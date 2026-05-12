@@ -1,6 +1,6 @@
 const FORUM_BASE = "https://forum.rdfzer.com";
 const FONT_SCALE_KEY = "yw-reader-font-scale";
-const PREVIEW_VERSION = "20260512u";
+const PREVIEW_VERSION = "20260512v";
 const THEME_KEY = "yw-theme";
 const SIDEBAR_KEY = "yw-sidebar";
 const THEMES = [
@@ -650,7 +650,7 @@ function frameMarkup(src, title, kind = "web", extraActions = "") {
   const sandbox = kind === "pdf"
     ? ""
     : proxiedWeb
-      ? ` sandbox="allow-same-origin allow-forms allow-popups"`
+      ? ` sandbox="allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"`
       : ` sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"`;
   return `
     <div class="preview-shell is-open" data-preview-kind="${esc(kind)}">
