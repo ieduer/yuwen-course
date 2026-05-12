@@ -355,7 +355,7 @@ async function handlePreview(request, env) {
   if (isHtml && request.method !== "HEAD") {
     const html = await upstream.text();
     responseHeaders.set("content-type", "text/html; charset=utf-8");
-    responseHeaders.set("cache-control", "no-store");
+    responseHeaders.set("cache-control", "no-store, no-transform");
     return new Response(rewritePreviewHtml(html, target), {
       status: upstream.status,
       statusText: upstream.statusText,
