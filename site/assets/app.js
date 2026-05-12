@@ -1,6 +1,6 @@
 const FORUM_BASE = "https://forum.rdfzer.com";
 const FONT_SCALE_KEY = "yw-reader-font-scale";
-const PREVIEW_VERSION = "20260512w";
+const PREVIEW_VERSION = "20260512x";
 const THEME_KEY = "yw-theme";
 const SIDEBAR_KEY = "yw-sidebar";
 const THEMES = [
@@ -558,6 +558,16 @@ function cleanDisplayText(value) {
     .trim();
 }
 
+function isAttachmentMetaText(value) {
+  const text = cleanDisplayText(value);
+  return !text || /^\d+[x×]\d+\s+[\d.]+\s*(?:kb|mb|gb|b)$/i.test(text);
+}
+
+function cleanCaptionText(value) {
+  const text = cleanDisplayText(value);
+  return isAttachmentMetaText(text) ? "" : text;
+}
+
 function filenameFromUrl(value) {
   const url = httpUrl(value);
   if (!url) return "";
@@ -571,7 +581,7 @@ function filenameFromUrl(value) {
 
 function resourceTitle(item, href, lesson) {
   const cleaned = cleanDisplayText(item?.text);
-  if (cleaned && !/^\d+[x×]\d+\s+[\d.]+\s*(?:kb|mb|gb|b)$/i.test(cleaned)) return cleaned;
+  if (cleaned && !isAttachmentMetaText(cleaned)) return cleaned;
   if (isImageUrl(href)) return `${lesson.title} 圖片資源`;
   return filenameFromUrl(href) || href;
 }
@@ -839,6 +849,12 @@ function enhanceCooked(container) {
     const href = resolvedHref(raw);
     link.href = publicHref(href);
     if (link.querySelector("img")) {
+      link.childNodes.forEach((node) => {
+        if (node.nodeType !== Node.TEXT_NODE) return;
+        const cleaned = cleanCaptionText(node.textContent);
+        if (cleaned) node.textContent = cleaned;
+        else node.remove();
+      });
       link.addEventListener("click", (event) => {
         event.preventDefault();
         const image = link.querySelector("img");
@@ -861,9 +877,13 @@ function enhanceCooked(container) {
   container.querySelectorAll("img").forEach((img) => {
     const src = publicHref(img.getAttribute("src") || "");
     if (src) img.src = src;
-    if (/^undefined$/i.test(String(img.alt || "").trim())) img.alt = state.currentLesson?.title || "";
+    img.alt = cleanCaptionText(img.getAttribute("alt") || "") || state.currentLesson?.title || "";
     const parentLink = img.closest("a[title]");
-    if (/^undefined$/i.test(String(parentLink?.getAttribute("title") || "").trim())) parentLink.removeAttribute("title");
+    if (parentLink) {
+      const title = cleanCaptionText(parentLink.getAttribute("title") || "");
+      if (title) parentLink.setAttribute("title", title);
+      else parentLink.removeAttribute("title");
+    }
     img.loading = "lazy";
     img.decoding = "async";
     img.addEventListener("click", () => openViewer(img.src, img.alt || state.currentLesson.title));
