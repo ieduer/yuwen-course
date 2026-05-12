@@ -1,0 +1,229 @@
+const OWNER = "ieduer";
+const REPO = "yuwen-course";
+const DISCUSSION_MARKER_PREFIX = "yuwen-course-lesson:";
+
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    if (url.pathname === "/api/chat" && request.method === "POST") {
+      return handleChat(request, env);
+    }
+    const discussionMatch = url.pathname.match(/^\/api\/discussions\/([^/]+)$/);
+    if (discussionMatch) {
+      if (request.method === "GET") return handleDiscussionGet(request, env, discussionMatch[1]);
+      if (request.method === "POST") return handleDiscussionPost(request, env, discussionMatch[1]);
+    }
+    return env.ASSETS.fetch(request);
+  },
+};
+
+function json(data, init = {}) {
+  return new Response(JSON.stringify(data), {
+    ...init,
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      ...(init.headers || {}),
+    },
+  });
+}
+
+function cleanText(value, max = 4000) {
+  return String(value || "").replace(/\r/g, "").trim().slice(0, max);
+}
+
+async function getManifest(request, env) {
+  const url = new URL("/data/manifest.json", request.url);
+  const response = await env.ASSETS.fetch(new Request(url.toString(), { method: "GET" }));
+  if (!response.ok) return null;
+  return response.json();
+}
+
+async function getLessonMeta(request, env, lessonId) {
+  const manifest = await getManifest(request, env);
+  return manifest?.lessons?.find((item) => item.id === lessonId) || { id: lessonId, title: lessonId, blockTitle: "課文" };
+}
+
+function githubHeaders(env) {
+  const headers = {
+    "accept": "application/vnd.github+json",
+    "user-agent": "bdfz-yuwen-course",
+    "x-github-api-version": "2022-11-28",
+  };
+  if (env.GITHUB_TOKEN) headers.authorization = `Bearer ${env.GITHUB_TOKEN}`;
+  return headers;
+}
+
+async function githubFetch(env, path, init = {}) {
+  const response = await fetch(`https://api.github.com${path}`, {
+    ...init,
+    headers: {
+      ...githubHeaders(env),
+      ...(init.headers || {}),
+    },
+  });
+  const text = await response.text();
+  let data = null;
+  try {
+    data = text ? JSON.parse(text) : null;
+  } catch {
+    data = { raw: text };
+  }
+  if (!response.ok) {
+    throw new Error(data?.message || `GitHub ${response.status}`);
+  }
+  return data;
+}
+
+async function findIssue(env, lessonId) {
+  const marker = `${DISCUSSION_MARKER_PREFIX}${lessonId}`;
+  const q = encodeURIComponent(`repo:${OWNER}/${REPO} is:issue "${marker}" in:body`);
+  const result = await githubFetch(env, `/search/issues?q=${q}&per_page=1`);
+  return result.items?.[0] || null;
+}
+
+async function createIssue(env, lesson) {
+  const marker = `${DISCUSSION_MARKER_PREFIX}${lesson.id}`;
+  const body = [
+    `<!-- ${marker} -->`,
+    `本 Issue 對應 yw.bdfz.net 課文討論。`,
+    ``,
+    `- 課文：${lesson.blockTitle} / ${lesson.title}`,
+    `- Topic：${lesson.topicId || lesson.id}`,
+    `- 站內：https://yw.bdfz.net/#${lesson.id}`,
+    lesson.forumUrl ? `- 論壇原帖：${lesson.forumUrl}` : null,
+  ].filter(Boolean).join("\n");
+  const payload = {
+    title: `[課文討論] ${lesson.blockTitle} / ${lesson.title}`,
+    body,
+    labels: ["lesson-discussion"],
+  };
+  try {
+    return await githubFetch(env, `/repos/${OWNER}/${REPO}/issues`, {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  } catch (error) {
+    delete payload.labels;
+    return githubFetch(env, `/repos/${OWNER}/${REPO}/issues`, {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  }
+}
+
+async function handleDiscussionGet(request, env, lessonId) {
+  try {
+    const issue = await findIssue(env, lessonId);
+    if (!issue) return json({ issueUrl: null, comments: [] });
+    const comments = await githubFetch(env, `/repos/${OWNER}/${REPO}/issues/${issue.number}/comments?per_page=100`);
+    return json({
+      issueUrl: issue.html_url,
+      issueNumber: issue.number,
+      comments: comments.map((item) => ({
+        id: item.id,
+        author: item.user?.login,
+        body: stripMarker(item.body || ""),
+        createdAt: item.created_at,
+        url: item.html_url,
+      })),
+    });
+  } catch (error) {
+    if (/Not Found|Validation Failed/i.test(error.message)) {
+      return json({ issueUrl: null, comments: [] });
+    }
+    return json({ error: error.message }, { status: 502 });
+  }
+}
+
+async function handleDiscussionPost(request, env, lessonId) {
+  if (!env.GITHUB_TOKEN) return json({ error: "GITHUB_TOKEN is not configured" }, { status: 503 });
+  const payload = await request.json().catch(() => ({}));
+  if (payload.website) return json({ ok: true, ignored: true });
+  const body = cleanText(payload.body, 4000);
+  const name = cleanText(payload.name, 40).replace(/[\n\r]/g, " ") || "匿名同學";
+  if (body.length < 2) return json({ error: "body is required" }, { status: 400 });
+  try {
+    const lesson = await getLessonMeta(request, env, lessonId);
+    let issue = await findIssue(env, lessonId);
+    if (!issue) issue = await createIssue(env, lesson);
+    const comment = await githubFetch(env, `/repos/${OWNER}/${REPO}/issues/${issue.number}/comments`, {
+      method: "POST",
+      body: JSON.stringify({
+        body: `**${name}**\n\n${body}`,
+      }),
+    });
+    return json({ ok: true, issueUrl: issue.html_url, commentUrl: comment.html_url });
+  } catch (error) {
+    return json({ error: error.message }, { status: 502 });
+  }
+}
+
+function stripMarker(value) {
+  return value.replace(/<!--[\s\S]*?-->/g, "").trim();
+}
+
+async function handleChat(request, env) {
+  const payload = await request.json().catch(() => ({}));
+  const messages = Array.isArray(payload.messages) ? payload.messages.slice(-12) : [];
+  const lessonTitle = cleanText(payload.lessonTitle, 120);
+  const blockTitle = cleanText(payload.blockTitle, 40);
+  const excerpt = cleanText(payload.excerpt, 900);
+  const notes = Array.isArray(payload.annotations)
+    ? payload.annotations.map((item) => `${item.title}: ${item.body}`).join("\n").slice(0, 900)
+    : "";
+
+  if (!messages.length) return json({ error: "messages required" }, { status: 400 });
+
+  const system = [
+    "你是高中語文學習教練，不替學生完成作業，而是把問題拆成可學會的步驟。",
+    "回答要緊扣課文、教材圖頁、論壇資源和學生已提出的問題。",
+    "每次優先給：文本證據、思路拆解、下一個可操作問題。語氣直接、清楚、有啟發。",
+    "用繁體中文回答；必要時引用簡短原文，但避免大段搬運。",
+    "",
+    `當前課文：${blockTitle} / ${lessonTitle}`,
+    `課文摘錄：${excerpt}`,
+    `站內旁注：${notes}`,
+  ].join("\n");
+
+  if (!env.OPENAI_API_KEY) {
+    const last = cleanText(messages[messages.length - 1]?.content, 500);
+    return json({
+      provider: "local-fallback",
+      reply: [
+        `先把問題扣回《${lessonTitle}》。`,
+        `你剛才問的是：「${last}」。`,
+        "可先做三步：1. 找一句原文作證據；2. 說清這句的字面意思與語氣；3. 再問它和本課核心問題的關係。若要更精準，把你選中的原句貼進來，我再逐句拆。",
+      ].join("\n"),
+    });
+  }
+
+  const apiMessages = [
+    { role: "system", content: system },
+    ...messages.map((message) => ({
+      role: message.role === "assistant" ? "assistant" : "user",
+      content: cleanText(message.content, 2000),
+    })),
+  ];
+
+  try {
+    const response = await fetch(env.OPENAI_ENDPOINT || "https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "authorization": `Bearer ${env.OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: env.OPENAI_MODEL || "gpt-4.1-mini",
+        messages: apiMessages,
+        temperature: 0.45,
+      }),
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error?.message || `OpenAI ${response.status}`);
+    const reply = data.choices?.[0]?.message?.content || "";
+    return json({ provider: "openai", reply });
+  } catch (error) {
+    return json({ error: error.message }, { status: 502 });
+  }
+}

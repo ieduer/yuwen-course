@@ -1,0 +1,11 @@
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/manifest.json
+  Cache-Control: public, max-age=300
+
+/data/lessons/*
+  Cache-Control: public, max-age=3600
+
+/api/*
+  Cache-Control: no-store

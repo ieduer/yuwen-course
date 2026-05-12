@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="高中語文五冊課文、論壇學習資源、教材圖頁、AI 對話與課文討論。">
+  <meta property="og:title" content="課文 · 北大附中">
+  <meta property="og:description" content="必修上、必修下、選必上中下課文與學習資源整合。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yw.bdfz.net/">
+  <link rel="canonical" href="https://yw.bdfz.net/">
+  <link rel="icon" href="https://img.bdfz.net/20250503004.webp" type="image/webp">
+  <title>課文 · 北大附中</title>
+  <link rel="stylesheet" href="assets/styles.css?v=20260512a">
+</head>
+
+<body>
+  <div id="image-viewer" class="image-viewer hidden" role="dialog" aria-modal="true" aria-label="圖片放大查看">
+    <button id="viewer-close" class="viewer-close" type="button" aria-label="關閉">×</button>
+    <img id="viewer-image" alt="">
+    <p id="viewer-caption"></p>
+  </div>
+
+  <div class="app-shell">
+    <aside class="lesson-sidebar" aria-label="課文目錄">
+      <header class="brand">
+        <a href="/" class="brand-title">課文</a>
+        <span id="data-status">讀取中</span>
+      </header>
+
+      <section class="search-panel">
+        <label for="lesson-search">檢索</label>
+        <input id="lesson-search" type="search" placeholder="課題、作者、資源、正文" autocomplete="off">
+        <div id="block-tabs" class="block-tabs" aria-label="冊別篩選"></div>
+      </section>
+
+      <nav id="lesson-list" class="lesson-list" aria-live="polite"></nav>
+    </aside>
+
+    <main class="lesson-main">
+      <header class="lesson-toolbar">
+        <button id="sidebar-button" type="button" class="icon-button" aria-label="顯示或隱藏目錄">☰</button>
+        <div class="lesson-heading">
+          <p id="lesson-kicker">高中語文</p>
+          <h1 id="lesson-title">課文載入中</h1>
+        </div>
+        <div class="mode-switch" role="group" aria-label="注釋顯示模式">
+          <button type="button" data-mode="study" class="active">精讀</button>
+          <button type="button" data-mode="notes">旁注</button>
+          <button type="button" data-mode="clean">純讀</button>
+        </div>
+      </header>
+
+      <section class="lesson-meta" aria-label="課文資料">
+        <span id="meta-posts">0 樓</span>
+        <span id="meta-images">0 圖</span>
+        <span id="meta-resources">0 資源</span>
+        <a id="forum-link" href="#" target="_blank" rel="noreferrer">論壇原帖</a>
+      </section>
+
+      <section id="annotation-strip" class="annotation-strip"></section>
+
+      <div class="workspace">
+        <article class="reading-pane" aria-label="課文與論壇內容">
+          <div class="pane-tabs" role="tablist" aria-label="內容分區">
+            <button type="button" class="active" data-tab="posts">課文</button>
+            <button type="button" data-tab="images">圖頁</button>
+            <button type="button" data-tab="resources">資源</button>
+          </div>
+          <div id="posts-panel" class="tab-panel active"></div>
+          <div id="images-panel" class="tab-panel"></div>
+          <div id="resources-panel" class="tab-panel"></div>
+        </article>
+
+        <aside class="study-pane" aria-label="學習互動">
+          <section class="study-section">
+            <div class="section-head">
+              <h2>學習任務</h2>
+              <button id="copy-tasks" type="button">複製</button>
+            </div>
+            <div id="learning-tasks"></div>
+          </section>
+
+          <section class="study-section">
+            <div class="section-head">
+              <h2>AI 對話</h2>
+              <button id="copy-chat" type="button">複製</button>
+            </div>
+            <div id="chat-log" class="chat-log"></div>
+            <form id="chat-form" class="chat-form">
+              <textarea id="chat-input" rows="3" placeholder="追問文本、資源、考點或自己的理解"></textarea>
+              <button type="submit">發送</button>
+            </form>
+          </section>
+
+          <section class="study-section discussion-section">
+            <div class="section-head">
+              <h2>本課討論</h2>
+              <button id="reload-discussion" type="button">刷新</button>
+            </div>
+            <div id="discussion-log" class="discussion-log"></div>
+            <form id="discussion-form" class="discussion-form">
+              <input id="discussion-name" name="name" placeholder="顯示名稱" maxlength="40" autocomplete="nickname">
+              <textarea id="discussion-body" name="body" rows="4" placeholder="留下問題、補充資料或回覆同學"></textarea>
+              <input id="discussion-trap" name="website" tabindex="-1" autocomplete="off">
+              <button type="submit">送出到 GitHub Issue</button>
+            </form>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://nav.bdfz.net/bdfz-nav.js" async></script>
+  <script src="assets/app.js?v=20260512a" defer></script>
+</body>
+
+</html>

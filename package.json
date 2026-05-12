@@ -1,0 +1,11 @@
+{
+  "name": "yuwen-course",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "build:data": "python3 scripts/build_site_data.py --export .cache/discourse-course-export.json --catalog /Users/ylsuen/CF/jc-textbook-reader/site/data/catalog.json --fts-db /Users/ylsuen/textbook_ai_migration/platform/data/textbook_mineru_fts.db --out site/data",
+    "serve": "npx wrangler pages dev site",
+    "deploy": "wrangler pages deploy site --project-name yuwen-course --branch main"
+  }
+}
