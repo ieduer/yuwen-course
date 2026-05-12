@@ -1,6 +1,6 @@
 const FORUM_BASE = "https://forum.rdfzer.com";
 const FONT_SCALE_KEY = "yw-reader-font-scale";
-const PREVIEW_VERSION = "20260512y";
+const PREVIEW_VERSION = "20260512z";
 const THEME_KEY = "yw-theme";
 const SIDEBAR_KEY = "yw-sidebar";
 const THEMES = [
