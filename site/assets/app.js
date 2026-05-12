@@ -1,6 +1,6 @@
 const FORUM_BASE = "https://forum.rdfzer.com";
 const FONT_SCALE_KEY = "yw-reader-font-scale";
-const PREVIEW_VERSION = "20260512x";
+const PREVIEW_VERSION = "20260512y";
 const THEME_KEY = "yw-theme";
 const SIDEBAR_KEY = "yw-sidebar";
 const THEMES = [
@@ -849,6 +849,7 @@ function enhanceCooked(container) {
     const href = resolvedHref(raw);
     link.href = publicHref(href);
     if (link.querySelector("img")) {
+      link.querySelectorAll(".meta").forEach((meta) => meta.remove());
       link.childNodes.forEach((node) => {
         if (node.nodeType !== Node.TEXT_NODE) return;
         const cleaned = cleanCaptionText(node.textContent);
@@ -941,11 +942,14 @@ function renderImages(lesson) {
   ` : `<p class="empty">本課未自動匹配到教材圖片；仍保留論壇圖片和資源。</p>`;
   const forumHtml = forumImages.length ? `
     <h2>論壇圖片</h2>
-    <div class="image-grid">${forumImages.map((image) => `
-      <button type="button" class="image-tile" data-src="${esc(image.src)}" data-caption="${esc(`#${image.postNumber} · ${image.alt || lesson.title}`)}">
-        <img src="${esc(image.src)}" alt="${esc(image.alt || lesson.title)}" loading="lazy" decoding="async">
+    <div class="image-grid">${forumImages.map((image) => {
+      const label = cleanCaptionText(image.alt) || lesson.title;
+      return `
+      <button type="button" class="image-tile" data-src="${esc(image.src)}" data-caption="${esc(`#${image.postNumber} · ${label}`)}">
+        <img src="${esc(image.src)}" alt="${esc(label)}" loading="lazy" decoding="async">
       </button>
-    `).join("")}</div>
+    `;
+    }).join("")}</div>
   ` : `<p class="empty">本課論壇回覆中未抽取到圖片。</p>`;
   els.imagesPanel.innerHTML = textbookHtml + forumHtml;
   els.imagesPanel.querySelectorAll(".image-tile").forEach((tile) => {
