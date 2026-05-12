@@ -24,6 +24,7 @@
   --danger: #b65c4d;
   --shadow: 0 18px 44px rgba(54, 74, 81, 0.14);
   --font: "HuWenMingChao", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --reader-scale: 1;
 }
 
 * {
@@ -218,7 +219,7 @@ a {
   max-width: 1180px;
   margin: 0 auto 14px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 12px;
   align-items: center;
   min-height: 64px;
@@ -240,6 +241,26 @@ a {
   font-size: clamp(1.8rem, 3vw, 3.1rem);
   line-height: 1.16;
   letter-spacing: 0;
+}
+
+.reader-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.reader-tools button {
+  min-height: 32px;
+  padding: 3px 9px;
+}
+
+.reader-tools span {
+  min-width: 46px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-align: center;
 }
 
 .workspace {
@@ -328,7 +349,7 @@ a {
   min-width: 0;
   max-width: 900px;
   color: #26393f;
-  font-size: clamp(1rem, 0.35vw + 0.95rem, 1.13rem);
+  font-size: calc(clamp(1rem, 0.35vw + 0.95rem, 1.13rem) * var(--reader-scale));
   line-height: 1.92;
   overflow-wrap: anywhere;
 }
@@ -520,6 +541,35 @@ a {
   gap: 12px;
 }
 
+.resource-section {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.resource-section:last-child {
+  margin-bottom: 0;
+}
+
+.resource-section-head {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.resource-section-head h2 {
+  margin: 0;
+  color: var(--ink-strong);
+  font-size: calc(1.22rem * var(--reader-scale));
+  line-height: 1.3;
+}
+
+.resource-section-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
 .resource-item {
   display: grid;
   gap: 10px;
@@ -546,6 +596,28 @@ a {
   font-size: 0.82rem;
 }
 
+.resource-actions,
+.preview-actions,
+.exercise-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.resource-actions a,
+.preview-link {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 253, 247, 0.74);
+  color: var(--water-deep);
+  text-decoration: none;
+}
+
 .resource-embed,
 .inline-embed {
   max-width: 900px;
@@ -564,7 +636,9 @@ a {
 }
 
 .video-embed iframe,
-.document-embed iframe {
+.document-embed iframe,
+.web-embed iframe,
+.wy-frame-wrap iframe {
   display: block;
   width: 100%;
   height: 100%;
@@ -572,8 +646,32 @@ a {
 }
 
 .document-embed {
+  min-height: 0;
+}
+
+.preview-shell {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+}
+
+.preview-frame {
   height: min(72vh, 760px);
   min-height: 420px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.preview-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.web-embed .preview-frame {
+  min-height: 520px;
 }
 
 .embed-image-button {
@@ -598,6 +696,51 @@ a {
   object-fit: contain;
   background: rgba(255, 253, 247, 0.82);
   cursor: zoom-in;
+}
+
+.exercise-section,
+.exercise-empty {
+  display: grid;
+  gap: 14px;
+}
+
+.exercise-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.exercise-entry {
+  display: grid;
+  gap: 4px;
+  min-height: 72px;
+  padding: 10px;
+  text-align: left;
+  background: rgba(255, 253, 247, 0.72);
+}
+
+.exercise-entry.active {
+  border-color: rgba(66, 109, 101, 0.7);
+  background: rgba(232, 242, 236, 0.9);
+}
+
+.exercise-entry strong {
+  color: var(--ink-strong);
+  line-height: 1.35;
+}
+
+.exercise-entry span {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.wy-frame-wrap {
+  height: min(78vh, 860px);
+  min-height: 560px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 253, 247, 0.7);
 }
 
 .interaction-stack {
@@ -786,6 +929,13 @@ a {
     backdrop-filter: blur(12px);
   }
 
+  .reader-tools {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
   .sidebar-toggle {
     min-width: 58px;
     min-height: 38px;
@@ -856,8 +1006,18 @@ a {
   }
 
   .document-embed {
+    min-height: 0;
+  }
+
+  .preview-frame {
     min-height: 360px;
     height: 62vh;
+  }
+
+  .web-embed .preview-frame,
+  .wy-frame-wrap {
+    min-height: 480px;
+    height: 70vh;
   }
 
   .chat-log,

@@ -8,6 +8,12 @@ export default {
     if (url.pathname === "/api/chat" && request.method === "POST") {
       return handleChat(request, env);
     }
+    if (url.pathname === "/api/wy-articles" && request.method === "GET") {
+      return handleWyArticles(request, env);
+    }
+    if (url.pathname === "/api/preview" && (request.method === "GET" || request.method === "HEAD")) {
+      return handlePreview(request, env);
+    }
     const discussionMatch = url.pathname.match(/^\/api\/discussions\/([^/]+)$/);
     if (discussionMatch) {
       if (request.method === "GET") return handleDiscussionGet(request, env, discussionMatch[1]);
@@ -30,6 +36,120 @@ function json(data, init = {}) {
 
 function cleanText(value, max = 4000) {
   return String(value || "").replace(/\r/g, "").trim().slice(0, max);
+}
+
+async function handleWyArticles() {
+  const response = await fetch("https://wy.bdfz.net/api/bootstrap", {
+    headers: {
+      "accept": "application/json",
+      "user-agent": "bdfz-yuwen-course",
+    },
+    cf: { cacheTtl: 300, cacheEverything: true },
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) return json({ error: data?.error || `wy ${response.status}` }, { status: 502 });
+  const articles = Array.isArray(data.articles) ? data.articles.map((article) => ({
+    article_id: article.article_id,
+    book_key: article.book_key,
+    book_title: article.book_title,
+    title: article.title,
+    manifest_title: article.manifest_title,
+    author: article.author,
+    page_start: article.page_start,
+    page_end: article.page_end,
+    challenge_count: article.challenge_count,
+    content_count: article.content_count,
+    function_count: article.function_count,
+    note_count: article.note_count,
+  })) : [];
+  return json({ source: "https://wy.bdfz.net/api/bootstrap", articles }, {
+    headers: { "cache-control": "public, max-age=300" },
+  });
+}
+
+function previewAllowed(url) {
+  if (!["http:", "https:"].includes(url.protocol)) return false;
+  const host = url.hostname.toLowerCase();
+  if (/^(localhost|127\.|10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.)/.test(host)) return false;
+  return true;
+}
+
+function filenameFromUrl(url) {
+  const last = decodeURIComponent(url.pathname.split("/").filter(Boolean).pop() || "preview.pdf");
+  return last.replace(/[^\w.\-\u4e00-\u9fff]+/g, "_") || "preview.pdf";
+}
+
+function redirectLookupKeys(url) {
+  const keys = [url.toString()];
+  const noHash = new URL(url.toString());
+  noHash.hash = "";
+  keys.push(noHash.toString());
+  return [...new Set(keys)];
+}
+
+async function getResourceRedirects(request, env) {
+  try {
+    const assetUrl = new URL("/data/resource_redirects.json", request.url);
+    const response = await env.ASSETS.fetch(new Request(assetUrl.toString(), { method: "GET" }));
+    if (!response.ok) return {};
+    const data = await response.json();
+    return data?.redirects || {};
+  } catch {
+    return {};
+  }
+}
+
+async function resolvePreviewTarget(request, env, target) {
+  if (
+    target.hostname.toLowerCase() !== "forum.rdfzer.com"
+    || !target.pathname.startsWith("/uploads/short-url/")
+  ) {
+    return target;
+  }
+  const redirects = await getResourceRedirects(request, env);
+  for (const key of redirectLookupKeys(target)) {
+    if (redirects[key]) return new URL(redirects[key]);
+  }
+  return target;
+}
+
+async function handlePreview(request, env) {
+  const requestUrl = new URL(request.url);
+  const targetRaw = requestUrl.searchParams.get("url") || "";
+  let target;
+  try {
+    target = new URL(targetRaw);
+  } catch {
+    return new Response("bad url", { status: 400 });
+  }
+  target = await resolvePreviewTarget(request, env, target);
+  if (!previewAllowed(target)) return new Response("url is not allowed", { status: 400 });
+  const headers = new Headers({
+    "user-agent": "bdfz-yuwen-course-preview",
+    "accept": request.headers.get("accept") || "*/*",
+  });
+  const range = request.headers.get("range");
+  if (range) headers.set("range", range);
+  const upstream = await fetch(target.toString(), {
+    method: request.method,
+    headers,
+    redirect: "follow",
+  });
+  const responseHeaders = new Headers(upstream.headers);
+  const type = responseHeaders.get("content-type") || "";
+  const isPdf = /\.pdf$/i.test(target.pathname) || /application\/pdf/i.test(type);
+  responseHeaders.set("access-control-allow-origin", "*");
+  responseHeaders.set("x-content-type-options", "nosniff");
+  responseHeaders.set(
+    "content-disposition",
+    `${requestUrl.searchParams.get("download") ? "attachment" : "inline"}; filename="${filenameFromUrl(target)}"`
+  );
+  if (isPdf && !type) responseHeaders.set("content-type", "application/pdf");
+  return new Response(request.method === "HEAD" ? null : upstream.body, {
+    status: upstream.status,
+    statusText: upstream.statusText,
+    headers: responseHeaders,
+  });
 }
 
 async function getManifest(request, env) {

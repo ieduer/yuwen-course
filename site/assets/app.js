@@ -1,13 +1,25 @@
 const FORUM_BASE = "https://forum.rdfzer.com";
+const FONT_SCALE_KEY = "yw-reader-font-scale";
+const WY_BOOK_KEYS = {
+  "bixiu-shang": "高中_语文_普通高中教科书_语文必修_上册",
+  "bixiu-xia": "高中_语文_普通高中教科书_语文必修_下册",
+  "xuanbi-shang": "高中_语文_普通高中教科书_语文选择性必修_上册",
+  "xuanbi-zhong": "高中_语文_普通高中教科书_语文选择性必修_中册",
+  "xuanbi-xia": "高中_语文_普通高中教科书_语文选择性必修_下册",
+};
 
 const state = {
   manifest: null,
+  classResources: { books: [], items: [] },
+  resourceRedirects: {},
+  wyArticles: [],
   lessons: new Map(),
   currentLesson: null,
   block: "all",
   tab: "posts",
   query: "",
   chat: new Map(),
+  fontScale: loadFontScale(),
 };
 
 const els = {
@@ -21,6 +33,11 @@ const els = {
   postsPanel: document.getElementById("posts-panel"),
   imagesPanel: document.getElementById("images-panel"),
   resourcesPanel: document.getElementById("resources-panel"),
+  exercisesPanel: document.getElementById("exercises-panel"),
+  fontDecrease: document.getElementById("font-decrease"),
+  fontIncrease: document.getElementById("font-increase"),
+  fontReset: document.getElementById("font-reset"),
+  fontValue: document.getElementById("font-value"),
   copyChat: document.getElementById("copy-chat"),
   chatLog: document.getElementById("chat-log"),
   chatForm: document.getElementById("chat-form"),
@@ -47,10 +64,30 @@ function esc(value) {
   }[ch]));
 }
 
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+function loadFontScale() {
+  const stored = Number(localStorage.getItem(FONT_SCALE_KEY) || "1");
+  return Number.isFinite(stored) ? clamp(stored, 0.82, 1.58) : 1;
+}
+
+function applyFontScale() {
+  document.documentElement.style.setProperty("--reader-scale", state.fontScale.toFixed(2));
+  if (els.fontValue) els.fontValue.textContent = `${Math.round(state.fontScale * 100)}%`;
+}
+
+function setFontScale(value) {
+  state.fontScale = clamp(Math.round(value * 100) / 100, 0.82, 1.58);
+  localStorage.setItem(FONT_SCALE_KEY, String(state.fontScale));
+  applyFontScale();
+}
+
 function normalize(value) {
   return String(value || "")
     .toLowerCase()
-    .replace(/[語選擇論記復萬勝國歷紀實檢驗證學習務單臺]/g, (ch) => ({
+    .replace(/[語選擇論記復萬勝國歷紀實檢驗證學習務單臺別詩經禮莊為]/g, (ch) => ({
       "語": "语",
       "選": "选",
       "擇": "择",
@@ -71,8 +108,65 @@ function normalize(value) {
       "務": "务",
       "單": "单",
       "臺": "台",
+      "別": "别",
+      "詩": "诗",
+      "經": "经",
+      "禮": "礼",
+      "莊": "庄",
+      "為": "为",
     }[ch] || ch))
     .replace(/\s+/g, "");
+}
+
+function keyText(value) {
+  return normalize(value)
+    .replace(/選必/g, "选必")
+    .replace(/选择性必修/g, "选必")
+    .replace(/普通高中教科书|高中语文|语文|人教版|部编版/g, "")
+    .replace(/[（(][^）)]*[）)]/g, "")
+    .replace(/[/／].*$/g, "")
+    .replace(/^[*＊]*(\d+|[一二三四五六七八九十]+)[、.．-]*/g, "")
+    .replace(/^[*＊]*(\d+|[一二三四五六七八九十]+)/g, "")
+    .replace(/[^0-9a-z\u4e00-\u9fff]/g, "")
+    .replace(/[a-z]$/g, "");
+}
+
+function lessonKeys(lesson) {
+  const raw = [
+    lesson.title,
+    lesson.sourceTitle,
+    lesson.textbook?.tocLabel,
+    lesson.tocLabel,
+  ].filter(Boolean);
+  const keys = new Set();
+  raw.forEach((value) => {
+    const main = keyText(value);
+    if (main.length >= 1) keys.add(main);
+    String(value).split(/[、,，;；/／\s]+/).forEach((piece) => {
+      const key = keyText(piece);
+      if (key.length >= 1) keys.add(key);
+    });
+  });
+  return [...keys];
+}
+
+function matchScore(lesson, candidate) {
+  const keys = lessonKeys(lesson);
+  const candidateKeys = [
+    candidate.key,
+    keyText(candidate.title),
+    keyText(candidate.manifest_title),
+    keyText(candidate.book_title),
+  ].filter((item) => item && item.length >= 1);
+  let score = 0;
+  for (const left of keys) {
+    for (const right of candidateKeys) {
+      if (left === right) score = Math.max(score, 1);
+      else if (left.length >= 3 && right.includes(left)) score = Math.max(score, 0.86);
+      else if (right.length >= 3 && left.includes(right)) score = Math.max(score, 0.82);
+    }
+  }
+  return score;
 }
 
 function lessonText(meta) {
@@ -152,6 +246,50 @@ async function loadLesson(id) {
   return lesson;
 }
 
+async function loadJson(path, fallback = null) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) throw new Error(`${path} ${response.status}`);
+    return response.json();
+  } catch (error) {
+    if (!fallback) throw error;
+    const response = await fetch(fallback);
+    if (!response.ok) throw new Error(`${fallback} ${response.status}`);
+    return response.json();
+  }
+}
+
+async function loadSupportData() {
+  const [classResources, wyArticles, resourceRedirects] = await Promise.all([
+    loadJson("data/class_resources.json").catch(() => ({ books: [], items: [] })),
+    loadJson("/api/wy-articles", "data/wy_articles.json").catch(() => ({ articles: [] })),
+    loadJson("data/resource_redirects.json").catch(() => ({ redirects: {} })),
+  ]);
+  state.classResources = classResources || { books: [], items: [] };
+  state.wyArticles = Array.isArray(wyArticles?.articles) ? wyArticles.articles : [];
+  state.resourceRedirects = resourceRedirects?.redirects || {};
+}
+
+function classResourcesForLesson(lesson) {
+  const items = Array.isArray(state.classResources?.items) ? state.classResources.items : [];
+  return items
+    .filter((item) => item.blockId === lesson.blockId && item.kind !== "unit")
+    .map((item) => ({ ...item, score: matchScore(lesson, item) }))
+    .filter((item) => item.score >= 0.82)
+    .sort((a, b) => b.score - a.score || a.order - b.order)
+    .slice(0, 8);
+}
+
+function exerciseArticlesForLesson(lesson) {
+  const bookKey = WY_BOOK_KEYS[lesson.blockId] || "";
+  return state.wyArticles
+    .filter((article) => !bookKey || article.book_key === bookKey)
+    .map((article) => ({ ...article, score: matchScore(lesson, article) }))
+    .filter((article) => article.score >= 0.8)
+    .sort((a, b) => b.score - a.score || Number(b.challenge_count || 0) - Number(a.challenge_count || 0))
+    .slice(0, 8);
+}
+
 function setTab(tab) {
   state.tab = tab;
   document.querySelectorAll(".pane-tabs button").forEach((button) => {
@@ -170,9 +308,26 @@ function normalizeHref(href) {
   return value;
 }
 
+function withoutHash(value) {
+  try {
+    const url = new URL(value, window.location.href);
+    url.hash = "";
+    return url.toString();
+  } catch {
+    return value;
+  }
+}
+
+function resolvedHref(href) {
+  const value = normalizeHref(href);
+  if (!value || value.startsWith("#")) return value;
+  const redirects = state.resourceRedirects || {};
+  return redirects[value] || redirects[withoutHash(value)] || value;
+}
+
 function httpUrl(value) {
   try {
-    const url = new URL(normalizeHref(value), window.location.href);
+    const url = new URL(resolvedHref(value), window.location.href);
     if (url.protocol === "http:" || url.protocol === "https:") return url;
   } catch {
     return null;
@@ -192,7 +347,7 @@ function visibleResources(lesson) {
   const seen = new Set();
   return (lesson.resources || []).filter((item) => {
     if (isInternalResource(item)) return false;
-    const href = normalizeHref(item.href);
+    const href = resolvedHref(item.href);
     const key = href.toLowerCase();
     if (seen.has(key)) return false;
     seen.add(key);
@@ -212,6 +367,17 @@ function isPdfUrl(value) {
   return /\.pdf$/i.test(url.pathname);
 }
 
+function isDocumentUrl(value) {
+  const url = httpUrl(value);
+  if (!url) return false;
+  return /\.(pdf|docx?|pptx?|xlsx?)$/i.test(url.pathname);
+}
+
+function previewUrl(value, download = false) {
+  const url = resolvedHref(value);
+  return `/api/preview?url=${encodeURIComponent(url)}${download ? "&download=1" : ""}`;
+}
+
 function youtubeEmbedUrl(value) {
   const url = httpUrl(value);
   if (!url) return "";
@@ -226,6 +392,15 @@ function youtubeEmbedUrl(value) {
   return id ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}` : "";
 }
 
+function xEmbedUrl(value) {
+  const url = httpUrl(value);
+  if (!url) return "";
+  const host = url.hostname.replace(/^www\./, "");
+  if (!["x.com", "twitter.com"].includes(host)) return "";
+  const match = url.pathname.match(/\/status\/(\d+)/);
+  return match ? `https://platform.twitter.com/embed/Tweet.html?id=${encodeURIComponent(match[1])}` : "";
+}
+
 function bilibiliEmbedUrl(value) {
   const url = httpUrl(value);
   if (!url || !/bilibili\.com$/i.test(url.hostname.replace(/^www\./, ""))) return "";
@@ -233,12 +408,37 @@ function bilibiliEmbedUrl(value) {
   return match ? `https://player.bilibili.com/player.html?bvid=${encodeURIComponent(match[1])}&autoplay=0` : "";
 }
 
+function isYuqueUrl(value) {
+  const url = httpUrl(value);
+  return Boolean(url && /(^|\.)yuque\.com$/i.test(url.hostname));
+}
+
+function canTryWebEmbed(value) {
+  const url = httpUrl(value);
+  if (!url || isDocumentUrl(url.href) || isImageUrl(url.href)) return false;
+  if (isYuqueUrl(url.href)) return false;
+  return url.protocol === "https:";
+}
+
+function lazyFrameMarkup(src, title, kind = "web", extraActions = "") {
+  return `
+    <div class="preview-shell" data-preview-kind="${esc(kind)}">
+      <div class="preview-actions">
+        <button type="button" class="preview-toggle" data-preview-src="${esc(src)}" data-preview-title="${esc(title)}">預覽</button>
+        ${extraActions}
+      </div>
+      <div class="preview-frame" hidden></div>
+    </div>
+  `;
+}
+
 function embedMarkupForUrl(rawUrl, title, variant = "resource") {
-  const url = normalizeHref(rawUrl);
+  const url = resolvedHref(rawUrl);
   const label = title || url;
   const youtube = youtubeEmbedUrl(url);
+  const xEmbed = xEmbedUrl(url);
   const bilibili = bilibiliEmbedUrl(url);
-  const embedUrl = youtube || bilibili;
+  const embedUrl = youtube || xEmbed || bilibili;
   if (embedUrl) {
     return `
       <div class="${variant}-embed video-embed">
@@ -256,9 +456,18 @@ function embedMarkupForUrl(rawUrl, title, variant = "resource") {
     `;
   }
   if (isPdfUrl(url)) {
+    const source = previewUrl(url);
+    const download = previewUrl(url, true);
     return `
       <div class="${variant}-embed document-embed">
-        <iframe src="${esc(`${url}#toolbar=0`)}" title="${esc(label)}" loading="lazy"></iframe>
+        ${lazyFrameMarkup(source, label, "pdf", `<a class="preview-link" href="${esc(download)}" target="_blank" rel="noreferrer">下載</a><a class="preview-link" href="${esc(url)}" target="_blank" rel="noreferrer">原鏈接</a>`)}
+      </div>
+    `;
+  }
+  if (canTryWebEmbed(url)) {
+    return `
+      <div class="${variant}-embed web-embed">
+        ${lazyFrameMarkup(url, label, "web", `<a class="preview-link" href="${esc(url)}" target="_blank" rel="noreferrer">新頁打開</a>`)}
       </div>
     `;
   }
@@ -314,6 +523,56 @@ function attachImageButtons(container) {
   });
 }
 
+function bindPreviewButtons(container) {
+  container.querySelectorAll(".preview-toggle").forEach((button) => {
+    button.addEventListener("click", () => {
+      const shell = button.closest(".preview-shell");
+      const frameHost = shell?.querySelector(".preview-frame");
+      if (!shell || !frameHost) return;
+      const open = shell.classList.toggle("is-open");
+      button.textContent = open ? "收起" : "預覽";
+      frameHost.hidden = !open;
+      if (open && !frameHost.querySelector("iframe")) {
+        const iframe = document.createElement("iframe");
+        iframe.src = button.dataset.previewSrc || "";
+        iframe.title = button.dataset.previewTitle || "preview";
+        iframe.loading = "lazy";
+        iframe.referrerPolicy = "no-referrer-when-downgrade";
+        iframe.setAttribute("sandbox", "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox");
+        frameHost.appendChild(iframe);
+      }
+    });
+  });
+}
+
+function normalizeMarkdownQuotes(container) {
+  container.querySelectorAll(".cooked p").forEach((paragraph) => {
+    const text = paragraph.textContent.trim();
+    if (!/^>\s*\S/.test(text)) return;
+    const quote = document.createElement("blockquote");
+    quote.className = "md-quote";
+    const p = document.createElement("p");
+    p.textContent = text.replace(/^>\s?/, "");
+    quote.appendChild(p);
+    paragraph.replaceWith(quote);
+  });
+}
+
+function deferExistingFrames(container) {
+  container.querySelectorAll(".cooked iframe[src]").forEach((frame) => {
+    const src = frame.getAttribute("src") || "";
+    if (!src || youtubeEmbedUrl(src) || bilibiliEmbedUrl(src)) {
+      frame.loading = "lazy";
+      return;
+    }
+    const title = frame.getAttribute("title") || src;
+    const wrapper = document.createElement("div");
+    wrapper.className = "inline-embed web-embed";
+    wrapper.innerHTML = lazyFrameMarkup(src, title, "web", `<a class="preview-link" href="${esc(src)}" target="_blank" rel="noreferrer">新頁打開</a>`);
+    frame.replaceWith(wrapper);
+  });
+}
+
 function enhanceInlineEmbeds(container) {
   const embedded = new Set();
   container.querySelectorAll("a[href]").forEach((link) => {
@@ -335,7 +594,7 @@ function enhanceCooked(container) {
       bindLocalAnchor(link, container, raw);
       return;
     }
-    const href = normalizeHref(raw);
+    const href = resolvedHref(raw);
     link.href = href;
     if (link.querySelector("img")) {
       link.addEventListener("click", (event) => {
@@ -366,7 +625,10 @@ function enhanceCooked(container) {
   });
 
   enhanceInlineEmbeds(container);
+  deferExistingFrames(container);
+  normalizeMarkdownQuotes(container);
   attachImageButtons(container);
+  bindPreviewButtons(container);
 }
 
 function renderPosts(lesson) {
@@ -409,24 +671,131 @@ function renderImages(lesson) {
   });
 }
 
+function hrefKey(value) {
+  const url = httpUrl(value);
+  if (!url) return resolvedHref(value).toLowerCase();
+  url.hash = "";
+  return url.toString().replace(/\/$/, "").toLowerCase();
+}
+
+function resourceCard({ href, title, meta, kind = "link", source = "" }) {
+  const target = resolvedHref(href);
+  return `
+    <article class="resource-item" data-kind="${esc(kind)}">
+      <div class="resource-link">
+        <strong>${esc(title || target)}</strong>
+        <span>${esc([meta, source].filter(Boolean).join(" · "))}</span>
+      </div>
+      <div class="resource-actions">
+        <a href="${esc(target)}" target="_blank" rel="noreferrer">打開</a>
+      </div>
+      ${embedMarkupForUrl(target, title || target, "resource")}
+    </article>
+  `;
+}
+
+function renderClassResourceSection(lesson, seen) {
+  const matches = classResourcesForLesson(lesson)
+    .filter((item) => !seen.has(hrefKey(item.url)));
+  if (!matches.length) return "";
+  matches.forEach((item) => seen.add(hrefKey(item.url)));
+  return `
+    <section class="resource-section class-resource-section">
+      <header class="resource-section-head">
+        <h2>課程資源</h2>
+        <p>按課題拆分自 class.bdfz.net 的三本語雀資源，只補本站未列出的課級入口。</p>
+      </header>
+      <div class="resource-list">${matches.map((item) => resourceCard({
+        href: item.url,
+        title: item.title,
+        meta: `${item.blockTitle} · 語雀課文資源`,
+        kind: item.kind,
+        source: item.score >= 1 ? "精確匹配" : "標題匹配",
+      })).join("")}</div>
+    </section>
+  `;
+}
+
 function renderResources(lesson) {
   const resources = visibleResources(lesson);
-  els.resourcesPanel.innerHTML = resources.length ? `
-    <div class="resource-list">${resources.map((item) => {
-      const href = normalizeHref(item.href);
-      const title = item.text || href;
-      return `
-        <article class="resource-item">
-          <a class="resource-link" href="${esc(href)}" target="_blank" rel="noreferrer">
-            <strong>${esc(title)}</strong>
-            <span>#${item.postNumber} · ${esc(item.kind)}</span>
-          </a>
-          ${embedMarkupForUrl(href, title, "resource")}
-        </article>
-      `;
-    }).join("")}</div>
-  ` : `<p class="empty">本課暫無可抽取連結或附件。</p>`;
+  const seen = new Set(resources.map((item) => hrefKey(item.href)));
+  const forumHtml = resources.length ? `
+    <section class="resource-section">
+      <header class="resource-section-head">
+        <h2>論壇資源</h2>
+      </header>
+      <div class="resource-list">${resources.map((item) => {
+        const href = normalizeHref(item.href);
+        const title = item.text || href;
+        return resourceCard({
+          href,
+          title,
+          meta: `#${item.postNumber} · ${item.kind}`,
+          kind: item.kind,
+        });
+      }).join("")}</div>
+    </section>
+  ` : "";
+  const classHtml = renderClassResourceSection(lesson, seen);
+  els.resourcesPanel.innerHTML = forumHtml + classHtml || `<p class="empty">本課暫無可抽取連結或附件。</p>`;
   attachImageButtons(els.resourcesPanel);
+  bindPreviewButtons(els.resourcesPanel);
+}
+
+function wyEmbedUrl(articleId) {
+  const url = new URL("https://wy.bdfz.net/");
+  url.searchParams.set("kind", "textbook_word");
+  url.searchParams.set("articleId", articleId);
+  url.searchParams.set("embed", "1");
+  return url.toString();
+}
+
+function renderExercises(lesson) {
+  const matches = exerciseArticlesForLesson(lesson);
+  if (!matches.length) {
+    els.exercisesPanel.innerHTML = `
+      <section class="exercise-empty">
+        <p class="empty">本課暫未匹配到 wy.bdfz.net 的課文練習；可先進入總練習頁選篇。</p>
+        ${lazyFrameMarkup("https://wy.bdfz.net/?embed=1", "AI 字詞", "web", `<a class="preview-link" href="https://wy.bdfz.net/" target="_blank" rel="noreferrer">新頁練習</a>`)}
+      </section>
+    `;
+    bindPreviewButtons(els.exercisesPanel);
+    return;
+  }
+  const first = matches[0];
+  els.exercisesPanel.innerHTML = `
+    <section class="exercise-section">
+      <header class="resource-section-head">
+        <h2>習題</h2>
+        <p>已按本課標題對接 wy.bdfz.net 的選篇掌握練習。</p>
+      </header>
+      <div class="exercise-list">
+        ${matches.map((article, index) => `
+          <button type="button" class="exercise-entry ${index === 0 ? "active" : ""}" data-wy-article="${esc(article.article_id)}">
+            <strong>${esc(article.title || article.manifest_title || "課文練習")}</strong>
+            <span>${Number(article.challenge_count || 0)} 題 · p${esc(article.page_start || "?")}${article.page_end && article.page_end !== article.page_start ? `-p${esc(article.page_end)}` : ""}</span>
+          </button>
+        `).join("")}
+      </div>
+      <div class="wy-frame-wrap">
+        <iframe id="wy-frame" src="${esc(wyEmbedUrl(first.article_id))}" title="${esc(`${first.title || lesson.title} 練習`)}" loading="lazy" allow="clipboard-write"></iframe>
+      </div>
+      <div class="resource-actions exercise-actions">
+        <a id="wy-open-link" href="${esc(wyEmbedUrl(first.article_id))}" target="_blank" rel="noreferrer">新頁練習</a>
+      </div>
+    </section>
+  `;
+  const frame = els.exercisesPanel.querySelector("#wy-frame");
+  const openLink = els.exercisesPanel.querySelector("#wy-open-link");
+  els.exercisesPanel.querySelectorAll(".exercise-entry").forEach((button) => {
+    button.addEventListener("click", () => {
+      els.exercisesPanel.querySelectorAll(".exercise-entry").forEach((item) => item.classList.remove("active"));
+      button.classList.add("active");
+      const next = wyEmbedUrl(button.dataset.wyArticle || "");
+      if (frame) frame.src = next;
+      if (openLink) openLink.href = next;
+    });
+  });
 }
 
 function renderChat() {
@@ -470,6 +839,7 @@ async function showLesson(id, { push = true } = {}) {
   renderPosts(lesson);
   renderImages(lesson);
   renderResources(lesson);
+  renderExercises(lesson);
   renderChat();
   renderLessonList();
   loadDiscussion();
@@ -506,7 +876,7 @@ async function sendChat(event) {
   els.chatForm.querySelector("button").disabled = true;
   try {
     const resources = visibleResources(state.currentLesson).slice(0, 16).map((item) => ({
-      href: normalizeHref(item.href),
+      href: resolvedHref(item.href),
       text: item.text || item.href,
       kind: item.kind,
       postNumber: item.postNumber,
@@ -584,6 +954,9 @@ function bindEvents() {
     state.query = els.search.value;
     renderLessonList();
   });
+  els.fontDecrease?.addEventListener("click", () => setFontScale(state.fontScale - 0.08));
+  els.fontIncrease?.addEventListener("click", () => setFontScale(state.fontScale + 0.08));
+  els.fontReset?.addEventListener("click", () => setFontScale(1));
   document.querySelector(".pane-tabs").addEventListener("click", (event) => {
     const button = event.target.closest("button[data-tab]");
     if (button) setTab(button.dataset.tab);
@@ -630,9 +1003,11 @@ function bindEvents() {
 
 async function init() {
   bindEvents();
+  applyFontScale();
   setTab("posts");
   const response = await fetch("data/manifest.json");
   state.manifest = await response.json();
+  await loadSupportData();
   renderBlocks();
   renderLessonList();
   const requested = location.hash.replace(/^#/, "");

@@ -12,7 +12,7 @@
   <link rel="canonical" href="https://yw.bdfz.net/">
   <link rel="icon" href="https://img.bdfz.net/20250503004.webp" type="image/webp">
   <title>課文 · 北大附中</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260512c">
+  <link rel="stylesheet" href="assets/styles.css?v=20260512e">
 </head>
 
 <body>
@@ -44,6 +44,12 @@
         <div class="lesson-heading">
           <h1 id="lesson-title">課文載入中</h1>
         </div>
+        <div class="reader-tools" aria-label="閱讀演示字號">
+          <button id="font-decrease" type="button" aria-label="縮小字號">A-</button>
+          <span id="font-value">100%</span>
+          <button id="font-increase" type="button" aria-label="放大字號">A+</button>
+          <button id="font-reset" type="button" aria-label="重置字號">重置</button>
+        </div>
       </header>
 
       <div class="workspace">
@@ -52,10 +58,12 @@
             <button type="button" class="active" data-tab="posts">課文</button>
             <button type="button" data-tab="images">圖頁</button>
             <button type="button" data-tab="resources">資源</button>
+            <button type="button" data-tab="exercises">習題</button>
           </div>
           <div id="posts-panel" class="tab-panel active"></div>
           <div id="images-panel" class="tab-panel"></div>
           <div id="resources-panel" class="tab-panel"></div>
+          <div id="exercises-panel" class="tab-panel"></div>
         </article>
 
         <section class="interaction-stack" aria-label="學習互動">
@@ -90,7 +98,7 @@
   </div>
 
   <script src="https://nav.bdfz.net/bdfz-nav.js" async></script>
-  <script src="assets/app.js?v=20260512c" defer></script>
+  <script src="assets/app.js?v=20260512e" defer></script>
 </body>
 
 </html>
