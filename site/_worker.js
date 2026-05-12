@@ -85,6 +85,24 @@ function filenameFromUrl(url) {
   return last.replace(/[^\w.\-\u4e00-\u9fff]+/g, "_") || "preview.pdf";
 }
 
+function asciiHeaderFilename(value) {
+  const safe = String(value || "preview")
+    .replace(/[^\x20-\x7e]+/g, "_")
+    .replace(/["\\;]+/g, "_")
+    .trim();
+  return safe || "preview";
+}
+
+function encodeHeaderFilename(value) {
+  return encodeURIComponent(String(value || "preview"))
+    .replace(/['()]/g, (ch) => `%${ch.charCodeAt(0).toString(16).toUpperCase()}`)
+    .replace(/\*/g, "%2A");
+}
+
+function contentDispositionValue(disposition, filename) {
+  return `${disposition}; filename="${asciiHeaderFilename(filename)}"; filename*=UTF-8''${encodeHeaderFilename(filename)}`;
+}
+
 function escapeHtml(value) {
   return String(value || "").replace(/[&<>"']/g, (ch) => ({
     "&": "&amp;",
@@ -341,7 +359,7 @@ async function handlePreview(request, env) {
   responseHeaders.set("x-content-type-options", "nosniff");
   responseHeaders.set(
     "content-disposition",
-    `${requestUrl.searchParams.get("download") ? "attachment" : "inline"}; filename="${filenameFromUrl(target)}"`
+    contentDispositionValue(requestUrl.searchParams.get("download") ? "attachment" : "inline", filenameFromUrl(target))
   );
   if (isPdf && !type) responseHeaders.set("content-type", "application/pdf");
   if (isPdf && isHtml && request.method !== "HEAD") {
