@@ -79,6 +79,37 @@ function filenameFromUrl(url) {
   return last.replace(/[^\w.\-\u4e00-\u9fff]+/g, "_") || "preview.pdf";
 }
 
+function escapeHtml(value) {
+  return String(value || "").replace(/[&<>"']/g, (ch) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#39;",
+  }[ch]));
+}
+
+function clearFrameBlockingHeaders(headers) {
+  headers.delete("content-security-policy");
+  headers.delete("content-security-policy-report-only");
+  headers.delete("x-frame-options");
+  headers.delete("content-length");
+  headers.delete("content-encoding");
+}
+
+function rewritePreviewHtml(html, target) {
+  const base = `<base href="${escapeHtml(target.href)}">`;
+  const style = `<style>html{background:#fff}body{max-width:980px;margin:0 auto;padding:20px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.7}img,video,iframe{max-width:100%;height:auto}</style>`;
+  if (/<head[^>]*>/i.test(html)) {
+    return html.replace(/<head([^>]*)>/i, `<head$1>${base}${style}`);
+  }
+  return `<!doctype html><html><head>${base}${style}</head><body>${html}</body></html>`;
+}
+
+function unavailablePdfHtml(target) {
+  return `<!doctype html><html><head><meta charset="utf-8"><style>body{margin:0;padding:24px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.7;color:#31444b;background:#fff}a{color:#426d65}</style></head><body><h2>PDF 暫不可預覽</h2><p>源站返回的是登錄頁或 HTML，不是公開 PDF。已保留外部打開入口；若源站恢復公開文件，這裏會自動恢復預覽。</p><p><a href="${escapeHtml(target.href)}" target="_blank" rel="noreferrer">打開源鏈接</a></p></body></html>`;
+}
+
 function redirectLookupKeys(url) {
   const keys = [url.toString()];
   const noHash = new URL(url.toString());
@@ -138,6 +169,8 @@ async function handlePreview(request, env) {
   const responseHeaders = new Headers(upstream.headers);
   const type = responseHeaders.get("content-type") || "";
   const isPdf = /\.pdf$/i.test(target.pathname) || /application\/pdf/i.test(type);
+  const isHtml = /text\/html|application\/xhtml\+xml/i.test(type);
+  clearFrameBlockingHeaders(responseHeaders);
   responseHeaders.set("access-control-allow-origin", "*");
   responseHeaders.set("x-content-type-options", "nosniff");
   responseHeaders.set(
@@ -145,6 +178,23 @@ async function handlePreview(request, env) {
     `${requestUrl.searchParams.get("download") ? "attachment" : "inline"}; filename="${filenameFromUrl(target)}"`
   );
   if (isPdf && !type) responseHeaders.set("content-type", "application/pdf");
+  if (isPdf && isHtml && request.method !== "HEAD") {
+    responseHeaders.set("content-type", "text/html; charset=utf-8");
+    responseHeaders.set("cache-control", "public, max-age=120");
+    return new Response(unavailablePdfHtml(target), {
+      status: 200,
+      headers: responseHeaders,
+    });
+  }
+  if (isHtml && request.method !== "HEAD") {
+    const html = await upstream.text();
+    responseHeaders.set("content-type", "text/html; charset=utf-8");
+    return new Response(rewritePreviewHtml(html, target), {
+      status: upstream.status,
+      statusText: upstream.statusText,
+      headers: responseHeaders,
+    });
+  }
   return new Response(request.method === "HEAD" ? null : upstream.body, {
     status: upstream.status,
     statusText: upstream.statusText,

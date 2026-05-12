@@ -125,6 +125,17 @@ def normalize_title(value: str) -> str:
     return value
 
 
+def yuque_book_url(slug: str) -> str:
+    return f"https://bdfz.yuque.com/{YUQUE_NAMESPACE}/{slug}?#"
+
+
+def yuque_doc_url(book_slug: str, doc_slug: str) -> str:
+    if re.match(r"^https?://", doc_slug, re.I):
+        return doc_slug
+    inner = urllib.parse.quote(doc_slug, safe="")
+    return f"https://bdfz.yuque.com/{YUQUE_NAMESPACE}/{book_slug}?view=doc_embed&inner={inner}"
+
+
 def public_doc_links(doc_url: str) -> list[dict[str, str]]:
     """Best-effort extraction for public Yuque pages.
 
@@ -163,7 +174,7 @@ def build_class_resources() -> dict[str, Any]:
     books: list[dict[str, Any]] = []
     items: list[dict[str, Any]] = []
     for source in YUQUE_BOOKS:
-        book_url = f"https://bdfz.yuque.com/{YUQUE_NAMESPACE}/{source['slug']}?#"
+        book_url = yuque_book_url(source["slug"])
         app_data = extract_app_data(fetch_text(book_url))
         book = app_data.get("book") or {}
         toc = book.get("toc") or []
@@ -178,7 +189,7 @@ def build_class_resources() -> dict[str, Any]:
             slug = node.get("url") or ""
             if not title or not slug:
                 continue
-            doc_url = f"https://bdfz.yuque.com/{YUQUE_NAMESPACE}/{slug}"
+            doc_url = yuque_doc_url(source["slug"], slug)
             is_unit = bool(re.search(r"单元|單元|研习任务|研習任務|目录|目錄", title))
             is_exam = "高考" in title or "命题" in title or "命題" in title
             item = {

@@ -180,18 +180,62 @@ a {
 
 .lesson-list {
   display: grid;
-  gap: 8px;
+  align-content: start;
+  gap: 10px;
   overflow: auto;
   padding-right: 4px;
+}
+
+.lesson-unit {
+  display: grid;
+  gap: 6px;
+}
+
+.unit-heading {
+  width: 100%;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  border-color: rgba(66, 109, 101, 0.24);
+  background: rgba(232, 242, 236, 0.52);
+  color: var(--water-deep);
+  text-align: left;
+}
+
+.unit-heading span {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.unit-heading.active {
+  border-color: rgba(66, 109, 101, 0.7);
+  background: rgba(232, 242, 236, 0.88);
+}
+
+.unit-heading.is-label {
+  cursor: default;
+}
+
+.unit-lessons {
+  display: grid;
+  gap: 6px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(66, 109, 101, 0.18);
 }
 
 .lesson-item {
   width: 100%;
   display: grid;
   gap: 4px;
-  padding: 10px;
+  padding: 9px 10px;
   text-align: left;
   background: rgba(255, 253, 247, 0.66);
+}
+
+.lesson-item.unit-overview {
+  background: rgba(245, 249, 244, 0.72);
 }
 
 .lesson-item.active {
@@ -413,7 +457,7 @@ a {
 }
 
 .cooked .lightbox .meta {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: 6px;
   color: var(--muted);
@@ -488,6 +532,26 @@ a {
 
 .bbcode-color {
   color: var(--bbcode-color, var(--danger));
+}
+
+.bbcode-align {
+  display: block;
+}
+
+.bbcode-right {
+  text-align: right;
+}
+
+.bbcode-center {
+  text-align: center;
+}
+
+.bbcode-left {
+  text-align: left;
+}
+
+.bbcode-size {
+  font-size: inherit;
 }
 
 .anchor-focus {
@@ -662,6 +726,10 @@ a {
   border-radius: 8px;
   overflow: hidden;
   background: #fff;
+}
+
+.document-embed .preview-frame {
+  min-height: min(760px, 82vh);
 }
 
 .preview-frame iframe {

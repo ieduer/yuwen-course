@@ -7,6 +7,17 @@ const WY_BOOK_KEYS = {
   "xuanbi-zhong": "高中_语文_普通高中教科书_语文选择性必修_中册",
   "xuanbi-xia": "高中_语文_普通高中教科书_语文选择性必修_下册",
 };
+const DEFAULT_WEB_EMBED_HOSTS = [
+  "ctext.org",
+  "matters.news",
+  "matters.town",
+  "old.shuge.org",
+  "shuge.org",
+  "wikisource.org",
+  "twitter.com",
+  "x.com",
+  "zh.wikisource.org",
+];
 
 const state = {
   manifest: null,
@@ -15,7 +26,7 @@ const state = {
   wyArticles: [],
   lessons: new Map(),
   currentLesson: null,
-  block: "all",
+  block: "",
   tab: "posts",
   query: "",
   chat: new Map(),
@@ -202,37 +213,88 @@ function loadStoredMessages(id) {
   }
 }
 
-function filteredLessons() {
-  const q = normalize(state.query);
-  return state.manifest.lessons.filter((lesson) => {
-    if (state.block !== "all" && lesson.blockId !== state.block) return false;
-    if (q && !lessonText(lesson).includes(q)) return false;
-    return true;
-  });
+function currentBlock() {
+  return state.manifest.blocks.find((block) => block.id === state.block) || state.manifest.blocks[0];
 }
 
 function renderBlocks() {
-  const buttons = [
-    `<button type="button" data-block="all" class="${state.block === "all" ? "active" : ""}">全部</button>`,
-    ...state.manifest.blocks.map((block) => (
-      `<button type="button" data-block="${esc(block.id)}" class="${state.block === block.id ? "active" : ""}">${esc(block.title)}</button>`
-    )),
-  ];
+  const buttons = state.manifest.blocks.map((block) => (
+    `<button type="button" data-block="${esc(block.id)}" class="${state.block === block.id ? "active" : ""}">${esc(block.title)}</button>`
+  ));
   els.blockTabs.innerHTML = buttons.join("");
 }
 
-function renderLessonList() {
-  const lessons = filteredLessons();
-  els.lessonList.innerHTML = lessons.map((lesson) => {
+function unitTitleFor(lesson) {
+  const title = lesson.title || "";
+  const match = title.match(/第[一二三四五六七八九十0-9]+[单單]元/);
+  if (match) return match[0].replace("单", "單");
+  if (/古诗词诵读|古詩詞誦讀/.test(title)) return "古詩詞誦讀";
+  if (/整本书阅读|整本書閱讀/.test(title)) return "整本書閱讀";
+  if (/单元研习任务|單元研習任務|单元学习任务|單元學習任務/.test(title)) return "單元研習任務";
+  return "";
+}
+
+function isUnitHeading(lesson) {
+  return Boolean(unitTitleFor(lesson));
+}
+
+function lessonMatchesQuery(lesson, q) {
+  return !q || lessonText(lesson).includes(q);
+}
+
+function groupedVisibleLessons() {
+  const block = currentBlock();
+  const q = normalize(state.query);
+  const allLessons = block?.lessons || [];
+  const groups = [];
+  let group = { title: "導讀", overview: null, items: [] };
+
+  allLessons.forEach((lesson) => {
+    if (isUnitHeading(lesson)) {
+      if (group.overview || group.items.length) groups.push(group);
+      group = { title: unitTitleFor(lesson), overview: lesson, items: [] };
+      return;
+    }
+    if (lessonMatchesQuery(lesson, q)) group.items.push(lesson);
+  });
+  if (group.overview || group.items.length) groups.push(group);
+
+  return groups
+    .map((item) => ({
+      ...item,
+      showOverview: Boolean(q && item.overview && lessonMatchesQuery(item.overview, q)),
+    }))
+    .filter((item) => item.showOverview || item.items.length);
+}
+
+function lessonButtonMarkup(lesson, extraClass = "") {
     const page = lesson.textbookStartPage ? ` · p${lesson.textbookStartPage}` : "";
     return `
-      <button type="button" class="lesson-item ${state.currentLesson?.id === lesson.id ? "active" : ""}" data-lesson="${esc(lesson.id)}">
+      <button type="button" class="lesson-item ${extraClass} ${state.currentLesson?.id === lesson.id ? "active" : ""}" data-lesson="${esc(lesson.id)}">
         <strong>${esc(lesson.title)}</strong>
         <span>${esc(lesson.blockTitle)}${esc(page)}</span>
       </button>
     `;
-  }).join("") || `<p class="empty">未找到匹配課文。</p>`;
-  els.dataStatus.textContent = `${lessons.length}/${state.manifest.totals.lessons} 課`;
+}
+
+function renderLessonList() {
+  const groups = groupedVisibleLessons();
+  const block = currentBlock();
+  const visibleCount = groups.reduce((sum, group) => sum + group.items.length + (group.showOverview ? 1 : 0), 0);
+  els.lessonList.innerHTML = groups.map((group) => `
+    <section class="lesson-unit">
+      ${group.overview ? `
+        <button type="button" class="unit-heading ${state.currentLesson?.id === group.overview.id ? "active" : ""}" data-lesson="${esc(group.overview.id)}">
+          <span>${esc(group.title)}</span>
+        </button>
+      ` : `<div class="unit-heading is-label"><span>${esc(group.title)}</span></div>`}
+      <div class="unit-lessons">
+        ${group.showOverview ? lessonButtonMarkup(group.overview, "unit-overview") : ""}
+        ${group.items.map((lesson) => lessonButtonMarkup(lesson)).join("")}
+      </div>
+    </section>
+  `).join("") || `<p class="empty">未找到匹配課文。</p>`;
+  els.dataStatus.textContent = `${visibleCount}/${block?.lessons?.length || 0} 課`;
 }
 
 async function loadLesson(id) {
@@ -304,6 +366,14 @@ function normalizeHref(href) {
   const value = String(href || "").trim();
   if (!value || value.startsWith("#")) return value;
   if (value.startsWith("//")) return `https:${value}`;
+  try {
+    const maybePreview = new URL(value, window.location.href);
+    if (maybePreview.pathname === "/api/preview" && maybePreview.searchParams.get("url")) {
+      return maybePreview.searchParams.get("url");
+    }
+  } catch {
+    // Fall through to the ordinary forum-relative handling below.
+  }
   if (value.startsWith("/")) return `${FORUM_BASE}${value}`;
   return value;
 }
@@ -378,6 +448,16 @@ function previewUrl(value, download = false) {
   return `/api/preview?url=${encodeURIComponent(url)}${download ? "&download=1" : ""}`;
 }
 
+function isForumUploadUrl(value) {
+  const url = httpUrl(value);
+  return Boolean(url && url.hostname === "forum.rdfzer.com" && url.pathname.startsWith("/uploads/short-url/"));
+}
+
+function publicHref(value) {
+  const href = resolvedHref(value);
+  return isForumUploadUrl(href) ? previewUrl(href) : href;
+}
+
 function youtubeEmbedUrl(value) {
   const url = httpUrl(value);
   if (!url) return "";
@@ -413,21 +493,33 @@ function isYuqueUrl(value) {
   return Boolean(url && /(^|\.)yuque\.com$/i.test(url.hostname));
 }
 
-function canTryWebEmbed(value) {
+function hostMatches(host, targets) {
+  const value = String(host || "").toLowerCase();
+  return targets.some((target) => value === target || value.endsWith(`.${target}`));
+}
+
+function shouldDefaultWebEmbed(value) {
   const url = httpUrl(value);
   if (!url || isDocumentUrl(url.href) || isImageUrl(url.href)) return false;
   if (isYuqueUrl(url.href)) return false;
-  return url.protocol === "https:";
+  return url.protocol === "https:" && hostMatches(url.hostname, DEFAULT_WEB_EMBED_HOSTS);
 }
 
-function lazyFrameMarkup(src, title, kind = "web", extraActions = "") {
+function shouldInlineEmbed(value) {
+  const url = httpUrl(value);
+  if (!url) return false;
+  if (isPdfUrl(url.href)) return false;
+  return Boolean(youtubeEmbedUrl(url.href) || xEmbedUrl(url.href) || bilibiliEmbedUrl(url.href) || shouldDefaultWebEmbed(url.href));
+}
+
+function frameMarkup(src, title, kind = "web", extraActions = "") {
+  const sandbox = kind === "pdf" ? "" : ` sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"`;
   return `
-    <div class="preview-shell" data-preview-kind="${esc(kind)}">
-      <div class="preview-actions">
-        <button type="button" class="preview-toggle" data-preview-src="${esc(src)}" data-preview-title="${esc(title)}">預覽</button>
-        ${extraActions}
+    <div class="preview-shell is-open" data-preview-kind="${esc(kind)}">
+      ${extraActions ? `<div class="preview-actions">${extraActions}</div>` : ""}
+      <div class="preview-frame">
+        <iframe src="${esc(src)}" title="${esc(title)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"${sandbox}></iframe>
       </div>
-      <div class="preview-frame" hidden></div>
     </div>
   `;
 }
@@ -447,10 +539,11 @@ function embedMarkupForUrl(rawUrl, title, variant = "resource") {
     `;
   }
   if (isImageUrl(url)) {
+    const imageSrc = publicHref(url);
     return `
       <div class="${variant}-embed image-embed">
-        <button type="button" class="embed-image-button" data-src="${esc(url)}" data-caption="${esc(label)}">
-          <img src="${esc(url)}" alt="${esc(label)}" loading="lazy" decoding="async">
+        <button type="button" class="embed-image-button" data-src="${esc(imageSrc)}" data-caption="${esc(label)}">
+          <img src="${esc(imageSrc)}" alt="${esc(label)}" loading="lazy" decoding="async">
         </button>
       </div>
     `;
@@ -460,14 +553,14 @@ function embedMarkupForUrl(rawUrl, title, variant = "resource") {
     const download = previewUrl(url, true);
     return `
       <div class="${variant}-embed document-embed">
-        ${lazyFrameMarkup(source, label, "pdf", `<a class="preview-link" href="${esc(download)}" target="_blank" rel="noreferrer">下載</a><a class="preview-link" href="${esc(url)}" target="_blank" rel="noreferrer">原鏈接</a>`)}
+        ${frameMarkup(source, label, "pdf", `<a class="preview-link" href="${esc(download)}" target="_blank" rel="noreferrer">下載</a>`)}
       </div>
     `;
   }
-  if (canTryWebEmbed(url)) {
+  if (shouldDefaultWebEmbed(url)) {
     return `
       <div class="${variant}-embed web-embed">
-        ${lazyFrameMarkup(url, label, "web", `<a class="preview-link" href="${esc(url)}" target="_blank" rel="noreferrer">新頁打開</a>`)}
+        ${frameMarkup(previewUrl(url), label, "web")}
       </div>
     `;
   }
@@ -488,13 +581,31 @@ function safeColorValue(raw) {
   return "";
 }
 
+function safeBbcodeImageSrc(raw) {
+  const url = httpUrl(raw);
+  if (!url || !isImageUrl(url.href)) return "";
+  return publicHref(url.href);
+}
+
 function normalizeCookedHtml(html) {
   return String(html || "")
+    .replace(/\[image\]([\s\S]*?)\[\/image\]/gi, (_match, src) => {
+      const safe = safeBbcodeImageSrc(src.trim());
+      return safe ? `<img class="bbcode-image" src="${esc(safe)}" alt="" loading="lazy" decoding="async">` : "";
+    })
     .replace(/\[color=([^\]]+)\]/gi, (_match, color) => {
       const safe = safeColorValue(color);
       return safe ? `<span class="bbcode-color" style="--bbcode-color:${safe}">` : "";
     })
-    .replace(/\[\/color\]/gi, "</span>");
+    .replace(/\[\/color\]/gi, "</span>")
+    .replace(/\[right\]/gi, `<span class="bbcode-align bbcode-right">`)
+    .replace(/\[\/right\]/gi, "</span>")
+    .replace(/\[center\]/gi, `<span class="bbcode-align bbcode-center">`)
+    .replace(/\[\/center\]/gi, "</span>")
+    .replace(/\[left\]/gi, `<span class="bbcode-align bbcode-left">`)
+    .replace(/\[\/left\]/gi, "</span>")
+    .replace(/\[size=[^\]]+\]/gi, `<span class="bbcode-size">`)
+    .replace(/\[\/size\]/gi, "</span>");
 }
 
 function findLocalAnchor(root, id) {
@@ -523,28 +634,6 @@ function attachImageButtons(container) {
   });
 }
 
-function bindPreviewButtons(container) {
-  container.querySelectorAll(".preview-toggle").forEach((button) => {
-    button.addEventListener("click", () => {
-      const shell = button.closest(".preview-shell");
-      const frameHost = shell?.querySelector(".preview-frame");
-      if (!shell || !frameHost) return;
-      const open = shell.classList.toggle("is-open");
-      button.textContent = open ? "收起" : "預覽";
-      frameHost.hidden = !open;
-      if (open && !frameHost.querySelector("iframe")) {
-        const iframe = document.createElement("iframe");
-        iframe.src = button.dataset.previewSrc || "";
-        iframe.title = button.dataset.previewTitle || "preview";
-        iframe.loading = "lazy";
-        iframe.referrerPolicy = "no-referrer-when-downgrade";
-        iframe.setAttribute("sandbox", "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox");
-        frameHost.appendChild(iframe);
-      }
-    });
-  });
-}
-
 function normalizeMarkdownQuotes(container) {
   container.querySelectorAll(".cooked p").forEach((paragraph) => {
     const text = paragraph.textContent.trim();
@@ -560,15 +649,15 @@ function normalizeMarkdownQuotes(container) {
 
 function deferExistingFrames(container) {
   container.querySelectorAll(".cooked iframe[src]").forEach((frame) => {
-    const src = frame.getAttribute("src") || "";
-    if (!src || youtubeEmbedUrl(src) || bilibiliEmbedUrl(src)) {
+    const src = resolvedHref(frame.getAttribute("src") || "");
+    if (!src || youtubeEmbedUrl(src) || bilibiliEmbedUrl(src) || /platform\.twitter\.com\/embed\/Tweet\.html/i.test(src)) {
       frame.loading = "lazy";
       return;
     }
     const title = frame.getAttribute("title") || src;
     const wrapper = document.createElement("div");
     wrapper.className = "inline-embed web-embed";
-    wrapper.innerHTML = lazyFrameMarkup(src, title, "web", `<a class="preview-link" href="${esc(src)}" target="_blank" rel="noreferrer">新頁打開</a>`);
+    wrapper.innerHTML = frameMarkup(previewUrl(src), title, "web");
     frame.replaceWith(wrapper);
   });
 }
@@ -576,14 +665,28 @@ function deferExistingFrames(container) {
 function enhanceInlineEmbeds(container) {
   const embedded = new Set();
   container.querySelectorAll("a[href]").forEach((link) => {
-    if (link.closest(".lightbox-wrapper, .onebox, .inline-embed")) return;
+    if (link.closest(".lightbox-wrapper, .onebox, .inline-embed, .footnotes-list, .footnote-ref, sup")) return;
     if (link.querySelector("img")) return;
-    const url = link.href;
+    const raw = link.getAttribute("href") || "";
+    if (raw.startsWith("#")) return;
+    const url = resolvedHref(raw);
     if (!url || embedded.has(url)) return;
+    if (!shouldInlineEmbed(url)) return;
     const markup = embedMarkupForUrl(url, link.textContent.trim() || url, "inline");
     if (!markup) return;
     embedded.add(url);
     link.insertAdjacentHTML("afterend", markup);
+  });
+}
+
+function enhanceOneboxEmbeds(container) {
+  container.querySelectorAll(".onebox[data-onebox-src]").forEach((box) => {
+    const url = resolvedHref(box.getAttribute("data-onebox-src") || "");
+    if (!url || !shouldInlineEmbed(url)) return;
+    if (box.nextElementSibling?.classList?.contains("inline-embed")) return;
+    const title = box.textContent.trim().replace(/\s+/g, " ").slice(0, 120) || url;
+    const markup = embedMarkupForUrl(url, title, "inline");
+    if (markup) box.insertAdjacentHTML("afterend", markup);
   });
 }
 
@@ -595,7 +698,7 @@ function enhanceCooked(container) {
       return;
     }
     const href = resolvedHref(raw);
-    link.href = href;
+    link.href = publicHref(href);
     if (link.querySelector("img")) {
       link.addEventListener("click", (event) => {
         event.preventDefault();
@@ -617,22 +720,41 @@ function enhanceCooked(container) {
   });
 
   container.querySelectorAll("img").forEach((img) => {
-    const src = normalizeHref(img.getAttribute("src") || "");
+    const src = publicHref(img.getAttribute("src") || "");
     if (src) img.src = src;
     img.loading = "lazy";
     img.decoding = "async";
     img.addEventListener("click", () => openViewer(img.src, img.alt || state.currentLesson.title));
   });
 
+  enhanceOneboxEmbeds(container);
   enhanceInlineEmbeds(container);
   deferExistingFrames(container);
   normalizeMarkdownQuotes(container);
   attachImageButtons(container);
-  bindPreviewButtons(container);
+}
+
+function postFingerprint(post) {
+  const raw = post?.plain_text || post?.cooked || "";
+  return String(raw)
+    .replace(/<[^>]*>/g, "")
+    .replace(/\s+/g, "")
+    .slice(0, 6000);
+}
+
+function visiblePosts(lesson) {
+  const seen = new Set();
+  return (lesson.posts || []).filter((post) => {
+    const key = postFingerprint(post);
+    if (key.length < 80) return true;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 function renderPosts(lesson) {
-  els.postsPanel.innerHTML = lesson.posts.map((post) => `
+  els.postsPanel.innerHTML = visiblePosts(lesson).map((post) => `
     <section class="forum-post" id="post-${esc(post.id || post.post_number)}">
       <aside>
         <div class="post-number">#${post.post_number}</div>
@@ -652,7 +774,6 @@ function renderImages(lesson) {
     <div class="image-grid">${textbook.map((image) => `
       <button type="button" class="image-tile" data-src="${esc(image.src)}" data-caption="${esc(`${lesson.textbook.bookTitle} · ${image.label}`)}">
         <img src="${esc(image.src)}" alt="${esc(`${lesson.title} ${image.label}`)}" loading="lazy" decoding="async">
-        <p>${esc(image.label)} · ${esc(lesson.textbook.tocLabel || lesson.title)}</p>
       </button>
     `).join("")}</div>
   ` : `<p class="empty">本課未自動匹配到教材圖片；仍保留論壇圖片和資源。</p>`;
@@ -661,7 +782,6 @@ function renderImages(lesson) {
     <div class="image-grid">${forumImages.map((image) => `
       <button type="button" class="image-tile" data-src="${esc(image.src)}" data-caption="${esc(`#${image.postNumber} · ${image.alt || lesson.title}`)}">
         <img src="${esc(image.src)}" alt="${esc(image.alt || lesson.title)}" loading="lazy" decoding="async">
-        <p>#${image.postNumber} · ${esc(image.alt || "圖片")}</p>
       </button>
     `).join("")}</div>
   ` : `<p class="empty">本課論壇回覆中未抽取到圖片。</p>`;
@@ -680,6 +800,7 @@ function hrefKey(value) {
 
 function resourceCard({ href, title, meta, kind = "link", source = "" }) {
   const target = resolvedHref(href);
+  const openTarget = publicHref(target);
   return `
     <article class="resource-item" data-kind="${esc(kind)}">
       <div class="resource-link">
@@ -687,7 +808,7 @@ function resourceCard({ href, title, meta, kind = "link", source = "" }) {
         <span>${esc([meta, source].filter(Boolean).join(" · "))}</span>
       </div>
       <div class="resource-actions">
-        <a href="${esc(target)}" target="_blank" rel="noreferrer">打開</a>
+        <a href="${esc(openTarget)}" target="_blank" rel="noreferrer">打開</a>
       </div>
       ${embedMarkupForUrl(target, title || target, "resource")}
     </article>
@@ -739,7 +860,6 @@ function renderResources(lesson) {
   const classHtml = renderClassResourceSection(lesson, seen);
   els.resourcesPanel.innerHTML = forumHtml + classHtml || `<p class="empty">本課暫無可抽取連結或附件。</p>`;
   attachImageButtons(els.resourcesPanel);
-  bindPreviewButtons(els.resourcesPanel);
 }
 
 function wyEmbedUrl(articleId) {
@@ -756,10 +876,9 @@ function renderExercises(lesson) {
     els.exercisesPanel.innerHTML = `
       <section class="exercise-empty">
         <p class="empty">本課暫未匹配到 wy.bdfz.net 的課文練習；可先進入總練習頁選篇。</p>
-        ${lazyFrameMarkup("https://wy.bdfz.net/?embed=1", "AI 字詞", "web", `<a class="preview-link" href="https://wy.bdfz.net/" target="_blank" rel="noreferrer">新頁練習</a>`)}
+        <div class="resource-embed web-embed">${frameMarkup("https://wy.bdfz.net/?embed=1", "AI 字詞", "web", `<a class="preview-link" href="https://wy.bdfz.net/" target="_blank" rel="noreferrer">打開練習</a>`)}</div>
       </section>
     `;
-    bindPreviewButtons(els.exercisesPanel);
     return;
   }
   const first = matches[0];
@@ -945,6 +1064,10 @@ function bindEvents() {
     state.block = button.dataset.block;
     renderBlocks();
     renderLessonList();
+    const first = groupedVisibleLessons()
+      .flatMap((group) => [group.overview, ...group.items].filter(Boolean))
+      .find(Boolean);
+    if (first) showLesson(first.id);
   });
   els.lessonList.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-lesson]");
@@ -1007,11 +1130,13 @@ async function init() {
   setTab("posts");
   const response = await fetch("data/manifest.json");
   state.manifest = await response.json();
+  state.block = state.manifest.blocks[0]?.id || "";
   await loadSupportData();
-  renderBlocks();
-  renderLessonList();
   const requested = location.hash.replace(/^#/, "");
   const first = state.manifest.lessons.find((lesson) => lesson.id === requested) || state.manifest.lessons[0];
+  if (first?.blockId) state.block = first.blockId;
+  renderBlocks();
+  renderLessonList();
   if (first) await showLesson(first.id, { push: requested !== first.id });
 }
 
