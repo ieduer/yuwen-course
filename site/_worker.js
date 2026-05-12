@@ -186,7 +186,18 @@ async function handleChat(request, env) {
     `站內旁注：${notes}`,
   ].join("\n");
 
+  const apiMessages = [
+    { role: "system", content: system },
+    ...messages.map((message) => ({
+      role: message.role === "assistant" ? "assistant" : "user",
+      content: cleanText(message.content, 2000),
+    })),
+  ];
+
   if (!env.OPENAI_API_KEY) {
+    const apisReply = await callApisGateway(env, apiMessages).catch(() => null);
+    if (apisReply) return json({ provider: "apis", reply: apisReply });
+
     const last = cleanText(messages[messages.length - 1]?.content, 500);
     return json({
       provider: "local-fallback",
@@ -197,14 +208,6 @@ async function handleChat(request, env) {
       ].join("\n"),
     });
   }
-
-  const apiMessages = [
-    { role: "system", content: system },
-    ...messages.map((message) => ({
-      role: message.role === "assistant" ? "assistant" : "user",
-      content: cleanText(message.content, 2000),
-    })),
-  ];
 
   try {
     const response = await fetch(env.OPENAI_ENDPOINT || "https://api.openai.com/v1/chat/completions", {
@@ -226,4 +229,27 @@ async function handleChat(request, env) {
   } catch (error) {
     return json({ error: error.message }, { status: 502 });
   }
+}
+
+async function callApisGateway(env, apiMessages) {
+  const prompt = apiMessages.map((message) => {
+    const label = message.role === "system" ? "系統" : message.role === "assistant" ? "AI" : "學生";
+    return `${label}：${message.content}`;
+  }).join("\n\n");
+  const response = await fetch(env.APIS_ENDPOINT || "https://apis.bdfz.net", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "origin": "https://yw.bdfz.net",
+      "x-project-name": "yw.bdfz.net",
+      "x-task-type": "chat",
+      "x-thinking-level": env.APIS_THINKING_LEVEL || "low",
+    },
+    body: JSON.stringify({ prompt, taskType: "chat", thinkingLevel: env.APIS_THINKING_LEVEL || "low" }),
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.error || `APIS ${response.status}`);
+  const answer = cleanText(data.answer, 8000);
+  if (!answer) throw new Error("APIS returned empty answer");
+  return answer;
 }
