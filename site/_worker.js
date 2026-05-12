@@ -1,6 +1,9 @@
 const OWNER = "ieduer";
 const REPO = "yuwen-course";
 const DISCUSSION_MARKER_PREFIX = "yuwen-course-lesson:";
+let ctextSession = { cookie: "", expiresAt: 0 };
+let shugeSession = { cookie: "", expiresAt: 0 };
+const BROWSER_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
 
 export default {
   async fetch(request, env, ctx) {
@@ -93,17 +96,72 @@ function clearFrameBlockingHeaders(headers) {
   headers.delete("content-security-policy");
   headers.delete("content-security-policy-report-only");
   headers.delete("x-frame-options");
+  headers.delete("set-cookie");
   headers.delete("content-length");
   headers.delete("content-encoding");
 }
 
+function isCtextUrl(url) {
+  const host = url.hostname.toLowerCase();
+  return host === "ctext.org" || host.endsWith(".ctext.org");
+}
+
+function isShugeUrl(url) {
+  const host = url.hostname.toLowerCase();
+  return host === "shuge.org" || host.endsWith(".shuge.org");
+}
+
+function splitSetCookieHeader(value) {
+  if (!value) return [];
+  return String(value).split(/,(?=\s*[^;,\s]+=)/g).map((item) => item.trim()).filter(Boolean);
+}
+
+function setCookieHeaders(headers) {
+  if (typeof headers.getSetCookie === "function") return headers.getSetCookie();
+  return splitSetCookieHeader(headers.get("set-cookie") || "");
+}
+
+function cookieHeaderFromSetCookies(values) {
+  return values
+    .map((value) => String(value).split(";")[0].trim())
+    .filter((value) => value && !/^deleted=/i.test(value))
+    .join("; ");
+}
+
+function mergeCookieHeaders(left, right) {
+  const cookies = new Map();
+  `${left || ""}; ${right || ""}`.split(";").forEach((part) => {
+    const item = part.trim();
+    const index = item.indexOf("=");
+    if (index <= 0) return;
+    cookies.set(item.slice(0, index), item.slice(index + 1));
+  });
+  return [...cookies].map(([key, value]) => `${key}=${value}`).join("; ");
+}
+
+function scrubCtextPreviewHtml(html) {
+  return html
+    .replace(/<div id=["']logininfo["'][\s\S]*?<\/div>/i, `<div id="logininfo">課程嵌入預覽</div>`)
+    .replace(/<span style=["']opacity:\s*0\.0;[^>]*>[\s\S]*?<\/span>/gi, "");
+}
+
 function rewritePreviewHtml(html, target) {
+  const origin = target.origin;
+  let staticHtml = html
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
+    .replace(/<script\b[^>]*\/?>/gi, "")
+    .replace(/<meta\b[^>]+http-equiv=["']?refresh["']?[^>]*>/gi, "")
+    .replace(/\s+on[a-z]+=(["']).*?\1/gi, "")
+    .replace(/\s+on[a-z]+=[^\s>]+/gi, "")
+    .replace(/\b(href|src|action)=(["'])\/(?!\/)/gi, (_match, attr, quote) => `${attr}=${quote}${origin}/`)
+    .replace(/\b(href|src|action)=(["'])\/\//gi, (_match, attr, quote) => `${attr}=${quote}${target.protocol}//`);
+  if (isCtextUrl(target)) staticHtml = scrubCtextPreviewHtml(staticHtml);
   const base = `<base href="${escapeHtml(target.href)}">`;
   const style = `<style>html{background:#fff}body{max-width:980px;margin:0 auto;padding:20px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.7}img,video,iframe{max-width:100%;height:auto}</style>`;
-  if (/<head[^>]*>/i.test(html)) {
-    return html.replace(/<head([^>]*)>/i, `<head$1>${base}${style}`);
+  if (/<head[^>]*>/i.test(staticHtml)) {
+    return staticHtml.replace(/<head([^>]*)>/i, `<head$1>${base}${style}`);
   }
-  return `<!doctype html><html><head>${base}${style}</head><body>${html}</body></html>`;
+  return `<!doctype html><html><head>${base}${style}</head><body>${staticHtml}</body></html>`;
 }
 
 function unavailablePdfHtml(target) {
@@ -144,6 +202,79 @@ async function resolvePreviewTarget(request, env, target) {
   return target;
 }
 
+async function getCtextCookie(env) {
+  const username = env.CTEXT_USERNAME || env.CTEXT_USER || "";
+  const password = env.CTEXT_PASSWORD || env.CTEXT_PASS || "";
+  if (!username || !password) return "";
+  if (ctextSession.cookie && Date.now() < ctextSession.expiresAt) return ctextSession.cookie;
+
+  const body = new URLSearchParams();
+  body.set("un", username);
+  body.set("pw", password);
+  body.set("if", "gb");
+  body.set("redirect", "/pre-qin-and-han/zh");
+  body.set("nologout", "on");
+
+  const response = await fetch("https://ctext.org/account.pl", {
+    method: "POST",
+    headers: {
+      "user-agent": "bdfz-yuwen-course-preview",
+      "accept": "text/html,application/xhtml+xml",
+      "content-type": "application/x-www-form-urlencoded",
+      "origin": "https://ctext.org",
+      "referer": "https://ctext.org/account.pl?if=gb",
+    },
+    body,
+    redirect: "manual",
+  });
+  const cookie = cookieHeaderFromSetCookies(setCookieHeaders(response.headers));
+  if (!cookie) return "";
+  ctextSession = {
+    cookie,
+    expiresAt: Date.now() + 6 * 60 * 60 * 1000,
+  };
+  return cookie;
+}
+
+async function fetchPreviewUpstream(request, target, headers, env) {
+  if (isCtextUrl(target)) {
+    const cookie = await getCtextCookie(env);
+    if (cookie) headers.set("cookie", cookie);
+    headers.set("accept", "text/html,application/xhtml+xml");
+    headers.set("referer", "https://ctext.org/");
+  }
+  if (isShugeUrl(target)) {
+    headers.set("user-agent", BROWSER_UA);
+    headers.set("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+    headers.set("accept-language", "zh-CN,zh;q=0.9,en;q=0.8");
+    headers.set("referer", "https://www.shuge.org/");
+    if (shugeSession.cookie && Date.now() < shugeSession.expiresAt) headers.set("cookie", shugeSession.cookie);
+  }
+  let response = await fetch(target.toString(), {
+    method: request.method,
+    headers,
+    redirect: "follow",
+  });
+  if (isShugeUrl(target)) {
+    const freshCookie = cookieHeaderFromSetCookies(setCookieHeaders(response.headers));
+    if (freshCookie) {
+      shugeSession = {
+        cookie: mergeCookieHeaders(shugeSession.cookie, freshCookie),
+        expiresAt: Date.now() + 60 * 60 * 1000,
+      };
+    }
+    if (response.status === 403 && shugeSession.cookie) {
+      headers.set("cookie", shugeSession.cookie);
+      response = await fetch(target.toString(), {
+        method: request.method,
+        headers,
+        redirect: "follow",
+      });
+    }
+  }
+  return response;
+}
+
 async function handlePreview(request, env) {
   const requestUrl = new URL(request.url);
   const targetRaw = requestUrl.searchParams.get("url") || "";
@@ -161,11 +292,7 @@ async function handlePreview(request, env) {
   });
   const range = request.headers.get("range");
   if (range) headers.set("range", range);
-  const upstream = await fetch(target.toString(), {
-    method: request.method,
-    headers,
-    redirect: "follow",
-  });
+  const upstream = await fetchPreviewUpstream(request, target, headers, env);
   const responseHeaders = new Headers(upstream.headers);
   const type = responseHeaders.get("content-type") || "";
   const isPdf = /\.pdf$/i.test(target.pathname) || /application\/pdf/i.test(type);
@@ -189,6 +316,7 @@ async function handlePreview(request, env) {
   if (isHtml && request.method !== "HEAD") {
     const html = await upstream.text();
     responseHeaders.set("content-type", "text/html; charset=utf-8");
+    if (isCtextUrl(target)) responseHeaders.set("cache-control", "private, max-age=120");
     return new Response(rewritePreviewHtml(html, target), {
       status: upstream.status,
       statusText: upstream.statusText,

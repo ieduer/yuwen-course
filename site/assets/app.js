@@ -508,12 +508,17 @@ function shouldDefaultWebEmbed(value) {
 function shouldInlineEmbed(value) {
   const url = httpUrl(value);
   if (!url) return false;
-  if (isPdfUrl(url.href)) return false;
+  if (isPdfUrl(url.href)) return true;
   return Boolean(youtubeEmbedUrl(url.href) || xEmbedUrl(url.href) || bilibiliEmbedUrl(url.href) || shouldDefaultWebEmbed(url.href));
 }
 
 function frameMarkup(src, title, kind = "web", extraActions = "") {
-  const sandbox = kind === "pdf" ? "" : ` sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"`;
+  const proxiedWeb = kind === "web" && /\/api\/preview\?/.test(src);
+  const sandbox = kind === "pdf"
+    ? ""
+    : proxiedWeb
+      ? ` sandbox="allow-same-origin allow-forms allow-popups"`
+      : ` sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"`;
   return `
     <div class="preview-shell is-open" data-preview-kind="${esc(kind)}">
       ${extraActions ? `<div class="preview-actions">${extraActions}</div>` : ""}
@@ -649,6 +654,7 @@ function normalizeMarkdownQuotes(container) {
 
 function deferExistingFrames(container) {
   container.querySelectorAll(".cooked iframe[src]").forEach((frame) => {
+    if (frame.closest(".inline-embed, .resource-embed, .preview-shell")) return;
     const src = resolvedHref(frame.getAttribute("src") || "");
     if (!src || youtubeEmbedUrl(src) || bilibiliEmbedUrl(src) || /platform\.twitter\.com\/embed\/Tweet\.html/i.test(src)) {
       frame.loading = "lazy";
@@ -665,7 +671,7 @@ function deferExistingFrames(container) {
 function enhanceInlineEmbeds(container) {
   const embedded = new Set();
   container.querySelectorAll("a[href]").forEach((link) => {
-    if (link.closest(".lightbox-wrapper, .onebox, .inline-embed, .footnotes-list, .footnote-ref, sup")) return;
+    if (link.closest(".lightbox-wrapper, aside.onebox, .inline-embed, .footnotes-list, .footnote-ref, sup")) return;
     if (link.querySelector("img")) return;
     const raw = link.getAttribute("href") || "";
     if (raw.startsWith("#")) return;
