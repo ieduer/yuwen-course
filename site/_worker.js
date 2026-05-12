@@ -190,6 +190,8 @@ function rewritePreviewHtml(html, target) {
     .replace(/<meta\b[^>]+http-equiv=["']?refresh["']?[^>]*>/gi, "")
     .replace(/\s+on[a-z]+=(["']).*?\1/gi, "")
     .replace(/\s+on[a-z]+=[^\s>]+/gi, "")
+    .replace(/\b(href|src|action)=(["'])\s*javascript:[\s\S]*?\2/gi, (_match, attr, quote) => `${attr}=${quote}#${quote}`)
+    .replace(/\b(href|src|action)=javascript:[^\s>]+/gi, (_match, attr) => `${attr}="#"`)
     .replace(/\b(href|src|action)=(["'])\/(?!\/)/gi, (_match, attr, quote) => `${attr}=${quote}${origin}/`)
     .replace(/\b(href|src|action)=(["'])\/\//gi, (_match, attr, quote) => `${attr}=${quote}${target.protocol}//`);
   if (isCtextUrl(target)) staticHtml = scrubCtextPreviewHtml(staticHtml);
