@@ -106,6 +106,15 @@ function isCtextUrl(url) {
   return host === "ctext.org" || host.endsWith(".ctext.org");
 }
 
+function shouldUseCtextAuth(url) {
+  if (!isCtextUrl(url)) return false;
+  const path = url.pathname.toLowerCase();
+  if (/\/(account|password|logout|login|user|users|admin|discuss|message|mail|inbox|settings)\.pl$/.test(path)) {
+    return false;
+  }
+  return true;
+}
+
 function isShugeUrl(url) {
   const host = url.hostname.toLowerCase();
   return host === "shuge.org" || host.endsWith(".shuge.org");
@@ -237,7 +246,7 @@ async function getCtextCookie(env) {
 }
 
 async function fetchPreviewUpstream(request, target, headers, env) {
-  if (isCtextUrl(target)) {
+  if (shouldUseCtextAuth(target)) {
     const cookie = await getCtextCookie(env);
     if (cookie) headers.set("cookie", cookie);
     headers.set("accept", "text/html,application/xhtml+xml");
