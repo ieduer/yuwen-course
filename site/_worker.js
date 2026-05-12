@@ -169,8 +169,17 @@ async function handleChat(request, env) {
   const lessonTitle = cleanText(payload.lessonTitle, 120);
   const blockTitle = cleanText(payload.blockTitle, 40);
   const excerpt = cleanText(payload.excerpt, 900);
-  const notes = Array.isArray(payload.annotations)
-    ? payload.annotations.map((item) => `${item.title}: ${item.body}`).join("\n").slice(0, 900)
+  const resourceLines = Array.isArray(payload.resources)
+    ? payload.resources.slice(0, 16).map((item) => {
+      const text = cleanText(item.text || item.href, 120);
+      const href = cleanText(item.href, 220);
+      const kind = cleanText(item.kind, 24);
+      const postNumber = cleanText(item.postNumber, 12);
+      return `#${postNumber || "?"} ${kind || "resource"} ${text} ${href}`.trim();
+    }).join("\n").slice(0, 1800)
+    : "";
+  const pageLines = Array.isArray(payload.textbookPages)
+    ? payload.textbookPages.slice(0, 12).map((item) => `${cleanText(item.label, 24)} ${cleanText(item.src, 180)}`.trim()).join("\n").slice(0, 1200)
     : "";
 
   if (!messages.length) return json({ error: "messages required" }, { status: 400 });
@@ -183,7 +192,8 @@ async function handleChat(request, env) {
     "",
     `當前課文：${blockTitle} / ${lessonTitle}`,
     `課文摘錄：${excerpt}`,
-    `站內旁注：${notes}`,
+    resourceLines ? `學習資源：\n${resourceLines}` : "",
+    pageLines ? `教材圖頁：\n${pageLines}` : "",
   ].join("\n");
 
   const apiMessages = [

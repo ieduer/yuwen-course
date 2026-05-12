@@ -12,7 +12,7 @@
   <link rel="canonical" href="https://yw.bdfz.net/">
   <link rel="icon" href="https://img.bdfz.net/20250503004.webp" type="image/webp">
   <title>課文 · 北大附中</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260512a">
+  <link rel="stylesheet" href="assets/styles.css?v=20260512c">
 </head>
 
 <body>
@@ -40,26 +40,11 @@
 
     <main class="lesson-main">
       <header class="lesson-toolbar">
-        <button id="sidebar-button" type="button" class="icon-button" aria-label="顯示或隱藏目錄">☰</button>
+        <button id="sidebar-button" type="button" class="sidebar-toggle" aria-label="顯示或隱藏目錄">目錄</button>
         <div class="lesson-heading">
-          <p id="lesson-kicker">高中語文</p>
           <h1 id="lesson-title">課文載入中</h1>
         </div>
-        <div class="mode-switch" role="group" aria-label="注釋顯示模式">
-          <button type="button" data-mode="study" class="active">精讀</button>
-          <button type="button" data-mode="notes">旁注</button>
-          <button type="button" data-mode="clean">純讀</button>
-        </div>
       </header>
-
-      <section class="lesson-meta" aria-label="課文資料">
-        <span id="meta-posts">0 樓</span>
-        <span id="meta-images">0 圖</span>
-        <span id="meta-resources">0 資源</span>
-        <a id="forum-link" href="#" target="_blank" rel="noreferrer">論壇原帖</a>
-      </section>
-
-      <section id="annotation-strip" class="annotation-strip"></section>
 
       <div class="workspace">
         <article class="reading-pane" aria-label="課文與論壇內容">
@@ -73,15 +58,7 @@
           <div id="resources-panel" class="tab-panel"></div>
         </article>
 
-        <aside class="study-pane" aria-label="學習互動">
-          <section class="study-section">
-            <div class="section-head">
-              <h2>學習任務</h2>
-              <button id="copy-tasks" type="button">複製</button>
-            </div>
-            <div id="learning-tasks"></div>
-          </section>
-
+        <section class="interaction-stack" aria-label="學習互動">
           <section class="study-section">
             <div class="section-head">
               <h2>AI 對話</h2>
@@ -107,13 +84,13 @@
               <button type="submit">送出到 GitHub Issue</button>
             </form>
           </section>
-        </aside>
+        </section>
       </div>
     </main>
   </div>
 
   <script src="https://nav.bdfz.net/bdfz-nav.js" async></script>
-  <script src="assets/app.js?v=20260512a" defer></script>
+  <script src="assets/app.js?v=20260512c" defer></script>
 </body>
 
 </html>

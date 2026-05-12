@@ -8,8 +8,10 @@
 
 :root {
   --paper: #f5efe3;
-  --paper-strong: rgba(255, 253, 247, 0.92);
+  --paper-soft: rgba(255, 253, 247, 0.68);
+  --paper-strong: rgba(255, 253, 247, 0.94);
   --ink: #31444b;
+  --ink-strong: #23363b;
   --muted: #6f8188;
   --line: rgba(86, 111, 118, 0.2);
   --line-strong: rgba(86, 111, 118, 0.34);
@@ -39,12 +41,9 @@ body {
   color: var(--ink);
   font-family: var(--font);
   background:
-    radial-gradient(900px 620px at 14% 8%, rgba(217, 169, 184, 0.34), transparent 62%),
-    radial-gradient(940px 680px at 88% 18%, rgba(159, 189, 209, 0.35), transparent 60%),
-    radial-gradient(800px 600px at 42% 92%, rgba(171, 197, 145, 0.36), transparent 64%),
-    linear-gradient(rgba(245, 239, 227, 0.82), rgba(245, 239, 227, 0.9)),
+    linear-gradient(120deg, rgba(245, 239, 227, 0.9), rgba(245, 239, 227, 0.78) 42%, rgba(238, 244, 238, 0.84)),
     url("background.jpg");
-  background-size: auto, auto, auto, auto, cover;
+  background-size: auto, cover;
   background-attachment: fixed;
   line-height: 1.72;
 }
@@ -119,9 +118,7 @@ a {
   gap: 14px;
   padding: 20px;
   border-right: 1px solid var(--line);
-  background:
-    linear-gradient(180deg, rgba(255, 253, 247, 0.78), rgba(245, 239, 227, 0.66)),
-    radial-gradient(320px 240px at 100% 0%, rgba(217, 169, 184, 0.24), transparent 72%);
+  background: rgba(255, 253, 247, 0.7);
   backdrop-filter: blur(16px);
   overflow: hidden;
 }
@@ -214,129 +211,49 @@ a {
 
 .lesson-main {
   min-width: 0;
-  padding: 22px;
+  padding: 20px clamp(18px, 3vw, 38px) 34px;
 }
 
 .lesson-toolbar {
+  max-width: 1180px;
+  margin: 0 auto 14px;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
   align-items: center;
-  min-height: 76px;
+  min-height: 64px;
   border-bottom: 1px solid var(--line);
 }
 
-.icon-button {
-  width: 42px;
-  height: 42px;
-  font-size: 1.2rem;
+.sidebar-toggle {
+  display: none;
 }
 
 .lesson-heading {
   min-width: 0;
 }
 
-.lesson-heading p,
 .lesson-heading h1 {
   margin: 0;
-}
-
-.lesson-heading p {
-  color: var(--water-deep);
-  font-size: 0.92rem;
-}
-
-.lesson-heading h1 {
   overflow-wrap: anywhere;
-  font-size: clamp(1.7rem, 3vw, 3rem);
+  color: var(--ink-strong);
+  font-size: clamp(1.8rem, 3vw, 3.1rem);
   line-height: 1.16;
   letter-spacing: 0;
 }
 
-.mode-switch {
-  display: flex;
-  gap: 6px;
-  padding: 4px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: rgba(255, 253, 247, 0.54);
-}
-
-.mode-switch button {
-  min-height: 34px;
-  padding: 4px 12px;
-  border-color: transparent;
-  color: var(--muted);
-  background: transparent;
-}
-
-.mode-switch button.active {
-  color: #fffaf1;
-  background: var(--water-deep);
-}
-
-.lesson-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 14px 0;
-}
-
-.lesson-meta span,
-.lesson-meta a,
-.annotation-strip article {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 253, 247, 0.62);
-}
-
-.lesson-meta span,
-.lesson-meta a {
-  padding: 6px 10px;
-  color: var(--muted);
-  font-size: 0.9rem;
-  text-decoration: none;
-}
-
-.annotation-strip {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.annotation-strip article {
-  padding: 12px;
-}
-
-.annotation-strip h3 {
-  margin: 0 0 4px;
-  color: var(--water-deep);
-  font-size: 0.96rem;
-}
-
-.annotation-strip p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
 .workspace {
+  max-width: 1180px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 390px);
   gap: 16px;
-  align-items: start;
-}
-
-.reading-pane,
-.study-pane {
-  min-width: 0;
 }
 
 .reading-pane {
+  min-width: 0;
   border: 1px solid var(--line);
   border-radius: 10px;
-  background: rgba(255, 253, 247, 0.64);
+  background: rgba(255, 253, 247, 0.66);
   box-shadow: var(--shadow);
   overflow: hidden;
 }
@@ -349,11 +266,13 @@ a {
   gap: 4px;
   padding: 10px;
   border-bottom: 1px solid var(--line);
-  background: rgba(255, 253, 247, 0.88);
+  background: rgba(255, 253, 247, 0.9);
   backdrop-filter: blur(12px);
+  overflow-x: auto;
 }
 
 .pane-tabs button {
+  min-width: 74px;
   min-height: 34px;
   padding: 4px 12px;
 }
@@ -366,7 +285,7 @@ a {
 
 .tab-panel {
   display: none;
-  padding: 16px;
+  padding: clamp(16px, 3vw, 34px);
 }
 
 .tab-panel.active {
@@ -376,13 +295,23 @@ a {
 .forum-post {
   display: grid;
   grid-template-columns: 72px minmax(0, 1fr);
-  gap: 16px;
-  padding: 18px 0;
+  gap: 18px;
+  padding: 22px 0;
   border-bottom: 1px solid var(--line);
 }
 
 .forum-post:first-child {
   padding-top: 4px;
+}
+
+.forum-post:last-child {
+  border-bottom: 0;
+}
+
+.forum-post aside {
+  position: sticky;
+  top: 64px;
+  align-self: start;
 }
 
 .post-number {
@@ -397,12 +326,49 @@ a {
 
 .cooked {
   min-width: 0;
+  max-width: 900px;
   color: #26393f;
-  font-size: 1.04rem;
+  font-size: clamp(1rem, 0.35vw + 0.95rem, 1.13rem);
+  line-height: 1.92;
+  overflow-wrap: anywhere;
 }
 
 .cooked > :first-child {
   margin-top: 0;
+}
+
+.cooked > :last-child {
+  margin-bottom: 0;
+}
+
+.cooked p {
+  margin: 0.82em 0;
+}
+
+.cooked h1,
+.cooked h2,
+.cooked h3,
+.cooked h4 {
+  margin: 1.55em 0 0.6em;
+  color: var(--ink-strong);
+  line-height: 1.28;
+  letter-spacing: 0;
+}
+
+.cooked h1 {
+  font-size: 1.62rem;
+}
+
+.cooked h2 {
+  font-size: 1.42rem;
+}
+
+.cooked h3 {
+  font-size: 1.24rem;
+}
+
+.cooked h4 {
+  font-size: 1.1rem;
 }
 
 .cooked img {
@@ -412,14 +378,40 @@ a {
   cursor: zoom-in;
 }
 
+.cooked .lightbox-wrapper {
+  display: inline-grid;
+  max-width: 100%;
+  margin: 10px 0;
+}
+
+.cooked .lightbox {
+  display: inline-grid;
+  gap: 6px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cooked .lightbox .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.cooked .lightbox svg {
+  display: none;
+}
+
 .cooked iframe,
 .cooked video {
   max-width: 100%;
 }
 
 .cooked blockquote {
-  margin-left: 0;
-  padding: 8px 12px;
+  margin: 1em 0;
+  padding: 10px 14px;
   border-left: 3px solid var(--water);
   background: rgba(232, 242, 236, 0.62);
 }
@@ -437,18 +429,59 @@ a {
   padding: 5px 8px;
 }
 
-.mode-clean .annotation-strip,
-.mode-clean .post-number,
-.mode-clean .post-date {
+.cooked sup a {
+  padding: 0 2px;
+  color: var(--danger);
+  text-decoration: none;
+}
+
+.cooked .footnote-backref {
   display: none;
 }
 
-.mode-clean .forum-post {
-  display: block;
+.cooked a.anchor {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  text-decoration: none;
 }
 
-.mode-notes .forum-post {
-  grid-template-columns: 104px minmax(0, 1fr);
+.footnotes-sep {
+  margin: 24px 0 14px;
+  border: 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+.footnotes-list {
+  margin: 0;
+  padding-left: 1.3em;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.footnotes-list li {
+  margin: 0.5em 0;
+  padding-left: 0.2em;
+}
+
+.bbcode-color {
+  color: var(--bbcode-color, var(--danger));
+}
+
+.anchor-focus {
+  animation: anchorFlash 1300ms ease;
+}
+
+@keyframes anchorFlash {
+  0%,
+  100% {
+    background: transparent;
+  }
+  18%,
+  72% {
+    background: rgba(223, 191, 112, 0.3);
+  }
 }
 
 .image-grid {
@@ -484,32 +517,97 @@ a {
 
 .resource-list {
   display: grid;
-  gap: 8px;
+  gap: 12px;
 }
 
 .resource-item {
   display: grid;
-  gap: 3px;
-  padding: 10px 12px;
+  gap: 10px;
+  padding: 12px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 253, 247, 0.68);
   overflow-wrap: anywhere;
 }
 
-.resource-item span {
+.resource-link {
+  display: grid;
+  gap: 3px;
+  text-decoration: none;
+}
+
+.resource-link strong {
+  color: var(--ink-strong);
+  font-weight: 600;
+}
+
+.resource-link span {
   color: var(--muted);
   font-size: 0.82rem;
 }
 
-.study-pane {
-  position: sticky;
-  top: 14px;
+.resource-embed,
+.inline-embed {
+  max-width: 900px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 253, 247, 0.72);
+  overflow: hidden;
+}
+
+.inline-embed {
+  margin: 10px 0 16px;
+}
+
+.video-embed {
+  aspect-ratio: 16 / 9;
+}
+
+.video-embed iframe,
+.document-embed iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.document-embed {
+  height: min(72vh, 760px);
+  min-height: 420px;
+}
+
+.embed-image-button {
+  width: 100%;
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.embed-image-button:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.embed-image-button img {
+  width: 100%;
+  max-height: min(72vh, 760px);
+  display: block;
+  object-fit: contain;
+  background: rgba(255, 253, 247, 0.82);
+  cursor: zoom-in;
+}
+
+.interaction-stack {
   display: grid;
-  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .study-section {
+  min-width: 0;
   border: 1px solid var(--line);
   border-radius: 10px;
   background: rgba(255, 253, 247, 0.7);
@@ -537,47 +635,13 @@ a {
   padding: 3px 10px;
 }
 
-#learning-tasks,
-.chat-log,
-.discussion-log {
-  padding: 12px;
-}
-
-.task-item {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 8px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.task-item:last-child {
-  border-bottom: 0;
-}
-
-.task-item input {
-  width: 18px;
-  height: 18px;
-  margin-top: 5px;
-}
-
-.task-item strong {
-  display: block;
-  color: var(--water-deep);
-}
-
-.task-item p {
-  margin: 2px 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
 .chat-log,
 .discussion-log {
   display: grid;
   gap: 9px;
   max-height: 360px;
   overflow: auto;
+  padding: 12px;
 }
 
 .message,
@@ -601,6 +665,7 @@ a {
 .message p,
 .discussion-comment p {
   margin: 4px 0 0;
+  white-space: pre-wrap;
 }
 
 .chat-form,
@@ -658,6 +723,7 @@ a {
   object-fit: contain;
   border-radius: 8px;
   background: #fff;
+  cursor: zoom-out;
 }
 
 .image-viewer p {
@@ -676,20 +742,16 @@ a {
 }
 
 @media (max-width: 1080px) {
-  .workspace {
+  .interaction-stack {
     grid-template-columns: 1fr;
-  }
-
-  .study-pane {
-    position: static;
-  }
-
-  .annotation-strip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 820px) {
+  body {
+    background-attachment: scroll;
+  }
+
   .app-shell {
     grid-template-columns: 1fr;
   }
@@ -709,32 +771,116 @@ a {
   }
 
   .lesson-main {
-    padding: 14px;
+    padding: 10px 10px 24px;
   }
 
   .lesson-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
     grid-template-columns: auto minmax(0, 1fr);
+    min-height: 56px;
+    margin-bottom: 10px;
+    padding: 8px 0;
+    background: rgba(245, 239, 227, 0.9);
+    backdrop-filter: blur(12px);
   }
 
-  .mode-switch {
-    grid-column: 1 / -1;
-    overflow-x: auto;
+  .sidebar-toggle {
+    min-width: 58px;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
   }
 
-  .annotation-strip {
-    grid-template-columns: 1fr;
+  .lesson-heading h1 {
+    font-size: 1.35rem;
+    line-height: 1.24;
+  }
+
+  .reading-pane,
+  .study-section {
+    border-radius: 8px;
+  }
+
+  .pane-tabs {
+    top: 56px;
+    padding: 8px;
+  }
+
+  .tab-panel {
+    padding: 14px;
   }
 
   .forum-post {
-    grid-template-columns: 1fr;
-    gap: 6px;
+    display: block;
+    padding: 18px 0;
+  }
+
+  .forum-post aside {
+    position: static;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    margin-bottom: 8px;
   }
 
   .post-number {
-    display: inline;
+    font-size: 0.98rem;
+  }
+
+  .cooked {
+    max-width: 100%;
+    font-size: 1rem;
+    line-height: 1.86;
+  }
+
+  .cooked h1 {
+    font-size: 1.34rem;
+  }
+
+  .cooked h2 {
+    font-size: 1.22rem;
+  }
+
+  .cooked h3,
+  .cooked h4 {
+    font-size: 1.08rem;
   }
 
   .image-grid {
-    grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+    gap: 10px;
+  }
+
+  .document-embed {
+    min-height: 360px;
+    height: 62vh;
+  }
+
+  .chat-log,
+  .discussion-log {
+    max-height: 46vh;
+  }
+}
+
+@media (max-width: 420px) {
+  .block-tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .pane-tabs button {
+    min-width: 64px;
+    padding-inline: 8px;
+  }
+
+  .lesson-heading h1 {
+    font-size: 1.18rem;
+  }
+
+  .image-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

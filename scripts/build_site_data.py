@@ -237,6 +237,8 @@ def classify_links(posts: list[dict[str, Any]]) -> dict[str, int]:
         for link in post.get("links", []):
             href = (link.get("href") or "").lower()
             text = (link.get("text") or "").lower()
+            if is_internal_resource(link):
+                continue
             if any(token in href for token in ("youtube", "bilibili", "youtu.be")):
                 counts["video"] += 1
             elif any(token in href for token in ("pdf", "doc", "ppt", "drive.google", "feishu", "notion")):
@@ -275,7 +277,7 @@ def collect_resources(posts: list[dict[str, Any]]) -> list[dict[str, Any]]:
     for post in posts:
         for link in post.get("links", []):
             href = link.get("href")
-            if not href or href in seen:
+            if not href or href in seen or is_internal_resource(link):
                 continue
             seen.add(href)
             text = link.get("text") or href
@@ -294,6 +296,21 @@ def collect_resources(posts: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "postNumber": post.get("post_number"),
             })
     return resources
+
+
+def is_internal_resource(link: dict[str, Any]) -> bool:
+    href = (link.get("href") or "").strip()
+    text = (link.get("text") or "").strip()
+    classes = set((link.get("classes") or "").split())
+    if not href:
+        return True
+    if href.startswith("#"):
+        return True
+    if "anchor" in classes:
+        return True
+    if re.fullmatch(r"#?(p|footnote|footnote-ref)-[\w-]+", text):
+        return True
+    return False
 
 
 def excerpt_from_posts(posts: list[dict[str, Any]], limit: int = 420) -> str:
@@ -431,10 +448,9 @@ def main() -> None:
             "resources": resources,
             "resourceCounts": classify_links(posts),
             "annotations": [],
-            "learningTasks": build_tasks(display_title),
+            "learningTasks": [],
             "posts": posts,
         }
-        lesson["annotations"] = build_annotations(lesson)
         write_json(lessons_dir / f"{lesson_id}.json", lesson)
 
         meta = {

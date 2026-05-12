@@ -1,9 +1,10 @@
+const FORUM_BASE = "https://forum.rdfzer.com";
+
 const state = {
   manifest: null,
   lessons: new Map(),
   currentLesson: null,
   block: "all",
-  mode: "study",
   tab: "posts",
   query: "",
   chat: new Map(),
@@ -17,17 +18,9 @@ const els = {
   search: document.getElementById("lesson-search"),
   sidebarButton: document.getElementById("sidebar-button"),
   title: document.getElementById("lesson-title"),
-  kicker: document.getElementById("lesson-kicker"),
-  metaPosts: document.getElementById("meta-posts"),
-  metaImages: document.getElementById("meta-images"),
-  metaResources: document.getElementById("meta-resources"),
-  forumLink: document.getElementById("forum-link"),
-  annotationStrip: document.getElementById("annotation-strip"),
   postsPanel: document.getElementById("posts-panel"),
   imagesPanel: document.getElementById("images-panel"),
   resourcesPanel: document.getElementById("resources-panel"),
-  learningTasks: document.getElementById("learning-tasks"),
-  copyTasks: document.getElementById("copy-tasks"),
   copyChat: document.getElementById("copy-chat"),
   chatLog: document.getElementById("chat-log"),
   chatForm: document.getElementById("chat-form"),
@@ -136,12 +129,15 @@ function renderBlocks() {
 
 function renderLessonList() {
   const lessons = filteredLessons();
-  els.lessonList.innerHTML = lessons.map((lesson) => `
-    <button type="button" class="lesson-item ${state.currentLesson?.id === lesson.id ? "active" : ""}" data-lesson="${esc(lesson.id)}">
-      <strong>${esc(lesson.title)}</strong>
-      <span>${esc(lesson.blockTitle)} · ${lesson.postCount} 樓 · ${lesson.imageCount} 圖 · ${lesson.resourceCount} 資源</span>
-    </button>
-  `).join("") || `<p class="empty">未找到匹配課文。</p>`;
+  els.lessonList.innerHTML = lessons.map((lesson) => {
+    const page = lesson.textbookStartPage ? ` · p${lesson.textbookStartPage}` : "";
+    return `
+      <button type="button" class="lesson-item ${state.currentLesson?.id === lesson.id ? "active" : ""}" data-lesson="${esc(lesson.id)}">
+        <strong>${esc(lesson.title)}</strong>
+        <span>${esc(lesson.blockTitle)}${esc(page)}</span>
+      </button>
+    `;
+  }).join("") || `<p class="empty">未找到匹配課文。</p>`;
   els.dataStatus.textContent = `${lessons.length}/${state.manifest.totals.lessons} 課`;
 }
 
@@ -156,15 +152,6 @@ async function loadLesson(id) {
   return lesson;
 }
 
-function setMode(mode) {
-  state.mode = mode;
-  document.querySelectorAll(".mode-switch button").forEach((button) => {
-    button.classList.toggle("active", button.dataset.mode === mode);
-  });
-  els.body.classList.toggle("mode-clean", mode === "clean");
-  els.body.classList.toggle("mode-notes", mode === "notes");
-}
-
 function setTab(tab) {
   state.tab = tab;
   document.querySelectorAll(".pane-tabs button").forEach((button) => {
@@ -175,40 +162,221 @@ function setTab(tab) {
   });
 }
 
-function renderAnnotations(lesson) {
-  els.annotationStrip.innerHTML = lesson.annotations.map((item) => `
-    <article>
-      <h3>${esc(item.title)}</h3>
-      <p>${esc(item.body)}</p>
-    </article>
-  `).join("");
+function normalizeHref(href) {
+  const value = String(href || "").trim();
+  if (!value || value.startsWith("#")) return value;
+  if (value.startsWith("//")) return `https:${value}`;
+  if (value.startsWith("/")) return `${FORUM_BASE}${value}`;
+  return value;
+}
+
+function httpUrl(value) {
+  try {
+    const url = new URL(normalizeHref(value), window.location.href);
+    if (url.protocol === "http:" || url.protocol === "https:") return url;
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+function isInternalResource(item) {
+  const href = String(item?.href || "").trim();
+  const text = String(item?.text || "").trim();
+  if (!href || href.startsWith("#")) return true;
+  if (/^#?(p|footnote|footnote-ref)-[\w-]+$/i.test(text)) return true;
+  return false;
+}
+
+function visibleResources(lesson) {
+  const seen = new Set();
+  return (lesson.resources || []).filter((item) => {
+    if (isInternalResource(item)) return false;
+    const href = normalizeHref(item.href);
+    const key = href.toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function isImageUrl(value) {
+  const url = httpUrl(value);
+  if (!url) return false;
+  return /\.(avif|gif|jpe?g|png|svg|webp)$/i.test(url.pathname);
+}
+
+function isPdfUrl(value) {
+  const url = httpUrl(value);
+  if (!url) return false;
+  return /\.pdf$/i.test(url.pathname);
+}
+
+function youtubeEmbedUrl(value) {
+  const url = httpUrl(value);
+  if (!url) return "";
+  const host = url.hostname.replace(/^www\./, "");
+  let id = "";
+  if (host === "youtu.be") id = url.pathname.split("/").filter(Boolean)[0] || "";
+  if (host.endsWith("youtube.com")) {
+    id = url.searchParams.get("v") || "";
+    const embedMatch = url.pathname.match(/\/embed\/([^/?]+)/);
+    if (!id && embedMatch) id = embedMatch[1];
+  }
+  return id ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}` : "";
+}
+
+function bilibiliEmbedUrl(value) {
+  const url = httpUrl(value);
+  if (!url || !/bilibili\.com$/i.test(url.hostname.replace(/^www\./, ""))) return "";
+  const match = url.pathname.match(/\/video\/(BV[0-9A-Za-z]+)/);
+  return match ? `https://player.bilibili.com/player.html?bvid=${encodeURIComponent(match[1])}&autoplay=0` : "";
+}
+
+function embedMarkupForUrl(rawUrl, title, variant = "resource") {
+  const url = normalizeHref(rawUrl);
+  const label = title || url;
+  const youtube = youtubeEmbedUrl(url);
+  const bilibili = bilibiliEmbedUrl(url);
+  const embedUrl = youtube || bilibili;
+  if (embedUrl) {
+    return `
+      <div class="${variant}-embed video-embed">
+        <iframe src="${esc(embedUrl)}" title="${esc(label)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    `;
+  }
+  if (isImageUrl(url)) {
+    return `
+      <div class="${variant}-embed image-embed">
+        <button type="button" class="embed-image-button" data-src="${esc(url)}" data-caption="${esc(label)}">
+          <img src="${esc(url)}" alt="${esc(label)}" loading="lazy" decoding="async">
+        </button>
+      </div>
+    `;
+  }
+  if (isPdfUrl(url)) {
+    return `
+      <div class="${variant}-embed document-embed">
+        <iframe src="${esc(`${url}#toolbar=0`)}" title="${esc(label)}" loading="lazy"></iframe>
+      </div>
+    `;
+  }
+  return "";
+}
+
+function safeColorValue(raw) {
+  const value = String(raw || "").trim().toLowerCase();
+  const named = {
+    red: "#b44636",
+    blue: "#2f6fab",
+    green: "#4f7f50",
+    orange: "#b86c2c",
+    purple: "#7458a8",
+  };
+  if (named[value]) return named[value];
+  if (/^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(value)) return value;
+  return "";
+}
+
+function normalizeCookedHtml(html) {
+  return String(html || "")
+    .replace(/\[color=([^\]]+)\]/gi, (_match, color) => {
+      const safe = safeColorValue(color);
+      return safe ? `<span class="bbcode-color" style="--bbcode-color:${safe}">` : "";
+    })
+    .replace(/\[\/color\]/gi, "</span>");
+}
+
+function findLocalAnchor(root, id) {
+  return Array.from(root.querySelectorAll("[id], a[name]"))
+    .find((node) => node.id === id || node.getAttribute("name") === id);
+}
+
+function bindLocalAnchor(link, root, href) {
+  link.removeAttribute("target");
+  link.removeAttribute("rel");
+  link.addEventListener("click", (event) => {
+    const id = decodeURIComponent(href.slice(1));
+    const target = findLocalAnchor(root, id);
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: "smooth", block: "center" });
+    target.classList.add("anchor-focus");
+    window.setTimeout(() => target.classList.remove("anchor-focus"), 1300);
+    if (state.currentLesson) history.replaceState(null, "", `#${state.currentLesson.id}`);
+  });
+}
+
+function attachImageButtons(container) {
+  container.querySelectorAll(".embed-image-button").forEach((button) => {
+    button.addEventListener("click", () => openViewer(button.dataset.src, button.dataset.caption));
+  });
+}
+
+function enhanceInlineEmbeds(container) {
+  const embedded = new Set();
+  container.querySelectorAll("a[href]").forEach((link) => {
+    if (link.closest(".lightbox-wrapper, .onebox, .inline-embed")) return;
+    if (link.querySelector("img")) return;
+    const url = link.href;
+    if (!url || embedded.has(url)) return;
+    const markup = embedMarkupForUrl(url, link.textContent.trim() || url, "inline");
+    if (!markup) return;
+    embedded.add(url);
+    link.insertAdjacentHTML("afterend", markup);
+  });
 }
 
 function enhanceCooked(container) {
   container.querySelectorAll("a[href]").forEach((link) => {
-    const href = link.getAttribute("href") || "";
-    if (href.startsWith("/")) link.href = `https://forum.rdfzer.com${href}`;
+    const raw = link.getAttribute("href") || "";
+    if (raw.startsWith("#")) {
+      bindLocalAnchor(link, container, raw);
+      return;
+    }
+    const href = normalizeHref(raw);
+    link.href = href;
+    if (link.querySelector("img")) {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const image = link.querySelector("img");
+        openViewer(image?.src || href, image?.alt || link.getAttribute("title") || state.currentLesson.title);
+      });
+      return;
+    }
+    if (link.classList.contains("lightbox")) {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const image = link.querySelector("img");
+        openViewer(image?.src || href, image?.alt || link.getAttribute("title") || state.currentLesson.title);
+      });
+      return;
+    }
     link.target = "_blank";
     link.rel = "noreferrer";
   });
+
   container.querySelectorAll("img").forEach((img) => {
-    const src = img.getAttribute("src") || "";
-    if (src.startsWith("/")) img.src = `https://forum.rdfzer.com${src}`;
-    if (src.startsWith("//")) img.src = `https:${src}`;
+    const src = normalizeHref(img.getAttribute("src") || "");
+    if (src) img.src = src;
     img.loading = "lazy";
     img.decoding = "async";
     img.addEventListener("click", () => openViewer(img.src, img.alt || state.currentLesson.title));
   });
+
+  enhanceInlineEmbeds(container);
+  attachImageButtons(container);
 }
 
 function renderPosts(lesson) {
   els.postsPanel.innerHTML = lesson.posts.map((post) => `
-    <section class="forum-post" id="p${post.post_number}">
+    <section class="forum-post" id="post-${esc(post.id || post.post_number)}">
       <aside>
         <div class="post-number">#${post.post_number}</div>
         <div class="post-date">${esc((post.created_at || "").slice(0, 10))}</div>
       </aside>
-      <div class="cooked">${post.cooked}</div>
+      <div class="cooked">${normalizeCookedHtml(post.cooked)}</div>
     </section>
   `).join("");
   enhanceCooked(els.postsPanel);
@@ -242,34 +410,23 @@ function renderImages(lesson) {
 }
 
 function renderResources(lesson) {
-  const resources = lesson.resources || [];
+  const resources = visibleResources(lesson);
   els.resourcesPanel.innerHTML = resources.length ? `
-    <div class="resource-list">${resources.map((item) => `
-      <a class="resource-item" href="${esc(item.href)}" target="_blank" rel="noreferrer">
-        <strong>${esc(item.text || item.href)}</strong>
-        <span>#${item.postNumber} · ${esc(item.kind)}</span>
-      </a>
-    `).join("")}</div>
+    <div class="resource-list">${resources.map((item) => {
+      const href = normalizeHref(item.href);
+      const title = item.text || href;
+      return `
+        <article class="resource-item">
+          <a class="resource-link" href="${esc(href)}" target="_blank" rel="noreferrer">
+            <strong>${esc(title)}</strong>
+            <span>#${item.postNumber} · ${esc(item.kind)}</span>
+          </a>
+          ${embedMarkupForUrl(href, title, "resource")}
+        </article>
+      `;
+    }).join("")}</div>
   ` : `<p class="empty">本課暫無可抽取連結或附件。</p>`;
-}
-
-function taskKey(taskId) {
-  return `yw-task:${state.currentLesson.id}:${taskId}`;
-}
-
-function renderTasks(lesson) {
-  els.learningTasks.innerHTML = lesson.learningTasks.map((task) => {
-    const checked = localStorage.getItem(taskKey(task.id)) === "1";
-    return `
-      <label class="task-item">
-        <input type="checkbox" data-task="${esc(task.id)}" ${checked ? "checked" : ""}>
-        <span>
-          <strong>${esc(task.title)}</strong>
-          <p>${esc(task.prompt)}</p>
-        </span>
-      </label>
-    `;
-  }).join("");
+  attachImageButtons(els.resourcesPanel);
 }
 
 function renderChat() {
@@ -309,16 +466,10 @@ async function showLesson(id, { push = true } = {}) {
   state.currentLesson = lesson;
   loadStoredMessages(id);
   els.title.textContent = lesson.title;
-  els.kicker.textContent = `${lesson.blockTitle} · ${lesson.textbook.bookTitle || "論壇課文"}`;
-  els.metaPosts.textContent = `${lesson.postCount} 樓`;
-  els.metaImages.textContent = `${lesson.forumImages.length + (lesson.textbook.pageImages || []).length} 圖`;
-  els.metaResources.textContent = `${lesson.resources.length} 資源`;
-  els.forumLink.href = lesson.forumUrl;
-  renderAnnotations(lesson);
+  document.title = `${lesson.title} · 課文`;
   renderPosts(lesson);
   renderImages(lesson);
   renderResources(lesson);
-  renderTasks(lesson);
   renderChat();
   renderLessonList();
   loadDiscussion();
@@ -344,11 +495,6 @@ async function copyText(text) {
   await navigator.clipboard.writeText(text);
 }
 
-function taskText() {
-  const lesson = state.currentLesson;
-  return lesson.learningTasks.map((task, index) => `${index + 1}. ${task.title}\n${task.prompt}`).join("\n\n");
-}
-
 async function sendChat(event) {
   event.preventDefault();
   const value = els.chatInput.value.trim();
@@ -359,6 +505,12 @@ async function sendChat(event) {
   renderChat();
   els.chatForm.querySelector("button").disabled = true;
   try {
+    const resources = visibleResources(state.currentLesson).slice(0, 16).map((item) => ({
+      href: normalizeHref(item.href),
+      text: item.text || item.href,
+      kind: item.kind,
+      postNumber: item.postNumber,
+    }));
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -367,7 +519,8 @@ async function sendChat(event) {
         lessonTitle: state.currentLesson.title,
         blockTitle: state.currentLesson.blockTitle,
         excerpt: state.currentLesson.excerpt,
-        annotations: state.currentLesson.annotations,
+        resources,
+        textbookPages: state.currentLesson.textbook.pageImages || [],
         messages: messages.slice(-12),
       }),
     });
@@ -411,6 +564,10 @@ async function submitDiscussion(event) {
   }
 }
 
+function manifestHasLesson(id) {
+  return Boolean(id && state.manifest?.lessons?.some((lesson) => lesson.id === id));
+}
+
 function bindEvents() {
   els.blockTabs.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-block]");
@@ -427,20 +584,11 @@ function bindEvents() {
     state.query = els.search.value;
     renderLessonList();
   });
-  document.querySelector(".mode-switch").addEventListener("click", (event) => {
-    const button = event.target.closest("button[data-mode]");
-    if (button) setMode(button.dataset.mode);
-  });
   document.querySelector(".pane-tabs").addEventListener("click", (event) => {
     const button = event.target.closest("button[data-tab]");
     if (button) setTab(button.dataset.tab);
   });
   els.sidebarButton.addEventListener("click", () => els.body.classList.toggle("sidebar-open"));
-  els.learningTasks.addEventListener("change", (event) => {
-    const input = event.target.closest("input[data-task]");
-    if (input) localStorage.setItem(taskKey(input.dataset.task), input.checked ? "1" : "0");
-  });
-  els.copyTasks.addEventListener("click", () => copyText(taskText()));
   els.copyChat.addEventListener("click", () => {
     const text = currentMessages().map((message) => `${message.role === "user" ? "我" : "AI"}：${message.content}`).join("\n\n");
     copyText(text);
@@ -461,18 +609,27 @@ function bindEvents() {
   });
   els.reloadDiscussion.addEventListener("click", loadDiscussion);
   els.viewerClose.addEventListener("click", closeViewer);
+  els.viewerImage.addEventListener("click", closeViewer);
   els.viewer.addEventListener("click", (event) => {
     if (event.target === els.viewer) closeViewer();
   });
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !els.viewer.classList.contains("hidden")) closeViewer();
+  });
   window.addEventListener("hashchange", () => {
     const id = location.hash.replace(/^#/, "");
-    if (id && id !== state.currentLesson?.id) showLesson(id, { push: false });
+    if (manifestHasLesson(id) && id !== state.currentLesson?.id) {
+      showLesson(id, { push: false });
+      return;
+    }
+    if (state.currentLesson && id && id !== state.currentLesson.id) {
+      history.replaceState(null, "", `#${state.currentLesson.id}`);
+    }
   });
 }
 
 async function init() {
   bindEvents();
-  setMode("study");
   setTab("posts");
   const response = await fetch("data/manifest.json");
   state.manifest = await response.json();
@@ -480,7 +637,7 @@ async function init() {
   renderLessonList();
   const requested = location.hash.replace(/^#/, "");
   const first = state.manifest.lessons.find((lesson) => lesson.id === requested) || state.manifest.lessons[0];
-  if (first) await showLesson(first.id, { push: !requested });
+  if (first) await showLesson(first.id, { push: requested !== first.id });
 }
 
 init().catch((error) => {
