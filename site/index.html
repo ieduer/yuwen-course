@@ -12,21 +12,55 @@
   <link rel="canonical" href="https://yw.bdfz.net/">
   <link rel="icon" href="https://img.bdfz.net/20250503004.webp" type="image/webp">
   <title>課文 · 北大附中</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260512j">
+  <meta name="theme-color" content="#f5efe3">
+  <link rel="stylesheet" href="assets/styles.css?v=20260512t">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem("yw-theme") || "lily";
+        var sidebar = localStorage.getItem("yw-sidebar") || "pinned";
+        window.__ywBoot = { theme: theme, sidebar: sidebar };
+      } catch (e) {
+        window.__ywBoot = { theme: "lily", sidebar: "pinned" };
+      }
+    })();
+  </script>
 </head>
 
-<body>
+<body data-theme="lily" data-sidebar="pinned"><script>
+    (function () {
+      var boot = window.__ywBoot || { theme: "lily", sidebar: "pinned" };
+      document.body.setAttribute("data-theme", boot.theme);
+      document.body.setAttribute("data-sidebar", boot.sidebar);
+    })();
+  </script>
   <div id="image-viewer" class="image-viewer hidden" role="dialog" aria-modal="true" aria-label="圖片放大查看">
     <button id="viewer-close" class="viewer-close" type="button" aria-label="關閉">×</button>
     <img id="viewer-image" alt="">
     <p id="viewer-caption"></p>
   </div>
 
+  <div class="sidebar-edge" id="sidebar-edge" aria-hidden="true"></div>
+  <div class="sidebar-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
+
   <div class="app-shell">
-    <aside class="lesson-sidebar" aria-label="課文目錄">
-      <header class="brand">
-        <a href="/" class="brand-title">課文</a>
-        <span id="data-status">讀取中</span>
+    <aside class="lesson-sidebar" id="lesson-sidebar" aria-label="課文目錄">
+      <header class="sidebar-head">
+        <div class="brand">
+          <a href="/" class="brand-title">課文</a>
+          <span id="data-status">讀取中</span>
+        </div>
+        <div class="sidebar-tools">
+          <div class="theme-picker">
+            <button id="theme-toggle" class="icon-button" type="button" aria-label="選擇配色" aria-haspopup="true" aria-expanded="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c5 0 9 3.6 9 8 0 3-2 5-5 5h-2a2 2 0 0 0-1 3.8c.4.4.5 1 .2 1.5-.3.4-.8.7-1.4.7-5 0-9-4-9-9s4-10 9.2-10Z"/><circle cx="7.5" cy="10.5" r="1.2"/><circle cx="11" cy="7" r="1.2"/><circle cx="15.5" cy="8" r="1.2"/><circle cx="17.5" cy="12" r="1.2"/></svg>
+            </button>
+            <div id="theme-menu" class="theme-menu" role="menu" hidden></div>
+          </div>
+          <button id="sidebar-pin" class="icon-button" type="button" aria-label="固定或自動隱藏目錄" aria-pressed="true" title="固定目錄">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3l7 7-3 1-2 6-4-4-5 5-1-1 5-5-4-4 6-2 1-3z"/></svg>
+          </button>
+        </div>
       </header>
 
       <section class="search-panel">
@@ -44,21 +78,24 @@
           <h1 id="lesson-title">課文載入中</h1>
         </div>
         <div class="reader-tools" aria-label="閱讀演示字號">
-          <button id="font-decrease" type="button" aria-label="縮小字號">A-</button>
-          <span id="font-value">100%</span>
-          <button id="font-increase" type="button" aria-label="放大字號">A+</button>
+          <label class="font-scale-control" for="font-scale">
+            <span class="font-mark font-mark-small" aria-hidden="true">A</span>
+            <input id="font-scale" type="range" min="82" max="158" step="1" value="100" aria-label="拖動調整字號">
+            <span class="font-mark font-mark-large" aria-hidden="true">A</span>
+            <output id="font-value" for="font-scale">100%</output>
+          </label>
           <button id="font-reset" type="button" aria-label="重置字號">重置</button>
+        </div>
+        <div class="pane-tabs" role="tablist" aria-label="內容分區">
+          <button type="button" class="active" data-tab="posts">課文</button>
+          <button type="button" data-tab="images">圖頁</button>
+          <button type="button" data-tab="resources">資源</button>
+          <button type="button" data-tab="exercises">習題</button>
         </div>
       </header>
 
       <div class="workspace">
         <article class="reading-pane" aria-label="課文與論壇內容">
-          <div class="pane-tabs" role="tablist" aria-label="內容分區">
-            <button type="button" class="active" data-tab="posts">課文</button>
-            <button type="button" data-tab="images">圖頁</button>
-            <button type="button" data-tab="resources">資源</button>
-            <button type="button" data-tab="exercises">習題</button>
-          </div>
           <div id="posts-panel" class="tab-panel active"></div>
           <div id="images-panel" class="tab-panel"></div>
           <div id="resources-panel" class="tab-panel"></div>
@@ -97,7 +134,7 @@
   </div>
 
   <script src="https://nav.bdfz.net/bdfz-nav.js" async></script>
-  <script src="assets/app.js?v=20260512j" defer></script>
+  <script src="assets/app.js?v=20260512t" defer></script>
 </body>
 
 </html>

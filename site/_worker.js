@@ -17,6 +17,9 @@ export default {
     if (url.pathname === "/api/preview" && (request.method === "GET" || request.method === "HEAD")) {
       return handlePreview(request, env);
     }
+    if (url.pathname.startsWith("/static/") && (request.method === "GET" || request.method === "HEAD")) {
+      return handleCtextStatic(request);
+    }
     const discussionMatch = url.pathname.match(/^\/api\/discussions\/([^/]+)$/);
     if (discussionMatch) {
       if (request.method === "GET") return handleDiscussionGet(request, env, discussionMatch[1]);
@@ -115,6 +118,30 @@ function shouldUseCtextAuth(url) {
   return true;
 }
 
+async function handleCtextStatic(request) {
+  const requestUrl = new URL(request.url);
+  const target = new URL(`${requestUrl.pathname}${requestUrl.search}`, "https://ctext.org");
+  const upstream = await fetch(target.toString(), {
+    method: request.method,
+    headers: {
+      "user-agent": BROWSER_UA,
+      "accept": request.headers.get("accept") || "*/*",
+      "referer": "https://ctext.org/",
+    },
+    cf: { cacheTtl: 3600, cacheEverything: true },
+  });
+  const headers = new Headers(upstream.headers);
+  clearFrameBlockingHeaders(headers);
+  headers.delete("set-cookie");
+  headers.set("access-control-allow-origin", "*");
+  headers.set("cache-control", "public, max-age=3600");
+  return new Response(request.method === "HEAD" ? null : upstream.body, {
+    status: upstream.status,
+    statusText: upstream.statusText,
+    headers,
+  });
+}
+
 function isShugeUrl(url) {
   const host = url.hostname.toLowerCase();
   return host === "shuge.org" || host.endsWith(".shuge.org");
@@ -151,6 +178,7 @@ function mergeCookieHeaders(left, right) {
 function scrubCtextPreviewHtml(html) {
   return html
     .replace(/<div id=["']logininfo["'][\s\S]*?<\/div>/i, `<div id="logininfo">課程嵌入預覽</div>`)
+    .replace(/,\s*target-densitydpi\s*=\s*[^,"']+/gi, "")
     .replace(/<span style=["']opacity:\s*0\.0;[^>]*>[\s\S]*?<\/span>/gi, "");
 }
 
@@ -325,7 +353,7 @@ async function handlePreview(request, env) {
   if (isHtml && request.method !== "HEAD") {
     const html = await upstream.text();
     responseHeaders.set("content-type", "text/html; charset=utf-8");
-    if (isCtextUrl(target)) responseHeaders.set("cache-control", "private, max-age=120");
+    responseHeaders.set("cache-control", "no-store");
     return new Response(rewritePreviewHtml(html, target), {
       status: upstream.status,
       statusText: upstream.statusText,

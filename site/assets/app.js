@@ -1,5 +1,17 @@
 const FORUM_BASE = "https://forum.rdfzer.com";
 const FONT_SCALE_KEY = "yw-reader-font-scale";
+const PREVIEW_VERSION = "20260512t";
+const THEME_KEY = "yw-theme";
+const SIDEBAR_KEY = "yw-sidebar";
+const THEMES = [
+  { id: "lily", label: "睡蓮", swatch: "#5e8f84", inner: "#f5efe3" },
+  { id: "sunrise", label: "日出·印象", swatch: "#d97a47", inner: "#ece4d2" },
+  { id: "haystack", label: "乾草垛", swatch: "#b08137", inner: "#f4e8d0" },
+  { id: "wisteria", label: "紫藤", swatch: "#8b6db5", inner: "#efe8ee" },
+  { id: "poplar", label: "白楊", swatch: "#6f8a3a", inner: "#f1ead0" },
+  { id: "twilight", label: "暮光夜讀", swatch: "#8ec0e6", inner: "#1a2230" },
+];
+const DESKTOP_QUERY = "(min-width: 821px)";
 const WY_BOOK_KEYS = {
   "bixiu-shang": "高中_语文_普通高中教科书_语文必修_上册",
   "bixiu-xia": "高中_语文_普通高中教科书_语文必修_下册",
@@ -39,14 +51,19 @@ const els = {
   blockTabs: document.getElementById("block-tabs"),
   lessonList: document.getElementById("lesson-list"),
   search: document.getElementById("lesson-search"),
+  sidebar: document.getElementById("lesson-sidebar"),
+  sidebarEdge: document.getElementById("sidebar-edge"),
+  sidebarBackdrop: document.getElementById("sidebar-backdrop"),
+  sidebarPin: document.getElementById("sidebar-pin"),
+  themeToggle: document.getElementById("theme-toggle"),
+  themeMenu: document.getElementById("theme-menu"),
   sidebarButton: document.getElementById("sidebar-button"),
   title: document.getElementById("lesson-title"),
   postsPanel: document.getElementById("posts-panel"),
   imagesPanel: document.getElementById("images-panel"),
   resourcesPanel: document.getElementById("resources-panel"),
   exercisesPanel: document.getElementById("exercises-panel"),
-  fontDecrease: document.getElementById("font-decrease"),
-  fontIncrease: document.getElementById("font-increase"),
+  fontScale: document.getElementById("font-scale"),
   fontReset: document.getElementById("font-reset"),
   fontValue: document.getElementById("font-value"),
   copyChat: document.getElementById("copy-chat"),
@@ -86,13 +103,104 @@ function loadFontScale() {
 
 function applyFontScale() {
   document.documentElement.style.setProperty("--reader-scale", state.fontScale.toFixed(2));
+  if (els.fontScale) els.fontScale.value = String(Math.round(state.fontScale * 100));
   if (els.fontValue) els.fontValue.textContent = `${Math.round(state.fontScale * 100)}%`;
 }
 
 function setFontScale(value) {
-  state.fontScale = clamp(Math.round(value * 100) / 100, 0.82, 1.58);
+  const numeric = Number.isFinite(value) ? value : 1;
+  state.fontScale = clamp(Math.round(numeric * 100) / 100, 0.82, 1.58);
   localStorage.setItem(FONT_SCALE_KEY, String(state.fontScale));
   applyFontScale();
+}
+
+function currentTheme() {
+  const stored = localStorage.getItem(THEME_KEY) || "lily";
+  return THEMES.some((theme) => theme.id === stored) ? stored : "lily";
+}
+
+function applyTheme(themeId) {
+  const theme = THEMES.find((item) => item.id === themeId) ? themeId : "lily";
+  document.body.setAttribute("data-theme", theme);
+  localStorage.setItem(THEME_KEY, theme);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  const colorMap = {
+    lily: "#f5efe3",
+    sunrise: "#ece4d2",
+    haystack: "#f4e8d0",
+    wisteria: "#efe8ee",
+    poplar: "#f1ead0",
+    twilight: "#1a2230",
+  };
+  if (meta && colorMap[theme]) meta.setAttribute("content", colorMap[theme]);
+  renderThemeMenu();
+}
+
+function renderThemeMenu() {
+  if (!els.themeMenu) return;
+  const active = currentTheme();
+  els.themeMenu.innerHTML = THEMES.map((theme) => `
+    <button type="button" class="theme-option" role="menuitemradio" data-theme="${esc(theme.id)}" aria-pressed="${theme.id === active ? "true" : "false"}">
+      <span class="theme-swatch" style="--swatch-color:${esc(theme.swatch)};--swatch-inner:${esc(theme.inner)};"></span>
+      <span class="label">${esc(theme.label)}</span>
+      <span class="check" aria-hidden="true"></span>
+    </button>
+  `).join("");
+}
+
+function openThemeMenu() {
+  if (!els.themeMenu) return;
+  els.themeMenu.hidden = false;
+  els.themeToggle?.setAttribute("aria-expanded", "true");
+}
+
+function closeThemeMenu() {
+  if (!els.themeMenu) return;
+  els.themeMenu.hidden = true;
+  els.themeToggle?.setAttribute("aria-expanded", "false");
+}
+
+function isDesktop() {
+  return window.matchMedia(DESKTOP_QUERY).matches;
+}
+
+function currentSidebarMode() {
+  const stored = localStorage.getItem(SIDEBAR_KEY) || "pinned";
+  return stored === "auto" ? "auto" : "pinned";
+}
+
+function applySidebarMode(mode) {
+  const normalized = mode === "auto" ? "auto" : "pinned";
+  document.body.setAttribute("data-sidebar", normalized);
+  localStorage.setItem(SIDEBAR_KEY, normalized);
+  els.body.classList.remove("sidebar-open");
+  if (els.sidebarPin) {
+    const pinned = normalized === "pinned";
+    els.sidebarPin.setAttribute("aria-pressed", pinned ? "true" : "false");
+    els.sidebarPin.title = pinned ? "目錄已固定，點擊改為自動隱藏" : "目錄將自動隱藏，點擊固定";
+  }
+  if (normalized === "pinned") {
+    revealSidebar(false);
+  }
+}
+
+let revealTimer = null;
+function revealSidebar(show) {
+  if (!els.sidebar) return;
+  if (revealTimer) {
+    clearTimeout(revealTimer);
+    revealTimer = null;
+  }
+  if (show) {
+    els.sidebar.classList.add("is-revealed");
+  } else {
+    els.sidebar.classList.remove("is-revealed");
+  }
+}
+
+function scheduleHideSidebar() {
+  if (revealTimer) clearTimeout(revealTimer);
+  revealTimer = window.setTimeout(() => revealSidebar(false), 280);
 }
 
 function normalize(value) {
@@ -443,9 +551,34 @@ function isDocumentUrl(value) {
   return /\.(pdf|docx?|pptx?|xlsx?)$/i.test(url.pathname);
 }
 
+function cleanDisplayText(value) {
+  return String(value || "")
+    .replace(/^undefined\s*/i, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function filenameFromUrl(value) {
+  const url = httpUrl(value);
+  if (!url) return "";
+  const last = url.pathname.split("/").filter(Boolean).pop() || "";
+  try {
+    return decodeURIComponent(last);
+  } catch {
+    return last;
+  }
+}
+
+function resourceTitle(item, href, lesson) {
+  const cleaned = cleanDisplayText(item?.text);
+  if (cleaned && !/^\d+[x×]\d+\s+[\d.]+\s*(?:kb|mb|gb|b)$/i.test(cleaned)) return cleaned;
+  if (isImageUrl(href)) return `${lesson.title} 圖片資源`;
+  return filenameFromUrl(href) || href;
+}
+
 function previewUrl(value, download = false) {
   const url = resolvedHref(value);
-  return `/api/preview?url=${encodeURIComponent(url)}${download ? "&download=1" : ""}`;
+  return `/api/preview?url=${encodeURIComponent(url)}&pv=${PREVIEW_VERSION}${download ? "&download=1" : ""}`;
 }
 
 function isForumUploadUrl(value) {
@@ -728,6 +861,9 @@ function enhanceCooked(container) {
   container.querySelectorAll("img").forEach((img) => {
     const src = publicHref(img.getAttribute("src") || "");
     if (src) img.src = src;
+    if (/^undefined$/i.test(String(img.alt || "").trim())) img.alt = state.currentLesson?.title || "";
+    const parentLink = img.closest("a[title]");
+    if (/^undefined$/i.test(String(parentLink?.getAttribute("title") || "").trim())) parentLink.removeAttribute("title");
     img.loading = "lazy";
     img.decoding = "async";
     img.addEventListener("click", () => openViewer(img.src, img.alt || state.currentLesson.title));
@@ -853,7 +989,7 @@ function renderResources(lesson) {
       </header>
       <div class="resource-list">${resources.map((item) => {
         const href = normalizeHref(item.href);
-        const title = item.text || href;
+        const title = resourceTitle(item, href, lesson);
         return resourceCard({
           href,
           title,
@@ -970,6 +1106,7 @@ async function showLesson(id, { push = true } = {}) {
   loadDiscussion();
   if (push) history.replaceState(null, "", `#${lesson.id}`);
   if (window.matchMedia("(max-width: 820px)").matches) els.body.classList.remove("sidebar-open");
+  if (isDesktop() && currentSidebarMode() === "auto") revealSidebar(false);
 }
 
 function openViewer(src, caption) {
@@ -1083,14 +1220,96 @@ function bindEvents() {
     state.query = els.search.value;
     renderLessonList();
   });
-  els.fontDecrease?.addEventListener("click", () => setFontScale(state.fontScale - 0.08));
-  els.fontIncrease?.addEventListener("click", () => setFontScale(state.fontScale + 0.08));
+  els.fontScale?.addEventListener("input", () => {
+    const next = Number(els.fontScale.value);
+    if (Number.isFinite(next)) setFontScale(next / 100);
+  });
   els.fontReset?.addEventListener("click", () => setFontScale(1));
-  document.querySelector(".pane-tabs").addEventListener("click", (event) => {
+  document.querySelector(".pane-tabs")?.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-tab]");
     if (button) setTab(button.dataset.tab);
   });
-  els.sidebarButton.addEventListener("click", () => els.body.classList.toggle("sidebar-open"));
+  els.sidebarButton.addEventListener("click", () => {
+    if (isDesktop()) {
+      const next = currentSidebarMode() === "auto" ? "pinned" : "auto";
+      applySidebarMode(next);
+      if (next === "auto") revealSidebar(true);
+    } else {
+      els.body.classList.toggle("sidebar-open");
+    }
+  });
+
+  els.sidebarPin?.addEventListener("click", () => {
+    const next = currentSidebarMode() === "pinned" ? "auto" : "pinned";
+    applySidebarMode(next);
+    if (next === "auto") {
+      revealSidebar(false);
+    } else {
+      els.body.classList.remove("sidebar-open");
+    }
+  });
+
+  if (els.sidebarEdge) {
+    els.sidebarEdge.addEventListener("mouseenter", () => {
+      if (isDesktop() && currentSidebarMode() === "auto") revealSidebar(true);
+    });
+    els.sidebarEdge.addEventListener("click", () => {
+      if (isDesktop() && currentSidebarMode() === "auto") revealSidebar(true);
+    });
+  }
+
+  if (els.sidebar) {
+    els.sidebar.addEventListener("mouseenter", () => {
+      if (isDesktop() && currentSidebarMode() === "auto") revealSidebar(true);
+    });
+    els.sidebar.addEventListener("mouseleave", () => {
+      if (isDesktop() && currentSidebarMode() === "auto") scheduleHideSidebar();
+    });
+    els.sidebar.addEventListener("focusin", () => {
+      if (isDesktop() && currentSidebarMode() === "auto") revealSidebar(true);
+    });
+    els.sidebar.addEventListener("focusout", (event) => {
+      if (!isDesktop() || currentSidebarMode() !== "auto") return;
+      if (els.sidebar.contains(event.relatedTarget)) return;
+      scheduleHideSidebar();
+    });
+  }
+
+  els.sidebarBackdrop?.addEventListener("click", () => {
+    els.body.classList.remove("sidebar-open");
+    if (isDesktop() && currentSidebarMode() === "auto") revealSidebar(false);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    if (isDesktop() && currentSidebarMode() === "auto") revealSidebar(false);
+    else els.body.classList.remove("sidebar-open");
+    closeThemeMenu();
+  });
+
+  els.themeToggle?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    if (els.themeMenu?.hidden) openThemeMenu();
+    else closeThemeMenu();
+  });
+
+  els.themeMenu?.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-theme]");
+    if (!button) return;
+    applyTheme(button.dataset.theme);
+    closeThemeMenu();
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!els.themeMenu || els.themeMenu.hidden) return;
+    if (event.target.closest("#theme-menu") || event.target.closest("#theme-toggle")) return;
+    closeThemeMenu();
+  });
+
+  window.matchMedia(DESKTOP_QUERY).addEventListener("change", () => {
+    if (isDesktop()) els.body.classList.remove("sidebar-open");
+    else revealSidebar(false);
+  });
   els.copyChat.addEventListener("click", () => {
     const text = currentMessages().map((message) => `${message.role === "user" ? "我" : "AI"}：${message.content}`).join("\n\n");
     copyText(text);
@@ -1131,6 +1350,8 @@ function bindEvents() {
 }
 
 async function init() {
+  applyTheme(currentTheme());
+  applySidebarMode(currentSidebarMode());
   bindEvents();
   applyFontScale();
   setTab("posts");
