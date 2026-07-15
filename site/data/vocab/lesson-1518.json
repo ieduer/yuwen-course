@@ -1,0 +1,247 @@
+{
+ "lessonId": "lesson-1518",
+ "title": "2 改造我们的学习/ 毛泽东",
+ "mode": "argument",
+ "builtAt": "2026-07-14T09:34:22.232Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 6182,
+ "annotationCount": 5,
+ "inventory": [
+  {
+   "id": "lesson-1518:v01",
+   "word": "言必称希腊",
+   "annotated": true,
+   "decision": "question",
+   "reason": "文中批判教条主义的核心典故，理解其比喻义对把握文章主旨至关重要。",
+   "contextMeaning": "指生搬硬套外来理论，不研究本国实际。",
+   "sourceSentence": "许多马克思列宁主义的学者也是言必称希腊,对于自己的祖宗,则对不住,忘记了",
+   "type": "contextual-choice",
+   "question": "文中“言必称希腊”意指：",
+   "options": [
+    "极度推崇古希腊文化",
+    "学习外国语言必须从希腊语开始",
+    "生搬硬套外来理论，忽视本国实际",
+    "研究革命理论应当回归古典主义"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中用此典故批评教条主义，指只知引用外来理论而不结合中国实际。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "教材注释"
+   ],
+   "location": {
+    "charIndex": 974
+   }
+  },
+  {
+   "id": "lesson-1518:v02",
+   "word": "检",
+   "annotated": true,
+   "decision": "question",
+   "reason": "涉及字形规范，考察学生对现代汉语用字的掌握。",
+   "contextMeaning": "拾取、搜集。",
+   "sourceSentence": "有些人对于自己的东西既无知识,于是剩下了希腊和外国故事,也是可怜得很,从外国故纸堆中零星地检来的",
+   "type": "substitution",
+   "question": "下列关于文中“检”字的说法，正确的是：",
+   "options": [
+    "应改为“捡”，表示拾取",
+    "应改为“拣”，表示挑选",
+    "应改为“俭”，表示节省",
+    "应改为“简”，表示简单"
+   ],
+   "answerIndex": 0,
+   "explanation": "教材明确指出“检：现在写作‘捡’”。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "教材注释"
+   ],
+   "location": {
+    "charIndex": 1549
+   }
+  },
+  {
+   "id": "lesson-1518:v03",
+   "word": "哗众取宠",
+   "annotated": true,
+   "decision": "question",
+   "reason": "常用成语，且在文中揭示了主观主义者的心态，需准确理解。",
+   "contextMeaning": "用浮夸的言行迎合众人，以博得好感。",
+   "sourceSentence": "无实事求是之意,有哗众取宠之心",
+   "type": "contextual-choice",
+   "question": "文中“无实事求是之意，有哗众取宠之心”一句中，“哗众取宠”的正确理解是：",
+   "options": [
+    "为了获得群众支持而大声疾呼",
+    "用夸张的言行迎合众人以博取好感",
+    "通过展示才华来吸引众人的注意",
+    "指工作作风浮夸，不切实际"
+   ],
+   "answerIndex": 1,
+   "explanation": "“哗众取宠”指用浮夸的言行迎合众人，博取好感或拥护。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "教材注释"
+   ],
+   "location": {
+    "charIndex": 2626
+   }
+  },
+  {
+   "id": "lesson-1518:v04",
+   "word": "人材",
+   "annotated": true,
+   "decision": "question",
+   "reason": "字形规范考察，区分古旧写法与现代规范。",
+   "contextMeaning": "人才。",
+   "sourceSentence": "对于近百年的中国史,应聚集人材,分工合作地去做,克服无组织的状态",
+   "type": "substitution",
+   "question": "文中“聚集人材”的“人材”，按照现代汉语规范应写作：",
+   "options": [
+    "人才",
+    "人材",
+    "人财",
+    "人裁"
+   ],
+   "answerIndex": 0,
+   "explanation": "教材指出“人材：现在写作‘人才’”。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "教材注释"
+   ],
+   "location": {
+    "charIndex": 4196
+   }
+  },
+  {
+   "id": "lesson-1518:v05",
+   "word": "肤浅",
+   "annotated": false,
+   "decision": "question",
+   "reason": "用于描述对理论认识的程度，是理解文章论证逻辑的关键词。",
+   "contextMeaning": "认识浅薄，不深刻。",
+   "sourceSentence": "我党在幼年时期,我们对于马克思列宁主义的认识和对于中国革命的认识是何等肤浅,何等贫乏",
+   "type": "contextual-choice",
+   "question": "文中“何等肤浅”中“肤浅”的含义是：",
+   "options": [
+    "皮肤表面，不够深入",
+    "认识浅薄，停留在表面",
+    "知识匮乏，没有积累",
+    "思想简单，容易被误导"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处形容对马列主义和中国革命认识的深度不足，指认识停留在表面。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 165
+   }
+  },
+  {
+   "id": "lesson-1518:v06",
+   "word": "有的放矢",
+   "annotated": false,
+   "decision": "question",
+   "reason": "核心比喻，概括了马克思列宁主义态度的精髓。",
+   "contextMeaning": "比喻说话做事有明确的目的和针对性。",
+   "sourceSentence": "这种态度,就是有的放矢的态度。“的”就是中国革命,“矢”就是马克思列宁主义",
+   "type": "interpretation",
+   "question": "下列对“有的放矢”在文中的理解，最准确的一项是：",
+   "options": [
+    "要用马克思列宁主义的箭，去射击中国革命的靶子",
+    "要学习马克思列宁主义，并不断提高射箭的技术",
+    "要用中国革命的实践，去验证马克思列宁主义的理论",
+    "要将马克思列宁主义作为解决中国革命问题的指导思想"
+   ],
+   "answerIndex": 3,
+   "explanation": "“有的放矢”强调理论与实际的结合，即用理论解决实际问题。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 3381
+   }
+  },
+  {
+   "id": "lesson-1518:v07",
+   "word": "闭塞眼睛捉麻雀",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形象化的比喻，深刻批评了主观主义作风，具极高阅读理解价值。",
+   "contextMeaning": "比喻主观盲目，不作调查研究，盲目蛮干。",
+   "sourceSentence": "闭塞眼睛捉麻雀”,“瞎子摸鱼”,粗枝大叶,夸夸其谈,满足于一知半解",
+   "type": "interpretation",
+   "question": "文中“闭塞眼睛捉麻雀”比喻的是：",
+   "options": [
+    "工作方法简单粗暴，容易导致失败",
+    "不进行调查研究，盲目地凭主观臆断处理工作",
+    "缺乏系统的收集材料，导致工作没有效率",
+    "对客观实际情况不了解，只能凭运气办事"
+   ],
+   "answerIndex": 1,
+   "explanation": "该比喻形象地批评了不作调查研究、主观臆断的作风。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 751
+   }
+  },
+  {
+   "id": "lesson-1518:v08",
+   "word": "生吞活剥",
+   "annotated": false,
+   "decision": "question",
+   "reason": "批评学习态度的关键成语，反映了教条主义者对外部经验的处理方式。",
+   "contextMeaning": "比喻生搬硬套，不顾实际情况。",
+   "sourceSentence": "他们从欧美日本回来,只知生吞活剥地谈外国",
+   "type": "contextual-choice",
+   "question": "文中“生吞活剥地谈外国”意在批评留学生：",
+   "options": [
+    "对外国文化了解不深，只能机械复述",
+    "盲目照搬外国经验，不顾中国国情",
+    "谈论外国事物时缺乏逻辑和条理",
+    "对外国事物采取毫无批判的吸收态度"
+   ],
+   "answerIndex": 1,
+   "explanation": "“生吞活剥”形容生搬硬套，文中指不结合中国实际照搬外国经验。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1617
+   }
+  },
+  {
+   "id": "lesson-1518:v09",
+   "word": "实事求是",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "全篇核心思想，属于政治术语范畴，而非单纯的词汇考查。",
+   "contextMeaning": "指从客观实际出发，找出规律，作为行动向导。",
+   "sourceSentence": "这种态度,就是实事求是的态度",
+   "location": {
+    "charIndex": 3459
+   }
+  },
+  {
+   "id": "lesson-1518:v10",
+   "word": "前仆后继",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "常用成语，难度较低，文意理解无障碍。",
+   "contextMeaning": "形容英勇奋斗，不怕牺牲。",
+   "sourceSentence": "灾难深重的中华民族,一百年来,其优秀人物奋斗牺牲,前仆后继,摸索救国救民的真理",
+   "location": {
+    "charIndex": 232
+   }
+  },
+  {
+   "id": "lesson-1518:v11",
+   "word": "边币和法币",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "历史专有名词，属于背景知识，不涉及词义理解的迁移。",
+   "contextMeaning": "当时根据地和国民党统治区的货币。",
+   "sourceSentence": "经济学教授不能解释边币和法币,当然学生也不能解释",
+   "location": {
+    "charIndex": 1948
+   }
+  }
+ ]
+}

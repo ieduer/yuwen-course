@@ -1,0 +1,212 @@
+{
+ "lessonId": "lesson-1722-p2",
+ "title": "涉江采芙蓉",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:27:18.068Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 275,
+ "annotationCount": 4,
+ "inventory": [
+  {
+   "id": "lesson-1722-p2:v01",
+   "word": "涉",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此句中指涉水渡江，考查实词语境义",
+   "contextMeaning": "渡，经过",
+   "sourceSentence": "涉江采芙蓉",
+   "type": "contextual-choice",
+   "question": "「涉江采芙蓉」中「涉」的意思是",
+   "options": [
+    "侵犯",
+    "经历",
+    "渡过",
+    "涉及"
+   ],
+   "answerIndex": 2,
+   "explanation": "「涉」在古文中常作渡水讲，此处指渡过江水。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 35
+   }
+  },
+  {
+   "id": "lesson-1722-p2:v02",
+   "word": "芙蓉",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已注，为特定意象，无需额外命题",
+   "contextMeaning": "荷花",
+   "sourceSentence": "涉江采芙蓉",
+   "location": {
+    "charIndex": 35
+   }
+  },
+  {
+   "id": "lesson-1722-p2:v03",
+   "word": "兰泽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注，为地理名词，便于理解即可",
+   "contextMeaning": "长着兰草的低湿之地",
+   "sourceSentence": "兰泽 多芳草",
+   "location": {
+    "charIndex": 42
+   }
+  },
+  {
+   "id": "lesson-1722-p2:v04",
+   "word": "遗",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，极易误解为遗失、遗留",
+   "contextMeaning": "赠送",
+   "sourceSentence": "采之欲遗 谁",
+   "type": "gu-jin",
+   "question": "下列选项中「遗」的古今意义用法与「采之欲遗谁」一致的是",
+   "options": [
+    "路不拾遗",
+    "以先国家之急而后私仇也，此其所以为遗也",
+    "是以先帝简拔以遗陛下",
+    "门前冷落鞍马稀，老大嫁作商人妇，商人重利轻别离，前月浮梁买茶去，去来江口守空船，绕船月明江水寒，夜深忽梦少年事，梦啼妆泪红阑干"
+   ],
+   "answerIndex": 2,
+   "explanation": "「遗」在古文中常作「赠送」讲，C项「以遗陛下」指送给陛下。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 50
+   }
+  },
+  {
+   "id": "lesson-1722-p2:v05",
+   "word": "以",
+   "annotated": true,
+   "decision": "question",
+   "reason": "文言虚词，表示结果，是考试高频考点",
+   "contextMeaning": "连词，表示结果",
+   "sourceSentence": "忧伤以 终老",
+   "type": "usage",
+   "question": "下列句中的「以」与「忧伤以终老」用法相同的是",
+   "options": [
+    "以其无礼于晋",
+    "不以物喜，不以己悲",
+    "木欣欣以向荣",
+    "余与四人拥火以入"
+   ],
+   "answerIndex": 2,
+   "explanation": "「忧伤以终老」中「以」表示因果，即因为忧伤而终老。C项「木欣欣以向荣」为修饰语助词。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 83
+   }
+  },
+  {
+   "id": "lesson-1722-p2:v06",
+   "word": "顾",
+   "annotated": false,
+   "decision": "question",
+   "reason": "考查动作指向，体现人物心理活动",
+   "contextMeaning": "回头看",
+   "sourceSentence": "还顾望旧乡",
+   "type": "contextual-choice",
+   "question": "「还顾望旧乡」中「顾」的意思是",
+   "options": [
+    "照顾",
+    "拜访",
+    "回头看",
+    "眷恋"
+   ],
+   "answerIndex": 2,
+   "explanation": "「顾」在此处为动词，指回头看，表达诗人对故乡的眷恋。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 64
+   }
+  },
+  {
+   "id": "lesson-1722-p2:v07",
+   "word": "漫浩浩",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容词叠词，体现意境，考查对诗歌意象的理解",
+   "contextMeaning": "广阔无边的样子",
+   "sourceSentence": "长路漫浩浩",
+   "type": "interpretation",
+   "question": "对「长路漫浩浩」一句理解最准确的是",
+   "options": [
+    "路途险峻，难以攀登",
+    "道路漫长，广阔无边，表现思念之情深远难达",
+    "路面平坦，一直延伸到远方",
+    "路途遥远，诗人感到疲惫不堪"
+   ],
+   "answerIndex": 1,
+   "explanation": "「漫浩浩」形容路途之长与广阔，不仅是空间上的距离，更暗示了心理上的无助与绝望。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 70
+   }
+  },
+  {
+   "id": "lesson-1722-p2:v08",
+   "word": "同心",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此处指代人物关系，是理解全诗情感的核心",
+   "contextMeaning": "志趣相同，此处指爱人/知己",
+   "sourceSentence": "同心而离居",
+   "type": "contextual-choice",
+   "question": "「同心而离居」中「同心」的意思是",
+   "options": [
+    "心脏相同",
+    "志同道合的人",
+    "同样的心思",
+    "同一个中心"
+   ],
+   "answerIndex": 1,
+   "explanation": "在古代诗词中，「同心」多指志趣相同或心意相通的人，此处特指诗人思念的爱人。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 77
+   }
+  },
+  {
+   "id": "lesson-1722-p2:v09",
+   "word": "离居",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "字面意思明确，不构成阅读障碍",
+   "contextMeaning": "分别居住",
+   "sourceSentence": "同心而离居",
+   "location": {
+    "charIndex": 77
+   }
+  },
+  {
+   "id": "lesson-1722-p2:v10",
+   "word": "旧乡",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "词义浅显，无需额外辨析",
+   "contextMeaning": "故乡",
+   "sourceSentence": "还顾望旧乡",
+   "location": {
+    "charIndex": 64
+   }
+  },
+  {
+   "id": "lesson-1722-p2:v11",
+   "word": "涉江采芙蓉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "芙蓉，荷花。",
+   "sourceSentence": ""
+  }
+ ]
+}

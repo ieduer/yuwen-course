@@ -1,0 +1,240 @@
+{
+ "lessonId": "lesson-1697",
+ "title": "4 喜看稻菽千重浪",
+ "mode": "journalism",
+ "builtAt": "2026-07-14T09:15:01.238Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 5214,
+ "annotationCount": 7,
+ "inventory": [
+  {
+   "id": "lesson-1697:v01",
+   "word": "亩",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材注释已明确定义，为计量基础知识，无需出题测试。",
+   "contextMeaning": "计量土地面积的市制单位",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1697:v02",
+   "word": "蔸",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材注释已明确，为方言词，理解即可，无需命题。",
+   "contextMeaning": "棵或丛",
+   "sourceSentence": "他那敏锐的目光停留在一蔸形态特异、鹤立鸡群的水稻植株上",
+   "location": {
+    "charIndex": 779
+   }
+  },
+  {
+   "id": "lesson-1697:v03",
+   "word": "孟德尔",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "背景知识，了解其为遗传学家即可。",
+   "contextMeaning": "奥地利遗传学家",
+   "sourceSentence": "但是对孟德尔、摩尔根遗传学有着深入研究的袁隆平",
+   "location": {
+    "charIndex": 1034
+   }
+  },
+  {
+   "id": "lesson-1697:v04",
+   "word": "摩尔根",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "背景知识，了解其为遗传学家即可。",
+   "contextMeaning": "美国胚胎学家、遗传学家",
+   "sourceSentence": "但是对孟德尔、摩尔根遗传学有着深入研究的袁隆平",
+   "location": {
+    "charIndex": 1034
+   }
+  },
+  {
+   "id": "lesson-1697:v05",
+   "word": "去雄",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "专业术语，教材注释清晰。",
+   "contextMeaning": "除去或杀死母本花朵中雄蕊的措施",
+   "sourceSentence": "一条是进行人工去雄",
+   "location": {
+    "charIndex": 1884
+   }
+  },
+  {
+   "id": "lesson-1697:v06",
+   "word": "洞庭早籼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "专业术语，教材注释清晰。",
+   "contextMeaning": "籼稻早稻品种之一",
+   "sourceSentence": "他马上把这株洞庭早籼天然雄性不育株用布条标记",
+   "location": {
+    "charIndex": 2611
+   }
+  },
+  {
+   "id": "lesson-1697:v07",
+   "word": "分蘖",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "专业术语，教材注释清晰。",
+   "contextMeaning": "分蘖有余，成穗不足",
+   "sourceSentence": "分蘖有余,成穗不足",
+   "location": {
+    "charIndex": 4057
+   }
+  },
+  {
+   "id": "lesson-1697:v08",
+   "word": "中流击水",
+   "annotated": false,
+   "decision": "question",
+   "reason": "典故词，考核学生对语境中豪情壮志的理解。",
+   "contextMeaning": "在江中游泳，比喻投身社会实践，激流勇进。",
+   "sourceSentence": "曾记否,到中流击水",
+   "type": "interpretation",
+   "question": "“曾记否，到中流击水”中“中流击水”的含义是",
+   "options": [
+    "在江中心拍打水面",
+    "在激流中游泳，比喻投身社会实践",
+    "特指袁隆平在田间劳作的情景",
+    "形容水稻田灌溉过程中的动作"
+   ],
+   "answerIndex": 1,
+   "explanation": "此语出自毛泽东诗词，此处借用以展现袁隆平投身科研、激流勇进的精神状态。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "毛泽东《七律·到韶山》"
+   ],
+   "location": {
+    "charIndex": 183
+   }
+  },
+  {
+   "id": "lesson-1697:v09",
+   "word": "勾头散籽",
+   "annotated": false,
+   "decision": "question",
+   "reason": "农业术语，考察学生对水稻生长状态的语境理解。",
+   "contextMeaning": "指水稻成熟时，稻穗低垂并开始散落谷粒，象征丰收。",
+   "sourceSentence": "采用常规法培育出来的早稻常规品种正在勾头散籽",
+   "type": "contextual-choice",
+   "question": "“采用常规法培育出来的早稻常规品种正在勾头散籽”中“勾头散籽”指的是",
+   "options": [
+    "水稻生长不良，头部枯萎",
+    "水稻授粉失败，籽粒散落",
+    "水稻成熟，稻穗低垂且谷粒饱满",
+    "水稻病虫害严重，需要防治"
+   ],
+   "answerIndex": 2,
+   "explanation": "“勾头”指稻穗因籽粒饱满而低垂，“散籽”是成熟表现，是丰收景象的描述。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 718
+   }
+  },
+  {
+   "id": "lesson-1697:v10",
+   "word": "泥腿子",
+   "annotated": false,
+   "decision": "question",
+   "reason": "易误解词，考察其在文中褒义的用法及人物形象塑造。",
+   "contextMeaning": "原指下田劳动的农民，文中指扎根土地、质朴务实的科研工作者。",
+   "sourceSentence": "这使我想起了农民送给他的“泥腿子专家”“泥腿子院士”的称谓",
+   "type": "interpretation",
+   "question": "文中称袁隆平为“泥腿子专家”，主要是为了表现他",
+   "options": [
+    "身份低微，不被同行认可",
+    "热爱农业，扎根田间地头，作风质朴",
+    "科研成果粗糙，缺乏科学理论支持",
+    "性格固执，不善与人沟通"
+   ],
+   "answerIndex": 1,
+   "explanation": "“泥腿子”在此是赞誉，强调袁隆平不畏艰苦、深入基层、脚踏实地的科学精神。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 354
+   }
+  },
+  {
+   "id": "lesson-1697:v11",
+   "word": "亦步亦趋",
+   "annotated": false,
+   "decision": "question",
+   "reason": "成语，考察其在学术语境下的贬义用法。",
+   "contextMeaning": "比喻缺乏主见，盲目模仿，跟随他人。",
+   "sourceSentence": "不能跟在权威后面亦步亦趋,不敢越雷池一步",
+   "type": "substitution",
+   "question": "“不能跟在权威后面亦步亦趋”中“亦步亦趋”可以用下列哪个成语替换且意义最贴切？",
+   "options": [
+    "循规蹈矩",
+    "东施效颦",
+    "人云亦云",
+    "墨守成规"
+   ],
+   "answerIndex": 2,
+   "explanation": "“亦步亦趋”侧重于没有主见，跟随别人脚步走，文中强调不能盲从权威。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1709
+   }
+  },
+  {
+   "id": "lesson-1697:v12",
+   "word": "越雷池一步",
+   "annotated": false,
+   "decision": "question",
+   "reason": "典故，考察学生对成语含义及文中态度的理解。",
+   "contextMeaning": "比喻越过界限或规矩。",
+   "sourceSentence": "不能跟在权威后面亦步亦趋,不敢越雷池一步",
+   "type": "interpretation",
+   "question": "“不敢越雷池一步”中“越雷池”的含义是",
+   "options": [
+    "跨越水稻试验田的边界",
+    "突破权威界定的理论禁区",
+    "在科学实验中跨越不同品种",
+    "在生产实践中超越前人的产量"
+   ],
+   "answerIndex": 1,
+   "explanation": "“雷池”原为地名，后比喻界限。文中指不敢突破权威的传统理论限制。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《晋书·庾亮传》"
+   ],
+   "location": {
+    "charIndex": 1709
+   }
+  },
+  {
+   "id": "lesson-1697:v13",
+   "word": "侍者",
+   "annotated": false,
+   "decision": "question",
+   "reason": "语境义，考察“侍者”在文中对科学家身份的文学性概括。",
+   "contextMeaning": "服侍、追随者，文中指科学家对真理的尊重与追求。",
+   "sourceSentence": "科学家是真理的侍者,是事实的追随者",
+   "type": "contextual-choice",
+   "question": "“科学家是真理的侍者”中“侍者”一词的含义是",
+   "options": [
+    "服务员",
+    "随从人员",
+    "竭诚追求与维护真理的人",
+    "在实验室工作的人员"
+   ],
+   "answerIndex": 2,
+   "explanation": "“侍者”在此处赋予了科学家崇高的使命感，即以真理为尊，谦卑而坚定地追随事实。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2730
+   }
+  }
+ ]
+}

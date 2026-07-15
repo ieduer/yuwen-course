@@ -1,0 +1,648 @@
+{
+ "lessonId": "lesson-1556",
+ "title": "1 氓/《诗经·卫风》",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:36:27.132Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 4457,
+ "annotationCount": 45,
+ "inventory": [
+  {
+   "id": "lesson-1556:v01",
+   "word": "匪",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，考试高频考点",
+   "contextMeaning": "不是",
+   "sourceSentence": "匪我愆期,子无良媒",
+   "type": "gu-jin",
+   "question": "下列选项中“匪”的意义与“匪我愆期”中的“匪”相同的是",
+   "options": [
+    "土匪流寇",
+    "匪夷所思",
+    "我心匪石",
+    "以此为匪"
+   ],
+   "answerIndex": 2,
+   "explanation": "“匪”在文中通“非”，意为不是。C项“我心匪石”意为我的心不是石头，符合古义。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《诗经·卫风·氓》"
+   ],
+   "location": {
+    "charIndex": 69
+   }
+  },
+  {
+   "id": "lesson-1556:v02",
+   "word": "贸",
+   "annotated": true,
+   "decision": "question",
+   "reason": "语境义，决定对情节（婚事买卖）的理解",
+   "contextMeaning": "交易，交换",
+   "sourceSentence": "抱布贸丝。匪来贸丝",
+   "type": "contextual-choice",
+   "question": "“抱布贸丝”中“贸”的意思是",
+   "options": [
+    "贸易",
+    "交易",
+    "买卖",
+    "交换"
+   ],
+   "answerIndex": 1,
+   "explanation": "根据注释，此处指用布换丝，最准确的对应词是交易。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《诗经·卫风·氓》"
+   ],
+   "location": {
+    "charIndex": 44
+   }
+  },
+  {
+   "id": "lesson-1556:v03",
+   "word": "乘",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，此语境下极易误解为交通工具",
+   "contextMeaning": "登上",
+   "sourceSentence": "乘彼垝垣,以望复关",
+   "type": "contextual-choice",
+   "question": "“乘彼垝垣”中“乘”的意思是",
+   "options": [
+    "乘坐",
+    "凭借",
+    "登上",
+    "追逐"
+   ],
+   "answerIndex": 2,
+   "explanation": "结合下文“望复关”的动作，此处“乘”应为登上墙垣。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《诗经·卫风·氓》"
+   ],
+   "location": {
+    "charIndex": 90
+   }
+  },
+  {
+   "id": "lesson-1556:v04",
+   "word": "说",
+   "annotated": true,
+   "decision": "question",
+   "reason": "通假字，是理解全诗情感转折的关键",
+   "contextMeaning": "通“脱”，摆脱、脱身",
+   "sourceSentence": "士之耽兮,犹可说也",
+   "type": "usage",
+   "question": "下列句中加点字属于通假字用法的是",
+   "options": [
+    "士之耽兮，犹可说也",
+    "淇则有岸，隰则有泮",
+    "反是不思，亦已焉哉",
+    "桑之未落，其叶沃若"
+   ],
+   "answerIndex": 0,
+   "explanation": "“说”通“脱”，摆脱的意思。B项“泮”也是通假，但“说”字在课文中是重点强调的通假考点。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《诗经·卫风·氓》"
+   ],
+   "location": {
+    "charIndex": 171
+   }
+  },
+  {
+   "id": "lesson-1556:v05",
+   "word": "爽",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，学生易根据现代义“爽快”误解",
+   "contextMeaning": "差错、过失",
+   "sourceSentence": "女也不爽,士贰其行",
+   "type": "gu-jin",
+   "question": "“女也不爽”中“爽”的意思是",
+   "options": [
+    "舒服",
+    "开朗",
+    "差错",
+    "违背"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指女子没有过错，古义为差错、过失。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《诗经·卫风·氓》"
+   ],
+   "location": {
+    "charIndex": 222
+   }
+  },
+  {
+   "id": "lesson-1556:v06",
+   "word": "贰",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，涉及数字与抽象义的迁移",
+   "contextMeaning": "不专一、有二心",
+   "sourceSentence": "女也不爽,士贰其行",
+   "type": "contextual-choice",
+   "question": "“士贰其行”中“贰”的意思是",
+   "options": [
+    "数字二",
+    "重复",
+    "不专一",
+    "辅助"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指男子行为不专一，有二心。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《诗经·卫风·氓》"
+   ],
+   "location": {
+    "charIndex": 222
+   }
+  },
+  {
+   "id": "lesson-1556:v07",
+   "word": "言",
+   "annotated": true,
+   "decision": "question",
+   "reason": "文言虚词，高频考点，此用法较特殊",
+   "contextMeaning": "助词，无实义",
+   "sourceSentence": "静言思之,躬自悼矣",
+   "type": "usage",
+   "question": "下列句中的“言”与其他三项用法不同的是",
+   "options": [
+    "静言思之",
+    "言既遂矣",
+    "载笑载言",
+    "言告师氏"
+   ],
+   "answerIndex": 3,
+   "explanation": "A、B、C项中“言”均为助词，无实义；D项中“言”为动词，意为“说”。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《诗经·卫风·氓》"
+   ],
+   "location": {
+    "charIndex": 283
+   }
+  },
+  {
+   "id": "lesson-1556:v08",
+   "word": "渐",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义与读音，易误解为“逐渐”",
+   "contextMeaning": "浸湿",
+   "sourceSentence": "淇水汤汤,渐车帷裳",
+   "type": "gu-jin",
+   "question": "“渐车帷裳”中“渐”的读音和意思是",
+   "options": [
+    "jiàn，逐渐",
+    "jiān，浸湿",
+    "jiàn，浸湿",
+    "jiān，逐渐"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处读jiān，意为浸湿。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《诗经·卫风·氓》"
+   ],
+   "location": {
+    "charIndex": 212
+   }
+  },
+  {
+   "id": "lesson-1556:v09",
+   "word": "蚩蚩",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "形容词，理解为忠厚样子即可，不涉及复杂考点",
+   "contextMeaning": "忠厚的样子",
+   "sourceSentence": "氓之蚩蚩,抱布贸丝",
+   "location": {
+    "charIndex": 39
+   }
+  },
+  {
+   "id": "lesson-1556:v10",
+   "word": "愆",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "作为拖延的词义，在文言语境下容易通过上下文推断，不设为命题点",
+   "contextMeaning": "拖延",
+   "sourceSentence": "匪我愆期,子无良媒",
+   "location": {
+    "charIndex": 69
+   }
+  },
+  {
+   "id": "lesson-1556:v11",
+   "word": "将",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "虽然是多义词，但文中语境明确为祈使语气，重点在于理解全句含义",
+   "contextMeaning": "愿，请",
+   "sourceSentence": "将子无怒,秋以为期",
+   "location": {
+    "charIndex": 79
+   }
+  },
+  {
+   "id": "lesson-1556:v12",
+   "word": "涉",
+   "annotated": false,
+   "decision": "question",
+   "reason": "正文未注但极其重要，涉及动作描写，理解人物行动轨迹",
+   "contextMeaning": "渡过",
+   "sourceSentence": "送子涉淇,至于顿丘",
+   "type": "contextual-choice",
+   "question": "“送子涉淇”中“涉”的意思是",
+   "options": [
+    "干涉",
+    "涉及",
+    "渡过",
+    "流经"
+   ],
+   "answerIndex": 2,
+   "explanation": "涉意为步行渡水，文中指送别到淇水边。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《诗经·卫风·氓》"
+   ],
+   "location": {
+    "charIndex": 59
+   }
+  },
+  {
+   "id": "lesson-1556:v13",
+   "word": "及",
+   "annotated": true,
+   "decision": "question",
+   "reason": "正文未注的重要虚词，连接词，考察阅读迁移能力",
+   "contextMeaning": "和",
+   "sourceSentence": "及尔偕老,老使我怨",
+   "type": "usage",
+   "question": "“及尔偕老”中“及”的意思是",
+   "options": [
+    "到",
+    "和",
+    "赶上",
+    "以及"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处“及”为连词，意为和、与。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《诗经·卫风·氓》"
+   ],
+   "location": {
+    "charIndex": 294
+   }
+  },
+  {
+   "id": "lesson-1556:v14",
+   "word": "夙",
+   "annotated": false,
+   "decision": "question",
+   "reason": "正文未注的重要词汇，构词能力强，高频考点",
+   "contextMeaning": "早",
+   "sourceSentence": "夙兴夜寐,靡有朝矣",
+   "type": "contextual-choice",
+   "question": "“夙兴夜寐”中“夙”的意思是",
+   "options": [
+    "早",
+    "晚",
+    "曾经",
+    "经常"
+   ],
+   "answerIndex": 0,
+   "explanation": "“夙”意为早，“夙兴夜寐”意为早起晚睡。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《诗经·卫风·氓》"
+   ],
+   "location": {
+    "charIndex": 253
+   }
+  },
+  {
+   "id": "lesson-1556:v15",
+   "word": "来即我谋",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "到我这里来商量（婚事）。即，就、靠近。谋，谋划、商量。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v16",
+   "word": "淇",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "淇水，在今河南境内。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v17",
+   "word": "顿丘",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "地名，在今河南浚（xùn）县。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v18",
+   "word": "愆期",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "拖延婚期。愆，拖延。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v19",
+   "word": "垝垣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "残破的墙。垝，毁坏。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v20",
+   "word": "复关",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "卫国地名，氓所住的地方。一说，诗中借所居之地代指氓。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v21",
+   "word": "载",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "助词，用在句首或句中，起加强语气的作用。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v22",
+   "word": "尔卜尔筮",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "你用龟板占卜，用蓍（shī）草占卦。卜，用火烧龟板，根据龟板上的裂纹推断吉凶祸福。筮，用蓍草的茎占卦。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v23",
+   "word": "体",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "占卜显示的兆象。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v24",
+   "word": "咎言",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不祥之语。咎，灾祸。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v25",
+   "word": "贿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "财物。这里指嫁妆。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v26",
+   "word": "沃若",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "润泽的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v27",
+   "word": "于嗟鸠兮无食桑葚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "唉，斑鸠啊，你不要贪吃桑葚（旧说斑鸠吃多了桑葚会昏醉）。于嗟，感叹词。无，同“毋”，不要。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v28",
+   "word": "无与士耽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不要同男子沉溺于爱情中。士，指未婚男子。耽，沉溺、沉醉。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v29",
+   "word": "陨",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "陨落，坠下。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v30",
+   "word": "徂",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "往。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v31",
+   "word": "三岁食贫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "多年来吃苦受贫。三岁，指多年。食贫，过贫苦的生活。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v32",
+   "word": "汤汤",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "水流盛大的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v33",
+   "word": "帷裳",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "车两旁的布幔。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v34",
+   "word": "不爽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "没有过错。爽，差错、过失。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v35",
+   "word": "罔极",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "没有定准。罔，无。极，准则。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v36",
+   "word": "二三其德",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "负德变心。二三，意思是反复无常，感情不专一。德，心意。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v37",
+   "word": "靡室劳矣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "家里的劳苦事没有一样不做的。靡，无、没有。室劳，家务劳动。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v38",
+   "word": "靡有朝矣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "没有一天不是如此。朝，日、天。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v39",
+   "word": "遂",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "如愿。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v40",
+   "word": "咥",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "讥笑。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v41",
+   "word": "悼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "伤感，哀伤。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v42",
+   "word": "老使我怨",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这样只能使我怨恨不已。老，这里指上句二人盟誓相约“偕老”一事。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v43",
+   "word": "淇则有岸隰则有泮",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "淇水有岸，池沼有边。隰，低湿的地方。一说指濕（tà）水，即漯水。泮，同“畔”，边、岸。这两句诗用淇水、池沼有岸，反衬男子心意无常，没有拘束限制。一说，这两句诗用淇水、池沼有岸，反衬妇人认为自己如与男子“偕老”，就会有无边的怨苦。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v44",
+   "word": "总角之宴",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "少年时我和你一起愉快地玩耍。总角，古代少年男女把头发扎成丫髻，叫“总角”，后用以指代少年时代。宴，快乐。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v45",
+   "word": "晏晏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "和悦的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v46",
+   "word": "旦旦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "诚恳的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v47",
+   "word": "反",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "违背。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v48",
+   "word": "反是不思",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "违背誓言而不再顾及。是，指代二人的誓言。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1556:v49",
+   "word": "亦已焉哉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "那就算了吧！已，止、了结。焉、哉，均为语气助词，连用以强化语气。",
+   "sourceSentence": ""
+  }
+ ]
+}

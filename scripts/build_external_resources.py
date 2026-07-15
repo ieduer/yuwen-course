@@ -133,7 +133,7 @@ def yuque_doc_url(book_slug: str, doc_slug: str) -> str:
     if re.match(r"^https?://", doc_slug, re.I):
         return doc_slug
     inner = urllib.parse.quote(doc_slug, safe="")
-    return f"https://bdfz.yuque.com/{YUQUE_NAMESPACE}/{book_slug}?view=doc_embed&inner={inner}"
+    return f"https://bdfz.yuque.com/{YUQUE_NAMESPACE}/{book_slug}/{inner}?view=doc_embed"
 
 
 def public_doc_links(doc_url: str) -> list[dict[str, str]]:

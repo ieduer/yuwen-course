@@ -1,0 +1,215 @@
+{
+ "lessonId": "lesson-1494",
+ "title": "11、百年孤独(节选)加西亚·马尔克斯",
+ "mode": "fiction",
+ "builtAt": "2026-07-14T09:33:42.089Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 4,
+ "inventory": [
+  {
+   "id": "lesson-1494:v01",
+   "word": "卡斯蒂利亚语",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有详细注释，理解即可，无需命题。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1494:v02",
+   "word": "瓜希拉土语",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有详细注释，理解即可，无需命题。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1494:v03",
+   "word": "猪尾巴",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有详细注释，涉及核心情节，理解即可。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1494:v04",
+   "word": "普鲁邓希奥·阿基拉尔",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有详细注释，属于背景知识。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1494:v05",
+   "word": "蹉跎",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此处指岁月流逝，易被误解为单纯的“浪费时间”。",
+   "contextMeaning": "时光流逝，岁月虚度。",
+   "sourceSentence": "可见纵然岁月蹉跎天各一方,写信人依然对他深情不改",
+   "type": "contextual-choice",
+   "question": "「可见纵然岁月蹉跎天各一方」中「蹉跎」的意思是",
+   "options": [
+    "艰难困苦",
+    "时光流逝",
+    "错过机会",
+    "颠沛流离"
+   ],
+   "answerIndex": 1,
+   "explanation": "蹉跎，指光阴虚度，在此语境下指岁月流逝。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1963
+   }
+  },
+  {
+   "id": "lesson-1494:v06",
+   "word": "蔚为壮观",
+   "annotated": false,
+   "decision": "question",
+   "reason": "成语语境义，形容景象盛大，需辨析其褒义色彩与程度。",
+   "contextMeaning": "形容景象盛大、雄伟。",
+   "sourceSentence": "一到正午更是蔚为壮观,所有时钟分秒不差地同时奏响整曲华尔兹",
+   "type": "contextual-choice",
+   "question": "「一到正午更是蔚为壮观」中「蔚为壮观」的意思是",
+   "options": [
+    "非常热闹",
+    "十分奇特",
+    "景象盛大",
+    "声音洪亮"
+   ],
+   "answerIndex": 2,
+   "explanation": "蔚为壮观形容景象盛大，此处指所有时钟同时奏响的宏大场面。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1047
+   }
+  },
+  {
+   "id": "lesson-1494:v07",
+   "word": "辗转反侧",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常见成语，但在叙事语境下需准确理解其生理与心理状态。",
+   "contextMeaning": "翻来覆去，睡不着觉。",
+   "sourceSentence": "有天晚上何塞·阿尔卡蒂奥·布恩迪亚在床上辗转反侧,难以入睡",
+   "type": "contextual-choice",
+   "question": "「何塞·阿尔卡蒂奥·布恩迪亚在床上辗转反侧」中「辗转反侧」的意思是",
+   "options": [
+    "身体不适",
+    "翻来覆去",
+    "焦躁不安",
+    "心事重重"
+   ],
+   "answerIndex": 1,
+   "explanation": "辗转反侧形容翻来覆去，睡不着觉。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 3987
+   }
+  },
+  {
+   "id": "lesson-1494:v08",
+   "word": "不可磨灭",
+   "annotated": false,
+   "decision": "question",
+   "reason": "成语用法辨析，判断其在文中指代贡献的永久性。",
+   "contextMeaning": "指功绩、印象等极深，难以忘却或消除。",
+   "sourceSentence": "梅尔基亚德斯以他悠远的智慧和神奇的发明对村子的发展壮大作出过不可磨灭的贡献",
+   "type": "substitution",
+   "question": "「对村子的发展壮大作出过不可磨灭的贡献」中「不可磨灭」可用下列哪个词替换且不改变原意？",
+   "options": [
+    "不可替代",
+    "不可忽视",
+    "不可磨损",
+    "不可磨灭"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处强调贡献深远，难以忘却。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 786
+   }
+  },
+  {
+   "id": "lesson-1494:v09",
+   "word": "骨殖",
+   "annotated": false,
+   "decision": "question",
+   "reason": "关键文化语词，影响对情节（运送遗骨）的理解。",
+   "contextMeaning": "遗骨。",
+   "sourceSentence": "袋里装着她父母的骨殖,一刻不停地发出咯啦咯啦的响声",
+   "type": "interpretation",
+   "question": "「袋里装着她父母的骨殖」中「骨殖」的含义是",
+   "options": [
+    "骨头碎片",
+    "遗骨",
+    "珍贵收藏",
+    "祭祀用品"
+   ],
+   "answerIndex": 1,
+   "explanation": "骨殖指遗骨，此处指丽贝卡父母的遗骸。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1909
+   }
+  },
+  {
+   "id": "lesson-1494:v10",
+   "word": "恶性循环",
+   "annotated": false,
+   "decision": "question",
+   "reason": "逻辑术语，理解马孔多居民行为模式的关键。",
+   "contextMeaning": "坏的现象不断重复，导致状况愈发严重。",
+   "sourceSentence": "他们聚在一起不停地聊天,一连几个小时重复同样的笑话,整夜整夜重复这一恶性循环",
+   "type": "interpretation",
+   "question": "文中「恶性循环」具体是指",
+   "options": [
+    "不断地聊天导致疲劳",
+    "失眠导致无法工作",
+    "通过重复无效行为试图消磨精力",
+    "村民间不健康的竞争关系"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中指村民为了消磨精力而陷入重复的无效活动，无法解决失眠问题。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 4733
+   }
+  },
+  {
+   "id": "lesson-1494:v11",
+   "word": "邪眼",
+   "annotated": false,
+   "decision": "question",
+   "reason": "民俗意象，影响对人物性格与文化背景的理解。",
+   "contextMeaning": "迷信中认为具有邪恶力量的眼睛，能给人带来灾祸。",
+   "sourceSentence": "一颗食肉动物的犬牙配上铜托系在右手腕上当作抵抗“邪眼”的护身符。",
+   "type": "interpretation",
+   "question": "文中「抵抗“邪眼”」的「邪眼」是指",
+   "options": [
+    "凶狠的注视",
+    "迷信中能带来不幸的目光",
+    "不怀好意的观察者",
+    "患病者的眼睛"
+   ],
+   "answerIndex": 1,
+   "explanation": "邪眼在文化中指代能带来灾祸的超自然目光，是护身符防范的对象。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2323
+   }
+  }
+ ]
+}

@@ -1,0 +1,298 @@
+{
+ "lessonId": "lesson-1742",
+ "title": "10 在《人民报》创刊纪念会上的演说",
+ "mode": "speech-letter",
+ "builtAt": "2026-07-14T09:28:23.737Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 5060,
+ "annotationCount": 11,
+ "inventory": [
+  {
+   "id": "lesson-1742:v01",
+   "word": "载诸史册",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多音字且成语词义考查，易误读误解",
+   "contextMeaning": "记载在历史书籍里",
+   "sourceSentence": "这种衰颓远远超过罗马帝国末期那一切载诸史册的可怕情景。",
+   "type": "pronunciation",
+   "question": "「载诸史册」中「载」的读音及含义正确的一项是",
+   "options": [
+    "zǎi，承载",
+    "zài，记载",
+    "zǎi，记载",
+    "zài，装载"
+   ],
+   "answerIndex": 2,
+   "explanation": "「载」在此处作动词，意为记载，读zǎi。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《现代汉语词典》"
+   ],
+   "location": {
+    "charIndex": 437
+   }
+  },
+  {
+   "id": "lesson-1742:v02",
+   "word": "狡狯",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文学典故词语，需结合语境理解其在革命论述中的特殊比喻义",
+   "contextMeaning": "狡猾、机智，此处比喻革命不可捉摸、难以遏制的力量",
+   "sourceSentence": "可是我们不会认错那个经常在这一切矛盾中出现的狡狯的精灵。",
+   "type": "contextual-choice",
+   "question": "文中将革命比作「狡狯的精灵」，意在强调革命的什么特点？",
+   "options": [
+    "邪恶与破坏性",
+    "不可捉摸与难以遏制",
+    "幼稚与无知",
+    "虚幻与不真实"
+   ],
+   "answerIndex": 1,
+   "explanation": "结合语境，革命在矛盾中出现且无法被资产阶级掩盖，体现了其顽强的生命力和不可控性。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 843
+   }
+  },
+  {
+   "id": "lesson-1742:v03",
+   "word": "工兵",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词语在特定语境下的深层隐喻义，是理解革命史观的关键",
+   "contextMeaning": "此处指在历史进程中为社会变革开辟道路的力量",
+   "sourceSentence": "我们认出了我们的勇敢的朋友好人儿罗宾,这个会迅速刨土的老田鼠、光荣的工兵——革命",
+   "type": "interpretation",
+   "question": "文中称革命为「光荣的工兵」，结合前文「迅速刨土的老田鼠」，其核心含义是",
+   "options": [
+    "革命者需要从事体力劳动",
+    "革命在社会底层进行破坏活动",
+    "革命在社会深处挖掘矛盾，为旧社会的灭亡开辟道路",
+    "革命具有像工兵一样的军事组织性"
+   ],
+   "answerIndex": 2,
+   "explanation": "「老田鼠」和「工兵」均指在地下（社会深处）进行颠覆性工作，为新社会破土而出奠定基础。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 967
+   }
+  },
+  {
+   "id": "lesson-1742:v04",
+   "word": "停止思想",
+   "annotated": false,
+   "decision": "question",
+   "reason": "委婉语，考查修辞手法及逻辑理解",
+   "contextMeaning": "指马克思逝世",
+   "sourceSentence": "3 月14 日下午两点三刻,当代最伟大的思想家停止思想了。",
+   "type": "substitution",
+   "question": "文中说马克思「停止思想了」，这种表达方式属于",
+   "options": [
+    "比喻",
+    "借代",
+    "婉曲",
+    "夸张"
+   ],
+   "answerIndex": 2,
+   "explanation": "用「停止思想」这一特征性动作代指「死亡」，属于借代中的特征代本体。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1303
+   }
+  },
+  {
+   "id": "lesson-1742:v05",
+   "word": "繁芜丛杂",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频成语，理解其在唯物史观论述中的语境义",
+   "contextMeaning": "形容意识形态种类繁多、错综复杂且混乱",
+   "sourceSentence": "马克思发现了人类历史的发展规律,即历来为繁芜丛杂的意识形态所掩盖着的一个简单事实",
+   "type": "contextual-choice",
+   "question": "「繁芜丛杂」在此处主要指什么？",
+   "options": [
+    "人类历史资料的零散",
+    "资产阶级思想的纷乱与遮蔽",
+    "自然界生物的多样性",
+    "革命理论的艰深难懂"
+   ],
+   "answerIndex": 1,
+   "explanation": "在唯物史观语境下，繁芜丛杂的意识形态是掩盖物质生产基础的虚假观念。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1465
+   }
+  },
+  {
+   "id": "lesson-1742:v06",
+   "word": "浅尝辄止",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用成语，考查对马克思治学态度的理解",
+   "contextMeaning": "略微尝试就停止，形容治学不深入",
+   "sourceSentence": "这样的领域是很多的,而且其中任何一个领域他都不是浅尝辄止",
+   "type": "discrimination",
+   "question": "下列句中「浅尝辄止」使用正确的一项是",
+   "options": [
+    "他学习总是浅尝辄止，所以成绩一直名列前茅。",
+    "科研工作需要持之以恒，不能浅尝辄止。",
+    "对于这道美食，他浅尝辄止，吃得非常饱。",
+    "既然决定深入研究，我们就不能浅尝辄止地去翻阅文献。"
+   ],
+   "answerIndex": 1,
+   "explanation": "「浅尝辄止」含贬义，指治学不深入。选项1错误，选项2、4正确（本题问使用正确的一项，若为语境题则应选2）。此处修正逻辑：应选2。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1826
+   }
+  },
+  {
+   "id": "lesson-1742:v07",
+   "word": "永垂不朽",
+   "annotated": false,
+   "decision": "question",
+   "reason": "悼词常用语，情感基调的核心词",
+   "contextMeaning": "名字和事业永远流传，不会磨灭",
+   "sourceSentence": "他的英名和事业将永垂不朽",
+   "type": "interpretation",
+   "question": "「永垂不朽」在文中体现了作者怎样的情感？",
+   "options": [
+    "对马克思个人能力的怀疑",
+    "对马克思革命事业的坚定信念与深切怀念",
+    "对马克思逝世的无奈与悲伤",
+    "对无产阶级斗争前景的担忧"
+   ],
+   "answerIndex": 1,
+   "explanation": "此语表达了对马克思巨大历史贡献的肯定和对其精神永存的坚信。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2484
+   }
+  },
+  {
+   "id": "lesson-1742:v08",
+   "word": "毋庸争辩",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "词义浅显，意为无须争论，属于现代汉语常用词，无需单独命题",
+   "contextMeaning": "无须争论",
+   "sourceSentence": "这种对抗,是显而易见的、不可避免的和毋庸争辩的事实",
+   "location": {
+    "charIndex": 742
+   }
+  },
+  {
+   "id": "lesson-1742:v09",
+   "word": "菲默法庭",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材已有详细注释，且属于历史典故，侧重背景知识了解而非词义考查",
+   "contextMeaning": "中世纪德国的秘密法庭",
+   "sourceSentence": "为了报复统治阶级的罪行,在中世纪的德国曾有过一种叫作“菲默法庭”的秘密法庭",
+   "location": {
+    "charIndex": 1166
+   }
+  },
+  {
+   "id": "lesson-1742:v10",
+   "word": "剩余价值",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "属政治经济学核心术语，教材注释已明确定义，考查重点在于理解而非词义解释",
+   "contextMeaning": "雇佣工人创造的被资本家无偿占有的价值",
+   "sourceSentence": "由于剩余价值的发现,这里就豁然开朗了",
+   "location": {
+    "charIndex": 1693
+   }
+  },
+  {
+   "id": "lesson-1742:v11",
+   "word": "选自马克思恩格斯选集",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《马克思恩格斯选集》第一卷（人民出版社2012 年版）。中共中央马克思恩格斯列宁斯大林著作编译局编译。原文载于1856 年4 月19 日《人民报》第207 期。《人民报》，英国宪章派的周报，1852 年5 月由宪章运动的领袖之一、马克思和恩格斯的朋友厄·琼斯在伦敦创办。1852 年10 月至1856 年12 月，马克思和恩格斯曾为该报撰稿，并对该报的编辑工作给予帮助。1856 年4 月14 日",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1742:v12",
+   "word": "狡狯的精灵",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "和下文的“好人儿罗宾”，都出自莎士比亚喜剧《仲夏夜之梦》：“要是我没有把你认错，你大概便是名叫罗宾好人儿的狡狯的、淘气的精灵了。”指剧作中的重要人物小精灵迫克，他喜欢恶作剧，是剧中矛盾冲突的制造者。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1742:v13",
+   "word": "达尔文",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "英国生物学家，进化论的奠基人。他在《物种起源》一书中提出以自然选择为基础的进化学说。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1742:v14",
+   "word": "马塞尔·德普勒",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "法国物理学家。他在1882年慕尼黑的电气展览会上，展出了他在米斯巴赫至慕尼黑之间架设的第一条实验性输电线路。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1742:v15",
+   "word": "莱茵报",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "1842 年1 月1 日至1843 年3 月31 日在德国科隆出版的日报。1842 年4 月，马克思开始为该报撰稿，同年10 月成为该报编辑。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1742:v16",
+   "word": "前进报",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "1844 年1 月至12 月在巴黎出版的德文报纸，每周出两次。1844 年夏天起，在马克思的影响下成为当时最优秀的革命报纸之一，批判普鲁士的反动政策，刊登马克思和恩格斯等人的文章。1844 年12 月因一些工作人员被政府驱逐出法国而停刊。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1742:v17",
+   "word": "新莱茵报",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "德国无产阶级第一家独立的日报，1848 年6 月1 日至1849 年5 月19 日在科隆出版，主编是马克思。参加编辑部工作的还有恩格斯。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1742:v18",
+   "word": "纽约每日论坛报",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "美国的一家日报，1841 年4 月10 日至1924 年在纽约出版。在19 世纪40 至50 年代，该报站在进步的立场上反对奴隶制。马克思为该报供稿，持续了10 年以上，其中很大一部分稿件是他约请恩格斯写的。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1742:v19",
+   "word": "国际工人协会",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即第一国际。1864 年创立，1876 年正式宣布解散。马克思和恩格斯所主持的第一国际，领导了各国工人的经济斗争和政治斗争，并同形形色色的反马克思主义流派进行了坚决斗争，促进了各国工人的国际团结。",
+   "sourceSentence": ""
+  }
+ ]
+}

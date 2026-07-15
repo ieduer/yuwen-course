@@ -1,0 +1,215 @@
+{
+ "lessonId": "lesson-1590",
+ "title": "登快阁/ 黄庭坚",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:41:46.532Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 7643,
+ "annotationCount": 0,
+ "inventory": [
+  {
+   "id": "lesson-1590:v01",
+   "word": "痴儿",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，极易误解为智力障碍，实为自谦或自嘲",
+   "contextMeaning": "痴人、呆子，这里是诗人自指",
+   "sourceSentence": "痴儿了却公家事",
+   "type": "gu-jin",
+   "question": "「痴儿了却公家事」中「痴儿」一词的含义是",
+   "options": [
+    "智力低下的儿童",
+    "诗人自嘲的称呼",
+    "对下属的戏称",
+    "天真无邪的形象"
+   ],
+   "answerIndex": 1,
+   "explanation": "在古代语境中，痴儿有时用作自谦或戏称，此处诗人自指忙于公事而显得呆笨，并非指生理上的痴呆。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《晋书·傅咸传》"
+   ],
+   "location": {
+    "charIndex": 137
+   }
+  },
+  {
+   "id": "lesson-1590:v02",
+   "word": "了却",
+   "annotated": false,
+   "decision": "question",
+   "reason": "关键动词，理解全诗开篇心态的基础",
+   "contextMeaning": "办完，处理完毕",
+   "sourceSentence": "痴儿了却公家事",
+   "type": "contextual-choice",
+   "question": "「了却」在句中的意思是",
+   "options": [
+    "了解并放弃",
+    "办完，处理完毕",
+    "为了……而拒绝",
+    "完全忘记"
+   ],
+   "answerIndex": 1,
+   "explanation": "「了却」意为结束、处理完毕，此处指诗人忙完公务，体现了脱离俗务的心态。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 137
+   }
+  },
+  {
+   "id": "lesson-1590:v03",
+   "word": "倚",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已注，含义明确，不具备出题难度",
+   "contextMeaning": "倚栏欣赏",
+   "sourceSentence": "快阁东西倚晚晴",
+   "location": {
+    "charIndex": 145
+   }
+  },
+  {
+   "id": "lesson-1590:v04",
+   "word": "落木",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文学意象，易与现代汉语的“树木”混淆",
+   "contextMeaning": "落叶，凋零的树木",
+   "sourceSentence": "落木千山天远大",
+   "type": "interpretation",
+   "question": "「落木千山天远大」中「落木」的准确理解是",
+   "options": [
+    "倒下的树木",
+    "凋落的树叶",
+    "茂密的树林",
+    "树木的枯干"
+   ],
+   "answerIndex": 1,
+   "explanation": "「落木」即落叶，是古典诗歌中表现秋天萧瑟景象的典型意象。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "屈原《九歌·湘君》「袅袅兮秋风，洞庭波兮木叶下」"
+   ],
+   "location": {
+    "charIndex": 154
+   }
+  },
+  {
+   "id": "lesson-1590:v05",
+   "word": "聊",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言虚词/副词，影响句意轻重程度的判断",
+   "contextMeaning": "姑且，暂且",
+   "sourceSentence": "青眼聊因美酒横",
+   "type": "substitution",
+   "question": "「青眼聊因美酒横」中「聊」的意思与下列哪项最接近？",
+   "options": [
+    "谈天",
+    "姑且，暂且",
+    "完全",
+    "因为"
+   ],
+   "answerIndex": 1,
+   "explanation": "「聊」在此处表示动作的随意性，即姑且、暂且，体现了诗人借酒消愁的无奈与洒脱。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 179
+   }
+  },
+  {
+   "id": "lesson-1590:v06",
+   "word": "青眼",
+   "annotated": false,
+   "decision": "question",
+   "reason": "重要典故，直接决定诗句含义的理解",
+   "contextMeaning": "看重，喜欢",
+   "sourceSentence": "青眼聊因美酒横",
+   "type": "contextual-choice",
+   "question": "「青眼」在句中表达的情感是",
+   "options": [
+    "眼睛发青的病态",
+    "对世俗礼法的鄙夷",
+    "对美酒的青睐与喜爱",
+    "对佳人的思念"
+   ],
+   "answerIndex": 2,
+   "explanation": "典出阮籍，此处指唯有美酒值得诗人青眼相待，表达了诗人对美酒的喜爱。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《晋书·阮籍传》"
+   ],
+   "location": {
+    "charIndex": 179
+   }
+  },
+  {
+   "id": "lesson-1590:v07",
+   "word": "弄",
+   "annotated": false,
+   "decision": "question",
+   "reason": "动词用法，体现诗人的动作情态",
+   "contextMeaning": "吹奏，摆弄",
+   "sourceSentence": "万里归船弄长笛",
+   "type": "usage",
+   "question": "「弄」在句中的用法与下列哪项一致？",
+   "options": [
+    "弄巧成拙（制造）",
+    "弄潮儿（从事）",
+    "弄玉吹箫（吹奏/摆弄）",
+    "耍弄权术（戏弄）"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处「弄」为动词，指吹奏长笛，表现诗人的闲适与豪迈。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 188
+   }
+  },
+  {
+   "id": "lesson-1590:v08",
+   "word": "盟",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "教材注释详细，含义明确，属于常用文言实词",
+   "contextMeaning": "订盟、盟誓",
+   "sourceSentence": "此心吾与白鸥盟",
+   "location": {
+    "charIndex": 196
+   }
+  },
+  {
+   "id": "lesson-1590:v09",
+   "word": "佳人",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材注释明确为“知己”，无歧义",
+   "contextMeaning": "知己",
+   "sourceSentence": "朱弦已为佳人绝",
+   "location": {
+    "charIndex": 171
+   }
+  },
+  {
+   "id": "lesson-1590:v10",
+   "word": "横",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已注，动作描写，理解难度不大",
+   "contextMeaning": "睨视、斜着眼看",
+   "sourceSentence": "青眼聊因美酒横",
+   "location": {
+    "charIndex": 179
+   }
+  }
+ ]
+}

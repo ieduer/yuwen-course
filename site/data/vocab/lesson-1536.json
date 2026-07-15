@@ -1,0 +1,764 @@
+{
+ "lessonId": "lesson-1536",
+ "title": "11 过秦论/ 贾谊",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:35:09.016Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 45,
+ "inventory": [
+  {
+   "id": "lesson-1536:v01",
+   "word": "固",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多義詞，且在文中分別作形容詞（堅固）、副詞（堅決地/固然）和名詞（要塞）使用，是理解全文論證結構的關鍵。",
+   "contextMeaning": "形容詞，堅固",
+   "sourceSentence": "秦孝公据崤函之固",
+   "type": "contextual-choice",
+   "question": "「秦孝公据崤函之固」中「固」的解釋正確的是",
+   "options": [
+    "堅固，指險要的地理形勢",
+    "堅決，指守衛的態度",
+    "本來，指固有的條件",
+    "安定，指政權的穩固"
+   ],
+   "answerIndex": 0,
+   "explanation": "此處「固」作名詞用，指險要的地理形勢，即函谷關與崤山。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 342
+   }
+  },
+  {
+   "id": "lesson-1536:v02",
+   "word": "制",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多義詞，在文中義項豐富（控制、治理、統治），易混淆。",
+   "contextMeaning": "控制、制服",
+   "sourceSentence": "秦有余力而制其弊",
+   "type": "contextual-choice",
+   "question": "「秦有余力而制其弊」中「制」的意思是",
+   "options": [
+    "制定",
+    "制度",
+    "統治",
+    "控制、制服"
+   ],
+   "answerIndex": 3,
+   "explanation": "此處指秦國有餘力去控制、制服六國的弱點。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 751
+   }
+  },
+  {
+   "id": "lesson-1536:v03",
+   "word": "亡",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今異義，且在文中作動詞（失去、逃亡、滅亡）等多種用法。",
+   "contextMeaning": "失去",
+   "sourceSentence": "秦无亡矢遗镞之费",
+   "type": "gu-jin",
+   "question": "「秦无亡矢遗镞之费」中「亡」的古今義辨析，正確的是",
+   "options": [
+    "古義：滅亡；今義：失去",
+    "古義：失去；今義：死亡或滅亡",
+    "古義：逃跑；今義：丟失",
+    "古義：花費；今義：死掉"
+   ],
+   "answerIndex": 1,
+   "explanation": "「亡」古義多為丟失、失去，今義多指死亡或消滅。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 719
+   }
+  },
+  {
+   "id": "lesson-1536:v04",
+   "word": "北",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古義特殊，名詞活用，極易誤解為方位。",
+   "contextMeaning": "敗逃的軍隊",
+   "sourceSentence": "追亡逐北",
+   "type": "interpretation",
+   "question": "「追亡逐北」中「北」的意思是",
+   "options": [
+    "北方",
+    "背部",
+    "敗逃的軍隊",
+    "背向而行"
+   ],
+   "answerIndex": 2,
+   "explanation": "「北」在此指被擊敗而逃跑的軍隊。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 760
+   }
+  },
+  {
+   "id": "lesson-1536:v05",
+   "word": "叩",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言常用動詞，易誤解為「敲」。",
+   "contextMeaning": "攻打",
+   "sourceSentence": "叩关而攻秦",
+   "type": "substitution",
+   "question": "「叩关而攻秦」中「叩」可以替換為",
+   "options": [
+    "敲擊",
+    "詢問",
+    "進攻",
+    "防守"
+   ],
+   "answerIndex": 2,
+   "explanation": "「叩」在這裡是攻打的意思。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 694
+   }
+  },
+  {
+   "id": "lesson-1536:v06",
+   "word": "贏",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今異義，極易誤解為「獲勝」。",
+   "contextMeaning": "擔負",
+   "sourceSentence": "赢粮而景从",
+   "type": "gu-jin",
+   "question": "「赢粮而景从」中「赢」的意思是",
+   "options": [
+    "獲勝",
+    "擔負",
+    "贏得",
+    "積累"
+   ],
+   "answerIndex": 1,
+   "explanation": "「贏」在此處是擔負的意思。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 1190
+   }
+  },
+  {
+   "id": "lesson-1536:v07",
+   "word": "景",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字，詞類活用，影響句意理解。",
+   "contextMeaning": "影子",
+   "sourceSentence": "赢粮而景从",
+   "type": "usage",
+   "question": "「赢粮而景从」中「景」的用法是",
+   "options": [
+    "通「影」，名詞作狀語，像影子一樣",
+    "名詞，指日光",
+    "形容詞，指景色優美",
+    "通「警」，動詞，警戒"
+   ],
+   "answerIndex": 0,
+   "explanation": "「景」通「影」，名詞作狀語，形容跟隨得緊密。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《說文解字》"
+   ],
+   "location": {
+    "charIndex": 1190
+   }
+  },
+  {
+   "id": "lesson-1536:v08",
+   "word": "絜",
+   "annotated": false,
+   "decision": "question",
+   "reason": "生僻字，需掌握其衡量之義。",
+   "contextMeaning": "衡量",
+   "sourceSentence": "度长絜大",
+   "type": "interpretation",
+   "question": "「度长絜大」中「絜」的意思是",
+   "options": [
+    "潔淨",
+    "衡量",
+    "巨大的",
+    "比較"
+   ],
+   "answerIndex": 1,
+   "explanation": "「絜」意為衡量。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 1335
+   }
+  },
+  {
+   "id": "lesson-1536:v09",
+   "word": "作難",
+   "annotated": false,
+   "decision": "question",
+   "reason": "固定短語，古義與今義「為難別人」完全不同。",
+   "contextMeaning": "起事",
+   "sourceSentence": "一夫作难而七庙隳",
+   "type": "gu-jin",
+   "question": "「一夫作难而七庙隳」中「作难」的意思是",
+   "options": [
+    "製造困難",
+    "起事",
+    "遭遇災難",
+    "發生爭執"
+   ],
+   "answerIndex": 1,
+   "explanation": "「作難」在古文中指發動起義或事變。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 1395
+   }
+  },
+  {
+   "id": "lesson-1536:v10",
+   "word": "誰何",
+   "annotated": false,
+   "decision": "question",
+   "reason": "特殊句式/詞組，不理解會影響對秦朝嚴酷統治的理解。",
+   "contextMeaning": "盤問",
+   "sourceSentence": "信臣精卒陈利兵而谁何",
+   "type": "interpretation",
+   "question": "「信臣精卒陈利兵而谁何」中「谁何」的意思是",
+   "options": [
+    "是誰",
+    "為什麼",
+    "盤問",
+    "何人"
+   ],
+   "answerIndex": 2,
+   "explanation": "「誰何」即「呵問是誰」，意為盤問。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 1037
+   }
+  },
+  {
+   "id": "lesson-1536:v11",
+   "word": "鄉",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字，高頻考點。",
+   "contextMeaning": "先前",
+   "sourceSentence": "非及乡时之士也",
+   "type": "usage",
+   "question": "「非及乡时之士也」中「乡」的含義是",
+   "options": [
+    "鄉村",
+    "方向",
+    "先前",
+    "趨向"
+   ],
+   "answerIndex": 2,
+   "explanation": "「鄉」通「向」，在此處指過去、先前。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 1303
+   }
+  },
+  {
+   "id": "lesson-1536:v12",
+   "word": "敲扑",
+   "annotated": false,
+   "decision": "question",
+   "reason": "重要文化語詞，代表秦朝統治工具。",
+   "contextMeaning": "刑具（短的叫敲，長的叫扑）",
+   "sourceSentence": "执敲扑而鞭笞天下",
+   "type": "interpretation",
+   "question": "「执敲扑而鞭笞天下」中「敲扑」指",
+   "options": [
+    "木棍，刑具",
+    "鞭子",
+    "枷鎖",
+    "刑罰"
+   ],
+   "answerIndex": 0,
+   "explanation": "「敲扑」是行刑用的棍杖。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 858
+   }
+  },
+  {
+   "id": "lesson-1536:v13",
+   "word": "瓮牖繩樞",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "成語典故，描述陳涉出身貧寒，雖重要但不適合作為單詞考查，適合作為句意理解題的素材。",
+   "contextMeaning": "用破甕做窗戶，用繩子繫門扇，形容家境貧寒",
+   "sourceSentence": "然陈涉瓮牖绳枢之子",
+   "location": {
+    "charIndex": 1094
+   }
+  },
+  {
+   "id": "lesson-1536:v14",
+   "word": "黔首",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "歷史文化名詞，秦代對百姓的特殊稱呼，屬於基礎常識。",
+   "contextMeaning": "秦朝對百姓的稱呼",
+   "sourceSentence": "以愚黔首",
+   "location": {
+    "charIndex": 956
+   }
+  },
+  {
+   "id": "lesson-1536:v15",
+   "word": "藩籬",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "比喻用法，詞義與現代漢語基本一致，無考查難度。",
+   "contextMeaning": "邊疆上的屏障",
+   "sourceSentence": "北筑长城而守藩篱",
+   "location": {
+    "charIndex": 906
+   }
+  },
+  {
+   "id": "lesson-1536:v16",
+   "word": "崤山和函谷关崤山在函",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "崤山和函谷关。崤山，在函谷关的东边。函谷关，在今河南灵宝",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v17",
+   "word": "在今陕西中部北部甘肃",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "在今陕西中部北部、甘肃、青海的东南部和宁夏一带",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v18",
+   "word": "意思是有统一",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是，（秦孝公）有统一天下的野心。席卷、包举、囊括，都有“并吞”的意思。宇内、四海、八荒，都是“天下”的意思。八荒，原指八方最边远的地方",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v19",
+   "word": "两手合抱形容毫不费力",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "两手合抱，形容毫不费力",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v20",
+   "word": "战国时魏地",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "战国时魏地",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v21",
+   "word": "惠文王武王昭襄王惠",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "惠文王、武王、昭襄王。惠文王是孝公的儿子，武王是惠文王的儿子，昭襄王是武王的异母弟",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v22",
+   "word": "削弱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "削弱",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v23",
+   "word": "吝惜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "吝惜",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v24",
+   "word": "招致招引",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "招致，招引",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v25",
+   "word": "孟尝君田文齐国贵族",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "孟尝君，田文，齐国贵族；平原君，赵胜，赵国贵族；春申君，黄歇，楚国贵族；信陵君，魏无忌，魏国贵族。他们是战国时有名的“四公子”，皆以招揽宾客著称",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v26",
+   "word": "攻打函谷关叩攻打",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "攻打函谷关。叩，攻打",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v27",
+   "word": "迎击敌人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "迎击敌人",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v28",
+   "word": "就是上文的韩魏燕楚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "就是上文的韩、魏、燕、楚、齐、赵、宋、卫、中山等国",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v29",
+   "word": "箭头",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "箭头",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v30",
+   "word": "追逐败逃的军队北败逃",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "追逐败逃的军队。北，败逃，这里指败逃的军队",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v31",
+   "word": "大盾牌",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "大盾牌",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v32",
+   "word": "古代越族居住在桂浙闽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "古代越族居住在桂、浙、闽、粤等地，每个部落都有名称，统称“百越”。也叫“百粤”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v33",
+   "word": "设置了桂林郡象郡在今",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "设置了桂林郡、象郡（在今广西一带）",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v34",
+   "word": "意思是愿意降服系颈颈",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是愿意降服。系颈，颈上系绳，表示投降",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v35",
+   "word": "比喻边疆上的屏障藩篱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "比喻边疆上的屏障。藩，篱笆",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v36",
+   "word": "使退却",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "使退却",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v37",
+   "word": "各学派的著作",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "各学派的著作",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v38",
+   "word": "秦朝对百姓的称呼黔黑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "秦朝对百姓的称呼。黔，黑色。秦朝百姓用黑色头巾包头，故称“黔首”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v39",
+   "word": "毁坏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "毁坏",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v40",
+   "word": "销毁兵器锋兵刃镝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "销毁兵器。锋，兵刃。镝，箭头",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v41",
+   "word": "指华山",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指华山",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v42",
+   "word": "指黄河",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指黄河",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v43",
+   "word": "可靠的大臣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "可靠的大臣",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v44",
+   "word": "盘诘查问",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "盘诘查问",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v45",
+   "word": "坚固的城池金比喻坚固",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "坚固的城池。金，比喻坚固",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v46",
+   "word": "指下层百姓氓民隶",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指下层百姓。氓，民。隶，低贱的人",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v47",
+   "word": "平常的人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "平常的人",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v48",
+   "word": "置身参与",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "置身，参与",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v49",
+   "word": "兴起",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "兴起",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v50",
+   "word": "举",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "举",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v51",
+   "word": "担着粮食如影随",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（许多人）担着粮食如影随形地跟着（陈涉）。赢，担负。景，同“影”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v52",
+   "word": "崤山以东代指东方诸国",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "崤山以东，代指东方诸国",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v53",
+   "word": "意思是像是原来的样子",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是像是原来的样子",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v54",
+   "word": "因有罪而被征调去守边",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "因有罪而被征调去守边",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v55",
+   "word": "匹敌相当",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "匹敌，相当",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v56",
+   "word": "先前乡同向",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "先前。乡，同“向”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v57",
+   "word": "量量长短比比大小絜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "量量长短，比比大小。絜，衡量",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v58",
+   "word": "指陈涉起义作难起事",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指陈涉起义。作难，起事",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v59",
+   "word": "指秦王子婴为项羽所杀",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指秦王子婴为项羽所杀",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1536:v60",
+   "word": "攻和守的形势不同了攻",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "攻和守的形势不同了。攻，指秦兼并六国时处于攻势。守，指秦统一天下后处于守势",
+   "sourceSentence": ""
+  }
+ ]
+}

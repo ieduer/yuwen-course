@@ -1,0 +1,467 @@
+{
+ "lessonId": "lesson-1559",
+ "title": "3 蜀道难/ 李白",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:37:44.377Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 4037,
+ "annotationCount": 28,
+ "inventory": [
+  {
+   "id": "lesson-1559:v01",
+   "word": "噫吁嚱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已明确标注为叹词，学生理解即可，无需出题。",
+   "contextMeaning": "叹词",
+   "sourceSentence": "噫吁嚱,危乎高哉",
+   "location": {
+    "charIndex": 244
+   }
+  },
+  {
+   "id": "lesson-1559:v02",
+   "word": "茫然",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义词，现代汉语中多指失落、不知所措，此处指模糊难知，易造成理解偏差。",
+   "contextMeaning": "模糊难知的样子",
+   "sourceSentence": "蚕丛及鱼凫,开国何茫然",
+   "type": "gu-jin",
+   "question": "「蚕丛及鱼凫，开国何茫然！」中「茫然」一词的古今义辨析，下列说法正确的是？",
+   "options": [
+    "古义指失落，今义指模糊难知",
+    "古义指模糊难知，今义指失落或不知所措",
+    "古今义一致，均指心中空虚",
+    "古义指开国艰难，今义指开国迷茫"
+   ],
+   "answerIndex": 1,
+   "explanation": "「茫然」在句中指历史久远模糊，难以考知；现代汉语中多指精神恍惚或失落。故选B。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 264
+   }
+  },
+  {
+   "id": "lesson-1559:v03",
+   "word": "尔来",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义词，易与现代汉语中表示“最近”的“尔来”混淆。",
+   "contextMeaning": "从那时以来",
+   "sourceSentence": "尔来四万八千岁,不与秦塞通人烟",
+   "type": "gu-jin",
+   "question": "「尔来四万八千岁」中「尔来」的意思是？",
+   "options": [
+    "你来",
+    "最近",
+    "从那时以来",
+    "也就是"
+   ],
+   "answerIndex": 2,
+   "explanation": "「尔来」是古汉语中常用的表示时间跨度的词，指从某事发生的时间开始到现在，此处指从古蜀国开国以来。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 276
+   }
+  },
+  {
+   "id": "lesson-1559:v04",
+   "word": "当",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此处在语境中为方位动词，易被误解为“应当”或“抵挡”。",
+   "contextMeaning": "正对着",
+   "sourceSentence": "西当太白有鸟道",
+   "type": "contextual-choice",
+   "question": "「西当太白有鸟道」中「当」的意思是？",
+   "options": [
+    "应当",
+    "抵挡",
+    "正对着",
+    "当做"
+   ],
+   "answerIndex": 2,
+   "explanation": "句意为秦地西面正对着太白山，此处「当」为动词，表方位，即“正对着”。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 292
+   }
+  },
+  {
+   "id": "lesson-1559:v05",
+   "word": "坐",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，此处并非动作“坐下”，而是副词“徒然”，是理解诗中情感的关键。",
+   "contextMeaning": "徒然",
+   "sourceSentence": "以手抚膺坐长叹",
+   "type": "gu-jin",
+   "question": "「以手抚膺坐长叹」中「坐」的意思是？",
+   "options": [
+    "坐着",
+    "徒然",
+    "因为",
+    "坐下"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处「坐」为副词，意为“空、徒然”，形容无奈的叹息。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 385
+   }
+  },
+  {
+   "id": "lesson-1559:v06",
+   "word": "匪",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字，是理解句意的关键，若按现代汉语“匪徒”理解则完全错误。",
+   "contextMeaning": "通“非”，不是",
+   "sourceSentence": "所守或匪亲",
+   "type": "usage",
+   "question": "「所守或匪亲」中「匪」的意思是？",
+   "options": [
+    "强盗",
+    "不是",
+    "匪徒",
+    "如果"
+   ],
+   "answerIndex": 1,
+   "explanation": "「匪」通「非」，意为“不是”。全句意思是：守关的将领如果不是亲信。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 526
+   }
+  },
+  {
+   "id": "lesson-1559:v07",
+   "word": "胡为",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言固定句式，是理解诗人劝诫之情的关键。",
+   "contextMeaning": "为什么",
+   "sourceSentence": "嗟尔远道之人胡为乎来哉",
+   "type": "interpretation",
+   "question": "「嗟尔远道之人胡为乎来哉」这句话的意思是？",
+   "options": [
+    "感叹你这远方的人为什么要做这些事",
+    "感叹你这远方的人为什么要到这里来",
+    "感叹你这远方的人怎么才能来到这里",
+    "感叹你这远方的人做什么才能回去"
+   ],
+   "answerIndex": 1,
+   "explanation": "「胡为」即「为何」、「为什么」，全句表达了诗人对友人入蜀的关切与担忧。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 495
+   }
+  },
+  {
+   "id": "lesson-1559:v08",
+   "word": "去",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，此处指距离，非现代汉语中的“离开”。",
+   "contextMeaning": "距离",
+   "sourceSentence": "连峰去天不盈尺",
+   "type": "gu-jin",
+   "question": "「连峰去天不盈尺」中「去」的意思是？",
+   "options": [
+    "离开",
+    "前往",
+    "距离",
+    "过去"
+   ],
+   "answerIndex": 2,
+   "explanation": "「去」在古文中常表示距离，此处意为“距离天不到一尺”。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 457
+   }
+  },
+  {
+   "id": "lesson-1559:v09",
+   "word": "盈",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用词，此处指“满”或“达到”，是理解山势极高的关键。",
+   "contextMeaning": "满，达到",
+   "sourceSentence": "连峰去天不盈尺",
+   "type": "contextual-choice",
+   "question": "「连峰去天不盈尺」中「盈」的意思是？",
+   "options": [
+    "超过",
+    "满，达到",
+    "亏损",
+    "剩余"
+   ],
+   "answerIndex": 1,
+   "explanation": "「盈」在此处意为“满”，「不盈尺」即不到一尺，夸张地表现了山峰之高。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 457
+   }
+  },
+  {
+   "id": "lesson-1559:v10",
+   "word": "摧",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已详细解释，学生容易理解，无需重复出题。",
+   "contextMeaning": "崩塌",
+   "sourceSentence": "地崩山摧壮士死",
+   "location": {
+    "charIndex": 308
+   }
+  },
+  {
+   "id": "lesson-1559:v11",
+   "word": "回",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已明确解释为回转，学生易于掌握。",
+   "contextMeaning": "回转",
+   "sourceSentence": "上有六龙回日之高标",
+   "location": {
+    "charIndex": 326
+   }
+  },
+  {
+   "id": "lesson-1559:v12",
+   "word": "转",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已明确解释为“使滚动”，属于使动用法，已标注，无需出题。",
+   "contextMeaning": "使滚动",
+   "sourceSentence": "砯崖转石万壑雷",
+   "location": {
+    "charIndex": 481
+   }
+  },
+  {
+   "id": "lesson-1559:v13",
+   "word": "蚕丛及鱼凫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "蚕丛、鱼凫，传说中古蜀王名。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v14",
+   "word": "秦塞",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "秦地的关塞。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v15",
+   "word": "西当太白有鸟道",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是，秦地西面有太白山阻隔了入蜀之路，山势高峻，道路狭窄，只有鸟才能飞过。鸟道，人兽皆不能至的险峻狭窄山路。当，正对着。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v16",
+   "word": "横绝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "横越，飞越。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v17",
+   "word": "地崩山摧壮士死",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "相传秦惠王想征服蜀国，知道蜀王好色，答应送给他五个美女。蜀王派五个力士迎接。返回时路经梓潼（今四川剑阁南），看见一条大蛇钻入穴中，五个力士用力往外拽。结果，山崩地裂，力士和女子全被压死，山分为五岭，入蜀之路遂通。摧，毁坏，这里指崩塌。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v18",
+   "word": "天梯石栈",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "天梯，指高险的山路。一说指木制的栈道。石栈，俗称“栈道”，在山崖上凿石架木建成的通道。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v19",
+   "word": "六龙回日之高标",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "迫使太阳神的车驾回转的高峻的山峰。六龙，传说太阳神的车由六条龙拉着，羲和是其御者。回，回转。高标，指高耸的山峰。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v20",
+   "word": "冲波逆折之回川",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "激浪冲撞岩石倒流形成的回旋急流。冲波，激浪。逆折，倒流。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v21",
+   "word": "黄鹤",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即黄鹄，善高飞的大鸟。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v22",
+   "word": "猱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "猿的一种，善攀援。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v23",
+   "word": "青泥",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指青泥岭，在今甘肃徽县境内，是由秦入蜀的要道。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v24",
+   "word": "盘盘",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "盘旋曲折的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v25",
+   "word": "扪参历井",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是，山高入天，由秦入蜀的人在山上，可以用手触摸到星宿，甚至可以从中穿过。参、井，星宿名，二者邻近，分别是蜀和秦的分野（古人把地域与星宿分别对应，称为分野）。扪，摸。历，穿越。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v26",
+   "word": "仰胁息",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "仰着头，屏住呼吸。胁息，屏住呼吸。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v27",
+   "word": "西游",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指入蜀。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v28",
+   "word": "巉岩",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "高而险的山岩。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v29",
+   "word": "凋朱颜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "使容颜大变。凋，用作使动，使……凋谢。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v30",
+   "word": "飞湍",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "急流。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v31",
+   "word": "喧豗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "形容轰响。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v32",
+   "word": "砯崖转石万壑雷",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（急流和瀑布）冲击山崖，使大石滚动而下，千山万壑间响起雷鸣般的声音。砯，水冲击石壁发出的响声，这里用作动词，“冲击”的意思。转，使滚动。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v33",
+   "word": "剑阁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指今四川剑阁北的大剑山和小剑山，群峰如剑插天，两山如门，极为险要。山间有栈道，即剑阁道，为诸葛亮所开辟，是秦、蜀两地间要道。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v34",
+   "word": "一夫当关万夫莫开",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "形容剑阁易守难攻。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v35",
+   "word": "所守或匪亲化为狼与豺",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "守关的将领倘若不是（自己的）亲信，就会变成叛乱者。此句与上句语本西晋张载《剑阁铭》：“一夫荷戟，万夫趑趄（zī jū）。形胜之地，匪亲勿居。”狼与豺，比喻叛乱为害的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1559:v36",
+   "word": "咨嗟",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "叹息。",
+   "sourceSentence": ""
+  }
+ ]
+}

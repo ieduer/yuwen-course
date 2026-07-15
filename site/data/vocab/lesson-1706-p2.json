@@ -1,0 +1,443 @@
+{
+ "lessonId": "lesson-1706-p2",
+ "title": "永遇乐·京口北固亭怀古",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:15:32.818Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 156,
+ "annotationCount": 32,
+ "inventory": [
+  {
+   "id": "lesson-1706-p2:v01",
+   "word": "寄奴",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "属于历史人名，需结合注释理解背景，无需出题考查其字义。",
+   "contextMeaning": "南朝宋武帝刘裕的小名",
+   "sourceSentence": "人道寄奴曾住",
+   "location": {
+    "charIndex": 57
+   }
+  },
+  {
+   "id": "lesson-1706-p2:v02",
+   "word": "元嘉草草",
+   "annotated": true,
+   "decision": "question",
+   "reason": "该词涉及典故与词义活用，理解其意对把握作者对北伐失败的评价至关重要。",
+   "contextMeaning": "南朝宋文帝刘义隆轻率发动的北伐",
+   "sourceSentence": "元嘉草草",
+   "type": "contextual-choice",
+   "question": "「元嘉草草」中「草草」一词在文中的意思是",
+   "options": [
+    "忧愁的样子",
+    "轻率、草率",
+    "匆忙的样子",
+    "杂乱的样子"
+   ],
+   "answerIndex": 1,
+   "explanation": "「草草」在词中形容刘义隆北伐时准备不足、态度轻率，导致失败。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 83
+   }
+  },
+  {
+   "id": "lesson-1706-p2:v03",
+   "word": "北顾",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今词义演变，若按现代汉语理解极易产生误读，影响对词人情感的理解。",
+   "contextMeaning": "败逃中回头北望（指回望被敌占领的故土）",
+   "sourceSentence": "赢得仓皇北顾",
+   "type": "interpretation",
+   "question": "「赢得仓皇北顾」中的「北顾」是指",
+   "options": [
+    "向北方看去",
+    "北方的顾虑",
+    "败逃时向北方回头张望",
+    "关照北方的情况"
+   ],
+   "answerIndex": 2,
+   "explanation": "结合词中「仓皇」二字，可知「北顾」是指战败后狼狈逃窜时回头看北方，含有悔恨与悲凉之意。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 95
+   }
+  },
+  {
+   "id": "lesson-1706-p2:v04",
+   "word": "寻常",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义词，古代常作为度量衡单位，此处为形容词，易误解。",
+   "contextMeaning": "平常、普通",
+   "sourceSentence": "斜阳草树，寻常巷陌",
+   "type": "gu-jin",
+   "question": "「寻常巷陌」中的「寻常」与下列哪项含义最接近？",
+   "options": [
+    "古代长度单位，八尺为寻",
+    "平常、普通",
+    "经常、往往",
+    "寻找常识"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处「寻常」意为普通、平常，指巷陌的平凡与往昔英雄事迹形成对比。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 47
+   }
+  },
+  {
+   "id": "lesson-1706-p2:v05",
+   "word": "风流",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，在不同语境下含义差异大，是文学鉴赏的高频考点。",
+   "contextMeaning": "杰出的才华、英雄气概",
+   "sourceSentence": "风流总被，雨打风吹去",
+   "type": "discrimination",
+   "question": "文中「风流总被」的「风流」是指",
+   "options": [
+    "生活放荡不羁",
+    "指代英雄人物的杰出风采",
+    "指自然景观的流转",
+    "指爱情故事"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处「风流」指孙权等英雄人物的雄才大略与气度，与现代语境中的贬义词义不同。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 36
+   }
+  },
+  {
+   "id": "lesson-1706-p2:v06",
+   "word": "堪",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言虚词/动词用法，直接影响对句式逻辑的理解。",
+   "contextMeaning": "能够，受得住",
+   "sourceSentence": "可堪回首，佛狸祠 下",
+   "type": "usage",
+   "question": "下列句中加点词的含义与「可堪回首」中的「堪」相同的是",
+   "options": [
+    "不可一世",
+    "堪当重任",
+    "不堪设想",
+    "堪称一绝"
+   ],
+   "answerIndex": 2,
+   "explanation": "「可堪」意为「能够忍受」，与「堪当」中的「堪」同为「能够」义。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 121
+   }
+  },
+  {
+   "id": "lesson-1706-p2:v07",
+   "word": "觅",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古汉语高频动词，也是理解词作开篇情感基调的关键。",
+   "contextMeaning": "寻找",
+   "sourceSentence": "英雄无觅，孙仲谋处",
+   "type": "substitution",
+   "question": "「英雄无觅」中「觅」字可以替换为",
+   "options": [
+    "看",
+    "见",
+    "寻",
+    "闻"
+   ],
+   "answerIndex": 2,
+   "explanation": "「觅」在古文中即为「寻找」之意，此处指再也找不到像孙权那样的英雄了。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 21
+   }
+  },
+  {
+   "id": "lesson-1706-p2:v08",
+   "word": "封狼居胥",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "典故，词义已通过注释明确，主要考查对典故背景的理解，不宜作为字词题。",
+   "contextMeaning": "霍去病在狼居胥山祭天纪功",
+   "sourceSentence": "封狼居胥",
+   "location": {
+    "charIndex": 89
+   }
+  },
+  {
+   "id": "lesson-1706-p2:v09",
+   "word": "廉颇",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "典故人物，教材已有详细注释，理解其「尚能饭否」的典故意义即可。",
+   "contextMeaning": "赵国名将，借指作者自己渴望被朝廷重用",
+   "sourceSentence": "廉颇老矣，尚能饭否",
+   "location": {
+    "charIndex": 145
+   }
+  },
+  {
+   "id": "lesson-1706-p2:v10",
+   "word": "选自东坡乐府笺卷二",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《东坡乐府笺》卷二（上海古籍出版社2009年版）。念奴娇，词牌名。这首词作于宋神宗元丰五年（1082）。苏轼所游的是黄州（今湖北黄冈）的赤鼻矶，并非东汉末期赤壁大战处。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v11",
+   "word": "大江",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指长江。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v12",
+   "word": "故垒",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "旧时军队营垒的遗迹。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v13",
+   "word": "周郎",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即周瑜（175—210），字公瑾，孙权军中指挥赤壁大战的将领。二十四岁时即出任要职，军中皆呼为“周郎”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v14",
+   "word": "雄姿英发",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "姿容雄伟，英气勃发。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v15",
+   "word": "羽扇纶巾",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（手持）羽扇，（头戴）纶巾。这是儒者的装束，形容周瑜有儒将风度。纶巾，配有青丝带的头巾。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v16",
+   "word": "樯橹",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "代指曹操的战船。樯，挂帆的桅杆。橹，一种摇船的桨。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v17",
+   "word": "故国",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指赤壁古战场。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v18",
+   "word": "多情应笑我早生华发",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "应笑我多愁善感，过早地长出花白的头发。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v19",
+   "word": "尊",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同“樽”，一种盛酒器。这里指酒杯。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v20",
+   "word": "酹",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "将酒洒在地上，表示凭吊。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v21",
+   "word": "选自稼轩词编年笺注卷",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《稼轩词编年笺注》卷五（上海古籍出版社1993年版）。永遇乐，词牌名。这首词作于宋宁宗开禧元年（1205）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v22",
+   "word": "寄奴曾住",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "寄奴是南朝宋武帝刘裕（363—422）的小名。刘裕的祖先移居京口，他在这里起事，晚年推翻东晋做了皇帝。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v23",
+   "word": "四十三年",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "作者于宋高宗绍兴三十二年（1162）南归，到写这首词时正好四十三年。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v24",
+   "word": "烽火扬州路",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "扬州一带抗金的烽火。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v25",
+   "word": "佛狸祠",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "北魏太武帝拓跋焘（408—452）小名“佛狸”。公元450年，他反击刘宋，兵锋南下，在长江北岸瓜步山上建立行宫，后称“佛狸祠”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v26",
+   "word": "神鸦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指在庙里吃祭品的乌鸦。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v27",
+   "word": "社鼓",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "社日祭祀土地神的鼓声。南宋时期，当地老百姓只把佛狸祠当作一般祠庙来祭祀供奉，而不知道它过去曾是北魏皇帝的行宫。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v28",
+   "word": "廉颇老矣尚能饭否",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "据《史记·廉颇蔺相如列传》，战国时赵国名将廉颇被免职后跑到魏国，后来赵王想重新起用他，派人去探看他的身体状况。廉颇在使者面前吃下饭一斗、肉十斤，披甲上马，以示尚可大用。使者受廉颇仇人郭开的贿赂，回来报告赵王说：“廉将军虽老，尚善饭，然与臣坐，顷之三遗矢矣。”（矢，同“屎”。）赵王以为廉颇已老，遂不召。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v29",
+   "word": "选自李清照集校注卷一",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《李清照集校注》卷一（人民文学出版社1979年版）。声声慢，词牌名。北宋末年李清照南渡避乱，不久北宋灭亡，丈夫病死，她只身逃难，境遇悲惨。这首词是作者南渡后晚年的作品。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v30",
+   "word": "戚戚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "悲愁、哀伤的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v31",
+   "word": "乍暖还寒",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "忽暖忽冷，天气变化无常。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v32",
+   "word": "将息",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "养息，休息。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v33",
+   "word": "黄花",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "菊花。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v34",
+   "word": "憔悴损",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "枯萎，凋零殆尽。憔悴，凋零、枯萎。损，这里相当于〔极〕，表示程度很深。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v35",
+   "word": "怎生得黑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "怎样挨到天黑。怎生，怎么、怎样。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v36",
+   "word": "次第",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "光景，状况。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1706-p2:v37",
+   "word": "怎一个愁字了得",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是，一个“愁”字怎么能概括得尽呢？",
+   "sourceSentence": ""
+  }
+ ]
+}

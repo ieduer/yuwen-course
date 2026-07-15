@@ -1,0 +1,248 @@
+{
+ "lessonId": "lesson-1500",
+ "title": "江城子·乙卯正月二十日夜记梦/苏轼",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:33:55.727Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 1119,
+ "annotationCount": 5,
+ "inventory": [
+  {
+   "id": "lesson-1500:v01",
+   "word": "茫茫",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，且该词在此处为固定搭配，不涉及复杂语法变化。",
+   "contextMeaning": "茫然不相知",
+   "sourceSentence": "十年生死两茫茫",
+   "location": {
+    "charIndex": 94
+   }
+  },
+  {
+   "id": "lesson-1500:v02",
+   "word": "千里孤坟",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材注释已详尽说明其地理背景与情感内涵，无需额外命题。",
+   "contextMeaning": "",
+   "sourceSentence": "千里孤坟,无处话凄凉",
+   "location": {
+    "charIndex": 111
+   }
+  },
+  {
+   "id": "lesson-1500:v03",
+   "word": "幽梦",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材注释明确，学生易于理解。",
+   "contextMeaning": "",
+   "sourceSentence": "夜来幽梦忽还乡",
+   "location": {
+    "charIndex": 140
+   }
+  },
+  {
+   "id": "lesson-1500:v04",
+   "word": "轩窗",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材注释明确，为基本名词。",
+   "contextMeaning": "",
+   "sourceSentence": "小轩窗,正梳妆",
+   "location": {
+    "charIndex": 148
+   }
+  },
+  {
+   "id": "lesson-1500:v05",
+   "word": "短松冈",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材注释已提供地理指代，无需额外考查。",
+   "contextMeaning": "",
+   "sourceSentence": "明月夜,短松冈",
+   "location": {
+    "charIndex": 177
+   }
+  },
+  {
+   "id": "lesson-1500:v06",
+   "word": "思量",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义词，古代多指考虑、思念，此处是关键情感动词。",
+   "contextMeaning": "思念",
+   "sourceSentence": "不思量,自难忘",
+   "type": "contextual-choice",
+   "question": "「不思量，自难忘」中「思量」一词的意思是",
+   "options": [
+    "思考计量",
+    "思念",
+    "商量",
+    "策划"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处「思量」意为刻意去想、去思念，结合上下文悼亡情境，选B。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 102
+   }
+  },
+  {
+   "id": "lesson-1500:v07",
+   "word": "话",
+   "annotated": false,
+   "decision": "question",
+   "reason": "此处为动词用法，意为「诉说」，属于文言实词活用，对理解全诗情感非常重要。",
+   "contextMeaning": "诉说",
+   "sourceSentence": "千里孤坟,无处话凄凉",
+   "type": "contextual-choice",
+   "question": "「千里孤坟，无处话凄凉」中「话」字的意思是",
+   "options": [
+    "谈话",
+    "言语",
+    "诉说",
+    "对话"
+   ],
+   "answerIndex": 2,
+   "explanation": "「话」在此处作动词，意为向人诉说、倾诉，故选C。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 111
+   }
+  },
+  {
+   "id": "lesson-1500:v08",
+   "word": "纵使",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频连词，考查对假设关系句式的理解。",
+   "contextMeaning": "即使",
+   "sourceSentence": "纵使相逢应不识",
+   "type": "substitution",
+   "question": "下列词语中，填入「纵使相逢应不识」中「纵使」位置，意思最接近的一项是",
+   "options": [
+    "若是",
+    "即使",
+    "因为",
+    "只要"
+   ],
+   "answerIndex": 1,
+   "explanation": "「纵使」是假设让步连词，意为即使，故选B。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 123
+   }
+  },
+  {
+   "id": "lesson-1500:v09",
+   "word": "应",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言副词，表推测，考查对语气的把握。",
+   "contextMeaning": "大概、应该",
+   "sourceSentence": "纵使相逢应不识",
+   "type": "contextual-choice",
+   "question": "「纵使相逢应不识」中「应」字的意思是",
+   "options": [
+    "应当",
+    "答应",
+    "大概",
+    "反应"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处「应」表示推测语气，意为大概、料想，故选C。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 123
+   }
+  },
+  {
+   "id": "lesson-1500:v10",
+   "word": "顾",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言实词，指回头看，是动作描写的核心。",
+   "contextMeaning": "回头看",
+   "sourceSentence": "相顾无言,惟有泪千行",
+   "type": "contextual-choice",
+   "question": "「相顾无言，惟有泪千行」中「顾」的意思是",
+   "options": [
+    "照顾",
+    "回头看",
+    "顾虑",
+    "拜访"
+   ],
+   "answerIndex": 1,
+   "explanation": "「相顾」意为互相看着、对视，故选B。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 157
+   }
+  },
+  {
+   "id": "lesson-1500:v11",
+   "word": "料得",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用词，但在诗歌中体现了作者主观推断的心理活动。",
+   "contextMeaning": "料想、预料",
+   "sourceSentence": "料得年年肠断处",
+   "type": "contextual-choice",
+   "question": "「料得年年肠断处」中「料得」的意思是",
+   "options": [
+    "预料",
+    "准备",
+    "计算",
+    "获得"
+   ],
+   "answerIndex": 0,
+   "explanation": "「料得」意为料想、估计，故选A。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 169
+   }
+  },
+  {
+   "id": "lesson-1500:v12",
+   "word": "肠断",
+   "annotated": false,
+   "decision": "question",
+   "reason": "典故性词汇，形容极度悲伤，是理解全词意象的重点。",
+   "contextMeaning": "形容极度悲伤",
+   "sourceSentence": "料得年年肠断处",
+   "type": "interpretation",
+   "question": "对「料得年年肠断处」一句的理解，最恰当的一项是",
+   "options": [
+    "料想到每年都有肠子断裂的地方",
+    "预料到每年最令作者肝肠寸断的地方",
+    "计算每年在山冈上悲伤的时间",
+    "指每年都要在山冈上进行祭奠"
+   ],
+   "answerIndex": 1,
+   "explanation": "「肠断」是形容悲伤到了极点，此处指代王弗坟茔所在地，故选B。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 169
+   }
+  },
+  {
+   "id": "lesson-1500:v13",
+   "word": "两茫茫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指双方茫然不相知。",
+   "sourceSentence": ""
+  }
+ ]
+}

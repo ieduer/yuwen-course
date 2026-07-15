@@ -1,0 +1,886 @@
+{
+ "lessonId": "lesson-1752",
+ "title": "15 谏太宗十思疏",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:29:09.066Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 5370,
+ "annotationCount": 69,
+ "inventory": [
+  {
+   "id": "lesson-1752:v01",
+   "word": "浚",
+   "annotated": true,
+   "decision": "question",
+   "reason": "考核对特殊动词义项的掌握，影响对整句比喻义的理解",
+   "contextMeaning": "疏通",
+   "sourceSentence": "欲流之远者,必浚其泉源",
+   "type": "contextual-choice",
+   "question": "「欲流之远者，必浚其泉源」中「浚」的意思是",
+   "options": [
+    "挖掘",
+    "疏通",
+    "加深",
+    "保护"
+   ],
+   "answerIndex": 1,
+   "explanation": "浚：疏通水道。在文中比喻疏通政治的源头。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 89
+   }
+  },
+  {
+   "id": "lesson-1752:v02",
+   "word": "傲物",
+   "annotated": true,
+   "decision": "question",
+   "reason": "考察文言词汇中「物」的特定指代，避免望文生义",
+   "contextMeaning": "看不起别人",
+   "sourceSentence": "既得志,则纵情以傲物",
+   "type": "contextual-choice",
+   "question": "「既得志，则纵情以傲物」中「傲物」的「物」指的是",
+   "options": [
+    "万物",
+    "物品",
+    "人",
+    "外界环境"
+   ],
+   "answerIndex": 2,
+   "explanation": "物：指人。傲物即傲视他人。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 305
+   }
+  },
+  {
+   "id": "lesson-1752:v03",
+   "word": "振",
+   "annotated": true,
+   "decision": "question",
+   "reason": "通假字考点，且在语境中表意特殊",
+   "contextMeaning": "威吓",
+   "sourceSentence": "虽董之以严刑,振之以威怒",
+   "type": "usage",
+   "question": "下列句中「振」字的用法与「振之以威怒」相同的一项是",
+   "options": [
+    "振臂一呼",
+    "振聋发聩",
+    "君子生非异也，善假于物也，振之以威",
+    "整顿乾坤"
+   ],
+   "answerIndex": 2,
+   "explanation": "振通「震」，指威吓。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 334
+   }
+  },
+  {
+   "id": "lesson-1752:v04",
+   "word": "下",
+   "annotated": false,
+   "decision": "question",
+   "reason": "考察名词活用为动词的用法，是理解句意的关键",
+   "contextMeaning": "居于……之下",
+   "sourceSentence": "惧满溢则思江海下百川",
+   "type": "usage",
+   "question": "「惧满溢则思江海下百川」中「下」的用法是",
+   "options": [
+    "名词作状语",
+    "名词作动词",
+    "形容词作动词",
+    "方位名词活用为动词"
+   ],
+   "answerIndex": 3,
+   "explanation": "下：居于……之下。方位名词活用为动词。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 449
+   }
+  },
+  {
+   "id": "lesson-1752:v05",
+   "word": "蒙教",
+   "annotated": true,
+   "decision": "question",
+   "reason": "考察古代书信谦辞与语境义，对理解作者态度至关重要",
+   "contextMeaning": "承蒙您的指教",
+   "sourceSentence": "昨日蒙教,窃以为与君实游处相好之日久",
+   "type": "contextual-choice",
+   "question": "「昨日蒙教」中「蒙教」的意思是",
+   "options": [
+    "蒙受教训",
+    "承蒙您的指教",
+    "蒙蔽了教条",
+    "蒙受教导的恩惠"
+   ],
+   "answerIndex": 1,
+   "explanation": "蒙教：承蒙您赐教，指收到对方的来信。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 2854
+   }
+  },
+  {
+   "id": "lesson-1752:v06",
+   "word": "术",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词考查，区分现代汉语与古汉语中的不同语境",
+   "contextMeaning": "政治主张",
+   "sourceSentence": "而议事每不合,所操之术多异故也",
+   "type": "contextual-choice",
+   "question": "「所操之术多异故也」中「术」的意思是",
+   "options": [
+    "技术",
+    "学术",
+    "政治主张",
+    "诡计"
+   ],
+   "answerIndex": 2,
+   "explanation": "术：方法、主张，此处指政治主张。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 2873
+   }
+  },
+  {
+   "id": "lesson-1752:v07",
+   "word": "所以",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言虚词高频考点，区分因果与凭借方式",
+   "contextMeaning": "……的原因",
+   "sourceSentence": "具道所以,冀君实或见恕也",
+   "type": "usage",
+   "question": "下列句中「所以」的用法与「具道所以」相同的是",
+   "options": [
+    "此所以学者不可以不深思而慎取之也",
+    "所以遣将守关者，备他盗之出入与非常也",
+    "师者，所以传道受业解惑也",
+    "吾知所以距子矣"
+   ],
+   "answerIndex": 0,
+   "explanation": "具道所以：详细地说出我之所以这样做的理由。属于「……的原因」。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 2932
+   }
+  },
+  {
+   "id": "lesson-1752:v08",
+   "word": "举",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词在特定语境下的辨析",
+   "contextMeaning": "施行",
+   "sourceSentence": "举先王之政,以兴利除弊,不为生事",
+   "type": "contextual-choice",
+   "question": "「举先王之政」中「举」的意思是",
+   "options": [
+    "推举",
+    "抬起",
+    "施行",
+    "全"
+   ],
+   "answerIndex": 2,
+   "explanation": "举：施行，推行。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 3034
+   }
+  },
+  {
+   "id": "lesson-1752:v09",
+   "word": "苟且",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义考点，考查对古代词义范畴的理解",
+   "contextMeaning": "得过且过",
+   "sourceSentence": "人习于苟且非一日",
+   "type": "gu-jin",
+   "question": "下列句中加点词的古今意义相同的一项是",
+   "options": [
+    "人习于苟且非一日",
+    "烈士暮年，壮心不已",
+    "今之众人，其下圣人也亦远矣",
+    "行李之往来，共其乏困"
+   ],
+   "answerIndex": 0,
+   "explanation": "「苟且」在句中指得过且过，古今含义基本一致，但此处侧重指官场风气。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 3092
+   }
+  },
+  {
+   "id": "lesson-1752:v10",
+   "word": "度",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多音多义词，考查对句法结构和词义的综合分析",
+   "contextMeaning": "计划，考虑",
+   "sourceSentence": "度义而后动,是而不见可悔故也",
+   "type": "pronunciation",
+   "question": "下列句中「度」的读音与其他三项不同的是",
+   "options": [
+    "度义而后动",
+    "盘庚不为怨者故改其度",
+    "审度形势",
+    "度德量力"
+   ],
+   "answerIndex": 1,
+   "explanation": "「盘庚不为怨者故改其度」中的「度」读dù（名词，计划），其余读duó（动词，考量）。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 3186
+   }
+  },
+  {
+   "id": "lesson-1752:v11",
+   "word": "浚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注且义项单一，通过课堂讲解即可掌握，无需出题",
+   "contextMeaning": "疏通水道",
+   "sourceSentence": "欲流之远者,必浚其泉源",
+   "location": {
+    "charIndex": 89
+   }
+  },
+  {
+   "id": "lesson-1752:v12",
+   "word": "德义",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "词义浅显，符合现代汉语组合逻辑，不影响阅读迁移",
+   "contextMeaning": "德行和道义",
+   "sourceSentence": "思国之安者,必积其德义",
+   "location": {
+    "charIndex": 101
+   }
+  },
+  {
+   "id": "lesson-1752:v13",
+   "word": "神器",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "特定文化词汇，教材注释清晰，理解难度较低",
+   "contextMeaning": "帝位",
+   "sourceSentence": "人君当神器之重",
+   "location": {
+    "charIndex": 157
+   }
+  },
+  {
+   "id": "lesson-1752:v14",
+   "word": "傲物",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "词义已注，属于文言文中常见的“傲+名词”结构",
+   "contextMeaning": "看不起别人",
+   "sourceSentence": "既得志,则纵情以傲物",
+   "location": {
+    "charIndex": 305
+   }
+  },
+  {
+   "id": "lesson-1752:v15",
+   "word": "谬赏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "构词法简单，通过“谬”字意义即可推断",
+   "contextMeaning": "不恰当地奖赏",
+   "sourceSentence": "恩所加则思无因喜以谬赏",
+   "location": {
+    "charIndex": 504
+   }
+  },
+  {
+   "id": "lesson-1752:v16",
+   "word": "视遇",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "词汇意义明确，不涉及复杂句法或深层隐喻",
+   "contextMeaning": "看待，对待",
+   "sourceSentence": "重念蒙君实视遇厚",
+   "location": {
+    "charIndex": 2913
+   }
+  },
+  {
+   "id": "lesson-1752:v17",
+   "word": "膏泽",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "比喻手法，教材已注，学生理解无碍",
+   "contextMeaning": "施恩惠",
+   "sourceSentence": "未能助上大有为,以膏泽斯民",
+   "location": {
+    "charIndex": 3211
+   }
+  },
+  {
+   "id": "lesson-1752:v18",
+   "word": "长",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "生长。这里指长得好。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v19",
+   "word": "下愚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "极愚昧无知的人。这里用作谦辞。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v20",
+   "word": "明哲",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "明智的人。这里指唐太宗。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v21",
+   "word": "当神器之重",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "掌握帝王的重权。当，主持、掌握。神器，指帝位。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v22",
+   "word": "居域中之大",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "处在天地间重要的地位上。域中，天地间。语出《老子》第二十五章：“故道大，天大，地大，王亦大。域中有四大，而王居其一焉。”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v23",
+   "word": "休",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "喜庆，福禄。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v24",
+   "word": "戒奢以俭",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "戒奢侈，行节俭。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v25",
+   "word": "凡百元首",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（历代）所有的帝王。凡百，所有的。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v26",
+   "word": "承天景命",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "承受上天的重大使命。景，大。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v27",
+   "word": "殷忧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "深深忧虑。殷，深。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v28",
+   "word": "能克终者盖寡",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "能够保持到底的大概很少。盖，表示推断。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v29",
+   "word": "董之以严刑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "用严酷的刑罚督察人民。董，督察。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v30",
+   "word": "终苟免而不怀仁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "最终只是苟且免于刑罚，但是并不会怀念（皇上的）仁德。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v31",
+   "word": "怨不在大可畏惟人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "怨恨不在于大小，可畏惧的是人民（心怀怨恨）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v32",
+   "word": "载舟覆舟",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "语出《荀子·王制》：“君者舟也，庶人者水也。水则载舟，水则覆舟。”意思是，人民能拥戴皇帝，也能推翻他的统治。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v33",
+   "word": "所宜深慎",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这是应当深切戒慎的。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v34",
+   "word": "见可欲",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "看见（自己）贪图的东西。语出《老子》第三章：“不见可欲，使民心不乱。”下文的“知足”（知道满足）、“知止”（知道适可而止），语出《老子》第四十四章的“知足不辱”与“知止不殆”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v35",
+   "word": "作",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "建造，兴建。这里指大兴土木、营建宫殿苑囿一类事情。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v36",
+   "word": "念高危则思谦冲而自牧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "想到（君位）高而险，就要不忘谦虚，加强自身的道德修养。谦冲，谦虚。牧，养。语出《周易·谦卦》：“谦谦君子，卑以自牧。”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v37",
+   "word": "满溢",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "容器中水满而溢出，比喻骄傲自满而听不进不同意见。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v38",
+   "word": "江海下百川",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "江海居于百川之下（而能容纳百川），比喻有度量，善于听取各方面的意见。下，居于……之下。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v39",
+   "word": "盘游",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "游乐。这里指田猎。盘，快乐。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v40",
+   "word": "三驱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "语出《周易·比卦》：“王用三驱。”田猎时设网三面，留一面不设，指田猎有度，不过分捕杀。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v41",
+   "word": "敬",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "慎。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v42",
+   "word": "虑壅蔽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "担心（耳目被）堵塞蒙蔽。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v43",
+   "word": "谗邪",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "以谗言陷害别人的邪恶之人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v44",
+   "word": "弘兹九德",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "光大九德的修养。弘，光大。九德，指《尚书·皋陶（yáo）谟》所讲的九种品德。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v45",
+   "word": "惠",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "仁爱，宽厚。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v46",
+   "word": "信者",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "诚信的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v47",
+   "word": "豫游",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "出游，游乐。帝王秋天出巡为“豫”，春天出巡为“游”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v48",
+   "word": "松乔之寿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "像仙人赤松子、王子乔那样的长寿。赤松子、王子乔，都是传说中的仙人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v49",
+   "word": "垂拱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "垂衣拱手，指不亲自处理政务。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v50",
+   "word": "游处",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同游共处，交往。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v51",
+   "word": "每",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "常常。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v52",
+   "word": "所操之术",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指所持的政治主张。操，持。术，方法、主张。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v53",
+   "word": "不蒙见察",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不能被（您）理解。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v54",
+   "word": "故略上报",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "所以只简单地给您回信。司马光因反对新法，曾三次给王安石写信，其中第一封长达三千字。王安石收到信后曾写了一封短信回复，即此处说的“略上报”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v55",
+   "word": "辨",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同“辩”，分辩。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v56",
+   "word": "重念",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "又考虑到。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v57",
+   "word": "反覆",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指书信往返。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v58",
+   "word": "具道所以",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "详细地说出我之所以这样做的理由。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v59",
+   "word": "尤在于名实",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "特别在于名和实（是否相符）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v60",
+   "word": "天下之理得矣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "天下的根本道理就清楚了。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v61",
+   "word": "侵官生事征利拒谏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这都是司马光信上指责的话。意思是，王安石变法，添设新官，侵夺原来官吏的职权；派人到各地推行新法，生事扰民；设法生财，与民争利；朝中有反对的意见，拒不接受。征，求。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v62",
+   "word": "以谓",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "以为，认为。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v63",
+   "word": "不为",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不是，不算。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v64",
+   "word": "辟邪说难壬人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "批驳不正确的言论，排斥巧辩的佞人。辟，批驳。难，排斥。壬人，善于巧言献媚、不行正道的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v65",
+   "word": "前",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "预先。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v66",
+   "word": "恤",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "顾念，忧虑。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v67",
+   "word": "同俗自媚于众",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "附和世俗，向众人献媚讨好。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v68",
+   "word": "汹汹然",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "形容声势盛大或凶猛。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v69",
+   "word": "盘庚之迁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "商王盘庚为了巩固统治、躲避自然灾害，将国都迁到殷（今河南安阳）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v70",
+   "word": "胥怨",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "相怨，指百姓对上位者的怨恨。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v71",
+   "word": "非特",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不仅。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v72",
+   "word": "度义而后动",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "考虑到（事情）适宜就采取行动。义，适宜。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v73",
+   "word": "是",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "认为正确。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v74",
+   "word": "可悔",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "值得反悔的地方。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v75",
+   "word": "膏泽斯民",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "施恩惠给人民。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1752:v76",
+   "word": "不事事",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不做事，无所作为。前一个“事”是动词，办（事）。",
+   "sourceSentence": ""
+  }
+ ]
+}

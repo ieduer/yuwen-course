@@ -1,0 +1,417 @@
+{
+ "lessonId": "lesson-1726-p1",
+ "title": "子路、曾皙、冉有、公西华侍坐",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:27:33.303Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 531,
+ "annotationCount": 1,
+ "inventory": [
+  {
+   "id": "lesson-1726-p1:v01",
+   "word": "以",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多義詞，此處為介詞「因為」，是理解句意關鍵",
+   "contextMeaning": "因為",
+   "sourceSentence": "以吾一日长乎尔，毋吾以也",
+   "type": "contextual-choice",
+   "question": "「以吾一日长乎尔」中「以」的意思是",
+   "options": [
+    "因為",
+    "憑藉",
+    "認為",
+    "用"
+   ],
+   "answerIndex": 0,
+   "explanation": "句意為：因為我比你們年長，不要因為（我年長）就不敢說話了。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 40
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v02",
+   "word": "居",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今異義，影響對人物平時狀態的理解",
+   "contextMeaning": "平時",
+   "sourceSentence": "居则曰 ：‘不吾知 也",
+   "type": "gu-jin",
+   "question": "「居则曰」中「居」的古今義辨析，正確的是",
+   "options": [
+    "古義：居住；今義：居住",
+    "古義：平時；今義：居住",
+    "古義：安坐；今義：平時",
+    "古義：平時；今義：停止"
+   ],
+   "answerIndex": 1,
+   "explanation": "「居」在此處指閒居、平時，非指居住地。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 54
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v03",
+   "word": "率尔",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容詞性副詞，影響對子路性格的判斷",
+   "contextMeaning": "急切地",
+   "sourceSentence": "子路率尔 而对曰",
+   "type": "contextual-choice",
+   "question": "「子路率尔而对曰」中「率尔」的意思是",
+   "options": [
+    "率直地",
+    "草率地",
+    "急切地",
+    "隨意地"
+   ],
+   "answerIndex": 2,
+   "explanation": "形容子路回答時毫無遲疑、急切的樣子。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 80
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v04",
+   "word": "摄",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多義詞，影響對地緣政治環境的理解",
+   "contextMeaning": "夾雜、迫近",
+   "sourceSentence": "摄乎大国之间",
+   "type": "contextual-choice",
+   "question": "「摄乎大国之间」中「摄」的意思是",
+   "options": [
+    "掠奪",
+    "夾雜",
+    "治理",
+    "幫助"
+   ],
+   "answerIndex": 1,
+   "explanation": "指國家夾在大國之間，處境艱難。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 96
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v05",
+   "word": "比及",
+   "annotated": false,
+   "decision": "question",
+   "reason": "固定短語，影響對時間跨度的理解",
+   "contextMeaning": "等到",
+   "sourceSentence": "比及 三年，可使有勇",
+   "type": "substitution",
+   "question": "「比及三年」中「比及」可以替換為",
+   "options": [
+    "對比",
+    "等到",
+    "大概",
+    "超過"
+   ],
+   "answerIndex": 1,
+   "explanation": "「比及」是連詞，表示等到某個時間。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 124
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v06",
+   "word": "知方",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文化語詞，影響對子路政治理想的理解",
+   "contextMeaning": "懂得禮義/處世之道",
+   "sourceSentence": "且知方 也",
+   "type": "interpretation",
+   "question": "「且知方也」的意思是",
+   "options": [
+    "而且知道方向",
+    "而且懂得處世的禮義",
+    "而且知道方法",
+    "而且知道地域"
+   ],
+   "answerIndex": 1,
+   "explanation": "「方」指道、禮義、處世原則。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 135
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v07",
+   "word": "哂",
+   "annotated": false,
+   "decision": "question",
+   "reason": "關鍵動詞，揭示孔子態度",
+   "contextMeaning": "微笑/譏笑",
+   "sourceSentence": "夫子哂 之",
+   "type": "contextual-choice",
+   "question": "「夫子哂之」中「哂」的意思是",
+   "options": [
+    "責備",
+    "誇獎",
+    "微笑",
+    "嘆息"
+   ],
+   "answerIndex": 2,
+   "explanation": "此處含有一種輕微的、帶有教導意味的笑。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 143
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v08",
+   "word": "足民",
+   "annotated": false,
+   "decision": "question",
+   "reason": "詞類活用，影響句法分析",
+   "contextMeaning": "使百姓富足",
+   "sourceSentence": "求也为之，比及三年，可使足民",
+   "type": "usage",
+   "question": "「可使足民」中「足」的用法是",
+   "options": [
+    "形容詞作定語",
+    "名詞作狀語",
+    "形容詞使動用法",
+    "形容詞作謂語"
+   ],
+   "answerIndex": 2,
+   "explanation": "「足」在此處為使動用法，意為使……富足。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 174
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v09",
+   "word": "端章甫",
+   "annotated": false,
+   "decision": "question",
+   "reason": "名詞活用作動詞，描寫人物行為",
+   "contextMeaning": "穿禮服，戴禮帽",
+   "sourceSentence": "端章甫 ，愿为小相 焉",
+   "type": "interpretation",
+   "question": "「端章甫」在文中是指",
+   "options": [
+    "端正的章甫",
+    "穿戴禮服禮帽",
+    "章甫端正",
+    "小相穿的衣服"
+   ],
+   "answerIndex": 1,
+   "explanation": "「端」、「章甫」皆為名詞，在此處用作動詞。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 237
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v10",
+   "word": "作",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古義，與今義差異大",
+   "contextMeaning": "起身",
+   "sourceSentence": "舍瑟而作",
+   "type": "gu-jin",
+   "question": "「舍瑟而作」中「作」的意思是",
+   "options": [
+    "寫作",
+    "製造",
+    "起來",
+    "開始"
+   ],
+   "answerIndex": 2,
+   "explanation": "「作」古義為起身、站立。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 269
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v11",
+   "word": "莫春",
+   "annotated": false,
+   "decision": "question",
+   "reason": "特殊時間詞，影響對季節背景的理解",
+   "contextMeaning": "暮春",
+   "sourceSentence": "莫春 者，春服既成",
+   "type": "substitution",
+   "question": "「莫春」可以替換為",
+   "options": [
+    "春初",
+    "春末",
+    "春中",
+    "春夜"
+   ],
+   "answerIndex": 1,
+   "explanation": "「莫」通「暮」，指春季末期。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 311
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v12",
+   "word": "風",
+   "annotated": false,
+   "decision": "question",
+   "reason": "名詞活用作動詞，影響對意境的理解",
+   "contextMeaning": "吹風",
+   "sourceSentence": "风乎舞雩",
+   "type": "usage",
+   "question": "「风乎舞雩」中「风」的用法與下列哪項相同？",
+   "options": [
+    "樹之成而實五石",
+    "端章甫",
+    "浴乎沂",
+    "吾與點也"
+   ],
+   "answerIndex": 1,
+   "explanation": "「風」在此處為名詞作動詞，意為吹風、納涼；與「端章甫」中的「端」、「章甫」名詞作動詞用法一致。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 341
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v13",
+   "word": "與",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多義詞，關鍵動詞，表達孔子的教育態度",
+   "contextMeaning": "贊同",
+   "sourceSentence": "吾与 点也",
+   "type": "contextual-choice",
+   "question": "「吾与点也」中「与」的意思是",
+   "options": [
+    "給予",
+    "參與",
+    "贊同",
+    "和"
+   ],
+   "answerIndex": 2,
+   "explanation": "孔子表示贊同曾皙的志向。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 363
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v14",
+   "word": "安",
+   "annotated": false,
+   "decision": "question",
+   "reason": "疑問代詞，影響對反詰句式的理解",
+   "contextMeaning": "怎麼",
+   "sourceSentence": "安见 方六七十如五六十而非邦也者",
+   "type": "contextual-choice",
+   "question": "「安见」中「安」的意思是",
+   "options": [
+    "哪裡",
+    "怎麼",
+    "安穩",
+    "安定"
+   ],
+   "answerIndex": 1,
+   "explanation": "反詰語氣，意為「怎麼能見到……」。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 458
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v15",
+   "word": "侍坐",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "課文註釋已詳解，屬文化常識，理解即可",
+   "contextMeaning": "在尊長近旁陪坐",
+   "sourceSentence": "子路、曾皙、冉有、公西华侍坐",
+   "location": {
+    "charIndex": 0
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v16",
+   "word": "會同",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "專有名詞，指古代諸侯相會，非通用詞彙，註釋即可",
+   "contextMeaning": "諸侯相會",
+   "sourceSentence": "如会同 ，端章甫 ，愿为小相 焉",
+   "location": {
+    "charIndex": 232
+   }
+  },
+  {
+   "id": "lesson-1726-p1:v17",
+   "word": "詠",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "語境明顯，不影響理解，且為常見字",
+   "contextMeaning": "歌詠",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p1:v18",
+   "word": "选自论语·先进论",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《论语·先进》（《论语译注》，中华书局1980年版）。题目是编者加的。子路（前542—前480），即仲由，字子路。曾皙（生卒年不详），名点，字子皙，曾参的父亲。冉有（前522—？），即冉求，字子有。公西华（前509—？），复姓公西，名赤，字子华。四人都是孔子的弟子。侍坐，在尊长近旁陪坐。",
+   "sourceSentence": ""
+  }
+ ]
+}

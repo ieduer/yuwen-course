@@ -1,0 +1,212 @@
+{
+ "lessonId": "lesson-1493",
+ "title": "10、老人与海(节选) 海明威",
+ "mode": "fiction",
+ "builtAt": "2026-07-14T09:33:32.027Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 2,
+ "inventory": [
+  {
+   "id": "lesson-1493:v01",
+   "word": "灰鲭鲨",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已明确定义，为生物学名词，理解其凶猛属性即可，无需深入考查字词用法。",
+   "contextMeaning": "软骨鱼纲鼠鲨目的一种鲨鱼",
+   "sourceSentence": "那是一条很大的灰鲭鲨,生就的游泳高手,能和海里速度最快的鱼游得一样快",
+   "location": {
+    "charIndex": 410
+   }
+  },
+  {
+   "id": "lesson-1493:v02",
+   "word": "铲鼻鲨",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已明确定义，属于特定物种名，直接理解其外形特征即可。",
+   "contextMeaning": "一种鲨鱼的俗称",
+   "sourceSentence": "从那褐色的三角形鱼鳍和甩来甩去的尾巴来看,他认出这是铲鼻鲨",
+   "location": {
+    "charIndex": 3095
+   }
+  },
+  {
+   "id": "lesson-1493:v03",
+   "word": "Galano",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文中多次出现并作为老人对鲨鱼的特定称呼，涉及文化语境，考察学生对小说异域色彩的把握。",
+   "contextMeaning": "西班牙语，指代文中提到的某种鲨鱼",
+   "sourceSentence": "加拉诺鲨: 。”他大声说。他看见第二个鱼鳍紧跟着第一个钻出海水",
+   "type": "contextual-choice",
+   "question": "文中老人称呼鲨鱼为“加拉诺鲨”（Galano），这一称呼体现了小说怎样的特色？",
+   "options": [
+    "体现了老人作为渔夫对海洋生物的敬畏",
+    "反映了小说浓郁的地域文化色彩和真实感",
+    "说明老人对这种鲨鱼有特定的仇恨心理",
+    "暗示了这种鲨鱼在当地神话中的特殊地位"
+   ],
+   "answerIndex": 1,
+   "explanation": "Galano是西班牙语，在该语境下作为老人生活背景中对鲨鱼的特定称呼，增强了小说的地域真实感。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 3063
+   }
+  },
+  {
+   "id": "lesson-1493:v04",
+   "word": "背运",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频词汇，语境义与字面理解易产生偏差，考察词义辨析。",
+   "contextMeaning": "运气不好",
+   "sourceSentence": "小说前面的情节是:老人圣地亚哥是个“背运”的渔夫,连着八十四天没有捕到鱼",
+   "type": "contextual-choice",
+   "question": "“老人圣地亚哥是个‘背运’的渔夫”中“背运”的意思是",
+   "options": [
+    "背着货物运输",
+    "运气不好",
+    "背道而驰",
+    "命运多舛"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处指老人连续多日未捕到鱼，运气不佳。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 67
+   }
+  },
+  {
+   "id": "lesson-1493:v05",
+   "word": "豁然",
+   "annotated": false,
+   "decision": "question",
+   "reason": "易误解为“开阔”或“开朗”，在此处指突然出现，考察词义的语境化。",
+   "contextMeaning": "形容突然出现",
+   "sourceSentence": "鲨鱼莽莽撞撞地一下子冲过来,划破了蓝色的水面,豁然出现在太阳底下",
+   "type": "contextual-choice",
+   "question": "“豁然出现在太阳底下”中“豁然”一词最恰当的解释是",
+   "options": [
+    "开阔的样子",
+    "突然的样子",
+    "明亮的样子",
+    "巨大的样子"
+   ],
+   "answerIndex": 1,
+   "explanation": "豁然在此处形容鲨鱼从深海突然冲出水面，意指动作突发。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 297
+   }
+  },
+  {
+   "id": "lesson-1493:v06",
+   "word": "肆意妄为",
+   "annotated": false,
+   "decision": "question",
+   "reason": "成语用法，直接刻画鲨鱼性格，影响对动物意象的理解。",
+   "contextMeaning": "任意胡作非为，不顾后果",
+   "sourceSentence": "老人一看见它游过来,就知道这是一条毫无畏惧、肆意妄为的鲨鱼",
+   "type": "substitution",
+   "question": "文中“肆意妄为”一词，若替换为下列哪个词，最能保持原意？",
+   "options": [
+    "为所欲为",
+    "胆大包天",
+    "兴风作浪",
+    "不可一世"
+   ],
+   "answerIndex": 0,
+   "explanation": "肆意妄为指任意胡作非为，为所欲为最为接近。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 730
+   }
+  },
+  {
+   "id": "lesson-1493:v07",
+   "word": "好景不长",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常见成语，考察在特定叙事语境下的含义。",
+   "contextMeaning": "美好的时光维持不了多久",
+   "sourceSentence": "老人此时头脑清醒好使,下定决心搏击一番,但却不抱什么希望。真是好景不长啊,他想",
+   "type": "interpretation",
+   "question": "文中老人感叹“真是好景不长啊”，此处指代的内容是",
+   "options": [
+    "老人捕到大鱼的快乐时光很短",
+    "鲨鱼的袭击破坏了平静的航行",
+    "老人的体力无法支撑漫长的搏斗",
+    "海上的天气突然变坏"
+   ],
+   "answerIndex": 1,
+   "explanation": "老人刚刚捕获大鱼，还没来得及享受成果，鲨鱼便开始袭击，美好的航行被打破。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 807
+   }
+  },
+  {
+   "id": "lesson-1493:v08",
+   "word": "参差不齐",
+   "annotated": false,
+   "decision": "question",
+   "reason": "易误解为“水平高低不一”，在此处指形状不整齐，考察多义词辨析。",
+   "contextMeaning": "长短、高低、大小不齐",
+   "sourceSentence": "他回到船尾,发现舵柄的一头尽管参差不齐,还是能塞进舵孔,让他凑合着掌舵",
+   "type": "contextual-choice",
+   "question": "文中“参差不齐”一词的含义是",
+   "options": [
+    "水平高低不一",
+    "进度快慢不同",
+    "形状不整齐",
+    "质量参杂"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处形容断裂后的舵柄断口形状不整齐。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 7604
+   }
+  },
+  {
+   "id": "lesson-1493:v09",
+   "word": "悬殊",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文中关键修饰词，揭示了人与自然博弈的本质。",
+   "contextMeaning": "相差很大",
+   "sourceSentence": "一个孤单的老人,面对险恶的大海,力量对比是悬殊的,结果似乎也是不言而喻的",
+   "type": "contextual-choice",
+   "question": "下列对“力量对比是悬殊的”中“悬殊”的理解，最准确的是",
+   "options": [
+    "差距极小",
+    "相差很大",
+    "难分胜负",
+    "势均力敌"
+   ],
+   "answerIndex": 1,
+   "explanation": "悬殊指相差很大，此处指老人与大海、鲨鱼的力量对比极其不平衡。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 8601
+   }
+  },
+  {
+   "id": "lesson-1493:v10",
+   "word": "铲鼻鲨的俗称原文为",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "铲鼻鲨的俗称。原文为Galano，西班牙语。",
+   "sourceSentence": ""
+  }
+ ]
+}

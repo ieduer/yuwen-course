@@ -1,0 +1,451 @@
+{
+ "lessonId": "lesson-1484",
+ "title": "*五石之瓠hù/《庄子》",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:11:34.541Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 3958,
+ "annotationCount": 15,
+ "inventory": [
+  {
+   "id": "lesson-1484:v01",
+   "word": "树",
+   "annotated": true,
+   "decision": "question",
+   "reason": "名词活用作动词，考查词类活用",
+   "contextMeaning": "种植",
+   "sourceSentence": "我树之成而实五石",
+   "type": "contextual-choice",
+   "question": "「我树之成而实五石」中「树」的意思是",
+   "options": [
+    "树木",
+    "种植",
+    "建立",
+    "直立"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处为动词，意为种植。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 76
+   }
+  },
+  {
+   "id": "lesson-1484:v02",
+   "word": "实",
+   "annotated": true,
+   "decision": "question",
+   "reason": "名词活用作动词，考查语境义",
+   "contextMeaning": "装满",
+   "sourceSentence": "我树之成而实五石",
+   "type": "contextual-choice",
+   "question": "「我树之成而实五石」中「实」的意思是",
+   "options": [
+    "果实",
+    "真实",
+    "装满",
+    "充实"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指大瓠能装下五石东西。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 76
+   }
+  },
+  {
+   "id": "lesson-1484:v03",
+   "word": "瓠落",
+   "annotated": true,
+   "decision": "question",
+   "reason": "形容词叠词，影响对物象的理解",
+   "contextMeaning": "宽大空廓的样子",
+   "sourceSentence": "则瓠落无所容",
+   "type": "interpretation",
+   "question": "「则瓠落无所容」的意思是",
+   "options": [
+    "葫芦太大而无法盛放东西",
+    "葫芦破损而不能装水",
+    "葫芦太重而拿不动",
+    "葫芦外壳坚硬而无法剖开"
+   ],
+   "answerIndex": 0,
+   "explanation": "瓠落，宽大空廓的样子，指因为器物太大而没有合适的容器盛放。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 104
+   }
+  },
+  {
+   "id": "lesson-1484:v04",
+   "word": "掊",
+   "annotated": true,
+   "decision": "question",
+   "reason": "文言动词，考查词义",
+   "contextMeaning": "击破",
+   "sourceSentence": "吾为其无用而掊之",
+   "type": "substitution",
+   "question": "下列词语替换「掊」后，句意不变的一项是",
+   "options": [
+    "丢",
+    "砸",
+    "卖",
+    "弃"
+   ],
+   "answerIndex": 1,
+   "explanation": "掊意为击破，与“砸”义近。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 118
+   }
+  },
+  {
+   "id": "lesson-1484:v05",
+   "word": "拙",
+   "annotated": true,
+   "decision": "question",
+   "reason": "核心形容词，涉及文章主旨",
+   "contextMeaning": "不善于",
+   "sourceSentence": "夫子固拙于用大矣",
+   "type": "contextual-choice",
+   "question": "「夫子固拙于用大矣」中「拙」的意思是",
+   "options": [
+    "笨拙",
+    "不善于",
+    "简单",
+    "迟钝"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处指不善于发挥事物的功用。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 133
+   }
+  },
+  {
+   "id": "lesson-1484:v06",
+   "word": "不龟手",
+   "annotated": true,
+   "decision": "question",
+   "reason": "特殊名词短语，考查通假字与句意",
+   "contextMeaning": "防止手冻裂",
+   "sourceSentence": "宋人有善为不龟手之药者",
+   "type": "pronunciation",
+   "question": "「不龟手」中「龟」的读音及含义正确的是",
+   "options": [
+    "guī，乌龟",
+    "jūn，皮肤冻裂",
+    "qiū，地名",
+    "guī，裂开"
+   ],
+   "answerIndex": 1,
+   "explanation": "龟同「皲」，读 jūn，指皮肤裂开。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《说文解字》"
+   ],
+   "location": {
+    "charIndex": 142
+   }
+  },
+  {
+   "id": "lesson-1484:v07",
+   "word": "鬻",
+   "annotated": true,
+   "decision": "question",
+   "reason": "文言动词，常用词汇",
+   "contextMeaning": "卖",
+   "sourceSentence": "今一朝而鬻技百金",
+   "type": "gu-jin",
+   "question": "下列关于「鬻」的说法正确的是",
+   "options": [
+    "古今同义",
+    "古义为卖，今义为买",
+    "古义为买，今义为卖",
+    "古义为卖，今基本不用"
+   ],
+   "answerIndex": 3,
+   "explanation": "鬻在古文中意为卖，现代汉语中较少使用。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 197
+   }
+  },
+  {
+   "id": "lesson-1484:v08",
+   "word": "说",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，考查语境辨析",
+   "contextMeaning": "劝说",
+   "sourceSentence": "客得之,以说吴王。",
+   "type": "discrimination",
+   "question": "下列句子中「说」的用法与「客得之，以说吴王」相同的是",
+   "options": [
+    "学而时习之，不亦说乎",
+    "低眉信手续续弹，说尽心中无限事",
+    "公输盘不说",
+    "秦王恐其破璧，乃辞谢，固请，召有司案图，指从此以往十五都予赵"
+   ],
+   "answerIndex": 1,
+   "explanation": "选项A、C均为「悦」的通假字，B与题干均为劝说、陈述之意。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 211
+   }
+  },
+  {
+   "id": "lesson-1484:v09",
+   "word": "难",
+   "annotated": true,
+   "decision": "question",
+   "reason": "语境义，考查对叙事背景的理解",
+   "contextMeaning": "战争/灾难",
+   "sourceSentence": "越有难,吴王使之将。冬",
+   "type": "contextual-choice",
+   "question": "「越有难」中「难」的意思是",
+   "options": [
+    "困难",
+    "责难",
+    "战争",
+    "灾荒"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指越国发兵侵吴，即战事。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 220
+   }
+  },
+  {
+   "id": "lesson-1484:v10",
+   "word": "将",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言动词，常见用法",
+   "contextMeaning": "率领",
+   "sourceSentence": "吴王使之将",
+   "type": "contextual-choice",
+   "question": "「吴王使之将」中「将」的意思是",
+   "options": [
+    "将要",
+    "将领",
+    "率领",
+    "维护"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处为动词，指统帅军队。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 224
+   }
+  },
+  {
+   "id": "lesson-1484:v11",
+   "word": "裂",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言动词，描述历史动作",
+   "contextMeaning": "分割",
+   "sourceSentence": "裂地而封之",
+   "type": "contextual-choice",
+   "question": "「裂地而封之」中「裂」的意思是",
+   "options": [
+    "破裂",
+    "分割",
+    "裂开",
+    "开辟"
+   ],
+   "answerIndex": 1,
+   "explanation": "指分割土地以分封。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 243
+   }
+  },
+  {
+   "id": "lesson-1484:v12",
+   "word": "虑",
+   "annotated": true,
+   "decision": "question",
+   "reason": "动词，考查对文中物象工具的理解",
+   "contextMeaning": "结缀",
+   "sourceSentence": "何不虑以为大樽而浮乎江湖",
+   "type": "interpretation",
+   "question": "「何不虑以为大樽」中「虑」的准确含义是",
+   "options": [
+    "考虑",
+    "忧虑",
+    "用绳结缀",
+    "捆绑"
+   ],
+   "answerIndex": 2,
+   "explanation": "虑，用绳结缀，指将大瓠做成大樽。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 284
+   }
+  },
+  {
+   "id": "lesson-1484:v13",
+   "word": "蓬",
+   "annotated": true,
+   "decision": "question",
+   "reason": "喻词，涉及文章思想与比喻手法",
+   "contextMeaning": "不通达的见识",
+   "sourceSentence": "则夫子犹有蓬之心也夫",
+   "type": "interpretation",
+   "question": "「则夫子犹有蓬之心也夫」一句的含义是",
+   "options": [
+    "你的心像蓬草一样轻盈",
+    "你像蓬草一样四处漂泊",
+    "你的见识像蓬草一样弯曲不通达",
+    "你的心像蓬草一样杂乱无章"
+   ],
+   "answerIndex": 2,
+   "explanation": "蓬，一种草，弯曲不直，比喻见识不通达。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 306
+   }
+  },
+  {
+   "id": "lesson-1484:v14",
+   "word": "坚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "词义在语境中较易理解，不构成阅读障碍",
+   "contextMeaning": "坚固",
+   "sourceSentence": "其坚不能自举也",
+   "location": {
+    "charIndex": 90
+   }
+  },
+  {
+   "id": "lesson-1484:v15",
+   "word": "呺然",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "生僻词，但在注释中已明确，不作为重点考查词汇",
+   "contextMeaning": "内中空虚而宽大的样子",
+   "sourceSentence": "非不呺然大也",
+   "location": {
+    "charIndex": 111
+   }
+  },
+  {
+   "id": "lesson-1484:v16",
+   "word": "洴澼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "专有名词性质，注音即可，不作为考查点",
+   "contextMeaning": "漂洗丝絮",
+   "sourceSentence": "世世以洴澼𬘢为事",
+   "location": {
+    "charIndex": 154
+   }
+  },
+  {
+   "id": "lesson-1484:v17",
+   "word": "樽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "古代名物，理解为容器即可，不作为考查重点",
+   "contextMeaning": "盛酒器",
+   "sourceSentence": "何不虑以为大樽",
+   "location": {
+    "charIndex": 284
+   }
+  },
+  {
+   "id": "lesson-1484:v18",
+   "word": "实五石",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "能容得下五石的东西。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1484:v19",
+   "word": "瓠落无所容",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "宽大而没有什么可盛受的东西。瓠落，宽大空廓的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1484:v20",
+   "word": "拙于用大",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不善于使用大的东西，不善于发挥事物的“大”的功用。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1484:v21",
+   "word": "不龟手之药",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "防止手冻裂的药物。龟，同“皲”，皮肤冻裂。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1484:v22",
+   "word": "越有难",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指越人发兵侵吴。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1484:v23",
+   "word": "蓬之心",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "比喻不通达的见识。蓬，一种草，弯曲不直。",
+   "sourceSentence": ""
+  }
+ ]
+}

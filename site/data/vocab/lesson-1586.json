@@ -1,0 +1,508 @@
+{
+ "lessonId": "lesson-1586",
+ "title": "14 * 天文学上的旷世之争/ 关增建",
+ "mode": "science",
+ "builtAt": "2026-07-14T09:41:17.118Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 34,
+ "inventory": [
+  {
+   "id": "lesson-1586:v01",
+   "word": "旷世",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文章标题核心词，理解其意有助于把握全文论述范围。",
+   "contextMeaning": "当代罕见，隔绝当代。",
+   "sourceSentence": "这就是中国天文学史上著名的浑盖之争。",
+   "type": "contextual-choice",
+   "question": "文中“旷世之争”的“旷世”最恰当的解释是",
+   "options": [
+    "空前绝后",
+    "经历很长时间",
+    "当代罕见，隔绝当代",
+    "规模宏大"
+   ],
+   "answerIndex": 2,
+   "explanation": "旷世指当代没有可以相比的，这里指争论持续时间极长，影响巨大。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 173
+   }
+  },
+  {
+   "id": "lesson-1586:v02",
+   "word": "相形见绌",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用成语，在此语境下表示理论价值的对比。",
+   "contextMeaning": "相比之下显出不足。",
+   "sourceSentence": "但是,从另一个视角来看,宣夜说的重要性就相形见绌了",
+   "type": "substitution",
+   "question": "文中“相形见绌”可以用下列哪个词替换且文意不变？",
+   "options": [
+    "黯然失色",
+    "相去甚远",
+    "捉襟见肘",
+    "大相径庭"
+   ],
+   "answerIndex": 0,
+   "explanation": "相形见绌指跟同类事物相比，显出不足。黯然失色指相形见绌，也指由于失去光彩而黯淡无光，符合语境。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1298
+   }
+  },
+  {
+   "id": "lesson-1586:v03",
+   "word": "绝无师法",
+   "annotated": false,
+   "decision": "question",
+   "reason": "关键引文，理解宣夜说被抛弃的原因。",
+   "contextMeaning": "完全没有传承和规范的教学体系。",
+   "sourceSentence": "宣夜之学,绝无师法",
+   "type": "interpretation",
+   "question": "文中引用蔡邕的话“宣夜之学，绝无师法”，其深层意思是",
+   "options": [
+    "宣夜说没有老师教导",
+    "宣夜说缺乏系统的学说支撑和传承规则",
+    "宣夜说已经被历史淘汰了",
+    "宣夜说是不合逻辑的错误理论"
+   ],
+   "answerIndex": 1,
+   "explanation": "“师法”指师承和法度。这里指宣夜说缺乏系统的论证方法和传承机制，导致无法进一步发展。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1570
+   }
+  },
+  {
+   "id": "lesson-1586:v04",
+   "word": "不绝如缕",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容争论持续状态的常用成语，考查词义理解。",
+   "contextMeaning": "形容声音细微或局面危急，也形容持续不断。",
+   "sourceSentence": "天文学界的争论一直不绝如缕",
+   "type": "contextual-choice",
+   "question": "文中“天文学界的争论一直不绝如缕”中“不绝如缕”的语境义是",
+   "options": [
+    "争论极其激烈，如同断开的丝线",
+    "争论声音极小，几乎听不到",
+    "争论持续不断，延续了很长时间",
+    "争论的内容非常细碎，难以理清"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处用以形容浑盖之争持续了一千多年，未曾间断。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2804
+   }
+  },
+  {
+   "id": "lesson-1586:v05",
+   "word": "软肋",
+   "annotated": false,
+   "decision": "question",
+   "reason": "比喻词，理解文章论证逻辑的转折。",
+   "contextMeaning": "致命弱点。",
+   "sourceSentence": "但是浑天说也有自己的软肋。",
+   "type": "substitution",
+   "question": "文中“浑天说也有自己的软肋”中“软肋”一词，若换成下列词语，最准确的是",
+   "options": [
+    "漏洞",
+    "短板",
+    "错误",
+    "难题"
+   ],
+   "answerIndex": 1,
+   "explanation": "“软肋”指致命的弱点或不足之处，“短板”在逻辑论证中指代理论体系中薄弱的环节。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 3261
+   }
+  },
+  {
+   "id": "lesson-1586:v06",
+   "word": "圭臬",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频文化词汇，考查词义迁移。",
+   "contextMeaning": "准则，标准。",
+   "sourceSentence": "被后人奉为中国古代历法的圭臬的《太初历》",
+   "type": "contextual-choice",
+   "question": "文中“被后人奉为中国古代历法的圭臬的《太初历》”中“圭臬”的意思是",
+   "options": [
+    "典范",
+    "测量工具",
+    "最高成就",
+    "准则"
+   ],
+   "answerIndex": 3,
+   "explanation": "圭臬原指测日影的仪器，后比喻准则、标准。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 5192
+   }
+  },
+  {
+   "id": "lesson-1586:v07",
+   "word": "先验",
+   "annotated": false,
+   "decision": "question",
+   "reason": "哲学概念，对理解文章评价标准的论证非常关键。",
+   "contextMeaning": "先于经验的，不经实践验证的。",
+   "sourceSentence": "而不是看其是否遵循某种先验的哲学观念。",
+   "type": "contextual-choice",
+   "question": "文中“先验的哲学观念”中“先验”的含义是",
+   "options": [
+    "经过长期验证的",
+    "脱离实际观测，先于经验的",
+    "关于天体运行的理论",
+    "古人深信不疑的真理"
+   ],
+   "answerIndex": 1,
+   "explanation": "“先验”指在经验之前，即不依赖于经验观察而预先设定的观念。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 4398
+   }
+  },
+  {
+   "id": "lesson-1586:v08",
+   "word": "趣",
+   "annotated": true,
+   "decision": "question",
+   "reason": "特殊用法，古今异义词。",
+   "contextMeaning": "趋向，奔赴。",
+   "sourceSentence": "由高趣下,归注于海",
+   "type": "usage",
+   "question": "“由高趣下”中“趣”的意思是",
+   "options": [
+    "趣味",
+    "奔赴、趋向",
+    "赶快",
+    "取向"
+   ],
+   "answerIndex": 1,
+   "explanation": "“趣”通“趋”，意为趋向、走向。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 3753
+   }
+  },
+  {
+   "id": "lesson-1586:v09",
+   "word": "眼瞀",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注释，且为特定描述词，不作为重点考查逻辑。",
+   "contextMeaning": "眼睛昏花。",
+   "sourceSentence": "眼瞀精绝",
+   "location": {
+    "charIndex": 718
+   }
+  },
+  {
+   "id": "lesson-1586:v10",
+   "word": "丽天",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注释，为特定天文术语，不影响整体文意理解。",
+   "contextMeaning": "附着于天。",
+   "sourceSentence": "日丽天而平转",
+   "location": {
+    "charIndex": 1826
+   }
+  },
+  {
+   "id": "lesson-1586:v11",
+   "word": "托勒密",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "古罗马帝国时期的天文学家、数学家、地理学家，地心说代表人物。他认为地球居中央不动，日月星辰均环绕地球运行。这一学说在天文学界占统治地位1300 余年之久，后为日心说取代。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v12",
+   "word": "郗萌",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "东汉天文学家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v13",
+   "word": "精绝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "精神尽竭。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v14",
+   "word": "第谷",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "丹麦天文学家。他曾在汶岛的天文台观测天象20 余年。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v15",
+   "word": "李约瑟",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "英国科学家、科学史专家。著有《中国科学技术史》。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v16",
+   "word": "蔡邕",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "字伯喈（jiē），陈留圉（yǔ）（今河南杞县西南）人，东汉文学家、书法家，通经史、音律、天文等。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v17",
+   "word": "周髀算经",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "原名《周髀》，是长期积累编纂而成的数理天文学著作，成书于西汉或更早时期。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v18",
+   "word": "槃",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同“盘”，木盘，古代盛水器皿。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v19",
+   "word": "滂沲",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即“滂沱”，广大的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v20",
+   "word": "四隤",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "四边向下倾斜。，隤下降。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v21",
+   "word": "句股",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "数学名词，即“勾股”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v22",
+   "word": "重差",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "汉代天文学家测望太阳高、远的方法，后发展为中国传统数学主要的测望方法。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v23",
+   "word": "晷影",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "晷表的投影。晷，日晷，测度日影以确定时刻的仪器。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v24",
+   "word": "落下闳",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "西汉天文学家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v25",
+   "word": "邓平",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "西汉天文学家。曾任太史丞。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v26",
+   "word": "扬雄",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "字子云，蜀郡成都（今属四川）人，西汉文学家、哲学家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v27",
+   "word": "桓谭",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "字君山，沛国相（今安徽濉溪西北）人，东汉哲学家、经学家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v28",
+   "word": "王充",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "字仲任，会稽上虞（今属浙江）人，东汉哲学家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v29",
+   "word": "葛洪",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "字稚川，丹阳句容（今属江苏）人，东晋思想家、医学家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v30",
+   "word": "何承天",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "东海（今山东郯城）人，南朝宋思想家、天文学家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v31",
+   "word": "光曜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "光辉照耀。曜，照耀。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v32",
+   "word": "炎炽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "炽热。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v33",
+   "word": "虞喜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "字仲宁，会稽余姚（今属浙江）人，东晋天文学家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v34",
+   "word": "虞耸",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "字世龙，会稽余姚人，西晋天文学家。官至河间相。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v35",
+   "word": "姚信",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "字元直，吴国武康（今浙江德清西）人，三国时期天文学家。曾任太常卿。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v36",
+   "word": "刘焯",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "字士元，信都（今河北冀州）人，隋代经学家、天文学家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v37",
+   "word": "祖暅",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一作祖暅之，字景烁，范阳遒县（今河北涞水）人，南朝梁天文学家、数学家，祖冲之之子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v38",
+   "word": "四维",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "四方。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v39",
+   "word": "漏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "古代计时用的漏壶。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v40",
+   "word": "梁武帝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即萧衍，字叔达，南兰陵（治今江苏常州西北）人，南朝梁的建立者，502—549 年在位。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1586:v41",
+   "word": "一行",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "本名张遂，巨鹿（今属河北）人，唐代天文学家。",
+   "sourceSentence": ""
+  }
+ ]
+}

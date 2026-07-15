@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="把篇目評價、文體掌握度與新學字詞整理成個人的高中語文閱讀圖。">
+  <link rel="icon" href="https://img.bdfz.net/20250503004.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="https://img.bdfz.net/20250503004.webp">
+  <meta name="theme-color" content="#070a14">
+  <title>我的閱讀圖 · 課文</title>
+  <link rel="stylesheet" href="assets/insights.css?v=20260712-galaxy7">
+</head>
+<body>
+  <canvas id="insight-canvas" aria-label="個人閱讀星圖"></canvas>
+  <div class="insight-tooltip" id="insight-tooltip" hidden></div>
+  <header class="insight-nav">
+    <a class="brand" href="./" target="_blank" rel="noopener noreferrer">課文</a>
+    <nav><a href="genres.html" data-same-tab>文體圖譜</a><a href="books.html" data-same-tab>書目星圖</a><a class="active" href="insights.html" data-same-tab>己身</a><a href="./" target="_blank" rel="noopener noreferrer">返回課文</a></nav>
+  </header>
+  <main>
+    <header class="insight-hero">
+      <p>個人 · 細讀 · 成長</p>
+      <h1>我的閱讀圖<span>。</span></h1>
+      <strong id="orbit-summary">尚無閱讀軌跡</strong>
+      <div><span id="sync-status">讀取此裝置的學習記錄</span><a id="auth-link" href="https://my.bdfz.net/#/auth" target="_blank" rel="noopener noreferrer">登入後跨設備保存 ↗</a></div>
+    </header>
+
+    <section class="insight-grid" aria-live="polite">
+      <article class="value-panel">
+        <header><div><span>01</span><h2>篇目價值</h2></div></header>
+        <div id="value-chart" class="value-chart"></div>
+      </article>
+      <article class="mastery-panel">
+        <header><div><span>02</span><h2>文體掌握度</h2></div></header>
+        <div id="mastery-chart" class="mastery-chart"></div>
+      </article>
+      <article class="word-panel">
+        <header><div><span>03</span><h2>新詞星群</h2></div></header>
+        <div id="word-chart" class="word-chart"></div>
+      </article>
+    </section>
+  </main>
+  <dialog id="word-dialog"><form method="dialog"><button aria-label="關閉">×</button></form><span>新詞活用</span><h2 id="word-title"></h2><p id="word-creation"></p><a id="word-lesson" href="./" target="_blank" rel="noopener noreferrer">回到篇目 ↗</a></dialog>
+  <script defer src="https://my.bdfz.net/site-auth.js" data-site-key="yw"></script>
+  <script type="module" src="assets/insights.js?v=20260712-galaxy7"></script>
+</body>
+</html>

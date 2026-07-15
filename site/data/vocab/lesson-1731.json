@@ -1,0 +1,716 @@
+{
+ "lessonId": "lesson-1731",
+ "title": "4 窦娥冤(节选)",
+ "mode": "drama",
+ "builtAt": "2026-07-14T09:27:59.103Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 4900,
+ "annotationCount": 55,
+ "inventory": [
+  {
+   "id": "lesson-1731:v01",
+   "word": "生",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，在此处作副词，表示程度深，极易误解为动词“产生”。",
+   "contextMeaning": "深深地",
+   "sourceSentence": "怎不将天地也生埋怨",
+   "type": "contextual-choice",
+   "question": "「怎不将天地也生埋怨」中「生」字的含义是",
+   "options": [
+    "产生",
+    "生长",
+    "深深地",
+    "生活"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处「生」为副词，相当于「甚」、「深」，修饰「埋怨」。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 159
+   }
+  },
+  {
+   "id": "lesson-1731:v02",
+   "word": "糊突",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词义随语境变化，是理解窦娥指责天地不公的关键。",
+   "contextMeaning": "混淆",
+   "sourceSentence": "可怎生糊突了盗跖、颜渊",
+   "type": "contextual-choice",
+   "question": "「可怎生糊突了盗跖、颜渊」中「糊突」的意思是",
+   "options": [
+    "模糊",
+    "混淆",
+    "糊涂",
+    "忽略"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处指天地未能分辨好人与坏人，故为「混淆」之意。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 203
+   }
+  },
+  {
+   "id": "lesson-1731:v03",
+   "word": "行",
+   "annotated": false,
+   "decision": "question",
+   "reason": "元杂剧高频词，表示处所，学生易误解为动词或名词。",
+   "contextMeaning": "那边",
+   "sourceSentence": "我窦娥向哥哥行有句言",
+   "type": "contextual-choice",
+   "question": "「我窦娥向哥哥行有句言」中「行」的用法是",
+   "options": [
+    "行走",
+    "行列",
+    "那边",
+    "能力"
+   ],
+   "answerIndex": 2,
+   "explanation": "在元杂剧口语中，「行」表示处所，相当于「这边」或「那边」。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 341
+   }
+  },
+  {
+   "id": "lesson-1731:v04",
+   "word": "每",
+   "annotated": true,
+   "decision": "question",
+   "reason": "元杂剧常用虚词，表复数，是阅读元代文学作品的必备知识。",
+   "contextMeaning": "们",
+   "sourceSentence": "这都是官吏每无心正法",
+   "type": "gu-jin",
+   "question": "下列句中「每」字的用法与「这都是官吏每无心正法」相同的一项是",
+   "options": [
+    "每人都要遵守纪律",
+    "每况愈下",
+    "老师们都在忙碌",
+    "百姓每皆受其苦"
+   ],
+   "answerIndex": 3,
+   "explanation": "元曲中「每」常作复数标记，相当于「们」。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1656
+   }
+  },
+  {
+   "id": "lesson-1731:v05",
+   "word": "罚",
+   "annotated": true,
+   "decision": "question",
+   "reason": "通假字/特殊用法，教材注释指出其为“发”的意思，属于高频考点。",
+   "contextMeaning": "发",
+   "sourceSentence": "不是我窦娥罚下这等无头愿",
+   "type": "substitution",
+   "question": "「不是我窦娥罚下这等无头愿」中「罚」字若替换为现代汉语，最恰当的是",
+   "options": [
+    "惩罚",
+    "发",
+    "强迫",
+    "决定"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处「罚」通「发」，意为发出、许下。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1257
+   }
+  },
+  {
+   "id": "lesson-1731:v06",
+   "word": "湛湛",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容词，描写意象，影响对窦娥心理和环境理解的关键。",
+   "contextMeaning": "清明澄澈",
+   "sourceSentence": "也不见得湛湛青天",
+   "type": "contextual-choice",
+   "question": "「也不见得湛湛青天」中「湛湛」形容的是",
+   "options": [
+    "深蓝色的天空",
+    "阴暗的天空",
+    "清明澄澈的天空",
+    "广阔无边的天空"
+   ],
+   "answerIndex": 2,
+   "explanation": "「湛湛」形容天理昭彰，清明澄澈。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1289
+   }
+  },
+  {
+   "id": "lesson-1731:v07",
+   "word": "题",
+   "annotated": true,
+   "decision": "question",
+   "reason": "通假字，教材中注释为“提”，如果不理解会影响句意理解。",
+   "contextMeaning": "提",
+   "sourceSentence": "三桩儿誓愿明题遍",
+   "type": "contextual-choice",
+   "question": "「三桩儿誓愿明题遍」中的「题」字意思是",
+   "options": [
+    "题目",
+    "写下",
+    "提及",
+    "提"
+   ],
+   "answerIndex": 3,
+   "explanation": "「题」通「提」，指提及、说出。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1735
+   }
+  },
+  {
+   "id": "lesson-1731:v08",
+   "word": "则是",
+   "annotated": true,
+   "decision": "question",
+   "reason": "元曲常用词，易误解为现代汉语的“就是”，实为表祈使或限定语气。",
+   "contextMeaning": "只当是",
+   "sourceSentence": "则是看你死的孩儿面上",
+   "type": "contextual-choice",
+   "question": "「则是看你死的孩儿面上」中「则是」的意思是",
+   "options": [
+    "就是",
+    "只当是",
+    "只有",
+    "总是"
+   ],
+   "answerIndex": 1,
+   "explanation": "在元曲中，「则是」常用于祈使句，有「只求」、「只当是」的意思。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 864
+   }
+  },
+  {
+   "id": "lesson-1731:v09",
+   "word": "着",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，且在戏曲中用法单一，属于基础常识。",
+   "contextMeaning": "命令",
+   "sourceSentence": "今日处决犯人,着做公的把住巷口",
+   "location": {
+    "charIndex": 34
+   }
+  },
+  {
+   "id": "lesson-1731:v10",
+   "word": "科",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "戏曲术语，教材注释详尽，学生易于识记。",
+   "contextMeaning": "古代戏曲剧本中指示角色动作、表情的用语",
+   "sourceSentence": "鼓三通、锣三下科",
+   "location": {
+    "charIndex": 64
+   }
+  },
+  {
+   "id": "lesson-1731:v11",
+   "word": "没来由",
+   "annotated": false,
+   "decision": "question",
+   "reason": "元杂剧高频词，意为“无缘无故”，对于理解窦娥的冤屈情绪至关重要。",
+   "contextMeaning": "无缘无故",
+   "sourceSentence": "没来由犯王法",
+   "type": "contextual-choice",
+   "question": "「没来由犯王法」中「没来由」的意思是",
+   "options": [
+    "没有原因",
+    "无缘无故",
+    "没有理由",
+    "没头没脑"
+   ],
+   "answerIndex": 1,
+   "explanation": "「没来由」是元曲常用语，表示无缘无故、莫名其妙。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 126
+   }
+  },
+  {
+   "id": "lesson-1731:v12",
+   "word": "只合",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言与口语结合词，表示“应该”，在文中是窦娥对天地职能的判断。",
+   "contextMeaning": "应该",
+   "sourceSentence": "天地也!只合把清浊分辨",
+   "type": "contextual-choice",
+   "question": "「只合把清浊分辨」中「只合」的意思是",
+   "options": [
+    "只能",
+    "只要求",
+    "应该",
+    "只管"
+   ],
+   "answerIndex": 2,
+   "explanation": "「只合」意为「应该」，体现了窦娥对天地的道德期待。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 191
+   }
+  },
+  {
+   "id": "lesson-1731:v13",
+   "word": "选自关汉卿戏剧集人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《关汉卿戏剧集》（人民文学出版社1976 年版）。关汉卿（约1230—约1300），号已斋叟，大都（今北京）人，元代戏曲作家。代表作有杂剧《窦娥冤》《救风尘》《望江亭》《鲁斋郎》《拜月亭》《调风月》《单刀会》等。《窦娥冤》是元杂剧的代表性作品，共四折，这里选的是第三折。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v14",
+   "word": "外",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "“外末”的简称，传统戏曲中男性角色名。意思是正角之外的次要角色。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v15",
+   "word": "做公的",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "公人，官府里的公差。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v16",
+   "word": "净",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "角色名，俗称“花脸”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v17",
+   "word": "磨旗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "摇旗。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v18",
+   "word": "正旦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "传统戏曲中的女主角。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v19",
+   "word": "行动些",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "走快些。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v20",
+   "word": "正宫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "宫调之一。宫调，我国古代音乐以宫、商、角（jué）、变徵（zhǐ）、徵、羽、变宫为七声，以其中任何一声为主，均可构成一种调式，凡以宫声为主的调式称“宫”，以其他各声为主的称“调”，合称“宫调”。杂剧的每一折，由同一宫调的若干曲牌联成一套曲子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v21",
+   "word": "端正好",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "和下文的“滚绣球”“倘秀才”等都是曲牌名。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v22",
+   "word": "不提防遭刑宪",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "没防备触犯刑律。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v23",
+   "word": "怎不将天地也生埋怨",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "怎么不把天地呀深深地埋怨。生，甚、深。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v24",
+   "word": "可怎生糊突了盗跖颜渊",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "可是怎么混淆了坏人和好人？糊突，同“糊涂”，这里是“混淆”的意思。跖，传说是春秋末年奴隶起义的首领，过去被诬称为“盗跖”。颜渊，孔子弟子，被推崇为“复圣”。盗跖、颜渊，这里泛指坏人和好人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v25",
+   "word": "错勘",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "错误地判断。勘，审问。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v26",
+   "word": "纽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同“扭”。这里是“拘束”的意思。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v27",
+   "word": "前合后偃",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是前倾后仰，站不稳。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v28",
+   "word": "哥哥行",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "哥哥那边。哥哥，对一般男子的客气称呼。行，表示处所。宋代和元代口语里自称或者称呼别人的词的后边，有时加“行”字，意思大致相当于“这边”“那边”或者“这里”“那里”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v29",
+   "word": "上朝取应",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "进京考试。取应，参加科举考试。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v30",
+   "word": "餐刀",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "吃刀，挨刀。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v31",
+   "word": "也么哥",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "元明戏曲中常用的衬词，无义。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v32",
+   "word": "卜儿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "元杂剧中的老年妇女角色。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v33",
+   "word": "兀的",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这，这个。与“不”连用，表示反问，如同说“这岂不”“怎的不”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v34",
+   "word": "咱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "语气助词，表示祈使。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v35",
+   "word": "冬时年节月一十五",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "冬至和过年，初一和十五。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v36",
+   "word": "瀽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "泼，倒。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v37",
+   "word": "陌",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "量词，用于祭奠时所烧的纸钱，相当于“叠”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v38",
+   "word": "念窦娥葫芦提当罪愆",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "可怜我窦娥被官府糊里糊涂地判了死罪。葫芦提，当时的口语，“糊里糊涂”的意思。愆，罪过。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v39",
+   "word": "干家缘",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "操劳家务。家缘，家务。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v40",
+   "word": "烈",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "烧。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v41",
+   "word": "荐",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "祭奠。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v42",
+   "word": "不明不暗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "糊里糊涂。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v43",
+   "word": "白练",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "白色熟绢。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v44",
+   "word": "旗枪",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "旗杆头。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v45",
+   "word": "者",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "语气助词，用于句末，表示祈使。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v46",
+   "word": "打甚么不紧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "有什么要紧。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v47",
+   "word": "站",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这里指让窦娥站着。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v48",
+   "word": "也不见得湛湛青天",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "也显不出天理昭彰。湛湛，清明澄澈。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v49",
+   "word": "红尘洒",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "洒在土地上。红尘，土地。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v50",
+   "word": "苌弘化碧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "苌弘是周朝的贤臣。相传他无罪被杀，他的血被蜀人藏起来，三年后变成了碧玉。碧，青绿色的美玉。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v51",
+   "word": "望帝啼鹃",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "望帝是古代传说中蜀王杜宇的称号。相传他因水灾让位给他的臣子，自己隐居山中，死后化为杜鹃，日夜悲啼，直到吐血。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v52",
+   "word": "天道",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "天气。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v53",
+   "word": "暄",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "炎热。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v54",
+   "word": "飞霜六月因邹衍",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "邹衍是战国时燕国的臣子。相传他遭谗言被囚禁，入狱时仰天大哭，当时正当夏天，竟然下起霜来。后来常用“六月飞霜”来表示冤狱。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v55",
+   "word": "六出冰花",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指雪花。雪的结晶体一般有六瓣，所以说“六出”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v56",
+   "word": "素车白马",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指送葬的车马。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v57",
+   "word": "断送出",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "发送往。断送，发送，指殡葬。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v58",
+   "word": "楚州",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "州名，治所在山阳（今江苏淮安）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v59",
+   "word": "亢旱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "大旱。亢，极。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v60",
+   "word": "东海曾经孝妇冤",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "此事见于《说苑·贵德》《汉书·于定国传》等，记东海孝妇蒙冤被杀，郡中大旱三年。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1731:v61",
+   "word": "内",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指后台。",
+   "sourceSentence": ""
+  }
+ ]
+}

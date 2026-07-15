@@ -1,0 +1,263 @@
+{
+ "lessonId": "lesson-1561",
+ "title": "4 * 望海潮(东南形胜)/ 柳永",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:37:45.360Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 2690,
+ "annotationCount": 0,
+ "inventory": [
+  {
+   "id": "lesson-1561:v01",
+   "word": "形胜",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已有註釋，且為理解詩歌背景的關鍵詞，不需重複命題",
+   "contextMeaning": "地理形势优越",
+   "sourceSentence": "东南形胜,三吴都会,钱塘自古繁华",
+   "location": {
+    "charIndex": 108
+   }
+  },
+  {
+   "id": "lesson-1561:v02",
+   "word": "都会",
+   "annotated": false,
+   "decision": "question",
+   "reason": "核心詞彙，影響對杭州城市地位的理解",
+   "contextMeaning": "大都市，繁华的中心城市",
+   "sourceSentence": "东南形胜,三吴都会,钱塘自古繁华",
+   "type": "contextual-choice",
+   "question": "「东南形胜,三吴都会,钱塘自古繁华」中「都会」的意思是",
+   "options": [
+    "大都市",
+    "聚会的地方",
+    "都城",
+    "繁华的街道"
+   ],
+   "answerIndex": 0,
+   "explanation": "「都会」在此處指人口稠密、商業繁榮的中心城市。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 108
+   }
+  },
+  {
+   "id": "lesson-1561:v03",
+   "word": "参差",
+   "annotated": false,
+   "decision": "question",
+   "reason": "描寫景物特徵的關鍵詞，易誤解為整齊排列",
+   "contextMeaning": "错落有致，形容房屋高低不齐",
+   "sourceSentence": "烟柳画桥,风帘翠幕,参差十万人家",
+   "type": "contextual-choice",
+   "question": "「烟柳画桥,风帘翠幕,参差十万人家」中「参差」的意思是",
+   "options": [
+    "整齐排列",
+    "错落有致",
+    "参差不齐，指稀疏",
+    "杂乱无章"
+   ],
+   "answerIndex": 1,
+   "explanation": "「参差」在此處形容十萬人家房屋錯落有致，展現繁華景象。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 125
+   }
+  },
+  {
+   "id": "lesson-1561:v04",
+   "word": "云树",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已有註釋",
+   "contextMeaning": "高耸入云的树木",
+   "sourceSentence": "云树绕堤沙,怒涛卷霜雪,天堑无涯",
+   "location": {
+    "charIndex": 142
+   }
+  },
+  {
+   "id": "lesson-1561:v05",
+   "word": "天堑",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已有註釋",
+   "contextMeaning": "天然壕沟",
+   "sourceSentence": "云树绕堤沙,怒涛卷霜雪,天堑无涯",
+   "location": {
+    "charIndex": 142
+   }
+  },
+  {
+   "id": "lesson-1561:v06",
+   "word": "市",
+   "annotated": false,
+   "decision": "question",
+   "reason": "名詞活用作動詞，影響句法理解",
+   "contextMeaning": "市场",
+   "sourceSentence": "市列珠玑,户盈罗绮,竞豪奢",
+   "type": "contextual-choice",
+   "question": "「市列珠玑,户盈罗绮,竞豪奢」中「市」的意思是",
+   "options": [
+    "城市",
+    "集市、市场",
+    "陈列",
+    "买卖"
+   ],
+   "answerIndex": 1,
+   "explanation": "「市」在此處作名詞，指市場，後面「列」才是謂語。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 159
+   }
+  },
+  {
+   "id": "lesson-1561:v07",
+   "word": "盈",
+   "annotated": false,
+   "decision": "question",
+   "reason": "描寫狀態的動詞，影響句意理解",
+   "contextMeaning": "充满",
+   "sourceSentence": "市列珠玑,户盈罗绮,竞豪奢",
+   "type": "contextual-choice",
+   "question": "「市列珠玑,户盈罗绮,竞豪奢」中「盈」的意思是",
+   "options": [
+    "充满",
+    "盈余",
+    "盈亏",
+    "盈利"
+   ],
+   "answerIndex": 0,
+   "explanation": "「盈」在此處為動詞，形容家家戶戶都充滿了綾羅綢緞，表現富庶。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 159
+   }
+  },
+  {
+   "id": "lesson-1561:v08",
+   "word": "叠𪩘",
+   "annotated": false,
+   "decision": "question",
+   "reason": "特殊生僻字，且為描寫西湖地貌的關鍵詞",
+   "contextMeaning": "重叠的山峰",
+   "sourceSentence": "重湖叠𪩘清嘉,有三秋桂子,十里荷花",
+   "type": "contextual-choice",
+   "question": "「重湖叠𪩘清嘉」中「叠𪩘」的意思是",
+   "options": [
+    "重叠的云雾",
+    "重叠的山峰",
+    "重叠的屋檐",
+    "重叠的浪花"
+   ],
+   "answerIndex": 1,
+   "explanation": "「𪩘」指小山，在此處形容西湖周圍群山重疊。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 174
+   }
+  },
+  {
+   "id": "lesson-1561:v09",
+   "word": "清嘉",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容詞組合，影響對景物特徵的理解",
+   "contextMeaning": "清秀且美好",
+   "sourceSentence": "重湖叠𪩘清嘉,有三秋桂子,十里荷花",
+   "type": "contextual-choice",
+   "question": "「重湖叠𪩘清嘉」中「清嘉」的意思是",
+   "options": [
+    "清澈美好",
+    "清冷高雅",
+    "清静幽雅",
+    "清秀且美好"
+   ],
+   "answerIndex": 3,
+   "explanation": "「清」指清秀，「嘉」指美好，形容景色清秀美好。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 174
+   }
+  },
+  {
+   "id": "lesson-1561:v10",
+   "word": "三秋",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已有註釋",
+   "contextMeaning": "农历九月",
+   "sourceSentence": "重湖叠𪩘清嘉,有三秋桂子,十里荷花",
+   "location": {
+    "charIndex": 174
+   }
+  },
+  {
+   "id": "lesson-1561:v11",
+   "word": "泛",
+   "annotated": false,
+   "decision": "question",
+   "reason": "動詞，影響對動態意境的理解",
+   "contextMeaning": "飘荡、回荡",
+   "sourceSentence": "羌管弄晴,菱歌泛夜,嬉嬉钓叟莲娃",
+   "type": "contextual-choice",
+   "question": "「羌管弄晴,菱歌泛夜」中「泛」的意思是",
+   "options": [
+    "漂浮",
+    "泛滥",
+    "飘荡、回荡",
+    "泛指"
+   ],
+   "answerIndex": 2,
+   "explanation": "「泛」在此處形容歌聲在夜空中飄蕩、迴旋。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 193
+   }
+  },
+  {
+   "id": "lesson-1561:v12",
+   "word": "高牙",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已有註釋",
+   "contextMeaning": "牙旗，借指孙何",
+   "sourceSentence": "千骑拥高牙,乘醉听箫鼓,吟赏烟霞",
+   "location": {
+    "charIndex": 210
+   }
+  },
+  {
+   "id": "lesson-1561:v13",
+   "word": "图",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已有註釋",
+   "contextMeaning": "描绘",
+   "sourceSentence": "异日图将好景,归去凤池夸",
+   "location": {
+    "charIndex": 227
+   }
+  },
+  {
+   "id": "lesson-1561:v14",
+   "word": "将",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已有註釋，且為語法助詞",
+   "contextMeaning": "助词，用于动词之后，无实义",
+   "sourceSentence": "异日图将好景,归去凤池夸",
+   "location": {
+    "charIndex": 227
+   }
+  }
+ ]
+}

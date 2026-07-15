@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="五冊高中語文教材文體譜系：從詩歌、散文、小說、戲劇到中國古代文體的多層關係。">
+  <link rel="icon" href="https://img.bdfz.net/20250503004.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="https://img.bdfz.net/20250503004.webp">
+  <link rel="stylesheet" href="assets/atlas.css?v=20260712-galaxy7">
+  <title>文體星系 · 課文</title>
+</head>
+<body data-atlas="genres">
+  <canvas id="atlas-canvas" aria-label="五冊教材文體關係圖"></canvas>
+  <div class="atlas-tooltip" id="atlas-tooltip" hidden></div>
+  <header class="atlas-topbar">
+    <a class="atlas-wordmark" href="./" target="_blank" rel="noopener noreferrer"><b>課文</b><span>YW · BDFZ</span></a>
+    <nav><a class="active" href="genres.html" data-same-tab>文體星系</a><a href="books.html" data-same-tab>書目星圖</a><a href="insights.html" data-same-tab>己身</a><a href="./" target="_blank" rel="noopener noreferrer">返回課文</a></nav>
+  </header>
+  <section class="atlas-intro">
+    <p>五冊教材 · 多重文體譜系</p>
+    <h1>文體星系<span>。</span></h1>
+    <strong><b id="stat-primary">—</b> 個文體節點，從形制、時代與表達方式看清一篇文章站在哪裡。</strong>
+    <div class="atlas-search"><span>⌕</span><input id="atlas-search" type="search" placeholder="搜尋文體或篇目"></div>
+    <div class="atlas-filters" id="atlas-filters"></div>
+  </section>
+  <aside class="atlas-detail" id="atlas-detail" aria-live="polite" hidden>
+    <button id="detail-close" type="button" aria-label="關閉詳情">×</button>
+    <p id="detail-kicker">文體</p>
+    <h2 id="detail-title"></h2>
+    <div id="detail-description"></div>
+    <div class="detail-lessons" id="detail-lessons"></div>
+  </aside>
+  <div class="atlas-hint">拖動旋轉 · Shift 拖動平移 · 滾輪／雙指縮放 · 點按聚焦 · 雙擊復位</div>
+  <script defer src="https://my.bdfz.net/site-auth.js" data-site-key="yw"></script>
+  <script type="module" src="assets/atlas.js?v=20260712-galaxy7"></script>
+</body>
+</html>

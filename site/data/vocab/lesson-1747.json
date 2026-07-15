@@ -1,0 +1,842 @@
+{
+ "lessonId": "lesson-1747",
+ "title": "13 林教头风雪山神庙",
+ "mode": "fiction",
+ "builtAt": "2026-07-14T09:28:40.156Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 7744,
+ "annotationCount": 78,
+ "inventory": [
+  {
+   "id": "lesson-1747:v01",
+   "word": "结果",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，现代汉语多指结局，文中有“杀死”之意，易误解",
+   "contextMeaning": "杀死",
+   "sourceSentence": "好歹要结果他性命。",
+   "type": "gu-jin",
+   "question": "“好歹要结果他性命”中“结果”的含义与下列哪项相同？",
+   "options": [
+    "经过长期努力，终于有了好的结果。",
+    "他因为多次违纪，被学校严肃处理，最后被开除学籍。",
+    "这件事情的最终结果，还需要相关部门进一步调查。",
+    "他心狠手辣，竟然想把那个人结果了。"
+   ],
+   "answerIndex": 3,
+   "explanation": "文中“结果”意为结束生命，选项3符合此意。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1380
+   }
+  },
+  {
+   "id": "lesson-1747:v02",
+   "word": "不尴尬",
+   "annotated": true,
+   "decision": "question",
+   "reason": "词义古今差异极大，现代指难堪，文中指行为不正当",
+   "contextMeaning": "鬼鬼祟祟，行为、态度不正常",
+   "sourceSentence": "这两个人来得不尴尬。",
+   "type": "contextual-choice",
+   "question": "文中“这两个人来得不尴尬”中“不尴尬”的意思是",
+   "options": [
+    "不觉得难堪",
+    "行为反常，鬼鬼祟祟",
+    "不感到羞耻",
+    "身体不适，行动迟缓"
+   ],
+   "answerIndex": 1,
+   "explanation": "结合语境，两人行踪诡秘，故“不尴尬”指行为反常。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1055
+   }
+  },
+  {
+   "id": "lesson-1747:v03",
+   "word": "将",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，在文中高频出现且意义不同，考查语境推断能力",
+   "contextMeaning": "拿",
+   "sourceSentence": "那个人将出一两银子与李小二道",
+   "type": "usage",
+   "question": "下列句中加点“将”字的用法与“那个人将出一两银子”中的“将”字意义相同的一项是",
+   "options": [
+    "林冲把花枪挑了酒葫芦，将火炭盖了。",
+    "林冲又来对李小二道：‘今日又无事。’",
+    "将近黄昏，天色暗了下来。",
+    "将军领兵出征，势不可挡。"
+   ],
+   "answerIndex": 0,
+   "explanation": "选项0的“将”均为“拿、取”之意，与原句一致。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 706
+   }
+  },
+  {
+   "id": "lesson-1747:v04",
+   "word": "消耗",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，现代指损耗，文中指消息、动静",
+   "contextMeaning": "消息",
+   "sourceSentence": "街上寻了三五日,不见消耗,林冲也自心下慢了",
+   "type": "gu-jin",
+   "question": "“不见消耗”中“消耗”的含义是",
+   "options": [
+    "损耗，减损",
+    "消费，使用",
+    "消息，动静",
+    "消失，不见"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中指林冲寻找陆虞候等人，却没打听到他们的消息。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2028
+   }
+  },
+  {
+   "id": "lesson-1747:v05",
+   "word": "吃",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言用法，文中作为被动标志，考查对特殊句式的理解",
+   "contextMeaning": "被",
+   "sourceSentence": "林冲今番直吃我们对付了",
+   "type": "usage",
+   "question": "“林冲今番直吃我们对付了”中的“吃”字用法与下列哪项相同？",
+   "options": [
+    "他吃了一碗饭。",
+    "这回可真吃他害苦了。",
+    "吃不消，还是休息一下吧。",
+    "你要是再吃惊，心跳就太快了。"
+   ],
+   "answerIndex": 1,
+   "explanation": "文中“吃”表示被动，相当于“被”。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 3929
+   }
+  },
+  {
+   "id": "lesson-1747:v06",
+   "word": "抬举",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词义语境化，指“关照、提拔”，现代汉语多指过分恭维",
+   "contextMeaning": "关照，提拔",
+   "sourceSentence": "柴大官人面皮,不曾抬举得你",
+   "type": "contextual-choice",
+   "question": "文中“柴大官人面皮，不曾抬举得你”中“抬举”的意思是",
+   "options": [
+    "恭维，吹捧",
+    "举起，抬起",
+    "看重，关照",
+    "教训，惩戒"
+   ],
+   "answerIndex": 2,
+   "explanation": "根据上下文，管营因为柴进的面子，所以要给林冲安排好差事，故为关照之意。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2082
+   }
+  },
+  {
+   "id": "lesson-1747:v07",
+   "word": "不合",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注，理解即通，无需出题。",
+   "contextMeaning": "不该",
+   "sourceSentence": "后来不合偷了店主人家钱财",
+   "location": {
+    "charIndex": 48
+   }
+  },
+  {
+   "id": "lesson-1747:v08",
+   "word": "但",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "高频虚词，文意清晰，不做命题。",
+   "contextMeaning": "只要",
+   "sourceSentence": "但有衣服,便拿来家里浆洗缝补",
+   "location": {
+    "charIndex": 483
+   }
+  },
+  {
+   "id": "lesson-1747:v09",
+   "word": "摸不着",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "口语化的习语，侧重人物性格刻画，无需命题。",
+   "contextMeaning": "动不动",
+   "sourceSentence": "林教头是个性急的人,摸不着便要杀人放火",
+   "location": {
+    "charIndex": 1205
+   }
+  },
+  {
+   "id": "lesson-1747:v10",
+   "word": "常例钱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "文化词汇，教材注释明确，无需出题。",
+   "contextMeaning": "按惯例送的钱，勒索名目",
+   "sourceSentence": "有些常例钱取觅",
+   "location": {
+    "charIndex": 2122
+   }
+  },
+  {
+   "id": "lesson-1747:v11",
+   "word": "酒生儿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "酒店里的伙计。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v12",
+   "word": "主张陪话",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "出头做主，为他说好话。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v13",
+   "word": "赍发",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "资助。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v14",
+   "word": "于路",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "沿路。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v15",
+   "word": "迤逦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "缓慢前行，这里有颠沛流离的意思。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v16",
+   "word": "过卖",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "堂倌，酒食店里招待顾客的伙计。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v17",
+   "word": "汁水",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "羹汤之类。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v18",
+   "word": "营前",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指牢城营前面。牢城，收管发配囚犯的地方。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v19",
+   "word": "恶了高太尉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "触怒了高太尉。恶，冒犯、触怒。高太尉，指殿帅府太尉高俅。太尉，官名，属于高级武官。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v20",
+   "word": "刺配",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "脸上刺字，发往远地充军。刺，古时的肉刑，在罪犯额面或肌肤上刺字，用墨染上颜色。配，发往远地充军。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v21",
+   "word": "管",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "看守。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v22",
+   "word": "恁地",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "如此，这样。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v23",
+   "word": "管待",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "款待，招待。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v24",
+   "word": "将出",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "拿出。将，拿。下文“将来”“将汤”的“将”也是“拿”的意思。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v25",
+   "word": "馔",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "饭食。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v26",
+   "word": "管营",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "看管牢城营的官吏。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v27",
+   "word": "差拨",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "管牢狱囚犯的公差。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v28",
+   "word": "讲了礼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "行了礼。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v29",
+   "word": "劝盘",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "敬酒时放酒杯的托盘。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v30",
+   "word": "把了盏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "敬了酒。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v31",
+   "word": "汤桶",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "热水桶。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v32",
+   "word": "按酒",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "下酒的菜。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v33",
+   "word": "伴当",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "随从的仆役。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v34",
+   "word": "呐",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这里指小声说。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v35",
+   "word": "干碍",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "关涉，妨害。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v36",
+   "word": "不省得",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不明白。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v37",
+   "word": "物事",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "东西。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v38",
+   "word": "好歹",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不管怎样，无论如何。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v39",
+   "word": "下饭",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指佐餐的菜肴。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v40",
+   "word": "转背",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "离开，离去。这里指管营等离开。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v41",
+   "word": "却才",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "刚才。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v42",
+   "word": "五短身材",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指身躯和四肢都短小。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v43",
+   "word": "紫棠色",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "黑里带红的颜色。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v44",
+   "word": "泼贱贼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "歹毒无赖的奸贼。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v45",
+   "word": "解腕尖刀",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "日常应用的一种小佩刀。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v46",
+   "word": "团团",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "到处。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v47",
+   "word": "慢",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "轻忽，松懈。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v48",
+   "word": "点视厅",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "点验犯人的大厅。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v49",
+   "word": "大军草料场",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "存放军用草料的场子。北宋时，沧州靠近宋辽边境，驻扎军队，所以有草料场。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v50",
+   "word": "交割",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "办交接手续。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v51",
+   "word": "好似",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "好于，胜过。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v52",
+   "word": "使钱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "行贿。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v53",
+   "word": "那工夫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "抽空儿。那，同“挪”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v54",
+   "word": "投",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "往，去。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v55",
+   "word": "彤云",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "浓云。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v56",
+   "word": "仓廒",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "粮仓。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v57",
+   "word": "向火",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "烤火。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v58",
+   "word": "官司封记",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "官家的封条。官司，旧时对官吏和政府的泛称。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v59",
+   "word": "点见",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "查点检视。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v60",
+   "word": "市井",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "市镇。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v61",
+   "word": "被卧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "被褥。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v62",
+   "word": "碎琼乱玉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "比喻地上的雪。琼，美玉。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v63",
+   "word": "顶礼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "敬礼，致敬。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v64",
+   "word": "庇祐",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "保佑。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v65",
+   "word": "草帚儿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "当酒旗用的草把。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v66",
+   "word": "接风",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "设宴接待远方来的客人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v67",
+   "word": "上盖",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "上身的外衣。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v68",
+   "word": "立地",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "站着。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v69",
+   "word": "端的",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "的确，确实。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v70",
+   "word": "这番张教头没得推故了",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这一回，张教头没有理由推托了。张教头，林冲的岳父。推故，指林冲充军以后，高衙内（高俅的干儿子，“衙内”是宋元时代对官家子弟的称呼）几次威逼林冲的妻子嫁他，张教头总推托说：“女婿会回来同女儿团聚。”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v71",
+   "word": "今番直吃我们对付了",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这回可真被我们收拾了。吃，被。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v72",
+   "word": "央浼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "恳求，请托。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v73",
+   "word": "可怜见",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即“可怜”，同情、怜悯。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v74",
+   "word": "搠",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "扎，刺。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v75",
+   "word": "阁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "放置。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v76",
+   "word": "剜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "挖。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v77",
+   "word": "搭膊",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一种布制的长带，中间有个袋，可以束在腰间。又称“搭包”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v78",
+   "word": "选自契诃夫短篇小说选",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《契诃夫短篇小说选》（中国青年出版社1955年版）。汝龙译。有删改。这篇小说借中学教师布尔金（即文中的“我”）同兽医伊凡·伊凡尼奇的谈话叙述别里科夫的故事。课文保留了谈话的大部分内容。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v79",
+   "word": "谢德林",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "俄国讽刺作家，革命民主主义者。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v80",
+   "word": "五等文官",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "当时沙皇俄国文官分十四等，这是官级较高的一等。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1747:v81",
+   "word": "促狭鬼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "爱捉弄人的人。",
+   "sourceSentence": ""
+  }
+ ]
+}

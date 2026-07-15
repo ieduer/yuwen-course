@@ -1,0 +1,405 @@
+{
+ "lessonId": "lesson-1485",
+ "title": "7 * 兼爱/《墨子》",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:33:11.435Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 6566,
+ "annotationCount": 18,
+ "inventory": [
+  {
+   "id": "lesson-1485:v01",
+   "word": "治",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多義詞，在文中既作動詞（治理），又作名詞（亂象的對立面），影響句意理解",
+   "contextMeaning": "治理",
+   "sourceSentence": "圣人以治天下为事者也",
+   "type": "contextual-choice",
+   "question": "下列句中「治」字的意思與其他三項不同的一項是",
+   "options": [
+    "圣人以治天下为事者也",
+    "必知乱之所自起，焉能治之",
+    "若此则天下治",
+    "治乱者何独不然"
+   ],
+   "answerIndex": 2,
+   "explanation": "選項C「天下治」中的治為形容詞，意為「安定、太平」，其他三項均為動詞「治理」。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 114
+   }
+  },
+  {
+   "id": "lesson-1485:v02",
+   "word": "焉",
+   "annotated": true,
+   "decision": "question",
+   "reason": "文言虛詞，在此處作疑問副詞，是理解因果邏輯的關鍵",
+   "contextMeaning": "於是，怎麼",
+   "sourceSentence": "必知乱之所自起,焉能治之",
+   "type": "usage",
+   "question": "對下列句中「焉」字的用法與含義判斷正確的一項是",
+   "options": [
+    "焉能治之（疑問副詞，怎麼）",
+    "积土成山，风雨兴焉（兼詞，於之）",
+    "寒暑易节，始一反焉（句末語氣詞）",
+    "且焉置土石（疑問代詞，哪裡）"
+   ],
+   "answerIndex": 0,
+   "explanation": "文中「焉能治之」意為「怎麼能治理它呢」，屬於疑問副詞用法。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 125
+   }
+  },
+  {
+   "id": "lesson-1485:v03",
+   "word": "攻",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今異義，現代漢語多指進攻，文中指醫治，誤解會導致對比論證失效",
+   "contextMeaning": "治療",
+   "sourceSentence": "譬之如医之攻人之疾者然",
+   "type": "gu-jin",
+   "question": "下列句中加點詞的古今義解釋不正確的一項是",
+   "options": [
+    "医之攻人之疾者然（古：治療；今：進攻）",
+    "虽父之不慈子（古：慈愛；今：慈祥）",
+    "亏父而自利（古：使受損失；今：虧損）",
+    "劝爱人（古：鼓勵；今：勸告）"
+   ],
+   "answerIndex": 1,
+   "explanation": "「慈」在古今漢語中基本含義一致，均為「慈愛」，不屬於古今異義。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 151
+   }
+  },
+  {
+   "id": "lesson-1485:v04",
+   "word": "当",
+   "annotated": true,
+   "decision": "question",
+   "reason": "通假字，若按現代義「應當」理解會導致句法錯誤",
+   "contextMeaning": "嘗試",
+   "sourceSentence": "当察乱何自起",
+   "type": "substitution",
+   "question": "文中「当察乱何自起」的「当」字，與下列哪一項的用法相同？",
+   "options": [
+    "当立者乃公子扶苏",
+    "当察乱何自起",
+    "今当远离",
+    "当之无愧"
+   ],
+   "answerIndex": 1,
+   "explanation": "文中的「当」通「尝」，意為嘗試。選項B為原文，其他選項皆為現代義「應當」或「面對」。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 245
+   }
+  },
+  {
+   "id": "lesson-1485:v05",
+   "word": "亏",
+   "annotated": true,
+   "decision": "question",
+   "reason": "語境義，對於理解墨家「兼愛」與「自愛」對立的論證邏輯至關重要",
+   "contextMeaning": "使受損失",
+   "sourceSentence": "故亏父而自利",
+   "type": "interpretation",
+   "question": "對「故亏父而自利」一句理解正確的是",
+   "options": [
+    "所以父親虧待兒子來讓自己獲利",
+    "所以（子）損害父親的利益來讓自己獲利",
+    "所以父親虧損了財產而自己獲利",
+    "所以（子）在父親身上虧損了而自己獲利"
+   ],
+   "answerIndex": 1,
+   "explanation": "「亏」在此為使動用法，即「使……受損」，主語為「子」。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 278
+   }
+  },
+  {
+   "id": "lesson-1485:v06",
+   "word": "室",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今異義，文中指「家」，與現代指「房間」不同",
+   "contextMeaning": "家",
+   "sourceSentence": "盗爱其室,不爱异室",
+   "type": "contextual-choice",
+   "question": "「盗爱其室，不爱异室」中「室」的意思是",
+   "options": [
+    "房間",
+    "家宅",
+    "宮殿",
+    "內室"
+   ],
+   "answerIndex": 1,
+   "explanation": "結合上下文論證「大夫愛其家」、「諸侯愛其國」，此處「室」指代「家」。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 421
+   }
+  },
+  {
+   "id": "lesson-1485:v07",
+   "word": "具",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假用法，在此處作副詞，影響對總結句的理解",
+   "contextMeaning": "全，都",
+   "sourceSentence": "天下之乱物,具此而已矣",
+   "type": "substitution",
+   "question": "「天下之乱物，具此而已矣」中「具」字的含義，與下列哪項最接近？",
+   "options": [
+    "具體",
+    "具備",
+    "皆",
+    "工具"
+   ],
+   "answerIndex": 2,
+   "explanation": "「具」在此處通「俱」，意為全、都。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 529
+   }
+  },
+  {
+   "id": "lesson-1485:v08",
+   "word": "恶",
+   "annotated": false,
+   "decision": "question",
+   "reason": "特殊虛詞，疑問代詞，易被誤認為「厭惡」",
+   "contextMeaning": "怎麼",
+   "sourceSentence": "恶施不孝",
+   "type": "usage",
+   "question": "下列句子中「恶」字的用法與「恶施不孝」相同的一項是",
+   "options": [
+    "恶在其无礼也",
+    "恶有不善",
+    "君子恶居下流",
+    "恶能无纪"
+   ],
+   "answerIndex": 2,
+   "explanation": "「恶」作疑問代詞，解作「怎麼」。選項C為「厭惡」之意。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 585
+   }
+  },
+  {
+   "id": "lesson-1485:v09",
+   "word": "亡",
+   "annotated": true,
+   "decision": "question",
+   "reason": "通假字，通「無」，影響對反面論證結論的理解",
+   "contextMeaning": "同「无」，沒有",
+   "sourceSentence": "故不孝不慈亡",
+   "type": "substitution",
+   "question": "對「故不孝不慈亡」一句的翻譯，正確的是",
+   "options": [
+    "所以不孝不慈的人滅亡了",
+    "所以不孝不慈的事情就沒有了",
+    "所以不孝不慈的行為逃亡了",
+    "所以不孝不慈的現象依然存在"
+   ],
+   "answerIndex": 1,
+   "explanation": "「亡」通「无」，意為沒有，指不孝不慈的現象消失。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 611
+   }
+  },
+  {
+   "id": "lesson-1485:v10",
+   "word": "劝",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今異義，現代指勸告，文中為鼓勵，是墨家主張的關鍵詞",
+   "contextMeaning": "鼓勵",
+   "sourceSentence": "恶得不禁恶而劝爱",
+   "type": "gu-jin",
+   "question": "「恶得不禁恶而劝爱」中「劝」的意思是",
+   "options": [
+    "勸告",
+    "勸阻",
+    "鼓勵",
+    "建議"
+   ],
+   "answerIndex": 2,
+   "explanation": "「劝」在此處意為鼓勵、推行。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 762
+   }
+  },
+  {
+   "id": "lesson-1485:v11",
+   "word": "慈",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材註釋明確，且詞義相對穩定，理解為「慈愛」即可，無需單獨命題",
+   "contextMeaning": "慈愛",
+   "sourceSentence": "虽父之不慈子",
+   "location": {
+    "charIndex": 321
+   }
+  },
+  {
+   "id": "lesson-1485:v12",
+   "word": "家",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材註釋為「卿大夫的封地」，屬於文化常識，已給出註釋，重點在於區分其與「國」的層級關係，而非字義辨析",
+   "contextMeaning": "卿大夫的封地",
+   "sourceSentence": "大夫之相乱家",
+   "location": {
+    "charIndex": 469
+   }
+  },
+  {
+   "id": "lesson-1485:v13",
+   "word": "交相",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材註釋明確，意為「互相」，為固定搭配，學生易於理解",
+   "contextMeaning": "互相",
+   "sourceSentence": "交相恶则乱",
+   "location": {
+    "charIndex": 780
+   }
+  },
+  {
+   "id": "lesson-1485:v14",
+   "word": "是",
+   "annotated": false,
+   "decision": "question",
+   "reason": "代詞用法，在文言文中頻繁出現，指代前文提到的現象，影響語句連貫性理解",
+   "contextMeaning": "這，此",
+   "sourceSentence": "此所谓乱也",
+   "type": "interpretation",
+   "question": "「此所谓乱也」中「此」指代的是",
+   "options": [
+    "聖人治天下",
+    "臣子之不孝君父",
+    "醫治疾病",
+    "天下之物"
+   ],
+   "answerIndex": 1,
+   "explanation": "根據文意，「此」代指前文提到的「臣子之不孝君父」。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 315
+   }
+  },
+  {
+   "id": "lesson-1485:v15",
+   "word": "以治天下为事",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "把治理天下作为（自己的）事务。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1485:v16",
+   "word": "虽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即使。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1485:v17",
+   "word": "盗贼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "偷窃和劫夺财物的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1485:v18",
+   "word": "乱物",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "纷乱之事。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1485:v19",
+   "word": "具此",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "全都在这里。具，完备、齐全。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1485:v20",
+   "word": "恶施",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "怎么实行。恶，相当于“何”“怎么”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1485:v21",
+   "word": "有",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同“又”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1485:v22",
+   "word": "子墨子",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "墨子的弟子对墨子的尊称。",
+   "sourceSentence": ""
+  }
+ ]
+}

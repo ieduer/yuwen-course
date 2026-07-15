@@ -1,0 +1,1034 @@
+{
+ "lessonId": "lesson-1728",
+ "title": "3 鸿门宴",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:27:48.419Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 6340,
+ "annotationCount": 86,
+ "inventory": [
+  {
+   "id": "lesson-1728:v01",
+   "word": "飨",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，在不同语境下意义不同，此处为犒劳义，是理解项羽意图的关键",
+   "contextMeaning": "犒劳",
+   "sourceSentence": "旦日飨士卒,为击破沛公军",
+   "type": "contextual-choice",
+   "question": "「旦日飨士卒」中「飨」的意思是",
+   "options": [
+    "享用",
+    "犒劳",
+    "祭祀",
+    "款待"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处指项羽准备用酒食犒劳士兵。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 67
+   }
+  },
+  {
+   "id": "lesson-1728:v02",
+   "word": "说",
+   "annotated": true,
+   "decision": "question",
+   "reason": "考查文言文动词的语境义，区别于现代汉语的“说话”",
+   "contextMeaning": "劝说",
+   "sourceSentence": "范增说项羽曰:“沛公居山东时,贪于财货,好美姬",
+   "type": "contextual-choice",
+   "question": "「范增说项羽曰」中「说」的意思是",
+   "options": [
+    "谈论",
+    "责备",
+    "劝说",
+    "解释"
+   ],
+   "answerIndex": 2,
+   "explanation": "范增在向项羽进言，劝其采取行动。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 108
+   }
+  },
+  {
+   "id": "lesson-1728:v03",
+   "word": "幸",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义词，易受现代汉语影响产生误解",
+   "contextMeaning": "宠爱",
+   "sourceSentence": "妇女无所幸,此其志不在小",
+   "type": "gu-jin",
+   "question": "「妇女无所幸」中「幸」的古义是",
+   "options": [
+    "幸运",
+    "宠爱",
+    "临幸",
+    "希望"
+   ],
+   "answerIndex": 1,
+   "explanation": "古文中君主对女子的宠爱称为“幸”。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 142
+   }
+  },
+  {
+   "id": "lesson-1728:v04",
+   "word": "善",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容词活用为动词，是理解人物关系的关键",
+   "contextMeaning": "交好",
+   "sourceSentence": "素善留侯张良。",
+   "type": "contextual-choice",
+   "question": "「素善留侯张良」中「善」的意思是",
+   "options": [
+    "善良",
+    "擅长",
+    "交好",
+    "完美"
+   ],
+   "answerIndex": 2,
+   "explanation": "形容词“善”此处意为“与……友好”。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 197
+   }
+  },
+  {
+   "id": "lesson-1728:v05",
+   "word": "内",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字，考查文言文基本功",
+   "contextMeaning": "接纳",
+   "sourceSentence": "距关,毋内诸侯,’ 秦地可尽王也",
+   "type": "usage",
+   "question": "「毋内诸侯」中「内」的通假字及其本义是",
+   "options": [
+    "通“纳”，接纳",
+    "通“入”，进入",
+    "通“内”，内部",
+    "通“那”，指代"
+   ],
+   "answerIndex": 0,
+   "explanation": "“内”通“纳”，指接纳、让……进入。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 329
+   }
+  },
+  {
+   "id": "lesson-1728:v06",
+   "word": "倍",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字，对理解人物立场非常重要",
+   "contextMeaning": "背弃",
+   "sourceSentence": "愿伯具言臣之不敢倍德也。",
+   "type": "usage",
+   "question": "「臣之不敢倍德也」中「倍」的通假字及其意义是",
+   "options": [
+    "通“背”，背弃",
+    "通“备”，防备",
+    "通“赔”，赔偿",
+    "通“卑”，卑下"
+   ],
+   "answerIndex": 0,
+   "explanation": "“倍”通“背”，指违背、背弃。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《说文解字》"
+   ],
+   "location": {
+    "charIndex": 585
+   }
+  },
+  {
+   "id": "lesson-1728:v07",
+   "word": "蚤",
+   "annotated": true,
+   "decision": "question",
+   "reason": "通假字，影响对时间状语的理解",
+   "contextMeaning": "早",
+   "sourceSentence": "旦日不可不蚤自来谢项王。",
+   "type": "usage",
+   "question": "「旦日不可不蚤自来谢项王」中「蚤」的通假字是",
+   "options": [
+    "通“爪”",
+    "通“早”",
+    "通“造”",
+    "通“燥”"
+   ],
+   "answerIndex": 1,
+   "explanation": "“蚤”通“早”，指时间上提前。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 609
+   }
+  },
+  {
+   "id": "lesson-1728:v08",
+   "word": "郤",
+   "annotated": true,
+   "decision": "question",
+   "reason": "通假字，理解关键情节冲突的词汇",
+   "contextMeaning": "隔阂",
+   "sourceSentence": "令将军与臣有郤。",
+   "type": "usage",
+   "question": "「令将军与臣有郤」中「郤」的通假字及其意义是",
+   "options": [
+    "通“隙”，隔阂",
+    "通“却”，退却",
+    "通“契”，契合",
+    "通“戏”，戏弄"
+   ],
+   "answerIndex": 0,
+   "explanation": "“郤”通“隙”，指嫌隙、隔阂。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 766
+   }
+  },
+  {
+   "id": "lesson-1728:v09",
+   "word": "啖",
+   "annotated": true,
+   "decision": "question",
+   "reason": "动词语境义，展现人物性格（樊哙的粗犷）",
+   "contextMeaning": "吃",
+   "sourceSentence": "拔剑切而啖之。",
+   "type": "contextual-choice",
+   "question": "「拔剑切而啖之」中「啖」的意思是",
+   "options": [
+    "品尝",
+    "吞咽",
+    "吃",
+    "分割"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处描写樊哙豪爽吃肉的动作。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 1231
+   }
+  },
+  {
+   "id": "lesson-1728:v10",
+   "word": "辞",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，考查在反问句中的用法",
+   "contextMeaning": "推辞",
+   "sourceSentence": "卮酒安足辞",
+   "type": "contextual-choice",
+   "question": "「卮酒安足辞」中「辞」的意思是",
+   "options": [
+    "告别",
+    "推辞",
+    "言辞",
+    "责备"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处指拒绝、推辞。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 1263
+   }
+  },
+  {
+   "id": "lesson-1728:v11",
+   "word": "间",
+   "annotated": false,
+   "decision": "question",
+   "reason": "语境义，影响对行军路线和情节发展的理解",
+   "contextMeaning": "秘密地",
+   "sourceSentence": "道芷阳间行。",
+   "type": "contextual-choice",
+   "question": "「道芷阳间行」中「间」的意思是",
+   "options": [
+    "间隔",
+    "中间",
+    "秘密地",
+    "参与"
+   ],
+   "answerIndex": 2,
+   "explanation": "指秘密地、抄小路行走。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 1658
+   }
+  },
+  {
+   "id": "lesson-1728:v12",
+   "word": "督过",
+   "annotated": true,
+   "decision": "question",
+   "reason": "固定词组，体现人物心理和关系",
+   "contextMeaning": "责备",
+   "sourceSentence": "闻大王有意督过之",
+   "type": "interpretation",
+   "question": "「闻大王有意督过之」中「督过」的意思是",
+   "options": [
+    "监督并纠正",
+    "责备",
+    "督促并照顾",
+    "过问"
+   ],
+   "answerIndex": 1,
+   "explanation": "“督过”在文中指责备、惩罚。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 1775
+   }
+  },
+  {
+   "id": "lesson-1728:v13",
+   "word": "节选自史记·项羽本纪",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "节选自《史记·项羽本纪》（中华书局2014 年版）。题目是编者加的。鸿门，地名，在新丰（今陕西临潼东北）。项羽（前232—前202），名籍，字羽，下相（今江苏宿迁）人，秦末起义军领袖。从叔父项梁起兵反秦，后与刘邦争天下，最终失败自杀。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v14",
+   "word": "沛公",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "刘邦（前256—前195），字季，沛县（今属江苏）人，秦末起义军领袖，称“沛公”。后建立西汉王朝，即汉高祖。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v15",
+   "word": "霸上",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "地名，在今陕西西安东。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v16",
+   "word": "左司马",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "官名，将军下面的属官，参掌军政。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v17",
+   "word": "王",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "称王。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v18",
+   "word": "关中",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "函谷关（在今河南灵宝东北）以西，泛指战国末期秦之故地。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v19",
+   "word": "子婴",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "秦朝最后的国君，在位46 天。当时已投降刘邦。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v20",
+   "word": "范增",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "项羽的主要谋士。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v21",
+   "word": "山东",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "崤（xiáo）山以东，泛指东方六国之地。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v22",
+   "word": "望其气",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "观察他的云气（以预测吉凶穷达）。望气是古代方士的一种占候之术，据说“真龙天子”所在的地方，天空中有一种异样的祥云，方士能够看出来。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v23",
+   "word": "失",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指失去时机。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v24",
+   "word": "楚左尹项伯",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "左尹，官名，多以亲贵任之，掌军事。项伯，名缠，字伯。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v25",
+   "word": "季父",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "叔父。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v26",
+   "word": "素善留侯张良",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一向与张良交好。善，交好、友善。张良，字子房，刘邦的主要谋士。刘邦得天下后，封他为留侯。留，地名，在今江苏沛县东南。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v27",
+   "word": "之沛公军",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "到刘邦驻军地。之，往。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v28",
+   "word": "臣为韩王送沛公",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "张良曾任韩王（战国末期韩国贵族，名成，项梁立其为王）司徒。刘邦从洛阳南行，让韩王留守，自己同张良西入武关。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v29",
+   "word": "鲰生",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "浅陋无知的小人。鲰，浅陋、卑微。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v30",
+   "word": "距",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同“拒”，据守。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v31",
+   "word": "毋内诸侯",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不要让诸侯进来。内，同“纳”，接纳。诸侯，指其他率兵攻秦的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v32",
+   "word": "当",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "对等，比得上。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v33",
+   "word": "有故",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "有旧，有交情。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v34",
+   "word": "活之",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "救了他。活，使……活命。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v35",
+   "word": "孰与君少长",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即“与君孰少孰长”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v36",
+   "word": "兄事之",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "用侍奉兄长的礼节对待他。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v37",
+   "word": "要",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同“邀”，邀请。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v38",
+   "word": "奉卮酒为寿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "奉上一杯酒，祝（项伯）健康长寿。卮，酒器。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v39",
+   "word": "婚姻",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "亲家，有婚姻关系的亲戚。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v40",
+   "word": "秋毫不敢有所近",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是财物丝毫不敢据为己有。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v41",
+   "word": "籍吏民",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "造册登记官吏、百姓。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v42",
+   "word": "将军",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指项羽。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v43",
+   "word": "非常",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指意外的变故。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v44",
+   "word": "倍德",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "背弃恩德。倍，同“背”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v45",
+   "word": "谢",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "道歉。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v46",
+   "word": "因",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "趁着（机会）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v47",
+   "word": "从百余骑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "率领一百多人马。从，率领、带领。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v48",
+   "word": "戮力",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "合力。戮，同“勠”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v49",
+   "word": "将军战河北臣战河南",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "秦二世三年（前207），楚怀王命项羽渡黄河救赵，又命刘邦沿黄河南进攻秦。河，黄河。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v50",
+   "word": "意",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "料想。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v51",
+   "word": "亚父",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "项羽对范增的尊称。意思是仅次于父亲。亚，次、次于。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v52",
+   "word": "数",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "屡次，多次。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v53",
+   "word": "目",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "递眼色。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v54",
+   "word": "玉玦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "环形有缺口的佩玉。“玦”与“决”同音，范增用玦暗示项羽要下决心除掉刘邦。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v55",
+   "word": "三",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "多次。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v56",
+   "word": "项庄",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "项羽的堂弟。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v57",
+   "word": "若属",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "你们这些人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v58",
+   "word": "翼蔽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "遮护。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v59",
+   "word": "樊哙",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "刘邦的部下。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v60",
+   "word": "与之同命",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "跟他同生死。意思是要守卫在刘邦身旁，竭力保护他。之，指刘邦。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v61",
+   "word": "交戟之卫士",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "用戟交叉着守卫营门的兵士。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v62",
+   "word": "披帷",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "掀开帷幕。披，分开。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v63",
+   "word": "目眦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "眼眶。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v64",
+   "word": "按剑而跽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "握着剑，挺直身子。这是一种警备的姿势。古人席地而坐，两膝着地，要起身先得挺直上身。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v65",
+   "word": "参乘",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即“骖乘”，古时站在车右陪乘或担任警卫的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v66",
+   "word": "斗卮",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "大酒杯。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v67",
+   "word": "彘肩",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "猪的前腿根部。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v68",
+   "word": "加彘肩上",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "把彘肩放（在盾）上。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v69",
+   "word": "怀王",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "名心，是战国时楚怀王之孙。项梁起兵，立他为王，也称楚怀王。破秦后，项羽尊他为义帝，后来又令人把他杀了。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v70",
+   "word": "细说",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "小人的谗言。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v71",
+   "word": "亡秦之续",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "已亡的秦朝的后继者。意思是蹈秦朝灭亡的覆辙。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v72",
+   "word": "窃为大王不取也",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "私意认为大王不应采用（这种做法）。窃，表示个人意见的谦辞。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v73",
+   "word": "陈平",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "项羽的部下，后来成为刘邦的谋士，是西汉的开国功臣之一。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v74",
+   "word": "刀俎",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "刀和砧板。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v75",
+   "word": "何辞为",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "何必告辞呢？为，语气助词，用于句末，表示反问。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v76",
+   "word": "操",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "拿。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v77",
+   "word": "璧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "平而圆、中心有孔的玉。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v78",
+   "word": "玉斗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一种玉制饮酒器皿。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v79",
+   "word": "谨诺",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "敬语，表示应允、遵命。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v80",
+   "word": "置",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "放弃，丢下。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v81",
+   "word": "夏侯婴靳强纪信",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "三人都是刘邦的部下。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v82",
+   "word": "郦山",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即骊山，在今陕西临潼东南。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v83",
+   "word": "道",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "取道。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v84",
+   "word": "芷阳",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "秦代县名，在今陕西西安东。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v85",
+   "word": "间行",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "秘密地走。间，秘密地。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v86",
+   "word": "度",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "估计。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v87",
+   "word": "不胜杯杓",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "禁不起多喝酒。意思是醉了。胜，承受。杯杓，酒器，借指饮酒。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v88",
+   "word": "再拜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "连拜两次，古代一种较重的礼节。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v89",
+   "word": "大将军",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指范增。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v90",
+   "word": "撞",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "敲击。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1728:v91",
+   "word": "竖子",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "骂人的话，相当于“小子”。",
+   "sourceSentence": ""
+  }
+ ]
+}

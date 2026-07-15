@@ -1,0 +1,360 @@
+{
+ "lessonId": "lesson-1499",
+ "title": "将进酒/李 白",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:33:53.558Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 1543,
+ "annotationCount": 17,
+ "inventory": [
+  {
+   "id": "lesson-1499:v01",
+   "word": "将",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，在题名与正文中义项不同，且为高频虚词",
+   "contextMeaning": "请",
+   "sourceSentence": "将进酒",
+   "type": "contextual-choice",
+   "question": "「将进酒」中「将」的意思是",
+   "options": [
+    "助词，无义",
+    "请",
+    "将要",
+    "带领"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处为汉乐府旧题，将，请也。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "课文注解"
+   ],
+   "location": {
+    "charIndex": 225
+   }
+  },
+  {
+   "id": "lesson-1499:v02",
+   "word": "得意",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，极易被现代汉语中「骄傲自满」的贬义误导",
+   "contextMeaning": "有兴致",
+   "sourceSentence": "人生得意须尽欢",
+   "type": "gu-jin",
+   "question": "「人生得意须尽欢」中「得意」的古义是",
+   "options": [
+    "骄傲自满",
+    "称心如意",
+    "有兴致",
+    "取得成功"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指人生遇上顺心、有兴致的时候。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "课文注解"
+   ],
+   "location": {
+    "charIndex": 166
+   }
+  },
+  {
+   "id": "lesson-1499:v03",
+   "word": "会须",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古汉语特殊词组，影响句意理解",
+   "contextMeaning": "应当",
+   "sourceSentence": "会须一饮三百杯",
+   "type": "substitution",
+   "question": "「会须一饮三百杯」中「会须」可以替换为",
+   "options": [
+    "一定需要",
+    "应当",
+    "能够",
+    "只会"
+   ],
+   "answerIndex": 1,
+   "explanation": "会须，意为应当，表示一种必然的期待。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "课文注解"
+   ],
+   "location": {
+    "charIndex": 208
+   }
+  },
+  {
+   "id": "lesson-1499:v04",
+   "word": "寂寞",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，古义侧重于政治上的不得志，今义侧重于心理感受",
+   "contextMeaning": "不为世所用",
+   "sourceSentence": "古来圣贤皆寂寞",
+   "type": "gu-jin",
+   "question": "「古来圣贤皆寂寞」中「寂寞」一词的含义是",
+   "options": [
+    "孤独冷清",
+    "默默无闻，不为世所用",
+    "无人陪伴",
+    "寂静无声"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处指圣贤才华得不到施展，不被世人所重用。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "课文注解"
+   ],
+   "location": {
+    "charIndex": 266
+   }
+  },
+  {
+   "id": "lesson-1499:v05",
+   "word": "径须",
+   "annotated": false,
+   "decision": "question",
+   "reason": "特殊虚词搭配，影响对诗人狂放态度的理解",
+   "contextMeaning": "直须、应当",
+   "sourceSentence": "径须沽取对君酌",
+   "type": "substitution",
+   "question": "「径须沽取对君酌」中「径须」最恰当的解释是",
+   "options": [
+    "只需",
+    "直接应当",
+    "径直需要",
+    "必须"
+   ],
+   "answerIndex": 1,
+   "explanation": "径须，表示毫不犹豫地去做，即直须、应当。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "课文注解"
+   ],
+   "location": {
+    "charIndex": 308
+   }
+  },
+  {
+   "id": "lesson-1499:v06",
+   "word": "将出",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，在此处作动词性短语，易产生歧义",
+   "contextMeaning": "牵出",
+   "sourceSentence": "呼儿将出换美酒",
+   "type": "contextual-choice",
+   "question": "「呼儿将出换美酒」中「将」的用法是",
+   "options": [
+    "副词，将要",
+    "动词，牵出",
+    "介词，把",
+    "动词，拿出"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处「将」为动词，指牵出（马）或拿出（裘）。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "课文注解"
+   ],
+   "location": {
+    "charIndex": 325
+   }
+  },
+  {
+   "id": "lesson-1499:v07",
+   "word": "销",
+   "annotated": true,
+   "decision": "question",
+   "reason": "一词多义，且为全诗情感落脚点",
+   "contextMeaning": "排遣",
+   "sourceSentence": "与尔同销万古愁",
+   "type": "contextual-choice",
+   "question": "「与尔同销万古愁」中「销」的意思是",
+   "options": [
+    "消失",
+    "消耗",
+    "排遣",
+    "销毁"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指通过饮酒来排遣心中的万古之愁。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "课文注解"
+   ],
+   "location": {
+    "charIndex": 333
+   }
+  },
+  {
+   "id": "lesson-1499:v08",
+   "word": "空",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词类活用，形容词作使动用法，是古诗常见考点",
+   "contextMeaning": "使……空",
+   "sourceSentence": "莫使金樽空对月",
+   "type": "usage",
+   "question": "「莫使金樽空对月」中「空」的用法是",
+   "options": [
+    "形容词，空虚的",
+    "名词，天空",
+    "形容词作动词，使……空",
+    "副词，徒然地"
+   ],
+   "answerIndex": 2,
+   "explanation": "空，此处是形容词作使动，意为使……空着。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 174
+   }
+  },
+  {
+   "id": "lesson-1499:v09",
+   "word": "高堂",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "词义固定，文中指代厅堂，无特殊考查价值",
+   "contextMeaning": "高大的厅堂",
+   "sourceSentence": "君不见高堂明镜悲白发",
+   "location": {
+    "charIndex": 146
+   }
+  },
+  {
+   "id": "lesson-1499:v10",
+   "word": "钟鼓馔玉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "典故性词语，侧重文化理解而非字词考查",
+   "contextMeaning": "富贵生活",
+   "sourceSentence": "钟鼓馔玉不足贵",
+   "location": {
+    "charIndex": 249
+   }
+  },
+  {
+   "id": "lesson-1499:v11",
+   "word": "陈王",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "专有名词，指代曹植，历史背景知识",
+   "contextMeaning": "曹植",
+   "sourceSentence": "陈王昔时宴平乐",
+   "location": {
+    "charIndex": 283
+   }
+  },
+  {
+   "id": "lesson-1499:v12",
+   "word": "平乐",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "地点名称，属于背景知识",
+   "contextMeaning": "宫观名",
+   "sourceSentence": "陈王昔时宴平乐",
+   "location": {
+    "charIndex": 283
+   }
+  },
+  {
+   "id": "lesson-1499:v13",
+   "word": "斗酒十千",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "成语性质，侧重语境描述而非字词本身",
+   "contextMeaning": "酒美而贵",
+   "sourceSentence": "斗酒十千恣欢谑",
+   "location": {
+    "charIndex": 291
+   }
+  },
+  {
+   "id": "lesson-1499:v14",
+   "word": "恣欢谑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "词语结构较为直白，易于理解",
+   "contextMeaning": "尽情地欢乐戏谑",
+   "sourceSentence": "斗酒十千恣欢谑",
+   "location": {
+    "charIndex": 291
+   }
+  },
+  {
+   "id": "lesson-1499:v15",
+   "word": "主人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "指代明确，无歧义",
+   "contextMeaning": "元丹丘",
+   "sourceSentence": "主人何为言少钱",
+   "location": {
+    "charIndex": 300
+   }
+  },
+  {
+   "id": "lesson-1499:v16",
+   "word": "五花马",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "文化词语，注解已详尽",
+   "contextMeaning": "名贵的马",
+   "sourceSentence": "五花马、千金裘",
+   "location": {
+    "charIndex": 317
+   }
+  },
+  {
+   "id": "lesson-1499:v17",
+   "word": "千金裘",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "文化词语，注解已详尽",
+   "contextMeaning": "珍贵的皮衣",
+   "sourceSentence": "五花马、千金裘",
+   "location": {
+    "charIndex": 317
+   }
+  },
+  {
+   "id": "lesson-1499:v18",
+   "word": "儿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "古代称呼，注解已详尽",
+   "contextMeaning": "侍僮",
+   "sourceSentence": "呼儿将出换美酒",
+   "location": {
+    "charIndex": 325
+   }
+  },
+  {
+   "id": "lesson-1499:v19",
+   "word": "愿",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材注为版本异文，非词义考点",
+   "contextMeaning": "一作“复”",
+   "sourceSentence": "但愿长醉不愿醒",
+   "location": {
+    "charIndex": 257
+   }
+  },
+  {
+   "id": "lesson-1499:v20",
+   "word": "径须沽取",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "毫不犹豫地买酒。径须，直须、应当。",
+   "sourceSentence": ""
+  }
+ ]
+}

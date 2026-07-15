@@ -7,5 +7,14 @@
 /data/lessons/*
   Cache-Control: public, max-age=3600
 
+/data/cache/*
+  Cache-Control: public, max-age=3600
+
 /api/*
   Cache-Control: no-store
+
+/data/vocab/*
+  Cache-Control: public, max-age=300
+
+/data/learning-manifest.json
+  Cache-Control: public, max-age=300

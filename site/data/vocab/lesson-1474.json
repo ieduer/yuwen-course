@@ -1,0 +1,521 @@
+{
+ "lessonId": "lesson-1474",
+ "title": "5、《论语》十二章",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:33:12.148Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 6226,
+ "annotationCount": 23,
+ "inventory": [
+  {
+   "id": "lesson-1474:v01",
+   "word": "敏",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，在不同语境中含义不同，易混淆。",
+   "contextMeaning": "勤勉、做事快",
+   "sourceSentence": "君子食无求饱,居无求安,敏 于事而慎于言,就有道而正焉",
+   "type": "contextual-choice",
+   "question": "「敏于事」中「敏」的意思是",
+   "options": [
+    "聪敏",
+    "勤勉",
+    "快速",
+    "灵敏"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处指做事勤勉。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 2317
+   }
+  },
+  {
+   "id": "lesson-1474:v02",
+   "word": "就",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用实词在文言中的特殊动词用法。",
+   "contextMeaning": "接近、趋向",
+   "sourceSentence": "君子食无求饱,居无求安,敏 于事而慎于言,就有道而正焉",
+   "type": "contextual-choice",
+   "question": "「就有道而正焉」中「就」的意思是",
+   "options": [
+    "成就",
+    "靠近、接近",
+    "就职",
+    "即刻"
+   ],
+   "answerIndex": 1,
+   "explanation": "就，趋向，接近。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 2317
+   }
+  },
+  {
+   "id": "lesson-1474:v03",
+   "word": "史",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，极易误解为历史。",
+   "contextMeaning": "虚饰、浮夸",
+   "sourceSentence": "质胜文则野,文胜质则史",
+   "type": "gu-jin",
+   "question": "「文胜质则史」中「史」的意思是",
+   "options": [
+    "历史",
+    "史官",
+    "浮夸",
+    "真实"
+   ],
+   "answerIndex": 2,
+   "explanation": "史，指文采胜过质朴，显得浮夸。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 2589
+   }
+  },
+  {
+   "id": "lesson-1474:v04",
+   "word": "弘毅",
+   "annotated": true,
+   "decision": "question",
+   "reason": "词义理解影响对人物性格的把握。",
+   "contextMeaning": "志向远大，意志坚强",
+   "sourceSentence": "士不可以不弘毅,任重而道远",
+   "type": "interpretation",
+   "question": "对「士不可以不弘毅」理解正确的一项是",
+   "options": [
+    "士人不能不广博而刚毅",
+    "士人不能不志向远大且意志坚强",
+    "士人不能不弘扬毅力",
+    "士人不能不宽宏大量且坚毅"
+   ],
+   "answerIndex": 1,
+   "explanation": "弘，大；毅，强。指志向远大，意志坚强。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《论语译注》（杨伯峻）"
+   ],
+   "location": {
+    "charIndex": 2624
+   }
+  },
+  {
+   "id": "lesson-1474:v05",
+   "word": "篑",
+   "annotated": false,
+   "decision": "question",
+   "reason": "生僻字，影响句意理解。",
+   "contextMeaning": "盛土的竹筐",
+   "sourceSentence": "譬如为山,未成一篑,止,吾止也",
+   "type": "contextual-choice",
+   "question": "「未成一篑」中「篑」的意思是",
+   "options": [
+    "土堆",
+    "山丘",
+    "竹筐",
+    "最后一步"
+   ],
+   "answerIndex": 2,
+   "explanation": "篑，盛土的竹筐。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《说文解字》"
+   ],
+   "location": {
+    "charIndex": 2671
+   }
+  },
+  {
+   "id": "lesson-1474:v06",
+   "word": "知者",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字，且为核心概念。",
+   "contextMeaning": "智慧的人",
+   "sourceSentence": "知者不惑,仁者不忧,勇者不惧",
+   "type": "usage",
+   "question": "「知者不惑」中「知」的用法是",
+   "options": [
+    "动词，知道",
+    "通假字，同“智”",
+    "形容词，知晓的",
+    "名词，知识"
+   ],
+   "answerIndex": 1,
+   "explanation": "知，通“智”，智慧。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 2715
+   }
+  },
+  {
+   "id": "lesson-1474:v07",
+   "word": "克己",
+   "annotated": false,
+   "decision": "question",
+   "reason": "儒家核心概念，易被误解为自我克制。",
+   "contextMeaning": "约束自我，使言行归复于先王之礼",
+   "sourceSentence": "克己复礼为仁。一日克己复礼,天下归仁焉",
+   "type": "interpretation",
+   "question": "「克己复礼」中的「克己」最准确的含义是",
+   "options": [
+    "克制自己的欲望",
+    "约束自我，使言行符合礼",
+    "克服自己的缺点",
+    "赢得自己"
+   ],
+   "answerIndex": 1,
+   "explanation": "克己，即约束自我，使言行归复于先王之礼。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《论语注疏》"
+   ],
+   "location": {
+    "charIndex": 2747
+   }
+  },
+  {
+   "id": "lesson-1474:v08",
+   "word": "敏",
+   "annotated": false,
+   "decision": "question",
+   "reason": "与前文「敏于事」构成对比，辨析语境义。",
+   "contextMeaning": "聪明、灵敏",
+   "sourceSentence": "回虽不敏,请事斯语矣",
+   "type": "discrimination",
+   "question": "下列句中「敏」字含义与其他三项不同的是",
+   "options": [
+    "敏于事而慎于言",
+    "回虽不敏，请事斯语矣",
+    "敏而好学",
+    "反应敏捷"
+   ],
+   "answerIndex": 1,
+   "explanation": "A项指勤勉，其他项指聪明、反应快。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 2821
+   }
+  },
+  {
+   "id": "lesson-1474:v09",
+   "word": "兴",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文学批评术语，义项较专。",
+   "contextMeaning": "激发人的感情",
+   "sourceSentence": "诗》可以兴,可以观,可以群,可以怨",
+   "type": "contextual-choice",
+   "question": "「《诗》可以兴」中「兴」的意思是",
+   "options": [
+    "兴起",
+    "流行",
+    "激发人的感情",
+    "产生"
+   ],
+   "answerIndex": 2,
+   "explanation": "兴，指激发人的感情。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《论语译注》（杨伯峻）"
+   ],
+   "location": {
+    "charIndex": 2904
+   }
+  },
+  {
+   "id": "lesson-1474:v10",
+   "word": "迩",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常见文言实词，考查词义。",
+   "contextMeaning": "近",
+   "sourceSentence": "迩之事父,远之事君",
+   "type": "contextual-choice",
+   "question": "「迩之事父」中「迩」的意思是",
+   "options": [
+    "远",
+    "近",
+    "常常",
+    "恭敬"
+   ],
+   "answerIndex": 1,
+   "explanation": "迩，近，指近处。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 2922
+   }
+  },
+  {
+   "id": "lesson-1474:v11",
+   "word": "喻",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此义项较特殊。",
+   "contextMeaning": "明白、知晓",
+   "sourceSentence": "君子喻于义,小人喻于利",
+   "type": "contextual-choice",
+   "question": "「君子喻于义」中「喻」的意思是",
+   "options": [
+    "比喻",
+    "知晓、明白",
+    "趋向",
+    "谈论"
+   ],
+   "answerIndex": 1,
+   "explanation": "喻，明白，知晓。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 2538
+   }
+  },
+  {
+   "id": "lesson-1474:v12",
+   "word": "施",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用实词，考查语境义。",
+   "contextMeaning": "施加",
+   "sourceSentence": "己所不欲,勿施于人",
+   "type": "substitution",
+   "question": "「勿施于人」中「施」字可替换为",
+   "options": [
+    "赠送",
+    "施加",
+    "实施",
+    "放置"
+   ],
+   "answerIndex": 1,
+   "explanation": "施，施加。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 2870
+   }
+  },
+  {
+   "id": "lesson-1474:v13",
+   "word": "勤勉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "勤勉。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v14",
+   "word": "如果",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "如果。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v15",
+   "word": "怎样对待礼呢",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "怎样对待礼呢？",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v16",
+   "word": "引出喻对象",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "引出“喻”对象。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v17",
+   "word": "质朴朴实",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "质朴、朴实",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v18",
+   "word": "华美文采",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "华美、文采",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v19",
+   "word": "粗野鄙俗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "粗野、鄙俗",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v20",
+   "word": "虚饰浮夸",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "虚饰，浮夸",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v21",
+   "word": "只差一筐土没有成功篑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "只差一筐土没有成功。篑，盛土的竹筐。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v22",
+   "word": "填平洼地",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "填平洼地。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v23",
+   "word": "知者同智",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "智慧的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v24",
+   "word": "一旦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一旦。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v25",
+   "word": "称赞称许",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "称赞，称许。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v26",
+   "word": "条目细则",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "条目，细则。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v27",
+   "word": "实践从事",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "实践，从事。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v28",
+   "word": "一个字",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一个字。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v29",
+   "word": "老师对学生的称呼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "老师对学生的称呼。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v30",
+   "word": "那",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "那。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v31",
+   "word": "指激发人的感情",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指激发人的感情。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v32",
+   "word": "指提升人际交往能力",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指提升人际交往能力。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v33",
+   "word": "指讽刺时政",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指讽刺时政。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1474:v34",
+   "word": "近",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "ěr 近。",
+   "sourceSentence": ""
+  }
+ ]
+}

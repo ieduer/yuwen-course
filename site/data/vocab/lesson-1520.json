@@ -1,0 +1,191 @@
+{
+ "lessonId": "lesson-1520",
+ "title": "3 实践是检验真理的唯一标准/《光明日报》特约评论员",
+ "mode": "argument",
+ "builtAt": "2026-07-14T09:34:31.633Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 0,
+ "inventory": [
+  {
+   "id": "lesson-1520:v01",
+   "word": "拨乱反正",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用成語，且在文中具有特定的政治與歷史語境，考察詞義理解與遷移能力。",
+   "contextMeaning": "扭轉混亂局面，恢復正常秩序。",
+   "sourceSentence": "为了深入批判“四人帮”,肃清其流毒和影响,在这个问题上拨乱反正,十分必要。",
+   "type": "contextual-choice",
+   "question": "「拨乱反正」在文中的含义是",
+   "options": [
+    "拨动乱象，回归正路",
+    "纠正错误，恢复正常秩序",
+    "拨开迷雾，辨别是非",
+    "推翻旧制，建立新法"
+   ],
+   "answerIndex": 1,
+   "explanation": "「拨乱反正」指治理混乱局面，恢复正常秩序，符合文中肃清流毒、恢复实事求是原则的语境。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 107
+   }
+  },
+  {
+   "id": "lesson-1520:v02",
+   "word": "经院哲学",
+   "annotated": false,
+   "decision": "question",
+   "reason": "哲學專有名詞，理解此詞對於把握馬克思批判脫離實踐的理論至關重要。",
+   "contextMeaning": "指脫離實際、空談理論、形式主義的哲學研究。",
+   "sourceSentence": "关于离开实践的思维是否具有现实性的争论,是一个纯粹经院哲学的问题。",
+   "type": "interpretation",
+   "question": "文中将「离开实践的思维争论」称为「经院哲学」，意在批评其",
+   "options": [
+    "历史久远且研究深奥",
+    "内容虚构且无法验证",
+    "脱离客观实际，空谈理论",
+    "属于宗教神学范畴"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中强调实践是检验真理的标准，故称脱离实践的争论为「经院哲学」，意指其空谈理论、脱离实际。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 276
+   }
+  },
+  {
+   "id": "lesson-1520:v03",
+   "word": "宰割",
+   "annotated": false,
+   "decision": "question",
+   "reason": "比喻用法，考察學生對詞語在具體語境下修辭義的理解。",
+   "contextMeaning": "比喻隨意歪曲、強制切割、不尊重客觀規律。",
+   "sourceSentence": "甚至拿现成的公式去限制、宰割、裁剪无限丰富的飞速发展的革命实践",
+   "type": "contextual-choice",
+   "question": "文中「宰割」一词的语境义是",
+   "options": [
+    "杀戮与分割",
+    "强行支配与扭曲",
+    "烹饪与加工",
+    "统治与管理"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处「宰割」与「限制」、「裁剪」并列，形容对待实践的态度，意指强行扭曲事实以符合教条。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 6278
+   }
+  },
+  {
+   "id": "lesson-1520:v04",
+   "word": "必然王国",
+   "annotated": false,
+   "decision": "question",
+   "reason": "馬克思主義哲學重要概念，對理解全文論證目標至關重要。",
+   "contextMeaning": "指人們對客觀規律尚未認識、處於被動受規律支配的狀態。",
+   "sourceSentence": "社会主义对于我们来说,有许多地方还是未被认识的必然王国。",
+   "type": "interpretation",
+   "question": "文中称社会主义对当时来说是「未被认识的必然王国」，其含义是",
+   "options": [
+    "社会主义的发展是不可避免的",
+    "人们尚未掌握社会主义建设的客观规律",
+    "社会主义社会充满了强制性的规则",
+    "社会主义必然会走向自由王国"
+   ],
+   "answerIndex": 1,
+   "explanation": "「必然王国」指对规律尚不认识、处于被动状态，文中指对社会主义建设规律尚待探索。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 6196
+   }
+  },
+  {
+   "id": "lesson-1520:v05",
+   "word": "教条",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用詞彙，但在文中有特定的批判對象。",
+   "contextMeaning": "指僵化、不隨實踐發展而變化的理論或原則。",
+   "sourceSentence": "马克思主义的理论宝库并不是一堆僵死不变的教条",
+   "type": "discrimination",
+   "question": "下列词语中，与文中「教条」的贬义色彩最接近的是",
+   "options": [
+    "准则",
+    "信条",
+    "刻板",
+    "公式化"
+   ],
+   "answerIndex": 2,
+   "explanation": "「教条」在此指僵死不变的原则，与「刻板」在语境中都强调缺乏灵活性。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 4642
+   }
+  },
+  {
+   "id": "lesson-1520:v06",
+   "word": "不二之真理",
+   "annotated": false,
+   "decision": "question",
+   "reason": "固定詞組，考察學生對「不二」一詞的深度理解。",
+   "contextMeaning": "指唯一、確鑿、不可動搖的真理。",
+   "sourceSentence": "它们被长期的实践证明为不易之真理",
+   "type": "substitution",
+   "question": "文中「不易之真理」的「不易」最恰当的解释是",
+   "options": [
+    "不容易",
+    "不改变",
+    "不交易",
+    "不平凡"
+   ],
+   "answerIndex": 1,
+   "explanation": "「不易」在此意为「不变」，指经得起实践检验的确定真理。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2619
+   }
+  },
+  {
+   "id": "lesson-1520:v07",
+   "word": "流毒",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "屬常見詞彙，語境中義指遺留下來的有害影響，學生根據上下文可輕鬆理解，無需專門命題。",
+   "contextMeaning": "遺留下來的有害影響。",
+   "sourceSentence": "为了深入批判“四人帮”,肃清其流毒和影响",
+   "location": {
+    "charIndex": 107
+   }
+  },
+  {
+   "id": "lesson-1520:v08",
+   "word": "蒙昧主义",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "屬哲學與社會學術語，文中語境明確（指與科學相對立的愚民政策），理解難度適中，可透過課堂講解掌握，無需出題。",
+   "contextMeaning": "反對科學、理性，提倡愚昧與盲從的主張。",
+   "sourceSentence": "就没有科学,就没有真正的马列主义、毛泽东思想,而只有蒙昧主义、唯心主义、文化专制主义。",
+   "location": {
+    "charIndex": 6106
+   }
+  },
+  {
+   "id": "lesson-1520:v09",
+   "word": "此岸性",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "這是引文中的專業哲學術語，文中引用馬克思原話，理解核心在於「實踐」，詞語本身不作為核心考點。",
+   "contextMeaning": "指思維能反映客觀現實的特性。",
+   "sourceSentence": "即自己思维的现实性和力量,亦即自己思维的此岸性。",
+   "location": {
+    "charIndex": 252
+   }
+  }
+ ]
+}

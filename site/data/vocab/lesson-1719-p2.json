@@ -1,0 +1,752 @@
+{
+ "lessonId": "lesson-1719-p2",
+ "title": "登泰山记",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:27:13.744Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 605,
+ "annotationCount": 35,
+ "inventory": [
+  {
+   "id": "lesson-1719-p2:v01",
+   "word": "阳",
+   "annotated": false,
+   "decision": "question",
+   "reason": "地理方位词，理解古人对山水方位的命名规则对阅读文言文至关重要",
+   "contextMeaning": "山的南面",
+   "sourceSentence": "泰山之阳，汶水 西流",
+   "type": "contextual-choice",
+   "question": "「泰山之阳，汶水西流」中「阳」的意思是",
+   "options": [
+    "太阳",
+    "山的南面",
+    "山的北面",
+    "温暖"
+   ],
+   "answerIndex": 1,
+   "explanation": "中国古代地理方位，山南为阳，水北为阳。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 9
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v02",
+   "word": "以",
+   "annotated": false,
+   "decision": "question",
+   "reason": "介词用法考查，属于文言虚词高频考点",
+   "contextMeaning": "在",
+   "sourceSentence": "余以 乾隆三十九年 十二月",
+   "type": "usage",
+   "question": "下列句中「以」的用法与「余以乾隆三十九年十二月」相同的一项是",
+   "options": [
+    "余以小人之腹，度君子之心",
+    "以其无礼于晋",
+    "以五月十三日到",
+    "以吾一日长乎尔"
+   ],
+   "answerIndex": 2,
+   "explanation": "原句中「以」为介词，表时间，意为「在」。选项C同此用法。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 70
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v03",
+   "word": "乘",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此处为特殊语境义，易被误解为交通工具",
+   "contextMeaning": "冒着",
+   "sourceSentence": "自京师乘 风雪",
+   "type": "contextual-choice",
+   "question": "「自京师乘风雪」中「乘」的意思是",
+   "options": [
+    "乘坐",
+    "趁着",
+    "冒着",
+    "凭借"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指冒着风雪前行。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 84
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v04",
+   "word": "限",
+   "annotated": false,
+   "decision": "question",
+   "reason": "名词活用或语境特殊用法，涉及地理概念",
+   "contextMeaning": "界限，指险阻",
+   "sourceSentence": "越长城之限",
+   "type": "contextual-choice",
+   "question": "「越长城之限」中「限」的意思是",
+   "options": [
+    "限制",
+    "阻碍",
+    "界限",
+    "期限"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指作为界限的险阻之地。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 107
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v05",
+   "word": "磴",
+   "annotated": false,
+   "decision": "question",
+   "reason": "实词，对理解登山过程至关重要",
+   "contextMeaning": "石阶",
+   "sourceSentence": "道皆砌石为磴",
+   "type": "interpretation",
+   "question": "对「道皆砌石为磴」句意理解正确的是",
+   "options": [
+    "道路都是用石头铺成的台阶",
+    "道路旁都砌有石头作为挡板",
+    "道路上到处都是堆砌的石头",
+    "道路被砌石阻断无法通行"
+   ],
+   "answerIndex": 0,
+   "explanation": "磴即石阶。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《说文解字》"
+   ],
+   "location": {
+    "charIndex": 144
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v06",
+   "word": "循",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频文言实词，考查其在不同语境下的理解",
+   "contextMeaning": "顺着",
+   "sourceSentence": "余始循以入",
+   "type": "substitution",
+   "question": "下列句中加点词的含义与「余始循以入」中的「循」相同的一项是",
+   "options": [
+    "因循守旧",
+    "循规蹈矩",
+    "循流而下",
+    "循序渐进"
+   ],
+   "answerIndex": 2,
+   "explanation": "循，顺着。循流而下即顺着水流而下。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 186
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v07",
+   "word": "几",
+   "annotated": false,
+   "decision": "question",
+   "reason": "副词，表程度，易被误解为数量词",
+   "contextMeaning": "几乎",
+   "sourceSentence": "磴几 不可登",
+   "type": "contextual-choice",
+   "question": "「磴几不可登」中「几」的意思是",
+   "options": [
+    "几个",
+    "几乎",
+    "岂",
+    "稍微"
+   ],
+   "answerIndex": 1,
+   "explanation": "几，副词，表程度，几乎。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 278
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v08",
+   "word": "负",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用实词，此处用法生动，考查语境义",
+   "contextMeaning": "背负",
+   "sourceSentence": "苍山负雪",
+   "type": "contextual-choice",
+   "question": "「苍山负雪」中「负」的意思是",
+   "options": [
+    "遭受",
+    "背负",
+    "依靠",
+    "亏欠"
+   ],
+   "answerIndex": 1,
+   "explanation": "这里将山拟人化，指山上覆盖着积雪，像背负着雪一样。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 289
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v09",
+   "word": "烛",
+   "annotated": false,
+   "decision": "question",
+   "reason": "名词活用作动词，考查词类活用",
+   "contextMeaning": "照亮",
+   "sourceSentence": "明烛天南",
+   "type": "contextual-choice",
+   "question": "「明烛天南」中「烛」的活用类型及意思是",
+   "options": [
+    "名词作动词，照亮",
+    "名词作状语，像蜡烛一样",
+    "形容词作动词，使……明亮",
+    "名词，指代火光"
+   ],
+   "answerIndex": 0,
+   "explanation": "烛，蜡烛，名词作动词，照亮。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 294
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v10",
+   "word": "居",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此处指状态，考查对意象描写的理解",
+   "contextMeaning": "停留",
+   "sourceSentence": "半山居 雾若带然",
+   "type": "contextual-choice",
+   "question": "「半山居雾若带然」中「居」的意思是",
+   "options": [
+    "居住",
+    "处于",
+    "停留",
+    "占有"
+   ],
+   "answerIndex": 2,
+   "explanation": "居，停留、停滞。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 318
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v11",
+   "word": "晦",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古代纪日法，属于文化常识，影响对具体时间的理解",
+   "contextMeaning": "农历每月的最后一天",
+   "sourceSentence": "戊申晦",
+   "type": "interpretation",
+   "question": "「戊申晦」中的「晦」指",
+   "options": [
+    "阴暗",
+    "农历每月初一",
+    "农历每月十五",
+    "农历每月最后一天"
+   ],
+   "answerIndex": 3,
+   "explanation": "晦指农历每月的最后一天，朔指初一，望指十五。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 328
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v12",
+   "word": "漫",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词义辨析，考查对描写性词汇的语境理解",
+   "contextMeaning": "弥漫",
+   "sourceSentence": "亭东自足下皆云漫",
+   "type": "contextual-choice",
+   "question": "「亭东自足下皆云漫」中「漫」的意思是",
+   "options": [
+    "漫长",
+    "弥漫",
+    "随意",
+    "水漫"
+   ],
+   "answerIndex": 1,
+   "explanation": "漫，弥漫，到处都是。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 358
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v13",
+   "word": "稍",
+   "annotated": false,
+   "decision": "question",
+   "reason": "副词，表程度或时间推移",
+   "contextMeaning": "逐渐",
+   "sourceSentence": "稍 见云中白若樗蒱 数十立者",
+   "type": "contextual-choice",
+   "question": "「稍见云中白若樗蒱数十立者」中「稍」的意思是",
+   "options": [
+    "稍微",
+    "逐渐",
+    "很快",
+    "更加"
+   ],
+   "answerIndex": 1,
+   "explanation": "稍，逐渐。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 368
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v14",
+   "word": "驳",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容词，描绘色彩，考查对复杂颜色的理解",
+   "contextMeaning": "颜色错杂",
+   "sourceSentence": "绛皓驳色",
+   "type": "interpretation",
+   "question": "「绛皓驳色」中「驳」的意思是",
+   "options": [
+    "驳回",
+    "斑驳",
+    "颜色错杂",
+    "非常鲜艳"
+   ],
+   "answerIndex": 2,
+   "explanation": "驳色，颜色错杂不纯。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 444
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v15",
+   "word": "圜",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字，考查古汉语基础知识",
+   "contextMeaning": "同“圆”",
+   "sourceSentence": "多平方，少圜",
+   "type": "evidence",
+   "question": "关于「多平方，少圜」中「圜」的说法，正确的一项是",
+   "options": [
+    "指古钱币，此处指形状像钱",
+    "通“圆”，指圆形",
+    "指一种特殊的石头名称",
+    "指方形的对立面，指不规则形状"
+   ],
+   "answerIndex": 1,
+   "explanation": "圜，同“圆”，指圆形。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《说文解字》"
+   ],
+   "location": {
+    "charIndex": 534
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v16",
+   "word": "麓",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "虽然是地理名词，但在文中语境明确，根据常识可推断为山脚，无需专门命题。",
+   "contextMeaning": "山脚",
+   "sourceSentence": "与知府朱孝纯子颍 由南麓登",
+   "location": {
+    "charIndex": 125
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v17",
+   "word": "巅",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "常用词，指山顶，语境明显，不影响阅读。",
+   "contextMeaning": "山顶",
+   "sourceSentence": "遂至其巅",
+   "location": {
+    "charIndex": 208
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v18",
+   "word": "罅",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "生僻字，但教材有注或通过语境「生石罅」可推知为缝隙，重点在于理解松树生长环境。",
+   "contextMeaning": "缝隙",
+   "sourceSentence": "生石罅",
+   "location": {
+    "charIndex": 549
+   }
+  },
+  {
+   "id": "lesson-1719-p2:v19",
+   "word": "选自惜抱轩诗文集卷十",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《惜抱轩诗文集》卷十四（上海古籍出版社1992年版）。姚鼐（1732—1815），字姬传，桐城（今属安徽）人，清代散文家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v20",
+   "word": "汶水发源于山",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "汶（wèn）水，发源于山东莱芜东北原山，向西南流经泰安。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v21",
+   "word": "济水发源于河南",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "济（jǐ）水，发源于河南济源西王屋山，东流到山东入海。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v22",
+   "word": "阳谷山南面山谷中的水",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "阳谷，山南面山谷中的水。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v23",
+   "word": "当其南北分者在那阳谷",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "当其南北分者，在那（阳谷和阴谷）南北分界处的。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v24",
+   "word": "古长城古代的长城指春",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "古长城，古代的长城，指春秋战国时齐国所筑长城的遗址，古时齐鲁两国以此分界。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v25",
+   "word": "以在",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "以，在。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v26",
+   "word": "乘这里是冒的意思",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "乘，这里是“冒”的意思。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v27",
+   "word": "齐河长清清代县名今",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "齐河、长清，清代县名，今属山东。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v28",
+   "word": "限界限",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "限，界限。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v29",
+   "word": "朱孝纯子颍",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "朱孝纯子颍（yǐng），朱孝纯，字子颍。当时是泰安府的知府。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v30",
+   "word": "磴石阶",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "磴，石阶。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v31",
+   "word": "循以入顺着进山",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "循以入，顺着（中谷）进山。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v32",
+   "word": "道少半路不到一半",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "道少半，路不到一半。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v33",
+   "word": "中岭山名又名中溪山",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "中岭，山名，又名“中溪山”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v34",
+   "word": "云助词无实义",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "云，助词，无实义。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v35",
+   "word": "几几乎",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "几（jī），几乎。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v36",
+   "word": "苍山负雪明烛天南青黑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "苍山负雪，明烛天南，青黑色的山上覆盖着白雪，雪反射的光照亮了南面的天空。负，背。烛，照。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v37",
+   "word": "城郭指城市",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "城郭，指城市。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v38",
+   "word": "徂徕山名",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "徂徕（cúlái），山名，在泰安城东南。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v39",
+   "word": "居停留",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "居，停留。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v40",
+   "word": "五鼓五更",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "五鼓，五更。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v41",
+   "word": "日观亭亭名在日观峰上",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "日观亭，亭名，在日观峰上。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v42",
+   "word": "漫弥漫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "漫，弥漫。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v43",
+   "word": "稍逐渐",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "稍，逐渐。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v44",
+   "word": "樗蒱古代",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "樗蒱（chūpú），古代的一种博戏，这里指樗蒱所用的掷具，长形而末端尖锐，立起来像山峰。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v45",
+   "word": "极天天边",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "极天，天边。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v46",
+   "word": "采同彩",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "采，同“彩”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v47",
+   "word": "丹朱砂",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "丹，朱砂。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v48",
+   "word": "东海泛指东面的海这里",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "东海，泛指东面的海。这里是想象，实际上在泰山顶上并不能看见东海。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v49",
+   "word": "绛皓驳色或红",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "绛皓（hào）驳色，或红或白，颜色错杂。绛，大红。皓，白。驳，杂。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v50",
+   "word": "偻脊背弯曲的样子引申",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "偻，脊背弯曲的样子。引申为鞠躬的样子。日观峰西面诸峰都比日观峰低，所以说“若偻”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v51",
+   "word": "岱祠东岳大帝庙",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "岱祠，东岳大帝庙。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v52",
+   "word": "漫失模糊或缺失",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "漫失，模糊或缺失。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1719-p2:v53",
+   "word": "圜同圆",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "圜，同“圆”。",
+   "sourceSentence": ""
+  }
+ ]
+}

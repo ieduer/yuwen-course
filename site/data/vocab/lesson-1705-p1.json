@@ -1,0 +1,1238 @@
+{
+ "lessonId": "lesson-1705-p1",
+ "title": "梦游天姥吟留别",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:15:22.765Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 375,
+ "annotationCount": 113,
+ "inventory": [
+  {
+   "id": "lesson-1705-p1:v01",
+   "word": "信",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，极易误解为书信或信用，实为副词“确实、实在”。",
+   "contextMeaning": "确实",
+   "sourceSentence": "烟涛微茫信难求",
+   "type": "contextual-choice",
+   "question": "下列选项中“信”字的含义与“烟涛微茫信难求”中的“信”相同的一项是",
+   "options": [
+    "信誓旦旦",
+    "信手拈来",
+    "欲信大义于天下",
+    "休信其言"
+   ],
+   "answerIndex": 1,
+   "explanation": "“信”在句中作副词，意为“确实、实在”。“信手拈来”中的“信”意为随手，与句中用法一致（此处指随心，引申为确实/随便）；“信誓旦旦”指誓言，“欲信”意为通“伸”，“休信”意为相信。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 18
+   }
+  },
+  {
+   "id": "lesson-1705-p1:v02",
+   "word": "拔",
+   "annotated": true,
+   "decision": "question",
+   "reason": "动词，超出，此处决定了对山势高峻程度的理解。",
+   "contextMeaning": "超出",
+   "sourceSentence": "势拔五岳掩赤城",
+   "type": "contextual-choice",
+   "question": "对“势拔五岳掩赤城”中“拔”字的解释，正确的一项是",
+   "options": [
+    "拔起",
+    "超出",
+    "拔掉",
+    "挑选"
+   ],
+   "answerIndex": 1,
+   "explanation": "拔：超出。形容天姥山的山势高峻，超过了五岳。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 51
+   }
+  },
+  {
+   "id": "lesson-1705-p1:v03",
+   "word": "因",
+   "annotated": true,
+   "decision": "question",
+   "reason": "文言介词/动词用法，影响对叙事逻辑的理解。",
+   "contextMeaning": "依据",
+   "sourceSentence": "我欲因之 梦吴越",
+   "type": "contextual-choice",
+   "question": "下列句中“因”字的用法与“我欲因之梦吴越”相同的一项是",
+   "options": [
+    "因人之力而敝之",
+    "因宾客至蔺相如门谢罪",
+    "因之以饥馑",
+    "不如因而厚遇之"
+   ],
+   "answerIndex": 0,
+   "explanation": "原文“因”意为依据、凭借。A项“因人之力”意为凭借，相同；B项意为趁着；C项意为接续；D项意为趁此。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 78
+   }
+  },
+  {
+   "id": "lesson-1705-p1:v04",
+   "word": "殷",
+   "annotated": true,
+   "decision": "question",
+   "reason": "动词，震动，属于特殊用法，影响对听觉意象的理解。",
+   "contextMeaning": "震动",
+   "sourceSentence": "熊咆龙吟殷岩泉",
+   "type": "contextual-choice",
+   "question": "“熊咆龙吟殷岩泉”中“殷”字的意思是",
+   "options": [
+    "兴盛",
+    "震动",
+    "红色",
+    "深沉"
+   ],
+   "answerIndex": 1,
+   "explanation": "殷：震动。指熊龙的咆哮声震荡着岩石和泉水。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 173
+   }
+  },
+  {
+   "id": "lesson-1705-p1:v05",
+   "word": "栗",
+   "annotated": true,
+   "decision": "question",
+   "reason": "使动用法，是古文中常见且重要的语法现象。",
+   "contextMeaning": "使……战栗",
+   "sourceSentence": "栗深林兮惊层巅",
+   "type": "usage",
+   "question": "下列选项中，加点字的用法与“栗深林兮惊层巅”中“栗”字用法相同的一项是",
+   "options": [
+    "且庸人尚羞之",
+    "项伯杀人，臣活之",
+    "吾妻之美我者，私我也",
+    "侣鱼虾而友麋鹿"
+   ],
+   "answerIndex": 1,
+   "explanation": "“栗”是使动用法，使……战栗。“活”也是使动用法，使……活。A是意动，C是意动，D是意动。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 182
+   }
+  },
+  {
+   "id": "lesson-1705-p1:v06",
+   "word": "青青",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，现代汉语常指绿色，此处指黑色，极易误解。",
+   "contextMeaning": "黑沉沉的",
+   "sourceSentence": "云青青 兮欲雨",
+   "type": "gu-jin",
+   "question": "关于“云青青兮欲雨”中“青青”的理解，正确的一项是",
+   "options": [
+    "形容云朵青翠欲滴",
+    "形容云层厚重且呈黑色",
+    "形容云朵颜色鲜艳",
+    "形容天空晴朗"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处“青青”指黑沉沉的，形容云层阴暗，预示下雨。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 191
+   }
+  },
+  {
+   "id": "lesson-1705-p1:v07",
+   "word": "觉",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，此处指醒来，与现代汉语“感觉”有别。",
+   "contextMeaning": "醒",
+   "sourceSentence": "惟觉 时之枕席",
+   "type": "gu-jin",
+   "question": "“惟觉时之枕席”中“觉”的意思是",
+   "options": [
+    "感觉",
+    "觉悟",
+    "醒",
+    "发觉"
+   ],
+   "answerIndex": 2,
+   "explanation": "觉：醒。指梦醒之后所见。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 298
+   }
+  },
+  {
+   "id": "lesson-1705-p1:v08",
+   "word": "向来",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，现代汉语多指“一直以来”，此处指“刚才”。",
+   "contextMeaning": "刚才",
+   "sourceSentence": "失向来之烟霞",
+   "type": "gu-jin",
+   "question": "“失向来之烟霞”中“向来”的意思是",
+   "options": [
+    "一向",
+    "刚才",
+    "未来",
+    "向来"
+   ],
+   "answerIndex": 1,
+   "explanation": "向来：原来，指刚才梦中所见。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 306
+   }
+  },
+  {
+   "id": "lesson-1705-p1:v09",
+   "word": "事",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "名词活用作动词，意为“侍奉”，属于基础考点，但文中语境明确，无需单独设题。",
+   "contextMeaning": "侍奉",
+   "sourceSentence": "安能摧眉折腰 事权贵",
+   "location": {
+    "charIndex": 356
+   }
+  },
+  {
+   "id": "lesson-1705-p1:v10",
+   "word": "横",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材已注，且词义较为直白，不构成理解障碍。",
+   "contextMeaning": "遮蔽",
+   "sourceSentence": "天姥连天向天横",
+   "location": {
+    "charIndex": 42
+   }
+  },
+  {
+   "id": "lesson-1705-p1:v11",
+   "word": "中",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材已注“訇然中开”，属于词组理解，无需单独拆解。",
+   "contextMeaning": "中间",
+   "sourceSentence": "洞天石扉，訇然中开",
+   "location": {
+    "charIndex": 217
+   }
+  },
+  {
+   "id": "lesson-1705-p1:v12",
+   "word": "选自李白集校注卷十五",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《李白集校注》卷十五（上海古籍出版社1980年版）。唐玄宗天宝三载（744），李白在长安受到权贵的排挤，被放出京。第二年，他即将由东鲁（今山东一带）南游吴越，写了这首描绘梦中游历天姥（mǔ）山的诗，留给在东鲁的朋友，所以也题作《梦游天姥山别东鲁诸公》。天姥山，在今浙江新昌东。传说登山的人能听到仙人天姥唱歌的声音，山因此而得名。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v13",
+   "word": "越人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指今浙江一带的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v14",
+   "word": "向天横",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "遮住天空。横，遮蔽。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v15",
+   "word": "势拔五岳掩赤城",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "山势高过五岳，遮掩了赤城。拔，超出。五岳，东岳泰山、西岳华山、中岳嵩山、北岳恒山、南岳衡山的总称。赤城，和下文的“天台（tāi）”都是山名，在今浙江天台北。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v16",
+   "word": "对此欲倒东南倾",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "对着（天姥）这座山，（天台山）就好像要拜倒在它的东南面一样。意思是天台山和天姥山相比，就显得低了。倾，偏斜、倒下。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v17",
+   "word": "因之",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是受前面越人的话所吸引。因，依据。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v18",
+   "word": "镜湖",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即鉴湖，在今浙江绍兴。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v19",
+   "word": "剡溪",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "水名，在今浙江嵊（shèng）州南。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v20",
+   "word": "谢公",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指南朝宋诗人谢灵运（385—433）。谢灵运喜欢游山访胜，他游天姥山时，曾在剡溪住宿。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v21",
+   "word": "渌",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "清澈。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v22",
+   "word": "清",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "凄清。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v23",
+   "word": "谢公屐",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "据《宋书·谢灵运传》，谢灵运游山，必到幽深高峻的地方，他备有一种特制的木屐，前后齿可装卸，上山时去掉前齿，下山时去掉后齿，以保持身体平衡。屐，以木板作底，上面有带子，形状像拖鞋。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v24",
+   "word": "青云梯",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指直上云霄的山路。语出谢灵运《登石门最高顶》诗：“惜无同怀客，共登青云梯。”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v25",
+   "word": "半壁见海日",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "在半山腰看到从海上升起的太阳。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v26",
+   "word": "天鸡",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "古代传说，东南有桃都山，山上有大树叫“桃都”，树上栖有天鸡。每当太阳初升照到树上，天鸡就会鸣叫，天下的鸡也都跟着它叫起来。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v27",
+   "word": "迷花倚石忽已暝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "迷恋着花，依倚着石，不觉天色很快就暗了下来。暝，昏暗。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v28",
+   "word": "熊咆龙吟殷岩泉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "熊在咆哮，龙在长吟，声音震荡着岩石和泉水。殷，震动。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v29",
+   "word": "栗深林兮惊层巅",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "使深林战栗，使层巅震惊。栗、惊，均为使动用法。层巅，层层山峰。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v30",
+   "word": "列缺",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "闪电。列，同“裂”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v31",
+   "word": "洞天石扉訇然中开",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "仙府的石门，訇的一声从中间打开。洞天，仙人居住的洞府。訇然，形容声音很大。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v32",
+   "word": "青冥",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "天空。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v33",
+   "word": "金银台",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "金银筑成的楼台，指神仙居住的地方。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v34",
+   "word": "云之君",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "泛指驾乘云彩的神仙。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v35",
+   "word": "鸾回车",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "鸾鸟拉车回转。鸾，传说中的神鸟。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v36",
+   "word": "悸",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "因惊惧而心跳。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v37",
+   "word": "恍",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "猛然惊醒的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v38",
+   "word": "失向来之烟霞",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "刚才（梦中）所见的烟雾云霞消失了。向来，原来。烟霞，指前面所写的仙境。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v39",
+   "word": "摧眉折腰",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "低头弯腰，即卑躬屈膝。摧眉，即低眉，低头。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v40",
+   "word": "选自杜诗详注卷二十",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《杜诗详注》卷二十（中华书局2015 年版）。这首诗是唐代宗大历二年（767）杜甫流寓夔州（今重庆奉节）时的作品。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v41",
+   "word": "鸟飞回",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "鸟（在急风中）飞舞盘旋。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v42",
+   "word": "落木",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "落叶。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v43",
+   "word": "萧萧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "草木摇落的声音。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v44",
+   "word": "万里",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指远离故乡。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v45",
+   "word": "百年",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这里借指晚年。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v46",
+   "word": "艰难苦恨繁霜鬓",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是，一生艰难，常常抱恨于志业无成而身已衰老。艰难，指自己生活多艰，又指国家多难。苦恨，极恨。繁霜鬓，像浓霜一样的鬓发。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v47",
+   "word": "潦倒",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "衰颓，失意。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v48",
+   "word": "新停",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "刚刚停止。杜甫晚年因病戒酒，所以说“新停”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v49",
+   "word": "选自白居易集笺校卷十",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《白居易集笺校》卷十二（上海古籍出版社1988年版）。行，古诗的一种体裁。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v50",
+   "word": "元和十年",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "公元815年。元和，唐宪宗的年号（806—820）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v51",
+   "word": "左迁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "贬官、降职的委婉说法。白居易因越职上书言事，触怒当朝权贵，被贬为江州司马。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v52",
+   "word": "九江郡",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "设于隋代，唐代称为江州或浔阳郡，治所在今江西九江。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v53",
+   "word": "司马",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "州刺史的副职。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v54",
+   "word": "湓浦口",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "湓江流入长江的地方，在今九江西。湓浦，又叫湓江，源出江西瑞昌清湓山。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v55",
+   "word": "京都声",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指唐代京城长安流行的乐曲声调。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v56",
+   "word": "倡女",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "歌女。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v57",
+   "word": "善才",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "当时对技艺高超的乐师的称呼。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v58",
+   "word": "委身",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "托身。这里是嫁人的意思。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v59",
+   "word": "贾人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "商人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v60",
+   "word": "命酒",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "叫人摆酒。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v61",
+   "word": "快",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "畅快。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v62",
+   "word": "悯然",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "忧郁的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v63",
+   "word": "漂沦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "漂泊流落。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v64",
+   "word": "出官",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "京官贬黜往地方任职。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v65",
+   "word": "恬然",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "宁静安适的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v66",
+   "word": "迁谪",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "官吏因罪降职并流放。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v67",
+   "word": "为",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "创作。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v68",
+   "word": "荻",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "多年生草本植物，形状像芦苇，生长在水边。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v69",
+   "word": "瑟瑟",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "形容微风吹动的声音。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v70",
+   "word": "主人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "白居易自指。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v71",
+   "word": "管弦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指音乐。管，箫、笛之类的管乐。弦，琴、瑟、琵琶之类的弦乐。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v72",
+   "word": "暗问",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "低声询问。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v73",
+   "word": "欲语迟",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "将要回答，又有些迟疑。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v74",
+   "word": "回灯",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "重新掌灯。一说“移灯”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v75",
+   "word": "转轴拨弦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "拧转弦轴，拨动弦丝。这里指调弦校音。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v76",
+   "word": "掩抑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "声音低沉。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v77",
+   "word": "思",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "深长的情思。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v78",
+   "word": "信手",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "随手。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v79",
+   "word": "续续",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "连续。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v80",
+   "word": "轻拢慢捻抹复挑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "轻轻地拢，慢慢地捻，一会儿抹，一会儿挑。拢，扣弦。捻，揉弦。抹，顺手下拨。挑，反手回拨。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v81",
+   "word": "霓裳",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即《霓裳羽衣曲》，唐代乐曲名，相传为唐玄宗所制。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v82",
+   "word": "六幺",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即《六幺令》，唐代乐曲名。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v83",
+   "word": "大弦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指琵琶四根弦中的粗弦。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v84",
+   "word": "嘈嘈",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "形容声音沉重舒长。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v85",
+   "word": "小弦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指琵琶上的细弦。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v86",
+   "word": "切切",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "形容声音轻细急促。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v87",
+   "word": "大珠小珠落玉盘",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "分别比喻乐声的重浊和清脆。一说，形容声音的清脆圆润。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v88",
+   "word": "间关莺语花底滑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "像黄莺在花下啼叫一样婉转流利。间关，形容鸟鸣婉转。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v89",
+   "word": "幽咽泉流冰下难",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "像幽咽的泉水在冰下艰难流过。幽咽，形容乐声梗塞不畅。难，艰难，形容乐声滞塞难通。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v90",
+   "word": "冰泉冷涩弦凝绝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "像冰下的泉水又冷又涩不能畅流，弦似乎凝结不动了。这是形容弦声愈来愈低沉，以至停顿。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v91",
+   "word": "曲终收拨当心画",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "乐曲终了，用拨子在琵琶的中间部位划过四弦。这是弹奏琵琶到一曲结束时的常用手法。拨，拨子，弹奏弦乐的用具。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v92",
+   "word": "四弦一声",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "四根弦同时发声。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v93",
+   "word": "敛容",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "显出端庄的脸色。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v94",
+   "word": "虾蟆陵",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "地名，在长安城东南。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v95",
+   "word": "教坊",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "古时管理宫廷音乐的官署。专管雅乐以外的音乐、舞蹈、百戏的教习、排练、演出等事务。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v96",
+   "word": "第一部",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "第一队，是教坊中最优秀的一队。部，量词，计量歌舞队、乐队。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v97",
+   "word": "秋娘",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "唐代歌伎常用的名字。这里是对善歌貌美歌伎的通称。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v98",
+   "word": "五陵年少",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指京城富家豪族子弟。五陵，汉代五个皇帝（高、惠、景、武、昭）的陵墓，在长安附近，富家豪族多聚居在这一带。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v99",
+   "word": "缠头",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "古代对歌伎舞女打赏用的锦帛。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v100",
+   "word": "红绡",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "轻薄的生丝织品。泛指轻美的丝织品。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v101",
+   "word": "钿头银篦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "上端镶着花钿的银质发篦。钿，用金银等制成的花形首饰。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v102",
+   "word": "击节碎",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（随着音乐）打拍子时敲碎了。节，节拍。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v103",
+   "word": "翻酒污",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（因为）泼翻了酒被沾污。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v104",
+   "word": "等闲",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "平常，随随便便。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v105",
+   "word": "颜色故",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "容貌衰老。故，旧、老。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v106",
+   "word": "老大",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "年纪大了。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v107",
+   "word": "浮梁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "地名，在今江西景德镇北。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v108",
+   "word": "去来",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "走了以后。来，语气助词。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v109",
+   "word": "梦啼妆泪红阑干",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "从梦中哭醒，搽了胭脂粉的脸上流满了一道道红色的泪痕。妆，这里指脸上的胭脂粉。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v110",
+   "word": "唧唧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "叹息。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v111",
+   "word": "杜鹃啼血",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "传说杜鹃鸟啼叫时，嘴里会淌出血来。这是形容杜鹃啼声的悲切。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v112",
+   "word": "独倾",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "独自饮酒。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v113",
+   "word": "呕哑嘲哳",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指声音嘈杂刺耳。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v114",
+   "word": "暂",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "忽然，一下子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v115",
+   "word": "更",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "再。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v116",
+   "word": "翻作",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "写作。翻，按曲调写作歌词。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v117",
+   "word": "却坐",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "回到（原处）坐下。却，退回。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v118",
+   "word": "促弦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "把琴弦拧紧。促，紧、迫。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v119",
+   "word": "转",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "更加，越发。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v120",
+   "word": "向前",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "以前。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v121",
+   "word": "掩泣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "掩面哭泣。下面“泣下”的“泣”指眼泪。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1705-p1:v122",
+   "word": "青衫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "青色单衣。唐代官职低的服色为青。",
+   "sourceSentence": ""
+  }
+ ]
+}

@@ -1,0 +1,207 @@
+{
+ "lessonId": "lesson-1589",
+ "title": "客至/ 杜甫",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:41:37.306Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 7203,
+ "annotationCount": 0,
+ "inventory": [
+  {
+   "id": "lesson-1589:v01",
+   "word": "舍",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今異義，影響對詩人居住環境的理解",
+   "contextMeaning": "房屋、居所",
+   "sourceSentence": "舍南舍北皆春水",
+   "type": "gu-jin",
+   "question": "下列選項中「舍」字的含義與「舍南舍北皆春水」中的「舍」相同的一項是",
+   "options": [
+    "退避三舍",
+    "依依墟里烟，舍舍見炊烟",
+    "不捨晝夜",
+    "捨本逐末"
+   ],
+   "answerIndex": 1,
+   "explanation": "「舍」在句中指房屋，B項亦指房屋；A項指古代軍隊行軍三十里，C、D項為「捨棄」之意。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 83
+   }
+  },
+  {
+   "id": "lesson-1589:v02",
+   "word": "但",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今異義，影響句意理解",
+   "contextMeaning": "只、僅",
+   "sourceSentence": "但见群鸥日日来",
+   "type": "gu-jin",
+   "question": "「但见群鸥日日来」中「但」的意思是",
+   "options": [
+    "但是",
+    "只、僅",
+    "只要",
+    "雖然"
+   ],
+   "answerIndex": 1,
+   "explanation": "「但」在此處為副詞，表示範圍，意為「只」。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 91
+   }
+  },
+  {
+   "id": "lesson-1589:v03",
+   "word": "缘",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言虛詞/實詞活用，影響對詩句邏輯關係的理解",
+   "contextMeaning": "因為",
+   "sourceSentence": "花径不曾缘客扫",
+   "type": "interpretation",
+   "question": "「花径不曾缘客扫」中「缘」的意思是",
+   "options": [
+    "因為",
+    "緣分",
+    "沿著",
+    "攀附"
+   ],
+   "answerIndex": 0,
+   "explanation": "「緣」在句中作連詞或介詞，表示原因，意為「因為」。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 100
+   }
+  },
+  {
+   "id": "lesson-1589:v04",
+   "word": "兼味",
+   "annotated": false,
+   "decision": "question",
+   "reason": "關鍵詞彙，影響對詩人生活境況的理解",
+   "contextMeaning": "兩種以上的菜餚",
+   "sourceSentence": "盘飧市远无兼味",
+   "type": "contextual-choice",
+   "question": "「盘飧市远无兼味」中「兼味」指的是",
+   "options": [
+    "美味佳餚",
+    "冷盤熱菜",
+    "兩種以上的菜餚",
+    "特別的風味"
+   ],
+   "answerIndex": 2,
+   "explanation": "「兼」有雙重、同時之意，「兼味」指多種菜餚，此句用以說明菜色簡單。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 117
+   }
+  },
+  {
+   "id": "lesson-1589:v05",
+   "word": "肯",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常見文言詞彙，影響人物心理刻畫",
+   "contextMeaning": "樂意、願意",
+   "sourceSentence": "肯与邻翁相对饮",
+   "type": "substitution",
+   "question": "「肯与邻翁相对饮」中「肯」字可以替換為",
+   "options": [
+    "豈",
+    "能",
+    "願",
+    "須"
+   ],
+   "answerIndex": 2,
+   "explanation": "「肯」在此處為助動詞，表示樂意、願意。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 134
+   }
+  },
+  {
+   "id": "lesson-1589:v06",
+   "word": "取",
+   "annotated": false,
+   "decision": "question",
+   "reason": "特殊用法，語助詞，影響句法理解",
+   "contextMeaning": "語助詞，無實義，常用於動詞後",
+   "sourceSentence": "隔篱呼取尽余杯",
+   "type": "usage",
+   "question": "「隔篱呼取尽余杯」中「取」的用法與下列哪項相同",
+   "options": [
+    "取之不盡",
+    "呼取鄰翁",
+    "各取所需",
+    "取信於人"
+   ],
+   "answerIndex": 1,
+   "explanation": "詩中的「取」為語助詞，附於動詞「呼」之後，表動作的完成或語氣的舒緩，B項「呼取」意同。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "王力《漢語史稿》"
+   ],
+   "location": {
+    "charIndex": 142
+   }
+  },
+  {
+   "id": "lesson-1589:v07",
+   "word": "尽",
+   "annotated": false,
+   "decision": "question",
+   "reason": "語境義，動詞用法",
+   "contextMeaning": "飲盡、喝完",
+   "sourceSentence": "隔篱呼取尽余杯",
+   "type": "contextual-choice",
+   "question": "「隔篱呼取尽余杯」中「尽」的意思是",
+   "options": [
+    "全部",
+    "竭盡",
+    "飲盡",
+    "盡頭"
+   ],
+   "answerIndex": 2,
+   "explanation": "「尽」在此處作動詞，意為喝乾、飲盡。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 142
+   }
+  },
+  {
+   "id": "lesson-1589:v08",
+   "word": "旧醅",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "文化語詞，教材有註，不構成理解障礙",
+   "contextMeaning": "陳釀之酒",
+   "sourceSentence": "樽酒家贫只旧醅",
+   "location": {
+    "charIndex": 125
+   }
+  },
+  {
+   "id": "lesson-1589:v09",
+   "word": "舍南舍北",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "空間方位詞，結構簡單，不影響文意理解",
+   "contextMeaning": "草堂的南面和北面",
+   "sourceSentence": "舍南舍北皆春水",
+   "location": {
+    "charIndex": 83
+   }
+  }
+ ]
+}

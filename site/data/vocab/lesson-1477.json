@@ -1,0 +1,454 @@
+{
+ "lessonId": "lesson-1477",
+ "title": "人皆有不忍人之心/《孟子》",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:32:56.632Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 3859,
+ "annotationCount": 13,
+ "inventory": [
+  {
+   "id": "lesson-1477:v01",
+   "word": "运",
+   "annotated": true,
+   "decision": "question",
+   "reason": "文中关键动词，考查词义迁移",
+   "contextMeaning": "运转，转动",
+   "sourceSentence": "治天下可运之掌上",
+   "type": "contextual-choice",
+   "question": "「治天下可运之掌上」中「运」的意思是",
+   "options": [
+    "运气",
+    "转动",
+    "运用",
+    "搬运"
+   ],
+   "answerIndex": 1,
+   "explanation": "「运」在此处意为转动，比喻治理天下极其容易。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 107
+   }
+  },
+  {
+   "id": "lesson-1477:v02",
+   "word": "怵惕",
+   "annotated": true,
+   "decision": "question",
+   "reason": "描写心理活动的双音节词，考查词义理解",
+   "contextMeaning": "惊骇，恐惧",
+   "sourceSentence": "皆有怵惕恻隐之心",
+   "type": "contextual-choice",
+   "question": "「皆有怵惕恻隐之心」中「怵惕」的意思是",
+   "options": [
+    "惊惶恐惧",
+    "同情怜悯",
+    "心跳加速",
+    "震惊不已"
+   ],
+   "answerIndex": 0,
+   "explanation": "怵惕，指因突然看到危险而产生的惊骇恐惧的心理。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 141
+   }
+  },
+  {
+   "id": "lesson-1477:v03",
+   "word": "内",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，通假字，考查文言基础",
+   "contextMeaning": "通“纳”，交结",
+   "sourceSentence": "非所以内交于孺子之父母也",
+   "type": "usage",
+   "question": "「非所以内交于孺子之父母也」中「内」的用法是",
+   "options": [
+    "内部",
+    "通“纳”，交结",
+    "接纳",
+    "内心"
+   ],
+   "answerIndex": 1,
+   "explanation": "「内」通「纳」，意为结交。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 150
+   }
+  },
+  {
+   "id": "lesson-1477:v04",
+   "word": "要",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，考查语境义",
+   "contextMeaning": "博取，求取",
+   "sourceSentence": "非所以要誉于乡党朋友也",
+   "type": "contextual-choice",
+   "question": "「非所以要誉于乡党朋友也」中「要」的意思是",
+   "options": [
+    "重要",
+    "需要",
+    "博取",
+    "约定"
+   ],
+   "answerIndex": 2,
+   "explanation": "「要」在此处读yāo，意为求取、博取。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 163
+   }
+  },
+  {
+   "id": "lesson-1477:v05",
+   "word": "恶",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，考查古汉语常见词义",
+   "contextMeaning": "厌恶",
+   "sourceSentence": "非恶其声而然也",
+   "type": "contextual-choice",
+   "question": "「非恶其声而然也」中「恶」的意思是",
+   "options": [
+    "凶恶",
+    "厌恶",
+    "怎么",
+    "罪恶"
+   ],
+   "answerIndex": 1,
+   "explanation": "「恶」在此处意为讨厌、厌恶。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 175
+   }
+  },
+  {
+   "id": "lesson-1477:v06",
+   "word": "羞恶",
+   "annotated": false,
+   "decision": "question",
+   "reason": "儒家核心概念，考查词义辨析",
+   "contextMeaning": "对自身的不善感到羞耻，对他人的不善感到憎恶",
+   "sourceSentence": "羞恶之心,义之端也",
+   "type": "interpretation",
+   "question": "下列对「羞恶之心」理解正确的一项是",
+   "options": [
+    "羞愧与厌恶",
+    "羞耻与憎恶",
+    "对自己的不善感到羞耻，对他人的不善感到憎恶",
+    "对自己的不善感到羞耻，对自己的不善感到厌恶"
+   ],
+   "answerIndex": 2,
+   "explanation": "「羞恶」指羞耻心与憎恶心，是孟子四端之一。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 240
+   }
+  },
+  {
+   "id": "lesson-1477:v07",
+   "word": "端",
+   "annotated": false,
+   "decision": "question",
+   "reason": "核心概念，考查引申义",
+   "contextMeaning": "萌芽，发端",
+   "sourceSentence": "恻隐之心,仁之端也",
+   "type": "contextual-choice",
+   "question": "「恻隐之心，仁之端也」中「端」的意思是",
+   "options": [
+    "顶端",
+    "项目",
+    "萌芽，发端",
+    "原因"
+   ],
+   "answerIndex": 2,
+   "explanation": "「端」在此处比喻发端、萌芽。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 230
+   }
+  },
+  {
+   "id": "lesson-1477:v08",
+   "word": "四体",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，考查文言词汇积累",
+   "contextMeaning": "四肢",
+   "sourceSentence": "犹其有四体也",
+   "type": "gu-jin",
+   "question": "「犹其有四体也」中「四体」在古代指",
+   "options": [
+    "四种身体状态",
+    "四肢",
+    "身体的四个部位",
+    "身体的四种功能"
+   ],
+   "answerIndex": 1,
+   "explanation": "「四体」即人的四肢。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 279
+   }
+  },
+  {
+   "id": "lesson-1477:v09",
+   "word": "然",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字，考查音义",
+   "contextMeaning": "同“燃”",
+   "sourceSentence": "若火之始然",
+   "type": "usage",
+   "question": "「若火之始然」中「然」的用法是",
+   "options": [
+    "代词，这样",
+    "形容词词尾",
+    "通“燃”，燃烧",
+    "助词，的样子"
+   ],
+   "answerIndex": 2,
+   "explanation": "「然」通「燃」，意为燃烧。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 332
+   }
+  },
+  {
+   "id": "lesson-1477:v10",
+   "word": "达",
+   "annotated": false,
+   "decision": "question",
+   "reason": "语境义，考查对动词的理解",
+   "contextMeaning": "流通，指泉水涌出",
+   "sourceSentence": "泉之始达",
+   "type": "contextual-choice",
+   "question": "「泉之始达」中「达」的意思是",
+   "options": [
+    "到达",
+    "流通，指泉水涌出",
+    "通达",
+    "表达"
+   ],
+   "answerIndex": 1,
+   "explanation": "「达」在此处意为泉水涌出、流通。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《漢語大詞典》"
+   ],
+   "location": {
+    "charIndex": 338
+   }
+  },
+  {
+   "id": "lesson-1477:v11",
+   "word": "所以",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频虚词，考查用法",
+   "contextMeaning": "……的原因",
+   "sourceSentence": "所以谓人皆有不忍人之心者",
+   "type": "usage",
+   "question": "「所以谓人皆有不忍人之心者」中「所以」的意思是",
+   "options": [
+    "……的原因",
+    "用来",
+    "因此",
+    "因为"
+   ],
+   "answerIndex": 0,
+   "explanation": "此处「所以」意为「……的原因」，引导主语从句。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 117
+   }
+  },
+  {
+   "id": "lesson-1477:v12",
+   "word": "乍",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常见文言副词，考查语境理解",
+   "contextMeaning": "忽然，刚刚",
+   "sourceSentence": "今人乍见孺子将入于井",
+   "type": "contextual-choice",
+   "question": "「今人乍见孺子将入于井」中「乍」的意思是",
+   "options": [
+    "突然，刚刚",
+    "仔细",
+    "故意",
+    "竟然"
+   ],
+   "answerIndex": 0,
+   "explanation": "「乍」意为突然、刚刚。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 130
+   }
+  },
+  {
+   "id": "lesson-1477:v13",
+   "word": "贼",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言常用动词，考查词义迁移",
+   "contextMeaning": "伤害",
+   "sourceSentence": "自贼者也",
+   "type": "contextual-choice",
+   "question": "「自贼者也」中「贼」的意思是",
+   "options": [
+    "小偷",
+    "伤害",
+    "作乱",
+    "背叛"
+   ],
+   "answerIndex": 1,
+   "explanation": "「贼」在此处意为伤害、残害。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古漢語常用字字典》"
+   ],
+   "location": {
+    "charIndex": 297
+   }
+  },
+  {
+   "id": "lesson-1477:v14",
+   "word": "安定",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "课文正文中未出现此词，无法考查",
+   "contextMeaning": "无",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1477:v15",
+   "word": "乡党",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "专有名词，指古代聚居单位，了解即可，无需专门出题",
+   "contextMeaning": "乡里邻居",
+   "sourceSentence": "非所以要誉于乡党朋友也",
+   "location": {
+    "charIndex": 163
+   }
+  },
+  {
+   "id": "lesson-1477:v16",
+   "word": "事",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "词类活用（名词作动词），难度较低，通过语境可推断",
+   "contextMeaning": "侍奉",
+   "sourceSentence": "不足以事父母",
+   "location": {
+    "charIndex": 359
+   }
+  },
+  {
+   "id": "lesson-1477:v17",
+   "word": "同乡",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同乡。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1477:v18",
+   "word": "非恶其声而然",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "并非因为厌恶孩子的哭声才这样。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1477:v19",
+   "word": "谦逊推让",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "谦逊推让。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1477:v20",
+   "word": "萌芽发端",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "萌芽，发端。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1477:v21",
+   "word": "四肢",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "四肢。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1477:v22",
+   "word": "伤害",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "伤害。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1477:v23",
+   "word": "同燃",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同“燃”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1477:v24",
+   "word": "流通指泉水涌出",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "流通，指泉水涌出。",
+   "sourceSentence": ""
+  }
+ ]
+}

@@ -1,0 +1,237 @@
+{
+ "lessonId": "lesson-1521",
+ "title": "4 * 修辞立其诚/ 张岱年",
+ "mode": "argument",
+ "builtAt": "2026-07-14T09:34:26.874Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 1959,
+ "annotationCount": 3,
+ "inventory": [
+  {
+   "id": "lesson-1521:v01",
+   "word": "修辞",
+   "annotated": false,
+   "decision": "question",
+   "reason": "题目核心词，学生易将其误解为现代汉语中的“修辞学”，需考查其在文中的特定含义。",
+   "contextMeaning": "修治言辞，指言说、著论、写文章",
+   "sourceSentence": "“修辞立其诚”,是《易传·文言》的一句话。",
+   "type": "contextual-choice",
+   "question": "文中“修辞立其诚”中“修辞”一词的含义是",
+   "options": [
+    "美化言辞，运用修辞手法",
+    "修订文辞，纠正错误说法",
+    "言说、著论、写文章",
+    "学习修辞学，提高表达能力"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中“修辞”即指说话、写作，而非单纯的辞格运用。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 55
+   }
+  },
+  {
+   "id": "lesson-1521:v02",
+   "word": "恶乎",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言虚词组合，影响对哲学命题的理解。",
+   "contextMeaning": "在哪里",
+   "sourceSentence": "《庄子》说:“道恶乎隐而有真伪 ?”",
+   "type": "usage",
+   "question": "下列选项中“恶乎”的用法与文中一致的是",
+   "options": [
+    "学恶乎成？",
+    "恶乎其为大也？",
+    "恶乎往而不得？",
+    "君子恶乎成名？"
+   ],
+   "answerIndex": 3,
+   "explanation": "文中“恶乎”意为“在哪里”，只有D项指“在哪里（凭借什么）成名”。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《管子·心术上》"
+   ],
+   "location": {
+    "charIndex": 178
+   }
+  },
+  {
+   "id": "lesson-1521:v03",
+   "word": "阿",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多音字，且为该句核心动词，影响对“曲学阿世”成语的理解。",
+   "contextMeaning": "迎合",
+   "sourceSentence": "务正学以言,无曲学以阿世。",
+   "type": "pronunciation",
+   "question": "“无曲学以阿世”中“阿”的读音及含义正确的是",
+   "options": [
+    "ā，迎合",
+    "ē，迎合",
+    "ā，亲近",
+    "ē，依赖"
+   ],
+   "answerIndex": 1,
+   "explanation": "“阿”在此处读ē，意为迎合、曲从。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 939
+   }
+  },
+  {
+   "id": "lesson-1521:v04",
+   "word": "对举",
+   "annotated": false,
+   "decision": "question",
+   "reason": "逻辑术语，理解论证方式的关键。",
+   "contextMeaning": "并列提出，对照列举",
+   "sourceSentence": "以真伪对举,始于庄子。",
+   "type": "discrimination",
+   "question": "文中“以真伪对举”中“对举”的意思是",
+   "options": [
+    "举手投足",
+    "相互争辩",
+    "并列提出并对照",
+    "一一对应"
+   ],
+   "answerIndex": 2,
+   "explanation": "“对举”指将两个相对的概念并列在一起进行讨论。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 196
+   }
+  },
+  {
+   "id": "lesson-1521:v05",
+   "word": "实",
+   "annotated": false,
+   "decision": "question",
+   "reason": "哲学概念，核心词，直接影响对“诚”的定义。",
+   "contextMeaning": "真实、客观存在",
+   "sourceSentence": "诚者,实也,真也。",
+   "type": "contextual-choice",
+   "question": "文中“诚者,实也”中“实”的含义是",
+   "options": [
+    "果实",
+    "充实",
+    "真实、客观存在",
+    "实践"
+   ],
+   "answerIndex": 2,
+   "explanation": "张岱年解释“诚”即“实”，意为真实不虚。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 131
+   }
+  },
+  {
+   "id": "lesson-1521:v06",
+   "word": "无益无损",
+   "annotated": false,
+   "decision": "question",
+   "reason": "理解唯物主义认识论的关键概念。",
+   "contextMeaning": "不增添主观成见，不减损事物本来面目",
+   "sourceSentence": "因也者,无益无损也。",
+   "type": "interpretation",
+   "question": "根据文中对“因”的解释，“无益无损”是指",
+   "options": [
+    "既不获得好处，也不遭受损失",
+    "放弃主观成见，保持客观本来面目",
+    "对事物不加评论，任其自然发展",
+    "追求真理过程中不计较个人得失"
+   ],
+   "answerIndex": 1,
+   "explanation": "文中明确指出这是指认识外物时不要有所损益，力求认识本来面目。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《管子·心术上》"
+   ],
+   "location": {
+    "charIndex": 722
+   }
+  },
+  {
+   "id": "lesson-1521:v07",
+   "word": "亮",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词义活用，从形容词/名词转化为动词，是理解作者态度的关键。",
+   "contextMeaning": "显示、显露",
+   "sourceSentence": "敢于把自己的思想见解亮出来。",
+   "type": "substitution",
+   "question": "下列词语替换“亮”字后，句意最接近的是",
+   "options": [
+    "照",
+    "晒",
+    "显",
+    "擦"
+   ],
+   "answerIndex": 2,
+   "explanation": "“亮”在此处为动词，意为显露、展示。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1248
+   }
+  },
+  {
+   "id": "lesson-1521:v08",
+   "word": "十翼",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "属于文学常识背景，对正文逻辑理解有辅助作用，但作为专有名词，直接识记即可，无需出题。",
+   "contextMeaning": "对《周易》经文解说的七种文辞共十篇",
+   "sourceSentence": "“传”是对“经”的解说,有七种文辞共十篇,称“十翼”。",
+   "location": {
+    "charIndex": 1499
+   }
+  },
+  {
+   "id": "lesson-1521:v09",
+   "word": "齐诗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "属于学术史背景，用于支持“曲学阿世”的论据，不作为字词考点。",
+   "contextMeaning": "西汉初年传授《诗经》的四家之一",
+   "sourceSentence": "据《汉书·儒林传》记载,齐诗的经师辕固曾对公孙弘说",
+   "location": {
+    "charIndex": 912
+   }
+  },
+  {
+   "id": "lesson-1521:v10",
+   "word": "主体性",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "哲学专有名词，教材未注且该词在文中语境较固定，属于阅读理解范畴，不宜拆解字词命题。",
+   "contextMeaning": "认识主体在认识活动中的作用",
+   "sourceSentence": "人在观察现象的时候,往往表现一定的主体性",
+   "location": {
+    "charIndex": 638
+   }
+  },
+  {
+   "id": "lesson-1521:v11",
+   "word": "易传·文言",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "《周易》有“经”和“传”两部分。“传”是对“经”的解说，有七种文辞共十篇，称“十翼”。《文言》是“十翼”之一。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1521:v12",
+   "word": "道恶乎隐而有真伪",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "大道隐藏于哪里，才（使原本浑朴的世间）有了真伪之分？恶乎，在哪里。乎，相当于“于”。",
+   "sourceSentence": ""
+  }
+ ]
+}

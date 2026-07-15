@@ -1,0 +1,326 @@
+{
+ "lessonId": "lesson-1566",
+ "title": "* 边城(节选)/ 沈从文",
+ "mode": "fiction",
+ "builtAt": "2026-07-14T09:38:37.189Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 12,
+ "inventory": [
+  {
+   "id": "lesson-1566:v01",
+   "word": "雄黄",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，且为文化常识，无需通过命题考察",
+   "contextMeaning": "矿物，也叫“鸡冠石”，此处指用雄黄泡制的酒",
+   "sourceSentence": "额角上用雄黄蘸酒画了个王字",
+   "location": {
+    "charIndex": 409
+   }
+  },
+  {
+   "id": "lesson-1566:v02",
+   "word": "缓促",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，属于对节奏快慢的描写",
+   "contextMeaning": "快慢",
+   "sourceSentence": "随了鼓声缓促为节拍",
+   "location": {
+    "charIndex": 745
+   }
+  },
+  {
+   "id": "lesson-1566:v03",
+   "word": "梁红玉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，属于文学典故",
+   "contextMeaning": "宋代大将韩世忠的妻子",
+   "sourceSentence": "便使人想起小说故事上梁红玉",
+   "location": {
+    "charIndex": 893
+   }
+  },
+  {
+   "id": "lesson-1566:v04",
+   "word": "傩送",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，属于专有名词",
+   "contextMeaning": "人名，因排行老二，也称“二老”",
+   "sourceSentence": "但一到次子傩nuó送年过十岁时",
+   "location": {
+    "charIndex": 1285
+   }
+  },
+  {
+   "id": "lesson-1566:v05",
+   "word": "氽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，属于特殊动词",
+   "contextMeaning": "漂浮，这里指潜泳",
+   "sourceSentence": "已能入水闭气氽tǔn着到鸭子身边",
+   "location": {
+    "charIndex": 1301
+   }
+  },
+  {
+   "id": "lesson-1566:v06",
+   "word": "鞶鼓",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，属于乐器名词",
+   "contextMeaning": "一种革制的鼓",
+   "sourceSentence": "已上了灯,且有人敲小鞶pán鼓弹月琴唱曲子",
+   "location": {
+    "charIndex": 3474
+   }
+  },
+  {
+   "id": "lesson-1566:v07",
+   "word": "踹水",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，属于特定动作",
+   "contextMeaning": "踏水，人直立水中，双脚快速蹬动",
+   "sourceSentence": "那人已把鸭子捉到手,却慢慢地踹水游近岸边的",
+   "location": {
+    "charIndex": 3858
+   }
+  },
+  {
+   "id": "lesson-1566:v08",
+   "word": "岨",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，属于地名专用字",
+   "contextMeaning": "地名，读jū",
+   "sourceSentence": "是碧溪岨撑渡船的孙女",
+   "location": {
+    "charIndex": 4083
+   }
+  },
+  {
+   "id": "lesson-1566:v09",
+   "word": "吕洞宾",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，属于民间传说人物",
+   "contextMeaning": "传说中的“八仙”之一",
+   "sourceSentence": "你那只狗不识吕洞宾",
+   "location": {
+    "charIndex": 4875
+   }
+  },
+  {
+   "id": "lesson-1566:v10",
+   "word": "镇筸",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，属于地名",
+   "contextMeaning": "地名，曾是湖南凤凰县的治所",
+   "sourceSentence": "城中舞龙耍狮子的镇筸兵士",
+   "location": {
+    "charIndex": 5400
+   }
+  },
+  {
+   "id": "lesson-1566:v11",
+   "word": "闪不知",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，属于方言词汇",
+   "contextMeaning": "突然",
+   "sourceSentence": "就闪不知[^12]一把抓住那个人",
+   "location": {
+    "charIndex": 5950
+   }
+  },
+  {
+   "id": "lesson-1566:v12",
+   "word": "安辑",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言词汇，考查对古代政务词汇的理解",
+   "contextMeaning": "安抚、安定",
+   "sourceSentence": "知道注重在安辑保守,处置还得法",
+   "type": "contextual-choice",
+   "question": "「知道注重在安辑保守」中「安辑」的意思是",
+   "options": [
+    "安装收集",
+    "安抚安定",
+    "安分守己",
+    "安顿辑录"
+   ],
+   "answerIndex": 1,
+   "explanation": "安辑意为安抚、安定，符合文中描写地方治理的语境。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 164
+   }
+  },
+  {
+   "id": "lesson-1566:v13",
+   "word": "悖时",
+   "annotated": false,
+   "decision": "question",
+   "reason": "地方方言，直接影响对人物情感及对话语气的理解",
+   "contextMeaning": "倒霉、不走运",
+   "sourceSentence": "你个悖时砍脑壳的",
+   "type": "interpretation",
+   "question": "「你个悖时砍脑壳的！」一句中，「悖时」一词表达的情感是",
+   "options": [
+    "赞美对方技艺高超",
+    "表达对对方的爱慕",
+    "咒骂对方倒霉、不走运",
+    "感叹时光流逝"
+   ],
+   "answerIndex": 2,
+   "explanation": "“悖时”是湘西地区方言，意为倒霉、不走运，是翠翠在误解对方欺侮自己时脱口而出的骂人话。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 4330
+   }
+  },
+  {
+   "id": "lesson-1566:v14",
+   "word": "喧阗",
+   "annotated": false,
+   "decision": "question",
+   "reason": "书面语，考查对形容声音词汇的掌握",
+   "contextMeaning": "声音大而杂",
+   "sourceSentence": "在小教场迎春,锣鼓喧阗大热闹",
+   "type": "contextual-choice",
+   "question": "「锣鼓喧阗大热闹」中「喧阗」的意思是",
+   "options": [
+    "声音嘈杂且大",
+    "节奏缓慢",
+    "整齐划一",
+    "清脆悦耳"
+   ],
+   "answerIndex": 0,
+   "explanation": "喧阗指声音大而杂，常形容节日庆典的热闹场面。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《现代汉语词典》"
+   ],
+   "location": {
+    "charIndex": 5378
+   }
+  },
+  {
+   "id": "lesson-1566:v15",
+   "word": "拮据",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用词，考查在特定语境下的准确理解",
+   "contextMeaning": "经济窘迫",
+   "sourceSentence": "且知道祖孙二人所过的日子,十分拮据",
+   "type": "contextual-choice",
+   "question": "「且知道祖孙二人所过的日子，十分拮据」中「拮据」的意思是",
+   "options": [
+    "极其富有",
+    "生活安定",
+    "经济窘迫",
+    "忙碌不堪"
+   ],
+   "answerIndex": 2,
+   "explanation": "拮据指经济困难，生活窘迫，符合文中对祖孙二人贫寒生活的描写。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《现代汉语词典》"
+   ],
+   "location": {
+    "charIndex": 6241
+   }
+  },
+  {
+   "id": "lesson-1566:v16",
+   "word": "不加检点",
+   "annotated": false,
+   "decision": "question",
+   "reason": "成语用法，考查对人物言行评价的理解",
+   "contextMeaning": "不注意约束言行",
+   "sourceSentence": "祖父不明白这句话的意思所在,因为今天太高兴一点,便不加检点笑着说",
+   "type": "interpretation",
+   "question": "文中祖父「不加检点」地笑着说，体现了祖父当时怎样的心理？",
+   "options": [
+    "对翠翠的婚事漠不关心",
+    "因过于高兴而缺乏审慎，言语直白",
+    "对他人的议论感到愤怒",
+    "因醉酒而神志不清"
+   ],
+   "answerIndex": 1,
+   "explanation": "“不加检点”指说话做事不加思考、不注意约束，文中指祖父因高兴而直言不讳地向翠翠提及其婚事，缺乏审慎。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 6495
+   }
+  },
+  {
+   "id": "lesson-1566:v17",
+   "word": "拢岸",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用动宾搭配，考查对小说动作描写的理解",
+   "contextMeaning": "靠岸",
+   "sourceSentence": "船拢岸时,那人跳上了码头",
+   "type": "contextual-choice",
+   "question": "「船拢岸时」中「拢岸」的意思是",
+   "options": [
+    "离开岸边",
+    "靠岸",
+    "在岸上行走",
+    "搁浅"
+   ],
+   "answerIndex": 1,
+   "explanation": "拢，靠近、到达。拢岸即船靠向岸边。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 7168
+   }
+  },
+  {
+   "id": "lesson-1566:v18",
+   "word": "行雨",
+   "annotated": false,
+   "decision": "question",
+   "reason": "方言/特殊用法，考查对文本细节的理解",
+   "contextMeaning": "阵雨",
+   "sourceSentence": "一切玩得正好时,忽然落了行雨,无人衣衫不被雨湿透",
+   "type": "interpretation",
+   "question": "文中「忽然落了行雨」的「行雨」最恰当的解释是",
+   "options": [
+    "下行的雨",
+    "阵雨",
+    "毛毛细雨",
+    "暴雨"
+   ],
+   "answerIndex": 1,
+   "explanation": "从文中“一切玩得正好时，忽然落了”可知，这是一种突发的、过阵即止的雨，即阵雨。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 5798
+   }
+  },
+  {
+   "id": "lesson-1566:v19",
+   "word": "老鹳河",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一名“鹳河”，在今江苏淮安西北，北通淮水，南接运河。建炎四年（1130），韩世忠与金兀术战于黄天荡（今南京东北长江干流），相传梁红玉亲自擂鼓助战。",
+   "sourceSentence": ""
+  }
+ ]
+}

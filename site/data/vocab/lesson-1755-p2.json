@@ -1,0 +1,272 @@
+{
+ "lessonId": "lesson-1755-p2",
+ "title": "桂枝香·金陵怀古",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:30:07.547Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 379,
+ "annotationCount": 5,
+ "inventory": [
+  {
+   "id": "lesson-1755-p2:v01",
+   "word": "登临送目",
+   "annotated": false,
+   "decision": "question",
+   "reason": "考核对词中特定动作意象的理解，是理解全词视角的重要切入点。",
+   "contextMeaning": "登山临水，放眼远眺。",
+   "sourceSentence": "登临送目 ，正故国 晚秋，天气初肃",
+   "type": "contextual-choice",
+   "question": "「登临送目」在词中的意思是",
+   "options": [
+    "登高望远，放眼视察",
+    "登上高处，寄送目光",
+    "登山临水，放眼远眺",
+    "登高凭栏，极目远望"
+   ],
+   "answerIndex": 2,
+   "explanation": "根据教材注释，登临送目即登山临水，放眼远眺之意。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 65
+   }
+  },
+  {
+   "id": "lesson-1755-p2:v02",
+   "word": "故国",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，极易将现代汉语中的「祖国」与词中的「故都」混淆。",
+   "contextMeaning": "故都，这里指金陵。",
+   "sourceSentence": "登临送目 ，正故国 晚秋，天气初肃",
+   "type": "gu-jin",
+   "question": "「故国」一词在句中的含义与现代汉语中哪个词的用法不同？",
+   "options": [
+    "祖国",
+    "旧国",
+    "故都",
+    "故乡"
+   ],
+   "answerIndex": 0,
+   "explanation": "词中「故国」指代旧日都城金陵，与现代汉语中指称国家的「祖国」含义不同。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 65
+   }
+  },
+  {
+   "id": "lesson-1755-p2:v03",
+   "word": "肃",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词义活用，考核对词语语境义的辨析。",
+   "contextMeaning": "天高气爽。",
+   "sourceSentence": "登临送目 ，正故国 晚秋，天气初肃",
+   "type": "contextual-choice",
+   "question": "「天气初肃」中「肃」的意思是",
+   "options": [
+    "严肃",
+    "恭敬",
+    "萧瑟",
+    "天高气爽"
+   ],
+   "answerIndex": 3,
+   "explanation": "教材明确注释「肃」为「肃爽」，即天高气爽之意。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 65
+   }
+  },
+  {
+   "id": "lesson-1755-p2:v04",
+   "word": "星河",
+   "annotated": false,
+   "decision": "question",
+   "reason": "比喻义，考核学生对词中意象的还原能力。",
+   "contextMeaning": "长江。",
+   "sourceSentence": "彩舟云淡，星河 鹭起，画图难足",
+   "type": "contextual-choice",
+   "question": "「星河鹭起」中的「星河」在词中是指",
+   "options": [
+    "天上的银河",
+    "长江",
+    "闪烁的河水",
+    "星光照耀的河流"
+   ],
+   "answerIndex": 1,
+   "explanation": "根据教材注释，此处的「星河」借指长江。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 117
+   }
+  },
+  {
+   "id": "lesson-1755-p2:v05",
+   "word": "凭高",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "词义较浅显，结合语境易于理解，不设题。",
+   "contextMeaning": "登临高处。",
+   "sourceSentence": "千古凭高 对此，谩嗟荣辱",
+   "location": {
+    "charIndex": 159
+   }
+  },
+  {
+   "id": "lesson-1755-p2:v06",
+   "word": "练",
+   "annotated": false,
+   "decision": "question",
+   "reason": "比喻修辞，考核对意象特征的准确把握。",
+   "contextMeaning": "白色的绢。",
+   "sourceSentence": "千里澄江似练，翠峰如簇",
+   "type": "contextual-choice",
+   "question": "「千里澄江似练」中「练」的意思是",
+   "options": [
+    "磨练",
+    "白色的绢",
+    "练兵",
+    "平整"
+   ],
+   "answerIndex": 1,
+   "explanation": "「练」指白色的绢，此处形容江水清澈如白绢。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 85
+   }
+  },
+  {
+   "id": "lesson-1755-p2:v07",
+   "word": "簇",
+   "annotated": false,
+   "decision": "question",
+   "reason": "描写词，考核对动词/形容词的理解。",
+   "contextMeaning": "聚集。",
+   "sourceSentence": "千里澄江似练，翠峰如簇",
+   "type": "contextual-choice",
+   "question": "「翠峰如簇」中「簇」的意思是",
+   "options": [
+    "堆积",
+    "聚集",
+    "草丛",
+    "簇拥"
+   ],
+   "answerIndex": 1,
+   "explanation": "「簇」在此处形容翠绿的山峰像聚在一起的花草。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 85
+   }
+  },
+  {
+   "id": "lesson-1755-p2:v08",
+   "word": "谩",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言常用词，常考，且在此语境中体现作者情感。",
+   "contextMeaning": "空、徒然。",
+   "sourceSentence": "千古凭高 对此，谩嗟荣辱",
+   "type": "contextual-choice",
+   "question": "「谩嗟荣辱」中「谩」的意思是",
+   "options": [
+    "欺骗",
+    "随口",
+    "空、徒然",
+    "慢慢"
+   ],
+   "answerIndex": 2,
+   "explanation": "「谩」在此处意为徒然、空，表达了作者对凭吊兴亡荣辱感到无意义。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 159
+   }
+  },
+  {
+   "id": "lesson-1755-p2:v09",
+   "word": "竞逐",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词义理解，对全词主题「繁华竞逐」的把握。",
+   "contextMeaning": "争相追逐，此处指争夺奢靡生活。",
+   "sourceSentence": "念往昔，繁华竞逐 ，叹门外楼头 ，悲恨相续",
+   "type": "interpretation",
+   "question": "对「繁华竞逐」一句的理解，最恰当的是",
+   "options": [
+    "大家都在争相观看繁华的景象",
+    "往昔的人们竞相追逐名利与奢靡",
+    "繁华的景象像在追逐着人们",
+    "往昔的繁华如竞跑般消逝"
+   ],
+   "answerIndex": 1,
+   "explanation": "「竞逐」在此处指代六朝统治者争相追求奢靡繁华，是导致亡国的原因之一。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 135
+   }
+  },
+  {
+   "id": "lesson-1755-p2:v10",
+   "word": "遗曲",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "字面意思明确，即遗留下来的曲子，不设题。",
+   "contextMeaning": "遗留下来的曲子。",
+   "sourceSentence": "至今商女，时时犹唱，后庭遗曲",
+   "location": {
+    "charIndex": 191
+   }
+  },
+  {
+   "id": "lesson-1755-p2:v11",
+   "word": "登临送目登山临水放眼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "登临送目，登山临水，放眼远眺。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1755-p2:v12",
+   "word": "故国故都这里指金陵",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "故国，故都，这里指金陵。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1755-p2:v13",
+   "word": "肃肃爽天高气爽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "肃，肃爽，天高气爽。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1755-p2:v14",
+   "word": "星河天河这里指长江",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "星河，天河，这里指长江。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1755-p2:v15",
+   "word": "凭高登临高处",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "凭高，登临高处。",
+   "sourceSentence": ""
+  }
+ ]
+}

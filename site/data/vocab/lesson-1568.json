@@ -1,0 +1,187 @@
+{
+ "lessonId": "lesson-1568",
+ "title": "* 再别康桥/ 徐志摩",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:38:28.447Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 1754,
+ "annotationCount": 0,
+ "inventory": [
+  {
+   "id": "lesson-1568:v01",
+   "word": "荇",
+   "annotated": false,
+   "decision": "question",
+   "reason": "教材已注，考查生僻字读音，是诗歌意象理解的基础",
+   "contextMeaning": "多年生草本植物",
+   "sourceSentence": "软泥上的青荇1",
+   "type": "pronunciation",
+   "question": "下列加点字的读音正确的一项是",
+   "options": [
+    "青荇（háng）",
+    "青荇（xìng）",
+    "青荇（yán）",
+    "青荇（xíng）"
+   ],
+   "answerIndex": 1,
+   "explanation": "根据教材注释，荇读xìng。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "教材注释"
+   ],
+   "location": {
+    "charIndex": 161
+   }
+  },
+  {
+   "id": "lesson-1568:v02",
+   "word": "招摇",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，现代语境多含贬义（炫耀），此处为中性词，指摆动",
+   "contextMeaning": "摆动，摇曳",
+   "sourceSentence": "软泥上的青荇1, 油油的在水底招摇:",
+   "type": "contextual-choice",
+   "question": "「油油的在水底招摇」中「招摇」一词的语境义是",
+   "options": [
+    "故意张扬以引起注意",
+    "在水中自由自在地摆动",
+    "被水流冲击而摇晃",
+    "展现出骄傲的姿态"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处描写青荇在水底随着水波摇曳的姿态，表现其生机与惬意，无贬义。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《现代汉语词典》"
+   ],
+   "location": {
+    "charIndex": 161
+   }
+  },
+  {
+   "id": "lesson-1568:v03",
+   "word": "漫溯",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词义组合，体现诗人的动作与心境，影响对意境的理解",
+   "contextMeaning": "随意地向水流上游探索",
+   "sourceSentence": "向青草更青处漫溯,",
+   "type": "interpretation",
+   "question": "对「向青草更青处漫溯」一句的理解，最恰当的是",
+   "options": [
+    "指诗人逆流而上，寻找青草茂盛的地方",
+    "表现诗人漫无目的地在康河上游荡",
+    "体现诗人怀着某种执着而又从容的心态去追寻梦想",
+    "写出诗人对康河地形的熟悉与探索"
+   ],
+   "answerIndex": 2,
+   "explanation": "「漫」有随意、悠然之意，「溯」为逆流而上。此处结合「寻梦」语境，体现诗人追寻理想的深情与从容。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《徐志摩诗全编》"
+   ],
+   "location": {
+    "charIndex": 246
+   }
+  },
+  {
+   "id": "lesson-1568:v04",
+   "word": "斑斓",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容词，关键意象词，影响画面感理解",
+   "contextMeaning": "色彩灿烂，光影交错",
+   "sourceSentence": "在星辉斑斓里放歌。",
+   "type": "substitution",
+   "question": "「在星辉斑斓里放歌」中「斑斓」一词可以用下列哪个词语替换而不改变原意",
+   "options": [
+    "绚丽",
+    "破碎",
+    "黯淡",
+    "模糊"
+   ],
+   "answerIndex": 0,
+   "explanation": "斑斓形容色彩灿烂夺目，此处形容星辉的色彩丰富、光影闪烁。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《现代汉语词典》"
+   ],
+   "location": {
+    "charIndex": 264
+   }
+  },
+  {
+   "id": "lesson-1568:v05",
+   "word": "笙箫",
+   "annotated": false,
+   "decision": "question",
+   "reason": "隐喻用法，理解诗歌情感转折的关键",
+   "contextMeaning": "乐器，此处借指离别的声音或氛围",
+   "sourceSentence": "悄悄是别离的笙箫;",
+   "type": "interpretation",
+   "question": "对「悄悄是别离的笙箫」一句的理解，正确的是",
+   "options": [
+    "诗人真的在离别时吹奏了笙箫",
+    "以乐器比喻离别时的喧闹",
+    "以有声的乐器反衬「悄悄」的寂静与离别的深沉",
+    "指离别时的音乐声过于凄凉"
+   ],
+   "answerIndex": 2,
+   "explanation": "诗人运用通感手法，以乐器之声反衬此时的无声与内心的沉重。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 282
+   }
+  },
+  {
+   "id": "lesson-1568:v06",
+   "word": "沉淀",
+   "annotated": false,
+   "decision": "question",
+   "reason": "动词的语境义，将抽象的「梦」具象化",
+   "contextMeaning": "积淀，凝结",
+   "sourceSentence": "沉淀着彩虹似的梦。",
+   "type": "contextual-choice",
+   "question": "「沉淀着彩虹似的梦」中「沉淀」一词的含义是",
+   "options": [
+    "物质从溶液中析出",
+    "比喻某种事物在心底积累并凝结",
+    "指梦境变得沉重，无法浮起",
+    "形容梦境色彩的加深"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处用「沉淀」写出诗人将对康桥美好的回忆与梦想深藏于心底。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 226
+   }
+  },
+  {
+   "id": "lesson-1568:v07",
+   "word": "作别",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "词义浅显，为现代汉语常用词，不影响文意理解",
+   "contextMeaning": "告别",
+   "sourceSentence": "作别西天的云彩。",
+   "location": {
+    "charIndex": 118
+   }
+  },
+  {
+   "id": "lesson-1568:v08",
+   "word": "轻轻",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "叠词修辞，主要用于营造音乐美与节奏感，非生僻字词理解难点",
+   "contextMeaning": "动作轻柔",
+   "sourceSentence": "轻轻的我走了,",
+   "location": {
+    "charIndex": 93
+   }
+  }
+ ]
+}

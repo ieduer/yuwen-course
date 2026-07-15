@@ -1,0 +1,195 @@
+{
+ "lessonId": "lesson-1700",
+ "title": "5 以工匠精神雕琢时代品质",
+ "mode": "journalism",
+ "builtAt": "2026-07-14T09:15:12.133Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 1428,
+ "annotationCount": 2,
+ "inventory": [
+  {
+   "id": "lesson-1700:v01",
+   "word": "说文",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "作为工具书名，属于背景知识，不涉及词义理解的难点。",
+   "contextMeaning": "《说文解字》",
+   "sourceSentence": "说文》里讲:“匠,木工也",
+   "location": {
+    "charIndex": 187
+   }
+  },
+  {
+   "id": "lesson-1700:v02",
+   "word": "躲进小楼成一统",
+   "annotated": true,
+   "decision": "question",
+   "reason": "典故含义深刻，理解其语境义有助于理解作者反对的“离群索居”态度。",
+   "contextMeaning": "指脱离社会现实，只顾自己的小天地。",
+   "sourceSentence": "也不是鼓励离群索居、“躲进小楼成一统”,而是为了擦亮爱岗敬业、劳动光荣的价值原色",
+   "type": "interpretation",
+   "question": "文中引用“躲进小楼成一统”旨在表达什么？",
+   "options": [
+    "赞赏工匠在安静环境中精益求精的态度",
+    "批评那种脱离现实、不关心社会整体利益的封闭心态",
+    "强调工匠需要独立思考的创作空间",
+    "说明工匠精神需要长期的孤独与寂寞"
+   ],
+   "answerIndex": 1,
+   "explanation": "原文语境中将此与“离群索居”并列，是作者所批判的消极避世态度。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "鲁迅《自嘲》"
+   ],
+   "location": {
+    "charIndex": 517
+   }
+  },
+  {
+   "id": "lesson-1700:v03",
+   "word": "不谋而合",
+   "annotated": false,
+   "decision": "question",
+   "reason": "考查词语在特定语境下的匹配关系。",
+   "contextMeaning": "指事先没有商量过，意见却完全一致。",
+   "sourceSentence": "企业对高精尖、炫彩酷的不懈追求,同工匠精神不谋而合",
+   "type": "contextual-choice",
+   "question": "文中“不谋而合”的意思是：",
+   "options": [
+    "经过长期计划而达成一致",
+    "企业追求的目标与工匠精神本质上契合",
+    "企业为了获得利益而迎合工匠精神",
+    "两者之间存在必然的利益关联"
+   ],
+   "answerIndex": 1,
+   "explanation": "指企业对品质的追求与工匠精神的核心价值是不约而同地一致的。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 113
+   }
+  },
+  {
+   "id": "lesson-1700:v04",
+   "word": "雕虫小技",
+   "annotated": false,
+   "decision": "question",
+   "reason": "成语语境义与字面义的辨析。",
+   "contextMeaning": "比喻微不足道的技能（多指文字技巧）。",
+   "sourceSentence": "工匠精神从来都不是什么雕虫小技,而是一种改变世界的现实力量",
+   "type": "contextual-choice",
+   "question": "下列哪项最能体现文中“雕虫小技”的含义？",
+   "options": [
+    "指工匠手艺精巧，如同雕刻虫子一样细致",
+    "指那些被认为无足轻重、缺乏价值的低级技术",
+    "指工匠在制作过程中使用的辅助性小工具",
+    "指需要极高耐心才能完成的精细操作"
+   ],
+   "answerIndex": 1,
+   "explanation": "作者用此词反衬工匠精神的伟大，意指其绝非微不足道的小技巧。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 465
+   }
+  },
+  {
+   "id": "lesson-1700:v05",
+   "word": "炉火纯青",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频成语，考查其在技能领域的适用性。",
+   "contextMeaning": "比喻功夫达到了纯熟完美的境界。",
+   "sourceSentence": "将一门技术掌握到炉火纯青,这固然是工匠精神",
+   "type": "substitution",
+   "question": "文中“炉火纯青”一词，若替换为以下哪个词语最不恰当？",
+   "options": [
+    "登峰造极",
+    "出神入化",
+    "炉火纯青",
+    "粗制滥造"
+   ],
+   "answerIndex": 3,
+   "explanation": "“粗制滥造”与“炉火纯青”词义完全相反。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 623
+   }
+  },
+  {
+   "id": "lesson-1700:v06",
+   "word": "技进乎道",
+   "annotated": false,
+   "decision": "question",
+   "reason": "涉及中国传统哲学概念，对理解文章深度至关重要。",
+   "contextMeaning": "指技艺精进到了一定程度，便能领悟到事物的规律或人生的哲理。",
+   "sourceSentence": "工匠精神中所深藏的,有格物致知、正心诚意的生命哲学,也有技进乎道、超然达观的人生信念",
+   "type": "interpretation",
+   "question": "“技进乎道”体现了工匠精神的哪一层次？",
+   "options": [
+    "技术熟练度极高，可以大规模生产",
+    "将简单的手工技艺提升为一种哲学高度和人生追求",
+    "为了获得更高的技术等级而不断努力",
+    "通过掌握技术来获取名利和地位"
+   ],
+   "answerIndex": 1,
+   "explanation": "“技进乎道”强调从物质层面上升到精神与哲学层面，是工匠精神的高级内涵。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《庄子·养生主》"
+   ],
+   "location": {
+    "charIndex": 781
+   }
+  },
+  {
+   "id": "lesson-1700:v07",
+   "word": "旨归",
+   "annotated": false,
+   "decision": "question",
+   "reason": "书面语词汇，考查词义理解。",
+   "contextMeaning": "主旨，归宿，目的。",
+   "sourceSentence": "工匠精神并不以成功为旨归,却足以为成功铺就通天大道",
+   "type": "contextual-choice",
+   "question": "文中“旨归”的意思是：",
+   "options": [
+    "最终目的",
+    "基本前提",
+    "必然结果",
+    "重要标准"
+   ],
+   "answerIndex": 0,
+   "explanation": "句意是说工匠精神的追求本身不是为了功利性的成功，而是内在的品质追求。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 996
+   }
+  },
+  {
+   "id": "lesson-1700:v08",
+   "word": "废寝忘食",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用成语，考查在语境中的准确运用。",
+   "contextMeaning": "顾不得睡觉，忘记了吃饭。形容专心努力。",
+   "sourceSentence": "怎能有废寝忘食、尽心竭力的付出",
+   "type": "discrimination",
+   "question": "下列句子中“废寝忘食”使用不正确的一项是：",
+   "options": [
+    "为了赶在截止日期前完成项目，他废寝忘食地工作。",
+    "他废寝忘食地钻研技术，终于掌握了核心工艺。",
+    "为了在游戏中获得胜利，他废寝忘食地通宵打怪。",
+    "科学家废寝忘食地在实验室里寻找真理。"
+   ],
+   "answerIndex": 2,
+   "explanation": "“废寝忘食”通常带有褒义，形容对正当事业的专注，选项C描述游戏行为，语境色彩不符。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 703
+   }
+  }
+ ]
+}

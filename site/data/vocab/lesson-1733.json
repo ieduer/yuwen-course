@@ -1,0 +1,244 @@
+{
+ "lessonId": "lesson-1733",
+ "title": "6 哈姆莱特(节选)",
+ "mode": "drama",
+ "builtAt": "2026-07-14T09:28:10.993Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 4280,
+ "annotationCount": 5,
+ "inventory": [
+  {
+   "id": "lesson-1733:v01",
+   "word": "国王",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "文中明确指代克劳狄斯，语境极清晰，无需命题考核。",
+   "contextMeaning": "克劳狄斯",
+   "sourceSentence": "国王指克劳狄斯。",
+   "location": {
+    "charIndex": 4031
+   }
+  },
+  {
+   "id": "lesson-1733:v02",
+   "word": "嫁奁",
+   "annotated": true,
+   "decision": "question",
+   "reason": "考查词汇在特定语境下的比喻义，涉及人物情感表达。",
+   "contextMeaning": "陪嫁的财物（此处比喻哈姆莱特送给奥菲利娅的诅咒）",
+   "sourceSentence": "要是你一定要嫁人,我就把这一个诅咒送给你做嫁奁",
+   "type": "contextual-choice",
+   "question": "「要是你一定要嫁人，我就把这一个诅咒送给你做嫁奁」中「嫁奁」的语境义是",
+   "options": [
+    "陪嫁的财物",
+    "结婚的聘礼",
+    "诅咒的代价",
+    "出家的信物"
+   ],
+   "answerIndex": 0,
+   "explanation": "嫁奁本义为陪嫁财物，哈姆莱特用此词反讽，将诅咒视为送给奥菲利娅的「嫁奁」。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2846
+   }
+  },
+  {
+   "id": "lesson-1733:v03",
+   "word": "烟视媚行",
+   "annotated": true,
+   "decision": "question",
+   "reason": "考查成语在戏剧台词中的贬义色彩及人物性格塑造作用。",
+   "contextMeaning": "形容扭捏不自然、妖媚做作的样子。",
+   "sourceSentence": "你们烟视媚行,淫声浪气,替上天造下的生物乱取名字",
+   "type": "contextual-choice",
+   "question": "「你们烟视媚行，淫声浪气」中「烟视媚行」的含义是",
+   "options": [
+    "形容眼神迷离，走路轻快",
+    "形容扭捏不自然，做作的样子",
+    "形容目中无人，横行霸道",
+    "形容卖弄风骚，步履蹒跚"
+   ],
+   "answerIndex": 1,
+   "explanation": "此词在文中形容女性故作姿态，与「淫声浪气」连用，具有强烈的批判色彩。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 3031
+   }
+  },
+  {
+   "id": "lesson-1733:v04",
+   "word": "权充",
+   "annotated": false,
+   "decision": "question",
+   "reason": "「权」为副词「暂且」之意，是文言词汇在现代汉语中的残留，易误解。",
+   "contextMeaning": "暂且充当",
+   "sourceSentence": "她的父亲跟我两人将要权充一下密探",
+   "type": "contextual-choice",
+   "question": "「她的父亲跟我两人将要权充一下密探」中「权充」的意思是",
+   "options": [
+    "有权力充当",
+    "勉强充当",
+    "暂且充当",
+    "完全充当"
+   ],
+   "answerIndex": 2,
+   "explanation": "「权」在文言中常作「暂且」「姑且」解，如「权宜之计」。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 1153
+   }
+  },
+  {
+   "id": "lesson-1733:v05",
+   "word": "迁延",
+   "annotated": false,
+   "decision": "question",
+   "reason": "考查对文言色彩词汇的理解，影响对哈姆莱特所处社会黑暗面的认知。",
+   "contextMeaning": "拖延",
+   "sourceSentence": "谁愿意忍受人世的鞭挞和讥嘲、压迫者的凌辱、傲慢者的冷眼、被轻蔑的爱情的惨痛、法律的迁延",
+   "type": "contextual-choice",
+   "question": "「法律的迁延」中「迁延」的意思是",
+   "options": [
+    "法律的改变",
+    "法律的拖延",
+    "法律的严苛",
+    "法律的偏袒"
+   ],
+   "answerIndex": 1,
+   "explanation": "「迁延」意为拖延、迟延，符合文中控诉现实黑暗的内容。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1793
+   }
+  },
+  {
+   "id": "lesson-1733:v06",
+   "word": "磨折",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此处语境下指代心理与生理的双重痛苦。",
+   "contextMeaning": "折磨、苦难",
+   "sourceSentence": "使我们宁愿忍受目前的磨折,不敢向我们所不知道的痛苦飞去",
+   "type": "contextual-choice",
+   "question": "「使我们宁愿忍受目前的磨折」中「磨折」的意思是",
+   "options": [
+    "磨损折断",
+    "折磨、苦难",
+    "反复周折",
+    "商量折中"
+   ],
+   "answerIndex": 1,
+   "explanation": "结合语境，此处指代「目前的苦难」，即活着所承受的压力。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1955
+   }
+  },
+  {
+   "id": "lesson-1733:v07",
+   "word": "陨落",
+   "annotated": false,
+   "decision": "question",
+   "reason": "比喻义，理解人物悲剧命运的关键点。",
+   "contextMeaning": "坠落，比喻高贵的人格或生命消亡",
+   "sourceSentence": "啊,一颗多么高贵的心是这样陨落了",
+   "type": "contextual-choice",
+   "question": "「啊，一颗多么高贵的心是这样陨落了」中「陨落」的含义是",
+   "options": [
+    "陨石落下",
+    "地位下降",
+    "人格或生命消亡",
+    "心灰意冷"
+   ],
+   "answerIndex": 2,
+   "explanation": "「陨落」原指星体落下，此处形容哈姆莱特的高贵理智与青春在疯狂中毁灭。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 3157
+   }
+  },
+  {
+   "id": "lesson-1733:v08",
+   "word": "迂回婉转",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容探听手段，考查词语搭配与语境逻辑。",
+   "contextMeaning": "曲折而不直率",
+   "sourceSentence": "你们不能用迂回婉转的方法,探出他为什么这样神魂颠倒",
+   "type": "contextual-choice",
+   "question": "「你们不能用迂回婉转的方法」中「迂回婉转」最恰当的解释是",
+   "options": [
+    "道路弯曲",
+    "手段曲折而不直率",
+    "说话动听而委婉",
+    "行动缓慢而谨慎"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处国王要求的是一种间接、隐蔽的探听手段，故选曲折而不直率。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 642
+   }
+  },
+  {
+   "id": "lesson-1733:v09",
+   "word": "神魂颠倒",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "常见成语，虽在文中，但学生理解难度较低，不作为命题重点。",
+   "contextMeaning": "神志不清，精神错乱",
+   "sourceSentence": "探出他为什么这样神魂颠倒",
+   "location": {
+    "charIndex": 655
+   }
+  },
+  {
+   "id": "lesson-1733:v10",
+   "word": "皮囊",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "此处比喻肉体，具有一定的宗教/哲学色彩，属于重要意象，但词义本身较易理解。",
+   "contextMeaning": "身体、肉体",
+   "sourceSentence": "因为当我们摆脱了这一具朽腐的皮囊以后",
+   "location": {
+    "charIndex": 1722
+   }
+  },
+  {
+   "id": "lesson-1733:v11",
+   "word": "国王指克劳狄斯",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "国王指克劳狄斯。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1733:v12",
+   "word": "他指哈姆莱特",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "他指哈姆莱特。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1733:v13",
+   "word": "乔特鲁德是王后的名字",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "乔特鲁德是王后的名字。",
+   "sourceSentence": ""
+  }
+ ]
+}

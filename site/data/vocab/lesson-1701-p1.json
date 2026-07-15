@@ -1,0 +1,269 @@
+{
+ "lessonId": "lesson-1701-p1",
+ "title": "芣苢",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:26:59.118Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 85,
+ "annotationCount": 13,
+ "inventory": [
+  {
+   "id": "lesson-1701-p1:v01",
+   "word": "采采",
+   "annotated": true,
+   "decision": "question",
+   "reason": "形容詞重疊，理解其語境義對於掌握全詩基調至關重要",
+   "contextMeaning": "茂盛的样子",
+   "sourceSentence": "采采 芣苢，薄言 采之",
+   "type": "contextual-choice",
+   "question": "「采采芣苢」中「采采」的意思是",
+   "options": [
+    "采摘的樣子",
+    "茂盛的樣子",
+    "色彩斑斕的樣子",
+    "急促的樣子"
+   ],
+   "answerIndex": 1,
+   "explanation": "「采采」在詩中形容芣苢長勢良好，非動作描述。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 13
+   }
+  },
+  {
+   "id": "lesson-1701-p1:v02",
+   "word": "薄言",
+   "annotated": true,
+   "decision": "question",
+   "reason": "《詩經》常見虛詞組合，考察對詩歌節奏與語法結構的把握",
+   "contextMeaning": "助詞，無實義",
+   "sourceSentence": "采采 芣苢，薄言 采之",
+   "type": "usage",
+   "question": "下列關於「薄言」的用法說明，正確的是",
+   "options": [
+    "「薄」意為輕微，「言」為語言",
+    "「薄」為副詞，「言」為語助詞，合用無實義",
+    "「薄」為動詞，「言」為代詞",
+    "「薄言」指代采摘的工具"
+   ],
+   "answerIndex": 1,
+   "explanation": "「薄言」為《詩經》中常見的發語詞或助詞組合，起調節音節作用。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 13
+   }
+  },
+  {
+   "id": "lesson-1701-p1:v03",
+   "word": "有",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今異義，易與現代漢語「擁有」混淆",
+   "contextMeaning": "取得，獲得",
+   "sourceSentence": "采采芣苢，薄言有 之",
+   "type": "gu-jin",
+   "question": "「薄言有之」中「有」的意思是",
+   "options": [
+    "存在",
+    "擁有",
+    "取得，獲得",
+    "發生"
+   ],
+   "answerIndex": 2,
+   "explanation": "在古代漢語中，「有」在特定語境下可解為「獲得」。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 26
+   }
+  },
+  {
+   "id": "lesson-1701-p1:v04",
+   "word": "掇",
+   "annotated": true,
+   "decision": "question",
+   "reason": "動詞精確度考察，區分不同採集方式",
+   "contextMeaning": "拾取，摘取",
+   "sourceSentence": "采采芣苢，薄言掇 之",
+   "type": "contextual-choice",
+   "question": "「薄言掇之」中的「掇」動作特徵是",
+   "options": [
+    "成把地捋下來",
+    "用衣襟兜住",
+    "拾取、摘取",
+    "連根拔起"
+   ],
+   "answerIndex": 2,
+   "explanation": "「掇」指用手拾取或摘取，與「捋」、「袺」動作方式不同。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 38
+   }
+  },
+  {
+   "id": "lesson-1701-p1:v05",
+   "word": "捋",
+   "annotated": true,
+   "decision": "question",
+   "reason": "動詞精確度考察，區分不同採集方式",
+   "contextMeaning": "从茎上成把地取下",
+   "sourceSentence": "采采芣苢，薄言捋 之",
+   "type": "discrimination",
+   "question": "關於「掇」與「捋」的區別，下列說法正確的是",
+   "options": [
+    "掇是用力扯，捋是輕輕摘",
+    "掇是拾取，捋是從莖上成把地取下",
+    "掇是成把取，捋是單個摘",
+    "兩者意思相同，僅用法不同"
+   ],
+   "answerIndex": 1,
+   "explanation": "「掇」側重拾取，「捋」側重沿莖順勢成把採摘。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 50
+   }
+  },
+  {
+   "id": "lesson-1701-p1:v06",
+   "word": "袺",
+   "annotated": true,
+   "decision": "question",
+   "reason": "動作複雜度考察，涉及古代生活方式",
+   "contextMeaning": "提起衣襟兜东西",
+   "sourceSentence": "采采芣苢，薄言袺 之",
+   "type": "interpretation",
+   "question": "「薄言袺之」句中，「袺」的具體動作是",
+   "options": [
+    "把衣襟掖在腰帶上",
+    "用雙手捧著",
+    "用籃子裝著",
+    "提起衣襟兜東西"
+   ],
+   "answerIndex": 3,
+   "explanation": "「袺」指提起衣襟兜東西，「襭」則是掖在腰帶上，兩者程度不同。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 62
+   }
+  },
+  {
+   "id": "lesson-1701-p1:v07",
+   "word": "襭",
+   "annotated": true,
+   "decision": "question",
+   "reason": "動作複雜度考察，對比「袺」理解採摘過程的深化",
+   "contextMeaning": "把衣襟掖在腰带上兜东西",
+   "sourceSentence": "采采芣苢，薄言襭 之",
+   "type": "discrimination",
+   "question": "比較「袺」與「襭」，下列敘述何者最準確？",
+   "options": [
+    "袺是掖在腰間，襭是手提",
+    "袺是單手提，襭是雙手提",
+    "袺是提起衣襟，襭是將衣襟掖在腰帶上兜物",
+    "兩者皆指將採下的東西裝入籃中"
+   ],
+   "answerIndex": 2,
+   "explanation": "「袺」是提，「襭」是掖，後者是前者動作的進一步固定。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 74
+   }
+  },
+  {
+   "id": "lesson-1701-p1:v08",
+   "word": "之",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高頻虛詞，考察代詞指代對象",
+   "contextMeaning": "代詞，指代芣苢",
+   "sourceSentence": "采采 芣苢，薄言 采之",
+   "type": "interpretation",
+   "question": "詩中多次出現「之」字，其指代對象是",
+   "options": [
+    "採摘的人",
+    "采摘的場所",
+    "芣苢（車前草）",
+    "衣襟"
+   ],
+   "answerIndex": 2,
+   "explanation": "「之」在此處為代詞，指代前文提到的對象「芣苢」。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 13
+   }
+  },
+  {
+   "id": "lesson-1701-p1:v09",
+   "word": "兜鍪",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "課文正文未出現此詞，不屬於本課教學內容範疇",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1701-p1:v10",
+   "word": "胛",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "課文正文未出現此詞，不屬於本課教學內容範疇",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1701-p1:v11",
+   "word": "渠",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "課文正文未出現此詞，不屬於本課教學內容範疇",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1701-p1:v12",
+   "word": "半霎",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "課文正文未出現此詞，不屬於本課教學內容範疇",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1701-p1:v13",
+   "word": "莳未匝",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "課文正文未出現此詞，不屬於本課教學內容範疇",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1701-p1:v14",
+   "word": "照管",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "課文正文未出現此詞，不屬於本課教學內容範疇",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1701-p1:v15",
+   "word": "芣苢",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "詩歌題目與核心意象，理解為車前草即可，無需命題",
+   "contextMeaning": "車前草",
+   "sourceSentence": "采采 芣苢，薄言 采之",
+   "location": {
+    "charIndex": 13
+   }
+  }
+ ]
+}

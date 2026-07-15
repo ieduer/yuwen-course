@@ -1,0 +1,221 @@
+{
+ "lessonId": "lesson-1692-p2",
+ "title": "红烛",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:14:24.868Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 409,
+ "annotationCount": 7,
+ "inventory": [
+  {
+   "id": "lesson-1692-p2:v01",
+   "word": "蜡炬成灰泪始干",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "引用古典诗词，旨在借用李商隐原意中奉献与牺牲的意象，不作为考试重点。",
+   "contextMeaning": "蜡烛烧尽变成灰烬，泪水才流干，比喻对理想的执着与牺牲。",
+   "sourceSentence": "蜡炬成灰泪始干",
+   "location": {
+    "charIndex": 8
+   }
+  },
+  {
+   "id": "lesson-1692-p2:v02",
+   "word": "律吕",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "课文正文中未出现此词，教材注释多余。",
+   "contextMeaning": "音律的统称。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p2:v03",
+   "word": "揳",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "课文正文中未出现此词，教材注释多余。",
+   "contextMeaning": "用力插入。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p2:v04",
+   "word": "罅隙",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "课文正文中未出现此词，教材注释多余。",
+   "contextMeaning": "缝隙。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p2:v05",
+   "word": "一般",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，极易被误解为“普通”，此处应为“一样”。",
+   "contextMeaning": "一样、相同。",
+   "sourceSentence": "可是一般颜色？",
+   "type": "contextual-choice",
+   "question": "「可是一般颜色？」中「一般」的意思是：",
+   "options": [
+    "普通",
+    "一样",
+    "大概",
+    "普遍"
+   ],
+   "answerIndex": 1,
+   "explanation": "在此处诗句中，诗人询问蜡烛的心与诗人的心颜色是否相同，故为“一样”。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 49
+   }
+  },
+  {
+   "id": "lesson-1692-p2:v06",
+   "word": "误",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词随语境变化，理解此词是把握全诗“矛盾-否定-升华”逻辑的关键。",
+   "contextMeaning": "指蜡烛燃烧过程中的自我怀疑或矛盾状态。",
+   "sourceSentence": "一误再误； 矛盾！冲突",
+   "type": "interpretation",
+   "question": "结合全文，诗人为什么说「一误再误」？",
+   "options": [
+    "指蜡烛制造的工艺有瑕疵",
+    "指蜡烛对自我牺牲价值的怀疑与矛盾",
+    "指诗人对蜡烛的描写出现错误",
+    "指残风破坏了蜡烛燃烧"
+   ],
+   "answerIndex": 1,
+   "explanation": "诗人通过「一误再误」表现蜡烛在燃烧过程中产生的内心冲突，随后又否定了这种怀疑，体现了牺牲的自觉性。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 106
+   }
+  },
+  {
+   "id": "lesson-1692-p2:v07",
+   "word": "灰心",
+   "annotated": false,
+   "decision": "question",
+   "reason": "字面义与语境义不一致，易被误解为日常的“失望/沮丧”。",
+   "contextMeaning": "心化为灰，指心随着蜡炬燃烧而化为灰烬，即奉献过程。",
+   "sourceSentence": "你流一滴泪，灰一分心。",
+   "type": "contextual-choice",
+   "question": "「灰一分心」中的「灰」字在文中的含义是：",
+   "options": [
+    "变得失望沮丧",
+    "颜色变成灰色",
+    "化为灰烬",
+    "熄灭火光"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处的「灰」是名词动用，指心如同蜡炬般燃烧化为灰，强调奉献的彻底性。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 362
+   }
+  },
+  {
+   "id": "lesson-1692-p2:v08",
+   "word": "脂膏",
+   "annotated": false,
+   "decision": "question",
+   "reason": "关键意象，理解其深层含义有助于理解诗人的革命献身精神。",
+   "contextMeaning": "原指油脂，此处指蜡烛的本体，象征生命与心血。",
+   "sourceSentence": "请将你的脂膏， 不息地流向人间",
+   "type": "interpretation",
+   "question": "「请将你的脂膏，不息地流向人间」中「脂膏」象征什么？",
+   "options": [
+    "自然的能源",
+    "蜡烛的原材料",
+    "诗人的心血与生命",
+    "人间的快乐与果实"
+   ],
+   "answerIndex": 2,
+   "explanation": "诗人将蜡烛的脂膏比作奉献给人类的心血与生命，体现了彻底的自我牺牲。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 322
+   }
+  },
+  {
+   "id": "lesson-1692-p2:v09",
+   "word": "残风",
+   "annotated": false,
+   "decision": "question",
+   "reason": "意象理解，直接影响对“泪流”原因的分析。",
+   "contextMeaning": "象征摧残光明、阻碍进步的黑暗势力或外在压力。",
+   "sourceSentence": "是残风来侵你的光芒",
+   "type": "interpretation",
+   "question": "诗中「残风来侵你的光芒」一句，其深层含义是：",
+   "options": [
+    "自然环境恶劣，导致蜡烛容易熄灭",
+    "黑暗势力对光明与进步力量的摧残",
+    "作者对气候变化的写实描写",
+    "蜡烛自身质量不佳，难以抵御风吹"
+   ],
+   "answerIndex": 1,
+   "explanation": "「残风」是诗中的象征意象，指代摧残光明、阻碍进步的外部敌对势力。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 279
+   }
+  },
+  {
+   "id": "lesson-1692-p2:v10",
+   "word": "耕耘",
+   "annotated": false,
+   "decision": "question",
+   "reason": "典故/常用搭配，考察对诗歌主旨的理解。",
+   "contextMeaning": "指付出的劳动、努力与奋斗过程。",
+   "sourceSentence": "“莫问收获，但问耕耘。”",
+   "type": "interpretation",
+   "question": "结尾引用的「莫问收获，但问耕耘」表达了诗人怎样的态度？",
+   "options": [
+    "对结果的漠不关心",
+    "对奉献过程的高度重视与坚定信念",
+    "对劳动成果的彻底否定",
+    "对农耕生活的向往"
+   ],
+   "answerIndex": 1,
+   "explanation": "诗人强调的是奉献的过程本身，认为只要奋斗过、燃烧过，就是有价值的，不应过分计较结果。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 397
+   }
+  },
+  {
+   "id": "lesson-1692-p2:v11",
+   "word": "选自红烛人民文学出",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《红烛》（人民文学出版社1981 年版）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p2:v12",
+   "word": "选自昌耀抒情诗集青",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《昌耀抒情诗集》（青海人民出版社1986 年版）。峨日朵雪峰在青海海北藏族自治州内，是祁连山脉的一座无名山，靠近祁连县峨堡镇，山顶终年积雪。 *作者在诗中借称这座山为“峨日朵雪峰”。昌耀（1936—2000），原名王昌耀，湖南桃源人，诗人。代表作有诗歌《划呀，划呀，父亲们！》《意绪》等。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p2:v13",
+   "word": "选自雪莱诗选时代文",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《雪莱诗选》（时代文艺出版社2012 年版）。江枫译。雪莱（1792—1822），英国诗人。代表作有诗歌《西风颂》、诗剧《解放了的普罗米修斯》等。",
+   "sourceSentence": ""
+  }
+ ]
+}

@@ -1,0 +1,301 @@
+{
+ "lessonId": "lesson-1701-p2",
+ "title": "插秧歌",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:26:57.249Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 83,
+ "annotationCount": 13,
+ "inventory": [
+  {
+   "id": "lesson-1701-p2:v01",
+   "word": "兜鍪",
+   "annotated": true,
+   "decision": "question",
+   "reason": "比喻用法，考察修辭與意象理解",
+   "contextMeaning": "頭盔，此處比喻斗笠",
+   "sourceSentence": "笠是兜鍪",
+   "type": "contextual-choice",
+   "question": "「笠是兜鍪」中「兜鍪」一詞的運用，主要體現了什麼意象？",
+   "options": [
+    "農具的堅固耐用",
+    "農民生活的艱辛與如臨戰陣",
+    "斗笠的形狀與顏色",
+    "雨具的防水功能"
+   ],
+   "answerIndex": 1,
+   "explanation": "將斗笠比作軍人的兜鍪，暗示插秧勞動如同戰鬥般緊張且艱苦。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 25
+   }
+  },
+  {
+   "id": "lesson-1701-p2:v02",
+   "word": "胛",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "僅為名詞解釋，無深層語境變化",
+   "contextMeaning": "肩胛",
+   "sourceSentence": "雨从头上湿到胛",
+   "location": {
+    "charIndex": 34
+   }
+  },
+  {
+   "id": "lesson-1701-p2:v03",
+   "word": "渠",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今異義，考察第三人稱代詞的用法",
+   "contextMeaning": "他",
+   "sourceSentence": "唤渠 朝餐歇半霎",
+   "type": "gu-jin",
+   "question": "下列選項中「渠」的含義與「唤渠朝餐歇半霎」中「渠」相同的是？",
+   "options": [
+    "引渠灌溉",
+    "渠帥何在",
+    "不知渠意",
+    "溝渠縱橫"
+   ],
+   "answerIndex": 2,
+   "explanation": "「唤渠」中的「渠」是第三人稱代詞「他」；選項中「不知渠意」也是「他」的意思。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《辭海》"
+   ],
+   "location": {
+    "charIndex": 44
+   }
+  },
+  {
+   "id": "lesson-1701-p2:v04",
+   "word": "半霎",
+   "annotated": true,
+   "decision": "question",
+   "reason": "考察對時間詞語的理解及文意銜接",
+   "contextMeaning": "極短的時間",
+   "sourceSentence": "唤渠 朝餐歇半霎",
+   "type": "contextual-choice",
+   "question": "「唤渠朝餐歇半霎」中「半霎」表達了什麼心理狀態？",
+   "options": [
+    "農民極度疲勞，渴望長久休息",
+    "農事繁忙，農民只能短暫休息",
+    "農民對休息時間的不滿",
+    "農民對午餐時間的期待"
+   ],
+   "answerIndex": 1,
+   "explanation": "「半霎」形容極短暫，體現了農忙時節爭分奪秒的勞作狀態。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 44
+   }
+  },
+  {
+   "id": "lesson-1701-p2:v05",
+   "word": "莳",
+   "annotated": false,
+   "decision": "question",
+   "reason": "專業農事詞彙，考察語境理解與遷移",
+   "contextMeaning": "移栽、種植",
+   "sourceSentence": "秧根未牢莳未匝",
+   "type": "contextual-choice",
+   "question": "「莳未匝」中「莳」的正確含義是？",
+   "options": [
+    "播種",
+    "耕地",
+    "移栽",
+    "施肥"
+   ],
+   "answerIndex": 2,
+   "explanation": "「莳」在古代農事中專指秧苗的移栽，即插秧。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 64
+   }
+  },
+  {
+   "id": "lesson-1701-p2:v06",
+   "word": "匝",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "詞義明確，不影響核心理解",
+   "contextMeaning": "遍及、布滿",
+   "sourceSentence": "秧根未牢莳未匝",
+   "location": {
+    "charIndex": 64
+   }
+  },
+  {
+   "id": "lesson-1701-p2:v07",
+   "word": "照管",
+   "annotated": true,
+   "decision": "question",
+   "reason": "詞義語境化，考察古今意義差異",
+   "contextMeaning": "提防、看顧",
+   "sourceSentence": "照管 鹅儿与雏鸭",
+   "type": "contextual-choice",
+   "question": "文中「照管」一詞的語境義是？",
+   "options": [
+    "照顧、養育",
+    "管理、規劃",
+    "提防、看守",
+    "觀察、研究"
+   ],
+   "answerIndex": 2,
+   "explanation": "此處指擔心鵝鴨毀壞秧苗，故有「提防」之意。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 73
+   }
+  },
+  {
+   "id": "lesson-1701-p2:v08",
+   "word": "田夫",
+   "annotated": false,
+   "decision": "question",
+   "reason": "社會角色詞彙，考察對詩歌敘事主體的理解",
+   "contextMeaning": "農夫、耕田的男子",
+   "sourceSentence": "田夫抛秧田妇接",
+   "type": "interpretation",
+   "question": "「田夫抛秧田妇接」一句中，作者描寫的勞動場景特點是？",
+   "options": [
+    "農夫農婦分工協作，節奏緊湊",
+    "農夫農婦各行其是，互不干涉",
+    "農夫偷懶，農婦辛苦",
+    "機械化勞動，效率極高"
+   ],
+   "answerIndex": 0,
+   "explanation": "「抛」與「接」體現了男女農民在插秧時的配合與默契。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 8
+   }
+  },
+  {
+   "id": "lesson-1701-p2:v09",
+   "word": "抛",
+   "annotated": false,
+   "decision": "question",
+   "reason": "動詞考察，體現動作的動態美",
+   "contextMeaning": "投擲",
+   "sourceSentence": "田夫抛秧田妇接",
+   "type": "substitution",
+   "question": "若將「田夫抛秧」中的「抛」換成「扔」，效果有何不同？",
+   "options": [
+    "更具現代感",
+    "語義更精確",
+    "失去勞動節奏感與技巧性",
+    "沒有任何區別"
+   ],
+   "answerIndex": 2,
+   "explanation": "「抛」字體現了農夫插秧時熟練的技巧與連貫的動作，換作「扔」則顯得笨拙。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 8
+   }
+  },
+  {
+   "id": "lesson-1701-p2:v10",
+   "word": "采采",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "課文正文未出現此詞，不屬於本次考察範圍",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1701-p2:v11",
+   "word": "薄言",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "課文正文未出現此詞",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1701-p2:v12",
+   "word": "有",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "課文正文未出現此詞",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1701-p2:v13",
+   "word": "掇",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "課文正文未出現此詞",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1701-p2:v14",
+   "word": "捋",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "課文正文未出現此詞",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1701-p2:v15",
+   "word": "袺",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "課文正文未出現此詞",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1701-p2:v16",
+   "word": "襭",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "課文正文未出現此詞",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1701-p2:v17",
+   "word": "折腰",
+   "annotated": false,
+   "decision": "question",
+   "reason": "固定短語，考察對勞動姿勢的描述",
+   "contextMeaning": "彎腰",
+   "sourceSentence": "低头折腰只不答",
+   "type": "interpretation",
+   "question": "「低头折腰」描寫了農民怎樣的勞動狀態？",
+   "options": [
+    "恭敬順從",
+    "疲憊不堪",
+    "專注插秧",
+    "正在休息"
+   ],
+   "answerIndex": 2,
+   "explanation": "「折腰」是插秧時的特定姿勢，描寫農民專注於工作，以至於對他人的呼喚無暇回應。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 54
+   }
+  },
+  {
+   "id": "lesson-1701-p2:v18",
+   "word": "莳未匝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是，这块田里还没有栽插完毕。莳，移栽、种植。匝，布满、遍及。",
+   "sourceSentence": ""
+  }
+ ]
+}

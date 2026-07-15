@@ -1,0 +1,287 @@
+{
+ "lessonId": "lesson-1722-p4",
+ "title": "鹊桥仙（纤云弄巧）",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:27:23.187Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 307,
+ "annotationCount": 8,
+ "inventory": [
+  {
+   "id": "lesson-1722-p4:v01",
+   "word": "弄巧",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词义考查，考察对诗歌意象描写手法的理解",
+   "contextMeaning": "制作巧妙的图案",
+   "sourceSentence": "纤云弄巧",
+   "type": "contextual-choice",
+   "question": "「纤云弄巧」中「弄巧」的意思是",
+   "options": [
+    "卖弄聪明",
+    "玩弄技巧",
+    "编织出巧妙的图案",
+    "动作轻盈灵巧"
+   ],
+   "answerIndex": 2,
+   "explanation": "词中描写云彩在天空中变幻出巧妙的形状，比喻织女手艺高超，故选2。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 91
+   }
+  },
+  {
+   "id": "lesson-1722-p4:v02",
+   "word": "迢迢",
+   "annotated": false,
+   "decision": "question",
+   "reason": "叠词形容词，是理解天河空间广阔的关键",
+   "contextMeaning": "形容距离遥远",
+   "sourceSentence": "银汉迢迢暗度",
+   "type": "contextual-choice",
+   "question": "「银汉迢迢暗度」中「迢迢」的意思是",
+   "options": [
+    "高远的样子",
+    "遥远的样子",
+    "清澈的样子",
+    "闪烁的样子"
+   ],
+   "answerIndex": 1,
+   "explanation": "「迢迢」常用来形容路途遥远，此处指银河辽阔，阻隔了牛郎织女。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 103
+   }
+  },
+  {
+   "id": "lesson-1722-p4:v03",
+   "word": "度",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，此处为动词，决定了句子的动作指向",
+   "contextMeaning": "渡过",
+   "sourceSentence": "银汉迢迢暗度",
+   "type": "gu-jin",
+   "question": "「银汉迢迢暗度」中「度」的用法与下列哪项相同？",
+   "options": [
+    "度德量力",
+    "春风不度玉门关",
+    "制度完善",
+    "度日如年"
+   ],
+   "answerIndex": 1,
+   "explanation": "诗句中「度」通「渡」，意为渡过，选项B「度玉门关」意亦为渡过。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 103
+   }
+  },
+  {
+   "id": "lesson-1722-p4:v04",
+   "word": "金风",
+   "annotated": true,
+   "decision": "question",
+   "reason": "文化常识考查，涉及五行与季节对应",
+   "contextMeaning": "秋风",
+   "sourceSentence": "金风 玉露一相逢",
+   "type": "interpretation",
+   "question": "「金风玉露一相逢」中「金风」是指",
+   "options": [
+    "春风",
+    "夏风",
+    "秋风",
+    "冬风"
+   ],
+   "answerIndex": 2,
+   "explanation": "五行学说中，秋天属金，故称秋风为金风。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 112
+   }
+  },
+  {
+   "id": "lesson-1722-p4:v05",
+   "word": "胜却",
+   "annotated": true,
+   "decision": "question",
+   "reason": "关键动词，体现词人对爱情的独特见解",
+   "contextMeaning": "胜过",
+   "sourceSentence": "便胜却 人间无数",
+   "type": "substitution",
+   "question": "「便胜却人间无数」中「胜却」可以替换为",
+   "options": [
+    "多于",
+    "超过",
+    "优于",
+    "等于"
+   ],
+   "answerIndex": 1,
+   "explanation": "「胜却」意为胜过，强调质量上的超越。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 121
+   }
+  },
+  {
+   "id": "lesson-1722-p4:v06",
+   "word": "顾",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，辨析词语在特定语境下的动作意义",
+   "contextMeaning": "回头看",
+   "sourceSentence": "忍顾鹊桥归路",
+   "type": "contextual-choice",
+   "question": "「忍顾鹊桥归路」中「顾」的意思是",
+   "options": [
+    "照顾",
+    "拜访",
+    "回头看",
+    "顾虑"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处「顾」为回头看，表达了依依不舍的情感。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 142
+   }
+  },
+  {
+   "id": "lesson-1722-p4:v07",
+   "word": "朝朝暮暮",
+   "annotated": true,
+   "decision": "question",
+   "reason": "成语用法，考察对词句深层含义的理解",
+   "contextMeaning": "朝夕相守",
+   "sourceSentence": "又岂在朝朝暮暮",
+   "type": "interpretation",
+   "question": "「又岂在朝朝暮暮」表达了词人怎样的爱情观？",
+   "options": [
+    "爱情需要时刻陪伴",
+    "只要情深，不在乎长相厮守",
+    "距离产生美",
+    "时间是衡量爱情的标准"
+   ],
+   "answerIndex": 1,
+   "explanation": "词人认为只要感情真挚，不在乎形式上的朝夕相守。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 159
+   }
+  },
+  {
+   "id": "lesson-1722-p4:v08",
+   "word": "岂",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言虚词，高频考点，用于反问",
+   "contextMeaning": "难道",
+   "sourceSentence": "又岂在朝朝暮暮",
+   "type": "usage",
+   "question": "「又岂在朝朝暮暮」中「岂」的用法与下列哪项相同？",
+   "options": [
+    "岂敢不尽力",
+    "岂有此理",
+    "岂不快哉",
+    "以上皆是"
+   ],
+   "answerIndex": 3,
+   "explanation": "「岂」在文中表反问，意为「难道」，选项中均为反问用法。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 159
+   }
+  },
+  {
+   "id": "lesson-1722-p4:v09",
+   "word": "纤云",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "描写意象，字面理解即可，无考查深意",
+   "contextMeaning": "纤细的云",
+   "sourceSentence": "纤云弄巧",
+   "location": {
+    "charIndex": 91
+   }
+  },
+  {
+   "id": "lesson-1722-p4:v10",
+   "word": "飞星",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "指流星，意象描写，不构成理解障碍",
+   "contextMeaning": "流星",
+   "sourceSentence": "飞星传恨",
+   "location": {
+    "charIndex": 97
+   }
+  },
+  {
+   "id": "lesson-1722-p4:v11",
+   "word": "佳期",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "古诗词常见词，意为美好时光，学生易懂",
+   "contextMeaning": "美好的相会时光",
+   "sourceSentence": "佳期 如梦",
+   "location": {
+    "charIndex": 136
+   }
+  },
+  {
+   "id": "lesson-1722-p4:v12",
+   "word": "银汉",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "教材已注为银河，且为固定典故，无需额外命题",
+   "contextMeaning": "银河",
+   "sourceSentence": "银汉迢迢暗度",
+   "location": {
+    "charIndex": 103
+   }
+  },
+  {
+   "id": "lesson-1722-p4:v13",
+   "word": "纤云弄巧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "纤细的云编织出各种巧妙的图案样式，比喻织女制作云锦的手艺高超。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1722-p4:v14",
+   "word": "飞星传恨",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "流星传递分别的愁苦。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1722-p4:v15",
+   "word": "银汉迢迢暗度",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "夜里渡过辽阔的天河。传说每年农历七月七日夜，织女、牛郎借鹊桥越过天河相会。银汉，天河、银河。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1722-p4:v16",
+   "word": "忍顾鹊桥归路",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "怎么忍心回望由鹊桥回去的路。",
+   "sourceSentence": ""
+  }
+ ]
+}

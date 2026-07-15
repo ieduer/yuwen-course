@@ -1,0 +1,203 @@
+{
+ "lessonId": "lesson-1562",
+ "title": "* 扬州慢(淮左名都)/ 姜夔",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:37:54.487Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 4470,
+ "annotationCount": 0,
+ "inventory": [
+  {
+   "id": "lesson-1562:v01",
+   "word": "窥",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，文中指金兵侵犯，而非现代汉语的偷看",
+   "contextMeaning": "窥伺、侵犯",
+   "sourceSentence": "自胡马窥江去后",
+   "type": "contextual-choice",
+   "question": "「自胡马窥江去后」中「窥」的意思是",
+   "options": [
+    "偷看",
+    "窥伺并侵犯",
+    "探望",
+    "经过"
+   ],
+   "answerIndex": 1,
+   "explanation": "「窥」在此处形容金兵对长江北岸的觊觎与侵略，具有强烈的军事意图。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "古汉语常用字字典"
+   ],
+   "location": {
+    "charIndex": 206
+   }
+  },
+  {
+   "id": "lesson-1562:v02",
+   "word": "兵",
+   "annotated": false,
+   "decision": "question",
+   "reason": "借代用法，影响对诗句意象的理解",
+   "contextMeaning": "战争",
+   "sourceSentence": "废池乔木,犹厌言兵",
+   "type": "contextual-choice",
+   "question": "「废池乔木，犹厌言兵」中「兵」的意思是",
+   "options": [
+    "士兵",
+    "武器",
+    "战争",
+    "战术"
+   ],
+   "answerIndex": 2,
+   "explanation": "「言兵」即谈论战争，在此处借代兵祸。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "古汉语常用字字典"
+   ],
+   "location": {
+    "charIndex": 214
+   }
+  },
+  {
+   "id": "lesson-1562:v03",
+   "word": "工",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容词用法，考察对词句修辞的理解",
+   "contextMeaning": "精巧、擅长",
+   "sourceSentence": "纵豆蔻词工,青楼梦好",
+   "type": "contextual-choice",
+   "question": "「纵豆蔻词工，青楼梦好」中「工」的意思是",
+   "options": [
+    "工作",
+    "工程",
+    "精巧、擅长",
+    "工具"
+   ],
+   "answerIndex": 2,
+   "explanation": "「词工」指作词技艺精巧、擅长作词。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "古汉语常用字字典"
+   ],
+   "location": {
+    "charIndex": 253
+   }
+  },
+  {
+   "id": "lesson-1562:v04",
+   "word": "赋",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，考察在诗歌语境下的动词用法",
+   "contextMeaning": "写作、抒发",
+   "sourceSentence": "难赋深情。二十四桥仍在",
+   "type": "contextual-choice",
+   "question": "「难赋深情」中「赋」的意思是",
+   "options": [
+    "给予",
+    "写作、抒发",
+    "赋税",
+    "铺陈"
+   ],
+   "answerIndex": 1,
+   "explanation": "「赋」在此处作动词，意为写作或抒发情感。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "古汉语常用字字典"
+   ],
+   "location": {
+    "charIndex": 264
+   }
+  },
+  {
+   "id": "lesson-1562:v05",
+   "word": "念",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，考察词人情感表达的深层含义",
+   "contextMeaning": "思念、怜惜",
+   "sourceSentence": "念桥边红药,年年知为谁生",
+   "type": "contextual-choice",
+   "question": "「念桥边红药」中「念」的意思是",
+   "options": [
+    "读诵",
+    "思念、怜惜",
+    "打算",
+    "告知"
+   ],
+   "answerIndex": 1,
+   "explanation": "「念」在此表达对芍药花年年空开的怜惜与感伤。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "古汉语常用字字典"
+   ],
+   "location": {
+    "charIndex": 285
+   }
+  },
+  {
+   "id": "lesson-1562:v06",
+   "word": "重",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多音字与多义词，影响句法理解",
+   "contextMeaning": "再、又",
+   "sourceSentence": "算而今,重到须惊",
+   "type": "pronunciation",
+   "question": "「重到」中的「重」读音及意思正确的一项是",
+   "options": [
+    "zhòng，沉重",
+    "chóng，再次",
+    "zhòng，重要",
+    "chóng，叠放"
+   ],
+   "answerIndex": 1,
+   "explanation": "「重」在此为副词，表示「再一次」的意思，读chóng。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "古汉语常用字字典"
+   ],
+   "location": {
+    "charIndex": 244
+   }
+  },
+  {
+   "id": "lesson-1562:v07",
+   "word": "淮左",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已注，属于地理专名",
+   "contextMeaning": "淮河以东地区",
+   "sourceSentence": "淮左名都,竹西佳处",
+   "location": {
+    "charIndex": 177
+   }
+  },
+  {
+   "id": "lesson-1562:v08",
+   "word": "解鞍",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已注，属于动作描述",
+   "contextMeaning": "解下马鞍短暂停留",
+   "sourceSentence": "解鞍少驻初程",
+   "location": {
+    "charIndex": 187
+   }
+  },
+  {
+   "id": "lesson-1562:v09",
+   "word": "清角",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已注，属于意象名词",
+   "contextMeaning": "清越的号角",
+   "sourceSentence": "渐黄昏,清角吹寒,都在空城",
+   "location": {
+    "charIndex": 224
+   }
+  }
+ ]
+}

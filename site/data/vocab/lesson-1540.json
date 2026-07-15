@@ -1,0 +1,203 @@
+{
+ "lessonId": "lesson-1540",
+ "title": "12 玩偶之家(节选)/ 易卜生",
+ "mode": "drama",
+ "builtAt": "2026-07-14T09:35:34.803Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 0,
+ "inventory": [
+  {
+   "id": "lesson-1540:v01",
+   "word": "啰唆",
+   "annotated": false,
+   "decision": "question",
+   "reason": "口语词汇，考察在特定语境下对人物评价的理解",
+   "contextMeaning": "说话繁琐，使人厌烦",
+   "sourceSentence": "好了,好容易才把她打发走。这个女人真啰唆!",
+   "type": "contextual-choice",
+   "question": "「这个女人真啰唆!」中「啰唆」的意思是",
+   "options": [
+    "形容人性格内向",
+    "形容人说话繁琐，使人厌烦",
+    "形容人动作迟缓",
+    "形容人非常有耐心"
+   ],
+   "answerIndex": 1,
+   "explanation": "文中海尔茂对林丹太太感到不耐烦，故用「啰唆」指其言语烦琐。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 347
+   }
+  },
+  {
+   "id": "lesson-1540:v02",
+   "word": "受用",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词义古今演变，易被现代语感误解为“受用不尽”等褒义",
+   "contextMeaning": "享受，感到舒服",
+   "sourceSentence": "刚才你在楼上好像也觉得很受用。",
+   "type": "contextual-choice",
+   "question": "「刚才你在楼上好像也觉得很受用」中「受用」的意思是",
+   "options": [
+    "受到重用",
+    "忍受痛苦",
+    "享受，感到舒服",
+    "获得利益"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指阮克在舞会上感到快乐与满足。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1313
+   }
+  },
+  {
+   "id": "lesson-1540:v03",
+   "word": "撺掇",
+   "annotated": false,
+   "decision": "question",
+   "reason": "方言词汇，是理解人物心理与情节冲突的关键点",
+   "contextMeaning": "怂恿，从旁鼓动",
+   "sourceSentence": "疑惑是我出主意撺掇你干的。",
+   "type": "contextual-choice",
+   "question": "「疑惑是我出主意撺掇你干的」中「撺掇」的意思是",
+   "options": [
+    "强迫",
+    "劝说",
+    "怂恿，鼓动",
+    "指责"
+   ],
+   "answerIndex": 2,
+   "explanation": "海尔茂担心别人认为是他教唆娜拉进行伪造签名等行为。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 4362
+   }
+  },
+  {
+   "id": "lesson-1540:v04",
+   "word": "颠扑不破",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频成语，考察对语义的准确把握",
+   "contextMeaning": "无论怎样摔打都破不了，比喻道理永远正确",
+   "sourceSentence": "难道在这些问题上没有颠扑不破的道理指导你?",
+   "type": "contextual-choice",
+   "question": "「难道在这些问题上没有颠扑不破的道理指导你?」中「颠扑不破」的意思是",
+   "options": [
+    "形容事物非常脆弱",
+    "形容道理永远正确，不可推翻",
+    "形容事物极其混乱",
+    "形容事物难以理解"
+   ],
+   "answerIndex": 1,
+   "explanation": "海尔茂认为社会传统道德规范是绝对正确的真理。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 8046
+   }
+  },
+  {
+   "id": "lesson-1540:v05",
+   "word": "伪君子",
+   "annotated": false,
+   "decision": "question",
+   "reason": "人物评价关键词，影响对海尔茂性格的反讽理解",
+   "contextMeaning": "假装正派、高尚的人",
+   "sourceSentence": "我最得意、 最喜欢的女人——没想到是个伪君子",
+   "type": "interpretation",
+   "question": "海尔茂称娜拉为「伪君子」，这反映了他什么样的心态？",
+   "options": [
+    "对娜拉的真实关怀",
+    "因社会地位受威胁而产生的愤怒与虚伪评价",
+    "对娜拉犯罪行为的客观分析",
+    "对娜拉过去良好表现的肯定"
+   ],
+   "answerIndex": 1,
+   "explanation": "海尔茂在得知娜拉伪造签名后，立刻翻脸称其为伪君子，体现其自私与虚伪。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 3954
+   }
+  },
+  {
+   "id": "lesson-1540:v06",
+   "word": "心不在焉",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频成语，考察对人物状态的理解",
+   "contextMeaning": "心思不在这里",
+   "sourceSentence": "娜 拉 ( 心不在焉)大概是吧。",
+   "type": "interpretation",
+   "question": "娜拉此时处于「心不在焉」的状态，原因是",
+   "options": [
+    "她对阮克的谈话感到无聊",
+    "她正在担忧信箱里的秘密被发现",
+    "她对跳舞感到疲倦",
+    "她在思考如何向丈夫坦白"
+   ],
+   "answerIndex": 1,
+   "explanation": "当时娜拉内心焦虑，因为知道秘密即将被揭露，故无法专注于与海尔茂的谈话。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2352
+   }
+  },
+  {
+   "id": "lesson-1540:v07",
+   "word": "过门不入",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "词义浅显，根据上下文「忍不住想进来坐一坐」即可推断，无需命题",
+   "contextMeaning": "路过门口而不进去",
+   "sourceSentence": "请进,谢谢你从来不肯过门不入。",
+   "location": {
+    "charIndex": 1228
+   }
+  },
+  {
+   "id": "lesson-1540:v08",
+   "word": "塔兰特拉",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "外来专有名词，属于文化背景知识，不涉及词义理解障碍",
+   "contextMeaning": "一种节奏强烈的意大利民间舞蹈",
+   "sourceSentence": "你血管里还在跳塔兰特拉",
+   "location": {
+    "charIndex": 712
+   }
+  },
+  {
+   "id": "lesson-1540:v09",
+   "word": "道喜",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "现代汉语常用词，无理解难度",
+   "contextMeaning": "向人表示祝贺",
+   "sourceSentence": "结果怎么样,是不是可以给你道喜?",
+   "location": {
+    "charIndex": 1604
+   }
+  },
+  {
+   "id": "lesson-1540:v10",
+   "word": "报应",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "常用词汇，语境义明确",
+   "contextMeaning": "指因果报应，此处指遭受到后果",
+   "sourceSentence": "当初我给他遮盖,如今遭了这么个报应!",
+   "location": {
+    "charIndex": 4096
+   }
+  }
+ ]
+}

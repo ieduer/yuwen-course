@@ -1,0 +1,191 @@
+{
+ "lessonId": "lesson-1458",
+ "title": "1、中国人民站起来了",
+ "mode": "speech-letter",
+ "builtAt": "2026-07-14T09:30:37.625Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 5274,
+ "annotationCount": 0,
+ "inventory": [
+  {
+   "id": "lesson-1458:v01",
+   "word": "落伍",
+   "annotated": false,
+   "decision": "question",
+   "reason": "该词在语境中指国家发展状态，而非简单的掉队，涉及对近代中国历史地位的准确理解",
+   "contextMeaning": "在时代发展中滞后",
+   "sourceSentence": "中国人从来就是一个伟大的勇敢的勤劳的民族,只是在近代是落伍了",
+   "type": "contextual-choice",
+   "question": "文中「只是在近代是落伍了」中「落伍」的准确含义是",
+   "options": [
+    "脱离队伍",
+    "在时代发展中滞后",
+    "落后于他人",
+    "丧失竞争能力"
+   ],
+   "answerIndex": 1,
+   "explanation": "结合上下文，此处指中国在近代历史进程中未能跟上世界工业化与现代化的步伐，而非单纯的个体竞争或物理距离落后。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1142
+   }
+  },
+  {
+   "id": "lesson-1458:v02",
+   "word": "遗志",
+   "annotated": false,
+   "decision": "question",
+   "reason": "涉及历史语境下对革命先辈愿望的理解，属于高频词汇考点",
+   "contextMeaning": "先人未竟的志向与愿望",
+   "sourceSentence": "我们的先人指示我们,叫我们完成他们的遗志",
+   "type": "interpretation",
+   "question": "「完成他们的遗志」中「遗志」的理解，最准确的一项是",
+   "options": [
+    "留下的遗嘱",
+    "留下的物质财富",
+    "未竟的志向与愿望",
+    "对后人的教导"
+   ],
+   "answerIndex": 2,
+   "explanation": "「遗志」指死者生前未完成的志向，结合前文提到的革命斗争，此处指民族独立与富强的理想。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1271
+   }
+  },
+  {
+   "id": "lesson-1458:v03",
+   "word": "复辟",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义及政治语境下的特殊用法，易被误解为单纯的王朝更替",
+   "contextMeaning": "旧势力企图恢复其在中国的统治地位",
+   "sourceSentence": "他们将每日每时企图在中国复辟。",
+   "type": "gu-jin",
+   "question": "文中「企图在中国复辟」中的「复辟」一词，在现代语境下的侧重点是",
+   "options": [
+    "恢复古代君主专制",
+    "恢复被推翻的旧政权或旧制度",
+    "重新开始某种旧习惯",
+    "政治力量的重新洗牌"
+   ],
+   "answerIndex": 1,
+   "explanation": "「复辟」原指君主制国家的旧君主重登王位，在文中语境下引申为国民党反动政府及其背后的帝国主义势力企图推翻新政权，恢复其反动统治。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1576
+   }
+  },
+  {
+   "id": "lesson-1458:v04",
+   "word": "职权",
+   "annotated": false,
+   "decision": "question",
+   "reason": "政治词汇，考查词语的精确替换与语境理解",
+   "contextMeaning": "法定的职责和权力",
+   "sourceSentence": "中国人民政治协商会议宣布自己执行全国人民代表大会的职权。",
+   "type": "substitution",
+   "question": "文中「执行全国人民代表大会的职权」中「职权」一词，若替换为下列词语，最恰当的是",
+   "options": [
+    "职责",
+    "权力",
+    "职能",
+    "权限"
+   ],
+   "answerIndex": 3,
+   "explanation": "「职权」指职务范围内的权力，兼具「职责」与「权力」的双重含义，在政治法律语境下，「权限」最能体现其界限与效力。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 889
+   }
+  },
+  {
+   "id": "lesson-1458:v05",
+   "word": "捣乱",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词语感情色彩在语境中的应用",
+   "contextMeaning": "进行破坏和干扰活动",
+   "sourceSentence": "他们也还会以各种方式从事破坏和捣乱",
+   "type": "contextual-choice",
+   "question": "文中「从事破坏和捣乱」中的「捣乱」一词，在文中具有什么色彩",
+   "options": [
+    "贬义，指恶意的干扰与破坏",
+    "中性，指正常的反对行为",
+    "褒义，指反抗压迫的勇敢",
+    "口语化，指无关紧要的小动作"
+   ],
+   "answerIndex": 0,
+   "explanation": "「捣乱」在文中指反动派对新中国建设的恶意干扰，带有强烈的贬义色彩。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1558
+   }
+  },
+  {
+   "id": "lesson-1458:v06",
+   "word": "孤立",
+   "annotated": false,
+   "decision": "question",
+   "reason": "涉及外交政策与政治处境的理解",
+   "contextMeaning": "没有支持，单打独斗",
+   "sourceSentence": "使我们的保障人民革命胜利成果和反对内外敌人复辟阴谋的斗争不致处于孤立地位。",
+   "type": "interpretation",
+   "question": "对「不致处于孤立地位」的理解，下列说法正确的是",
+   "options": [
+    "不让自己变得冷清",
+    "不让自己失去外部的援助与支持",
+    "不让自己成为国际上的少数派",
+    "不让自己处于被动挨打的境地"
+   ],
+   "answerIndex": 1,
+   "explanation": "文中强调通过团结国际友人来获得支持，因此「孤立」是指缺乏国际援助与盟友的单打独斗状态。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1727
+   }
+  },
+  {
+   "id": "lesson-1458:v07",
+   "word": "野战军",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "历史名词，指代中国人民解放军的主力部队，属于历史背景常识，无需专门命题考查字义。",
+   "contextMeaning": "脱离固定防区，在广阔战区进行机动作战的部队",
+   "sourceSentence": "数百万人民解放军的野战军已经打到接近台湾",
+   "location": {
+    "charIndex": 295
+   }
+  },
+  {
+   "id": "lesson-1458:v08",
+   "word": "集中的代表者",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "短语理解，侧重于论证逻辑，而非单字词义，通过阅读理解即可把握，无需单列试题。",
+   "contextMeaning": "最主要、最典型的代表",
+   "sourceSentence": "封建主义、官僚资本主义及其集中的代表者国民党反动政府",
+   "location": {
+    "charIndex": 752
+   }
+  },
+  {
+   "id": "lesson-1458:v09",
+   "word": "年号",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "文化常识词汇，文中旨在说明新中国采用国际通用纪年，而非复古，理解难度较低。",
+   "contextMeaning": "君主纪年的名号",
+   "sourceSentence": "以及采取和世界大多数国家一样的年号。",
+   "location": {
+    "charIndex": 1060
+   }
+  }
+ ]
+}

@@ -1,0 +1,516 @@
+{
+ "lessonId": "lesson-1704-p1",
+ "title": "短歌行",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:15:18.012Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 198,
+ "annotationCount": 25,
+ "inventory": [
+  {
+   "id": "lesson-1704-p1:v01",
+   "word": "当",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，在文中两处含义不同，易混淆",
+   "contextMeaning": "对着",
+   "sourceSentence": "对酒当歌",
+   "type": "contextual-choice",
+   "question": "「对酒当歌」中「当」的意思是",
+   "options": [
+    "应当",
+    "对着",
+    "阻挡",
+    "充当"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处意为对着酒，引申为饮酒时。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 8
+   }
+  },
+  {
+   "id": "lesson-1704-p1:v02",
+   "word": "慷慨",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义词，现代汉语多指大方，文中指情绪激昂",
+   "contextMeaning": "情绪激昂",
+   "sourceSentence": "慨当以慷",
+   "type": "gu-jin",
+   "question": "文中「慨当以慷」的「慷慨」与现代汉语词义不同，其义为",
+   "options": [
+    "大方、不吝啬",
+    "充满正义感",
+    "情绪激昂",
+    "悲伤忧愁"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中指宴会上歌声激越，情绪激昂。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 33
+   }
+  },
+  {
+   "id": "lesson-1704-p1:v03",
+   "word": "几何",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "现代汉语常用词，意思明确，不构成理解障碍",
+   "contextMeaning": "多少",
+   "sourceSentence": "人生几何",
+   "location": {
+    "charIndex": 14
+   }
+  },
+  {
+   "id": "lesson-1704-p1:v04",
+   "word": "子衿",
+   "annotated": true,
+   "decision": "question",
+   "reason": "典故词，涉及文化常识，影响对诗人招贤意图的理解",
+   "contextMeaning": "周代读书人的服饰，代指贤才",
+   "sourceSentence": "青青子衿，悠悠我心",
+   "type": "interpretation",
+   "question": "「青青子衿，悠悠我心」中「子衿」一词的含义是",
+   "options": [
+    "年轻的恋人",
+    "周代的学子，代指贤才",
+    "青色的衣领",
+    "思念的人"
+   ],
+   "answerIndex": 1,
+   "explanation": "语出《诗经》，原意指读书人，曹操借指贤才。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《诗经·郑风·子衿》"
+   ],
+   "location": {
+    "charIndex": 57
+   }
+  },
+  {
+   "id": "lesson-1704-p1:v05",
+   "word": "掇",
+   "annotated": true,
+   "decision": "question",
+   "reason": "生僻字，影响句意理解",
+   "contextMeaning": "拾取，摘取",
+   "sourceSentence": "何时可掇",
+   "type": "substitution",
+   "question": "「何时可掇」中「掇」字的意思是",
+   "options": [
+    "停止",
+    "摘取",
+    "获得",
+    "遇见"
+   ],
+   "answerIndex": 1,
+   "explanation": "掇，拾取、摘取之意，指贤才难得。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 109
+   }
+  },
+  {
+   "id": "lesson-1704-p1:v06",
+   "word": "枉",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，文中作“枉驾”解，与现代“冤枉”义不同",
+   "contextMeaning": "屈驾",
+   "sourceSentence": "枉用相存",
+   "type": "gu-jin",
+   "question": "「枉用相存」中「枉」的意思是",
+   "options": [
+    "弯曲",
+    "冤枉",
+    "屈驾",
+    "徒然"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指屈尊降贵来访。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 133
+   }
+  },
+  {
+   "id": "lesson-1704-p1:v07",
+   "word": "存",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，文中指问候、探望",
+   "contextMeaning": "问候、探望",
+   "sourceSentence": "枉用相存",
+   "type": "contextual-choice",
+   "question": "「枉用相存」中「存」的意思是",
+   "options": [
+    "存在",
+    "存留",
+    "问候、探望",
+    "积存"
+   ],
+   "answerIndex": 2,
+   "explanation": "存，意为问候、探望。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 133
+   }
+  },
+  {
+   "id": "lesson-1704-p1:v08",
+   "word": "契阔",
+   "annotated": true,
+   "decision": "question",
+   "reason": "词义古今差异大，是诗歌理解的核心词",
+   "contextMeaning": "久别重逢",
+   "sourceSentence": "契阔谈讌",
+   "type": "interpretation",
+   "question": "「契阔谈讌」中「契阔」的正确理解是",
+   "options": [
+    "聚散，此处指久别重逢",
+    "谈论广博",
+    "心情郁闷",
+    "契约合同"
+   ],
+   "answerIndex": 0,
+   "explanation": "契阔本意聚散，此处指久别后的重逢。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 140
+   }
+  },
+  {
+   "id": "lesson-1704-p1:v09",
+   "word": "吐哺",
+   "annotated": true,
+   "decision": "question",
+   "reason": "典故词，理解此词对把握曹操求贤心态至关重要",
+   "contextMeaning": "吐出嘴里的食物，比喻急于接见贤才",
+   "sourceSentence": "周公吐哺",
+   "type": "interpretation",
+   "question": "「周公吐哺」运用的典故所表达的情感是",
+   "options": [
+    "周公生活节俭",
+    "周公身体不好",
+    "周公求贤若渴，殷勤接待",
+    "周公对人才的轻视"
+   ],
+   "answerIndex": 2,
+   "explanation": "典出周公礼贤下士，以此自喻求贤心切。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《史记·鲁周公世家》"
+   ],
+   "location": {
+    "charIndex": 187
+   }
+  },
+  {
+   "id": "lesson-1704-p1:v10",
+   "word": "厌",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文中意义与现代汉语“讨厌”完全不同，为理解核心句意的关键",
+   "contextMeaning": "满足",
+   "sourceSentence": "山不厌高，海不厌深",
+   "type": "contextual-choice",
+   "question": "「山不厌高，海不厌深」中「厌」的意思是",
+   "options": [
+    "讨厌",
+    "满足",
+    "厌倦",
+    "压抑"
+   ],
+   "answerIndex": 1,
+   "explanation": "厌，即满足，意为山不嫌高，海不嫌深，以此比喻纳贤之广。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 175
+   }
+  },
+  {
+   "id": "lesson-1704-p1:v11",
+   "word": "归",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此处涉及全诗主旨的理解",
+   "contextMeaning": "归顺，归附",
+   "sourceSentence": "天下归心",
+   "type": "contextual-choice",
+   "question": "「天下归心」中「归」的意思是",
+   "options": [
+    "返回",
+    "归还",
+    "归顺，归附",
+    "聚拢"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指天下贤才归顺之心。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 193
+   }
+  },
+  {
+   "id": "lesson-1704-p1:v12",
+   "word": "用",
+   "annotated": false,
+   "decision": "question",
+   "reason": "特殊用法，此处作“以”解，在句法结构中起到连词作用",
+   "contextMeaning": "以",
+   "sourceSentence": "枉用相存",
+   "type": "usage",
+   "question": "「枉用相存」中「用」字在文中的用法是",
+   "options": [
+    "动词，使用",
+    "介词，表示凭借",
+    "连词，相当于“以”",
+    "名词，功用"
+   ],
+   "answerIndex": 2,
+   "explanation": "用，此处作连词，相当于“以”，表示目的。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 133
+   }
+  },
+  {
+   "id": "lesson-1704-p1:v13",
+   "word": "多少",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "多少。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v14",
+   "word": "即慷慨这里指宴会上",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即“慷慨”。这里指宴会上的歌声激越 不平。当以，没有实义。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v15",
+   "word": "语出诗经·郑风·子衿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "语出《诗经·郑风·子 衿》，原写姑娘思念情人，这里用来形容渴望得到 贤才。子，对对方的尊称。青衿，指代周代读书人 青色交领的服装。衿，衣服的交领。悠悠，长远的 样子，形容思虑连绵不断。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v16",
+   "word": "语出诗经·小雅·鹿鸣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "语 出《诗经·小雅·鹿鸣》。苹，艾蒿。《鹿鸣》是宴 客的诗，这里用来表达招纳贤才的热情。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v17",
+   "word": "拾取摘取一说同辍",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "拾取，摘取。一说同“辍”，停止。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v18",
+   "word": "穿过纵横交错的小路陌",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "穿过纵横交错的小路。陌，东西向的 田间小路。阡，南北向的田间小路。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v19",
+   "word": "屈驾来访枉这里是枉驾",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "屈驾来访。枉，这里是枉驾的意思。 用，以。存，问候、探望。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v20",
+   "word": "久别重逢欢饮畅谈契阔",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "久别重逢，欢饮畅谈。契阔， 聚散，这里指久别重逢。讌，同“宴”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v21",
+   "word": "三周匝周圈",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "三周。匝，周、圈。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v22",
+   "word": "史记·鲁周公世家记载",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "《史记·鲁周公世家》记载，周 公广纳贤才，正吃饭时，听到门外有士子求见，来 不及咽下嘴里的食物，把食物一吐就赶紧去接见。 这里借用这个典故，表示自己像周公一样热切殷勤 地接待贤才。吐哺，吐出嘴里的食物。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v23",
+   "word": "适应世俗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "适应世俗。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v24",
+   "word": "气质情致",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "气质，情致。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v25",
+   "word": "指山林",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指山林。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v26",
+   "word": "指世俗的种种束缚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指世俗的种种束缚。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v27",
+   "word": "被关在笼中的鸟羁约束",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "被关在笼中的鸟。羁，约束。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v28",
+   "word": "南面的田野一作南亩",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "南面的田野。一作“南亩”，指农田。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v29",
+   "word": "宅子四周有十几亩地方",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "宅子四周有十几亩地。方，四周围绕。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v30",
+   "word": "迷蒙隐约的样子",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "迷蒙隐约的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v31",
+   "word": "隐约的样子一说轻柔的",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "隐约的样子。一说“轻柔的样子”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v32",
+   "word": "指村落",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指村落。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v33",
+   "word": "顶端",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "顶端。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v34",
+   "word": "门户庭院",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "门户庭院。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v35",
+   "word": "指世俗的繁杂琐事",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指世俗的繁杂琐事。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v36",
+   "word": "静室",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "静室。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1704-p1:v37",
+   "word": "余暇空闲",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "余暇，空闲。",
+   "sourceSentence": ""
+  }
+ ]
+}

@@ -4,9 +4,29 @@
   "private": false,
   "type": "module",
   "scripts": {
-    "build:data": "python3 scripts/build_site_data.py --export .cache/discourse-course-export.json --catalog /Users/ylsuen/CF/jc-textbook-reader/site/data/catalog.json --fts-db /Users/ylsuen/textbook_ai_migration/platform/data/textbook_mineru_fts.db --out site/data",
+    "build:data": "/Users/ylsuen/.venv/bin/python scripts/build_site_data.py --export .cache/discourse-course-export.json --catalog /Users/ylsuen/CF/jc-textbook-reader/site/data/catalog.json --fts-db /Users/ylsuen/textbook_ai_migration/platform/data/textbook_mineru_fts.db --out site/data && npm run build:lessons",
     "build:external": "/Users/ylsuen/.venv/bin/python scripts/build_external_resources.py",
+    "build:cache": "node scripts/build_page_cache.mjs",
+    "build:lessons": "node scripts/split_composite_lessons.mjs",
+    "build:taxonomy": "node scripts/build_literary_taxonomy.mjs",
+    "check:taxonomy": "node scripts/build_literary_taxonomy.mjs --check",
+    "verify:authors": "node scripts/audit_lesson_authors.mjs",
+    "verify:ui": "node scripts/qa_taxonomy_matrix.mjs",
+    "build:vocab": "node scripts/build_vocab_bank.mjs",
+    "verify:vocab": "node scripts/validate_vocab_bank.mjs",
+    "verify:vocab:release": "node scripts/validate_vocab_bank.mjs --strict-coverage",
+    "build:learning-manifest": "node scripts/build_learning_manifest.mjs",
+    "check:learning-manifest": "node scripts/build_learning_manifest.mjs --check",
+    "test:learning-manifest": "node --test scripts/test_learning_manifest.mjs",
+    "test:reading": "node scripts/test_reading_api.mjs",
+    "build:artifact-manifest": "node scripts/build_artifact_manifest.mjs",
+    "check:artifact-manifest": "node scripts/build_artifact_manifest.mjs --check",
+    "release:check": "npm run check:taxonomy && npm run verify:authors && npm run verify:vocab:release && npm run check:learning-manifest && npm run test:learning-manifest && npm run test:reading && npm run check:artifact-manifest",
     "serve": "npx wrangler pages dev site",
-    "deploy": "wrangler pages deploy site --project-name yuwen-course --branch main"
+    "deploy": "npm run release:check && wrangler pages deploy site --project-name yuwen-course --branch main"
+  },
+  "devDependencies": {
+    "playwright": "^1.60.0",
+    "wrangler": "^4.100.0"
   }
 }

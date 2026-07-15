@@ -1,0 +1,380 @@
+{
+ "lessonId": "lesson-1528",
+ "title": "7 包身工/ 夏衍",
+ "mode": "journalism",
+ "builtAt": "2026-07-14T09:34:46.064Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 25,
+ "inventory": [
+  {
+   "id": "lesson-1528:v01",
+   "word": "拷绸",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "属于特定时代与地域的服饰名词，非核心逻辑理解点，了解即可。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v02",
+   "word": "猪猡",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "文中反复出现的比喻，揭示作者对包身工非人待遇的愤慨，学生需理解其贬义色彩，不需专门命题。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v03",
+   "word": "见机",
+   "annotated": true,
+   "decision": "question",
+   "reason": "此处与现代汉语常用词义不同，理解其语境义有助于把握人物在极端压迫下的生存状态。",
+   "contextMeaning": "知趣，看眼色行事",
+   "sourceSentence": "她很见机看情况(办事),地将身体慢慢地移到屋子的角上",
+   "type": "contextual-choice",
+   "question": "「她很见机看情况(办事)，地将身体慢慢地移到屋子的角上」中「见机」的正确含义是",
+   "options": [
+    "看到机会",
+    "看情况办事",
+    "知趣，看眼色行事",
+    "灵活应对"
+   ],
+   "answerIndex": 2,
+   "explanation": "结合语境，芦柴棒因生病虚弱，为避免被老板殴打而主动躲避，此处「见机」体现了她的卑微与恐惧，意为「知趣」。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2752
+   }
+  },
+  {
+   "id": "lesson-1528:v04",
+   "word": "手面",
+   "annotated": true,
+   "decision": "question",
+   "reason": "方言词汇，直接影响对带工老板社会地位与经济实力的理解。",
+   "contextMeaning": "排场、气派",
+   "sourceSentence": "每个带工所带包身工的人数也就表示了他们的手面和财产。",
+   "type": "contextual-choice",
+   "question": "「每个带工所带包身工的人数也就表示了他们的手面和财产」中「手面」的意思是",
+   "options": [
+    "手段与层面",
+    "排场与气派",
+    "手工与门面",
+    "技巧与能力"
+   ],
+   "answerIndex": 1,
+   "explanation": "「手面」在文中指人的排场和气派，此处用来衡量带工老板的经济实力。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1373
+   }
+  },
+  {
+   "id": "lesson-1528:v05",
+   "word": "轧",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多音字，且在文中为方言用法，考察字音与词义理解。",
+   "contextMeaning": "核对、查验",
+   "sourceSentence": "好像火车站轧gá票处一般的木栅子的前面。",
+   "type": "pronunciation",
+   "question": "下列对文中加点字「轧」的读音及含义解释，正确的一项是",
+   "options": [
+    "zhá，挤压",
+    "gá，核对、查验",
+    "yà，辗压",
+    "gá，聚集"
+   ],
+   "answerIndex": 1,
+   "explanation": "教材明确标注此处读gá，意为核对、查验。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1675
+   }
+  },
+  {
+   "id": "lesson-1528:v06",
+   "word": "温情主义者",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文中批判的核心逻辑词，理解其讽刺意味对把握文章主旨至关重要。",
+   "contextMeaning": "指代那些虚伪地主张用小恩小惠安抚工人以维持剥削制度的人",
+   "sourceSentence": "一个有殖民地经验的“温情主义者”,在一本著作的序文上说",
+   "type": "interpretation",
+   "question": "作者在文中批判「温情主义者」，其意图是",
+   "options": [
+    "否定所有关注工人福利的社会学说",
+    "讽刺那些虚伪地通过小恩小惠掩盖剥削实质的人",
+    "赞扬他们对工人生活状况的关注",
+    "强调只有温情主义才能改善工人的生存环境"
+   ],
+   "answerIndex": 1,
+   "explanation": "作者指出温情主义者虽然口谈「结合力」，实际却用「包身工」这种廉价劳动力替代「外头工人」，实质上是更隐蔽的剥削。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2400
+   }
+  },
+  {
+   "id": "lesson-1528:v07",
+   "word": "作践",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词义强烈，反映了作者对包身工悲惨命运的深切同情与愤慨，是文学性描写中的关键点。",
+   "contextMeaning": "践踏、糟蹋、虐待",
+   "sourceSentence": "猪猡一般的生活,泥土一般的作践",
+   "type": "substitution",
+   "question": "「猪猡一般的生活，泥土一般的作践」句中，「作践」一词可以替换为",
+   "options": [
+    "劳作",
+    "磨练",
+    "糟蹋",
+    "建设"
+   ],
+   "answerIndex": 2,
+   "explanation": "「作践」在此处形容被当作泥土一样践踏、蹂躏，体现了包身工地位的卑微与受到的非人虐待。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 5865
+   }
+  },
+  {
+   "id": "lesson-1528:v08",
+   "word": "滋养物",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高度隐喻化的表达，将包身工物化，深刻揭露了资本主义剥削的残酷本质。",
+   "contextMeaning": "比喻包身工是供工厂资本家吸血的养分",
+   "sourceSentence": "红砖头的怪物,已经张着嘴巴在等待着它的滋养物了",
+   "type": "interpretation",
+   "question": "下列对「红砖头的怪物，已经张着嘴巴在等待着它的滋养物了」这句话的理解，正确的一项是",
+   "options": [
+    "说明工厂需要食物来维持日常运转",
+    "比喻工厂是吞噬人的怪物，包身工是其剥削的对象",
+    "暗示工厂的运作极其依赖工人的主动奉献",
+    "描写工厂工人们排队领取营养品的真实场景"
+   ],
+   "answerIndex": 1,
+   "explanation": "作者将工厂比作「红砖头的怪物」，将包身工比作「滋养物」，形象地揭示了资本家靠榨取工人血汗来获利的本质。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 4183
+   }
+  },
+  {
+   "id": "lesson-1528:v09",
+   "word": "蠕动",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "文学性描写，表现包身工如虫子般麻木、低级的生存状态，重在感悟，出题易流于琐碎。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v10",
+   "word": "里应外合",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "常规成语，文中用法与通用义一致，无特殊迁移难度。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v11",
+   "word": "皮辊",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "属于纺织专业名词，教材已作注释，无需考察。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v12",
+   "word": "水门汀",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "英文cement 的音译，即水泥。在方言中有时也指混凝土。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v13",
+   "word": "弄堂",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "方言，小巷。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v14",
+   "word": "带工老板",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "管理包身工的工头。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v15",
+   "word": "请愿警",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "当时有钱人为保护自己而向政府雇用的警察。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v16",
+   "word": "脚路",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "门路。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v17",
+   "word": "画一个十字",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "老百姓不会写字，签字画押时只好以“十”字代替。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v18",
+   "word": "轧票处",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即检票处。轧，方言，核对、查验。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v19",
+   "word": "顾正红事件",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "1925 年5 月15 日，上海日商纱厂日籍职员枪杀工人顾正红（中共党员），打伤工人十余人，激起了工人、市民和学生的愤怒，引发了5 月30 日的罢工游行。英国巡捕开枪打死群众十余人，伤数十人，酿成了“五卅惨案”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v20",
+   "word": "开花衣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "拆开棉包。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v21",
+   "word": "扛原棉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "扛运棉包。原棉，已经轧出棉籽的棉花。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v22",
+   "word": "钢丝车间",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "也叫“梳棉车间”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v23",
+   "word": "条子间",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "并条车间，任务是把梳棉机加工出来的棉条（生条）再加工，使它成为熟条。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v24",
+   "word": "粗纱间",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "把棉条纺成粗纱的车间。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v25",
+   "word": "橡皮",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即橡胶。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v26",
+   "word": "玄色",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "黑中透红的颜色。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v27",
+   "word": "锭壳",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "套在锭子（纺纱机上绕纱的机件）上的管状外壳。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v28",
+   "word": "打相打",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "方言，指打架。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v29",
+   "word": "太平龙头",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "消防用的水龙头。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v30",
+   "word": "皮带盘心子",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "机器上绕皮带的轮盘。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1528:v31",
+   "word": "索洛",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "现在译作“梭罗”，美国作家，写过大量政论，反对对外侵略，支持奴隶解放。著有散文集《瓦尔登湖》。",
+   "sourceSentence": ""
+  }
+ ]
+}

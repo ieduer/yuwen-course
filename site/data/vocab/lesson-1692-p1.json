@@ -1,0 +1,245 @@
+{
+ "lessonId": "lesson-1692-p1",
+ "title": "立在地球边上放号",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:14:25.143Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 173,
+ "annotationCount": 7,
+ "inventory": [
+  {
+   "id": "lesson-1692-p1:v01",
+   "word": "律吕",
+   "annotated": true,
+   "decision": "question",
+   "reason": "专业术语，涉及诗歌意象的建构，理解其内涵对于把握诗歌节奏感至关重要。",
+   "contextMeaning": "泛指乐律、音响节奏",
+   "sourceSentence": "力的绘画，力的舞蹈，力的音乐，力的诗歌，力的律吕 哟！",
+   "type": "contextual-choice",
+   "question": "文中“力的律吕”中的“律吕”一词，在语境中是指什么？",
+   "options": [
+    "古代校正音律的器具",
+    "泛指音乐的节奏与旋律",
+    "指诗歌的韵律格式",
+    "指自然界的声音变化"
+   ],
+   "answerIndex": 1,
+   "explanation": "律吕原指古代定音器具，在此处借指音乐的节奏与律动，与前文的“绘画”“舞蹈”“音乐”等并列，象征生命力的外化形式。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 116
+   }
+  },
+  {
+   "id": "lesson-1692-p1:v02",
+   "word": "放号",
+   "annotated": false,
+   "decision": "question",
+   "reason": "题目核心词，关乎诗歌情感表达方式的理解。",
+   "contextMeaning": "大声呼喊，在此处指诗人情感的喷薄而出",
+   "sourceSentence": "立在地球边上放号",
+   "type": "contextual-choice",
+   "question": "诗题中“放号”一词的意思是？",
+   "options": [
+    "发布号令",
+    "吹响号角",
+    "大声呼喊",
+    "记录编号"
+   ],
+   "answerIndex": 2,
+   "explanation": "“放号”即放声呼号，体现了诗人情感的激越与对生命力量的颂扬，而非军事或行政上的号令。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 0
+   }
+  },
+  {
+   "id": "lesson-1692-p1:v03",
+   "word": "怒涌",
+   "annotated": false,
+   "decision": "question",
+   "reason": "动词修饰语，体现诗歌意象的动感与力度。",
+   "contextMeaning": "剧烈地翻腾涌动",
+   "sourceSentence": "无数的白云正在空中怒涌",
+   "type": "contextual-choice",
+   "question": "“无数的白云正在空中怒涌”中，“怒涌”一词体现了云的什么特点？",
+   "options": [
+    "缓慢而优美",
+    "愤怒而停滞",
+    "剧烈而充满活力",
+    "消散而无力"
+   ],
+   "answerIndex": 2,
+   "explanation": "“怒涌”赋予白云以强烈的生命动感，表现了自然界中那种磅礴的、不可阻挡的力量感。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 13
+   }
+  },
+  {
+   "id": "lesson-1692-p1:v04",
+   "word": "洪涛",
+   "annotated": false,
+   "decision": "question",
+   "reason": "关键意象，影响对诗歌宏大场景的感知。",
+   "contextMeaning": "巨大的波浪",
+   "sourceSentence": "我眼前来了的滚滚的洪涛哟！",
+   "type": "contextual-choice",
+   "question": "文中“洪涛”一词最贴切的解释是？",
+   "options": [
+    "洪水与波涛",
+    "巨大的波浪",
+    "江河的源头",
+    "愤怒的声浪"
+   ],
+   "answerIndex": 1,
+   "explanation": "“洪涛”指巨大的波浪，在此处呼应前文“太平洋提起他全身的力量”，象征着汹涌澎湃的生命力。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 69
+   }
+  },
+  {
+   "id": "lesson-1692-p1:v05",
+   "word": "力",
+   "annotated": false,
+   "decision": "question",
+   "reason": "全诗意象核心，理解其多重象征意义是解读诗歌的关键。",
+   "contextMeaning": "宇宙间创造与运动的生命原动力",
+   "sourceSentence": "力的绘画，力的舞蹈，力的音乐，力的诗歌，力的律吕 哟！",
+   "type": "interpretation",
+   "question": "关于诗中反复咏叹的“力”，下列理解不准确的一项是？",
+   "options": [
+    "象征着宇宙间不断创造的生命原动力",
+    "表现了诗人对宏大、激越事物的崇尚",
+    "指代自然界中具体的物理作用力",
+    "是诗人五四时期追求新生活与新文化的精神投射"
+   ],
+   "answerIndex": 2,
+   "explanation": "诗中的“力”是抽象的哲学意象，代表着创造与毁灭的生命律动，并非指代具体的物理力。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 116
+   }
+  },
+  {
+   "id": "lesson-1692-p1:v06",
+   "word": "晴景",
+   "annotated": false,
+   "decision": "question",
+   "reason": "语境义词，易被误解为单纯的天气描述。",
+   "contextMeaning": "晴朗的景象",
+   "sourceSentence": "好幅壮丽的北冰洋的晴景哟！",
+   "type": "contextual-choice",
+   "question": "“好幅壮丽的北冰洋的晴景哟！”中“晴景”指的是什么？",
+   "options": [
+    "清澈的背景",
+    "晴朗的景象",
+    "晴天的处境",
+    "美丽的远景"
+   ],
+   "answerIndex": 1,
+   "explanation": "“晴景”即晴朗的景象，形容北冰洋在诗人视野中展现出的壮丽画面。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 29
+   }
+  },
+  {
+   "id": "lesson-1692-p1:v07",
+   "word": "壮丽",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "属于基础形容词，语境中意思明确，不构成理解障碍。",
+   "contextMeaning": "雄壮美丽",
+   "sourceSentence": "好幅壮丽的北冰洋的晴景哟！",
+   "location": {
+    "charIndex": 29
+   }
+  },
+  {
+   "id": "lesson-1692-p1:v08",
+   "word": "毁坏",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "常用词，且在诗中与“创造”并列，意义明确，不需要考查。",
+   "contextMeaning": "破坏，打破旧格局",
+   "sourceSentence": "不断的毁坏，不断的创造，不断的努力哟！",
+   "location": {
+    "charIndex": 86
+   }
+  },
+  {
+   "id": "lesson-1692-p1:v09",
+   "word": "创造",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "常用词，语境意义与字面意义一致，无需命题。",
+   "contextMeaning": "创造，建立新秩序",
+   "sourceSentence": "不断的毁坏，不断的创造，不断的努力哟！",
+   "location": {
+    "charIndex": 86
+   }
+  },
+  {
+   "id": "lesson-1692-p1:v10",
+   "word": "选自红烛人民文学出",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《红烛》（人民文学出版社1981 年版）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p1:v11",
+   "word": "蜡炬成灰泪始干",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "语出唐李商隐《无题》（相见时难别亦难）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p1:v12",
+   "word": "选自昌耀抒情诗集青",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《昌耀抒情诗集》（青海人民出版社1986 年版）。峨日朵雪峰在青海海北藏族自治州内，是祁连山脉的一座无名山，靠近祁连县峨堡镇，山顶终年积雪。 *作者在诗中借称这座山为“峨日朵雪峰”。昌耀（1936—2000），原名王昌耀，湖南桃源人，诗人。代表作有诗歌《划呀，划呀，父亲们！》《意绪》等。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p1:v13",
+   "word": "揳",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "把楔子、钉子等捶打到物体里面。这里指用力插入。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p1:v14",
+   "word": "罅隙",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "缝隙。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p1:v15",
+   "word": "选自雪莱诗选时代文",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《雪莱诗选》（时代文艺出版社2012 年版）。江枫译。雪莱（1792—1822），英国诗人。代表作有诗歌《西风颂》、诗剧《解放了的普罗米修斯》等。",
+   "sourceSentence": ""
+  }
+ ]
+}

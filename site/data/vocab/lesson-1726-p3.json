@@ -1,0 +1,656 @@
+{
+ "lessonId": "lesson-1726-p3",
+ "title": "庖丁解牛",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:27:35.787Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 412,
+ "annotationCount": 40,
+ "inventory": [
+  {
+   "id": "lesson-1726-p3:v01",
+   "word": "盖",
+   "annotated": true,
+   "decision": "question",
+   "reason": "通假字，易误读误解，影响句意理解",
+   "contextMeaning": "何、怎么",
+   "sourceSentence": "技盖 至此乎",
+   "type": "gu-jin",
+   "question": "「技盖至此乎」中「盖」的含义与下列哪项相同？",
+   "options": [
+    "盖文王拘而演《周易》",
+    "盖将自其变者而观之",
+    "盖亦反其本矣",
+    "盖余所至，比好游者尚不能十一"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中「盖」同「盍」，意为“何、怎么”。选项C“盖亦反其本矣”中的“盖”也是“何、怎么”的意思。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 92
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v02",
+   "word": "道",
+   "annotated": true,
+   "decision": "question",
+   "reason": "核心哲学概念，直接决定对全文主旨的理解",
+   "contextMeaning": "自然的规律",
+   "sourceSentence": "臣之所好者道 也",
+   "type": "interpretation",
+   "question": "文中「臣之所好者道也」中「道」指代的是",
+   "options": [
+    "解牛的方法与技巧",
+    "一种高超的道德修养",
+    "事物运行的自然规律",
+    "庖丁个人的职业理想"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中庖丁强调其所追求的是“道”，即顺应自然规律，而非单纯的“技”。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 109
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v03",
+   "word": "进",
+   "annotated": false,
+   "decision": "question",
+   "reason": "特殊用法，理解“技”与“道”区别的关键",
+   "contextMeaning": "超过",
+   "sourceSentence": "进乎技矣",
+   "type": "contextual-choice",
+   "question": "「进乎技矣」中「进」的意思是",
+   "options": [
+    "前进",
+    "超过",
+    "进入",
+    "增进"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处指解牛的水平已经超越了单纯的技能层面。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 118
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v04",
+   "word": "神",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文中重要概念，体现庖丁解牛的境界",
+   "contextMeaning": "精神、心神",
+   "sourceSentence": "臣以神遇而不以目视",
+   "type": "interpretation",
+   "question": "「臣以神遇而不以目视」中「神」是指",
+   "options": [
+    "神灵",
+    "神奇的技巧",
+    "精神活动",
+    "神态"
+   ],
+   "answerIndex": 2,
+   "explanation": "意为用精神去接触牛的身体结构，而非依赖感官视觉。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 159
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v05",
+   "word": "天理",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义词，易误解为现代意义的“天道/公理”",
+   "contextMeaning": "牛体的自然结构",
+   "sourceSentence": "依乎天理",
+   "type": "gu-jin",
+   "question": "下列选项中「天理」的含义与文中一致的是",
+   "options": [
+    "天理昭昭，报应不爽",
+    "存天理，灭人欲",
+    "顺应天理，因势利导",
+    "不合天理，违背良心"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中指牛体天然的肌理结构，C项语境相符。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 179
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v06",
+   "word": "批",
+   "annotated": false,
+   "decision": "question",
+   "reason": "动作性动词，影响对解牛过程的理解",
+   "contextMeaning": "击",
+   "sourceSentence": "批大郤",
+   "type": "substitution",
+   "question": "「批大郤」中「批」最准确的解释是",
+   "options": [
+    "劈开",
+    "击入",
+    "批注",
+    "排斥"
+   ],
+   "answerIndex": 1,
+   "explanation": "“批”即击，指用刀顺着缝隙用力劈开。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 185
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v07",
+   "word": "因",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频虚词/动词，语境义重要",
+   "contextMeaning": "顺着",
+   "sourceSentence": "因其固然",
+   "type": "contextual-choice",
+   "question": "「因其固然」中「因」的意思是",
+   "options": [
+    "因为",
+    "依靠",
+    "顺着",
+    "沿袭"
+   ],
+   "answerIndex": 2,
+   "explanation": "指顺着牛体本来的结构进行解剖。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 195
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v08",
+   "word": "更",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，容易混淆",
+   "contextMeaning": "更换",
+   "sourceSentence": "良庖岁更 刀",
+   "type": "contextual-choice",
+   "question": "「良庖岁更刀」中「更」的意思是",
+   "options": [
+    "更加",
+    "更换",
+    "经历",
+    "改变"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处指更换刀具。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 216
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v09",
+   "word": "族",
+   "annotated": true,
+   "decision": "question",
+   "reason": "一词多义，且词性在文中发生变化",
+   "contextMeaning": "筋骨交错聚结的地方",
+   "sourceSentence": "每至于族",
+   "type": "discrimination",
+   "question": "下列两句中「族」的含义分别是：①族庖月更刀；②每至于族",
+   "options": [
+    "众；聚结处",
+    "宗族；聚结处",
+    "种类；宗族",
+    "众；种类"
+   ],
+   "answerIndex": 0,
+   "explanation": "①族庖指一般的厨师（众）；②指筋骨交错聚结之处。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 317
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v10",
+   "word": "间",
+   "annotated": false,
+   "decision": "question",
+   "reason": "语境义，决定对解牛原理的理解",
+   "contextMeaning": "空隙",
+   "sourceSentence": "彼节者有间",
+   "type": "contextual-choice",
+   "question": "「彼节者有间」中「间」的意思是",
+   "options": [
+    "时间",
+    "空间",
+    "空隙",
+    "间隙"
+   ],
+   "answerIndex": 2,
+   "explanation": "指骨节之间的空隙。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 264
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v11",
+   "word": "怵然",
+   "annotated": true,
+   "decision": "question",
+   "reason": "反映庖丁谨慎的态度，对人物形象刻画重要",
+   "contextMeaning": "戒惧的样子",
+   "sourceSentence": "吾见其难为，怵然 为戒",
+   "type": "interpretation",
+   "question": "「怵然为戒」中「怵然」的意思是",
+   "options": [
+    "惊讶的样子",
+    "恐惧的样子",
+    "戒惧的样子",
+    "专注的样子"
+   ],
+   "answerIndex": 2,
+   "explanation": "指因看到困难而产生警惕、戒惧心理。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 323
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v12",
+   "word": "善",
+   "annotated": true,
+   "decision": "question",
+   "reason": "词类活用，考查文言文实词活用能力",
+   "contextMeaning": "揩拭",
+   "sourceSentence": "善 刀而藏之",
+   "type": "contextual-choice",
+   "question": "「善刀而藏之」中「善」的意思是",
+   "options": [
+    "好的",
+    "擅长",
+    "揩拭",
+    "完善"
+   ],
+   "answerIndex": 2,
+   "explanation": "名词活用作动词，意为擦拭干净。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 380
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v13",
+   "word": "始",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "基础词汇，学生易于通过上下文推断，不出题",
+   "contextMeaning": "起初",
+   "sourceSentence": "始臣之解牛之时",
+   "location": {
+    "charIndex": 124
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v14",
+   "word": "方今",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "固定词组，理解难度低",
+   "contextMeaning": "现在",
+   "sourceSentence": "方今之时",
+   "location": {
+    "charIndex": 154
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v15",
+   "word": "虽然",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "现代汉语常用词，与古义基本一致，无需出题",
+   "contextMeaning": "即使如此",
+   "sourceSentence": "虽然，每至于族",
+   "location": {
+    "charIndex": 314
+   }
+  },
+  {
+   "id": "lesson-1726-p3:v16",
+   "word": "选自庄子·养生主",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《庄子·养生主》（《庄子集释》，中华书局2004年版）。题目是编者加的。庖丁，名为“丁”的厨师。一说即厨师，“丁”指从事专门劳动的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v17",
+   "word": "文惠君",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即梁惠王，战国时魏国国君。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v18",
+   "word": "所触",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "接触的地方。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v19",
+   "word": "履",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "踩。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v20",
+   "word": "踦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "抵住，指宰牛之时用膝盖抵住牛。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v21",
+   "word": "砉然向然",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "砉砉作响。砉，拟声词，皮肉筋骨分离的声音。向，同“响”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v22",
+   "word": "奏刀然",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "进刀时发出“然”的声音。奏，进。然，拟声词，插刀裂物的声音。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v23",
+   "word": "中音",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "合乎音律。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v24",
+   "word": "合于桑林之舞",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "合乎《桑林》舞乐的节拍。《桑林》，传说中商汤时的乐曲名。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v25",
+   "word": "乃中经首之会",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "又合乎《经首》乐曲的节奏。《经首》，传说中尧时的乐曲名。乃，又。会，节奏。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v26",
+   "word": "进乎技矣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "超过技术了。进，超过。技，具体的操作技术。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v27",
+   "word": "无非牛者",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "没有不是（完整的）牛的。意思是跟一般人所见的一样。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v28",
+   "word": "未尝见全牛也",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "未曾看到完整的牛了。这是说对牛的全身结构完全摸清了，不再把一头牛看成全牛，而是把它看成可以拆解的东西。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v29",
+   "word": "臣以神遇而不以目视",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "我只用精神去和牛接触，而不用眼睛去看。遇，接触。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v30",
+   "word": "官知止而神欲行",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "感觉器官的作用停止了，而精神在活动。意思是，解牛时可以不用感觉器官，而只靠精神活动来行事。神欲，精神活动。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v31",
+   "word": "批大郤",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "击入大的（筋骨连接处的）缝隙。批，击。郤，同“隙”，空隙。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v32",
+   "word": "导大窾",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "引刀进入（骨节之间的）空处。导，引导，这里指引刀进入。窾，空隙。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v33",
+   "word": "因其固然",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "顺着牛体本来的结构。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v34",
+   "word": "技经肯綮之未尝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "脉络相连和筋骨相结合的地方，不曾拿刀去尝试。意思是，用刀的技术高超，从不经过容易使刀口钝折的地方。技，应是“枝”字，指支脉。经，指经脉。肯，附在骨上的肉。綮，筋骨结合处。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v35",
+   "word": "大骨",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "：大骨。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v36",
+   "word": "割",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "割肉。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v37",
+   "word": "族庖",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一般的厨师。族，众。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v38",
+   "word": "折",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "断，指用刀砍断骨头。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v39",
+   "word": "新发于硎",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "刚从磨刀石上磨出来。硎，磨刀石。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v40",
+   "word": "彼节者有间",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "那牛骨节间有空隙。间，空隙。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v41",
+   "word": "无厚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "没有厚度。这里形容刀口薄。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v42",
+   "word": "恢恢乎",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "宽绰的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v43",
+   "word": "视为止行为迟",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "眼睛因为（筋骨交错聚结的地方）而凝视不动，动作也因此慢下来。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v44",
+   "word": "微",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "轻。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v45",
+   "word": "謋",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "拟声词，迅速裂开的声音。这里形容骨与肉分开的声音。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v46",
+   "word": "委",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "散落，卸落。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v47",
+   "word": "踌躇满志",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "悠然自得，心满意足。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1726-p3:v48",
+   "word": "养生",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指养生之道。",
+   "sourceSentence": ""
+  }
+ ]
+}

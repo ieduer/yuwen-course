@@ -1,0 +1,512 @@
+{
+ "lessonId": "lesson-1527",
+ "title": "* 为了忘却的记念/ 鲁迅",
+ "mode": "modern-prose",
+ "builtAt": "2026-07-14T09:34:43.445Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 38,
+ "inventory": [
+  {
+   "id": "lesson-1527:v01",
+   "word": "竦身",
+   "annotated": true,
+   "decision": "question",
+   "reason": "动作描写词，语境中体现作者试图摆脱悲愤的心理，易被误解为纯粹的生理动作",
+   "contextMeaning": "身体向上耸，这里指为了摆脱悲哀而产生的动作",
+   "sourceSentence": "我很想借此算是竦身一摇,将悲哀摆脱,给自己轻松一下",
+   "type": "contextual-choice",
+   "question": "文中“竦身一摇”的“竦身”最贴切的语境义是",
+   "options": [
+    "惊恐地站起来",
+    "身体向上耸，试图摆脱束缚",
+    "因为寒冷而战栗",
+    "因为兴奋而跳跃"
+   ],
+   "answerIndex": 1,
+   "explanation": "竦身即身体向上耸，文中指作者试图通过这一动作摆脱心中沉重的悲哀。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 337
+   }
+  },
+  {
+   "id": "lesson-1527:v02",
+   "word": "隐约其辞",
+   "annotated": false,
+   "decision": "question",
+   "reason": "成语用法考察，易与含糊其辞混淆，且体现了当时白色恐怖的社会背景",
+   "contextMeaning": "说话写文章不直截了当",
+   "sourceSentence": "当时上海的报章都不敢载这件事,或者也许是不愿,或不屑载这件事,只在《文艺新闻》上有一点隐约其辞的文章。",
+   "type": "interpretation",
+   "question": "文中“隐约其辞”体现了当时什么样的社会环境？",
+   "options": [
+    "文人表达风格含蓄",
+    "事件本身过于复杂",
+    "白色恐怖下媒体的噤若寒蝉与畏惧",
+    "作者对事件了解不够深刻"
+   ],
+   "answerIndex": 2,
+   "explanation": "隐约其辞指说话写文章不直截了当，结合语境“报章都不敢载”，可见是由于政治压力导致的不敢直言。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 422
+   }
+  },
+  {
+   "id": "lesson-1527:v03",
+   "word": "迂",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容词在文中具有极强的评价色彩，体现了鲁迅对柔石性格的复杂情感，属于关键理解词",
+   "contextMeaning": "言行守旧、固执，不合时宜，这里带有褒义的亲昵与叹惋",
+   "sourceSentence": "而且颇有点迂,有时会令我忽而想到方孝孺,觉得好像也有些这模样的。",
+   "type": "contextual-choice",
+   "question": "文中说柔石“颇有点迂”，鲁迅对这种“迂”的态度是",
+   "options": [
+    "彻底的否定与批评",
+    "作为性格缺陷的嘲讽",
+    "带着理解、亲昵与一丝痛惜",
+    "对柔石愚昧无知的无奈"
+   ],
+   "answerIndex": 2,
+   "explanation": "鲁迅通过“迂”将其与方孝孺联系，体现了对柔石刚正、质朴性格的肯定，而非贬义的守旧。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2131
+   }
+  },
+  {
+   "id": "lesson-1527:v04",
+   "word": "明珠投暗",
+   "annotated": false,
+   "decision": "question",
+   "reason": "比喻用法，体现了作者对书籍被没收的痛惜，属于文学修辞理解",
+   "contextMeaning": "比喻珍贵的东西落入不识货或环境恶劣的人手中",
+   "sourceSentence": "落在捕房的手里,真是明珠投暗了。",
+   "type": "interpretation",
+   "question": "文中“明珠投暗”比喻的是什么？",
+   "options": [
+    "柔石被捕入狱",
+    "鲁迅送给柔石的书籍落入捕房手中",
+    "珍贵的译稿被兵火烧毁",
+    "青年作家被反动派杀害"
+   ],
+   "answerIndex": 1,
+   "explanation": "明珠指鲁迅心爱的彼得斐诗集，暗指捕房，表现了鲁迅对心血之作落入敌手的愤慨。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1387
+   }
+  },
+  {
+   "id": "lesson-1527:v05",
+   "word": "苍皇",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义/正字考察，教材已指出即“仓皇”，考查学生对词汇演变的认知",
+   "contextMeaning": "惊慌失措",
+   "sourceSentence": "我这面也为他近视而又要照顾别人担心,大家都苍皇失措的愁一路",
+   "type": "gu-jin",
+   "question": "文中“苍皇”一词，在现代汉语中写作",
+   "options": [
+    "仓惶",
+    "仓皇",
+    "苍惶",
+    "沧皇"
+   ],
+   "answerIndex": 1,
+   "explanation": "根据教材注释，“苍皇”现在写作“仓皇”。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2914
+   }
+  },
+  {
+   "id": "lesson-1527:v06",
+   "word": "挈妇将雏",
+   "annotated": true,
+   "decision": "question",
+   "reason": "成语考察，语境理解，体现作者当时逃亡的艰辛",
+   "contextMeaning": "带着妻子，领着儿女",
+   "sourceSentence": "惯于长夜过春时,挈妇将雏鬓有丝。",
+   "type": "substitution",
+   "question": "诗句中“挈妇将雏”的意思是",
+   "options": [
+    "带领妻子儿女一同避难",
+    "告别妻子儿女独自流亡",
+    "妻子与儿女在战争中失散",
+    "照顾生病的妻子和年幼的孩子"
+   ],
+   "answerIndex": 0,
+   "explanation": "根据注释，挈、将都是带领的意思，雏指幼小的鸟喻指儿女，全句形容带着家眷流亡。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 4604
+   }
+  },
+  {
+   "id": "lesson-1527:v07",
+   "word": "延口残喘",
+   "annotated": false,
+   "decision": "question",
+   "reason": "关键短语，体现了白色恐怖下作者苟延残喘的悲愤心情",
+   "contextMeaning": "勉强维持残余的生命，苟且偷生",
+   "sourceSentence": "我只能用这样的笔墨,写几句文章,算是从泥土中挖一个小孔,自己延口残喘",
+   "type": "contextual-choice",
+   "question": "文中作者说自己“延口残喘”，表达了作者什么样的心态？",
+   "options": [
+    "对生存充满希望的乐观",
+    "在黑暗压抑下勉强维持写作与生存的痛苦与无奈",
+    "对自己苟且偷生感到羞耻",
+    "对革命成功不再抱有幻想"
+   ],
+   "answerIndex": 1,
+   "explanation": "作者将自己写文章比作挖小孔透气，体现了在反动统治下维持生命的艰难。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 5437
+   }
+  },
+  {
+   "id": "lesson-1527:v08",
+   "word": "高慢",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有明确注释，且词义较为单一，重在理解鲁迅对白莽的评价。",
+   "contextMeaning": "高傲自负，轻视他人",
+   "sourceSentence": "白莽并没有这么高慢",
+   "location": {
+    "charIndex": 659
+   }
+  },
+  {
+   "id": "lesson-1527:v09",
+   "word": "人心惟危",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "引自《尚书》，属典故，教材注释清晰，理解其含义即可。",
+   "contextMeaning": "指人心险恶，难以揣测",
+   "sourceSentence": "后来他对于我那“人心惟危”说的怀疑减少了",
+   "location": {
+    "charIndex": 2597
+   }
+  },
+  {
+   "id": "lesson-1527:v10",
+   "word": "拳拳",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "描述情感的词，语境中显而易见指诚挚、恳切，不需专门命题。",
+   "contextMeaning": "诚挚、恳切",
+   "sourceSentence": "我知道这失明的母亲的眷眷的心,柔石的拳拳的心。",
+   "location": {
+    "charIndex": 4809
+   }
+  },
+  {
+   "id": "lesson-1527:v11",
+   "word": "五个青年作家",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指本文所说的五位革命作家白莽、柔石、冯铿、李伟森和胡也频。白莽（1909—1931），又名殷夫，原名徐祖华，浙江象山人。柔石（1902—1931），原名赵平复，浙江宁海人。冯铿（1907—1931），原名冯岭梅，广东潮州人。李伟森（1903—1931），原名李国纬，又名李求实，湖北武昌人。胡也频（1903—1931），福建福州人。他们都是中国共产党领导的中国左翼作家联盟（简称“左联”）成员。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v12",
+   "word": "文艺新闻",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一种综合性文艺周刊。1931年在上海创刊，同年5月起接受“左联”的领导。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v13",
+   "word": "隐约其辞的文章",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指《文艺新闻》第三号（1931年3月30日）登载的以《在地狱或人世的作家？》为题的文章。这篇文章以读者致编者信的形式，首先透露了白莽等人被捕遇害的消息。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v14",
+   "word": "林莽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即楼适夷（1905—2001），浙江余姚人，作家、翻译家。当时是“左联”成员。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v15",
+   "word": "彼得斐",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "现在译作“裴多菲”，匈牙利诗人。他积极参加反对专制主义的政治活动。1849年在保卫祖国、抵抗奥地利和沙皇俄国侵略的战争中牺牲。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v16",
+   "word": "奔流",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "鲁迅、郁达夫主编的一种文艺刊物。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v17",
+   "word": "跑他的路",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "暗指去做革命工作。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v18",
+   "word": "罗曼谛克",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "英文romantic 的音译，即浪漫，这里有富于幻想、喜欢新奇的意味。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v19",
+   "word": "莱克朗氏万有文库",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "德国莱克朗氏书店1867年开始出版的文学丛书。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v20",
+   "word": "丸善书店",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "日本东京一家出售西文书籍的书店。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v21",
+   "word": "三道头",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指当时上海公共租界里的巡官。其制服袖上缀有三道倒人字形标志，故称。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v22",
+   "word": "台州的宁海",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "宁海在清代属台州府，因此作者按照旧习惯说“台州的宁海”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v23",
+   "word": "方孝孺",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "字希直，一字希古，浙江宁海人，明建文帝朱允炆时的侍讲学士、文学博士。建文四年（1402），建文帝的叔父燕王朱棣起兵攻陷南京，自立为帝（即永乐帝），命他起草即位诏书；他坚决不从，遂遭杀害，被灭十族。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v24",
+   "word": "朝华社",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "又称“朝花社”，由鲁迅发起和领导的新文学社团。1928年秋在上海成立，主要成员有柔石、许广平等。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v25",
+   "word": "艺苑朝华",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "朝华社出版的美术丛刊，鲁迅、柔石编。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v26",
+   "word": "蕗谷虹儿画选",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "鲁迅选编， 并作《小引》。《小引》后来收入《集外集拾遗》。蕗谷虹儿（1898—1979），日本画家、诗人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v27",
+   "word": "叶灵凤",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "原名叶蕴璞，江苏南京人，作家、藏书家。他当时有一些画作模仿蕗谷虹儿的作品，被鲁迅讽刺为“活剥蕗谷虹儿”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v28",
+   "word": "化",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同“花”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v29",
+   "word": "戈理基",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "现在译作“高尔基”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v30",
+   "word": "兵火",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指1932年1月28日日本帝国主义进犯上海闸北。当时商务印书馆遭到轰炸，大量书稿和藏书被毁，所以鲁迅有译稿被烧的揣测。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v31",
+   "word": "急于事功",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "做事急于求成。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v32",
+   "word": "拓荒者",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "“左联”领导的文艺刊物。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v33",
+   "word": "涅槃",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "佛教用语，梵文音译，意为寂灭、解脱等。后人称高僧逝世为“涅槃”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v34",
+   "word": "我于是就逃走",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "柔石被捕后，鲁迅于1931年1月20日携家属避居黄陆路花园庄，2月28日回寓。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v35",
+   "word": "囚系",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "监禁。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v36",
+   "word": "同乡",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指王育和（1903—1971），浙江宁海人，曾任宁海中学教员。当时是上海沙逊大厦瑞商永昌洋行的职员。柔石在狱中通过送饭人带信给他，由他送周建人转给鲁迅。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v37",
+   "word": "城头变幻大王旗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指国民党政府与地方军阀的连年混战，统治者的旗号不断变换。大王，对强盗的称呼，这里指军阀。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v38",
+   "word": "缁衣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "黑衣。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v39",
+   "word": "日本的歌人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指山本初枝（1898—1966）。据鲁迅1932年7月11日日记，鲁迅将此诗题写成小幅，托内山书店寄给她。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v40",
+   "word": "北斗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "“左联”的机关刊物之一。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v41",
+   "word": "被难",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "遇难。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v42",
+   "word": "徐培根",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "白莽的长兄，曾任国民党政府的航空署长。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1527:v43",
+   "word": "向子期",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即向秀（约227—272），字子期，河内怀县（今河南武陟）人，魏晋时期文学家，“竹林七贤”之一。他的好友嵇康、吕安被司马昭杀害后，他很悲痛，写了一篇《思旧赋》来纪念他们。由于当时司马氏的高压，向秀不能直书其事来表达自己的哀思，所以文章写得简短而隐晦，全文只有156字。",
+   "sourceSentence": ""
+  }
+ ]
+}

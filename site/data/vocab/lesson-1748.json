@@ -1,0 +1,1103 @@
+{
+ "lessonId": "lesson-1748",
+ "title": "14 促织 蒲松龄",
+ "mode": "fiction",
+ "builtAt": "2026-07-14T09:30:51.825Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 102,
+ "inventory": [
+  {
+   "id": "lesson-1748:v01",
+   "word": "岁",
+   "annotated": false,
+   "decision": "question",
+   "reason": "时间副词，义为“每年”，在文中作状语，理解此词有助于把握故事背景的常态化特征。",
+   "contextMeaning": "每年",
+   "sourceSentence": "岁征 民间。",
+   "type": "contextual-choice",
+   "question": "「岁征 民间」中「岁」的意思是",
+   "options": [
+    "年龄",
+    "时间",
+    "每年",
+    "岁星"
+   ],
+   "answerIndex": 2,
+   "explanation": "岁，在这里作状语，意思是每年。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 22
+   }
+  },
+  {
+   "id": "lesson-1748:v02",
+   "word": "故",
+   "annotated": false,
+   "decision": "question",
+   "reason": "虚词，此处作“本来”讲，易误解为“原因、缘故”，影响对句子逻辑的理解。",
+   "contextMeaning": "本来",
+   "sourceSentence": "此物故非西 产",
+   "type": "contextual-choice",
+   "question": "「此物故非西产」中「故」的意思是",
+   "options": [
+    "原因",
+    "旧的",
+    "本来",
+    "故意"
+   ],
+   "answerIndex": 2,
+   "explanation": "故，在这里是副词，表示本来如此。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《王力古汉语字典》"
+   ],
+   "location": {
+    "charIndex": 28
+   }
+  },
+  {
+   "id": "lesson-1748:v03",
+   "word": "中",
+   "annotated": false,
+   "decision": "question",
+   "reason": "动词，“符合”义，文中指蟋蟀不符合官府要求的规格，是理解情节转折的关键。",
+   "contextMeaning": "符合",
+   "sourceSentence": "又劣弱不中于款",
+   "type": "contextual-choice",
+   "question": "「又劣弱不中于款」中「中」的意思是",
+   "options": [
+    "中间",
+    "符合",
+    "打中",
+    "适中"
+   ],
+   "answerIndex": 1,
+   "explanation": "中，在此处是动词，读zhòng，指符合、合乎。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《现代汉语词典》"
+   ],
+   "location": {
+    "charIndex": 253
+   }
+  },
+  {
+   "id": "lesson-1748:v04",
+   "word": "尚",
+   "annotated": true,
+   "decision": "question",
+   "reason": "教材注释词，重点考查动词用法及语境义。",
+   "contextMeaning": "崇尚，喜好",
+   "sourceSentence": "宫中尚 促织之戏",
+   "type": "contextual-choice",
+   "question": "「宫中尚促织之戏」中「尚」的意思是",
+   "options": [
+    "还",
+    "崇尚",
+    "超过",
+    "指望"
+   ],
+   "answerIndex": 1,
+   "explanation": "尚，动词，指崇尚、喜好。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "教材注释"
+   ],
+   "location": {
+    "charIndex": 13
+   }
+  },
+  {
+   "id": "lesson-1748:v05",
+   "word": "竟",
+   "annotated": false,
+   "decision": "question",
+   "reason": "副词，表示出乎意料，理解此词有助于把握人物心理。",
+   "contextMeaning": "竟然",
+   "sourceSentence": "我竟安安稳稳地睡着而没有听见",
+   "type": "contextual-choice",
+   "question": "「我竟安安稳稳地睡着而没有听见」中「竟」的意思是",
+   "options": [
+    "最终",
+    "竟然",
+    "完毕",
+    "境界"
+   ],
+   "answerIndex": 1,
+   "explanation": "竟，副词，表示出乎意料。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《现代汉语词典》"
+   ],
+   "location": {
+    "charIndex": 7586
+   }
+  },
+  {
+   "id": "lesson-1748:v06",
+   "word": "背",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容词，在文中指听力不好，为语境义，易被误解为“背部”。",
+   "contextMeaning": "听力不好",
+   "sourceSentence": "而由于他的耳朵又背,大家必须走近他才行",
+   "type": "contextual-choice",
+   "question": "「而由于他的耳朵又背，大家必须走近他才行」中「背」的意思是",
+   "options": [
+    "背部",
+    "背诵",
+    "听力不好",
+    "违背"
+   ],
+   "answerIndex": 2,
+   "explanation": "背，形容词，指听觉不灵敏。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《现代汉语词典》"
+   ],
+   "location": {
+    "charIndex": 7364
+   }
+  },
+  {
+   "id": "lesson-1748:v07",
+   "word": "媚",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "动词，“讨好”义，刻画人物性格（华阴令）的关键，学生容易理解但需要确认其褒贬色彩。",
+   "contextMeaning": "讨好",
+   "sourceSentence": "有华阴令欲媚上官",
+   "location": {
+    "charIndex": 36
+   }
+  },
+  {
+   "id": "lesson-1748:v08",
+   "word": "居",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "动词，“处于”义，在《变形记》中指处于高位，与《促织》中的“居为奇货”意思不同，属于常见多义词迁移。",
+   "contextMeaning": "处于",
+   "sourceSentence": "坐在桌子上居高临下地跟职员们说话",
+   "location": {
+    "charIndex": 7347
+   }
+  },
+  {
+   "id": "lesson-1748:v09",
+   "word": "斯须",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材注释词，属于时间副词，虽有注释，但属于高频文学用语，值得强调记忆。",
+   "contextMeaning": "一会儿",
+   "sourceSentence": "斯须就毙",
+   "location": {
+    "charIndex": 772
+   }
+  },
+  {
+   "id": "lesson-1748:v10",
+   "word": "宣德",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "明宣宗朱瞻基年号（1426—1435）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v11",
+   "word": "促织之戏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "斗蟋蟀的游戏。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v12",
+   "word": "征",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "征收。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v13",
+   "word": "西",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这里指陕西。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v14",
+   "word": "华阴令",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "华阴县县令。华阴县，明代属西安府，治所在今陕西华阴。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v15",
+   "word": "进",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "进奉。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v16",
+   "word": "才",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "有才能。这里指勇猛善斗。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v17",
+   "word": "责",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "责令。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v18",
+   "word": "里正",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "里长。里，古代基层行政组织。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v19",
+   "word": "游侠儿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这里指游手好闲、不务正业的年轻人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v20",
+   "word": "昂其直",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "抬高它的价钱。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v21",
+   "word": "居为奇货",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "储存起来，当作稀奇的货物（等待高价）。居，囤积、储存。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v22",
+   "word": "里胥",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "管理乡里事务的小吏。胥，官府的小吏。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v23",
+   "word": "假此科敛丁口",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "借此向百姓摊派（进贡蟋蟀的）有关费用。假，凭借、利用。科敛，摊派、征收。丁口，即人口。明清时期年满十六周岁男子称丁，女子及未满十六岁男子称口。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v24",
+   "word": "操童子业",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是，正在读书，准备考秀才。操，从事。童子，童生。科举时代，还没考取秀才的读书人，不论年纪大小，都称为“童生”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v25",
+   "word": "售",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "卖出。这里指考取秀才。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v26",
+   "word": "迂讷",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "迂拙而又不善于言辞。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v27",
+   "word": "薄产累尽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "微薄的家产受牵累而耗尽。累，牵累，这里指受牵累。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v28",
+   "word": "败堵",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "残破的墙垣。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v29",
+   "word": "靡计不施迄无济",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "什么办法都用上了，最终也没有成功。靡，无。迄，最终。济，成功。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v30",
+   "word": "款",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "规格。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v31",
+   "word": "宰严限追比",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "县令严定期限，按期查验追逼。追比，旧时地方官限期交税、交差等，过期以杖责、监禁等方式继续追逼。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v32",
+   "word": "流离",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "形容液体湿淋淋地往下滴的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v33",
+   "word": "行",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "做，从事。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v34",
+   "word": "能以神卜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "能够凭借神力占卜。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v35",
+   "word": "具资诣问",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "准备好钱财前去询问。具，准备。诣，到、前往。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v36",
+   "word": "爇香",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "点燃香。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v37",
+   "word": "祝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "祷告。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v38",
+   "word": "翕辟",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "开合。翕，合。辟，开。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v39",
+   "word": "竦立",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "恭敬地站着。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v40",
+   "word": "无毫发爽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "没有丝毫差失。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v41",
+   "word": "食顷",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一顿饭的工夫，形容时间很短。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v42",
+   "word": "兰若",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "寺庙，梵语“阿兰若”的省称。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v43",
+   "word": "青麻头",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "蟋蟀品名。下文的“蝴蝶”“螳螂”“油利挞”“青丝额”，也都是上品蟋蟀的名称。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v44",
+   "word": "得无",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "莫非。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v45",
+   "word": "逼似",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "非常相似。逼，非常。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v46",
+   "word": "蹲石鳞鳞",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "蹲踞着的一块块石头像鱼鳞般排列。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v47",
+   "word": "冥搜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "尽力搜索。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v48",
+   "word": "趁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "追逐。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v49",
+   "word": "蹑迹披求",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "跟随（蛤蟆的）踪迹，拨开（丛草）寻求。蹑，追随。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v50",
+   "word": "掭",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "轻轻拨动。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v51",
+   "word": "虽连城拱璧不啻也",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即使价值连城的宝玉也比不上它。拱璧，大璧，指极为珍贵的东西。不啻，比不上。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v52",
+   "word": "蟹白栗黄",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "蟹肉和栗实，指蟋蟀吃的精饲料。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v53",
+   "word": "塞",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "充抵。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v54",
+   "word": "发",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "打开。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v55",
+   "word": "业根",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "祸种，惹祸的东西。业，恶业，造成恶果的言语行为等。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v56",
+   "word": "而翁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "你父亲。而，你。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v57",
+   "word": "覆算",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "追究。覆，审核。算，算账。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v58",
+   "word": "被",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "覆盖。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v59",
+   "word": "抢呼欲绝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "头撞地，口呼天，几乎要绝命，形容十分悲痛。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v60",
+   "word": "向隅",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "面对着墙角（哭泣）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v61",
+   "word": "不复聊赖",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不再有所指望。意思是因绝望而精神郁闷。聊赖，依赖、指望。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v62",
+   "word": "藁葬",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "用草席裹着尸体埋葬。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v63",
+   "word": "惙然",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "气息微弱的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v64",
+   "word": "气断声吞",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "出不来气，说不出话，形容极度悲伤。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v65",
+   "word": "交睫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "上下睫毛相交，指睡觉。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v66",
+   "word": "东曦既驾",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "太阳已经升起。东曦，指初升的太阳。既驾，已经乘车出来。古代传说，太阳乘着六龙拉的车。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v67",
+   "word": "觇视",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "窥视，探看。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v68",
+   "word": "裁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同“才”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v69",
+   "word": "超忽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "形容跳得轻快而高。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v70",
+   "word": "审谛之",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "仔细地看它。谛，细察。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v71",
+   "word": "土狗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "蝼蛄的别名。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v72",
+   "word": "胫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "腿。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v73",
+   "word": "日与子弟角",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "天天和其他年轻人斗蟋蟀。子弟，年轻人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v74",
+   "word": "售者",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这里指买主。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v75",
+   "word": "造庐",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "到家。造，到。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v76",
+   "word": "胡卢",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "从喉咙发出的笑声，这里有轻蔑的意味。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v77",
+   "word": "比笼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "用以盛放准备打斗的蟋蟀的容器。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v78",
+   "word": "固强之",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是，坚持要较量较量。固，坚持、一定。强，强迫、迫使。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v79",
+   "word": "顾",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "但。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v80",
+   "word": "蠢若木鸡",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "形容神貌呆笨。《庄子·达生》说，养斗鸡的，要把斗鸡训练得镇静沉着，仿佛是木头雕的，才能够不动声色，战胜别的斗鸡。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v81",
+   "word": "猪鬣毛",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "猪颈项上稍长的毛，质硬而粗。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v82",
+   "word": "腾击",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "跳起来攻击。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v83",
+   "word": "直龁敌领",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "直接咬住敌方的脖子。龁，咬。领，脖子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v84",
+   "word": "翘然矜鸣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "鼓起翅膀得意地叫。翘，举。矜，得意、骄傲。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v85",
+   "word": "瞥来",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "突然而来。瞥，突然、倏然。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v86",
+   "word": "尺有咫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一尺多。咫，八寸。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v87",
+   "word": "虫集冠上",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "蟋蟀停落在鸡冠上。集，止。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v88",
+   "word": "翼日",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "次日。翼，同“翌”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v89",
+   "word": "抚军",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即巡抚，总管一省民政和军政的高级官员。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v90",
+   "word": "细疏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "在公文上详细地分条陈述。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v91",
+   "word": "所自",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "由来，来源。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v92",
+   "word": "卓异",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（才能）优异。这是考核官吏政绩的评语。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v93",
+   "word": "闻",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "上报。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v94",
+   "word": "学使",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即提学，负责一省学校事务，主持岁考、科考两试的官员。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v95",
+   "word": "俾入邑庠",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "使（他）进入县学，即取中秀才。俾，使。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v96",
+   "word": "赉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "赠送，赏赐。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v97",
+   "word": "百顷",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "和下文的“万椽”“各千计”等，都极言其多。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v98",
+   "word": "蹄躈",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "也作“蹄噭”，蹄为脚，躈为肛门，噭为口，计算牲畜数量时，以四蹄加一窍（肛门或口）为五，算一头牲畜。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v99",
+   "word": "裘马过世家",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "穿的皮衣和驾车的马都超过世代做官的人家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v100",
+   "word": "异史氏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "作者自称。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v101",
+   "word": "贴妇",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "以妻子作为抵押品去借钱。贴，抵押。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v102",
+   "word": "独是",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "唯独这个。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v103",
+   "word": "以蠹贫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "因胥吏侵害而贫穷。蠹，蛀虫，这里比喻胥吏。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v104",
+   "word": "扬扬",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "得意的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v105",
+   "word": "扑责",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "杖击的责罚。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v106",
+   "word": "令尹",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "县令、府尹。这里是沿用古称。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v107",
+   "word": "恩荫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "恩惠荫庇。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v108",
+   "word": "一人飞升仙及鸡犬",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "晋葛洪《神仙传》记载：西汉淮南王刘安修炼成仙，飞升天上。他剩下的仙药让鸡犬啄舐了，于是鸡犬也成了仙。比喻一个人发迹了，同他有关系的人都跟着得势。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1748:v109",
+   "word": "选自卡夫卡短篇小说选",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《卡夫卡短篇小说选》（漓江出版社2013年版）。叶廷芳译。全文共3部分，课文节选的是第1部分，略有改动。卡夫卡（1883—1924），奥地利小说家。代表作有《变形记》《诉讼》《城堡》等。",
+   "sourceSentence": ""
+  }
+ ]
+}

@@ -1,0 +1,221 @@
+{
+ "lessonId": "lesson-1755-p1",
+ "title": "登岳阳楼",
+ "mode": "modern-prose",
+ "builtAt": "2026-07-14T09:29:57.874Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 247,
+ "annotationCount": 5,
+ "inventory": [
+  {
+   "id": "lesson-1755-p1:v01",
+   "word": "坼",
+   "annotated": true,
+   "decision": "question",
+   "reason": "诗歌炼字，体现洞庭湖分割吴楚的宏大气势，是理解诗歌意象的关键。",
+   "contextMeaning": "分裂",
+   "sourceSentence": "吴楚东南坼",
+   "type": "contextual-choice",
+   "question": "「吴楚东南坼」中「坼」字的语境义是",
+   "options": [
+    "塌陷",
+    "分裂",
+    "覆盖",
+    "连接"
+   ],
+   "answerIndex": 1,
+   "explanation": "「坼」意为分裂，此处形容洞庭湖宽广，将吴楚大地从东南方向分割开来。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 22
+   }
+  },
+  {
+   "id": "lesson-1755-p1:v02",
+   "word": "乾坤",
+   "annotated": true,
+   "decision": "question",
+   "reason": "双关义，既指天地，又在文中与日月对应，理解此词有助于把握作者胸怀。",
+   "contextMeaning": "天地，指日月",
+   "sourceSentence": "乾坤 日夜浮",
+   "type": "interpretation",
+   "question": "对「乾坤日夜浮」一句的理解，最恰当的是",
+   "options": [
+    "写洞庭湖水势浩大，日月仿佛漂浮在湖水之上",
+    "写洞庭湖四季分明，日月交替出现在湖面上",
+    "写洞庭湖不仅地理位置重要，且受日月光辉照耀",
+    "写洞庭湖风平浪静，日月映照在湖面如漂浮一般"
+   ],
+   "answerIndex": 0,
+   "explanation": "「浮」字写出洞庭湖浩瀚无边，日月仿佛在湖面上浮沉起落，体现了极其恢宏的气象。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 29
+   }
+  },
+  {
+   "id": "lesson-1755-p1:v03",
+   "word": "凭轩",
+   "annotated": true,
+   "decision": "question",
+   "reason": "动宾结构，涉及古代建筑名词，考察学生对诗歌动作描写的迁移能力。",
+   "contextMeaning": "倚靠着窗户",
+   "sourceSentence": "凭轩 涕泗 流",
+   "type": "contextual-choice",
+   "question": "「凭轩涕泗流」中「凭轩」的意思是",
+   "options": [
+    "凭借轩车",
+    "倚靠窗户",
+    "凭吊古迹",
+    "依靠门廊"
+   ],
+   "answerIndex": 1,
+   "explanation": "「凭」意为倚靠，「轩」指窗户或有窗的长廊。此处写诗人倚窗流泪。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 57
+   }
+  },
+  {
+   "id": "lesson-1755-p1:v04",
+   "word": "昔",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义词，考察对文言词汇在诗歌中指代时间的敏感度。",
+   "contextMeaning": "过去",
+   "sourceSentence": "昔闻洞庭水",
+   "type": "gu-jin",
+   "question": "下列词语中，与「昔」在「昔闻洞庭水」中的用法一致的是",
+   "options": [
+    "昔日重现",
+    "今非昔比",
+    "惜墨如金",
+    "昔人已乘黄鹤去"
+   ],
+   "answerIndex": 3,
+   "explanation": "「昔」在文中是「过去」的意思，「昔人」指过去的人，用法一致。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 9
+   }
+  },
+  {
+   "id": "lesson-1755-p1:v05",
+   "word": "闻",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，考察在不同语境下的词义辨析。",
+   "contextMeaning": "听说",
+   "sourceSentence": "昔闻洞庭水",
+   "type": "contextual-choice",
+   "question": "「昔闻洞庭水」中「闻」的意思是",
+   "options": [
+    "用鼻子嗅",
+    "听见/听说",
+    "名声",
+    "使……知道"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处「闻」为动词，意为听说。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 9
+   }
+  },
+  {
+   "id": "lesson-1755-p1:v06",
+   "word": "字",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文中指代书信，属于词义的引申用法，是诗歌理解的难点。",
+   "contextMeaning": "书信",
+   "sourceSentence": "亲朋无一字",
+   "type": "contextual-choice",
+   "question": "「亲朋无一字」中「字」的含义是",
+   "options": [
+    "文字",
+    "书法",
+    "书信",
+    "字据"
+   ],
+   "answerIndex": 2,
+   "explanation": "古文中常以「字」代指书信，此处指亲友没有音讯。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 37
+   }
+  },
+  {
+   "id": "lesson-1755-p1:v07",
+   "word": "困顿",
+   "annotated": false,
+   "decision": "question",
+   "reason": "现代汉语词汇，考察对作者身世境遇的概括性理解。",
+   "contextMeaning": "处境艰难、生活贫困",
+   "sourceSentence": "要留意诗人困顿的处境",
+   "type": "contextual-choice",
+   "question": "文中提到诗人「困顿的处境」，结合全诗来看，下列哪项不属于其表现？",
+   "options": [
+    "亲朋无音讯",
+    "年老多病",
+    "只有一只孤舟",
+    "国家局势稳定"
+   ],
+   "answerIndex": 3,
+   "explanation": "诗中写时局动荡，并非稳定。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 178
+   }
+  },
+  {
+   "id": "lesson-1755-p1:v08",
+   "word": "戎马",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已明确注释为「战马，代指战争」，含义清晰，无需再次命题。",
+   "contextMeaning": "战争",
+   "sourceSentence": "戎马关山北",
+   "location": {
+    "charIndex": 50
+   }
+  },
+  {
+   "id": "lesson-1755-p1:v09",
+   "word": "涕泗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已明确注释为「眼泪鼻涕」，属于固定词组，理解难度低。",
+   "contextMeaning": "眼泪鼻涕",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1755-p1:v10",
+   "word": "关山",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "教材已注，且为地理专有名词，属于事实性知识，无需命题。",
+   "contextMeaning": "在今宁夏南部",
+   "sourceSentence": "戎马关山北",
+   "location": {
+    "charIndex": 50
+   }
+  },
+  {
+   "id": "lesson-1755-p1:v11",
+   "word": "戎马关山北",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指战事起于北部边境地区。当时吐蕃正侵扰陇右、关中一带。戎马，战马，代指战争。关山，在今宁夏南部。",
+   "sourceSentence": ""
+  }
+ ]
+}

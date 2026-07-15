@@ -1,0 +1,233 @@
+{
+ "lessonId": "lesson-1722-p3",
+ "title": "虞美人（春花秋月何时了）",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:27:23.823Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 293,
+ "annotationCount": 6,
+ "inventory": [
+  {
+   "id": "lesson-1722-p3:v01",
+   "word": "春花秋月",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "课文注释已详尽，属季节更替的修辞手法，学生易理解。",
+   "contextMeaning": "季节的更替",
+   "sourceSentence": "春花秋月 何时了",
+   "location": {
+    "charIndex": 77
+   }
+  },
+  {
+   "id": "lesson-1722-p3:v02",
+   "word": "往事",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "语义明确，无需额外考查。",
+   "contextMeaning": "过去的经历",
+   "sourceSentence": "往事知多少",
+   "location": {
+    "charIndex": 86
+   }
+  },
+  {
+   "id": "lesson-1722-p3:v03",
+   "word": "知多少",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "课文注释已说明其为反问语气的表达，属固定搭配。",
+   "contextMeaning": "难以忘却",
+   "sourceSentence": "往事知多少",
+   "location": {
+    "charIndex": 86
+   }
+  },
+  {
+   "id": "lesson-1722-p3:v04",
+   "word": "故国",
+   "annotated": true,
+   "decision": "question",
+   "reason": "指代明确，涉及词人政治背景，考查深度理解。",
+   "contextMeaning": "南唐",
+   "sourceSentence": "故国 不堪回首月明中",
+   "type": "interpretation",
+   "question": "「故国不堪回首月明中」一句中，「故国」指的是",
+   "options": [
+    "指词人出生的地方",
+    "指词人曾经统治的南唐",
+    "指古代的中国",
+    "指繁华的家乡"
+   ],
+   "answerIndex": 1,
+   "explanation": "词人李煜为南唐后主，此处的故国指其亡国前的南唐政权。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 102
+   }
+  },
+  {
+   "id": "lesson-1722-p3:v05",
+   "word": "不堪",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言高频词，表示无法承受，是理解全词情感的关键。",
+   "contextMeaning": "不能承受",
+   "sourceSentence": "故国 不堪回首月明中",
+   "type": "substitution",
+   "question": "「故国不堪回首月明中」中「不堪」一词，若替换为下列词语，最恰当的一项是",
+   "options": [
+    "不曾",
+    "不能",
+    "不愿",
+    "不忍"
+   ],
+   "answerIndex": 1,
+   "explanation": "不堪意为无法承受，此处指对亡国往事无法忍受回想，故选「不能」。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 102
+   }
+  },
+  {
+   "id": "lesson-1722-p3:v06",
+   "word": "雕栏玉砌",
+   "annotated": true,
+   "decision": "question",
+   "reason": "借代手法，考查学生对物象与情感联系的理解。",
+   "contextMeaning": "代指宫殿建筑",
+   "sourceSentence": "雕栏玉砌 应犹在，只是朱颜改",
+   "type": "contextual-choice",
+   "question": "「雕栏玉砌应犹在」中「雕栏玉砌」一词在文中的语境义是",
+   "options": [
+    "精美的建筑装饰",
+    "宫殿的建筑实体",
+    "贵族的奢华生活",
+    "坚固的城墙防御"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处用具体的建筑部件代指整个宫殿，表达对故国宫殿的怀念。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 114
+   }
+  },
+  {
+   "id": "lesson-1722-p3:v07",
+   "word": "应",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言语气副词，表示推测，影响句意语气。",
+   "contextMeaning": "应当/想必",
+   "sourceSentence": "雕栏玉砌 应犹在，只是朱颜改",
+   "type": "contextual-choice",
+   "question": "「雕栏玉砌应犹在」中「应」字表达的语气是",
+   "options": [
+    "肯定的陈述",
+    "祈使的请求",
+    "推测的语气",
+    "反问的质询"
+   ],
+   "answerIndex": 2,
+   "explanation": "「应」在此处表示推测，词人身在俘囚生活中，对于故国宫殿现状只能推测，含悲凉之感。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 114
+   }
+  },
+  {
+   "id": "lesson-1722-p3:v08",
+   "word": "犹",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用文言副词，表示“仍然”，对理解句意至关重要。",
+   "contextMeaning": "仍然",
+   "sourceSentence": "雕栏玉砌 应犹在，只是朱颜改",
+   "type": "contextual-choice",
+   "question": "「雕栏玉砌应犹在」中「犹」的意思是",
+   "options": [
+    "仿佛",
+    "仍然",
+    "应该",
+    "尤其"
+   ],
+   "answerIndex": 1,
+   "explanation": "犹，意为仍然，指宫殿建筑依然存在，与后文人的改变形成对比。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 114
+   }
+  },
+  {
+   "id": "lesson-1722-p3:v09",
+   "word": "朱颜",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "课文注释已解释为容颜，无深化考查必要。",
+   "contextMeaning": "红润的容颜",
+   "sourceSentence": "只是朱颜改",
+   "location": {
+    "charIndex": 123
+   }
+  },
+  {
+   "id": "lesson-1722-p3:v10",
+   "word": "几多",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "词义简单，即“多少”，不构成理解障碍。",
+   "contextMeaning": "多少",
+   "sourceSentence": "问君能有几多愁",
+   "location": {
+    "charIndex": 247
+   }
+  },
+  {
+   "id": "lesson-1722-p3:v11",
+   "word": "恰似",
+   "annotated": false,
+   "decision": "question",
+   "reason": "比喻词，考查对意象之间逻辑关系的理解。",
+   "contextMeaning": "恰好如同",
+   "sourceSentence": "恰似一江春水向东流",
+   "type": "interpretation",
+   "question": "「恰似一江春水向东流」中「恰似」一词在句中的作用是",
+   "options": [
+    "递进关系，说明愁绪加重",
+    "比喻关系，将抽象的愁绪具象化",
+    "因果关系，解释愁绪的来源",
+    "转折关系，表达心情的转换"
+   ],
+   "answerIndex": 1,
+   "explanation": "「恰似」引出比喻，将抽象的愁绪比作滔滔不绝的春水，形象地表现了愁绪之多。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 140
+   }
+  },
+  {
+   "id": "lesson-1722-p3:v12",
+   "word": "往事知多少",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是多少往事都难以忘却。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1722-p3:v13",
+   "word": "朱颜改",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "红润的容颜改变了，指人已憔悴。",
+   "sourceSentence": ""
+  }
+ ]
+}

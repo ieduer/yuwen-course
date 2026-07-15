@@ -1,0 +1,468 @@
+{
+ "lessonId": "lesson-1547",
+ "title": "燕歌行并序/ 高适",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:36:09.073Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 4811,
+ "annotationCount": 27,
+ "inventory": [
+  {
+   "id": "lesson-1547:v01",
+   "word": "和",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此处为动词，需考察语境义",
+   "contextMeaning": "按照别人诗词的题材和体裁作诗词",
+   "sourceSentence": "适感征戍之事,因而和焉",
+   "type": "contextual-choice",
+   "question": "「适感征戍之事，因而和焉」中「和」的意思是",
+   "options": [
+    "和平",
+    "和谐",
+    "应和/酬答",
+    "混合"
+   ],
+   "answerIndex": 2,
+   "explanation": "根据注释，此处指按照别人诗词的题材和体裁作诗词，作为酬答。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "教材注释"
+   ],
+   "location": {
+    "charIndex": 133
+   }
+  },
+  {
+   "id": "lesson-1547:v02",
+   "word": "颜色",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，极易误解为色彩",
+   "contextMeaning": "褒奖恩宠",
+   "sourceSentence": "天子非常赐颜色。",
+   "type": "gu-jin",
+   "question": "「天子非常赐颜色」中「颜色」的古义是",
+   "options": [
+    "色彩",
+    "面容",
+    "褒奖恩宠",
+    "脸色"
+   ],
+   "answerIndex": 2,
+   "explanation": "古义指脸色、容貌，引申为恩宠，此处指天子给予的褒奖恩宠。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "教材注释"
+   ],
+   "location": {
+    "charIndex": 171
+   }
+  },
+  {
+   "id": "lesson-1547:v03",
+   "word": "横行",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，今多指蛮横霸道，古指纵横驰骋",
+   "contextMeaning": "纵横驰骋",
+   "sourceSentence": "男儿本自重横行,天子非常赐颜色",
+   "type": "gu-jin",
+   "question": "「男儿本自重横行」中「横行」的意思是",
+   "options": [
+    "蛮横霸道",
+    "纵横驰骋",
+    "横着行走",
+    "不讲道理"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处指在战场上纵横驰骋，是褒义。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 163
+   }
+  },
+  {
+   "id": "lesson-1547:v04",
+   "word": "空",
+   "annotated": false,
+   "decision": "question",
+   "reason": "副词，表示徒劳、白白地，影响对人物心态的理解",
+   "contextMeaning": "徒劳地",
+   "sourceSentence": "征人蓟北空回首。",
+   "type": "contextual-choice",
+   "question": "「征人蓟北空回首」中「空」字表达了怎样的情感？",
+   "options": [
+    "征人回头看，发现后面什么也没有",
+    "征人白白回头，却无法见到亲人，表达了徒劳与无奈",
+    "征人心情空虚，所以回头",
+    "征人回头看天空"
+   ],
+   "answerIndex": 1,
+   "explanation": "「空」意为徒劳，体现了征人思乡却无法归家的悲凉。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 308
+   }
+  },
+  {
+   "id": "lesson-1547:v05",
+   "word": "烽烟",
+   "annotated": false,
+   "decision": "question",
+   "reason": "借代用法，理解其意象对把握诗歌基调至关重要",
+   "contextMeaning": "战乱",
+   "sourceSentence": "汉家烟尘在东北,汉将辞家破残贼",
+   "type": "interpretation",
+   "question": "「汉家烟尘在东北」中「烟尘」指的是",
+   "options": [
+    "自然界的沙尘暴",
+    "边境的战乱",
+    "做饭产生的炊烟",
+    "敌人的火攻"
+   ],
+   "answerIndex": 1,
+   "explanation": "根据注释，「烽烟和尘土」指战乱。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "教材注释"
+   ],
+   "location": {
+    "charIndex": 146
+   }
+  },
+  {
+   "id": "lesson-1547:v06",
+   "word": "死节",
+   "annotated": false,
+   "decision": "question",
+   "reason": "关键短语，涉及诗歌核心主题的理解",
+   "contextMeaning": "为气节献身",
+   "sourceSentence": "相看白刃血纷纷,死节从来岂顾勋! ",
+   "type": "interpretation",
+   "question": "「死节从来岂顾勋」一句表达了诗人怎样的观点？",
+   "options": [
+    "战士们为了军功才去拼命",
+    "战士们死守气节，本就不是为了个人的功勋",
+    "战士们因为怕死，所以不顾功勋",
+    "战士们为了国家的荣誉而战，不在乎死亡"
+   ],
+   "answerIndex": 1,
+   "explanation": "「死节」指为保卫国家的节操而献身，体现了将士们悲壮的报国之志。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "教材注释"
+   ],
+   "location": {
+    "charIndex": 351
+   }
+  },
+  {
+   "id": "lesson-1547:v07",
+   "word": "凭陵",
+   "annotated": false,
+   "decision": "question",
+   "reason": "生僻词，决定了对战争紧迫感和敌军态势的理解",
+   "contextMeaning": "逼压，形容来势凶猛",
+   "sourceSentence": "胡骑凭陵杂风雨。",
+   "type": "discrimination",
+   "question": "下列对「胡骑凭陵杂风雨」理解最准确的一项是",
+   "options": [
+    "胡人的骑兵像风雨一样平静",
+    "胡人的骑兵像风雨一样从山上冲下来",
+    "胡人骑兵侵犯，来势凶猛如同风雨交加",
+    "胡人骑兵在风雨中训练"
+   ],
+   "answerIndex": 2,
+   "explanation": "「凭陵」指逼压，形容敌军来势凶猛。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "教材注释"
+   ],
+   "location": {
+    "charIndex": 223
+   }
+  },
+  {
+   "id": "lesson-1547:v08",
+   "word": "铁衣",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "借代用法，语境中很明确是指战士，无需出题测试",
+   "contextMeaning": "用铁片制作的战衣，借指战士",
+   "sourceSentence": "铁衣远戍辛勤久",
+   "location": {
+    "charIndex": 283
+   }
+  },
+  {
+   "id": "lesson-1547:v09",
+   "word": "刁斗",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "特定文化名词，属于文学常识，理解其功能即可，无需命题",
+   "contextMeaning": "古代军中兼用于炊煮和巡更敲击的铜制用具",
+   "sourceSentence": "寒声一夜传刁斗。",
+   "location": {
+    "charIndex": 342
+   }
+  },
+  {
+   "id": "lesson-1547:v10",
+   "word": "玉箸",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "比喻用法，含义清晰，不影响整体文意理解",
+   "contextMeaning": "玉制筷子，比喻思妇的眼泪",
+   "sourceSentence": "玉箸应啼别离后。",
+   "location": {
+    "charIndex": 291
+   }
+  },
+  {
+   "id": "lesson-1547:v11",
+   "word": "主将指辅国大将军右羽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "主将。指辅国大将军、右羽林大将军兼御史大夫张守珪",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v12",
+   "word": "和按照别人诗词的",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "和（hè）按照别人诗词的题材和体裁作诗词，作为酬答",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v13",
+   "word": "烽烟和尘土指战乱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "烽烟和尘土，指战乱",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v14",
+   "word": "指残忍暴虐的敌寇",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指残忍暴虐的敌寇",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v15",
+   "word": "指给予褒奖恩宠",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指给予褒奖恩宠",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v16",
+   "word": "𪭢指击打",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "𪭢chuānɡ 指击打钲、铙之类的金属乐器和鼓，作为行军指挥信号。金，指军中作信号用的钲、铙等金属乐器。伐，敲击",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v17",
+   "word": "古关名即今山海关在今",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "古关名，即今山海关（在今河北秦皇岛）",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v18",
+   "word": "旌旆旗帜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "旌旆（pèi）旗帜",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v19",
+   "word": "舒展的样子",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "舒展的样子",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v20",
+   "word": "山名在今河北昌黎西北",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "山名，在今河北昌黎西北",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v21",
+   "word": "武官名泛指统帅",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "武官名，泛指统帅",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v22",
+   "word": "即羽檄古代军事文书插",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即羽檄，古代军事文书，插鸟羽以示紧急，必须迅速传递",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v23",
+   "word": "即边地靠近边境的地域",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即边地，靠近边境的地域",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v24",
+   "word": "战场",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "战场",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v25",
+   "word": "死生各半指伤亡惨重",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "死生各半，指伤亡惨重",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v26",
+   "word": "指统帅的营帐中",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指统帅的营帐中",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v27",
+   "word": "晚秋深秋",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "晚秋，深秋",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v28",
+   "word": "腓枯萎",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "〔腓（féi）枯萎",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v29",
+   "word": "承受",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "承受",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v30",
+   "word": "天子的知遇之恩",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "天子的知遇之恩",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v31",
+   "word": "蓟州以北地区",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "蓟州（今属天津）以北地区",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v32",
+   "word": "边地动荡不安难以越过",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "边地动荡不安，难以越过。飘飖 yáo，随风飘动，形容动荡不安。那可，即“哪可”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v33",
+   "word": "极远的地方",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "极远的地方",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v34",
+   "word": "早午晚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "早、午、晚",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v35",
+   "word": "浓重堆积似战阵的云层",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "浓重堆积似战阵的云层",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v36",
+   "word": "凄凉的声音",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "凄凉的声音",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1547:v37",
+   "word": "意思是历来志士为保卫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是，历来志士为（保卫国家的）气节献身，难道是为了个人的功勋！",
+   "sourceSentence": ""
+  }
+ ]
+}

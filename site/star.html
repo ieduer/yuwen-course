@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>我的閱讀星圖 · 課文</title>
+<meta name="description" content="逐課三詞初讀評議累積成的個人閱讀星圖：每顆星、每條線、每分亮度都可回溯到真實的課文學習記錄。">
+<meta property="og:title" content="我的閱讀星圖 · 課文">
+<meta property="og:description" content="從一篇課文的三個詞開始，長出自己的語文星空。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yw.bdfz.net/star.html">
+<link rel="canonical" href="https://yw.bdfz.net/star.html">
+<link rel="icon" href="https://img.bdfz.net/20250503004.webp" type="image/webp">
+<link rel="apple-touch-icon" href="https://img.bdfz.net/20250503004.webp">
+<meta name="theme-color" content="#0A0C14">
+<link rel="stylesheet" href="assets/star.css?v=20260714-star1">
+</head>
+<body>
+<div id="stage">
+  <canvas id="gl"></canvas>
+</div>
+
+<header id="hud">
+  <div class="brand">YW · BDFZ</div>
+  <h1>閱讀星圖<span class="dot">。</span></h1>
+  <p class="lede">逐課三詞，累積成你自己的語文星空。</p>
+  <p class="sub"><b id="stat-lessons">…</b> 篇課文星、<b id="stat-words">…</b> 顆詞星、<b id="stat-links">…</b> 條連線。每顆星都來自你在課文裏留下的真實三詞；<b>點按任意星點</b>，看它的來路與去向。</p>
+  <p class="fine">星點只由真實提交生成 · 課文正文在 <a href="./" data-same-tab>yw.bdfz.net</a></p>
+  <div id="chips"></div>
+</header>
+
+<div id="searchbox">
+  <input id="search" type="search" placeholder="搜索課文星、詞星…" autocomplete="off" spellcheck="false">
+  <div id="search-results" hidden></div>
+</div>
+
+<div id="hint">拖動旋轉 · 滾輪縮放 · 右鍵平移 · 點按星點看脈絡 · 雙擊復位</div>
+
+<aside id="card" hidden>
+  <div class="card-top">
+    <button id="card-back" class="ghost" hidden>‹ 返回</button>
+    <button id="card-close" class="ghost" aria-label="關閉">×</button>
+  </div>
+  <div id="card-kind" class="kind"></div>
+  <h2 id="card-title"></h2>
+  <div id="card-facts" class="facts"></div>
+  <div class="sect" id="sect-pre">
+    <div class="sect-h"><span id="pre-label">此前來路</span> <span id="pre-count" class="mono"></span></div>
+    <ul id="rows-pre" class="rows"></ul>
+  </div>
+  <div class="sect" id="sect-next">
+    <div class="sect-h"><span id="next-label">由此展開</span> <span id="next-count" class="mono"></span></div>
+    <ul id="rows-next" class="rows"></ul>
+  </div>
+  <div class="sect" id="sect-history" hidden>
+    <div class="sect-h">三詞沿革 <span id="history-count" class="mono"></span></div>
+    <ul id="rows-history" class="rows history"></ul>
+  </div>
+  <a id="card-open" class="cta" target="_blank" rel="noopener">回到這篇課文 ↗</a>
+</aside>
+
+<div id="tooltip" hidden></div>
+
+<div id="empty-state" hidden>
+  <div class="empty-inner">
+    <span class="pearl still"></span>
+    <h2 id="empty-title">星空尚未點亮</h2>
+    <p id="empty-copy">五冊書的骨架已經在這裏。回到課文，為任何一篇寫下你的三個詞，第一顆星就會在對應的冊裏亮起。</p>
+    <a id="empty-action" class="cta" href="./" data-same-tab>去課文寫下三個詞</a>
+  </div>
+</div>
+
+<div id="loading"><span class="pearl"></span>正在鋪開你的星空…</div>
+
+<script defer src="https://my.bdfz.net/site-auth.js" data-site-key="yw"></script>
+<script async src="https://nav.bdfz.net/bdfz-nav.js"></script>
+<script type="module" src="assets/star.js?v=20260714-star1"></script>
+</body>
+</html>

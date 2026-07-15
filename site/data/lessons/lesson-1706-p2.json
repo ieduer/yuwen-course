@@ -1,0 +1,804 @@
+{
+  "id": "lesson-1706-p2",
+  "topicId": 1706,
+  "title": "永遇乐·京口北固亭怀古",
+  "sourceTitle": "永遇乐·京口北固亭怀古",
+  "blockId": "bixiu-shang",
+  "blockTitle": "必修上",
+  "forumUrl": "https://forum.rdfzer.com/t/topic/1706",
+  "createdAt": "2024-08-21T12:03:49Z",
+  "updatedAt": "2024-08-21T12:03:49Z",
+  "postCount": 1,
+  "excerpt": "永遇乐·京口北固亭怀古 [12] \n辛弃疾\n千古江山，英雄无觅，孙仲谋处。舞榭歌台，风流总被，雨打风吹去。斜阳草树，寻常巷陌，人道寄奴曾住 [13] 。想当年，金戈铁马，气吞万里如虎 [14] 。\n元嘉草草 [15] ，封狼居胥 [16] ，赢得仓皇北顾 [17] 。四十三年 [18] ，望中犹记，烽火扬州路 [19] 。可堪回首，佛狸祠 [20] 下，一片神鸦 [21] 社鼓 [22] 。凭谁问：廉颇老矣，尚能饭否 [23] ？",
+  "textbook": {
+    "bookId": "高中_语文_普通高中教科书_语文必修_上册",
+    "bookTitle": "普通高中教科书·语文必修 上册（人教版）",
+    "imageBase": "https://img.rdfzer.com/pages/1082bfb4a71a",
+    "tocLabel": "永遇乐·京口北固亭怀古/辛弃疾",
+    "tocScore": 1.03,
+    "startPage": 72,
+    "pages": [
+      72,
+      73
+    ],
+    "pageImages": [
+      {
+        "page": 72,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p72.webp",
+        "label": "p72",
+        "matched": true
+      },
+      {
+        "page": 73,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p73.webp",
+        "label": "p73",
+        "matched": true
+      }
+    ],
+    "contextPages": [
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94
+    ],
+    "contextPageImages": [
+      {
+        "page": 51,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p51.webp",
+        "label": "p51",
+        "matched": false
+      },
+      {
+        "page": 52,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p52.webp",
+        "label": "p52",
+        "matched": false
+      },
+      {
+        "page": 53,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p53.webp",
+        "label": "p53",
+        "matched": false
+      },
+      {
+        "page": 54,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p54.webp",
+        "label": "p54",
+        "matched": false
+      },
+      {
+        "page": 55,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p55.webp",
+        "label": "p55",
+        "matched": false
+      },
+      {
+        "page": 56,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p56.webp",
+        "label": "p56",
+        "matched": false
+      },
+      {
+        "page": 57,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p57.webp",
+        "label": "p57",
+        "matched": false
+      },
+      {
+        "page": 58,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p58.webp",
+        "label": "p58",
+        "matched": false
+      },
+      {
+        "page": 59,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p59.webp",
+        "label": "p59",
+        "matched": false
+      },
+      {
+        "page": 60,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p60.webp",
+        "label": "p60",
+        "matched": false
+      },
+      {
+        "page": 61,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p61.webp",
+        "label": "p61",
+        "matched": false
+      },
+      {
+        "page": 62,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p62.webp",
+        "label": "p62",
+        "matched": false
+      },
+      {
+        "page": 63,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p63.webp",
+        "label": "p63",
+        "matched": false
+      },
+      {
+        "page": 64,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p64.webp",
+        "label": "p64",
+        "matched": false
+      },
+      {
+        "page": 65,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p65.webp",
+        "label": "p65",
+        "matched": false
+      },
+      {
+        "page": 66,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p66.webp",
+        "label": "p66",
+        "matched": false
+      },
+      {
+        "page": 67,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p67.webp",
+        "label": "p67",
+        "matched": false
+      },
+      {
+        "page": 68,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p68.webp",
+        "label": "p68",
+        "matched": false
+      },
+      {
+        "page": 69,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p69.webp",
+        "label": "p69",
+        "matched": false
+      },
+      {
+        "page": 70,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p70.webp",
+        "label": "p70",
+        "matched": false
+      },
+      {
+        "page": 71,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p71.webp",
+        "label": "p71",
+        "matched": true
+      },
+      {
+        "page": 72,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p72.webp",
+        "label": "p72",
+        "matched": true
+      },
+      {
+        "page": 73,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p73.webp",
+        "label": "p73",
+        "matched": true
+      },
+      {
+        "page": 74,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p74.webp",
+        "label": "p74",
+        "matched": true
+      },
+      {
+        "page": 75,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p75.webp",
+        "label": "p75",
+        "matched": false
+      },
+      {
+        "page": 76,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p76.webp",
+        "label": "p76",
+        "matched": false
+      },
+      {
+        "page": 77,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p77.webp",
+        "label": "p77",
+        "matched": false
+      },
+      {
+        "page": 78,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p78.webp",
+        "label": "p78",
+        "matched": false
+      },
+      {
+        "page": 79,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p79.webp",
+        "label": "p79",
+        "matched": false
+      },
+      {
+        "page": 80,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p80.webp",
+        "label": "p80",
+        "matched": false
+      },
+      {
+        "page": 81,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p81.webp",
+        "label": "p81",
+        "matched": false
+      },
+      {
+        "page": 82,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p82.webp",
+        "label": "p82",
+        "matched": false
+      },
+      {
+        "page": 83,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p83.webp",
+        "label": "p83",
+        "matched": false
+      },
+      {
+        "page": 84,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p84.webp",
+        "label": "p84",
+        "matched": false
+      },
+      {
+        "page": 85,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p85.webp",
+        "label": "p85",
+        "matched": false
+      },
+      {
+        "page": 86,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p86.webp",
+        "label": "p86",
+        "matched": false
+      },
+      {
+        "page": 87,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p87.webp",
+        "label": "p87",
+        "matched": false
+      },
+      {
+        "page": 88,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p88.webp",
+        "label": "p88",
+        "matched": false
+      },
+      {
+        "page": 89,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p89.webp",
+        "label": "p89",
+        "matched": false
+      },
+      {
+        "page": 90,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p90.webp",
+        "label": "p90",
+        "matched": false
+      },
+      {
+        "page": 91,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p91.webp",
+        "label": "p91",
+        "matched": false
+      },
+      {
+        "page": 92,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p92.webp",
+        "label": "p92",
+        "matched": false
+      },
+      {
+        "page": 93,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p93.webp",
+        "label": "p93",
+        "matched": false
+      },
+      {
+        "page": 94,
+        "src": "https://img.rdfzer.com/pages/1082bfb4a71a/p94.webp",
+        "label": "p94",
+        "matched": false
+      }
+    ]
+  },
+  "forumImages": [],
+  "resources": [],
+  "resourceCounts": {},
+  "annotations": [],
+  "learningTasks": [],
+  "posts": [
+    {
+      "id": "11138-2",
+      "post_number": 1,
+      "reply_to_post_number": null,
+      "created_at": "2024-08-21T12:03:49Z",
+      "updated_at": "2024-08-21T12:03:49Z",
+      "like_count": 0,
+      "cooked": "<p>永遇乐·京口北固亭怀古<sup class=\"footnote-ref\"><a href=\"#footnote-11138-12\" id=\"footnote-ref-11138-12\">[12]</a></sup><br>\n辛弃疾<br>\n千古江山，英雄无觅，孙仲谋处。舞榭歌台，风流总被，雨打风吹去。斜阳草树，寻常巷陌，人道寄奴曾住<sup class=\"footnote-ref\"><a href=\"#footnote-11138-13\" id=\"footnote-ref-11138-13\">[13]</a></sup>。想当年，金戈铁马，气吞万里如虎<sup class=\"footnote-ref\"><a href=\"#footnote-11138-14\" id=\"footnote-ref-11138-14\">[14]</a></sup>。<br>\n元嘉草草<sup class=\"footnote-ref\"><a href=\"#footnote-11138-15\" id=\"footnote-ref-11138-15\">[15]</a></sup>，封狼居胥<sup class=\"footnote-ref\"><a href=\"#footnote-11138-16\" id=\"footnote-ref-11138-16\">[16]</a></sup>，赢得仓皇北顾<sup class=\"footnote-ref\"><a href=\"#footnote-11138-17\" id=\"footnote-ref-11138-17\">[17]</a></sup>。四十三年<sup class=\"footnote-ref\"><a href=\"#footnote-11138-18\" id=\"footnote-ref-11138-18\">[18]</a></sup>，望中犹记，烽火扬州路<sup class=\"footnote-ref\"><a href=\"#footnote-11138-19\" id=\"footnote-ref-11138-19\">[19]</a></sup>。可堪回首，佛狸祠<sup class=\"footnote-ref\"><a href=\"#footnote-11138-20\" id=\"footnote-ref-11138-20\">[20]</a></sup>下，一片神鸦<sup class=\"footnote-ref\"><a href=\"#footnote-11138-21\" id=\"footnote-ref-11138-21\">[21]</a></sup>社鼓<sup class=\"footnote-ref\"><a href=\"#footnote-11138-22\" id=\"footnote-ref-11138-22\">[22]</a></sup>。凭谁问：廉颇老矣，尚能饭否<sup class=\"footnote-ref\"><a href=\"#footnote-11138-23\" id=\"footnote-ref-11138-23\">[23]</a></sup>？</p>\n<hr class=\"footnotes-sep\">\n\n<ol class=\"footnotes-list\">\n<li id=\"footnote-11138-1\" class=\"footnote-item\"><p>[color=red]选自《东坡乐府笺》卷二（上海古籍出版社2009年版）。念奴娇，词牌名。这首词作于宋神宗元丰五年（1082）。苏轼所游的是黄州（今湖北黄冈）的赤鼻矶，并非东汉末期赤壁大战处。[/color] <a href=\"#footnote-ref-11138-1\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-2\" class=\"footnote-item\"><p>[color=red]〔大江〕指长江。[/color] <a href=\"#footnote-ref-11138-2\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-3\" class=\"footnote-item\"><p>[color=red]〔故垒〕旧时军队营垒的遗迹。[/color] <a href=\"#footnote-ref-11138-3\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-4\" class=\"footnote-item\"><p>[color=red]〔周郎〕即周瑜（175—210），字公瑾，孙权军中指挥赤壁大战的将领。二十四岁时即出任要职，军中皆呼为“周郎”。[/color] <a href=\"#footnote-ref-11138-4\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-5\" class=\"footnote-item\"><p>[color=red]〔雄姿英发〕姿容雄伟，英气勃发。[/color] <a href=\"#footnote-ref-11138-5\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-6\" class=\"footnote-item\"><p>[color=red]〔羽扇纶（guān）巾〕（手持）羽扇，（头戴）纶巾。这是儒者的装束，形容周瑜有儒将风度。纶巾，配有青丝带的头巾。[/color] <a href=\"#footnote-ref-11138-6\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-7\" class=\"footnote-item\"><p>[color=red]〔樯（qiáng）橹〕代指曹操的战船。樯，挂帆的桅杆。橹，一种摇船的桨。[/color] <a href=\"#footnote-ref-11138-7\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-8\" class=\"footnote-item\"><p>[color=red]〔故国〕指赤壁古战场。[/color] <a href=\"#footnote-ref-11138-8\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-9\" class=\"footnote-item\"><p>[color=red]〔多情应笑我，早生华发〕应笑我多愁善感，过早地长出花白的头发。[/color] <a href=\"#footnote-ref-11138-9\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-10\" class=\"footnote-item\"><p>[color=red]〔尊〕同“樽”，一种盛酒器。这里指酒杯。[/color] <a href=\"#footnote-ref-11138-10\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-11\" class=\"footnote-item\"><p>[color=red]〔酹（lèi）〕将酒洒在地上，表示凭吊。[/color] <a href=\"#footnote-ref-11138-11\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-12\" class=\"footnote-item\"><p>[color=red]选自《稼轩词编年笺注》卷五（上海古籍出版社1993年版）。永遇乐，词牌名。这首词作于宋宁宗开禧元年（1205）。[/color] <a href=\"#footnote-ref-11138-12\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-13\" class=\"footnote-item\"><p>[color=red]〔寄奴曾住〕寄奴是南朝宋武帝刘裕（363—422）的小名。刘裕的祖先移居京口，他在这里起事，晚年推翻东晋做了皇帝。[/color] <a href=\"#footnote-ref-11138-13\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-14\" class=\"footnote-item\"><p>[color=red]〔想当年，金戈铁马，气吞万里如虎〕刘裕曾两次率领东晋军队北伐，收复洛阳、长安等地。[/color] <a href=\"#footnote-ref-11138-14\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-15\" class=\"footnote-item\"><p>[color=red]〔元嘉草草〕南朝宋文帝刘义隆好大喜功，仓促北伐，遭到重创。元嘉，宋文帝刘义隆的年号（424—453）。草草，轻率。[/color] <a href=\"#footnote-ref-11138-15\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-16\" class=\"footnote-item\"><p>[color=red]〔封狼居胥〕汉武帝元狩四年（前119），霍去病远征匈奴，歼敌七万余，封狼居胥山而还。封，登山祭天，以纪功勋。狼居胥，山名，即今蒙古国境内的肯特山。这里用“元嘉北伐”暗示南宋朝廷要汲取历史教训。[/color] <a href=\"#footnote-ref-11138-16\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-17\" class=\"footnote-item\"><p>[color=red]〔北顾〕败逃中回头北望。[/color] <a href=\"#footnote-ref-11138-17\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-18\" class=\"footnote-item\"><p>[color=red]〔四十三年〕作者于宋高宗绍兴三十二年（1162）南归，到写这首词时正好四十三年。[/color] <a href=\"#footnote-ref-11138-18\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-19\" class=\"footnote-item\"><p>[color=red]〔烽火扬州路〕扬州一带抗金的烽火。[/color] <a href=\"#footnote-ref-11138-19\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-20\" class=\"footnote-item\"><p>[color=red]〔佛（bì）狸祠〕北魏太武帝拓跋焘（408—452）小名“佛狸”。公元450年，他反击刘宋，兵锋南下，在长江北岸瓜步山上建立行宫，后称“佛狸祠”。[/color] <a href=\"#footnote-ref-11138-20\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-21\" class=\"footnote-item\"><p>[color=red]〔神鸦〕指在庙里吃祭品的乌鸦。[/color] <a href=\"#footnote-ref-11138-21\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-22\" class=\"footnote-item\"><p>[color=red]〔社鼓〕社日祭祀土地神的鼓声。南宋时期，当地老百姓只把佛狸祠当作一般祠庙来祭祀供奉，而不知道它过去曾是北魏皇帝的行宫。[/color] <a href=\"#footnote-ref-11138-22\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-23\" class=\"footnote-item\"><p>[color=red]〔廉颇老矣，尚能饭否〕据《史记·廉颇蔺相如列传》，战国时赵国名将廉颇被免职后跑到魏国，后来赵王想重新起用他，派人去探看他的身体状况。廉颇在使者面前吃下饭一斗、肉十斤，披甲上马，以示尚可大用。使者受廉颇仇人郭开的贿赂，回来报告赵王说：“廉将军虽老，尚善饭，然与臣坐，顷之三遗矢矣。”（矢，同“屎”。）赵王以为廉颇已老，遂不召。[/color] <a href=\"#footnote-ref-11138-23\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-24\" class=\"footnote-item\"><p>[color=red]选自《李清照集校注》卷一（人民文学出版社1979年版）。声声慢，词牌名。北宋末年李清照南渡避乱，不久北宋灭亡，丈夫病死，她只身逃难，境遇悲惨。这首词是作者南渡后晚年的作品。[/color] <a href=\"#footnote-ref-11138-24\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-25\" class=\"footnote-item\"><p>[color=red]〔戚戚〕悲愁、哀伤的样子。[/color] <a href=\"#footnote-ref-11138-25\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-26\" class=\"footnote-item\"><p>[color=red]〔乍暖还（huán）寒〕忽暖忽冷，天气变化无常。[/color] <a href=\"#footnote-ref-11138-26\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-27\" class=\"footnote-item\"><p>[color=red]〔将息〕养息，休息。[/color] <a href=\"#footnote-ref-11138-27\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-28\" class=\"footnote-item\"><p>[color=red]〔黄花〕菊花。[/color] <a href=\"#footnote-ref-11138-28\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-29\" class=\"footnote-item\"><p>[color=red]〔憔悴损〕枯萎，凋零殆尽。憔悴，凋零、枯萎。损，这里相当于〔极〕，表示程度很深。[/color] <a href=\"#footnote-ref-11138-29\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-30\" class=\"footnote-item\"><p>[color=red]〔堪〕可以，能够。[/color] <a href=\"#footnote-ref-11138-30\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-31\" class=\"footnote-item\"><p>[color=red]〔怎生得黑〕怎样挨到天黑。怎生，怎么、怎样。[/color] <a href=\"#footnote-ref-11138-31\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-32\" class=\"footnote-item\"><p>[color=red]〔次第〕光景，状况。[/color] <a href=\"#footnote-ref-11138-32\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n<li id=\"footnote-11138-33\" class=\"footnote-item\"><p>[color=red]〔怎一个愁字了得〕意思是，一个“愁”字怎么能概括得尽呢？[/color] <a href=\"#footnote-ref-11138-33\" class=\"footnote-backref\">↩︎</a></p>\n</li>\n</ol>",
+      "plain_text": "永遇乐·京口北固亭怀古 [12] \n辛弃疾\n千古江山，英雄无觅，孙仲谋处。舞榭歌台，风流总被，雨打风吹去。斜阳草树，寻常巷陌，人道寄奴曾住 [13] 。想当年，金戈铁马，气吞万里如虎 [14] 。\n元嘉草草 [15] ，封狼居胥 [16] ，赢得仓皇北顾 [17] 。四十三年 [18] ，望中犹记，烽火扬州路 [19] 。可堪回首，佛狸祠 [20] 下，一片神鸦 [21] 社鼓 [22] 。凭谁问：廉颇老矣，尚能饭否 [23] ？",
+      "images": [],
+      "links": [
+        {
+          "href": "#footnote-11138-1",
+          "text": "[1]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-2",
+          "text": "[2]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-3",
+          "text": "[3]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-4",
+          "text": "[4]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-5",
+          "text": "[5]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-6",
+          "text": "[6]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-7",
+          "text": "[7]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-8",
+          "text": "[8]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-9",
+          "text": "[9]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-10",
+          "text": "[10]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-11",
+          "text": "[11]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-12",
+          "text": "[12]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-13",
+          "text": "[13]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-14",
+          "text": "[14]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-15",
+          "text": "[15]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-16",
+          "text": "[16]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-17",
+          "text": "[17]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-18",
+          "text": "[18]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-19",
+          "text": "[19]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-20",
+          "text": "[20]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-21",
+          "text": "[21]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-22",
+          "text": "[22]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-23",
+          "text": "[23]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-24",
+          "text": "[24]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-25",
+          "text": "[25]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-26",
+          "text": "[26]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-27",
+          "text": "[27]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-28",
+          "text": "[28]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-29",
+          "text": "[29]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-30",
+          "text": "[30]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-31",
+          "text": "[31]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-32",
+          "text": "[32]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-11138-33",
+          "text": "[33]",
+          "title": "",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-1",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-2",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-3",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-4",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-5",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-6",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-7",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-8",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-9",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-10",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-11",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-12",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-13",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-14",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-15",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-16",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-17",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-18",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-19",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-20",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-21",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-22",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-23",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-24",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-25",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-26",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-27",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-28",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-29",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-30",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-31",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-32",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        },
+        {
+          "href": "#footnote-ref-11138-33",
+          "text": "↩︎",
+          "title": "",
+          "classes": "footnote-backref",
+          "has_image": false
+        }
+      ],
+      "attachments": []
+    }
+  ],
+  "derivedFrom": "lesson-1706",
+  "derivedAuthor": "辛弃疾",
+  "tocLabel": "永遇乐·京口北固亭怀古/辛弃疾"
+}

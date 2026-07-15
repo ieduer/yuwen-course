@@ -1,0 +1,212 @@
+{
+ "lessonId": "lesson-1692-p3",
+ "title": "峨日朵雪峰之侧",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:14:36.501Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 234,
+ "annotationCount": 7,
+ "inventory": [
+  {
+   "id": "lesson-1692-p3:v01",
+   "word": "揳",
+   "annotated": true,
+   "decision": "question",
+   "reason": "動詞，詩中描寫攀登動作的關鍵詞，理解其語境義有助於體悟詩人的艱難處境。",
+   "contextMeaning": "用力插入",
+   "sourceSentence": "我的指关节铆钉一样揳 入巨石的罅隙",
+   "type": "contextual-choice",
+   "question": "「我的指关节铆钉一样揳/入巨石的罅隙」中「揳」的意思是？",
+   "options": [
+    "敲打",
+    "固定",
+    "用力插入",
+    "緊緊扣住"
+   ],
+   "answerIndex": 2,
+   "explanation": "根據教材註釋及詩歌語境，此處形容指關節像釘子一樣嵌入岩石縫隙中，體現攀登之艱難。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 111
+   }
+  },
+  {
+   "id": "lesson-1692-p3:v02",
+   "word": "罅隙",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "詞義明確且教材已有註釋，學生易於理解，無需額外設題。",
+   "contextMeaning": "縫隙",
+   "sourceSentence": "我的指关节铆钉一样揳 入巨石的罅隙",
+   "location": {
+    "charIndex": 111
+   }
+  },
+  {
+   "id": "lesson-1692-p3:v03",
+   "word": "征服",
+   "annotated": false,
+   "decision": "question",
+   "reason": "全詩核心語詞，涉及詩歌主旨及詩人自我定位的理解。",
+   "contextMeaning": "克服困難，達到某種目標",
+   "sourceSentence": "这是我此刻仅能征服的高度了",
+   "type": "interpretation",
+   "question": "對「这是我此刻仅能征服的高度了」一句的理解，最準確的一項是？",
+   "options": [
+    "表達了詩人對雪峰高度的輕蔑與藐視",
+    "表現了詩人在極限挑戰中對自我極限的認知與接納",
+    "說明詩人攀登技術尚未成熟，無法繼續向上攀爬",
+    "暗示雪峰的高度已經超過了人類所能企及的範圍"
+   ],
+   "answerIndex": 1,
+   "explanation": "詩人並非真的要征服自然，而是通過攀登這一行為來進行自我挑戰與精神超越，此句體現了詩人對自身處境的冷靜審視。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 11
+   }
+  },
+  {
+   "id": "lesson-1692-p3:v04",
+   "word": "彷徨",
+   "annotated": false,
+   "decision": "question",
+   "reason": "擬人化手法，理解此詞能感受詩中意象的動態美。",
+   "contextMeaning": "走來走去，猶豫不決，在此處形容陽光在雪峰間移動、徘徊",
+   "sourceSentence": "朝向峨日朵之雪彷徨许久的太阳",
+   "type": "contextual-choice",
+   "question": "「朝向峨日朵之雪彷徨许久的太阳」中「彷徨」一詞的修辭效果是？",
+   "options": [
+    "運用擬人手法，表現太陽移動緩慢，彷彿在雪峰間猶豫徘徊",
+    "運用誇張手法，強調太陽的光芒在雪峰上停留的時間極長",
+    "運用對比手法，表現太陽與雪峰之間互不相容的關係",
+    "運用比喻手法，將太陽比作迷路的人，尋找下山的道路"
+   ],
+   "answerIndex": 0,
+   "explanation": "詩人將太陽擬人化，賦予其「彷徨」的動作，生動地表現了光影在雪峰上緩慢移動的狀態。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 44
+   }
+  },
+  {
+   "id": "lesson-1692-p3:v05",
+   "word": "嚣鸣",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文學性強的詞彙，是理解詩歌聽覺意象的關鍵。",
+   "contextMeaning": "喧鬧的聲音",
+   "sourceSentence": "引动棕色深渊自上而下的一派嚣鸣",
+   "type": "substitution",
+   "question": "文中「嚣鸣」一詞若改為「轟鳴」，下列分析最恰當的是？",
+   "options": [
+    "「轟鳴」更能體現聲音的規律性",
+    "「囂鳴」含有「囂張、吵鬧」的意味，更具主觀情感色彩，能體現深淵對人的威懾",
+    "「轟鳴」與後文的「喊殺聲」搭配更自然，應予以替換",
+    "兩詞意思完全相同，替換後不影響詩歌意境"
+   ],
+   "answerIndex": 1,
+   "explanation": "「囂」字帶有喧囂、不安的色彩，與後文「軍旅遠去的喊殺聲」呼應，比單純的「轟鳴」更具情感張力。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 83
+   }
+  },
+  {
+   "id": "lesson-1692-p3:v06",
+   "word": "铆钉",
+   "annotated": false,
+   "decision": "question",
+   "reason": "關鍵意象，涉及比喻手法的分析與語境理解。",
+   "contextMeaning": "金屬釘，此處用來比喻手指卡在岩石縫中極度穩固的狀態",
+   "sourceSentence": "我的指关节铆钉一样揳 入巨石的罅隙",
+   "type": "interpretation",
+   "question": "關於「我的指关节铆钉一样揳/入巨石的罅隙」一句的分析，正確的是？",
+   "options": [
+    "將指關節比作鉚釘，突出了手指纖細無力的特點",
+    "將指關節比作鉚釘，突出了攀登者與岩石緊密結合的力度與堅韌",
+    "運用誇張手法，說明指關節已經因為寒冷而變得像金屬一樣僵硬",
+    "運用借代手法，用鉚釘代指攀登用的工具，體現詩人裝備齊全"
+   ],
+   "answerIndex": 1,
+   "explanation": "作者以「鉚釘」比喻指關節，形象地傳達了在險峻環境下，手指緊扣岩石的力度與決心。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 111
+   }
+  },
+  {
+   "id": "lesson-1692-p3:v07",
+   "word": "默享",
+   "annotated": false,
+   "decision": "question",
+   "reason": "詩歌結尾情感昇華的關鍵詞，理解其語境義對把握詩歌主旨至關重要。",
+   "contextMeaning": "默默地享受",
+   "sourceSentence": "与我一同默享着这大自然赐予的快慰",
+   "type": "contextual-choice",
+   "question": "對「与我一同默享着这大自然赐予的快慰」中「默享」的理解，最準確的是？",
+   "options": [
+    "表現了詩人因攀登成功而感到的狂喜與喧鬧",
+    "表現了詩人與蜘蛛在極致艱苦中獲得的一種安靜、神聖的精神慰藉",
+    "表現了詩人對大自然的敬畏與不敢發出聲音的恐懼",
+    "表現了詩人對蜘蛛的憐憫，願意將自己的快樂分享給它"
+   ],
+   "answerIndex": 1,
+   "explanation": "「默享」體現了詩人從激烈的攀登轉向對自然與生命本質的靜默體悟，帶有孤獨而深刻的快慰。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 186
+   }
+  },
+  {
+   "id": "lesson-1692-p3:v08",
+   "word": "律吕",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "該詞雖然出現在教材註釋中，但並未出現在本詩正文中，無語境可供考察。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p3:v09",
+   "word": "蜡炬成灰泪始干",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "該詞雖然出現在教材註釋中，但並未出現在本詩正文中，僅為註釋引用，不適合作為本課文的命題內容。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p3:v10",
+   "word": "选自红烛人民文学出",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《红烛》（人民文学出版社1981 年版）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p3:v11",
+   "word": "选自昌耀抒情诗集青",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《昌耀抒情诗集》（青海人民出版社1986 年版）。峨日朵雪峰在青海海北藏族自治州内，是祁连山脉的一座无名山，靠近祁连县峨堡镇，山顶终年积雪。 *作者在诗中借称这座山为“峨日朵雪峰”。昌耀（1936—2000），原名王昌耀，湖南桃源人，诗人。代表作有诗歌《划呀，划呀，父亲们！》《意绪》等。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1692-p3:v12",
+   "word": "选自雪莱诗选时代文",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《雪莱诗选》（时代文艺出版社2012 年版）。江枫译。雪莱（1792—1822），英国诗人。代表作有诗歌《西风颂》、诗剧《解放了的普罗米修斯》等。",
+   "sourceSentence": ""
+  }
+ ]
+}

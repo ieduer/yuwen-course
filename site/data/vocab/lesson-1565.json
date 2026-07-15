@@ -1,0 +1,401 @@
+{
+ "lessonId": "lesson-1565",
+ "title": "5 阿Q正传(节选)/ 鲁迅",
+ "mode": "fiction",
+ "builtAt": "2026-07-14T09:37:58.667Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 22,
+ "inventory": [
+  {
+   "id": "lesson-1565:v01",
+   "word": "行状",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已明确注义，学生通过上下文理解即可，无需单独设题。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v02",
+   "word": "渺茫",
+   "annotated": false,
+   "decision": "question",
+   "reason": "此处并非指空间广阔，而是指模糊不清、难以考证，是理解阿Q人物背景的关键。",
+   "contextMeaning": "模糊不清，难以考证",
+   "sourceSentence": "阿Q不独是姓名籍贯有些渺茫,连他先前的“行状”也渺茫",
+   "type": "contextual-choice",
+   "question": "文中“阿Q不独是姓名籍贯有些渺茫”的“渺茫”含义是",
+   "options": [
+    "形容距离遥远，看不清楚",
+    "形容希望微小，难以实现",
+    "形容模糊不清，难以考证",
+    "形容意志消沉，漫无目的"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处形容阿Q的身世资料缺失，无法查考。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 252
+   }
+  },
+  {
+   "id": "lesson-1565:v03",
+   "word": "不独",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频文言词汇在现代白话文中的运用，直接影响句式结构理解。",
+   "contextMeaning": "不仅",
+   "sourceSentence": "阿Q不独是姓名籍贯有些渺茫,连他先前的“行状”也渺茫",
+   "type": "substitution",
+   "question": "下列词语替换文中“不独”后，句意保持不变的一项是",
+   "options": [
+    "不但",
+    "不只",
+    "不仅",
+    "以上皆可"
+   ],
+   "answerIndex": 3,
+   "explanation": "“不独”在此处为连词，表示递进关系，意为“不仅”。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 252
+   }
+  },
+  {
+   "id": "lesson-1565:v04",
+   "word": "间或",
+   "annotated": false,
+   "decision": "question",
+   "reason": "能够反映阿Q行为习惯的副词，影响对人物性格的把握。",
+   "contextMeaning": "偶尔",
+   "sourceSentence": "独有和别人口角的时候,间或瞪着眼睛道",
+   "type": "contextual-choice",
+   "question": "“独有和别人口角的时候，间或瞪着眼睛道”中“间或”的意思是",
+   "options": [
+    "经常",
+    "偶尔",
+    "总是",
+    "反而"
+   ],
+   "answerIndex": 1,
+   "explanation": "“间或”表示动作发生频率不高，指偶尔为之。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 326
+   }
+  },
+  {
+   "id": "lesson-1565:v05",
+   "word": "鄙薄",
+   "annotated": false,
+   "decision": "question",
+   "reason": "体现阿Q自我中心、盲目自大的关键心理词汇。",
+   "contextMeaning": "轻视，看不起",
+   "sourceSentence": "然而他又很鄙薄城里人",
+   "type": "contextual-choice",
+   "question": "“然而他又很鄙薄城里人”中“鄙薄”的意思是",
+   "options": [
+    "轻视",
+    "羡慕",
+    "憎恨",
+    "怀疑"
+   ],
+   "answerIndex": 0,
+   "explanation": "阿Q认为城里人的生活习惯是错的，因此产生轻视心理。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 721
+   }
+  },
+  {
+   "id": "lesson-1565:v06",
+   "word": "犯忌",
+   "annotated": false,
+   "decision": "question",
+   "reason": "涉及阿Q对于癞疮疤的敏感心态，是人物心理塑造的关键点。",
+   "contextMeaning": "触犯禁忌",
+   "sourceSentence": "他立刻知道和“犯忌”有点抵触,便不再往底下说",
+   "type": "interpretation",
+   "question": "文中“和‘犯忌’有点抵触”是指",
+   "options": [
+    "阿Q的话与自己的癞头疮这一禁忌相冲突",
+    "阿Q认为闲人的话触犯了法律",
+    "阿Q认为自己的言行违背了社会道德",
+    "阿Q的话与赵太爷的威严相抵触"
+   ],
+   "answerIndex": 0,
+   "explanation": "阿Q讳说“癞”等音，认为提到这些就是犯忌，而他自己说的话不小心触碰到了这个禁忌。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1276
+   }
+  },
+  {
+   "id": "lesson-1565:v07",
+   "word": "穿凿",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文学评论与考据中常用词，理解此词有助于理解鲁迅序言的幽默反讽。",
+   "contextMeaning": "强行解释，牵强附会",
+   "sourceSentence": "这可难解,穿凿起来说,或者因为阿Q说是赵太爷的本家",
+   "type": "contextual-choice",
+   "question": "“这可难解，穿凿起来说”中“穿凿”的意思是",
+   "options": [
+    "深入挖掘",
+    "刻意雕琢",
+    "强行解释，牵强附会",
+    "客观分析"
+   ],
+   "answerIndex": 2,
+   "explanation": "指人们为了给阿Q被尊敬找理由，而进行的一种勉强的推论。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2807
+   }
+  },
+  {
+   "id": "lesson-1565:v08",
+   "word": "确凿",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今义辨析，古代常用作“真实可靠”，文中亦作此解，需与现代用法对比。",
+   "contextMeaning": "确实，真实可靠",
+   "sourceSentence": "阿Q并没有抗辩他确凿姓赵",
+   "type": "gu-jin",
+   "question": "下列选项中，“确凿”一词的含义与文中“阿Q并没有抗辩他确凿姓赵”用法一致的是",
+   "options": [
+    "证据确凿",
+    "确凿不移的真理",
+    "他的话确实确凿可信",
+    "以上皆是"
+   ],
+   "answerIndex": 3,
+   "explanation": "“确凿”古今义基本一致，均指真实、确实。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 7128
+   }
+  },
+  {
+   "id": "lesson-1565:v09",
+   "word": "自轻自贱",
+   "annotated": false,
+   "decision": "question",
+   "reason": "概括阿Q精神胜利法的核心术语，对于分析人物形象具有高度概括性。",
+   "contextMeaning": "自己看不起自己，降低身分",
+   "sourceSentence": "他觉得他是第一个能够自轻自贱的人",
+   "type": "interpretation",
+   "question": "阿Q认为自己是“第一个能够自轻自贱的人”，这体现了他怎样的心理？",
+   "options": [
+    "深刻的自我反省意识",
+    "一种扭曲的精神胜利法，以自我贬低来获得虚幻的心理平衡",
+    "极度的自卑，导致他彻底放弃了尊严",
+    "对压迫者的无声抗议"
+   ],
+   "answerIndex": 1,
+   "explanation": "阿Q通过主动承认自己是“虫豸”或“儿子打老子”，将屈辱转化为一种“优胜”，这是其精神胜利法的表现。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1641
+   }
+  },
+  {
+   "id": "lesson-1565:v10",
+   "word": "文童",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已有详细历史背景注释，学生理解即可。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v11",
+   "word": "崇奉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义，属于词义理解范畴。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v12",
+   "word": "完人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义，且文中带有强烈的反讽色彩，理解语境即可。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v13",
+   "word": "口讷",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v14",
+   "word": "虫豸",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v15",
+   "word": "押牌宝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义，属于民俗词汇。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v16",
+   "word": "赛神",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v17",
+   "word": "非常",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义，属于古今义差别。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v18",
+   "word": "小孤孀上坟",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义，属于文化背景知识。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v19",
+   "word": "托庇",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v20",
+   "word": "所以者何",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义，属于文言句式。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v21",
+   "word": "渺视",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义，提示了现代写法。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v22",
+   "word": "出言无状",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v23",
+   "word": "皇帝已经停了考",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义，属于历史背景。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v24",
+   "word": "小觑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v25",
+   "word": "东洋",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v26",
+   "word": "假洋鬼子",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v27",
+   "word": "哭丧棒",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v28",
+   "word": "看见伊也一定要唾骂",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注义，属于民俗迷信。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v29",
+   "word": "土谷祠",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即土地庙，旧时祭祀土地神祈求五谷丰收的地方。土谷，即土地神和五谷神。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1565:v30",
+   "word": "舂米",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "用杵把糙米捣成精米。",
+   "sourceSentence": ""
+  }
+ ]
+}

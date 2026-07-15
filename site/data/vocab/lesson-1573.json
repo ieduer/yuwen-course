@@ -1,0 +1,176 @@
+{
+ "lessonId": "lesson-1573",
+ "title": "8 茶馆(节选)/ 老舍",
+ "mode": "drama",
+ "builtAt": "2026-07-14T09:39:01.275Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 8814,
+ "annotationCount": 0,
+ "inventory": [
+  {
+   "id": "lesson-1573:v01",
+   "word": "生意口",
+   "annotated": false,
+   "decision": "question",
+   "reason": "老舍剧作中极具特色的京味儿语言，准确理解方能把握人物职业特点与话语风格。",
+   "contextMeaning": "做生意时惯用的套话、行话",
+   "sourceSentence": "算了吧,我送给你一碗茶喝,你就甭卖那套生意口啦",
+   "type": "contextual-choice",
+   "question": "文中「你就甭卖那套生意口啦」中「生意口」的意思是",
+   "options": [
+    "做生意的门路",
+    "做生意的口才",
+    "做生意时惯用的套话",
+    "做生意的开端"
+   ],
+   "answerIndex": 2,
+   "explanation": "「生意口」在剧中指代相面、算命等职业惯用的招揽生意的话术，属于行业黑话。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1133
+   }
+  },
+  {
+   "id": "lesson-1573:v02",
+   "word": "外场人",
+   "annotated": false,
+   "decision": "question",
+   "reason": "反映老北京社会交际文化，涉及人物身份地位的认同感。",
+   "contextMeaning": "指经常出入社交场合、见过世面、懂规矩的人",
+   "sourceSentence": "来,坐下喝一碗,我们也都是外场人",
+   "type": "contextual-choice",
+   "question": "文中松二爷称自己与常四爷是「外场人」，其语境义为",
+   "options": [
+    "茶馆外的人",
+    "经常出入社交场合、懂规矩的人",
+    "从事外事工作的人",
+    "在室外活动的人"
+   ],
+   "answerIndex": 1,
+   "explanation": "「外场人」指在社会上混迹，懂得江湖规矩和社交礼仪的人。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1503
+   }
+  },
+  {
+   "id": "lesson-1573:v03",
+   "word": "铁杆庄稼",
+   "annotated": false,
+   "decision": "question",
+   "reason": "清末旗人的特殊历史语汇，直接关系到人物对自身生存利益的理解。",
+   "contextMeaning": "指清朝旗人领取的固定钱粮，寓意旱涝保收",
+   "sourceSentence": "得!不管怎么说,我的铁杆庄稼又保住了",
+   "type": "interpretation",
+   "question": "文中茶客丁所说的「铁杆庄稼」是指",
+   "options": [
+    "极其坚固的庄稼",
+    "不受天气影响的农作物",
+    "清朝旗人领取的固定钱粮",
+    "指维新变法运动"
+   ],
+   "answerIndex": 2,
+   "explanation": "「铁杆庄稼」是清代旗人对自己赖以生存的钱粮的戏称，意指无需劳作即可领取的固定收入。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 5884
+   }
+  },
+  {
+   "id": "lesson-1573:v04",
+   "word": "造化",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词义在文中具有讽刺意味，偏离现代汉语的褒义语境。",
+   "contextMeaning": "运气、福分（此处含有反讽意味）",
+   "sourceSentence": "你看,姑娘一过门,吃的是珍馐美味,穿的是绫罗绸缎,这不是造化吗",
+   "type": "contextual-choice",
+   "question": "刘麻子说「这不是造化吗」，这里的「造化」在语境中指",
+   "options": [
+    "自然界的演化",
+    "个人的运气或福分",
+    "人为的创造",
+    "宗教上的修行结果"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处刘麻子以诱骗口吻，将卖身为奴美化为极大的福气，具有强烈的讽刺效果。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2761
+   }
+  },
+  {
+   "id": "lesson-1573:v05",
+   "word": "走一趟",
+   "annotated": false,
+   "decision": "question",
+   "reason": "双关语/委婉语，涉及语境义的理解与社会背景。",
+   "contextMeaning": "指被逮捕并带往官府",
+   "sourceSentence": "量你也跑不了!(对松二爷)你也走一趟,到堂上实话实说,没你的事",
+   "type": "contextual-choice",
+   "question": "文中宋恩子对松二爷说「你也走一趟」，这里的「走一趟」实际意思是",
+   "options": [
+    "去散散步",
+    "去茶馆外面看看",
+    "被逮捕并带往官府",
+    "去传个话"
+   ],
+   "answerIndex": 2,
+   "explanation": "在当时语境下，这是侦缉人员将人带走审讯的委婉说法，实则为拘捕。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 6639
+   }
+  },
+  {
+   "id": "lesson-1573:v06",
+   "word": "长",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词在文中的具体含义，考查词义辨析。",
+   "contextMeaning": "增加、上涨",
+   "sourceSentence": "该长多少租钱,我一定照办",
+   "type": "substitution",
+   "question": "下列句子中「长」字意义与「该长多少租钱」中「长」一致的是",
+   "options": [
+    "这孩子长高了不少。",
+    "这种植物长得很快。",
+    "最近物价又长了。",
+    "他长着一张圆脸。"
+   ],
+   "answerIndex": 2,
+   "explanation": "句中「长」为动词，意为上涨、增加。选项A、B、D中的长读zhǎng，指生长或外形特征。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 4471
+   }
+  },
+  {
+   "id": "lesson-1573:v07",
+   "word": "化干戈为玉帛",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "常见成语，虽在文中出现，但属于基础文化常识，不作命题重点。",
+   "contextMeaning": "比喻变争斗为友好",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1573:v08",
+   "word": "莫谈国事",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "课文中的重要标语，反映时代背景，作为阅读理解背景知识即可。",
+   "contextMeaning": "不要讨论国家政治大事",
+   "sourceSentence": "各处都贴着“莫谈国事”的纸条",
+   "location": {
+    "charIndex": 688
+   }
+  }
+ ]
+}

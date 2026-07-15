@@ -1,0 +1,221 @@
+{
+ "lessonId": "lesson-1497",
+ "title": "无衣/《诗经·秦风》",
+ "mode": "poetry",
+ "builtAt": "2026-07-14T09:33:41.622Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 3362,
+ "annotationCount": 6,
+ "inventory": [
+  {
+   "id": "lesson-1497:v01",
+   "word": "岂",
+   "annotated": false,
+   "decision": "question",
+   "reason": "语气副词，在反问句中表示“怎么”，是文言文高频虚词。",
+   "contextMeaning": "怎么",
+   "sourceSentence": "岂曰无衣?",
+   "type": "contextual-choice",
+   "question": "「岂曰无衣」中「岂」的用法与含义是",
+   "options": [
+    "难道，表反问",
+    "哪里，表否定",
+    "大概，表推测",
+    "岂能，表祈使"
+   ],
+   "answerIndex": 0,
+   "explanation": "「岂」在诗经中常作反问语气词，意为“怎么、难道”。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《古代汉语字典》"
+   ],
+   "location": {
+    "charIndex": 22
+   }
+  },
+  {
+   "id": "lesson-1497:v02",
+   "word": "与",
+   "annotated": false,
+   "decision": "question",
+   "reason": "介词，用于引出对象，是文言文基础语法点。",
+   "contextMeaning": "和、跟",
+   "sourceSentence": "与子同袍。",
+   "type": "usage",
+   "question": "下列选项中「与」的用法与「与子同袍」中的「与」一致的是",
+   "options": [
+    "与人为善",
+    "与日俱增",
+    "与子偕行",
+    "与虎谋皮"
+   ],
+   "answerIndex": 2,
+   "explanation": "「与」在此处作介词，意为“和、跟”。选项A、B、D皆为介词，但语境含义不同，C项与例句完全一致。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 27
+   }
+  },
+  {
+   "id": "lesson-1497:v03",
+   "word": "袍",
+   "annotated": true,
+   "decision": "question",
+   "reason": "课文重点意象，理解该词对于体会战士共苦之情至关重要。",
+   "contextMeaning": "长袍",
+   "sourceSentence": "与子同袍。",
+   "type": "interpretation",
+   "question": "「与子同袍」体现了战士之间怎样的情感？",
+   "options": [
+    "战友之间相互攀比衣物",
+    "战友之间共享物资，共担艰苦",
+    "战士因没有衣服而感到羞愧",
+    "战士向周王索要物资的诉求"
+   ],
+   "answerIndex": 1,
+   "explanation": "「袍」指长袍，文中指代战士共用的物资，体现了同甘共苦的深厚情谊。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 27
+   }
+  },
+  {
+   "id": "lesson-1497:v04",
+   "word": "泽",
+   "annotated": true,
+   "decision": "question",
+   "reason": "通假字，是考察古汉语阅读能力的重点。",
+   "contextMeaning": "同“襗”，贴身穿的内衣",
+   "sourceSentence": "与子同泽。",
+   "type": "pronunciation",
+   "question": "「与子同泽」中的「泽」读音及含义正确的是",
+   "options": [
+    "zé，恩泽",
+    "zé，通“襗”，贴身内衣",
+    "zhái，沼泽",
+    "zhái，通“宅”，居所"
+   ],
+   "answerIndex": 1,
+   "explanation": "「泽」在此处为通假字，通“襗”，读zé，指贴身内衣。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 54
+   }
+  },
+  {
+   "id": "lesson-1497:v05",
+   "word": "修",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，在不同语境下含义不同，考察学生迁移能力。",
+   "contextMeaning": "整治、准备",
+   "sourceSentence": "修我戈矛",
+   "type": "substitution",
+   "question": "下列词语替换「修我戈矛」中「修」字后，句意最准确的是",
+   "options": [
+    "修理",
+    "学习",
+    "整备",
+    "修改"
+   ],
+   "answerIndex": 2,
+   "explanation": "「修」在此处意为“整治、整备”，以便作战使用。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 38
+   }
+  },
+  {
+   "id": "lesson-1497:v06",
+   "word": "偕作",
+   "annotated": true,
+   "decision": "question",
+   "reason": "词组，体现了诗歌的动态美与行动力。",
+   "contextMeaning": "一同行动",
+   "sourceSentence": "与子偕作。",
+   "type": "interpretation",
+   "question": "「与子偕作」中「偕作」的语境义是",
+   "options": [
+    "一起起床",
+    "一同制作兵器",
+    "一同行动，奔赴战场",
+    "一起创作诗歌"
+   ],
+   "answerIndex": 2,
+   "explanation": "「作」指起，在此指共同行动，即奔赴战场。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 70
+   }
+  },
+  {
+   "id": "lesson-1497:v07",
+   "word": "裳",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，现代汉语中指衣服，古代特指下衣。",
+   "contextMeaning": "下衣，裙子",
+   "sourceSentence": "与子同裳。",
+   "type": "gu-jin",
+   "question": "关于「与子同裳」中「裳」的说法，正确的是",
+   "options": [
+    "古今同义，泛指一切衣服",
+    "古义指上衣，今义指下衣",
+    "古义指下衣，今义泛指衣服",
+    "文中指裤子，今义指裙子"
+   ],
+   "answerIndex": 2,
+   "explanation": "「裳」在古代指下衣，与「衣」（上衣）相对，今泛指衣服。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 81
+   }
+  },
+  {
+   "id": "lesson-1497:v08",
+   "word": "王于兴师",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "句式较为固定，注释已明确，无需额外设题。",
+   "contextMeaning": "周王出兵打仗",
+   "sourceSentence": "王于兴师",
+   "location": {
+    "charIndex": 33
+   }
+  },
+  {
+   "id": "lesson-1497:v09",
+   "word": "同仇",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "已演化为成语，学生易于理解，无需设题。",
+   "contextMeaning": "共同对付敌人",
+   "sourceSentence": "与子同仇",
+   "location": {
+    "charIndex": 43
+   }
+  },
+  {
+   "id": "lesson-1497:v10",
+   "word": "甲兵",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "词义明确，属于基础名词，不作为命题重点。",
+   "contextMeaning": "铠甲和兵器",
+   "sourceSentence": "修我甲兵",
+   "location": {
+    "charIndex": 92
+   }
+  }
+ ]
+}

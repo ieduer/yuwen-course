@@ -1,0 +1,748 @@
+{
+ "lessonId": "lesson-1711-p2",
+ "title": "师说",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:18:36.017Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 614,
+ "annotationCount": 52,
+ "inventory": [
+  {
+   "id": "lesson-1711-p2:v01",
+   "word": "闻",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，在不同语境下意义不同，此处是高频考点",
+   "contextMeaning": "懂得、知道",
+   "sourceSentence": "其闻 道也固先乎吾",
+   "type": "contextual-choice",
+   "question": "「其闻道也固先乎吾」中「闻」的意思是",
+   "options": [
+    "听见",
+    "听说",
+    "懂得、知道",
+    "名声"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指通过学习而懂得道理，非单纯的听觉。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 67
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v02",
+   "word": "生而知之",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义且涉及哲学概念，理解句意关键",
+   "contextMeaning": "生下来就懂得知识和道理",
+   "sourceSentence": "人非生而知之 者",
+   "type": "gu-jin",
+   "question": "「人非生而知之者」中「生而知之」的含义与下列哪项最接近？",
+   "options": [
+    "天生就具备某种技能",
+    "生下来就懂得知识和道理",
+    "通过后天学习而获得知识",
+    "出生后才开始认知世界"
+   ],
+   "answerIndex": 1,
+   "explanation": "「生而知之」指天赋，非后天学习。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 31
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v03",
+   "word": "师",
+   "annotated": true,
+   "decision": "question",
+   "reason": "名词活用为动词，文言文中极高频的语法考点",
+   "contextMeaning": "以……为师",
+   "sourceSentence": "吾从而师之",
+   "type": "substitution",
+   "question": "「吾从而师之」中「师」的用法与下列哪项相同？",
+   "options": [
+    "师者，所以传道受业解惑也",
+    "孔子师郯子、苌弘、师襄、老聃",
+    "圣人无常师",
+    "古之学者必有师"
+   ],
+   "answerIndex": 1,
+   "explanation": "题干中的「师」为意动用法，以……为师。选项B中「师」同样意动用法。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 77
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v04",
+   "word": "所以",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言虚词固定结构，常考点，教材未注但必须掌握",
+   "contextMeaning": "用来……的",
+   "sourceSentence": "师者，所以传道受业解惑也",
+   "type": "usage",
+   "question": "「师者，所以传道受业解惑也」中「所以」的用法是",
+   "options": [
+    "表原因的连词",
+    "表结果的连词",
+    "表凭借，用来……的",
+    "表动作的对象"
+   ],
+   "answerIndex": 2,
+   "explanation": "「所以」在文言文中常固定为「所+以」，即「用来……的」。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 17
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v05",
+   "word": "众人",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，极易混淆",
+   "contextMeaning": "一般人",
+   "sourceSentence": "今之众人 ，其下圣人也亦远矣",
+   "type": "gu-jin",
+   "question": "「今之众人」中「众人」的古义是",
+   "options": [
+    "大家、许多人",
+    "普通人、一般人",
+    "大众、百姓",
+    "一群人"
+   ],
+   "answerIndex": 1,
+   "explanation": "古义指一般人，今义多指许多人。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 194
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v06",
+   "word": "句读之不知",
+   "annotated": true,
+   "decision": "question",
+   "reason": "特殊的宾语前置句式，语法核心考点",
+   "contextMeaning": "不知道句读",
+   "sourceSentence": "句读之不知 ，惑之不解",
+   "type": "interpretation",
+   "question": "对「句读之不知，惑之不解」句式理解正确的是",
+   "options": [
+    "主谓倒装句",
+    "定语后置句",
+    "宾语前置句",
+    "状语后置句"
+   ],
+   "answerIndex": 2,
+   "explanation": "「之」是宾语前置的标志，正常语序为「不知句读」「不解惑」。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语语法纲要》"
+   ],
+   "location": {
+    "charIndex": 306
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v07",
+   "word": "或",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，且该句中出现两次不同用法，易混",
+   "contextMeaning": "有的人",
+   "sourceSentence": "或师焉，或不焉",
+   "type": "contextual-choice",
+   "question": "「或师焉，或不焉」中两个「或」的意思分别是",
+   "options": [
+    "有的，有的",
+    "或许，或许",
+    "有人，有人",
+    "有的，或者"
+   ],
+   "answerIndex": 0,
+   "explanation": "此处「或」作不定代词，指代某人。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 318
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v08",
+   "word": "小学而大遗",
+   "annotated": true,
+   "decision": "question",
+   "reason": "形容词活用作名词，且涉及对仗理解",
+   "contextMeaning": "小的方面/大的方面",
+   "sourceSentence": "小学而大遗",
+   "type": "contextual-choice",
+   "question": "「小学而大遗」中「小」和「大」的词性及意义是",
+   "options": [
+    "形容词，小的事情，大的事情",
+    "名词，小的知识，大的道理",
+    "形容词作名词，小的方面，大的方面",
+    "副词，稍微，大大地"
+   ],
+   "answerIndex": 2,
+   "explanation": "在此句中，「小」「大」均作名词使用，指代学习内容的范围。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 327
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v09",
+   "word": "不齿",
+   "annotated": true,
+   "decision": "question",
+   "reason": "词义理解，古今差别大",
+   "contextMeaning": "不屑同列",
+   "sourceSentence": "君子不齿",
+   "type": "interpretation",
+   "question": "「君子不齿」中「不齿」的准确含义是",
+   "options": [
+    "不开口说话",
+    "牙齿不整齐",
+    "不屑同列，看不起",
+    "不与人交往"
+   ],
+   "answerIndex": 2,
+   "explanation": "齿，排列。不齿，指不与同列，即看不起。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 439
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v10",
+   "word": "不必",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，易造成误解",
+   "contextMeaning": "不一定",
+   "sourceSentence": "弟子不必 不如师",
+   "type": "gu-jin",
+   "question": "「弟子不必不如师」中「不必」的古义是",
+   "options": [
+    "不需要",
+    "不一定",
+    "不是必须",
+    "未必要"
+   ],
+   "answerIndex": 1,
+   "explanation": "古义为不一定，今义多为不需要。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 520
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v11",
+   "word": "庸",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言疑问副词，教材未注但对理解反问语气至关重要",
+   "contextMeaning": "怎么、岂",
+   "sourceSentence": "夫庸知其年之先后生于吾乎",
+   "type": "interpretation",
+   "question": "「夫庸知其年之先后生于吾乎」中「庸」的意思是",
+   "options": [
+    "平庸",
+    "怎么、岂",
+    "愿意",
+    "需要"
+   ],
+   "answerIndex": 1,
+   "explanation": "「庸」在此为疑问副词，表示反问。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 110
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v12",
+   "word": "不拘于时",
+   "annotated": true,
+   "decision": "question",
+   "reason": "被动句式，语法考点",
+   "contextMeaning": "不受时俗限制",
+   "sourceSentence": "不拘于时",
+   "type": "usage",
+   "question": "「不拘于时」的句式特点是",
+   "options": [
+    "判断句",
+    "被动句",
+    "倒装句",
+    "省略句"
+   ],
+   "answerIndex": 1,
+   "explanation": "「于」引出动作的主动者，构成被动句。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语语法纲要》"
+   ],
+   "location": {
+    "charIndex": 584
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v13",
+   "word": "反",
+   "annotated": false,
+   "decision": "question",
+   "reason": "重要副词，教材未注，影响逻辑转折理解",
+   "contextMeaning": "反而",
+   "sourceSentence": "今其智乃 反不能及",
+   "type": "interpretation",
+   "question": "「今其智乃反不能及」中「反」的意思是",
+   "options": [
+    "相反",
+    "反而",
+    "返回",
+    "背叛"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处「反」表示转折，意为反而。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 445
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v14",
+   "word": "学者",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "虽为古今异义，但学生极易通过语境掌握，无需专门出题",
+   "contextMeaning": "求学的人",
+   "sourceSentence": "古之学者",
+   "location": {
+    "charIndex": 8
+   }
+  },
+  {
+   "id": "lesson-1711-p2:v15",
+   "word": "选自韩昌黎文集校注卷",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《韩昌黎文集校注》卷一（上海古籍出版社1986 年版）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v16",
+   "word": "其为惑也",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "它们作为疑惑。其，它们，指不跟从老师学习而遗留下的问题。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v17",
+   "word": "从而师之",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "跟随他学习，即以他为老师。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v18",
+   "word": "吾师道也",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "我学习的是道。师，学习。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v19",
+   "word": "无贵无贱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是就从师问道来说，没有贵和贱的区分。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v20",
+   "word": "道之所存师之所存也",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "道存在的地方，就是老师在的地方。意思是谁懂得道，谁就是自己的老师。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v21",
+   "word": "师道",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "尊师学习的风尚。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v22",
+   "word": "出人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "超出一般人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v23",
+   "word": "犹且",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "尚且，还。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v24",
+   "word": "圣益圣愚益愚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "圣人更加圣明，愚人更加愚昧。益，更加、越发。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v25",
+   "word": "身",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "自己。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v26",
+   "word": "耻师",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "以从师学习为耻。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v27",
+   "word": "惑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "糊涂。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v28",
+   "word": "童子",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "未成年的男子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v29",
+   "word": "授之书而习其句读",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "教给他书本的文字，（帮助他）学习句读。句读，指断开句子的知识。一句话后面的停顿为句，一句话中间短暂的停顿为读。古书没有标点，所以要学习句读。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v30",
+   "word": "或师焉或不焉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "有的向老师学习，有的不向老师学习。前一个“或”指代“句读之不知”，后一个“或”指代“惑之不解”。不，同“否”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v31",
+   "word": "巫医",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "古代巫和医不分，故并举。巫主要以祝祷、占卜等为业，也为人治病。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v32",
+   "word": "乐师",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "以演奏音乐为职业的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v33",
+   "word": "百工",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "泛指各种工匠。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v34",
+   "word": "不耻相师",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不以拜别人为师为耻。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v35",
+   "word": "族",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "类。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v36",
+   "word": "曰师曰弟子云者",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "说谁是谁的老师、谁是谁的学生之类的话。云者，如此之类。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v37",
+   "word": "年相若",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "年龄差不多。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v38",
+   "word": "位卑则足羞官盛则近谀",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "以地位低者为师，就感到十分耻辱；以官职高者为师，就觉得是近乎谄媚。谀，谄媚奉承。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v39",
+   "word": "乃",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "竟。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v40",
+   "word": "欤",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "语气助词，表示感叹。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v41",
+   "word": "常师",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "固定的老师。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v42",
+   "word": "郯子",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "春秋时郯国（今山东郯城一带）的国君，孔子曾向他请教官职的名称。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v43",
+   "word": "苌弘",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "周敬王时的大夫，孔子曾向他请教过音乐方面的事情。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v44",
+   "word": "师襄",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "春秋时鲁国的乐官，孔子曾跟他学过琴。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v45",
+   "word": "老聃",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即老子，孔子曾向他问过礼。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v46",
+   "word": "郯子之徒",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "郯子那些人（指上面说的四个人）。徒，同类的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v47",
+   "word": "贤",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "才德优秀。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v48",
+   "word": "三人行则必有我师",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "语出《论语·述而》。原句是：“三人行，必有我师焉。”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v49",
+   "word": "术业",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "学术技艺。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v50",
+   "word": "专攻",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "专门学习或研究。攻，学习、研究。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v51",
+   "word": "李氏子蟠",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "李家的孩子叫蟠的。即李蟠，唐德宗贞元十九年（803）进士。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v52",
+   "word": "古文",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指先秦两汉时期的散文，与骈文相对。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v53",
+   "word": "六艺经传",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "六经的经文和传文。六艺，指《诗》《书》《礼》《乐》《易》《春秋》六种经书，其中《乐》久已失传。传，古代解释经书的著作。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v54",
+   "word": "通",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "全面。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v55",
+   "word": "嘉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "赞许。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v56",
+   "word": "古道",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指古人从师之道。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1711-p2:v57",
+   "word": "贻",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "赠送。。",
+   "sourceSentence": ""
+  }
+ ]
+}

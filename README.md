@@ -1,38 +1,70 @@
 # yuwen-course
 
-高中語文五冊課文學習站：從 `forum.rdfzer.com` 的 `必修上`、`必修下`、`選必上`、`選必中`、`選必下` 五個板塊抽取全部 topic 與回覆資源，並對接 R2/教材圖片。
+`yw.bdfz.net` is the student-centred learning matrix for the five senior-high Chinese textbooks. It combines lesson text and resources, author and literary-taxonomy links, vocabulary mastery, reading evidence, and a D1-backed reading constellation.
 
-## Data Pipeline
+## Runtime and source of truth
 
-論壇後端只讀匯出：
+- Local source: `/Users/ylsuen/CF/yuwen-course`
+- GitHub: `ieduer/yuwen-course`, branch `main`
+- Cloudflare Pages: `yuwen-course`
+- Production: `https://yw.bdfz.net/`
+- Deploy artifact: `site/`
+- Pages Worker: `site/_worker.js`
+- D1: `yuwen-reading-db`, binding `READING_DB`
+- Stable User Center site key: `yw`
 
-```bash
+Production is direct-upload Pages. A Cloudflare deployment's displayed commit hash is metadata, not proof that GitHub contains the uploaded files. Releases must record the Git commit, artifact checksum, Pages deployment ID, D1 backup/migration state, and verification result together.
+
+## Required reading
+
+- [`docs/MAINTENANCE_MANUAL.md`](docs/MAINTENANCE_MANUAL.md) — architecture, dependencies, configuration, release, monitoring, rollback, and troubleshooting
+- [`docs/VERIFICATION.md`](docs/VERIFICATION.md) — executable eight-point verification standard
+- [`docs/READING_CONSTELLATION.md`](docs/READING_CONSTELLATION.md) — reading-constellation data and API contract
+- [`docs/VOCAB_STANDARD.md`](docs/VOCAB_STANDARD.md) — vocabulary bank and release rules
+
+## Local development
+
+Use the repository-pinned dependencies and the user's fixed Python environment:
+
+```zsh
+cd /Users/ylsuen/CF/yuwen-course
+npm ci
+npm run serve
+```
+
+For the D1-backed reading API test seam, follow `docs/READING_CONSTELLATION.md`. `READING_TEST_SLUG` is local-only and forbidden in production.
+
+## Data pipeline
+
+The forum export is read-only. Do not run `build:data` unless the source export or textbook catalog intentionally changed; it rewrites the generated lesson tree.
+
+```zsh
 ssh -i ~/.ssh/ravnix_ed25519 root@172.93.160.202 \
   'docker exec -i --user discourse -w /var/www/discourse app bash -lc "RAILS_ENV=production bundle exec rails runner -"' \
   < scripts/export_discourse_course.rb \
   > .cache/discourse-course-export.json
-```
 
-生成站點資料：
-
-```bash
 npm run build:data
 ```
 
-## Local Preview
+## Verification and release
 
-```bash
-npm run serve
+```zsh
+cd /Users/ylsuen/CF/yuwen-course
+npm run release:check
+npm run deploy
 ```
 
-## Deploy
+`release:check` is the minimum local gate. The maintenance manual additionally requires a checksum-fixed Pages preview, live dependency probes, desktop/mobile browser QA, production deployment readback, and rollback recording.
 
-```bash
-wrangler pages deploy site --project-name yuwen-course --branch main
-```
+## Configuration names
 
-Runtime secrets:
+Never store values in Git or documentation.
 
-- `GITHUB_TOKEN`: create/read GitHub Issues for per-lesson discussion.
-- `OPENAI_API_KEY`: enable AI multi-turn dialogue.
-- `OPENAI_MODEL`: optional model override.
+- `READING_DB`: D1 binding, required in production
+- `GITHUB_TOKEN`: optional GitHub Issues integration secret
+- `CTEXT_USER` / `CTEXT_USERNAME`, `CTEXT_PASS` / `CTEXT_PASSWORD`: controlled China Text Project preview credentials
+- `APIS_ENDPOINT`, `APIS_THINKING_LEVEL`: optional non-secret gateway routing overrides; default gateway is `https://apis.bdfz.net`
+- `READING_TEST_SLUG`: local test seam only; forbidden in production
+
+The project must not receive a leaf Gemini/OpenAI key pool. AI calls go through the shared APIS gateway.

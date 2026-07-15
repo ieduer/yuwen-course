@@ -1,0 +1,376 @@
+{
+ "lessonId": "lesson-1717-p2",
+ "title": "荷塘月色",
+ "mode": "modern-prose",
+ "builtAt": "2026-07-14T09:18:26.817Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 1402,
+ "annotationCount": 21,
+ "inventory": [
+  {
+   "id": "lesson-1717-p2:v01",
+   "word": "满月",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注，且为常见词，学生结合上下文可理解其指代圆月。",
+   "contextMeaning": "圆月",
+   "sourceSentence": "在这满月 的光里，总该另有一番样子吧",
+   "location": {
+    "charIndex": 42
+   }
+  },
+  {
+   "id": "lesson-1717-p2:v02",
+   "word": "蓊蓊郁郁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注，为描写性四字词，虽生僻但注释清晰，无需额外命题。",
+   "contextMeaning": "形容树木茂盛的样子",
+   "sourceSentence": "荷塘四面，长着许多树，蓊蓊郁郁 的",
+   "location": {
+    "charIndex": 164
+   }
+  },
+  {
+   "id": "lesson-1717-p2:v03",
+   "word": "弥望",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注，且在句中语境明显，理解难度不大。",
+   "contextMeaning": "充满视野，满眼",
+   "sourceSentence": "曲曲折折的荷塘上面，弥望 的是田田 的叶子",
+   "location": {
+    "charIndex": 394
+   }
+  },
+  {
+   "id": "lesson-1717-p2:v04",
+   "word": "田田",
+   "annotated": true,
+   "decision": "question",
+   "reason": "涉及典故与叠词修辞，直接影响对荷叶意象的理解，是高频考点。",
+   "contextMeaning": "形容荷叶相连的样子",
+   "sourceSentence": "曲曲折折的荷塘上面，弥望 的是田田 的叶子",
+   "type": "interpretation",
+   "question": "「弥望的是田田的叶子」中「田田」一词的理解，下列说法正确的是：",
+   "options": [
+    "形容荷叶像田地一样方正",
+    "借用古诗词，形容荷叶相连茂盛的样子",
+    "形容荷叶在风中摇曳的声音",
+    "形容荷叶在月光下呈现的田字格纹路"
+   ],
+   "answerIndex": 1,
+   "explanation": "「田田」出自汉乐府《江南》，形容莲叶茂密相连，是文学常识与意象理解的结合。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "汉乐府《江南》"
+   ],
+   "location": {
+    "charIndex": 394
+   }
+  },
+  {
+   "id": "lesson-1717-p2:v05",
+   "word": "袅娜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注，属于形容词，主要用于描摹姿态，理解即可，无需命题。",
+   "contextMeaning": "柔美的样子",
+   "sourceSentence": "有袅娜 地开着的，有羞涩地打着朵儿的",
+   "location": {
+    "charIndex": 450
+   }
+  },
+  {
+   "id": "lesson-1717-p2:v06",
+   "word": "脉脉",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，此处语境义（无声）与常见义（含情）易混，考察语境辨析能力。",
+   "contextMeaning": "默默，无声",
+   "sourceSentence": "叶子底下是脉脉 的流水，遮住了，不能见一些颜色；而叶子却更见风致 了",
+   "type": "contextual-choice",
+   "question": "文中「叶子底下是脉脉的流水」中「脉脉」的含义是：",
+   "options": [
+    "形容流水含情凝视的样子",
+    "形容流水断断续续的样子",
+    "形容流水没有声音，默默流淌",
+    "形容流水清澈见底的样子"
+   ],
+   "answerIndex": 2,
+   "explanation": "「脉脉」在文中形容水没有声音，与通常指含情脉脉的用法不同。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 583
+   }
+  },
+  {
+   "id": "lesson-1717-p2:v07",
+   "word": "风致",
+   "annotated": true,
+   "decision": "question",
+   "reason": "文言词汇在现代散文中的运用，考察语境义的推导。",
+   "contextMeaning": "美的姿态",
+   "sourceSentence": "叶子底下是脉脉 的流水，遮住了，不能见一些颜色；而叶子却更见风致 了",
+   "type": "contextual-choice",
+   "question": "下列选项中「风致」的解释，最符合语境的一项是：",
+   "options": [
+    "风的吹拂",
+    "美的姿态",
+    "风俗习惯",
+    "风度气质"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处形容叶子在流水映衬下更具美的姿态。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 583
+   }
+  },
+  {
+   "id": "lesson-1717-p2:v08",
+   "word": "一例",
+   "annotated": true,
+   "decision": "question",
+   "reason": "易误解为「一个例子」，考察语境义辨析。",
+   "contextMeaning": "一概，一律",
+   "sourceSentence": "树色一例 是阴阴的，乍看像一团烟雾；但杨柳的丰姿，便在烟雾里也辨得出",
+   "type": "contextual-choice",
+   "question": "文中「树色一例是阴阴的」中「一例」的意思是：",
+   "options": [
+    "一个例子",
+    "一律、一概",
+    "排列整齐",
+    "一种比例"
+   ],
+   "answerIndex": 1,
+   "explanation": "「一例」在此处表示树色全都一样阴暗，不能误解为例子。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 887
+   }
+  },
+  {
+   "id": "lesson-1717-p2:v09",
+   "word": "风流",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义高频考点，现代语境常含贬义，文中为褒义或中性，考察迁移能力。",
+   "contextMeaning": "年轻男女不拘礼法地表露爱情",
+   "sourceSentence": "那是一个热闹的季节，也是一个风流 的季节",
+   "type": "gu-jin",
+   "question": "文中「那是一个热闹的季节，也是一个风流的季节」中「风流」一词，下列理解正确的是：",
+   "options": [
+    "形容季节风大，流动快",
+    "指那个时代年轻男女自由表露爱情的习俗",
+    "指那个时代的人行为放荡，不守礼法",
+    "指那个时代文人墨客的才华横溢"
+   ],
+   "answerIndex": 1,
+   "explanation": "「风流」在此处指当时男女自由表露爱情的社会风尚，是古义。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1097
+   }
+  },
+  {
+   "id": "lesson-1717-p2:v10",
+   "word": "消受",
+   "annotated": true,
+   "decision": "question",
+   "reason": "考察对词语搭配及语境情感色彩的理解。",
+   "contextMeaning": "享受",
+   "sourceSentence": "这真是有趣的事，可惜我们现在早已无福消受 了",
+   "type": "contextual-choice",
+   "question": "文中「可惜我们现在早已无福消受了」中「消受」的含义是：",
+   "options": [
+    "忍受",
+    "承受",
+    "享受",
+    "接受"
+   ],
+   "answerIndex": 2,
+   "explanation": "「消受」多用于否定式，此处意为享受。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1224
+   }
+  },
+  {
+   "id": "lesson-1717-p2:v11",
+   "word": "参差",
+   "annotated": false,
+   "decision": "question",
+   "reason": "描写性词汇，对营造意境至关重要，考察对景物形态的理解。",
+   "contextMeaning": "长短、高低、大小不齐",
+   "sourceSentence": "高处丛生的灌木，落下参差的斑驳的黑影，峭楞楞如鬼一般；",
+   "type": "contextual-choice",
+   "question": "文中「落下参差的斑驳的黑影」中「参差」的含义是：",
+   "options": [
+    "整齐划一",
+    "长短、高低不齐",
+    "极其稀疏",
+    "深浅不一"
+   ],
+   "answerIndex": 1,
+   "explanation": "「参差」形容灌木投下的影子高低长短不一。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 741
+   }
+  },
+  {
+   "id": "lesson-1717-p2:v12",
+   "word": "大意",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此处语境与「主要内容」义不同，极易误解。",
+   "contextMeaning": "大概的轮廓或样子",
+   "sourceSentence": "树梢上隐隐约约的是一带远山，只有些大意罢了。",
+   "type": "contextual-choice",
+   "question": "文中「只有些大意罢了」中「大意」的含义是：",
+   "options": [
+    "粗心大意",
+    "主要的意思",
+    "大概的轮廓",
+    "特别的注意"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指远山在夜色中只能看到大概的轮廓。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 922
+   }
+  },
+  {
+   "id": "lesson-1717-p2:v13",
+   "word": "受用",
+   "annotated": false,
+   "decision": "question",
+   "reason": "考察动词在文中的语境义，对理解作者心境有帮助。",
+   "contextMeaning": "享受",
+   "sourceSentence": "这是独处的妙处，我且受用这无边的荷香月色好了。",
+   "type": "contextual-choice",
+   "question": "文中「我且受用这无边的荷香月色好了」中「受用」的含义是：",
+   "options": [
+    "利用",
+    "享受",
+    "承受",
+    "受用不尽"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处表示作者在独处时享受自然美景。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 370
+   }
+  },
+  {
+   "id": "lesson-1717-p2:v14",
+   "word": "选自朱自清全集第一卷",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《朱自清全集》第一卷（江苏教育出版社1996年版）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1717-p2:v15",
+   "word": "闰儿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指作者的次子朱闰生。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1717-p2:v16",
+   "word": "宛然",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "仿佛。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1717-p2:v17",
+   "word": "梵婀玲",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "英语violin的音译，即小提琴。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1717-p2:v18",
+   "word": "艳歌",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "专门咏唱男女爱情的歌曲。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1717-p2:v19",
+   "word": "梁元帝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "南朝梁代皇帝萧绎（508—554）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1717-p2:v20",
+   "word": "妖童媛女荡舟心许",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "艳丽的少男和美貌的少女，摇着小船互相默默地传情。妖，艳丽。心许，默许。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1717-p2:v21",
+   "word": "鹢首徐回兼传羽杯",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "船慢慢地来回摇荡着，双方传递着酒杯。鹢首，古时画鹢于船头，所以把船头叫“鹢首”。鹢，水鸟。兼，指双方。羽杯，酒器。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1717-p2:v22",
+   "word": "尔其纤腰束素迁延顾步",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "那细细的腰肢，裹着洁白的绸子，走走停停，不住地回视自己的动作。尔其，那。顾，回头看。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1717-p2:v23",
+   "word": "敛裾",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "提着衣襟。裾，衣襟。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1717-p2:v24",
+   "word": "西洲曲",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "南朝乐府诗，描写青年女子思念意中人的痛苦。",
+   "sourceSentence": ""
+  }
+ ]
+}

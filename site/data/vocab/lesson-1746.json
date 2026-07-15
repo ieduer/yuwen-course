@@ -1,0 +1,674 @@
+{
+ "lessonId": "lesson-1746",
+ "title": "12 祝福",
+ "mode": "fiction",
+ "builtAt": "2026-07-14T13:28:36.579Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 13309,
+ "annotationCount": 60,
+ "inventory": [
+  {
+   "id": "lesson-1746:v01",
+   "word": "投机",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，现代汉语常指投机取巧，文中指谈话合拍，影响人物关系理解。",
+   "contextMeaning": "合拍，投缘",
+   "sourceSentence": "谈话是总不投机的了,于是不多久,我便一个人剩在书房里",
+   "type": "contextual-choice",
+   "question": "「谈话是总不投机的了」中「投机」一词在文中的意思是",
+   "options": [
+    "利用时机钻空子",
+    "意见相投，合得来",
+    "进行商业投资",
+    "投其所好"
+   ],
+   "answerIndex": 1,
+   "explanation": "文中指“我”与鲁四老爷因思想差异，谈话无法进行下去，故为合拍、投缘的意思。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 281
+   }
+  },
+  {
+   "id": "lesson-1746:v02",
+   "word": "不更事",
+   "annotated": true,
+   "decision": "question",
+   "reason": "考查成语/固定词组积累，且对理解文中作者对少年的评价有帮助。",
+   "contextMeaning": "经历世事不多，缺乏社会经验",
+   "sourceSentence": "不更事的勇敢的少年,往往敢于给人解决疑问",
+   "type": "interpretation",
+   "question": "文中「不更事的勇敢的少年」中「不更事」的意思是",
+   "options": [
+    "不经历任何事情",
+    "不改变态度",
+    "缺乏社会经验",
+    "不懂得基本礼仪"
+   ],
+   "answerIndex": 2,
+   "explanation": "更，经历。指经历世事不多，即缺乏社会经验，不懂世故人情。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1839
+   }
+  },
+  {
+   "id": "lesson-1746:v03",
+   "word": "无常",
+   "annotated": true,
+   "decision": "question",
+   "reason": "佛教用语，在文中具有特殊的语境义（死亡），体现作者对祥林嫂命运的冷峻思考。",
+   "contextMeaning": "死亡",
+   "sourceSentence": "现在总算被无常打扫得干干净净了。",
+   "type": "contextual-choice",
+   "question": "文中「现在总算被无常打扫得干干净净了」中「无常」一词的语境含义是",
+   "options": [
+    "世事变化无定",
+    "一种神鬼力量",
+    "死亡",
+    "虚无缥缈"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中借“无常”代指死亡，带有冷峻、讽刺的意味。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2946
+   }
+  },
+  {
+   "id": "lesson-1746:v04",
+   "word": "强",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多音字考点，且为本文重要语境词，直接影响对祥林嫂反抗行为的理解。",
+   "contextMeaning": "固执，不听劝导",
+   "sourceSentence": "再一强,或者索性撞一个死,就好了",
+   "type": "pronunciation",
+   "question": "下列加点字的读音正确的一项是",
+   "options": [
+    "再一强（qiáng）",
+    "再一强（qiǎng）",
+    "再一强（jiàng）",
+    "再一强（jiāng）"
+   ],
+   "answerIndex": 2,
+   "explanation": "在此处读jiàng，意为固执，不听劝导。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 8148
+   }
+  },
+  {
+   "id": "lesson-1746:v05",
+   "word": "大抵",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频词，容易被现代语感干扰，影响对句子逻辑关系的判断。",
+   "contextMeaning": "大多，大致，基本上",
+   "sourceSentence": "万一结果不佳,大抵反成了怨府",
+   "type": "contextual-choice",
+   "question": "「万一结果不佳，大抵反成了怨府」中「大抵」的意思是",
+   "options": [
+    "大概，大体上",
+    "抵消，平衡",
+    "必然，一定",
+    "特别，尤其"
+   ],
+   "answerIndex": 0,
+   "explanation": "“大抵”在此处表示推测或结论的范围，意为大多、基本上。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1865
+   }
+  },
+  {
+   "id": "lesson-1746:v06",
+   "word": "断送",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文中语境义与现代常用词义略有差异，体现人物命运的悲剧性。",
+   "contextMeaning": "丧失，毁掉，断绝",
+   "sourceSentence": "年纪青青,就会断送在伤寒上",
+   "type": "contextual-choice",
+   "question": "文中「年纪青青，就会断送在伤寒上」的「断送」应理解为",
+   "options": [
+    "送别，告别",
+    "丧失，毁掉",
+    "断绝往来",
+    "送达终点"
+   ],
+   "answerIndex": 1,
+   "explanation": "文中指生命被断绝、丧失。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 5736
+   }
+  },
+  {
+   "id": "lesson-1746:v07",
+   "word": "监生",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "属于历史文化常识，文中有详细注释，且不影响对小说叙事主线的理解。",
+   "contextMeaning": "国子监生员的简称",
+   "sourceSentence": "是一个讲理学的老监生。",
+   "location": {
+    "charIndex": 181
+   }
+  },
+  {
+   "id": "lesson-1746:v08",
+   "word": "炮烙",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材已有注释，且作为比喻用法，学生理解其痛苦程度即可，无需作为考点。",
+   "contextMeaning": "酷刑，此处形容极度的痛苦",
+   "sourceSentence": "她像是受了炮烙似的缩手",
+   "location": {
+    "charIndex": 8836
+   }
+  },
+  {
+   "id": "lesson-1746:v09",
+   "word": "选自彷徨鲁迅全集",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "选自《彷徨》（《鲁迅全集》第二卷，人民文学出版社2005 年版）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v10",
+   "word": "送灶",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "旧俗以农历十二月二十三日或二十四日夜祭送灶神升天奏事，称为“送灶”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v11",
+   "word": "理学",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "又称“道学”，是宋元明清时期以探讨理气、心性等问题为核心的哲学思潮。它吸收佛学和道教思想，将儒家伦理道德观念与对宇宙本原、人的本质问题的阐释融会贯通，成为宋元以后中国封建社会占统治地位的思想体系。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v12",
+   "word": "新党",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "清末对主张或倾向维新的人的称呼。辛亥革命前后，也用它称呼革命党人和拥护革命的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v13",
+   "word": "绞丝银镯子",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "用银丝拧制成的一种手镯。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v14",
+   "word": "朱拓",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "用银朱等红颜料从碑刻上摹印下文字或图形。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v15",
+   "word": "陈抟老祖",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "亳州真源（今河南鹿邑）人，五代宋初道士。后唐长兴年间举进士不第，隐居修道。他的思想对宋元理学和道教的发展都有一定影响。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v16",
+   "word": "事理通达心气和平",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "语出南宋朱熹《论语集注》。朱熹在《季氏》篇“不学诗，无以言”下作注云：“事理通达而心气和平，故能言。”意思是，理解了孔孟之道，待人接物就能通情达理，心平气和。这是理学家所宣扬的自我修养的标准。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v17",
+   "word": "康熙字典",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "清代康熙年间，张玉书、陈廷敬等奉皇帝命令编纂的一部大型字典。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v18",
+   "word": "近思录集注",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "清代学者为《近思录》作的集注。有两部，一为茅星来著，一为江永著。《近思录》，朱熹、吕祖谦选编的宋代几个理学家的文章和语录，是一部理学的入门书。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v19",
+   "word": "四书衬",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "清代骆培解说“四书”的一部书。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v20",
+   "word": "间或一轮",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "偶尔转动一下。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v21",
+   "word": "豫备",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "现在写作“预备”。下文“豫防”“豫感”，现在写作“预防”“预感”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v22",
+   "word": "钉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "现在写作“盯”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v23",
+   "word": "踌蹰",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "犹豫。现在写作“踌躇”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v24",
+   "word": "支梧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "用含混的话搪塞。现在写作“支吾”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v25",
+   "word": "计画",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "现在写作“计划”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v26",
+   "word": "怨府",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "怨恨集中的所在。这里指埋怨的对象。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v27",
+   "word": "谬种",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "坏东西。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v28",
+   "word": "淡然",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "漠不关心的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v29",
+   "word": "俨然",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "显得十分庄重的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v30",
+   "word": "鬼神者二气之良能也",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "语出北宋张载《张子正蒙·太和》，也见《近思录》。意思是，鬼神是阴阳二气自然变化而成的。良能，先天具有的能力。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v31",
+   "word": "隐语",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不明确说出要说的意思，而借用别的话来表示。如用“老了”代替“死了”，就是隐语。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v32",
+   "word": "尘芥堆",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "垃圾堆。芥，小草。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v33",
+   "word": "中人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "为双方介绍买卖、调解纠纷等并做见证的中间人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v34",
+   "word": "月白",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "白中微带浅蓝色。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v35",
+   "word": "周正",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "端正。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v36",
+   "word": "顺着眼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "垂着眼，显出顺从的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v37",
+   "word": "定局",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "事情确定。这里指雇佣关系确定。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v38",
+   "word": "沸反盈天",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "形容极度喧闹，乱成一片。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v39",
+   "word": "折罪",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "抵罪，赎罪。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v40",
+   "word": "新正",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "农历新年正月。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v41",
+   "word": "一注钱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一笔钱。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v42",
+   "word": "里山",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "深山里面。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v43",
+   "word": "八十千",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即八十吊钱。千，一千文钱。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v44",
+   "word": "吓",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "叹词，表示惊奇或赞叹。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v45",
+   "word": "出格",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "超越常规，与众不同。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v46",
+   "word": "利害",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "现在写作“厉害”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v47",
+   "word": "回头人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指再嫁的寡妇。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v48",
+   "word": "但是",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "只是。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v49",
+   "word": "驯熟",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "很熟练。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v50",
+   "word": "桌帏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "悬挂在桌子前面用来遮挡的饰物，多用布或绸缎制成，常用于办婚丧事或祭祀时。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v51",
+   "word": "讪讪",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "难为情的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v52",
+   "word": "善女人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "旧时指吃斋念佛的女人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v53",
+   "word": "含胡",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "现在写作“含糊”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v54",
+   "word": "拗他不过",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "无法改变他坚决的态度。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v55",
+   "word": "蹙缩",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "皱缩。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v56",
+   "word": "阴司",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指阴间。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v57",
+   "word": "替身",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "旧时迷信的人认为人死后到阴间还有鬼魂，人活着时有什么罪，可以用人或物代替赎罪，这人或物叫“替身”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v58",
+   "word": "庙祝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "旧时庙里管香火祭祀的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v59",
+   "word": "鹰洋",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指墨西哥银元，币面铸有鹰的图案（墨西哥国徽）。鸦片战争后大量流入我国，曾与我国自铸的银元同在市场上流通。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v60",
+   "word": "窈陷",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "深陷。窈，深。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v61",
+   "word": "怜悧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "现在写作“伶俐”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v62",
+   "word": "蒙胧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "现在写作“朦胧”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1746:v63",
+   "word": "初夜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指进入夜晚不久的时段。",
+   "sourceSentence": ""
+  }
+ ]
+}

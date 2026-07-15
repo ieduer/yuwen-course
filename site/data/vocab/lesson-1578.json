@@ -1,0 +1,598 @@
+{
+ "lessonId": "lesson-1578",
+ "title": "10 兰亭集序/ 王羲之",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:39:40.865Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 3743,
+ "annotationCount": 35,
+ "inventory": [
+  {
+   "id": "lesson-1578:v01",
+   "word": "修",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，在不同语境下意义不同，考察词义辨析能力",
+   "contextMeaning": "高",
+   "sourceSentence": "此地有崇山峻岭,茂林修竹",
+   "type": "contextual-choice",
+   "question": "下列选项中“修”字的含义与“茂林修竹”中的“修”字相同的一项是",
+   "options": [
+    "修禊事也",
+    "外结好孙权，内修政理",
+    "修短随化",
+    "邹忌修八尺有余"
+   ],
+   "answerIndex": 3,
+   "explanation": "“修”在“茂林修竹”中意为高；选项4中意为长（高）。选项1意为举行；选项2意为治理；选项3意为长短。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 310
+   }
+  },
+  {
+   "id": "lesson-1578:v02",
+   "word": "次",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，极易误认为“次序”或“下一次”，考察语境理解",
+   "contextMeaning": "旁边",
+   "sourceSentence": "引以为流觞曲水,列坐其次",
+   "type": "gu-jin",
+   "question": "“列坐其次”中“次”的古今异义理解正确的一项是",
+   "options": [
+    "古义：旁边；今义：顺序",
+    "古义：顺序；今义：质量较差",
+    "古义：旁边；今义：第二",
+    "古义：驻扎；今义：顺序"
+   ],
+   "answerIndex": 0,
+   "explanation": "“次”在此处作名词，指旁边、水边，与今义“顺序”不同。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 335
+   }
+  },
+  {
+   "id": "lesson-1578:v03",
+   "word": "所以",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言虚词高频考点，此处为“用来...的方法/原因”，易与现代汉语表因果的关联词混淆",
+   "contextMeaning": "用来……的方法",
+   "sourceSentence": "所以游目骋怀,足以极视听之娱",
+   "type": "usage",
+   "question": "下列句中“所以”的用法与“所以游目骋怀”相同的一项是",
+   "options": [
+    "此所以学者不可以不深思而慎取之也",
+    "师者，所以传道受业解惑也",
+    "亲贤臣，远小人，此先汉所以兴隆也",
+    "吾知所以距子矣"
+   ],
+   "answerIndex": 1,
+   "explanation": "题干中“所以”意为“用来……的方法”。选项1表原因；选项2意为“用来……的”，表凭借；选项3表原因；选项4意为“用来……的方法”。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 399
+   }
+  },
+  {
+   "id": "lesson-1578:v04",
+   "word": "俯仰",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，原文比喻时间短暂，今义指动作，考察语境迁移",
+   "contextMeaning": "形容时间极其短暂",
+   "sourceSentence": "夫人之相与,俯仰一世",
+   "type": "interpretation",
+   "question": "“夫人之相与，俯仰一世”句中“俯仰”的意思是",
+   "options": [
+    "低头抬头",
+    "交往频繁",
+    "时间短暂",
+    "一生一世"
+   ],
+   "answerIndex": 2,
+   "explanation": "“俯仰”本指低头抬头，此处借指时间极短，形容一生转瞬即逝。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 420
+   }
+  },
+  {
+   "id": "lesson-1578:v05",
+   "word": "趣",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字，且为易错点，影响对句意的精准理解",
+   "contextMeaning": "通“取”，取向、爱好",
+   "sourceSentence": "虽趣舍万殊,静躁不同",
+   "type": "pronunciation",
+   "question": "下列关于“虽趣舍万殊”中“趣”的说法，正确的一项是",
+   "options": [
+    "读作qù，意思是乐趣",
+    "读作qū，通“取”，意思是取向、爱好",
+    "读作cù，意思是趋向",
+    "读作qū，意思是急促"
+   ],
+   "answerIndex": 1,
+   "explanation": "“趣”通“取”，在文中指人们的取向或爱好，读qū。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 457
+   }
+  },
+  {
+   "id": "lesson-1578:v06",
+   "word": "之",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，在此处作动词（求得），属于古文中特殊的动词用法",
+   "contextMeaning": "求得、得到",
+   "sourceSentence": "及其所之既倦,情随事迁",
+   "type": "contextual-choice",
+   "question": "“及其所之既倦”中“之”字的意思是",
+   "options": [
+    "代词，指代所遇之事",
+    "助词，不译",
+    "动词，去、往",
+    "动词，求得、得到"
+   ],
+   "answerIndex": 3,
+   "explanation": "“所之”指所求得的事物，之作动词，意为求得。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 492
+   }
+  },
+  {
+   "id": "lesson-1578:v07",
+   "word": "一",
+   "annotated": false,
+   "decision": "question",
+   "reason": "数词活用，此处用作动词，是理解魏晋玄学思想的关键",
+   "contextMeaning": "把……看作一样",
+   "sourceSentence": "固知一死生为虚诞,齐彭殇为妄作",
+   "type": "substitution",
+   "question": "下列句中加点词的活用现象与“一死生”中的“一”相同的一项是",
+   "options": [
+    "足以极视听之娱",
+    "齐彭殇为妄作",
+    "后之视今，亦犹今之视昔",
+    "引以为流觞曲水"
+   ],
+   "answerIndex": 1,
+   "explanation": "“一”为数词作动词，意为把……看作一样；“齐”亦为形容词作动词，意为把……看作相等。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 592
+   }
+  },
+  {
+   "id": "lesson-1578:v08",
+   "word": "致",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，此处指意态、情趣，较抽象，易误解",
+   "contextMeaning": "情趣、意态",
+   "sourceSentence": "虽世殊事异,所以兴怀,其致一也",
+   "type": "interpretation",
+   "question": "“其致一也”中“致”的意思是",
+   "options": [
+    "达到",
+    "情趣、意态",
+    "招致",
+    "细密"
+   ],
+   "answerIndex": 1,
+   "explanation": "“致”在此处指作者感怀的情趣和意态。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 634
+   }
+  },
+  {
+   "id": "lesson-1578:v09",
+   "word": "信",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频副词，表示确实、实在，对理解作者情感态度有帮助",
+   "contextMeaning": "确实、实在",
+   "sourceSentence": "足以极视听之娱,信可乐也",
+   "type": "contextual-choice",
+   "question": "“信可乐也”中“信”的意思是",
+   "options": [
+    "书信",
+    "信用",
+    "确实",
+    "相信"
+   ],
+   "answerIndex": 2,
+   "explanation": "“信”在此处作副词，表示确实、实在。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 406
+   }
+  },
+  {
+   "id": "lesson-1578:v10",
+   "word": "极",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容词活用为动词，是文言文中常见的语法现象",
+   "contextMeaning": "穷尽、达到极限",
+   "sourceSentence": "足以极视听之娱,信可乐也",
+   "type": "usage",
+   "question": "下列句中“极”字的用法与“极视听之娱”中的“极”相同的一项是",
+   "options": [
+    "南极潇湘",
+    "此乐何极",
+    "极力推崇",
+    "极度悲伤"
+   ],
+   "answerIndex": 0,
+   "explanation": "“极”为形容词活用为动词，意为穷尽。选项0中“南极”意为向南到达……的尽头，用法相同。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 406
+   }
+  },
+  {
+   "id": "lesson-1578:v11",
+   "word": "期",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已注，且意义明确，为“注定”之意，无需额外出题。",
+   "contextMeaning": "注定",
+   "sourceSentence": "终期于尽",
+   "location": {
+    "charIndex": 540
+   }
+  },
+  {
+   "id": "lesson-1578:v12",
+   "word": "毕",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材已注且意义简单，即“全、都”，属于基础词汇，不值得出题。",
+   "contextMeaning": "全、都",
+   "sourceSentence": "群贤毕至",
+   "location": {
+    "charIndex": 300
+   }
+  },
+  {
+   "id": "lesson-1578:v13",
+   "word": "咸",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "同“毕”，意义重复，即“全、都”，基础词汇。",
+   "contextMeaning": "全、都",
+   "sourceSentence": "少长咸集",
+   "location": {
+    "charIndex": 305
+   }
+  },
+  {
+   "id": "lesson-1578:v14",
+   "word": "相与",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已注为“互相交往”，含义明确，古今差异虽大但教材注释清晰，不再命题。",
+   "contextMeaning": "互相交往",
+   "sourceSentence": "夫人之相与",
+   "location": {
+    "charIndex": 420
+   }
+  },
+  {
+   "id": "lesson-1578:v15",
+   "word": "癸丑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指永和九年。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v16",
+   "word": "修禊",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "古代民俗，于农历三月上旬的巳日（三国魏以后始固定为三月初三）到水边嬉戏，以祓除不祥，称为“修禊”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v17",
+   "word": "修竹",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "高高的竹子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v18",
+   "word": "映带",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "景物互相衬托。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v19",
+   "word": "引以为流觞曲水",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "引（清流激湍）来作为流觞的曲水。流觞，把盛酒的杯浮在水面从上游放出，循曲水而下，流到谁的面前，谁就取来饮用。觞，酒杯。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v20",
+   "word": "幽情",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "深远高雅的情思。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v21",
+   "word": "惠风",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "和风。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v22",
+   "word": "品类",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "自然界的万物。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v23",
+   "word": "所以游目骋怀",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "借以纵目观赏，开畅胸怀。骋，开畅、舒展。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v24",
+   "word": "夫人之相与俯仰一世",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "人与人交往，很快便度过一生。相与，互相交往。俯仰，一俯一仰之间，比喻时间短暂。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v25",
+   "word": "取诸怀抱悟言一室之内",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是，（有的人）在室中晤谈，互相倾吐心里话。诸，相当于“之于”。怀抱，心怀。悟言，晤谈、对谈。悟，同“晤”，面对。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v26",
+   "word": "因寄所托放浪形骸之外",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是，（有的人）把情怀寄托在所爱好的事物上，言行不受拘束，狂放不羁。放浪形骸，放纵、不受拘束。形骸，人的躯体。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v27",
+   "word": "趣舍万殊",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是，各有各的爱好，取舍各不相同。趣，同“取”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v28",
+   "word": "静躁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "静与动。躁，动。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v29",
+   "word": "欣于所遇",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "对所接触的感到欣喜。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v30",
+   "word": "暂得于己",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一时感到自得。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v31",
+   "word": "快然自足",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（感到）高兴和满足。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v32",
+   "word": "不知老之将至",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不知道老年将要到来。语出《论语·述而》。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v33",
+   "word": "所之既倦",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（对于）所喜爱或得到的已经厌倦。之，求得。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v34",
+   "word": "情随事迁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "感情随着情况的变化而变化。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v35",
+   "word": "感慨系之",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "感慨随着这种变化而有所不同。系，连接。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v36",
+   "word": "犹",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "尚且。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v37",
+   "word": "以之兴怀",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "因它而引起心中的感触。以，因。之，指“向之所欣……已为陈迹”。兴，发生、引起。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v38",
+   "word": "修短随化",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "寿命长短，听凭造化。化，指自然。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v39",
+   "word": "终期于尽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "终究归结于消灭。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v40",
+   "word": "死生亦大矣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "死生是一件大事。语出《庄子·德充符》。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v41",
+   "word": "每览昔人兴感之由",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "每当看到古人（对死生）发生感慨的原因。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v42",
+   "word": "若合一契",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "像符契那样相合（意思是发生感触的原因相同）。契，即符契，古代符信的一种，以金玉竹木等制成，上刻文字，分成两半，合在一起可为凭验。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v43",
+   "word": "嗟悼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "叹息哀伤。悼，悲伤。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v44",
+   "word": "不能喻之于怀",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不能明白于心。意思是，看到古人对死生发生感慨的文章，就为此悲伤感叹，也说不出是什么原因。喻，明白。一说是消解、释怀的意思。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1578:v45",
+   "word": "列叙时人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一个一个记下当时与会的人。",
+   "sourceSentence": ""
+  }
+ ]
+}

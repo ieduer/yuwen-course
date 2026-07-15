@@ -1,0 +1,1250 @@
+{
+ "lessonId": "lesson-1535",
+ "title": "10 * 苏武传/ 班固",
+ "mode": "classical",
+ "builtAt": "2026-07-14T13:27:05.400Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 16000,
+ "annotationCount": 100,
+ "inventory": [
+  {
+   "id": "lesson-1535:v01",
+   "word": "任",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，影响句意理解",
+   "contextMeaning": "凭藉",
+   "sourceSentence": "少以父任,兄弟并为郎",
+   "type": "contextual-choice",
+   "question": "“少以父任”中“任”的意思是",
+   "options": [
+    "任用",
+    "职位",
+    "凭藉",
+    "担任"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指凭借父亲的职位关系。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 6052
+   }
+  },
+  {
+   "id": "lesson-1535:v02",
+   "word": "行",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此处为特殊用法",
+   "contextMeaning": "辈分",
+   "sourceSentence": "汉天子我丈人行也",
+   "type": "contextual-choice",
+   "question": "“汉天子我丈人行也”中“行”的意思是",
+   "options": [
+    "行走",
+    "辈分",
+    "行列",
+    "能力"
+   ],
+   "answerIndex": 1,
+   "explanation": "指辈分。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 6138
+   }
+  },
+  {
+   "id": "lesson-1535:v03",
+   "word": "见",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言高频考点，表被动",
+   "contextMeaning": "表被动，相当于“被”",
+   "sourceSentence": "见犯乃死,重负国",
+   "type": "usage",
+   "question": "“见犯乃死”中“见”的用法是",
+   "options": [
+    "通“现”，显露",
+    "看见",
+    "表被动，相当于“被”",
+    "拜见"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处“见”作被动标志，表示受到侮辱。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 6474
+   }
+  },
+  {
+   "id": "lesson-1535:v04",
+   "word": "当",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，随语境变化",
+   "contextMeaning": "判处",
+   "sourceSentence": "当死",
+   "type": "contextual-choice",
+   "question": "“汉使张胜谋杀单于近臣，当死”中“当”的意思是",
+   "options": [
+    "应当",
+    "判处",
+    "抵押",
+    "面对"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处指法律上的判处。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 6695
+   }
+  },
+  {
+   "id": "lesson-1535:v05",
+   "word": "畔",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字，影响词义理解",
+   "contextMeaning": "通“叛”，背叛",
+   "sourceSentence": "畔主背亲",
+   "type": "gu-jin",
+   "question": "“畔主背亲”中“畔”的意思是",
+   "options": [
+    "田界",
+    "旁边",
+    "背叛",
+    "离开"
+   ],
+   "answerIndex": 2,
+   "explanation": "畔同“叛”。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《说文解字》"
+   ],
+   "location": {
+    "charIndex": 6880
+   }
+  },
+  {
+   "id": "lesson-1535:v06",
+   "word": "雨",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词类活用，名作动",
+   "contextMeaning": "下雨（雪）",
+   "sourceSentence": "天雨雪",
+   "type": "contextual-choice",
+   "question": "“天雨雪”中“雨”的意思是",
+   "options": [
+    "雨水",
+    "下",
+    "像雨一样",
+    "降落"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处为名词作动词，下。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 6985
+   }
+  },
+  {
+   "id": "lesson-1535:v07",
+   "word": "杖",
+   "annotated": false,
+   "decision": "question",
+   "reason": "词类活用，名作动",
+   "contextMeaning": "拄着",
+   "sourceSentence": "杖汉节牧羊",
+   "type": "contextual-choice",
+   "question": "“杖汉节牧羊”中“杖”的意思是",
+   "options": [
+    "棍棒",
+    "依靠",
+    "拄着",
+    "惩罚"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处为名词作动词，拄着。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 7065
+   }
+  },
+  {
+   "id": "lesson-1535:v08",
+   "word": "见",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字，易误解",
+   "contextMeaning": "通“现”，显示",
+   "sourceSentence": "信义安所见乎",
+   "type": "contextual-choice",
+   "question": "“信义安所见乎”中“见”的意思是",
+   "options": [
+    "看见",
+    "拜见",
+    "显示",
+    "被"
+   ],
+   "answerIndex": 2,
+   "explanation": "见通“现”，显示出来。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 7250
+   }
+  },
+  {
+   "id": "lesson-1535:v09",
+   "word": "劾",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古语词，重要历史名词",
+   "contextMeaning": "判决",
+   "sourceSentence": "劾大不敬",
+   "type": "contextual-choice",
+   "question": "“劾大不敬”中“劾”的意思是",
+   "options": [
+    "揭发",
+    "审判",
+    "判决",
+    "弹劾"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指判决。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 7281
+   }
+  },
+  {
+   "id": "lesson-1535:v10",
+   "word": "决",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字",
+   "contextMeaning": "通“诀”，辞别",
+   "sourceSentence": "与武决去",
+   "type": "usage",
+   "question": "“与武决去”中“决”的意思是",
+   "options": [
+    "决定",
+    "断裂",
+    "辞别",
+    "水冲"
+   ],
+   "answerIndex": 2,
+   "explanation": "决通“诀”。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《说文解字》"
+   ],
+   "location": {
+    "charIndex": 7665
+   }
+  },
+  {
+   "id": "lesson-1535:v11",
+   "word": "物故",
+   "annotated": false,
+   "decision": "question",
+   "reason": "委婉语，影响叙事理解",
+   "contextMeaning": "死亡",
+   "sourceSentence": "前以降及物故",
+   "type": "contextual-choice",
+   "question": "“前以降及物故”中“物故”的意思是",
+   "options": [
+    "物品损坏",
+    "死亡",
+    "旧事",
+    "叛变"
+   ],
+   "answerIndex": 1,
+   "explanation": "物故是对死亡的委婉说法。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 7801
+   }
+  },
+  {
+   "id": "lesson-1535:v12",
+   "word": "相当",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义",
+   "contextMeaning": "相抵",
+   "sourceSentence": "汉亦留之以相当",
+   "type": "contextual-choice",
+   "question": "“汉亦留之以相当”中“相当”的意思是",
+   "options": [
+    "彼此相等",
+    "相抵",
+    "非常",
+    "合适"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处指用汉朝留下的匈奴使者来抵销匈奴留下的汉朝使者。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 6108
+   }
+  },
+  {
+   "id": "lesson-1535:v13",
+   "word": "并",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "副词，意为“都”，基础词汇，不作命题",
+   "contextMeaning": "都",
+   "sourceSentence": "兄弟并为郎",
+   "location": {
+    "charIndex": 6057
+   }
+  },
+  {
+   "id": "lesson-1535:v14",
+   "word": "稍",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "副词，意为“渐渐”，常见文言词汇，不作命题",
+   "contextMeaning": "渐渐",
+   "sourceSentence": "稍迁至栘中厩监",
+   "location": {
+    "charIndex": 6063
+   }
+  },
+  {
+   "id": "lesson-1535:v15",
+   "word": "假",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已注，为“临时”之意，属于基础义",
+   "contextMeaning": "临时",
+   "sourceSentence": "假吏",
+   "location": {
+    "charIndex": 6202
+   }
+  },
+  {
+   "id": "lesson-1535:v16",
+   "word": "武字子卿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "苏武的传是附在父亲苏建的传后面的，所以这里不再写明他的姓。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v17",
+   "word": "少以父任兄弟并为郎",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "年轻时，凭借父亲职位的关系而被任用，兄弟三人都做了皇帝的侍从官。依汉朝制度，凡职位在二千石以上的官吏可以保举子弟一人做郎官。并，都。郎，官名，汉代专指皇帝的侍从官。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v18",
+   "word": "稍迁至栘中厩监",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "渐渐升到栘中厩监。稍，渐渐。栘中厩，汉有栘园，其中的马厩称“栘中厩”。监，管事的官员。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v19",
+   "word": "胡",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这里指匈奴。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v20",
+   "word": "数通使相窥观",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "屡次互派使者窥探观察（对方的情况）。通使，互派使者。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v21",
+   "word": "十余辈",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "十几批。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v22",
+   "word": "天汉元年",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "公元前100 年。天汉，汉武帝年号（前100—前97）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v23",
+   "word": "且鞮侯单于",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "曾被封为且鞮侯的单于。单于，匈奴的最高首领。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v24",
+   "word": "汉天子我丈人行也",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "汉天子是我的长辈。丈人，对长辈的尊称。行，辈。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v25",
+   "word": "嘉其义",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "赞许他这种合乎情理的做法。义，做事合乎情理。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v26",
+   "word": "厚赂",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "赠送丰厚的礼物。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v27",
+   "word": "假吏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "临时委任的使臣属官。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v28",
+   "word": "士",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "士卒。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v29",
+   "word": "斥候",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "侦察兵。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v30",
+   "word": "置币遗单于",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "备办了一些财物送给单于。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v31",
+   "word": "益",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "渐渐。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v32",
+   "word": "非汉所望也",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不是汉朝所期望的。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v33",
+   "word": "正要派遣使者送苏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（匈奴）正要派遣使者送苏武等人（返汉）",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v34",
+   "word": "相熟识有交情",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "相熟识，有交情",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v35",
+   "word": "私下拜访",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "私下拜访",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v36",
+   "word": "希望得到皇帝的赏赐幸",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "希望得到皇帝的赏赐。幸，希望。蒙，蒙受、得到",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v37",
+   "word": "财物",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "财物",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v38",
+   "word": "发动动手",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "发动，动手",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v39",
+   "word": "逃跑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "逃跑",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v40",
+   "word": "告发",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "告发",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v41",
+   "word": "指被活捉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指被活捉",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v42",
+   "word": "审理这个案件",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "审理这个案件",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v43",
+   "word": "担心以前的谈话",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "担心以前（与虞常）的谈话泄露。发，暴露、泄露",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v44",
+   "word": "把情况告诉苏武状情状",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "把情况告诉苏武。状，情状、情况",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v45",
+   "word": "牵连",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "牵连",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v46",
+   "word": "等到被侮辱以后才",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "等到被（匈奴）侮辱以后才死，更加对不起国家。见犯，指受到侮辱。重，更加",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v47",
+   "word": "牵扯",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "牵扯",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v48",
+   "word": "贵族大臣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "贵族大臣",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v49",
+   "word": "匈奴王号",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "匈奴王号",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v50",
+   "word": "应该让他们都投降降使",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "应该让他们都投降。降，使动用法，使……投降",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v51",
+   "word": "听取供词",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "听取供词",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v52",
+   "word": "污损了节操辜负了使命",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "污损了节操，辜负了使命",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v53",
+   "word": "坑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "坑",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v54",
+   "word": "没有火焰的微火",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "没有火焰的微火",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v55",
+   "word": "同搯",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同“ 搯（tāo）”， 叩击， 拍打。一说当作“焰”，熏",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v56",
+   "word": "又能呼吸",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "又能呼吸",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v57",
+   "word": "车这里用作动词用车载",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "车，这里用作动词，用车载送",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v58",
+   "word": "问候",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "问候",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v59",
+   "word": "逮捕监禁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "逮捕监禁",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v60",
+   "word": "渐渐痊愈",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "渐渐痊愈",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v61",
+   "word": "派使者通知苏武",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "派使者通知苏武",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v62",
+   "word": "会同判定虞常的罪论判",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "会同判定虞常的罪。论，判罪",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v63",
+   "word": "判处死罪当判处",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "判处死罪。当，判处",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v64",
+   "word": "相连坐一个人犯",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "相连坐（治罪）。一个人犯了罪，有关的人连同治罪，叫“连坐”或“相坐”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v65",
+   "word": "本来没有参与谋划",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "本来没有参与谋划",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v66",
+   "word": "说什么连坐",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "说什么连坐（治罪）？",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v67",
+   "word": "向苏武比画着要杀他拟",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "向苏武比画着要杀他。拟，比画",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v68",
+   "word": "你通过我投降",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "你通过我投降",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v69",
+   "word": "背叛主上背弃双亲畔",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "背叛主上，背弃双亲。畔，同“叛”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v70",
+   "word": "在异族那里做俘虏蛮夷",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "在异族那里做俘虏。蛮夷，古代指边远地区的民族",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v71",
+   "word": "即何以见汝为要见你",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即“何以见汝为”，要见你干什么？",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v72",
+   "word": "匈奴的灾难就要从杀死",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "匈奴的灾难，就要从（杀死）我苏武开始了",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v73",
+   "word": "不可威逼而致屈服",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不可威逼而致屈服",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v74",
+   "word": "囚禁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "囚禁",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v75",
+   "word": "断绝供应不给他喝的吃",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "断绝供应，不给他喝的、吃的",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v76",
+   "word": "下雪雨动词下",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "下雪。雨，动词，下",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v77",
+   "word": "咬嚼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "咬，嚼",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v78",
+   "word": "同毡毛一起吞下去旃同",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同毡毛一起吞下去。旃，同“毡”，毛织的毡毯",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v79",
+   "word": "公羊",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "公羊",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v80",
+   "word": "公羊生了小羊才能回乳",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "公羊生了小羊才能回。乳，生子。公羊不能生子，说明苏武永远不可能被放回",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v81",
+   "word": "拄着汉朝的旄节牧羊杖",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "拄着汉朝的旄节牧羊。杖，执、拄",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v82",
+   "word": "旄节上牦尾全部脱落",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "旄节上牦尾全部脱落",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v83",
+   "word": "结网一说网前应有",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "结网。一说，“网”前应有一“结”字",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v84",
+   "word": "纺制系在箭尾的丝绳",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "纺制系在箭尾的丝绳",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v85",
+   "word": "盛酒酪的器皿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "盛酒酪的器皿",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v86",
+   "word": "即丁灵匈奴族的一支卫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即丁灵，匈奴族的一支。卫律被封为丁灵王。丁令盗武牛羊，应是他所指使",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v87",
+   "word": "困顿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "困顿",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v88",
+   "word": "访求",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "访求",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v89",
+   "word": "一心向往想以礼相待",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一心向往，想以礼相待",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v90",
+   "word": "信义又能在",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（您对汉朝的）信义又能在哪里显示呢？意思是，有谁知道您的信义呢？见，同“现”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v91",
+   "word": "被判决为大不敬劾",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "被判决为“大不敬”。劾，判决",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v92",
+   "word": "您的母亲已去世太夫人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "您的母亲已去世。太夫人，称苏武的母亲。不幸，对去世的委婉说法",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v93",
+   "word": "县名在今陕西咸阳东",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "县名，在今陕西咸阳东",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v94",
+   "word": "改嫁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "改嫁",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v95",
+   "word": "妹妹",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "妹妹",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v96",
+   "word": "指苏武的三个孩子",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指苏武的三个孩子",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v97",
+   "word": "精神恍惚好像发狂一样",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "精神恍惚，好像发狂一样，痛心自己对不起汉朝",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v98",
+   "word": "关押在保宫保宫汉代囚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "关押在保宫。保宫，汉代囚禁犯罪大臣及其眷属的处所",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v99",
+   "word": "年纪老",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "年纪老",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v100",
+   "word": "法令没有定规",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "法令没有定规",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v101",
+   "word": "诛灭这里指全家杀尽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "诛灭，这里指全家杀尽",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v102",
+   "word": "还为谁呢",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "还为谁（守节）呢？",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v103",
+   "word": "不要再说什么了",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不要再说什么了",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v104",
+   "word": "栽培提拔",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "栽培，提拔",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v105",
+   "word": "官职升到列将列将一般",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "官职升到列将。列将，一般将军的总称。苏武的父亲苏建伐匈奴有功，封为游击将军、右将军",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v106",
+   "word": "爵位封为通侯通侯爵位",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "爵位封为通侯。通侯，爵位名。秦代置爵二十级，最高一级叫彻侯。汉朝继承秦制，后因避汉武帝刘彻讳改为通侯。苏建封为平陵侯",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v107",
+   "word": "一定",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "一定",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v108",
+   "word": "料想断定",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "料想，断定",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v109",
+   "word": "在您面前死去",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "在您面前死去",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v110",
+   "word": "告别离开决同诀",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "告别离开。决，同“诀”，辞别、告别",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v111",
+   "word": "看守他的人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "看守他的人",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v112",
+   "word": "责备",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "责备",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v113",
+   "word": "召集会见",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "召集会见",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1535:v114",
+   "word": "在始元六年",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "在始元六年（前81）",
+   "sourceSentence": ""
+  }
+ ]
+}

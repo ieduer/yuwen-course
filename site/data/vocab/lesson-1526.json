@@ -1,0 +1,439 @@
+{
+ "lessonId": "lesson-1526",
+ "title": "6 记念刘和珍君/ 鲁迅",
+ "mode": "modern-prose",
+ "builtAt": "2026-07-14T09:34:43.437Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 30,
+ "inventory": [
+  {
+   "id": "lesson-1526:v01",
+   "word": "桀骜",
+   "annotated": true,
+   "decision": "question",
+   "reason": "形容词，易误解为凶狠，实指倔强，需辨析。",
+   "contextMeaning": "性情倔强",
+   "sourceSentence": "总该是有些桀骜锋利的",
+   "type": "discrimination",
+   "question": "「总该是有些桀骜锋利的」中「桀骜」一词的意思是",
+   "options": [
+    "凶狠残暴",
+    "倔强不驯",
+    "傲慢无礼",
+    "果断勇敢"
+   ],
+   "answerIndex": 1,
+   "explanation": "桀骜指性情倔强，不驯服，此处指学生反抗权威的气节。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《记念刘和珍君》教材注释"
+   ],
+   "location": {
+    "charIndex": 1351
+   }
+  },
+  {
+   "id": "lesson-1526:v02",
+   "word": "喋血",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，此处形容惨死，需结合语境理解。",
+   "contextMeaning": "形容杀人多而血流遍地",
+   "sourceSentence": "况且始终微笑着的和蔼的刘和珍君,更何至于无端在府门前喋血呢",
+   "type": "interpretation",
+   "question": "文中「喋血」一词的正确语境义是",
+   "options": [
+    "流血过多",
+    "口吐鲜血",
+    "惨遭杀害",
+    "血染战袍"
+   ],
+   "answerIndex": 2,
+   "explanation": "根据注释，喋血形容杀人多而血流遍地，此处指在惨案中遇害。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《记念刘和珍君》教材注释"
+   ],
+   "location": {
+    "charIndex": 1636
+   }
+  },
+  {
+   "id": "lesson-1526:v03",
+   "word": "立仆",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，考察文言实词“仆”的读音与意义。",
+   "contextMeaning": "立刻倒下",
+   "sourceSentence": "同去的张静淑君想扶起她,中了四弹,其一是手枪,立仆",
+   "type": "pronunciation",
+   "question": "「立仆」中「仆」的正确读音及意思是",
+   "options": [
+    "pú，仆人",
+    "pū，倒下",
+    "pú，倒下",
+    "pū，仆人"
+   ],
+   "answerIndex": 1,
+   "explanation": "仆在此处读pū，意为倒下。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《记念刘和珍君》教材注释"
+   ],
+   "location": {
+    "charIndex": 1951
+   }
+  },
+  {
+   "id": "lesson-1526:v04",
+   "word": "苟活",
+   "annotated": false,
+   "decision": "question",
+   "reason": "体现鲁迅自我反思的关键词，理解此词对把握文意至关重要。",
+   "contextMeaning": "勉强活着",
+   "sourceSentence": "她不是“苟活到现在的我”的学生,是为了中国而死的中国的青年",
+   "type": "contextual-choice",
+   "question": "文中作者自称「苟活到现在的我」，其主要情感色彩是",
+   "options": [
+    "谦虚自嘲",
+    "对生存状态的羞愧与自责",
+    "对长寿的庆幸",
+    "对平庸生活的满足"
+   ],
+   "answerIndex": 1,
+   "explanation": "鲁迅在此处表达了对自己在学生牺牲后仍活着的不安与痛苦，带有强烈的自责感。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1147
+   }
+  },
+  {
+   "id": "lesson-1526:v05",
+   "word": "不惮",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文言用法，考察“惮”字在文言语境中的准确含义。",
+   "contextMeaning": "怕",
+   "sourceSentence": "我向来是不惮以最坏的恶意,来推测中国人的",
+   "type": "usage",
+   "question": "「我向来是不惮以最坏的恶意」中「惮」的意思是",
+   "options": [
+    "避讳",
+    "忌惮、怕",
+    "计算",
+    "担心"
+   ],
+   "answerIndex": 1,
+   "explanation": "“不惮”即“不怕”，指不怕以最坏的恶意去推测。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1594
+   }
+  },
+  {
+   "id": "lesson-1526:v06",
+   "word": "殒身不恤",
+   "annotated": true,
+   "decision": "question",
+   "reason": "成语考查，重点理解“恤”的含义。",
+   "contextMeaning": "顾虑",
+   "sourceSentence": "至于这一回在弹雨中互相救助,虽殒身不恤的事实",
+   "type": "substitution",
+   "question": "「殒身不恤」中「恤」字的意思是",
+   "options": [
+    "怜悯",
+    "救助",
+    "顾虑",
+    "悲伤"
+   ],
+   "answerIndex": 2,
+   "explanation": "恤意为顾虑，殒身不恤即牺牲生命也不顾虑/不惜。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《记念刘和珍君》教材注释"
+   ],
+   "location": {
+    "charIndex": 2645
+   }
+  },
+  {
+   "id": "lesson-1526:v07",
+   "word": "有始无终",
+   "annotated": false,
+   "decision": "question",
+   "reason": "成语用法，理解作者对自身编辑刊物状况的评价。",
+   "contextMeaning": "指做事不能坚持到底",
+   "sourceSentence": "凡我所编辑的期刊,大概是因为往往有始无终之故罢",
+   "type": "interpretation",
+   "question": "文中「有始无终」是指",
+   "options": [
+    "做事不负责任",
+    "刊物往往中途停刊",
+    "没有明确的编辑目标",
+    "刊物内容缺乏连贯性"
+   ],
+   "answerIndex": 1,
+   "explanation": "根据上下文，指鲁迅编辑的期刊往往因为外部环境等原因无法长久维持。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 554
+   }
+  },
+  {
+   "id": "lesson-1526:v08",
+   "word": "寥落",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "注释明确，词义简单，属于理解性词汇，无需单独命题。",
+   "contextMeaning": "稀少",
+   "sourceSentence": "销行一向就甚为寥落",
+   "location": {
+    "charIndex": 578
+   }
+  },
+  {
+   "id": "lesson-1526:v09",
+   "word": "菲薄",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "注释明确，属于形容词语境义，不构成考点难点。",
+   "contextMeaning": "微薄",
+   "sourceSentence": "就将这作为后死者的菲薄的祭品",
+   "location": {
+    "charIndex": 854
+   }
+  },
+  {
+   "id": "lesson-1526:v10",
+   "word": "偏安",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "教材注释已详尽解释为特殊历史背景下的临时租房，非通用字词考点。",
+   "contextMeaning": "被迫离开原来的地方，暂居另处",
+   "sourceSentence": "待到偏安于宗帽胡同,赁屋授课之后",
+   "location": {
+    "charIndex": 1377
+   }
+  },
+  {
+   "id": "lesson-1526:v11",
+   "word": "中华民国十五年",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "1926年。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v12",
+   "word": "段祺瑞执政府",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "1924年第二次“直奉战争”，直系军阀失败，奉系军阀推段祺瑞为北洋政府临时执政。段祺瑞（1865—1936），北洋军阀皖系首领，曾几度把持北洋军阀的中央政权，1926年4月被冯玉祥驱逐下台。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v13",
+   "word": "杨德群",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "湖南湘阴人，北京女子师范大学国文系预科学生。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v14",
+   "word": "程君",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指程毅志，湖北孝感人，北京女子师范大学教育系学生。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v15",
+   "word": "莽原",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "鲁迅编辑的一种文艺刊物。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v16",
+   "word": "那里",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "现在写作“哪里”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v17",
+   "word": "长歌当哭",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是用写文章来当作哭泣。长歌，引吭高歌，这里指写文章。当，当作。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v18",
+   "word": "出离",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "超出。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v19",
+   "word": "深味",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "深深地体会。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v20",
+   "word": "直面惨淡的人生",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "面对反动派统治下悲惨凄凉的黑暗现实。“直面”和下句的“正视”，都表示正面注视、决不回避的意思。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v21",
+   "word": "造化",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指自然界。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v22",
+   "word": "微漠",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "依稀，淡薄。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v23",
+   "word": "杨荫榆",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "江苏无锡人。1924年起任北京女子师范大学校长，以封建家长作风治校，阻挠学生运动，引起师生强烈抗争，后被免职。1938年被侵华日军杀害。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v24",
+   "word": "广有羽翼",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "到处都有帮凶。羽翼，指党羽、帮凶。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v25",
+   "word": "学校恢复旧观",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指1925年11月30日北京女子师范大学迁回原址，宣告复校。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v26",
+   "word": "引退",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "退避。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v27",
+   "word": "这样的罗网",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "鲁迅在《可惨与可笑》一文中指出：“三月十八日的惨杀事件，在事后看来，分明是政府布成的罗网，……”在《空谈》一文中指出：“四十七个男女青年的生命， 完全是被骗去的，简直是诱杀。”",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v28",
+   "word": "张静淑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "湖南长沙人，北京女子师范大学教育系学生。受伤后经医治，幸得不死。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v29",
+   "word": "沉勇",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "沉着而勇敢。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v30",
+   "word": "惩创",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "惩罚，惩治。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v31",
+   "word": "无恶意的闲人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指一般庸俗的市民。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v32",
+   "word": "有恶意的闲人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指林学衡、陈源等人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v33",
+   "word": "人类的血战前行的历史",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "人类社会在流血斗争中发展的历史。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1526:v34",
+   "word": "但请愿是不在其中的",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "为了积聚革命的力量，以有限的代价去换取更大的胜利，鲁迅是不主张采用向反动派请愿这种斗争方式的。参看他在写《记念刘和珍君》后第二天写的《空谈》一文。",
+   "sourceSentence": ""
+  }
+ ]
+}

@@ -2,6 +2,13 @@
 .cache/
 .wrangler/
 .playwright-cli/
+.claude/
 node_modules/
 __pycache__/
 *.pyc
+backups/
+output/
+site/data/cache/
+.env
+.env.*
+!.env.example

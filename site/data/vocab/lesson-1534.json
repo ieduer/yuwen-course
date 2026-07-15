@@ -1,0 +1,1185 @@
+{
+ "lessonId": "lesson-1534",
+ "title": "9 屈原列传/ 司马迁",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:35:07.278Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 96,
+ "inventory": [
+  {
+   "id": "lesson-1534:v01",
+   "word": "害",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此处为嫉妒，易误解为伤害",
+   "contextMeaning": "嫉妒",
+   "sourceSentence": "争宠而心害其能",
+   "type": "contextual-choice",
+   "question": "「争宠而心害其能」中「害」的意思是",
+   "options": [
+    "伤害",
+    "妨碍",
+    "嫉妒",
+    "担忧"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中指上官大夫因嫉妒屈原的才能而心生怨恨。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 104
+   }
+  },
+  {
+   "id": "lesson-1534:v02",
+   "word": "伐",
+   "annotated": true,
+   "decision": "question",
+   "reason": "常见文言实词，在特定语境下为夸耀",
+   "contextMeaning": "夸耀",
+   "sourceSentence": "平伐其功",
+   "type": "contextual-choice",
+   "question": "「平伐其功」中「伐」的意思是",
+   "options": [
+    "砍伐",
+    "攻打",
+    "夸耀",
+    "停止"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处指屈原自夸功劳，符合文意。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 168
+   }
+  },
+  {
+   "id": "lesson-1534:v03",
+   "word": "疾",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此处为痛心，非疾病",
+   "contextMeaning": "痛心",
+   "sourceSentence": "屈平疾王听之不聪也",
+   "type": "contextual-choice",
+   "question": "「屈平疾王听之不聪也」中「疾」的意思是",
+   "options": [
+    "疾病",
+    "痛心",
+    "快",
+    "恨"
+   ],
+   "answerIndex": 1,
+   "explanation": "屈原对怀王的昏庸感到痛心。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 194
+   }
+  },
+  {
+   "id": "lesson-1534:v04",
+   "word": "离",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字，且为古今异义，极易混淆",
+   "contextMeaning": "同“罹”，遭受",
+   "sourceSentence": "离骚”者,犹离忧也",
+   "type": "gu-jin",
+   "question": "下列对「离骚」中「离」的解释，正确的一项是",
+   "options": [
+    "离开",
+    "距离",
+    "遭遇",
+    "背离"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中注“离，同‘罹’，遭受”，指遭受忧患。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 238
+   }
+  },
+  {
+   "id": "lesson-1534:v05",
+   "word": "穷",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，此处指处境艰难困窘，非贫穷",
+   "contextMeaning": "处境困窘",
+   "sourceSentence": "人穷则反本",
+   "type": "gu-jin",
+   "question": "「人穷则反本」中「穷」的含义与下列哪项一致？",
+   "options": [
+    "穷困潦倒",
+    "穷尽一生",
+    "穷山恶水",
+    "穷凶极恶"
+   ],
+   "answerIndex": 0,
+   "explanation": "此处指身处绝境、困顿，与“穷困潦倒”含义一致。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 266
+   }
+  },
+  {
+   "id": "lesson-1534:v06",
+   "word": "见",
+   "annotated": false,
+   "decision": "question",
+   "reason": "虚词用法，被动标志，核心考点",
+   "contextMeaning": "被",
+   "sourceSentence": "信而见疑,忠而被谤",
+   "type": "usage",
+   "question": "「信而见疑」中「见」的用法与下列哪项相同？",
+   "options": [
+    "见贤思齐",
+    "却看妻子愁何在，漫卷诗书喜欲狂",
+    "欲见其人",
+    "内惑于郑袖，外欺于张仪"
+   ],
+   "answerIndex": 1,
+   "explanation": "“见”在此处为被动标志，“见疑”即被怀疑。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 324
+   }
+  },
+  {
+   "id": "lesson-1534:v07",
+   "word": "绌",
+   "annotated": true,
+   "decision": "question",
+   "reason": "通假字，需掌握其本字含义",
+   "contextMeaning": "同“黜”，罢免",
+   "sourceSentence": "屈平既绌",
+   "type": "substitution",
+   "question": "「屈平既绌」中「绌」可用下列哪个词替换？",
+   "options": [
+    "减少",
+    "罢免",
+    "增加",
+    "困顿"
+   ],
+   "answerIndex": 1,
+   "explanation": "教材注：绌，同“黜”，指被罢免官职。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《说文解字》"
+   ],
+   "location": {
+    "charIndex": 534
+   }
+  },
+  {
+   "id": "lesson-1534:v08",
+   "word": "详",
+   "annotated": false,
+   "decision": "question",
+   "reason": "通假字，易误解为详细",
+   "contextMeaning": "同“佯”，假装",
+   "sourceSentence": "乃令张仪详去秦",
+   "type": "contextual-choice",
+   "question": "「乃令张仪详去秦」中「详」的意思是",
+   "options": [
+    "详细",
+    "假装",
+    "商量",
+    "打算"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处为通假用法，即“佯装离开”。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 557
+   }
+  },
+  {
+   "id": "lesson-1534:v09",
+   "word": "迁",
+   "annotated": true,
+   "decision": "question",
+   "reason": "词义演变，此处为贬谪，非一般迁徙",
+   "contextMeaning": "放逐，贬谪",
+   "sourceSentence": "顷襄王怒而迁之",
+   "type": "contextual-choice",
+   "question": "「顷襄王怒而迁之」中「迁」的意思是",
+   "options": [
+    "搬迁",
+    "调动",
+    "放逐",
+    "升迁"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中指屈原被贬谪到偏远地区。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 1295
+   }
+  },
+  {
+   "id": "lesson-1534:v10",
+   "word": "形容",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，此处指形体容貌",
+   "contextMeaning": "形体容貌",
+   "sourceSentence": "颜色憔悴,形容枯槁",
+   "type": "gu-jin",
+   "question": "「形容枯槁」中「形容」在现代汉语中通常指「外貌描述」，但在文中指",
+   "options": [
+    "形体和容貌",
+    "描写叙述",
+    "形状样貌",
+    "精神状态"
+   ],
+   "answerIndex": 0,
+   "explanation": "文中为两个词：形（身形）、容（面容）。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 1318
+   }
+  },
+  {
+   "id": "lesson-1534:v11",
+   "word": "凝滞",
+   "annotated": false,
+   "decision": "question",
+   "reason": "抽象概念，理解屈原人格的关键",
+   "contextMeaning": "拘泥、执着",
+   "sourceSentence": "不凝滞于物",
+   "type": "interpretation",
+   "question": "渔父劝屈原「不凝滞于物」，其深层含义是",
+   "options": [
+    "不要在物体上停留",
+    "不要拘泥于某种固定的原则或事物",
+    "不要在江边徘徊",
+    "不要执着于写作"
+   ],
+   "answerIndex": 1,
+   "explanation": "指不要被外界事物所束缚，要学会变通。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 1393
+   }
+  },
+  {
+   "id": "lesson-1534:v12",
+   "word": "短",
+   "annotated": true,
+   "decision": "question",
+   "reason": "词义活用，此处指诋毁",
+   "contextMeaning": "诋毁",
+   "sourceSentence": "短屈原于顷襄王",
+   "type": "contextual-choice",
+   "question": "「短屈原于顷襄王」中「短」的意思是",
+   "options": [
+    "时间短",
+    "距离近",
+    "诋毁",
+    "截断"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处为动词，指说坏话、诋毁他人。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 1287
+   }
+  },
+  {
+   "id": "lesson-1534:v13",
+   "word": "祖",
+   "annotated": true,
+   "decision": "question",
+   "reason": "词义演变，此处为效法",
+   "contextMeaning": "效法、继承",
+   "sourceSentence": "然皆祖屈原之从容辞令",
+   "type": "contextual-choice",
+   "question": "「然皆祖屈原之从容辞令」中「祖」的意思是",
+   "options": [
+    "祖先",
+    "效法",
+    "阻碍",
+    "推崇"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处意为继承前人做法，即效法。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 1586
+   }
+  },
+  {
+   "id": "lesson-1534:v14",
+   "word": "去就",
+   "annotated": true,
+   "decision": "question",
+   "reason": "重要双音词，指政治选择",
+   "contextMeaning": "离官去职或在朝任职",
+   "sourceSentence": "轻去就",
+   "type": "contextual-choice",
+   "question": "「轻去就」中「去就」指的是",
+   "options": [
+    "去向与停留",
+    "离职与任职",
+    "去留与进退",
+    "辞职与归家"
+   ],
+   "answerIndex": 1,
+   "explanation": "指在官场上的进退抉择。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 1717
+   }
+  },
+  {
+   "id": "lesson-1534:v15",
+   "word": "博闻强志",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "成语，学生应掌握其含义，出题意义不大",
+   "contextMeaning": "知识广博，长于记忆",
+   "sourceSentence": "博闻强志,明于治乱",
+   "location": {
+    "charIndex": 48
+   }
+  },
+  {
+   "id": "lesson-1534:v16",
+   "word": "属",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "常用词，此处为撰写，在教材中已详注",
+   "contextMeaning": "撰写",
+   "sourceSentence": "屈平属草稿未定",
+   "location": {
+    "charIndex": 122
+   }
+  },
+  {
+   "id": "lesson-1534:v17",
+   "word": "反覆",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "词义固定，此处指回归，已在教材注中说明",
+   "contextMeaning": "回归",
+   "sourceSentence": "其存君兴国而欲反覆之",
+   "location": {
+    "charIndex": 1093
+   }
+  },
+  {
+   "id": "lesson-1534:v18",
+   "word": "左徒",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "官名。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v19",
+   "word": "明于治乱",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "明晓国家治乱（的道理）。治，指国家安定。乱，指国家动荡。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v20",
+   "word": "娴于辞令",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "擅长外交辞令。娴，熟练、熟悉。辞令，应对的言辞。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v21",
+   "word": "图议",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "谋划计议。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v22",
+   "word": "任",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "信任。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v23",
+   "word": "上官大夫与之同列",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "上官大夫和屈原地位相同。上官，复姓。大夫，官名。列，朝列、班列。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v24",
+   "word": "害其能",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "嫉妒屈原的才能。害，嫉妒。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v25",
+   "word": "宪令",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "国家法令。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v26",
+   "word": "夺",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "强取。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v27",
+   "word": "曰以为",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "“曰”和“以为”是同义连用。一说，“曰”为衍文。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v28",
+   "word": "疾王听之不聪",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "痛心于楚怀王惑于小人之言，不能明辨是非。疾，痛心。聪，明察。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v29",
+   "word": "谗谄之蔽明",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "说人坏话、奉承献媚的小人混淆黑白，蒙蔽怀王。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v30",
+   "word": "邪曲之害公",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "品行不正的小人损害国家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v31",
+   "word": "方正之不容",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "端方正直的人不为（昏君谗臣）所容。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v32",
+   "word": "离忧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "遭遇忧患。离，同“罹”，遭受。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v33",
+   "word": "人穷则反本",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "人困窘没有出路，就会追念根本。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v34",
+   "word": "倦极",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "疲倦困苦。极，疲困。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v35",
+   "word": "惨怛",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "忧伤，悲痛。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v36",
+   "word": "信而见疑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "诚实不欺却被怀疑。见，被。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v37",
+   "word": "盖自怨生也",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "大概是由怨愤引起的。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v38",
+   "word": "上称帝喾",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "往远处说提到帝喾（传说中的五帝之一）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v39",
+   "word": "下道齐桓",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "往近处说提到齐桓公。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v40",
+   "word": "汤武",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即商汤、周武王。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v41",
+   "word": "以刺世事",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（称引古代帝王）以此讥刺当世的事。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v42",
+   "word": "广崇",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "广大崇高。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v43",
+   "word": "条贯",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "条理。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v44",
+   "word": "靡",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "无，没有。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v45",
+   "word": "约",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "简约。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v46",
+   "word": "微",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "含蓄隐晦。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v47",
+   "word": "其称文小而其指极大",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "其文辞描写的是寻常事物，但是它的意旨却极为博大（因为关系到国家的治乱）。指，同“旨”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v48",
+   "word": "举类迩而见义远",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "列举的事例浅近，而表达的意思很深远。类，事物。迩，近。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v49",
+   "word": "称物芳",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指《离骚》里面多用美人香草来比喻。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v50",
+   "word": "故死而不容",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "所以至死不容于世。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v51",
+   "word": "自疏濯淖污泥之中",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "自动地远离污浊。濯、淖、污、泥，都是“污浊”的意思。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v52",
+   "word": "蝉蜕于浊秽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "像蝉脱壳那样摆脱污秽的境地。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v53",
+   "word": "不获世之滋垢",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不为尘世的污垢所辱。获，辱、被辱。滋，黑。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v54",
+   "word": "皭然泥而不滓者也",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思是，屈原是出淤泥而不染、保持高洁品德的人。皭，清白、洁净。泥，同“涅”，染黑。滓，污染。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v55",
+   "word": "推",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "推赞，推许。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v56",
+   "word": "齐与楚从亲",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "齐国和楚国合纵相亲。从，同“纵”，合纵，联合抗秦。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v57",
+   "word": "惠王",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "秦惠王。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v58",
+   "word": "绝齐",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "与齐国断绝外交关系。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v59",
+   "word": "商於",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "地名，在今河南淅（xī）川西南。一说，指商（今陕西丹凤西北商镇）、於（在今河南西峡境）两邑及两邑之间的地区，即今丹江中下游一带。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v60",
+   "word": "使使如秦受地",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "派使者到秦国接受秦国答应割让的土地。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v61",
+   "word": "丹淅",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "丹水、淅水一带。丹水发源于陕西商洛，东入河南与淅水汇合，至湖北丹江口入汉水。淅水发源于河南卢氏，流经内乡、淅川等地。前312年，秦军在丹阳（今河南西峡西丹水以北地区）大败楚军。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v62",
+   "word": "匄",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "读gài。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v63",
+   "word": "蓝田",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "在今湖北钟祥西北。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v64",
+   "word": "邓",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "在今湖北襄阳北。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v65",
+   "word": "明年",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "第二年。指楚怀王十八年（前311）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v66",
+   "word": "又因厚币用事者臣靳尚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "又趁机送厚礼给楚国当权的臣子靳尚。因，趁机。用事，当权。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v67",
+   "word": "设诡辩",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "说假话。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v68",
+   "word": "顾反",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "回来。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v69",
+   "word": "眜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "读mò。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v70",
+   "word": "武关",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "秦国的南关，在今陕西丹凤东。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v71",
+   "word": "咎",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "怪罪，责怪。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v72",
+   "word": "嫉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "恨。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v73",
+   "word": "存",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "思念。一说，保全。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v74",
+   "word": "三致志",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "再三表达（这种）意愿。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v75",
+   "word": "自为",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "帮助自己。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v76",
+   "word": "相随属",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "接连出现。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v77",
+   "word": "治国",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "安定太平的国家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v78",
+   "word": "六郡",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指汉中一带。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v79",
+   "word": "三闾大夫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "官名。屈原此前曾任此职。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v80",
+   "word": "是以见放",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "因此被放逐。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v81",
+   "word": "圣人",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这里指聪明通达的人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v82",
+   "word": "不凝滞于物",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不为外物所拘束。凝滞，拘泥、执着。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v83",
+   "word": "与世推移",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "随世道变化而变化。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v84",
+   "word": "随其流而扬其波",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指随从世俗，与之同流。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v85",
+   "word": "其糟而啜其醨",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "吃众人的酒糟，喝众人的薄酒。意思是与众人同醉。，吃。啜，喝。醨，薄酒。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v86",
+   "word": "怀瑾握瑜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "比喻保持高洁美好的节操志向。瑾、瑜，都是美玉。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v87",
+   "word": "弹冠",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "弹去帽子上的灰尘。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v88",
+   "word": "察察",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "洁净的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v89",
+   "word": "汶汶",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "浑浊的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v90",
+   "word": "常流",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "即“长流”，指江水。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v91",
+   "word": "晧晧之白",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "比喻品德的高尚纯洁。晧，同“皓”。晧晧，皎洁的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v92",
+   "word": "温蠖",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "尘垢。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v93",
+   "word": "汨罗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "江名，在湖南东北部。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v94",
+   "word": "辞",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "文辞，这里指文学。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v95",
+   "word": "从容",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "委婉得体。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v96",
+   "word": "太史公曰",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "太史公是司马迁的自称。后面的文字是司马迁对历史人物和历史事件的评论、总结。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v97",
+   "word": "天问招魂哀郢",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "均为屈原的作品。《哀郢》是《九章》中的一篇。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v98",
+   "word": "适",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "到某地去。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v99",
+   "word": "贾生吊之",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指西汉政论家、文学家贾谊路过湘水，写《吊屈原赋》凭吊屈原。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v100",
+   "word": "彼其材",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "他那样的才能。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v101",
+   "word": "服鸟赋",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "贾谊的赋作，借与服鸟问答抒发自己忧愤不平的情感。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v102",
+   "word": "同死生",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "将生死同等看待。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1534:v103",
+   "word": "爽然自失",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "茫然若有所失。",
+   "sourceSentence": ""
+  }
+ ]
+}

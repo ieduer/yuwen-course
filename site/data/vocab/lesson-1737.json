@@ -1,0 +1,326 @@
+{
+ "lessonId": "lesson-1737",
+ "title": "8 中国建筑的特征 梁思成",
+ "mode": "science",
+ "builtAt": "2026-07-14T09:28:15.982Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 6318,
+ "annotationCount": 16,
+ "inventory": [
+  {
+   "id": "lesson-1737:v01",
+   "word": "结束",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，文中特指收束，易被现代汉语中“终止”的含义误导。",
+   "contextMeaning": "收束",
+   "sourceSentence": "怎样结束瓦顶",
+   "type": "contextual-choice",
+   "question": "文中“怎样结束瓦顶”中“结束”的意思是",
+   "options": [
+    "做完、停止",
+    "收束、结尾",
+    "解决、了结",
+    "连接、组合"
+   ],
+   "answerIndex": 1,
+   "explanation": "在建筑术语中，指处理构件收头或收尾的工艺，非现代汉语中“终止”之意。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2300
+   }
+  },
+  {
+   "id": "lesson-1737:v02",
+   "word": "文法",
+   "annotated": false,
+   "decision": "question",
+   "reason": "本文的核心隐喻，理解该词的语境义是把握全篇论证逻辑的关键。",
+   "contextMeaning": "指建筑的法式、惯例和规则",
+   "sourceSentence": "我们可以叫它作中国建筑的“文法”。",
+   "type": "interpretation",
+   "question": "作者将中国建筑的“法式”比作“文法”，主要目的是为了说明",
+   "options": [
+    "中国建筑具有严密的逻辑性和语言般的修辞美",
+    "中国建筑的构成规则像语言一样具有规律性和可遵循性",
+    "中国建筑的构件必须像文法一样严格排列，不能变动",
+    "中国建筑的创作需要具备深厚的文学素养和文法知识"
+   ],
+   "answerIndex": 1,
+   "explanation": "作者以语言学类比建筑学，强调建筑结构有其内在的、被民族所认可的组织规则。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2145
+   }
+  },
+  {
+   "id": "lesson-1737:v03",
+   "word": "词汇",
+   "annotated": false,
+   "decision": "question",
+   "reason": "本文核心隐喻，与“文法”对应，理解建筑构件如何成为“词汇”是理解全文的关键。",
+   "contextMeaning": "指建筑的构件和元素",
+   "sourceSentence": "至如梁、柱、枋、檩、门、窗、墙、瓦、槛、阶、栏杆、隔扇、斗拱、正脊、垂脊、正吻、戗兽、正房、厢房、游廊、庭院、夹道等等,那就是我们建筑上的“词汇",
+   "type": "evidence",
+   "question": "根据文意，下列哪项不属于中国建筑“词汇”的范畴？",
+   "options": [
+    "斗拱",
+    "隔扇",
+    "文法",
+    "正吻"
+   ],
+   "answerIndex": 2,
+   "explanation": "文法是规则，词汇是具体的构件，二者属于不同范畴。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2502
+   }
+  },
+  {
+   "id": "lesson-1737:v04",
+   "word": "墁",
+   "annotated": false,
+   "decision": "question",
+   "reason": "专业性较强的动词，考察语境理解。",
+   "contextMeaning": "铺设地面",
+   "sourceSentence": "主要部分一般地都有砖石墁地",
+   "type": "contextual-choice",
+   "question": "“主要部分一般地都有砖石墁地”中“墁”的意思是",
+   "options": [
+    "堆砌",
+    "覆盖",
+    "铺设",
+    "装饰"
+   ],
+   "answerIndex": 2,
+   "explanation": "墁地指用砖石等材料铺筑地面。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 619
+   }
+  },
+  {
+   "id": "lesson-1737:v05",
+   "word": "小品",
+   "annotated": false,
+   "decision": "question",
+   "reason": "语境义与现代文学体裁“小品文”不同，考察学生对文中建筑类比的理解。",
+   "contextMeaning": "指规模较小、非宏大的建筑作品",
+   "sourceSentence": "建筑的“文章”也可因不同的命题,有“大文章”或“小品",
+   "type": "contextual-choice",
+   "question": "文中将建筑比作文章，其中“小品”一词指的是",
+   "options": [
+    "一种短小精悍的文学体裁",
+    "指山亭、水榭等规模较小的建筑",
+    "指装饰性的牌楼或影壁",
+    "指制作精良、具有观赏性的构件"
+   ],
+   "answerIndex": 1,
+   "explanation": "文中明确指出“小品”如山亭、水榭、一轩、一楼，指规模较小的建筑类型。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 2713
+   }
+  },
+  {
+   "id": "lesson-1737:v06",
+   "word": "大同小异",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频成语，在此语境下精准描述了建筑体系的分布关系。",
+   "contextMeaning": "大体相同，略有差异",
+   "sourceSentence": "这些地区的建筑和中国中心地区的建筑,或是同属于一个体系,或是大同小异,如弟兄之同属于一家的关系",
+   "type": "discrimination",
+   "question": "下列对“大同小异”在文中的含义理解最准确的一项是",
+   "options": [
+    "完全相同，没有任何区别",
+    "基本特征一致，但在细部处理或风格上有细微差异",
+    "虽然属于同一体系，但外表看起来完全不同",
+    "因为地理位置不同，导致建筑结构根本不同"
+   ],
+   "answerIndex": 1,
+   "explanation": "文中用“弟兄之同属于一家”比喻，强调体系的统一性与地域表现的差异性。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 203
+   }
+  },
+  {
+   "id": "lesson-1737:v07",
+   "word": "葱岭",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "教材已详细注释为地理名词，属于常识性背景，无需单独出题考查词义。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v08",
+   "word": "如鸟斯革，如翚斯飞",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "涉及文言引用与典故，教材注释详尽，重点在于理解其对屋顶特征的形容，而非字词辨析。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v09",
+   "word": "可译性",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "这是本文论证的核心概念，属于理解层面的抽象术语，不属于字词考查范畴。",
+   "contextMeaning": "",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v10",
+   "word": "葱岭古山脉名包括帕米",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "葱岭 古山脉名，包括帕米尔高原、西昆仑山等。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v11",
+   "word": "个别单个单独",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "个别 单个，单独。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v12",
+   "word": "厢厢房在正房前面两旁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "厢 厢房，在正房前面两旁的房屋。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v13",
+   "word": "耳耳房跟正房相连的两",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "耳 耳房，跟正房相连的两侧的小房屋，也指厢房两旁的小屋。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v14",
+   "word": "墁用砖石等",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "墁（màn） 用砖、石等铺地面。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v15",
+   "word": "如鸟斯革如翚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "如鸟斯革，如翚（huī）斯飞 语出《诗经·小雅·斯干》。意思是屋宇高扬如同鸟翅，屋檐华美上翘，如同五彩野鸡展翅高飞。斯，语气助词。革，翅膀。翚，羽毛具五彩的野鸡。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v16",
+   "word": "额枋檐柱之间的联系梁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "额枋 檐柱之间的联系梁，用以承托其上的斗拱。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v17",
+   "word": "蚂蚱头与下文的霸王拳",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "蚂蚱头 与下文的“霸王拳”“六分头”“菊花头”“三福云”等都是斗拱的一些部件（如昂）的端头雕饰名称。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v18",
+   "word": "昂斗拱中斜置的构件起",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "昂 斗拱中斜置的构件，起斜撑或杠杆作用，有“下昂”“上昂”之分，两层昂称“重昂”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v19",
+   "word": "瓦当筒瓦的头部上面多",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "瓦当 筒瓦的头部，上面多有装饰性的文字、图案。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v20",
+   "word": "五种典范这里指希腊罗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "五种典范 这里指希腊、罗马建筑体系中的五种常见柱式，分别是塔斯干、多立克、爱奥尼、科林斯和混合式。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v21",
+   "word": "结束这里是收束的意",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "结束 这里是“收束”的意思。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v22",
+   "word": "隔扇也称格扇长窗",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "隔扇 也称“格扇”“长窗”，用木制成的柱与柱之间的隔断窗，周围有框架，中间划分为花心、绦环板、裙板等。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v23",
+   "word": "垂脊也称斜脊与正",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "垂脊 也称“斜脊”，与正脊相交，沿屋面坡度向下的脊。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v24",
+   "word": "戗兽戗脊",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "戗（qiàng）兽 戗脊上的兽形装饰构件。戗脊，支撑垂脊的斜向或檐角屋脊。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1737:v25",
+   "word": "天坛皇穹宇原名泰神殿",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "天坛皇穹宇 原名“泰神殿”，位于北京天坛圜（yuán）丘坛北面，为圆形攒尖顶建筑，用于平日收藏、供奉祭天大典所用的神牌。",
+   "sourceSentence": ""
+  }
+ ]
+}

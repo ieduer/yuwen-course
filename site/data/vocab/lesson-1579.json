@@ -1,0 +1,1012 @@
+{
+ "lessonId": "lesson-1579",
+ "title": "归去来兮辞并序/ 陶渊明",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:39:55.136Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 72,
+ "inventory": [
+  {
+   "id": "lesson-1579:v01",
+   "word": "术",
+   "annotated": true,
+   "decision": "question",
+   "reason": "考查文言实词在特定语境下的义项，涉及生计规划，是理解作者贫困背景的关键",
+   "contextMeaning": "营生的本领",
+   "sourceSentence": "生生所资,未见其术",
+   "type": "contextual-choice",
+   "question": "「生生所资，未见其术」中「术」的意思是",
+   "options": [
+    "法术",
+    "营生的本领",
+    "艺术",
+    "学术"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处指维持生计的方法或本领。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 167
+   }
+  },
+  {
+   "id": "lesson-1579:v02",
+   "word": "矫厉",
+   "annotated": true,
+   "decision": "question",
+   "reason": "形容词活用或词组意义，准确理解此词有助于把握作者辞官的动机",
+   "contextMeaning": "造作勉强",
+   "sourceSentence": "质性自然,非矫厉所得",
+   "type": "contextual-choice",
+   "question": "「质性自然，非矫厉所得」中「矫厉」的意思是",
+   "options": [
+    "矫正严厉",
+    "造作勉强",
+    "刚直不阿",
+    "改变本性"
+   ],
+   "answerIndex": 1,
+   "explanation": "指违背本性的造作勉强。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 276
+   }
+  },
+  {
+   "id": "lesson-1579:v03",
+   "word": "稔",
+   "annotated": false,
+   "decision": "question",
+   "reason": "量词用法，考查对古汉语农耕文化词汇的掌握",
+   "contextMeaning": "庄稼成熟一次，引申为一年",
+   "sourceSentence": "犹望一稔,当敛裳宵逝",
+   "type": "contextual-choice",
+   "question": "「犹望一稔，当敛裳宵逝」中「稔」的意思是",
+   "options": [
+    "成熟",
+    "一年",
+    "收获",
+    "庄稼"
+   ],
+   "answerIndex": 1,
+   "explanation": "古语中常以庄稼一熟为一年。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 322
+   }
+  },
+  {
+   "id": "lesson-1579:v04",
+   "word": "奚",
+   "annotated": true,
+   "decision": "question",
+   "reason": "高频文言疑问代词，语境中表示反问，影响情感色彩理解",
+   "contextMeaning": "何，为什么",
+   "sourceSentence": "既自以心为形役,奚惆怅而独悲",
+   "type": "contextual-choice",
+   "question": "「奚惆怅而独悲」中「奚」的意思是",
+   "options": [
+    "哪里",
+    "为什么",
+    "什么",
+    "怎么"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处为疑问代词，表反问，意为为什么。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 401
+   }
+  },
+  {
+   "id": "lesson-1579:v05",
+   "word": "谏",
+   "annotated": false,
+   "decision": "question",
+   "reason": "与「追」构成对举，考查对偶句中同义或反义词的推断能力",
+   "contextMeaning": "挽回",
+   "sourceSentence": "悟已往之不谏,知来者之可追",
+   "type": "discrimination",
+   "question": "关于「悟已往之不谏，知来者之可追」中词语的解释，正确的一项是",
+   "options": [
+    "谏：规劝；追：追赶",
+    "谏：挽回；追：补救",
+    "谏：停止；追：追求",
+    "谏：言论；追：未来"
+   ],
+   "answerIndex": 1,
+   "explanation": "根据对偶特点，「谏」与「追」相对，意为挽回与补救。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 416
+   }
+  },
+  {
+   "id": "lesson-1579:v06",
+   "word": "衡宇",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文化典故词，反映隐士居所特点，是重要意象",
+   "contextMeaning": "简陋的房屋",
+   "sourceSentence": "乃瞻衡宇,载欣载奔",
+   "type": "interpretation",
+   "question": "「乃瞻衡宇，载欣载奔」中「衡宇」描绘了怎样的生活状态？",
+   "options": [
+    "华丽的官邸",
+    "简陋的贫士居所",
+    "隐居的深山洞府",
+    "远方的驿站"
+   ],
+   "answerIndex": 1,
+   "explanation": "衡宇指横木为门的简陋房屋，是贫士之居。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 472
+   }
+  },
+  {
+   "id": "lesson-1579:v07",
+   "word": "载",
+   "annotated": false,
+   "decision": "question",
+   "reason": "虚词用法，考查重叠动词前的语助词",
+   "contextMeaning": "语助词，表示动作同时进行",
+   "sourceSentence": "载欣载奔。",
+   "type": "usage",
+   "question": "「载欣载奔」中「载」的作用是",
+   "options": [
+    "承载",
+    "记载",
+    "充满",
+    "语助词，表示同时进行"
+   ],
+   "answerIndex": 3,
+   "explanation": "「载...载...」为并列连词，在此表示动作同时进行。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 477
+   }
+  },
+  {
+   "id": "lesson-1579:v08",
+   "word": "眄",
+   "annotated": false,
+   "decision": "question",
+   "reason": "动词用法，考查视觉描写词汇",
+   "contextMeaning": "看",
+   "sourceSentence": "眄庭柯以怡颜",
+   "type": "contextual-choice",
+   "question": "「眄庭柯以怡颜」中「眄」的意思是",
+   "options": [
+    "斜着眼睛看",
+    "凝视",
+    "环顾",
+    "闭目"
+   ],
+   "answerIndex": 0,
+   "explanation": "眄意为斜视，此处指悠闲地看。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《说文解字》"
+   ],
+   "location": {
+    "charIndex": 519
+   }
+  },
+  {
+   "id": "lesson-1579:v09",
+   "word": "策",
+   "annotated": false,
+   "decision": "question",
+   "reason": "名词活用作动词，考查文言文特殊用法",
+   "contextMeaning": "拄着",
+   "sourceSentence": "策扶老以流憩",
+   "type": "contextual-choice",
+   "question": "「策扶老以流憩」中「策」的意思是",
+   "options": [
+    "策略",
+    "鞭打",
+    "拄着",
+    "规划"
+   ],
+   "answerIndex": 2,
+   "explanation": "名词活用作动词，指拄着拐杖。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 554
+   }
+  },
+  {
+   "id": "lesson-1579:v10",
+   "word": "景",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，极易误认为风景",
+   "contextMeaning": "日光",
+   "sourceSentence": "景翳翳以将入",
+   "type": "gu-jin",
+   "question": "「景翳翳以将入」中「景」的意思是",
+   "options": [
+    "风景",
+    "日光",
+    "影子",
+    "景象"
+   ],
+   "answerIndex": 1,
+   "explanation": "古汉语中「景」常通「影」，此处指日光。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 582
+   }
+  },
+  {
+   "id": "lesson-1579:v11",
+   "word": "棹",
+   "annotated": false,
+   "decision": "question",
+   "reason": "名词活用作动词，考查动作描写词",
+   "contextMeaning": "划",
+   "sourceSentence": "或棹孤舟",
+   "type": "contextual-choice",
+   "question": "「或棹孤舟」中「棹」的意思是",
+   "options": [
+    "船桨",
+    "划",
+    "停靠",
+    "系住"
+   ],
+   "answerIndex": 1,
+   "explanation": "名词活用作动词，指划船。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 657
+   }
+  },
+  {
+   "id": "lesson-1579:v12",
+   "word": "善",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容词活用作动词，表达心理情感的关键动词",
+   "contextMeaning": "羡慕",
+   "sourceSentence": "善万物之得时",
+   "type": "contextual-choice",
+   "question": "「善万物之得时」中「善」的意思是",
+   "options": [
+    "善良",
+    "擅长",
+    "赞许",
+    "羡慕"
+   ],
+   "answerIndex": 3,
+   "explanation": "此处为意动用法，以...为善，即羡慕。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 690
+   }
+  },
+  {
+   "id": "lesson-1579:v13",
+   "word": "委心",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "词组意义清晰，且属于作者思想的核心表述，无需出题考查其字面义",
+   "contextMeaning": "随心所欲，顺其自然",
+   "sourceSentence": "曷不委心任去留",
+   "location": {
+    "charIndex": 719
+   }
+  },
+  {
+   "id": "lesson-1579:v14",
+   "word": "遑遑",
+   "annotated": false,
+   "decision": "question",
+   "reason": "叠词，描绘人物心境，考查对复杂心理状态的理解",
+   "contextMeaning": "惊恐匆忙、心神不定",
+   "sourceSentence": "胡为乎遑遑欲何之",
+   "type": "contextual-choice",
+   "question": "「胡为乎遑遑欲何之」中「遑遑」的意思是",
+   "options": [
+    "悠闲自在",
+    "惊恐匆忙",
+    "坚定执着",
+    "悲伤痛苦"
+   ],
+   "answerIndex": 1,
+   "explanation": "形容心神不定、焦虑忙乱的状态。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 728
+   }
+  },
+  {
+   "id": "lesson-1579:v15",
+   "word": "幼稚",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "教材已有详细注释，语义明确，不作为重点设题",
+   "contextMeaning": "小孩",
+   "sourceSentence": "幼稚盈室",
+   "location": {
+    "charIndex": 157
+   }
+  },
+  {
+   "id": "lesson-1579:v16",
+   "word": "公田",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材注释明确，属文化常识，理解难度低",
+   "contextMeaning": "官田",
+   "sourceSentence": "公田之利",
+   "location": {
+    "charIndex": 244
+   }
+  },
+  {
+   "id": "lesson-1579:v17",
+   "word": "盘桓",
+   "annotated": true,
+   "decision": "excluded",
+   "reason": "教材注释明确，现代汉语亦有此词，迁移难度低",
+   "contextMeaning": "徘徊",
+   "sourceSentence": "抚孤松而盘桓",
+   "location": {
+    "charIndex": 589
+   }
+  },
+  {
+   "id": "lesson-1579:v18",
+   "word": "东皋",
+   "annotated": false,
+   "decision": "excluded",
+   "reason": "教材注释明确，属于地名/方位词，理解即可",
+   "contextMeaning": "水边向阳的高地",
+   "sourceSentence": "登东皋以舒啸",
+   "location": {
+    "charIndex": 764
+   }
+  },
+  {
+   "id": "lesson-1579:v19",
+   "word": "耕植",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "耕田种植。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v20",
+   "word": "自给",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "供给自己生活。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v21",
+   "word": "幼稚盈室",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指孩子多。幼稚，小孩。盈室，满屋。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v22",
+   "word": "瓶无储粟",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指家无余粮。瓶，盛粮食的器皿。粟，谷子，脱壳后称为小米，这里泛指粮食。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v23",
+   "word": "生生所资",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "所赖以维持生活的。生生，维持生活。资，凭借。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v24",
+   "word": "长吏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指县丞、县尉，是县吏中职位较高的官吏。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v25",
+   "word": "脱然",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "忧虑解除而放松的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v26",
+   "word": "有怀",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "有了某种念头。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v27",
+   "word": "靡途",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "没有门路。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v28",
+   "word": "会有四方之事",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指陶渊明接受建威将军江州刺史刘敬宣的任命出使的事。会，恰逢。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v29",
+   "word": "诸侯以惠爱为德",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "地方大吏以爱惜人才为美德。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v30",
+   "word": "家叔",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "可能是作者的叔父陶夔，当时任太常卿。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v31",
+   "word": "风波未静",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指战乱未停息。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v32",
+   "word": "远役",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "到远方供职。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v33",
+   "word": "彭泽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "县名，在今江西湖口东。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v34",
+   "word": "眷然有归欤之情",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "有辞官回家的想法。眷然，思念的样子。归欤，语出《论语·公冶长》。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v35",
+   "word": "何则",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "为什么呢？",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v36",
+   "word": "质性",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "本性。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v37",
+   "word": "违己",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "违反自己的意志。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v38",
+   "word": "交病",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（身心）都感到痛苦。交，都。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v39",
+   "word": "尝从人事",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "曾经出仕。从，从事。人事，指做官。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v40",
+   "word": "皆口腹自役",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "都是为了谋生糊口而役使自己。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v41",
+   "word": "慷慨",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "感叹。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v42",
+   "word": "一稔",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "庄稼成熟一次，引申为一年。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v43",
+   "word": "敛裳宵逝",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "收拾衣装，连夜离去。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v44",
+   "word": "程氏妹",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "嫁到程家的妹妹。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v45",
+   "word": "情在骏奔",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "去吊丧的心情非常急迫。骏奔，急速奔驰。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v46",
+   "word": "因事顺心",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "因辞官的事顺遂心意。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v47",
+   "word": "乙巳",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "东晋义熙元年（405）。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v48",
+   "word": "芜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "田地荒废。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v49",
+   "word": "以心为形役",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "使精神被形体役使。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v50",
+   "word": "实迷途其未远",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "确实迷了路，或许走得还不太远。迷途，指出来做官。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v51",
+   "word": "舟遥遥以轻飏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "船在水面上轻轻地摇荡着前进。遥遥，漂流摇荡的样子。飏，船缓缓前进。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v52",
+   "word": "问征夫以前路",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "向行人问前面的路程。征夫，行人。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v53",
+   "word": "恨晨光之熹微",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "怨晨光微弱（耽误行程）。熹微，光线微弱。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v54",
+   "word": "乃瞻衡宇",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "于是看见了自家的房子。衡宇，简陋的房屋。衡，横木，横木为门，是贫者之居的布置。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v55",
+   "word": "载欣载奔",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "高兴地奔跑。载，语助词。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v56",
+   "word": "三径就荒",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "院子里的小路已经荒芜了。三径，西汉末，兖州刺史蒋诩隐居后，在院中开辟三径，只与求仲、羊仲来往。后以“三径”代指隐士住处。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v57",
+   "word": "眄庭柯以怡颜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "看着院子里的树木，喜形于色。眄，看。柯，草木的枝茎，这里指树。怡，愉快，使动用法，使愉快。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v58",
+   "word": "寄傲",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "寄托傲世的情怀。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v59",
+   "word": "审容膝之易安",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "深知住在陋室中反而容易使人安适。审，深知。容膝，仅能容纳双膝，形容居处狭小。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v60",
+   "word": "园日涉以成趣",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "每天在园中游玩，成为乐趣。涉，游玩、游览。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v61",
+   "word": "策扶老以流憩",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "拄着拐杖出去，到处走走，随时随地休息。策，拄着。扶老，拐杖。流憩，指无目的地漫步和随时随地休息。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v62",
+   "word": "时矫首而遐观",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "常常抬起头遥望远方。矫，举。遐观，远望。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v63",
+   "word": "云无心以出岫",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "云气自然而然地冒出山头。无心，无意。岫，峰峦。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v64",
+   "word": "景翳翳以将入",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "阳光黯淡，太阳快要下山了。景，日光。翳翳，阴暗的样子。入，指太阳下山。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v65",
+   "word": "请息交以绝游",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "让我同外界断绝交游。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v66",
+   "word": "复驾言兮焉求",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "还要驾车出去追求什么？驾言，驾车出游。《诗经·邶风·泉水》有“驾言出游”之语。驾，驾车。言，助词。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v67",
+   "word": "情话",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "知心话。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v68",
+   "word": "春及",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "春天到了。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v69",
+   "word": "将有事于西畴",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "将要到西边的田里去春耕。事，指耕种之事。畴，田地。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v70",
+   "word": "或命巾车",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "有时坐着有帷幕的小车。命，命人备置。巾车，外面覆盖着帷幕的小车。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v71",
+   "word": "或棹孤舟",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "有时划着一只小船。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v72",
+   "word": "窈窕以寻壑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "沿着幽深曲折的山谷。窈窕，幽深的样子。寻，循着。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v73",
+   "word": "崎岖而经丘",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "经过道路崎岖的山丘。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v74",
+   "word": "善万物之得时",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "羡慕万物恰逢繁荣滋长的好时节。善，羡慕。得时，顺应天时。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v75",
+   "word": "感吾生之行休",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "感叹我的一生将要结束。行，将要。休，终结。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v76",
+   "word": "已矣乎",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "算了吧！助词“矣”“乎”连用，加强感叹语气。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v77",
+   "word": "寓形宇内复几时",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "人寄身于天地间能有多长时间？寓形，寄托身体。宇内，天地间。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v78",
+   "word": "曷不委心任去留",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "为什么不随心所欲，生与死都顺随自然？曷，相当于“何”，为什么。去留，指生死。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v79",
+   "word": "胡为乎遑遑欲何之",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "为什么心神惶惶不安，到底想要到哪里去？遑遑，惊恐匆忙、心神不定。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v80",
+   "word": "帝乡不可期",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "仙境不可期求。帝乡，天帝居住的地方，也就是所谓仙境。期，期求。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v81",
+   "word": "怀良辰以孤往",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "爱惜美好的时光，独自外出。怀，留恋、爱惜。良辰，美好的时光，指上文所说万物得时的春天。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v82",
+   "word": "或植杖而耘耔",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "有时倚着棍杖除草培土。植杖，倚杖、扶杖。一说“植杖”是把手杖插在地上。耘，除草。耔，培土。《论语·微子》有“植其杖而芸”之语。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v83",
+   "word": "登东皋以舒啸",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "登上向阳的高地，放声长啸。东皋，水边向阳的高地。舒啸，放声长啸。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v84",
+   "word": "聊乘化以归尽",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "姑且顺随自然的变化，走到生命的尽头。聊，姑且。乘化，顺随自然。归尽，到生命的尽头。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1579:v85",
+   "word": "乐夫天命复奚疑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "乐天安命，还有什么可疑虑的呢？",
+   "sourceSentence": ""
+  }
+ ]
+}

@@ -1,0 +1,191 @@
+{
+ "lessonId": "lesson-1519",
+ "title": "人的正确思想是从哪里来的? / 毛泽东",
+ "mode": "argument",
+ "builtAt": "2026-07-14T09:34:15.682Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 2713,
+ "annotationCount": 0,
+ "inventory": [
+  {
+   "id": "lesson-1519:v01",
+   "word": "固有的",
+   "annotated": false,
+   "decision": "question",
+   "reason": "哲学逻辑中的关键概念，学生易与‘天生的’混淆，此处指主观认识脱离实践的臆想",
+   "contextMeaning": "本来就有的（指不通过实践而存在于头脑中）",
+   "sourceSentence": "是自己头脑里固有的吗?",
+   "type": "contextual-choice",
+   "question": "「是自己头脑里固有的吗?」中「固有的」一词的语境义是",
+   "options": [
+    "天生具备的生理本能",
+    "不通过社会实践而存在于头脑中的认识",
+    "通过长期学习积累而成的知识",
+    "经过科学实验证明的真理"
+   ],
+   "answerIndex": 1,
+   "explanation": "文中讨论认识论，作者否定思想是从头脑中「固有的」产生，是指否定唯心主义认为认识先于实践的观点。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 126
+   }
+  },
+  {
+   "id": "lesson-1519:v02",
+   "word": "飞跃",
+   "annotated": false,
+   "decision": "question",
+   "reason": "辩证唯物主义认识论的核心词汇，指认识从感性到理性的质变",
+   "contextMeaning": "认识过程中的质变（由感性认识上升为理性认识）",
+   "sourceSentence": "这种感性认识的材料积累多了,就会产生一个飞跃",
+   "type": "contextual-choice",
+   "question": "「这种感性认识的材料积累多了,就会产生一个飞跃」中「飞跃」的含义是",
+   "options": [
+    "事物发展速度的突然加快",
+    "认识由感性阶段上升到理性阶段的质变",
+    "实践活动范围的迅速扩大",
+    "理论与实践的脱节"
+   ],
+   "answerIndex": 1,
+   "explanation": "在马克思主义认识论中，飞跃指认识的深度从感性经验提升到理性规律的阶段。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 320
+   }
+  },
+  {
+   "id": "lesson-1519:v03",
+   "word": "官能",
+   "annotated": false,
+   "decision": "question",
+   "reason": "易被误解为‘官职’或‘功能’，此处特指生理感知器官",
+   "contextMeaning": "生理上的感觉器官",
+   "sourceSentence": "无数客观外界的现象通过人的眼、耳、鼻、舌、身这五个官能反映到自己的头脑中来",
+   "type": "contextual-choice",
+   "question": "文中「五个官能」指的是",
+   "options": [
+    "五种行政职能",
+    "五种思考能力",
+    "五种生理感觉器官",
+    "五种科学实验方法"
+   ],
+   "answerIndex": 2,
+   "explanation": "官能即感觉器官，文中列举眼耳鼻舌身，即人体感官。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 274
+   }
+  },
+  {
+   "id": "lesson-1519:v04",
+   "word": "高屋建瓴",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用成语，需准确把握其形容论述气势与视角的含义",
+   "contextMeaning": "形容对事物把握全面，站得高，看得远",
+   "sourceSentence": "文章高屋建瓴,论述酣畅淋漓。",
+   "type": "contextual-choice",
+   "question": "对「文章高屋建瓴」的理解，最准确的是",
+   "options": [
+    "文章建筑风格独特，结构精巧",
+    "文章论述观点犀利，直击要害",
+    "文章气势宏大，从高处着眼，立意高远",
+    "文章语言华丽，辞藻堆砌"
+   ],
+   "answerIndex": 2,
+   "explanation": "高屋建瓴比喻居高临下，不可阻挡，常用于形容言论或文章气势宏伟。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1481
+   }
+  },
+  {
+   "id": "lesson-1519:v05",
+   "word": "滔滔不绝",
+   "annotated": false,
+   "decision": "question",
+   "reason": "此处含有讽刺意味，指只说空话而不结合实践",
+   "contextMeaning": "形容说话连续不断，多含贬义（在此处指脱离实践的空谈）",
+   "sourceSentence": "问他的思想、意见、政策、方法、计划、结论、滔滔不绝的演说、大块的文章,是从哪里得来的",
+   "type": "contextual-choice",
+   "question": "作者在文中用「滔滔不绝」来形容演说，意在指出这些演说",
+   "options": [
+    "内容丰富，极具说服力",
+    "言辞流畅，感染力强",
+    "脱离实践，仅为空谈",
+    "观点新颖，令人耳目一新"
+   ],
+   "answerIndex": 2,
+   "explanation": "结合下文「他觉得是个怪问题，回答不出来」，可知作者批评的是那些脱离实践的空谈，故此处含贬义。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 947
+   }
+  },
+  {
+   "id": "lesson-1519:v06",
+   "word": "端正",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，需根据语境判断其词义",
+   "contextMeaning": "使正确、纠正偏差",
+   "sourceSentence": "以便端正思想,善于调查研究",
+   "type": "substitution",
+   "question": "「以便端正思想」中的「端正」一词，若要替换，最恰当的一项是",
+   "options": [
+    "摆正",
+    "校正",
+    "树立",
+    "平整"
+   ],
+   "answerIndex": 1,
+   "explanation": "「端正思想」即纠正思想上的偏差，使之符合正确认识论，「校正」最为贴切。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1074
+   }
+  },
+  {
+   "id": "lesson-1519:v07",
+   "word": "实事求是",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "党的重要思想路线，课文后半部分明确提及，属于核心概念，但学生对此词已有基础认知，故不命题",
+   "contextMeaning": "从实际情况出发，探求事物的内部联系及其规律性",
+   "sourceSentence": "把握党的实事求是的思想路线",
+   "location": {
+    "charIndex": 1389
+   }
+  },
+  {
+   "id": "lesson-1519:v08",
+   "word": "物质力量",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "马克思主义哲学核心术语，原文语境明确，属于理论常识，不宜作为字词考点",
+   "contextMeaning": "能够改造世界的客观现实力量",
+   "sourceSentence": "就会变成改造社会、改造世界的物质力量",
+   "location": {
+    "charIndex": 222
+   }
+  },
+  {
+   "id": "lesson-1519:v09",
+   "word": "认识论",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "哲学专有名词，课文明确定义了辩证唯物论的认识论，属于理论框架，不宜拆解为字词考题",
+   "contextMeaning": "关于人类认识的来源、过程和检验标准的理论",
+   "sourceSentence": "这就是马克思主义的认识论",
+   "location": {
+    "charIndex": 896
+   }
+  }
+ ]
+}

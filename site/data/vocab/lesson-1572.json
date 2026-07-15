@@ -1,0 +1,143 @@
+{
+ "lessonId": "lesson-1572",
+ "title": "聽聽那冷雨",
+ "mode": "modern-prose",
+ "builtAt": "2026-07-14T13:27:20.479Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 2362,
+ "annotationCount": 0,
+ "inventory": [
+  {
+   "id": "lesson-1572:v01",
+   "word": "消逝",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文中核心词汇，易与‘消失’混淆，考察词义深度",
+   "contextMeaning": "逐渐减少以至消失",
+   "sourceSentence": "7 一个消逝了的山村 / 冯至",
+   "type": "discrimination",
+   "question": "文中「消逝」一词最恰当的近义替换是",
+   "options": [
+    "消失",
+    "逝去",
+    "消亡",
+    "湮灭"
+   ],
+   "answerIndex": 0,
+   "explanation": "「消逝」侧重于逐渐减弱并最终消失的过程，与「消失」在此语境下意义相近，但「消逝」更具文学色彩。",
+   "difficulty": 1,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 105
+   }
+  },
+  {
+   "id": "lesson-1572:v02",
+   "word": "语境",
+   "annotated": false,
+   "decision": "question",
+   "reason": "学术性词汇，影响对文学评论的理解",
+   "contextMeaning": "语言环境，指文章的上下文或创作背景",
+   "sourceSentence": "Once I have a better understanding of your needs, I can give you a more informed",
+   "type": "interpretation",
+   "question": "文中提及「Once I have a better understanding of your needs」的目的是为了明确什么？",
+   "options": [
+    "了解学生的文学功底",
+    "确定具体的教学语境与需求",
+    "分析作者的写作风格",
+    "评估文章的字数长短"
+   ],
+   "answerIndex": 1,
+   "explanation": "语境在此指代对话双方的交流背景与教学目标需求。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 746
+   }
+  },
+  {
+   "id": "lesson-1572:v03",
+   "word": "意象",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文学批评常用术语，考察对文本分析能力的迁移",
+   "contextMeaning": "文学作品中融入了作者主观情感的客观物象",
+   "sourceSentence": "Yu Guangzhong, the author, masterfully utilizes rich and evocative language to c",
+   "type": "contextual-choice",
+   "question": "文中「vivid imagery」对应的中文术语是",
+   "options": [
+    "生动的想象",
+    "鲜明的意象",
+    "形象的描写",
+    "深刻的隐喻"
+   ],
+   "answerIndex": 1,
+   "explanation": "Imagery在文学评论中通常翻译为「意象」，指通过语言构建的艺术形象。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1303
+   }
+  },
+  {
+   "id": "lesson-1572:v04",
+   "word": "迁移",
+   "annotated": false,
+   "decision": "question",
+   "reason": "教学常用语，涉及学习能力的内涵",
+   "contextMeaning": "将已有的知识应用于新情境",
+   "sourceSentence": "This can be particularly enriching for students unfamiliar with the context, enc",
+   "type": "interpretation",
+   "question": "文中「broadening understanding」体现了哪种学习目标？",
+   "options": [
+    "知识的死记硬背",
+    "情感的直接宣泄",
+    "知识的有效迁移与深化",
+    "语法的准确运用"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中强调通过研究与背景了解，将知识转化为更广阔的理解，即学习迁移。",
+   "difficulty": 3,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1743
+   }
+  },
+  {
+   "id": "lesson-1572:v05",
+   "word": "范畴",
+   "annotated": false,
+   "decision": "question",
+   "reason": "易误解的抽象名词",
+   "contextMeaning": "领域、范围",
+   "sourceSentence": "While all the options likely offer literary value, “Listen to the Cold Rain” del",
+   "type": "substitution",
+   "question": "若将「universal themes」中的「themes」替换为「范畴」，下列哪项表述最符合原意？",
+   "options": [
+    "普遍的范畴",
+    "文学的范畴",
+    "情感的范畴",
+    "认知的范畴"
+   ],
+   "answerIndex": 0,
+   "explanation": "Themes在此指主题，属于普遍的讨论范畴。",
+   "difficulty": 2,
+   "sourceRefs": [],
+   "location": {
+    "charIndex": 1015
+   }
+  },
+  {
+   "id": "lesson-1572:v06",
+   "word": "博大精深",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "文中未出现此词，仅为补充文化常识，不出题",
+   "contextMeaning": "形容思想和学术广博深奥",
+   "sourceSentence": "This can be particularly enriching for students unfamiliar with the context, enc",
+   "location": {
+    "charIndex": 1743
+   }
+  }
+ ]
+}

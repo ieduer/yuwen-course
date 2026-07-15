@@ -1,0 +1,486 @@
+{
+ "lessonId": "lesson-1743-p2",
+ "title": "与妻书",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:28:35.700Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 1788,
+ "annotationCount": 26,
+ "inventory": [
+  {
+   "id": "lesson-1743-p2:v01",
+   "word": "意映",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "专有名词，作者妻子名字，不涉及文意深层理解。",
+   "contextMeaning": "作者妻子的名字",
+   "sourceSentence": "意映卿卿如晤",
+   "location": {
+    "charIndex": 24
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v02",
+   "word": "卿卿",
+   "annotated": false,
+   "decision": "note-only",
+   "reason": "属于文言文化常识中的爱称，理解即可，无需出题。",
+   "contextMeaning": "旧时夫对妻的爱称",
+   "sourceSentence": "意映卿卿如晤",
+   "location": {
+    "charIndex": 24
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v03",
+   "word": "竟",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，在此处为完成义，易与“竟然”混淆。",
+   "contextMeaning": "完成",
+   "sourceSentence": "不能竟 书而欲搁笔",
+   "type": "contextual-choice",
+   "question": "「不能竟书而欲搁笔」中「竟」的意思是",
+   "options": [
+    "竟然",
+    "结束",
+    "完成",
+    "到底"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处“竟”为动词，指写完。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 84
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v04",
+   "word": "察",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义词，易误解为“观察”，实为“理解、体察”。",
+   "contextMeaning": "理解、体察",
+   "sourceSentence": "又恐汝不察吾衷",
+   "type": "gu-jin",
+   "question": "下列句中加点词的含义与现代汉语相同的一项是",
+   "options": [
+    "又恐汝不察吾衷",
+    "今人又言心电感应有道",
+    "汝幸而偶我",
+    "司马春衫"
+   ],
+   "answerIndex": 1,
+   "explanation": "A项“察”古义为体察，今义为观察；B项“心电感应”古今义基本一致；C项“偶”古义为婚配，今义为偶尔；D项为典故。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 94
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v05",
+   "word": "就",
+   "annotated": false,
+   "decision": "question",
+   "reason": "常用实词用法，在此处指“走向、赴”，影响对人物决绝态度的理解。",
+   "contextMeaning": "走向、赴",
+   "sourceSentence": "使吾勇于就死也",
+   "type": "contextual-choice",
+   "question": "「使吾勇于就死也」中「就」的意思是",
+   "options": [
+    "成就",
+    "靠近",
+    "赴、走向",
+    "即使"
+   ],
+   "answerIndex": 2,
+   "explanation": "“就死”即赴死，走向死亡。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 144
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v06",
+   "word": "卒",
+   "annotated": false,
+   "decision": "question",
+   "reason": "高频文言词，指“最终”，对叙事逻辑至关重要。",
+   "contextMeaning": "最终",
+   "sourceSentence": "谁知吾卒先汝而死乎",
+   "type": "contextual-choice",
+   "question": "「谁知吾卒先汝而死乎」中「卒」的意思是",
+   "options": [
+    "士兵",
+    "最终",
+    "死",
+    "仓促"
+   ],
+   "answerIndex": 1,
+   "explanation": "“卒”通“终”，意为最终。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 429
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v07",
+   "word": "与使",
+   "annotated": true,
+   "decision": "question",
+   "reason": "文言虚词用法，表示选择关系，理解句意核心。",
+   "contextMeaning": "与其",
+   "sourceSentence": "与使 吾先死也",
+   "type": "usage",
+   "question": "下列句中“与”字的用法与“与使吾先死也”中“与”字相同的一项是",
+   "options": [
+    "失之东隅，收之桑榆",
+    "与尔三矢，尔其无忘乃父之志",
+    "与使吾先死也",
+    "蹇叔之子与师"
+   ],
+   "answerIndex": 2,
+   "explanation": "题干“与使”即“与其”，表示比较选择，C项为正文原句，此处考查用法辨析。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 335
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v08",
+   "word": "骨化石",
+   "annotated": true,
+   "decision": "question",
+   "reason": "典故意象，影响对夫妻情感深度的理解。",
+   "contextMeaning": "喻指思念至极，变成石头",
+   "sourceSentence": "徒使两地眼成穿而骨化石",
+   "type": "interpretation",
+   "question": "对「徒使两地眼成穿而骨化石」一句的理解，最准确的一项是",
+   "options": [
+    "指两地分居，身体虚弱而患病",
+    "指由于长期思念，最终导致身体僵硬成了化石",
+    "借望夫石典故，表现思念之深与离别之苦",
+    "指两人虽然相隔两地，但感情坚如磐石"
+   ],
+   "answerIndex": 2,
+   "explanation": "此处运用望夫石典故，表现思念之苦与离别之痛。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 790
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v09",
+   "word": "念",
+   "annotated": true,
+   "decision": "question",
+   "reason": "通假字，影响日期理解。",
+   "contextMeaning": "二十",
+   "sourceSentence": "三月念 六夜四鼓",
+   "type": "gu-jin",
+   "question": "「三月念六夜」中「念」字的含义是",
+   "options": [
+    "思念",
+    "二十",
+    "读诵",
+    "记念"
+   ],
+   "answerIndex": 1,
+   "explanation": "“念”通“廿”，意为二十。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 1266
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v10",
+   "word": "偶",
+   "annotated": true,
+   "decision": "question",
+   "reason": "词类活用/古义，影响对夫妻关系定位的理解。",
+   "contextMeaning": "婚配",
+   "sourceSentence": "汝幸而偶 我",
+   "type": "contextual-choice",
+   "question": "「汝幸而偶我」中「偶」的意思是",
+   "options": [
+    "偶尔",
+    "配偶",
+    "婚配",
+    "遇到"
+   ],
+   "answerIndex": 2,
+   "explanation": "名词作动词，指与人结为配偶。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 1161
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v11",
+   "word": "的的",
+   "annotated": true,
+   "decision": "question",
+   "reason": "生僻词，理解其程度副词用法。",
+   "contextMeaning": "确实、实在",
+   "sourceSentence": "的的 非吾所忍",
+   "type": "contextual-choice",
+   "question": "「的的非吾所忍」中「的的」的意思是",
+   "options": [
+    "分明",
+    "确实",
+    "点点",
+    "忧虑"
+   ],
+   "answerIndex": 1,
+   "explanation": "“的的”即确实、实在。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 1137
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v12",
+   "word": "模拟",
+   "annotated": true,
+   "decision": "question",
+   "reason": "古今异义，古义为想象、揣摩，今义为仿效。",
+   "contextMeaning": "想象、揣摩",
+   "sourceSentence": "汝可以模拟 得之",
+   "type": "gu-jin",
+   "question": "下列句中加点词属于古今异义的一项是",
+   "options": [
+    "汝可以模拟得之",
+    "依新已五岁",
+    "吾辈处今日之中国",
+    "巾短情长"
+   ],
+   "answerIndex": 0,
+   "explanation": "“模拟”古义为想象、揣摩，今义为仿效或计算机模拟，属古今异义。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 1225
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v13",
+   "word": "诸母",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "亲属称谓，理解即可，不构成考试难点。",
+   "contextMeaning": "各位伯母、叔母",
+   "sourceSentence": "家中诸母 皆通文",
+   "location": {
+    "charIndex": 1282
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v14",
+   "word": "司马春衫",
+   "annotated": true,
+   "decision": "question",
+   "reason": "典故，理解作者借此表达的深层悲痛。",
+   "contextMeaning": "比喻极度悲伤",
+   "sourceSentence": "司马春衫 ，吾不能学太上之忘情 也",
+   "type": "interpretation",
+   "question": "对「司马春衫」典故的理解，最恰当的一项是",
+   "options": [
+    "指司马迁穿的春装",
+    "指作者怀念司马迁",
+    "指白居易在江州伤感流泪，借以形容自己的极度悲伤",
+    "指作者因春天的衣服而感到伤感"
+   ],
+   "answerIndex": 2,
+   "explanation": "语出白居易《琵琶行》，此处借指极度悲伤。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 193
+   }
+  },
+  {
+   "id": "lesson-1743-p2:v15",
+   "word": "意映卿卿如晤",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "意思如同“我妻见字如面”。意映，作者妻子的名字。卿卿，旧时夫对妻的爱称。如晤，如同见面，旧时书信用语。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v16",
+   "word": "彀",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "同“够”。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v17",
+   "word": "太上之忘情",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "古人有“太上忘情”之说，意思是修养最高的人，忘了喜怒哀乐之情。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v18",
+   "word": "充",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "扩充。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v19",
+   "word": "无宁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不如。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v20",
+   "word": "有身",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "有身孕。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v21",
+   "word": "寸管",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指笔。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v22",
+   "word": "第",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "只是。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v23",
+   "word": "抑",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "还是。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v24",
+   "word": "率性",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "任性。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v25",
+   "word": "依新",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "作者的儿子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v26",
+   "word": "肖",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "像。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v27",
+   "word": "旁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "靠近。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v28",
+   "word": "巾",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "这封信写在一条白布方巾上，故云。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v29",
+   "word": "一恸",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "大恸。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v30",
+   "word": "辛未",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "应是“辛亥”，即1911 年。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1743-p2:v31",
+   "word": "四鼓",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "四更天。",
+   "sourceSentence": ""
+  }
+ ]
+}

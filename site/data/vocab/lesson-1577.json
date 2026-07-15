@@ -1,0 +1,720 @@
+{
+ "lessonId": "lesson-1577",
+ "title": "* 项脊轩志/ 归有光",
+ "mode": "classical",
+ "builtAt": "2026-07-14T09:39:28.636Z",
+ "generator": "apis.bdfz.net authoring + scripts/build_vocab_bank.mjs",
+ "textChars": 9000,
+ "annotationCount": 43,
+ "inventory": [
+  {
+   "id": "lesson-1577:v01",
+   "word": "垣墙",
+   "annotated": false,
+   "decision": "question",
+   "reason": "名词活用作动词，是理解语境的关键",
+   "contextMeaning": "砌上垣墙",
+   "sourceSentence": "垣墙周庭,以当南日",
+   "type": "contextual-choice",
+   "question": "“垣墙周庭”中“垣墙”的意思是",
+   "options": [
+    "矮墙",
+    "砌上矮墙",
+    "墙壁周围",
+    "围墙环绕"
+   ],
+   "answerIndex": 1,
+   "explanation": "此处垣墙为名词活用作动词，意为砌墙。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 212
+   }
+  },
+  {
+   "id": "lesson-1577:v02",
+   "word": "洞然",
+   "annotated": true,
+   "decision": "question",
+   "reason": "形容词在文中的特殊指代",
+   "contextMeaning": "明亮的样子",
+   "sourceSentence": "室始洞然",
+   "type": "contextual-choice",
+   "question": "“室始洞然”中“洞然”的意思是",
+   "options": [
+    "深邃的样子",
+    "空旷的样子",
+    "明亮的样子",
+    "寒冷的样子"
+   ],
+   "answerIndex": 2,
+   "explanation": "形容室内采光充足，明亮通透。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 227
+   }
+  },
+  {
+   "id": "lesson-1577:v03",
+   "word": "增胜",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词“胜”的语境辨析",
+   "contextMeaning": "增加美感",
+   "sourceSentence": "旧时栏楯,亦遂增胜",
+   "type": "contextual-choice",
+   "question": "“亦遂增胜”中“胜”的意思是",
+   "options": [
+    "胜利",
+    "优美",
+    "能够",
+    "尽"
+   ],
+   "answerIndex": 1,
+   "explanation": "胜：美，优美。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 242
+   }
+  },
+  {
+   "id": "lesson-1577:v04",
+   "word": "冥然",
+   "annotated": false,
+   "decision": "question",
+   "reason": "形容词作状语，描绘人物神态",
+   "contextMeaning": "静静地",
+   "sourceSentence": "冥然兀坐",
+   "type": "contextual-choice",
+   "question": "“冥然兀坐”中“冥然”的意思是",
+   "options": [
+    "昏暗的样子",
+    "深沉的样子",
+    "静静的样子",
+    "专注的样子"
+   ],
+   "answerIndex": 2,
+   "explanation": "冥然，形容静寂、沉静的样子。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 262
+   }
+  },
+  {
+   "id": "lesson-1577:v05",
+   "word": "三五",
+   "annotated": false,
+   "decision": "question",
+   "reason": "文化常识词，易误解为数字",
+   "contextMeaning": "农历每月十五",
+   "sourceSentence": "三五之夜,明月半墙",
+   "type": "interpretation",
+   "question": "“三五之夜”指的是",
+   "options": [
+    "农历三月初五",
+    "农历五月十五",
+    "农历每月十五",
+    "农历每月初三和初五"
+   ],
+   "answerIndex": 2,
+   "explanation": "古人常以“三五”指十五。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 290
+   }
+  },
+  {
+   "id": "lesson-1577:v06",
+   "word": "往往",
+   "annotated": false,
+   "decision": "question",
+   "reason": "古今异义，极易混淆",
+   "contextMeaning": "到处",
+   "sourceSentence": "内外多置小门墙,往往而是",
+   "type": "gu-jin",
+   "question": "“往往而是”中的“往往”在古文中意为",
+   "options": [
+    "经常",
+    "到处",
+    "容易",
+    "有时"
+   ],
+   "answerIndex": 1,
+   "explanation": "古义为到处，今义多为经常。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 349
+   }
+  },
+  {
+   "id": "lesson-1577:v07",
+   "word": "逾",
+   "annotated": false,
+   "decision": "question",
+   "reason": "动词用法，影响句意",
+   "contextMeaning": "越过",
+   "sourceSentence": "客逾庖而宴",
+   "type": "contextual-choice",
+   "question": "“客逾庖而宴”中“逾”的意思是",
+   "options": [
+    "超过",
+    "越过",
+    "等待",
+    "靠近"
+   ],
+   "answerIndex": 1,
+   "explanation": "逾：越过。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 367
+   }
+  },
+  {
+   "id": "lesson-1577:v08",
+   "word": "乳",
+   "annotated": false,
+   "decision": "question",
+   "reason": "名词用作动词，特殊用法",
+   "contextMeaning": "喂奶",
+   "sourceSentence": "乳二世,先妣抚之甚厚",
+   "type": "contextual-choice",
+   "question": "“乳二世”中“乳”的意思是",
+   "options": [
+    "母乳",
+    "乳房",
+    "喂奶",
+    "生育"
+   ],
+   "answerIndex": 2,
+   "explanation": "乳：喂奶，哺育。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 411
+   }
+  },
+  {
+   "id": "lesson-1577:v09",
+   "word": "过",
+   "annotated": false,
+   "decision": "question",
+   "reason": "多义词，此处为特定动作",
+   "contextMeaning": "拜访",
+   "sourceSentence": "大母过余曰",
+   "type": "contextual-choice",
+   "question": "“大母过余曰”中“过”的意思是",
+   "options": [
+    "经过",
+    "拜访",
+    "责备",
+    "超过"
+   ],
+   "answerIndex": 1,
+   "explanation": "过：拜访，看望。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 520
+   }
+  },
+  {
+   "id": "lesson-1577:v10",
+   "word": "不效",
+   "annotated": true,
+   "decision": "question",
+   "reason": "词义演变，古义为有成效",
+   "contextMeaning": "没有成就",
+   "sourceSentence": "吾家读书久不效",
+   "type": "interpretation",
+   "question": "“吾家读书久不效”中“不效”是指",
+   "options": [
+    "没有效果",
+    "不听从教导",
+    "科举没有成就",
+    "不模仿古人"
+   ],
+   "answerIndex": 2,
+   "explanation": "文中指科举上无所成就。",
+   "difficulty": 3,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 564
+   }
+  },
+  {
+   "id": "lesson-1577:v11",
+   "word": "殆",
+   "annotated": true,
+   "decision": "question",
+   "reason": "副词，表揣测",
+   "contextMeaning": "大概",
+   "sourceSentence": "得不焚,殆有神护者",
+   "type": "contextual-choice",
+   "question": "“殆有神护者”中“殆”的意思是",
+   "options": [
+    "危险",
+    "几乎",
+    "大概",
+    "大概率"
+   ],
+   "answerIndex": 2,
+   "explanation": "殆：恐怕，大概。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "王力《古汉语常用字字典》"
+   ],
+   "location": {
+    "charIndex": 674
+   }
+  },
+  {
+   "id": "lesson-1577:v12",
+   "word": "来归",
+   "annotated": true,
+   "decision": "question",
+   "reason": "文化词，指代婚姻",
+   "contextMeaning": "嫁到我家",
+   "sourceSentence": "吾妻来归",
+   "type": "interpretation",
+   "question": "“吾妻来归”中“来归”的意思是",
+   "options": [
+    "回来",
+    "嫁到我家",
+    "归还",
+    "回到娘家"
+   ],
+   "answerIndex": 1,
+   "explanation": "归：女子出嫁。",
+   "difficulty": 2,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 708
+   }
+  },
+  {
+   "id": "lesson-1577:v13",
+   "word": "盖",
+   "annotated": true,
+   "decision": "question",
+   "reason": "多义词，名词用法",
+   "contextMeaning": "伞盖",
+   "sourceSentence": "今已亭亭如盖矣",
+   "type": "contextual-choice",
+   "question": "“今已亭亭如盖矣”中“盖”的意思是",
+   "options": [
+    "遮盖",
+    "伞盖",
+    "因为",
+    "大概"
+   ],
+   "answerIndex": 1,
+   "explanation": "盖，这里指伞盖。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 829
+   }
+  },
+  {
+   "id": "lesson-1577:v14",
+   "word": "方丈",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材注释明确，属量词性短语，难度低，不宜命题",
+   "contextMeaning": "一丈见方",
+   "sourceSentence": "室仅方丈",
+   "location": {
+    "charIndex": 144
+   }
+  },
+  {
+   "id": "lesson-1577:v15",
+   "word": "渗漉",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材注释明确，为偏正式描述词，非考试重点",
+   "contextMeaning": "渗漏",
+   "sourceSentence": "尘泥渗漉",
+   "location": {
+    "charIndex": 160
+   }
+  },
+  {
+   "id": "lesson-1577:v16",
+   "word": "手植",
+   "annotated": false,
+   "decision": "question",
+   "reason": "动词与名词组合，体现深厚情感，常考点",
+   "contextMeaning": "亲手种植",
+   "sourceSentence": "吾妻死之年所手植也",
+   "type": "interpretation",
+   "question": "“吾妻死之年所手植也”中“手植”的意思是",
+   "options": [
+    "亲手种植",
+    "用手修剪",
+    "手工制作",
+    "手植的树"
+   ],
+   "answerIndex": 0,
+   "explanation": "手，名词作状语，表示亲手。",
+   "difficulty": 1,
+   "sourceRefs": [
+    "《汉语大词典》"
+   ],
+   "location": {
+    "charIndex": 819
+   }
+  },
+  {
+   "id": "lesson-1577:v17",
+   "word": "抚",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注且语境明确，属于一般性动词",
+   "contextMeaning": "对待",
+   "sourceSentence": "先妣抚之甚厚",
+   "location": {
+    "charIndex": 415
+   }
+  },
+  {
+   "id": "lesson-1577:v18",
+   "word": "阖",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已注，为常用动词，无特殊语法变异",
+   "contextMeaning": "关闭",
+   "sourceSentence": "以手阖门",
+   "location": {
+    "charIndex": 554
+   }
+  },
+  {
+   "id": "lesson-1577:v19",
+   "word": "旧",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "旧日的，原来的。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v20",
+   "word": "无可置者",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "没有可以挪置（桌案）的地方。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v21",
+   "word": "前",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "指阁子北面，因这阁子是“北向”的。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v22",
+   "word": "垣墙周庭以当南日",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "四周围绕院子砌上墙，用（北墙）对着南边射来的日光（使其反照室内）。垣墙，用作动词，砌上垣墙。垣，矮墙，也泛指墙。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v23",
+   "word": "栏楯",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "栏杆。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v24",
+   "word": "偃仰",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "俯仰，这里指安居、休息。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v25",
+   "word": "啸歌",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "长啸歌吟。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v26",
+   "word": "冥然兀坐",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "静静地独自端坐。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v27",
+   "word": "三五之夜",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "农历每月十五的夜晚。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v28",
+   "word": "珊珊",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "树影摇动的样子。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v29",
+   "word": "先是",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "在此以前。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v30",
+   "word": "迨诸父异爨",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "等到伯、叔分家。迨，等到。诸父，伯父、叔父的统称。异爨，分灶做饭，意思是分家。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v31",
+   "word": "往往而是",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "到处都是。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v32",
+   "word": "东犬西吠",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "东家的狗（听到西家的声音）就对着西家叫。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v33",
+   "word": "逾庖而宴",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "越过厨房去吃饭。因为多置小门墙，所以宴客的时候客人要经过厨房。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v34",
+   "word": "已",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "不久后。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v35",
+   "word": "先大母",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "去世的祖母。下文的“先妣”，指去世的母亲。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v36",
+   "word": "乳二世",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "给父亲和自己两代人喂过奶。乳，喂奶、哺育。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v37",
+   "word": "中闺",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "内室。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v38",
+   "word": "而母立于兹",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "你的母亲（曾经）站在这儿。而， 你的。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v39",
+   "word": "过余",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "到我（这里来）。意思是来看我。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v40",
+   "word": "大类",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "很像。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v41",
+   "word": "比去",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "等到离开的时候。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v42",
+   "word": "象笏",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "象牙制的手板。古代品级较高的官员朝见君主时执笏，供指画和记事。笏多以象牙、玉制成。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v43",
+   "word": "太常公",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "归有光祖母的祖父夏昶（chǎng），在明宣德年间曾任太常寺卿。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v44",
+   "word": "瞻顾遗迹",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "瞻视回顾先人留下的旧物。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v45",
+   "word": "扃牖",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "关上窗户。扃，关闭。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v46",
+   "word": "余既为此志",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "我已经作了这篇志。此志，指本篇中这一句之上的内容，从这一句以下是后来补写的。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v47",
+   "word": "书",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "写字。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v48",
+   "word": "归宁",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "出嫁的女子回娘家省亲。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v49",
+   "word": "述诸小妹语",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "（回我家后）转述她小妹们的话。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v50",
+   "word": "且",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "助词，用于句首。这里有“那么”的意思。",
+   "sourceSentence": ""
+  },
+  {
+   "id": "lesson-1577:v51",
+   "word": "制",
+   "annotated": true,
+   "decision": "note-only",
+   "reason": "教材已註且正文逐查可達；本輪未單獨出題（腳本自動補錄，保證註釋全覆蓋）",
+   "contextMeaning": "形制，规制。",
+   "sourceSentence": ""
+  }
+ ]
+}
