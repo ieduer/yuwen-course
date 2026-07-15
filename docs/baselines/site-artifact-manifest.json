@@ -3,7 +3,7 @@
   "artifactRoot": "site/",
   "fileCount": 842,
   "totalBytes": 148147662,
-  "aggregateSha256": "b7d86190528d69c76d2ae1fe5477e9905bd29271635bfd533eff2ace16897d67",
+  "aggregateSha256": "c9ae504b34c39bd29fb62c376679b351079719ae6e7efb2ecbca3186c2168519",
   "files": [
     {
       "path": "_headers",
@@ -4203,7 +4203,7 @@
     {
       "path": "index.html",
       "bytes": 10464,
-      "sha256": "a219e1597517e36ab4075df5be29d2a1374682fc806f6234b24cb3c772b26399"
+      "sha256": "575ffa7c87db474a79690beb7ac47d2517a961cd669fb270881faf6b72f53f6d"
     },
     {
       "path": "insights.html",
