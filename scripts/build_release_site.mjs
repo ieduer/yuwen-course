@@ -77,6 +77,7 @@ function sanitizeJsonProjection(relative, text, sanitizer) {
     fail(`invalid JSON release input ${relative}: ${error.message}`);
   }
   const sanitizedValue = sanitizer.sanitizeValue(parsed);
+  if (JSON.stringify(sanitizedValue) === JSON.stringify(parsed)) return text;
   const indentation = text.includes("\n") ? 2 : undefined;
   const trailingNewline = text.endsWith("\n") ? "\n" : "";
   return `${JSON.stringify(sanitizedValue, null, indentation)}${trailingNewline}`;
@@ -105,6 +106,9 @@ function projectSource() {
         );
       }
       output = Buffer.from(projectedText);
+      if (relative.startsWith("app-content/") && !output.equals(source)) {
+        fail(`immutable native content changed during release projection: ${relative}`);
+      }
       if (!output.equals(source)) changedFiles += 1;
     }
     if (output.length >= MAX_FILE_BYTES) {

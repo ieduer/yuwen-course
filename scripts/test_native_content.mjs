@@ -22,6 +22,7 @@ import {
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const SITE_ROOT = path.join(ROOT, "site");
+const RELEASE_SITE_ROOT = path.join(ROOT, ".release", "site");
 const OUTPUT_ROOT = mkdtempSync(path.join(os.tmpdir(), "yw-native-content-tests-"));
 const MAX_CORE_BYTES = 25 * 1024 * 1024;
 const MAX_PAGES_FILES = 20_000;
@@ -747,6 +748,38 @@ test("Pages upload tree stays below file-count and per-file limits", () => {
   }
   assert.ok(statSync(pointerFile).size < MAX_CORE_BYTES);
   assert.equal(sourceFiles.some((file) => file.startsWith("data/cache/")), false);
+});
+
+test("release projection preserves immutable native receipts byte-for-byte", () => {
+  execFileSync(process.execPath, ["scripts/build_release_site.mjs"], {
+    cwd: ROOT,
+    encoding: "utf8",
+    stdio: "pipe",
+  });
+  const sourceAppContent = path.join(SITE_ROOT, "app-content");
+  const releaseAppContent = path.join(RELEASE_SITE_ROOT, "app-content");
+  const publicFiles = collectFiles(sourceAppContent).filter((file) => (
+    !file.startsWith("candidates/")
+  ));
+  assert.ok(publicFiles.length > 0);
+  assert.equal(
+    collectFiles(releaseAppContent).some((file) => file.startsWith("candidates/")),
+    false,
+  );
+  for (const file of publicFiles) {
+    assert.deepEqual(
+      readFileSync(path.join(releaseAppContent, file)),
+      readFileSync(path.join(sourceAppContent, file)),
+      `${file}: release projection changed immutable bytes`,
+    );
+  }
+  const releasePointer = json(path.join(releaseAppContent, "latest-stable.json"));
+  const releaseManifestBytes = readFileSync(path.join(releaseAppContent, releasePointer.manifest.path));
+  const releaseCoreBytes = readFileSync(path.join(releaseAppContent, releasePointer.coreBundle.path));
+  assert.equal(sha256(releaseManifestBytes), releasePointer.manifest.sha256);
+  assert.equal(releaseManifestBytes.length, releasePointer.manifest.bytes);
+  assert.equal(sha256(releaseCoreBytes), releasePointer.coreBundle.sha256);
+  assert.equal(releaseCoreBytes.length, releasePointer.coreBundle.bytes);
 });
 
 test("shared sanitizer preserves surrounding content and clears the Web projection", () => {
