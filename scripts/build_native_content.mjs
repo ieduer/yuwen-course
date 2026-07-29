@@ -36,6 +36,8 @@ const REVIEWED_DISPOSITIONS = new Set([
   "compatible-no-client-release",
   "blocked",
 ]);
+const PAGES_DEPLOYMENT_ID =
+  /^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/;
 const RIGHTS_PROVENANCE = "user-authorized-for-bdfz-yw-app-2026-07-29";
 
 function fail(message) {
@@ -422,6 +424,16 @@ if (!sourceClean) {
 }
 if (appDisposition !== "blocked") {
   assert(sourceClean, "a compatible App disposition requires a clean source tree");
+  assert(
+    PAGES_DEPLOYMENT_ID.test(String(deploymentId || "")),
+    "a compatible App disposition requires a validated Pages deployment UUID",
+  );
+  assert(
+    typeof publishedAt === "string"
+      && publishedAt.endsWith("Z")
+      && !Number.isNaN(Date.parse(publishedAt)),
+    "a compatible App disposition requires an ISO-8601 UTC publication time",
+  );
 }
 if (promoteStable) {
   assert(sourceClean, "--promote-stable requires a clean source tree");
