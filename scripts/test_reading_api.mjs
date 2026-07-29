@@ -2,10 +2,29 @@
 // 自起 wrangler pages dev（本地 D1 模擬）＋ 每輪唯一合成學生 → 斷言確定性。
 // 用法：node scripts/test_reading_api.mjs   （約 40–60 秒；退出碼非 0 即失敗）
 import { spawn } from "node:child_process";
+import { copyFileSync, mkdirSync, mkdtempSync, rmSync } from "node:fs";
+import os from "node:os";
+import path from "node:path";
 
 const PORT = 8801;
 const SLUG = `test-${Date.now().toString(36)}`;
 const BASE = `http://127.0.0.1:${PORT}`;
+const ROOT = new URL("..", import.meta.url).pathname;
+const SERVER_ROOT = mkdtempSync(path.join(os.tmpdir(), "yuwen-reading-api-"));
+for (const file of [
+  "_worker.js",
+  "learning-evidence-source.js",
+  "data/interaction-definitions.json",
+  "data/learning-manifest.json",
+  "data/manifest.json",
+  "data/lessons/lesson-1484.json",
+  "data/vocab/index.json",
+  "data/vocab/lesson-1484.json",
+]) {
+  const destination = path.join(SERVER_ROOT, file);
+  mkdirSync(path.dirname(destination), { recursive: true });
+  copyFileSync(new URL(`../site/${file}`, import.meta.url), destination);
+}
 let passed = 0;
 const failures = [];
 
@@ -24,8 +43,8 @@ async function api(path, body) {
 }
 
 const server = spawn("./node_modules/.bin/wrangler", [
-  "pages", "dev", "site", "--port", String(PORT), "--binding", `READING_TEST_SLUG=${SLUG}`,
-], { cwd: new URL("..", import.meta.url).pathname, stdio: ["ignore", "pipe", "pipe"] });
+  "pages", "dev", SERVER_ROOT, "--port", String(PORT), "--binding", `READING_TEST_SLUG=${SLUG}`,
+], { cwd: ROOT, stdio: ["ignore", "pipe", "pipe"] });
 let serverLog = "";
 server.stdout.on("data", (chunk) => { serverLog += chunk; });
 server.stderr.on("data", (chunk) => { serverLog += chunk; });
@@ -123,8 +142,8 @@ try {
 
   // 8. 字詞題掌握規則
   const firstTry = await api("/api/reading/vocab-attempt", { lessonId: "lesson-1484", itemId: "lesson-1484:v01", selectedIndex: 1 });
-  assert("first-try correct => mastered", firstTry.data.status === "mastered");
-  assert("server computes correctness from answer key", firstTry.data.correct === true);
+  assert("first-try correct => mastered", firstTry.data.status === "mastered", JSON.stringify(firstTry));
+  assert("server computes correctness from answer key", firstTry.data.correct === true, JSON.stringify(firstTry));
   const forged = await api("/api/reading/vocab-attempt", { lessonId: "lesson-1484", itemId: "lesson-1484:v02", correct: true, answer: "forged" });
   assert("browser correctness without selectedIndex rejected", forged.status === 400);
   const vocabRetryMutationId = `vocab-retry-${SLUG}`;
@@ -134,7 +153,7 @@ try {
     selectedIndex: 0,
     clientMutationId: vocabRetryMutationId,
   });
-  assert("wrong => learning", wrong.data.status === "learning");
+  assert("wrong => learning", wrong.data.status === "learning", JSON.stringify(wrong));
   assert("wrong answer synchronizes as ineligible", wrong.data.evidence?.delivery?.endsWith("_ineligible"));
   const wrongRetry = await api("/api/reading/vocab-attempt", {
     lessonId: "lesson-1484",
@@ -181,7 +200,7 @@ try {
     clientMutationId: `trace-${SLUG}`,
     data: { noteRef: "1" },
   });
-  assert("registered semantic interaction recorded", trace.data.ok && trace.data.sourceEventId);
+  assert("registered semantic interaction recorded", trace.data.ok && trace.data.sourceEventId, JSON.stringify(trace));
   const traceDup = await api("/api/learning/interactions", {
     lessonId: "lesson-1484",
     interactionKey: "noteOpened",
@@ -199,6 +218,7 @@ try {
   console.error(error);
 } finally {
   await stopServer();
+  rmSync(SERVER_ROOT, { recursive: true, force: true });
 }
 
 console.log(`\n${passed} passed, ${failures.length} failed`);
