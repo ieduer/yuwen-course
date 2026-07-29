@@ -46,11 +46,15 @@ function buildPrompt(lesson, text, annotations, [min, max]) {
     "教材註釋之外，還必須補收正文裏未註而重要的字詞（正文支持時至少 3 條）。不要把每個詞都機械出題：以「誤解是否影響理解/遷移」取捨。",
     "",
     `第三步，對 decision=question 的條目命題，總題數 ${min}–${max} 題。題型 type 限用：contextual-choice(語境義選擇)、gu-jin(古今異義)、substitution(換詞判斷)、discrimination(近義易混辨析)、usage(虛詞/特殊用法)、pronunciation(讀音)、interpretation(句意理解)、evidence(原文定位)。按課文實際需要混用，難度 difficulty 用 1/2/3 且要有層次。`,
-    "每題四個選項，interpretation/evidence 也做四選一。selected 句 sourceSentence 必須從我給你的正文里逐字抄出（不改標點、不增刪字），長度 6–40 字。",
+    "每題四個選項，interpretation/evidence 也做四選一。每題必須且只能有一個最佳答案：四個選項須屬於同一回答層級、長度和語法形態大致相當，錯項要有迷惑性但能被本句或相鄰語境明確排除；禁止用荒謬選項、語法不平行、長度差異或褒貶色彩直接暴露答案。",
+    "換詞題只有在替換後語義、語體和句法功能都能等值時才可使用。若近義詞只覆蓋原詞的一部分含義，改成語境義辨析题，不得宣称可以无损替换。",
+    "如教材注释保留异说、词义有边界或两项可能同时成立，题干必须显式限定“依教材注释首选义”或改写题型；不得强行给出伪唯一答案。",
+    "解释必须先用本句或相邻语境证明正确项，再逐项说明其余三个选项为什么不合语境；不得加入正文和教材注释不能支持的历史、作者心理或因果事实。",
+    "sourceSentence 必須從我給你的正文里逐字抄出（不改標點、不增刪字），長度 6–80 字。",
     lesson.mode === "classical" ? "文言條目每條給 sourceRefs：所依據的辭書或文獻名（如 王力《古漢語常用字字典》、《漢語大詞典》、《說文解字》），不確定時寧可標《漢語大詞典》待核。" : "如涉文言引語或成語典故，給 sourceRefs。",
     "",
     "只輸出一個 JSON 物件，不要 Markdown 代碼欄。結構：",
-    `{"inventory":[{"word":"樹","annotated":true,"decision":"question","reason":"名詞活用作動詞，直接影響句意","contextMeaning":"種植","sourceSentence":"我树之成而实五石","type":"contextual-choice","question":"「我树之成而实五石」中「树」的意思是","options":["树木","种植","建立","直立"],"answerIndex":1,"explanation":"……","difficulty":1,"sourceRefs":["王力《古漢語常用字字典》"]}]}`,
+    `{"inventory":[{"word":"樹","annotated":true,"decision":"question","reason":"名詞活用作動詞，直接影響句意","contextMeaning":"種植","sourceSentence":"我树之成而实五石","type":"contextual-choice","question":"「我树之成而实五石」中「树」的意思是","options":["培土","种植","建立","直立"],"answerIndex":1,"explanation":"本句的宾语和后文“成而实”说明……；培土只是一道工序，建立用于抽象对象，直立是不及物状态。","distractorRationales":["只是一道栽培工序，不等于“树”的动作","正确项","常用于抽象对象，不合语境","表示状态，不能支配后续结果"],"difficulty":1,"sourceRefs":["王力《古漢語常用字字典》"]}]}`,
     "decision 非 question 的條目只需 word/annotated/decision/reason/contextMeaning/sourceSentence（sourceSentence 仍須逐字來自正文；教材註釋條目若正文找不到原句可省略 sourceSentence）。",
     "",
     "課文正文如下：",
@@ -111,6 +115,9 @@ function normalizeItem(raw, lessonId, index, mode) {
     item.options = Array.isArray(raw.options) ? raw.options.slice(0, 4).map((o) => String(o).trim().slice(0, 80)) : [];
     item.answerIndex = Number.isInteger(raw.answerIndex) ? raw.answerIndex : -1;
     item.explanation = String(raw.explanation || "").trim().slice(0, 500);
+    item.distractorRationales = Array.isArray(raw.distractorRationales)
+      ? raw.distractorRationales.slice(0, 4).map((reason) => String(reason || "").trim().slice(0, 160))
+      : [];
     item.difficulty = [1, 2, 3].includes(raw.difficulty) ? raw.difficulty : 2;
     item.sourceRefs = Array.isArray(raw.sourceRefs) ? raw.sourceRefs.map((s) => String(s).slice(0, 60)).slice(0, 3) : [];
     if (mode === "classical" && !item.sourceRefs.length) item.sourceRefs = ["《漢語大詞典》"];
@@ -172,6 +179,9 @@ function structuralIssues(bank, text) {
       if (new Set(item.options).size !== item.options.length) issues.push(`duplicate options: ${item.word}`);
       if (item.answerIndex < 0 || item.answerIndex > 3) issues.push(`bad answerIndex: ${item.word}`);
       if (!item.explanation) issues.push(`missing explanation: ${item.word}`);
+      if (item.distractorRationales.length !== 4 || item.distractorRationales.some((reason) => !reason)) {
+        issues.push(`distractor rationales != 4: ${item.word}`);
+      }
       const span = findSpan(text, item.sourceSentence);
       if (!span) issues.push(`sentence not in text: ${item.word} | ${item.sourceSentence}`);
       else item.sourceSentence = span;

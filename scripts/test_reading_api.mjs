@@ -122,20 +122,78 @@ try {
   assert("existing star seq unchanged after growth", seqStable);
 
   // 8. 字詞題掌握規則
-  const firstTry = await api("/api/reading/vocab-attempt", { lessonId: "lesson-1484", itemId: "lesson-1484:v01", correct: true, answer: "A" });
+  const firstTry = await api("/api/reading/vocab-attempt", { lessonId: "lesson-1484", itemId: "lesson-1484:v01", selectedIndex: 1 });
   assert("first-try correct => mastered", firstTry.data.status === "mastered");
-  const wrong = await api("/api/reading/vocab-attempt", { lessonId: "lesson-1484", itemId: "lesson-1484:v02", correct: false, answer: "B" });
+  assert("server computes correctness from answer key", firstTry.data.correct === true);
+  const forged = await api("/api/reading/vocab-attempt", { lessonId: "lesson-1484", itemId: "lesson-1484:v02", correct: true, answer: "forged" });
+  assert("browser correctness without selectedIndex rejected", forged.status === 400);
+  const vocabRetryMutationId = `vocab-retry-${SLUG}`;
+  const wrong = await api("/api/reading/vocab-attempt", {
+    lessonId: "lesson-1484",
+    itemId: "lesson-1484:v02",
+    selectedIndex: 0,
+    clientMutationId: vocabRetryMutationId,
+  });
   assert("wrong => learning", wrong.data.status === "learning");
-  const retry1 = await api("/api/reading/vocab-attempt", { lessonId: "lesson-1484", itemId: "lesson-1484:v02", correct: true, answer: "C" });
+  assert("wrong answer synchronizes as ineligible", wrong.data.evidence?.delivery?.endsWith("_ineligible"));
+  const wrongRetry = await api("/api/reading/vocab-attempt", {
+    lessonId: "lesson-1484",
+    itemId: "lesson-1484:v02",
+    selectedIndex: 0,
+    clientMutationId: vocabRetryMutationId,
+  });
+  assert("same mutation id replays without a new attempt", wrongRetry.data.deduped === true && wrongRetry.data.wrongCount === 1);
+  const retry1 = await api("/api/reading/vocab-attempt", { lessonId: "lesson-1484", itemId: "lesson-1484:v02", selectedIndex: 2 });
   assert("one correct after wrong => still learning", retry1.data.status === "learning");
-  const retry2 = await api("/api/reading/vocab-attempt", { lessonId: "lesson-1484", itemId: "lesson-1484:v02", correct: true, answer: "C" });
+  assert("correct retry remains synchronized but ineligible until mastered", retry1.data.evidence?.delivery?.endsWith("_ineligible"));
+  const retry2 = await api("/api/reading/vocab-attempt", { lessonId: "lesson-1484", itemId: "lesson-1484:v02", selectedIndex: 2 });
   assert("two corrects => mastered", retry2.data.status === "mastered");
+  assert("mastered answer is eligible for delivery", !retry2.data.evidence?.delivery?.endsWith("_ineligible"));
   const state = await api("/api/reading/vocab-state/lesson-1484");
   assert("vocab-state lists 2 items", state.data.items?.length === 2);
 
-  // 9. 健康探針
+  // 9. 每人每資源短時提交邊界：八次正常修訂可保留，第九次拒絕且不新增嘗試。
+  const boundedAttempts = [];
+  for (let i = 0; i < 8; i += 1) {
+    boundedAttempts.push(await api("/api/reading/vocab-attempt", {
+      lessonId: "lesson-1484",
+      itemId: "lesson-1484:v03",
+      selectedIndex: i === 0 ? 1 : 0,
+    }));
+  }
+  assert("eight bounded revisions accepted", boundedAttempts.every((item) => item.status === 200));
+  const rateBlocked = await api("/api/reading/vocab-attempt", {
+    lessonId: "lesson-1484",
+    itemId: "lesson-1484:v03",
+    selectedIndex: 0,
+  });
+  assert(
+    "ninth same-resource submission rate-limited",
+    rateBlocked.status === 429 && rateBlocked.data.code === "learning_submission_rate_limited",
+  );
+
+  // 10. 互動註冊表：未知事件拒絕；已註冊語義事件進入源端賬本。
+  const unknown = await api("/api/learning/interactions", { lessonId: "lesson-1484", interactionKey: "mousemove" });
+  assert("unknown/raw telemetry rejected", unknown.status === 400);
+  const trace = await api("/api/learning/interactions", {
+    lessonId: "lesson-1484",
+    interactionKey: "noteOpened",
+    clientMutationId: `trace-${SLUG}`,
+    data: { noteRef: "1" },
+  });
+  assert("registered semantic interaction recorded", trace.data.ok && trace.data.sourceEventId);
+  const traceDup = await api("/api/learning/interactions", {
+    lessonId: "lesson-1484",
+    interactionKey: "noteOpened",
+    clientMutationId: `trace-${SLUG}`,
+    data: { noteRef: "1" },
+  });
+  assert("client mutation id is idempotent", traceDup.data.ok && traceDup.data.deduped === true);
+
+  // 11. 健康探針
   const health = (await api("/api/reading/health")).data;
   assert("health counts grow", health.ok && health.submissions >= 4 && health.nodes >= 9);
+  assert("eligible and ineligible attempts remain in source ledger", health.learningInteractions >= 13);
 } catch (error) {
   failures.push(String(error.message || error));
   console.error(error);

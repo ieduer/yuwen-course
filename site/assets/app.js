@@ -24,6 +24,7 @@ const state = {
   blueprintLoading: new Set(),
   vocabBanks: new Map(),
   vocabBankLoading: new Set(),
+  lessonMedia: new Map(),
   progress: loadStoredProgress(),
   fontIndex: Number(localStorage.getItem(FONT_KEY) || 1),
   activeAuthorId: "",
@@ -55,6 +56,8 @@ const els = {
   textFlow: $("#text-flow"),
   materialStream: $("#material-stream"),
   materialsCount: $("#materials-count"),
+  lessonMediaContent: $("#lesson-media-content"),
+  lessonMediaStatus: $("#lesson-media-status"),
   checkStage: $("#check-stage"),
   matrixLinks: $("#matrix-links"),
   checkpointList: $("#checkpoint-list"),
@@ -524,6 +527,14 @@ function primaryPost(lesson) {
 
 function renderOrientation(lesson) {
   const taxonomy = taxonomyFor(lesson);
+  const activeAuthorId = taxonomy.authors.some((author) => author.id === state.activeAuthorId)
+    ? state.activeAuthorId
+    : taxonomy.authors[0]?.id || "";
+  const orderedAuthors = [...taxonomy.authors].sort((a, b) => {
+    if (a.id === activeAuthorId) return -1;
+    if (b.id === activeAuthorId) return 1;
+    return 0;
+  });
   const genres = genreNodesFor(lesson);
   const unitMode = modeFor(lesson).startsWith("unit");
   const authorText = taxonomy.authors.map((author) => author.url
@@ -540,10 +551,10 @@ function renderOrientation(lesson) {
   ].filter(Boolean).join("");
   els.orientation.innerHTML = `<p class="orientation-line">${[relation, representativeText].filter(Boolean).join(" ")}</p>`;
   els.lessonPortraits.setAttribute("aria-label", taxonomy.authors.length ? "作者肖像" : taxonomy.representativeFigure ? taxonomy.representativeFigure.role : "人物視覺");
-  els.lessonPortraits.innerHTML = taxonomy.authors.length ? taxonomy.authors.map((author, index) => {
+  els.lessonPortraits.innerHTML = taxonomy.authors.length ? orderedAuthors.map((author, index) => {
     const isNameCard = author.portraitKind === "documented-no-reliable-portrait";
     return `
-    <button type="button" class="portrait-choice${isNameCard ? " name-card" : ""}" data-author-id="${esc(author.id)}" style="--portrait-index:${index}" aria-label="${isNameCard ? `${esc(author.name)}無可靠肖像姓名卡` : `切換至${esc(author.name)}`}" aria-pressed="${author.id === (state.activeAuthorId || taxonomy.authors[0]?.id) ? "true" : "false"}">
+    <button type="button" class="portrait-choice${isNameCard ? " name-card" : ""}" data-author-id="${esc(author.id)}" style="--portrait-index:${index}" aria-label="${isNameCard ? `${esc(author.name)}無可靠肖像姓名卡` : `切換至${esc(author.name)}`}" aria-pressed="${author.id === activeAuthorId ? "true" : "false"}">
       <span>${esc(author.name.slice(0, 1))}</span>
       ${author.url ? `<img src="https://qx.bdfz.net/img/figures/${encodeURIComponent(author.id)}.webp" alt="${isNameCard ? `${esc(author.name)}無可靠肖像姓名卡` : esc(author.name)}" loading="eager" onerror="this.remove()">` : ""}
       ${isNameCard ? "<small>無可靠肖像 · 姓名卡</small>" : ""}
@@ -566,6 +577,50 @@ function renderOrientation(lesson) {
     });
     renderCheckStage(lesson);
   }));
+}
+
+function renderLessonMedia(lesson) {
+  const media = state.lessonMedia.get(lesson.id);
+  if (!media) {
+    els.lessonMediaStatus.textContent = "本課尚未列入選修教材視覺資源計畫";
+    els.lessonMediaContent.innerHTML = `<p class="empty-state">目前先完成選擇性必修上、中、下的課文來源核查。</p>`;
+    return;
+  }
+  const ready = Boolean(media.slideDeck);
+  els.lessonMediaStatus.textContent = ready
+    ? `來源 ${media.sourceVersion} · ${media.generatedAt ? new Date(media.generatedAt).toLocaleDateString("zh-CN") : "日期待記錄"} · 已人工審核`
+    : media.pilot
+      ? "試點來源包已核查，視覺資源正在生成與審核"
+      : "來源目錄與課程標準映射已登記；本課未生成 Slide";
+  if (!ready) {
+    els.lessonMediaContent.innerHTML = `
+      <article class="media-pending">
+        <span>${media.pilot ? "PILOT" : "PLANNED"}</span>
+        <div>
+          <h3>${media.pilot ? "試點資源製作中" : "來源目錄已登記"}</h3>
+          <p>來源版本：${esc(media.sourceVersion)}；Slide Deck 指令：${esc(media.promptVersions.slideDeck)}。</p>
+        </div>
+      </article>`;
+    return;
+  }
+  els.lessonMediaContent.innerHTML = `
+    <div class="lesson-media-grid">
+      <article class="slide-deck-card">
+        <div class="media-card-kicker">SLIDE DECK · PDF</div>
+        <h3>課堂演示</h3>
+        <p>按課文結構組織關鍵問題、文本證據、閱讀方法與學習任務。</p>
+        <div class="media-card-actions">
+          <button type="button" data-slide-open="${esc(media.slideDeck.href)}" data-slide-title="${esc(media.slideDeck.title)}">頁內閱讀</button>
+          <a href="${esc(media.slideDeck.href)}" target="_blank" rel="noopener noreferrer">另頁打開 ↗</a>
+        </div>
+      </article>
+    </div>
+    <dl class="media-provenance">
+      <div><dt>來源版本</dt><dd>${esc(media.sourceVersion)}</dd></div>
+      <div><dt>生成指令</dt><dd>${esc(media.promptVersions.slideDeck)}</dd></div>
+      <div><dt>生成日期</dt><dd>${esc(media.generatedAt ? new Date(media.generatedAt).toLocaleDateString("zh-CN") : "待記錄")}</dd></div>
+      <div><dt>審核狀態</dt><dd>${esc(media.reviewStatus.slideDeck)}</dd></div>
+    </dl>`;
 }
 
 function renderText(lesson) {
@@ -819,38 +874,27 @@ function renderVocabularyQuiz(lesson, progress, bank) {
   </div>`;
 }
 
-async function recordVocabAttempt(itemId, correct, answerText) {
+function recordLearning(interactionKey, data = {}, options = {}) {
+  if (!state.current?.id) return Promise.resolve({ ok: false, reason: "no-lesson" });
+  const pending = window.YwLearningEvidence?.record?.(interactionKey, state.current.id, data, options);
+  return pending
+    ? pending.catch(() => ({ ok: false, reason: "unavailable" }))
+    : Promise.resolve({ ok: false, reason: "identity-unavailable" });
+}
+
+async function recordVocabAttempt(itemId, selectedIndex) {
   try {
     await fetch("/api/reading/vocab-attempt", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ lessonId: state.current.id, itemId, correct, answer: String(answerText || "").slice(0, 80) }),
+      body: JSON.stringify({
+        lessonId: state.current.id,
+        itemId,
+        selectedIndex,
+        clientMutationId: window.YwLearningEvidence?.mutationId?.("vocabAnswer", state.current.id),
+      }),
     });
   } catch { /* 離線/未登入時僅記本地 */ }
-}
-
-async function recordQuizCompletion(lesson, questions) {
-  const identity = window.BdfzIdentity;
-  const session = await identity?.getSession?.().catch(() => null);
-  if (!session?.authenticated) return;
-  const quiz = quizRecord(lessonProgress(lesson.id));
-  await identity.recordEvent?.({
-    siteKey: "yw",
-    recordKey: `vocab-quiz:${lesson.id}`,
-    title: `字詞過關 · ${lessonTitle(lesson)}`,
-    summary: `${questions.length} 題全部答對，其中 ${questions.filter((item) => quizItemState(quiz, item.id).mastered).length} 題一次過`,
-    itemGroup: lesson.blockTitle,
-    itemType: "vocab-quiz",
-    contentFormat: "yw-vocab-quiz-v1",
-    sourceUrl: location.origin + location.pathname,
-    payload: {
-      eventName: "vocab_quiz_completed",
-      contentId: lesson.id,
-      total: questions.length,
-      firstTry: questions.filter((item) => quizItemState(quiz, item.id).mastered).length,
-      genre: modeFor(lesson),
-    },
-  });
 }
 
 function renderWordCreation(lesson, progress) {
@@ -903,7 +947,7 @@ function renderCheckStage(lesson) {
   const track = trackFor(lesson);
   els.checkStage.innerHTML = track.map(([key, label, _detail, weight], index) => `
     <section class="check-round ${checkpointDone(progress, key) ? "complete" : ""}" data-round="${key}">
-      <header>${wadangMark(STAGE_MARKS[index] || index + 1)}<h3>${esc(label)}</h3><b>${checkpointDone(progress, key) ? "完成" : `+${weight}`}</b></header>
+      <header>${wadangMark(STAGE_MARKS[index] || index + 1)}<h3>${esc(label)}</h3><b>${checkpointDone(progress, key) ? "本課完成" : `本課 ${weight}%`}</b></header>
       ${renderInteractionBody(key, lesson, progress, blueprint)}
     </section>
   `).join("");
@@ -992,32 +1036,6 @@ function renderLessonChat(lesson) {
   if (els.lessonChatFrame.src === "about:blank") els.lessonChatFrame.src = "https://chat.bdfz.net/#lobby";
 }
 
-function progressPayload(percent) {
-  const lesson = state.current;
-  return {
-    siteKey: "yw",
-    itemKey: lesson.id,
-    itemTitle: lessonTitle(lesson),
-    itemGroup: lesson.blockTitle || "高中語文",
-    itemType: "lesson",
-    state: percent === 100 ? "completed" : "in_progress",
-    progressPercent: percent,
-    score: percent,
-    meta: {
-      source: "yuwen-course",
-      mode: modeFor(lesson),
-      version: "participation-matrix-v3",
-      checkpoints: Object.fromEntries(trackFor(lesson).map(([key]) => [key, lessonProgress(lesson.id)[key] || (key === "read" ? Boolean(lessonProgress(lesson.id).read) : false)])),
-    },
-  };
-}
-
-function submitEffectEvidence(resourceKey, result) {
-  const evidence = window.YwLearningEvidence;
-  if (!evidence?.complete || !resourceKey) return;
-  void evidence.complete(resourceKey, result).catch(() => {});
-}
-
 function syncProgress({ event = false } = {}) {
   saveStoredProgress();
   if (!state.current || !state.manifest) return;
@@ -1026,29 +1044,17 @@ function syncProgress({ event = false } = {}) {
   if (!state.current) return;
   const percent = progressPercent();
   const send = async () => {
-    const identity = window.BdfzIdentity;
-    if (!identity?.getSession) return;
-    const session = await identity.getSession().catch(() => null);
-    if (!session?.authenticated) return;
-    await identity.syncProgress?.(progressPayload(percent));
     const progress = lessonProgress();
     if (event && percent === 100 && !progress.completionEventSent) {
-      await identity.recordEvent?.({
-        siteKey: "yw",
-        recordKey: `close-reading:${state.current.id}`,
-        title: `完成細讀 · ${lessonTitle(state.current)}`,
-        summary: `完成 ${primaryGenreLabel(state.current)} 的文體化細讀確認`,
-        itemGroup: state.current.blockTitle || "高中語文",
-        itemType: "learning-check",
-        contentFormat: "bdfz-event-v1",
-        sourceUrl: location.origin + location.pathname,
-        payload: { eventName: "lesson_close_reading_completed", contentId: state.current.id, result: percent, genre: modeFor(state.current) },
+      await recordLearning("lessonCompleted", {
+        checkpointCount: trackFor().filter(([key]) => checkpointDone(progress, key)).length,
+        checkpointTotal: trackFor().length,
       });
       progress.completionEventSent = true;
       saveStoredProgress();
     }
   };
-  if (window.BdfzIdentity) void send(); else setTimeout(() => void send(), 1800);
+  void send();
 }
 
 function renderLesson(lesson) {
@@ -1063,6 +1069,7 @@ function renderLesson(lesson) {
   renderOrientation(lesson);
   renderText(lesson);
   renderMaterials(lesson);
+  renderLessonMedia(lesson);
   renderCheckStage(lesson);
   renderLessonChat(lesson);
   renderMatrix(lesson);
@@ -1122,6 +1129,7 @@ async function showLesson(id, { push = true } = {}) {
     state.blockId = lesson.blockId || meta.blockId || state.blockId;
     renderBooks();
     renderLesson(lesson);
+    void recordLearning("lessonOpened");
     if (push) history.replaceState(null, "", `#${lesson.id}`);
     if (matchMedia("(max-width: 900px)").matches) closeAtlas();
     scrollTo({ top: 0, behavior: "auto" });
@@ -1165,6 +1173,7 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
   }
   if (autoStatus) autoStatus.textContent = "核對中";
   try {
+    const clientMutationId = window.YwLearningEvidence?.mutationId?.(key, state.current.id);
     const response = await fetch("/api/interaction-check", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -1179,6 +1188,7 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
         blueprint: state.blueprints.get(blueprintKey(state.current)) || blueprintFallback(state.current),
         excerpt: String(primaryPost(state.current)?.plain_text || state.current.excerpt || "").slice(0, 4200),
         input,
+        clientMutationId,
       }),
     });
     const payload = await response.json();
@@ -1188,12 +1198,7 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     const score = Number(result.score || 0);
     lessonProgress()[progressKey] = { ...lessonProgress()[progressKey], ...input, done: score >= 60, score, result };
     if (key === "wordCreation" && !lessonVocabulary(state.current).length) lessonProgress().vocabulary = { ...(lessonProgress().vocabulary || {}), done: true, reviewed: [] };
-    if (key === "wordCreation" && score >= 60) void saveLearnedWord(input);
     if (key === "contextWords") void saveReadingSubmission(input, result);
-    submitEffectEvidence(
-      window.YwLearningEvidence?.interactionResourceKey(state.current.id, key),
-      { scorePercent: score, correctness: score >= 60 ? "passed" : "needs_revision", attemptCount: 1 },
-    );
     if (!silent) toast(`${trackFor().find((item) => item[0] === progressKey)?.[1] || "互動"} · ${result.score || 0} 分`);
     syncProgress({ event: true });
     renderCheckStage(state.current);
@@ -1224,50 +1229,13 @@ async function saveReadingSubmission(input, result) {
   } catch { /* 未登入或離線時僅保留本地進度，星圖等待下次有效提交 */ }
 }
 
-async function saveLearnedWord(input) {
-  const identity = window.BdfzIdentity;
-  const session = await identity?.getSession?.().catch(() => null);
-  if (!session?.authenticated) return;
-  const wordKey = normalizeText(input.word).slice(0, 40) || "word";
-  await identity.recordEvent?.({
-    siteKey: "yw",
-    recordKey: `learned-word:${state.current.id}:${wordKey}`,
-    title: `新詞活用 · ${input.word}`,
-    summary: input.creation.slice(0, 140),
-    itemGroup: state.current.blockTitle,
-    itemType: "learned-word",
-    contentFormat: "yw-learned-word-v1",
-    sourceUrl: location.origin + location.pathname,
-    payload: {
-      eventName: "learned_word_creation",
-      contentId: state.current.id,
-      word: input.word.slice(0, 80),
-      creation: input.creation.slice(0, 500),
-      genre: modeFor(state.current),
-    },
-  });
-}
-
 async function saveEvaluation(explicitRating = 0, { quiet = false } = {}) {
   const rating = Number(explicitRating || els.checkStage.querySelector("[data-rating].active")?.dataset.rating || lessonProgress().evaluation?.rating || 0);
   const reason = fieldValue("evaluation.reason");
   if (!rating) return;
   lessonProgress().evaluation = { rating, reason, done: true };
   syncProgress({ event: true });
-  const identity = window.BdfzIdentity;
-  const session = await identity?.getSession?.().catch(() => null);
-  if (session?.authenticated) {
-    await identity.recordEvent?.({
-      siteKey: "yw", recordKey: `lesson-value:${state.current.id}`, title: `篇目評價 · ${lessonTitle(state.current)}`,
-      summary: `${rating}/5 · ${reason.slice(0, 120)}`, itemGroup: state.current.blockTitle, itemType: "lesson-rating",
-      contentFormat: "yw-lesson-value-v1", sourceUrl: location.origin + location.pathname,
-      payload: { eventName: "lesson_value_rating", contentId: state.current.id, rating, genre: modeFor(state.current), reason: reason.slice(0, 300) },
-    });
-  }
-  submitEffectEvidence(
-    window.YwLearningEvidence?.interactionResourceKey(state.current.id, "evaluation"),
-    { scorePercent: rating * 20, correctness: "not_applicable", attemptCount: 1 },
-  );
+  await recordLearning("evaluation", { rating, reason: reason.slice(0, 300) });
   if (!quiet) toast(`已自動保存 ${rating}/5`);
 }
 
@@ -1326,14 +1294,9 @@ function bindCheckStage() {
       progress.vocabulary = { ...(progress.vocabulary || {}), done: true, quiz: true };
       if (!quiz.completionSent) {
         quiz.completionSent = true;
-        void recordQuizCompletion(state.current, bank.questions);
       }
     }
-    void recordVocabAttempt(item.id, correct, item.options[pick]);
-    submitEffectEvidence(
-      window.YwLearningEvidence?.vocabResourceKey(state.current.id, item.id),
-      { scorePercent: correct ? 100 : 0, correctness: correct ? "correct" : "incorrect", attemptCount: entry.attempts },
-    );
+    void recordVocabAttempt(item.id, pick);
     syncProgress({ event: true });
     if (!correct) {
       renderCheckStage(state.current);
@@ -1370,6 +1333,7 @@ function bindCheckStage() {
     const previous = lessonProgress().read && typeof lessonProgress().read === "object" ? lessonProgress().read : {};
     lessonProgress().read = { ...previous, checked: checkbox.checked, done: checkbox.checked };
     syncProgress();
+    if (checkbox.checked) void recordLearning("readAcknowledged", { threshold: "manual_confirmation" });
     renderCheckStage(state.current);
     if (checkbox.checked) toast("已記下");
   }));
@@ -1392,6 +1356,10 @@ function openLexicon(text) {
   els.body.classList.add("lexicon-open");
   els.lexiconDock.setAttribute("aria-hidden", "false");
   updateLexiconFrame();
+  void recordLearning("vocabularyLookup", {
+    lookupKind: state.lexicon,
+    termLength: [...clean].length,
+  });
 }
 
 function closeLexicon() {
@@ -1445,10 +1413,18 @@ function openPages(index = 0) {
   $$('.page-strip button', els.pageStrip).forEach((button) => button.addEventListener("click", () => showPage(Number(button.dataset.pageIndex))));
   showPage(index);
   if (!els.pageDialog.open) els.pageDialog.showModal();
+  void recordLearning("resourceOpened", {
+    resourceKind: "textbook_page",
+    resourceRef: state.pages[index]?.label || String(index + 1),
+  });
 }
 
 function resourcePreviewUrl(href) {
   if (/\.(png|jpe?g|gif|webp|svg)(?:$|\?)/i.test(href)) return href;
+  try {
+    const url = new URL(href, location.href);
+    if (url.origin === location.origin && /\.pdf$/i.test(url.pathname)) return url.toString();
+  } catch {}
   return `/api/preview?url=${encodeURIComponent(href)}`;
 }
 
@@ -1463,6 +1439,10 @@ function openResource(resource) {
   }
   els.resourceFrame.src = resourcePreviewUrl(resource.href);
   if (!els.resourceDialog.open) els.resourceDialog.showModal();
+  void recordLearning(resource.evidenceKind === "slideDeck" ? "slideDeckOpened" : "resourceOpened", {
+    resourceKind: resource.evidenceKind === "slideDeck" ? "slide_deck_pdf" : (resource.kind || "resource"),
+    resourceRef: String(resource.href || "").slice(0, 500),
+  });
 }
 
 function onSelection() {
@@ -1484,7 +1464,11 @@ function updateReadProgress() {
   const endY = Math.max(startY + 1, end.offsetTop - innerHeight * 0.45);
   const ratio = clamp((scrollY - startY + innerHeight * 0.35) / (endY - startY), 0, 1);
   els.readProgress.style.width = `${ratio * 100}%`;
-  if (ratio > 0.72 && !lessonProgress().readReached) { lessonProgress().readReached = true; syncProgress(); }
+  if (ratio > 0.72 && !lessonProgress().readReached) {
+    lessonProgress().readReached = true;
+    syncProgress();
+    void recordLearning("readAcknowledged", { threshold: 0.72 });
+  }
 }
 
 function applyFont() {
@@ -1528,6 +1512,9 @@ function toggleInlineNote(button) {
     popover.classList.remove("typing");
     return;
   }
+  void recordLearning("noteOpened", {
+    noteRef: String($$(".inline-note", els.textFlow).indexOf(button) + 1),
+  });
   const characters = [...(button.dataset.note || "")];
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
     popover.textContent = characters.join("");
@@ -1573,6 +1560,16 @@ function bindEvents() {
     if (!button) return;
     openResource(resourcesFor(state.current)[Number(button.dataset.resourceIndex)]);
   });
+  els.lessonMediaContent.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-slide-open]");
+    if (!button) return;
+    openResource({
+      href: button.dataset.slideOpen,
+      title: button.dataset.slideTitle,
+      kind: "document",
+      evidenceKind: "slideDeck",
+    });
+  });
   els.textFlow.addEventListener("click", (event) => {
     const note = event.target.closest(".inline-note");
     if (note) {
@@ -1602,6 +1599,9 @@ function bindEvents() {
   els.resourcesOpen.addEventListener("click", () => {
     const first = resourcesFor(state.current)[0];
     if (first) openResource(first); else document.querySelector("#classroom-materials")?.scrollIntoView({ behavior: "smooth" });
+  });
+  document.querySelector("#lesson-chat a")?.addEventListener("click", () => {
+    void recordLearning("chatOpened");
   });
   els.resourceDialog.addEventListener("close", () => { els.resourceFrame.src = "about:blank"; });
   els.fontDown.addEventListener("click", () => changeFont(-1));
@@ -1693,10 +1693,14 @@ async function init() {
   }))).observe(document.body, { childList: true, subtree: true });
   if (matchMedia("(min-width: 901px)").matches) openAtlas(); else closeAtlas();
   try {
-    [state.manifest, state.taxonomy] = await Promise.all([
+    const [manifest, taxonomy, lessonMedia] = await Promise.all([
       fetchJson("data/manifest.json"),
       fetchJson("data/literary-taxonomy.json"),
+      fetchJson("data/lesson-media.json"),
     ]);
+    state.manifest = manifest;
+    state.taxonomy = taxonomy;
+    state.lessonMedia = new Map((lessonMedia.lessons || []).map((lesson) => [lesson.lessonId, lesson]));
     state.taxonomyLessons = new Map(state.taxonomy.lessons.map((lesson) => [lesson.id, lesson]));
     state.taxonomyGenres = new Map(state.taxonomy.genres.map((genre) => [genre.id, genre]));
     const defaultBlock = state.manifest.blocks.find((block) => block.id === "xuanbi-shang" || block.title === "選必上") || state.manifest.blocks[0];

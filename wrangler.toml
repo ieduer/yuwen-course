@@ -7,3 +7,12 @@ binding = "READING_DB"
 database_name = "yuwen-reading-db"
 database_id = "99c541e7-e70b-4584-b939-7e88a6dd68c5"
 migrations_dir = "migrations"
+
+[[services]]
+binding = "USER_CENTER_EVIDENCE"
+service = "bdfz-user-center"
+entrypoint = "YuwenEvidenceIdentity"
+
+[[queues.producers]]
+binding = "LEARNING_EVIDENCE_QUEUE"
+queue = "bdfz-learning-evidence-yw-v1"

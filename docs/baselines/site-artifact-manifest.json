@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": "site/",
-  "fileCount": 842,
-  "totalBytes": 148147662,
-  "aggregateSha256": "c9ae504b34c39bd29fb62c376679b351079719ae6e7efb2ecbca3186c2168519",
+  "fileCount": 855,
+  "totalBytes": 242773997,
+  "aggregateSha256": "e9da3f18a3fa46eb80695cbf92f38fa2f98de43315c92a2cf6d4e1123f034d5b",
   "files": [
     {
       "path": "_headers",
@@ -12,13 +12,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 60883,
-      "sha256": "0114e9de3a7ac72821106f2589b68db850b3bbc20913229c0e7178213db50830"
+      "bytes": 75822,
+      "sha256": "7a33c29e778103c00d366301530e139726baf97c5b0505ec33921e42a64e82c8"
     },
     {
       "path": "assets/app.js",
-      "bytes": 83333,
-      "sha256": "d802e7801f509ee916f2a898e976b250fa1cce73ebefaef8e2f483961968c8ae"
+      "bytes": 83570,
+      "sha256": "63283ca091a02dd889b7b6673d2316a293d61ddd4e5350ffab95a882cd81102e"
     },
     {
       "path": "assets/atlas.css",
@@ -47,8 +47,8 @@
     },
     {
       "path": "assets/learning-evidence.js",
-      "bytes": 3642,
-      "sha256": "91e8cf944fa1fa72d12d33fa5331f3a1581ad0cec335af113324fbc424566d57"
+      "bytes": 1361,
+      "sha256": "b47db3fc8cd662d0c2df6055f73a280f3ef03456df7e832c6497eda15a52342c"
     },
     {
       "path": "assets/menu-icon.webp",
@@ -67,8 +67,8 @@
     },
     {
       "path": "assets/styles.css",
-      "bytes": 50206,
-      "sha256": "62225a57c0a0d01cf72cc99fcb2f2cfd742b9141ce06767662255c706b1edee9"
+      "bytes": 52791,
+      "sha256": "2ee8a85006d9da89b80ead0f3c626f816c62dd39ca3939525a518504869acf7e"
     },
     {
       "path": "books.html",
@@ -2476,9 +2476,19 @@
       "sha256": "953799e35d48a600c420b86f31d248721412db7b51bd34d510e9f9f2b1287b80"
     },
     {
+      "path": "data/interaction-definitions.json",
+      "bytes": 5238,
+      "sha256": "cf68703253a3f026540456b08dddc12d8a8204a0f76e146af9ec8b69e5a42f5c"
+    },
+    {
       "path": "data/learning-manifest.json",
-      "bytes": 512412,
-      "sha256": "20dbb74d8aca9df104d84e0a047f7d7a957462232a31be838eaf0cd3e73ee1af"
+      "bytes": 512417,
+      "sha256": "aa3dc3a27fa5899b2ce2f036ad0bca1ee20954d94566dadd362e287932921080"
+    },
+    {
+      "path": "data/lesson-media.json",
+      "bytes": 29977,
+      "sha256": "c6bd6649bc66ba59480041f568bfdec51da36f9f654905288d1c397cb435cc65"
     },
     {
       "path": "data/lessons/lesson-11637.json",
@@ -3522,8 +3532,8 @@
     },
     {
       "path": "data/vocab/lesson-1458.json",
-      "bytes": 6999,
-      "sha256": "46ac2c16b082ba48a5deeaa3bc1b5e3cef77e76dcfddc007db3bfec7478c7df9"
+      "bytes": 7671,
+      "sha256": "6d05c2c103ccf030dcf36e45a8f47d7a1b0c7f321e9f403e72d6437efda122a4"
     },
     {
       "path": "data/vocab/lesson-1461.json",
@@ -3592,8 +3602,8 @@
     },
     {
       "path": "data/vocab/lesson-1493.json",
-      "bytes": 7559,
-      "sha256": "9b75b0e15b926ec41fce3a20246492da553273be054deffadc6a6bc78947ffd8"
+      "bytes": 7956,
+      "sha256": "0e7b31c96f3b023eeaf7c8b9a0e2ed5cbdcaa5e7a088351a054539b1a52b6c84"
     },
     {
       "path": "data/vocab/lesson-1494.json",
@@ -3657,8 +3667,8 @@
     },
     {
       "path": "data/vocab/lesson-1526.json",
-      "bytes": 15296,
-      "sha256": "a611a8bee31b89f4dd7e73a2d0be42f10979056622c00a3adcc0e2ada8ceeaba"
+      "bytes": 15720,
+      "sha256": "21043e45a947584700d44e5bf8e22ae69afad98345f95596f61c15899e3e42d8"
     },
     {
       "path": "data/vocab/lesson-1527.json",
@@ -3687,8 +3697,8 @@
     },
     {
       "path": "data/vocab/lesson-1534.json",
-      "bytes": 38612,
-      "sha256": "5e5ff8bac3444365ab8a3f3e109ae52272e24b9c77fe3fe4bfaf59848b0307de"
+      "bytes": 39429,
+      "sha256": "729cabc5c8ee11c8255bc68845506aa787105860e7200908d3baee9f453f9086"
     },
     {
       "path": "data/vocab/lesson-1535.json",
@@ -3767,8 +3777,8 @@
     },
     {
       "path": "data/vocab/lesson-1559.json",
-      "bytes": 16629,
-      "sha256": "ed6846cf06baa79acc59a7ab4d8c5b0fc21dbf17b827a4e891222bb1ee8ce4fa"
+      "bytes": 16750,
+      "sha256": "381c4c0edc1bdb4ed6b1a75626b72b697f8791ffba57440f42b1dde2a170b5fe"
     },
     {
       "path": "data/vocab/lesson-1560.json",
@@ -4202,13 +4212,68 @@
     },
     {
       "path": "index.html",
-      "bytes": 10464,
-      "sha256": "575ffa7c87db474a79690beb7ac47d2517a961cd669fb270881faf6b72f53f6d"
+      "bytes": 10953,
+      "sha256": "c9bbf6d43b10d9177d7765e6a3a0dd49f861707b97094a13e78a459fc67bf6ee"
     },
     {
       "path": "insights.html",
       "bytes": 2639,
       "sha256": "c6429f2cba8a4bbabdd60442d0c338708a9e4bd6d954cb01f1896ee2ec3a7497"
+    },
+    {
+      "path": "learning-evidence-source.js",
+      "bytes": 18153,
+      "sha256": "5d165d3ad8d4f890fc669789ddddc7390431b97abd15e760df5a269f1d996797"
+    },
+    {
+      "path": "media/lesson-media/lesson-1458/sha256-cbf43aa4198be042f4724aec8cba24e94e27457f6938cd17bae4a5b6bec730c0.pdf",
+      "bytes": 6120202,
+      "sha256": "cbf43aa4198be042f4724aec8cba24e94e27457f6938cd17bae4a5b6bec730c0"
+    },
+    {
+      "path": "media/lesson-media/lesson-1458/slide-deck.pdf",
+      "bytes": 6120202,
+      "sha256": "cbf43aa4198be042f4724aec8cba24e94e27457f6938cd17bae4a5b6bec730c0"
+    },
+    {
+      "path": "media/lesson-media/lesson-1493/sha256-a667e7ddbcc5ce4812e5dce7feee4d7ba94c66c54031c9c867b75f277e493bed.pdf",
+      "bytes": 15236228,
+      "sha256": "a667e7ddbcc5ce4812e5dce7feee4d7ba94c66c54031c9c867b75f277e493bed"
+    },
+    {
+      "path": "media/lesson-media/lesson-1493/slide-deck.pdf",
+      "bytes": 15236228,
+      "sha256": "a667e7ddbcc5ce4812e5dce7feee4d7ba94c66c54031c9c867b75f277e493bed"
+    },
+    {
+      "path": "media/lesson-media/lesson-1526/sha256-c617815d5a1376384c94985138284c1c885a562249a342eb3332c683ec85d478.pdf",
+      "bytes": 8119118,
+      "sha256": "c617815d5a1376384c94985138284c1c885a562249a342eb3332c683ec85d478"
+    },
+    {
+      "path": "media/lesson-media/lesson-1526/slide-deck.pdf",
+      "bytes": 8119118,
+      "sha256": "c617815d5a1376384c94985138284c1c885a562249a342eb3332c683ec85d478"
+    },
+    {
+      "path": "media/lesson-media/lesson-1534/sha256-fb3ed89d45fd333820bdb1d2d1249d5eb6a6f1c3a6c076a7505c1b65ddc7efa5.pdf",
+      "bytes": 8188384,
+      "sha256": "fb3ed89d45fd333820bdb1d2d1249d5eb6a6f1c3a6c076a7505c1b65ddc7efa5"
+    },
+    {
+      "path": "media/lesson-media/lesson-1534/slide-deck.pdf",
+      "bytes": 8188384,
+      "sha256": "fb3ed89d45fd333820bdb1d2d1249d5eb6a6f1c3a6c076a7505c1b65ddc7efa5"
+    },
+    {
+      "path": "media/lesson-media/lesson-1559/sha256-6bf63372fb6f2f6b63854bce541dbf16838ff9b63424ef9af55d246a476914eb.pdf",
+      "bytes": 9613349,
+      "sha256": "6bf63372fb6f2f6b63854bce541dbf16838ff9b63424ef9af55d246a476914eb"
+    },
+    {
+      "path": "media/lesson-media/lesson-1559/slide-deck.pdf",
+      "bytes": 9613349,
+      "sha256": "6bf63372fb6f2f6b63854bce541dbf16838ff9b63424ef9af55d246a476914eb"
     },
     {
       "path": "star.html",

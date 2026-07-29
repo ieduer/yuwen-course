@@ -3,7 +3,7 @@ import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
-const SITE = path.join(ROOT, "site");
+const SITE = path.join(ROOT, ".release", "site");
 const OUTPUT = path.join(ROOT, "docs/baselines/site-artifact-manifest.json");
 const CHECK_ONLY = process.argv.includes("--check");
 
@@ -27,7 +27,7 @@ const aggregateSha256 = createHash("sha256")
   .digest("hex");
 const manifest = {
   schemaVersion: 1,
-  artifactRoot: "site/",
+  artifactRoot: ".release/site/",
   fileCount: files.length,
   totalBytes: files.reduce((sum, file) => sum + file.bytes, 0),
   aggregateSha256,

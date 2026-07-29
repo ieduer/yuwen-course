@@ -1,6 +1,84 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-07-14 (America/Los_Angeles)
+Last reviewed: 2026-07-28 (America/Los_Angeles)
+
+## 2026-07-28 completion eligibility and anti-farming (current)
+
+Production deployment `33725793-42fa-437e-ab6d-bc712549e633` keeps every
+authenticated YW attempt in the source-owned ledger and makes the Worker the
+only authority for scoring eligibility. AI performance is eligible only when
+the server result has `score >= 60` and correctness `passed`; vocabulary is
+eligible only when the source-owned verdict is `mastered`. Evaluation remains
+`self_report + scoringRole=none`.
+
+Failed and learning attempts are still synchronized to User Center as
+`ineligible` process evidence. They therefore remain visible for audit without
+entering the Student Growth denominator. The browser cannot submit score,
+correctness, attempt count, resource version, scoring role or eligibility.
+
+The Worker accepts at most eight scoring submissions per authenticated
+user/resource in a ten-minute window; the ninth returns `429`. An exact
+client-mutation replay returns the stored evaluation without another APIS or
+vocabulary write. Reusing that mutation id with another resource returns `409`.
+These checks are source-side and require no D1 schema change.
+
+Release acceptance:
+
+```text
+Production:             33725793-42fa-437e-ab6d-bc712549e633
+Immediate rollback:     8c3cb13e-a954-4f79-a342-f072b0a950b4
+Source contract:        8 / 8
+Local Pages + D1 path:  37 / 37
+Learning manifest:      8 / 8
+Artifact files:         850
+Artifact aggregate:     acb2daaadc5cfe358f6ccbc94798a68be5812ab31519f867c02f75be93fca491
+```
+
+No migration, student-row rewrite, synthetic attempt or completion backfill
+was performed. Roll back the Pages artifact only; preserve the additive D1
+tables and all later student history.
+
+## 2026-07-26 learning-evidence source adapter (historical)
+
+YW is the first source under the cross-site contract:
+
+```text
+/Users/ylsuen/CF/runbooks/bdfz_learning_evidence_integration_standard.md
+/Users/ylsuen/CF/runbooks/student_growth_system_v3_2_0.md
+```
+
+Source-owned components:
+
+- migration `0003_learning_evidence_loop_v1.sql`;
+- raw ledger `learning_interactions`;
+- evaluation table `learning_evaluations`;
+- reliable outbox `evidence_outbox`;
+- event registry `site/data/interaction-definitions.json`;
+- named identity binding `USER_CENTER_EVIDENCE` →
+  `bdfz-user-center#YuwenEvidenceIdentity`;
+- dedicated producer `LEARNING_EVIDENCE_QUEUE` →
+  `bdfz-learning-evidence-yw-v1`.
+
+The browser may submit a lesson/resource key, interaction key, selected option
+or raw input and client mutation id. It may not submit User Center ID, trusted
+score, correctness, attempt number, manifest/registry version, scoring role or
+A+ eligibility. Raw answers stay in YW D1; User Center receives only the
+privacy-minimized projection. Future YW events must be registered on both sides
+and unknown events fail closed.
+
+The `evaluation` interaction is a `self_report` with `scoringRole=none`.
+It remains visible in the process dossier but cannot add a dimension score or
+satisfy an A+ gate. `npm run test:evidence-contract` constructs the real YW
+envelope, sends it through a Queue-producer mock, and validates it with the
+current User Center consumer registry from the sibling canonical source.
+
+Cloudflare Queue producer success proves only that a message was enqueued. The
+source outbox therefore records `enqueued`, not `delivered`; historical
+`delivered` rows are preserved and are not rewritten. The current one-way Queue
+has no consumer receipt channel. Consumer policy rejection remains visible in
+User Center's sanitized `learning_evidence_rejected` log, so a future
+per-message receipt requires a separately versioned receipt Queue or RPC
+contract on both systems.
 
 ## 1. Scope and ownership
 
@@ -29,7 +107,8 @@ Browser / Companion WebView
   -> Pages static artifact (site/)
   -> Pages Worker (site/_worker.js)
        -> D1 yuwen-reading-db: reading submissions and vocab attempts
-       -> my.bdfz.net: server-side session verification and central events
+       -> my.bdfz.net named RPC: immutable user ID with source key fixed to yw
+       -> source-specific Queue: privacy-minimized process-evidence projection
        -> apis.bdfz.net: AI dialogue and authoring gateway
        -> GitHub Issues: optional lesson discussion integration
 
@@ -40,7 +119,7 @@ Static/UI dependencies
   -> nav.bdfz.net and img.bdfz.net: shared navigation and favicon/assets
 
 Operational consumers
-  <- my.bdfz.net: progress, data records, mastery, activity timeline
+  <- my.bdfz.net: legacy progress readback + trusted process dossier/A+ gate
   <- pulse.bdfz.net: host coverage and availability reporting
   <- bdfz-companion: trusted WebView entry
 ```

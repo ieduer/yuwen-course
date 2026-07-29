@@ -1,0 +1,1152 @@
+{
+  "schemaVersion": "yw-lesson-media-v2",
+  "generatedAt": "2026-07-26T22:15:23.866Z",
+  "sourceCatalog": "选择性必修上、中、下 75 篇课文",
+  "lessons": [
+    {
+      "lessonId": "lesson-1458",
+      "title": "中国人民站起来了",
+      "blockTitle": "選必上",
+      "pilot": true,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": "2026-07-26T22:09:02Z",
+      "reviewStatus": {
+        "slideDeck": "approved"
+      },
+      "slideDeck": {
+        "title": "中国人民站起来了｜课堂演示",
+        "href": "media/lesson-media/lesson-1458/sha256-cbf43aa4198be042f4724aec8cba24e94e27457f6938cd17bae4a5b6bec730c0.pdf",
+        "sha256": "cbf43aa4198be042f4724aec8cba24e94e27457f6938cd17bae4a5b6bec730c0"
+      }
+    },
+    {
+      "lessonId": "lesson-1461",
+      "title": "长征胜利万岁",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1462",
+      "title": "大战中的插曲",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1466",
+      "title": "别了,“不列颠尼亚”",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1471",
+      "title": "县委书记的榜样——焦裕禄",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1468",
+      "title": "在民族复兴的历史丰碑上——2020 中国抗疫记",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1474",
+      "title": "《论语》十二章",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1476",
+      "title": "大学之道",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1477",
+      "title": "人皆有不忍人之心",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1483",
+      "title": "《老子》四章",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1484",
+      "title": "五石之瓠hù",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1485",
+      "title": "兼爱",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1488",
+      "title": "大卫·科波菲尔(节选)",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1490",
+      "title": "复活(节选)",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1493",
+      "title": "老人与海(节选)",
+      "blockTitle": "選必上",
+      "pilot": true,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": "2026-07-26T22:09:02Z",
+      "reviewStatus": {
+        "slideDeck": "approved"
+      },
+      "slideDeck": {
+        "title": "老人与海(节选)｜课堂演示",
+        "href": "media/lesson-media/lesson-1493/sha256-a667e7ddbcc5ce4812e5dce7feee4d7ba94c66c54031c9c867b75f277e493bed.pdf",
+        "sha256": "a667e7ddbcc5ce4812e5dce7feee4d7ba94c66c54031c9c867b75f277e493bed"
+      }
+    },
+    {
+      "lessonId": "lesson-1494",
+      "title": "百年孤独(节选)",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1497",
+      "title": "无衣",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1498",
+      "title": "春江花月夜",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1499",
+      "title": "将进酒",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1500",
+      "title": "江城子·乙卯正月二十日夜记梦",
+      "blockTitle": "選必上",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1517",
+      "title": "社会历史的决定性基础",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1518",
+      "title": "改造我们的学习",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1519",
+      "title": "人的正确思想是从哪里来的?",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1520",
+      "title": "实践是检验真理的唯一标准",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1521",
+      "title": "修辞立其诚",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1522",
+      "title": "怜悯是人的天性",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1523",
+      "title": "人应当坚持正义",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1526",
+      "title": "记念刘和珍君",
+      "blockTitle": "選必中",
+      "pilot": true,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": "2026-07-26T22:09:02Z",
+      "reviewStatus": {
+        "slideDeck": "approved"
+      },
+      "slideDeck": {
+        "title": "记念刘和珍君｜课堂演示",
+        "href": "media/lesson-media/lesson-1526/sha256-c617815d5a1376384c94985138284c1c885a562249a342eb3332c683ec85d478.pdf",
+        "sha256": "c617815d5a1376384c94985138284c1c885a562249a342eb3332c683ec85d478"
+      }
+    },
+    {
+      "lessonId": "lesson-1527",
+      "title": "为了忘却的记念",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1528",
+      "title": "包身工",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1529",
+      "title": "荷花淀",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1530",
+      "title": "小二黑结婚(节选)",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1531",
+      "title": "党费",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1534",
+      "title": "屈原列传",
+      "blockTitle": "選必中",
+      "pilot": true,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": "2026-07-26T22:09:02Z",
+      "reviewStatus": {
+        "slideDeck": "approved"
+      },
+      "slideDeck": {
+        "title": "屈原列传｜课堂演示",
+        "href": "media/lesson-media/lesson-1534/sha256-fb3ed89d45fd333820bdb1d2d1249d5eb6a6f1c3a6c076a7505c1b65ddc7efa5.pdf",
+        "sha256": "fb3ed89d45fd333820bdb1d2d1249d5eb6a6f1c3a6c076a7505c1b65ddc7efa5"
+      }
+    },
+    {
+      "lessonId": "lesson-1535",
+      "title": "苏武传",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1536",
+      "title": "过秦论",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1537",
+      "title": "五代史伶官传序",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1540",
+      "title": "玩偶之家(节选)",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1541",
+      "title": "迷娘(之一)",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1542",
+      "title": "致大海",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1543",
+      "title": "自己之歌(节选)",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1544",
+      "title": "树和天空",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1547",
+      "title": "燕歌行并序",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1548",
+      "title": "李凭箜篌引",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1550",
+      "title": "锦瑟",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1549",
+      "title": "书愤",
+      "blockTitle": "選必中",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1556",
+      "title": "氓",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1557",
+      "title": "离骚(节选)",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1558",
+      "title": "孔雀东南飞并序",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1559",
+      "title": "蜀道难",
+      "blockTitle": "選必下",
+      "pilot": true,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": "2026-07-26T22:09:02Z",
+      "reviewStatus": {
+        "slideDeck": "approved"
+      },
+      "slideDeck": {
+        "title": "蜀道难｜课堂演示",
+        "href": "media/lesson-media/lesson-1559/sha256-6bf63372fb6f2f6b63854bce541dbf16838ff9b63424ef9af55d246a476914eb.pdf",
+        "sha256": "6bf63372fb6f2f6b63854bce541dbf16838ff9b63424ef9af55d246a476914eb"
+      }
+    },
+    {
+      "lessonId": "lesson-1560",
+      "title": "蜀相",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1561",
+      "title": "望海潮(东南形胜)",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1562",
+      "title": "扬州慢(淮左名都)",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1565",
+      "title": "阿Q正传(节选)",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1566",
+      "title": "边城(节选)",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1567",
+      "title": "大堰河——我的保姆",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1568",
+      "title": "再别康桥",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1569",
+      "title": "一个消逝了的山村",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1570",
+      "title": "风景谈",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1571",
+      "title": "秦腔",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1572",
+      "title": "聽聽那冷雨",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1573",
+      "title": "茶馆(节选)",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1576",
+      "title": "陈情表",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1577",
+      "title": "项脊轩志",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1578",
+      "title": "兰亭集序",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1579",
+      "title": "归去来兮辞并序",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1580",
+      "title": "种树郭橐驼传",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1581",
+      "title": "石钟山记",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1584",
+      "title": "自然选择的证明",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1585",
+      "title": "宇宙的边疆",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1586",
+      "title": "天文学上的旷世之争",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1588",
+      "title": "拟行路难(其四)",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1589",
+      "title": "客至",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1590",
+      "title": "登快阁",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    },
+    {
+      "lessonId": "lesson-1591",
+      "title": "临安春雨初霁",
+      "blockTitle": "選必下",
+      "pilot": false,
+      "sourceVersion": "yw-nlm-source-v1-2026-07-26",
+      "promptVersions": {
+        "slideDeck": "yw-slide-v1"
+      },
+      "generatedAt": null,
+      "reviewStatus": {
+        "slideDeck": "cataloged"
+      },
+      "slideDeck": null
+    }
+  ]
+}

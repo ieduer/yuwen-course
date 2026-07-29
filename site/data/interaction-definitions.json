@@ -1,0 +1,154 @@
+{
+  "schema": "bdfz-learning-interaction-registry-v1",
+  "schemaVersion": 1,
+  "registryVersion": "yw-interactions-2026-07-26-v1",
+  "sourceSystem": "yuwen-course",
+  "sourceSiteKey": "yw",
+  "unknownInteractionPolicy": "reject",
+  "definitions": {
+    "lessonOpened": {
+      "eventType": "lesson_opened",
+      "assessmentKind": "trace",
+      "scoringRole": "none",
+      "dimensionKey": "reading",
+      "verificationMethod": "source_route",
+      "resourceKind": "lesson",
+      "allowedPayloadKeys": []
+    },
+    "readAcknowledged": {
+      "eventType": "text_read_acknowledged",
+      "assessmentKind": "participation",
+      "scoringRole": "none",
+      "dimensionKey": "reading",
+      "verificationMethod": "source_scroll_threshold",
+      "resourceKind": "lesson",
+      "allowedPayloadKeys": ["threshold"]
+    },
+    "noteOpened": {
+      "eventType": "note_opened",
+      "assessmentKind": "trace",
+      "scoringRole": "none",
+      "dimensionKey": "reading",
+      "verificationMethod": "source_ui_action",
+      "resourceKind": "lesson",
+      "allowedPayloadKeys": ["noteRef"]
+    },
+    "vocabularyLookup": {
+      "eventType": "vocabulary_lookup",
+      "assessmentKind": "trace",
+      "scoringRole": "none",
+      "dimensionKey": "retention",
+      "verificationMethod": "source_ui_action",
+      "resourceKind": "lesson",
+      "allowedPayloadKeys": ["lookupKind", "termLength"]
+    },
+    "contextWords": {
+      "eventType": "context_words_submitted",
+      "assessmentKind": "performance",
+      "scoringRole": "a_plus_gate",
+      "dimensionKey": "reading",
+      "verificationMethod": "source_ai_assessment",
+      "resourceKind": "manifest_interaction",
+      "allowedPayloadKeys": ["words"]
+    },
+    "wordCreation": {
+      "eventType": "word_creation_submitted",
+      "assessmentKind": "performance",
+      "scoringRole": "a_plus_gate",
+      "dimensionKey": "retention",
+      "verificationMethod": "source_ai_assessment",
+      "resourceKind": "manifest_interaction",
+      "allowedPayloadKeys": ["word", "creation"]
+    },
+    "authorQuestion": {
+      "eventType": "author_question_submitted",
+      "assessmentKind": "performance",
+      "scoringRole": "a_plus_gate",
+      "dimensionKey": "inquiry",
+      "verificationMethod": "source_ai_assessment",
+      "resourceKind": "manifest_interaction",
+      "allowedPayloadKeys": ["answer"]
+    },
+    "revision": {
+      "eventType": "revision_submitted",
+      "assessmentKind": "performance",
+      "scoringRole": "a_plus_gate",
+      "dimensionKey": "reading",
+      "verificationMethod": "source_ai_assessment",
+      "resourceKind": "manifest_interaction",
+      "allowedPayloadKeys": ["original", "action", "revised", "reason"]
+    },
+    "structure": {
+      "eventType": "structure_response_submitted",
+      "assessmentKind": "performance",
+      "scoringRole": "a_plus_gate",
+      "dimensionKey": "reading",
+      "verificationMethod": "source_ai_assessment",
+      "resourceKind": "manifest_interaction",
+      "allowedPayloadKeys": ["reason"]
+    },
+    "evaluation": {
+      "eventType": "lesson_value_rated",
+      "assessmentKind": "self_report",
+      "scoringRole": "none",
+      "dimensionKey": "reflection",
+      "verificationMethod": "source_form_submission",
+      "resourceKind": "manifest_interaction",
+      "allowedPayloadKeys": ["rating", "reason"]
+    },
+    "vocabAnswer": {
+      "eventType": "vocab_answer_submitted",
+      "assessmentKind": "performance",
+      "scoringRole": "a_plus_gate",
+      "dimensionKey": "retention",
+      "verificationMethod": "source_answer_key",
+      "resourceKind": "manifest_vocab",
+      "allowedPayloadKeys": ["itemId", "selectedIndex"]
+    },
+    "vocabQuizCompleted": {
+      "eventType": "vocab_quiz_completed",
+      "assessmentKind": "participation",
+      "scoringRole": "formative",
+      "dimensionKey": "retention",
+      "verificationMethod": "source_mastery_aggregate",
+      "resourceKind": "lesson",
+      "allowedPayloadKeys": ["questionCount", "firstTryCount"]
+    },
+    "resourceOpened": {
+      "eventType": "resource_opened",
+      "assessmentKind": "trace",
+      "scoringRole": "none",
+      "dimensionKey": "reading",
+      "verificationMethod": "source_ui_action",
+      "resourceKind": "lesson",
+      "allowedPayloadKeys": ["resourceKind", "resourceRef"]
+    },
+    "slideDeckOpened": {
+      "eventType": "slide_deck_opened",
+      "assessmentKind": "participation",
+      "scoringRole": "none",
+      "dimensionKey": "reading",
+      "verificationMethod": "source_ui_action",
+      "resourceKind": "lesson",
+      "allowedPayloadKeys": ["resourceRef"]
+    },
+    "chatOpened": {
+      "eventType": "chat_opened",
+      "assessmentKind": "trace",
+      "scoringRole": "none",
+      "dimensionKey": "inquiry",
+      "verificationMethod": "source_ui_action",
+      "resourceKind": "lesson",
+      "allowedPayloadKeys": []
+    },
+    "lessonCompleted": {
+      "eventType": "lesson_completed",
+      "assessmentKind": "self_report",
+      "scoringRole": "none",
+      "dimensionKey": "reading",
+      "verificationMethod": "source_form_submission",
+      "resourceKind": "lesson",
+      "allowedPayloadKeys": ["checkpointCount", "checkpointTotal"]
+    }
+  }
+}

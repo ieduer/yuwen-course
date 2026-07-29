@@ -1,3 +1,10 @@
+import {
+  assertLearningSubmissionAllowed,
+  LearningSubmissionRateLimitError,
+  recordLearningInteraction,
+  retryPendingEvidence,
+} from "./learning-evidence-source.js";
+
 const OWNER = "ieduer";
 const REPO = "yuwen-course";
 const DISCUSSION_MARKER_PREFIX = "yuwen-course-lesson:";
@@ -20,6 +27,12 @@ export default {
     if (url.pathname === "/api/interaction-check" && request.method === "POST") {
       return handleInteractionCheck(request, env);
     }
+    if (url.pathname === "/api/learning/interactions" && request.method === "POST") {
+      return handleLearningInteraction(request, env, ctx);
+    }
+    if (url.pathname === "/api/learning/health" && request.method === "GET") {
+      return handleLearningEvidenceHealth(env);
+    }
     if (url.pathname === "/api/wy-articles" && request.method === "GET") {
       return handleWyArticles(request, env);
     }
@@ -37,9 +50,37 @@ export default {
       if (request.method === "GET") return handleDiscussionGet(request, env, discussionMatch[1]);
       if (request.method === "POST") return handleDiscussionPost(request, env, discussionMatch[1]);
     }
+    if ((request.method === "GET" || request.method === "HEAD")
+      && isNativeContentAssetPath(url.pathname)) {
+      return handleNativeContentAsset(request, env, url.pathname);
+    }
     return env.ASSETS.fetch(request);
   },
 };
+
+function isNativeContentAssetPath(pathname) {
+  return pathname === "/app-content/latest-stable.json"
+    || pathname.startsWith("/app-content/releases/")
+    || /^\/media\/lesson-media\/lesson-[^/]+\/sha256-[a-f0-9]{64}\.pdf$/.test(pathname);
+}
+
+async function handleNativeContentAsset(request, env, pathname) {
+  const response = await env.ASSETS.fetch(request);
+  if (!response.ok) return response;
+  const headers = new Headers(response.headers);
+  headers.set("x-content-type-options", "nosniff");
+  headers.set(
+    "cache-control",
+    pathname === "/app-content/latest-stable.json"
+      ? "no-store, no-transform"
+      : "public, max-age=31536000, immutable, no-transform",
+  );
+  return new Response(request.method === "HEAD" ? null : response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
 
 function json(data, init = {}) {
   return new Response(JSON.stringify(data), {
@@ -52,8 +93,65 @@ function json(data, init = {}) {
   });
 }
 
+function learningRateLimitResponse(error) {
+  const retryAfterSeconds = Math.max(1, Number(error?.retryAfterSeconds) || 600);
+  return json({
+    ok: false,
+    error: "提交过于频繁，请稍后继续修改",
+    code: "learning_submission_rate_limited",
+    retryAfterSeconds,
+  }, {
+    status: 429,
+    headers: { "retry-after": String(retryAfterSeconds) },
+  });
+}
+
+function learningMutationConflictResponse() {
+  return json({
+    ok: false,
+    error: "本次提交标识已用于另一学习项目，请刷新后重试",
+    code: "learning_mutation_conflict",
+  }, { status: 409 });
+}
+
 function cleanText(value, max = 4000) {
   return String(value || "").replace(/\r/g, "").trim().slice(0, max);
+}
+
+async function handleLearningEvidenceHealth(env) {
+  if (!env.USER_CENTER_EVIDENCE
+    || typeof env.USER_CENTER_EVIDENCE.getSourceReceipt !== "function"
+    || !env.ASSETS
+    || typeof env.ASSETS.fetch !== "function") {
+    return json({ error: "learning evidence unavailable" }, { status: 503 });
+  }
+  try {
+    const manifestResponse = await env.ASSETS.fetch(
+      new Request("https://yw.bdfz.net/data/learning-manifest.json"),
+    );
+    if (!manifestResponse.ok) throw new Error("learning manifest unavailable");
+    const manifest = await manifestResponse.json();
+    const descriptor = {
+      sourceSiteKey: "yw",
+      manifestVersion: manifest?.manifestVersion,
+      manifestDigest: manifest?.resourceKeyHash,
+      itemCount: Number(manifest?.itemCount),
+      loaderContractVersion: "yuwen-queue-ledger-v1",
+    };
+    const receipt = await env.USER_CENTER_EVIDENCE.getSourceReceipt(descriptor);
+    if (receipt?.ok !== true
+      || receipt?.status !== "active"
+      || receipt?.sourceSiteKey !== "yw"
+      || receipt?.loaderContractVersion !== "yuwen-queue-ledger-v1"
+      || receipt?.manifestVersion !== manifest?.manifestVersion
+      || receipt?.manifestDigest !== manifest?.resourceKeyHash
+      || Number(receipt?.itemCount) !== Number(manifest?.itemCount)) {
+      return json({ error: "learning evidence contract mismatch" }, { status: 503 });
+    }
+    return json({ ok: true, receipt });
+  } catch {
+    return json({ error: "learning evidence unavailable" }, { status: 503 });
+  }
 }
 
 async function handleWyArticles() {
@@ -485,6 +583,16 @@ async function getLessonMeta(request, env, lessonId) {
   return manifest?.lessons?.find((item) => item.id === lessonId) || { id: lessonId, title: lessonId, blockTitle: "課文" };
 }
 
+async function getLessonData(request, env, lessonId) {
+  const meta = await getLessonMeta(request, env, lessonId);
+  if (!meta?.dataUrl || meta.id !== lessonId) return meta;
+  const url = new URL(`/${String(meta.dataUrl).replace(/^\/+/, "")}`, request.url);
+  const response = await env.ASSETS.fetch(new Request(url.toString(), { method: "GET" }));
+  if (!response.ok) return meta;
+  const lesson = await response.json().catch(() => null);
+  return lesson?.id === lessonId ? { ...meta, ...lesson } : meta;
+}
+
 function githubHeaders(env) {
   const headers = {
     "accept": "application/vnd.github+json",
@@ -743,13 +851,23 @@ async function handleLessonBlueprint(request, env, ctx) {
 
 async function handleInteractionCheck(request, env) {
   const payload = await request.json().catch(() => ({}));
-  const lessonTitle = cleanText(payload.lessonTitle, 160);
-  const blockTitle = cleanText(payload.blockTitle, 80);
+  const lessonId = cleanText(payload.lessonId, 80);
+  if (!/^lesson-[\w-]{1,60}$/.test(lessonId)) {
+    return json({ error: "valid lesson id required" }, { status: 400 });
+  }
+  const lesson = await getLessonData(request, env, lessonId);
+  const lessonTitle = cleanText(lesson.title || lesson.tocLabel, 160);
+  const blockTitle = cleanText(lesson.blockTitle, 80);
   const mode = cleanText(payload.mode, 40);
   const authors = Array.isArray(payload.authors) ? payload.authors.map((item) => cleanText(item, 40)).filter(Boolean).slice(0, 4) : [];
   const speaker = authors[0] || (mode.startsWith("unit") ? "編者" : "作者");
   const interaction = cleanText(payload.interaction, 40);
-  const excerpt = cleanText(payload.excerpt, 5200);
+  const excerpt = cleanText(
+    lesson.posts?.find((post) => post.kind === "primary")?.plain_text
+      || lesson.posts?.[0]?.plain_text
+      || lesson.excerpt,
+    5200
+  );
   const input = payload.input && typeof payload.input === "object" ? payload.input : {};
   const inputText = Object.entries(input).map(([key, value]) => `${key}: ${cleanText(value, 1800)}`).join("\n");
   if (!lessonTitle || !["contextWords", "authorQuestion", "revision", "structure", "wordCreation"].includes(interaction) || inputText.length < 6) {
@@ -774,11 +892,66 @@ async function handleInteractionCheck(request, env) {
     `正文摘錄：${excerpt}`,
     `學生輸入：\n${inputText}`,
   ].join("\n");
+  const sourcePayload = {
+    ...input,
+    clientMutationId: cleanText(payload.clientMutationId, 100),
+    classSessionId: cleanText(payload.classSessionId, 100),
+    lessonPhase: cleanText(payload.lessonPhase, 60),
+  };
   try {
+    const student = await getReadingStudent(request, env);
+    if (student) {
+      const submissionGuard = await assertLearningSubmissionAllowed({
+        request,
+        env,
+        student,
+        lesson,
+        interactionKey: interaction,
+        payload: sourcePayload,
+      });
+      if (submissionGuard.deduped) {
+        return json({
+          provider: submissionGuard.evaluation?.provider || "source-ledger",
+          assessment: normalizeAssessment(submissionGuard.evaluation, "", speaker),
+          evidence: {
+            status: submissionGuard.eligibilityStatus === "ineligible"
+              ? "already_recorded_ineligible"
+              : "already_recorded",
+            sourceEventId: submissionGuard.sourceEventId,
+            attemptNo: submissionGuard.attemptNo,
+          },
+          deduped: true,
+        });
+      }
+    }
     const raw = await callApisPrompt(env, prompt, "feedback", "medium");
     const parsed = extractJsonObject(raw);
-    return json({ provider: "apis", assessment: normalizeAssessment(parsed, parsed ? "" : raw, speaker) });
+    const assessment = normalizeAssessment(parsed, parsed ? "" : raw, speaker);
+    let evidence = { status: "anonymous" };
+    if (student) {
+      const recorded = await recordLearningInteraction({
+        request,
+        env,
+        student,
+        lesson,
+        interactionKey: interaction,
+        payload: sourcePayload,
+        evaluation: {
+          score: assessment.score,
+          correctness: assessment.score >= 60 ? "passed" : "needs_revision",
+          provider: "apis",
+          verdict: assessment.verdict,
+          strength: assessment.strength,
+          gap: assessment.gap,
+          nextQuestion: assessment.nextQuestion,
+        },
+      });
+      evidence = { status: recorded.delivery || "recorded", sourceEventId: recorded.sourceEventId, attemptNo: recorded.attemptNo };
+    }
+    return json({ provider: "apis", assessment, evidence });
   } catch (error) {
+    if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
+    if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
     return json({ error: error.message || "interaction assessment unavailable" }, { status: 502 });
   }
 }
@@ -888,33 +1061,117 @@ async function getReadingStudent(request, env) {
     const slug = String(env.READING_TEST_SLUG).slice(0, 80);
     const db = env.READING_DB;
     await db.prepare("INSERT OR IGNORE INTO students (uc_slug, display_name) VALUES (?, ?)").bind(slug, "合成測試學生").run();
-    const row = await db.prepare("SELECT id, uc_slug, display_name, class_name FROM students WHERE uc_slug = ?").bind(slug).first();
-    return { id: row.id, slug: row.uc_slug, displayName: row.display_name, className: row.class_name || "" };
+    const row = await db.prepare("SELECT id, uc_user_id, uc_slug, display_name, class_name FROM students WHERE uc_slug = ?").bind(slug).first();
+    return { id: row.id, ucUserId: row.uc_user_id || null, slug: row.uc_slug, displayName: row.display_name, className: row.class_name || "" };
   }
   const token = cookies[UC_SESSION_COOKIE];
   if (!token) return null;
   const cached = identityCache.get(token);
   let user = cached && cached.exp > Date.now() ? cached.user : null;
   if (!user) {
-    const response = await fetch(`${UC_ORIGIN}/api/me`, {
-      headers: { cookie: `${UC_SESSION_COOKIE}=${token}`, accept: "application/json" },
-    }).catch(() => null);
-    if (!response?.ok) return null;
-    const payload = await response.json().catch(() => null);
-    if (!payload?.slug) return null;
-    user = { slug: String(payload.slug).slice(0, 80), displayName: String(payload.displayName || "").slice(0, 80) };
+    const cookieHeader = `${UC_SESSION_COOKIE}=${token}`;
+    if (env.USER_CENTER_EVIDENCE?.resolveSession) {
+      const resolved = await env.USER_CENTER_EVIDENCE.resolveSession(cookieHeader).catch(() => null);
+      if (resolved?.authenticated && resolved?.sourceSiteKey === "yw" && Number.isInteger(Number(resolved.userId))) {
+        user = {
+          userId: Number(resolved.userId),
+          slug: String(resolved.slug || "").slice(0, 80),
+          displayName: String(resolved.displayName || "").slice(0, 80),
+        };
+      }
+    }
+    if (!user) {
+      const response = await fetch(`${UC_ORIGIN}/api/me`, {
+        headers: { cookie: cookieHeader, accept: "application/json" },
+      }).catch(() => null);
+      if (!response?.ok) return null;
+      const payload = await response.json().catch(() => null);
+      if (!payload?.slug) return null;
+      user = {
+        userId: null,
+        slug: String(payload.slug).slice(0, 80),
+        displayName: String(payload.displayName || "").slice(0, 80),
+      };
+    }
+    if (!user.slug) return null;
     if (identityCache.size > 500) identityCache.clear();
     identityCache.set(token, { user, exp: Date.now() + 5 * 60 * 1000 });
   }
   const db = env.READING_DB;
-  let row = await db.prepare("SELECT id, uc_slug, display_name, class_name FROM students WHERE uc_slug = ?").bind(user.slug).first();
+  let row = user.userId
+    ? await db.prepare("SELECT id, uc_user_id, uc_slug, display_name, class_name FROM students WHERE uc_user_id = ? OR uc_slug = ? ORDER BY uc_user_id IS NOT NULL DESC LIMIT 1")
+      .bind(user.userId, user.slug).first()
+    : await db.prepare("SELECT id, uc_user_id, uc_slug, display_name, class_name FROM students WHERE uc_slug = ?").bind(user.slug).first();
   if (!row) {
-    await db.prepare("INSERT OR IGNORE INTO students (uc_slug, display_name) VALUES (?, ?)").bind(user.slug, user.displayName).run();
-    row = await db.prepare("SELECT id, uc_slug, display_name, class_name FROM students WHERE uc_slug = ?").bind(user.slug).first();
+    await db.prepare(
+      "INSERT OR IGNORE INTO students (uc_user_id, uc_slug, display_name, identity_verified_at) VALUES (?, ?, ?, ?)"
+    ).bind(user.userId || null, user.slug, user.displayName, user.userId ? new Date().toISOString() : null).run();
+    row = await db.prepare("SELECT id, uc_user_id, uc_slug, display_name, class_name FROM students WHERE uc_slug = ?").bind(user.slug).first();
   } else {
-    await db.prepare("UPDATE students SET last_seen_at = datetime('now'), display_name = ? WHERE id = ?").bind(user.displayName || row.display_name, row.id).run();
+    await db.prepare(
+      "UPDATE students SET last_seen_at = datetime('now'), display_name = ?, uc_user_id = COALESCE(?, uc_user_id), identity_verified_at = CASE WHEN ? IS NOT NULL THEN ? ELSE identity_verified_at END WHERE id = ?"
+    ).bind(user.displayName || row.display_name, user.userId || null, user.userId || null, new Date().toISOString(), row.id).run();
   }
-  return row ? { id: row.id, slug: row.uc_slug, displayName: user.displayName || row.display_name, className: row.class_name || "" } : null;
+  return row ? {
+    id: row.id,
+    ucUserId: user.userId || row.uc_user_id || null,
+    slug: row.uc_slug,
+    displayName: user.displayName || row.display_name,
+    className: row.class_name || "",
+  } : null;
+}
+
+const DIRECT_LEARNING_INTERACTIONS = new Set([
+  "lessonOpened",
+  "readAcknowledged",
+  "noteOpened",
+  "vocabularyLookup",
+  "evaluation",
+  "resourceOpened",
+  "slideDeckOpened",
+  "chatOpened",
+  "lessonCompleted",
+]);
+
+async function handleLearningInteraction(request, env, ctx) {
+  if (!env.READING_DB) return readingError("learning evidence store not configured", 503);
+  const student = await getReadingStudent(request, env);
+  if (!student) return json({ ok: false, error: "not authenticated", authRequired: true }, { status: 401 });
+  const payload = await request.json().catch(() => ({}));
+  const lessonId = cleanText(payload.lessonId, 80);
+  const interactionKey = cleanText(payload.interactionKey, 40);
+  if (!/^lesson-[\w-]{1,60}$/.test(lessonId) || !DIRECT_LEARNING_INTERACTIONS.has(interactionKey)) {
+    return readingError("registered direct interaction required");
+  }
+  const lesson = await getLessonData(request, env, lessonId);
+  if (lesson?.id !== lessonId) return readingError("lesson absent from authoritative catalog");
+  try {
+    const recorded = await recordLearningInteraction({
+      request,
+      env,
+      student,
+      lesson,
+      interactionKey,
+      payload: {
+        ...(payload.data && typeof payload.data === "object" ? payload.data : {}),
+        clientMutationId: cleanText(payload.clientMutationId, 100),
+        classSessionId: cleanText(payload.classSessionId, 100),
+        lessonPhase: cleanText(payload.lessonPhase, 60),
+      },
+    });
+    if (ctx?.waitUntil) ctx.waitUntil(retryPendingEvidence(env, 5));
+    return json({
+      ok: true,
+      sourceEventId: recorded.sourceEventId,
+      attemptNo: recorded.attemptNo,
+      deduped: recorded.deduped,
+      delivery: recorded.delivery || "already_recorded",
+    });
+  } catch (error) {
+    if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
+    if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
+    return readingError(error?.message || "interaction recording failed", 422);
+  }
 }
 
 async function loadWordGroups(env) {
@@ -942,6 +1199,17 @@ async function loadVocabIndex(request, env) {
   } catch { /* 題庫索引缺席時亮度公式退化為作答比 */ }
   vocabIndexCache = { data, exp: Date.now() + 10 * 60 * 1000 };
   return data;
+}
+
+async function loadVocabBank(request, env, lessonId) {
+  const url = new URL(`/data/vocab/${encodeURIComponent(lessonId)}.json`, request.url);
+  const response = await env.ASSETS.fetch(new Request(url.toString(), { method: "GET" }));
+  if (!response.ok) throw new Error("authoritative vocabulary bank unavailable");
+  const bank = await response.json();
+  if (bank?.lessonId !== lessonId || !Array.isArray(bank?.inventory)) {
+    throw new Error("vocabulary bank contract invalid");
+  }
+  return bank;
 }
 
 function readingError(message, status = 400) {
@@ -1234,9 +1502,55 @@ async function handleReadingVocabAttempt(request, env, student) {
   const lessonId = String(payload.lessonId || "").trim();
   const itemId = String(payload.itemId || "").trim().slice(0, 80);
   if (!/^lesson-[\w-]{1,60}$/.test(lessonId) || !itemId) return readingError("lessonId and itemId required");
-  const correct = payload.correct ? 1 : 0;
-  const answer = cleanText(payload.answer, 200);
+  const selectedIndex = Number(payload.selectedIndex);
+  if (!Number.isInteger(selectedIndex) || selectedIndex < 0 || selectedIndex > 20) {
+    return readingError("selectedIndex required");
+  }
+  const bank = await loadVocabBank(request, env, lessonId);
+  const authoritativeItem = bank.inventory.find((item) => item?.id === itemId && item?.decision === "question");
+  if (!authoritativeItem || !Array.isArray(authoritativeItem.options) || selectedIndex >= authoritativeItem.options.length) {
+    return readingError("vocabulary item absent from authoritative bank");
+  }
+  const lesson = await getLessonData(request, env, lessonId);
   const db = env.READING_DB;
+  const submissionGuard = await assertLearningSubmissionAllowed({
+    request,
+    env,
+    student,
+    lesson,
+    interactionKey: "vocabAnswer",
+    payload: {
+      itemId,
+      selectedIndex,
+      clientMutationId: cleanText(payload.clientMutationId, 100),
+      classSessionId: cleanText(payload.classSessionId, 100),
+      lessonPhase: cleanText(payload.lessonPhase, 60),
+    },
+  });
+  if (submissionGuard.deduped) {
+    const current = await db.prepare(
+      "SELECT status, correct_count, wrong_count FROM vocab_mastery WHERE student_id = ? AND lesson_id = ? AND item_id = ?"
+    ).bind(student.id, lessonId, itemId).first();
+    const priorCorrectness = cleanText(submissionGuard.evaluation?.correctness, 32).toLowerCase();
+    return json({
+      ok: true,
+      deduped: true,
+      attemptNo: submissionGuard.attemptNo,
+      correct: priorCorrectness === "correct" || priorCorrectness === "passed",
+      status: submissionGuard.evaluation?.verdict || current?.status || "learning",
+      correctCount: Number(current?.correct_count || 0),
+      wrongCount: Number(current?.wrong_count || 0),
+      evidence: {
+        sourceEventId: submissionGuard.sourceEventId,
+        delivery: submissionGuard.eligibilityStatus === "ineligible"
+          ? "already_recorded_ineligible"
+          : "already_recorded",
+      },
+      completionEvidence: null,
+    });
+  }
+  const correct = selectedIndex === Number(authoritativeItem.answerIndex) ? 1 : 0;
+  const answer = cleanText(authoritativeItem.options[selectedIndex], 200);
   const attemptRow = await db.prepare(
     "SELECT COALESCE(MAX(attempt_no), 0) + 1 AS n FROM vocab_attempts WHERE student_id = ? AND lesson_id = ? AND item_id = ?"
   ).bind(student.id, lessonId, itemId).first();
@@ -1258,7 +1572,64 @@ async function handleReadingVocabAttempt(request, env, student) {
       "ON CONFLICT(student_id, lesson_id, item_id) DO UPDATE SET status = ?, correct_count = ?, wrong_count = ?, last_at = datetime('now')"
     ).bind(student.id, lessonId, itemId, status, correctCount, wrongCount, status, correctCount, wrongCount),
   ]);
-  return json({ ok: true, attemptNo, status, correctCount, wrongCount });
+  const recorded = await recordLearningInteraction({
+    request,
+    env,
+    student,
+    lesson,
+    interactionKey: "vocabAnswer",
+    payload: {
+      itemId,
+      selectedIndex,
+      clientMutationId: cleanText(payload.clientMutationId, 100),
+      classSessionId: cleanText(payload.classSessionId, 100),
+      lessonPhase: cleanText(payload.lessonPhase, 60),
+    },
+    evaluation: {
+      score: correct ? 100 : 0,
+      correctness: correct ? "correct" : "incorrect",
+      provider: "answer-key",
+      verdict: status,
+    },
+  });
+  let completionEvidence = null;
+  const questionCount = bank.inventory.filter((item) => item?.decision === "question").length;
+  const masteryAggregate = await db.prepare(
+    `SELECT COUNT(*) AS mastered,
+            SUM(CASE WHEN wrong_count = 0 AND correct_count > 0 THEN 1 ELSE 0 END) AS first_try
+       FROM vocab_mastery
+      WHERE student_id = ? AND lesson_id = ? AND status = 'mastered'`
+  ).bind(student.id, lessonId).first();
+  if (questionCount > 0 && Number(masteryAggregate?.mastered || 0) >= questionCount) {
+    completionEvidence = await recordLearningInteraction({
+      request,
+      env,
+      student,
+      lesson,
+      interactionKey: "vocabQuizCompleted",
+      payload: {
+        questionCount,
+        firstTryCount: Number(masteryAggregate?.first_try || 0),
+        clientMutationId: `vocab-complete:${lessonId}:${student.id}:${String(bank.builtAt || "v1")}`.slice(0, 100),
+      },
+    });
+  }
+  return json({
+    ok: true,
+    attemptNo,
+    correct: !!correct,
+    status,
+    correctCount,
+    wrongCount,
+    evidence: {
+      sourceEventId: recorded.sourceEventId,
+      delivery: recorded.delivery || "already_recorded",
+    },
+    completionEvidence: completionEvidence ? {
+      sourceEventId: completionEvidence.sourceEventId,
+      delivery: completionEvidence.delivery || "already_recorded",
+    } : null,
+  });
 }
 
 async function handleReadingVocabState(request, env, student, lessonId) {
@@ -1271,17 +1642,22 @@ async function handleReadingVocabState(request, env, student, lessonId) {
 
 async function handleReadingHealth(env) {
   const db = env.READING_DB;
-  const [students, submissions, nodes] = await Promise.all([
+  const [students, submissions, nodes, interactions, pending] = await Promise.all([
     db.prepare("SELECT COUNT(*) AS n FROM students").first(),
     db.prepare("SELECT COUNT(*) AS n FROM submissions").first(),
     db.prepare("SELECT COUNT(*) AS n FROM star_nodes").first(),
+    db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").first(),
+    db.prepare("SELECT COUNT(*) AS n FROM evidence_outbox WHERE delivery_status = 'pending'").first(),
   ]);
   return json({
     ok: true,
     students: Number(students?.n || 0),
     submissions: Number(submissions?.n || 0),
     nodes: Number(nodes?.n || 0),
+    learningInteractions: Number(interactions?.n || 0),
+    evidenceOutboxPending: Number(pending?.n || 0),
     rulesVersion: "constellation-rules-v1",
+    evidenceContractVersion: "bdfz-learning-evidence-v1",
   });
 }
 
@@ -1302,6 +1678,8 @@ async function handleReading(request, env, url) {
     if (vocabMatch && request.method === "GET") return await handleReadingVocabState(request, env, student, vocabMatch[1]);
     return readingError("not found", 404);
   } catch (error) {
+    if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
+    if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
     return readingError(error?.message || "reading api failure", 500);
   }
 }

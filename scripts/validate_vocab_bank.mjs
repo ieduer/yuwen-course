@@ -11,6 +11,7 @@
 //   C6 難度分佈：題數 ≥6 的課至少覆蓋兩個難度檔
 //   C7 文言條目必須帶辭書/文獻 sourceRefs
 //   C8 id 穩定唯一（lessonId:vNN）且 index.json 與檔案一致
+//   C9 教學語義品質：新題須記錄四個選項的逐項判定理由；舊題庫缺少時先警告，經語義複核後補齊
 import { readFileSync, existsSync } from "node:fs";
 import {
   VOCAB_DIR, bankPath, eligibleLessons, extractAnnotations, listBankFiles,
@@ -79,6 +80,9 @@ for (const meta of eligible) {
     else if (new Set(item.options).size !== 4) fail(meta.id, "C4", `duplicate options: ${item.word}`);
     if (!(item.answerIndex >= 0 && item.answerIndex <= 3)) fail(meta.id, "C4", `bad answerIndex: ${item.word}`);
     if (!item.explanation) fail(meta.id, "C4", `missing explanation: ${item.word}`);
+    if (!Array.isArray(item.distractorRationales) || item.distractorRationales.length !== 4) {
+      warn(meta.id, "C9", `missing four option rationales: ${item.word}`);
+    }
     if (!item.contextMeaning) warn(meta.id, "C4", `missing contextMeaning: ${item.word}`);
     const stem = String(item.question || "").replace(/\s+/g, "");
     if (!stem) fail(meta.id, "C4", `empty question: ${item.word}`);

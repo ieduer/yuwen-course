@@ -1,6 +1,6 @@
 {
   "name": "yuwen-course",
-  "version": "0.1.0",
+  "version": "0.2.1-evaluation-nonscoring",
   "private": false,
   "type": "module",
   "scripts": {
@@ -15,15 +15,26 @@
     "build:vocab": "node scripts/build_vocab_bank.mjs",
     "verify:vocab": "node scripts/validate_vocab_bank.mjs",
     "verify:vocab:release": "node scripts/validate_vocab_bank.mjs --strict-coverage",
+    "build:lesson-media": "node scripts/build_lesson_media_manifest.mjs",
+    "build:native-content": "node scripts/build_native_content.mjs",
+    "build:native-content:stable": "node scripts/build_native_content.mjs --app-disposition compatible-and-synced --promote-stable",
+    "check:native-content:deploy-sync": "node scripts/check_native_content_deploy_sync.mjs",
+    "check:web-url-projection": "node scripts/build_release_site.mjs --check-source",
+    "build:release-site": "node scripts/build_release_site.mjs",
+    "check:release-site": "node scripts/build_release_site.mjs --check-staging",
     "build:learning-manifest": "node scripts/build_learning_manifest.mjs",
     "check:learning-manifest": "node scripts/build_learning_manifest.mjs --check",
     "test:learning-manifest": "node --test scripts/test_learning_manifest.mjs",
+    "test:evidence-contract": "node --test scripts/test_learning_evidence_contract.mjs",
+    "test:native-content": "node --test scripts/test_native_content.mjs",
     "test:reading": "node scripts/test_reading_api.mjs",
     "build:artifact-manifest": "node scripts/build_artifact_manifest.mjs",
     "check:artifact-manifest": "node scripts/build_artifact_manifest.mjs --check",
-    "release:check": "npm run check:taxonomy && npm run verify:authors && npm run verify:vocab:release && npm run check:learning-manifest && npm run test:learning-manifest && npm run test:reading && npm run check:artifact-manifest",
+    "precontent:check": "npm run check:taxonomy && npm run verify:authors && npm run verify:vocab:release && npm run check:learning-manifest && npm run test:learning-manifest && npm run test:evidence-contract && npm run test:reading && npm run check:web-url-projection && npm run test:native-content",
+    "prepare:release-artifact": "npm run check:native-content:deploy-sync && npm run build:release-site && npm run build:artifact-manifest",
+    "release:check": "npm run precontent:check && npm run check:native-content:deploy-sync && npm run build:release-site && npm run check:release-site && npm run check:artifact-manifest",
     "serve": "npx wrangler pages dev site",
-    "deploy": "npm run release:check && wrangler pages deploy site --project-name yuwen-course --branch main"
+    "deploy": "npm run release:check && wrangler pages deploy .release/site --project-name yuwen-course --branch main"
   },
   "devDependencies": {
     "playwright": "^1.60.0",

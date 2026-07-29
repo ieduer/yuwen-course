@@ -8,6 +8,7 @@ __pycache__/
 *.pyc
 backups/
 output/
+notebooklm/
 site/data/cache/
 .env
 .env.*

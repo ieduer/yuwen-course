@@ -16,6 +16,7 @@ import {
 const ROOT = resolve(import.meta.dirname, "..");
 const OUTPUT = resolve(ROOT, "site/data/learning-manifest.json");
 const EVIDENCE_MODULE = resolve(ROOT, "site/assets/learning-evidence.js");
+const INTERACTION_REGISTRY = resolve(ROOT, "site/data/interaction-definitions.json");
 const REMOVED_LESSONS = ["lesson-2177", "lesson-9140", "lesson-10653"];
 const REMOVED_TOPIC_IDS = new Set([2177, 9140, 10653]);
 
@@ -81,74 +82,90 @@ test("every key is unique and traceable to an answer-bearing effect control", ()
   assert.equal(manifest.items.every((item) => item.sourceId && item.sourcePath && item.questionKind), true);
 });
 
-test("submitted wrong answers remain completed while correctness stays explicit", async () => {
-  delete globalThis.YwLearningEvidence;
-  await import(`${EVIDENCE_MODULE}?test=${Date.now()}`);
-  const manifest = buildLearningManifest();
-  const item = manifest.items.find((entry) => entry.questionKind === "vocabulary");
-  const payloads = globalThis.YwLearningEvidence.buildEvidencePayloads(manifest, item, {
-    scorePercent: 0,
-    correctness: "incorrect",
-    attemptCount: 1,
-  });
-  assert.equal(payloads.progress.state, "completed");
-  assert.equal(payloads.progress.progressPercent, 100);
-  assert.equal(payloads.progress.score, 0);
-  assert.equal(payloads.progress.meta.correctness, "incorrect");
-  assert.equal(payloads.progress.meta.completionKind, "answer_submitted");
-  assert.equal(JSON.stringify(payloads).includes("answerText"), false);
+test("vocabulary correctness is source-verified and cannot be claimed by the browser bridge", () => {
+  const registry = JSON.parse(readFileSync(INTERACTION_REGISTRY, "utf8"));
+  const vocabulary = registry.definitions.vocabAnswer;
+  const browserBridge = readFileSync(EVIDENCE_MODULE, "utf8");
+  assert.equal(vocabulary.assessmentKind, "performance");
+  assert.equal(vocabulary.scoringRole, "a_plus_gate");
+  assert.equal(vocabulary.verificationMethod, "source_answer_key");
+  assert.deepEqual(vocabulary.allowedPayloadKeys, ["itemId", "selectedIndex"]);
+  assert.equal(browserBridge.includes("scorePercent"), false);
+  assert.equal(browserBridge.includes("correctness"), false);
+  assert.equal(browserBridge.includes("syncProgress"), false);
+  assert.equal(browserBridge.includes("recordEvent"), false);
 });
 
-test("anonymous activity cannot fetch the manifest or write evidence", async () => {
+test("lesson evaluation remains a recorded self-report and never a scoring or A+ event", () => {
+  const registry = JSON.parse(readFileSync(INTERACTION_REGISTRY, "utf8"));
+  const evaluation = registry.definitions.evaluation;
+  assert.equal(evaluation.assessmentKind, "self_report");
+  assert.equal(evaluation.scoringRole, "none");
+  assert.equal(evaluation.verificationMethod, "source_form_submission");
+  assert.deepEqual(evaluation.allowedPayloadKeys, ["rating", "reason"]);
+});
+
+test("anonymous activity is rejected by the source endpoint without a User Center write", async () => {
   delete globalThis.YwLearningEvidence;
-  let fetched = false;
-  let writes = 0;
-  globalThis.fetch = async () => {
-    fetched = true;
-    throw new Error("anonymous code must not fetch");
-  };
-  globalThis.BdfzIdentity = {
-    getSession: async () => ({ authenticated: false }),
-    syncProgress: async () => { writes += 1; },
-    recordEvent: async () => { writes += 1; },
+  const requests = [];
+  globalThis.fetch = async (url, options) => {
+    requests.push({ url, options });
+    return { ok: false, status: 401, json: async () => ({ error: "authentication required" }) };
   };
   await import(`${EVIDENCE_MODULE}?anonymous=${Date.now()}`);
-  const result = await globalThis.YwLearningEvidence.complete("effect:lesson-1458:interaction:contextWords");
+  const result = await globalThis.YwLearningEvidence.record(
+    "contextWords",
+    "lesson-1458",
+    { words: "风雪" },
+    { clientMutationId: "test-anonymous-1" },
+  );
   assert.deepEqual(result, { ok: false, reason: "anonymous" });
-  assert.equal(fetched, false);
-  assert.equal(writes, 0);
+  assert.equal(requests.length, 1);
+  assert.equal(requests[0].url, "/api/learning/interactions");
+  assert.equal(requests[0].options.credentials, "include");
+  assert.equal(globalThis.BdfzIdentity, undefined);
   delete globalThis.fetch;
-  delete globalThis.BdfzIdentity;
 });
 
-test("authenticated submitted answers write stable progress and drill-down events", async () => {
+test("authenticated browser bridge submits semantic source events without score or identity claims", async () => {
   delete globalThis.YwLearningEvidence;
-  const manifest = buildLearningManifest();
-  const item = manifest.items.find((entry) => entry.questionKind === "vocabulary");
-  const progressWrites = [];
-  const eventWrites = [];
-  globalThis.fetch = async () => ({ ok: true, json: async () => manifest });
-  globalThis.BdfzIdentity = {
-    getSession: async () => ({ authenticated: true }),
-    syncProgress: async (payload) => { progressWrites.push(payload); },
-    recordEvent: async (payload) => { eventWrites.push(payload); },
+  const requests = [];
+  globalThis.fetch = async (url, options) => {
+    requests.push({ url, options });
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({ ok: true, eventId: "source-event-1", delivery: "queued" }),
+    };
   };
   await import(`${EVIDENCE_MODULE}?authenticated=${Date.now()}`);
-  const result = await globalThis.YwLearningEvidence.complete(item.resourceKey, {
-    scorePercent: 0,
-    correctness: "incorrect",
-    attemptCount: 1,
-  });
+  const result = await globalThis.YwLearningEvidence.record(
+    "noteOpened",
+    "lesson-1458",
+    { noteRef: "note-1" },
+    {
+      clientMutationId: "test-authenticated-1",
+      classSessionId: "class-session-1",
+      lessonPhase: "close-reading",
+    },
+  );
+  const body = JSON.parse(requests[0].options.body);
   assert.equal(result.ok, true);
-  assert.equal(result.manifestVersion, manifest.manifestVersion);
-  assert.equal(progressWrites.length, 1);
-  assert.equal(eventWrites.length, 1);
-  assert.equal(progressWrites[0].itemKey, item.resourceKey);
-  assert.equal(progressWrites[0].state, "completed");
-  assert.equal(progressWrites[0].score, 0);
-  assert.equal(progressWrites[0].meta.correctness, "incorrect");
-  assert.equal(eventWrites[0].contentFormat, "yw-effect-question-completion-v1");
-  assert.equal(eventWrites[0].payload.resourceKey, item.resourceKey);
+  assert.equal(requests.length, 1);
+  assert.equal(requests[0].url, "/api/learning/interactions");
+  assert.equal(requests[0].options.method, "POST");
+  assert.deepEqual(body, {
+    lessonId: "lesson-1458",
+    interactionKey: "noteOpened",
+    clientMutationId: "test-authenticated-1",
+    classSessionId: "class-session-1",
+    lessonPhase: "close-reading",
+    data: { noteRef: "note-1" },
+  });
+  assert.equal("score" in body, false);
+  assert.equal("correctness" in body, false);
+  assert.equal("userId" in body, false);
+  assert.equal("sourceVersion" in body, false);
+  assert.equal(globalThis.BdfzIdentity, undefined);
   delete globalThis.fetch;
-  delete globalThis.BdfzIdentity;
 });
