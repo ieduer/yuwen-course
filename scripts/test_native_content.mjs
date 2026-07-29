@@ -465,6 +465,11 @@ test("release metadata changes the immutable receipt, not semantic content ident
 });
 
 test("dirty source cannot promote a compatible stable pointer", () => {
+  const dirtyMarker = path.join(
+    ROOT,
+    `.native-content-dirty-test-${process.pid}`,
+  );
+  writeFileSync(dirtyMarker, "intentional test-only dirty marker\n");
   let failure;
   try {
     execFileSync(process.execPath, [
@@ -472,6 +477,7 @@ test("dirty source cannot promote a compatible stable pointer", () => {
       "--allow-dirty",
       "--app-disposition", "compatible-and-synced",
       "--promote-stable",
+      "--deployment-id", "609fdc2b-0410-4f14-b553-b0df3916b6df",
       "--published-at", "2026-07-29T00:00:00Z",
     ], {
       cwd: ROOT,
@@ -484,6 +490,8 @@ test("dirty source cannot promote a compatible stable pointer", () => {
     });
   } catch (error) {
     failure = error;
+  } finally {
+    rmSync(dirtyMarker, { force: true });
   }
   assert.ok(failure, "compatible promotion unexpectedly succeeded");
   assert.match(String(failure.stderr), /--allow-dirty may only be used with appDisposition=blocked/);
