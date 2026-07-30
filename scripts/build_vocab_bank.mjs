@@ -6,11 +6,19 @@
 //   2) 題目不得限於教材註釋；每課須含未註而重要的字詞（文本支持時 ≥3 條）
 //   3) sourceSentence 必須逐字出現在所供正文中（防編造；location 由本腳本回填，不信模型）
 //   4) 選擇題四個選項互異、answerIndex 有效；難度 1-3 混合；文言條目須給 sourceRefs
+//   5) 重建必須沿用既有概念 ID；已審核下架的 ID 永不重用，完整題目只留在墓碑
 import { mkdirSync, writeFileSync, existsSync, readFileSync } from "node:fs";
+import path from "node:path";
+import { pathToFileURL } from "node:url";
 import {
   SITE, VOCAB_DIR, bankPath, eligibleLessons, extractAnnotations, loadLesson,
   primaryText, QUESTION_TYPES,
 } from "./vocab_lib.mjs";
+import {
+  applyDecisionsToBank,
+  buildVocabIndex,
+  loadDispositionDocument,
+} from "./apply_vocab_review_decisions.mjs";
 
 const GATEWAY = "https://apis.bdfz.net";
 const args = process.argv.slice(2);
@@ -19,6 +27,12 @@ const onlyIndex = args.indexOf("--only");
 const only = onlyIndex >= 0 ? String(args[onlyIndex + 1] || "").split(",").filter(Boolean) : [];
 const limit = args.includes("--limit") ? Number(args[args.indexOf("--limit") + 1]) : Infinity;
 const CONCURRENCY = 3;
+const dispositionDocument = loadDispositionDocument();
+const dispositionsByLesson = new Map();
+for (const decision of dispositionDocument.decisions) {
+  if (!dispositionsByLesson.has(decision.lessonId)) dispositionsByLesson.set(decision.lessonId, []);
+  dispositionsByLesson.get(decision.lessonId).push(decision);
+}
 
 const MODE_LABEL = {
   classical: "文言文", poetry: "詩歌", fiction: "小說", drama: "戲劇",
@@ -98,10 +112,10 @@ function extractJson(text) {
   try { return JSON.parse(trimmed.slice(start, end + 1)); } catch { return null; }
 }
 
-function normalizeItem(raw, lessonId, index, mode) {
+function normalizeItem(raw, id, mode) {
   const decision = ["question", "note-only", "excluded"].includes(raw.decision) ? raw.decision : "note-only";
   const item = {
-    id: `${lessonId}:v${String(index + 1).padStart(2, "0")}`,
+    id,
     word: String(raw.word || "").trim().slice(0, 16),
     annotated: !!raw.annotated,
     decision,
@@ -123,6 +137,72 @@ function normalizeItem(raw, lessonId, index, mode) {
     if (mode === "classical" && !item.sourceRefs.length) item.sourceRefs = ["《漢語大詞典》"];
   }
   return item;
+}
+
+function idNumber(itemId) {
+  const match = String(itemId || "").match(/:v(\d+)$/);
+  return match ? Number(match[1]) : 0;
+}
+
+function stableIdentityKeys(item) {
+  const word = String(item.word || "").trim();
+  const sentence = String(item.sourceSentence || "").replace(/\s+/g, " ").trim();
+  const type = String(item.type || "").trim();
+  return [
+    sentence ? `word-sentence:${word}\u0000${sentence}` : "",
+    type ? `word-type:${word}\u0000${type}` : "",
+    word ? `word:${word}` : "",
+  ].filter(Boolean);
+}
+
+function historicalItems(existingBank) {
+  const byId = new Map();
+  for (const tombstone of existingBank?.questionTombstones || []) {
+    if (tombstone?.formerItem?.id) byId.set(tombstone.formerItem.id, tombstone.formerItem);
+  }
+  for (const item of existingBank?.inventory || []) {
+    if (item?.id && !byId.has(item.id)) byId.set(item.id, item);
+  }
+  return [...byId.values()];
+}
+
+export function assignStableIds(rawItems, existingBank, lessonId, mode) {
+  const normalized = rawItems.map((raw) => normalizeItem(raw, "", mode));
+  const history = historicalItems(existingBank);
+  const reservedIds = new Set(history.map((item) => item.id));
+  const usedIds = new Set();
+  const candidatesByKey = new Map();
+  for (const item of history) {
+    for (const key of stableIdentityKeys(item)) {
+      if (!candidatesByKey.has(key)) candidatesByKey.set(key, []);
+      candidatesByKey.get(key).push(item);
+    }
+  }
+  let nextNumber = Math.max(0, ...[...reservedIds].map(idNumber)) + 1;
+  for (const item of normalized) {
+    let matched = null;
+    for (const key of stableIdentityKeys(item)) {
+      const available = (candidatesByKey.get(key) || []).filter((candidate) => !usedIds.has(candidate.id));
+      if (available.length === 1) {
+        matched = available[0];
+        break;
+      }
+    }
+    if (matched) {
+      item.id = matched.id;
+      usedIds.add(matched.id);
+      continue;
+    }
+    let id;
+    do {
+      id = `${lessonId}:v${String(nextNumber).padStart(2, "0")}`;
+      nextNumber += 1;
+    } while (reservedIds.has(id) || usedIds.has(id));
+    item.id = id;
+    usedIds.add(id);
+    reservedIds.add(id);
+  }
+  return normalized;
 }
 
 const PUNCT_RE = /[\s，。！？、；：“”‘’「」『』（）()《》〈〉…—～·,.!?;:'"\-\[\]]/;
@@ -147,11 +227,15 @@ function findSpan(text, sentence) {
 // 教材註釋覆蓋由腳本兜底：模型漏列的註釋自動補為 note-only 條目（決策有記錄、不出題）
 function mergeUncoveredAnnotations(bank, annotations, lessonId) {
   const covered = new Set(bank.inventory.map((item) => item.word));
-  let index = bank.inventory.length;
+  let nextNumber = Math.max(
+    0,
+    ...bank.inventory.map((item) => idNumber(item.id)),
+    ...(bank.questionTombstones || []).map((item) => idNumber(item.itemId)),
+  ) + 1;
   for (const annotation of annotations) {
     if (covered.has(annotation.word)) continue;
     bank.inventory.push({
-      id: `${lessonId}:v${String(index + 1).padStart(2, "0")}`,
+      id: `${lessonId}:v${String(nextNumber).padStart(2, "0")}`,
       word: annotation.word,
       annotated: true,
       decision: "note-only",
@@ -159,7 +243,7 @@ function mergeUncoveredAnnotations(bank, annotations, lessonId) {
       contextMeaning: annotation.note.slice(0, 200),
       sourceSentence: "",
     });
-    index += 1;
+    nextNumber += 1;
   }
 }
 
@@ -199,6 +283,9 @@ async function buildOne(meta) {
   if (text.length < 40) return { id: meta.id, skipped: "text too short" };
   const annotations = extractAnnotations(lesson);
   const range = targetCount(meta.mode);
+  const existingBank = existsSync(bankPath(meta.id))
+    ? JSON.parse(readFileSync(bankPath(meta.id), "utf8"))
+    : null;
   let lastIssues = [];
   for (let attempt = 1; attempt <= 3; attempt += 1) {
     const extra = lastIssues.length
@@ -212,11 +299,11 @@ async function buildOne(meta) {
       continue;
     }
     if (!parsed || !Array.isArray(parsed.inventory)) { lastIssues = ["output is not {inventory:[...]}"]; continue; }
-    const inventory = parsed.inventory.map((raw, index) => normalizeItem(raw, meta.id, index, meta.mode));
+    const inventory = assignStableIds(parsed.inventory, existingBank, meta.id, meta.mode);
     // annotated 以腳本抽取的教材註釋為準（不信模型自報），C3 判定才可靠
     const annotationWords = new Set(annotations.map((annotation) => annotation.word));
     for (const item of inventory) item.annotated = annotationWords.has(item.word);
-    const bank = {
+    let bank = {
       lessonId: meta.id,
       title: meta.title,
       mode: meta.mode,
@@ -226,17 +313,38 @@ async function buildOne(meta) {
       annotationCount: annotations.length,
       inventory,
     };
+    if (existingBank?.questionTombstones?.length) {
+      bank.questionTombstones = cloneTombstones(existingBank);
+    }
     mergeUncoveredAnnotations(bank, annotations, meta.id);
+    const lessonDispositions = dispositionsByLesson.get(meta.id) || [];
+    if (lessonDispositions.length) {
+      try {
+        bank = applyDecisionsToBank(bank, dispositionDocument, lessonDispositions);
+      } catch (error) {
+        lastIssues = [`review disposition failed closed: ${error.message}`];
+        continue;
+      }
+    }
     lastIssues = structuralIssues(bank, text);
     if (!lastIssues.length) {
       for (const item of bank.inventory) {
         if (item.sourceSentence) item.location = { charIndex: text.indexOf(item.sourceSentence) };
       }
       writeFileSync(bankPath(meta.id), JSON.stringify(bank, null, 1));
-      return { id: meta.id, ok: true, questions: inventory.filter((i) => i.decision === "question").length, attempt };
+      return {
+        id: meta.id,
+        ok: true,
+        questions: bank.inventory.filter((i) => i.decision === "question").length,
+        attempt,
+      };
     }
   }
   return { id: meta.id, failed: lastIssues.slice(0, 8) };
+}
+
+function cloneTombstones(existingBank) {
+  return JSON.parse(JSON.stringify(existingBank?.questionTombstones || []));
 }
 
 async function main() {
@@ -262,12 +370,11 @@ async function main() {
   await Promise.all(Array.from({ length: CONCURRENCY }, worker));
   // 重建索引（lessonId → 題目數），供 Worker 亮度公式與覆蓋核查使用
   const { listBankFiles } = await import("./vocab_lib.mjs");
-  const lessons = {};
-  for (const file of listBankFiles()) {
-    const bank = JSON.parse(readFileSync(`${VOCAB_DIR}/${file}`, "utf8"));
-    lessons[bank.lessonId] = bank.inventory.filter((item) => item.decision === "question").length;
-  }
-  writeFileSync(`${VOCAB_DIR}/index.json`, JSON.stringify({ builtAt: new Date().toISOString(), lessons }, null, 1));
+  const banks = listBankFiles().map((file) => JSON.parse(readFileSync(`${VOCAB_DIR}/${file}`, "utf8")));
+  writeFileSync(
+    `${VOCAB_DIR}/index.json`,
+    JSON.stringify(buildVocabIndex(banks, new Date().toISOString()), null, 1),
+  );
   const failed = results.filter((r) => r.failed);
   console.log(`done. ok=${results.filter((r) => r.ok).length} skip=${results.filter((r) => r.skipped).length} fail=${failed.length}`);
   if (failed.length) {
@@ -276,4 +383,5 @@ async function main() {
   }
 }
 
-await main();
+const invokedPath = process.argv[1] ? pathToFileURL(path.resolve(process.argv[1])).href : "";
+if (import.meta.url === invokedPath) await main();

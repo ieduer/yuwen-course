@@ -11,171 +11,92 @@
    "id": "lesson-1742:v01",
    "word": "载诸史册",
    "annotated": false,
-   "decision": "question",
-   "reason": "多音字且成语词义考查，易误读误解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "记载在历史书籍里",
    "sourceSentence": "这种衰颓远远超过罗马帝国末期那一切载诸史册的可怕情景。",
-   "type": "pronunciation",
-   "question": "「载诸史册」中「载」的读音及含义正确的一项是",
-   "options": [
-    "zǎi，承载",
-    "zài，记载",
-    "zǎi，记载",
-    "zài，装载"
-   ],
-   "answerIndex": 2,
-   "explanation": "「载」在此处作动词，意为记载，读zǎi。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 437
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1742:v01"
   },
   {
    "id": "lesson-1742:v02",
    "word": "狡狯",
    "annotated": false,
-   "decision": "question",
-   "reason": "文学典故词语，需结合语境理解其在革命论述中的特殊比喻义",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "狡猾、机智，此处比喻革命不可捉摸、难以遏制的力量",
    "sourceSentence": "可是我们不会认错那个经常在这一切矛盾中出现的狡狯的精灵。",
-   "type": "contextual-choice",
-   "question": "文中将革命比作「狡狯的精灵」，意在强调革命的什么特点？",
-   "options": [
-    "邪恶与破坏性",
-    "不可捉摸与难以遏制",
-    "幼稚与无知",
-    "虚幻与不真实"
-   ],
-   "answerIndex": 1,
-   "explanation": "结合语境，革命在矛盾中出现且无法被资产阶级掩盖，体现了其顽强的生命力和不可控性。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 843
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1742:v02"
   },
   {
    "id": "lesson-1742:v03",
    "word": "工兵",
    "annotated": false,
-   "decision": "question",
-   "reason": "词语在特定语境下的深层隐喻义，是理解革命史观的关键",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "此处指在历史进程中为社会变革开辟道路的力量",
    "sourceSentence": "我们认出了我们的勇敢的朋友好人儿罗宾,这个会迅速刨土的老田鼠、光荣的工兵——革命",
-   "type": "interpretation",
-   "question": "文中称革命为「光荣的工兵」，结合前文「迅速刨土的老田鼠」，其核心含义是",
-   "options": [
-    "革命者需要从事体力劳动",
-    "革命在社会底层进行破坏活动",
-    "革命在社会深处挖掘矛盾，为旧社会的灭亡开辟道路",
-    "革命具有像工兵一样的军事组织性"
-   ],
-   "answerIndex": 2,
-   "explanation": "「老田鼠」和「工兵」均指在地下（社会深处）进行颠覆性工作，为新社会破土而出奠定基础。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 967
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1742:v03"
   },
   {
    "id": "lesson-1742:v04",
    "word": "停止思想",
    "annotated": false,
-   "decision": "question",
-   "reason": "委婉语，考查修辞手法及逻辑理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指马克思逝世",
    "sourceSentence": "3 月14 日下午两点三刻,当代最伟大的思想家停止思想了。",
-   "type": "substitution",
-   "question": "文中说马克思「停止思想了」，这种表达方式属于",
-   "options": [
-    "比喻",
-    "借代",
-    "婉曲",
-    "夸张"
-   ],
-   "answerIndex": 2,
-   "explanation": "用「停止思想」这一特征性动作代指「死亡」，属于借代中的特征代本体。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1303
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1742:v04"
   },
   {
    "id": "lesson-1742:v05",
    "word": "繁芜丛杂",
    "annotated": false,
-   "decision": "question",
-   "reason": "高频成语，理解其在唯物史观论述中的语境义",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容意识形态种类繁多、错综复杂且混乱",
    "sourceSentence": "马克思发现了人类历史的发展规律,即历来为繁芜丛杂的意识形态所掩盖着的一个简单事实",
-   "type": "contextual-choice",
-   "question": "「繁芜丛杂」在此处主要指什么？",
-   "options": [
-    "人类历史资料的零散",
-    "资产阶级思想的纷乱与遮蔽",
-    "自然界生物的多样性",
-    "革命理论的艰深难懂"
-   ],
-   "answerIndex": 1,
-   "explanation": "在唯物史观语境下，繁芜丛杂的意识形态是掩盖物质生产基础的虚假观念。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1465
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1742:v05"
   },
   {
    "id": "lesson-1742:v06",
    "word": "浅尝辄止",
    "annotated": false,
-   "decision": "question",
-   "reason": "常用成语，考查对马克思治学态度的理解",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目說明本身承認兩個選項都正確，沒有唯一答案。",
    "contextMeaning": "略微尝试就停止，形容治学不深入",
    "sourceSentence": "这样的领域是很多的,而且其中任何一个领域他都不是浅尝辄止",
-   "type": "discrimination",
-   "question": "下列句中「浅尝辄止」使用正确的一项是",
-   "options": [
-    "他学习总是浅尝辄止，所以成绩一直名列前茅。",
-    "科研工作需要持之以恒，不能浅尝辄止。",
-    "对于这道美食，他浅尝辄止，吃得非常饱。",
-    "既然决定深入研究，我们就不能浅尝辄止地去翻阅文献。"
-   ],
-   "answerIndex": 1,
-   "explanation": "「浅尝辄止」含贬义，指治学不深入。选项1错误，选项2、4正确（本题问使用正确的一项，若为语境题则应选2）。此处修正逻辑：应选2。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1826
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260730-independent-quality-v1:lesson-1742:v06"
   },
   {
    "id": "lesson-1742:v07",
    "word": "永垂不朽",
    "annotated": false,
-   "decision": "question",
-   "reason": "悼词常用语，情感基调的核心词",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "名字和事业永远流传，不会磨灭",
    "sourceSentence": "他的英名和事业将永垂不朽",
-   "type": "interpretation",
-   "question": "「永垂不朽」在文中体现了作者怎样的情感？",
-   "options": [
-    "对马克思个人能力的怀疑",
-    "对马克思革命事业的坚定信念与深切怀念",
-    "对马克思逝世的无奈与悲伤",
-    "对无产阶级斗争前景的担忧"
-   ],
-   "answerIndex": 1,
-   "explanation": "此语表达了对马克思巨大历史贡献的肯定和对其精神永存的坚信。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2484
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1742:v07"
   },
   {
    "id": "lesson-1742:v08",
@@ -294,5 +215,263 @@
    "contextMeaning": "即第一国际。1864 年创立，1876 年正式宣布解散。马克思和恩格斯所主持的第一国际，领导了各国工人的经济斗争和政治斗争，并同形形色色的反马克思主义流派进行了坚决斗争，促进了各国工人的国际团结。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1742:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1742:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "710988fd8633c4054c30dbd7d4499c15fb2aad4cac4f0341c7c1f59830a4caa5",
+   "formerItem": {
+    "id": "lesson-1742:v01",
+    "word": "载诸史册",
+    "annotated": false,
+    "decision": "question",
+    "reason": "多音字且成语词义考查，易误读误解",
+    "contextMeaning": "记载在历史书籍里",
+    "sourceSentence": "这种衰颓远远超过罗马帝国末期那一切载诸史册的可怕情景。",
+    "type": "pronunciation",
+    "question": "「载诸史册」中「载」的读音及含义正确的一项是",
+    "options": [
+     "zǎi，承载",
+     "zài，记载",
+     "zǎi，记载",
+     "zài，装载"
+    ],
+    "answerIndex": 2,
+    "explanation": "「载」在此处作动词，意为记载，读zǎi。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 437
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1742:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1742:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "d5e47e4705457faa419963b75f040792a1657b8218635777933ebbb3c82d87df",
+   "formerItem": {
+    "id": "lesson-1742:v02",
+    "word": "狡狯",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文学典故词语，需结合语境理解其在革命论述中的特殊比喻义",
+    "contextMeaning": "狡猾、机智，此处比喻革命不可捉摸、难以遏制的力量",
+    "sourceSentence": "可是我们不会认错那个经常在这一切矛盾中出现的狡狯的精灵。",
+    "type": "contextual-choice",
+    "question": "文中将革命比作「狡狯的精灵」，意在强调革命的什么特点？",
+    "options": [
+     "邪恶与破坏性",
+     "不可捉摸与难以遏制",
+     "幼稚与无知",
+     "虚幻与不真实"
+    ],
+    "answerIndex": 1,
+    "explanation": "结合语境，革命在矛盾中出现且无法被资产阶级掩盖，体现了其顽强的生命力和不可控性。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 843
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1742:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1742:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "e4f9a9e64d451881031e4bee6c69f87c18ce3488534e2f5b1a364be0db75c798",
+   "formerItem": {
+    "id": "lesson-1742:v03",
+    "word": "工兵",
+    "annotated": false,
+    "decision": "question",
+    "reason": "词语在特定语境下的深层隐喻义，是理解革命史观的关键",
+    "contextMeaning": "此处指在历史进程中为社会变革开辟道路的力量",
+    "sourceSentence": "我们认出了我们的勇敢的朋友好人儿罗宾,这个会迅速刨土的老田鼠、光荣的工兵——革命",
+    "type": "interpretation",
+    "question": "文中称革命为「光荣的工兵」，结合前文「迅速刨土的老田鼠」，其核心含义是",
+    "options": [
+     "革命者需要从事体力劳动",
+     "革命在社会底层进行破坏活动",
+     "革命在社会深处挖掘矛盾，为旧社会的灭亡开辟道路",
+     "革命具有像工兵一样的军事组织性"
+    ],
+    "answerIndex": 2,
+    "explanation": "「老田鼠」和「工兵」均指在地下（社会深处）进行颠覆性工作，为新社会破土而出奠定基础。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 967
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1742:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1742:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "0ead2e1b76b56e32ac92065007e85bdec45698e3a455b54ebb838795554241a5",
+   "formerItem": {
+    "id": "lesson-1742:v04",
+    "word": "停止思想",
+    "annotated": false,
+    "decision": "question",
+    "reason": "委婉语，考查修辞手法及逻辑理解",
+    "contextMeaning": "指马克思逝世",
+    "sourceSentence": "3 月14 日下午两点三刻,当代最伟大的思想家停止思想了。",
+    "type": "substitution",
+    "question": "文中说马克思「停止思想了」，这种表达方式属于",
+    "options": [
+     "比喻",
+     "借代",
+     "婉曲",
+     "夸张"
+    ],
+    "answerIndex": 2,
+    "explanation": "用「停止思想」这一特征性动作代指「死亡」，属于借代中的特征代本体。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1303
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1742:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1742:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "5d5f805e546db4e34eca11563eb2f6e83000665497faf31df29b896c0acdbf5c",
+   "formerItem": {
+    "id": "lesson-1742:v05",
+    "word": "繁芜丛杂",
+    "annotated": false,
+    "decision": "question",
+    "reason": "高频成语，理解其在唯物史观论述中的语境义",
+    "contextMeaning": "形容意识形态种类繁多、错综复杂且混乱",
+    "sourceSentence": "马克思发现了人类历史的发展规律,即历来为繁芜丛杂的意识形态所掩盖着的一个简单事实",
+    "type": "contextual-choice",
+    "question": "「繁芜丛杂」在此处主要指什么？",
+    "options": [
+     "人类历史资料的零散",
+     "资产阶级思想的纷乱与遮蔽",
+     "自然界生物的多样性",
+     "革命理论的艰深难懂"
+    ],
+    "answerIndex": 1,
+    "explanation": "在唯物史观语境下，繁芜丛杂的意识形态是掩盖物质生产基础的虚假观念。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1465
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1742:v06",
+   "reviewId": "yw-vocab-review-20260730-independent-quality-v1",
+   "reviewedAt": "2026-07-30T00:59:29.000Z",
+   "itemId": "lesson-1742:v06",
+   "action": "suppress",
+   "reasonCode": "invalid_or_ambiguous_question",
+   "reason": "題目說明本身承認兩個選項都正確，沒有唯一答案。",
+   "sourceItemSha256": "e397fc6de9ff4c6f46bbc65c7107aaacbe4af4a0468c4c8419ff0aa4fc9b2dcf",
+   "formerItem": {
+    "id": "lesson-1742:v06",
+    "word": "浅尝辄止",
+    "annotated": false,
+    "decision": "question",
+    "reason": "常用成语，考查对马克思治学态度的理解",
+    "contextMeaning": "略微尝试就停止，形容治学不深入",
+    "sourceSentence": "这样的领域是很多的,而且其中任何一个领域他都不是浅尝辄止",
+    "type": "discrimination",
+    "question": "下列句中「浅尝辄止」使用正确的一项是",
+    "options": [
+     "他学习总是浅尝辄止，所以成绩一直名列前茅。",
+     "科研工作需要持之以恒，不能浅尝辄止。",
+     "对于这道美食，他浅尝辄止，吃得非常饱。",
+     "既然决定深入研究，我们就不能浅尝辄止地去翻阅文献。"
+    ],
+    "answerIndex": 1,
+    "explanation": "「浅尝辄止」含贬义，指治学不深入。选项1错误，选项2、4正确（本题问使用正确的一项，若为语境题则应选2）。此处修正逻辑：应选2。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1826
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1742:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1742:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "88c76c2ca412e0d384ec93c6e3395d1c210176fe142ad1313d201cb5ea8443ba",
+   "formerItem": {
+    "id": "lesson-1742:v07",
+    "word": "永垂不朽",
+    "annotated": false,
+    "decision": "question",
+    "reason": "悼词常用语，情感基调的核心词",
+    "contextMeaning": "名字和事业永远流传，不会磨灭",
+    "sourceSentence": "他的英名和事业将永垂不朽",
+    "type": "interpretation",
+    "question": "「永垂不朽」在文中体现了作者怎样的情感？",
+    "options": [
+     "对马克思个人能力的怀疑",
+     "对马克思革命事业的坚定信念与深切怀念",
+     "对马克思逝世的无奈与悲伤",
+     "对无产阶级斗争前景的担忧"
+    ],
+    "answerIndex": 1,
+    "explanation": "此语表达了对马克思巨大历史贡献的肯定和对其精神永存的坚信。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2484
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-review-20260730-independent-quality-v1",
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

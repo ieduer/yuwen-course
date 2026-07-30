@@ -122,6 +122,42 @@ function urlsIn(value) {
   return urls;
 }
 
+function readerRunText(run) {
+  if (run?.type === "text" || run?.type === "link") return run.text || "";
+  if (run?.type === "annotation-ref") return run.label || "";
+  if (run?.type === "media-ref") return run.alt || "";
+  return "";
+}
+
+function readerBlockText(block) {
+  if (!block) return "";
+  if (Array.isArray(block.runs)) return block.runs.map(readerRunText).join("");
+  if (Array.isArray(block.blocks)) return block.blocks.map(readerBlockText).join("\n");
+  if (Array.isArray(block.items)) {
+    return block.items.flatMap((item) => item.blocks || []).map(readerBlockText).join("\n");
+  }
+  if (Array.isArray(block.rows)) {
+    return block.rows.flat().map((cell) => readerBlockText(cell)).join("\n");
+  }
+  return String(block.text || "");
+}
+
+function expectedReaderBody(document) {
+  return [
+    ...(document.main?.frontMatter || []),
+    ...(document.main?.guidance || []),
+    ...(document.main?.blocks || []),
+  ].map(readerBlockText).join("\n\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+
+function collectAnnotationRefs(blocks) {
+  const refs = [];
+  visit(blocks, (item) => {
+    if (item?.type === "annotation-ref") refs.push(item.noteId);
+  });
+  return refs;
+}
+
 function decodePercentEscapes(value) {
   let decoded = String(value);
   for (let pass = 0; pass < 3; pass += 1) {
@@ -143,6 +179,23 @@ function deriveSourceCounts() {
   const sourceLessons = sourceManifest.lessons.map((lesson) => (
     json(path.join(SITE_ROOT, lesson.dataUrl))
   ));
+  const readerIndex = json(path.join(SITE_ROOT, "data", "reader-documents", "index.json"));
+  assert.equal(readerIndex.schemaVersion, "yw-reader-document-index-v1");
+  assert.deepEqual(
+    Object.keys(readerIndex.documents).sort(),
+    sourceManifest.lessons.map((lesson) => lesson.id).sort(),
+    "reader/source lesson inventory",
+  );
+  const readerAnnotations = sourceManifest.lessons.reduce((count, lesson) => {
+    const receipt = readerIndex.documents[lesson.id];
+    const document = json(path.join(SITE_ROOT, "data", receipt.path));
+    return count
+      + (document.main?.annotations || []).length
+      + (document.supplementary || []).reduce(
+        (subtotal, section) => subtotal + (section.annotations || []).length,
+        0,
+      );
+  }, 0);
   const lessonTotals = sourceLessons.reduce((totals, lesson) => {
     const posts = lesson.posts || [];
     const pageImages = lesson.textbook?.pageImages || [];
@@ -152,7 +205,6 @@ function deriveSourceCounts() {
     totals.textbookContextPageRefs += contextPageImages.length;
     totals.forumImages += (lesson.forumImages || []).length;
     totals.resources += (lesson.resources || []).length;
-    totals.annotations += (lesson.annotations || []).length;
     totals.learningTasks += (lesson.learningTasks || []).length;
     totals.postAttachments += posts.flatMap((post) => post.attachments || []).length;
     totals.postImages += posts.flatMap((post) => post.images || []).length;
@@ -162,7 +214,6 @@ function deriveSourceCounts() {
     return totals;
   }, {
     activePageUrls: new Set(),
-    annotations: 0,
     contextPageUrls: new Set(),
     forumImages: 0,
     learningTasks: 0,
@@ -175,7 +226,8 @@ function deriveSourceCounts() {
     textbookPageRefs: 0,
   });
   const vocabIndex = json(path.join(SITE_ROOT, "data", "vocab", "index.json"));
-  const vocabIds = Object.keys(vocabIndex.lessons);
+  const vocabIds = Object.keys(vocabIndex.lessons)
+    .filter((lessonId) => Number(vocabIndex.lessons[lessonId]) > 0);
   const vocabBanks = vocabIds.map((lessonId) => (
     json(path.join(SITE_ROOT, "data", "vocab", `${lessonId}.json`))
   ));
@@ -192,7 +244,7 @@ function deriveSourceCounts() {
     .filter((file) => /^lesson-.+\.json$/.test(file))
     .map((file) => file.slice(0, -5));
   return canonicalize({
-    annotations: lessonTotals.annotations,
+    annotations: readerAnnotations,
     approvedDecks,
     approvedSlideDecks: approvedDecks,
     blockedTextbookPageRefs: 0,
@@ -370,7 +422,7 @@ test("manifest object receipts match every immutable object", () => {
   assert.equal(manifest.releaseReceiptId, `sha256-${sha256(releaseReceiptInput)}`);
   assert.equal(
     manifest.objects.length,
-    core.lessons.length + core.vocab.lessons.length + 7,
+    core.lessons.length + core.vocab.lessons.length + 8,
   );
   assert.deepEqual(firstBuild.immutableWrites, {
     unchanged: 0,
@@ -529,7 +581,7 @@ test("full active content and native body counts match the Web source", () => {
   for (const lesson of core.lessons) {
     assert.equal(lesson.schemaVersion, "yw-native-lesson-v1");
     assert.equal(lesson.contentVersion, pointer.contentVersion);
-    assert.equal(lesson.body, lesson.posts.map((post) => post.plainText).join("\n\n"), `${lesson.id}: body`);
+    assert.equal(lesson.body, expectedReaderBody(lesson.readerDocument), `${lesson.id}: reader body`);
     for (const post of lesson.posts) {
       assert.equal(typeof post.plainText, "string");
       assert.equal(Object.hasOwn(post, "cooked"), false);
@@ -552,11 +604,302 @@ test("full active content and native body counts match the Web source", () => {
   }]);
 });
 
+test("shared reader projection assigns every post once and is byte-bound to Web", () => {
+  const readerIndexFile = path.join(SITE_ROOT, "data", "reader-documents", "index.json");
+  const readerIndexBytes = readFileSync(readerIndexFile);
+  const readerIndex = JSON.parse(readerIndexBytes.toString("utf8"));
+  const curationFile = path.join(ROOT, "scripts", "reader_content_curation.v1.json");
+  const curation = json(curationFile);
+  const roleAuditFile = path.join(ROOT, "scripts", "reader_role_audit.v1.json");
+  const roleAuditBytes = readFileSync(roleAuditFile);
+  const roleAudit = JSON.parse(roleAuditBytes.toString("utf8"));
+  const mediaReceiptFile = path.join(SITE_ROOT, "data", "reader-media-receipts.v1.json");
+  const mediaReceiptBytes = readFileSync(mediaReceiptFile);
+  const mediaReceiptLedger = JSON.parse(mediaReceiptBytes.toString("utf8"));
+  const mediaReceiptByUrl = new Map(mediaReceiptLedger.receipts.map((receipt) => (
+    [receipt.sourceUrl, receipt]
+  )));
+  const catalogLessons = new Map(core.catalog.lessons.map((lesson) => [lesson.id, lesson]));
+  const sanitizedHashDifferences = [];
+  assert.equal(curation.schemaVersion, "yw-reader-curation-v1");
+  assert.equal(curation.rolePolicyVersion, "yw-reader-post-role-policy-v1");
+  assert.equal(curation.review?.status, "reviewed");
+  assert.equal(curation.review?.basis, "explicit-post-role-review-v1");
+  assert.equal(roleAudit.schemaVersion, "yw-reader-role-audit-v1");
+  assert.equal(roleAudit.rolePolicyVersion, curation.rolePolicyVersion);
+  assert.equal(roleAudit.review?.status, "reviewed");
+  assert.equal(roleAudit.review?.basis, "independent-reader-content-audit-v1");
+  assert.equal(roleAudit.decisions.length, 9);
+  assert.equal(new Set(roleAudit.decisions.map((decision) => (
+    `${decision.lessonId}:${decision.postId}`
+  ))).size, roleAudit.decisions.length);
+  assert.equal(curation.lessons.length, sourceCounts.lessons);
+  assert.equal(new Set(curation.lessons.map((lesson) => lesson.lessonId)).size, sourceCounts.lessons);
+  assert.equal(readerIndex.schemaVersion, "yw-reader-document-index-v1");
+  assert.equal(readerIndex.roleAuditVersion, roleAudit.auditVersion);
+  assert.equal(readerIndex.roleAuditSha256, sha256(roleAuditBytes));
+  assert.equal(readerIndex.roleOverrideCount, roleAudit.decisions.length);
+  assert.equal(readerIndex.mediaReceiptLedger.schemaVersion, mediaReceiptLedger.schemaVersion);
+  assert.equal(readerIndex.mediaReceiptLedger.ledgerVersion, mediaReceiptLedger.ledgerVersion);
+  assert.equal(readerIndex.mediaReceiptLedger.sha256, sha256(mediaReceiptBytes));
+  assert.equal(readerIndex.mediaReceiptLedger.receiptCount, 165);
+  assert.equal(readerIndex.mediaReceiptLedger.totalBytes, 28066373);
+  assert.equal(
+    readerIndex.mediaReceiptLedger.sourceInventorySha256,
+    mediaReceiptLedger.sourceInventorySha256,
+  );
+  assert.equal(readerIndex.lessonCount, sourceCounts.lessons);
+  assert.equal(core.readerProjection.schemaVersion, readerIndex.schemaVersion);
+  assert.equal(core.readerProjection.curationVersion, readerIndex.curationVersion);
+  assert.equal(core.readerProjection.readerSemanticDigest, readerIndex.readerSemanticDigest);
+  assert.equal(core.readerProjection.indexSha256, sha256(readerIndexBytes));
+  assert.equal(Object.keys(readerIndex.documents).length, sourceCounts.lessons);
+
+  const allowedRoles = new Set([
+    "primary",
+    "supplementary",
+    "resource-only",
+    "discussion",
+    "reply",
+    "source-only",
+  ]);
+  let assignedPosts = 0;
+  let provenanceMedia = 0;
+  let blockedHttpLinks = 0;
+  let projectedAnnotations = 0;
+  let annotationRefOccurrences = 0;
+  let resourceLinkBlocks = 0;
+  let actionableMediaReferences = 0;
+  const sanitizedReaderDocuments = new Map();
+  const sanitizer = createUrlSanitizer();
+  const roleDecisionsByLesson = new Map();
+  for (const decision of roleAudit.decisions) {
+    const decisions = roleDecisionsByLesson.get(decision.lessonId) || [];
+    decisions.push(decision);
+    roleDecisionsByLesson.set(decision.lessonId, decisions);
+  }
+  const expectedPrimaryEmbedLinks = new Map([
+    ["lesson-1558", "https://www.youtube.com/watch?v=K5LIDpXFWKk"],
+    ["lesson-1560", "https://ctext.org/library.pl?if=gb&file=56722&page=49"],
+    ["lesson-1589", "https://ctext.org/wiki.pl?if=gb&chapter=206323"],
+    ["lesson-1590", "https://ctext.org/wiki.pl?if=gb&chapter=65609"],
+    ["lesson-1591", "https://ctext.org/wiki.pl?if=gb&chapter=768444"],
+  ]);
+  const lesson1557Image =
+    "https://files.rdfzer.com/original/2X/b/bdfbe13294db151cbe5b180495493a0a46181138.jpeg";
+
+  for (const lesson of core.lessons) {
+    const receipt = readerIndex.documents[lesson.id];
+    const catalogLesson = catalogLessons.get(lesson.id);
+    assert.ok(receipt, `${lesson.id}: reader receipt`);
+    assert.ok(catalogLesson, `${lesson.id}: catalog reader receipt`);
+    const file = path.join(SITE_ROOT, "data", receipt.path);
+    const bytes = readFileSync(file);
+    assert.equal(bytes.length, receipt.bytes, `${lesson.id}: reader bytes`);
+    assert.equal(sha256(bytes), receipt.sha256, `${lesson.id}: reader sha256`);
+    const webDocument = JSON.parse(bytes);
+    const sanitizedWebDocument = canonicalize(sanitizer.sanitizeValue(webDocument));
+    sanitizedReaderDocuments.set(lesson.id, sanitizedWebDocument);
+    const rawCanonicalSha256 = sha256(JSON.stringify(canonicalize(webDocument)));
+    const embeddedSha256 = sha256(JSON.stringify(sanitizedWebDocument));
+    assert.equal(catalogLesson.readerDocumentPath, `data/reader-documents/${lesson.id}.json`);
+    assert.equal(catalogLesson.readerDocumentSha256, receipt.sha256);
+    assert.equal(catalogLesson.readerDocumentEmbeddedSha256, embeddedSha256);
+    if (rawCanonicalSha256 !== embeddedSha256) sanitizedHashDifferences.push(lesson.id);
+    assert.deepEqual(lesson.readerDocument, sanitizedWebDocument, `${lesson.id}: Web/App reader drift`);
+    assert.equal(lesson.readerDocument.schemaVersion, "yw-reader-document-v1");
+    assert.equal(lesson.readerDocument.lessonId, lesson.id);
+    assert.equal(lesson.readerDocument.main.sourcePostId, receipt.primaryPostId);
+    assert.equal(lesson.readerDocument.provenance.sourcePostCount, lesson.posts.length);
+
+    const assignments = lesson.readerDocument.provenance.posts;
+    assignedPosts += assignments.length;
+    assert.equal(assignments.length, lesson.posts.length, `${lesson.id}: assignment count`);
+    assert.equal(new Set(assignments.map((post) => String(post.postId))).size, assignments.length);
+    assert.deepEqual(
+      assignments.map((post) => String(post.postId)).sort(),
+      lesson.posts.map((post) => String(post.id)).sort(),
+      `${lesson.id}: assigned post inventory`,
+    );
+    for (const assignment of assignments) assert.ok(allowedRoles.has(assignment.role));
+    for (const decision of roleDecisionsByLesson.get(lesson.id) || []) {
+      assert.equal(
+        assignments.find((assignment) => String(assignment.postId) === String(decision.postId))?.role,
+        decision.role,
+        `${lesson.id}/${decision.postId}: audited role`,
+      );
+    }
+    const primary = assignments.filter((post) => post.role === "primary");
+    assert.equal(primary.length, 1, `${lesson.id}: exactly one main`);
+    assert.equal(primary[0].postId, lesson.readerDocument.main.sourcePostId);
+    assert.equal(primary[0].replyToPostNumber, null, `${lesson.id}: reply entered main`);
+    assert.equal(
+      assignments.some((post) => (
+        (post.role === "discussion" || post.role === "reply")
+        && String(post.postId) === String(lesson.readerDocument.main.sourcePostId)
+      )),
+      false,
+      `${lesson.id}: discussion/reply entered main`,
+    );
+
+    const body = lesson.body.trim();
+    assert.doesNotMatch(body, /^https?:\/\/\S+$/i, `${lesson.id}: pure URL body`);
+    assert.doesNotMatch(JSON.stringify(lesson.readerDocument), /<\/?(?:p|div|span|a|img|ol|ul|li|blockquote)\b/i,
+      `${lesson.id}: cooked HTML leaked`);
+    visit(lesson.readerDocument, (_value, pathParts) => {
+      assert.notEqual(pathParts.at(-1), "cooked", `${lesson.id}: cooked key leaked`);
+    });
+
+    const mainRefs = collectAnnotationRefs([
+      ...lesson.readerDocument.main.frontMatter,
+      ...lesson.readerDocument.main.guidance,
+      ...lesson.readerDocument.main.blocks,
+    ]);
+    const uniqueMainRefs = [...new Set(mainRefs)];
+    assert.deepEqual(
+      lesson.readerDocument.main.annotations.map((note) => note.noteId),
+      uniqueMainRefs,
+      `${lesson.id}: main annotations must exactly follow first references`,
+    );
+    projectedAnnotations += lesson.readerDocument.main.annotations.length;
+    annotationRefOccurrences += mainRefs.length;
+    for (const supplementary of lesson.readerDocument.supplementary) {
+      const refs = collectAnnotationRefs(supplementary.blocks);
+      assert.deepEqual(
+        supplementary.annotations.map((note) => note.noteId),
+        [...new Set(refs)],
+        `${lesson.id}/${supplementary.postId}: annotations must exactly follow first references`,
+      );
+      projectedAnnotations += supplementary.annotations.length;
+      annotationRefOccurrences += refs.length;
+    }
+
+    const embedLinks = [];
+    visit([
+      ...lesson.readerDocument.main.frontMatter,
+      ...lesson.readerDocument.main.guidance,
+      ...lesson.readerDocument.main.blocks,
+    ], (item) => {
+      if (item?.type === "resource-link") embedLinks.push(item);
+    });
+    resourceLinkBlocks += embedLinks.length;
+    if (expectedPrimaryEmbedLinks.has(lesson.id)) {
+      assert.deepEqual(
+        embedLinks.map((block) => block.href),
+        [expectedPrimaryEmbedLinks.get(lesson.id)],
+        `${lesson.id}: primary iframe fallback`,
+      );
+      assert.equal(embedLinks[0].disposition, "system-browser");
+    } else {
+      assert.equal(embedLinks.length, 0, `${lesson.id}: unexpected primary embed link`);
+    }
+    if (lesson.id === "lesson-1557") {
+      const media = lesson.readerDocument.main.media.find((item) => (
+        item.sourceUrl === lesson1557Image
+      ));
+      assert.ok(media, "lesson-1557 nested heading image receipt");
+      const projectedMediaIds = [];
+      visit(lesson.readerDocument.main.blocks, (item) => {
+        if (item?.type === "image" || item?.type === "media-ref") {
+          projectedMediaIds.push(item.mediaId);
+        }
+      });
+      assert.equal(
+        projectedMediaIds.filter((mediaId) => mediaId === media.id).length,
+        1,
+        "lesson-1557 nested heading image projected exactly once",
+      );
+    }
+
+    for (const media of [
+      ...lesson.readerDocument.main.media,
+      ...lesson.readerDocument.supplementary.flatMap((section) => section.media),
+    ]) {
+      const sourceReceipt = mediaReceiptByUrl.get(media.sourceUrl);
+      assert.ok(sourceReceipt, `${lesson.id}: actionable image has source receipt`);
+      assert.equal(media.nativeDisposition, "verified-in-app");
+      assert.equal(media.bytes, sourceReceipt.bytes);
+      assert.equal(media.sha256, sourceReceipt.sha256);
+      assert.equal(media.mediaType, sourceReceipt.mime);
+      assert.equal(media.width, sourceReceipt.width);
+      assert.equal(media.height, sourceReceipt.height);
+      assert.equal(media.finalUrl, sourceReceipt.finalUrl);
+      assert.equal(media.receiptRequired, true);
+      actionableMediaReferences += 1;
+    }
+
+    for (const media of lesson.readerDocument.provenance.media) {
+      provenanceMedia += 1;
+      assert.match(media.sourceUrl, /^https?:\/\//);
+      assert.ok(Object.hasOwn(media, "bytes"));
+      assert.ok(Object.hasOwn(media, "sha256"));
+      assert.ok(Object.hasOwn(media, "mediaType"));
+      assert.ok(Object.hasOwn(media, "width"));
+      assert.ok(Object.hasOwn(media, "height"));
+      if (media.postRole === "primary" || media.postRole === "supplementary") {
+        const sourceReceipt = mediaReceiptByUrl.get(media.sourceUrl);
+        assert.ok(sourceReceipt, `${lesson.id}: visible provenance media receipt`);
+        assert.equal(media.nativeDisposition, "verified-in-app");
+        assert.equal(media.bytes, sourceReceipt.bytes);
+        assert.equal(media.sha256, sourceReceipt.sha256);
+        assert.equal(media.mediaType, sourceReceipt.mime);
+      } else if (media.nativeDisposition === "blocked-missing-receipt") {
+        assert.equal(media.bytes, null);
+        assert.equal(media.sha256, null);
+        assert.equal(media.receiptRequired, true);
+      } else {
+        assert.equal(media.nativeDisposition, "blocked-http");
+        assert.equal(media.webDisposition, "source-only");
+      }
+    }
+    for (const link of lesson.readerDocument.provenance.links) {
+      if (link.disposition !== "blocked-http") continue;
+      blockedHttpLinks += 1;
+      assert.match(link.sourceUrl, /^http:\/\//);
+      assert.equal(link.href, null);
+    }
+  }
+  assert.deepEqual(
+    sanitizedHashDifferences,
+    ["lesson-1458", "lesson-1499", "lesson-1528", "lesson-1557", "lesson-1579"],
+    "only reviewed URL-sanitization lessons may differ between canonical Web and embedded App reader hashes",
+  );
+  assert.equal(assignedPosts, sourceCounts.posts);
+  assert.equal(projectedAnnotations, 2932);
+  assert.equal(annotationRefOccurrences, 2933);
+  assert.equal(resourceLinkBlocks, expectedPrimaryEmbedLinks.size);
+  assert.equal(actionableMediaReferences, 167);
+  assert.equal(provenanceMedia, sourceCounts.postImages);
+  assert.equal(blockedHttpLinks, 11);
+  assert.equal(sanitizedReaderDocuments.size, sourceCounts.lessons);
+  const webAppSource = readFileSync(path.join(SITE_ROOT, "assets", "app.js"), "utf8");
+  const renderTextSource = webAppSource.slice(
+    webAppSource.indexOf("function renderText("),
+    webAppSource.indexOf("function absoluteResourceUrl("),
+  );
+  assert.match(webAppSource, /function renderReaderDocument\(/);
+  assert.match(webAppSource, /function fetchVerifiedJson\(/);
+  assert.match(webAppSource, /globalThis\.crypto\.subtle\.digest\("SHA-256", bytes\)/);
+  assert.match(webAppSource, /data-reader-retry/);
+  assert.match(webAppSource, /state\.lessons\.delete\(id\)/);
+  assert.match(webAppSource, /if \(shouldCache\) state\.lessons\.set\(id, lesson\)/);
+  assert.doesNotMatch(webAppSource, /existing lesson-v1 renderer is the only compatibility fallback/);
+  assert.doesNotMatch(renderTextSource, /meaningfulPosts|primaryContentParts|cleanedCooked/);
+});
+
 test("vocab, tombstones and media fail closed", () => {
   assert.equal(core.vocab.index.lessonCount, sourceCounts.vocabLessonFiles);
+  assert.equal(core.vocab.index.sourceBankCount, Object.keys(
+    json(path.join(SITE_ROOT, "data", "vocab", "index.json")).lessons,
+  ).length);
   assert.equal(core.vocab.index.inventoryFileCount, sourceCounts.vocabInventoryFiles);
   assert.equal(core.vocab.index.questionCount, sourceCounts.vocabQuestions);
   assert.equal(core.vocab.lessons.length, sourceCounts.vocabLessonFiles);
+  assert.deepEqual(core.vocab.eligibility, json(path.join(
+    SITE_ROOT,
+    "data",
+    "vocab-eligibility.json",
+  )));
   assert.equal(core.vocab.lessons.reduce((sum, bank) => sum + bank.inventory.filter((item) => item.decision === "question").length, 0), sourceCounts.vocabQuestions);
   assert.equal(core.tombstones.tombstones.length, sourceCounts.compositeTombstones);
   const active = new Set(core.lessons.map((lesson) => lesson.id));
@@ -606,7 +949,7 @@ test("vocab, tombstones and media fail closed", () => {
 });
 
 test("all derived immutable objects have safe URLs", () => {
-  assert.equal(manifest.objects.length, core.lessons.length + core.vocab.lessons.length + 7);
+  assert.equal(manifest.objects.length, core.lessons.length + core.vocab.lessons.length + 8);
   const publicDocuments = [
     { name: "latest-stable.json", value: pointer },
     { name: "manifest.json", value: manifest },

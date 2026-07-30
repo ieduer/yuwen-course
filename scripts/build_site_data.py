@@ -301,6 +301,9 @@ AI_IMAGE_DESCRIPTION_RE = re.compile(
 MEDIA_META_RE = re.compile(r"(?:\b(?:undefined|image)?\s*)?\d{2,5}\s*[x×]\s*\d{2,5}\s+[\d.]+\s*(?:kb|mb|gb|b)\b", re.IGNORECASE)
 FILE_HASH_RE = re.compile(r"\b[a-f0-9]{24,}\b", re.IGNORECASE)
 MEDIA_ANCHOR_RE = re.compile(r"image\d{2,5}[x×]\d{2,5}upload[a-z0-9]+", re.IGNORECASE)
+BBCODE_COLOR_RE = re.compile(r"\[/?color(?:=[^\]]+)?\]", re.IGNORECASE)
+BBCODE_ALIGNMENT_RE = re.compile(r"\[/?(?:right|center|left)\]", re.IGNORECASE)
+RAW_ANNOTATION_LABEL_RE = re.compile(r"\[\d+:\d+\]")
 UNIT_RE = re.compile(r"第\s*([一二三四五六七八九十\d]+)\s*单元")
 UNIT_TASK_RE = re.compile(r"(学习任务|研习任务)")
 
@@ -329,6 +332,9 @@ def clean_title(title: str, block_title: str = "") -> str:
 def clean_media_text(value: str) -> str:
     text = unicodedata.normalize("NFKC", value or "")
     text = html.unescape(text)
+    text = BBCODE_COLOR_RE.sub("", text)
+    text = BBCODE_ALIGNMENT_RE.sub("", text)
+    text = RAW_ANNOTATION_LABEL_RE.sub("", text)
     text = AI_CAPTION_RE.sub("", text)
     text = AI_IMAGE_DESCRIPTION_RE.sub(" ", text)
     text = AI_DESCRIPTION_PREFIX_RE.sub(" ", text)
@@ -347,6 +353,9 @@ def is_media_noise(value: str) -> bool:
 
 def sanitize_cooked_html(value: str) -> str:
     html_text = str(value or "")
+    html_text = BBCODE_COLOR_RE.sub("", html_text)
+    html_text = BBCODE_ALIGNMENT_RE.sub("", html_text)
+    html_text = RAW_ANNOTATION_LABEL_RE.sub("", html_text)
     html_text = re.sub(r'<div class="meta">.*?</div>', "", html_text, flags=re.DOTALL)
     html_text = AI_CAPTION_RE.sub("", html_text)
     html_text = AI_IMAGE_DESCRIPTION_RE.sub(" ", html_text)
@@ -422,9 +431,9 @@ def repair_known_footnotes(post: dict[str, Any]) -> dict[str, Any]:
 
 def sanitize_post(post: dict[str, Any]) -> dict[str, Any]:
     post = dict(post)
+    post = repair_known_footnotes(post)
     post["plain_text"] = clean_media_text(post.get("plain_text", ""))
     post["cooked"] = sanitize_cooked_html(post.get("cooked", ""))
-    post = repair_known_footnotes(post)
     images = []
     for image in post.get("images", []):
         item = dict(image)
@@ -448,6 +457,20 @@ def sanitize_post(post: dict[str, Any]) -> dict[str, Any]:
         attachments.append(item)
     post["attachments"] = attachments
     return post
+
+
+def assert_user_facing_projection(value: Any, path: str = "lesson") -> None:
+    if isinstance(value, str):
+        if BBCODE_COLOR_RE.search(value) or RAW_ANNOTATION_LABEL_RE.search(value):
+            raise ValueError(f"user-facing projection residue at {path}")
+        return
+    if isinstance(value, list):
+        for index, item in enumerate(value):
+            assert_user_facing_projection(item, f"{path}[{index}]")
+        return
+    if isinstance(value, dict):
+        for key, item in value.items():
+            assert_user_facing_projection(item, f"{path}.{key}")
 
 
 def normalized(value: str) -> str:
@@ -1010,6 +1033,7 @@ def main() -> None:
             meta["textbookPageCount"] = len(pages)
             meta["textbookStartPage"] = pages[0] if pages else None
             block["lessons"].append(meta)
+            assert_user_facing_projection(lesson, lesson["id"])
             write_json(lessons_dir / f"{lesson['id']}.json", lesson)
 
     manifest_lessons = [
@@ -1045,6 +1069,7 @@ def main() -> None:
             "mappedLessons": sum(1 for item in manifest_lessons if item["textbookPageCount"]),
         }
     }
+    assert_user_facing_projection(manifest, "manifest")
     write_json(args.out / "manifest.json", manifest)
 
     summary = manifest["totals"]

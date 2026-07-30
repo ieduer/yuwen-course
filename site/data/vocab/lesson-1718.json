@@ -23,25 +23,14 @@
    "id": "lesson-1718:v02",
    "word": "撅",
    "annotated": true,
-   "decision": "question",
-   "reason": "动词，准确理解动作细节有助于还原作者当时百无聊赖的心境。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "折断",
    "sourceSentence": "撅一杈树枝左右拍打,驱赶那些和我一样不明白为什么要来这世上的小昆虫",
-   "type": "substitution",
-   "question": "下列词语替换文中「撅」字，语意最恰当的一项是",
-   "options": [
-    "捡",
-    "折",
-    "砍",
-    "拨"
-   ],
-   "answerIndex": 1,
-   "explanation": "「撅」在文中指折断树枝，选项中「折」最符合原意。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 826
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1718:v02"
   },
   {
    "id": "lesson-1718:v03",
@@ -59,121 +48,66 @@
    "id": "lesson-1718:v04",
    "word": "熨帖",
    "annotated": true,
-   "decision": "question",
-   "reason": "形容词的多义性，此处形容气息带来的心理感受，是理解散文意境的关键。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "舒服、安适",
    "sourceSentence": "满园中播散着熨帖而微苦的味道。",
-   "type": "contextual-choice",
-   "question": "文中「熨帖」一词在句中的含义是",
-   "options": [
-    "整齐服帖",
-    "熨烫平整",
-    "舒服安适",
-    "妥帖周到"
-   ],
-   "answerIndex": 2,
-   "explanation": "文中形容气味给人带来的心理安适感，故选「舒服安适」。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1844
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1718:v04"
   },
   {
    "id": "lesson-1718:v05",
    "word": "隽永",
    "annotated": true,
-   "decision": "question",
-   "reason": "形容词，考察对抽象情感表达的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "意味深长",
    "sourceSentence": "母亲生前没留下过什么隽永:的哲言,或要我恪守的教诲",
-   "type": "contextual-choice",
-   "question": "文中「隽永」一词的意思是",
-   "options": [
-    "言辞华丽",
-    "意味深长",
-    "难以理解",
-    "陈旧过时"
-   ],
-   "answerIndex": 1,
-   "explanation": "隽永指意味深长，耐人寻味。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4287
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1718:v05"
   },
   {
    "id": "lesson-1718:v06",
    "word": "剥蚀",
    "annotated": false,
-   "decision": "question",
-   "reason": "动词，揭示古园沧桑感的关键，误解会影响对环境意象的把握。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "侵蚀、风化脱落",
    "sourceSentence": "它一面剥蚀了古殿檐头浮夸的琉璃,淡褪了门壁上炫耀的朱红",
-   "type": "contextual-choice",
-   "question": "文中「剥蚀」一词最准确的语境义是",
-   "options": [
-    "剥夺并侵蚀",
-    "因风化而脱落",
-    "强行拆除",
-    "掩盖并消除"
-   ],
-   "answerIndex": 1,
-   "explanation": "剥蚀指由于自然力作用，物体表面逐渐脱落，符合古园荒废的状态。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 339
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1718:v06"
   },
   {
    "id": "lesson-1718:v07",
    "word": "宿命",
    "annotated": false,
-   "decision": "question",
-   "reason": "名词，体现作者对人生际遇的哲学思考，是全篇基调的核心词。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "命中注定",
    "sourceSentence": "我常觉得这中间有着宿命的味道:仿佛这古园就是为了等我",
-   "type": "interpretation",
-   "question": "作者认为自己与地坛的相遇有「宿命的味道」，其含义是",
-   "options": [
-    "偶然的巧合",
-    "命中注定般的缘分",
-    "悲剧性的必然",
-    "刻意的安排"
-   ],
-   "answerIndex": 1,
-   "explanation": "「宿命」强调一种非人力所能改变的、注定的联系。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 259
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1718:v07"
   },
   {
    "id": "lesson-1718:v08",
    "word": "声名狼藉",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语，考察对作者自我批判心理的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "名声极坏",
    "sourceSentence": "以致使“想出名”这一声名狼藉的念头也多少改变了一点形象。",
-   "type": "interpretation",
-   "question": "文中作者称「想出名」这一念头是「声名狼藉」的，这反映了作者",
-   "options": [
-    "对功名利禄的极度蔑视",
-    "对个人动机的深刻反省与批判",
-    "对社会舆论的无奈妥协",
-    "对他人的功利心感到厌恶"
-   ],
-   "answerIndex": 1,
-   "explanation": "作者反思自己年少时想出名的念头，认为其动机不够纯粹，故以负面词汇自嘲。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4140
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1718:v08"
   },
   {
    "id": "lesson-1718:v09",
@@ -187,5 +121,225 @@
     "charIndex": 2429
    }
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1718:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1718:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "b81cea3c006e40f492ae9bac323952c34a99605e88021bd5aea307d5c55486c4",
+   "formerItem": {
+    "id": "lesson-1718:v02",
+    "word": "撅",
+    "annotated": true,
+    "decision": "question",
+    "reason": "动词，准确理解动作细节有助于还原作者当时百无聊赖的心境。",
+    "contextMeaning": "折断",
+    "sourceSentence": "撅一杈树枝左右拍打,驱赶那些和我一样不明白为什么要来这世上的小昆虫",
+    "type": "substitution",
+    "question": "下列词语替换文中「撅」字，语意最恰当的一项是",
+    "options": [
+     "捡",
+     "折",
+     "砍",
+     "拨"
+    ],
+    "answerIndex": 1,
+    "explanation": "「撅」在文中指折断树枝，选项中「折」最符合原意。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 826
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1718:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1718:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "bc08449f7a9041325869fcbb7ad29b4d65940c66c87bdf08bf32622ea4a7bccc",
+   "formerItem": {
+    "id": "lesson-1718:v04",
+    "word": "熨帖",
+    "annotated": true,
+    "decision": "question",
+    "reason": "形容词的多义性，此处形容气息带来的心理感受，是理解散文意境的关键。",
+    "contextMeaning": "舒服、安适",
+    "sourceSentence": "满园中播散着熨帖而微苦的味道。",
+    "type": "contextual-choice",
+    "question": "文中「熨帖」一词在句中的含义是",
+    "options": [
+     "整齐服帖",
+     "熨烫平整",
+     "舒服安适",
+     "妥帖周到"
+    ],
+    "answerIndex": 2,
+    "explanation": "文中形容气味给人带来的心理安适感，故选「舒服安适」。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1844
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1718:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1718:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "1afe94307bcd804624a0ab2db093810912ba3ed43d55ccf1ab029864026a131f",
+   "formerItem": {
+    "id": "lesson-1718:v05",
+    "word": "隽永",
+    "annotated": true,
+    "decision": "question",
+    "reason": "形容词，考察对抽象情感表达的理解。",
+    "contextMeaning": "意味深长",
+    "sourceSentence": "母亲生前没留下过什么隽永:的哲言,或要我恪守的教诲",
+    "type": "contextual-choice",
+    "question": "文中「隽永」一词的意思是",
+    "options": [
+     "言辞华丽",
+     "意味深长",
+     "难以理解",
+     "陈旧过时"
+    ],
+    "answerIndex": 1,
+    "explanation": "隽永指意味深长，耐人寻味。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4287
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1718:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1718:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "0a8369ae9723cff95271a99f5b58dd590f79f30cec16d8806bff0ce75cbe95ff",
+   "formerItem": {
+    "id": "lesson-1718:v06",
+    "word": "剥蚀",
+    "annotated": false,
+    "decision": "question",
+    "reason": "动词，揭示古园沧桑感的关键，误解会影响对环境意象的把握。",
+    "contextMeaning": "侵蚀、风化脱落",
+    "sourceSentence": "它一面剥蚀了古殿檐头浮夸的琉璃,淡褪了门壁上炫耀的朱红",
+    "type": "contextual-choice",
+    "question": "文中「剥蚀」一词最准确的语境义是",
+    "options": [
+     "剥夺并侵蚀",
+     "因风化而脱落",
+     "强行拆除",
+     "掩盖并消除"
+    ],
+    "answerIndex": 1,
+    "explanation": "剥蚀指由于自然力作用，物体表面逐渐脱落，符合古园荒废的状态。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 339
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1718:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1718:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "d75cbb7f1adb4481b43bd93693e7fb2f4469092f3a41877d3ee2ce1a5d277132",
+   "formerItem": {
+    "id": "lesson-1718:v07",
+    "word": "宿命",
+    "annotated": false,
+    "decision": "question",
+    "reason": "名词，体现作者对人生际遇的哲学思考，是全篇基调的核心词。",
+    "contextMeaning": "命中注定",
+    "sourceSentence": "我常觉得这中间有着宿命的味道:仿佛这古园就是为了等我",
+    "type": "interpretation",
+    "question": "作者认为自己与地坛的相遇有「宿命的味道」，其含义是",
+    "options": [
+     "偶然的巧合",
+     "命中注定般的缘分",
+     "悲剧性的必然",
+     "刻意的安排"
+    ],
+    "answerIndex": 1,
+    "explanation": "「宿命」强调一种非人力所能改变的、注定的联系。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 259
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1718:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1718:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "3493e7f3ba466b6a8401125702e096766749eecc6dc0ca258971c84a81ce04aa",
+   "formerItem": {
+    "id": "lesson-1718:v08",
+    "word": "声名狼藉",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语，考察对作者自我批判心理的理解。",
+    "contextMeaning": "名声极坏",
+    "sourceSentence": "以致使“想出名”这一声名狼藉的念头也多少改变了一点形象。",
+    "type": "interpretation",
+    "question": "文中作者称「想出名」这一念头是「声名狼藉」的，这反映了作者",
+    "options": [
+     "对功名利禄的极度蔑视",
+     "对个人动机的深刻反省与批判",
+     "对社会舆论的无奈妥协",
+     "对他人的功利心感到厌恶"
+    ],
+    "answerIndex": 1,
+    "explanation": "作者反思自己年少时想出名的念头，认为其动机不够纯粹，故以负面词汇自嘲。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4140
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

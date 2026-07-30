@@ -23,169 +23,92 @@
    "id": "lesson-1694:v02",
    "word": "皱褶",
    "annotated": false,
-   "decision": "question",
-   "reason": "此处比喻大山的地理形态，理解此词有助于把握环境描写对人物生活的隔绝作用",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "此处指山峦起伏形成的褶皱地带",
    "sourceSentence": "它和它的十几户乡亲,一心一意掩藏 在大山那深深的皱褶里",
-   "type": "contextual-choice",
-   "question": "文中「大山那深深的皱褶里」的「皱褶」一词，最准确的理解是",
-   "options": [
-    "形容大山面貌苍老，布满皱纹",
-    "指大山地理结构中隐蔽、凹陷的峡谷地带",
-    "强调山路崎岖难行，像衣服的褶皱",
-    "比喻大山对小村庄的束缚与压迫"
-   ],
-   "answerIndex": 1,
-   "explanation": "「皱褶」在文中既是写实，也是为了表现台儿沟地理位置的隐蔽与封闭。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 52
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1694:v02"
   },
   {
    "id": "lesson-1694:v03",
    "word": "娇嗔",
    "annotated": false,
-   "decision": "question",
-   "reason": "精准刻画人物心理与神态的词，是理解青春期少女心理的关键",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "假装生气，表现娇憨的情态",
    "sourceSentence": "不时能听见她们 由于互相捶打而发出的一两声娇嗔的尖叫",
-   "type": "interpretation",
-   "question": "下列对「娇嗔」一词的理解，最符合文中情境的是",
-   "options": [
-    "由于感到痛苦而发出的愤怒叫声",
-    "因火车呼啸而过感到恐惧的尖叫",
-    "一种带有撒娇意味的佯怒或娇柔的情态",
-    "对火车不停留表示不满的埋怨"
-   ],
-   "answerIndex": 2,
-   "explanation": "「娇嗔」表现了姑娘们纯真、活泼、充满青春气息的互动状态。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 542
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1694:v03"
   },
   {
    "id": "lesson-1694:v04",
    "word": "斟酌",
    "annotated": false,
-   "decision": "question",
-   "reason": "体现人物对自我形象的重视，是心理描写的重要动词",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "反复考虑、考量",
    "sourceSentence": "她们还是按照自己的心思,刻意斟酌着服饰和容貌。",
-   "type": "substitution",
-   "question": "文中「刻意斟酌着服饰和容貌」的「斟酌」一词，若换成下列词语，最不恰当的一项是",
-   "options": [
-    "考量",
-    "打理",
-    "推敲",
-    "琢磨"
-   ],
-   "answerIndex": 1,
-   "explanation": "「斟酌」侧重于思考与取舍，「打理」偏重于动作处理，语境中「斟酌」强调的是姑娘们对美的思考与判断，换成「打理」会失去心理活动的厚度。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 926
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1694:v04"
   },
   {
    "id": "lesson-1694:v05",
    "word": "相好",
    "annotated": false,
-   "decision": "question",
-   "reason": "涉及人物关系与时代语境，易产生歧义或理解偏差",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指恋人或亲密关系的对象",
    "sourceSentence": "你担保人家没有相好的?",
-   "type": "contextual-choice",
-   "question": "文中「你担保人家没有相好的?」中的「相好」指的是",
-   "options": [
-    "关系很好的朋友",
-    "值得信赖的伙伴",
-    "恋人或情感对象",
-    "经常往来的亲戚"
-   ],
-   "answerIndex": 2,
-   "explanation": "在文境中，这涉及到姑娘们对「北京话」乘务员的猜测与调侃，指代情感层面的伴侣。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2563
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1694:v05"
   },
   {
    "id": "lesson-1694:v06",
    "word": "值不当",
    "annotated": false,
-   "decision": "question",
-   "reason": "方言色彩浓厚，是理解人物对话逻辑的关键",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "不值得，没必要",
    "sourceSentence": "“值不当的!”",
-   "type": "interpretation",
-   "question": "姑娘们对香雪追火车的行为评价为「值不当的」，其含义是",
-   "options": [
-    "认为这样做太危险，不值得",
-    "认为为了一个铅笔盒不值得这样做",
-    "认为香雪的行为很可笑，没有意义",
-    "认为这样做会招来大人的责骂"
-   ],
-   "answerIndex": 1,
-   "explanation": "「值不当」在文中意为「不值得」，体现了同伴对香雪行为的某种不理解与关切。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3546
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1694:v06"
   },
   {
    "id": "lesson-1694:v07",
    "word": "凛冽",
    "annotated": false,
-   "decision": "question",
-   "reason": "环境描写的核心词，烘托氛围",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "寒冷刺骨",
    "sourceSentence": "深秋,山风渐渐凛冽了",
-   "type": "contextual-choice",
-   "question": "「深秋,山风渐渐凛冽了」中「凛冽」一词，主要为了突出",
-   "options": [
-    "秋天即将来临的季节特征",
-    "山村环境的艰苦与寒冷",
-    "香雪内心对火车的渴望与焦灼",
-    "大山的威严与不可侵犯"
-   ],
-   "answerIndex": 1,
-   "explanation": "「凛冽」形容寒冷，在此处既是写实，也为后文姑娘们等待火车的艰辛作了铺垫。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4393
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1694:v07"
   },
   {
    "id": "lesson-1694:v08",
    "word": "怂恿",
    "annotated": false,
-   "decision": "question",
-   "reason": "语境义与词典义的微妙差异，考查对文学意象的感知",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "此处指风的吹动，使核桃叶产生声音，带有拟人色彩",
    "sourceSentence": "她第一次听清它们 在夜晚,在风的怂恿下“豁啷啷”地歌唱",
-   "type": "interpretation",
-   "question": "文中提到「在风的怂恿下」，这里运用了拟人手法，「怂恿」一词在这里表现了",
-   "options": [
-    "风的恶意挑唆",
-    "风的轻柔与推动作用",
-    "风的强烈与破坏性",
-    "风的神秘与不可捉摸"
-   ],
-   "answerIndex": 1,
-   "explanation": "「怂恿」通常含贬义，此处用在风上，赋予了大自然以人的性格，表现了风与叶子的亲密互动，带有诗意。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 6544
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1694:v08"
   },
   {
    "id": "lesson-1694:v09",
@@ -220,5 +143,260 @@
    "contextMeaning": "选自《铁凝文集》（江苏文艺出版社1996 年版）。略有改动。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1694:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1694:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "3f3c8dfb84ff2383f7886fa479a0dbc8608e0afaa9a6c83b841ac3eb2be57588",
+   "formerItem": {
+    "id": "lesson-1694:v02",
+    "word": "皱褶",
+    "annotated": false,
+    "decision": "question",
+    "reason": "此处比喻大山的地理形态，理解此词有助于把握环境描写对人物生活的隔绝作用",
+    "contextMeaning": "此处指山峦起伏形成的褶皱地带",
+    "sourceSentence": "它和它的十几户乡亲,一心一意掩藏 在大山那深深的皱褶里",
+    "type": "contextual-choice",
+    "question": "文中「大山那深深的皱褶里」的「皱褶」一词，最准确的理解是",
+    "options": [
+     "形容大山面貌苍老，布满皱纹",
+     "指大山地理结构中隐蔽、凹陷的峡谷地带",
+     "强调山路崎岖难行，像衣服的褶皱",
+     "比喻大山对小村庄的束缚与压迫"
+    ],
+    "answerIndex": 1,
+    "explanation": "「皱褶」在文中既是写实，也是为了表现台儿沟地理位置的隐蔽与封闭。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 52
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1694:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1694:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "7cb95e069c0f57262064dd5239fdb87735343d02c71bd26facce4c60427079ef",
+   "formerItem": {
+    "id": "lesson-1694:v03",
+    "word": "娇嗔",
+    "annotated": false,
+    "decision": "question",
+    "reason": "精准刻画人物心理与神态的词，是理解青春期少女心理的关键",
+    "contextMeaning": "假装生气，表现娇憨的情态",
+    "sourceSentence": "不时能听见她们 由于互相捶打而发出的一两声娇嗔的尖叫",
+    "type": "interpretation",
+    "question": "下列对「娇嗔」一词的理解，最符合文中情境的是",
+    "options": [
+     "由于感到痛苦而发出的愤怒叫声",
+     "因火车呼啸而过感到恐惧的尖叫",
+     "一种带有撒娇意味的佯怒或娇柔的情态",
+     "对火车不停留表示不满的埋怨"
+    ],
+    "answerIndex": 2,
+    "explanation": "「娇嗔」表现了姑娘们纯真、活泼、充满青春气息的互动状态。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 542
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1694:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1694:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a95d8c3ef696c9151382c192ccdeb65cbe8518bac236b087e9bd8e971d845bc1",
+   "formerItem": {
+    "id": "lesson-1694:v04",
+    "word": "斟酌",
+    "annotated": false,
+    "decision": "question",
+    "reason": "体现人物对自我形象的重视，是心理描写的重要动词",
+    "contextMeaning": "反复考虑、考量",
+    "sourceSentence": "她们还是按照自己的心思,刻意斟酌着服饰和容貌。",
+    "type": "substitution",
+    "question": "文中「刻意斟酌着服饰和容貌」的「斟酌」一词，若换成下列词语，最不恰当的一项是",
+    "options": [
+     "考量",
+     "打理",
+     "推敲",
+     "琢磨"
+    ],
+    "answerIndex": 1,
+    "explanation": "「斟酌」侧重于思考与取舍，「打理」偏重于动作处理，语境中「斟酌」强调的是姑娘们对美的思考与判断，换成「打理」会失去心理活动的厚度。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 926
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1694:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1694:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "cadb5e1454301561b9f65921df2c9e9534081b907c095acb0fcacb0f9978f951",
+   "formerItem": {
+    "id": "lesson-1694:v05",
+    "word": "相好",
+    "annotated": false,
+    "decision": "question",
+    "reason": "涉及人物关系与时代语境，易产生歧义或理解偏差",
+    "contextMeaning": "指恋人或亲密关系的对象",
+    "sourceSentence": "你担保人家没有相好的?",
+    "type": "contextual-choice",
+    "question": "文中「你担保人家没有相好的?」中的「相好」指的是",
+    "options": [
+     "关系很好的朋友",
+     "值得信赖的伙伴",
+     "恋人或情感对象",
+     "经常往来的亲戚"
+    ],
+    "answerIndex": 2,
+    "explanation": "在文境中，这涉及到姑娘们对「北京话」乘务员的猜测与调侃，指代情感层面的伴侣。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2563
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1694:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1694:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a86974ab469fb3e87ab5ab21bc020c51d7a6afe18a04977469c50a21f91b1886",
+   "formerItem": {
+    "id": "lesson-1694:v06",
+    "word": "值不当",
+    "annotated": false,
+    "decision": "question",
+    "reason": "方言色彩浓厚，是理解人物对话逻辑的关键",
+    "contextMeaning": "不值得，没必要",
+    "sourceSentence": "“值不当的!”",
+    "type": "interpretation",
+    "question": "姑娘们对香雪追火车的行为评价为「值不当的」，其含义是",
+    "options": [
+     "认为这样做太危险，不值得",
+     "认为为了一个铅笔盒不值得这样做",
+     "认为香雪的行为很可笑，没有意义",
+     "认为这样做会招来大人的责骂"
+    ],
+    "answerIndex": 1,
+    "explanation": "「值不当」在文中意为「不值得」，体现了同伴对香雪行为的某种不理解与关切。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3546
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1694:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1694:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "0185bd0aca329c715ea2180bb439b34ae405ef6f11adad452d7a02ff3df6a7c1",
+   "formerItem": {
+    "id": "lesson-1694:v07",
+    "word": "凛冽",
+    "annotated": false,
+    "decision": "question",
+    "reason": "环境描写的核心词，烘托氛围",
+    "contextMeaning": "寒冷刺骨",
+    "sourceSentence": "深秋,山风渐渐凛冽了",
+    "type": "contextual-choice",
+    "question": "「深秋,山风渐渐凛冽了」中「凛冽」一词，主要为了突出",
+    "options": [
+     "秋天即将来临的季节特征",
+     "山村环境的艰苦与寒冷",
+     "香雪内心对火车的渴望与焦灼",
+     "大山的威严与不可侵犯"
+    ],
+    "answerIndex": 1,
+    "explanation": "「凛冽」形容寒冷，在此处既是写实，也为后文姑娘们等待火车的艰辛作了铺垫。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4393
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1694:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1694:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "3fc83811a93cbc7725fcc2e743691f05c9ab33d4b7b16207d467ab99d9aef701",
+   "formerItem": {
+    "id": "lesson-1694:v08",
+    "word": "怂恿",
+    "annotated": false,
+    "decision": "question",
+    "reason": "语境义与词典义的微妙差异，考查对文学意象的感知",
+    "contextMeaning": "此处指风的吹动，使核桃叶产生声音，带有拟人色彩",
+    "sourceSentence": "她第一次听清它们 在夜晚,在风的怂恿下“豁啷啷”地歌唱",
+    "type": "interpretation",
+    "question": "文中提到「在风的怂恿下」，这里运用了拟人手法，「怂恿」一词在这里表现了",
+    "options": [
+     "风的恶意挑唆",
+     "风的轻柔与推动作用",
+     "风的强烈与破坏性",
+     "风的神秘与不可捉摸"
+    ],
+    "answerIndex": 1,
+    "explanation": "「怂恿」通常含贬义，此处用在风上，赋予了大自然以人的性格，表现了风与叶子的亲密互动，带有诗意。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 6544
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

@@ -11,171 +11,92 @@
    "id": "lesson-1717-p1:v01",
    "word": "混混沌沌",
    "annotated": false,
-   "decision": "question",
-   "reason": "形容词叠词，反映生活状态，误解会影响对作者心境的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容糊里糊涂，无所事事",
    "sourceSentence": "一个人夹在苏州上海杭州，或厦门香港广州的市民中间，混混沌沌地过去",
-   "type": "contextual-choice",
-   "question": "文中「混混沌沌」一词用来形容作者在南方生活时的哪种状态？",
-   "options": [
-    "形容天气阴沉，灰暗不明",
-    "形容生活忙碌，难以分辨方向",
-    "形容生活平庸，缺乏精神追求",
-    "形容身体疲惫，意识模糊"
-   ],
-   "answerIndex": 2,
-   "explanation": "文中语境指在南方城市中平庸、无所事事、缺乏对秋之美感领略的生活状态。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 148
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v01"
   },
   {
    "id": "lesson-1717-p1:v02",
    "word": "看 不饱",
    "annotated": false,
-   "decision": "question",
-   "reason": "特殊搭配，字面义与语境义不符，影响对情感表达的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "看不厌，无法满足",
    "sourceSentence": "秋的味，秋的色，秋的意境与姿态，总看不饱，尝不透，赏玩不到十足。",
-   "type": "interpretation",
-   "question": "文中「总看不饱」中的「饱」字，其语境义是？",
-   "options": [
-    "吃得充足",
-    "满足感，指审美上的彻底满足",
-    "视觉上的饱满",
-    "色调上的浓郁"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处借用饮食习惯表达审美体验，意为无论怎么看都无法获得足够的满足感。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 191
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v02"
   },
   {
    "id": "lesson-1717-p1:v03",
    "word": "落蕊",
    "annotated": false,
-   "decision": "question",
-   "reason": "词义涉及描写对象，是理解北国秋天特征的关键意象",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "落下的花蕊",
    "sourceSentence": "像花而又不是花的那一种落蕊，早晨起来，会铺得满地。",
-   "type": "contextual-choice",
-   "question": "文中「落蕊」一词指代的是北国秋天的哪种植物器官？",
-   "options": [
-    "槐树的花瓣或花蕊",
-    "秋草的种子",
-    "牵牛花的蓝朵",
-    "枯萎的树叶"
-   ],
-   "answerIndex": 0,
-   "explanation": "结合上文「北国的槐树」，此处「落蕊」即指槐树落下的花蕊。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 564
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v03"
   },
   {
    "id": "lesson-1717-p1:v04",
    "word": "息列索落",
    "annotated": false,
-   "decision": "question",
-   "reason": "拟声词，生动描绘秋雨，考察语感",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容雨声细碎且断断续续",
    "sourceSentence": "忽而来一阵凉风，便息列索落地下起雨来了。",
-   "type": "contextual-choice",
-   "question": "下列哪项最能准确解释「息列索落」在文中的含义？",
-   "options": [
-    "形容雨势很大，急骤有力",
-    "形容雨声清脆，节奏明快",
-    "形容雨声细碎，稀疏而断续",
-    "形容雨水连绵，持久不断"
-   ],
-   "answerIndex": 2,
-   "explanation": "该词为叠音拟声词，符合文中北方初秋雨势细碎、凉爽的特征。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 867
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v04"
   },
   {
    "id": "lesson-1717-p1:v05",
    "word": "歧韵",
    "annotated": false,
-   "decision": "question",
-   "reason": "方言语音现象，涉及文句理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "发音上的偏差或不同",
    "sourceSentence": "北方人念阵字，总老像是层字，平平仄仄 起来，这念错的歧韵，倒来得正好",
-   "type": "contextual-choice",
-   "question": "文中「歧韵」指的是什么现象？",
-   "options": [
-    "诗歌押韵不合规范",
-    "方言中某些字音读法上的偏差",
-    "北方话与南方话的声调差异",
-    "作者对韵律的独特理解"
-   ],
-   "answerIndex": 1,
-   "explanation": "根据语境，是指北方人将「阵」念得像「层」，这种发音上的偏差即为歧韵。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1029
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v05"
   },
   {
    "id": "lesson-1717-p1:v06",
    "word": "不能自已",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语，易误读（已/己），此处考察对情感程度的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "无法控制自己的感情",
    "sourceSentence": "到了秋天，我想也一定会感到一种不能自已的深情",
-   "type": "usage",
-   "question": "文中「不能自已」的「已」字，读音与含义正确的是？",
-   "options": [
-    "yǐ，停止",
-    "jǐ，自己",
-    "yǐ，已经",
-    "jǐ，身体"
-   ],
-   "answerIndex": 0,
-   "explanation": "「不能自已」意为无法控制自己的情感，已，停止，控制。",
-   "difficulty": 1,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 1512
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v06"
   },
   {
    "id": "lesson-1717-p1:v07",
    "word": "何尝",
    "annotated": false,
-   "decision": "question",
-   "reason": "副词，高频考点，用于反问，影响句意理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "用在反问句中，表示「难道……吗」或「何曾」",
    "sourceSentence": "秋之于人，何尝有国别，更何尝有人种阶级的区别呢？",
-   "type": "usage",
-   "question": "文中「何尝」表达了怎样的语气？",
-   "options": [
-    "表示推测，意为「或许」",
-    "表示反问，意为「难道……吗」",
-    "表示否定，意为「从未」",
-    "表示比较，意为「比……更」"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处用反问形式强调秋天对人的影响是普遍的，没有国别和人种之分。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1535
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v07"
   },
   {
    "id": "lesson-1717-p1:v08",
@@ -351,5 +272,262 @@
    "contextMeaning": "在广州市。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1717-p1:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a2bf8f89f5f959bb2cff55cd88f4d5f8480629b208eadb9d83d6c0a06becc27d",
+   "formerItem": {
+    "id": "lesson-1717-p1:v01",
+    "word": "混混沌沌",
+    "annotated": false,
+    "decision": "question",
+    "reason": "形容词叠词，反映生活状态，误解会影响对作者心境的理解",
+    "contextMeaning": "形容糊里糊涂，无所事事",
+    "sourceSentence": "一个人夹在苏州上海杭州，或厦门香港广州的市民中间，混混沌沌地过去",
+    "type": "contextual-choice",
+    "question": "文中「混混沌沌」一词用来形容作者在南方生活时的哪种状态？",
+    "options": [
+     "形容天气阴沉，灰暗不明",
+     "形容生活忙碌，难以分辨方向",
+     "形容生活平庸，缺乏精神追求",
+     "形容身体疲惫，意识模糊"
+    ],
+    "answerIndex": 2,
+    "explanation": "文中语境指在南方城市中平庸、无所事事、缺乏对秋之美感领略的生活状态。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 148
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1717-p1:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "7c0d04639edf17aa48f159cd3a83eaecd6c572538e6ba30e439cfbad51a1629d",
+   "formerItem": {
+    "id": "lesson-1717-p1:v02",
+    "word": "看 不饱",
+    "annotated": false,
+    "decision": "question",
+    "reason": "特殊搭配，字面义与语境义不符，影响对情感表达的理解",
+    "contextMeaning": "看不厌，无法满足",
+    "sourceSentence": "秋的味，秋的色，秋的意境与姿态，总看不饱，尝不透，赏玩不到十足。",
+    "type": "interpretation",
+    "question": "文中「总看不饱」中的「饱」字，其语境义是？",
+    "options": [
+     "吃得充足",
+     "满足感，指审美上的彻底满足",
+     "视觉上的饱满",
+     "色调上的浓郁"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处借用饮食习惯表达审美体验，意为无论怎么看都无法获得足够的满足感。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 191
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1717-p1:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "0a373a4537716c6e49ff8df8a082c34dc77202d24fbab30d9c4ae07c1d759536",
+   "formerItem": {
+    "id": "lesson-1717-p1:v03",
+    "word": "落蕊",
+    "annotated": false,
+    "decision": "question",
+    "reason": "词义涉及描写对象，是理解北国秋天特征的关键意象",
+    "contextMeaning": "落下的花蕊",
+    "sourceSentence": "像花而又不是花的那一种落蕊，早晨起来，会铺得满地。",
+    "type": "contextual-choice",
+    "question": "文中「落蕊」一词指代的是北国秋天的哪种植物器官？",
+    "options": [
+     "槐树的花瓣或花蕊",
+     "秋草的种子",
+     "牵牛花的蓝朵",
+     "枯萎的树叶"
+    ],
+    "answerIndex": 0,
+    "explanation": "结合上文「北国的槐树」，此处「落蕊」即指槐树落下的花蕊。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 564
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1717-p1:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "08db858baca0d079fa67dc091e5d684d3930e8653392125f268c8fea5a8b18f0",
+   "formerItem": {
+    "id": "lesson-1717-p1:v04",
+    "word": "息列索落",
+    "annotated": false,
+    "decision": "question",
+    "reason": "拟声词，生动描绘秋雨，考察语感",
+    "contextMeaning": "形容雨声细碎且断断续续",
+    "sourceSentence": "忽而来一阵凉风，便息列索落地下起雨来了。",
+    "type": "contextual-choice",
+    "question": "下列哪项最能准确解释「息列索落」在文中的含义？",
+    "options": [
+     "形容雨势很大，急骤有力",
+     "形容雨声清脆，节奏明快",
+     "形容雨声细碎，稀疏而断续",
+     "形容雨水连绵，持久不断"
+    ],
+    "answerIndex": 2,
+    "explanation": "该词为叠音拟声词，符合文中北方初秋雨势细碎、凉爽的特征。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 867
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1717-p1:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "63a605ee0c3b1b911fb09c812e17a43e145beaa1238dd0db14ec71347833c0ef",
+   "formerItem": {
+    "id": "lesson-1717-p1:v05",
+    "word": "歧韵",
+    "annotated": false,
+    "decision": "question",
+    "reason": "方言语音现象，涉及文句理解",
+    "contextMeaning": "发音上的偏差或不同",
+    "sourceSentence": "北方人念阵字，总老像是层字，平平仄仄 起来，这念错的歧韵，倒来得正好",
+    "type": "contextual-choice",
+    "question": "文中「歧韵」指的是什么现象？",
+    "options": [
+     "诗歌押韵不合规范",
+     "方言中某些字音读法上的偏差",
+     "北方话与南方话的声调差异",
+     "作者对韵律的独特理解"
+    ],
+    "answerIndex": 1,
+    "explanation": "根据语境，是指北方人将「阵」念得像「层」，这种发音上的偏差即为歧韵。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1029
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1717-p1:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "2de76907e1dd7bac0bf57b4a67f1e726c2726085898a1220fb129b95c7f67080",
+   "formerItem": {
+    "id": "lesson-1717-p1:v06",
+    "word": "不能自已",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语，易误读（已/己），此处考察对情感程度的理解",
+    "contextMeaning": "无法控制自己的感情",
+    "sourceSentence": "到了秋天，我想也一定会感到一种不能自已的深情",
+    "type": "usage",
+    "question": "文中「不能自已」的「已」字，读音与含义正确的是？",
+    "options": [
+     "yǐ，停止",
+     "jǐ，自己",
+     "yǐ，已经",
+     "jǐ，身体"
+    ],
+    "answerIndex": 0,
+    "explanation": "「不能自已」意为无法控制自己的情感，已，停止，控制。",
+    "difficulty": 1,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 1512
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1717-p1:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1717-p1:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "e4bb365064385469b8523ba55abc98ce3c74744efa8e80d5dcb18a181d7f5ce9",
+   "formerItem": {
+    "id": "lesson-1717-p1:v07",
+    "word": "何尝",
+    "annotated": false,
+    "decision": "question",
+    "reason": "副词，高频考点，用于反问，影响句意理解",
+    "contextMeaning": "用在反问句中，表示「难道……吗」或「何曾」",
+    "sourceSentence": "秋之于人，何尝有国别，更何尝有人种阶级的区别呢？",
+    "type": "usage",
+    "question": "文中「何尝」表达了怎样的语气？",
+    "options": [
+     "表示推测，意为「或许」",
+     "表示反问，意为「难道……吗」",
+     "表示否定，意为「从未」",
+     "表示比较，意为「比……更」"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处用反问形式强调秋天对人的影响是普遍的，没有国别和人种之分。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1535
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

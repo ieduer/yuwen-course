@@ -20,193 +20,105 @@
    "id": "lesson-1565:v02",
    "word": "渺茫",
    "annotated": false,
-   "decision": "question",
-   "reason": "此处并非指空间广阔，而是指模糊不清、难以考证，是理解阿Q人物背景的关键。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "模糊不清，难以考证",
    "sourceSentence": "阿Q不独是姓名籍贯有些渺茫,连他先前的“行状”也渺茫",
-   "type": "contextual-choice",
-   "question": "文中“阿Q不独是姓名籍贯有些渺茫”的“渺茫”含义是",
-   "options": [
-    "形容距离遥远，看不清楚",
-    "形容希望微小，难以实现",
-    "形容模糊不清，难以考证",
-    "形容意志消沉，漫无目的"
-   ],
-   "answerIndex": 2,
-   "explanation": "此处形容阿Q的身世资料缺失，无法查考。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 252
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1565:v02"
   },
   {
    "id": "lesson-1565:v03",
    "word": "不独",
    "annotated": false,
-   "decision": "question",
-   "reason": "高频文言词汇在现代白话文中的运用，直接影响句式结构理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "不仅",
    "sourceSentence": "阿Q不独是姓名籍贯有些渺茫,连他先前的“行状”也渺茫",
-   "type": "substitution",
-   "question": "下列词语替换文中“不独”后，句意保持不变的一项是",
-   "options": [
-    "不但",
-    "不只",
-    "不仅",
-    "以上皆可"
-   ],
-   "answerIndex": 3,
-   "explanation": "“不独”在此处为连词，表示递进关系，意为“不仅”。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 252
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1565:v03"
   },
   {
    "id": "lesson-1565:v04",
    "word": "间或",
    "annotated": false,
-   "decision": "question",
-   "reason": "能够反映阿Q行为习惯的副词，影响对人物性格的把握。",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
    "contextMeaning": "偶尔",
    "sourceSentence": "独有和别人口角的时候,间或瞪着眼睛道",
-   "type": "contextual-choice",
-   "question": "“独有和别人口角的时候，间或瞪着眼睛道”中“间或”的意思是",
-   "options": [
-    "经常",
-    "偶尔",
-    "总是",
-    "反而"
-   ],
-   "answerIndex": 1,
-   "explanation": "“间或”表示动作发生频率不高，指偶尔为之。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 326
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1565:v04"
   },
   {
    "id": "lesson-1565:v05",
    "word": "鄙薄",
    "annotated": false,
-   "decision": "question",
-   "reason": "体现阿Q自我中心、盲目自大的关键心理词汇。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "轻视，看不起",
    "sourceSentence": "然而他又很鄙薄城里人",
-   "type": "contextual-choice",
-   "question": "“然而他又很鄙薄城里人”中“鄙薄”的意思是",
-   "options": [
-    "轻视",
-    "羡慕",
-    "憎恨",
-    "怀疑"
-   ],
-   "answerIndex": 0,
-   "explanation": "阿Q认为城里人的生活习惯是错的，因此产生轻视心理。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 721
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1565:v05"
   },
   {
    "id": "lesson-1565:v06",
    "word": "犯忌",
    "annotated": false,
-   "decision": "question",
-   "reason": "涉及阿Q对于癞疮疤的敏感心态，是人物心理塑造的关键点。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "触犯禁忌",
    "sourceSentence": "他立刻知道和“犯忌”有点抵触,便不再往底下说",
-   "type": "interpretation",
-   "question": "文中“和‘犯忌’有点抵触”是指",
-   "options": [
-    "阿Q的话与自己的癞头疮这一禁忌相冲突",
-    "阿Q认为闲人的话触犯了法律",
-    "阿Q认为自己的言行违背了社会道德",
-    "阿Q的话与赵太爷的威严相抵触"
-   ],
-   "answerIndex": 0,
-   "explanation": "阿Q讳说“癞”等音，认为提到这些就是犯忌，而他自己说的话不小心触碰到了这个禁忌。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1276
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1565:v06"
   },
   {
    "id": "lesson-1565:v07",
    "word": "穿凿",
    "annotated": false,
-   "decision": "question",
-   "reason": "文学评论与考据中常用词，理解此词有助于理解鲁迅序言的幽默反讽。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "强行解释，牵强附会",
    "sourceSentence": "这可难解,穿凿起来说,或者因为阿Q说是赵太爷的本家",
-   "type": "contextual-choice",
-   "question": "“这可难解，穿凿起来说”中“穿凿”的意思是",
-   "options": [
-    "深入挖掘",
-    "刻意雕琢",
-    "强行解释，牵强附会",
-    "客观分析"
-   ],
-   "answerIndex": 2,
-   "explanation": "指人们为了给阿Q被尊敬找理由，而进行的一种勉强的推论。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2807
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1565:v07"
   },
   {
    "id": "lesson-1565:v08",
    "word": "确凿",
    "annotated": false,
-   "decision": "question",
-   "reason": "古今义辨析，古代常用作“真实可靠”，文中亦作此解，需与现代用法对比。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "确实，真实可靠",
    "sourceSentence": "阿Q并没有抗辩他确凿姓赵",
-   "type": "gu-jin",
-   "question": "下列选项中，“确凿”一词的含义与文中“阿Q并没有抗辩他确凿姓赵”用法一致的是",
-   "options": [
-    "证据确凿",
-    "确凿不移的真理",
-    "他的话确实确凿可信",
-    "以上皆是"
-   ],
-   "answerIndex": 3,
-   "explanation": "“确凿”古今义基本一致，均指真实、确实。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 7128
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1565:v08"
   },
   {
    "id": "lesson-1565:v09",
    "word": "自轻自贱",
    "annotated": false,
-   "decision": "question",
-   "reason": "概括阿Q精神胜利法的核心术语，对于分析人物形象具有高度概括性。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "自己看不起自己，降低身分",
    "sourceSentence": "他觉得他是第一个能够自轻自贱的人",
-   "type": "interpretation",
-   "question": "阿Q认为自己是“第一个能够自轻自贱的人”，这体现了他怎样的心理？",
-   "options": [
-    "深刻的自我反省意识",
-    "一种扭曲的精神胜利法，以自我贬低来获得虚幻的心理平衡",
-    "极度的自卑，导致他彻底放弃了尊严",
-    "对压迫者的无声抗议"
-   ],
-   "answerIndex": 1,
-   "explanation": "阿Q通过主动承认自己是“虫豸”或“儿子打老子”，将屈辱转化为一种“优胜”，这是其精神胜利法的表现。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1641
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1565:v09"
   },
   {
    "id": "lesson-1565:v10",
@@ -397,5 +309,296 @@
    "contextMeaning": "用杵把糙米捣成精米。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1565:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1565:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "0da7c322aecc23e7f3d4376ac994dfb02523a15c573caf35f6c1ac811c454868",
+   "formerItem": {
+    "id": "lesson-1565:v02",
+    "word": "渺茫",
+    "annotated": false,
+    "decision": "question",
+    "reason": "此处并非指空间广阔，而是指模糊不清、难以考证，是理解阿Q人物背景的关键。",
+    "contextMeaning": "模糊不清，难以考证",
+    "sourceSentence": "阿Q不独是姓名籍贯有些渺茫,连他先前的“行状”也渺茫",
+    "type": "contextual-choice",
+    "question": "文中“阿Q不独是姓名籍贯有些渺茫”的“渺茫”含义是",
+    "options": [
+     "形容距离遥远，看不清楚",
+     "形容希望微小，难以实现",
+     "形容模糊不清，难以考证",
+     "形容意志消沉，漫无目的"
+    ],
+    "answerIndex": 2,
+    "explanation": "此处形容阿Q的身世资料缺失，无法查考。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 252
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1565:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1565:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a60fc86adf6430734f9fd8d3210f35dc99b875c6df2e55ae91d97e1f385dd948",
+   "formerItem": {
+    "id": "lesson-1565:v03",
+    "word": "不独",
+    "annotated": false,
+    "decision": "question",
+    "reason": "高频文言词汇在现代白话文中的运用，直接影响句式结构理解。",
+    "contextMeaning": "不仅",
+    "sourceSentence": "阿Q不独是姓名籍贯有些渺茫,连他先前的“行状”也渺茫",
+    "type": "substitution",
+    "question": "下列词语替换文中“不独”后，句意保持不变的一项是",
+    "options": [
+     "不但",
+     "不只",
+     "不仅",
+     "以上皆可"
+    ],
+    "answerIndex": 3,
+    "explanation": "“不独”在此处为连词，表示递进关系，意为“不仅”。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 252
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1565:v04",
+   "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+   "reviewedAt": "2026-07-30T00:32:00.000Z",
+   "itemId": "lesson-1565:v04",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
+   "sourceItemSha256": "3c18e94ee6c1d61f941b4da3a18a1974257b9b6ea7698c62d95dd17af231b87e",
+   "formerItem": {
+    "id": "lesson-1565:v04",
+    "word": "间或",
+    "annotated": false,
+    "decision": "question",
+    "reason": "能够反映阿Q行为习惯的副词，影响对人物性格的把握。",
+    "contextMeaning": "偶尔",
+    "sourceSentence": "独有和别人口角的时候,间或瞪着眼睛道",
+    "type": "contextual-choice",
+    "question": "“独有和别人口角的时候，间或瞪着眼睛道”中“间或”的意思是",
+    "options": [
+     "经常",
+     "偶尔",
+     "总是",
+     "反而"
+    ],
+    "answerIndex": 1,
+    "explanation": "“间或”表示动作发生频率不高，指偶尔为之。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 326
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1565:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1565:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "9994d3987aeb29fe1b2eb392fe3baf41352e57e90581927f55ba145bf0b390d2",
+   "formerItem": {
+    "id": "lesson-1565:v05",
+    "word": "鄙薄",
+    "annotated": false,
+    "decision": "question",
+    "reason": "体现阿Q自我中心、盲目自大的关键心理词汇。",
+    "contextMeaning": "轻视，看不起",
+    "sourceSentence": "然而他又很鄙薄城里人",
+    "type": "contextual-choice",
+    "question": "“然而他又很鄙薄城里人”中“鄙薄”的意思是",
+    "options": [
+     "轻视",
+     "羡慕",
+     "憎恨",
+     "怀疑"
+    ],
+    "answerIndex": 0,
+    "explanation": "阿Q认为城里人的生活习惯是错的，因此产生轻视心理。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 721
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1565:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1565:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a3bc89b5d3416c2f7e976cf775b05b3129fa6b48d4edf953ce1f59f25556e4ac",
+   "formerItem": {
+    "id": "lesson-1565:v06",
+    "word": "犯忌",
+    "annotated": false,
+    "decision": "question",
+    "reason": "涉及阿Q对于癞疮疤的敏感心态，是人物心理塑造的关键点。",
+    "contextMeaning": "触犯禁忌",
+    "sourceSentence": "他立刻知道和“犯忌”有点抵触,便不再往底下说",
+    "type": "interpretation",
+    "question": "文中“和‘犯忌’有点抵触”是指",
+    "options": [
+     "阿Q的话与自己的癞头疮这一禁忌相冲突",
+     "阿Q认为闲人的话触犯了法律",
+     "阿Q认为自己的言行违背了社会道德",
+     "阿Q的话与赵太爷的威严相抵触"
+    ],
+    "answerIndex": 0,
+    "explanation": "阿Q讳说“癞”等音，认为提到这些就是犯忌，而他自己说的话不小心触碰到了这个禁忌。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1276
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1565:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1565:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "23708f73bf065e84464abe04a503dbc90cd92ca9f70f72e18de9e0f5e48adee4",
+   "formerItem": {
+    "id": "lesson-1565:v07",
+    "word": "穿凿",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文学评论与考据中常用词，理解此词有助于理解鲁迅序言的幽默反讽。",
+    "contextMeaning": "强行解释，牵强附会",
+    "sourceSentence": "这可难解,穿凿起来说,或者因为阿Q说是赵太爷的本家",
+    "type": "contextual-choice",
+    "question": "“这可难解，穿凿起来说”中“穿凿”的意思是",
+    "options": [
+     "深入挖掘",
+     "刻意雕琢",
+     "强行解释，牵强附会",
+     "客观分析"
+    ],
+    "answerIndex": 2,
+    "explanation": "指人们为了给阿Q被尊敬找理由，而进行的一种勉强的推论。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2807
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1565:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1565:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "4202384b50699dc466301645a5253d006318881a7b08349e07572d114509a82c",
+   "formerItem": {
+    "id": "lesson-1565:v08",
+    "word": "确凿",
+    "annotated": false,
+    "decision": "question",
+    "reason": "古今义辨析，古代常用作“真实可靠”，文中亦作此解，需与现代用法对比。",
+    "contextMeaning": "确实，真实可靠",
+    "sourceSentence": "阿Q并没有抗辩他确凿姓赵",
+    "type": "gu-jin",
+    "question": "下列选项中，“确凿”一词的含义与文中“阿Q并没有抗辩他确凿姓赵”用法一致的是",
+    "options": [
+     "证据确凿",
+     "确凿不移的真理",
+     "他的话确实确凿可信",
+     "以上皆是"
+    ],
+    "answerIndex": 3,
+    "explanation": "“确凿”古今义基本一致，均指真实、确实。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 7128
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1565:v09",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1565:v09",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "3e43e65be92dafdcc2b4e0cdc56b1c9dd1548340ab10bdaa142a2b0e17723f10",
+   "formerItem": {
+    "id": "lesson-1565:v09",
+    "word": "自轻自贱",
+    "annotated": false,
+    "decision": "question",
+    "reason": "概括阿Q精神胜利法的核心术语，对于分析人物形象具有高度概括性。",
+    "contextMeaning": "自己看不起自己，降低身分",
+    "sourceSentence": "他觉得他是第一个能够自轻自贱的人",
+    "type": "interpretation",
+    "question": "阿Q认为自己是“第一个能够自轻自贱的人”，这体现了他怎样的心理？",
+    "options": [
+     "深刻的自我反省意识",
+     "一种扭曲的精神胜利法，以自我贬低来获得虚幻的心理平衡",
+     "极度的自卑，导致他彻底放弃了尊严",
+     "对压迫者的无声抗议"
+    ],
+    "answerIndex": 1,
+    "explanation": "阿Q通过主动承认自己是“虫豸”或“儿子打老子”，将屈辱转化为一种“优胜”，这是其精神胜利法的表现。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1641
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-review-20260729-modern-basic-meaning",
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

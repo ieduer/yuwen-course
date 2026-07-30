@@ -11,147 +11,79 @@
    "id": "lesson-1461:v01",
    "word": "相机",
    "annotated": false,
-   "decision": "question",
-   "reason": "古今异义，极易误解为照相机，影响文意",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "根据情况（行事）",
    "sourceSentence": "命令你部骑兵前往堵截,相机包围,予以歼灭",
-   "type": "gu-jin",
-   "question": "「相机包围」中「相机」一词在文中的意思是",
-   "options": [
-    "使用照相机进行拍摄",
-    "看准时机，根据情况行事",
-    "像机器一样精准地包围",
-    "针对某项任务进行部署"
-   ],
-   "answerIndex": 1,
-   "explanation": "「相机」在古汉语中意为观察时机、根据情况行事，与现代汉语中「照相机」的意义完全不同。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 1521
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1461:v01"
   },
   {
    "id": "lesson-1461:v02",
    "word": "跋涉",
    "annotated": false,
-   "decision": "question",
-   "reason": "重点动词，理解长征艰苦性的关键",
+   "decision": "excluded",
+   "reason": "经人工复核移除：現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
    "contextMeaning": "登山涉水，指长途艰苦的行军",
    "sourceSentence": "经过一年多的长途跋涉,经过无数次残酷的战斗",
-   "type": "contextual-choice",
-   "question": "文中「长途跋涉」一词最贴切的解释是",
-   "options": [
-    "在平坦的道路上快速行走",
-    "为了某种目的而反复奔波",
-    "登山涉水，形容路途艰苦遥远",
-    "在复杂的环境中进行物资运输"
-   ],
-   "answerIndex": 2,
-   "explanation": "「跋涉」原指爬山过水，形容旅途艰辛，文中指红军长征路途的艰难。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 197
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260730-independent-quality-v1:lesson-1461:v02"
   },
   {
    "id": "lesson-1461:v03",
    "word": "屏障",
    "annotated": false,
-   "decision": "question",
-   "reason": "语境义考察，理解地理环境对战事的影响",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "像屏风一样起遮挡、保护作用的东西",
    "sourceSentence": "墙外长着几株大树,正是天然的屏障",
-   "type": "contextual-choice",
-   "question": "文中说大树是「天然的屏障」，其作用是指",
-   "options": [
-    "装饰环境，美化会场",
-    "遮挡视线，起到保护作用",
-    "分隔空间，划分不同区域",
-    "提供阴凉，改善开会条件"
-   ],
-   "answerIndex": 1,
-   "explanation": "结合文中「防止敌机骚扰」的语境，此处屏障指遮蔽视线、防止被敌机发现的保护物。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3978
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1461:v03"
   },
   {
    "id": "lesson-1461:v04",
    "word": "穷追",
    "annotated": false,
-   "decision": "question",
-   "reason": "「穷」字在文中的特殊用法，易被误解为贫穷",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "竭尽、追到底",
    "sourceSentence": "除非敌人穷追、拦阻,惹怒我们的时候",
-   "type": "contextual-choice",
-   "question": "「穷追」中的「穷」字，其含义与下列哪项相同？",
-   "options": [
-    "穷困潦倒",
-    "无穷无尽",
-    "穷追不舍",
-    "穷人"
-   ],
-   "answerIndex": 2,
-   "explanation": "「穷」此处意为竭尽、彻底。A、D项指贫穷，B、C项中的「穷」均指竭尽、彻底。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 700
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1461:v04"
   },
   {
    "id": "lesson-1461:v05",
    "word": "指战员",
    "annotated": false,
-   "decision": "question",
-   "reason": "特定历史时期的军事称谓，考查学生对革命历史用语的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指挥员和战斗员的统称",
    "sourceSentence": "是的,我们红四团的指战员和整个红军一样",
-   "type": "interpretation",
-   "question": "「指战员」在文中是指",
-   "options": [
-    "指引战斗方向的人员",
-    "指挥员和战斗员的合称",
-    "专门负责战术部署的官员",
-    "参加长征的所有人员"
-   ],
-   "answerIndex": 1,
-   "explanation": "「指战员」是革命战争年代对军队中指挥人员和士兵的总称。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 170
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1461:v05"
   },
   {
    "id": "lesson-1461:v06",
    "word": "迂回",
    "annotated": false,
-   "decision": "question",
-   "reason": "军事术语，理解战术动作的关键",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "绕道进攻，不正面交锋",
    "sourceSentence": "我们一纵队四大队担负着迂回敌人左侧的任务",
-   "type": "contextual-choice",
-   "question": "「迂回」在文中的战术含义是",
-   "options": [
-    "从正面进行强攻",
-    "绕道到侧后方进行攻击",
-    "撤退到安全地带",
-    "在原地进行埋伏"
-   ],
-   "answerIndex": 1,
-   "explanation": "军事上的「迂回」指绕过敌人的防线，从侧翼或后方进行攻击。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 956
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1461:v06"
   },
   {
    "id": "lesson-1461:v07",
@@ -186,5 +118,228 @@
     "charIndex": 4275
    }
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1461:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1461:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "2e375c3cfe3045462df6f7502e9371c7b2c6b538d90dbdf0aaf96f28ab30938a",
+   "formerItem": {
+    "id": "lesson-1461:v01",
+    "word": "相机",
+    "annotated": false,
+    "decision": "question",
+    "reason": "古今异义，极易误解为照相机，影响文意",
+    "contextMeaning": "根据情况（行事）",
+    "sourceSentence": "命令你部骑兵前往堵截,相机包围,予以歼灭",
+    "type": "gu-jin",
+    "question": "「相机包围」中「相机」一词在文中的意思是",
+    "options": [
+     "使用照相机进行拍摄",
+     "看准时机，根据情况行事",
+     "像机器一样精准地包围",
+     "针对某项任务进行部署"
+    ],
+    "answerIndex": 1,
+    "explanation": "「相机」在古汉语中意为观察时机、根据情况行事，与现代汉语中「照相机」的意义完全不同。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 1521
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1461:v02",
+   "reviewId": "yw-vocab-review-20260730-independent-quality-v1",
+   "reviewedAt": "2026-07-30T00:59:29.000Z",
+   "itemId": "lesson-1461:v02",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
+   "sourceItemSha256": "d6fbe14916051f8120c322e25928109babb92939fb3b7a849849401bd1a0687f",
+   "formerItem": {
+    "id": "lesson-1461:v02",
+    "word": "跋涉",
+    "annotated": false,
+    "decision": "question",
+    "reason": "重点动词，理解长征艰苦性的关键",
+    "contextMeaning": "登山涉水，指长途艰苦的行军",
+    "sourceSentence": "经过一年多的长途跋涉,经过无数次残酷的战斗",
+    "type": "contextual-choice",
+    "question": "文中「长途跋涉」一词最贴切的解释是",
+    "options": [
+     "在平坦的道路上快速行走",
+     "为了某种目的而反复奔波",
+     "登山涉水，形容路途艰苦遥远",
+     "在复杂的环境中进行物资运输"
+    ],
+    "answerIndex": 2,
+    "explanation": "「跋涉」原指爬山过水，形容旅途艰辛，文中指红军长征路途的艰难。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 197
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1461:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1461:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "af2996e5667edf2903a8f519f7939e3544d59593c34b7853504093299cbf87db",
+   "formerItem": {
+    "id": "lesson-1461:v03",
+    "word": "屏障",
+    "annotated": false,
+    "decision": "question",
+    "reason": "语境义考察，理解地理环境对战事的影响",
+    "contextMeaning": "像屏风一样起遮挡、保护作用的东西",
+    "sourceSentence": "墙外长着几株大树,正是天然的屏障",
+    "type": "contextual-choice",
+    "question": "文中说大树是「天然的屏障」，其作用是指",
+    "options": [
+     "装饰环境，美化会场",
+     "遮挡视线，起到保护作用",
+     "分隔空间，划分不同区域",
+     "提供阴凉，改善开会条件"
+    ],
+    "answerIndex": 1,
+    "explanation": "结合文中「防止敌机骚扰」的语境，此处屏障指遮蔽视线、防止被敌机发现的保护物。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3978
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1461:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1461:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "75d17f882810783075f41367c5d412ce13e66ec64d39dc89fc36fa7c62135c97",
+   "formerItem": {
+    "id": "lesson-1461:v04",
+    "word": "穷追",
+    "annotated": false,
+    "decision": "question",
+    "reason": "「穷」字在文中的特殊用法，易被误解为贫穷",
+    "contextMeaning": "竭尽、追到底",
+    "sourceSentence": "除非敌人穷追、拦阻,惹怒我们的时候",
+    "type": "contextual-choice",
+    "question": "「穷追」中的「穷」字，其含义与下列哪项相同？",
+    "options": [
+     "穷困潦倒",
+     "无穷无尽",
+     "穷追不舍",
+     "穷人"
+    ],
+    "answerIndex": 2,
+    "explanation": "「穷」此处意为竭尽、彻底。A、D项指贫穷，B、C项中的「穷」均指竭尽、彻底。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 700
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1461:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1461:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "32bea96023443db68dae580032a8995cdfeb35c6217459ff42ffd2324816f3c5",
+   "formerItem": {
+    "id": "lesson-1461:v05",
+    "word": "指战员",
+    "annotated": false,
+    "decision": "question",
+    "reason": "特定历史时期的军事称谓，考查学生对革命历史用语的理解",
+    "contextMeaning": "指挥员和战斗员的统称",
+    "sourceSentence": "是的,我们红四团的指战员和整个红军一样",
+    "type": "interpretation",
+    "question": "「指战员」在文中是指",
+    "options": [
+     "指引战斗方向的人员",
+     "指挥员和战斗员的合称",
+     "专门负责战术部署的官员",
+     "参加长征的所有人员"
+    ],
+    "answerIndex": 1,
+    "explanation": "「指战员」是革命战争年代对军队中指挥人员和士兵的总称。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 170
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1461:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1461:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "296ccbae4b1fb2374b0e7c409bddd60388da8fc7af18d9edcdccf58b4499872e",
+   "formerItem": {
+    "id": "lesson-1461:v06",
+    "word": "迂回",
+    "annotated": false,
+    "decision": "question",
+    "reason": "军事术语，理解战术动作的关键",
+    "contextMeaning": "绕道进攻，不正面交锋",
+    "sourceSentence": "我们一纵队四大队担负着迂回敌人左侧的任务",
+    "type": "contextual-choice",
+    "question": "「迂回」在文中的战术含义是",
+    "options": [
+     "从正面进行强攻",
+     "绕道到侧后方进行攻击",
+     "撤退到安全地带",
+     "在原地进行埋伏"
+    ],
+    "answerIndex": 1,
+    "explanation": "军事上的「迂回」指绕过敌人的防线，从侧翼或后方进行攻击。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 956
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-review-20260730-independent-quality-v1",
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

@@ -95,73 +95,40 @@
    "id": "lesson-1738:v08",
    "word": "万应锭",
    "annotated": false,
-   "decision": "question",
-   "reason": "比喻用法，需结合语境理解其指代义。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指随意通用、解决所有问题的法宝。",
    "sourceSentence": "事实上他们并不是随处都用的,要是那样,就成了“万应锭了。",
-   "type": "contextual-choice",
-   "question": "文中说“要是那样,就成了‘万应锭’了”，这里的“万应锭”是指：",
-   "options": [
-    "一种治疗秋天伤感的特效药",
-    "可以随意通用、解决所有问题的办法",
-    "诗歌创作中必须遵循的固定准则",
-    "屈原用来创作诗歌的特殊工具"
-   ],
-   "answerIndex": 1,
-   "explanation": "作者用万应锭比喻随处可用、不加区分的通用词汇，意在指出“木”字的使用有其特定语境。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1531
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1738:v08"
   },
   {
    "id": "lesson-1738:v09",
    "word": "言筌",
    "annotated": false,
-   "decision": "question",
-   "reason": "典故词，涉及文学批评理论的核心，易误解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "言辞上留下的迹象，指局限于字面意思。",
    "sourceSentence": "它之富于感染性启发性者在此,它之不落于言筌者也在此。",
-   "type": "interpretation",
-   "question": "文中“它之不落于言筌者也在此”中的“言筌”是指：",
-   "options": [
-    "言辞中包含的深刻道理",
-    "语言文字表面留下的局限性迹象",
-    "诗歌创作中常用的修辞技巧",
-    "读者对诗歌意境的过度解读"
-   ],
-   "answerIndex": 1,
-   "explanation": "“言筌”化用《庄子》，指言辞的表象。此处指诗歌语言的暗示性超越了字面概念的局限。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2125
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1738:v09"
   },
   {
    "id": "lesson-1738:v10",
    "word": "疏朗",
    "annotated": false,
-   "decision": "question",
-   "reason": "关键描述词，影响对“木”字意象的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "稀疏通透，不繁密。",
    "sourceSentence": "“叶”因此常被排斥到“木”的疏朗的形象以外去",
-   "type": "contextual-choice",
-   "question": "下列对文中“疏朗”一词理解正确的一项是：",
-   "options": [
-    "形容树木生长得非常稀疏",
-    "形容“木”字带来的空阔、透光、不繁密的意象",
-    "指诗歌语言平淡、不加修饰",
-    "指诗人描写秋天景色时心情开朗"
-   ],
-   "answerIndex": 1,
-   "explanation": "文中“疏朗”对应“木”字的艺术特征，即含蓄、空灵、不繁茂的视觉暗示。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2238
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1738:v10"
   },
   {
    "id": "lesson-1738:v11",
@@ -179,97 +146,53 @@
    "id": "lesson-1738:v12",
    "word": "洗练",
    "annotated": false,
-   "decision": "question",
-   "reason": "文学评论高频词，涉及对诗歌语言特征的判断。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "语言简洁精炼。",
    "sourceSentence": "这当然还可以说是由于诗人们文字洗练的缘故",
-   "type": "substitution",
-   "question": "文中“这当然还可以说是由于诗人们文字洗练的缘故”中“洗练”一词，若替换为下列词语，最恰当的一项是：",
-   "options": [
-    "洗刷",
-    "精炼",
-    "简约",
-    "通达"
-   ],
-   "answerIndex": 1,
-   "explanation": "“洗练”指语言简练、纯粹，符合文学评论中对诗歌语言的要求。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 462
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1738:v12"
   },
   {
    "id": "lesson-1738:v13",
    "word": "意象",
    "annotated": false,
-   "decision": "question",
-   "reason": "文学理论核心词，全文分析的基础。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "融入了主观情思的客观物象。",
    "sourceSentence": "从“木叶”发展到“落木”,其中关键显然在“木”这一字",
-   "type": "interpretation",
-   "question": "根据文意，下列关于“意象”的理解，不符合原文的一项是：",
-   "options": [
-    "意象是诗歌语言中客观物象与主观情思的结合",
-    "意象的构建可以通过夸张手段实现",
-    "同一个客观物象只能构成一种意象",
-    "诗人在构成意象时可以赋予物象原本不具备的性质"
-   ],
-   "answerIndex": 2,
-   "explanation": "文末明确指出“同一个物象，由于融入的情意不同，所构成的意象也就大异其趣”，故“只能构成一种”错误。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1133
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1738:v13"
   },
   {
    "id": "lesson-1738:v14",
    "word": "暗示性",
    "annotated": false,
-   "decision": "question",
-   "reason": "本文论证的关键概念，理解全文逻辑的核心。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "语言文字所传达的潜在的、非直观的联想意义。",
    "sourceSentence": "要说明“木”字何以会有这个特征,就不能不触及诗歌语言中暗示性的问题。",
-   "type": "interpretation",
-   "question": "文中提到“暗示性”，下列对其理解准确的一项是：",
-   "options": [
-    "指诗歌中直接表达作者情感的词汇",
-    "指隐藏在概念背后、能激发读者联想的潜在力量",
-    "指诗歌必须晦涩难懂才能具有艺术性",
-    "指诗人为了追求形式美而刻意省略词语"
-   ],
-   "answerIndex": 1,
-   "explanation": "文中将暗示性比作“概念的影子”，指语言中潜藏的、影响读者感受的联想空间。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1971
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1738:v14"
   },
   {
    "id": "lesson-1738:v15",
    "word": "死心眼",
    "annotated": false,
-   "decision": "question",
-   "reason": "口语词，在论证中起对比作用，体现作者修辞策略。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指思想僵化、不懂变通、只看字面意思的人。",
    "sourceSentence": "难道不怕死心眼的人会误以为是木头自天而降吗?",
-   "type": "contextual-choice",
-   "question": "文中“难道不怕死心眼的人会误以为是木头自天而降吗”一句中，“死心眼”是指：",
-   "options": [
-    "对诗歌意境理解深刻的读者",
-    "只懂字面概念、缺乏艺术想象力的读者",
-    "对杜甫诗歌成就表示怀疑的批评家",
-    "固执己见、拒绝接受新鲜事物的诗人"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处用“死心眼”与具备“形象思维”的读者对比，意指那些只从字面逻辑理解诗歌的人。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1353
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1738:v15"
   },
   {
    "id": "lesson-1738:v16",
@@ -361,5 +284,260 @@
    "contextMeaning": "司空曙（生卒年不详）字文明，一说字文初，广平（今河北永年东南）人，唐代诗人，“大历十才子”之一。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1738:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1738:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "480243fb36680f162802b62ea1d910f68c2d12217f4f499999ce4aa6bb900dd3",
+   "formerItem": {
+    "id": "lesson-1738:v08",
+    "word": "万应锭",
+    "annotated": false,
+    "decision": "question",
+    "reason": "比喻用法，需结合语境理解其指代义。",
+    "contextMeaning": "指随意通用、解决所有问题的法宝。",
+    "sourceSentence": "事实上他们并不是随处都用的,要是那样,就成了“万应锭了。",
+    "type": "contextual-choice",
+    "question": "文中说“要是那样,就成了‘万应锭’了”，这里的“万应锭”是指：",
+    "options": [
+     "一种治疗秋天伤感的特效药",
+     "可以随意通用、解决所有问题的办法",
+     "诗歌创作中必须遵循的固定准则",
+     "屈原用来创作诗歌的特殊工具"
+    ],
+    "answerIndex": 1,
+    "explanation": "作者用万应锭比喻随处可用、不加区分的通用词汇，意在指出“木”字的使用有其特定语境。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1531
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1738:v09",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1738:v09",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "81e661fe2b0c473cd2bd22577ea7bf34468d9b9fef88262025a00113f44f1c6c",
+   "formerItem": {
+    "id": "lesson-1738:v09",
+    "word": "言筌",
+    "annotated": false,
+    "decision": "question",
+    "reason": "典故词，涉及文学批评理论的核心，易误解。",
+    "contextMeaning": "言辞上留下的迹象，指局限于字面意思。",
+    "sourceSentence": "它之富于感染性启发性者在此,它之不落于言筌者也在此。",
+    "type": "interpretation",
+    "question": "文中“它之不落于言筌者也在此”中的“言筌”是指：",
+    "options": [
+     "言辞中包含的深刻道理",
+     "语言文字表面留下的局限性迹象",
+     "诗歌创作中常用的修辞技巧",
+     "读者对诗歌意境的过度解读"
+    ],
+    "answerIndex": 1,
+    "explanation": "“言筌”化用《庄子》，指言辞的表象。此处指诗歌语言的暗示性超越了字面概念的局限。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2125
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1738:v10",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1738:v10",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "9b04707ed7d0a38c7ed1879f8812bae0ca8755b5e318592381d2d97264ba39a0",
+   "formerItem": {
+    "id": "lesson-1738:v10",
+    "word": "疏朗",
+    "annotated": false,
+    "decision": "question",
+    "reason": "关键描述词，影响对“木”字意象的理解。",
+    "contextMeaning": "稀疏通透，不繁密。",
+    "sourceSentence": "“叶”因此常被排斥到“木”的疏朗的形象以外去",
+    "type": "contextual-choice",
+    "question": "下列对文中“疏朗”一词理解正确的一项是：",
+    "options": [
+     "形容树木生长得非常稀疏",
+     "形容“木”字带来的空阔、透光、不繁密的意象",
+     "指诗歌语言平淡、不加修饰",
+     "指诗人描写秋天景色时心情开朗"
+    ],
+    "answerIndex": 1,
+    "explanation": "文中“疏朗”对应“木”字的艺术特征，即含蓄、空灵、不繁茂的视觉暗示。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2238
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1738:v12",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1738:v12",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "4c5dd06abca9dded95ed32c5dbfb66716637ec8db8494456930aaeb412ab3efe",
+   "formerItem": {
+    "id": "lesson-1738:v12",
+    "word": "洗练",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文学评论高频词，涉及对诗歌语言特征的判断。",
+    "contextMeaning": "语言简洁精炼。",
+    "sourceSentence": "这当然还可以说是由于诗人们文字洗练的缘故",
+    "type": "substitution",
+    "question": "文中“这当然还可以说是由于诗人们文字洗练的缘故”中“洗练”一词，若替换为下列词语，最恰当的一项是：",
+    "options": [
+     "洗刷",
+     "精炼",
+     "简约",
+     "通达"
+    ],
+    "answerIndex": 1,
+    "explanation": "“洗练”指语言简练、纯粹，符合文学评论中对诗歌语言的要求。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 462
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1738:v13",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1738:v13",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "f83514a6a40e2780f088b29c219e01c1200dafbcef80b23c0c1ef52c276e6e6b",
+   "formerItem": {
+    "id": "lesson-1738:v13",
+    "word": "意象",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文学理论核心词，全文分析的基础。",
+    "contextMeaning": "融入了主观情思的客观物象。",
+    "sourceSentence": "从“木叶”发展到“落木”,其中关键显然在“木”这一字",
+    "type": "interpretation",
+    "question": "根据文意，下列关于“意象”的理解，不符合原文的一项是：",
+    "options": [
+     "意象是诗歌语言中客观物象与主观情思的结合",
+     "意象的构建可以通过夸张手段实现",
+     "同一个客观物象只能构成一种意象",
+     "诗人在构成意象时可以赋予物象原本不具备的性质"
+    ],
+    "answerIndex": 2,
+    "explanation": "文末明确指出“同一个物象，由于融入的情意不同，所构成的意象也就大异其趣”，故“只能构成一种”错误。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1133
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1738:v14",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1738:v14",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "3ae0f8cbf208d86217f18dbf99ea95359ca4cd23b5821ac15abce60d5cb86cd0",
+   "formerItem": {
+    "id": "lesson-1738:v14",
+    "word": "暗示性",
+    "annotated": false,
+    "decision": "question",
+    "reason": "本文论证的关键概念，理解全文逻辑的核心。",
+    "contextMeaning": "语言文字所传达的潜在的、非直观的联想意义。",
+    "sourceSentence": "要说明“木”字何以会有这个特征,就不能不触及诗歌语言中暗示性的问题。",
+    "type": "interpretation",
+    "question": "文中提到“暗示性”，下列对其理解准确的一项是：",
+    "options": [
+     "指诗歌中直接表达作者情感的词汇",
+     "指隐藏在概念背后、能激发读者联想的潜在力量",
+     "指诗歌必须晦涩难懂才能具有艺术性",
+     "指诗人为了追求形式美而刻意省略词语"
+    ],
+    "answerIndex": 1,
+    "explanation": "文中将暗示性比作“概念的影子”，指语言中潜藏的、影响读者感受的联想空间。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1971
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1738:v15",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1738:v15",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "0f5f3cc633d9841646e46ddc791f7afc3d360706123768170d4259dcb79e73c1",
+   "formerItem": {
+    "id": "lesson-1738:v15",
+    "word": "死心眼",
+    "annotated": false,
+    "decision": "question",
+    "reason": "口语词，在论证中起对比作用，体现作者修辞策略。",
+    "contextMeaning": "指思想僵化、不懂变通、只看字面意思的人。",
+    "sourceSentence": "难道不怕死心眼的人会误以为是木头自天而降吗?",
+    "type": "contextual-choice",
+    "question": "文中“难道不怕死心眼的人会误以为是木头自天而降吗”一句中，“死心眼”是指：",
+    "options": [
+     "对诗歌意境理解深刻的读者",
+     "只懂字面概念、缺乏艺术想象力的读者",
+     "对杜甫诗歌成就表示怀疑的批评家",
+     "固执己见、拒绝接受新鲜事物的诗人"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处用“死心眼”与具备“形象思维”的读者对比，意指那些只从字面逻辑理解诗歌的人。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1353
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

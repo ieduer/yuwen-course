@@ -11,149 +11,79 @@
    "id": "lesson-1466:v01",
    "word": "陈迹",
    "annotated": false,
-   "decision": "question",
-   "reason": "考核学生对书面语在特定历史语境下语义的准确理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "过去留下的痕迹，指不再起作用的历史遗物",
    "sourceSentence": "随着末代港督的离去,这座古典风格的白色建筑成为历史的陈迹。",
-   "type": "contextual-choice",
-   "question": "文中「这座古典风格的白色建筑成为历史的陈迹」中「陈迹」一词的意思是",
-   "options": [
-    "陈旧的痕迹",
-    "过去留下的痕迹，指不再起作用的历史遗物",
-    "陈列的遗迹",
-    "已经损坏的建筑物"
-   ],
-   "answerIndex": 1,
-   "explanation": "「陈迹」在此语境下指代随着殖民统治结束而失去原有政治功能的港督府，强调其历史意义的转变。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 464
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1466:v01"
   },
   {
    "id": "lesson-1466:v02",
    "word": "易帜",
    "annotated": false,
-   "decision": "question",
-   "reason": "考核对特定政治语境下词汇的理解，属于历史事件的关键点",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "更换旗帜，指政权更迭",
    "sourceSentence": "当然,最为世人瞩目的是子夜时分中英香港政权交接仪式上的易帜。",
-   "type": "interpretation",
-   "question": "文中提到的「易帜」在语境中具体指代什么？",
-   "options": [
-    "英国军队更换旗帜",
-    "港督府更换标志",
-    "香港政权交接，由米字旗换为五星红旗",
-    "游轮更换航向"
-   ],
-   "answerIndex": 2,
-   "explanation": "「易帜」原指改换旗帜，在香港回归这一特定历史背景下，专指主权交接过程中英国国旗降下、中国国旗升起的过程。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 781
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1466:v02"
   },
   {
    "id": "lesson-1466:v03",
    "word": "冉冉",
    "annotated": false,
-   "decision": "question",
-   "reason": "基础字音考核，且叠词在描绘庄严仪式感时有特殊修辞作用",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "缓慢地（升起）",
    "sourceSentence": "五星红旗伴着《义勇军进行曲》冉冉rǎn升起,中国从此恢复对香港行使主权。",
-   "type": "pronunciation",
-   "question": "文中「冉冉」的读音及语义对应正确的一项是",
-   "options": [
-    "ránrán，形容旗帜快速升起",
-    "rǎnrǎn，形容缓慢地升起",
-    "rǎnrǎn，形容旗帜鲜艳",
-    "ránrán，形容旗帜随风飘动"
-   ],
-   "answerIndex": 1,
-   "explanation": "「冉冉」意为缓慢地，常用于形容云气、花木等，此处形容国旗升起，带有庄重、神圣的色彩。",
-   "difficulty": 1,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 881
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1466:v03"
   },
   {
    "id": "lesson-1466:v04",
    "word": "掩映",
    "annotated": false,
-   "decision": "question",
-   "reason": "考核词汇的搭配与环境描写能力",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "彼此遮掩而互相衬托",
    "sourceSentence": "掩映在绿树丛中的港督府于1855 年建成",
-   "type": "substitution",
-   "question": "下列词语替换句中「掩映」后，语意最不贴切的一项是",
-   "options": [
-    "隐现",
-    "映衬",
-    "覆盖",
-    "掩映"
-   ],
-   "answerIndex": 2,
-   "explanation": "「掩映」强调遮掩与衬托并存，若替换为「覆盖」则失去了「衬托」的视觉美感。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 402
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1466:v04"
   },
   {
    "id": "lesson-1466:v05",
    "word": "凝重",
    "annotated": false,
-   "decision": "question",
-   "reason": "考核人物神态描写的语境意义",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "庄重、严肃，带有沉思感",
    "sourceSentence": "面色凝重的彭定康注视着港督旗帜在“日落余音”的号角声中降下旗杆。",
-   "type": "contextual-choice",
-   "question": "文中描写彭定康「面色凝重」，最能体现其此时心理的是",
-   "options": [
-    "悲伤痛苦",
-    "庄重严肃而带有失落",
-    "愤怒不满",
-    "漫不经心"
-   ],
-   "answerIndex": 1,
-   "explanation": "「凝重」形容神态庄重，结合离任港督面对殖民统治结束的背景，此处包含了对其政治生涯终结的复杂失落感。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 265
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1466:v05"
   },
   {
    "id": "lesson-1466:v06",
    "word": "沧桑",
    "annotated": false,
-   "decision": "question",
-   "reason": "考核成语的语境内涵，涉及对历史跨度的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容历史变迁巨大",
    "sourceSentence": "报道香港历经沧桑之后回归祖国这一重大历史事件",
-   "type": "evidence",
-   "question": "文中「历经沧桑」一词，最能从文中找到对应事实依据的是",
-   "options": [
-    "英国撤离的仪式",
-    "156年间米字旗的升降变迁",
-    "查尔斯王子的宣读",
-    "香港建筑的改建"
-   ],
-   "answerIndex": 1,
-   "explanation": "「沧桑」指沧海变桑田，文中通过156年的历史跨度，反映了香港从被割占到回归的巨大历史变迁。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1239
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1466:v06"
   },
   {
    "id": "lesson-1466:v07",
@@ -179,5 +109,229 @@
     "charIndex": 198
    }
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1466:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1466:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "4fcc790446770880b181194b4e9586b3bfb15513b91b6cbae8bf21358001759e",
+   "formerItem": {
+    "id": "lesson-1466:v01",
+    "word": "陈迹",
+    "annotated": false,
+    "decision": "question",
+    "reason": "考核学生对书面语在特定历史语境下语义的准确理解",
+    "contextMeaning": "过去留下的痕迹，指不再起作用的历史遗物",
+    "sourceSentence": "随着末代港督的离去,这座古典风格的白色建筑成为历史的陈迹。",
+    "type": "contextual-choice",
+    "question": "文中「这座古典风格的白色建筑成为历史的陈迹」中「陈迹」一词的意思是",
+    "options": [
+     "陈旧的痕迹",
+     "过去留下的痕迹，指不再起作用的历史遗物",
+     "陈列的遗迹",
+     "已经损坏的建筑物"
+    ],
+    "answerIndex": 1,
+    "explanation": "「陈迹」在此语境下指代随着殖民统治结束而失去原有政治功能的港督府，强调其历史意义的转变。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 464
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1466:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1466:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "7395102fe2e1111ccc838430274a7d731ad0b7bdeabd077b2b21261d79e594c8",
+   "formerItem": {
+    "id": "lesson-1466:v02",
+    "word": "易帜",
+    "annotated": false,
+    "decision": "question",
+    "reason": "考核对特定政治语境下词汇的理解，属于历史事件的关键点",
+    "contextMeaning": "更换旗帜，指政权更迭",
+    "sourceSentence": "当然,最为世人瞩目的是子夜时分中英香港政权交接仪式上的易帜。",
+    "type": "interpretation",
+    "question": "文中提到的「易帜」在语境中具体指代什么？",
+    "options": [
+     "英国军队更换旗帜",
+     "港督府更换标志",
+     "香港政权交接，由米字旗换为五星红旗",
+     "游轮更换航向"
+    ],
+    "answerIndex": 2,
+    "explanation": "「易帜」原指改换旗帜，在香港回归这一特定历史背景下，专指主权交接过程中英国国旗降下、中国国旗升起的过程。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 781
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1466:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1466:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "c5476345a8068e3a984c4406757db3e7f87496ef624dec15e2f9974f9c81a1a4",
+   "formerItem": {
+    "id": "lesson-1466:v03",
+    "word": "冉冉",
+    "annotated": false,
+    "decision": "question",
+    "reason": "基础字音考核，且叠词在描绘庄严仪式感时有特殊修辞作用",
+    "contextMeaning": "缓慢地（升起）",
+    "sourceSentence": "五星红旗伴着《义勇军进行曲》冉冉rǎn升起,中国从此恢复对香港行使主权。",
+    "type": "pronunciation",
+    "question": "文中「冉冉」的读音及语义对应正确的一项是",
+    "options": [
+     "ránrán，形容旗帜快速升起",
+     "rǎnrǎn，形容缓慢地升起",
+     "rǎnrǎn，形容旗帜鲜艳",
+     "ránrán，形容旗帜随风飘动"
+    ],
+    "answerIndex": 1,
+    "explanation": "「冉冉」意为缓慢地，常用于形容云气、花木等，此处形容国旗升起，带有庄重、神圣的色彩。",
+    "difficulty": 1,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 881
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1466:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1466:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "939f35fb94ca379474593694d3b6da0c5afa81dcf11b0250b4fe80078fe82fb1",
+   "formerItem": {
+    "id": "lesson-1466:v04",
+    "word": "掩映",
+    "annotated": false,
+    "decision": "question",
+    "reason": "考核词汇的搭配与环境描写能力",
+    "contextMeaning": "彼此遮掩而互相衬托",
+    "sourceSentence": "掩映在绿树丛中的港督府于1855 年建成",
+    "type": "substitution",
+    "question": "下列词语替换句中「掩映」后，语意最不贴切的一项是",
+    "options": [
+     "隐现",
+     "映衬",
+     "覆盖",
+     "掩映"
+    ],
+    "answerIndex": 2,
+    "explanation": "「掩映」强调遮掩与衬托并存，若替换为「覆盖」则失去了「衬托」的视觉美感。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 402
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1466:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1466:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "7af5efb27fc5af79afc204877f1ed13cc545bbe0610629a988a14975b1f68772",
+   "formerItem": {
+    "id": "lesson-1466:v05",
+    "word": "凝重",
+    "annotated": false,
+    "decision": "question",
+    "reason": "考核人物神态描写的语境意义",
+    "contextMeaning": "庄重、严肃，带有沉思感",
+    "sourceSentence": "面色凝重的彭定康注视着港督旗帜在“日落余音”的号角声中降下旗杆。",
+    "type": "contextual-choice",
+    "question": "文中描写彭定康「面色凝重」，最能体现其此时心理的是",
+    "options": [
+     "悲伤痛苦",
+     "庄重严肃而带有失落",
+     "愤怒不满",
+     "漫不经心"
+    ],
+    "answerIndex": 1,
+    "explanation": "「凝重」形容神态庄重，结合离任港督面对殖民统治结束的背景，此处包含了对其政治生涯终结的复杂失落感。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 265
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1466:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1466:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "e390a4e7c2e7ee0e02a66cb6cddf3d87f5fdaf7dcd81e6ab1fd21ea57fbe8148",
+   "formerItem": {
+    "id": "lesson-1466:v06",
+    "word": "沧桑",
+    "annotated": false,
+    "decision": "question",
+    "reason": "考核成语的语境内涵，涉及对历史跨度的理解",
+    "contextMeaning": "形容历史变迁巨大",
+    "sourceSentence": "报道香港历经沧桑之后回归祖国这一重大历史事件",
+    "type": "evidence",
+    "question": "文中「历经沧桑」一词，最能从文中找到对应事实依据的是",
+    "options": [
+     "英国撤离的仪式",
+     "156年间米字旗的升降变迁",
+     "查尔斯王子的宣读",
+     "香港建筑的改建"
+    ],
+    "answerIndex": 1,
+    "explanation": "「沧桑」指沧海变桑田，文中通过156年的历史跨度，反映了香港从被割占到回归的巨大历史变迁。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1239
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

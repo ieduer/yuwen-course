@@ -9,6 +9,7 @@ const STAGE_MARKS = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "�
 
 const state = {
   manifest: null,
+  readerIndex: null,
   taxonomy: null,
   taxonomyLessons: new Map(),
   taxonomyGenres: new Map(),
@@ -24,6 +25,8 @@ const state = {
   blueprintLoading: new Set(),
   vocabBanks: new Map(),
   vocabBankLoading: new Set(),
+  vocabEligibility: null,
+  vocabIndex: { activeItemIds: {} },
   lessonMedia: new Map(),
   progress: loadStoredProgress(),
   fontIndex: Number(localStorage.getItem(FONT_KEY) || 1),
@@ -58,6 +61,9 @@ const els = {
   materialsCount: $("#materials-count"),
   lessonMediaContent: $("#lesson-media-content"),
   lessonMediaStatus: $("#lesson-media-status"),
+  lessonMediaSection: $("#lesson-media"),
+  materialsSection: $("#classroom-materials"),
+  authLogin: $("#auth-login"),
   checkStage: $("#check-stage"),
   matrixLinks: $("#matrix-links"),
   checkpointList: $("#checkpoint-list"),
@@ -133,6 +139,18 @@ function enforceNewTabLinks(root = document) {
   });
 }
 
+function userCenterLoginUrl() {
+  const url = new URL("https://my.bdfz.net/");
+  url.searchParams.set("returnTo", location.href);
+  return url.toString();
+}
+
+function setAuthenticatedState(authenticated) {
+  if (!els.authLogin) return;
+  els.authLogin.href = userCenterLoginUrl();
+  els.authLogin.hidden = Boolean(authenticated);
+}
+
 function lessonProgress(id = state.current?.id) {
   if (!id) return {};
   state.progress[id] ||= {};
@@ -204,13 +222,54 @@ function modeFor(lesson = state.current) {
   return MODE_TRACKS[mode] ? mode : "argument";
 }
 
+function sourceModeFor(lesson = state.current) {
+  return state.taxonomyLessons.get(lesson?.id)?.mode || genreFor(lesson);
+}
+
+function lessonHasVocabulary(lesson = state.current) {
+  const lessonId = lesson?.id || "";
+  if (!lessonId) return false;
+  const activeIds = state.vocabIndex?.activeItemIds?.[lessonId] || [];
+  if (!activeIds.length) return false;
+  const mode = sourceModeFor(lesson);
+  const policy = state.vocabEligibility;
+  if (!policy) return mode === "classical" || mode === "poetry";
+  if ((policy.defaultEligibleModes || []).includes(mode)) return true;
+  return (policy.exceptions || []).some((exception) => (
+    exception.lessonId === lessonId && activeIds.includes(exception.itemId)
+  ));
+}
+
+function normalizeTrackWeights(track) {
+  const total = track.reduce((sum, item) => sum + Number(item[3] || 0), 0);
+  if (total === 100 || total <= 0) return track;
+  let assigned = 0;
+  return track.map((item, index) => {
+    const weight = index === track.length - 1
+      ? 100 - assigned
+      : Math.round(Number(item[3] || 0) / total * 100);
+    assigned += weight;
+    return [item[0], item[1], item[2], weight];
+  });
+}
+
 function trackFor(lesson = state.current) {
-  return MODE_TRACKS[modeFor(lesson)];
+  const track = MODE_TRACKS[modeFor(lesson)];
+  return normalizeTrackWeights(
+    lessonHasVocabulary(lesson)
+      ? track
+      : track.filter(([key]) => key !== "vocabulary"),
+  );
 }
 
 function checkpointDone(progress, key, lesson = state.current) {
   if (key === "read" || key === "context") return progress[key] === true || Boolean(progress[key]?.done);
-  if (key === "vocabulary") return Boolean(progress.vocabulary?.done && (modeFor(lesson) === "classical" || progress.wordCreation?.done));
+  if (key === "vocabulary") {
+    return Boolean(
+      progress.vocabulary?.done
+      && (sourceModeFor(lesson) !== "poetry" || progress.wordCreation?.done),
+    );
+  }
   return Boolean(progress[key]?.done);
 }
 
@@ -225,10 +284,82 @@ function toast(message) {
   toast.timer = setTimeout(() => els.toast.classList.remove("show"), 2400);
 }
 
-async function fetchJson(url) {
-  const response = await fetch(url, { headers: { accept: "application/json" } });
+async function fetchJson(url, { cache = "default" } = {}) {
+  const response = await fetch(url, {
+    headers: { accept: "application/json" },
+    cache,
+  });
   if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
   return response.json();
+}
+
+function hexDigest(buffer) {
+  return [...new Uint8Array(buffer)]
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+async function fetchVerifiedJson(url, receipt) {
+  const response = await fetch(url, {
+    headers: { accept: "application/json" },
+    cache: "no-cache",
+  });
+  if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+  const bytes = new Uint8Array(await response.arrayBuffer());
+  if (!Number.isInteger(receipt?.bytes) || bytes.byteLength !== receipt.bytes) {
+    throw new Error("reader document byte receipt mismatch");
+  }
+  if (!globalThis.crypto?.subtle || !/^[a-f0-9]{64}$/i.test(receipt?.sha256 || "")) {
+    throw new Error("reader document hash receipt unavailable");
+  }
+  const digest = hexDigest(await globalThis.crypto.subtle.digest("SHA-256", bytes));
+  if (digest !== receipt.sha256) throw new Error("reader document hash receipt mismatch");
+  return JSON.parse(new TextDecoder().decode(bytes));
+}
+
+function validateReaderIndex(index) {
+  if (index?.schemaVersion !== "yw-reader-document-index-v1") {
+    throw new Error("reader index schema mismatch");
+  }
+  const lessonIds = state.manifest.lessons.map((lesson) => lesson.id);
+  const receiptIds = Object.keys(index.documents || {});
+  if (
+    index.lessonCount !== lessonIds.length
+    || JSON.stringify(receiptIds.sort()) !== JSON.stringify([...lessonIds].sort())
+  ) {
+    throw new Error("reader index inventory mismatch");
+  }
+  return index;
+}
+
+async function loadReaderIndex() {
+  if (state.readerIndex) return state.readerIndex;
+  const index = validateReaderIndex(await fetchJson(
+    "data/reader-documents/index.json",
+    { cache: "no-cache" },
+  ));
+  state.readerIndex = index;
+  return index;
+}
+
+async function loadReaderDocument(id) {
+  const index = await loadReaderIndex();
+  const receipt = index.documents[id];
+  const expectedPath = `reader-documents/${id}.json`;
+  if (!receipt || receipt.path !== expectedPath) {
+    throw new Error("reader document receipt missing");
+  }
+  const document = await fetchVerifiedJson(`data/${receipt.path}`, receipt);
+  if (
+    document?.schemaVersion !== "yw-reader-document-v1"
+    || document.lessonId !== id
+    || document.curationVersion !== index.curationVersion
+    || document.roleAuditSha256 !== index.roleAuditSha256
+    || document.main?.sourcePostId !== receipt.primaryPostId
+  ) {
+    throw new Error("reader document identity mismatch");
+  }
+  return document;
 }
 
 function normalizeText(value) {
@@ -394,35 +525,7 @@ function removeUnwantedSourceNodes(root) {
   $$('small', root).forEach((node) => {
     if (/companion discussion|sites\.google|yuque|語雀/i.test(node.textContent || "")) node.remove();
   });
-  const notes = new Map();
-  $$('.footnotes-list .footnote-item, li[id^="footnote-"]', root).forEach((item) => {
-    const clone = item.cloneNode(true);
-    $$('.footnote-backref', clone).forEach((node) => node.remove());
-    const raw = cleanAnnotationText((clone.textContent || "").replace(/^\s*\[[^\]]+\]\s*/, ""));
-    const parsed = annotationParts(raw);
-    notes.set(item.id, {
-      word: parsed.word,
-      text: parsed.note || raw,
-    });
-  });
-  $$('.footnote-ref', root).forEach((reference) => {
-    const link = reference.querySelector('a[href^="#"]');
-    const id = link?.getAttribute("href")?.slice(1) || "";
-    const note = notes.get(id);
-    if (!note?.text) return;
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "inline-note";
-    button.dataset.note = note.text;
-    button.dataset.word = /^[\p{Script=Han}·]{1,10}$/u.test(note.word)
-      ? note.word
-      : precedingAnnotationWord(reference);
-    button.setAttribute("aria-expanded", "false");
-    button.setAttribute("aria-label", `查看註釋 ${link.textContent || ""}`);
-    button.textContent = link.textContent || "註";
-    reference.replaceWith(button);
-  });
-  $$('.footnotes-list, .footnotes-sep', root).forEach((node) => node.remove());
+  $$('.footnote-ref, .footnotes-list, .footnotes-sep', root).forEach((node) => node.remove());
   $$('a', root).forEach((link) => {
     const raw = link.getAttribute("href") || "";
     if (raw.startsWith("#")) return;
@@ -444,8 +547,8 @@ function removeUnwantedSourceNodes(root) {
     image.decoding = "async";
   });
   root.innerHTML = root.innerHTML
-    .replace(/\[color=([^\]]+)\]/gi, '<span class="source-emphasis">')
-    .replace(/\[\/color\]/gi, "</span>")
+    .replace(/\[\/?color(?:=[^\]]+)?\]/gi, "")
+    .replace(/\[\d+:\d+\]/g, "")
     .replace(/\[right\]|\[center\]|\[left\]|\[\/right\]|\[\/center\]|\[\/left\]/gi, "");
 }
 
@@ -581,67 +684,160 @@ function renderOrientation(lesson) {
 
 function renderLessonMedia(lesson) {
   const media = state.lessonMedia.get(lesson.id);
-  if (!media) {
-    els.lessonMediaStatus.textContent = "本課尚未列入選修教材視覺資源計畫";
-    els.lessonMediaContent.innerHTML = `<p class="empty-state">目前先完成選擇性必修上、中、下的課文來源核查。</p>`;
-    return;
-  }
-  const ready = Boolean(media.slideDeck);
-  els.lessonMediaStatus.textContent = ready
-    ? `來源 ${media.sourceVersion} · ${media.generatedAt ? new Date(media.generatedAt).toLocaleDateString("zh-CN") : "日期待記錄"} · 已人工審核`
-    : media.pilot
-      ? "試點來源包已核查，視覺資源正在生成與審核"
-      : "來源目錄與課程標準映射已登記；本課未生成 Slide";
+  const ready = Boolean(media?.slideDeck);
+  els.lessonMediaSection.hidden = !ready;
+  els.lessonMediaStatus.textContent = "";
   if (!ready) {
-    els.lessonMediaContent.innerHTML = `
-      <article class="media-pending">
-        <span>${media.pilot ? "PILOT" : "PLANNED"}</span>
-        <div>
-          <h3>${media.pilot ? "試點資源製作中" : "來源目錄已登記"}</h3>
-          <p>來源版本：${esc(media.sourceVersion)}；Slide Deck 指令：${esc(media.promptVersions.slideDeck)}。</p>
-        </div>
-      </article>`;
+    els.lessonMediaContent.innerHTML = "";
     return;
   }
   els.lessonMediaContent.innerHTML = `
     <div class="lesson-media-grid">
       <article class="slide-deck-card">
-        <div class="media-card-kicker">SLIDE DECK · PDF</div>
-        <h3>課堂演示</h3>
-        <p>按課文結構組織關鍵問題、文本證據、閱讀方法與學習任務。</p>
+        <h3>${esc(media.slideDeck.title || "課堂簡報")}</h3>
         <div class="media-card-actions">
-          <button type="button" data-slide-open="${esc(media.slideDeck.href)}" data-slide-title="${esc(media.slideDeck.title)}">頁內閱讀</button>
-          <a href="${esc(media.slideDeck.href)}" target="_blank" rel="noopener noreferrer">另頁打開 ↗</a>
+          <button type="button" data-slide-open="${esc(media.slideDeck.href)}" data-slide-title="${esc(media.slideDeck.title || "課堂簡報")}">打開</button>
+          <a href="${esc(media.slideDeck.href)}" target="_blank" rel="noopener noreferrer">新頁</a>
         </div>
       </article>
+    </div>`;
+}
+
+function readerMediaMap(...collections) {
+  return new Map(
+    collections.flat().filter(Boolean).map((media) => [media.id, media]),
+  );
+}
+
+function renderReaderMedia(media) {
+  if (!media) return "";
+  const label = esc(media.alt || "課文圖片");
+  if (media.webDisposition !== "source-url" || !/^https:\/\//i.test(media.sourceUrl || "")) {
+    return `<span class="reader-media-unavailable">${label}</span>`;
+  }
+  const dimensions = [
+    media.width ? ` width="${Number(media.width)}"` : "",
+    media.height ? ` height="${Number(media.height)}"` : "",
+  ].join("");
+  return `
+    <a class="reader-media" href="${esc(media.sourceUrl)}" target="_blank" rel="noopener noreferrer">
+      <img src="${esc(media.sourceUrl)}" alt="${label}"${dimensions} loading="lazy" decoding="async">
+    </a>`;
+}
+
+function cleanReaderVisibleText(value) {
+  return String(value || "")
+    .replace(/\[color=[^\]]+\]|\[\/color\]/gi, "")
+    .replace(/\[\d+:\d+\]/g, "")
+    .replace(/\s+([，。；：！？])/g, "$1");
+}
+
+function annotationNumberMap(annotations) {
+  return new Map((annotations || []).map((annotation, index) => [annotation.noteId, index + 1]));
+}
+
+function renderReaderRuns(runs, media, options = {}) {
+  const annotationNumbers = options.annotationNumbers || new Map();
+  return (runs || []).map((run) => {
+    if (run.type === "text") return esc(cleanReaderVisibleText(run.text)).replace(/\n/g, "<br>");
+    if (run.type === "link") {
+      const label = esc(cleanReaderVisibleText(run.text || run.sourceUrl || "外部資料"));
+      if (!run.href || run.disposition === "blocked-http") {
+        return `<span class="reader-link-blocked">${label}</span>`;
+      }
+      return `<a href="${esc(run.href)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+    }
+    if (run.type === "annotation-ref") {
+      const number = annotationNumbers.get(run.noteId);
+      if (!number) return "";
+      return `<a class="reader-note-ref" href="#reader-note-${esc(run.noteId)}" aria-label="查看註釋 ${number}">[${number}]</a>`;
+    }
+    if (run.type === "media-ref") return renderReaderMedia(media.get(run.mediaId));
+    return "";
+  }).join("");
+}
+
+function renderReaderBlocks(blocks, media, options = {}) {
+  return (blocks || []).map((block) => {
+    if (block.type === "paragraph") return `<p>${renderReaderRuns(block.runs, media, options)}</p>`;
+    if (block.type === "heading") {
+      const level = Math.min(4, Math.max(2, Number(block.level) || 2));
+      return `<h${level}>${renderReaderRuns(block.runs, media, options)}</h${level}>`;
+    }
+    if (block.type === "quote") {
+      return `<blockquote>${renderReaderBlocks(block.blocks, media, options)}</blockquote>`;
+    }
+    if (block.type === "list") {
+      const tag = block.ordered ? "ol" : "ul";
+      return `<${tag}>${(block.items || []).map((item) => (
+        `<li>${renderReaderBlocks(item.blocks, media, options)}</li>`
+      )).join("")}</${tag}>`;
+    }
+    if (block.type === "image") return renderReaderMedia(media.get(block.mediaId));
+    if (block.type === "resource-link") {
+      if (options.includeResourceLinks === false) return "";
+      const label = esc(cleanReaderVisibleText(block.text || "延伸資料"));
+      if (!block.href || !/^https:\/\//i.test(block.href) || /^blocked-/i.test(block.disposition || "")) {
+        return `<p><span class="reader-link-blocked">${label}</span></p>`;
+      }
+      return `<p class="reader-resource-link"><a href="${esc(block.href)}" target="_blank" rel="noopener noreferrer">${label} ↗</a></p>`;
+    }
+    if (block.type === "code") return `<pre><code>${esc(block.text || "")}</code></pre>`;
+    if (block.type === "table") {
+      return `<div class="reader-table-wrap"><table><tbody>${(block.rows || []).map((row) => (
+        `<tr>${row.map((cell) => {
+          const tag = cell.header ? "th" : "td";
+          return `<${tag}>${renderReaderRuns(cell.runs, media, options)}</${tag}>`;
+        }).join("")}</tr>`
+      )).join("")}</tbody></table></div>`;
+    }
+    if (block.type === "divider") return "<hr>";
+    return "";
+  }).join("");
+}
+
+function renderReaderAnnotations(annotations, media, annotationNumbers = annotationNumberMap(annotations)) {
+  if (!(annotations || []).length) return "";
+  return `
+    <section class="reader-annotations" aria-label="正文註釋">
+      <h3>註釋</h3>
+      <ol>
+        ${annotations.map((annotation) => `
+          <li id="reader-note-${esc(annotation.noteId)}" value="${annotationNumbers.get(annotation.noteId)}">
+            ${renderReaderBlocks(annotation.blocks, media, { annotationNumbers })}
+          </li>
+        `).join("")}
+      </ol>
+    </section>`;
+}
+
+function renderReaderDocument(document) {
+  const mainMedia = readerMediaMap(document.main?.media || []);
+  const annotationNumbers = annotationNumberMap(document.main?.annotations || []);
+  const options = { annotationNumbers, includeResourceLinks: false };
+  const frontMatter = renderReaderBlocks(document.main?.frontMatter || [], mainMedia, options);
+  const guidance = renderReaderBlocks(document.main?.guidance || [], mainMedia, options);
+  const body = renderReaderBlocks(document.main?.blocks || [], mainMedia, options);
+  const annotations = renderReaderAnnotations(
+    document.main?.annotations || [],
+    mainMedia,
+    annotationNumbers,
+  );
+  return `
+    ${frontMatter ? `<aside class="reader-front-matter">${frontMatter}</aside>` : ""}
+    ${guidance ? `<aside class="reader-guidance">${guidance}</aside>` : ""}
+    <div class="primary-text reader-primary" data-post="${esc(document.main?.sourcePostNumber || document.main?.sourcePostId || "")}">
+      ${body || `<p class="empty-state">本課正文請從教材原圖閱讀。</p>`}
     </div>
-    <dl class="media-provenance">
-      <div><dt>來源版本</dt><dd>${esc(media.sourceVersion)}</dd></div>
-      <div><dt>生成指令</dt><dd>${esc(media.promptVersions.slideDeck)}</dd></div>
-      <div><dt>生成日期</dt><dd>${esc(media.generatedAt ? new Date(media.generatedAt).toLocaleDateString("zh-CN") : "待記錄")}</dd></div>
-      <div><dt>審核狀態</dt><dd>${esc(media.reviewStatus.slideDeck)}</dd></div>
-    </dl>`;
+    ${annotations}`;
 }
 
 function renderText(lesson) {
-  const posts = meaningfulPosts(lesson);
-  const primary = primaryPost(lesson);
-  if (!primary) {
-    els.textFlow.innerHTML = `<p class="empty-state">本課正文仍在整理，可先核對教材原圖。</p>`;
+  if (lesson.readerDocument?.schemaVersion === "yw-reader-document-v1") {
+    els.textFlow.innerHTML = renderReaderDocument(lesson.readerDocument);
     return;
   }
-  const primaryParts = primaryContentParts(lesson);
-  els.textFlow.innerHTML = `
-    <div class="primary-text" data-post="${esc(primary.post_number || primary.id)}">
-      ${primaryParts.html}
-    </div>
-    ${posts.filter((post) => post !== primary && (post.plain_text || "").length > 180 && !(post.attachments || []).length).slice(0, 8).map((post, index) => `
-      <details class="extension-reading">
-        <summary><span>延伸 ${String(index + 1).padStart(2, "0")}</span>${esc(String(post.plain_text || "").replace(/\s+/g, " ").slice(0, 46))}</summary>
-        <div class="extension-body">${cleanedCooked(post.cooked)}</div>
-      </details>
-    `).join("")}
-  `;
+  els.textFlow.innerHTML = `<p class="empty-state">課文暫時無法顯示。</p>`;
 }
 
 function absoluteResourceUrl(raw) {
@@ -660,8 +856,41 @@ function resourceTitle(resource, url) {
 
 function resourcesFor(lesson) {
   const seen = new Set();
-  return (lesson.resources || []).reduce((items, resource) => {
-    const href = absoluteResourceUrl(resource.href);
+  const readerDocument = lesson.readerDocument?.schemaVersion === "yw-reader-document-v1"
+    ? lesson.readerDocument
+    : null;
+  const readerResourceLinks = [];
+  const collectReaderResourceLinks = (value) => {
+    if (Array.isArray(value)) {
+      value.forEach(collectReaderResourceLinks);
+      return;
+    }
+    if (!value || typeof value !== "object") return;
+    if (value.type === "resource-link") readerResourceLinks.push(value);
+    Object.values(value).forEach(collectReaderResourceLinks);
+  };
+  if (readerDocument) {
+    collectReaderResourceLinks(readerDocument.main?.blocks || []);
+    for (const post of readerDocument.supplementary || []) {
+      collectReaderResourceLinks(post.blocks || []);
+    }
+  }
+  const source = readerDocument
+    ? [
+      ...(readerDocument.resources || []).map((resource) => ({
+      href: resource.href,
+      text: resource.label,
+      title: resource.label,
+      kind: resource.kind,
+      postNumber: resource.postNumber,
+      disposition: resource.disposition,
+      })),
+      ...readerResourceLinks,
+    ]
+    : (lesson.resources || []);
+  return source.reduce((items, resource) => {
+    if (resource.disposition === "source-only" || resource.disposition === "blocked-http") return items;
+    const href = resource.href ? absoluteResourceUrl(resource.href) : "";
     if (!href || /sites\.google\.com|yuque\.com|\/u\//i.test(href)) return items;
     const key = href.replace(/[?#].*$/, "").replace(/\/$/, "").toLowerCase();
     if (seen.has(key)) return items;
@@ -676,21 +905,43 @@ function resourcesFor(lesson) {
   }, []);
 }
 
+function renderSupplementaryMaterials(lesson) {
+  const supplementary = lesson.readerDocument?.schemaVersion === "yw-reader-document-v1"
+    ? lesson.readerDocument.supplementary || []
+    : [];
+  return supplementary.map((post, index) => {
+    const media = readerMediaMap(post.media || []);
+    const annotationNumbers = annotationNumberMap(post.annotations || []);
+    return `
+      <details class="extension-reading reader-supplementary">
+        <summary>補充閱讀 ${index + 1}</summary>
+        <div class="extension-body">
+          ${renderReaderBlocks(post.blocks || [], media, { annotationNumbers })}
+          ${renderReaderAnnotations(post.annotations || [], media, annotationNumbers)}
+        </div>
+      </details>`;
+  }).join("");
+}
+
 function renderMaterials(lesson) {
   const resources = resourcesFor(lesson);
-  els.materialsCount.textContent = resources.length ? `${resources.length} 項已去重資料，可直接投影` : "本課暫無獨立附件";
-  els.materialStream.innerHTML = resources.length ? `
-    <div class="material-list">
+  const supplementary = lesson.readerDocument?.supplementary || [];
+  const count = resources.length + supplementary.length;
+  els.materialsSection.hidden = count === 0;
+  els.materialsCount.textContent = count ? `${count} 項` : "";
+  els.materialStream.innerHTML = count ? `
+    ${renderSupplementaryMaterials(lesson)}
+    ${resources.length ? `<div class="material-list">
       ${resources.map((resource, index) => `
         <button type="button" class="material-row" data-resource-index="${index}">
           <span>${String(index + 1).padStart(2, "0")}</span>
           <strong>${esc(resource.title)}</strong>
-          <small>${esc(resource.kind === "document" ? "文檔" : "網頁")}${resource.postNumber ? ` · 原帖 #${esc(resource.postNumber)}` : ""}</small>
-          <em>投影 ↗</em>
+          <small>${esc(resource.kind === "document" ? "文檔" : "連結")}</small>
+          <em>打開</em>
         </button>
       `).join("")}
-    </div>
-  ` : `<p class="empty-state">本課內容已集中在正文與教材原圖，不再重複列出 Google Sites 或語雀鏡像。</p>`;
+    </div>` : ""}
+  ` : "";
 }
 
 function lessonVocabulary(lesson) {
@@ -797,6 +1048,10 @@ function authorDialogue(lesson, body, result = "", action = "") {
 async function ensureVocabBank(lesson) {
   const id = lesson?.id;
   if (!id || state.vocabBanks.has(id) || state.vocabBankLoading.has(id)) return;
+  if (!lessonHasVocabulary(lesson)) {
+    state.vocabBanks.set(id, null);
+    return;
+  }
   state.vocabBankLoading.add(id);
   try {
     const response = await fetch(`data/vocab/${encodeURIComponent(id)}.json`);
@@ -851,7 +1106,7 @@ function renderVocabularyQuiz(lesson, progress, bank) {
     const firstTry = questions.filter((item) => quizItemState(quiz, item.id).mastered).length;
     return `<div class="vocabulary-step vocab-quiz" style="--vocabulary-progress:${percent}%">${header}
       <p class="vocabulary-complete">字詞題全部過關：${questions.length} 題，其中 ${firstTry} 題一次答對。</p>
-    </div>${modeFor(lesson) !== "classical" ? renderWordCreation(lesson, progress) : ""}`;
+    </div>${sourceModeFor(lesson) === "poetry" ? renderWordCreation(lesson, progress) : ""}`;
   }
   const itemState = quizItemState(quiz, current.id);
   const answered = itemState.lastPick;
@@ -882,16 +1137,17 @@ function recordLearning(interactionKey, data = {}, options = {}) {
     : Promise.resolve({ ok: false, reason: "identity-unavailable" });
 }
 
-async function recordVocabAttempt(itemId, selectedIndex) {
+async function recordVocabAttempt(itemId, selectedIndex, lessonId = state.current?.id) {
+  if (!lessonId) return;
   try {
     await fetch("/api/reading/vocab-attempt", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        lessonId: state.current.id,
+        lessonId,
         itemId,
         selectedIndex,
-        clientMutationId: window.YwLearningEvidence?.mutationId?.("vocabAnswer", state.current.id),
+        clientMutationId: window.YwLearningEvidence?.mutationId?.("vocabAnswer", lessonId),
       }),
     });
   } catch { /* 離線/未登入時僅記本地 */ }
@@ -931,7 +1187,7 @@ function renderInteractionBody(key, lesson, progress, blueprint) {
     return `<div class="vocabulary-step" style="--vocabulary-progress:${percent}%">
       <div class="vocabulary-progress" aria-label="詞級疏通 ${reviewed.size} / ${words.length}"><span></span><b>${reviewed.size} / ${words.length}</b></div>
       ${completed ? (words.length ? `<p class="vocabulary-complete">已逐詞核對。</p>` : `<p class="vocabulary-empty">正文沒有獨立註詞。</p>`) : `<button type="button" data-vocabulary="${esc(current.word)}" data-note="${esc(current.note)}"><span>下一詞</span><strong>${esc(current.word)}</strong><em>查</em></button>`}
-    </div>${completed && modeFor(lesson) !== "classical" ? renderWordCreation(lesson, progress) : ""}`;
+    </div>${completed && sourceModeFor(lesson) === "poetry" ? renderWordCreation(lesson, progress) : ""}`;
   }
   if (key === "read") return `<label class="read-check"><input type="checkbox" data-read-check ${value.checked || value.done ? "checked" : ""}><span>我已完成一次不中斷的正文通讀</span></label>`;
   if (key === "authorQuestion") return authorDialogue(lesson, `<textarea data-field="authorQuestion.answer" rows="4" aria-label="你想問作者的問題" placeholder="你最想我的問題是什麼，你問，我答。">${esc(value.answer || "")}</textarea>`, interactionResult(progress, key), `<button class="check-action" type="button" data-ai-check="authorQuestion">問</button>`);
@@ -953,7 +1209,7 @@ function renderCheckStage(lesson) {
   `).join("");
   bindCheckStage();
   void ensureBlueprint(lesson);
-  void ensureVocabBank(lesson);
+  if (lessonHasVocabulary(lesson)) void ensureVocabBank(lesson);
 }
 
 function matrixItemsFor(lesson) {
@@ -1111,6 +1367,20 @@ function fitLessonTitle() {
   }
 }
 
+function renderReaderLoadFailure(id) {
+  state.current = null;
+  els.title.textContent = "課文暫時無法載入";
+  els.orientation.textContent = "請稍後重試。";
+  els.textFlow.innerHTML = `
+    <div class="empty-state" role="status">
+      <p>課文暫時無法顯示。</p>
+      <button type="button" data-reader-retry="${esc(id)}">重試</button>
+    </div>`;
+  els.textFlow.querySelector("[data-reader-retry]")?.addEventListener("click", () => {
+    void showLesson(id, { push: false });
+  }, { once: true });
+}
+
 let lessonToken = 0;
 async function showLesson(id, { push = true } = {}) {
   const token = ++lessonToken;
@@ -1118,9 +1388,11 @@ async function showLesson(id, { push = true } = {}) {
     const meta = state.manifest.lessons.find((lesson) => lesson.id === id);
     if (!meta) throw new Error("找不到課文");
     let lesson = state.lessons.get(id);
+    let shouldCache = false;
     if (!lesson) {
       lesson = await fetchJson(meta.dataUrl);
-      state.lessons.set(id, lesson);
+      lesson.readerDocument = await loadReaderDocument(id);
+      shouldCache = true;
     }
     if (token !== lessonToken) return;
     state.current = lesson;
@@ -1129,13 +1401,16 @@ async function showLesson(id, { push = true } = {}) {
     state.blockId = lesson.blockId || meta.blockId || state.blockId;
     renderBooks();
     renderLesson(lesson);
+    if (shouldCache) state.lessons.set(id, lesson);
     void recordLearning("lessonOpened");
     if (push) history.replaceState(null, "", `#${lesson.id}`);
     if (matchMedia("(max-width: 900px)").matches) closeAtlas();
     scrollTo({ top: 0, behavior: "auto" });
-  } catch (error) {
-    els.title.textContent = "課文載入失敗";
-    els.orientation.textContent = error.message;
+  } catch {
+    if (token !== lessonToken) return;
+    state.lessons.delete(id);
+    state.readerIndex = null;
+    renderReaderLoadFailure(id);
     toast("無法載入這篇課文");
   }
 }
@@ -1266,12 +1541,13 @@ function bindCheckStage() {
     void saveEvaluation(Number(button.dataset.rating)).then(() => { if (status) status.textContent = `已自動保存 ${button.dataset.rating}/5`; });
   }));
   $$('[data-quiz-option]', els.checkStage).forEach((button) => button.addEventListener("click", () => {
-    const bank = state.vocabBanks.get(state.current?.id);
+    const lessonId = state.current?.id;
+    const bank = state.vocabBanks.get(lessonId);
     const itemHost = button.closest("[data-quiz-item]");
-    if (!bank || !itemHost) return;
+    if (!lessonId || !bank || !itemHost) return;
     const item = bank.questions.find((entry) => entry.id === itemHost.dataset.quizItem);
     if (!item) return;
-    const progress = lessonProgress();
+    const progress = lessonProgress(lessonId);
     const quiz = quizRecord(progress);
     const entry = quiz.answers[item.id] || { attempts: 0, correct: false, mastered: false };
     if (entry.correct) return;
@@ -1287,7 +1563,9 @@ function bindCheckStage() {
     }
     quiz.answers[item.id] = entry;
     quiz.cursorId = correct
-      ? bank.questions.find((question) => !quizItemState(quiz, question.id).correct)?.id || null
+      ? window.YwVocabProgress?.nextCursor?.(bank.questions, quiz.answers)
+        ?? bank.questions.find((question) => !quizItemState(quiz, question.id).correct)?.id
+        ?? null
       : item.id;
     const solvedAll = bank.questions.every((question) => quizRecord(progress).answers[question.id]?.correct);
     if (solvedAll) {
@@ -1296,19 +1574,22 @@ function bindCheckStage() {
         quiz.completionSent = true;
       }
     }
-    void recordVocabAttempt(item.id, pick);
+    void recordVocabAttempt(item.id, pick, lessonId);
     syncProgress({ event: true });
     if (!correct) {
-      renderCheckStage(state.current);
+      if (state.current?.id === lessonId) renderCheckStage(state.current);
       return;
     }
-    const lessonId = state.current.id;
     $$('[data-quiz-option]', itemHost).forEach((option) => { option.disabled = true; });
     button.classList.add("correct");
     itemHost.classList.add("quiz-advancing");
     const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
     setTimeout(() => {
-      if (state.current?.id !== lessonId) return;
+      const canAdvance = window.YwVocabProgress?.canAdvanceScheduledLesson?.(
+        state.current?.id,
+        lessonId,
+      ) ?? state.current?.id === lessonId;
+      if (!canAdvance) return;
       renderCheckStage(state.current);
       const round = els.checkStage.querySelector('[data-round="vocabulary"]');
       round?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
@@ -1486,58 +1767,15 @@ function changeFont(delta) {
   applyFont();
 }
 
-function closeInlineNotes(except = null) {
-  $$('.note-popover.open', els.textFlow).forEach((popover) => {
-    if (popover === except) return;
-    clearTimeout(popover.typeTimer);
-    popover.classList.remove("typing");
-    popover.classList.remove("open");
-    popover.previousElementSibling?.setAttribute("aria-expanded", "false");
-  });
-}
-
-function toggleInlineNote(button) {
-  let popover = button.nextElementSibling;
-  if (!popover?.classList.contains("note-popover")) {
-    popover = document.createElement("span");
-    popover.className = "note-popover";
-    button.insertAdjacentElement("afterend", popover);
-  }
-  const opening = !popover.classList.contains("open");
-  closeInlineNotes(opening ? popover : null);
-  popover.classList.toggle("open", opening);
-  button.setAttribute("aria-expanded", opening ? "true" : "false");
-  clearTimeout(popover.typeTimer);
-  if (!opening) {
-    popover.classList.remove("typing");
-    return;
-  }
-  void recordLearning("noteOpened", {
-    noteRef: String($$(".inline-note", els.textFlow).indexOf(button) + 1),
-  });
-  const characters = [...(button.dataset.note || "")];
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    popover.textContent = characters.join("");
-    return;
-  }
-  popover.textContent = "";
-  popover.classList.add("typing");
-  let index = 0;
-  const type = () => {
-    popover.textContent += characters[index] || "";
-    index += 1;
-    if (index < characters.length && popover.classList.contains("open")) popover.typeTimer = setTimeout(type, 24);
-    else popover.classList.remove("typing");
-  };
-  type();
-}
-
 function bindEvents() {
   els.atlasOpen.addEventListener("click", openAtlas);
   els.atlasClose.addEventListener("click", closeAtlas);
   els.atlasScrim.addEventListener("click", closeAtlas);
   els.mobileToolsToggle.addEventListener("click", () => setToolsOpen(!els.body.classList.contains("tools-open")));
   $("#topbar-actions").addEventListener("click", () => setToolsOpen(false));
+  els.authLogin?.addEventListener("click", () => {
+    els.authLogin.href = userCenterLoginUrl();
+  });
   els.search.addEventListener("input", () => {
     state.query = els.search.value;
     renderLessonIndex();
@@ -1557,8 +1795,18 @@ function bindEvents() {
   });
   els.materialStream.addEventListener("click", (event) => {
     const button = event.target.closest("[data-resource-index]");
-    if (!button) return;
-    openResource(resourcesFor(state.current)[Number(button.dataset.resourceIndex)]);
+    if (button) {
+      openResource(resourcesFor(state.current)[Number(button.dataset.resourceIndex)]);
+      return;
+    }
+    const image = event.target.closest("img");
+    if (!image) return;
+    event.preventDefault();
+    openResource({
+      href: image.currentSrc || image.src,
+      title: image.alt || lessonTitle(state.current),
+      kind: "image",
+    });
   });
   els.lessonMediaContent.addEventListener("click", (event) => {
     const button = event.target.closest("[data-slide-open]");
@@ -1571,15 +1819,17 @@ function bindEvents() {
     });
   });
   els.textFlow.addEventListener("click", (event) => {
-    const note = event.target.closest(".inline-note");
+    const note = event.target.closest(".reader-note-ref");
     if (note) {
-      event.preventDefault();
-      event.stopPropagation();
-      toggleInlineNote(note);
+      void recordLearning("noteOpened", {
+        noteRef: note.getAttribute("href")?.slice(1) || "",
+      });
       return;
     }
     const image = event.target.closest("img");
-    if (image) openResource({ href: image.currentSrc || image.src, title: image.alt || lessonTitle(state.current) });
+    if (!image) return;
+    event.preventDefault();
+    openResource({ href: image.currentSrc || image.src, title: image.alt || lessonTitle(state.current), kind: "image" });
   });
   document.addEventListener("mouseup", () => setTimeout(onSelection, 0));
   document.addEventListener("touchend", () => setTimeout(onSelection, 80));
@@ -1639,7 +1889,13 @@ function bindEvents() {
   }
   window.addEventListener("hashchange", () => {
     const id = location.hash.slice(1);
-    if (id && id !== state.current?.id) showLesson(id, { push: false });
+    if (
+      id
+      && id !== state.current?.id
+      && state.manifest?.lessons?.some((lesson) => lesson.id === id)
+    ) {
+      showLesson(id, { push: false });
+    }
   });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeLexicon();
@@ -1665,12 +1921,14 @@ function mergeRemoteProgress(item) {
 }
 
 async function hydrateUserProgress() {
+  setAuthenticatedState(false);
   const deadline = Date.now() + 6000;
   while (!window.BdfzIdentity && Date.now() < deadline) await new Promise((resolve) => setTimeout(resolve, 120));
   const identity = window.BdfzIdentity;
   if (!identity) return;
   const session = await identity.getSession?.().catch(() => null);
   if (!session?.authenticated) return;
+  setAuthenticatedState(true);
   const payload = await identity.api?.("/api/progress?site=yw").catch(() => null);
   const items = Array.isArray(payload?.items) ? payload.items : Array.isArray(payload) ? payload : [];
   if (items.some(mergeRemoteProgress)) {
@@ -1693,13 +1951,23 @@ async function init() {
   }))).observe(document.body, { childList: true, subtree: true });
   if (matchMedia("(min-width: 901px)").matches) openAtlas(); else closeAtlas();
   try {
-    const [manifest, taxonomy, lessonMedia] = await Promise.all([
+    const [manifest, taxonomy, lessonMedia, vocabEligibility, vocabIndex] = await Promise.all([
       fetchJson("data/manifest.json"),
       fetchJson("data/literary-taxonomy.json"),
       fetchJson("data/lesson-media.json"),
+      fetchJson("data/vocab-eligibility.json", { cache: "no-cache" }),
+      fetchJson("data/vocab/index.json", { cache: "no-cache" }),
     ]);
+    if (
+      vocabEligibility?.schemaVersion !== "yw-vocab-eligibility-v1"
+      || vocabIndex?.schemaVersion !== "yw-vocab-index-v2"
+    ) {
+      throw new Error("字詞範圍資料不一致");
+    }
     state.manifest = manifest;
     state.taxonomy = taxonomy;
+    state.vocabEligibility = vocabEligibility;
+    state.vocabIndex = vocabIndex;
     state.lessonMedia = new Map((lessonMedia.lessons || []).map((lesson) => [lesson.lessonId, lesson]));
     state.taxonomyLessons = new Map(state.taxonomy.lessons.map((lesson) => [lesson.id, lesson]));
     state.taxonomyGenres = new Map(state.taxonomy.genres.map((genre) => [genre.id, genre]));

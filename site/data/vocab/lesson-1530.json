@@ -35,25 +35,14 @@
    "id": "lesson-1530:v03",
    "word": "峧",
    "annotated": true,
-   "decision": "question",
-   "reason": "生僻地名用字，考察读音。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "地名用字，读jiāo。",
    "sourceSentence": "三个民兵回到刘家峧,一说区上把兴旺金旺二人押起来",
-   "type": "pronunciation",
-   "question": "文中“刘家峧”的“峧”字读音正确的是",
-   "options": [
-    "jiāo",
-    "jiǎo",
-    "kǎo",
-    "yáo"
-   ],
-   "answerIndex": 0,
-   "explanation": "教材明确标注读音为jiāo。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3295
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1530:v03"
   },
   {
    "id": "lesson-1530:v04",
@@ -71,169 +60,92 @@
    "id": "lesson-1530:v05",
    "word": "冲",
    "annotated": false,
-   "decision": "question",
-   "reason": "多义词，此处词义与现代汉语常用义有细微差别，考察语境理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "冲突、相克，指迷信中认为不吉利的事物破坏了运气。",
    "sourceSentence": "要谨防戴孝的冲了运气,因此哪里也不敢去",
-   "type": "contextual-choice",
-   "question": "文中“冲了运气”的“冲”字，意为",
-   "options": [
-    "碰撞",
-    "冒犯",
-    "相克、破坏",
-    "直上"
-   ],
-   "answerIndex": 2,
-   "explanation": "在迷信语境中，指相互抵触、破坏原有的好运势。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 218
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1530:v05"
   },
   {
    "id": "lesson-1530:v06",
    "word": "充人物头",
    "annotated": false,
-   "decision": "question",
-   "reason": "方言色彩浓厚的词语，影响人物性格理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "充当重要角色，摆架子，出风头。",
    "sourceSentence": "小杂种硬要充人物头",
-   "type": "interpretation",
-   "question": "文中“硬要充人物头”的意思是",
-   "options": [
-    "想成为受人尊敬的人物",
-    "硬要强出头、摆架子",
-    "为了保护别人而挺身而出",
-    "指责别人虚张声势"
-   ],
-   "answerIndex": 1,
-   "explanation": "二诸葛认为当队长是惹祸，认为小二黑是在强出头，带贬义。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 467
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1530:v06"
   },
   {
    "id": "lesson-1530:v07",
    "word": "勾引",
    "annotated": false,
-   "decision": "question",
-   "reason": "古今异义/语境义演变，考察学生对词义褒贬色彩及程度的判断。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "本指诱导、带走，此处带有责备对方破坏自己家庭秩序的愤怒口吻。",
    "sourceSentence": "你母女两个好生生把我个孩子勾引坏",
-   "type": "gu-jin",
-   "question": "下列关于“勾引”一词的理解，不正确的一项是",
-   "options": [
-    "现代汉语中常指诱惑他人做不正当的事，贬义较重",
-    "文中指二诸葛老婆认为三仙姑母女诱导小二黑，带有强烈的主观愤怒",
-    "文中指两人正当的自由恋爱行为，二诸葛老婆用词带有偏见",
-    "此处“勾引”与现代汉语“吸引”意义完全等同，无贬义"
-   ],
-   "answerIndex": 3,
-   "explanation": "文中“勾引”带有责备和贬义色彩，并非中性词“吸引”。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 790
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1530:v07"
   },
   {
    "id": "lesson-1530:v08",
    "word": "恋战",
    "annotated": false,
-   "decision": "question",
-   "reason": "词语语境义考察，易被误解为军事术语。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "留恋争吵的局面，不愿离去。",
    "sourceSentence": "三仙姑见二诸葛老婆已经不顾了命,自己先胆怯了几分,不敢恋战",
-   "type": "contextual-choice",
-   "question": "下列句中“恋战”一词的语境义是",
-   "options": [
-    "贪恋战场上的胜利",
-    "不愿放弃争吵的局面",
-    "舍不得离开家乡",
-    "在战斗中表现出犹豫"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处指三仙姑在与二诸葛老婆吵架中处于劣势，不想继续纠缠。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 860
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1530:v08"
   },
   {
    "id": "lesson-1530:v09",
    "word": "恩典",
    "annotated": false,
-   "decision": "question",
-   "reason": "词语语境义考察，考察封建思想与现代法律观念的冲突。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "乞求、施舍，此处反映二诸葛对公职人员的封建依附心理。",
    "sourceSentence": "请区长恩典恩典就过去了",
-   "type": "contextual-choice",
-   "question": "文中二诸葛反复乞求区长“恩典”，反映了他怎样的心理？",
-   "options": [
-    "对区长权力的崇敬与畏惧",
-    "希望区长行使特权，而非依法办事",
-    "对婚姻自主政策的深刻认同",
-    "试图通过贿赂解决问题"
-   ],
-   "answerIndex": 1,
-   "explanation": "二诸葛习惯于将区长视为旧社会的“青天大老爷”，希望其法外开恩。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1603
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1530:v09"
   },
   {
    "id": "lesson-1530:v10",
    "word": "耍",
    "annotated": false,
-   "decision": "question",
-   "reason": "方言用法，考察上下文语境对词义的限制。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "滚开，离开。",
    "sourceSentence": "门边站着老乡一个十来岁的小闺女嘻嘻嘻笑了。交通员说:“到外边耍",
-   "type": "contextual-choice",
-   "question": "文中交通员对小闺女说“到外边耍”，意为",
-   "options": [
-    "到外面玩耍",
-    "到外面去表演",
-    "到外面去离开，别在这儿碍事",
-    "到外面去寻找玩具"
-   ],
-   "answerIndex": 2,
-   "explanation": "此处是劝离语，让无关人员离开现场，非字面意义的游玩。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2631
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1530:v10"
   },
   {
    "id": "lesson-1530:v11",
    "word": "顺水推舟",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语用法，考察对人物性格转变的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "比喻顺应趋势，借机达成目的。",
    "sourceSentence": "托邻居们趁势和说和说,两位神仙也就顺水推舟同意他们结婚",
-   "type": "substitution",
-   "question": "将“顺水推舟”换为下列哪个词，最不符合原意？",
-   "options": [
-    "因势利导",
-    "借坡下驴",
-    "顺势而为",
-    "固执己见"
-   ],
-   "answerIndex": 3,
-   "explanation": "“固执己见”与“顺水推舟”意义相反，此处指两人借坡下驴同意婚事。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4119
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1530:v11"
   },
   {
    "id": "lesson-1530:v12",
@@ -244,5 +156,295 @@
    "contextMeaning": "小说第一节中提到：三仙姑有一次设香案扮神给人问病，趁人出去时对小芹说：“快去捞饭！米烂了！”不料被人听见，传为笑谈。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1530:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1530:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "16bd27f6a4acbe9257025287de691541773086e80236f7b3e120095706034332",
+   "formerItem": {
+    "id": "lesson-1530:v03",
+    "word": "峧",
+    "annotated": true,
+    "decision": "question",
+    "reason": "生僻地名用字，考察读音。",
+    "contextMeaning": "地名用字，读jiāo。",
+    "sourceSentence": "三个民兵回到刘家峧,一说区上把兴旺金旺二人押起来",
+    "type": "pronunciation",
+    "question": "文中“刘家峧”的“峧”字读音正确的是",
+    "options": [
+     "jiāo",
+     "jiǎo",
+     "kǎo",
+     "yáo"
+    ],
+    "answerIndex": 0,
+    "explanation": "教材明确标注读音为jiāo。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3295
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1530:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1530:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "79f081186fa0c69f7e73cdd0f202467fb0a3c0f9843d2f818d89aaad4022115c",
+   "formerItem": {
+    "id": "lesson-1530:v05",
+    "word": "冲",
+    "annotated": false,
+    "decision": "question",
+    "reason": "多义词，此处词义与现代汉语常用义有细微差别，考察语境理解。",
+    "contextMeaning": "冲突、相克，指迷信中认为不吉利的事物破坏了运气。",
+    "sourceSentence": "要谨防戴孝的冲了运气,因此哪里也不敢去",
+    "type": "contextual-choice",
+    "question": "文中“冲了运气”的“冲”字，意为",
+    "options": [
+     "碰撞",
+     "冒犯",
+     "相克、破坏",
+     "直上"
+    ],
+    "answerIndex": 2,
+    "explanation": "在迷信语境中，指相互抵触、破坏原有的好运势。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 218
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1530:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1530:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "d0317adc16ce5a61a4b796bce18adf57963fceb8dd7653ff420810f54fd9e408",
+   "formerItem": {
+    "id": "lesson-1530:v06",
+    "word": "充人物头",
+    "annotated": false,
+    "decision": "question",
+    "reason": "方言色彩浓厚的词语，影响人物性格理解。",
+    "contextMeaning": "充当重要角色，摆架子，出风头。",
+    "sourceSentence": "小杂种硬要充人物头",
+    "type": "interpretation",
+    "question": "文中“硬要充人物头”的意思是",
+    "options": [
+     "想成为受人尊敬的人物",
+     "硬要强出头、摆架子",
+     "为了保护别人而挺身而出",
+     "指责别人虚张声势"
+    ],
+    "answerIndex": 1,
+    "explanation": "二诸葛认为当队长是惹祸，认为小二黑是在强出头，带贬义。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 467
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1530:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1530:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "19687462b65c4ff0e96eba683937f7c953f79fdff45b2a616e791b7f6400d2d0",
+   "formerItem": {
+    "id": "lesson-1530:v07",
+    "word": "勾引",
+    "annotated": false,
+    "decision": "question",
+    "reason": "古今异义/语境义演变，考察学生对词义褒贬色彩及程度的判断。",
+    "contextMeaning": "本指诱导、带走，此处带有责备对方破坏自己家庭秩序的愤怒口吻。",
+    "sourceSentence": "你母女两个好生生把我个孩子勾引坏",
+    "type": "gu-jin",
+    "question": "下列关于“勾引”一词的理解，不正确的一项是",
+    "options": [
+     "现代汉语中常指诱惑他人做不正当的事，贬义较重",
+     "文中指二诸葛老婆认为三仙姑母女诱导小二黑，带有强烈的主观愤怒",
+     "文中指两人正当的自由恋爱行为，二诸葛老婆用词带有偏见",
+     "此处“勾引”与现代汉语“吸引”意义完全等同，无贬义"
+    ],
+    "answerIndex": 3,
+    "explanation": "文中“勾引”带有责备和贬义色彩，并非中性词“吸引”。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 790
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1530:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1530:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "c295e0f91e4642e1718af72e975e266b51b6cdda3c69a6a45829fc4d605b87a2",
+   "formerItem": {
+    "id": "lesson-1530:v08",
+    "word": "恋战",
+    "annotated": false,
+    "decision": "question",
+    "reason": "词语语境义考察，易被误解为军事术语。",
+    "contextMeaning": "留恋争吵的局面，不愿离去。",
+    "sourceSentence": "三仙姑见二诸葛老婆已经不顾了命,自己先胆怯了几分,不敢恋战",
+    "type": "contextual-choice",
+    "question": "下列句中“恋战”一词的语境义是",
+    "options": [
+     "贪恋战场上的胜利",
+     "不愿放弃争吵的局面",
+     "舍不得离开家乡",
+     "在战斗中表现出犹豫"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处指三仙姑在与二诸葛老婆吵架中处于劣势，不想继续纠缠。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 860
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1530:v09",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1530:v09",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "b22a1a54e55a6871c9853a4929c1bbed879ea4269391005d27cae5c5025105fd",
+   "formerItem": {
+    "id": "lesson-1530:v09",
+    "word": "恩典",
+    "annotated": false,
+    "decision": "question",
+    "reason": "词语语境义考察，考察封建思想与现代法律观念的冲突。",
+    "contextMeaning": "乞求、施舍，此处反映二诸葛对公职人员的封建依附心理。",
+    "sourceSentence": "请区长恩典恩典就过去了",
+    "type": "contextual-choice",
+    "question": "文中二诸葛反复乞求区长“恩典”，反映了他怎样的心理？",
+    "options": [
+     "对区长权力的崇敬与畏惧",
+     "希望区长行使特权，而非依法办事",
+     "对婚姻自主政策的深刻认同",
+     "试图通过贿赂解决问题"
+    ],
+    "answerIndex": 1,
+    "explanation": "二诸葛习惯于将区长视为旧社会的“青天大老爷”，希望其法外开恩。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1603
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1530:v10",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1530:v10",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "42b1a889fa967a225728746919e55bc83dde2d257d977f5090f6537ce844332f",
+   "formerItem": {
+    "id": "lesson-1530:v10",
+    "word": "耍",
+    "annotated": false,
+    "decision": "question",
+    "reason": "方言用法，考察上下文语境对词义的限制。",
+    "contextMeaning": "滚开，离开。",
+    "sourceSentence": "门边站着老乡一个十来岁的小闺女嘻嘻嘻笑了。交通员说:“到外边耍",
+    "type": "contextual-choice",
+    "question": "文中交通员对小闺女说“到外边耍”，意为",
+    "options": [
+     "到外面玩耍",
+     "到外面去表演",
+     "到外面去离开，别在这儿碍事",
+     "到外面去寻找玩具"
+    ],
+    "answerIndex": 2,
+    "explanation": "此处是劝离语，让无关人员离开现场，非字面意义的游玩。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2631
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1530:v11",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1530:v11",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "df473f39dacc26b0dd7b27e2f039a6ee45915c374a32f522aae96adc0998aef2",
+   "formerItem": {
+    "id": "lesson-1530:v11",
+    "word": "顺水推舟",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语用法，考察对人物性格转变的理解。",
+    "contextMeaning": "比喻顺应趋势，借机达成目的。",
+    "sourceSentence": "托邻居们趁势和说和说,两位神仙也就顺水推舟同意他们结婚",
+    "type": "substitution",
+    "question": "将“顺水推舟”换为下列哪个词，最不符合原意？",
+    "options": [
+     "因势利导",
+     "借坡下驴",
+     "顺势而为",
+     "固执己见"
+    ],
+    "answerIndex": 3,
+    "explanation": "“固执己见”与“顺水推舟”意义相反，此处指两人借坡下驴同意婚事。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4119
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

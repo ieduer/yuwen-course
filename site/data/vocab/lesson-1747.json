@@ -11,145 +11,79 @@
    "id": "lesson-1747:v01",
    "word": "结果",
    "annotated": true,
-   "decision": "question",
-   "reason": "古今异义，现代汉语多指结局，文中有“杀死”之意，易误解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "杀死",
    "sourceSentence": "好歹要结果他性命。",
-   "type": "gu-jin",
-   "question": "“好歹要结果他性命”中“结果”的含义与下列哪项相同？",
-   "options": [
-    "经过长期努力，终于有了好的结果。",
-    "他因为多次违纪，被学校严肃处理，最后被开除学籍。",
-    "这件事情的最终结果，还需要相关部门进一步调查。",
-    "他心狠手辣，竟然想把那个人结果了。"
-   ],
-   "answerIndex": 3,
-   "explanation": "文中“结果”意为结束生命，选项3符合此意。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1380
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1747:v01"
   },
   {
    "id": "lesson-1747:v02",
    "word": "不尴尬",
    "annotated": true,
-   "decision": "question",
-   "reason": "词义古今差异极大，现代指难堪，文中指行为不正当",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "鬼鬼祟祟，行为、态度不正常",
    "sourceSentence": "这两个人来得不尴尬。",
-   "type": "contextual-choice",
-   "question": "文中“这两个人来得不尴尬”中“不尴尬”的意思是",
-   "options": [
-    "不觉得难堪",
-    "行为反常，鬼鬼祟祟",
-    "不感到羞耻",
-    "身体不适，行动迟缓"
-   ],
-   "answerIndex": 1,
-   "explanation": "结合语境，两人行踪诡秘，故“不尴尬”指行为反常。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1055
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1747:v02"
   },
   {
    "id": "lesson-1747:v03",
    "word": "将",
    "annotated": false,
-   "decision": "question",
-   "reason": "多义词，在文中高频出现且意义不同，考查语境推断能力",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "拿",
    "sourceSentence": "那个人将出一两银子与李小二道",
-   "type": "usage",
-   "question": "下列句中加点“将”字的用法与“那个人将出一两银子”中的“将”字意义相同的一项是",
-   "options": [
-    "林冲把花枪挑了酒葫芦，将火炭盖了。",
-    "林冲又来对李小二道：‘今日又无事。’",
-    "将近黄昏，天色暗了下来。",
-    "将军领兵出征，势不可挡。"
-   ],
-   "answerIndex": 0,
-   "explanation": "选项0的“将”均为“拿、取”之意，与原句一致。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 706
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1747:v03"
   },
   {
    "id": "lesson-1747:v04",
    "word": "消耗",
    "annotated": true,
-   "decision": "question",
-   "reason": "古今异义，现代指损耗，文中指消息、动静",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "消息",
    "sourceSentence": "街上寻了三五日,不见消耗,林冲也自心下慢了",
-   "type": "gu-jin",
-   "question": "“不见消耗”中“消耗”的含义是",
-   "options": [
-    "损耗，减损",
-    "消费，使用",
-    "消息，动静",
-    "消失，不见"
-   ],
-   "answerIndex": 2,
-   "explanation": "文中指林冲寻找陆虞候等人，却没打听到他们的消息。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2028
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1747:v04"
   },
   {
    "id": "lesson-1747:v05",
    "word": "吃",
    "annotated": false,
-   "decision": "question",
-   "reason": "文言用法，文中作为被动标志，考查对特殊句式的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "被",
    "sourceSentence": "林冲今番直吃我们对付了",
-   "type": "usage",
-   "question": "“林冲今番直吃我们对付了”中的“吃”字用法与下列哪项相同？",
-   "options": [
-    "他吃了一碗饭。",
-    "这回可真吃他害苦了。",
-    "吃不消，还是休息一下吧。",
-    "你要是再吃惊，心跳就太快了。"
-   ],
-   "answerIndex": 1,
-   "explanation": "文中“吃”表示被动，相当于“被”。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3929
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1747:v05"
   },
   {
    "id": "lesson-1747:v06",
    "word": "抬举",
    "annotated": false,
-   "decision": "question",
-   "reason": "词义语境化，指“关照、提拔”，现代汉语多指过分恭维",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "关照，提拔",
    "sourceSentence": "柴大官人面皮,不曾抬举得你",
-   "type": "contextual-choice",
-   "question": "文中“柴大官人面皮，不曾抬举得你”中“抬举”的意思是",
-   "options": [
-    "恭维，吹捧",
-    "举起，抬起",
-    "看重，关照",
-    "教训，惩戒"
-   ],
-   "answerIndex": 2,
-   "explanation": "根据上下文，管营因为柴进的面子，所以要给林冲安排好差事，故为关照之意。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2082
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1747:v06"
   },
   {
    "id": "lesson-1747:v07",
@@ -838,5 +772,225 @@
    "contextMeaning": "爱捉弄人的人。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1747:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1747:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a4fdef08769886614fef2c402713e342796add5a4ed7fcc658d0d06c7d436648",
+   "formerItem": {
+    "id": "lesson-1747:v01",
+    "word": "结果",
+    "annotated": true,
+    "decision": "question",
+    "reason": "古今异义，现代汉语多指结局，文中有“杀死”之意，易误解",
+    "contextMeaning": "杀死",
+    "sourceSentence": "好歹要结果他性命。",
+    "type": "gu-jin",
+    "question": "“好歹要结果他性命”中“结果”的含义与下列哪项相同？",
+    "options": [
+     "经过长期努力，终于有了好的结果。",
+     "他因为多次违纪，被学校严肃处理，最后被开除学籍。",
+     "这件事情的最终结果，还需要相关部门进一步调查。",
+     "他心狠手辣，竟然想把那个人结果了。"
+    ],
+    "answerIndex": 3,
+    "explanation": "文中“结果”意为结束生命，选项3符合此意。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1380
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1747:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1747:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a92c607ca0ebb5cdbec711aafe8a4c01003f04d3959efc2bb79a1649c89accdf",
+   "formerItem": {
+    "id": "lesson-1747:v02",
+    "word": "不尴尬",
+    "annotated": true,
+    "decision": "question",
+    "reason": "词义古今差异极大，现代指难堪，文中指行为不正当",
+    "contextMeaning": "鬼鬼祟祟，行为、态度不正常",
+    "sourceSentence": "这两个人来得不尴尬。",
+    "type": "contextual-choice",
+    "question": "文中“这两个人来得不尴尬”中“不尴尬”的意思是",
+    "options": [
+     "不觉得难堪",
+     "行为反常，鬼鬼祟祟",
+     "不感到羞耻",
+     "身体不适，行动迟缓"
+    ],
+    "answerIndex": 1,
+    "explanation": "结合语境，两人行踪诡秘，故“不尴尬”指行为反常。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1055
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1747:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1747:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "b9623be76ee164abe1fc4caaed81b1895b9546ecac883f7acde2600d7c5edad7",
+   "formerItem": {
+    "id": "lesson-1747:v03",
+    "word": "将",
+    "annotated": false,
+    "decision": "question",
+    "reason": "多义词，在文中高频出现且意义不同，考查语境推断能力",
+    "contextMeaning": "拿",
+    "sourceSentence": "那个人将出一两银子与李小二道",
+    "type": "usage",
+    "question": "下列句中加点“将”字的用法与“那个人将出一两银子”中的“将”字意义相同的一项是",
+    "options": [
+     "林冲把花枪挑了酒葫芦，将火炭盖了。",
+     "林冲又来对李小二道：‘今日又无事。’",
+     "将近黄昏，天色暗了下来。",
+     "将军领兵出征，势不可挡。"
+    ],
+    "answerIndex": 0,
+    "explanation": "选项0的“将”均为“拿、取”之意，与原句一致。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 706
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1747:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1747:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "2308fff09d8946b1e0b81d82094613d76e88e5df0bf7dcd3ffaff1bfaa894d48",
+   "formerItem": {
+    "id": "lesson-1747:v04",
+    "word": "消耗",
+    "annotated": true,
+    "decision": "question",
+    "reason": "古今异义，现代指损耗，文中指消息、动静",
+    "contextMeaning": "消息",
+    "sourceSentence": "街上寻了三五日,不见消耗,林冲也自心下慢了",
+    "type": "gu-jin",
+    "question": "“不见消耗”中“消耗”的含义是",
+    "options": [
+     "损耗，减损",
+     "消费，使用",
+     "消息，动静",
+     "消失，不见"
+    ],
+    "answerIndex": 2,
+    "explanation": "文中指林冲寻找陆虞候等人，却没打听到他们的消息。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2028
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1747:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1747:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "49ed1d69442e015d8cbb8c104b02bc2e18c6d7fcb82e483d4262586df78ab6f5",
+   "formerItem": {
+    "id": "lesson-1747:v05",
+    "word": "吃",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文言用法，文中作为被动标志，考查对特殊句式的理解",
+    "contextMeaning": "被",
+    "sourceSentence": "林冲今番直吃我们对付了",
+    "type": "usage",
+    "question": "“林冲今番直吃我们对付了”中的“吃”字用法与下列哪项相同？",
+    "options": [
+     "他吃了一碗饭。",
+     "这回可真吃他害苦了。",
+     "吃不消，还是休息一下吧。",
+     "你要是再吃惊，心跳就太快了。"
+    ],
+    "answerIndex": 1,
+    "explanation": "文中“吃”表示被动，相当于“被”。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3929
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1747:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1747:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "05f8465b8b156d4936f60ecb8a825f29c3e3a2f5a866c456ec29c5adbb84e5c4",
+   "formerItem": {
+    "id": "lesson-1747:v06",
+    "word": "抬举",
+    "annotated": false,
+    "decision": "question",
+    "reason": "词义语境化，指“关照、提拔”，现代汉语多指过分恭维",
+    "contextMeaning": "关照，提拔",
+    "sourceSentence": "柴大官人面皮,不曾抬举得你",
+    "type": "contextual-choice",
+    "question": "文中“柴大官人面皮，不曾抬举得你”中“抬举”的意思是",
+    "options": [
+     "恭维，吹捧",
+     "举起，抬起",
+     "看重，关照",
+     "教训，惩戒"
+    ],
+    "answerIndex": 2,
+    "explanation": "根据上下文，管营因为柴进的面子，所以要给林冲安排好差事，故为关照之意。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2082
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

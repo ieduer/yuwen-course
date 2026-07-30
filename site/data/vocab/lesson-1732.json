@@ -35,193 +35,105 @@
    "id": "lesson-1732:v03",
    "word": "门第",
    "annotated": false,
-   "decision": "question",
-   "reason": "反映封建等级观念的关键语词，影响对周朴园抛弃侍萍动机的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "家族的社会地位",
    "sourceSentence": "后来周家为了给周朴园娶有钱有门第的小姐,大年三十把侍萍赶出家门",
-   "type": "interpretation",
-   "question": "文中「娶有钱有门第的小姐」中的「门第」是指",
-   "options": [
-    "门槛的高度",
-    "家族的社会地位",
-    "房子的建筑规格",
-    "亲属的户籍背景"
-   ],
-   "answerIndex": 1,
-   "explanation": "「门第」指封建社会中家族的社会地位、声望，是周朴园这类资产阶级大家长选择婚姻对象的重要考量。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 232
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1732:v03"
   },
   {
    "id": "lesson-1732:v04",
    "word": "规矩",
    "annotated": false,
-   "decision": "question",
-   "reason": "语境义与现代义有细微差别，涉及对侍萍自我评价以及周朴园封建道德观的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指女性的品行端正、守妇道",
    "sourceSentence": "梅家的一个年轻小姐,很贤惠,也很规矩",
-   "type": "contextual-choice",
-   "question": "文中周朴园称梅家小姐「很规矩」，这里的「规矩」在语境中意为",
-   "options": [
-    "遵守礼法，品行端正",
-    "做事有条理，不混乱",
-    "服从长辈的安排",
-    "工作勤奋，任劳任怨"
-   ],
-   "answerIndex": 0,
-   "explanation": "在周朴园的封建视角下，用「规矩」来评价女性，强调的是其是否符合封建道德规范中的贞洁与顺从。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1695
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1732:v04"
   },
   {
    "id": "lesson-1732:v05",
    "word": "本分",
    "annotated": false,
-   "decision": "question",
-   "reason": "体现封建礼教对女性的束缚，是理解侍萍悲剧命运的关键词。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "守妇道，安分守己",
    "sourceSentence": "她是个下等人,不很守本分的",
-   "type": "contextual-choice",
-   "question": "侍萍说自己「不很守本分」，结合语境，其含义是",
-   "options": [
-    "不恪守职业道德",
-    "没有安分守己，违背了封建道德规范",
-    "不擅长做家务",
-    "没有尽到做母亲的责任"
-   ],
-   "answerIndex": 1,
-   "explanation": "侍萍以卑微的口吻自嘲，实际上反映了当时社会对未婚先孕女性的歧视与苛责。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1915
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1732:v05"
   },
   {
    "id": "lesson-1732:v06",
    "word": "不清白",
    "annotated": false,
-   "decision": "question",
-   "reason": "委婉语，反映了人物在谈及性道德时的态度及时代背景。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指男女关系不正当",
    "sourceSentence": "听说她跟那时周公馆的少爷有点不清白,生了两个儿子",
-   "type": "interpretation",
-   "question": "「听说她跟那时周公馆的少爷有点不清白」，句中「不清白」是指",
-   "options": [
-    "身份低微，不被家族承认",
-    "男女关系不正当",
-    "行为不检点，偷窃财物",
-    "性格冲动，容易惹事"
-   ],
-   "answerIndex": 1,
-   "explanation": "「不清白」是当时社会对非婚性关系的一种含蓄且带有贬义的说法。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1929
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1732:v06"
   },
   {
    "id": "lesson-1732:v07",
    "word": "骨肉",
    "annotated": false,
-   "decision": "question",
-   "reason": "高频考点，古今词义演变，此处强调血缘亲情与阶级对抗的冲突。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "亲生子女",
    "sourceSentence": "这么说,我自己的骨肉在矿上鼓动罢工,反对我",
-   "type": "gu-jin",
-   "question": "下列关于「骨肉」一词的用法，理解正确的是",
-   "options": [
-    "古代指父母兄弟子女等亲人，现代多指身体的组织",
-    "古代指身体组织，现代多指亲人",
-    "古代与现代均指人的身体部位",
-    "古代与现代均指人的亲生子女"
-   ],
-   "answerIndex": 0,
-   "explanation": "「骨肉」古义多指亲属，今义多指身体组织，此处周朴园用「骨肉」强调鲁大海是其亲生儿子。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4250
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1732:v07"
   },
   {
    "id": "lesson-1732:v08",
    "word": "意气",
    "annotated": false,
-   "decision": "question",
-   "reason": "影响对人物性格（鲁大海的冲动与周朴园的城府）的对比理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "主观的情绪和冲动",
    "sourceSentence": "你这么只凭意气是不行的。",
-   "type": "interpretation",
-   "question": "周朴园对鲁大海说「你这么只凭意气是不行的」，这里的「意气」含义是",
-   "options": [
-    "志向与抱负",
-    "情谊与交情",
-    "主观的情绪和冲动",
-    "公正的立场"
-   ],
-   "answerIndex": 2,
-   "explanation": "周朴园认为鲁大海的抗争仅凭一腔热血（意气），缺乏冷静的策略，反映了周朴园狡诈的商人性格。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 5781
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1732:v08"
   },
   {
    "id": "lesson-1732:v09",
    "word": "离间",
    "annotated": false,
-   "decision": "question",
-   "reason": "重要的动词，揭示了周朴园处理劳资冲突的阴谋手段。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "搬弄是非，使人疏远",
    "sourceSentence": "报来离间我们的。(笑)哼,你们这种卑鄙无赖的行为",
-   "type": "substitution",
-   "question": "文中「报来离间我们的」中的「离间」若替换为下列词语，最恰当的是",
-   "options": [
-    "分化",
-    "挑拨",
-    "隔绝",
-    "疏远"
-   ],
-   "answerIndex": 1,
-   "explanation": "「离间」指用手段使人不和，此处指周朴园通过假电报破坏工人代表之间的团结，用「挑拨」最为贴切。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 6224
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1732:v09"
   },
   {
    "id": "lesson-1732:v10",
    "word": "昧心",
    "annotated": false,
-   "decision": "question",
-   "reason": "具有强烈的道德评判色彩，是理解鲁大海对周朴园仇恨的核心词。",
+   "decision": "excluded",
+   "reason": "经人工复核移除：現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
    "contextMeaning": "违背良心",
    "sourceSentence": "你发的是绝子绝孙的昧心财",
-   "type": "interpretation",
-   "question": "鲁大海骂周朴园发的财是「昧心财」，这里的「昧心」是指",
-   "options": [
-    "不择手段",
-    "违背良心",
-    "贪得无厌",
-    "心狠手辣"
-   ],
-   "answerIndex": 1,
-   "explanation": "「昧心」意为隐瞒自己的良心，指做事不顾良知，此处指周朴园为了敛财不顾工人性命。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 6929
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260730-independent-quality-v1:lesson-1732:v10"
   },
   {
    "id": "lesson-1732:v11",
@@ -232,5 +144,296 @@
    "contextMeaning": "涔（cén）涔 形容汗水不断地流下。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1732:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1732:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "7e217c0660640b4c49514abfc81d7af04f3723a7a01fdaa80d7fa481568eb5c6",
+   "formerItem": {
+    "id": "lesson-1732:v03",
+    "word": "门第",
+    "annotated": false,
+    "decision": "question",
+    "reason": "反映封建等级观念的关键语词，影响对周朴园抛弃侍萍动机的理解。",
+    "contextMeaning": "家族的社会地位",
+    "sourceSentence": "后来周家为了给周朴园娶有钱有门第的小姐,大年三十把侍萍赶出家门",
+    "type": "interpretation",
+    "question": "文中「娶有钱有门第的小姐」中的「门第」是指",
+    "options": [
+     "门槛的高度",
+     "家族的社会地位",
+     "房子的建筑规格",
+     "亲属的户籍背景"
+    ],
+    "answerIndex": 1,
+    "explanation": "「门第」指封建社会中家族的社会地位、声望，是周朴园这类资产阶级大家长选择婚姻对象的重要考量。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 232
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1732:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1732:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "b9e92db3e365ac8e7c6c1ae3454ac1b4eaa41dfd6ba87e26986236d950f9d4d6",
+   "formerItem": {
+    "id": "lesson-1732:v04",
+    "word": "规矩",
+    "annotated": false,
+    "decision": "question",
+    "reason": "语境义与现代义有细微差别，涉及对侍萍自我评价以及周朴园封建道德观的理解。",
+    "contextMeaning": "指女性的品行端正、守妇道",
+    "sourceSentence": "梅家的一个年轻小姐,很贤惠,也很规矩",
+    "type": "contextual-choice",
+    "question": "文中周朴园称梅家小姐「很规矩」，这里的「规矩」在语境中意为",
+    "options": [
+     "遵守礼法，品行端正",
+     "做事有条理，不混乱",
+     "服从长辈的安排",
+     "工作勤奋，任劳任怨"
+    ],
+    "answerIndex": 0,
+    "explanation": "在周朴园的封建视角下，用「规矩」来评价女性，强调的是其是否符合封建道德规范中的贞洁与顺从。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1695
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1732:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1732:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "28a3f90452f1c445994aff5c540339c57eccee9f8928eda18496e0435dd7d0cd",
+   "formerItem": {
+    "id": "lesson-1732:v05",
+    "word": "本分",
+    "annotated": false,
+    "decision": "question",
+    "reason": "体现封建礼教对女性的束缚，是理解侍萍悲剧命运的关键词。",
+    "contextMeaning": "守妇道，安分守己",
+    "sourceSentence": "她是个下等人,不很守本分的",
+    "type": "contextual-choice",
+    "question": "侍萍说自己「不很守本分」，结合语境，其含义是",
+    "options": [
+     "不恪守职业道德",
+     "没有安分守己，违背了封建道德规范",
+     "不擅长做家务",
+     "没有尽到做母亲的责任"
+    ],
+    "answerIndex": 1,
+    "explanation": "侍萍以卑微的口吻自嘲，实际上反映了当时社会对未婚先孕女性的歧视与苛责。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1915
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1732:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1732:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "01319afa3c10e7b8133634db126c40b2845a4c506eddd33d134ff46cb18f7bf1",
+   "formerItem": {
+    "id": "lesson-1732:v06",
+    "word": "不清白",
+    "annotated": false,
+    "decision": "question",
+    "reason": "委婉语，反映了人物在谈及性道德时的态度及时代背景。",
+    "contextMeaning": "指男女关系不正当",
+    "sourceSentence": "听说她跟那时周公馆的少爷有点不清白,生了两个儿子",
+    "type": "interpretation",
+    "question": "「听说她跟那时周公馆的少爷有点不清白」，句中「不清白」是指",
+    "options": [
+     "身份低微，不被家族承认",
+     "男女关系不正当",
+     "行为不检点，偷窃财物",
+     "性格冲动，容易惹事"
+    ],
+    "answerIndex": 1,
+    "explanation": "「不清白」是当时社会对非婚性关系的一种含蓄且带有贬义的说法。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1929
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1732:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1732:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "281558d21394ca0650171a1ae4e9f21258497e3c00a4549d0f803e46635f1ad9",
+   "formerItem": {
+    "id": "lesson-1732:v07",
+    "word": "骨肉",
+    "annotated": false,
+    "decision": "question",
+    "reason": "高频考点，古今词义演变，此处强调血缘亲情与阶级对抗的冲突。",
+    "contextMeaning": "亲生子女",
+    "sourceSentence": "这么说,我自己的骨肉在矿上鼓动罢工,反对我",
+    "type": "gu-jin",
+    "question": "下列关于「骨肉」一词的用法，理解正确的是",
+    "options": [
+     "古代指父母兄弟子女等亲人，现代多指身体的组织",
+     "古代指身体组织，现代多指亲人",
+     "古代与现代均指人的身体部位",
+     "古代与现代均指人的亲生子女"
+    ],
+    "answerIndex": 0,
+    "explanation": "「骨肉」古义多指亲属，今义多指身体组织，此处周朴园用「骨肉」强调鲁大海是其亲生儿子。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4250
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1732:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1732:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "ac3b419abd7f6b6968e98a11c3a2612ab0be298865ff203b1d191f962b141c82",
+   "formerItem": {
+    "id": "lesson-1732:v08",
+    "word": "意气",
+    "annotated": false,
+    "decision": "question",
+    "reason": "影响对人物性格（鲁大海的冲动与周朴园的城府）的对比理解。",
+    "contextMeaning": "主观的情绪和冲动",
+    "sourceSentence": "你这么只凭意气是不行的。",
+    "type": "interpretation",
+    "question": "周朴园对鲁大海说「你这么只凭意气是不行的」，这里的「意气」含义是",
+    "options": [
+     "志向与抱负",
+     "情谊与交情",
+     "主观的情绪和冲动",
+     "公正的立场"
+    ],
+    "answerIndex": 2,
+    "explanation": "周朴园认为鲁大海的抗争仅凭一腔热血（意气），缺乏冷静的策略，反映了周朴园狡诈的商人性格。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 5781
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1732:v09",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1732:v09",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "7909ae2be5a7ccc1965e9fbfdcde355f1d409c31eba99746dedc2d3a4e42d3d5",
+   "formerItem": {
+    "id": "lesson-1732:v09",
+    "word": "离间",
+    "annotated": false,
+    "decision": "question",
+    "reason": "重要的动词，揭示了周朴园处理劳资冲突的阴谋手段。",
+    "contextMeaning": "搬弄是非，使人疏远",
+    "sourceSentence": "报来离间我们的。(笑)哼,你们这种卑鄙无赖的行为",
+    "type": "substitution",
+    "question": "文中「报来离间我们的」中的「离间」若替换为下列词语，最恰当的是",
+    "options": [
+     "分化",
+     "挑拨",
+     "隔绝",
+     "疏远"
+    ],
+    "answerIndex": 1,
+    "explanation": "「离间」指用手段使人不和，此处指周朴园通过假电报破坏工人代表之间的团结，用「挑拨」最为贴切。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 6224
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1732:v10",
+   "reviewId": "yw-vocab-review-20260730-independent-quality-v1",
+   "reviewedAt": "2026-07-30T00:59:29.000Z",
+   "itemId": "lesson-1732:v10",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
+   "sourceItemSha256": "c8ffbdc1075d402edeaef50a5c2dab5c565d003cc530fe672f5dda7da9784815",
+   "formerItem": {
+    "id": "lesson-1732:v10",
+    "word": "昧心",
+    "annotated": false,
+    "decision": "question",
+    "reason": "具有强烈的道德评判色彩，是理解鲁大海对周朴园仇恨的核心词。",
+    "contextMeaning": "违背良心",
+    "sourceSentence": "你发的是绝子绝孙的昧心财",
+    "type": "interpretation",
+    "question": "鲁大海骂周朴园发的财是「昧心财」，这里的「昧心」是指",
+    "options": [
+     "不择手段",
+     "违背良心",
+     "贪得无厌",
+     "心狠手辣"
+    ],
+    "answerIndex": 1,
+    "explanation": "「昧心」意为隐瞒自己的良心，指做事不顾良知，此处指周朴园为了敛财不顾工人性命。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 6929
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-review-20260730-independent-quality-v1",
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

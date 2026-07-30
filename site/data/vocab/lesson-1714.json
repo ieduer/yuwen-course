@@ -11,193 +11,105 @@
    "id": "lesson-1714:v01",
    "word": "修养",
    "annotated": false,
-   "decision": "question",
-   "reason": "文章的核心概念，且在文中具有特定含义，区别于日常理解的品行，涉及对自我完善的追求。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "精神和心灵的完善与追求",
    "sourceSentence": "真正的修养不追求任何具体目的,一如所有为了自我完善而作的努力,本身便有意义。",
-   "type": "interpretation",
-   "question": "根据文意，黑塞所言的“真正的修养”指的是什么？",
-   "options": [
-    "对具体知识和本领的积累",
-    "一种向着特定目标艰难跋涉的过程",
-    "对精神和心灵完善的追求",
-    "通过阅读获得的社会地位提升"
-   ],
-   "answerIndex": 2,
-   "explanation": "文中明确指出“对于教养也即精神和心灵完善的追求”，而非狭隘目标。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 13
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1714:v01"
   },
   {
    "id": "lesson-1714:v02",
    "word": "共振",
    "annotated": false,
-   "decision": "question",
-   "reason": "物理术语的引申义，考察学生对文中修辞意象的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指个人的生命节奏与宇宙的永恒规律达成契合与呼应",
    "sourceSentence": "随处都可到达终点却又从不停歇,永远都在半道上,与宇宙共振,于永恒中生存。",
-   "type": "contextual-choice",
-   "question": "文中“与宇宙共振”的“共振”意为",
-   "options": [
-    "物理学上的频率一致现象",
-    "与宇宙万物共同震动",
-    "个人的精神与宇宙的规律达成契合",
-    "通过修养获得超自然的力量"
-   ],
-   "answerIndex": 2,
-   "explanation": "此处为隐喻用法，强调修养使个体融入永恒的生命体验中。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 151
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1714:v02"
   },
   {
    "id": "lesson-1714:v03",
    "word": "僵死",
    "annotated": false,
-   "decision": "question",
-   "reason": "对比词，考察学生对“知识”与“意识”区别的把握。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "缺乏生命力、机械、教条的",
    "sourceSentence": "——不是因为获得了僵死的知识,而是有了鲜活的意识和理解。",
-   "type": "substitution",
-   "question": "文中“僵死的知识”中“僵死”一词，若替换为下列词语，最能准确表达原意的是",
-   "options": [
-    "陈旧",
-    "凝固",
-    "死板",
-    "虚假"
-   ],
-   "answerIndex": 1,
-   "explanation": "“僵死”与“鲜活”对举，强调知识若无意识注入则如同凝固一般，失去活性。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 433
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1714:v03"
   },
   {
    "id": "lesson-1714:v04",
    "word": "戕害",
    "annotated": false,
-   "decision": "question",
-   "reason": "高频词汇，考察学生对词语褒贬色彩及适用范围的辨析。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "摧残、伤害",
    "sourceSentence": "没有爱的阅读,没有敬重的知识,没有心的教养,是戕害性灵的最严重的罪过之一。",
-   "type": "discrimination",
-   "question": "下列词语中，与“戕害”一词语义最接近的是",
-   "options": [
-    "损害",
-    "摧残",
-    "妨碍",
-    "扭曲"
-   ],
-   "answerIndex": 1,
-   "explanation": "“戕害”指严重的伤害，侧重于对生命力、精神的破坏，与“摧残”语意最重。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1344
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1714:v04"
   },
   {
    "id": "lesson-1714:v05",
    "word": "卷帙",
    "annotated": false,
-   "decision": "question",
-   "reason": "书面语词，属于文学常识性词汇，直接影响对藏书室描述的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "书籍的册数或书籍本身",
    "sourceSentence": "在它数以千计的卷帙里面,绝大多数我一点不感兴趣,也永远不会再感兴趣。",
-   "type": "interpretation",
-   "question": "文中“数以千计的卷帙”中“卷帙”的意思是",
-   "options": [
-    "书架",
-    "书籍",
-    "房间",
-    "章节"
-   ],
-   "answerIndex": 1,
-   "explanation": "“卷帙”原指书卷的卷数，后常代指书籍。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1667
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1714:v05"
   },
   {
    "id": "lesson-1714:v06",
    "word": "一劳永逸",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语误用考察，文中作者表达的是彻底的、终身的发现，与常见义有细微差别。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "一次性解决问题后，以后不必再费心（文中指彻底的、终身的、不再反复的发现）",
    "sourceSentence": "这次才是认认真真的发现,一劳永逸的发现。",
-   "type": "gu-jin",
-   "question": "文中“一劳永逸的发现”中“一劳永逸”的含义是",
-   "options": [
-    "辛苦一次，永久安逸",
-    "指彻底解决，后续不再需要重新寻找或怀疑",
-    "指读书的成果可以一辈子享用",
-    "指通过一次努力就能永远获得知识"
-   ],
-   "answerIndex": 1,
-   "explanation": "文中指这次的发现非常深刻且彻底，使得作者以后不用再反复摸索，表达一种确定性。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2208
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1714:v06"
   },
   {
    "id": "lesson-1714:v07",
    "word": "牵强附会",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语用法，考察作者在文中对该词的自嘲与语境应用。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "把不相关的事物硬拉在一起做解释",
    "sourceSentence": "也许是牵强附会吧,但这也说明独拥书城自吟啸固是一乐,上图书馆也有其奇趣。",
-   "type": "contextual-choice",
-   "question": "作者在文中说“也许是牵强附会吧”，是指",
-   "options": [
-    "引用莎士比亚的词句来解释自己的图书馆体验",
-    "认为图书馆的建筑华美与自己的阅读体验无关",
-    "将马克思去图书馆的经历与自己的经历强行关联",
-    "认为自己对图书馆的赞美过度夸张了"
-   ],
-   "answerIndex": 0,
-   "explanation": "作者引用莎士比亚的台词来感叹图书馆的宏大，随后自谦这可能有些生搬硬套。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4688
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1714:v07"
   },
   {
    "id": "lesson-1714:v08",
    "word": "吟啸",
    "annotated": false,
-   "decision": "question",
-   "reason": "文言词汇，考查学生对古典雅词在现代散文中的审美理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "吟诵与长啸，此处指读书人的怡然自得",
    "sourceSentence": "但这也说明独拥书城自吟啸固是一乐,上图书馆也有其奇趣。",
-   "type": "interpretation",
-   "question": "文中“独拥书城自吟啸”所传达的意境是",
-   "options": [
-    "在图书馆里大声朗读",
-    "独自一人在书的海洋中获得精神上的满足与愉悦",
-    "一个人在书店里发出的叹息",
-    "读书时因为看不懂而发出的苦笑"
-   ],
-   "answerIndex": 1,
-   "explanation": "“吟啸”在此处表现的是读书人沉浸在书中的那种从容、洒脱与自得。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4697
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1714:v08"
   },
   {
    "id": "lesson-1714:v09",
@@ -253,5 +165,295 @@
    "contextMeaning": "即英国作家斯蒂文森（1850—1894）的小说《金银岛》。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1714:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1714:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "002552d4e5d0aa17c761c260ce1192510f79925873d802e02f6902a4b4aad498",
+   "formerItem": {
+    "id": "lesson-1714:v01",
+    "word": "修养",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文章的核心概念，且在文中具有特定含义，区别于日常理解的品行，涉及对自我完善的追求。",
+    "contextMeaning": "精神和心灵的完善与追求",
+    "sourceSentence": "真正的修养不追求任何具体目的,一如所有为了自我完善而作的努力,本身便有意义。",
+    "type": "interpretation",
+    "question": "根据文意，黑塞所言的“真正的修养”指的是什么？",
+    "options": [
+     "对具体知识和本领的积累",
+     "一种向着特定目标艰难跋涉的过程",
+     "对精神和心灵完善的追求",
+     "通过阅读获得的社会地位提升"
+    ],
+    "answerIndex": 2,
+    "explanation": "文中明确指出“对于教养也即精神和心灵完善的追求”，而非狭隘目标。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 13
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1714:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1714:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "c25de0e6f04fe99bca3a59fca1bee980c6d67c7703dc9dc172922aad26cb667b",
+   "formerItem": {
+    "id": "lesson-1714:v02",
+    "word": "共振",
+    "annotated": false,
+    "decision": "question",
+    "reason": "物理术语的引申义，考察学生对文中修辞意象的理解。",
+    "contextMeaning": "指个人的生命节奏与宇宙的永恒规律达成契合与呼应",
+    "sourceSentence": "随处都可到达终点却又从不停歇,永远都在半道上,与宇宙共振,于永恒中生存。",
+    "type": "contextual-choice",
+    "question": "文中“与宇宙共振”的“共振”意为",
+    "options": [
+     "物理学上的频率一致现象",
+     "与宇宙万物共同震动",
+     "个人的精神与宇宙的规律达成契合",
+     "通过修养获得超自然的力量"
+    ],
+    "answerIndex": 2,
+    "explanation": "此处为隐喻用法，强调修养使个体融入永恒的生命体验中。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 151
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1714:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1714:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "ed685306957cd87b9776c82b4bb053c99a239ab46d844a0d13e4af519aab2622",
+   "formerItem": {
+    "id": "lesson-1714:v03",
+    "word": "僵死",
+    "annotated": false,
+    "decision": "question",
+    "reason": "对比词，考察学生对“知识”与“意识”区别的把握。",
+    "contextMeaning": "缺乏生命力、机械、教条的",
+    "sourceSentence": "——不是因为获得了僵死的知识,而是有了鲜活的意识和理解。",
+    "type": "substitution",
+    "question": "文中“僵死的知识”中“僵死”一词，若替换为下列词语，最能准确表达原意的是",
+    "options": [
+     "陈旧",
+     "凝固",
+     "死板",
+     "虚假"
+    ],
+    "answerIndex": 1,
+    "explanation": "“僵死”与“鲜活”对举，强调知识若无意识注入则如同凝固一般，失去活性。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 433
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1714:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1714:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "46b1848042759a585ad627bea910249ce3d4af83daec8c6d3a1ca00e6c48099a",
+   "formerItem": {
+    "id": "lesson-1714:v04",
+    "word": "戕害",
+    "annotated": false,
+    "decision": "question",
+    "reason": "高频词汇，考察学生对词语褒贬色彩及适用范围的辨析。",
+    "contextMeaning": "摧残、伤害",
+    "sourceSentence": "没有爱的阅读,没有敬重的知识,没有心的教养,是戕害性灵的最严重的罪过之一。",
+    "type": "discrimination",
+    "question": "下列词语中，与“戕害”一词语义最接近的是",
+    "options": [
+     "损害",
+     "摧残",
+     "妨碍",
+     "扭曲"
+    ],
+    "answerIndex": 1,
+    "explanation": "“戕害”指严重的伤害，侧重于对生命力、精神的破坏，与“摧残”语意最重。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1344
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1714:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1714:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "616d5fc368d8d45ee9eddd77517b3df51295af2819aa3f66bf5e54db9b1ba1b5",
+   "formerItem": {
+    "id": "lesson-1714:v05",
+    "word": "卷帙",
+    "annotated": false,
+    "decision": "question",
+    "reason": "书面语词，属于文学常识性词汇，直接影响对藏书室描述的理解。",
+    "contextMeaning": "书籍的册数或书籍本身",
+    "sourceSentence": "在它数以千计的卷帙里面,绝大多数我一点不感兴趣,也永远不会再感兴趣。",
+    "type": "interpretation",
+    "question": "文中“数以千计的卷帙”中“卷帙”的意思是",
+    "options": [
+     "书架",
+     "书籍",
+     "房间",
+     "章节"
+    ],
+    "answerIndex": 1,
+    "explanation": "“卷帙”原指书卷的卷数，后常代指书籍。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1667
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1714:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1714:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "9f93a158f2de3a075eb3864e34b855fc7f323795a090d729b34a45b0d7ae5488",
+   "formerItem": {
+    "id": "lesson-1714:v06",
+    "word": "一劳永逸",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语误用考察，文中作者表达的是彻底的、终身的发现，与常见义有细微差别。",
+    "contextMeaning": "一次性解决问题后，以后不必再费心（文中指彻底的、终身的、不再反复的发现）",
+    "sourceSentence": "这次才是认认真真的发现,一劳永逸的发现。",
+    "type": "gu-jin",
+    "question": "文中“一劳永逸的发现”中“一劳永逸”的含义是",
+    "options": [
+     "辛苦一次，永久安逸",
+     "指彻底解决，后续不再需要重新寻找或怀疑",
+     "指读书的成果可以一辈子享用",
+     "指通过一次努力就能永远获得知识"
+    ],
+    "answerIndex": 1,
+    "explanation": "文中指这次的发现非常深刻且彻底，使得作者以后不用再反复摸索，表达一种确定性。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2208
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1714:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1714:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "1bdfa9eff3f062c350542eb2360ac76ccb19072f998c79e4fc1fcda56f51e922",
+   "formerItem": {
+    "id": "lesson-1714:v07",
+    "word": "牵强附会",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语用法，考察作者在文中对该词的自嘲与语境应用。",
+    "contextMeaning": "把不相关的事物硬拉在一起做解释",
+    "sourceSentence": "也许是牵强附会吧,但这也说明独拥书城自吟啸固是一乐,上图书馆也有其奇趣。",
+    "type": "contextual-choice",
+    "question": "作者在文中说“也许是牵强附会吧”，是指",
+    "options": [
+     "引用莎士比亚的词句来解释自己的图书馆体验",
+     "认为图书馆的建筑华美与自己的阅读体验无关",
+     "将马克思去图书馆的经历与自己的经历强行关联",
+     "认为自己对图书馆的赞美过度夸张了"
+    ],
+    "answerIndex": 0,
+    "explanation": "作者引用莎士比亚的台词来感叹图书馆的宏大，随后自谦这可能有些生搬硬套。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4688
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1714:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1714:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "5e15a3b368b421f24b49c1c2f67c3ac185a9ee5b6c166c56ab67d013b2bcce37",
+   "formerItem": {
+    "id": "lesson-1714:v08",
+    "word": "吟啸",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文言词汇，考查学生对古典雅词在现代散文中的审美理解。",
+    "contextMeaning": "吟诵与长啸，此处指读书人的怡然自得",
+    "sourceSentence": "但这也说明独拥书城自吟啸固是一乐,上图书馆也有其奇趣。",
+    "type": "interpretation",
+    "question": "文中“独拥书城自吟啸”所传达的意境是",
+    "options": [
+     "在图书馆里大声朗读",
+     "独自一人在书的海洋中获得精神上的满足与愉悦",
+     "一个人在书店里发出的叹息",
+     "读书时因为看不懂而发出的苦笑"
+    ],
+    "answerIndex": 1,
+    "explanation": "“吟啸”在此处表现的是读书人沉浸在书中的那种从容、洒脱与自得。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4697
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

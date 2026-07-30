@@ -11,193 +11,105 @@
    "id": "lesson-1731:v01",
    "word": "生",
    "annotated": false,
-   "decision": "question",
-   "reason": "古今异义，在此处作副词，表示程度深，极易误解为动词“产生”。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "深深地",
    "sourceSentence": "怎不将天地也生埋怨",
-   "type": "contextual-choice",
-   "question": "「怎不将天地也生埋怨」中「生」字的含义是",
-   "options": [
-    "产生",
-    "生长",
-    "深深地",
-    "生活"
-   ],
-   "answerIndex": 2,
-   "explanation": "此处「生」为副词，相当于「甚」、「深」，修饰「埋怨」。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 159
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1731:v01"
   },
   {
    "id": "lesson-1731:v02",
    "word": "糊突",
    "annotated": false,
-   "decision": "question",
-   "reason": "词义随语境变化，是理解窦娥指责天地不公的关键。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "混淆",
    "sourceSentence": "可怎生糊突了盗跖、颜渊",
-   "type": "contextual-choice",
-   "question": "「可怎生糊突了盗跖、颜渊」中「糊突」的意思是",
-   "options": [
-    "模糊",
-    "混淆",
-    "糊涂",
-    "忽略"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处指天地未能分辨好人与坏人，故为「混淆」之意。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 203
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1731:v02"
   },
   {
    "id": "lesson-1731:v03",
    "word": "行",
    "annotated": false,
-   "decision": "question",
-   "reason": "元杂剧高频词，表示处所，学生易误解为动词或名词。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "那边",
    "sourceSentence": "我窦娥向哥哥行有句言",
-   "type": "contextual-choice",
-   "question": "「我窦娥向哥哥行有句言」中「行」的用法是",
-   "options": [
-    "行走",
-    "行列",
-    "那边",
-    "能力"
-   ],
-   "answerIndex": 2,
-   "explanation": "在元杂剧口语中，「行」表示处所，相当于「这边」或「那边」。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 341
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1731:v03"
   },
   {
    "id": "lesson-1731:v04",
    "word": "每",
    "annotated": true,
-   "decision": "question",
-   "reason": "元杂剧常用虚词，表复数，是阅读元代文学作品的必备知识。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "们",
    "sourceSentence": "这都是官吏每无心正法",
-   "type": "gu-jin",
-   "question": "下列句中「每」字的用法与「这都是官吏每无心正法」相同的一项是",
-   "options": [
-    "每人都要遵守纪律",
-    "每况愈下",
-    "老师们都在忙碌",
-    "百姓每皆受其苦"
-   ],
-   "answerIndex": 3,
-   "explanation": "元曲中「每」常作复数标记，相当于「们」。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1656
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1731:v04"
   },
   {
    "id": "lesson-1731:v05",
    "word": "罚",
    "annotated": true,
-   "decision": "question",
-   "reason": "通假字/特殊用法，教材注释指出其为“发”的意思，属于高频考点。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "发",
    "sourceSentence": "不是我窦娥罚下这等无头愿",
-   "type": "substitution",
-   "question": "「不是我窦娥罚下这等无头愿」中「罚」字若替换为现代汉语，最恰当的是",
-   "options": [
-    "惩罚",
-    "发",
-    "强迫",
-    "决定"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处「罚」通「发」，意为发出、许下。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1257
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1731:v05"
   },
   {
    "id": "lesson-1731:v06",
    "word": "湛湛",
    "annotated": false,
-   "decision": "question",
-   "reason": "形容词，描写意象，影响对窦娥心理和环境理解的关键。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "清明澄澈",
    "sourceSentence": "也不见得湛湛青天",
-   "type": "contextual-choice",
-   "question": "「也不见得湛湛青天」中「湛湛」形容的是",
-   "options": [
-    "深蓝色的天空",
-    "阴暗的天空",
-    "清明澄澈的天空",
-    "广阔无边的天空"
-   ],
-   "answerIndex": 2,
-   "explanation": "「湛湛」形容天理昭彰，清明澄澈。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1289
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1731:v06"
   },
   {
    "id": "lesson-1731:v07",
    "word": "题",
    "annotated": true,
-   "decision": "question",
-   "reason": "通假字，教材中注释为“提”，如果不理解会影响句意理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "提",
    "sourceSentence": "三桩儿誓愿明题遍",
-   "type": "contextual-choice",
-   "question": "「三桩儿誓愿明题遍」中的「题」字意思是",
-   "options": [
-    "题目",
-    "写下",
-    "提及",
-    "提"
-   ],
-   "answerIndex": 3,
-   "explanation": "「题」通「提」，指提及、说出。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1735
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1731:v07"
   },
   {
    "id": "lesson-1731:v08",
    "word": "则是",
    "annotated": true,
-   "decision": "question",
-   "reason": "元曲常用词，易误解为现代汉语的“就是”，实为表祈使或限定语气。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "只当是",
    "sourceSentence": "则是看你死的孩儿面上",
-   "type": "contextual-choice",
-   "question": "「则是看你死的孩儿面上」中「则是」的意思是",
-   "options": [
-    "就是",
-    "只当是",
-    "只有",
-    "总是"
-   ],
-   "answerIndex": 1,
-   "explanation": "在元曲中，「则是」常用于祈使句，有「只求」、「只当是」的意思。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 864
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1731:v08"
   },
   {
    "id": "lesson-1731:v09",
@@ -227,49 +139,27 @@
    "id": "lesson-1731:v11",
    "word": "没来由",
    "annotated": false,
-   "decision": "question",
-   "reason": "元杂剧高频词，意为“无缘无故”，对于理解窦娥的冤屈情绪至关重要。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "无缘无故",
    "sourceSentence": "没来由犯王法",
-   "type": "contextual-choice",
-   "question": "「没来由犯王法」中「没来由」的意思是",
-   "options": [
-    "没有原因",
-    "无缘无故",
-    "没有理由",
-    "没头没脑"
-   ],
-   "answerIndex": 1,
-   "explanation": "「没来由」是元曲常用语，表示无缘无故、莫名其妙。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 126
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1731:v11"
   },
   {
    "id": "lesson-1731:v12",
    "word": "只合",
    "annotated": false,
-   "decision": "question",
-   "reason": "文言与口语结合词，表示“应该”，在文中是窦娥对天地职能的判断。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "应该",
    "sourceSentence": "天地也!只合把清浊分辨",
-   "type": "contextual-choice",
-   "question": "「只合把清浊分辨」中「只合」的意思是",
-   "options": [
-    "只能",
-    "只要求",
-    "应该",
-    "只管"
-   ],
-   "answerIndex": 2,
-   "explanation": "「只合」意为「应该」，体现了窦娥对天地的道德期待。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 191
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1731:v12"
   },
   {
    "id": "lesson-1731:v13",
@@ -712,5 +602,365 @@
    "contextMeaning": "指后台。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1731:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1731:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "1bb7543e657226e6b63009c3677bc60bc61755ecb8bd617ab7de2f9791601451",
+   "formerItem": {
+    "id": "lesson-1731:v01",
+    "word": "生",
+    "annotated": false,
+    "decision": "question",
+    "reason": "古今异义，在此处作副词，表示程度深，极易误解为动词“产生”。",
+    "contextMeaning": "深深地",
+    "sourceSentence": "怎不将天地也生埋怨",
+    "type": "contextual-choice",
+    "question": "「怎不将天地也生埋怨」中「生」字的含义是",
+    "options": [
+     "产生",
+     "生长",
+     "深深地",
+     "生活"
+    ],
+    "answerIndex": 2,
+    "explanation": "此处「生」为副词，相当于「甚」、「深」，修饰「埋怨」。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 159
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1731:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1731:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "2d33ba2662510e8d6c3ab273f7d9c755602824c99657b4844ba7c5761e616a5c",
+   "formerItem": {
+    "id": "lesson-1731:v02",
+    "word": "糊突",
+    "annotated": false,
+    "decision": "question",
+    "reason": "词义随语境变化，是理解窦娥指责天地不公的关键。",
+    "contextMeaning": "混淆",
+    "sourceSentence": "可怎生糊突了盗跖、颜渊",
+    "type": "contextual-choice",
+    "question": "「可怎生糊突了盗跖、颜渊」中「糊突」的意思是",
+    "options": [
+     "模糊",
+     "混淆",
+     "糊涂",
+     "忽略"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处指天地未能分辨好人与坏人，故为「混淆」之意。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 203
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1731:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1731:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "106ef4a3f09c9e059979f736012c0e02984dcea999ce05c243db54041009520f",
+   "formerItem": {
+    "id": "lesson-1731:v03",
+    "word": "行",
+    "annotated": false,
+    "decision": "question",
+    "reason": "元杂剧高频词，表示处所，学生易误解为动词或名词。",
+    "contextMeaning": "那边",
+    "sourceSentence": "我窦娥向哥哥行有句言",
+    "type": "contextual-choice",
+    "question": "「我窦娥向哥哥行有句言」中「行」的用法是",
+    "options": [
+     "行走",
+     "行列",
+     "那边",
+     "能力"
+    ],
+    "answerIndex": 2,
+    "explanation": "在元杂剧口语中，「行」表示处所，相当于「这边」或「那边」。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 341
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1731:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1731:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "734576072e0f0c3c0a8aea4d3fb64e783a7f0627290dd96f919da62fca7ba8a2",
+   "formerItem": {
+    "id": "lesson-1731:v04",
+    "word": "每",
+    "annotated": true,
+    "decision": "question",
+    "reason": "元杂剧常用虚词，表复数，是阅读元代文学作品的必备知识。",
+    "contextMeaning": "们",
+    "sourceSentence": "这都是官吏每无心正法",
+    "type": "gu-jin",
+    "question": "下列句中「每」字的用法与「这都是官吏每无心正法」相同的一项是",
+    "options": [
+     "每人都要遵守纪律",
+     "每况愈下",
+     "老师们都在忙碌",
+     "百姓每皆受其苦"
+    ],
+    "answerIndex": 3,
+    "explanation": "元曲中「每」常作复数标记，相当于「们」。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1656
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1731:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1731:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "fe13f249344653fd413dffd532e90cc93cb49afab6425ddf1fe0d3987861ad17",
+   "formerItem": {
+    "id": "lesson-1731:v05",
+    "word": "罚",
+    "annotated": true,
+    "decision": "question",
+    "reason": "通假字/特殊用法，教材注释指出其为“发”的意思，属于高频考点。",
+    "contextMeaning": "发",
+    "sourceSentence": "不是我窦娥罚下这等无头愿",
+    "type": "substitution",
+    "question": "「不是我窦娥罚下这等无头愿」中「罚」字若替换为现代汉语，最恰当的是",
+    "options": [
+     "惩罚",
+     "发",
+     "强迫",
+     "决定"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处「罚」通「发」，意为发出、许下。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1257
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1731:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1731:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "bc8b2dd00bbb301493be2f157b6e5a6bf3810a920bbf9099881a00fc73d3f0e2",
+   "formerItem": {
+    "id": "lesson-1731:v06",
+    "word": "湛湛",
+    "annotated": false,
+    "decision": "question",
+    "reason": "形容词，描写意象，影响对窦娥心理和环境理解的关键。",
+    "contextMeaning": "清明澄澈",
+    "sourceSentence": "也不见得湛湛青天",
+    "type": "contextual-choice",
+    "question": "「也不见得湛湛青天」中「湛湛」形容的是",
+    "options": [
+     "深蓝色的天空",
+     "阴暗的天空",
+     "清明澄澈的天空",
+     "广阔无边的天空"
+    ],
+    "answerIndex": 2,
+    "explanation": "「湛湛」形容天理昭彰，清明澄澈。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1289
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1731:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1731:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "60b9fc1d4ab0361e97b524d92c5cb3740b71c6dbfa03e629332c7c8ef7add3e4",
+   "formerItem": {
+    "id": "lesson-1731:v07",
+    "word": "题",
+    "annotated": true,
+    "decision": "question",
+    "reason": "通假字，教材中注释为“提”，如果不理解会影响句意理解。",
+    "contextMeaning": "提",
+    "sourceSentence": "三桩儿誓愿明题遍",
+    "type": "contextual-choice",
+    "question": "「三桩儿誓愿明题遍」中的「题」字意思是",
+    "options": [
+     "题目",
+     "写下",
+     "提及",
+     "提"
+    ],
+    "answerIndex": 3,
+    "explanation": "「题」通「提」，指提及、说出。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1735
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1731:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1731:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "c2b551fae16b2aa0af8f7bd45d855663ac9b0af5a0b71bf6d75200028e2fe66a",
+   "formerItem": {
+    "id": "lesson-1731:v08",
+    "word": "则是",
+    "annotated": true,
+    "decision": "question",
+    "reason": "元曲常用词，易误解为现代汉语的“就是”，实为表祈使或限定语气。",
+    "contextMeaning": "只当是",
+    "sourceSentence": "则是看你死的孩儿面上",
+    "type": "contextual-choice",
+    "question": "「则是看你死的孩儿面上」中「则是」的意思是",
+    "options": [
+     "就是",
+     "只当是",
+     "只有",
+     "总是"
+    ],
+    "answerIndex": 1,
+    "explanation": "在元曲中，「则是」常用于祈使句，有「只求」、「只当是」的意思。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 864
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1731:v11",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1731:v11",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "ccd4df44895ec86cde233c5a5262850613d81d205c5e434357a96c8e04b64429",
+   "formerItem": {
+    "id": "lesson-1731:v11",
+    "word": "没来由",
+    "annotated": false,
+    "decision": "question",
+    "reason": "元杂剧高频词，意为“无缘无故”，对于理解窦娥的冤屈情绪至关重要。",
+    "contextMeaning": "无缘无故",
+    "sourceSentence": "没来由犯王法",
+    "type": "contextual-choice",
+    "question": "「没来由犯王法」中「没来由」的意思是",
+    "options": [
+     "没有原因",
+     "无缘无故",
+     "没有理由",
+     "没头没脑"
+    ],
+    "answerIndex": 1,
+    "explanation": "「没来由」是元曲常用语，表示无缘无故、莫名其妙。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 126
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1731:v12",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1731:v12",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "e0b81bc5d8b9ca2b27028cead8ccfec99934cc84d00eafaced085eec7ce5730f",
+   "formerItem": {
+    "id": "lesson-1731:v12",
+    "word": "只合",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文言与口语结合词，表示“应该”，在文中是窦娥对天地职能的判断。",
+    "contextMeaning": "应该",
+    "sourceSentence": "天地也!只合把清浊分辨",
+    "type": "contextual-choice",
+    "question": "「只合把清浊分辨」中「只合」的意思是",
+    "options": [
+     "只能",
+     "只要求",
+     "应该",
+     "只管"
+    ],
+    "answerIndex": 2,
+    "explanation": "「只合」意为「应该」，体现了窦娥对天地的道德期待。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 191
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

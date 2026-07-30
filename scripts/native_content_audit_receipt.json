@@ -2,11 +2,11 @@
   "schemaVersion": "yw-native-content-audit-receipt-v1",
   "siteKey": "yw",
   "reviewDisposition": "approved",
-  "reviewAuthority": "user-authorized-native-baseline-2026-07-29",
-  "reviewedAt": "2026-07-29",
-  "semanticDigest": "sha256:9897f39b3236f2e351415ebc7662d642fed1c40eda29ae2c0619ed1f291be4e2",
+  "reviewAuthority": "independent-yw-v031-reader-media-vocab-native-graph-triple-build-audit-2026-07-30",
+  "reviewedAt": "2026-07-30T04:16:11Z",
+  "semanticDigest": "sha256:da21d574de1b58c37763032e15a5926c89df8befdedadb5642700a7ec1b7f140",
   "counts": {
-    "annotations": 0,
+    "annotations": 2932,
     "approvedDecks": 5,
     "approvedSlideDecks": 5,
     "blockedTextbookPageRefs": 0,
@@ -28,11 +28,11 @@
     "uniqueTextbookContextPageAssets": 693,
     "uniqueTextbookPageAssets": 669,
     "verifiedTextbookPageRefs": 671,
-    "vocabInventoryFiles": 135,
-    "vocabInventoryItems": 4057,
-    "vocabLessonFiles": 134,
-    "vocabQuestions": 1102,
-    "vocabularyLessons": 134,
-    "vocabularyQuestions": 1102
+    "vocabInventoryFiles": 78,
+    "vocabInventoryItems": 2944,
+    "vocabLessonFiles": 77,
+    "vocabQuestions": 723,
+    "vocabularyLessons": 77,
+    "vocabularyQuestions": 723
   }
 }

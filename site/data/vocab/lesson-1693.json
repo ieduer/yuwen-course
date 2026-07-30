@@ -83,169 +83,92 @@
    "id": "lesson-1693:v07",
    "word": "撂",
    "annotated": false,
-   "decision": "question",
-   "reason": "方言词，此处语境义为甩开/丢下，考察学生对小说人物关系及动作描写理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "丢下、甩开",
    "sourceSentence": "一开始他就把我撂下几丈远。",
-   "type": "contextual-choice",
-   "question": "「一开始他就把我撂下几丈远」中「撂」的意思是",
-   "options": [
-    "放置",
-    "丢下、甩开",
-    "投掷",
-    "放弃"
-   ],
-   "answerIndex": 1,
-   "explanation": "结合下文「怎么努力也赶不上他」，可知此处为把人甩在后面的意思。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 264
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1693:v07"
   },
   {
    "id": "lesson-1693:v08",
    "word": "审讯",
    "annotated": false,
-   "decision": "question",
-   "reason": "此处为心理描写，揭示叙述者与通讯员之间尴尬、不平等的交流氛围，考察语境理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "审问犯人，此处指盘问语气过于严肃",
    "sourceSentence": "我问到这里自己觉得这不像是谈话,倒有些像审讯",
-   "type": "contextual-choice",
-   "question": "「我问到这里自己觉得这不像是谈话，倒有些像审讯」中「审讯」的语境义是",
-   "options": [
-    "正式的调查",
-    "正常的交谈",
-    "严肃的盘问",
-    "无意的闲聊"
-   ],
-   "answerIndex": 2,
-   "explanation": "叙述者通过自省，认为自己的问话过于严肃，带有审问色彩。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1156
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1693:v08"
   },
   {
    "id": "lesson-1693:v09",
    "word": "掂量",
    "annotated": false,
-   "decision": "question",
-   "reason": "准确理解新媳妇心理的关键动词，体现了人物犹豫、观察的微妙神态。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "估量、考虑",
    "sourceSentence": "她看看我,看看通讯员,好像在掂量我刚才那些话的斤两",
-   "type": "contextual-choice",
-   "question": "「好像在掂量我刚才那些话的斤两」中「掂量」的意思是",
-   "options": [
-    "称重量",
-    "估量、考虑",
-    "丢弃",
-    "挑选"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处指新媳妇在判断叙述者说话的真诚程度或分量。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2561
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1693:v09"
   },
   {
    "id": "lesson-1693:v10",
    "word": "忌怕",
    "annotated": false,
-   "decision": "question",
-   "reason": "涉及战争环境描写，理解敌人心理，考察词义。",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
    "contextMeaning": "害怕、畏惧",
    "sourceSentence": "敌人照例是忌怕夜晚的,在地上烧起一堆堆的野火",
-   "type": "contextual-choice",
-   "question": "「敌人照例是忌怕夜晚的」中「忌怕」的意思是",
-   "options": [
-    "憎恨",
-    "厌恶",
-    "害怕、畏惧",
-    "躲避"
-   ],
-   "answerIndex": 2,
-   "explanation": "结合后文敌人盲目轰炸、照明弹升起，说明敌人对夜晚感到恐惧。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3888
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1693:v10"
   },
   {
    "id": "lesson-1693:v11",
    "word": "运动",
    "annotated": false,
-   "decision": "question",
-   "reason": "军事术语在小说中的特定用法，易被误解为体育运动。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "调动、行进",
    "sourceSentence": "我们十多副担架挤在一个小巷子里,准备往前运动",
-   "type": "contextual-choice",
-   "question": "「准备往前运动」中「运动」的意思是",
-   "options": [
-    "体育锻炼",
-    "运转",
-    "调动、行进",
-    "开展活动"
-   ],
-   "answerIndex": 2,
-   "explanation": "在军事语境下，「运动」指部队或人员的行进与调动。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 5263
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1693:v11"
   },
   {
    "id": "lesson-1693:v12",
    "word": "磕磕绊绊",
    "annotated": false,
-   "decision": "question",
-   "reason": "描写动作神态的成语，反映叙述者得知通讯员牺牲后的心理状态。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "走路不稳、匆忙费力",
    "sourceSentence": "我猛然醒悟,磕磕绊绊地跑去找医生",
-   "type": "contextual-choice",
-   "question": "「磕磕绊绊地跑去找医生」中「磕磕绊绊」的意思是",
-   "options": [
-    "说话不流利",
-    "走路不稳、匆忙费力",
-    "故意制造障碍",
-    "缓慢地行走"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处形容叙述者因内心焦急而奔跑姿态不稳。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 5517
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1693:v12"
   },
   {
    "id": "lesson-1693:v13",
    "word": "铺",
    "annotated": false,
-   "decision": "question",
-   "reason": "多义词，此处考察在具体语境下的动词用法。",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
    "contextMeaning": "展开、铺设",
    "sourceSentence": "我看见她把自己那条白百合花的新被,铺在外面屋檐下的一块门板上",
-   "type": "contextual-choice",
-   "question": "「铺在外面屋檐下的一块门板上」中「铺」的意思是",
-   "options": [
-    "商店",
-    "睡觉的地方",
-    "展开、铺设",
-    "平整"
-   ],
-   "answerIndex": 2,
-   "explanation": "此处为动词，指将东西展开放置。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3833
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1693:v13"
   },
   {
    "id": "lesson-1693:v14",
@@ -256,5 +179,261 @@
    "contextMeaning": "选自《百合花》（人民文学出版社2000 年版）。略有改动。茹志鹃（1925—1998），浙江杭州人，作家。代表作有短篇小说《百合花》《剪辑错了的故事》等。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1693:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1693:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "af6af3e7ad2ae4aa7241cca39ae8cf2c833db4a2019453816b76433bd3e25839",
+   "formerItem": {
+    "id": "lesson-1693:v07",
+    "word": "撂",
+    "annotated": false,
+    "decision": "question",
+    "reason": "方言词，此处语境义为甩开/丢下，考察学生对小说人物关系及动作描写理解。",
+    "contextMeaning": "丢下、甩开",
+    "sourceSentence": "一开始他就把我撂下几丈远。",
+    "type": "contextual-choice",
+    "question": "「一开始他就把我撂下几丈远」中「撂」的意思是",
+    "options": [
+     "放置",
+     "丢下、甩开",
+     "投掷",
+     "放弃"
+    ],
+    "answerIndex": 1,
+    "explanation": "结合下文「怎么努力也赶不上他」，可知此处为把人甩在后面的意思。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 264
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1693:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1693:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "e878d52944df14bf6e8557b8fb4407309628aefb5efeda09ed67f2e3ce3f9f54",
+   "formerItem": {
+    "id": "lesson-1693:v08",
+    "word": "审讯",
+    "annotated": false,
+    "decision": "question",
+    "reason": "此处为心理描写，揭示叙述者与通讯员之间尴尬、不平等的交流氛围，考察语境理解。",
+    "contextMeaning": "审问犯人，此处指盘问语气过于严肃",
+    "sourceSentence": "我问到这里自己觉得这不像是谈话,倒有些像审讯",
+    "type": "contextual-choice",
+    "question": "「我问到这里自己觉得这不像是谈话，倒有些像审讯」中「审讯」的语境义是",
+    "options": [
+     "正式的调查",
+     "正常的交谈",
+     "严肃的盘问",
+     "无意的闲聊"
+    ],
+    "answerIndex": 2,
+    "explanation": "叙述者通过自省，认为自己的问话过于严肃，带有审问色彩。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1156
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1693:v09",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1693:v09",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "84eb798e841e8a3a2a08bfab2ac443a5ca280b7994b7601c6fbb674a9e0a9a74",
+   "formerItem": {
+    "id": "lesson-1693:v09",
+    "word": "掂量",
+    "annotated": false,
+    "decision": "question",
+    "reason": "准确理解新媳妇心理的关键动词，体现了人物犹豫、观察的微妙神态。",
+    "contextMeaning": "估量、考虑",
+    "sourceSentence": "她看看我,看看通讯员,好像在掂量我刚才那些话的斤两",
+    "type": "contextual-choice",
+    "question": "「好像在掂量我刚才那些话的斤两」中「掂量」的意思是",
+    "options": [
+     "称重量",
+     "估量、考虑",
+     "丢弃",
+     "挑选"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处指新媳妇在判断叙述者说话的真诚程度或分量。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2561
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1693:v10",
+   "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+   "reviewedAt": "2026-07-30T00:32:00.000Z",
+   "itemId": "lesson-1693:v10",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
+   "sourceItemSha256": "1a08140e33a15f46aefeb3df3d6b0e5d638b8659260f548cc3c87a0961ba3e88",
+   "formerItem": {
+    "id": "lesson-1693:v10",
+    "word": "忌怕",
+    "annotated": false,
+    "decision": "question",
+    "reason": "涉及战争环境描写，理解敌人心理，考察词义。",
+    "contextMeaning": "害怕、畏惧",
+    "sourceSentence": "敌人照例是忌怕夜晚的,在地上烧起一堆堆的野火",
+    "type": "contextual-choice",
+    "question": "「敌人照例是忌怕夜晚的」中「忌怕」的意思是",
+    "options": [
+     "憎恨",
+     "厌恶",
+     "害怕、畏惧",
+     "躲避"
+    ],
+    "answerIndex": 2,
+    "explanation": "结合后文敌人盲目轰炸、照明弹升起，说明敌人对夜晚感到恐惧。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3888
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1693:v11",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1693:v11",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "0a9a6098f83001f55639aea59843615376f691893d392c6c7f657a67b5ecefd2",
+   "formerItem": {
+    "id": "lesson-1693:v11",
+    "word": "运动",
+    "annotated": false,
+    "decision": "question",
+    "reason": "军事术语在小说中的特定用法，易被误解为体育运动。",
+    "contextMeaning": "调动、行进",
+    "sourceSentence": "我们十多副担架挤在一个小巷子里,准备往前运动",
+    "type": "contextual-choice",
+    "question": "「准备往前运动」中「运动」的意思是",
+    "options": [
+     "体育锻炼",
+     "运转",
+     "调动、行进",
+     "开展活动"
+    ],
+    "answerIndex": 2,
+    "explanation": "在军事语境下，「运动」指部队或人员的行进与调动。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 5263
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1693:v12",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1693:v12",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "007d50a57dfdacb7919acf827be32acbafb98405fd0e546a6cefd892de3a0c4a",
+   "formerItem": {
+    "id": "lesson-1693:v12",
+    "word": "磕磕绊绊",
+    "annotated": false,
+    "decision": "question",
+    "reason": "描写动作神态的成语，反映叙述者得知通讯员牺牲后的心理状态。",
+    "contextMeaning": "走路不稳、匆忙费力",
+    "sourceSentence": "我猛然醒悟,磕磕绊绊地跑去找医生",
+    "type": "contextual-choice",
+    "question": "「磕磕绊绊地跑去找医生」中「磕磕绊绊」的意思是",
+    "options": [
+     "说话不流利",
+     "走路不稳、匆忙费力",
+     "故意制造障碍",
+     "缓慢地行走"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处形容叙述者因内心焦急而奔跑姿态不稳。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 5517
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1693:v13",
+   "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+   "reviewedAt": "2026-07-30T00:32:00.000Z",
+   "itemId": "lesson-1693:v13",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
+   "sourceItemSha256": "f56d8f60ac67a08d3a3c0fbc30626e291562feeee01cd1c065c0d0416655f800",
+   "formerItem": {
+    "id": "lesson-1693:v13",
+    "word": "铺",
+    "annotated": false,
+    "decision": "question",
+    "reason": "多义词，此处考察在具体语境下的动词用法。",
+    "contextMeaning": "展开、铺设",
+    "sourceSentence": "我看见她把自己那条白百合花的新被,铺在外面屋檐下的一块门板上",
+    "type": "contextual-choice",
+    "question": "「铺在外面屋檐下的一块门板上」中「铺」的意思是",
+    "options": [
+     "商店",
+     "睡觉的地方",
+     "展开、铺设",
+     "平整"
+    ],
+    "answerIndex": 2,
+    "explanation": "此处为动词，指将东西展开放置。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3833
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-review-20260729-modern-basic-meaning",
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

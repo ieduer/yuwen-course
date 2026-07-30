@@ -35,147 +35,79 @@
    "id": "lesson-1736:v03",
    "word": "肆虐",
    "annotated": false,
-   "decision": "question",
-   "reason": "高频书面语，理解词义对把握文章叙述背景（疟疾的严重性）至关重要。",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
    "contextMeaning": "指（害虫、疾病、自然灾害等）横行，不受控制地造成破坏。",
    "sourceSentence": "20世纪50年代,由于疟原虫抗药性的出现,疟疾重新开始肆虐,消灭疟疾的国际努力遭受重挫",
-   "type": "contextual-choice",
-   "question": "文中「疟疾重新开始肆虐」中「肆虐」一词的意思是",
-   "options": [
-    "蔓延并造成严重破坏",
-    "在短时间内迅速消失",
-    "被有效控制并减弱",
-    "在实验室内被成功提取"
-   ],
-   "answerIndex": 0,
-   "explanation": "肆虐指残暴地横行，在此语境下形容疟疾重新流行且造成严重危害。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 664
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1736:v03"
   },
   {
    "id": "lesson-1736:v04",
    "word": "相悖",
    "annotated": false,
-   "decision": "question",
-   "reason": "逻辑关系词，理解该词对于领会科研过程中的矛盾冲突点非常重要。",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
    "contextMeaning": "相反，违背。",
    "sourceSentence": "研究的转折点出现在青蒿上,其提取物显示有一定的抗疟效果,然而,实验结果很难重复,而且似乎与文献记录相悖",
-   "type": "contextual-choice",
-   "question": "「实验结果很难重复，而且似乎与文献记录相悖」中「相悖」的意思是",
-   "options": [
-    "极其相似",
-    "完全符合",
-    "相互抵触",
-    "没有关联"
-   ],
-   "answerIndex": 2,
-   "explanation": "相悖意为相反、违背，在此处指实验结果与文献记录不一致。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 888
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1736:v04"
   },
   {
    "id": "lesson-1736:v05",
    "word": "渍",
    "annotated": false,
-   "decision": "question",
-   "reason": "古汉语词汇在现代文中的应用，理解其动作方式有助于体会作者对中医古籍的研读深度。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "浸泡。",
    "sourceSentence": "又方,青蒿一握,以水二升渍,绞取汁,尽服之",
-   "type": "interpretation",
-   "question": "在引用的古籍文献中，「以水二升渍」里的「渍」意思是",
-   "options": [
-    "煮沸",
-    "浸泡",
-    "研磨",
-    "过滤"
-   ],
-   "answerIndex": 1,
-   "explanation": "根据文意及古汉语常识，渍意为浸泡，此处指用冷水浸泡青蒿。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《古汉语常用字字典》"
-   ],
    "location": {
     "charIndex": 1001
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1736:v05"
   },
   {
    "id": "lesson-1736:v06",
    "word": "君臣佐使",
    "annotated": false,
-   "decision": "question",
-   "reason": "中医核心术语，对于理解中医复方用药的科学性具有决定性意义。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "中药方剂组成配伍的比拟词，指方剂中各药物的地位与作用。",
    "sourceSentence": "对症开出由多种中药按君臣佐使组成的处方",
-   "type": "interpretation",
-   "question": "文中提到「按君臣佐使组成的处方」，这体现了中医用药的什么特点？",
-   "options": [
-    "单一药物治疗特定疾病",
-    "只使用名贵药材进行配伍",
-    "根据药物地位与作用科学配伍",
-    "通过加热提取活性成分"
-   ],
-   "answerIndex": 2,
-   "explanation": "君臣佐使是中医方剂配伍原则，体现了药物之间的协作关系。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2466
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1736:v06"
   },
   {
    "id": "lesson-1736:v07",
    "word": "辨证施治",
    "annotated": false,
-   "decision": "question",
-   "reason": "中医诊疗的精髓，是文章论述中医药学贡献的关键概念。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "中医的一种诊治原则，指根据病人的症候，辨别病因、病位、病性，确定治疗方法。",
    "sourceSentence": "这样的辨证施治疗法和有效方药的积累对中华民族的繁衍昌盛作出了积极贡献。",
-   "type": "interpretation",
-   "question": "「辨证施治」的含义最准确的一项是",
-   "options": [
-    "按照统一的标准配方治疗所有病人",
-    "根据病人的个体症候进行诊断并确定治疗方案",
-    "仅通过观察病人的外观进行简单治疗",
-    "利用现代科学技术进行机械化诊疗"
-   ],
-   "answerIndex": 1,
-   "explanation": "辨证施治是中医的核心理论，强调因人而异、因病而异的个体化诊疗。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2523
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1736:v07"
   },
   {
    "id": "lesson-1736:v08",
    "word": "沧海一粟",
    "annotated": false,
-   "decision": "question",
-   "reason": "常用成语，用于总结全文情感，体现作者谦逊的科学态度。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "大海里的一粒谷子，比喻非常渺小。",
    "sourceSentence": "这里所举中医药对人类健康的贡献,不过沧海一粟",
-   "type": "contextual-choice",
-   "question": "作者说中医药的贡献「不过沧海一粟」，其表达目的是",
-   "options": [
-    "强调中医药在历史上作用微弱",
-    "感叹人类健康问题的复杂性",
-    "表达对中医药宝库深厚潜力的敬畏与谦逊",
-    "说明现代科技对中医药的否定"
-   ],
-   "answerIndex": 2,
-   "explanation": "作者以此成语形容所举贡献相对于中医药宝库而言仅是极小的一部分，体现了科学家的谦虚。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2815
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1736:v08"
   },
   {
    "id": "lesson-1736:v09",
@@ -381,5 +313,228 @@
    "contextMeaning": "英美制长度单位。1 码约合0.91 米。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1736:v03",
+   "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+   "reviewedAt": "2026-07-30T00:32:00.000Z",
+   "itemId": "lesson-1736:v03",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
+   "sourceItemSha256": "f62f24d2c9f57bb6b23764dbd9f8b06c4ec9ed57345436f92ca1f0387346340e",
+   "formerItem": {
+    "id": "lesson-1736:v03",
+    "word": "肆虐",
+    "annotated": false,
+    "decision": "question",
+    "reason": "高频书面语，理解词义对把握文章叙述背景（疟疾的严重性）至关重要。",
+    "contextMeaning": "指（害虫、疾病、自然灾害等）横行，不受控制地造成破坏。",
+    "sourceSentence": "20世纪50年代,由于疟原虫抗药性的出现,疟疾重新开始肆虐,消灭疟疾的国际努力遭受重挫",
+    "type": "contextual-choice",
+    "question": "文中「疟疾重新开始肆虐」中「肆虐」一词的意思是",
+    "options": [
+     "蔓延并造成严重破坏",
+     "在短时间内迅速消失",
+     "被有效控制并减弱",
+     "在实验室内被成功提取"
+    ],
+    "answerIndex": 0,
+    "explanation": "肆虐指残暴地横行，在此语境下形容疟疾重新流行且造成严重危害。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 664
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1736:v04",
+   "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+   "reviewedAt": "2026-07-30T00:32:00.000Z",
+   "itemId": "lesson-1736:v04",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
+   "sourceItemSha256": "cdb6f37e04704ca7a35e9a21e2f6c0090ca0158c631abfe8f136c2b2a8b45ccb",
+   "formerItem": {
+    "id": "lesson-1736:v04",
+    "word": "相悖",
+    "annotated": false,
+    "decision": "question",
+    "reason": "逻辑关系词，理解该词对于领会科研过程中的矛盾冲突点非常重要。",
+    "contextMeaning": "相反，违背。",
+    "sourceSentence": "研究的转折点出现在青蒿上,其提取物显示有一定的抗疟效果,然而,实验结果很难重复,而且似乎与文献记录相悖",
+    "type": "contextual-choice",
+    "question": "「实验结果很难重复，而且似乎与文献记录相悖」中「相悖」的意思是",
+    "options": [
+     "极其相似",
+     "完全符合",
+     "相互抵触",
+     "没有关联"
+    ],
+    "answerIndex": 2,
+    "explanation": "相悖意为相反、违背，在此处指实验结果与文献记录不一致。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 888
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1736:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1736:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "ed456799bb0f1002dd1d2971b56df308df4ec186e8adc0b307b0d41e4fca8d08",
+   "formerItem": {
+    "id": "lesson-1736:v05",
+    "word": "渍",
+    "annotated": false,
+    "decision": "question",
+    "reason": "古汉语词汇在现代文中的应用，理解其动作方式有助于体会作者对中医古籍的研读深度。",
+    "contextMeaning": "浸泡。",
+    "sourceSentence": "又方,青蒿一握,以水二升渍,绞取汁,尽服之",
+    "type": "interpretation",
+    "question": "在引用的古籍文献中，「以水二升渍」里的「渍」意思是",
+    "options": [
+     "煮沸",
+     "浸泡",
+     "研磨",
+     "过滤"
+    ],
+    "answerIndex": 1,
+    "explanation": "根据文意及古汉语常识，渍意为浸泡，此处指用冷水浸泡青蒿。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《古汉语常用字字典》"
+    ],
+    "location": {
+     "charIndex": 1001
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1736:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1736:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "b81dcf00daf3acafbf829c57dfef2ce2805d07c5bca7ff4c12910789d07edf00",
+   "formerItem": {
+    "id": "lesson-1736:v06",
+    "word": "君臣佐使",
+    "annotated": false,
+    "decision": "question",
+    "reason": "中医核心术语，对于理解中医复方用药的科学性具有决定性意义。",
+    "contextMeaning": "中药方剂组成配伍的比拟词，指方剂中各药物的地位与作用。",
+    "sourceSentence": "对症开出由多种中药按君臣佐使组成的处方",
+    "type": "interpretation",
+    "question": "文中提到「按君臣佐使组成的处方」，这体现了中医用药的什么特点？",
+    "options": [
+     "单一药物治疗特定疾病",
+     "只使用名贵药材进行配伍",
+     "根据药物地位与作用科学配伍",
+     "通过加热提取活性成分"
+    ],
+    "answerIndex": 2,
+    "explanation": "君臣佐使是中医方剂配伍原则，体现了药物之间的协作关系。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2466
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1736:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1736:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "3860024edf38116bfcbaf7e7c9d837a3909fb6bd0bf781b713751efc58e90d9c",
+   "formerItem": {
+    "id": "lesson-1736:v07",
+    "word": "辨证施治",
+    "annotated": false,
+    "decision": "question",
+    "reason": "中医诊疗的精髓，是文章论述中医药学贡献的关键概念。",
+    "contextMeaning": "中医的一种诊治原则，指根据病人的症候，辨别病因、病位、病性，确定治疗方法。",
+    "sourceSentence": "这样的辨证施治疗法和有效方药的积累对中华民族的繁衍昌盛作出了积极贡献。",
+    "type": "interpretation",
+    "question": "「辨证施治」的含义最准确的一项是",
+    "options": [
+     "按照统一的标准配方治疗所有病人",
+     "根据病人的个体症候进行诊断并确定治疗方案",
+     "仅通过观察病人的外观进行简单治疗",
+     "利用现代科学技术进行机械化诊疗"
+    ],
+    "answerIndex": 1,
+    "explanation": "辨证施治是中医的核心理论，强调因人而异、因病而异的个体化诊疗。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2523
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1736:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1736:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "d97ce108a5c50e0499303220d5ef91293a88e757a78476ff1eac1b09ec37b78e",
+   "formerItem": {
+    "id": "lesson-1736:v08",
+    "word": "沧海一粟",
+    "annotated": false,
+    "decision": "question",
+    "reason": "常用成语，用于总结全文情感，体现作者谦逊的科学态度。",
+    "contextMeaning": "大海里的一粒谷子，比喻非常渺小。",
+    "sourceSentence": "这里所举中医药对人类健康的贡献,不过沧海一粟",
+    "type": "contextual-choice",
+    "question": "作者说中医药的贡献「不过沧海一粟」，其表达目的是",
+    "options": [
+     "强调中医药在历史上作用微弱",
+     "感叹人类健康问题的复杂性",
+     "表达对中医药宝库深厚潜力的敬畏与谦逊",
+     "说明现代科技对中医药的否定"
+    ],
+    "answerIndex": 2,
+    "explanation": "作者以此成语形容所举贡献相对于中医药宝库而言仅是极小的一部分，体现了科学家的谦虚。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2815
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-review-20260729-modern-basic-meaning",
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

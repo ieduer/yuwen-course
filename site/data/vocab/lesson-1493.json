@@ -35,169 +35,92 @@
    "id": "lesson-1493:v03",
    "word": "Galano",
    "annotated": false,
-   "decision": "question",
-   "reason": "文中多次出现并作为老人对鲨鱼的特定称呼，涉及文化语境，考察学生对小说异域色彩的把握。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "西班牙语，指代文中提到的某种鲨鱼",
    "sourceSentence": "加拉诺鲨: 。”他大声说。他看见第二个鱼鳍紧跟着第一个钻出海水",
-   "type": "contextual-choice",
-   "question": "文中老人称呼鲨鱼为“加拉诺鲨”（Galano），这一称呼体现了小说怎样的特色？",
-   "options": [
-    "体现了老人作为渔夫对海洋生物的敬畏",
-    "反映了小说浓郁的地域文化色彩和真实感",
-    "说明老人对这种鲨鱼有特定的仇恨心理",
-    "暗示了这种鲨鱼在当地神话中的特殊地位"
-   ],
-   "answerIndex": 1,
-   "explanation": "Galano是西班牙语，在该语境下作为老人生活背景中对鲨鱼的特定称呼，增强了小说的地域真实感。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3063
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1493:v03"
   },
   {
    "id": "lesson-1493:v04",
    "word": "背运",
    "annotated": false,
-   "decision": "question",
-   "reason": "高频词汇，语境义与字面理解易产生偏差，考察词义辨析。",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
    "contextMeaning": "运气不好",
    "sourceSentence": "小说前面的情节是:老人圣地亚哥是个“背运”的渔夫,连着八十四天没有捕到鱼",
-   "type": "contextual-choice",
-   "question": "“老人圣地亚哥是个‘背运’的渔夫”中“背运”的意思是",
-   "options": [
-    "背着货物运输",
-    "运气不好",
-    "背道而驰",
-    "命运多舛"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处指老人连续多日未捕到鱼，运气不佳。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 67
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1493:v04"
   },
   {
    "id": "lesson-1493:v05",
    "word": "豁然",
    "annotated": false,
-   "decision": "question",
-   "reason": "易误解为“开阔”或“开朗”，在此处指突然出现，考察词义的语境化。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容突然出现",
    "sourceSentence": "鲨鱼莽莽撞撞地一下子冲过来,划破了蓝色的水面,豁然出现在太阳底下",
-   "type": "contextual-choice",
-   "question": "“豁然出现在太阳底下”中“豁然”一词最恰当的解释是",
-   "options": [
-    "开阔的样子",
-    "突然的样子",
-    "明亮的样子",
-    "巨大的样子"
-   ],
-   "answerIndex": 1,
-   "explanation": "豁然在此处形容鲨鱼从深海突然冲出水面，意指动作突发。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 297
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1493:v05"
   },
   {
    "id": "lesson-1493:v06",
    "word": "肆意妄为",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语用法，直接刻画鲨鱼性格，影响对动物意象的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "任意胡作非为，不顾后果",
    "sourceSentence": "老人一看见它游过来,就知道这是一条毫无畏惧、肆意妄为的鲨鱼",
-   "type": "substitution",
-   "question": "文中“肆意妄为”一词，若替换为下列哪个词，最能保持原意？",
-   "options": [
-    "为所欲为",
-    "胆大包天",
-    "兴风作浪",
-    "不可一世"
-   ],
-   "answerIndex": 0,
-   "explanation": "肆意妄为指任意胡作非为，为所欲为最为接近。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 730
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1493:v06"
   },
   {
    "id": "lesson-1493:v07",
    "word": "好景不长",
    "annotated": false,
-   "decision": "question",
-   "reason": "该成语位于捕获大鱼与鲨鱼来袭的叙事转折点，需要把词义和情节结构一并理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "刚获得大鱼的希望立刻被鲨鱼来袭打断",
    "sourceSentence": "老人此时头脑清醒好使,下定决心搏击一番,但却不抱什么希望。真是好景不长啊,他想",
-   "type": "interpretation",
-   "question": "老人感叹「真是好景不长啊」，这句话在情节推进中的作用是",
-   "options": [
-    "把捕获大鱼后的希望转入鲨鱼来袭的新危机",
-    "说明海上天气突然转坏，迫使老人返航",
-    "交代老人因体力耗尽而主动放弃大鱼",
-    "总结老人此前八十四天没有捕到鱼的经历"
-   ],
-   "answerIndex": 0,
-   "explanation": "这句话紧接灰鲭鲨出现之前的希望，又开启连续搏斗，既写“好景”短暂，也承担从捕鱼成功转向保卫成果的结构转折。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 807
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1493:v07"
   },
   {
    "id": "lesson-1493:v08",
    "word": "参差不齐",
    "annotated": false,
-   "decision": "question",
-   "reason": "易误解为“水平高低不一”，在此处指形状不整齐，考察多义词辨析。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "长短、高低、大小不齐",
    "sourceSentence": "他回到船尾,发现舵柄的一头尽管参差不齐,还是能塞进舵孔,让他凑合着掌舵",
-   "type": "contextual-choice",
-   "question": "「舵柄的一头尽管参差不齐，还是能塞进舵孔」中的「参差不齐」指",
-   "options": [
-    "断口长短高低不一，形状不整齐",
-    "不同舵手的技术水平有高有低",
-    "修理舵柄的进度快慢不同",
-    "木料的质量好坏混杂在一起"
-   ],
-   "answerIndex": 0,
-   "explanation": "“一头”和“塞进舵孔”限定了描写对象是舵柄断口的外形；不能套用常见的“水平不一”义。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 7604
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1493:v08"
   },
   {
    "id": "lesson-1493:v09",
    "word": "悬殊",
    "annotated": false,
-   "decision": "question",
-   "reason": "文中关键修饰词，揭示了人与自然博弈的本质。",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
    "contextMeaning": "相差很大",
    "sourceSentence": "一个孤单的老人,面对险恶的大海,力量对比是悬殊的,结果似乎也是不言而喻的",
-   "type": "contextual-choice",
-   "question": "下列对“力量对比是悬殊的”中“悬殊”的理解，最准确的是",
-   "options": [
-    "差距极小",
-    "相差很大",
-    "难分胜负",
-    "势均力敌"
-   ],
-   "answerIndex": 1,
-   "explanation": "悬殊指相差很大，此处指老人与大海、鲨鱼的力量对比极其不平衡。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 8601
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1493:v09"
   },
   {
    "id": "lesson-1493:v10",
@@ -208,5 +131,261 @@
    "contextMeaning": "铲鼻鲨的俗称。原文为Galano，西班牙语。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1493:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1493:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "ad371afd1ab51c0c88e9434fa08fe2865095350adf95d031e7c59a160cb20042",
+   "formerItem": {
+    "id": "lesson-1493:v03",
+    "word": "Galano",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文中多次出现并作为老人对鲨鱼的特定称呼，涉及文化语境，考察学生对小说异域色彩的把握。",
+    "contextMeaning": "西班牙语，指代文中提到的某种鲨鱼",
+    "sourceSentence": "加拉诺鲨: 。”他大声说。他看见第二个鱼鳍紧跟着第一个钻出海水",
+    "type": "contextual-choice",
+    "question": "文中老人称呼鲨鱼为“加拉诺鲨”（Galano），这一称呼体现了小说怎样的特色？",
+    "options": [
+     "体现了老人作为渔夫对海洋生物的敬畏",
+     "反映了小说浓郁的地域文化色彩和真实感",
+     "说明老人对这种鲨鱼有特定的仇恨心理",
+     "暗示了这种鲨鱼在当地神话中的特殊地位"
+    ],
+    "answerIndex": 1,
+    "explanation": "Galano是西班牙语，在该语境下作为老人生活背景中对鲨鱼的特定称呼，增强了小说的地域真实感。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3063
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1493:v04",
+   "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+   "reviewedAt": "2026-07-30T00:32:00.000Z",
+   "itemId": "lesson-1493:v04",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
+   "sourceItemSha256": "a2775a97647006d5575baf6c80af498fafcdf64c1d412bb2377a59668d084d77",
+   "formerItem": {
+    "id": "lesson-1493:v04",
+    "word": "背运",
+    "annotated": false,
+    "decision": "question",
+    "reason": "高频词汇，语境义与字面理解易产生偏差，考察词义辨析。",
+    "contextMeaning": "运气不好",
+    "sourceSentence": "小说前面的情节是:老人圣地亚哥是个“背运”的渔夫,连着八十四天没有捕到鱼",
+    "type": "contextual-choice",
+    "question": "“老人圣地亚哥是个‘背运’的渔夫”中“背运”的意思是",
+    "options": [
+     "背着货物运输",
+     "运气不好",
+     "背道而驰",
+     "命运多舛"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处指老人连续多日未捕到鱼，运气不佳。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 67
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1493:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1493:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "82f3bae77a03bf44d22103d1f180d0e443be0ca823ef68883d691af4ff263e40",
+   "formerItem": {
+    "id": "lesson-1493:v05",
+    "word": "豁然",
+    "annotated": false,
+    "decision": "question",
+    "reason": "易误解为“开阔”或“开朗”，在此处指突然出现，考察词义的语境化。",
+    "contextMeaning": "形容突然出现",
+    "sourceSentence": "鲨鱼莽莽撞撞地一下子冲过来,划破了蓝色的水面,豁然出现在太阳底下",
+    "type": "contextual-choice",
+    "question": "“豁然出现在太阳底下”中“豁然”一词最恰当的解释是",
+    "options": [
+     "开阔的样子",
+     "突然的样子",
+     "明亮的样子",
+     "巨大的样子"
+    ],
+    "answerIndex": 1,
+    "explanation": "豁然在此处形容鲨鱼从深海突然冲出水面，意指动作突发。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 297
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1493:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1493:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "8e052281a047a4d053b76f5c284910f20eabfe00d5253cf076c55667ae0bce37",
+   "formerItem": {
+    "id": "lesson-1493:v06",
+    "word": "肆意妄为",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语用法，直接刻画鲨鱼性格，影响对动物意象的理解。",
+    "contextMeaning": "任意胡作非为，不顾后果",
+    "sourceSentence": "老人一看见它游过来,就知道这是一条毫无畏惧、肆意妄为的鲨鱼",
+    "type": "substitution",
+    "question": "文中“肆意妄为”一词，若替换为下列哪个词，最能保持原意？",
+    "options": [
+     "为所欲为",
+     "胆大包天",
+     "兴风作浪",
+     "不可一世"
+    ],
+    "answerIndex": 0,
+    "explanation": "肆意妄为指任意胡作非为，为所欲为最为接近。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 730
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1493:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1493:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "d26e8078e72fc4f7d06ddf453d25c7ad230cdae77d4dd6382ea0f0c4b52d79a6",
+   "formerItem": {
+    "id": "lesson-1493:v07",
+    "word": "好景不长",
+    "annotated": false,
+    "decision": "question",
+    "reason": "该成语位于捕获大鱼与鲨鱼来袭的叙事转折点，需要把词义和情节结构一并理解",
+    "contextMeaning": "刚获得大鱼的希望立刻被鲨鱼来袭打断",
+    "sourceSentence": "老人此时头脑清醒好使,下定决心搏击一番,但却不抱什么希望。真是好景不长啊,他想",
+    "type": "interpretation",
+    "question": "老人感叹「真是好景不长啊」，这句话在情节推进中的作用是",
+    "options": [
+     "把捕获大鱼后的希望转入鲨鱼来袭的新危机",
+     "说明海上天气突然转坏，迫使老人返航",
+     "交代老人因体力耗尽而主动放弃大鱼",
+     "总结老人此前八十四天没有捕到鱼的经历"
+    ],
+    "answerIndex": 0,
+    "explanation": "这句话紧接灰鲭鲨出现之前的希望，又开启连续搏斗，既写“好景”短暂，也承担从捕鱼成功转向保卫成果的结构转折。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 807
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1493:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1493:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "4dc1ec3db0742bf92cb98547c60649170e23fa879362a3f5f3172220ffdb543e",
+   "formerItem": {
+    "id": "lesson-1493:v08",
+    "word": "参差不齐",
+    "annotated": false,
+    "decision": "question",
+    "reason": "易误解为“水平高低不一”，在此处指形状不整齐，考察多义词辨析。",
+    "contextMeaning": "长短、高低、大小不齐",
+    "sourceSentence": "他回到船尾,发现舵柄的一头尽管参差不齐,还是能塞进舵孔,让他凑合着掌舵",
+    "type": "contextual-choice",
+    "question": "「舵柄的一头尽管参差不齐，还是能塞进舵孔」中的「参差不齐」指",
+    "options": [
+     "断口长短高低不一，形状不整齐",
+     "不同舵手的技术水平有高有低",
+     "修理舵柄的进度快慢不同",
+     "木料的质量好坏混杂在一起"
+    ],
+    "answerIndex": 0,
+    "explanation": "“一头”和“塞进舵孔”限定了描写对象是舵柄断口的外形；不能套用常见的“水平不一”义。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 7604
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1493:v09",
+   "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+   "reviewedAt": "2026-07-30T00:32:00.000Z",
+   "itemId": "lesson-1493:v09",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
+   "sourceItemSha256": "052314a56794140c1dc65024e5efa9f33ec101c16a54c5b320edca8f46626348",
+   "formerItem": {
+    "id": "lesson-1493:v09",
+    "word": "悬殊",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文中关键修饰词，揭示了人与自然博弈的本质。",
+    "contextMeaning": "相差很大",
+    "sourceSentence": "一个孤单的老人,面对险恶的大海,力量对比是悬殊的,结果似乎也是不言而喻的",
+    "type": "contextual-choice",
+    "question": "下列对“力量对比是悬殊的”中“悬殊”的理解，最准确的是",
+    "options": [
+     "差距极小",
+     "相差很大",
+     "难分胜负",
+     "势均力敌"
+    ],
+    "answerIndex": 1,
+    "explanation": "悬殊指相差很大，此处指老人与大海、鲨鱼的力量对比极其不平衡。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 8601
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-review-20260729-modern-basic-meaning",
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

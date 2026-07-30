@@ -143,175 +143,92 @@
    "id": "lesson-1566:v12",
    "word": "安辑",
    "annotated": false,
-   "decision": "question",
-   "reason": "文言词汇，考查对古代政务词汇的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "安抚、安定",
    "sourceSentence": "知道注重在安辑保守,处置还得法",
-   "type": "contextual-choice",
-   "question": "「知道注重在安辑保守」中「安辑」的意思是",
-   "options": [
-    "安装收集",
-    "安抚安定",
-    "安分守己",
-    "安顿辑录"
-   ],
-   "answerIndex": 1,
-   "explanation": "安辑意为安抚、安定，符合文中描写地方治理的语境。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《古汉语常用字字典》"
-   ],
    "location": {
     "charIndex": 164
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1566:v12"
   },
   {
    "id": "lesson-1566:v13",
    "word": "悖时",
    "annotated": false,
-   "decision": "question",
-   "reason": "地方方言，直接影响对人物情感及对话语气的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "倒霉、不走运",
    "sourceSentence": "你个悖时砍脑壳的",
-   "type": "interpretation",
-   "question": "「你个悖时砍脑壳的！」一句中，「悖时」一词表达的情感是",
-   "options": [
-    "赞美对方技艺高超",
-    "表达对对方的爱慕",
-    "咒骂对方倒霉、不走运",
-    "感叹时光流逝"
-   ],
-   "answerIndex": 2,
-   "explanation": "“悖时”是湘西地区方言，意为倒霉、不走运，是翠翠在误解对方欺侮自己时脱口而出的骂人话。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4330
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1566:v13"
   },
   {
    "id": "lesson-1566:v14",
    "word": "喧阗",
    "annotated": false,
-   "decision": "question",
-   "reason": "书面语，考查对形容声音词汇的掌握",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "声音大而杂",
    "sourceSentence": "在小教场迎春,锣鼓喧阗大热闹",
-   "type": "contextual-choice",
-   "question": "「锣鼓喧阗大热闹」中「喧阗」的意思是",
-   "options": [
-    "声音嘈杂且大",
-    "节奏缓慢",
-    "整齐划一",
-    "清脆悦耳"
-   ],
-   "answerIndex": 0,
-   "explanation": "喧阗指声音大而杂，常形容节日庆典的热闹场面。",
-   "difficulty": 1,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 5378
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1566:v14"
   },
   {
    "id": "lesson-1566:v15",
    "word": "拮据",
    "annotated": false,
-   "decision": "question",
-   "reason": "常用词，考查在特定语境下的准确理解",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
    "contextMeaning": "经济窘迫",
    "sourceSentence": "且知道祖孙二人所过的日子,十分拮据",
-   "type": "contextual-choice",
-   "question": "「且知道祖孙二人所过的日子，十分拮据」中「拮据」的意思是",
-   "options": [
-    "极其富有",
-    "生活安定",
-    "经济窘迫",
-    "忙碌不堪"
-   ],
-   "answerIndex": 2,
-   "explanation": "拮据指经济困难，生活窘迫，符合文中对祖孙二人贫寒生活的描写。",
-   "difficulty": 1,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 6241
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1566:v15"
   },
   {
    "id": "lesson-1566:v16",
    "word": "不加检点",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语用法，考查对人物言行评价的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "不注意约束言行",
    "sourceSentence": "祖父不明白这句话的意思所在,因为今天太高兴一点,便不加检点笑着说",
-   "type": "interpretation",
-   "question": "文中祖父「不加检点」地笑着说，体现了祖父当时怎样的心理？",
-   "options": [
-    "对翠翠的婚事漠不关心",
-    "因过于高兴而缺乏审慎，言语直白",
-    "对他人的议论感到愤怒",
-    "因醉酒而神志不清"
-   ],
-   "answerIndex": 1,
-   "explanation": "“不加检点”指说话做事不加思考、不注意约束，文中指祖父因高兴而直言不讳地向翠翠提及其婚事，缺乏审慎。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 6495
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1566:v16"
   },
   {
    "id": "lesson-1566:v17",
    "word": "拢岸",
    "annotated": false,
-   "decision": "question",
-   "reason": "常用动宾搭配，考查对小说动作描写的理解",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
    "contextMeaning": "靠岸",
    "sourceSentence": "船拢岸时,那人跳上了码头",
-   "type": "contextual-choice",
-   "question": "「船拢岸时」中「拢岸」的意思是",
-   "options": [
-    "离开岸边",
-    "靠岸",
-    "在岸上行走",
-    "搁浅"
-   ],
-   "answerIndex": 1,
-   "explanation": "拢，靠近、到达。拢岸即船靠向岸边。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 7168
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1566:v17"
   },
   {
    "id": "lesson-1566:v18",
    "word": "行雨",
    "annotated": false,
-   "decision": "question",
-   "reason": "方言/特殊用法，考查对文本细节的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "阵雨",
    "sourceSentence": "一切玩得正好时,忽然落了行雨,无人衣衫不被雨湿透",
-   "type": "interpretation",
-   "question": "文中「忽然落了行雨」的「行雨」最恰当的解释是",
-   "options": [
-    "下行的雨",
-    "阵雨",
-    "毛毛细雨",
-    "暴雨"
-   ],
-   "answerIndex": 1,
-   "explanation": "从文中“一切玩得正好时，忽然落了”可知，这是一种突发的、过阵即止的雨，即阵雨。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 5798
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1566:v18"
   },
   {
    "id": "lesson-1566:v19",
@@ -322,5 +239,267 @@
    "contextMeaning": "一名“鹳河”，在今江苏淮安西北，北通淮水，南接运河。建炎四年（1130），韩世忠与金兀术战于黄天荡（今南京东北长江干流），相传梁红玉亲自擂鼓助战。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1566:v12",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1566:v12",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "cb70a2579421676b3427b795db69c20e8eaaade27d5f212a7214baa6714ba662",
+   "formerItem": {
+    "id": "lesson-1566:v12",
+    "word": "安辑",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文言词汇，考查对古代政务词汇的理解",
+    "contextMeaning": "安抚、安定",
+    "sourceSentence": "知道注重在安辑保守,处置还得法",
+    "type": "contextual-choice",
+    "question": "「知道注重在安辑保守」中「安辑」的意思是",
+    "options": [
+     "安装收集",
+     "安抚安定",
+     "安分守己",
+     "安顿辑录"
+    ],
+    "answerIndex": 1,
+    "explanation": "安辑意为安抚、安定，符合文中描写地方治理的语境。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《古汉语常用字字典》"
+    ],
+    "location": {
+     "charIndex": 164
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1566:v13",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1566:v13",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "bf37a0d818e144213c75846027c146076e0b82e3404191480a89be3c444af291",
+   "formerItem": {
+    "id": "lesson-1566:v13",
+    "word": "悖时",
+    "annotated": false,
+    "decision": "question",
+    "reason": "地方方言，直接影响对人物情感及对话语气的理解",
+    "contextMeaning": "倒霉、不走运",
+    "sourceSentence": "你个悖时砍脑壳的",
+    "type": "interpretation",
+    "question": "「你个悖时砍脑壳的！」一句中，「悖时」一词表达的情感是",
+    "options": [
+     "赞美对方技艺高超",
+     "表达对对方的爱慕",
+     "咒骂对方倒霉、不走运",
+     "感叹时光流逝"
+    ],
+    "answerIndex": 2,
+    "explanation": "“悖时”是湘西地区方言，意为倒霉、不走运，是翠翠在误解对方欺侮自己时脱口而出的骂人话。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4330
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1566:v14",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1566:v14",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "16722d80afebd60ab1ff172c7e2610c0c2cf8effa01e3bc78a8beb9c7bed64e3",
+   "formerItem": {
+    "id": "lesson-1566:v14",
+    "word": "喧阗",
+    "annotated": false,
+    "decision": "question",
+    "reason": "书面语，考查对形容声音词汇的掌握",
+    "contextMeaning": "声音大而杂",
+    "sourceSentence": "在小教场迎春,锣鼓喧阗大热闹",
+    "type": "contextual-choice",
+    "question": "「锣鼓喧阗大热闹」中「喧阗」的意思是",
+    "options": [
+     "声音嘈杂且大",
+     "节奏缓慢",
+     "整齐划一",
+     "清脆悦耳"
+    ],
+    "answerIndex": 0,
+    "explanation": "喧阗指声音大而杂，常形容节日庆典的热闹场面。",
+    "difficulty": 1,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 5378
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1566:v15",
+   "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+   "reviewedAt": "2026-07-30T00:32:00.000Z",
+   "itemId": "lesson-1566:v15",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
+   "sourceItemSha256": "dc98e1054b86331e809eb3b0ef760909295376ad8f6561939e1b86944768b5e1",
+   "formerItem": {
+    "id": "lesson-1566:v15",
+    "word": "拮据",
+    "annotated": false,
+    "decision": "question",
+    "reason": "常用词，考查在特定语境下的准确理解",
+    "contextMeaning": "经济窘迫",
+    "sourceSentence": "且知道祖孙二人所过的日子,十分拮据",
+    "type": "contextual-choice",
+    "question": "「且知道祖孙二人所过的日子，十分拮据」中「拮据」的意思是",
+    "options": [
+     "极其富有",
+     "生活安定",
+     "经济窘迫",
+     "忙碌不堪"
+    ],
+    "answerIndex": 2,
+    "explanation": "拮据指经济困难，生活窘迫，符合文中对祖孙二人贫寒生活的描写。",
+    "difficulty": 1,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 6241
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1566:v16",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1566:v16",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "63d4decebecc18ba57511230458706390ac3a074a6d9591c6df61b9b5bc6537a",
+   "formerItem": {
+    "id": "lesson-1566:v16",
+    "word": "不加检点",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语用法，考查对人物言行评价的理解",
+    "contextMeaning": "不注意约束言行",
+    "sourceSentence": "祖父不明白这句话的意思所在,因为今天太高兴一点,便不加检点笑着说",
+    "type": "interpretation",
+    "question": "文中祖父「不加检点」地笑着说，体现了祖父当时怎样的心理？",
+    "options": [
+     "对翠翠的婚事漠不关心",
+     "因过于高兴而缺乏审慎，言语直白",
+     "对他人的议论感到愤怒",
+     "因醉酒而神志不清"
+    ],
+    "answerIndex": 1,
+    "explanation": "“不加检点”指说话做事不加思考、不注意约束，文中指祖父因高兴而直言不讳地向翠翠提及其婚事，缺乏审慎。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 6495
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1566:v17",
+   "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+   "reviewedAt": "2026-07-30T00:32:00.000Z",
+   "itemId": "lesson-1566:v17",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
+   "sourceItemSha256": "99552418e00443e40995743c53beead9184155b14461af6732211b004f34d3cc",
+   "formerItem": {
+    "id": "lesson-1566:v17",
+    "word": "拢岸",
+    "annotated": false,
+    "decision": "question",
+    "reason": "常用动宾搭配，考查对小说动作描写的理解",
+    "contextMeaning": "靠岸",
+    "sourceSentence": "船拢岸时,那人跳上了码头",
+    "type": "contextual-choice",
+    "question": "「船拢岸时」中「拢岸」的意思是",
+    "options": [
+     "离开岸边",
+     "靠岸",
+     "在岸上行走",
+     "搁浅"
+    ],
+    "answerIndex": 1,
+    "explanation": "拢，靠近、到达。拢岸即船靠向岸边。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 7168
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1566:v18",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1566:v18",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "02799ae36b6a4e63a53d2e35caccd71c542b32e62978597f545ff64e41f5a7fd",
+   "formerItem": {
+    "id": "lesson-1566:v18",
+    "word": "行雨",
+    "annotated": false,
+    "decision": "question",
+    "reason": "方言/特殊用法，考查对文本细节的理解",
+    "contextMeaning": "阵雨",
+    "sourceSentence": "一切玩得正好时,忽然落了行雨,无人衣衫不被雨湿透",
+    "type": "interpretation",
+    "question": "文中「忽然落了行雨」的「行雨」最恰当的解释是",
+    "options": [
+     "下行的雨",
+     "阵雨",
+     "毛毛细雨",
+     "暴雨"
+    ],
+    "answerIndex": 1,
+    "explanation": "从文中“一切玩得正好时，忽然落了”可知，这是一种突发的、过阵即止的雨，即阵雨。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 5798
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-review-20260729-modern-basic-meaning",
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

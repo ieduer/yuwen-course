@@ -23,145 +23,79 @@
    "id": "lesson-1712:v02",
    "word": "瘪三",
    "annotated": true,
-   "decision": "question",
-   "reason": "语境义与字面义差异大，且为课文核心比喻。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指没有正当职业、样子干瘪难看的游民，此处比喻文章内容干枯、乏味。",
    "sourceSentence": "如果一篇文章,一个演说,颠来倒去,总是那几个名词,一套“学生腔”,没有一点生动活泼的语言,这岂不是语言无味,面目可憎,像个瘪三吗?",
-   "type": "contextual-choice",
-   "question": "文中将党八股比作“瘪三”，主要意在强调其什么特点？",
-   "options": [
-    "贫穷潦倒，行为不端",
-    "内容空洞，语言干瘪乏味",
-    "游手好闲，没有正当职业",
-    "外表丑陋，令人心生厌恶"
-   ],
-   "answerIndex": 1,
-   "explanation": "文中作者通过“干瘪得很”与“没有一点生动活泼的语言”来定义党八股像“瘪三”，重点在于批判其文风枯燥无物。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2204
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1712:v02"
   },
   {
    "id": "lesson-1712:v03",
    "word": "蹩脚",
    "annotated": true,
-   "decision": "question",
-   "reason": "高频易错词，考察字音与词义。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "本领不强，水平很差。",
    "sourceSentence": "因此,群众就不欢迎他们枯燥无味的宣传,我们也不需要这样蹩脚的不中用的宣传家。",
-   "type": "pronunciation",
-   "question": "下列对“蹩脚”一词的注音及解释，完全正确的一项是",
-   "options": [
-    "bié jiǎo，指走路跛脚",
-    "biè jiǎo，指水平极差",
-    "bié jiǎo，指本领不强",
-    "biè jiǎo，指动作笨拙"
-   ],
-   "answerIndex": 2,
-   "explanation": "“蹩”读作bié，在文中是形容文章或宣传水平低劣，与“本领不强”义同。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2786
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1712:v03"
   },
   {
    "id": "lesson-1712:v04",
    "word": "檄文",
    "annotated": true,
-   "decision": "question",
-   "reason": "古词新用，考察对于论证语气的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "古代声讨敌人或叛逆者的文书，此处借指对党八股进行严厉批判的文章。",
    "sourceSentence": "上面这八条,就是我们申讨党八股的檄文。",
-   "type": "interpretation",
-   "question": "作者将本文称为“檄文”，其主要意图是",
-   "options": [
-    "表明本文是一篇严厉批判党八股、号召全党革新文风的战斗性文章",
-    "模仿古代文人的笔法，增加文章的文学色彩",
-    "强调党八股像叛逆者一样，必须通过战争手段解决",
-    "说明本文是写给敌人看的，旨在威慑反动派"
-   ],
-   "answerIndex": 0,
-   "explanation": "“檄文”的特点在于声讨与征伐，作者用此词是为了突出批判党八股的坚决态度和战斗性。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4783
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1712:v04"
   },
   {
    "id": "lesson-1712:v05",
    "word": "党八股",
    "annotated": false,
-   "decision": "question",
-   "reason": "全文核心概念，考察语境理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指在共产党内存在的脱离实际、内容空洞、形式主义的坏文风。",
    "sourceSentence": "现在来分析一下党八股的坏处在什么地方。",
-   "type": "interpretation",
-   "question": "文中“党八股”这一称谓的实质含义是",
-   "options": [
-    "共产党内学习八股文的写作规范",
-    "一种在党内流行的形式主义、教条主义的坏文风",
-    "一种必须通过科举考试才能掌握的写作方法",
-    "仅指在抗日战争时期出现的冗长且毫无内容的会议记录"
-   ],
-   "answerIndex": 1,
-   "explanation": "党八股在文中指代的是一种脱离群众、主观主义、形式主义的恶劣文风，是批判的对象。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 26
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1712:v05"
   },
   {
    "id": "lesson-1712:v06",
    "word": "无的放矢",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语误用辨析，考察逻辑理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "没有目标乱射箭，比喻不看对象、不解决实际问题。",
    "sourceSentence": "党八股的第三条罪状是:无的放矢,不看对象。",
-   "type": "substitution",
-   "question": "下列词语替换“无的放矢”后，最符合原意的一项是",
-   "options": [
-    "有的放矢",
-    "盲目行事",
-    "无所适从",
-    "信口雌黄"
-   ],
-   "answerIndex": 1,
-   "explanation": "“无的放矢”意为没有明确目标，此处指不看对象乱讲一通，与“盲目行事”最为贴切。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1591
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1712:v06"
   },
   {
    "id": "lesson-1712:v07",
    "word": "轻重倒置",
    "annotated": false,
-   "decision": "question",
-   "reason": "论证逻辑中的关键评价语。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "把重要的事当成次要的，把次要的事当成重要的，此处指对待文章工作的态度不严谨。",
    "sourceSentence": "写文章做演说就不同了,这是专为影响人的,我们的同志反而随随便便,这就叫做轻重倒置。",
-   "type": "interpretation",
-   "question": "作者批评同志“轻重倒置”，是因为他们",
-   "options": [
-    "过于看重洗脸等小事，而忽视了写文章的大事",
-    "在写文章时，只顾个人名誉而忽视了群众需求",
-    "对影响他人思想和行动的宣传工作态度草率，缺乏应有的责任心",
-    "将残酷斗争的手段用在了同志身上，而对敌人过于宽容"
-   ],
-   "answerIndex": 2,
-   "explanation": "文中作者以洗脸作比，对比写文章对他人思想的影响，指出同志们对待写文章的态度过于随意，即轻重倒置。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4245
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1712:v07"
   },
   {
    "id": "lesson-1712:v08",
@@ -208,5 +142,225 @@
    "contextMeaning": "选自《毛泽东选集》第三卷（人民出版社1991年版）。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1712:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1712:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "7835b61805c531a7d7285a3dd650fde97e636ba906833d3aed9aaf95c9681112",
+   "formerItem": {
+    "id": "lesson-1712:v02",
+    "word": "瘪三",
+    "annotated": true,
+    "decision": "question",
+    "reason": "语境义与字面义差异大，且为课文核心比喻。",
+    "contextMeaning": "指没有正当职业、样子干瘪难看的游民，此处比喻文章内容干枯、乏味。",
+    "sourceSentence": "如果一篇文章,一个演说,颠来倒去,总是那几个名词,一套“学生腔”,没有一点生动活泼的语言,这岂不是语言无味,面目可憎,像个瘪三吗?",
+    "type": "contextual-choice",
+    "question": "文中将党八股比作“瘪三”，主要意在强调其什么特点？",
+    "options": [
+     "贫穷潦倒，行为不端",
+     "内容空洞，语言干瘪乏味",
+     "游手好闲，没有正当职业",
+     "外表丑陋，令人心生厌恶"
+    ],
+    "answerIndex": 1,
+    "explanation": "文中作者通过“干瘪得很”与“没有一点生动活泼的语言”来定义党八股像“瘪三”，重点在于批判其文风枯燥无物。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2204
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1712:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1712:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "d8544fb1833df207877cf9dcaac331fbaff943f0f3cd58ebd805d2faaee279cb",
+   "formerItem": {
+    "id": "lesson-1712:v03",
+    "word": "蹩脚",
+    "annotated": true,
+    "decision": "question",
+    "reason": "高频易错词，考察字音与词义。",
+    "contextMeaning": "本领不强，水平很差。",
+    "sourceSentence": "因此,群众就不欢迎他们枯燥无味的宣传,我们也不需要这样蹩脚的不中用的宣传家。",
+    "type": "pronunciation",
+    "question": "下列对“蹩脚”一词的注音及解释，完全正确的一项是",
+    "options": [
+     "bié jiǎo，指走路跛脚",
+     "biè jiǎo，指水平极差",
+     "bié jiǎo，指本领不强",
+     "biè jiǎo，指动作笨拙"
+    ],
+    "answerIndex": 2,
+    "explanation": "“蹩”读作bié，在文中是形容文章或宣传水平低劣，与“本领不强”义同。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2786
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1712:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1712:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "997b22f65df257698931b3fb22bfefeb8a31255a5e920b00ab2f61724948a27e",
+   "formerItem": {
+    "id": "lesson-1712:v04",
+    "word": "檄文",
+    "annotated": true,
+    "decision": "question",
+    "reason": "古词新用，考察对于论证语气的理解。",
+    "contextMeaning": "古代声讨敌人或叛逆者的文书，此处借指对党八股进行严厉批判的文章。",
+    "sourceSentence": "上面这八条,就是我们申讨党八股的檄文。",
+    "type": "interpretation",
+    "question": "作者将本文称为“檄文”，其主要意图是",
+    "options": [
+     "表明本文是一篇严厉批判党八股、号召全党革新文风的战斗性文章",
+     "模仿古代文人的笔法，增加文章的文学色彩",
+     "强调党八股像叛逆者一样，必须通过战争手段解决",
+     "说明本文是写给敌人看的，旨在威慑反动派"
+    ],
+    "answerIndex": 0,
+    "explanation": "“檄文”的特点在于声讨与征伐，作者用此词是为了突出批判党八股的坚决态度和战斗性。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4783
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1712:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1712:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "129cc959867d753c2d58a7aa264ebc1e4064776ec42f190aaed1d7b39134d197",
+   "formerItem": {
+    "id": "lesson-1712:v05",
+    "word": "党八股",
+    "annotated": false,
+    "decision": "question",
+    "reason": "全文核心概念，考察语境理解。",
+    "contextMeaning": "指在共产党内存在的脱离实际、内容空洞、形式主义的坏文风。",
+    "sourceSentence": "现在来分析一下党八股的坏处在什么地方。",
+    "type": "interpretation",
+    "question": "文中“党八股”这一称谓的实质含义是",
+    "options": [
+     "共产党内学习八股文的写作规范",
+     "一种在党内流行的形式主义、教条主义的坏文风",
+     "一种必须通过科举考试才能掌握的写作方法",
+     "仅指在抗日战争时期出现的冗长且毫无内容的会议记录"
+    ],
+    "answerIndex": 1,
+    "explanation": "党八股在文中指代的是一种脱离群众、主观主义、形式主义的恶劣文风，是批判的对象。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 26
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1712:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1712:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "18bd2065d319afcc4e4cf36fc6e8e5c67dfc0f2fa9bc068cd90d34c76dc434bd",
+   "formerItem": {
+    "id": "lesson-1712:v06",
+    "word": "无的放矢",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语误用辨析，考察逻辑理解。",
+    "contextMeaning": "没有目标乱射箭，比喻不看对象、不解决实际问题。",
+    "sourceSentence": "党八股的第三条罪状是:无的放矢,不看对象。",
+    "type": "substitution",
+    "question": "下列词语替换“无的放矢”后，最符合原意的一项是",
+    "options": [
+     "有的放矢",
+     "盲目行事",
+     "无所适从",
+     "信口雌黄"
+    ],
+    "answerIndex": 1,
+    "explanation": "“无的放矢”意为没有明确目标，此处指不看对象乱讲一通，与“盲目行事”最为贴切。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1591
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1712:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1712:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "ee8f5fe5ea89aab09ab5b1a01d4b3502b9f2b8a172716ae73955e0bf3c26ed21",
+   "formerItem": {
+    "id": "lesson-1712:v07",
+    "word": "轻重倒置",
+    "annotated": false,
+    "decision": "question",
+    "reason": "论证逻辑中的关键评价语。",
+    "contextMeaning": "把重要的事当成次要的，把次要的事当成重要的，此处指对待文章工作的态度不严谨。",
+    "sourceSentence": "写文章做演说就不同了,这是专为影响人的,我们的同志反而随随便便,这就叫做轻重倒置。",
+    "type": "interpretation",
+    "question": "作者批评同志“轻重倒置”，是因为他们",
+    "options": [
+     "过于看重洗脸等小事，而忽视了写文章的大事",
+     "在写文章时，只顾个人名誉而忽视了群众需求",
+     "对影响他人思想和行动的宣传工作态度草率，缺乏应有的责任心",
+     "将残酷斗争的手段用在了同志身上，而对敌人过于宽容"
+    ],
+    "answerIndex": 2,
+    "explanation": "文中作者以洗脸作比，对比写文章对他人思想的影响，指出同志们对待写文章的态度过于随意，即轻重倒置。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4245
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

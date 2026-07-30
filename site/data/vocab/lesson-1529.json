@@ -23,145 +23,79 @@
    "id": "lesson-1529:v02",
    "word": "打点",
    "annotated": false,
-   "decision": "question",
-   "reason": "在文中指整理行装，属于动词的多义用法，容易与“打听”或“点拨”混淆。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "整理、准备",
    "sourceSentence": "第二天,女人给他打点好一个小小的包裹,里面包了一身新单衣,一条新毛巾,一双新鞋子",
-   "type": "contextual-choice",
-   "question": "文中「第二天，女人给他打点好一个小小的包裹」中「打点」的意思是：",
-   "options": [
-    "打听消息",
-    "整理准备",
-    "点缀装饰",
-    "贿赂通融"
-   ],
-   "answerIndex": 1,
-   "explanation": "文中指为丈夫准备行装，故选整理准备。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1388
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1529:v02"
   },
   {
    "id": "lesson-1529:v03",
    "word": "藕断丝连",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语在文中的语境义与字面义有重合，但侧重心理描写，考查学生对人物心理的把握。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容女人们对丈夫依依不舍，情感难以割舍。",
    "sourceSentence": "女人们到底有些藕断丝连。",
-   "type": "interpretation",
-   "question": "文中「女人们到底有些藕断丝连」一句，表现了女人们怎样的心理状态？",
-   "options": [
-    "形容她们做事的效率不高，拖泥带水",
-    "形容她们对丈夫依依不舍，情感牵挂",
-    "形容她们对于参军一事犹豫不决",
-    "形容她们与丈夫之间存在难以调和的矛盾"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处用成语描绘女人们因思念丈夫而产生的牵挂心理。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1539
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1529:v03"
   },
   {
    "id": "lesson-1529:v04",
    "word": "落后分子",
    "annotated": false,
-   "decision": "question",
-   "reason": "此词在语境中含有反语和调侃意味，考查学生对特定语境下词义色彩变化的辨析能力。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "这里是水生对妻子们行为的嗔怪与调侃，并非指政治上的落后。",
    "sourceSentence": "不是她们是谁,一群落后分子",
-   "type": "contextual-choice",
-   "question": "文中水生戏称妻子们是「一群落后分子」，其真实语境含义是：",
-   "options": [
-    "批评她们思想觉悟低，阻碍革命",
-    "嘲讽她们在战斗中表现胆怯",
-    "亲昵地调侃她们不顾危险跑来找丈夫",
-    "严肃地指出她们违反了部队纪律"
-   ],
-   "answerIndex": 2,
-   "explanation": "水生是在伏击战后见到妻子们，虽语气带责备，实则关切，此处为调侃。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3334
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1529:v04"
   },
   {
    "id": "lesson-1529:v05",
    "word": "横",
    "annotated": false,
-   "decision": "question",
-   "reason": "考查方言词汇在叙事中的语境意义，影响对人物性格及互动关系的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "蛮横、傲慢、神气。",
    "sourceSentence": "你看他们那个横样子,见了我们爱搭理不搭理的",
-   "type": "contextual-choice",
-   "question": "文中「你看他们那个横样子」中「横」的意思是：",
-   "options": [
-    "宽阔",
-    "蛮横傲慢",
-    "横向移动",
-    "突如其来"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处形容战士们打完仗后神气、傲慢的样子。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3637
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1529:v05"
   },
   {
    "id": "lesson-1529:v06",
    "word": "凫水",
    "annotated": false,
-   "decision": "question",
-   "reason": "文言词汇在现代汉语中的存留，考查对动作行为的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "游泳。",
    "sourceSentence": "打沉了,我也会凫水捞东西,我管保比他们水式好,再深点儿我也不怕",
-   "type": "substitution",
-   "question": "下列词语替换文中「我也会凫水捞东西」的「凫水」，最恰当的一项是：",
-   "options": [
-    "划船",
-    "跳水",
-    "游泳",
-    "潜水"
-   ],
-   "answerIndex": 2,
-   "explanation": "凫即野鸭，凫水指像鸭子一样在水面游动，即游泳。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3777
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1529:v06"
   },
   {
    "id": "lesson-1529:v07",
    "word": "跳荡",
    "annotated": false,
-   "decision": "question",
-   "reason": "此词在文中的比喻用法极具文学色彩，考查学生对意象描写及动词修饰的敏感度。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "闪烁、晃动。",
    "sourceSentence": "水面没有一只船,水像无边的跳荡的水银",
-   "type": "interpretation",
-   "question": "「水像无边的跳荡的水银」一句中，「跳荡」一词的表达效果是：",
-   "options": [
-    "写出了水面的浑浊与沉重",
-    "写出了水面在阳光下波光粼粼的动态美",
-    "写出了水流的湍急与危险",
-    "写出了水银制作工艺的精巧"
-   ],
-   "answerIndex": 1,
-   "explanation": "以水银比喻水面，以“跳荡”形容光线在水波上的闪烁感，动感十足。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1907
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1529:v07"
   },
   {
    "id": "lesson-1529:v08",
@@ -244,5 +178,225 @@
    "contextMeaning": "也叫“冰排子”或者“冰床”，一种在冰上行驶的木制交通工具",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1529:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1529:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "7080fd9845a68a8717e09732c760fe8054d088307245c6afd0c4c1999c6ca552",
+   "formerItem": {
+    "id": "lesson-1529:v02",
+    "word": "打点",
+    "annotated": false,
+    "decision": "question",
+    "reason": "在文中指整理行装，属于动词的多义用法，容易与“打听”或“点拨”混淆。",
+    "contextMeaning": "整理、准备",
+    "sourceSentence": "第二天,女人给他打点好一个小小的包裹,里面包了一身新单衣,一条新毛巾,一双新鞋子",
+    "type": "contextual-choice",
+    "question": "文中「第二天，女人给他打点好一个小小的包裹」中「打点」的意思是：",
+    "options": [
+     "打听消息",
+     "整理准备",
+     "点缀装饰",
+     "贿赂通融"
+    ],
+    "answerIndex": 1,
+    "explanation": "文中指为丈夫准备行装，故选整理准备。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1388
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1529:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1529:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "d25e904fc3904c42684fca58d9ebf8aa148c1694eeaebc8cfcc596826a1c5a5f",
+   "formerItem": {
+    "id": "lesson-1529:v03",
+    "word": "藕断丝连",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语在文中的语境义与字面义有重合，但侧重心理描写，考查学生对人物心理的把握。",
+    "contextMeaning": "形容女人们对丈夫依依不舍，情感难以割舍。",
+    "sourceSentence": "女人们到底有些藕断丝连。",
+    "type": "interpretation",
+    "question": "文中「女人们到底有些藕断丝连」一句，表现了女人们怎样的心理状态？",
+    "options": [
+     "形容她们做事的效率不高，拖泥带水",
+     "形容她们对丈夫依依不舍，情感牵挂",
+     "形容她们对于参军一事犹豫不决",
+     "形容她们与丈夫之间存在难以调和的矛盾"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处用成语描绘女人们因思念丈夫而产生的牵挂心理。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1539
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1529:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1529:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "b764918f7fe3f381d6a86cec1d2208a19970ffdc39727feb0ac6236d7bbb4496",
+   "formerItem": {
+    "id": "lesson-1529:v04",
+    "word": "落后分子",
+    "annotated": false,
+    "decision": "question",
+    "reason": "此词在语境中含有反语和调侃意味，考查学生对特定语境下词义色彩变化的辨析能力。",
+    "contextMeaning": "这里是水生对妻子们行为的嗔怪与调侃，并非指政治上的落后。",
+    "sourceSentence": "不是她们是谁,一群落后分子",
+    "type": "contextual-choice",
+    "question": "文中水生戏称妻子们是「一群落后分子」，其真实语境含义是：",
+    "options": [
+     "批评她们思想觉悟低，阻碍革命",
+     "嘲讽她们在战斗中表现胆怯",
+     "亲昵地调侃她们不顾危险跑来找丈夫",
+     "严肃地指出她们违反了部队纪律"
+    ],
+    "answerIndex": 2,
+    "explanation": "水生是在伏击战后见到妻子们，虽语气带责备，实则关切，此处为调侃。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3334
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1529:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1529:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "fc6649a56ea6543888883766d47a87d350fcc1d5dac3e45f3172137e51744034",
+   "formerItem": {
+    "id": "lesson-1529:v05",
+    "word": "横",
+    "annotated": false,
+    "decision": "question",
+    "reason": "考查方言词汇在叙事中的语境意义，影响对人物性格及互动关系的理解。",
+    "contextMeaning": "蛮横、傲慢、神气。",
+    "sourceSentence": "你看他们那个横样子,见了我们爱搭理不搭理的",
+    "type": "contextual-choice",
+    "question": "文中「你看他们那个横样子」中「横」的意思是：",
+    "options": [
+     "宽阔",
+     "蛮横傲慢",
+     "横向移动",
+     "突如其来"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处形容战士们打完仗后神气、傲慢的样子。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3637
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1529:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1529:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "de14b7a10fe1665ffc919d2a77273a07593d4394e13462f36d07112ba1347396",
+   "formerItem": {
+    "id": "lesson-1529:v06",
+    "word": "凫水",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文言词汇在现代汉语中的存留，考查对动作行为的理解。",
+    "contextMeaning": "游泳。",
+    "sourceSentence": "打沉了,我也会凫水捞东西,我管保比他们水式好,再深点儿我也不怕",
+    "type": "substitution",
+    "question": "下列词语替换文中「我也会凫水捞东西」的「凫水」，最恰当的一项是：",
+    "options": [
+     "划船",
+     "跳水",
+     "游泳",
+     "潜水"
+    ],
+    "answerIndex": 2,
+    "explanation": "凫即野鸭，凫水指像鸭子一样在水面游动，即游泳。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3777
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1529:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1529:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "cd808d1ad5e082ae5d438a140e19f3d74c6c9cec252a0bdf94d7056980f629bc",
+   "formerItem": {
+    "id": "lesson-1529:v07",
+    "word": "跳荡",
+    "annotated": false,
+    "decision": "question",
+    "reason": "此词在文中的比喻用法极具文学色彩，考查学生对意象描写及动词修饰的敏感度。",
+    "contextMeaning": "闪烁、晃动。",
+    "sourceSentence": "水面没有一只船,水像无边的跳荡的水银",
+    "type": "interpretation",
+    "question": "「水像无边的跳荡的水银」一句中，「跳荡」一词的表达效果是：",
+    "options": [
+     "写出了水面的浑浊与沉重",
+     "写出了水面在阳光下波光粼粼的动态美",
+     "写出了水流的湍急与危险",
+     "写出了水银制作工艺的精巧"
+    ],
+    "answerIndex": 1,
+    "explanation": "以水银比喻水面，以“跳荡”形容光线在水波上的闪烁感，动感十足。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1907
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

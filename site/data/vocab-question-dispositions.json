@@ -1,0 +1,546 @@
+{
+  "schemaVersion": "yw-vocab-question-dispositions-v2",
+  "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+  "reviewedAt": "2026-07-30T00:32:00.000Z",
+  "reviews": {
+    "yw-vocab-review-20260730-independent-quality-v1": {
+      "reviewedAt": "2026-07-30T00:59:29.000Z",
+      "reason": "獨立覆核發現來源不屬於本課正文、答案不唯一或判定不成立，以及同一清理門檻下仍屬過簡單的現當代常用詞題。"
+    }
+  },
+  "policy": {
+    "action": "suppress",
+    "reasonCode": "context_free_basic_meaning",
+    "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。"
+  },
+  "decisions": [
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1468:v03",
+      "lessonId": "lesson-1468",
+      "itemId": "lesson-1468:v03",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "7d96e3d76b7d70a6764aa0c080c02231bf040856f6f1991c0ecf77b890389285",
+      "semanticSummary": {
+        "word": "停摆",
+        "question": "文中「停摆」一词的语境含义是",
+        "contextMeaning": "停止运转",
+        "sourceSentence": "正常生产生活骤然“停摆"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1471:v01",
+      "lessonId": "lesson-1471",
+      "itemId": "lesson-1471:v01",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "30f38779a110f6a1d72013a72a6f0a39ab2e30a329caa08484c196a4b8a65514",
+      "semanticSummary": {
+        "word": "关口",
+        "question": "「就是在这样的关口」中「关口」的意思是",
+        "contextMeaning": "关键时刻",
+        "sourceSentence": "就是在这样的关口,党派焦裕禄来到了兰考。"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1493:v04",
+      "lessonId": "lesson-1493",
+      "itemId": "lesson-1493:v04",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "a2775a97647006d5575baf6c80af498fafcdf64c1d412bb2377a59668d084d77",
+      "semanticSummary": {
+        "word": "背运",
+        "question": "“老人圣地亚哥是个‘背运’的渔夫”中“背运”的意思是",
+        "contextMeaning": "运气不好",
+        "sourceSentence": "小说前面的情节是:老人圣地亚哥是个“背运”的渔夫,连着八十四天没有捕到鱼"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1493:v09",
+      "lessonId": "lesson-1493",
+      "itemId": "lesson-1493:v09",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "052314a56794140c1dc65024e5efa9f33ec101c16a54c5b320edca8f46626348",
+      "semanticSummary": {
+        "word": "悬殊",
+        "question": "下列对“力量对比是悬殊的”中“悬殊”的理解，最准确的是",
+        "contextMeaning": "相差很大",
+        "sourceSentence": "一个孤单的老人,面对险恶的大海,力量对比是悬殊的,结果似乎也是不言而喻的"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1494:v07",
+      "lessonId": "lesson-1494",
+      "itemId": "lesson-1494:v07",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "2407033aa8871b982a5ff27e156930a5cf6e9073012be1ce98470e22188857ae",
+      "semanticSummary": {
+        "word": "辗转反侧",
+        "question": "「何塞·阿尔卡蒂奥·布恩迪亚在床上辗转反侧」中「辗转反侧」的意思是",
+        "contextMeaning": "翻来覆去，睡不着觉。",
+        "sourceSentence": "有天晚上何塞·阿尔卡蒂奥·布恩迪亚在床上辗转反侧,难以入睡"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1565:v04",
+      "lessonId": "lesson-1565",
+      "itemId": "lesson-1565:v04",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "3c18e94ee6c1d61f941b4da3a18a1974257b9b6ea7698c62d95dd17af231b87e",
+      "semanticSummary": {
+        "word": "间或",
+        "question": "“独有和别人口角的时候，间或瞪着眼睛道”中“间或”的意思是",
+        "contextMeaning": "偶尔",
+        "sourceSentence": "独有和别人口角的时候,间或瞪着眼睛道"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1566:v15",
+      "lessonId": "lesson-1566",
+      "itemId": "lesson-1566:v15",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "dc98e1054b86331e809eb3b0ef760909295376ad8f6561939e1b86944768b5e1",
+      "semanticSummary": {
+        "word": "拮据",
+        "question": "「且知道祖孙二人所过的日子，十分拮据」中「拮据」的意思是",
+        "contextMeaning": "经济窘迫",
+        "sourceSentence": "且知道祖孙二人所过的日子,十分拮据"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1566:v17",
+      "lessonId": "lesson-1566",
+      "itemId": "lesson-1566:v17",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "99552418e00443e40995743c53beead9184155b14461af6732211b004f34d3cc",
+      "semanticSummary": {
+        "word": "拢岸",
+        "question": "「船拢岸时」中「拢岸」的意思是",
+        "contextMeaning": "靠岸",
+        "sourceSentence": "船拢岸时,那人跳上了码头"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1693:v10",
+      "lessonId": "lesson-1693",
+      "itemId": "lesson-1693:v10",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "1a08140e33a15f46aefeb3df3d6b0e5d638b8659260f548cc3c87a0961ba3e88",
+      "semanticSummary": {
+        "word": "忌怕",
+        "question": "「敌人照例是忌怕夜晚的」中「忌怕」的意思是",
+        "contextMeaning": "害怕、畏惧",
+        "sourceSentence": "敌人照例是忌怕夜晚的,在地上烧起一堆堆的野火"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1693:v13",
+      "lessonId": "lesson-1693",
+      "itemId": "lesson-1693:v13",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "f56d8f60ac67a08d3a3c0fbc30626e291562feeee01cd1c065c0d0416655f800",
+      "semanticSummary": {
+        "word": "铺",
+        "question": "「铺在外面屋檐下的一块门板上」中「铺」的意思是",
+        "contextMeaning": "展开、铺设",
+        "sourceSentence": "我看见她把自己那条白百合花的新被,铺在外面屋檐下的一块门板上"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1698:v04",
+      "lessonId": "lesson-1698",
+      "itemId": "lesson-1698:v04",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "67f23c940a10861353c8a3dac88e7c22db55029279452f6500a27dfb660cbdf3",
+      "semanticSummary": {
+        "word": "座无虚席",
+        "question": "文中“座无虚席”的意思是：",
+        "contextMeaning": "形容座位都坐满了，没有空位",
+        "sourceSentence": "这里已经座无虚席,他买了一盘炒面站着吃起来。"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1699:v01",
+      "lessonId": "lesson-1699",
+      "itemId": "lesson-1699:v01",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "68c42c9adbac1fb75fd56f95f85e514eadb09fc8d5a32d3f803be90b37551901",
+      "semanticSummary": {
+        "word": "戛然而止",
+        "question": "「直到他生命戛然而止的那一天」中「戛然而止」的意思是",
+        "contextMeaning": "形容声音突然中止，这里指生命突然结束。",
+        "sourceSentence": "在生命的高度和广度上,他一直在探索自己的边界,直到他生命戛然而止的那一天......"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1717-p2:v11",
+      "lessonId": "lesson-1717-p2",
+      "itemId": "lesson-1717-p2:v11",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "523a8d14fdf1a8da8ffec461d739e012702fb304ffde9dbc3355403a170b5b77",
+      "semanticSummary": {
+        "word": "参差",
+        "question": "文中「落下参差的斑驳的黑影」中「参差」的含义是：",
+        "contextMeaning": "长短、高低、大小不齐",
+        "sourceSentence": "高处丛生的灌木，落下参差的斑驳的黑影，峭楞楞如鬼一般；"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1717-p2:v13",
+      "lessonId": "lesson-1717-p2",
+      "itemId": "lesson-1717-p2:v13",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "d1806514e1374f98d18d019bb53048d1612206ff3b3b6f3dae9882ffd4609b33",
+      "semanticSummary": {
+        "word": "受用",
+        "question": "文中「我且受用这无边的荷香月色好了」中「受用」的含义是：",
+        "contextMeaning": "享受",
+        "sourceSentence": "这是独处的妙处，我且受用这无边的荷香月色好了。"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1736:v03",
+      "lessonId": "lesson-1736",
+      "itemId": "lesson-1736:v03",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "f62f24d2c9f57bb6b23764dbd9f8b06c4ec9ed57345436f92ca1f0387346340e",
+      "semanticSummary": {
+        "word": "肆虐",
+        "question": "文中「疟疾重新开始肆虐」中「肆虐」一词的意思是",
+        "contextMeaning": "指（害虫、疾病、自然灾害等）横行，不受控制地造成破坏。",
+        "sourceSentence": "20世纪50年代,由于疟原虫抗药性的出现,疟疾重新开始肆虐,消灭疟疾的国际努力遭受重挫"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1736:v04",
+      "lessonId": "lesson-1736",
+      "itemId": "lesson-1736:v04",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "sourceItemSha256": "cdb6f37e04704ca7a35e9a21e2f6c0090ca0158c631abfe8f136c2b2a8b45ccb",
+      "semanticSummary": {
+        "word": "相悖",
+        "question": "「实验结果很难重复，而且似乎与文献记录相悖」中「相悖」的意思是",
+        "contextMeaning": "相反，违背。",
+        "sourceSentence": "研究的转折点出现在青蒿上,其提取物显示有一定的抗疟效果,然而,实验结果很难重复,而且似乎与文献记录相悖"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1572:v01",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1572",
+      "itemId": "lesson-1572:v01",
+      "action": "suppress",
+      "reasonCode": "wrong_source_material",
+      "reason": "題目來源不是《聽聽那冷雨》經審核正文，而是論壇選篇討論或 AI 英文回覆；先停止交付，待從已授權正文重建。",
+      "sourceItemSha256": "eaebb7325f5e5cd1a627f730dc0a83650e1a4f2a0fc4ebb205ce746092441cdd",
+      "semanticSummary": {
+        "word": "消逝",
+        "question": "文中「消逝」一词最恰当的近义替换是",
+        "contextMeaning": "逐渐减少以至消失",
+        "sourceSentence": "7 一个消逝了的山村 / 冯至"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1572:v02",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1572",
+      "itemId": "lesson-1572:v02",
+      "action": "suppress",
+      "reasonCode": "wrong_source_material",
+      "reason": "題目來源不是《聽聽那冷雨》經審核正文，而是論壇選篇討論或 AI 英文回覆；先停止交付，待從已授權正文重建。",
+      "sourceItemSha256": "1c49f565ba6f4cd9603919e617b56517b26f37e29590a8f0a6820b162824c75d",
+      "semanticSummary": {
+        "word": "语境",
+        "question": "文中提及「Once I have a better understanding of your needs」的目的是为了明确什么？",
+        "contextMeaning": "语言环境，指文章的上下文或创作背景",
+        "sourceSentence": "Once I have a better understanding of your needs, I can give you a more informed"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1572:v03",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1572",
+      "itemId": "lesson-1572:v03",
+      "action": "suppress",
+      "reasonCode": "wrong_source_material",
+      "reason": "題目來源不是《聽聽那冷雨》經審核正文，而是論壇選篇討論或 AI 英文回覆；先停止交付，待從已授權正文重建。",
+      "sourceItemSha256": "081d7b66aeb48ce8ba4674438821abe7493a11ff7f1cbb3e7d1dedd95ae9a3e0",
+      "semanticSummary": {
+        "word": "意象",
+        "question": "文中「vivid imagery」对应的中文术语是",
+        "contextMeaning": "文学作品中融入了作者主观情感的客观物象",
+        "sourceSentence": "Yu Guangzhong, the author, masterfully utilizes rich and evocative language to c"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1572:v04",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1572",
+      "itemId": "lesson-1572:v04",
+      "action": "suppress",
+      "reasonCode": "wrong_source_material",
+      "reason": "題目來源不是《聽聽那冷雨》經審核正文，而是論壇選篇討論或 AI 英文回覆；先停止交付，待從已授權正文重建。",
+      "sourceItemSha256": "f0ddbe4685cd3be29bfcaa14db48ea17f06a322b186ed977ffa285641b59c7d5",
+      "semanticSummary": {
+        "word": "迁移",
+        "question": "文中「broadening understanding」体现了哪种学习目标？",
+        "contextMeaning": "将已有的知识应用于新情境",
+        "sourceSentence": "This can be particularly enriching for students unfamiliar with the context, enc"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1572:v05",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1572",
+      "itemId": "lesson-1572:v05",
+      "action": "suppress",
+      "reasonCode": "wrong_source_material",
+      "reason": "題目來源不是《聽聽那冷雨》經審核正文，而是論壇選篇討論或 AI 英文回覆；先停止交付，待從已授權正文重建。",
+      "sourceItemSha256": "a43ff106bc9ac7d6c6ed3e7f32f9dcac397f0ed3be7892110dd4d1ba64b4b48d",
+      "semanticSummary": {
+        "word": "范畴",
+        "question": "若将「universal themes」中的「themes」替换为「范畴」，下列哪项表述最符合原意？",
+        "contextMeaning": "领域、范围",
+        "sourceSentence": "While all the options likely offer literary value, “Listen to the Cold Rain” del"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1569:v05",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1569",
+      "itemId": "lesson-1569:v05",
+      "action": "suppress",
+      "reasonCode": "invalid_or_ambiguous_question",
+      "reason": "「隨處可見」與「比比皆是」都能成立，題目沒有唯一答案。",
+      "sourceItemSha256": "c28be67c83a1b35b707bdec3c3e4a6b48fd0b7d58596967068bb9c2cb85545f2",
+      "semanticSummary": {
+        "word": "俯拾皆是",
+        "question": "「草间的菌子，俯拾皆是」中的「俯拾皆是」可以用下列哪个成语替换？",
+        "contextMeaning": "形容数量多，容易得到",
+        "sourceSentence": "下了一夜的雨,第二天太阳出来一蒸发,草间的菌子,俯拾皆是"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1700:v05",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1700",
+      "itemId": "lesson-1700:v05",
+      "action": "suppress",
+      "reasonCode": "invalid_or_ambiguous_question",
+      "reason": "選項含原詞本身並以明顯反義詞送分，不能形成有效語境辨析。",
+      "sourceItemSha256": "dfc4a75df0c16c613bb51aee6bd68e79d72d2e346ea3636dfcef493f602c5e39",
+      "semanticSummary": {
+        "word": "炉火纯青",
+        "question": "文中“炉火纯青”一词，若替换为以下哪个词语最不恰当？",
+        "contextMeaning": "比喻功夫达到了纯熟完美的境界。",
+        "sourceSentence": "将一门技术掌握到炉火纯青,这固然是工匠精神"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1700:v08",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1700",
+      "itemId": "lesson-1700:v08",
+      "action": "suppress",
+      "reasonCode": "invalid_or_ambiguous_question",
+      "reason": "「廢寢忘食地打遊戲」在語義上可以成立，不能用價值判斷取代詞義判定。",
+      "sourceItemSha256": "d822905a7987356c89b1261b03c840258d582d2fa529941d0bce5e0d874621eb",
+      "semanticSummary": {
+        "word": "废寝忘食",
+        "question": "下列句子中“废寝忘食”使用不正确的一项是：",
+        "contextMeaning": "顾不得睡觉，忘记了吃饭。形容专心努力。",
+        "sourceSentence": "怎能有废寝忘食、尽心竭力的付出"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1742:v06",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1742",
+      "itemId": "lesson-1742:v06",
+      "action": "suppress",
+      "reasonCode": "invalid_or_ambiguous_question",
+      "reason": "題目說明本身承認兩個選項都正確，沒有唯一答案。",
+      "sourceItemSha256": "e397fc6de9ff4c6f46bbc65c7107aaacbe4af4a0468c4c8419ff0aa4fc9b2dcf",
+      "semanticSummary": {
+        "word": "浅尝辄止",
+        "question": "下列句中「浅尝辄止」使用正确的一项是",
+        "contextMeaning": "略微尝试就停止，形容治学不深入",
+        "sourceSentence": "这样的领域是很多的,而且其中任何一个领域他都不是浅尝辄止"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1717-p2:v10",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1717-p2",
+      "itemId": "lesson-1717-p2:v10",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "reason": "「消受」只要求選出同義常用詞「享受」，與同課已下架的「受用」屬同一低增量層級。",
+      "sourceItemSha256": "cda4584ceadb3b167cc28b441020895887067777097473528436d3a8c9da83b4",
+      "semanticSummary": {
+        "word": "消受",
+        "question": "文中「可惜我们现在早已无福消受了」中「消受」的含义是：",
+        "contextMeaning": "享受",
+        "sourceSentence": "这真是有趣的事，可惜我们现在早已无福消受 了"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1458:v02",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1458",
+      "itemId": "lesson-1458:v02",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "reason": "現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
+      "sourceItemSha256": "36cb10fcef5865c88df48d44ecd7ac8fb7c3eb5e04087e7d4bee8eeb7b2aa3b2",
+      "semanticSummary": {
+        "word": "遗志",
+        "question": "「完成他们的遗志」中「遗志」的理解，最准确的一项是",
+        "contextMeaning": "先人未竟的志向与愿望",
+        "sourceSentence": "我们的先人指示我们,叫我们完成他们的遗志"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1461:v02",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1461",
+      "itemId": "lesson-1461:v02",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "reason": "現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
+      "sourceItemSha256": "d6fbe14916051f8120c322e25928109babb92939fb3b7a849849401bd1a0687f",
+      "semanticSummary": {
+        "word": "跋涉",
+        "question": "文中「长途跋涉」一词最贴切的解释是",
+        "contextMeaning": "登山涉水，指长途艰苦的行军",
+        "sourceSentence": "经过一年多的长途跋涉,经过无数次残酷的战斗"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1471:v06",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1471",
+      "itemId": "lesson-1471:v06",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "reason": "現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
+      "sourceItemSha256": "cfe60e10e674bafeb520b75155147f9cec95161e0475e316deb2b0215415b9b4",
+      "semanticSummary": {
+        "word": "身先士卒",
+        "question": "下列选项中对「身先士卒」理解最准确的是",
+        "contextMeaning": "作战时将领亲自带头冲在前面，现多比喻领导带头走在群众前面",
+        "sourceSentence": "他在抗灾斗争中,身先士卒,表现得很英勇。"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1518:v05",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1518",
+      "itemId": "lesson-1518:v05",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "reason": "現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
+      "sourceItemSha256": "8bf641834b2c09463643468b3a16076777d4451eed0d34f1b61123b61ed85020",
+      "semanticSummary": {
+        "word": "肤浅",
+        "question": "文中“何等肤浅”中“肤浅”的含义是：",
+        "contextMeaning": "认识浅薄，不深刻。",
+        "sourceSentence": "我党在幼年时期,我们对于马克思列宁主义的认识和对于中国革命的认识是何等肤浅,何等贫乏"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1523:v06",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1523",
+      "itemId": "lesson-1523:v06",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "reason": "現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
+      "sourceItemSha256": "1062501fe548de23f26f0f42a3644054c289fb39022517edb3037aa9e22f5f59",
+      "semanticSummary": {
+        "word": "枚举",
+        "question": "文中「枚举」的含义是：",
+        "contextMeaning": "一一列举",
+        "sourceSentence": "别的事情岂不也是这样吗,格黎东?我们用不着一一枚举,可以总起来看"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1540:v01",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1540",
+      "itemId": "lesson-1540:v01",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "reason": "現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
+      "sourceItemSha256": "961695ed7545dfbf22ad8a795e830fd8e068eb4883beecd6433a45389a4c6f38",
+      "semanticSummary": {
+        "word": "啰唆",
+        "question": "「这个女人真啰唆!」中「啰唆」的意思是",
+        "contextMeaning": "说话繁琐，使人厌烦",
+        "sourceSentence": "好了,好容易才把她打发走。这个女人真啰唆!"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1540:v02",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1540",
+      "itemId": "lesson-1540:v02",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "reason": "現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
+      "sourceItemSha256": "1a08b70617fbc5f10ce40226c60534d5c5b9b0834d613c840c15fde5ba8a7fc2",
+      "semanticSummary": {
+        "word": "受用",
+        "question": "「刚才你在楼上好像也觉得很受用」中「受用」的意思是",
+        "contextMeaning": "享受，感到舒服",
+        "sourceSentence": "刚才你在楼上好像也觉得很受用。"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1585:v08",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1585",
+      "itemId": "lesson-1585:v08",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "reason": "現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
+      "sourceItemSha256": "ef854d4662362191175aa5c5cfcaf551ef08b5abf99df41005744166699f0414",
+      "semanticSummary": {
+        "word": "人才济济",
+        "question": "下列句子中“人才济济”使用正确的一项是",
+        "contextMeaning": "形容有才能的人很多",
+        "sourceSentence": "我们这个世界人才济济,人们勤学好问。"
+      }
+    },
+    {
+      "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1732:v10",
+      "reviewRef": "yw-vocab-review-20260730-independent-quality-v1",
+      "lessonId": "lesson-1732",
+      "itemId": "lesson-1732:v10",
+      "action": "suppress",
+      "reasonCode": "context_free_basic_meaning",
+      "reason": "現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
+      "sourceItemSha256": "c8ffbdc1075d402edeaef50a5c2dab5c565d003cc530fe672f5dda7da9784815",
+      "semanticSummary": {
+        "word": "昧心",
+        "question": "鲁大海骂周朴园发的财是「昧心财」，这里的「昧心」是指",
+        "contextMeaning": "违背良心",
+        "sourceSentence": "你发的是绝子绝孙的昧心财"
+      }
+    }
+  ]
+}

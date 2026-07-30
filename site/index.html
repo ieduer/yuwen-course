@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="https://img.bdfz.net/20250503004.webp">
   <meta name="theme-color" content="#f4f0e6">
   <title>課文 · 語文學習矩陣</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260726-slide-pilot-v1">
+  <link rel="stylesheet" href="assets/styles.css?v=20260730-content-rules-v1">
 </head>
 <body>
   <div class="read-progress" aria-hidden="true"><span id="read-progress-bar"></span></div>
@@ -49,6 +49,7 @@
       <a class="text-button atlas-link" href="books.html" data-same-tab>書目</a>
       <a class="text-button atlas-link" href="star.html" data-same-tab>星圖</a>
       <a class="text-button atlas-link insight-link" href="insights.html" data-same-tab>己身</a>
+      <a class="text-button auth-login" id="auth-login" href="https://my.bdfz.net/" data-same-tab hidden>登入</a>
       <button class="text-button" id="page-open" type="button">原圖</button>
       <button class="text-button" id="resources-open" type="button">資料</button>
     </nav>
@@ -93,7 +94,7 @@
               <div class="section-label">03 / 打開材料</div>
               <h2 id="materials-title">延伸</h2>
             </div>
-            <p id="materials-count">按內容去重後隨時可展示</p>
+            <p id="materials-count"></p>
           </div>
           <div id="material-stream"></div>
         </section>
@@ -104,7 +105,7 @@
               <div class="section-label">04 / 課堂呈現</div>
               <h2 id="lesson-media-title">課堂演示</h2>
             </div>
-            <p id="lesson-media-status">正在核對本課視覺資源</p>
+            <p id="lesson-media-status"></p>
           </div>
           <div class="lesson-media-content" id="lesson-media-content"></div>
         </section>
@@ -210,6 +211,7 @@
   <script defer src="https://my.bdfz.net/site-auth.js" data-site-key="yw"></script>
   <script async src="https://nav.bdfz.net/bdfz-nav.js"></script>
   <script defer src="assets/learning-evidence.js?v=20260727-evidence-loop-v2"></script>
-  <script defer src="assets/app.js?v=20260727-evidence-loop-v2"></script>
+  <script defer src="assets/vocab-progress.js?v=20260730-vocab-scope-v1"></script>
+  <script defer src="assets/app.js?v=20260730-content-rules-v1"></script>
 </body>
 </html>

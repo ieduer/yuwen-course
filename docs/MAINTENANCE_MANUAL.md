@@ -1,6 +1,68 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-07-28 (America/Los_Angeles)
+Last reviewed: 2026-07-30 (America/Los_Angeles)
+
+## 2026-07-30 Web/native shared-content candidate (not yet published)
+
+The website repository remains the content authority. The independent native
+client repository is `/Users/ylsuen/CF/yuwen-native-android`; it must never keep
+a hand-edited copy of website content. Both clients consume the same generated,
+versioned and content-addressed graph.
+
+Current reviewed source candidate:
+
+```text
+Books / lessons / posts:       5 / 191 / 1,153
+Reader annotations:            2,932 unique / 2,933 references
+Reader media:                  165 unique URLs / 167 visible references
+Reader media ledger SHA-256:   5487243dd8d14d65dfadc20ed544a999aaa318fc20c291462ea62c69e1eff320
+Reader inventory SHA-256:      2c7672e88dc8e1bb0ea1e4af84e59ccaf521ded73e774e35c03abd5547f69d03
+Active vocabulary questions:   723 / 77 classical-or-poetry lessons
+Eligibility tombstones:        344 / 56 nonclassical lessons
+Quality tombstones:            35
+Reviewed vocab exceptions:     0
+Learning manifest:             yw-7abfb37143d876fd / 901 items
+Native semantic digest:        sha256:da21d574de1b58c37763032e15a5926c89df8befdedadb5642700a7ec1b7f140
+Blocked content version:       yw-da21d574de1b58c37763032e
+Blocked release receipt:       sha256-1cd132a3ced4a699e5105d14e1399aa6eb9740fd273c2a01c342ec3a658df297
+```
+
+The native digest above is approved by the tracked independent audit receipt
+after three byte-identical isolated rebuilds. That approval covers the
+canonical graph only. The candidate remains blocked because it records
+`sourceClean=false`, `appDisposition=blocked`, no Pages deployment ID and no
+publication time; no App pointer, Pages production deployment or APK release
+may claim it.
+
+Vocabulary eligibility is sourced only from
+`site/data/vocab-eligibility.json`. Nonclassical lessons do not fetch or show a
+vocabulary stage. Existing D1/User Center attempts and evaluation history are
+append-only and remain untouched even when a source item becomes tombstoned.
+
+Reader annotation labels are canonicalized by first occurrence. Web and App
+must never render source reuse labels such as `[3:1]` or BBCode color tokens.
+The main text projection contains only the primary text and its annotations;
+supplementary posts, resource links and images render only in the separate
+materials section. Anonymous Web users get the existing User Center login
+route with `returnTo`; this project must not add a local account flow.
+
+The release transaction is fail-closed:
+
+1. commit and deploy the reviewed Web source while the old App
+   `latest-stable` pointer remains unchanged;
+2. generate the App payload from that exact clean Git revision and record the
+   Web deployment ID, schema, stable IDs and semantic digest;
+3. publish and publicly read back immutable content objects first;
+4. record exactly one App disposition:
+   `compatible-and-synced`, `compatible-no-client-release`, or `blocked`;
+5. move `latest-stable` last only when all Web/App tests and receipts pass.
+
+Unknown schema, mismatched hashes, dirty generated output, missing media
+receipts, an unreviewed audit receipt, or an incomplete App disposition blocks
+the pointer move. The current audit receipt is approved, but it does not waive
+the separate clean-source, deployment, publication and App-disposition gates.
+A Web content release may be compatible without a new APK, but it may never
+omit the App disposition.
 
 ## 2026-07-28 completion eligibility and anti-farming (current)
 
@@ -103,7 +165,7 @@ Do not modify or deploy `bdfz-user-center`, `apis`, `bdfz-nav`, `img`, `qunxian`
 ## 2. Architecture and data ownership
 
 ```text
-Browser / Companion WebView
+Browser / Companion legacy WebView
   -> Pages static artifact (site/)
   -> Pages Worker (site/_worker.js)
        -> D1 yuwen-reading-db: reading submissions and vocab attempts
@@ -122,6 +184,11 @@ Operational consumers
   <- my.bdfz.net: legacy progress readback + trusted process dossier/A+ gate
   <- pulse.bdfz.net: host coverage and availability reporting
   <- bdfz-companion: trusted WebView entry
+
+Native YW App (independent repository)
+  -> immutable content objects generated from this repository
+  -> latest-stable pointer moved only after Web/App contract verification
+  -> native offline store + idempotent User Center outbox
 ```
 
 Non-regenerable data: D1 reading submissions, version history, vocabulary attempts, and student-linked evidence. Generated lesson JSON, taxonomy, vocabulary banks, and static assets are reproducible only when their source inputs and scripts are preserved.
@@ -192,11 +259,44 @@ Do not inspect or commit raw student rows. Static-only releases may record `no D
 
 ```zsh
 npm ci
+npm run check:taxonomy
+npm run verify:authors
+npm run verify:vocab:release
+npm run test:vocab-progress
+npm run check:reader-documents
+npm run verify:reader-media
+npm run test:reader-media
+npm run check:learning-manifest
+npm run test:learning-manifest
+npm run test:evidence-contract
+npm run test:reading
+npm run check:content-projection
+npm run check:web-url-projection
+npm run test:native-content
 npm run release:check
 git diff --check
 ```
 
 Run a staged secret scan before commit or push. Generated cache, `output/`, `.claude/`, Playwright profiles, local D1 state, backups, and secrets are not source artifacts.
+
+Reader media maintenance is deliberately explicit and never hidden inside an
+ordinary build:
+
+```zsh
+node scripts/build_reader_documents.mjs \
+  --stage-media-inventory <EMPTY_STAGING_DIRECTORY>
+node scripts/collect_reader_media_receipts.mjs \
+  --reader-documents-dir <EMPTY_STAGING_DIRECTORY>
+npm run build:reader-documents
+npm run verify:reader-media
+npm run test:reader-media
+```
+
+The first command only creates a non-canonical inventory stage and records
+`networkUsed:false`. The collector is the sole networked step. Review the
+receipt/anomaly diff before rebuilding canonical documents. Ordinary
+`build:reader-documents`, `precontent:check`, and release builds must not fetch
+the network.
 
 ### 5.4 Preview
 
@@ -205,21 +305,40 @@ Deploy the exact checksum-fixed `site/` artifact to a non-production branch. The
 Verify on the preview URL:
 
 - manifest/taxonomy/vocabulary counts and removed-record absence;
+- all 191 reader documents, annotation projection and resource-link policy;
+- all visible images joined to the reviewed media receipt ledger by exact URL,
+  bytes, SHA-256, MIME and dimensions;
+- 723 active vocabulary questions only in 77 classical/poetry lessons, 344
+  eligibility tombstones, 35 retained quality tombstones, zero exceptions and
+  absence of every tombstoned ID from the active set;
+- Web/App schema, stable-ID, semantic-digest and fixture equality;
 - reading health plus anonymous `401` boundaries;
 - APIS, QX portrait, textbook-page, User Center SDK, and Pulse contracts;
 - desktop and 390 px mobile layout, accessibility, navigation, loading/error states, dark mode, animation, and console/network cleanliness;
-- vocabulary correct/wrong/retry/completion flow and persistence;
+- vocabulary wrong/retry, same-lesson automatic next, final-question stop,
+  lesson-switch race cancellation and persistence;
+- canonical continuous annotations with no BBCode/raw reuse labels; main text,
+  supplementary materials and resource/image actions remain separate;
+- anonymous login CTA routes through `my.bdfz.net/?returnTo=...`;
 - D1 write/read canary only when explicitly authorized and isolated.
 
 ### 5.5 Production
 
-Only after preview and all gates pass:
+Only after preview and all gates pass, publish immutable content objects before
+moving the App pointer. Then deploy the exact checksum-fixed Web artifact:
 
 ```zsh
 npm run deploy
 ```
 
 Record Git commit/tag, staged-file set, artifact checksum manifest, Pages deployment ID/URL, D1 migration/export state, previous verified deployment, and exact live verification result. The displayed Pages commit hash is not accepted as source proof for a direct upload.
+
+Native APK release is a separate gate. The same byte-identical signed artifact
+must pass upgrade and persistence acceptance on registered Phone A
+`c5467d2b`, registered Phone B `6393cccf`, and the separate physical tablet as
+specified in `/Users/ylsuen/CF/runbooks/yw_native_app_operations.md`.
+Emulators and device clouds may add coverage but cannot replace any of those
+three physical-device receipts.
 
 ## 6. Monitoring and post-deploy validation
 
@@ -246,6 +365,9 @@ After rollback, rerun `docs/VERIFICATION.md` health, contract, dependency, brows
 | Live differs from GitHub | compare live asset SHA-256 with `site/`; inspect Pages deployment and direct-upload ownership | unreproducible artifact/source drift |
 | `9109` from Wrangler | reload canonical secrets without printing; run `wrangler whoami` and read-only list | local Cloudflare authentication |
 | Root works but lesson is missing | manifest block + flat list, lesson JSON, taxonomy, search/recommendation indexes, cache index | generated-data consistency |
+| Web and App show different lesson content | compare clean source revision, App disposition, reader/native semantic digests and `latest-stable` object | pointer moved before joint verification or stale generated copy |
+| Reader image is missing in App | exact URL lookup in `reader-media-receipts.v1.json`, receipt anomaly ledger, bytes/SHA/MIME/dimensions | media receipt absent or URL changed without recollection |
+| Removed vocabulary question reappears | disposition source-item SHA, tombstone ID, active index and generated lesson file | generator bypassed reviewed dispositions or reused a tombstoned ID |
 | Reading APIs return `503` | binding readback, D1 health/schema/migrations; verify production lacks test seam | Pages/D1 config |
 | Anonymous data leak | stop release; verify server-side User Center session check and `401` tests | auth boundary |
 | AI errors | YW request headers/Origin, `data.answer`, allowed APIS health test | shared APIS contract; do not add a leaf key |

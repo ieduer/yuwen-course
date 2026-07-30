@@ -11,145 +11,79 @@
    "id": "lesson-1698:v01",
    "word": "袭人",
    "annotated": false,
-   "decision": "question",
-   "reason": "多义词，此处词义与现代口语中作为人名或特定用法不同，易产生偏差",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "侵袭、充满",
    "sourceSentence": "初冬的早晨,寒气袭人。",
-   "type": "contextual-choice",
-   "question": "文中“寒气袭人”的“袭”字，在语境中的含义是：",
-   "options": [
-    "偷袭",
-    "侵袭",
-    "延续",
-    "服饰"
-   ],
-   "answerIndex": 1,
-   "explanation": "在“寒气袭人”中，袭为侵袭、充满之意，形容寒冷的气息扑面而来。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 70
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1698:v01"
   },
   {
    "id": "lesson-1698:v02",
    "word": "体贴入微",
    "annotated": false,
-   "decision": "question",
-   "reason": "考查对成语内涵的理解，影响对人物精神的把握",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容照顾得非常细心周到",
    "sourceSentence": "人们常用体贴入微来形容张秉贵的服务态度。",
-   "type": "interpretation",
-   "question": "文中用“体贴入微”形容张秉贵，最贴切的理解是：",
-   "options": [
-    "他能猜中顾客所有的心思",
-    "他能通过观察细节，给予顾客周到细致的照顾",
-    "他对待顾客像对待自己的家人一样",
-    "他能够忍受顾客所有的无理取闹"
-   ],
-   "answerIndex": 1,
-   "explanation": "“体贴入微”侧重于在每一个细小环节上给予对方关怀，对应文中张秉贵在售货细节上的表现。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 511
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1698:v02"
   },
   {
    "id": "lesson-1698:v03",
    "word": "参谋",
    "annotated": false,
-   "decision": "question",
-   "reason": "词义迁移，本为军事术语，此处指代服务中的角色，易被误解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "咨询者、提供建议的人",
    "sourceSentence": "为了当好顾客的参谋,他不知费了多少心血去熟悉自己柜台里的商品。",
-   "type": "contextual-choice",
-   "question": "“为了当好顾客的参谋”中“参谋”的语境义是：",
-   "options": [
-    "军队中的辅助指挥人员",
-    "暗中出谋划策的人",
-    "协助顾客挑选商品、提供专业建议的人",
-    "负责管理柜台的领导"
-   ],
-   "answerIndex": 2,
-   "explanation": "结合下文张秉贵学习商品知识、为顾客介绍合适商品的行为，可知此处指提供专业建议。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2339
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1698:v03"
   },
   {
    "id": "lesson-1698:v04",
    "word": "座无虚席",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语理解，考查语境对成语字面意义的推导",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
    "contextMeaning": "形容座位都坐满了，没有空位",
    "sourceSentence": "这里已经座无虚席,他买了一盘炒面站着吃起来。",
-   "type": "contextual-choice",
-   "question": "文中“座无虚席”的意思是：",
-   "options": [
-    "座位非常舒适",
-    "没有人敢坐在座位上",
-    "座位全部被占满",
-    "座位已经撤掉了"
-   ],
-   "answerIndex": 2,
-   "explanation": "“虚”在此处为“空”的意思，座无虚席即没有空座位。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3080
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1698:v04"
   },
   {
    "id": "lesson-1698:v05",
    "word": "翻了身",
    "annotated": false,
-   "decision": "question",
-   "reason": "特殊词组，具有特定的历史语境意义",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指劳动人民摆脱了压迫，获得了政治地位和社会地位",
    "sourceSentence": "新中国成立后,他翻了身,打心眼儿里感谢党和毛主席。",
-   "type": "interpretation",
-   "question": "文中“他翻了身”指的是：",
-   "options": [
-    "他从童工变成了售货员",
-    "他从被压迫的地位转变为国家的主人",
-    "他学会了称糖算账的本领",
-    "他获得了劳动模范的称号"
-   ],
-   "answerIndex": 1,
-   "explanation": "“翻身”在当时的语境中，特指受压迫者获得了政治和经济地位上的解放。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1548
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1698:v05"
   },
   {
    "id": "lesson-1698:v06",
    "word": "和颜悦色",
    "annotated": false,
-   "decision": "question",
-   "reason": "近义词辨析，考查对人物神态描写的准确把握",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "态度温和，脸色和蔼",
    "sourceSentence": "张秉贵一边走,一边还是那样和颜悦色地说:“最近从上海来了几种新糖果,味道还不错,您想看看吗?我向您介绍一下",
-   "type": "substitution",
-   "question": "下列词语中，哪一个与“和颜悦色”在文中表达的语气和态度最接近？",
-   "options": [
-    "嬉皮笑脸",
-    "心平气和",
-    "一本正经",
-    "唯唯诺诺"
-   ],
-   "answerIndex": 1,
-   "explanation": "“和颜悦色”强调态度温和，与“心平气和”在表达平和、友善的态度上最为接近。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 984
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1698:v06"
   },
   {
    "id": "lesson-1698:v07",
@@ -208,5 +142,226 @@
    "contextMeaning": "北京人，北京市百货大楼售货员，全国劳动模范。他一心一意为人民服务，练就了称糖“一抓准”、算账“一口清”的本领，以“一团火”的服务精神树起我国商业战线上的一面旗帜。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1698:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1698:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "8bc96f22b742f78a84bad6ea3f0faf6a1e069c7a703434cf53ac9fe63c165a37",
+   "formerItem": {
+    "id": "lesson-1698:v01",
+    "word": "袭人",
+    "annotated": false,
+    "decision": "question",
+    "reason": "多义词，此处词义与现代口语中作为人名或特定用法不同，易产生偏差",
+    "contextMeaning": "侵袭、充满",
+    "sourceSentence": "初冬的早晨,寒气袭人。",
+    "type": "contextual-choice",
+    "question": "文中“寒气袭人”的“袭”字，在语境中的含义是：",
+    "options": [
+     "偷袭",
+     "侵袭",
+     "延续",
+     "服饰"
+    ],
+    "answerIndex": 1,
+    "explanation": "在“寒气袭人”中，袭为侵袭、充满之意，形容寒冷的气息扑面而来。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 70
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1698:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1698:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "057819d80073848a576597482e245dd5ccfb4b012a5ac3a65c5728465ffb26aa",
+   "formerItem": {
+    "id": "lesson-1698:v02",
+    "word": "体贴入微",
+    "annotated": false,
+    "decision": "question",
+    "reason": "考查对成语内涵的理解，影响对人物精神的把握",
+    "contextMeaning": "形容照顾得非常细心周到",
+    "sourceSentence": "人们常用体贴入微来形容张秉贵的服务态度。",
+    "type": "interpretation",
+    "question": "文中用“体贴入微”形容张秉贵，最贴切的理解是：",
+    "options": [
+     "他能猜中顾客所有的心思",
+     "他能通过观察细节，给予顾客周到细致的照顾",
+     "他对待顾客像对待自己的家人一样",
+     "他能够忍受顾客所有的无理取闹"
+    ],
+    "answerIndex": 1,
+    "explanation": "“体贴入微”侧重于在每一个细小环节上给予对方关怀，对应文中张秉贵在售货细节上的表现。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 511
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1698:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1698:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "63e0905983c49838960aba44d6e55880bae2f156c643eeab5dce2b9e0bb17121",
+   "formerItem": {
+    "id": "lesson-1698:v03",
+    "word": "参谋",
+    "annotated": false,
+    "decision": "question",
+    "reason": "词义迁移，本为军事术语，此处指代服务中的角色，易被误解",
+    "contextMeaning": "咨询者、提供建议的人",
+    "sourceSentence": "为了当好顾客的参谋,他不知费了多少心血去熟悉自己柜台里的商品。",
+    "type": "contextual-choice",
+    "question": "“为了当好顾客的参谋”中“参谋”的语境义是：",
+    "options": [
+     "军队中的辅助指挥人员",
+     "暗中出谋划策的人",
+     "协助顾客挑选商品、提供专业建议的人",
+     "负责管理柜台的领导"
+    ],
+    "answerIndex": 2,
+    "explanation": "结合下文张秉贵学习商品知识、为顾客介绍合适商品的行为，可知此处指提供专业建议。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2339
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1698:v04",
+   "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+   "reviewedAt": "2026-07-30T00:32:00.000Z",
+   "itemId": "lesson-1698:v04",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
+   "sourceItemSha256": "67f23c940a10861353c8a3dac88e7c22db55029279452f6500a27dfb660cbdf3",
+   "formerItem": {
+    "id": "lesson-1698:v04",
+    "word": "座无虚席",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语理解，考查语境对成语字面意义的推导",
+    "contextMeaning": "形容座位都坐满了，没有空位",
+    "sourceSentence": "这里已经座无虚席,他买了一盘炒面站着吃起来。",
+    "type": "contextual-choice",
+    "question": "文中“座无虚席”的意思是：",
+    "options": [
+     "座位非常舒适",
+     "没有人敢坐在座位上",
+     "座位全部被占满",
+     "座位已经撤掉了"
+    ],
+    "answerIndex": 2,
+    "explanation": "“虚”在此处为“空”的意思，座无虚席即没有空座位。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3080
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1698:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1698:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "e1d5078f58a541f74a1aa8d6af33862e1b815cc9b84162427eb6e3ac5ca224f4",
+   "formerItem": {
+    "id": "lesson-1698:v05",
+    "word": "翻了身",
+    "annotated": false,
+    "decision": "question",
+    "reason": "特殊词组，具有特定的历史语境意义",
+    "contextMeaning": "指劳动人民摆脱了压迫，获得了政治地位和社会地位",
+    "sourceSentence": "新中国成立后,他翻了身,打心眼儿里感谢党和毛主席。",
+    "type": "interpretation",
+    "question": "文中“他翻了身”指的是：",
+    "options": [
+     "他从童工变成了售货员",
+     "他从被压迫的地位转变为国家的主人",
+     "他学会了称糖算账的本领",
+     "他获得了劳动模范的称号"
+    ],
+    "answerIndex": 1,
+    "explanation": "“翻身”在当时的语境中，特指受压迫者获得了政治和经济地位上的解放。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1548
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1698:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1698:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "8ec25b7e9b155e0b938d8b7da8bf930a00d013efbe7f8c8a0244131b915bf42d",
+   "formerItem": {
+    "id": "lesson-1698:v06",
+    "word": "和颜悦色",
+    "annotated": false,
+    "decision": "question",
+    "reason": "近义词辨析，考查对人物神态描写的准确把握",
+    "contextMeaning": "态度温和，脸色和蔼",
+    "sourceSentence": "张秉贵一边走,一边还是那样和颜悦色地说:“最近从上海来了几种新糖果,味道还不错,您想看看吗?我向您介绍一下",
+    "type": "substitution",
+    "question": "下列词语中，哪一个与“和颜悦色”在文中表达的语气和态度最接近？",
+    "options": [
+     "嬉皮笑脸",
+     "心平气和",
+     "一本正经",
+     "唯唯诺诺"
+    ],
+    "answerIndex": 1,
+    "explanation": "“和颜悦色”强调态度温和，与“心平气和”在表达平和、友善的态度上最为接近。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 984
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-review-20260729-modern-basic-meaning",
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

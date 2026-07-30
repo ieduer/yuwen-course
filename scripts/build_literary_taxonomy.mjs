@@ -144,7 +144,7 @@ function classify(lesson) {
   if (has(title, /短歌行|孔雀东南飞|拟行路难|燕歌行/)) add(genres, "yuefu");
   if (has(title, /梦游天姥吟留别|琵琶行|春江花月夜|将进酒|蜀道难|燕歌行|拟行路难|李凭箜篌引/)) add(genres, "gexing");
   if (has(title, /归园田居|插秧歌|涉江采芙蓉/)) add(genres, "gushi");
-  if (has(title, /登高|锦瑟|书愤|客至|登快阁|临安春雨初霁|蜀相/)) add(genres, "lvshi");
+  if (has(title, /登高|登岳阳楼|锦瑟|书愤|客至|登快阁|临安春雨初霁|蜀相/)) add(genres, "lvshi");
   if (has(title, /立在地球边上放号|红烛|峨日朵雪峰之侧|大堰河|再别康桥/)) add(genres, "modern-poetry");
   if (has(title, /致云雀|迷娘|致大海|自己之歌|树和天空/)) add(genres, "foreign-poetry");
   if ([...genres].some((id) => ["classical-poetry", "poetry"].includes(nodeById[id]?.parent) || nodeById[nodeById[id]?.parent]?.parent === "classical-poetry")) {

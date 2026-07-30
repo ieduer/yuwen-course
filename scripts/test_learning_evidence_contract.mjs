@@ -27,6 +27,18 @@ const lesson = {
   blockId: "selected-compulsory-1",
   blockTitle: "选择性必修上册",
 };
+const wordCreationLesson = {
+  id: "lesson-1497",
+  title: "无衣/《诗经·秦风》",
+  blockId: "xuanbi-shang",
+  blockTitle: "選必上",
+};
+const vocabLesson = {
+  id: "lesson-1474",
+  title: "5、《论语》十二章",
+  blockId: "xuanbi-shang",
+  blockTitle: "選必上",
+};
 
 function mockStatement(sql, writes, state) {
   return {
@@ -204,7 +216,7 @@ test("AI performance is eligible only when the server score is at least 60 and c
       request: new Request("https://yw.bdfz.net/api/interaction-check"),
       env,
       student: { id: 7, ucUserId: 42 },
-      lesson,
+      lesson: wordCreationLesson,
       interactionKey: "wordCreation",
       payload: {
         word: "站立",
@@ -224,11 +236,12 @@ test("AI performance is eligible only when the server score is at least 60 and c
     ["contextWords", { words: ["人民", "站立", "新生"] }],
   ]) {
     const { env, queued } = sourceEnvironment();
+    const interactionLesson = interactionKey === "wordCreation" ? wordCreationLesson : lesson;
     const result = await recordLearningInteraction({
       request: new Request("https://yw.bdfz.net/api/interaction-check"),
       env,
       student: { id: 7, ucUserId: 42 },
-      lesson,
+      lesson: interactionLesson,
       interactionKey,
       payload,
       evaluation: {
@@ -257,9 +270,9 @@ test("vocabulary evidence is countable only after source-owned mastery while eve
       request: new Request("https://yw.bdfz.net/api/reading/vocab-attempt"),
       env,
       student: { id: 7, ucUserId: 42 },
-      lesson,
+      lesson: vocabLesson,
       interactionKey: "vocabAnswer",
-      payload: { itemId: "lesson-1458:v01", selectedIndex: 1 },
+      payload: { itemId: "lesson-1474:v01", selectedIndex: 1 },
       evaluation,
       occurredAt: "2026-07-01T00:10:00.000Z",
     });
@@ -271,9 +284,9 @@ test("vocabulary evidence is countable only after source-owned mastery while eve
     request: new Request("https://yw.bdfz.net/api/reading/vocab-attempt"),
     env,
     student: { id: 7, ucUserId: 42 },
-    lesson,
+    lesson: vocabLesson,
     interactionKey: "vocabAnswer",
-    payload: { itemId: "lesson-1458:v01", selectedIndex: 1 },
+    payload: { itemId: "lesson-1474:v01", selectedIndex: 1 },
     evaluation: {
       score: 100,
       correctness: "correct",
@@ -300,7 +313,7 @@ test("the bounded scoring submission window permits ordinary revision and idempo
     request: new Request("https://yw.bdfz.net/api/interaction-check"),
     env: allowed.env,
     student: { id: 7, ucUserId: 42 },
-    lesson,
+    lesson: wordCreationLesson,
     interactionKey: "wordCreation",
     payload: { word: "站立", creation: "第八次正常修订。" },
     evaluation: { score: 80, correctness: "passed", provider: "apis", verdict: "passed" },
@@ -315,7 +328,7 @@ test("the bounded scoring submission window permits ordinary revision and idempo
       request: new Request("https://yw.bdfz.net/api/interaction-check"),
       env: blocked.env,
       student: { id: 7, ucUserId: 42 },
-      lesson,
+      lesson: wordCreationLesson,
       interactionKey: "wordCreation",
       payload: { word: "站立", creation: "超出短时提交边界。" },
       evaluation: { score: 80, correctness: "passed", provider: "apis", verdict: "passed" },
@@ -333,7 +346,7 @@ test("the bounded scoring submission window permits ordinary revision and idempo
     existingInteraction: {
       source_event_id: "existing-source-event",
       attempt_no: 3,
-      resource_key: "effect:lesson-1458:interaction:wordCreation",
+      resource_key: "effect:lesson-1497:interaction:wordCreation",
       interaction_key: "wordCreation",
       eligibility_status: "ineligible",
     },
@@ -342,7 +355,7 @@ test("the bounded scoring submission window permits ordinary revision and idempo
     request: new Request("https://yw.bdfz.net/api/interaction-check"),
     env: retry.env,
     student: { id: 7, ucUserId: 42 },
-    lesson,
+    lesson: wordCreationLesson,
     interactionKey: "wordCreation",
     payload: {
       word: "站立",
@@ -363,7 +376,7 @@ test("a client mutation id cannot be replayed onto another learning item", async
     existingInteraction: {
       source_event_id: "existing-source-event",
       attempt_no: 1,
-      resource_key: "effect:lesson-1458:interaction:wordCreation",
+      resource_key: "effect:lesson-1497:interaction:wordCreation",
       interaction_key: "wordCreation",
       eligibility_status: "eligible",
     },
@@ -373,10 +386,10 @@ test("a client mutation id cannot be replayed onto another learning item", async
       request: new Request("https://yw.bdfz.net/api/interaction-check"),
       env: replay.env,
       student: { id: 7, ucUserId: 42 },
-      lesson,
+      lesson: vocabLesson,
       interactionKey: "vocabAnswer",
       payload: {
-        itemId: "lesson-1458:v01",
+        itemId: "lesson-1474:v01",
         selectedIndex: 1,
         clientMutationId: "same-client-mutation",
       },

@@ -35,145 +35,300 @@
    "id": "lesson-1585:v03",
    "word": "无所用心",
    "annotated": false,
-   "decision": "question",
-   "reason": "常用成语，此处语境义与现代汉语常见的贬义（不肯动脑筋）不同，需结合帕斯卡尔的名言理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指不需要费心思去追求或忧虑",
    "sourceSentence": "假如我拥有一切,我就无所用心。",
-   "type": "contextual-choice",
-   "question": "文中“假如我拥有一切,我就无所用心”中“无所用心”的意思是",
-   "options": [
-    "形容人懒惰，什么事都不做",
-    "形容人没有追求，没有奋斗目标",
-    "形容拥有了一切，无需再费尽心思去索取",
-    "形容对于客观规律完全不予理会"
-   ],
-   "answerIndex": 2,
-   "explanation": "此处语境强调拥有了一切之后，反而失去了探索与追求的动力，而非贬义的懒惰。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 102
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1585:v03"
   },
   {
    "id": "lesson-1585:v04",
    "word": "典雅",
    "annotated": false,
-   "decision": "question",
-   "reason": "语境义与常识义（优美、文雅）有别，需结合科学规律的本质理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指宇宙运行规律有条理、严密且优美",
    "sourceSentence": "宇宙神秘非常,它有典雅的事实,错综的关系,微妙的机制。",
-   "type": "contextual-choice",
-   "question": "文中形容宇宙“典雅的事实”，这里的“典雅”最恰当的理解是",
-   "options": [
-    "文辞优美，词藻华丽",
-    "严谨、规律且具有秩序之美",
-    "古色古香，有历史韵味",
-    "高贵大方，不落俗套"
-   ],
-   "answerIndex": 1,
-   "explanation": "在科普语境中，科学家常以“典雅”形容自然规律的简洁与和谐，指其逻辑严密、秩序井然。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 729
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1585:v04"
   },
   {
    "id": "lesson-1585:v05",
    "word": "夙望",
    "annotated": false,
-   "decision": "question",
-   "reason": "书面词汇，易被误解为一般愿望，考查词语的准确积累",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "长久以来的愿望",
    "sourceSentence": "虽然我们的夙望可能会冒犯“天神”,但是我相信我们并不是在作无谓的空想。",
-   "type": "substitution",
-   "question": "下列词语替换“夙望”一词后，最能保持原句意蕴的是",
-   "options": [
-    "初衷",
-    "奢望",
-    "宿愿",
-    "妄想"
-   ],
-   "answerIndex": 2,
-   "explanation": "“夙”意为早年、平素，“夙望”即平素的愿望，与“宿愿”意义最贴近。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 879
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1585:v05"
   },
   {
    "id": "lesson-1585:v06",
    "word": "没",
    "annotated": false,
-   "decision": "question",
-   "reason": "多音字，易误读，且影响句法理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "淹没，没过",
    "sourceSentence": "海水才刚刚没及我们的脚趾",
-   "type": "pronunciation",
-   "question": "下列选项中加点字读音与其他三项不同的是",
-   "options": [
-    "海水才刚刚没（mò）及我们的脚趾",
-    "沉没",
-    "没收",
-    "没精打采"
-   ],
-   "answerIndex": 3,
-   "explanation": "“没”在“没及”中读mò，意为淹没；“没精打采”中的“没”读méi，意为没有。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 808
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1585:v06"
   },
   {
    "id": "lesson-1585:v07",
    "word": "茫无际涯",
    "annotated": false,
-   "decision": "question",
-   "reason": "四字成语，考查对文本描写对象特征的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容范围极大，没有边际",
    "sourceSentence": "宇宙汪洋茫无际涯,范围之大,难以想象",
-   "type": "interpretation",
-   "question": "文中用“茫无际涯”来形容宇宙，其主要作用是",
-   "options": [
-    "强调宇宙的危险性，劝诫人类不要探索",
-    "反衬人类探索宇宙的渺小与伟大",
-    "说明宇宙中充满了未知的灾难",
-    "表达作者对宇宙空虚无物的失望之情"
-   ],
-   "answerIndex": 1,
-   "explanation": "作者通过描写宇宙的广袤无垠，既表达了宇宙的壮丽，也反衬了人类在其中探索的勇气。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3815
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1585:v07"
   },
   {
    "id": "lesson-1585:v08",
    "word": "人才济济",
    "annotated": false,
-   "decision": "question",
-   "reason": "常用成语，考查在特定语境（科普文章结尾）中的辨析",
+   "decision": "excluded",
+   "reason": "经人工复核移除：現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
    "contextMeaning": "形容有才能的人很多",
    "sourceSentence": "我们这个世界人才济济,人们勤学好问。",
-   "type": "discrimination",
-   "question": "下列句子中“人才济济”使用正确的一项是",
-   "options": [
-    "这个科研团队人才济济，每个人都非常勤学好问",
-    "这个荒岛上人才济济，到处都是高科技设备",
-    "由于人才济济，所以这个岗位一直没人应聘",
-    "人才济济的课堂上，学生们一言不发"
-   ],
-   "answerIndex": 0,
-   "explanation": "“人才济济”指人才众多，常用于褒义，与“勤学好问”等积极语境搭配。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4153
+   },
+   "tombstoneRef": "yw-vocab-review-20260730-independent-quality-v1:lesson-1585:v08"
+  }
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1585:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1585:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "ce42a71436e5b65a4b2e4048f49b58bd8991c755c557b6fb2e7f2f3e6fab4fa7",
+   "formerItem": {
+    "id": "lesson-1585:v03",
+    "word": "无所用心",
+    "annotated": false,
+    "decision": "question",
+    "reason": "常用成语，此处语境义与现代汉语常见的贬义（不肯动脑筋）不同，需结合帕斯卡尔的名言理解",
+    "contextMeaning": "指不需要费心思去追求或忧虑",
+    "sourceSentence": "假如我拥有一切,我就无所用心。",
+    "type": "contextual-choice",
+    "question": "文中“假如我拥有一切,我就无所用心”中“无所用心”的意思是",
+    "options": [
+     "形容人懒惰，什么事都不做",
+     "形容人没有追求，没有奋斗目标",
+     "形容拥有了一切，无需再费尽心思去索取",
+     "形容对于客观规律完全不予理会"
+    ],
+    "answerIndex": 2,
+    "explanation": "此处语境强调拥有了一切之后，反而失去了探索与追求的动力，而非贬义的懒惰。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 102
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1585:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1585:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "53fd3ca6ddb71fa1b41c19893ded875d658060e1d1c76629f515bace9eb018a8",
+   "formerItem": {
+    "id": "lesson-1585:v04",
+    "word": "典雅",
+    "annotated": false,
+    "decision": "question",
+    "reason": "语境义与常识义（优美、文雅）有别，需结合科学规律的本质理解",
+    "contextMeaning": "指宇宙运行规律有条理、严密且优美",
+    "sourceSentence": "宇宙神秘非常,它有典雅的事实,错综的关系,微妙的机制。",
+    "type": "contextual-choice",
+    "question": "文中形容宇宙“典雅的事实”，这里的“典雅”最恰当的理解是",
+    "options": [
+     "文辞优美，词藻华丽",
+     "严谨、规律且具有秩序之美",
+     "古色古香，有历史韵味",
+     "高贵大方，不落俗套"
+    ],
+    "answerIndex": 1,
+    "explanation": "在科普语境中，科学家常以“典雅”形容自然规律的简洁与和谐，指其逻辑严密、秩序井然。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 729
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1585:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1585:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a629221bdfb8d2d22066fe82c213fc75c608c9fc7c9248420836ed790518f452",
+   "formerItem": {
+    "id": "lesson-1585:v05",
+    "word": "夙望",
+    "annotated": false,
+    "decision": "question",
+    "reason": "书面词汇，易被误解为一般愿望，考查词语的准确积累",
+    "contextMeaning": "长久以来的愿望",
+    "sourceSentence": "虽然我们的夙望可能会冒犯“天神”,但是我相信我们并不是在作无谓的空想。",
+    "type": "substitution",
+    "question": "下列词语替换“夙望”一词后，最能保持原句意蕴的是",
+    "options": [
+     "初衷",
+     "奢望",
+     "宿愿",
+     "妄想"
+    ],
+    "answerIndex": 2,
+    "explanation": "“夙”意为早年、平素，“夙望”即平素的愿望，与“宿愿”意义最贴近。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 879
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1585:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1585:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "5e710766fe47e752c805fd56a7c45a964b8f86d8f45284253e6e99dfdc7e608d",
+   "formerItem": {
+    "id": "lesson-1585:v06",
+    "word": "没",
+    "annotated": false,
+    "decision": "question",
+    "reason": "多音字，易误读，且影响句法理解",
+    "contextMeaning": "淹没，没过",
+    "sourceSentence": "海水才刚刚没及我们的脚趾",
+    "type": "pronunciation",
+    "question": "下列选项中加点字读音与其他三项不同的是",
+    "options": [
+     "海水才刚刚没（mò）及我们的脚趾",
+     "沉没",
+     "没收",
+     "没精打采"
+    ],
+    "answerIndex": 3,
+    "explanation": "“没”在“没及”中读mò，意为淹没；“没精打采”中的“没”读méi，意为没有。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 808
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1585:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1585:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "518cc97b1312fc3222ac8f700ef35ca5428efb6858ccb7ab96ec4000ea9d3690",
+   "formerItem": {
+    "id": "lesson-1585:v07",
+    "word": "茫无际涯",
+    "annotated": false,
+    "decision": "question",
+    "reason": "四字成语，考查对文本描写对象特征的理解",
+    "contextMeaning": "形容范围极大，没有边际",
+    "sourceSentence": "宇宙汪洋茫无际涯,范围之大,难以想象",
+    "type": "interpretation",
+    "question": "文中用“茫无际涯”来形容宇宙，其主要作用是",
+    "options": [
+     "强调宇宙的危险性，劝诫人类不要探索",
+     "反衬人类探索宇宙的渺小与伟大",
+     "说明宇宙中充满了未知的灾难",
+     "表达作者对宇宙空虚无物的失望之情"
+    ],
+    "answerIndex": 1,
+    "explanation": "作者通过描写宇宙的广袤无垠，既表达了宇宙的壮丽，也反衬了人类在其中探索的勇气。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3815
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1585:v08",
+   "reviewId": "yw-vocab-review-20260730-independent-quality-v1",
+   "reviewedAt": "2026-07-30T00:59:29.000Z",
+   "itemId": "lesson-1585:v08",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "現當代正文中的常見基本詞義，無需課文語境即可直接作答。",
+   "sourceItemSha256": "ef854d4662362191175aa5c5cfcaf551ef08b5abf99df41005744166699f0414",
+   "formerItem": {
+    "id": "lesson-1585:v08",
+    "word": "人才济济",
+    "annotated": false,
+    "decision": "question",
+    "reason": "常用成语，考查在特定语境（科普文章结尾）中的辨析",
+    "contextMeaning": "形容有才能的人很多",
+    "sourceSentence": "我们这个世界人才济济,人们勤学好问。",
+    "type": "discrimination",
+    "question": "下列句子中“人才济济”使用正确的一项是",
+    "options": [
+     "这个科研团队人才济济，每个人都非常勤学好问",
+     "这个荒岛上人才济济，到处都是高科技设备",
+     "由于人才济济，所以这个岗位一直没人应聘",
+     "人才济济的课堂上，学生们一言不发"
+    ],
+    "answerIndex": 0,
+    "explanation": "“人才济济”指人才众多，常用于褒义，与“勤学好问”等积极语境搭配。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4153
+    }
    }
   }
- ]
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-review-20260730-independent-quality-v1",
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

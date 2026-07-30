@@ -11,145 +11,79 @@
    "id": "lesson-1737:v01",
    "word": "结束",
    "annotated": false,
-   "decision": "question",
-   "reason": "古今异义，文中特指收束，易被现代汉语中“终止”的含义误导。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "收束",
    "sourceSentence": "怎样结束瓦顶",
-   "type": "contextual-choice",
-   "question": "文中“怎样结束瓦顶”中“结束”的意思是",
-   "options": [
-    "做完、停止",
-    "收束、结尾",
-    "解决、了结",
-    "连接、组合"
-   ],
-   "answerIndex": 1,
-   "explanation": "在建筑术语中，指处理构件收头或收尾的工艺，非现代汉语中“终止”之意。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2300
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1737:v01"
   },
   {
    "id": "lesson-1737:v02",
    "word": "文法",
    "annotated": false,
-   "decision": "question",
-   "reason": "本文的核心隐喻，理解该词的语境义是把握全篇论证逻辑的关键。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指建筑的法式、惯例和规则",
    "sourceSentence": "我们可以叫它作中国建筑的“文法”。",
-   "type": "interpretation",
-   "question": "作者将中国建筑的“法式”比作“文法”，主要目的是为了说明",
-   "options": [
-    "中国建筑具有严密的逻辑性和语言般的修辞美",
-    "中国建筑的构成规则像语言一样具有规律性和可遵循性",
-    "中国建筑的构件必须像文法一样严格排列，不能变动",
-    "中国建筑的创作需要具备深厚的文学素养和文法知识"
-   ],
-   "answerIndex": 1,
-   "explanation": "作者以语言学类比建筑学，强调建筑结构有其内在的、被民族所认可的组织规则。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2145
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1737:v02"
   },
   {
    "id": "lesson-1737:v03",
    "word": "词汇",
    "annotated": false,
-   "decision": "question",
-   "reason": "本文核心隐喻，与“文法”对应，理解建筑构件如何成为“词汇”是理解全文的关键。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指建筑的构件和元素",
    "sourceSentence": "至如梁、柱、枋、檩、门、窗、墙、瓦、槛、阶、栏杆、隔扇、斗拱、正脊、垂脊、正吻、戗兽、正房、厢房、游廊、庭院、夹道等等,那就是我们建筑上的“词汇",
-   "type": "evidence",
-   "question": "根据文意，下列哪项不属于中国建筑“词汇”的范畴？",
-   "options": [
-    "斗拱",
-    "隔扇",
-    "文法",
-    "正吻"
-   ],
-   "answerIndex": 2,
-   "explanation": "文法是规则，词汇是具体的构件，二者属于不同范畴。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2502
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1737:v03"
   },
   {
    "id": "lesson-1737:v04",
    "word": "墁",
    "annotated": false,
-   "decision": "question",
-   "reason": "专业性较强的动词，考察语境理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "铺设地面",
    "sourceSentence": "主要部分一般地都有砖石墁地",
-   "type": "contextual-choice",
-   "question": "“主要部分一般地都有砖石墁地”中“墁”的意思是",
-   "options": [
-    "堆砌",
-    "覆盖",
-    "铺设",
-    "装饰"
-   ],
-   "answerIndex": 2,
-   "explanation": "墁地指用砖石等材料铺筑地面。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 619
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1737:v04"
   },
   {
    "id": "lesson-1737:v05",
    "word": "小品",
    "annotated": false,
-   "decision": "question",
-   "reason": "语境义与现代文学体裁“小品文”不同，考察学生对文中建筑类比的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指规模较小、非宏大的建筑作品",
    "sourceSentence": "建筑的“文章”也可因不同的命题,有“大文章”或“小品",
-   "type": "contextual-choice",
-   "question": "文中将建筑比作文章，其中“小品”一词指的是",
-   "options": [
-    "一种短小精悍的文学体裁",
-    "指山亭、水榭等规模较小的建筑",
-    "指装饰性的牌楼或影壁",
-    "指制作精良、具有观赏性的构件"
-   ],
-   "answerIndex": 1,
-   "explanation": "文中明确指出“小品”如山亭、水榭、一轩、一楼，指规模较小的建筑类型。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2713
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1737:v05"
   },
   {
    "id": "lesson-1737:v06",
    "word": "大同小异",
    "annotated": false,
-   "decision": "question",
-   "reason": "高频成语，在此语境下精准描述了建筑体系的分布关系。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "大体相同，略有差异",
    "sourceSentence": "这些地区的建筑和中国中心地区的建筑,或是同属于一个体系,或是大同小异,如弟兄之同属于一家的关系",
-   "type": "discrimination",
-   "question": "下列对“大同小异”在文中的含义理解最准确的一项是",
-   "options": [
-    "完全相同，没有任何区别",
-    "基本特征一致，但在细部处理或风格上有细微差异",
-    "虽然属于同一体系，但外表看起来完全不同",
-    "因为地理位置不同，导致建筑结构根本不同"
-   ],
-   "answerIndex": 1,
-   "explanation": "文中用“弟兄之同属于一家”比喻，强调体系的统一性与地域表现的差异性。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 203
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1737:v06"
   },
   {
    "id": "lesson-1737:v07",
@@ -322,5 +256,225 @@
    "contextMeaning": "天坛皇穹宇 原名“泰神殿”，位于北京天坛圜（yuán）丘坛北面，为圆形攒尖顶建筑，用于平日收藏、供奉祭天大典所用的神牌。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1737:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1737:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "9eec68b9becc8c8483be62d961fe29f7e222b5b188bdf548309a278af4086ab4",
+   "formerItem": {
+    "id": "lesson-1737:v01",
+    "word": "结束",
+    "annotated": false,
+    "decision": "question",
+    "reason": "古今异义，文中特指收束，易被现代汉语中“终止”的含义误导。",
+    "contextMeaning": "收束",
+    "sourceSentence": "怎样结束瓦顶",
+    "type": "contextual-choice",
+    "question": "文中“怎样结束瓦顶”中“结束”的意思是",
+    "options": [
+     "做完、停止",
+     "收束、结尾",
+     "解决、了结",
+     "连接、组合"
+    ],
+    "answerIndex": 1,
+    "explanation": "在建筑术语中，指处理构件收头或收尾的工艺，非现代汉语中“终止”之意。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2300
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1737:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1737:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "ba145bfd3bd8d2623cedff4fba5749e2ea2c1e3b8d430c90b6823e80435455fa",
+   "formerItem": {
+    "id": "lesson-1737:v02",
+    "word": "文法",
+    "annotated": false,
+    "decision": "question",
+    "reason": "本文的核心隐喻，理解该词的语境义是把握全篇论证逻辑的关键。",
+    "contextMeaning": "指建筑的法式、惯例和规则",
+    "sourceSentence": "我们可以叫它作中国建筑的“文法”。",
+    "type": "interpretation",
+    "question": "作者将中国建筑的“法式”比作“文法”，主要目的是为了说明",
+    "options": [
+     "中国建筑具有严密的逻辑性和语言般的修辞美",
+     "中国建筑的构成规则像语言一样具有规律性和可遵循性",
+     "中国建筑的构件必须像文法一样严格排列，不能变动",
+     "中国建筑的创作需要具备深厚的文学素养和文法知识"
+    ],
+    "answerIndex": 1,
+    "explanation": "作者以语言学类比建筑学，强调建筑结构有其内在的、被民族所认可的组织规则。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2145
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1737:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1737:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "11d5e109c3501fc9d1df5456cfb2c60b304a58075829f602c2795e982d9a6baf",
+   "formerItem": {
+    "id": "lesson-1737:v03",
+    "word": "词汇",
+    "annotated": false,
+    "decision": "question",
+    "reason": "本文核心隐喻，与“文法”对应，理解建筑构件如何成为“词汇”是理解全文的关键。",
+    "contextMeaning": "指建筑的构件和元素",
+    "sourceSentence": "至如梁、柱、枋、檩、门、窗、墙、瓦、槛、阶、栏杆、隔扇、斗拱、正脊、垂脊、正吻、戗兽、正房、厢房、游廊、庭院、夹道等等,那就是我们建筑上的“词汇",
+    "type": "evidence",
+    "question": "根据文意，下列哪项不属于中国建筑“词汇”的范畴？",
+    "options": [
+     "斗拱",
+     "隔扇",
+     "文法",
+     "正吻"
+    ],
+    "answerIndex": 2,
+    "explanation": "文法是规则，词汇是具体的构件，二者属于不同范畴。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2502
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1737:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1737:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "8a6698d0940b639f0727ef9eef4c6da73e20d7e6e1bafae7bb74bc3f79731d69",
+   "formerItem": {
+    "id": "lesson-1737:v04",
+    "word": "墁",
+    "annotated": false,
+    "decision": "question",
+    "reason": "专业性较强的动词，考察语境理解。",
+    "contextMeaning": "铺设地面",
+    "sourceSentence": "主要部分一般地都有砖石墁地",
+    "type": "contextual-choice",
+    "question": "“主要部分一般地都有砖石墁地”中“墁”的意思是",
+    "options": [
+     "堆砌",
+     "覆盖",
+     "铺设",
+     "装饰"
+    ],
+    "answerIndex": 2,
+    "explanation": "墁地指用砖石等材料铺筑地面。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 619
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1737:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1737:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "f95977315648819c1146f7bdd4980bc5e602d7aba56a0ba9df6885b2071954e9",
+   "formerItem": {
+    "id": "lesson-1737:v05",
+    "word": "小品",
+    "annotated": false,
+    "decision": "question",
+    "reason": "语境义与现代文学体裁“小品文”不同，考察学生对文中建筑类比的理解。",
+    "contextMeaning": "指规模较小、非宏大的建筑作品",
+    "sourceSentence": "建筑的“文章”也可因不同的命题,有“大文章”或“小品",
+    "type": "contextual-choice",
+    "question": "文中将建筑比作文章，其中“小品”一词指的是",
+    "options": [
+     "一种短小精悍的文学体裁",
+     "指山亭、水榭等规模较小的建筑",
+     "指装饰性的牌楼或影壁",
+     "指制作精良、具有观赏性的构件"
+    ],
+    "answerIndex": 1,
+    "explanation": "文中明确指出“小品”如山亭、水榭、一轩、一楼，指规模较小的建筑类型。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2713
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1737:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1737:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "5646e0fb978e16381de727202280f358381ee484ddebad94511f43e32de5da62",
+   "formerItem": {
+    "id": "lesson-1737:v06",
+    "word": "大同小异",
+    "annotated": false,
+    "decision": "question",
+    "reason": "高频成语，在此语境下精准描述了建筑体系的分布关系。",
+    "contextMeaning": "大体相同，略有差异",
+    "sourceSentence": "这些地区的建筑和中国中心地区的建筑,或是同属于一个体系,或是大同小异,如弟兄之同属于一家的关系",
+    "type": "discrimination",
+    "question": "下列对“大同小异”在文中的含义理解最准确的一项是",
+    "options": [
+     "完全相同，没有任何区别",
+     "基本特征一致，但在细部处理或风格上有细微差异",
+     "虽然属于同一体系，但外表看起来完全不同",
+     "因为地理位置不同，导致建筑结构根本不同"
+    ],
+    "answerIndex": 1,
+    "explanation": "文中用“弟兄之同属于一家”比喻，强调体系的统一性与地域表现的差异性。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 203
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

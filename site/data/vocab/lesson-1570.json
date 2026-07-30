@@ -11,205 +11,105 @@
    "id": "lesson-1570:v01",
    "word": "猩猩峡",
    "annotated": true,
-   "decision": "question",
-   "reason": "地理常识与课文背景结合，考察对文学作品地理意象的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "古今中外交通的要冲，象征着抗战时期连接大后方与前线的关键地带",
    "sourceSentence": "便又回忆起猩猩峡外的沙漠 来了。",
-   "type": "contextual-choice",
-   "question": "文中提到的“猩猩峡”在语境中具有怎样的地理意义？",
-   "options": [
-    "荒无人烟的沙漠禁区",
-    "古代中原与西域的交通要冲",
-    "抗战影片的拍摄基地",
-    "红军长征途中的必经之地"
-   ],
-   "answerIndex": 1,
-   "explanation": "根据教材注释，猩猩峡为古代中原与西域间的交通要冲，此处借指抗战时期具有战略意义的通道。",
-   "difficulty": 1,
-   "sourceRefs": [
-    "教材注释"
-   ],
    "location": {
     "charIndex": 15
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1570:v01"
   },
   {
    "id": "lesson-1570:v02",
    "word": "干坼",
    "annotated": true,
-   "decision": "question",
-   "reason": "双音节词汇，考察对文言色彩词语的积累与迁移能力",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "干裂",
    "sourceSentence": "夕阳在山,干坼的黄土正吐出它在一 天内所吸收的热",
-   "type": "contextual-choice",
-   "question": "“干坼”一词在文中的意思是",
-   "options": [
-    "干涸",
-    "干枯",
-    "干裂",
-    "干燥"
-   ],
-   "answerIndex": 2,
-   "explanation": "干坼，指因干旱而裂开。选项中“干裂”最为准确。",
-   "difficulty": 1,
-   "sourceRefs": [
-    "教材注释"
-   ],
    "location": {
     "charIndex": 860
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1570:v02"
   },
   {
    "id": "lesson-1570:v03",
    "word": "汤汤",
    "annotated": false,
-   "decision": "question",
-   "reason": "古汉语词汇在现代散文中的运用，易被误解为“热汤”",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容水流大而急",
    "sourceSentence": "河水汤汤急流,似乎能把浅浅河床中的鹅卵石都冲走了似的",
-   "type": "contextual-choice",
-   "question": "文中“河水汤汤急流”的“汤汤”读音及含义正确的是",
-   "options": [
-    "tāng tāng，形容水热气腾腾",
-    "shāng shāng，形容水流浩大急促",
-    "tāng tāng，形容水流平缓",
-    "shāng shāng，形容水流枯竭"
-   ],
-   "answerIndex": 1,
-   "explanation": "“汤汤”在此处读shāng，是古汉语中形容大水急流的词。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《诗经·卫风·氓》“淇水汤汤”"
-   ],
    "location": {
     "charIndex": 885
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1570:v03"
   },
   {
    "id": "lesson-1570:v04",
    "word": "调朱弄粉",
    "annotated": false,
-   "decision": "question",
-   "reason": "考察对特定短语在语境中指代对象的理解（作者致编写组信件内容）",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指代文艺工作者从事艺术创作活动，此处特指女同志的手",
    "sourceSentence": "多少曾调朱弄粉的手儿,已经将金 黄的小米饭、翠绿的油菜准备齐全",
-   "type": "interpretation",
-   "question": "作者用“调朱弄粉的手儿”来形容做饭的女同志，其用意是",
-   "options": [
-    "讽刺她们只会打扮而不从事劳动",
-    "强调她们既是文艺工作者又是劳动者，具有双重身份",
-    "赞美她们精湛的厨艺如同绘画般精美",
-    "说明她们出身于富贵家庭，未曾干过粗活"
-   ],
-   "answerIndex": 1,
-   "explanation": "作者旨在强调这些女同志既拥有文艺创作的才华，也能投身于艰苦的生产劳动，体现了崇高的精神。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "教材注释"
-   ],
    "location": {
     "charIndex": 1114
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1570:v04"
   },
   {
    "id": "lesson-1570:v05",
    "word": "洋洋洒洒",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语常见误用，考察词语语境义的辨析",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容文章或书画气势盛大，笔力奔放",
    "sourceSentence": "这是经常不离木刻刀的,那又是洋洋洒洒下笔如有神的, 但现在,一律都被锄锹的木柄磨起了老茧了",
-   "type": "substitution",
-   "question": "文中的“洋洋洒洒”若要替换，最恰当的一项是",
-   "options": [
-    "滔滔不绝",
-    "挥洒自如",
-    "信手拈来",
-    "零零散散"
-   ],
-   "answerIndex": 1,
-   "explanation": "“洋洋洒洒”在此处形容下笔如神，气势奔放，“挥洒自如”最为贴切。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1041
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1570:v05"
   },
   {
    "id": "lesson-1570:v06",
    "word": "亭子间",
    "annotated": true,
-   "decision": "question",
-   "reason": "考察对特殊建筑空间名词的理解及其在文中的比喻义",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "上海旧式楼房中狭小、光线差的房间，此处用以形容石洞的狭窄与简陋",
    "sourceSentence": "高高的山壁上有几个天然的石洞,三层 楼的亭子间似的,一对人儿促膝而坐",
-   "type": "interpretation",
-   "question": "文中将石洞比作“亭子间”，主要为了强调石洞的什么特点？",
-   "options": [
-    "位置隐蔽，难以发现",
-    "环境优美，适合谈情说爱",
-    "空间狭小、条件简陋",
-    "具有上海独特的建筑风格"
-   ],
-   "answerIndex": 2,
-   "explanation": "亭子间在旧式楼房中以狭小、光线差著称，作者以此比喻石洞的简陋，反衬在此处生活的人精神之崇高。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "教材注释"
-   ],
    "location": {
     "charIndex": 1494
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1570:v06"
   },
   {
    "id": "lesson-1570:v07",
    "word": "贻笑大方",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语辨析，考察对“大方”一词的理解，避免望文生义",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "让内行人见笑",
    "sourceSentence": "如果把那二三十棵桃树,半爿磨石,几尺断 碣,还有荞麦和大麻、玉米,这些其实到处可遇的东西,看成了此所谓 风景区的主要条件,那或者是会贻笑大方的",
-   "type": "contextual-choice",
-   "question": "文中“贻笑大方”一词中“大方”的意思是",
-   "options": [
-    "大方得体",
-    "内行专家",
-    "广大群众",
-    "慷慨大方"
-   ],
-   "answerIndex": 1,
-   "explanation": "“贻笑大方”指被内行见笑，其中的“大方”指专家或内行。",
-   "difficulty": 3,
-   "sourceRefs": [
-    "《庄子·秋水》"
-   ],
    "location": {
     "charIndex": 2355
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1570:v07"
   },
   {
    "id": "lesson-1570:v08",
    "word": "万籁俱静",
    "annotated": false,
-   "decision": "question",
-   "reason": "考察对四字短语的理解及语境氛围的把握",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容周围环境非常安静",
    "sourceSentence": "最后一段回忆是五月的北国。清晨,窗纸微微透白,万籁俱静,嘹 亮的喇叭声,破空而来",
-   "type": "contextual-choice",
-   "question": "文中使用“万籁俱静”的目的是为了",
-   "options": [
-    "描写北国清晨的寒冷",
-    "为喇叭声的突兀和嘹亮做铺垫",
-    "展现摄影照片的艺术美感",
-    "表现战士们处于睡梦之中"
-   ],
-   "answerIndex": 1,
-   "explanation": "作者通过极静的背景来衬托喇叭声的破空而来，从而突出环境的肃穆与号兵的英姿。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2941
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1570:v08"
   },
   {
    "id": "lesson-1570:v09",
@@ -265,5 +165,307 @@
    "contextMeaning": "作者于1980年2月2日致中学语文教材编写组的信中说：“应该是指‘女同志的手’，但是这些做饭的女同志也同时是文艺工作者。”",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1570:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1570:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "44202611fb6792c7b4c20a66f27526432e44fe1dc6e4757a913bcdb79057af60",
+   "formerItem": {
+    "id": "lesson-1570:v01",
+    "word": "猩猩峡",
+    "annotated": true,
+    "decision": "question",
+    "reason": "地理常识与课文背景结合，考察对文学作品地理意象的理解",
+    "contextMeaning": "古今中外交通的要冲，象征着抗战时期连接大后方与前线的关键地带",
+    "sourceSentence": "便又回忆起猩猩峡外的沙漠 来了。",
+    "type": "contextual-choice",
+    "question": "文中提到的“猩猩峡”在语境中具有怎样的地理意义？",
+    "options": [
+     "荒无人烟的沙漠禁区",
+     "古代中原与西域的交通要冲",
+     "抗战影片的拍摄基地",
+     "红军长征途中的必经之地"
+    ],
+    "answerIndex": 1,
+    "explanation": "根据教材注释，猩猩峡为古代中原与西域间的交通要冲，此处借指抗战时期具有战略意义的通道。",
+    "difficulty": 1,
+    "sourceRefs": [
+     "教材注释"
+    ],
+    "location": {
+     "charIndex": 15
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1570:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1570:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "c10e687401f3501956e4b55821b41422b29ebffb229c58e2b3f845881aec25b5",
+   "formerItem": {
+    "id": "lesson-1570:v02",
+    "word": "干坼",
+    "annotated": true,
+    "decision": "question",
+    "reason": "双音节词汇，考察对文言色彩词语的积累与迁移能力",
+    "contextMeaning": "干裂",
+    "sourceSentence": "夕阳在山,干坼的黄土正吐出它在一 天内所吸收的热",
+    "type": "contextual-choice",
+    "question": "“干坼”一词在文中的意思是",
+    "options": [
+     "干涸",
+     "干枯",
+     "干裂",
+     "干燥"
+    ],
+    "answerIndex": 2,
+    "explanation": "干坼，指因干旱而裂开。选项中“干裂”最为准确。",
+    "difficulty": 1,
+    "sourceRefs": [
+     "教材注释"
+    ],
+    "location": {
+     "charIndex": 860
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1570:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1570:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "cfb9cc3a11db76919534aa5b5b0469ef95b9a28221b61b1257e735f196cd1b2c",
+   "formerItem": {
+    "id": "lesson-1570:v03",
+    "word": "汤汤",
+    "annotated": false,
+    "decision": "question",
+    "reason": "古汉语词汇在现代散文中的运用，易被误解为“热汤”",
+    "contextMeaning": "形容水流大而急",
+    "sourceSentence": "河水汤汤急流,似乎能把浅浅河床中的鹅卵石都冲走了似的",
+    "type": "contextual-choice",
+    "question": "文中“河水汤汤急流”的“汤汤”读音及含义正确的是",
+    "options": [
+     "tāng tāng，形容水热气腾腾",
+     "shāng shāng，形容水流浩大急促",
+     "tāng tāng，形容水流平缓",
+     "shāng shāng，形容水流枯竭"
+    ],
+    "answerIndex": 1,
+    "explanation": "“汤汤”在此处读shāng，是古汉语中形容大水急流的词。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《诗经·卫风·氓》“淇水汤汤”"
+    ],
+    "location": {
+     "charIndex": 885
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1570:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1570:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "540ab1878a5ac0ac64c6b7a2dcc7cc9daf4861474b875d8b5b0ccd2077867ee2",
+   "formerItem": {
+    "id": "lesson-1570:v04",
+    "word": "调朱弄粉",
+    "annotated": false,
+    "decision": "question",
+    "reason": "考察对特定短语在语境中指代对象的理解（作者致编写组信件内容）",
+    "contextMeaning": "指代文艺工作者从事艺术创作活动，此处特指女同志的手",
+    "sourceSentence": "多少曾调朱弄粉的手儿,已经将金 黄的小米饭、翠绿的油菜准备齐全",
+    "type": "interpretation",
+    "question": "作者用“调朱弄粉的手儿”来形容做饭的女同志，其用意是",
+    "options": [
+     "讽刺她们只会打扮而不从事劳动",
+     "强调她们既是文艺工作者又是劳动者，具有双重身份",
+     "赞美她们精湛的厨艺如同绘画般精美",
+     "说明她们出身于富贵家庭，未曾干过粗活"
+    ],
+    "answerIndex": 1,
+    "explanation": "作者旨在强调这些女同志既拥有文艺创作的才华，也能投身于艰苦的生产劳动，体现了崇高的精神。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "教材注释"
+    ],
+    "location": {
+     "charIndex": 1114
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1570:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1570:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "8c2267cf9baf14c21c804b0251ee1ad172fb664c56ca59f91d78845dad5a3d70",
+   "formerItem": {
+    "id": "lesson-1570:v05",
+    "word": "洋洋洒洒",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语常见误用，考察词语语境义的辨析",
+    "contextMeaning": "形容文章或书画气势盛大，笔力奔放",
+    "sourceSentence": "这是经常不离木刻刀的,那又是洋洋洒洒下笔如有神的, 但现在,一律都被锄锹的木柄磨起了老茧了",
+    "type": "substitution",
+    "question": "文中的“洋洋洒洒”若要替换，最恰当的一项是",
+    "options": [
+     "滔滔不绝",
+     "挥洒自如",
+     "信手拈来",
+     "零零散散"
+    ],
+    "answerIndex": 1,
+    "explanation": "“洋洋洒洒”在此处形容下笔如神，气势奔放，“挥洒自如”最为贴切。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1041
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1570:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1570:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "c85ef78668a1b3f6a1d4870645a70a733f7b12fc8c41d385e4f3762fe5ce87ee",
+   "formerItem": {
+    "id": "lesson-1570:v06",
+    "word": "亭子间",
+    "annotated": true,
+    "decision": "question",
+    "reason": "考察对特殊建筑空间名词的理解及其在文中的比喻义",
+    "contextMeaning": "上海旧式楼房中狭小、光线差的房间，此处用以形容石洞的狭窄与简陋",
+    "sourceSentence": "高高的山壁上有几个天然的石洞,三层 楼的亭子间似的,一对人儿促膝而坐",
+    "type": "interpretation",
+    "question": "文中将石洞比作“亭子间”，主要为了强调石洞的什么特点？",
+    "options": [
+     "位置隐蔽，难以发现",
+     "环境优美，适合谈情说爱",
+     "空间狭小、条件简陋",
+     "具有上海独特的建筑风格"
+    ],
+    "answerIndex": 2,
+    "explanation": "亭子间在旧式楼房中以狭小、光线差著称，作者以此比喻石洞的简陋，反衬在此处生活的人精神之崇高。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "教材注释"
+    ],
+    "location": {
+     "charIndex": 1494
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1570:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1570:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "7d7f891a37b070e331da1e1884925c2ae0561a02178fbd860012e3ef8c08d480",
+   "formerItem": {
+    "id": "lesson-1570:v07",
+    "word": "贻笑大方",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语辨析，考察对“大方”一词的理解，避免望文生义",
+    "contextMeaning": "让内行人见笑",
+    "sourceSentence": "如果把那二三十棵桃树,半爿磨石,几尺断 碣,还有荞麦和大麻、玉米,这些其实到处可遇的东西,看成了此所谓 风景区的主要条件,那或者是会贻笑大方的",
+    "type": "contextual-choice",
+    "question": "文中“贻笑大方”一词中“大方”的意思是",
+    "options": [
+     "大方得体",
+     "内行专家",
+     "广大群众",
+     "慷慨大方"
+    ],
+    "answerIndex": 1,
+    "explanation": "“贻笑大方”指被内行见笑，其中的“大方”指专家或内行。",
+    "difficulty": 3,
+    "sourceRefs": [
+     "《庄子·秋水》"
+    ],
+    "location": {
+     "charIndex": 2355
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1570:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1570:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "c9c1f6bd5237a587e4a75541d81dd2f905559d52d90b554b674ddbf3d6b6c5ec",
+   "formerItem": {
+    "id": "lesson-1570:v08",
+    "word": "万籁俱静",
+    "annotated": false,
+    "decision": "question",
+    "reason": "考察对四字短语的理解及语境氛围的把握",
+    "contextMeaning": "形容周围环境非常安静",
+    "sourceSentence": "最后一段回忆是五月的北国。清晨,窗纸微微透白,万籁俱静,嘹 亮的喇叭声,破空而来",
+    "type": "contextual-choice",
+    "question": "文中使用“万籁俱静”的目的是为了",
+    "options": [
+     "描写北国清晨的寒冷",
+     "为喇叭声的突兀和嘹亮做铺垫",
+     "展现摄影照片的艺术美感",
+     "表现战士们处于睡梦之中"
+    ],
+    "answerIndex": 1,
+    "explanation": "作者通过极静的背景来衬托喇叭声的破空而来，从而突出环境的肃穆与号兵的英姿。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2941
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

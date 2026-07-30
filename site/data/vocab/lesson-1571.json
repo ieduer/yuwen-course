@@ -47,169 +47,347 @@
    "id": "lesson-1571:v04",
    "word": "乱弹",
    "annotated": false,
-   "decision": "question",
-   "reason": "文中指代秦腔的一种泛称，易与现代汉语中“胡乱弹奏”产生歧义。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "戏曲剧种的统称，此处指秦腔",
    "sourceSentence": "起码不能吼一阵乱弹呢?!",
-   "type": "contextual-choice",
-   "question": "文中「起码不能吼一阵乱弹呢?!」中「乱弹」的意思是",
-   "options": [
-    "随心所欲地弹奏",
-    "一种戏曲剧种的泛称",
-    "乐器演奏杂乱无章",
-    "指代秦腔的贬义称呼"
-   ],
-   "answerIndex": 1,
-   "explanation": "在戏曲史上，“乱弹”常作为地方戏的代称，在此处语境下指代秦腔，非指演奏水平乱。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 312
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1571:v04"
   },
   {
    "id": "lesson-1571:v05",
    "word": "涤荡",
    "annotated": false,
-   "decision": "question",
-   "reason": "该词在语境中形象化地表达了艺术对身心疲惫的洗涤，考查词语的语境义。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "清除、洗涤",
    "sourceSentence": "那心胸肺腑、关关节节的困乏便一尽儿涤荡净了。",
-   "type": "contextual-choice",
-   "question": "文中「困乏便一尽儿涤荡净了」中「涤荡」的意思是",
-   "options": [
-    "沉淀",
-    "洗涤、清除",
-    "排解、释放",
-    "覆盖、掩盖"
-   ],
-   "answerIndex": 1,
-   "explanation": "“涤荡”原指洗涤，在此处形容秦腔将农民劳作后的疲惫彻底消除，符合语境。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 414
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1571:v05"
   },
   {
    "id": "lesson-1571:v06",
    "word": "叫板",
    "annotated": false,
-   "decision": "question",
-   "reason": "该词在文中是戏曲专业术语，不同于现代汉语中的“挑战”义。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "戏曲术语，指演员在唱腔前的一段有节奏的念白或动作",
    "sourceSentence": "几声雄壮的秦腔叫板,我就痴呆了",
-   "type": "contextual-choice",
-   "question": "文中「几声雄壮的秦腔叫板」中「叫板」一词的含义是",
-   "options": [
-    "挑衅、挑战",
-    "戏曲演唱前的念白或动作",
-    "大声地呼喊",
-    "敲打木板的声音"
-   ],
-   "answerIndex": 1,
-   "explanation": "“叫板”是秦腔等戏曲表演中的专业术语，指正式演唱前的衔接动作或念白，此处考查对戏曲常识的理解。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 991
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1571:v06"
   },
   {
    "id": "lesson-1571:v07",
    "word": "熨平",
    "annotated": false,
-   "decision": "question",
-   "reason": "该词运用了比喻手法，将抽象的愁苦具象化，考查对句意深层理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "抚平、化解",
    "sourceSentence": "美也熨平了自己心中愁苦的皱纹。",
-   "type": "interpretation",
-   "question": "对「美也熨平了自己心中愁苦的皱纹」一句的理解，最恰当的一项是",
-   "options": [
-    "秦腔表演者在台上通过动作消除了脸上的皱纹",
-    "秦腔艺术的美感缓解并抚平了农民内心的痛苦",
-    "农民在看戏时心情愉悦，不再为生活操劳",
-    "秦腔表演通过熨烫道具，展现出整洁的美感"
-   ],
-   "answerIndex": 1,
-   "explanation": "此句运用比喻，将“愁苦”比作“皱纹”，“熨平”指代艺术带来的心理慰藉和痛苦的消解。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 734
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1571:v07"
   },
   {
    "id": "lesson-1571:v08",
    "word": "二杆子",
    "annotated": false,
-   "decision": "question",
-   "reason": "这是西北方言词汇，直接影响对文中特定人物形象的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "方言，指鲁莽、冲动、不计后果的人",
    "sourceSentence": "立即就跳出一个两个所谓“二杆子”人物来。",
-   "type": "interpretation",
-   "question": "文中提到的「二杆子」人物，其主要特点是",
-   "options": [
-    "专业素质高，是戏班的骨干",
-    "性格冲动鲁莽，但对秦腔极为忠诚",
-    "性格狡猾，喜欢在戏场里偷窃",
-    "是戏班专门雇佣的安保人员"
-   ],
-   "answerIndex": 1,
-   "explanation": "根据文意，“二杆子”人物“头脑简单，四肢发达，却十二分忠诚于秦腔”，符合冲动但忠诚的形象描述。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2252
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1571:v08"
   },
   {
    "id": "lesson-1571:v09",
    "word": "乐府",
    "annotated": false,
-   "decision": "question",
-   "reason": "引用文学典故（乐府），考查学生对文化词语的理解与语境转换能力。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "原指汉代采诗、制乐的机构，此处形容古寺庙成了演出的艺术殿堂",
    "sourceSentence": "古寺庙成了古今真乐府,天地大梨园",
-   "type": "interpretation",
-   "question": "文中将古寺庙称为「古今真乐府」，其意图是",
-   "options": [
-    "强调古寺庙历史悠久，曾是古代的官办乐府",
-    "借用古代乐府的称呼，盛赞古寺庙是秦腔艺术的荟萃之地",
-    "指出秦腔的剧本都是仿照古代乐府诗创作的",
-    "嘲讽古寺庙环境破旧，只能演一些古老的戏曲"
-   ],
-   "answerIndex": 1,
-   "explanation": "“乐府”在此处借代，用以赞美古寺庙作为秦腔演出场所的艺术高度和地位。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1121
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1571:v09"
   },
   {
    "id": "lesson-1571:v10",
    "word": "红白丧喜",
    "annotated": false,
-   "decision": "question",
-   "reason": "该词是社会文化词汇，考查学生对民俗语境的掌握。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "红事指婚嫁，白事指丧葬，合称人生的重要仪式",
    "sourceSentence": "每每村里过红白丧喜之事,那必是要包一台秦腔的",
-   "type": "interpretation",
-   "question": "文中「红白丧喜之事」指代的是",
-   "options": [
-    "节庆活动与演戏排练",
-    "戏班的开演与谢幕仪式",
-    "婚嫁与丧葬等人生重要仪式",
-    "戏台的修建与演出筹款活动"
-   ],
-   "answerIndex": 2,
-   "explanation": "在民间风俗中，“红事”指喜庆事（如婚嫁），“白事”指丧葬事，“红白丧喜”即涵盖了人生重大仪式。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4049
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1571:v10"
+  }
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1571:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1571:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "dbe3bb0c403a97f099f5ef6a84f10fe7457e4725b4c916ae9c1f567f7c354538",
+   "formerItem": {
+    "id": "lesson-1571:v04",
+    "word": "乱弹",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文中指代秦腔的一种泛称，易与现代汉语中“胡乱弹奏”产生歧义。",
+    "contextMeaning": "戏曲剧种的统称，此处指秦腔",
+    "sourceSentence": "起码不能吼一阵乱弹呢?!",
+    "type": "contextual-choice",
+    "question": "文中「起码不能吼一阵乱弹呢?!」中「乱弹」的意思是",
+    "options": [
+     "随心所欲地弹奏",
+     "一种戏曲剧种的泛称",
+     "乐器演奏杂乱无章",
+     "指代秦腔的贬义称呼"
+    ],
+    "answerIndex": 1,
+    "explanation": "在戏曲史上，“乱弹”常作为地方戏的代称，在此处语境下指代秦腔，非指演奏水平乱。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 312
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1571:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1571:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "f49cbc2f5f986bb5b835c4fd7cfe8fac45d0860c36556afa12a1a19837d71497",
+   "formerItem": {
+    "id": "lesson-1571:v05",
+    "word": "涤荡",
+    "annotated": false,
+    "decision": "question",
+    "reason": "该词在语境中形象化地表达了艺术对身心疲惫的洗涤，考查词语的语境义。",
+    "contextMeaning": "清除、洗涤",
+    "sourceSentence": "那心胸肺腑、关关节节的困乏便一尽儿涤荡净了。",
+    "type": "contextual-choice",
+    "question": "文中「困乏便一尽儿涤荡净了」中「涤荡」的意思是",
+    "options": [
+     "沉淀",
+     "洗涤、清除",
+     "排解、释放",
+     "覆盖、掩盖"
+    ],
+    "answerIndex": 1,
+    "explanation": "“涤荡”原指洗涤，在此处形容秦腔将农民劳作后的疲惫彻底消除，符合语境。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 414
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1571:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1571:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "1823601a4b02e92dec9844a35ffaadd1a1b9e56cf55028e3e79c2ad875dd3079",
+   "formerItem": {
+    "id": "lesson-1571:v06",
+    "word": "叫板",
+    "annotated": false,
+    "decision": "question",
+    "reason": "该词在文中是戏曲专业术语，不同于现代汉语中的“挑战”义。",
+    "contextMeaning": "戏曲术语，指演员在唱腔前的一段有节奏的念白或动作",
+    "sourceSentence": "几声雄壮的秦腔叫板,我就痴呆了",
+    "type": "contextual-choice",
+    "question": "文中「几声雄壮的秦腔叫板」中「叫板」一词的含义是",
+    "options": [
+     "挑衅、挑战",
+     "戏曲演唱前的念白或动作",
+     "大声地呼喊",
+     "敲打木板的声音"
+    ],
+    "answerIndex": 1,
+    "explanation": "“叫板”是秦腔等戏曲表演中的专业术语，指正式演唱前的衔接动作或念白，此处考查对戏曲常识的理解。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 991
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1571:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1571:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "2d9edcc1c9fceda4f4f963f6fcbf05a93f13117f8079bf7c28b87b946df28c2f",
+   "formerItem": {
+    "id": "lesson-1571:v07",
+    "word": "熨平",
+    "annotated": false,
+    "decision": "question",
+    "reason": "该词运用了比喻手法，将抽象的愁苦具象化，考查对句意深层理解。",
+    "contextMeaning": "抚平、化解",
+    "sourceSentence": "美也熨平了自己心中愁苦的皱纹。",
+    "type": "interpretation",
+    "question": "对「美也熨平了自己心中愁苦的皱纹」一句的理解，最恰当的一项是",
+    "options": [
+     "秦腔表演者在台上通过动作消除了脸上的皱纹",
+     "秦腔艺术的美感缓解并抚平了农民内心的痛苦",
+     "农民在看戏时心情愉悦，不再为生活操劳",
+     "秦腔表演通过熨烫道具，展现出整洁的美感"
+    ],
+    "answerIndex": 1,
+    "explanation": "此句运用比喻，将“愁苦”比作“皱纹”，“熨平”指代艺术带来的心理慰藉和痛苦的消解。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 734
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1571:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1571:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "14efb9865cb558aacff0879b09092634eae120182708b050517f83e0f1567642",
+   "formerItem": {
+    "id": "lesson-1571:v08",
+    "word": "二杆子",
+    "annotated": false,
+    "decision": "question",
+    "reason": "这是西北方言词汇，直接影响对文中特定人物形象的理解。",
+    "contextMeaning": "方言，指鲁莽、冲动、不计后果的人",
+    "sourceSentence": "立即就跳出一个两个所谓“二杆子”人物来。",
+    "type": "interpretation",
+    "question": "文中提到的「二杆子」人物，其主要特点是",
+    "options": [
+     "专业素质高，是戏班的骨干",
+     "性格冲动鲁莽，但对秦腔极为忠诚",
+     "性格狡猾，喜欢在戏场里偷窃",
+     "是戏班专门雇佣的安保人员"
+    ],
+    "answerIndex": 1,
+    "explanation": "根据文意，“二杆子”人物“头脑简单，四肢发达，却十二分忠诚于秦腔”，符合冲动但忠诚的形象描述。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2252
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1571:v09",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1571:v09",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "0de93eed9620b920e61c73b5394486991cf37cdf8c80f797db467bf293642f25",
+   "formerItem": {
+    "id": "lesson-1571:v09",
+    "word": "乐府",
+    "annotated": false,
+    "decision": "question",
+    "reason": "引用文学典故（乐府），考查学生对文化词语的理解与语境转换能力。",
+    "contextMeaning": "原指汉代采诗、制乐的机构，此处形容古寺庙成了演出的艺术殿堂",
+    "sourceSentence": "古寺庙成了古今真乐府,天地大梨园",
+    "type": "interpretation",
+    "question": "文中将古寺庙称为「古今真乐府」，其意图是",
+    "options": [
+     "强调古寺庙历史悠久，曾是古代的官办乐府",
+     "借用古代乐府的称呼，盛赞古寺庙是秦腔艺术的荟萃之地",
+     "指出秦腔的剧本都是仿照古代乐府诗创作的",
+     "嘲讽古寺庙环境破旧，只能演一些古老的戏曲"
+    ],
+    "answerIndex": 1,
+    "explanation": "“乐府”在此处借代，用以赞美古寺庙作为秦腔演出场所的艺术高度和地位。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1121
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1571:v10",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1571:v10",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "05eec0d1ea7b4a256ff614800b7c29fa70c8b0f56decb58ca073cbbe5a052f9c",
+   "formerItem": {
+    "id": "lesson-1571:v10",
+    "word": "红白丧喜",
+    "annotated": false,
+    "decision": "question",
+    "reason": "该词是社会文化词汇，考查学生对民俗语境的掌握。",
+    "contextMeaning": "红事指婚嫁，白事指丧葬，合称人生的重要仪式",
+    "sourceSentence": "每每村里过红白丧喜之事,那必是要包一台秦腔的",
+    "type": "interpretation",
+    "question": "文中「红白丧喜之事」指代的是",
+    "options": [
+     "节庆活动与演戏排练",
+     "戏班的开演与谢幕仪式",
+     "婚嫁与丧葬等人生重要仪式",
+     "戏台的修建与演出筹款活动"
+    ],
+    "answerIndex": 2,
+    "explanation": "在民间风俗中，“红事”指喜庆事（如婚嫁），“白事”指丧葬事，“红白丧喜”即涵盖了人生重大仪式。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4049
+    }
    }
   }
- ]
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

@@ -11,169 +11,92 @@
    "id": "lesson-1527:v01",
    "word": "竦身",
    "annotated": true,
-   "decision": "question",
-   "reason": "动作描写词，语境中体现作者试图摆脱悲愤的心理，易被误解为纯粹的生理动作",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "身体向上耸，这里指为了摆脱悲哀而产生的动作",
    "sourceSentence": "我很想借此算是竦身一摇,将悲哀摆脱,给自己轻松一下",
-   "type": "contextual-choice",
-   "question": "文中“竦身一摇”的“竦身”最贴切的语境义是",
-   "options": [
-    "惊恐地站起来",
-    "身体向上耸，试图摆脱束缚",
-    "因为寒冷而战栗",
-    "因为兴奋而跳跃"
-   ],
-   "answerIndex": 1,
-   "explanation": "竦身即身体向上耸，文中指作者试图通过这一动作摆脱心中沉重的悲哀。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 337
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1527:v01"
   },
   {
    "id": "lesson-1527:v02",
    "word": "隐约其辞",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语用法考察，易与含糊其辞混淆，且体现了当时白色恐怖的社会背景",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "说话写文章不直截了当",
    "sourceSentence": "当时上海的报章都不敢载这件事,或者也许是不愿,或不屑载这件事,只在《文艺新闻》上有一点隐约其辞的文章。",
-   "type": "interpretation",
-   "question": "文中“隐约其辞”体现了当时什么样的社会环境？",
-   "options": [
-    "文人表达风格含蓄",
-    "事件本身过于复杂",
-    "白色恐怖下媒体的噤若寒蝉与畏惧",
-    "作者对事件了解不够深刻"
-   ],
-   "answerIndex": 2,
-   "explanation": "隐约其辞指说话写文章不直截了当，结合语境“报章都不敢载”，可见是由于政治压力导致的不敢直言。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 422
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1527:v02"
   },
   {
    "id": "lesson-1527:v03",
    "word": "迂",
    "annotated": false,
-   "decision": "question",
-   "reason": "形容词在文中具有极强的评价色彩，体现了鲁迅对柔石性格的复杂情感，属于关键理解词",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "言行守旧、固执，不合时宜，这里带有褒义的亲昵与叹惋",
    "sourceSentence": "而且颇有点迂,有时会令我忽而想到方孝孺,觉得好像也有些这模样的。",
-   "type": "contextual-choice",
-   "question": "文中说柔石“颇有点迂”，鲁迅对这种“迂”的态度是",
-   "options": [
-    "彻底的否定与批评",
-    "作为性格缺陷的嘲讽",
-    "带着理解、亲昵与一丝痛惜",
-    "对柔石愚昧无知的无奈"
-   ],
-   "answerIndex": 2,
-   "explanation": "鲁迅通过“迂”将其与方孝孺联系，体现了对柔石刚正、质朴性格的肯定，而非贬义的守旧。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2131
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1527:v03"
   },
   {
    "id": "lesson-1527:v04",
    "word": "明珠投暗",
    "annotated": false,
-   "decision": "question",
-   "reason": "比喻用法，体现了作者对书籍被没收的痛惜，属于文学修辞理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "比喻珍贵的东西落入不识货或环境恶劣的人手中",
    "sourceSentence": "落在捕房的手里,真是明珠投暗了。",
-   "type": "interpretation",
-   "question": "文中“明珠投暗”比喻的是什么？",
-   "options": [
-    "柔石被捕入狱",
-    "鲁迅送给柔石的书籍落入捕房手中",
-    "珍贵的译稿被兵火烧毁",
-    "青年作家被反动派杀害"
-   ],
-   "answerIndex": 1,
-   "explanation": "明珠指鲁迅心爱的彼得斐诗集，暗指捕房，表现了鲁迅对心血之作落入敌手的愤慨。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1387
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1527:v04"
   },
   {
    "id": "lesson-1527:v05",
    "word": "苍皇",
    "annotated": true,
-   "decision": "question",
-   "reason": "古今异义/正字考察，教材已指出即“仓皇”，考查学生对词汇演变的认知",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "惊慌失措",
    "sourceSentence": "我这面也为他近视而又要照顾别人担心,大家都苍皇失措的愁一路",
-   "type": "gu-jin",
-   "question": "文中“苍皇”一词，在现代汉语中写作",
-   "options": [
-    "仓惶",
-    "仓皇",
-    "苍惶",
-    "沧皇"
-   ],
-   "answerIndex": 1,
-   "explanation": "根据教材注释，“苍皇”现在写作“仓皇”。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2914
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1527:v05"
   },
   {
    "id": "lesson-1527:v06",
    "word": "挈妇将雏",
    "annotated": true,
-   "decision": "question",
-   "reason": "成语考察，语境理解，体现作者当时逃亡的艰辛",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "带着妻子，领着儿女",
    "sourceSentence": "惯于长夜过春时,挈妇将雏鬓有丝。",
-   "type": "substitution",
-   "question": "诗句中“挈妇将雏”的意思是",
-   "options": [
-    "带领妻子儿女一同避难",
-    "告别妻子儿女独自流亡",
-    "妻子与儿女在战争中失散",
-    "照顾生病的妻子和年幼的孩子"
-   ],
-   "answerIndex": 0,
-   "explanation": "根据注释，挈、将都是带领的意思，雏指幼小的鸟喻指儿女，全句形容带着家眷流亡。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4604
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1527:v06"
   },
   {
    "id": "lesson-1527:v07",
    "word": "延口残喘",
    "annotated": false,
-   "decision": "question",
-   "reason": "关键短语，体现了白色恐怖下作者苟延残喘的悲愤心情",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "勉强维持残余的生命，苟且偷生",
    "sourceSentence": "我只能用这样的笔墨,写几句文章,算是从泥土中挖一个小孔,自己延口残喘",
-   "type": "contextual-choice",
-   "question": "文中作者说自己“延口残喘”，表达了作者什么样的心态？",
-   "options": [
-    "对生存充满希望的乐观",
-    "在黑暗压抑下勉强维持写作与生存的痛苦与无奈",
-    "对自己苟且偷生感到羞耻",
-    "对革命成功不再抱有幻想"
-   ],
-   "answerIndex": 1,
-   "explanation": "作者将自己写文章比作挖小孔透气，体现了在反动统治下维持生命的艰难。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 5437
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1527:v07"
   },
   {
    "id": "lesson-1527:v08",
@@ -508,5 +431,260 @@
    "contextMeaning": "即向秀（约227—272），字子期，河内怀县（今河南武陟）人，魏晋时期文学家，“竹林七贤”之一。他的好友嵇康、吕安被司马昭杀害后，他很悲痛，写了一篇《思旧赋》来纪念他们。由于当时司马氏的高压，向秀不能直书其事来表达自己的哀思，所以文章写得简短而隐晦，全文只有156字。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1527:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1527:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "267d2618dabdf3772e0d9ec2a4ffc151040c6bfc3f9d28ec72b1f48b4d70e6b6",
+   "formerItem": {
+    "id": "lesson-1527:v01",
+    "word": "竦身",
+    "annotated": true,
+    "decision": "question",
+    "reason": "动作描写词，语境中体现作者试图摆脱悲愤的心理，易被误解为纯粹的生理动作",
+    "contextMeaning": "身体向上耸，这里指为了摆脱悲哀而产生的动作",
+    "sourceSentence": "我很想借此算是竦身一摇,将悲哀摆脱,给自己轻松一下",
+    "type": "contextual-choice",
+    "question": "文中“竦身一摇”的“竦身”最贴切的语境义是",
+    "options": [
+     "惊恐地站起来",
+     "身体向上耸，试图摆脱束缚",
+     "因为寒冷而战栗",
+     "因为兴奋而跳跃"
+    ],
+    "answerIndex": 1,
+    "explanation": "竦身即身体向上耸，文中指作者试图通过这一动作摆脱心中沉重的悲哀。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 337
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1527:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1527:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "f18f48e9adeeab9483c53dab0e8282d7a3380f651109f6295caaf2f19575a287",
+   "formerItem": {
+    "id": "lesson-1527:v02",
+    "word": "隐约其辞",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语用法考察，易与含糊其辞混淆，且体现了当时白色恐怖的社会背景",
+    "contextMeaning": "说话写文章不直截了当",
+    "sourceSentence": "当时上海的报章都不敢载这件事,或者也许是不愿,或不屑载这件事,只在《文艺新闻》上有一点隐约其辞的文章。",
+    "type": "interpretation",
+    "question": "文中“隐约其辞”体现了当时什么样的社会环境？",
+    "options": [
+     "文人表达风格含蓄",
+     "事件本身过于复杂",
+     "白色恐怖下媒体的噤若寒蝉与畏惧",
+     "作者对事件了解不够深刻"
+    ],
+    "answerIndex": 2,
+    "explanation": "隐约其辞指说话写文章不直截了当，结合语境“报章都不敢载”，可见是由于政治压力导致的不敢直言。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 422
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1527:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1527:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "25c555b414aed8eea8dd90699574d53b8a732084c0b66bdc85399b62c64a3ea5",
+   "formerItem": {
+    "id": "lesson-1527:v03",
+    "word": "迂",
+    "annotated": false,
+    "decision": "question",
+    "reason": "形容词在文中具有极强的评价色彩，体现了鲁迅对柔石性格的复杂情感，属于关键理解词",
+    "contextMeaning": "言行守旧、固执，不合时宜，这里带有褒义的亲昵与叹惋",
+    "sourceSentence": "而且颇有点迂,有时会令我忽而想到方孝孺,觉得好像也有些这模样的。",
+    "type": "contextual-choice",
+    "question": "文中说柔石“颇有点迂”，鲁迅对这种“迂”的态度是",
+    "options": [
+     "彻底的否定与批评",
+     "作为性格缺陷的嘲讽",
+     "带着理解、亲昵与一丝痛惜",
+     "对柔石愚昧无知的无奈"
+    ],
+    "answerIndex": 2,
+    "explanation": "鲁迅通过“迂”将其与方孝孺联系，体现了对柔石刚正、质朴性格的肯定，而非贬义的守旧。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2131
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1527:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1527:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "ee66f709d7d5a950ff50b9d48a7929fdfc09082995861d8f4b60f6aeb6a4ce2d",
+   "formerItem": {
+    "id": "lesson-1527:v04",
+    "word": "明珠投暗",
+    "annotated": false,
+    "decision": "question",
+    "reason": "比喻用法，体现了作者对书籍被没收的痛惜，属于文学修辞理解",
+    "contextMeaning": "比喻珍贵的东西落入不识货或环境恶劣的人手中",
+    "sourceSentence": "落在捕房的手里,真是明珠投暗了。",
+    "type": "interpretation",
+    "question": "文中“明珠投暗”比喻的是什么？",
+    "options": [
+     "柔石被捕入狱",
+     "鲁迅送给柔石的书籍落入捕房手中",
+     "珍贵的译稿被兵火烧毁",
+     "青年作家被反动派杀害"
+    ],
+    "answerIndex": 1,
+    "explanation": "明珠指鲁迅心爱的彼得斐诗集，暗指捕房，表现了鲁迅对心血之作落入敌手的愤慨。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1387
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1527:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1527:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "8e4a4bc0f8b4531b0586963ca049bc92c104a200cfa484b7d23104ef98a9813d",
+   "formerItem": {
+    "id": "lesson-1527:v05",
+    "word": "苍皇",
+    "annotated": true,
+    "decision": "question",
+    "reason": "古今异义/正字考察，教材已指出即“仓皇”，考查学生对词汇演变的认知",
+    "contextMeaning": "惊慌失措",
+    "sourceSentence": "我这面也为他近视而又要照顾别人担心,大家都苍皇失措的愁一路",
+    "type": "gu-jin",
+    "question": "文中“苍皇”一词，在现代汉语中写作",
+    "options": [
+     "仓惶",
+     "仓皇",
+     "苍惶",
+     "沧皇"
+    ],
+    "answerIndex": 1,
+    "explanation": "根据教材注释，“苍皇”现在写作“仓皇”。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2914
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1527:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1527:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "4f5c97575d1e06fcde3134c3320da122eb9e782db1b30a05f2f7e8ffc7a9d1d9",
+   "formerItem": {
+    "id": "lesson-1527:v06",
+    "word": "挈妇将雏",
+    "annotated": true,
+    "decision": "question",
+    "reason": "成语考察，语境理解，体现作者当时逃亡的艰辛",
+    "contextMeaning": "带着妻子，领着儿女",
+    "sourceSentence": "惯于长夜过春时,挈妇将雏鬓有丝。",
+    "type": "substitution",
+    "question": "诗句中“挈妇将雏”的意思是",
+    "options": [
+     "带领妻子儿女一同避难",
+     "告别妻子儿女独自流亡",
+     "妻子与儿女在战争中失散",
+     "照顾生病的妻子和年幼的孩子"
+    ],
+    "answerIndex": 0,
+    "explanation": "根据注释，挈、将都是带领的意思，雏指幼小的鸟喻指儿女，全句形容带着家眷流亡。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4604
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1527:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1527:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "11d124050a617d54426e920f49652d2c6c9bacaaec2064804789763e9233c94f",
+   "formerItem": {
+    "id": "lesson-1527:v07",
+    "word": "延口残喘",
+    "annotated": false,
+    "decision": "question",
+    "reason": "关键短语，体现了白色恐怖下作者苟延残喘的悲愤心情",
+    "contextMeaning": "勉强维持残余的生命，苟且偷生",
+    "sourceSentence": "我只能用这样的笔墨,写几句文章,算是从泥土中挖一个小孔,自己延口残喘",
+    "type": "contextual-choice",
+    "question": "文中作者说自己“延口残喘”，表达了作者什么样的心态？",
+    "options": [
+     "对生存充满希望的乐观",
+     "在黑暗压抑下勉强维持写作与生存的痛苦与无奈",
+     "对自己苟且偷生感到羞耻",
+     "对革命成功不再抱有幻想"
+    ],
+    "answerIndex": 1,
+    "explanation": "作者将自己写文章比作挖小孔透气，体现了在反动统治下维持生命的艰难。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 5437
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

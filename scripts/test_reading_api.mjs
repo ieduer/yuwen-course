@@ -17,8 +17,10 @@ for (const file of [
   "data/interaction-definitions.json",
   "data/learning-manifest.json",
   "data/manifest.json",
+  "data/lessons/lesson-1468.json",
   "data/lessons/lesson-1484.json",
   "data/vocab/index.json",
+  "data/vocab/lesson-1468.json",
   "data/vocab/lesson-1484.json",
 ]) {
   const destination = path.join(SERVER_ROOT, file);
@@ -146,6 +148,24 @@ try {
   assert("server computes correctness from answer key", firstTry.data.correct === true, JSON.stringify(firstTry));
   const forged = await api("/api/reading/vocab-attempt", { lessonId: "lesson-1484", itemId: "lesson-1484:v02", correct: true, answer: "forged" });
   assert("browser correctness without selectedIndex rejected", forged.status === 400);
+  const beforeExcludedAttempt = (await api("/api/reading/health")).data.learningInteractions;
+  const excludedAttempt = await api("/api/reading/vocab-attempt", {
+    lessonId: "lesson-1468",
+    itemId: "lesson-1468:v01",
+    selectedIndex: 0,
+  });
+  const afterExcludedAttempt = (await api("/api/reading/health")).data.learningInteractions;
+  assert(
+    "non-classical tombstone cannot enter evaluator",
+    excludedAttempt.status === 400
+      && excludedAttempt.data.error === "vocabulary item absent from authoritative bank",
+    JSON.stringify(excludedAttempt),
+  );
+  assert(
+    "rejected tombstone creates no learning evidence",
+    afterExcludedAttempt === beforeExcludedAttempt,
+    `${beforeExcludedAttempt} -> ${afterExcludedAttempt}`,
+  );
   const vocabRetryMutationId = `vocab-retry-${SLUG}`;
   const wrong = await api("/api/reading/vocab-attempt", {
     lessonId: "lesson-1484",

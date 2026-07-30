@@ -86,15 +86,16 @@ const chenqing = await page.evaluate(() => ({
   portraitNameCard: document.querySelector("#lesson-portraits .portrait-choice.name-card")?.getAttribute("aria-label") || "",
   portraitShape: (() => { const node = document.querySelector("#lesson-portraits .portrait-choice"); if (!node) return null; const rect = node.getBoundingClientRect(); return { width: rect.width, height: rect.height, radius: getComputedStyle(node).borderRadius }; })(),
   titleLayout: (() => { const node = document.querySelector("#lesson-title"); if (!node) return null; const style = getComputedStyle(node); return { whiteSpace: style.whiteSpace, width: node.clientWidth, scrollWidth: node.scrollWidth, height: node.getBoundingClientRect().height, lineHeight: parseFloat(style.lineHeight) }; })(),
-  inlineNotes: document.querySelectorAll("#text-flow .inline-note").length,
-  annotationResidue: [...document.querySelectorAll("#text-flow .inline-note")].filter((node) => /<\/?span|\[\/?color/i.test(node.dataset.note || "")).length,
+  annotationRefs: document.querySelectorAll("#text-flow .reader-note-ref").length,
+  annotationItems: document.querySelectorAll("#text-flow .reader-annotations li").length,
+  annotationResidue: /\[\/?color|\[\d+:\d+\]/i.test(document.querySelector("#text-flow")?.textContent || ""),
   footnoteLists: document.querySelectorAll("#text-flow .footnotes-list").length,
   forumFragmentLinks: [...document.querySelectorAll('#text-flow a[href*="forum.rdfzer.com/#footnote"]')].length,
   repeatedHeadings: [...document.querySelectorAll("#text-flow h1,#text-flow h2,#text-flow h3")].filter((node) => /陈情表/.test(node.textContent || "")).length,
   checkLabels: [...document.querySelectorAll("#check-stage h3")].map((node) => node.textContent.trim()),
   stageMarks: [...document.querySelectorAll("#check-stage .check-round > header > .stage-wadang")].map((node) => node.textContent.trim()),
   stageSvgCount: document.querySelectorAll("#check-stage .stage-wadang svg").length,
-  noteStyle: (() => { const node = document.querySelector("#text-flow .inline-note"); if (!node) return null; const style = getComputedStyle(node); return { border: style.borderStyle, radius: style.borderRadius }; })(),
+  noteStyle: (() => { const node = document.querySelector("#text-flow .reader-note-ref"); if (!node) return null; const style = getComputedStyle(node); return { border: style.borderStyle, radius: style.borderRadius }; })(),
   mastheadHeight: document.querySelector("#lesson-masthead")?.getBoundingClientRect().height || 0,
   kickerCount: document.querySelectorAll("#lesson-kicker").length,
 }));
@@ -107,8 +108,8 @@ check("頁首引入李密肖像", chenqing.portraits > 0, String(chenqing.portra
 check("無可靠李密肖像明示為姓名卡", chenqing.portraitNameCard.includes("無可靠肖像姓名卡"), chenqing.portraitNameCard);
 check("作者肖像為正圓", chenqing.portraitShape?.radius === "50%" && Math.abs(chenqing.portraitShape.width - chenqing.portraitShape.height) < 1, JSON.stringify(chenqing.portraitShape));
 check("篇名保持單行", chenqing.titleLayout?.whiteSpace === "nowrap" && chenqing.titleLayout.scrollWidth <= chenqing.titleLayout.width + 1 && chenqing.titleLayout.height <= chenqing.titleLayout.lineHeight * 1.1, JSON.stringify(chenqing.titleLayout));
-check("古文註釋原位化", chenqing.inlineNotes > 20, String(chenqing.inlineNotes));
-check("註釋無 span 或 color 殘片", chenqing.annotationResidue === 0, String(chenqing.annotationResidue));
+check("古文註釋正文引用與頁末列表一一對應", chenqing.annotationRefs > 20 && chenqing.annotationItems > 20, JSON.stringify({ refs: chenqing.annotationRefs, items: chenqing.annotationItems }));
+check("註釋無 color 或原始複用編碼殘片", chenqing.annotationResidue === false, String(chenqing.annotationResidue));
 check("頁末註釋移除", chenqing.footnoteLists === 0, String(chenqing.footnoteLists));
 check("註釋不跳論壇", chenqing.forumFragmentLinks === 0, String(chenqing.forumFragmentLinks));
 check("正文不重複篇名", chenqing.repeatedHeadings === 0, String(chenqing.repeatedHeadings));
@@ -119,18 +120,14 @@ check("叩問作者移至見效最後", chenqing.checkLabels.at(-1) === "叩問�
 check("學習效果確認改名見效", await page.locator("#check-title", { hasText: "見效" }).count() === 1 && await page.getByText("學習效果確認", { exact: true }).count() === 0);
 check("正文三段標題精簡", (await page.locator("#orientation-title").innerText()) === "起始" && (await page.locator("#textbook-title").innerText()) === "細讀" && (await page.locator("#materials-title").innerText()) === "延伸");
 check("閱讀起點鏈接新頁打開", await page.locator("#orientation-content a:not([target='_blank'])").count() === 0);
-check("文體書目星圖己身留在當前頁", await page.locator(".topbar-actions a[data-same-tab]:not([target])").count() === 4);
+check("站內入口與登入留在當前頁", await page.locator(".topbar-actions a[data-same-tab]:not([target])").count() >= 4);
 check("其餘鏈接均新頁打開", await page.locator("a[href]:not([target='_blank']):not([data-same-tab])").count() === 0);
 
-const firstNote = page.locator("#text-flow .inline-note").first();
-const fullNote = await firstNote.getAttribute("data-note");
+const firstNote = page.locator("#text-flow .reader-note-ref").first();
+const noteTarget = await firstNote.getAttribute("href");
 await firstNote.click();
-check("註釋點擊展開", await page.locator("#text-flow .note-popover.open").count() === 1);
-await page.waitForTimeout(72);
-const typedNote = await page.locator("#text-flow .note-popover.open").textContent();
-check("註釋逐字顯示", typedNote.length > 0 && typedNote.length < (fullNote || "").length, `${typedNote.length}/${(fullNote || "").length}`);
-await firstNote.click();
-check("註釋再次點擊收起", await page.locator("#text-flow .note-popover.open").count() === 0);
+check("註釋點擊定位到同頁 canonical 列表", Boolean(noteTarget) && page.url().endsWith(noteTarget) && await page.locator(noteTarget).count() === 1, `${page.url()} ${noteTarget}`);
+check("註釋定位不切換課文", (await page.locator("#lesson-title").innerText()).includes("陈情表"));
 
 check("非專注模式不顯示正文縮放", await page.locator("#font-up").isHidden() && await page.locator("#font-down").isHidden() && await page.locator("#font-label").isHidden());
 await page.locator("#focus-button").click();
@@ -319,22 +316,24 @@ if (fiveStoneHasBank) {
   const fiveStoneQuiz = await page.evaluate(() => {
     const bankCount = Number((document.querySelector('[data-round="vocabulary"] .vocabulary-progress b')?.textContent || "0 / 0").split("/")[1]);
     return {
-      inlineNotes: document.querySelectorAll("#text-flow .inline-note").length,
+      annotationRefs: document.querySelectorAll("#text-flow .reader-note-ref").length,
+      annotationItems: document.querySelectorAll("#text-flow .reader-annotations li").length,
       bankCount,
       wordCreation: document.querySelectorAll('[data-round="vocabulary"] .word-creation-prompt').length,
     };
   });
-  check("五石之瓠十五條正文註詞與題庫並存", fiveStoneQuiz.inlineNotes === 15 && fiveStoneQuiz.bankCount >= 8, JSON.stringify(fiveStoneQuiz));
+  check("五石之瓠十五條 canonical 註釋與題庫並存", fiveStoneQuiz.annotationRefs === 15 && fiveStoneQuiz.annotationItems === 15 && fiveStoneQuiz.bankCount >= 8, JSON.stringify(fiveStoneQuiz));
   check("五石之瓠文言詞級不設創作", fiveStoneQuiz.wordCreation === 0, String(fiveStoneQuiz.wordCreation));
 } else {
   const fiveStoneVocabulary = await page.evaluate(() => ({
-    inlineNotes: document.querySelectorAll("#text-flow .inline-note").length,
+    annotationRefs: document.querySelectorAll("#text-flow .reader-note-ref").length,
+    annotationItems: document.querySelectorAll("#text-flow .reader-annotations li").length,
     progress: document.querySelector('[data-round="vocabulary"] .vocabulary-progress')?.getAttribute("aria-label") || "",
     empty: document.querySelector('[data-round="vocabulary"] .vocabulary-empty')?.textContent || "",
     wordCreation: document.querySelectorAll('[data-round="vocabulary"] .word-creation-prompt').length,
     firstWord: document.querySelector('[data-round="vocabulary"] [data-vocabulary]')?.getAttribute("data-vocabulary") || "",
   }));
-  check("五石之瓠十五條正文註詞全部進入疏通", fiveStoneVocabulary.inlineNotes === 15 && /0 \/ 15/.test(fiveStoneVocabulary.progress) && !fiveStoneVocabulary.empty && Boolean(fiveStoneVocabulary.firstWord), JSON.stringify(fiveStoneVocabulary));
+  check("五石之瓠十五條 canonical 註釋全部進入疏通", fiveStoneVocabulary.annotationRefs === 15 && fiveStoneVocabulary.annotationItems === 15 && /0 \/ 15/.test(fiveStoneVocabulary.progress) && !fiveStoneVocabulary.empty && Boolean(fiveStoneVocabulary.firstWord), JSON.stringify(fiveStoneVocabulary));
   check("五石之瓠文言詞級不設創作", fiveStoneVocabulary.wordCreation === 0, String(fiveStoneVocabulary.wordCreation));
 }
 
@@ -401,7 +400,8 @@ for (const [index, lesson] of taxonomy.lessons.entries()) {
         const style = getComputedStyle(representativeVisual);
         return style.display !== "none" && style.visibility !== "hidden" && rect.width > 40 && rect.height > 40 && rect.right > 0 && rect.left < innerWidth;
       })(),
-      inlineNotes: document.querySelectorAll("#text-flow .inline-note").length,
+      annotationRefs: document.querySelectorAll("#text-flow .reader-note-ref").length,
+      vocabularyRound: Boolean(document.querySelector('[data-round="vocabulary"]')),
       vocabularyTotal: Number((document.querySelector('[data-round="vocabulary"] .vocabulary-progress')?.getAttribute("aria-label") || "").match(/\/\s*(\d+)/)?.[1] || 0),
       vocabularyEmpty: Boolean(document.querySelector('[data-round="vocabulary"] .vocabulary-empty')),
       wordCreation: document.querySelectorAll('[data-round="vocabulary"] .word-creation-prompt').length,
@@ -412,8 +412,9 @@ for (const [index, lesson] of taxonomy.lessons.entries()) {
   const expectedPortraitCount = lesson.authors.length || (lesson.representativeFigure ? 1 : 0);
   if (state.portraitCount !== expectedPortraitCount || !state.portraitsVisible) portraitLessons.push(`${lesson.id}:${state.portraitCount}/${expectedPortraitCount}`);
   if (!lesson.authors.length && !state.representativeVisual) representativeLessonsNotVisible.push(lesson.id);
-  const hasVocabularyRound = !["whole-book", "language-activity", "review"].includes(lesson.mode);
-  if (hasVocabularyRound && state.inlineNotes > 0 && (state.vocabularyTotal === 0 || state.vocabularyEmpty)) vocabularyMismatchLessons.push(`${lesson.id}:${state.inlineNotes}/${state.vocabularyTotal}`);
+  const hasVocabularyRound = ["classical", "poetry"].includes(lesson.mode);
+  if (hasVocabularyRound && state.annotationRefs > 0 && (state.vocabularyTotal === 0 || state.vocabularyEmpty)) vocabularyMismatchLessons.push(`${lesson.id}:${state.annotationRefs}/${state.vocabularyTotal}`);
+  if (!hasVocabularyRound && state.vocabularyRound) vocabularyMismatchLessons.push(`${lesson.id}:out-of-scope`);
   if (lesson.mode === "classical" && state.wordCreation > 0) classicalCreationLessons.push(lesson.id);
 }
 check("全 189 篇移動端無鏈接或正文溢出", overflowLessons.length === 0, overflowLessons.join(" / "));
@@ -567,7 +568,7 @@ check("課文頂欄含星圖入口", await page.request.get(`${base}/`).then(asy
 
 const vocabIndexResponse = await page.request.get(`${base}/data/vocab/index.json`, { timeout: 15000 });
 const vocabIndex = vocabIndexResponse.ok() ? await vocabIndexResponse.json().catch(() => ({ lessons: {} })) : { lessons: {} };
-const vocabLessonIds = Object.keys(vocabIndex.lessons || {});
+const vocabLessonIds = Object.keys(vocabIndex.lessons || {}).filter((lessonId) => Number(vocabIndex.lessons[lessonId]) > 0);
 check("字詞題庫索引可達", vocabIndexResponse.ok(), String(vocabIndexResponse.status()));
 if (vocabLessonIds.length) {
   const sampleId = vocabLessonIds[0];

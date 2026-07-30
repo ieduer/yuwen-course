@@ -15,6 +15,7 @@ import {
   writeImmutableFile,
 } from "./native_content_release_contract.mjs";
 import { createUrlSanitizer } from "./native_content_url_sanitizer.mjs";
+import { validateVocabEligibility } from "./vocab_eligibility.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const SITE = path.join(ROOT, "site");
@@ -71,6 +72,10 @@ function canonicalize(value) {
 
 function serialize(value) {
   return `${JSON.stringify(canonicalize(value))}\n`;
+}
+
+function canonicalSha256(value) {
+  return sha256(JSON.stringify(canonicalize(value)));
 }
 
 function parseArgs(argv) {
@@ -152,7 +157,40 @@ function normalizePost(post) {
   return sanitizeValue({ ...rest, plainText });
 }
 
-const sourceManifest = json(path.join(DATA, "manifest.json"));
+function readerBlockText(block) {
+  if (!block) return "";
+  if (Array.isArray(block.runs)) {
+    return block.runs.map((run) => (
+      run.type === "text" || run.type === "link"
+        ? run.text || ""
+        : run.type === "annotation-ref"
+          ? run.label || ""
+          : run.type === "media-ref"
+            ? run.alt || ""
+            : ""
+    )).join("");
+  }
+  if (Array.isArray(block.blocks)) return block.blocks.map(readerBlockText).join("\n");
+  if (Array.isArray(block.items)) {
+    return block.items.flatMap((item) => item.blocks || []).map(readerBlockText).join("\n");
+  }
+  if (Array.isArray(block.rows)) {
+    return block.rows.flat().map((cell) => readerBlockText(cell)).join("\n");
+  }
+  return String(block.text || "");
+}
+
+function readerBody(document) {
+  return [
+    ...(document.main?.frontMatter || []),
+    ...(document.main?.guidance || []),
+    ...(document.main?.blocks || []),
+  ].map(readerBlockText).join("\n\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+
+const sourceManifestFile = path.join(DATA, "manifest.json");
+const sourceManifestBytes = readFileSync(sourceManifestFile);
+const sourceManifest = JSON.parse(sourceManifestBytes.toString("utf8"));
 const activeIds = new Set(sourceManifest.lessons.map((lesson) => lesson.id));
 assert(activeIds.size === sourceManifest.lessons.length, "source manifest has duplicate active lesson IDs");
 const blockLessonIds = sourceManifest.blocks.flatMap((block) => block.lessons.map((lesson) => lesson.id));
@@ -167,6 +205,52 @@ assert(
 const bookTitles = new Set(sourceManifest.lessons.map((lesson) => (
   lesson.textbookBookTitle || lesson.blockTitle
 )).filter(Boolean));
+const readerIndexFile = path.join(DATA, "reader-documents", "index.json");
+const readerIndexBytes = readFileSync(readerIndexFile);
+const readerIndex = JSON.parse(readerIndexBytes.toString("utf8"));
+const readerMediaReceiptFile = path.join(DATA, "reader-media-receipts.v1.json");
+const readerMediaReceiptBytes = readFileSync(readerMediaReceiptFile);
+const readerMediaReceiptLedger = JSON.parse(readerMediaReceiptBytes.toString("utf8"));
+assert(readerIndex.schemaVersion === "yw-reader-document-index-v1", "unsupported reader document index");
+assert(readerIndex.sourceManifestSha256 === sha256(sourceManifestBytes),
+  "reader document index source-manifest receipt is stale");
+assert(readerIndex.lessonCount === sourceManifest.lessons.length,
+  "reader document index lesson count differs from source manifest");
+assert(
+  JSON.stringify(Object.keys(readerIndex.documents).sort())
+    === JSON.stringify(sourceManifest.lessons.map((lesson) => lesson.id).sort()),
+  "reader document index inventory differs from source manifest",
+);
+assert(readerIndex.mediaReceiptLedger?.schemaVersion === "yw-reader-media-receipts-v1",
+  "reader document index has no supported media receipt ledger");
+assert(readerIndex.mediaReceiptLedger.sha256 === sha256(readerMediaReceiptBytes),
+  "reader media receipt ledger hash differs from reader index");
+assert(readerMediaReceiptLedger.readerSemanticDigest === readerIndex.readerSemanticDigest,
+  "reader media receipt ledger semantic digest differs from reader index");
+assert(readerMediaReceiptLedger.receiptCount === readerIndex.mediaReceiptLedger.receiptCount,
+  "reader media receipt count differs from reader index");
+assert(readerMediaReceiptLedger.sourceInventorySha256
+  === readerIndex.mediaReceiptLedger.sourceInventorySha256,
+  "reader media receipt inventory differs from reader index");
+const readerDocuments = new Map();
+for (const meta of sourceManifest.lessons) {
+  const receipt = readerIndex.documents[meta.id];
+  assert(receipt, `${meta.id}: reader document receipt missing`);
+  const file = path.join(DATA, receipt.path);
+  assert(existsSync(file), `${meta.id}: reader document file missing`);
+  const bytes = readFileSync(file);
+  assert(bytes.length === receipt.bytes, `${meta.id}: reader document byte receipt mismatch`);
+  assert(sha256(bytes) === receipt.sha256, `${meta.id}: reader document hash receipt mismatch`);
+  const document = JSON.parse(bytes.toString("utf8"));
+  assert(document.schemaVersion === "yw-reader-document-v1", `${meta.id}: unsupported reader document`);
+  assert(document.lessonId === meta.id, `${meta.id}: reader document identity mismatch`);
+  assert(document.main?.sourcePostId != null, `${meta.id}: reader document primary post missing`);
+  assert(document.provenance?.posts?.filter((post) => post.role === "primary").length === 1,
+    `${meta.id}: reader document must have exactly one primary post`);
+  assert(document.provenance?.posts?.length === receipt.sourcePostCount,
+    `${meta.id}: reader document provenance post count mismatch`);
+  readerDocuments.set(meta.id, sanitizeValue(document));
+}
 const normalizedLessons = [];
 for (const meta of sourceManifest.lessons) {
   const sourceFile = path.join(SITE, meta.dataUrl);
@@ -183,11 +267,21 @@ for (const meta of sourceManifest.lessons) {
     posts: undefined,
     textbook: undefined,
   });
+  const readerDocument = readerDocuments.get(meta.id);
+  assert(readerDocument, `${meta.id}: reader document not loaded`);
+  assert(readerDocument.provenance.posts.length === posts.length,
+    `${meta.id}: reader/source post count mismatch`);
+  assert(
+    JSON.stringify(readerDocument.provenance.posts.map((post) => String(post.postId)).sort())
+      === JSON.stringify(posts.map((post) => String(post.id)).sort()),
+    `${meta.id}: reader/source post inventory mismatch`,
+  );
   normalizedLessons.push(canonicalize({
     schemaVersion: "yw-native-lesson-v1",
     ...lesson,
     postCount: posts.length,
-    body: posts.map((post) => post.plainText).join("\n\n"),
+    body: readerBody(readerDocument),
+    readerDocument,
     posts,
     textbook,
   }));
@@ -199,7 +293,9 @@ const actualTotals = normalizedLessons.reduce((totals, lesson) => {
   totals.textbookContextPageRefs += lesson.textbook.contextPageImages.length;
   totals.forumImages += (lesson.forumImages || []).length;
   totals.resources += (lesson.resources || []).length;
-  totals.annotations += (lesson.annotations || []).length;
+  totals.annotations += (lesson.readerDocument?.main?.annotations || []).length;
+  totals.annotations += (lesson.readerDocument?.supplementary || [])
+    .reduce((count, section) => count + (section.annotations || []).length, 0);
   totals.learningTasks += (lesson.learningTasks || []).length;
   for (const post of lesson.posts) {
     totals.postAttachments += (post.attachments || []).length;
@@ -224,6 +320,11 @@ const contextPageUrls = new Set(normalizedLessons.flatMap((lesson) => lesson.tex
 
 const vocabSourceIndex = json(path.join(DATA, "vocab", "index.json"));
 const vocabLessonIds = Object.keys(vocabSourceIndex.lessons).sort((left, right) => left.localeCompare(right, "en"));
+const vocabEligibilityFile = path.join(DATA, "vocab-eligibility.json");
+const vocabEligibilityBytes = readFileSync(vocabEligibilityFile);
+const vocabEligibility = canonicalize(sanitizeValue(
+  validateVocabEligibility(JSON.parse(vocabEligibilityBytes.toString("utf8"))),
+));
 const vocabFileIds = readdirSync(path.join(DATA, "vocab"))
   .filter((file) => file.endsWith(".json") && file !== "index.json")
   .map((file) => file.slice(0, -5))
@@ -232,6 +333,7 @@ assert(
   JSON.stringify(vocabFileIds) === JSON.stringify(vocabLessonIds),
   "vocab index and JSON file inventory differ",
 );
+const allVocabLessons = [];
 const vocabLessons = [];
 let vocabInventoryItems = 0;
 let vocabQuestions = 0;
@@ -240,19 +342,25 @@ for (const lessonId of vocabLessonIds) {
   assert(activeIds.has(lessonId), `vocab references inactive lesson: ${lessonId}`);
   const bank = sanitizeValue(json(path.join(DATA, "vocab", `${lessonId}.json`)));
   assert(bank.lessonId === lessonId, `${lessonId}: vocab identity mismatch`);
+  const questions = bank.inventory.filter((item) => item.decision === "question");
+  assert(vocabSourceIndex.lessons[lessonId] === questions.length,
+    `${lessonId}: vocab index question count mismatch`);
+  allVocabLessons.push(canonicalize(bank));
+  if (questions.length === 0) continue;
   vocabInventoryItems += bank.inventory.length;
   for (const item of bank.inventory) {
     vocabDecisionCounts[item.decision] = (vocabDecisionCounts[item.decision] || 0) + 1;
     if (item.decision === "question") vocabQuestions += 1;
   }
-  assert(vocabSourceIndex.lessons[lessonId] === bank.inventory.filter((item) => item.decision === "question").length,
-    `${lessonId}: vocab index question count mismatch`);
   vocabLessons.push(canonicalize(bank));
 }
+const nativeVocabLessonIds = new Set(vocabLessons.map((bank) => bank.lessonId));
 const normalizedVocabIndex = canonicalize({
   schemaVersion: "yw-native-vocab-index-v1",
-  lessonCount: vocabLessonIds.length,
-  inventoryFileCount: vocabLessonIds.length + 1,
+  eligibilityPolicyVersion: vocabEligibility.policyVersion,
+  lessonCount: vocabLessons.length,
+  sourceBankCount: allVocabLessons.length,
+  inventoryFileCount: vocabLessons.length + 1,
   inventoryItemCount: vocabInventoryItems,
   questionCount: vocabQuestions,
   decisionCounts: vocabDecisionCounts,
@@ -402,7 +510,10 @@ const catalogBase = canonicalize({
     path: `lessons/${lesson.id}.json`,
     postCount: lesson.postCount,
     textbookPageCount: lesson.textbookPageCount,
-    vocabPath: vocabLessonIds.includes(lesson.id) ? `vocab/${lesson.id}.json` : null,
+    vocabPath: nativeVocabLessonIds.has(lesson.id) ? `vocab/${lesson.id}.json` : null,
+    readerDocumentPath: `data/reader-documents/${lesson.id}.json`,
+    readerDocumentSha256: readerIndex.documents[lesson.id].sha256,
+    readerDocumentEmbeddedSha256: canonicalSha256(readerDocuments.get(lesson.id)),
   })),
 });
 
@@ -466,11 +577,11 @@ const counts = canonicalize({
   postAttachments: actualTotals.postAttachments,
   postImages: actualTotals.postImages,
   postLinks: actualTotals.postLinks,
-  vocabLessonFiles: vocabLessonIds.length,
-  vocabInventoryFiles: vocabLessonIds.length + 1,
+  vocabLessonFiles: vocabLessons.length,
+  vocabInventoryFiles: vocabLessons.length + 1,
   vocabInventoryItems,
   vocabQuestions,
-  vocabularyLessons: vocabLessonIds.length,
+  vocabularyLessons: vocabLessons.length,
   vocabularyQuestions: vocabQuestions,
   mediaCatalogLessons: mediaLessons.length,
   approvedDecks,
@@ -494,9 +605,17 @@ const semanticCoreBase = canonicalize({
   provenance: RIGHTS_PROVENANCE,
   counts,
   exclusions,
+  readerProjection: {
+    schemaVersion: readerIndex.schemaVersion,
+    curationVersion: readerIndex.curationVersion,
+    readerSemanticDigest: readerIndex.readerSemanticDigest,
+    indexSha256: sha256(readerIndexBytes),
+    mediaReceiptLedger: readerIndex.mediaReceiptLedger,
+  },
   catalog: catalogBase,
   lessons: normalizedLessons,
   vocab: {
+    eligibility: vocabEligibility,
     index: normalizedVocabIndex,
     lessons: vocabLessons,
   },
@@ -583,6 +702,7 @@ addObject("media", "media", "media.json", versionedMedia);
 addObject("tombstones", "tombstones", "tombstones.json", normalizedTombstones);
 addObject("learning-manifest", "learning-manifest", "learning-manifest.json", learningManifest);
 addObject("interaction-definitions", "interaction-definitions", "interaction-definitions.json", interactionDefinitions);
+addObject("vocab-eligibility", "vocab-eligibility", "vocab-eligibility.json", vocabEligibility);
 for (const lesson of versionedLessons) {
   addObject(lesson.id, "lesson", `lessons/${lesson.id}.json`, lesson);
 }
@@ -622,11 +742,33 @@ const manifest = canonicalize({
   sourceProvenance: {
     sourceManifest: {
       path: "site/data/manifest.json",
-      sha256: sha256(readFileSync(path.join(DATA, "manifest.json"))),
+      sha256: sha256(sourceManifestBytes),
+    },
+    readerDocumentIndex: {
+      path: "site/data/reader-documents/index.json",
+      sha256: sha256(readerIndexBytes),
+      readerSemanticDigest: readerIndex.readerSemanticDigest,
+      curationVersion: readerIndex.curationVersion,
+    },
+    readerMediaReceiptLedger: {
+      path: "site/data/reader-media-receipts.v1.json",
+      sha256: sha256(readerMediaReceiptBytes),
+      schemaVersion: readerMediaReceiptLedger.schemaVersion,
+      ledgerVersion: readerMediaReceiptLedger.ledgerVersion,
+      sourceInventorySha256: readerMediaReceiptLedger.sourceInventorySha256,
+      receiptCount: readerMediaReceiptLedger.receiptCount,
+      totalBytes: readerMediaReceiptLedger.totalBytes,
+      rightsBasis: readerMediaReceiptLedger.rightsBasis,
     },
     learningManifest: {
       path: "site/data/learning-manifest.json",
       sha256: sha256(readFileSync(path.join(DATA, "learning-manifest.json"))),
+    },
+    vocabEligibility: {
+      path: "site/data/vocab-eligibility.json",
+      sha256: sha256(vocabEligibilityBytes),
+      policyVersion: vocabEligibility.policyVersion,
+      exceptionCount: vocabEligibility.exceptions.length,
     },
     nativeContentAuditReceipt: {
       path: "scripts/native_content_audit_receipt.json",

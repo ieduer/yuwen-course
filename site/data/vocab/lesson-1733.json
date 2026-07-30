@@ -23,171 +23,92 @@
    "id": "lesson-1733:v02",
    "word": "嫁奁",
    "annotated": true,
-   "decision": "question",
-   "reason": "考查词汇在特定语境下的比喻义，涉及人物情感表达。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "陪嫁的财物（此处比喻哈姆莱特送给奥菲利娅的诅咒）",
    "sourceSentence": "要是你一定要嫁人,我就把这一个诅咒送给你做嫁奁",
-   "type": "contextual-choice",
-   "question": "「要是你一定要嫁人，我就把这一个诅咒送给你做嫁奁」中「嫁奁」的语境义是",
-   "options": [
-    "陪嫁的财物",
-    "结婚的聘礼",
-    "诅咒的代价",
-    "出家的信物"
-   ],
-   "answerIndex": 0,
-   "explanation": "嫁奁本义为陪嫁财物，哈姆莱特用此词反讽，将诅咒视为送给奥菲利娅的「嫁奁」。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2846
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1733:v02"
   },
   {
    "id": "lesson-1733:v03",
    "word": "烟视媚行",
    "annotated": true,
-   "decision": "question",
-   "reason": "考查成语在戏剧台词中的贬义色彩及人物性格塑造作用。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容扭捏不自然、妖媚做作的样子。",
    "sourceSentence": "你们烟视媚行,淫声浪气,替上天造下的生物乱取名字",
-   "type": "contextual-choice",
-   "question": "「你们烟视媚行，淫声浪气」中「烟视媚行」的含义是",
-   "options": [
-    "形容眼神迷离，走路轻快",
-    "形容扭捏不自然，做作的样子",
-    "形容目中无人，横行霸道",
-    "形容卖弄风骚，步履蹒跚"
-   ],
-   "answerIndex": 1,
-   "explanation": "此词在文中形容女性故作姿态，与「淫声浪气」连用，具有强烈的批判色彩。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3031
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1733:v03"
   },
   {
    "id": "lesson-1733:v04",
    "word": "权充",
    "annotated": false,
-   "decision": "question",
-   "reason": "「权」为副词「暂且」之意，是文言词汇在现代汉语中的残留，易误解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "暂且充当",
    "sourceSentence": "她的父亲跟我两人将要权充一下密探",
-   "type": "contextual-choice",
-   "question": "「她的父亲跟我两人将要权充一下密探」中「权充」的意思是",
-   "options": [
-    "有权力充当",
-    "勉强充当",
-    "暂且充当",
-    "完全充当"
-   ],
-   "answerIndex": 2,
-   "explanation": "「权」在文言中常作「暂且」「姑且」解，如「权宜之计」。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "王力《古汉语常用字字典》"
-   ],
    "location": {
     "charIndex": 1153
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1733:v04"
   },
   {
    "id": "lesson-1733:v05",
    "word": "迁延",
    "annotated": false,
-   "decision": "question",
-   "reason": "考查对文言色彩词汇的理解，影响对哈姆莱特所处社会黑暗面的认知。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "拖延",
    "sourceSentence": "谁愿意忍受人世的鞭挞和讥嘲、压迫者的凌辱、傲慢者的冷眼、被轻蔑的爱情的惨痛、法律的迁延",
-   "type": "contextual-choice",
-   "question": "「法律的迁延」中「迁延」的意思是",
-   "options": [
-    "法律的改变",
-    "法律的拖延",
-    "法律的严苛",
-    "法律的偏袒"
-   ],
-   "answerIndex": 1,
-   "explanation": "「迁延」意为拖延、迟延，符合文中控诉现实黑暗的内容。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1793
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1733:v05"
   },
   {
    "id": "lesson-1733:v06",
    "word": "磨折",
    "annotated": false,
-   "decision": "question",
-   "reason": "多义词，此处语境下指代心理与生理的双重痛苦。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "折磨、苦难",
    "sourceSentence": "使我们宁愿忍受目前的磨折,不敢向我们所不知道的痛苦飞去",
-   "type": "contextual-choice",
-   "question": "「使我们宁愿忍受目前的磨折」中「磨折」的意思是",
-   "options": [
-    "磨损折断",
-    "折磨、苦难",
-    "反复周折",
-    "商量折中"
-   ],
-   "answerIndex": 1,
-   "explanation": "结合语境，此处指代「目前的苦难」，即活着所承受的压力。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1955
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1733:v06"
   },
   {
    "id": "lesson-1733:v07",
    "word": "陨落",
    "annotated": false,
-   "decision": "question",
-   "reason": "比喻义，理解人物悲剧命运的关键点。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "坠落，比喻高贵的人格或生命消亡",
    "sourceSentence": "啊,一颗多么高贵的心是这样陨落了",
-   "type": "contextual-choice",
-   "question": "「啊，一颗多么高贵的心是这样陨落了」中「陨落」的含义是",
-   "options": [
-    "陨石落下",
-    "地位下降",
-    "人格或生命消亡",
-    "心灰意冷"
-   ],
-   "answerIndex": 2,
-   "explanation": "「陨落」原指星体落下，此处形容哈姆莱特的高贵理智与青春在疯狂中毁灭。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3157
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1733:v07"
   },
   {
    "id": "lesson-1733:v08",
    "word": "迂回婉转",
    "annotated": false,
-   "decision": "question",
-   "reason": "形容探听手段，考查词语搭配与语境逻辑。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "曲折而不直率",
    "sourceSentence": "你们不能用迂回婉转的方法,探出他为什么这样神魂颠倒",
-   "type": "contextual-choice",
-   "question": "「你们不能用迂回婉转的方法」中「迂回婉转」最恰当的解释是",
-   "options": [
-    "道路弯曲",
-    "手段曲折而不直率",
-    "说话动听而委婉",
-    "行动缓慢而谨慎"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处国王要求的是一种间接、隐蔽的探听手段，故选曲折而不直率。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 642
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1733:v08"
   },
   {
    "id": "lesson-1733:v09",
@@ -240,5 +161,262 @@
    "contextMeaning": "乔特鲁德是王后的名字。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1733:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1733:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "32f9010be7b25b5d860e14002d22f1a3cdae15c6b8e639c481755eb3dff0cc00",
+   "formerItem": {
+    "id": "lesson-1733:v02",
+    "word": "嫁奁",
+    "annotated": true,
+    "decision": "question",
+    "reason": "考查词汇在特定语境下的比喻义，涉及人物情感表达。",
+    "contextMeaning": "陪嫁的财物（此处比喻哈姆莱特送给奥菲利娅的诅咒）",
+    "sourceSentence": "要是你一定要嫁人,我就把这一个诅咒送给你做嫁奁",
+    "type": "contextual-choice",
+    "question": "「要是你一定要嫁人，我就把这一个诅咒送给你做嫁奁」中「嫁奁」的语境义是",
+    "options": [
+     "陪嫁的财物",
+     "结婚的聘礼",
+     "诅咒的代价",
+     "出家的信物"
+    ],
+    "answerIndex": 0,
+    "explanation": "嫁奁本义为陪嫁财物，哈姆莱特用此词反讽，将诅咒视为送给奥菲利娅的「嫁奁」。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2846
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1733:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1733:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "99f23400436c8b2f748fb5b8676bcdb972bbde41e18264b74fc1f80317a1befb",
+   "formerItem": {
+    "id": "lesson-1733:v03",
+    "word": "烟视媚行",
+    "annotated": true,
+    "decision": "question",
+    "reason": "考查成语在戏剧台词中的贬义色彩及人物性格塑造作用。",
+    "contextMeaning": "形容扭捏不自然、妖媚做作的样子。",
+    "sourceSentence": "你们烟视媚行,淫声浪气,替上天造下的生物乱取名字",
+    "type": "contextual-choice",
+    "question": "「你们烟视媚行，淫声浪气」中「烟视媚行」的含义是",
+    "options": [
+     "形容眼神迷离，走路轻快",
+     "形容扭捏不自然，做作的样子",
+     "形容目中无人，横行霸道",
+     "形容卖弄风骚，步履蹒跚"
+    ],
+    "answerIndex": 1,
+    "explanation": "此词在文中形容女性故作姿态，与「淫声浪气」连用，具有强烈的批判色彩。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3031
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1733:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1733:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "b0c084f29ae98d40e971f7c3fc209ad99f7fe3522bd1611ec584470c469bbb19",
+   "formerItem": {
+    "id": "lesson-1733:v04",
+    "word": "权充",
+    "annotated": false,
+    "decision": "question",
+    "reason": "「权」为副词「暂且」之意，是文言词汇在现代汉语中的残留，易误解。",
+    "contextMeaning": "暂且充当",
+    "sourceSentence": "她的父亲跟我两人将要权充一下密探",
+    "type": "contextual-choice",
+    "question": "「她的父亲跟我两人将要权充一下密探」中「权充」的意思是",
+    "options": [
+     "有权力充当",
+     "勉强充当",
+     "暂且充当",
+     "完全充当"
+    ],
+    "answerIndex": 2,
+    "explanation": "「权」在文言中常作「暂且」「姑且」解，如「权宜之计」。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "王力《古汉语常用字字典》"
+    ],
+    "location": {
+     "charIndex": 1153
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1733:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1733:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "7096097b1a898cf305c35c03fcddce181b7c67c97aadcb4905f21637ba264340",
+   "formerItem": {
+    "id": "lesson-1733:v05",
+    "word": "迁延",
+    "annotated": false,
+    "decision": "question",
+    "reason": "考查对文言色彩词汇的理解，影响对哈姆莱特所处社会黑暗面的认知。",
+    "contextMeaning": "拖延",
+    "sourceSentence": "谁愿意忍受人世的鞭挞和讥嘲、压迫者的凌辱、傲慢者的冷眼、被轻蔑的爱情的惨痛、法律的迁延",
+    "type": "contextual-choice",
+    "question": "「法律的迁延」中「迁延」的意思是",
+    "options": [
+     "法律的改变",
+     "法律的拖延",
+     "法律的严苛",
+     "法律的偏袒"
+    ],
+    "answerIndex": 1,
+    "explanation": "「迁延」意为拖延、迟延，符合文中控诉现实黑暗的内容。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1793
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1733:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1733:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "eb7682589809137a1db205cec587e71cf152cb7d9b4fc464b9a595590c04ea55",
+   "formerItem": {
+    "id": "lesson-1733:v06",
+    "word": "磨折",
+    "annotated": false,
+    "decision": "question",
+    "reason": "多义词，此处语境下指代心理与生理的双重痛苦。",
+    "contextMeaning": "折磨、苦难",
+    "sourceSentence": "使我们宁愿忍受目前的磨折,不敢向我们所不知道的痛苦飞去",
+    "type": "contextual-choice",
+    "question": "「使我们宁愿忍受目前的磨折」中「磨折」的意思是",
+    "options": [
+     "磨损折断",
+     "折磨、苦难",
+     "反复周折",
+     "商量折中"
+    ],
+    "answerIndex": 1,
+    "explanation": "结合语境，此处指代「目前的苦难」，即活着所承受的压力。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1955
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1733:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1733:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "f9ca5d8b8fb51900509f77d9c5f688d455ee45585db7b88a42008e82bcf41a3e",
+   "formerItem": {
+    "id": "lesson-1733:v07",
+    "word": "陨落",
+    "annotated": false,
+    "decision": "question",
+    "reason": "比喻义，理解人物悲剧命运的关键点。",
+    "contextMeaning": "坠落，比喻高贵的人格或生命消亡",
+    "sourceSentence": "啊,一颗多么高贵的心是这样陨落了",
+    "type": "contextual-choice",
+    "question": "「啊，一颗多么高贵的心是这样陨落了」中「陨落」的含义是",
+    "options": [
+     "陨石落下",
+     "地位下降",
+     "人格或生命消亡",
+     "心灰意冷"
+    ],
+    "answerIndex": 2,
+    "explanation": "「陨落」原指星体落下，此处形容哈姆莱特的高贵理智与青春在疯狂中毁灭。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3157
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1733:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1733:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "ec12c3e7ab9ba84ef22111a214c938a450b8d20399178f263352f61c35a2f995",
+   "formerItem": {
+    "id": "lesson-1733:v08",
+    "word": "迂回婉转",
+    "annotated": false,
+    "decision": "question",
+    "reason": "形容探听手段，考查词语搭配与语境逻辑。",
+    "contextMeaning": "曲折而不直率",
+    "sourceSentence": "你们不能用迂回婉转的方法,探出他为什么这样神魂颠倒",
+    "type": "contextual-choice",
+    "question": "「你们不能用迂回婉转的方法」中「迂回婉转」最恰当的解释是",
+    "options": [
+     "道路弯曲",
+     "手段曲折而不直率",
+     "说话动听而委婉",
+     "行动缓慢而谨慎"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处国王要求的是一种间接、隐蔽的探听手段，故选曲折而不直率。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 642
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

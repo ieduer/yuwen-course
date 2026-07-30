@@ -11,155 +11,79 @@
    "id": "lesson-1713:v01",
    "word": "闭关主义",
    "annotated": true,
-   "decision": "question",
-   "reason": "核心论点背景词，理解其语境义对把握全文批判基调至关重要",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指清政府奉行的闭关自守政策",
    "sourceSentence": "中国一向是所谓“闭关主义”,自己不去,别人也不许来。",
-   "type": "interpretation",
-   "question": "文中“闭关主义”一词的含义是",
-   "options": [
-    "闭门造车，不与外界交流",
-    "清政府奉行的闭关自守政策",
-    "一种拒绝学习外国先进文化的激进思想",
-    "指中国传统文化中封闭保守的部分"
-   ],
-   "answerIndex": 1,
-   "explanation": "教材注释明确指出指清政府奉行的闭关自守政策。",
-   "difficulty": 1,
-   "sourceRefs": [
-    "教材注释"
-   ],
    "location": {
     "charIndex": 9
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1713:v01"
   },
   {
    "id": "lesson-1713:v02",
    "word": "冠冕",
    "annotated": true,
-   "decision": "question",
-   "reason": "古今异义且在文中具有讽刺意味，易误解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "体面、有气派（含讽刺义）",
    "sourceSentence": "说得冠冕些,可以称之为“送来”,我在这里不想举出实例。",
-   "type": "contextual-choice",
-   "question": "文中“说得冠冕些”中“冠冕”的含义是",
-   "options": [
-    "指帝王的礼帽，引申为庄重",
-    "指外表非常体面、有气派",
-    "指言语极为严谨且公正",
-    "指为了掩盖真相而虚构的理由"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处“冠冕”意为体面、有气派，在文中讽刺国民党政府将丧权辱国的借款行为包装得好听。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "教材注释"
-   ],
    "location": {
     "charIndex": 507
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1713:v02"
   },
   {
    "id": "lesson-1713:v03",
    "word": "孱头",
    "annotated": true,
-   "decision": "question",
-   "reason": "高频易错读音，且是理解作者对不同态度评价的关键点",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "懦弱无能的人",
    "sourceSentence": "怕给他的东西染污了,徘徊不敢走进门,是孱头",
-   "type": "pronunciation",
-   "question": "“孱头”中“孱”的正确读音是",
-   "options": [
-    "chàn",
-    "càn",
-    "chán",
-    "cán"
-   ],
-   "answerIndex": 1,
-   "explanation": "“孱”在此处读càn，意为懦弱无能。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "教材注释"
-   ],
    "location": {
     "charIndex": 847
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1713:v03"
   },
   {
    "id": "lesson-1713:v04",
    "word": "蹩进",
    "annotated": false,
-   "decision": "question",
-   "reason": "方言词汇，直接影响对“废物”行为的具体理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "勉强地进入",
    "sourceSentence": "而这回接受一切,欣欣然的蹩进卧室,大吸剩下的鸦片",
-   "type": "contextual-choice",
-   "question": "句中“蹩进”一词的语境含义最接近的是",
-   "options": [
-    "轻快地跳进",
-    "局促、勉强地进入",
-    "大摇大摆地闯入",
-    "悄无声息地潜入"
-   ],
-   "answerIndex": 1,
-   "explanation": "“蹩”在吴方言中指由于脚部不便或局促而走得不自然，此处形容人进入卧室时的卑劣与不体面。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "现代汉语词典"
-   ],
    "location": {
     "charIndex": 913
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1713:v04"
   },
   {
    "id": "lesson-1713:v05",
    "word": "国粹",
    "annotated": true,
-   "decision": "question",
-   "reason": "反语用法，是理解作者批判态度的关键点",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指本国固有文化精华（文中为反语，指烟枪等落后残余）",
    "sourceSentence": "确可以算是一种国粹,倘使背着周游世界,一定会有人看",
-   "type": "contextual-choice",
-   "question": "文中说烟枪等物是“国粹”，这属于什么修辞手法？",
-   "options": [
-    "比喻",
-    "借代",
-    "反语",
-    "夸张"
-   ],
-   "answerIndex": 2,
-   "explanation": "鲁迅在此处使用“国粹”是反语，讽刺那些被封建余孽视为宝贝的落后东西。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "教材注释"
-   ],
    "location": {
     "charIndex": 1106
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1713:v05"
   },
   {
    "id": "lesson-1713:v06",
    "word": "脑髓",
    "annotated": false,
-   "decision": "question",
-   "reason": "比喻用法，代表思考能力，是“拿来主义”实施的前提",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "此处指思考能力、智慧",
    "sourceSentence": "所以我们要运用脑髓,放出眼光,自己来拿!",
-   "type": "interpretation",
-   "question": "文中“运用脑髓”的深层含义是",
-   "options": [
-    "利用自己的身体器官",
-    "依靠政府的决策",
-    "发挥独立思考的能力",
-    "借鉴他人的经验"
-   ],
-   "answerIndex": 2,
-   "explanation": "“脑髓”在此代指人的思维与判断力，强调主体性的选择。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 712
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1713:v06"
   },
   {
    "id": "lesson-1713:v07",
@@ -326,5 +250,235 @@
    "contextMeaning": "现在译作“阿拉伯”。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1713:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1713:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "fc329c958a71279b587c23e4f00793e85d75c60659100a4e01033b0c94aba494",
+   "formerItem": {
+    "id": "lesson-1713:v01",
+    "word": "闭关主义",
+    "annotated": true,
+    "decision": "question",
+    "reason": "核心论点背景词，理解其语境义对把握全文批判基调至关重要",
+    "contextMeaning": "指清政府奉行的闭关自守政策",
+    "sourceSentence": "中国一向是所谓“闭关主义”,自己不去,别人也不许来。",
+    "type": "interpretation",
+    "question": "文中“闭关主义”一词的含义是",
+    "options": [
+     "闭门造车，不与外界交流",
+     "清政府奉行的闭关自守政策",
+     "一种拒绝学习外国先进文化的激进思想",
+     "指中国传统文化中封闭保守的部分"
+    ],
+    "answerIndex": 1,
+    "explanation": "教材注释明确指出指清政府奉行的闭关自守政策。",
+    "difficulty": 1,
+    "sourceRefs": [
+     "教材注释"
+    ],
+    "location": {
+     "charIndex": 9
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1713:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1713:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "631264f12caae3fbafb7fe40ae50f0933788d1ca6cc8d6a23900beb8c56a7dbc",
+   "formerItem": {
+    "id": "lesson-1713:v02",
+    "word": "冠冕",
+    "annotated": true,
+    "decision": "question",
+    "reason": "古今异义且在文中具有讽刺意味，易误解",
+    "contextMeaning": "体面、有气派（含讽刺义）",
+    "sourceSentence": "说得冠冕些,可以称之为“送来”,我在这里不想举出实例。",
+    "type": "contextual-choice",
+    "question": "文中“说得冠冕些”中“冠冕”的含义是",
+    "options": [
+     "指帝王的礼帽，引申为庄重",
+     "指外表非常体面、有气派",
+     "指言语极为严谨且公正",
+     "指为了掩盖真相而虚构的理由"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处“冠冕”意为体面、有气派，在文中讽刺国民党政府将丧权辱国的借款行为包装得好听。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "教材注释"
+    ],
+    "location": {
+     "charIndex": 507
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1713:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1713:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a4c0db5e6bf7d21df223d5ee9e0b7992727946e2b623eb44edef22f0b63bc7b3",
+   "formerItem": {
+    "id": "lesson-1713:v03",
+    "word": "孱头",
+    "annotated": true,
+    "decision": "question",
+    "reason": "高频易错读音，且是理解作者对不同态度评价的关键点",
+    "contextMeaning": "懦弱无能的人",
+    "sourceSentence": "怕给他的东西染污了,徘徊不敢走进门,是孱头",
+    "type": "pronunciation",
+    "question": "“孱头”中“孱”的正确读音是",
+    "options": [
+     "chàn",
+     "càn",
+     "chán",
+     "cán"
+    ],
+    "answerIndex": 1,
+    "explanation": "“孱”在此处读càn，意为懦弱无能。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "教材注释"
+    ],
+    "location": {
+     "charIndex": 847
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1713:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1713:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "2214ae385cecbfd5d5ae2a58fda4052fed3ab5e372eae1a38bb34050d296b148",
+   "formerItem": {
+    "id": "lesson-1713:v04",
+    "word": "蹩进",
+    "annotated": false,
+    "decision": "question",
+    "reason": "方言词汇，直接影响对“废物”行为的具体理解",
+    "contextMeaning": "勉强地进入",
+    "sourceSentence": "而这回接受一切,欣欣然的蹩进卧室,大吸剩下的鸦片",
+    "type": "contextual-choice",
+    "question": "句中“蹩进”一词的语境含义最接近的是",
+    "options": [
+     "轻快地跳进",
+     "局促、勉强地进入",
+     "大摇大摆地闯入",
+     "悄无声息地潜入"
+    ],
+    "answerIndex": 1,
+    "explanation": "“蹩”在吴方言中指由于脚部不便或局促而走得不自然，此处形容人进入卧室时的卑劣与不体面。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "现代汉语词典"
+    ],
+    "location": {
+     "charIndex": 913
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1713:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1713:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "acca7affe70cf288614ab1da0dd152935bd3db9eabdb16ac4b460d9d7227eb12",
+   "formerItem": {
+    "id": "lesson-1713:v05",
+    "word": "国粹",
+    "annotated": true,
+    "decision": "question",
+    "reason": "反语用法，是理解作者批判态度的关键点",
+    "contextMeaning": "指本国固有文化精华（文中为反语，指烟枪等落后残余）",
+    "sourceSentence": "确可以算是一种国粹,倘使背着周游世界,一定会有人看",
+    "type": "contextual-choice",
+    "question": "文中说烟枪等物是“国粹”，这属于什么修辞手法？",
+    "options": [
+     "比喻",
+     "借代",
+     "反语",
+     "夸张"
+    ],
+    "answerIndex": 2,
+    "explanation": "鲁迅在此处使用“国粹”是反语，讽刺那些被封建余孽视为宝贝的落后东西。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "教材注释"
+    ],
+    "location": {
+     "charIndex": 1106
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1713:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1713:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "d171a8c0608063c5e4d89fd1cdea2b6efc82e84730e0ea7fa829ad04755964ab",
+   "formerItem": {
+    "id": "lesson-1713:v06",
+    "word": "脑髓",
+    "annotated": false,
+    "decision": "question",
+    "reason": "比喻用法，代表思考能力，是“拿来主义”实施的前提",
+    "contextMeaning": "此处指思考能力、智慧",
+    "sourceSentence": "所以我们要运用脑髓,放出眼光,自己来拿!",
+    "type": "interpretation",
+    "question": "文中“运用脑髓”的深层含义是",
+    "options": [
+     "利用自己的身体器官",
+     "依靠政府的决策",
+     "发挥独立思考的能力",
+     "借鉴他人的经验"
+    ],
+    "answerIndex": 2,
+    "explanation": "“脑髓”在此代指人的思维与判断力，强调主体性的选择。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 712
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

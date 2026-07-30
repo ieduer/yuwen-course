@@ -59,145 +59,299 @@
    "id": "lesson-1584:v05",
    "word": "变异",
    "annotated": false,
-   "decision": "question",
-   "reason": "全文核心概念，误解将无法理解自然选择的前提。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "生物体在繁殖过程中产生的不同于亲代的差异。",
    "sourceSentence": "只要在自然状况下有变异发生,那么认为自然选择不曾发挥作用就很难解释了",
-   "type": "contextual-choice",
-   "question": "文中「只要在自然状况下有变异发生」的「变异」指的是什么？",
-   "options": [
-    "物种之间明显的形态改变",
-    "生物个体间微小的差异",
-    "人为驯养造成的品种改良",
-    "环境剧烈变迁导致的突变"
-   ],
-   "answerIndex": 1,
-   "explanation": "文中强调自然选择是通过微小、连续的变异积累而起作用的，故指个体间的细微差异。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 209
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1584:v05"
   },
   {
    "id": "lesson-1584:v06",
    "word": "性状",
    "annotated": false,
-   "decision": "question",
-   "reason": "生物学专业术语，在文中指代生物的形态、构造等特征，理解此词有助于把握达尔文论证的角度。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "生物体的形态结构、生理特性等表现。",
    "sourceSentence": "虽然只是作用于外部性状,并且其结果很难确定,但人们却可以将驯养生物个体的微小差异逐渐积累起来",
-   "type": "substitution",
-   "question": "下列词语替换「外部性状」后，最符合原意的一项是？",
-   "options": [
-    "外部特征",
-    "外部环境",
-    "外部行为",
-    "外部表现"
-   ],
-   "answerIndex": 0,
-   "explanation": "性状在生物学中指生物体的形态、生理等特征，用「特征」替换最为准确。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 283
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1584:v06"
   },
   {
    "id": "lesson-1584:v07",
    "word": "几何级数",
    "annotated": false,
-   "decision": "question",
-   "reason": "理解自然选择动力来源的关键数学比喻。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指生物繁殖速度极快，呈倍数增长。",
    "sourceSentence": "由于每个物种都有按照几何级数过度繁殖的趋向",
-   "type": "interpretation",
-   "question": "文中提到「按照几何级数过度繁殖的趋向」，其深层含义是？",
-   "options": [
-    "生物繁殖的数学规律是固定的",
-    "生物种群数量增长极其迅速，远超生存资源承载力",
-    "生物通过几何图形的排列来选择后代",
-    "自然选择的过程是精确的数学计算"
-   ],
-   "answerIndex": 1,
-   "explanation": "几何级数在此处强调种群爆发式增长，从而导致生存竞争，这是自然选择的动力。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1319
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1584:v07"
   },
   {
    "id": "lesson-1584:v08",
    "word": "类群",
    "annotated": false,
-   "decision": "question",
-   "reason": "涉及生物分类学，是达尔文反驳特创论的逻辑支点。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指生物学上的分类单位，如纲、属、种等。",
    "sourceSentence": "用特创论的观点完全不能解释为什么在自然系统下所有的生物都可以划归大小不等的类群这一重大事实。",
-   "type": "discrimination",
-   "question": "文中「划归大小不等的类群」中「类群」的逻辑含义是？",
-   "options": [
-    "指生物按照相似性形成的层级分类系统",
-    "指生物在自然界中随机分布的群体",
-    "指生物在不同地质时期生存的化石群",
-    "指生物根据生活习惯形成的竞争团体"
-   ],
-   "answerIndex": 0,
-   "explanation": "类群在文中指代分类学上的等级，达尔文认为这种层级关系证明了共同祖先。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1764
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1584:v08"
   },
   {
    "id": "lesson-1584:v09",
    "word": "世系",
    "annotated": false,
-   "decision": "question",
-   "reason": "理解化石记录与演化关系的核心逻辑词。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指生物物种演化的血缘传承链条。",
    "sourceSentence": "各地质层中的化石,其性状在某种程度上,介于其上下地层的化石之间,这一事实可以简单地以它们处于世系链的中间来解释",
-   "type": "evidence",
-   "question": "作者用「世系」来解释哪一现象？",
-   "options": [
-    "不同大陆生物的地理隔离",
-    "化石性状在不同地层间的过渡性",
-    "物种通过自然选择被淘汰",
-    "生物形态的适应性退化"
-   ],
-   "answerIndex": 1,
-   "explanation": "文中明确指出化石性状介于上下地层之间，是因为处于世系链的中间，证明了演化过程。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3711
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1584:v09"
   },
   {
    "id": "lesson-1584:v10",
    "word": "特创论",
    "annotated": false,
-   "decision": "question",
-   "reason": "全文对比论证的核心对立面，理解此词是把握全文论点的关键。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "主张物种由超自然力量独立创造的学说。",
    "sourceSentence": "用特创论的观点完全不能解释为什么在自然系统下所有的生物都可以划归大小不等的类群这一重大事实。",
-   "type": "interpretation",
-   "question": "作者在文中多次提到「特创论」，其目的是？",
-   "options": [
-    "赞同特创论关于物种稳定性的观点",
-    "利用特创论的逻辑来补充自然选择的缺陷",
-    "通过指出特创论无法解释的现象，反衬自然选择学说的科学性",
-    "说明生物学界对物种起源问题存在多种解释"
-   ],
-   "answerIndex": 2,
-   "explanation": "达尔文通过列举特创论无法解释的现象，如类群分布、地理分布等，来反证自然选择学说更具解释力。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1764
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1584:v10"
+  }
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1584:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1584:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "283c30d76d346eb88c2ebd1e398a41d51fd3a1ab6d253f441e684e910f15e04c",
+   "formerItem": {
+    "id": "lesson-1584:v05",
+    "word": "变异",
+    "annotated": false,
+    "decision": "question",
+    "reason": "全文核心概念，误解将无法理解自然选择的前提。",
+    "contextMeaning": "生物体在繁殖过程中产生的不同于亲代的差异。",
+    "sourceSentence": "只要在自然状况下有变异发生,那么认为自然选择不曾发挥作用就很难解释了",
+    "type": "contextual-choice",
+    "question": "文中「只要在自然状况下有变异发生」的「变异」指的是什么？",
+    "options": [
+     "物种之间明显的形态改变",
+     "生物个体间微小的差异",
+     "人为驯养造成的品种改良",
+     "环境剧烈变迁导致的突变"
+    ],
+    "answerIndex": 1,
+    "explanation": "文中强调自然选择是通过微小、连续的变异积累而起作用的，故指个体间的细微差异。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 209
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1584:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1584:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "d40179a207d72341def1daada941901d4a115587319afcac90d3ff2f4ece2337",
+   "formerItem": {
+    "id": "lesson-1584:v06",
+    "word": "性状",
+    "annotated": false,
+    "decision": "question",
+    "reason": "生物学专业术语，在文中指代生物的形态、构造等特征，理解此词有助于把握达尔文论证的角度。",
+    "contextMeaning": "生物体的形态结构、生理特性等表现。",
+    "sourceSentence": "虽然只是作用于外部性状,并且其结果很难确定,但人们却可以将驯养生物个体的微小差异逐渐积累起来",
+    "type": "substitution",
+    "question": "下列词语替换「外部性状」后，最符合原意的一项是？",
+    "options": [
+     "外部特征",
+     "外部环境",
+     "外部行为",
+     "外部表现"
+    ],
+    "answerIndex": 0,
+    "explanation": "性状在生物学中指生物体的形态、生理等特征，用「特征」替换最为准确。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 283
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1584:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1584:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "0d06b1bc78bbe75bd8dd7227834f6db8e5a6a5c24dc43016e91ae0a1a9d0175f",
+   "formerItem": {
+    "id": "lesson-1584:v07",
+    "word": "几何级数",
+    "annotated": false,
+    "decision": "question",
+    "reason": "理解自然选择动力来源的关键数学比喻。",
+    "contextMeaning": "指生物繁殖速度极快，呈倍数增长。",
+    "sourceSentence": "由于每个物种都有按照几何级数过度繁殖的趋向",
+    "type": "interpretation",
+    "question": "文中提到「按照几何级数过度繁殖的趋向」，其深层含义是？",
+    "options": [
+     "生物繁殖的数学规律是固定的",
+     "生物种群数量增长极其迅速，远超生存资源承载力",
+     "生物通过几何图形的排列来选择后代",
+     "自然选择的过程是精确的数学计算"
+    ],
+    "answerIndex": 1,
+    "explanation": "几何级数在此处强调种群爆发式增长，从而导致生存竞争，这是自然选择的动力。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1319
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1584:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1584:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "204cf41c571500a27e1feffb698826fe55fc085483a1f68c0fbbefcd195728e0",
+   "formerItem": {
+    "id": "lesson-1584:v08",
+    "word": "类群",
+    "annotated": false,
+    "decision": "question",
+    "reason": "涉及生物分类学，是达尔文反驳特创论的逻辑支点。",
+    "contextMeaning": "指生物学上的分类单位，如纲、属、种等。",
+    "sourceSentence": "用特创论的观点完全不能解释为什么在自然系统下所有的生物都可以划归大小不等的类群这一重大事实。",
+    "type": "discrimination",
+    "question": "文中「划归大小不等的类群」中「类群」的逻辑含义是？",
+    "options": [
+     "指生物按照相似性形成的层级分类系统",
+     "指生物在自然界中随机分布的群体",
+     "指生物在不同地质时期生存的化石群",
+     "指生物根据生活习惯形成的竞争团体"
+    ],
+    "answerIndex": 0,
+    "explanation": "类群在文中指代分类学上的等级，达尔文认为这种层级关系证明了共同祖先。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1764
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1584:v09",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1584:v09",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "6e442d1523a7caadf2e01716571f934ed27f8af14c798b4c995180b5efed94c4",
+   "formerItem": {
+    "id": "lesson-1584:v09",
+    "word": "世系",
+    "annotated": false,
+    "decision": "question",
+    "reason": "理解化石记录与演化关系的核心逻辑词。",
+    "contextMeaning": "指生物物种演化的血缘传承链条。",
+    "sourceSentence": "各地质层中的化石,其性状在某种程度上,介于其上下地层的化石之间,这一事实可以简单地以它们处于世系链的中间来解释",
+    "type": "evidence",
+    "question": "作者用「世系」来解释哪一现象？",
+    "options": [
+     "不同大陆生物的地理隔离",
+     "化石性状在不同地层间的过渡性",
+     "物种通过自然选择被淘汰",
+     "生物形态的适应性退化"
+    ],
+    "answerIndex": 1,
+    "explanation": "文中明确指出化石性状介于上下地层之间，是因为处于世系链的中间，证明了演化过程。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3711
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1584:v10",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1584:v10",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "907d14d5774578f6fd23dde154e949f4d7b971bbac964d12d573e67888b3cf1a",
+   "formerItem": {
+    "id": "lesson-1584:v10",
+    "word": "特创论",
+    "annotated": false,
+    "decision": "question",
+    "reason": "全文对比论证的核心对立面，理解此词是把握全文论点的关键。",
+    "contextMeaning": "主张物种由超自然力量独立创造的学说。",
+    "sourceSentence": "用特创论的观点完全不能解释为什么在自然系统下所有的生物都可以划归大小不等的类群这一重大事实。",
+    "type": "interpretation",
+    "question": "作者在文中多次提到「特创论」，其目的是？",
+    "options": [
+     "赞同特创论关于物种稳定性的观点",
+     "利用特创论的逻辑来补充自然选择的缺陷",
+     "通过指出特创论无法解释的现象，反衬自然选择学说的科学性",
+     "说明生物学界对物种起源问题存在多种解释"
+    ],
+    "answerIndex": 2,
+    "explanation": "达尔文通过列举特创论无法解释的现象，如类群分布、地理分布等，来反证自然选择学说更具解释力。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1764
+    }
    }
   }
- ]
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

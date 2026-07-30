@@ -11,157 +11,79 @@
    "id": "lesson-1522:v01",
    "word": "嗜血成性",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语，准确理解该词有助于把握人物评价语境",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容残忍好杀",
    "sourceSentence": "如嗜血成性的苏拉,对不是由他造成的痛苦,也是很伤感的",
-   "type": "contextual-choice",
-   "question": "文中「嗜血成性」一词的意思是",
-   "options": [
-    "形容人非常喜欢喝酒",
-    "形容人性格暴戾，残忍好杀",
-    "形容人对鲜血有特殊的医学嗜好",
-    "形容人为了利益不择手段"
-   ],
-   "answerIndex": 1,
-   "explanation": "嗜血成性形容残忍好杀，符合苏拉在文中作为暴君的背景。",
-   "difficulty": 1,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 2106
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1522:v01"
   },
   {
    "id": "lesson-1522:v02",
    "word": "感同身受",
    "annotated": false,
-   "decision": "question",
-   "reason": "高频易误用词，此处指代动物对同类痛苦的共情能力",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指虽未亲身经历，但感受就像亲身经历过一样",
    "sourceSentence": "表明它们对所看到的恐怖情景是感同身受的",
-   "type": "contextual-choice",
-   "question": "「表明它们对所看到的恐怖情景是感同身受的」中「感同身受」的含义是",
-   "options": [
-    "指自己经历过同样的恐怖",
-    "指虽然没有亲身经历，但感受如同亲身经历",
-    "指动物能够进行深度的逻辑思考",
-    "指动物对同类的排斥与厌恶"
-   ],
-   "answerIndex": 1,
-   "explanation": "此词在现代汉语中常被误用为「感谢」，在文中应取其本义，即共情。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 1784
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1522:v02"
   },
   {
    "id": "lesson-1522:v03",
    "word": "汲汲于",
    "annotated": false,
-   "decision": "question",
-   "reason": "文言色彩较浓的词，影响对哲学家自私心理的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "急切地追求或营求",
    "sourceSentence": "自爱心使人汲汲于关心自己,使他远离一切使他感到为难和痛苦的事物",
-   "type": "contextual-choice",
-   "question": "「自爱心使人汲汲于关心自己」中「汲汲于」的意思是",
-   "options": [
-    "缓慢地",
-    "急切地",
-    "无奈地",
-    "理性地"
-   ],
-   "answerIndex": 1,
-   "explanation": "汲汲，形容心情急切。在此处表现了自爱心促使人只顾自己的心理状态。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《古汉语常用字字典》"
-   ],
    "location": {
     "charIndex": 2685
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1522:v03"
   },
   {
    "id": "lesson-1522:v04",
    "word": "官能",
    "annotated": false,
-   "decision": "question",
-   "reason": "语境义词，易与现代「官能症」混淆",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "生理器官的功能",
    "sourceSentence": "阻碍野蛮人滥用他们的官能的原因",
-   "type": "contextual-choice",
-   "question": "文中「阻碍野蛮人滥用他们的官能的原因」中「官能」指的是",
-   "options": [
-    "感官功能",
-    "政治官职的效能",
-    "法律职能",
-    "心理障碍"
-   ],
-   "answerIndex": 0,
-   "explanation": "官能指生理器官的功能，此处指人的本能反应。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 1273
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1522:v04"
   },
   {
    "id": "lesson-1522:v05",
    "word": "禀性",
    "annotated": false,
-   "decision": "question",
-   "reason": "关键概念词，涉及对怜悯心的定义",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "天性、本性",
    "sourceSentence": "怜悯心是我们这样柔弱和最容易遭受苦难折磨的人最应具备的禀性",
-   "type": "contextual-choice",
-   "question": "「最应具备的禀性」中「禀性」的意思是",
-   "options": [
-    "禀赋的才华",
-    "天性、本性",
-    "后天培养的习惯",
-    "某种特殊的技能"
-   ],
-   "answerIndex": 1,
-   "explanation": "禀性指天生的性情，文中强调怜悯心是人类天然具备的。",
-   "difficulty": 1,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 1569
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1522:v05"
   },
   {
    "id": "lesson-1522:v06",
    "word": "若无其事",
    "annotated": false,
-   "decision": "question",
-   "reason": "描述哲学家冷漠态度的关键短语",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "好像没有发生过什么事一样，形容态度冷漠",
    "sourceSentence": "他也能若无其事地用手捂着他的耳朵",
-   "type": "contextual-choice",
-   "question": "「他也能若无其事地用手捂着他的耳朵」中「若无其事」体现了哲学家怎样的状态",
-   "options": [
-    "被突发情况惊呆了",
-    "对正在发生的惨剧表现得漠不关心",
-    "因为恐惧而不敢面对",
-    "内心充满怜悯却无力帮助"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处描写哲学家在看到他人受难时，因理智的冷漠而表现出的无动于衷。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 2817
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1522:v06"
   },
   {
    "id": "lesson-1522:v07",
@@ -247,5 +169,237 @@
    "contextMeaning": "都是古希腊悲剧中的人物。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1522:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1522:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "8f4004120937591382651d81b2ec3926a55f668e70536b788598724bf9c65fc5",
+   "formerItem": {
+    "id": "lesson-1522:v01",
+    "word": "嗜血成性",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语，准确理解该词有助于把握人物评价语境",
+    "contextMeaning": "形容残忍好杀",
+    "sourceSentence": "如嗜血成性的苏拉,对不是由他造成的痛苦,也是很伤感的",
+    "type": "contextual-choice",
+    "question": "文中「嗜血成性」一词的意思是",
+    "options": [
+     "形容人非常喜欢喝酒",
+     "形容人性格暴戾，残忍好杀",
+     "形容人对鲜血有特殊的医学嗜好",
+     "形容人为了利益不择手段"
+    ],
+    "answerIndex": 1,
+    "explanation": "嗜血成性形容残忍好杀，符合苏拉在文中作为暴君的背景。",
+    "difficulty": 1,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 2106
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1522:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1522:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "27658bdf842f32eb68cb6473928abad915484199ab769ae67ca54aa41485bee7",
+   "formerItem": {
+    "id": "lesson-1522:v02",
+    "word": "感同身受",
+    "annotated": false,
+    "decision": "question",
+    "reason": "高频易误用词，此处指代动物对同类痛苦的共情能力",
+    "contextMeaning": "指虽未亲身经历，但感受就像亲身经历过一样",
+    "sourceSentence": "表明它们对所看到的恐怖情景是感同身受的",
+    "type": "contextual-choice",
+    "question": "「表明它们对所看到的恐怖情景是感同身受的」中「感同身受」的含义是",
+    "options": [
+     "指自己经历过同样的恐怖",
+     "指虽然没有亲身经历，但感受如同亲身经历",
+     "指动物能够进行深度的逻辑思考",
+     "指动物对同类的排斥与厌恶"
+    ],
+    "answerIndex": 1,
+    "explanation": "此词在现代汉语中常被误用为「感谢」，在文中应取其本义，即共情。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 1784
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1522:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1522:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "669de47ea32d93767930076f28243523daee10a64426f7f3c9964ae063024600",
+   "formerItem": {
+    "id": "lesson-1522:v03",
+    "word": "汲汲于",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文言色彩较浓的词，影响对哲学家自私心理的理解",
+    "contextMeaning": "急切地追求或营求",
+    "sourceSentence": "自爱心使人汲汲于关心自己,使他远离一切使他感到为难和痛苦的事物",
+    "type": "contextual-choice",
+    "question": "「自爱心使人汲汲于关心自己」中「汲汲于」的意思是",
+    "options": [
+     "缓慢地",
+     "急切地",
+     "无奈地",
+     "理性地"
+    ],
+    "answerIndex": 1,
+    "explanation": "汲汲，形容心情急切。在此处表现了自爱心促使人只顾自己的心理状态。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《古汉语常用字字典》"
+    ],
+    "location": {
+     "charIndex": 2685
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1522:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1522:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "bdb93f984d1696ac68f7dd3b144d4ead0b9a70f3ec70d1c58025fca5e04853ea",
+   "formerItem": {
+    "id": "lesson-1522:v04",
+    "word": "官能",
+    "annotated": false,
+    "decision": "question",
+    "reason": "语境义词，易与现代「官能症」混淆",
+    "contextMeaning": "生理器官的功能",
+    "sourceSentence": "阻碍野蛮人滥用他们的官能的原因",
+    "type": "contextual-choice",
+    "question": "文中「阻碍野蛮人滥用他们的官能的原因」中「官能」指的是",
+    "options": [
+     "感官功能",
+     "政治官职的效能",
+     "法律职能",
+     "心理障碍"
+    ],
+    "answerIndex": 0,
+    "explanation": "官能指生理器官的功能，此处指人的本能反应。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 1273
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1522:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1522:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "37e8adb7e5594aa7844dd5b5c91f4b3e5fe01bfc82b5253f82fd7594cfcd4abc",
+   "formerItem": {
+    "id": "lesson-1522:v05",
+    "word": "禀性",
+    "annotated": false,
+    "decision": "question",
+    "reason": "关键概念词，涉及对怜悯心的定义",
+    "contextMeaning": "天性、本性",
+    "sourceSentence": "怜悯心是我们这样柔弱和最容易遭受苦难折磨的人最应具备的禀性",
+    "type": "contextual-choice",
+    "question": "「最应具备的禀性」中「禀性」的意思是",
+    "options": [
+     "禀赋的才华",
+     "天性、本性",
+     "后天培养的习惯",
+     "某种特殊的技能"
+    ],
+    "answerIndex": 1,
+    "explanation": "禀性指天生的性情，文中强调怜悯心是人类天然具备的。",
+    "difficulty": 1,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 1569
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1522:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1522:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "b4a3aa4302a0f18232ec1cf7928a3fbae612a17547964806721c2c2f767f3003",
+   "formerItem": {
+    "id": "lesson-1522:v06",
+    "word": "若无其事",
+    "annotated": false,
+    "decision": "question",
+    "reason": "描述哲学家冷漠态度的关键短语",
+    "contextMeaning": "好像没有发生过什么事一样，形容态度冷漠",
+    "sourceSentence": "他也能若无其事地用手捂着他的耳朵",
+    "type": "contextual-choice",
+    "question": "「他也能若无其事地用手捂着他的耳朵」中「若无其事」体现了哲学家怎样的状态",
+    "options": [
+     "被突发情况惊呆了",
+     "对正在发生的惨剧表现得漠不关心",
+     "因为恐惧而不敢面对",
+     "内心充满怜悯却无力帮助"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处描写哲学家在看到他人受难时，因理智的冷漠而表现出的无动于衷。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 2817
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

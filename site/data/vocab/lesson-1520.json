@@ -11,145 +11,79 @@
    "id": "lesson-1520:v01",
    "word": "拨乱反正",
    "annotated": false,
-   "decision": "question",
-   "reason": "常用成語，且在文中具有特定的政治與歷史語境，考察詞義理解與遷移能力。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "扭轉混亂局面，恢復正常秩序。",
    "sourceSentence": "为了深入批判“四人帮”,肃清其流毒和影响,在这个问题上拨乱反正,十分必要。",
-   "type": "contextual-choice",
-   "question": "「拨乱反正」在文中的含义是",
-   "options": [
-    "拨动乱象，回归正路",
-    "纠正错误，恢复正常秩序",
-    "拨开迷雾，辨别是非",
-    "推翻旧制，建立新法"
-   ],
-   "answerIndex": 1,
-   "explanation": "「拨乱反正」指治理混乱局面，恢复正常秩序，符合文中肃清流毒、恢复实事求是原则的语境。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 107
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1520:v01"
   },
   {
    "id": "lesson-1520:v02",
    "word": "经院哲学",
    "annotated": false,
-   "decision": "question",
-   "reason": "哲學專有名詞，理解此詞對於把握馬克思批判脫離實踐的理論至關重要。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指脫離實際、空談理論、形式主義的哲學研究。",
    "sourceSentence": "关于离开实践的思维是否具有现实性的争论,是一个纯粹经院哲学的问题。",
-   "type": "interpretation",
-   "question": "文中将「离开实践的思维争论」称为「经院哲学」，意在批评其",
-   "options": [
-    "历史久远且研究深奥",
-    "内容虚构且无法验证",
-    "脱离客观实际，空谈理论",
-    "属于宗教神学范畴"
-   ],
-   "answerIndex": 2,
-   "explanation": "文中强调实践是检验真理的标准，故称脱离实践的争论为「经院哲学」，意指其空谈理论、脱离实际。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 276
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1520:v02"
   },
   {
    "id": "lesson-1520:v03",
    "word": "宰割",
    "annotated": false,
-   "decision": "question",
-   "reason": "比喻用法，考察學生對詞語在具體語境下修辭義的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "比喻隨意歪曲、強制切割、不尊重客觀規律。",
    "sourceSentence": "甚至拿现成的公式去限制、宰割、裁剪无限丰富的飞速发展的革命实践",
-   "type": "contextual-choice",
-   "question": "文中「宰割」一词的语境义是",
-   "options": [
-    "杀戮与分割",
-    "强行支配与扭曲",
-    "烹饪与加工",
-    "统治与管理"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处「宰割」与「限制」、「裁剪」并列，形容对待实践的态度，意指强行扭曲事实以符合教条。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 6278
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1520:v03"
   },
   {
    "id": "lesson-1520:v04",
    "word": "必然王国",
    "annotated": false,
-   "decision": "question",
-   "reason": "馬克思主義哲學重要概念，對理解全文論證目標至關重要。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指人們對客觀規律尚未認識、處於被動受規律支配的狀態。",
    "sourceSentence": "社会主义对于我们来说,有许多地方还是未被认识的必然王国。",
-   "type": "interpretation",
-   "question": "文中称社会主义对当时来说是「未被认识的必然王国」，其含义是",
-   "options": [
-    "社会主义的发展是不可避免的",
-    "人们尚未掌握社会主义建设的客观规律",
-    "社会主义社会充满了强制性的规则",
-    "社会主义必然会走向自由王国"
-   ],
-   "answerIndex": 1,
-   "explanation": "「必然王国」指对规律尚不认识、处于被动状态，文中指对社会主义建设规律尚待探索。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 6196
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1520:v04"
   },
   {
    "id": "lesson-1520:v05",
    "word": "教条",
    "annotated": false,
-   "decision": "question",
-   "reason": "常用詞彙，但在文中有特定的批判對象。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指僵化、不隨實踐發展而變化的理論或原則。",
    "sourceSentence": "马克思主义的理论宝库并不是一堆僵死不变的教条",
-   "type": "discrimination",
-   "question": "下列词语中，与文中「教条」的贬义色彩最接近的是",
-   "options": [
-    "准则",
-    "信条",
-    "刻板",
-    "公式化"
-   ],
-   "answerIndex": 2,
-   "explanation": "「教条」在此指僵死不变的原则，与「刻板」在语境中都强调缺乏灵活性。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4642
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1520:v05"
   },
   {
    "id": "lesson-1520:v06",
    "word": "不二之真理",
    "annotated": false,
-   "decision": "question",
-   "reason": "固定詞組，考察學生對「不二」一詞的深度理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指唯一、確鑿、不可動搖的真理。",
    "sourceSentence": "它们被长期的实践证明为不易之真理",
-   "type": "substitution",
-   "question": "文中「不易之真理」的「不易」最恰当的解释是",
-   "options": [
-    "不容易",
-    "不改变",
-    "不交易",
-    "不平凡"
-   ],
-   "answerIndex": 1,
-   "explanation": "「不易」在此意为「不变」，指经得起实践检验的确定真理。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2619
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1520:v06"
   },
   {
    "id": "lesson-1520:v07",
@@ -187,5 +121,225 @@
     "charIndex": 252
    }
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1520:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1520:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "630353f4a8b0575cca805b48c6faab88d8e16956f0d41c86c7f3907a3d127200",
+   "formerItem": {
+    "id": "lesson-1520:v01",
+    "word": "拨乱反正",
+    "annotated": false,
+    "decision": "question",
+    "reason": "常用成語，且在文中具有特定的政治與歷史語境，考察詞義理解與遷移能力。",
+    "contextMeaning": "扭轉混亂局面，恢復正常秩序。",
+    "sourceSentence": "为了深入批判“四人帮”,肃清其流毒和影响,在这个问题上拨乱反正,十分必要。",
+    "type": "contextual-choice",
+    "question": "「拨乱反正」在文中的含义是",
+    "options": [
+     "拨动乱象，回归正路",
+     "纠正错误，恢复正常秩序",
+     "拨开迷雾，辨别是非",
+     "推翻旧制，建立新法"
+    ],
+    "answerIndex": 1,
+    "explanation": "「拨乱反正」指治理混乱局面，恢复正常秩序，符合文中肃清流毒、恢复实事求是原则的语境。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 107
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1520:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1520:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "36934b2eb5bb691e33db41c020f0b0703e3f691379dd37bc8157b623516e1ab2",
+   "formerItem": {
+    "id": "lesson-1520:v02",
+    "word": "经院哲学",
+    "annotated": false,
+    "decision": "question",
+    "reason": "哲學專有名詞，理解此詞對於把握馬克思批判脫離實踐的理論至關重要。",
+    "contextMeaning": "指脫離實際、空談理論、形式主義的哲學研究。",
+    "sourceSentence": "关于离开实践的思维是否具有现实性的争论,是一个纯粹经院哲学的问题。",
+    "type": "interpretation",
+    "question": "文中将「离开实践的思维争论」称为「经院哲学」，意在批评其",
+    "options": [
+     "历史久远且研究深奥",
+     "内容虚构且无法验证",
+     "脱离客观实际，空谈理论",
+     "属于宗教神学范畴"
+    ],
+    "answerIndex": 2,
+    "explanation": "文中强调实践是检验真理的标准，故称脱离实践的争论为「经院哲学」，意指其空谈理论、脱离实际。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 276
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1520:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1520:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "205cfc8c47a27496430229147444b545846397e847c0eac3ab29b3d8f4c0ee34",
+   "formerItem": {
+    "id": "lesson-1520:v03",
+    "word": "宰割",
+    "annotated": false,
+    "decision": "question",
+    "reason": "比喻用法，考察學生對詞語在具體語境下修辭義的理解。",
+    "contextMeaning": "比喻隨意歪曲、強制切割、不尊重客觀規律。",
+    "sourceSentence": "甚至拿现成的公式去限制、宰割、裁剪无限丰富的飞速发展的革命实践",
+    "type": "contextual-choice",
+    "question": "文中「宰割」一词的语境义是",
+    "options": [
+     "杀戮与分割",
+     "强行支配与扭曲",
+     "烹饪与加工",
+     "统治与管理"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处「宰割」与「限制」、「裁剪」并列，形容对待实践的态度，意指强行扭曲事实以符合教条。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 6278
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1520:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1520:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "474615bbbe6811a7985e8d6657480e49109d6b648ac3a79b1ce2471a23717fe6",
+   "formerItem": {
+    "id": "lesson-1520:v04",
+    "word": "必然王国",
+    "annotated": false,
+    "decision": "question",
+    "reason": "馬克思主義哲學重要概念，對理解全文論證目標至關重要。",
+    "contextMeaning": "指人們對客觀規律尚未認識、處於被動受規律支配的狀態。",
+    "sourceSentence": "社会主义对于我们来说,有许多地方还是未被认识的必然王国。",
+    "type": "interpretation",
+    "question": "文中称社会主义对当时来说是「未被认识的必然王国」，其含义是",
+    "options": [
+     "社会主义的发展是不可避免的",
+     "人们尚未掌握社会主义建设的客观规律",
+     "社会主义社会充满了强制性的规则",
+     "社会主义必然会走向自由王国"
+    ],
+    "answerIndex": 1,
+    "explanation": "「必然王国」指对规律尚不认识、处于被动状态，文中指对社会主义建设规律尚待探索。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 6196
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1520:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1520:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "fdd14f30a96aa27c0fe90d987d0db03955801b2cfdf5966eb41690d8bb101856",
+   "formerItem": {
+    "id": "lesson-1520:v05",
+    "word": "教条",
+    "annotated": false,
+    "decision": "question",
+    "reason": "常用詞彙，但在文中有特定的批判對象。",
+    "contextMeaning": "指僵化、不隨實踐發展而變化的理論或原則。",
+    "sourceSentence": "马克思主义的理论宝库并不是一堆僵死不变的教条",
+    "type": "discrimination",
+    "question": "下列词语中，与文中「教条」的贬义色彩最接近的是",
+    "options": [
+     "准则",
+     "信条",
+     "刻板",
+     "公式化"
+    ],
+    "answerIndex": 2,
+    "explanation": "「教条」在此指僵死不变的原则，与「刻板」在语境中都强调缺乏灵活性。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4642
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1520:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1520:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "4593d7ca8e34c8b9253a2592606fcddaee283a036ddb21bf61576d9c2dd788bc",
+   "formerItem": {
+    "id": "lesson-1520:v06",
+    "word": "不二之真理",
+    "annotated": false,
+    "decision": "question",
+    "reason": "固定詞組，考察學生對「不二」一詞的深度理解。",
+    "contextMeaning": "指唯一、確鑿、不可動搖的真理。",
+    "sourceSentence": "它们被长期的实践证明为不易之真理",
+    "type": "substitution",
+    "question": "文中「不易之真理」的「不易」最恰当的解释是",
+    "options": [
+     "不容易",
+     "不改变",
+     "不交易",
+     "不平凡"
+    ],
+    "answerIndex": 1,
+    "explanation": "「不易」在此意为「不变」，指经得起实践检验的确定真理。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2619
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

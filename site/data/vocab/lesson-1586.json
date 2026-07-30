@@ -11,195 +11,105 @@
    "id": "lesson-1586:v01",
    "word": "旷世",
    "annotated": false,
-   "decision": "question",
-   "reason": "文章标题核心词，理解其意有助于把握全文论述范围。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "当代罕见，隔绝当代。",
    "sourceSentence": "这就是中国天文学史上著名的浑盖之争。",
-   "type": "contextual-choice",
-   "question": "文中“旷世之争”的“旷世”最恰当的解释是",
-   "options": [
-    "空前绝后",
-    "经历很长时间",
-    "当代罕见，隔绝当代",
-    "规模宏大"
-   ],
-   "answerIndex": 2,
-   "explanation": "旷世指当代没有可以相比的，这里指争论持续时间极长，影响巨大。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 173
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1586:v01"
   },
   {
    "id": "lesson-1586:v02",
    "word": "相形见绌",
    "annotated": false,
-   "decision": "question",
-   "reason": "常用成语，在此语境下表示理论价值的对比。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "相比之下显出不足。",
    "sourceSentence": "但是,从另一个视角来看,宣夜说的重要性就相形见绌了",
-   "type": "substitution",
-   "question": "文中“相形见绌”可以用下列哪个词替换且文意不变？",
-   "options": [
-    "黯然失色",
-    "相去甚远",
-    "捉襟见肘",
-    "大相径庭"
-   ],
-   "answerIndex": 0,
-   "explanation": "相形见绌指跟同类事物相比，显出不足。黯然失色指相形见绌，也指由于失去光彩而黯淡无光，符合语境。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1298
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1586:v02"
   },
   {
    "id": "lesson-1586:v03",
    "word": "绝无师法",
    "annotated": false,
-   "decision": "question",
-   "reason": "关键引文，理解宣夜说被抛弃的原因。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "完全没有传承和规范的教学体系。",
    "sourceSentence": "宣夜之学,绝无师法",
-   "type": "interpretation",
-   "question": "文中引用蔡邕的话“宣夜之学，绝无师法”，其深层意思是",
-   "options": [
-    "宣夜说没有老师教导",
-    "宣夜说缺乏系统的学说支撑和传承规则",
-    "宣夜说已经被历史淘汰了",
-    "宣夜说是不合逻辑的错误理论"
-   ],
-   "answerIndex": 1,
-   "explanation": "“师法”指师承和法度。这里指宣夜说缺乏系统的论证方法和传承机制，导致无法进一步发展。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1570
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1586:v03"
   },
   {
    "id": "lesson-1586:v04",
    "word": "不绝如缕",
    "annotated": false,
-   "decision": "question",
-   "reason": "形容争论持续状态的常用成语，考查词义理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容声音细微或局面危急，也形容持续不断。",
    "sourceSentence": "天文学界的争论一直不绝如缕",
-   "type": "contextual-choice",
-   "question": "文中“天文学界的争论一直不绝如缕”中“不绝如缕”的语境义是",
-   "options": [
-    "争论极其激烈，如同断开的丝线",
-    "争论声音极小，几乎听不到",
-    "争论持续不断，延续了很长时间",
-    "争论的内容非常细碎，难以理清"
-   ],
-   "answerIndex": 2,
-   "explanation": "此处用以形容浑盖之争持续了一千多年，未曾间断。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2804
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1586:v04"
   },
   {
    "id": "lesson-1586:v05",
    "word": "软肋",
    "annotated": false,
-   "decision": "question",
-   "reason": "比喻词，理解文章论证逻辑的转折。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "致命弱点。",
    "sourceSentence": "但是浑天说也有自己的软肋。",
-   "type": "substitution",
-   "question": "文中“浑天说也有自己的软肋”中“软肋”一词，若换成下列词语，最准确的是",
-   "options": [
-    "漏洞",
-    "短板",
-    "错误",
-    "难题"
-   ],
-   "answerIndex": 1,
-   "explanation": "“软肋”指致命的弱点或不足之处，“短板”在逻辑论证中指代理论体系中薄弱的环节。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3261
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1586:v05"
   },
   {
    "id": "lesson-1586:v06",
    "word": "圭臬",
    "annotated": false,
-   "decision": "question",
-   "reason": "高频文化词汇，考查词义迁移。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "准则，标准。",
    "sourceSentence": "被后人奉为中国古代历法的圭臬的《太初历》",
-   "type": "contextual-choice",
-   "question": "文中“被后人奉为中国古代历法的圭臬的《太初历》”中“圭臬”的意思是",
-   "options": [
-    "典范",
-    "测量工具",
-    "最高成就",
-    "准则"
-   ],
-   "answerIndex": 3,
-   "explanation": "圭臬原指测日影的仪器，后比喻准则、标准。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 5192
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1586:v06"
   },
   {
    "id": "lesson-1586:v07",
    "word": "先验",
    "annotated": false,
-   "decision": "question",
-   "reason": "哲学概念，对理解文章评价标准的论证非常关键。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "先于经验的，不经实践验证的。",
    "sourceSentence": "而不是看其是否遵循某种先验的哲学观念。",
-   "type": "contextual-choice",
-   "question": "文中“先验的哲学观念”中“先验”的含义是",
-   "options": [
-    "经过长期验证的",
-    "脱离实际观测，先于经验的",
-    "关于天体运行的理论",
-    "古人深信不疑的真理"
-   ],
-   "answerIndex": 1,
-   "explanation": "“先验”指在经验之前，即不依赖于经验观察而预先设定的观念。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4398
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1586:v07"
   },
   {
    "id": "lesson-1586:v08",
    "word": "趣",
    "annotated": true,
-   "decision": "question",
-   "reason": "特殊用法，古今异义词。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "趋向，奔赴。",
    "sourceSentence": "由高趣下,归注于海",
-   "type": "usage",
-   "question": "“由高趣下”中“趣”的意思是",
-   "options": [
-    "趣味",
-    "奔赴、趋向",
-    "赶快",
-    "取向"
-   ],
-   "answerIndex": 1,
-   "explanation": "“趣”通“趋”，意为趋向、走向。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《古汉语常用字字典》"
-   ],
    "location": {
     "charIndex": 3753
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1586:v08"
   },
   {
    "id": "lesson-1586:v09",
@@ -504,5 +414,297 @@
    "contextMeaning": "本名张遂，巨鹿（今属河北）人，唐代天文学家。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1586:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1586:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a4de048ed84e21590d4ffa4df39702bffeca7328b154363fb335b25fdafda495",
+   "formerItem": {
+    "id": "lesson-1586:v01",
+    "word": "旷世",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文章标题核心词，理解其意有助于把握全文论述范围。",
+    "contextMeaning": "当代罕见，隔绝当代。",
+    "sourceSentence": "这就是中国天文学史上著名的浑盖之争。",
+    "type": "contextual-choice",
+    "question": "文中“旷世之争”的“旷世”最恰当的解释是",
+    "options": [
+     "空前绝后",
+     "经历很长时间",
+     "当代罕见，隔绝当代",
+     "规模宏大"
+    ],
+    "answerIndex": 2,
+    "explanation": "旷世指当代没有可以相比的，这里指争论持续时间极长，影响巨大。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 173
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1586:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1586:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "c831424fb7fc397737f8d50d7be98b1d899ace9af9c054b36ce459043542d00f",
+   "formerItem": {
+    "id": "lesson-1586:v02",
+    "word": "相形见绌",
+    "annotated": false,
+    "decision": "question",
+    "reason": "常用成语，在此语境下表示理论价值的对比。",
+    "contextMeaning": "相比之下显出不足。",
+    "sourceSentence": "但是,从另一个视角来看,宣夜说的重要性就相形见绌了",
+    "type": "substitution",
+    "question": "文中“相形见绌”可以用下列哪个词替换且文意不变？",
+    "options": [
+     "黯然失色",
+     "相去甚远",
+     "捉襟见肘",
+     "大相径庭"
+    ],
+    "answerIndex": 0,
+    "explanation": "相形见绌指跟同类事物相比，显出不足。黯然失色指相形见绌，也指由于失去光彩而黯淡无光，符合语境。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1298
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1586:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1586:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "71ab3f97be057e2bb7e16a24612929744691902bc36292b0405844ed9043e42a",
+   "formerItem": {
+    "id": "lesson-1586:v03",
+    "word": "绝无师法",
+    "annotated": false,
+    "decision": "question",
+    "reason": "关键引文，理解宣夜说被抛弃的原因。",
+    "contextMeaning": "完全没有传承和规范的教学体系。",
+    "sourceSentence": "宣夜之学,绝无师法",
+    "type": "interpretation",
+    "question": "文中引用蔡邕的话“宣夜之学，绝无师法”，其深层意思是",
+    "options": [
+     "宣夜说没有老师教导",
+     "宣夜说缺乏系统的学说支撑和传承规则",
+     "宣夜说已经被历史淘汰了",
+     "宣夜说是不合逻辑的错误理论"
+    ],
+    "answerIndex": 1,
+    "explanation": "“师法”指师承和法度。这里指宣夜说缺乏系统的论证方法和传承机制，导致无法进一步发展。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1570
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1586:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1586:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "6e880450db8d8490310edde1dbac8221f78c48ac500caf0a4a3cf5b5d3b7bcc1",
+   "formerItem": {
+    "id": "lesson-1586:v04",
+    "word": "不绝如缕",
+    "annotated": false,
+    "decision": "question",
+    "reason": "形容争论持续状态的常用成语，考查词义理解。",
+    "contextMeaning": "形容声音细微或局面危急，也形容持续不断。",
+    "sourceSentence": "天文学界的争论一直不绝如缕",
+    "type": "contextual-choice",
+    "question": "文中“天文学界的争论一直不绝如缕”中“不绝如缕”的语境义是",
+    "options": [
+     "争论极其激烈，如同断开的丝线",
+     "争论声音极小，几乎听不到",
+     "争论持续不断，延续了很长时间",
+     "争论的内容非常细碎，难以理清"
+    ],
+    "answerIndex": 2,
+    "explanation": "此处用以形容浑盖之争持续了一千多年，未曾间断。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2804
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1586:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1586:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "419e3c38d37720f2d7fdfebcc9cd2a2bf8b47b54c4666a6f71ab8af088291d9e",
+   "formerItem": {
+    "id": "lesson-1586:v05",
+    "word": "软肋",
+    "annotated": false,
+    "decision": "question",
+    "reason": "比喻词，理解文章论证逻辑的转折。",
+    "contextMeaning": "致命弱点。",
+    "sourceSentence": "但是浑天说也有自己的软肋。",
+    "type": "substitution",
+    "question": "文中“浑天说也有自己的软肋”中“软肋”一词，若换成下列词语，最准确的是",
+    "options": [
+     "漏洞",
+     "短板",
+     "错误",
+     "难题"
+    ],
+    "answerIndex": 1,
+    "explanation": "“软肋”指致命的弱点或不足之处，“短板”在逻辑论证中指代理论体系中薄弱的环节。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3261
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1586:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1586:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "f4ec30397672c8fb9fc190f3a20d2e8ccc69b9ab401648fcc48824819bcf1dc0",
+   "formerItem": {
+    "id": "lesson-1586:v06",
+    "word": "圭臬",
+    "annotated": false,
+    "decision": "question",
+    "reason": "高频文化词汇，考查词义迁移。",
+    "contextMeaning": "准则，标准。",
+    "sourceSentence": "被后人奉为中国古代历法的圭臬的《太初历》",
+    "type": "contextual-choice",
+    "question": "文中“被后人奉为中国古代历法的圭臬的《太初历》”中“圭臬”的意思是",
+    "options": [
+     "典范",
+     "测量工具",
+     "最高成就",
+     "准则"
+    ],
+    "answerIndex": 3,
+    "explanation": "圭臬原指测日影的仪器，后比喻准则、标准。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 5192
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1586:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1586:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "95fc3d3e54bb2af4e1d0eb5e6edeae3f382a73dec6c3b861c672e73ebe51757a",
+   "formerItem": {
+    "id": "lesson-1586:v07",
+    "word": "先验",
+    "annotated": false,
+    "decision": "question",
+    "reason": "哲学概念，对理解文章评价标准的论证非常关键。",
+    "contextMeaning": "先于经验的，不经实践验证的。",
+    "sourceSentence": "而不是看其是否遵循某种先验的哲学观念。",
+    "type": "contextual-choice",
+    "question": "文中“先验的哲学观念”中“先验”的含义是",
+    "options": [
+     "经过长期验证的",
+     "脱离实际观测，先于经验的",
+     "关于天体运行的理论",
+     "古人深信不疑的真理"
+    ],
+    "answerIndex": 1,
+    "explanation": "“先验”指在经验之前，即不依赖于经验观察而预先设定的观念。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4398
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1586:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1586:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "325cec6d7290b8939039457d5efbdaa390fb73bef7b6eb5b1f67d6011631c78a",
+   "formerItem": {
+    "id": "lesson-1586:v08",
+    "word": "趣",
+    "annotated": true,
+    "decision": "question",
+    "reason": "特殊用法，古今异义词。",
+    "contextMeaning": "趋向，奔赴。",
+    "sourceSentence": "由高趣下,归注于海",
+    "type": "usage",
+    "question": "“由高趣下”中“趣”的意思是",
+    "options": [
+     "趣味",
+     "奔赴、趋向",
+     "赶快",
+     "取向"
+    ],
+    "answerIndex": 1,
+    "explanation": "“趣”通“趋”，意为趋向、走向。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《古汉语常用字字典》"
+    ],
+    "location": {
+     "charIndex": 3753
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

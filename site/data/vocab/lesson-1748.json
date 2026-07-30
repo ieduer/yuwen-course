@@ -11,157 +11,79 @@
    "id": "lesson-1748:v01",
    "word": "岁",
    "annotated": false,
-   "decision": "question",
-   "reason": "时间副词，义为“每年”，在文中作状语，理解此词有助于把握故事背景的常态化特征。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "每年",
    "sourceSentence": "岁征 民间。",
-   "type": "contextual-choice",
-   "question": "「岁征 民间」中「岁」的意思是",
-   "options": [
-    "年龄",
-    "时间",
-    "每年",
-    "岁星"
-   ],
-   "answerIndex": 2,
-   "explanation": "岁，在这里作状语，意思是每年。",
-   "difficulty": 1,
-   "sourceRefs": [
-    "《古汉语常用字字典》"
-   ],
    "location": {
     "charIndex": 22
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1748:v01"
   },
   {
    "id": "lesson-1748:v02",
    "word": "故",
    "annotated": false,
-   "decision": "question",
-   "reason": "虚词，此处作“本来”讲，易误解为“原因、缘故”，影响对句子逻辑的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "本来",
    "sourceSentence": "此物故非西 产",
-   "type": "contextual-choice",
-   "question": "「此物故非西产」中「故」的意思是",
-   "options": [
-    "原因",
-    "旧的",
-    "本来",
-    "故意"
-   ],
-   "answerIndex": 2,
-   "explanation": "故，在这里是副词，表示本来如此。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《王力古汉语字典》"
-   ],
    "location": {
     "charIndex": 28
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1748:v02"
   },
   {
    "id": "lesson-1748:v03",
    "word": "中",
    "annotated": false,
-   "decision": "question",
-   "reason": "动词，“符合”义，文中指蟋蟀不符合官府要求的规格，是理解情节转折的关键。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "符合",
    "sourceSentence": "又劣弱不中于款",
-   "type": "contextual-choice",
-   "question": "「又劣弱不中于款」中「中」的意思是",
-   "options": [
-    "中间",
-    "符合",
-    "打中",
-    "适中"
-   ],
-   "answerIndex": 1,
-   "explanation": "中，在此处是动词，读zhòng，指符合、合乎。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 253
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1748:v03"
   },
   {
    "id": "lesson-1748:v04",
    "word": "尚",
    "annotated": true,
-   "decision": "question",
-   "reason": "教材注释词，重点考查动词用法及语境义。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "崇尚，喜好",
    "sourceSentence": "宫中尚 促织之戏",
-   "type": "contextual-choice",
-   "question": "「宫中尚促织之戏」中「尚」的意思是",
-   "options": [
-    "还",
-    "崇尚",
-    "超过",
-    "指望"
-   ],
-   "answerIndex": 1,
-   "explanation": "尚，动词，指崇尚、喜好。",
-   "difficulty": 1,
-   "sourceRefs": [
-    "教材注释"
-   ],
    "location": {
     "charIndex": 13
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1748:v04"
   },
   {
    "id": "lesson-1748:v05",
    "word": "竟",
    "annotated": false,
-   "decision": "question",
-   "reason": "副词，表示出乎意料，理解此词有助于把握人物心理。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "竟然",
    "sourceSentence": "我竟安安稳稳地睡着而没有听见",
-   "type": "contextual-choice",
-   "question": "「我竟安安稳稳地睡着而没有听见」中「竟」的意思是",
-   "options": [
-    "最终",
-    "竟然",
-    "完毕",
-    "境界"
-   ],
-   "answerIndex": 1,
-   "explanation": "竟，副词，表示出乎意料。",
-   "difficulty": 1,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 7586
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1748:v05"
   },
   {
    "id": "lesson-1748:v06",
    "word": "背",
    "annotated": false,
-   "decision": "question",
-   "reason": "形容词，在文中指听力不好，为语境义，易被误解为“背部”。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "听力不好",
    "sourceSentence": "而由于他的耳朵又背,大家必须走近他才行",
-   "type": "contextual-choice",
-   "question": "「而由于他的耳朵又背，大家必须走近他才行」中「背」的意思是",
-   "options": [
-    "背部",
-    "背诵",
-    "听力不好",
-    "违背"
-   ],
-   "answerIndex": 2,
-   "explanation": "背，形容词，指听觉不灵敏。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《现代汉语词典》"
-   ],
    "location": {
     "charIndex": 7364
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1748:v06"
   },
   {
    "id": "lesson-1748:v07",
@@ -1099,5 +1021,237 @@
    "contextMeaning": "选自《卡夫卡短篇小说选》（漓江出版社2013年版）。叶廷芳译。全文共3部分，课文节选的是第1部分，略有改动。卡夫卡（1883—1924），奥地利小说家。代表作有《变形记》《诉讼》《城堡》等。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1748:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1748:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "1ef074c8e6b1c527d2703268cb89bb22dfccbd5faff6f5f283a16f3d06091b94",
+   "formerItem": {
+    "id": "lesson-1748:v01",
+    "word": "岁",
+    "annotated": false,
+    "decision": "question",
+    "reason": "时间副词，义为“每年”，在文中作状语，理解此词有助于把握故事背景的常态化特征。",
+    "contextMeaning": "每年",
+    "sourceSentence": "岁征 民间。",
+    "type": "contextual-choice",
+    "question": "「岁征 民间」中「岁」的意思是",
+    "options": [
+     "年龄",
+     "时间",
+     "每年",
+     "岁星"
+    ],
+    "answerIndex": 2,
+    "explanation": "岁，在这里作状语，意思是每年。",
+    "difficulty": 1,
+    "sourceRefs": [
+     "《古汉语常用字字典》"
+    ],
+    "location": {
+     "charIndex": 22
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1748:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1748:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "3b1eca41c3fb9ef25856958b61ac2b2fbc4906877a59015c84831fc3a2ae1026",
+   "formerItem": {
+    "id": "lesson-1748:v02",
+    "word": "故",
+    "annotated": false,
+    "decision": "question",
+    "reason": "虚词，此处作“本来”讲，易误解为“原因、缘故”，影响对句子逻辑的理解。",
+    "contextMeaning": "本来",
+    "sourceSentence": "此物故非西 产",
+    "type": "contextual-choice",
+    "question": "「此物故非西产」中「故」的意思是",
+    "options": [
+     "原因",
+     "旧的",
+     "本来",
+     "故意"
+    ],
+    "answerIndex": 2,
+    "explanation": "故，在这里是副词，表示本来如此。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《王力古汉语字典》"
+    ],
+    "location": {
+     "charIndex": 28
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1748:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1748:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "66a65e113c7d9d80561e9f0d347af367f66632ffd036dd539248072fbde2188e",
+   "formerItem": {
+    "id": "lesson-1748:v03",
+    "word": "中",
+    "annotated": false,
+    "decision": "question",
+    "reason": "动词，“符合”义，文中指蟋蟀不符合官府要求的规格，是理解情节转折的关键。",
+    "contextMeaning": "符合",
+    "sourceSentence": "又劣弱不中于款",
+    "type": "contextual-choice",
+    "question": "「又劣弱不中于款」中「中」的意思是",
+    "options": [
+     "中间",
+     "符合",
+     "打中",
+     "适中"
+    ],
+    "answerIndex": 1,
+    "explanation": "中，在此处是动词，读zhòng，指符合、合乎。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 253
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1748:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1748:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "df9d5470a08b0041f6327a465613fc70adb715f04c03bae0a5e774c40b6512be",
+   "formerItem": {
+    "id": "lesson-1748:v04",
+    "word": "尚",
+    "annotated": true,
+    "decision": "question",
+    "reason": "教材注释词，重点考查动词用法及语境义。",
+    "contextMeaning": "崇尚，喜好",
+    "sourceSentence": "宫中尚 促织之戏",
+    "type": "contextual-choice",
+    "question": "「宫中尚促织之戏」中「尚」的意思是",
+    "options": [
+     "还",
+     "崇尚",
+     "超过",
+     "指望"
+    ],
+    "answerIndex": 1,
+    "explanation": "尚，动词，指崇尚、喜好。",
+    "difficulty": 1,
+    "sourceRefs": [
+     "教材注释"
+    ],
+    "location": {
+     "charIndex": 13
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1748:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1748:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a75a2b684a35041c4187d71fa6d86f996c8201b690be1fefac8d8f3a4b7e6dd2",
+   "formerItem": {
+    "id": "lesson-1748:v05",
+    "word": "竟",
+    "annotated": false,
+    "decision": "question",
+    "reason": "副词，表示出乎意料，理解此词有助于把握人物心理。",
+    "contextMeaning": "竟然",
+    "sourceSentence": "我竟安安稳稳地睡着而没有听见",
+    "type": "contextual-choice",
+    "question": "「我竟安安稳稳地睡着而没有听见」中「竟」的意思是",
+    "options": [
+     "最终",
+     "竟然",
+     "完毕",
+     "境界"
+    ],
+    "answerIndex": 1,
+    "explanation": "竟，副词，表示出乎意料。",
+    "difficulty": 1,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 7586
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1748:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1748:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "7ff6670bd22d29860519f8832e56123e8748841f75f45749070efbc5d7502e57",
+   "formerItem": {
+    "id": "lesson-1748:v06",
+    "word": "背",
+    "annotated": false,
+    "decision": "question",
+    "reason": "形容词，在文中指听力不好，为语境义，易被误解为“背部”。",
+    "contextMeaning": "听力不好",
+    "sourceSentence": "而由于他的耳朵又背,大家必须走近他才行",
+    "type": "contextual-choice",
+    "question": "「而由于他的耳朵又背，大家必须走近他才行」中「背」的意思是",
+    "options": [
+     "背部",
+     "背诵",
+     "听力不好",
+     "违背"
+    ],
+    "answerIndex": 2,
+    "explanation": "背，形容词，指听觉不灵敏。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《现代汉语词典》"
+    ],
+    "location": {
+     "charIndex": 7364
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

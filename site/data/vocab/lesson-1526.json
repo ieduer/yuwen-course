@@ -11,177 +11,92 @@
    "id": "lesson-1526:v01",
    "word": "桀骜",
    "annotated": true,
-   "decision": "question",
-   "reason": "形容词，易误解为凶狠，实指倔强，需辨析。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "性情倔强",
    "sourceSentence": "总该是有些桀骜锋利的",
-   "type": "discrimination",
-   "question": "「总该是有些桀骜锋利的」中「桀骜」一词的意思是",
-   "options": [
-    "凶狠残暴",
-    "倔强不驯",
-    "傲慢无礼",
-    "果断勇敢"
-   ],
-   "answerIndex": 1,
-   "explanation": "桀骜指性情倔强，不驯服，此处指学生反抗权威的气节。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《记念刘和珍君》教材注释"
-   ],
    "location": {
     "charIndex": 1351
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1526:v01"
   },
   {
    "id": "lesson-1526:v02",
    "word": "喋血",
    "annotated": true,
-   "decision": "question",
-   "reason": "必须按教材注释辨明词义，不能把事件结果“遇害”当成词语本身的释义",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容杀人多而血流遍地",
    "sourceSentence": "况且始终微笑着的和蔼的刘和珍君,更何至于无端在府门前喋血呢",
-   "type": "interpretation",
-   "question": "文中「喋血」一词的正确语境义是",
-   "options": [
-    "杀人多而血流遍地",
-    "因病而口吐鲜血",
-    "独自负伤但没有流血",
-    "在战袍上绘制血色图案"
-   ],
-   "answerIndex": 0,
-   "explanation": "教材注释明确说明“喋血”形容杀人多而血流遍地。刘和珍在惨案中遇害是句中事件结果，不应反过来替代词义。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《记念刘和珍君》教材注释"
-   ],
    "location": {
     "charIndex": 1636
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1526:v02"
   },
   {
    "id": "lesson-1526:v03",
    "word": "立仆",
    "annotated": true,
-   "decision": "question",
-   "reason": "古今异义，考察文言实词“仆”的读音与意义。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "立刻倒下",
    "sourceSentence": "同去的张静淑君想扶起她,中了四弹,其一是手枪,立仆",
-   "type": "pronunciation",
-   "question": "「立仆」中「仆」的正确读音及意思是",
-   "options": [
-    "pú，仆人",
-    "pū，倒下",
-    "pú，倒下",
-    "pū，仆人"
-   ],
-   "answerIndex": 1,
-   "explanation": "仆在此处读pū，意为倒下。",
-   "difficulty": 1,
-   "sourceRefs": [
-    "《记念刘和珍君》教材注释"
-   ],
    "location": {
     "charIndex": 1951
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1526:v03"
   },
   {
    "id": "lesson-1526:v04",
    "word": "苟活",
    "annotated": false,
-   "decision": "question",
-   "reason": "体现作者在烈士牺牲面前对幸存处境的沉重自我审视，需避免把复杂语气简化成单一心理标签",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "勉强活着，并带有沉重、痛苦的自我审视",
    "sourceSentence": "她不是“苟活到现在的我”的学生,是为了中国而死的中国的青年",
-   "type": "contextual-choice",
-   "question": "文中作者自称「苟活到现在的我」，其主要情感色彩是",
-   "options": [
-    "在烈士牺牲面前对自己仍活着的沉重自我审视",
-    "因年长而故意表现出的轻松自嘲",
-    "庆幸自己躲过危险并获得长寿",
-    "满足于不再参与现实生活的安稳"
-   ],
-   "answerIndex": 0,
-   "explanation": "“苟活”与“为了中国而死的中国的青年”形成对照，语气包含痛苦、不安和幸存者式的自我审视；仅概括为“羞愧自责”会压窄这层复杂情感。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1147
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1526:v04"
   },
   {
    "id": "lesson-1526:v05",
    "word": "不惮",
    "annotated": false,
-   "decision": "question",
-   "reason": "文言用法，考察“惮”字在文言语境中的准确含义。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "怕",
    "sourceSentence": "我向来是不惮以最坏的恶意,来推测中国人的",
-   "type": "usage",
-   "question": "「我向来是不惮以最坏的恶意」中「惮」的意思是",
-   "options": [
-    "避讳",
-    "忌惮、怕",
-    "计算",
-    "担心"
-   ],
-   "answerIndex": 1,
-   "explanation": "“不惮”即“不怕”，指不怕以最坏的恶意去推测。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1594
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1526:v05"
   },
   {
    "id": "lesson-1526:v06",
    "word": "殒身不恤",
    "annotated": true,
-   "decision": "question",
-   "reason": "成语考查，重点理解“恤”的含义。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "顾虑",
    "sourceSentence": "至于这一回在弹雨中互相救助,虽殒身不恤的事实",
-   "type": "substitution",
-   "question": "「殒身不恤」中「恤」字的意思是",
-   "options": [
-    "怜悯",
-    "救助",
-    "顾虑",
-    "悲伤"
-   ],
-   "answerIndex": 2,
-   "explanation": "恤意为顾虑，殒身不恤即牺牲生命也不顾虑/不惜。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "《记念刘和珍君》教材注释"
-   ],
    "location": {
     "charIndex": 2645
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1526:v06"
   },
   {
    "id": "lesson-1526:v07",
    "word": "有始无终",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语用法，理解作者对自身编辑刊物状况的评价。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指做事不能坚持到底",
    "sourceSentence": "凡我所编辑的期刊,大概是因为往往有始无终之故罢",
-   "type": "interpretation",
-   "question": "文中「有始无终」是指",
-   "options": [
-    "做事不负责任",
-    "刊物往往中途停刊",
-    "没有明确的编辑目标",
-    "刊物内容缺乏连贯性"
-   ],
-   "answerIndex": 1,
-   "explanation": "根据上下文，指鲁迅编辑的期刊往往因为外部环境等原因无法长久维持。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 554
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1526:v07"
   },
   {
    "id": "lesson-1526:v08",
@@ -435,5 +350,268 @@
    "contextMeaning": "为了积聚革命的力量，以有限的代价去换取更大的胜利，鲁迅是不主张采用向反动派请愿这种斗争方式的。参看他在写《记念刘和珍君》后第二天写的《空谈》一文。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1526:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1526:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "3f704a78dc62d4401c3e6cb4c51b864bb55b87885fc70b808e01d27f4484f0ea",
+   "formerItem": {
+    "id": "lesson-1526:v01",
+    "word": "桀骜",
+    "annotated": true,
+    "decision": "question",
+    "reason": "形容词，易误解为凶狠，实指倔强，需辨析。",
+    "contextMeaning": "性情倔强",
+    "sourceSentence": "总该是有些桀骜锋利的",
+    "type": "discrimination",
+    "question": "「总该是有些桀骜锋利的」中「桀骜」一词的意思是",
+    "options": [
+     "凶狠残暴",
+     "倔强不驯",
+     "傲慢无礼",
+     "果断勇敢"
+    ],
+    "answerIndex": 1,
+    "explanation": "桀骜指性情倔强，不驯服，此处指学生反抗权威的气节。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《记念刘和珍君》教材注释"
+    ],
+    "location": {
+     "charIndex": 1351
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1526:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1526:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "68617a6bc4e5c878591196e873144829f7a97ea4abda3f6d68b920710f0639a9",
+   "formerItem": {
+    "id": "lesson-1526:v02",
+    "word": "喋血",
+    "annotated": true,
+    "decision": "question",
+    "reason": "必须按教材注释辨明词义，不能把事件结果“遇害”当成词语本身的释义",
+    "contextMeaning": "形容杀人多而血流遍地",
+    "sourceSentence": "况且始终微笑着的和蔼的刘和珍君,更何至于无端在府门前喋血呢",
+    "type": "interpretation",
+    "question": "文中「喋血」一词的正确语境义是",
+    "options": [
+     "杀人多而血流遍地",
+     "因病而口吐鲜血",
+     "独自负伤但没有流血",
+     "在战袍上绘制血色图案"
+    ],
+    "answerIndex": 0,
+    "explanation": "教材注释明确说明“喋血”形容杀人多而血流遍地。刘和珍在惨案中遇害是句中事件结果，不应反过来替代词义。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《记念刘和珍君》教材注释"
+    ],
+    "location": {
+     "charIndex": 1636
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1526:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1526:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "8deb1f04e66f2556bce7a62e471e48d06cf08231524d3a4733e371bb0ef9e424",
+   "formerItem": {
+    "id": "lesson-1526:v03",
+    "word": "立仆",
+    "annotated": true,
+    "decision": "question",
+    "reason": "古今异义，考察文言实词“仆”的读音与意义。",
+    "contextMeaning": "立刻倒下",
+    "sourceSentence": "同去的张静淑君想扶起她,中了四弹,其一是手枪,立仆",
+    "type": "pronunciation",
+    "question": "「立仆」中「仆」的正确读音及意思是",
+    "options": [
+     "pú，仆人",
+     "pū，倒下",
+     "pú，倒下",
+     "pū，仆人"
+    ],
+    "answerIndex": 1,
+    "explanation": "仆在此处读pū，意为倒下。",
+    "difficulty": 1,
+    "sourceRefs": [
+     "《记念刘和珍君》教材注释"
+    ],
+    "location": {
+     "charIndex": 1951
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1526:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1526:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "428adbffbb6e667cb7ad9d62cc9c64f508760e9286df860b9235d9b27043542c",
+   "formerItem": {
+    "id": "lesson-1526:v04",
+    "word": "苟活",
+    "annotated": false,
+    "decision": "question",
+    "reason": "体现作者在烈士牺牲面前对幸存处境的沉重自我审视，需避免把复杂语气简化成单一心理标签",
+    "contextMeaning": "勉强活着，并带有沉重、痛苦的自我审视",
+    "sourceSentence": "她不是“苟活到现在的我”的学生,是为了中国而死的中国的青年",
+    "type": "contextual-choice",
+    "question": "文中作者自称「苟活到现在的我」，其主要情感色彩是",
+    "options": [
+     "在烈士牺牲面前对自己仍活着的沉重自我审视",
+     "因年长而故意表现出的轻松自嘲",
+     "庆幸自己躲过危险并获得长寿",
+     "满足于不再参与现实生活的安稳"
+    ],
+    "answerIndex": 0,
+    "explanation": "“苟活”与“为了中国而死的中国的青年”形成对照，语气包含痛苦、不安和幸存者式的自我审视；仅概括为“羞愧自责”会压窄这层复杂情感。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1147
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1526:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1526:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "cf97d7e1d637e7055a3e0a6b64a87e3f2aa705578635e1af452083520ba4ee97",
+   "formerItem": {
+    "id": "lesson-1526:v05",
+    "word": "不惮",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文言用法，考察“惮”字在文言语境中的准确含义。",
+    "contextMeaning": "怕",
+    "sourceSentence": "我向来是不惮以最坏的恶意,来推测中国人的",
+    "type": "usage",
+    "question": "「我向来是不惮以最坏的恶意」中「惮」的意思是",
+    "options": [
+     "避讳",
+     "忌惮、怕",
+     "计算",
+     "担心"
+    ],
+    "answerIndex": 1,
+    "explanation": "“不惮”即“不怕”，指不怕以最坏的恶意去推测。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1594
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1526:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1526:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a03b33d15ab75448990206e74fda729ad896beaa397c09396a133c8b517af493",
+   "formerItem": {
+    "id": "lesson-1526:v06",
+    "word": "殒身不恤",
+    "annotated": true,
+    "decision": "question",
+    "reason": "成语考查，重点理解“恤”的含义。",
+    "contextMeaning": "顾虑",
+    "sourceSentence": "至于这一回在弹雨中互相救助,虽殒身不恤的事实",
+    "type": "substitution",
+    "question": "「殒身不恤」中「恤」字的意思是",
+    "options": [
+     "怜悯",
+     "救助",
+     "顾虑",
+     "悲伤"
+    ],
+    "answerIndex": 2,
+    "explanation": "恤意为顾虑，殒身不恤即牺牲生命也不顾虑/不惜。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "《记念刘和珍君》教材注释"
+    ],
+    "location": {
+     "charIndex": 2645
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1526:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1526:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "0ebefed51590484ac5366ab382331319ef0631c526cd4dd82c4d9978ef5b2b0c",
+   "formerItem": {
+    "id": "lesson-1526:v07",
+    "word": "有始无终",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语用法，理解作者对自身编辑刊物状况的评价。",
+    "contextMeaning": "指做事不能坚持到底",
+    "sourceSentence": "凡我所编辑的期刊,大概是因为往往有始无终之故罢",
+    "type": "interpretation",
+    "question": "文中「有始无终」是指",
+    "options": [
+     "做事不负责任",
+     "刊物往往中途停刊",
+     "没有明确的编辑目标",
+     "刊物内容缺乏连贯性"
+    ],
+    "answerIndex": 1,
+    "explanation": "根据上下文，指鲁迅编辑的期刊往往因为外部环境等原因无法长久维持。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 554
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

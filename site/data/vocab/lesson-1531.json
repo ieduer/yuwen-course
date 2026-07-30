@@ -11,145 +11,79 @@
    "id": "lesson-1531:v01",
    "word": "连锅端",
    "annotated": false,
-   "decision": "question",
-   "reason": "口语化表达，是理解侦察员工作性质的关键，易被误解为字面义",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "彻底消灭，一网打尽",
    "sourceSentence": "瞅准了机会,一下子给敌人个“连锅端”,歼灭个把小队的保安团",
-   "type": "contextual-choice",
-   "question": "文中「连锅端」一词的意思是",
-   "options": [
-    "把锅子整个端走",
-    "彻底消灭，一网打尽",
-    "把敌人围困起来",
-    "破坏敌人的炊事设施"
-   ],
-   "answerIndex": 1,
-   "explanation": "文中指侦察员通过突袭彻底消灭敌人的小部队，属于军事术语的口语化表达。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 524
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1531:v01"
   },
   {
    "id": "lesson-1531:v02",
    "word": "熨帖",
    "annotated": false,
-   "decision": "question",
-   "reason": "多义词，此处表达心理感受，考察学生在语境中理解词义的能力",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "心里舒服、妥帖",
    "sourceSentence": "在这样的时候,听到这样的歌子,心里真觉得熨帖。",
-   "type": "contextual-choice",
-   "question": "文中「熨帖」一词的意思是",
-   "options": [
-    "平整、不皱",
-    "妥当、合适",
-    "心里舒服、妥帖",
-    "压制、服从"
-   ],
-   "answerIndex": 2,
-   "explanation": "此处形容听到革命歌曲后心理得到的抚慰和安宁，是情感层面的词语。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1630
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1531:v02"
   },
   {
    "id": "lesson-1531:v03",
    "word": "屈了",
    "annotated": false,
-   "decision": "question",
-   "reason": "方言色彩浓厚，影响对人物心理和情节的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "亏待、委屈",
    "sourceSentence": "要卖嘛,自己的孩子吃根菜也算不了啥,别屈了孩子",
-   "type": "contextual-choice",
-   "question": "文中「别屈了孩子」中的「屈」的意思是",
-   "options": [
-    "弯曲",
-    "压服",
-    "亏待、委屈",
-    "折磨"
-   ],
-   "answerIndex": 2,
-   "explanation": "此处表达母亲对孩子因贫穷和斗争而受苦的愧疚与心疼。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4352
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1531:v03"
   },
   {
    "id": "lesson-1531:v04",
    "word": "好歹",
    "annotated": false,
-   "decision": "question",
-   "reason": "多义词，此处语境义特殊，是理解情节转折的关键",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "意外、不幸（指生命安全受威胁）",
    "sourceSentence": "万一我有个什么好歹,八角坳的党组织还在",
-   "type": "contextual-choice",
-   "question": "文中「万一我有个什么好歹」中「好歹」的意思是",
-   "options": [
-    "好坏",
-    "无论如何",
-    "意外、不幸",
-    "事情的结局"
-   ],
-   "answerIndex": 2,
-   "explanation": "在特定语境中，好歹常指遭遇灾祸或牺牲。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 5113
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1531:v04"
   },
   {
    "id": "lesson-1531:v05",
    "word": "禁折磨",
    "annotated": false,
-   "decision": "question",
-   "reason": "易误解为字面义，考察对人物状态的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "经得起困苦、苦难",
    "sourceSentence": "妞儿不如大人禁折磨,比她妈瘦得还厉害",
-   "type": "contextual-choice",
-   "question": "文中「妞儿不如大人禁折磨」中的「禁」读音及意思正确的一项是",
-   "options": [
-    "jìn，禁止",
-    "jīn，能够承受",
-    "jìn，承受",
-    "jīn，限制"
-   ],
-   "answerIndex": 1,
-   "explanation": "「禁」在此处读 jīn，意为承受，形容孩子身体虚弱，经不起苦难。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4081
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1531:v05"
   },
   {
    "id": "lesson-1531:v06",
    "word": "瞅空子",
    "annotated": false,
-   "decision": "question",
-   "reason": "常见口语，考察语境应用",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "寻找机会",
    "sourceSentence": "当时,我们一面瞅空子打击敌人,一面通过一条条看不见的交通线",
-   "type": "substitution",
-   "question": "下列词语中，哪一个替换原文中的「瞅空子」后语义最接近？",
-   "options": [
-    "看热闹",
-    "钻空隙",
-    "找机会",
-    "闲暇时"
-   ],
-   "answerIndex": 2,
-   "explanation": "「瞅空子」即伺机行动，寻找打击敌人的时机。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 314
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1531:v06"
   },
   {
    "id": "lesson-1531:v07",
@@ -175,5 +109,225 @@
     "charIndex": 851
    }
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1531:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1531:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "6074b89e9beaab86f0d8aa83448fc2da17656c1d6b50470ec0fa1515ef1ce42d",
+   "formerItem": {
+    "id": "lesson-1531:v01",
+    "word": "连锅端",
+    "annotated": false,
+    "decision": "question",
+    "reason": "口语化表达，是理解侦察员工作性质的关键，易被误解为字面义",
+    "contextMeaning": "彻底消灭，一网打尽",
+    "sourceSentence": "瞅准了机会,一下子给敌人个“连锅端”,歼灭个把小队的保安团",
+    "type": "contextual-choice",
+    "question": "文中「连锅端」一词的意思是",
+    "options": [
+     "把锅子整个端走",
+     "彻底消灭，一网打尽",
+     "把敌人围困起来",
+     "破坏敌人的炊事设施"
+    ],
+    "answerIndex": 1,
+    "explanation": "文中指侦察员通过突袭彻底消灭敌人的小部队，属于军事术语的口语化表达。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 524
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1531:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1531:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "79bdae916a6c1ba835e15256a17f5a4dab7e8bac38c310a476db6b79aabe2b08",
+   "formerItem": {
+    "id": "lesson-1531:v02",
+    "word": "熨帖",
+    "annotated": false,
+    "decision": "question",
+    "reason": "多义词，此处表达心理感受，考察学生在语境中理解词义的能力",
+    "contextMeaning": "心里舒服、妥帖",
+    "sourceSentence": "在这样的时候,听到这样的歌子,心里真觉得熨帖。",
+    "type": "contextual-choice",
+    "question": "文中「熨帖」一词的意思是",
+    "options": [
+     "平整、不皱",
+     "妥当、合适",
+     "心里舒服、妥帖",
+     "压制、服从"
+    ],
+    "answerIndex": 2,
+    "explanation": "此处形容听到革命歌曲后心理得到的抚慰和安宁，是情感层面的词语。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1630
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1531:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1531:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "c9126e18631c76c3d6e834a1feb8c3b5847509a66005801d8f39d50cd811df48",
+   "formerItem": {
+    "id": "lesson-1531:v03",
+    "word": "屈了",
+    "annotated": false,
+    "decision": "question",
+    "reason": "方言色彩浓厚，影响对人物心理和情节的理解",
+    "contextMeaning": "亏待、委屈",
+    "sourceSentence": "要卖嘛,自己的孩子吃根菜也算不了啥,别屈了孩子",
+    "type": "contextual-choice",
+    "question": "文中「别屈了孩子」中的「屈」的意思是",
+    "options": [
+     "弯曲",
+     "压服",
+     "亏待、委屈",
+     "折磨"
+    ],
+    "answerIndex": 2,
+    "explanation": "此处表达母亲对孩子因贫穷和斗争而受苦的愧疚与心疼。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4352
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1531:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1531:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "59d9c106c0df106b72997aac9a49b0e2a4e2aa6667d02f04eb98196f068995b5",
+   "formerItem": {
+    "id": "lesson-1531:v04",
+    "word": "好歹",
+    "annotated": false,
+    "decision": "question",
+    "reason": "多义词，此处语境义特殊，是理解情节转折的关键",
+    "contextMeaning": "意外、不幸（指生命安全受威胁）",
+    "sourceSentence": "万一我有个什么好歹,八角坳的党组织还在",
+    "type": "contextual-choice",
+    "question": "文中「万一我有个什么好歹」中「好歹」的意思是",
+    "options": [
+     "好坏",
+     "无论如何",
+     "意外、不幸",
+     "事情的结局"
+    ],
+    "answerIndex": 2,
+    "explanation": "在特定语境中，好歹常指遭遇灾祸或牺牲。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 5113
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1531:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1531:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "b4594b2d2274cf0da77f5c798f17eb9f2a40cca4ed99a1d3ed31428430fef211",
+   "formerItem": {
+    "id": "lesson-1531:v05",
+    "word": "禁折磨",
+    "annotated": false,
+    "decision": "question",
+    "reason": "易误解为字面义，考察对人物状态的理解",
+    "contextMeaning": "经得起困苦、苦难",
+    "sourceSentence": "妞儿不如大人禁折磨,比她妈瘦得还厉害",
+    "type": "contextual-choice",
+    "question": "文中「妞儿不如大人禁折磨」中的「禁」读音及意思正确的一项是",
+    "options": [
+     "jìn，禁止",
+     "jīn，能够承受",
+     "jìn，承受",
+     "jīn，限制"
+    ],
+    "answerIndex": 1,
+    "explanation": "「禁」在此处读 jīn，意为承受，形容孩子身体虚弱，经不起苦难。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4081
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1531:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1531:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "ad9e57eb87f33253f1bc3aec93aba160f3e58de710e9e220e13b7d1bdb5451a4",
+   "formerItem": {
+    "id": "lesson-1531:v06",
+    "word": "瞅空子",
+    "annotated": false,
+    "decision": "question",
+    "reason": "常见口语，考察语境应用",
+    "contextMeaning": "寻找机会",
+    "sourceSentence": "当时,我们一面瞅空子打击敌人,一面通过一条条看不见的交通线",
+    "type": "substitution",
+    "question": "下列词语中，哪一个替换原文中的「瞅空子」后语义最接近？",
+    "options": [
+     "看热闹",
+     "钻空隙",
+     "找机会",
+     "闲暇时"
+    ],
+    "answerIndex": 2,
+    "explanation": "「瞅空子」即伺机行动，寻找打击敌人的时机。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 314
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

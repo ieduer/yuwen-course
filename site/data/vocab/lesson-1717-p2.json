@@ -47,27 +47,14 @@
    "id": "lesson-1717-p2:v04",
    "word": "田田",
    "annotated": true,
-   "decision": "question",
-   "reason": "涉及典故与叠词修辞，直接影响对荷叶意象的理解，是高频考点。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容荷叶相连的样子",
    "sourceSentence": "曲曲折折的荷塘上面，弥望 的是田田 的叶子",
-   "type": "interpretation",
-   "question": "「弥望的是田田的叶子」中「田田」一词的理解，下列说法正确的是：",
-   "options": [
-    "形容荷叶像田地一样方正",
-    "借用古诗词，形容荷叶相连茂盛的样子",
-    "形容荷叶在风中摇曳的声音",
-    "形容荷叶在月光下呈现的田字格纹路"
-   ],
-   "answerIndex": 1,
-   "explanation": "「田田」出自汉乐府《江南》，形容莲叶茂密相连，是文学常识与意象理解的结合。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "汉乐府《江南》"
-   ],
    "location": {
     "charIndex": 394
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1717-p2:v04"
   },
   {
    "id": "lesson-1717-p2:v05",
@@ -85,193 +72,105 @@
    "id": "lesson-1717-p2:v06",
    "word": "脉脉",
    "annotated": true,
-   "decision": "question",
-   "reason": "多义词，此处语境义（无声）与常见义（含情）易混，考察语境辨析能力。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "默默，无声",
    "sourceSentence": "叶子底下是脉脉 的流水，遮住了，不能见一些颜色；而叶子却更见风致 了",
-   "type": "contextual-choice",
-   "question": "文中「叶子底下是脉脉的流水」中「脉脉」的含义是：",
-   "options": [
-    "形容流水含情凝视的样子",
-    "形容流水断断续续的样子",
-    "形容流水没有声音，默默流淌",
-    "形容流水清澈见底的样子"
-   ],
-   "answerIndex": 2,
-   "explanation": "「脉脉」在文中形容水没有声音，与通常指含情脉脉的用法不同。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 583
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1717-p2:v06"
   },
   {
    "id": "lesson-1717-p2:v07",
    "word": "风致",
    "annotated": true,
-   "decision": "question",
-   "reason": "文言词汇在现代散文中的运用，考察语境义的推导。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "美的姿态",
    "sourceSentence": "叶子底下是脉脉 的流水，遮住了，不能见一些颜色；而叶子却更见风致 了",
-   "type": "contextual-choice",
-   "question": "下列选项中「风致」的解释，最符合语境的一项是：",
-   "options": [
-    "风的吹拂",
-    "美的姿态",
-    "风俗习惯",
-    "风度气质"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处形容叶子在流水映衬下更具美的姿态。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 583
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1717-p2:v07"
   },
   {
    "id": "lesson-1717-p2:v08",
    "word": "一例",
    "annotated": true,
-   "decision": "question",
-   "reason": "易误解为「一个例子」，考察语境义辨析。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "一概，一律",
    "sourceSentence": "树色一例 是阴阴的，乍看像一团烟雾；但杨柳的丰姿，便在烟雾里也辨得出",
-   "type": "contextual-choice",
-   "question": "文中「树色一例是阴阴的」中「一例」的意思是：",
-   "options": [
-    "一个例子",
-    "一律、一概",
-    "排列整齐",
-    "一种比例"
-   ],
-   "answerIndex": 1,
-   "explanation": "「一例」在此处表示树色全都一样阴暗，不能误解为例子。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 887
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1717-p2:v08"
   },
   {
    "id": "lesson-1717-p2:v09",
    "word": "风流",
    "annotated": true,
-   "decision": "question",
-   "reason": "古今异义高频考点，现代语境常含贬义，文中为褒义或中性，考察迁移能力。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "年轻男女不拘礼法地表露爱情",
    "sourceSentence": "那是一个热闹的季节，也是一个风流 的季节",
-   "type": "gu-jin",
-   "question": "文中「那是一个热闹的季节，也是一个风流的季节」中「风流」一词，下列理解正确的是：",
-   "options": [
-    "形容季节风大，流动快",
-    "指那个时代年轻男女自由表露爱情的习俗",
-    "指那个时代的人行为放荡，不守礼法",
-    "指那个时代文人墨客的才华横溢"
-   ],
-   "answerIndex": 1,
-   "explanation": "「风流」在此处指当时男女自由表露爱情的社会风尚，是古义。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1097
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1717-p2:v09"
   },
   {
    "id": "lesson-1717-p2:v10",
    "word": "消受",
    "annotated": true,
-   "decision": "question",
-   "reason": "考察对词语搭配及语境情感色彩的理解。",
+   "decision": "excluded",
+   "reason": "经人工复核移除：「消受」只要求選出同義常用詞「享受」，與同課已下架的「受用」屬同一低增量層級。",
    "contextMeaning": "享受",
    "sourceSentence": "这真是有趣的事，可惜我们现在早已无福消受 了",
-   "type": "contextual-choice",
-   "question": "文中「可惜我们现在早已无福消受了」中「消受」的含义是：",
-   "options": [
-    "忍受",
-    "承受",
-    "享受",
-    "接受"
-   ],
-   "answerIndex": 2,
-   "explanation": "「消受」多用于否定式，此处意为享受。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1224
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260730-independent-quality-v1:lesson-1717-p2:v10"
   },
   {
    "id": "lesson-1717-p2:v11",
    "word": "参差",
    "annotated": false,
-   "decision": "question",
-   "reason": "描写性词汇，对营造意境至关重要，考察对景物形态的理解。",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
    "contextMeaning": "长短、高低、大小不齐",
    "sourceSentence": "高处丛生的灌木，落下参差的斑驳的黑影，峭楞楞如鬼一般；",
-   "type": "contextual-choice",
-   "question": "文中「落下参差的斑驳的黑影」中「参差」的含义是：",
-   "options": [
-    "整齐划一",
-    "长短、高低不齐",
-    "极其稀疏",
-    "深浅不一"
-   ],
-   "answerIndex": 1,
-   "explanation": "「参差」形容灌木投下的影子高低长短不一。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 741
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1717-p2:v11"
   },
   {
    "id": "lesson-1717-p2:v12",
    "word": "大意",
    "annotated": false,
-   "decision": "question",
-   "reason": "多义词，此处语境与「主要内容」义不同，极易误解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "大概的轮廓或样子",
    "sourceSentence": "树梢上隐隐约约的是一带远山，只有些大意罢了。",
-   "type": "contextual-choice",
-   "question": "文中「只有些大意罢了」中「大意」的含义是：",
-   "options": [
-    "粗心大意",
-    "主要的意思",
-    "大概的轮廓",
-    "特别的注意"
-   ],
-   "answerIndex": 2,
-   "explanation": "此处指远山在夜色中只能看到大概的轮廓。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 922
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1717-p2:v12"
   },
   {
    "id": "lesson-1717-p2:v13",
    "word": "受用",
    "annotated": false,
-   "decision": "question",
-   "reason": "考察动词在文中的语境义，对理解作者心境有帮助。",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
    "contextMeaning": "享受",
    "sourceSentence": "这是独处的妙处，我且受用这无边的荷香月色好了。",
-   "type": "contextual-choice",
-   "question": "文中「我且受用这无边的荷香月色好了」中「受用」的含义是：",
-   "options": [
-    "利用",
-    "享受",
-    "承受",
-    "受用不尽"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处表示作者在独处时享受自然美景。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 370
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1717-p2:v13"
   },
   {
    "id": "lesson-1717-p2:v14",
@@ -372,5 +271,334 @@
    "contextMeaning": "南朝乐府诗，描写青年女子思念意中人的痛苦。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1717-p2:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1717-p2:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "505d4261da18cb5140f9b8a94502e7a9fb1430096356acab45b84dc559405cc8",
+   "formerItem": {
+    "id": "lesson-1717-p2:v04",
+    "word": "田田",
+    "annotated": true,
+    "decision": "question",
+    "reason": "涉及典故与叠词修辞，直接影响对荷叶意象的理解，是高频考点。",
+    "contextMeaning": "形容荷叶相连的样子",
+    "sourceSentence": "曲曲折折的荷塘上面，弥望 的是田田 的叶子",
+    "type": "interpretation",
+    "question": "「弥望的是田田的叶子」中「田田」一词的理解，下列说法正确的是：",
+    "options": [
+     "形容荷叶像田地一样方正",
+     "借用古诗词，形容荷叶相连茂盛的样子",
+     "形容荷叶在风中摇曳的声音",
+     "形容荷叶在月光下呈现的田字格纹路"
+    ],
+    "answerIndex": 1,
+    "explanation": "「田田」出自汉乐府《江南》，形容莲叶茂密相连，是文学常识与意象理解的结合。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "汉乐府《江南》"
+    ],
+    "location": {
+     "charIndex": 394
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1717-p2:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1717-p2:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a1455c0f824766ed15d899c39d8b9416742e90a69f5758872dde7a1385733d81",
+   "formerItem": {
+    "id": "lesson-1717-p2:v06",
+    "word": "脉脉",
+    "annotated": true,
+    "decision": "question",
+    "reason": "多义词，此处语境义（无声）与常见义（含情）易混，考察语境辨析能力。",
+    "contextMeaning": "默默，无声",
+    "sourceSentence": "叶子底下是脉脉 的流水，遮住了，不能见一些颜色；而叶子却更见风致 了",
+    "type": "contextual-choice",
+    "question": "文中「叶子底下是脉脉的流水」中「脉脉」的含义是：",
+    "options": [
+     "形容流水含情凝视的样子",
+     "形容流水断断续续的样子",
+     "形容流水没有声音，默默流淌",
+     "形容流水清澈见底的样子"
+    ],
+    "answerIndex": 2,
+    "explanation": "「脉脉」在文中形容水没有声音，与通常指含情脉脉的用法不同。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 583
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1717-p2:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1717-p2:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "3f73b78532546d16c758fa52e2da20f831add08b5bea2fdf4839f755bf7e8b50",
+   "formerItem": {
+    "id": "lesson-1717-p2:v07",
+    "word": "风致",
+    "annotated": true,
+    "decision": "question",
+    "reason": "文言词汇在现代散文中的运用，考察语境义的推导。",
+    "contextMeaning": "美的姿态",
+    "sourceSentence": "叶子底下是脉脉 的流水，遮住了，不能见一些颜色；而叶子却更见风致 了",
+    "type": "contextual-choice",
+    "question": "下列选项中「风致」的解释，最符合语境的一项是：",
+    "options": [
+     "风的吹拂",
+     "美的姿态",
+     "风俗习惯",
+     "风度气质"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处形容叶子在流水映衬下更具美的姿态。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 583
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1717-p2:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1717-p2:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a3f63d73cedde261fa0367764611fe2786e820259800bb0855b1d411ebddc491",
+   "formerItem": {
+    "id": "lesson-1717-p2:v08",
+    "word": "一例",
+    "annotated": true,
+    "decision": "question",
+    "reason": "易误解为「一个例子」，考察语境义辨析。",
+    "contextMeaning": "一概，一律",
+    "sourceSentence": "树色一例 是阴阴的，乍看像一团烟雾；但杨柳的丰姿，便在烟雾里也辨得出",
+    "type": "contextual-choice",
+    "question": "文中「树色一例是阴阴的」中「一例」的意思是：",
+    "options": [
+     "一个例子",
+     "一律、一概",
+     "排列整齐",
+     "一种比例"
+    ],
+    "answerIndex": 1,
+    "explanation": "「一例」在此处表示树色全都一样阴暗，不能误解为例子。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 887
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1717-p2:v09",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1717-p2:v09",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "c804901d4ecfcd67546bd20a600c17013eebc5936669d61b790dd09d5c515e1c",
+   "formerItem": {
+    "id": "lesson-1717-p2:v09",
+    "word": "风流",
+    "annotated": true,
+    "decision": "question",
+    "reason": "古今异义高频考点，现代语境常含贬义，文中为褒义或中性，考察迁移能力。",
+    "contextMeaning": "年轻男女不拘礼法地表露爱情",
+    "sourceSentence": "那是一个热闹的季节，也是一个风流 的季节",
+    "type": "gu-jin",
+    "question": "文中「那是一个热闹的季节，也是一个风流的季节」中「风流」一词，下列理解正确的是：",
+    "options": [
+     "形容季节风大，流动快",
+     "指那个时代年轻男女自由表露爱情的习俗",
+     "指那个时代的人行为放荡，不守礼法",
+     "指那个时代文人墨客的才华横溢"
+    ],
+    "answerIndex": 1,
+    "explanation": "「风流」在此处指当时男女自由表露爱情的社会风尚，是古义。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1097
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260730-independent-quality-v1:lesson-1717-p2:v10",
+   "reviewId": "yw-vocab-review-20260730-independent-quality-v1",
+   "reviewedAt": "2026-07-30T00:59:29.000Z",
+   "itemId": "lesson-1717-p2:v10",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "「消受」只要求選出同義常用詞「享受」，與同課已下架的「受用」屬同一低增量層級。",
+   "sourceItemSha256": "cda4584ceadb3b167cc28b441020895887067777097473528436d3a8c9da83b4",
+   "formerItem": {
+    "id": "lesson-1717-p2:v10",
+    "word": "消受",
+    "annotated": true,
+    "decision": "question",
+    "reason": "考察对词语搭配及语境情感色彩的理解。",
+    "contextMeaning": "享受",
+    "sourceSentence": "这真是有趣的事，可惜我们现在早已无福消受 了",
+    "type": "contextual-choice",
+    "question": "文中「可惜我们现在早已无福消受了」中「消受」的含义是：",
+    "options": [
+     "忍受",
+     "承受",
+     "享受",
+     "接受"
+    ],
+    "answerIndex": 2,
+    "explanation": "「消受」多用于否定式，此处意为享受。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1224
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1717-p2:v11",
+   "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+   "reviewedAt": "2026-07-30T00:32:00.000Z",
+   "itemId": "lesson-1717-p2:v11",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
+   "sourceItemSha256": "523a8d14fdf1a8da8ffec461d739e012702fb304ffde9dbc3355403a170b5b77",
+   "formerItem": {
+    "id": "lesson-1717-p2:v11",
+    "word": "参差",
+    "annotated": false,
+    "decision": "question",
+    "reason": "描写性词汇，对营造意境至关重要，考察对景物形态的理解。",
+    "contextMeaning": "长短、高低、大小不齐",
+    "sourceSentence": "高处丛生的灌木，落下参差的斑驳的黑影，峭楞楞如鬼一般；",
+    "type": "contextual-choice",
+    "question": "文中「落下参差的斑驳的黑影」中「参差」的含义是：",
+    "options": [
+     "整齐划一",
+     "长短、高低不齐",
+     "极其稀疏",
+     "深浅不一"
+    ],
+    "answerIndex": 1,
+    "explanation": "「参差」形容灌木投下的影子高低长短不一。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 741
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1717-p2:v12",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1717-p2:v12",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "63a282c178d99fb746cf5096420f5609512b455cc9668b920cdca776c5beebe1",
+   "formerItem": {
+    "id": "lesson-1717-p2:v12",
+    "word": "大意",
+    "annotated": false,
+    "decision": "question",
+    "reason": "多义词，此处语境与「主要内容」义不同，极易误解。",
+    "contextMeaning": "大概的轮廓或样子",
+    "sourceSentence": "树梢上隐隐约约的是一带远山，只有些大意罢了。",
+    "type": "contextual-choice",
+    "question": "文中「只有些大意罢了」中「大意」的含义是：",
+    "options": [
+     "粗心大意",
+     "主要的意思",
+     "大概的轮廓",
+     "特别的注意"
+    ],
+    "answerIndex": 2,
+    "explanation": "此处指远山在夜色中只能看到大概的轮廓。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 922
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1717-p2:v13",
+   "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+   "reviewedAt": "2026-07-30T00:32:00.000Z",
+   "itemId": "lesson-1717-p2:v13",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
+   "sourceItemSha256": "d1806514e1374f98d18d019bb53048d1612206ff3b3b6f3dae9882ffd4609b33",
+   "formerItem": {
+    "id": "lesson-1717-p2:v13",
+    "word": "受用",
+    "annotated": false,
+    "decision": "question",
+    "reason": "考察动词在文中的语境义，对理解作者心境有帮助。",
+    "contextMeaning": "享受",
+    "sourceSentence": "这是独处的妙处，我且受用这无边的荷香月色好了。",
+    "type": "contextual-choice",
+    "question": "文中「我且受用这无边的荷香月色好了」中「受用」的含义是：",
+    "options": [
+     "利用",
+     "享受",
+     "承受",
+     "受用不尽"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处表示作者在独处时享受自然美景。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 370
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-review-20260729-modern-basic-meaning",
+   "yw-vocab-review-20260730-independent-quality-v1",
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

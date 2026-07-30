@@ -11,121 +11,66 @@
    "id": "lesson-1490:v01",
    "word": "斜睨",
    "annotated": false,
-   "decision": "question",
-   "reason": "文中多次出现，表现人物特有的神态，误解会影响对人物心理的把握",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "眼睛斜着看，此处指带着一种审视或不屑的目光",
    "sourceSentence": "把她那张眼睛斜睨的笑盈盈的脸凑近铁栅栏。",
-   "type": "contextual-choice",
-   "question": "文中「她那张眼睛斜睨的笑盈盈的脸」中「斜睨」一词最贴切的解释是",
-   "options": [
-    "眼睛睁得很圆",
-    "眼珠斜着看",
-    "眼睛眯成一条缝",
-    "目光呆滞无神"
-   ],
-   "answerIndex": 1,
-   "explanation": "「斜睨」意为斜着眼睛看，结合下文玛丝洛娃对聂赫留朵夫的态度，此处体现其复杂的心理状态。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 285
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1490:v01"
   },
   {
    "id": "lesson-1490:v02",
    "word": "嫣然一笑",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语，形容女子的笑容，此处与人物沦落风尘的背景形成强烈反差",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容笑容美好",
    "sourceSentence": "不过,她从衣衫上看出他是个有钱人,就嫣然一笑",
-   "type": "contextual-choice",
-   "question": "文中「就嫣然一笑」中「嫣然」最准确的含义是",
-   "options": [
-    "形容笑容美丽",
-    "形容极其虚伪",
-    "形容非常羞涩",
-    "形容充满嘲讽"
-   ],
-   "answerIndex": 0,
-   "explanation": "「嫣然」本义指女子笑得很美，此处表现玛丝洛娃在认出对方是有钱人后，下意识展现出的职业性媚态。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 251
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1490:v02"
   },
   {
    "id": "lesson-1490:v03",
    "word": "赎",
    "annotated": false,
-   "decision": "question",
-   "reason": "全篇核心词，直接关乎小说主旨「复活」的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "补偿罪过",
    "sourceSentence": "哪怕到今天我也要赎我的罪。",
-   "type": "interpretation",
-   "question": "聂赫留朵夫说「哪怕到今天我也要赎我的罪」，这里的「赎」最准确的理解是",
-   "options": [
-    "通过金钱买回被没收的财产",
-    "通过法律手段辩护脱罪",
-    "通过忏悔与行动补偿过失",
-    "通过言语道歉获得谅解"
-   ],
-   "answerIndex": 2,
-   "explanation": "「赎」在文中指道德上的自我救赎，不仅是口头道歉，更包含后续的实际行动与精神觉醒。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1789
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1490:v03"
   },
   {
    "id": "lesson-1490:v04",
    "word": "窘态毕露",
    "annotated": false,
-   "decision": "question",
-   "reason": "形容人物心理状态的词汇，对理解人物性格转变至关重要",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "尴尬的样子完全显露出来",
    "sourceSentence": "聂赫留朵夫窘态毕露地说,伸手去掏皮夹子",
-   "type": "substitution",
-   "question": "文中「聂赫留朵夫窘态毕露地说」中「窘态毕露」可以用哪个词替换而不改变句意",
-   "options": [
-    "神情自若",
-    "尴尬万分",
-    "从容不迫",
-    "大惊失色"
-   ],
-   "answerIndex": 1,
-   "explanation": "「窘」即尴尬、为难，「毕露」即完全显露，「尴尬万分」最符合语境。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2562
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1490:v04"
   },
   {
    "id": "lesson-1490:v05",
    "word": "水火不相容",
    "annotated": false,
-   "decision": "question",
-   "reason": "成语，用于描述人物间精神世界的隔阂",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "比喻两种事物不能相容，此处指两人的价值观与内心世界存在巨大鸿沟",
    "sourceSentence": "聂赫留朵夫觉得她身上有一样东西,同他水火不相容",
-   "type": "interpretation",
-   "question": "文中说「她身上有一样东西，同他水火不相容」，这句话反映了聂赫留朵夫怎样的心理",
-   "options": [
-    "厌恶玛丝洛娃的贫穷",
-    "两人在精神世界存在巨大的隔阂",
-    "玛丝洛娃对他有强烈的敌意",
-    "他认为两人身份地位悬殊"
-   ],
-   "answerIndex": 1,
-   "explanation": "「水火不相容」在此处象征两人在精神追求和生活状态上的冲突，不是简单的身份或贫富问题。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 3221
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1490:v05"
   },
   {
    "id": "lesson-1490:v06",
@@ -143,25 +88,14 @@
    "id": "lesson-1490:v07",
    "word": "漂",
    "annotated": false,
-   "decision": "question",
-   "reason": "多音字，此处易误读",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "悬浮移动",
    "sourceSentence": "乌黑的鬈发也像前天那样一圈圈飘在额上",
-   "type": "pronunciation",
-   "question": "文中「乌黑的鬈发也像前天那样一圈圈飘在额上」中的「飘」的读音应为",
-   "options": [
-    "piāo",
-    "piáo",
-    "piào",
-    "piǎo"
-   ],
-   "answerIndex": 0,
-   "explanation": "「飘」在此处读阴平，指轻盈地浮动。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1178
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1490:v07"
   },
   {
    "id": "lesson-1490:v08",
@@ -175,5 +109,225 @@
     "charIndex": 392
    }
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1490:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1490:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "36ee8114afa86b02d7945e31f69aebd0d1db912dd300d21b6982740daed6b0d2",
+   "formerItem": {
+    "id": "lesson-1490:v01",
+    "word": "斜睨",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文中多次出现，表现人物特有的神态，误解会影响对人物心理的把握",
+    "contextMeaning": "眼睛斜着看，此处指带着一种审视或不屑的目光",
+    "sourceSentence": "把她那张眼睛斜睨的笑盈盈的脸凑近铁栅栏。",
+    "type": "contextual-choice",
+    "question": "文中「她那张眼睛斜睨的笑盈盈的脸」中「斜睨」一词最贴切的解释是",
+    "options": [
+     "眼睛睁得很圆",
+     "眼珠斜着看",
+     "眼睛眯成一条缝",
+     "目光呆滞无神"
+    ],
+    "answerIndex": 1,
+    "explanation": "「斜睨」意为斜着眼睛看，结合下文玛丝洛娃对聂赫留朵夫的态度，此处体现其复杂的心理状态。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 285
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1490:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1490:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "80a440ed46e1a91c2a227097f542f0f4849459a2fee16476f67e2518f684d97c",
+   "formerItem": {
+    "id": "lesson-1490:v02",
+    "word": "嫣然一笑",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语，形容女子的笑容，此处与人物沦落风尘的背景形成强烈反差",
+    "contextMeaning": "形容笑容美好",
+    "sourceSentence": "不过,她从衣衫上看出他是个有钱人,就嫣然一笑",
+    "type": "contextual-choice",
+    "question": "文中「就嫣然一笑」中「嫣然」最准确的含义是",
+    "options": [
+     "形容笑容美丽",
+     "形容极其虚伪",
+     "形容非常羞涩",
+     "形容充满嘲讽"
+    ],
+    "answerIndex": 0,
+    "explanation": "「嫣然」本义指女子笑得很美，此处表现玛丝洛娃在认出对方是有钱人后，下意识展现出的职业性媚态。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 251
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1490:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1490:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "e0c0fd70b0a0c000003715e4d9390b1f47abfdecf16c5c62841952e19834beef",
+   "formerItem": {
+    "id": "lesson-1490:v03",
+    "word": "赎",
+    "annotated": false,
+    "decision": "question",
+    "reason": "全篇核心词，直接关乎小说主旨「复活」的理解",
+    "contextMeaning": "补偿罪过",
+    "sourceSentence": "哪怕到今天我也要赎我的罪。",
+    "type": "interpretation",
+    "question": "聂赫留朵夫说「哪怕到今天我也要赎我的罪」，这里的「赎」最准确的理解是",
+    "options": [
+     "通过金钱买回被没收的财产",
+     "通过法律手段辩护脱罪",
+     "通过忏悔与行动补偿过失",
+     "通过言语道歉获得谅解"
+    ],
+    "answerIndex": 2,
+    "explanation": "「赎」在文中指道德上的自我救赎，不仅是口头道歉，更包含后续的实际行动与精神觉醒。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1789
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1490:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1490:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "4942968143d28bd3963f1ed9463946f3feb2a27cac07a587a0dfd70b7fca9302",
+   "formerItem": {
+    "id": "lesson-1490:v04",
+    "word": "窘态毕露",
+    "annotated": false,
+    "decision": "question",
+    "reason": "形容人物心理状态的词汇，对理解人物性格转变至关重要",
+    "contextMeaning": "尴尬的样子完全显露出来",
+    "sourceSentence": "聂赫留朵夫窘态毕露地说,伸手去掏皮夹子",
+    "type": "substitution",
+    "question": "文中「聂赫留朵夫窘态毕露地说」中「窘态毕露」可以用哪个词替换而不改变句意",
+    "options": [
+     "神情自若",
+     "尴尬万分",
+     "从容不迫",
+     "大惊失色"
+    ],
+    "answerIndex": 1,
+    "explanation": "「窘」即尴尬、为难，「毕露」即完全显露，「尴尬万分」最符合语境。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2562
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1490:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1490:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "c7d638f01d01ecd690f8cc6d501dcb2107e80da0eb54d13f8e767415603306ba",
+   "formerItem": {
+    "id": "lesson-1490:v05",
+    "word": "水火不相容",
+    "annotated": false,
+    "decision": "question",
+    "reason": "成语，用于描述人物间精神世界的隔阂",
+    "contextMeaning": "比喻两种事物不能相容，此处指两人的价值观与内心世界存在巨大鸿沟",
+    "sourceSentence": "聂赫留朵夫觉得她身上有一样东西,同他水火不相容",
+    "type": "interpretation",
+    "question": "文中说「她身上有一样东西，同他水火不相容」，这句话反映了聂赫留朵夫怎样的心理",
+    "options": [
+     "厌恶玛丝洛娃的贫穷",
+     "两人在精神世界存在巨大的隔阂",
+     "玛丝洛娃对他有强烈的敌意",
+     "他认为两人身份地位悬殊"
+    ],
+    "answerIndex": 1,
+    "explanation": "「水火不相容」在此处象征两人在精神追求和生活状态上的冲突，不是简单的身份或贫富问题。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 3221
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1490:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1490:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "6c3af82f971eefba69e32667aed5be3dfb8e0a521c0217187500dc9c2502618c",
+   "formerItem": {
+    "id": "lesson-1490:v07",
+    "word": "漂",
+    "annotated": false,
+    "decision": "question",
+    "reason": "多音字，此处易误读",
+    "contextMeaning": "悬浮移动",
+    "sourceSentence": "乌黑的鬈发也像前天那样一圈圈飘在额上",
+    "type": "pronunciation",
+    "question": "文中「乌黑的鬈发也像前天那样一圈圈飘在额上」中的「飘」的读音应为",
+    "options": [
+     "piāo",
+     "piáo",
+     "piào",
+     "piǎo"
+    ],
+    "answerIndex": 0,
+    "explanation": "「飘」在此处读阴平，指轻盈地浮动。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1178
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

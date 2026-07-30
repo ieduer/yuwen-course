@@ -26,7 +26,9 @@
    "answerIndex": 1,
    "explanation": "典押即把财产作价抵给别人换钱。连一丈平方的园地都被典押，写尽大堰河一家的赤贫。",
    "difficulty": 1,
-   "sourceRefs": ["《现代汉语词典》"]
+   "sourceRefs": [
+    "《现代汉语词典》"
+   ]
   },
   {
    "id": "lesson-1567:v02",
@@ -47,7 +49,9 @@
    "answerIndex": 0,
    "explanation": "忸怩读 niǔ ní，指羞惭、局促不自在。「我」回到亲生父母家反而拘束如新客，与在大堰河怀里的自然温暖形成对照。",
    "difficulty": 2,
-   "sourceRefs": ["《现代汉语词典》"]
+   "sourceRefs": [
+    "《现代汉语词典》"
+   ]
   },
   {
    "id": "lesson-1567:v03",
@@ -68,7 +72,9 @@
    "answerIndex": 2,
    "explanation": "「天伦叙乐」指家人团聚之乐；「不认得」既是字面的不识，更是情感上的不识——真正给过「我」母爱的是大堰河，不是这块匾下的家。",
    "difficulty": 3,
-   "sourceRefs": ["《汉语大词典》"]
+   "sourceRefs": [
+    "《汉语大词典》"
+   ]
   },
   {
    "id": "lesson-1567:v04",
@@ -89,7 +95,9 @@
    "answerIndex": 1,
    "explanation": "凌侮即欺凌侮辱。大堰河带着四十几年被欺凌的一生入土，只有四块钱的棺材与几束稻草，是对旧世界最沉痛的控诉。",
    "difficulty": 1,
-   "sourceRefs": ["《汉语大词典》"]
+   "sourceRefs": [
+    "《汉语大词典》"
+   ]
   },
   {
    "id": "lesson-1567:v05",
@@ -110,7 +118,9 @@
    "answerIndex": 1,
    "explanation": "「咒语」在此是比喻：把控诉旧世界的诗当作诅咒它的语言。与结尾「赞美诗」相对——诅咒不公道的世界，赞美大堰河般的人。",
    "difficulty": 2,
-   "sourceRefs": ["《现代汉语词典》"]
+   "sourceRefs": [
+    "《现代汉语词典》"
+   ]
   },
   {
    "id": "lesson-1567:v06",
@@ -131,7 +141,9 @@
    "answerIndex": 0,
    "explanation": "叱骂即大声呵斥责骂，直接、粗暴；不同于含讥带讽的「冷嘲热讽」，更不是好意的「劝诫」。一词写出学徒与雇工的屈辱日常。",
    "difficulty": 2,
-   "sourceRefs": ["《现代汉语词典》"]
+   "sourceRefs": [
+    "《现代汉语词典》"
+   ]
   },
   {
    "id": "lesson-1567:v07",
@@ -152,7 +164,9 @@
    "answerIndex": 1,
    "explanation": "教材注：瓦菲指生长在瓦缝中的野草。连瓦菲都枯死了，故居的死寂荒凉便有了具体的着落。",
    "difficulty": 1,
-   "sourceRefs": ["统编教材选择性必修下册注释"]
+   "sourceRefs": [
+    "统编教材选择性必修下册注释"
+   ]
   },
   {
    "id": "lesson-1567:v08",
@@ -173,7 +187,10 @@
    "answerIndex": 0,
    "explanation": "钵读 bō，陶制器具，形状像盆而小；火钵即盛炭火取暖的瓦盆。教材文末有注。",
    "difficulty": 1,
-   "sourceRefs": ["统编教材选择性必修下册注释", "《现代汉语词典》"]
+   "sourceRefs": [
+    "统编教材选择性必修下册注释",
+    "《现代汉语词典》"
+   ]
   },
   {
    "id": "lesson-1567:v09",
@@ -193,5 +210,7 @@
    "contextMeaning": "即糯米，也叫“江米”",
    "sourceSentence": "为了他,忙着切那冬米的糖"
   }
- ]
+ ],
+ "questionTombstones": [],
+ "questionSetVersion": "vocab-set-b7f52c9d34fb738e"
 }

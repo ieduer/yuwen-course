@@ -1,0 +1,3156 @@
+{
+  "schemaVersion": "yw-reader-media-receipts-v1",
+  "ledgerVersion": "2026-07-30.2",
+  "readerSemanticDigest": "sha256:d63a2d1ff847318cda6ec87791afe01c5051a102bf73d7e373901c4d6497f9e0",
+  "sourceInventorySha256": "2c7672e88dc8e1bb0ea1e4af84e59ccaf521ded73e774e35c03abd5547f69d03",
+  "rightsBasis": "user-authorized-course-source-use-2026-07-29",
+  "receiptCount": 165,
+  "totalBytes": 28066373,
+  "receipts": [
+    {
+      "sourceUrl": "https://files.rdfzer.com/optimized/2X/9/9d42a1fdd5200e4f7eb6c6de7c61c126bf6b0567_2_14399x959.jpeg",
+      "finalUrl": "https://files.rdfzer.com/optimized/2X/9/9d42a1fdd5200e4f7eb6c6de7c61c126bf6b0567_2_14399x959.jpeg",
+      "bytes": 4205068,
+      "sha256": "09991329a514b1a7d2a04528a4eec9937fdeb79b1a7a92c0c0b1cedc01fbb6e6",
+      "mime": "image/jpeg",
+      "width": 14399,
+      "height": 959,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1483",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/0/01569f077e453eeb8c38fc45d32c3789a5aaf5a7.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/0/01569f077e453eeb8c38fc45d32c3789a5aaf5a7.jpeg",
+      "bytes": 61952,
+      "sha256": "c484b8b3f27db80e10f3b1cbf53bec282dd68f36854acdae9f5b38ae9afdf467",
+      "mime": "image/jpeg",
+      "width": 624,
+      "height": 224,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1719-p1",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/0/04ef98aa6e415b75889db96f07aaa8f289d4bd67.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/0/04ef98aa6e415b75889db96f07aaa8f289d4bd67.jpeg",
+      "bytes": 133922,
+      "sha256": "8afe2c5b5ca73625782b3d0efc102d6d1c3613b3ef50799f5ae31a902af41b20",
+      "mime": "image/jpeg",
+      "width": 625,
+      "height": 437,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1468",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/0/0822f680199d6db8363654ce22b632d25e780cb4.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/0/0822f680199d6db8363654ce22b632d25e780cb4.png",
+      "bytes": 96407,
+      "sha256": "688cd1d5b5e470515789ff65b9f185775ea96fac48be93aeb26564d6e8ce2d7b",
+      "mime": "image/png",
+      "width": 952,
+      "height": 692,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1729",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/0/086ebcc20278d9ff6c8037eae1a083a807cd3e26.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/0/086ebcc20278d9ff6c8037eae1a083a807cd3e26.png",
+      "bytes": 421732,
+      "sha256": "6ca16d0ee593d2f9f1b2330f3e52a7e649824b98232c09d255a3ccc6b39dfbc6",
+      "mime": "image/png",
+      "width": 1280,
+      "height": 828,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1589",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/0/0b28e37c7a77efef00a90a1fcb87c4b844dace6c.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/0/0b28e37c7a77efef00a90a1fcb87c4b844dace6c.jpeg",
+      "bytes": 77860,
+      "sha256": "20a3154254471408c71817925792eccd2842d6f29398d43570c6805f651e6179",
+      "mime": "image/jpeg",
+      "width": 500,
+      "height": 360,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1585",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/0/0b7e23df006920964ad969de140a93738b0a3b8f.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/0/0b7e23df006920964ad969de140a93738b0a3b8f.jpeg",
+      "bytes": 231317,
+      "sha256": "a5f8f82778f86eb5a1695957d00f0e6e4702ab9a83f545bc14b9e8b3e28bb6ed",
+      "mime": "image/jpeg",
+      "width": 676,
+      "height": 950,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1746",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/0/0ca1004e83b8951e5dff196aa1544594a585e5fc.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/0/0ca1004e83b8951e5dff196aa1544594a585e5fc.jpeg",
+      "bytes": 112303,
+      "sha256": "99bfa65228743d4e8cc184b8a0ed6d58204a911147e0b0ebb90f9a12373b7b1e",
+      "mime": "image/jpeg",
+      "width": 806,
+      "height": 539,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1554",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/0/0d5a9397daf23fcec54dab3e75e0d3c0b28fbd92.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/0/0d5a9397daf23fcec54dab3e75e0d3c0b28fbd92.jpeg",
+      "bytes": 73177,
+      "sha256": "f7d0dc3a95c8714b2dbbd82d7a35438b23dec12712d8118353db08bbcb82e7ec",
+      "mime": "image/jpeg",
+      "width": 456,
+      "height": 302,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1578",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/0/0d8eafa53be5765819f8bffdbe9deb8a023866d2.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/0/0d8eafa53be5765819f8bffdbe9deb8a023866d2.jpeg",
+      "bytes": 74603,
+      "sha256": "0dd558860563bb372a2b19ee9a569d130778304fae537841f8711864116329fc",
+      "mime": "image/jpeg",
+      "width": 888,
+      "height": 527,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1747",
+          "role": "supplementary",
+          "postNumber": 2
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/1/107729110b61d092df555e2ce1276098f0217c9b.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/1/107729110b61d092df555e2ce1276098f0217c9b.jpeg",
+      "bytes": 30918,
+      "sha256": "9f2f6c9d61bf308fc65070191b1f0bfe97793516f4ee65ca32126dfa9b64c56c",
+      "mime": "image/jpeg",
+      "width": 175,
+      "height": 530,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1719-p2",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/1/1078bd71d67e8eda224ffa37eac09e7b45276994.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/1/1078bd71d67e8eda224ffa37eac09e7b45276994.png",
+      "bytes": 34126,
+      "sha256": "c823c69f97c0974d91fbfa601de10c4a4d36899324f1243d326bf3a961c502e5",
+      "mime": "image/png",
+      "width": 800,
+      "height": 1128,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1560",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/1/10a8e3f2c27b344dcdf588eab7f8ed15ac20bb61.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/1/10a8e3f2c27b344dcdf588eab7f8ed15ac20bb61.jpeg",
+      "bytes": 62567,
+      "sha256": "e502d3a158d204dcfd032887d6e317c909b1e91fa3804dac876e2ccf8f6f4d67",
+      "mime": "image/jpeg",
+      "width": 537,
+      "height": 315,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1699",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/1/112e8f525e5b4b86bc6a0b0ba1da11b75faaf4e7.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/1/112e8f525e5b4b86bc6a0b0ba1da11b75faaf4e7.jpeg",
+      "bytes": 81497,
+      "sha256": "f4cce5e98f01a976116b58d691a11b4d0d2edaa3f5e699a67af7a8e1836c933f",
+      "mime": "image/jpeg",
+      "width": 500,
+      "height": 282,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1520",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/1/13e1fa74c5de99516a2f25a6eaa2c8c60c1885b6.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/1/13e1fa74c5de99516a2f25a6eaa2c8c60c1885b6.jpeg",
+      "bytes": 171540,
+      "sha256": "8b3c891eab5584a804117c9ab42c5fd71209c8e48f12e0f511d0e9026c643470",
+      "mime": "image/jpeg",
+      "width": 416,
+      "height": 798,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1581",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/1/16b20e3d39de422c80693694dcfa0dcbd561a558.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/1/16b20e3d39de422c80693694dcfa0dcbd561a558.jpeg",
+      "bytes": 237767,
+      "sha256": "2f816698cd59e056990340b95f53180c6ccb2bc91c93d521c9fda69b3ab6d2dc",
+      "mime": "image/jpeg",
+      "width": 1280,
+      "height": 950,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1590",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/1/1862dcd1e4c4bf321d1d246de3703955476dff6c.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/1/1862dcd1e4c4bf321d1d246de3703955476dff6c.jpeg",
+      "bytes": 146690,
+      "sha256": "b1a677426d264c8b43c72977210724939b13fab7aa90152c7ca95560f559fe84",
+      "mime": "image/jpeg",
+      "width": 709,
+      "height": 479,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1737",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/1/192ae5bb3819240caa7c075bfcbddb8542e90eda.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/1/192ae5bb3819240caa7c075bfcbddb8542e90eda.jpeg",
+      "bytes": 244541,
+      "sha256": "25ef5315df68dc354bcdfeaa953626f7020e63882192019657b9c1ff523364bd",
+      "mime": "image/jpeg",
+      "width": 1655,
+      "height": 980,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1556",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/1/1b0819f912a982e09f1475d5ee9b84752527b339.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/1/1b0819f912a982e09f1475d5ee9b84752527b339.jpeg",
+      "bytes": 11672,
+      "sha256": "6e58d027cdf0eedd5891047bf45a560204d78d141c9b6b5e0386137640a8acb7",
+      "mime": "image/jpeg",
+      "width": 480,
+      "height": 360,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1458",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/1/1bac4f8953a14915c3fac69ea4f7c8e09fb8e2ba.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/1/1bac4f8953a14915c3fac69ea4f7c8e09fb8e2ba.jpeg",
+      "bytes": 471434,
+      "sha256": "82a8330a0d141680f04e181bad918c2d019f4b8a30d515ec73c1169b4d3d1205",
+      "mime": "image/jpeg",
+      "width": 957,
+      "height": 758,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1737",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/1/1ec1db67aeafc3f5e5f02dc663ad362c04359fe5.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/1/1ec1db67aeafc3f5e5f02dc663ad362c04359fe5.jpeg",
+      "bytes": 458657,
+      "sha256": "c0ac6415e4fa0f2e12efe285f7d6a60b6da29d07a488ef9ff6899d1f865a720c",
+      "mime": "image/jpeg",
+      "width": 1280,
+      "height": 1987,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1590",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/1/1f32431e8a75c16965f8224b5f8168a75a6b495a.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/1/1f32431e8a75c16965f8224b5f8168a75a6b495a.jpeg",
+      "bytes": 163943,
+      "sha256": "428d256de7bc0755b23a4196a1e0922b5fc9f570efd522f4dbdf3408c4d55d08",
+      "mime": "image/jpeg",
+      "width": 626,
+      "height": 789,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1458",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/2/27097b149275120c07fa03b6d8c7ac2a0ad20f8d.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/2/27097b149275120c07fa03b6d8c7ac2a0ad20f8d.jpeg",
+      "bytes": 163494,
+      "sha256": "9ca674de13cb8dab251817caaad6e6fe2cd668f0989b2ca3b013e60b93cd2e67",
+      "mime": "image/jpeg",
+      "width": 1701,
+      "height": 2386,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1745",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/2/27d5022c4a925658b21c69b65e15ace879382193.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/2/27d5022c4a925658b21c69b65e15ace879382193.png",
+      "bytes": 36974,
+      "sha256": "00aa4f8ca12078610795ebfcca6ae8fa696492a7650906b7262c5e21fbed7bd1",
+      "mime": "image/png",
+      "width": 800,
+      "height": 1114,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1476",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/2/28784ebf47ce1e2be75ef5654a9b895f02cb9b0f.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/2/28784ebf47ce1e2be75ef5654a9b895f02cb9b0f.jpeg",
+      "bytes": 119658,
+      "sha256": "f133466cef972ced7a7e8ec14048218db8c08c131b17e46b63d212c8ea3fbda2",
+      "mime": "image/jpeg",
+      "width": 660,
+      "height": 853,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1747",
+          "role": "supplementary",
+          "postNumber": 2
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/2/2a778ce148c56b796d1098d15e1badfe78f8b476.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/2/2a778ce148c56b796d1098d15e1badfe78f8b476.jpeg",
+      "bytes": 828651,
+      "sha256": "944582862eccccbef5e7c399d1b504b6b75f94f425ae0c3204c32d706bea955a",
+      "mime": "image/jpeg",
+      "width": 2026,
+      "height": 1620,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1589",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/2/2a84a43b20d7956edfe3e0768a913dc459a34198.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/2/2a84a43b20d7956edfe3e0768a913dc459a34198.jpeg",
+      "bytes": 294731,
+      "sha256": "a2dd622f2ca28d6296bb65991d57b39048d1768926202101b50f77b684d1a96e",
+      "mime": "image/jpeg",
+      "width": 1280,
+      "height": 615,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1462",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/2/2b75c4a7af0aba3436df2e8910805c686a2cf586.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/2/2b75c4a7af0aba3436df2e8910805c686a2cf586.png",
+      "bytes": 41295,
+      "sha256": "cfa5f89add67c3fe4cdc8576e0bcca6a548bd9a3c43d651c21a5cf2e2f931a66",
+      "mime": "image/png",
+      "width": 488,
+      "height": 675,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1565",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/311034841bd3ac71742de7ceb012ab8018968ba7.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/311034841bd3ac71742de7ceb012ab8018968ba7.jpeg",
+      "bytes": 95175,
+      "sha256": "c377fea80584c427dc52075b3e3e181d1a50047af896b59eba10d4c126b8f48e",
+      "mime": "image/jpeg",
+      "width": 809,
+      "height": 547,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1575",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/337d4146d6f00fbbd8421871df2d2882ff070933.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/337d4146d6f00fbbd8421871df2d2882ff070933.jpeg",
+      "bytes": 50055,
+      "sha256": "406143779325e49908c5e78e2f30e9a14a7a4df9bd38c07a508f2149dafdc114",
+      "mime": "image/jpeg",
+      "width": 339,
+      "height": 219,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1586",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/33de15dc0f255e07cc6b1f2f04b609188220dcf2.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/33de15dc0f255e07cc6b1f2f04b609188220dcf2.jpeg",
+      "bytes": 29714,
+      "sha256": "1d20d76c0a72938d43275f0cddf88d3ac3730a4f3bed645111ef97f6ab598438",
+      "mime": "image/jpeg",
+      "width": 192,
+      "height": 372,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1535",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/34acd1dcd582979755fe61bbbf898ddd6c0924d4.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/34acd1dcd582979755fe61bbbf898ddd6c0924d4.jpeg",
+      "bytes": 62397,
+      "sha256": "a7ee075cad0e8361cfc547162a15450f39cfc221f7dd65434605d06fe853315d",
+      "mime": "image/jpeg",
+      "width": 289,
+      "height": 572,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1498",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/35e9ae5c54f3256ce75e9548cd911fad171c36cb.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/35e9ae5c54f3256ce75e9548cd911fad171c36cb.jpeg",
+      "bytes": 57578,
+      "sha256": "263b48ab0980aee8d6541da53b8c85ea00542604e32daa90c490ed03a44f92e7",
+      "mime": "image/jpeg",
+      "width": 818,
+      "height": 412,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1583",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/36fce89df8432f611e10ae0fc418fcbaecb3bcba.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/36fce89df8432f611e10ae0fc418fcbaecb3bcba.jpeg",
+      "bytes": 269421,
+      "sha256": "fa01346e8b2dc4ac362cbf3b3ff7908e13ab8d9134cc80c1b01a5d2025377bc6",
+      "mime": "image/jpeg",
+      "width": 1558,
+      "height": 561,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1557",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/394937431e3e933ae587ec2f1ff07687d6d1ae5c.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/394937431e3e933ae587ec2f1ff07687d6d1ae5c.jpeg",
+      "bytes": 51162,
+      "sha256": "1a0d58a90c5338cbac679d5734376fadd445c275d33b128c420822a6ab9bd8bb",
+      "mime": "image/jpeg",
+      "width": 389,
+      "height": 353,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1530",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/3a7bd7702a97970cc3c961e829d7088b8c10f42c.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/3a7bd7702a97970cc3c961e829d7088b8c10f42c.jpeg",
+      "bytes": 153032,
+      "sha256": "bbc713eb6aa70adfbc90d677de43450e50d590e50f06aa3d2a4ffd56428051e5",
+      "mime": "image/jpeg",
+      "width": 937,
+      "height": 371,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1498",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/3c9008ce47bf07a2ef75fe2881636c7fa896b0e1.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/3c9008ce47bf07a2ef75fe2881636c7fa896b0e1.jpeg",
+      "bytes": 520134,
+      "sha256": "1f63129b0a0b6bf264eb42743b7b212655e5a72989d29b8a40bf08e3b55a9b6e",
+      "mime": "image/jpeg",
+      "width": 2140,
+      "height": 1654,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1556",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/3d221dfc4e3cdb3adb5061e60f7da5f6abaa649b.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/3d221dfc4e3cdb3adb5061e60f7da5f6abaa649b.jpeg",
+      "bytes": 59510,
+      "sha256": "07f422a2a815e1826bbbb3232552ce1c1fd8906084bd53b22c01da62c90b2e8e",
+      "mime": "image/jpeg",
+      "width": 338,
+      "height": 344,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1488",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/3e520d35eec75e81fe00c528c1043293cb2791ce.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/3e520d35eec75e81fe00c528c1043293cb2791ce.jpeg",
+      "bytes": 260615,
+      "sha256": "bb787de46a91cf25c259cea825f04d13d2d4030ccf5884f4a92095a6dc86d46d",
+      "mime": "image/jpeg",
+      "width": 1387,
+      "height": 683,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1557",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/4/40a447c7612dc03dfb8543e91ebf915353d02381.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/4/40a447c7612dc03dfb8543e91ebf915353d02381.jpeg",
+      "bytes": 248548,
+      "sha256": "8498185bc1e396b5e14dedc7dd987fcc5226d4ea534eb40f88da0042e8be0e60",
+      "mime": "image/jpeg",
+      "width": 1701,
+      "height": 2386,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1735",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/4/40be3feec11670112b7dc0d395d42d325ed6eb7e.webp",
+      "finalUrl": "https://files.rdfzer.com/original/2X/4/40be3feec11670112b7dc0d395d42d325ed6eb7e.webp",
+      "bytes": 107032,
+      "sha256": "d00819e3ab9a7053eb15ea07c08f32c1340791f1f58723ae2433926d73a68a11",
+      "mime": "image/webp",
+      "width": 1532,
+      "height": 930,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1557",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/4/411c993e4fb1485e9d70f16f7390c5d3d152191c.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/4/411c993e4fb1485e9d70f16f7390c5d3d152191c.jpeg",
+      "bytes": 226144,
+      "sha256": "39cf4e9e60da6c4da03ff6c2c3c8be6c7cd36c5d56492338530e412913bd7717",
+      "mime": "image/jpeg",
+      "width": 1680,
+      "height": 2386,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1725",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/4/41c2e301ac58a87db955a0f9c48ac445d1d23648.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/4/41c2e301ac58a87db955a0f9c48ac445d1d23648.png",
+      "bytes": 58872,
+      "sha256": "51c9bb352ccd10d6d670735b65839ee8839bd7527e7951897254fd9fffd62cd1",
+      "mime": "image/png",
+      "width": 1044,
+      "height": 468,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1709",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/4/434246e686552900c98f372b24a43183b03e7997.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/4/434246e686552900c98f372b24a43183b03e7997.jpeg",
+      "bytes": 75310,
+      "sha256": "2c8076757a3a66a6d94a9e472e758e335bbc07ef4760be64622e221c52c12360",
+      "mime": "image/jpeg",
+      "width": 320,
+      "height": 425,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1541",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/4/43cb6b70e674b4cef14cc12efd9d8500c4bae5fa.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/4/43cb6b70e674b4cef14cc12efd9d8500c4bae5fa.jpeg",
+      "bytes": 165700,
+      "sha256": "55837a4a3c75e6006d140abfc8f5659a18f9fd0ce842e97ebf24267b0d62da45",
+      "mime": "image/jpeg",
+      "width": 711,
+      "height": 482,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1737",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/4/452aaef9258f47cf9751ae71a6c8cd5dbad46694.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/4/452aaef9258f47cf9751ae71a6c8cd5dbad46694.jpeg",
+      "bytes": 22443,
+      "sha256": "ea0b445c1a587e6657734202578eeb3041cd9fe83b8573e63825a0897dbd030c",
+      "mime": "image/jpeg",
+      "width": 320,
+      "height": 229,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1462",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/4/4ac91f5d65aebcf77e2d5773cbfc6e0c6601756d.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/4/4ac91f5d65aebcf77e2d5773cbfc6e0c6601756d.jpeg",
+      "bytes": 112586,
+      "sha256": "88746c93067d2cceb257152cde5db1c6c30cdd9d69db0d8a232e10dbfc076981",
+      "mime": "image/jpeg",
+      "width": 817,
+      "height": 450,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1564",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/4/4ae9e183e5794d3332d2716e74c5997dd12e8bc2.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/4/4ae9e183e5794d3332d2716e74c5997dd12e8bc2.jpeg",
+      "bytes": 238152,
+      "sha256": "309fe1a790939cb08aafe9d60575760351072fa6699f764f2c5ef95d1b750462",
+      "mime": "image/jpeg",
+      "width": 937,
+      "height": 584,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1556",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/51372ab0bc5580a65cc8bf832fb826483eb6842c.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/51372ab0bc5580a65cc8bf832fb826483eb6842c.jpeg",
+      "bytes": 138349,
+      "sha256": "aa2604e1e1c745abc9b113dcbbf8d84441976f2753a961d572c3e010640b8aa3",
+      "mime": "image/jpeg",
+      "width": 807,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1487",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/533df079992931d4452b49a1227c62d57f924274.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/533df079992931d4452b49a1227c62d57f924274.png",
+      "bytes": 18387,
+      "sha256": "65f31796ed3bcd5d0f6d64285ff01e2a092ebdf368ae154b1d94b084e3a3a957",
+      "mime": "image/png",
+      "width": 100,
+      "height": 100,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1471",
+          "role": "supplementary",
+          "postNumber": 2
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/553bf016ebdf814ea4e4dbaae926764d34002a87.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/553bf016ebdf814ea4e4dbaae926764d34002a87.png",
+      "bytes": 32852,
+      "sha256": "870efae1c7bba0220b8537d2eedaf442a33cd7844607d7f834d2b19ab52b341b",
+      "mime": "image/png",
+      "width": 800,
+      "height": 1111,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1476",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/55bdbb99e37a26de630886033c45c2eba1b9408c.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/55bdbb99e37a26de630886033c45c2eba1b9408c.jpeg",
+      "bytes": 104996,
+      "sha256": "9f4ebd3623fb82c99bb79b35db551d7cf3f279658f19114f6f29f86ead478aa7",
+      "mime": "image/jpeg",
+      "width": 807,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1525",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/572787a09e5c70b693ef83b67115584ec29703b0.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/572787a09e5c70b693ef83b67115584ec29703b0.png",
+      "bytes": 40663,
+      "sha256": "5b4e05a7a9d6487dc70754ba0f711df821d6424f785d7e9a6094c617c51bf84e",
+      "mime": "image/png",
+      "width": 383,
+      "height": 456,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1531",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/574a40a1358cc91472402b47aaa6bfae05193368.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/574a40a1358cc91472402b47aaa6bfae05193368.png",
+      "bytes": 49705,
+      "sha256": "a01cd48bd2a78683a66c784696563e9b074281a9f3c4fd4d4782f8707be5b6e0",
+      "mime": "image/png",
+      "width": 1312,
+      "height": 432,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1496",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/5803dd4d9da0ac587a036232b6e2976ff044883e.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/5803dd4d9da0ac587a036232b6e2976ff044883e.jpeg",
+      "bytes": 29245,
+      "sha256": "465677d910ca6e3d41803d42435bd25d31a6bcbc34ce42942dcbbfd76b412bba",
+      "mime": "image/jpeg",
+      "width": 214,
+      "height": 334,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1526",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/594ceca9001383b4da614148a0cdb7e47348d91c.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/594ceca9001383b4da614148a0cdb7e47348d91c.jpeg",
+      "bytes": 257610,
+      "sha256": "3a8b1b93ca96505e0ca35002beaac33ba3912d206a1c8d080b5acff431df1695",
+      "mime": "image/jpeg",
+      "width": 835,
+      "height": 595,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1742",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/59afce71955c76edb528dac935ac6584343f7325.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/59afce71955c76edb528dac935ac6584343f7325.jpeg",
+      "bytes": 98331,
+      "sha256": "fbde7735af695fb5707fe0dd945a42ed690792de97d7a6d72ec26fad0fb3035c",
+      "mime": "image/jpeg",
+      "width": 599,
+      "height": 389,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1540",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/5aa85fe5da537fcee3a2f4a5dfb4396667ec0451.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/5aa85fe5da537fcee3a2f4a5dfb4396667ec0451.png",
+      "bytes": 57825,
+      "sha256": "c13ba82f6efc214197ce52e2c31bd3c986577431328c1365030b0fdffa8a34fe",
+      "mime": "image/png",
+      "width": 710,
+      "height": 1016,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1466",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/5bd95f4a7c5f7839e116e0108c4478b808c742ca.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/5bd95f4a7c5f7839e116e0108c4478b808c742ca.jpeg",
+      "bytes": 52339,
+      "sha256": "3be35ff86917c02ab7b57b563b0d2d38e89defa3de56c663d3ec61a03471d086",
+      "mime": "image/jpeg",
+      "width": 620,
+      "height": 375,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1573",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/5e50d0e4b1ff81fbfd1442a842852a7392f0f5a7.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/5e50d0e4b1ff81fbfd1442a842852a7392f0f5a7.png",
+      "bytes": 32276,
+      "sha256": "d0c8bce2bb8ac2b088282d764302751c8865630485dcbfb5482498c0b14765b9",
+      "mime": "image/png",
+      "width": 800,
+      "height": 1248,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1560",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/6/60861db239a9fc50db45e4a75c4bd3eb3d08f562.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/6/60861db239a9fc50db45e4a75c4bd3eb3d08f562.jpeg",
+      "bytes": 331327,
+      "sha256": "30d483a37d8edeb1003eea4b4e401c8bfa62b8f0c20e8982aa7ba19940275715",
+      "mime": "image/jpeg",
+      "width": 1565,
+      "height": 639,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1557",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/6/65829233b520a2a304cc978827e11c145c3752d0.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/6/65829233b520a2a304cc978827e11c145c3752d0.png",
+      "bytes": 12330,
+      "sha256": "5265d5ae71668495297141aed9a71f09ad4174690b5fe50c84ba4d87ad1916b1",
+      "mime": "image/png",
+      "width": 100,
+      "height": 100,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1471",
+          "role": "supplementary",
+          "postNumber": 2
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/6/6723934ae750efdddb43c0e38f5a234201b7a2f2.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/6/6723934ae750efdddb43c0e38f5a234201b7a2f2.jpeg",
+      "bytes": 119754,
+      "sha256": "01236819712932c2ccc2ccd2ba980e54e27e8541682b1ef54d9fdfb909b6093e",
+      "mime": "image/jpeg",
+      "width": 807,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1473",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/6/67c1505318f472d2320711681f0c36516b8c30f8.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/6/67c1505318f472d2320711681f0c36516b8c30f8.png",
+      "bytes": 40629,
+      "sha256": "57a59298c5e5d214b691361090310fcd75dcd58d714de4e0b126c80b5ac0b76e",
+      "mime": "image/png",
+      "width": 800,
+      "height": 1127,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1476",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/6/680971d720d4b508a5b128312d3aac64ed56c97e.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/6/680971d720d4b508a5b128312d3aac64ed56c97e.jpeg",
+      "bytes": 42516,
+      "sha256": "eb6ddf1b27ff40c944912f5b095894795add627e45804a9e6905833ba9d82222",
+      "mime": "image/jpeg",
+      "width": 411,
+      "height": 289,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1493",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/6/6ec0a99abb19ac011d648e0e55c23ee600d7bab6.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/6/6ec0a99abb19ac011d648e0e55c23ee600d7bab6.jpeg",
+      "bytes": 285359,
+      "sha256": "c57f404ceaf48d83fdb02e7ae936b35e4a9cc3d1c0631a5b27f3e9dd3af9bb68",
+      "mime": "image/jpeg",
+      "width": 1280,
+      "height": 1557,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1589",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/6/6eff4e77af2cc9235f7990ce2793ccae628153c7.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/6/6eff4e77af2cc9235f7990ce2793ccae628153c7.jpeg",
+      "bytes": 328792,
+      "sha256": "3f3f361acbd7388fe62a2b617fb98980fe043b5c264a0ccb4859679aac1662a3",
+      "mime": "image/jpeg",
+      "width": 1280,
+      "height": 1546,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1591",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/7/7105942e54085603e820809d8845a7ab4df12f5a.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/7/7105942e54085603e820809d8845a7ab4df12f5a.png",
+      "bytes": 687,
+      "sha256": "ba940b5fdaa1912de4ce2fa90367b2ccda4de2fc3eece946a4d8e615192232a2",
+      "mime": "image/png",
+      "width": 32,
+      "height": 32,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1471",
+          "role": "supplementary",
+          "postNumber": 2
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/7/7207327c24671c1a0caba7f29b955aef6a048964.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/7/7207327c24671c1a0caba7f29b955aef6a048964.jpeg",
+      "bytes": 129246,
+      "sha256": "70da1ab2f3c3af52a96f3a1f75671acd7d63206af4497cfada67ee0dfa21bd6e",
+      "mime": "image/jpeg",
+      "width": 729,
+      "height": 904,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1747",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/7/746dfdf01aa05b5502e9c0f228ee5e0c78d4c181.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/7/746dfdf01aa05b5502e9c0f228ee5e0c78d4c181.jpeg",
+      "bytes": 448894,
+      "sha256": "03f497f95f288c91ca24fec9f48e0272efa3f592b650c1c4dc8c79c92229ad32",
+      "mime": "image/jpeg",
+      "width": 1280,
+      "height": 1809,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1591",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/7/772f3dd6726706725078ea208deb29ae910aae7b.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/7/772f3dd6726706725078ea208deb29ae910aae7b.png",
+      "bytes": 62134,
+      "sha256": "7a07d6b4e37be5029a080f5b5240680e83c9fef4472c440c5295878a57caf759",
+      "mime": "image/png",
+      "width": 1062,
+      "height": 370,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1708",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/7/77f2cf106436c671a16d56d8380a29f9d6e39c95.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/7/77f2cf106436c671a16d56d8380a29f9d6e39c95.png",
+      "bytes": 30795,
+      "sha256": "2144764798bf546abbe268d3d56ef99e76ef1777bcd5ece85fe3b2541ae61bf0",
+      "mime": "image/png",
+      "width": 800,
+      "height": 1106,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1560",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/7/78e7a01adf7c1e5343b997b2a775ec4829618814.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/7/78e7a01adf7c1e5343b997b2a775ec4829618814.jpeg",
+      "bytes": 28508,
+      "sha256": "0065d2bf7c105dd1e59e2164d882ce9606e15b9f366d7355cdb5f36a7ea44812",
+      "mime": "image/jpeg",
+      "width": 296,
+      "height": 341,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1471",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/7/7a41492c8b101a060737bf16a60c244a011e378b.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/7/7a41492c8b101a060737bf16a60c244a011e378b.jpeg",
+      "bytes": 935196,
+      "sha256": "51f0bd27d5ef44f0c42e20cea47d56a5358cec04d53b625d0e13cc8455f30f5c",
+      "mime": "image/jpeg",
+      "width": 1439,
+      "height": 2839,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1738",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/8/82c8a2f98783cea56ce4ce4f090833dc148310cc.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/8/82c8a2f98783cea56ce4ce4f090833dc148310cc.png",
+      "bytes": 43398,
+      "sha256": "73a5749c9c8d90c5d41c306096c79fe7b331db1d76413ad3d71d2185a9b98eb1",
+      "mime": "image/png",
+      "width": 1072,
+      "height": 364,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1708",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/8/834013534f99105ae712ddfe8c4e5a80b5fc37cd.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/8/834013534f99105ae712ddfe8c4e5a80b5fc37cd.jpeg",
+      "bytes": 235359,
+      "sha256": "b37d2bbce611c3790dbaba744294263a773454485e825bee9f2adff89ac07890",
+      "mime": "image/jpeg",
+      "width": 700,
+      "height": 883,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1462",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/8/83440a0a0ad63d3192f633fa463980dc53e94b3f.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/8/83440a0a0ad63d3192f633fa463980dc53e94b3f.jpeg",
+      "bytes": 270813,
+      "sha256": "1d6c195c3b1b6c73be37339e0e55ab45395e2c13c019a55b3012b5e0e128be33",
+      "mime": "image/jpeg",
+      "width": 1280,
+      "height": 1769,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1591",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/8/83d7d01225de4bd0d6b5ddd6358d4e364aadc268.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/8/83d7d01225de4bd0d6b5ddd6358d4e364aadc268.png",
+      "bytes": 54256,
+      "sha256": "06566358d55c96c00ee1b12defd630a2ca374d186b7883da9768cb8076966403",
+      "mime": "image/png",
+      "width": 350,
+      "height": 385,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1577",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/8/872f5b420af544205bbd5e8a8d2855312d18c367.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/8/872f5b420af544205bbd5e8a8d2855312d18c367.jpeg",
+      "bytes": 444826,
+      "sha256": "b132a4cd2f058daa6ac0ad42e61c522d502a13555ba43fefa4e43b0b40ee0469",
+      "mime": "image/jpeg",
+      "width": 1280,
+      "height": 1629,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1591",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/8/88ff5a2381e17c46bc91f562f89ae44e77e8cd57.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/8/88ff5a2381e17c46bc91f562f89ae44e77e8cd57.jpeg",
+      "bytes": 250288,
+      "sha256": "36eead10b3b57c4c5434cd28e7576cf8a66439c04a99954fd877e0c394333dc6",
+      "mime": "image/jpeg",
+      "width": 937,
+      "height": 826,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1582",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/8/8a9a7b35ecb0af9339dde91f9f099d9a3355730c.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/8/8a9a7b35ecb0af9339dde91f9f099d9a3355730c.jpeg",
+      "bytes": 250123,
+      "sha256": "e77186338aa035b2214eeda47b9bc5b6c32cb0acb8f54b20486a59f4fd7524c7",
+      "mime": "image/jpeg",
+      "width": 1121,
+      "height": 750,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1732",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/9/94d25056d38196f43446b95849e4e8e40c010c12.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/9/94d25056d38196f43446b95849e4e8e40c010c12.jpeg",
+      "bytes": 155231,
+      "sha256": "f5e6fc6f4b3903bf5e1274b6cd037b5d23afe27c867ad59f82f96779f7b2a798",
+      "mime": "image/jpeg",
+      "width": 817,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1708",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/9/96d77795956a8f8aac6cb6453a9c690f91dbb749.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/9/96d77795956a8f8aac6cb6453a9c690f91dbb749.jpeg",
+      "bytes": 106097,
+      "sha256": "5824debb0ef47c6794601eef2ec0ea39f3794d3e1c41b98a5b534888901bbc59",
+      "mime": "image/jpeg",
+      "width": 328,
+      "height": 862,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1559",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/9/98495bdc31456a319088c2f8f8da4bde9a9cde10.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/9/98495bdc31456a319088c2f8f8da4bde9a9cde10.jpeg",
+      "bytes": 322425,
+      "sha256": "6017c13003eabd9ae8aaa8d94c9d5d4dfb4ba1c54e467c5fa7e1d080ae8f1a17",
+      "mime": "image/jpeg",
+      "width": 967,
+      "height": 725,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1743-p2",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/9/992cb49fa67bb09db73b1fc5db017c33d4b9bf1f.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/9/992cb49fa67bb09db73b1fc5db017c33d4b9bf1f.jpeg",
+      "bytes": 32242,
+      "sha256": "50dd46a4b4d5f226b603badc225f9850e52e97cae55f2d8377a7a5660a2cf8b1",
+      "mime": "image/jpeg",
+      "width": 277,
+      "height": 257,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1527",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/9/99e7e028161670656422ba8e68065cefdc820f22.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/9/99e7e028161670656422ba8e68065cefdc820f22.png",
+      "bytes": 26862,
+      "sha256": "a52c26231a4fc3dbfb7de3bb5200e78807e197a20b1c4f03dd750f8197f5e968",
+      "mime": "image/png",
+      "width": 800,
+      "height": 1120,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1560",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/9/9b11e70d59bc670b3fd2d088c216c89dead3e7aa.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/9/9b11e70d59bc670b3fd2d088c216c89dead3e7aa.jpeg",
+      "bytes": 132892,
+      "sha256": "ee5cb7ac9acce7ead2972b9fa90eb35991103a1a711f8a2fc06cf5faee5025da",
+      "mime": "image/jpeg",
+      "width": 1318,
+      "height": 406,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1562",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/9/9b43553466cde6423b22035799efd7bc53d7a6c8.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/9/9b43553466cde6423b22035799efd7bc53d7a6c8.jpeg",
+      "bytes": 269566,
+      "sha256": "d1d291d59041673a4de260a9dcf1595baccd68ba4426c9a307f25037df826824",
+      "mime": "image/jpeg",
+      "width": 1280,
+      "height": 1575,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1591",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/9/9ba4c9f0e5f2e768f08151797920720417cb1f47.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/9/9ba4c9f0e5f2e768f08151797920720417cb1f47.jpeg",
+      "bytes": 223539,
+      "sha256": "605d1d09a885c67be959ca5dabe3e6aa677104af58c62b71ffcee5771d6ed0bd",
+      "mime": "image/jpeg",
+      "width": 1280,
+      "height": 1712,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1590",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/9/9bac82a9e3d561d5ef04731f121dd8ae15f8e36d.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/9/9bac82a9e3d561d5ef04731f121dd8ae15f8e36d.jpeg",
+      "bytes": 53181,
+      "sha256": "03279fec2175662988b192ef24069d2c3dee9c7e951f7f32e2bf153637c629de",
+      "mime": "image/jpeg",
+      "width": 433,
+      "height": 299,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1518",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/9/9c4fa5e9e8298356ae5f5d707b72bb0de9280947.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/9/9c4fa5e9e8298356ae5f5d707b72bb0de9280947.jpeg",
+      "bytes": 43139,
+      "sha256": "368170fbf234cb54cd0af3305c86ad80df069648488e3ee23142475b5d53ba89",
+      "mime": "image/jpeg",
+      "width": 813,
+      "height": 235,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1486",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/a216d7b7dc390546666ebbbff9b78a304501aead.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/a216d7b7dc390546666ebbbff9b78a304501aead.jpeg",
+      "bytes": 86645,
+      "sha256": "5f492623c729aabedeada49d8ca316054fa3b3fe7abe89d2c6aabddf0a4b6e6c",
+      "mime": "image/jpeg",
+      "width": 1104,
+      "height": 782,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1733",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/a2248813b3d2418808ae70d7f0441e92133d248a.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/a2248813b3d2418808ae70d7f0441e92133d248a.png",
+      "bytes": 17330,
+      "sha256": "6506f9649fef3de6bff8092daac7ab9c55584a5a9847a6fa143373d4545e5b5c",
+      "mime": "image/png",
+      "width": 100,
+      "height": 100,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1471",
+          "role": "supplementary",
+          "postNumber": 2
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/a299c5e9e37787beb0431746e83e996db0bea059.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/a299c5e9e37787beb0431746e83e996db0bea059.jpeg",
+      "bytes": 148959,
+      "sha256": "0b036952b1435e98961c69bf1629c14261022ac8421dc5a1791fe7e573d3526b",
+      "mime": "image/jpeg",
+      "width": 624,
+      "height": 372,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1466",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/a2afdda7b02958e15129743a678af6eecc83039f.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/a2afdda7b02958e15129743a678af6eecc83039f.jpeg",
+      "bytes": 58359,
+      "sha256": "8ccf65fea4bfaff8a46b84d4c7a9e89df4024859c11a323260f1f3902f5debc0",
+      "mime": "image/jpeg",
+      "width": 678,
+      "height": 264,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1557",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/a2dbeb0ebedf7cca0470a9be799470e2f38d1584.webp",
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/a2dbeb0ebedf7cca0470a9be799470e2f38d1584.webp",
+      "bytes": 18890,
+      "sha256": "0324de80755c2952061b413f3a6ef9dbb679a2de0517ce19c1d8cab32102379c",
+      "mime": "image/webp",
+      "width": 480,
+      "height": 340,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1474",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/a305a1e1378b437359c3390c7106a5116be266c8.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/a305a1e1378b437359c3390c7106a5116be266c8.jpeg",
+      "bytes": 46017,
+      "sha256": "f91afdeded51fec352c68662bbdc49b89937ab273775a9eae50fca1b9488ad2d",
+      "mime": "image/jpeg",
+      "width": 414,
+      "height": 290,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1493",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/a3ee6862898e708e45362d4e544d3d1ee5136ad7.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/a3ee6862898e708e45362d4e544d3d1ee5136ad7.png",
+      "bytes": 59009,
+      "sha256": "8dc46b2d8dcea809f67aa7e5b42eb4e792e83639a6dea317fd81d4262dbf780f",
+      "mime": "image/png",
+      "width": 710,
+      "height": 1016,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1466",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/a44196462f6d71d14b7b515cc04754b126c095ad.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/a44196462f6d71d14b7b515cc04754b126c095ad.jpeg",
+      "bytes": 747431,
+      "sha256": "f3dcd6b10a25500996f09c6dc59231533daa64b141a73529aabb4b8c6c24b872",
+      "mime": "image/jpeg",
+      "width": 1300,
+      "height": 1713,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1750",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/a95002b16674433ab7ca6f321a5769da6451ddc6.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/a95002b16674433ab7ca6f321a5769da6451ddc6.jpeg",
+      "bytes": 181217,
+      "sha256": "551706adb273c1bae0ab196c2cbd24b8e4bf917aea4655b09d2dc35b7f1740e5",
+      "mime": "image/jpeg",
+      "width": 823,
+      "height": 604,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1582",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/aa0d895e01664d4ddaa41309d2f401352966ef0e.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/aa0d895e01664d4ddaa41309d2f401352966ef0e.jpeg",
+      "bytes": 79705,
+      "sha256": "b8b8bc0421c2b3d1266e3ce00fda9a7535325e19aec265cf2e18a566db27ff6d",
+      "mime": "image/jpeg",
+      "width": 391,
+      "height": 569,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1542",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/adae7379e8911d3ce0023a188af8ba2a47a1f3c9.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/adae7379e8911d3ce0023a188af8ba2a47a1f3c9.jpeg",
+      "bytes": 182351,
+      "sha256": "25d0789acf9598c0289733a282d78d1f65c27919b621edccc8f3cad9b896e9c1",
+      "mime": "image/jpeg",
+      "width": 650,
+      "height": 535,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1590",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/adc12383f36d96f50276b7e02a9c366cc7dcb7d8.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/adc12383f36d96f50276b7e02a9c366cc7dcb7d8.jpeg",
+      "bytes": 110017,
+      "sha256": "cd97a12cdcfbc7d9e90a98b35724c88e0d84f0b75b4951860381dda60e9a3ff5",
+      "mime": "image/jpeg",
+      "width": 674,
+      "height": 877,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1736",
+          "role": "supplementary",
+          "postNumber": 2
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/affb297f85d94142caf7ab98387a1896e830ec40.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/affb297f85d94142caf7ab98387a1896e830ec40.png",
+      "bytes": 60696,
+      "sha256": "243b3c42e508cf103f35a707eac5a4561d5e8c3b5e76d1f09f32fd16585ba49d",
+      "mime": "image/png",
+      "width": 179,
+      "height": 217,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1579",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/b/b111c064bc5a48f908511e0537c06420ff23b420.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/b/b111c064bc5a48f908511e0537c06420ff23b420.jpeg",
+      "bytes": 181255,
+      "sha256": "f7b18e6779fc5e1ba70150e4df2f2baaedff80765a12ff638988752c7c4b3603",
+      "mime": "image/jpeg",
+      "width": 551,
+      "height": 1060,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1753-p1",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/b/b1e7fe6606bd7369b7cd3c43c0e49c520fc6f0b7.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/b/b1e7fe6606bd7369b7cd3c43c0e49c520fc6f0b7.jpeg",
+      "bytes": 125632,
+      "sha256": "1e863545baca0895b360fbb69610f464af93154019df90d3cb7efe396406b4ac",
+      "mime": "image/jpeg",
+      "width": 968,
+      "height": 811,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1727",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/b/b38bb4ef8499cb517590191cb0c83d838d52f8ea.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/b/b38bb4ef8499cb517590191cb0c83d838d52f8ea.jpeg",
+      "bytes": 54819,
+      "sha256": "701f0c9511d8d5401a904ac5e039d233b3d95d556df8c01e10c2fbbc86ac83b1",
+      "mime": "image/jpeg",
+      "width": 807,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1502",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/b/b41a63939bfd37bfee9e524a6e095f38fa932035.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/b/b41a63939bfd37bfee9e524a6e095f38fa932035.jpeg",
+      "bytes": 179268,
+      "sha256": "61ab44cd311517485e7f4b778883f1ec6eea9f766ff475f96db7b6927f107bd5",
+      "mime": "image/jpeg",
+      "width": 1341,
+      "height": 573,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1557",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/b/b51e04ebfeb95af3ea1fe3b8e335640baa50499a.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/b/b51e04ebfeb95af3ea1fe3b8e335640baa50499a.jpeg",
+      "bytes": 65104,
+      "sha256": "ec454d4cd7b91dbac7608cadabff60804debe30a8d77293d892b2ec22aec5a0b",
+      "mime": "image/jpeg",
+      "width": 383,
+      "height": 520,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1517",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/b/b52108080f1754a00aed648a5eb46dc605f3e6da.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/b/b52108080f1754a00aed648a5eb46dc605f3e6da.jpeg",
+      "bytes": 283470,
+      "sha256": "26d3c729cadc2cf29dca41da8a56ee1223b0e85785e2a925ac2650f36fc54c4a",
+      "mime": "image/jpeg",
+      "width": 1586,
+      "height": 722,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1557",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/b/b8892d60188c8585753c510d6695d1ad997bf77f.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/b/b8892d60188c8585753c510d6695d1ad997bf77f.jpeg",
+      "bytes": 163535,
+      "sha256": "3c9126e91ec61e666e85bdcb502d227b98c24115770ff82e992e85c34c35132c",
+      "mime": "image/jpeg",
+      "width": 1680,
+      "height": 2386,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1750",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/b/ba4c07905c1cc55998b48df7e7dd26d04115103f.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/b/ba4c07905c1cc55998b48df7e7dd26d04115103f.jpeg",
+      "bytes": 288323,
+      "sha256": "7aa5a1661443c0ac63fb3c90b2abad840cdb486cceb4eed23995c41c6868acaa",
+      "mime": "image/jpeg",
+      "width": 1701,
+      "height": 2386,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1751",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/b/ba4c870877c7e9de083b5a3c4de3a3f1fe96adb0.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/b/ba4c870877c7e9de083b5a3c4de3a3f1fe96adb0.jpeg",
+      "bytes": 117360,
+      "sha256": "09a1163ee2fa115b4bec626a57abbd3499dd099403aa359546f97c34ce468d3c",
+      "mime": "image/jpeg",
+      "width": 628,
+      "height": 423,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1562",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/b/bdc3e5c5d98c1e2c69d34f816b7cb3803f5c33f3.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/b/bdc3e5c5d98c1e2c69d34f816b7cb3803f5c33f3.jpeg",
+      "bytes": 82247,
+      "sha256": "eedb34228715ee6a34c17fc4e762c6378c8be7a2b5db53e80f071423c5e56a14",
+      "mime": "image/jpeg",
+      "width": 312,
+      "height": 446,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1471",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/b/bdfbe13294db151cbe5b180495493a0a46181138.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/b/bdfbe13294db151cbe5b180495493a0a46181138.jpeg",
+      "bytes": 29648,
+      "sha256": "8040da7744e3b278508eb5c3d53307afd6a9c5fd3e33a9ed9f657f5351e7b3a4",
+      "mime": "image/jpeg",
+      "width": 227,
+      "height": 340,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1557",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/b/be738a4e8a65352a7692a284d26cf80a9b81b176.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/b/be738a4e8a65352a7692a284d26cf80a9b81b176.png",
+      "bytes": 35576,
+      "sha256": "a2f12134440e089980ccf2d703681091fefd15d445c722fe88e594501429e027",
+      "mime": "image/png",
+      "width": 800,
+      "height": 1133,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1558",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/c/c190690584068462dc414805208dd8a09098f9d2.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/c/c190690584068462dc414805208dd8a09098f9d2.jpeg",
+      "bytes": 178156,
+      "sha256": "dad256e9ffcd7d2f50bb1ba86fe8f92d6e6ba537ddc8d3d2e5cb6c7c15c2525e",
+      "mime": "image/jpeg",
+      "width": 1701,
+      "height": 2386,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1740",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/c/c3563621da19325749b02be6c0cd569b05c282e4.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/c/c3563621da19325749b02be6c0cd569b05c282e4.jpeg",
+      "bytes": 307910,
+      "sha256": "87e10a2776fec60ab2ef80ad69c3c42282300a19e9a837ff27f7146a7b376fe8",
+      "mime": "image/jpeg",
+      "width": 1572,
+      "height": 633,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1557",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/c/c61060115c27bfbfd4a19cedf3986e5f38433d06.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/c/c61060115c27bfbfd4a19cedf3986e5f38433d06.jpeg",
+      "bytes": 27535,
+      "sha256": "6004103c658fe58b32e54054592fbf99ce186e64dbe073552d54a375e8a3e062",
+      "mime": "image/jpeg",
+      "width": 348,
+      "height": 324,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1585",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/c/c796c3db3b6b1875229a405e6f8b847753cc7759.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/c/c796c3db3b6b1875229a405e6f8b847753cc7759.jpeg",
+      "bytes": 56033,
+      "sha256": "124b6fe708d11c1995c1dc2e9d39b8e9d7b4247c755bb00f324682c276db4651",
+      "mime": "image/jpeg",
+      "width": 512,
+      "height": 375,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1566",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/c/c79bd0eab5fad7c41ab0220ed8476eeeb559a54a.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/c/c79bd0eab5fad7c41ab0220ed8476eeeb559a54a.png",
+      "bytes": 11049,
+      "sha256": "146a53fecde8bf22aefcbd798a16494049c2fcc4b546b992ec5f8949c9e7f6bc",
+      "mime": "image/png",
+      "width": 533,
+      "height": 150,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1462",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/c/c9cd7d8a3de2f7527aa5b720e1ac69acb20e894c.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/c/c9cd7d8a3de2f7527aa5b720e1ac69acb20e894c.jpeg",
+      "bytes": 60837,
+      "sha256": "bee917cd2c2bdfaa8fcb417c0a11bcd4090803008922b219734754c0e5035e4a",
+      "mime": "image/jpeg",
+      "width": 807,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1539",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/c/ca016f387f4fc511642a70e2112fce80c192d068.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/c/ca016f387f4fc511642a70e2112fce80c192d068.jpeg",
+      "bytes": 74649,
+      "sha256": "e82a5c598455c60a52a1b5f939b0e18abfa0c0b34e3a6d5f912a2c583e0062b7",
+      "mime": "image/jpeg",
+      "width": 498,
+      "height": 309,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1697",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/c/cc2d9ade7e4678bebd5a368b1214fd7a28676229.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/c/cc2d9ade7e4678bebd5a368b1214fd7a28676229.jpeg",
+      "bytes": 99498,
+      "sha256": "4c95cfd066978067b8681cd14f2cf2cde7af41497fefa3fe685155d8680b3238",
+      "mime": "image/jpeg",
+      "width": 807,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1716",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/c/cc8c67fe710dab11bbb809903d38b6c283ecc9fb.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/c/cc8c67fe710dab11bbb809903d38b6c283ecc9fb.jpeg",
+      "bytes": 735233,
+      "sha256": "21865d228b59a8acd29a1a3f0af102d59d4ebd4f6aba3b7a71c78faa286c04c6",
+      "mime": "image/jpeg",
+      "width": 2778,
+      "height": 2525,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1536",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/c/ce2071c35b62a3f8893a5063a6017171b778342b.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/c/ce2071c35b62a3f8893a5063a6017171b778342b.png",
+      "bytes": 31576,
+      "sha256": "13b5c31755a77e7630e77d53938ac717893ec9679860fd34728465d71e5143f4",
+      "mime": "image/png",
+      "width": 800,
+      "height": 1188,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1560",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/d/d384a9e09d431f388d213b0e8eb894c00d4b43aa.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/d/d384a9e09d431f388d213b0e8eb894c00d4b43aa.jpeg",
+      "bytes": 69339,
+      "sha256": "eedc3dc83287d4e3085bc9a73d270c0209590836165b5b83a6cc5465015e496d",
+      "mime": "image/jpeg",
+      "width": 807,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1710",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/d/d433d2a4ab2cf56b853be3d4fe7be89cb4cec3cd.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/d/d433d2a4ab2cf56b853be3d4fe7be89cb4cec3cd.jpeg",
+      "bytes": 166746,
+      "sha256": "3ad2f15b16a1d1444ba5917790c9958977ca6b0c88404ee819214f0982f940ca",
+      "mime": "image/jpeg",
+      "width": 807,
+      "height": 483,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1468",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/d/d4a5c82c6b4417293bee6c66f18d8c1587469874.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/d/d4a5c82c6b4417293bee6c66f18d8c1587469874.jpeg",
+      "bytes": 74165,
+      "sha256": "4ab2d28fad0149ac11ca5956f64d70e2c4391b5a5d317616b90a7f3511f699c6",
+      "mime": "image/jpeg",
+      "width": 1010,
+      "height": 386,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1754",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/d/d58d81c8527405c32de73dac08953336f5076d2a.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/d/d58d81c8527405c32de73dac08953336f5076d2a.png",
+      "bytes": 43064,
+      "sha256": "d9a72fe29d67ec38fd2414d6a99437a01329215cc21fd9aaa182a109022cc557",
+      "mime": "image/png",
+      "width": 1064,
+      "height": 386,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1709",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/d/d5a76ca220313f0947268fabc71b00930de26fbe.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/d/d5a76ca220313f0947268fabc71b00930de26fbe.jpeg",
+      "bytes": 411352,
+      "sha256": "069ba73af28519734c8ad97ab23e5edbc30af5dd27e6c36d570321d124334b0e",
+      "mime": "image/jpeg",
+      "width": 1280,
+      "height": 1810,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1591",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/d/d615b1a94c18ee9673238077369f4a1a8c49720c.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/d/d615b1a94c18ee9673238077369f4a1a8c49720c.jpeg",
+      "bytes": 161064,
+      "sha256": "4b0ca45ca3951f47288eb38e1b5c20a5e0d07e52e272f85660b0117cddc37e14",
+      "mime": "image/jpeg",
+      "width": 1680,
+      "height": 2386,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1730",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/d/d7bd3042fb9e8230935281c8f7a333d2f7b41012.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/d/d7bd3042fb9e8230935281c8f7a333d2f7b41012.jpeg",
+      "bytes": 335955,
+      "sha256": "8423188775447532e9b810a352e76388e3b053159e5c9f4587ca28ca8be012e0",
+      "mime": "image/jpeg",
+      "width": 1280,
+      "height": 941,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1561",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/d/d97c8d3bceb92be489feaf6403dd7b9123ae199b.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/d/d97c8d3bceb92be489feaf6403dd7b9123ae199b.png",
+      "bytes": 88966,
+      "sha256": "8e07d8e7efbf11cd699d333c77b2d77a6c3ef31a23b31578958792a0c49582e8",
+      "mime": "image/png",
+      "width": 1532,
+      "height": 930,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1557",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/d/d98ff37afdd90f3887903726b3ef999138acfaab.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/d/d98ff37afdd90f3887903726b3ef999138acfaab.jpeg",
+      "bytes": 59211,
+      "sha256": "b8590b807f6781231300984ae0940ab3d991c16eca6a24a7182e2d84bbc96c82",
+      "mime": "image/jpeg",
+      "width": 494,
+      "height": 303,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1694",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/d/dc53284245701f4017f133c9336cf953425c69da.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/d/dc53284245701f4017f133c9336cf953425c69da.jpeg",
+      "bytes": 62697,
+      "sha256": "df3aeacfe9e0e94bfc611334f5f47352391114c38b7dc70918fe8a7d43252580",
+      "mime": "image/jpeg",
+      "width": 624,
+      "height": 236,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1579",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/d/dddaf6a059c5aa578f18fbd3ad5f089374b2c335.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/d/dddaf6a059c5aa578f18fbd3ad5f089374b2c335.jpeg",
+      "bytes": 93582,
+      "sha256": "b2d18ad18fce8dc1337ac1809c5b87f5b9534eb70789293a9b6900f45dc8f37f",
+      "mime": "image/jpeg",
+      "width": 720,
+      "height": 696,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1561",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/d/df473c77a85f1b9373d9192d58c5395ba41bcc36.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/d/df473c77a85f1b9373d9192d58c5395ba41bcc36.jpeg",
+      "bytes": 106979,
+      "sha256": "6b2738bc9cd5c2074e434ec2df374836974bd5f9b1180aae00b1d802766829c1",
+      "mime": "image/jpeg",
+      "width": 807,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1460",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/e/e11c21be3435164564c896af16f15d4ce62dc9c3.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/e/e11c21be3435164564c896af16f15d4ce62dc9c3.jpeg",
+      "bytes": 185299,
+      "sha256": "5f9b9a8a02e89e15a0ba44eeeddebfd119cc216fd621da9557d6631cef7ee1e6",
+      "mime": "image/jpeg",
+      "width": 557,
+      "height": 1193,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1728",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/e/e5bbf76d97307422395b3d98b04f5c8245d3e90b.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/e/e5bbf76d97307422395b3d98b04f5c8245d3e90b.jpeg",
+      "bytes": 192990,
+      "sha256": "eb4f1cb476d039907306c5b54c4f167d8fd1be70bab5f21265fe20968cd5df51",
+      "mime": "image/jpeg",
+      "width": 717,
+      "height": 480,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1737",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/e/e75a2a13c848055e56c2f1675cbadc97c188d704.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/e/e75a2a13c848055e56c2f1675cbadc97c188d704.jpeg",
+      "bytes": 260365,
+      "sha256": "43ea1fc545d7b7963e4cad9495c0bf94cb09495f93334129a3dd7c109b53ac2b",
+      "mime": "image/jpeg",
+      "width": 738,
+      "height": 984,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1752",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/e/e7a1448504b113aad85032e099f71658e621f603.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/e/e7a1448504b113aad85032e099f71658e621f603.jpeg",
+      "bytes": 59787,
+      "sha256": "0dc955c0b047399985fb58c0c1b01329d2d709e98962c760ff56abdebfd3de19",
+      "mime": "image/jpeg",
+      "width": 624,
+      "height": 339,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1523",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/e/e9de8bbfad5b2a65978a45ad003fda7225ebd2f6.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/e/e9de8bbfad5b2a65978a45ad003fda7225ebd2f6.jpeg",
+      "bytes": 53104,
+      "sha256": "f063ad1308f4058c773c2ede00c441243f4110906c922305bfa973ea13cd8736",
+      "mime": "image/jpeg",
+      "width": 314,
+      "height": 431,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1490",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/e/ecbbe40239c7f55f0f7c20c4bd6b06a35e0115e4.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/e/ecbbe40239c7f55f0f7c20c4bd6b06a35e0115e4.jpeg",
+      "bytes": 455730,
+      "sha256": "fad327b15200ced4b4d0c59570ae21348f2fe98a5578da67a64e6fe68ac1314e",
+      "mime": "image/jpeg",
+      "width": 1144,
+      "height": 1648,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1588",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/e/ecc854fcb9bf22a95fb3b194271ed0d6702fc1a5.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/e/ecc854fcb9bf22a95fb3b194271ed0d6702fc1a5.jpeg",
+      "bytes": 391286,
+      "sha256": "16a03c77c0d8e2bc83490dd1797a7ad331311594619a8cbb772d761d5076241f",
+      "mime": "image/jpeg",
+      "width": 938,
+      "height": 721,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1726-p1",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/e/ede4e3c7aa15f2a363fea42671889de4dfd2d160.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/e/ede4e3c7aa15f2a363fea42671889de4dfd2d160.jpeg",
+      "bytes": 61191,
+      "sha256": "541ad2f5fcea74015a884190d526e100a51afa2ed885b1e1782d204a39d19b9c",
+      "mime": "image/jpeg",
+      "width": 807,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1533",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/e/efd78108a51278bf9be67041cfda0324da311512.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/e/efd78108a51278bf9be67041cfda0324da311512.jpeg",
+      "bytes": 116632,
+      "sha256": "7343ade75b7c968871a74e5bda56ef9d460fc5315d69accb2f79f66046789098",
+      "mime": "image/jpeg",
+      "width": 722,
+      "height": 955,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1748",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/f/f1771cb4514a95cda05e450198c7c88cec105698.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/f/f1771cb4514a95cda05e450198c7c88cec105698.jpeg",
+      "bytes": 123876,
+      "sha256": "d4547c8c3d6cc13aa8b07977457491a42231cd9d96a440c6a54069b7987a385c",
+      "mime": "image/jpeg",
+      "width": 817,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1696",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/f/f259651bf20bf9ffc207fbf0573f702a8bd7a220.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/f/f259651bf20bf9ffc207fbf0573f702a8bd7a220.jpeg",
+      "bytes": 135029,
+      "sha256": "4a6efa16b38372d9c20a299cf3ba7ce86934ce93322d4657a2b91ff9c59b2047",
+      "mime": "image/jpeg",
+      "width": 817,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1709",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/f/f3916d33f68fe0a92a90de68f694782ced5c146f.png",
+      "finalUrl": "https://files.rdfzer.com/original/2X/f/f3916d33f68fe0a92a90de68f694782ced5c146f.png",
+      "bytes": 112198,
+      "sha256": "95825dc7d27d6831169d9658bc52cb503d955b9dc45bf4e83e27b97608dfb84f",
+      "mime": "image/png",
+      "width": 1369,
+      "height": 858,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1557",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/f/f479330ff2ec28c0d048ed920016c67bbb89eae2.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/f/f479330ff2ec28c0d048ed920016c67bbb89eae2.jpeg",
+      "bytes": 34180,
+      "sha256": "4f84011d0e073cdc7fee7cc19e31bd01fbcd098c1ce64709242c7f7ade74b9e5",
+      "mime": "image/jpeg",
+      "width": 289,
+      "height": 337,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1698",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/f/f4854ab4d50e4ea1cf08f6fbe1cee3d42bbad1ca.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/f/f4854ab4d50e4ea1cf08f6fbe1cee3d42bbad1ca.jpeg",
+      "bytes": 316376,
+      "sha256": "8ceca79f149cb9b2571866ef595ed98af3547d57034b492ce50aaf498a13ac80",
+      "mime": "image/jpeg",
+      "width": 1701,
+      "height": 2386,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1741",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/f/f661a3bb60d6b93892c8b2b649f891b8b7d32f5b.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/f/f661a3bb60d6b93892c8b2b649f891b8b7d32f5b.jpeg",
+      "bytes": 32083,
+      "sha256": "36044f212bec5a9cabcf9a76d299d37a7cf05f792aa085a2f3db0c0702b732ba",
+      "mime": "image/jpeg",
+      "width": 217,
+      "height": 320,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1584",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/f/fba3ff1ae299e50181f4e6582cd9ac0141c8755b.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/f/fba3ff1ae299e50181f4e6582cd9ac0141c8755b.jpeg",
+      "bytes": 92434,
+      "sha256": "98a2c4f4eee4014f84ecfdca96e302a6346918d1c6ba918069bfdcb30a87bf06",
+      "mime": "image/jpeg",
+      "width": 600,
+      "height": 403,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1736",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/f/fd50404aad69e3190650ab75647618403ef2102a.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/f/fd50404aad69e3190650ab75647618403ef2102a.jpeg",
+      "bytes": 70061,
+      "sha256": "86a0c5ef053b68d6ce931b9ed4f4fbb28c79e3755432215141bf1b2a77afe58f",
+      "mime": "image/jpeg",
+      "width": 808,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1690",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/2X/f/ffdd4e83dc7b5d89756ac8a68ffa851b2e04d51a.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/2X/f/ffdd4e83dc7b5d89756ac8a68ffa851b2e04d51a.jpeg",
+      "bytes": 88919,
+      "sha256": "510e18f68df2b8c93fb14bda88458dd2863f59a17feda12aee92d917a0523f17",
+      "mime": "image/jpeg",
+      "width": 817,
+      "height": 1146,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1703",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://files.rdfzer.com/original/3X/c/b/cb7015d3322bcf83eb16fe89e1309471963bc3ca.jpeg",
+      "finalUrl": "https://files.rdfzer.com/original/3X/c/b/cb7015d3322bcf83eb16fe89e1309471963bc3ca.jpeg",
+      "bytes": 44877,
+      "sha256": "a7cbeef3b0906debed35e82ae58a4adf370d6a28b62ec16ed76f260ed0ae2949",
+      "mime": "image/jpeg",
+      "width": 480,
+      "height": 480,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-11637",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://forum.rdfzer.com/images/emoji/apple/confused.png?v=14",
+      "finalUrl": "https://forum.rdfzer.com/images/emoji/apple/confused.png?v=14",
+      "bytes": 592,
+      "sha256": "5dc1ca61bbc8cd4bf02bc0d192e798628af5c2b64f08d0179d7a828a9527ec33",
+      "mime": "image/png",
+      "width": 72,
+      "height": 72,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1476",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://forum.rdfzer.com/images/emoji/apple/face_savoring_food.png?v=14",
+      "finalUrl": "https://forum.rdfzer.com/images/emoji/apple/face_savoring_food.png?v=14",
+      "bytes": 940,
+      "sha256": "d8cb622d4c4edfeebcfed51dfc1dd883c5e5ec35e93292f976b6575ee31c8f62",
+      "mime": "image/png",
+      "width": 72,
+      "height": 72,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1522",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://forum.rdfzer.com/images/emoji/apple/face_with_peeking_eye.png?v=14",
+      "finalUrl": "https://forum.rdfzer.com/images/emoji/apple/face_with_peeking_eye.png?v=14",
+      "bytes": 1326,
+      "sha256": "42a387f727604a699d515247db528d3e9d985f8d31e33da15efb0e7005557419",
+      "mime": "image/png",
+      "width": 72,
+      "height": 72,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1522",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://forum.rdfzer.com/images/emoji/apple/high_voltage.png?v=14",
+      "finalUrl": "https://forum.rdfzer.com/images/emoji/apple/high_voltage.png?v=14",
+      "bytes": 446,
+      "sha256": "954e52c6f49987daf74ad9341c55874ada731def069dd938842f170022aa2fc8",
+      "mime": "image/png",
+      "width": 72,
+      "height": 72,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1522",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://forum.rdfzer.com/images/emoji/apple/palm_up_hand.png?v=14",
+      "finalUrl": "https://forum.rdfzer.com/images/emoji/apple/palm_up_hand.png?v=14",
+      "bytes": 883,
+      "sha256": "ee5cb940912f322525d57842dd3c0c33e1650cb921b06393f55534b344964875",
+      "mime": "image/png",
+      "width": 72,
+      "height": 72,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1522",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://forum.rdfzer.com/images/emoji/apple/paperclip.png?v=14",
+      "finalUrl": "https://forum.rdfzer.com/images/emoji/apple/paperclip.png?v=14",
+      "bytes": 541,
+      "sha256": "6930b0a8c19fbbfbb3f82f2ee639b86e863a7bc0dabe3d03197e80bb0541a0c5",
+      "mime": "image/png",
+      "width": 72,
+      "height": 72,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1476",
+          "role": "primary",
+          "postNumber": 1
+        },
+        {
+          "lessonId": "lesson-1566",
+          "role": "primary",
+          "postNumber": 1
+        },
+        {
+          "lessonId": "lesson-1591",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://forum.rdfzer.com/images/emoji/apple/pensive_face.png?v=14",
+      "finalUrl": "https://forum.rdfzer.com/images/emoji/apple/pensive_face.png?v=14",
+      "bytes": 683,
+      "sha256": "70684e6f3d83eed95d1cba7429bedaf96898ce516bb255da4c658f826f8c5bee",
+      "mime": "image/png",
+      "width": 72,
+      "height": 72,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1476",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    },
+    {
+      "sourceUrl": "https://forum.rdfzer.com/images/emoji/apple/thinking.png?v=14",
+      "finalUrl": "https://forum.rdfzer.com/images/emoji/apple/thinking.png?v=14",
+      "bytes": 1028,
+      "sha256": "5116f7d07677f06785887c0af23c189b541a306d6b792d605ffaf3ed9f0e912d",
+      "mime": "image/png",
+      "width": 72,
+      "height": 72,
+      "redirects": [],
+      "uses": [
+        {
+          "lessonId": "lesson-1476",
+          "role": "primary",
+          "postNumber": 1
+        }
+      ],
+      "collectedAt": "2026-07-30T01:10:43.464Z",
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29"
+    }
+  ]
+}

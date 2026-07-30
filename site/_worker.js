@@ -1191,14 +1191,42 @@ async function loadWordGroups(env) {
 
 async function loadVocabIndex(request, env) {
   if (vocabIndexCache.data && vocabIndexCache.exp > Date.now()) return vocabIndexCache.data;
-  let data = {};
+  let data = { lessons: {}, activeItemIds: {} };
   try {
     const assetUrl = new URL("/data/vocab/index.json", request.url);
     const response = await env.ASSETS.fetch(new Request(assetUrl.toString(), { method: "GET" }));
-    if (response.ok) data = (await response.json())?.lessons || {};
+    if (response.ok) {
+      const candidate = await response.json();
+      if (
+        candidate?.schemaVersion === "yw-vocab-index-v2" &&
+        candidate.lessons && typeof candidate.lessons === "object" &&
+        candidate.activeItemIds && typeof candidate.activeItemIds === "object"
+      ) {
+        data = candidate;
+      }
+    }
   } catch { /* 題庫索引缺席時亮度公式退化為作答比 */ }
   vocabIndexCache = { data, exp: Date.now() + 10 * 60 * 1000 };
   return data;
+}
+
+export function activeVocabItemIds(vocabIndex, lessonId) {
+  return new Set(Array.isArray(vocabIndex?.activeItemIds?.[lessonId])
+    ? vocabIndex.activeItemIds[lessonId]
+    : []);
+}
+
+export function currentVocabMastery(rows, vocabIndex) {
+  const byLesson = new Map();
+  for (const row of rows || []) {
+    const activeIds = activeVocabItemIds(vocabIndex, row.lesson_id);
+    if (!activeIds.has(row.item_id)) continue;
+    const aggregate = byLesson.get(row.lesson_id) || { attempted: 0, mastered: 0 };
+    aggregate.attempted += 1;
+    if (row.status === "mastered") aggregate.mastered += 1;
+    byLesson.set(row.lesson_id, aggregate);
+  }
+  return byLesson;
 }
 
 async function loadVocabBank(request, env, lessonId) {
@@ -1343,8 +1371,7 @@ async function handleReadingConstellation(request, env, student) {
       "JOIN submissions s ON s.id = w.submission_id WHERE s.student_id = ? AND s.is_active = 1"
     ).bind(student.id).all(),
     db.prepare(
-      "SELECT lesson_id, COUNT(*) AS attempted, SUM(CASE WHEN status = 'mastered' THEN 1 ELSE 0 END) AS mastered " +
-      "FROM vocab_mastery WHERE student_id = ? GROUP BY lesson_id"
+      "SELECT lesson_id, item_id, status FROM vocab_mastery WHERE student_id = ?"
     ).bind(student.id).all(),
     loadVocabIndex(request, env),
   ]);
@@ -1360,7 +1387,7 @@ async function handleReadingConstellation(request, env, student) {
   const firstLessonByWord = new Map((firstRows.results || []).map((row) => [row.word_norm, row.lesson_id]));
 
   const subByLesson = new Map((activeSubs.results || []).map((row) => [row.lesson_id, row]));
-  const masteryByLesson = new Map((masteryRows.results || []).map((row) => [row.lesson_id, row]));
+  const masteryByLesson = currentVocabMastery(masteryRows.results || [], vocabIndex);
   const wordRows = activeWords.results || [];
   const lessonsByWord = new Map();
   const rawByWord = new Map();
@@ -1386,7 +1413,7 @@ async function handleReadingConstellation(request, env, student) {
       const sub = subByLesson.get(node.ref);
       if (!sub) continue; // 全部版本被清時，星點保留 seq 但不出圖
       const mastery = masteryByLesson.get(node.ref) || { attempted: 0, mastered: 0 };
-      const bankTotal = Number(vocabIndex[node.ref] || 0);
+      const bankTotal = Number(vocabIndex.lessons?.[node.ref] || 0);
       outNodes.push({
         id: node.node_id, kind: "lesson", ref: node.ref, seq: node.seq,
         label: sub.lesson_title || node.ref,
@@ -1447,7 +1474,7 @@ async function handleReadingConstellation(request, env, student) {
 async function handleReadingLesson(request, env, student, lessonId) {
   if (!/^lesson-[\w-]{1,60}$/.test(lessonId)) return readingError("lessonId invalid");
   const db = env.READING_DB;
-  const [history, mastery, lessonTop] = await Promise.all([
+  const [history, mastery, lessonTop, bank] = await Promise.all([
     db.prepare(
       "SELECT version, words_raw, words_norm, ai_score, ai_verdict, is_active, source, created_at " +
       "FROM submissions WHERE student_id = ? AND lesson_id = ? ORDER BY version DESC"
@@ -1458,7 +1485,11 @@ async function handleReadingLesson(request, env, student, lessonId) {
     db.prepare(
       "SELECT word_norm, freq FROM agg_word_freq WHERE scope = 'lesson' AND scope_key = ? ORDER BY freq DESC, word_norm LIMIT 12"
     ).bind(lessonId).all(),
+    loadVocabBank(request, env, lessonId).catch(() => null),
   ]);
+  const activeIds = new Set(
+    (bank?.inventory || []).filter((item) => item?.decision === "question").map((item) => item.id),
+  );
   return json({
     ok: true,
     lessonId,
@@ -1472,7 +1503,7 @@ async function handleReadingLesson(request, env, student, lessonId) {
       source: row.source,
       createdAt: row.created_at,
     })),
-    vocab: mastery.results || [],
+    vocab: (mastery.results || []).filter((row) => activeIds.has(row.item_id)),
     lessonTopWords: (lessonTop.results || []).map((row) => [row.word_norm, row.freq]),
   }, { headers: { "cache-control": "no-store" } });
 }
@@ -1593,14 +1624,19 @@ async function handleReadingVocabAttempt(request, env, student) {
     },
   });
   let completionEvidence = null;
-  const questionCount = bank.inventory.filter((item) => item?.decision === "question").length;
-  const masteryAggregate = await db.prepare(
-    `SELECT COUNT(*) AS mastered,
-            SUM(CASE WHEN wrong_count = 0 AND correct_count > 0 THEN 1 ELSE 0 END) AS first_try
-       FROM vocab_mastery
-      WHERE student_id = ? AND lesson_id = ? AND status = 'mastered'`
-  ).bind(student.id, lessonId).first();
-  if (questionCount > 0 && Number(masteryAggregate?.mastered || 0) >= questionCount) {
+  const activeQuestionIds = new Set(
+    bank.inventory.filter((item) => item?.decision === "question").map((item) => item.id),
+  );
+  const masteryRows = await db.prepare(
+    "SELECT item_id, status, correct_count, wrong_count FROM vocab_mastery WHERE student_id = ? AND lesson_id = ?"
+  ).bind(student.id, lessonId).all();
+  const activeMasteryRows = (masteryRows.results || []).filter((row) => activeQuestionIds.has(row.item_id));
+  const masteredRows = activeMasteryRows.filter((row) => row.status === "mastered");
+  const questionCount = activeQuestionIds.size;
+  const firstTryCount = masteredRows.filter(
+    (row) => Number(row.wrong_count || 0) === 0 && Number(row.correct_count || 0) > 0,
+  ).length;
+  if (questionCount > 0 && masteredRows.length >= questionCount) {
     completionEvidence = await recordLearningInteraction({
       request,
       env,
@@ -1609,8 +1645,10 @@ async function handleReadingVocabAttempt(request, env, student) {
       interactionKey: "vocabQuizCompleted",
       payload: {
         questionCount,
-        firstTryCount: Number(masteryAggregate?.first_try || 0),
-        clientMutationId: `vocab-complete:${lessonId}:${student.id}:${String(bank.builtAt || "v1")}`.slice(0, 100),
+        firstTryCount,
+        clientMutationId: `vocab-complete:${lessonId}:${student.id}:${String(
+          bank.questionSetVersion || bank.builtAt || "v1",
+        )}`.slice(0, 100),
       },
     });
   }
@@ -1634,10 +1672,20 @@ async function handleReadingVocabAttempt(request, env, student) {
 
 async function handleReadingVocabState(request, env, student, lessonId) {
   if (!/^lesson-[\w-]{1,60}$/.test(lessonId)) return readingError("lessonId invalid");
-  const rows = await env.READING_DB.prepare(
-    "SELECT item_id, status, correct_count, wrong_count, last_at FROM vocab_mastery WHERE student_id = ? AND lesson_id = ?"
-  ).bind(student.id, lessonId).all();
-  return json({ ok: true, lessonId, items: rows.results || [] }, { headers: { "cache-control": "no-store" } });
+  const [rows, bank] = await Promise.all([
+    env.READING_DB.prepare(
+      "SELECT item_id, status, correct_count, wrong_count, last_at FROM vocab_mastery WHERE student_id = ? AND lesson_id = ?"
+    ).bind(student.id, lessonId).all(),
+    loadVocabBank(request, env, lessonId).catch(() => null),
+  ]);
+  const activeIds = new Set(
+    (bank?.inventory || []).filter((item) => item?.decision === "question").map((item) => item.id),
+  );
+  return json({
+    ok: true,
+    lessonId,
+    items: (rows.results || []).filter((row) => activeIds.has(row.item_id)),
+  }, { headers: { "cache-control": "no-store" } });
 }
 
 async function handleReadingHealth(env) {

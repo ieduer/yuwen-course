@@ -11,151 +11,79 @@
    "id": "lesson-1468:v01",
    "word": "障百川而东之",
    "annotated": false,
-   "decision": "question",
-   "reason": "引用古文，考查对文言实词活用及句意的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "阻拦百川使它们向东流",
    "sourceSentence": "障百川而东之,回狂澜于既倒",
-   "type": "interpretation",
-   "question": "文中「障百川而东之」的意思是",
-   "options": [
-    "阻挡百川向东方流动",
-    "使百川在东方受阻",
-    "防堵泛滥的百川，使它们向东流淌",
-    "在东方建立百川的屏障"
-   ],
-   "answerIndex": 2,
-   "explanation": "障，阻拦；东之，使之向东流，符合韩愈原文语境。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "唐·韩愈《进学解》"
-   ],
    "location": {
     "charIndex": 716
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1468:v01"
   },
   {
    "id": "lesson-1468:v02",
    "word": "不服周",
    "annotated": false,
-   "decision": "question",
-   "reason": "方言词汇，考查在特定语境下的心理义",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "不服气、不服输",
    "sourceSentence": "面对疫魔“不服周 ”。,武汉这座英雄之城始终屹立不倒",
-   "type": "contextual-choice",
-   "question": "文中「不服周」一词在语境中表达的意思是",
-   "options": [
-    "不服从周朝的礼制",
-    "不服气、不服输",
-    "不服从周边的安排",
-    "不服从周期性的管控"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处为武汉方言，形容面对困难顽强抗争、不肯认输的态度。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1585
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1468:v02"
   },
   {
    "id": "lesson-1468:v03",
    "word": "停摆",
    "annotated": false,
-   "decision": "question",
-   "reason": "现代汉语常用词，但在新闻语境中有特殊含义，考查词义迁移",
+   "decision": "excluded",
+   "reason": "经人工复核移除：題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
    "contextMeaning": "停止运转",
    "sourceSentence": "正常生产生活骤然“停摆",
-   "type": "contextual-choice",
-   "question": "文中「停摆」一词的语境含义是",
-   "options": [
-    "停止摆放物品",
-    "停止运转、陷入瘫痪",
-    "摆脱停滞的状态",
-    "暂停摆动"
-   ],
-   "answerIndex": 1,
-   "explanation": "原指钟摆停止，文中比喻社会生产生活因疫情而被迫中断。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 628
-   }
+   },
+   "tombstoneRef": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1468:v03"
   },
   {
    "id": "lesson-1468:v04",
    "word": "苟利国家生死以",
    "annotated": false,
-   "decision": "question",
-   "reason": "经典名句，考查对古代爱国情怀在当代语境下的内涵理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "如果对国家有利，哪怕牺牲生命也在所不惜",
    "sourceSentence": "从白衣战士冲锋在前的身影里,人们看到了“苟利国家生死以”的英勇无畏",
-   "type": "interpretation",
-   "question": "「苟利国家生死以」表达的核心精神是",
-   "options": [
-    "为了国家利益，可以把生死置之度外",
-    "如果国家利益受损，便不惜牺牲自己",
-    "生命是国家给予的，应当为国牺牲",
-    "只要国家有利，就可以放弃生命"
-   ],
-   "answerIndex": 0,
-   "explanation": "意指只要是对国家有利的事，即使牺牲生命也愿意去做。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "林则徐《赴戍登程口占示家人二首》"
-   ],
    "location": {
     "charIndex": 2802
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1468:v04"
   },
   {
    "id": "lesson-1468:v05",
    "word": "黑天鹅",
    "annotated": false,
-   "decision": "question",
-   "reason": "现代经济/管理学比喻词，考查对语境义的迁移运用",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "极其罕见且影响巨大的不可预知事件",
    "sourceSentence": "疫情之下,既有难以预料的“黑天鹅”,也有有迹可循的“灰犀牛",
-   "type": "contextual-choice",
-   "question": "文中「黑天鹅」比喻的是",
-   "options": [
-    "一种珍稀的濒危动物",
-    "一种难以预料的突发性重大灾难",
-    "一种在疫情中出现的黑色生物",
-    "一种可以预测的经济发展趋势"
-   ],
-   "answerIndex": 1,
-   "explanation": "「黑天鹅」常用于指代发生概率极小、但影响巨大的突发事件。",
-   "difficulty": 2,
-   "sourceRefs": [
-    "纳西姆·尼古拉斯·塔勒布《黑天鹅》"
-   ],
    "location": {
     "charIndex": 5597
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1468:v05"
   },
   {
    "id": "lesson-1468:v06",
    "word": "沉渣泛起",
    "annotated": false,
-   "decision": "question",
-   "reason": "贬义成语，考查词义辨析及对复杂社会现象的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "比喻已经沉没的腐朽、反动事物重新出现",
    "sourceSentence": "尽管将疫情标签化、政治化和污名化等论调不时沉渣泛起,但合作抗疫始终是国际社会的普遍共识",
-   "type": "discrimination",
-   "question": "文中「沉渣泛起」一词的感情色彩及含义分析正确的是",
-   "options": [
-    "褒义词，指陈旧的经验重新发挥作用",
-    "中性词，指各种声音的汇集",
-    "贬义词，指错误、腐朽的言论重新出现",
-    "贬义词，指社会渣滓开始活跃"
-   ],
-   "answerIndex": 2,
-   "explanation": "沉渣泛起用于比喻坏人或腐朽事物重新抬头。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 7090
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1468:v06"
   },
   {
    "id": "lesson-1468:v07",
@@ -268,5 +196,232 @@
    "contextMeaning": "追求。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1468:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1468:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "992028ebfc18014201291ccbf77706a249ad340116f743345b614764c48eae29",
+   "formerItem": {
+    "id": "lesson-1468:v01",
+    "word": "障百川而东之",
+    "annotated": false,
+    "decision": "question",
+    "reason": "引用古文，考查对文言实词活用及句意的理解",
+    "contextMeaning": "阻拦百川使它们向东流",
+    "sourceSentence": "障百川而东之,回狂澜于既倒",
+    "type": "interpretation",
+    "question": "文中「障百川而东之」的意思是",
+    "options": [
+     "阻挡百川向东方流动",
+     "使百川在东方受阻",
+     "防堵泛滥的百川，使它们向东流淌",
+     "在东方建立百川的屏障"
+    ],
+    "answerIndex": 2,
+    "explanation": "障，阻拦；东之，使之向东流，符合韩愈原文语境。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "唐·韩愈《进学解》"
+    ],
+    "location": {
+     "charIndex": 716
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1468:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1468:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "5cb50f7bd969c27042a73a536e7b5bf313e22fa5a94a10779a5582a9c27bde56",
+   "formerItem": {
+    "id": "lesson-1468:v02",
+    "word": "不服周",
+    "annotated": false,
+    "decision": "question",
+    "reason": "方言词汇，考查在特定语境下的心理义",
+    "contextMeaning": "不服气、不服输",
+    "sourceSentence": "面对疫魔“不服周 ”。,武汉这座英雄之城始终屹立不倒",
+    "type": "contextual-choice",
+    "question": "文中「不服周」一词在语境中表达的意思是",
+    "options": [
+     "不服从周朝的礼制",
+     "不服气、不服输",
+     "不服从周边的安排",
+     "不服从周期性的管控"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处为武汉方言，形容面对困难顽强抗争、不肯认输的态度。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1585
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-review-20260729-modern-basic-meaning:lesson-1468:v03",
+   "reviewId": "yw-vocab-review-20260729-modern-basic-meaning",
+   "reviewedAt": "2026-07-30T00:32:00.000Z",
+   "itemId": "lesson-1468:v03",
+   "action": "suppress",
+   "reasonCode": "context_free_basic_meaning",
+   "reason": "題目只要求無需課文語境即可直接作答的常見基本詞義，對課文理解與遷移沒有足夠增量。",
+   "sourceItemSha256": "7d96e3d76b7d70a6764aa0c080c02231bf040856f6f1991c0ecf77b890389285",
+   "formerItem": {
+    "id": "lesson-1468:v03",
+    "word": "停摆",
+    "annotated": false,
+    "decision": "question",
+    "reason": "现代汉语常用词，但在新闻语境中有特殊含义，考查词义迁移",
+    "contextMeaning": "停止运转",
+    "sourceSentence": "正常生产生活骤然“停摆",
+    "type": "contextual-choice",
+    "question": "文中「停摆」一词的语境含义是",
+    "options": [
+     "停止摆放物品",
+     "停止运转、陷入瘫痪",
+     "摆脱停滞的状态",
+     "暂停摆动"
+    ],
+    "answerIndex": 1,
+    "explanation": "原指钟摆停止，文中比喻社会生产生活因疫情而被迫中断。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 628
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1468:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1468:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "f00f880126fb9669ea7bb26defc570895299314ef0e2c96d83a3adfefa8c3d60",
+   "formerItem": {
+    "id": "lesson-1468:v04",
+    "word": "苟利国家生死以",
+    "annotated": false,
+    "decision": "question",
+    "reason": "经典名句，考查对古代爱国情怀在当代语境下的内涵理解",
+    "contextMeaning": "如果对国家有利，哪怕牺牲生命也在所不惜",
+    "sourceSentence": "从白衣战士冲锋在前的身影里,人们看到了“苟利国家生死以”的英勇无畏",
+    "type": "interpretation",
+    "question": "「苟利国家生死以」表达的核心精神是",
+    "options": [
+     "为了国家利益，可以把生死置之度外",
+     "如果国家利益受损，便不惜牺牲自己",
+     "生命是国家给予的，应当为国牺牲",
+     "只要国家有利，就可以放弃生命"
+    ],
+    "answerIndex": 0,
+    "explanation": "意指只要是对国家有利的事，即使牺牲生命也愿意去做。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "林则徐《赴戍登程口占示家人二首》"
+    ],
+    "location": {
+     "charIndex": 2802
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1468:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1468:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "26ff55dd5277d5bec299f9c652e59916448551074428d6f15d2f4f8334578126",
+   "formerItem": {
+    "id": "lesson-1468:v05",
+    "word": "黑天鹅",
+    "annotated": false,
+    "decision": "question",
+    "reason": "现代经济/管理学比喻词，考查对语境义的迁移运用",
+    "contextMeaning": "极其罕见且影响巨大的不可预知事件",
+    "sourceSentence": "疫情之下,既有难以预料的“黑天鹅”,也有有迹可循的“灰犀牛",
+    "type": "contextual-choice",
+    "question": "文中「黑天鹅」比喻的是",
+    "options": [
+     "一种珍稀的濒危动物",
+     "一种难以预料的突发性重大灾难",
+     "一种在疫情中出现的黑色生物",
+     "一种可以预测的经济发展趋势"
+    ],
+    "answerIndex": 1,
+    "explanation": "「黑天鹅」常用于指代发生概率极小、但影响巨大的突发事件。",
+    "difficulty": 2,
+    "sourceRefs": [
+     "纳西姆·尼古拉斯·塔勒布《黑天鹅》"
+    ],
+    "location": {
+     "charIndex": 5597
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1468:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1468:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "bf202ce67c06cb2a47764af8990bdd04f1d466eedb13ec97b675489ab9370009",
+   "formerItem": {
+    "id": "lesson-1468:v06",
+    "word": "沉渣泛起",
+    "annotated": false,
+    "decision": "question",
+    "reason": "贬义成语，考查词义辨析及对复杂社会现象的理解",
+    "contextMeaning": "比喻已经沉没的腐朽、反动事物重新出现",
+    "sourceSentence": "尽管将疫情标签化、政治化和污名化等论调不时沉渣泛起,但合作抗疫始终是国际社会的普遍共识",
+    "type": "discrimination",
+    "question": "文中「沉渣泛起」一词的感情色彩及含义分析正确的是",
+    "options": [
+     "褒义词，指陈旧的经验重新发挥作用",
+     "中性词，指各种声音的汇集",
+     "贬义词，指错误、腐朽的言论重新出现",
+     "贬义词，指社会渣滓开始活跃"
+    ],
+    "answerIndex": 2,
+    "explanation": "沉渣泛起用于比喻坏人或腐朽事物重新抬头。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 7090
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-review-20260729-modern-basic-meaning",
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

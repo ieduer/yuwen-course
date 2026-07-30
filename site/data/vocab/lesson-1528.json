@@ -29,145 +29,79 @@
    "id": "lesson-1528:v03",
    "word": "见机",
    "annotated": true,
-   "decision": "question",
-   "reason": "此处与现代汉语常用词义不同，理解其语境义有助于把握人物在极端压迫下的生存状态。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "知趣，看眼色行事",
    "sourceSentence": "她很见机看情况(办事),地将身体慢慢地移到屋子的角上",
-   "type": "contextual-choice",
-   "question": "「她很见机看情况(办事)，地将身体慢慢地移到屋子的角上」中「见机」的正确含义是",
-   "options": [
-    "看到机会",
-    "看情况办事",
-    "知趣，看眼色行事",
-    "灵活应对"
-   ],
-   "answerIndex": 2,
-   "explanation": "结合语境，芦柴棒因生病虚弱，为避免被老板殴打而主动躲避，此处「见机」体现了她的卑微与恐惧，意为「知趣」。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2752
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1528:v03"
   },
   {
    "id": "lesson-1528:v04",
    "word": "手面",
    "annotated": true,
-   "decision": "question",
-   "reason": "方言词汇，直接影响对带工老板社会地位与经济实力的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "排场、气派",
    "sourceSentence": "每个带工所带包身工的人数也就表示了他们的手面和财产。",
-   "type": "contextual-choice",
-   "question": "「每个带工所带包身工的人数也就表示了他们的手面和财产」中「手面」的意思是",
-   "options": [
-    "手段与层面",
-    "排场与气派",
-    "手工与门面",
-    "技巧与能力"
-   ],
-   "answerIndex": 1,
-   "explanation": "「手面」在文中指人的排场和气派，此处用来衡量带工老板的经济实力。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1373
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1528:v04"
   },
   {
    "id": "lesson-1528:v05",
    "word": "轧",
    "annotated": false,
-   "decision": "question",
-   "reason": "多音字，且在文中为方言用法，考察字音与词义理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "核对、查验",
    "sourceSentence": "好像火车站轧gá票处一般的木栅子的前面。",
-   "type": "pronunciation",
-   "question": "下列对文中加点字「轧」的读音及含义解释，正确的一项是",
-   "options": [
-    "zhá，挤压",
-    "gá，核对、查验",
-    "yà，辗压",
-    "gá，聚集"
-   ],
-   "answerIndex": 1,
-   "explanation": "教材明确标注此处读gá，意为核对、查验。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1675
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1528:v05"
   },
   {
    "id": "lesson-1528:v06",
    "word": "温情主义者",
    "annotated": false,
-   "decision": "question",
-   "reason": "文中批判的核心逻辑词，理解其讽刺意味对把握文章主旨至关重要。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "指代那些虚伪地主张用小恩小惠安抚工人以维持剥削制度的人",
    "sourceSentence": "一个有殖民地经验的“温情主义者”,在一本著作的序文上说",
-   "type": "interpretation",
-   "question": "作者在文中批判「温情主义者」，其意图是",
-   "options": [
-    "否定所有关注工人福利的社会学说",
-    "讽刺那些虚伪地通过小恩小惠掩盖剥削实质的人",
-    "赞扬他们对工人生活状况的关注",
-    "强调只有温情主义才能改善工人的生存环境"
-   ],
-   "answerIndex": 1,
-   "explanation": "作者指出温情主义者虽然口谈「结合力」，实际却用「包身工」这种廉价劳动力替代「外头工人」，实质上是更隐蔽的剥削。",
-   "difficulty": 3,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2400
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1528:v06"
   },
   {
    "id": "lesson-1528:v07",
    "word": "作践",
    "annotated": false,
-   "decision": "question",
-   "reason": "词义强烈，反映了作者对包身工悲惨命运的深切同情与愤慨，是文学性描写中的关键点。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "践踏、糟蹋、虐待",
    "sourceSentence": "猪猡一般的生活,泥土一般的作践",
-   "type": "substitution",
-   "question": "「猪猡一般的生活，泥土一般的作践」句中，「作践」一词可以替换为",
-   "options": [
-    "劳作",
-    "磨练",
-    "糟蹋",
-    "建设"
-   ],
-   "answerIndex": 2,
-   "explanation": "「作践」在此处形容被当作泥土一样践踏、蹂躏，体现了包身工地位的卑微与受到的非人虐待。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 5865
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1528:v07"
   },
   {
    "id": "lesson-1528:v08",
    "word": "滋养物",
    "annotated": false,
-   "decision": "question",
-   "reason": "高度隐喻化的表达，将包身工物化，深刻揭露了资本主义剥削的残酷本质。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "比喻包身工是供工厂资本家吸血的养分",
    "sourceSentence": "红砖头的怪物,已经张着嘴巴在等待着它的滋养物了",
-   "type": "interpretation",
-   "question": "下列对「红砖头的怪物，已经张着嘴巴在等待着它的滋养物了」这句话的理解，正确的一项是",
-   "options": [
-    "说明工厂需要食物来维持日常运转",
-    "比喻工厂是吞噬人的怪物，包身工是其剥削的对象",
-    "暗示工厂的运作极其依赖工人的主动奉献",
-    "描写工厂工人们排队领取营养品的真实场景"
-   ],
-   "answerIndex": 1,
-   "explanation": "作者将工厂比作「红砖头的怪物」，将包身工比作「滋养物」，形象地揭示了资本家靠榨取工人血汗来获利的本质。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 4183
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1528:v08"
   },
   {
    "id": "lesson-1528:v09",
@@ -376,5 +310,225 @@
    "contextMeaning": "现在译作“梭罗”，美国作家，写过大量政论，反对对外侵略，支持奴隶解放。著有散文集《瓦尔登湖》。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1528:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1528:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "28e49dbcf828008c4e01f6edb72aabf8de8f19760b41333e6fad0190213bd86b",
+   "formerItem": {
+    "id": "lesson-1528:v03",
+    "word": "见机",
+    "annotated": true,
+    "decision": "question",
+    "reason": "此处与现代汉语常用词义不同，理解其语境义有助于把握人物在极端压迫下的生存状态。",
+    "contextMeaning": "知趣，看眼色行事",
+    "sourceSentence": "她很见机看情况(办事),地将身体慢慢地移到屋子的角上",
+    "type": "contextual-choice",
+    "question": "「她很见机看情况(办事)，地将身体慢慢地移到屋子的角上」中「见机」的正确含义是",
+    "options": [
+     "看到机会",
+     "看情况办事",
+     "知趣，看眼色行事",
+     "灵活应对"
+    ],
+    "answerIndex": 2,
+    "explanation": "结合语境，芦柴棒因生病虚弱，为避免被老板殴打而主动躲避，此处「见机」体现了她的卑微与恐惧，意为「知趣」。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2752
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1528:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1528:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "d0440e2d3259107d99d406a8ebfc5e03417fd7823884dd78508aa2ce49cad1ed",
+   "formerItem": {
+    "id": "lesson-1528:v04",
+    "word": "手面",
+    "annotated": true,
+    "decision": "question",
+    "reason": "方言词汇，直接影响对带工老板社会地位与经济实力的理解。",
+    "contextMeaning": "排场、气派",
+    "sourceSentence": "每个带工所带包身工的人数也就表示了他们的手面和财产。",
+    "type": "contextual-choice",
+    "question": "「每个带工所带包身工的人数也就表示了他们的手面和财产」中「手面」的意思是",
+    "options": [
+     "手段与层面",
+     "排场与气派",
+     "手工与门面",
+     "技巧与能力"
+    ],
+    "answerIndex": 1,
+    "explanation": "「手面」在文中指人的排场和气派，此处用来衡量带工老板的经济实力。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1373
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1528:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1528:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "00325c1cf419c96a003d1197e78f4910dd8acd12dc998454da10a2fc59379cc3",
+   "formerItem": {
+    "id": "lesson-1528:v05",
+    "word": "轧",
+    "annotated": false,
+    "decision": "question",
+    "reason": "多音字，且在文中为方言用法，考察字音与词义理解。",
+    "contextMeaning": "核对、查验",
+    "sourceSentence": "好像火车站轧gá票处一般的木栅子的前面。",
+    "type": "pronunciation",
+    "question": "下列对文中加点字「轧」的读音及含义解释，正确的一项是",
+    "options": [
+     "zhá，挤压",
+     "gá，核对、查验",
+     "yà，辗压",
+     "gá，聚集"
+    ],
+    "answerIndex": 1,
+    "explanation": "教材明确标注此处读gá，意为核对、查验。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1675
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1528:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1528:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "38149cff6a52505bfb38cb520a6416f02ae80cd713f53dd782e5dc720bff9bf6",
+   "formerItem": {
+    "id": "lesson-1528:v06",
+    "word": "温情主义者",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文中批判的核心逻辑词，理解其讽刺意味对把握文章主旨至关重要。",
+    "contextMeaning": "指代那些虚伪地主张用小恩小惠安抚工人以维持剥削制度的人",
+    "sourceSentence": "一个有殖民地经验的“温情主义者”,在一本著作的序文上说",
+    "type": "interpretation",
+    "question": "作者在文中批判「温情主义者」，其意图是",
+    "options": [
+     "否定所有关注工人福利的社会学说",
+     "讽刺那些虚伪地通过小恩小惠掩盖剥削实质的人",
+     "赞扬他们对工人生活状况的关注",
+     "强调只有温情主义才能改善工人的生存环境"
+    ],
+    "answerIndex": 1,
+    "explanation": "作者指出温情主义者虽然口谈「结合力」，实际却用「包身工」这种廉价劳动力替代「外头工人」，实质上是更隐蔽的剥削。",
+    "difficulty": 3,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2400
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1528:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1528:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "db668f9a6a8278ed639ba4b5f5c4fb08357ef3d8482664ea8b36455610413a36",
+   "formerItem": {
+    "id": "lesson-1528:v07",
+    "word": "作践",
+    "annotated": false,
+    "decision": "question",
+    "reason": "词义强烈，反映了作者对包身工悲惨命运的深切同情与愤慨，是文学性描写中的关键点。",
+    "contextMeaning": "践踏、糟蹋、虐待",
+    "sourceSentence": "猪猡一般的生活,泥土一般的作践",
+    "type": "substitution",
+    "question": "「猪猡一般的生活，泥土一般的作践」句中，「作践」一词可以替换为",
+    "options": [
+     "劳作",
+     "磨练",
+     "糟蹋",
+     "建设"
+    ],
+    "answerIndex": 2,
+    "explanation": "「作践」在此处形容被当作泥土一样践踏、蹂躏，体现了包身工地位的卑微与受到的非人虐待。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 5865
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1528:v08",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1528:v08",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "93f093687a0d6773e8e0e5f203c1d0e2a7f4034d21c48484ee6bd9d989424be3",
+   "formerItem": {
+    "id": "lesson-1528:v08",
+    "word": "滋养物",
+    "annotated": false,
+    "decision": "question",
+    "reason": "高度隐喻化的表达，将包身工物化，深刻揭露了资本主义剥削的残酷本质。",
+    "contextMeaning": "比喻包身工是供工厂资本家吸血的养分",
+    "sourceSentence": "红砖头的怪物,已经张着嘴巴在等待着它的滋养物了",
+    "type": "interpretation",
+    "question": "下列对「红砖头的怪物，已经张着嘴巴在等待着它的滋养物了」这句话的理解，正确的一项是",
+    "options": [
+     "说明工厂需要食物来维持日常运转",
+     "比喻工厂是吞噬人的怪物，包身工是其剥削的对象",
+     "暗示工厂的运作极其依赖工人的主动奉献",
+     "描写工厂工人们排队领取营养品的真实场景"
+    ],
+    "answerIndex": 1,
+    "explanation": "作者将工厂比作「红砖头的怪物」，将包身工比作「滋养物」，形象地揭示了资本家靠榨取工人血汗来获利的本质。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 4183
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

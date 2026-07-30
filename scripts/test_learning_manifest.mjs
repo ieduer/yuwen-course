@@ -34,13 +34,36 @@ test("manifest contains only the three exact textbook books", () => {
   assert.equal(manifest.completionKind, "answer_submitted");
   assert.equal(manifest.thresholdPercent, 90);
   assert.equal(manifest.lessonCount, 101);
-  assert.equal(manifest.itemCount, 1156);
-  assert.equal(manifest.manifestVersion, "yw-b530d57cb873ed49");
-  assert.equal(manifest.resourceKeyHash, "sha256:b530d57cb873ed49340bcc606ec8a70fd9970a59d911fd1001d63ce85a86c2ba");
+  assert.equal(manifest.itemCount, 901);
+  assert.equal(manifest.manifestVersion, "yw-7abfb37143d876fd");
+  assert.equal(manifest.resourceKeyHash, "sha256:7abfb37143d876fdcb31966eb8f19116bb30a1e01f09abe098a009edd3c90f10");
+  assert.deepEqual(manifest.vocabEligibility, {
+    policyVersion: "yw-vocab-eligibility-20260730-v1",
+    defaultEligibleModes: ["classical", "poetry"],
+    exceptionCount: 0,
+  });
   assert.deepEqual(manifest.sources.map((source) => source.blockId), BOOK_IDS);
   assert.deepEqual(manifest.sources.map((source) => source.lessonCount), [28, 36, 37]);
   assert.deepEqual(manifest.exclusions.map((entry) => entry.lessonId).sort(), Object.keys(EXCLUDED_LESSONS).sort());
   assert.equal(manifest.items.some((item) => EXCLUDED_LESSONS[item.sourceId]), false);
+});
+
+test("vocabulary stays classical-or-poetry and word creation stays poetry-only", () => {
+  const manifest = buildLearningManifest();
+  const taxonomy = JSON.parse(readFileSync(resolve(ROOT, "site/data/literary-taxonomy.json"), "utf8"));
+  const modeByLesson = new Map(taxonomy.lessons.map((lesson) => [lesson.id, lesson.mode]));
+  const vocabulary = manifest.items.filter((item) => item.questionKind === "vocabulary");
+  const wordCreation = manifest.items.filter((item) => item.questionKind === "wordCreation");
+  assert.equal(vocabulary.length, 382);
+  assert.equal(wordCreation.length, 25);
+  assert.equal(
+    vocabulary.every((item) => ["classical", "poetry"].includes(modeByLesson.get(item.sourceId))),
+    true,
+  );
+  assert.equal(
+    wordCreation.every((item) => modeByLesson.get(item.sourceId) === "poetry"),
+    true,
+  );
 });
 
 test("removed lessons are absent from source data and every shipped index", () => {
@@ -76,7 +99,7 @@ test("every key is unique and traceable to an answer-bearing effect control", ()
   assert.equal(manifest.itemCount, keys.length);
   assert.equal(keys.includes(interactionResourceKey("lesson-1458", "contextWords")), true);
   assert.equal(keys.includes(interactionResourceKey("lesson-1458", "evaluation")), true);
-  assert.equal(keys.includes(vocabResourceKey("lesson-1458", "lesson-1458:v01")), true);
+  assert.equal(keys.includes(vocabResourceKey("lesson-1474", "lesson-1474:v01")), true);
   assert.equal(keys.some((key) => key.includes(":interaction:read")), false);
   assert.equal(keys.some((key) => key.includes(":interaction:vocabulary")), false);
   assert.equal(manifest.items.every((item) => item.sourceId && item.sourcePath && item.questionKind), true);

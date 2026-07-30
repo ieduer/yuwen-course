@@ -4,6 +4,11 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  hashEligibilitySourceItem,
+  isVocabItemEligible,
+  loadVocabEligibility,
+} from "./vocab_eligibility.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const MANIFEST_PATH = resolve(ROOT, "site/data/manifest.json");
@@ -78,13 +83,19 @@ function interactionItem(lesson, mode, interaction) {
   };
 }
 
-function vocabItems(lesson) {
+function vocabItems(lesson, sourceMode, eligibility) {
   const relativePath = `site/data/vocab/${lesson.id}.json`;
   const sourcePath = resolve(ROOT, relativePath);
   if (!existsSync(sourcePath)) return [];
   const bank = JSON.parse(readFileSync(sourcePath, "utf8"));
   return (Array.isArray(bank.inventory) ? bank.inventory : [])
     .filter((item) => item?.decision === "question")
+    .filter((item) => isVocabItemEligible(eligibility, {
+      mode: sourceMode,
+      lessonId: lesson.id,
+      itemId: String(item.id || ""),
+      sourceItemSha256: hashEligibilitySourceItem(item),
+    }))
     .map((item, index) => ({
       resourceKey: vocabResourceKey(lesson.id, String(item.id || "")),
       itemTitle: `${cleanTitle(lesson.title)} · 字詞題 ${index + 1}`,
@@ -121,6 +132,7 @@ function officialLessons(manifest) {
 export function buildLearningManifest() {
   const manifest = JSON.parse(readFileSync(MANIFEST_PATH, "utf8"));
   const taxonomy = JSON.parse(readFileSync(TAXONOMY_PATH, "utf8"));
+  const eligibility = loadVocabEligibility();
   const taxonomyById = new Map(taxonomy.lessons.map((lesson) => [lesson.id, lesson]));
   const lessons = officialLessons(manifest);
   const items = [];
@@ -133,9 +145,12 @@ export function buildLearningManifest() {
     for (const interaction of INTERACTIONS_BY_MODE[interactionGroup]) {
       items.push(interactionItem(lesson, mode, interaction));
     }
-    if (STANDARD_MODES.has(mode)) {
-      items.push(...vocabItems(lesson));
-      if (mode !== "classical") items.push(interactionItem(lesson, mode, "wordCreation"));
+    const vocabulary = vocabItems(lesson, taxonomyLesson.mode, eligibility);
+    if (vocabulary.length > 0) {
+      items.push(...vocabulary);
+      if (taxonomyLesson.mode === "poetry") {
+        items.push(interactionItem(lesson, mode, "wordCreation"));
+      }
     }
   }
 
@@ -170,6 +185,11 @@ export function buildLearningManifest() {
     completionKind: "answer_submitted",
     thresholdPercent: 90,
     lessonCount: lessons.length,
+    vocabEligibility: {
+      policyVersion: eligibility.policyVersion,
+      defaultEligibleModes: eligibility.defaultEligibleModes,
+      exceptionCount: eligibility.exceptions.length,
+    },
     sources,
     exclusions: Object.entries(EXCLUDED_LESSONS).map(([lessonId, reason]) => ({ lessonId, reason })),
     items,

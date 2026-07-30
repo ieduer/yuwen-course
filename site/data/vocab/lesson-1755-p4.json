@@ -11,169 +11,92 @@
    "id": "lesson-1755-p4:v01",
    "word": "谁家",
    "annotated": false,
-   "decision": "question",
-   "reason": "教材注释词汇，且涉及语境理解，影响对曲词意境的把握",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "哪一家",
    "sourceSentence": "赏心乐事谁家 院",
-   "type": "contextual-choice",
-   "question": "「赏心乐事谁家院！」中「谁家」最恰当的理解是",
-   "options": [
-    "某一家",
-    "哪一家",
-    "什么地方",
-    "谁的家"
-   ],
-   "answerIndex": 1,
-   "explanation": "此处为反问语气，意在感叹良辰美景无人共赏，应理解为“哪一家”，即没有哪一家能真正享受这良辰美景。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 233
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v01"
   },
   {
    "id": "lesson-1755-p4:v02",
    "word": "姹紫嫣红",
    "annotated": false,
-   "decision": "question",
-   "reason": "描写景色的核心意象，影响对杜丽娘青春觉醒的语境感知",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "形容百花娇艳，色彩绚烂",
    "sourceSentence": "原来姹紫嫣红开遍",
-   "type": "interpretation",
-   "question": "「原来姹紫嫣红开遍」中「姹紫嫣红」的含义是",
-   "options": [
-    "形容春天的色彩斑斓，百花盛开",
-    "形容紫色的花和红色的花开得很多",
-    "形容杜丽娘的衣着华丽多彩",
-    "形容花园里的装饰非常精美"
-   ],
-   "answerIndex": 0,
-   "explanation": "姹紫嫣红形容花朵娇艳，色彩绚烂，在文中象征着春天生机勃勃的景象，与杜丽娘觉醒的青春意识相呼应。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 203
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v02"
   },
   {
    "id": "lesson-1755-p4:v03",
    "word": "断井颓垣",
    "annotated": false,
-   "decision": "question",
-   "reason": "关键意象，影响对“良辰美景”与“凋敝环境”对比的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "破败的井和倒塌的墙，形容荒凉破败的景象",
    "sourceSentence": "似这般都付与断井颓垣",
-   "type": "evidence",
-   "question": "文中用「断井颓垣」这一意象，意在表现什么？",
-   "options": [
-    "表现花园修缮得非常精巧别致",
-    "表现作者对古代建筑的喜爱",
-    "反衬良辰美景的无人欣赏与凄凉孤寂",
-    "体现杜丽娘家境的贫寒与落魄"
-   ],
-   "answerIndex": 2,
-   "explanation": "“断井颓垣”是破败荒凉的景象，与前文的“姹紫嫣红”形成鲜明对比，突出了杜丽娘对美好的时光被辜负的感伤。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 212
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v03"
   },
   {
    "id": "lesson-1755-p4:v04",
    "word": "奈何天",
    "annotated": false,
-   "decision": "question",
-   "reason": "对主人公情感转折至关重要，体现戏曲悲剧色彩",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "对苍天无可奈何，感叹良辰美景易逝",
    "sourceSentence": "良辰美景奈何天",
-   "type": "interpretation",
-   "question": "「良辰美景奈何天」中「奈何天」的含义是",
-   "options": [
-    "感叹天空景色变幻莫测",
-    "感叹美好的时光无法留住，对天无可奈何",
-    "赞美上天赐予的美景",
-    "祈求上天保佑青春永驻"
-   ],
-   "answerIndex": 1,
-   "explanation": "“奈何天”是戏曲中常用的感叹语，指面对如此美好的良辰美景，却无人共享，对时光流逝、美景将残感到无可奈何。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 224
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v04"
   },
   {
    "id": "lesson-1755-p4:v05",
    "word": "朝飞暮卷",
    "annotated": false,
-   "decision": "question",
-   "reason": "对偶句法，刻画云霞形态，影响对意象动态美的理解",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "云霞早晚随风飞卷",
    "sourceSentence": "朝飞暮卷",
-   "type": "contextual-choice",
-   "question": "「朝飞暮卷」在句中描绘的是什么意象？",
-   "options": [
-    "飞鸟在暮色中盘旋",
-    "书卷在早晚翻动",
-    "云霞在早晚随风变幻的状态",
-    "杜丽娘早晚在花园里游玩"
-   ],
-   "answerIndex": 2,
-   "explanation": "结合下文“云霞翠轩”，可知此处形容的是云霞在早晚时分随风飞卷的动态美。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 243
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v05"
   },
   {
    "id": "lesson-1755-p4:v06",
    "word": "忒",
    "annotated": false,
-   "decision": "question",
-   "reason": "方言词，影响主观情感程度的判断",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "太，过分",
    "sourceSentence": "锦屏人忒看的这韶光贱",
-   "type": "gu-jin",
-   "question": "「锦屏人忒看的这韶光贱」中「忒」的意思是",
-   "options": [
-    "稍微",
-    "特别",
-    "太，过分",
-    "怎么"
-   ],
-   "answerIndex": 2,
-   "explanation": "“忒”是元明戏曲中常见的方言，相当于“太”，在此处表现了杜丽娘对辜负大好春光的自责与感叹。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 265
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v06"
   },
   {
    "id": "lesson-1755-p4:v07",
    "word": "锦屏人",
    "annotated": false,
-   "decision": "question",
-   "reason": "借代用法，理解人物身份的关键",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "深闺中的女子",
    "sourceSentence": "锦屏人忒看的这韶光贱",
-   "type": "interpretation",
-   "question": "「锦屏人」在文中借代的是",
-   "options": [
-    "杜丽娘自己",
-    "花园的守护者",
-    "达官显贵",
-    "制作锦屏的工匠"
-   ],
-   "answerIndex": 0,
-   "explanation": "“锦屏人”是指居住在锦屏风装饰的闺房中的人，此处借指深闺中的杜丽娘。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 265
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v07"
   },
   {
    "id": "lesson-1755-p4:v08",
@@ -220,5 +143,260 @@
    "contextMeaning": "谁家，哪一家。一说作“什么”解。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1755-p4:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "f15f3b9bf7ce1422d290aa84de536127669ba9a3a94aea238f38e770930e4c6b",
+   "formerItem": {
+    "id": "lesson-1755-p4:v01",
+    "word": "谁家",
+    "annotated": false,
+    "decision": "question",
+    "reason": "教材注释词汇，且涉及语境理解，影响对曲词意境的把握",
+    "contextMeaning": "哪一家",
+    "sourceSentence": "赏心乐事谁家 院",
+    "type": "contextual-choice",
+    "question": "「赏心乐事谁家院！」中「谁家」最恰当的理解是",
+    "options": [
+     "某一家",
+     "哪一家",
+     "什么地方",
+     "谁的家"
+    ],
+    "answerIndex": 1,
+    "explanation": "此处为反问语气，意在感叹良辰美景无人共赏，应理解为“哪一家”，即没有哪一家能真正享受这良辰美景。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 233
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1755-p4:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "45d0aeb07d56489210fff74b4e0f1bf5245af605f9ac1fee0c7920ad9921223c",
+   "formerItem": {
+    "id": "lesson-1755-p4:v02",
+    "word": "姹紫嫣红",
+    "annotated": false,
+    "decision": "question",
+    "reason": "描写景色的核心意象，影响对杜丽娘青春觉醒的语境感知",
+    "contextMeaning": "形容百花娇艳，色彩绚烂",
+    "sourceSentence": "原来姹紫嫣红开遍",
+    "type": "interpretation",
+    "question": "「原来姹紫嫣红开遍」中「姹紫嫣红」的含义是",
+    "options": [
+     "形容春天的色彩斑斓，百花盛开",
+     "形容紫色的花和红色的花开得很多",
+     "形容杜丽娘的衣着华丽多彩",
+     "形容花园里的装饰非常精美"
+    ],
+    "answerIndex": 0,
+    "explanation": "姹紫嫣红形容花朵娇艳，色彩绚烂，在文中象征着春天生机勃勃的景象，与杜丽娘觉醒的青春意识相呼应。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 203
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1755-p4:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "411a0d1c887d4f997450efbf0338ecd7987dca2846c7fad168b4481869704281",
+   "formerItem": {
+    "id": "lesson-1755-p4:v03",
+    "word": "断井颓垣",
+    "annotated": false,
+    "decision": "question",
+    "reason": "关键意象，影响对“良辰美景”与“凋敝环境”对比的理解",
+    "contextMeaning": "破败的井和倒塌的墙，形容荒凉破败的景象",
+    "sourceSentence": "似这般都付与断井颓垣",
+    "type": "evidence",
+    "question": "文中用「断井颓垣」这一意象，意在表现什么？",
+    "options": [
+     "表现花园修缮得非常精巧别致",
+     "表现作者对古代建筑的喜爱",
+     "反衬良辰美景的无人欣赏与凄凉孤寂",
+     "体现杜丽娘家境的贫寒与落魄"
+    ],
+    "answerIndex": 2,
+    "explanation": "“断井颓垣”是破败荒凉的景象，与前文的“姹紫嫣红”形成鲜明对比，突出了杜丽娘对美好的时光被辜负的感伤。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 212
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1755-p4:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "19d1d8b58c6100ab7322506f0e37037545944f5f579c0a5843e13b03798fa1be",
+   "formerItem": {
+    "id": "lesson-1755-p4:v04",
+    "word": "奈何天",
+    "annotated": false,
+    "decision": "question",
+    "reason": "对主人公情感转折至关重要，体现戏曲悲剧色彩",
+    "contextMeaning": "对苍天无可奈何，感叹良辰美景易逝",
+    "sourceSentence": "良辰美景奈何天",
+    "type": "interpretation",
+    "question": "「良辰美景奈何天」中「奈何天」的含义是",
+    "options": [
+     "感叹天空景色变幻莫测",
+     "感叹美好的时光无法留住，对天无可奈何",
+     "赞美上天赐予的美景",
+     "祈求上天保佑青春永驻"
+    ],
+    "answerIndex": 1,
+    "explanation": "“奈何天”是戏曲中常用的感叹语，指面对如此美好的良辰美景，却无人共享，对时光流逝、美景将残感到无可奈何。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 224
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1755-p4:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "538ff5dccd0af005d28d492b31909728454259a5e32e5919e9e3dd58fbd1977a",
+   "formerItem": {
+    "id": "lesson-1755-p4:v05",
+    "word": "朝飞暮卷",
+    "annotated": false,
+    "decision": "question",
+    "reason": "对偶句法，刻画云霞形态，影响对意象动态美的理解",
+    "contextMeaning": "云霞早晚随风飞卷",
+    "sourceSentence": "朝飞暮卷",
+    "type": "contextual-choice",
+    "question": "「朝飞暮卷」在句中描绘的是什么意象？",
+    "options": [
+     "飞鸟在暮色中盘旋",
+     "书卷在早晚翻动",
+     "云霞在早晚随风变幻的状态",
+     "杜丽娘早晚在花园里游玩"
+    ],
+    "answerIndex": 2,
+    "explanation": "结合下文“云霞翠轩”，可知此处形容的是云霞在早晚时分随风飞卷的动态美。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 243
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1755-p4:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "10e331ec89cca5f741474ecea505b622e50cd4dfe63bd5fc5acc25cd345fd761",
+   "formerItem": {
+    "id": "lesson-1755-p4:v06",
+    "word": "忒",
+    "annotated": false,
+    "decision": "question",
+    "reason": "方言词，影响主观情感程度的判断",
+    "contextMeaning": "太，过分",
+    "sourceSentence": "锦屏人忒看的这韶光贱",
+    "type": "gu-jin",
+    "question": "「锦屏人忒看的这韶光贱」中「忒」的意思是",
+    "options": [
+     "稍微",
+     "特别",
+     "太，过分",
+     "怎么"
+    ],
+    "answerIndex": 2,
+    "explanation": "“忒”是元明戏曲中常见的方言，相当于“太”，在此处表现了杜丽娘对辜负大好春光的自责与感叹。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 265
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1755-p4:v07",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1755-p4:v07",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "1658b31423a68188efa1ce0291ef707ec8af9fe088e03b704e74dc6fb151cb04",
+   "formerItem": {
+    "id": "lesson-1755-p4:v07",
+    "word": "锦屏人",
+    "annotated": false,
+    "decision": "question",
+    "reason": "借代用法，理解人物身份的关键",
+    "contextMeaning": "深闺中的女子",
+    "sourceSentence": "锦屏人忒看的这韶光贱",
+    "type": "interpretation",
+    "question": "「锦屏人」在文中借代的是",
+    "options": [
+     "杜丽娘自己",
+     "花园的守护者",
+     "达官显贵",
+     "制作锦屏的工匠"
+    ],
+    "answerIndex": 0,
+    "explanation": "“锦屏人”是指居住在锦屏风装饰的闺房中的人，此处借指深闺中的杜丽娘。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 265
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }

@@ -11,145 +11,79 @@
    "id": "lesson-1746:v01",
    "word": "投机",
    "annotated": false,
-   "decision": "question",
-   "reason": "古今异义，现代汉语常指投机取巧，文中指谈话合拍，影响人物关系理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "合拍，投缘",
    "sourceSentence": "谈话是总不投机的了,于是不多久,我便一个人剩在书房里",
-   "type": "contextual-choice",
-   "question": "「谈话是总不投机的了」中「投机」一词在文中的意思是",
-   "options": [
-    "利用时机钻空子",
-    "意见相投，合得来",
-    "进行商业投资",
-    "投其所好"
-   ],
-   "answerIndex": 1,
-   "explanation": "文中指“我”与鲁四老爷因思想差异，谈话无法进行下去，故为合拍、投缘的意思。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 281
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1746:v01"
   },
   {
    "id": "lesson-1746:v02",
    "word": "不更事",
    "annotated": true,
-   "decision": "question",
-   "reason": "考查成语/固定词组积累，且对理解文中作者对少年的评价有帮助。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "经历世事不多，缺乏社会经验",
    "sourceSentence": "不更事的勇敢的少年,往往敢于给人解决疑问",
-   "type": "interpretation",
-   "question": "文中「不更事的勇敢的少年」中「不更事」的意思是",
-   "options": [
-    "不经历任何事情",
-    "不改变态度",
-    "缺乏社会经验",
-    "不懂得基本礼仪"
-   ],
-   "answerIndex": 2,
-   "explanation": "更，经历。指经历世事不多，即缺乏社会经验，不懂世故人情。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1839
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1746:v02"
   },
   {
    "id": "lesson-1746:v03",
    "word": "无常",
    "annotated": true,
-   "decision": "question",
-   "reason": "佛教用语，在文中具有特殊的语境义（死亡），体现作者对祥林嫂命运的冷峻思考。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "死亡",
    "sourceSentence": "现在总算被无常打扫得干干净净了。",
-   "type": "contextual-choice",
-   "question": "文中「现在总算被无常打扫得干干净净了」中「无常」一词的语境含义是",
-   "options": [
-    "世事变化无定",
-    "一种神鬼力量",
-    "死亡",
-    "虚无缥缈"
-   ],
-   "answerIndex": 2,
-   "explanation": "文中借“无常”代指死亡，带有冷峻、讽刺的意味。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 2946
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1746:v03"
   },
   {
    "id": "lesson-1746:v04",
    "word": "强",
    "annotated": true,
-   "decision": "question",
-   "reason": "多音字考点，且为本文重要语境词，直接影响对祥林嫂反抗行为的理解。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "固执，不听劝导",
    "sourceSentence": "再一强,或者索性撞一个死,就好了",
-   "type": "pronunciation",
-   "question": "下列加点字的读音正确的一项是",
-   "options": [
-    "再一强（qiáng）",
-    "再一强（qiǎng）",
-    "再一强（jiàng）",
-    "再一强（jiāng）"
-   ],
-   "answerIndex": 2,
-   "explanation": "在此处读jiàng，意为固执，不听劝导。",
-   "difficulty": 1,
-   "sourceRefs": [],
    "location": {
     "charIndex": 8148
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1746:v04"
   },
   {
    "id": "lesson-1746:v05",
    "word": "大抵",
    "annotated": false,
-   "decision": "question",
-   "reason": "高频词，容易被现代语感干扰，影响对句子逻辑关系的判断。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "大多，大致，基本上",
    "sourceSentence": "万一结果不佳,大抵反成了怨府",
-   "type": "contextual-choice",
-   "question": "「万一结果不佳，大抵反成了怨府」中「大抵」的意思是",
-   "options": [
-    "大概，大体上",
-    "抵消，平衡",
-    "必然，一定",
-    "特别，尤其"
-   ],
-   "answerIndex": 0,
-   "explanation": "“大抵”在此处表示推测或结论的范围，意为大多、基本上。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 1865
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1746:v05"
   },
   {
    "id": "lesson-1746:v06",
    "word": "断送",
    "annotated": false,
-   "decision": "question",
-   "reason": "文中语境义与现代常用词义略有差异，体现人物命运的悲剧性。",
+   "decision": "excluded",
+   "reason": "依詞級疏通範圍規則移除：詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
    "contextMeaning": "丧失，毁掉，断绝",
    "sourceSentence": "年纪青青,就会断送在伤寒上",
-   "type": "contextual-choice",
-   "question": "文中「年纪青青，就会断送在伤寒上」的「断送」应理解为",
-   "options": [
-    "送别，告别",
-    "丧失，毁掉",
-    "断绝往来",
-    "送达终点"
-   ],
-   "answerIndex": 1,
-   "explanation": "文中指生命被断绝、丧失。",
-   "difficulty": 2,
-   "sourceRefs": [],
    "location": {
     "charIndex": 5736
-   }
+   },
+   "tombstoneRef": "yw-vocab-eligibility-20260730-v1:lesson-1746:v06"
   },
   {
    "id": "lesson-1746:v07",
@@ -670,5 +604,225 @@
    "contextMeaning": "指进入夜晚不久的时段。",
    "sourceSentence": ""
   }
- ]
+ ],
+ "questionTombstones": [
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1746:v01",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1746:v01",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "31f99850122fe93a3756413ec51c4b0183f481b5d8c0af7d6957e6236eadd52a",
+   "formerItem": {
+    "id": "lesson-1746:v01",
+    "word": "投机",
+    "annotated": false,
+    "decision": "question",
+    "reason": "古今异义，现代汉语常指投机取巧，文中指谈话合拍，影响人物关系理解。",
+    "contextMeaning": "合拍，投缘",
+    "sourceSentence": "谈话是总不投机的了,于是不多久,我便一个人剩在书房里",
+    "type": "contextual-choice",
+    "question": "「谈话是总不投机的了」中「投机」一词在文中的意思是",
+    "options": [
+     "利用时机钻空子",
+     "意见相投，合得来",
+     "进行商业投资",
+     "投其所好"
+    ],
+    "answerIndex": 1,
+    "explanation": "文中指“我”与鲁四老爷因思想差异，谈话无法进行下去，故为合拍、投缘的意思。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 281
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1746:v02",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1746:v02",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "848c2ff83a15bf4fac50f054fc1131d0346b92bc6c59a465ae6771f051902e62",
+   "formerItem": {
+    "id": "lesson-1746:v02",
+    "word": "不更事",
+    "annotated": true,
+    "decision": "question",
+    "reason": "考查成语/固定词组积累，且对理解文中作者对少年的评价有帮助。",
+    "contextMeaning": "经历世事不多，缺乏社会经验",
+    "sourceSentence": "不更事的勇敢的少年,往往敢于给人解决疑问",
+    "type": "interpretation",
+    "question": "文中「不更事的勇敢的少年」中「不更事」的意思是",
+    "options": [
+     "不经历任何事情",
+     "不改变态度",
+     "缺乏社会经验",
+     "不懂得基本礼仪"
+    ],
+    "answerIndex": 2,
+    "explanation": "更，经历。指经历世事不多，即缺乏社会经验，不懂世故人情。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1839
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1746:v03",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1746:v03",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "71054f6485d73bd080a85dbf814ad0a272872fe1600e759f67a80b1223fc9c4f",
+   "formerItem": {
+    "id": "lesson-1746:v03",
+    "word": "无常",
+    "annotated": true,
+    "decision": "question",
+    "reason": "佛教用语，在文中具有特殊的语境义（死亡），体现作者对祥林嫂命运的冷峻思考。",
+    "contextMeaning": "死亡",
+    "sourceSentence": "现在总算被无常打扫得干干净净了。",
+    "type": "contextual-choice",
+    "question": "文中「现在总算被无常打扫得干干净净了」中「无常」一词的语境含义是",
+    "options": [
+     "世事变化无定",
+     "一种神鬼力量",
+     "死亡",
+     "虚无缥缈"
+    ],
+    "answerIndex": 2,
+    "explanation": "文中借“无常”代指死亡，带有冷峻、讽刺的意味。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 2946
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1746:v04",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1746:v04",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "0890b386a980c6b20d4e841746361a1f4ce330f156e2a2660b749821c4200441",
+   "formerItem": {
+    "id": "lesson-1746:v04",
+    "word": "强",
+    "annotated": true,
+    "decision": "question",
+    "reason": "多音字考点，且为本文重要语境词，直接影响对祥林嫂反抗行为的理解。",
+    "contextMeaning": "固执，不听劝导",
+    "sourceSentence": "再一强,或者索性撞一个死,就好了",
+    "type": "pronunciation",
+    "question": "下列加点字的读音正确的一项是",
+    "options": [
+     "再一强（qiáng）",
+     "再一强（qiǎng）",
+     "再一强（jiàng）",
+     "再一强（jiāng）"
+    ],
+    "answerIndex": 2,
+    "explanation": "在此处读jiàng，意为固执，不听劝导。",
+    "difficulty": 1,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 8148
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1746:v05",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1746:v05",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "5525d697be6711b315018aae1b83c54b6108706e2da2f2e37543ec95884eae8f",
+   "formerItem": {
+    "id": "lesson-1746:v05",
+    "word": "大抵",
+    "annotated": false,
+    "decision": "question",
+    "reason": "高频词，容易被现代语感干扰，影响对句子逻辑关系的判断。",
+    "contextMeaning": "大多，大致，基本上",
+    "sourceSentence": "万一结果不佳,大抵反成了怨府",
+    "type": "contextual-choice",
+    "question": "「万一结果不佳，大抵反成了怨府」中「大抵」的意思是",
+    "options": [
+     "大概，大体上",
+     "抵消，平衡",
+     "必然，一定",
+     "特别，尤其"
+    ],
+    "answerIndex": 0,
+    "explanation": "“大抵”在此处表示推测或结论的范围，意为大多、基本上。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 1865
+    }
+   }
+  },
+  {
+   "schemaVersion": "yw-vocab-question-tombstone-v1",
+   "dispositionId": "yw-vocab-eligibility-20260730-v1:lesson-1746:v06",
+   "reviewId": "yw-vocab-scope-review-20260730-v1",
+   "reviewedAt": "2026-07-30T02:26:08.408Z",
+   "itemId": "lesson-1746:v06",
+   "action": "suppress",
+   "reasonCode": "non_classical_scope_excluded",
+   "reason": "詞級疏通預設只用於古文與古詩詞；其他文體只有經逐題覆核並留下來源雜湊的極必要例外才可進入當前題集。",
+   "sourceItemSha256": "a59e488385cac64ffd2f2241a5e2c42456b74c0639330cb1fe47389dc718ab53",
+   "formerItem": {
+    "id": "lesson-1746:v06",
+    "word": "断送",
+    "annotated": false,
+    "decision": "question",
+    "reason": "文中语境义与现代常用词义略有差异，体现人物命运的悲剧性。",
+    "contextMeaning": "丧失，毁掉，断绝",
+    "sourceSentence": "年纪青青,就会断送在伤寒上",
+    "type": "contextual-choice",
+    "question": "文中「年纪青青，就会断送在伤寒上」的「断送」应理解为",
+    "options": [
+     "送别，告别",
+     "丧失，毁掉",
+     "断绝往来",
+     "送达终点"
+    ],
+    "answerIndex": 1,
+    "explanation": "文中指生命被断绝、丧失。",
+    "difficulty": 2,
+    "sourceRefs": [],
+    "location": {
+     "charIndex": 5736
+    }
+   }
+  }
+ ],
+ "reviewRevision": {
+  "schemaVersion": "yw-vocab-review-revision-v2",
+  "reviewIds": [
+   "yw-vocab-scope-review-20260730-v1"
+  ],
+  "latestReviewedAt": "2026-07-30T02:26:08.408Z"
+ },
+ "questionSetVersion": "vocab-set-4f53cda18c2baa0c"
 }
