@@ -1,10 +1,12 @@
 # 核查標準 / Verification Standard
 
-## 2026-07-30 Web/native compatible release override
+## 2026-07-30 Web/native synchronized production release
 
-This source candidate supersedes older content-count markers below; the current
-public Pages deployment remains the 2026-07-28 release until the full release
-transaction passes.
+This synchronized source graph supersedes older content-count markers below.
+The complete release transaction is published in production as Pages deployment
+`20be2885-5494-4b98-a130-af022c1a389b` from source
+`e87c697119d7d75d01def58ff781524f73bb3ff9`; its immediate Pages rollback is
+`ada922c5-62e7-46cc-bcd7-7e97dddcc522`.
 
 - five books, 191 lessons and 1,153 posts;
 - reader projection: 2,932 unique annotations / 2,933 references;
@@ -63,9 +65,10 @@ Release-tree acceptance is executable and mode-bound:
 formal build/check passed on 2026-07-30. The formal artifact has 852 files, 278
 exact App-content paths and aggregate
 `c79cad29e7ca32f2fc11391f7c3e8029f7d1c279eef5857efbfdbef90f9740f1`;
-candidate and historical release paths are absent. Production publication
-still requires the complete `release:check`, artifact-manifest update, Pages
-deployment and public hash/content-type readback.
+candidate and historical release paths are absent. The complete
+`release:check`, artifact-manifest update, Pages deployment and public
+hash/content-type readback passed for this exact release. Future releases must
+repeat every gate; this record does not authorize reusing an earlier receipt.
 
 Web publication must record exactly one App disposition and must publish/read
 back immutable App content objects before moving `latest-stable`. The binary
@@ -98,7 +101,32 @@ contract.
 > additionally builds an `evaluation` envelope from the YW source and validates
 > it against the current User Center consumer registry.
 
-## 2026-07-28 current release override
+## 2026-07-30 current production readback
+
+- production Pages deployment:
+  `20be2885-5494-4b98-a130-af022c1a389b`
+  (`https://20be2885.yuwen-course.pages.dev`);
+- deployed source:
+  `e87c697119d7d75d01def58ff781524f73bb3ff9`;
+- immediate rollback:
+  `ada922c5-62e7-46cc-bcd7-7e97dddcc522`;
+- `node scripts/verify_deployed_native_content.mjs https://yw.bdfz.net/`
+  passed again on 2026-07-30 for
+  `contentVersion=yw-3e77f0f7ffa5d042a6d06763`,
+  semantic digest
+  `sha256:3e77f0f7ffa5d042a6d06763789858ea89f5194eb4e157e80ddb95f2ac8b5543`
+  and release receipt
+  `sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06`;
+- public readback verified all 276 immutable objects, five approved slide
+  PDFs, 70 explicit missing-deck entries, five representative textbook images
+  and healthy Reading API state;
+- no D1 migration or data mutation was part of this documentation correction,
+  and no additional Cloudflare paid product was enabled;
+- this is a Web/App content compatibility release. It does not claim a new
+  signed Android binary, installation, in-place upgrade or native authenticated
+  data-loop acceptance.
+
+## 2026-07-28 release override (historical)
 
 The following values and eligibility rules supersede every older “current”
 marker retained below as historical release evidence:

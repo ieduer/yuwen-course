@@ -9,7 +9,7 @@ client repository is `/Users/ylsuen/CF/yuwen-native-android`; it must never keep
 a hand-edited copy of website content. Both clients consume the same generated,
 versioned and content-addressed graph.
 
-Current reviewed source candidate:
+Current synchronized source graph:
 
 ```text
 Books / lessons / posts:       5 / 191 / 1,153
@@ -39,8 +39,19 @@ time `2026-07-30T06:18:00.123175Z` and disposition
 trees contained 278 files / 33,143,783 bytes and had the same canonical
 inventory aggregate
 `7816d7b31aedafd379b13668d58e05099a3c2c458523a3c50c72dd699a9031a8`.
-The local stable pointer now references this exact release; production
-publication and public readback remain separate gates until recorded below.
+The stable pointer references this exact release. Production publication and
+public readback completed as Pages deployment
+`20be2885-5494-4b98-a130-af022c1a389b` from source
+`e87c697119d7d75d01def58ff781524f73bb3ff9`, with immediate rollback
+`ada922c5-62e7-46cc-bcd7-7e97dddcc522`.
+
+The 2026-07-30 custom-domain readback reran
+`node scripts/verify_deployed_native_content.mjs https://yw.bdfz.net/` and
+verified the exact content version, semantic digest and release receipt above,
+all 276 immutable objects, five approved slide PDFs, 70 explicit missing-deck
+entries, five representative textbook images and healthy Reading API state.
+The synchronized Web release did not apply a D1 migration, mutate D1 data,
+enable another Cloudflare paid product, or release a new signed Android binary.
 
 The earlier independent review found two historical immutable App-content
 receipts under the old `yw-9897f39b3236f2e351415ebc` release that preserve a
@@ -111,12 +122,13 @@ The release transaction is fail-closed:
 
 Unknown schema, mismatched hashes, dirty generated output, missing media
 receipts, an unreviewed audit receipt, or an incomplete App disposition blocks
-the pointer move. The current audit receipt is approved, but it does not waive
-the separate clean-source, deployment, publication and App-disposition gates.
-A Web content release may be compatible without a new APK, but it may never
-omit the App disposition.
+the pointer move. The clean-source, deployment, publication, public-readback
+and `compatible-and-synced` gates were satisfied for the exact production
+release recorded above. Every future change must satisfy them again; a prior
+receipt never waives a current gate. A Web content release may be compatible
+without a new APK, but it may never omit the App disposition.
 
-## 2026-07-28 completion eligibility and anti-farming (current)
+## 2026-07-28 completion eligibility and anti-farming (historical release)
 
 Production deployment `33725793-42fa-437e-ab6d-bc712549e633` keeps every
 authenticated YW attempt in the source-owned ledger and makes the Worker the
