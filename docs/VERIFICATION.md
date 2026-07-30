@@ -1,6 +1,6 @@
 # 核查標準 / Verification Standard
 
-## 2026-07-30 Web/native content candidate override (not yet published)
+## 2026-07-30 Web/native compatible release override
 
 This source candidate supersedes older content-count markers below; the current
 public Pages deployment remains the 2026-07-28 release until the full release
@@ -22,19 +22,28 @@ transaction passes.
 - learning manifest: `yw-7abfb37143d876fd` / 901 items;
 - current derived native semantic digest:
   `sha256:3e77f0f7ffa5d042a6d06763789858ea89f5194eb4e157e80ddb95f2ac8b5543`;
-- blocked candidate `contentVersion=yw-3e77f0f7ffa5d042a6d06763`,
-  `releaseReceiptId=sha256-041b6cedaee5c6041cb337d49ee3a71ef7c1fb84342ae54e6270bbd6d691d11c`;
-- the tracked native audit receipt approves this exact digest and count set
-  after three byte-identical isolated rebuilds. The graph remains deliberately
-  blocked because `sourceClean=false`, `appDisposition=blocked`,
-  `deploymentId=null` and `publishedAt=null`; no pointer, Pages deployment or
-  APK release may use it.
+- compatible `contentVersion=yw-3e77f0f7ffa5d042a6d06763`,
+  `releaseReceiptId=sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06`;
+- exact release gate: source
+  `fd7a482ac88e6baa0da79d69b2fea88c7b00d195`, preview deployment
+  `54232d7c-7e6c-4a14-a6b8-d6543efc1134`, publication time
+  `2026-07-30T06:18:00.123175Z`, `sourceClean=true` and
+  `appDisposition=compatible-and-synced`;
+- three isolated compatible builds were byte-identical at 278 files /
+  33,143,783 bytes and canonical aggregate
+  `7816d7b31aedafd379b13668d58e05099a3c2c458523a3c50c72dd699a9031a8`;
+- stable pointer / manifest / core receipts are respectively
+  `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`,
+  `a866d2a2b89877a8d511622a3f736481401cb48b0da88fc39c1c50cead7fe1c3`
+  and
+  `6cc5e1205de54012141a779a848939f54bd4be1370f2d81f1c7397ec90cfb823`.
 
-The graph audit does not approve the current `.release/site`: two historical
-old-stable App-content receipts still contain a malformed AI Studio state
-payload. Formal staging must parse JSON string values, include only the exact
-release referenced by `latest-stable`, and exclude every historical release.
-The release remains blocked until those gates pass.
+Two historical old-stable App-content receipts still contain a malformed AI
+Studio state payload and remain forbidden. Formal staging now parses JSON
+string values, includes only the exact release referenced by `latest-stable`,
+and excludes every historical release. The previously documented
+`sha256-041b…` value has no reproducible pointer or release tree and must never
+be used.
 
 Release-tree acceptance is executable and mode-bound:
 
@@ -48,15 +57,15 @@ Release-tree acceptance is executable and mode-bound:
   verify `releaseKind=formal-stable`, one exact stable prefix, a byte/SHA/path
   allowlist, and no historical or candidate path;
 - a preview marker is never acceptable to the production deploy command, and a
-  formal marker cannot be built from the currently unsafe old stable bytes.
+  formal marker cannot be built from unsafe old stable bytes.
 
-`npm run precontent:check` passed on 2026-07-30, including vocab policy,
-same-lesson progress, Reading API, user-facing projection and all 19 native
-content-contract tests. Publication still requires
-`npm run check:native-content:deploy-sync`, `npm run build:release-site`,
-`npm run check:release-site`, and `npm run check:artifact-manifest` against a
-clean reviewed revision; no pointer or production deployment may move on the
-current blocked candidate or partial evidence.
+`npm run check:native-content:deploy-sync`, `npm run test:release-site` and the
+formal build/check passed on 2026-07-30. The formal artifact has 852 files, 278
+exact App-content paths and aggregate
+`c79cad29e7ca32f2fc11391f7c3e8029f7d1c279eef5857efbfdbef90f9740f1`;
+candidate and historical release paths are absent. Production publication
+still requires the complete `release:check`, artifact-manifest update, Pages
+deployment and public hash/content-type readback.
 
 Web publication must record exactly one App disposition and must publish/read
 back immutable App content objects before moving `latest-stable`. The binary

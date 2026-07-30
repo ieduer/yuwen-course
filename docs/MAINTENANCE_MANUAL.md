@@ -2,7 +2,7 @@
 
 Last reviewed: 2026-07-30 (America/Los_Angeles)
 
-## 2026-07-30 Web/native shared-content candidate (not yet published)
+## 2026-07-30 Web/native shared-content release transaction
 
 The website repository remains the content authority. The independent native
 client repository is `/Users/ylsuen/CF/yuwen-native-android`; it must never keep
@@ -23,25 +23,31 @@ Quality tombstones:            35
 Reviewed vocab exceptions:     0
 Learning manifest:             yw-7abfb37143d876fd / 901 items
 Native semantic digest:        sha256:3e77f0f7ffa5d042a6d06763789858ea89f5194eb4e157e80ddb95f2ac8b5543
-Blocked content version:       yw-3e77f0f7ffa5d042a6d06763
-Blocked release receipt:       sha256-041b6cedaee5c6041cb337d49ee3a71ef7c1fb84342ae54e6270bbd6d691d11c
+Compatible content version:    yw-3e77f0f7ffa5d042a6d06763
+Compatible release receipt:    sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06
+Stable pointer SHA-256:        a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7
+Manifest SHA-256 / bytes:      a866d2a2b89877a8d511622a3f736481401cb48b0da88fc39c1c50cead7fe1c3 / 110,119
+Core SHA-256 / bytes:          6cc5e1205de54012141a779a848939f54bd4be1370f2d81f1c7397ec90cfb823 / 16,517,004
 ```
 
 The native digest above is approved by the tracked independent audit receipt
-after three byte-identical isolated rebuilds. That approval covers the
-canonical graph only. The candidate remains blocked because it records
-`sourceClean=false`, `appDisposition=blocked`, no Pages deployment ID and no
-publication time; no App pointer, Pages production deployment or APK release
-may claim it.
+after three byte-identical isolated rebuilds. A second three-build audit bound
+the exact clean source `fd7a482ac88e6baa0da79d69b2fea88c7b00d195`,
+preview deployment `54232d7c-7e6c-4a14-a6b8-d6543efc1134`, publication
+time `2026-07-30T06:18:00.123175Z` and disposition
+`compatible-and-synced` to the compatible receipt above. The three candidate
+trees contained 278 files / 33,143,783 bytes and had the same canonical
+inventory aggregate
+`7816d7b31aedafd379b13668d58e05099a3c2c458523a3c50c72dd699a9031a8`.
+The local stable pointer now references this exact release; production
+publication and public readback remain separate gates until recorded below.
 
-The same independent review also found two historical immutable App-content
+The earlier independent review found two historical immutable App-content
 receipts under the old `yw-9897f39b3236f2e351415ebc` release that preserve a
 malformed AI Studio state payload. The approved digest above does not approve
-those historical bytes or the current release tree. A new deployment must
-parse JSON string values for privacy review, include only the one release
-referenced by the reviewed stable pointer, and exclude every historical
-release object. Until that gate passes, `.release/site` is not a clean Web
-artifact and must not be deployed.
+those historical bytes. The formal release tree now parses JSON string values
+for privacy review, includes only the one release referenced by the reviewed
+stable pointer, and excludes every historical release object.
 
 `build_release_site.mjs` now has two explicit, non-interchangeable artifact
 kinds:
@@ -64,7 +70,7 @@ the artifact aggregate and rejects any candidate or historical native path.
 # Web-only, non-production preview artifact
 npm run prepare:preview-artifact
 
-# Formal artifact; intentionally fails while the current stable bytes are unsafe
+# Formal production artifact
 npm run build:release-site
 npm run check:release-site
 ```
@@ -72,6 +78,13 @@ npm run check:release-site
 Never deploy a `preview-web-only` marker to the production branch. Formal
 `release:check` still requires native deploy synchronization and
 `formal-stable`; the preview mode does not relax or move `latest-stable`.
+The current formal artifact passed with 852 files, 278 exact App-content paths,
+zero candidate paths, zero historical release paths and aggregate
+`c79cad29e7ca32f2fc11391f7c3e8029f7d1c279eef5857efbfdbef90f9740f1`.
+
+The previously documented `sha256-041b…` blocked receipt was a provenance
+error: no corresponding pointer or release tree exists. It is forbidden as a
+release, import or rollback anchor.
 
 Vocabulary eligibility is sourced only from
 `site/data/vocab-eligibility.json`. Nonclassical lessons do not fetch or show a
