@@ -20,6 +20,7 @@ import {
   createUrlSanitizer,
   privacyIssueCounts,
 } from "./native_content_url_sanitizer.mjs";
+import { nativeContentAssetContentTypeMatches } from "../site/_worker.js";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const SITE_ROOT = path.join(ROOT, "site");
@@ -1212,6 +1213,30 @@ test("reader annotation references stay in the current lesson page", () => {
   assert.match(
     appSource,
     /link\.hasAttribute\("data-same-tab"\) \|\| href\.startsWith\("#"\)/,
+  );
+});
+
+test("native content routes fail closed instead of serving the SPA fallback", () => {
+  assert.equal(
+    nativeContentAssetContentTypeMatches(
+      "/app-content/latest-stable.json",
+      "application/json; charset=utf-8",
+    ),
+    true,
+  );
+  assert.equal(
+    nativeContentAssetContentTypeMatches(
+      "/app-content/releases/yw-version/sha256-receipt/core-bundle.json",
+      "text/html; charset=utf-8",
+    ),
+    false,
+  );
+  assert.equal(
+    nativeContentAssetContentTypeMatches(
+      `/media/lesson-media/lesson-1/sha256-${"a".repeat(64)}.pdf`,
+      "application/pdf",
+    ),
+    true,
   );
 });
 

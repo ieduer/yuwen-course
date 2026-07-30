@@ -64,9 +64,29 @@ function isNativeContentAssetPath(pathname) {
     || /^\/media\/lesson-media\/lesson-[^/]+\/sha256-[a-f0-9]{64}\.pdf$/.test(pathname);
 }
 
+export function nativeContentAssetContentTypeMatches(pathname, contentType) {
+  const normalized = String(contentType || "").toLowerCase();
+  if (pathname === "/app-content/latest-stable.json" || pathname.startsWith("/app-content/releases/")) {
+    return /^(?:application\/json|[^;]+\+json)(?:;|$)/.test(normalized);
+  }
+  if (/^\/media\/lesson-media\/lesson-[^/]+\/sha256-[a-f0-9]{64}\.pdf$/.test(pathname)) {
+    return /^application\/pdf(?:;|$)/.test(normalized);
+  }
+  return false;
+}
+
 async function handleNativeContentAsset(request, env, pathname) {
   const response = await env.ASSETS.fetch(request);
   if (!response.ok) return response;
+  if (!nativeContentAssetContentTypeMatches(pathname, response.headers.get("content-type"))) {
+    return new Response(null, {
+      status: 404,
+      headers: {
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+      },
+    });
+  }
   const headers = new Headers(response.headers);
   headers.set("x-content-type-options", "nosniff");
   headers.set(
