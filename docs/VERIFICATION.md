@@ -21,17 +21,37 @@ transaction passes.
   quality tombstones and zero reviewed exceptions;
 - learning manifest: `yw-7abfb37143d876fd` / 901 items;
 - current derived native semantic digest:
-  `sha256:da21d574de1b58c37763032e15a5926c89df8befdedadb5642700a7ec1b7f140`;
-- blocked candidate `contentVersion=yw-da21d574de1b58c37763032e`,
-  `releaseReceiptId=sha256-1cd132a3ced4a699e5105d14e1399aa6eb9740fd273c2a01c342ec3a658df297`;
+  `sha256:3e77f0f7ffa5d042a6d06763789858ea89f5194eb4e157e80ddb95f2ac8b5543`;
+- blocked candidate `contentVersion=yw-3e77f0f7ffa5d042a6d06763`,
+  `releaseReceiptId=sha256-041b6cedaee5c6041cb337d49ee3a71ef7c1fb84342ae54e6270bbd6d691d11c`;
 - the tracked native audit receipt approves this exact digest and count set
   after three byte-identical isolated rebuilds. The graph remains deliberately
   blocked because `sourceClean=false`, `appDisposition=blocked`,
   `deploymentId=null` and `publishedAt=null`; no pointer, Pages deployment or
   APK release may use it.
 
+The graph audit does not approve the current `.release/site`: two historical
+old-stable App-content receipts still contain a malformed AI Studio state
+payload. Formal staging must parse JSON string values, include only the exact
+release referenced by `latest-stable`, and exclude every historical release.
+The release remains blocked until those gates pass.
+
+Release-tree acceptance is executable and mode-bound:
+
+- `npm run test:release-site` must prove that escaped JSON payloads are caught
+  only after parsing, unsafe immutable bytes fail closed, receipt drift fails,
+  and historical releases/candidates cannot enter formal staging;
+- `npm run prepare:preview-artifact` must produce a
+  `releaseKind=preview-web-only` marker with zero native allowlist entries and
+  no `app-content/` directory;
+- `npm run build:release-site && npm run check:release-site` must produce and
+  verify `releaseKind=formal-stable`, one exact stable prefix, a byte/SHA/path
+  allowlist, and no historical or candidate path;
+- a preview marker is never acceptable to the production deploy command, and a
+  formal marker cannot be built from the currently unsafe old stable bytes.
+
 `npm run precontent:check` passed on 2026-07-30, including vocab policy,
-same-lesson progress, Reading API, user-facing projection and all 18 native
+same-lesson progress, Reading API, user-facing projection and all 19 native
 content-contract tests. Publication still requires
 `npm run check:native-content:deploy-sync`, `npm run build:release-site`,
 `npm run check:release-site`, and `npm run check:artifact-manifest` against a

@@ -258,6 +258,7 @@ const roleAudit = JSON.parse(roleAuditBytes.toString("utf8"));
 const roleAuditSha256 = sha256(roleAuditBytes);
 const {
   sanitizeUrl,
+  sanitizeValue,
 } = createUrlSanitizer();
 
 assert(curation.schemaVersion === "yw-reader-curation-v1", "unsupported reader curation schema");
@@ -1094,7 +1095,7 @@ function attachVerifiedMediaReceipt(media, context) {
   });
 }
 
-const documents = baseDocuments.map((document) => canonicalize({
+const documents = baseDocuments.map((document) => canonicalize(sanitizeValue({
   ...document,
   mediaReceiptLedgerVersion: mediaReceiptLedger.ledgerVersion,
   mediaReceiptLedgerSha256: sha256(mediaReceiptBytes),
@@ -1118,7 +1119,7 @@ const documents = baseDocuments.map((document) => canonicalize({
         : media
     )),
   },
-}));
+})));
 
 const documentFiles = new Map();
 for (const document of documents) {

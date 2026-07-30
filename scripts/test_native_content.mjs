@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import {
+  existsSync,
   lstatSync,
   mkdtempSync,
   readFileSync,
@@ -861,8 +862,8 @@ test("shared reader projection assigns every post once and is byte-bound to Web"
   }
   assert.deepEqual(
     sanitizedHashDifferences,
-    ["lesson-1458", "lesson-1499", "lesson-1528", "lesson-1557", "lesson-1579"],
-    "only reviewed URL-sanitization lessons may differ between canonical Web and embedded App reader hashes",
+    [],
+    "canonical Web and embedded App reader documents must be byte-identical after source sanitization",
   );
   assert.equal(assignedPosts, sourceCounts.posts);
   assert.equal(projectedAnnotations, 2932);
@@ -1101,36 +1102,37 @@ test("Pages upload tree stays below file-count and per-file limits", () => {
   assert.equal(sourceFiles.some((file) => file.startsWith("data/cache/")), false);
 });
 
-test("release projection preserves immutable native receipts byte-for-byte", () => {
-  execFileSync(process.execPath, ["scripts/build_release_site.mjs"], {
+test("Web preview release projection excludes the complete native content tree", () => {
+  execFileSync(process.execPath, ["scripts/build_release_site.mjs", "--preview"], {
     cwd: ROOT,
     encoding: "utf8",
     stdio: "pipe",
   });
-  const sourceAppContent = path.join(SITE_ROOT, "app-content");
   const releaseAppContent = path.join(RELEASE_SITE_ROOT, "app-content");
-  const publicFiles = collectFiles(sourceAppContent).filter((file) => (
-    !file.startsWith("candidates/")
-  ));
-  assert.ok(publicFiles.length > 0);
-  assert.equal(
-    collectFiles(releaseAppContent).some((file) => file.startsWith("candidates/")),
-    false,
-  );
-  for (const file of publicFiles) {
-    assert.deepEqual(
-      readFileSync(path.join(releaseAppContent, file)),
-      readFileSync(path.join(sourceAppContent, file)),
-      `${file}: release projection changed immutable bytes`,
-    );
+  assert.equal(existsSync(releaseAppContent), false);
+  const marker = json(path.join(RELEASE_SITE_ROOT, ".bdfz-release-artifact.json"));
+  assert.equal(marker.schemaVersion, "yw-release-site-v2");
+  assert.equal(marker.releaseKind, "preview-web-only");
+  assert.equal(marker.nativeContent.policy, "excluded");
+  assert.equal(marker.nativeContent.includedPathCount, 0);
+});
+
+test("release projection preserves verified Web reader receipts", () => {
+  execFileSync(process.execPath, ["scripts/build_release_site.mjs", "--preview"], {
+    cwd: ROOT,
+    encoding: "utf8",
+    stdio: "pipe",
+  });
+  const readerRoot = path.join(RELEASE_SITE_ROOT, "data", "reader-documents");
+  const readerIndex = json(path.join(readerRoot, "index.json"));
+  assert.equal(readerIndex.schemaVersion, "yw-reader-document-index-v1");
+  assert.equal(Object.keys(readerIndex.documents).length, readerIndex.lessonCount);
+  for (const [lessonId, receipt] of Object.entries(readerIndex.documents)) {
+    const bytes = readFileSync(path.join(RELEASE_SITE_ROOT, "data", receipt.path));
+    assert.equal(bytes.length, receipt.bytes, `${lessonId}: release byte receipt mismatch`);
+    assert.equal(sha256(bytes), receipt.sha256, `${lessonId}: release hash receipt mismatch`);
+    assert.equal(JSON.parse(bytes).lessonId, lessonId);
   }
-  const releasePointer = json(path.join(releaseAppContent, "latest-stable.json"));
-  const releaseManifestBytes = readFileSync(path.join(releaseAppContent, releasePointer.manifest.path));
-  const releaseCoreBytes = readFileSync(path.join(releaseAppContent, releasePointer.coreBundle.path));
-  assert.equal(sha256(releaseManifestBytes), releasePointer.manifest.sha256);
-  assert.equal(releaseManifestBytes.length, releasePointer.manifest.bytes);
-  assert.equal(sha256(releaseCoreBytes), releasePointer.coreBundle.sha256);
-  assert.equal(releaseCoreBytes.length, releasePointer.coreBundle.bytes);
 });
 
 test("shared sanitizer preserves surrounding content and clears the Web projection", () => {
@@ -1165,6 +1167,24 @@ test("shared sanitizer preserves surrounding content and clears the Web projecti
   );
   assert.match(htmlEntityUrl, /\?download=1&amp;page=2$/);
   assert.doesNotMatch(htmlEntityUrl, /token=/);
+  const malformedAiStudioState = sanitizer.sanitizeString([
+    "正文前",
+    'https://aistudio.google.com/app/prompts?state={"ids":["prompt"],"action":"open","userId":"private","resourceKeys":{}}&usp=sharing',
+    "正文后",
+  ].join(" "));
+  assert.equal(
+    malformedAiStudioState,
+    "正文前 https://aistudio.google.com/app/prompts 正文后",
+  );
+  assert.doesNotMatch(malformedAiStudioState, /userId|resourceKeys|state=|usp=/);
+  for (const issue of Object.values(privacyIssueCounts(malformedAiStudioState))) {
+    assert.equal(issue.raw + issue.decoded, 0);
+  }
+  assert.ok(
+    privacyIssueCounts(
+      'https://aistudio.google.com/app/prompts"ids":[],"userId":"private","resourceKeys":{}}',
+    ).aiStudioEmbeddedStatePayload.raw > 0,
+  );
   for (const issue of Object.values(
     privacyIssueCounts("https://example.com/search?keywords=语文"),
   )) {
@@ -1173,6 +1193,7 @@ test("shared sanitizer preserves surrounding content and clears the Web projecti
   const projection = JSON.parse(execFileSync(process.execPath, [
     "scripts/build_release_site.mjs",
     "--check-source",
+    "--preview",
   ], {
     cwd: ROOT,
     encoding: "utf8",
@@ -1208,6 +1229,9 @@ test("formal deploy gates cannot bypass stable sync or staging", () => {
   assert.match(packageJson.scripts["release:check"], /check:native-content:deploy-sync/);
   assert.match(packageJson.scripts["release:check"], /build:release-site/);
   assert.match(packageJson.scripts["prepare:release-artifact"], /^npm run check:native-content:deploy-sync/);
+  assert.match(packageJson.scripts["prepare:preview-artifact"], /build:release-site:preview/);
+  assert.match(packageJson.scripts["prepare:preview-artifact"], /check:release-site:preview/);
+  assert.match(packageJson.scripts["precontent:check"], /test:release-site/);
   assert.match(packageJson.scripts.deploy, /pages deploy \.release\/site/);
   assert.doesNotMatch(packageJson.scripts.deploy, /pages deploy site(?:\s|$)/);
 });

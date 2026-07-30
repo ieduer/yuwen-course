@@ -22,9 +22,9 @@ Eligibility tombstones:        344 / 56 nonclassical lessons
 Quality tombstones:            35
 Reviewed vocab exceptions:     0
 Learning manifest:             yw-7abfb37143d876fd / 901 items
-Native semantic digest:        sha256:da21d574de1b58c37763032e15a5926c89df8befdedadb5642700a7ec1b7f140
-Blocked content version:       yw-da21d574de1b58c37763032e
-Blocked release receipt:       sha256-1cd132a3ced4a699e5105d14e1399aa6eb9740fd273c2a01c342ec3a658df297
+Native semantic digest:        sha256:3e77f0f7ffa5d042a6d06763789858ea89f5194eb4e157e80ddb95f2ac8b5543
+Blocked content version:       yw-3e77f0f7ffa5d042a6d06763
+Blocked release receipt:       sha256-041b6cedaee5c6041cb337d49ee3a71ef7c1fb84342ae54e6270bbd6d691d11c
 ```
 
 The native digest above is approved by the tracked independent audit receipt
@@ -33,6 +33,45 @@ canonical graph only. The candidate remains blocked because it records
 `sourceClean=false`, `appDisposition=blocked`, no Pages deployment ID and no
 publication time; no App pointer, Pages production deployment or APK release
 may claim it.
+
+The same independent review also found two historical immutable App-content
+receipts under the old `yw-9897f39b3236f2e351415ebc` release that preserve a
+malformed AI Studio state payload. The approved digest above does not approve
+those historical bytes or the current release tree. A new deployment must
+parse JSON string values for privacy review, include only the one release
+referenced by the reviewed stable pointer, and exclude every historical
+release object. Until that gate passes, `.release/site` is not a clean Web
+artifact and must not be deployed.
+
+`build_release_site.mjs` now has two explicit, non-interchangeable artifact
+kinds:
+
+- formal `formal-stable`: requires `latest-stable.json`, reproduces its release
+  receipt, verifies the pointer, manifest and every object by exact path, bytes
+  and SHA-256, then includes only that pointer and that one immutable release;
+- non-production `preview-web-only`: excludes the entire `app-content/` tree so
+  the reviewed Web source can obtain a Pages preview deployment UUID before a
+  new stable native release exists.
+
+Every JSON file is parsed and every decoded string is checked with the shared
+URL sanitizer and privacy patterns. If an immutable native JSON string would
+need sanitization, formal staging fails instead of changing its bytes. The
+`yw-release-site-v2` marker records the artifact kind, exact native allowlist
+and receipt, and excluded historical prefixes; staging verification recomputes
+the artifact aggregate and rejects any candidate or historical native path.
+
+```zsh
+# Web-only, non-production preview artifact
+npm run prepare:preview-artifact
+
+# Formal artifact; intentionally fails while the current stable bytes are unsafe
+npm run build:release-site
+npm run check:release-site
+```
+
+Never deploy a `preview-web-only` marker to the production branch. Formal
+`release:check` still requires native deploy synchronization and
+`formal-stable`; the preview mode does not relax or move `latest-stable`.
 
 Vocabulary eligibility is sourced only from
 `site/data/vocab-eligibility.json`. Nonclassical lessons do not fetch or show a

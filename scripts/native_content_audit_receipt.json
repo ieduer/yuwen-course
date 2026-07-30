@@ -2,9 +2,9 @@
   "schemaVersion": "yw-native-content-audit-receipt-v1",
   "siteKey": "yw",
   "reviewDisposition": "approved",
-  "reviewAuthority": "independent-yw-v031-reader-media-vocab-native-graph-triple-build-audit-2026-07-30",
-  "reviewedAt": "2026-07-30T04:16:11Z",
-  "semanticDigest": "sha256:da21d574de1b58c37763032e15a5926c89df8befdedadb5642700a7ec1b7f140",
+  "reviewAuthority": "independent-yw-reader-web-native-privacy-triple-build-audit-2026-07-30",
+  "reviewedAt": "2026-07-30T05:27:42Z",
+  "semanticDigest": "sha256:3e77f0f7ffa5d042a6d06763789858ea89f5194eb4e157e80ddb95f2ac8b5543",
   "counts": {
     "annotations": 2932,
     "approvedDecks": 5,

@@ -1,7 +1,9 @@
 const SENSITIVE_QUERY_KEY = /(^|[_-])(access|api|auth|authorization|cookie|credential|jwt|key|password|refresh|secret|session|sig|signature|token)([_-]|$)|^(chksm|continue|dsh|followup|ifkv|osid|sn|state)$/i;
 const URL_PATTERN = /https?:\/\/[^\s\\<>"'，。；！？、）】》]+/gu;
+const MALFORMED_AI_STUDIO_STATE_URL_PATTERN = /https?:\/\/aistudio\.google\.com\/app\/prompts\?state=\{[^\s\\<>]*\}(?:&[^\s\\<>"'，。；！？、）】》]*)?/gu;
 
 export const PRIVACY_PATTERNS = {
+  aiStudioEmbeddedStatePayload: /aistudio\.google\.com\/app\/prompts[^\s\\<]*(?:"(?:userId|resourceKeys)"\s*:)/gi,
   aiStudioPromptQuery: /aistudio\.google\.com\/app\/prompts\?[^"'\\\s#]*(?:state|usp)=/gi,
   bilibiliTrackingQuery: /bilibili\.com\/[^"'\\\s#?]*\?[^"'\\\s#]*(?:vd_source|spm_id_from)=/gi,
   googleAuthenticationQuery: /[?&](?:continue|dsh|followup|ifkv|osid)=/gi,
@@ -175,7 +177,17 @@ export function createUrlSanitizer() {
   }
 
   function sanitizeString(value) {
-    return String(value).replace(URL_PATTERN, (candidate) => {
+    const withoutMalformedAiStudioState = String(value).replace(
+      MALFORMED_AI_STUDIO_STATE_URL_PATTERN,
+      (candidate) => {
+        redactions.aiStudioPromptUrlsCollapsed += 1;
+        redactions.sensitiveQueryParametersRemoved += (
+          candidate.slice(candidate.indexOf("?") + 1).split("&").length
+        );
+        return "https://aistudio.google.com/app/prompts";
+      },
+    );
+    return withoutMalformedAiStudioState.replace(URL_PATTERN, (candidate) => {
       const hasHtmlAmpersand = /&(?:amp|#0*38|#x0*26);/i.test(candidate);
       let normalized = candidate;
       for (let pass = 0; pass < 3; pass += 1) {
