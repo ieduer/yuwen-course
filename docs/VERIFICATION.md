@@ -69,10 +69,16 @@ deployment and public hash/content-type readback.
 
 Web publication must record exactly one App disposition and must publish/read
 back immutable App content objects before moving `latest-stable`. The binary
-release is separate: one byte-identical signed APK must pass prior-version
-upgrade plus user/session/outbox/content persistence on Phone A `c5467d2b`,
-Phone B `6393cccf`, and the separate physical tablet. Missing hardware or any
-failure blocks release; emulator/device-cloud evidence is supplemental only.
+release is separate: select registered Phone A `c5467d2b` or Phone B
+`6393cccf`, then make one byte-identical signed APK pass prior-version
+same-package upgrade plus user/session/outbox/content persistence on that
+phone. The same phone must also pass a reversible expanded-layout check with
+App-observed `AdaptiveWidth.Expanded`, `maxWidth >= 840dp`, effective smallest
+width, explicit 200% font, portrait and landscape, followed by itemized
+restoration of its exact size, density, rotation, font, proxy and keep-awake
+baseline. The second phone is supplemental, no separate physical tablet is a
+current blocker, and emulator/device-cloud evidence cannot replace the
+selected phone.
 
 The older `yw-b530d57cb873ed49` / 1,156-item clause in item 2 below is retained
 only as historical production evidence and is not the current source-candidate

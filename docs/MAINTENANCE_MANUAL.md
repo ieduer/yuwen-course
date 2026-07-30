@@ -386,11 +386,16 @@ npm run deploy
 Record Git commit/tag, staged-file set, artifact checksum manifest, Pages deployment ID/URL, D1 migration/export state, previous verified deployment, and exact live verification result. The displayed Pages commit hash is not accepted as source proof for a direct upload.
 
 Native APK release is a separate gate. The same byte-identical signed artifact
-must pass upgrade and persistence acceptance on registered Phone A
-`c5467d2b`, registered Phone B `6393cccf`, and the separate physical tablet as
-specified in `/Users/ylsuen/CF/runbooks/yw_native_app_operations.md`.
-Emulators and device clouds may add coverage but cannot replace any of those
-three physical-device receipts.
+must pass upgrade and persistence acceptance on one selected registered phone:
+Phone A `c5467d2b` or Phone B `6393cccf`, as specified in
+`/Users/ylsuen/CF/runbooks/yw_native_app_operations.md`. On that same phone,
+run the reversible expanded-layout gate and record App-observed
+`AdaptiveWidth.Expanded`, `maxWidth >= 840dp`, effective smallest width,
+explicit 200% font, portrait and landscape, then restore and read back the
+exact size, density, rotation, font, proxy and keep-awake baseline item by
+item. The second phone is supplemental, a separate physical tablet is not a
+current blocker, and emulators or device clouds cannot replace the selected
+phone.
 
 ## 6. Monitoring and post-deploy validation
 
