@@ -1203,6 +1203,18 @@ test("shared sanitizer preserves surrounding content and clears the Web projecti
   assert.ok(projection.excludedPrefixes.includes("data/cache/"));
 });
 
+test("reader annotation references stay in the current lesson page", () => {
+  const appSource = readFileSync(path.join(SITE_ROOT, "assets", "app.js"), "utf8");
+  assert.match(
+    appSource,
+    /class="reader-note-ref" href="#reader-note-\$\{esc\(run\.noteId\)\}" data-same-tab/,
+  );
+  assert.match(
+    appSource,
+    /link\.hasAttribute\("data-same-tab"\) \|\| href\.startsWith\("#"\)/,
+  );
+});
+
 test("formal deploy gates cannot bypass stable sync or staging", () => {
   const missingOutput = mkdtempSync(path.join(os.tmpdir(), "yw-native-missing-stable-"));
   try {

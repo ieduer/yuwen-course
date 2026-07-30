@@ -121,7 +121,10 @@ check("學習效果確認改名見效", await page.locator("#check-title", { has
 check("正文三段標題精簡", (await page.locator("#orientation-title").innerText()) === "起始" && (await page.locator("#textbook-title").innerText()) === "細讀" && (await page.locator("#materials-title").innerText()) === "延伸");
 check("閱讀起點鏈接新頁打開", await page.locator("#orientation-content a:not([target='_blank'])").count() === 0);
 check("站內入口與登入留在當前頁", await page.locator(".topbar-actions a[data-same-tab]:not([target])").count() >= 4);
-check("其餘鏈接均新頁打開", await page.locator("a[href]:not([target='_blank']):not([data-same-tab])").count() === 0);
+check(
+  "其餘鏈接均新頁打開",
+  await page.locator("a[href]:not([target='_blank']):not([data-same-tab]):not([href^='#'])").count() === 0,
+);
 
 const firstNote = page.locator("#text-flow .reader-note-ref").first();
 const noteTarget = await firstNote.getAttribute("href");

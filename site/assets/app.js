@@ -129,7 +129,8 @@ function saveStoredProgress() {
 function enforceNewTabLinks(root = document) {
   const links = root.matches?.("a[href]") ? [root] : $$("a[href]", root);
   links.forEach((link) => {
-    if (link.hasAttribute("data-same-tab")) {
+    const href = link.getAttribute("href") || "";
+    if (link.hasAttribute("data-same-tab") || href.startsWith("#")) {
       link.removeAttribute("target");
       link.removeAttribute("rel");
       return;
@@ -750,7 +751,7 @@ function renderReaderRuns(runs, media, options = {}) {
     if (run.type === "annotation-ref") {
       const number = annotationNumbers.get(run.noteId);
       if (!number) return "";
-      return `<a class="reader-note-ref" href="#reader-note-${esc(run.noteId)}" aria-label="查看註釋 ${number}">[${number}]</a>`;
+      return `<a class="reader-note-ref" href="#reader-note-${esc(run.noteId)}" data-same-tab aria-label="查看註釋 ${number}">[${number}]</a>`;
     }
     if (run.type === "media-ref") return renderReaderMedia(media.get(run.mediaId));
     return "";
