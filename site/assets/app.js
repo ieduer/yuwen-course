@@ -6,6 +6,84 @@ const LAST_LESSON_KEY = "yw-matrix-last-lesson-v1";
 const MASTERY_COLLAPSED_KEY = "yw-matrix-mastery-collapsed-v1";
 const FONT_STEPS = [0.92, 1, 1.12, 1.26, 1.42, 1.6];
 const STAGE_MARKS = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+const SHARED_STATE_ASSET_VERSION = "20260730-owner-v1";
+const ANONYMOUS_UI_SCOPE = "anonymous-v2";
+const APP_SCRIPT_URL = document.currentScript?.src || new URL("assets/app.js", document.baseURI).href;
+const SHARED_STATE_MODULE_URL = new URL(
+  `yw-shared-state.js?v=${SHARED_STATE_ASSET_VERSION}`,
+  APP_SCRIPT_URL,
+).href;
+
+let sharedStateClient = null;
+let sharedStateModulePromise = null;
+let sharedStateRefreshPromise = null;
+let sharedStateRefreshRequested = false;
+let sharedStateGeneration = 0;
+let sharedStateUiScope = ANONYMOUS_UI_SCOPE;
+let pendingSharedReadingPosition = null;
+let pendingSharedTextScale = null;
+
+function pendingMatchesOwner(pending, ownerScope, generation = sharedStateGeneration) {
+  return Boolean(
+    pending
+    && pending.ownerScope === ownerScope
+    && pending.generation === generation
+  );
+}
+
+function bindUnownedPendingState(ownerScope, generation) {
+  if (pendingSharedReadingPosition?.ownerScope === null) {
+    pendingSharedReadingPosition = {
+      ...pendingSharedReadingPosition,
+      ownerScope,
+      generation,
+    };
+  }
+  if (pendingSharedTextScale?.ownerScope === null) {
+    pendingSharedTextScale = {
+      ...pendingSharedTextScale,
+      ownerScope,
+      generation,
+    };
+  }
+}
+
+function discardPendingStateForOtherOwner(ownerScope) {
+  if (
+    pendingSharedReadingPosition
+    && pendingSharedReadingPosition.ownerScope !== null
+    && pendingSharedReadingPosition.ownerScope !== ownerScope
+  ) {
+    pendingSharedReadingPosition = null;
+  }
+  if (
+    pendingSharedTextScale
+    && pendingSharedTextScale.ownerScope !== null
+    && pendingSharedTextScale.ownerScope !== ownerScope
+  ) {
+    pendingSharedTextScale = null;
+  }
+}
+
+function scopedUiStorageKey(baseKey, scope = sharedStateUiScope) {
+  return `${baseKey}:scope:${scope}`;
+}
+
+function readScopedUiValue(baseKey, scope = sharedStateUiScope) {
+  try {
+    return localStorage.getItem(scopedUiStorageKey(baseKey, scope));
+  } catch {
+    return null;
+  }
+}
+
+function writeScopedUiValue(baseKey, value, scope = sharedStateUiScope) {
+  localStorage.setItem(scopedUiStorageKey(baseKey, scope), String(value));
+}
+
+function removeScopedUiValue(baseKey, scope = sharedStateUiScope) {
+  localStorage.removeItem(scopedUiStorageKey(baseKey, scope));
+}
 
 const state = {
   manifest: null,
@@ -28,8 +106,9 @@ const state = {
   vocabEligibility: null,
   vocabIndex: { activeItemIds: {} },
   lessonMedia: new Map(),
+  sharedContentVersion: "",
   progress: loadStoredProgress(),
-  fontIndex: Number(localStorage.getItem(FONT_KEY) || 1),
+  fontIndex: Number(readScopedUiValue(FONT_KEY) || 1),
   activeAuthorId: "",
 };
 
@@ -150,6 +229,337 @@ function setAuthenticatedState(authenticated) {
   if (!els.authLogin) return;
   els.authLogin.href = userCenterLoginUrl();
   els.authLogin.hidden = Boolean(authenticated);
+}
+
+function loadSharedStateModule() {
+  sharedStateModulePromise ||= import(SHARED_STATE_MODULE_URL).catch(() => null);
+  return sharedStateModulePromise;
+}
+
+function closestFontIndex(value) {
+  return FONT_STEPS.reduce((best, step, index) => (
+    Math.abs(step - value) < Math.abs(FONT_STEPS[best] - value) ? index : best
+  ), 0);
+}
+
+function defaultSharedLesson() {
+  const defaultBlock = state.manifest?.blocks?.find(
+    (block) => block.id === "xuanbi-shang" || block.title === "選必上",
+  ) || state.manifest?.blocks?.[0];
+  return defaultBlock?.lessons?.find(
+    (lesson) => !isUnitHeading(lesson)
+      && !isRetiredMirror(lesson)
+      && (lesson.excerpt || "").length > 100,
+  ) || state.manifest?.lessons?.[0] || null;
+}
+
+function remoteReadingPositionCompatible(position) {
+  return Boolean(
+    position
+    && state.sharedContentVersion
+    && position.contentVersion === state.sharedContentVersion
+    && position.documentId === "body"
+    && position.stableAnchor === "lesson-root"
+    && state.manifest?.lessons?.some((lesson) => lesson.id === position.lessonId),
+  );
+}
+
+function sharedContentVersionFromPointer(pointer) {
+  return pointer?.schemaVersion === "yw-native-content-pointer-v1"
+    && pointer?.siteKey === "yw"
+    && /^yw-[0-9a-f]{24}$/.test(String(pointer?.contentVersion || ""))
+    ? pointer.contentVersion
+    : "";
+}
+
+async function applyRemoteSharedState(
+  remoteState,
+  {
+    ownerScope,
+    pendingKinds,
+    generation,
+  },
+) {
+  const ownerStillCurrent = () => (
+    generation === sharedStateGeneration
+    && sharedStateClient?.ownerScope === ownerScope
+  );
+  if (!ownerStillCurrent()) return;
+  sharedStateUiScope = ownerScope;
+
+  const currentPendingTextScale = pendingMatchesOwner(
+    pendingSharedTextScale,
+    ownerScope,
+    generation,
+  ) ? pendingSharedTextScale.value : null;
+  const storedFontIndex = Number(readScopedUiValue(FONT_KEY, ownerScope));
+  const remoteTextScale = remoteState.readerPreferences?.TEXT_SCALE?.value;
+  if (pendingKinds.has("READER_PREFERENCE:TEXT_SCALE")) {
+    state.fontIndex = (
+      currentPendingTextScale === null
+        ? clamp(
+          Number.isInteger(storedFontIndex) ? storedFontIndex : 1,
+          0,
+          FONT_STEPS.length - 1,
+        )
+        : closestFontIndex(currentPendingTextScale)
+    );
+    if (!ownerStillCurrent()) return;
+    writeScopedUiValue(FONT_KEY, state.fontIndex, ownerScope);
+  } else if (Number.isFinite(remoteTextScale)) {
+    state.fontIndex = closestFontIndex(remoteTextScale);
+    if (!ownerStillCurrent()) return;
+    writeScopedUiValue(FONT_KEY, state.fontIndex, ownerScope);
+  } else {
+    state.fontIndex = 1;
+    if (!ownerStillCurrent()) return;
+    removeScopedUiValue(FONT_KEY, ownerScope);
+  }
+  applyFont();
+
+  const storedLessonId = readScopedUiValue(LAST_LESSON_KEY, ownerScope) || "";
+  const pendingLessonId = pendingKinds.has("READING_POSITION")
+    ? (
+      pendingMatchesOwner(
+        pendingSharedReadingPosition,
+        ownerScope,
+        generation,
+      )
+        ? pendingSharedReadingPosition.lessonId
+        : storedLessonId
+    )
+    : "";
+  const remoteReadingWasDeleted = !pendingKinds.has("READING_POSITION")
+    && remoteState.readingPosition === null;
+  const remoteLessonId = !pendingKinds.has("READING_POSITION")
+    && remoteReadingPositionCompatible(remoteState.readingPosition)
+    ? remoteState.readingPosition.lessonId
+    : "";
+  if (remoteReadingWasDeleted) removeScopedUiValue(LAST_LESSON_KEY, ownerScope);
+  const localFallbackLessonId = remoteReadingWasDeleted ? "" : storedLessonId;
+  const lessonId = state.manifest?.lessons?.find(
+    (lesson) => lesson.id === (
+      pendingLessonId || remoteLessonId || localFallbackLessonId
+    ),
+  )?.id || defaultSharedLesson()?.id || "";
+  if (!lessonId || !ownerStillCurrent()) return;
+  if (state.current?.id !== lessonId) {
+    await showLesson(lessonId, {
+      push: true,
+      recordEvidence: false,
+      syncSharedState: false,
+      stateGuard: ownerStillCurrent,
+    });
+  }
+  if (!ownerStillCurrent() || state.current?.id !== lessonId) return;
+  if (!remoteReadingWasDeleted) {
+    writeScopedUiValue(LAST_LESSON_KEY, lessonId, ownerScope);
+  }
+}
+
+function pendingSharedKinds(ownerScope, generation = sharedStateGeneration) {
+  const kinds = [];
+  if (pendingMatchesOwner(pendingSharedReadingPosition, ownerScope, generation)) {
+    kinds.push("READING_POSITION");
+  }
+  if (pendingMatchesOwner(pendingSharedTextScale, ownerScope, generation)) {
+    kinds.push("READER_PREFERENCE:TEXT_SCALE");
+  }
+  return kinds;
+}
+
+async function persistPendingSharedState(client, ownerScope) {
+  const generation = sharedStateGeneration;
+  const ownerStillCurrent = async () => (
+    client === sharedStateClient
+    && client.ownerScope === ownerScope
+    && generation === sharedStateGeneration
+  );
+  if (
+    !client
+    || !await ownerStillCurrent()
+  ) return;
+
+  if (pendingMatchesOwner(pendingSharedReadingPosition, ownerScope, generation)) {
+    const pending = pendingSharedReadingPosition;
+    try {
+      if (state.current?.id !== pending.lessonId) {
+        await showLesson(pending.lessonId, {
+          push: true,
+          recordEvidence: false,
+          syncSharedState: false,
+          stateGuard: ownerStillCurrent,
+        });
+      }
+      if (!await ownerStillCurrent() || state.current?.id !== pending.lessonId) return;
+      writeScopedUiValue(LAST_LESSON_KEY, pending.lessonId, ownerScope);
+      if (
+        pending.contentVersion
+        && pending.contentVersion === state.sharedContentVersion
+      ) {
+        client.queueReadingPosition(pending);
+      }
+      if (pendingSharedReadingPosition === pending) {
+        pendingSharedReadingPosition = null;
+      }
+    } catch {
+      return;
+    }
+  }
+
+  if (pendingMatchesOwner(pendingSharedTextScale, ownerScope, generation)) {
+    const pending = pendingSharedTextScale;
+    try {
+      if (!await ownerStillCurrent()) return;
+      state.fontIndex = closestFontIndex(pending.value);
+      writeScopedUiValue(FONT_KEY, state.fontIndex, ownerScope);
+      applyFont();
+      client.queueTextScale(pending.value);
+      if (pendingSharedTextScale === pending) pendingSharedTextScale = null;
+    } catch {
+      return;
+    }
+  }
+  await client.flush();
+}
+
+async function applyAnonymousSharedState() {
+  sharedStateGeneration += 1;
+  sharedStateClient = null;
+  sharedStateUiScope = ANONYMOUS_UI_SCOPE;
+  if (pendingSharedReadingPosition?.ownerScope === null) {
+    writeScopedUiValue(
+      LAST_LESSON_KEY,
+      pendingSharedReadingPosition.lessonId,
+      ANONYMOUS_UI_SCOPE,
+    );
+    pendingSharedReadingPosition = null;
+  } else {
+    pendingSharedReadingPosition = null;
+    const storedLessonId = readScopedUiValue(
+      LAST_LESSON_KEY,
+      ANONYMOUS_UI_SCOPE,
+    ) || "";
+    const lessonId = state.manifest?.lessons?.find(
+      (lesson) => lesson.id === storedLessonId,
+    )?.id || defaultSharedLesson()?.id || "";
+    if (lessonId && state.current?.id !== lessonId) {
+      await showLesson(lessonId, {
+        push: true,
+        recordEvidence: false,
+        syncSharedState: false,
+      });
+    }
+  }
+  if (pendingSharedTextScale?.ownerScope === null) {
+    writeScopedUiValue(
+      FONT_KEY,
+      closestFontIndex(pendingSharedTextScale.value),
+      ANONYMOUS_UI_SCOPE,
+    );
+    pendingSharedTextScale = null;
+  } else {
+    pendingSharedTextScale = null;
+    const storedFontIndex = Number(readScopedUiValue(
+      FONT_KEY,
+      ANONYMOUS_UI_SCOPE,
+    ));
+    state.fontIndex = clamp(
+      Number.isInteger(storedFontIndex) ? storedFontIndex : 1,
+      0,
+      FONT_STEPS.length - 1,
+    );
+    applyFont();
+  }
+}
+
+async function hydrateSharedStateOnce() {
+  const deadline = Date.now() + 6000;
+  while (!window.BdfzIdentity && Date.now() < deadline) {
+    await new Promise((resolve) => setTimeout(resolve, 120));
+  }
+  const identity = window.BdfzIdentity;
+  if (!identity?.api) return;
+  const session = await identity.getSession?.().catch(() => null);
+  if (!session?.authenticated) {
+    setAuthenticatedState(false);
+    await applyAnonymousSharedState();
+    return;
+  }
+
+  const sharedState = await loadSharedStateModule();
+  if (!sharedState) return;
+  const discoveryPayload = await identity.api("/api/yw/v1/state").catch(() => null);
+  const discovery = sharedState.normalizeSharedStateResponse(discoveryPayload);
+  if (!discovery?.ownerScope) return;
+  setAuthenticatedState(true);
+
+  if (sharedStateClient?.ownerScope !== discovery.ownerScope) {
+    discardPendingStateForOtherOwner(discovery.ownerScope);
+    sharedStateGeneration += 1;
+    const generation = sharedStateGeneration;
+    bindUnownedPendingState(discovery.ownerScope, generation);
+    sharedStateClient = sharedState.createSharedStateClient({
+      api: (path, options) => identity.api(path, options),
+      storage: localStorage,
+      storageKey: `yw-shared-state-outbox/2:${discovery.ownerScope}`,
+      ownerScope: discovery.ownerScope,
+      onRemoteState: (remoteState, context) => applyRemoteSharedState(
+        remoteState,
+        { ...context, generation },
+      ),
+    });
+  } else {
+    bindUnownedPendingState(discovery.ownerScope, sharedStateGeneration);
+  }
+  const client = sharedStateClient;
+  const ownerScope = discovery.ownerScope;
+  const hydrated = await client.hydrate({
+    pendingKinds: pendingSharedKinds(ownerScope),
+    initialState: discoveryPayload,
+  });
+  if (!hydrated.ok || client !== sharedStateClient) return;
+  await persistPendingSharedState(client, ownerScope);
+}
+
+function flushSharedState() {
+  sharedStateRefreshRequested = true;
+  if (sharedStateRefreshPromise) return sharedStateRefreshPromise;
+  sharedStateRefreshPromise = (async () => {
+    while (sharedStateRefreshRequested) {
+      sharedStateRefreshRequested = false;
+      try {
+        await hydrateSharedStateOnce();
+      } catch {
+        // The local textbook remains available while shared state is unavailable.
+      }
+    }
+  })().finally(() => {
+    sharedStateRefreshPromise = null;
+  });
+  return sharedStateRefreshPromise;
+}
+
+function queueSharedReadingPosition(lesson) {
+  if (!lesson?.id) return;
+  pendingSharedReadingPosition = {
+    contentVersion: state.sharedContentVersion,
+    lessonId: lesson.id,
+    documentId: "body",
+    stableAnchor: "lesson-root",
+    ownerScope: sharedStateClient?.ownerScope || null,
+    generation: sharedStateGeneration,
+  };
+  void flushSharedState();
+}
+
+function queueSharedTextScale() {
+  pendingSharedTextScale = {
+    value: FONT_STEPS[state.fontIndex],
+    ownerScope: sharedStateClient?.ownerScope || null,
+    generation: sharedStateGeneration,
+  };
+  void flushSharedState();
 }
 
 function lessonProgress(id = state.current?.id) {
@@ -1383,7 +1793,15 @@ function renderReaderLoadFailure(id) {
 }
 
 let lessonToken = 0;
-async function showLesson(id, { push = true } = {}) {
+async function showLesson(
+  id,
+  {
+    push = true,
+    recordEvidence = true,
+    syncSharedState = true,
+    stateGuard = null,
+  } = {},
+) {
   const token = ++lessonToken;
   try {
     const meta = state.manifest.lessons.find((lesson) => lesson.id === id);
@@ -1396,14 +1814,15 @@ async function showLesson(id, { push = true } = {}) {
       shouldCache = true;
     }
     if (token !== lessonToken) return;
+    if (stateGuard && !await stateGuard()) return;
     state.current = lesson;
     state.activeAuthorId = taxonomyFor(lesson).authors?.[0]?.id || "";
-    localStorage.setItem(LAST_LESSON_KEY, lesson.id);
     state.blockId = lesson.blockId || meta.blockId || state.blockId;
     renderBooks();
     renderLesson(lesson);
     if (shouldCache) state.lessons.set(id, lesson);
-    void recordLearning("lessonOpened");
+    if (recordEvidence) void recordLearning("lessonOpened");
+    if (syncSharedState) queueSharedReadingPosition(lesson);
     if (push) history.replaceState(null, "", `#${lesson.id}`);
     if (matchMedia("(max-width: 900px)").matches) closeAtlas();
     scrollTo({ top: 0, behavior: "auto" });
@@ -1764,8 +2183,8 @@ function applyFont() {
 
 function changeFont(delta) {
   state.fontIndex = clamp(state.fontIndex + delta, 0, FONT_STEPS.length - 1);
-  localStorage.setItem(FONT_KEY, state.fontIndex);
   applyFont();
+  queueSharedTextScale();
 }
 
 function bindEvents() {
@@ -1898,6 +2317,11 @@ function bindEvents() {
       showLesson(id, { push: false });
     }
   });
+  window.addEventListener("online", flushSharedState);
+  window.addEventListener("focus", flushSharedState);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") flushSharedState();
+  });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeLexicon();
     if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
@@ -1906,36 +2330,6 @@ function bindEvents() {
       els.search.focus();
     }
   });
-}
-
-function mergeRemoteProgress(item) {
-  if (!item?.itemKey || !item?.meta?.checkpoints) return false;
-  const local = state.progress[item.itemKey] || {};
-  const localPercent = progressPercent(local, { id: item.itemKey });
-  if (Number(item.progressPercent || 0) < localPercent) return false;
-  state.progress[item.itemKey] = {
-    ...local,
-    ...item.meta.checkpoints,
-    remoteProgressPercent: Number(item.progressPercent || 0),
-  };
-  return true;
-}
-
-async function hydrateUserProgress() {
-  setAuthenticatedState(false);
-  const deadline = Date.now() + 6000;
-  while (!window.BdfzIdentity && Date.now() < deadline) await new Promise((resolve) => setTimeout(resolve, 120));
-  const identity = window.BdfzIdentity;
-  if (!identity) return;
-  const session = await identity.getSession?.().catch(() => null);
-  if (!session?.authenticated) return;
-  setAuthenticatedState(true);
-  const payload = await identity.api?.("/api/progress?site=yw").catch(() => null);
-  const items = Array.isArray(payload?.items) ? payload.items : Array.isArray(payload) ? payload : [];
-  if (items.some(mergeRemoteProgress)) {
-    saveStoredProgress();
-    if (state.current) renderLesson(state.current);
-  }
 }
 
 async function init() {
@@ -1952,12 +2346,20 @@ async function init() {
   }))).observe(document.body, { childList: true, subtree: true });
   if (matchMedia("(min-width: 901px)").matches) openAtlas(); else closeAtlas();
   try {
-    const [manifest, taxonomy, lessonMedia, vocabEligibility, vocabIndex] = await Promise.all([
+    const [
+      manifest,
+      taxonomy,
+      lessonMedia,
+      vocabEligibility,
+      vocabIndex,
+      sharedContentPointer,
+    ] = await Promise.all([
       fetchJson("data/manifest.json"),
       fetchJson("data/literary-taxonomy.json"),
       fetchJson("data/lesson-media.json"),
       fetchJson("data/vocab-eligibility.json", { cache: "no-cache" }),
       fetchJson("data/vocab/index.json", { cache: "no-cache" }),
+      fetchJson("app-content/latest-stable.json", { cache: "no-cache" }).catch(() => null),
     ]);
     if (
       vocabEligibility?.schemaVersion !== "yw-vocab-eligibility-v1"
@@ -1969,6 +2371,7 @@ async function init() {
     state.taxonomy = taxonomy;
     state.vocabEligibility = vocabEligibility;
     state.vocabIndex = vocabIndex;
+    state.sharedContentVersion = sharedContentVersionFromPointer(sharedContentPointer);
     state.lessonMedia = new Map((lessonMedia.lessons || []).map((lesson) => [lesson.lessonId, lesson]));
     state.taxonomyLessons = new Map(state.taxonomy.lessons.map((lesson) => [lesson.id, lesson]));
     state.taxonomyGenres = new Map(state.taxonomy.genres.map((genre) => [genre.id, genre]));
@@ -1978,13 +2381,13 @@ async function init() {
     renderBooks();
     renderLessonIndex();
     const hashId = location.hash.slice(1);
-    const rememberedId = localStorage.getItem(LAST_LESSON_KEY) || "";
+    const rememberedId = readScopedUiValue(LAST_LESSON_KEY) || "";
     const initial = state.manifest.lessons.find((lesson) => lesson.id === hashId)
       || state.manifest.lessons.find((lesson) => lesson.id === rememberedId)
       || defaultBlock?.lessons.find((lesson) => !isUnitHeading(lesson) && !isRetiredMirror(lesson) && (lesson.excerpt || "").length > 100)
       || state.manifest.lessons[0];
-    if (initial) await showLesson(initial.id, { push: true });
-    void hydrateUserProgress();
+    if (initial) await showLesson(initial.id, { push: true, syncSharedState: false });
+    void flushSharedState();
   } catch (error) {
     els.atlasStatus.textContent = "教材資料載入失敗";
     els.title.textContent = "暫時無法打開教材";
