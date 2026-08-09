@@ -333,6 +333,7 @@ Source and targets:
 | Artifact | `site/` |
 | Worker | `site/_worker.js` |
 | D1 | `yuwen-reading-db` / `READING_DB` |
+| Preview D1 | `yuwen-reading-db-preview` / `READING_DB` (`39ed36d9-b3f3-40fd-933a-9a68a4066302`) |
 | User Center key | `yw` |
 | Data class | `student_owned` |
 | Verification | `docs/VERIFICATION.md` |
@@ -369,6 +370,14 @@ Native YW App (independent repository)
 ```
 
 Non-regenerable data: D1 reading submissions, version history, vocabulary attempts, and student-linked evidence. Generated lesson JSON, taxonomy, vocabulary banks, and static assets are reproducible only when their source inputs and scripts are preserved.
+
+Pages preview is deliberately data-isolated. Top-level `wrangler.toml` binds
+only `yuwen-reading-db-preview`; `env.production` alone binds the production
+D1, `bdfz-user-center#YuwenEvidenceIdentity`, and
+`bdfz-learning-evidence-yw-v1`. Preview therefore cannot authenticate or emit
+student evidence and must return 401/503 on those routes. Any preview deployment
+created before this split retains unsafe historical bindings until explicitly
+retired; do not leave such immutable preview URLs active.
 
 ## 3. Dependency map and contract probes
 

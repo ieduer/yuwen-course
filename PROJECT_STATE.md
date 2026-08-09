@@ -92,12 +92,12 @@ and is not release-authorized by the current root guard.
 6. The blocked native semantic candidate still needs an independent clean
    three-build App-content audit after a production Web carrier exists. A stale
    audit receipt is a deliberate release blocker, not an approval shortcut.
-7. Cloudflare readback shows that the Pages preview environment currently binds
-   the same production `READING_DB`, `USER_CENTER_EVIDENCE` service and
-   `LEARNING_EVIDENCE_QUEUE` as production. There is no preview-host write kill
-   switch. A public `pages.dev` preview is therefore blocked until bindings are
-   isolated or every student-data write route fails closed outside the custom
-   domain.
+7. Preview isolation is being established with dedicated D1
+   `yuwen-reading-db-preview` (`39ed36d9-b3f3-40fd-933a-9a68a4066302`). The
+   source configuration gives preview no User Center service or Queue binding;
+   production bindings are explicit under `env.production`. A public preview
+   remains blocked until the isolated configuration is deployed and every old
+   preview deployment carrying production bindings is retired.
 
 ## CAPABILITY_FIT — self-study loop candidate (`blocked`)
 
@@ -114,8 +114,10 @@ and is not release-authorized by the current root guard.
 3. **Runtime fit.** Retain the established Pages Functions + Assets runtime.
    Existing approved D1, Service Binding and Queue capabilities match durable
    student state, same-account identity RPC and asynchronous evidence delivery.
-   No new Cloudflare capability/resource is adopted, and the stable Pages site
-   is not migrated to Workers + Static Assets without measured benefit.
+   This rollout adds one dedicated preview D1 resource using the already
+   approved D1 capability; preview intentionally receives no User Center or
+   Queue binding. The stable Pages site is not migrated to Workers + Static
+   Assets without measured benefit.
 4. **Data fit.** D1 is the authoritative YW process ledger; mutation IDs,
    transactions, rate slots and outbox rows provide idempotency and retry.
    Student free-text responses are bounded and retained only in YW D1; the
@@ -124,15 +126,18 @@ and is not release-authorized by the current root guard.
    rolled back with destructive table drops.
 5. **Official maturity.** Pages, D1, Service Bindings and Queues are existing
    stable capabilities classified `approved` by the workspace policy refreshed
-   2026-08-08. This candidate adds no beta/preview dependency, pricing plan or
-   new billable resource; current account readback remains `usage_model=standard`.
+   2026-08-08. This candidate adds no beta dependency or pricing plan. The new
+   preview D1 is a small isolated non-production resource whose storage and
+   operations remain within the existing D1 billing/limits; current account
+   readback remains `usage_model=standard`.
 6. **Toolchain.** Release checks use Node `22.21.1`, lockfile-resolved Wrangler
    `4.100.0`, fixed compatibility date `2026-05-12`, generated-schema checks and
    byte-current manifests. `always_use_latest_compatibility_date=false` in live
    preview and production configuration.
-7. **Exposure.** The existing custom domain is `yw.bdfz.net`; Pages preview URLs
-   are not an isolated canary because they inherit production student-data
-   bindings. No preview or production deployment is authorized in this state.
+7. **Exposure.** The existing custom domain is `yw.bdfz.net`. Preview uses the
+   dedicated D1 above and omits the production identity service and evidence
+   Queue, so authenticated/student-data routes fail closed there. Old preview
+   deployments must be retired before the isolated preview is accepted.
    `robots`/Content-Signal policy, custom routes and public registration are
    unchanged by this candidate.
 8. **Hub fan-out.** Contracts touch User Center identity/evidence, the shared

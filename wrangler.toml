@@ -4,15 +4,21 @@ pages_build_output_dir = "site"
 
 [[d1_databases]]
 binding = "READING_DB"
+database_name = "yuwen-reading-db-preview"
+database_id = "39ed36d9-b3f3-40fd-933a-9a68a4066302"
+migrations_dir = "migrations"
+
+[[env.production.d1_databases]]
+binding = "READING_DB"
 database_name = "yuwen-reading-db"
 database_id = "99c541e7-e70b-4584-b939-7e88a6dd68c5"
 migrations_dir = "migrations"
 
-[[services]]
+[[env.production.services]]
 binding = "USER_CENTER_EVIDENCE"
 service = "bdfz-user-center"
 entrypoint = "YuwenEvidenceIdentity"
 
-[[queues.producers]]
+[[env.production.queues.producers]]
 binding = "LEARNING_EVIDENCE_QUEUE"
 queue = "bdfz-learning-evidence-yw-v1"
