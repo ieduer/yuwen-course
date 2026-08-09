@@ -65,11 +65,13 @@ with `appDisposition=blocked`. Its old audit receipt is intentionally reported
 as `review-required`, and the existing stable pointer remains byte-unchanged at
 `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
 
-The paired clean User Center consumer candidate is
+Review rejected the earlier User Center candidate
 `f1874e5cc2ed39a907f50c2badfb4cfd7aba55f6` based on canonical main
-`844cab6e30590e9853177e55d96944ae7829b88f`. It keeps formative health and
-mastery outside growth-source activation and A+/A--F scoring. It is not deployed
-and is not release-authorized by the current root guard.
+`844cab6e30590e9853177e55d96944ae7829b88f`: although its formative projection
+was non-scoring, it also changed the frozen YW A+ source denominator. A smaller
+consumer-only replacement that preserves the canonical A+/A--F snapshot is
+under isolated review. No User Center candidate is deployed or authorized by
+the current root guard.
 
 ## Active release blockers and deferred work
 
@@ -92,12 +94,16 @@ and is not release-authorized by the current root guard.
 6. The blocked native semantic candidate still needs an independent clean
    three-build App-content audit after a production Web carrier exists. A stale
    audit receipt is a deliberate release blocker, not an approval shortcut.
-7. Preview isolation is being established with dedicated D1
-   `yuwen-reading-db-preview` (`39ed36d9-b3f3-40fd-933a-9a68a4066302`). The
-   source configuration gives preview no User Center service or Queue binding;
-   production bindings are explicit under `env.production`. A public preview
-   remains blocked until the isolated configuration is deployed and every old
-   preview deployment carrying production bindings is retired.
+7. Pages preview isolation completed on 2026-08-09. Dedicated D1
+   `yuwen-reading-db-preview` (`39ed36d9-b3f3-40fd-933a-9a68a4066302`) contains
+   migrations 0001--0004; preview has no User Center service or Queue binding,
+   while production bindings remain explicit under `env.production`. Eight
+   branch-latest previews carry exact clean source `918e66e2473ee298ce3af5f23598de9d3e659095`.
+   All 12 historical production-bound preview deployments were deleted; ten
+   hash hosts return 404 and the two Cloudflare edge routes that outlived their
+   control-plane deletion are quarantined by exact-host Access app
+   `5d768360-2dd8-458d-a743-182c9ced3b22` and deny policy
+   `eaa5cef6-e21f-4182-b9ce-15d000136fee`.
 
 ## CAPABILITY_FIT — self-study loop candidate (`blocked`)
 
@@ -124,20 +130,23 @@ and is not release-authorized by the current root guard.
    queue/User Center envelope is privacy-minimized. Migration 0004 is additive,
    requires a fresh remote export/bookmark and schema readback, and is never
    rolled back with destructive table drops.
-5. **Official maturity.** Pages, D1, Service Bindings and Queues are existing
+5. **Official maturity.** Pages, D1, Service Bindings, Queues and Access are existing
    stable capabilities classified `approved` by the workspace policy refreshed
    2026-08-08. This candidate adds no beta dependency or pricing plan. The new
    preview D1 is a small isolated non-production resource whose storage and
    operations remain within the existing D1 billing/limits; current account
-   readback remains `usage_model=standard`.
+   readback remains `usage_model=standard`. Access is used only as a reversible
+   exact-two-host quarantine for deleted preview routes that had not yet
+   converged at the edge; it does not cover the custom domain or new previews.
 6. **Toolchain.** Release checks use Node `22.21.1`, lockfile-resolved Wrangler
    `4.100.0`, fixed compatibility date `2026-05-12`, generated-schema checks and
    byte-current manifests. `always_use_latest_compatibility_date=false` in live
    preview and production configuration.
 7. **Exposure.** The existing custom domain is `yw.bdfz.net`. Preview uses the
    dedicated D1 above and omits the production identity service and evidence
-   Queue, so authenticated/student-data routes fail closed there. Old preview
-   deployments must be retired before the isolated preview is accepted.
+   Queue, so authenticated/student-data routes fail closed there. Old
+   production-bound deployments are retired; the two stale edge hostnames are
+   deny-all quarantined until deletion has converged everywhere.
    `robots`/Content-Signal policy, custom routes and public registration are
    unchanged by this candidate.
 8. **Hub fan-out.** Contracts touch User Center identity/evidence, the shared
@@ -156,11 +165,14 @@ and is not release-authorized by the current root guard.
     limits remain the outer ceiling, and a 503 health receipt is a stop signal.
 11. **Verification.** Locked-toolchain local tests, workerd preview sanitization,
     local D1 concurrency/replay, full projection, privacy scan and native-tree
-    exclusion pass. Release stops on shared preview bindings, live learning
-    health 503, absent migration 0004, unauthorized User Center deployment or
-    any authenticated mutation/readback mismatch.
-12. **Exit.** Source rollback is
-    `backup/yw-self-study-loop-pre-20260809` at `037484f8`; Pages rollback
+    exclusion pass. Preview binding isolation and historical deployment cleanup
+    passed. Release still stops on live learning health 503, absent production
+    migration 0004, unauthorized User Center deployment or any authenticated
+    mutation/readback mismatch.
+12. **Exit.** The immediate rollout source backup is
+    `backup/yw-pre-production-rollout-20260809` at
+    `cf9a8ec17c026526c98172970630df3261d76a68`; the older baseline backup remains
+    `backup/yw-self-study-loop-pre-20260809` at `037484f8`. Pages rollback
     anchors are listed below. Preserve D1 during code rollback; use the fresh
     pre-migration export for disaster recovery and backward-compatible
     forward-fix for additive schema. App stable content remains untouched.

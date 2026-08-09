@@ -138,6 +138,48 @@ stable graph, `check:native-content:deploy-sync` rejects this candidate, and
 No production Pages deployment, D1 migration, User Center deployment or App
 mutation is part of this local result.
 
+### Pages preview binding isolation receipt (2026-08-09)
+
+- clean pushed source: `918e66e2473ee298ce3af5f23598de9d3e659095`;
+- primary isolated preview: `577ad2a8-b2eb-458f-8145-4791ec7cd5f5`, created
+  `2026-08-09T05:22:52.419368Z`, URL
+  `https://577ad2a8.yuwen-course.pages.dev`;
+- all eight surviving preview deployments use that exact carrier and bind only
+  D1 `39ed36d9-b3f3-40fd-933a-9a68a4066302`; project preview configuration has
+  no service or Queue producer;
+- production remained deployment `20be2885-5494-4b98-a130-af022c1a389b`,
+  carrier `e87c697119d7d75d01def58ff781524f73bb3ff9`, D1
+  `99c541e7-e70b-4584-b939-7e88a6dd68c5`, the named User Center service and
+  production evidence Queue;
+- 12 historical production-bound preview deployments and one wrong-carrier
+  metadata deployment were deleted after every historical branch received an
+  isolated successor;
+- final old-host readback: ten 404 and two 302 to exact-host Access quarantine
+  `5d768360-2dd8-458d-a743-182c9ced3b22` /
+  `eaa5cef6-e21f-4182-b9ce-15d000136fee`. Two rounds at least 60 seconds apart
+  across both observed Anycast addresses returned no old Worker;
+- preview smoke: Reading health 200 with schema v4, learning health 503 as
+  expected without User Center; production smoke remained Reading 200 and the
+  pre-existing learning-health 503.
+
+Private pre-change Pages project/deployment JSON is mode 0600 under
+`/Users/ylsuen/CF/backups/yuwen-course/2026-08-09-production-rollout`. The
+sanitized preview-isolation receipt is 3,465 bytes with SHA-256
+`709b7b5a5d17c7cb15b319d1a01e8fbdce2de945a0b0b157d3272017765104f6`.
+The exact pre-change SHA-256 values are:
+
+```text
+project:  eb0dc6ae3c662e04fb46bdabcb0b795ac720e9709c77ba532d9b6cc100906110
+page 1:  36c62697bee008095836479c4e2d0df1843bafd687978243d65707ae4fbf3752
+page 2:  2a63157003487680aff56bc65c4c87f6a1079ad9e1fb00099ce4fc264f65fbff
+page 3:  6702c67884c2045ab49bd1d48c7c73a1b6accdb13a5948ea79e815e68fd38fd1
+page 4:  4bdc535450074724f385be9372de0ecda768c08284cc0e99b25010c25839c9b2
+```
+
+Deleted atomic preview URLs cannot be restored directly, but all branch
+aliases can be redeployed from the clean carrier. The custom domain and
+production deployment were never moved.
+
 ## 2026-07-30 Web/native synchronized production release
 
 This synchronized source graph supersedes older content-count markers below.

@@ -375,9 +375,15 @@ Pages preview is deliberately data-isolated. Top-level `wrangler.toml` binds
 only `yuwen-reading-db-preview`; `env.production` alone binds the production
 D1, `bdfz-user-center#YuwenEvidenceIdentity`, and
 `bdfz-learning-evidence-yw-v1`. Preview therefore cannot authenticate or emit
-student evidence and must return 401/503 on those routes. Any preview deployment
-created before this split retains unsafe historical bindings until explicitly
-retired; do not leave such immutable preview URLs active.
+student evidence and must return 401/503 on those routes. On 2026-08-09 all 12
+preview deployments created before this split were superseded and deleted.
+Ten deleted hash hosts return 404. Two deleted hosts whose Cloudflare edge
+routes continued serving the old Worker are isolated by exact-host Access app
+`5d768360-2dd8-458d-a743-182c9ced3b22` and deny policy
+`eaa5cef6-e21f-4182-b9ce-15d000136fee`; the application does not cover new
+previews or `yw.bdfz.net`. Remove that quarantine only after two privacy-bounded
+probe rounds at least 60 seconds apart show no old Worker on every resolved
+edge address.
 
 ## 3. Dependency map and contract probes
 
