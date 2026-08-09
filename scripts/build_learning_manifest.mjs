@@ -29,6 +29,7 @@ const STANDARD_MODES = new Set([
 
 const INTERACTIONS_BY_MODE = Object.freeze({
   standard: ["contextWords", "revision", "structure", "evaluation", "authorQuestion"],
+  classical: ["structure", "evaluation", "authorQuestion"],
   "unit-intro": ["contextWords", "structure", "evaluation", "authorQuestion"],
   "unit-task": ["contextWords", "revision", "structure", "evaluation", "authorQuestion"],
 });
@@ -141,7 +142,9 @@ export function buildLearningManifest() {
     const taxonomyLesson = taxonomyById.get(lesson.id);
     if (!taxonomyLesson) throw new Error(`taxonomy missing selected lesson: ${lesson.id}`);
     const mode = appMode(taxonomyLesson.mode);
-    const interactionGroup = mode === "unit-intro" || mode === "unit-task" ? mode : "standard";
+    const interactionGroup = mode === "classical"
+      ? "classical"
+      : (mode === "unit-intro" || mode === "unit-task" ? mode : "standard");
     for (const interaction of INTERACTIONS_BY_MODE[interactionGroup]) {
       items.push(interactionItem(lesson, mode, interaction));
     }

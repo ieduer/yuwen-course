@@ -13,7 +13,7 @@
 <link rel="icon" href="https://img.bdfz.net/20250503004.webp" type="image/webp">
 <link rel="apple-touch-icon" href="https://img.bdfz.net/20250503004.webp">
 <meta name="theme-color" content="#0A0C14">
-<link rel="stylesheet" href="assets/star.css?v=20260714-star1">
+<link rel="stylesheet" href="assets/star.css?v=20260809-formative1">
 </head>
 <body>
 <div id="stage">
@@ -33,6 +33,48 @@
   <input id="search" type="search" placeholder="搜索課文星、詞星…" autocomplete="off" spellcheck="false">
   <div id="search-results" hidden></div>
 </div>
+
+<button id="mastery-toggle" type="button" aria-controls="mastery-panel" aria-expanded="false">
+  <span>篇目能力</span>
+  <span id="mastery-toggle-status">讀取中</span>
+</button>
+
+<section id="mastery-panel" aria-labelledby="mastery-title" hidden>
+  <header class="mastery-head">
+    <div>
+      <p class="mastery-kicker">FORMATIVE · LESSON</p>
+      <h2 id="mastery-title">篇目能力雷達</h2>
+    </div>
+    <button id="mastery-close" class="ghost" type="button" aria-label="收起篇目能力雷達">×</button>
+  </header>
+
+  <div id="mastery-state" class="mastery-state" role="status" aria-live="polite">正在讀取形成性學習記錄…</div>
+
+  <div id="mastery-content" hidden>
+    <label class="mastery-select-label" for="mastery-lesson">選擇篇目</label>
+    <select id="mastery-lesson"></select>
+
+    <div class="mastery-visual">
+      <svg id="mastery-radar" viewBox="0 0 320 286" role="img" aria-labelledby="mastery-radar-title mastery-radar-desc">
+        <title id="mastery-radar-title">篇目四維能力雷達</title>
+        <desc id="mastery-radar-desc">尚未選擇篇目。</desc>
+        <g id="mastery-radar-grid" aria-hidden="true"></g>
+        <g id="mastery-radar-values" aria-hidden="true"></g>
+        <g id="mastery-radar-labels" aria-hidden="true"></g>
+      </svg>
+      <dl id="mastery-dimensions" class="mastery-dimensions"></dl>
+    </div>
+
+    <p id="mastery-denominator" class="mastery-denominator">已完成的有效交互與目前啟用題組取交集；題目增刪時，分母會自動更新。</p>
+    <p id="mastery-policy" class="mastery-policy">affectsGrowthScore=false · affectsAPlus=false</p>
+
+    <div id="mastery-interest" class="mastery-interest">
+      <span>本篇有意思</span>
+      <strong id="mastery-interest-value">尚無已同步評價</strong>
+      <div id="mastery-interest-track" class="mastery-interest-track" hidden aria-hidden="true"><span id="mastery-interest-fill"></span></div>
+    </div>
+  </div>
+</section>
 
 <div id="hint">拖動旋轉 · 滾輪縮放 · 右鍵平移 · 點按星點看脈絡 · 雙擊復位</div>
 
@@ -74,6 +116,6 @@
 
 <script defer src="https://my.bdfz.net/site-auth.js" data-site-key="yw"></script>
 <script async src="https://nav.bdfz.net/bdfz-nav.js"></script>
-<script type="module" src="assets/star.js?v=20260714-star1"></script>
+<script type="module" src="assets/star.js?v=20260809-formative1"></script>
 </body>
 </html>

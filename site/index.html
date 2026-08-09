@@ -13,9 +13,10 @@
   <link rel="apple-touch-icon" href="https://img.bdfz.net/20250503004.webp">
   <meta name="theme-color" content="#f4f0e6">
   <title>課文 · 語文學習矩陣</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260730-content-rules-v1">
+  <link rel="stylesheet" href="assets/styles.css?v=20260809-self-study-loop-v2">
 </head>
 <body>
+  <a class="skip-link" href="#textbook-text" data-same-tab>跳到正文</a>
   <div class="read-progress" aria-hidden="true"><span id="read-progress-bar"></span></div>
 
   <aside class="atlas" id="atlas" aria-label="教材目錄" aria-hidden="false">
@@ -103,7 +104,7 @@
           <div class="section-head">
             <div>
               <div class="section-label">04 / 課堂呈現</div>
-              <h2 id="lesson-media-title">課堂演示</h2>
+              <h2 id="lesson-media-title">簡報預覽</h2>
             </div>
             <p id="lesson-media-status"></p>
           </div>
@@ -140,9 +141,9 @@
         </section>
       </article>
 
-      <aside class="learning-rail" id="learning-rail" aria-label="本課掌握度">
+      <aside class="learning-rail" id="learning-rail" aria-label="本機步驟完成度">
         <button class="mastery-toggle" id="mastery-toggle" type="button" aria-expanded="true" aria-controls="mastery-panel">
-          <span>本課掌握度</span>
+          <span>本機步驟完成度</span>
           <strong><b id="mastery-value">0</b><small>%</small></strong>
           <i aria-hidden="true">收</i>
         </button>
@@ -173,7 +174,7 @@
     <div class="lexicon-viewport"><iframe id="lexicon-frame" title="辭典查詢" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe></div>
   </section>
 
-  <dialog class="page-dialog" id="page-dialog">
+  <dialog class="page-dialog" id="page-dialog" aria-modal="true" aria-labelledby="page-dialog-title">
     <form method="dialog" class="dialog-bar">
       <div>
         <span>教材原圖校勘</span>
@@ -192,7 +193,7 @@
     <div class="page-strip" id="page-strip"></div>
   </dialog>
 
-  <dialog class="resource-dialog" id="resource-dialog">
+  <dialog class="resource-dialog" id="resource-dialog" aria-modal="true" aria-labelledby="resource-dialog-title">
     <form method="dialog" class="dialog-bar resource-dialog-bar">
       <div>
         <span>課堂投影</span>
@@ -212,6 +213,7 @@
   <script async src="https://nav.bdfz.net/bdfz-nav.js"></script>
   <script defer src="assets/learning-evidence.js?v=20260727-evidence-loop-v2"></script>
   <script defer src="assets/vocab-progress.js?v=20260730-vocab-scope-v1"></script>
-  <script defer src="assets/app.js?v=20260730-owner-v1"></script>
+  <script defer src="assets/classical-first-read.js?v=20260809-first-read-v1"></script>
+  <script defer src="assets/app.js?v=20260809-self-study-loop-v2"></script>
 </body>
 </html>

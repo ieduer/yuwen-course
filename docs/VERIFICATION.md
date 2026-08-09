@@ -1,5 +1,142 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-09 self-study-loop candidate gate
+
+This is the executable acceptance standard for the current candidate. It does
+not supersede the production deployment values in the next section until every
+paired release gate has passed.
+
+### Source/content checks
+
+```zsh
+cd /Users/ylsuen/CF/yuwen-course
+npm ci
+npm run verify:study-guide-sources
+npm run precontent:check
+git diff --check
+```
+
+Required readback:
+
+- five PDF and five extraction receipts match actual bytes and page counts;
+- 30 classical assets declare `yw-classical-first-read-v1`, numeric version 1,
+  UTF-16 offsets, no punctuation or annotation, and exact reader-text binding;
+- catalog `yw-study-guides-f4c48caf4acbabb4` has 241 items / 193 active / 48
+  inactive; every missing source answer is labelled `Codex 參考答案`, every
+  open reference is non-unique, and review-required items cannot self-complete;
+- formative `yw-formative-52b574175221646f` has 1,021 active items / 115 lessons
+  / 48 tombstones and validates its exact active-set hashes, semantic history,
+  authority and formal-manifest binding;
+- reader projection remains 191 documents and the media ledger remains 165
+  objects / 28,066,373 bytes with zero unreviewed anomaly;
+- preview network policy rejects unregistered redirects, IP literals and active
+  MIME, strips upstream CORS/cookies/frame controls, and the workerd
+  HTMLRewriter test passes;
+- isolated blocked native-content candidate builds are byte-identical, report
+  the stale audit receipt as `review-required`, and carry the exact
+  `canonical_graph_review_required` blocker. The test must not create or move
+  `latest-stable.json`. A later App import additionally requires a new
+  independent three-build audit receipt bound to the clean Web carrier; this
+  Web-only candidate deliberately does not mint that receipt early.
+
+### Browser acceptance
+
+At desktop width and 390x844, verify at least one modern lesson and
+`lesson-1534` / `lesson-1535`:
+
+1. a logged-out classical first read does not retain guesses on a shared
+   browser or unlock later stages;
+2. an authenticated student can add three non-overlapping marks by pointer and
+   keyboard, submit a summary, reload the immutable submitted state, then mark
+   each difficulty resolved during close reading;
+3. `注` stays inline, types once, opens with a unique occurrence ID, closes on
+   a second click or blank-text click and respects reduced motion;
+4. wrong -> correct -> correct vocabulary follows the server status and does
+   not unlock early;
+5. study-guide objective answers are graded by source logic; an open answer
+   shows the explicit `Codex 參考答案` rubric and only the server result can mark
+   completion;
+6. classical pages have no duplicate `通讀正文`/`字句之改`; a modern page still
+   has the three-word response and `字句之改`;
+7. materials/slides/migration previews are expanded, unsupported items show an
+   explicit fallback, there is no duplicate `此刻同讀`, and cross-book lookup
+   targets exactly `https://xue.bdfz.net/`;
+8. the interest slider distinguishes `已同步` from `本機已存／尚未同步`; local
+   step progress is owner-scoped and never labelled as authoritative mastery;
+9. `star.html` retains the three-word constellation and, when authenticated
+   formative data is available, shows lesson/competency dynamic percentages;
+   401/503 is unavailable rather than zero.
+
+Close every task-owned browser/server and run the workspace orphan-browser
+dry-run before closeout.
+
+### Paired production gate
+
+Production is prohibited until all items below are evidenced together:
+
+1. independently reviewed and release-authorized User Center consumer deployed;
+2. `GET /api/learning/health` returns the exact compound formal + registry +
+   formative receipt and explicitly says it cannot affect scoring/A+;
+3. authenticated formative read returns 200, unauthenticated returns 401, and
+   manifest/ledger unavailability returns 503 without displaying 0%;
+4. a fresh D1 export/bookmark exists, remote duplicate preflight is zero,
+   migration 0004 applies additively, and `/api/reading/health` reads back every
+   required table/index;
+5. authenticated first-read and study-guide mutations, exact idempotent replay,
+   User Center projection readback and Queue/outbox status all match without
+   creating synthetic student progress;
+6. a checksum-fixed preview deployment passes desktop/mobile/API/dependency and
+   custom-domain immutable-object readback;
+7. a clean formal Web carrier commit, production Pages UUID, created time,
+   artifact manifest, immediate rollback and D1 no-loss rollback are recorded;
+8. the native content receipt has an explicit App disposition. App import,
+   signing and device acceptance remain a later task and do not begin from a
+   preview or blocked receipt.
+
+If User Center authority remains blocked or live learning health remains 503,
+stop after the reviewed candidate. Do not deploy YW, apply D1 or hand a false
+compatibility receipt to the App task.
+
+### Latest local result (2026-08-09)
+
+`PATH=/Users/ylsuen/.nvm/versions/node/v22.21.1/bin:$PATH npm run
+prepare:preview-artifact` passed in full. Key executable results:
+
+```text
+classical first-read:       30 lessons / 102 paragraphs
+study-guide catalog:        241 total / 193 active / 48 inactive
+learning manifest:          9 / 9
+study-guide builder:        3 / 3
+study-guide assessment:     5 / 5
+study-guide frontend:       3 / 3
+evidence contract:          12 / 12
+formative projection:       4 / 4
+formative star UI:          2 / 2
+reading identity:           4 / 4
+local progress truth:       6 / 6
+shared state:               13 / 13 + real-browser contract
+Reading API + local D1:     64 / 64
+native candidate:           21 / 21
+release-site staging:       4 / 4
+preview files:              614
+preview aggregate SHA-256:  5377ff2b5a652fac2da3ff245c353a1b46de6a8974b7d642594e3ee377166c7d
+```
+
+The staged Gitleaks pass reported only 213 `generic-api-key` pattern matches;
+all 213 are the public schema field `itemKey` in the study-guide catalog and
+formative manifest, with zero other match prefix. Native raw/decoded privacy
+tests also passed. This classification must be repeated after any catalog
+schema change.
+
+The current native semantic candidate is `yw-9fad79d2acd5ab37986712da` /
+`sha256:9fad79d2acd5ab37986712dab20277c2a8685066b4a637bc5adce709936d131a`.
+It is correctly `blocked`: the tracked audit receipt still approves the prior
+stable graph, `check:native-content:deploy-sync` rejects this candidate, and
+`latest-stable.json` remains SHA-256
+`a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
+No production Pages deployment, D1 migration, User Center deployment or App
+mutation is part of this local result.
+
 ## 2026-07-30 Web/native synchronized production release
 
 This synchronized source graph supersedes older content-count markers below.

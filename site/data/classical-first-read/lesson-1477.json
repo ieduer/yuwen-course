@@ -1,0 +1,68 @@
+{
+  "schema": "yw-classical-first-read-v1",
+  "schemaVersion": 1,
+  "offsetUnit": "utf16_code_unit",
+  "lessonId": "lesson-1477",
+  "title": "人皆有不忍人之心/《孟子》",
+  "textVersionId": "cfr-lesson-1477-c3a55d9db52cd11b",
+  "textDigest": "sha256:c3a55d9db52cd11bb4751eddf4fd59bb9f01fda3e426925d3a27e919a0916268",
+  "canonicalPunctuatedDigest": "sha256:5588d59a7928dfb9a892fc57ff7914ad5cada60f81a5760c46aa350885bfdefe",
+  "source": {
+    "readerDocument": "data/reader-documents/lesson-1477.json",
+    "curationVersion": "2026-07-30.2",
+    "curationManifestSha256": "8deda35e2cb9b2aae68a6d4e2614684605ec85d50bf2ff9dddd19f7e4588283b",
+    "segments": [
+      {
+        "startBlock": 0,
+        "endBlock": 5
+      }
+    ]
+  },
+  "paragraphCount": 6,
+  "charCount": 255,
+  "paragraphs": [
+    {
+      "key": "cfrp:lesson-1477:040726633aea8326:01",
+      "ordinal": 1,
+      "sourceBlockIndex": 0,
+      "text": "孟子曰人皆有不忍人之心先王有不忍人之心斯有不忍人之政矣以不忍人之心行不忍人之政治天下可运之掌上",
+      "charCount": 47
+    },
+    {
+      "key": "cfrp:lesson-1477:4fa795b617685335:01",
+      "ordinal": 2,
+      "sourceBlockIndex": 1,
+      "text": "所以谓人皆有不忍人之心者今人乍见孺子将入于井皆有怵惕恻隐之心非所以内交于孺子之父母也非所以要誉于乡党朋友也非恶其声而然也",
+      "charCount": 60
+    },
+    {
+      "key": "cfrp:lesson-1477:b01f8c5ee07ab9d5:01",
+      "ordinal": 3,
+      "sourceBlockIndex": 2,
+      "text": "由是观之无恻隐之心非人也无羞恶之心非人也无辞让之心非人也无是非之心非人也",
+      "charCount": 36
+    },
+    {
+      "key": "cfrp:lesson-1477:a867f0243e49cd0e:01",
+      "ordinal": 4,
+      "sourceBlockIndex": 3,
+      "text": "恻隐之心仁之端也羞恶之心义之端也辞让之心礼之端也是非之心智之端也",
+      "charCount": 32
+    },
+    {
+      "key": "cfrp:lesson-1477:52d752d0dec9d8c6:01",
+      "ordinal": 5,
+      "sourceBlockIndex": 4,
+      "text": "人之有是四端也犹其有四体也有是四端而自谓不能者自贼者也谓其君不能者贼其君者也",
+      "charCount": 38
+    },
+    {
+      "key": "cfrp:lesson-1477:a4c201ad1c52f9b8:01",
+      "ordinal": 6,
+      "sourceBlockIndex": 5,
+      "text": "凡有四端于我者知皆扩而充之矣若火之始然泉之始达苟能充之足以保四海苟不充之不足以事父母",
+      "charCount": 42
+    }
+  ],
+  "text": "孟子曰人皆有不忍人之心先王有不忍人之心斯有不忍人之政矣以不忍人之心行不忍人之政治天下可运之掌上所以谓人皆有不忍人之心者今人乍见孺子将入于井皆有怵惕恻隐之心非所以内交于孺子之父母也非所以要誉于乡党朋友也非恶其声而然也由是观之无恻隐之心非人也无羞恶之心非人也无辞让之心非人也无是非之心非人也恻隐之心仁之端也羞恶之心义之端也辞让之心礼之端也是非之心智之端也人之有是四端也犹其有四体也有是四端而自谓不能者自贼者也谓其君不能者贼其君者也凡有四端于我者知皆扩而充之矣若火之始然泉之始达苟能充之足以保四海苟不充之不足以事父母"
+}

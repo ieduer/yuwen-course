@@ -968,6 +968,7 @@ def main() -> None:
             "imageCount": len(forum_images),
             "resourceCount": len(resources),
             "textbookPageCount": 0,
+            "textbookPageImageCount": 0,
             "textbookStartPage": textbook["startPage"],
             "textbookBookTitle": textbook["bookTitle"],
             "tocLabel": textbook["tocLabel"],
@@ -1031,6 +1032,7 @@ def main() -> None:
                 if textbook.get("imageBase")
             ]
             meta["textbookPageCount"] = len(pages)
+            meta["textbookPageImageCount"] = len(textbook["pageImages"])
             meta["textbookStartPage"] = pages[0] if pages else None
             block["lessons"].append(meta)
             assert_user_facing_projection(lesson, lesson["id"])

@@ -1,0 +1,280 @@
+{
+  "schema": "yw-classical-first-read-index-v1",
+  "schemaVersion": 1,
+  "offsetUnit": "utf16_code_unit",
+  "policyId": "yw-classical-first-read-reviewed-2026-08-09-v1",
+  "policyDigest": "sha256:c123d5416034084cd48cc8222fbd4b2fb8d598e8b767f7689e3c7c948efc8106",
+  "lessonCount": 30,
+  "lessons": [
+    {
+      "lessonId": "lesson-1711-p1",
+      "title": "劝学",
+      "dataUrl": "data/classical-first-read/lesson-1711-p1.json",
+      "textVersionId": "cfr-lesson-1711-p1-29fb3c127104daa7",
+      "textDigest": "sha256:29fb3c127104daa7c65a634b0307136ad1c51602f8ac87491a76fdfea2695d2d",
+      "paragraphCount": 1,
+      "charCount": 291
+    },
+    {
+      "lessonId": "lesson-1711-p2",
+      "title": "师说",
+      "dataUrl": "data/classical-first-read/lesson-1711-p2.json",
+      "textVersionId": "cfr-lesson-1711-p2-cba084784b3b3346",
+      "textDigest": "sha256:cba084784b3b334693f8457e4d1e635d319a93ee428fa05f34c8e544381ea06a",
+      "paragraphCount": 1,
+      "charCount": 456
+    },
+    {
+      "lessonId": "lesson-1719-p1",
+      "title": "赤壁赋",
+      "dataUrl": "data/classical-first-read/lesson-1719-p1.json",
+      "textVersionId": "cfr-lesson-1719-p1-0ddd7262460793cd",
+      "textDigest": "sha256:0ddd7262460793cd6f08032606d8c1a60bd94acf1154b241143927f49a9fe170",
+      "paragraphCount": 2,
+      "charCount": 537
+    },
+    {
+      "lessonId": "lesson-1719-p2",
+      "title": "登泰山记",
+      "dataUrl": "data/classical-first-read/lesson-1719-p2.json",
+      "textVersionId": "cfr-lesson-1719-p2-6d9ec4ad08cc2667",
+      "textDigest": "sha256:6d9ec4ad08cc2667f6b3e6190b02ad13c7d40c2f498e8c212abdd2c19b6754e1",
+      "paragraphCount": 4,
+      "charCount": 448
+    },
+    {
+      "lessonId": "lesson-1726-p1",
+      "title": "子路、曾皙、冉有、公西华侍坐",
+      "dataUrl": "data/classical-first-read/lesson-1726-p1.json",
+      "textVersionId": "cfr-lesson-1726-p1-e3a8041bd0966b1f",
+      "textDigest": "sha256:e3a8041bd0966b1ff587e68da51dde438aa875d9185346fff095a351cefc1394",
+      "paragraphCount": 1,
+      "charCount": 315
+    },
+    {
+      "lessonId": "lesson-1726-p2",
+      "title": "齐桓晋文之事",
+      "dataUrl": "data/classical-first-read/lesson-1726-p2.json",
+      "textVersionId": "cfr-lesson-1726-p2-484766cf801ddd18",
+      "textDigest": "sha256:484766cf801ddd185c40f9ccf81c894ad0c25763ddc4b0ae9cb70ead25bca688",
+      "paragraphCount": 1,
+      "charCount": 1314
+    },
+    {
+      "lessonId": "lesson-1726-p3",
+      "title": "庖丁解牛",
+      "dataUrl": "data/classical-first-read/lesson-1726-p3.json",
+      "textVersionId": "cfr-lesson-1726-p3-223b1d7a66503030",
+      "textDigest": "sha256:223b1d7a6650303022efb7cd6032594162d6f4f9d3fa02a8d0a6698094a89b05",
+      "paragraphCount": 1,
+      "charCount": 290
+    },
+    {
+      "lessonId": "lesson-1727",
+      "title": "2 烛之武退秦师",
+      "dataUrl": "data/classical-first-read/lesson-1727.json",
+      "textVersionId": "cfr-lesson-1727-480510a343c01bfc",
+      "textDigest": "sha256:480510a343c01bfcda119a3635649f1d6e9cf469085c35099b9922b05a39642e",
+      "paragraphCount": 1,
+      "charCount": 294
+    },
+    {
+      "lessonId": "lesson-1728",
+      "title": "3 鸿门宴",
+      "dataUrl": "data/classical-first-read/lesson-1728.json",
+      "textVersionId": "cfr-lesson-1728-ccb0268986a96c1a",
+      "textDigest": "sha256:ccb0268986a96c1a0023c131a56656b8c765b12d76e3207fc9fb4c2fdb46efad",
+      "paragraphCount": 8,
+      "charCount": 1442
+    },
+    {
+      "lessonId": "lesson-1743-p1",
+      "title": "谏逐客书",
+      "dataUrl": "data/classical-first-read/lesson-1743-p1.json",
+      "textVersionId": "cfr-lesson-1743-p1-bf3d927d86675f05",
+      "textDigest": "sha256:bf3d927d86675f05a5e0527fb577e7ef7c92bd796c48dd86db6d2bbc631079b7",
+      "paragraphCount": 1,
+      "charCount": 703
+    },
+    {
+      "lessonId": "lesson-1743-p2",
+      "title": "与妻书",
+      "dataUrl": "data/classical-first-read/lesson-1743-p2.json",
+      "textVersionId": "cfr-lesson-1743-p2-07cf7891e8fd8b7f",
+      "textDigest": "sha256:07cf7891e8fd8b7f5b4c393c5819ec8ec25ae99cd4ae79342d932f8f433ba07e",
+      "paragraphCount": 1,
+      "charCount": 1072
+    },
+    {
+      "lessonId": "lesson-1752",
+      "title": "15 谏太宗十思疏",
+      "dataUrl": "data/classical-first-read/lesson-1752.json",
+      "textVersionId": "cfr-lesson-1752-e1ba081b3cceed4b",
+      "textDigest": "sha256:e1ba081b3cceed4b2862b4e7b52bf6e0772a9c64a5e3a180b4c8c7d0b0ca99df",
+      "paragraphCount": 3,
+      "charCount": 467
+    },
+    {
+      "lessonId": "lesson-1753-p1",
+      "title": "阿房宫赋",
+      "dataUrl": "data/classical-first-read/lesson-1753-p1.json",
+      "textVersionId": "cfr-lesson-1753-p1-cf0240df14ca12ed",
+      "textDigest": "sha256:cf0240df14ca12ed54e47e88a5ec548cd43f801cc3682bfd04e4703be7985240",
+      "paragraphCount": 3,
+      "charCount": 513
+    },
+    {
+      "lessonId": "lesson-1753-p2",
+      "title": "六国论",
+      "dataUrl": "data/classical-first-read/lesson-1753-p2.json",
+      "textVersionId": "cfr-lesson-1753-p2-080bb0c11a9eabf7",
+      "textDigest": "sha256:080bb0c11a9eabf7f20df5e294d0e643ad6ed6e98281348ac05a88465c0ca9d6",
+      "paragraphCount": 1,
+      "charCount": 543
+    },
+    {
+      "lessonId": "lesson-1474",
+      "title": "5、《论语》十二章",
+      "dataUrl": "data/classical-first-read/lesson-1474.json",
+      "textVersionId": "cfr-lesson-1474-1253a91eca5d93e2",
+      "textDigest": "sha256:1253a91eca5d93e2e58cf6662d824103861c1bdd9e7dc3ff44925d45bfd32422",
+      "paragraphCount": 12,
+      "charCount": 337
+    },
+    {
+      "lessonId": "lesson-1476",
+      "title": "大学之道/《礼记》",
+      "dataUrl": "data/classical-first-read/lesson-1476.json",
+      "textVersionId": "cfr-lesson-1476-4d749663a73a78ff",
+      "textDigest": "sha256:4d749663a73a78ff8c8123615693045f56e67183c86069ef75b65fea2c128927",
+      "paragraphCount": 2,
+      "charCount": 181
+    },
+    {
+      "lessonId": "lesson-1477",
+      "title": "人皆有不忍人之心/《孟子》",
+      "dataUrl": "data/classical-first-read/lesson-1477.json",
+      "textVersionId": "cfr-lesson-1477-c3a55d9db52cd11b",
+      "textDigest": "sha256:c3a55d9db52cd11bb4751eddf4fd59bb9f01fda3e426925d3a27e919a0916268",
+      "paragraphCount": 6,
+      "charCount": 255
+    },
+    {
+      "lessonId": "lesson-1483",
+      "title": "6、《老子》四章",
+      "dataUrl": "data/classical-first-read/lesson-1483.json",
+      "textVersionId": "cfr-lesson-1483-1764d94c9281e649",
+      "textDigest": "sha256:1764d94c9281e64976a882265da5822c1a5e4fe0890a0617579fe5dc8dc0c924",
+      "paragraphCount": 4,
+      "charCount": 278
+    },
+    {
+      "lessonId": "lesson-1484",
+      "title": "*五石之瓠hù/《庄子》",
+      "dataUrl": "data/classical-first-read/lesson-1484.json",
+      "textVersionId": "cfr-lesson-1484-f076e1082216c62c",
+      "textDigest": "sha256:f076e1082216c62c7d85429d2d92e2b71941becaaa3e2e4357db0172ac404f5c",
+      "paragraphCount": 1,
+      "charCount": 214
+    },
+    {
+      "lessonId": "lesson-1485",
+      "title": "7 * 兼爱/《墨子》",
+      "dataUrl": "data/classical-first-read/lesson-1485.json",
+      "textVersionId": "cfr-lesson-1485-0eea1a22401173b3",
+      "textDigest": "sha256:0eea1a22401173b334795058d24e92ab389c58e1bf66e1131801d157f1760189",
+      "paragraphCount": 4,
+      "charCount": 582
+    },
+    {
+      "lessonId": "lesson-1534",
+      "title": "9 屈原列传/ 司马迁",
+      "dataUrl": "data/classical-first-read/lesson-1534.json",
+      "textVersionId": "cfr-lesson-1534-c332d4cede431f64",
+      "textDigest": "sha256:c332d4cede431f640196a6a75dc1edab906a044eecaebdc04c7b8620b81fe264",
+      "paragraphCount": 14,
+      "charCount": 1366
+    },
+    {
+      "lessonId": "lesson-1535",
+      "title": "10 * 苏武传/ 班固",
+      "dataUrl": "data/classical-first-read/lesson-1535.json",
+      "textVersionId": "cfr-lesson-1535-a6d3d69153bd0100",
+      "textDigest": "sha256:a6d3d69153bd010066e85998fc751ceabf615a446ffd34c801927deb14eadfa3",
+      "paragraphCount": 4,
+      "charCount": 1468
+    },
+    {
+      "lessonId": "lesson-1536",
+      "title": "11 过秦论/ 贾谊",
+      "dataUrl": "data/classical-first-read/lesson-1536.json",
+      "textVersionId": "cfr-lesson-1536-f6389dbb6dd21109",
+      "textDigest": "sha256:f6389dbb6dd21109ce4859d66f20d265973c60f43cd4c4a2c5a062116e8e7d8c",
+      "paragraphCount": 1,
+      "charCount": 894
+    },
+    {
+      "lessonId": "lesson-1537",
+      "title": "* 五代史伶官传序/ 欧阳修",
+      "dataUrl": "data/classical-first-read/lesson-1537.json",
+      "textVersionId": "cfr-lesson-1537-2555c0913f5aaf69",
+      "textDigest": "sha256:2555c0913f5aaf69ae7c80ada60537a654a5162a935f0719f443ee6a370e61cf",
+      "paragraphCount": 1,
+      "charCount": 328
+    },
+    {
+      "lessonId": "lesson-1576",
+      "title": "9 陈情表/ 李密",
+      "dataUrl": "data/classical-first-read/lesson-1576.json",
+      "textVersionId": "cfr-lesson-1576-a02e134672336793",
+      "textDigest": "sha256:a02e1346723367933cef54ccf32edcd1daee14331ecb1db92ba34e32552460cb",
+      "paragraphCount": 4,
+      "charCount": 475
+    },
+    {
+      "lessonId": "lesson-1577",
+      "title": "* 项脊轩志/ 归有光",
+      "dataUrl": "data/classical-first-read/lesson-1577.json",
+      "textVersionId": "cfr-lesson-1577-de75e68824f71757",
+      "textDigest": "sha256:de75e68824f71757d3e306eb01c9136a65a6eb05098063f11e78bf1ac0eb3c2d",
+      "paragraphCount": 6,
+      "charCount": 547
+    },
+    {
+      "lessonId": "lesson-1578",
+      "title": "10 兰亭集序/ 王羲之",
+      "dataUrl": "data/classical-first-read/lesson-1578.json",
+      "textVersionId": "cfr-lesson-1578-30c5866c3ff844e7",
+      "textDigest": "sha256:30c5866c3ff844e727ced2efd13993d058b3b9a949476f7f28648b03b1900c51",
+      "paragraphCount": 4,
+      "charCount": 324
+    },
+    {
+      "lessonId": "lesson-1579",
+      "title": "归去来兮辞并序/ 陶渊明",
+      "dataUrl": "data/classical-first-read/lesson-1579.json",
+      "textVersionId": "cfr-lesson-1579-39b5102d580cd25b",
+      "textDigest": "sha256:39b5102d580cd25ba6815e4b6c24652059d7c9d535d15bf8ca1cd5f1692c80ac",
+      "paragraphCount": 4,
+      "charCount": 537
+    },
+    {
+      "lessonId": "lesson-1580",
+      "title": "11 * 种树郭橐驼传/ 柳宗元",
+      "dataUrl": "data/classical-first-read/lesson-1580.json",
+      "textVersionId": "cfr-lesson-1580-36e0ab5d9535ca62",
+      "textDigest": "sha256:36e0ab5d9535ca623eba37a717d3637ac94ec719d8ddbbdbe018d13cba87ce55",
+      "paragraphCount": 5,
+      "charCount": 471
+    },
+    {
+      "lessonId": "lesson-1581",
+      "title": "12 * 石钟山记/ 苏轼",
+      "dataUrl": "data/classical-first-read/lesson-1581.json",
+      "textVersionId": "cfr-lesson-1581-204fe29035485c8a",
+      "textDigest": "sha256:204fe29035485c8a31151ec5b5c69f00c2059419f83dc49eca77f0786f108f29",
+      "paragraphCount": 1,
+      "charCount": 503
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "yw-classical-first-read-v1",
+  "schemaVersion": 1,
+  "offsetUnit": "utf16_code_unit",
+  "lessonId": "lesson-1726-p3",
+  "title": "庖丁解牛",
+  "textVersionId": "cfr-lesson-1726-p3-223b1d7a66503030",
+  "textDigest": "sha256:223b1d7a6650303022efb7cd6032594162d6f4f9d3fa02a8d0a6698094a89b05",
+  "canonicalPunctuatedDigest": "sha256:d2babcd4ea5fd11b36eb463993fa1a564ae20b800f8f924460ae7cff4eeaed41",
+  "source": {
+    "readerDocument": "data/reader-documents/lesson-1726-p3.json",
+    "curationVersion": "2026-07-30.2",
+    "curationManifestSha256": "8deda35e2cb9b2aae68a6d4e2614684605ec85d50bf2ff9dddd19f7e4588283b",
+    "segments": [
+      {
+        "startBlock": 1,
+        "endBlock": 1
+      }
+    ]
+  },
+  "paragraphCount": 1,
+  "charCount": 290,
+  "paragraphs": [
+    {
+      "key": "cfrp:lesson-1726-p3:83b25be93da2fae9:01",
+      "ordinal": 1,
+      "sourceBlockIndex": 1,
+      "text": "庖丁为文惠君解牛手之所触肩之所倚足之所履膝之所踦砉然向然奏刀然莫不中音合于桑林之舞乃中经首之会文惠君曰嘻善哉技盖至此乎庖丁释刀对曰臣之所好者道也进乎技矣始臣之解牛之时所见无非牛者三年之后未尝见全牛也方今之时臣以神遇而不以目视官知止而神欲行依乎天理批大郤导大窾因其固然技经肯綮之未尝而况大乎良庖岁更刀割也族庖月更刀折也今臣之刀十九年矣所解数千牛矣而刀刃若新发于硎彼节者有间而刀刃者无厚以无厚入有间恢恢乎其于游刃必有余地矣是以十九年而刀刃若新发于硎虽然每至于族吾见其难为怵然为戒视为止行为迟动刀甚微謋然已解如土委地提刀而立为之四顾为之踌躇满志善刀而藏之文惠君曰善哉吾闻庖丁之言得养生焉",
+      "charCount": 290
+    }
+  ],
+  "text": "庖丁为文惠君解牛手之所触肩之所倚足之所履膝之所踦砉然向然奏刀然莫不中音合于桑林之舞乃中经首之会文惠君曰嘻善哉技盖至此乎庖丁释刀对曰臣之所好者道也进乎技矣始臣之解牛之时所见无非牛者三年之后未尝见全牛也方今之时臣以神遇而不以目视官知止而神欲行依乎天理批大郤导大窾因其固然技经肯綮之未尝而况大乎良庖岁更刀割也族庖月更刀折也今臣之刀十九年矣所解数千牛矣而刀刃若新发于硎彼节者有间而刀刃者无厚以无厚入有间恢恢乎其于游刃必有余地矣是以十九年而刀刃若新发于硎虽然每至于族吾见其难为怵然为戒视为止行为迟动刀甚微謋然已解如土委地提刀而立为之四顾为之踌躇满志善刀而藏之文惠君曰善哉吾闻庖丁之言得养生焉"
+}

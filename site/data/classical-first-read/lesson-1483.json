@@ -1,0 +1,54 @@
+{
+  "schema": "yw-classical-first-read-v1",
+  "schemaVersion": 1,
+  "offsetUnit": "utf16_code_unit",
+  "lessonId": "lesson-1483",
+  "title": "6、《老子》四章",
+  "textVersionId": "cfr-lesson-1483-1764d94c9281e649",
+  "textDigest": "sha256:1764d94c9281e64976a882265da5822c1a5e4fe0890a0617579fe5dc8dc0c924",
+  "canonicalPunctuatedDigest": "sha256:27ab325fc5dd2d5d01a4503d59808dba95eeeb1e2190b1f190f3d78444da5560",
+  "source": {
+    "readerDocument": "data/reader-documents/lesson-1483.json",
+    "curationVersion": "2026-07-30.2",
+    "curationManifestSha256": "8deda35e2cb9b2aae68a6d4e2614684605ec85d50bf2ff9dddd19f7e4588283b",
+    "segments": [
+      {
+        "startBlock": 3,
+        "endBlock": 6
+      }
+    ]
+  },
+  "paragraphCount": 4,
+  "charCount": 278,
+  "paragraphs": [
+    {
+      "key": "cfrp:lesson-1483:a8e29d31a78c29b2:01",
+      "ordinal": 1,
+      "sourceBlockIndex": 3,
+      "text": "三十辐共一毂当其无有车之用埏埴以为器当其无有器之用凿户牖以为室当其无有室之用故有之以为利无之以为用第十一章",
+      "charCount": 53
+    },
+    {
+      "key": "cfrp:lesson-1483:cef13c4fe32dab30:01",
+      "ordinal": 2,
+      "sourceBlockIndex": 4,
+      "text": "企者不立跨者不行自见者不明自是者不彰自伐者无功自矜者不长其在道也曰余食赘行物或恶之故有道者不处第二十四章",
+      "charCount": 52
+    },
+    {
+      "key": "cfrp:lesson-1483:b65a8991c18ccc81:01",
+      "ordinal": 3,
+      "sourceBlockIndex": 5,
+      "text": "知人者智自知者明胜人者有力自胜者强知足者富强行者有志不失其所者久死而不亡者寿第三十三章",
+      "charCount": 43
+    },
+    {
+      "key": "cfrp:lesson-1483:a829150bb957e523:01",
+      "ordinal": 4,
+      "sourceBlockIndex": 6,
+      "text": "其安易持其未兆易谋其脆易泮其微易散为之于未有治之于未乱合抱之木生于毫末九层之台起于累土千里之行始于足下为者败之执者失之是以圣人无为故无败无执故无失民之从事常于几成而败之慎终如始则无败事是以圣人欲不欲不贵难得之货学不学复众人之所过以辅万物之自然而不敢为第六十四章",
+      "charCount": 130
+    }
+  ],
+  "text": "三十辐共一毂当其无有车之用埏埴以为器当其无有器之用凿户牖以为室当其无有室之用故有之以为利无之以为用第十一章企者不立跨者不行自见者不明自是者不彰自伐者无功自矜者不长其在道也曰余食赘行物或恶之故有道者不处第二十四章知人者智自知者明胜人者有力自胜者强知足者富强行者有志不失其所者久死而不亡者寿第三十三章其安易持其未兆易谋其脆易泮其微易散为之于未有治之于未乱合抱之木生于毫末九层之台起于累土千里之行始于足下为者败之执者失之是以圣人无为故无败无执故无失民之从事常于几成而败之慎终如始则无败事是以圣人欲不欲不贵难得之货学不学复众人之所过以辅万物之自然而不敢为第六十四章"
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "yw-classical-first-read-v1",
+  "schemaVersion": 1,
+  "offsetUnit": "utf16_code_unit",
+  "lessonId": "lesson-1484",
+  "title": "*五石之瓠hù/《庄子》",
+  "textVersionId": "cfr-lesson-1484-f076e1082216c62c",
+  "textDigest": "sha256:f076e1082216c62c7d85429d2d92e2b71941becaaa3e2e4357db0172ac404f5c",
+  "canonicalPunctuatedDigest": "sha256:8e5c292749eafeed0ec6a0540d052b0454b822882d208a6ad60ce1a08189fae8",
+  "source": {
+    "readerDocument": "data/reader-documents/lesson-1484.json",
+    "curationVersion": "2026-07-30.2",
+    "curationManifestSha256": "8deda35e2cb9b2aae68a6d4e2614684605ec85d50bf2ff9dddd19f7e4588283b",
+    "segments": [
+      {
+        "startBlock": 0,
+        "endBlock": 0
+      }
+    ]
+  },
+  "paragraphCount": 1,
+  "charCount": 214,
+  "paragraphs": [
+    {
+      "key": "cfrp:lesson-1484:eff43e851562e875:01",
+      "ordinal": 1,
+      "sourceBlockIndex": 0,
+      "text": "惠子谓庄子曰魏王贻我大瓠之种我树之成而实五石以盛水浆其坚不能自举也剖之以为瓢则瓠落无所容非不呺然大也吾为其无用而掊之庄子曰夫子固拙于用大矣宋人有善为不龟手之药者世世以洴澼𬘢为事客闻之请买其方百金聚族而谋之曰我世世为洴澼𬘢不过数金今一朝而鬻技百金请与之客得之以说吴王越有难吴王使之将冬与越人水战大败越人裂地而封之能不龟手一也或以封或不免于洴澼𬘢则所用之异也今子有五石之瓠何不虑以为大樽而浮乎江湖而忧其瓠落无所容则夫子犹有蓬之心也夫",
+      "charCount": 214
+    }
+  ],
+  "text": "惠子谓庄子曰魏王贻我大瓠之种我树之成而实五石以盛水浆其坚不能自举也剖之以为瓢则瓠落无所容非不呺然大也吾为其无用而掊之庄子曰夫子固拙于用大矣宋人有善为不龟手之药者世世以洴澼𬘢为事客闻之请买其方百金聚族而谋之曰我世世为洴澼𬘢不过数金今一朝而鬻技百金请与之客得之以说吴王越有难吴王使之将冬与越人水战大败越人裂地而封之能不龟手一也或以封或不免于洴澼𬘢则所用之异也今子有五石之瓠何不虑以为大樽而浮乎江湖而忧其瓠落无所容则夫子犹有蓬之心也夫"
+}

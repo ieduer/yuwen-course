@@ -1,10 +1,23 @@
 {
   "schema": "bdfz-learning-interaction-registry-v1",
   "schemaVersion": 1,
-  "registryVersion": "yw-interactions-2026-07-26-v1",
+  "registryVersion": "yw-interactions-2026-08-09-v2",
   "sourceSystem": "yuwen-course",
   "sourceSiteKey": "yw",
   "unknownInteractionPolicy": "reject",
+  "compatibilityContracts": {
+    "aPlusGate": {
+      "schemaVersion": "yw-aplus-producer-compatibility-v1",
+      "sourceVersion": "yw-b530d57cb873ed49",
+      "registryVersion": "yw-interactions-2026-07-26-v1",
+      "itemCount": 1156,
+      "resourceKeyHash": "sha256:b530d57cb873ed49340bcc606ec8a70fd9970a59d911fd1001d63ce85a86c2ba",
+      "reviewedProducerManifestVersion": "yw-e310d45b1d81e9ad",
+      "reviewedProducerManifestDigest": "sha256:e310d45b1d81e9adf6182bd50ea02842daf69a8981aa29ff03b2da30b0846aca",
+      "reviewedProducerItemCount": 869,
+      "subsetDisposition": "all_current_a_plus_resources_verified_in_frozen_manifest"
+    }
+  },
   "definitions": {
     "lessonOpened": {
       "eventType": "lesson_opened",
@@ -49,6 +62,7 @@
       "dimensionKey": "reading",
       "verificationMethod": "source_ai_assessment",
       "resourceKind": "manifest_interaction",
+      "competencyTag": "comprehension",
       "allowedPayloadKeys": ["words"]
     },
     "wordCreation": {
@@ -58,6 +72,7 @@
       "dimensionKey": "retention",
       "verificationMethod": "source_ai_assessment",
       "resourceKind": "manifest_interaction",
+      "competencyTag": "vocabulary",
       "allowedPayloadKeys": ["word", "creation"]
     },
     "authorQuestion": {
@@ -67,6 +82,7 @@
       "dimensionKey": "inquiry",
       "verificationMethod": "source_ai_assessment",
       "resourceKind": "manifest_interaction",
+      "competencyTag": "comprehension",
       "allowedPayloadKeys": ["answer"]
     },
     "revision": {
@@ -76,6 +92,7 @@
       "dimensionKey": "reading",
       "verificationMethod": "source_ai_assessment",
       "resourceKind": "manifest_interaction",
+      "competencyTag": "syntax",
       "allowedPayloadKeys": ["original", "action", "revised", "reason"]
     },
     "structure": {
@@ -85,6 +102,7 @@
       "dimensionKey": "reading",
       "verificationMethod": "source_ai_assessment",
       "resourceKind": "manifest_interaction",
+      "competencyTag": "comprehension",
       "allowedPayloadKeys": ["reason"]
     },
     "evaluation": {
@@ -103,6 +121,7 @@
       "dimensionKey": "retention",
       "verificationMethod": "source_answer_key",
       "resourceKind": "manifest_vocab",
+      "competencyTag": "vocabulary",
       "allowedPayloadKeys": ["itemId", "selectedIndex"]
     },
     "vocabQuizCompleted": {
@@ -112,7 +131,37 @@
       "dimensionKey": "retention",
       "verificationMethod": "source_mastery_aggregate",
       "resourceKind": "lesson",
+      "competencyTag": "vocabulary",
       "allowedPayloadKeys": ["questionCount", "firstTryCount"]
+    },
+    "initialReadingSubmitted": {
+      "eventType": "initial_reading_submitted",
+      "assessmentKind": "trace",
+      "scoringRole": "none",
+      "dimensionKey": "reading",
+      "verificationMethod": "source_mark_and_summary_gate",
+      "resourceKind": "lesson",
+      "competencyTag": "first_read_process",
+      "allowedPayloadKeys": ["markCount", "elapsedMs", "textVersionId"]
+    },
+    "initialReadingResolved": {
+      "eventType": "initial_reading_resolved",
+      "assessmentKind": "trace",
+      "scoringRole": "none",
+      "dimensionKey": "reading",
+      "verificationMethod": "source_correction_gate",
+      "resourceKind": "lesson",
+      "competencyTag": "first_read_process",
+      "allowedPayloadKeys": ["markCount", "resolvedCount", "textVersionId"]
+    },
+    "studyGuideItemCompleted": {
+      "eventType": "study_guide_item_completed",
+      "assessmentKind": "performance",
+      "scoringRole": "formative",
+      "dimensionKey": "reading",
+      "verificationMethod": "source_mixed_assessment",
+      "resourceKind": "formative_item",
+      "allowedPayloadKeys": ["itemKey", "competencyTag", "answerAuthority", "response", "responseDigest", "responseLength", "referenceRevealedAt"]
     },
     "resourceOpened": {
       "eventType": "resource_opened",

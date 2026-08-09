@@ -375,13 +375,23 @@ test("pointer and immutable receipts are complete", () => {
   });
 });
 
-test("review receipt approves exactly the current derived graph", () => {
-  assert.deepEqual(auditReceiptIssues(auditReceipt, {
+test("review receipt state is reflected exactly in the candidate release gate", () => {
+  const auditIssues = auditReceiptIssues(auditReceipt, {
     semanticDigest: pointer.semanticDigest,
     counts: sourceCounts,
-  }), []);
-  assert.equal(firstBuild.audit.status, "approved");
-  assert.deepEqual(firstBuild.releaseBlockers, []);
+  });
+  assert.deepEqual(firstBuild.audit.issues, auditIssues);
+  assert.equal(
+    firstBuild.audit.status,
+    auditIssues.length === 0 ? "approved" : "review-required",
+  );
+  assert.deepEqual(
+    firstBuild.releaseBlockers.filter(({ code }) => code === "canonical_graph_review_required"),
+    auditIssues.length > 0
+      ? [{ code: "canonical_graph_review_required", count: auditIssues.length }]
+      : [],
+  );
+  assert.equal(pointer.appDisposition, "blocked");
   const driftedCounts = { ...sourceCounts, lessons: sourceCounts.lessons + 1 };
   assert.ok(auditReceiptIssues(auditReceipt, {
     semanticDigest: pointer.semanticDigest,
@@ -1204,16 +1214,29 @@ test("shared sanitizer preserves surrounding content and clears the Web projecti
   assert.ok(projection.excludedPrefixes.includes("data/cache/"));
 });
 
-test("reader annotation references stay in the current lesson page", () => {
+test("reader annotation controls use occurrence-scoped inline note ids", () => {
   const appSource = readFileSync(path.join(SITE_ROOT, "assets", "app.js"), "utf8");
   assert.match(
     appSource,
-    /class="reader-note-ref" href="#reader-note-\$\{esc\(run\.noteId\)\}" data-same-tab/,
+    /const noteId = `reader-inline-note-\$\{run\.noteId\}-\$\{occurrence\}`;/,
+  );
+  assert.match(
+    appSource,
+    /options\.annotationOccurrences \|\| \(options\.annotationOccurrences = new Map\(\)\)/,
+  );
+  assert.match(
+    appSource,
+    /class="reader-note-ref" type="button" data-note-ref="\$\{esc\(run\.noteId\)\}" aria-expanded="false" aria-controls="\$\{esc\(noteId\)\}"/,
+  );
+  assert.doesNotMatch(
+    appSource,
+    /class="reader-note-ref" href=/,
   );
   assert.match(
     appSource,
     /link\.hasAttribute\("data-same-tab"\) \|\| href\.startsWith\("#"\)/,
   );
+  assert.match(appSource, /if \(note\.dataset\.typed !== "true"\)/);
 });
 
 test("native content routes fail closed instead of serving the SPA fallback", () => {

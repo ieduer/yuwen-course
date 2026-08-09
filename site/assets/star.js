@@ -6,6 +6,13 @@ const VOL_COLORS = ["#ef6a5b", "#6888f6", "#e4b651", "#7d69df", "#4fc7b5"];
 const WORD_COLOR = "#c9d3ec";
 const WORD_GROUP_COLOR = "#e8c579";
 const HUB_LIT_MIN = 3; // 解鎖規則：一冊內 ≥3 篇有效三詞 → 該冊樞紐增亮
+const FORMATIVE_SCHEMA = "bdfz-yw-formative-mastery-v1";
+const FORMATIVE_DIMENSIONS = Object.freeze([
+  { tag: "first_read_process", label: "無標點初讀" },
+  { tag: "vocabulary", label: "實詞疏通" },
+  { tag: "syntax", label: "虛詞句法" },
+  { tag: "comprehension", label: "理解考辨" },
+]);
 const $ = (id) => document.getElementById(id);
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -25,6 +32,233 @@ async function fetchJson(url) {
   if (response.status === 401) return { __auth: true };
   if (!response.ok) throw new Error(`${response.status}`);
   return response.json();
+}
+
+async function fetchFormativeMastery() {
+  try {
+    const response = await fetch("/api/reading/formative-mastery", {
+      headers: { accept: "application/json" },
+      credentials: "same-origin",
+    });
+    if (response.status === 401) return { __auth: true };
+    if (!response.ok) return { __error: true, status: response.status };
+    return await response.json();
+  } catch {
+    return { __error: true, status: 0 };
+  }
+}
+
+const formativeMasteryPromise = fetchFormativeMastery();
+
+function normalizeDimension(raw, tag) {
+  const completed = raw?.completedItems;
+  const total = raw?.totalItems;
+  const rate = raw?.masteryRate;
+  const countsValid = Number.isInteger(completed)
+    && Number.isInteger(total)
+    && completed >= 0
+    && total > 0
+    && completed <= total;
+  const rateValid = typeof rate === "number" && Number.isFinite(rate) && rate >= 0 && rate <= 100;
+  const expectedRate = countsValid ? Math.round((completed / total) * 10000) / 100 : null;
+  const available = raw?.competencyTag === tag
+    && raw?.status === "available"
+    && countsValid
+    && rateValid
+    && Math.abs(rate - expectedRate) < 0.001;
+  return {
+    tag,
+    status: available ? "available" : "unavailable",
+    completed: available ? completed : null,
+    total: available ? total : null,
+    rate: available ? rate : null,
+  };
+}
+
+function interestRatingFor(payloadValue, lesson) {
+  const candidates = [
+    lesson?.interestRating,
+    lesson?.interestingRating,
+    lesson?.evaluation?.interestRating,
+    payloadValue?.interestRatings?.[lesson?.lessonId],
+  ];
+  const rating = candidates.find((value) => typeof value === "number" && Number.isFinite(value) && value >= 0 && value <= 100);
+  return rating === undefined ? null : Math.round(rating * 100) / 100;
+}
+
+function normalizeFormativePayload(value) {
+  const payloadValue = value?.schemaVersion === FORMATIVE_SCHEMA ? value : value?.formativeMastery;
+  if (!payloadValue
+    || payloadValue.schemaVersion !== FORMATIVE_SCHEMA
+    || payloadValue.affectsGrowthScore !== false
+    || payloadValue.affectsAPlus !== false
+    || !Array.isArray(payloadValue.lessons)) return null;
+
+  const seen = new Set();
+  const lessons = [];
+  for (const rawLesson of payloadValue.lessons) {
+    const lessonId = String(rawLesson?.lessonId || "").trim();
+    if (!/^lesson-[a-z0-9-]+$/i.test(lessonId) || seen.has(lessonId)) continue;
+    seen.add(lessonId);
+    const rawCompetencies = Array.isArray(rawLesson.competencies) ? rawLesson.competencies : [];
+    const byTag = new Map(rawCompetencies.map((entry) => [entry?.competencyTag, entry]));
+    lessons.push({
+      lessonId,
+      lessonTitle: String(rawLesson.lessonTitle || lessonId).trim().slice(0, 180),
+      dimensions: FORMATIVE_DIMENSIONS.map(({ tag }) => normalizeDimension(byTag.get(tag), tag)),
+      interestRating: interestRatingFor(payloadValue, rawLesson),
+    });
+  }
+  return {
+    status: payloadValue.status === "available" ? "available" : "unavailable",
+    manifestVersion: String(payloadValue.manifestVersion || "").slice(0, 120),
+    summary: payloadValue.summary || {},
+    lessons,
+  };
+}
+
+function radarPoint(index, rate, radius = 88) {
+  const angle = -Math.PI / 2 + index * Math.PI / 2;
+  const distance = radius * rate / 100;
+  return {
+    x: 160 + Math.cos(angle) * distance,
+    y: 138 + Math.sin(angle) * distance,
+  };
+}
+
+function gridPolygon(rate) {
+  return FORMATIVE_DIMENSIONS.map((_, index) => {
+    const point = radarPoint(index, rate);
+    return `${point.x.toFixed(2)},${point.y.toFixed(2)}`;
+  }).join(" ");
+}
+
+function formatRate(rate) {
+  if (rate === null) return "未提供";
+  return `${Number.isInteger(rate) ? rate : rate.toFixed(2).replace(/0+$/, "").replace(/\.$/, "")}%`;
+}
+
+function renderMasteryLesson(lesson) {
+  const grid = $("mastery-radar-grid");
+  const values = $("mastery-radar-values");
+  const labels = $("mastery-radar-labels");
+  grid.innerHTML = [25, 50, 75, 100].map((rate) => (
+    `<polygon points="${gridPolygon(rate)}"></polygon>`
+  )).join("") + FORMATIVE_DIMENSIONS.map((_, index) => {
+    const edge = radarPoint(index, 100);
+    return `<line x1="160" y1="138" x2="${edge.x}" y2="${edge.y}"></line>`;
+  }).join("");
+
+  const available = lesson.dimensions.filter((dimension) => dimension.rate !== null);
+  const rays = lesson.dimensions.map((dimension, index) => {
+    if (dimension.rate === null) return "";
+    const point = radarPoint(index, dimension.rate);
+    return `<line class="mastery-value-ray" x1="160" y1="138" x2="${point.x}" y2="${point.y}"></line>`
+      + `<circle class="mastery-value-point" data-competency="${dimension.tag}" cx="${point.x}" cy="${point.y}" r="4"></circle>`;
+  }).join("");
+  const polygon = available.length === FORMATIVE_DIMENSIONS.length
+    ? `<polygon class="mastery-value-shape" points="${lesson.dimensions.map((dimension, index) => {
+      const point = radarPoint(index, dimension.rate);
+      return `${point.x.toFixed(2)},${point.y.toFixed(2)}`;
+    }).join(" ")}"></polygon>`
+    : "";
+  values.innerHTML = polygon + rays;
+
+  const labelPositions = [
+    { x: 160, y: 22, anchor: "middle" },
+    { x: 306, y: 142, anchor: "end" },
+    { x: 160, y: 278, anchor: "middle" },
+    { x: 14, y: 142, anchor: "start" },
+  ];
+  labels.innerHTML = FORMATIVE_DIMENSIONS.map((dimension, index) => {
+    const position = labelPositions[index];
+    const status = lesson.dimensions[index].rate === null ? " · 未提供" : "";
+    return `<text x="${position.x}" y="${position.y}" text-anchor="${position.anchor}">${dimension.label}${status}</text>`;
+  }).join("");
+
+  $("mastery-radar-title").textContent = `《${lesson.lessonTitle}》篇目四維能力雷達`;
+  $("mastery-radar-desc").textContent = `《${lesson.lessonTitle}》：${lesson.dimensions.map((dimension, index) => {
+    const label = FORMATIVE_DIMENSIONS[index].label;
+    return dimension.rate === null
+      ? `${label}未提供`
+      : `${label}${formatRate(dimension.rate)}，已完成${dimension.completed}/${dimension.total}`;
+  }).join("；")}。`;
+
+  $("mastery-dimensions").innerHTML = lesson.dimensions.map((dimension, index) => {
+    const label = FORMATIVE_DIMENSIONS[index].label;
+    const count = dimension.rate === null ? "無有效分母" : `${dimension.completed} / ${dimension.total}`;
+    return `<div class="mastery-dimension" data-competency="${dimension.tag}" data-status="${dimension.status}">
+      <dt>${label}</dt>
+      <dd><strong>${formatRate(dimension.rate)}</strong><span>${count}</span></dd>
+    </div>`;
+  }).join("");
+
+  const interestValue = $("mastery-interest-value");
+  const interestTrack = $("mastery-interest-track");
+  if (lesson.interestRating === null) {
+    interestValue.textContent = "尚無已同步評價";
+    interestTrack.hidden = true;
+    $("mastery-interest-fill").style.width = "0";
+  } else {
+    interestValue.textContent = `${lesson.interestRating} / 100`;
+    interestTrack.hidden = false;
+    $("mastery-interest-fill").style.width = `${lesson.interestRating}%`;
+  }
+}
+
+function setMasteryUnavailable(statusText, detail) {
+  $("mastery-toggle-status").textContent = statusText;
+  $("mastery-state").textContent = detail;
+  $("mastery-content").hidden = true;
+}
+
+async function hydrateMasteryPanel(promise) {
+  const raw = await promise;
+  if (raw?.__auth) {
+    setMasteryUnavailable("需登入", "登入 User Center 後才能查看你的篇目能力；三詞星圖仍可照常使用。");
+    return;
+  }
+  if (raw?.__error) {
+    setMasteryUnavailable("暫不可用", "篇目能力資料暫時無法讀取；系統沒有把缺失資料當成 0，三詞星圖不受影響。");
+    return;
+  }
+  const formative = normalizeFormativePayload(raw);
+  if (!formative) {
+    setMasteryUnavailable("未提供", "篇目能力資料契約未通過，已停止呈現；三詞星圖不受影響。");
+    return;
+  }
+  if (!formative.lessons.length) {
+    setMasteryUnavailable("未提供", "目前沒有可呈現的篇目能力資料；缺值不會被計為 0。");
+    return;
+  }
+
+  const summaryCompleted = formative.summary?.completedItems;
+  const summaryTotal = formative.summary?.totalItems;
+  const summaryAvailable = formative.status === "available"
+    && Number.isInteger(summaryCompleted)
+    && Number.isInteger(summaryTotal)
+    && summaryCompleted >= 0
+    && summaryTotal > 0
+    && summaryCompleted <= summaryTotal;
+  $("mastery-toggle-status").textContent = summaryAvailable ? `${summaryCompleted}/${summaryTotal}` : "未提供";
+  $("mastery-state").textContent = summaryAvailable
+    ? `全部篇目已完成 ${summaryCompleted} / ${summaryTotal} 個目前啟用題組。`
+    : "總體掌握度未提供；可逐篇查看有有效分母的能力維度。";
+
+  const select = $("mastery-lesson");
+  select.replaceChildren(...formative.lessons.map((lesson) => {
+    const option = document.createElement("option");
+    option.value = lesson.lessonId;
+    option.textContent = lesson.lessonTitle;
+    return option;
+  }));
+  const lessonById = new Map(formative.lessons.map((lesson) => [lesson.lessonId, lesson]));
+  const renderSelected = () => renderMasteryLesson(lessonById.get(select.value) || formative.lessons[0]);
+  select.addEventListener("change", renderSelected);
+  select.value = formative.lessons.find((lesson) => lesson.dimensions.some((dimension) => dimension.rate !== null))?.lessonId
+    || formative.lessons[0].lessonId;
+  renderSelected();
+  $("mastery-content").hidden = false;
 }
 
 const manifest = await fetchJson("data/manifest.json");
@@ -471,6 +705,21 @@ $("card").addEventListener("click", (e) => {
 $("card-back").addEventListener("click", goBack);
 $("card-close").addEventListener("click", clearSel);
 
+function setMasteryPanelOpen(open, restoreFocus = false) {
+  $("mastery-panel").hidden = !open;
+  $("mastery-toggle").setAttribute("aria-expanded", String(open));
+  if (open) {
+    $("mastery-panel").classList.remove("closing");
+  } else if (restoreFocus) {
+    $("mastery-toggle").focus();
+  }
+}
+
+$("mastery-toggle").addEventListener("click", () => {
+  setMasteryPanelOpen($("mastery-panel").hidden);
+});
+$("mastery-close").addEventListener("click", () => setMasteryPanelOpen(false, true));
+
 // ---------- 交互 ----------
 let dragging = false, panning = false, moved = 0, lx = 0, ly = 0;
 const pts = new Map(); let pinchD = 0;
@@ -527,6 +776,7 @@ stage.addEventListener("dblclick", () => {
 });
 addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
+    if (!$("mastery-panel").hidden) { setMasteryPanelOpen(false, true); return; }
     if (!$("search-results").hidden) { $("search-results").hidden = true; return; }
     clearSel();
   }
@@ -608,3 +858,4 @@ if (matchMedia("(pointer: coarse)").matches) {
 }
 requestAnimationFrame(frame);
 $("loading").classList.add("done");
+void hydrateMasteryPanel(formativeMasteryPromise);

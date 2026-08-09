@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "siteKey": "yw",
   "title": "語文課 · 選擇性必修見效題目",
-  "manifestVersion": "yw-7abfb37143d876fd",
-  "resourceKeyHash": "sha256:7abfb37143d876fdcb31966eb8f19116bb30a1e01f09abe098a009edd3c90f10",
-  "itemCount": 901,
+  "manifestVersion": "yw-e310d45b1d81e9ad",
+  "resourceKeyHash": "sha256:e310d45b1d81e9adf6182bd50ea02842daf69a8981aa29ff03b2da30b0846aca",
+  "itemCount": 869,
   "completionKind": "answer_submitted",
   "thresholdPercent": 90,
   "lessonCount": 101,
@@ -23,7 +23,7 @@
       "title": "選必上",
       "path": "/data/manifest.json",
       "lessonCount": 28,
-      "itemCount": 239
+      "itemCount": 227
     },
     {
       "sourceKind": "textbook",
@@ -31,7 +31,7 @@
       "title": "選必中",
       "path": "/data/manifest.json",
       "lessonCount": 36,
-      "itemCount": 295
+      "itemCount": 287
     },
     {
       "sourceKind": "textbook",
@@ -39,7 +39,7 @@
       "title": "選必下",
       "path": "/data/manifest.json",
       "lessonCount": 37,
-      "itemCount": 367
+      "itemCount": 355
     }
   ],
   "exclusions": [
@@ -527,28 +527,6 @@
       "mode": "unit-intro"
     },
     {
-      "resourceKey": "effect:lesson-1474:interaction:contextWords",
-      "itemTitle": "《论语》十二章 · 初讀評議",
-      "itemGroup": "選必上",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1474",
-      "sourcePath": "data/lessons/lesson-1474.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1474:interaction:revision",
-      "itemTitle": "《论语》十二章 · 字句之改",
-      "itemGroup": "選必上",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1474",
-      "sourcePath": "data/lessons/lesson-1474.json",
-      "questionKind": "revision",
-      "mode": "classical"
-    },
-    {
       "resourceKey": "effect:lesson-1474:interaction:structure",
       "itemTitle": "《论语》十二章 · 結構回應",
       "itemGroup": "選必上",
@@ -738,28 +716,6 @@
       "questionIndex": 12
     },
     {
-      "resourceKey": "effect:lesson-1476:interaction:contextWords",
-      "itemTitle": "大学之道/《礼记》 · 初讀評議",
-      "itemGroup": "選必上",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1476",
-      "sourcePath": "data/lessons/lesson-1476.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1476:interaction:revision",
-      "itemTitle": "大学之道/《礼记》 · 字句之改",
-      "itemGroup": "選必上",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1476",
-      "sourcePath": "data/lessons/lesson-1476.json",
-      "questionKind": "revision",
-      "mode": "classical"
-    },
-    {
       "resourceKey": "effect:lesson-1476:interaction:structure",
       "itemTitle": "大学之道/《礼记》 · 結構回應",
       "itemGroup": "選必上",
@@ -921,28 +877,6 @@
       "questionId": "lesson-1476:v10",
       "questionType": "interpretation",
       "questionIndex": 10
-    },
-    {
-      "resourceKey": "effect:lesson-1477:interaction:contextWords",
-      "itemTitle": "人皆有不忍人之心/《孟子》 · 初讀評議",
-      "itemGroup": "選必上",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1477",
-      "sourcePath": "data/lessons/lesson-1477.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1477:interaction:revision",
-      "itemTitle": "人皆有不忍人之心/《孟子》 · 字句之改",
-      "itemGroup": "選必上",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1477",
-      "sourcePath": "data/lessons/lesson-1477.json",
-      "questionKind": "revision",
-      "mode": "classical"
     },
     {
       "resourceKey": "effect:lesson-1477:interaction:structure",
@@ -1147,28 +1081,6 @@
       "questionIndex": 13
     },
     {
-      "resourceKey": "effect:lesson-1483:interaction:contextWords",
-      "itemTitle": "《老子》四章 · 初讀評議",
-      "itemGroup": "選必上",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1483",
-      "sourcePath": "data/lessons/lesson-1483.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1483:interaction:revision",
-      "itemTitle": "《老子》四章 · 字句之改",
-      "itemGroup": "選必上",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1483",
-      "sourcePath": "data/lessons/lesson-1483.json",
-      "questionKind": "revision",
-      "mode": "classical"
-    },
-    {
       "resourceKey": "effect:lesson-1483:interaction:structure",
       "itemTitle": "《老子》四章 · 結構回應",
       "itemGroup": "選必上",
@@ -1343,28 +1255,6 @@
       "questionId": "lesson-1483:v12",
       "questionType": "contextual-choice",
       "questionIndex": 11
-    },
-    {
-      "resourceKey": "effect:lesson-1484:interaction:contextWords",
-      "itemTitle": "*五石之瓠hù/《庄子》 · 初讀評議",
-      "itemGroup": "選必上",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1484",
-      "sourcePath": "data/lessons/lesson-1484.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1484:interaction:revision",
-      "itemTitle": "*五石之瓠hù/《庄子》 · 字句之改",
-      "itemGroup": "選必上",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1484",
-      "sourcePath": "data/lessons/lesson-1484.json",
-      "questionKind": "revision",
-      "mode": "classical"
     },
     {
       "resourceKey": "effect:lesson-1484:interaction:structure",
@@ -1567,28 +1457,6 @@
       "questionId": "lesson-1484:v13",
       "questionType": "interpretation",
       "questionIndex": 13
-    },
-    {
-      "resourceKey": "effect:lesson-1485:interaction:contextWords",
-      "itemTitle": "* 兼爱/《墨子》 · 初讀評議",
-      "itemGroup": "選必上",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1485",
-      "sourcePath": "data/lessons/lesson-1485.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1485:interaction:revision",
-      "itemTitle": "* 兼爱/《墨子》 · 字句之改",
-      "itemGroup": "選必上",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1485",
-      "sourcePath": "data/lessons/lesson-1485.json",
-      "questionKind": "revision",
-      "mode": "classical"
     },
     {
       "resourceKey": "effect:lesson-1485:interaction:structure",
@@ -3836,28 +3704,6 @@
       "mode": "unit-intro"
     },
     {
-      "resourceKey": "effect:lesson-1534:interaction:contextWords",
-      "itemTitle": "屈原列传/ 司马迁 · 初讀評議",
-      "itemGroup": "選必中",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1534",
-      "sourcePath": "data/lessons/lesson-1534.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1534:interaction:revision",
-      "itemTitle": "屈原列传/ 司马迁 · 字句之改",
-      "itemGroup": "選必中",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1534",
-      "sourcePath": "data/lessons/lesson-1534.json",
-      "questionKind": "revision",
-      "mode": "classical"
-    },
-    {
       "resourceKey": "effect:lesson-1534:interaction:structure",
       "itemTitle": "屈原列传/ 司马迁 · 結構回應",
       "itemGroup": "選必中",
@@ -4073,28 +3919,6 @@
       "questionIndex": 14
     },
     {
-      "resourceKey": "effect:lesson-1535:interaction:contextWords",
-      "itemTitle": "* 苏武传/ 班固 · 初讀評議",
-      "itemGroup": "選必中",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1535",
-      "sourcePath": "data/lessons/lesson-1535.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1535:interaction:revision",
-      "itemTitle": "* 苏武传/ 班固 · 字句之改",
-      "itemGroup": "選必中",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1535",
-      "sourcePath": "data/lessons/lesson-1535.json",
-      "questionKind": "revision",
-      "mode": "classical"
-    },
-    {
       "resourceKey": "effect:lesson-1535:interaction:structure",
       "itemTitle": "* 苏武传/ 班固 · 結構回應",
       "itemGroup": "選必中",
@@ -4284,28 +4108,6 @@
       "questionIndex": 12
     },
     {
-      "resourceKey": "effect:lesson-1536:interaction:contextWords",
-      "itemTitle": "过秦论/ 贾谊 · 初讀評議",
-      "itemGroup": "選必中",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1536",
-      "sourcePath": "data/lessons/lesson-1536.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1536:interaction:revision",
-      "itemTitle": "过秦论/ 贾谊 · 字句之改",
-      "itemGroup": "選必中",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1536",
-      "sourcePath": "data/lessons/lesson-1536.json",
-      "questionKind": "revision",
-      "mode": "classical"
-    },
-    {
       "resourceKey": "effect:lesson-1536:interaction:structure",
       "itemTitle": "过秦论/ 贾谊 · 結構回應",
       "itemGroup": "選必中",
@@ -4493,28 +4295,6 @@
       "questionId": "lesson-1536:v12",
       "questionType": "interpretation",
       "questionIndex": 12
-    },
-    {
-      "resourceKey": "effect:lesson-1537:interaction:contextWords",
-      "itemTitle": "* 五代史伶官传序/ 欧阳修 · 初讀評議",
-      "itemGroup": "選必中",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1537",
-      "sourcePath": "data/lessons/lesson-1537.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1537:interaction:revision",
-      "itemTitle": "* 五代史伶官传序/ 欧阳修 · 字句之改",
-      "itemGroup": "選必中",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1537",
-      "sourcePath": "data/lessons/lesson-1537.json",
-      "questionKind": "revision",
-      "mode": "classical"
     },
     {
       "resourceKey": "effect:lesson-1537:interaction:structure",
@@ -8529,28 +8309,6 @@
       "mode": "unit-intro"
     },
     {
-      "resourceKey": "effect:lesson-1576:interaction:contextWords",
-      "itemTitle": "陈情表/ 李密 · 初讀評議",
-      "itemGroup": "選必下",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1576",
-      "sourcePath": "data/lessons/lesson-1576.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1576:interaction:revision",
-      "itemTitle": "陈情表/ 李密 · 字句之改",
-      "itemGroup": "選必下",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1576",
-      "sourcePath": "data/lessons/lesson-1576.json",
-      "questionKind": "revision",
-      "mode": "classical"
-    },
-    {
       "resourceKey": "effect:lesson-1576:interaction:structure",
       "itemTitle": "陈情表/ 李密 · 結構回應",
       "itemGroup": "選必下",
@@ -8738,28 +8496,6 @@
       "questionId": "lesson-1576:v12",
       "questionType": "contextual-choice",
       "questionIndex": 12
-    },
-    {
-      "resourceKey": "effect:lesson-1577:interaction:contextWords",
-      "itemTitle": "* 项脊轩志/ 归有光 · 初讀評議",
-      "itemGroup": "選必下",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1577",
-      "sourcePath": "data/lessons/lesson-1577.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1577:interaction:revision",
-      "itemTitle": "* 项脊轩志/ 归有光 · 字句之改",
-      "itemGroup": "選必下",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1577",
-      "sourcePath": "data/lessons/lesson-1577.json",
-      "questionKind": "revision",
-      "mode": "classical"
     },
     {
       "resourceKey": "effect:lesson-1577:interaction:structure",
@@ -8977,28 +8713,6 @@
       "questionIndex": 14
     },
     {
-      "resourceKey": "effect:lesson-1578:interaction:contextWords",
-      "itemTitle": "兰亭集序/ 王羲之 · 初讀評議",
-      "itemGroup": "選必下",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1578",
-      "sourcePath": "data/lessons/lesson-1578.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1578:interaction:revision",
-      "itemTitle": "兰亭集序/ 王羲之 · 字句之改",
-      "itemGroup": "選必下",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1578",
-      "sourcePath": "data/lessons/lesson-1578.json",
-      "questionKind": "revision",
-      "mode": "classical"
-    },
-    {
       "resourceKey": "effect:lesson-1578:interaction:structure",
       "itemTitle": "兰亭集序/ 王羲之 · 結構回應",
       "itemGroup": "選必下",
@@ -9160,28 +8874,6 @@
       "questionId": "lesson-1578:v10",
       "questionType": "usage",
       "questionIndex": 10
-    },
-    {
-      "resourceKey": "effect:lesson-1579:interaction:contextWords",
-      "itemTitle": "归去来兮辞并序/ 陶渊明 · 初讀評議",
-      "itemGroup": "選必下",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1579",
-      "sourcePath": "data/lessons/lesson-1579.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1579:interaction:revision",
-      "itemTitle": "归去来兮辞并序/ 陶渊明 · 字句之改",
-      "itemGroup": "選必下",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1579",
-      "sourcePath": "data/lessons/lesson-1579.json",
-      "questionKind": "revision",
-      "mode": "classical"
     },
     {
       "resourceKey": "effect:lesson-1579:interaction:structure",
@@ -9386,28 +9078,6 @@
       "questionIndex": 13
     },
     {
-      "resourceKey": "effect:lesson-1580:interaction:contextWords",
-      "itemTitle": "* 种树郭橐驼传/ 柳宗元 · 初讀評議",
-      "itemGroup": "選必下",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1580",
-      "sourcePath": "data/lessons/lesson-1580.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1580:interaction:revision",
-      "itemTitle": "* 种树郭橐驼传/ 柳宗元 · 字句之改",
-      "itemGroup": "選必下",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1580",
-      "sourcePath": "data/lessons/lesson-1580.json",
-      "questionKind": "revision",
-      "mode": "classical"
-    },
-    {
       "resourceKey": "effect:lesson-1580:interaction:structure",
       "itemTitle": "* 种树郭橐驼传/ 柳宗元 · 結構回應",
       "itemGroup": "選必下",
@@ -9595,28 +9265,6 @@
       "questionId": "lesson-1580:v12",
       "questionType": "contextual-choice",
       "questionIndex": 12
-    },
-    {
-      "resourceKey": "effect:lesson-1581:interaction:contextWords",
-      "itemTitle": "* 石钟山记/ 苏轼 · 初讀評議",
-      "itemGroup": "選必下",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1581",
-      "sourcePath": "data/lessons/lesson-1581.json",
-      "questionKind": "contextWords",
-      "mode": "classical"
-    },
-    {
-      "resourceKey": "effect:lesson-1581:interaction:revision",
-      "itemTitle": "* 石钟山记/ 苏轼 · 字句之改",
-      "itemGroup": "選必下",
-      "itemType": "effect-question",
-      "sourceKind": "lesson-interaction",
-      "sourceId": "lesson-1581",
-      "sourcePath": "data/lessons/lesson-1581.json",
-      "questionKind": "revision",
-      "mode": "classical"
     },
     {
       "resourceKey": "effect:lesson-1581:interaction:structure",

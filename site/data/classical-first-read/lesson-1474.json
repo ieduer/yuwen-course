@@ -1,0 +1,114 @@
+{
+  "schema": "yw-classical-first-read-v1",
+  "schemaVersion": 1,
+  "offsetUnit": "utf16_code_unit",
+  "lessonId": "lesson-1474",
+  "title": "5、《论语》十二章",
+  "textVersionId": "cfr-lesson-1474-1253a91eca5d93e2",
+  "textDigest": "sha256:1253a91eca5d93e2e58cf6662d824103861c1bdd9e7dc3ff44925d45bfd32422",
+  "canonicalPunctuatedDigest": "sha256:69478a884240d40b4d77f1479ec4a12734cf048d6c2bfb8558bf8057c31857ac",
+  "source": {
+    "readerDocument": "data/reader-documents/lesson-1474.json",
+    "curationVersion": "2026-07-30.2",
+    "curationManifestSha256": "8deda35e2cb9b2aae68a6d4e2614684605ec85d50bf2ff9dddd19f7e4588283b",
+    "segments": [
+      {
+        "startBlock": 4,
+        "endBlock": 4
+      },
+      {
+        "startBlock": 6,
+        "endBlock": 16
+      }
+    ]
+  },
+  "paragraphCount": 12,
+  "charCount": 337,
+  "paragraphs": [
+    {
+      "key": "cfrp:lesson-1474:8da1dd474b72f805:01",
+      "ordinal": 1,
+      "sourceBlockIndex": 4,
+      "text": "子曰君子食无求饱居无求安敏于事而慎于言就有道而正焉可谓好学也已学而",
+      "charCount": 33
+    },
+    {
+      "key": "cfrp:lesson-1474:c351fda9391e5029:01",
+      "ordinal": 2,
+      "sourceBlockIndex": 6,
+      "text": "子曰人而不仁如礼何人而不仁如乐何八佾",
+      "charCount": 18
+    },
+    {
+      "key": "cfrp:lesson-1474:ec946aa0a2aa8861:01",
+      "ordinal": 3,
+      "sourceBlockIndex": 7,
+      "text": "子曰朝闻道夕死可矣里仁",
+      "charCount": 11
+    },
+    {
+      "key": "cfrp:lesson-1474:0d903bea1e2f02d6:01",
+      "ordinal": 4,
+      "sourceBlockIndex": 8,
+      "text": "子曰君子喻于义小人喻于利里仁",
+      "charCount": 14
+    },
+    {
+      "key": "cfrp:lesson-1474:de9ecb49d5cb4a05:01",
+      "ordinal": 5,
+      "sourceBlockIndex": 9,
+      "text": "子曰见贤思齐焉见不贤而内自省也里仁",
+      "charCount": 17
+    },
+    {
+      "key": "cfrp:lesson-1474:19cf5fe29ae3747b:01",
+      "ordinal": 6,
+      "sourceBlockIndex": 10,
+      "text": "子曰质胜文则野文胜质则史文质彬彬然后君子雍也",
+      "charCount": 22
+    },
+    {
+      "key": "cfrp:lesson-1474:09dbdd780822fbb3:01",
+      "ordinal": 7,
+      "sourceBlockIndex": 11,
+      "text": "曾子曰士不可以不弘毅任重而道远仁以为己任不亦重乎死而后已不亦远乎泰伯",
+      "charCount": 34
+    },
+    {
+      "key": "cfrp:lesson-1474:367fbbf8fde1e71a:01",
+      "ordinal": 8,
+      "sourceBlockIndex": 12,
+      "text": "子曰譬如为山未成一篑止吾止也譬如平地虽覆一篑进吾往也子罕",
+      "charCount": 28
+    },
+    {
+      "key": "cfrp:lesson-1474:cbd2b3853dfb51e2:01",
+      "ordinal": 9,
+      "sourceBlockIndex": 13,
+      "text": "子曰知者不惑仁者不忧勇者不惧子罕",
+      "charCount": 16
+    },
+    {
+      "key": "cfrp:lesson-1474:dfca6b36e7bd67bf:01",
+      "ordinal": 10,
+      "sourceBlockIndex": 14,
+      "text": "颜渊问仁子曰克己复礼为仁一日克己复礼天下归仁焉为仁由己而由人乎哉颜渊曰请问其目子曰非礼勿视非礼勿听非礼勿言非礼勿动颜渊曰回虽不敏请事斯语矣颜渊",
+      "charCount": 71
+    },
+    {
+      "key": "cfrp:lesson-1474:846d062d8a546ebc:01",
+      "ordinal": 11,
+      "sourceBlockIndex": 15,
+      "text": "子贡问曰有一言而可以终身行之者乎子曰其恕乎己所不欲勿施于人卫灵公",
+      "charCount": 32
+    },
+    {
+      "key": "cfrp:lesson-1474:c0ac826dfa86a312:01",
+      "ordinal": 12,
+      "sourceBlockIndex": 16,
+      "text": "子曰小子何莫学夫诗诗可以兴可以观可以群可以怨迩之事父远之事君多识于鸟兽草木之名阳货",
+      "charCount": 41
+    }
+  ],
+  "text": "子曰君子食无求饱居无求安敏于事而慎于言就有道而正焉可谓好学也已学而子曰人而不仁如礼何人而不仁如乐何八佾子曰朝闻道夕死可矣里仁子曰君子喻于义小人喻于利里仁子曰见贤思齐焉见不贤而内自省也里仁子曰质胜文则野文胜质则史文质彬彬然后君子雍也曾子曰士不可以不弘毅任重而道远仁以为己任不亦重乎死而后已不亦远乎泰伯子曰譬如为山未成一篑止吾止也譬如平地虽覆一篑进吾往也子罕子曰知者不惑仁者不忧勇者不惧子罕颜渊问仁子曰克己复礼为仁一日克己复礼天下归仁焉为仁由己而由人乎哉颜渊曰请问其目子曰非礼勿视非礼勿听非礼勿言非礼勿动颜渊曰回虽不敏请事斯语矣颜渊子贡问曰有一言而可以终身行之者乎子曰其恕乎己所不欲勿施于人卫灵公子曰小子何莫学夫诗诗可以兴可以观可以群可以怨迩之事父远之事君多识于鸟兽草木之名阳货"
+}

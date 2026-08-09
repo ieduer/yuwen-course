@@ -175,6 +175,7 @@ function lessonMeta(sourceMeta, source, piece, pieceIndex, post) {
     imageCount: forumImages.length,
     resourceCount: resources.length,
     textbookPageCount: piece.pages.length,
+    textbookPageImageCount: textbook.pageImages.length,
     textbookStartPage: piece.pages[0] || null,
     tocLabel,
     excerpt: lesson.excerpt,

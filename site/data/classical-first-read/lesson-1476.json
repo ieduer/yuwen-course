@@ -1,0 +1,40 @@
+{
+  "schema": "yw-classical-first-read-v1",
+  "schemaVersion": 1,
+  "offsetUnit": "utf16_code_unit",
+  "lessonId": "lesson-1476",
+  "title": "大学之道/《礼记》",
+  "textVersionId": "cfr-lesson-1476-4d749663a73a78ff",
+  "textDigest": "sha256:4d749663a73a78ff8c8123615693045f56e67183c86069ef75b65fea2c128927",
+  "canonicalPunctuatedDigest": "sha256:17f0230b498b0b577bb9771f91933fc94fcb80b7e498659d9736158e4e079da1",
+  "source": {
+    "readerDocument": "data/reader-documents/lesson-1476.json",
+    "curationVersion": "2026-07-30.2",
+    "curationManifestSha256": "8deda35e2cb9b2aae68a6d4e2614684605ec85d50bf2ff9dddd19f7e4588283b",
+    "segments": [
+      {
+        "startBlock": 0,
+        "endBlock": 1
+      }
+    ]
+  },
+  "paragraphCount": 2,
+  "charCount": 181,
+  "paragraphs": [
+    {
+      "key": "cfrp:lesson-1476:d2c27cc463a7ab15:01",
+      "ordinal": 1,
+      "sourceBlockIndex": 0,
+      "text": "大学之道在明明德在亲民在止于至善知止而后有定定而后能静静而后能安安而后能虑虑而后能得物有本末事有终始知所先后则近道矣",
+      "charCount": 58
+    },
+    {
+      "key": "cfrp:lesson-1476:0c4eff7e5c326c4c:01",
+      "ordinal": 2,
+      "sourceBlockIndex": 1,
+      "text": "古之欲明明德于天下者先治其国欲治其国者先齐其家欲齐其家者先修其身欲修其身者先正其心欲正其心者先诚其意欲诚其意者先致其知致知在格物物格而后知至知至而后意诚意诚而后心正心正而后身修身修而后家齐家齐而后国治国治而后天下平自天子以至于庶人壹是皆以修身为本",
+      "charCount": 123
+    }
+  ],
+  "text": "大学之道在明明德在亲民在止于至善知止而后有定定而后能静静而后能安安而后能虑虑而后能得物有本末事有终始知所先后则近道矣古之欲明明德于天下者先治其国欲治其国者先齐其家欲齐其家者先修其身欲修其身者先正其心欲正其心者先诚其意欲诚其意者先致其知致知在格物物格而后知至知至而后意诚意诚而后心正心正而后身修身修而后家齐家齐而后国治国治而后天下平自天子以至于庶人壹是皆以修身为本"
+}

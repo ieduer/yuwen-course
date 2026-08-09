@@ -1,0 +1,54 @@
+{
+  "schema": "yw-classical-first-read-v1",
+  "schemaVersion": 1,
+  "offsetUnit": "utf16_code_unit",
+  "lessonId": "lesson-1578",
+  "title": "10 兰亭集序/ 王羲之",
+  "textVersionId": "cfr-lesson-1578-30c5866c3ff844e7",
+  "textDigest": "sha256:30c5866c3ff844e727ced2efd13993d058b3b9a949476f7f28648b03b1900c51",
+  "canonicalPunctuatedDigest": "sha256:ad68de2391be36ed4bf0e48d78fe0289266d9b93574111d08019a773a4b946c7",
+  "source": {
+    "readerDocument": "data/reader-documents/lesson-1578.json",
+    "curationVersion": "2026-07-30.2",
+    "curationManifestSha256": "8deda35e2cb9b2aae68a6d4e2614684605ec85d50bf2ff9dddd19f7e4588283b",
+    "segments": [
+      {
+        "startBlock": 1,
+        "endBlock": 4
+      }
+    ]
+  },
+  "paragraphCount": 4,
+  "charCount": 324,
+  "paragraphs": [
+    {
+      "key": "cfrp:lesson-1578:79fc92956448741c:01",
+      "ordinal": 1,
+      "sourceBlockIndex": 1,
+      "text": "永和九年岁在癸丑暮春之初会于会稽山阴之兰亭修禊事也群贤毕至少长咸集此地有崇山峻岭茂林修竹又有清流激湍映带左右引以为流觞曲水列坐其次虽无丝竹管弦之盛一觞一咏亦足以畅叙幽情",
+      "charCount": 84
+    },
+    {
+      "key": "cfrp:lesson-1578:acb843ab5ec1025c:01",
+      "ordinal": 2,
+      "sourceBlockIndex": 2,
+      "text": "是日也天朗气清惠风和畅仰观宇宙之大俯察品类之盛所以游目骋怀足以极视听之娱信可乐也",
+      "charCount": 40
+    },
+    {
+      "key": "cfrp:lesson-1578:d147eb45b1307358:01",
+      "ordinal": 3,
+      "sourceBlockIndex": 3,
+      "text": "夫人之相与俯仰一世或取诸怀抱悟言一室之内或因寄所托放浪形骸之外虽趣舍万殊静躁不同当其欣于所遇暂得于己快然自足不知老之将至及其所之既倦情随事迁感慨系之矣向之所欣俯仰之间已为陈迹犹不能不以之兴怀况修短随化终期于尽古人云死生亦大矣岂不痛哉",
+      "charCount": 116
+    },
+    {
+      "key": "cfrp:lesson-1578:94d66a6fe2bc21e7:01",
+      "ordinal": 4,
+      "sourceBlockIndex": 4,
+      "text": "每览昔人兴感之由若合一契未尝不临文嗟悼不能喻之于怀固知一死生为虚诞齐彭殇为妄作后之视今亦犹今之视昔悲夫故列叙时人录其所述虽世殊事异所以兴怀其致一也后之览者亦将有感于斯文",
+      "charCount": 84
+    }
+  ],
+  "text": "永和九年岁在癸丑暮春之初会于会稽山阴之兰亭修禊事也群贤毕至少长咸集此地有崇山峻岭茂林修竹又有清流激湍映带左右引以为流觞曲水列坐其次虽无丝竹管弦之盛一觞一咏亦足以畅叙幽情是日也天朗气清惠风和畅仰观宇宙之大俯察品类之盛所以游目骋怀足以极视听之娱信可乐也夫人之相与俯仰一世或取诸怀抱悟言一室之内或因寄所托放浪形骸之外虽趣舍万殊静躁不同当其欣于所遇暂得于己快然自足不知老之将至及其所之既倦情随事迁感慨系之矣向之所欣俯仰之间已为陈迹犹不能不以之兴怀况修短随化终期于尽古人云死生亦大矣岂不痛哉每览昔人兴感之由若合一契未尝不临文嗟悼不能喻之于怀固知一死生为虚诞齐彭殇为妄作后之视今亦犹今之视昔悲夫故列叙时人录其所述虽世殊事异所以兴怀其致一也后之览者亦将有感于斯文"
+}

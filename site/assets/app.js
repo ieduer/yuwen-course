@@ -20,6 +20,7 @@ let sharedStateRefreshPromise = null;
 let sharedStateRefreshRequested = false;
 let sharedStateGeneration = 0;
 let sharedStateUiScope = ANONYMOUS_UI_SCOPE;
+let progressOwnerScope = ANONYMOUS_UI_SCOPE;
 let pendingSharedReadingPosition = null;
 let pendingSharedTextScale = null;
 
@@ -105,12 +106,15 @@ const state = {
   vocabBankLoading: new Set(),
   vocabEligibility: null,
   vocabIndex: { activeItemIds: {} },
+  firstReads: new Map(),
+  studyGuideLessons: new Map(),
   lessonMedia: new Map(),
   sharedContentVersion: "",
   progress: loadStoredProgress(),
   fontIndex: Number(readScopedUiValue(FONT_KEY) || 1),
   activeAuthorId: "",
 };
+const noteAnimations = new WeakMap();
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -130,11 +134,13 @@ const els = {
   readingColumn: $("#reading-column"),
   topbarContext: $("#topbar-context"),
   mobileToolsToggle: $("#mobile-tools-toggle"),
+  topbarActions: $("#topbar-actions"),
   title: $("#lesson-title"),
   mastheadVolume: $("#masthead-volume"),
   mastheadPosition: $("#masthead-position"),
   lessonPortraits: $("#lesson-portraits"),
   orientation: $("#orientation-content"),
+  textbookTitle: $("#textbook-title"),
   textFlow: $("#text-flow"),
   materialStream: $("#material-stream"),
   materialsCount: $("#materials-count"),
@@ -155,6 +161,7 @@ const els = {
   readProgress: $("#read-progress-bar"),
   lessonChatTitle: $("#lesson-chat-title"),
   lessonChatFrame: $("#lesson-chat-frame"),
+  lessonChatSection: $("#lesson-chat"),
   pageOpen: $("#page-open"),
   resourcesOpen: $("#resources-open"),
   fontDown: $("#font-down"),
@@ -191,10 +198,16 @@ function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
 
-function loadStoredProgress() {
+function loadStoredProgress(scope = progressOwnerScope) {
+  if (!scope) return {};
   try {
-    const current = localStorage.getItem(PROGRESS_KEY);
-    const parsed = JSON.parse(current || localStorage.getItem(LEGACY_PROGRESS_KEY) || "{}");
+    const storageKey = scopedUiStorageKey(PROGRESS_KEY, scope);
+    let current = localStorage.getItem(storageKey);
+    if (current === null && scope === ANONYMOUS_UI_SCOPE) {
+      current = localStorage.getItem(PROGRESS_KEY) || localStorage.getItem(LEGACY_PROGRESS_KEY);
+      if (current !== null) localStorage.setItem(storageKey, current);
+    }
+    const parsed = JSON.parse(current || "{}");
     return parsed && typeof parsed === "object" ? parsed : {};
   } catch {
     return {};
@@ -202,7 +215,28 @@ function loadStoredProgress() {
 }
 
 function saveStoredProgress() {
-  localStorage.setItem(PROGRESS_KEY, JSON.stringify(state.progress));
+  if (!progressOwnerScope) return false;
+  localStorage.setItem(
+    scopedUiStorageKey(PROGRESS_KEY, progressOwnerScope),
+    JSON.stringify(state.progress),
+  );
+  return true;
+}
+
+function refreshLocalProgressViews() {
+  if (!state.manifest || !state.current) return;
+  renderLessonIndex();
+  renderCheckStage(state.current);
+  renderMatrix(state.current);
+  renderMastery();
+}
+
+function setProgressOwnerScope(scope) {
+  const nextScope = scope || null;
+  if (progressOwnerScope === nextScope) return;
+  progressOwnerScope = nextScope;
+  state.progress = loadStoredProgress(nextScope);
+  refreshLocalProgressViews();
 }
 
 function enforceNewTabLinks(root = document) {
@@ -481,18 +515,26 @@ async function hydrateSharedStateOnce() {
   const identity = window.BdfzIdentity;
   if (!identity?.api) return;
   const session = await identity.getSession?.().catch(() => null);
-  if (!session?.authenticated) {
+  if (!session || typeof session.authenticated !== "boolean") {
     setAuthenticatedState(false);
+    setProgressOwnerScope(null);
+    return;
+  }
+  if (!session.authenticated) {
+    setAuthenticatedState(false);
+    setProgressOwnerScope(ANONYMOUS_UI_SCOPE);
     await applyAnonymousSharedState();
     return;
   }
 
+  setAuthenticatedState(true);
+  setProgressOwnerScope(null);
   const sharedState = await loadSharedStateModule();
   if (!sharedState) return;
   const discoveryPayload = await identity.api("/api/yw/v1/state").catch(() => null);
   const discovery = sharedState.normalizeSharedStateResponse(discoveryPayload);
   if (!discovery?.ownerScope) return;
-  setAuthenticatedState(true);
+  setProgressOwnerScope(discovery.ownerScope);
 
   if (sharedStateClient?.ownerScope !== discovery.ownerScope) {
     discardPendingStateForOtherOwner(discovery.ownerScope);
@@ -570,13 +612,11 @@ function lessonProgress(id = state.current?.id) {
 
 const MODE_TRACKS = {
   classical: [
-    ["context", "初讀評議", "", 10],
+    ["firstRead", "無注疏初讀", "", 25],
     ["vocabulary", "詞級疏通", "", 30],
-    ["read", "通讀正文", "", 10],
-    ["revision", "字句之改", "", 15],
-    ["structure", "章法機關", "", 20],
-    ["evaluation", "篇目評價", "", 5],
-    ["authorQuestion", "叩問作者", "", 10],
+    ["structure", "考辨與章法", "", 20],
+    ["evaluation", "本篇有意思", "", 10],
+    ["authorQuestion", "遷移與追問", "", 15],
   ],
   poetry: [
     ["context", "初讀評議", "", 10], ["vocabulary", "詞級疏通", "", 25],
@@ -674,14 +714,53 @@ function trackFor(lesson = state.current) {
 }
 
 function checkpointDone(progress, key, lesson = state.current) {
+  if (key === "firstRead") {
+    const session = state.firstReads.get(lesson?.id);
+    return Boolean(session?.authMode === "authenticated" && session?.submitted);
+  }
   if (key === "read" || key === "context") return progress[key] === true || Boolean(progress[key]?.done);
   if (key === "vocabulary") {
-    return Boolean(
+    const vocabularyDone = Boolean(
       progress.vocabulary?.done
       && (sourceModeFor(lesson) !== "poetry" || progress.wordCreation?.done),
     );
+    if (!vocabularyDone || sourceModeFor(lesson) !== "classical") return vocabularyDone;
+    if (!studyGuideCompletedFor(lesson, ["vocabulary", "syntax"])) return false;
+    const session = state.firstReads.get(lesson?.id);
+    return Boolean(session?.submitted && session.marks.length > 0
+      && session.marks.every((mark) => mark.resolutionStatus === "resolved"));
+  }
+  if (key === "structure" && sourceModeFor(lesson) === "classical") {
+    return Boolean(progress.structure?.done && studyGuideCompletedFor(lesson, ["comprehension"]));
   }
   return Boolean(progress[key]?.done);
+}
+
+function studyGuideProgress(progress = lessonProgress()) {
+  progress.studyGuide ||= { items: {} };
+  progress.studyGuide.items ||= {};
+  return progress.studyGuide.items;
+}
+
+function studyGuideItemsFor(lesson, competencyTags) {
+  const lessonData = state.studyGuideLessons.get(lesson?.id);
+  const tags = new Set(competencyTags);
+  return (lessonData?.items || []).filter((item) => tags.has(item.competencyTag));
+}
+
+function studyGuideRecordMatches(item, record) {
+  return Boolean(
+    item
+    && record?.completed === true
+    && record.semanticRevision === item.semanticRevision,
+  );
+}
+
+function studyGuideCompletedFor(lesson, competencyTags) {
+  const active = studyGuideItemsFor(lesson, competencyTags).filter((item) => item.activeForSelfTest);
+  if (!active.length) return true;
+  const records = studyGuideProgress(lessonProgress(lesson?.id));
+  return active.every((item) => studyGuideRecordMatches(item, records[item.itemKey]));
 }
 
 function progressPercent(progress = lessonProgress(), lesson = state.current) {
@@ -922,7 +1001,7 @@ function renderLessonIndex() {
       <button type="button" class="lesson-link ${state.current?.id === lesson.id ? "active" : ""} ${heading ? "overview" : ""}" data-lesson="${esc(lesson.id)}">
         <span>${heading ? "導" : String(sequence).padStart(2, "0")}</span>
         <strong>${esc(lessonTitle(lesson))}</strong>
-        <small>${done ? "已掌握" : page ? `p${page}` : isUnitTask(lesson) ? "任務" : ""}</small>
+        <small>${done ? "步驟完成" : page ? `p${page}` : isUnitTask(lesson) ? "任務" : ""}</small>
       </button>
     `;
   }).join("") || `<p class="index-empty">沒有匹配的課文。</p>`;
@@ -1094,24 +1173,39 @@ function renderOrientation(lesson) {
 }
 
 function renderLessonMedia(lesson) {
+  const firstRead = state.firstReads.get(lesson.id);
+  if (sourceModeFor(lesson) === "classical" && firstRead && !firstRead.submitted) {
+    els.lessonMediaSection.hidden = true;
+    els.lessonMediaStatus.textContent = "初讀後解鎖";
+    els.lessonMediaContent.innerHTML = "";
+    return;
+  }
   const media = state.lessonMedia.get(lesson.id);
   const ready = Boolean(media?.slideDeck);
   els.lessonMediaSection.hidden = !ready;
-  els.lessonMediaStatus.textContent = "";
+  els.lessonMediaStatus.textContent = ready ? "已展開預覽" : "";
   if (!ready) {
     els.lessonMediaContent.innerHTML = "";
     return;
   }
+  const slideDeck = {
+    href: media.slideDeck.href,
+    title: media.slideDeck.title || "課堂簡報",
+    kind: "document",
+    disposition: "internal",
+  };
+  const plan = resourcePreviewPlan(slideDeck);
   els.lessonMediaContent.innerHTML = `
     <div class="lesson-media-grid">
       <article class="slide-deck-card">
-        <h3>${esc(media.slideDeck.title || "課堂簡報")}</h3>
-        <div class="media-card-actions">
-          <button type="button" data-slide-open="${esc(media.slideDeck.href)}" data-slide-title="${esc(media.slideDeck.title || "課堂簡報")}">打開</button>
-          <a href="${esc(media.slideDeck.href)}" target="_blank" rel="noopener noreferrer">新頁</a>
-        </div>
+        <header><span class="media-card-kicker">PDF · 頁內預覽</span><h3>${esc(slideDeck.title)}</h3></header>
+        <div class="slide-deck-preview-frame" data-slide-preview>${previewPlaceholder(plan)}</div>
+        <p class="preview-state-note" data-preview-note>${esc(plan.reason)}</p>
+        ${previewFallback(plan, "另頁開啟簡報")}
       </article>
     </div>`;
+  const host = $("[data-slide-preview]", els.lessonMediaContent);
+  if (host) mountResourcePreview(host, plan, slideDeck.title, { eager: true });
 }
 
 function readerMediaMap(...collections) {
@@ -1149,6 +1243,7 @@ function annotationNumberMap(annotations) {
 
 function renderReaderRuns(runs, media, options = {}) {
   const annotationNumbers = options.annotationNumbers || new Map();
+  const annotationOccurrences = options.annotationOccurrences || (options.annotationOccurrences = new Map());
   return (runs || []).map((run) => {
     if (run.type === "text") return esc(cleanReaderVisibleText(run.text)).replace(/\n/g, "<br>");
     if (run.type === "link") {
@@ -1161,11 +1256,22 @@ function renderReaderRuns(runs, media, options = {}) {
     if (run.type === "annotation-ref") {
       const number = annotationNumbers.get(run.noteId);
       if (!number) return "";
-      return `<a class="reader-note-ref" href="#reader-note-${esc(run.noteId)}" data-same-tab aria-label="查看註釋 ${number}">[${number}]</a>`;
+      const occurrence = (annotationOccurrences.get(run.noteId) || 0) + 1;
+      annotationOccurrences.set(run.noteId, occurrence);
+      const noteId = `reader-inline-note-${run.noteId}-${occurrence}`;
+      const noteBody = options.annotationBodies?.get(run.noteId) || "";
+      return `<button class="reader-note-ref" type="button" data-note-ref="${esc(run.noteId)}" aria-expanded="false" aria-controls="${esc(noteId)}" aria-label="打開註釋 ${number}">注</button><span class="reader-inline-note" id="${esc(noteId)}" data-inline-note hidden><span class="reader-inline-note-content">${noteBody}</span></span>`;
     }
     if (run.type === "media-ref") return renderReaderMedia(media.get(run.mediaId));
     return "";
   }).join("");
+}
+
+function inlineAnnotationBodies(annotations, media, annotationNumbers) {
+  return new Map((annotations || []).map((annotation) => [
+    annotation.noteId,
+    renderReaderBlocks(annotation.blocks, media, { annotationNumbers, annotationBodies: new Map() }),
+  ]));
 }
 
 function renderReaderBlocks(blocks, media, options = {}) {
@@ -1222,30 +1328,77 @@ function renderReaderAnnotations(annotations, media, annotationNumbers = annotat
     </section>`;
 }
 
-function renderReaderDocument(document) {
+function renderReaderDocument(document, canonicalAsset = null) {
   const mainMedia = readerMediaMap(document.main?.media || []);
   const annotationNumbers = annotationNumberMap(document.main?.annotations || []);
-  const options = { annotationNumbers, includeResourceLinks: false };
-  const frontMatter = renderReaderBlocks(document.main?.frontMatter || [], mainMedia, options);
-  const guidance = renderReaderBlocks(document.main?.guidance || [], mainMedia, options);
-  const body = renderReaderBlocks(document.main?.blocks || [], mainMedia, options);
-  const annotations = renderReaderAnnotations(
-    document.main?.annotations || [],
-    mainMedia,
+  const annotationBodies = inlineAnnotationBodies(document.main?.annotations || [], mainMedia, annotationNumbers);
+  const options = {
     annotationNumbers,
-  );
+    annotationBodies,
+    annotationOccurrences: new Map(),
+    includeResourceLinks: false,
+  };
+  const approvedBlockIndexes = canonicalAsset
+    ? new Set((canonicalAsset.paragraphs || []).map((paragraph) => Number(paragraph.sourceBlockIndex)))
+    : null;
+  const canonicalBlocks = approvedBlockIndexes
+    ? (document.main?.blocks || []).filter((_block, index) => approvedBlockIndexes.has(index))
+    : (document.main?.blocks || []);
+  const frontMatter = canonicalAsset ? "" : renderReaderBlocks(document.main?.frontMatter || [], mainMedia, options);
+  const guidance = canonicalAsset ? "" : renderReaderBlocks(document.main?.guidance || [], mainMedia, options);
+  const body = renderReaderBlocks(canonicalBlocks, mainMedia, options);
   return `
     ${frontMatter ? `<aside class="reader-front-matter">${frontMatter}</aside>` : ""}
     ${guidance ? `<aside class="reader-guidance">${guidance}</aside>` : ""}
     <div class="primary-text reader-primary" data-post="${esc(document.main?.sourcePostNumber || document.main?.sourcePostId || "")}">
       ${body || `<p class="empty-state">本課正文請從教材原圖閱讀。</p>`}
-    </div>
-    ${annotations}`;
+    </div>`;
 }
 
 function renderText(lesson) {
+  const firstRead = state.firstReads.get(lesson.id);
+  if (sourceModeFor(lesson) === "classical" && firstRead && !firstRead.submitted) {
+    els.textbookTitle.textContent = "起始 · 無注疏初讀";
+    els.textFlow.innerHTML = window.YwClassicalFirstRead.renderGate(firstRead);
+    window.YwClassicalFirstRead.bindGate(els.textFlow, firstRead, {
+      toast,
+      onChange: () => {
+        lessonProgress(lesson.id).firstRead = {
+          ...(lessonProgress(lesson.id).firstRead || {}),
+          markCount: firstRead.marks.length,
+          done: false,
+        };
+        syncProgress();
+        renderCheckStage(lesson);
+      },
+      onUnlock: () => {
+        lessonProgress(lesson.id).firstRead = {
+          done: true,
+          markCount: firstRead.marks.length,
+          summary: firstRead.summary,
+          textVersionId: firstRead.asset.textVersionId,
+        };
+        syncProgress({ event: true });
+        els.body.classList.remove("first-read-locked");
+        els.pageOpen.disabled = !state.pages.length;
+        els.resourcesOpen.disabled = false;
+        els.pageOpen.title = "";
+        els.resourcesOpen.title = "";
+        renderText(lesson);
+        renderMaterials(lesson);
+        renderLessonMedia(lesson);
+        renderCheckStage(lesson);
+        renderLessonChat(lesson);
+        renderMatrix(lesson);
+        toast("初讀已保存；正文、註釋與查詞已解鎖");
+        document.querySelector("#textbook-text")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      },
+    });
+    return;
+  }
+  els.textbookTitle.textContent = sourceModeFor(lesson) === "classical" ? "細讀 · 對照解難" : "細讀";
   if (lesson.readerDocument?.schemaVersion === "yw-reader-document-v1") {
-    els.textFlow.innerHTML = renderReaderDocument(lesson.readerDocument);
+    els.textFlow.innerHTML = renderReaderDocument(lesson.readerDocument, firstRead?.asset || null);
     return;
   }
   els.textFlow.innerHTML = `<p class="empty-state">課文暫時無法顯示。</p>`;
@@ -1263,6 +1416,133 @@ function resourceTitle(resource, url) {
   } catch {
     return "學習資料";
   }
+}
+
+const RESOURCE_TRACKING_KEYS = new Set(["spm", "fbclid", "gclid", "dclid", "msclkid", "mc_cid", "mc_eid"]);
+
+function resourceIdentity(href) {
+  try {
+    const normalized = new URL(href, FORUM_ORIGIN);
+    normalized.hash = "";
+    for (const key of [...normalized.searchParams.keys()]) {
+      if (/^utm_/i.test(key) || RESOURCE_TRACKING_KEYS.has(key.toLowerCase())) {
+        normalized.searchParams.delete(key);
+      }
+    }
+    return normalized.toString();
+  } catch {
+    return String(href || "").replace(/#.*$/, "");
+  }
+}
+
+function resourcePreviewPlan(resource) {
+  const rawHref = String(resource?.href || resource?.sourceUrl || "").trim();
+  if (!rawHref) {
+    return { mode: "unavailable", externalHref: "", reason: "來源沒有提供可開啟地址，資料條目仍予保留。" };
+  }
+  let url;
+  try { url = new URL(rawHref, location.href); } catch {
+    return { mode: "unavailable", externalHref: "", reason: "來源地址格式無法辨識，資料條目仍予保留。" };
+  }
+  if (!["http:", "https:"].includes(url.protocol)) {
+    return { mode: "unavailable", externalHref: "", reason: `不支援 ${url.protocol || "未知"} 協議，未載入頁內預覽。` };
+  }
+  const externalHref = url.toString();
+  const disposition = String(resource?.disposition || "").toLowerCase();
+  const hostname = url.hostname.toLowerCase();
+  const pathname = url.pathname.toLowerCase();
+  const extension = pathname.match(/\.([a-z0-9]{2,5})$/)?.[1] || "";
+  const externalOnly = (reason) => ({ mode: "external-only", externalHref, reason });
+
+  if (url.protocol !== "https:" && url.origin !== location.origin) {
+    return externalOnly("來源僅提供 HTTP；為避免不安全的混合內容，頁內不載入，仍可另頁開啟原始地址。");
+  }
+  if (disposition === "source-only") return externalOnly("此條目只保留原始出處，沒有可驗證的頁內版本。");
+  if (disposition.startsWith("blocked-")) return externalOnly("來源審核狀態不允許頁內載入，仍保留原始地址供核對。");
+  if (hostname === "accounts.google.com") return externalOnly("此來源要求外部帳號登入，不能在課文頁內安全預覽。");
+  if (hostname.endsWith("yuque.com")) return externalOnly("語雀來源通常需要原站登入或禁止第三方嵌入，請另頁開啟。");
+  if (hostname === "sites.google.com") return externalOnly("Google Sites 的防嵌入策略可能攔截頁內畫面，請另頁開啟。");
+  if (hostname === "www.youtube.com" || hostname === "youtube.com" || hostname === "youtu.be") {
+    return externalOnly("影片來源使用獨立播放器與 Cookie 策略，本頁不代載，請另頁觀看。");
+  }
+  if (hostname.endsWith("alipan.com")) return externalOnly("雲端分享頁需要原站互動，不能在受限預覽框內可靠操作。");
+  if (hostname === "forum.rdfzer.com" && pathname.startsWith("/u/")) {
+    return externalOnly("這是討論者個人頁，不是可內嵌教材；保留另頁核對入口。");
+  }
+  if (["png", "jpg", "jpeg", "gif", "webp", "svg", "avif"].includes(extension)) {
+    return { mode: "image", src: externalHref, externalHref, reason: "圖片已直接展開；若載入失敗可打開原圖。" };
+  }
+  if (["mp3", "wav", "m4a", "ogg", "flac"].includes(extension)) {
+    return { mode: "audio", src: externalHref, externalHref, reason: "音訊已直接展開；若來源限制播放可另頁開啟。" };
+  }
+  if (["mp4", "webm", "mov"].includes(extension)) {
+    return { mode: "video", src: externalHref, externalHref, reason: "影片已直接展開；若來源限制播放可另頁開啟。" };
+  }
+  if (extension === "pdf" || resource?.kind === "document") {
+    return { mode: "document", src: resourcePreviewUrl(externalHref), externalHref, reason: "PDF 已展開；若瀏覽器不支援內嵌閱讀可另頁開啟。" };
+  }
+  return {
+    mode: "iframe",
+    src: resourcePreviewUrl(externalHref),
+    externalHref,
+    reason: "已展開頁內預覽；若來源登入或防嵌入策略令畫面空白，請打開原頁。",
+  };
+}
+
+function previewFallback(plan, label = "打開原頁") {
+  return plan.externalHref
+    ? `<a class="preview-open" href="${esc(plan.externalHref)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>`
+    : `<span class="preview-no-source">沒有可安全開啟的來源地址</span>`;
+}
+
+function previewPlaceholder(plan) {
+  if (plan.mode === "external-only" || plan.mode === "unavailable") {
+    return `<div class="preview-unavailable"><strong>${plan.mode === "external-only" ? "僅可另頁開啟" : "預覽未提供"}</strong><p>${esc(plan.reason)}</p></div>`;
+  }
+  return `<p>正在準備預覽…</p>`;
+}
+
+function mountResourcePreview(host, plan, title, { eager = false } = {}) {
+  const note = host.closest("article")?.querySelector("[data-preview-note]");
+  const updateNote = (message) => { if (note) note.textContent = message; };
+  updateNote(plan.reason);
+  if (plan.mode === "external-only" || plan.mode === "unavailable") {
+    host.innerHTML = previewPlaceholder(plan);
+    host.dataset.previewState = plan.mode;
+    return;
+  }
+  let element;
+  if (plan.mode === "image") {
+    element = document.createElement("img");
+    element.alt = title;
+    element.decoding = "async";
+  } else if (plan.mode === "audio") {
+    element = document.createElement("audio");
+    element.controls = true;
+    element.preload = "metadata";
+  } else if (plan.mode === "video") {
+    element = document.createElement("video");
+    element.controls = true;
+    element.preload = "metadata";
+  } else {
+    element = document.createElement("iframe");
+    element.title = `預覽：${title}`;
+    element.loading = eager ? "eager" : "lazy";
+    if (plan.mode !== "document") {
+      element.setAttribute("sandbox", "allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox");
+    }
+  }
+  element.addEventListener("load", () => {
+    host.dataset.previewState = "loaded";
+    updateNote(plan.reason);
+  }, { once: true });
+  element.addEventListener("error", () => {
+    host.dataset.previewState = "failed";
+    updateNote("來源拒絕或無法載入頁內預覽；請使用下方原頁連結。");
+  }, { once: true });
+  element.src = plan.src;
+  host.replaceChildren(element);
+  host.dataset.previewState = "loading";
 }
 
 function resourcesFor(lesson) {
@@ -1295,15 +1575,15 @@ function resourcesFor(lesson) {
       kind: resource.kind,
       postNumber: resource.postNumber,
       disposition: resource.disposition,
+      sourceUrl: resource.sourceUrl,
       })),
       ...readerResourceLinks,
     ]
     : (lesson.resources || []);
   return source.reduce((items, resource) => {
-    if (resource.disposition === "source-only" || resource.disposition === "blocked-http") return items;
-    const href = resource.href ? absoluteResourceUrl(resource.href) : "";
-    if (!href || /sites\.google\.com|yuque\.com|\/u\//i.test(href)) return items;
-    const key = href.replace(/[?#].*$/, "").replace(/\/$/, "").toLowerCase();
+    const sourceHref = resource.href || resource.sourceUrl || "";
+    const href = sourceHref ? absoluteResourceUrl(sourceHref) : "";
+    const key = href ? resourceIdentity(href) : `missing:${resourceTitle(resource, "")}:${resource.postNumber || ""}`;
     if (seen.has(key)) return items;
     seen.add(key);
     items.push({
@@ -1311,6 +1591,8 @@ function resourcesFor(lesson) {
       title: resourceTitle(resource, href),
       kind: resource.kind || (/\.pdf(?:$|\?)/i.test(href) ? "document" : "link"),
       postNumber: resource.postNumber,
+      disposition: resource.disposition || "",
+      sourceUrl: resource.sourceUrl || "",
     });
     return items;
   }, []);
@@ -1323,18 +1605,25 @@ function renderSupplementaryMaterials(lesson) {
   return supplementary.map((post, index) => {
     const media = readerMediaMap(post.media || []);
     const annotationNumbers = annotationNumberMap(post.annotations || []);
+    const annotationBodies = inlineAnnotationBodies(post.annotations || [], media, annotationNumbers);
     return `
-      <details class="extension-reading reader-supplementary">
-        <summary>補充閱讀 ${index + 1}</summary>
+      <section class="extension-reading reader-supplementary">
+        <header><span>補充閱讀 ${index + 1}</span><b>已展開預覽</b></header>
         <div class="extension-body">
-          ${renderReaderBlocks(post.blocks || [], media, { annotationNumbers })}
-          ${renderReaderAnnotations(post.annotations || [], media, annotationNumbers)}
+          ${renderReaderBlocks(post.blocks || [], media, { annotationNumbers, annotationBodies })}
         </div>
-      </details>`;
+      </section>`;
   }).join("");
 }
 
 function renderMaterials(lesson) {
+  const firstRead = state.firstReads.get(lesson.id);
+  if (sourceModeFor(lesson) === "classical" && firstRead && !firstRead.submitted) {
+    els.materialsSection.hidden = true;
+    els.materialsCount.textContent = "初讀後解鎖";
+    els.materialStream.innerHTML = "";
+    return;
+  }
   const resources = resourcesFor(lesson);
   const supplementary = lesson.readerDocument?.supplementary || [];
   const count = resources.length + supplementary.length;
@@ -1342,17 +1631,28 @@ function renderMaterials(lesson) {
   els.materialsCount.textContent = count ? `${count} 項` : "";
   els.materialStream.innerHTML = count ? `
     ${renderSupplementaryMaterials(lesson)}
-    ${resources.length ? `<div class="material-list">
-      ${resources.map((resource, index) => `
-        <button type="button" class="material-row" data-resource-index="${index}">
-          <span>${String(index + 1).padStart(2, "0")}</span>
-          <strong>${esc(resource.title)}</strong>
-          <small>${esc(resource.kind === "document" ? "文檔" : "連結")}</small>
-          <em>打開</em>
-        </button>
-      `).join("")}
+    ${resources.length ? `<div class="material-preview-list">
+      ${resources.map((resource, index) => {
+        const plan = resourcePreviewPlan(resource);
+        return `
+        <article class="material-preview-card" data-resource-preview-index="${index}">
+          <header><span>${String(index + 1).padStart(2, "0")}</span><strong>${esc(resource.title)}</strong><small>${plan.mode === "external-only" || plan.mode === "unavailable" ? "僅外開" : "已展開"}</small></header>
+          <div class="material-preview-frame" data-material-preview="${index}">${previewPlaceholder(plan)}</div>
+          <p class="preview-state-note" data-preview-note>${esc(plan.reason)}</p>
+          ${previewFallback(plan)}
+        </article>
+      `; }).join("")}
     </div>` : ""}
   ` : "";
+  activateMaterialPreviews(resources);
+}
+
+function activateMaterialPreviews(resources) {
+  $$('[data-material-preview]', els.materialStream).forEach((host) => {
+    const resource = resources[Number(host.dataset.materialPreview)];
+    if (!resource) return;
+    mountResourcePreview(host, resourcePreviewPlan(resource), resource.title);
+  });
 }
 
 function lessonVocabulary(lesson) {
@@ -1533,8 +1833,8 @@ function renderVocabularyQuiz(lesson, progress, bank) {
         const tone = picked ? (isAnswer ? "correct" : "wrong") : (showExplain && isAnswer && itemState.revealed ? "correct" : "");
         return `<button type="button" data-quiz-option="${index}" class="${tone}">${esc(option)}</button>`;
       }).join("")}</div>
-      ${itemState.correct || itemState.revealed
-        ? `<div class="quiz-explain ${itemState.correct ? "good" : ""}">${itemState.correct ? "✓ " : ""}${esc(current.explanation)}${current.sourceRefs?.length ? `<small>依據：${current.sourceRefs.map(esc).join("、")}</small>` : ""}</div>`
+      ${itemState.correct || itemState.lastAnswerCorrect || itemState.revealed
+        ? `<div class="quiz-explain ${itemState.correct || itemState.lastAnswerCorrect ? "good" : ""}">${itemState.correct ? "✓ 本題已完成。" : itemState.lastAnswerCorrect ? "✓ 本次答對；因先前有誤，請再確認一次。" : ""}${esc(current.explanation)}${current.sourceRefs?.length ? `<small>依據：${current.sourceRefs.map(esc).join("、")}</small>` : ""}</div>`
         : (showExplain ? `<div class="quiz-explain">還不對。回到原句想一想：這個詞在句中的實際功能與搭配是什麼？</div>` : "")}
     </div>
   </div>`;
@@ -1549,19 +1849,28 @@ function recordLearning(interactionKey, data = {}, options = {}) {
 }
 
 async function recordVocabAttempt(itemId, selectedIndex, lessonId = state.current?.id) {
-  if (!lessonId) return;
+  if (!lessonId) return { ok: false, reason: "no-lesson" };
   try {
-    await fetch("/api/reading/vocab-attempt", {
+    const response = await fetch("/api/reading/vocab-attempt", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      credentials: "include",
+      headers: { "content-type": "application/json", accept: "application/json" },
       body: JSON.stringify({
         lessonId,
         itemId,
         selectedIndex,
-        clientMutationId: window.YwLearningEvidence?.mutationId?.("vocabAnswer", lessonId),
+        clientMutationId: window.YwLearningEvidence?.mutationId?.("vocabAnswer", lessonId)
+          || `yw:${lessonId}:vocabAnswer:${crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`}`.slice(0, 100),
       }),
     });
-  } catch { /* 離線/未登入時僅記本地 */ }
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || payload.ok !== true) {
+      return { ok: false, reason: response.status === 401 ? "anonymous" : payload.error || `http-${response.status}` };
+    }
+    return payload;
+  } catch {
+    return { ok: false, reason: "unavailable" };
+  }
 }
 
 function renderWordCreation(lesson, progress) {
@@ -1576,9 +1885,95 @@ function wadangMark(label) {
   return `<span class="stage-wadang" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><circle cx="24" cy="24" r="21"></circle><path d="M24 5v38M5 24h38M10.6 10.6l26.8 26.8M37.4 10.6 10.6 37.4"></path><circle cx="24" cy="24" r="8"></circle></svg><b>${esc(label)}</b></span>`;
 }
 
+function interestLabel(value) {
+  const rating = clamp(Number(value) || 0, 0, 100);
+  if (rating < 20) return "枯燥乏味";
+  if (rating < 40) return "尚未入味";
+  if (rating < 60) return "差強人意";
+  if (rating < 80) return "漸入佳境";
+  return rating < 96 ? "很有意思" : "拍案叫絕";
+}
+
+function renderReferenceAnswer(value) {
+  if (Array.isArray(value)) {
+    return `<ol>${value.map((entry) => `<li>${typeof entry === "object" ? renderReferenceAnswer(entry) : esc(entry)}</li>`).join("")}</ol>`;
+  }
+  if (value && typeof value === "object") {
+    return `<dl>${Object.entries(value).map(([key, entry]) => `<dt>${esc(key)}</dt><dd>${renderReferenceAnswer(entry)}</dd>`).join("")}</dl>`;
+  }
+  return `<p>${esc(value || "本題須先人工複核，暫不提供唯一答案。")}</p>`;
+}
+
+function renderStudyGuideAssessment(record) {
+  const assessment = record?.assessment;
+  if (!assessment) {
+    if (record?.submitting) return `<p class="study-guide-sync pending" role="status">正在進行來源端評閱…</p>`;
+    if (record?.pendingSync) return `<p class="study-guide-sync pending" role="status">參考答案已顯示；本次評閱尚未同步，恢復登入或連線後請重試。</p>`;
+    return "";
+  }
+  const passed = record.completed === true;
+  return `<section class="study-guide-assessment ${passed ? "passed" : "needs-revision"}" aria-label="本次形成性評閱">
+    <header><strong>${passed ? "本次達標" : "尚需修訂"}</strong><b>${Number(assessment.score) || 0} / 100</b></header>
+    <p>${esc(assessment.verdict || "")}</p>
+    ${assessment.strength ? `<dl><dt>已做到</dt><dd>${esc(assessment.strength)}</dd></dl>` : ""}
+    ${assessment.gap ? `<dl><dt>關鍵缺口</dt><dd>${esc(assessment.gap)}</dd></dl>` : ""}
+    ${assessment.nextQuestion ? `<dl><dt>重答提示</dt><dd>${esc(assessment.nextQuestion)}</dd></dl>` : ""}
+  </section>`;
+}
+
+function renderStudyGuideCards(lesson, competencyTags) {
+  const items = studyGuideItemsFor(lesson, competencyTags);
+  if (!items.length) return "";
+  const active = items.filter((item) => item.activeForSelfTest);
+  const held = items.filter((item) => !item.activeForSelfTest);
+  const records = studyGuideProgress();
+  const completed = active.filter((item) => studyGuideRecordMatches(item, records[item.itemKey])).length;
+  const current = active.find((item) => !studyGuideRecordMatches(item, records[item.itemKey])) || null;
+  const storedRecord = current ? (records[current.itemKey] || {}) : {};
+  const record = current && storedRecord.semanticRevision && storedRecord.semanticRevision !== current.semanticRevision
+    ? {}
+    : storedRecord;
+  return `<section class="study-guide-deck" aria-label="學案知能清算">
+    <header><div><span>學案知能清算</span><strong>實詞 · 虛詞 · 句式 · 考辨</strong></div><b>${completed} / ${active.length}</b></header>
+    ${current ? `<article class="study-guide-card" data-study-item="${esc(current.itemKey)}">
+      <div class="study-guide-source"><span>PDF ${Number(current.pdfPage) || "—"}${current.printedPage ? ` · 印 ${Number(current.printedPage)}` : ""}</span><i>${esc(current.detailTag || current.competencyTag)}</i></div>
+      <h4>${esc(current.prompt)}</h4>
+      ${current.qualityNotes?.length ? `<p class="study-guide-quality-notes"><strong>核對說明</strong>${esc(current.qualityNotes.join("；"))}</p>` : ""}
+      ${record.revealed ? `<div class="study-guide-response-saved"><span>我的作答</span><p>${esc(record.response || "")}</p></div><div class="study-guide-answer"><b>${esc(current.answerLabel)}</b>${renderReferenceAnswer(current.referenceAnswer)}${current.explanation ? `<p class="study-guide-explanation">${esc(current.explanation)}</p>` : ""}${current.rubric ? `<div class="study-guide-rubric"><strong>核對標準</strong>${renderReferenceAnswer(current.rubric)}</div>` : ""}</div>
+        ${renderStudyGuideAssessment(record)}
+        ${record.completed ? "" : `<div class="study-guide-actions"><button type="button" data-study-retry="${esc(current.itemKey)}" ${record.submitting ? "disabled" : ""}>${record.pendingSync ? "返回作答並重試" : "依提示重答"}</button></div>`}`
+        : `<form class="study-guide-response" data-study-response="${esc(current.itemKey)}"><label>先寫下你的答案<textarea name="response" rows="4" maxlength="2000" required>${esc(record.response || "")}</textarea></label><button class="study-guide-reveal" type="submit">提交作答並核對</button></form>`}
+    </article>` : `<p class="study-guide-finished">本組 ${active.length} 個學案互動點已全部核對。</p>`}
+    ${held.length ? `<div class="study-guide-held"><strong>${held.length} 項暫不計入本機步驟完成度；參考答案仍完整保留</strong>${held.map((item) => `<article><h5>${esc(item.prompt)}</h5><small>${esc((item.qualityNotes || []).join("；") || "主觀題或來源待複核")}</small><div class="study-guide-held-answer"><b>${esc(item.answerLabel)}</b>${renderReferenceAnswer(item.referenceAnswer)}${item.explanation ? `<p>${esc(item.explanation)}</p>` : ""}${item.rubric?.length ? `<div><strong>核對標準</strong>${renderReferenceAnswer(item.rubric)}</div>` : ""}</div></article>`).join("")}</div>` : ""}
+  </section>`;
+}
+
+function appendFirstReadCorrections(body, lesson) {
+  if (sourceModeFor(lesson) !== "classical") return body;
+  const session = state.firstReads.get(lesson.id);
+  return `${body}${renderStudyGuideCards(lesson, ["vocabulary", "syntax"])}${window.YwClassicalFirstRead?.renderCorrections?.(session) || ""}`;
+}
+
+function classicalRoundLocked(key, lesson, progress) {
+  if (sourceModeFor(lesson) !== "classical" || key === "firstRead") return "";
+  if (!checkpointDone(progress, "firstRead", lesson)) return "先完成無標點初讀，才會解鎖這一關。";
+  if (["structure", "evaluation", "authorQuestion"].includes(key)
+      && !checkpointDone(progress, "vocabulary", lesson)) {
+    return "先完成紅藍訂正與詞級疏通，才會解鎖考辨與遷移。";
+  }
+  return "";
+}
+
 function renderInteractionBody(key, lesson, progress, blueprint) {
   const rawValue = progress[key];
   const value = rawValue && typeof rawValue === "object" ? rawValue : (rawValue === true ? { done: true } : {});
+  if (key === "firstRead") {
+    const session = state.firstReads.get(lesson.id);
+    if (!session?.submitted) {
+      return `<p class="first-read-round-status">在上方無標點正文完成至少 3 處紅筆標記，寫下第一直覺與初讀感知。</p>`;
+    }
+    return `<div class="first-read-round-status complete"><b>已提交初讀</b><span>${session.marks.length} 處疑難 · ${Math.round(Number(session.elapsedMs || 0) / 60000)} 分鐘</span><p>${esc(session.summary)}</p></div>`;
+  }
   if (key === "context") {
     const words = String(value.words || "").split(/[，,、\s]+/).filter(Boolean).slice(0, 3);
     const body = `<div class="three-word-check"><div class="three-word-fields">${[0, 1, 2].map((index) => `<input data-context-word data-field="context.word${index + 1}" value="${esc(words[index] || "")}" maxlength="12" aria-label="第${index + 1}個詞" autocomplete="off">`).join("")}</div><span class="auto-check-status" data-auto-status="contextWords" aria-live="polite">${words.length === 3 ? "已記下" : `${words.length}/3`}</span></div>`;
@@ -1586,25 +1981,33 @@ function renderInteractionBody(key, lesson, progress, blueprint) {
   }
   if (key === "vocabulary") {
     const bank = state.vocabBanks.get(lesson.id);
-    if (bank) return renderVocabularyQuiz(lesson, progress, bank);
+    if (bank) return appendFirstReadCorrections(renderVocabularyQuiz(lesson, progress, bank), lesson);
     if (bank === undefined && state.vocabBankLoading.has(lesson.id)) {
-      return `<div class="vocabulary-step"><p class="vocabulary-empty">正在準備本課字詞題…</p></div>`;
+      return appendFirstReadCorrections(`<div class="vocabulary-step"><p class="vocabulary-empty">正在準備本課字詞題…</p></div>`, lesson);
     }
     const words = lessonVocabulary(lesson);
     const reviewed = new Set(value.reviewed || []);
     const completed = words.length === 0 || reviewed.size >= words.length;
     const current = words.find((item) => !reviewed.has(item.word));
     const percent = words.length ? Math.round(reviewed.size / words.length * 100) : 0;
-    return `<div class="vocabulary-step" style="--vocabulary-progress:${percent}%">
+    return appendFirstReadCorrections(`<div class="vocabulary-step" style="--vocabulary-progress:${percent}%">
       <div class="vocabulary-progress" aria-label="詞級疏通 ${reviewed.size} / ${words.length}"><span></span><b>${reviewed.size} / ${words.length}</b></div>
       ${completed ? (words.length ? `<p class="vocabulary-complete">已逐詞核對。</p>` : `<p class="vocabulary-empty">正文沒有獨立註詞。</p>`) : `<button type="button" data-vocabulary="${esc(current.word)}" data-note="${esc(current.note)}"><span>下一詞</span><strong>${esc(current.word)}</strong><em>查</em></button>`}
-    </div>${completed && sourceModeFor(lesson) === "poetry" ? renderWordCreation(lesson, progress) : ""}`;
+    </div>${completed && sourceModeFor(lesson) === "poetry" ? renderWordCreation(lesson, progress) : ""}`, lesson);
   }
   if (key === "read") return `<label class="read-check"><input type="checkbox" data-read-check ${value.checked || value.done ? "checked" : ""}><span>我已完成一次不中斷的正文通讀</span></label>`;
   if (key === "authorQuestion") return authorDialogue(lesson, `<textarea data-field="authorQuestion.answer" rows="4" aria-label="你想問作者的問題" placeholder="你最想我的問題是什麼，你問，我答。">${esc(value.answer || "")}</textarea>`, interactionResult(progress, key), `<button class="check-action" type="button" data-ai-check="authorQuestion">問</button>`);
   if (key === "revision") return authorDialogue(lesson, `<div class="revision-row"><input data-field="revision.original" value="${esc(value.original || "")}" aria-label="原文"><select data-field="revision.action" aria-label="增刪調"><option ${value.action === "調" ? "selected" : ""}>調</option><option ${value.action === "增" ? "selected" : ""}>增</option><option ${value.action === "刪" ? "selected" : ""}>刪</option></select><input data-field="revision.revised" value="${esc(value.revised || "")}" aria-label="改文"></div><textarea data-field="revision.reason" rows="4" aria-label="改動理由" placeholder="請說明如何修改的緣由">${esc(value.reason || "")}</textarea>`, interactionResult(progress, key), `<button class="check-action" type="button" data-ai-check="revision">核對</button>`);
-  if (key === "structure") return authorDialogue(lesson, `<p class="structure-focus">${esc(blueprint.structureFocus)}</p><textarea data-field="structure.reason" rows="4" aria-label="回答作者的章法問題">${esc(value.reason || "")}</textarea>`, interactionResult(progress, key), `<button class="check-action" type="button" data-ai-check="structure">回應</button>`);
-  if (key === "evaluation") return `<div class="rating-spectrum rating-numeric" style="--rating:${Number(value.rating || 0)}"><div class="rating-line"></div>${[1, 2, 3, 4, 5].map((rating) => `<button type="button" data-rating="${rating}" class="${Number(value.rating) === rating ? "active" : ""}" aria-label="${rating} 分"><i></i><strong>${rating}</strong></button>`).join("")}</div>`;
+  if (key === "structure") return `${authorDialogue(lesson, `<p class="structure-focus">${esc(blueprint.structureFocus)}</p><textarea data-field="structure.reason" rows="4" aria-label="回答作者的章法問題">${esc(value.reason || "")}</textarea>`, interactionResult(progress, key), `<button class="check-action" type="button" data-ai-check="structure">回應</button>`)}${sourceModeFor(lesson) === "classical" ? renderStudyGuideCards(lesson, ["comprehension"]) : ""}`;
+  if (key === "evaluation") {
+    const rating = Number.isFinite(Number(value.rating)) ? clamp(Number(value.rating), 0, 100) : 50;
+    return `<div class="interest-rating" style="--rating:${rating}%">
+      <div class="interest-rating-head"><span>本篇有意思</span><output data-interest-output>${rating}% · ${esc(interestLabel(rating))}</output></div>
+      <input type="range" min="0" max="100" step="1" value="${rating}" data-interest-slider aria-label="本篇有意思程度，0 到 100">
+      <div class="interest-rating-scale" aria-hidden="true"><span>枯燥乏味</span><span>差強人意</span><span>拍案叫絕</span></div>
+      <span class="auto-save-status" aria-live="polite">${value.synced ? "已同步" : value.done ? "本機已存／尚未同步" : "拖動後自動保存"}</span>
+    </div>`;
+  }
   return "";
 }
 
@@ -1612,12 +2015,14 @@ function renderCheckStage(lesson) {
   const progress = lessonProgress();
   const blueprint = state.blueprints.get(blueprintKey(lesson)) || blueprintFallback(lesson);
   const track = trackFor(lesson);
-  els.checkStage.innerHTML = track.map(([key, label, _detail, weight], index) => `
-    <section class="check-round ${checkpointDone(progress, key) ? "complete" : ""}" data-round="${key}">
+  els.checkStage.innerHTML = track.map(([key, label, _detail, weight], index) => {
+    const locked = classicalRoundLocked(key, lesson, progress);
+    return `
+    <section class="check-round ${checkpointDone(progress, key) ? "complete" : ""} ${locked ? "locked" : ""}" data-round="${key}" ${locked ? "aria-disabled=\"true\"" : ""}>
       <header>${wadangMark(STAGE_MARKS[index] || index + 1)}<h3>${esc(label)}</h3><b>${checkpointDone(progress, key) ? "本課完成" : `本課 ${weight}%`}</b></header>
-      ${renderInteractionBody(key, lesson, progress, blueprint)}
+      ${locked ? `<p class="round-lock"><span aria-hidden="true">鎖</span>${esc(locked)}</p>` : renderInteractionBody(key, lesson, progress, blueprint)}
     </section>
-  `).join("");
+  `; }).join("");
   bindCheckStage();
   void ensureBlueprint(lesson);
   if (lessonHasVocabulary(lesson)) void ensureVocabBank(lesson);
@@ -1628,9 +2033,7 @@ function matrixItemsFor(lesson) {
   const title = lessonTitle(lesson);
   const taxonomy = taxonomyFor(lesson);
   const items = [
-    { label: "此刻同讀", title: `帶著《${title}》去時聊，和正在線上的讀者交換一句發現`, href: "https://chat.bdfz.net/", meta: "時聊 · 匿名整點聊天", kind: "together" },
-    { label: "原帖共讀", title: "回到本課材料源，補充、追問或回應別人的讀法", href: lesson.forumUrl || "https://forum.rdfzer.com", meta: "彣彰 · 課文討論", kind: "together" },
-    { label: "跨冊定位", title: "在完整教材中核對原頁，尋找同題互文", href: `https://jc.bdfz.net/?q=${encodeURIComponent(title)}`, meta: "教材 PDF", kind: "source" },
+    { label: "跨冊定位", title: "在完整教材中核對原頁，尋找同題互文", href: "https://xue.bdfz.net/", meta: "全科自學平台", kind: "source" },
   ];
   const linkedAuthor = taxonomy.authors.find((author) => author.url);
   if (linkedAuthor) items.push({ label: "知人論世", title: `沿${linkedAuthor.name}的關係繼續讀`, href: linkedAuthor.url, meta: "群賢星圖", kind: "source" });
@@ -1665,6 +2068,11 @@ function matrixItemsFor(lesson) {
 }
 
 function renderMatrix(lesson) {
+  const progress = lessonProgress(lesson.id);
+  if (sourceModeFor(lesson) === "classical" && !checkpointDone(progress, "vocabulary", lesson)) {
+    els.matrixLinks.innerHTML = `<section class="matrix-locked"><span aria-hidden="true">鎖</span><h3>關卡三 · 考辨與遷移</h3><p>完成初讀疑難訂正與詞級疏通後，能力遷移會在此直接展開。</p></section>`;
+    return;
+  }
   const examPrompts = primaryContentParts(lesson).examPrompts;
   els.matrixLinks.innerHTML = `
     ${examPrompts.length ? `
@@ -1674,15 +2082,32 @@ function renderMatrix(lesson) {
         <a class="exam-more" href="https://gk.bdfz.net/" target="_blank" rel="noreferrer">進入完整高考真題庫 ↗</a>
       </section>
     ` : ""}
-    <div class="matrix-route">
-    ${matrixItemsFor(lesson).map((item, index) => `
-    <a class="matrix-${esc(item.kind)}" href="${esc(item.href)}" target="_blank" rel="noreferrer">
-      <span>${String(index + 1).padStart(2, "0")} · ${esc(item.label)}</span>
+    <div class="matrix-route expanded">
+    ${matrixItemsFor(lesson).map((item, index) => {
+      const plan = resourcePreviewPlan(item);
+      return `
+    <article class="matrix-preview matrix-${esc(item.kind)}">
+      <header><span>${String(index + 1).padStart(2, "0")} · ${esc(item.label)}</span><small>${esc(item.meta)}</small></header>
       <strong>${esc(item.title)}</strong>
-      <small>${esc(item.meta)} ↗</small>
-    </a>
-    `).join("")}</div>
+      <div class="matrix-preview-frame" data-preview-src="${esc(item.href)}">${previewPlaceholder(plan)}</div>
+      <p class="preview-state-note" data-preview-note>${esc(plan.reason)}</p>
+      ${previewFallback(plan)}
+    </article>
+    `; }).join("")}</div>
   `;
+  activateExpandedPreviews(els.matrixLinks);
+}
+
+function activateExpandedPreviews(root) {
+  const frames = $$('[data-preview-src]', root);
+  const load = (host) => {
+    if (host.dataset.loaded === "1") return;
+    host.dataset.loaded = "1";
+    const source = host.dataset.previewSrc;
+    const title = host.closest("article")?.querySelector("strong")?.textContent || "能力遷移";
+    mountResourcePreview(host, resourcePreviewPlan({ href: source }), title);
+  };
+  frames.forEach(load);
 }
 
 function renderMastery() {
@@ -1696,7 +2121,14 @@ function renderMastery() {
 }
 
 function renderLessonChat(lesson) {
-  if (!els.lessonChatFrame || !els.lessonChatTitle) return;
+  if (!els.lessonChatFrame || !els.lessonChatTitle || !els.lessonChatSection) return;
+  const firstRead = state.firstReads.get(lesson.id);
+  const locked = sourceModeFor(lesson) === "classical" && firstRead && !firstRead.submitted;
+  els.lessonChatSection.hidden = locked;
+  if (locked) {
+    els.lessonChatFrame.src = "about:blank";
+    return;
+  }
   const title = lessonTitle(lesson);
   els.lessonChatTitle.textContent = `《${title}》同讀`;
   els.lessonChatFrame.title = `《${title}》實時聊天`;
@@ -1708,16 +2140,17 @@ function syncProgress({ event = false } = {}) {
   if (!state.current || !state.manifest) return;
   renderMastery();
   renderLessonIndex();
+  renderMatrix(state.current);
   if (!state.current) return;
   const percent = progressPercent();
   const send = async () => {
     const progress = lessonProgress();
     if (event && percent === 100 && !progress.completionEventSent) {
-      await recordLearning("lessonCompleted", {
+      const evidence = await recordLearning("lessonCompleted", {
         checkpointCount: trackFor().filter(([key]) => checkpointDone(progress, key)).length,
         checkpointTotal: trackFor().length,
       });
-      progress.completionEventSent = true;
+      progress.completionEventSent = evidence?.ok === true;
       saveStoredProgress();
     }
   };
@@ -1733,6 +2166,13 @@ function renderLesson(lesson) {
   const position = readingLessons.findIndex((item) => item.id === lesson.id);
   els.mastheadPosition.textContent = position >= 0 ? `第 ${String(position + 1).padStart(2, "0")} 篇` : (isUnitTask(lesson) ? "研習任務" : "單元導讀");
   document.title = `${lessonTitle(lesson)} · 課文`;
+  const firstRead = state.firstReads.get(lesson.id);
+  const firstReadLocked = Boolean(sourceModeFor(lesson) === "classical" && firstRead && !firstRead.submitted);
+  els.body.classList.toggle("first-read-locked", firstReadLocked);
+  els.pageOpen.disabled = firstReadLocked;
+  els.resourcesOpen.disabled = firstReadLocked;
+  els.pageOpen.title = firstReadLocked ? "完成無標點初讀後解鎖" : "";
+  els.resourcesOpen.title = firstReadLocked ? "完成無標點初讀後解鎖" : "";
   renderOrientation(lesson);
   renderText(lesson);
   renderMaterials(lesson);
@@ -1755,6 +2195,8 @@ function setToolsOpen(open) {
   els.body.classList.toggle("tools-open", open);
   els.mobileToolsToggle.setAttribute("aria-expanded", String(open));
   els.mobileToolsToggle.setAttribute("aria-label", open ? "關閉篇目工具" : "打開篇目工具");
+  if (matchMedia("(max-width: 900px)").matches) els.topbarActions.inert = !open;
+  else els.topbarActions.inert = false;
 }
 
 function syncMasteryPlacement() {
@@ -1812,6 +2254,21 @@ async function showLesson(
       lesson = await fetchJson(meta.dataUrl);
       lesson.readerDocument = await loadReaderDocument(id);
       shouldCache = true;
+    }
+    if (sourceModeFor(lesson) === "classical" && !state.firstReads.has(id)) {
+      const firstRead = await window.YwClassicalFirstRead.load(id);
+      if (!firstRead) throw new Error("無標點初讀正文缺失");
+      state.firstReads.set(id, firstRead);
+      const progress = lessonProgress(id);
+      progress.firstRead = {
+        ...(progress.firstRead || {}),
+        done: firstRead.submitted,
+        markCount: firstRead.marks.length,
+        resolvedCount: firstRead.marks.filter((mark) => mark.resolutionStatus === "resolved").length,
+        summary: firstRead.summary,
+        textVersionId: firstRead.asset.textVersionId,
+      };
+      saveStoredProgress();
     }
     if (token !== lessonToken) return;
     if (stateGuard && !await stateGuard()) return;
@@ -1924,17 +2381,174 @@ async function saveReadingSubmission(input, result) {
   } catch { /* 未登入或離線時僅保留本地進度，星圖等待下次有效提交 */ }
 }
 
-async function saveEvaluation(explicitRating = 0, { quiet = false } = {}) {
-  const rating = Number(explicitRating || els.checkStage.querySelector("[data-rating].active")?.dataset.rating || lessonProgress().evaluation?.rating || 0);
+async function saveEvaluation(explicitRating = null, { quiet = false } = {}) {
+  const candidate = explicitRating === null || explicitRating === undefined
+    ? (els.checkStage.querySelector("[data-interest-slider]")?.value ?? lessonProgress().evaluation?.rating)
+    : explicitRating;
+  const rating = Number(candidate);
   const reason = fieldValue("evaluation.reason");
-  if (!rating) return;
-  lessonProgress().evaluation = { rating, reason, done: true };
+  const lessonId = state.current?.id;
+  if (!lessonId || !Number.isFinite(rating) || rating < 0 || rating > 100) {
+    return { ok: false, synced: false, savedLocal: false, rating: null, reason: "invalid-evaluation" };
+  }
+  const ownerScope = progressOwnerScope;
+  const localEvaluation = { rating, reason, done: true, synced: false };
+  lessonProgress(lessonId).evaluation = localEvaluation;
   syncProgress({ event: true });
-  await recordLearning("evaluation", { rating, reason: reason.slice(0, 300) });
-  if (!quiet) toast(`已自動保存 ${rating}/5`);
+  const evidence = await recordLearning("evaluation", { rating, reason: reason.slice(0, 300) });
+  const synced = evidence?.ok === true;
+  if (
+    progressOwnerScope === ownerScope
+    && state.progress[lessonId]?.evaluation === localEvaluation
+  ) {
+    localEvaluation.synced = synced;
+    saveStoredProgress();
+  }
+  const result = {
+    ok: synced,
+    synced,
+    savedLocal: Boolean(ownerScope),
+    rating,
+    status: Number(evidence?.status) || null,
+    reason: evidence?.reason || (synced ? "synced" : "unavailable"),
+  };
+  if (!quiet) {
+    toast(synced
+      ? `有意思程度已同步為 ${rating}%`
+      : result.savedLocal
+        ? `有意思程度 ${rating}% 本機已存／尚未同步`
+        : `有意思程度 ${rating}% 尚未同步；登入狀態未確認`);
+  }
+  return result;
+}
+
+function studyGuideMutationId(lessonId) {
+  return window.YwLearningEvidence?.mutationId?.("studyGuideItemCompleted", lessonId)
+    || `yw:${lessonId}:studyGuideItemCompleted:${crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`}`.slice(0, 100);
+}
+
+async function submitStudyGuideAttempt({ lessonId, itemKey, response, referenceRevealedAt, clientMutationId }) {
+  try {
+    const result = await fetch("/api/reading/study-guide-attempt", {
+      method: "POST",
+      headers: { "content-type": "application/json", accept: "application/json" },
+      body: JSON.stringify({ lessonId, itemKey, response, referenceRevealedAt, clientMutationId }),
+    });
+    const payload = await result.json().catch(() => ({}));
+    if (!result.ok || payload.ok !== true) {
+      return {
+        ok: false,
+        status: result.status,
+        reason: payload.error || (result.status === 401 ? "anonymous" : `http-${result.status}`),
+      };
+    }
+    return payload;
+  } catch {
+    return { ok: false, status: 0, reason: "unavailable" };
+  }
 }
 
 function bindCheckStage() {
+  const firstRead = state.firstReads.get(state.current?.id);
+  if (firstRead) {
+    window.YwClassicalFirstRead?.bindCorrections?.(els.checkStage, firstRead, {
+      toast,
+      onChange: () => {
+        const resolvedCount = firstRead.marks.filter((mark) => mark.resolutionStatus === "resolved").length;
+        lessonProgress().firstRead = {
+          ...(lessonProgress().firstRead || {}),
+          done: true,
+          markCount: firstRead.marks.length,
+          resolvedCount,
+        };
+        syncProgress({ event: true });
+        renderCheckStage(state.current);
+        if (resolvedCount === firstRead.marks.length) toast("初讀疑難已全部完成藍筆訂正");
+      },
+    });
+  }
+  $$('[data-study-response]', els.checkStage).forEach((form) => form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const response = String(new FormData(form).get("response") || "").trim();
+    if (!response) {
+      toast("請先寫下自己的答案，再看參考答案");
+      return;
+    }
+    const lessonId = state.current?.id;
+    const itemKey = form.dataset.studyResponse;
+    const item = state.studyGuideLessons.get(lessonId)?.items?.find((entry) => entry.itemKey === itemKey);
+    if (!lessonId || !item?.activeForSelfTest) {
+      toast("本題已更新，請重新載入後再答");
+      return;
+    }
+    const ownerScope = progressOwnerScope;
+    const records = studyGuideProgress(lessonProgress(lessonId));
+    const previous = records[itemKey] || {};
+    const replayPending = previous.pendingSync === true
+      && previous.response === response
+      && previous.semanticRevision === item.semanticRevision
+      && previous.clientMutationId
+      && Number.isFinite(Date.parse(previous.referenceRevealedAt));
+    const clientMutationId = replayPending ? previous.clientMutationId : studyGuideMutationId(lessonId);
+    const referenceRevealedAt = replayPending ? previous.referenceRevealedAt : new Date().toISOString();
+    const pendingRecord = {
+      ...previous,
+      semanticRevision: item.semanticRevision,
+      response,
+      revealed: true,
+      referenceRevealedAt,
+      clientMutationId,
+      submitting: true,
+      pendingSync: false,
+      completed: false,
+      assessment: replayPending ? previous.assessment : null,
+    };
+    records[itemKey] = pendingRecord;
+    syncProgress();
+    renderCheckStage(state.current);
+    const result = await submitStudyGuideAttempt({
+      lessonId,
+      itemKey,
+      response,
+      referenceRevealedAt,
+      clientMutationId,
+    });
+    if (progressOwnerScope !== ownerScope || records[itemKey]?.clientMutationId !== clientMutationId) return;
+    const completed = result?.ok === true
+      && result.passed === true
+      && result.evidence?.eligibilityStatus === "eligible";
+    records[itemKey] = {
+      ...records[itemKey],
+      submitting: false,
+      pendingSync: result?.ok !== true,
+      completed,
+      assessment: result?.ok === true ? result.assessment : records[itemKey]?.assessment || null,
+      evidence: result?.ok === true ? result.evidence : null,
+      lastError: result?.ok === true ? "" : result?.reason || "unavailable",
+      assessedAt: result?.ok === true ? new Date().toISOString() : null,
+    };
+    syncProgress({ event: true });
+    if (state.current?.id === lessonId) renderCheckStage(state.current);
+    if (completed) {
+      toast(`本次達標 ${Number(result.assessment?.score) || 0} 分，已同步形成性掌握度`);
+    } else if (result?.ok === true) {
+      toast(`本次 ${Number(result.assessment?.score) || 0} 分，已記錄；請依提示重答`);
+    } else {
+      toast(result?.status === 401
+        ? "參考答案已顯示；登入後可重試形成性評閱"
+        : "參考答案已顯示；評閱尚未同步，稍後請重試");
+    }
+  }));
+  $$('[data-study-retry]', els.checkStage).forEach((button) => button.addEventListener("click", () => {
+    const records = studyGuideProgress();
+    records[button.dataset.studyRetry] = {
+      ...(records[button.dataset.studyRetry] || {}),
+      revealed: false,
+      submitting: false,
+    };
+    syncProgress();
+    renderCheckStage(state.current);
+  }));
   $$('[data-ai-check]', els.checkStage).forEach((button) => button.addEventListener("click", () => submitInteraction(button.dataset.aiCheck, button)));
   const contextWords = $$('[data-context-word]', els.checkStage);
   if (contextWords.length) contextWords.forEach((field) => field.addEventListener("input", () => {
@@ -1951,56 +2565,76 @@ function bindCheckStage() {
     }
     submitInteraction.contextTimer = setTimeout(() => void submitInteraction("contextWords", null, { silent: true }), 720);
   }));
-  $$('[data-rating]', els.checkStage).forEach((button) => button.addEventListener("click", () => {
-    $$('[data-rating]', els.checkStage).forEach((item) => item.classList.toggle("active", item === button));
-    lessonProgress().evaluation = { ...(lessonProgress().evaluation || {}), rating: Number(button.dataset.rating), done: true };
-    const spectrum = button.closest(".rating-spectrum");
-    if (spectrum) spectrum.style.setProperty("--rating", button.dataset.rating);
-    const status = button.closest(".check-round")?.querySelector(".auto-save-status");
-    if (status) status.textContent = `正在保存 ${button.dataset.rating}/5…`;
-    void saveEvaluation(Number(button.dataset.rating)).then(() => { if (status) status.textContent = `已自動保存 ${button.dataset.rating}/5`; });
-  }));
-  $$('[data-quiz-option]', els.checkStage).forEach((button) => button.addEventListener("click", () => {
+  $$('[data-interest-slider]', els.checkStage).forEach((slider) => {
+    const update = () => {
+      const rating = clamp(Number(slider.value), 0, 100);
+      const host = slider.closest(".interest-rating");
+      host?.style.setProperty("--rating", `${rating}%`);
+      const output = host?.querySelector("[data-interest-output]");
+      if (output) output.textContent = `${rating}% · ${interestLabel(rating)}`;
+      const status = host?.querySelector(".auto-save-status");
+      if (status) status.textContent = "待保存";
+    };
+    slider.addEventListener("input", update);
+    slider.addEventListener("change", () => {
+      const rating = clamp(Number(slider.value), 0, 100);
+      const status = slider.closest(".interest-rating")?.querySelector(".auto-save-status");
+      if (status) status.textContent = `正在保存 ${rating}%…`;
+      void saveEvaluation(rating, { quiet: true }).then((result) => {
+        if (!status) return;
+        status.textContent = result?.synced
+          ? `已同步 ${rating}%`
+          : result?.savedLocal
+            ? "本機已存／尚未同步"
+            : "尚未同步；登入狀態未確認";
+      });
+    });
+  });
+  $$('[data-quiz-option]', els.checkStage).forEach((button) => button.addEventListener("click", async () => {
     const lessonId = state.current?.id;
     const bank = state.vocabBanks.get(lessonId);
     const itemHost = button.closest("[data-quiz-item]");
     if (!lessonId || !bank || !itemHost) return;
+    if (itemHost.dataset.submitting === "1") return;
     const item = bank.questions.find((entry) => entry.id === itemHost.dataset.quizItem);
     if (!item) return;
     const progress = lessonProgress(lessonId);
     const quiz = quizRecord(progress);
-    const entry = quiz.answers[item.id] || { attempts: 0, correct: false, mastered: false };
-    if (entry.correct) return;
+    const previous = quiz.answers[item.id] || { attempts: 0, correct: false, mastered: false };
+    if (previous.correct) return;
     const pick = Number(button.dataset.quizOption);
-    entry.attempts += 1;
-    entry.lastPick = pick;
-    const correct = pick === item.answerIndex;
-    if (correct) {
-      entry.correct = true;
-      entry.mastered = entry.attempts === 1;
-    } else {
-      entry.revealed = entry.attempts >= 2; // 第二次答錯後亮出正解與解析
+    itemHost.dataset.submitting = "1";
+    const optionButtons = $$('[data-quiz-option]', itemHost);
+    optionButtons.forEach((option) => { option.disabled = true; });
+    const result = await recordVocabAttempt(item.id, pick, lessonId);
+    if (state.current?.id !== lessonId) return;
+    const entry = window.YwVocabProgress?.applyServerAttempt?.(previous, result, pick);
+    if (!entry) {
+      itemHost.dataset.submitting = "0";
+      optionButtons.forEach((option) => { option.disabled = false; });
+      toast(result?.reason === "anonymous" ? "請先登入，再完成字詞自測" : "本次答案尚未同步，請恢復連線後重試");
+      return;
     }
     quiz.answers[item.id] = entry;
-    quiz.cursorId = correct
+    quiz.cursorId = entry.correct
       ? window.YwVocabProgress?.nextCursor?.(bank.questions, quiz.answers)
         ?? bank.questions.find((question) => !quizItemState(quiz, question.id).correct)?.id
         ?? null
       : item.id;
     const solvedAll = bank.questions.every((question) => quizRecord(progress).answers[question.id]?.correct);
+    progress.vocabulary = {
+      ...(progress.vocabulary || {}),
+      done: solvedAll,
+      quiz: solvedAll,
+    };
     if (solvedAll) {
-      progress.vocabulary = { ...(progress.vocabulary || {}), done: true, quiz: true };
-      if (!quiz.completionSent) {
-        quiz.completionSent = true;
-      }
+      quiz.completionSent = Boolean(result.completionEvidence);
     }
-    void recordVocabAttempt(item.id, pick, lessonId);
     syncProgress({ event: true });
-    if (!correct) {
-      if (state.current?.id === lessonId) renderCheckStage(state.current);
+    if (!entry.correct) {
+      renderCheckStage(state.current);
       return;
     }
-    $$('[data-quiz-option]', itemHost).forEach((option) => { option.disabled = true; });
     button.classList.add("correct");
     itemHost.classList.add("quiz-advancing");
     const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
@@ -2042,9 +2676,9 @@ function bindCheckStage() {
   if (reason) {
     reason.addEventListener("input", () => {
       clearTimeout(saveEvaluation.timer);
-      saveEvaluation.timer = setTimeout(() => void saveEvaluation(0, { quiet: true }), 700);
+      saveEvaluation.timer = setTimeout(() => void saveEvaluation(null, { quiet: true }), 700);
     });
-    reason.addEventListener("blur", () => void saveEvaluation(0, { quiet: true }));
+    reason.addEventListener("blur", () => void saveEvaluation(null, { quiet: true }));
   }
 }
 
@@ -2052,11 +2686,13 @@ function openLexicon(text) {
   const clean = String(text || "").replace(/\s+/g, " ").trim().slice(0, 80);
   if (!clean) return;
   state.selectedText = clean;
+  state.lexiconReturnFocus = document.activeElement;
   els.selectionWord.textContent = clean;
   els.lexiconDock.classList.add("open");
   els.body.classList.add("lexicon-open");
   els.lexiconDock.setAttribute("aria-hidden", "false");
   updateLexiconFrame();
+  requestAnimationFrame(() => els.lexiconClose.focus());
   void recordLearning("vocabularyLookup", {
     lookupKind: state.lexicon,
     termLength: [...clean].length,
@@ -2068,6 +2704,8 @@ function closeLexicon() {
   els.lexiconDock.classList.remove("open");
   els.body.classList.remove("lexicon-open");
   els.lexiconDock.setAttribute("aria-hidden", "true");
+  if (state.lexiconReturnFocus?.focus) state.lexiconReturnFocus.focus({ preventScroll: true });
+  state.lexiconReturnFocus = null;
   setTimeout(() => { if (!els.lexiconDock.classList.contains("open")) els.lexiconFrame.src = "about:blank"; }, 260);
 }
 
@@ -2087,7 +2725,9 @@ function preparePages(lesson) {
   const context = (lesson.textbook?.contextPageImages || []).filter((page) => page.matched);
   state.pages = direct.length ? direct : context;
   state.pageIndex = 0;
-  els.pageOpen.disabled = !state.pages.length;
+  const firstRead = state.firstReads.get(lesson.id);
+  const firstReadLocked = Boolean(sourceModeFor(lesson) === "classical" && firstRead && !firstRead.submitted);
+  els.pageOpen.disabled = firstReadLocked || !state.pages.length;
 }
 
 function showPage(index) {
@@ -2103,6 +2743,11 @@ function showPage(index) {
 }
 
 function openPages(index = 0) {
+  const firstRead = state.firstReads.get(state.current?.id);
+  if (sourceModeFor(state.current) === "classical" && firstRead && !firstRead.submitted) {
+    toast("完成無標點初讀後再打開教材原圖");
+    return;
+  }
   if (!state.pages.length) {
     toast("本課尚未匹配到教材原圖");
     return;
@@ -2124,7 +2769,7 @@ function resourcePreviewUrl(href) {
   if (/\.(png|jpe?g|gif|webp|svg)(?:$|\?)/i.test(href)) return href;
   try {
     const url = new URL(href, location.href);
-    if (url.origin === location.origin && /\.pdf$/i.test(url.pathname)) return url.toString();
+    if (url.origin === location.origin) return url.toString();
   } catch {}
   return `/api/preview?url=${encodeURIComponent(href)}`;
 }
@@ -2146,7 +2791,98 @@ function openResource(resource) {
   });
 }
 
+function restoreInlineNoteText(content) {
+  const nodes = noteAnimations.get(content)?.nodes || [];
+  nodes.forEach(({ node, text }) => { node.nodeValue = text; });
+}
+
+function stopInlineNoteAnimation(content) {
+  const active = noteAnimations.get(content);
+  if (active?.frame) cancelAnimationFrame(active.frame);
+  restoreInlineNoteText(content);
+}
+
+function typewriteInlineNote(note) {
+  const content = note.querySelector(".reader-inline-note-content");
+  if (!content) return;
+  stopInlineNoteAnimation(content);
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const walker = document.createTreeWalker(content, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  let node;
+  while ((node = walker.nextNode())) nodes.push({ node, text: node.nodeValue || "", index: 0 });
+  const total = nodes.reduce((sum, item) => sum + [...item.text].length, 0);
+  nodes.forEach((item) => { item.characters = [...item.text]; item.node.nodeValue = ""; });
+  const active = { nodes, frame: 0 };
+  noteAnimations.set(content, active);
+  const perFrame = Math.max(1, Math.ceil(total / 90));
+  const tick = () => {
+    let budget = perFrame;
+    for (const item of nodes) {
+      while (budget > 0 && item.index < item.characters.length) {
+        item.node.nodeValue += item.characters[item.index++];
+        budget -= 1;
+      }
+      if (budget <= 0) break;
+    }
+    if (nodes.some((item) => item.index < item.characters.length) && !note.hidden) {
+      active.frame = requestAnimationFrame(tick);
+    }
+  };
+  active.frame = requestAnimationFrame(tick);
+}
+
+function closeInlineNote(note) {
+  if (!note || note.hidden) return;
+  const content = note.querySelector(".reader-inline-note-content");
+  if (content) stopInlineNoteAnimation(content);
+  note.hidden = true;
+  const button = document.querySelector(`[aria-controls="${CSS.escape(note.id)}"]`);
+  button?.setAttribute("aria-expanded", "false");
+  button?.setAttribute("aria-label", button.getAttribute("aria-label")?.replace(/^收起/, "打開") || "打開註釋");
+}
+
+function closeInlineNotes(except = null) {
+  $$('[data-inline-note]:not([hidden])', els.textFlow).forEach((note) => {
+    if (note !== except) closeInlineNote(note);
+  });
+}
+
+function toggleInlineNote(button) {
+  const note = document.getElementById(button.getAttribute("aria-controls") || "");
+  if (!note) return;
+  const opening = note.hidden;
+  closeInlineNotes(opening ? note : null);
+  if (!opening) {
+    closeInlineNote(note);
+    return;
+  }
+  note.hidden = false;
+  button.setAttribute("aria-expanded", "true");
+  button.setAttribute("aria-label", button.getAttribute("aria-label")?.replace(/^打開/, "收起") || "收起註釋");
+  if (note.dataset.typed !== "true") {
+    note.dataset.typed = "true";
+    typewriteInlineNote(note);
+  }
+}
+
 function onSelection() {
+  const firstRead = state.firstReads.get(state.current?.id);
+  if (firstRead && !firstRead.submitted) {
+    window.YwClassicalFirstRead?.captureSelection?.(els.textFlow, firstRead, {
+      toast,
+      onChange: () => {
+        lessonProgress().firstRead = {
+          ...(lessonProgress().firstRead || {}),
+          markCount: firstRead.marks.length,
+          done: false,
+        };
+        syncProgress();
+        renderCheckStage(state.current);
+      },
+    });
+    return;
+  }
   const selection = window.getSelection();
   if (!selection || selection.isCollapsed) return;
   const text = selection.toString().trim();
@@ -2228,24 +2964,22 @@ function bindEvents() {
       kind: "image",
     });
   });
-  els.lessonMediaContent.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-slide-open]");
-    if (!button) return;
-    openResource({
-      href: button.dataset.slideOpen,
-      title: button.dataset.slideTitle,
-      kind: "document",
-      evidenceKind: "slideDeck",
-    });
-  });
   els.textFlow.addEventListener("click", (event) => {
     const note = event.target.closest(".reader-note-ref");
     if (note) {
+      event.preventDefault();
+      toggleInlineNote(note);
       void recordLearning("noteOpened", {
-        noteRef: note.getAttribute("href")?.slice(1) || "",
+        noteRef: note.dataset.noteRef || "",
       });
       return;
     }
+    const inlineNote = event.target.closest("[data-inline-note]");
+    if (inlineNote) {
+      closeInlineNote(inlineNote);
+      return;
+    }
+    closeInlineNotes();
     const image = event.target.closest("img");
     if (!image) return;
     event.preventDefault();
@@ -2253,6 +2987,13 @@ function bindEvents() {
   });
   document.addEventListener("mouseup", () => setTimeout(onSelection, 0));
   document.addEventListener("touchend", () => setTimeout(onSelection, 80));
+  let keyboardSelectionTimer = 0;
+  document.addEventListener("selectionchange", () => {
+    clearTimeout(keyboardSelectionTimer);
+    const firstRead = state.firstReads.get(state.current?.id);
+    if (!firstRead || firstRead.submitted || !els.textFlow.contains(document.activeElement)) return;
+    keyboardSelectionTimer = setTimeout(onSelection, 180);
+  });
   els.lexiconClose.addEventListener("click", closeLexicon);
   els.lexiconScrim.addEventListener("click", closeLexicon);
   $$('.lexicon-switch button').forEach((button) => button.addEventListener("click", () => {
@@ -2267,8 +3008,7 @@ function bindEvents() {
   els.pagePrev.addEventListener("click", () => showPage(state.pageIndex - 1));
   els.pageNext.addEventListener("click", () => showPage(state.pageIndex + 1));
   els.resourcesOpen.addEventListener("click", () => {
-    const first = resourcesFor(state.current)[0];
-    if (first) openResource(first); else document.querySelector("#classroom-materials")?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector("#classroom-materials")?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
   document.querySelector("#lesson-chat a")?.addEventListener("click", () => {
     void recordLearning("chatOpened");
@@ -2335,6 +3075,7 @@ function bindEvents() {
 async function init() {
   applyFont();
   bindEvents();
+  setToolsOpen(false);
   syncMasteryPlacement();
   const masteryCollapsed = localStorage.getItem(MASTERY_COLLAPSED_KEY) === "1";
   els.learningRail.classList.toggle("collapsed", masteryCollapsed);
@@ -2352,6 +3093,7 @@ async function init() {
       lessonMedia,
       vocabEligibility,
       vocabIndex,
+      studyGuideCatalog,
       sharedContentPointer,
     ] = await Promise.all([
       fetchJson("data/manifest.json"),
@@ -2359,11 +3101,13 @@ async function init() {
       fetchJson("data/lesson-media.json"),
       fetchJson("data/vocab-eligibility.json", { cache: "no-cache" }),
       fetchJson("data/vocab/index.json", { cache: "no-cache" }),
+      fetchJson("data/study-guide-catalog.json", { cache: "no-cache" }),
       fetchJson("app-content/latest-stable.json", { cache: "no-cache" }).catch(() => null),
     ]);
     if (
       vocabEligibility?.schemaVersion !== "yw-vocab-eligibility-v1"
       || vocabIndex?.schemaVersion !== "yw-vocab-index-v2"
+      || studyGuideCatalog?.schemaVersion !== "yw-study-guide-catalog-v1"
     ) {
       throw new Error("字詞範圍資料不一致");
     }
@@ -2371,6 +3115,7 @@ async function init() {
     state.taxonomy = taxonomy;
     state.vocabEligibility = vocabEligibility;
     state.vocabIndex = vocabIndex;
+    state.studyGuideLessons = new Map((studyGuideCatalog.lessons || []).map((lesson) => [lesson.lessonId, lesson]));
     state.sharedContentVersion = sharedContentVersionFromPointer(sharedContentPointer);
     state.lessonMedia = new Map((lessonMedia.lessons || []).map((lesson) => [lesson.lessonId, lesson]));
     state.taxonomyLessons = new Map(state.taxonomy.lessons.map((lesson) => [lesson.id, lesson]));

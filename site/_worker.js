@@ -4,12 +4,28 @@ import {
   recordLearningInteraction,
   retryPendingEvidence,
 } from "./learning-evidence-source.js";
+import {
+  deleteClassicalFirstReadMark,
+  getClassicalFirstReadState,
+  resolveClassicalFirstReadMark,
+  submitClassicalFirstRead,
+  upsertClassicalFirstReadMark,
+} from "./classical-first-read-source.js";
+import { previewUrlHasPublicHostname } from "./preview-network-policy.js";
+import { reconcileReadingStudent } from "./reading-identity-source.js";
+import {
+  deterministicStudyGuideAssessment,
+  normalizeOpenStudyGuideAssessment,
+  studyGuideAssessmentPrompt,
+} from "./study-guide-assessment.js";
 
 const OWNER = "ieduer";
 const REPO = "yuwen-course";
 const DISCUSSION_MARKER_PREFIX = "yuwen-course-lesson:";
 let ctextSession = { cookie: "", expiresAt: 0 };
 let shugeSession = { cookie: "", expiresAt: 0 };
+const previewRegistryCache = { value: null, expiresAt: 0 };
+const studyGuideCatalogCache = { value: null, expiresAt: 0 };
 const BROWSER_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
 
 export default {
@@ -41,9 +57,6 @@ export default {
     }
     if (url.pathname === "/api/preview" && (request.method === "GET" || request.method === "HEAD")) {
       return handlePreview(request, env);
-    }
-    if (url.pathname.startsWith("/static/") && (request.method === "GET" || request.method === "HEAD")) {
-      return handleCtextStatic(request);
     }
     const discussionMatch = url.pathname.match(/^\/api\/discussions\/([^/]+)$/);
     if (discussionMatch) {
@@ -138,34 +151,68 @@ function cleanText(value, max = 4000) {
   return String(value || "").replace(/\r/g, "").trim().slice(0, max);
 }
 
+function exactLearningDescriptorPart(actual, expected) {
+  if (!actual || typeof actual !== "object" || Array.isArray(actual)) return false;
+  const keys = Object.keys(actual).sort();
+  if (keys.join("\n") !== "itemCount\nmanifestDigest\nmanifestVersion") return false;
+  return actual.manifestVersion === expected.manifestVersion
+    && actual.manifestDigest === expected.manifestDigest
+    && Number(actual.itemCount) === Number(expected.itemCount);
+}
+
 async function handleLearningEvidenceHealth(env) {
   if (!env.USER_CENTER_EVIDENCE
-    || typeof env.USER_CENTER_EVIDENCE.getSourceReceipt !== "function"
+    || typeof env.USER_CENTER_EVIDENCE.getLearningHealthReceipt !== "function"
     || !env.ASSETS
     || typeof env.ASSETS.fetch !== "function") {
     return json({ error: "learning evidence unavailable" }, { status: 503 });
   }
   try {
-    const manifestResponse = await env.ASSETS.fetch(
-      new Request("https://yw.bdfz.net/data/learning-manifest.json"),
-    );
-    if (!manifestResponse.ok) throw new Error("learning manifest unavailable");
-    const manifest = await manifestResponse.json();
+    const [manifestResponse, registryResponse, formativeResponse] = await Promise.all([
+      env.ASSETS.fetch(new Request("https://yw.bdfz.net/data/learning-manifest.json")),
+      env.ASSETS.fetch(new Request("https://yw.bdfz.net/data/interaction-definitions.json")),
+      env.ASSETS.fetch(new Request("https://yw.bdfz.net/data/lesson-competency-manifest.json")),
+    ]);
+    if (!manifestResponse.ok || !registryResponse.ok || !formativeResponse.ok) {
+      throw new Error("learning contract assets unavailable");
+    }
+    const [manifest, registry, formative] = await Promise.all([
+      manifestResponse.json(),
+      registryResponse.json(),
+      formativeResponse.json(),
+    ]);
     const descriptor = {
       sourceSiteKey: "yw",
-      manifestVersion: manifest?.manifestVersion,
-      manifestDigest: manifest?.resourceKeyHash,
-      itemCount: Number(manifest?.itemCount),
-      loaderContractVersion: "yuwen-queue-ledger-v1",
+      formal: {
+        manifestVersion: manifest?.manifestVersion,
+        manifestDigest: manifest?.resourceKeyHash,
+        itemCount: Number(manifest?.itemCount),
+      },
+      registryVersion: registry?.registryVersion,
+      formative: {
+        manifestVersion: formative?.manifestVersion,
+        manifestDigest: formative?.manifestDigest,
+        itemCount: Number(formative?.itemCount),
+      },
     };
-    const receipt = await env.USER_CENTER_EVIDENCE.getSourceReceipt(descriptor);
+    if (formative?.formalLearningManifestVersion !== descriptor.formal.manifestVersion
+      || formative?.formalLearningManifestDigest !== descriptor.formal.manifestDigest
+      || formative?.registryVersion !== descriptor.registryVersion) {
+      throw new Error("learning contract assets disagree");
+    }
+    const receipt = await env.USER_CENTER_EVIDENCE.getLearningHealthReceipt(descriptor);
     if (receipt?.ok !== true
-      || receipt?.status !== "active"
+      || receipt?.schemaVersion !== "bdfz-yw-learning-health-receipt-v1"
+      || receipt?.status !== "healthy"
       || receipt?.sourceSiteKey !== "yw"
-      || receipt?.loaderContractVersion !== "yuwen-queue-ledger-v1"
-      || receipt?.manifestVersion !== manifest?.manifestVersion
-      || receipt?.manifestDigest !== manifest?.resourceKeyHash
-      || Number(receipt?.itemCount) !== Number(manifest?.itemCount)) {
+      || !exactLearningDescriptorPart(receipt?.formal, descriptor.formal)
+      || receipt?.registryVersion !== descriptor.registryVersion
+      || !exactLearningDescriptorPart(receipt?.formative, descriptor.formative)
+      || receipt?.activationScope !== "transport_and_formative_health_only"
+      || receipt?.persistence !== "none"
+      || receipt?.runtimeScoringActivation !== false
+      || receipt?.affectsGrowthScore !== false
+      || receipt?.affectsAPlus !== false) {
       return json({ error: "learning evidence contract mismatch" }, { status: 503 });
     }
     return json({ ok: true, receipt });
@@ -204,10 +251,46 @@ async function handleWyArticles() {
 }
 
 function previewAllowed(url) {
-  if (!["http:", "https:"].includes(url.protocol)) return false;
-  const host = url.hostname.toLowerCase();
-  if (/^(localhost|127\.|10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.)/.test(host)) return false;
-  return true;
+  return previewUrlHasPublicHostname(url);
+}
+
+function normalizedPreviewTarget(url) {
+  const normalized = new URL(url.toString());
+  normalized.hash = "";
+  return normalized.toString();
+}
+
+async function getPreviewRegistry(request, env) {
+  if (previewRegistryCache.value && previewRegistryCache.expiresAt > Date.now()) {
+    return previewRegistryCache.value;
+  }
+  const assetUrl = new URL("/data/preview-targets.json", request.url);
+  const response = await env.ASSETS.fetch(new Request(assetUrl.toString(), { method: "GET" }));
+  if (!response.ok) throw new Error("preview target registry unavailable");
+  const registry = await response.json();
+  if (
+    registry?.schemaVersion !== "yw-preview-targets-v1"
+    || !/^sha256:[a-f0-9]{64}$/.test(String(registry?.targetDigest || ""))
+    || !Array.isArray(registry?.targets)
+    || !Array.isArray(registry?.redirectTargets)
+    || !Array.isArray(registry?.allowedHosts)
+    || Number(registry?.targetCount) !== registry.targets.length
+  ) throw new Error("preview target registry invalid");
+  const value = {
+    targets: new Set(registry.targets),
+    redirectTargets: new Set(registry.redirectTargets),
+    allowedHosts: new Set(registry.allowedHosts.map((host) => String(host).toLowerCase())),
+  };
+  previewRegistryCache.value = value;
+  previewRegistryCache.expiresAt = Date.now() + 5 * 60 * 1000;
+  return value;
+}
+
+function previewRedirectAllowed(registry, url) {
+  const normalized = normalizedPreviewTarget(url);
+  return previewAllowed(url)
+    && registry.allowedHosts.has(url.hostname.toLowerCase())
+    && (registry.targets.has(normalized) || registry.redirectTargets.has(normalized));
 }
 
 function filenameFromUrl(url) {
@@ -250,83 +333,13 @@ function clearFrameBlockingHeaders(headers) {
   headers.delete("set-cookie");
   headers.delete("content-length");
   headers.delete("content-encoding");
+  const corsHeaders = [...headers.keys()].filter((name) => name.toLowerCase().startsWith("access-control-"));
+  corsHeaders.forEach((name) => headers.delete(name));
 }
 
 function isCtextUrl(url) {
   const host = url.hostname.toLowerCase();
   return host === "ctext.org" || host.endsWith(".ctext.org");
-}
-
-function isYuqueUrl(url) {
-  const host = url.hostname.toLowerCase();
-  return host === "yuque.com" || host.endsWith(".yuque.com");
-}
-
-function extractYuqueAppData(html) {
-  const match = String(html || "").match(/window\.appData\s*=\s*JSON\.parse\(decodeURIComponent\("(.+?)"\)\)/s);
-  if (!match) return null;
-  try {
-    return JSON.parse(decodeURIComponent(match[1]));
-  } catch {
-    return null;
-  }
-}
-
-function yuqueNodeHref(target, book, node) {
-  const raw = String(node?.url || "").trim();
-  if (!raw) return target.href;
-  if (/^https?:\/\//i.test(raw)) return raw;
-  const parts = target.pathname.split("/").filter(Boolean);
-  const namespace = parts[0] || "";
-  const bookSlug = book?.slug || parts[1] || "";
-  if (!namespace || !bookSlug) return target.href;
-  return `${target.origin}/${namespace}/${bookSlug}/${encodeURIComponent(raw)}`;
-}
-
-function yuqueStaticPreviewHtml(html, target) {
-  if (!isYuqueUrl(target)) return "";
-  const data = extractYuqueAppData(html);
-  const book = data?.book || null;
-  const doc = data?.doc || null;
-  if (!book && !doc) return "";
-  const title = doc?.title || book?.name || "語雀";
-  const toc = Array.isArray(book?.toc) ? book.toc : [];
-  const tocHtml = toc.length ? `
-    <ol class="yuque-toc">
-      ${toc.map((node) => {
-        const level = Math.max(0, Math.min(4, Number(node?.level || 0)));
-        const text = node?.title || node?.label || node?.url || "未命名";
-        const href = yuqueNodeHref(target, book, node);
-        return `<li style="--level:${level}"><a href="${escapeHtml(href)}" target="_blank" rel="noreferrer">${escapeHtml(text)}</a></li>`;
-      }).join("")}
-    </ol>
-  ` : `<p class="empty">此語雀頁未公開目錄內容，可點右上角打開源頁。</p>`;
-  return `<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <base href="${escapeHtml(target.href)}">
-  <style>
-    :root{color-scheme:light}
-    body{margin:0;padding:24px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.7;color:#243a40;background:#fff}
-    header{margin:0 0 18px;padding-bottom:14px;border-bottom:1px solid #dbe4df}
-    h1{margin:0;font-size:1.55rem;line-height:1.25;color:#20383f}
-    .meta{margin:8px 0 0;color:#667a75;font-size:.92rem}
-    .yuque-toc{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-    .yuque-toc li{margin-left:calc(var(--level) * 18px)}
-    .yuque-toc a{display:block;padding:10px 12px;border:1px solid #dbe4df;border-radius:8px;color:#294f49;text-decoration:none;background:#fbfbf6}
-    .yuque-toc a:hover{border-color:#7b9d93;background:#f3f8f4}
-    .empty{color:#667a75}
-  </style>
-</head>
-<body>
-  <header>
-    <h1>${escapeHtml(title)}</h1>
-    <p class="meta">語雀嵌入預覽 · ${toc.length ? `${toc.length} 個條目` : "源頁"}</p>
-  </header>
-  ${tocHtml}
-</body>
-</html>`;
 }
 
 function shouldUseCtextAuth(url) {
@@ -336,30 +349,6 @@ function shouldUseCtextAuth(url) {
     return false;
   }
   return true;
-}
-
-async function handleCtextStatic(request) {
-  const requestUrl = new URL(request.url);
-  const target = new URL(`${requestUrl.pathname}${requestUrl.search}`, "https://ctext.org");
-  const upstream = await fetch(target.toString(), {
-    method: request.method,
-    headers: {
-      "user-agent": BROWSER_UA,
-      "accept": request.headers.get("accept") || "*/*",
-      "referer": "https://ctext.org/",
-    },
-    cf: { cacheTtl: 3600, cacheEverything: true },
-  });
-  const headers = new Headers(upstream.headers);
-  clearFrameBlockingHeaders(headers);
-  headers.delete("set-cookie");
-  headers.set("access-control-allow-origin", "*");
-  headers.set("cache-control", "public, max-age=3600");
-  return new Response(request.method === "HEAD" ? null : upstream.body, {
-    status: upstream.status,
-    statusText: upstream.statusText,
-    headers,
-  });
 }
 
 function isShugeUrl(url) {
@@ -393,36 +382,6 @@ function mergeCookieHeaders(left, right) {
     cookies.set(item.slice(0, index), item.slice(index + 1));
   });
   return [...cookies].map(([key, value]) => `${key}=${value}`).join("; ");
-}
-
-function scrubCtextPreviewHtml(html) {
-  return html
-    .replace(/<div id=["']logininfo["'][\s\S]*?<\/div>/i, `<div id="logininfo">課程嵌入預覽</div>`)
-    .replace(/,\s*target-densitydpi\s*=\s*[^,"']+/gi, "")
-    .replace(/<span style=["']opacity:\s*0\.0;[^>]*>[\s\S]*?<\/span>/gi, "");
-}
-
-function rewritePreviewHtml(html, target) {
-  const yuqueHtml = yuqueStaticPreviewHtml(html, target);
-  if (yuqueHtml) return yuqueHtml;
-  const origin = target.origin;
-  let staticHtml = html
-    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
-    .replace(/<script\b[^>]*\/?>/gi, "")
-    .replace(/<meta\b[^>]+http-equiv=["']?refresh["']?[^>]*>/gi, "")
-    .replace(/\s+on[a-z]+=(["']).*?\1/gi, "")
-    .replace(/\s+on[a-z]+=[^\s>]+/gi, "")
-    .replace(/\b(href|src|action)=(["'])\s*javascript:[\s\S]*?\2/gi, (_match, attr, quote) => `${attr}=${quote}#${quote}`)
-    .replace(/\b(href|src|action)=javascript:[^\s>]+/gi, (_match, attr) => `${attr}="#"`)
-    .replace(/\b(href|src|action)=(["'])\/(?!\/)/gi, (_match, attr, quote) => `${attr}=${quote}${origin}/`)
-    .replace(/\b(href|src|action)=(["'])\/\//gi, (_match, attr, quote) => `${attr}=${quote}${target.protocol}//`);
-  if (isCtextUrl(target)) staticHtml = scrubCtextPreviewHtml(staticHtml);
-  const base = `<base href="${escapeHtml(target.href)}">`;
-  const style = `<style>html{background:#fff}body{max-width:980px;margin:0 auto;padding:20px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.7}img,video,iframe{max-width:100%;height:auto}</style>`;
-  if (/<head[^>]*>/i.test(staticHtml)) {
-    return staticHtml.replace(/<head([^>]*)>/i, `<head$1>${base}${style}`);
-  }
-  return `<!doctype html><html><head>${base}${style}</head><body>${staticHtml}</body></html>`;
 }
 
 function unavailablePdfHtml(target) {
@@ -497,43 +456,161 @@ async function getCtextCookie(env) {
   return cookie;
 }
 
-async function fetchPreviewUpstream(request, target, headers, env) {
-  if (shouldUseCtextAuth(target)) {
-    const cookie = await getCtextCookie(env);
-    if (cookie) headers.set("cookie", cookie);
-    headers.set("accept", "text/html,application/xhtml+xml");
-    headers.set("referer", "https://ctext.org/");
+async function fetchPreviewUpstream(request, initialTarget, baseHeaders, env, registry) {
+  let target = initialTarget;
+  for (let redirectCount = 0; redirectCount <= 5; redirectCount += 1) {
+    if (!previewRedirectAllowed(registry, target)) throw new Error("preview redirect is not allowed");
+    const headers = new Headers(baseHeaders);
+    if (shouldUseCtextAuth(target)) {
+      const cookie = await getCtextCookie(env);
+      if (cookie) headers.set("cookie", cookie);
+      headers.set("accept", "text/html,application/xhtml+xml");
+      headers.set("referer", "https://ctext.org/");
+    }
+    if (isShugeUrl(target)) {
+      headers.set("user-agent", BROWSER_UA);
+      headers.set("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+      headers.set("accept-language", "zh-CN,zh;q=0.9,en;q=0.8");
+      headers.set("referer", "https://www.shuge.org/");
+      if (shugeSession.cookie && Date.now() < shugeSession.expiresAt) headers.set("cookie", shugeSession.cookie);
+    }
+    let response = await fetch(target.toString(), {
+      method: request.method,
+      headers,
+      redirect: "manual",
+    });
+    if (isShugeUrl(target)) {
+      const freshCookie = cookieHeaderFromSetCookies(setCookieHeaders(response.headers));
+      if (freshCookie) {
+        shugeSession = {
+          cookie: mergeCookieHeaders(shugeSession.cookie, freshCookie),
+          expiresAt: Date.now() + 60 * 60 * 1000,
+        };
+      }
+      if (response.status === 403 && shugeSession.cookie) {
+        headers.set("cookie", shugeSession.cookie);
+        response = await fetch(target.toString(), {
+          method: request.method,
+          headers,
+          redirect: "manual",
+        });
+      }
+    }
+    if (![301, 302, 303, 307, 308].includes(response.status)) return { response, target };
+    const location = response.headers.get("location");
+    if (!location || redirectCount === 5) throw new Error("preview redirect limit exceeded");
+    target = new URL(location, target);
   }
-  if (isShugeUrl(target)) {
-    headers.set("user-agent", BROWSER_UA);
-    headers.set("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-    headers.set("accept-language", "zh-CN,zh;q=0.9,en;q=0.8");
-    headers.set("referer", "https://www.shuge.org/");
-    if (shugeSession.cookie && Date.now() < shugeSession.expiresAt) headers.set("cookie", shugeSession.cookie);
+  throw new Error("preview redirect limit exceeded");
+}
+
+function safePreviewAttributeUrl(raw, target, { image = false } = {}) {
+  const value = String(raw || "").trim();
+  if (image && /^data:image\/(?:png|gif|jpe?g|webp);/i.test(value)) return value;
+  try {
+    const url = new URL(value, target);
+    return url.protocol === "https:" ? url.toString() : "";
+  } catch {
+    return "";
   }
-  let response = await fetch(target.toString(), {
-    method: request.method,
-    headers,
-    redirect: "follow",
+}
+
+function sanitizePreviewHtml(upstream, target, responseHeaders) {
+  responseHeaders.set("content-type", "text/html; charset=utf-8");
+  responseHeaders.set("cache-control", "no-store, no-transform");
+  responseHeaders.set("referrer-policy", "no-referrer");
+  responseHeaders.set("cross-origin-resource-policy", "same-origin");
+  responseHeaders.set("permissions-policy", "camera=(), microphone=(), geolocation=(), payment=(), usb=()");
+  responseHeaders.set(
+    "content-security-policy",
+    `default-src 'none'; img-src https: data:; media-src https:; style-src 'unsafe-inline'; script-src 'none'; connect-src 'none'; frame-src 'none'; object-src 'none'; form-action 'none'; base-uri ${target.origin}; sandbox`,
+  );
+  const remove = { element(element) { element.remove(); } };
+  const transformer = new HTMLRewriter()
+    .on("script, iframe, object, embed, link, base", remove)
+    .on("meta[http-equiv]", {
+      element(element) {
+        if (String(element.getAttribute("http-equiv") || "").toLowerCase() === "refresh") element.remove();
+      },
+    })
+    .on("form", { element(element) { element.removeAndKeepContent(); } })
+    .on("head", {
+      element(element) {
+        element.prepend(
+          `<base href="${escapeHtml(target.href)}"><style>html{background:#fff}body{max-width:980px;margin:0 auto;padding:20px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.7;color:#243a40}img,video{max-width:100%;height:auto}</style>`,
+          { html: true },
+        );
+      },
+    })
+    .on("#logininfo", { element(element) { element.setInnerContent("課程嵌入預覽"); } })
+    .on("*", {
+      element(element) {
+        const eventAttributes = [...element.attributes]
+          .map(([name]) => name)
+          .filter((name) => /^on/i.test(name));
+        eventAttributes.forEach((name) => element.removeAttribute(name));
+        const style = element.getAttribute("style");
+        if (style && /(?:url\s*\(|expression\s*\(|behavior\s*:|@import)/i.test(style)) {
+          element.removeAttribute("style");
+        }
+        element.removeAttribute("srcset");
+        for (const attribute of ["href", "src", "poster"]) {
+          const raw = element.getAttribute(attribute);
+          if (raw === null) continue;
+          const safe = safePreviewAttributeUrl(raw, target, {
+            image: attribute === "src" && element.tagName === "img",
+          });
+          if (safe) element.setAttribute(attribute, safe);
+          else element.removeAttribute(attribute);
+        }
+        element.removeAttribute("action");
+        if (element.tagName === "a") {
+          element.setAttribute("target", "_blank");
+          element.setAttribute("rel", "noopener noreferrer");
+        }
+      },
+    });
+  return transformer.transform(new Response(upstream.body, {
+    status: upstream.status,
+    statusText: upstream.statusText,
+    headers: responseHeaders,
+  }));
+}
+
+const SAFE_INLINE_PREVIEW_MIME_TYPES = new Set([
+  "application/pdf",
+  "application/json",
+  "text/plain",
+  "image/avif",
+  "image/gif",
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "audio/mpeg",
+  "audio/mp4",
+  "audio/ogg",
+  "audio/wav",
+  "audio/webm",
+  "video/mp4",
+  "video/ogg",
+  "video/webm",
+]);
+
+function previewMimeType(contentType) {
+  return String(contentType || "").split(";", 1)[0].trim().toLowerCase();
+}
+
+function previewError(status, message) {
+  return new Response(message, {
+    status,
+    headers: {
+      "content-type": "text/plain; charset=utf-8",
+      "cache-control": "no-store",
+      "content-security-policy": "default-src 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox",
+      "cross-origin-resource-policy": "same-origin",
+      "x-content-type-options": "nosniff",
+    },
   });
-  if (isShugeUrl(target)) {
-    const freshCookie = cookieHeaderFromSetCookies(setCookieHeaders(response.headers));
-    if (freshCookie) {
-      shugeSession = {
-        cookie: mergeCookieHeaders(shugeSession.cookie, freshCookie),
-        expiresAt: Date.now() + 60 * 60 * 1000,
-      };
-    }
-    if (response.status === 403 && shugeSession.cookie) {
-      headers.set("cookie", shugeSession.cookie);
-      response = await fetch(target.toString(), {
-        method: request.method,
-        headers,
-        redirect: "follow",
-      });
-    }
-  }
-  return response;
 }
 
 async function handlePreview(request, env) {
@@ -545,45 +622,78 @@ async function handlePreview(request, env) {
   } catch {
     return new Response("bad url", { status: 400 });
   }
-  target = await resolvePreviewTarget(request, env, target);
   if (!previewAllowed(target)) return new Response("url is not allowed", { status: 400 });
+  let registry;
+  try {
+    registry = await getPreviewRegistry(request, env);
+  } catch {
+    return new Response("preview registry unavailable", { status: 503 });
+  }
+  if (!registry.targets.has(normalizedPreviewTarget(target))) {
+    return new Response("url is not registered for preview", { status: 403 });
+  }
+  const requestedTarget = target;
+  target = await resolvePreviewTarget(request, env, target);
+  if (
+    normalizedPreviewTarget(target) !== normalizedPreviewTarget(requestedTarget)
+    && !registry.redirectTargets.has(normalizedPreviewTarget(target))
+  ) return new Response("preview redirect is not registered", { status: 403 });
+  if (!previewRedirectAllowed(registry, target)) return new Response("url is not allowed", { status: 400 });
   const headers = new Headers({
     "user-agent": "bdfz-yuwen-course-preview",
     "accept": request.headers.get("accept") || "*/*",
   });
   const range = request.headers.get("range");
   if (range) headers.set("range", range);
-  const upstream = await fetchPreviewUpstream(request, target, headers, env);
+  let upstream;
+  let finalTarget;
+  try {
+    ({ response: upstream, target: finalTarget } = await fetchPreviewUpstream(request, target, headers, env, registry));
+  } catch {
+    return new Response("preview upstream unavailable", { status: 502 });
+  }
   const responseHeaders = new Headers(upstream.headers);
   const type = responseHeaders.get("content-type") || "";
-  const isPdf = /\.pdf$/i.test(target.pathname) || /application\/pdf/i.test(type);
-  const isHtml = /text\/html|application\/xhtml\+xml/i.test(type);
+  const mimeType = previewMimeType(type);
+  const pdfPath = /\.pdf$/i.test(finalTarget.pathname);
+  const isHtml = mimeType === "text/html" || mimeType === "application/xhtml+xml";
+  const isPdf = mimeType === "application/pdf"
+    || (pdfPath && (!mimeType || mimeType === "application/octet-stream"));
   clearFrameBlockingHeaders(responseHeaders);
-  responseHeaders.set("access-control-allow-origin", "*");
   responseHeaders.set("x-content-type-options", "nosniff");
+  responseHeaders.set("cross-origin-resource-policy", "same-origin");
   responseHeaders.set(
     "content-disposition",
-    contentDispositionValue(requestUrl.searchParams.get("download") ? "attachment" : "inline", filenameFromUrl(target))
+    contentDispositionValue(requestUrl.searchParams.get("download") ? "attachment" : "inline", filenameFromUrl(finalTarget))
   );
-  if (isPdf && !type) responseHeaders.set("content-type", "application/pdf");
-  if (isPdf && isHtml && request.method !== "HEAD") {
+  if (pdfPath && isHtml && request.method !== "HEAD") {
     responseHeaders.set("content-type", "text/html; charset=utf-8");
     responseHeaders.set("cache-control", "public, max-age=120");
-    return new Response(unavailablePdfHtml(target), {
+    responseHeaders.set("content-security-policy", "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; sandbox");
+    return new Response(unavailablePdfHtml(finalTarget), {
       status: 200,
       headers: responseHeaders,
     });
   }
   if (isHtml && request.method !== "HEAD") {
-    const html = await upstream.text();
+    return sanitizePreviewHtml(upstream, finalTarget, responseHeaders);
+  }
+  if (isHtml) {
     responseHeaders.set("content-type", "text/html; charset=utf-8");
-    responseHeaders.set("cache-control", "no-store, no-transform");
-    return new Response(rewritePreviewHtml(html, target), {
+    responseHeaders.set("content-security-policy", "default-src 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox");
+    responseHeaders.set("cache-control", "no-store");
+    return new Response(null, {
       status: upstream.status,
       statusText: upstream.statusText,
       headers: responseHeaders,
     });
   }
+  if (pdfPath && !isPdf) return previewError(415, "preview content type does not match the registered PDF target");
+  if (!isPdf && !SAFE_INLINE_PREVIEW_MIME_TYPES.has(mimeType)) {
+    return previewError(415, "preview content type is not supported");
+  }
+  if (isPdf) responseHeaders.set("content-type", "application/pdf");
+  responseHeaders.set("content-security-policy", "default-src 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox");
   return new Response(request.method === "HEAD" ? null : upstream.body, {
     status: upstream.status,
     statusText: upstream.statusText,
@@ -1070,11 +1180,17 @@ async function sha256Hex(text) {
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
+function userCenterSessionCookieHeader(request) {
+  const entry = String(request.headers.get("cookie") || "")
+    .split(";")
+    .map((part) => part.trim())
+    .find((part) => part.startsWith(`${UC_SESSION_COOKIE}=`));
+  const token = entry ? entry.slice(UC_SESSION_COOKIE.length + 1).trim() : "";
+  if (!token || token.length > 2048 || /[\s;\r\n]/.test(token)) return "";
+  return `${UC_SESSION_COOKIE}=${token}`;
+}
+
 async function getReadingStudent(request, env) {
-  const cookies = Object.fromEntries((request.headers.get("cookie") || "").split(";").map((part) => {
-    const index = part.indexOf("=");
-    return index > 0 ? [part.slice(0, index).trim(), part.slice(index + 1).trim()] : ["", ""];
-  }));
   // 測試縫（僅本地 wrangler pages dev 可設 READING_TEST_SLUG；生產項目嚴禁配置此變量）：
   // 合成數據與真實數據走完全相同的寫入/聚合/讀取路徑，僅身分核驗來源不同。
   if (env.READING_TEST_SLUG) {
@@ -1084,12 +1200,12 @@ async function getReadingStudent(request, env) {
     const row = await db.prepare("SELECT id, uc_user_id, uc_slug, display_name, class_name FROM students WHERE uc_slug = ?").bind(slug).first();
     return { id: row.id, ucUserId: row.uc_user_id || null, slug: row.uc_slug, displayName: row.display_name, className: row.class_name || "" };
   }
-  const token = cookies[UC_SESSION_COOKIE];
-  if (!token) return null;
+  const cookieHeader = userCenterSessionCookieHeader(request);
+  if (!cookieHeader) return null;
+  const token = cookieHeader.slice(UC_SESSION_COOKIE.length + 1);
   const cached = identityCache.get(token);
   let user = cached && cached.exp > Date.now() ? cached.user : null;
   if (!user) {
-    const cookieHeader = `${UC_SESSION_COOKIE}=${token}`;
     if (env.USER_CENTER_EVIDENCE?.resolveSession) {
       const resolved = await env.USER_CENTER_EVIDENCE.resolveSession(cookieHeader).catch(() => null);
       if (resolved?.authenticated && resolved?.sourceSiteKey === "yw" && Number.isInteger(Number(resolved.userId))) {
@@ -1106,9 +1222,10 @@ async function getReadingStudent(request, env) {
       }).catch(() => null);
       if (!response?.ok) return null;
       const payload = await response.json().catch(() => null);
-      if (!payload?.slug) return null;
+      const fallbackUserId = Number(payload?.userId || payload?.id || 0);
+      if (!payload?.slug || !Number.isInteger(fallbackUserId) || fallbackUserId <= 0) return null;
       user = {
-        userId: null,
+        userId: fallbackUserId,
         slug: String(payload.slug).slice(0, 80),
         displayName: String(payload.displayName || "").slice(0, 80),
       };
@@ -1117,28 +1234,7 @@ async function getReadingStudent(request, env) {
     if (identityCache.size > 500) identityCache.clear();
     identityCache.set(token, { user, exp: Date.now() + 5 * 60 * 1000 });
   }
-  const db = env.READING_DB;
-  let row = user.userId
-    ? await db.prepare("SELECT id, uc_user_id, uc_slug, display_name, class_name FROM students WHERE uc_user_id = ? OR uc_slug = ? ORDER BY uc_user_id IS NOT NULL DESC LIMIT 1")
-      .bind(user.userId, user.slug).first()
-    : await db.prepare("SELECT id, uc_user_id, uc_slug, display_name, class_name FROM students WHERE uc_slug = ?").bind(user.slug).first();
-  if (!row) {
-    await db.prepare(
-      "INSERT OR IGNORE INTO students (uc_user_id, uc_slug, display_name, identity_verified_at) VALUES (?, ?, ?, ?)"
-    ).bind(user.userId || null, user.slug, user.displayName, user.userId ? new Date().toISOString() : null).run();
-    row = await db.prepare("SELECT id, uc_user_id, uc_slug, display_name, class_name FROM students WHERE uc_slug = ?").bind(user.slug).first();
-  } else {
-    await db.prepare(
-      "UPDATE students SET last_seen_at = datetime('now'), display_name = ?, uc_user_id = COALESCE(?, uc_user_id), identity_verified_at = CASE WHEN ? IS NOT NULL THEN ? ELSE identity_verified_at END WHERE id = ?"
-    ).bind(user.displayName || row.display_name, user.userId || null, user.userId || null, new Date().toISOString(), row.id).run();
-  }
-  return row ? {
-    id: row.id,
-    ucUserId: user.userId || row.uc_user_id || null,
-    slug: row.uc_slug,
-    displayName: user.displayName || row.display_name,
-    className: row.class_name || "",
-  } : null;
+  return reconcileReadingStudent(env.READING_DB, user);
 }
 
 const DIRECT_LEARNING_INTERACTIONS = new Set([
@@ -1564,85 +1660,60 @@ async function handleReadingVocabAttempt(request, env, student) {
   }
   const lesson = await getLessonData(request, env, lessonId);
   const db = env.READING_DB;
-  const submissionGuard = await assertLearningSubmissionAllowed({
-    request,
-    env,
-    student,
-    lesson,
-    interactionKey: "vocabAnswer",
-    payload: {
-      itemId,
-      selectedIndex,
-      clientMutationId: cleanText(payload.clientMutationId, 100),
-      classSessionId: cleanText(payload.classSessionId, 100),
-      lessonPhase: cleanText(payload.lessonPhase, 60),
-    },
-  });
-  if (submissionGuard.deduped) {
-    const current = await db.prepare(
-      "SELECT status, correct_count, wrong_count FROM vocab_mastery WHERE student_id = ? AND lesson_id = ? AND item_id = ?"
-    ).bind(student.id, lessonId, itemId).first();
-    const priorCorrectness = cleanText(submissionGuard.evaluation?.correctness, 32).toLowerCase();
-    return json({
-      ok: true,
-      deduped: true,
-      attemptNo: submissionGuard.attemptNo,
-      correct: priorCorrectness === "correct" || priorCorrectness === "passed",
-      status: submissionGuard.evaluation?.verdict || current?.status || "learning",
-      correctCount: Number(current?.correct_count || 0),
-      wrongCount: Number(current?.wrong_count || 0),
-      evidence: {
-        sourceEventId: submissionGuard.sourceEventId,
-        delivery: submissionGuard.eligibilityStatus === "ineligible"
-          ? "already_recorded_ineligible"
-          : "already_recorded",
-      },
-      completionEvidence: null,
-    });
-  }
+  const clientMutationId = cleanText(payload.clientMutationId, 100);
+  if (!clientMutationId) return readingError("clientMutationId required");
+  const evidencePayload = {
+    itemId,
+    selectedIndex,
+    clientMutationId,
+    classSessionId: cleanText(payload.classSessionId, 100),
+    lessonPhase: cleanText(payload.lessonPhase, 60),
+  };
   const correct = selectedIndex === Number(authoritativeItem.answerIndex) ? 1 : 0;
   const answer = cleanText(authoritativeItem.options[selectedIndex], 200);
-  const attemptRow = await db.prepare(
-    "SELECT COALESCE(MAX(attempt_no), 0) + 1 AS n FROM vocab_attempts WHERE student_id = ? AND lesson_id = ? AND item_id = ?"
-  ).bind(student.id, lessonId, itemId).first();
-  const attemptNo = Number(attemptRow?.n || 1);
-  const current = await db.prepare(
-    "SELECT status, correct_count, wrong_count FROM vocab_mastery WHERE student_id = ? AND lesson_id = ? AND item_id = ?"
-  ).bind(student.id, lessonId, itemId).first();
-  const correctCount = Number(current?.correct_count || 0) + (correct ? 1 : 0);
-  const wrongCount = Number(current?.wrong_count || 0) + (correct ? 0 : 1);
-  // 掌握規則（可測）：首答即對 → mastered；否則需累計兩次答對且末次為對。
-  const mastered = correct && (attemptNo === 1 || correctCount >= 2);
-  const status = mastered ? "mastered" : "learning";
-  await db.batch([
-    db.prepare(
-      "INSERT INTO vocab_attempts (student_id, lesson_id, item_id, attempt_no, correct, answer) VALUES (?, ?, ?, ?, ?, ?)"
-    ).bind(student.id, lessonId, itemId, attemptNo, correct, answer),
-    db.prepare(
-      "INSERT INTO vocab_mastery (student_id, lesson_id, item_id, status, correct_count, wrong_count, last_at) VALUES (?, ?, ?, ?, ?, ?, datetime('now')) " +
-      "ON CONFLICT(student_id, lesson_id, item_id) DO UPDATE SET status = ?, correct_count = ?, wrong_count = ?, last_at = datetime('now')"
-    ).bind(student.id, lessonId, itemId, status, correctCount, wrongCount, status, correctCount, wrongCount),
-  ]);
   const recorded = await recordLearningInteraction({
     request,
     env,
     student,
     lesson,
     interactionKey: "vocabAnswer",
-    payload: {
-      itemId,
-      selectedIndex,
-      clientMutationId: cleanText(payload.clientMutationId, 100),
-      classSessionId: cleanText(payload.classSessionId, 100),
-      lessonPhase: cleanText(payload.lessonPhase, 60),
-    },
-    evaluation: {
-      score: correct ? 100 : 0,
-      correctness: correct ? "correct" : "incorrect",
-      provider: "answer-key",
-      verdict: status,
+    payload: evidencePayload,
+    sourceMutation: async ({ attemptNo }) => {
+      const current = await db.prepare(
+        "SELECT status, correct_count, wrong_count FROM vocab_mastery WHERE student_id = ? AND lesson_id = ? AND item_id = ?"
+      ).bind(student.id, lessonId, itemId).first();
+      const correctCount = Number(current?.correct_count || 0) + (correct ? 1 : 0);
+      const wrongCount = Number(current?.wrong_count || 0) + (correct ? 0 : 1);
+      // 首答即對即掌握；曾答錯則需累計兩次答對。掌握後不因額外練習降級。
+      const mastered = current?.status === "mastered"
+        || (correct && (attemptNo === 1 || correctCount >= 2));
+      const status = mastered ? "mastered" : "learning";
+      return {
+        statements: [
+          db.prepare(
+            "INSERT INTO vocab_attempts (student_id, lesson_id, item_id, attempt_no, correct, answer, client_mutation_id) VALUES (?, ?, ?, ?, ?, ?, ?)"
+          ).bind(student.id, lessonId, itemId, attemptNo, correct, answer, clientMutationId),
+          db.prepare(
+            "INSERT INTO vocab_mastery (student_id, lesson_id, item_id, status, correct_count, wrong_count, last_at) VALUES (?, ?, ?, ?, ?, ?, datetime('now')) " +
+            "ON CONFLICT(student_id, lesson_id, item_id) DO UPDATE SET status = ?, correct_count = ?, wrong_count = ?, last_at = datetime('now')"
+          ).bind(student.id, lessonId, itemId, status, correctCount, wrongCount, status, correctCount, wrongCount),
+        ],
+        evaluation: {
+          score: correct ? 100 : 0,
+          correctness: correct ? "correct" : "incorrect",
+          provider: "answer-key",
+          verdict: status,
+        },
+        result: { status, correctCount, wrongCount },
+      };
     },
   });
+  const current = await db.prepare(
+    "SELECT status, correct_count, wrong_count FROM vocab_mastery WHERE student_id = ? AND lesson_id = ? AND item_id = ?"
+  ).bind(student.id, lessonId, itemId).first();
+  const status = current?.status || recorded.sourceMutationResult?.status || "learning";
+  const correctCount = Number(current?.correct_count ?? recorded.sourceMutationResult?.correctCount ?? 0);
+  const wrongCount = Number(current?.wrong_count ?? recorded.sourceMutationResult?.wrongCount ?? 0);
   let completionEvidence = null;
   const activeQuestionIds = new Set(
     bank.inventory.filter((item) => item?.decision === "question").map((item) => item.id),
@@ -1670,11 +1741,12 @@ async function handleReadingVocabAttempt(request, env, student) {
           bank.questionSetVersion || bank.builtAt || "v1",
         )}`.slice(0, 100),
       },
-    });
+    }).catch(() => null);
   }
   return json({
     ok: true,
-    attemptNo,
+    deduped: recorded.deduped === true,
+    attemptNo: recorded.attemptNo,
     correct: !!correct,
     status,
     correctCount,
@@ -1708,25 +1780,519 @@ async function handleReadingVocabState(request, env, student, lessonId) {
   }, { headers: { "cache-control": "no-store" } });
 }
 
-async function handleReadingHealth(env) {
-  const db = env.READING_DB;
-  const [students, submissions, nodes, interactions, pending] = await Promise.all([
-    db.prepare("SELECT COUNT(*) AS n FROM students").first(),
-    db.prepare("SELECT COUNT(*) AS n FROM submissions").first(),
-    db.prepare("SELECT COUNT(*) AS n FROM star_nodes").first(),
-    db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").first(),
-    db.prepare("SELECT COUNT(*) AS n FROM evidence_outbox WHERE delivery_status = 'pending'").first(),
+async function loadStudyGuideCatalog(request, env) {
+  if (studyGuideCatalogCache.value && studyGuideCatalogCache.expiresAt > Date.now()) {
+    return studyGuideCatalogCache.value;
+  }
+  const response = await env.ASSETS.fetch(new Request(new URL("/data/study-guide-catalog.json", request.url)));
+  if (!response.ok) throw new Error("study-guide catalog unavailable");
+  const catalog = await response.json();
+  if (catalog?.schemaVersion !== "yw-study-guide-catalog-v1"
+    || !/^yw-study-guides-[a-f0-9]{16}$/.test(String(catalog?.catalogVersion || ""))
+    || !/^sha256:[a-f0-9]{64}$/.test(String(catalog?.catalogDigest || ""))
+    || !Array.isArray(catalog?.lessons)
+    || Number(catalog?.lessonCount) !== catalog.lessons.length) {
+    throw new Error("study-guide catalog invalid");
+  }
+  const itemByKey = new Map();
+  for (const lesson of catalog.lessons) {
+    for (const item of lesson?.items || []) {
+      if (!item?.activeForSelfTest) continue;
+      const key = `${lesson.lessonId}\n${item.itemKey}`;
+      if (itemByKey.has(key)) throw new Error("study-guide item duplicate");
+      itemByKey.set(key, item);
+    }
+  }
+  const value = { catalog, itemByKey };
+  studyGuideCatalogCache.value = value;
+  studyGuideCatalogCache.expiresAt = Date.now() + 5 * 60 * 1000;
+  return value;
+}
+
+async function handleReadingStudyGuideAttempt(request, env, student) {
+  const payload = await request.json().catch(() => ({}));
+  const lessonId = cleanText(payload.lessonId, 80);
+  const itemKey = cleanText(payload.itemKey, 180);
+  const responseText = cleanText(payload.response, 4000);
+  const clientMutationId = cleanText(payload.clientMutationId, 100);
+  const referenceRevealedAt = cleanText(payload.referenceRevealedAt, 40);
+  if (!/^lesson-[\w-]{1,60}$/.test(lessonId)
+    || !itemKey
+    || responseText.length < 1
+    || !clientMutationId
+    || !Number.isFinite(Date.parse(referenceRevealedAt))) {
+    return readingError("lesson, item, response, reveal receipt and clientMutationId required");
+  }
+  const [{ itemByKey }, lesson] = await Promise.all([
+    loadStudyGuideCatalog(request, env),
+    getLessonData(request, env, lessonId),
   ]);
+  const item = itemByKey.get(`${lessonId}\n${itemKey}`);
+  if (!item || lesson?.id !== lessonId) return readingError("active study-guide item absent");
+
+  let assessment = deterministicStudyGuideAssessment(item, responseText);
+  if (!assessment) {
+    const raw = await callApisPrompt(env, studyGuideAssessmentPrompt(item, responseText), "feedback", "medium");
+    const parsed = extractJsonObject(raw);
+    assessment = normalizeOpenStudyGuideAssessment(parsed);
+  }
+
+  const recorded = await recordLearningInteraction({
+    request,
+    env,
+    student,
+    lesson,
+    interactionKey: "studyGuideItemCompleted",
+    payload: {
+      itemKey,
+      response: responseText,
+      referenceRevealedAt,
+      clientMutationId,
+      lessonPhase: "knowledge_accounting",
+    },
+    evaluation: assessment,
+  });
   return json({
     ok: true,
-    students: Number(students?.n || 0),
-    submissions: Number(submissions?.n || 0),
-    nodes: Number(nodes?.n || 0),
-    learningInteractions: Number(interactions?.n || 0),
-    evidenceOutboxPending: Number(pending?.n || 0),
+    passed: assessment.passed === true,
+    assessment: {
+      score: assessment.score,
+      verdict: assessment.verdict,
+      strength: assessment.strength,
+      gap: assessment.gap,
+      nextQuestion: assessment.nextQuestion,
+    },
+    evidence: {
+      sourceEventId: recorded.sourceEventId,
+      attemptNo: recorded.attemptNo,
+      eligibilityStatus: recorded.eligibilityStatus,
+      delivery: recorded.delivery || "already_recorded",
+    },
+  });
+}
+
+async function handleClassicalFirstReadState(request, env, student, lessonId) {
+  const state = await getClassicalFirstReadState(request, env, student, lessonId);
+  return json(state, { headers: { "cache-control": "no-store" } });
+}
+
+async function handleClassicalFirstReadMark(request, env, student) {
+  const payload = await request.json().catch(() => ({}));
+  const result = await upsertClassicalFirstReadMark(request, env, student, payload);
+  return json(result);
+}
+
+async function handleClassicalFirstReadMarkDelete(request, env, student) {
+  const payload = await request.json().catch(() => ({}));
+  const result = await deleteClassicalFirstReadMark(request, env, student, payload);
+  return json(result);
+}
+
+async function handleClassicalFirstReadSubmit(request, env, student) {
+  const payload = await request.json().catch(() => ({}));
+  const result = await submitClassicalFirstRead(request, env, student, payload);
+  const lesson = await getLessonData(request, env, result.lessonId);
+  const evidence = await recordLearningInteraction({
+    request,
+    env,
+    student,
+    lesson,
+    interactionKey: "initialReadingSubmitted",
+    payload: {
+      markCount: result.markCount,
+      elapsedMs: result.elapsedMs,
+      textVersionId: result.textVersionId,
+      clientMutationId: `first-read-submitted:${result.lessonId}:${result.textVersionId}`.slice(0, 100),
+      lessonPhase: "initial_reading",
+    },
+  });
+  return json({
+    ...result,
+    evidence: {
+      sourceEventId: evidence.sourceEventId,
+      delivery: evidence.delivery || "already_recorded",
+    },
+  });
+}
+
+async function handleClassicalFirstReadReconcile(request, env, student) {
+  const payload = await request.json().catch(() => ({}));
+  const lessonId = cleanText(payload.lessonId, 80);
+  const requestedVersion = cleanText(payload.textVersionId, 96);
+  if (!/^lesson-[\w-]{1,60}$/.test(lessonId)) return readingError("lessonId invalid");
+  const state = await getClassicalFirstReadState(request, env, student, lessonId);
+  if (!state.submitted || state.textVersionId !== requestedVersion) {
+    return readingError("submitted first-read state required", 409);
+  }
+  const lesson = await getLessonData(request, env, lessonId);
+  const submitted = await recordLearningInteraction({
+    request,
+    env,
+    student,
+    lesson,
+    interactionKey: "initialReadingSubmitted",
+    payload: {
+      markCount: state.markCount,
+      elapsedMs: state.elapsedMs,
+      textVersionId: state.textVersionId,
+      clientMutationId: `first-read-submitted:${lessonId}:${state.textVersionId}`.slice(0, 100),
+      lessonPhase: "initial_reading",
+    },
+  });
+  let resolved = null;
+  if (state.markCount > 0 && state.resolvedCount === state.markCount) {
+    resolved = await recordLearningInteraction({
+      request,
+      env,
+      student,
+      lesson,
+      interactionKey: "initialReadingResolved",
+      payload: {
+        markCount: state.markCount,
+        resolvedCount: state.resolvedCount,
+        textVersionId: state.textVersionId,
+        clientMutationId: `first-read-resolved:${lessonId}:${state.textVersionId}`.slice(0, 100),
+        lessonPhase: "close_reading",
+      },
+    });
+  }
+  return json({
+    ok: true,
+    submittedEvidence: { sourceEventId: submitted.sourceEventId, delivery: submitted.delivery || "already_recorded" },
+    resolvedEvidence: resolved
+      ? { sourceEventId: resolved.sourceEventId, delivery: resolved.delivery || "already_recorded" }
+      : null,
+  });
+}
+
+async function handleClassicalFirstReadResolve(request, env, student) {
+  const payload = await request.json().catch(() => ({}));
+  const result = await resolveClassicalFirstReadMark(request, env, student, payload);
+  let evidence = null;
+  if (result.allResolved) {
+    const lessonId = cleanText(payload.lessonId, 80);
+    const textVersionId = cleanText(payload.textVersionId, 96);
+    const lesson = await getLessonData(request, env, lessonId);
+    evidence = await recordLearningInteraction({
+      request,
+      env,
+      student,
+      lesson,
+      interactionKey: "initialReadingResolved",
+      payload: {
+        markCount: result.markCount,
+        resolvedCount: result.resolvedCount,
+        textVersionId,
+        clientMutationId: `first-read-resolved:${lessonId}:${textVersionId}`.slice(0, 100),
+        lessonPhase: "close_reading",
+      },
+    });
+  }
+  return json({
+    ...result,
+    evidence: evidence ? {
+      sourceEventId: evidence.sourceEventId,
+      delivery: evidence.delivery || "already_recorded",
+    } : null,
+  });
+}
+
+const FORMATIVE_COMPETENCY_TAGS = new Set([
+  "first_read_process",
+  "vocabulary",
+  "syntax",
+  "comprehension",
+]);
+
+function masteryRate(completedItems, totalItems) {
+  return totalItems > 0 ? Math.round((completedItems / totalItems) * 10000) / 100 : null;
+}
+
+function latestInterestByLesson(rows) {
+  const values = new Map();
+  for (const row of rows || []) {
+    if (values.has(row.lesson_id)) continue;
+    let payload;
+    try { payload = JSON.parse(row.raw_payload_json || "{}"); } catch { continue; }
+    const rating = Number(payload?.rating);
+    if (!Number.isFinite(rating) || rating < 0 || rating > 100) continue;
+    values.set(row.lesson_id, {
+      interestRating: Math.round(rating * 100) / 100,
+      interestRatedAt: String(row.occurred_at || ""),
+    });
+  }
+  return values;
+}
+
+function formativeManifestExpectation(manifest) {
+  const digest = String(manifest?.manifestDigest || "");
+  const version = String(manifest?.manifestVersion || "");
+  const itemCount = Number(manifest?.itemCount);
+  const lessonCount = Number(manifest?.lessonCount);
+  if (manifest?.schemaVersion !== "yw-lesson-competency-manifest-v1"
+    || manifest?.sourceSiteKey !== "yw"
+    || manifest?.registryVersion !== "yw-interactions-2026-08-09-v2"
+    || !Array.isArray(manifest?.aggregationUnit)
+    || manifest.aggregationUnit.join("\n") !== "lessonId\ncompetencyTag"
+    || !/^sha256:[a-f0-9]{64}$/.test(digest)
+    || version !== `yw-formative-${digest.slice(7, 23)}`
+    || !Number.isInteger(itemCount)
+    || itemCount < 0
+    || !Number.isInteger(lessonCount)
+    || lessonCount < 0
+    || !Array.isArray(manifest?.lessons)
+    || manifest.lessons.length !== lessonCount) {
+    throw new Error("formative manifest invalid");
+  }
+  const lessons = new Map();
+  let computedItemCount = 0;
+  for (const lesson of manifest.lessons) {
+    const lessonId = String(lesson?.lessonId || "");
+    if (!/^lesson-[\w-]{1,60}$/.test(lessonId)
+      || lessons.has(lessonId)
+      || !Array.isArray(lesson?.competencies)) {
+      throw new Error("formative manifest lesson invalid");
+    }
+    const competencies = new Map();
+    for (const competency of lesson.competencies) {
+      const tag = String(competency?.competencyTag || "");
+      const total = Number(competency?.activeItemCount);
+      if (!FORMATIVE_COMPETENCY_TAGS.has(tag)
+        || competencies.has(tag)
+        || !Number.isInteger(total)
+        || total < 0
+        || !Array.isArray(competency?.items)
+        || competency.items.length !== total) {
+        throw new Error("formative manifest competency invalid");
+      }
+      competencies.set(tag, total);
+      computedItemCount += total;
+    }
+    lessons.set(lessonId, competencies);
+  }
+  if (computedItemCount !== itemCount) throw new Error("formative manifest item count invalid");
+  return { manifestVersion: version, manifestDigest: digest, itemCount, lessons };
+}
+
+export function publicFormativeMastery(projection, interestRows, currentManifest) {
+  const expected = formativeManifestExpectation(currentManifest);
+  if (projection?.schemaVersion !== "bdfz-yw-formative-mastery-v1"
+    || projection?.status !== "available"
+    || projection?.unit !== "lesson_competency"
+    || projection?.nonScoring !== true
+    || projection?.affectsGrowthScore !== false
+    || projection?.affectsAPlus !== false
+    || projection?.manifestVersion !== expected.manifestVersion
+    || !Array.isArray(projection?.lessons)) {
+    throw new Error("formative mastery projection invalid");
+  }
+  const interests = latestInterestByLesson(interestRows);
+  let totalItems = 0;
+  let completedItems = 0;
+  let competencyUnitCount = 0;
+  const lessonIds = new Set();
+  const lessons = projection.lessons.map((lesson) => {
+    const lessonId = String(lesson?.lessonId || "");
+    const expectedCompetencies = expected.lessons.get(lessonId);
+    if (!/^lesson-[\w-]{1,60}$/.test(lessonId)
+      || lessonIds.has(lessonId)
+      || !expectedCompetencies
+      || !Array.isArray(lesson?.competencies)) {
+      throw new Error("formative mastery lesson invalid");
+    }
+    lessonIds.add(lessonId);
+    const seenTags = new Set();
+    const competencies = lesson.competencies.map((competency) => {
+      const tag = String(competency?.competencyTag || "");
+      const total = Number(competency?.totalItems);
+      const completed = Number(competency?.completedItems);
+      if (!FORMATIVE_COMPETENCY_TAGS.has(tag)
+        || seenTags.has(tag)
+        || !expectedCompetencies.has(tag)
+        || !Number.isInteger(total)
+        || !Number.isInteger(completed)
+        || total < 0
+        || completed < 0
+        || completed > total) {
+        throw new Error("formative mastery competency invalid");
+      }
+      if (total !== expectedCompetencies.get(tag)) {
+        throw new Error("formative mastery denominator invalid");
+      }
+      seenTags.add(tag);
+      const rate = masteryRate(completed, total);
+      if (competency?.masteryRate !== rate
+        || competency?.status !== (total > 0 ? "available" : "unavailable")) {
+        throw new Error("formative mastery rate invalid");
+      }
+      totalItems += total;
+      completedItems += completed;
+      if (total > 0) competencyUnitCount += 1;
+      return {
+        competencyTag: tag,
+        status: total > 0 ? "available" : "unavailable",
+        completedItems: completed,
+        totalItems: total,
+        masteryRate: rate,
+      };
+    });
+    if (seenTags.size !== expectedCompetencies.size) {
+      throw new Error("formative mastery competency set invalid");
+    }
+    return {
+      lessonId,
+      lessonTitle: cleanText(lesson?.lessonTitle || lessonId, 180),
+      competencies,
+      ...(interests.get(lessonId) || {}),
+    };
+  });
+  if (lessonIds.size !== expected.lessons.size || totalItems !== expected.itemCount) {
+    throw new Error("formative mastery active set invalid");
+  }
+  const summaryRate = masteryRate(completedItems, totalItems);
+  if (Number(projection?.summary?.lessonCount) !== lessons.length
+    || Number(projection?.summary?.competencyUnitCount) !== competencyUnitCount
+    || Number(projection?.summary?.completedItems) !== completedItems
+    || Number(projection?.summary?.totalItems) !== totalItems
+    || projection?.summary?.masteryRate !== summaryRate) {
+    throw new Error("formative mastery summary invalid");
+  }
+  return {
+    schemaVersion: "bdfz-yw-formative-mastery-v1",
+    status: "available",
+    unit: "lesson_competency",
+    manifestVersion: expected.manifestVersion,
+    manifestDigest: expected.manifestDigest,
+    nonScoring: true,
+    affectsGrowthScore: false,
+    affectsAPlus: false,
+    summary: {
+      lessonCount: lessons.length,
+      competencyUnitCount,
+      completedItems,
+      totalItems,
+      masteryRate: summaryRate,
+    },
+    lessons,
+  };
+}
+
+async function handleReadingFormativeMastery(request, env, student) {
+  if (typeof env.USER_CENTER_EVIDENCE?.getFormativeMastery !== "function") {
+    return readingError("formative mastery unavailable", 503);
+  }
+  let result;
+  let currentManifest;
+  try {
+    const manifestResponse = await env.ASSETS.fetch(new Request(
+      new URL("/data/lesson-competency-manifest.json", request.url),
+    ));
+    if (!manifestResponse.ok) throw new Error("formative manifest unavailable");
+    [result, currentManifest] = await Promise.all([
+      env.USER_CENTER_EVIDENCE.getFormativeMastery(userCenterSessionCookieHeader(request)),
+      manifestResponse.json(),
+    ]);
+  } catch (error) {
+    return readingError("formative mastery unavailable", 503);
+  }
+  const validRpcFlags = result?.schemaVersion === "bdfz-yw-formative-mastery-rpc-v1"
+    && result?.nonScoring === true
+    && result?.affectsGrowthScore === false
+    && result?.affectsAPlus === false;
+  if (validRpcFlags
+    && result?.ok === false
+    && result?.status === "unauthorized"
+    && result?.httpStatus === 401
+    && result?.projection === null) {
+    return json({ ok: false, error: "not authenticated", authRequired: true }, { status: 401 });
+  }
+  if (validRpcFlags
+    && result?.ok === false
+    && result?.status === "unavailable"
+    && result?.httpStatus === 503
+    && result?.projection === null) {
+    return readingError("formative mastery unavailable", 503);
+  }
+  if (result?.ok !== true
+    || !validRpcFlags
+    || result?.status !== "available"
+    || result?.httpStatus !== 200
+    || !result?.projection) {
+    return readingError("formative mastery unavailable", 503);
+  }
+  try {
+    const ratings = await env.READING_DB.prepare(
+      `SELECT i.lesson_id, i.raw_payload_json, i.occurred_at
+         FROM learning_interactions i
+        WHERE i.student_id = ? AND i.interaction_key = 'evaluation'
+          AND i.id = (
+            SELECT MAX(latest.id) FROM learning_interactions latest
+             WHERE latest.student_id = i.student_id
+               AND latest.lesson_id = i.lesson_id
+               AND latest.interaction_key = 'evaluation'
+          )
+        ORDER BY i.lesson_id`
+    ).bind(student.id).all();
+    return json(publicFormativeMastery(result.projection, ratings.results || [], currentManifest), {
+      headers: { "cache-control": "no-store" },
+    });
+  } catch {
+    return readingError("formative mastery contract mismatch", 502);
+  }
+}
+
+async function handleReadingHealth(env) {
+  const db = env.READING_DB;
+  const [tables, indexes] = await Promise.all([
+    db.prepare(
+      `SELECT COUNT(*) AS n FROM sqlite_master WHERE type = 'table'
+        AND name IN (
+          'classical_first_read_sessions',
+          'classical_first_read_marks',
+          'learning_submission_slots',
+          'student_identity_links'
+        )`
+    ).first(),
+    db.prepare(
+      `SELECT COUNT(*) AS n FROM sqlite_master WHERE type = 'index'
+        AND name IN (
+          'idx_classical_first_read_marks_mutation',
+          'idx_classical_first_read_marks_state',
+          'idx_evidence_outbox_pending_id',
+          'idx_learning_interactions_attempt_unique',
+          'idx_vocab_attempts_mutation_unique',
+          'idx_vocab_attempts_attempt_unique',
+          'idx_learning_submission_slots_window',
+          'idx_student_identity_links_user'
+        )`
+    ).first(),
+  ]);
+  if (Number(tables?.n) !== 4 || Number(indexes?.n) !== 8) {
+    return readingError("reading schema unavailable", 503);
+  }
+  const result = {
+    ok: true,
+    schemaVersion: "reading-schema-v4",
     rulesVersion: "constellation-rules-v1",
     evidenceContractVersion: "bdfz-learning-evidence-v1",
-  });
+  };
+  if (env.READING_TEST_SLUG) {
+    const [students, submissions, nodes, interactions, pending] = await Promise.all([
+      db.prepare("SELECT COUNT(*) AS n FROM students").first(),
+      db.prepare("SELECT COUNT(*) AS n FROM submissions").first(),
+      db.prepare("SELECT COUNT(*) AS n FROM star_nodes").first(),
+      db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").first(),
+      db.prepare("SELECT COUNT(*) AS n FROM evidence_outbox WHERE delivery_status = 'pending'").first(),
+    ]);
+    Object.assign(result, {
+      students: Number(students?.n || 0),
+      submissions: Number(submissions?.n || 0),
+      nodes: Number(nodes?.n || 0),
+      learningInteractions: Number(interactions?.n || 0),
+      evidenceOutboxPending: Number(pending?.n || 0),
+    });
+  }
+  return json(result);
 }
 
 async function handleReading(request, env, url) {
@@ -1738,8 +2304,17 @@ async function handleReading(request, env, url) {
     if (!student) return json({ ok: false, error: "not authenticated", authRequired: true }, { status: 401 });
     if (path === "/api/reading/submission" && request.method === "POST") return await handleReadingSubmission(request, env, student);
     if (path === "/api/reading/constellation" && request.method === "GET") return await handleReadingConstellation(request, env, student);
+    if (path === "/api/reading/formative-mastery" && request.method === "GET") return await handleReadingFormativeMastery(request, env, student);
     if (path === "/api/reading/history" && request.method === "GET") return await handleReadingHistory(request, env, student);
     if (path === "/api/reading/vocab-attempt" && request.method === "POST") return await handleReadingVocabAttempt(request, env, student);
+    if (path === "/api/reading/study-guide-attempt" && request.method === "POST") return await handleReadingStudyGuideAttempt(request, env, student);
+    if (path === "/api/reading/first-read/mark" && request.method === "POST") return await handleClassicalFirstReadMark(request, env, student);
+    if (path === "/api/reading/first-read/mark/delete" && request.method === "POST") return await handleClassicalFirstReadMarkDelete(request, env, student);
+    if (path === "/api/reading/first-read/submit" && request.method === "POST") return await handleClassicalFirstReadSubmit(request, env, student);
+    if (path === "/api/reading/first-read/resolve" && request.method === "POST") return await handleClassicalFirstReadResolve(request, env, student);
+    if (path === "/api/reading/first-read/reconcile" && request.method === "POST") return await handleClassicalFirstReadReconcile(request, env, student);
+    const firstReadMatch = path.match(/^\/api\/reading\/first-read\/state\/([\w-]+)$/);
+    if (firstReadMatch && request.method === "GET") return await handleClassicalFirstReadState(request, env, student, firstReadMatch[1]);
     const lessonMatch = path.match(/^\/api\/reading\/lesson\/([\w-]+)$/);
     if (lessonMatch && request.method === "GET") return await handleReadingLesson(request, env, student, lessonMatch[1]);
     const vocabMatch = path.match(/^\/api\/reading\/vocab-state\/([\w-]+)$/);

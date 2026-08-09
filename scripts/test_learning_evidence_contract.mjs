@@ -10,16 +10,12 @@ import {
   learningEvidenceContract,
   recordLearningInteraction,
 } from "../site/learning-evidence-source.js";
-import {
-  LEARNING_EVIDENCE_SOURCES,
-  LearningEvidenceValidationError,
-  validateLearningEvidenceEnvelope,
-} from "../../bdfz-user-center/src/learning-evidence-sources.js";
 
 const ROOT = resolve(import.meta.dirname, "..");
-const QUEUE = "bdfz-learning-evidence-yw-v1";
 const registry = JSON.parse(readFileSync(resolve(ROOT, "site/data/interaction-definitions.json"), "utf8"));
 const manifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/learning-manifest.json"), "utf8"));
+const formativeManifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/lesson-competency-manifest.json"), "utf8"));
+const vocabFirstRead = JSON.parse(readFileSync(resolve(ROOT, "site/data/classical-first-read/lesson-1474.json"), "utf8"));
 const workerSource = readFileSync(resolve(ROOT, "site/_worker.js"), "utf8");
 const lesson = {
   id: "lesson-1458",
@@ -49,16 +45,25 @@ function mockStatement(sql, writes, state) {
       return this;
     },
     async first() {
+      if (sql.includes("FROM classical_first_read_sessions")) {
+        return state.firstReadSubmitted ? { submitted_at: "2026-07-01T00:00:00.000Z" } : null;
+      }
       if (sql.includes("WHERE i.student_id = ? AND i.client_mutation_id = ?")) {
         return state.existingInteraction;
       }
-      if (sql.includes("COUNT(*) AS n, MIN(occurred_at) AS oldest_at")) {
-        return {
-          n: state.recentSubmissionCount,
-          oldest_at: state.recentOldestAt,
-        };
-      }
       if (sql.includes("COALESCE(MAX(attempt_no)")) return { n: state.nextAttemptNo };
+      if (sql.includes("FROM learning_interactions") && sql.includes("resource_key = ?")) {
+        return { n: state.recentSubmissionCount };
+      }
+      if (sql.includes("FROM learning_interactions") && sql.includes("occurred_at >= ?")) {
+        return { n: state.globalSubmissionCount };
+      }
+      if (sql.includes("FROM learning_submission_slots") && sql.includes("resource_key = ?")) {
+        return { n: state.resourceSlotCount };
+      }
+      if (sql.includes("FROM learning_submission_slots")) {
+        return { n: state.globalSlotCount };
+      }
       return null;
     },
     async run() {
@@ -70,17 +75,23 @@ function mockStatement(sql, writes, state) {
 
 function sourceEnvironment({
   recentSubmissionCount = 0,
-  recentOldestAt = "2026-07-01T00:05:00.000Z",
+  globalSubmissionCount = 0,
+  resourceSlotCount = recentSubmissionCount,
+  globalSlotCount = globalSubmissionCount,
   nextAttemptNo = 1,
   existingInteraction = null,
+  firstReadSubmitted = true,
 } = {}) {
   const writes = [];
   const queued = [];
   const state = {
     recentSubmissionCount,
-    recentOldestAt,
+    globalSubmissionCount,
+    resourceSlotCount,
+    globalSlotCount,
     nextAttemptNo,
     existingInteraction,
+    firstReadSubmitted,
   };
   return {
     writes,
@@ -93,6 +104,10 @@ function sourceEnvironment({
             ? registry
             : pathname === "/data/learning-manifest.json"
               ? manifest
+              : pathname === "/data/lesson-competency-manifest.json"
+                ? formativeManifest
+                : pathname === "/data/classical-first-read/lesson-1474.json"
+                  ? vocabFirstRead
               : null;
           return value
             ? Response.json(value)
@@ -132,20 +147,32 @@ function assertSynchronizedIneligibleAttempt(result, queued, writes) {
   const evaluationWrite = writeStartingWith(writes, "INSERT INTO learning_evaluations");
   assert.equal(evaluationWrite?.values?.[2], "ineligible");
   assert.ok(writeStartingWith(writes, "INSERT INTO evidence_outbox"));
-  assert.equal(
-    validateLearningEvidenceEnvelope(queued[0].envelope, QUEUE).eligibilityStatus,
-    "ineligible",
-  );
+  assert.equal(queued[0].envelope.sourceVersion, registry.compatibilityContracts.aPlusGate.sourceVersion);
+  assert.equal(queued[0].envelope.registryVersion, registry.compatibilityContracts.aPlusGate.registryVersion);
+  assert.equal(queued[0].envelope.eligibilityStatus, "ineligible");
 }
+
+test("current formal resources pin the separately reviewed frozen A+ contract", () => {
+  const compatibility = registry.compatibilityContracts.aPlusGate;
+  assert.match(compatibility.sourceVersion, /^yw-[a-f0-9]{16}$/);
+  assert.match(compatibility.resourceKeyHash, /^sha256:[a-f0-9]{64}$/);
+  assert.ok(Number(compatibility.itemCount) > manifest.itemCount);
+  assert.equal(compatibility.reviewedProducerManifestVersion, manifest.manifestVersion);
+  assert.equal(compatibility.reviewedProducerManifestDigest, manifest.resourceKeyHash);
+  assert.equal(Number(compatibility.reviewedProducerItemCount), manifest.itemCount);
+  assert.equal(compatibility.subsetDisposition, "all_current_a_plus_resources_verified_in_frozen_manifest");
+});
 
 test("YW exposes the named-entrypoint health receipt without browser evidence writes", () => {
   assert.match(workerSource, /\/api\/learning\/health/);
-  assert.match(workerSource, /USER_CENTER_EVIDENCE\.getSourceReceipt/);
-  assert.match(workerSource, /yuwen-queue-ledger-v1/);
-  assert.match(workerSource, /receipt\?\.manifestVersion !== manifest\?\.manifestVersion/);
-  assert.match(workerSource, /receipt\?\.manifestDigest !== manifest\?\.resourceKeyHash/);
-  assert.match(workerSource, /receipt\?\.itemCount/);
-  assert.match(workerSource, /getSourceReceipt\(descriptor\)/);
+  assert.match(workerSource, /USER_CENTER_EVIDENCE\.getLearningHealthReceipt/);
+  assert.match(workerSource, /data\/learning-manifest\.json/);
+  assert.match(workerSource, /data\/interaction-definitions\.json/);
+  assert.match(workerSource, /data\/lesson-competency-manifest\.json/);
+  assert.match(workerSource, /getLearningHealthReceipt\(descriptor\)/);
+  assert.match(workerSource, /activationScope !== "transport_and_formative_health_only"/);
+  assert.match(workerSource, /runtimeScoringActivation !== false/);
+  assert.match(workerSource, /affectsAPlus !== false/);
 });
 
 test("the Worker checks the per-user resource bound before AI work and vocabulary mutation", () => {
@@ -163,14 +190,16 @@ test("the Worker checks the per-user resource bound before AI work and vocabular
     workerSource.indexOf("async function handleReadingVocabState"),
   );
   assert.ok(
-    vocabHandler.indexOf("assertLearningSubmissionAllowed") <
+    vocabHandler.indexOf("recordLearningInteraction") >= 0
+      && vocabHandler.indexOf("recordLearningInteraction") <
       vocabHandler.indexOf("INSERT INTO vocab_attempts"),
   );
+  assert.match(vocabHandler, /sourceMutation:\s*async/);
   assert.match(workerSource, /status:\s*429/);
   assert.match(workerSource, /"retry-after"/);
 });
 
-test("YW evaluation self-report is enqueued as non-scoring and accepted by the current consumer contract", async () => {
+test("YW evaluation self-report remains a v2 non-scoring event", async () => {
   const { env, queued, writes } = sourceEnvironment();
   const result = await recordLearningInteraction({
     request: new Request("https://yw.bdfz.net/api/learning/interactions"),
@@ -194,15 +223,93 @@ test("YW evaluation self-report is enqueued as non-scoring and accepted by the c
   assert.equal(envelope.maxValue, null);
   assert.equal(envelope.normalizedValue, null);
 
-  const accepted = validateLearningEvidenceEnvelope(envelope, QUEUE);
-  assert.equal(accepted.interactionKey, "evaluation");
-  assert.equal(accepted.scoringRole, "none");
-  assert.equal(accepted.eligibilityStatus, "non_scoring");
-  assert.equal(LEARNING_EVIDENCE_SOURCES[QUEUE].allowedInteractions.evaluation[2], "none");
+  assert.equal(envelope.registryVersion, "yw-interactions-2026-08-09-v2");
+  assert.equal(envelope.sourceVersion, formativeManifest.manifestVersion);
+  assert.equal(envelope.interactionKey, "evaluation");
 
   const enqueueReceipt = writes.find((write) => write.sql.startsWith("UPDATE evidence_outbox SET"));
   assert.match(enqueueReceipt?.sql || "", /delivery_status = 'enqueued'/);
   assert.doesNotMatch(enqueueReceipt?.sql || "", /delivery_status = 'delivered'/);
+});
+
+test("study-guide and initial-reading events bind to the current semantic formative manifest", async () => {
+  const studyItem = formativeManifest.lessons
+    .find((entry) => entry.lessonId === vocabLesson.id)
+    .competencies.flatMap((entry) => entry.items)
+    .find((entry) => entry.interactionKey === "studyGuideItemCompleted");
+  assert.ok(studyItem);
+
+  const study = sourceEnvironment();
+  await recordLearningInteraction({
+    request: new Request("https://yw.bdfz.net/api/learning/interactions"),
+    env: study.env,
+    student: { id: 7, ucUserId: 42 },
+    lesson: vocabLesson,
+    interactionKey: "studyGuideItemCompleted",
+    payload: {
+      itemKey: studyItem.itemKey,
+      competencyTag: "wrong-client-claim",
+      answerAuthority: "browser_self_claim",
+      response: "我先依原句語境作答，再對照學案參考答案完成訂正。",
+      referenceRevealedAt: "2026-07-01T00:00:00.000Z",
+    },
+    evaluation: {
+      score: 80,
+      correctness: "passed",
+      provider: "apis",
+      verdict: "passed",
+    },
+    occurredAt: "2026-07-01T00:00:00.000Z",
+  });
+  const studyEnvelope = study.queued[0].envelope;
+  const studyInteraction = writeStartingWith(study.writes, "INSERT INTO learning_interactions");
+  const storedStudyPayload = JSON.parse(studyInteraction.values[16]);
+  assert.equal(storedStudyPayload.response, "我先依原句語境作答，再對照學案參考答案完成訂正。");
+  assert.match(storedStudyPayload.responseDigest, /^sha256:[a-f0-9]{64}$/);
+  assert.equal(storedStudyPayload.responseLength, 24);
+  assert.doesNotMatch(JSON.stringify(studyEnvelope), /我先依原句語境作答/);
+  assert.equal(studyEnvelope.sourceVersion, formativeManifest.manifestVersion);
+  assert.equal(studyEnvelope.registryVersion, formativeManifest.registryVersion);
+  assert.equal(studyEnvelope.resourceKey, studyItem.resourceKey);
+  assert.deepEqual(
+    Object.fromEntries(studyEnvelope.facets.map((facet) => [facet.key, facet.value])),
+    {
+      lesson: vocabLesson.id,
+      block: vocabLesson.blockId,
+      assessment: "performance",
+      competency: studyItem.competencyTag,
+      formative_manifest: formativeManifest.manifestVersion,
+      answer_authority: studyItem.answerAuthority,
+    },
+  );
+
+  const process = sourceEnvironment();
+  await recordLearningInteraction({
+    request: new Request("https://yw.bdfz.net/api/reading/first-read/submit"),
+    env: process.env,
+    student: { id: 7, ucUserId: 42 },
+    lesson: { id: "lesson-1534", title: "屈原列傳", blockId: "selected-compulsory-2", blockTitle: "選必中" },
+    interactionKey: "initialReadingSubmitted",
+    payload: { markCount: 3, elapsedMs: 60000, textVersionId: "cfr-lesson-1534-c332d4cede431f64" },
+    occurredAt: "2026-07-01T00:00:00.000Z",
+  });
+  const processEnvelope = process.queued[0].envelope;
+  assert.equal(processEnvelope.sourceVersion, formativeManifest.manifestVersion);
+  assert.equal(processEnvelope.scoringRole, "none");
+  assert.equal(processEnvelope.eligibilityStatus, "non_scoring");
+  assert.equal(processEnvelope.facets.find((facet) => facet.key === "formative_manifest")?.value, formativeManifest.manifestVersion);
+
+  await assert.rejects(
+    recordLearningInteraction({
+      request: new Request("https://yw.bdfz.net/api/learning/interactions"),
+      env: sourceEnvironment().env,
+      student: { id: 7, ucUserId: 42 },
+      lesson: vocabLesson,
+      interactionKey: "studyGuideItemCompleted",
+      payload: { itemKey: "lesson-1534-not-in-this-lesson" },
+    }),
+    /absent from current active lesson set/,
+  );
 });
 
 test("AI performance is eligible only when the server score is at least 60 and correctness passed", async () => {
@@ -226,7 +333,7 @@ test("AI performance is eligible only when the server score is at least 60 and c
         eligibilityStatus: "eligible",
       },
       evaluation,
-      occurredAt: "2026-07-01T00:10:00.000Z",
+      occurredAt: "2026-07-01T00:15:00.000Z",
     });
     assertSynchronizedIneligibleAttempt(result, queued, writes);
   }
@@ -250,13 +357,13 @@ test("AI performance is eligible only when the server score is at least 60 and c
         provider: "apis",
         verdict: "passed",
       },
-      occurredAt: "2026-07-01T00:10:00.000Z",
+      occurredAt: "2026-07-01T00:15:00.000Z",
     });
     assert.equal(result.eligibilityStatus, "eligible");
     assert.equal(result.delivery, "enqueued");
     assert.equal(queued.length, 1);
     assert.equal(queued[0].envelope.eligibilityStatus, "eligible");
-    assert.equal(validateLearningEvidenceEnvelope(queued[0].envelope, QUEUE).eligibilityStatus, "eligible");
+    assert.equal(queued[0].envelope.eligibilityStatus, "eligible");
   }
 });
 
@@ -299,7 +406,7 @@ test("vocabulary evidence is countable only after source-owned mastery while eve
   assert.equal(mastered.delivery, "enqueued");
   assert.equal(queued.length, 1);
   assert.ok(writeStartingWith(writes, "INSERT INTO evidence_outbox"));
-  assert.equal(validateLearningEvidenceEnvelope(queued[0].envelope, QUEUE).eligibilityStatus, "eligible");
+  assert.equal(queued[0].envelope.eligibilityStatus, "eligible");
 });
 
 test("the bounded scoring submission window permits ordinary revision and idempotent retry", async () => {
@@ -332,7 +439,7 @@ test("the bounded scoring submission window permits ordinary revision and idempo
       interactionKey: "wordCreation",
       payload: { word: "站立", creation: "超出短时提交边界。" },
       evaluation: { score: 80, correctness: "passed", provider: "apis", verdict: "passed" },
-      occurredAt: "2026-07-01T00:10:00.000Z",
+      occurredAt: "2026-07-01T00:15:00.000Z",
     }),
     (error) => error instanceof LearningSubmissionRateLimitError
       && error.code === "learning_submission_rate_limited"
@@ -349,6 +456,7 @@ test("the bounded scoring submission window permits ordinary revision and idempo
       resource_key: "effect:lesson-1497:interaction:wordCreation",
       interaction_key: "wordCreation",
       eligibility_status: "ineligible",
+      raw_payload_json: JSON.stringify({ word: "站立", creation: "网络重试不应成为新提交。" }),
     },
   });
   const deduped = await recordLearningInteraction({
@@ -369,6 +477,56 @@ test("the bounded scoring submission window permits ordinary revision and idempo
   assert.equal(deduped.sourceEventId, "existing-source-event");
   assert.equal(deduped.delivery, "already_recorded_ineligible");
   assert.equal(retry.writes.length, 0);
+});
+
+test("non-scoring telemetry is bounded and rejected before any write", async () => {
+  const flooded = sourceEnvironment({ recentSubmissionCount: 60 });
+  await assert.rejects(
+    () => recordLearningInteraction({
+      request: new Request("https://yw.bdfz.net/api/learning/interactions"),
+      env: flooded.env,
+      student: { id: 7, ucUserId: 42 },
+      lesson,
+      interactionKey: "evaluation",
+      payload: { rating: 80, reason: "短時間重複評價" },
+      occurredAt: "2026-07-01T00:15:00.000Z",
+    }),
+    (error) => error instanceof LearningSubmissionRateLimitError
+      && error.retryAfterSeconds === 300,
+  );
+  assert.equal(flooded.writes.length, 0);
+  assert.equal(flooded.queued.length, 0);
+});
+
+test("the same mutation id cannot replay with a changed payload", async () => {
+  const replay = sourceEnvironment({
+    existingInteraction: {
+      source_event_id: "existing-source-event",
+      attempt_no: 1,
+      resource_key: "effect:lesson-1458:interaction:evaluation",
+      interaction_key: "evaluation",
+      eligibility_status: "non_scoring",
+      raw_payload_json: JSON.stringify({ rating: 80, reason: "原始理由" }),
+    },
+  });
+  await assert.rejects(
+    () => recordLearningInteraction({
+      request: new Request("https://yw.bdfz.net/api/learning/interactions"),
+      env: replay.env,
+      student: { id: 7, ucUserId: 42 },
+      lesson,
+      interactionKey: "evaluation",
+      payload: {
+        rating: 80,
+        reason: "篡改後理由",
+        clientMutationId: "same-client-mutation",
+      },
+      occurredAt: "2026-07-01T00:15:00.000Z",
+    }),
+    (error) => error?.code === "learning_mutation_conflict",
+  );
+  assert.equal(replay.writes.length, 0);
+  assert.equal(replay.queued.length, 0);
 });
 
 test("a client mutation id cannot be replayed onto another learning item", async () => {
@@ -406,56 +564,15 @@ test("a client mutation id cannot be replayed onto another learning item", async
   assert.equal(replay.queued.length, 0);
 });
 
-test("the stale scoring envelope is rejected instead of silently entering evaluation", () => {
-  const current = LEARNING_EVIDENCE_SOURCES[QUEUE].allowedInteractions.evaluation;
-  assert.deepEqual(current, [
-    "lesson_value_rated",
-    "self_report",
-    "none",
-    "source_form_submission",
-  ]);
-
-  const staleEnvelope = {
-    schema: "bdfz-learning-evidence-v1",
-    schemaVersion: 1,
-    sourceSystem: "yuwen-course",
-    sourceSiteKey: "yw",
-    sourceEventId: "018f1234-5678-7abc-9def-0123456789ab",
-    sourceVersion: manifest.manifestVersion,
-    registryVersion: registry.registryVersion,
-    userId: 42,
-    academicYear: "2025-2026",
-    dimensionKey: "reflection",
+test("the producer registry cannot classify lesson interest as scoring evidence", () => {
+  const current = registry.definitions.evaluation;
+  assert.deepEqual(current, {
     eventType: "lesson_value_rated",
-    interactionKey: "evaluation",
     assessmentKind: "self_report",
-    scoringRole: "a_plus_gate",
+    scoringRole: "none",
+    dimensionKey: "reflection",
     verificationMethod: "source_form_submission",
-    eligibilityStatus: "eligible",
-    resourceKey: "effect:lesson-1458:interaction:evaluation",
-    classSessionId: "",
-    lessonPhase: "",
-    attemptNo: 1,
-    rawValue: null,
-    maxValue: null,
-    normalizedValue: null,
-    occurredAt: "2026-07-01T00:00:00.000Z",
-    sourceUrl: "https://yw.bdfz.net/#lesson-1458",
-    sourcePayloadRef: "learning_interactions:018f1234-5678-7abc-9def-0123456789ab",
-    summary: {
-      lessonTitle: "中国人民站起来了",
-      itemTitle: "篇目评价",
-      itemGroup: "选择性必修上册",
-      eventType: "lesson_value_rated",
-    },
-    facets: [
-      { key: "lesson", value: "lesson-1458" },
-      { key: "assessment", value: "self_report" },
-    ],
-  };
-
-  assert.throws(
-    () => validateLearningEvidenceEnvelope(staleEnvelope, QUEUE),
-    LearningEvidenceValidationError,
-  );
+    resourceKind: "manifest_interaction",
+    allowedPayloadKeys: ["rating", "reason"],
+  });
 });

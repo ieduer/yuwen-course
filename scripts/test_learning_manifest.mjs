@@ -34,9 +34,9 @@ test("manifest contains only the three exact textbook books", () => {
   assert.equal(manifest.completionKind, "answer_submitted");
   assert.equal(manifest.thresholdPercent, 90);
   assert.equal(manifest.lessonCount, 101);
-  assert.equal(manifest.itemCount, 901);
-  assert.equal(manifest.manifestVersion, "yw-7abfb37143d876fd");
-  assert.equal(manifest.resourceKeyHash, "sha256:7abfb37143d876fdcb31966eb8f19116bb30a1e01f09abe098a009edd3c90f10");
+  assert.equal(manifest.itemCount, 869);
+  assert.equal(manifest.manifestVersion, "yw-e310d45b1d81e9ad");
+  assert.equal(manifest.resourceKeyHash, "sha256:e310d45b1d81e9adf6182bd50ea02842daf69a8981aa29ff03b2da30b0846aca");
   assert.deepEqual(manifest.vocabEligibility, {
     policyVersion: "yw-vocab-eligibility-20260730-v1",
     defaultEligibleModes: ["classical", "poetry"],
@@ -99,6 +99,9 @@ test("every key is unique and traceable to an answer-bearing effect control", ()
   assert.equal(manifest.itemCount, keys.length);
   assert.equal(keys.includes(interactionResourceKey("lesson-1458", "contextWords")), true);
   assert.equal(keys.includes(interactionResourceKey("lesson-1458", "evaluation")), true);
+  assert.equal(keys.includes(interactionResourceKey("lesson-1534", "contextWords")), false);
+  assert.equal(keys.includes(interactionResourceKey("lesson-1534", "revision")), false);
+  assert.equal(keys.includes(interactionResourceKey("lesson-1534", "structure")), true);
   assert.equal(keys.includes(vocabResourceKey("lesson-1474", "lesson-1474:v01")), true);
   assert.equal(keys.some((key) => key.includes(":interaction:read")), false);
   assert.equal(keys.some((key) => key.includes(":interaction:vocabulary")), false);

@@ -1,6 +1,119 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-07-30 (America/Los_Angeles)
+Last reviewed: 2026-08-09 (America/Los_Angeles)
+
+## 2026-08-09 self-study-loop candidate override
+
+This section is the current source and release disposition. Older sections are
+retained as historical production evidence; they do not authorize this
+candidate.
+
+### Learning flow and source authority
+
+Classical lessons use three visible stages:
+
+1. `起始 · 無注疏初讀`: an authenticated student marks at least three UTF-16
+   ranges in a no-punctuation text, records first guesses and a summary, then
+   submits an immutable first-read snapshot.
+2. `細讀 · 詞級疏通與知能清算`: textbook punctuation/inline annotations and
+   selection lookup unlock; server-owned vocabulary and study-guide assessment
+   determine eligibility. A previously wrong vocabulary answer needs the
+   source contract's subsequent correct evidence and the browser follows the
+   server verdict.
+3. `考辨 · 評價與遷移`: the 0--100 `本篇有意思` slider is non-scoring, while
+   curated comprehension items use source answers or a visibly labelled,
+   non-unique `Codex 參考答案` rubric.
+
+Modern lessons keep the existing three-word initial response and
+`字句之改`. Classical lessons do not render the old duplicate `通讀正文` or
+`字句之改` stages.
+
+The no-punctuation artifact is generated from the reviewed textbook reader,
+not copied blindly from a special study guide. The Qu Yuan special PDF omits
+three textbook passages and contains transcription differences; the Su Wu
+special PDF includes a later supplement outside the selected textbook excerpt.
+The PDFs remain authoritative for learning cards, prompts and supplementary
+material, while the textbook reader remains authoritative for the displayed
+canonical lesson text and stable offsets. The UI states this distinction.
+
+### Formative identity and scoring isolation
+
+The public aggregation unit is `lessonId + competencyTag`, with four tags:
+`first_read_process`, `vocabulary`, `syntax` and `comprehension`. The current
+active completion-key set is the denominator; valid completed keys intersect
+that set for the numerator. A semantic change to prompt/answer/rubric/tag gets a
+new completion key, while an unchanged rename or explicit reviewed alias may
+preserve completion. Retired and review-required items remain in history but
+leave both numerator and denominator. A zero denominator is `unavailable`, not
+0%.
+
+The exact candidate contracts are:
+
+```text
+Interaction registry:      yw-interactions-2026-08-09-v2
+Formal manifest:           yw-e310d45b1d81e9ad / 869
+Formal digest:             sha256:e310d45b1d81e9adf6182bd50ea02842daf69a8981aa29ff03b2da30b0846aca
+Formative manifest:        yw-formative-52b574175221646f / 1,021 / 115 lessons
+Formative digest:          sha256:52b574175221646f466a1f55c64730195a99e2756c59a6ea83717da8811832c9
+Study-guide catalog:       yw-study-guides-f4c48caf4acbabb4 / 241 / 193 active
+Study-guide digest:        sha256:f4c48caf4acbabb44e14b6d01011c91cb8b659845cf492cecd43348424aa575d
+```
+
+`studyGuideItemCompleted` is `performance + formative +
+source_mixed_assessment`; only a server-normalized eligible result at or above
+60/100 enters the formative numerator. This projection is non-scoring and must
+never activate or change A--F, A+ or a formal coverage receipt.
+
+### Resource location and restore
+
+The five original PDFs and extraction JSON are required external source
+material under:
+
+```text
+/Users/ylsuen/CF/output/pdf_study_guides_web/
+```
+
+Their exact paths, SHA-256 values, byte counts, page counts, extraction paths
+and extraction receipts are recorded in:
+
+```text
+scripts/study-guide-curation/special-guides.json
+scripts/study-guide-curation/selected-compulsory-upper.json
+scripts/study-guide-curation/selected-compulsory-middle.json
+scripts/study-guide-curation/selected-compulsory-lower.json
+```
+
+`npm run verify:study-guide-sources` must read the actual PDF/extraction bytes
+and page metadata before a release. The JSON catalog under `site/data/` is
+derived and regenerable; the PDFs are not committed. No accepted remote archive
+or restore authority is currently recorded, so these five PDFs and extraction
+files **must remain local and must not be deleted or replaced**. Until a
+path-preserving archive receipt is added, there is intentionally no claimed
+restore command.
+
+Reader media is separately bound by
+`site/data/reader-media-receipts.v1.json`: ledger `2026-08-09.1`, 165 objects,
+28,066,373 bytes, inventory
+`2c7672e88dc8e1bb0ea1e4af84e59ccaf521ded73e774e35c03abd5547f69d03`.
+
+### Release disposition
+
+This candidate is fail-closed:
+
+- current live `/api/learning/health` is 503 under the old single-manifest
+  handshake;
+- the clean User Center consumer candidate
+  `f1874e5cc2ed39a907f50c2badfb4cfd7aba55f6` is not deployed and is not
+  authorized by the installed root release guard;
+- production D1 migration 0004 is absent; no production D1 write has occurred;
+- teacher/class aggregation is deferred until a versioned, complete and
+  session-stable class-authorization source exists;
+- the native App repository and `latest-stable` pointer remain unchanged.
+
+Do not deploy the new YW producer, apply migration 0004, claim User Center
+sync, or start App import until the User Center consumer has independent review
+and release authority. A Web-only preview must carry
+`releaseKind=preview-web-only` and exclude `app-content/`.
 
 ## 2026-07-30 Web/native shared-content release transaction
 
