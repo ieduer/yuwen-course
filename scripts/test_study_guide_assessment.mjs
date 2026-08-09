@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  authoritativeStudyGuideAssessment,
   deterministicStudyGuideAssessment,
   normalizeOpenStudyGuideAssessment,
   studyGuideAssessmentPrompt,
@@ -67,4 +68,37 @@ test("open assessment fails closed on malformed or incomplete model output", () 
     gap: "",
     nextQuestion: "如何回應另一種立場？",
   }), /回饋不完整/);
+});
+
+test("idempotent replay always presents the immutable stored assessment", () => {
+  const presented = authoritativeStudyGuideAssessment(
+    {
+      score: 92,
+      correctness: "passed",
+      verdict: "fresh contradictory result",
+      strength: "fresh strength",
+      gap: "fresh gap",
+      nextQuestion: "fresh question",
+    },
+    {
+      deduped: true,
+      eligibilityStatus: "ineligible",
+      evaluation: {
+        score: 35,
+        correctness: "needs_revision",
+        verdict: "stored result",
+        strength: "stored strength",
+        gap: "stored gap",
+        nextQuestion: "stored question",
+      },
+    },
+  );
+  assert.equal(presented.passed, false);
+  assert.deepEqual(presented.assessment, {
+    score: 35,
+    verdict: "stored result",
+    strength: "stored strength",
+    gap: "stored gap",
+    nextQuestion: "stored question",
+  });
 });

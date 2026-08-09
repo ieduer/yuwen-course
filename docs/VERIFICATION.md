@@ -107,7 +107,7 @@ classical first-read:       30 lessons / 102 paragraphs
 study-guide catalog:        241 total / 193 active / 48 inactive
 learning manifest:          9 / 9
 study-guide builder:        3 / 3
-study-guide assessment:     5 / 5
+study-guide assessment:     6 / 6
 study-guide frontend:       3 / 3
 evidence contract:          12 / 12
 formative projection:       4 / 4
@@ -115,11 +115,12 @@ formative star UI:          2 / 2
 reading identity:           4 / 4
 local progress truth:       6 / 6
 shared state:               13 / 13 + real-browser contract
-Reading API + local D1:     64 / 64
+Reading API + local D1:     65 / 65
 native candidate:           21 / 21
 release-site staging:       4 / 4
 preview files:              614
-preview aggregate SHA-256:  5377ff2b5a652fac2da3ff245c353a1b46de6a8974b7d642594e3ee377166c7d
+preview aggregate SHA-256:  9da4db40dacb2b6a5026b14b4db416c98308d0b461600316f9f2b0941a859dcf
+preview marker SHA-256:     de0f4ce971751ecf7d5a5390e1242005ea848abd6cf641b9feb9a172e883f69c
 ```
 
 The staged Gitleaks pass reported only 213 `generic-api-key` pattern matches;

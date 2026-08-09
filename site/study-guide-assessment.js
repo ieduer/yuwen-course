@@ -102,6 +102,28 @@ export function normalizeOpenStudyGuideAssessment(value) {
   };
 }
 
+export function authoritativeStudyGuideAssessment(attemptedAssessment, recorded) {
+  const authoritative = recorded?.deduped === true && recorded?.evaluation
+    ? recorded.evaluation
+    : attemptedAssessment;
+  const score = Number(authoritative?.score);
+  const correctness = clean(authoritative?.correctness, 32).toLowerCase();
+  const passed = recorded?.eligibilityStatus === "eligible"
+    && Number.isFinite(score)
+    && score >= 60
+    && (correctness === "passed" || correctness === "correct");
+  return {
+    passed,
+    assessment: {
+      score: Number.isFinite(score) ? score : null,
+      verdict: clean(authoritative?.verdict, 240),
+      strength: clean(authoritative?.strength, 500),
+      gap: clean(authoritative?.gap, 500),
+      nextQuestion: clean(authoritative?.nextQuestion, 500),
+    },
+  };
+}
+
 export function studyGuideAssessmentPrompt(item, response) {
   return [
     "你是高中語文學案形成性評閱員。只評學生這一次作答，不代寫，不改變其價值立場。",

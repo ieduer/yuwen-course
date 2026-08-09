@@ -195,6 +195,19 @@ test("the Worker checks the per-user resource bound before AI work and vocabular
       vocabHandler.indexOf("INSERT INTO vocab_attempts"),
   );
   assert.match(vocabHandler, /sourceMutation:\s*async/);
+
+  const studyGuideHandler = workerSource.slice(
+    workerSource.indexOf("async function handleReadingStudyGuideAttempt"),
+    workerSource.indexOf("async function handleClassicalFirstReadState"),
+  );
+  assert.ok(
+    studyGuideHandler.indexOf("assertLearningSubmissionAllowed") >= 0
+      && studyGuideHandler.indexOf("assertLearningSubmissionAllowed") <
+        studyGuideHandler.indexOf("deterministicStudyGuideAssessment"),
+  );
+  assert.ok(
+    studyGuideHandler.indexOf("authoritativeStudyGuideAssessment(assessment, recorded)") >= 0,
+  );
   assert.match(workerSource, /status:\s*429/);
   assert.match(workerSource, /"retry-after"/);
 });

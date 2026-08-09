@@ -57,7 +57,7 @@ kept in `docs/VERIFICATION.md`; a passing local test is not production proof.
 The latest complete local `prepare:preview-artifact` run passed under the
 locked Node 22.21.1 toolchain. It produced a `preview-web-only` tree of 614
 files with projected aggregate
-`5377ff2b5a652fac2da3ff245c353a1b46de6a8974b7d642594e3ee377166c7d`;
+`9da4db40dacb2b6a5026b14b4db416c98308d0b461600316f9f2b0941a859dcf`;
 all 947 native-content source paths are excluded. The derived native semantic
 candidate is `yw-9fad79d2acd5ab37986712da` /
 `sha256:9fad79d2acd5ab37986712dab20277c2a8685066b4a637bc5adce709936d131a`
@@ -92,6 +92,73 @@ and is not release-authorized by the current root guard.
 6. The blocked native semantic candidate still needs an independent clean
    three-build App-content audit after a production Web carrier exists. A stale
    audit receipt is a deliberate release blocker, not an approval shortcut.
+7. Cloudflare readback shows that the Pages preview environment currently binds
+   the same production `READING_DB`, `USER_CENTER_EVIDENCE` service and
+   `LEARNING_EVIDENCE_QUEUE` as production. There is no preview-host write kill
+   switch. A public `pages.dev` preview is therefore blocked until bindings are
+   isolated or every student-data write route fails closed outside the custom
+   domain.
+
+## CAPABILITY_FIT — self-study loop candidate (`blocked`)
+
+1. **Problem.** Replace teacher-facing lesson-plan display with a measurable
+   student-owned first-read, correction, assessment and transfer loop. Success
+   requires source-bound content, immutable process evidence, a current dynamic
+   denominator, authenticated read/write replay and live User Center/App
+   compatibility—not merely a rendered page.
+2. **Source authority.** Canonical source is this repository on
+   `codex/yw-self-study-loop-v2`, targeting Cloudflare Pages project
+   `yuwen-course`; production branch remains `main`. The paired User Center work
+   exists only in the isolated clean candidate documented above. App, root
+   release guard, routes and User Center migrations 0038/0039 are excluded.
+3. **Runtime fit.** Retain the established Pages Functions + Assets runtime.
+   Existing approved D1, Service Binding and Queue capabilities match durable
+   student state, same-account identity RPC and asynchronous evidence delivery.
+   No new Cloudflare capability/resource is adopted, and the stable Pages site
+   is not migrated to Workers + Static Assets without measured benefit.
+4. **Data fit.** D1 is the authoritative YW process ledger; mutation IDs,
+   transactions, rate slots and outbox rows provide idempotency and retry.
+   Student free-text responses are bounded and retained only in YW D1; the
+   queue/User Center envelope is privacy-minimized. Migration 0004 is additive,
+   requires a fresh remote export/bookmark and schema readback, and is never
+   rolled back with destructive table drops.
+5. **Official maturity.** Pages, D1, Service Bindings and Queues are existing
+   stable capabilities classified `approved` by the workspace policy refreshed
+   2026-08-08. This candidate adds no beta/preview dependency, pricing plan or
+   new billable resource; current account readback remains `usage_model=standard`.
+6. **Toolchain.** Release checks use Node `22.21.1`, lockfile-resolved Wrangler
+   `4.100.0`, fixed compatibility date `2026-05-12`, generated-schema checks and
+   byte-current manifests. `always_use_latest_compatibility_date=false` in live
+   preview and production configuration.
+7. **Exposure.** The existing custom domain is `yw.bdfz.net`; Pages preview URLs
+   are not an isolated canary because they inherit production student-data
+   bindings. No preview or production deployment is authorized in this state.
+   `robots`/Content-Signal policy, custom routes and public registration are
+   unchanged by this candidate.
+8. **Hub fan-out.** Contracts touch User Center identity/evidence, the shared
+   APIS gateway, the evidence Queue and the downstream native App. Nav, image
+   and Pulse surfaces are not mutated. User Center must deploy consumer-first;
+   App import/signing/device work remains sequenced after the exact Web receipt.
+9. **Privacy/security.** Data class is `student_owned`. Only the verified stable
+   User Center user ID owns records; only the named session cookie crosses the
+   RPC boundary. Raw answers stay in YW D1 and are excluded from the outbox;
+   logs/receipts contain no cookie or student payload. Teacher aggregation is
+   blocked until fresh, complete class authorization exists.
+10. **Resource guard.** Responses and raw payloads are bounded; scoring and
+    non-scoring submissions have per-resource/global windows; mutation replay
+    is immutable; malformed AI output fails closed; queue failure remains in a
+    retryable outbox. No new cost surface is introduced. Existing platform/APIS
+    limits remain the outer ceiling, and a 503 health receipt is a stop signal.
+11. **Verification.** Locked-toolchain local tests, workerd preview sanitization,
+    local D1 concurrency/replay, full projection, privacy scan and native-tree
+    exclusion pass. Release stops on shared preview bindings, live learning
+    health 503, absent migration 0004, unauthorized User Center deployment or
+    any authenticated mutation/readback mismatch.
+12. **Exit.** Source rollback is
+    `backup/yw-self-study-loop-pre-20260809` at `037484f8`; Pages rollback
+    anchors are listed below. Preserve D1 during code rollback; use the fresh
+    pre-migration export for disaster recovery and backward-compatible
+    forward-fix for additive schema. App stable content remains untouched.
 
 ## Production and rollback authority
 

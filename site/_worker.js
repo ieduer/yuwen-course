@@ -14,6 +14,7 @@ import {
 import { previewUrlHasPublicHostname } from "./preview-network-policy.js";
 import { reconcileReadingStudent } from "./reading-identity-source.js";
 import {
+  authoritativeStudyGuideAssessment,
   deterministicStudyGuideAssessment,
   normalizeOpenStudyGuideAssessment,
   studyGuideAssessmentPrompt,
@@ -1830,6 +1831,39 @@ async function handleReadingStudyGuideAttempt(request, env, student) {
   const item = itemByKey.get(`${lessonId}\n${itemKey}`);
   if (!item || lesson?.id !== lessonId) return readingError("active study-guide item absent");
 
+  const attemptPayload = {
+    itemKey,
+    response: responseText,
+    referenceRevealedAt,
+    clientMutationId,
+    lessonPhase: "knowledge_accounting",
+  };
+  const submissionGuard = await assertLearningSubmissionAllowed({
+    request,
+    env,
+    student,
+    lesson,
+    interactionKey: "studyGuideItemCompleted",
+    payload: attemptPayload,
+  });
+  if (submissionGuard.deduped) {
+    const authoritative = authoritativeStudyGuideAssessment(null, submissionGuard);
+    return json({
+      ok: true,
+      deduped: true,
+      passed: authoritative.passed,
+      assessment: authoritative.assessment,
+      evidence: {
+        sourceEventId: submissionGuard.sourceEventId,
+        attemptNo: submissionGuard.attemptNo,
+        eligibilityStatus: submissionGuard.eligibilityStatus,
+        delivery: submissionGuard.eligibilityStatus === "ineligible"
+          ? "already_recorded_ineligible"
+          : "already_recorded",
+      },
+    });
+  }
+
   let assessment = deterministicStudyGuideAssessment(item, responseText);
   if (!assessment) {
     const raw = await callApisPrompt(env, studyGuideAssessmentPrompt(item, responseText), "feedback", "medium");
@@ -1843,25 +1877,15 @@ async function handleReadingStudyGuideAttempt(request, env, student) {
     student,
     lesson,
     interactionKey: "studyGuideItemCompleted",
-    payload: {
-      itemKey,
-      response: responseText,
-      referenceRevealedAt,
-      clientMutationId,
-      lessonPhase: "knowledge_accounting",
-    },
+    payload: attemptPayload,
     evaluation: assessment,
   });
+  const authoritative = authoritativeStudyGuideAssessment(assessment, recorded);
   return json({
     ok: true,
-    passed: assessment.passed === true,
-    assessment: {
-      score: assessment.score,
-      verdict: assessment.verdict,
-      strength: assessment.strength,
-      gap: assessment.gap,
-      nextQuestion: assessment.nextQuestion,
-    },
+    deduped: recorded.deduped === true,
+    passed: authoritative.passed,
+    assessment: authoritative.assessment,
     evidence: {
       sourceEventId: recorded.sourceEventId,
       attemptNo: recorded.attemptNo,

@@ -326,12 +326,13 @@ try {
       && wrongStudyEvidence.data.evidence?.eligibilityStatus === "ineligible",
     JSON.stringify(wrongStudyEvidence),
   );
+  const studyRevealAt = new Date().toISOString();
   const studyEvidence = await api("/api/reading/study-guide-attempt", {
     lessonId: "lesson-1484",
     itemKey: studyGuideItem.itemKey,
     clientMutationId: `study-correct-${SLUG}`,
     response: "A",
-    referenceRevealedAt: new Date().toISOString(),
+    referenceRevealedAt: studyRevealAt,
   });
   assert(
     "source-graded study-guide answer enters non-grade mastery evidence",
@@ -339,6 +340,22 @@ try {
       && studyEvidence.data.passed === true
       && studyEvidence.data.evidence?.eligibilityStatus === "eligible",
     JSON.stringify(studyEvidence),
+  );
+  const studyEvidenceReplay = await api("/api/reading/study-guide-attempt", {
+    lessonId: "lesson-1484",
+    itemKey: studyGuideItem.itemKey,
+    clientMutationId: `study-correct-${SLUG}`,
+    response: "A",
+    referenceRevealedAt: studyRevealAt,
+  });
+  assert(
+    "study-guide replay returns the immutable stored assessment",
+    studyEvidenceReplay.data.ok === true
+      && studyEvidenceReplay.data.deduped === true
+      && studyEvidenceReplay.data.passed === studyEvidence.data.passed
+      && studyEvidenceReplay.data.assessment?.score === studyEvidence.data.assessment?.score
+      && studyEvidenceReplay.data.evidence?.sourceEventId === studyEvidence.data.evidence?.sourceEventId,
+    JSON.stringify(studyEvidenceReplay),
   );
 
   // 9. 字詞題掌握規則
