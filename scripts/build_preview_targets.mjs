@@ -16,7 +16,7 @@ const FORUM_ORIGIN = "https://forum.rdfzer.com";
 const WECHAT_SOURCE_HOST = "mp.weixin.qq.com";
 const WECHAT_ARCHIVE_HOST = "wx.bdfz.net";
 
-export const BDFZ_EMBED_ROOTS = Object.freeze([
+export const DIRECT_REMOTE_APP_ROOTS = Object.freeze([
   "https://coread.bdfz.net/",
   "https://flx.bdfz.net/",
   "https://gk.bdfz.net/",
@@ -32,14 +32,15 @@ export const BDFZ_EMBED_ROOTS = Object.freeze([
   "https://sy.bdfz.net/",
   "https://voice.bdfz.net/",
   "https://wygame.bdfz.net/",
-  "https://xue.bdfz.net/",
   "https://yyjc.bdfz.net/",
   "https://zw.bdfz.net/",
 ]);
 
-export const EXACT_PREVIEW_REDIRECT_TARGETS = Object.freeze([
-  "https://xue.bdfz.net/template/",
-]);
+// Backward-compatible export for the existing verification suite. The registry
+// field below is the browser/runtime authority for direct remote app embeds.
+export const BDFZ_EMBED_ROOTS = DIRECT_REMOTE_APP_ROOTS;
+
+export const EXACT_PREVIEW_REDIRECT_TARGETS = Object.freeze([]);
 
 function normalize(raw) {
   const url = new URL(String(raw || ""), FORUM_ORIGIN);
@@ -107,7 +108,7 @@ function collectResourceLinks(value, output) {
 }
 
 export function buildPreviewTargets() {
-  const targets = new Set(BDFZ_EMBED_ROOTS);
+  const targets = new Set(DIRECT_REMOTE_APP_ROOTS);
   for (const entry of WECHAT_ARCHIVES.values()) targets.add(entry.archiveUrl);
   for (const name of readdirSync(DOCUMENTS_DIR).filter((entry) => entry.endsWith(".json")).sort()) {
     const document = JSON.parse(readFileSync(resolve(DOCUMENTS_DIR, name), "utf8"));
@@ -123,12 +124,13 @@ export function buildPreviewTargets() {
     ? JSON.parse(readFileSync(REDIRECTS_PATH, "utf8"))?.redirects || {}
     : {};
   const redirectTargets = [...new Set([
-    ...Object.values(redirects).map(normalize).filter(Boolean),
+    ...Object.values(redirects).map(normalize).filter((entry) => entry && !isRemovedWebResource(entry)),
     ...EXACT_PREVIEW_REDIRECT_TARGETS,
   ])].sort();
   const sortedTargets = [...targets].sort();
   const allowedHosts = [...new Set([...sortedTargets, ...redirectTargets].map((entry) => new URL(entry).hostname))].sort();
-  const digestInput = JSON.stringify({ targets: sortedTargets, redirectTargets, allowedHosts });
+  const directRemoteAppRoots = [...DIRECT_REMOTE_APP_ROOTS].sort();
+  const digestInput = JSON.stringify({ targets: sortedTargets, redirectTargets, allowedHosts, directRemoteAppRoots });
   const digest = createHash("sha256").update(digestInput).digest("hex");
   return {
     schemaVersion: "yw-preview-targets-v1",
@@ -136,6 +138,8 @@ export function buildPreviewTargets() {
     targetCount: sortedTargets.length,
     redirectTargetCount: redirectTargets.length,
     allowedHostCount: allowedHosts.length,
+    directRemoteAppRootCount: directRemoteAppRoots.length,
+    directRemoteAppRoots,
     targets: sortedTargets,
     redirectTargets,
     allowedHosts,

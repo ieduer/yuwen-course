@@ -45,8 +45,9 @@ test("resource identity removes only tracking and hash while preserving semantic
 const projectionSource = section("const REMOVED_WEB_RESOURCE_KEYS", "function resourcePreviewPlan");
 const resourcesSource = section("function isNonContentResource", "function renderSupplementaryMaterials");
 const runtimePolicy = new Function(
+  "location",
   `${projectionSource}; return { keys: REMOVED_WEB_RESOURCE_KEYS, isRemoved: isRemovedWebResource };`,
-)();
+)({ href: "https://yw.bdfz.net/#lesson", origin: "https://yw.bdfz.net" });
 const wechatArchiveBySource = new Map(
   wechatArchiveMap.entries.map((entry) => [resourceIdentity(entry.sourceUrl), entry]),
 );
@@ -65,7 +66,7 @@ const resourcesFor = new Function(
   { href: "https://yw.bdfz.net/#lesson", origin: "https://yw.bdfz.net" },
 );
 
-test("resource list maps WeChat archives, removes bdfz Yuque, and preserves source provenance", () => {
+test("resource list maps WeChat archives, removes bdfz Yuque and xue, and preserves provenance", () => {
   const mapped = wechatArchiveMap.entries[0];
   const trackedDuplicate = new URL(mapped.sourceUrl);
   trackedDuplicate.hash = "other";
@@ -82,9 +83,10 @@ test("resource list maps WeChat archives, removes bdfz Yuque, and preserves sour
     ],
   });
 
-  assert.equal(resources.length, 3);
+  assert.equal(resources.length, 2);
   assert.equal(resources.filter((item) => new URL(item.href).hostname === "mp.weixin.qq.com").length, 0);
   assert.equal(resources.filter((item) => new URL(item.href).hostname === "bdfz.yuque.com").length, 0);
+  assert.equal(resources.filter((item) => new URL(item.href).hostname === "xue.bdfz.net").length, 0);
   assert.equal(resources.some((item) => runtimePolicy.isRemoved(item.href)), false);
   assert.ok(resources.some((item) => item.href === "https://pkuschool.yuque.com/example/lesson"));
   const archive = resources.find((item) => item.href === mapped.archiveUrl);
@@ -101,6 +103,9 @@ test("student runtime uses the exact reviewed deletion set and preserves neighbo
     runtimePolicy.isRemoved("https://www.bilibili.com/video/BV1Zg4y1H7fK/?vd_source=legacy"),
     true,
   );
+  assert.equal(runtimePolicy.isRemoved("https://xue.bdfz.net/"), true);
+  assert.equal(runtimePolicy.isRemoved("https://xue.bdfz.net/arbitrary/path?lesson=1"), true);
+  assert.equal(runtimePolicy.isRemoved("https://xue.bdfz.net.example.com/"), false);
   for (const href of [
     "https://baike.baidu.com/item/%E6%97%A0%E9%A2%98",
     "https://forum.rdfzer.com/c/general/5",
@@ -119,22 +124,43 @@ test("reader body links use the same fail-closed student projection", () => {
   assert.doesNotMatch(readerBlocksSource, /href="\$\{esc\(block\.href\)\}"/);
 });
 
-const previewPlanSource = section("function resourcePreviewPlan", "function previewFallback");
+const previewPlanSource = section("function directRemoteAppRootFor", "function previewFallback");
+const reviewedGoogleSite = "https://sites.google.com/view/pkuschool/cover3/xbs1/xbs5";
 const resourcePreviewPlan = new Function(
   "location",
   "resourcePreviewUrl",
   "previewScreenshotFor",
+  "state",
   `${previewPlanSource}; return resourcePreviewPlan;`,
 )(
   { href: "https://yw.bdfz.net/#lesson" },
   (href) => href.startsWith("https://yw.bdfz.net/") ? href : `/api/preview?url=${encodeURIComponent(href)}`,
-  () => null,
+  (href) => href === reviewedGoogleSite
+    ? { screenshotUrl: "/assets/preview-screenshots/reviewed-google.webp" }
+    : null,
+  { directRemoteAppRoots: new Set(["https://coread.bdfz.net/"]) },
 );
 
-test("preview plan expands safe resources and gives explicit external fallbacks", () => {
+test("preview plan uses reviewed remote roots, Google screenshots, and explicit external fallbacks", () => {
   assert.equal(resourcePreviewPlan({ href: "https://yw.bdfz.net/slides/lesson.pdf", kind: "document" }).mode, "document");
-  assert.equal(resourcePreviewPlan({ href: "https://xue.bdfz.net/" }).mode, "iframe");
   assert.equal(resourcePreviewPlan({ href: "https://img.bdfz.net/page.webp" }).mode, "image");
+
+  const direct = resourcePreviewPlan({ href: "https://coread.bdfz.net/" });
+  assert.equal(direct.mode, "remote-app");
+  assert.equal(direct.src, "https://coread.bdfz.net/");
+  assert.equal(direct.externalHref, "https://coread.bdfz.net/");
+  for (const nonRoot of [
+    "https://coread.bdfz.net/private-path",
+    "https://coread.bdfz.net/?query=1",
+    "https://coread.bdfz.net/#fragment",
+    "https://unregistered.bdfz.net/",
+  ]) assert.notEqual(resourcePreviewPlan({ href: nonRoot }).mode, "remote-app", nonRoot);
+
+  const google = resourcePreviewPlan({ href: reviewedGoogleSite });
+  assert.equal(google.mode, "image");
+  assert.equal(google.src, "/assets/preview-screenshots/reviewed-google.webp");
+  assert.equal(google.screenshot, true);
+  assert.match(google.reason, /Google Sites/);
 
   const http = resourcePreviewPlan({ href: "http://example.test/material" });
   assert.equal(http.mode, "external-only");
@@ -159,10 +185,10 @@ test("same-origin lesson pages and documents preview directly", () => {
 
   assert.equal(resourcePreviewUrl("books.html?q=史記"), "https://yw.bdfz.net/books.html?q=%E5%8F%B2%E8%A8%98");
   assert.equal(resourcePreviewUrl("media/lesson.pdf"), "https://yw.bdfz.net/media/lesson.pdf");
-  assert.match(resourcePreviewUrl("https://xue.bdfz.net/"), /^\/api\/preview\?url=/);
+  assert.match(resourcePreviewUrl("https://pkuschool.yuque.com/example/lesson"), /^\/api\/preview\?url=/);
 });
 
-test("capability migration is expanded immediately, deduplicated, and points to exact cross-book root", () => {
+test("reviewed embeds expand immediately, use real remote sites, and never restore xue", () => {
   const matrixSource = section("function matrixItemsFor", "function renderMatrix");
   const activationSource = section("function activateExpandedPreviews", "function renderMastery");
   const mediaSource = section("function renderLessonMedia", "function readerMediaMap");
@@ -170,7 +196,7 @@ test("capability migration is expanded immediately, deduplicated, and points to 
   const dialogSource = section("function openResourcePlan", "function restoreInlineNoteText");
   const eventSource = section("function bindEvents", "async function init");
 
-  assert.match(matrixSource, /href: "https:\/\/xue\.bdfz\.net\/"/);
+  assert.doesNotMatch(matrixSource, /xue\.bdfz\.net/);
   assert.doesNotMatch(matrixSource, /此刻同讀|原帖共讀|kind: "together"/);
   assert.match(activationSource, /frames\.forEach\(load\)/);
   assert.doesNotMatch(activationSource, /IntersectionObserver/);
@@ -181,6 +207,8 @@ test("capability migration is expanded immediately, deduplicated, and points to 
   assert.match(mountSource, /openResourcePlan\(plan, title\)/);
   assert.match(mountSource, /inlinePreviewUsable\(plan\.src\)/);
   assert.match(mountSource, /screenshotFallbackPlan\(plan\)/);
+  assert.match(mountSource, /plan\.mode === "remote-app"/);
+  assert.match(mountSource, /allow-scripts allow-same-origin allow-forms/);
   assert.match(mountSource, /沒有經驗證的本機截圖/);
   assert.match(dialogSource, /mountResourcePreview\(els\.resourceStage, plan, title, \{ eager: true, expanded: true \}\)/);
   assert.match(eventSource, /els\.resourceStage\.replaceChildren\(\)/);

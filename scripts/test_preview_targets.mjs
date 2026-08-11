@@ -4,6 +4,7 @@ import test from "node:test";
 import { resolve } from "node:path";
 import {
   BDFZ_EMBED_ROOTS,
+  DIRECT_REMOTE_APP_ROOTS,
   EXACT_PREVIEW_REDIRECT_TARGETS,
   buildPreviewTargets,
   renderPreviewTargets,
@@ -11,7 +12,9 @@ import {
 import { previewUrlHasPublicHostname } from "../site/preview-network-policy.js";
 import worker from "../site/_worker.js";
 import {
+  REMOVED_WEB_RESOURCE_HOSTS,
   REMOVED_WEB_RESOURCE_URLS,
+  isRemovedWebResource,
   webResourceKey,
 } from "./web_resource_policy.mjs";
 
@@ -68,6 +71,16 @@ test("preview proxy accepts only the generated authoritative resource registry",
   assert.equal(registry.targets.every((entry) => entry.startsWith("https://")), true);
   assert.equal(registry.targets.some((entry) => /(?:localhost|127\.0\.0\.1|192\.168\.)/.test(entry)), false);
   assert.equal(registry.targets.some((entry) => entry.includes("BV1Zg4y1H7fK")), false);
+  assert.deepEqual(REMOVED_WEB_RESOURCE_HOSTS, ["xue.bdfz.net"]);
+  for (const href of [
+    "https://xue.bdfz.net/",
+    "https://xue.bdfz.net/template/",
+    "https://xue.bdfz.net/arbitrary?lesson=1#section",
+  ]) assert.equal(isRemovedWebResource(href), true, href);
+  assert.equal(isRemovedWebResource("https://xue.bdfz.net.example.com/"), false);
+  assert.equal(registry.targets.some((entry) => new URL(entry).hostname === "xue.bdfz.net"), false);
+  assert.equal(registry.redirectTargets.some((entry) => new URL(entry).hostname === "xue.bdfz.net"), false);
+  assert.equal(registry.allowedHosts.includes("xue.bdfz.net"), false);
   const targetKeys = new Set(registry.targets.map(webResourceKey));
   for (const href of REMOVED_WEB_RESOURCE_URLS) {
     assert.equal(targetKeys.has(webResourceKey(href)), false, href);
@@ -121,8 +134,9 @@ test("every student-visible WeChat source has one reviewed wx archive and no dir
   for (const archiveUrl of archiveUrls) assert.ok(registry.targets.includes(archiveUrl), archiveUrl);
 });
 
-test("bdfz embedded-app registry adds only the 18 reviewed exact roots", () => {
-  assert.equal(BDFZ_EMBED_ROOTS.length, 18);
+test("bdfz embedded-app registry exposes only the 17 reviewed exact roots", () => {
+  assert.equal(BDFZ_EMBED_ROOTS, DIRECT_REMOTE_APP_ROOTS);
+  assert.equal(DIRECT_REMOTE_APP_ROOTS.length, 17);
   assert.equal(new Set(BDFZ_EMBED_ROOTS).size, BDFZ_EMBED_ROOTS.length);
   const appSource = readFileSync(APP_PATH, "utf8");
   const matrixSource = appSource.slice(
@@ -140,15 +154,24 @@ test("bdfz embedded-app registry adds only the 18 reviewed exact roots", () => {
   }
   assert.deepEqual([...BDFZ_EMBED_ROOTS].sort(), [...exactConsumers].sort());
   const registry = buildPreviewTargets();
+  assert.equal(registry.directRemoteAppRootCount, 17);
+  assert.deepEqual(registry.directRemoteAppRoots, [...DIRECT_REMOTE_APP_ROOTS].sort());
   for (const root of BDFZ_EMBED_ROOTS) {
     assert.equal(new URL(root).pathname, "/");
+    assert.equal(new URL(root).search, "");
+    assert.equal(new URL(root).hash, "");
     assert.ok(registry.targets.includes(root), root);
+    assert.ok(registry.directRemoteAppRoots.includes(root), root);
+    const url = new URL(root);
+    for (const nonRoot of [
+      new URL("unregistered-path", url).toString(),
+      `${root}?unregistered=1`,
+      `${root}#unregistered`,
+    ]) assert.equal(registry.directRemoteAppRoots.includes(nonRoot), false, nonRoot);
   }
   assert.equal(registry.targets.includes("https://unregistered.bdfz.net/"), false);
   assert.equal(registry.targets.includes("https://gwyw.bdfz.net/unregistered-sensitive-path"), false);
-  assert.deepEqual(EXACT_PREVIEW_REDIRECT_TARGETS, ["https://xue.bdfz.net/template/"]);
-  assert.ok(registry.redirectTargets.includes("https://xue.bdfz.net/template/"));
-  assert.equal(registry.redirectTargets.includes("https://xue.bdfz.net/template/unregistered"), false);
+  assert.deepEqual(EXACT_PREVIEW_REDIRECT_TARGETS, []);
 });
 
 test("exact Google Sites and non-BDFZ Yuque lessons are previewable without reopening blocked links", () => {
@@ -213,6 +236,8 @@ test("preview Worker denies unregistered targets and never emits wildcard CORS",
     "https://sites.google.com/view/pkuschool/unregistered-preview-path",
     "https://pkuschool.yuque.com/unregistered/preview-path",
     "https://bdfz.yuque.com/org-wiki/blocked",
+    "https://xue.bdfz.net/",
+    "https://xue.bdfz.net/template/",
   ]) {
     const response = await worker.fetch(
       new Request(`https://yw.bdfz.net/api/preview?url=${encodeURIComponent(exactBdfzDenial)}`),
@@ -269,26 +294,6 @@ test("preview Worker denies unregistered targets and never emits wildcard CORS",
     assert.equal(allowed.headers.get("access-control-allow-origin"), null);
     assert.equal(allowed.headers.get("access-control-allow-credentials"), null);
     assert.equal(allowed.headers.get("cross-origin-resource-policy"), "same-origin");
-
-    globalThis.fetch = async (request) => {
-      const url = new URL(typeof request === "string" ? request : request.url);
-      if (url.toString() === "https://xue.bdfz.net/") {
-        return new Response(null, { status: 302, headers: { location: "/template/" } });
-      }
-      if (url.toString() === "https://xue.bdfz.net/template/") {
-        return new Response("全科自學：公開課程入口", {
-          headers: { "content-type": "text/plain; charset=utf-8" },
-        });
-      }
-      throw new Error(`unexpected redirect fixture target: ${url}`);
-    };
-    const xueRedirect = await worker.fetch(
-      new Request(`https://yw.bdfz.net/api/preview?url=${encodeURIComponent("https://xue.bdfz.net/")}`),
-      env,
-      {},
-    );
-    assert.equal(xueRedirect.status, 200);
-    assert.match(await xueRedirect.text(), /全科自學/);
 
     for (const [contentType, body] of [
       ["application/javascript", "globalThis.previewPwned = true"],

@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "yw-classical-learning-tip-policy-v1",
+  "sources": [
+    {
+      "sourceId": "tip-1711",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1711-p1",
+      "blockIndexes": [2, 3, 4, 5],
+      "targets": ["lesson-1711-p1", "lesson-1711-p2"]
+    },
+    {
+      "sourceId": "tip-1719",
+      "kind": "lesson-post-slice",
+      "lessonId": "lesson-1719",
+      "postNumber": 3,
+      "start": "《赤壁赋》和《登泰山记》的景与情的关系",
+      "end": "可以找来阅读、比较。",
+      "targets": ["lesson-1719-p1", "lesson-1719-p2"]
+    },
+    {
+      "sourceId": "tip-1726",
+      "kind": "lesson-post-slice",
+      "lessonId": "lesson-1726",
+      "postNumber": 4,
+      "start": "理想的社会是什么样的?",
+      "end": "拓展阅读《季氏将伐颛臾》。",
+      "targets": ["lesson-1726-p1", "lesson-1726-p2", "lesson-1726-p3"]
+    },
+    {
+      "sourceId": "tip-1727",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1727",
+      "blockIndexes": [3],
+      "targets": ["lesson-1727"]
+    },
+    {
+      "sourceId": "tip-1728",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1728",
+      "blockIndexes": [9],
+      "targets": ["lesson-1728"]
+    },
+    {
+      "sourceId": "tip-1743",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1743-p2",
+      "blockIndexes": [3],
+      "targets": ["lesson-1743-p1", "lesson-1743-p2"]
+    },
+    {
+      "sourceId": "tip-1752",
+      "kind": "lesson-post-slice",
+      "lessonId": "lesson-1752",
+      "postNumber": 2,
+      "start": "魏征和王安石都是中国古代著名的政治家",
+      "end": "有时可以帮助理解文言实词的意思。",
+      "targets": ["lesson-1752"]
+    },
+    {
+      "sourceId": "tip-1753",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1753-p2",
+      "blockIndexes": [1],
+      "targets": ["lesson-1753-p1", "lesson-1753-p2"]
+    },
+    {
+      "sourceId": "tip-1474-1477",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1477",
+      "blockIndexes": [7],
+      "targets": ["lesson-1474", "lesson-1476", "lesson-1477"]
+    },
+    {
+      "sourceId": "tip-1483-1484",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1484",
+      "blockIndexes": [1],
+      "targets": ["lesson-1483", "lesson-1484"]
+    },
+    {
+      "sourceId": "tip-1485",
+      "kind": "lesson-post-slice",
+      "lessonId": "lesson-1473",
+      "postNumber": 1,
+      "start": "本单元选择了先秦诸子的一些经典论说",
+      "end": "领悟其妙处。",
+      "targets": ["lesson-1485"]
+    },
+    {
+      "sourceId": "tip-1534",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1534",
+      "blockIndexes": [14],
+      "targets": ["lesson-1534"]
+    },
+    {
+      "sourceId": "tip-1535",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1535",
+      "blockIndexes": [39],
+      "targets": ["lesson-1535"]
+    },
+    {
+      "sourceId": "tip-1536-1537",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1537",
+      "blockIndexes": [1],
+      "targets": ["lesson-1536", "lesson-1537"]
+    },
+    {
+      "sourceId": "tip-1576-1577",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1577",
+      "blockIndexes": [10],
+      "targets": ["lesson-1576", "lesson-1577"]
+    },
+    {
+      "sourceId": "tip-1578-1579",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1579",
+      "blockIndexes": [6],
+      "targets": ["lesson-1578", "lesson-1579"]
+    },
+    {
+      "sourceId": "tip-1580",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1580",
+      "blockIndexes": [5],
+      "targets": ["lesson-1580"]
+    },
+    {
+      "sourceId": "tip-1581",
+      "kind": "reader-blocks",
+      "lessonId": "lesson-1581",
+      "blockIndexes": [2],
+      "targets": ["lesson-1581"]
+    }
+  ]
+}

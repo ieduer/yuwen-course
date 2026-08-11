@@ -1,5 +1,11 @@
 const BILIBILI_REMOVED_KEY = "www.bilibili.com/video/bv1zg4y1h7fk";
 
+export const REMOVED_WEB_RESOURCE_HOSTS = Object.freeze([
+  "xue.bdfz.net",
+]);
+
+const REMOVED_WEB_RESOURCE_HOST_SET = new Set(REMOVED_WEB_RESOURCE_HOSTS);
+
 export function webResourceKey(raw) {
   try {
     const url = raw instanceof URL
@@ -51,6 +57,12 @@ export const REMOVED_WEB_RESOURCE_KEYS = Object.freeze(
 const REMOVED_WEB_RESOURCE_KEY_SET = new Set(REMOVED_WEB_RESOURCE_KEYS);
 
 export function isRemovedWebResource(raw) {
+  try {
+    const url = raw instanceof URL ? raw : new URL(String(raw || "").replaceAll("&amp;", "&"));
+    if (REMOVED_WEB_RESOURCE_HOST_SET.has(url.hostname.toLowerCase())) return true;
+  } catch {
+    return false;
+  }
   const key = webResourceKey(raw);
   return Boolean(key && REMOVED_WEB_RESOURCE_KEY_SET.has(key));
 }

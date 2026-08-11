@@ -1226,7 +1226,7 @@ test("reader annotation controls use occurrence-scoped inline note ids", () => {
   );
   assert.match(
     appSource,
-    /class="reader-note-ref" type="button" data-note-ref="\$\{esc\(run\.noteId\)\}" aria-expanded="false" aria-controls="\$\{esc\(noteId\)\}"/,
+    /class="reader-note-ref" type="button" data-note-ref="\$\{esc\(run\.noteId\)\}" aria-expanded="false" aria-controls="\$\{esc\(noteId\)\}" aria-label="展開註釋 \$\{number\}"/,
   );
   assert.doesNotMatch(
     appSource,
@@ -1236,6 +1236,9 @@ test("reader annotation controls use occurrence-scoped inline note ids", () => {
     appSource,
     /link\.hasAttribute\("data-same-tab"\) \|\| href\.startsWith\("#"\)/,
   );
+  assert.match(appSource, /class="reader-annotation-anchor"/);
+  assert.match(appSource, />\$\{number\}<\/button>/);
+  assert.doesNotMatch(appSource, />注<\/button>/);
   assert.match(appSource, /if \(note\.dataset\.typed !== "true"\)/);
 });
 

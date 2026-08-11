@@ -120,12 +120,14 @@ assert.equal(
 const browserContractSource = readFileSync(resolve(ROOT, "site/assets/classical-first-read.js"), "utf8");
 const appSource = readFileSync(resolve(ROOT, "site/assets/app.js"), "utf8");
 const indexSource = readFileSync(resolve(ROOT, "site/index.html"), "utf8");
-assert.match(indexSource, /assets\/classical-first-read\.js\?v=20260811-annotated-read-v2/);
-assert.doesNotMatch(indexSource, /assets\/classical-first-read\.js\?v=20260809-first-read-v1/);
+assert.match(indexSource, /assets\/classical-first-read\.js\?v=20260811-annotated-reading-v3/);
+assert.doesNotMatch(indexSource, /assets\/classical-first-read\.js\?v=20260811-annotated-read-v2/);
 assert.match(browserContractSource, /asset\.schema\s*!==\s*"yw-classical-first-read-v1"/);
 assert.match(browserContractSource, /Number\(asset\.schemaVersion\)\s*!==\s*1/);
 assert.match(browserContractSource, /data-first-read-keyboard-form/);
 assert.match(browserContractSource, /tabindex="0" data-first-read-paragraph/);
+assert.match(browserContractSource, /renderSubmittedReading/);
+assert.match(browserContractSource, /data-first-read-submitted-review/);
 assert.match(browserContractSource, /session\.authMode\s*!==\s*"authenticated"/);
 assert.doesNotMatch(browserContractSource, /localStorage\.setItem/);
 assert.match(browserContractSource, /localStorage\.removeItem\(localKey\(asset\)\)/);

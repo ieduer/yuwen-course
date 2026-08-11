@@ -19,6 +19,14 @@ import {
   normalizeOpenStudyGuideAssessment,
   studyGuideAssessmentPrompt,
 } from "./study-guide-assessment.js";
+import {
+  BLUEPRINT_MODE_TECHNIQUES,
+  LESSON_BLUEPRINT_CACHE_VERSION,
+  deterministicLessonBlueprint,
+  lessonBlueprintPromptAnchor,
+  normalizeBlueprintMode,
+  normalizeLessonBlueprint,
+} from "./lesson-blueprint-rules.js";
 
 const OWNER = "ieduer";
 const REPO = "yuwen-course";
@@ -928,26 +936,25 @@ function normalizeAssessment(value, fallbackText = "", speaker = "作者") {
   };
 }
 
-function normalizeBlueprint(value, fallbackTitle = "本文", speaker = "作者") {
-  return {
-    structureFocus: cleanText(value?.structureFocus || `我是${speaker}。我把最關鍵的材料放在這裡；你能說清若抽掉或換序，全文會失去什麼嗎？`, 300),
-  };
-}
-
 async function handleLessonBlueprint(request, env, ctx) {
   const payload = await request.json().catch(() => ({}));
   const lessonId = cleanText(payload.lessonId, 80);
   const lessonTitle = cleanText(payload.lessonTitle, 160);
+  const blockTitle = cleanText(payload.blockTitle, 80);
   const mode = cleanText(payload.mode, 40);
   const genres = Array.isArray(payload.genres) ? payload.genres.map((item) => cleanText(item, 40)).filter(Boolean).slice(0, 8) : [];
-  const authors = Array.isArray(payload.authors) ? payload.authors.map((item) => cleanText(item, 40)).filter(Boolean).slice(0, 4) : [];
-  const speaker = authors[0] || (mode.startsWith("unit") ? "編者" : "作者");
   const excerpt = cleanText(payload.excerpt, 4200);
   if (!lessonId || !lessonTitle || excerpt.length < 80) return json({ error: "lesson id, title and excerpt are required" }, { status: 400 });
+  const blueprintContext = { lessonId, lessonTitle, blockTitle, mode, excerpt };
+  const normalizedMode = normalizeBlueprintMode(mode);
+  const technique = BLUEPRINT_MODE_TECHNIQUES[normalizedMode];
+  const anchor = lessonBlueprintPromptAnchor(blueprintContext);
+  const lessonLabel = [blockTitle, lessonTitle].filter(Boolean).join(" · ");
   const cache = caches.default;
   const cacheUrl = new URL(`/api/lesson-blueprint-cache/${encodeURIComponent(lessonId)}`, request.url);
-  cacheUrl.searchParams.set("v", "participation-matrix-v5");
-  cacheUrl.searchParams.set("speaker", speaker);
+  cacheUrl.searchParams.set("v", LESSON_BLUEPRINT_CACHE_VERSION);
+  cacheUrl.searchParams.set("mode", normalizedMode);
+  if (blockTitle) cacheUrl.searchParams.set("block", blockTitle);
   const cacheKey = new Request(cacheUrl.toString(), { method: "GET" });
   const cached = await cache.match(cacheKey);
   if (cached) {
@@ -957,12 +964,12 @@ async function handleLessonBlueprint(request, env, ctx) {
     });
   }
   const prompt = [
-    "你是高中語文教材的細讀任務設計員。只根據提供的正文，找出作者在結構文章時最用心、最值得學生體悟的一個具體安排。",
-    "禁止使用放諸四海皆準的空話。必須能在摘錄中定位，並說明材料次序、轉折、視角、意象、聲律、論證、場面或收束中的一項。",
-    `你必須完全使用${speaker}的第一人稱口吻，像作者本人正在向讀者發問；不要寫「作者如何」「向作者提問」等第三人稱模板。`,
-    "structureFocus 由作者本人揭示最在意的具體章法，再反問學生若換序或抽掉會損失什麼。",
-    "只輸出 JSON：structureFocus(作者口吻的一句具體結構追問)。不要 Markdown。",
-    `篇目：${lessonTitle}`,
+    "你是高中語文教材的細讀任務設計員。只根據提供的正文，設計一個可由學生用原文驗證的章法問題。",
+    "不得冒充作者，不得使用作者第一人稱，不得使用“抽掉”“換序”或放諸四海皆準的模板。",
+    `structureFocus 必須逐字包含本課定位「${lessonLabel}」、正文錨點「${anchor}」和文體技法「${technique}」。`,
+    "要求學生比較前後至少兩處原文，說清技法怎樣形成篇目的表達效果；不得只問段意或感想。",
+    "只輸出 JSON：structureFocus(一句具體結構追問)。不要 Markdown。",
+    `篇目：${lessonLabel}`,
     `掌握模式：${mode}`,
     `多層文體：${genres.join(" / ")}`,
     `正文摘錄：${excerpt}`,
@@ -970,13 +977,23 @@ async function handleLessonBlueprint(request, env, ctx) {
   try {
     const raw = await callApisPrompt(env, prompt, "lesson-plan", "medium");
     const parsed = extractJsonObject(raw);
-    const response = json({ provider: "apis", cached: false, blueprint: normalizeBlueprint(parsed, lessonTitle, speaker) }, {
+    const normalized = normalizeLessonBlueprint(parsed, blueprintContext);
+    const provider = normalized.structureFocus === cleanText(parsed?.structureFocus, 300) ? "apis" : "local-fallback";
+    const response = json({ provider, cached: false, blueprint: normalized }, {
       headers: { "cache-control": "public, max-age=604800", "x-yw-blueprint-cache": "MISS" },
     });
     ctx.waitUntil(cache.put(cacheKey, response.clone()));
     return response;
-  } catch (error) {
-    return json({ error: error.message || "lesson blueprint unavailable" }, { status: 502 });
+  } catch {
+    const response = json({
+      provider: "local-fallback",
+      cached: false,
+      blueprint: deterministicLessonBlueprint(blueprintContext),
+    }, {
+      headers: { "cache-control": "public, max-age=604800", "x-yw-blueprint-cache": "MISS" },
+    });
+    ctx.waitUntil(cache.put(cacheKey, response.clone()));
+    return response;
   }
 }
 
@@ -1008,15 +1025,21 @@ async function handleInteractionCheck(request, env) {
     contextWords: "核查學生給出的三個詞是否各有區分度，並能由作者、文體、字句或立意得到支持。泛泛的好、優美、感人不得超過59分；恰好三詞且能形成對作者與文章的整體判斷才可高分。",
     authorQuestion: "把自己放在作者或編者的位置，判斷這個問題能否證明提問者讀到了具體字句、結構選擇或價值矛盾。只問常識、感想或可脫離文本回答的問題不得超過59分。",
     revision: "判斷增、刪、調是否抵達文字底層。必須比較原文和改文在語義、語氣、節奏、意象、人物、論證或結構上的實際得失；只說更生動更好不得超過59分。",
-    structure: "核查學生選出的章法機關是否能在正文定位，並能說清若抽掉或換序會損失什麼。只概括段意不得超過59分。",
+    structure: `核查學生能否在正文定位至少兩處證據，並用${BLUEPRINT_MODE_TECHNIQUES[normalizeBlueprintMode(mode)]}說清前後材料如何共同形成表達效果。只概括段意或只說“更好”不得超過59分。`,
     wordCreation: "核查新學字詞在三句小說、短詩、對白、微報道或微論證中的詞義、語境和搭配是否成立；創作短但準確可得高分。",
   }[interaction];
+  const responseRole = interaction === "structure"
+    ? `你是《${lessonTitle}》的文本細讀教練。不得冒充作者或編者，不得使用“我是${speaker}”一類身分話術。`
+    : `你就是《${lessonTitle}》的${speaker}。始終使用${speaker}本人的第一人稱身分與學生交談，不得退回「評估員」「作者認為」或第三人稱口吻。`;
+  const responseSchema = interaction === "structure"
+    ? "只輸出 JSON：score(1-100整數)、verdict(一句話)、strength(指出已掌握的一點)、gap(指出最關鍵缺口)、nextQuestion(只追問一個迫使學生回到文本的問題)。不得冒充作者。不要 Markdown。"
+    : `只輸出 JSON：score(1-100整數)、verdict(一句話)、strength(我以${speaker}身分指出已掌握的一點)、gap(我指出最關鍵缺口)、nextQuestion(我只追問一個迫使學生回到文本的問題)。四個文字欄都必須是${speaker}的第一人稱口吻。不要 Markdown。`;
   const prompt = [
-    `你就是《${lessonTitle}》的${speaker}。始終使用${speaker}本人的第一人稱身分與學生交談，不得退回「評估員」「作者認為」或第三人稱口吻。`,
+    responseRole,
     "你嚴格但可操作，不代寫，只判斷學生是否真正進入文本。",
     criteria,
     "所有判斷必須服從原文；摘錄不足時應指出需回到哪類原文，不要編造。",
-    `只輸出 JSON：score(1-100整數)、verdict(一句話)、strength(我以${speaker}身分指出已掌握的一點)、gap(我指出最關鍵缺口)、nextQuestion(我只追問一個迫使學生回到文本的問題)。四個文字欄都必須是${speaker}的第一人稱口吻。不要 Markdown。`,
+    responseSchema,
     `課文：${blockTitle} / ${lessonTitle}`,
     `文體掌握模式：${mode}`,
     `互動類型：${interaction}`,

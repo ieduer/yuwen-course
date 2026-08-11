@@ -13,11 +13,16 @@ const SHARED_STATE_MODULE_URL = new URL(
   `yw-shared-state.js?v=${SHARED_STATE_ASSET_VERSION}`,
   APP_SCRIPT_URL,
 ).href;
+const LESSON_BLUEPRINT_RULES_URL = new URL(
+  "../lesson-blueprint-rules.js?v=20260811-text-anchored-v1",
+  APP_SCRIPT_URL,
+).href;
 
 let sharedStateClient = null;
 let sharedStateModulePromise = null;
 let sharedStateRefreshPromise = null;
 let sharedStateRefreshRequested = false;
+let lessonBlueprintRules = null;
 let sharedStateGeneration = 0;
 let sharedStateUiScope = ANONYMOUS_UI_SCOPE;
 let progressOwnerScope = ANONYMOUS_UI_SCOPE;
@@ -111,6 +116,8 @@ const state = {
   lessonMedia: new Map(),
   wechatArchiveBySource: new Map(),
   previewScreenshotBySource: new Map(),
+  directRemoteAppRoots: new Set(),
+  classicalLearningTips: new Map(),
   sharedContentVersion: "",
   progress: loadStoredProgress(),
   fontIndex: Number(readScopedUiValue(FONT_KEY) || 1),
@@ -1241,29 +1248,90 @@ function annotationNumberMap(annotations) {
   return new Map((annotations || []).map((annotation, index) => [annotation.noteId, index + 1]));
 }
 
-function renderReaderRuns(runs, media, options = {}) {
+function splitReaderAnnotationAnchor(value) {
+  const text = cleanReaderVisibleText(value);
+  const match = text.match(/^([\s\S]*?)([\p{Script=Han}][，。；：！？、）】》”’…—]*|[\p{L}\p{N}·_-]+[，。；：！？、）】》”’…—]*|\S)(\s*)$/u);
+  return match
+    ? { prefix: match[1], anchor: match[2], suffix: match[3] }
+    : { prefix: text, anchor: "", suffix: "" };
+}
+
+function renderReaderAnnotationRef(run, options = {}) {
   const annotationNumbers = options.annotationNumbers || new Map();
   const annotationOccurrences = options.annotationOccurrences || (options.annotationOccurrences = new Map());
-  return (runs || []).map((run) => {
-    if (run.type === "text") return esc(cleanReaderVisibleText(run.text)).replace(/\n/g, "<br>");
-    if (run.type === "link") {
-      const label = esc(cleanReaderVisibleText(run.text || run.sourceUrl || "外部資料"));
-      const href = projectStudentResourceHref(run.href || run.sourceUrl || "");
-      if (!href || run.disposition === "blocked-http") {
-        return `<span class="reader-link-blocked">${label}</span>`;
+  const number = annotationNumbers.get(run.noteId);
+  if (!number) return { marker: "", note: "" };
+  const occurrence = (annotationOccurrences.get(run.noteId) || 0) + 1;
+  annotationOccurrences.set(run.noteId, occurrence);
+  const noteId = `reader-inline-note-${run.noteId}-${occurrence}`;
+  const noteBody = options.annotationBodies?.get(run.noteId) || "";
+  return {
+    marker: `<sup class="reader-note-sup"><button class="reader-note-ref" type="button" data-note-ref="${esc(run.noteId)}" aria-expanded="false" aria-controls="${esc(noteId)}" aria-label="展開註釋 ${number}">${number}</button></sup>`,
+    note: `<span class="reader-inline-note" id="${esc(noteId)}" data-inline-note role="note" hidden><span class="reader-inline-note-content">${noteBody}</span></span>`,
+  };
+}
+
+function renderReaderTextWithAnnotations(run, annotationRuns, options = {}) {
+  const value = cleanReaderVisibleText(run.text || run.sourceUrl || "外部資料");
+  const { prefix, anchor, suffix } = splitReaderAnnotationAnchor(value);
+  const renderValue = (part) => esc(part).replace(/\n/g, "<br>");
+  const annotationParts = annotationRuns.map((annotation) => renderReaderAnnotationRef(annotation, options));
+  const markerMarkup = annotationParts.map((part) => part.marker).join("");
+  const noteMarkup = annotationParts.map((part) => part.note).join("");
+  if (run.type === "link") {
+    const href = projectStudentResourceHref(run.href || run.sourceUrl || "");
+    const renderLink = (part) => {
+      const body = renderValue(part);
+      if (!body) return "";
+      if (!href || run.disposition === "blocked-http") return `<span class="reader-link-blocked">${body}</span>`;
+      return `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${body}</a>`;
+    };
+    return `${renderLink(prefix)}<span class="reader-annotation-anchor">${renderLink(anchor)}${markerMarkup}</span>${noteMarkup}${renderValue(suffix)}`;
+  }
+  return `${renderValue(prefix)}<span class="reader-annotation-anchor">${renderValue(anchor)}${markerMarkup}</span>${noteMarkup}${renderValue(suffix)}`;
+}
+
+function renderReaderRuns(runs, media, options = {}) {
+  const output = [];
+  const input = runs || [];
+  for (let index = 0; index < input.length; index += 1) {
+    const run = input[index];
+    if (run.type === "text" || run.type === "link") {
+      const annotationRuns = [];
+      while (input[index + 1]?.type === "annotation-ref") {
+        annotationRuns.push(input[index + 1]);
+        index += 1;
       }
-      return `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+      if (annotationRuns.length) {
+        output.push(renderReaderTextWithAnnotations(run, annotationRuns, options));
+      } else if (run.type === "text") {
+        output.push(esc(cleanReaderVisibleText(run.text)).replace(/\n/g, "<br>"));
+      } else {
+        const label = esc(cleanReaderVisibleText(run.text || run.sourceUrl || "外部資料"));
+        const href = projectStudentResourceHref(run.href || run.sourceUrl || "");
+        output.push(!href || run.disposition === "blocked-http"
+          ? `<span class="reader-link-blocked">${label}</span>`
+          : `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+      }
+      continue;
     }
     if (run.type === "annotation-ref") {
-      const number = annotationNumbers.get(run.noteId);
-      if (!number) return "";
-      const occurrence = (annotationOccurrences.get(run.noteId) || 0) + 1;
-      annotationOccurrences.set(run.noteId, occurrence);
-      const noteId = `reader-inline-note-${run.noteId}-${occurrence}`;
-      const noteBody = options.annotationBodies?.get(run.noteId) || "";
-      return `<button class="reader-note-ref" type="button" data-note-ref="${esc(run.noteId)}" aria-expanded="false" aria-controls="${esc(noteId)}" aria-label="打開註釋 ${number}">注</button><span class="reader-inline-note" id="${esc(noteId)}" data-inline-note role="note" hidden><span class="reader-inline-note-content">${noteBody}</span></span>`;
+      const annotation = renderReaderAnnotationRef(run, options);
+      output.push(`<span class="reader-annotation-anchor">${annotation.marker}</span>${annotation.note}`);
     }
-    if (run.type === "media-ref") return renderReaderMedia(media.get(run.mediaId));
+    else if (run.type === "media-ref") output.push(renderReaderMedia(media.get(run.mediaId)));
+  }
+  return output.join("");
+}
+
+function renderInlineAnnotationBlocks(blocks, media, options = {}) {
+  return (blocks || []).map((block) => {
+    if (block.type === "paragraph") {
+      return `<span class="reader-inline-note-paragraph">${renderReaderRuns(block.runs, media, options)}</span>`;
+    }
+    if (block.type === "image") {
+      return `<span class="reader-inline-note-media">${renderReaderMedia(media.get(block.mediaId))}</span>`;
+    }
     return "";
   }).join("");
 }
@@ -1271,7 +1339,7 @@ function renderReaderRuns(runs, media, options = {}) {
 function inlineAnnotationBodies(annotations, media, annotationNumbers) {
   return new Map((annotations || []).map((annotation) => [
     annotation.noteId,
-    renderReaderBlocks(annotation.blocks, media, { annotationNumbers, annotationBodies: new Map() }),
+    renderInlineAnnotationBlocks(annotation.blocks, media, { annotationNumbers, annotationBodies: new Map() }),
   ]));
 }
 
@@ -1330,7 +1398,12 @@ function renderReaderAnnotations(annotations, media, annotationNumbers = annotat
     </section>`;
 }
 
-function renderReaderDocument(document, canonicalAsset = null) {
+function renderLearningTip(tip) {
+  if (!tip?.paragraphs?.length) return "";
+  return `<aside class="reader-guidance classical-learning-tip" data-learning-tip aria-label="學習提示"><h3>學習提示</h3>${tip.paragraphs.map((paragraph) => `<p>${esc(paragraph)}</p>`).join("")}</aside>`;
+}
+
+function renderReaderDocument(document, canonicalAsset = null, learningTip = null) {
   const mainMedia = readerMediaMap(document.main?.media || []);
   const annotationNumbers = annotationNumberMap(document.main?.annotations || []);
   const annotationBodies = inlineAnnotationBodies(document.main?.annotations || [], mainMedia, annotationNumbers);
@@ -1352,6 +1425,7 @@ function renderReaderDocument(document, canonicalAsset = null) {
   return `
     ${frontMatter ? `<aside class="reader-front-matter">${frontMatter}</aside>` : ""}
     ${guidance ? `<aside class="reader-guidance">${guidance}</aside>` : ""}
+    ${renderLearningTip(learningTip)}
     <div class="primary-text reader-primary" data-post="${esc(document.main?.sourcePostNumber || document.main?.sourcePostId || "")}">
       ${body || `<p class="empty-state">本課正文請從教材原圖閱讀。</p>`}
     </div>`;
@@ -1400,13 +1474,17 @@ function renderText(lesson) {
   }
   els.textbookTitle.textContent = sourceModeFor(lesson) === "classical" ? "帶註釋正文" : "細讀";
   if (lesson.readerDocument?.schemaVersion === "yw-reader-document-v1") {
-    const reader = renderReaderDocument(lesson.readerDocument, firstRead?.asset || null);
+    const learningTip = state.classicalLearningTips.get(lesson.id) || null;
+    const submittedFirstRead = sourceModeFor(lesson) === "classical" && firstRead?.submitted
+      ? window.YwClassicalFirstRead.renderSubmittedReading(firstRead)
+      : "";
+    const reader = renderReaderDocument(lesson.readerDocument, firstRead?.asset || null, learningTip);
     const annotatedCompletion = sourceModeFor(lesson) === "classical" && firstRead?.submitted
       ? (firstRead.annotatedReadCompleted
         ? `<section class="annotated-read-completion complete" aria-label="帶註釋正文已讀完"><strong>帶註釋正文已讀完</strong><p>詞級疏通與查詞已解鎖，可回到下方關卡繼續。</p></section>`
-        : `<section class="annotated-read-completion" aria-label="完成帶註釋正文閱讀"><strong>先讀完正文與隨文註釋</strong><p>註釋默認隱藏，點「注」展開，再點即可收起。讀完後再進入詞級疏通。</p><button type="button" data-annotated-read-complete>我已讀完帶註釋正文，進入詞級疏通</button></section>`)
+        : `<section class="annotated-read-completion" aria-label="完成帶註釋正文閱讀"><strong>先讀完正文與隨文註釋</strong><p>註釋默認隱藏，點上標數字展開，再點即可收起。讀完後再進入詞級疏通。</p><button type="button" data-annotated-read-complete>我已讀完帶註釋正文，進入詞級疏通</button></section>`)
       : "";
-    els.textFlow.innerHTML = `${reader}${annotatedCompletion}`;
+    els.textFlow.innerHTML = `${submittedFirstRead}${reader}${annotatedCompletion}`;
     return;
   }
   els.textFlow.innerHTML = `<p class="empty-state">課文暫時無法顯示。</p>`;
@@ -1516,6 +1594,12 @@ function webResourceKey(raw) {
 }
 
 function isRemovedWebResource(raw) {
+  try {
+    const url = raw instanceof URL ? raw : new URL(String(raw || ""), location.href);
+    if (url.hostname.toLowerCase() === "xue.bdfz.net") return true;
+  } catch {
+    return false;
+  }
   const key = webResourceKey(raw);
   return Boolean(key && REMOVED_WEB_RESOURCE_KEYS.has(key));
 }
@@ -1534,6 +1618,17 @@ function projectStudentResourceHref(rawHref) {
 
 function previewScreenshotFor(href) {
   return state.previewScreenshotBySource.get(resourceIdentity(href)) || null;
+}
+
+function directRemoteAppRootFor(href) {
+  try {
+    const url = new URL(href);
+    if (url.search || url.hash || url.pathname !== "/") return "";
+    const normalized = `${url.origin}/`;
+    return state.directRemoteAppRoots.has(normalized) ? normalized : "";
+  } catch {
+    return "";
+  }
 }
 
 function resourcePreviewPlan(resource) {
@@ -1562,6 +1657,26 @@ function resourcePreviewPlan(resource) {
   if (disposition === "source-only") return externalOnly("此條目只保留原始出處，沒有可驗證的頁內版本。");
   if (disposition.startsWith("blocked-")) return externalOnly("來源審核狀態不允許頁內載入，仍保留原始地址供核對。");
   if (hostname === "accounts.google.com") return externalOnly("此來源要求外部帳號登入，不能在課文頁內安全預覽。");
+  if (hostname === "sites.google.com" && fallbackScreenshotSrc) {
+    return {
+      mode: "image",
+      src: fallbackScreenshotSrc,
+      externalHref,
+      fallbackScreenshotSrc: "",
+      reason: "Google Sites 不允許可靠內嵌；此處顯示已核對的完整頁面截圖，可放大查看或另頁打開原站。",
+      screenshot: true,
+    };
+  }
+  const directRemoteRoot = directRemoteAppRootFor(externalHref);
+  if (directRemoteRoot) {
+    return {
+      mode: "remote-app",
+      src: directRemoteRoot,
+      externalHref: directRemoteRoot,
+      fallbackScreenshotSrc,
+      reason: "已直接載入經審核的 BDFZ 遠端網站；放大後仍是同一個即時網站。",
+    };
+  }
   if (hostname === "www.youtube.com" || hostname === "youtube.com" || hostname === "youtu.be") {
     const videoId = hostname === "youtu.be"
       ? pathname.split("/").filter(Boolean)[0]
@@ -1724,7 +1839,10 @@ function mountResourcePreview(host, plan, title, { eager = false, expanded = fal
     element.title = `預覽：${title}`;
     element.loading = eager ? "eager" : "lazy";
     if (plan.mode !== "document") {
-      element.setAttribute("sandbox", "allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox");
+      const sandbox = plan.mode === "remote-app"
+        ? "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+        : "allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox";
+      element.setAttribute("sandbox", sandbox);
     }
   }
   element.addEventListener("load", () => {
@@ -1925,23 +2043,21 @@ function lessonVocabulary(lesson) {
     .filter((item, index, all) => all.findIndex((other) => other.word === item.word) === index);
 }
 
-function blueprintFallback(lesson) {
-  const mode = modeFor(lesson);
-  const speaker = authorNameFor(lesson);
-  const focus = {
-    classical: "我先陳情、再轉折、最後落到現實請求；你能說清這個次序為何既合情又能達成目的嗎？",
-    poetry: "我讓意象、節奏與情感在一個關鍵處同時轉向；你找到那裡了嗎？",
-    fiction: "我把一個細節、視角或延宕放在最關鍵的位置；你能說清它如何改變人物命運嗎？",
-    drama: "我用出場、對話和潛台詞把衝突推到不能迴避的時刻；你找到那一步了嗎？",
-    journalism: "我刻意排列事實、引語與典型材料；你能說清這個報道角度如何成立嗎？",
-    science: "我從問題走向證據，又限制結論的邊界；你能指出這條推理鏈嗎？",
-    argument: "我由核心概念推進到判斷，並預先處理反駁；你能指出最關鍵的一步嗎？",
-    "unit-intro": "我把人文主題、篇目關係與語文能力組成一條路；你能依次走出來嗎？",
-    "unit-task": "我把材料、行動、合作方式和成果標準連成一路；你能找到最容易斷裂的一環嗎？",
-  }[mode];
+function blueprintContext(lesson) {
   return {
-    structureFocus: `我是${speaker}。安排《${lessonTitle(lesson)}》時，我最在意這件事：${focus}`,
+    lessonId: lesson.id,
+    lessonTitle: lessonTitle(lesson),
+    blockTitle: lesson.blockTitle || "",
+    mode: modeFor(lesson),
+    excerpt: String(primaryPost(lesson)?.plain_text || lesson.excerpt || "").slice(0, 3600),
   };
+}
+
+function blueprintFallback(lesson) {
+  if (!lessonBlueprintRules?.deterministicLessonBlueprint) {
+    throw new Error("lesson blueprint rules are unavailable");
+  }
+  return lessonBlueprintRules.deterministicLessonBlueprint(blueprintContext(lesson));
 }
 
 async function ensureBlueprint(lesson) {
@@ -1955,6 +2071,7 @@ async function ensureBlueprint(lesson) {
       body: JSON.stringify({
         lessonId: lesson.id,
         lessonTitle: lessonTitle(lesson),
+        blockTitle: lesson.blockTitle || "",
         mode: modeFor(lesson),
         genres: genreNodesFor(lesson).map((genre) => genre.label),
         authors: [authorNameFor(lesson)],
@@ -2270,9 +2387,7 @@ function matrixItemsFor(lesson) {
   const mode = modeFor(lesson);
   const title = lessonTitle(lesson);
   const taxonomy = taxonomyFor(lesson);
-  const items = [
-    { label: "跨冊定位", title: "在完整教材中核對原頁，尋找同題互文", href: "https://xue.bdfz.net/", meta: "全科自學平台", kind: "source" },
-  ];
+  const items = [];
   const linkedAuthor = taxonomy.authors.find((author) => author.url);
   if (linkedAuthor) items.push({ label: "知人論世", title: `沿${linkedAuthor.name}的關係繼續讀`, href: linkedAuthor.url, meta: "群賢星圖", kind: "source" });
   if (taxonomy.sourceBooks.length) items.push({ label: "書目互文", title: `查看《${taxonomy.sourceBooks[0]}》與五冊篇目的連線`, href: `books.html?q=${encodeURIComponent(taxonomy.sourceBooks[0])}`, meta: "書目星圖", kind: "source" });
@@ -3072,7 +3187,7 @@ function closeInlineNote(note) {
   note.hidden = true;
   const button = document.querySelector(`[aria-controls="${CSS.escape(note.id)}"]`);
   button?.setAttribute("aria-expanded", "false");
-  button?.setAttribute("aria-label", button.getAttribute("aria-label")?.replace(/^收起/, "打開") || "打開註釋");
+  button?.setAttribute("aria-label", button.getAttribute("aria-label")?.replace(/^收起/, "展開") || "展開註釋");
 }
 
 function closeInlineNotes(except = null) {
@@ -3092,7 +3207,7 @@ function toggleInlineNote(button) {
   }
   note.hidden = false;
   button.setAttribute("aria-expanded", "true");
-  button.setAttribute("aria-label", button.getAttribute("aria-label")?.replace(/^打開/, "收起") || "收起註釋");
+  button.setAttribute("aria-label", button.getAttribute("aria-label")?.replace(/^展開/, "收起") || "收起註釋");
   if (note.dataset.typed !== "true") {
     note.dataset.typed = "true";
     typewriteInlineNote(note);
@@ -3350,6 +3465,9 @@ async function init() {
       studyGuideCatalog,
       wechatArchiveMap,
       previewScreenshots,
+      previewTargets,
+      classicalLearningTips,
+      loadedBlueprintRules,
       sharedContentPointer,
     ] = await Promise.all([
       fetchJson("data/manifest.json"),
@@ -3360,6 +3478,9 @@ async function init() {
       fetchJson("data/study-guide-catalog.json", { cache: "no-cache" }),
       fetchJson("data/wechat-archive-map.json", { cache: "no-cache" }),
       fetchJson("data/preview-screenshots.json", { cache: "no-cache" }),
+      fetchJson("data/preview-targets.json", { cache: "no-cache" }),
+      fetchJson("data/classical-learning-tips.json", { cache: "no-cache" }),
+      import(LESSON_BLUEPRINT_RULES_URL),
       fetchJson("app-content/latest-stable.json", { cache: "no-cache" }).catch(() => null),
     ]);
     if (
@@ -3370,6 +3491,11 @@ async function init() {
       || !Array.isArray(wechatArchiveMap?.entries)
       || previewScreenshots?.schemaVersion !== "yw-preview-screenshots-v1"
       || !Array.isArray(previewScreenshots?.entries)
+      || previewTargets?.schemaVersion !== "yw-preview-targets-v1"
+      || !Array.isArray(previewTargets?.directRemoteAppRoots)
+      || classicalLearningTips?.schemaVersion !== "yw-classical-learning-tips-v1"
+      || !Array.isArray(classicalLearningTips?.lessons)
+      || typeof loadedBlueprintRules?.deterministicLessonBlueprint !== "function"
     ) {
       throw new Error("字詞範圍資料不一致");
     }
@@ -3380,6 +3506,9 @@ async function init() {
     state.studyGuideLessons = new Map((studyGuideCatalog.lessons || []).map((lesson) => [lesson.lessonId, lesson]));
     state.wechatArchiveBySource = new Map(wechatArchiveMap.entries.map((entry) => [resourceIdentity(entry.sourceUrl), entry]));
     state.previewScreenshotBySource = new Map(previewScreenshots.entries.map((entry) => [resourceIdentity(entry.sourceUrl), entry]));
+    state.directRemoteAppRoots = new Set(previewTargets.directRemoteAppRoots);
+    state.classicalLearningTips = new Map(classicalLearningTips.lessons.map((entry) => [entry.lessonId, entry]));
+    lessonBlueprintRules = loadedBlueprintRules;
     state.sharedContentVersion = sharedContentVersionFromPointer(sharedContentPointer);
     state.lessonMedia = new Map((lessonMedia.lessons || []).map((lesson) => [lesson.lessonId, lesson]));
     state.taxonomyLessons = new Map(state.taxonomy.lessons.map((lesson) => [lesson.id, lesson]));

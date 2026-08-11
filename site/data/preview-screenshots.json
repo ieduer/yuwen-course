@@ -5,9 +5,9 @@
     "width": 1024,
     "height": 640
   },
-  "totalBytes": 12816592,
-  "candidateCount": 353,
-  "screenshotCount": 335,
+  "totalBytes": 12795016,
+  "candidateCount": 352,
+  "screenshotCount": 334,
   "blockedCount": 7,
   "entries": [
     {
@@ -12113,22 +12113,6 @@
           "lessonTitle": "7 包身工/ 夏衍",
           "sourceDocument": "data/reader-documents/lesson-1528.json",
           "sourcePath": "resources[12].sourceUrl"
-        }
-      ],
-      "disposition": "screenshot-provided"
-    },
-    {
-      "sourceUrl": "https://xue.bdfz.net/",
-      "screenshotUrl": "/assets/preview-screenshots/2a3eb675b4dfe92d2656f394.webp",
-      "title": "全学科教材阅读 · xue",
-      "width": 1024,
-      "height": 640,
-      "bytes": 21576,
-      "sha256": "2a3eb675b4dfe92d2656f3940498583d55418b456d3ef5b8917039b897250a77",
-      "reason": "standby-for-runtime-failure",
-      "attribution": [
-        {
-          "surface": "global-learning-matrix"
         }
       ],
       "disposition": "screenshot-provided"

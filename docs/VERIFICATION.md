@@ -14,6 +14,7 @@ YW_STUDY_GUIDE_SOURCE_DIR=/Users/ylsuen/CF/output/pdf_study_guides_web \
   PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:/opt/homebrew/bin:$PATH \
   npm run verify:study-guide-sources
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run precontent:check
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run qa:web-polish
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:release-site
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:release-site
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:artifact-manifest
@@ -28,50 +29,71 @@ The current run must prove:
   the source manifest retains 191 records including two hidden system records,
   and the local-step disclosure begins collapsed beside the portrait;
 - 30 classical lessons / 102 first-read paragraphs remain source-bound; after
-  first-read submission, inline annotations begin hidden and type once; the
-  server and browser both block vocabulary until the stable
-  `annotated_reading` acknowledgment succeeds;
+  first-read submission, the submitted no-note text, source-bound learning tip
+  and annotated canonical text remain visible together. The 30 tips derive
+  deterministically from 18 exact source groups. Inline annotations begin
+  hidden and type once; the server and browser both block vocabulary until the
+  stable `annotated_reading` acknowledgment succeeds;
+- all 2,933 annotation references across 191 reader documents bind to the
+  preceding visible character or Latin word and render as numeric superscript
+  buttons. Classical and modern text must have zero orphan marker, zero
+  visible `注／註` word button and zero horizontal overflow at 1440/1024/390;
+- all 189 student lessons have a unique, text-anchored, mode-specific structure
+  prompt; author impersonation and `我是／抽掉／換序／最關鍵的材料` templates
+  must be rejected. The Dickens prompt must name the adult retrospective,
+  child-labour experience and first-person narrative perspective;
 - all nine WeChat sources project to exact `wx.bdfz.net` archives; direct
   `mp.weixin.qq.com` and `bdfz.yuque.com` student targets are zero;
 - every supported embed can expand and shrink, with Escape/focus restoration;
-  after the exact deletion set, the audited 353 page resources resolve to 335
+  after the exact deletion set, the audited 352 page resources resolve to 334
   screenshots + 11 direct presentations + 7 stopped embeds, all seven due to
   an external condition. The screenshots include 49 reviewed authenticated
-  pages and deduplicate to 329 WebP assets / 12,816,592 logical bytes;
-- preview targets are exactly 540 / 119 redirects / 76 hosts with digest
-  `sha256:08b55ba18ccbea706b4755a7e4c1a5de276d5588a5c748bc1ed82dcc00e6968a`;
+  pages and deduplicate to 328 WebP assets / 12,795,016 logical bytes;
+- preview targets are exactly 539 / 118 redirects / 75 hosts with digest
+  `sha256:dd847ef28e2e492390c896cd2587931a3c8fdd402f497f359601d16ad0f662a8`;
   arbitrary same-host paths and unregistered redirects remain 403;
 - screenshot manifest SHA-256 is
-  `95b8929c4b0bce0ddde45f4eb7941275e9660708704518ad23d5de825c58e17d`;
+  `8b6fee25080e21ccc7475d5058e79193e6ba0624d8a6828b0411b62e55193e47`;
   confirmed-dead Bilibili `BV1Zg4y1H7fK` is absent from the Web projection,
   preview registry and screenshot manifest. E01 and all 16 permanent/remove
   resources are likewise absent and are not counted among the seven;
+- all 99 exact Google Sites targets use reviewed screenshot-first rendering;
+  17 BDFZ exact roots load the same real remote URL in their card and full-page
+  view. `xue.bdfz.net` has zero student resource, target, redirect, host,
+  screenshot, resolved or blocked record, and its preview requests return 403;
+- 文體、書目、星圖、己身 and 登入 all open a new tab with
+  `noopener noreferrer`; the original lesson URL remains unchanged;
 - the study-guide catalog is 241 / 191 active / 50 inactive and the formative
   manifest is 1,019 / 115 lessons / 50 tombstones; A+/A--F bytes and behavior
   do not change;
-- live pre-deploy readback is Reading 200 (`reading-schema-v4`) and learning
-  200. Reading health checks four tables/eight key indexes; a separate
+- live pre-deploy readback requires Reading 200 (`reading-schema-v4`). Reading
+  health checks four tables/eight key indexes; a separate
   read-only `sqlite_schema` query confirms all four tables/ten named indexes
   from migration 0004. D1 migrations 0001--0004 are present exactly once and
-  must not be replayed during this Web deployment.
+  must not be replayed during this Web deployment. Learning-health is recorded
+  as compatibility evidence but, while User Center follow-up is deliberately
+  paused, it does not gate these Web-only presentation changes and must not be
+  used to claim an outage in three-word submission, vocabulary progress or the
+  durable evidence queue.
 
-The completed local precontent run reports: preview targets 6/6, expanded
-resource policy 7/7, screenshot policy 4/4, authenticated importer 5/5,
+The completed local precontent run reports: preview targets 6/6, resource and
+screenshot policy 12/12, authenticated importer 5/5,
 learning manifest 9/9, study-guide catalog 3/3, assessment 6/6, frontend 3/3,
 evidence 15/15, formative projection 4/4, shared state 13/13 plus real browser,
 Reading API 70/70, native candidate 21/21 and release-site 5/5. Layout
-acceptance passed 25/25. The `lesson-1534` browser flow rendered 98 initially
-hidden notes, retained type-once/collapse behavior, blocked vocabulary before
-the receipt and unlocked it only after the exact stable mutation succeeded.
+acceptance passed 25/25 and the dedicated Web-polish browser matrix passed
+32/32. The `lesson-1534` browser flow rendered 98 initially hidden notes,
+retained type-once/collapse behavior, blocked vocabulary before the receipt and
+unlocked it only after the exact stable mutation succeeded.
 
-The formal staging/check and artifact-manifest check pass at 1,222 files. The
-release marker is `formal-stable`, 1,221 projected files, projected aggregate
-`6b156f53be4876769cad7e523645c25e510dca4f7c96b9445936842056fffe29`,
+The formal staging/check and artifact-manifest check pass at 1,223 files. The
+release marker is `formal-stable`, 1,222 projected files, projected aggregate
+`e847d33848fff683fd8d6816a9a6deeda1adf1b427a93ddfdea4d520bafb2f9f`,
 marker SHA-256
-`579d588eab5718551da61b6009789631e9a710cc2fc9f1b6cc46588f64f74bb6`
+`1a947f37e17f9617ad30ba9ecde4ed19e0b12c921edca4489591cde42926bf94`
 and artifact-manifest aggregate
-`bde95d8ba08d7a883dcb1fdbefd9d36f54d791b1e20efb234126bd9003a112fb`
-(163,807,598 bytes).
+`b664e2d4bb28eff30a8d807d7a351f591209a8712e012977f15646914ba804e7`
+(163,859,704 bytes).
 It includes the unchanged stable App release only (278 exact paths) and no new
 App candidate or pointer.
 
@@ -478,7 +500,7 @@ file as historical release evidence:
 
 1. Source of truth：本機源码为 `/Users/ylsuen/CF/yuwen-course`；GitHub `ieduer/yuwen-course` branch `main`；當前發布記錄 commit `ab6c9eec08a4de9b9a28cb96cc9ebc0bcf92b42a`（內容基線 `185f781f39b302e34f052e3250755fe597c51987`，後續只補不可變資產 cache-bust）；Cloudflare Pages 项目 `yuwen-course`；发布目录 `site/`；生产域名 `https://yw.bdfz.net/`；Pages Worker 为 `site/_worker.js`。自 2026-07-14 起本站持有 D1 `yuwen-reading-db`（id `99c541e7-e70b-4584-b939-7e88a6dd68c5`，綁定 `READING_DB`，遷移在 `migrations/`）——**學生三詞提交與字詞作答是不可再生數據**。閱讀星圖規則文檔 `docs/READING_CONSTELLATION.md`、字詞題庫標準 `docs/VOCAB_STANDARD.md` 為對應子系統的單一事實源。
 2. 健康探针：`curl -fsSI https://yw.bdfz.net/` 期望 `200`；`curl -fsS https://yw.bdfz.net/data/manifest.json | jq -e '(.blocks | length == 5) and (.totals.lessons == 191) and ([.lessons[] | select(.derivedFrom)] | length == 35)'`；`curl -fsS https://yw.bdfz.net/data/literary-taxonomy.json | jq -e '(.stats.lessons == 189) and (.stats.sourceBooks == 84) and (.stats.authors == 106) and ([.genres[] | select(.era and .year and .detail)] | length == 52) and ([.lessons[] | select((.authors | length) == 0 and .representativeFigure.id and .representativeFigure.role and (.visual == null))] | length == 65) and ((.lessons[] | select(.id == "lesson-1692-p4") | .authors[0].url) == "https://qx.bdfz.net/#shelley")'`；`curl -fsS https://yw.bdfz.net/api/reading/health | jq -e '.ok == true and .rulesVersion == "constellation-rules-v1"'`；匿名 `curl -s -o /dev/null -w '%{http_code}' https://yw.bdfz.net/api/reading/constellation` 期望 `401`（未登入不得出數據）；選必上中下「見效題目」清單以 `npm run check:learning-manifest && npm run test:learning-manifest` 為闸門，當前精確契約為 `yw-7abfb37143d876fd`／901 題／101 個教材條目／90% 門檻；關鍵互動以 `BASE_URL=https://yw.bdfz.net npm run verify:ui` 為生產闸門；星圖/字詞後端以 `npm run test:reading` 為合成數據闸門（25 斷言）；字詞題庫以 `npm run verify:vocab:release` 為發布內容闸門；完整靜態包以 `npm run check:artifact-manifest` 驗證逐檔 SHA-256。
-3. 關鍵契約核查：HTML 必須加載 `https://my.bdfz.net/site-auth.js`，`siteKey` 為 `yw`；AI 僅由 Pages Worker按 `runbooks/gemini_gateway_policy.md` 調用 `https://apis.bdfz.net`，響應使用 `data.answer`；所有可見 AI 回應必須以當前課文作者第一人稱生成。A+ 見效證據僅包括選必上中下教材目錄內真正有服務端核驗結果的題目：AI 互動成功返回或字詞選項提交後，才以 manifest 中的穩定 `resourceKey` 寫受信作答；篇目 `evaluation` 評價是 `self_report + none`，只記錄而不計分、不作 A+ 條件；匿名狀態不得載入清單、排隊或寫入；錯答仍是已記錄的嘗試，但只同步為 `ineligible`，不得視為計分完成，且 `score`／`correctness` 必須保留真值；正文通讀勾選、查詞、導航、頁面瀏覽和教師課堂進度不是 A+ 題目。`npm run test:evidence-contract` 必須用 YW 真實生產函數構造投影，經 Queue producer mock 後由當前 User Center consumer registry 接受，並證明舊 `self_report + a_plus_gate` 投影會 fail closed。`npm run verify:ui` 覆蓋 User Center 回灌、APIS 細讀判定、QX 作者鏈接、教材 PDF 預覽和本地進度記憶，並固定核查：必修上下 13 個合併項必須穩定生成 35 個獨立篇目且舊合併 ID 不在 manifest；三段標題必須是「起始／細讀／延伸」；篇名下不得再顯示文體籤；所有模式的「叩問作者／提出問題」必須同時位於見效與掌握度最後；叩問作者提示必須是「你最想我的問題是什麼，你問，我答。」；篇目評價只顯示 `1–5` 且無對話框；手機端掌握度必須緊接見效、頂部工具必須收為單一完整標籤入口；目錄必須在側欄展開動畫完成後以真實滾動手勢到達末篇；能力遷移區標題只顯示「高考」且 390px 不得左側擠壓；106 位署名作者必須全部有 QX 深鏈與圖像資產，65 個無署名篇目必須有與單元／作品／時代直接相關的 QX 代表人物、明示 `role`／`reason`／`evidenceLessonIds` 且不得冒充作者；無可靠肖像者必須標明「姓名卡」，篇首禁止書封與教材頁；`lesson-1484` 的 15 個正文註詞必須全部進入詞級疏通；所有設有詞級疏通的篇目不得錯報無獨立註詞；全部文言篇目不得出現新詞創作；全 189 篇作者／代表人物肖像可見性及 390px 移動端橫向溢出必須逐篇巡檢。另保留選必上默認及上次篇目記憶、詞級逐詞查典和彩條、答對自動前進且錯答留在原題重試、通讀無 AI 對話、註釋無圓圈且逐字展開、A+ 與專注閱讀彩條、`chat.bdfz.net` 課內嵌入、三圖內部同頁切換而其他鏈接新頁、文體／書目時代和關係資料、星圖 `0.56` 全貌尺度。閱讀星圖契約（2026-07-14 起）：頂欄必須含 `star.html` 入口；`/star.html` 渲染與交互直接復刻 `jc-atlas`；三詞提交必須冪等（同詞重排/繁簡變體不生新記錄）、換詞生成新版本並保留沿革；星點 id/seq 穩定，佈局只由冊別／教材篇序／詞形哈希推導；未登入 401＋克制空態，嚴禁偽造星點或推斷進度；有題庫課文的詞級疏通必須走逐題過關並記錄作答／重試／掌握（本地＋D1＋UC 事件 `vocab-quiz:<lessonId>`），無題庫課文回退註詞逐查。
+3. 關鍵契約核查：HTML 必須加載 `https://my.bdfz.net/site-auth.js`，`siteKey` 為 `yw`；AI 僅由 Pages Worker按 `runbooks/gemini_gateway_policy.md` 調用 `https://apis.bdfz.net`，響應使用 `data.answer`。結構提問不得冒充課文作者，必須以篇名或正文可定位文字為錨點並追問該文類的具體視角、時序、場面、論證或語言效果；互動評閱至少要求兩處正文證據，不能只複述「抽掉／換序」模板。A+ 見效證據僅包括選必上中下教材目錄內真正有服務端核驗結果的題目：AI 互動成功返回或字詞選項提交後，才以 manifest 中的穩定 `resourceKey` 寫受信作答；篇目 `evaluation` 評價是 `self_report + none`，只記錄而不計分、不作 A+ 條件；匿名狀態不得載入清單、排隊或寫入；錯答仍是已記錄的嘗試，但只同步為 `ineligible`，不得視為計分完成，且 `score`／`correctness` 必須保留真值；正文通讀勾選、查詞、導航、頁面瀏覽和教師課堂進度不是 A+ 題目。`npm run test:evidence-contract` 必須用 YW 真實生產函數構造投影，經 Queue producer mock 後由當前 User Center consumer registry 接受，並證明舊 `self_report + a_plus_gate` 投影會 fail closed。`npm run verify:ui` 覆蓋 User Center 回灌、APIS 細讀判定、QX 作者鏈接、教材 PDF 預覽和本地進度記憶，並固定核查：必修上下 13 個合併項必須穩定生成 35 個獨立篇目且舊合併 ID 不在 manifest；三段標題必須是「起始／細讀／延伸」；篇名下不得再顯示文體籤；所有模式的「叩問作者／提出問題」必須同時位於見效與掌握度最後；篇目評價只顯示 `1–5` 且無對話框；手機端掌握度必須緊接見效、頂部工具必須收為單一完整標籤入口；目錄必須在側欄展開動畫完成後以真實滾動手勢到達末篇；能力遷移區標題只顯示「高考」且 390px 不得左側擠壓；106 位署名作者必須全部有 QX 深鏈與圖像資產，65 個無署名篇目必須有與單元／作品／時代直接相關的 QX 代表人物、明示 `role`／`reason`／`evidenceLessonIds` 且不得冒充作者；無可靠肖像者必須標明「姓名卡」，篇首禁止書封與教材頁；`lesson-1484` 的 15 個正文註詞必須全部進入詞級疏通；所有設有詞級疏通的篇目不得錯報無獨立註詞；全部文言篇目不得出現新詞創作；全 189 篇作者／代表人物肖像可見性及 390px 移動端橫向溢出必須逐篇巡檢。另保留選必上默認及上次篇目記憶、詞級逐詞查典和彩條、答對自動前進且錯答留在原題重試、通讀無 AI 對話、數字上標註釋無孤行且逐字展開、A+ 與專注閱讀彩條、`chat.bdfz.net` 課內嵌入、三圖內部同頁切換而其他鏈接新頁、文體／書目時代和關係資料、星圖 `0.56` 全貌尺度。閱讀星圖契約（2026-07-14 起）：頂欄必須含 `star.html` 入口；`/star.html` 渲染與交互直接復刻 `jc-atlas`；三詞提交必須冪等（同詞重排/繁簡變體不生新記錄）、換詞生成新版本並保留沿革；星點 id/seq 穩定，佈局只由冊別／教材篇序／詞形哈希推導；未登入 401＋克制空態，嚴禁偽造星點或推斷進度；有題庫課文的詞級疏通必須走逐題過關並記錄作答／重試／掌握（本地＋D1＋UC 事件 `vocab-quiz:<lessonId>`），無題庫課文回退註詞逐查。
 4. 部署命令 + 禁止事项：先应用未落库迁移 `source ~/.secrets.env && ./node_modules/.bin/wrangler d1 migrations apply yuwen-reading-db --remote`，再从项目根目录运行 `npm run deploy`。不得从 `.cache/`、临时目录或旧镜像发布；不得为本站新增 Gemini 密钥；数据源未变时不得运行 `build:data`；修改不可变前端资产后必须提升 `index.html` / `star.html` 的查询版本。**严禁在生产 Pages 项目配置 `READING_TEST_SLUG`**（本地测试缝，见 READING_CONSTELLATION.md §2）；**严禁以 DROP TABLE 作为回滚手段**；重大变更前先 `wrangler d1 export yuwen-reading-db --remote` 备份。
 5. 依賴回歸：本站依賴 `my.bdfz.net`、`apis.bdfz.net`、`nav.bdfz.net`、`img.bdfz.net`、`qx.bdfz.net`、`jc.bdfz.net`、`chat.bdfz.net`；改動若不觸碰樞紐契約，至少驗證這些入口仍可達並運行本站生產 UI 闸門。若修改會話或 APIS 契約，須按項目矩陣重掃扇出，並回歸 `bdfz-companion` App。
 6. 备份 / 恢复：课文 JSON、taxonomy、字词题库 `site/data/vocab/`、前端与 Worker 均由 Git 工作树及 Pages 历史保存；本輪 pre-commit 完整 source archive 為 `/Users/ylsuen/CF/backups/yuwen-production-baseline-precommit-20260714/yuwen-course-source.tar.gz`，SHA-256 `a03b3b76f5e54db98a37a0103daa135afb183e7da96225a5a0a354f8b6faf7b7`。D1 `yuwen-reading-db` 为不可再生学生数据：重大变更前 `wrangler d1 export yuwen-reading-db --remote --output backups/yuwen-reading-<date>.sql` 备份，恢复用 `wrangler d1 execute yuwen-reading-db --remote --file <backup>`；恢复数据文件时从 Git/本机备份恢复后重新生成 taxonomy，并先在 `pages.dev` 预览验证。2026-07-26 已在私有限制权限目录保存远端导出；迁移 0003 为纯增量，代码回滚时保留新增表，不执行 DROP TABLE。

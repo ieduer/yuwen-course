@@ -646,7 +646,6 @@ body.focus-mode .reader-size #font-label { display: inline-grid; place-items: ce
 .reader-annotations h3 { margin: 0 0 12px; font: 700 .82rem var(--sans); letter-spacing: .12em; }
 .reader-annotations ol { margin: 0; padding-left: 1.7em; }
 .reader-annotations li { padding: .35em 0 .55em .35em; scroll-margin-top: 96px; }
-.reader-note-ref { margin: 0 .12em; font: 700 .62em/1 var(--sans); vertical-align: super; }
 .reader-media { display: block; max-width: 760px; margin: 34px auto; }
 .reader-media img { width: auto; height: auto; margin: 0; }
 .reader-media-unavailable,
@@ -1356,22 +1355,69 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
 .first-read-round-status.complete { display: grid; grid-template-columns: 1fr auto; gap: 4px 18px; border-left-color: var(--success); background: rgba(47, 107, 80, .06); }
 .first-read-round-status.complete p { grid-column: 1 / -1; margin: 7px 0 0; color: var(--ink-soft); }
 
-.reader-note-ref {
-  display: inline-grid;
-  place-items: center;
-  min-width: max(1.75em, 28px);
-  min-height: max(1.75em, 28px);
-  margin: 0 .14em;
-  padding: 0 .32em;
-  border: 1px solid rgba(160, 124, 34, .42);
-  border-radius: 999px;
-  color: #725714;
-  background: rgba(160, 124, 34, .09);
-  font: 750 .52em/1 var(--sans);
-  vertical-align: super;
-  cursor: pointer;
+.first-read-submitted-review {
+  display: block;
+  margin: 0 0 42px;
+  padding: clamp(20px, 3vw, 34px);
+  border: 1px solid var(--rule);
+  background: rgba(251, 249, 243, .62);
 }
-.reader-note-ref[aria-expanded="true"] { color: #fff; border-color: var(--gold); background: var(--gold); }
+.first-read-submitted-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 26px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--ink);
+}
+.first-read-submitted-heading span,
+.first-read-submitted-heading > p,
+.first-read-submitted-summary > span,
+.first-read-submitted-marks > header span { color: var(--ink-soft); font: 750 .66rem var(--sans); letter-spacing: .1em; }
+.first-read-submitted-heading h3 { margin: 4px 0 0; font: 760 clamp(1.45rem, 2.5vw, 2.1rem) var(--serif); }
+.first-read-submitted-heading > p { margin: 0; color: var(--success); }
+.first-read-submitted-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(230px, 30%); gap: 36px; align-items: start; }
+.first-read-submitted-document { min-width: 0; }
+.first-read-submitted-record { display: grid; gap: 22px; padding: 18px; border-left: 2px solid var(--rule); background: rgba(255, 255, 255, .44); }
+.first-read-submitted-summary p { margin: 8px 0 0; color: var(--ink); font: .92rem/1.8 var(--serif); white-space: pre-wrap; overflow-wrap: anywhere; }
+.first-read-submitted-marks > header { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+.first-read-submitted-marks > header strong { color: var(--accent-dark); font-size: .74rem; }
+.first-read-submitted-record .first-read-mark-list { margin-bottom: 0; }
+.first-read-submitted-record .first-read-mark-card header { grid-template-columns: 26px minmax(0, 1fr); }
+.first-read-submitted-record .first-read-mark-card:last-child { border-bottom: 0; }
+
+.reader-annotation-anchor {
+  display: inline-block;
+  white-space: nowrap;
+}
+.reader-note-sup { line-height: 0; vertical-align: super; white-space: nowrap; }
+
+.reader-note-ref {
+  position: relative;
+  display: inline;
+  margin: 0 .06em 0 .02em;
+  padding: 0 .08em;
+  border: 0;
+  border-radius: 0;
+  appearance: none;
+  color: #725714;
+  background: transparent;
+  font: 800 .54em/.9 var(--sans);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  text-decoration: none;
+  vertical-align: super;
+  white-space: nowrap;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.reader-note-sup .reader-note-ref { vertical-align: baseline; }
+.reader-note-ref::before { position: absolute; inset: -.58em -.46em; content: ""; }
+.reader-note-ref:hover,
+.reader-note-ref:focus-visible,
+.reader-note-ref[aria-expanded="true"] { color: var(--accent-dark); text-decoration: underline; text-decoration-thickness: .12em; text-underline-offset: .18em; }
+.reader-note-ref:focus-visible { outline: 1px solid currentColor; outline-offset: .18em; }
 .reader-inline-note { display: inline; margin: 0 .16em; }
 .reader-inline-note[hidden] { display: none; }
 .reader-inline-note-content {
@@ -1381,11 +1427,15 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
   color: #675420;
   background: rgba(255, 248, 213, .72);
   font: .72em/1.72 var(--sans);
+  white-space: normal;
+  overflow-wrap: anywhere;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   cursor: pointer;
 }
-.reader-inline-note-content p { display: inline; margin: 0; }
+.reader-inline-note-paragraph { display: inline; }
+.reader-inline-note-paragraph + .reader-inline-note-paragraph::before { content: " "; }
+.reader-inline-note-media { display: inline-flex; max-width: min(100%, 26rem); vertical-align: middle; }
 .reader-annotations { display: none; }
 
 .first-read-corrections { display: grid; gap: 14px; margin-top: 28px; padding-top: 22px; border-top: 2px solid var(--ink); }
@@ -1520,6 +1570,8 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
 @media (max-width: 900px) {
   .first-read-layout { grid-template-columns: 1fr; gap: 26px; }
   .first-read-sidebar { position: static; max-height: none; }
+  .first-read-submitted-layout { grid-template-columns: 1fr; gap: 24px; }
+  .first-read-submitted-record { border-top: 2px solid var(--rule); border-left: 0; }
   .material-preview-list,
   .matrix-route.expanded { grid-template-columns: 1fr; }
 }
@@ -1531,6 +1583,10 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
   .first-read-paragraph::before { position: static; margin-right: 8px; content: attr(data-ordinal) " ·"; }
   .first-read-text { font-size: calc(1.04rem * var(--reader-scale)); line-height: 2; }
   .first-read-sidebar { padding: 14px; }
+  .first-read-submitted-review { padding: 18px 14px; }
+  .first-read-submitted-heading { display: block; }
+  .first-read-submitted-heading > p { margin-top: 9px; }
+  .first-read-submitted-record { padding: 14px; }
   .correction-card p { grid-template-columns: auto minmax(0, 1fr); }
   .correction-card p span { grid-column: 1 / -1; }
   .material-preview-frame,

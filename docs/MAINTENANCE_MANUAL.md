@@ -16,14 +16,21 @@ pre-migration and 503 statements no longer describe production.
   local-step disclosure. The main reading column no longer reserves a separate
   right rail.
 - The 30 classical lessons first collect the immutable no-punctuation,
-  no-annotation reading. Submission reveals the canonical annotated text.
-  Inline notes are `role=note`, hidden initially, type only once, and collapse
-  on repeat click or Escape with focus restoration.
+  no-annotation reading. After submission, that reading remains visible,
+  followed by source-bound learning tips and the canonical annotated text.
+  Inline notes are numeric superscript buttons with `role=note` content, hidden
+  initially, typed only once, and collapsed on repeat click or Escape with
+  focus restoration. The shared renderer binds all 2,933 references to the
+  preceding visible character or word in both classical and modern texts.
 - Vocabulary and vocabulary/syntax study-guide interactions require the
   existing non-scoring `readAcknowledged` receipt for `annotated_reading`.
   Client mutation IDs are stable per lesson/text version; the Worker enforces
   the receipt and preserves idempotent replay. Existing vocabulary evidence is
   grandfathered so previously active students are not stranded.
+- `site/data/classical-learning-tips.json` deterministically projects 18
+  source groups to all 30 classical lessons. `site/lesson-blueprint-rules.js`
+  gives all 189 student lessons a unique text-anchored, mode-specific structure
+  question and rejects author impersonation or generic rearrangement prompts.
 
 ### Resource and preview policy
 
@@ -32,22 +39,24 @@ pre-migration and 503 statements no longer describe production.
   must contain `wx.bdfz.net`, never direct `mp.weixin.qq.com` targets.
 - `bdfz.yuque.com` is forbidden in student-visible links and preview targets.
   Exact `pkuschool.yuque.com` lesson pages may be proxied; exact Google Sites
-  lesson pages and 18 reviewed BDFZ subdomain roots are also registered.
+  lesson pages are screenshot-first and 17 reviewed BDFZ exact roots load the
+  real remote sites directly in card and full-page modes. `xue.bdfz.net` is
+  absent from student resources and every preview authority.
 - Preview registration is exact-target: arbitrary sibling paths, redirects to
   an unregistered target, active MIME and IP literals fail closed. Current
-  registry: 540 targets / 119 redirects / 76 hosts, digest
-  `sha256:08b55ba18ccbea706b4755a7e4c1a5de276d5588a5c748bc1ed82dcc00e6968a`.
+  registry: 539 targets / 118 redirects / 75 hosts, digest
+  `sha256:dd847ef28e2e492390c896cd2587931a3c8fdd402f497f359601d16ad0f662a8`.
 - Every rendered iframe/document/image/audio/video preview exposes a full-page
   expand control. Close, Escape and shrink clear the mounted media and restore
   focus. After exact deletion of E01, 16 permanently unavailable resources and
-  the confirmed-dead Bilibili item, the audited set is 353 page resources: 335
+  the confirmed-dead Bilibili item, the audited set is 352 page resources: 334
   have screenshots, 11 have a verified direct presentation, and 7 are not
   embedded because an external condition remains. The 49 authenticated
   recoveries are 22 `ctext.org` pages and 27 `forum.rdfzer.com` pages; their
-  browser credentials, cookies and session state are not stored. The 335
-  entries deduplicate to 329 WebP files / 12,816,592 logical bytes;
+  browser credentials, cookies and session state are not stored. The 334
+  entries deduplicate to 328 WebP files / 12,795,016 logical bytes;
   `site/data/preview-screenshots.json` SHA-256 is
-  `95b8929c4b0bce0ddde45f4eb7941275e9660708704518ad23d5de825c58e17d`.
+  `8b6fee25080e21ccc7475d5058e79193e6ba0624d8a6828b0411b62e55193e47`.
   Deleted resources are removed from the Web projection and registries rather
   than retained as blockers; no permanent/remove blocker remains.
 
@@ -524,23 +533,17 @@ Do not inspect or commit raw student rows. Static-only releases may record `no D
 
 ```zsh
 npm ci
-npm run check:taxonomy
-npm run verify:authors
-npm run verify:vocab:release
-npm run test:vocab-progress
-npm run check:reader-documents
-npm run verify:reader-media
-npm run test:reader-media
-npm run check:learning-manifest
-npm run test:learning-manifest
-npm run test:evidence-contract
-npm run test:reading
-npm run check:content-projection
-npm run check:web-url-projection
-npm run test:native-content
-npm run release:check
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run precontent:check
+YW_STUDY_GUIDE_SOURCE_DIR=/Users/ylsuen/CF/output/pdf_study_guides_web \
+  PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:/opt/homebrew/bin:$PATH \
+  npm run verify:study-guide-sources
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run qa:web-polish
 git diff --check
 ```
+
+The current Web-only release deliberately does not run `release:check`: that
+paired command includes the paused App synchronization gate. It must remain
+fail-closed until App follow-up resumes; do not rewrite it as a Web pass.
 
 Run a staged secret scan before commit or push. Generated cache, `output/`, `.claude/`, Playwright profiles, local D1 state, backups, and secrets are not source artifacts.
 
@@ -603,7 +606,14 @@ publish immutable content objects before moving the App pointer, then deploy
 the exact checksum-fixed Web artifact.
 
 ```zsh
-npm run deploy
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:release-site
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:release-site
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:artifact-manifest
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:artifact-manifest
+bash /Users/ylsuen/CF/scripts/git-deploy-gate.sh
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
+  ./node_modules/.bin/wrangler pages deploy .release/site \
+  --project-name yuwen-course --branch main
 ```
 
 Record Git commit/tag, staged-file set, artifact checksum manifest, Pages deployment ID/URL, D1 migration/export state, previous verified deployment, and exact live verification result. The displayed Pages commit hash is not accepted as source proof for a direct upload.

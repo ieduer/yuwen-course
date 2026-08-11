@@ -17,32 +17,39 @@ Production serves Pages deployment
   lesson title and portrait. The owner-scoped local step indicator is collapsed
   beside the portrait instead of occupying the reading column.
 - All 30 classical lessons now require two consecutive reading stages. After
-  the immutable `起始 · 無注疏初讀`, the annotated canonical text appears with
-  inline notes hidden by default. Notes type once, collapse on repeat click or
-  Escape, and restore focus. Vocabulary and vocabulary/syntax study-guide work
-  unlock only after the student explicitly acknowledges the annotated reading;
-  the server enforces the same non-scoring receipt gate and supports exact
-  mutation replay.
+  the immutable `起始 · 無注疏初讀`, the submitted no-note reading remains
+  visible beside source-bound learning tips and the annotated canonical text.
+  Inline notes begin hidden, use numeric superscripts, type once, collapse on
+  repeat click or Escape, and restore focus. Across 191 reader documents all
+  2,933 annotation references bind to the preceding visible character or word.
+  Vocabulary and vocabulary/syntax study-guide work unlock only after the
+  student explicitly acknowledges the annotated reading; the server enforces
+  the same non-scoring receipt gate and supports exact mutation replay.
 - Student-visible `bdfz.yuque.com` links are removed. Nine WeChat article URLs
   project through exact `wx.bdfz.net` archive mappings. Every supported
   document, image, audio, video or iframe preview can expand to the full-page
   dialog and shrink back with focus restored. After deleting E01, the 16
   permanently unavailable resources and the separately confirmed-dead
-  Bilibili item, the fallback audit covers 353 page resources: 335 have
+  Bilibili item, the fallback audit covers 352 page resources: 334 have
   reviewed screenshots, 11 use an already verified direct presentation, and
   7 stop embedding while keeping the original link because an external
   condition remains. The screenshot set includes 49 reviewed authenticated
-  captures (22 `ctext.org`, 27 `forum.rdfzer.com`). There are 329 unique WebP
-  files and 12,816,592 logical screenshot bytes; manifest SHA-256 is
-  `95b8929c4b0bce0ddde45f4eb7941275e9660708704518ad23d5de825c58e17d`.
+  captures (22 `ctext.org`, 27 `forum.rdfzer.com`). There are 328 unique WebP
+  files and 12,795,016 logical screenshot bytes; manifest SHA-256 is
+  `8b6fee25080e21ccc7475d5058e79193e6ba0624d8a6828b0411b62e55193e47`.
   Deleted resources are absent from the Web projection, preview registry and
   screenshot manifest; no permanent/remove blocker remains.
-- Preview registration remains exact-target and fail-closed: 540 targets, 119
-  redirect targets and 76 hosts with digest
-  `sha256:08b55ba18ccbea706b4755a7e4c1a5de276d5588a5c748bc1ed82dcc00e6968a`.
-  The 18 approved BDFZ subdomain roots, exact Google Sites and exact
-  `pkuschool.yuque.com` lesson URLs are registered; arbitrary sibling paths and
-  every `bdfz.yuque.com` URL remain forbidden.
+- Preview registration remains exact-target and fail-closed: 539 targets, 118
+  redirect targets and 75 hosts with digest
+  `sha256:dd847ef28e2e492390c896cd2587931a3c8fdd402f497f359601d16ad0f662a8`.
+  Seventeen approved BDFZ exact roots load the real remote sites in both card
+  and full-page modes; 99 exact Google Sites targets are screenshot-first.
+  Arbitrary sibling paths and every `bdfz.yuque.com` URL remain forbidden, and
+  `xue.bdfz.net` is absent from student resources and all preview authorities.
+- Every one of the 189 student lessons now has a unique structure question
+  tied to a reviewed focus or a literal text anchor and to the lesson's mode.
+  The runtime rejects author impersonation and the generic
+  `我是／抽掉／換序／最關鍵的材料` templates before caching.
 - The study-guide catalog remains 241 items in 16 lessons, now 191 active and
   50 inactive/tombstoned (`yw-study-guides-9cb5500f46333aac`). The formative
   manifest is `yw-formative-20a7145bd573bbb7`, 1,019 items in 115 lessons with
@@ -65,14 +72,14 @@ Production serves Pages deployment
   `579d588eab5718551da61b6009789631e9a710cc2fc9f1b6cc46588f64f74bb6`.
   Reading and learning health are 200, the online source/taxonomy counts are
   191/189, and desktop/mobile layout acceptance is 25/25.
-- Formal Web staging is current at 1,222 files / 1,221 projected files. Its
+- Formal Web staging is current at 1,223 files / 1,222 projected files. Its
   marker is `formal-stable`, projected aggregate
-  `6b156f53be4876769cad7e523645c25e510dca4f7c96b9445936842056fffe29`,
+  `e847d33848fff683fd8d6816a9a6deeda1adf1b427a93ddfdea4d520bafb2f9f`,
   marker SHA-256
-  `579d588eab5718551da61b6009789631e9a710cc2fc9f1b6cc46588f64f74bb6`
+  `1a947f37e17f9617ad30ba9ecde4ed19e0b12c921edca4489591cde42926bf94`
   and artifact-manifest aggregate
-  `bde95d8ba08d7a883dcb1fdbefd9d36f54d791b1e20efb234126bd9003a112fb`
-  over 163,807,598 bytes. The unchanged stable App release remains exactly 278
+  `b664e2d4bb28eff30a8d807d7a351f591209a8712e012977f15646914ba804e7`
+  over 163,859,704 bytes. The unchanged stable App release remains exactly 278
   included paths.
 
 ## Historical 2026-08-09 objective and implemented scope
@@ -111,9 +118,10 @@ selection lookup, modern three-word response and reading constellation.
   The refreshed reader semantic digest is
   `sha256:c53a5c9d86ef10b0e82f3f9951be49b0b0fc0207b934c72cf3218f4df4805f2d`.
 - Inline typewriter annotations, expanded resource/slide/matrix previews,
-  semantic-query-preserving deduplication, the `xue.bdfz.net` cross-book link,
+  semantic-query-preserving deduplication, a historical cross-book link,
   0--100 interest slider, owner-scoped local progress and a four-axis formative
-  star projection are implemented.
+  star projection were implemented. The historical cross-book resource is not
+  part of the current Web release.
 - Migration `0004_classical_first_read_and_outbox_index.sql` adds first-read,
   idempotency/rate-slot and stable identity-link structures. It has not been
   applied to production.

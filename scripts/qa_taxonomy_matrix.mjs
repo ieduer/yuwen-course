@@ -225,7 +225,7 @@ check("頁首引入李密肖像", chenqing.portraits > 0, String(chenqing.portra
 check("無可靠李密肖像明示為姓名卡", chenqing.portraitNameCard.includes("無可靠肖像姓名卡"), chenqing.portraitNameCard);
 check("作者肖像為正圓", chenqing.portraitShape?.radius === "50%" && Math.abs(chenqing.portraitShape.width - chenqing.portraitShape.height) < 1, JSON.stringify(chenqing.portraitShape));
 check("篇名保持單行", chenqing.titleLayout?.whiteSpace === "nowrap" && chenqing.titleLayout.scrollWidth <= chenqing.titleLayout.width + 1 && chenqing.titleLayout.height <= chenqing.titleLayout.lineHeight * 1.1, JSON.stringify(chenqing.titleLayout));
-check("古文註釋正文引用與頁末列表一一對應", chenqing.annotationRefs > 20 && chenqing.annotationItems > 20, JSON.stringify({ refs: chenqing.annotationRefs, items: chenqing.annotationItems }));
+check("古文註釋全部改為隨文數字按鈕", chenqing.annotationRefs > 20 && chenqing.annotationItems === 0, JSON.stringify({ refs: chenqing.annotationRefs, items: chenqing.annotationItems }));
 check("註釋無 color 或原始複用編碼殘片", chenqing.annotationResidue === false, String(chenqing.annotationResidue));
 check("頁末註釋移除", chenqing.footnoteLists === 0, String(chenqing.footnoteLists));
 check("註釋不跳論壇", chenqing.forumFragmentLinks === 0, String(chenqing.forumFragmentLinks));
@@ -237,16 +237,19 @@ check("叩問作者移至見效最後", chenqing.checkLabels.at(-1) === "叩問�
 check("學習效果確認改名見效", await page.locator("#check-title", { hasText: "見效" }).count() === 1 && await page.getByText("學習效果確認", { exact: true }).count() === 0);
 check("正文三段標題精簡", (await page.locator("#orientation-title").innerText()) === "起始" && (await page.locator("#textbook-title").innerText()) === "細讀" && (await page.locator("#materials-title").innerText()) === "延伸");
 check("閱讀起點鏈接新頁打開", await page.locator("#orientation-content a:not([target='_blank'])").count() === 0);
-check("站內入口與登入留在當前頁", await page.locator(".topbar-actions a[data-same-tab]:not([target])").count() >= 4);
+check("文體書目星圖己身登入均在新頁", await page.locator("#topbar-actions a[href]:not([target='_blank'])").count() === 0 && await page.locator("#topbar-actions a[data-same-tab]").count() === 0);
 check(
   "其餘鏈接均新頁打開",
   await page.locator("a[href]:not([target='_blank']):not([data-same-tab]):not([href^='#'])").count() === 0,
 );
 
 const firstNote = page.locator("#text-flow .reader-note-ref").first();
-const noteTarget = await firstNote.getAttribute("href");
+const noteTarget = await firstNote.getAttribute("aria-controls");
+const pageBeforeNote = page.url();
 await firstNote.click();
-check("註釋點擊定位到同頁 canonical 列表", Boolean(noteTarget) && page.url().endsWith(noteTarget) && await page.locator(noteTarget).count() === 1, `${page.url()} ${noteTarget}`);
+check("數字上標展開隨文註釋", Boolean(noteTarget) && await page.locator(`#${noteTarget}:not([hidden])`).count() === 1 && page.url() === pageBeforeNote, `${page.url()} ${noteTarget}`);
+await firstNote.click();
+check("數字上標再次點擊收起註釋", await page.locator(`#${noteTarget}[hidden]`).count() === 1 && await firstNote.getAttribute("aria-expanded") === "false");
 check("註釋定位不切換課文", (await page.locator("#lesson-title").innerText()).includes("陈情表"));
 
 check("非專注模式不顯示正文縮放", await page.locator("#font-up").isHidden() && await page.locator("#font-down").isHidden() && await page.locator("#font-label").isHidden());

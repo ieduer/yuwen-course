@@ -102,12 +102,12 @@ test("preview screenshot manifest is bounded and every byte is content-addressed
 });
 
 test("reviewed recovery audit is fail-closed and preserves the original resource identity", () => {
-  assert.equal(manifest.candidateCount, 353);
-  assert.equal(manifest.screenshotCount, 335);
+  assert.equal(manifest.candidateCount, 352);
+  assert.equal(manifest.screenshotCount, 334);
   assert.equal(manifest.resolvedCount, 11);
   assert.equal(manifest.blockedCount, 7);
-  assert.equal(new Set(manifest.entries.map((entry) => entry.screenshotUrl)).size, 329);
-  assert.equal(manifest.totalBytes, 12_816_592);
+  assert.equal(new Set(manifest.entries.map((entry) => entry.screenshotUrl)).size, 328);
+  assert.equal(manifest.totalBytes, 12_795_016);
   const recovered = manifest.entries.filter((entry) => entry.recoveryMethod);
   assert.equal(recovered.length, 137);
   assert.equal(new Set(recovered.map((entry) => entry.sourceUrl)).size, 137);
@@ -141,7 +141,25 @@ test("reviewed recovery audit is fail-closed and preserves the original resource
   });
   assert.equal(registry.targets.some((entry) => entry.includes("BV1Zg4y1H7fK")), false);
   assert.equal(JSON.stringify(manifest).includes("BV1Zg4y1H7fK"), false);
+  assert.equal(
+    [...manifest.entries, ...manifest.blocked, ...manifest.resolved]
+      .some((entry) => new URL(entry.sourceUrl).hostname === "xue.bdfz.net"),
+    false,
+  );
   assert.match(appSource, /\/video\/bv1zg4y1h7fk/);
+});
+
+test("all 99 exact Google Sites targets have reviewed screenshots", () => {
+  const googleTargets = registry.targets
+    .filter((entry) => new URL(entry).hostname === "sites.google.com")
+    .sort();
+  const googleScreenshots = manifest.entries
+    .filter((entry) => new URL(entry.sourceUrl).hostname === "sites.google.com")
+    .map((entry) => entry.sourceUrl)
+    .sort();
+  assert.equal(googleTargets.length, 99);
+  assert.equal(googleScreenshots.length, 99);
+  assert.deepEqual(googleScreenshots, googleTargets);
 });
 
 test("runtime falls back to reviewed screenshots and otherwise stops embedding", () => {

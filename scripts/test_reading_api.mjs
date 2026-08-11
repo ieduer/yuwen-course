@@ -14,6 +14,7 @@ const SERVER_ROOT = mkdtempSync(path.join(os.tmpdir(), "yuwen-reading-api-"));
 const STATE_ROOT = path.join(SERVER_ROOT, ".wrangler-state");
 for (const file of [
   "_worker.js",
+  "lesson-blueprint-rules.js",
   "learning-evidence-source.js",
   "classical-first-read-source.js",
   "preview-network-policy.js",

@@ -11,26 +11,37 @@ does not change the User Center, native App, A+/A--F scoring, or D1 schema:
 - the lesson title, `起始` orientation and portrait share one compact masthead;
   owner-scoped local steps sit collapsed beside the portrait, leaving the main
   column to reading;
-- 30 classical lessons show the annotated canonical text after the no-note
-  first read, keep inline notes hidden until clicked, and require an explicit
-  non-scoring annotated-reading receipt before vocabulary unlocks;
+- after the no-note first read, all 30 classical lessons keep that submitted
+  reading visible, add source-bound learning tips, and then show the annotated
+  canonical text. Inline notes begin hidden and vocabulary remains locked until
+  an explicit non-scoring annotated-reading receipt succeeds;
+- all 191 reader documents share one numeric-superscript renderer: all 2,933
+  references bind to the preceding visible character or word, so neither
+  classical nor modern annotations can leave an orphan marker on a new line;
+- all 189 student lessons have a unique, text-anchored and mode-specific
+  structure question. Author impersonation and the generic
+  `我是／抽掉／換序／最關鍵的材料` templates fail closed;
 - all nine WeChat article resources use reviewed `wx.bdfz.net` archives, all
   embeds can expand to the full-page preview and return to their card, and
-  the reviewed fallback set covers 353 page resources: 335 use screenshots,
+  the reviewed fallback set covers 352 page resources: 334 use screenshots,
   11 have a direct presentation, and 7 stop embedding honestly because an
   external condition remains. The screenshots include 22 reviewed
   `ctext.org` pages and 27 reviewed `forum.rdfzer.com` pages;
+- 99 Google Sites resources are screenshot-first, while 17 reviewed exact
+  BDFZ roots load the real remote site in both the card and full-page view.
+  `xue.bdfz.net` is absent from student resources, preview targets, redirects,
+  allowed hosts and screenshot receipts;
 - every student-visible `bdfz.yuque.com` link is removed. Registered BDFZ
   subdomain roots and exact third-party lesson URLs remain exact-target and
   fail closed for arbitrary sibling paths. E01, 16 permanently unavailable
   resources and the confirmed-dead Bilibili item are deleted from the Web
   projection and registries.
 
-The current preview registry is 540 targets / 119 redirects / 76 hosts, digest
-`sha256:08b55ba18ccbea706b4755a7e4c1a5de276d5588a5c748bc1ed82dcc00e6968a`.
-The screenshot manifest uses 329 unique WebP files / 12,816,592 logical bytes;
+The current preview registry is 539 targets / 118 redirects / 75 hosts, digest
+`sha256:dd847ef28e2e492390c896cd2587931a3c8fdd402f497f359601d16ad0f662a8`.
+The screenshot manifest uses 328 unique WebP files / 12,795,016 logical bytes;
 its SHA-256 is
-`95b8929c4b0bce0ddde45f4eb7941275e9660708704518ad23d5de825c58e17d`.
+`8b6fee25080e21ccc7475d5058e79193e6ba0624d8a6828b0411b62e55193e47`.
 
 The production D1 already contains migration 0004. This task performs no D1
 write and does not move `site/app-content/latest-stable.json`. App and User
@@ -56,11 +67,11 @@ the current production release or an App-approved content receipt:
   rubric rather than a fabricated unique answer.
 - Classical lessons no longer duplicate `通讀正文` or `字句之改`; modern lessons
   retain the three-word first response and `字句之改`.
-- Inline annotations follow the text, type in when `注` is opened, and collapse
+- Inline annotations followed the text, typed in from a legacy word marker, and collapsed
   on a second click or a blank-text click. Lesson material, slide and transfer
   resources render as expanded previews with explicit fallbacks; duplicate
-  `此刻同讀` entries are removed and cross-book lookup uses
-  `https://xue.bdfz.net/`.
+  `此刻同讀` entries were removed. The former cross-book lookup was removed in
+  the current Web release.
 - `lessonId + competencyTag` is the public formative aggregation unit. The
   current active-set denominator is computed from stable semantic completion
   keys, so additions, retirements and reviewed aliases update mastery without
@@ -173,6 +184,7 @@ tree:
 ```zsh
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:release-site
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:release-site
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:artifact-manifest
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:artifact-manifest
 bash /Users/ylsuen/CF/scripts/git-deploy-gate.sh
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \

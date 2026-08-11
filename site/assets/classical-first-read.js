@@ -200,6 +200,54 @@
       </section>`;
   }
 
+  function renderSubmittedParagraphs(session) {
+    return session.asset.paragraphs.map((paragraph) => `
+      <p class="first-read-paragraph" data-first-read-submitted-paragraph="${esc(paragraph.key)}" data-ordinal="${Number(paragraph.ordinal)}">${markedText(session, paragraph)}</p>`).join("");
+  }
+
+  function renderSubmittedMarks(session) {
+    if (!session.marks.length) {
+      return '<p class="first-read-empty">本次初讀沒有留下疑難標記。</p>';
+    }
+    return session.marks.map((mark, index) => `
+      <article class="first-read-mark-card">
+        <header><span>${String(index + 1).padStart(2, "0")}</span><strong>${esc(mark.selectedText)}</strong></header>
+        <p>${esc(mark.guess || "")}</p>
+      </article>`).join("");
+  }
+
+  function renderSubmittedReading(session) {
+    if (!session?.submitted || !session.asset || !Array.isArray(session.asset.paragraphs)) return "";
+    const safeSession = {
+      ...session,
+      marks: Array.isArray(session.marks) ? session.marks : [],
+      summary: String(session.summary || ""),
+    };
+    return `
+      <section class="first-read-submitted-review" data-first-read-submitted-review aria-labelledby="first-read-submitted-heading">
+        <header class="first-read-submitted-heading">
+          <div><span>起始</span><h3 id="first-read-submitted-heading">無注疏初讀</h3></div>
+          <p>已提交 · 保留第一次閱讀</p>
+        </header>
+        <div class="first-read-submitted-layout">
+          <div class="first-read-submitted-document" aria-label="已提交的無注疏初讀正文">
+            <p class="first-read-instruction">這是解鎖前讀過的無標點正文；原始紅筆標記保持不變，可隨時與帶註釋正文對照。</p>
+            <div class="first-read-text">${renderSubmittedParagraphs(safeSession)}</div>
+          </div>
+          <aside class="first-read-submitted-record" aria-label="已提交的初讀記錄">
+            <section class="first-read-submitted-summary">
+              <span>初讀感知</span>
+              <p>${esc(safeSession.summary) || "未留下初讀感知。"}</p>
+            </section>
+            <section class="first-read-submitted-marks" aria-label="初讀疑難標記">
+              <header><span>疑難標記</span><strong>${safeSession.marks.length}</strong></header>
+              <div class="first-read-mark-list">${renderSubmittedMarks(safeSession)}</div>
+            </section>
+          </aside>
+        </div>
+      </section>`;
+  }
+
   function refreshGate(root, session, handlers) {
     const text = root.querySelector(".first-read-text");
     const sidebar = root.querySelector("[data-first-read-sidebar]");
@@ -465,6 +513,7 @@
   window.YwClassicalFirstRead = Object.freeze({
     load,
     renderGate,
+    renderSubmittedReading,
     bindGate,
     captureSelection,
     renderCorrections,
