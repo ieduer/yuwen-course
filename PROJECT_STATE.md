@@ -2,12 +2,12 @@
 
 Last updated: 2026-08-11
 
-Package: `0.2.1-evaluation-nonscoring`. Current Web candidate branch:
-`codex/yw-web-content-finalize-20260811`, based on clean source
-`a85cf94cc7f5193417b059b504e03693e3046be1`. Before this candidate is
-published, production serves Pages deployment
-`d017e7db-08f9-47fe-b348-4f40c29db474` from that same source. The current
-override below supersedes the retained 2026-08-09 candidate/release narrative.
+Package: `0.2.1-evaluation-nonscoring`. GitHub `main` and the deployed Web
+source are clean commit `48251ef3f572fd0d6dbd73f6b70a742ebb86b05b`.
+Production serves Pages deployment
+`e3b07f67-ad58-4467-9a69-915f29f24f03` at `yw.bdfz.net`; it was deployed at
+2026-08-11T12:16:10Z. The current override below supersedes the retained
+2026-08-09 candidate/release narrative.
 
 ## 2026-08-11 Web reading finalization
 
@@ -60,6 +60,11 @@ override below supersedes the retained 2026-08-09 candidate/release narrative.
   The Web release uses the formal stable artifact already referenced by the
   unchanged pointer; immediate Pages rollback is the pre-release deployment
   `d017e7db-08f9-47fe-b348-4f40c29db474`, preserving every D1 row.
+- Live readback of both the atomic deployment URL and `yw.bdfz.net` matches the
+  formal release marker SHA-256
+  `579d588eab5718551da61b6009789631e9a710cc2fc9f1b6cc46588f64f74bb6`.
+  Reading and learning health are 200, the online source/taxonomy counts are
+  191/189, and desktop/mobile layout acceptance is 25/25.
 - Formal Web staging is current at 1,222 files / 1,221 projected files. Its
   marker is `formal-stable`, projected aggregate
   `6b156f53be4876769cad7e523645c25e510dca4f7c96b9445936842056fffe29`,

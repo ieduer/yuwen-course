@@ -53,12 +53,15 @@ pre-migration and 503 statements no longer describe production.
 
 ### Release, data and rollback
 
-Production before this Web release is Pages deployment
-`d017e7db-08f9-47fe-b348-4f40c29db474`, source
-`a85cf94cc7f5193417b059b504e03693e3046be1`. Remote readback confirms D1
-migrations 0001--0004, `reading-schema-v4`, and compound learning health 200.
-This task does not export, migrate or write D1; it changes no User Center,
-Queue, App or scoring contract.
+Current production is Pages deployment
+`e3b07f67-ad58-4467-9a69-915f29f24f03`, clean source
+`48251ef3f572fd0d6dbd73f6b70a742ebb86b05b`, deployed at
+2026-08-11T12:16:10Z. The atomic deployment URL and `yw.bdfz.net` return the
+same formal marker SHA-256
+`579d588eab5718551da61b6009789631e9a710cc2fc9f1b6cc46588f64f74bb6`.
+Remote readback confirms D1 migrations 0001--0004, `reading-schema-v4`, and
+compound learning health 200. This Web release did not export, migrate or write
+D1; it changed no User Center, Queue, App or scoring contract.
 
 User direction pauses App/User Center follow-up while the Web content is
 settled. Therefore `check:native-content:deploy-sync` is expected to reject the

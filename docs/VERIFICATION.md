@@ -75,6 +75,16 @@ and artifact-manifest aggregate
 It includes the unchanged stable App release only (278 exact paths) and no new
 App candidate or pointer.
 
+Production deployment
+`e3b07f67-ad58-4467-9a69-915f29f24f03` was published from clean GitHub `main`
+commit `48251ef3f572fd0d6dbd73f6b70a742ebb86b05b` at
+2026-08-11T12:16:10Z. The atomic deployment URL and `yw.bdfz.net` return the
+same marker SHA-256 above. Live Reading and compound learning health are 200;
+the online source/taxonomy counts are 191/189, preview registry is 540/119/76,
+the screenshot manifest is 353/335/11/7, and production layout acceptance is
+25/25. Immediate Pages rollback is
+`d017e7db-08f9-47fe-b348-4f40c29db474`; D1 and the App pointer remain in place.
+
 ### Deliberate App pause
 
 `npm run check:native-content:deploy-sync` remains fail-closed because this Web
