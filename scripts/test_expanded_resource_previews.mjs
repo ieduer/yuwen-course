@@ -106,6 +106,14 @@ test("student runtime uses the exact reviewed deletion set and preserves neighbo
   assert.equal(runtimePolicy.isRemoved("https://xue.bdfz.net/"), true);
   assert.equal(runtimePolicy.isRemoved("https://xue.bdfz.net/arbitrary/path?lesson=1"), true);
   assert.equal(runtimePolicy.isRemoved("https://xue.bdfz.net.example.com/"), false);
+  assert.equal(
+    runtimePolicy.isRemoved("https://www.scdfz.org.cn/ztzl/hjczzsc/zzhy/content_30068"),
+    true,
+  );
+  assert.equal(
+    runtimePolicy.isRemoved("https://www.scdfz.org.cn/scdqs/sxdq/lss/jwx/content_22151"),
+    false,
+  );
   for (const href of [
     "https://baike.baidu.com/item/%E6%97%A0%E9%A2%98",
     "https://forum.rdfzer.com/c/general/5",
@@ -126,6 +134,8 @@ test("reader body links use the same fail-closed student projection", () => {
 
 const previewPlanSource = section("function directRemoteAppRootFor", "function previewFallback");
 const reviewedGoogleSite = "https://sites.google.com/view/pkuschool/cover3/xbs1/xbs5";
+const reviewedWikisource = "https://zh.wikisource.org/zh-hant/%E5%88%A5%E8%B3%A6";
+const reviewedWikisourceScreenshot = "/assets/preview-screenshots/d7fd59e2b134dd5e9de56a65.webp";
 const resourcePreviewPlan = new Function(
   "location",
   "resourcePreviewUrl",
@@ -137,11 +147,13 @@ const resourcePreviewPlan = new Function(
   (href) => href.startsWith("https://yw.bdfz.net/") ? href : `/api/preview?url=${encodeURIComponent(href)}`,
   (href) => href === reviewedGoogleSite
     ? { screenshotUrl: "/assets/preview-screenshots/reviewed-google.webp" }
+    : href === reviewedWikisource
+      ? { screenshotUrl: reviewedWikisourceScreenshot }
     : null,
-  { directRemoteAppRoots: new Set(["https://coread.bdfz.net/"]) },
+  { directRemoteAppRoots: new Set(["https://coread.bdfz.net/", "https://qx.bdfz.net/"]) },
 );
 
-test("preview plan uses reviewed remote roots, Google screenshots, and explicit external fallbacks", () => {
+test("preview plan uses safe qx fragments, screenshot-first Wikisource, clickable YouTube, and explicit fallbacks", () => {
   assert.equal(resourcePreviewPlan({ href: "https://yw.bdfz.net/slides/lesson.pdf", kind: "document" }).mode, "document");
   assert.equal(resourcePreviewPlan({ href: "https://img.bdfz.net/page.webp" }).mode, "image");
 
@@ -149,10 +161,18 @@ test("preview plan uses reviewed remote roots, Google screenshots, and explicit 
   assert.equal(direct.mode, "remote-app");
   assert.equal(direct.src, "https://coread.bdfz.net/");
   assert.equal(direct.externalHref, "https://coread.bdfz.net/");
+
+  const qxAuthor = resourcePreviewPlan({ href: "https://qx.bdfz.net/#luxun" });
+  assert.equal(qxAuthor.mode, "remote-app");
+  assert.equal(qxAuthor.src, "https://qx.bdfz.net/#luxun");
+  assert.equal(qxAuthor.externalHref, "https://qx.bdfz.net/#luxun");
   for (const nonRoot of [
     "https://coread.bdfz.net/private-path",
     "https://coread.bdfz.net/?query=1",
     "https://coread.bdfz.net/#fragment",
+    "https://qx.bdfz.net/private-path#luxun",
+    "https://qx.bdfz.net/?author=luxun",
+    "https://qx.bdfz.net/#bad/route",
     "https://unregistered.bdfz.net/",
   ]) assert.notEqual(resourcePreviewPlan({ href: nonRoot }).mode, "remote-app", nonRoot);
 
@@ -161,6 +181,26 @@ test("preview plan uses reviewed remote roots, Google screenshots, and explicit 
   assert.equal(google.src, "/assets/preview-screenshots/reviewed-google.webp");
   assert.equal(google.screenshot, true);
   assert.match(google.reason, /Google Sites/);
+
+  const wikisource = resourcePreviewPlan({ href: reviewedWikisource });
+  assert.equal(wikisource.mode, "image");
+  assert.equal(wikisource.src, reviewedWikisourceScreenshot);
+  assert.equal(wikisource.externalHref, reviewedWikisource);
+  assert.equal(wikisource.screenshot, true);
+  assert.match(wikisource.reason, /維基文庫/);
+
+  const youtube = resourcePreviewPlan({ href: "https://www.youtube.com/watch?v=XSopGMoaHkU" });
+  assert.equal(youtube.mode, "youtube");
+  assert.equal(
+    youtube.src,
+    "https://www.youtube-nocookie.com/embed/XSopGMoaHkU?rel=0&playsinline=1",
+  );
+  assert.equal(youtube.posterSrc, "https://i.ytimg.com/vi/XSopGMoaHkU/hqdefault.jpg");
+  assert.match(youtube.reason, /點擊畫面即可直接播放/);
+  assert.equal(
+    resourcePreviewPlan({ href: "https://www.youtube.com/watch?v=bad" }).mode,
+    "external-only",
+  );
 
   const http = resourcePreviewPlan({ href: "http://example.test/material" });
   assert.equal(http.mode, "external-only");
@@ -207,8 +247,15 @@ test("reviewed embeds expand immediately, use real remote sites, and never resto
   assert.match(mountSource, /openResourcePlan\(plan, title\)/);
   assert.match(mountSource, /inlinePreviewUsable\(plan\.src\)/);
   assert.match(mountSource, /screenshotFallbackPlan\(plan\)/);
-  assert.match(mountSource, /plan\.mode === "remote-app"/);
-  assert.match(mountSource, /allow-scripts allow-same-origin allow-forms/);
+  assert.match(mountSource, /element\.loading = eager \? "eager" : "lazy"/);
+  assert.doesNotMatch(mountSource, /eager \|\| plan\.mode === "remote-app"/);
+  assert.match(mountSource, /plan\.mode === "youtube" && !eager/);
+  assert.match(mountSource, /className = "youtube-preview-play"/);
+  assert.match(mountSource, /autoplay\.searchParams\.set\("autoplay", "1"\)/);
+  assert.match(mountSource, /\["remote-app", "youtube"\]\.includes\(plan\.mode\)/);
+  assert.match(mountSource, /allow-scripts allow-same-origin allow-forms[^"]*allow-presentation/);
+  assert.match(mountSource, /element\.referrerPolicy = "strict-origin-when-cross-origin"/);
+  assert.match(mountSource, /element\.allowFullscreen = true/);
   assert.match(mountSource, /沒有經驗證的本機截圖/);
   assert.match(dialogSource, /mountResourcePreview\(els\.resourceStage, plan, title, \{ eager: true, expanded: true \}\)/);
   assert.match(eventSource, /els\.resourceStage\.replaceChildren\(\)/);

@@ -9,6 +9,8 @@ const manifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/preview-screen
 const registry = JSON.parse(readFileSync(resolve(ROOT, "site/data/preview-targets.json"), "utf8"));
 const appSource = readFileSync(resolve(ROOT, "site/assets/app.js"), "utf8");
 const captureSource = readFileSync(resolve(ROOT, "scripts/capture_preview_screenshots.mjs"), "utf8");
+const REMOVED_EMPTY_SCDFZ_URL = "https://www.scdfz.org.cn/ztzl/hjczzsc/zzhy/content_30068";
+const PRESERVED_SCDFZ_URL = "https://www.scdfz.org.cn/scdqs/sxdq/lss/jwx/content_22151";
 
 test("preview screenshot manifest is bounded and every byte is content-addressed", () => {
   assert.equal(manifest.schemaVersion, "yw-preview-screenshots-v1");
@@ -102,10 +104,10 @@ test("preview screenshot manifest is bounded and every byte is content-addressed
 });
 
 test("reviewed recovery audit is fail-closed and preserves the original resource identity", () => {
-  assert.equal(manifest.candidateCount, 352);
+  assert.equal(manifest.candidateCount, 351);
   assert.equal(manifest.screenshotCount, 334);
   assert.equal(manifest.resolvedCount, 11);
-  assert.equal(manifest.blockedCount, 7);
+  assert.equal(manifest.blockedCount, 6);
   assert.equal(new Set(manifest.entries.map((entry) => entry.screenshotUrl)).size, 328);
   assert.equal(manifest.totalBytes, 12_795_016);
   const recovered = manifest.entries.filter((entry) => entry.recoveryMethod);
@@ -128,7 +130,7 @@ test("reviewed recovery audit is fail-closed and preserves the original resource
       .map((category) => [category, manifest.blocked.filter((entry) => entry.auditCategory === category).length]),
   );
   assert.deepEqual(categories, {
-    "requires-suen-or-external-account": 7,
+    "requires-suen-or-external-account": 6,
     "permanent-dead-or-remove": 0,
   });
   const resolutionGroups = Object.fromEntries(
@@ -136,9 +138,20 @@ test("reviewed recovery audit is fail-closed and preserves the original resource
       .map((group) => [group, manifest.blocked.filter((entry) => entry.resolutionGroup === group).length]),
   );
   assert.deepEqual(resolutionGroups, {
-    "external-condition-required": 7,
+    "external-condition-required": 6,
     "remove-from-embed": 0,
   });
+  const allManifestEntries = [...manifest.entries, ...manifest.blocked, ...manifest.resolved];
+  assert.equal(registry.targets.includes(REMOVED_EMPTY_SCDFZ_URL), false);
+  assert.equal(allManifestEntries.some((entry) => entry.sourceUrl === REMOVED_EMPTY_SCDFZ_URL), false);
+  assert.equal(registry.targets.includes(PRESERVED_SCDFZ_URL), true);
+  assert.equal(
+    manifest.blocked.some((entry) => (
+      entry.sourceUrl === PRESERVED_SCDFZ_URL
+      && entry.resolutionGroup === "external-condition-required"
+    )),
+    true,
+  );
   assert.equal(registry.targets.some((entry) => entry.includes("BV1Zg4y1H7fK")), false);
   assert.equal(JSON.stringify(manifest).includes("BV1Zg4y1H7fK"), false);
   assert.equal(
@@ -162,6 +175,24 @@ test("all 99 exact Google Sites targets have reviewed screenshots", () => {
   assert.deepEqual(googleScreenshots, googleTargets);
 });
 
+test("all exact Wikisource targets are screenshot-first and YouTube targets retain playable metadata", () => {
+  const wikisourceTargets = registry.targets
+    .filter((entry) => new URL(entry).hostname === "zh.wikisource.org")
+    .sort();
+  const wikisourceScreenshots = manifest.entries
+    .filter((entry) => new URL(entry.sourceUrl).hostname === "zh.wikisource.org")
+    .map((entry) => entry.sourceUrl)
+    .sort();
+  assert.equal(wikisourceTargets.length, 17);
+  assert.deepEqual(wikisourceScreenshots, wikisourceTargets);
+
+  const youtubeResolved = manifest.resolved.filter((entry) => (
+    ["youtube.com", "www.youtube.com", "youtu.be"].includes(new URL(entry.sourceUrl).hostname)
+  ));
+  assert.equal(youtubeResolved.length, 5);
+  assert.ok(youtubeResolved.every((entry) => entry.resolution === "reviewed-video-thumbnail"));
+});
+
 test("runtime falls back to reviewed screenshots and otherwise stops embedding", () => {
   assert.match(appSource, /fetchJson\("data\/preview-screenshots\.json"/);
   assert.match(appSource, /previewScreenshotBySource/);
@@ -172,6 +203,11 @@ test("runtime falls back to reviewed screenshots and otherwise stops embedding",
 });
 
 test("capture is anonymous, fixed-size, compressed, and rejects login or error pages", () => {
+  assert.match(captureSource, /import \{ isRemovedWebResource \} from "\.\/web_resource_policy\.mjs"/);
+  assert.doesNotMatch(captureSource, /const REMOVED_WEB_RESOURCE_KEYS/);
+  assert.match(captureSource, /values\.filter\(\(entry\) => !isRemovedWebResource\(entry\?\.sourceUrl\)\)/);
+  assert.match(captureSource, /candidateCount: entries\.length \+ resolved\.length \+ blocked\.length/);
+  assert.match(captureSource, /\.filter\(\(target\) => !isRemovedWebResource\(target\)\)/);
   assert.match(captureSource, /newContext\(\{/);
   assert.doesNotMatch(captureSource, /launchPersistentContext|storageState|userDataDir/);
   assert.match(captureSource, /viewport: \{ width: 1024, height: 640 \}/);

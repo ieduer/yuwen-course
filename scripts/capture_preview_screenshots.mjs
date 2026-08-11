@@ -8,6 +8,7 @@ import { resolve } from "node:path";
 import { chromium } from "playwright";
 import sharp from "sharp";
 import { previewUrlHasPublicHostname } from "../site/preview-network-policy.js";
+import { isRemovedWebResource } from "./web_resource_policy.mjs";
 
 const ROOT = resolve(import.meta.dirname, "..");
 const REGISTRY_PATH = resolve(ROOT, "site/data/preview-targets.json");
@@ -30,20 +31,6 @@ const FINAL_URL_SEMANTIC_QUERY_KEYS = new Set([
   "lang", "page", "redlink", "searchmode", "searchu", "title", "type",
 ]);
 const PRIVATE_OR_TRANSIENT_QUERY_KEY = /(?:auth|client|code|continue|dsh|flow|followup|ifkv|nonce|passive|prompt|redirect|secret|service|session|state|token)/i;
-const REMOVED_WEB_RESOURCE_KEYS = new Set([
-  "www.bilibili.com/video/bv1zg4y1h7fk",
-]);
-
-function isRemovedWebResource(raw) {
-  try {
-    const url = new URL(raw);
-    const pathname = url.pathname.replace(/\/+$/, "").toLowerCase();
-    return REMOVED_WEB_RESOURCE_KEYS.has(`${url.hostname.toLowerCase()}${pathname}`);
-  } catch {
-    return false;
-  }
-}
-
 function parseArgs() {
   const value = (name, fallback = "") => {
     const match = process.argv.find((entry) => entry.startsWith(`--${name}=`));
@@ -123,15 +110,17 @@ function builtInResolution(entry) {
 
 function enrichManifest(manifest) {
   const attributions = sourceAttributions();
+  const retained = (values = []) => values.filter((entry) => !isRemovedWebResource(entry?.sourceUrl));
   const withAttribution = (entry) => ({
     ...entry,
     ...(Object.hasOwn(entry, "finalUrl") ? { finalUrl: privacyBoundedFinalUrl(entry.finalUrl) } : {}),
     attribution: attributions.get(entry.sourceUrl) || [{ surface: "global-learning-matrix" }],
   });
-  const entries = manifest.entries.map((entry) => ({ ...withAttribution(entry), disposition: "screenshot-provided" }));
+  const entries = retained(manifest.entries)
+    .map((entry) => ({ ...withAttribution(entry), disposition: "screenshot-provided" }));
   const blocked = [];
   const resolved = [];
-  for (const entry of [...(manifest.blocked || []), ...(manifest.resolved || [])]) {
+  for (const entry of [...retained(manifest.blocked), ...retained(manifest.resolved)]) {
     const resolution = builtInResolution(entry);
     if (resolution) {
       resolved.push({
@@ -149,13 +138,17 @@ function enrichManifest(manifest) {
   }
   resolved.sort((left, right) => left.sourceUrl.localeCompare(right.sourceUrl));
   blocked.sort((left, right) => left.sourceUrl.localeCompare(right.sourceUrl));
+  const totalBytes = entries.reduce((sum, entry) => sum + Number(entry.bytes || 0), 0);
   return {
     ...manifest,
     entries,
     resolved,
     blocked,
+    candidateCount: entries.length + resolved.length + blocked.length,
+    screenshotCount: entries.length,
     resolvedCount: resolved.length,
     blockedCount: blocked.length,
+    totalBytes,
   };
 }
 
@@ -679,9 +672,11 @@ async function recoverFromAudit(options) {
   const autoSources = new Set(auto.map((item) => item.sourceUrl));
   const auditBySource = new Map(audit.items.map((item) => [item.sourceUrl, item]));
   const retainedBlocked = (manifest.blocked || [])
-    .filter((entry) => !autoSources.has(entry.sourceUrl))
+    .filter((entry) => !autoSources.has(entry.sourceUrl) && !isRemovedWebResource(entry.sourceUrl))
     .map((entry) => ({ ...entry, auditCategory: auditBySource.get(entry.sourceUrl)?.category || "unclassified" }));
-  const entries = [...manifest.entries, ...recovered].sort((left, right) => left.sourceUrl.localeCompare(right.sourceUrl));
+  const entries = [...manifest.entries, ...recovered]
+    .filter((entry) => !isRemovedWebResource(entry.sourceUrl))
+    .sort((left, right) => left.sourceUrl.localeCompare(right.sourceUrl));
   const totalBytes = entries.reduce((sum, entry) => sum + entry.bytes, 0);
   if (totalBytes > MAX_TOTAL_BYTES) throw new Error("recovery screenshots exceed 80 MB manifest limit");
   const output = enrichManifest({
@@ -723,6 +718,7 @@ async function main() {
   const registry = JSON.parse(readFileSync(REGISTRY_PATH, "utf8"));
   let targets = registry.targets
     .map(normalizedTarget)
+    .filter((target) => !isRemovedWebResource(target))
     .filter((target) => !MEDIA_PATH.test(target))
     .filter((target) => {
       const url = new URL(target);

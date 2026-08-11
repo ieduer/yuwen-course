@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1223,
-  "totalBytes": 163859704,
-  "aggregateSha256": "b664e2d4bb28eff30a8d807d7a351f591209a8712e012977f15646914ba804e7",
+  "totalBytes": 163876162,
+  "aggregateSha256": "53dd53198cfbf9ede9ec8155597303a0732e0c6aa8ca2b0d70221f048278102e",
   "files": [
     {
       "path": "_headers",
@@ -18,7 +18,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44369,
-      "sha256": "1a947f37e17f9617ad30ba9ecde4ed19e0b12c921edca4489591cde42926bf94"
+      "sha256": "ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1412,8 +1412,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 157675,
-      "sha256": "5f998f9ee7f2b784b64b8dfef3f13732554b23c7577ce439b44265f7c1259671"
+      "bytes": 161597,
+      "sha256": "86b3bfc447e34dac45b9352bffdf1da7b29644200c80ef04375551d8a8eb8d10"
     },
     {
       "path": "assets/atlas.css",
@@ -3107,8 +3107,8 @@
     },
     {
       "path": "assets/styles.css",
-      "bytes": 78502,
-      "sha256": "40198b0d10476bd1728d082e6c12a9622622269f3c1d5cdb469aac762ac2d7ac"
+      "bytes": 80925,
+      "sha256": "24b8316f905d7ad09a822554846a5d7445084464b6eb78885e856e941148fc91"
     },
     {
       "path": "assets/vocab-progress.js",
@@ -3332,8 +3332,8 @@
     },
     {
       "path": "data/lessons/lesson-1461.json",
-      "bytes": 165269,
-      "sha256": "82188fcf2a1a7201b48048b8cb1d1f058793ef75fd7938bf4b111ee618754922"
+      "bytes": 164686,
+      "sha256": "cc17567ce249be236a237ea19db8fbc07c441b76bae51e59b10dfa314d6a698d"
     },
     {
       "path": "data/lessons/lesson-1462.json",
@@ -4342,18 +4342,18 @@
     },
     {
       "path": "data/preview-screenshots.json",
-      "bytes": 623631,
-      "sha256": "8b6fee25080e21ccc7475d5058e79193e6ba0624d8a6828b0411b62e55193e47"
+      "bytes": 622274,
+      "sha256": "30193e813611eb5e9ec09e2da99f81e5bca50597ed8b16839097eb70458333af"
     },
     {
       "path": "data/preview-targets.json",
-      "bytes": 61148,
-      "sha256": "cd677aba3c7574e25d853410ccc6571037680da8c2aa7686fb1bff6b827eee92"
+      "bytes": 61084,
+      "sha256": "5478b2c9263d4970307bd27ef5739d0f3ecf707b829f35d7df5d5d3bf8c8b753"
     },
     {
       "path": "data/reader-documents/index.json",
       "bytes": 47551,
-      "sha256": "921927e3cfca1a50e0ba278b487ef07d0fe1c8b0136ed5be6eb7e8e67b9178be"
+      "sha256": "38cebeba005d9eb4502336b14764deafa8993a3ae936d2f86a8bff3674b7821a"
     },
     {
       "path": "data/reader-documents/lesson-11637.json",
@@ -4377,8 +4377,8 @@
     },
     {
       "path": "data/reader-documents/lesson-1461.json",
-      "bytes": 39865,
-      "sha256": "ea337c724c1424e97fb8797ce81cf7b05ec2b6c6d0a69f14ce9e06da5fddb9b3"
+      "bytes": 51679,
+      "sha256": "2c9f57455a2251749f1de1edeb6f0377a4b892ccc935b4899cf51ef5c382631c"
     },
     {
       "path": "data/reader-documents/lesson-1462.json",
@@ -6032,8 +6032,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 11374,
-      "sha256": "5c41957c6af6d2063224e38057589d8d2210dbefd25284cd9178bf89bb04c9cc"
+      "bytes": 11677,
+      "sha256": "6d0ab3d182cf370f44278a55efe23ffb415fd0ba6cb20cf6519df10e31654080"
     },
     {
       "path": "insights.html",

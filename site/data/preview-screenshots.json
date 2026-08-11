@@ -6,9 +6,9 @@
     "height": 640
   },
   "totalBytes": 12795016,
-  "candidateCount": 352,
+  "candidateCount": 351,
   "screenshotCount": 334,
-  "blockedCount": 7,
+  "blockedCount": 6,
   "entries": [
     {
       "sourceUrl": "https://aquarianhq.substack.com/",
@@ -14959,40 +14959,6 @@
           "lessonTitle": "9 陈情表/ 李密",
           "sourceDocument": "data/reader-documents/lesson-1576.json",
           "sourcePath": "resources[7].sourceUrl"
-        }
-      ],
-      "disposition": "not-embedded",
-      "resolutionGroup": "external-condition-required",
-      "auditCategory": "requires-suen-or-external-account"
-    },
-    {
-      "sourceUrl": "https://www.scdfz.org.cn/ztzl/hjczzsc/zzhy/content_30068",
-      "reason": "direct-Error:page.goto: net::ERR_CONNECTION_RESET at https://www.scdfz.org.cn/ztzl/hjczzsc/zzhy/content_30068",
-      "finalUrl": "about:blank",
-      "attribution": [
-        {
-          "lessonId": "lesson-1461",
-          "lessonTitle": "2 、长征胜利万岁",
-          "sourceDocument": "data/reader-documents/lesson-1461.json",
-          "sourcePath": "provenance.links[6].href"
-        },
-        {
-          "lessonId": "lesson-1461",
-          "lessonTitle": "2 、长征胜利万岁",
-          "sourceDocument": "data/reader-documents/lesson-1461.json",
-          "sourcePath": "provenance.links[6].sourceUrl"
-        },
-        {
-          "lessonId": "lesson-1461",
-          "lessonTitle": "2 、长征胜利万岁",
-          "sourceDocument": "data/reader-documents/lesson-1461.json",
-          "sourcePath": "resources[3].href"
-        },
-        {
-          "lessonId": "lesson-1461",
-          "lessonTitle": "2 、长征胜利万岁",
-          "sourceDocument": "data/reader-documents/lesson-1461.json",
-          "sourcePath": "resources[3].sourceUrl"
         }
       ],
       "disposition": "not-embedded",

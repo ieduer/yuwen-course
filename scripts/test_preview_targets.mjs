@@ -23,13 +23,14 @@ const DOCUMENTS_DIR = resolve(ROOT, "site/data/reader-documents");
 const WECHAT_MAP_PATH = resolve(ROOT, "site/data/wechat-archive-map.json");
 const APP_PATH = resolve(ROOT, "site/assets/app.js");
 const TAXONOMY_PATH = resolve(ROOT, "site/data/literary-taxonomy.json");
+const REMOVED_EMPTY_SCDFZ_URL = "https://www.scdfz.org.cn/ztzl/hjczzsc/zzhy/content_30068";
+const PRESERVED_SCDFZ_URL = "https://www.scdfz.org.cn/scdqs/sxdq/lss/jwx/content_22151";
 const PRESERVED_EXTERNAL_CONDITION_URLS = Object.freeze([
   "https://j-dac.jp/infolib/meta_pub/CsvSearch.cgi",
   "https://pkuschool.yuque.com/g/qrvbic/books/folder/29416843",
   "https://pkuschool.yuque.com/qrvbic/books/29585115",
   "https://www.imdb.com/title/tt1475582/",
-  "https://www.scdfz.org.cn/scdqs/sxdq/lss/jwx/content_22151",
-  "https://www.scdfz.org.cn/ztzl/hjczzsc/zzhy/content_30068",
+  PRESERVED_SCDFZ_URL,
   "https://www.shuge.org/view/lan_ting_xiu_xi_tu_juan/",
 ]);
 
@@ -82,6 +83,10 @@ test("preview proxy accepts only the generated authoritative resource registry",
   assert.equal(registry.redirectTargets.some((entry) => new URL(entry).hostname === "xue.bdfz.net"), false);
   assert.equal(registry.allowedHosts.includes("xue.bdfz.net"), false);
   const targetKeys = new Set(registry.targets.map(webResourceKey));
+  assert.equal(isRemovedWebResource(REMOVED_EMPTY_SCDFZ_URL), true);
+  assert.equal(isRemovedWebResource(PRESERVED_SCDFZ_URL), false);
+  assert.equal(targetKeys.has(webResourceKey(REMOVED_EMPTY_SCDFZ_URL)), false);
+  assert.equal(targetKeys.has(webResourceKey(PRESERVED_SCDFZ_URL)), true);
   for (const href of REMOVED_WEB_RESOURCE_URLS) {
     assert.equal(targetKeys.has(webResourceKey(href)), false, href);
   }
@@ -238,6 +243,7 @@ test("preview Worker denies unregistered targets and never emits wildcard CORS",
     "https://bdfz.yuque.com/org-wiki/blocked",
     "https://xue.bdfz.net/",
     "https://xue.bdfz.net/template/",
+    REMOVED_EMPTY_SCDFZ_URL,
   ]) {
     const response = await worker.fetch(
       new Request(`https://yw.bdfz.net/api/preview?url=${encodeURIComponent(exactBdfzDenial)}`),

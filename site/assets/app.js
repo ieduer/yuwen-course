@@ -5,6 +5,7 @@ const FONT_KEY = "yw-matrix-font-v1";
 const LAST_LESSON_KEY = "yw-matrix-last-lesson-v1";
 const MASTERY_COLLAPSED_KEY = "yw-matrix-mastery-collapsed-v1";
 const FONT_STEPS = [0.92, 1, 1.12, 1.26, 1.42, 1.6];
+const DEFAULT_FONT_INDEX = 3;
 const STAGE_MARKS = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
 const SHARED_STATE_ASSET_VERSION = "20260730-owner-v1";
 const ANONYMOUS_UI_SCOPE = "anonymous-v2";
@@ -120,7 +121,11 @@ const state = {
   classicalLearningTips: new Map(),
   sharedContentVersion: "",
   progress: loadStoredProgress(),
-  fontIndex: Number(readScopedUiValue(FONT_KEY) || 1),
+  fontIndex: (() => {
+    const stored = readScopedUiValue(FONT_KEY);
+    const parsed = Number(stored);
+    return stored !== null && Number.isInteger(parsed) ? parsed : DEFAULT_FONT_INDEX;
+  })(),
   activeAuthorId: "",
 };
 const noteAnimations = new WeakMap();
@@ -168,6 +173,8 @@ const els = {
   readProgress: $("#read-progress-bar"),
   lessonChatTitle: $("#lesson-chat-title"),
   lessonChatFrame: $("#lesson-chat-frame"),
+  lessonChatPlaceholder: $("#lesson-chat-placeholder"),
+  lessonChatLoad: $("#lesson-chat-load"),
   lessonChatSection: $("#lesson-chat"),
   pageOpen: $("#page-open"),
   resourcesOpen: $("#resources-open"),
@@ -333,13 +340,16 @@ async function applyRemoteSharedState(
     ownerScope,
     generation,
   ) ? pendingSharedTextScale.value : null;
-  const storedFontIndex = Number(readScopedUiValue(FONT_KEY, ownerScope));
+  const storedFontValue = readScopedUiValue(FONT_KEY, ownerScope);
+  const storedFontIndex = Number(storedFontValue);
   const remoteTextScale = remoteState.readerPreferences?.TEXT_SCALE?.value;
   if (pendingKinds.has("READER_PREFERENCE:TEXT_SCALE")) {
     state.fontIndex = (
       currentPendingTextScale === null
         ? clamp(
-          Number.isInteger(storedFontIndex) ? storedFontIndex : 1,
+          storedFontValue !== null && Number.isInteger(storedFontIndex)
+            ? storedFontIndex
+            : DEFAULT_FONT_INDEX,
           0,
           FONT_STEPS.length - 1,
         )
@@ -352,7 +362,7 @@ async function applyRemoteSharedState(
     if (!ownerStillCurrent()) return;
     writeScopedUiValue(FONT_KEY, state.fontIndex, ownerScope);
   } else {
-    state.fontIndex = 1;
+    state.fontIndex = DEFAULT_FONT_INDEX;
     if (!ownerStillCurrent()) return;
     removeScopedUiValue(FONT_KEY, ownerScope);
   }
@@ -501,12 +511,12 @@ async function applyAnonymousSharedState() {
     pendingSharedTextScale = null;
   } else {
     pendingSharedTextScale = null;
-    const storedFontIndex = Number(readScopedUiValue(
-      FONT_KEY,
-      ANONYMOUS_UI_SCOPE,
-    ));
+    const storedFontValue = readScopedUiValue(FONT_KEY, ANONYMOUS_UI_SCOPE);
+    const storedFontIndex = Number(storedFontValue);
     state.fontIndex = clamp(
-      Number.isInteger(storedFontIndex) ? storedFontIndex : 1,
+      storedFontValue !== null && Number.isInteger(storedFontIndex)
+        ? storedFontIndex
+        : DEFAULT_FONT_INDEX,
       0,
       FONT_STEPS.length - 1,
     );
@@ -1564,6 +1574,7 @@ const REMOVED_WEB_RESOURCE_KEYS = new Set([
   "sites.google.com/view/pkuschool/cover3/xbs1/xbs4",
   "sites.google.com/view/pkuschool/cover3/xbs1/xbs6/xbs7",
   "www.digital.archives.go.jp/DAS/meta/listPhoto?LANG=eng&BID=F1000000000000107520&ID=&TYPE=dljpeg",
+  "www.scdfz.org.cn/ztzl/hjczzsc/zzhy/content_30068",
   "z-library.sk/book/30273234/d175b9/%E5%A4%A7%E5%94%90%E7%AC%AC%E4%B8%80%E5%8F%A4%E6%83%91%E4%BB%94%E6%9D%8E%E7%99%BD%E5%AE%9E%E5%BD%95.html?ts=0729",
   "z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929",
   "zh.m.wikipedia.org/w/index.php?title=%E9%B2%81%E8%BF%85%E4%BC%A0&action=edit&redlink=1",
@@ -1623,9 +1634,16 @@ function previewScreenshotFor(href) {
 function directRemoteAppRootFor(href) {
   try {
     const url = new URL(href);
-    if (url.search || url.hash || url.pathname !== "/") return "";
+    if (url.search || url.pathname !== "/") return "";
+    if (
+      url.hash
+      && (
+        url.hostname.toLowerCase() !== "qx.bdfz.net"
+        || !/^#[A-Za-z0-9_-]{1,80}$/.test(url.hash)
+      )
+    ) return "";
     const normalized = `${url.origin}/`;
-    return state.directRemoteAppRoots.has(normalized) ? normalized : "";
+    return state.directRemoteAppRoots.has(normalized) ? url.toString() : "";
   } catch {
     return "";
   }
@@ -1667,6 +1685,16 @@ function resourcePreviewPlan(resource) {
       screenshot: true,
     };
   }
+  if (hostname === "zh.wikisource.org" && fallbackScreenshotSrc) {
+    return {
+      mode: "image",
+      src: fallbackScreenshotSrc,
+      externalHref,
+      fallbackScreenshotSrc: "",
+      reason: "維基文庫的完整遠頁不適合經代理重排；此處顯示已核對的正文截圖，可放大查看或另頁打開原站。",
+      screenshot: true,
+    };
+  }
   const directRemoteRoot = directRemoteAppRootFor(externalHref);
   if (directRemoteRoot) {
     return {
@@ -1683,11 +1711,12 @@ function resourcePreviewPlan(resource) {
       : url.searchParams.get("v");
     if (videoId && /^[\w-]{6,20}$/.test(videoId)) {
       return {
-        mode: "image",
-        src: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+        mode: "youtube",
+        src: `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?rel=0&playsinline=1`,
+        posterSrc: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
         externalHref,
         fallbackScreenshotSrc,
-        reason: "影片頁不能直接嵌入；此處顯示影片頁截圖，點放大可全頁查看。",
+        reason: "點擊畫面即可直接播放；也可放大觀看。",
       };
     }
     return externalOnly("影片頁不能安全嵌入，請另頁觀看。");
@@ -1791,7 +1820,22 @@ async function inlinePreviewUsable(src) {
 function mountResourcePreview(host, plan, title, { eager = false, expanded = false, preflight = true } = {}) {
   const note = host.closest("article")?.querySelector("[data-preview-note]");
   const updateNote = (message) => { if (note) note.textContent = message; };
+  const appendExpandButton = () => {
+    if (expanded) return;
+    const expand = document.createElement("button");
+    expand.type = "button";
+    expand.className = "preview-expand";
+    expand.textContent = "放大";
+    expand.setAttribute("aria-label", `放大預覽：${title}`);
+    expand.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      openResourcePlan(plan, title);
+    });
+    host.append(expand);
+  };
   updateNote(plan.reason);
+  host.dataset.previewMode = plan.mode;
   if (plan.mode === "external-only" || plan.mode === "unavailable") {
     host.innerHTML = previewPlaceholder(plan);
     host.dataset.previewState = plan.mode;
@@ -1821,6 +1865,34 @@ function mountResourcePreview(host, plan, title, { eager = false, expanded = fal
     });
     return;
   }
+  if (plan.mode === "youtube" && !eager) {
+    const play = document.createElement("button");
+    play.type = "button";
+    play.className = "youtube-preview-play";
+    play.setAttribute("aria-label", `播放影片：${title}`);
+    const poster = document.createElement("img");
+    poster.src = plan.posterSrc;
+    poster.alt = "";
+    poster.decoding = "async";
+    const label = document.createElement("span");
+    label.textContent = "播放";
+    play.append(poster, label);
+    play.addEventListener("click", () => {
+      const autoplay = new URL(plan.src);
+      autoplay.searchParams.set("autoplay", "1");
+      mountResourcePreview(
+        host,
+        { ...plan, src: autoplay.toString() },
+        title,
+        { eager: true, expanded, preflight: false },
+      );
+    }, { once: true });
+    host.replaceChildren(play);
+    host.classList.add("preview-host");
+    host.dataset.previewState = "ready";
+    appendExpandButton();
+    return;
+  }
   let element;
   if (plan.mode === "image") {
     element = document.createElement("img");
@@ -1838,11 +1910,16 @@ function mountResourcePreview(host, plan, title, { eager = false, expanded = fal
     element = document.createElement("iframe");
     element.title = `預覽：${title}`;
     element.loading = eager ? "eager" : "lazy";
+    element.referrerPolicy = "strict-origin-when-cross-origin";
     if (plan.mode !== "document") {
-      const sandbox = plan.mode === "remote-app"
-        ? "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+      const sandbox = ["remote-app", "youtube"].includes(plan.mode)
+        ? "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation"
         : "allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox";
       element.setAttribute("sandbox", sandbox);
+    }
+    if (plan.mode === "youtube") {
+      element.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      element.allowFullscreen = true;
     }
   }
   element.addEventListener("load", () => {
@@ -1865,19 +1942,7 @@ function mountResourcePreview(host, plan, title, { eager = false, expanded = fal
     host.dataset.previewState = "screenshot";
     updateNote(plan.reason);
   }
-  if (!expanded) {
-    const expand = document.createElement("button");
-    expand.type = "button";
-    expand.className = "preview-expand";
-    expand.textContent = "放大";
-    expand.setAttribute("aria-label", `放大預覽：${title}`);
-    expand.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      openResourcePlan(plan, title);
-    });
-    host.append(expand);
-  }
+  appendExpandButton();
   if (!plan.screenshot) host.dataset.previewState = "loading";
 }
 
@@ -2473,19 +2538,33 @@ function renderMastery() {
   `).join("");
 }
 
+function resetLessonChat() {
+  if (!els.lessonChatFrame || !els.lessonChatPlaceholder) return;
+  if (document.activeElement === els.lessonChatFrame) els.lessonChatFrame.blur();
+  els.lessonChatFrame.hidden = true;
+  els.lessonChatPlaceholder.hidden = false;
+  if (els.lessonChatFrame.src !== "about:blank") els.lessonChatFrame.src = "about:blank";
+}
+
 function renderLessonChat(lesson) {
-  if (!els.lessonChatFrame || !els.lessonChatTitle || !els.lessonChatSection) return;
+  if (
+    !els.lessonChatFrame
+    || !els.lessonChatTitle
+    || !els.lessonChatSection
+    || !els.lessonChatPlaceholder
+    || !els.lessonChatLoad
+  ) return;
   const firstRead = state.firstReads.get(lesson.id);
   const locked = sourceModeFor(lesson) === "classical" && firstRead && !firstRead.submitted;
   els.lessonChatSection.hidden = locked;
+  resetLessonChat();
   if (locked) {
-    els.lessonChatFrame.src = "about:blank";
     return;
   }
   const title = lessonTitle(lesson);
   els.lessonChatTitle.textContent = `《${title}》同讀`;
   els.lessonChatFrame.title = `《${title}》實時聊天`;
-  if (els.lessonChatFrame.src === "about:blank") els.lessonChatFrame.src = "https://chat.bdfz.net/#lobby";
+  els.lessonChatLoad.dataset.lessonId = lesson.id;
 }
 
 function syncProgress({ event = false } = {}) {
@@ -2556,6 +2635,16 @@ function fitLessonTitle() {
   const title = els.title;
   if (!title) return;
   title.style.removeProperty("font-size");
+  if (matchMedia("(max-width: 620px)").matches) {
+    let size = parseFloat(getComputedStyle(title).fontSize) || 24;
+    let lineHeight = parseFloat(getComputedStyle(title).lineHeight) || size * 1.05;
+    while (title.scrollHeight > lineHeight * 2 + 1 && size > 18) {
+      size = Math.max(18, size - 0.5);
+      title.style.fontSize = `${size}px`;
+      lineHeight = parseFloat(getComputedStyle(title).lineHeight) || size * 1.05;
+    }
+    return;
+  }
   const available = title.parentElement?.clientWidth || title.clientWidth;
   let size = parseFloat(getComputedStyle(title).fontSize) || 92;
   while (title.scrollWidth > available && size > 16) {
@@ -3261,7 +3350,12 @@ function updateReadProgress() {
 }
 
 function applyFont() {
-  state.fontIndex = clamp(Number(state.fontIndex) || 0, 0, FONT_STEPS.length - 1);
+  const parsedFontIndex = Number(state.fontIndex);
+  state.fontIndex = clamp(
+    Number.isInteger(parsedFontIndex) ? parsedFontIndex : DEFAULT_FONT_INDEX,
+    0,
+    FONT_STEPS.length - 1,
+  );
   document.documentElement.style.setProperty("--reader-scale", FONT_STEPS[state.fontIndex]);
   const percent = Math.round(FONT_STEPS[state.fontIndex] * 100);
   els.fontLabel.textContent = `${percent}%`;
@@ -3377,6 +3471,17 @@ function bindEvents() {
   document.querySelector("#lesson-chat a")?.addEventListener("click", () => {
     void recordLearning("chatOpened");
   });
+  els.lessonChatLoad?.addEventListener("click", () => {
+    if (
+      !state.current
+      || els.lessonChatLoad.dataset.lessonId !== state.current.id
+      || !els.lessonChatFrame.hidden
+    ) return;
+    els.lessonChatPlaceholder.hidden = true;
+    els.lessonChatFrame.hidden = false;
+    els.lessonChatFrame.src = "https://chat.bdfz.net/#lobby";
+    void recordLearning("chatOpened");
+  });
   els.resourceDialog.addEventListener("close", () => { els.resourceStage.replaceChildren(); });
   els.fontDown.addEventListener("click", () => changeFont(-1));
   els.fontUp.addEventListener("click", () => changeFont(1));
@@ -3401,7 +3506,7 @@ function bindEvents() {
   });
   window.addEventListener("scroll", updateReadProgress, { passive: true });
   window.addEventListener("resize", () => requestAnimationFrame(() => {
-    if (matchMedia("(max-width: 900px)").matches && els.body.classList.contains("atlas-open")) {
+    if (matchMedia("(max-width: 1180px)").matches && els.body.classList.contains("atlas-open")) {
       closeAtlas();
     }
     fitLessonTitle();
@@ -3424,7 +3529,9 @@ function bindEvents() {
   window.addEventListener("focus", flushSharedState);
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") flushSharedState();
+    else resetLessonChat();
   });
+  window.addEventListener("pagehide", resetLessonChat);
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       const openNote = $('[data-inline-note]:not([hidden])', els.textFlow);
@@ -3454,7 +3561,7 @@ async function init() {
   new MutationObserver((mutations) => mutations.forEach((mutation) => mutation.addedNodes.forEach((node) => {
     if (node.nodeType === Node.ELEMENT_NODE) enforceNewTabLinks(node);
   }))).observe(document.body, { childList: true, subtree: true });
-  if (matchMedia("(min-width: 901px)").matches) openAtlas(); else closeAtlas();
+  if (matchMedia("(min-width: 1181px)").matches) openAtlas(); else closeAtlas();
   try {
     const [
       manifest,

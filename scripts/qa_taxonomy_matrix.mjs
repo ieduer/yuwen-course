@@ -17,17 +17,15 @@ function check(name, condition, detail = "") {
 }
 
 function printResults() {
-  console.log(JSON.stringify({ base, passed: checks.filter((item) => item.pass).length, total: checks.length, failures }, null, 2));
+  process.stdout.write(`${JSON.stringify({ base, passed: checks.filter((item) => item.pass).length, total: checks.length, failures }, null, 2)}\n`);
 }
 
 async function captureLessonLayout(page, width, height) {
   await page.setViewportSize({ width, height });
   await page.goto(`${base}/#lesson-1458`, { waitUntil: "domcontentloaded" });
   await page.waitForFunction(() => document.querySelector("#lesson-title")?.textContent.includes("中国人民站起来了"));
-  await page.waitForFunction(() => {
-    const title = document.querySelector("#lesson-title");
-    return title && title.scrollWidth <= title.clientWidth + 1;
-  });
+  await page.waitForFunction(() => document.querySelector("#orientation-content")?.textContent.trim().length > 0);
+  await page.waitForTimeout(450);
   return page.evaluate(() => {
     const rect = (selector) => {
       const node = document.querySelector(selector);
@@ -38,9 +36,18 @@ async function captureLessonLayout(page, width, height) {
     const panel = document.querySelector("#mastery-panel");
     const title = document.querySelector("#lesson-title");
     const titleStyle = title ? getComputedStyle(title) : null;
+    const titleLineHeight = titleStyle ? parseFloat(titleStyle.lineHeight) : 0;
+    const titleHeight = title?.getBoundingClientRect().height || 0;
+    const titleLines = titleLineHeight > 0 ? Math.max(1, Math.ceil((titleHeight - 0.5) / titleLineHeight)) : 0;
+    const titleNotClipped = Boolean(title && titleStyle)
+      && (titleStyle.overflowX === "visible" || title.scrollWidth <= title.clientWidth + 2)
+      && (titleStyle.overflowY === "visible" || title.scrollHeight <= title.clientHeight + 2);
     return {
       viewport: { width: innerWidth, height: innerHeight },
       overflow: document.documentElement.scrollWidth > innerWidth + 1,
+      oldOrientationCopyVisible: document.body.innerText.includes("先找方向"),
+      orientationHeading: document.querySelector("#orientation-title")?.textContent.trim() || "",
+      orientationContent: document.querySelector("#orientation-content")?.textContent.trim() || "",
       orientationParent: document.querySelector("#orientation")?.parentElement?.id || "",
       railParent: document.querySelector("#learning-rail")?.parentElement?.id || "",
       mobileAnchorCount: document.querySelectorAll("#mobile-mastery-anchor").length,
@@ -49,14 +56,27 @@ async function captureLessonLayout(page, width, height) {
       ariaExpanded: document.querySelector("#mastery-toggle")?.getAttribute("aria-expanded") || "",
       panelDisplay: panel ? getComputedStyle(panel).display : "missing",
       masthead: rect("#lesson-masthead"),
+      atlas: rect("#atlas"),
       copy: rect(".masthead-copy"),
       orientation: rect("#orientation"),
       portrait: rect("#lesson-portraits"),
       rail: rect("#learning-rail"),
       textbook: rect("#textbook-text"),
-      titleSingleLine: Boolean(title && titleStyle)
-        && title.scrollWidth <= title.clientWidth + 1
-        && title.getBoundingClientRect().height <= parseFloat(titleStyle.lineHeight) * 1.1,
+      atlasOpen: document.body.classList.contains("atlas-open"),
+      atlasAriaHidden: document.querySelector("#atlas")?.getAttribute("aria-hidden") || "",
+      atlasToggleExpanded: document.querySelector("#atlas-open")?.getAttribute("aria-expanded") || "",
+      titleLines,
+      titleMetrics: title ? {
+        clientWidth: title.clientWidth,
+        scrollWidth: title.scrollWidth,
+        clientHeight: title.clientHeight,
+        scrollHeight: title.scrollHeight,
+        overflowX: titleStyle?.overflowX || "",
+        overflowY: titleStyle?.overflowY || "",
+      } : null,
+      titleNotClipped,
+      titleSingleLine: titleNotClipped && titleLines === 1,
+      titleMaxTwoLines: titleNotClipped && titleLines >= 1 && titleLines <= 2,
     };
   });
 }
@@ -76,6 +96,7 @@ async function verifyLessonLayout(browser) {
   page.on("pageerror", (error) => pageErrors.push(error.message));
 
   const desktop = await captureLessonLayout(page, 1440, 960);
+  check("起始不再顯示先找方向且內容非空", !desktop.oldOrientationCopyVisible && desktop.orientationHeading === "起始" && desktop.orientationContent.length > 0, JSON.stringify(desktop));
   check("起始方向與本機完成度合併進篇首", desktop.orientationParent === "lesson-masthead" && desktop.railParent === "lesson-masthead", JSON.stringify(desktop));
   check("舊移動端完成度錨點已刪除", desktop.mobileAnchorCount === 0 && desktop.railInStudyLayout === 0, JSON.stringify(desktop));
   check("新訪客本機完成度默認收起", desktop.collapsed && desktop.ariaExpanded === "false" && desktop.panelDisplay === "none", JSON.stringify(desktop));
@@ -100,6 +121,14 @@ async function verifyLessonLayout(browser) {
   const tablet = await captureLessonLayout(page, 1024, 768);
   check("1024 篇頁無橫向溢出", !tablet.overflow && tablet.titleSingleLine, JSON.stringify(tablet));
   check(
+    "1024 教材目錄默認關閉",
+    !tablet.atlasOpen
+      && tablet.atlasAriaHidden === "true"
+      && tablet.atlasToggleExpanded === "false"
+      && tablet.atlas?.right <= 1,
+    JSON.stringify(tablet),
+  );
+  check(
     "1024 完成度仍留在篇首且不佔正文欄",
     tablet.railParent === "lesson-masthead"
       && inside(tablet.masthead, tablet.rail)
@@ -109,7 +138,7 @@ async function verifyLessonLayout(browser) {
   );
 
   const mobile = await captureLessonLayout(page, 390, 844);
-  check("390 篇頁無橫向溢出且篇名單行", !mobile.overflow && mobile.titleSingleLine, JSON.stringify(mobile));
+  check("390 篇頁無橫向溢出且篇名最多兩行無裁切", !mobile.overflow && mobile.titleMaxTwoLines, JSON.stringify(mobile));
   check(
     "390 起始與完成度依序留在篇首",
     mobile.orientationParent === "lesson-masthead"
@@ -121,6 +150,94 @@ async function verifyLessonLayout(browser) {
     JSON.stringify(mobile),
   );
   check("版面驗證無前端運行錯誤", pageErrors.length === 0, pageErrors.join(" | "));
+  await context.close();
+}
+
+async function verifyMobileLessonSweep(browser) {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  let chatRequests = 0;
+  await context.route("**/*", (route) => {
+    const url = route.request().url();
+    const requestUrl = new URL(url);
+    const baseUrl = new URL(base);
+    if (requestUrl.origin === baseUrl.origin && requestUrl.pathname === "/api/lesson-blueprint") {
+      return route.fulfill({
+        status: 503,
+        contentType: "application/json; charset=utf-8",
+        body: JSON.stringify({ error: "qa_offline" }),
+      });
+    }
+    if (requestUrl.origin === baseUrl.origin && requestUrl.pathname === "/api/learning/interactions") {
+      return route.fulfill({
+        status: 401,
+        contentType: "application/json; charset=utf-8",
+        body: JSON.stringify({ error: "qa_unauthenticated" }),
+      });
+    }
+    if (url.startsWith(base)) return route.continue();
+    if (url === "https://my.bdfz.net/site-auth.js") {
+      return route.fulfill({
+        contentType: "text/javascript; charset=utf-8",
+        body: "window.BdfzIdentity={getSession:async()=>({authenticated:false})};",
+      });
+    }
+    if (url === "https://nav.bdfz.net/bdfz-nav.js") {
+      return route.fulfill({ contentType: "text/javascript; charset=utf-8", body: "" });
+    }
+    if (url.startsWith("https://chat.bdfz.net/")) chatRequests += 1;
+    return route.abort();
+  });
+  const page = await context.newPage();
+  const titleFailures = [];
+  const orientationFailures = [];
+  const chatFailures = [];
+
+  for (const [index, lesson] of taxonomy.lessons.entries()) {
+    if (index === 0) {
+      await page.goto(`${base}/#${lesson.id}`, { waitUntil: "domcontentloaded" });
+    } else {
+      await page.evaluate((id) => { location.hash = id; }, lesson.id);
+    }
+    await page.waitForFunction(
+      (id) => document.querySelector(`.lesson-link.active[data-lesson="${CSS.escape(id)}"]`),
+      lesson.id,
+      { timeout: 15_000 },
+    );
+    await page.waitForFunction(() => document.querySelector("#orientation-content")?.textContent.trim().length > 0);
+    await page.evaluate(() => new Promise((resolvePromise) => requestAnimationFrame(() => requestAnimationFrame(resolvePromise))));
+    const state = await page.evaluate(() => {
+      const title = document.querySelector("#lesson-title");
+      const style = title ? getComputedStyle(title) : null;
+      const lineHeight = style ? parseFloat(style.lineHeight) : 0;
+      const height = title?.getBoundingClientRect().height || 0;
+      const lines = lineHeight > 0 ? Math.max(1, Math.ceil((height - 0.5) / lineHeight)) : 0;
+      const frame = document.querySelector("#lesson-chat-frame");
+      return {
+        lines,
+        titleNotClipped: Boolean(title && style)
+          && (style.overflowX === "visible" || title.scrollWidth <= title.clientWidth + 2)
+          && (style.overflowY === "visible" || title.scrollHeight <= title.clientHeight + 2),
+        orientationHeading: document.querySelector("#orientation-title")?.textContent.trim() || "",
+        orientationContent: document.querySelector("#orientation-content")?.textContent.trim() || "",
+        oldOrientationCopyVisible: document.body.innerText.includes("先找方向"),
+        chatSrc: frame?.getAttribute("src") || "",
+        chatHidden: frame?.hidden === true,
+      };
+    });
+    if (!state.titleNotClipped || state.lines < 1 || state.lines > 2) {
+      titleFailures.push(`${lesson.id}:${state.lines}:${state.titleNotClipped ? "visible" : "clipped"}`);
+    }
+    if (state.oldOrientationCopyVisible || state.orientationHeading !== "起始" || !state.orientationContent) {
+      orientationFailures.push(`${lesson.id}:${state.orientationHeading || "missing"}:${state.orientationContent.length}`);
+    }
+    if (state.chatSrc !== "about:blank" || !state.chatHidden) {
+      chatFailures.push(`${lesson.id}:${state.chatSrc}:${state.chatHidden ? "hidden" : "visible"}`);
+    }
+  }
+
+  check("全 189 篇 390 篇名最多兩行且無裁切", titleFailures.length === 0, titleFailures.join(" / "));
+  check("全 189 篇只顯示非空起始且無先找方向", orientationFailures.length === 0, orientationFailures.join(" / "));
+  check("全 189 篇同讀均保持點擊前未載入", chatFailures.length === 0 && chatRequests === 0, JSON.stringify({ chatFailures, chatRequests }));
   await context.close();
 }
 
@@ -159,13 +276,22 @@ check("文體書目具時代與關係資料", taxonomy.genres.every((item) => it
 const browser = await chromium.launch({ executablePath, headless: true });
 await verifyLessonLayout(browser);
 if (layoutOnly) {
+  await verifyMobileLessonSweep(browser);
   await browser.close();
   printResults();
   process.exit(failures.length ? 1 : 0);
 }
 const page = await browser.newPage({ viewport: { width: 1440, height: 960 } });
 const pageErrors = [];
+let chatDocumentRequests = 0;
 page.on("pageerror", (error) => pageErrors.push(error.message));
+await page.route("https://chat.bdfz.net/**", async (route) => {
+  chatDocumentRequests += 1;
+  await route.fulfill({
+    contentType: "text/html; charset=utf-8",
+    body: "<!doctype html><meta charset=utf-8><title>同讀 QA</title><textarea id=text>同讀已載入</textarea>",
+  });
+});
 
 await page.goto(`${base}/`, { waitUntil: "domcontentloaded" });
 await page.waitForFunction(() => document.querySelector("#lesson-title")?.textContent.includes("中国人民站起来了"));
@@ -352,7 +478,41 @@ await page.waitForTimeout(80);
 const savedRating = await page.evaluate(() => JSON.parse(localStorage.getItem("yw-matrix-progress-v2") || "{}")["lesson-1576"]?.evaluation?.rating);
 check("篇目評價點擊即自動保存", savedRating === 4 && await page.getByText("保存篇目評價", { exact: false }).count() === 0, String(savedRating));
 check("能力遷移自然接入時聊", await page.locator('.matrix-route a[href="https://chat.bdfz.net/"]').count() === 1);
-check("每篇課文嵌入實時聊天", await page.locator('#lesson-chat-frame[src="https://chat.bdfz.net/#lobby"]').count() === 1 && (await page.locator("#lesson-chat-title").innerText()).includes("陈情表"));
+const chatBeforeActivation = await page.evaluate(() => ({
+  src: document.querySelector("#lesson-chat-frame")?.getAttribute("src") || "",
+  frameHidden: document.querySelector("#lesson-chat-frame")?.hidden === true,
+  placeholderHidden: document.querySelector("#lesson-chat-placeholder")?.hidden === true,
+  loadButtonVisible: Boolean(document.querySelector("#lesson-chat-load")?.getClientRects().length),
+}));
+check(
+  "同讀初始不自動載入",
+  chatBeforeActivation.src === "about:blank"
+    && chatBeforeActivation.frameHidden
+    && !chatBeforeActivation.placeholderHidden
+    && chatBeforeActivation.loadButtonVisible
+    && chatDocumentRequests === 0
+    && (await page.locator("#lesson-chat-title").innerText()).includes("陈情表"),
+  JSON.stringify({ ...chatBeforeActivation, chatDocumentRequests }),
+);
+await page.locator("#lesson-chat-load").click();
+await page.waitForFunction(() => {
+  const frame = document.querySelector("#lesson-chat-frame");
+  return frame?.getAttribute("src") === "https://chat.bdfz.net/#lobby" && !frame.hidden;
+});
+await page.waitForTimeout(80);
+const chatAfterActivation = await page.evaluate(() => ({
+  src: document.querySelector("#lesson-chat-frame")?.getAttribute("src") || "",
+  frameHidden: document.querySelector("#lesson-chat-frame")?.hidden === true,
+  placeholderHidden: document.querySelector("#lesson-chat-placeholder")?.hidden === true,
+}));
+check(
+  "同讀只在點擊後載入一次",
+  chatAfterActivation.src === "https://chat.bdfz.net/#lobby"
+    && !chatAfterActivation.frameHidden
+    && chatAfterActivation.placeholderHidden
+    && chatDocumentRequests === 1,
+  JSON.stringify({ ...chatAfterActivation, chatDocumentRequests }),
+);
 check("閱讀起點不再重複文體與學習路線", await page.locator(".reading-contract").count() === 0);
 check("右上角個人圖入口命名為己身", await page.locator('.topbar-actions a[href="insights.html"]', { hasText: "己身" }).count() === 1);
 
@@ -495,11 +655,13 @@ const portraitLessons = [];
 const representativeLessonsNotVisible = [];
 const vocabularyMismatchLessons = [];
 const classicalCreationLessons = [];
+const mobileTitleFailures = [];
+const orientationFailures = [];
 for (const [index, lesson] of taxonomy.lessons.entries()) {
   if (index === 0) await sweepPage.goto(`${base}/#${lesson.id}`, { waitUntil: "domcontentloaded" });
   else await sweepPage.evaluate((id) => { location.hash = id; }, lesson.id);
   await sweepPage.waitForFunction((id) => localStorage.getItem("yw-matrix-last-lesson-v1") === id, lesson.id);
-  await sweepPage.waitForTimeout(16);
+  await sweepPage.waitForTimeout(40);
   // 字詞題庫異步載入：等 app 內部 bank 狀態落定（set 與重渲染同步發生）再量測
   await sweepPage.waitForFunction((id) => {
     try {
@@ -511,8 +673,20 @@ for (const [index, lesson] of taxonomy.lessons.entries()) {
     const portraits = [...document.querySelectorAll("#lesson-portraits .portrait-choice")];
     const representativeVisual = document.querySelector("#lesson-portraits .representative-choice img");
     const text = document.querySelector("#text-flow");
+    const title = document.querySelector("#lesson-title");
+    const titleStyle = title ? getComputedStyle(title) : null;
+    const titleLineHeight = titleStyle ? parseFloat(titleStyle.lineHeight) : 0;
+    const titleHeight = title?.getBoundingClientRect().height || 0;
+    const titleLines = titleLineHeight > 0 ? Math.max(1, Math.ceil((titleHeight - 0.5) / titleLineHeight)) : 0;
     return {
       overflow: document.documentElement.scrollWidth > innerWidth + 1 || Boolean(text && text.scrollWidth > text.clientWidth + 1),
+      orientationHeading: document.querySelector("#orientation-title")?.textContent.trim() || "",
+      orientationContent: document.querySelector("#orientation-content")?.textContent.trim() || "",
+      oldOrientationCopyVisible: document.body.innerText.includes("先找方向"),
+      titleLines,
+      titleNotClipped: Boolean(title)
+        && (titleStyle?.overflowX === "visible" || title.scrollWidth <= title.clientWidth + 2)
+        && (titleStyle?.overflowY === "visible" || title.scrollHeight <= title.clientHeight + 2),
       portraitCount: portraits.length,
       portraitsVisible: portraits.every((node) => {
         const rect = node.getBoundingClientRect();
@@ -534,6 +708,12 @@ for (const [index, lesson] of taxonomy.lessons.entries()) {
     };
   }, lesson.authors.length);
   if (state.overflow) overflowLessons.push(lesson.id);
+  if (!state.titleNotClipped || state.titleLines < 1 || state.titleLines > 2) {
+    mobileTitleFailures.push(`${lesson.id}:${state.titleLines}:${state.titleNotClipped ? "visible" : "clipped"}`);
+  }
+  if (state.oldOrientationCopyVisible || state.orientationHeading !== "起始" || !state.orientationContent) {
+    orientationFailures.push(`${lesson.id}:${state.orientationHeading || "missing"}:${state.orientationContent.length}`);
+  }
   const expectedPortraitCount = lesson.authors.length || (lesson.representativeFigure ? 1 : 0);
   if (state.portraitCount !== expectedPortraitCount || !state.portraitsVisible) portraitLessons.push(`${lesson.id}:${state.portraitCount}/${expectedPortraitCount}`);
   if (!lesson.authors.length && !state.representativeVisual) representativeLessonsNotVisible.push(lesson.id);
@@ -543,6 +723,8 @@ for (const [index, lesson] of taxonomy.lessons.entries()) {
   if (lesson.mode === "classical" && state.wordCreation > 0) classicalCreationLessons.push(lesson.id);
 }
 check("全 189 篇移動端無鏈接或正文溢出", overflowLessons.length === 0, overflowLessons.join(" / "));
+check("全 189 篇 390 篇名最多兩行且無裁切", mobileTitleFailures.length === 0, mobileTitleFailures.join(" / "));
+check("全 189 篇只顯示非空起始且無先找方向", orientationFailures.length === 0, orientationFailures.join(" / "));
 check("全部作者與代表人物肖像完整可見", portraitLessons.length === 0, portraitLessons.join(" / "));
 check("全部無作者篇目代表人物完整可見", representativeLessonsNotVisible.length === 0, representativeLessonsNotVisible.join(" / "));
 check("所有含詞級疏通的篇目均接入正文註釋", vocabularyMismatchLessons.length === 0, vocabularyMismatchLessons.join(" / "));
@@ -595,8 +777,22 @@ check("移動端篇首工具收為單一入口", await page.locator("#mobile-too
 await page.locator("#mobile-tools-toggle").click();
 check("移動端工具展開完整標籤", await page.locator("#topbar-actions").evaluate((node) => getComputedStyle(node).pointerEvents === "auto") && (await page.locator("#topbar-actions").innerText()).includes("文體") && (await page.locator("#topbar-actions").innerText()).includes("原圖"));
 await page.locator("#mobile-tools-toggle").click();
-const mobileTitle = await page.evaluate(() => { const node = document.querySelector("#lesson-title"); const style = getComputedStyle(node); return { width: node.clientWidth, scrollWidth: node.scrollWidth, height: node.getBoundingClientRect().height, lineHeight: parseFloat(style.lineHeight) }; });
-check("移動端篇名保持單行", mobileTitle.scrollWidth <= mobileTitle.width + 1 && mobileTitle.height <= mobileTitle.lineHeight * 1.1, JSON.stringify(mobileTitle));
+const mobileTitle = await page.evaluate(() => {
+  const node = document.querySelector("#lesson-title");
+  const style = getComputedStyle(node);
+  const lineHeight = parseFloat(style.lineHeight);
+  const height = node.getBoundingClientRect().height;
+  return {
+    width: node.clientWidth,
+    scrollWidth: node.scrollWidth,
+    height,
+    lineHeight,
+    lines: Math.max(1, Math.ceil((height - 0.5) / lineHeight)),
+    clipped: (style.overflowX !== "visible" && node.scrollWidth > node.clientWidth + 2)
+      || (style.overflowY !== "visible" && node.scrollHeight > node.clientHeight + 2),
+  };
+});
+check("移動端篇名最多兩行且無裁切", !mobileTitle.clipped && mobileTitle.lines <= 2, JSON.stringify(mobileTitle));
 const transferLayout = await page.evaluate(() => {
   const section = document.querySelector("#transfer-matrix");
   const links = [...document.querySelectorAll("#matrix-links .matrix-route > a")];

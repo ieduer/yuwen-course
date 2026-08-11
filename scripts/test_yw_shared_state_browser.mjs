@@ -107,7 +107,9 @@ window.__stateGate = new Promise((resolve) => {
 });
 
 window.BdfzIdentity = {
-  getSession: async () => ({ authenticated: true }),
+  getSession: async () => ({
+    authenticated: window.__sharedStateTestAuthenticated !== false,
+  }),
   api: async (path, options = {}) => {
     const ownerAtRequest = window.__currentOwner;
     if (path === "/api/yw/v1/state") {
@@ -169,7 +171,15 @@ window.YwLearningEvidence = {
 };
 `;
 
-async function configurePage(page, base, pageErrors) {
+async function configurePage(
+  page,
+  base,
+  pageErrors,
+  { authenticated = true } = {},
+) {
+  await page.addInitScript((value) => {
+    window.__sharedStateTestAuthenticated = value;
+  }, authenticated);
   page.on("pageerror", (error) => pageErrors.push(error.message));
   await page.route("https://my.bdfz.net/site-auth.js", (route) => route.fulfill({
     contentType: "text/javascript; charset=utf-8",
@@ -201,6 +211,17 @@ try {
     document.querySelector("#lesson-title")?.textContent.includes("中国人民站起来了")
     && window.__sharedStateGets.length >= 1
   ));
+  const noPreferenceDefault = await page.evaluate(() => ({
+    scale: getComputedStyle(document.documentElement)
+      .getPropertyValue("--reader-scale").trim(),
+    anonymousFont: localStorage.getItem(
+      "yw-matrix-font-v1:scope:anonymous-v2",
+    ),
+  }));
+  assert.deepEqual(noPreferenceDefault, {
+    scale: "1.26",
+    anonymousFont: null,
+  });
 
   await page.evaluate(() => {
     location.hash = "#lesson-1579";
@@ -212,7 +233,7 @@ try {
   await page.evaluate(() => document.querySelector("#font-up").click());
   await page.waitForFunction(() => (
     getComputedStyle(document.documentElement)
-      .getPropertyValue("--reader-scale").trim() === "1.12"
+      .getPropertyValue("--reader-scale").trim() === "1.42"
   ));
   await page.evaluate(() => window.__releaseStateGate());
 
@@ -241,9 +262,9 @@ try {
     evidenceCalls: window.__evidenceCalls.map((call) => call.slice(0, 2)),
   }), { ownerA: OWNER_A, storageKey: ownerAOutbox });
   assert.equal(initWindow.lessonId, "lesson-1579");
-  assert.equal(initWindow.scale, "1.12");
+  assert.equal(initWindow.scale, "1.42");
   assert.equal(initWindow.lessonScope, "lesson-1579");
-  assert.equal(initWindow.fontScope, "2");
+  assert.equal(initWindow.fontScope, "4");
   assert.deepEqual(initWindow.outbox.mutations, []);
   assert.deepEqual(initWindow.evidenceCalls, [
     ["lessonOpened", "lesson-1458"],
@@ -381,7 +402,7 @@ try {
     window.__sharedStateGets.length >= before + 3
     && location.hash === "#lesson-1458"
     && getComputedStyle(document.documentElement)
-      .getPropertyValue("--reader-scale").trim() === "1"
+      .getPropertyValue("--reader-scale").trim() === "1.26"
     && localStorage.getItem(`yw-matrix-last-lesson-v1:scope:${ownerA}`) === null
     && localStorage.getItem(`yw-matrix-font-v1:scope:${ownerA}`) === null
   ), { before: deletionStart, ownerA: OWNER_A });
@@ -454,6 +475,52 @@ try {
   ]);
   assert.deepEqual(racePageErrors, []);
   await racePage.close();
+
+  const anonymousPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  const anonymousPageErrors = [];
+  await configurePage(anonymousPage, base, anonymousPageErrors, {
+    authenticated: false,
+  });
+  await anonymousPage.goto(base, { waitUntil: "domcontentloaded" });
+  await anonymousPage.waitForFunction(() => (
+    document.querySelector("#lesson-title")?.textContent.includes("中国人民站起来了")
+    && !document.querySelector("#auth-login")?.hidden
+    && getComputedStyle(document.documentElement)
+      .getPropertyValue("--reader-scale").trim() === "1.26"
+  ));
+  const anonymousDefault = await anonymousPage.evaluate(() => ({
+    scale: getComputedStyle(document.documentElement)
+      .getPropertyValue("--reader-scale").trim(),
+    fontScope: localStorage.getItem(
+      "yw-matrix-font-v1:scope:anonymous-v2",
+    ),
+    stateGets: window.__sharedStateGets.length,
+  }));
+  assert.deepEqual(anonymousDefault, {
+    scale: "1.26",
+    fontScope: null,
+    stateGets: 0,
+  });
+
+  await anonymousPage.evaluate(() => {
+    localStorage.setItem("yw-matrix-font-v1:scope:anonymous-v2", "4");
+    window.dispatchEvent(new Event("focus"));
+  });
+  await anonymousPage.waitForFunction(() => (
+    getComputedStyle(document.documentElement)
+      .getPropertyValue("--reader-scale").trim() === "1.42"
+  ));
+  assert.deepEqual(
+    await anonymousPage.evaluate(() => ({
+      fontScope: localStorage.getItem(
+        "yw-matrix-font-v1:scope:anonymous-v2",
+      ),
+      stateGets: window.__sharedStateGets.length,
+    })),
+    { fontScope: "4", stateGets: 0 },
+  );
+  assert.deepEqual(anonymousPageErrors, []);
+  await anonymousPage.close();
 
   process.stdout.write("YW shared-state browser contract passed\n");
 } finally {

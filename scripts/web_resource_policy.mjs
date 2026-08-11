@@ -44,6 +44,7 @@ export const REMOVED_WEB_RESOURCE_URLS = Object.freeze([
   "https://sites.google.com/view/pkuschool/cover3/xbs1/xbs4",
   "https://sites.google.com/view/pkuschool/cover3/xbs1/xbs6/xbs7",
   "https://www.digital.archives.go.jp/DAS/meta/listPhoto?LANG=eng&BID=F1000000000000107520&ID=&TYPE=dljpeg",
+  "https://www.scdfz.org.cn/ztzl/hjczzsc/zzhy/content_30068",
   "https://z-library.sk/book/30273234/d175b9/%E5%A4%A7%E5%94%90%E7%AC%AC%E4%B8%80%E5%8F%A4%E6%83%91%E4%BB%94%E6%9D%8E%E7%99%BD%E5%AE%9E%E5%BD%95.html?ts=0729",
   "https://z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929",
   "https://zh.m.wikipedia.org/w/index.php?title=%E9%B2%81%E8%BF%85%E4%BC%A0&action=edit&redlink=1",

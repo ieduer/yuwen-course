@@ -39,11 +39,12 @@ export const AUTHORIZED_SOURCE_BATCHES = Object.freeze({
   }),
 });
 
-// E01 and P01-P16 are removed by the source/registry policy. The seven
-// remaining external-condition records must survive either authenticated batch.
+// E01, P01-P16, and the reviewed empty SCDFZ page are removed by the
+// source/registry policy. The six remaining external-condition records must
+// survive either authenticated batch.
 const RETAINED_EXTERNAL_BATCH = Object.freeze({
-  count: 7,
-  digest: "5655837fe339cc4b84ad587fea08e8deeb459255f0a3c1cf035bc51b8d0ec8bb",
+  count: 6,
+  digest: "8fd16f05cd6ffbb159453c8622df7b0a0325e638002dd0597d423093e098968c",
 });
 
 function sha256(bytes) {
@@ -241,7 +242,7 @@ function validateRetainedExternalBlockers(manifest, registered) {
     .map((entry) => entry.sourceUrl)
     .sort();
   if (sources.length !== RETAINED_EXTERNAL_BATCH.count || digestSourceSet(sources) !== RETAINED_EXTERNAL_BATCH.digest) {
-    fail("the seven retained external-condition blockers no longer match the reviewed set");
+    fail("the six retained external-condition blockers no longer match the reviewed set");
   }
 }
 

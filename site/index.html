@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="https://img.bdfz.net/20250503004.webp">
   <meta name="theme-color" content="#f4f0e6">
   <title>課文 · 語文學習矩陣</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260811-annotation-layout-v3">
+  <link rel="stylesheet" href="assets/styles.css?v=20260811-embed-scroll-layout-v4">
 </head>
 <body>
   <a class="skip-link" href="#textbook-text" data-same-tab>跳到正文</a>
@@ -64,7 +64,6 @@
       </div>
       <div class="lesson-portraits" id="lesson-portraits" aria-label="人物視覺"></div>
       <section class="orientation" id="orientation" aria-labelledby="orientation-title">
-        <div class="section-label">01 / 先找方向</div>
         <h2 id="orientation-title">起始</h2>
         <div id="orientation-content"></div>
       </section>
@@ -139,7 +138,14 @@
             </div>
             <a href="https://chat.bdfz.net/#lobby" target="_blank" rel="noopener noreferrer">另頁打開 ↗</a>
           </div>
-          <div class="lesson-chat-frame"><iframe id="lesson-chat-frame" src="about:blank" title="課文實時聊天" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe></div>
+          <div class="lesson-chat-frame">
+            <div class="lesson-chat-placeholder" id="lesson-chat-placeholder">
+              <strong>準備好後再進入同讀</strong>
+              <p>你的細讀位置會保留；同讀不會在背景自動載入。</p>
+              <button id="lesson-chat-load" type="button">進入同讀</button>
+            </div>
+            <iframe id="lesson-chat-frame" src="about:blank" title="課文實時聊天" loading="eager" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" hidden></iframe>
+          </div>
         </section>
 
         <section class="transfer-matrix" id="transfer-matrix" aria-labelledby="transfer-title">
@@ -211,6 +217,6 @@
   <script defer src="assets/learning-evidence.js?v=20260727-evidence-loop-v2"></script>
   <script defer src="assets/vocab-progress.js?v=20260730-vocab-scope-v1"></script>
   <script defer src="assets/classical-first-read.js?v=20260811-annotated-reading-v3"></script>
-  <script defer src="assets/app.js?v=20260811-annotation-embed-v3"></script>
+  <script defer src="assets/app.js?v=20260811-embed-scroll-layout-v4"></script>
 </body>
 </html>

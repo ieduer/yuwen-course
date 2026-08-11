@@ -194,7 +194,7 @@ for (const [host, authority] of Object.entries(AUTHORIZED_SOURCE_BATCHES)) {
     assert.equal(after.screenshotCount, after.entries.length);
     assert.equal(after.blockedCount, after.blocked.length);
     assert.equal(after.candidateCount, after.entries.length + after.blocked.length + after.resolved.length);
-    assert.equal(after.blocked.filter(retainedExternalRecord).length, 7);
+    assert.equal(after.blocked.filter(retainedExternalRecord).length, 6);
     assert.equal(after.blocked.some(deletedRecord), false);
     assert.deepEqual(readdirSync(fixture.outputDir), [sampleFile]);
 

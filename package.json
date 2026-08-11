@@ -16,6 +16,8 @@
     "verify:authors": "node scripts/audit_lesson_authors.mjs",
     "verify:ui": "node scripts/qa_taxonomy_matrix.mjs",
     "qa:web-polish": "node scripts/qa_web_polish.mjs",
+    "qa:chat-no-autoload": "node scripts/qa_chat_no_autoload.mjs",
+    "qa:embed-playback": "node scripts/qa_embed_playback.mjs",
     "build:vocab:source": "node scripts/build_vocab_bank.mjs",
     "apply:vocab-policy": "node scripts/apply_vocab_review_decisions.mjs",
     "check:vocab-policy": "node scripts/apply_vocab_review_decisions.mjs --check",
