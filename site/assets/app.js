@@ -487,13 +487,18 @@ async function applyAnonymousSharedState() {
     pendingSharedReadingPosition = null;
   } else {
     pendingSharedReadingPosition = null;
+    const requestedLessonId = location.hash.slice(1);
+    const hashLessonId = studentVisibleLessons().find(
+      (lesson) => lesson.id === requestedLessonId,
+    )?.id || "";
     const storedLessonId = readScopedUiValue(
       LAST_LESSON_KEY,
       ANONYMOUS_UI_SCOPE,
     ) || "";
-    const lessonId = state.manifest?.lessons?.find(
+    const storedStudentLessonId = studentVisibleLessons().find(
       (lesson) => lesson.id === storedLessonId,
-    )?.id || defaultSharedLesson()?.id || "";
+    )?.id || "";
+    const lessonId = hashLessonId || storedStudentLessonId || defaultSharedLesson()?.id || "";
     if (lessonId && state.current?.id !== lessonId) {
       await showLesson(lessonId, {
         push: true,

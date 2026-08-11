@@ -169,6 +169,11 @@ test("student lesson count and startup exclude hidden system records", () => {
   assert.match(initSource, /atlasStatus\.textContent = `\$\{studentLessons\.length\} 篇 · 五冊教材`/);
   assert.match(initSource, /const initial = studentLessons\.find/);
   assert.match(initSource, /\|\| studentLessons\[0\]/);
-  assert.match(indexHtml, /assets\/app\.js\?v=20260811-student-units-v5/);
-  assert.doesNotMatch(indexHtml, /assets\/app\.js\?v=20260811-embed-scroll-layout-v4/);
+  const anonymousSource = section("async function applyAnonymousSharedState", "async function hydrateSharedStateOnce");
+  assert.match(anonymousSource, /const requestedLessonId = location\.hash\.slice\(1\)/);
+  assert.match(anonymousSource, /const hashLessonId = studentVisibleLessons\(\)\.find/);
+  assert.match(anonymousSource, /const storedStudentLessonId = studentVisibleLessons\(\)\.find/);
+  assert.match(anonymousSource, /const lessonId = hashLessonId \|\| storedStudentLessonId/);
+  assert.match(indexHtml, /assets\/app\.js\?v=20260811-deeplink-stability-v6/);
+  assert.doesNotMatch(indexHtml, /assets\/app\.js\?v=20260811-(?:embed-scroll-layout-v4|student-units-v5)/);
 });

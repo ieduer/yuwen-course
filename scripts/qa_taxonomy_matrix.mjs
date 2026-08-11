@@ -193,16 +193,27 @@ async function verifyMobileLessonSweep(browser) {
   const chatFailures = [];
 
   for (const [index, lesson] of taxonomy.lessons.entries()) {
-    if (index === 0) {
-      await page.goto(`${base}/#${lesson.id}`, { waitUntil: "domcontentloaded" });
-    } else {
-      await page.evaluate((id) => { location.hash = id; }, lesson.id);
+    if (index === 0 || (index + 1) % 25 === 0 || index === taxonomy.lessons.length - 1) {
+      process.stderr.write(`mobile sweep ${index + 1}/${taxonomy.lessons.length} ${lesson.id}\n`);
     }
-    await page.waitForFunction(
-      (id) => document.querySelector(`.lesson-link.active[data-lesson="${CSS.escape(id)}"]`),
-      lesson.id,
-      { timeout: 15_000 },
-    );
+    await page.goto(`${base}/#${lesson.id}`, { waitUntil: "domcontentloaded" });
+    try {
+      await page.waitForFunction(
+        (id) => document.querySelector(`.lesson-link.active[data-lesson="${CSS.escape(id)}"]`),
+        lesson.id,
+        { timeout: 15_000 },
+      );
+    } catch (error) {
+      const pageState = await page.evaluate(() => ({
+        hash: location.hash,
+        title: document.querySelector("#lesson-title")?.textContent.trim() || "",
+        activeLesson: document.querySelector(".lesson-link.active")?.dataset.lesson || "",
+      })).catch(() => ({}));
+      throw new Error(
+        `mobile lesson sweep timed out at ${index + 1}/${taxonomy.lessons.length} ${lesson.id} ${lesson.title}: ${JSON.stringify(pageState)}`,
+        { cause: error },
+      );
+    }
     await page.waitForFunction(() => document.querySelector("#orientation-content")?.textContent.trim().length > 0);
     await page.evaluate(() => new Promise((resolvePromise) => requestAnimationFrame(() => requestAnimationFrame(resolvePromise))));
     const state = await page.evaluate(() => {
