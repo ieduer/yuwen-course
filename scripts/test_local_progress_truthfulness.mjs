@@ -169,4 +169,6 @@ test("student lesson count and startup exclude hidden system records", () => {
   assert.match(initSource, /atlasStatus\.textContent = `\$\{studentLessons\.length\} 篇 · 五冊教材`/);
   assert.match(initSource, /const initial = studentLessons\.find/);
   assert.match(initSource, /\|\| studentLessons\[0\]/);
+  assert.match(indexHtml, /assets\/app\.js\?v=20260811-student-units-v5/);
+  assert.doesNotMatch(indexHtml, /assets\/app\.js\?v=20260811-embed-scroll-layout-v4/);
 });
