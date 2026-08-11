@@ -287,7 +287,7 @@
         },
         {
           "itemKey": "sg:1535:function:nai-yin",
-          "pdfPage": 4,
+          "pdfPage": null,
           "printedPage": null,
           "competencyTag": "syntax",
           "detailTag": "wenyan.function_word.nai_yin",
@@ -298,7 +298,9 @@
           "explanation": "同一虛詞會隨敘事承接、條件與語氣發生變化。",
           "rubric": "每個義類能各舉一處課文語境即可。",
           "reviewRequired": false,
-          "qualityNotes": [],
+          "qualityNotes": [
+            "本題依《蘇武傳》課文語境整理，並非來源 PDF 的原題；來源 PDF 頁碼不適用。"
+          ],
           "activeForSelfTest": true
         },
         {

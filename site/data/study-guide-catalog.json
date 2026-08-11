@@ -1,7 +1,7 @@
 {
   "schemaVersion": "yw-study-guide-catalog-v1",
-  "catalogVersion": "yw-study-guides-f4c48caf4acbabb4",
-  "catalogDigest": "sha256:f4c48caf4acbabb44e14b6d01011c91cb8b659845cf492cecd43348424aa575d",
+  "catalogVersion": "yw-study-guides-9cb5500f46333aac",
+  "catalogDigest": "sha256:9cb5500f46333aac50d2daa8ee36415ddb1e0b6d5331c656754cf10bac4fefe8",
   "answerPolicy": {
     "sourceAnswerLabel": "學案來源答案",
     "codexReferenceLabel": "Codex 參考答案",
@@ -11,7 +11,7 @@
   "sourceCount": 5,
   "lessonCount": 16,
   "itemCount": 241,
-  "activeItemCount": 193,
+  "activeItemCount": 191,
   "sources": [
     {
       "sourceId": "pdf-328ca1c13da067b9",
@@ -2752,7 +2752,9 @@
           "explanation": "已排除special-guides中重复的完整句‘信而见疑，忠而被谤’，但保留其中未单独测试的‘忠而被谤’形式对照。",
           "rubric": [],
           "reviewRequired": false,
-          "qualityNotes": [],
+          "qualityNotes": [
+            "題幹為合集 PDF 第56頁被動句題組的去重摘錄；完整句「信而見疑，忠而被謗」已收於 special-guides，本條只保留未重複例句及「忠而被謗」的形式對照。"
+          ],
           "activeForSelfTest": true,
           "semanticRevision": "eeca6c7d072ba842",
           "semanticAliases": []
@@ -3415,7 +3417,7 @@
         {
           "lessonId": "lesson-1535",
           "itemKey": "sg:1535:function:nai-yin",
-          "pdfPage": 4,
+          "pdfPage": null,
           "printedPage": null,
           "competencyTag": "syntax",
           "detailTag": "wenyan.function_word.nai_yin",
@@ -3437,7 +3439,9 @@
           "explanation": "同一虛詞會隨敘事承接、條件與語氣發生變化。",
           "rubric": "每個義類能各舉一處課文語境即可。",
           "reviewRequired": false,
-          "qualityNotes": [],
+          "qualityNotes": [
+            "本題依《蘇武傳》課文語境整理，並非來源 PDF 的原題；來源 PDF 頁碼不適用。"
+          ],
           "activeForSelfTest": true,
           "semanticRevision": "7088117005f43534",
           "semanticAliases": []
@@ -3711,7 +3715,8 @@
           ],
           "reviewRequired": false,
           "qualityNotes": [
-            "主观题组，参考答案非唯一。"
+            "主观题组，参考答案非唯一。",
+            "題目跨 PDF 第71-72頁；預覽或核對時須同時查看兩頁，頁碼記錄採用起始頁。"
           ],
           "activeForSelfTest": false,
           "semanticRevision": "c5bd0cc434d76887",
@@ -4679,8 +4684,10 @@
           "explanation": "欧阳修之父为死囚求生，是出于仁厚并力求审慎公正；“不愿因错判枉杀而遭人怨恨”把动机曲解为避怨。",
           "rubric": [],
           "reviewRequired": false,
-          "qualityNotes": [],
-          "activeForSelfTest": true,
+          "qualityNotes": [
+            "本條編目未保存 A-D 選項，現僅保留答案 D 與解析供核對；選項恢復前不提供獨立自測。"
+          ],
+          "activeForSelfTest": false,
           "semanticRevision": "38009c426eb79f6b",
           "semanticAliases": []
         },
@@ -5686,7 +5693,7 @@
           "rubric": [],
           "reviewRequired": false,
           "qualityNotes": [
-            "页码记录采用题组起始页。"
+            "題組跨 PDF 第86-87頁；預覽或核對時須同時查看兩頁，頁碼記錄採用起始頁。"
           ],
           "activeForSelfTest": true,
           "semanticRevision": "f65b37873b62f779",
@@ -5756,8 +5763,10 @@
           "explanation": "“既而语人云”的“语”读yù，意为告诉；“越人语天姥”的“语”读yǔ，意为谈论，词义不同。",
           "rubric": [],
           "reviewRequired": false,
-          "qualityNotes": [],
-          "activeForSelfTest": true,
+          "qualityNotes": [
+            "本條編目未保存 A-D 選項，現僅保留答案 B 與解析供核對；選項恢復前不提供獨立自測。"
+          ],
+          "activeForSelfTest": false,
           "semanticRevision": "4ecc302a32a133cf",
           "semanticAliases": []
         },

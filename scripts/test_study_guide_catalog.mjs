@@ -25,6 +25,35 @@ test("study-guide catalog is deterministic, labelled, and byte-current", () => {
   assert.equal(catalog.lessons.some((lesson) => lesson.lessonId === "lesson-1534"), true);
   assert.equal(catalog.lessons.some((lesson) => lesson.lessonId === "lesson-1535"), true);
   assert.equal(items.every((item) => /^[a-f0-9]{16}$/.test(item.semanticRevision)), true);
+
+  const byKey = new Map(items.map((item) => [item.itemKey, item]));
+  const derivedNaiYin = byKey.get("sg:1535:function:nai-yin");
+  assert.equal(derivedNaiYin.pdfPage, null);
+  assert.match(derivedNaiYin.qualityNotes.join(" "), /並非來源 PDF 的原題/);
+
+  for (const [itemKey, answer] of [
+    ["lesson-1576-p65-content-discrimination-02", "D"],
+    ["lesson-1579-p88-content-discrimination-01", "B"],
+  ]) {
+    const item = byKey.get(itemKey);
+    assert.equal(item.answerLabel, "Codex 參考答案");
+    assert.equal(item.referenceAnswer, answer);
+    assert.equal(item.activeForSelfTest, false);
+    assert.match(item.qualityNotes.join(" "), /未保存 A-D 選項/);
+  }
+
+  assert.match(
+    byKey.get("lesson-1534-p56-passive-increment-01").qualityNotes.join(" "),
+    /去重摘錄/,
+  );
+  assert.match(
+    byKey.get("lesson-1536-p71-72-text-inquiry-01").qualityNotes.join(" "),
+    /第71-72頁/,
+  );
+  assert.match(
+    byKey.get("lesson-1579-p86-sentence-pattern-01").qualityNotes.join(" "),
+    /第86-87頁/,
+  );
 });
 
 test("formative manifest aggregates by lesson and competency without changing scores", () => {

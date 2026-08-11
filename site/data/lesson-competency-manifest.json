@@ -1,13 +1,13 @@
 {
   "schemaVersion": "yw-lesson-competency-manifest-v1",
   "sourceSiteKey": "yw",
-  "manifestVersion": "yw-formative-52b574175221646f",
-  "manifestDigest": "sha256:52b574175221646f466a1f55c64730195a99e2756c59a6ea83717da8811832c9",
+  "manifestVersion": "yw-formative-20a7145bd573bbb7",
+  "manifestDigest": "sha256:20a7145bd573bbb747382e19032f6bb18e541526958c014a5093316ab9aaa8da",
   "registryVersion": "yw-interactions-2026-08-09-v2",
   "formalLearningManifestVersion": "yw-e310d45b1d81e9ad",
   "formalLearningManifestDigest": "sha256:e310d45b1d81e9adf6182bd50ea02842daf69a8981aa29ff03b2da30b0846aca",
-  "studyGuideCatalogVersion": "yw-study-guides-f4c48caf4acbabb4",
-  "studyGuideCatalogDigest": "sha256:f4c48caf4acbabb44e14b6d01011c91cb8b659845cf492cecd43348424aa575d",
+  "studyGuideCatalogVersion": "yw-study-guides-9cb5500f46333aac",
+  "studyGuideCatalogDigest": "sha256:9cb5500f46333aac50d2daa8ee36415ddb1e0b6d5331c656754cf10bac4fefe8",
   "firstReadPolicyDigest": "sha256:c123d5416034084cd48cc8222fbd4b2fb8d598e8b767f7689e3c7c948efc8106",
   "aggregationUnit": [
     "lessonId",
@@ -229,6 +229,13 @@
     {
       "lessonId": "lesson-1576",
       "competencyTag": "comprehension",
+      "semanticRevision": "38009c426eb79f6b",
+      "resourceKey": "formative:lesson-1576:comprehension:38009c426eb79f6b",
+      "disposition": "inactive"
+    },
+    {
+      "lessonId": "lesson-1576",
+      "competencyTag": "comprehension",
       "semanticRevision": "4edccd23f617bb6b",
       "resourceKey": "formative:lesson-1576:comprehension:4edccd23f617bb6b",
       "disposition": "inactive"
@@ -299,6 +306,13 @@
     {
       "lessonId": "lesson-1579",
       "competencyTag": "comprehension",
+      "semanticRevision": "4ecc302a32a133cf",
+      "resourceKey": "formative:lesson-1579:comprehension:4ecc302a32a133cf",
+      "disposition": "inactive"
+    },
+    {
+      "lessonId": "lesson-1579",
+      "competencyTag": "comprehension",
       "semanticRevision": "c22bcd764b8979aa",
       "resourceKey": "formative:lesson-1579:comprehension:c22bcd764b8979aa",
       "disposition": "inactive"
@@ -362,7 +376,7 @@
   ],
   "zeroTotalDisposition": "unavailable",
   "scoringPolicy": "formative_projection_does_not_modify_a_to_f_or_a_plus",
-  "itemCount": 1021,
+  "itemCount": 1019,
   "lessonCount": 115,
   "lessons": [
     {
@@ -12015,8 +12029,8 @@
       "competencies": [
         {
           "competencyTag": "comprehension",
-          "activeItemCount": 4,
-          "activeSetHash": "sha256:ffd4ac0040cc9a455c61923c34f9a2e8ddf79a7c692c7020850c1cc835074a4e",
+          "activeItemCount": 3,
+          "activeSetHash": "sha256:8f291bd82ab783c75856c3ba922f55dabdec2ef87fbfd037078feacae11b26a8",
           "items": [
             {
               "lessonId": "lesson-1576",
@@ -12040,21 +12054,6 @@
               "sourceKind": "formal_learning_manifest",
               "answerAuthority": "source_assessment",
               "scoringRole": "a_plus_gate",
-              "active": true
-            },
-            {
-              "lessonId": "lesson-1576",
-              "competencyTag": "comprehension",
-              "itemKey": "lesson-1576-p65-content-discrimination-02",
-              "semanticRevision": "38009c426eb79f6b",
-              "completionKey": "formative:lesson-1576:comprehension:38009c426eb79f6b#studyGuideItemCompleted",
-              "interactionKey": "studyGuideItemCompleted",
-              "resourceKey": "formative:lesson-1576:comprehension:38009c426eb79f6b",
-              "resourceAliases": [],
-              "completionAliases": [],
-              "sourceKind": "study_guide",
-              "answerAuthority": "codex_reference",
-              "scoringRole": "formative",
               "active": true
             },
             {
@@ -13065,8 +13064,8 @@
       "competencies": [
         {
           "competencyTag": "comprehension",
-          "activeItemCount": 4,
-          "activeSetHash": "sha256:bb5c2dd0d8e33f7dfac4b63258cf75564abf6fa40f192ed2e9eb6d0a13a00535",
+          "activeItemCount": 3,
+          "activeSetHash": "sha256:8024b1369aeba2fb179f2bcd187835af0c996aa704afd1eace44f9ce313f50e0",
           "items": [
             {
               "lessonId": "lesson-1579",
@@ -13090,21 +13089,6 @@
               "sourceKind": "formal_learning_manifest",
               "answerAuthority": "source_assessment",
               "scoringRole": "a_plus_gate",
-              "active": true
-            },
-            {
-              "lessonId": "lesson-1579",
-              "competencyTag": "comprehension",
-              "itemKey": "lesson-1579-p88-content-discrimination-01",
-              "semanticRevision": "4ecc302a32a133cf",
-              "completionKey": "formative:lesson-1579:comprehension:4ecc302a32a133cf#studyGuideItemCompleted",
-              "interactionKey": "studyGuideItemCompleted",
-              "resourceKey": "formative:lesson-1579:comprehension:4ecc302a32a133cf",
-              "resourceAliases": [],
-              "completionAliases": [],
-              "sourceKind": "study_guide",
-              "answerAuthority": "codex_reference",
-              "scoringRole": "formative",
               "active": true
             },
             {

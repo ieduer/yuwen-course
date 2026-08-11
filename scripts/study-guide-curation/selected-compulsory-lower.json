@@ -234,8 +234,10 @@
           "explanation": "欧阳修之父为死囚求生，是出于仁厚并力求审慎公正；“不愿因错判枉杀而遭人怨恨”把动机曲解为避怨。",
           "rubric": [],
           "reviewRequired": false,
-          "qualityNotes": [],
-          "activeForSelfTest": true
+          "qualityNotes": [
+            "本條編目未保存 A-D 選項，現僅保留答案 D 與解析供核對；選項恢復前不提供獨立自測。"
+          ],
+          "activeForSelfTest": false
         },
         {
           "itemKey": "lesson-1576-p65-comprehension-02",
@@ -997,7 +999,9 @@
           "explanation": "题组始于PDF第86页并续至第87页，集中考查被动、宾语前置和状语后置。",
           "rubric": [],
           "reviewRequired": false,
-          "qualityNotes": ["页码记录采用题组起始页。"],
+          "qualityNotes": [
+            "題組跨 PDF 第86-87頁；預覽或核對時須同時查看兩頁，頁碼記錄採用起始頁。"
+          ],
           "activeForSelfTest": true
         },
         {
@@ -1031,8 +1035,10 @@
           "explanation": "“既而语人云”的“语”读yù，意为告诉；“越人语天姥”的“语”读yǔ，意为谈论，词义不同。",
           "rubric": [],
           "reviewRequired": false,
-          "qualityNotes": [],
-          "activeForSelfTest": true
+          "qualityNotes": [
+            "本條編目未保存 A-D 選項，現僅保留答案 B 與解析供核對；選項恢復前不提供獨立自測。"
+          ],
+          "activeForSelfTest": false
         },
         {
           "itemKey": "lesson-1579-p88-content-discrimination-02",

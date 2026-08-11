@@ -181,7 +181,9 @@
           "explanation": "已排除special-guides中重复的完整句‘信而见疑，忠而被谤’，但保留其中未单独测试的‘忠而被谤’形式对照。",
           "rubric": [],
           "reviewRequired": false,
-          "qualityNotes": [],
+          "qualityNotes": [
+            "題幹為合集 PDF 第56頁被動句題組的去重摘錄；完整句「信而見疑，忠而被謗」已收於 special-guides，本條只保留未重複例句及「忠而被謗」的形式對照。"
+          ],
           "activeForSelfTest": true
         }
       ]
@@ -540,7 +542,10 @@
           "explanation": "原页六题均为开放探究，合并保存但不作为自动判定题。",
           "rubric": ["每题须引用或准确概括原文证据", "观点题允许有据的不同表述"],
           "reviewRequired": false,
-          "qualityNotes": ["主观题组，参考答案非唯一。"],
+          "qualityNotes": [
+            "主观题组，参考答案非唯一。",
+            "題目跨 PDF 第71-72頁；預覽或核對時須同時查看兩頁，頁碼記錄採用起始頁。"
+          ],
           "activeForSelfTest": false
         },
         {
