@@ -2,11 +2,11 @@
 
 Last updated: 2026-08-11
 
-Package: `0.2.1-evaluation-nonscoring`. GitHub `main` and the deployed Web
-source are clean commit `48251ef3f572fd0d6dbd73f6b70a742ebb86b05b`.
+Package: `0.2.1-evaluation-nonscoring`. The deployed Web carrier is clean
+GitHub `main` commit `3317e668125a4869f97cbd918570de6d30fe7e08`.
 Production serves Pages deployment
-`e3b07f67-ad58-4467-9a69-915f29f24f03` at `yw.bdfz.net`; it was deployed at
-2026-08-11T12:16:10Z. The current override below supersedes the retained
+`a257af4c-78a1-483d-bc9e-57e34e1d2dbe` at `yw.bdfz.net`; it was deployed at
+2026-08-11T14:14:44.487229Z. The current override below supersedes the retained
 2026-08-09 candidate/release narrative.
 
 ## 2026-08-11 Web reading finalization
@@ -66,12 +66,16 @@ Production serves Pages deployment
   truthfully blocked and no App receipt, schema or stable pointer is minted.
   The Web release uses the formal stable artifact already referenced by the
   unchanged pointer; immediate Pages rollback is the pre-release deployment
-  `d017e7db-08f9-47fe-b348-4f40c29db474`, preserving every D1 row.
+  `e3b07f67-ad58-4467-9a69-915f29f24f03`, preserving every D1 row.
 - Live readback of both the atomic deployment URL and `yw.bdfz.net` matches the
   formal release marker SHA-256
-  `579d588eab5718551da61b6009789631e9a710cc2fc9f1b6cc46588f64f74bb6`.
+  `1a947f37e17f9617ad30ba9ecde4ed19e0b12c921edca4489591cde42926bf94`.
   Reading and learning health are 200, the online source/taxonomy counts are
-  191/189, and desktop/mobile layout acceptance is 25/25.
+  191/189, the deployed preview/screenshot authorities are 539/118/75 and
+  352/334/11/7, and the dedicated desktop/mobile Web-polish acceptance is
+  32/32. A production 390-pixel read-only browser smoke also confirmed numeric
+  note expansion, no horizontal overflow, five safe new-tab links and zero
+  `xue.bdfz.net` DOM references.
 - Formal Web staging is current at 1,223 files / 1,222 projected files. Its
   marker is `formal-stable`, projected aggregate
   `e847d33848fff683fd8d6816a9a6deeda1adf1b427a93ddfdea4d520bafb2f9f`,

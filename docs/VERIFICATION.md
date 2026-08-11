@@ -98,14 +98,18 @@ It includes the unchanged stable App release only (278 exact paths) and no new
 App candidate or pointer.
 
 Production deployment
-`e3b07f67-ad58-4467-9a69-915f29f24f03` was published from clean GitHub `main`
-commit `48251ef3f572fd0d6dbd73f6b70a742ebb86b05b` at
-2026-08-11T12:16:10Z. The atomic deployment URL and `yw.bdfz.net` return the
+`a257af4c-78a1-483d-bc9e-57e34e1d2dbe` was published from clean GitHub `main`
+carrier commit `3317e668125a4869f97cbd918570de6d30fe7e08` at
+2026-08-11T14:14:44.487229Z. The atomic deployment URL and `yw.bdfz.net` return the
 same marker SHA-256 above. Live Reading and compound learning health are 200;
-the online source/taxonomy counts are 191/189, preview registry is 540/119/76,
-the screenshot manifest is 353/335/11/7, and production layout acceptance is
-25/25. Immediate Pages rollback is
-`d017e7db-08f9-47fe-b348-4f40c29db474`; D1 and the App pointer remain in place.
+the online source/taxonomy counts are 191/189, preview registry is 539/118/75,
+and the screenshot manifest is 352/334/11/7. All seven fetched production
+authorities match the carrier byte-for-byte. The production 390-pixel,
+read-only browser smoke confirms an expanding numeric note with content, no
+horizontal overflow, five safe new-tab links and zero `xue.bdfz.net` DOM
+references; the complete exact-carrier Web-polish matrix passed 32/32.
+Immediate Pages rollback is `e3b07f67-ad58-4467-9a69-915f29f24f03`; D1 and the
+App pointer remain in place.
 
 ### Deliberate App pause
 
@@ -115,7 +119,7 @@ rewritten as a pass. Per the current user direction, keep the existing App
 stable pointer byte-identical, mint no App receipt/schema, and publish only the
 checksum-verified `formal-stable` Web artifact from a committed clean tree.
 Rollback is the pre-release Pages deployment
-`d017e7db-08f9-47fe-b348-4f40c29db474`; D1 is preserved.
+`e3b07f67-ad58-4467-9a69-915f29f24f03`; D1 is preserved.
 
 ## 2026-08-09 self-study-loop candidate gate (historical)
 

@@ -63,14 +63,21 @@ pre-migration and 503 statements no longer describe production.
 ### Release, data and rollback
 
 Current production is Pages deployment
-`e3b07f67-ad58-4467-9a69-915f29f24f03`, clean source
-`48251ef3f572fd0d6dbd73f6b70a742ebb86b05b`, deployed at
-2026-08-11T12:16:10Z. The atomic deployment URL and `yw.bdfz.net` return the
+`a257af4c-78a1-483d-bc9e-57e34e1d2dbe`, clean carrier source
+`3317e668125a4869f97cbd918570de6d30fe7e08`, deployed at
+2026-08-11T14:14:44.487229Z. The atomic deployment URL and `yw.bdfz.net` return the
 same formal marker SHA-256
-`579d588eab5718551da61b6009789631e9a710cc2fc9f1b6cc46588f64f74bb6`.
+`1a947f37e17f9617ad30ba9ecde4ed19e0b12c921edca4489591cde42926bf94`.
 Remote readback confirms D1 migrations 0001--0004, `reading-schema-v4`, and
 compound learning health 200. This Web release did not export, migrate or write
 D1; it changed no User Center, Queue, App or scoring contract.
+
+Live atomic/custom-domain byte checks match the carrier for the marker, app,
+styles, prompt rules, preview registry, screenshot manifest and classical-tip
+dataset. Production serves 191 source records / 189 student lessons, registry
+539/118/75 and screenshot disposition 352/334/11/7. A read-only 390-pixel
+browser smoke confirms numeric note expansion, no horizontal overflow, all five
+top links opening safely in new tabs and no `xue.bdfz.net` DOM reference.
 
 User direction pauses App/User Center follow-up while the Web content is
 settled. Therefore `check:native-content:deploy-sync` is expected to reject the
@@ -78,7 +85,7 @@ new Web graph and is not reported as passing. Do not create a replacement App
 receipt/schema or move `site/app-content/latest-stable.json`. Build the
 production `formal-stable` artifact, verify its marker/checksum and deploy only
 from a committed clean tree. Roll back Pages to
-`d017e7db-08f9-47fe-b348-4f40c29db474` if live checks fail; preserve D1 and the
+`e3b07f67-ad58-4467-9a69-915f29f24f03` if live checks fail; preserve D1 and the
 unchanged App pointer.
 
 No new Cloudflare capability is adopted. Release tooling is Node `24.18.0`
