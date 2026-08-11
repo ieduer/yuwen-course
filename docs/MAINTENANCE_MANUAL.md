@@ -14,7 +14,8 @@ pre-migration and 503 statements no longer describe production.
   including two hidden system records. All 189 student-visible pages use one
   masthead for title, `起始` orientation, portrait and a collapsed owner-scoped
   local-step disclosure. The main reading column no longer reserves a separate
-  right rail.
+  right rail. The redundant `先找方向` label is absent. New readers default to
+  126%, while a stored local or remote reading-size preference remains intact.
 - The 30 classical lessons first collect the immutable no-punctuation,
   no-annotation reading. After submission, that reading remains visible,
   followed by source-bound learning tips and the canonical annotated text.
@@ -44,30 +45,37 @@ pre-migration and 503 statements no longer describe production.
   absent from student resources and every preview authority.
 - Preview registration is exact-target: arbitrary sibling paths, redirects to
   an unregistered target, active MIME and IP literals fail closed. Current
-  registry: 539 targets / 118 redirects / 75 hosts, digest
-  `sha256:dd847ef28e2e492390c896cd2587931a3c8fdd402f497f359601d16ad0f662a8`.
+  registry: 538 targets / 118 redirects / 75 hosts, digest
+  `sha256:887931515ae55b93d579a6892b5146ef68466c1e2c3ae5ed0c8022e00f2e84b7`.
 - Every rendered iframe/document/image/audio/video preview exposes a full-page
   expand control. Close, Escape and shrink clear the mounted media and restore
   focus. After exact deletion of E01, 16 permanently unavailable resources and
-  the confirmed-dead Bilibili item, the audited set is 352 page resources: 334
-  have screenshots, 11 have a verified direct presentation, and 7 are not
+  the confirmed-dead Bilibili item and the empty exact Sichuan gazetteer
+  `content_30068` page, the audited set is 351 page resources: 334
+  have screenshots, 11 have a verified direct presentation, and 6 are not
   embedded because an external condition remains. The 49 authenticated
   recoveries are 22 `ctext.org` pages and 27 `forum.rdfzer.com` pages; their
   browser credentials, cookies and session state are not stored. The 334
   entries deduplicate to 328 WebP files / 12,795,016 logical bytes;
   `site/data/preview-screenshots.json` SHA-256 is
-  `8b6fee25080e21ccc7475d5058e79193e6ba0624d8a6828b0411b62e55193e47`.
+  `30193e813611eb5e9ec09e2da99f81e5bca50597ed8b16839097eb70458333af`.
   Deleted resources are removed from the Web projection and registries rather
   than retained as blockers; no permanent/remove blocker remains.
 
 ### Release, data and rollback
 
+Safe QX hash routes use the exact remote app; all 17 Wikisource targets use
+reviewed screenshot-first rendering; five YouTube resources use explicit
+click-to-play `youtube-nocookie.com` frames. The lesson chat stays unloaded
+until the student selects `進入同讀`, so its remote input cannot focus and
+scroll the parent lesson before user action.
+
 Current production is Pages deployment
-`a257af4c-78a1-483d-bc9e-57e34e1d2dbe`, clean carrier source
-`3317e668125a4869f97cbd918570de6d30fe7e08`, deployed at
-2026-08-11T14:14:44.487229Z. The atomic deployment URL and `yw.bdfz.net` return the
+`8da16237-ac91-47e1-afe2-7843e2d4c8a4`, clean carrier source
+`0ff5d5604ceefef92c99c07033f1e900d9edaaed`, deployed at
+2026-08-11T15:43:46.808208Z. The atomic deployment URL and `yw.bdfz.net` return the
 same formal marker SHA-256
-`1a947f37e17f9617ad30ba9ecde4ed19e0b12c921edca4489591cde42926bf94`.
+`ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`.
 Remote readback confirms D1 migrations 0001--0004, `reading-schema-v4`, and
 compound learning health 200. This Web release did not export, migrate or write
 D1; it changed no User Center, Queue, App or scoring contract.
@@ -75,7 +83,7 @@ D1; it changed no User Center, Queue, App or scoring contract.
 Live atomic/custom-domain byte checks match the carrier for the marker, app,
 styles, prompt rules, preview registry, screenshot manifest and classical-tip
 dataset. Production serves 191 source records / 189 student lessons, registry
-539/118/75 and screenshot disposition 352/334/11/7. A read-only 390-pixel
+538/118/75 and screenshot disposition 351/334/11/6. A read-only 390-pixel
 browser smoke confirms numeric note expansion, no horizontal overflow, all five
 top links opening safely in new tabs and no `xue.bdfz.net` DOM reference.
 
@@ -85,7 +93,7 @@ new Web graph and is not reported as passing. Do not create a replacement App
 receipt/schema or move `site/app-content/latest-stable.json`. Build the
 production `formal-stable` artifact, verify its marker/checksum and deploy only
 from a committed clean tree. Roll back Pages to
-`e3b07f67-ad58-4467-9a69-915f29f24f03` if live checks fail; preserve D1 and the
+`a257af4c-78a1-483d-bc9e-57e34e1d2dbe` if live checks fail; preserve D1 and the
 unchanged App pointer.
 
 No new Cloudflare capability is adopted. Release tooling is Node `24.18.0`

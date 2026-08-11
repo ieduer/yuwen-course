@@ -3,19 +3,20 @@
 Last updated: 2026-08-11
 
 Package: `0.2.1-evaluation-nonscoring`. The deployed Web carrier is clean
-GitHub `main` commit `3317e668125a4869f97cbd918570de6d30fe7e08`.
+GitHub `main` commit `0ff5d5604ceefef92c99c07033f1e900d9edaaed`.
 Production serves Pages deployment
-`a257af4c-78a1-483d-bc9e-57e34e1d2dbe` at `yw.bdfz.net`; it was deployed at
-2026-08-11T14:14:44.487229Z. The current override below supersedes the retained
+`8da16237-ac91-47e1-afe2-7843e2d4c8a4` at `yw.bdfz.net`; it was deployed at
+2026-08-11T15:43:46.808208Z. The current override below supersedes the retained
 2026-08-09 candidate/release narrative.
 
 ## 2026-08-11 Web reading finalization
 
 - Students can use 189 lesson units. The source manifest retains 191 records,
   including two hidden system records; all 189 student-visible pages use one
-  masthead, with the former `01 / 先找方向 / 起始` content merged with the
-  lesson title and portrait. The owner-scoped local step indicator is collapsed
-  beside the portrait instead of occupying the reading column.
+  masthead: the redundant `先找方向` label is gone while `起始` remains with
+  the lesson title and portrait. The owner-scoped local step indicator is
+  collapsed beside the portrait instead of occupying the reading column. New
+  readers default to 126%; stored local or remote font preferences still win.
 - All 30 classical lessons now require two consecutive reading stages. After
   the immutable `起始 · 無注疏初讀`, the submitted no-note reading remains
   visible beside source-bound learning tips and the annotated canonical text.
@@ -30,20 +31,24 @@ Production serves Pages deployment
   document, image, audio, video or iframe preview can expand to the full-page
   dialog and shrink back with focus restored. After deleting E01, the 16
   permanently unavailable resources and the separately confirmed-dead
-  Bilibili item, the fallback audit covers 352 page resources: 334 have
+  Bilibili item and the empty exact Sichuan gazetteer `content_30068` page, the
+  fallback audit covers 351 page resources: 334 have
   reviewed screenshots, 11 use an already verified direct presentation, and
-  7 stop embedding while keeping the original link because an external
+  6 stop embedding while keeping the original link because an external
   condition remains. The screenshot set includes 49 reviewed authenticated
   captures (22 `ctext.org`, 27 `forum.rdfzer.com`). There are 328 unique WebP
   files and 12,795,016 logical screenshot bytes; manifest SHA-256 is
-  `8b6fee25080e21ccc7475d5058e79193e6ba0624d8a6828b0411b62e55193e47`.
+  `30193e813611eb5e9ec09e2da99f81e5bca50597ed8b16839097eb70458333af`.
   Deleted resources are absent from the Web projection, preview registry and
   screenshot manifest; no permanent/remove blocker remains.
-- Preview registration remains exact-target and fail-closed: 539 targets, 118
+- Preview registration remains exact-target and fail-closed: 538 targets, 118
   redirect targets and 75 hosts with digest
-  `sha256:dd847ef28e2e492390c896cd2587931a3c8fdd402f497f359601d16ad0f662a8`.
+  `sha256:887931515ae55b93d579a6892b5146ef68466c1e2c3ae5ed0c8022e00f2e84b7`.
   Seventeen approved BDFZ exact roots load the real remote sites in both card
-  and full-page modes; 99 exact Google Sites targets are screenshot-first.
+  and full-page modes; safe QX figure fragments preserve their remote route.
+  All 17 Wikisource and 99 exact Google Sites targets are screenshot-first;
+  five reviewed YouTube resources are directly playable after an explicit
+  student click. `content_22151` remains as a separate exact source.
   Arbitrary sibling paths and every `bdfz.yuque.com` URL remain forbidden, and
   `xue.bdfz.net` is absent from student resources and all preview authorities.
 - Every one of the 189 student lessons now has a unique structure question
@@ -66,24 +71,27 @@ Production serves Pages deployment
   truthfully blocked and no App receipt, schema or stable pointer is minted.
   The Web release uses the formal stable artifact already referenced by the
   unchanged pointer; immediate Pages rollback is the pre-release deployment
-  `e3b07f67-ad58-4467-9a69-915f29f24f03`, preserving every D1 row.
+  `a257af4c-78a1-483d-bc9e-57e34e1d2dbe`, preserving every D1 row.
+- The section-06 chat frame remains `about:blank` until `進入同讀` is selected;
+  this prevents its remote input from taking focus and moving the parent page.
+  Mobile lesson titles may use two lines, the 1024-pixel atlas starts closed,
+  and vertical whitespace is tightened without removing reading content.
 - Live readback of both the atomic deployment URL and `yw.bdfz.net` matches the
   formal release marker SHA-256
-  `1a947f37e17f9617ad30ba9ecde4ed19e0b12c921edca4489591cde42926bf94`.
+  `ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`.
   Reading and learning health are 200, the online source/taxonomy counts are
-  191/189, the deployed preview/screenshot authorities are 539/118/75 and
-  352/334/11/7, and the dedicated desktop/mobile Web-polish acceptance is
-  32/32. A production 390-pixel read-only browser smoke also confirmed numeric
-  note expansion, no horizontal overflow, five safe new-tab links and zero
-  `xue.bdfz.net` DOM references.
+  191/189, the deployed preview/screenshot authorities are 538/118/75 and
+  351/334/11/6. Dedicated source-carrier browser acceptance is 32/32 for Web
+  polish and 16/16 for embed playback; the live-domain browser closeout also
+  verifies the no-autoload chat interval before accepting this deployment.
 - Formal Web staging is current at 1,223 files / 1,222 projected files. Its
   marker is `formal-stable`, projected aggregate
-  `e847d33848fff683fd8d6816a9a6deeda1adf1b427a93ddfdea4d520bafb2f9f`,
+  `a22ab92d0dc6193921a87fe7aee7340edf35ff18530206bb7bca0b0c23b76eac`,
   marker SHA-256
-  `1a947f37e17f9617ad30ba9ecde4ed19e0b12c921edca4489591cde42926bf94`
+  `ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`
   and artifact-manifest aggregate
-  `b664e2d4bb28eff30a8d807d7a351f591209a8712e012977f15646914ba804e7`
-  over 163,859,704 bytes. The unchanged stable App release remains exactly 278
+  `53dd53198cfbf9ede9ec8155597303a0732e0c6aa8ca2b0d70221f048278102e`
+  over 163,876,162 bytes. The unchanged stable App release remains exactly 278
   included paths.
 
 ## Historical 2026-08-09 objective and implemented scope

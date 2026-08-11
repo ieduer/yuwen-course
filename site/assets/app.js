@@ -995,6 +995,10 @@ function renderBooks() {
   `).join("");
 }
 
+function studentVisibleLessons() {
+  return (state.manifest?.lessons || []).filter((lesson) => !isRetiredMirror(lesson));
+}
+
 function visibleLessons() {
   const block = state.manifest.blocks.find((item) => item.id === state.blockId) || state.manifest.blocks[0];
   const query = normalizeText(state.query);
@@ -1022,7 +1026,7 @@ function renderLessonIndex() {
       </button>
     `;
   }).join("") || `<p class="index-empty">沒有匹配的課文。</p>`;
-  const allIds = state.manifest.lessons.map((lesson) => lesson.id);
+  const allIds = studentVisibleLessons().map((lesson) => lesson.id);
   const mastered = allIds.filter((id) => progressPercent(state.progress[id] || {}, { id }) === 100).length;
   els.atlasProgress.textContent = `${mastered} / ${allIds.length}`;
 }
@@ -3622,15 +3626,16 @@ async function init() {
     state.taxonomyGenres = new Map(state.taxonomy.genres.map((genre) => [genre.id, genre]));
     const defaultBlock = state.manifest.blocks.find((block) => block.id === "xuanbi-shang" || block.title === "選必上") || state.manifest.blocks[0];
     state.blockId = defaultBlock?.id || "";
-    els.atlasStatus.textContent = `${state.manifest.totals?.lessons || state.manifest.lessons.length} 篇 · 五冊教材`;
+    const studentLessons = studentVisibleLessons();
+    els.atlasStatus.textContent = `${studentLessons.length} 篇 · 五冊教材`;
     renderBooks();
     renderLessonIndex();
     const hashId = location.hash.slice(1);
     const rememberedId = readScopedUiValue(LAST_LESSON_KEY) || "";
-    const initial = state.manifest.lessons.find((lesson) => lesson.id === hashId)
-      || state.manifest.lessons.find((lesson) => lesson.id === rememberedId)
+    const initial = studentLessons.find((lesson) => lesson.id === hashId)
+      || studentLessons.find((lesson) => lesson.id === rememberedId)
       || defaultBlock?.lessons.find((lesson) => !isUnitHeading(lesson) && !isRetiredMirror(lesson) && (lesson.excerpt || "").length > 100)
-      || state.manifest.lessons[0];
+      || studentLessons[0];
     if (initial) await showLesson(initial.id, { push: true, syncSharedState: false });
     void flushSharedState();
   } catch (error) {

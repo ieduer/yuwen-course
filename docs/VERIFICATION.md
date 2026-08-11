@@ -15,6 +15,8 @@ YW_STUDY_GUIDE_SOURCE_DIR=/Users/ylsuen/CF/output/pdf_study_guides_web \
   npm run verify:study-guide-sources
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run precontent:check
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run qa:web-polish
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run qa:chat-no-autoload
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run qa:embed-playback
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:release-site
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:release-site
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:artifact-manifest
@@ -45,22 +47,30 @@ The current run must prove:
 - all nine WeChat sources project to exact `wx.bdfz.net` archives; direct
   `mp.weixin.qq.com` and `bdfz.yuque.com` student targets are zero;
 - every supported embed can expand and shrink, with Escape/focus restoration;
-  after the exact deletion set, the audited 352 page resources resolve to 334
-  screenshots + 11 direct presentations + 7 stopped embeds, all seven due to
+  after the exact deletion set, the audited 351 page resources resolve to 334
+  screenshots + 11 direct presentations + 6 stopped embeds, all six due to
   an external condition. The screenshots include 49 reviewed authenticated
   pages and deduplicate to 328 WebP assets / 12,795,016 logical bytes;
-- preview targets are exactly 539 / 118 redirects / 75 hosts with digest
-  `sha256:dd847ef28e2e492390c896cd2587931a3c8fdd402f497f359601d16ad0f662a8`;
+- preview targets are exactly 538 / 118 redirects / 75 hosts with digest
+  `sha256:887931515ae55b93d579a6892b5146ef68466c1e2c3ae5ed0c8022e00f2e84b7`;
   arbitrary same-host paths and unregistered redirects remain 403;
 - screenshot manifest SHA-256 is
-  `8b6fee25080e21ccc7475d5058e79193e6ba0624d8a6828b0411b62e55193e47`;
+  `30193e813611eb5e9ec09e2da99f81e5bca50597ed8b16839097eb70458333af`;
   confirmed-dead Bilibili `BV1Zg4y1H7fK` is absent from the Web projection,
   preview registry and screenshot manifest. E01 and all 16 permanent/remove
-  resources are likewise absent and are not counted among the seven;
+  resources and exact empty Sichuan gazetteer `content_30068` page are likewise
+  absent and are not counted among the six; `content_22151` remains;
 - all 99 exact Google Sites targets use reviewed screenshot-first rendering;
   17 BDFZ exact roots load the same real remote URL in their card and full-page
   view. `xue.bdfz.net` has zero student resource, target, redirect, host,
   screenshot, resolved or blocked record, and its preview requests return 403;
+- safe QX figure fragments load the exact remote profile; all 17 Wikisource
+  targets are screenshot-first; all five registered YouTube resources expose
+  click-to-play `youtube-nocookie.com` players and fullscreen playback;
+- `先找方向` is absent while `起始` remains. With no saved preference the
+  reader scale is 126%; saved local/remote values win. Chat remains
+  `about:blank`, hidden and request-free for at least 12 seconds before an
+  explicit `進入同讀` click, without scroll or focus movement;
 - 文體、書目、星圖、己身 and 登入 all open a new tab with
   `noopener noreferrer`; the original lesson URL remains unchanged;
 - the study-guide catalog is 241 / 191 active / 50 inactive and the formative
@@ -81,34 +91,34 @@ screenshot policy 12/12, authenticated importer 5/5,
 learning manifest 9/9, study-guide catalog 3/3, assessment 6/6, frontend 3/3,
 evidence 15/15, formative projection 4/4, shared state 13/13 plus real browser,
 Reading API 70/70, native candidate 21/21 and release-site 5/5. Layout
-acceptance passed 25/25 and the dedicated Web-polish browser matrix passed
-32/32. The `lesson-1534` browser flow rendered 98 initially hidden notes,
+acceptance passed 25/25, the dedicated Web-polish browser matrix passed 32/32,
+and the embed-playback matrix passed 16/16. The `lesson-1534` browser flow rendered 98 initially hidden notes,
 retained type-once/collapse behavior, blocked vocabulary before the receipt and
 unlocked it only after the exact stable mutation succeeded.
 
 The formal staging/check and artifact-manifest check pass at 1,223 files. The
 release marker is `formal-stable`, 1,222 projected files, projected aggregate
-`e847d33848fff683fd8d6816a9a6deeda1adf1b427a93ddfdea4d520bafb2f9f`,
+`a22ab92d0dc6193921a87fe7aee7340edf35ff18530206bb7bca0b0c23b76eac`,
 marker SHA-256
-`1a947f37e17f9617ad30ba9ecde4ed19e0b12c921edca4489591cde42926bf94`
+`ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`
 and artifact-manifest aggregate
-`b664e2d4bb28eff30a8d807d7a351f591209a8712e012977f15646914ba804e7`
-(163,859,704 bytes).
+`53dd53198cfbf9ede9ec8155597303a0732e0c6aa8ca2b0d70221f048278102e`
+(163,876,162 bytes).
 It includes the unchanged stable App release only (278 exact paths) and no new
 App candidate or pointer.
 
 Production deployment
-`a257af4c-78a1-483d-bc9e-57e34e1d2dbe` was published from clean GitHub `main`
-carrier commit `3317e668125a4869f97cbd918570de6d30fe7e08` at
-2026-08-11T14:14:44.487229Z. The atomic deployment URL and `yw.bdfz.net` return the
+`8da16237-ac91-47e1-afe2-7843e2d4c8a4` was published from clean GitHub `main`
+carrier commit `0ff5d5604ceefef92c99c07033f1e900d9edaaed` at
+2026-08-11T15:43:46.808208Z. The atomic deployment URL and `yw.bdfz.net` return the
 same marker SHA-256 above. Live Reading and compound learning health are 200;
-the online source/taxonomy counts are 191/189, preview registry is 539/118/75,
-and the screenshot manifest is 352/334/11/7. All seven fetched production
+the online source/taxonomy counts are 191/189, preview registry is 538/118/75,
+and the screenshot manifest is 351/334/11/6. All seven fetched production
 authorities match the carrier byte-for-byte. The production 390-pixel,
 read-only browser smoke confirms an expanding numeric note with content, no
 horizontal overflow, five safe new-tab links and zero `xue.bdfz.net` DOM
 references; the complete exact-carrier Web-polish matrix passed 32/32.
-Immediate Pages rollback is `e3b07f67-ad58-4467-9a69-915f29f24f03`; D1 and the
+Immediate Pages rollback is `a257af4c-78a1-483d-bc9e-57e34e1d2dbe`; D1 and the
 App pointer remain in place.
 
 ### Deliberate App pause
@@ -119,7 +129,7 @@ rewritten as a pass. Per the current user direction, keep the existing App
 stable pointer byte-identical, mint no App receipt/schema, and publish only the
 checksum-verified `formal-stable` Web artifact from a committed clean tree.
 Rollback is the pre-release Pages deployment
-`e3b07f67-ad58-4467-9a69-915f29f24f03`; D1 is preserved.
+`a257af4c-78a1-483d-bc9e-57e34e1d2dbe`; D1 is preserved.
 
 ## 2026-08-09 self-study-loop candidate gate (historical)
 

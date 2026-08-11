@@ -9,8 +9,9 @@ source manifest retains 191 records, including two hidden system records. It
 does not change the User Center, native App, A+/A--F scoring, or D1 schema:
 
 - the lesson title, `起始` orientation and portrait share one compact masthead;
-  owner-scoped local steps sit collapsed beside the portrait, leaving the main
-  column to reading;
+  the redundant `先找方向` label is gone, owner-scoped local steps sit
+  collapsed beside the portrait, and new readers start close reading at 126%
+  while an existing saved preference remains authoritative;
 - after the no-note first read, all 30 classical lessons keep that submitted
   reading visible, add source-bound learning tips, and then show the annotated
   canonical text. Inline notes begin hidden and vocabulary remains locked until
@@ -23,25 +24,38 @@ does not change the User Center, native App, A+/A--F scoring, or D1 schema:
   `我是／抽掉／換序／最關鍵的材料` templates fail closed;
 - all nine WeChat article resources use reviewed `wx.bdfz.net` archives, all
   embeds can expand to the full-page preview and return to their card, and
-  the reviewed fallback set covers 352 page resources: 334 use screenshots,
-  11 have a direct presentation, and 7 stop embedding honestly because an
+  the reviewed fallback set covers 351 page resources: 334 use screenshots,
+  11 have a direct presentation, and 6 stop embedding honestly because an
   external condition remains. The screenshots include 22 reviewed
   `ctext.org` pages and 27 reviewed `forum.rdfzer.com` pages;
 - 99 Google Sites resources are screenshot-first, while 17 reviewed exact
   BDFZ roots load the real remote site in both the card and full-page view.
   `xue.bdfz.net` is absent from student resources, preview targets, redirects,
   allowed hosts and screenshot receipts;
+- safe `qx.bdfz.net` figure fragments load the real remote profile, all 17
+  `zh.wikisource.org` targets are screenshot-first, and five reviewed YouTube
+  resources expose click-to-play privacy-bounded players. The empty exact
+  Sichuan gazetteer resource ending in `content_30068` is deleted while the
+  separate `content_22151` source remains;
+- `此刻同讀` stays unloaded until the student selects `進入同讀`, preventing
+  the remote frame from taking focus and scrolling the lesson to section 06.
+  Mobile titles may use two lines, and the atlas no longer opens by default at
+  the cramped 1024-pixel layout;
 - every student-visible `bdfz.yuque.com` link is removed. Registered BDFZ
   subdomain roots and exact third-party lesson URLs remain exact-target and
   fail closed for arbitrary sibling paths. E01, 16 permanently unavailable
   resources and the confirmed-dead Bilibili item are deleted from the Web
   projection and registries.
 
-The current preview registry is 539 targets / 118 redirects / 75 hosts, digest
-`sha256:dd847ef28e2e492390c896cd2587931a3c8fdd402f497f359601d16ad0f662a8`.
+The current preview registry is 538 targets / 118 redirects / 75 hosts, digest
+`sha256:887931515ae55b93d579a6892b5146ef68466c1e2c3ae5ed0c8022e00f2e84b7`.
 The screenshot manifest uses 328 unique WebP files / 12,795,016 logical bytes;
 its SHA-256 is
-`8b6fee25080e21ccc7475d5058e79193e6ba0624d8a6828b0411b62e55193e47`.
+`30193e813611eb5e9ec09e2da99f81e5bca50597ed8b16839097eb70458333af`.
+
+Production deployment `8da16237-ac91-47e1-afe2-7843e2d4c8a4` serves clean
+carrier `0ff5d5604ceefef92c99c07033f1e900d9edaaed`; immediate Pages rollback is
+`a257af4c-78a1-483d-bc9e-57e34e1d2dbe`.
 
 The production D1 already contains migration 0004. This task performs no D1
 write and does not move `site/app-content/latest-stable.json`. App and User

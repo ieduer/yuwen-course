@@ -4,8 +4,10 @@ import test from "node:test";
 
 const APP_PATH = new URL("../site/assets/app.js", import.meta.url);
 const INDEX_PATH = new URL("../site/index.html", import.meta.url);
+const MANIFEST_PATH = new URL("../site/data/manifest.json", import.meta.url);
 const source = await readFile(APP_PATH, "utf8");
 const indexHtml = await readFile(INDEX_PATH, "utf8");
+const manifest = JSON.parse(await readFile(MANIFEST_PATH, "utf8"));
 
 function section(start, end) {
   const startIndex = source.indexOf(start);
@@ -139,4 +141,32 @@ test("local completion labels do not claim formative mastery", () => {
   assert.doesNotMatch(indexHtml, /本課掌握度/);
   assert.doesNotMatch(source, /已掌握/);
   assert.match(source, /本機已存／尚未同步/);
+});
+
+test("student lesson count and startup exclude hidden system records", () => {
+  const retiredSource = section("function isRetiredMirror", "function genreFor");
+  const studentLessonsSource = section("function studentVisibleLessons", "function visibleLessons");
+  const studentVisibleLessons = new Function(
+    "state",
+    "lessonTitle",
+    `${retiredSource}\n${studentLessonsSource}\nreturn studentVisibleLessons;`,
+  )(
+    { manifest },
+    (lesson) => String(lesson?.title || lesson?.sourceTitle || ""),
+  );
+  const visible = studentVisibleLessons();
+
+  assert.equal(manifest.lessons.length, 191);
+  assert.equal(visible.length, 189);
+  assert.deepEqual(
+    manifest.lessons.filter((lesson) => !visible.some((entry) => entry.id === lesson.id)).map((lesson) => lesson.id),
+    ["lesson-11637", "lesson-11705"],
+  );
+
+  const indexSource = section("function renderLessonIndex", "function removeUnwantedSourceNodes");
+  assert.match(indexSource, /const allIds = studentVisibleLessons\(\)\.map/);
+  const initSource = section("async function init", "init\(\);");
+  assert.match(initSource, /atlasStatus\.textContent = `\$\{studentLessons\.length\} 篇 · 五冊教材`/);
+  assert.match(initSource, /const initial = studentLessons\.find/);
+  assert.match(initSource, /\|\| studentLessons\[0\]/);
 });
