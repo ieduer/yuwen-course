@@ -16,6 +16,9 @@ pre-migration and 503 statements no longer describe production.
   local-step disclosure. The main reading column no longer reserves a separate
   right rail. The redundant `先找方向` label is absent. New readers default to
   126%, while a stored local or remote reading-size preference remains intact.
+  The atlas and progress denominator use the 189 student units; two system
+  records remain hidden, and a valid explicit lesson URL wins over anonymous
+  remembered history.
 - The 30 classical lessons first collect the immutable no-punctuation,
   no-annotation reading. After submission, that reading remains visible,
   followed by source-bound learning tips and the canonical annotated text.
@@ -71,11 +74,11 @@ until the student selects `進入同讀`, so its remote input cannot focus and
 scroll the parent lesson before user action.
 
 Current production is Pages deployment
-`8da16237-ac91-47e1-afe2-7843e2d4c8a4`, clean carrier source
-`0ff5d5604ceefef92c99c07033f1e900d9edaaed`, deployed at
-2026-08-11T15:43:46.808208Z. The atomic deployment URL and `yw.bdfz.net` return the
+`18213286-37d1-4b71-80b6-78e8b986ed3d`, clean carrier source
+`a97eba7589ed6afa7df30ba4f37f2241a22d90d0`, deployed at
+2026-08-11T16:25:28.112875Z. The atomic deployment URL and `yw.bdfz.net` return the
 same formal marker SHA-256
-`ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`.
+`e384299f11f5695cfe118950bf4f486e1d803ba6fca4335816c49e03dac437c8`.
 Remote readback confirms D1 migrations 0001--0004, `reading-schema-v4`, and
 compound learning health 200. This Web release did not export, migrate or write
 D1; it changed no User Center, Queue, App or scoring contract.
@@ -85,15 +88,16 @@ styles, prompt rules, preview registry, screenshot manifest and classical-tip
 dataset. Production serves 191 source records / 189 student lessons, registry
 538/118/75 and screenshot disposition 351/334/11/6. A read-only 390-pixel
 browser smoke confirms numeric note expansion, no horizontal overflow, all five
-top links opening safely in new tabs and no `xue.bdfz.net` DOM reference.
+top links opening safely in new tabs and no `xue.bdfz.net` DOM reference. The
+live independent-load sweep passes all 189 lessons and 30/30 aggregate checks.
 
 User direction pauses App/User Center follow-up while the Web content is
 settled. Therefore `check:native-content:deploy-sync` is expected to reject the
 new Web graph and is not reported as passing. Do not create a replacement App
 receipt/schema or move `site/app-content/latest-stable.json`. Build the
 production `formal-stable` artifact, verify its marker/checksum and deploy only
-from a committed clean tree. Roll back Pages to
-`a257af4c-78a1-483d-bc9e-57e34e1d2dbe` if live checks fail; preserve D1 and the
+from a committed clean tree. Roll back Pages to the stable deployment
+`8da16237-ac91-47e1-afe2-7843e2d4c8a4` if live checks fail; preserve D1 and the
 unchanged App pointer.
 
 No new Cloudflare capability is adopted. Release tooling is Node `24.18.0`

@@ -196,7 +196,10 @@ async function verifyMobileLessonSweep(browser) {
     if (index === 0 || (index + 1) % 25 === 0 || index === taxonomy.lessons.length - 1) {
       process.stderr.write(`mobile sweep ${index + 1}/${taxonomy.lessons.length} ${lesson.id}\n`);
     }
-    await page.goto(`${base}/#${lesson.id}`, { waitUntil: "domcontentloaded" });
+    const lessonUrl = new URL(base);
+    lessonUrl.searchParams.set("qaLesson", lesson.id);
+    lessonUrl.hash = lesson.id;
+    await page.goto(lessonUrl.toString(), { waitUntil: "domcontentloaded" });
     try {
       await page.waitForFunction(
         (id) => document.querySelector(`.lesson-link.active[data-lesson="${CSS.escape(id)}"]`),

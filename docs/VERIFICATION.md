@@ -87,30 +87,31 @@ The current run must prove:
   durable evidence queue.
 
 The completed local precontent run reports: preview targets 6/6, resource and
-screenshot policy 12/12, authenticated importer 5/5,
+screenshot policy 13/13, authenticated importer 5/5,
 learning manifest 9/9, study-guide catalog 3/3, assessment 6/6, frontend 3/3,
 evidence 15/15, formative projection 4/4, shared state 13/13 plus real browser,
 Reading API 70/70, native candidate 21/21 and release-site 5/5. Layout
 acceptance passed 25/25, the dedicated Web-polish browser matrix passed 32/32,
-and the embed-playback matrix passed 16/16. The `lesson-1534` browser flow rendered 98 initially hidden notes,
+the embed-playback matrix passed 16/16, and the live independent-load sweep
+passed 189/189 lessons plus 30/30 aggregate checks. The `lesson-1534` browser flow rendered 98 initially hidden notes,
 retained type-once/collapse behavior, blocked vocabulary before the receipt and
 unlocked it only after the exact stable mutation succeeded.
 
 The formal staging/check and artifact-manifest check pass at 1,223 files. The
 release marker is `formal-stable`, 1,222 projected files, projected aggregate
-`a22ab92d0dc6193921a87fe7aee7340edf35ff18530206bb7bca0b0c23b76eac`,
+`0217dc7579cc58ed3c49364e850c0d0561437638383b8f8b621709ff4816050e`,
 marker SHA-256
-`ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`
+`e384299f11f5695cfe118950bf4f486e1d803ba6fca4335816c49e03dac437c8`
 and artifact-manifest aggregate
-`53dd53198cfbf9ede9ec8155597303a0732e0c6aa8ca2b0d70221f048278102e`
-(163,876,162 bytes).
+`9513b0c02a02a1b7aa3e98201acf09fc2e9e9daf844ffeca02f528c92c87c785`
+(163,876,528 bytes).
 It includes the unchanged stable App release only (278 exact paths) and no new
 App candidate or pointer.
 
 Production deployment
-`8da16237-ac91-47e1-afe2-7843e2d4c8a4` was published from clean GitHub `main`
-carrier commit `0ff5d5604ceefef92c99c07033f1e900d9edaaed` at
-2026-08-11T15:43:46.808208Z. The atomic deployment URL and `yw.bdfz.net` return the
+`18213286-37d1-4b71-80b6-78e8b986ed3d` was published from clean GitHub `main`
+carrier commit `a97eba7589ed6afa7df30ba4f37f2241a22d90d0` at
+2026-08-11T16:25:28.112875Z. The atomic deployment URL and `yw.bdfz.net` return the
 same marker SHA-256 above. Live Reading and compound learning health are 200;
 the online source/taxonomy counts are 191/189, preview registry is 538/118/75,
 and the screenshot manifest is 351/334/11/6. All seven fetched production
@@ -118,7 +119,9 @@ authorities match the carrier byte-for-byte. The production 390-pixel,
 read-only browser smoke confirms an expanding numeric note with content, no
 horizontal overflow, five safe new-tab links and zero `xue.bdfz.net` DOM
 references; the complete exact-carrier Web-polish matrix passed 32/32.
-Immediate Pages rollback is `a257af4c-78a1-483d-bc9e-57e34e1d2dbe`; D1 and the
+The live atlas/progress denominator is 189; both hidden direct hashes fall back
+without requesting their data, and valid explicit lesson hashes remain stable.
+Stable Pages rollback is `8da16237-ac91-47e1-afe2-7843e2d4c8a4`; D1 and the
 App pointer remain in place.
 
 ### Deliberate App pause
@@ -128,8 +131,8 @@ graph has no new App audit receipt. That result is expected and must not be
 rewritten as a pass. Per the current user direction, keep the existing App
 stable pointer byte-identical, mint no App receipt/schema, and publish only the
 checksum-verified `formal-stable` Web artifact from a committed clean tree.
-Rollback is the pre-release Pages deployment
-`a257af4c-78a1-483d-bc9e-57e34e1d2dbe`; D1 is preserved.
+Rollback is the stable Pages deployment
+`8da16237-ac91-47e1-afe2-7843e2d4c8a4`; D1 is preserved.
 
 ## 2026-08-09 self-study-loop candidate gate (historical)
 

@@ -2,11 +2,11 @@
 
 Last updated: 2026-08-11
 
-Package: `0.2.1-evaluation-nonscoring`. The deployed Web carrier is clean
-GitHub `main` commit `0ff5d5604ceefef92c99c07033f1e900d9edaaed`.
+Package: `0.2.1-evaluation-nonscoring`. The deployed Web carrier is commit
+`a97eba7589ed6afa7df30ba4f37f2241a22d90d0`, contained by current GitHub `main`.
 Production serves Pages deployment
-`8da16237-ac91-47e1-afe2-7843e2d4c8a4` at `yw.bdfz.net`; it was deployed at
-2026-08-11T15:43:46.808208Z. The current override below supersedes the retained
+`18213286-37d1-4b71-80b6-78e8b986ed3d` at `yw.bdfz.net`; it was deployed at
+2026-08-11T16:25:28.112875Z. The current override below supersedes the retained
 2026-08-09 candidate/release narrative.
 
 ## 2026-08-11 Web reading finalization
@@ -17,6 +17,9 @@ Production serves Pages deployment
   the lesson title and portrait. The owner-scoped local step indicator is
   collapsed beside the portrait instead of occupying the reading column. New
   readers default to 126%; stored local or remote font preferences still win.
+  The atlas label and progress denominator derive from the 189 student units,
+  while the two hidden system records cannot be opened by direct hash. A valid
+  explicit lesson URL takes precedence over anonymous remembered history.
 - All 30 classical lessons now require two consecutive reading stages. After
   the immutable `起始 · 無注疏初讀`, the submitted no-note reading remains
   visible beside source-bound learning tips and the annotated canonical text.
@@ -70,28 +73,29 @@ Production serves Pages deployment
   experience is settled. Consequently the old App-content sync check remains
   truthfully blocked and no App receipt, schema or stable pointer is minted.
   The Web release uses the formal stable artifact already referenced by the
-  unchanged pointer; immediate Pages rollback is the pre-release deployment
-  `a257af4c-78a1-483d-bc9e-57e34e1d2dbe`, preserving every D1 row.
+  unchanged pointer; the stable Pages rollback is deployment
+  `8da16237-ac91-47e1-afe2-7843e2d4c8a4`, preserving every D1 row.
 - The section-06 chat frame remains `about:blank` until `進入同讀` is selected;
   this prevents its remote input from taking focus and moving the parent page.
   Mobile lesson titles may use two lines, the 1024-pixel atlas starts closed,
   and vertical whitespace is tightened without removing reading content.
 - Live readback of both the atomic deployment URL and `yw.bdfz.net` matches the
   formal release marker SHA-256
-  `ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`.
+  `e384299f11f5695cfe118950bf4f486e1d803ba6fca4335816c49e03dac437c8`.
   Reading and learning health are 200, the online source/taxonomy counts are
   191/189, the deployed preview/screenshot authorities are 538/118/75 and
   351/334/11/6. Dedicated source-carrier browser acceptance is 32/32 for Web
   polish and 16/16 for embed playback; the live-domain browser closeout also
-  verifies the no-autoload chat interval before accepting this deployment.
+  verifies the no-autoload chat interval. The independent-load mobile sweep
+  passed 189/189 lessons and 30/30 aggregate checks, including `lesson-1589`.
 - Formal Web staging is current at 1,223 files / 1,222 projected files. Its
   marker is `formal-stable`, projected aggregate
-  `a22ab92d0dc6193921a87fe7aee7340edf35ff18530206bb7bca0b0c23b76eac`,
+  `0217dc7579cc58ed3c49364e850c0d0561437638383b8f8b621709ff4816050e`,
   marker SHA-256
-  `ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`
+  `e384299f11f5695cfe118950bf4f486e1d803ba6fca4335816c49e03dac437c8`
   and artifact-manifest aggregate
-  `53dd53198cfbf9ede9ec8155597303a0732e0c6aa8ca2b0d70221f048278102e`
-  over 163,876,162 bytes. The unchanged stable App release remains exactly 278
+  `9513b0c02a02a1b7aa3e98201acf09fc2e9e9daf844ffeca02f528c92c87c785`
+  over 163,876,528 bytes. The unchanged stable App release remains exactly 278
   included paths.
 
 ## Historical 2026-08-09 objective and implemented scope

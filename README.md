@@ -11,7 +11,9 @@ does not change the User Center, native App, A+/A--F scoring, or D1 schema:
 - the lesson title, `起始` orientation and portrait share one compact masthead;
   the redundant `先找方向` label is gone, owner-scoped local steps sit
   collapsed beside the portrait, and new readers start close reading at 126%
-  while an existing saved preference remains authoritative;
+  while an existing saved preference remains authoritative. The atlas and
+  progress denominator show the 189 student units, and an explicit valid
+  lesson URL is never replaced by an anonymous remembered lesson;
 - after the no-note first read, all 30 classical lessons keep that submitted
   reading visible, add source-bound learning tips, and then show the annotated
   canonical text. Inline notes begin hidden and vocabulary remains locked until
@@ -53,9 +55,9 @@ The screenshot manifest uses 328 unique WebP files / 12,795,016 logical bytes;
 its SHA-256 is
 `30193e813611eb5e9ec09e2da99f81e5bca50597ed8b16839097eb70458333af`.
 
-Production deployment `8da16237-ac91-47e1-afe2-7843e2d4c8a4` serves clean
-carrier `0ff5d5604ceefef92c99c07033f1e900d9edaaed`; immediate Pages rollback is
-`a257af4c-78a1-483d-bc9e-57e34e1d2dbe`.
+Production deployment `18213286-37d1-4b71-80b6-78e8b986ed3d` serves carrier
+`a97eba7589ed6afa7df30ba4f37f2241a22d90d0`; the stable Pages rollback is
+`8da16237-ac91-47e1-afe2-7843e2d4c8a4`.
 
 The production D1 already contains migration 0004. This task performs no D1
 write and does not move `site/app-content/latest-stable.json`. App and User
