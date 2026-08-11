@@ -70,7 +70,8 @@
     "prepare:release-artifact": "npm run check:native-content:deploy-sync && npm run build:release-site && npm run build:artifact-manifest",
     "release:check": "npm run precontent:check && npm run verify:study-guide-sources && npm run check:native-content:deploy-sync && npm run build:release-site && npm run check:release-site && npm run check:artifact-manifest",
     "serve": "npx wrangler pages dev site",
-    "deploy": "npm run release:check && wrangler pages deploy .release/site --project-name yuwen-course --branch main"
+    "deploy": "npm run release:check && wrangler pages deploy .release/site --project-name yuwen-course --branch main",
+    "predeploy": "bash /Users/ylsuen/CF/scripts/git-deploy-gate.sh"
   },
   "devDependencies": {
     "linkedom": "0.18.13",
