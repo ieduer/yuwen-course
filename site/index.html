@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="https://img.bdfz.net/20250503004.webp">
   <meta name="theme-color" content="#f4f0e6">
   <title>課文 · 語文學習矩陣</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260809-self-study-loop-v2">
+  <link rel="stylesheet" href="assets/styles.css?v=20260811-web-reading-final-v1">
 </head>
 <body>
   <a class="skip-link" href="#textbook-text" data-same-tab>跳到正文</a>
@@ -63,16 +63,26 @@
         <h1 id="lesson-title">課文</h1>
       </div>
       <div class="lesson-portraits" id="lesson-portraits" aria-label="人物視覺"></div>
+      <section class="orientation" id="orientation" aria-labelledby="orientation-title">
+        <div class="section-label">01 / 先找方向</div>
+        <h2 id="orientation-title">起始</h2>
+        <div id="orientation-content"></div>
+      </section>
+      <aside class="learning-rail collapsed" id="learning-rail" aria-label="本機步驟完成度">
+        <button class="mastery-toggle" id="mastery-toggle" type="button" aria-expanded="false" aria-controls="mastery-panel">
+          <span>本機步驟完成度</span>
+          <strong><b id="mastery-value">0</b><small>%</small></strong>
+          <i aria-hidden="true">展</i>
+        </button>
+        <div class="mastery-panel" id="mastery-panel">
+          <div class="mastery-spectrum" id="mastery-spectrum" style="--mastery:0%" aria-hidden="true"><span></span></div>
+          <ol class="checkpoint-list" id="checkpoint-list"></ol>
+        </div>
+      </aside>
     </header>
 
     <div class="study-layout">
       <article class="reading-column" id="reading-column" aria-label="課文正文">
-        <section class="orientation" id="orientation" aria-labelledby="orientation-title">
-          <div class="section-label">01 / 先找方向</div>
-          <h2 id="orientation-title">起始</h2>
-          <div id="orientation-content"></div>
-        </section>
-
         <section class="textbook-text" id="textbook-text" aria-labelledby="textbook-title">
           <div class="section-head">
             <div>
@@ -121,8 +131,6 @@
           <div class="check-stage" id="check-stage"></div>
         </section>
 
-        <div class="mobile-mastery-anchor" id="mobile-mastery-anchor" aria-hidden="true"></div>
-
         <section class="lesson-chat" id="lesson-chat" aria-labelledby="lesson-chat-title">
           <div class="section-head">
             <div>
@@ -141,17 +149,6 @@
         </section>
       </article>
 
-      <aside class="learning-rail" id="learning-rail" aria-label="本機步驟完成度">
-        <button class="mastery-toggle" id="mastery-toggle" type="button" aria-expanded="true" aria-controls="mastery-panel">
-          <span>本機步驟完成度</span>
-          <strong><b id="mastery-value">0</b><small>%</small></strong>
-          <i aria-hidden="true">收</i>
-        </button>
-        <div class="mastery-panel" id="mastery-panel">
-          <div class="mastery-spectrum" id="mastery-spectrum" style="--mastery:0%" aria-hidden="true"><span></span></div>
-          <ol class="checkpoint-list" id="checkpoint-list"></ol>
-        </div>
-      </aside>
     </div>
   </main>
 
@@ -204,7 +201,7 @@
         <button class="icon-button" value="close" aria-label="關閉資料">×</button>
       </div>
     </form>
-    <iframe id="resource-frame" title="課堂資料預覽" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+    <div class="resource-dialog-stage" id="resource-dialog-stage" aria-label="課堂資料預覽"></div>
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -213,7 +210,7 @@
   <script async src="https://nav.bdfz.net/bdfz-nav.js"></script>
   <script defer src="assets/learning-evidence.js?v=20260727-evidence-loop-v2"></script>
   <script defer src="assets/vocab-progress.js?v=20260730-vocab-scope-v1"></script>
-  <script defer src="assets/classical-first-read.js?v=20260809-first-read-v1"></script>
-  <script defer src="assets/app.js?v=20260809-self-study-loop-v2"></script>
+  <script defer src="assets/classical-first-read.js?v=20260811-annotated-read-v2"></script>
+  <script defer src="assets/app.js?v=20260811-web-reading-final-v1"></script>
 </body>
 </html>

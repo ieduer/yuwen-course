@@ -3,6 +3,9 @@
   "version": "0.2.1-evaluation-nonscoring",
   "private": false,
   "type": "module",
+  "engines": {
+    "node": "24.18.0"
+  },
   "scripts": {
     "build:data": "/Users/ylsuen/.venv/bin/python scripts/build_site_data.py --export .cache/discourse-course-export.json --catalog /Users/ylsuen/CF/jc-textbook-reader/site/data/catalog.json --fts-db /Users/ylsuen/textbook_ai_migration/platform/data/textbook_mineru_fts.db --out site/data && npm run build:lessons && npm run build:reader-documents",
     "build:external": "/Users/ylsuen/.venv/bin/python scripts/build_external_resources.py",
@@ -44,7 +47,8 @@
     "test:reading-identity": "node --test scripts/test_reading_identity.mjs",
     "test:study-guide-assessment": "node --test scripts/test_study_guide_assessment.mjs",
     "test:study-guide-frontend": "node --test scripts/test_study_guide_frontend.mjs",
-    "test:resource-previews": "node --test scripts/test_expanded_resource_previews.mjs",
+    "test:resource-previews": "node --test scripts/test_expanded_resource_previews.mjs scripts/test_preview_screenshots.mjs",
+    "test:authenticated-preview-import": "node --test scripts/test_authenticated_preview_import.mjs",
     "test:local-progress": "node --test scripts/test_local_progress_truthfulness.mjs",
     "test:shared-state": "node --test scripts/test_yw_shared_state.mjs && node scripts/test_yw_shared_state_browser.mjs",
     "test:native-content": "node --test scripts/test_native_content.mjs",
@@ -65,7 +69,7 @@
     "test:reading": "node scripts/test_reading_api.mjs",
     "build:artifact-manifest": "node scripts/build_artifact_manifest.mjs",
     "check:artifact-manifest": "node scripts/build_artifact_manifest.mjs --check",
-    "precontent:check": "npm run check:taxonomy && npm run verify:authors && npm run verify:vocab:release && npm run test:vocab-progress && npm run check:reader-documents && npm run verify:reader-media && npm run test:reader-media && npm run test:manifest-textbook-images && npm run check:preview-targets && npm run test:preview-targets && npm run test:preview-workerd && npm run test:preview-bindings && npm run test:resource-previews && npm run check:classical-first-read && npm run test:classical-first-read && npm run check:learning-manifest && npm run test:learning-manifest && npm run check:study-guides && npm run test:study-guides && npm run test:study-guide-assessment && npm run test:study-guide-frontend && npm run test:evidence-contract && npm run test:formative-mastery && npm run test:star-formative && npm run test:reading-identity && npm run test:local-progress && npm run test:shared-state && npm run test:reading && npm run check:content-projection && npm run check:web-url-projection && npm run test:native-content && npm run test:release-site",
+    "precontent:check": "npm run check:taxonomy && npm run verify:authors && npm run verify:vocab:release && npm run test:vocab-progress && npm run check:reader-documents && npm run verify:reader-media && npm run test:reader-media && npm run test:manifest-textbook-images && npm run check:preview-targets && npm run test:preview-targets && npm run test:preview-workerd && npm run test:preview-bindings && npm run test:resource-previews && npm run test:authenticated-preview-import && npm run check:classical-first-read && npm run test:classical-first-read && npm run check:learning-manifest && npm run test:learning-manifest && npm run check:study-guides && npm run test:study-guides && npm run test:study-guide-assessment && npm run test:study-guide-frontend && npm run test:evidence-contract && npm run test:formative-mastery && npm run test:star-formative && npm run test:reading-identity && npm run test:local-progress && npm run test:shared-state && npm run test:reading && npm run check:content-projection && npm run check:web-url-projection && npm run test:native-content && npm run test:release-site",
     "prepare:preview-artifact": "npm run precontent:check && npm run build:release-site:preview && npm run check:release-site:preview",
     "prepare:release-artifact": "npm run check:native-content:deploy-sync && npm run build:release-site && npm run build:artifact-manifest",
     "release:check": "npm run precontent:check && npm run verify:study-guide-sources && npm run check:native-content:deploy-sync && npm run build:release-site && npm run check:release-site && npm run check:artifact-manifest",

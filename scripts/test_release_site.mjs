@@ -18,6 +18,10 @@ import {
   verifyReleaseStaging,
 } from "./build_release_site.mjs";
 import { privacyIssueCounts } from "./native_content_url_sanitizer.mjs";
+import {
+  REMOVED_WEB_RESOURCE_URLS,
+  isRemovedWebResource,
+} from "./web_resource_policy.mjs";
 
 function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
@@ -38,6 +42,12 @@ function canonicalize(value) {
 
 function serialize(value) {
   return `${JSON.stringify(canonicalize(value))}\n`;
+}
+
+function removedResourceUrlsInText(value) {
+  return [...String(value || "").matchAll(/https?:\/\/[^\s"'<>]+/gi)]
+    .map((match) => match[0].replaceAll("&amp;", "&"))
+    .filter(isRemovedWebResource);
 }
 
 function privacyTotal(value) {
@@ -154,6 +164,74 @@ function createFixture() {
     title: "课文与注释保持不变",
     href: "https://example.com/lesson",
   }));
+  writeBytes(path.join(sourceRoot, "data", "class_resources.json"), serialize({
+    href: "https://bdfz.yuque.com/legacy-class-index",
+  }));
+  writeBytes(path.join(sourceRoot, "assets", "app.js"), Buffer.from(
+    'const blockedHost = "bdfz.yuque.com";\n',
+  ));
+  writeBytes(path.join(sourceRoot, "data", "lessons", "lesson-yuque.json"), serialize({
+    lessonId: "lesson-yuque",
+    resources: [{
+      href: "https://bdfz.yuque.com/lesson",
+      text: "旧语雀课文",
+    }, {
+      href: "https://bdfz.yuque.com.evil.example/keep-exact-host-semantics",
+      text: "相似但不同的主机",
+    },
+    ...REMOVED_WEB_RESOURCE_URLS.map((href) => ({ href, text: "已删除资源" })),
+    {
+      href: "https://baike.baidu.com/item/%E6%97%A0%E9%A2%98",
+      text: "保留相邻百科条目",
+    }, {
+      href: "https://pkuschool.yuque.com/g/qrvbic/books/folder/29416843",
+      text: "保留外部条件资源",
+    }],
+    posts: [{
+      post_number: 5,
+      cooked: '<p><a href="https://bdfz.yuque.com/lesson">课文标题</a> 保留正文 <a href="https://www.bilibili.com/video/BV1Zg4y1H7fK/">已失效视频</a></p>',
+      links: [
+        { href: "https://bdfz.yuque.com/lesson", text: "课文标题" },
+        { href: "https://www.bilibili.com/video/BV1Zg4y1H7fK/", text: "已失效视频" },
+      ],
+    }, {
+      post_number: 6,
+      cooked: '<aside data-onebox-src="https://www.bilibili.com/video/BV1Zg4y1H7fK/"><a href="https://www.bilibili.com/video/BV1Zg4y1H7fK/">已失效视频</a></aside>',
+      plain_text: "bilibili.com 已失效视频 视频播放量 100",
+      images: [{ src: "https://example.com/stale-thumbnail.png" }],
+      links: [{ href: "https://www.bilibili.com/video/BV1Zg4y1H7fK/", text: "已失效视频" }],
+    }],
+  }));
+  const readerDocument = serialize({
+    lessonId: "lesson-yuque",
+    resources: [{
+      href: "https://bdfz.yuque.com/lesson",
+      sourceUrl: "https://bdfz.yuque.com/lesson",
+    },
+    ...REMOVED_WEB_RESOURCE_URLS.map((href) => ({ href, sourceUrl: href })),
+    {
+      href: "https://baike.baidu.com/item/%E6%97%A0%E9%A2%98",
+      sourceUrl: "https://baike.baidu.com/item/%E6%97%A0%E9%A2%98",
+    }, {
+      href: "https://pkuschool.yuque.com/g/qrvbic/books/folder/29416843",
+      sourceUrl: "https://pkuschool.yuque.com/g/qrvbic/books/folder/29416843",
+    }],
+  });
+  writeBytes(
+    path.join(sourceRoot, "data", "reader-documents", "lesson-yuque.json"),
+    readerDocument,
+  );
+  writeBytes(path.join(sourceRoot, "data", "reader-documents", "index.json"), serialize({
+    schemaVersion: "yw-reader-document-index-v1",
+    readerSemanticDigest: `sha256:${"3".repeat(64)}`,
+    documents: {
+      "lesson-yuque": {
+        path: "reader-documents/lesson-yuque.json",
+        bytes: Buffer.byteLength(readerDocument),
+        sha256: sha256(readerDocument),
+      },
+    },
+  }));
   const clean = writeImmutableRelease(appContentRoot, {
     contentVersion: "yw-111111111111111111111111",
     corePayload: {
@@ -243,6 +321,65 @@ test("formal staging contains only the exact stable pointer and receipted releas
     assert.throws(
       () => verifyReleaseStaging({ releaseRoot, releaseKind: "formal-stable" }),
       /historical native release exists in staging/,
+    );
+  } finally {
+    rmSync(fixture.root, { recursive: true, force: true });
+  }
+});
+
+test("Web projection removes the exact legacy Yuque host and refreshes reader receipts", () => {
+  const fixture = createFixture();
+  const releaseRoot = path.join(fixture.root, "formal-web-host-policy");
+  try {
+    buildReleaseSite({
+      sourceRoot: fixture.sourceRoot,
+      releaseRoot,
+      releaseKind: "formal-stable",
+    });
+    assert.equal(existsSync(path.join(releaseRoot, "data", "class_resources.json")), false);
+    const lesson = readFileSync(
+      path.join(releaseRoot, "data", "lessons", "lesson-yuque.json"),
+      "utf8",
+    );
+    assert.doesNotMatch(lesson, /(?<![a-z0-9.-])bdfz\.yuque\.com(?![a-z0-9.-])/i);
+    assert.match(lesson, /bdfz\.yuque\.com\.evil\.example/);
+    assert.match(lesson, /课文标题/);
+    assert.match(lesson, /保留正文/);
+    assert.doesNotMatch(lesson, /BV1Zg4y1H7fK|已失效视频|视频播放量|stale-thumbnail/);
+    assert.deepEqual(removedResourceUrlsInText(lesson), []);
+    assert.match(lesson, /https:\/\/baike\.baidu\.com\/item\/%E6%97%A0%E9%A2%98/);
+    assert.match(lesson, /https:\/\/pkuschool\.yuque\.com\/g\/qrvbic\/books\/folder\/29416843/);
+
+    const readerPath = path.join(
+      releaseRoot,
+      "data",
+      "reader-documents",
+      "lesson-yuque.json",
+    );
+    const readerBytes = readFileSync(readerPath);
+    assert.doesNotMatch(readerBytes.toString("utf8"), /bdfz\.yuque\.com/i);
+    assert.doesNotMatch(readerBytes.toString("utf8"), /BV1Zg4y1H7fK/);
+    assert.deepEqual(removedResourceUrlsInText(readerBytes), []);
+    const readerIndex = JSON.parse(readFileSync(
+      path.join(releaseRoot, "data", "reader-documents", "index.json"),
+      "utf8",
+    ));
+    assert.equal(readerIndex.documents["lesson-yuque"].bytes, readerBytes.length);
+    assert.equal(readerIndex.documents["lesson-yuque"].sha256, sha256(readerBytes));
+    assert.equal(readerIndex.readerSemanticDigest, `sha256:${"3".repeat(64)}`);
+    assert.doesNotMatch(
+      readFileSync(path.join(releaseRoot, "assets", "app.js"), "utf8"),
+      /bdfz\.yuque\.com/i,
+    );
+    verifyReleaseStaging({ releaseRoot, releaseKind: "formal-stable" });
+
+    writeBytes(
+      path.join(releaseRoot, "index.html"),
+      Buffer.from('<a href="https://bdfz.yuque.com/forbidden">forbidden</a>\n'),
+    );
+    assert.throws(
+      () => verifyReleaseStaging({ releaseRoot, releaseKind: "formal-stable" }),
+      /forbidden Web host remains/,
     );
   } finally {
     rmSync(fixture.root, { recursive: true, force: true });

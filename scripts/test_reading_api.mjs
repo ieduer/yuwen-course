@@ -181,6 +181,7 @@ try {
 
   const firstReadState = await api("/api/reading/first-read/state/lesson-1484");
   assert("first-read state uses current text version", firstReadState.data.textVersionId === firstReadAsset.textVersionId);
+  assert("annotated reading starts incomplete", firstReadState.data.annotatedReadCompleted === false);
   const firstReadParagraph = firstReadAsset.paragraphs[0];
   let nextUtf16Offset = 0;
   const markRanges = Array.from(firstReadParagraph.text).slice(0, 3).map((character) => {
@@ -244,6 +245,26 @@ try {
   assert("submit wins or serializes with racing mark update", submitted.data.ok === true && [200, 500].includes(raced.status));
   const submittedState = await api("/api/reading/first-read/state/lesson-1484");
   assert("submitted state has exactly three immutable active marks", submittedState.data.submitted === true && submittedState.data.markCount === 3);
+  assert("first-read submit does not skip annotated reading", submittedState.data.annotatedReadCompleted === false);
+  const vocabBeforeAnnotatedRead = await api("/api/reading/vocab-attempt", {
+    lessonId: "lesson-1484",
+    itemId: "lesson-1484:v01",
+    selectedIndex: 1,
+    clientMutationId: `vocab-before-annotated-${SLUG}`,
+  });
+  assert("vocabulary remains locked until annotated reading is acknowledged", vocabBeforeAnnotatedRead.status === 422, JSON.stringify(vocabBeforeAnnotatedRead));
+  const annotatedReadBody = {
+    lessonId: "lesson-1484",
+    interactionKey: "readAcknowledged",
+    clientMutationId: `annotated-read:lesson-1484:${firstReadAsset.textVersionId}`.slice(0, 100),
+    lessonPhase: "annotated_reading",
+    data: { threshold: 1 },
+  };
+  const annotatedRead = await api("/api/learning/interactions", annotatedReadBody);
+  const annotatedReadReplay = await api("/api/learning/interactions", annotatedReadBody);
+  const stateAfterAnnotatedRead = await api("/api/reading/first-read/state/lesson-1484");
+  assert("annotated reading acknowledgement is idempotent", annotatedRead.data.ok === true && annotatedReadReplay.data.deduped === true);
+  assert("annotated reading receipt unlocks vocabulary", stateAfterAnnotatedRead.data.annotatedReadCompleted === true);
   const frozenGuess = submittedState.data.marks.find((mark) => mark.markId === mark1.data.mark.markId)?.guess;
   const lateUpdate = await api("/api/reading/first-read/mark", {
     ...markBodies[0],

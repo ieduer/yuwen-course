@@ -1,12 +1,82 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-08-09 (America/Los_Angeles)
+Last reviewed: 2026-08-11 (America/Los_Angeles)
 
-## 2026-08-09 self-study-loop candidate override
+## 2026-08-11 Web reading finalization override
 
-This section is the current source and release disposition. Older sections are
-retained as historical production evidence; they do not authorize this
-candidate.
+This is the current operational disposition. Older paired Web/App and
+2026-08-09 candidate sections remain as historical evidence, but their blocked
+pre-migration and 503 statements no longer describe production.
+
+### Current student flow
+
+- Students can use 189 lesson units. The source manifest retains 191 records,
+  including two hidden system records. All 189 student-visible pages use one
+  masthead for title, `起始` orientation, portrait and a collapsed owner-scoped
+  local-step disclosure. The main reading column no longer reserves a separate
+  right rail.
+- The 30 classical lessons first collect the immutable no-punctuation,
+  no-annotation reading. Submission reveals the canonical annotated text.
+  Inline notes are `role=note`, hidden initially, type only once, and collapse
+  on repeat click or Escape with focus restoration.
+- Vocabulary and vocabulary/syntax study-guide interactions require the
+  existing non-scoring `readAcknowledged` receipt for `annotated_reading`.
+  Client mutation IDs are stable per lesson/text version; the Worker enforces
+  the receipt and preserves idempotent replay. Existing vocabulary evidence is
+  grandfathered so previously active students are not stranded.
+
+### Resource and preview policy
+
+- `site/data/wechat-archive-map.json` is the reviewed source-to-archive map for
+  all nine student-visible WeChat articles. Rendering and preview generation
+  must contain `wx.bdfz.net`, never direct `mp.weixin.qq.com` targets.
+- `bdfz.yuque.com` is forbidden in student-visible links and preview targets.
+  Exact `pkuschool.yuque.com` lesson pages may be proxied; exact Google Sites
+  lesson pages and 18 reviewed BDFZ subdomain roots are also registered.
+- Preview registration is exact-target: arbitrary sibling paths, redirects to
+  an unregistered target, active MIME and IP literals fail closed. Current
+  registry: 540 targets / 119 redirects / 76 hosts, digest
+  `sha256:08b55ba18ccbea706b4755a7e4c1a5de276d5588a5c748bc1ed82dcc00e6968a`.
+- Every rendered iframe/document/image/audio/video preview exposes a full-page
+  expand control. Close, Escape and shrink clear the mounted media and restore
+  focus. After exact deletion of E01, 16 permanently unavailable resources and
+  the confirmed-dead Bilibili item, the audited set is 353 page resources: 335
+  have screenshots, 11 have a verified direct presentation, and 7 are not
+  embedded because an external condition remains. The 49 authenticated
+  recoveries are 22 `ctext.org` pages and 27 `forum.rdfzer.com` pages; their
+  browser credentials, cookies and session state are not stored. The 335
+  entries deduplicate to 329 WebP files / 12,816,592 logical bytes;
+  `site/data/preview-screenshots.json` SHA-256 is
+  `95b8929c4b0bce0ddde45f4eb7941275e9660708704518ad23d5de825c58e17d`.
+  Deleted resources are removed from the Web projection and registries rather
+  than retained as blockers; no permanent/remove blocker remains.
+
+### Release, data and rollback
+
+Production before this Web release is Pages deployment
+`d017e7db-08f9-47fe-b348-4f40c29db474`, source
+`a85cf94cc7f5193417b059b504e03693e3046be1`. Remote readback confirms D1
+migrations 0001--0004, `reading-schema-v4`, and compound learning health 200.
+This task does not export, migrate or write D1; it changes no User Center,
+Queue, App or scoring contract.
+
+User direction pauses App/User Center follow-up while the Web content is
+settled. Therefore `check:native-content:deploy-sync` is expected to reject the
+new Web graph and is not reported as passing. Do not create a replacement App
+receipt/schema or move `site/app-content/latest-stable.json`. Build the
+production `formal-stable` artifact, verify its marker/checksum and deploy only
+from a committed clean tree. Roll back Pages to
+`d017e7db-08f9-47fe-b348-4f40c29db474` if live checks fail; preserve D1 and the
+unchanged App pointer.
+
+No new Cloudflare capability is adopted. Release tooling is Node `24.18.0`
+from `.nvmrc` and lockfile Wrangler `4.100.0`.
+
+## 2026-08-09 self-study-loop candidate override (historical)
+
+This section records the 2026-08-09 source and release disposition. It is
+retained as historical production evidence and does not authorize the current
+Web release.
 
 ### Learning flow and source authority
 
@@ -492,7 +562,10 @@ the network.
 
 ### 5.4 Preview
 
-Deploy the exact checksum-fixed `site/` artifact to a non-production branch. The preview branch must differ from `main`, and post-deploy readback must prove the production canonical deployment ID did not move.
+Deploy the exact checksum-fixed preview-kind `.release/site` artifact to a
+non-production branch. Never deploy the raw `site/` source tree. The preview
+branch must differ from `main`, and post-deploy readback must prove the
+production canonical deployment ID did not move.
 
 Verify on the preview URL:
 
@@ -516,8 +589,15 @@ Verify on the preview URL:
 
 ### 5.5 Production
 
-Only after preview and all gates pass, publish immutable content objects before
-moving the App pointer. Then deploy the exact checksum-fixed Web artifact:
+For the current Web-only release, keep the App pointer unchanged. From a fully
+committed tree with empty `git status --porcelain`, build and check the
+`formal-stable` `.release/site` tree and its artifact manifest, then deploy that
+exact staged directory. Do not deploy raw `site/` or a `preview-web-only`
+marker.
+
+The paired Web/App procedure below applies only when App follow-up resumes:
+publish immutable content objects before moving the App pointer, then deploy
+the exact checksum-fixed Web artifact.
 
 ```zsh
 npm run deploy

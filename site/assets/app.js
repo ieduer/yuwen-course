@@ -109,6 +109,8 @@ const state = {
   firstReads: new Map(),
   studyGuideLessons: new Map(),
   lessonMedia: new Map(),
+  wechatArchiveBySource: new Map(),
+  previewScreenshotBySource: new Map(),
   sharedContentVersion: "",
   progress: loadStoredProgress(),
   fontIndex: Number(readScopedUiValue(FONT_KEY) || 1),
@@ -130,7 +132,6 @@ const els = {
   search: $("#lesson-search"),
   bookSwitcher: $("#book-switcher"),
   lessonIndex: $("#lesson-index"),
-  studyLayout: $(".study-layout"),
   readingColumn: $("#reading-column"),
   topbarContext: $("#topbar-context"),
   mobileToolsToggle: $("#mobile-tools-toggle"),
@@ -153,7 +154,6 @@ const els = {
   matrixLinks: $("#matrix-links"),
   checkpointList: $("#checkpoint-list"),
   learningRail: $("#learning-rail"),
-  mobileMasteryAnchor: $("#mobile-mastery-anchor"),
   masteryToggle: $("#mastery-toggle"),
   masteryPanel: $("#mastery-panel"),
   masterySpectrum: $("#mastery-spectrum"),
@@ -183,7 +183,7 @@ const els = {
   pageNext: $("#page-next"),
   resourceDialog: $("#resource-dialog"),
   resourceDialogTitle: $("#resource-dialog-title"),
-  resourceFrame: $("#resource-frame"),
+  resourceStage: $("#resource-dialog-stage"),
   resourceExternal: $("#resource-external"),
   toast: $("#toast"),
 };
@@ -1248,10 +1248,11 @@ function renderReaderRuns(runs, media, options = {}) {
     if (run.type === "text") return esc(cleanReaderVisibleText(run.text)).replace(/\n/g, "<br>");
     if (run.type === "link") {
       const label = esc(cleanReaderVisibleText(run.text || run.sourceUrl || "外部資料"));
-      if (!run.href || run.disposition === "blocked-http") {
+      const href = projectStudentResourceHref(run.href || run.sourceUrl || "");
+      if (!href || run.disposition === "blocked-http") {
         return `<span class="reader-link-blocked">${label}</span>`;
       }
-      return `<a href="${esc(run.href)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+      return `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
     }
     if (run.type === "annotation-ref") {
       const number = annotationNumbers.get(run.noteId);
@@ -1260,7 +1261,7 @@ function renderReaderRuns(runs, media, options = {}) {
       annotationOccurrences.set(run.noteId, occurrence);
       const noteId = `reader-inline-note-${run.noteId}-${occurrence}`;
       const noteBody = options.annotationBodies?.get(run.noteId) || "";
-      return `<button class="reader-note-ref" type="button" data-note-ref="${esc(run.noteId)}" aria-expanded="false" aria-controls="${esc(noteId)}" aria-label="打開註釋 ${number}">注</button><span class="reader-inline-note" id="${esc(noteId)}" data-inline-note hidden><span class="reader-inline-note-content">${noteBody}</span></span>`;
+      return `<button class="reader-note-ref" type="button" data-note-ref="${esc(run.noteId)}" aria-expanded="false" aria-controls="${esc(noteId)}" aria-label="打開註釋 ${number}">注</button><span class="reader-inline-note" id="${esc(noteId)}" data-inline-note role="note" hidden><span class="reader-inline-note-content">${noteBody}</span></span>`;
     }
     if (run.type === "media-ref") return renderReaderMedia(media.get(run.mediaId));
     return "";
@@ -1294,10 +1295,11 @@ function renderReaderBlocks(blocks, media, options = {}) {
     if (block.type === "resource-link") {
       if (options.includeResourceLinks === false) return "";
       const label = esc(cleanReaderVisibleText(block.text || "延伸資料"));
-      if (!block.href || !/^https:\/\//i.test(block.href) || /^blocked-/i.test(block.disposition || "")) {
+      const href = projectStudentResourceHref(block.href || block.sourceUrl || "");
+      if (!href || !/^https:\/\//i.test(href) || /^blocked-/i.test(block.disposition || "")) {
         return `<p><span class="reader-link-blocked">${label}</span></p>`;
       }
-      return `<p class="reader-resource-link"><a href="${esc(block.href)}" target="_blank" rel="noopener noreferrer">${label} ↗</a></p>`;
+      return `<p class="reader-resource-link"><a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${label} ↗</a></p>`;
     }
     if (block.type === "code") return `<pre><code>${esc(block.text || "")}</code></pre>`;
     if (block.type === "table") {
@@ -1390,18 +1392,52 @@ function renderText(lesson) {
         renderCheckStage(lesson);
         renderLessonChat(lesson);
         renderMatrix(lesson);
-        toast("初讀已保存；正文、註釋與查詞已解鎖");
+        toast("初讀已保存；正文與隨文註釋已展開，讀完後解鎖查詞");
         document.querySelector("#textbook-text")?.scrollIntoView({ behavior: "smooth", block: "start" });
       },
     });
     return;
   }
-  els.textbookTitle.textContent = sourceModeFor(lesson) === "classical" ? "細讀 · 對照解難" : "細讀";
+  els.textbookTitle.textContent = sourceModeFor(lesson) === "classical" ? "帶註釋正文" : "細讀";
   if (lesson.readerDocument?.schemaVersion === "yw-reader-document-v1") {
-    els.textFlow.innerHTML = renderReaderDocument(lesson.readerDocument, firstRead?.asset || null);
+    const reader = renderReaderDocument(lesson.readerDocument, firstRead?.asset || null);
+    const annotatedCompletion = sourceModeFor(lesson) === "classical" && firstRead?.submitted
+      ? (firstRead.annotatedReadCompleted
+        ? `<section class="annotated-read-completion complete" aria-label="帶註釋正文已讀完"><strong>帶註釋正文已讀完</strong><p>詞級疏通與查詞已解鎖，可回到下方關卡繼續。</p></section>`
+        : `<section class="annotated-read-completion" aria-label="完成帶註釋正文閱讀"><strong>先讀完正文與隨文註釋</strong><p>註釋默認隱藏，點「注」展開，再點即可收起。讀完後再進入詞級疏通。</p><button type="button" data-annotated-read-complete>我已讀完帶註釋正文，進入詞級疏通</button></section>`)
+      : "";
+    els.textFlow.innerHTML = `${reader}${annotatedCompletion}`;
     return;
   }
   els.textFlow.innerHTML = `<p class="empty-state">課文暫時無法顯示。</p>`;
+}
+
+async function completeAnnotatedReading(button) {
+  const lesson = state.current;
+  const session = state.firstReads.get(lesson?.id);
+  if (!lesson || !session?.submitted || session.annotatedReadCompleted) return;
+  button.disabled = true;
+  button.textContent = "正在保存閱讀確認…";
+  const clientMutationId = `annotated-read:${lesson.id}:${session.asset.textVersionId}`.slice(0, 100);
+  const result = await recordLearning(
+    "readAcknowledged",
+    { threshold: 1 },
+    { clientMutationId, lessonPhase: "annotated_reading" },
+  );
+  if (state.current?.id !== lesson.id) return;
+  if (result?.ok !== true) {
+    button.disabled = false;
+    button.textContent = "我已讀完帶註釋正文，進入詞級疏通";
+    toast(result?.reason === "anonymous" ? "請先登入，再保存帶註釋閱讀進度" : "閱讀確認尚未保存，請稍後重試");
+    return;
+  }
+  session.annotatedReadCompleted = true;
+  renderText(lesson);
+  renderCheckStage(lesson);
+  renderMatrix(lesson);
+  renderMastery();
+  toast("帶註釋正文已讀完；詞級疏通與查詞已解鎖");
+  document.querySelector('[data-round="vocabulary"]')?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function absoluteResourceUrl(raw) {
@@ -1435,6 +1471,71 @@ function resourceIdentity(href) {
   }
 }
 
+const REMOVED_WEB_RESOURCE_KEYS = new Set([
+  "www.bilibili.com/video/bv1zg4y1h7fk",
+  "baike.baidu.com/item/%E6%9C%89%E6%84%9F",
+  "aistudio.google.com/app/prompts",
+  "aistudio.google.com/app/prompts/new_chat",
+  "chat.deepseek.com/",
+  "claude.ai/",
+  "forum.rdfzer.com/c/general/4",
+  "grok.com/",
+  "labs.google/fx/tools/flow/unsupported-country",
+  "mf.bdfzer.com/",
+  "pkuschool.yuque.com/search?q=%E6%AF%94%E5%85%B4&type=content&scope=qrvbic&tab=group&p=1&sence=modal",
+  "sites.google.com/view/pkuschool/cover3/xbs1/xbs4",
+  "sites.google.com/view/pkuschool/cover3/xbs1/xbs6/xbs7",
+  "www.digital.archives.go.jp/DAS/meta/listPhoto?LANG=eng&BID=F1000000000000107520&ID=&TYPE=dljpeg",
+  "z-library.sk/book/30273234/d175b9/%E5%A4%A7%E5%94%90%E7%AC%AC%E4%B8%80%E5%8F%A4%E6%83%91%E4%BB%94%E6%9D%8E%E7%99%BD%E5%AE%9E%E5%BD%95.html?ts=0729",
+  "z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929",
+  "zh.m.wikipedia.org/w/index.php?title=%E9%B2%81%E8%BF%85%E4%BC%A0&action=edit&redlink=1",
+  "zh.wikisource.org/w/index.php?title=%E5%A4%AA%E7%99%BD&action=edit&redlink=1",
+]);
+
+function webResourceKey(raw) {
+  try {
+    const url = raw instanceof URL
+      ? new URL(raw.toString())
+      : new URL(String(raw || "").replaceAll("&amp;", "&"));
+    if (!["http:", "https:"].includes(url.protocol)) return "";
+    url.hash = "";
+    const hostname = url.hostname.toLowerCase();
+    const port = url.port ? `:${url.port}` : "";
+    let pathname = url.pathname || "/";
+    if (pathname !== "/") pathname = pathname.replace(/\/+$/, "");
+    pathname = pathname.replace(/%[0-9a-f]{2}/gi, (escape) => escape.toUpperCase());
+    const search = url.search.replace(/%[0-9a-f]{2}/gi, (escape) => escape.toUpperCase());
+    if (
+      hostname === "www.bilibili.com"
+      && pathname.toLowerCase() === "/video/bv1zg4y1h7fk"
+    ) return "www.bilibili.com/video/bv1zg4y1h7fk";
+    return `${hostname}${port}${pathname}${search}`;
+  } catch {
+    return "";
+  }
+}
+
+function isRemovedWebResource(raw) {
+  const key = webResourceKey(raw);
+  return Boolean(key && REMOVED_WEB_RESOURCE_KEYS.has(key));
+}
+
+function projectStudentResourceHref(rawHref) {
+  const href = rawHref ? absoluteResourceUrl(rawHref) : "";
+  if (!href) return "";
+  try {
+    const url = new URL(href, location.href);
+    if (url.hostname.toLowerCase() === "bdfz.yuque.com" || isRemovedWebResource(url)) return "";
+  } catch {
+    return "";
+  }
+  return state.wechatArchiveBySource.get(resourceIdentity(href))?.archiveUrl || href;
+}
+
+function previewScreenshotFor(href) {
+  return state.previewScreenshotBySource.get(resourceIdentity(href)) || null;
+}
+
 function resourcePreviewPlan(resource) {
   const rawHref = String(resource?.href || resource?.sourceUrl || "").trim();
   if (!rawHref) {
@@ -1448,11 +1549,12 @@ function resourcePreviewPlan(resource) {
     return { mode: "unavailable", externalHref: "", reason: `不支援 ${url.protocol || "未知"} 協議，未載入頁內預覽。` };
   }
   const externalHref = url.toString();
+  const fallbackScreenshotSrc = previewScreenshotFor(externalHref)?.screenshotUrl || "";
   const disposition = String(resource?.disposition || "").toLowerCase();
   const hostname = url.hostname.toLowerCase();
   const pathname = url.pathname.toLowerCase();
   const extension = pathname.match(/\.([a-z0-9]{2,5})$/)?.[1] || "";
-  const externalOnly = (reason) => ({ mode: "external-only", externalHref, reason });
+  const externalOnly = (reason) => ({ mode: "external-only", externalHref, fallbackScreenshotSrc, reason });
 
   if (url.protocol !== "https:" && url.origin !== location.origin) {
     return externalOnly("來源僅提供 HTTP；為避免不安全的混合內容，頁內不載入，仍可另頁開啟原始地址。");
@@ -1460,31 +1562,44 @@ function resourcePreviewPlan(resource) {
   if (disposition === "source-only") return externalOnly("此條目只保留原始出處，沒有可驗證的頁內版本。");
   if (disposition.startsWith("blocked-")) return externalOnly("來源審核狀態不允許頁內載入，仍保留原始地址供核對。");
   if (hostname === "accounts.google.com") return externalOnly("此來源要求外部帳號登入，不能在課文頁內安全預覽。");
-  if (hostname.endsWith("yuque.com")) return externalOnly("語雀來源通常需要原站登入或禁止第三方嵌入，請另頁開啟。");
-  if (hostname === "sites.google.com") return externalOnly("Google Sites 的防嵌入策略可能攔截頁內畫面，請另頁開啟。");
   if (hostname === "www.youtube.com" || hostname === "youtube.com" || hostname === "youtu.be") {
-    return externalOnly("影片來源使用獨立播放器與 Cookie 策略，本頁不代載，請另頁觀看。");
+    const videoId = hostname === "youtu.be"
+      ? pathname.split("/").filter(Boolean)[0]
+      : url.searchParams.get("v");
+    if (videoId && /^[\w-]{6,20}$/.test(videoId)) {
+      return {
+        mode: "image",
+        src: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+        externalHref,
+        fallbackScreenshotSrc,
+        reason: "影片頁不能直接嵌入；此處顯示影片頁截圖，點放大可全頁查看。",
+      };
+    }
+    return externalOnly("影片頁不能安全嵌入，請另頁觀看。");
   }
-  if (hostname.endsWith("alipan.com")) return externalOnly("雲端分享頁需要原站互動，不能在受限預覽框內可靠操作。");
   if (hostname === "forum.rdfzer.com" && pathname.startsWith("/u/")) {
     return externalOnly("這是討論者個人頁，不是可內嵌教材；保留另頁核對入口。");
   }
+  if (hostname === "blogger.googleusercontent.com") {
+    return { mode: "image", src: externalHref, externalHref, fallbackScreenshotSrc, reason: "圖片已直接展開；若載入失敗可打開原圖。" };
+  }
   if (["png", "jpg", "jpeg", "gif", "webp", "svg", "avif"].includes(extension)) {
-    return { mode: "image", src: externalHref, externalHref, reason: "圖片已直接展開；若載入失敗可打開原圖。" };
+    return { mode: "image", src: externalHref, externalHref, fallbackScreenshotSrc, reason: "圖片已直接展開；若載入失敗可打開原圖。" };
   }
   if (["mp3", "wav", "m4a", "ogg", "flac"].includes(extension)) {
-    return { mode: "audio", src: externalHref, externalHref, reason: "音訊已直接展開；若來源限制播放可另頁開啟。" };
+    return { mode: "audio", src: externalHref, externalHref, fallbackScreenshotSrc, reason: "音訊已直接展開；若來源限制播放可另頁開啟。" };
   }
   if (["mp4", "webm", "mov"].includes(extension)) {
-    return { mode: "video", src: externalHref, externalHref, reason: "影片已直接展開；若來源限制播放可另頁開啟。" };
+    return { mode: "video", src: externalHref, externalHref, fallbackScreenshotSrc, reason: "影片已直接展開；若來源限制播放可另頁開啟。" };
   }
   if (extension === "pdf" || resource?.kind === "document") {
-    return { mode: "document", src: resourcePreviewUrl(externalHref), externalHref, reason: "PDF 已展開；若瀏覽器不支援內嵌閱讀可另頁開啟。" };
+    return { mode: "document", src: resourcePreviewUrl(externalHref), externalHref, fallbackScreenshotSrc, reason: "PDF 已展開；若瀏覽器不支援內嵌閱讀可另頁開啟。" };
   }
   return {
     mode: "iframe",
     src: resourcePreviewUrl(externalHref),
     externalHref,
+    fallbackScreenshotSrc,
     reason: "已展開頁內預覽；若來源登入或防嵌入策略令畫面空白，請打開原頁。",
   };
 }
@@ -1502,13 +1617,93 @@ function previewPlaceholder(plan) {
   return `<p>正在準備預覽…</p>`;
 }
 
-function mountResourcePreview(host, plan, title, { eager = false } = {}) {
+function screenshotFallbackPlan(plan, reason = "即時頁面目前無法顯示；已切換到經驗證的本機頁面截圖。") {
+  if (!plan.fallbackScreenshotSrc) return null;
+  return {
+    mode: "image",
+    src: plan.fallbackScreenshotSrc,
+    externalHref: plan.externalHref,
+    fallbackScreenshotSrc: "",
+    reason,
+    screenshot: true,
+  };
+}
+
+async function previewTextSample(response, maxBytes = 96_000) {
+  const reader = response.body?.getReader();
+  if (!reader) return "";
+  const decoder = new TextDecoder();
+  let bytes = 0;
+  let text = "";
+  try {
+    while (bytes < maxBytes) {
+      const chunk = await reader.read();
+      if (chunk.done) break;
+      bytes += chunk.value.byteLength;
+      text += decoder.decode(chunk.value, { stream: true });
+    }
+  } finally {
+    await reader.cancel().catch(() => {});
+  }
+  return text.replace(/<[^>]+>/g, " ").replace(/&nbsp;|&#160;/g, " ").replace(/\s+/g, " ").trim();
+}
+
+async function inlinePreviewUsable(src) {
+  try {
+    const response = await fetch(src, {
+      cache: "no-store",
+      headers: { accept: "text/html,application/xhtml+xml,*/*" },
+    });
+    if (!response.ok) {
+      await response.body?.cancel().catch(() => {});
+      return false;
+    }
+    const type = String(response.headers.get("content-type") || "").toLowerCase();
+    if (!type.includes("text/html") && !type.includes("application/xhtml+xml")) {
+      await response.body?.cancel().catch(() => {});
+      return true;
+    }
+    const sample = await previewTextSample(response);
+    if (sample.length < 80) return false;
+    if (/(?:preview upstream unavailable|url is not registered|access denied|error\s+(?:4\d\d|5\d\d)|page not found|頁面不存在|页面不存在|找不到网页|just a moment|verify you are human)/i.test(sample.slice(0, 5_000))) return false;
+    if (sample.length < 1_600 && /(?:sign in|log in|登\s*[录錄入]|扫码登录|掃碼登錄|請先登入|请先登录)/i.test(sample.slice(0, 5_000))) return false;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function mountResourcePreview(host, plan, title, { eager = false, expanded = false, preflight = true } = {}) {
   const note = host.closest("article")?.querySelector("[data-preview-note]");
   const updateNote = (message) => { if (note) note.textContent = message; };
   updateNote(plan.reason);
   if (plan.mode === "external-only" || plan.mode === "unavailable") {
     host.innerHTML = previewPlaceholder(plan);
     host.dataset.previewState = plan.mode;
+    return;
+  }
+  if (preflight && plan.mode === "iframe" && String(plan.src || "").startsWith("/api/preview?")) {
+    host.innerHTML = "<p>正在檢查頁內預覽…</p>";
+    host.dataset.previewState = "loading";
+    void inlinePreviewUsable(plan.src).then((usable) => {
+      if (!host.isConnected) return;
+      if (usable) {
+        mountResourcePreview(host, plan, title, { eager, expanded, preflight: false });
+        return;
+      }
+      const fallback = screenshotFallbackPlan(plan);
+      if (fallback) {
+        mountResourcePreview(host, fallback, title, { eager: true, expanded, preflight: false });
+        return;
+      }
+      updateNote("即時頁面目前無法顯示，且沒有經驗證的本機截圖；已停止嵌入，請使用原頁連結。");
+      host.innerHTML = previewPlaceholder({
+        mode: "external-only",
+        externalHref: plan.externalHref,
+        reason: "即時頁面目前無法顯示，且沒有經驗證的本機截圖。",
+      });
+      host.dataset.previewState = "external-only";
+    });
     return;
   }
   let element;
@@ -1533,16 +1728,53 @@ function mountResourcePreview(host, plan, title, { eager = false } = {}) {
     }
   }
   element.addEventListener("load", () => {
-    host.dataset.previewState = "loaded";
+    host.dataset.previewState = plan.screenshot ? "screenshot" : "loaded";
     updateNote(plan.reason);
   }, { once: true });
   element.addEventListener("error", () => {
+    const fallback = screenshotFallbackPlan(plan);
+    if (fallback) {
+      mountResourcePreview(host, fallback, title, { eager: true, expanded, preflight: false });
+      return;
+    }
     host.dataset.previewState = "failed";
     updateNote("來源拒絕或無法載入頁內預覽；請使用下方原頁連結。");
   }, { once: true });
   element.src = plan.src;
   host.replaceChildren(element);
-  host.dataset.previewState = "loading";
+  host.classList.add("preview-host");
+  if (plan.screenshot) {
+    host.dataset.previewState = "screenshot";
+    updateNote(plan.reason);
+  }
+  if (!expanded) {
+    const expand = document.createElement("button");
+    expand.type = "button";
+    expand.className = "preview-expand";
+    expand.textContent = "放大";
+    expand.setAttribute("aria-label", `放大預覽：${title}`);
+    expand.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      openResourcePlan(plan, title);
+    });
+    host.append(expand);
+  }
+  if (!plan.screenshot) host.dataset.previewState = "loading";
+}
+
+function isNonContentResource(href, disposition = "") {
+  try {
+    const url = new URL(href, location.href);
+    if (url.hostname === "bdfz.yuque.com") return true;
+    if (isRemovedWebResource(url)) return true;
+    if (url.hostname === "accounts.google.com") return true;
+    if (url.hostname === "forum.rdfzer.com" && url.pathname.startsWith("/u/")) return true;
+    if (url.protocol === "http:" && url.origin !== location.origin) return true;
+  } catch {
+    return true;
+  }
+  return disposition === "source-only" || String(disposition).startsWith("blocked-");
 }
 
 function resourcesFor(lesson) {
@@ -1582,17 +1814,21 @@ function resourcesFor(lesson) {
     : (lesson.resources || []);
   return source.reduce((items, resource) => {
     const sourceHref = resource.href || resource.sourceUrl || "";
-    const href = sourceHref ? absoluteResourceUrl(sourceHref) : "";
+    const originalHref = sourceHref ? absoluteResourceUrl(sourceHref) : "";
+    if (isNonContentResource(originalHref, resource.disposition || "")) return items;
+    const archive = state.wechatArchiveBySource.get(resourceIdentity(originalHref));
+    const href = projectStudentResourceHref(originalHref);
     const key = href ? resourceIdentity(href) : `missing:${resourceTitle(resource, "")}:${resource.postNumber || ""}`;
     if (seen.has(key)) return items;
     seen.add(key);
+    if (archive) seen.add(resourceIdentity(originalHref));
     items.push({
       href,
-      title: resourceTitle(resource, href),
+      title: archive?.title || resourceTitle(resource, href),
       kind: resource.kind || (/\.pdf(?:$|\?)/i.test(href) ? "document" : "link"),
       postNumber: resource.postNumber,
       disposition: resource.disposition || "",
-      sourceUrl: resource.sourceUrl || "",
+      sourceUrl: archive ? originalHref : (resource.sourceUrl || ""),
     });
     return items;
   }, []);
@@ -1957,6 +2193,8 @@ function appendFirstReadCorrections(body, lesson) {
 function classicalRoundLocked(key, lesson, progress) {
   if (sourceModeFor(lesson) !== "classical" || key === "firstRead") return "";
   if (!checkpointDone(progress, "firstRead", lesson)) return "先完成無標點初讀，才會解鎖這一關。";
+  const session = state.firstReads.get(lesson.id);
+  if (!session?.annotatedReadCompleted) return "先讀完帶註釋正文，再進入詞級疏通。";
   if (["structure", "evaluation", "authorQuestion"].includes(key)
       && !checkpointDone(progress, "vocabulary", lesson)) {
     return "先完成紅藍訂正與詞級疏通，才會解鎖考辨與遷移。";
@@ -2197,15 +2435,6 @@ function setToolsOpen(open) {
   els.mobileToolsToggle.setAttribute("aria-label", open ? "關閉篇目工具" : "打開篇目工具");
   if (matchMedia("(max-width: 900px)").matches) els.topbarActions.inert = !open;
   else els.topbarActions.inert = false;
-}
-
-function syncMasteryPlacement() {
-  if (matchMedia("(max-width: 900px)").matches) {
-    els.mobileMasteryAnchor.after(els.learningRail);
-  } else {
-    els.studyLayout.append(els.learningRail);
-    setToolsOpen(false);
-  }
 }
 
 function fitLessonTitle() {
@@ -2774,21 +3003,25 @@ function resourcePreviewUrl(href) {
   return `/api/preview?url=${encodeURIComponent(href)}`;
 }
 
+function openResourcePlan(plan, title, evidenceKind = "resource") {
+  if (!plan || !title) return;
+  els.resourceDialogTitle.textContent = title;
+  els.resourceExternal.href = plan.externalHref || plan.src || "#";
+  mountResourcePreview(els.resourceStage, plan, title, { eager: true, expanded: true });
+  if (!els.resourceDialog.open) els.resourceDialog.showModal();
+  void recordLearning(evidenceKind === "slideDeck" ? "slideDeckOpened" : "resourceOpened", {
+    resourceKind: evidenceKind === "slideDeck" ? "slide_deck_pdf" : evidenceKind,
+    resourceRef: String(plan.externalHref || plan.src || "").slice(0, 500),
+  });
+}
+
 function openResource(resource) {
   if (!resource) return;
-  els.resourceDialogTitle.textContent = resource.title;
-  els.resourceExternal.href = resource.href;
-  if (resource.kind === "document" || /\.pdf(?:$|\?)/i.test(resource.href)) {
-    els.resourceFrame.removeAttribute("sandbox");
-  } else {
-    els.resourceFrame.setAttribute("sandbox", "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox");
-  }
-  els.resourceFrame.src = resourcePreviewUrl(resource.href);
-  if (!els.resourceDialog.open) els.resourceDialog.showModal();
-  void recordLearning(resource.evidenceKind === "slideDeck" ? "slideDeckOpened" : "resourceOpened", {
-    resourceKind: resource.evidenceKind === "slideDeck" ? "slide_deck_pdf" : (resource.kind || "resource"),
-    resourceRef: String(resource.href || "").slice(0, 500),
-  });
+  openResourcePlan(
+    resourcePreviewPlan(resource),
+    resource.title || "學習資料",
+    resource.evidenceKind === "slideDeck" ? "slideDeck" : (resource.kind || "resource"),
+  );
 }
 
 function restoreInlineNoteText(content) {
@@ -2889,6 +3122,10 @@ function onSelection() {
   if (!text || text.length > 80) return;
   const anchor = selection.anchorNode?.parentElement;
   if (!anchor?.closest("#text-flow")) return;
+  if (firstRead?.submitted && !firstRead.annotatedReadCompleted) {
+    toast("讀完帶註釋正文並確認後，再使用查詞工具");
+    return;
+  }
   openLexicon(text);
 }
 
@@ -2921,6 +3158,13 @@ function changeFont(delta) {
   state.fontIndex = clamp(state.fontIndex + delta, 0, FONT_STEPS.length - 1);
   applyFont();
   queueSharedTextScale();
+}
+
+function setMasteryCollapsed(collapsed, { persist = false } = {}) {
+  els.learningRail.classList.toggle("collapsed", collapsed);
+  els.masteryToggle.setAttribute("aria-expanded", String(!collapsed));
+  els.masteryToggle.querySelector("i").textContent = collapsed ? "展" : "收";
+  if (persist) localStorage.setItem(MASTERY_COLLAPSED_KEY, collapsed ? "1" : "0");
 }
 
 function bindEvents() {
@@ -2965,6 +3209,12 @@ function bindEvents() {
     });
   });
   els.textFlow.addEventListener("click", (event) => {
+    const annotatedReadButton = event.target.closest("[data-annotated-read-complete]");
+    if (annotatedReadButton) {
+      event.preventDefault();
+      void completeAnnotatedReading(annotatedReadButton);
+      return;
+    }
     const note = event.target.closest(".reader-note-ref");
     if (note) {
       event.preventDefault();
@@ -2990,8 +3240,7 @@ function bindEvents() {
   let keyboardSelectionTimer = 0;
   document.addEventListener("selectionchange", () => {
     clearTimeout(keyboardSelectionTimer);
-    const firstRead = state.firstReads.get(state.current?.id);
-    if (!firstRead || firstRead.submitted || !els.textFlow.contains(document.activeElement)) return;
+    if (!els.textFlow.contains(document.activeElement)) return;
     keyboardSelectionTimer = setTimeout(onSelection, 180);
   });
   els.lexiconClose.addEventListener("click", closeLexicon);
@@ -3013,7 +3262,7 @@ function bindEvents() {
   document.querySelector("#lesson-chat a")?.addEventListener("click", () => {
     void recordLearning("chatOpened");
   });
-  els.resourceDialog.addEventListener("close", () => { els.resourceFrame.src = "about:blank"; });
+  els.resourceDialog.addEventListener("close", () => { els.resourceStage.replaceChildren(); });
   els.fontDown.addEventListener("click", () => changeFont(-1));
   els.fontUp.addEventListener("click", () => changeFont(1));
   els.focusButton.addEventListener("click", () => {
@@ -3033,15 +3282,14 @@ function bindEvents() {
   });
   els.masteryToggle.addEventListener("click", () => {
     const collapsed = !els.learningRail.classList.contains("collapsed");
-    els.learningRail.classList.toggle("collapsed", collapsed);
-    els.masteryToggle.setAttribute("aria-expanded", String(!collapsed));
-    els.masteryToggle.querySelector("i").textContent = collapsed ? "展" : "收";
-    localStorage.setItem(MASTERY_COLLAPSED_KEY, collapsed ? "1" : "0");
+    setMasteryCollapsed(collapsed, { persist: true });
   });
   window.addEventListener("scroll", updateReadProgress, { passive: true });
   window.addEventListener("resize", () => requestAnimationFrame(() => {
+    if (matchMedia("(max-width: 900px)").matches && els.body.classList.contains("atlas-open")) {
+      closeAtlas();
+    }
     fitLessonTitle();
-    syncMasteryPlacement();
   }), { passive: true });
   if (window.ResizeObserver && els.title?.parentElement) {
     const titleObserver = new ResizeObserver(() => requestAnimationFrame(fitLessonTitle));
@@ -3063,7 +3311,16 @@ function bindEvents() {
     if (document.visibilityState === "visible") flushSharedState();
   });
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeLexicon();
+    if (event.key === "Escape") {
+      const openNote = $('[data-inline-note]:not([hidden])', els.textFlow);
+      const noteButton = openNote && document.querySelector(`[aria-controls="${CSS.escape(openNote.id)}"]`);
+      if (openNote) {
+        closeInlineNote(openNote);
+        noteButton?.focus({ preventScroll: true });
+      } else {
+        closeLexicon();
+      }
+    }
     if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
       event.preventDefault();
       openAtlas();
@@ -3076,11 +3333,8 @@ async function init() {
   applyFont();
   bindEvents();
   setToolsOpen(false);
-  syncMasteryPlacement();
-  const masteryCollapsed = localStorage.getItem(MASTERY_COLLAPSED_KEY) === "1";
-  els.learningRail.classList.toggle("collapsed", masteryCollapsed);
-  els.masteryToggle.setAttribute("aria-expanded", String(!masteryCollapsed));
-  els.masteryToggle.querySelector("i").textContent = masteryCollapsed ? "展" : "收";
+  const masteryCollapsed = localStorage.getItem(MASTERY_COLLAPSED_KEY) !== "0";
+  setMasteryCollapsed(masteryCollapsed);
   enforceNewTabLinks();
   new MutationObserver((mutations) => mutations.forEach((mutation) => mutation.addedNodes.forEach((node) => {
     if (node.nodeType === Node.ELEMENT_NODE) enforceNewTabLinks(node);
@@ -3094,6 +3348,8 @@ async function init() {
       vocabEligibility,
       vocabIndex,
       studyGuideCatalog,
+      wechatArchiveMap,
+      previewScreenshots,
       sharedContentPointer,
     ] = await Promise.all([
       fetchJson("data/manifest.json"),
@@ -3102,12 +3358,18 @@ async function init() {
       fetchJson("data/vocab-eligibility.json", { cache: "no-cache" }),
       fetchJson("data/vocab/index.json", { cache: "no-cache" }),
       fetchJson("data/study-guide-catalog.json", { cache: "no-cache" }),
+      fetchJson("data/wechat-archive-map.json", { cache: "no-cache" }),
+      fetchJson("data/preview-screenshots.json", { cache: "no-cache" }),
       fetchJson("app-content/latest-stable.json", { cache: "no-cache" }).catch(() => null),
     ]);
     if (
       vocabEligibility?.schemaVersion !== "yw-vocab-eligibility-v1"
       || vocabIndex?.schemaVersion !== "yw-vocab-index-v2"
       || studyGuideCatalog?.schemaVersion !== "yw-study-guide-catalog-v1"
+      || wechatArchiveMap?.schemaVersion !== "yw-wechat-archive-map-v1"
+      || !Array.isArray(wechatArchiveMap?.entries)
+      || previewScreenshots?.schemaVersion !== "yw-preview-screenshots-v1"
+      || !Array.isArray(previewScreenshots?.entries)
     ) {
       throw new Error("字詞範圍資料不一致");
     }
@@ -3116,6 +3378,8 @@ async function init() {
     state.vocabEligibility = vocabEligibility;
     state.vocabIndex = vocabIndex;
     state.studyGuideLessons = new Map((studyGuideCatalog.lessons || []).map((lesson) => [lesson.lessonId, lesson]));
+    state.wechatArchiveBySource = new Map(wechatArchiveMap.entries.map((entry) => [resourceIdentity(entry.sourceUrl), entry]));
+    state.previewScreenshotBySource = new Map(previewScreenshots.entries.map((entry) => [resourceIdentity(entry.sourceUrl), entry]));
     state.sharedContentVersion = sharedContentVersionFromPointer(sharedContentPointer);
     state.lessonMedia = new Map((lessonMedia.lessons || []).map((lesson) => [lesson.lessonId, lesson]));
     state.taxonomyLessons = new Map(state.taxonomy.lessons.map((lesson) => [lesson.id, lesson]));

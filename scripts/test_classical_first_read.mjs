@@ -8,7 +8,11 @@ import {
   extractCanonicalParagraphs,
   isUnpunctuatedText,
 } from "./build_classical_first_read.mjs";
-import { loadClassicalFirstRead } from "../site/classical-first-read-source.js";
+import {
+  classicalAnnotatedReadMutationId,
+  getClassicalFirstReadState,
+  loadClassicalFirstRead,
+} from "../site/classical-first-read-source.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const taxonomy = JSON.parse(readFileSync(resolve(ROOT, "site/data/literary-taxonomy.json"), "utf8"));
@@ -53,7 +57,71 @@ const serverLoaded = await loadClassicalFirstRead(
   "lesson-1534",
 );
 assert.equal(serverLoaded.textVersionId, "cfr-lesson-1534-c332d4cede431f64");
+
+function firstReadStateEnvironment({ acknowledged = false, grandfathered = false } = {}) {
+  return {
+    ASSETS: {
+      async fetch(request) {
+        const id = new URL(request.url).pathname.split("/").pop().replace(/\.json$/, "");
+        const lesson = artifacts.lessons.find((entry) => entry.lessonId === id);
+        return lesson ? Response.json(lesson) : new Response("not found", { status: 404 });
+      },
+    },
+    READING_DB: {
+      prepare(sql) {
+        return {
+          bind() {
+            return this;
+          },
+          async first() {
+            if (sql.includes("FROM classical_first_read_sessions")) {
+              return {
+                submitted_at: "2026-08-11T00:00:00.000Z",
+                elapsed_ms: 90000,
+                summary_text: "已完成無注疏初讀",
+              };
+            }
+            if (sql.includes("AS acknowledged") && sql.includes("AS grandfathered")) {
+              return { acknowledged: Number(acknowledged), grandfathered: Number(grandfathered) };
+            }
+            return null;
+          },
+          async all() {
+            return { results: [] };
+          },
+        };
+      },
+    },
+  };
+}
+
+const stateRequest = new Request("https://yw.bdfz.net/api/reading/first-read/state/lesson-1534");
+const beforeAnnotatedReceipt = await getClassicalFirstReadState(
+  stateRequest,
+  firstReadStateEnvironment(),
+  { id: 7 },
+  "lesson-1534",
+);
+assert.equal(beforeAnnotatedReceipt.submitted, true);
+assert.equal(beforeAnnotatedReceipt.annotatedReadCompleted, false);
+
+const afterAnnotatedReceipt = await getClassicalFirstReadState(
+  stateRequest,
+  firstReadStateEnvironment({ acknowledged: true }),
+  { id: 7 },
+  "lesson-1534",
+);
+assert.equal(afterAnnotatedReceipt.annotatedReadCompleted, true);
+assert.equal(
+  classicalAnnotatedReadMutationId("lesson-1534", serverLoaded.textVersionId),
+  "annotated-read:lesson-1534:cfr-lesson-1534-c332d4cede431f64",
+);
+
 const browserContractSource = readFileSync(resolve(ROOT, "site/assets/classical-first-read.js"), "utf8");
+const appSource = readFileSync(resolve(ROOT, "site/assets/app.js"), "utf8");
+const indexSource = readFileSync(resolve(ROOT, "site/index.html"), "utf8");
+assert.match(indexSource, /assets\/classical-first-read\.js\?v=20260811-annotated-read-v2/);
+assert.doesNotMatch(indexSource, /assets\/classical-first-read\.js\?v=20260809-first-read-v1/);
 assert.match(browserContractSource, /asset\.schema\s*!==\s*"yw-classical-first-read-v1"/);
 assert.match(browserContractSource, /Number\(asset\.schemaVersion\)\s*!==\s*1/);
 assert.match(browserContractSource, /data-first-read-keyboard-form/);
@@ -61,6 +129,13 @@ assert.match(browserContractSource, /tabindex="0" data-first-read-paragraph/);
 assert.match(browserContractSource, /session\.authMode\s*!==\s*"authenticated"/);
 assert.doesNotMatch(browserContractSource, /localStorage\.setItem/);
 assert.match(browserContractSource, /localStorage\.removeItem\(localKey\(asset\)\)/);
+assert.match(appSource, /data-inline-note role="note" hidden/);
+assert.match(appSource, /aria-expanded="false" aria-controls=/);
+assert.match(appSource, /if \(note\.dataset\.typed !== "true"\)/);
+assert.match(appSource, /note\.dataset\.typed = "true"/);
+assert.match(appSource, /event\.key === "Escape"/);
+assert.match(appSource, /closeInlineNote\(openNote\)/);
+assert.match(appSource, /noteButton\?\.focus\(\{ preventScroll: true \}\)/);
 
 const quyuan = artifacts.lessons.find((lesson) => lesson.lessonId === "lesson-1534");
 assert.deepEqual(quyuan.source.segments, [{ startBlock: 0, endBlock: 13 }]);

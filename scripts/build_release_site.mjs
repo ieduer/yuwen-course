@@ -14,8 +14,10 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import {
   createUrlSanitizer,
+  decodePercentEscapes,
   privacyIssueCounts,
 } from "./native_content_url_sanitizer.mjs";
+import { isRemovedWebResource } from "./web_resource_policy.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const DEFAULT_SOURCE_ROOT = path.join(ROOT, "site");
@@ -27,6 +29,20 @@ const BASE_EXCLUDED_PREFIXES = [
   "app-content/",
   "data/cache/",
 ];
+const BASE_EXCLUDED_PATHS = new Set([
+  "data/class_resources.json",
+]);
+const FORBIDDEN_WEB_HOSTS = new Set([
+  "bdfz.yuque.com",
+]);
+const FORBIDDEN_WEB_HOST_TOKEN_SOURCE = String.raw`(?<![a-z0-9.-])bdfz\.yuque\.com(?![a-z0-9.-])`;
+const REMOVED_WEB_RESOURCE_TOKEN_SOURCE = String.raw`BV1Zg4y1H7fK`;
+const HTML_ASIDE = /<aside\b(?<attributes>[^>]*)>.*?<\/aside>/gis;
+const HTML_ANCHOR = /<a\b(?<attributes>[^>]*)>(?<body>.*?)<\/a>/gis;
+const HTML_URL_ATTRIBUTE = /\b(?:data-onebox-src|href|src)\s*=\s*(["'])(?<url>.*?)\1/gis;
+const WEB_URL_TOKEN = /https?:\/\/[^\s"'<>]+/gi;
+const URL_TRAILING_PUNCTUATION = /[),.;:!?，。；：！？、）]/;
+const DROP_WEB_VALUE = Symbol("drop-web-value");
 const RELEASE_KINDS = {
   formal: "formal-stable",
   preview: "preview-web-only",
@@ -136,6 +152,132 @@ function parseJson(relative, text) {
     return JSON.parse(text);
   } catch (error) {
     fail(`invalid JSON release input ${relative}: ${error.message}`);
+  }
+}
+
+function webUrlDisposition(value) {
+  try {
+    const url = new URL(String(value || "").replaceAll("&amp;", "&"));
+    if (FORBIDDEN_WEB_HOSTS.has(url.hostname.toLowerCase())) return "forbidden-host";
+    if (isRemovedWebResource(url)) return "removed-resource";
+    return "";
+  } catch {
+    return "";
+  }
+}
+
+function removedUrlPrefixLength(value) {
+  const text = String(value || "");
+  if (isRemovedWebResource(text.replaceAll("&amp;", "&"))) return text.length;
+  let end = text.length;
+  while (end > 0 && URL_TRAILING_PUNCTUATION.test(text[end - 1])) {
+    end -= 1;
+    if (isRemovedWebResource(text.slice(0, end).replaceAll("&amp;", "&"))) return end;
+  }
+  return -1;
+}
+
+function textContainsRemovedWebResource(value) {
+  for (const match of String(value || "").matchAll(WEB_URL_TOKEN)) {
+    if (removedUrlPrefixLength(match[0]) >= 0) return true;
+  }
+  return false;
+}
+
+function htmlAttributesDisposition(attributes) {
+  HTML_URL_ATTRIBUTE.lastIndex = 0;
+  for (const match of String(attributes || "").matchAll(HTML_URL_ATTRIBUTE)) {
+    const disposition = webUrlDisposition(match.groups?.url);
+    if (disposition) return disposition;
+  }
+  return "";
+}
+
+function stripForbiddenWebHostFromText(value) {
+  const withoutAsides = String(value).replace(HTML_ASIDE, (match, ...args) => {
+    const groups = args.at(-1);
+    return htmlAttributesDisposition(groups?.attributes) ? "" : match;
+  });
+  const withoutAnchors = withoutAsides.replace(HTML_ANCHOR, (match, ...args) => {
+    const groups = args.at(-1);
+    const disposition = htmlAttributesDisposition(groups?.attributes);
+    if (disposition === "removed-resource") return "";
+    return disposition === "forbidden-host" ? groups.body : match;
+  });
+  return withoutAnchors
+    .replace(WEB_URL_TOKEN, (match) => {
+      const removedLength = removedUrlPrefixLength(match);
+      return removedLength >= 0 ? match.slice(removedLength) : match;
+    })
+    .replace(new RegExp(FORBIDDEN_WEB_HOST_TOKEN_SOURCE, "gi"), "")
+    .replace(new RegExp(String.raw`https?:\/\/www\.bilibili\.com\/video\/${REMOVED_WEB_RESOURCE_TOKEN_SOURCE}\/?(?:\?[^"'<\s]*)?`, "gi"), "")
+    .replace(new RegExp(REMOVED_WEB_RESOURCE_TOKEN_SOURCE, "g"), "");
+}
+
+function webValueUsesForbiddenAuthority(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  return ["href", "sourceUrl", "url"].some((key) => (
+    typeof value[key] === "string" && webUrlDisposition(value[key])
+  ));
+}
+
+function webPostContainsOnlyRemovedResource(value) {
+  if (
+    !value
+    || typeof value !== "object"
+    || Array.isArray(value)
+    || !Number.isSafeInteger(value.post_number)
+    || typeof value.cooked !== "string"
+  ) return false;
+  const hasRemovedResource = textContainsRemovedWebResource(value.cooked)
+    || new RegExp(REMOVED_WEB_RESOURCE_TOKEN_SOURCE, "i").test(value.cooked);
+  const projectedVisibleText = stripForbiddenWebHostFromText(value.cooked)
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;|&#160;/gi, " ")
+    .replace(/\s+/g, "")
+    .trim();
+  return hasRemovedResource && projectedVisibleText === "";
+}
+
+function projectWebValue(value) {
+  if (typeof value === "string") return stripForbiddenWebHostFromText(value);
+  if (Array.isArray(value)) {
+    return value.flatMap((item) => {
+      if (typeof item === "string" && webUrlDisposition(item) === "removed-resource") return [];
+      if (webValueUsesForbiddenAuthority(item)) return [];
+      const projected = projectWebValue(item);
+      return projected === DROP_WEB_VALUE ? [] : [projected];
+    });
+  }
+  if (value && typeof value === "object") {
+    if (webValueUsesForbiddenAuthority(value)) return DROP_WEB_VALUE;
+    if (webPostContainsOnlyRemovedResource(value)) return DROP_WEB_VALUE;
+    return Object.fromEntries(Object.entries(value).flatMap(([key, item]) => {
+      const projected = projectWebValue(item);
+      return projected === DROP_WEB_VALUE ? [] : [[key, projected]];
+    }));
+  }
+  return value;
+}
+
+function projectWebJson(relative, text) {
+  const parsed = parseJson(relative, text);
+  const projected = projectWebValue(parsed);
+  if (projected === DROP_WEB_VALUE) fail(`Web JSON root is a forbidden URL record: ${relative}`);
+  if (JSON.stringify(projected) === JSON.stringify(parsed)) return text;
+  const indentation = text.includes("\n") ? 2 : undefined;
+  const trailingNewline = text.endsWith("\n") ? "\n" : "";
+  return `${JSON.stringify(projected, null, indentation)}${trailingNewline}`;
+}
+
+function assertNoForbiddenWebHost(relative, text) {
+  const decoded = decodePercentEscapes(String(text)).replaceAll("&amp;", "&");
+  if (
+    new RegExp(FORBIDDEN_WEB_HOST_TOKEN_SOURCE, "i").test(decoded)
+    || new RegExp(REMOVED_WEB_RESOURCE_TOKEN_SOURCE).test(decoded)
+    || textContainsRemovedWebResource(decoded)
+  ) {
+    fail(`forbidden Web host remains in ${relative}`);
   }
 }
 
@@ -415,7 +557,35 @@ function resolveStableNativeContent(appContentRoot) {
 }
 
 function excludedFromBaseProjection(relative) {
-  return BASE_EXCLUDED_PREFIXES.some((prefix) => relative.startsWith(prefix));
+  return BASE_EXCLUDED_PATHS.has(relative)
+    || BASE_EXCLUDED_PREFIXES.some((prefix) => relative.startsWith(prefix));
+}
+
+function refreshReaderDocumentIndexReceipts(projected) {
+  const byPath = new Map(projected.map((file) => [file.path, file]));
+  const indexFile = byPath.get("data/reader-documents/index.json");
+  if (!indexFile) return false;
+  const index = parseJson(indexFile.path, indexFile.bytes.toString("utf8"));
+  let changed = false;
+  for (const receipt of Object.values(index.documents || {})) {
+    const documentFile = byPath.get(`data/${receipt.path}`);
+    if (!documentFile) fail(`reader index document is missing from Web projection: ${receipt.path}`);
+    const bytes = documentFile.bytes.length;
+    const digest = documentFile.sha256;
+    if (receipt.bytes !== bytes || receipt.sha256 !== digest) {
+      receipt.bytes = bytes;
+      receipt.sha256 = digest;
+      changed = true;
+    }
+  }
+  if (!changed) return false;
+  const text = indexFile.bytes.toString("utf8");
+  const indentation = text.includes("\n") ? 2 : undefined;
+  const trailingNewline = text.endsWith("\n") ? "\n" : "";
+  indexFile.bytes = Buffer.from(`${JSON.stringify(index, null, indentation)}${trailingNewline}`);
+  indexFile.sha256 = sha256(indexFile.bytes);
+  assertNoForbiddenWebHost(indexFile.path, indexFile.bytes.toString("utf8"));
+  return true;
 }
 
 function projectSource(sourceRoot, releaseKind) {
@@ -430,10 +600,13 @@ function projectSource(sourceRoot, releaseKind) {
     if (TEXT_EXTENSIONS.has(path.extname(relative).toLowerCase())) {
       const text = source.toString("utf8");
       if (path.extname(relative).toLowerCase() === ".json") {
-        output = Buffer.from(projectJson(relative, text, sanitizer));
+        const privacyProjected = projectJson(relative, text, sanitizer);
+        output = Buffer.from(projectWebJson(relative, privacyProjected));
       } else {
         assertTextSafe(relative, text);
+        output = Buffer.from(stripForbiddenWebHostFromText(text));
       }
+      assertNoForbiddenWebHost(relative, output.toString("utf8"));
       if (!output.equals(source)) changedFiles += 1;
     }
     if (output.length >= MAX_FILE_BYTES) {
@@ -445,6 +618,7 @@ function projectSource(sourceRoot, releaseKind) {
       sha256: sha256(output),
     });
   }
+  if (refreshReaderDocumentIndexReceipts(projected)) changedFiles += 1;
 
   let nativeContent;
   if (releaseKind === RELEASE_KINDS.formal) {
@@ -479,6 +653,7 @@ function markerFor(projected, changedFiles, releaseKind, nativeContent) {
     releaseKind,
     sourceRoot: "site/",
     baseExcludedPrefixes: BASE_EXCLUDED_PREFIXES,
+    baseExcludedPaths: [...BASE_EXCLUDED_PATHS].sort(),
     sanitizedFiles: changedFiles,
     projectedFiles: projected.length,
     artifactFiles: projected.length + 1,
@@ -565,8 +740,14 @@ export function verifyReleaseStaging({
   if (JSON.stringify(marker.baseExcludedPrefixes) !== JSON.stringify(BASE_EXCLUDED_PREFIXES)) {
     fail("release artifact base exclusion policy is invalid");
   }
+  if (JSON.stringify(marker.baseExcludedPaths) !== JSON.stringify([...BASE_EXCLUDED_PATHS].sort())) {
+    fail("release artifact exact-path exclusion policy is invalid");
+  }
   for (const prefix of BASE_EXCLUDED_PREFIXES.filter((item) => item !== "app-content/")) {
     if (existsSync(path.join(releaseRoot, prefix))) fail(`excluded release path exists: ${prefix}`);
+  }
+  for (const relative of BASE_EXCLUDED_PATHS) {
+    if (existsSync(path.join(releaseRoot, relative))) fail(`excluded release path exists: ${relative}`);
   }
 
   const files = collectFiles(releaseRoot);
@@ -584,6 +765,7 @@ export function verifyReleaseStaging({
     }
     if (TEXT_EXTENSIONS.has(path.extname(relative).toLowerCase())) {
       const text = bytes.toString("utf8");
+      if (!relative.startsWith("app-content/")) assertNoForbiddenWebHost(relative, text);
       if (path.extname(relative).toLowerCase() === ".json") {
         projectJson(relative, text, sanitizer, true);
       } else {
@@ -637,6 +819,7 @@ export function buildReleaseSite({
       artifactFiles: projected.length + 1,
       changedFiles,
       excludedPrefixes: BASE_EXCLUDED_PREFIXES,
+      excludedPaths: [...BASE_EXCLUDED_PATHS].sort(),
       redactions,
       nativeContent,
       marker,

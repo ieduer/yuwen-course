@@ -319,10 +319,13 @@ body:not(.atlas-open) .lesson-shell { margin-left: 0; }
 .lesson-masthead {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(210px, 29vw);
+  grid-template-areas:
+    "copy portrait mastery"
+    "orientation portrait mastery";
+  grid-template-columns: minmax(0, 1fr) minmax(190px, 25vw) minmax(210px, 248px);
   gap: 24px;
   align-items: center;
-  min-height: 360px;
+  min-height: 420px;
   overflow: hidden;
   padding: clamp(58px, 7vw, 88px) max(7vw, 42px) 46px;
   border-bottom: 1px solid var(--rule);
@@ -331,7 +334,7 @@ body:not(.atlas-open) .lesson-shell { margin-left: 0; }
     radial-gradient(circle at 78% 50%, rgba(189,66,44,.09), transparent 26rem);
 }
 
-.masthead-copy { position: relative; z-index: 2; min-width: 0; }
+.masthead-copy { position: relative; z-index: 2; min-width: 0; grid-area: copy; }
 
 .masthead-path {
   display: flex;
@@ -373,7 +376,25 @@ body:not(.atlas-open) .lesson-shell { margin-left: 0; }
   align-items: center;
   justify-content: center;
   isolation: isolate;
+  grid-area: portrait;
 }
+
+.lesson-masthead .orientation {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-area: orientation;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 22px;
+  align-items: start;
+  max-width: 880px;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule);
+}
+.lesson-masthead .orientation .section-label { grid-column: 1; margin: 4px 0 0; white-space: nowrap; }
+.lesson-masthead .orientation h2 { grid-column: 1; margin: 0; font: 760 1.35rem/1.2 var(--serif); }
+.lesson-masthead #orientation-content { grid-row: 1 / span 2; grid-column: 2; min-width: 0; }
+.lesson-masthead .orientation-line { max-width: none; font-size: clamp(.96rem, 1.25vw, 1.14rem); line-height: 1.8; }
 
 .lesson-portraits::before {
   position: absolute;
@@ -465,11 +486,8 @@ body:not(.atlas-open) .lesson-shell { margin-left: 0; }
 .lesson-route span:first-child { padding-left: 0; border-left: 0; }
 
 .study-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 920px) 230px;
-  gap: clamp(48px, 7vw, 110px);
-  justify-content: center;
-  max-width: 1420px;
+  display: block;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 72px clamp(28px, 5vw, 76px) 150px;
 }
@@ -481,7 +499,7 @@ body:not(.atlas-open) .lesson-shell { margin-left: 0; }
   border-bottom: 1px solid var(--rule);
 }
 
-.reading-column > section:first-child { padding-top: 10px; }
+.reading-column > section:first-child { padding-top: 54px; }
 
 .reading-column h2 {
   margin: 0;
@@ -976,8 +994,9 @@ body.focus-mode .reader-size #font-label { display: inline-grid; place-items: ce
 }
 
 .learning-rail {
-  position: sticky;
-  top: calc(var(--topbar) + 46px);
+  position: relative;
+  z-index: 3;
+  grid-area: mastery;
   align-self: start;
   overflow: hidden;
   border-top: 2px solid var(--ink);
@@ -1149,7 +1168,35 @@ dialog[open] { animation: dialog-in .28s cubic-bezier(.2,.8,.2,1) both; }
 .resource-dialog-bar > div:last-child { display: flex; gap: 12px; align-items: center; }
 .resource-dialog-bar a { color: #ff9e86; font-size: .74rem; text-decoration: none; }
 .resource-dialog-bar .icon-button { border-color: rgba(255,255,255,.2); }
-.resource-dialog iframe { width: 100%; height: calc(100% - 64px); border: 0; background: #fff; }
+.resource-dialog-stage { position: relative; display: grid; width: 100%; height: calc(100% - 64px); place-items: center; overflow: auto; background: #fff; }
+.resource-dialog-stage > iframe { width: 100%; height: 100%; border: 0; background: #fff; }
+.resource-dialog-stage > img,
+.resource-dialog-stage > video { display: block; width: 100%; height: 100%; object-fit: contain; }
+.resource-dialog-stage > audio { width: min(90%, 860px); }
+
+.preview-host { position: relative; }
+.preview-expand {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 4;
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(20,25,22,.84);
+  box-shadow: 0 5px 16px rgba(0,0,0,.2);
+  font: 750 .68rem var(--sans);
+  cursor: pointer;
+}
+.preview-expand:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+.annotated-read-completion { display: grid; gap: 10px; margin-top: 48px; padding: 24px; border: 1px solid var(--rule); border-left: 4px solid var(--accent); background: rgba(189,66,44,.045); }
+.annotated-read-completion strong { font: 760 1.18rem var(--serif); }
+.annotated-read-completion p { margin: 0; color: var(--ink-soft); font-size: .82rem; }
+.annotated-read-completion button { justify-self: start; min-height: 44px; padding: 10px 18px; border: 1px solid var(--accent); color: #fff; background: var(--accent); font-weight: 750; cursor: pointer; }
+.annotated-read-completion.complete { border-left-color: var(--success); background: rgba(47,107,80,.055); }
 
 .toast {
   position: fixed;
@@ -1312,8 +1359,8 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
 .reader-note-ref {
   display: inline-grid;
   place-items: center;
-  min-width: 1.75em;
-  min-height: 1.75em;
+  min-width: max(1.75em, 28px);
+  min-height: max(1.75em, 28px);
   margin: 0 .14em;
   padding: 0 .32em;
   border: 1px solid rgba(160, 124, 34, .42);
@@ -1498,7 +1545,14 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
 }
 
 @media (max-width: 1180px) {
-  .study-layout { grid-template-columns: minmax(0, 820px) 200px; gap: 48px; }
+  .lesson-masthead {
+    grid-template-areas:
+      "copy portrait"
+      "orientation portrait"
+      "mastery mastery";
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 28vw);
+  }
+  .learning-rail { width: min(720px, 100%); margin-top: 12px; }
   .material-row { grid-template-columns: 40px minmax(0,1fr) auto; }
   .material-row small { display: none; }
 }
@@ -1553,9 +1607,8 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
   .masthead-path { margin-bottom: 15px; font-size: .64rem; letter-spacing: .1em; }
   .lesson-portraits { min-height: 210px; }
   .lesson-masthead h1 { font-size: clamp(2.5rem, 13vw, 5rem); }
-  .study-layout { display: block; padding: 50px 22px 110px; }
-  .learning-rail { position: static; margin: 18px 0 60px; border-top-width: 3px; background: rgba(255,255,255,.24); }
-  .mobile-mastery-anchor { display: none; }
+  .study-layout { padding: 50px 22px 110px; }
+  .learning-rail { margin: 18px 0 0; border-top-width: 3px; background: rgba(255,255,255,.24); }
   .checkpoint-list { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); }
   .checkpoint-list li { border-right: 1px solid var(--rule); }
   .checkpoint-list li:nth-child(4n) { border-right: 0; }
@@ -1569,7 +1622,20 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
 }
 
 @media (max-width: 620px) {
-  .lesson-masthead { grid-template-columns: minmax(0,1fr) 94px; min-height: 285px; gap: 8px; }
+  .lesson-masthead {
+    grid-template-areas:
+      "copy portrait"
+      "orientation orientation"
+      "mastery mastery";
+    grid-template-columns: minmax(0,1fr) 94px;
+    min-height: 285px;
+    gap: 18px 8px;
+  }
+  .lesson-masthead .orientation { grid-template-columns: 1fr; gap: 7px; padding-top: 18px; }
+  .lesson-masthead .orientation .section-label,
+  .lesson-masthead .orientation h2,
+  .lesson-masthead #orientation-content { grid-row: auto; grid-column: 1; }
+  .lesson-masthead .orientation .section-label { margin: 0; }
   .lesson-portraits { min-height: 168px; }
   .lesson-portraits::before { width: 170px; }
   .lesson-portraits .portrait-choice, .lesson-portraits .portrait-choice:first-child { width: 118px; }
@@ -1612,6 +1678,7 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
   .page-dialog { width: 100vw; height: 100vh; max-width: none; max-height: none; }
   .page-stage { grid-template-columns: 40px minmax(0,1fr) 40px; }
   .resource-dialog { width: 100vw; height: 100vh; max-width: none; max-height: none; }
+  .preview-expand { min-height: 40px; padding: 9px 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

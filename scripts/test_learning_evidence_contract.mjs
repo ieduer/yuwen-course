@@ -48,6 +48,12 @@ function mockStatement(sql, writes, state) {
       if (sql.includes("FROM classical_first_read_sessions")) {
         return state.firstReadSubmitted ? { submitted_at: "2026-07-01T00:00:00.000Z" } : null;
       }
+      if (sql.includes("AS acknowledged") && sql.includes("AS grandfathered")) {
+        return {
+          acknowledged: Number(state.annotatedReadAcknowledged),
+          grandfathered: Number(state.vocabEvidenceExists),
+        };
+      }
       if (sql.includes("WHERE i.student_id = ? AND i.client_mutation_id = ?")) {
         return state.existingInteraction;
       }
@@ -81,6 +87,8 @@ function sourceEnvironment({
   nextAttemptNo = 1,
   existingInteraction = null,
   firstReadSubmitted = true,
+  annotatedReadAcknowledged = true,
+  vocabEvidenceExists = false,
 } = {}) {
   const writes = [];
   const queued = [];
@@ -92,10 +100,13 @@ function sourceEnvironment({
     nextAttemptNo,
     existingInteraction,
     firstReadSubmitted,
+    annotatedReadAcknowledged,
+    vocabEvidenceExists,
   };
   return {
     writes,
     queued,
+    state,
     env: {
       ASSETS: {
         async fetch(request) {
@@ -323,6 +334,108 @@ test("study-guide and initial-reading events bind to the current semantic format
     }),
     /absent from current active lesson set/,
   );
+});
+
+test("annotated classical reading receipt is idempotent for the stable mutation id", async () => {
+  const receipt = sourceEnvironment();
+  const payload = {
+    threshold: 1,
+    lessonPhase: "annotated_reading",
+    clientMutationId: `annotated-read:${vocabLesson.id}:${vocabFirstRead.textVersionId}`.slice(0, 100),
+  };
+  const first = await recordLearningInteraction({
+    request: new Request("https://yw.bdfz.net/api/learning/interactions"),
+    env: receipt.env,
+    student: { id: 7, ucUserId: 42 },
+    lesson: vocabLesson,
+    interactionKey: "readAcknowledged",
+    payload,
+    occurredAt: "2026-08-11T00:00:00.000Z",
+  });
+  assert.equal(first.deduped, false);
+
+  receipt.state.existingInteraction = {
+    source_event_id: first.sourceEventId,
+    attempt_no: first.attemptNo,
+    resource_key: `lesson:${vocabLesson.id}`,
+    interaction_key: "readAcknowledged",
+    eligibility_status: "non_scoring",
+    raw_payload_json: JSON.stringify({ threshold: 1 }),
+    delivery_status: "enqueued",
+  };
+  const replay = await recordLearningInteraction({
+    request: new Request("https://yw.bdfz.net/api/learning/interactions"),
+    env: receipt.env,
+    student: { id: 7, ucUserId: 42 },
+    lesson: vocabLesson,
+    interactionKey: "readAcknowledged",
+    payload,
+    occurredAt: "2026-08-11T00:00:01.000Z",
+  });
+  assert.equal(replay.deduped, true);
+  assert.equal(replay.sourceEventId, first.sourceEventId);
+  assert.equal(
+    receipt.writes.filter((write) => write.sql.trimStart().startsWith("INSERT INTO learning_interactions")).length,
+    1,
+  );
+});
+
+test("classical vocabulary and vocabulary or syntax study-guide work require the annotated-reading receipt", async () => {
+  const assertAnnotatedGate = (promise) => assert.rejects(
+    promise,
+    (error) => error?.code === "classical_annotated_reading_required"
+      && error.message === "請先讀完帶註釋正文再進入詞級疏通",
+  );
+  await assertAnnotatedGate(recordLearningInteraction({
+    request: new Request("https://yw.bdfz.net/api/reading/vocab-attempt"),
+    env: sourceEnvironment({ annotatedReadAcknowledged: false }).env,
+    student: { id: 7, ucUserId: 42 },
+    lesson: vocabLesson,
+    interactionKey: "vocabAnswer",
+    payload: { itemId: "lesson-1474:v01", selectedIndex: 1 },
+    evaluation: { score: 100, correctness: "correct", provider: "answer-key", verdict: "mastered" },
+  }));
+
+  const lessonManifest = formativeManifest.lessons.find((entry) => entry.lessonId === vocabLesson.id);
+  for (const competencyTag of ["vocabulary", "syntax"]) {
+    const item = lessonManifest.competencies
+      .find((competency) => competency.competencyTag === competencyTag)
+      .items.find((candidate) => candidate.interactionKey === "studyGuideItemCompleted");
+    assert.ok(item, `${competencyTag} study-guide fixture missing`);
+    await assertAnnotatedGate(recordLearningInteraction({
+      request: new Request("https://yw.bdfz.net/api/reading/study-guide-attempt"),
+      env: sourceEnvironment({ annotatedReadAcknowledged: false }).env,
+      student: { id: 7, ucUserId: 42 },
+      lesson: vocabLesson,
+      interactionKey: "studyGuideItemCompleted",
+      payload: {
+        itemKey: item.itemKey,
+        response: "先依原句語境作答，再對照參考答案完成訂正。",
+        referenceRevealedAt: "2026-08-11T00:00:00.000Z",
+      },
+      evaluation: { score: 80, correctness: "passed", provider: "deterministic", verdict: "passed" },
+    }));
+  }
+});
+
+test("existing vocabulary evidence grandfathers the annotated-reading gate", async () => {
+  const grandfathered = sourceEnvironment({
+    annotatedReadAcknowledged: false,
+    vocabEvidenceExists: true,
+  });
+  const result = await recordLearningInteraction({
+    request: new Request("https://yw.bdfz.net/api/reading/vocab-attempt"),
+    env: grandfathered.env,
+    student: { id: 7, ucUserId: 42 },
+    lesson: vocabLesson,
+    interactionKey: "vocabAnswer",
+    payload: { itemId: "lesson-1474:v01", selectedIndex: 1 },
+    evaluation: { score: 100, correctness: "correct", provider: "answer-key", verdict: "mastered" },
+    occurredAt: "2026-08-11T00:00:00.000Z",
+  });
+  assert.equal(result.deduped, false);
+  assert.equal(result.eligibilityStatus, "eligible");
+  assert.equal(grandfathered.queued.length, 1);
 });
 
 test("AI performance is eligible only when the server score is at least 60 and correctness passed", async () => {

@@ -2,9 +2,44 @@
 
 `yw.bdfz.net` is the student-centred learning matrix for the five senior-high Chinese textbooks. It combines lesson text and resources, author and literary-taxonomy links, vocabulary mastery, reading evidence, and a D1-backed reading constellation.
 
-## 2026-08-09 self-study-loop candidate
+## 2026-08-11 Web reading release
 
-The current branch rebuilds the Web lesson flow around a source-backed,
+The current Web-only release provides 189 student-visible lesson units. The
+source manifest retains 191 records, including two hidden system records. It
+does not change the User Center, native App, A+/A--F scoring, or D1 schema:
+
+- the lesson title, `起始` orientation and portrait share one compact masthead;
+  owner-scoped local steps sit collapsed beside the portrait, leaving the main
+  column to reading;
+- 30 classical lessons show the annotated canonical text after the no-note
+  first read, keep inline notes hidden until clicked, and require an explicit
+  non-scoring annotated-reading receipt before vocabulary unlocks;
+- all nine WeChat article resources use reviewed `wx.bdfz.net` archives, all
+  embeds can expand to the full-page preview and return to their card, and
+  the reviewed fallback set covers 353 page resources: 335 use screenshots,
+  11 have a direct presentation, and 7 stop embedding honestly because an
+  external condition remains. The screenshots include 22 reviewed
+  `ctext.org` pages and 27 reviewed `forum.rdfzer.com` pages;
+- every student-visible `bdfz.yuque.com` link is removed. Registered BDFZ
+  subdomain roots and exact third-party lesson URLs remain exact-target and
+  fail closed for arbitrary sibling paths. E01, 16 permanently unavailable
+  resources and the confirmed-dead Bilibili item are deleted from the Web
+  projection and registries.
+
+The current preview registry is 540 targets / 119 redirects / 76 hosts, digest
+`sha256:08b55ba18ccbea706b4755a7e4c1a5de276d5588a5c748bc1ed82dcc00e6968a`.
+The screenshot manifest uses 329 unique WebP files / 12,816,592 logical bytes;
+its SHA-256 is
+`95b8929c4b0bce0ddde45f4eb7941275e9660708704518ad23d5de825c58e17d`.
+
+The production D1 already contains migration 0004. This task performs no D1
+write and does not move `site/app-content/latest-stable.json`. App and User
+Center follow-up are deliberately paused until the Web learning experience is
+accepted; the current Web release does not claim App synchronization.
+
+## 2026-08-09 self-study-loop candidate (historical)
+
+The historical candidate branch rebuilt the Web lesson flow around a source-backed,
 non-scoring formative loop. It is a **blocked implementation candidate**, not
 the current production release or an App-approved content receipt:
 
@@ -71,7 +106,7 @@ Aggregate SHA-256:     acb2daaadc5cfe358f6ccbc94798a68be5812ab31519f867c02f75be9
 - GitHub: `ieduer/yuwen-course`, branch `main`
 - Cloudflare Pages: `yuwen-course`
 - Production: `https://yw.bdfz.net/`
-- Deploy artifact: `site/`
+- Deploy artifact: `.release/site` (generated; never deploy raw `site/`)
 - Pages Worker: `site/_worker.js`
 - D1: `yuwen-reading-db`, binding `READING_DB`
 - Stable User Center site key: `yw`
@@ -99,7 +134,7 @@ Use the repository-pinned dependencies and the user's fixed Python environment:
 
 ```zsh
 cd /Users/ylsuen/CF/yuwen-course
-npm ci
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm ci
 npm run serve
 ```
 
@@ -120,13 +155,32 @@ npm run build:data
 
 ## Verification and release
 
+The default paired Web/App command remains `npm run release:check`. For the
+current user-directed Web-only release, the App sync subcheck is expected to
+remain fail-closed: run the source/precontent gates and the formal release-site
+plus artifact-manifest checks individually as listed in
+`docs/VERIFICATION.md`. Commit every source change and require
+`git status --porcelain` to be empty before deploying `.release/site`.
+
+The maintenance manual additionally requires live dependency probes,
+desktop/mobile browser QA, production deployment readback and rollback
+recording. Do not move the App pointer in this Web-only phase.
+
+After the Web source is committed, pushed, and `git status --porcelain` is
+empty, rebuild the formal tree from that exact commit and deploy only that
+tree:
+
 ```zsh
-cd /Users/ylsuen/CF/yuwen-course
-npm run release:check
-npm run deploy
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:release-site
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:release-site
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:artifact-manifest
+bash /Users/ylsuen/CF/scripts/git-deploy-gate.sh
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
+  ./node_modules/.bin/wrangler pages deploy .release/site --project-name yuwen-course --branch main
 ```
 
-`release:check` is the minimum local gate. The maintenance manual additionally requires a checksum-fixed Pages preview, live dependency probes, desktop/mobile browser QA, production deployment readback, and rollback recording.
+Do not use `npm run deploy` during this Web-only phase: it intentionally runs
+the paired App sync gate, which remains blocked until App work resumes.
 
 ## Configuration names
 

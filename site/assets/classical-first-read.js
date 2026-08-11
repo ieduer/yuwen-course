@@ -72,6 +72,7 @@
       authMode,
       submitted: Boolean(fallback.submitted || fallback.unlocked),
       submittedAt: fallback.submittedAt || null,
+      annotatedReadCompleted: Boolean(fallback.annotatedReadCompleted),
       summary: fallback.summary || "",
       elapsedMs: Number(fallback.elapsedMs || 0),
       openedAt: performance.now(),

@@ -2347,6 +2347,9 @@ async function handleReading(request, env, url) {
   } catch (error) {
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
+    if (["classical_first_read_required", "classical_annotated_reading_required"].includes(error?.code)) {
+      return readingError(error.message, 422);
+    }
     return readingError(error?.message || "reading api failure", 500);
   }
 }

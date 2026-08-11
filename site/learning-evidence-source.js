@@ -1,4 +1,7 @@
-import { loadClassicalFirstRead } from "./classical-first-read-source.js";
+import {
+  hasClassicalAnnotatedReadReceipt,
+  loadClassicalFirstRead,
+} from "./classical-first-read-source.js";
 
 const SOURCE_SYSTEM = "yuwen-course";
 const SOURCE_SITE_KEY = "yw";
@@ -285,7 +288,7 @@ async function loadFormativeManifest(request, env, learningManifest) {
   return manifest;
 }
 
-async function assertClassicalFirstReadGate({ request, env, student, lesson, interactionKey, formativeManifest }) {
+async function assertClassicalFirstReadGate({ request, env, student, lesson, interactionKey, formativeManifest, formativeItem }) {
   if (["lessonOpened", "initialReadingSubmitted"].includes(interactionKey)) return;
   if (!formativeManifest.processByKey.has(`${lesson.id}\ninitialReadingSubmitted`)) return;
   const asset = await loadClassicalFirstRead(request, env, lesson.id);
@@ -296,6 +299,21 @@ async function assertClassicalFirstReadGate({ request, env, student, lesson, int
   if (!session?.submitted_at) {
     const error = new Error("請先完成無標點初讀再進入本課後續關卡");
     error.code = "classical_first_read_required";
+    throw error;
+  }
+  const needsAnnotatedReading = interactionKey === "vocabAnswer"
+    || (interactionKey === "studyGuideItemCompleted"
+      && ["vocabulary", "syntax"].includes(formativeItem?.competencyTag));
+  if (!needsAnnotatedReading) return;
+  const annotatedReadCompleted = await hasClassicalAnnotatedReadReceipt(
+    env.READING_DB,
+    student.id,
+    lesson.id,
+    asset.textVersionId,
+  );
+  if (!annotatedReadCompleted) {
+    const error = new Error("請先讀完帶註釋正文再進入詞級疏通");
+    error.code = "classical_annotated_reading_required";
     throw error;
   }
 }
@@ -378,7 +396,15 @@ async function resolveInteractionContext(request, env, student, lesson, interact
   if (definition.scoringRole === "a_plus_gate" && !manifestItem) {
     throw new Error("interaction absent from authoritative learning manifest");
   }
-  await assertClassicalFirstReadGate({ request, env, student, lesson, interactionKey, formativeManifest });
+  await assertClassicalFirstReadGate({
+    request,
+    env,
+    student,
+    lesson,
+    interactionKey,
+    formativeManifest,
+    formativeItem,
+  });
   return {
     registry,
     definition,

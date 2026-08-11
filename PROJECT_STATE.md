@@ -1,13 +1,81 @@
 # Project State
 
-Last updated: 2026-08-09
+Last updated: 2026-08-11
 
-Package: `0.2.1-evaluation-nonscoring`. Candidate branch:
-`codex/yw-self-study-loop-v2`, based on
-`037484f8c4231277165d17ccce5b25b4431c7e3e`. This file describes a local Web
-candidate; production still serves the 2026-07-30 release below.
+Package: `0.2.1-evaluation-nonscoring`. Current Web candidate branch:
+`codex/yw-web-content-finalize-20260811`, based on clean source
+`a85cf94cc7f5193417b059b504e03693e3046be1`. Before this candidate is
+published, production serves Pages deployment
+`d017e7db-08f9-47fe-b348-4f40c29db474` from that same source. The current
+override below supersedes the retained 2026-08-09 candidate/release narrative.
 
-## Objective and implemented scope
+## 2026-08-11 Web reading finalization
+
+- Students can use 189 lesson units. The source manifest retains 191 records,
+  including two hidden system records; all 189 student-visible pages use one
+  masthead, with the former `01 / 先找方向 / 起始` content merged with the
+  lesson title and portrait. The owner-scoped local step indicator is collapsed
+  beside the portrait instead of occupying the reading column.
+- All 30 classical lessons now require two consecutive reading stages. After
+  the immutable `起始 · 無注疏初讀`, the annotated canonical text appears with
+  inline notes hidden by default. Notes type once, collapse on repeat click or
+  Escape, and restore focus. Vocabulary and vocabulary/syntax study-guide work
+  unlock only after the student explicitly acknowledges the annotated reading;
+  the server enforces the same non-scoring receipt gate and supports exact
+  mutation replay.
+- Student-visible `bdfz.yuque.com` links are removed. Nine WeChat article URLs
+  project through exact `wx.bdfz.net` archive mappings. Every supported
+  document, image, audio, video or iframe preview can expand to the full-page
+  dialog and shrink back with focus restored. After deleting E01, the 16
+  permanently unavailable resources and the separately confirmed-dead
+  Bilibili item, the fallback audit covers 353 page resources: 335 have
+  reviewed screenshots, 11 use an already verified direct presentation, and
+  7 stop embedding while keeping the original link because an external
+  condition remains. The screenshot set includes 49 reviewed authenticated
+  captures (22 `ctext.org`, 27 `forum.rdfzer.com`). There are 329 unique WebP
+  files and 12,816,592 logical screenshot bytes; manifest SHA-256 is
+  `95b8929c4b0bce0ddde45f4eb7941275e9660708704518ad23d5de825c58e17d`.
+  Deleted resources are absent from the Web projection, preview registry and
+  screenshot manifest; no permanent/remove blocker remains.
+- Preview registration remains exact-target and fail-closed: 540 targets, 119
+  redirect targets and 76 hosts with digest
+  `sha256:08b55ba18ccbea706b4755a7e4c1a5de276d5588a5c748bc1ed82dcc00e6968a`.
+  The 18 approved BDFZ subdomain roots, exact Google Sites and exact
+  `pkuschool.yuque.com` lesson URLs are registered; arbitrary sibling paths and
+  every `bdfz.yuque.com` URL remain forbidden.
+- The study-guide catalog remains 241 items in 16 lessons, now 191 active and
+  50 inactive/tombstoned (`yw-study-guides-9cb5500f46333aac`). The formative
+  manifest is `yw-formative-20a7145bd573bbb7`, 1,019 items in 115 lessons with
+  50 tombstones. Formal A+/A--F scoring remains unchanged.
+- Production D1 already contains migrations 0001--0004 and Reading health is
+  `reading-schema-v4`; compound learning health is 200. This Web task does not
+  alter D1, User Center, the Queue contract, native App source, or the existing
+  App `latest-stable` pointer.
+- Runtime capabilities are unchanged: Pages + Assets, the existing D1, service
+  binding and Queue. Reproducible release authority is Node `24.18.0`,
+  lockfile-resolved Wrangler `4.100.0`, with no new Cloudflare capability.
+- User direction pauses App and User Center follow-up until the Web learning
+  experience is settled. Consequently the old App-content sync check remains
+  truthfully blocked and no App receipt, schema or stable pointer is minted.
+  The Web release uses the formal stable artifact already referenced by the
+  unchanged pointer; immediate Pages rollback is the pre-release deployment
+  `d017e7db-08f9-47fe-b348-4f40c29db474`, preserving every D1 row.
+- Formal Web staging is current at 1,222 files / 1,221 projected files. Its
+  marker is `formal-stable`, projected aggregate
+  `6b156f53be4876769cad7e523645c25e510dca4f7c96b9445936842056fffe29`,
+  marker SHA-256
+  `579d588eab5718551da61b6009789631e9a710cc2fc9f1b6cc46588f64f74bb6`
+  and artifact-manifest aggregate
+  `bde95d8ba08d7a883dcb1fdbefd9d36f54d791b1e20efb234126bd9003a112fb`
+  over 163,807,598 bytes. The unchanged stable App release remains exactly 278
+  included paths.
+
+## Historical 2026-08-09 objective and implemented scope
+
+The sections from here through the historical production/rollback authority
+describe the 2026-08-09 candidate and are retained for provenance only. They
+are not current deployment instructions; the 2026-08-11 override above is the
+operational authority.
 
 The candidate changes YW from a lesson-plan display into a student-owned
 `資料 -> 過程 -> 評價` loop while preserving the existing start, close-reading,
@@ -45,7 +113,7 @@ selection lookup, modern three-word response and reading constellation.
   idempotency/rate-slot and stable identity-link structures. It has not been
   applied to production.
 
-## Verified candidate behavior
+## Historical 2026-08-09 verified candidate behavior
 
 Targeted gates cover first-read submit/immutability/reconcile, vocabulary
 wrong-to-right mastery, study-guide source assessment, evidence idempotency,
@@ -73,7 +141,7 @@ consumer-only replacement that preserves the canonical A+/A--F snapshot is
 under isolated review. No User Center candidate is deployed or authorized by
 the current root guard.
 
-## Active release blockers and deferred work
+## Historical 2026-08-09 release blockers and deferred work
 
 1. Production `GET /api/learning/health` returns 503 under the old
    Web-to-User-Center handshake. The new compound receipt requires a separately
@@ -177,12 +245,12 @@ the current root guard.
     pre-migration export for disaster recovery and backward-compatible
     forward-fix for additive schema. App stable content remains untouched.
 
-## Production and rollback authority
+## Historical 2026-08-09 production and rollback authority
 
 - Pages project / host: `yuwen-course` / `https://yw.bdfz.net/`
-- Current production deployment:
+- Historical production deployment at that closeout:
   `20be2885-5494-4b98-a130-af022c1a389b`
-- Current production carrier commit:
+- Historical production carrier commit at that closeout:
   `e87c697119d7d75d01def58ff781524f73bb3ff9`
 - Immediate rollback deployment:
   `ada922c5-62e7-46cc-bcd7-7e97dddcc522`
@@ -194,8 +262,9 @@ the current root guard.
   `yw-3e77f0f7ffa5d042a6d06763`; do not move its stable pointer for this blocked
   Web candidate.
 
-Next safe action: finish the clean deterministic Web candidate and independent
-review, then obtain a separately authorized User Center release. Only after the
+Historical next action (superseded by the 2026-08-11 override): finish the clean
+deterministic Web candidate and independent review, then obtain a separately
+authorized User Center release. Only after the
 compound health receipt is live may the task back up/apply D1, deploy a Pages
 preview/production artifact, perform authenticated mutation/replay/readback and
 hand the exact Web receipt to the App follow-up task.

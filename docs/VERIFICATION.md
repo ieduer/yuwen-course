@@ -1,10 +1,95 @@
 # 核查標準 / Verification Standard
 
-## 2026-08-09 self-study-loop candidate gate
+## 2026-08-11 Web reading release gate
 
-This is the executable acceptance standard for the current candidate. It does
-not supersede the production deployment values in the next section until every
-paired release gate has passed.
+This current Web-only gate supersedes the 2026-08-09 pre-migration/503 release
+disposition below. It does not authorize App or User Center work.
+
+### Required commands
+
+```zsh
+cd /Users/ylsuen/CF/yuwen-course
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm ci
+YW_STUDY_GUIDE_SOURCE_DIR=/Users/ylsuen/CF/output/pdf_study_guides_web \
+  PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:/opt/homebrew/bin:$PATH \
+  npm run verify:study-guide-sources
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run precontent:check
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:release-site
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:release-site
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:artifact-manifest
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:artifact-manifest
+git diff --check
+```
+
+The current run must prove:
+
+- 189 student-visible lesson units render the merged masthead/orientation/
+  portrait layout at 1440, 1024 and 390 CSS pixels without horizontal overflow;
+  the source manifest retains 191 records including two hidden system records,
+  and the local-step disclosure begins collapsed beside the portrait;
+- 30 classical lessons / 102 first-read paragraphs remain source-bound; after
+  first-read submission, inline annotations begin hidden and type once; the
+  server and browser both block vocabulary until the stable
+  `annotated_reading` acknowledgment succeeds;
+- all nine WeChat sources project to exact `wx.bdfz.net` archives; direct
+  `mp.weixin.qq.com` and `bdfz.yuque.com` student targets are zero;
+- every supported embed can expand and shrink, with Escape/focus restoration;
+  after the exact deletion set, the audited 353 page resources resolve to 335
+  screenshots + 11 direct presentations + 7 stopped embeds, all seven due to
+  an external condition. The screenshots include 49 reviewed authenticated
+  pages and deduplicate to 329 WebP assets / 12,816,592 logical bytes;
+- preview targets are exactly 540 / 119 redirects / 76 hosts with digest
+  `sha256:08b55ba18ccbea706b4755a7e4c1a5de276d5588a5c748bc1ed82dcc00e6968a`;
+  arbitrary same-host paths and unregistered redirects remain 403;
+- screenshot manifest SHA-256 is
+  `95b8929c4b0bce0ddde45f4eb7941275e9660708704518ad23d5de825c58e17d`;
+  confirmed-dead Bilibili `BV1Zg4y1H7fK` is absent from the Web projection,
+  preview registry and screenshot manifest. E01 and all 16 permanent/remove
+  resources are likewise absent and are not counted among the seven;
+- the study-guide catalog is 241 / 191 active / 50 inactive and the formative
+  manifest is 1,019 / 115 lessons / 50 tombstones; A+/A--F bytes and behavior
+  do not change;
+- live pre-deploy readback is Reading 200 (`reading-schema-v4`) and learning
+  200. Reading health checks four tables/eight key indexes; a separate
+  read-only `sqlite_schema` query confirms all four tables/ten named indexes
+  from migration 0004. D1 migrations 0001--0004 are present exactly once and
+  must not be replayed during this Web deployment.
+
+The completed local precontent run reports: preview targets 6/6, expanded
+resource policy 7/7, screenshot policy 4/4, authenticated importer 5/5,
+learning manifest 9/9, study-guide catalog 3/3, assessment 6/6, frontend 3/3,
+evidence 15/15, formative projection 4/4, shared state 13/13 plus real browser,
+Reading API 70/70, native candidate 21/21 and release-site 5/5. Layout
+acceptance passed 25/25. The `lesson-1534` browser flow rendered 98 initially
+hidden notes, retained type-once/collapse behavior, blocked vocabulary before
+the receipt and unlocked it only after the exact stable mutation succeeded.
+
+The formal staging/check and artifact-manifest check pass at 1,222 files. The
+release marker is `formal-stable`, 1,221 projected files, projected aggregate
+`6b156f53be4876769cad7e523645c25e510dca4f7c96b9445936842056fffe29`,
+marker SHA-256
+`579d588eab5718551da61b6009789631e9a710cc2fc9f1b6cc46588f64f74bb6`
+and artifact-manifest aggregate
+`bde95d8ba08d7a883dcb1fdbefd9d36f54d791b1e20efb234126bd9003a112fb`
+(163,807,598 bytes).
+It includes the unchanged stable App release only (278 exact paths) and no new
+App candidate or pointer.
+
+### Deliberate App pause
+
+`npm run check:native-content:deploy-sync` remains fail-closed because this Web
+graph has no new App audit receipt. That result is expected and must not be
+rewritten as a pass. Per the current user direction, keep the existing App
+stable pointer byte-identical, mint no App receipt/schema, and publish only the
+checksum-verified `formal-stable` Web artifact from a committed clean tree.
+Rollback is the pre-release Pages deployment
+`d017e7db-08f9-47fe-b348-4f40c29db474`; D1 is preserved.
+
+## 2026-08-09 self-study-loop candidate gate (historical)
+
+This was the executable acceptance standard for the 2026-08-09 candidate. It
+is retained for provenance and does not supersede the current Web-only release
+standard above.
 
 ### Source/content checks
 
@@ -281,7 +366,7 @@ contract.
 > additionally builds an `evaluation` envelope from the YW source and validates
 > it against the current User Center consumer registry.
 
-## 2026-07-30 current production readback
+## 2026-07-30 production readback (historical)
 
 - production Pages deployment:
   `20be2885-5494-4b98-a130-af022c1a389b`

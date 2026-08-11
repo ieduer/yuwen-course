@@ -1,12 +1,64 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import test from "node:test";
 import { resolve } from "node:path";
-import { buildPreviewTargets, renderPreviewTargets } from "./build_preview_targets.mjs";
+import {
+  BDFZ_EMBED_ROOTS,
+  EXACT_PREVIEW_REDIRECT_TARGETS,
+  buildPreviewTargets,
+  renderPreviewTargets,
+} from "./build_preview_targets.mjs";
 import { previewUrlHasPublicHostname } from "../site/preview-network-policy.js";
 import worker from "../site/_worker.js";
+import {
+  REMOVED_WEB_RESOURCE_URLS,
+  webResourceKey,
+} from "./web_resource_policy.mjs";
 
 const ROOT = resolve(import.meta.dirname, "..");
+const DOCUMENTS_DIR = resolve(ROOT, "site/data/reader-documents");
+const WECHAT_MAP_PATH = resolve(ROOT, "site/data/wechat-archive-map.json");
+const APP_PATH = resolve(ROOT, "site/assets/app.js");
+const TAXONOMY_PATH = resolve(ROOT, "site/data/literary-taxonomy.json");
+const PRESERVED_EXTERNAL_CONDITION_URLS = Object.freeze([
+  "https://j-dac.jp/infolib/meta_pub/CsvSearch.cgi",
+  "https://pkuschool.yuque.com/g/qrvbic/books/folder/29416843",
+  "https://pkuschool.yuque.com/qrvbic/books/29585115",
+  "https://www.imdb.com/title/tt1475582/",
+  "https://www.scdfz.org.cn/scdqs/sxdq/lss/jwx/content_22151",
+  "https://www.scdfz.org.cn/ztzl/hjczzsc/zzhy/content_30068",
+  "https://www.shuge.org/view/lan_ting_xiu_xi_tu_juan/",
+]);
+
+function normalizedUrl(raw) {
+  const url = new URL(String(raw || ""), "https://forum.rdfzer.com");
+  url.hash = "";
+  return url.toString();
+}
+
+function collectStudentWechatSources() {
+  const sources = new Set();
+  const collect = (value) => {
+    if (Array.isArray(value)) {
+      value.forEach(collect);
+      return;
+    }
+    if (!value || typeof value !== "object") return;
+    const source = value.sourceUrl || value.href || "";
+    if (source) {
+      const url = new URL(source, "https://forum.rdfzer.com");
+      if (url.hostname === "mp.weixin.qq.com") sources.add(normalizedUrl(source));
+    }
+    Object.values(value).forEach(collect);
+  };
+  for (const name of readdirSync(DOCUMENTS_DIR).filter((entry) => entry.endsWith(".json")).sort()) {
+    const document = JSON.parse(readFileSync(resolve(DOCUMENTS_DIR, name), "utf8"));
+    collect(document.resources || []);
+    collect(document.main?.blocks || []);
+    collect(document.supplementary || []);
+  }
+  return sources;
+}
 
 test("preview proxy accepts only the generated authoritative resource registry", () => {
   const registry = buildPreviewTargets();
@@ -15,10 +67,107 @@ test("preview proxy accepts only the generated authoritative resource registry",
   assert.equal(new Set(registry.targets).size, registry.targetCount);
   assert.equal(registry.targets.every((entry) => entry.startsWith("https://")), true);
   assert.equal(registry.targets.some((entry) => /(?:localhost|127\.0\.0\.1|192\.168\.)/.test(entry)), false);
+  assert.equal(registry.targets.some((entry) => entry.includes("BV1Zg4y1H7fK")), false);
+  const targetKeys = new Set(registry.targets.map(webResourceKey));
+  for (const href of REMOVED_WEB_RESOURCE_URLS) {
+    assert.equal(targetKeys.has(webResourceKey(href)), false, href);
+  }
+  for (const href of PRESERVED_EXTERNAL_CONDITION_URLS) {
+    assert.equal(targetKeys.has(webResourceKey(href)), true, href);
+  }
   assert.equal(
     readFileSync(resolve(ROOT, "site/data/preview-targets.json"), "utf8"),
     renderPreviewTargets(),
   );
+});
+
+test("every student-visible WeChat source has one reviewed wx archive and no direct preview target", () => {
+  const document = JSON.parse(readFileSync(WECHAT_MAP_PATH, "utf8"));
+  assert.equal(document.schemaVersion, "yw-wechat-archive-map-v1");
+  assert.equal(document.entries.length, 9);
+
+  const sourceUrls = document.entries.map((entry) => normalizedUrl(entry.sourceUrl));
+  const archiveUrls = document.entries.map((entry) => normalizedUrl(entry.archiveUrl));
+  assert.equal(new Set(sourceUrls).size, document.entries.length);
+  assert.equal(new Set(archiveUrls).size, document.entries.length);
+  assert.deepEqual(new Set(sourceUrls), collectStudentWechatSources());
+  const bySource = new Map(document.entries.map((entry) => [normalizedUrl(entry.sourceUrl), entry]));
+  const pairedIssue = (index) => normalizedUrl(
+    `https://mp.weixin.qq.com/s?__biz=Mzg3NzA4Mzc1NQ%3D%3D&mid=2247484112&idx=${index}&lang=zh_CN#rd`,
+  );
+  assert.deepEqual(
+    [bySource.get(pairedIssue(1))?.archiveUrl, bySource.get(pairedIssue(1))?.title],
+    ["https://wx.bdfz.net/wx-17bfb2fe", "中国人民从此站起来了！（上）"],
+  );
+  assert.deepEqual(
+    [bySource.get(pairedIssue(2))?.archiveUrl, bySource.get(pairedIssue(2))?.title],
+    ["https://wx.bdfz.net/wx-0a6b4105", "中国人民从此站起来了！（下）"],
+  );
+  assert.equal(
+    bySource.get(normalizedUrl("https://mp.weixin.qq.com/s/tYH4zeFK6M7oo0RxVp-EKg"))?.archiveUrl,
+    "https://wx.bdfz.net/20-28363bfb",
+  );
+  for (const entry of document.entries) {
+    assert.equal(new URL(entry.sourceUrl).hostname, "mp.weixin.qq.com");
+    assert.equal(new URL(entry.archiveUrl).hostname, "wx.bdfz.net");
+    assert.ok(String(entry.title || "").trim(), entry.sourceUrl);
+  }
+
+  const registry = buildPreviewTargets();
+  assert.equal(
+    registry.targets.some((entry) => new URL(entry).hostname === "mp.weixin.qq.com"),
+    false,
+  );
+  for (const archiveUrl of archiveUrls) assert.ok(registry.targets.includes(archiveUrl), archiveUrl);
+});
+
+test("bdfz embedded-app registry adds only the 18 reviewed exact roots", () => {
+  assert.equal(BDFZ_EMBED_ROOTS.length, 18);
+  assert.equal(new Set(BDFZ_EMBED_ROOTS).size, BDFZ_EMBED_ROOTS.length);
+  const appSource = readFileSync(APP_PATH, "utf8");
+  const matrixSource = appSource.slice(
+    appSource.indexOf("function matrixItemsFor"),
+    appSource.indexOf("function renderMatrix"),
+  );
+  const taxonomy = JSON.parse(readFileSync(TAXONOMY_PATH, "utf8"));
+  const exactConsumers = new Set(
+    [...matrixSource.matchAll(/https:\/\/[a-z0-9-]+\.bdfz\.net\//g)].map((match) => match[0]),
+  );
+  for (const author of taxonomy.authors || []) {
+    if (!author.url) continue;
+    const url = new URL(author.url);
+    if (url.hostname === "qx.bdfz.net") exactConsumers.add(`${url.origin}/`);
+  }
+  assert.deepEqual([...BDFZ_EMBED_ROOTS].sort(), [...exactConsumers].sort());
+  const registry = buildPreviewTargets();
+  for (const root of BDFZ_EMBED_ROOTS) {
+    assert.equal(new URL(root).pathname, "/");
+    assert.ok(registry.targets.includes(root), root);
+  }
+  assert.equal(registry.targets.includes("https://unregistered.bdfz.net/"), false);
+  assert.equal(registry.targets.includes("https://gwyw.bdfz.net/unregistered-sensitive-path"), false);
+  assert.deepEqual(EXACT_PREVIEW_REDIRECT_TARGETS, ["https://xue.bdfz.net/template/"]);
+  assert.ok(registry.redirectTargets.includes("https://xue.bdfz.net/template/"));
+  assert.equal(registry.redirectTargets.includes("https://xue.bdfz.net/template/unregistered"), false);
+});
+
+test("exact Google Sites and non-BDFZ Yuque lessons are previewable without reopening blocked links", () => {
+  const registry = buildPreviewTargets();
+  const googleSite = registry.targets.find((entry) => new URL(entry).hostname === "sites.google.com");
+  const schoolYuque = registry.targets.find((entry) => new URL(entry).hostname === "pkuschool.yuque.com");
+  assert.ok(googleSite, "expected one exact Google Sites lesson target");
+  assert.ok(schoolYuque, "expected one exact PKU School Yuque lesson target");
+  assert.equal(registry.targets.some((entry) => new URL(entry).hostname === "bdfz.yuque.com"), false);
+
+  const arbitraryGoogle = new URL(googleSite);
+  arbitraryGoogle.pathname = "/view/pkuschool/unregistered-preview-path";
+  arbitraryGoogle.search = "";
+  assert.equal(registry.targets.includes(arbitraryGoogle.toString()), false);
+
+  const arbitraryYuque = new URL(schoolYuque);
+  arbitraryYuque.pathname = "/unregistered/preview-path";
+  arbitraryYuque.search = "";
+  assert.equal(registry.targets.includes(arbitraryYuque.toString()), false);
 });
 
 test("preview network policy rejects every address literal and non-public hostname form", () => {
@@ -57,6 +206,21 @@ test("preview Worker denies unregistered targets and never emits wildcard CORS",
     {},
   );
   assert.equal(denied.status, 403);
+
+  for (const exactBdfzDenial of [
+    "https://unregistered.bdfz.net/",
+    "https://gwyw.bdfz.net/unregistered-sensitive-path",
+    "https://sites.google.com/view/pkuschool/unregistered-preview-path",
+    "https://pkuschool.yuque.com/unregistered/preview-path",
+    "https://bdfz.yuque.com/org-wiki/blocked",
+  ]) {
+    const response = await worker.fetch(
+      new Request(`https://yw.bdfz.net/api/preview?url=${encodeURIComponent(exactBdfzDenial)}`),
+      env,
+      {},
+    );
+    assert.equal(response.status, 403, exactBdfzDenial);
+  }
 
   for (const privateTarget of [
     "https://[::ffff:7f00:1]/x",
@@ -105,6 +269,26 @@ test("preview Worker denies unregistered targets and never emits wildcard CORS",
     assert.equal(allowed.headers.get("access-control-allow-origin"), null);
     assert.equal(allowed.headers.get("access-control-allow-credentials"), null);
     assert.equal(allowed.headers.get("cross-origin-resource-policy"), "same-origin");
+
+    globalThis.fetch = async (request) => {
+      const url = new URL(typeof request === "string" ? request : request.url);
+      if (url.toString() === "https://xue.bdfz.net/") {
+        return new Response(null, { status: 302, headers: { location: "/template/" } });
+      }
+      if (url.toString() === "https://xue.bdfz.net/template/") {
+        return new Response("全科自學：公開課程入口", {
+          headers: { "content-type": "text/plain; charset=utf-8" },
+        });
+      }
+      throw new Error(`unexpected redirect fixture target: ${url}`);
+    };
+    const xueRedirect = await worker.fetch(
+      new Request(`https://yw.bdfz.net/api/preview?url=${encodeURIComponent("https://xue.bdfz.net/")}`),
+      env,
+      {},
+    );
+    assert.equal(xueRedirect.status, 200);
+    assert.match(await xueRedirect.text(), /全科自學/);
 
     for (const [contentType, body] of [
       ["application/javascript", "globalThis.previewPwned = true"],

@@ -9,10 +9,119 @@ const atlasSource = fs.readFileSync(new URL("../site/assets/atlas.js", import.me
 const insightsSource = fs.readFileSync(new URL("../site/assets/insights.js", import.meta.url), "utf8");
 const failures = [];
 const checks = [];
+const layoutOnly = process.env.YW_LAYOUT_ONLY === "1";
 
 function check(name, condition, detail = "") {
   checks.push({ name, pass: Boolean(condition), detail });
   if (!condition) failures.push(`${name}${detail ? `: ${detail}` : ""}`);
+}
+
+function printResults() {
+  console.log(JSON.stringify({ base, passed: checks.filter((item) => item.pass).length, total: checks.length, failures }, null, 2));
+}
+
+async function captureLessonLayout(page, width, height) {
+  await page.setViewportSize({ width, height });
+  await page.goto(`${base}/#lesson-1458`, { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelector("#lesson-title")?.textContent.includes("中国人民站起来了"));
+  await page.waitForFunction(() => {
+    const title = document.querySelector("#lesson-title");
+    return title && title.scrollWidth <= title.clientWidth + 1;
+  });
+  return page.evaluate(() => {
+    const rect = (selector) => {
+      const node = document.querySelector(selector);
+      if (!node) return null;
+      const box = node.getBoundingClientRect();
+      return { top: box.top, right: box.right, bottom: box.bottom, left: box.left, width: box.width, height: box.height };
+    };
+    const panel = document.querySelector("#mastery-panel");
+    const title = document.querySelector("#lesson-title");
+    const titleStyle = title ? getComputedStyle(title) : null;
+    return {
+      viewport: { width: innerWidth, height: innerHeight },
+      overflow: document.documentElement.scrollWidth > innerWidth + 1,
+      orientationParent: document.querySelector("#orientation")?.parentElement?.id || "",
+      railParent: document.querySelector("#learning-rail")?.parentElement?.id || "",
+      mobileAnchorCount: document.querySelectorAll("#mobile-mastery-anchor").length,
+      railInStudyLayout: document.querySelectorAll(".study-layout #learning-rail").length,
+      collapsed: document.querySelector("#learning-rail")?.classList.contains("collapsed") === true,
+      ariaExpanded: document.querySelector("#mastery-toggle")?.getAttribute("aria-expanded") || "",
+      panelDisplay: panel ? getComputedStyle(panel).display : "missing",
+      masthead: rect("#lesson-masthead"),
+      copy: rect(".masthead-copy"),
+      orientation: rect("#orientation"),
+      portrait: rect("#lesson-portraits"),
+      rail: rect("#learning-rail"),
+      textbook: rect("#textbook-text"),
+      titleSingleLine: Boolean(title && titleStyle)
+        && title.scrollWidth <= title.clientWidth + 1
+        && title.getBoundingClientRect().height <= parseFloat(titleStyle.lineHeight) * 1.1,
+    };
+  });
+}
+
+function inside(container, child, tolerance = 1) {
+  return Boolean(container && child
+    && child.left >= container.left - tolerance
+    && child.right <= container.right + tolerance
+    && child.top >= container.top - tolerance
+    && child.bottom <= container.bottom + tolerance);
+}
+
+async function verifyLessonLayout(browser) {
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  const pageErrors = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+
+  const desktop = await captureLessonLayout(page, 1440, 960);
+  check("起始方向與本機完成度合併進篇首", desktop.orientationParent === "lesson-masthead" && desktop.railParent === "lesson-masthead", JSON.stringify(desktop));
+  check("舊移動端完成度錨點已刪除", desktop.mobileAnchorCount === 0 && desktop.railInStudyLayout === 0, JSON.stringify(desktop));
+  check("新訪客本機完成度默認收起", desktop.collapsed && desktop.ariaExpanded === "false" && desktop.panelDisplay === "none", JSON.stringify(desktop));
+  check("1440 篇頁無橫向溢出且篇名單行", !desktop.overflow && desktop.titleSingleLine, JSON.stringify(desktop));
+  check("1440 本機完成度位於肖像右側", inside(desktop.masthead, desktop.rail) && desktop.rail.left >= desktop.portrait.right - 1, JSON.stringify(desktop));
+
+  await page.locator("#mastery-toggle").click();
+  const expanded = await page.evaluate(() => ({
+    collapsed: document.querySelector("#learning-rail")?.classList.contains("collapsed") === true,
+    ariaExpanded: document.querySelector("#mastery-toggle")?.getAttribute("aria-expanded") || "",
+    panelDisplay: getComputedStyle(document.querySelector("#mastery-panel")).display,
+  }));
+  check("本機完成度可展開", !expanded.collapsed && expanded.ariaExpanded === "true" && expanded.panelDisplay !== "none", JSON.stringify(expanded));
+  await page.locator("#mastery-toggle").click();
+  const collapsed = await page.evaluate(() => ({
+    collapsed: document.querySelector("#learning-rail")?.classList.contains("collapsed") === true,
+    ariaExpanded: document.querySelector("#mastery-toggle")?.getAttribute("aria-expanded") || "",
+    panelDisplay: getComputedStyle(document.querySelector("#mastery-panel")).display,
+  }));
+  check("本機完成度可縮回", collapsed.collapsed && collapsed.ariaExpanded === "false" && collapsed.panelDisplay === "none", JSON.stringify(collapsed));
+
+  const tablet = await captureLessonLayout(page, 1024, 768);
+  check("1024 篇頁無橫向溢出", !tablet.overflow && tablet.titleSingleLine, JSON.stringify(tablet));
+  check(
+    "1024 完成度仍留在篇首且不佔正文欄",
+    tablet.railParent === "lesson-masthead"
+      && inside(tablet.masthead, tablet.rail)
+      && tablet.rail.top >= Math.max(tablet.orientation.bottom, tablet.portrait.bottom) - 1
+      && tablet.textbook.top >= tablet.masthead.bottom - 1,
+    JSON.stringify(tablet),
+  );
+
+  const mobile = await captureLessonLayout(page, 390, 844);
+  check("390 篇頁無橫向溢出且篇名單行", !mobile.overflow && mobile.titleSingleLine, JSON.stringify(mobile));
+  check(
+    "390 起始與完成度依序留在篇首",
+    mobile.orientationParent === "lesson-masthead"
+      && mobile.railParent === "lesson-masthead"
+      && inside(mobile.masthead, mobile.orientation)
+      && inside(mobile.masthead, mobile.rail)
+      && mobile.rail.top >= mobile.orientation.bottom - 1
+      && mobile.textbook.top >= mobile.masthead.bottom - 1,
+    JSON.stringify(mobile),
+  );
+  check("版面驗證無前端運行錯誤", pageErrors.length === 0, pageErrors.join(" | "));
+  await context.close();
 }
 
 const authorEvidenceErrors = taxonomy.lessons.flatMap((lesson) => {
@@ -48,6 +157,12 @@ check("文體書目默認尺度可見全貌", /const BASE_ZOOM = \.56;/.test(atl
 check("文體書目具時代與關係資料", taxonomy.genres.every((item) => item.era && Number.isFinite(item.year) && item.detail && Array.isArray(item.relatedIds)) && taxonomy.books.every((item) => item.era && Number.isFinite(item.year) && item.description && Array.isArray(item.relatedTitles)));
 
 const browser = await chromium.launch({ executablePath, headless: true });
+await verifyLessonLayout(browser);
+if (layoutOnly) {
+  await browser.close();
+  printResults();
+  process.exit(failures.length ? 1 : 0);
+}
 const page = await browser.newPage({ viewport: { width: 1440, height: 960 } });
 const pageErrors = [];
 page.on("pageerror", (error) => pageErrors.push(error.message));
@@ -96,7 +211,9 @@ const chenqing = await page.evaluate(() => ({
   stageMarks: [...document.querySelectorAll("#check-stage .check-round > header > .stage-wadang")].map((node) => node.textContent.trim()),
   stageSvgCount: document.querySelectorAll("#check-stage .stage-wadang svg").length,
   noteStyle: (() => { const node = document.querySelector("#text-flow .reader-note-ref"); if (!node) return null; const style = getComputedStyle(node); return { border: style.borderStyle, radius: style.borderRadius }; })(),
-  mastheadHeight: document.querySelector("#lesson-masthead")?.getBoundingClientRect().height || 0,
+  orientationParent: document.querySelector("#orientation")?.parentElement?.id || "",
+  railParent: document.querySelector("#learning-rail")?.parentElement?.id || "",
+  mobileMasteryAnchors: document.querySelectorAll("#mobile-mastery-anchor").length,
   kickerCount: document.querySelectorAll("#lesson-kicker").length,
 }));
 check("篇名下不再重複文體", chenqing.metaRemoved, String(chenqing.metaRemoved));
@@ -113,7 +230,7 @@ check("註釋無 color 或原始複用編碼殘片", chenqing.annotationResidue 
 check("頁末註釋移除", chenqing.footnoteLists === 0, String(chenqing.footnoteLists));
 check("註釋不跳論壇", chenqing.forumFragmentLinks === 0, String(chenqing.forumFragmentLinks));
 check("正文不重複篇名", chenqing.repeatedHeadings === 0, String(chenqing.repeatedHeadings));
-check("頁首移除冊別文體行並收短", chenqing.kickerCount === 0 && chenqing.mastheadHeight < 400, JSON.stringify({ kicker: chenqing.kickerCount, height: chenqing.mastheadHeight }));
+check("篇首合併起始、肖像與本機完成度", chenqing.kickerCount === 0 && chenqing.orientationParent === "lesson-masthead" && chenqing.railParent === "lesson-masthead" && chenqing.mobileMasteryAnchors === 0, JSON.stringify(chenqing));
 check("見效以瓦當紋甲乙丙丁編目", chenqing.stageMarks.join("") === "甲乙丙丁戊己庚" && chenqing.stageSvgCount === 7, JSON.stringify({ marks: chenqing.stageMarks, svg: chenqing.stageSvgCount }));
 check("註釋數字取消圓圈", chenqing.noteStyle?.border === "none" && chenqing.noteStyle?.radius === "0px", JSON.stringify(chenqing.noteStyle));
 check("叩問作者移至見效最後", chenqing.checkLabels.at(-1) === "叩問作者" && chenqing.checkLabels.slice(0, 5).join("/") === "初讀評議/詞級疏通/通讀正文/字句之改/章法機關", chenqing.checkLabels.join(" / "));
@@ -207,9 +324,11 @@ const masteryBeforeRead = Number(await page.locator("#mastery-value").textConten
 await readCheck.check();
 check("通讀正文不再生成對話與回應", await page.locator('[data-round="read"] .author-dialog,[data-round="read"] .interaction-result,[data-field="read.feedback"]').count() === 0);
 check("通讀勾選即更新掌握度", Number(await page.locator("#mastery-value").textContent()) > masteryBeforeRead);
+check("本課掌握度目錄默認收起", await page.locator("#learning-rail").evaluate((node) => node.classList.contains("collapsed")) && await page.locator("#mastery-toggle").getAttribute("aria-expanded") === "false");
 await page.locator("#mastery-toggle").click();
-check("本課掌握度目錄可收起", await page.locator("#learning-rail").evaluate((node) => node.classList.contains("collapsed")) && await page.locator("#mastery-toggle").getAttribute("aria-expanded") === "false");
+check("本課掌握度目錄可展開", !await page.locator("#learning-rail").evaluate((node) => node.classList.contains("collapsed")) && await page.locator("#mastery-toggle").getAttribute("aria-expanded") === "true");
 await page.locator("#mastery-toggle").click();
+check("本課掌握度目錄可縮回", await page.locator("#learning-rail").evaluate((node) => node.classList.contains("collapsed")) && await page.locator("#mastery-toggle").getAttribute("aria-expanded") === "false");
 check("掌握度目錄與見效節點同序", await page.locator("#checkpoint-list li").count() === chenqing.checkLabels.length);
 check("掌握度移除用戶中心與卡住說明", await page.locator("#progress-login,#progress-status,#coach-open,#coach-dialog").count() === 0);
 const authorQuestion = await page.evaluate(() => ({ placeholder: document.querySelector('[data-field="authorQuestion.answer"]')?.getAttribute("placeholder"), prefaced: document.querySelectorAll(".defense-question").length }));
@@ -468,7 +587,7 @@ if (atlasBox) {
 const atlasAfter = await page.locator("#lesson-index").evaluate((node) => ({ scrollTop: node.scrollTop, max: node.scrollHeight - node.clientHeight }));
 check("移動端目錄可用真實手勢下拉至末篇", atlasBefore.max > 0 && atlasAfter.scrollTop >= atlasAfter.max - 2 && atlasBefore.touchAction === "pan-y", JSON.stringify({ atlasBox, atlasBefore, atlasAfter }));
 await page.locator("#atlas-close").click();
-check("移動端掌握度緊接見效而非墜在篇末", await page.locator("#mobile-mastery-anchor + #learning-rail").count() === 1);
+check("移動端起始與掌握度均留在篇首", await page.locator("#lesson-masthead > #orientation").count() === 1 && await page.locator("#lesson-masthead > #learning-rail").count() === 1 && await page.locator("#mobile-mastery-anchor").count() === 0);
 check("移動端篇首工具收為單一入口", await page.locator("#mobile-tools-toggle").isVisible() && await page.locator("#topbar-actions").evaluate((node) => getComputedStyle(node).pointerEvents === "none"));
 await page.locator("#mobile-tools-toggle").click();
 check("移動端工具展開完整標籤", await page.locator("#topbar-actions").evaluate((node) => getComputedStyle(node).pointerEvents === "auto") && (await page.locator("#topbar-actions").innerText()).includes("文體") && (await page.locator("#topbar-actions").innerText()).includes("原圖"));
@@ -621,5 +740,5 @@ check("瀏覽器無前端運行錯誤", pageErrors.length === 0, pageErrors.join
 await page.screenshot({ path: "output/playwright/yw-audit/taxonomy-matrix-mobile.png", fullPage: true });
 await browser.close();
 
-console.log(JSON.stringify({ base, passed: checks.filter((item) => item.pass).length, total: checks.length, failures }, null, 2));
+printResults();
 if (failures.length) process.exitCode = 1;

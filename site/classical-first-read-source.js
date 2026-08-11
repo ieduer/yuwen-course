@@ -119,6 +119,28 @@ async function markRows(db, studentId, lessonId, textVersionId) {
   return rows.results || [];
 }
 
+export function classicalAnnotatedReadMutationId(lessonId, textVersionId) {
+  return `annotated-read:${lessonId}:${textVersionId}`.slice(0, 100);
+}
+
+export async function hasClassicalAnnotatedReadReceipt(db, studentId, lessonId, textVersionId) {
+  const mutationId = classicalAnnotatedReadMutationId(lessonId, textVersionId);
+  const row = await db.prepare(
+    `SELECT EXISTS(
+       SELECT 1 FROM learning_interactions
+        WHERE student_id = ? AND lesson_id = ?
+          AND interaction_key = 'readAcknowledged'
+          AND lesson_phase = 'annotated_reading'
+          AND client_mutation_id = ?
+     ) AS acknowledged,
+     EXISTS(
+       SELECT 1 FROM learning_interactions
+        WHERE student_id = ? AND lesson_id = ? AND interaction_key = 'vocabAnswer'
+     ) AS grandfathered`
+  ).bind(studentId, lessonId, mutationId, studentId, lessonId).first();
+  return Boolean(Number(row?.acknowledged || 0) || Number(row?.grandfathered || 0));
+}
+
 function publicMark(row) {
   return {
     markId: row.mark_id,
@@ -138,8 +160,11 @@ function publicMark(row) {
 
 export async function getClassicalFirstReadState(request, env, student, lessonId) {
   const asset = await loadClassicalFirstRead(request, env, lessonId);
-  const session = await sessionRow(env.READING_DB, student.id, lessonId, asset.textVersionId);
-  const marks = await markRows(env.READING_DB, student.id, lessonId, asset.textVersionId);
+  const [session, marks, annotatedReadCompleted] = await Promise.all([
+    sessionRow(env.READING_DB, student.id, lessonId, asset.textVersionId),
+    markRows(env.READING_DB, student.id, lessonId, asset.textVersionId),
+    hasClassicalAnnotatedReadReceipt(env.READING_DB, student.id, lessonId, asset.textVersionId),
+  ]);
   const resolvedCount = marks.filter((row) => row.resolution_status === "resolved").length;
   return {
     ok: true,
@@ -148,6 +173,7 @@ export async function getClassicalFirstReadState(request, env, student, lessonId
     textDigest: asset.textDigest,
     submitted: Boolean(session?.submitted_at),
     unlocked: Boolean(session?.submitted_at),
+    annotatedReadCompleted,
     submittedAt: session?.submitted_at || null,
     elapsedMs: Number(session?.elapsed_ms || 0),
     summary: session?.summary_text || "",
