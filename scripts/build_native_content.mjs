@@ -244,6 +244,107 @@ assert(readerMediaReceiptLedger.receiptCount === readerIndex.mediaReceiptLedger.
 assert(readerMediaReceiptLedger.sourceInventorySha256
   === readerIndex.mediaReceiptLedger.sourceInventorySha256,
   "reader media receipt inventory differs from reader index");
+
+const classicalFirstReadIndexFile = path.join(DATA, "classical-first-read", "index.json");
+const classicalFirstReadIndexBytes = readFileSync(classicalFirstReadIndexFile);
+const classicalFirstReadSourceIndex = JSON.parse(classicalFirstReadIndexBytes.toString("utf8"));
+assert(
+  classicalFirstReadSourceIndex.schema === "yw-classical-first-read-index-v1"
+    && Number(classicalFirstReadSourceIndex.schemaVersion) === 1
+    && classicalFirstReadSourceIndex.offsetUnit === "utf16_code_unit",
+  "unsupported classical first-read index",
+);
+assert(
+  classicalFirstReadSourceIndex.lessonCount === classicalFirstReadSourceIndex.lessons.length,
+  "classical first-read index lesson count differs from its inventory",
+);
+const classicalFirstReadLessons = [];
+const classicalFirstReadLessonIds = new Set();
+let classicalFirstReadParagraphs = 0;
+for (const indexEntry of classicalFirstReadSourceIndex.lessons) {
+  const lessonId = String(indexEntry.lessonId || "");
+  assert(nativeIds.has(lessonId), `classical first-read references inactive lesson: ${lessonId}`);
+  assert(!classicalFirstReadLessonIds.has(lessonId), `duplicate classical first-read lesson: ${lessonId}`);
+  assert(
+    indexEntry.dataUrl === `data/classical-first-read/${lessonId}.json`,
+    `${lessonId}: classical first-read path differs from its source contract`,
+  );
+  const assetFile = path.join(SITE, indexEntry.dataUrl);
+  assert(existsSync(assetFile), `${lessonId}: classical first-read asset is missing`);
+  const asset = sanitizeValue(json(assetFile));
+  assert(
+    asset.schema === "yw-classical-first-read-v1"
+      && Number(asset.schemaVersion) === 1
+      && asset.offsetUnit === "utf16_code_unit",
+    `${lessonId}: unsupported classical first-read asset`,
+  );
+  assert(asset.lessonId === lessonId, `${lessonId}: classical first-read identity mismatch`);
+  assert(typeof asset.text === "string", `${lessonId}: classical first-read text is invalid`);
+  const textDigest = String(asset.textDigest || "");
+  assert(
+    asset.textVersionId === indexEntry.textVersionId
+      && textDigest === indexEntry.textDigest
+      && /^sha256:[a-f0-9]{64}$/.test(textDigest)
+      && sha256(Buffer.from(asset.text, "utf8")) === textDigest.slice(7)
+      && asset.textVersionId === `cfr-${lessonId}-${textDigest.slice(7, 23)}`,
+    `${lessonId}: classical first-read version receipt mismatch`,
+  );
+  assert(
+    Array.isArray(asset.paragraphs)
+      && asset.paragraphs.length > 0
+      && asset.paragraphCount === asset.paragraphs.length
+      && asset.paragraphCount === indexEntry.paragraphCount,
+    `${lessonId}: classical first-read paragraph count mismatch`,
+  );
+  assert(
+    asset.text === asset.paragraphs.map((paragraph) => paragraph.text).join("")
+      && Array.from(asset.text).length === asset.charCount
+      && asset.charCount === indexEntry.charCount,
+    `${lessonId}: classical first-read text receipt mismatch`,
+  );
+  const paragraphKeys = asset.paragraphs.map((paragraph, index) => {
+    assert(
+      paragraph.ordinal === index + 1
+        && typeof paragraph.text === "string"
+        && paragraph.text.length > 0
+        && Number.isInteger(paragraph.sourceBlockIndex)
+        && paragraph.sourceBlockIndex >= 0
+        && paragraph.charCount === Array.from(paragraph.text).length
+        && new RegExp(
+          `^cfrp:${lessonId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}:` +
+            "[a-f0-9]{16}:\\d{2,4}$",
+        ).test(String(paragraph.key || "")),
+      `${lessonId}: classical first-read paragraph is invalid`,
+    );
+    return paragraph.key;
+  });
+  assert(
+    new Set(paragraphKeys).size === paragraphKeys.length,
+    `${lessonId}: duplicate classical first-read paragraph key`,
+  );
+  classicalFirstReadLessonIds.add(lessonId);
+  classicalFirstReadParagraphs += asset.paragraphs.length;
+  classicalFirstReadLessons.push(canonicalize(asset));
+}
+const normalizedClassicalFirstReadIndex = canonicalize({
+  schemaVersion: "yw-native-classical-first-read-index-v1",
+  sourceSchema: classicalFirstReadSourceIndex.schema,
+  sourceSchemaVersion: classicalFirstReadSourceIndex.schemaVersion,
+  offsetUnit: classicalFirstReadSourceIndex.offsetUnit,
+  policyId: classicalFirstReadSourceIndex.policyId,
+  policyDigest: classicalFirstReadSourceIndex.policyDigest,
+  lessonCount: classicalFirstReadLessons.length,
+  paragraphCount: classicalFirstReadParagraphs,
+  lessons: classicalFirstReadLessons.map((lesson) => ({
+    lessonId: lesson.lessonId,
+    title: lesson.title,
+    path: `classical-first-read/${lesson.lessonId}.json`,
+    textVersionId: lesson.textVersionId,
+    textDigest: lesson.textDigest,
+    paragraphCount: lesson.paragraphCount,
+    charCount: lesson.charCount,
+  })),
+});
 const readerDocuments = new Map();
 for (const meta of sourceManifest.lessons) {
   const receipt = readerIndex.documents[meta.id];
@@ -531,6 +632,9 @@ const catalogBase = canonicalize({
     postCount: lesson.postCount,
     textbookPageCount: lesson.textbookPageCount,
     vocabPath: nativeVocabLessonIds.has(lesson.id) ? `vocab/${lesson.id}.json` : null,
+    classicalFirstReadPath: classicalFirstReadLessonIds.has(lesson.id)
+      ? `classical-first-read/${lesson.id}.json`
+      : null,
     readerDocumentPath: `data/reader-documents/${lesson.id}.json`,
     readerDocumentSha256: readerIndex.documents[lesson.id].sha256,
     readerDocumentEmbeddedSha256: canonicalSha256(readerDocuments.get(lesson.id)),
@@ -602,6 +706,8 @@ const counts = canonicalize({
   vocabQuestions,
   vocabularyLessons: vocabLessons.length,
   vocabularyQuestions: vocabQuestions,
+  classicalFirstReadLessons: classicalFirstReadLessons.length,
+  classicalFirstReadParagraphs,
   mediaCatalogLessons: mediaLessons.length,
   approvedDecks,
   approvedSlideDecks: approvedDecks,
@@ -630,6 +736,10 @@ const semanticCoreBase = canonicalize({
     readerSemanticDigest: readerIndex.readerSemanticDigest,
     indexSha256: sha256(readerIndexBytes),
     mediaReceiptLedger: readerIndex.mediaReceiptLedger,
+  },
+  classicalFirstRead: {
+    index: normalizedClassicalFirstReadIndex,
+    lessons: classicalFirstReadLessons,
   },
   catalog: catalogBase,
   lessons: normalizedLessons,
@@ -729,6 +839,20 @@ addObject("vocab-index", "vocab-index", "vocab/index.json", normalizedVocabIndex
 for (const bank of vocabLessons) {
   addObject(bank.lessonId, "vocab-lesson", `vocab/${bank.lessonId}.json`, bank);
 }
+addObject(
+  "classical-first-read-index",
+  "classical-first-read-index",
+  "classical-first-read/index.json",
+  normalizedClassicalFirstReadIndex,
+);
+for (const lesson of classicalFirstReadLessons) {
+  addObject(
+    lesson.lessonId,
+    "classical-first-read",
+    `classical-first-read/${lesson.lessonId}.json`,
+    lesson,
+  );
+}
 objects.sort((left, right) => left.path.localeCompare(right.path, "en"));
 
 const semanticObjectReceipts = objects.map(({ body: _body, ...receipt }) => receipt);
@@ -778,6 +902,14 @@ const manifest = canonicalize({
       receiptCount: readerMediaReceiptLedger.receiptCount,
       totalBytes: readerMediaReceiptLedger.totalBytes,
       rightsBasis: readerMediaReceiptLedger.rightsBasis,
+    },
+    classicalFirstReadIndex: {
+      path: "site/data/classical-first-read/index.json",
+      sha256: sha256(classicalFirstReadIndexBytes),
+      schema: classicalFirstReadSourceIndex.schema,
+      policyId: classicalFirstReadSourceIndex.policyId,
+      policyDigest: classicalFirstReadSourceIndex.policyDigest,
+      lessonCount: classicalFirstReadSourceIndex.lessonCount,
     },
     learningManifest: {
       path: "site/data/learning-manifest.json",

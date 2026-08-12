@@ -27,6 +27,15 @@ Last updated: 2026-08-12
 - The authority-split follow-up is source-only on
   `codex/yw-vocab-authority-20260812`; it has not been deployed and changes no
   D1 row, Queue message, User Center contract or App release pointer.
+- The same source branch now projects the exact 30 classical first-read assets
+  (102 paragraphs) into the immutable native-content graph. Every projected
+  lesson retains the Web `textVersionId`, `textDigest`, UTF-16 offset unit and
+  paragraph keys, with a receipt-bound native index and per-lesson object.
+  This is a blocked development candidate only: the tracked stable pointer and
+  formal 382-question inventory are unchanged. `node --test
+  scripts/test_native_content.mjs` passes 22/22 locally; a clean Web commit,
+  Pages deployment receipt, current native-content review and stable promotion
+  remain release gates.
 
 Package: `0.2.1-evaluation-nonscoring`. The deployed Web carrier is commit
 `a97eba7589ed6afa7df30ba4f37f2241a22d90d0`, contained by current GitHub `main`.

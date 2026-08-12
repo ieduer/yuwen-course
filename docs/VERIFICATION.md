@@ -27,6 +27,15 @@ and no browser or App field can claim score, correctness or eligibility.
 passing score remains incomplete, the UI says `試做 · 未記錄`, and only a
 recognized authenticated evidence status can advance a checkpoint.
 
+For the classical native projection, `npm run test:native-content` must also
+prove that the Web index's 30 lessons / 102 paragraphs are projected exactly,
+that every catalog path resolves to one receipt-bound asset, and that
+`textVersionId`, `textDigest`, UTF-16 offsets, paragraph keys and text bytes do
+not drift. The immutable object count must include one native first-read index
+plus all 30 lesson assets. This test is development evidence only; a stable
+promotion still requires clean exact source, a Pages deployment UUID,
+publication time, current content audit and compatible App disposition.
+
 ## 2026-08-11 Web reading release gate
 
 This current Web-only gate supersedes the 2026-08-09 pre-migration/503 release

@@ -29,6 +29,23 @@ Last reviewed: 2026-08-12 (America/Los_Angeles)
   the explicit practice-only label and must not advance any local completion
   percentage or A—F evidence. Unknown evidence statuses fail closed.
 
+### Classical Web-to-App content projection
+
+- Native content must consume, never reconstruct, the reviewed Web artifacts
+  in `site/data/classical-first-read/`. The source index currently contains 30
+  lessons / 102 paragraphs and fixes `offsetUnit=utf16_code_unit`, stable
+  paragraph keys, exact text versions and text digests.
+- `scripts/build_native_content.mjs` validates that every first-read lesson is
+  an active student lesson, that index and asset counts/versions/digests agree,
+  and that the combined text equals the ordered paragraphs. It emits one
+  `classical-first-read-index` object plus 30 receipt-bound
+  `classical-first-read` objects and catalog paths.
+- This projection does not alter the learning manifest, formal vocabulary
+  denominator, score, eligibility or A+ contract. A dirty or blocked build may
+  only write a candidate pointer; moving `latest-stable` still requires clean
+  source, a real Pages deployment receipt, a current independent content audit
+  and the paired Android import/verification transaction.
+
 ## 2026-08-11 Web reading finalization override
 
 This is the current operational disposition. Older paired Web/App and
