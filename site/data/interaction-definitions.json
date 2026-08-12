@@ -7,15 +7,45 @@
   "unknownInteractionPolicy": "reject",
   "compatibilityContracts": {
     "aPlusGate": {
-      "schemaVersion": "yw-aplus-producer-compatibility-v1",
-      "sourceVersion": "yw-b530d57cb873ed49",
-      "registryVersion": "yw-interactions-2026-07-26-v1",
-      "itemCount": 1156,
-      "resourceKeyHash": "sha256:b530d57cb873ed49340bcc606ec8a70fd9970a59d911fd1001d63ce85a86c2ba",
-      "reviewedProducerManifestVersion": "yw-e310d45b1d81e9ad",
-      "reviewedProducerManifestDigest": "sha256:e310d45b1d81e9adf6182bd50ea02842daf69a8981aa29ff03b2da30b0846aca",
-      "reviewedProducerItemCount": 869,
-      "subsetDisposition": "all_current_a_plus_resources_verified_in_frozen_manifest"
+      "schemaVersion": "yw-aplus-producer-compatibility-v2",
+      "contractVersion": "yw-aplus-e310-v2",
+      "sourceVersion": "yw-e310d45b1d81e9ad",
+      "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+      "mappingVersion": "yw-canonical-learning-mapping-v1",
+      "registryVersion": "yw-interactions-2026-08-09-v2",
+      "itemCount": 869,
+      "resourceKeyHash": "sha256:e310d45b1d81e9adf6182bd50ea02842daf69a8981aa29ff03b2da30b0846aca",
+      "eligibleAssessmentKind": "performance",
+      "eligibleScoringRole": "a_plus_gate",
+      "excludedQuestionKinds": ["evaluation"],
+      "excludedItemCount": 101,
+      "eligibleItemCount": 768,
+      "mappingCoveragePercent": 100,
+      "thresholdPercent": 90,
+      "thresholdCount": 692,
+      "academicYearPolicy": {
+        "status": "active",
+        "policyVersion": "yw-aplus-2026-2027-v1",
+        "academicYear": "2026-2027",
+        "scoringMode": "fixed_distinct_credit_unit_a_plus_gate",
+        "priorContractEvidence": "historical_read_only",
+        "creditUnitKey": "canonicalUnitId",
+        "admissibleReleaseRule": "fully_mapped_effective_release_without_changing_fixed_threshold",
+        "requiredDistinctCreditUnits": 692,
+        "scoringPolicyChangeRule": "explicit_new_policy_version_only"
+      },
+      "historicalEvidencePolicy": "read_only_not_counted_in_current_a_plus",
+      "resourceLifecyclePolicy": "append_only_versions_retired_evidence_preserved_under_evidence_time_policy",
+      "sourceFactPolicy": {
+        "allowedResultClaims": ["rawValue", "maxValue", "normalizedValue", "verificationMethod"],
+        "forbiddenGradingClaims": ["weight", "grade", "points", "bands", "sourceCap"]
+      },
+      "ledgerAuthority": "shared_user_center_learning_evidence",
+      "clientPolicy": "web_and_android_share_one_ledger_no_client_specific_denominator",
+      "deliveryEvidenceIdentity": "sourceSiteKey+contractVersion+sourceReleaseId+canonicalUnitId+resourceVersion+sourceAttemptId",
+      "scoringCreditIdentity": "userId+academicYear+policyVersion+canonicalUnitId",
+      "acceptedTerminalDisposition": "mapped_accepted_eligibility_is_terminal_unless_superseded",
+      "legacyAcceptedEvidencePolicy": "preserve_null_finalized_at_read_only_never_treat_as_platform_error"
     }
   },
   "definitions": {

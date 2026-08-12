@@ -2,6 +2,34 @@
 
 Last updated: 2026-08-12
 
+## 2026-08-12 e310/v2 User Center source-contract candidate
+
+- This isolated, source-only candidate makes the current Web manifest the
+  explicit 2026–27 YW producer contract. It has 869 fully mapped resources:
+  768 eligible `performance / a_plus_gate` units and 101 `evaluation`
+  resources that remain visible but non-scoring. The annual requirement is
+  fixed at 692 distinct `canonicalUnitId` credits and does not grow when the
+  live task pool later adds a mapped release.
+- Each formal event now uses `bdfz-learning-evidence-event-v2` with
+  `schemaVersion: 2` and carries `contractVersion`, `sourceReleaseId`,
+  `canonicalUnitId`, `resourceVersion`, `mappingVersion` and a source attempt
+  identity. These preserve a real revised attempt while User Center dedupes
+  Web, Android and resource revisions at the annual canonical-credit layer.
+- The Web producer emits only e310/v2 for `2026-2027`. User Center retains a
+  transition adapter for immutable b530/v1 evidence in `2025-2026`; it is
+  historical-only and cannot enter the new-year numerator or denominator.
+  Unknown future contract years withhold rather than falling through to F.
+- Android remains a formal-resource client of this same Web source graph and
+  shared User Center ledger. This candidate changes no Android inventory,
+  package, release pointer or client-specific denominator.
+- Evaluation and every other source fact remain unable to claim `weight`,
+  `grade`, `points`, bands or source caps. Unknown releases/mappings must be
+  durably held outside scoring until the central contract is activated.
+- No Pages deployment, Queue write, D1 migration, User Center release, App
+  publication, commit or push was performed. The production facts recorded in
+  the following sections remain unchanged until the paired guarded release is
+  separately authorized and read back.
+
 ## 2026-08-12 A+—F / App synchronization candidate
 
 - The 723 student-visible active vocabulary questions now have one explicit

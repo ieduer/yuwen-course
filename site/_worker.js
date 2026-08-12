@@ -3,6 +3,7 @@ import {
   LearningSubmissionRateLimitError,
   recordLearningInteraction,
   retryPendingEvidence,
+  validateAPlusCompatibilityContract,
 } from "./learning-evidence-source.js";
 import {
   deleteClassicalFirstReadMark,
@@ -165,13 +166,31 @@ function cleanText(value, max = 4000) {
   return String(value || "").replace(/\r/g, "").trim().slice(0, max);
 }
 
-function exactLearningDescriptorPart(actual, expected) {
+function stableCanonical(value) {
+  if (Array.isArray(value)) return `[${value.map(stableCanonical).join(",")}]`;
+  if (value && typeof value === "object") {
+    return `{${Object.keys(value).sort().map((key) => (
+      `${JSON.stringify(key)}:${stableCanonical(value[key])}`
+    )).join(",")}}`;
+  }
+  return JSON.stringify(value);
+}
+
+function exactLearningHealthReceipt(actual, descriptor) {
   if (!actual || typeof actual !== "object" || Array.isArray(actual)) return false;
-  const keys = Object.keys(actual).sort();
-  if (keys.join("\n") !== "itemCount\nmanifestDigest\nmanifestVersion") return false;
-  return actual.manifestVersion === expected.manifestVersion
-    && actual.manifestDigest === expected.manifestDigest
-    && Number(actual.itemCount) === Number(expected.itemCount);
+  const expected = {
+    ok: true,
+    schemaVersion: "bdfz-learning-source-health-receipt-v2",
+    status: "healthy",
+    sources: descriptor.sources,
+    capabilities: descriptor.capabilities,
+    activationScope: "registered_source_contract_health_only",
+    persistence: "none",
+    runtimeScoringActivation: false,
+    affectsGrowthScore: false,
+    affectsAPlus: false,
+  };
+  return stableCanonical(actual) === stableCanonical(expected);
 }
 
 function exactAPlusSourceReceipt(actual, expected) {
@@ -221,36 +240,70 @@ async function handleLearningEvidenceHealth(env) {
       registryResponse.json(),
       formativeResponse.json(),
     ]);
-    const descriptor = {
-      sourceSiteKey: "yw",
-      formal: {
-        manifestVersion: manifest?.manifestVersion,
-        manifestDigest: manifest?.resourceKeyHash,
-        itemCount: Number(manifest?.itemCount),
-      },
-      registryVersion: registry?.registryVersion,
-      formative: {
-        manifestVersion: formative?.manifestVersion,
-        manifestDigest: formative?.manifestDigest,
-        itemCount: Number(formative?.itemCount),
-      },
+    const compatibility = validateAPlusCompatibilityContract(registry, manifest);
+    const formal = {
+      manifestVersion: manifest?.manifestVersion,
+      manifestDigest: manifest?.resourceKeyHash,
+      itemCount: Number(manifest?.itemCount),
     };
-    if (formative?.formalLearningManifestVersion !== descriptor.formal.manifestVersion
-      || formative?.formalLearningManifestDigest !== descriptor.formal.manifestDigest
-      || formative?.registryVersion !== descriptor.registryVersion) {
+    if (formative?.formalLearningManifestVersion !== formal.manifestVersion
+      || formative?.formalLearningManifestDigest !== formal.manifestDigest
+      || formative?.registryVersion !== registry?.registryVersion) {
       throw new Error("learning contract assets disagree");
     }
-    const compatibility = registry?.compatibilityContracts?.aPlusGate;
-    if (compatibility?.schemaVersion !== "yw-aplus-producer-compatibility-v1"
-      || !/^yw-[a-f0-9]{16}$/.test(String(compatibility?.sourceVersion || ""))
-      || !/^sha256:[a-f0-9]{64}$/.test(String(compatibility?.resourceKeyHash || ""))
-      || !Number.isInteger(Number(compatibility?.itemCount))
-      || Number(compatibility.itemCount) < 1
-      || compatibility?.reviewedProducerManifestVersion !== descriptor.formal.manifestVersion
-      || compatibility?.reviewedProducerManifestDigest !== descriptor.formal.manifestDigest
-      || Number(compatibility?.reviewedProducerItemCount) !== descriptor.formal.itemCount) {
-      throw new Error("A+ compatibility contract disagrees");
-    }
+    const descriptor = {
+      schemaVersion: "bdfz-learning-source-health-descriptor-v1",
+      sources: [{
+        sourceSiteKey: "yw",
+        sourceSystem: registry.sourceSystem,
+        contractVersion: compatibility.contractVersion,
+        registryVersion: compatibility.registryVersion,
+        resourceCatalog: {
+          catalogVersion: compatibility.sourceReleaseId,
+          manifestVersion: compatibility.sourceVersion,
+          manifestDigest: compatibility.resourceKeyHash,
+          sourceReleaseId: compatibility.sourceReleaseId,
+          mappingVersion: compatibility.mappingVersion,
+          publishedItemCount: Number(compatibility.itemCount),
+        },
+        activeAPlusProjection: {
+          assessmentKind: compatibility.eligibleAssessmentKind,
+          scoringRole: compatibility.eligibleScoringRole,
+          excludedQuestionKinds: compatibility.excludedQuestionKinds,
+          excludedItemCount: Number(compatibility.excludedItemCount),
+          eligibleItemCount: Number(compatibility.eligibleItemCount),
+          thresholdPolicy: {
+            percent: Number(compatibility.thresholdPercent),
+            activationBaselineEligibleUnits: Number(compatibility.eligibleItemCount),
+            requiredDistinctCreditUnits: Number(compatibility.thresholdCount),
+            annualStabilityRule: "fixed_for_academic_year_task_pool_append_does_not_raise_requirement",
+          },
+          academicYearPolicy: compatibility.academicYearPolicy,
+        },
+        resourceMappingPolicy: {
+          requiredCoveragePercent: Number(compatibility.mappingCoveragePercent),
+          mappingVersion: compatibility.mappingVersion,
+        },
+        sourcePayloadPolicy: compatibility.sourceFactPolicy,
+        unknownReleasePolicy: "durably_ingest_pending_mapping_quarantine_alert_never_grade",
+        resourceLifecyclePolicy: "append_release_never_replace_scoring_inventory_dedupe_canonical_unit",
+        ledgerAuthority: compatibility.ledgerAuthority,
+        clientPolicy: compatibility.clientPolicy,
+        deliveryEvidenceIdentity: compatibility.deliveryEvidenceIdentity,
+        scoringCreditIdentity: compatibility.scoringCreditIdentity,
+        acceptedTerminalDisposition: compatibility.acceptedTerminalDisposition,
+        legacyAcceptedEvidencePolicy: compatibility.legacyAcceptedEvidencePolicy,
+      }],
+      capabilities: [{
+        sourceSiteKey: "yw",
+        capabilityKey: "formative_mastery",
+        registryVersion: registry.registryVersion,
+        formal,
+        manifestVersion: formative.manifestVersion,
+        manifestDigest: formative.manifestDigest,
+        itemCount: Number(formative.itemCount),
+      }],
+    };
     const aPlusDescriptor = {
       sourceSiteKey: "yw",
       manifestVersion: compatibility.sourceVersion,
@@ -259,18 +312,7 @@ async function handleLearningEvidenceHealth(env) {
       loaderContractVersion: "yuwen-queue-ledger-v1",
     };
     const receipt = await env.USER_CENTER_EVIDENCE.getLearningHealthReceipt(descriptor);
-    if (receipt?.ok !== true
-      || receipt?.schemaVersion !== "bdfz-yw-learning-health-receipt-v1"
-      || receipt?.status !== "healthy"
-      || receipt?.sourceSiteKey !== "yw"
-      || !exactLearningDescriptorPart(receipt?.formal, descriptor.formal)
-      || receipt?.registryVersion !== descriptor.registryVersion
-      || !exactLearningDescriptorPart(receipt?.formative, descriptor.formative)
-      || receipt?.activationScope !== "transport_and_formative_health_only"
-      || receipt?.persistence !== "none"
-      || receipt?.runtimeScoringActivation !== false
-      || receipt?.affectsGrowthScore !== false
-      || receipt?.affectsAPlus !== false) {
+    if (!exactLearningHealthReceipt(receipt, descriptor)) {
       return json({ error: "learning evidence contract mismatch" }, { status: 503 });
     }
     const aPlusSourceReceipt = await env.USER_CENTER_EVIDENCE.getSourceReceipt(aPlusDescriptor);

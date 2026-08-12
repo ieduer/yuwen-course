@@ -5,7 +5,7 @@ import {
 
 const SOURCE_SYSTEM = "yuwen-course";
 const SOURCE_SITE_KEY = "yw";
-const ENVELOPE_SCHEMA = "bdfz-learning-evidence-v1";
+const ENVELOPE_SCHEMA = "bdfz-learning-evidence-event-v2";
 const MAX_RAW_PAYLOAD_CHARS = 12000;
 const SUBMISSION_RATE_LIMIT = Object.freeze({
   maxAttempts: 8,
@@ -14,6 +14,34 @@ const SUBMISSION_RATE_LIMIT = Object.freeze({
 const registryCache = { value: null, expiresAt: 0 };
 const manifestCache = { value: null, expiresAt: 0 };
 const formativeManifestCache = { value: null, expiresAt: 0 };
+const A_PLUS_COMPATIBILITY_KEYS = Object.freeze([
+  "schemaVersion",
+  "contractVersion",
+  "sourceVersion",
+  "sourceReleaseId",
+  "mappingVersion",
+  "registryVersion",
+  "itemCount",
+  "resourceKeyHash",
+  "eligibleAssessmentKind",
+  "eligibleScoringRole",
+  "excludedQuestionKinds",
+  "excludedItemCount",
+  "eligibleItemCount",
+  "mappingCoveragePercent",
+  "thresholdPercent",
+  "thresholdCount",
+  "academicYearPolicy",
+  "historicalEvidencePolicy",
+  "resourceLifecyclePolicy",
+  "sourceFactPolicy",
+  "ledgerAuthority",
+  "clientPolicy",
+  "deliveryEvidenceIdentity",
+  "scoringCreditIdentity",
+  "acceptedTerminalDisposition",
+  "legacyAcceptedEvidencePolicy",
+]);
 
 export class LearningSubmissionRateLimitError extends Error {
   constructor(retryAfterSeconds = SUBMISSION_RATE_LIMIT.windowSeconds) {
@@ -63,6 +91,110 @@ async function loadAssetJson(request, env, pathname) {
   return response.json();
 }
 
+function hasExactKeys(value, expectedKeys) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const actual = Object.keys(value).sort();
+  const expected = [...expectedKeys].sort();
+  return actual.length === expected.length
+    && actual.every((key, index) => key === expected[index]);
+}
+
+export function validateAPlusCompatibilityContract(registry, manifest = null) {
+  const compatibility = registry?.compatibilityContracts?.aPlusGate;
+  const excludedQuestionKinds = compatibility?.excludedQuestionKinds;
+  if (
+    !hasExactKeys(compatibility, A_PLUS_COMPATIBILITY_KEYS)
+    || compatibility.schemaVersion !== "yw-aplus-producer-compatibility-v2"
+    || compatibility.contractVersion !== "yw-aplus-e310-v2"
+    || !/^yw-[a-f0-9]{16}$/.test(String(compatibility.sourceVersion || ""))
+    || !/^yw-release-[a-f0-9]{16}$/.test(String(compatibility.sourceReleaseId || ""))
+    || compatibility.mappingVersion !== "yw-canonical-learning-mapping-v1"
+    || compatibility.registryVersion !== registry?.registryVersion
+    || compatibility.registryVersion !== "yw-interactions-2026-08-09-v2"
+    || !/^sha256:[a-f0-9]{64}$/.test(String(compatibility.resourceKeyHash || ""))
+    || !Number.isInteger(Number(compatibility.itemCount))
+    || Number(compatibility.itemCount) < 1
+    || compatibility.eligibleAssessmentKind !== "performance"
+    || compatibility.eligibleScoringRole !== "a_plus_gate"
+    || !Array.isArray(excludedQuestionKinds)
+    || excludedQuestionKinds.length !== 1
+    || excludedQuestionKinds[0] !== "evaluation"
+    || Number(compatibility.excludedItemCount) !== 101
+    || !Number.isInteger(Number(compatibility.eligibleItemCount))
+    || Number(compatibility.eligibleItemCount) < 1
+    || Number(compatibility.eligibleItemCount) > Number(compatibility.itemCount)
+    || Number(compatibility.mappingCoveragePercent) !== 100
+    || Number(compatibility.thresholdPercent) !== 90
+    || Number(compatibility.thresholdCount)
+      !== Math.ceil(Number(compatibility.eligibleItemCount) * Number(compatibility.thresholdPercent) / 100)
+    || !hasExactKeys(compatibility.academicYearPolicy, [
+      "status",
+      "policyVersion",
+      "academicYear",
+      "scoringMode",
+      "priorContractEvidence",
+      "creditUnitKey",
+      "admissibleReleaseRule",
+      "requiredDistinctCreditUnits",
+      "scoringPolicyChangeRule",
+    ])
+    || compatibility.academicYearPolicy.status !== "active"
+    || compatibility.academicYearPolicy.policyVersion !== "yw-aplus-2026-2027-v1"
+    || compatibility.academicYearPolicy.academicYear !== "2026-2027"
+    || compatibility.academicYearPolicy.scoringMode !== "fixed_distinct_credit_unit_a_plus_gate"
+    || compatibility.academicYearPolicy.priorContractEvidence !== "historical_read_only"
+    || compatibility.academicYearPolicy.creditUnitKey !== "canonicalUnitId"
+    || compatibility.academicYearPolicy.admissibleReleaseRule
+      !== "fully_mapped_effective_release_without_changing_fixed_threshold"
+    || Number(compatibility.academicYearPolicy.requiredDistinctCreditUnits)
+      !== Number(compatibility.thresholdCount)
+    || compatibility.academicYearPolicy.scoringPolicyChangeRule !== "explicit_new_policy_version_only"
+    || compatibility.historicalEvidencePolicy !== "read_only_not_counted_in_current_a_plus"
+    || compatibility.resourceLifecyclePolicy !== "append_only_versions_retired_evidence_preserved_under_evidence_time_policy"
+    || !hasExactKeys(compatibility.sourceFactPolicy, ["allowedResultClaims", "forbiddenGradingClaims"])
+    || JSON.stringify(compatibility.sourceFactPolicy.allowedResultClaims)
+      !== JSON.stringify(["rawValue", "maxValue", "normalizedValue", "verificationMethod"])
+    || JSON.stringify(compatibility.sourceFactPolicy.forbiddenGradingClaims)
+      !== JSON.stringify(["weight", "grade", "points", "bands", "sourceCap"])
+    || compatibility.ledgerAuthority !== "shared_user_center_learning_evidence"
+    || compatibility.clientPolicy !== "web_and_android_share_one_ledger_no_client_specific_denominator"
+    || compatibility.deliveryEvidenceIdentity !== "sourceSiteKey+contractVersion+sourceReleaseId+canonicalUnitId+resourceVersion+sourceAttemptId"
+    || compatibility.scoringCreditIdentity !== "userId+academicYear+policyVersion+canonicalUnitId"
+    || compatibility.acceptedTerminalDisposition !== "mapped_accepted_eligibility_is_terminal_unless_superseded"
+    || compatibility.legacyAcceptedEvidencePolicy !== "preserve_null_finalized_at_read_only_never_treat_as_platform_error"
+  ) throw new Error("A+ producer compatibility contract invalid");
+
+  if (manifest) {
+    const items = Array.isArray(manifest.items) ? manifest.items : [];
+    const excludedKinds = new Set(excludedQuestionKinds);
+    const eligibleItems = items.filter((item) => !excludedKinds.has(String(item?.questionKind || "")));
+    const excludedItems = items.length - eligibleItems.length;
+    if (
+      manifest.manifestVersion !== compatibility.sourceVersion
+      || manifest.sourceReleaseId !== compatibility.sourceReleaseId
+      || manifest.mappingVersion !== compatibility.mappingVersion
+      || manifest.resourceKeyHash !== compatibility.resourceKeyHash
+      || Number(manifest.itemCount) !== Number(compatibility.itemCount)
+      || Number(manifest.thresholdPercent) !== Number(compatibility.thresholdPercent)
+      || excludedItems !== Number(compatibility.excludedItemCount)
+      || eligibleItems.length !== Number(compatibility.eligibleItemCount)
+      || items.some((item) => (
+        item.sourceReleaseId !== compatibility.sourceReleaseId
+        || item.mappingVersion !== compatibility.mappingVersion
+        || !/^yw:lesson-[a-z0-9-]+:(?:interaction:[A-Za-z]+|vocabulary:[A-Za-z0-9:-]+)$/.test(String(item.canonicalUnitId || ""))
+        || !/^sha256:[a-f0-9]{64}$/.test(String(item.resourceVersion || ""))
+        || !["retention", "reading", "inquiry", "reflection"].includes(item.dimensionKey)
+        || !["vocabulary", "syntax", "comprehension", "reflection"].includes(item.competencyKey)
+        || !["a_plus_gate", "non_scoring"].includes(item.evidenceRole)
+        || item.lifecycleStatus !== "active"
+        || !Number.isFinite(Date.parse(item.effectiveFrom))
+        || item.effectiveTo !== null
+      ))
+    ) throw new Error("current A+ manifest disagrees with its compatibility contract");
+  }
+  return compatibility;
+}
+
 async function loadRegistry(request, env) {
   if (registryCache.value && registryCache.expiresAt > Date.now()) return registryCache.value;
   const registry = await loadAssetJson(request, env, "/data/interaction-definitions.json");
@@ -74,44 +206,39 @@ async function loadRegistry(request, env) {
       || !registry?.definitions) {
     throw new Error("interaction registry contract invalid");
   }
-  const compatibility = registry.compatibilityContracts?.aPlusGate;
-  if (
-    compatibility?.schemaVersion !== "yw-aplus-producer-compatibility-v1"
-    || !/^yw-[a-f0-9]{16}$/.test(String(compatibility?.sourceVersion || ""))
-    || compatibility?.registryVersion !== "yw-interactions-2026-07-26-v1"
-    || !/^sha256:[a-f0-9]{64}$/.test(String(compatibility?.resourceKeyHash || ""))
-    || !/^yw-[a-f0-9]{16}$/.test(String(compatibility?.reviewedProducerManifestVersion || ""))
-    || !/^sha256:[a-f0-9]{64}$/.test(String(compatibility?.reviewedProducerManifestDigest || ""))
-    || !Number.isInteger(Number(compatibility?.reviewedProducerItemCount))
-  ) throw new Error("A+ producer compatibility contract invalid");
+  validateAPlusCompatibilityContract(registry);
   registryCache.value = registry;
   registryCache.expiresAt = Date.now() + 5 * 60 * 1000;
   return registry;
 }
 
 function evidenceVersions(registry, manifest, definition, formativeManifest) {
+  const sourceContract = validateAPlusCompatibilityContract(registry, manifest);
   if (definition.scoringRole === "a_plus_gate") {
-    const contract = registry.compatibilityContracts.aPlusGate;
-    if (
-      manifest.manifestVersion !== contract.reviewedProducerManifestVersion
-      || manifest.resourceKeyHash !== contract.reviewedProducerManifestDigest
-      || Number(manifest.itemCount) !== Number(contract.reviewedProducerItemCount)
-    ) throw new Error("current A+ resources have not been reviewed against the frozen scoring manifest");
     return {
-      sourceVersion: contract.sourceVersion,
-      registryVersion: contract.registryVersion,
+      contractVersion: sourceContract.contractVersion,
+      sourceVersion: sourceContract.sourceVersion,
+      sourceReleaseId: sourceContract.sourceReleaseId,
+      mappingVersion: sourceContract.mappingVersion,
+      registryVersion: sourceContract.registryVersion,
       producerManifestVersion: manifest.manifestVersion,
     };
   }
   if (formativeManifest?.manifestVersion) {
     return {
+      contractVersion: sourceContract.contractVersion,
       sourceVersion: formativeManifest.manifestVersion,
+      sourceReleaseId: `yw-formative-release-${formativeManifest.manifestVersion.replace("yw-formative-", "")}`,
+      mappingVersion: "yw-formative-learning-mapping-v1",
       registryVersion: registry.registryVersion,
       producerManifestVersion: manifest.manifestVersion,
     };
   }
   return {
+    contractVersion: sourceContract.contractVersion,
     sourceVersion: manifest.manifestVersion,
+    sourceReleaseId: sourceContract.sourceReleaseId,
+    mappingVersion: sourceContract.mappingVersion,
     registryVersion: registry.registryVersion,
     producerManifestVersion: manifest.manifestVersion,
   };
@@ -682,11 +809,18 @@ export async function recordLearningInteraction({
   const summary = publicSummary(manifestItem, lesson, definition);
   const envelope = {
     schema: ENVELOPE_SCHEMA,
-    schemaVersion: 1,
+    schemaVersion: 2,
     sourceSystem: SOURCE_SYSTEM,
     sourceSiteKey: SOURCE_SITE_KEY,
+    contractVersion: versions.contractVersion,
     sourceEventId,
+    sourceAttemptId: sourceEventId,
     sourceVersion: versions.sourceVersion,
+    sourceReleaseId: versions.sourceReleaseId,
+    canonicalUnitId: manifestItem?.canonicalUnitId || `yw:${resourceKey}`,
+    resourceVersion: manifestItem?.resourceVersion
+      || `sha256:${await sha256Text(`${versions.sourceVersion}\n${resourceKey}`)}`,
+    mappingVersion: versions.mappingVersion,
     registryVersion: versions.registryVersion,
     userId: Number(student.ucUserId || 0),
     academicYear: academicYearFor(occurredAt),

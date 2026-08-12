@@ -159,20 +159,44 @@ function assertSynchronizedIneligibleAttempt(result, queued, writes) {
   const evaluationWrite = writeStartingWith(writes, "INSERT INTO learning_evaluations");
   assert.equal(evaluationWrite?.values?.[2], "ineligible");
   assert.ok(writeStartingWith(writes, "INSERT INTO evidence_outbox"));
+  assert.equal(queued[0].envelope.schema, "bdfz-learning-evidence-event-v2");
+  assert.equal(queued[0].envelope.schemaVersion, 2);
+  assert.equal(Object.hasOwn(queued[0].envelope, "sourceContractVersion"), false);
   assert.equal(queued[0].envelope.sourceVersion, registry.compatibilityContracts.aPlusGate.sourceVersion);
+  assert.equal(queued[0].envelope.contractVersion, registry.compatibilityContracts.aPlusGate.contractVersion);
+  assert.equal(queued[0].envelope.sourceReleaseId, registry.compatibilityContracts.aPlusGate.sourceReleaseId);
+  assert.equal(queued[0].envelope.mappingVersion, registry.compatibilityContracts.aPlusGate.mappingVersion);
+  assert.equal(queued[0].envelope.sourceAttemptId, queued[0].envelope.sourceEventId);
+  assert.match(queued[0].envelope.canonicalUnitId, /^yw:lesson-/);
+  assert.match(queued[0].envelope.resourceVersion, /^sha256:[a-f0-9]{64}$/);
   assert.equal(queued[0].envelope.registryVersion, registry.compatibilityContracts.aPlusGate.registryVersion);
   assert.equal(queued[0].envelope.eligibilityStatus, "ineligible");
 }
 
-test("current formal resources pin the separately reviewed frozen A+ contract", () => {
+test("current formal resources publish one exact e310/v2 source contract with complete lineage", () => {
   const compatibility = registry.compatibilityContracts.aPlusGate;
+  assert.equal(compatibility.contractVersion, "yw-aplus-e310-v2");
   assert.match(compatibility.sourceVersion, /^yw-[a-f0-9]{16}$/);
   assert.match(compatibility.resourceKeyHash, /^sha256:[a-f0-9]{64}$/);
-  assert.ok(Number(compatibility.itemCount) > manifest.itemCount);
-  assert.equal(compatibility.reviewedProducerManifestVersion, manifest.manifestVersion);
-  assert.equal(compatibility.reviewedProducerManifestDigest, manifest.resourceKeyHash);
-  assert.equal(Number(compatibility.reviewedProducerItemCount), manifest.itemCount);
-  assert.equal(compatibility.subsetDisposition, "all_current_a_plus_resources_verified_in_frozen_manifest");
+  assert.equal(compatibility.sourceVersion, manifest.manifestVersion);
+  assert.equal(compatibility.resourceKeyHash, manifest.resourceKeyHash);
+  assert.equal(Number(compatibility.itemCount), manifest.itemCount);
+  assert.equal(Number(compatibility.eligibleItemCount), 768);
+  assert.equal(Number(compatibility.thresholdCount), 692);
+  assert.equal(Number(compatibility.mappingCoveragePercent), 100);
+  assert.equal(compatibility.academicYearPolicy.status, "active");
+  assert.equal(compatibility.academicYearPolicy.academicYear, "2026-2027");
+  assert.equal(
+    compatibility.academicYearPolicy.scoringMode,
+    "fixed_distinct_credit_unit_a_plus_gate",
+  );
+  assert.equal(compatibility.academicYearPolicy.requiredDistinctCreditUnits, 692);
+  assert.ok(manifest.items.every((item) => (
+    item.sourceReleaseId === compatibility.sourceReleaseId
+    && item.mappingVersion === compatibility.mappingVersion
+    && item.canonicalUnitId
+    && /^sha256:[a-f0-9]{64}$/.test(item.resourceVersion)
+  )));
 });
 
 test("YW exposes compound health and the exact existing A+ source activation receipt", async () => {
@@ -184,9 +208,9 @@ test("YW exposes compound health and the exact existing A+ source activation rec
   assert.match(workerSource, /data\/lesson-competency-manifest\.json/);
   assert.match(workerSource, /getLearningHealthReceipt\(descriptor\)/);
   assert.match(workerSource, /getSourceReceipt\(aPlusDescriptor\)/);
-  assert.match(workerSource, /activationScope !== "transport_and_formative_health_only"/);
-  assert.match(workerSource, /runtimeScoringActivation !== false/);
-  assert.match(workerSource, /affectsAPlus !== false/);
+  assert.match(workerSource, /activationScope: "registered_source_contract_health_only"/);
+  assert.match(workerSource, /runtimeScoringActivation: false/);
+  assert.match(workerSource, /affectsAPlus: false/);
 
   const calls = [];
   const env = sourceEnvironment().env;
@@ -195,13 +219,11 @@ test("YW exposes compound health and the exact existing A+ source activation rec
       calls.push({ method: "health", descriptor });
       return {
         ok: true,
-        schemaVersion: "bdfz-yw-learning-health-receipt-v1",
+        schemaVersion: "bdfz-learning-source-health-receipt-v2",
         status: "healthy",
-        sourceSiteKey: "yw",
-        formal: { ...descriptor.formal },
-        registryVersion: descriptor.registryVersion,
-        formative: { ...descriptor.formative },
-        activationScope: "transport_and_formative_health_only",
+        sources: structuredClone(descriptor.sources),
+        capabilities: structuredClone(descriptor.capabilities),
+        activationScope: "registered_source_contract_health_only",
         persistence: "none",
         runtimeScoringActivation: false,
         affectsGrowthScore: false,

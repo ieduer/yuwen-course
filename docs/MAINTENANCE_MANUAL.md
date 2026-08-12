@@ -2,6 +2,58 @@
 
 Last reviewed: 2026-08-12 (America/Los_Angeles)
 
+## 2026-08-12 e310/v2 learning-source contract override
+
+This source-only override supersedes the older frozen-denominator statements
+below for a future 2026–27 release; it does not change current production.
+User Center remains the identity, immutable-evidence and A+—F scoring core.
+YW reports server-verified facts through the existing dedicated Queue and must
+never report a grade, weight, points, band or source cap.
+
+- `site/data/learning-manifest.json` and
+  `site/data/interaction-definitions.json` jointly define contract
+  `yw-aplus-e310-v2`: release `yw-release-f78c3cae78ac3ac3`, 869 mapped
+  resources, 768 eligible performance units, 101 non-scoring evaluations and
+  the fixed 2026–27 requirement of 692 distinct canonical units.
+- The annual policy and task pool are independent. A fully mapped later
+  release can create another valid route to a canonical unit, but cannot
+  change 692, the A+—F bands, dimension weights, targets or source caps without
+  an explicit new academic-year policy version.
+- Formal envelopes use the distinct new event schema
+  `bdfz-learning-evidence-event-v2` and carry the delivery lineage required by
+  the central source contract. Legacy `bdfz-learning-evidence-v1` is emitted
+  no longer and remains only in the User Center historical adapter. Delivery identity
+  includes source contract/release, canonical unit, resource version and
+  source attempt. Annual scoring credit uses user, academic year, policy
+  version and canonical unit, so Web/Android retries and revisions do not
+  double-count.
+- During the paired User Center cutover, the same Queue consumer must accept
+  legal b530/v1 events for `2025-2026` and e310/v2 events for `2026-2027`, while
+  rejecting either contract in the other year. Old evidence and snapshots are
+  immutable; no synthetic migration or completion backfill is permitted.
+- Unknown release/version/mapping is a pending-mapping operational condition,
+  never a student zero or F. It may be replayed only through the central
+  idempotent helper after the mapping becomes active.
+- Android consumes the same formal resource inventory and User Center ledger;
+  no Android-specific denominator or scoring route exists. This change does
+  not alter the App repository or release pointer.
+
+Source verification before any paired release:
+
+```bash
+npm run check:learning-manifest
+npm run test:learning-manifest
+npm run test:evidence-contract
+npm run test:formative-mastery
+git diff --check
+```
+
+The central architecture authority is User Center
+`docs/LEARNING_EVIDENCE_AND_SCORING_ARCHITECTURE.md` together with workspace
+`runbooks/bdfz_learning_evidence_integration_standard.md` v2. This candidate
+adopts no new Cloudflare capability: the hot path stays Queue plus D1; no
+production Workflow dependency is added.
+
 ## 2026-08-12 User Center and native evidence boundary
 
 - Do not equate the 723 active vocabulary questions with formal evidence.

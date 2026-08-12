@@ -560,7 +560,10 @@ file as historical release evidence:
 7. 回滾：先運行 `./node_modules/.bin/wrangler pages deployment list --project-name yuwen-course` 確認目標；在 Cloudflare Pages deployment history 將上一個已驗證 production deployment 重新部署。當前 production 為 `46e3c87f-69a4-4fe4-99bd-9602ed8ffbba`（`https://46e3c87f.yuwen-course.pages.dev`）；立即回滾錨點為 `54117eae-2d7a-495a-b3b2-234855225cee`，回滾會恢復舊 `evaluation=self_report+a_plus_gate` 來源宣告和舊的 `delivered` 佇列標籤，因此只在整站故障時使用。更早的完整回滾仍有 `6686fe9e-2d14-4f40-9e3c-cb21c0d928de` 和 pre-loop `18aa0c62-5f37-4a0f-9bdf-a145fc7e2279`；任何程式碼回滾都保留 additive D1 表與歷史行。回滾後重跑第 2、3、5 條。
 8. 最後驗證人 / 日期：Codex / 2026-07-27 PDT。`release:check` 全通：作者 189/106/65/0 unsupported、字詞 134/134 課 1102 題、learning manifest 8/8、source-to-consumer contract 2/2、reading API 30/30、850-file artifact aggregate `4f5e79d1589b05f003ab5cc4545b096282211e54de631636b53677cc0287bc85`。Preview `40994e9e-4631-46b6-926e-975c09440769` 和 production `46e3c87f-69a4-4fe4-99bd-9602ed8ffbba` 的兩個任務資產雜湊與本地完全一致；custom domain registry 明示 `evaluation=self_report+none`，Worker 只把 Queue producer 成功標成 `enqueued`，health 通過，匿名 evaluation POST 為 401。Production D1 聚合讀回沒有既有 `evaluation` 行；沒有製造學生互動、改 D1、改 User Center、改共享 SDK 或改身份契約。
 
-YW A+ manifest 与 User Center evaluator 现已固定为同一来源版本；新 YW A+ 只接受 `bdfz-learning-evidence-v1`、当前注册表和发布资源键。匿名负向验证为 401。2026-07-27 先以明确标记的毕业测试映射验证后端源账本、Queue、中心消费者和幂等读回；随后用本机密钥文件中的 28 届学生账号一次通过希悦 Passport 与 User Center session，在同一浏览器打开 `lesson-1458`，完成 YW interaction / evaluation / outbox、Queue、User Center evidence / facets 与过程档案页面的全链路读回。事件仍为 `lessonOpened`／`scoring_role=none`／`eligibility_status=non_scoring`，不会改变 A—F 分数；正文、账号、密码、Cookie 和 token 均未进入运维记录。
+YW A+ manifest 与 User Center evaluator 现已固定为同一来源版本；2026–27
+新 YW 事件只接受 `bdfz-learning-evidence-event-v2`、当前注册表、精确发布
+lineage 和资源键；`bdfz-learning-evidence-v1` 仅由 User Center 的 2025–26
+历史兼容适配器读取。匿名负向验证为 401。2026-07-27 先以明确标记的毕业测试映射验证后端源账本、Queue、中心消费者和幂等读回；随后用本机密钥文件中的 28 届学生账号一次通过希悦 Passport 与 User Center session，在同一浏览器打开 `lesson-1458`，完成 YW interaction / evaluation / outbox、Queue、User Center evidence / facets 与过程档案页面的全链路读回。该历史事件为 `lessonOpened`／`scoring_role=none`／`eligibility_status=non_scoring`，不会改变 A—F 分数；正文、账号、密码、Cookie 和 token 均未进入运维记录。
 
 本地完整核查：
 
