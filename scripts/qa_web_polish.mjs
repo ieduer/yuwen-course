@@ -99,9 +99,18 @@ function startStaticServer() {
 
 function authStub() {
   return `
+    const qaSharedState = {
+      schemaVersion: "yw-shared-state/1",
+      siteKey: "yw",
+      ownerScope: "ywo_${"a".repeat(32)}",
+      state: { readingPosition: null, readerPreferences: {} }
+    };
     window.BdfzIdentity = {
       getSession: async () => ({ authenticated: true }),
-      api: async () => { throw new Error("shared-state intentionally unavailable in Web-only QA"); },
+      api: async (path) => {
+        if (path === "/api/yw/v1/state") return qaSharedState;
+        throw new Error("shared-state mutation intentionally unavailable in Web-only QA");
+      },
       mount: () => {}
     };
     const exposeLogin = () => { const node = document.querySelector("#auth-login"); if (node) node.hidden = false; };

@@ -112,6 +112,7 @@ const state = {
   vocabBankLoading: new Set(),
   vocabEligibility: null,
   vocabIndex: { activeItemIds: {} },
+  formalVocabResourceKeys: new Set(),
   firstReads: new Map(),
   studyGuideLessons: new Map(),
   lessonMedia: new Map(),
@@ -389,9 +390,13 @@ async function applyRemoteSharedState(
     : "";
   if (remoteReadingWasDeleted) removeScopedUiValue(LAST_LESSON_KEY, ownerScope);
   const localFallbackLessonId = remoteReadingWasDeleted ? "" : storedLessonId;
+  const currentLessonId = remoteReadingWasDeleted
+    && state.manifest?.lessons?.some((lesson) => lesson.id === state.current?.id)
+    ? state.current.id
+    : "";
   const lessonId = state.manifest?.lessons?.find(
     (lesson) => lesson.id === (
-      pendingLessonId || remoteLessonId || localFallbackLessonId
+      pendingLessonId || remoteLessonId || currentLessonId || localFallbackLessonId
     ),
   )?.id || defaultSharedLesson()?.id || "";
   if (!lessonId || !ownerStillCurrent()) return;
@@ -2249,7 +2254,15 @@ function renderVocabularyQuiz(lesson, progress, bank) {
   let current = questions.find((item) => item.id === quiz.cursorId) || null;
   if (!current) current = questions.find((item) => !quizItemState(quiz, item.id).correct) || null;
   const percent = Math.round(solved / questions.length * 100);
-  const header = `<div class="vocabulary-progress" aria-label="字詞題 ${solved} / ${questions.length}"><span></span><b>${solved} / ${questions.length}</b></div>`;
+  const formal = (current ? [current] : questions).every((item) =>
+    window.YwVocabProgress?.isFormalVocabularyQuestion?.(
+      state.formalVocabResourceKeys,
+      lesson.id,
+      item.id,
+    ) === true
+  );
+  const header = `<div class="vocabulary-progress" aria-label="字詞題 ${solved} / ${questions.length}"><span></span><b>${solved} / ${questions.length}</b></div>
+    <p class="vocabulary-evidence-mode">${formal ? "本課字詞結果同步至正式學習證據。" : "本課字詞保留為本機練習，不計入正式 A+ 題目。"}</p>`;
   if (!current) {
     const firstTry = questions.filter((item) => quizItemState(quiz, item.id).mastered).length;
     return `<div class="vocabulary-step vocab-quiz" style="--vocabulary-progress:${percent}%">${header}
@@ -3101,9 +3114,22 @@ function bindCheckStage() {
     itemHost.dataset.submitting = "1";
     const optionButtons = $$('[data-quiz-option]', itemHost);
     optionButtons.forEach((option) => { option.disabled = true; });
-    const result = await recordVocabAttempt(item.id, pick, lessonId);
+    const formal = window.YwVocabProgress?.isFormalVocabularyQuestion?.(
+      state.formalVocabResourceKeys,
+      lessonId,
+      item.id,
+    ) === true;
+    const result = formal
+      ? await recordVocabAttempt(item.id, pick, lessonId)
+      : { ok: true, localPractice: true };
     if (state.current?.id !== lessonId) return;
-    const entry = window.YwVocabProgress?.applyServerAttempt?.(previous, result, pick);
+    const entry = formal
+      ? window.YwVocabProgress?.applyServerAttempt?.(previous, result, pick)
+      : window.YwVocabProgress?.applyLocalPracticeAttempt?.(
+        previous,
+        pick === item.answerIndex,
+        pick,
+      );
     if (!entry) {
       itemHost.dataset.submitting = "0";
       optionButtons.forEach((option) => { option.disabled = false; });
@@ -3631,6 +3657,7 @@ async function init() {
       lessonMedia,
       vocabEligibility,
       vocabIndex,
+      learningManifest,
       studyGuideCatalog,
       wechatArchiveMap,
       previewScreenshots,
@@ -3644,6 +3671,7 @@ async function init() {
       fetchJson("data/lesson-media.json"),
       fetchJson("data/vocab-eligibility.json", { cache: "no-cache" }),
       fetchJson("data/vocab/index.json", { cache: "no-cache" }),
+      fetchJson("data/learning-manifest.json", { cache: "no-cache" }),
       fetchJson("data/study-guide-catalog.json", { cache: "no-cache" }),
       fetchJson("data/wechat-archive-map.json", { cache: "no-cache" }),
       fetchJson("data/preview-screenshots.json", { cache: "no-cache" }),
@@ -3655,6 +3683,7 @@ async function init() {
     if (
       vocabEligibility?.schemaVersion !== "yw-vocab-eligibility-v1"
       || vocabIndex?.schemaVersion !== "yw-vocab-index-v2"
+      || learningManifest?.schemaVersion !== 1
       || studyGuideCatalog?.schemaVersion !== "yw-study-guide-catalog-v1"
       || wechatArchiveMap?.schemaVersion !== "yw-wechat-archive-map-v1"
       || !Array.isArray(wechatArchiveMap?.entries)
@@ -3672,6 +3701,13 @@ async function init() {
     state.taxonomy = taxonomy;
     state.vocabEligibility = vocabEligibility;
     state.vocabIndex = vocabIndex;
+    state.formalVocabResourceKeys = window.YwVocabProgress.formalVocabularyResourceKeys(
+      learningManifest,
+    );
+    window.YwVocabProgress.validateVocabularyAuthority(
+      state.formalVocabResourceKeys,
+      state.vocabIndex.activeItemIds,
+    );
     state.studyGuideLessons = new Map((studyGuideCatalog.lessons || []).map((lesson) => [lesson.lessonId, lesson]));
     state.wechatArchiveBySource = new Map(wechatArchiveMap.entries.map((entry) => [resourceIdentity(entry.sourceUrl), entry]));
     state.previewScreenshotBySource = new Map(previewScreenshots.entries.map((entry) => [resourceIdentity(entry.sourceUrl), entry]));

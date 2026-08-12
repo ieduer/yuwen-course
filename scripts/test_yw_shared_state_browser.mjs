@@ -10,7 +10,9 @@ const SITE_ROOT = path.resolve(import.meta.dirname, "../site");
 const BRAVE = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser";
 const OWNER_A = `ywo_${"a".repeat(32)}`;
 const OWNER_B = `ywo_${"b".repeat(32)}`;
-const CONTENT_VERSION = "yw-3e77f0f7ffa5d042a6d06763";
+const CONTENT_VERSION = JSON.parse(
+  await readFile(path.join(SITE_ROOT, "app-content/latest-stable.json"), "utf8"),
+).contentVersion;
 const MIME = new Map([
   [".css", "text/css; charset=utf-8"],
   [".html", "text/html; charset=utf-8"],

@@ -4,6 +4,14 @@ Last reviewed: 2026-08-12 (America/Los_Angeles)
 
 ## 2026-08-12 User Center and native evidence boundary
 
+- Do not equate the 723 active vocabulary questions with formal evidence.
+  `site/data/learning-manifest.json` is the item-level authority: the current
+  graph contains 382 formal vocabulary resource keys and 341 additional
+  student-visible local-practice questions. The browser must keep all 723
+  visible, submit only an exact manifest match, fail closed if a formal key is
+  absent from the active vocabulary index, and label local practice as not
+  part of formal A+ evidence. Changing the 382-item formal subset is a source
+  policy change, not an App/UI synchronization fix.
 - Keep `recordLearningInteraction` as the only authority for YW correctness,
   attempt number, eligibility, scoring role and resource key. Native clients
   send raw answers only and reuse the same `/api/reading/*` handlers.

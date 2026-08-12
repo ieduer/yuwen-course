@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
 import { pathToFileURL } from "node:url";
@@ -87,4 +88,57 @@ test("an unavailable server result never mutates local mastery", () => {
     { ok: false, status: "mastered" },
     1,
   ), null);
+});
+
+test("local-only practice mirrors mastery without claiming formal evidence sync", () => {
+  const wrong = globalThis.YwVocabProgress.applyLocalPracticeAttempt({}, false, 0);
+  const firstCorrect = globalThis.YwVocabProgress.applyLocalPracticeAttempt(wrong, true, 2);
+  const mastered = globalThis.YwVocabProgress.applyLocalPracticeAttempt(firstCorrect, true, 2);
+  assert.deepEqual(
+    {
+      firstCorrect: firstCorrect.correct,
+      mastered: mastered.correct,
+      synced: mastered.synced,
+      formalEvidence: mastered.formalEvidence,
+    },
+    { firstCorrect: false, mastered: true, synced: false, formalEvidence: false },
+  );
+});
+
+test("authoritative manifest gates 382 formal questions while retaining all 723 in the UI", () => {
+  const dataRoot = path.resolve(import.meta.dirname, "../site/data");
+  const learningManifest = JSON.parse(fs.readFileSync(
+    path.join(dataRoot, "learning-manifest.json"),
+    "utf8",
+  ));
+  const vocabularyIndex = JSON.parse(fs.readFileSync(
+    path.join(dataRoot, "vocab/index.json"),
+    "utf8",
+  ));
+  const formalKeys = globalThis.YwVocabProgress.formalVocabularyResourceKeys(learningManifest);
+  const counts = globalThis.YwVocabProgress.validateVocabularyAuthority(
+    formalKeys,
+    vocabularyIndex.activeItemIds,
+  );
+  const active = Object.entries(vocabularyIndex.activeItemIds).flatMap(([lessonId, itemIds]) =>
+    itemIds.map((itemId) => ({ lessonId, itemId }))
+  );
+  const formal = active.filter(({ lessonId, itemId }) =>
+    globalThis.YwVocabProgress.isFormalVocabularyQuestion(formalKeys, lessonId, itemId)
+  );
+  assert.equal(active.length, 723);
+  assert.equal(formal.length, 382);
+  assert.equal(active.length - formal.length, 341);
+  assert.equal(formalKeys.size, formal.length);
+  assert.deepEqual(counts, { active: 723, formal: 382, localPractice: 341 });
+});
+
+test("a formal question absent from the active index fails closed", () => {
+  assert.throws(
+    () => globalThis.YwVocabProgress.validateVocabularyAuthority(
+      new Set(["effect:lesson-a:vocab:lesson-a:v02"]),
+      { "lesson-a": ["lesson-a:v01"] },
+    ),
+    /not active/,
+  );
 });

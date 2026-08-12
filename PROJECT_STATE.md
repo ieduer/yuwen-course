@@ -4,6 +4,12 @@ Last updated: 2026-08-12
 
 ## 2026-08-12 A+—F / App synchronization candidate
 
+- The 723 student-visible active vocabulary questions now have one explicit
+  authority split derived from `site/data/learning-manifest.json`: 382 exact
+  questions remain formal source-evidence items and 341 remain available as
+  local practice. Local-practice answers use the same mastery interaction but
+  never call the source endpoint or claim evidence sync. This preserves every
+  student question and the existing formal A+ denominator.
 - Candidate branch `codex/yw-a-f-evidence-20260812` adds an exact native
   bearer identity path and exposes the current YW A+ activation receipt beside
   the already-live formative health receipt. The source manifest and scoring
@@ -18,6 +24,9 @@ Last updated: 2026-08-12
   native flags, Worker version, Web deploy and native release all pass their
   own guarded gates. No D1 row or production traffic is changed by this source
   checkpoint.
+- The authority-split follow-up is source-only on
+  `codex/yw-vocab-authority-20260812`; it has not been deployed and changes no
+  D1 row, Queue message, User Center contract or App release pointer.
 
 Package: `0.2.1-evaluation-nonscoring`. The deployed Web carrier is commit
 `a97eba7589ed6afa7df30ba4f37f2241a22d90d0`, contained by current GitHub `main`.

@@ -2,6 +2,13 @@
 
 ## 2026-08-12 A+—F / Android candidate additions
 
+`npm run test:vocab-progress` must additionally derive, without a client-side
+book allowlist, 723 active questions = 382 formal manifest matches + 341 local
+practice questions. It must prove that local practice follows the same
+two-correct-after-error mastery interaction while retaining `synced=false` and
+`formalEvidence=false`, and that a formal resource absent from the active index
+fails closed.
+
 Run with Node 24.18.0 before the existing release gate:
 
 ```zsh
