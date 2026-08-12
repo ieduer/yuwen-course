@@ -138,9 +138,46 @@ test("evaluation reports synchronized only after successful evidence response", 
 
 test("local completion labels do not claim formative mastery", () => {
   assert.match(indexHtml, /本機步驟完成度/);
+  assert.match(indexHtml, /id="mastery-label"/);
   assert.doesNotMatch(indexHtml, /本課掌握度/);
   assert.doesNotMatch(source, /已掌握/);
   assert.match(source, /本機已存／尚未同步/);
+  assert.match(source, /本機試做 · 未記錄/);
+  assert.match(source, /不進入 User Center 的 A–F 評價/);
+});
+
+const interactionEvidenceDecisionSource = section(
+  "function interactionEvidenceDecision",
+  "async function submitInteraction",
+);
+const interactionEvidenceDecision = new Function(
+  `${interactionEvidenceDecisionSource}; return interactionEvidenceDecision;`,
+)();
+
+test("anonymous interaction keeps feedback but never claims completion", () => {
+  assert.deepEqual(interactionEvidenceDecision("anonymous", 98), {
+    accepted: true,
+    recorded: false,
+    completed: false,
+    evidenceStatus: "anonymous",
+  });
+});
+
+test("anonymous scope cannot advance any visible completion checkpoint", () => {
+  const checkpointSource = section("function checkpointDone", "function studyGuideProgress");
+  assert.match(checkpointSource, /!progressOwnerScope \|\| progressOwnerScope === ANONYMOUS_UI_SCOPE/);
+  assert.ok(
+    checkpointSource.indexOf("progressOwnerScope === ANONYMOUS_UI_SCOPE")
+      < checkpointSource.indexOf('if (key === "firstRead")'),
+  );
+});
+
+test("recorded interaction completes only after a passing score", () => {
+  assert.equal(interactionEvidenceDecision("enqueued", 98).completed, true);
+  assert.equal(interactionEvidenceDecision("pending", 59).completed, false);
+  assert.equal(interactionEvidenceDecision("already_recorded", 88).completed, true);
+  assert.equal(interactionEvidenceDecision("already_recorded_ineligible", 99).completed, false);
+  assert.equal(interactionEvidenceDecision("unknown", 100).accepted, false);
 });
 
 test("student lesson count and startup exclude hidden system records", () => {
@@ -174,6 +211,6 @@ test("student lesson count and startup exclude hidden system records", () => {
   assert.match(anonymousSource, /const hashLessonId = studentVisibleLessons\(\)\.find/);
   assert.match(anonymousSource, /const storedStudentLessonId = studentVisibleLessons\(\)\.find/);
   assert.match(anonymousSource, /const lessonId = hashLessonId \|\| storedStudentLessonId/);
-  assert.match(indexHtml, /assets\/app\.js\?v=20260811-deeplink-stability-v6/);
+  assert.match(indexHtml, /assets\/app\.js\?v=20260812-a-f-truth-v1/);
   assert.doesNotMatch(indexHtml, /assets\/app\.js\?v=20260811-(?:embed-scroll-layout-v4|student-units-v5)/);
 });

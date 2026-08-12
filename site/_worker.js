@@ -12,7 +12,12 @@ import {
   upsertClassicalFirstReadMark,
 } from "./classical-first-read-source.js";
 import { previewUrlHasPublicHostname } from "./preview-network-policy.js";
-import { reconcileReadingStudent } from "./reading-identity-source.js";
+import {
+  nativeAuthorizationDecision,
+  nativeReadingIdentityProjection,
+  readingCredentialDecision,
+  reconcileReadingStudent,
+} from "./reading-identity-source.js";
 import {
   authoritativeStudyGuideAssessment,
   deterministicStudyGuideAssessment,
@@ -169,9 +174,35 @@ function exactLearningDescriptorPart(actual, expected) {
     && Number(actual.itemCount) === Number(expected.itemCount);
 }
 
+function exactAPlusSourceReceipt(actual, expected) {
+  if (!actual || typeof actual !== "object" || Array.isArray(actual)) return false;
+  const keys = Object.keys(actual).sort();
+  if (keys.join("\n") !== [
+    "entrypointVersion",
+    "itemCount",
+    "loaderContractVersion",
+    "manifestDigest",
+    "manifestVersion",
+    "ok",
+    "schemaVersion",
+    "sourceSiteKey",
+    "status",
+  ].sort().join("\n")) return false;
+  return actual.ok === true
+    && actual.schemaVersion === 1
+    && actual.sourceSiteKey === "yw"
+    && actual.manifestVersion === expected.manifestVersion
+    && actual.manifestDigest === expected.manifestDigest
+    && Number(actual.itemCount) === Number(expected.itemCount)
+    && actual.loaderContractVersion === expected.loaderContractVersion
+    && actual.entrypointVersion === "bdfz-growth-source-rpc-v1"
+    && actual.status === "active";
+}
+
 async function handleLearningEvidenceHealth(env) {
   if (!env.USER_CENTER_EVIDENCE
     || typeof env.USER_CENTER_EVIDENCE.getLearningHealthReceipt !== "function"
+    || typeof env.USER_CENTER_EVIDENCE.getSourceReceipt !== "function"
     || !env.ASSETS
     || typeof env.ASSETS.fetch !== "function") {
     return json({ error: "learning evidence unavailable" }, { status: 503 });
@@ -209,6 +240,24 @@ async function handleLearningEvidenceHealth(env) {
       || formative?.registryVersion !== descriptor.registryVersion) {
       throw new Error("learning contract assets disagree");
     }
+    const compatibility = registry?.compatibilityContracts?.aPlusGate;
+    if (compatibility?.schemaVersion !== "yw-aplus-producer-compatibility-v1"
+      || !/^yw-[a-f0-9]{16}$/.test(String(compatibility?.sourceVersion || ""))
+      || !/^sha256:[a-f0-9]{64}$/.test(String(compatibility?.resourceKeyHash || ""))
+      || !Number.isInteger(Number(compatibility?.itemCount))
+      || Number(compatibility.itemCount) < 1
+      || compatibility?.reviewedProducerManifestVersion !== descriptor.formal.manifestVersion
+      || compatibility?.reviewedProducerManifestDigest !== descriptor.formal.manifestDigest
+      || Number(compatibility?.reviewedProducerItemCount) !== descriptor.formal.itemCount) {
+      throw new Error("A+ compatibility contract disagrees");
+    }
+    const aPlusDescriptor = {
+      sourceSiteKey: "yw",
+      manifestVersion: compatibility.sourceVersion,
+      manifestDigest: compatibility.resourceKeyHash,
+      itemCount: Number(compatibility.itemCount),
+      loaderContractVersion: "yuwen-queue-ledger-v1",
+    };
     const receipt = await env.USER_CENTER_EVIDENCE.getLearningHealthReceipt(descriptor);
     if (receipt?.ok !== true
       || receipt?.schemaVersion !== "bdfz-yw-learning-health-receipt-v1"
@@ -224,7 +273,11 @@ async function handleLearningEvidenceHealth(env) {
       || receipt?.affectsAPlus !== false) {
       return json({ error: "learning evidence contract mismatch" }, { status: 503 });
     }
-    return json({ ok: true, receipt });
+    const aPlusSourceReceipt = await env.USER_CENTER_EVIDENCE.getSourceReceipt(aPlusDescriptor);
+    if (!exactAPlusSourceReceipt(aPlusSourceReceipt, aPlusDescriptor)) {
+      return json({ error: "learning evidence contract mismatch" }, { status: 503 });
+    }
+    return json({ ok: true, receipt, aPlusSourceReceipt });
   } catch {
     return json({ error: "learning evidence unavailable" }, { status: 503 });
   }
@@ -1214,17 +1267,13 @@ function userCenterSessionCookieHeader(request) {
   return `${UC_SESSION_COOKIE}=${token}`;
 }
 
-async function getReadingStudent(request, env) {
-  // 測試縫（僅本地 wrangler pages dev 可設 READING_TEST_SLUG；生產項目嚴禁配置此變量）：
-  // 合成數據與真實數據走完全相同的寫入/聚合/讀取路徑，僅身分核驗來源不同。
-  if (env.READING_TEST_SLUG) {
-    const slug = String(env.READING_TEST_SLUG).slice(0, 80);
-    const db = env.READING_DB;
-    await db.prepare("INSERT OR IGNORE INTO students (uc_slug, display_name) VALUES (?, ?)").bind(slug, "合成測試學生").run();
-    const row = await db.prepare("SELECT id, uc_user_id, uc_slug, display_name, class_name FROM students WHERE uc_slug = ?").bind(slug).first();
-    return { id: row.id, ucUserId: row.uc_user_id || null, slug: row.uc_slug, displayName: row.display_name, className: row.class_name || "" };
-  }
-  const cookieHeader = userCenterSessionCookieHeader(request);
+function readingIdentityUnavailable() {
+  const error = new Error("reading identity unavailable");
+  error.code = "reading_identity_unavailable";
+  return error;
+}
+
+async function resolveWebReadingUser(cookieHeader, env) {
   if (!cookieHeader) return null;
   const token = cookieHeader.slice(UC_SESSION_COOKIE.length + 1);
   const cached = identityCache.get(token);
@@ -1258,7 +1307,39 @@ async function getReadingStudent(request, env) {
     if (identityCache.size > 500) identityCache.clear();
     identityCache.set(token, { user, exp: Date.now() + 5 * 60 * 1000 });
   }
-  return reconcileReadingStudent(env.READING_DB, user);
+  return user;
+}
+
+async function getReadingStudent(request, env) {
+  // 測試縫（僅本地 wrangler pages dev 可設 READING_TEST_SLUG；生產項目嚴禁配置此變量）：
+  // 合成數據與真實數據走完全相同的寫入/聚合/讀取路徑，僅身分核驗來源不同。
+  if (env.READING_TEST_SLUG) {
+    const slug = String(env.READING_TEST_SLUG).slice(0, 80);
+    const db = env.READING_DB;
+    await db.prepare("INSERT OR IGNORE INTO students (uc_slug, display_name) VALUES (?, ?)").bind(slug, "合成測試學生").run();
+    const row = await db.prepare("SELECT id, uc_user_id, uc_slug, display_name, class_name FROM students WHERE uc_slug = ?").bind(slug).first();
+    return { id: row.id, ucUserId: row.uc_user_id || null, slug: row.uc_slug, displayName: row.display_name, className: row.class_name || "" };
+  }
+  const cookieHeader = userCenterSessionCookieHeader(request);
+  const nativeAuthorization = nativeAuthorizationDecision(request.headers.get("authorization"));
+  if (nativeAuthorization.status === "unauthorized") return null;
+  const authorizationHeader = nativeAuthorization.authorizationHeader;
+  let nativeUser = null;
+  if (authorizationHeader) {
+    if (typeof env.USER_CENTER_EVIDENCE?.resolveNativeSession !== "function") {
+      throw readingIdentityUnavailable();
+    }
+    const projection = nativeReadingIdentityProjection(
+      await env.USER_CENTER_EVIDENCE.resolveNativeSession(authorizationHeader).catch(() => null),
+    );
+    if (projection.status === "unavailable") throw readingIdentityUnavailable();
+    if (projection.status === "unauthorized") return null;
+    nativeUser = projection.user;
+  }
+  const webUser = await resolveWebReadingUser(cookieHeader, env);
+  const decision = readingCredentialDecision(nativeUser, webUser);
+  if (decision.status !== "authenticated") return null;
+  return reconcileReadingStudent(env.READING_DB, decision.user);
 }
 
 const DIRECT_LEARNING_INTERACTIONS = new Set([
@@ -1275,7 +1356,13 @@ const DIRECT_LEARNING_INTERACTIONS = new Set([
 
 async function handleLearningInteraction(request, env, ctx) {
   if (!env.READING_DB) return readingError("learning evidence store not configured", 503);
-  const student = await getReadingStudent(request, env);
+  let student;
+  try {
+    student = await getReadingStudent(request, env);
+  } catch (error) {
+    if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
+    throw error;
+  }
   if (!student) return json({ ok: false, error: "not authenticated", authRequired: true }, { status: 401 });
   const payload = await request.json().catch(() => ({}));
   const lessonId = cleanText(payload.lessonId, 80);
@@ -1308,6 +1395,7 @@ async function handleLearningInteraction(request, env, ctx) {
       delivery: recorded.delivery || "already_recorded",
     });
   } catch (error) {
+    if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
     return readingError(error?.message || "interaction recording failed", 422);
@@ -2368,6 +2456,7 @@ async function handleReading(request, env, url) {
     if (vocabMatch && request.method === "GET") return await handleReadingVocabState(request, env, student, vocabMatch[1]);
     return readingError("not found", 404);
   } catch (error) {
+    if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
     if (["classical_first_read_required", "classical_annotated_reading_required"].includes(error?.code)) {

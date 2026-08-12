@@ -1,7 +1,67 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { readingIdentityDecision } from "../site/reading-identity-source.js";
+import {
+  nativeAuthorizationDecision,
+  nativeReadingIdentityProjection,
+  readingCredentialDecision,
+  readingIdentityDecision,
+} from "../site/reading-identity-source.js";
+
+test("native reading authorization is exact and malformed credentials fail closed", () => {
+  const token = `Bearer ywat_${"a".repeat(43)}`;
+  assert.deepEqual(nativeAuthorizationDecision(""), { status: "absent", authorizationHeader: "" });
+  assert.deepEqual(nativeAuthorizationDecision(token), { status: "authorized", authorizationHeader: token });
+  assert.deepEqual(nativeAuthorizationDecision(`bearer ${token.slice(7)}`), {
+    status: "unauthorized",
+    authorizationHeader: "",
+  });
+  assert.deepEqual(nativeAuthorizationDecision(`${token}x`), {
+    status: "unauthorized",
+    authorizationHeader: "",
+  });
+});
+
+test("native session projection reuses the exact existing auth schema", () => {
+  assert.deepEqual(nativeReadingIdentityProjection({
+    schemaVersion: "bdfz-native-auth/1",
+    status: 200,
+    authenticated: true,
+    sourceSiteKey: "yw",
+    clientId: "yuwen-native-android",
+    capability: "data",
+    userId: 42,
+    slug: "student-42",
+    displayName: "測試學生",
+  }), {
+    status: "authenticated",
+    user: { userId: 42, slug: "student-42", displayName: "測試學生" },
+  });
+  assert.deepEqual(nativeReadingIdentityProjection({
+    schemaVersion: "bdfz-native-auth/1",
+    status: 401,
+    authenticated: false,
+    sourceSiteKey: "yw",
+    clientId: "yuwen-native-android",
+    capability: "data",
+    code: "unauthorized",
+  }), { status: "unauthorized" });
+});
+
+test("dual Web and native credentials must identify the same User Center user", () => {
+  const nativeUser = { userId: 42, slug: "native", displayName: "Native" };
+  assert.deepEqual(readingCredentialDecision(nativeUser, null), {
+    status: "authenticated",
+    user: nativeUser,
+  });
+  assert.deepEqual(readingCredentialDecision(nativeUser, { userId: 42, slug: "web" }), {
+    status: "authenticated",
+    user: nativeUser,
+  });
+  assert.deepEqual(readingCredentialDecision(nativeUser, { userId: 41, slug: "web" }), {
+    status: "unauthorized",
+  });
+});
 
 test("stable User Center id owns identity even when the slug changes", () => {
   assert.deepEqual(

@@ -1,5 +1,25 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-12 A+—F / Android candidate additions
+
+Run with Node 24.18.0 before the existing release gate:
+
+```zsh
+npm run test:evidence-contract
+npm run test:reading-identity
+npm run test:native-content
+```
+
+The run must prove that A+ envelopes retain the existing v1/b530 source
+contract; formative v2 envelopes stay non-scoring; learning health returns an
+exact active A+ receipt; malformed/wrong-client/disabled native authority fails
+closed; dual credentials cannot cross users; native output contains 189
+student lessons while all 191 source reader documents remain byte-validated;
+and no browser or App field can claim score, correctness or eligibility.
+`npm run test:local-progress` must additionally prove that an anonymous
+passing score remains incomplete, the UI says `試做 · 未記錄`, and only a
+recognized authenticated evidence status can advance a checkpoint.
+
 ## 2026-08-11 Web reading release gate
 
 This current Web-only gate supersedes the 2026-08-09 pre-migration/503 release

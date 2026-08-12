@@ -10,6 +10,7 @@ import {
   learningEvidenceContract,
   recordLearningInteraction,
 } from "../site/learning-evidence-source.js";
+import worker from "../site/_worker.js";
 
 const ROOT = resolve(import.meta.dirname, "..");
 const registry = JSON.parse(readFileSync(resolve(ROOT, "site/data/interaction-definitions.json"), "utf8"));
@@ -174,16 +175,63 @@ test("current formal resources pin the separately reviewed frozen A+ contract", 
   assert.equal(compatibility.subsetDisposition, "all_current_a_plus_resources_verified_in_frozen_manifest");
 });
 
-test("YW exposes the named-entrypoint health receipt without browser evidence writes", () => {
+test("YW exposes compound health and the exact existing A+ source activation receipt", async () => {
   assert.match(workerSource, /\/api\/learning\/health/);
   assert.match(workerSource, /USER_CENTER_EVIDENCE\.getLearningHealthReceipt/);
+  assert.match(workerSource, /USER_CENTER_EVIDENCE\.getSourceReceipt/);
   assert.match(workerSource, /data\/learning-manifest\.json/);
   assert.match(workerSource, /data\/interaction-definitions\.json/);
   assert.match(workerSource, /data\/lesson-competency-manifest\.json/);
   assert.match(workerSource, /getLearningHealthReceipt\(descriptor\)/);
+  assert.match(workerSource, /getSourceReceipt\(aPlusDescriptor\)/);
   assert.match(workerSource, /activationScope !== "transport_and_formative_health_only"/);
   assert.match(workerSource, /runtimeScoringActivation !== false/);
   assert.match(workerSource, /affectsAPlus !== false/);
+
+  const calls = [];
+  const env = sourceEnvironment().env;
+  env.USER_CENTER_EVIDENCE = {
+    async getLearningHealthReceipt(descriptor) {
+      calls.push({ method: "health", descriptor });
+      return {
+        ok: true,
+        schemaVersion: "bdfz-yw-learning-health-receipt-v1",
+        status: "healthy",
+        sourceSiteKey: "yw",
+        formal: { ...descriptor.formal },
+        registryVersion: descriptor.registryVersion,
+        formative: { ...descriptor.formative },
+        activationScope: "transport_and_formative_health_only",
+        persistence: "none",
+        runtimeScoringActivation: false,
+        affectsGrowthScore: false,
+        affectsAPlus: false,
+      };
+    },
+    async getSourceReceipt(descriptor) {
+      calls.push({ method: "source", descriptor });
+      return {
+        ok: true,
+        schemaVersion: 1,
+        ...descriptor,
+        entrypointVersion: "bdfz-growth-source-rpc-v1",
+        status: "active",
+      };
+    },
+  };
+  const response = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/health"), env, {});
+  const body = await response.json();
+  assert.equal(response.status, 200);
+  assert.equal(body.receipt.status, "healthy");
+  assert.equal(body.aPlusSourceReceipt.status, "active");
+  assert.deepEqual(calls.map(({ method }) => method), ["health", "source"]);
+  assert.deepEqual(calls[1].descriptor, {
+    sourceSiteKey: "yw",
+    manifestVersion: registry.compatibilityContracts.aPlusGate.sourceVersion,
+    manifestDigest: registry.compatibilityContracts.aPlusGate.resourceKeyHash,
+    itemCount: registry.compatibilityContracts.aPlusGate.itemCount,
+    loaderContractVersion: "yuwen-queue-ledger-v1",
+  });
 });
 
 test("the Worker checks the per-user resource bound before AI work and vocabulary mutation", () => {

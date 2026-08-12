@@ -192,6 +192,18 @@ const sourceManifestFile = path.join(DATA, "manifest.json");
 const sourceManifestBytes = readFileSync(sourceManifestFile);
 const sourceManifest = JSON.parse(sourceManifestBytes.toString("utf8"));
 const activeIds = new Set(sourceManifest.lessons.map((lesson) => lesson.id));
+const learningManifest = canonicalize(sanitizeValue(json(path.join(DATA, "learning-manifest.json"))));
+const excludedLessonIds = new Set(
+  (learningManifest.exclusions || []).map((item) => String(item.lessonId || "")),
+);
+assert(
+  excludedLessonIds.size === (learningManifest.exclusions || []).length
+    && [...excludedLessonIds].every((lessonId) => activeIds.has(lessonId)),
+  "learning manifest exclusions must identify unique source lessons",
+);
+const nativeSourceLessons = sourceManifest.lessons.filter((lesson) => !excludedLessonIds.has(lesson.id));
+const nativeIds = new Set(nativeSourceLessons.map((lesson) => lesson.id));
+assert(nativeIds.size > 0, "native lesson projection is empty");
 assert(activeIds.size === sourceManifest.lessons.length, "source manifest has duplicate active lesson IDs");
 const blockLessonIds = sourceManifest.blocks.flatMap((block) => block.lessons.map((lesson) => lesson.id));
 assert(
@@ -202,7 +214,7 @@ assert(
   JSON.stringify([...new Set(blockLessonIds)].sort()) === JSON.stringify([...activeIds].sort()),
   "source manifest blocks and active lesson inventory differ",
 );
-const bookTitles = new Set(sourceManifest.lessons.map((lesson) => (
+const bookTitles = new Set(nativeSourceLessons.map((lesson) => (
   lesson.textbookBookTitle || lesson.blockTitle
 )).filter(Boolean));
 const readerIndexFile = path.join(DATA, "reader-documents", "index.json");
@@ -276,7 +288,7 @@ for (const meta of sourceManifest.lessons) {
       === JSON.stringify(posts.map((post) => String(post.id)).sort()),
     `${meta.id}: reader/source post inventory mismatch`,
   );
-  normalizedLessons.push(canonicalize({
+  const normalizedLesson = canonicalize({
     schemaVersion: "yw-native-lesson-v1",
     ...lesson,
     postCount: posts.length,
@@ -284,7 +296,8 @@ for (const meta of sourceManifest.lessons) {
     readerDocument,
     posts,
     textbook,
-  }));
+  });
+  if (nativeIds.has(meta.id)) normalizedLessons.push(normalizedLesson);
 }
 
 const actualTotals = normalizedLessons.reduce((totals, lesson) => {
@@ -346,6 +359,7 @@ for (const lessonId of vocabLessonIds) {
   assert(vocabSourceIndex.lessons[lessonId] === questions.length,
     `${lessonId}: vocab index question count mismatch`);
   allVocabLessons.push(canonicalize(bank));
+  if (!nativeIds.has(lessonId)) continue;
   if (questions.length === 0) continue;
   vocabInventoryItems += bank.inventory.length;
   for (const item of bank.inventory) {
@@ -382,7 +396,7 @@ assert(
 let approvedDecks = 0;
 let catalogedDecks = 0;
 const mutableApprovedMedia = [];
-const mediaLessons = mediaSource.lessons.map((item) => {
+const allMediaLessons = mediaSource.lessons.map((item) => {
   const reviewStatus = item.reviewStatus?.slideDeck || "cataloged";
   assert(activeIds.has(item.lessonId), `media catalog references inactive lesson: ${item.lessonId}`);
   assert(
@@ -444,6 +458,9 @@ const mediaLessons = mediaSource.lessons.map((item) => {
     },
   });
 });
+const mediaLessons = allMediaLessons.filter((item) => nativeIds.has(item.lessonId));
+approvedDecks = mediaLessons.filter((item) => item.reviewStatus === "approved").length;
+catalogedDecks = mediaLessons.filter((item) => item.reviewStatus === "cataloged").length;
 if (appDisposition !== "blocked") {
   assert(
     mutableApprovedMedia.length === 0,
@@ -492,13 +509,16 @@ const catalogBase = canonicalize({
     posts: actualTotals.posts,
     textbookPageRefs: actualTotals.textbookPageRefs,
   },
-  blocks: sourceManifest.blocks.map((block) => ({
+  blocks: sourceManifest.blocks.map((block) => {
+    const lessonIds = block.lessons.map((lesson) => lesson.id).filter((lessonId) => nativeIds.has(lessonId));
+    return {
     id: block.id,
     title: block.title,
-    lessonCount: block.lessons.length,
-    lessonIds: block.lessons.map((lesson) => lesson.id),
-  })),
-  lessons: sourceManifest.lessons.map((lesson) => ({
+    lessonCount: lessonIds.length,
+    lessonIds,
+  };
+  }),
+  lessons: nativeSourceLessons.map((lesson) => ({
     id: lesson.id,
     title: lesson.title,
     sourceTitle: lesson.sourceTitle,
@@ -517,7 +537,6 @@ const catalogBase = canonicalize({
   })),
 });
 
-const learningManifest = canonicalize(sanitizeValue(json(path.join(DATA, "learning-manifest.json"))));
 const interactionDefinitions = canonicalize(sanitizeValue(json(path.join(DATA, "interaction-definitions.json"))));
 const sourceRevision = execFileSync("git", ["rev-parse", "HEAD"], { cwd: ROOT, encoding: "utf8" }).trim();
 const dirtyRows = execFileSync("git", ["status", "--porcelain=v1", "--untracked-files=all"], {

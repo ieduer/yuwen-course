@@ -2,6 +2,27 @@
 
 `yw.bdfz.net` is the student-centred learning matrix for the five senior-high Chinese textbooks. It combines lesson text and resources, author and literary-taxonomy links, vocabulary mastery, reading evidence, and a D1-backed reading constellation.
 
+## 2026-08-12 User Center A+—F and native App candidate
+
+- YW remains the source owner. The browser and Android App submit only raw
+  interaction input plus a stable mutation ID; the Worker alone derives score,
+  correctness, eligibility, resource identity and A+ role before the existing
+  D1 outbox and `bdfz-learning-evidence-yw-v1` Queue deliver the minimized
+  envelope to User Center.
+- `/api/learning/health` now keeps the non-scoring formative health receipt and
+  also renews the existing exact YW A+ source-activation receipt. No formative
+  trace is promoted into A+ or a growth dimension.
+- The native bearer bridge accepts only the fixed `yuwen-native-android`
+  client with session and data capability. Dual Web/native credentials must
+  resolve to the same User Center ID. The App reuses `/api/reading/*`; it does
+  not maintain a second answer key or scoring engine.
+- Native content projects the 189 student-visible lessons while continuing to
+  validate all 191 Web source records. This candidate does not itself claim a
+  production deployment or an Android release.
+- Anonymous AI checks remain available as practice feedback, but they show
+  `試做 · 未記錄`, never advance a completion checkpoint and never enter A—F.
+  Only an authenticated source receipt may mark a step complete.
+
 ## 2026-08-11 Web reading release
 
 The current Web-only release provides 189 student-visible lesson units. The

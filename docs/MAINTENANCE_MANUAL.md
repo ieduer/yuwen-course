@@ -1,6 +1,25 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-08-11 (America/Los_Angeles)
+Last reviewed: 2026-08-12 (America/Los_Angeles)
+
+## 2026-08-12 User Center and native evidence boundary
+
+- Keep `recordLearningInteraction` as the only authority for YW correctness,
+  attempt number, eligibility, scoring role and resource key. Native clients
+  send raw answers only and reuse the same `/api/reading/*` handlers.
+- A native request is authorized only by the existing User Center
+  `bdfz-native-auth/1` projection for client `yuwen-native-android` with data
+  capability. A malformed bearer never falls back to a Web cookie, and two
+  simultaneous credentials must identify the same User Center user.
+- Compound learning health contains two deliberately separate receipts:
+  formative transport remains non-scoring, while `aPlusSourceReceipt` renews
+  the existing 1,156-item frozen YW A+ source descriptor. Never substitute one
+  for the other.
+- Queue delivery is at-least-once; stable mutation IDs and source event IDs are
+  the idempotency authority. `enqueued` is not consumer-delivery proof.
+- Anonymous interaction responses may display score and guidance, but must use
+  the explicit practice-only label and must not advance any local completion
+  percentage or A—F evidence. Unknown evidence statuses fail closed.
 
 ## 2026-08-11 Web reading finalization override
 

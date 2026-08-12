@@ -178,7 +178,10 @@ function decodePercentEscapes(value) {
 
 function deriveSourceCounts() {
   const sourceManifest = json(path.join(SITE_ROOT, "data", "manifest.json"));
-  const sourceLessons = sourceManifest.lessons.map((lesson) => (
+  const learningManifest = json(path.join(SITE_ROOT, "data", "learning-manifest.json"));
+  const excludedIds = new Set((learningManifest.exclusions || []).map((item) => item.lessonId));
+  const nativeManifestLessons = sourceManifest.lessons.filter((lesson) => !excludedIds.has(lesson.id));
+  const sourceLessons = nativeManifestLessons.map((lesson) => (
     json(path.join(SITE_ROOT, lesson.dataUrl))
   ));
   const readerIndex = json(path.join(SITE_ROOT, "data", "reader-documents", "index.json"));
@@ -188,7 +191,7 @@ function deriveSourceCounts() {
     sourceManifest.lessons.map((lesson) => lesson.id).sort(),
     "reader/source lesson inventory",
   );
-  const readerAnnotations = sourceManifest.lessons.reduce((count, lesson) => {
+  const readerAnnotations = nativeManifestLessons.reduce((count, lesson) => {
     const receipt = readerIndex.documents[lesson.id];
     const document = json(path.join(SITE_ROOT, "data", receipt.path));
     return count
@@ -229,7 +232,7 @@ function deriveSourceCounts() {
   });
   const vocabIndex = json(path.join(SITE_ROOT, "data", "vocab", "index.json"));
   const vocabIds = Object.keys(vocabIndex.lessons)
-    .filter((lessonId) => Number(vocabIndex.lessons[lessonId]) > 0);
+    .filter((lessonId) => Number(vocabIndex.lessons[lessonId]) > 0 && !excludedIds.has(lessonId));
   const vocabBanks = vocabIds.map((lessonId) => (
     json(path.join(SITE_ROOT, "data", "vocab", `${lessonId}.json`))
   ));
@@ -238,7 +241,8 @@ function deriveSourceCounts() {
     sum + bank.inventory.filter((item) => item.decision === "question").length
   ), 0);
   const media = json(path.join(SITE_ROOT, "data", "lesson-media.json"));
-  const approvedDecks = media.lessons.filter((lesson) => (
+  const nativeMedia = media.lessons.filter((lesson) => !excludedIds.has(lesson.lessonId));
+  const approvedDecks = nativeMedia.filter((lesson) => (
     lesson.reviewStatus?.slideDeck === "approved"
   )).length;
   const activeIds = new Set(sourceManifest.lessons.map((lesson) => lesson.id));
@@ -251,15 +255,15 @@ function deriveSourceCounts() {
     approvedSlideDecks: approvedDecks,
     blockedTextbookPageRefs: 0,
     blocks: sourceManifest.blocks.length,
-    books: new Set(sourceManifest.lessons.map((lesson) => (
+    books: new Set(nativeManifestLessons.map((lesson) => (
       lesson.textbookBookTitle || lesson.blockTitle
     )).filter(Boolean)).size,
-    catalogedDecks: media.lessons.length - approvedDecks,
+    catalogedDecks: nativeMedia.length - approvedDecks,
     compositeTombstones: lessonInventory.filter((lessonId) => !activeIds.has(lessonId)).length,
     forumImages: lessonTotals.forumImages,
     learningTasks: lessonTotals.learningTasks,
-    lessons: sourceManifest.lessons.length,
-    mediaCatalogLessons: media.lessons.length,
+    lessons: nativeManifestLessons.length,
+    mediaCatalogLessons: nativeMedia.length,
     postAttachments: lessonTotals.postAttachments,
     postImages: lessonTotals.postImages,
     postLinks: lessonTotals.postLinks,
@@ -617,6 +621,7 @@ test("full active content and native body counts match the Web source", () => {
 });
 
 test("shared reader projection assigns every post once and is byte-bound to Web", () => {
+  const sourceManifestLessonCount = json(path.join(SITE_ROOT, "data", "manifest.json")).lessons.length;
   const readerIndexFile = path.join(SITE_ROOT, "data", "reader-documents", "index.json");
   const readerIndexBytes = readFileSync(readerIndexFile);
   const readerIndex = JSON.parse(readerIndexBytes.toString("utf8"));
@@ -645,8 +650,8 @@ test("shared reader projection assigns every post once and is byte-bound to Web"
   assert.equal(new Set(roleAudit.decisions.map((decision) => (
     `${decision.lessonId}:${decision.postId}`
   ))).size, roleAudit.decisions.length);
-  assert.equal(curation.lessons.length, sourceCounts.lessons);
-  assert.equal(new Set(curation.lessons.map((lesson) => lesson.lessonId)).size, sourceCounts.lessons);
+  assert.equal(curation.lessons.length, sourceManifestLessonCount);
+  assert.equal(new Set(curation.lessons.map((lesson) => lesson.lessonId)).size, sourceManifestLessonCount);
   assert.equal(readerIndex.schemaVersion, "yw-reader-document-index-v1");
   assert.equal(readerIndex.roleAuditVersion, roleAudit.auditVersion);
   assert.equal(readerIndex.roleAuditSha256, sha256(roleAuditBytes));
@@ -660,12 +665,12 @@ test("shared reader projection assigns every post once and is byte-bound to Web"
     readerIndex.mediaReceiptLedger.sourceInventorySha256,
     mediaReceiptLedger.sourceInventorySha256,
   );
-  assert.equal(readerIndex.lessonCount, sourceCounts.lessons);
+  assert.equal(readerIndex.lessonCount, sourceManifestLessonCount);
   assert.equal(core.readerProjection.schemaVersion, readerIndex.schemaVersion);
   assert.equal(core.readerProjection.curationVersion, readerIndex.curationVersion);
   assert.equal(core.readerProjection.readerSemanticDigest, readerIndex.readerSemanticDigest);
   assert.equal(core.readerProjection.indexSha256, sha256(readerIndexBytes));
-  assert.equal(Object.keys(readerIndex.documents).length, sourceCounts.lessons);
+  assert.equal(Object.keys(readerIndex.documents).length, sourceManifestLessonCount);
 
   const allowedRoles = new Set([
     "primary",
@@ -880,7 +885,7 @@ test("shared reader projection assigns every post once and is byte-bound to Web"
   assert.equal(projectedAnnotations, 2932);
   assert.equal(annotationRefOccurrences, 2933);
   assert.equal(resourceLinkBlocks, expectedPrimaryEmbedLinks.size);
-  assert.equal(actionableMediaReferences, 167);
+  assert.equal(actionableMediaReferences, 166);
   assert.equal(provenanceMedia, sourceCounts.postImages);
   assert.equal(blockedHttpLinks, 11);
   assert.equal(sanitizedReaderDocuments.size, sourceCounts.lessons);

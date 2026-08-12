@@ -170,6 +170,7 @@ const els = {
   masteryPanel: $("#mastery-panel"),
   masterySpectrum: $("#mastery-spectrum"),
   masteryValue: $("#mastery-value"),
+  masteryLabel: $("#mastery-label"),
   readProgress: $("#read-progress-bar"),
   lessonChatTitle: $("#lesson-chat-title"),
   lessonChatFrame: $("#lesson-chat-frame"),
@@ -736,6 +737,7 @@ function trackFor(lesson = state.current) {
 }
 
 function checkpointDone(progress, key, lesson = state.current) {
+  if (!progressOwnerScope || progressOwnerScope === ANONYMOUS_UI_SCOPE) return false;
   if (key === "firstRead") {
     const session = state.firstReads.get(lesson?.id);
     return Boolean(session?.authMode === "authenticated" && session?.submitted);
@@ -2166,7 +2168,15 @@ async function ensureBlueprint(lesson) {
 function interactionResult(progress, key) {
   const result = progress[key]?.result;
   if (!result) return "";
-  return `<div class="interaction-result"><header><strong>${esc(result.verdict)}</strong><span>${esc(result.score)} / 100</span></header><p>${esc(result.strength)}</p><p><b>還差一步：</b>${esc(result.gap)}</p><p><b>追問：</b>${esc(result.nextQuestion)}</p></div>`;
+  const evidenceStatus = progress[key]?.evidenceStatus;
+  const evidenceLabel = evidenceStatus === "anonymous"
+    ? '<em class="interaction-evidence-status anonymous">試做回饋 · 未記錄</em>'
+    : evidenceStatus === "ineligible"
+      ? '<em class="interaction-evidence-status ineligible">已記錄 · 不計入本次完成</em>'
+      : evidenceStatus === "recorded"
+        ? '<em class="interaction-evidence-status recorded">已記錄到正式學習證據</em>'
+        : "";
+  return `<div class="interaction-result"><header><strong>${esc(result.verdict)}</strong><span>${esc(result.score)} / 100</span></header>${evidenceLabel}<p>${esc(result.strength)}</p><p><b>還差一步：</b>${esc(result.gap)}</p><p><b>追問：</b>${esc(result.nextQuestion)}</p></div>`;
 }
 
 function authorDialogue(lesson, body, result = "", action = "") {
@@ -2444,7 +2454,10 @@ function renderCheckStage(lesson) {
   const progress = lessonProgress();
   const blueprint = state.blueprints.get(blueprintKey(lesson)) || blueprintFallback(lesson);
   const track = trackFor(lesson);
-  els.checkStage.innerHTML = track.map(([key, label, _detail, weight], index) => {
+  const anonymousNotice = progressOwnerScope === ANONYMOUS_UI_SCOPE
+    ? `<aside class="anonymous-learning-notice" role="note"><strong>目前是試做模式</strong><span>你仍可取得核對分數與修改提示，但本次不記入完成度，也不進入 User Center 的 A–F 評價。</span><a href="${esc(userCenterLoginUrl())}" target="_blank" rel="noopener noreferrer">登入後正式學習</a></aside>`
+    : "";
+  els.checkStage.innerHTML = anonymousNotice + track.map(([key, label, _detail, weight], index) => {
     const locked = classicalRoundLocked(key, lesson, progress);
     return `
     <section class="check-round ${checkpointDone(progress, key) ? "complete" : ""} ${locked ? "locked" : ""}" data-round="${key}" ${locked ? "aria-disabled=\"true\"" : ""}>
@@ -2540,6 +2553,11 @@ function activateExpandedPreviews(root) {
 function renderMastery() {
   const progress = lessonProgress();
   const percent = progressPercent(progress);
+  if (els.masteryLabel) {
+    els.masteryLabel.textContent = progressOwnerScope === ANONYMOUS_UI_SCOPE
+      ? "本機試做 · 未記錄"
+      : "本機步驟完成度";
+  }
   els.masterySpectrum.style.setProperty("--mastery", `${percent}%`);
   els.masteryValue.textContent = percent;
   els.checkpointList.innerHTML = trackFor().map(([key, label], index) => `
@@ -2751,6 +2769,20 @@ function interactionInputLength(input) {
   return Object.values(input).join("").replace(/\s+/g, "").length;
 }
 
+function interactionEvidenceDecision(status, score) {
+  const normalized = String(status || "").trim();
+  if (normalized === "anonymous") {
+    return { accepted: true, recorded: false, completed: false, evidenceStatus: "anonymous" };
+  }
+  if (normalized === "already_recorded_ineligible" || normalized.endsWith("_ineligible")) {
+    return { accepted: true, recorded: true, completed: false, evidenceStatus: "ineligible" };
+  }
+  if (["recorded", "enqueued", "pending", "local_only", "already_recorded", "delivered"].includes(normalized)) {
+    return { accepted: true, recorded: true, completed: Number(score) >= 60, evidenceStatus: "recorded" };
+  }
+  return { accepted: false, recorded: false, completed: false, evidenceStatus: "unavailable" };
+}
+
 async function submitInteraction(key, button = null, { silent = false } = {}) {
   const input = interactionInput(key);
   const compactLength = interactionInputLength(input);
@@ -2790,10 +2822,31 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     const result = payload.assessment || {};
     const progressKey = key === "contextWords" ? "context" : key;
     const score = Number(result.score || 0);
-    lessonProgress()[progressKey] = { ...lessonProgress()[progressKey], ...input, done: score >= 60, score, result };
-    if (key === "wordCreation" && !lessonVocabulary(state.current).length) lessonProgress().vocabulary = { ...(lessonProgress().vocabulary || {}), done: true, reviewed: [] };
+    const evidence = interactionEvidenceDecision(payload.evidence?.status, score);
+    if (!evidence.accepted) throw new Error("學習證據回執無效，未計入完成度");
+    lessonProgress()[progressKey] = {
+      ...lessonProgress()[progressKey],
+      ...input,
+      done: evidence.completed,
+      score,
+      result,
+      evidenceStatus: evidence.evidenceStatus,
+    };
+    if (key === "wordCreation" && !lessonVocabulary(state.current).length) {
+      lessonProgress().vocabulary = {
+        ...(lessonProgress().vocabulary || {}),
+        done: evidence.completed,
+        reviewed: [],
+        evidenceStatus: evidence.evidenceStatus,
+      };
+    }
     if (key === "contextWords") void saveReadingSubmission(input, result);
-    if (!silent) toast(`${trackFor().find((item) => item[0] === progressKey)?.[1] || "互動"} · ${result.score || 0} 分`);
+    if (!silent) {
+      const label = trackFor().find((item) => item[0] === progressKey)?.[1] || "互動";
+      if (evidence.evidenceStatus === "anonymous") toast(`${score} 分 · 未登入，本次未記錄`);
+      else if (evidence.evidenceStatus === "ineligible") toast(`${label} · ${score} 分，已記錄但不計入本次完成`);
+      else toast(`${label} · ${score} 分，已記錄`);
+    }
     syncProgress({ event: true });
     renderCheckStage(state.current);
   } catch (error) {

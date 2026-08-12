@@ -1,6 +1,23 @@
 # Project State
 
-Last updated: 2026-08-11
+Last updated: 2026-08-12
+
+## 2026-08-12 A+—F / App synchronization candidate
+
+- Candidate branch `codex/yw-a-f-evidence-20260812` adds an exact native
+  bearer identity path and exposes the current YW A+ activation receipt beside
+  the already-live formative health receipt. The source manifest and scoring
+  policy are unchanged; eligibility is still computed on the server.
+- Android content generation now emits exactly 189 student-visible lessons and
+  validates the two hidden Web records without bundling them. Candidate semantic
+  digest is `sha256:82a4f9f2b5da4d1df4814db301c40a079a2ddcff03c3ac939a8ce4f9801199b3`.
+- Anonymous interaction scores are feedback-only: the UI labels them unrecorded
+  and all visible completion checkpoints remain false until authenticated
+  source evidence is accepted.
+- Production remains the 2026-08-11 deployment below until the User Center
+  native flags, Worker version, Web deploy and native release all pass their
+  own guarded gates. No D1 row or production traffic is changed by this source
+  checkpoint.
 
 Package: `0.2.1-evaluation-nonscoring`. The deployed Web carrier is commit
 `a97eba7589ed6afa7df30ba4f37f2241a22d90d0`, contained by current GitHub `main`.

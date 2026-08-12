@@ -13,6 +13,71 @@ function identityConflict(message = "verified User Center identity conflicts wit
   return error;
 }
 
+function exactKeys(value, keys) {
+  return value
+    && typeof value === "object"
+    && !Array.isArray(value)
+    && Object.keys(value).sort().join("\n") === [...keys].sort().join("\n");
+}
+
+export function nativeReadingIdentityProjection(value) {
+  const baseKeys = [
+    "schemaVersion",
+    "status",
+    "authenticated",
+    "sourceSiteKey",
+    "clientId",
+    "capability",
+  ];
+  if (value?.authenticated === false
+    && exactKeys(value, [...baseKeys, "code"])
+    && value.schemaVersion === "bdfz-native-auth/1"
+    && value.sourceSiteKey === "yw"
+    && value.clientId === "yuwen-native-android"
+    && value.capability === "data"
+    && ((value.status === 401 && value.code === "unauthorized")
+      || (value.status === 503 && value.code === "unavailable"))) {
+    return { status: value.code };
+  }
+  if (value?.authenticated === true
+    && exactKeys(value, [...baseKeys, "userId", "slug", "displayName"])
+    && value.schemaVersion === "bdfz-native-auth/1"
+    && value.status === 200
+    && value.sourceSiteKey === "yw"
+    && value.clientId === "yuwen-native-android"
+    && value.capability === "data"
+    && validUserId(value.userId)
+    && cleanIdentityText(value.slug)
+    && !/[\u0000-\u001f\u007f]/.test(String(value.slug || ""))
+    && !/[\u0000-\u001f\u007f]/.test(String(value.displayName || ""))) {
+    return {
+      status: "authenticated",
+      user: {
+        userId: Number(value.userId),
+        slug: cleanIdentityText(value.slug),
+        displayName: cleanIdentityText(value.displayName),
+      },
+    };
+  }
+  return { status: "unavailable" };
+}
+
+export function nativeAuthorizationDecision(value) {
+  const authorizationHeader = String(value || "");
+  if (!authorizationHeader) return { status: "absent", authorizationHeader: "" };
+  return /^Bearer ywat_[A-Za-z0-9_-]{43}$/.test(authorizationHeader)
+    ? { status: "authorized", authorizationHeader }
+    : { status: "unauthorized", authorizationHeader: "" };
+}
+
+export function readingCredentialDecision(nativeUser, webUser) {
+  if (!nativeUser) return webUser ? { status: "authenticated", user: webUser } : { status: "unauthorized" };
+  if (!webUser) return { status: "authenticated", user: nativeUser };
+  return Number(nativeUser.userId) === Number(webUser.userId)
+    ? { status: "authenticated", user: nativeUser }
+    : { status: "unauthorized" };
+}
+
 export function readingIdentityDecision(exactRow, slugRow, user) {
   const userId = validUserId(user?.userId);
   const slug = cleanIdentityText(user?.slug);
