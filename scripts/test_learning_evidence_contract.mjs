@@ -326,6 +326,18 @@ test("YW evaluation self-report remains a v2 non-scoring event", async () => {
   assert.doesNotMatch(enqueueReceipt?.sql || "", /delivery_status = 'delivered'/);
 });
 
+test("normal interaction route rejects client-forged occurrence time or academic year", () => {
+  const workerSource = readFileSync(new URL("../site/_worker.js", import.meta.url), "utf8");
+  const handler = workerSource.slice(
+    workerSource.indexOf("async function handleLearningInteraction"),
+    workerSource.indexOf("async function handleReadingStudyGuideAttempt"),
+  );
+  assert.match(handler, /Object\.hasOwn\(payload, "occurredAt"\)/);
+  assert.match(handler, /Object\.hasOwn\(payload, "academicYear"\)/);
+  assert.match(handler, /server time authority required/);
+  assert.match(handler, /422/);
+});
+
 test("study-guide and initial-reading events bind to the current semantic formative manifest", async () => {
   const studyItem = formativeManifest.lessons
     .find((entry) => entry.lessonId === vocabLesson.id)

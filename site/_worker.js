@@ -1407,6 +1407,9 @@ async function handleLearningInteraction(request, env, ctx) {
   }
   if (!student) return json({ ok: false, error: "not authenticated", authRequired: true }, { status: 401 });
   const payload = await request.json().catch(() => ({}));
+  if (Object.hasOwn(payload, "occurredAt") || Object.hasOwn(payload, "academicYear")) {
+    return readingError("server time authority required", 422);
+  }
   const lessonId = cleanText(payload.lessonId, 80);
   const interactionKey = cleanText(payload.interactionKey, 40);
   if (!/^lesson-[\w-]{1,60}$/.test(lessonId) || !DIRECT_LEARNING_INTERACTIONS.has(interactionKey)) {

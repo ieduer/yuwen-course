@@ -360,3 +360,10 @@ authorized User Center release. Only after the
 compound health receipt is live may the task back up/apply D1, deploy a Pages
 preview/production artifact, perform authenticated mutation/replay/readback and
 hand the exact Web receipt to the App follow-up task.
+- Opening-before-school transport verification does not falsify the academic
+  year. From Beijing time 2026-08-12 00:00 until (but excluding) 2026-09-01
+  00:00, User Center may accept only the exact server-timed `lessonOpened`
+  shape with `lessonPhase=release_canary`, `trace / none / non_scoring` and all
+  numeric results null. It is audit-only and can create no credit, snapshot,
+  grade or F; delayed replay after the boundary is quarantined. The normal YW
+  route explicitly rejects client-supplied `occurredAt` or `academicYear`.

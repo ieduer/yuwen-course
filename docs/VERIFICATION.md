@@ -576,3 +576,10 @@ npx wrangler pages dev site --port 8799
 # 另一个终端：
 BASE_URL=http://127.0.0.1:8799 npm run verify:ui
 ```
+Opening-before-school Queue acceptance must use the exact bounded transport
+canary in the current User Center authority. The Web request remains the normal
+authenticated `/api/learning/interactions` route; top-level `occurredAt` and
+`academicYear` are rejected with 422. The accepted event must be the real
+2025–26 `lessonOpened` audit shape, while D1 readback proves one accepted
+delivery/evidence, an idempotent duplicate, and zero credit/snapshot/F delta.
+At Beijing 2026-09-01 00:00 the exception expires, including delayed replay.

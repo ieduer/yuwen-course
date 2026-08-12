@@ -788,3 +788,11 @@ Every material release updates:
 - this manual when architecture, config, dependencies, deploy or recovery changes;
 - `/Users/ylsuen/CF/reports/cloudflare_business_audit_2026-05-23.md` and its association index when ownership/resource relationships change;
 - `/Users/ylsuen/CF/reports/agent_action_log.jsonl` with change, verify, and closeout rows.
+- A bounded pre-activation transport canary is the only exception to the
+  scoring-year admission rule. It uses the normal authenticated interactions
+  route and real server time, accepts only `lessonOpened` with
+  `lessonPhase=release_canary`, `trace / none / non_scoring` and null numeric
+  results, and is valid only from `2026-08-11T16:00:00.000Z` through
+  `2026-08-31T15:59:59.999Z`. It must produce zero credit, score-snapshot and F
+  deltas. Never accept client-provided occurrence time or academic year, and
+  never extend or replay this window after Beijing 2026-09-01 00:00.
