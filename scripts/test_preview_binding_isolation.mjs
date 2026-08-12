@@ -16,7 +16,7 @@ test("Pages preview cannot inherit production student-data bindings", () => {
   assert.doesNotMatch(preview, /^\[\[queues\.producers\]\]/m);
   assert.doesNotMatch(preview, /99c541e7-e70b-4584-b939-7e88a6dd68c5/);
   assert.doesNotMatch(preview, /bdfz-user-center/);
-  assert.doesNotMatch(preview, /bdfz-learning-evidence-yw-v1/);
+  assert.doesNotMatch(preview, /bdfz-learning-evidence-yw-v[12]/);
 });
 
 test("Pages production keeps the exact reviewed bindings", () => {
@@ -27,5 +27,6 @@ test("Pages production keeps the exact reviewed bindings", () => {
   assert.match(production, /service = "bdfz-user-center"/);
   assert.match(production, /entrypoint = "YuwenEvidenceIdentity"/);
   assert.match(production, /\[\[env\.production\.queues\.producers\]\]/);
-  assert.match(production, /queue = "bdfz-learning-evidence-yw-v1"/);
+  assert.match(production, /queue = "bdfz-learning-evidence-yw-v2"/);
+  assert.doesNotMatch(production, /queue = "bdfz-learning-evidence-yw-v1"/);
 });

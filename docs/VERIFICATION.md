@@ -543,7 +543,7 @@ file as historical release evidence:
   and 1280x900. It remained `non_scoring` and created no pending outbox row;
 - the browser writes only semantic interactions to the source endpoint.
   Source-side D1 records raw interactions and server results, then enqueues a
-  privacy-minimized envelope through `bdfz-learning-evidence-yw-v1`.
+  privacy-minimized envelope through `bdfz-learning-evidence-yw-v2`.
   The old browser-to-User-Center progress/event wording in item 3 below is
   superseded and must not be reintroduced.
 - `evaluation` is an explicitly non-scoring `self_report`; it remains visible

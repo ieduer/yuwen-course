@@ -27,9 +27,10 @@ never report a grade, weight, points, band or source cap.
   source attempt. Annual scoring credit uses user, academic year, policy
   version and canonical unit, so Web/Android retries and revisions do not
   double-count.
-- During the paired User Center cutover, the same Queue consumer must accept
-  legal b530/v1 events for `2025-2026` and e310/v2 events for `2026-2027`, while
-  rejecting either contract in the other year. Old evidence and snapshots are
+- During the paired User Center cutover, the isolated `yw-v2` consumer accepts
+  only e310/v2 events for `2026-2027`; the existing `yw-v1` consumer remains
+  attached only for legal historical backlog replay. Neither queue may accept
+  the other contract or academic year. Old evidence and snapshots are
   immutable; no synthetic migration or completion backfill is permitted.
 - Unknown release/version/mapping is a pending-mapping operational condition,
   never a student zero or F. It may be replayed only through the central
@@ -493,7 +494,7 @@ Source-owned components:
 - named identity binding `USER_CENTER_EVIDENCE` →
   `bdfz-user-center#YuwenEvidenceIdentity`;
 - dedicated producer `LEARNING_EVIDENCE_QUEUE` →
-  `bdfz-learning-evidence-yw-v1`.
+  `bdfz-learning-evidence-yw-v2`.
 
 The browser may submit a lesson/resource key, interaction key, selected option
 or raw input and client mutation id. It may not submit User Center ID, trusted
@@ -571,7 +572,7 @@ Non-regenerable data: D1 reading submissions, version history, vocabulary attemp
 Pages preview is deliberately data-isolated. Top-level `wrangler.toml` binds
 only `yuwen-reading-db-preview`; `env.production` alone binds the production
 D1, `bdfz-user-center#YuwenEvidenceIdentity`, and
-`bdfz-learning-evidence-yw-v1`. Preview therefore cannot authenticate or emit
+`bdfz-learning-evidence-yw-v2`. Preview therefore cannot authenticate or emit
 student evidence and must return 401/503 on those routes. On 2026-08-09 all 12
 preview deployments created before this split were superseded and deleted.
 Ten deleted hash hosts return 404. Two deleted hosts whose Cloudflare edge

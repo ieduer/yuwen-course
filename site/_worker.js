@@ -2451,7 +2451,7 @@ async function handleReadingHealth(env) {
     ok: true,
     schemaVersion: "reading-schema-v4",
     rulesVersion: "constellation-rules-v1",
-    evidenceContractVersion: "bdfz-learning-evidence-v1",
+    evidenceContractVersion: "bdfz-learning-evidence-event-v2",
   };
   if (env.READING_TEST_SLUG) {
     const [students, submissions, nodes, interactions, pending] = await Promise.all([

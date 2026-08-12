@@ -21,4 +21,4 @@ entrypoint = "YuwenEvidenceIdentity"
 
 [[env.production.queues.producers]]
 binding = "LEARNING_EVIDENCE_QUEUE"
-queue = "bdfz-learning-evidence-yw-v1"
+queue = "bdfz-learning-evidence-yw-v2"

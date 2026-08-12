@@ -7,7 +7,7 @@
 - YW remains the source owner. The browser and Android App submit only raw
   interaction input plus a stable mutation ID; the Worker alone derives score,
   correctness, eligibility, resource identity and A+ role before the existing
-  D1 outbox and `bdfz-learning-evidence-yw-v1` Queue deliver the minimized
+  D1 outbox and isolated `bdfz-learning-evidence-yw-v2` Queue deliver the minimized
   envelope to User Center.
 - `/api/learning/health` now keeps the non-scoring formative health receipt and
   also renews the existing exact YW A+ source-activation receipt. No formative
@@ -159,7 +159,8 @@ Aggregate SHA-256:     acb2daaadc5cfe358f6ccbc94798a68be5812ab31519f867c02f75be9
 - D1: `yuwen-reading-db`, binding `READING_DB`
 - Stable User Center site key: `yw`
 - Learning evidence: source-owned raw ledger + dedicated Queue
-  `bdfz-learning-evidence-yw-v1`
+  `bdfz-learning-evidence-yw-v2` (`yw-v1` remains a User Center-only
+  historical backlog consumer)
 
 The lesson `evaluation` interaction is a recorded `self_report` with
 `scoringRole=none`: it is visible in the process dossier but never affects a
