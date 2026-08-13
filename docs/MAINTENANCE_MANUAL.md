@@ -740,25 +740,32 @@ Verify on the preview URL:
 
 ### 5.5 Production
 
-For the current Web-only release, keep the App pointer unchanged. From a fully
-committed tree with empty `git status --porcelain`, build and check the
-`formal-stable` `.release/site` tree and its artifact manifest, then deploy that
-exact staged directory. Do not deploy raw `site/` or a `preview-web-only`
-marker.
+For the current foundation release, keep the App pointer disposition explicit.
+From a fully committed tree with empty `git status --porcelain`, build and check
+the `formal-stable` `.release/site` tree and its artifact manifest. This
+checkout must stop there: `package.json` has no production deploy or rollback
+entrypoint. The separately reviewed external UC+YW executor is the only path
+that may consume that exact staged artifact and mutate Pages, D1, Queues or
+traffic. Do not deploy raw `site/` or a `preview-web-only` marker.
+
+The foundation artifact must preserve the current production and Android
+pointer byte-for-byte: SHA-256
+`a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`,
+content version `yw-3e77f0f7ffa5d042a6d06763`. The executor reads it before
+and after the Pages transaction. The prior `yw-82a4...` candidate receipt is
+stale relative to current native inputs and is not a release authority. Do not
+move the pointer until a later clean native-content build, public immutable
+object readback, App staged/active checks and physical-device acceptance pass.
 
 The paired Web/App procedure below applies only when App follow-up resumes:
-publish immutable content objects before moving the App pointer, then deploy
-the exact checksum-fixed Web artifact.
+publish immutable content objects before moving the App pointer, then hand the
+exact checksum-fixed Web artifact to the external executor for deployment.
 
 ```zsh
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:release-site
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:release-site
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:artifact-manifest
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:artifact-manifest
-bash /Users/ylsuen/CF/scripts/git-deploy-gate.sh
-PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
-  ./node_modules/.bin/wrangler pages deploy .release/site \
-  --project-name yuwen-course --branch main
 ```
 
 Record Git commit/tag, staged-file set, artifact checksum manifest, Pages deployment ID/URL, D1 migration/export state, previous verified deployment, and exact live verification result. The displayed Pages commit hash is not accepted as source proof for a direct upload.

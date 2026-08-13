@@ -1,6 +1,31 @@
 # Project State
 
-Last updated: 2026-08-12
+Last updated: 2026-08-13
+
+## 2026-08-13 external-executor release boundary
+
+- Checkout production and rollback entrypoints are disabled. `package.json`
+  deliberately exposes no `deploy` or `predeploy` script; local commands may
+  build and verify immutable artifacts only.
+- The first production wave is bounded to User Center plus YW. It may run only
+  through the independently reviewed external executor after exact commits,
+  fresh D1 backups, Queue topology, rollback anchors and live preflight pass.
+  This does not claim fleet completion: the remaining source adapters stay
+  withheld until their own versioned contracts and authenticated acceptance
+  are verified.
+- The foundation artifact deliberately preserves the live/Android pointer
+  `yw-3e77f0f7ffa5d042a6d06763`, byte SHA-256
+  `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
+  The stale `yw-82a4...` receipt is not a release authority; current native
+  inputs must be regenerated and pass public readback plus physical-device
+  acceptance in a later Web/App transaction before any pointer move.
+- No Pages deployment, Queue/D1 write, traffic change or rollback was performed
+  by this source update.
+- The exact formal foundation artifact contains 1,223 files / 164,349,103
+  bytes with aggregate SHA-256
+  `6107f4e3863c83aa7860af906f413f3faf5d8120e2240c2d89354cce2fb22a67`;
+  its tracked manifest byte SHA-256 is
+  `987522a5c70db5c370d2a2b4fa77662ef1f39b432328ed3144c701050ad2f163`.
 
 ## 2026-08-12 e310/v2 User Center source-contract candidate
 

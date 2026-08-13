@@ -117,15 +117,12 @@ Run the source, content, reader-media, learning-manifest, evidence-contract,
 reading, release-site, artifact, browser, API/auth, D1, dependency, Pulse, and
 Web/App receipt checks in `docs/VERIFICATION.md`.
 
-Production deployment is authorized only by an explicit Pages/D1/content task:
-
-```bash
-npm run deploy
-```
-
-The deploy command runs the formal release check and uses `.release/site`.
-Documentation-only changes do not authorize a deploy, D1 migration, Queue
-write, App pointer move, or native release.
+Production mutation is disabled in this checkout. `package.json` intentionally
+contains no `deploy` or `predeploy` script. Keep `release:check` and the artifact
+builders as source-verification inputs, but Pages deployment, D1 migration,
+Queue mutation, traffic change and rollback may run only through the separately
+reviewed external UC+YW executor. Documentation-only changes do not authorize
+that executor, an App pointer move, or a native release.
 
 ## Dependencies and ownership boundaries
 

@@ -29,6 +29,7 @@ const OUTPUT_ROOT = mkdtempSync(path.join(os.tmpdir(), "yw-native-content-tests-
 const MAX_CORE_BYTES = 25 * 1024 * 1024;
 const MAX_PAGES_FILES = 20_000;
 const RIGHTS_PROVENANCE = "user-authorized-for-bdfz-yw-app-2026-07-29";
+const FOUNDATION_WAVE_APP_POINTER_SHA256 = "a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7";
 const SENSITIVE_QUERY_KEY = /(^|[_-])(access|api|auth|authorization|cookie|credential|jwt|key|password|refresh|secret|session|sig|signature|token)([_-]|$)|^(chksm|continue|dsh|followup|ifkv|osid|sn|state)$/i;
 const FORBIDDEN_AUTH_QUERY = /[?&](?:continue|dsh|followup|ifkv|osid)=/i;
 const PRIVATE_NOTEBOOK_PATH = /notebooklm\.google\.com\/notebook\/[^"'\\/\s?#]+/i;
@@ -1330,7 +1331,7 @@ test("native content routes fail closed instead of serving the SPA fallback", ()
   );
 });
 
-test("formal deploy gates cannot bypass stable sync or staging", () => {
+test("formal artifact gates cannot restore checkout production entrypoints", () => {
   const missingOutput = mkdtempSync(path.join(os.tmpdir(), "yw-native-missing-stable-"));
   try {
     let failure;
@@ -1359,6 +1360,11 @@ test("formal deploy gates cannot bypass stable sync or staging", () => {
   assert.match(packageJson.scripts["prepare:preview-artifact"], /build:release-site:preview/);
   assert.match(packageJson.scripts["prepare:preview-artifact"], /check:release-site:preview/);
   assert.match(packageJson.scripts["precontent:check"], /test:release-site/);
-  assert.match(packageJson.scripts.deploy, /pages deploy \.release\/site/);
-  assert.doesNotMatch(packageJson.scripts.deploy, /pages deploy site(?:\s|$)/);
+  assert.equal(packageJson.scripts.deploy, undefined);
+  assert.equal(packageJson.scripts.predeploy, undefined);
+  assert.equal(
+    sha256(readFileSync(path.join(SITE_ROOT, "app-content", "latest-stable.json"))),
+    FOUNDATION_WAVE_APP_POINTER_SHA256,
+    "foundation wave must preserve the live and Android-compatible App pointer",
+  );
 });
