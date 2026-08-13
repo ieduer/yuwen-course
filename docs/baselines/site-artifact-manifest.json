@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1223,
-  "totalBytes": 164349103,
-  "aggregateSha256": "6107f4e3863c83aa7860af906f413f3faf5d8120e2240c2d89354cce2fb22a67",
+  "totalBytes": 164367668,
+  "aggregateSha256": "947f3e297f5031a18fbefd0d63b2e955a7ffde5dbd76e93b6170332d6f66c278",
   "files": [
     {
       "path": "_headers",
@@ -12,13 +12,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 110172,
-      "sha256": "7b9adb0c567949d88b5f16cfe07c05e9c4149cfe0d95def968240ef67cc7914f"
+      "bytes": 110224,
+      "sha256": "052ac27f759185e2c8c198631798b369afa5f5ad224a6c3b9acb5e9646a3700e"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "41b7a7d0592a8ea0c408afb568ed0fc6c35c8a3a9c9aa99ee6e3cb7a198286da"
+      "sha256": "6ce4ad3e39657a792bc73f0478a4d68edf686fe9eb9f26ee271ac57c9266c13d"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1412,8 +1412,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 165992,
-      "sha256": "81f7bd03f4befb3759bd222801a56cd5b284025737377454313dcde52f892226"
+      "bytes": 168128,
+      "sha256": "80a09e3be9531f589d9d2f736541cc5f12a3054987cff9d10c01be43c4810f08"
     },
     {
       "path": "assets/atlas.css",
@@ -3302,8 +3302,8 @@
     },
     {
       "path": "data/lesson-competency-manifest.json",
-      "bytes": 699438,
-      "sha256": "482bf4f6a96495eb63d613682476b396354aa5d8df8137d9feb149b47fa0d222"
+      "bytes": 700434,
+      "sha256": "1307286d4dd9f1e687553a30c4f87d5403fe237cac56727400233abfac36d334"
     },
     {
       "path": "data/lesson-media.json",
@@ -5327,8 +5327,8 @@
     },
     {
       "path": "data/study-guide-catalog.json",
-      "bytes": 291361,
-      "sha256": "c505a6d4de5809ea2fb59f7fb975733e385d657b11b8fa5c058ffc7e663891f2"
+      "bytes": 298535,
+      "sha256": "4ac9e223be27316aa5324ab5c9b474e378f61ec703ac9140b590e1a42c3c89d0"
     },
     {
       "path": "data/vocab-eligibility.json",
@@ -6042,8 +6042,8 @@
     },
     {
       "path": "learning-evidence-source.js",
-      "bytes": 47852,
-      "sha256": "a5a6201b0875bece89aa42d41f80d91cf3129197a748dc60dd981b595eae98f1"
+      "bytes": 54288,
+      "sha256": "2a338c816759b3f96aff9274c2a8d1d0f2ff3e295eba9892047488f3d3bba4c1"
     },
     {
       "path": "lesson-blueprint-rules.js",
@@ -6117,8 +6117,8 @@
     },
     {
       "path": "study-guide-assessment.js",
-      "bytes": 5891,
-      "sha256": "295d1146871d63b27fbcca89f91d153f7c2d2fc5e92901243caceb1a8b3e129f"
+      "bytes": 7662,
+      "sha256": "77be8632f315349fee513b8e82e492f3e803000ff4d56ebf752090f2a456df92"
     }
   ]
 }

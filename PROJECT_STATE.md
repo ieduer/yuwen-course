@@ -61,11 +61,11 @@ Last updated: 2026-08-13
   acceptance in a later Web/App transaction before any pointer move.
 - No Pages deployment, Queue/D1 write, traffic change or rollback was performed
   by this source update.
-- The exact formal foundation artifact contains 1,223 files / 164,349,103
+- The exact formal foundation artifact contains 1,223 files / 164,367,668
   bytes with aggregate SHA-256
-  `6107f4e3863c83aa7860af906f413f3faf5d8120e2240c2d89354cce2fb22a67`;
+  `947f3e297f5031a18fbefd0d63b2e955a7ffde5dbd76e93b6170332d6f66c278`;
   its tracked manifest byte SHA-256 is
-  `987522a5c70db5c370d2a2b4fa77662ef1f39b432328ed3144c701050ad2f163`.
+  `5e50fd942dcf7b4095c8cdeef092c1a85142963de91380be835bec4271fd6025`.
 
 ## 2026-08-12 e310/v2 User Center source-contract candidate
 
