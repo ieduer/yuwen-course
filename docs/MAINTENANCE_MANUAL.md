@@ -1,6 +1,43 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-08-12 (America/Los_Angeles)
+Last reviewed: 2026-08-13 (America/Los_Angeles)
+
+## 2026-08-13 evaluation correctness and retry boundary
+
+- `site/study-guide-assessment.js` is the source-owned objective grader. Choice
+  extraction is limited to the answer lead and accepts exact letter or circled
+  choices; explanation prose is never searched for extra option letters.
+  Punctuation and sentence segmentation use deterministic source comparison.
+  Open answers may use APIS only when no deterministic rule applies; their
+  normalized result must contain a finite 0--100 score plus all required
+  feedback fields. A real zero stays zero and malformed output fails closed.
+- `site/data/study-guide-catalog.json` and
+  `site/data/lesson-competency-manifest.json` are one release boundary. Before
+  a write, the Worker verifies catalog digest and item semantic revision against
+  the formative manifest. It may invalidate and reload both caches once; any
+  remaining mismatch returns `study_guide_catalog_changed` and does not reserve,
+  grade, or write evidence. The current content-addressed snapshot is 241 total
+  / 193 active / 48 tombstones, catalog
+  `yw-study-guides-eae416d57be24516`, formative
+  `yw-formative-65a150df80285f4e`. These counts describe this release only;
+  updated questions require a new task-pool digest and complete mapping/readback.
+- AI interaction evaluation is not an anonymous practice API. It requires a
+  My-authenticated identity, a non-empty client mutation ID, and a durable
+  submission reservation created before APIS. The reservation is bound to
+  user, resource, payload, window and source event; only the in-process trusted
+  object can finalize it. Duplicate evaluation returns an exact remaining
+  retry window, not a generic immediate retry instruction. Failed evaluators
+  remain bounded by the same eight-per-resource/ten-minute policy. The browser
+  retains the mutation ID across failures/in-progress responses and deletes it
+  only after an accepted durable receipt; do not generate a new retry ID.
+- APIS requests abort after 20 seconds. The legacy `/api/learning-check` route
+  is deliberately HTTP 410 because it had no source-ledger/My evidence write;
+  do not restore a parallel evaluation endpoint. Existing local anonymous
+  records remain preserved but cannot be accepted as new evidence or completion.
+- Preview and production use the same exact service-binding identity contract.
+  With a session cookie but no working `USER_CENTER_EVIDENCE.resolveSession`,
+  evaluation fails 503. No cached identity, public HTTP `/api/me`, browser body
+  identity, or native/Web mismatch may authorize a student write.
 
 ## 2026-08-12 e310/v2 learning-source contract override
 
@@ -107,9 +144,9 @@ of the grade-authoritative hot path.
   a historical descriptor for the resolved annual A+ contract.
 - Queue delivery is at-least-once; stable mutation IDs and source event IDs are
   the idempotency authority. `enqueued` is not consumer-delivery proof.
-- Anonymous interaction responses may display score and guidance, but must use
-  the explicit practice-only label and must not advance any local completion
-  percentage or A—F evidence. Unknown evidence statuses fail closed.
+- Historical anonymous interaction responses may still be displayed from local
+  state but cannot advance completion or A—F evidence. New evaluation requests
+  require authenticated My identity; unknown evidence statuses fail closed.
 
 ### Classical Web-to-App content projection
 

@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 
 const config = readFileSync(new URL("../wrangler.toml", import.meta.url), "utf8");
+const workerSource = readFileSync(new URL("../site/_worker.js", import.meta.url), "utf8");
 const productionMarker = "[[env.production.d1_databases]]";
 const markerIndex = config.indexOf(productionMarker);
 
@@ -17,6 +18,9 @@ test("Pages preview cannot inherit production student-data bindings", () => {
   assert.doesNotMatch(preview, /99c541e7-e70b-4584-b939-7e88a6dd68c5/);
   assert.doesNotMatch(preview, /bdfz-user-center/);
   assert.doesNotMatch(preview, /bdfz-learning-evidence-yw-v[12]/);
+  assert.doesNotMatch(workerSource, /fetch\([^\n]*\/api\/me/);
+  assert.match(workerSource, /typeof env\.USER_CENTER_EVIDENCE\?\.resolveSession !== "function"/);
+  assert.match(workerSource, /throw readingIdentityUnavailable\(\)/);
 });
 
 test("Pages production keeps the exact reviewed bindings", () => {

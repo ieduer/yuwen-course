@@ -2,6 +2,46 @@
 
 Last updated: 2026-08-13
 
+## 2026-08-13 scoring-correctness source candidate
+
+- The current 241-item study-guide catalog remains structurally stable, but
+  eight source prompts whose PDF review receipts omitted visible answer choices
+  now reproduce those choices exactly. The content-addressed task authority is
+  therefore `yw-study-guides-eae416d57be24516` (193 active / 48 tombstones),
+  and the corresponding formative authority is
+  `yw-formative-65a150df80285f4e` (1,021 items / 115 lessons / 48 tombstones).
+  A future content update must mint new catalog and task-pool digests; it does
+  not silently change the annual My scoring policy.
+- Deterministic grading now reads only the answer lead, supports circled
+  source choices, and handles quotation, colon, bracket, dash, ellipsis,
+  punctuation and sentence-segmentation tasks without sending them to AI.
+  Explanation prose can no longer smuggle another option letter. Open-response
+  normalization preserves a genuine zero and rejects malformed or incomplete
+  model output instead of inventing 60.
+- Every `/api/interaction-check` evaluation now requires a User Center identity
+  and reserves its durable per-user/resource slot before calling APIS. The same
+  mutation cannot trigger a second evaluator; an evaluator failure still
+  consumes the bounded slot, and the response reports the exact remaining
+  window rather than prompting an immediate retry loop. The browser retains
+  that mutation ID until a terminal durable receipt, so an explicit retry
+  queries the same reservation rather than paying for another evaluator. APIS calls have a
+  20-second abort boundary. The untracked legacy `/api/learning-check` scoring
+  path is retired with HTTP 410.
+- The Worker validates study-guide catalog digest plus semantic revision
+  against the formative manifest before reservation/write, reloads both caches
+  together once, and then fails closed on drift. Pages preview identity uses
+  the exact `USER_CENTER_EVIDENCE` service binding and cannot reuse a cached
+  production identity or fall back to public `/api/me`.
+- No Pages deployment, D1/Queue write, UC mutation, Android pointer movement or
+  production traffic change was performed by this source candidate. The
+  foundation pointer remains byte SHA-256
+  `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
+- Exact Node 24.18.0 and Node 22.21.1 each passed the complete
+  `precontent:check`; the defect-focused matrix passed 61/61 on each runtime,
+  Reading API passed 70/70, native-content passed 22/22 and release-site passed
+  5/5. Formal Web-only artifact generation, commit/push and live readback remain
+  separate release gates.
+
 ## 2026-08-13 external-executor release boundary
 
 - Checkout production and rollback entrypoints are disabled. `package.json`
@@ -89,9 +129,10 @@ Last updated: 2026-08-13
 - Android content generation now emits exactly 189 student-visible lessons and
   validates the two hidden Web records without bundling them. Candidate semantic
   digest is `sha256:82a4f9f2b5da4d1df4814db301c40a079a2ddcff03c3ac939a8ce4f9801199b3`.
-- Anonymous interaction scores are feedback-only: the UI labels them unrecorded
-  and all visible completion checkpoints remain false until authenticated
-  source evidence is accepted.
+- Historical anonymous interaction feedback remains local and cannot advance a
+  checkpoint. New AI interaction evaluation requires authenticated My identity
+  and an accepted durable source-evidence receipt; anonymous evaluation is no
+  longer generated.
 - Production remains the 2026-08-11 deployment below until the User Center
   native flags, Worker version, Web deploy and native release all pass their
   own guarded gates. No D1 row or production traffic is changed by this source

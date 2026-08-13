@@ -154,12 +154,12 @@ const interactionEvidenceDecision = new Function(
   `${interactionEvidenceDecisionSource}; return interactionEvidenceDecision;`,
 )();
 
-test("anonymous interaction keeps feedback but never claims completion", () => {
+test("a new anonymous interaction cannot be accepted as evaluation evidence", () => {
   assert.deepEqual(interactionEvidenceDecision("anonymous", 98), {
-    accepted: true,
+    accepted: false,
     recorded: false,
     completed: false,
-    evidenceStatus: "anonymous",
+    evidenceStatus: "unavailable",
   });
 });
 

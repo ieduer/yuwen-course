@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   authoritativeStudyGuideAssessment,
   deterministicStudyGuideAssessment,
+  normalizeInteractionAssessment,
   normalizeOpenStudyGuideAssessment,
   studyGuideAssessmentPrompt,
 } from "../site/study-guide-assessment.js";
@@ -16,6 +17,20 @@ test("source-owned single and multiple choice answers are graded without browser
   const multiple = { detailTag: "multiple_choice", referenceAnswer: ["B", "C"] };
   assert.equal(deterministicStudyGuideAssessment(multiple, "C、B")?.passed, true);
   assert.equal(deterministicStudyGuideAssessment(multiple, "B")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment(single, "C。因為 B 項的說法不成立")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(single, "A。因為 C 項正確")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment(multiple, "選 B 和 C。A 項是干擾項")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(multiple, "B、C、D")?.passed, false);
+});
+
+test("evidence identification accepts the exact source option or equivalent circled statements", () => {
+  const item = {
+    detailTag: "evidence_identification",
+    referenceAnswer: "A：①②④。",
+  };
+  assert.equal(deterministicStudyGuideAssessment(item, "A")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(item, "①②④")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(item, "①②③")?.passed, false);
 });
 
 test("compound objective sets retain the source answer order", () => {
@@ -29,6 +44,25 @@ test("compound objective sets retain the source answer order", () => {
   };
   assert.equal(deterministicStudyGuideAssessment(item, "D B B")?.passed, true);
   assert.equal(deterministicStudyGuideAssessment(item, "D B C")?.passed, false);
+});
+
+test("punctuation and sentence segmentation normalize speech punctuation deterministically", () => {
+  const punctuation = {
+    detailTag: "punctuation",
+    referenceAnswer: "太夫人告之曰／汝父为吏／廉而好施与。",
+  };
+  assert.equal(
+    deterministicStudyGuideAssessment(punctuation, "太夫人告之曰：‘汝父为吏，廉而好施与。’")?.passed,
+    true,
+  );
+  const segmentation = {
+    detailTag: "sentence-segmentation",
+    referenceAnswer: "其平居教他子弟／常用此语／吾耳熟焉／故能详也",
+  };
+  assert.equal(
+    deterministicStudyGuideAssessment(segmentation, "其平居教他子弟，常用此语；吾耳熟焉，故能详也")?.passed,
+    true,
+  );
 });
 
 test("open Codex reference answers are routed to rubric assessment and remain non-unique", () => {
@@ -68,6 +102,20 @@ test("open assessment fails closed on malformed or incomplete model output", () 
     gap: "",
     nextQuestion: "如何回應另一種立場？",
   }), /回饋不完整/);
+});
+
+test("legacy interaction assessment preserves zero and rejects malformed model output", () => {
+  const zero = normalizeInteractionAssessment({
+    score: 0,
+    verdict: "尚未完成。",
+    strength: "已经作答。",
+    gap: "没有文本证据。",
+    nextQuestion: "哪一句原文支持你的结论？",
+  }, "raw");
+  assert.equal(zero.score, 0);
+  assert.equal(zero.raw, "raw");
+  assert.throws(() => normalizeInteractionAssessment({ score: "bad" }), /分數無效/);
+  assert.throws(() => normalizeInteractionAssessment(null), /格式無效/);
 });
 
 test("idempotent replay always presents the immutable stored assessment", () => {

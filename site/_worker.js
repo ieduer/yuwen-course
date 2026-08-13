@@ -1,6 +1,8 @@
 import {
   assertLearningSubmissionAllowed,
   drainEvidenceOutbox,
+  invalidateFormativeManifestCache,
+  LearningSubmissionInProgressError,
   LearningSubmissionRateLimitError,
   recordLearningInteraction,
   validateAPlusCompatibilityContract,
@@ -22,6 +24,7 @@ import {
 import {
   authoritativeStudyGuideAssessment,
   deterministicStudyGuideAssessment,
+  normalizeInteractionAssessment,
   normalizeOpenStudyGuideAssessment,
   studyGuideAssessmentPrompt,
 } from "./study-guide-assessment.js";
@@ -161,6 +164,25 @@ function learningMutationConflictResponse() {
     error: "本次提交标识已用于另一学习项目，请刷新后重试",
     code: "learning_mutation_conflict",
   }, { status: 409 });
+}
+
+function authenticatedEvaluationRequiredResponse() {
+  return json({
+    ok: false,
+    error: "請先登入 My，再提交需要評閱的學習證據",
+    code: "authenticated_evaluation_required",
+    authRequired: true,
+  }, { status: 401 });
+}
+
+function learningSubmissionInProgressResponse(error) {
+  const retryAfterSeconds = Math.max(1, Number(error?.retryAfterSeconds) || 600);
+  return json({
+    ok: false,
+    error: error?.message || "本次提交已进入评阅，請稍後使用同一提交重試",
+    code: "learning_submission_in_progress",
+    retryAfterSeconds,
+  }, { status: 409, headers: { "retry-after": String(retryAfterSeconds) } });
 }
 
 function cleanText(value, max = 4000) {
@@ -1039,18 +1061,6 @@ function extractJsonObject(value) {
   }
 }
 
-function normalizeAssessment(value, fallbackText = "", speaker = "作者") {
-  const score = Math.max(1, Math.min(100, Number(value?.score || 0) || 60));
-  return {
-    score,
-    verdict: cleanText(value?.verdict || (score >= 80 ? "你已讀進我這篇文字" : "你已提出判斷，我還想看見更精確的證據"), 120),
-    strength: cleanText(value?.strength || `我看見你能回到原文提出自己的理解。`, 500),
-    gap: cleanText(value?.gap || `我還要你說清所引字句如何通向我的結構或立意。`, 500),
-    nextQuestion: cleanText(value?.nextQuestion || `如果換用另一處原文，你對我這篇文字的判斷仍然成立嗎？`, 500),
-    raw: cleanText(fallbackText, 2000),
-  };
-}
-
 async function handleLessonBlueprint(request, env, ctx) {
   const payload = await request.json().catch(() => ({}));
   const lessonId = cleanText(payload.lessonId, 80);
@@ -1136,6 +1146,14 @@ async function handleInteractionCheck(request, env) {
   if (!lessonTitle || !["contextWords", "authorQuestion", "revision", "structure", "wordCreation"].includes(interaction) || inputText.length < 6) {
     return json({ error: "valid lesson, interaction and student input are required" }, { status: 400 });
   }
+  let student;
+  try {
+    student = await getReadingStudent(request, env);
+  } catch (error) {
+    if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
+    throw error;
+  }
+  if (!student) return authenticatedEvaluationRequiredResponse();
   const criteria = {
     contextWords: "核查學生給出的三個詞是否各有區分度，並能由作者、文體、字句或立意得到支持。泛泛的好、優美、感人不得超過59分；恰好三詞且能形成對作者與文章的整體判斷才可高分。",
     authorQuestion: "把自己放在作者或編者的位置，判斷這個問題能否證明提問者讀到了具體字句、結構選擇或價值矛盾。只問常識、感想或可脫離文本回答的問題不得超過59分。",
@@ -1147,8 +1165,8 @@ async function handleInteractionCheck(request, env) {
     ? `你是《${lessonTitle}》的文本細讀教練。不得冒充作者或編者，不得使用“我是${speaker}”一類身分話術。`
     : `你就是《${lessonTitle}》的${speaker}。始終使用${speaker}本人的第一人稱身分與學生交談，不得退回「評估員」「作者認為」或第三人稱口吻。`;
   const responseSchema = interaction === "structure"
-    ? "只輸出 JSON：score(1-100整數)、verdict(一句話)、strength(指出已掌握的一點)、gap(指出最關鍵缺口)、nextQuestion(只追問一個迫使學生回到文本的問題)。不得冒充作者。不要 Markdown。"
-    : `只輸出 JSON：score(1-100整數)、verdict(一句話)、strength(我以${speaker}身分指出已掌握的一點)、gap(我指出最關鍵缺口)、nextQuestion(我只追問一個迫使學生回到文本的問題)。四個文字欄都必須是${speaker}的第一人稱口吻。不要 Markdown。`;
+    ? "只輸出 JSON：score(0-100整數)、verdict(一句話)、strength(指出已掌握的一點)、gap(指出最關鍵缺口)、nextQuestion(只追問一個迫使學生回到文本的問題)。不得冒充作者。不要 Markdown。"
+    : `只輸出 JSON：score(0-100整數)、verdict(一句話)、strength(我以${speaker}身分指出已掌握的一點)、gap(我指出最關鍵缺口)、nextQuestion(我只追問一個迫使學生回到文本的問題)。四個文字欄都必須是${speaker}的第一人稱口吻。不要 Markdown。`;
   const prompt = [
     responseRole,
     "你嚴格但可操作，不代寫，只判斷學生是否真正進入文本。",
@@ -1168,112 +1186,91 @@ async function handleInteractionCheck(request, env) {
     lessonPhase: cleanText(payload.lessonPhase, 60),
   };
   try {
-    const student = await getReadingStudent(request, env);
-    if (student) {
-      const submissionGuard = await assertLearningSubmissionAllowed({
-        request,
-        env,
-        student,
-        lesson,
-        interactionKey: interaction,
-        payload: sourcePayload,
+    let submissionGuard = null;
+    submissionGuard = await assertLearningSubmissionAllowed({
+      request,
+      env,
+      student,
+      lesson,
+      interactionKey: interaction,
+      payload: sourcePayload,
+    });
+    if (submissionGuard.deduped) {
+      return json({
+        provider: submissionGuard.evaluation?.provider || "source-ledger",
+        assessment: normalizeInteractionAssessment(submissionGuard.evaluation, ""),
+        evidence: {
+          status: submissionGuard.eligibilityStatus === "ineligible"
+            ? "already_recorded_ineligible"
+            : "already_recorded",
+          sourceEventId: submissionGuard.sourceEventId,
+          attemptNo: submissionGuard.attemptNo,
+        },
+        deduped: true,
       });
-      if (submissionGuard.deduped) {
-        return json({
-          provider: submissionGuard.evaluation?.provider || "source-ledger",
-          assessment: normalizeAssessment(submissionGuard.evaluation, "", speaker),
-          evidence: {
-            status: submissionGuard.eligibilityStatus === "ineligible"
-              ? "already_recorded_ineligible"
-              : "already_recorded",
-            sourceEventId: submissionGuard.sourceEventId,
-            attemptNo: submissionGuard.attemptNo,
-          },
-          deduped: true,
-        });
-      }
     }
     const raw = await callApisPrompt(env, prompt, "feedback", "medium");
     const parsed = extractJsonObject(raw);
-    const assessment = normalizeAssessment(parsed, parsed ? "" : raw, speaker);
-    let evidence = { status: "anonymous" };
-    if (student) {
-      const recorded = await recordLearningInteraction({
-        request,
-        env,
-        student,
-        lesson,
-        interactionKey: interaction,
-        payload: sourcePayload,
-        evaluation: {
-          score: assessment.score,
-          correctness: assessment.score >= 60 ? "passed" : "needs_revision",
-          provider: "apis",
-          verdict: assessment.verdict,
-          strength: assessment.strength,
-          gap: assessment.gap,
-          nextQuestion: assessment.nextQuestion,
-        },
-      });
-      evidence = { status: recorded.delivery || "recorded", sourceEventId: recorded.sourceEventId, attemptNo: recorded.attemptNo };
-    }
+    const assessment = normalizeInteractionAssessment(parsed, parsed ? "" : raw);
+    const recorded = await recordLearningInteraction({
+      request,
+      env,
+      student,
+      lesson,
+      interactionKey: interaction,
+      payload: sourcePayload,
+      evaluation: {
+        score: assessment.score,
+        correctness: assessment.score >= 60 ? "passed" : "needs_revision",
+        provider: "apis",
+        verdict: assessment.verdict,
+        strength: assessment.strength,
+        gap: assessment.gap,
+        nextQuestion: assessment.nextQuestion,
+      },
+      submissionReservation: submissionGuard.submissionReservation,
+    });
+    const evidence = { status: recorded.delivery || "recorded", sourceEventId: recorded.sourceEventId, attemptNo: recorded.attemptNo };
     return json({ provider: "apis", assessment, evidence });
   } catch (error) {
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
+    if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
+    if (["classical_first_read_required", "classical_annotated_reading_required"].includes(error?.code)) {
+      return readingError(error.message, 422, error.code);
+    }
     return json({ error: error.message || "interaction assessment unavailable" }, { status: 502 });
   }
 }
 
-async function handleLearningCheck(request, env) {
-  const payload = await request.json().catch(() => ({}));
-  const lessonId = cleanText(payload.lessonId, 80);
-  const lessonTitle = cleanText(payload.lessonTitle, 160);
-  const blockTitle = cleanText(payload.blockTitle, 60);
-  const genre = cleanText(payload.genre, 30);
-  const excerpt = cleanText(payload.excerpt, 2400);
-  const evidence = cleanText(payload.evidence, 500);
-  const question = cleanText(payload.question, 600);
-  const answer = cleanText(payload.answer, 3000);
-  if (!lessonId || !lessonTitle || !evidence || answer.length < 30) {
-    return json({ error: "lesson, evidence and an answer of at least 30 characters are required" }, { status: 400 });
-  }
-
-  const prompt = [
-    "你是高中語文細讀能力評估員。你的工作不是替學生改寫答案，而是確認他是否真正讀懂文本。",
-    "評估順序必須是：原文證據是否準確 → 字句效果是否說清 → 結構關係是否成立 → 立意或知人論世是否有文本支撐。",
-    "不要因篇幅、術語或價值立場給高分。沒有分析所引字句的具體作用，最高 69 分；只有主題概括而無結構推理，最高 59 分。",
-    "只輸出一個 JSON 物件，不要 Markdown，不要答案示範。JSON 欄位固定為：score(1-100整數)、verdict(一句話)、strength(已掌握的一點)、gap(最關鍵缺口)、nextQuestion(只追問一個能迫使學生回到文本的問題)。",
-    "",
-    `課文：${blockTitle} / ${lessonTitle}`,
-    `課文類型：${genre}`,
-    `確認問題：${question}`,
-    `課文摘錄：${excerpt}`,
-    `學生選取的證據：${evidence}`,
-    `學生答辯：${answer}`,
-  ].join("\n");
-
-  try {
-    const raw = await callApisPrompt(env, prompt, "feedback", "medium");
-    const parsed = extractJsonObject(raw);
-    return json({ provider: "apis", assessment: normalizeAssessment(parsed, parsed ? "" : raw) });
-  } catch (error) {
-    return json({ error: error.message || "learning assessment unavailable" }, { status: 502 });
-  }
+async function handleLearningCheck() {
+  return json({
+    ok: false,
+    error: "此舊評閱入口已停用；請使用會寫入 My 證據閉環的 /api/interaction-check",
+    code: "untracked_learning_check_retired",
+  }, { status: 410 });
 }
 
 async function callApisPrompt(env, prompt, taskType = "chat", thinkingLevel = "low") {
-  const response = await fetch(env.APIS_ENDPOINT || "https://apis.bdfz.net", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      "origin": "https://yw.bdfz.net",
-      "x-project-name": "yw.bdfz.net",
-      "x-task-type": taskType,
-      "x-thinking-level": thinkingLevel,
-    },
-    body: JSON.stringify({ prompt, taskType, thinkingLevel }),
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort("APIS evaluation timeout"), 20_000);
+  let response;
+  try {
+    response = await fetch(env.APIS_ENDPOINT || "https://apis.bdfz.net", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "origin": "https://yw.bdfz.net",
+        "x-project-name": "yw.bdfz.net",
+        "x-task-type": taskType,
+        "x-thinking-level": thinkingLevel,
+      },
+      body: JSON.stringify({ prompt, taskType, thinkingLevel }),
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timeout);
+  }
   const data = await response.json().catch(() => ({}));
   if (!response.ok) throw new Error(data.error || `APIS ${response.status}`);
   const answer = cleanText(data.answer, 8000);
@@ -1291,9 +1288,9 @@ async function callApisGateway(env, apiMessages) {
 
 // ---------------- 閱讀星圖：三詞初讀評議持久層（D1: READING_DB） ----------------
 // 契約文檔：docs/READING_CONSTELLATION.md。身分鏈：bdfz_uc_session cookie →
-// 服務端轉發 my.bdfz.net/api/me 核驗 → students.uc_slug。前端自報身分一律不信。
+// USER_CENTER_EVIDENCE 服務綁定核驗 → students.uc_slug。前端自報身分一律不信；
+// 缺少綁定的 Pages preview 不得回退到正式站 HTTP 身分或寫入學生資料。
 
-const UC_ORIGIN = "https://my.bdfz.net";
 const UC_SESSION_COOKIE = "bdfz_uc_session";
 const identityCache = new Map(); // token -> { user, exp }
 let wordGroupCache = { index: null, exp: 0 };
@@ -1337,35 +1334,33 @@ function readingIdentityUnavailable() {
 
 async function resolveWebReadingUser(cookieHeader, env) {
   if (!cookieHeader) return null;
+  if (typeof env.USER_CENTER_EVIDENCE?.resolveSession !== "function") {
+    throw readingIdentityUnavailable();
+  }
   const token = cookieHeader.slice(UC_SESSION_COOKIE.length + 1);
   const cached = identityCache.get(token);
   let user = cached && cached.exp > Date.now() ? cached.user : null;
   if (!user) {
-    if (env.USER_CENTER_EVIDENCE?.resolveSession) {
-      const resolved = await env.USER_CENTER_EVIDENCE.resolveSession(cookieHeader).catch(() => null);
-      if (resolved?.authenticated && resolved?.sourceSiteKey === "yw" && Number.isInteger(Number(resolved.userId))) {
-        user = {
-          userId: Number(resolved.userId),
-          slug: String(resolved.slug || "").slice(0, 80),
-          displayName: String(resolved.displayName || "").slice(0, 80),
-        };
-      }
+    let resolved;
+    try {
+      resolved = await env.USER_CENTER_EVIDENCE.resolveSession(cookieHeader);
+    } catch {
+      throw readingIdentityUnavailable();
     }
-    if (!user) {
-      const response = await fetch(`${UC_ORIGIN}/api/me`, {
-        headers: { cookie: cookieHeader, accept: "application/json" },
-      }).catch(() => null);
-      if (!response?.ok) return null;
-      const payload = await response.json().catch(() => null);
-      const fallbackUserId = Number(payload?.userId || payload?.id || 0);
-      if (!payload?.slug || !Number.isInteger(fallbackUserId) || fallbackUserId <= 0) return null;
-      user = {
-        userId: fallbackUserId,
-        slug: String(payload.slug).slice(0, 80),
-        displayName: String(payload.displayName || "").slice(0, 80),
-      };
-    }
-    if (!user.slug) return null;
+    if (!resolved || typeof resolved.authenticated !== "boolean") throw readingIdentityUnavailable();
+    if (!resolved.authenticated) return null;
+    const userId = Number(resolved.userId);
+    if (
+      resolved.sourceSiteKey !== "yw"
+      || !Number.isInteger(userId)
+      || userId <= 0
+      || !String(resolved.slug || "").trim()
+    ) throw readingIdentityUnavailable();
+    user = {
+      userId,
+      slug: String(resolved.slug).slice(0, 80),
+      displayName: String(resolved.displayName || "").slice(0, 80),
+    };
     if (identityCache.size > 500) identityCache.clear();
     identityCache.set(token, { user, exp: Date.now() + 5 * 60 * 1000 });
   }
@@ -1462,6 +1457,7 @@ async function handleLearningInteraction(request, env, ctx) {
   } catch (error) {
     if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
+    if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse();
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
     return readingError(error?.message || "interaction recording failed", 422);
   }
@@ -1533,8 +1529,8 @@ async function loadVocabBank(request, env, lessonId) {
   return bank;
 }
 
-function readingError(message, status = 400) {
-  return json({ ok: false, error: message }, { status });
+function readingError(message, status = 400, code = "") {
+  return json({ ok: false, error: message, ...(code ? { code } : {}) }, { status });
 }
 
 async function nextNodeSeq(db, studentId) {
@@ -2000,12 +1996,14 @@ async function handleReadingStudyGuideAttempt(request, env, student) {
     || !Number.isFinite(Date.parse(referenceRevealedAt))) {
     return readingError("lesson, item, response, reveal receipt and clientMutationId required");
   }
-  const [{ itemByKey }, lesson] = await Promise.all([
+  let [{ catalog, itemByKey }, lesson] = await Promise.all([
     loadStudyGuideCatalog(request, env),
     getLessonData(request, env, lessonId),
   ]);
-  const item = itemByKey.get(`${lessonId}\n${itemKey}`);
+  let item = itemByKey.get(`${lessonId}\n${itemKey}`);
   if (!item || lesson?.id !== lessonId) return readingError("active study-guide item absent");
+  const submittedCatalogDigest = catalog.catalogDigest;
+  const submittedSemanticRevision = item.semanticRevision;
 
   const attemptPayload = {
     itemKey,
@@ -2014,14 +2012,39 @@ async function handleReadingStudyGuideAttempt(request, env, student) {
     clientMutationId,
     lessonPhase: "knowledge_accounting",
   };
-  const submissionGuard = await assertLearningSubmissionAllowed({
-    request,
-    env,
-    student,
-    lesson,
-    interactionKey: "studyGuideItemCompleted",
-    payload: attemptPayload,
-  });
+  let submissionGuard;
+  try {
+    submissionGuard = await assertLearningSubmissionAllowed({
+      request,
+      env,
+      student,
+      lesson,
+      interactionKey: "studyGuideItemCompleted",
+      payload: attemptPayload,
+      expectedStudyGuideCatalogDigest: catalog.catalogDigest,
+    });
+  } catch (error) {
+    if (error?.code !== "study_guide_catalog_drift") throw error;
+    studyGuideCatalogCache.value = null;
+    studyGuideCatalogCache.expiresAt = 0;
+    invalidateFormativeManifestCache();
+    ({ catalog, itemByKey } = await loadStudyGuideCatalog(request, env));
+    item = itemByKey.get(`${lessonId}\n${itemKey}`);
+    if (!item
+      || catalog.catalogDigest !== submittedCatalogDigest
+      || item.semanticRevision !== submittedSemanticRevision) {
+      return readingError("active study-guide item changed; reload before retrying", 409, "study_guide_catalog_changed");
+    }
+    submissionGuard = await assertLearningSubmissionAllowed({
+      request,
+      env,
+      student,
+      lesson,
+      interactionKey: "studyGuideItemCompleted",
+      payload: attemptPayload,
+      expectedStudyGuideCatalogDigest: catalog.catalogDigest,
+    });
+  }
   if (submissionGuard.deduped) {
     const authoritative = authoritativeStudyGuideAssessment(null, submissionGuard);
     return json({
@@ -2055,6 +2078,7 @@ async function handleReadingStudyGuideAttempt(request, env, student) {
     interactionKey: "studyGuideItemCompleted",
     payload: attemptPayload,
     evaluation: assessment,
+    submissionReservation: submissionGuard.submissionReservation,
   });
   const authoritative = authoritativeStudyGuideAssessment(assessment, recorded);
   return json({
@@ -2524,9 +2548,10 @@ async function handleReading(request, env, url) {
   } catch (error) {
     if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
+    if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
     if (["classical_first_read_required", "classical_annotated_reading_required"].includes(error?.code)) {
-      return readingError(error.message, 422);
+      return readingError(error.message, 422, error.code);
     }
     return readingError(error?.message || "reading api failure", 500);
   }
