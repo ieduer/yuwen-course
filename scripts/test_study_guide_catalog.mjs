@@ -27,20 +27,49 @@ test("study-guide catalog is deterministic, labelled, and byte-current", () => {
   assert.equal(items.every((item) => /^[a-f0-9]{16}$/.test(item.semanticRevision)), true);
 
   const byKey = new Map(items.map((item) => [item.itemKey, item]));
+  const deterministicChoiceItems = items.filter((item) => {
+    const answer = item.referenceAnswer;
+    const hasChoiceAnswer = (
+      typeof answer === "string" && /^\s*[A-D](?:\b|[：:。、，,])/i.test(answer)
+    ) || (
+      Array.isArray(answer)
+      && answer.length > 0
+      && answer.every((entry) => /^[A-D]$/i.test(String(entry).trim()))
+    ) || (
+      answer && typeof answer === "object" && !Array.isArray(answer)
+      && Object.values(answer).length > 0
+      && Object.values(answer).every((entry) => /^[A-D]$/i.test(String(entry?.option || "").trim()))
+    );
+    return item.activeForSelfTest
+      && hasChoiceAnswer
+      && /(?:choice|discrimination|identification|objective|knowledge)/i.test(item.detailTag || "");
+  });
+  assert.ok(deterministicChoiceItems.length > 10);
+  for (const item of deterministicChoiceItems) {
+    assert.match(item.prompt, /(?:^|[^A-Za-z])A[.．、）)]/, `${item.itemKey} must publish option A`);
+    assert.match(item.prompt, /(?:^|[^A-Za-z])D[.．、）)]/, `${item.itemKey} must publish option D`);
+  }
+  for (const itemKey of [
+    "lesson-1485-p56-evidence-identification-01",
+    "lesson-1576-p65-content-discrimination-01",
+    "lesson-1576-p65-content-discrimination-02",
+    "lesson-1577-p72-content-discrimination-01",
+    "lesson-1577-p73-content-discrimination-02",
+    "lesson-1578-p79-content-discrimination-01",
+    "lesson-1578-p79-function-word-03",
+    "lesson-1579-p88-content-discrimination-01",
+    "lesson-1579-p88-content-discrimination-02",
+    "lesson-1580-p96-content-discrimination-01",
+    "lesson-1581-p103-content-discrimination-01",
+  ]) {
+    const item = byKey.get(itemKey);
+    assert.equal(item.activeForSelfTest, true);
+    assert.match(item.prompt, /\nA\./);
+    assert.match(item.prompt, /(?:\n|　)D\./);
+  }
   const derivedNaiYin = byKey.get("sg:1535:function:nai-yin");
   assert.equal(derivedNaiYin.pdfPage, null);
   assert.match(derivedNaiYin.qualityNotes.join(" "), /並非來源 PDF 的原題/);
-
-  for (const [itemKey, answer] of [
-    ["lesson-1576-p65-content-discrimination-02", "D"],
-    ["lesson-1579-p88-content-discrimination-01", "B"],
-  ]) {
-    const item = byKey.get(itemKey);
-    assert.equal(item.answerLabel, "Codex 參考答案");
-    assert.equal(item.referenceAnswer, answer);
-    assert.equal(item.activeForSelfTest, false);
-    assert.match(item.qualityNotes.join(" "), /未保存 A-D 選項/);
-  }
 
   assert.match(
     byKey.get("lesson-1534-p56-passive-increment-01").qualityNotes.join(" "),

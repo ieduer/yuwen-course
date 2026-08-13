@@ -115,6 +115,7 @@ const state = {
   formalVocabResourceKeys: new Set(),
   firstReads: new Map(),
   studyGuideLessons: new Map(),
+  studyGuideCatalogStatus: "loading",
   lessonMedia: new Map(),
   wechatArchiveBySource: new Map(),
   previewScreenshotBySource: new Map(),
@@ -129,6 +130,8 @@ const state = {
   })(),
   activeAuthorId: "",
 };
+
+const interactionMutationIds = new Map();
 const noteAnimations = new WeakMap();
 
 const $ = (selector, root = document) => root.querySelector(selector);
@@ -2372,6 +2375,9 @@ function renderStudyGuideAssessment(record) {
 }
 
 function renderStudyGuideCards(lesson, competencyTags) {
+  if (state.studyGuideCatalogStatus === "unavailable") {
+    return `<section class="study-guide-deck" aria-label="學案知能清算"><p class="study-guide-sync pending" role="status">學案知能清算資料暫時無法載入；教材閱讀與其他學習步驟仍可繼續。</p></section>`;
+  }
   const items = studyGuideItemsFor(lesson, competencyTags);
   if (!items.length) return "";
   const active = items.filter((item) => item.activeForSelfTest);
@@ -2785,7 +2791,7 @@ function interactionInputLength(input) {
 function interactionEvidenceDecision(status, score) {
   const normalized = String(status || "").trim();
   if (normalized === "anonymous") {
-    return { accepted: true, recorded: false, completed: false, evidenceStatus: "anonymous" };
+    return { accepted: false, recorded: false, completed: false, evidenceStatus: "unavailable" };
   }
   if (normalized === "already_recorded_ineligible" || normalized.endsWith("_ineligible")) {
     return { accepted: true, recorded: true, completed: false, evidenceStatus: "ineligible" };
@@ -2812,7 +2818,11 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
   }
   if (autoStatus) autoStatus.textContent = "核對中";
   try {
-    const clientMutationId = window.YwLearningEvidence?.mutationId?.(key, state.current.id);
+    const mutationKey = `${state.current.id}\n${key}`;
+    const clientMutationId = interactionMutationIds.get(mutationKey)
+      || window.YwLearningEvidence?.mutationId?.(key, state.current.id);
+    if (!clientMutationId) throw new Error("無法建立穩定提交標識，請刷新後重試");
+    interactionMutationIds.set(mutationKey, clientMutationId);
     const response = await fetch("/api/interaction-check", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -2831,12 +2841,18 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
       }),
     });
     const payload = await response.json();
-    if (!response.ok) throw new Error(payload.error || `評估失敗 ${response.status}`);
+    if (!response.ok) {
+      const error = new Error(payload.error || `評估失敗 ${response.status}`);
+      error.code = String(payload.code || "");
+      error.retryAfterSeconds = Number(payload.retryAfterSeconds || 0);
+      throw error;
+    }
     const result = payload.assessment || {};
     const progressKey = key === "contextWords" ? "context" : key;
     const score = Number(result.score || 0);
     const evidence = interactionEvidenceDecision(payload.evidence?.status, score);
     if (!evidence.accepted) throw new Error("學習證據回執無效，未計入完成度");
+    interactionMutationIds.delete(mutationKey);
     lessonProgress()[progressKey] = {
       ...lessonProgress()[progressKey],
       ...input,
@@ -2856,14 +2872,21 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     if (key === "contextWords") void saveReadingSubmission(input, result);
     if (!silent) {
       const label = trackFor().find((item) => item[0] === progressKey)?.[1] || "互動";
-      if (evidence.evidenceStatus === "anonymous") toast(`${score} 分 · 未登入，本次未記錄`);
-      else if (evidence.evidenceStatus === "ineligible") toast(`${label} · ${score} 分，已記錄但不計入本次完成`);
+      if (evidence.evidenceStatus === "ineligible") toast(`${label} · ${score} 分，已記錄但不計入本次完成`);
       else toast(`${label} · ${score} 分，已記錄`);
     }
     syncProgress({ event: true });
     renderCheckStage(state.current);
   } catch (error) {
-    if (!silent) toast(error.message || "暫時無法完成評估");
+    if (!silent) {
+      if (error.code === "authenticated_evaluation_required") {
+        toast("請先登入 My，再提交並記錄本次學習證據");
+      } else if (error.code === "learning_submission_in_progress" && error.retryAfterSeconds > 0) {
+        toast(`本次提交仍在評閱，${error.retryAfterSeconds} 秒後可再次查詢`);
+      } else {
+        toast(error.message || "暫時無法完成評估");
+      }
+    }
     if (button) {
       button.disabled = false;
       button.textContent = "重試";
@@ -2947,6 +2970,8 @@ async function submitStudyGuideAttempt({ lessonId, itemKey, response, referenceR
       return {
         ok: false,
         status: result.status,
+        code: payload.code || "",
+        retryAfterSeconds: Number(payload.retryAfterSeconds) || null,
         reason: payload.error || (result.status === 401 ? "anonymous" : `http-${result.status}`),
       };
     }
@@ -3033,6 +3058,7 @@ function bindCheckStage() {
       assessment: result?.ok === true ? result.assessment : records[itemKey]?.assessment || null,
       evidence: result?.ok === true ? result.evidence : null,
       lastError: result?.ok === true ? "" : result?.reason || "unavailable",
+      lastErrorCode: result?.ok === true ? "" : result?.code || "",
       assessedAt: result?.ok === true ? new Date().toISOString() : null,
     };
     syncProgress({ event: true });
@@ -3042,9 +3068,17 @@ function bindCheckStage() {
     } else if (result?.ok === true) {
       toast(`本次 ${Number(result.assessment?.score) || 0} 分，已記錄；請依提示重答`);
     } else {
-      toast(result?.status === 401
+      const gateMessage = {
+        classical_first_read_required: "請先完成無標點初讀，再回來核對本題。",
+        classical_annotated_reading_required: "請先讀完帶註釋正文，再回來核對本題。",
+        study_guide_catalog_changed: "題目版本已更新，請重新載入後作答。",
+        learning_submission_in_progress: result?.retryAfterSeconds
+          ? `本次提交已保留；若沒有返回結果，請在 ${result.retryAfterSeconds} 秒後重試。`
+          : "本次提交已保留，請稍後使用同一答案重試。",
+      }[result?.code];
+      toast(gateMessage || (result?.status === 401
         ? "參考答案已顯示；登入後可重試形成性評閱"
-        : "參考答案已顯示；評閱尚未同步，稍後請重試");
+        : "參考答案已顯示；評閱尚未同步，稍後請重試"));
     }
   }));
   $$('[data-study-retry]', els.checkStage).forEach((button) => button.addEventListener("click", () => {
@@ -3672,7 +3706,7 @@ async function init() {
       fetchJson("data/vocab-eligibility.json", { cache: "no-cache" }),
       fetchJson("data/vocab/index.json", { cache: "no-cache" }),
       fetchJson("data/learning-manifest.json", { cache: "no-cache" }),
-      fetchJson("data/study-guide-catalog.json", { cache: "no-cache" }),
+      fetchJson("data/study-guide-catalog.json", { cache: "no-cache" }).catch(() => null),
       fetchJson("data/wechat-archive-map.json", { cache: "no-cache" }),
       fetchJson("data/preview-screenshots.json", { cache: "no-cache" }),
       fetchJson("data/preview-targets.json", { cache: "no-cache" }),
@@ -3684,7 +3718,6 @@ async function init() {
       vocabEligibility?.schemaVersion !== "yw-vocab-eligibility-v1"
       || vocabIndex?.schemaVersion !== "yw-vocab-index-v2"
       || learningManifest?.schemaVersion !== 1
-      || studyGuideCatalog?.schemaVersion !== "yw-study-guide-catalog-v1"
       || wechatArchiveMap?.schemaVersion !== "yw-wechat-archive-map-v1"
       || !Array.isArray(wechatArchiveMap?.entries)
       || previewScreenshots?.schemaVersion !== "yw-preview-screenshots-v1"
@@ -3708,7 +3741,14 @@ async function init() {
       state.formalVocabResourceKeys,
       state.vocabIndex.activeItemIds,
     );
-    state.studyGuideLessons = new Map((studyGuideCatalog.lessons || []).map((lesson) => [lesson.lessonId, lesson]));
+    if (studyGuideCatalog?.schemaVersion === "yw-study-guide-catalog-v1"
+      && Array.isArray(studyGuideCatalog.lessons)) {
+      state.studyGuideLessons = new Map(studyGuideCatalog.lessons.map((lesson) => [lesson.lessonId, lesson]));
+      state.studyGuideCatalogStatus = "available";
+    } else {
+      state.studyGuideLessons = new Map();
+      state.studyGuideCatalogStatus = "unavailable";
+    }
     state.wechatArchiveBySource = new Map(wechatArchiveMap.entries.map((entry) => [resourceIdentity(entry.sourceUrl), entry]));
     state.previewScreenshotBySource = new Map(previewScreenshots.entries.map((entry) => [resourceIdentity(entry.sourceUrl), entry]));
     state.directRemoteAppRoots = new Set(previewTargets.directRemoteAppRoots);

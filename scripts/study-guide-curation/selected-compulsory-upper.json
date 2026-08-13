@@ -1,6 +1,6 @@
 {
   "schemaVersion": "yw-study-guide-curation-v1",
-  "reviewReceipt": {"authority": "codex_pdf_curation_review", "reviewedAt": "2026-08-09T03:05:07Z", "disposition": "source_answers_and_codex_references_reviewed; flagged_items_inactive"},
+  "reviewReceipt": {"authority": "codex_pdf_curation_review", "reviewedAt": "2026-08-13T22:20:15Z", "disposition": "source_answers_and_codex_references_reviewed; omitted_source_options_restored; flagged_items_inactive"},
   "source": {
     "originalPath": "/Users/ylsuen/CF/output/pdf_study_guides_web/选必上合集（27届修订版）.pdf",
     "fileName": "选必上合集（27届修订版）.pdf",
@@ -2160,7 +2160,7 @@
           "printedPage": 53,
           "competencyTag": "comprehension",
           "detailTag": "evidence_identification",
-          "prompt": "从六句中选出全都表现“行为不义”的一组：①入人园圃，窃其桃李；②扡其衣裘，取戈剑者；③天下之君子皆知而非之；④今至大为不义攻国，则弗知非，从而誉之；⑤书其言以遗后世；⑥此人为不知白黑之辩矣。",
+          "prompt": "从六句中选出全都表现“行为不义”的一组：①入人园圃，窃其桃李；②扡其衣裘，取戈剑者；③天下之君子皆知而非之；④今至大为不义攻国，则弗知非，从而誉之；⑤书其言以遗后世；⑥此人为不知白黑之辩矣。\nA. ①②④　B. ③⑤⑥　C. ①②③　D. ④⑤⑥",
           "answerAuthority": "codex_reference",
           "answerLabel": "Codex 參考答案",
           "referenceAnswer": "A：①②④。",

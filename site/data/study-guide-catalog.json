@@ -1,7 +1,7 @@
 {
   "schemaVersion": "yw-study-guide-catalog-v1",
-  "catalogVersion": "yw-study-guides-9cb5500f46333aac",
-  "catalogDigest": "sha256:9cb5500f46333aac50d2daa8ee36415ddb1e0b6d5331c656754cf10bac4fefe8",
+  "catalogVersion": "yw-study-guides-eae416d57be24516",
+  "catalogDigest": "sha256:eae416d57be24516fb646c85ad75e9590871fdbcd2be68b41a0dfd0509259e1f",
   "answerPolicy": {
     "sourceAnswerLabel": "學案來源答案",
     "codexReferenceLabel": "Codex 參考答案",
@@ -11,7 +11,7 @@
   "sourceCount": 5,
   "lessonCount": 16,
   "itemCount": 241,
-  "activeItemCount": 191,
+  "activeItemCount": 193,
   "sources": [
     {
       "sourceId": "pdf-328ca1c13da067b9",
@@ -73,8 +73,8 @@
     {
       "file": "selected-compulsory-lower.json",
       "authority": "codex_pdf_curation_review",
-      "reviewedAt": "2026-08-09T03:05:07Z",
-      "disposition": "source_answers_and_codex_references_reviewed; flagged_items_inactive"
+      "reviewedAt": "2026-08-13T22:20:15Z",
+      "disposition": "source_answers_and_codex_references_reviewed; omitted_source_options_restored; flagged_items_inactive"
     },
     {
       "file": "selected-compulsory-middle.json",
@@ -85,8 +85,8 @@
     {
       "file": "selected-compulsory-upper.json",
       "authority": "codex_pdf_curation_review",
-      "reviewedAt": "2026-08-09T03:05:07Z",
-      "disposition": "source_answers_and_codex_references_reviewed; flagged_items_inactive"
+      "reviewedAt": "2026-08-13T22:20:15Z",
+      "disposition": "source_answers_and_codex_references_reviewed; omitted_source_options_restored; flagged_items_inactive"
     },
     {
       "file": "special-guides.json",
@@ -2436,7 +2436,7 @@
           "printedPage": 53,
           "competencyTag": "comprehension",
           "detailTag": "evidence_identification",
-          "prompt": "从六句中选出全都表现“行为不义”的一组：①入人园圃，窃其桃李；②扡其衣裘，取戈剑者；③天下之君子皆知而非之；④今至大为不义攻国，则弗知非，从而誉之；⑤书其言以遗后世；⑥此人为不知白黑之辩矣。",
+          "prompt": "从六句中选出全都表现“行为不义”的一组：①入人园圃，窃其桃李；②扡其衣裘，取戈剑者；③天下之君子皆知而非之；④今至大为不义攻国，则弗知非，从而誉之；⑤书其言以遗后世；⑥此人为不知白黑之辩矣。\nA. ①②④　B. ③⑤⑥　C. ①②③　D. ④⑤⑥",
           "answerAuthority": "codex_reference",
           "answerLabel": "Codex 參考答案",
           "referenceAnswer": "A：①②④。",
@@ -2445,7 +2445,7 @@
           "reviewRequired": false,
           "qualityNotes": [],
           "activeForSelfTest": true,
-          "semanticRevision": "e41f2c3d8bbf236d",
+          "semanticRevision": "f614676554f54956",
           "semanticAliases": []
         },
         {
@@ -4658,7 +4658,7 @@
           "printedPage": 62,
           "competencyTag": "comprehension",
           "detailTag": "language-and-culture-discrimination",
-          "prompt": "课后任务第2题：下列对加点词语及相关内容的解说，不正确的一项是？",
+          "prompt": "课后任务第2题：下列对加点词语及相关内容的解说，不正确的一项是？\nA. “慈父见背”的“见”表被动，与《孔雀东南飞》中“府吏见丁宁”的“见”用法不同。\nB. 孝廉，汉代所设荐举人才的一种科目，推举孝顺父母、品行方正的人。\nC. 恃，依赖、依仗，与成语“恃才傲物”“恃宠而骄”的“恃”意思相同。\nD. “汝其勉之”中的“其”与《兰亭集序》“及其所之既倦”中的“其”用法不同。",
           "answerAuthority": "codex_reference",
           "answerLabel": "Codex 參考答案",
           "referenceAnswer": "A",
@@ -4667,7 +4667,7 @@
           "reviewRequired": false,
           "qualityNotes": [],
           "activeForSelfTest": true,
-          "semanticRevision": "ba1459622f68f250",
+          "semanticRevision": "cc6a165b82c7ee23",
           "semanticAliases": []
         },
         {
@@ -4677,18 +4677,16 @@
           "printedPage": 62,
           "competencyTag": "comprehension",
           "detailTag": "content-discrimination",
-          "prompt": "课后任务第3题：下列对两则材料有关内容的概述，不正确的一项是？",
+          "prompt": "课后任务第3题：下列对两则材料有关内容的概述，不正确的一项是？\nA. 李密出生六个月，父亲就去世了；四岁时，母亲被迫改嫁。他身体孱弱多病，能够长大成人，离不开祖母的悉心抚养。\nB. 李密深受朝廷器重，先后得到地方官的举荐，在得到晋武帝征召任命时，并未即刻赴任，而是向皇帝陈情，请求允许自己先孝后忠。\nC. 欧阳修的母亲在丈夫去世、家境清苦的情况下，含辛茹苦将欧阳修养大成人，并用他父亲的言行引导教育他。\nD. 欧阳修的母亲曾对儿子讲述丈夫往事，提及他做官时常在夜里认真研究案卷，为死刑犯谋求生路，这是由于他不愿因错判枉杀而遭人怨恨。",
           "answerAuthority": "codex_reference",
           "answerLabel": "Codex 參考答案",
           "referenceAnswer": "D",
           "explanation": "欧阳修之父为死囚求生，是出于仁厚并力求审慎公正；“不愿因错判枉杀而遭人怨恨”把动机曲解为避怨。",
           "rubric": [],
           "reviewRequired": false,
-          "qualityNotes": [
-            "本條編目未保存 A-D 選項，現僅保留答案 D 與解析供核對；選項恢復前不提供獨立自測。"
-          ],
-          "activeForSelfTest": false,
-          "semanticRevision": "38009c426eb79f6b",
+          "qualityNotes": [],
+          "activeForSelfTest": true,
+          "semanticRevision": "80542bf7d35a3f26",
           "semanticAliases": []
         },
         {
@@ -4986,7 +4984,7 @@
           "printedPage": 69,
           "competencyTag": "comprehension",
           "detailTag": "language-and-culture-discrimination",
-          "prompt": "课后任务第2题：下列对加点词语相关内容的解说，不正确的一项是？",
+          "prompt": "课后任务第2题：下列对加点词语相关内容的解说，不正确的一项是？\nA. 归宁：出嫁的女子回娘家省亲。\nB. 孝：指对兄长敬爱；悌：指对父母孝顺。儒家提倡孝悌是为了维护宗法等级秩序。\nC. 字：古人幼时命名，成年（男20岁，女15岁）取字，字和名有意义上的联系；称字出于礼貌和尊敬。\nD. 壬辰：由天干地支依次相配组成六十个基本单位，古人用以作为年月日时的序号。",
           "answerAuthority": "codex_reference",
           "answerLabel": "Codex 參考答案",
           "referenceAnswer": "B",
@@ -4995,7 +4993,7 @@
           "reviewRequired": false,
           "qualityNotes": [],
           "activeForSelfTest": true,
-          "semanticRevision": "e164ae3a87ab8036",
+          "semanticRevision": "0320151c6db57d77",
           "semanticAliases": []
         },
         {
@@ -5055,7 +5053,7 @@
           "printedPage": 70,
           "competencyTag": "comprehension",
           "detailTag": "content-discrimination",
-          "prompt": "课后任务第3题：下列对两段文本有关内容的概述，不正确的一项是？",
+          "prompt": "课后任务第3题：下列对两段文本有关内容的概述，不正确的一项是？\nA. 文本一关于妻死室坏的叙写，揭示了封建士大夫家庭走向没落的必然趋势，给人以深刻的启迪。\nB. 后母为了自己和孩子吃饱，在饭将熟时怪罪归钺，让他父亲发怒，将归钺赶出家门。\nC. 归绣卖盐卖麻供养家庭并和妻子一起抚养亲戚的遗孤。\nD. 篇末的“赞”是史传的传统写法，一般以作者议论为主，兼有抒情。",
           "answerAuthority": "codex_reference",
           "answerLabel": "Codex 參考答案",
           "referenceAnswer": "A",
@@ -5064,7 +5062,7 @@
           "reviewRequired": false,
           "qualityNotes": [],
           "activeForSelfTest": true,
-          "semanticRevision": "166bd16dd0cd3e6a",
+          "semanticRevision": "70643c482d8c2aca",
           "semanticAliases": []
         }
       ]
@@ -5321,7 +5319,7 @@
           "printedPage": 76,
           "competencyTag": "comprehension",
           "detailTag": "language-discrimination",
-          "prompt": "课后任务第1题：对加点词语的解释，不正确的一项是？",
+          "prompt": "课后任务第1题：对加点词语的解释，不正确的一项是？\nA. 况修短随化　修：修为\nB. 购募备尽　募：征求\nC. 弟子又幼来耽玩　耽：潜心\nD. 更不复安于梁槛上　安：放、藏",
           "answerAuthority": "codex_reference",
           "answerLabel": "Codex 參考答案",
           "referenceAnswer": "A",
@@ -5330,7 +5328,7 @@
           "reviewRequired": false,
           "qualityNotes": [],
           "activeForSelfTest": true,
-          "semanticRevision": "3903de9f5e0cc689",
+          "semanticRevision": "4e00f33326d718fd",
           "semanticAliases": []
         },
         {
@@ -5361,7 +5359,7 @@
           "printedPage": 76,
           "competencyTag": "vocabulary",
           "detailTag": "function-word-discrimination",
-          "prompt": "课后任务第2题：下列“之”字的用法与其他三项不同的一项是？",
+          "prompt": "课后任务第2题：下列“之”字的用法与其他三项不同的一项是？\nA. 太宗以德政之暇\nB. 知在辩才之所\nC. 梁元帝之曾孙\nD. 辩才熟详之曰",
           "answerAuthority": "codex_reference",
           "answerLabel": "Codex 參考答案",
           "referenceAnswer": "D",
@@ -5370,7 +5368,7 @@
           "reviewRequired": false,
           "qualityNotes": [],
           "activeForSelfTest": true,
-          "semanticRevision": "759180753c9d0ace",
+          "semanticRevision": "436f0abacec007f9",
           "semanticAliases": []
         },
         {
@@ -5756,18 +5754,16 @@
           "printedPage": 85,
           "competencyTag": "comprehension",
           "detailTag": "language-discrimination",
-          "prompt": "课后任务第2题：下列对加点词语及相关内容的解说，不正确的一项是？",
+          "prompt": "课后任务第2题：下列对加点词语及相关内容的解说，不正确的一项是？\nA. 乃赋《归去来兮辞》：乃，在文中指于是，与“家祭无忘告乃翁”中的“乃”词义不相同。\nB. 既而语人云：语，在文中指告诉，与《梦游天姥吟留别》“越人语天姥”中的“语”词义相同。\nC. 家务悉委之儿仆：委，在文中指交托，与《得道多助，失道寡助》中“委而去之，是地利不如人和也”中“委”字词义不相同。\nD. 仲秋至冬：仲秋，农历八月，八月是秋季的第二个月，按孟仲季之序称为仲秋。",
           "answerAuthority": "codex_reference",
           "answerLabel": "Codex 參考答案",
           "referenceAnswer": "B",
           "explanation": "“既而语人云”的“语”读yù，意为告诉；“越人语天姥”的“语”读yǔ，意为谈论，词义不同。",
           "rubric": [],
           "reviewRequired": false,
-          "qualityNotes": [
-            "本條編目未保存 A-D 選項，現僅保留答案 B 與解析供核對；選項恢復前不提供獨立自測。"
-          ],
-          "activeForSelfTest": false,
-          "semanticRevision": "4ecc302a32a133cf",
+          "qualityNotes": [],
+          "activeForSelfTest": true,
+          "semanticRevision": "56fc95d8cac4e0a6",
           "semanticAliases": []
         },
         {
@@ -5777,7 +5773,7 @@
           "printedPage": 85,
           "competencyTag": "comprehension",
           "detailTag": "content-discrimination",
-          "prompt": "课后任务第3题：下列对原文有关内容的概括和分析，不正确的一项是？",
+          "prompt": "课后任务第3题：下列对原文有关内容的概括和分析，不正确的一项是？\nA. 陶渊明因为家庭贫困，亲人年迈，曾做州祭酒；不久辞职回家，后来又历任镇军、建威参军、彭泽令。\nB. 陶渊明做彭泽县令时，一开始命令公田全部种秫谷，后来在妻儿请求下才决定一半种秫谷、一半种粳稻。\nC. 陶渊明好酒，每当朋友带酒肉到他家，他都会喝醉，感觉舒适快意，随后吟咏不止。\nD. 陶渊明请求到彭泽县做官，是考虑到当时社会动荡、彭泽县离家较近，并且公田之利足够酿酒。",
           "answerAuthority": "codex_reference",
           "answerLabel": "Codex 參考答案",
           "referenceAnswer": "C",
@@ -5786,7 +5782,7 @@
           "reviewRequired": false,
           "qualityNotes": [],
           "activeForSelfTest": true,
-          "semanticRevision": "dc53d845b2856e1f",
+          "semanticRevision": "7a169de877d7115f",
           "semanticAliases": []
         }
       ]
@@ -6099,7 +6095,7 @@
           "printedPage": 93,
           "competencyTag": "comprehension",
           "detailTag": "objective-question-set",
-          "prompt": "课后任务第1至3题：分别选择正确断句、词语解说不正确项、内容概括不正确项。",
+          "prompt": "课后任务第1至3题：分别选择正确断句、词语解说不正确项、内容概括不正确项。请依次提交三个选项字母。\n第1题：下列对文中画波浪线部分的断句，正确的一项是？\nA. 署之东园／久茀不治修／至始辟之／粪瘠溉枯／为蔬圃十数畦／又植花果桐竹／凡百本／春阳既浮／萌者将动\nB. 署之东园／久茀不治／修至始辟之／粪瘠溉枯为蔬圃／十数畦／又植花果桐竹／凡百本／春阳既浮／萌者将动\nC. 署之东园／久茀不治修／至始辟之／粪瘠溉枯为蔬圃／十数畦／又植花果桐竹凡百本／春阳既浮／萌者将动\nD. 署之东园／久茀不治／修至始辟之／粪瘠溉枯／为蔬圃十数畦／又植花果桐竹凡百本／春阳既浮／萌者将动\n第2题：下列对文中加点词语的相关内容的解说，不正确的一项是？\nA. “以无用而贼有用”的“贼”，指侵害、伤害，与“早实以蕃”的“实”，表示结果实，两者都是名词活用为动词。\nB. “则与吾业者其亦有类乎”的“其”，与“视其处之而已”的“其”，两者用法相同。\nC. 缕，双股搓合的线，可泛指线状物，古有“蚕者为丝，麻者为缕”之说。\nD. 飧饔（sūn yōng），古时招待宾客的两种礼宴，飧饔分别指晚餐和早餐，后引申为吃饭。\n第3题：下列对原文有关内容的概括和分析，不正确的一项是？\nA. 第一篇围绕“养树之术”和“养人之术”的类比展开，表现出作者对民生的关注；第二篇针对树的“伐”与“生”，借客人对庄周之言的论述，显示出敢于挑战权威的勇气。\nB. 两文均有存疑答疑的过程：第一篇因郭橐驼种树无不活和他植者莫能如而让人生疑，后郭橐驼答疑；第二篇作者对园内树木的去留原则与庄周之说相似而生疑，后客人答疑。\nC. 第一篇对比特色鲜明，有郭橐驼和他植者种树效果的对比、两种种树方法的对比等；第二篇叙事脉络清晰，论述层层深入，反问句式有力，结尾句耐人寻味。\nD. 两文均有寓言性质：第一篇在朴实的简单类比中，揭示吏治的弊端，颇具讽刺意味；第二篇通过具体的小事推而广之，体现出事物的生存与消亡取决于它所处的环境和时势。",
           "answerAuthority": "codex_reference",
           "answerLabel": "Codex 參考答案",
           "referenceAnswer": {
@@ -6121,7 +6117,7 @@
           "reviewRequired": false,
           "qualityNotes": [],
           "activeForSelfTest": true,
-          "semanticRevision": "9f74ebb3075c9045",
+          "semanticRevision": "a46925a5388b4717",
           "semanticAliases": []
         }
       ]
@@ -6387,7 +6383,7 @@
           "printedPage": 100,
           "competencyTag": "comprehension",
           "detailTag": "objective-question-set",
-          "prompt": "课后任务第1至3题：分别选择正确断句、文化常识解说不正确项、内容概括不正确项。",
+          "prompt": "课后任务第1至3题：分别选择正确断句、文化常识解说不正确项、内容概括不正确项。请依次提交三个选项字母。\n第1题：下列对文中画波浪线部分的断句，正确的一项是？\nA. 入之其中／透漏玲珑／乳石如天花散漫／垂垂欲落\nB. 入之／其中透漏玲珑／乳石如天花散漫／垂垂欲落\nC. 入之／其中透漏玲珑／乳石如天花／散漫垂垂欲落\nD. 入之其中／透漏／玲珑乳石如天花／散漫垂垂欲落\n第2题：下列对文中加点词语的相关内容的解说，不正确的一项是？\nA. 元丰，皇帝的年号，年号是中国封建王朝用来纪年的一种名号，先秦至汉初无年号，汉武帝即位后首创年号。始创年号为建元，一个皇帝只有一个年号。\nB. 公元前522年周景王铸造了一套名叫“无射（yì）”的大型编钟。无射是十二律中的第十一律，因钟声合乎无射的音律，故用“无射”作钟名。\nC. 笔记，一种随笔记录的文体，笔记文包括史料笔记、考据笔记和笔记小说。\nD. 丹房，指道教炼丹的地方，后指道观；也指神仙的住所。本文指的是神仙的住所。\n第3题：下列对原文有关内容的概括和分析，不正确的一项是？\nA. 文段（一）是通过记游来发表议论的别开生面的文章，它既有记叙文写景状物形象生动的特点，又有议论文剖析事理、探讨问题的性质。\nB. 文段（一）中作者用栖鹘和鹳鹤的声音渲染了一种阴森恐怖的气氛，使人心惊胆战，侧面凸显出了作者的不怕艰险、勇于探索的精神。\nC. 文段（二）认为苏轼只看到了下钟山的山形似钟，而没看到上钟山亦然。\nD. 文段（二）认为苏轼考察石钟山，以为其得名是因风水相吞吐而为声，这也没有探察到问题的根本。",
           "answerAuthority": "codex_reference",
           "answerLabel": "Codex 參考答案",
           "referenceAnswer": {
@@ -6409,7 +6405,7 @@
           "reviewRequired": false,
           "qualityNotes": [],
           "activeForSelfTest": true,
-          "semanticRevision": "d425cef4610a5191",
+          "semanticRevision": "eee7930637f90d69",
           "semanticAliases": []
         },
         {

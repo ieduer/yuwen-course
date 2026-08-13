@@ -15,6 +15,7 @@ const SUBMISSION_RATE_LIMIT = Object.freeze({
 const registryCache = { value: null, expiresAt: 0 };
 const manifestCache = { value: null, expiresAt: 0 };
 const formativeManifestCache = { value: null, expiresAt: 0 };
+const trustedSubmissionReservations = new WeakSet();
 const A_PLUS_COMPATIBILITY_KEYS = Object.freeze([
   "schemaVersion",
   "contractVersion",
@@ -50,6 +51,16 @@ export class LearningSubmissionRateLimitError extends Error {
     this.name = "LearningSubmissionRateLimitError";
     this.code = "learning_submission_rate_limited";
     this.retryAfterSeconds = Math.max(1, Number(retryAfterSeconds) || SUBMISSION_RATE_LIMIT.windowSeconds);
+  }
+}
+
+export class LearningSubmissionInProgressError extends Error {
+  constructor(retryAfterSeconds = SUBMISSION_RATE_LIMIT.windowSeconds) {
+    const wait = Math.max(1, Number(retryAfterSeconds) || SUBMISSION_RATE_LIMIT.windowSeconds);
+    super(`本次提交已进入评阅；若未返回结果，请在 ${wait} 秒后使用同一提交重试`);
+    this.name = "LearningSubmissionInProgressError";
+    this.code = "learning_submission_in_progress";
+    this.retryAfterSeconds = wait;
   }
 }
 
@@ -416,6 +427,11 @@ async function loadFormativeManifest(request, env, learningManifest) {
   return manifest;
 }
 
+export function invalidateFormativeManifestCache() {
+  formativeManifestCache.value = null;
+  formativeManifestCache.expiresAt = 0;
+}
+
 async function assertClassicalFirstReadGate({ request, env, student, lesson, interactionKey, formativeManifest, formativeItem }) {
   if (["lessonOpened", "initialReadingSubmitted"].includes(interactionKey)) return;
   if (!formativeManifest.processByKey.has(`${lesson.id}\ninitialReadingSubmitted`)) return;
@@ -639,7 +655,9 @@ async function enforceSubmissionRateLimit(db, studentId, resourceKey, definition
         WHERE student_id = ? AND window_start = ?`
     ).bind(studentId, windowStart).first(),
   ]);
-  if (Number(recent?.n || 0) >= resourceLimit || Number(globalRecent?.n || 0) >= globalLimit) {
+  const resourceUsed = Math.max(Number(recent?.n || 0), Number(resourceSlots?.n || 0));
+  const globalUsed = Math.max(Number(globalRecent?.n || 0), Number(globalSlots?.n || 0));
+  if (resourceUsed >= resourceLimit || globalUsed >= globalLimit) {
     throw new LearningSubmissionRateLimitError(Math.max(1, Math.ceil((windowStartMs + windowMs - windowEndMs) / 1000)));
   }
   return {
@@ -647,6 +665,118 @@ async function enforceSubmissionRateLimit(db, studentId, resourceKey, definition
     resourceSlotNo: Number(resourceSlots?.n || 0) + 1,
     globalSlotNo: Number(globalSlots?.n || 0) + 1,
   };
+}
+
+async function deterministicReservationId(studentId, clientMutationId, windowStart) {
+  const hex = await sha256Text(`yw-submission-reservation-v1\n${studentId}\n${clientMutationId}\n${windowStart}`);
+  const variantNibble = ((Number.parseInt(hex[16], 16) & 0x3) | 0x8).toString(16);
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-5${hex.slice(13, 16)}-${variantNibble}${hex.slice(17, 20)}-${hex.slice(20, 32)}`;
+}
+
+async function reserveSubmissionSlot(
+  db,
+  studentId,
+  clientMutationId,
+  resourceKey,
+  definition,
+  occurredAt,
+  retry = 0,
+) {
+  const rateReservation = await enforceSubmissionRateLimit(
+    db,
+    studentId,
+    resourceKey,
+    definition,
+    occurredAt,
+  );
+  const sourceEventId = await deterministicReservationId(studentId, clientMutationId, rateReservation.windowStart);
+  try {
+    await db.prepare(
+      `INSERT INTO learning_submission_slots (
+         source_event_id, student_id, resource_key, window_start, resource_slot_no, global_slot_no
+       ) VALUES (?, ?, ?, ?, ?, ?)`
+    ).bind(
+      sourceEventId,
+      studentId,
+      resourceKey,
+      rateReservation.windowStart,
+      rateReservation.resourceSlotNo,
+      rateReservation.globalSlotNo,
+    ).run();
+  } catch (error) {
+    if (isUniqueConstraintError(error)) {
+      const sameMutation = await db.prepare(
+        `SELECT source_event_id, student_id, resource_key, window_start
+           FROM learning_submission_slots WHERE source_event_id = ?`
+      ).bind(sourceEventId).first();
+      if (sameMutation?.source_event_id === sourceEventId) {
+        if (Number(sameMutation.student_id) !== Number(studentId)
+          || clean(sameMutation.resource_key, 220) !== resourceKey
+          || String(sameMutation.window_start || "") !== rateReservation.windowStart) {
+          const conflict = new Error("client mutation id already belongs to another learning item");
+          conflict.code = "learning_mutation_conflict";
+          throw conflict;
+        }
+        const windowEndMs = Date.parse(rateReservation.windowStart)
+          + SUBMISSION_RATE_LIMIT.windowSeconds * 1000;
+        const occurredAtMs = Date.parse(occurredAt);
+        const retryAfterSeconds = Math.max(1, Math.ceil(
+          (windowEndMs - (Number.isFinite(occurredAtMs) ? occurredAtMs : Date.now())) / 1000,
+        ));
+        throw new LearningSubmissionInProgressError(retryAfterSeconds);
+      }
+      if (Number(retry) < 3) {
+        return reserveSubmissionSlot(
+          db,
+          studentId,
+          clientMutationId,
+          resourceKey,
+          definition,
+          occurredAt,
+          Number(retry) + 1,
+        );
+      }
+    }
+    throw error;
+  }
+  return { sourceEventId, ...rateReservation };
+}
+
+function assertTrustedSubmissionReservation(
+  reservation,
+  { student, lesson, interactionKey, clientMutationId, rawPayloadJson },
+) {
+  if (!reservation || !trustedSubmissionReservations.has(reservation)
+    || reservation.studentId !== Number(student.id)
+    || reservation.lessonId !== lesson.id
+    || reservation.interactionKey !== interactionKey
+    || reservation.clientMutationId !== clientMutationId
+    || reservation.rawPayloadJson !== rawPayloadJson) {
+    throw new Error("learning submission reservation invalid");
+  }
+  return reservation;
+}
+
+export async function acquireLearningSubmissionReservation({
+  db,
+  studentId,
+  clientMutationId,
+  resourceKey,
+  scoringRole = "formative",
+  occurredAt = isoNow(),
+}) {
+  if (!db || !Number.isInteger(Number(studentId)) || Number(studentId) <= 0
+    || !clean(clientMutationId, 100) || !clean(resourceKey, 220)) {
+    throw new Error("submission reservation input invalid");
+  }
+  return reserveSubmissionSlot(
+    db,
+    Number(studentId),
+    clean(clientMutationId, 100),
+    clean(resourceKey, 220),
+    { scoringRole: clean(scoringRole, 40) },
+    occurredAt,
+  );
 }
 
 function normalizeServerEvaluation(definition, interactionKey, evaluation) {
@@ -701,11 +831,19 @@ export async function assertLearningSubmissionAllowed({
   interactionKey,
   payload = {},
   occurredAt = isoNow(),
+  expectedStudyGuideCatalogDigest = "",
 }) {
   if (!env.READING_DB || !student?.id || !lesson?.id) throw new Error("learning evidence source unavailable");
   const context = await resolveInteractionContext(request, env, student, lesson, interactionKey, payload);
+  if (expectedStudyGuideCatalogDigest
+    && context.formativeManifest.studyGuideCatalogDigest !== expectedStudyGuideCatalogDigest) {
+    const error = new Error("study-guide and formative catalogs are not the same release");
+    error.code = "study_guide_catalog_drift";
+    throw error;
+  }
   const raw = boundedRawPayload(context.definition, context.normalizedPayload);
   const clientMutationId = clean(payload.clientMutationId, 100);
+  if (!clientMutationId) throw new Error("client mutation id required before evaluation");
   const existing = await existingInteraction(env.READING_DB, student.id, clientMutationId);
   if (existing) {
     assertIdempotentReplayMatches(existing, context.resourceKey, interactionKey, raw.serialized);
@@ -718,17 +856,36 @@ export async function assertLearningSubmissionAllowed({
       evaluation: storedEvaluation(existing),
     };
   }
-  await enforceSubmissionRateLimit(
+  const slot = await reserveSubmissionSlot(
     env.READING_DB,
     student.id,
+    clientMutationId,
     context.resourceKey,
     context.definition,
     occurredAt,
   );
+  const submissionReservation = {
+    sourceEventId: slot.sourceEventId,
+    occurredAt,
+    studentId: Number(student.id),
+    lessonId: lesson.id,
+    interactionKey,
+    clientMutationId,
+    resourceKey: context.resourceKey,
+    rawPayloadJson: raw.serialized,
+    rateReservation: {
+      windowStart: slot.windowStart,
+      resourceSlotNo: slot.resourceSlotNo,
+      globalSlotNo: slot.globalSlotNo,
+    },
+    context,
+  };
+  trustedSubmissionReservations.add(submissionReservation);
   return {
     allowed: true,
     deduped: false,
     resourceKey: context.resourceKey,
+    submissionReservation,
   };
 }
 
@@ -760,9 +917,15 @@ export async function recordLearningInteraction({
   evaluation = null,
   occurredAt = isoNow(),
   sourceMutation = null,
+  submissionReservation = null,
   contentionRetry = 0,
 }) {
   if (!env.READING_DB || !student?.id || !lesson?.id) throw new Error("learning evidence source unavailable");
+  if (submissionReservation && sourceMutation) {
+    throw new Error("reserved submission cannot carry a separate source mutation");
+  }
+  const effectiveOccurredAt = submissionReservation?.occurredAt || occurredAt;
+  const reservedContext = submissionReservation?.context || null;
   const {
     registry,
     definition,
@@ -772,24 +935,33 @@ export async function recordLearningInteraction({
     manifestItem,
     formativeManifest,
     formativeItem,
-  } = await resolveInteractionContext(request, env, student, lesson, interactionKey, payload);
+  } = reservedContext || await resolveInteractionContext(request, env, student, lesson, interactionKey, payload);
   const raw = boundedRawPayload(definition, normalizedPayload);
 
   const clientMutationId = clean(payload.clientMutationId, 100);
+  const trustedReservation = submissionReservation
+    ? assertTrustedSubmissionReservation(submissionReservation, {
+      student,
+      lesson,
+      interactionKey,
+      clientMutationId,
+      rawPayloadJson: raw.serialized,
+    })
+    : null;
   const existing = await existingInteraction(env.READING_DB, student.id, clientMutationId);
   if (existing) {
     assertIdempotentReplayMatches(existing, resourceKey, interactionKey, raw.serialized);
     return dedupedInteractionResult(existing);
   }
 
-  const rateReservation = await enforceSubmissionRateLimit(
+  const rateReservation = trustedReservation?.rateReservation || await enforceSubmissionRateLimit(
     env.READING_DB,
     student.id,
     resourceKey,
     definition,
-    occurredAt,
+    effectiveOccurredAt,
   );
-  const sourceEventId = crypto.randomUUID();
+  const sourceEventId = trustedReservation?.sourceEventId || crypto.randomUUID();
   const attemptNo = await attemptNumber(env.READING_DB, student.id, resourceKey, interactionKey);
   const mutation = typeof sourceMutation === "function"
     ? await sourceMutation({ attemptNo, db: env.READING_DB, student, lesson, resourceKey })
@@ -824,7 +996,7 @@ export async function recordLearningInteraction({
     mappingVersion: versions.mappingVersion,
     registryVersion: versions.registryVersion,
     userId: Number(student.ucUserId || 0),
-    academicYear: academicYearFor(occurredAt),
+    academicYear: academicYearFor(effectiveOccurredAt),
     dimensionKey: definition.dimensionKey,
     eventType: definition.eventType,
     interactionKey,
@@ -839,7 +1011,7 @@ export async function recordLearningInteraction({
     rawValue: numericScore,
     maxValue: numericScore === null ? null : 100,
     normalizedValue,
-    occurredAt,
+    occurredAt: effectiveOccurredAt,
     sourceUrl: `https://yw.bdfz.net/#${encodeURIComponent(lesson.id)}`,
     sourcePayloadRef: `learning_interactions:${sourceEventId}`,
     summary,
@@ -863,7 +1035,7 @@ export async function recordLearningInteraction({
   };
 
   const statements = [
-    env.READING_DB.prepare(
+    ...(!trustedReservation ? [env.READING_DB.prepare(
       `INSERT INTO learning_submission_slots (
          source_event_id, student_id, resource_key, window_start, resource_slot_no, global_slot_no
        ) VALUES (?, ?, ?, ?, ?, ?)`
@@ -874,7 +1046,7 @@ export async function recordLearningInteraction({
       rateReservation.windowStart,
       rateReservation.resourceSlotNo,
       rateReservation.globalSlotNo,
-    ),
+    )] : []),
     ...sourceStatements,
     env.READING_DB.prepare(
       `INSERT INTO learning_interactions (
@@ -886,7 +1058,7 @@ export async function recordLearningInteraction({
       sourceEventId, student.id, student.ucUserId || null, envelope.academicYear, lesson.id, interactionKey,
       definition.eventType, definition.assessmentKind, definition.scoringRole, resourceKey, versions.sourceVersion,
       versions.registryVersion, envelope.classSessionId, envelope.lessonPhase, attemptNo, clientMutationId,
-      raw.serialized, occurredAt
+      raw.serialized, effectiveOccurredAt
     ),
     env.READING_DB.prepare(
       `INSERT INTO learning_evaluations (
@@ -906,7 +1078,7 @@ export async function recordLearningInteraction({
         nextQuestion: clean(effectiveEvaluation?.nextQuestion, 500),
         eligibilityReason,
       }),
-      occurredAt
+      effectiveOccurredAt
     ),
     env.READING_DB.prepare(
       "INSERT INTO evidence_outbox (source_event_id, envelope_json) VALUES (?, ?)"
@@ -934,6 +1106,7 @@ export async function recordLearningInteraction({
           evaluation,
           occurredAt,
           sourceMutation,
+          submissionReservation,
           contentionRetry: Number(contentionRetry) + 1,
         });
       }

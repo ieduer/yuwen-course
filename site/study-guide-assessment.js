@@ -2,8 +2,25 @@ function clean(value, max = 4000) {
   return String(value || "").normalize("NFC").trim().slice(0, max);
 }
 
+function answerLead(value) {
+  return clean(value)
+    .normalize("NFKC")
+    .split(/(?:\r?\n|[。！？!?；;])/u, 1)[0]
+    .split(/(?:因為|因为|理由|解析|依據|依据|原因)/u, 1)[0]
+    .trim();
+}
+
 function choiceLetters(value) {
-  return [...clean(value).toUpperCase().matchAll(/[A-D]/g)].map((match) => match[0]);
+  return [...answerLead(value).toUpperCase().matchAll(/(?:^|[^A-Z])([A-D])(?=$|[^A-Z])/g)]
+    .map((match) => match[1]);
+}
+
+function circledNumbers(value) {
+  const lead = clean(value)
+    .split(/(?:\r?\n|[。！？!?；;])/u, 1)[0]
+    .split(/(?:因為|因为|理由|解析|依據|依据|原因)/u, 1)[0];
+  return [...lead.matchAll(/[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳]/gu)]
+    .map((match) => match[0]);
 }
 
 function expectedChoiceSpec(referenceAnswer) {
@@ -27,8 +44,9 @@ function expectedChoiceSpec(referenceAnswer) {
 
 function punctuationSignature(value) {
   return clean(value)
-    .replace(/[「」『』“”‘’"']/g, "")
-    .replace(/[，,。；;！？!?、／/]+/g, "|")
+    .replace(/[「」『』“”‘’"'《》〈〉（）()【】\[\]]/g, "")
+    .replace(/[：:，,。；;！？!?、／/]+/g, "|")
+    .replace(/[—–－…·]+/g, "")
     .replace(/\s+/g, "")
     .replace(/^\|+|\|+$/g, "")
     .replace(/\|+/g, "|");
@@ -52,6 +70,17 @@ export function deterministicStudyGuideAssessment(item, response) {
   const detailTag = clean(item?.detailTag, 100);
   const { choices: expected, mode } = expectedChoiceSpec(item?.referenceAnswer);
   if (expected.length > 0 && /(?:choice|discrimination|identification|objective|knowledge)/i.test(detailTag)) {
+    const expectedCircled = circledNumbers(item?.referenceAnswer);
+    const actualCircled = circledNumbers(response);
+    if (expectedCircled.length > 0 && actualCircled.length > 0) {
+      const normalizedExpectedCircled = [...new Set(expectedCircled)].sort();
+      const normalizedActualCircled = [...new Set(actualCircled)].sort();
+      const correct = normalizedActualCircled.length === normalizedExpectedCircled.length
+        && normalizedActualCircled.every((entry, index) => entry === normalizedExpectedCircled[index]);
+      return correct
+        ? assessment(100, "答案鍵核對正確。")
+        : assessment(0, "答案鍵核對未通過。", `應選 ${expected.join("、")}（${expectedCircled.join("")}）。`);
+    }
     const actual = choiceLetters(response);
     const normalizedExpected = mode === "set" ? [...expected].sort() : expected;
     const normalizedActual = mode === "set"
@@ -63,7 +92,8 @@ export function deterministicStudyGuideAssessment(item, response) {
       ? assessment(100, "答案鍵核對正確。")
       : assessment(0, "答案鍵核對未通過。", `應選 ${expected.join("、")}。`);
   }
-  if (detailTag === "punctuation" && typeof item?.referenceAnswer === "string") {
+  if (/(?:punctuation|sentence[-_]segmentation)/i.test(detailTag)
+      && typeof item?.referenceAnswer === "string") {
     const expectedSignature = punctuationSignature(item.referenceAnswer);
     const actualSignature = punctuationSignature(response);
     const correct = Boolean(actualSignature && actualSignature === expectedSignature);
@@ -99,6 +129,18 @@ export function normalizeOpenStudyGuideAssessment(value) {
     gap,
     nextQuestion,
     passed,
+  };
+}
+
+export function normalizeInteractionAssessment(value, fallbackText = "") {
+  const normalized = normalizeOpenStudyGuideAssessment(value);
+  return {
+    score: normalized.score,
+    verdict: normalized.verdict,
+    strength: normalized.strength,
+    gap: normalized.gap,
+    nextQuestion: normalized.nextQuestion,
+    raw: clean(fallbackText, 2000),
   };
 }
 

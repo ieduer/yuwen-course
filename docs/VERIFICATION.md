@@ -1,5 +1,53 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-13 scoring-correctness candidate
+
+Run the full source and release-artifact prerequisites with exact Node 24.18.0
+and repeat them with Node 22.21.1 compatibility authority:
+
+```zsh
+npm run precontent:check
+node --test scripts/test_study_guide_assessment.mjs \
+  scripts/test_study_guide_catalog.mjs \
+  scripts/test_study_guide_frontend.mjs \
+  scripts/test_learning_evidence_contract.mjs \
+  scripts/test_local_progress_truthfulness.mjs \
+  scripts/test_preview_binding_isolation.mjs \
+  scripts/test_formative_mastery_projection.mjs
+git diff --check
+```
+
+The gate must prove:
+
+- every active deterministic choice prompt contains its source-visible A and D
+  option boundaries; the eight restored PDF prompts retain exact reviewed
+  options and source answer order;
+- answer explanations containing A--D letters cannot change the selected
+  answer; circled answers, quote/colon/bracket punctuation, dash/ellipsis and
+  sentence segmentation are deterministic;
+- a real score zero remains zero; missing/non-numeric score or incomplete AI
+  feedback throws and cannot become 60 or a pass;
+- catalog digest, formative digest and semantic revision are checked before
+  reservation/write, with one coherent cache reload and fail-closed drift;
+- `assertLearningSubmissionAllowed` precedes APIS, creates a durable slot and
+  exact mutation-bound reservation, and a duplicate/failed evaluator cannot
+  create a second charge or evidence row; the browser reuses the same mutation
+  ID until a terminal durable receipt;
+- `/api/interaction-check` rejects anonymous identity; `/api/learning-check`
+  returns 410; APIS has a 20-second abort signal; frontend error handling keeps
+  failed/unavailable evaluation out of completion;
+- preview lacks production data bindings and never falls back to a cached or
+  public-HTTP production identity.
+
+Completed evidence on 2026-08-13: focused matrix 61/61 on Node 24.18.0 and
+61/61 on Node 22.21.1; complete `precontent:check` passed on both runtimes;
+Reading API 70/70; native-content 22/22; release-site 5/5. The run used the
+current read-only course exports and generated ignored page cache. It made no
+remote write. Production acceptance still requires a clean exact commit,
+formal Web-only artifact with stable App pointer, external-executor backup and
+rollback authority, UC/YW migration and Queue readback, then an authenticated
+environment-account evidence-to-My A--F check.
+
 ## 2026-08-12 e310/v2 delivery-recovery candidate
 
 Run the current source contract on exact Node 24.18.0 and Node 22.21.1:
@@ -63,9 +111,10 @@ exact active A+ receipt; malformed/wrong-client/disabled native authority fails
 closed; dual credentials cannot cross users; native output contains 189
 student lessons while all 191 source reader documents remain byte-validated;
 and no browser or App field can claim score, correctness or eligibility.
-`npm run test:local-progress` must additionally prove that an anonymous
-passing score remains incomplete, the UI says `試做 · 未記錄`, and only a
-recognized authenticated evidence status can advance a checkpoint.
+`npm run test:local-progress` must additionally prove that a historical
+anonymous result remains incomplete and a new anonymous evidence status is
+rejected; only a recognized authenticated evidence status can advance a
+checkpoint.
 
 For the classical native projection, `npm run test:native-content` must also
 prove that the Web index's 30 lessons / 102 paragraphs are projected exactly,
@@ -164,9 +213,9 @@ The current run must prove:
 
 The completed local precontent run reports: preview targets 6/6, resource and
 screenshot policy 13/13, authenticated importer 5/5,
-learning manifest 9/9, study-guide catalog 3/3, assessment 6/6, frontend 3/3,
-evidence 15/15, formative projection 4/4, shared state 13/13 plus real browser,
-Reading API 70/70, native candidate 21/21 and release-site 5/5. Layout
+learning manifest 9/9, study-guide catalog 3/3, assessment 9/9, frontend 5/5,
+evidence 28/28, formative projection 4/4, shared state 13/13 plus real browser,
+Reading API 70/70, native candidate 22/22 and release-site 5/5. Layout
 acceptance passed 25/25, the dedicated Web-polish browser matrix passed 32/32,
 the embed-playback matrix passed 16/16, and the live independent-load sweep
 passed 189/189 lessons plus 30/30 aggregate checks. The `lesson-1534` browser flow rendered 98 initially hidden notes,
@@ -175,12 +224,12 @@ unlocked it only after the exact stable mutation succeeded.
 
 The formal staging/check and artifact-manifest check pass at 1,223 files. The
 release marker is `formal-stable`, 1,222 projected files, projected aggregate
-`0217dc7579cc58ed3c49364e850c0d0561437638383b8f8b621709ff4816050e`,
+`a5172edec5e9e9d25bf24078c15869fe04c526166b79f30b0a1e3ebad9f42b91`,
 marker SHA-256
-`e384299f11f5695cfe118950bf4f486e1d803ba6fca4335816c49e03dac437c8`
+`6ce4ad3e39657a792bc73f0478a4d68edf686fe9eb9f26ee271ac57c9266c13d`
 and artifact-manifest aggregate
-`9513b0c02a02a1b7aa3e98201acf09fc2e9e9daf844ffeca02f528c92c87c785`
-(163,876,528 bytes).
+`947f3e297f5031a18fbefd0d63b2e955a7ffde5dbd76e93b6170332d6f66c278`
+(164,367,668 bytes).
 It includes the unchanged stable App release only (278 exact paths) and no new
 App candidate or pointer.
 

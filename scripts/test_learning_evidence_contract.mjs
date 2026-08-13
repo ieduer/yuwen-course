@@ -7,10 +7,13 @@ import test from "node:test";
 import { resolve } from "node:path";
 
 import {
+  acquireLearningSubmissionReservation,
   drainEvidenceOutbox,
+  LearningSubmissionInProgressError,
   LearningSubmissionRateLimitError,
   learningEvidenceContract,
   OUTBOX_RETRY_SELECTION_SQL,
+  assertLearningSubmissionAllowed,
   recordLearningInteraction,
 } from "../site/learning-evidence-source.js";
 import worker from "../site/_worker.js";
@@ -213,6 +216,9 @@ function sqliteD1(db) {
         async all() {
           return { results: db.prepare(sql).all(...this.values) };
         },
+        async first() {
+          return db.prepare(sql).get(...this.values) || null;
+        },
         async run() {
           const result = db.prepare(sql).run(...this.values);
           return { success: true, meta: { changes: Number(result.changes || 0) } };
@@ -345,6 +351,25 @@ test("the Worker checks the per-user resource bound before AI work and vocabular
     interactionHandler.indexOf("assertLearningSubmissionAllowed") <
       interactionHandler.indexOf('callApisPrompt(env, prompt, "feedback"'),
   );
+  assert.match(interactionHandler, /if \(!student\) return authenticatedEvaluationRequiredResponse\(\)/);
+  assert.match(interactionHandler, /submissionReservation: submissionGuard\.submissionReservation/);
+
+  const retiredLearningCheck = workerSource.slice(
+    workerSource.indexOf("async function handleLearningCheck"),
+    workerSource.indexOf("async function callApisPrompt"),
+  );
+  assert.match(retiredLearningCheck, /untracked_learning_check_retired/);
+  assert.match(retiredLearningCheck, /status: 410/);
+  assert.doesNotMatch(retiredLearningCheck, /callApisPrompt/);
+
+  const apisPrompt = workerSource.slice(
+    workerSource.indexOf("async function callApisPrompt"),
+    workerSource.indexOf("async function callApisGateway"),
+  );
+  assert.match(apisPrompt, /AbortController/);
+  assert.match(apisPrompt, /20_000/);
+  assert.match(apisPrompt, /signal: controller\.signal/);
+  assert.match(apisPrompt, /clearTimeout\(timeout\)/);
 
   const vocabHandler = workerSource.slice(
     workerSource.indexOf("async function handleReadingVocabAttempt"),
@@ -366,6 +391,9 @@ test("the Worker checks the per-user resource bound before AI work and vocabular
       && studyGuideHandler.indexOf("assertLearningSubmissionAllowed") <
         studyGuideHandler.indexOf("deterministicStudyGuideAssessment"),
   );
+  assert.match(studyGuideHandler, /submissionReservation: submissionGuard\.submissionReservation/);
+  assert.match(studyGuideHandler, /catalog\.catalogDigest !== submittedCatalogDigest/);
+  assert.match(studyGuideHandler, /item\.semanticRevision !== submittedSemanticRevision/);
   assert.ok(
     studyGuideHandler.indexOf("authoritativeStudyGuideAssessment(assessment, recorded)") >= 0,
   );
@@ -746,6 +774,32 @@ test("study-guide and initial-reading events bind to the current semantic format
   );
 });
 
+test("study-guide guard rejects a catalog digest that does not match the formative authority before reserving", async () => {
+  const studyItem = formativeManifest.lessons
+    .find((entry) => entry.lessonId === vocabLesson.id)
+    .competencies.flatMap((entry) => entry.items)
+    .find((entry) => entry.interactionKey === "studyGuideItemCompleted");
+  const source = sourceEnvironment();
+  await assert.rejects(
+    assertLearningSubmissionAllowed({
+      request: new Request("https://yw.bdfz.net/api/reading/study-guide-attempt"),
+      env: source.env,
+      student: { id: 7, ucUserId: 42 },
+      lesson: vocabLesson,
+      interactionKey: "studyGuideItemCompleted",
+      payload: {
+        itemKey: studyItem.itemKey,
+        response: "我先完成自己的回答，再核对来源答案。",
+        referenceRevealedAt: "2026-08-13T22:00:00.000Z",
+        clientMutationId: "catalog-drift-mutation",
+      },
+      expectedStudyGuideCatalogDigest: "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    }),
+    (error) => error?.code === "study_guide_catalog_drift",
+  );
+  assert.equal(source.writes.length, 0);
+});
+
 test("annotated classical reading receipt is idempotent for the stable mutation id", async () => {
   const receipt = sourceEnvironment();
   const payload = {
@@ -1013,6 +1067,107 @@ test("the bounded scoring submission window permits ordinary revision and idempo
   assert.equal(deduped.sourceEventId, "existing-source-event");
   assert.equal(deduped.delivery, "already_recorded_ineligible");
   assert.equal(retry.writes.length, 0);
+});
+
+test("submission reservations count durable slots and the same mutation cannot trigger a second evaluator", async () => {
+  const db = new DatabaseSync(":memory:");
+  try {
+    db.exec(`CREATE TABLE learning_interactions (
+      source_event_id TEXT PRIMARY KEY,
+      student_id INTEGER NOT NULL,
+      resource_key TEXT NOT NULL,
+      occurred_at TEXT NOT NULL
+    );
+    CREATE TABLE learning_submission_slots (
+      source_event_id TEXT PRIMARY KEY,
+      student_id INTEGER NOT NULL,
+      resource_key TEXT NOT NULL,
+      window_start TEXT NOT NULL,
+      resource_slot_no INTEGER NOT NULL,
+      global_slot_no INTEGER NOT NULL,
+      UNIQUE (student_id, resource_key, window_start, resource_slot_no),
+      UNIQUE (student_id, window_start, global_slot_no)
+    );`);
+    const d1 = sqliteD1(db);
+    const first = await acquireLearningSubmissionReservation({
+      db: d1,
+      studentId: 7,
+      clientMutationId: "stable-evaluator-mutation",
+      resourceKey: "formative:lesson-1:comprehension:revision",
+      occurredAt: "2026-08-13T22:00:00.000Z",
+    });
+    assert.match(first.sourceEventId, /^[a-f0-9-]{36}$/);
+    await assert.rejects(
+      acquireLearningSubmissionReservation({
+        db: d1,
+        studentId: 7,
+        clientMutationId: "stable-evaluator-mutation",
+        resourceKey: "formative:lesson-1:comprehension:revision",
+        occurredAt: "2026-08-13T22:00:01.000Z",
+      }),
+      (error) => error instanceof LearningSubmissionInProgressError
+        && error.retryAfterSeconds === 599,
+    );
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
+
+    await assert.rejects(
+      acquireLearningSubmissionReservation({
+        db: d1,
+        studentId: 7,
+        clientMutationId: "stable-evaluator-mutation",
+        resourceKey: "formative:lesson-2:comprehension:revision",
+        occurredAt: "2026-08-13T22:00:02.000Z",
+      }),
+      (error) => error?.code === "learning_mutation_conflict",
+    );
+  } finally {
+    db.close();
+  }
+});
+
+test("durable reservations alone exhaust the evaluator limit after failed evaluations", async () => {
+  const db = new DatabaseSync(":memory:");
+  try {
+    db.exec(`CREATE TABLE learning_interactions (
+      source_event_id TEXT PRIMARY KEY,
+      student_id INTEGER NOT NULL,
+      resource_key TEXT NOT NULL,
+      occurred_at TEXT NOT NULL
+    );
+    CREATE TABLE learning_submission_slots (
+      source_event_id TEXT PRIMARY KEY,
+      student_id INTEGER NOT NULL,
+      resource_key TEXT NOT NULL,
+      window_start TEXT NOT NULL,
+      resource_slot_no INTEGER NOT NULL,
+      global_slot_no INTEGER NOT NULL,
+      UNIQUE (student_id, resource_key, window_start, resource_slot_no),
+      UNIQUE (student_id, window_start, global_slot_no)
+    );`);
+    const d1 = sqliteD1(db);
+    for (let index = 0; index < 8; index += 1) {
+      await acquireLearningSubmissionReservation({
+        db: d1,
+        studentId: 7,
+        clientMutationId: `failed-evaluator-${index}`,
+        resourceKey: "formative:lesson-1:comprehension:revision",
+        occurredAt: "2026-08-13T22:00:00.000Z",
+      });
+    }
+    await assert.rejects(
+      acquireLearningSubmissionReservation({
+        db: d1,
+        studentId: 7,
+        clientMutationId: "ninth-evaluator",
+        resourceKey: "formative:lesson-1:comprehension:revision",
+        occurredAt: "2026-08-13T22:00:02.000Z",
+      }),
+      (error) => error instanceof LearningSubmissionRateLimitError,
+    );
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 8);
+  } finally {
+    db.close();
+  }
 });
 
 test("non-scoring telemetry is bounded and rejected before any write", async () => {
