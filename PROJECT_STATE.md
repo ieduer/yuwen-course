@@ -25,8 +25,27 @@ Last updated: 2026-08-12
 - Evaluation and every other source fact remain unable to claim `weight`,
   `grade`, `points`, bands or source caps. Unknown releases/mappings must be
   durably held outside scoring until the central contract is activated.
-- No Pages deployment, Queue write, D1 migration, User Center release, App
-  publication, commit or push was performed. The production facts recorded in
+- Additive D1 migration `0005_learning_evidence_central_receipts.sql` separates
+  Queue transport (`pending`/`enqueued`) from the authoritative User Center
+  disposition. The source outbox keeps unresolved v2 envelopes durably,
+  re-emits stale rows after a transport failure, and stops re-emitting once a
+  central `accepted`, `pending_mapping`, or `quarantined` receipt exists.
+  `pending_mapping` continues to be polled and can advance to `accepted`
+  or `quarantined` without another Queue send. Receipt updates compare and
+  swap the exact previously read central disposition and count success only
+  from D1 `changes=1`, so a stale pending poll cannot overwrite a concurrent
+  terminal decision. Historical v1 rows are preserved and are never silently
+  rewritten or sent into the v2 Queue.
+- YW remains a Pages project. Pages cannot own a Cron Trigger or Queue
+  consumer, so recovery is driven by ordinary authenticated interactions and
+  the learning-health request that User Center probes hourly. The UC Worker
+  owns the v2 main/DLQ consumers, bounded scheduled replay, and append-only
+  replay receipts. Learning health projects only privacy-safe aggregate counts.
+- After migration 0005, reading health is `reading-schema-v5` and requires the
+  v2 recovery index. Before that migration, the candidate health check
+  deliberately returns unavailable rather than claiming a usable outbox.
+- No Pages deployment, Queue write, D1 migration, User Center release or App
+  publication was performed. The production facts recorded in
   the following sections remain unchanged until the paired guarded release is
   separately authorized and read back.
 

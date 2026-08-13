@@ -1,8 +1,8 @@
 import {
   assertLearningSubmissionAllowed,
+  drainEvidenceOutbox,
   LearningSubmissionRateLimitError,
   recordLearningInteraction,
-  retryPendingEvidence,
   validateAPlusCompatibilityContract,
 } from "./learning-evidence-source.js";
 import {
@@ -62,6 +62,7 @@ export default {
       return handleLearningInteraction(request, env, ctx);
     }
     if (url.pathname === "/api/learning/health" && request.method === "GET") {
+      if (ctx?.waitUntil) ctx.waitUntil(drainEvidenceOutbox(env, 50));
       return handleLearningEvidenceHealth(env);
     }
     if (url.pathname === "/api/wy-articles" && request.method === "GET") {
@@ -285,7 +286,7 @@ async function handleLearningEvidenceHealth(env) {
           mappingVersion: compatibility.mappingVersion,
         },
         sourcePayloadPolicy: compatibility.sourceFactPolicy,
-        unknownReleasePolicy: "durably_ingest_pending_mapping_quarantine_alert_never_grade",
+        unknownReleasePolicy: "durably_ingest_pending_mapping_quarantine_observe_never_grade",
         resourceLifecyclePolicy: "append_release_never_replace_scoring_inventory_dedupe_canonical_unit",
         ledgerAuthority: compatibility.ledgerAuthority,
         clientPolicy: compatibility.clientPolicy,
@@ -319,7 +320,26 @@ async function handleLearningEvidenceHealth(env) {
     if (!exactAPlusSourceReceipt(aPlusSourceReceipt, aPlusDescriptor)) {
       return json({ error: "learning evidence contract mismatch" }, { status: 503 });
     }
-    return json({ ok: true, receipt, aPlusSourceReceipt });
+    const recovery = await env.READING_DB.prepare(
+      `SELECT
+         SUM(CASE WHEN central_disposition IS NULL AND delivery_status = 'pending' THEN 1 ELSE 0 END) AS transport_pending,
+         SUM(CASE WHEN central_disposition IS NULL AND delivery_status = 'enqueued' THEN 1 ELSE 0 END) AS transport_enqueued,
+         SUM(CASE WHEN central_disposition = 'accepted' THEN 1 ELSE 0 END) AS central_accepted,
+         SUM(CASE WHEN central_disposition = 'pending_mapping' THEN 1 ELSE 0 END) AS central_pending_mapping,
+         SUM(CASE WHEN central_disposition = 'quarantined' THEN 1 ELSE 0 END) AS central_quarantined
+       FROM evidence_outbox
+      WHERE json_extract(envelope_json, '$.schema') = 'bdfz-learning-evidence-event-v2'`
+    ).first();
+    const deliveryRecovery = {
+      schemaVersion: "yw-evidence-outbox-recovery-v1",
+      transportPending: Number(recovery?.transport_pending || 0),
+      transportEnqueued: Number(recovery?.transport_enqueued || 0),
+      centralAccepted: Number(recovery?.central_accepted || 0),
+      centralPendingMapping: Number(recovery?.central_pending_mapping || 0),
+      centralQuarantined: Number(recovery?.central_quarantined || 0),
+      containsIdentityData: false,
+    };
+    return json({ ok: true, receipt, aPlusSourceReceipt, deliveryRecovery });
   } catch {
     return json({ error: "learning evidence unavailable" }, { status: 503 });
   }
@@ -1431,7 +1451,7 @@ async function handleLearningInteraction(request, env, ctx) {
         lessonPhase: cleanText(payload.lessonPhase, 60),
       },
     });
-    if (ctx?.waitUntil) ctx.waitUntil(retryPendingEvidence(env, 5));
+    if (ctx?.waitUntil) ctx.waitUntil(drainEvidenceOutbox(env, 5));
     return json({
       ok: true,
       sourceEventId: recorded.sourceEventId,
@@ -2439,6 +2459,7 @@ async function handleReadingHealth(env) {
           'idx_classical_first_read_marks_mutation',
           'idx_classical_first_read_marks_state',
           'idx_evidence_outbox_pending_id',
+          'idx_evidence_outbox_v2_recovery',
           'idx_learning_interactions_attempt_unique',
           'idx_vocab_attempts_mutation_unique',
           'idx_vocab_attempts_attempt_unique',
@@ -2447,12 +2468,12 @@ async function handleReadingHealth(env) {
         )`
     ).first(),
   ]);
-  if (Number(tables?.n) !== 4 || Number(indexes?.n) !== 8) {
+  if (Number(tables?.n) !== 4 || Number(indexes?.n) !== 9) {
     return readingError("reading schema unavailable", 503);
   }
   const result = {
     ok: true,
-    schemaVersion: "reading-schema-v4",
+    schemaVersion: "reading-schema-v5",
     rulesVersion: "constellation-rules-v1",
     evidenceContractVersion: "bdfz-learning-evidence-event-v2",
   };

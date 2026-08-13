@@ -33,8 +33,9 @@ embedded into that repository or replaced by a hand-edited App content copy.
 - Database: D1 `yuwen-reading-db`, binding `READING_DB`.
 - User identity: User Center `siteKey=yw`, named evidence identity binding, and
   shared session/widget contract.
-- Learning evidence: source-owned interaction/evaluation ledger, reliable
-  outbox, and dedicated Queue `bdfz-learning-evidence-yw-v1`.
+- Learning evidence: source-owned interaction/evaluation ledger, durable
+  outbox, historical Queue `bdfz-learning-evidence-yw-v1`, current Queue
+  `bdfz-learning-evidence-yw-v2`, and central delivery-receipt reconciliation.
 - AI: shared `https://apis.bdfz.net`; no leaf model key.
 - Monitoring: Pulse host coverage and source-specific operational probes.
 - Native content: versioned, content-addressed graph, stable IDs, semantic
@@ -70,6 +71,9 @@ YW is a leaf project. It consumes shared hubs but does not own their contracts.
 - Lesson evaluation is `self_report` with `scoringRole=none`; it never changes
   a dimension or A+ gate.
 - Queue producer acceptance is `enqueued`, not proof of consumer delivery.
+  Only a User Center receipt may settle an outbox attempt as `accepted`,
+  `pending_mapping`, or `quarantined`; pending mapping stops transport resend
+  but remains eligible for central receipt polling.
 - Raw answers stay in YW D1; User Center receives only the privacy-minimized
   projection.
 - Never fabricate student progress, completion, evidence, or unavailable source

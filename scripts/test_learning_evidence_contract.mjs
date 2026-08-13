@@ -2,12 +2,15 @@
 
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { DatabaseSync } from "node:sqlite";
 import test from "node:test";
 import { resolve } from "node:path";
 
 import {
+  drainEvidenceOutbox,
   LearningSubmissionRateLimitError,
   learningEvidenceContract,
+  OUTBOX_RETRY_SELECTION_SQL,
   recordLearningInteraction,
 } from "../site/learning-evidence-source.js";
 import worker from "../site/_worker.js";
@@ -71,11 +74,45 @@ function mockStatement(sql, writes, state) {
       if (sql.includes("FROM learning_submission_slots")) {
         return { n: state.globalSlotCount };
       }
+      if (sql.includes("central_pending_mapping") && sql.includes("FROM evidence_outbox")) {
+        return {
+          transport_pending: 0,
+          transport_enqueued: 2,
+          central_accepted: 7,
+          central_pending_mapping: 1,
+          central_quarantined: 0,
+        };
+      }
       return null;
+    },
+    async all() {
+      if (sql.includes("FROM evidence_outbox") && sql.includes("delivery_status IN")) {
+        const statuses = new Set(["pending", "enqueued"]);
+        const includePendingMapping = sql.includes("central_disposition IS NULL OR central_disposition = 'pending_mapping'");
+        return { results: structuredClone((state.outboxRows || []).filter((row) => (
+          statuses.has(row.delivery_status)
+          && (!row.central_disposition || (includePendingMapping && row.central_disposition === "pending_mapping"))
+          && JSON.parse(row.envelope_json || "{}").schema === "bdfz-learning-evidence-event-v2"
+          && JSON.parse(row.envelope_json || "{}").contractVersion === "yw-aplus-e310-v2"
+        ))) };
+      }
+      return { results: [] };
     },
     async run() {
       writes.push({ sql, values: this.values });
-      return { success: true };
+      if (sql.includes("SET central_disposition = ?") && sql.includes("central_receipted_at")) {
+        const row = (state.outboxRows || []).find((candidate) => candidate.source_event_id === this.values[3]);
+        const expectedDisposition = this.values[4];
+        const matchesExpected = expectedDisposition === null
+          ? row?.central_disposition == null
+          : row?.central_disposition === expectedDisposition;
+        if (row && matchesExpected && ["pending", "enqueued"].includes(row.delivery_status)) {
+          row.central_disposition = this.values[0];
+          return { success: true, meta: { changes: 1 } };
+        }
+        return { success: true, meta: { changes: 0 } };
+      }
+      return { success: true, meta: { changes: 1 } };
     },
   };
 }
@@ -90,6 +127,8 @@ function sourceEnvironment({
   firstReadSubmitted = true,
   annotatedReadAcknowledged = true,
   vocabEvidenceExists = false,
+  outboxRows = [],
+  centralReceipts = [],
 } = {}) {
   const writes = [];
   const queued = [];
@@ -103,6 +142,7 @@ function sourceEnvironment({
     firstReadSubmitted,
     annotatedReadAcknowledged,
     vocabEvidenceExists,
+    outboxRows,
   };
   return {
     writes,
@@ -143,12 +183,43 @@ function sourceEnvironment({
           queued.push({ envelope, options });
         },
       },
+      USER_CENTER_EVIDENCE: {
+        async getLearningEvidenceDeliveryReceipts(sourceAttemptIds) {
+          return {
+            schemaVersion: "bdfz-learning-evidence-delivery-receipts-v1",
+            sourceSiteKey: "yw",
+            contractVersion: "yw-aplus-e310-v2",
+            receipts: centralReceipts.filter((receipt) => sourceAttemptIds.includes(receipt.sourceAttemptId)),
+          };
+        },
+      },
     },
   };
 }
 
 function writeStartingWith(writes, sqlPrefix) {
   return writes.find((write) => write.sql.trimStart().startsWith(sqlPrefix));
+}
+
+function sqliteD1(db) {
+  return {
+    prepare(sql) {
+      return {
+        values: [],
+        bind(...values) {
+          this.values = values;
+          return this;
+        },
+        async all() {
+          return { results: db.prepare(sql).all(...this.values) };
+        },
+        async run() {
+          const result = db.prepare(sql).run(...this.values);
+          return { success: true, meta: { changes: Number(result.changes || 0) } };
+        },
+      };
+    },
+  };
 }
 
 function assertSynchronizedIneligibleAttempt(result, queued, writes) {
@@ -246,6 +317,15 @@ test("YW exposes compound health and the exact existing A+ source activation rec
   assert.equal(response.status, 200);
   assert.equal(body.receipt.status, "healthy");
   assert.equal(body.aPlusSourceReceipt.status, "active");
+  assert.deepEqual(body.deliveryRecovery, {
+    schemaVersion: "yw-evidence-outbox-recovery-v1",
+    transportPending: 0,
+    transportEnqueued: 2,
+    centralAccepted: 7,
+    centralPendingMapping: 1,
+    centralQuarantined: 0,
+    containsIdentityData: false,
+  });
   assert.deepEqual(calls.map(({ method }) => method), ["health", "source"]);
   assert.deepEqual(calls[1].descriptor, {
     sourceSiteKey: "yw",
@@ -336,6 +416,254 @@ test("normal interaction route rejects client-forged occurrence time or academic
   assert.match(handler, /Object\.hasOwn\(payload, "academicYear"\)/);
   assert.match(handler, /server time authority required/);
   assert.match(handler, /422/);
+});
+
+test("health probes and interactions reconcile central receipts before bounded re-enqueue", () => {
+  const workerSource = readFileSync(new URL("../site/_worker.js", import.meta.url), "utf8");
+  const evidenceSource = readFileSync(new URL("../site/learning-evidence-source.js", import.meta.url), "utf8");
+  assert.match(workerSource, /\/api\/learning\/health[\s\S]*ctx\?\.waitUntil\) ctx\.waitUntil\(drainEvidenceOutbox\(env, 50\)\)/);
+  assert.match(workerSource, /handleLearningInteraction[\s\S]*drainEvidenceOutbox\(env, 5\)/);
+  assert.match(evidenceSource, /delivery_status IN \('pending', 'enqueued'\)/);
+  assert.match(evidenceSource, /datetime\(last_attempt_at\) < datetime\('now', '-15 minutes'\)/);
+});
+
+test("reading health exposes schema v5 only with the central receipt recovery index", () => {
+  assert.match(workerSource, /'idx_evidence_outbox_v2_recovery'/);
+  assert.match(workerSource, /Number\(indexes\?\.n\) !== 9/);
+  assert.match(workerSource, /schemaVersion: "reading-schema-v5"/);
+});
+
+test("ISO outbox attempt timestamps become retryable at the exact SQLite stale boundary", () => {
+  const db = new DatabaseSync(":memory:");
+  try {
+    db.exec(`CREATE TABLE evidence_outbox (
+      id INTEGER PRIMARY KEY,
+      source_event_id TEXT NOT NULL,
+      envelope_json TEXT NOT NULL,
+      delivery_status TEXT NOT NULL,
+      central_disposition TEXT,
+      last_attempt_at TEXT,
+      created_at TEXT NOT NULL
+    )`);
+    db.exec(`INSERT INTO evidence_outbox VALUES
+      (1, 'pending-old', '{"schema":"bdfz-learning-evidence-event-v2","contractVersion":"yw-aplus-e310-v2"}', 'pending', NULL, strftime('%Y-%m-%dT%H:%M:%SZ', 'now', '-16 minutes'), datetime('now', '-16 minutes')),
+      (2, 'enqueued-old', '{"schema":"bdfz-learning-evidence-event-v2","contractVersion":"yw-aplus-e310-v2"}', 'enqueued', NULL, strftime('%Y-%m-%dT%H:%M:%SZ', 'now', '-16 minutes'), datetime('now', '-16 minutes')),
+      (3, 'enqueued-fresh', '{"schema":"bdfz-learning-evidence-event-v2","contractVersion":"yw-aplus-e310-v2"}', 'enqueued', NULL, strftime('%Y-%m-%dT%H:%M:%SZ', 'now', '-14 minutes'), datetime('now', '-14 minutes')),
+      (4, 'accepted-old', '{"schema":"bdfz-learning-evidence-event-v2","contractVersion":"yw-aplus-e310-v2"}', 'enqueued', 'accepted', strftime('%Y-%m-%dT%H:%M:%SZ', 'now', '-1 day'), datetime('now', '-1 day')),
+      (5, 'legacy-v1', '{"schema":"bdfz-learning-evidence-v1"}', 'pending', NULL, strftime('%Y-%m-%dT%H:%M:%SZ', 'now', '-1 day'), datetime('now', '-1 day')),
+      (6, 'mapping-old', '{"schema":"bdfz-learning-evidence-event-v2","contractVersion":"yw-aplus-e310-v2"}', 'enqueued', 'pending_mapping', strftime('%Y-%m-%dT%H:%M:%SZ', 'now', '-1 day'), datetime('now', '-1 day')),
+      (7, 'quarantined-old', '{"schema":"bdfz-learning-evidence-event-v2","contractVersion":"yw-aplus-e310-v2"}', 'pending', 'quarantined', strftime('%Y-%m-%dT%H:%M:%SZ', 'now', '-1 day'), datetime('now', '-1 day'))`);
+    const rows = db.prepare(OUTBOX_RETRY_SELECTION_SQL).all(50);
+    assert.deepEqual(rows.map((row) => row.source_event_id), ["pending-old", "enqueued-old"]);
+  } finally {
+    db.close();
+  }
+});
+
+test("central durable receipt stops blind resend while pending mapping remains reconcilable", async () => {
+  const acceptedId = "018f1234-5678-7abc-9def-012345678901";
+  const pendingId = "018f1234-5678-7abc-9def-012345678902";
+  const absentId = "018f1234-5678-7abc-9def-012345678903";
+  const receipt = sourceEnvironment({
+    outboxRows: [
+      { source_event_id: acceptedId, delivery_status: "enqueued", envelope_json: JSON.stringify({ schema: "bdfz-learning-evidence-event-v2", contractVersion: "yw-aplus-e310-v2", userId: 42 }) },
+      { source_event_id: pendingId, delivery_status: "enqueued", envelope_json: JSON.stringify({ schema: "bdfz-learning-evidence-event-v2", contractVersion: "yw-aplus-e310-v2", userId: 42 }) },
+      { source_event_id: absentId, delivery_status: "enqueued", envelope_json: JSON.stringify({ schema: "bdfz-learning-evidence-event-v2", contractVersion: "yw-aplus-e310-v2", userId: 42 }) },
+    ],
+    centralReceipts: [
+      { sourceAttemptId: acceptedId, disposition: "accepted" },
+      { sourceAttemptId: pendingId, disposition: "pending_mapping" },
+    ],
+  });
+  const result = await drainEvidenceOutbox(receipt.env, 50);
+  assert.deepEqual(result.reconciled, { checked: 3, receipted: 2 });
+  const terminalUpdates = receipt.writes.filter((write) => (
+    write.sql.includes("SET central_disposition = ?") && write.sql.includes("central_receipted_at")
+  ));
+  assert.deepEqual(terminalUpdates.map((write) => [write.values[0], write.values[3]]), [
+    ["accepted", acceptedId],
+    ["pending_mapping", pendingId],
+  ]);
+  assert.equal(receipt.queued.length, 1);
+  assert.equal(receipt.state.outboxRows.find((row) => row.source_event_id === acceptedId).central_disposition, "accepted");
+  assert.equal(receipt.state.outboxRows.find((row) => row.source_event_id === pendingId).central_disposition, "pending_mapping");
+
+  receipt.env.USER_CENTER_EVIDENCE.getLearningEvidenceDeliveryReceipts = async (sourceAttemptIds) => ({
+    schemaVersion: "bdfz-learning-evidence-delivery-receipts-v1",
+    sourceSiteKey: "yw",
+    contractVersion: "yw-aplus-e310-v2",
+    receipts: sourceAttemptIds.includes(pendingId)
+      ? [{ sourceAttemptId: pendingId, disposition: "accepted" }]
+      : [],
+  });
+  receipt.queued.length = 0;
+  const completed = await drainEvidenceOutbox(receipt.env, 50);
+  assert.deepEqual(completed.reconciled, { checked: 2, receipted: 1 });
+  assert.equal(receipt.state.outboxRows.find((row) => row.source_event_id === pendingId).central_disposition, "accepted");
+  assert.equal(receipt.queued.length, 1, "only the still-absent attempt remains transport-retryable");
+});
+
+test("malformed central receipt is ignored and cannot terminate a source outbox row", async () => {
+  const id = "018f1234-5678-7abc-9def-012345678904";
+  const receipt = sourceEnvironment({
+    outboxRows: [{ source_event_id: id, delivery_status: "enqueued", envelope_json: JSON.stringify({ schema: "bdfz-learning-evidence-event-v2", contractVersion: "yw-aplus-e310-v2", userId: 42 }) }],
+  });
+  receipt.env.USER_CENTER_EVIDENCE.getLearningEvidenceDeliveryReceipts = async () => ({
+    schemaVersion: "bdfz-learning-evidence-delivery-receipts-v1",
+    sourceSiteKey: "forged",
+    contractVersion: "yw-aplus-e310-v2",
+    receipts: [{ sourceAttemptId: id, disposition: "accepted" }],
+  });
+  const result = await drainEvidenceOutbox(receipt.env, 50);
+  assert.deepEqual(result.reconciled, { checked: 1, receipted: 0 });
+  assert.equal(receipt.writes.some((write) => (
+    write.sql.includes("SET central_disposition = ?") && write.sql.includes("central_receipted_at")
+  )), false);
+});
+
+test("unchanged pending-mapping receipt is read without an hourly D1 rewrite", async () => {
+  const id = "018f1234-5678-7abc-9def-012345678905";
+  const receipt = sourceEnvironment({
+    outboxRows: [{
+      source_event_id: id,
+      delivery_status: "enqueued",
+      central_disposition: "pending_mapping",
+      envelope_json: JSON.stringify({
+        schema: "bdfz-learning-evidence-event-v2",
+        contractVersion: "yw-aplus-e310-v2",
+        userId: 42,
+      }),
+    }],
+    centralReceipts: [{ sourceAttemptId: id, disposition: "pending_mapping" }],
+  });
+  const result = await drainEvidenceOutbox(receipt.env, 50);
+  assert.deepEqual(result.reconciled, { checked: 1, receipted: 0 });
+  assert.equal(receipt.writes.some((write) => write.sql.includes("SET central_disposition = ?")), false);
+  assert.equal(receipt.queued.length, 0);
+});
+
+test("pending mapping advances monotonically to quarantine without another queue send", async () => {
+  const id = "018f1234-5678-7abc-9def-012345678906";
+  const receipt = sourceEnvironment({
+    outboxRows: [{
+      source_event_id: id,
+      delivery_status: "enqueued",
+      central_disposition: "pending_mapping",
+      envelope_json: JSON.stringify({
+        schema: "bdfz-learning-evidence-event-v2",
+        contractVersion: "yw-aplus-e310-v2",
+        userId: 42,
+      }),
+    }],
+    centralReceipts: [{ sourceAttemptId: id, disposition: "quarantined" }],
+  });
+  const result = await drainEvidenceOutbox(receipt.env, 50);
+  assert.deepEqual(result, {
+    reconciled: { checked: 1, receipted: 1 },
+    retried: { attempted: 0, enqueued: 0 },
+  });
+  assert.equal(receipt.state.outboxRows[0].central_disposition, "quarantined");
+  assert.equal(receipt.queued.length, 0);
+});
+
+test("accepted and quarantined terminal receipts are never polled, rewritten, or retried", async () => {
+  const acceptedId = "018f1234-5678-7abc-9def-012345678907";
+  const quarantinedId = "018f1234-5678-7abc-9def-012345678908";
+  const receipt = sourceEnvironment({
+    outboxRows: [
+      {
+        source_event_id: acceptedId,
+        delivery_status: "enqueued",
+        central_disposition: "accepted",
+        envelope_json: JSON.stringify({ schema: "bdfz-learning-evidence-event-v2", contractVersion: "yw-aplus-e310-v2" }),
+      },
+      {
+        source_event_id: quarantinedId,
+        delivery_status: "pending",
+        central_disposition: "quarantined",
+        envelope_json: JSON.stringify({ schema: "bdfz-learning-evidence-event-v2", contractVersion: "yw-aplus-e310-v2" }),
+      },
+    ],
+  });
+  let receiptCalls = 0;
+  receipt.env.USER_CENTER_EVIDENCE.getLearningEvidenceDeliveryReceipts = async () => {
+    receiptCalls += 1;
+    throw new Error("terminal dispositions must not be polled");
+  };
+  const result = await drainEvidenceOutbox(receipt.env, 50);
+  assert.deepEqual(result, {
+    reconciled: { checked: 0, receipted: 0 },
+    retried: { attempted: 0, enqueued: 0 },
+  });
+  assert.equal(receiptCalls, 0);
+  assert.deepEqual(receipt.state.outboxRows.map((row) => row.central_disposition), [
+    "accepted",
+    "quarantined",
+  ]);
+  assert.equal(receipt.writes.some((write) => write.sql.includes("SET central_disposition = ?")), false);
+  assert.equal(receipt.queued.length, 0);
+});
+
+test("a stale pending-mapping poll cannot overwrite a concurrent terminal decision", async () => {
+  const id = "018f1234-5678-7abc-9def-012345678909";
+  const db = new DatabaseSync(":memory:");
+  try {
+    db.exec(`CREATE TABLE evidence_outbox (
+      id INTEGER PRIMARY KEY,
+      source_event_id TEXT NOT NULL UNIQUE,
+      envelope_json TEXT NOT NULL,
+      delivery_status TEXT NOT NULL,
+      delivery_attempts INTEGER NOT NULL DEFAULT 0,
+      last_error_class TEXT NOT NULL DEFAULT '',
+      last_attempt_at TEXT,
+      delivered_at TEXT,
+      central_disposition TEXT,
+      central_receipted_at TEXT,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )`);
+    db.prepare(
+      `INSERT INTO evidence_outbox (
+        source_event_id, envelope_json, delivery_status, last_attempt_at, central_disposition
+      ) VALUES (?, ?, 'enqueued', datetime('now', '-1 day'), 'pending_mapping')`
+    ).run(id, JSON.stringify({
+      schema: "bdfz-learning-evidence-event-v2",
+      contractVersion: "yw-aplus-e310-v2",
+    }));
+    let queueCalls = 0;
+    const env = {
+      READING_DB: sqliteD1(db),
+      LEARNING_EVIDENCE_QUEUE: {
+        async send() {
+          queueCalls += 1;
+        },
+      },
+      USER_CENTER_EVIDENCE: {
+        async getLearningEvidenceDeliveryReceipts() {
+          db.prepare(
+            "UPDATE evidence_outbox SET central_disposition = 'accepted' WHERE source_event_id = ?"
+          ).run(id);
+          return {
+            schemaVersion: "bdfz-learning-evidence-delivery-receipts-v1",
+            sourceSiteKey: "yw",
+            contractVersion: "yw-aplus-e310-v2",
+            receipts: [{ sourceAttemptId: id, disposition: "quarantined" }],
+          };
+        },
+      },
+    };
+    const result = await drainEvidenceOutbox(env, 50);
+    assert.deepEqual(result, {
+      reconciled: { checked: 1, receipted: 0 },
+      retried: { attempted: 0, enqueued: 0 },
+    });
+    assert.equal(
+      db.prepare("SELECT central_disposition FROM evidence_outbox WHERE source_event_id = ?").get(id).central_disposition,
+      "accepted",
+    );
+    assert.equal(queueCalls, 0);
+  } finally {
+    db.close();
+  }
 });
 
 test("study-guide and initial-reading events bind to the current semantic formative manifest", async () => {

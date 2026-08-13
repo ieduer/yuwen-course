@@ -6,6 +6,7 @@ import {
 const SOURCE_SYSTEM = "yuwen-course";
 const SOURCE_SITE_KEY = "yw";
 const ENVELOPE_SCHEMA = "bdfz-learning-evidence-event-v2";
+const CURRENT_A_PLUS_CONTRACT_VERSION = "yw-aplus-e310-v2";
 const MAX_RAW_PAYLOAD_CHARS = 12000;
 const SUBMISSION_RATE_LIMIT = Object.freeze({
   maxAttempts: 8,
@@ -954,11 +955,20 @@ export async function recordLearningInteraction({
   };
 }
 
+export const OUTBOX_RETRY_SELECTION_SQL = `SELECT source_event_id, envelope_json FROM evidence_outbox
+  WHERE central_disposition IS NULL
+    AND json_extract(envelope_json, '$.schema') = '${ENVELOPE_SCHEMA}'
+    AND json_extract(envelope_json, '$.contractVersion') = '${CURRENT_A_PLUS_CONTRACT_VERSION}'
+    AND delivery_status IN ('pending', 'enqueued')
+    AND (last_attempt_at IS NULL OR datetime(last_attempt_at) < datetime('now', '-15 minutes'))
+  ORDER BY CASE delivery_status WHEN 'pending' THEN 0 ELSE 1 END,
+           COALESCE(last_attempt_at, created_at), id
+  LIMIT ?`;
+
 export async function retryPendingEvidence(env, limit = 10) {
   if (!env.READING_DB || !env.LEARNING_EVIDENCE_QUEUE) return { attempted: 0, enqueued: 0 };
-  const rows = await env.READING_DB.prepare(
-    "SELECT source_event_id, envelope_json FROM evidence_outbox WHERE delivery_status = 'pending' ORDER BY id LIMIT ?"
-  ).bind(Math.max(1, Math.min(50, Number(limit) || 10))).all();
+  const rows = await env.READING_DB.prepare(OUTBOX_RETRY_SELECTION_SQL)
+    .bind(Math.max(1, Math.min(50, Number(limit) || 10))).all();
   let enqueued = 0;
   for (const row of rows.results || []) {
     const envelope = JSON.parse(row.envelope_json || "{}");
@@ -966,6 +976,101 @@ export async function retryPendingEvidence(env, limit = 10) {
     if (result.status === "enqueued") enqueued += 1;
   }
   return { attempted: (rows.results || []).length, enqueued };
+}
+
+const CENTRAL_RECEIPT_SCHEMA = "bdfz-learning-evidence-delivery-receipts-v1";
+const CENTRAL_RECEIPT_DISPOSITIONS = new Set(["accepted", "pending_mapping", "quarantined"]);
+
+function exactCentralDeliveryReceipt(value, requestedAttemptIds) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  if (Object.keys(value).sort().join("\n") !== [
+    "contractVersion", "receipts", "schemaVersion", "sourceSiteKey",
+  ].sort().join("\n")) return null;
+  if (value.schemaVersion !== CENTRAL_RECEIPT_SCHEMA
+    || value.sourceSiteKey !== SOURCE_SITE_KEY
+    || value.contractVersion !== CURRENT_A_PLUS_CONTRACT_VERSION
+    || !Array.isArray(value.receipts)
+    || value.receipts.length > requestedAttemptIds.length) return null;
+  const requested = new Set(requestedAttemptIds);
+  const seen = new Set();
+  const receipts = [];
+  for (const receipt of value.receipts) {
+    if (!receipt || typeof receipt !== "object" || Array.isArray(receipt)
+      || Object.keys(receipt).sort().join("\n") !== ["disposition", "sourceAttemptId"].sort().join("\n")) {
+      return null;
+    }
+    const sourceAttemptId = clean(receipt.sourceAttemptId, 100);
+    const disposition = clean(receipt.disposition, 32);
+    if (!requested.has(sourceAttemptId) || seen.has(sourceAttemptId)
+      || !CENTRAL_RECEIPT_DISPOSITIONS.has(disposition)) return null;
+    seen.add(sourceAttemptId);
+    receipts.push({ sourceAttemptId, disposition });
+  }
+  return receipts;
+}
+
+export async function reconcileEvidenceOutbox(env, limit = 50) {
+  if (!env.READING_DB
+    || typeof env.USER_CENTER_EVIDENCE?.getLearningEvidenceDeliveryReceipts !== "function") {
+    return { checked: 0, receipted: 0 };
+  }
+  const rows = await env.READING_DB.prepare(
+    `SELECT source_event_id, central_disposition FROM evidence_outbox
+      WHERE (central_disposition IS NULL OR central_disposition = 'pending_mapping')
+        AND json_extract(envelope_json, '$.schema') = '${ENVELOPE_SCHEMA}'
+        AND json_extract(envelope_json, '$.contractVersion') = '${CURRENT_A_PLUS_CONTRACT_VERSION}'
+        AND delivery_status IN ('pending', 'enqueued')
+      ORDER BY COALESCE(last_attempt_at, created_at), id
+      LIMIT ?`
+  ).bind(Math.max(1, Math.min(50, Number(limit) || 50))).all();
+  const attemptIds = [...new Set((rows.results || [])
+    .map((row) => clean(row.source_event_id, 100))
+    .filter(Boolean))];
+  if (!attemptIds.length) return { checked: 0, receipted: 0 };
+  let response;
+  try {
+    response = await env.USER_CENTER_EVIDENCE.getLearningEvidenceDeliveryReceipts(attemptIds);
+  } catch {
+    return { checked: attemptIds.length, receipted: 0 };
+  }
+  const receipts = exactCentralDeliveryReceipt(response, attemptIds);
+  if (!receipts) return { checked: attemptIds.length, receipted: 0 };
+  const currentDispositions = new Map((rows.results || []).map((row) => [
+    clean(row.source_event_id, 100),
+    clean(row.central_disposition, 32),
+  ]));
+  let receipted = 0;
+  for (const receipt of receipts) {
+    // Health and interaction drains may overlap. Bind the exact observed state
+    // so a stale poll cannot rewrite or misreport a newer central decision.
+    const currentDisposition = currentDispositions.get(receipt.sourceAttemptId) || null;
+    if (currentDisposition === receipt.disposition) continue;
+    if (currentDisposition === "pending_mapping"
+      && !["accepted", "quarantined"].includes(receipt.disposition)) continue;
+    const result = await env.READING_DB.prepare(
+      `UPDATE evidence_outbox
+          SET central_disposition = ?, central_receipted_at = ?,
+              delivered_at = COALESCE(delivered_at, ?), last_error_class = ''
+        WHERE source_event_id = ?
+          AND ((? IS NULL AND central_disposition IS NULL) OR central_disposition = ?)
+          AND delivery_status IN ('pending', 'enqueued')`
+    ).bind(
+      receipt.disposition,
+      isoNow(),
+      isoNow(),
+      receipt.sourceAttemptId,
+      currentDisposition,
+      currentDisposition,
+    ).run();
+    if (Number(result?.meta?.changes || 0) === 1) receipted += 1;
+  }
+  return { checked: attemptIds.length, receipted };
+}
+
+export async function drainEvidenceOutbox(env, limit = 50) {
+  const reconciled = await reconcileEvidenceOutbox(env, limit);
+  const retried = await retryPendingEvidence(env, limit);
+  return { reconciled, retried };
 }
 
 export const learningEvidenceContract = Object.freeze({

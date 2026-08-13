@@ -32,9 +32,36 @@ never report a grade, weight, points, band or source cap.
   attached only for legal historical backlog replay. Neither queue may accept
   the other contract or academic year. Old evidence and snapshots are
   immutable; no synthetic migration or completion backfill is permitted.
+- Apply `migrations/0005_learning_evidence_central_receipts.sql` before the
+  Pages carrier. It adds only central receipt state and one recovery index;
+  it does not update or delete an old outbox row. Reading health then reports
+  `reading-schema-v5`. A missing migration makes health fail closed.
+- The source outbox is the durable recovery authority. Queue `enqueued` is
+  transport state only. User Center returns exact per-attempt dispositions;
+  `accepted` and `quarantined` settle an attempt, while `pending_mapping`
+  stops duplicate Queue delivery but remains polled until it advances to a
+  terminal result. The receipt write is an exact compare-and-swap against the
+  disposition that was read, and only D1 `changes=1` counts as reconciled;
+  stale polling therefore cannot move a terminal row backward. Stale
+  unresolved `pending` or `enqueued` v2 attempts are re-emitted with the
+  original identity and payload.
+- YW is Cloudflare Pages: it can produce Queue messages but cannot own Cron
+  Triggers or Queue consumers. Recovery is invoked by normal interactions and
+  `/api/learning/health`; User Center's hourly Worker probe supplies the idle
+  recovery heartbeat. The UC Worker owns main/DLQ consumption and bounded
+  scheduled replay. Do not add a Pages `[triggers]` block.
+- `deliveryRecovery` in compound health is aggregate-only and contains no
+  student or attempt identity. Unknown releases are durably observed as
+  `pending_mapping`; no unimplemented alert is claimed.
+- Historical v1 delivery is not recoverable through the v2 source outbox.
+  Production cutover therefore remains blocked until the v1 main queue and
+  DLQ are empty and every v1 YW outbox identity is reconciled against User
+  Center, or an explicit original-key v1 replay path is implemented and
+  verified. Queue emptiness alone is insufficient.
 - Unknown release/version/mapping is a pending-mapping operational condition,
   never a student zero or F. It may be replayed only through the central
-  idempotent helper after the mapping becomes active.
+  idempotent helper after the mapping becomes active; it is observed and
+  surfaced, not described as alerted unless an alert delivery receipt exists.
 - Android consumes the same formal resource inventory and User Center ledger;
   no Android-specific denominator or scoring route exists. This change does
   not alter the App repository or release pointer.
@@ -52,8 +79,9 @@ git diff --check
 The central architecture authority is User Center
 `docs/LEARNING_EVIDENCE_AND_SCORING_ARCHITECTURE.md` together with workspace
 `runbooks/bdfz_learning_evidence_integration_standard.md` v2. This candidate
-adopts no new Cloudflare capability: the hot path stays Queue plus D1; no
-production Workflow dependency is added.
+uses stable Cloudflare Queues plus D1 and Worker scheduled maintenance.
+Workflows, Dynamic Workflows, Pipelines and D1 read replication are not part
+of the grade-authoritative hot path.
 
 ## 2026-08-12 User Center and native evidence boundary
 
@@ -72,10 +100,11 @@ production Workflow dependency is added.
   `bdfz-native-auth/1` projection for client `yuwen-native-android` with data
   capability. A malformed bearer never falls back to a Web cookie, and two
   simultaneous credentials must identify the same User Center user.
-- Compound learning health contains two deliberately separate receipts:
-  formative transport remains non-scoring, while `aPlusSourceReceipt` renews
-  the existing 1,156-item frozen YW A+ source descriptor. Never substitute one
-  for the other.
+- Compound learning health contains deliberately separate formative and A+
+  receipts. The current 2026–27 A+ authority is e310/v2 (869 published, 768
+  eligible, fixed requirement 692); the older 1,156-item b530/v1 descriptor is
+  historical 2025–26 authority only. Never substitute formative transport or
+  a historical descriptor for the resolved annual A+ contract.
 - Queue delivery is at-least-once; stable mutation IDs and source event IDs are
   the idempotency authority. `enqueued` is not consumer-delivery proof.
 - Anonymous interaction responses may display score and guidance, but must use

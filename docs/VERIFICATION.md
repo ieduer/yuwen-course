@@ -1,5 +1,44 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-12 e310/v2 delivery-recovery candidate
+
+Run the current source contract on exact Node 24.18.0 and Node 22.21.1:
+
+```zsh
+/Users/ylsuen/.nvm/versions/node/v24.18.0/bin/node --test scripts/test_learning_evidence_contract.mjs
+/usr/local/libexec/bdfz-release/node-v22.21.1 --test scripts/test_learning_evidence_contract.mjs
+node scripts/test_reading_api.mjs
+git diff --check
+```
+
+The gate must prove all of the following:
+
+- current formal events use e310/v2 and historical b530/v1 rows are neither
+  rewritten nor sent to the v2 Queue;
+- migration 0005 is additive, reading health requires nine key indexes and
+  reports `reading-schema-v5` only after the recovery index exists;
+- SQLite time comparison makes a 15-minute-old ISO attempt retryable while a
+  fresh attempt, a centrally settled attempt, and every v1 row stay excluded;
+- Queue transport `enqueued` is not delivery proof. An exact User Center
+  receipt settles accepted/quarantined attempts, pending mapping suppresses
+  transport resend while continuing central polling, and a later accepted
+  or quarantined receipt advances the same source attempt without another
+  delivery; the D1 update compares the previously read disposition and a stale
+  poll is accepted only when `changes=1`, so it cannot overwrite a terminal
+  concurrent result;
+- health and the normal interaction route invoke bounded recovery without a
+  Pages Cron Trigger, and health exposes only aggregate recovery counts;
+- malformed, wrong-site, wrong-contract, duplicate or unsolicited central
+  receipts cannot settle an outbox row;
+- an unavailable Queue or User Center does not delete the source envelope,
+  award credit, create a snapshot, or synthesize F.
+
+Before any paired deployment, read the YW D1 migration ledger and v1 Queue/DLQ
+backlog. Apply 0005 before the Pages version. Production remains blocked if
+v1 has a non-empty or unreconciled source outbox without an executable legacy
+replay path, or if the User Center v2 main/DLQ consumers and central receipt
+RPC are not live.
+
 ## 2026-08-12 A+—F / Android candidate additions
 
 `npm run test:vocab-progress` must additionally derive, without a client-side
@@ -17,8 +56,9 @@ npm run test:reading-identity
 npm run test:native-content
 ```
 
-The run must prove that A+ envelopes retain the existing v1/b530 source
-contract; formative v2 envelopes stay non-scoring; learning health returns an
+The run must prove that the resolved annual A+ contract is b530/v1 only for
+2025–26 and e310/v2 for 2026–27; formative v2 envelopes stay non-scoring;
+learning health returns an
 exact active A+ receipt; malformed/wrong-client/disabled native authority fails
 closed; dual credentials cannot cross users; native output contains 189
 student lessons while all 191 source reader documents remain byte-validated;
