@@ -29,6 +29,7 @@ const OUTPUT_ROOT = mkdtempSync(path.join(os.tmpdir(), "yw-native-content-tests-
 const MAX_CORE_BYTES = 25 * 1024 * 1024;
 const MAX_PAGES_FILES = 20_000;
 const RIGHTS_PROVENANCE = "user-authorized-for-bdfz-yw-app-2026-07-29";
+const FOUNDATION_WAVE_APP_POINTER_SHA256 = "a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7";
 const SENSITIVE_QUERY_KEY = /(^|[_-])(access|api|auth|authorization|cookie|credential|jwt|key|password|refresh|secret|session|sig|signature|token)([_-]|$)|^(chksm|continue|dsh|followup|ifkv|osid|sn|state)$/i;
 const FORBIDDEN_AUTH_QUERY = /[?&](?:continue|dsh|followup|ifkv|osid)=/i;
 const PRIVATE_NOTEBOOK_PATH = /notebooklm\.google\.com\/notebook\/[^"'\\/\s?#]+/i;
@@ -240,6 +241,12 @@ function deriveSourceCounts() {
   const vocabQuestions = vocabBanks.reduce((sum, bank) => (
     sum + bank.inventory.filter((item) => item.decision === "question").length
   ), 0);
+  const classicalFirstReadIndex = json(path.join(
+    SITE_ROOT,
+    "data",
+    "classical-first-read",
+    "index.json",
+  ));
   const media = json(path.join(SITE_ROOT, "data", "lesson-media.json"));
   const nativeMedia = media.lessons.filter((lesson) => !excludedIds.has(lesson.lessonId));
   const approvedDecks = nativeMedia.filter((lesson) => (
@@ -259,6 +266,11 @@ function deriveSourceCounts() {
       lesson.textbookBookTitle || lesson.blockTitle
     )).filter(Boolean)).size,
     catalogedDecks: nativeMedia.length - approvedDecks,
+    classicalFirstReadLessons: classicalFirstReadIndex.lessonCount,
+    classicalFirstReadParagraphs: classicalFirstReadIndex.lessons.reduce(
+      (sum, lesson) => sum + lesson.paragraphCount,
+      0,
+    ),
     compositeTombstones: lessonInventory.filter((lessonId) => !activeIds.has(lessonId)).length,
     forumImages: lessonTotals.forumImages,
     learningTasks: lessonTotals.learningTasks,
@@ -438,7 +450,10 @@ test("manifest object receipts match every immutable object", () => {
   assert.equal(manifest.releaseReceiptId, `sha256-${sha256(releaseReceiptInput)}`);
   assert.equal(
     manifest.objects.length,
-    core.lessons.length + core.vocab.lessons.length + 8,
+    core.lessons.length
+      + core.vocab.lessons.length
+      + core.classicalFirstRead.lessons.length
+      + 9,
   );
   assert.deepEqual(firstBuild.immutableWrites, {
     unchanged: 0,
@@ -904,6 +919,45 @@ test("shared reader projection assigns every post once and is byte-bound to Web"
   assert.doesNotMatch(renderTextSource, /meaningfulPosts|primaryContentParts|cleanedCooked/);
 });
 
+test("classical first-read projection is exact and receipt-bound", () => {
+  const sourceIndexFile = path.join(
+    SITE_ROOT,
+    "data",
+    "classical-first-read",
+    "index.json",
+  );
+  const sourceIndexBytes = readFileSync(sourceIndexFile);
+  const sourceIndex = JSON.parse(sourceIndexBytes.toString("utf8"));
+  assert.equal(sourceIndex.lessonCount, 30);
+  assert.equal(core.classicalFirstRead.index.schemaVersion,
+    "yw-native-classical-first-read-index-v1");
+  assert.equal(core.classicalFirstRead.index.lessonCount, sourceIndex.lessonCount);
+  assert.equal(core.classicalFirstRead.index.offsetUnit, "utf16_code_unit");
+  assert.equal(core.classicalFirstRead.lessons.length, sourceIndex.lessonCount);
+  assert.equal(manifest.sourceProvenance.classicalFirstReadIndex.sha256,
+    sha256(sourceIndexBytes));
+  assert.equal(
+    manifest.objects.filter((object) => object.kind === "classical-first-read").length,
+    sourceIndex.lessonCount,
+  );
+  const projectedByLesson = new Map(
+    core.classicalFirstRead.lessons.map((lesson) => [lesson.lessonId, lesson]),
+  );
+  for (const entry of sourceIndex.lessons) {
+    const source = json(path.join(SITE_ROOT, entry.dataUrl));
+    assert.deepEqual(projectedByLesson.get(entry.lessonId), canonicalize(source));
+    const catalogLesson = core.catalog.lessons.find((lesson) => lesson.id === entry.lessonId);
+    assert.equal(
+      catalogLesson?.classicalFirstReadPath,
+      `classical-first-read/${entry.lessonId}.json`,
+    );
+  }
+  assert.equal(
+    core.catalog.lessons.filter((lesson) => lesson.classicalFirstReadPath).length,
+    sourceIndex.lessonCount,
+  );
+});
+
 test("vocab, tombstones and media fail closed", () => {
   assert.equal(core.vocab.index.lessonCount, sourceCounts.vocabLessonFiles);
   assert.equal(core.vocab.index.sourceBankCount, Object.keys(
@@ -966,7 +1020,13 @@ test("vocab, tombstones and media fail closed", () => {
 });
 
 test("all derived immutable objects have safe URLs", () => {
-  assert.equal(manifest.objects.length, core.lessons.length + core.vocab.lessons.length + 8);
+  assert.equal(
+    manifest.objects.length,
+    core.lessons.length
+      + core.vocab.lessons.length
+      + core.classicalFirstRead.lessons.length
+      + 9,
+  );
   const publicDocuments = [
     { name: "latest-stable.json", value: pointer },
     { name: "manifest.json", value: manifest },
@@ -1271,7 +1331,7 @@ test("native content routes fail closed instead of serving the SPA fallback", ()
   );
 });
 
-test("formal deploy gates cannot bypass stable sync or staging", () => {
+test("formal artifact gates cannot restore checkout production entrypoints", () => {
   const missingOutput = mkdtempSync(path.join(os.tmpdir(), "yw-native-missing-stable-"));
   try {
     let failure;
@@ -1300,6 +1360,11 @@ test("formal deploy gates cannot bypass stable sync or staging", () => {
   assert.match(packageJson.scripts["prepare:preview-artifact"], /build:release-site:preview/);
   assert.match(packageJson.scripts["prepare:preview-artifact"], /check:release-site:preview/);
   assert.match(packageJson.scripts["precontent:check"], /test:release-site/);
-  assert.match(packageJson.scripts.deploy, /pages deploy \.release\/site/);
-  assert.doesNotMatch(packageJson.scripts.deploy, /pages deploy site(?:\s|$)/);
+  assert.equal(packageJson.scripts.deploy, undefined);
+  assert.equal(packageJson.scripts.predeploy, undefined);
+  assert.equal(
+    sha256(readFileSync(path.join(SITE_ROOT, "app-content", "latest-stable.json"))),
+    FOUNDATION_WAVE_APP_POINTER_SHA256,
+    "foundation wave must preserve the live and Android-compatible App pointer",
+  );
 });

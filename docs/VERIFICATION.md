@@ -1,6 +1,52 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-12 e310/v2 delivery-recovery candidate
+
+Run the current source contract on exact Node 24.18.0 and Node 22.21.1:
+
+```zsh
+/Users/ylsuen/.nvm/versions/node/v24.18.0/bin/node --test scripts/test_learning_evidence_contract.mjs
+/usr/local/libexec/bdfz-release/node-v22.21.1 --test scripts/test_learning_evidence_contract.mjs
+node scripts/test_reading_api.mjs
+git diff --check
+```
+
+The gate must prove all of the following:
+
+- current formal events use e310/v2 and historical b530/v1 rows are neither
+  rewritten nor sent to the v2 Queue;
+- migration 0005 is additive, reading health requires nine key indexes and
+  reports `reading-schema-v5` only after the recovery index exists;
+- SQLite time comparison makes a 15-minute-old ISO attempt retryable while a
+  fresh attempt, a centrally settled attempt, and every v1 row stay excluded;
+- Queue transport `enqueued` is not delivery proof. An exact User Center
+  receipt settles accepted/quarantined attempts, pending mapping suppresses
+  transport resend while continuing central polling, and a later accepted
+  or quarantined receipt advances the same source attempt without another
+  delivery; the D1 update compares the previously read disposition and a stale
+  poll is accepted only when `changes=1`, so it cannot overwrite a terminal
+  concurrent result;
+- health and the normal interaction route invoke bounded recovery without a
+  Pages Cron Trigger, and health exposes only aggregate recovery counts;
+- malformed, wrong-site, wrong-contract, duplicate or unsolicited central
+  receipts cannot settle an outbox row;
+- an unavailable Queue or User Center does not delete the source envelope,
+  award credit, create a snapshot, or synthesize F.
+
+Before any paired deployment, read the YW D1 migration ledger and v1 Queue/DLQ
+backlog. Apply 0005 before the Pages version. Production remains blocked if
+v1 has a non-empty or unreconciled source outbox without an executable legacy
+replay path, or if the User Center v2 main/DLQ consumers and central receipt
+RPC are not live.
+
 ## 2026-08-12 A+—F / Android candidate additions
+
+`npm run test:vocab-progress` must additionally derive, without a client-side
+book allowlist, 723 active questions = 382 formal manifest matches + 341 local
+practice questions. It must prove that local practice follows the same
+two-correct-after-error mastery interaction while retaining `synced=false` and
+`formalEvidence=false`, and that a formal resource absent from the active index
+fails closed.
 
 Run with Node 24.18.0 before the existing release gate:
 
@@ -10,8 +56,9 @@ npm run test:reading-identity
 npm run test:native-content
 ```
 
-The run must prove that A+ envelopes retain the existing v1/b530 source
-contract; formative v2 envelopes stay non-scoring; learning health returns an
+The run must prove that the resolved annual A+ contract is b530/v1 only for
+2025–26 and e310/v2 for 2026–27; formative v2 envelopes stay non-scoring;
+learning health returns an
 exact active A+ receipt; malformed/wrong-client/disabled native authority fails
 closed; dual credentials cannot cross users; native output contains 189
 student lessons while all 191 source reader documents remain byte-validated;
@@ -19,6 +66,15 @@ and no browser or App field can claim score, correctness or eligibility.
 `npm run test:local-progress` must additionally prove that an anonymous
 passing score remains incomplete, the UI says `試做 · 未記錄`, and only a
 recognized authenticated evidence status can advance a checkpoint.
+
+For the classical native projection, `npm run test:native-content` must also
+prove that the Web index's 30 lessons / 102 paragraphs are projected exactly,
+that every catalog path resolves to one receipt-bound asset, and that
+`textVersionId`, `textDigest`, UTF-16 offsets, paragraph keys and text bytes do
+not drift. The immutable object count must include one native first-read index
+plus all 30 lesson assets. This test is development evidence only; a stable
+promotion still requires clean exact source, a Pages deployment UUID,
+publication time, current content audit and compatible App disposition.
 
 ## 2026-08-11 Web reading release gate
 
@@ -527,7 +583,7 @@ file as historical release evidence:
   and 1280x900. It remained `non_scoring` and created no pending outbox row;
 - the browser writes only semantic interactions to the source endpoint.
   Source-side D1 records raw interactions and server results, then enqueues a
-  privacy-minimized envelope through `bdfz-learning-evidence-yw-v1`.
+  privacy-minimized envelope through `bdfz-learning-evidence-yw-v2`.
   The old browser-to-User-Center progress/event wording in item 3 below is
   superseded and must not be reintroduced.
 - `evaluation` is an explicitly non-scoring `self_report`; it remains visible
@@ -544,7 +600,10 @@ file as historical release evidence:
 7. 回滾：先運行 `./node_modules/.bin/wrangler pages deployment list --project-name yuwen-course` 確認目標；在 Cloudflare Pages deployment history 將上一個已驗證 production deployment 重新部署。當前 production 為 `46e3c87f-69a4-4fe4-99bd-9602ed8ffbba`（`https://46e3c87f.yuwen-course.pages.dev`）；立即回滾錨點為 `54117eae-2d7a-495a-b3b2-234855225cee`，回滾會恢復舊 `evaluation=self_report+a_plus_gate` 來源宣告和舊的 `delivered` 佇列標籤，因此只在整站故障時使用。更早的完整回滾仍有 `6686fe9e-2d14-4f40-9e3c-cb21c0d928de` 和 pre-loop `18aa0c62-5f37-4a0f-9bdf-a145fc7e2279`；任何程式碼回滾都保留 additive D1 表與歷史行。回滾後重跑第 2、3、5 條。
 8. 最後驗證人 / 日期：Codex / 2026-07-27 PDT。`release:check` 全通：作者 189/106/65/0 unsupported、字詞 134/134 課 1102 題、learning manifest 8/8、source-to-consumer contract 2/2、reading API 30/30、850-file artifact aggregate `4f5e79d1589b05f003ab5cc4545b096282211e54de631636b53677cc0287bc85`。Preview `40994e9e-4631-46b6-926e-975c09440769` 和 production `46e3c87f-69a4-4fe4-99bd-9602ed8ffbba` 的兩個任務資產雜湊與本地完全一致；custom domain registry 明示 `evaluation=self_report+none`，Worker 只把 Queue producer 成功標成 `enqueued`，health 通過，匿名 evaluation POST 為 401。Production D1 聚合讀回沒有既有 `evaluation` 行；沒有製造學生互動、改 D1、改 User Center、改共享 SDK 或改身份契約。
 
-YW A+ manifest 与 User Center evaluator 现已固定为同一来源版本；新 YW A+ 只接受 `bdfz-learning-evidence-v1`、当前注册表和发布资源键。匿名负向验证为 401。2026-07-27 先以明确标记的毕业测试映射验证后端源账本、Queue、中心消费者和幂等读回；随后用本机密钥文件中的 28 届学生账号一次通过希悦 Passport 与 User Center session，在同一浏览器打开 `lesson-1458`，完成 YW interaction / evaluation / outbox、Queue、User Center evidence / facets 与过程档案页面的全链路读回。事件仍为 `lessonOpened`／`scoring_role=none`／`eligibility_status=non_scoring`，不会改变 A—F 分数；正文、账号、密码、Cookie 和 token 均未进入运维记录。
+YW A+ manifest 与 User Center evaluator 现已固定为同一来源版本；2026–27
+新 YW 事件只接受 `bdfz-learning-evidence-event-v2`、当前注册表、精确发布
+lineage 和资源键；`bdfz-learning-evidence-v1` 仅由 User Center 的 2025–26
+历史兼容适配器读取。匿名负向验证为 401。2026-07-27 先以明确标记的毕业测试映射验证后端源账本、Queue、中心消费者和幂等读回；随后用本机密钥文件中的 28 届学生账号一次通过希悦 Passport 与 User Center session，在同一浏览器打开 `lesson-1458`，完成 YW interaction / evaluation / outbox、Queue、User Center evidence / facets 与过程档案页面的全链路读回。该历史事件为 `lessonOpened`／`scoring_role=none`／`eligibility_status=non_scoring`，不会改变 A—F 分数；正文、账号、密码、Cookie 和 token 均未进入运维记录。
 
 本地完整核查：
 
@@ -557,3 +616,10 @@ npx wrangler pages dev site --port 8799
 # 另一个终端：
 BASE_URL=http://127.0.0.1:8799 npm run verify:ui
 ```
+Opening-before-school Queue acceptance must use the exact bounded transport
+canary in the current User Center authority. The Web request remains the normal
+authenticated `/api/learning/interactions` route; top-level `occurredAt` and
+`academicYear` are rejected with 422. The accepted event must be the real
+2025–26 `lessonOpened` audit shape, while D1 readback proves one accepted
+delivery/evidence, an idempotent duplicate, and zero credit/snapshot/F delta.
+At Beijing 2026-09-01 00:00 the exception expires, including delayed replay.

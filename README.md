@@ -7,7 +7,7 @@
 - YW remains the source owner. The browser and Android App submit only raw
   interaction input plus a stable mutation ID; the Worker alone derives score,
   correctness, eligibility, resource identity and A+ role before the existing
-  D1 outbox and `bdfz-learning-evidence-yw-v1` Queue deliver the minimized
+  D1 outbox and isolated `bdfz-learning-evidence-yw-v2` Queue deliver the minimized
   envelope to User Center.
 - `/api/learning/health` now keeps the non-scoring formative health receipt and
   also renews the existing exact YW A+ source-activation receipt. No formative
@@ -159,7 +159,8 @@ Aggregate SHA-256:     acb2daaadc5cfe358f6ccbc94798a68be5812ab31519f867c02f75be9
 - D1: `yuwen-reading-db`, binding `READING_DB`
 - Stable User Center site key: `yw`
 - Learning evidence: source-owned raw ledger + dedicated Queue
-  `bdfz-learning-evidence-yw-v1`
+  `bdfz-learning-evidence-yw-v2` (`yw-v1` remains a User Center-only
+  historical backlog consumer)
 
 The lesson `evaluation` interaction is a recorded `self_report` with
 `scoringRole=none`: it is visible in the process dossier but never affects a
@@ -215,21 +216,27 @@ desktop/mobile browser QA, production deployment readback and rollback
 recording. Do not move the App pointer in this Web-only phase.
 
 After the Web source is committed, pushed, and `git status --porcelain` is
-empty, rebuild the formal tree from that exact commit and deploy only that
-tree:
+empty, rebuild the formal tree from that exact commit. The commands below stop
+at source and artifact verification; this checkout has no production deploy or
+rollback entrypoint:
 
 ```zsh
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:release-site
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:release-site
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:artifact-manifest
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:artifact-manifest
-bash /Users/ylsuen/CF/scripts/git-deploy-gate.sh
-PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
-  ./node_modules/.bin/wrangler pages deploy .release/site --project-name yuwen-course --branch main
 ```
 
-Do not use `npm run deploy` during this Web-only phase: it intentionally runs
-the paired App sync gate, which remains blocked until App work resumes.
+The separately reviewed external UC+YW executor consumes the exact artifact and
+performs any authorized Pages/D1/Queue/traffic transaction. `npm run deploy`
+does not exist and must not be recreated in a project checkout.
+
+For this foundation wave, the executor must assert before and after deployment
+that `app-content/latest-stable.json` remains byte SHA-256
+`a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
+This keeps existing Android clients on the verified `yw-3e77...` graph while
+YW evidence transport moves to v2. New native content is a separate reviewed
+transaction and must not reuse the stale `yw-82a4...` receipt.
 
 ## Configuration names
 

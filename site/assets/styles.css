@@ -784,6 +784,7 @@ body.focus-mode .reader-size #font-label { display: inline-grid; place-items: ce
 .vocabulary-progress > span { position: relative; height: 5px; overflow: hidden; background: linear-gradient(90deg,rgba(189,66,44,.13),rgba(212,158,53,.12),rgba(42,111,78,.12)); }
 .vocabulary-progress > span::after { position: absolute; inset: 0 auto 0 0; width: var(--vocabulary-progress); background: linear-gradient(90deg,var(--accent),var(--gold),var(--success)); content: ""; transition: width .42s cubic-bezier(.2,.8,.2,1); }
 .vocabulary-progress b { color: var(--ink-soft); font-size: .68rem; font-weight: 650; }
+.vocabulary-evidence-mode { margin: 9px 0 0 !important; color: var(--ink-soft) !important; font-size: .68rem !important; }
 .vocabulary-step > button { display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 22px; align-items: center; width: 100%; margin-top: 18px; padding: 18px 0; border: 0; border-bottom: 1px solid var(--ink); text-align: left; color: var(--ink); background: transparent; cursor: pointer; }
 .vocabulary-step > button > span { color: var(--accent); font-size: .66rem; letter-spacing: .12em; }
 .vocabulary-step > button > strong { font: 750 1.45rem var(--serif); }

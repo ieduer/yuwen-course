@@ -1,9 +1,87 @@
 # Project State
 
-Last updated: 2026-08-12
+Last updated: 2026-08-13
+
+## 2026-08-13 external-executor release boundary
+
+- Checkout production and rollback entrypoints are disabled. `package.json`
+  deliberately exposes no `deploy` or `predeploy` script; local commands may
+  build and verify immutable artifacts only.
+- The first production wave is bounded to User Center plus YW. It may run only
+  through the independently reviewed external executor after exact commits,
+  fresh D1 backups, Queue topology, rollback anchors and live preflight pass.
+  This does not claim fleet completion: the remaining source adapters stay
+  withheld until their own versioned contracts and authenticated acceptance
+  are verified.
+- The foundation artifact deliberately preserves the live/Android pointer
+  `yw-3e77f0f7ffa5d042a6d06763`, byte SHA-256
+  `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
+  The stale `yw-82a4...` receipt is not a release authority; current native
+  inputs must be regenerated and pass public readback plus physical-device
+  acceptance in a later Web/App transaction before any pointer move.
+- No Pages deployment, Queue/D1 write, traffic change or rollback was performed
+  by this source update.
+- The exact formal foundation artifact contains 1,223 files / 164,349,103
+  bytes with aggregate SHA-256
+  `6107f4e3863c83aa7860af906f413f3faf5d8120e2240c2d89354cce2fb22a67`;
+  its tracked manifest byte SHA-256 is
+  `987522a5c70db5c370d2a2b4fa77662ef1f39b432328ed3144c701050ad2f163`.
+
+## 2026-08-12 e310/v2 User Center source-contract candidate
+
+- This isolated, source-only candidate makes the current Web manifest the
+  explicit 2026–27 YW producer contract. It has 869 fully mapped resources:
+  768 eligible `performance / a_plus_gate` units and 101 `evaluation`
+  resources that remain visible but non-scoring. The annual requirement is
+  fixed at 692 distinct `canonicalUnitId` credits and does not grow when the
+  live task pool later adds a mapped release.
+- Each formal event now uses `bdfz-learning-evidence-event-v2` with
+  `schemaVersion: 2` and carries `contractVersion`, `sourceReleaseId`,
+  `canonicalUnitId`, `resourceVersion`, `mappingVersion` and a source attempt
+  identity. These preserve a real revised attempt while User Center dedupes
+  Web, Android and resource revisions at the annual canonical-credit layer.
+- The Web producer emits only e310/v2 for `2026-2027`. User Center retains a
+  transition adapter for immutable b530/v1 evidence in `2025-2026`; it is
+  historical-only and cannot enter the new-year numerator or denominator.
+  Unknown future contract years withhold rather than falling through to F.
+- Android remains a formal-resource client of this same Web source graph and
+  shared User Center ledger. This candidate changes no Android inventory,
+  package, release pointer or client-specific denominator.
+- Evaluation and every other source fact remain unable to claim `weight`,
+  `grade`, `points`, bands or source caps. Unknown releases/mappings must be
+  durably held outside scoring until the central contract is activated.
+- Additive D1 migration `0005_learning_evidence_central_receipts.sql` separates
+  Queue transport (`pending`/`enqueued`) from the authoritative User Center
+  disposition. The source outbox keeps unresolved v2 envelopes durably,
+  re-emits stale rows after a transport failure, and stops re-emitting once a
+  central `accepted`, `pending_mapping`, or `quarantined` receipt exists.
+  `pending_mapping` continues to be polled and can advance to `accepted`
+  or `quarantined` without another Queue send. Receipt updates compare and
+  swap the exact previously read central disposition and count success only
+  from D1 `changes=1`, so a stale pending poll cannot overwrite a concurrent
+  terminal decision. Historical v1 rows are preserved and are never silently
+  rewritten or sent into the v2 Queue.
+- YW remains a Pages project. Pages cannot own a Cron Trigger or Queue
+  consumer, so recovery is driven by ordinary authenticated interactions and
+  the learning-health request that User Center probes hourly. The UC Worker
+  owns the v2 main/DLQ consumers, bounded scheduled replay, and append-only
+  replay receipts. Learning health projects only privacy-safe aggregate counts.
+- After migration 0005, reading health is `reading-schema-v5` and requires the
+  v2 recovery index. Before that migration, the candidate health check
+  deliberately returns unavailable rather than claiming a usable outbox.
+- No Pages deployment, Queue write, D1 migration, User Center release or App
+  publication was performed. The production facts recorded in
+  the following sections remain unchanged until the paired guarded release is
+  separately authorized and read back.
 
 ## 2026-08-12 A+—F / App synchronization candidate
 
+- The 723 student-visible active vocabulary questions now have one explicit
+  authority split derived from `site/data/learning-manifest.json`: 382 exact
+  questions remain formal source-evidence items and 341 remain available as
+  local practice. Local-practice answers use the same mastery interaction but
+  never call the source endpoint or claim evidence sync. This preserves every
+  student question and the existing formal A+ denominator.
 - Candidate branch `codex/yw-a-f-evidence-20260812` adds an exact native
   bearer identity path and exposes the current YW A+ activation receipt beside
   the already-live formative health receipt. The source manifest and scoring
@@ -18,6 +96,18 @@ Last updated: 2026-08-12
   native flags, Worker version, Web deploy and native release all pass their
   own guarded gates. No D1 row or production traffic is changed by this source
   checkpoint.
+- The authority-split follow-up is source-only on
+  `codex/yw-vocab-authority-20260812`; it has not been deployed and changes no
+  D1 row, Queue message, User Center contract or App release pointer.
+- The same source branch now projects the exact 30 classical first-read assets
+  (102 paragraphs) into the immutable native-content graph. Every projected
+  lesson retains the Web `textVersionId`, `textDigest`, UTF-16 offset unit and
+  paragraph keys, with a receipt-bound native index and per-lesson object.
+  This is a blocked development candidate only: the tracked stable pointer and
+  formal 382-question inventory are unchanged. `node --test
+  scripts/test_native_content.mjs` passes 22/22 locally; a clean Web commit,
+  Pages deployment receipt, current native-content review and stable promotion
+  remain release gates.
 
 Package: `0.2.1-evaluation-nonscoring`. The deployed Web carrier is commit
 `a97eba7589ed6afa7df30ba4f37f2241a22d90d0`, contained by current GitHub `main`.
@@ -314,3 +404,10 @@ authorized User Center release. Only after the
 compound health receipt is live may the task back up/apply D1, deploy a Pages
 preview/production artifact, perform authenticated mutation/replay/readback and
 hand the exact Web receipt to the App follow-up task.
+- Opening-before-school transport verification does not falsify the academic
+  year. From Beijing time 2026-08-12 00:00 until (but excluding) 2026-09-01
+  00:00, User Center may accept only the exact server-timed `lessonOpened`
+  shape with `lessonPhase=release_canary`, `trace / none / non_scoring` and all
+  numeric results null. It is audit-only and can create no credit, snapshot,
+  grade or F; delayed replay after the boundary is quarantined. The normal YW
+  route explicitly rejects client-supplied `occurredAt` or `academicYear`.

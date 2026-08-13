@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1223,
-  "totalBytes": 163876528,
-  "aggregateSha256": "9513b0c02a02a1b7aa3e98201acf09fc2e9e9daf844ffeca02f528c92c87c785",
+  "totalBytes": 164349103,
+  "aggregateSha256": "6107f4e3863c83aa7860af906f413f3faf5d8120e2240c2d89354cce2fb22a67",
   "files": [
     {
       "path": "_headers",
@@ -12,13 +12,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 103147,
-      "sha256": "acb4092757061c2bd33f604793e45b86d109a19b6a52ede7187341440abb626c"
+      "bytes": 110172,
+      "sha256": "7b9adb0c567949d88b5f16cfe07c05e9c4149cfe0d95def968240ef67cc7914f"
     },
     {
       "path": ".bdfz-release-artifact.json",
-      "bytes": 44369,
-      "sha256": "e384299f11f5695cfe118950bf4f486e1d803ba6fca4335816c49e03dac437c8"
+      "bytes": 44500,
+      "sha256": "41b7a7d0592a8ea0c408afb568ed0fc6c35c8a3a9c9aa99ee6e3cb7a198286da"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1412,8 +1412,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 161964,
-      "sha256": "d7d884bf0ba62ac8c1819e35f9c3075681ccf3e3bf208765052a07ce4fb5cd02"
+      "bytes": 165992,
+      "sha256": "81f7bd03f4befb3759bd222801a56cd5b284025737377454313dcde52f892226"
     },
     {
       "path": "assets/atlas.css",
@@ -3107,13 +3107,13 @@
     },
     {
       "path": "assets/styles.css",
-      "bytes": 80925,
-      "sha256": "24b8316f905d7ad09a822554846a5d7445084464b6eb78885e856e941148fc91"
+      "bytes": 82394,
+      "sha256": "79fef8ce686591257b769684d9e585887b69f213bcd91987aac19ba16973c4c9"
     },
     {
       "path": "assets/vocab-progress.js",
-      "bytes": 1211,
-      "sha256": "e6cb0c273fdce0e4e199cc7fca43136d4f1a12b7ac567e462f19c3faff668f75"
+      "bytes": 4350,
+      "sha256": "b96e88a1cad8df4edf32c0a1912ff39f51376ecb8f19095faa1aaced87217eae"
     },
     {
       "path": "assets/yw-shared-state.js",
@@ -3292,13 +3292,13 @@
     },
     {
       "path": "data/interaction-definitions.json",
-      "bytes": 7374,
-      "sha256": "bed1893a5f53dcf797c319b9069fb311bdb72583a5424760974a00658c75c99a"
+      "bytes": 9044,
+      "sha256": "86e3f4d321bf6f1b33b1d47e063f3a8cb06d1ed6b43dab1e5e47e3ab8b127c7b"
     },
     {
       "path": "data/learning-manifest.json",
-      "bytes": 378932,
-      "sha256": "92a5068545c20ff188331ba61eb2bfea7dca85d52727655ae4d4a84ca59693a7"
+      "bytes": 819802,
+      "sha256": "2a6824db45cac416c4aee3a95ce83aba5be393b6a94034799d6d18cb56f9f998"
     },
     {
       "path": "data/lesson-competency-manifest.json",
@@ -6033,7 +6033,7 @@
     {
       "path": "index.html",
       "bytes": 11676,
-      "sha256": "202299df3cd98c4a7dbbe036720bfbb961eb6156a75a50bf8bd65f7de638fd6b"
+      "sha256": "ad56624eec8f17d27686d85ca7a6294f34e4549d4a944c9ce3474c0cc6211046"
     },
     {
       "path": "insights.html",
@@ -6042,8 +6042,8 @@
     },
     {
       "path": "learning-evidence-source.js",
-      "bytes": 35958,
-      "sha256": "0fb3c354904ebc5cb4d52fecd99aa6bfac60c3865e6e49ac48f4f9654f77027b"
+      "bytes": 47852,
+      "sha256": "a5a6201b0875bece89aa42d41f80d91cf3129197a748dc60dd981b595eae98f1"
     },
     {
       "path": "lesson-blueprint-rules.js",
@@ -6107,8 +6107,8 @@
     },
     {
       "path": "reading-identity-source.js",
-      "bytes": 3971,
-      "sha256": "185e1fb1564ec00ab389f8abcc975a63f1fe53269fdb2412a51d28f8127ef3ca"
+      "bytes": 6320,
+      "sha256": "055865690f79367af9b9e3d9ea0add5bd074c2e0e315e569e2bcbe6f795376f1"
     },
     {
       "path": "star.html",

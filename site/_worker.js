@@ -1,8 +1,9 @@
 import {
   assertLearningSubmissionAllowed,
+  drainEvidenceOutbox,
   LearningSubmissionRateLimitError,
   recordLearningInteraction,
-  retryPendingEvidence,
+  validateAPlusCompatibilityContract,
 } from "./learning-evidence-source.js";
 import {
   deleteClassicalFirstReadMark,
@@ -61,6 +62,7 @@ export default {
       return handleLearningInteraction(request, env, ctx);
     }
     if (url.pathname === "/api/learning/health" && request.method === "GET") {
+      if (ctx?.waitUntil) ctx.waitUntil(drainEvidenceOutbox(env, 50));
       return handleLearningEvidenceHealth(env);
     }
     if (url.pathname === "/api/wy-articles" && request.method === "GET") {
@@ -165,13 +167,31 @@ function cleanText(value, max = 4000) {
   return String(value || "").replace(/\r/g, "").trim().slice(0, max);
 }
 
-function exactLearningDescriptorPart(actual, expected) {
+function stableCanonical(value) {
+  if (Array.isArray(value)) return `[${value.map(stableCanonical).join(",")}]`;
+  if (value && typeof value === "object") {
+    return `{${Object.keys(value).sort().map((key) => (
+      `${JSON.stringify(key)}:${stableCanonical(value[key])}`
+    )).join(",")}}`;
+  }
+  return JSON.stringify(value);
+}
+
+function exactLearningHealthReceipt(actual, descriptor) {
   if (!actual || typeof actual !== "object" || Array.isArray(actual)) return false;
-  const keys = Object.keys(actual).sort();
-  if (keys.join("\n") !== "itemCount\nmanifestDigest\nmanifestVersion") return false;
-  return actual.manifestVersion === expected.manifestVersion
-    && actual.manifestDigest === expected.manifestDigest
-    && Number(actual.itemCount) === Number(expected.itemCount);
+  const expected = {
+    ok: true,
+    schemaVersion: "bdfz-learning-source-health-receipt-v2",
+    status: "healthy",
+    sources: descriptor.sources,
+    capabilities: descriptor.capabilities,
+    activationScope: "registered_source_contract_health_only",
+    persistence: "none",
+    runtimeScoringActivation: false,
+    affectsGrowthScore: false,
+    affectsAPlus: false,
+  };
+  return stableCanonical(actual) === stableCanonical(expected);
 }
 
 function exactAPlusSourceReceipt(actual, expected) {
@@ -221,36 +241,70 @@ async function handleLearningEvidenceHealth(env) {
       registryResponse.json(),
       formativeResponse.json(),
     ]);
-    const descriptor = {
-      sourceSiteKey: "yw",
-      formal: {
-        manifestVersion: manifest?.manifestVersion,
-        manifestDigest: manifest?.resourceKeyHash,
-        itemCount: Number(manifest?.itemCount),
-      },
-      registryVersion: registry?.registryVersion,
-      formative: {
-        manifestVersion: formative?.manifestVersion,
-        manifestDigest: formative?.manifestDigest,
-        itemCount: Number(formative?.itemCount),
-      },
+    const compatibility = validateAPlusCompatibilityContract(registry, manifest);
+    const formal = {
+      manifestVersion: manifest?.manifestVersion,
+      manifestDigest: manifest?.resourceKeyHash,
+      itemCount: Number(manifest?.itemCount),
     };
-    if (formative?.formalLearningManifestVersion !== descriptor.formal.manifestVersion
-      || formative?.formalLearningManifestDigest !== descriptor.formal.manifestDigest
-      || formative?.registryVersion !== descriptor.registryVersion) {
+    if (formative?.formalLearningManifestVersion !== formal.manifestVersion
+      || formative?.formalLearningManifestDigest !== formal.manifestDigest
+      || formative?.registryVersion !== registry?.registryVersion) {
       throw new Error("learning contract assets disagree");
     }
-    const compatibility = registry?.compatibilityContracts?.aPlusGate;
-    if (compatibility?.schemaVersion !== "yw-aplus-producer-compatibility-v1"
-      || !/^yw-[a-f0-9]{16}$/.test(String(compatibility?.sourceVersion || ""))
-      || !/^sha256:[a-f0-9]{64}$/.test(String(compatibility?.resourceKeyHash || ""))
-      || !Number.isInteger(Number(compatibility?.itemCount))
-      || Number(compatibility.itemCount) < 1
-      || compatibility?.reviewedProducerManifestVersion !== descriptor.formal.manifestVersion
-      || compatibility?.reviewedProducerManifestDigest !== descriptor.formal.manifestDigest
-      || Number(compatibility?.reviewedProducerItemCount) !== descriptor.formal.itemCount) {
-      throw new Error("A+ compatibility contract disagrees");
-    }
+    const descriptor = {
+      schemaVersion: "bdfz-learning-source-health-descriptor-v1",
+      sources: [{
+        sourceSiteKey: "yw",
+        sourceSystem: registry.sourceSystem,
+        contractVersion: compatibility.contractVersion,
+        registryVersion: compatibility.registryVersion,
+        resourceCatalog: {
+          catalogVersion: compatibility.sourceReleaseId,
+          manifestVersion: compatibility.sourceVersion,
+          manifestDigest: compatibility.resourceKeyHash,
+          sourceReleaseId: compatibility.sourceReleaseId,
+          mappingVersion: compatibility.mappingVersion,
+          publishedItemCount: Number(compatibility.itemCount),
+        },
+        activeAPlusProjection: {
+          assessmentKind: compatibility.eligibleAssessmentKind,
+          scoringRole: compatibility.eligibleScoringRole,
+          excludedQuestionKinds: compatibility.excludedQuestionKinds,
+          excludedItemCount: Number(compatibility.excludedItemCount),
+          eligibleItemCount: Number(compatibility.eligibleItemCount),
+          thresholdPolicy: {
+            percent: Number(compatibility.thresholdPercent),
+            activationBaselineEligibleUnits: Number(compatibility.eligibleItemCount),
+            requiredDistinctCreditUnits: Number(compatibility.thresholdCount),
+            annualStabilityRule: "fixed_for_academic_year_task_pool_append_does_not_raise_requirement",
+          },
+          academicYearPolicy: compatibility.academicYearPolicy,
+        },
+        resourceMappingPolicy: {
+          requiredCoveragePercent: Number(compatibility.mappingCoveragePercent),
+          mappingVersion: compatibility.mappingVersion,
+        },
+        sourcePayloadPolicy: compatibility.sourceFactPolicy,
+        unknownReleasePolicy: "durably_ingest_pending_mapping_quarantine_observe_never_grade",
+        resourceLifecyclePolicy: "append_release_never_replace_scoring_inventory_dedupe_canonical_unit",
+        ledgerAuthority: compatibility.ledgerAuthority,
+        clientPolicy: compatibility.clientPolicy,
+        deliveryEvidenceIdentity: compatibility.deliveryEvidenceIdentity,
+        scoringCreditIdentity: compatibility.scoringCreditIdentity,
+        acceptedTerminalDisposition: compatibility.acceptedTerminalDisposition,
+        legacyAcceptedEvidencePolicy: compatibility.legacyAcceptedEvidencePolicy,
+      }],
+      capabilities: [{
+        sourceSiteKey: "yw",
+        capabilityKey: "formative_mastery",
+        registryVersion: registry.registryVersion,
+        formal,
+        manifestVersion: formative.manifestVersion,
+        manifestDigest: formative.manifestDigest,
+        itemCount: Number(formative.itemCount),
+      }],
+    };
     const aPlusDescriptor = {
       sourceSiteKey: "yw",
       manifestVersion: compatibility.sourceVersion,
@@ -259,25 +313,33 @@ async function handleLearningEvidenceHealth(env) {
       loaderContractVersion: "yuwen-queue-ledger-v1",
     };
     const receipt = await env.USER_CENTER_EVIDENCE.getLearningHealthReceipt(descriptor);
-    if (receipt?.ok !== true
-      || receipt?.schemaVersion !== "bdfz-yw-learning-health-receipt-v1"
-      || receipt?.status !== "healthy"
-      || receipt?.sourceSiteKey !== "yw"
-      || !exactLearningDescriptorPart(receipt?.formal, descriptor.formal)
-      || receipt?.registryVersion !== descriptor.registryVersion
-      || !exactLearningDescriptorPart(receipt?.formative, descriptor.formative)
-      || receipt?.activationScope !== "transport_and_formative_health_only"
-      || receipt?.persistence !== "none"
-      || receipt?.runtimeScoringActivation !== false
-      || receipt?.affectsGrowthScore !== false
-      || receipt?.affectsAPlus !== false) {
+    if (!exactLearningHealthReceipt(receipt, descriptor)) {
       return json({ error: "learning evidence contract mismatch" }, { status: 503 });
     }
     const aPlusSourceReceipt = await env.USER_CENTER_EVIDENCE.getSourceReceipt(aPlusDescriptor);
     if (!exactAPlusSourceReceipt(aPlusSourceReceipt, aPlusDescriptor)) {
       return json({ error: "learning evidence contract mismatch" }, { status: 503 });
     }
-    return json({ ok: true, receipt, aPlusSourceReceipt });
+    const recovery = await env.READING_DB.prepare(
+      `SELECT
+         SUM(CASE WHEN central_disposition IS NULL AND delivery_status = 'pending' THEN 1 ELSE 0 END) AS transport_pending,
+         SUM(CASE WHEN central_disposition IS NULL AND delivery_status = 'enqueued' THEN 1 ELSE 0 END) AS transport_enqueued,
+         SUM(CASE WHEN central_disposition = 'accepted' THEN 1 ELSE 0 END) AS central_accepted,
+         SUM(CASE WHEN central_disposition = 'pending_mapping' THEN 1 ELSE 0 END) AS central_pending_mapping,
+         SUM(CASE WHEN central_disposition = 'quarantined' THEN 1 ELSE 0 END) AS central_quarantined
+       FROM evidence_outbox
+      WHERE json_extract(envelope_json, '$.schema') = 'bdfz-learning-evidence-event-v2'`
+    ).first();
+    const deliveryRecovery = {
+      schemaVersion: "yw-evidence-outbox-recovery-v1",
+      transportPending: Number(recovery?.transport_pending || 0),
+      transportEnqueued: Number(recovery?.transport_enqueued || 0),
+      centralAccepted: Number(recovery?.central_accepted || 0),
+      centralPendingMapping: Number(recovery?.central_pending_mapping || 0),
+      centralQuarantined: Number(recovery?.central_quarantined || 0),
+      containsIdentityData: false,
+    };
+    return json({ ok: true, receipt, aPlusSourceReceipt, deliveryRecovery });
   } catch {
     return json({ error: "learning evidence unavailable" }, { status: 503 });
   }
@@ -1365,6 +1427,9 @@ async function handleLearningInteraction(request, env, ctx) {
   }
   if (!student) return json({ ok: false, error: "not authenticated", authRequired: true }, { status: 401 });
   const payload = await request.json().catch(() => ({}));
+  if (Object.hasOwn(payload, "occurredAt") || Object.hasOwn(payload, "academicYear")) {
+    return readingError("server time authority required", 422);
+  }
   const lessonId = cleanText(payload.lessonId, 80);
   const interactionKey = cleanText(payload.interactionKey, 40);
   if (!/^lesson-[\w-]{1,60}$/.test(lessonId) || !DIRECT_LEARNING_INTERACTIONS.has(interactionKey)) {
@@ -1386,7 +1451,7 @@ async function handleLearningInteraction(request, env, ctx) {
         lessonPhase: cleanText(payload.lessonPhase, 60),
       },
     });
-    if (ctx?.waitUntil) ctx.waitUntil(retryPendingEvidence(env, 5));
+    if (ctx?.waitUntil) ctx.waitUntil(drainEvidenceOutbox(env, 5));
     return json({
       ok: true,
       sourceEventId: recorded.sourceEventId,
@@ -2394,6 +2459,7 @@ async function handleReadingHealth(env) {
           'idx_classical_first_read_marks_mutation',
           'idx_classical_first_read_marks_state',
           'idx_evidence_outbox_pending_id',
+          'idx_evidence_outbox_v2_recovery',
           'idx_learning_interactions_attempt_unique',
           'idx_vocab_attempts_mutation_unique',
           'idx_vocab_attempts_attempt_unique',
@@ -2402,14 +2468,14 @@ async function handleReadingHealth(env) {
         )`
     ).first(),
   ]);
-  if (Number(tables?.n) !== 4 || Number(indexes?.n) !== 8) {
+  if (Number(tables?.n) !== 4 || Number(indexes?.n) !== 9) {
     return readingError("reading schema unavailable", 503);
   }
   const result = {
     ok: true,
-    schemaVersion: "reading-schema-v4",
+    schemaVersion: "reading-schema-v5",
     rulesVersion: "constellation-rules-v1",
-    evidenceContractVersion: "bdfz-learning-evidence-v1",
+    evidenceContractVersion: "bdfz-learning-evidence-event-v2",
   };
   if (env.READING_TEST_SLUG) {
     const [students, submissions, nodes, interactions, pending] = await Promise.all([

@@ -2,8 +2,97 @@
 
 Last reviewed: 2026-08-12 (America/Los_Angeles)
 
+## 2026-08-12 e310/v2 learning-source contract override
+
+This source-only override supersedes the older frozen-denominator statements
+below for a future 2026–27 release; it does not change current production.
+User Center remains the identity, immutable-evidence and A+—F scoring core.
+YW reports server-verified facts through the existing dedicated Queue and must
+never report a grade, weight, points, band or source cap.
+
+- `site/data/learning-manifest.json` and
+  `site/data/interaction-definitions.json` jointly define contract
+  `yw-aplus-e310-v2`: release `yw-release-f78c3cae78ac3ac3`, 869 mapped
+  resources, 768 eligible performance units, 101 non-scoring evaluations and
+  the fixed 2026–27 requirement of 692 distinct canonical units.
+- The annual policy and task pool are independent. A fully mapped later
+  release can create another valid route to a canonical unit, but cannot
+  change 692, the A+—F bands, dimension weights, targets or source caps without
+  an explicit new academic-year policy version.
+- Formal envelopes use the distinct new event schema
+  `bdfz-learning-evidence-event-v2` and carry the delivery lineage required by
+  the central source contract. Legacy `bdfz-learning-evidence-v1` is emitted
+  no longer and remains only in the User Center historical adapter. Delivery identity
+  includes source contract/release, canonical unit, resource version and
+  source attempt. Annual scoring credit uses user, academic year, policy
+  version and canonical unit, so Web/Android retries and revisions do not
+  double-count.
+- During the paired User Center cutover, the isolated `yw-v2` consumer accepts
+  only e310/v2 events for `2026-2027`; the existing `yw-v1` consumer remains
+  attached only for legal historical backlog replay. Neither queue may accept
+  the other contract or academic year. Old evidence and snapshots are
+  immutable; no synthetic migration or completion backfill is permitted.
+- Apply `migrations/0005_learning_evidence_central_receipts.sql` before the
+  Pages carrier. It adds only central receipt state and one recovery index;
+  it does not update or delete an old outbox row. Reading health then reports
+  `reading-schema-v5`. A missing migration makes health fail closed.
+- The source outbox is the durable recovery authority. Queue `enqueued` is
+  transport state only. User Center returns exact per-attempt dispositions;
+  `accepted` and `quarantined` settle an attempt, while `pending_mapping`
+  stops duplicate Queue delivery but remains polled until it advances to a
+  terminal result. The receipt write is an exact compare-and-swap against the
+  disposition that was read, and only D1 `changes=1` counts as reconciled;
+  stale polling therefore cannot move a terminal row backward. Stale
+  unresolved `pending` or `enqueued` v2 attempts are re-emitted with the
+  original identity and payload.
+- YW is Cloudflare Pages: it can produce Queue messages but cannot own Cron
+  Triggers or Queue consumers. Recovery is invoked by normal interactions and
+  `/api/learning/health`; User Center's hourly Worker probe supplies the idle
+  recovery heartbeat. The UC Worker owns main/DLQ consumption and bounded
+  scheduled replay. Do not add a Pages `[triggers]` block.
+- `deliveryRecovery` in compound health is aggregate-only and contains no
+  student or attempt identity. Unknown releases are durably observed as
+  `pending_mapping`; no unimplemented alert is claimed.
+- Historical v1 delivery is not recoverable through the v2 source outbox.
+  Production cutover therefore remains blocked until the v1 main queue and
+  DLQ are empty and every v1 YW outbox identity is reconciled against User
+  Center, or an explicit original-key v1 replay path is implemented and
+  verified. Queue emptiness alone is insufficient.
+- Unknown release/version/mapping is a pending-mapping operational condition,
+  never a student zero or F. It may be replayed only through the central
+  idempotent helper after the mapping becomes active; it is observed and
+  surfaced, not described as alerted unless an alert delivery receipt exists.
+- Android consumes the same formal resource inventory and User Center ledger;
+  no Android-specific denominator or scoring route exists. This change does
+  not alter the App repository or release pointer.
+
+Source verification before any paired release:
+
+```bash
+npm run check:learning-manifest
+npm run test:learning-manifest
+npm run test:evidence-contract
+npm run test:formative-mastery
+git diff --check
+```
+
+The central architecture authority is User Center
+`docs/LEARNING_EVIDENCE_AND_SCORING_ARCHITECTURE.md` together with workspace
+`runbooks/bdfz_learning_evidence_integration_standard.md` v2. This candidate
+uses stable Cloudflare Queues plus D1 and Worker scheduled maintenance.
+Workflows, Dynamic Workflows, Pipelines and D1 read replication are not part
+of the grade-authoritative hot path.
+
 ## 2026-08-12 User Center and native evidence boundary
 
+- Do not equate the 723 active vocabulary questions with formal evidence.
+  `site/data/learning-manifest.json` is the item-level authority: the current
+  graph contains 382 formal vocabulary resource keys and 341 additional
+  student-visible local-practice questions. The browser must keep all 723
+  visible, submit only an exact manifest match, fail closed if a formal key is
+  absent from the active vocabulary index, and label local practice as not
+  part of formal A+ evidence. Changing the 382-item formal subset is a source
+  policy change, not an App/UI synchronization fix.
 - Keep `recordLearningInteraction` as the only authority for YW correctness,
   attempt number, eligibility, scoring role and resource key. Native clients
   send raw answers only and reuse the same `/api/reading/*` handlers.
@@ -11,15 +100,33 @@ Last reviewed: 2026-08-12 (America/Los_Angeles)
   `bdfz-native-auth/1` projection for client `yuwen-native-android` with data
   capability. A malformed bearer never falls back to a Web cookie, and two
   simultaneous credentials must identify the same User Center user.
-- Compound learning health contains two deliberately separate receipts:
-  formative transport remains non-scoring, while `aPlusSourceReceipt` renews
-  the existing 1,156-item frozen YW A+ source descriptor. Never substitute one
-  for the other.
+- Compound learning health contains deliberately separate formative and A+
+  receipts. The current 2026–27 A+ authority is e310/v2 (869 published, 768
+  eligible, fixed requirement 692); the older 1,156-item b530/v1 descriptor is
+  historical 2025–26 authority only. Never substitute formative transport or
+  a historical descriptor for the resolved annual A+ contract.
 - Queue delivery is at-least-once; stable mutation IDs and source event IDs are
   the idempotency authority. `enqueued` is not consumer-delivery proof.
 - Anonymous interaction responses may display score and guidance, but must use
   the explicit practice-only label and must not advance any local completion
   percentage or A—F evidence. Unknown evidence statuses fail closed.
+
+### Classical Web-to-App content projection
+
+- Native content must consume, never reconstruct, the reviewed Web artifacts
+  in `site/data/classical-first-read/`. The source index currently contains 30
+  lessons / 102 paragraphs and fixes `offsetUnit=utf16_code_unit`, stable
+  paragraph keys, exact text versions and text digests.
+- `scripts/build_native_content.mjs` validates that every first-read lesson is
+  an active student lesson, that index and asset counts/versions/digests agree,
+  and that the combined text equals the ordered paragraphs. It emits one
+  `classical-first-read-index` object plus 30 receipt-bound
+  `classical-first-read` objects and catalog paths.
+- This projection does not alter the learning manifest, formal vocabulary
+  denominator, score, eligibility or A+ contract. A dirty or blocked build may
+  only write a candidate pointer; moving `latest-stable` still requires clean
+  source, a real Pages deployment receipt, a current independent content audit
+  and the paired Android import/verification transaction.
 
 ## 2026-08-11 Web reading finalization override
 
@@ -416,7 +523,7 @@ Source-owned components:
 - named identity binding `USER_CENTER_EVIDENCE` →
   `bdfz-user-center#YuwenEvidenceIdentity`;
 - dedicated producer `LEARNING_EVIDENCE_QUEUE` →
-  `bdfz-learning-evidence-yw-v1`.
+  `bdfz-learning-evidence-yw-v2`.
 
 The browser may submit a lesson/resource key, interaction key, selected option
 or raw input and client mutation id. It may not submit User Center ID, trusted
@@ -494,7 +601,7 @@ Non-regenerable data: D1 reading submissions, version history, vocabulary attemp
 Pages preview is deliberately data-isolated. Top-level `wrangler.toml` binds
 only `yuwen-reading-db-preview`; `env.production` alone binds the production
 D1, `bdfz-user-center#YuwenEvidenceIdentity`, and
-`bdfz-learning-evidence-yw-v1`. Preview therefore cannot authenticate or emit
+`bdfz-learning-evidence-yw-v2`. Preview therefore cannot authenticate or emit
 student evidence and must return 401/503 on those routes. On 2026-08-09 all 12
 preview deployments created before this split were superseded and deleted.
 Ten deleted hash hosts return 404. Two deleted hosts whose Cloudflare edge
@@ -633,25 +740,32 @@ Verify on the preview URL:
 
 ### 5.5 Production
 
-For the current Web-only release, keep the App pointer unchanged. From a fully
-committed tree with empty `git status --porcelain`, build and check the
-`formal-stable` `.release/site` tree and its artifact manifest, then deploy that
-exact staged directory. Do not deploy raw `site/` or a `preview-web-only`
-marker.
+For the current foundation release, keep the App pointer disposition explicit.
+From a fully committed tree with empty `git status --porcelain`, build and check
+the `formal-stable` `.release/site` tree and its artifact manifest. This
+checkout must stop there: `package.json` has no production deploy or rollback
+entrypoint. The separately reviewed external UC+YW executor is the only path
+that may consume that exact staged artifact and mutate Pages, D1, Queues or
+traffic. Do not deploy raw `site/` or a `preview-web-only` marker.
+
+The foundation artifact must preserve the current production and Android
+pointer byte-for-byte: SHA-256
+`a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`,
+content version `yw-3e77f0f7ffa5d042a6d06763`. The executor reads it before
+and after the Pages transaction. The prior `yw-82a4...` candidate receipt is
+stale relative to current native inputs and is not a release authority. Do not
+move the pointer until a later clean native-content build, public immutable
+object readback, App staged/active checks and physical-device acceptance pass.
 
 The paired Web/App procedure below applies only when App follow-up resumes:
-publish immutable content objects before moving the App pointer, then deploy
-the exact checksum-fixed Web artifact.
+publish immutable content objects before moving the App pointer, then hand the
+exact checksum-fixed Web artifact to the external executor for deployment.
 
 ```zsh
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:release-site
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:release-site
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:artifact-manifest
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:artifact-manifest
-bash /Users/ylsuen/CF/scripts/git-deploy-gate.sh
-PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
-  ./node_modules/.bin/wrangler pages deploy .release/site \
-  --project-name yuwen-course --branch main
 ```
 
 Record Git commit/tag, staged-file set, artifact checksum manifest, Pages deployment ID/URL, D1 migration/export state, previous verified deployment, and exact live verification result. The displayed Pages commit hash is not accepted as source proof for a direct upload.
@@ -710,3 +824,11 @@ Every material release updates:
 - this manual when architecture, config, dependencies, deploy or recovery changes;
 - `/Users/ylsuen/CF/reports/cloudflare_business_audit_2026-05-23.md` and its association index when ownership/resource relationships change;
 - `/Users/ylsuen/CF/reports/agent_action_log.jsonl` with change, verify, and closeout rows.
+- A bounded pre-activation transport canary is the only exception to the
+  scoring-year admission rule. It uses the normal authenticated interactions
+  route and real server time, accepts only `lessonOpened` with
+  `lessonPhase=release_canary`, `trace / none / non_scoring` and null numeric
+  results, and is valid only from `2026-08-11T16:00:00.000Z` through
+  `2026-08-31T15:59:59.999Z`. It must produce zero credit, score-snapshot and F
+  deltas. Never accept client-provided occurrence time or academic year, and
+  never extend or replay this window after Beijing 2026-09-01 00:00.

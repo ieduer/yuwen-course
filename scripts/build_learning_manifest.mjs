@@ -15,6 +15,8 @@ const MANIFEST_PATH = resolve(ROOT, "site/data/manifest.json");
 const TAXONOMY_PATH = resolve(ROOT, "site/data/literary-taxonomy.json");
 const VOCAB_DIR = resolve(ROOT, "site/data/vocab");
 const OUTPUT_PATH = resolve(ROOT, "site/data/learning-manifest.json");
+const EFFECTIVE_FROM = "2026-08-12T00:00:00+08:00";
+const MAPPING_VERSION = "yw-canonical-learning-mapping-v1";
 
 export const SITE_KEY = "yw";
 export const BOOK_IDS = Object.freeze(["xuanbi-shang", "xuanbi-zhong", "xuanbi-xia"]);
@@ -47,6 +49,45 @@ function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
 }
 
+function stableJson(value) {
+  if (Array.isArray(value)) return `[${value.map(stableJson).join(",")}]`;
+  if (value && typeof value === "object") {
+    return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableJson(value[key])}`).join(",")}}`;
+  }
+  return JSON.stringify(value);
+}
+
+const MAPPING_BY_QUESTION_KIND = Object.freeze({
+  contextWords: Object.freeze({ dimensionKey: "reading", competencyKey: "comprehension", evidenceRole: "a_plus_gate" }),
+  wordCreation: Object.freeze({ dimensionKey: "retention", competencyKey: "vocabulary", evidenceRole: "a_plus_gate" }),
+  authorQuestion: Object.freeze({ dimensionKey: "inquiry", competencyKey: "comprehension", evidenceRole: "a_plus_gate" }),
+  revision: Object.freeze({ dimensionKey: "reading", competencyKey: "syntax", evidenceRole: "a_plus_gate" }),
+  structure: Object.freeze({ dimensionKey: "reading", competencyKey: "comprehension", evidenceRole: "a_plus_gate" }),
+  vocabulary: Object.freeze({ dimensionKey: "retention", competencyKey: "vocabulary", evidenceRole: "a_plus_gate" }),
+  evaluation: Object.freeze({ dimensionKey: "reflection", competencyKey: "reflection", evidenceRole: "non_scoring" }),
+});
+
+function canonicalUnitId(lessonId, questionKind, questionId = "") {
+  return questionKind === "vocabulary"
+    ? `yw:${lessonId}:vocabulary:${questionId}`
+    : `yw:${lessonId}:interaction:${questionKind}`;
+}
+
+function versionedItem(item, semanticSource) {
+  const mapping = MAPPING_BY_QUESTION_KIND[item.questionKind];
+  if (!mapping) throw new Error(`missing canonical mapping: ${item.questionKind}`);
+  return {
+    ...item,
+    canonicalUnitId: canonicalUnitId(item.sourceId, item.questionKind, item.questionId),
+    resourceVersion: `sha256:${sha256(stableJson(semanticSource))}`,
+    mappingVersion: MAPPING_VERSION,
+    ...mapping,
+    lifecycleStatus: "active",
+    effectiveFrom: EFFECTIVE_FROM,
+    effectiveTo: null,
+  };
+}
+
 function cleanTitle(value) {
   return String(value || "未命名課文")
     .replace(/^\s*\d+\s*[.．、]?\s*/, "")
@@ -71,7 +112,7 @@ export function vocabResourceKey(lessonId, questionId) {
 }
 
 function interactionItem(lesson, mode, interaction) {
-  return {
+  const item = {
     resourceKey: interactionResourceKey(lesson.id, interaction),
     itemTitle: `${cleanTitle(lesson.title)} · ${INTERACTION_LABELS[interaction]}`,
     itemGroup: lesson.blockTitle,
@@ -82,6 +123,16 @@ function interactionItem(lesson, mode, interaction) {
     questionKind: interaction,
     mode,
   };
+  const sourcePath = resolve(ROOT, `site/${lesson.dataUrl.replace(/^\//, "")}`);
+  const lessonSource = existsSync(sourcePath) ? JSON.parse(readFileSync(sourcePath, "utf8")) : null;
+  if (!lessonSource) throw new Error(`learning interaction source unavailable: ${lesson.id}`);
+  return versionedItem(item, {
+    schemaVersion: 1,
+    lessonId: lesson.id,
+    interaction,
+    mode,
+    lessonSource,
+  });
 }
 
 function vocabItems(lesson, sourceMode, eligibility) {
@@ -97,19 +148,23 @@ function vocabItems(lesson, sourceMode, eligibility) {
       itemId: String(item.id || ""),
       sourceItemSha256: hashEligibilitySourceItem(item),
     }))
-    .map((item, index) => ({
-      resourceKey: vocabResourceKey(lesson.id, String(item.id || "")),
-      itemTitle: `${cleanTitle(lesson.title)} · 字詞題 ${index + 1}`,
-      itemGroup: lesson.blockTitle,
-      itemType: "effect-question",
-      sourceKind: "vocabulary-question",
-      sourceId: lesson.id,
-      sourcePath: relativePath.replace(/^site\//, ""),
-      questionKind: "vocabulary",
-      questionId: String(item.id || ""),
-      questionType: String(item.type || ""),
-      questionIndex: index + 1,
-    }));
+    .map((item, index) => versionedItem({
+        resourceKey: vocabResourceKey(lesson.id, String(item.id || "")),
+        itemTitle: `${cleanTitle(lesson.title)} · 字詞題 ${index + 1}`,
+        itemGroup: lesson.blockTitle,
+        itemType: "effect-question",
+        sourceKind: "vocabulary-question",
+        sourceId: lesson.id,
+        sourcePath: relativePath.replace(/^site\//, ""),
+        questionKind: "vocabulary",
+        questionId: String(item.id || ""),
+        questionType: String(item.type || ""),
+        questionIndex: index + 1,
+      }, {
+        schemaVersion: 1,
+        lessonId: lesson.id,
+        question: item,
+      }));
 }
 
 function officialLessons(manifest) {
@@ -165,6 +220,19 @@ export function buildLearningManifest() {
   }
 
   const keyHash = sha256([...keys].sort().join("\n"));
+  const releaseHash = sha256(stableJson(items.map((item) => ({
+    resourceKey: item.resourceKey,
+    canonicalUnitId: item.canonicalUnitId,
+    resourceVersion: item.resourceVersion,
+    mappingVersion: item.mappingVersion,
+    dimensionKey: item.dimensionKey,
+    competencyKey: item.competencyKey,
+    evidenceRole: item.evidenceRole,
+    lifecycleStatus: item.lifecycleStatus,
+    effectiveFrom: item.effectiveFrom,
+    effectiveTo: item.effectiveTo,
+  }))));
+  const sourceReleaseId = `${SITE_KEY}-release-${releaseHash.slice(0, 16)}`;
   const sources = BOOK_IDS.map((blockId) => {
     const block = manifest.blocks.find((entry) => entry.id === blockId);
     const lessonIds = new Set(lessons.filter((lesson) => lesson.blockId === blockId).map((lesson) => lesson.id));
@@ -183,6 +251,9 @@ export function buildLearningManifest() {
     siteKey: SITE_KEY,
     title: "語文課 · 選擇性必修見效題目",
     manifestVersion: `${SITE_KEY}-${keyHash.slice(0, 16)}`,
+    sourceReleaseId,
+    mappingVersion: MAPPING_VERSION,
+    lineagePolicy: "append_only_canonical_unit_resource_versions_v1",
     resourceKeyHash: `sha256:${keyHash}`,
     itemCount: items.length,
     completionKind: "answer_submitted",
@@ -195,7 +266,7 @@ export function buildLearningManifest() {
     },
     sources,
     exclusions: Object.entries(EXCLUDED_LESSONS).map(([lessonId, reason]) => ({ lessonId, reason })),
-    items,
+    items: items.map((item) => ({ ...item, sourceReleaseId })),
   };
 }
 

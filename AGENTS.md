@@ -33,8 +33,9 @@ embedded into that repository or replaced by a hand-edited App content copy.
 - Database: D1 `yuwen-reading-db`, binding `READING_DB`.
 - User identity: User Center `siteKey=yw`, named evidence identity binding, and
   shared session/widget contract.
-- Learning evidence: source-owned interaction/evaluation ledger, reliable
-  outbox, and dedicated Queue `bdfz-learning-evidence-yw-v1`.
+- Learning evidence: source-owned interaction/evaluation ledger, durable
+  outbox, historical Queue `bdfz-learning-evidence-yw-v1`, current Queue
+  `bdfz-learning-evidence-yw-v2`, and central delivery-receipt reconciliation.
 - AI: shared `https://apis.bdfz.net`; no leaf model key.
 - Monitoring: Pulse host coverage and source-specific operational probes.
 - Native content: versioned, content-addressed graph, stable IDs, semantic
@@ -70,6 +71,9 @@ YW is a leaf project. It consumes shared hubs but does not own their contracts.
 - Lesson evaluation is `self_report` with `scoringRole=none`; it never changes
   a dimension or A+ gate.
 - Queue producer acceptance is `enqueued`, not proof of consumer delivery.
+  Only a User Center receipt may settle an outbox attempt as `accepted`,
+  `pending_mapping`, or `quarantined`; pending mapping stops transport resend
+  but remains eligible for central receipt polling.
 - Raw answers stay in YW D1; User Center receives only the privacy-minimized
   projection.
 - Never fabricate student progress, completion, evidence, or unavailable source
@@ -113,15 +117,12 @@ Run the source, content, reader-media, learning-manifest, evidence-contract,
 reading, release-site, artifact, browser, API/auth, D1, dependency, Pulse, and
 Web/App receipt checks in `docs/VERIFICATION.md`.
 
-Production deployment is authorized only by an explicit Pages/D1/content task:
-
-```bash
-npm run deploy
-```
-
-The deploy command runs the formal release check and uses `.release/site`.
-Documentation-only changes do not authorize a deploy, D1 migration, Queue
-write, App pointer move, or native release.
+Production mutation is disabled in this checkout. `package.json` intentionally
+contains no `deploy` or `predeploy` script. Keep `release:check` and the artifact
+builders as source-verification inputs, but Pages deployment, D1 migration,
+Queue mutation, traffic change and rollback may run only through the separately
+reviewed external UC+YW executor. Documentation-only changes do not authorize
+that executor, an App pointer move, or a native release.
 
 ## Dependencies and ownership boundaries
 
