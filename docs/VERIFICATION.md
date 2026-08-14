@@ -1,5 +1,28 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-13 B6/B10/B12 closeout additions
+
+Run the current learning-manifest and evidence-contract tests on exact Node
+24.18.0 and Node 22.21.1. The complete `precontent:check` remains the source
+gate:
+
+```zsh
+npm run test:learning-manifest
+npm run test:evidence-contract
+npm run precontent:check
+git diff --check
+```
+
+The focused checks must prove that the generic interaction route and browser
+bridge preserve classical prerequisite code, HTTP status and timed-retry
+metadata; a real catalog/formative cache-skew route performs one reload and
+returns 409 with no APIS/ledger/outbox/Queue write; and a learning-health
+request supplies one `waitUntil` drain that monotonically advances a pending
+central receipt. Separately run canonical User Center's
+`tests/growth-source-health.test.mjs` and inspect its `scheduled()` handler to
+prove the hourly probe calls the exact YW learning-health URL. No Pages Cron is
+permitted.
+
 ## 2026-08-13 scoring-correctness candidate
 
 Run the full source and release-artifact prerequisites with exact Node 24.18.0

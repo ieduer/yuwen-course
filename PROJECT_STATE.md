@@ -2,6 +2,35 @@
 
 Last updated: 2026-08-13
 
+## 2026-08-13 structured-error and recovery closeout candidate
+
+- The generic `/api/learning/interactions` route now preserves the exact
+  `classical_first_read_required` or
+  `classical_annotated_reading_required` prerequisite, HTTP 422 disposition,
+  non-retryable disposition and null timed-retry boundary. Timed submission conflicts keep
+  their exact `retryAfterSeconds`; the browser evidence bridge returns these
+  structured fields instead of collapsing them into `unavailable`.
+- A route-level hostile test now forces the study-guide catalog cache to the
+  prior digest while the formative cache observes the next digest. The Worker
+  performs exactly one catalog reload, returns
+  `study_guide_catalog_changed`/409, and makes zero APIS, learning-ledger,
+  outbox or Queue writes.
+- Canonical User Center `8aca8be51f6088444083d53d90dbc6966b815630`
+  owns the hourly `scheduled()` source-health probe and calls the exact
+  `https://yw.bdfz.net/api/learning/health` route. A request-context test now
+  awaits that route's existing `ctx.waitUntil(drainEvidenceOutbox(...))` path
+  through a monotonic `pending_mapping` to `accepted` receipt. YW remains a
+  Pages project and adds no Cron Trigger or new runtime recovery mechanism.
+- This candidate changes no scoring rule, catalog byte, formative authority,
+  D1 row, Queue, Pages deployment, User Center source or App content. The App
+  pointer remains byte SHA-256
+  `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
+- Exact Node 24.18.0 and 22.21.1 each pass the complete
+  `precontent:check` and the focused 41/41 structured-error, cache-skew and
+  recovery set. Canonical User Center's source-health suite passes 6/6 on both
+  Node authorities. This is a `no-new-capability` change: the existing Pages
+  request context, D1, service binding and Queue contracts are unchanged.
+
 ## 2026-08-13 scoring-correctness source candidate
 
 - The current 241-item study-guide catalog remains structurally stable, but

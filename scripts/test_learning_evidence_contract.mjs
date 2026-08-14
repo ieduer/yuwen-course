@@ -14,6 +14,7 @@ import {
   learningEvidenceContract,
   OUTBOX_RETRY_SELECTION_SQL,
   assertLearningSubmissionAllowed,
+  invalidateFormativeManifestCache,
   recordLearningInteraction,
 } from "../site/learning-evidence-source.js";
 import worker from "../site/_worker.js";
@@ -22,6 +23,7 @@ const ROOT = resolve(import.meta.dirname, "..");
 const registry = JSON.parse(readFileSync(resolve(ROOT, "site/data/interaction-definitions.json"), "utf8"));
 const manifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/learning-manifest.json"), "utf8"));
 const formativeManifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/lesson-competency-manifest.json"), "utf8"));
+const studyGuideCatalog = JSON.parse(readFileSync(resolve(ROOT, "site/data/study-guide-catalog.json"), "utf8"));
 const vocabFirstRead = JSON.parse(readFileSync(resolve(ROOT, "site/data/classical-first-read/lesson-1474.json"), "utf8"));
 const workerSource = readFileSync(resolve(ROOT, "site/_worker.js"), "utf8");
 const lesson = {
@@ -52,6 +54,15 @@ function mockStatement(sql, writes, state) {
       return this;
     },
     async first() {
+      if (sql.includes("SELECT id, uc_user_id, uc_slug, display_name, class_name FROM students")) {
+        return {
+          id: 7,
+          uc_user_id: 42,
+          uc_slug: "gap-test-student",
+          display_name: "Gap Test Student",
+          class_name: "",
+        };
+      }
       if (sql.includes("FROM classical_first_read_sessions")) {
         return state.firstReadSubmitted ? { submitted_at: "2026-07-01T00:00:00.000Z" } : null;
       }
@@ -340,6 +351,148 @@ test("YW exposes compound health and the exact existing A+ source activation rec
     itemCount: registry.compatibilityContracts.aPlusGate.itemCount,
     loaderContractVersion: "yuwen-queue-ledger-v1",
   });
+});
+
+test("generic learning route preserves the classical prerequisite code and retry shape", async () => {
+  invalidateFormativeManifestCache();
+  const source = sourceEnvironment({ firstReadSubmitted: false });
+  source.env.READING_TEST_SLUG = "gap-test-student";
+  const response = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/interactions", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      lessonId: vocabLesson.id,
+      interactionKey: "noteOpened",
+      clientMutationId: "classical-gate-generic-route",
+      data: { noteRef: "1" },
+    }),
+  }), source.env, {});
+  const body = await response.json();
+  assert.equal(response.status, 422);
+  assert.deepEqual(body, {
+    ok: false,
+    error: "請先完成無標點初讀再進入本課後續關卡",
+    code: "classical_first_read_required",
+    retryable: false,
+    retryAfterSeconds: null,
+  });
+  assert.equal(source.queued.length, 0);
+  assert.equal(source.writes.some((write) => (
+    /learning_interactions|learning_evaluations|evidence_outbox|learning_submission_slots/.test(write.sql)
+  )), false);
+});
+
+test("study-guide route rejects a catalog and formative cache skew after one coherent catalog reload", async () => {
+  invalidateFormativeManifestCache();
+  const isolatedWorkerUrl = new URL("../site/_worker.js?route-cache-skew-hostile=1", import.meta.url);
+  const { default: isolatedWorker } = await import(isolatedWorkerUrl);
+  const source = sourceEnvironment();
+  source.env.READING_TEST_SLUG = "gap-test-student";
+  const originalAssetsFetch = source.env.ASSETS.fetch.bind(source.env.ASSETS);
+  const nextCatalogDigest = `sha256:${"a".repeat(64)}`;
+  const nextCatalog = structuredClone(studyGuideCatalog);
+  nextCatalog.catalogDigest = nextCatalogDigest;
+  const nextFormative = structuredClone(formativeManifest);
+  nextFormative.studyGuideCatalogDigest = nextCatalogDigest;
+  const catalogReads = [];
+  let skewed = false;
+  source.env.ASSETS.fetch = async (request) => {
+    const pathname = new URL(request.url).pathname;
+    if (pathname === "/data/study-guide-catalog.json") {
+      const value = skewed ? nextCatalog : studyGuideCatalog;
+      catalogReads.push(value.catalogDigest);
+      skewed = true;
+      return Response.json(value);
+    }
+    if (pathname === "/data/lesson-competency-manifest.json" && skewed) {
+      return Response.json(nextFormative);
+    }
+    return originalAssetsFetch(request);
+  };
+  const item = studyGuideCatalog.lessons
+    .find((entry) => entry.lessonId === vocabLesson.id)
+    .items.find((entry) => entry.activeForSelfTest);
+  assert.ok(item);
+  const originalFetch = globalThis.fetch;
+  let apisCalls = 0;
+  globalThis.fetch = async () => {
+    apisCalls += 1;
+    throw new Error("APIS must not run during catalog skew rejection");
+  };
+  try {
+    const response = await isolatedWorker.fetch(new Request("https://yw.bdfz.net/api/reading/study-guide-attempt", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        lessonId: vocabLesson.id,
+        itemKey: item.itemKey,
+        response: "我先依原句語境作答，再核對來源答案。",
+        referenceRevealedAt: "2026-08-14T00:00:00.000Z",
+        clientMutationId: "catalog-formative-cache-skew",
+      }),
+    }), source.env, {});
+    const body = await response.json();
+    assert.equal(response.status, 409);
+    assert.equal(body.code, "study_guide_catalog_changed");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  assert.deepEqual(catalogReads, [studyGuideCatalog.catalogDigest, nextCatalogDigest]);
+  assert.equal(apisCalls, 0);
+  assert.equal(source.queued.length, 0);
+  assert.equal(source.writes.some((write) => (
+    /learning_interactions|learning_evaluations|evidence_outbox|learning_submission_slots/.test(write.sql)
+  )), false);
+});
+
+test("learning-health request context completes the durable outbox drain through waitUntil", async () => {
+  const sourceAttemptId = "018f1234-5678-7abc-9def-012345678910";
+  const source = sourceEnvironment({
+    outboxRows: [{
+      source_event_id: sourceAttemptId,
+      delivery_status: "enqueued",
+      central_disposition: "pending_mapping",
+      envelope_json: JSON.stringify({
+        schema: "bdfz-learning-evidence-event-v2",
+        contractVersion: "yw-aplus-e310-v2",
+      }),
+    }],
+    centralReceipts: [{ sourceAttemptId, disposition: "accepted" }],
+  });
+  source.env.USER_CENTER_EVIDENCE.getLearningHealthReceipt = async (descriptor) => ({
+    ok: true,
+    schemaVersion: "bdfz-learning-source-health-receipt-v2",
+    status: "healthy",
+    sources: structuredClone(descriptor.sources),
+    capabilities: structuredClone(descriptor.capabilities),
+    activationScope: "registered_source_contract_health_only",
+    persistence: "none",
+    runtimeScoringActivation: false,
+    affectsGrowthScore: false,
+    affectsAPlus: false,
+  });
+  source.env.USER_CENTER_EVIDENCE.getSourceReceipt = async (descriptor) => ({
+    ok: true,
+    schemaVersion: 1,
+    ...descriptor,
+    entrypointVersion: "bdfz-growth-source-rpc-v1",
+    status: "active",
+  });
+  const background = [];
+  const response = await worker.fetch(
+    new Request("https://yw.bdfz.net/api/learning/health"),
+    source.env,
+    { waitUntil(promise) { background.push(promise); } },
+  );
+  assert.equal(response.status, 200);
+  assert.equal(background.length, 1);
+  const [drained] = await Promise.all(background);
+  assert.deepEqual(drained, {
+    reconciled: { checked: 1, receipted: 1 },
+    retried: { attempted: 0, enqueued: 0 },
+  });
+  assert.equal(source.state.outboxRows[0].central_disposition, "accepted");
+  assert.equal(source.queued.length, 0);
 });
 
 test("the Worker checks the per-user resource bound before AI work and vocabulary mutation", () => {

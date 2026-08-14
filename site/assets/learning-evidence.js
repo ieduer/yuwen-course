@@ -25,8 +25,23 @@
     });
     const payload = await response.json().catch(() => ({}));
     if (!response.ok) {
-      if (response.status === 401) return { ok: false, reason: "anonymous" };
-      throw new Error(payload.error || `learning interaction ${response.status}`);
+      const retryHeader = Number(response.headers?.get?.("retry-after"));
+      const retryPayload = Number(payload.retryAfterSeconds);
+      const retryAfterSeconds = Number.isFinite(retryPayload) && retryPayload > 0
+        ? Math.ceil(retryPayload)
+        : Number.isFinite(retryHeader) && retryHeader > 0
+          ? Math.ceil(retryHeader)
+          : null;
+      return {
+        ok: false,
+        status: Number(response.status) || 0,
+        code: String(payload.code || ""),
+        retryable: payload.retryable === true || retryAfterSeconds !== null,
+        retryAfterSeconds,
+        reason: response.status === 401
+          ? "anonymous"
+          : String(payload.error || `learning interaction ${response.status}`),
+      };
     }
     return payload;
   }
