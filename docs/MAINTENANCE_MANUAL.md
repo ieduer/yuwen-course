@@ -16,9 +16,10 @@ Last reviewed: 2026-08-13 (America/Los_Angeles)
   changed, return `study_guide_catalog_changed`/409 before APIS, reservation,
   learning-ledger, outbox or Queue work. The hostile route test must observe
   the old then new catalog digest and zero prohibited writes.
-- Idle recovery uses the existing supported request chain: canonical User
-  Center `8aca8be51f6088444083d53d90dbc6966b815630` runs hourly
-  `scheduled()` growth-source maintenance; its exact YW probe requests
+- Idle recovery uses the existing supported request chain. The exact canonical
+  User Center SHA comes from the UC strong-workspace audit pin at review and
+  release time; that source runs hourly `scheduled()` growth-source
+  maintenance, and its exact YW probe requests
   `https://yw.bdfz.net/api/learning/health`; the YW Pages request context
   attaches `drainEvidenceOutbox(env, 50)` with `ctx.waitUntil`. The drain
   reconciles before retrying and preserves the pending-mapping monotonic CAS.

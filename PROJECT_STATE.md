@@ -15,8 +15,9 @@ Last updated: 2026-08-13
   performs exactly one catalog reload, returns
   `study_guide_catalog_changed`/409, and makes zero APIS, learning-ledger,
   outbox or Queue writes.
-- Canonical User Center `8aca8be51f6088444083d53d90dbc6966b815630`
-  owns the hourly `scheduled()` source-health probe and calls the exact
+- The exact canonical User Center SHA is supplied by the UC strong-workspace
+  audit pin at review and release time. That audited source owns the hourly
+  `scheduled()` source-health probe and calls the exact
   `https://yw.bdfz.net/api/learning/health` route. A request-context test now
   awaits that route's existing `ctx.waitUntil(drainEvidenceOutbox(...))` path
   through a monotonic `pending_mapping` to `accepted` receipt. YW remains a
@@ -27,9 +28,10 @@ Last updated: 2026-08-13
   `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
 - Exact Node 24.18.0 and 22.21.1 each pass the complete
   `precontent:check` and the focused 41/41 structured-error, cache-skew and
-  recovery set. Canonical User Center's source-health suite passes 6/6 on both
-  Node authorities. This is a `no-new-capability` change: the existing Pages
-  request context, D1, service binding and Queue contracts are unchanged.
+  recovery set. The UC strong-workspace audit-pinned source-health suite passes
+  6/6 on both Node authorities. This is a `no-new-capability` change: the
+  existing Pages request context, D1, service binding and Queue contracts are
+  unchanged.
 - `.github/workflows/learning-contract-ci.yml` adds the repository's first
   read-only PR check: the exact Node 24.18.0/22.21.1 matrix runs the same 41
   focused source-contract tests with `contents: read` only. It has no deploy,
