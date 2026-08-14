@@ -34,6 +34,8 @@ jobs:
         run: npm ci
       - name: Verify focused learning contracts
         run: node --test scripts/test_learning_manifest.mjs scripts/test_learning_evidence_contract.mjs scripts/test_preview_binding_isolation.mjs
+      - name: Verify dedicated precheck binding types
+        run: npm run check:precheck-binding-types
       - name: Verify formal Web artifact authority
         run: |
           npm run build:release-site

@@ -2,24 +2,32 @@
 
 Last reviewed: 2026-08-14 (America/Los_Angeles)
 
-## 2026-08-14 isolated preview identity contract
+## 2026-08-14 dedicated precheck project contract
 
-- Preview must bind `USER_CENTER_EVIDENCE` exactly to
-  `bdfz-user-center#YuwenEvidenceIdentity`. The binding is required for the
-  write-disabled external-executor preview to resolve an authenticated test
-  account and read central delivery receipts through the named RPC contract.
-- Preview remains isolated on `yuwen-reading-db-preview` and must have no
-  `LEARNING_EVIDENCE_QUEUE` producer. Production D1 and Queue bindings remain
-  confined to `[env.production]`; a preview must never inherit either one.
-- `npm run test:preview-bindings` is the executable authority for this split.
-  A missing/drifted identity binding, any preview Queue producer, or any
-  production D1 identifier in the preview configuration blocks release.
-- Pull-request CI runs these two checks with the existing 41 focused learning
-  contract checks on both exact Node authorities; the current focused matrix
-  is therefore 43 tests per job.
-- This configuration correction is `no-new-capability`: it uses the existing
-  reviewed Pages service-binding contract and changes no scoring policy,
-  artifact content, App pointer, D1 data or live resource by itself.
+- The primary `yuwen-course` project must keep all previews on
+  `yuwen-reading-db-preview` with no `USER_CENTER_EVIDENCE` service and no
+  `LEARNING_EVIDENCE_QUEUE`. Pages preview bindings apply project-wide, not to
+  one branch, and the project retains historical preview deployments.
+- Only the new Direct Upload project `yuwen-course-foundation-precheck` may use
+  `wrangler.precheck.toml`. It binds `USER_CENTER_EVIDENCE` exactly to
+  `bdfz-user-center#YuwenEvidenceIdentity` and the preview D1, but contains no
+  Queue, production D1, custom domain or production traffic binding.
+- Before any deployment, the external executor must read back that the named
+  project is newly created with zero deployment history. It may then deploy
+  one exact write-disabled artifact, require a single exact deployment and
+  verify the source SHA and binding topology. Reusing the primary project or a
+  project with prior deployments fails closed.
+- Apply preview D1 migration 0005 in its own journaled phase, independently of
+  production YW 0005. Require the exact migration hash, sole-new ledger row,
+  schema, `quick_check`, foreign-key and aggregate watermark readbacks before
+  the precheck may authenticate a test account or reconcile central receipts.
+- `npm run test:preview-bindings` and
+  `npm run check:precheck-binding-types` are the executable source gates. CI
+  runs three binding tests with the existing 41 focused learning-contract
+  checks, for 44 tests per exact Node job.
+- This source correction creates no Pages project, deployment, migration or
+  student-data write by itself. Scoring policy, artifact bytes and App pointer
+  remain unchanged.
 
 ## 2026-08-13 structured error and idle-recovery closeout
 
@@ -690,9 +698,12 @@ Non-regenerable data: D1 reading submissions, version history, vocabulary attemp
 Pages preview is deliberately data-isolated. Top-level `wrangler.toml` binds
 only `yuwen-reading-db-preview`; `env.production` alone binds the production
 D1, `bdfz-user-center#YuwenEvidenceIdentity`, and
-`bdfz-learning-evidence-yw-v2`. Preview therefore cannot authenticate or emit
-student evidence and must return 401/503 on those routes. On 2026-08-09 all 12
-preview deployments created before this split were superseded and deleted.
+`bdfz-learning-evidence-yw-v2`. Primary-project preview therefore cannot
+authenticate or emit student evidence and must return 401/503 on those routes.
+The separately governed `wrangler.precheck.toml` is valid only for the fresh
+`yuwen-course-foundation-precheck` Direct Upload project described above.
+On 2026-08-09 all 12 preview deployments created before this split were
+superseded and deleted.
 Ten deleted hash hosts return 404. Two deleted hosts whose Cloudflare edge
 routes continued serving the old Worker are isolated by exact-host Access app
 `5d768360-2dd8-458d-a743-182c9ced3b22` and deny policy

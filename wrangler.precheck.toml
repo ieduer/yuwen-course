@@ -1,0 +1,25 @@
+name = "yuwen-course-foundation-precheck"
+compatibility_date = "2026-05-12"
+pages_build_output_dir = "site"
+
+# Local development remains data-isolated and has no User Center capability.
+[[d1_databases]]
+binding = "READING_DB"
+database_name = "yuwen-reading-db-preview"
+database_id = "39ed36d9-b3f3-40fd-933a-9a68a4066302"
+migrations_dir = "migrations"
+
+# This binding is valid only for a newly created, Direct Upload precheck Pages
+# project whose deployment history and lack of custom domains are read back by
+# the external executor. It must never be used with the primary yuwen-course
+# project, because Pages preview configuration applies to every preview there.
+[[env.preview.d1_databases]]
+binding = "READING_DB"
+database_name = "yuwen-reading-db-preview"
+database_id = "39ed36d9-b3f3-40fd-933a-9a68a4066302"
+migrations_dir = "migrations"
+
+[[env.preview.services]]
+binding = "USER_CENTER_EVIDENCE"
+service = "bdfz-user-center"
+entrypoint = "YuwenEvidenceIdentity"
