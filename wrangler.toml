@@ -8,6 +8,17 @@ database_name = "yuwen-reading-db-preview"
 database_id = "39ed36d9-b3f3-40fd-933a-9a68a4066302"
 migrations_dir = "migrations"
 
+[[env.preview.d1_databases]]
+binding = "READING_DB"
+database_name = "yuwen-reading-db-preview"
+database_id = "39ed36d9-b3f3-40fd-933a-9a68a4066302"
+migrations_dir = "migrations"
+
+[[env.preview.services]]
+binding = "USER_CENTER_EVIDENCE"
+service = "bdfz-user-center"
+entrypoint = "YuwenEvidenceIdentity"
+
 [[env.production.d1_databases]]
 binding = "READING_DB"
 database_name = "yuwen-reading-db"

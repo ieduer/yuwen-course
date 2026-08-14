@@ -1,6 +1,23 @@
 # Project State
 
-Last updated: 2026-08-13
+Last updated: 2026-08-14
+
+## 2026-08-14 preview identity-binding contract correction
+
+- Pages preview now declares the exact `USER_CENTER_EVIDENCE` service binding
+  to `bdfz-user-center#YuwenEvidenceIdentity`. It continues to use only
+  `yuwen-reading-db-preview` and still has no Queue producer, production D1 or
+  production traffic authority.
+- This closes the source/configuration mismatch in the external UC+YW
+  transaction: the write-disabled preview can authenticate an existing test
+  account and reconcile central delivery receipts during the controlled v2
+  Queue/RPC precheck. Missing or drifted binding still fails closed with 503.
+- No learning rule, score, catalog, artifact byte, App pointer, D1 row, Queue,
+  Pages deployment or User Center source changed. Production remains disabled
+  until the external executor completes its separately journaled gates.
+- Pull-request CI now includes the two preview-binding hostile checks alongside
+  the existing 41 learning-manifest/evidence checks, for 43 current focused
+  checks on each exact Node authority.
 
 ## 2026-08-13 structured-error and recovery closeout candidate
 

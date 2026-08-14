@@ -1,6 +1,25 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-08-13 (America/Los_Angeles)
+Last reviewed: 2026-08-14 (America/Los_Angeles)
+
+## 2026-08-14 isolated preview identity contract
+
+- Preview must bind `USER_CENTER_EVIDENCE` exactly to
+  `bdfz-user-center#YuwenEvidenceIdentity`. The binding is required for the
+  write-disabled external-executor preview to resolve an authenticated test
+  account and read central delivery receipts through the named RPC contract.
+- Preview remains isolated on `yuwen-reading-db-preview` and must have no
+  `LEARNING_EVIDENCE_QUEUE` producer. Production D1 and Queue bindings remain
+  confined to `[env.production]`; a preview must never inherit either one.
+- `npm run test:preview-bindings` is the executable authority for this split.
+  A missing/drifted identity binding, any preview Queue producer, or any
+  production D1 identifier in the preview configuration blocks release.
+- Pull-request CI runs these two checks with the existing 41 focused learning
+  contract checks on both exact Node authorities; the current focused matrix
+  is therefore 43 tests per job.
+- This configuration correction is `no-new-capability`: it uses the existing
+  reviewed Pages service-binding contract and changes no scoring policy,
+  artifact content, App pointer, D1 data or live resource by itself.
 
 ## 2026-08-13 structured error and idle-recovery closeout
 
