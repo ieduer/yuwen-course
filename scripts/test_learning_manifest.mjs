@@ -71,11 +71,15 @@ test("removed lessons are absent from source data and every shipped index", () =
   const taxonomy = JSON.parse(readFileSync(resolve(ROOT, "site/data/literary-taxonomy.json"), "utf8"));
   const learningManifest = JSON.parse(readFileSync(OUTPUT, "utf8"));
   const vocabIndex = JSON.parse(readFileSync(resolve(ROOT, "site/data/vocab/index.json"), "utf8"));
-  const pageCacheIndex = readFileSync(resolve(ROOT, "site/data/cache/index.json"), "utf8");
+  const pageCachePath = resolve(ROOT, "site/data/cache/index.json");
+  const pageCacheIndex = existsSync(pageCachePath) ? readFileSync(pageCachePath, "utf8") : "";
+  const releaseBuilder = readFileSync(resolve(ROOT, "scripts/build_release_site.mjs"), "utf8");
+  assert.match(releaseBuilder, /"data\/cache\/"/, "ignored page cache must remain excluded from formal artifacts");
   const sourceExports = [
     resolve(ROOT, ".cache/discourse-course-export.json"),
     resolve(ROOT, ".cache/discourse-course-export.live.json"),
-  ].map((path) => JSON.parse(readFileSync(path, "utf8")));
+  ].filter((path) => existsSync(path))
+    .map((path) => JSON.parse(readFileSync(path, "utf8")));
 
   for (const lessonId of REMOVED_LESSONS) {
     assert.equal(contentManifest.lessons.some((lesson) => lesson.id === lessonId), false);
@@ -84,7 +88,7 @@ test("removed lessons are absent from source data and every shipped index", () =
     assert.equal(learningManifest.items.some((item) => item.sourceId === lessonId || item.sourcePath.includes(lessonId)), false);
     assert.equal(learningManifest.exclusions.some((item) => item.lessonId === lessonId), false);
     assert.equal(Object.hasOwn(vocabIndex.lessons, lessonId), false);
-    assert.equal(pageCacheIndex.includes(lessonId), false);
+    if (pageCacheIndex) assert.equal(pageCacheIndex.includes(lessonId), false);
     assert.equal(existsSync(resolve(ROOT, `site/data/lessons/${lessonId}.json`)), false);
   }
   for (const source of sourceExports) {
