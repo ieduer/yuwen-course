@@ -149,11 +149,74 @@ test("anonymous activity is rejected by the source endpoint without a User Cente
     { words: "风雪" },
     { clientMutationId: "test-anonymous-1" },
   );
-  assert.deepEqual(result, { ok: false, reason: "anonymous" });
+  assert.deepEqual(result, {
+    ok: false,
+    status: 401,
+    code: "",
+    retryable: false,
+    retryAfterSeconds: null,
+    reason: "anonymous",
+  });
   assert.equal(requests.length, 1);
   assert.equal(requests[0].url, "/api/learning/interactions");
   assert.equal(requests[0].options.credentials, "include");
   assert.equal(globalThis.BdfzIdentity, undefined);
+  delete globalThis.fetch;
+});
+
+test("browser evidence bridge preserves structured prerequisite and timed-retry errors", async () => {
+  delete globalThis.YwLearningEvidence;
+  const responses = [
+    new Response(JSON.stringify({
+      ok: false,
+      error: "請先完成無標點初讀再進入本課後續關卡",
+      code: "classical_first_read_required",
+      retryable: false,
+      retryAfterSeconds: null,
+    }), {
+      status: 422,
+      headers: { "content-type": "application/json" },
+    }),
+    new Response(JSON.stringify({
+      ok: false,
+      error: "本次提交仍在處理",
+      code: "learning_submission_in_progress",
+      retryable: true,
+    }), {
+      status: 409,
+      headers: { "content-type": "application/json", "retry-after": "37" },
+    }),
+  ];
+  globalThis.fetch = async () => responses.shift();
+  await import(`${EVIDENCE_MODULE}?structured-errors=${Date.now()}`);
+  const prerequisite = await globalThis.YwLearningEvidence.record(
+    "noteOpened",
+    "lesson-1474",
+    { noteRef: "1" },
+    { clientMutationId: "structured-classical-gate" },
+  );
+  assert.deepEqual(prerequisite, {
+    ok: false,
+    status: 422,
+    code: "classical_first_read_required",
+    retryable: false,
+    retryAfterSeconds: null,
+    reason: "請先完成無標點初讀再進入本課後續關卡",
+  });
+  const inProgress = await globalThis.YwLearningEvidence.record(
+    "evaluation",
+    "lesson-1474",
+    { rating: 80 },
+    { clientMutationId: "structured-timed-retry" },
+  );
+  assert.deepEqual(inProgress, {
+    ok: false,
+    status: 409,
+    code: "learning_submission_in_progress",
+    retryable: true,
+    retryAfterSeconds: 37,
+    reason: "本次提交仍在處理",
+  });
   delete globalThis.fetch;
 });
 

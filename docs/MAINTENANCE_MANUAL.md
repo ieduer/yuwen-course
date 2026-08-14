@@ -2,6 +2,37 @@
 
 Last reviewed: 2026-08-13 (America/Los_Angeles)
 
+## 2026-08-13 structured error and idle-recovery closeout
+
+- All generic learning-interaction failures that represent a classical reading
+  prerequisite retain a machine-readable `classical_*` code, HTTP 422 status,
+  `retryable=false` and `retryAfterSeconds=null`. A timed submission conflict
+  retains its exact positive retry interval. `site/assets/learning-evidence.js`
+  must pass these fields to the caller; it must not throw away the response as
+  a generic network failure.
+- Catalog/formative cache skew is a route boundary, not only a helper
+  invariant. On the first digest mismatch, invalidate both authorities and
+  reload the catalog once. If the submitted digest or item semantic revision
+  changed, return `study_guide_catalog_changed`/409 before APIS, reservation,
+  learning-ledger, outbox or Queue work. The hostile route test must observe
+  the old then new catalog digest and zero prohibited writes.
+- Idle recovery uses the existing supported request chain. The exact canonical
+  User Center SHA comes from the UC strong-workspace audit pin at review and
+  release time; that source runs hourly `scheduled()` growth-source
+  maintenance, and its exact YW probe requests
+  `https://yw.bdfz.net/api/learning/health`; the YW Pages request context
+  attaches `drainEvidenceOutbox(env, 50)` with `ctx.waitUntil`. The drain
+  reconciles before retrying and preserves the pending-mapping monotonic CAS.
+  Do not add a Pages Cron Trigger.
+- These changes do not alter the learning/scoring contract or Web/App content.
+  Keep `site/app-content/latest-stable.json` byte SHA-256
+  `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
+- Pull requests run `.github/workflows/learning-contract-ci.yml` on exact Node
+  24.18.0 and 22.21.1. The workflow has read-only repository permission and
+  runs only the focused learning-manifest/evidence tests; it must never gain a
+  deploy, Cloudflare credential, D1 or Queue step. Run `precontent:check`
+  separately on both Node authorities before a release-source handoff.
+
 ## 2026-08-13 evaluation correctness and retry boundary
 
 - `site/study-guide-assessment.js` is the source-owned objective grader. Choice

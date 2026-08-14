@@ -151,6 +151,7 @@ function learningRateLimitResponse(error) {
     ok: false,
     error: "提交过于频繁，请稍后继续修改",
     code: "learning_submission_rate_limited",
+    retryable: true,
     retryAfterSeconds,
   }, {
     status: 429,
@@ -181,6 +182,7 @@ function learningSubmissionInProgressResponse(error) {
     ok: false,
     error: error?.message || "本次提交已进入评阅，請稍後使用同一提交重試",
     code: "learning_submission_in_progress",
+    retryable: true,
     retryAfterSeconds,
   }, { status: 409, headers: { "retry-after": String(retryAfterSeconds) } });
 }
@@ -1457,8 +1459,14 @@ async function handleLearningInteraction(request, env, ctx) {
   } catch (error) {
     if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
-    if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse();
+    if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
+    if (["classical_first_read_required", "classical_annotated_reading_required"].includes(error?.code)) {
+      return readingError(error.message, 422, error.code, {
+        retryable: false,
+        retryAfterSeconds: null,
+      });
+    }
     return readingError(error?.message || "interaction recording failed", 422);
   }
 }
@@ -1529,8 +1537,8 @@ async function loadVocabBank(request, env, lessonId) {
   return bank;
 }
 
-function readingError(message, status = 400, code = "") {
-  return json({ ok: false, error: message, ...(code ? { code } : {}) }, { status });
+function readingError(message, status = 400, code = "", details = {}) {
+  return json({ ok: false, error: message, ...(code ? { code } : {}), ...details }, { status });
 }
 
 async function nextNodeSeq(db, studentId) {
