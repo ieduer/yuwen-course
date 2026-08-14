@@ -26,6 +26,11 @@ Last reviewed: 2026-08-13 (America/Los_Angeles)
 - These changes do not alter the learning/scoring contract or Web/App content.
   Keep `site/app-content/latest-stable.json` byte SHA-256
   `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
+- Pull requests run `.github/workflows/learning-contract-ci.yml` on exact Node
+  24.18.0 and 22.21.1. The workflow has read-only repository permission and
+  runs only the focused learning-manifest/evidence tests; it must never gain a
+  deploy, Cloudflare credential, D1 or Queue step. Run `precontent:check`
+  separately on both Node authorities before a release-source handoff.
 
 ## 2026-08-13 evaluation correctness and retry boundary
 

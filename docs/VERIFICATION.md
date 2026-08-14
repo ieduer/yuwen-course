@@ -13,6 +13,12 @@ npm run precontent:check
 git diff --check
 ```
 
+Every pull request also runs the read-only
+`.github/workflows/learning-contract-ci.yml` matrix on exact Node 24.18.0 and
+22.21.1. Both focused 41-test jobs must pass. This CI does not replace the full
+dual-Node `precontent:check` and contains no deployment or production-data
+authority.
+
 The focused checks must prove that the generic interaction route and browser
 bridge preserve classical prerequisite code, HTTP status and timed-retry
 metadata; a real catalog/formative cache-skew route performs one reload and

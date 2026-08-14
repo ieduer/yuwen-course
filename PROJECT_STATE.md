@@ -30,6 +30,11 @@ Last updated: 2026-08-13
   recovery set. Canonical User Center's source-health suite passes 6/6 on both
   Node authorities. This is a `no-new-capability` change: the existing Pages
   request context, D1, service binding and Queue contracts are unchanged.
+- `.github/workflows/learning-contract-ci.yml` adds the repository's first
+  read-only PR check: the exact Node 24.18.0/22.21.1 matrix runs the same 41
+  focused source-contract tests with `contents: read` only. It has no deploy,
+  Cloudflare credential, D1 or Queue step; the full local `precontent:check`
+  remains the heavier release-source gate.
 
 ## 2026-08-13 scoring-correctness source candidate
 
