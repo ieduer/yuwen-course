@@ -34,9 +34,10 @@ Last updated: 2026-08-13
   unchanged.
 - `.github/workflows/learning-contract-ci.yml` adds the repository's first
   read-only PR check: the exact Node 24.18.0/22.21.1 matrix runs the same 41
-  focused source-contract tests with `contents: read` only. It has no deploy,
-  Cloudflare credential, D1 or Queue step; the full local `precontent:check`
-  remains the heavier release-source gate.
+  focused source-contract tests, then builds and checks the formal Web artifact
+  against the tracked checksum manifest with `contents: read` only. It has no
+  deploy, Cloudflare credential, D1 or Queue step; the full local
+  `precontent:check` remains the heavier release-source gate.
 
 ## 2026-08-13 scoring-correctness source candidate
 
@@ -101,11 +102,11 @@ Last updated: 2026-08-13
   acceptance in a later Web/App transaction before any pointer move.
 - No Pages deployment, Queue/D1 write, traffic change or rollback was performed
   by this source update.
-- The exact formal foundation artifact contains 1,223 files / 164,367,668
+- The exact formal foundation artifact contains 1,223 files / 164,368,564
   bytes with aggregate SHA-256
-  `947f3e297f5031a18fbefd0d63b2e955a7ffde5dbd76e93b6170332d6f66c278`;
+  `10144eec24d73e63fe51f271b6d200cf193e504a658f5738c4e258f42053e8be`;
   its tracked manifest byte SHA-256 is
-  `5e50fd942dcf7b4095c8cdeef092c1a85142963de91380be835bec4271fd6025`.
+  `e136b867d77c5fdcda6b6698a7e33e745350c2cbfd27fb05964ca82b6cab9a6f`.
 
 ## 2026-08-12 e310/v2 User Center source-contract candidate
 

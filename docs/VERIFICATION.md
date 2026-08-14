@@ -15,9 +15,9 @@ git diff --check
 
 Every pull request also runs the read-only
 `.github/workflows/learning-contract-ci.yml` matrix on exact Node 24.18.0 and
-22.21.1. Both focused 41-test jobs must pass. This CI does not replace the full
-dual-Node `precontent:check` and contains no deployment or production-data
-authority.
+22.21.1. Both focused 41-test jobs and both deterministic formal Web artifact
+manifest checks must pass. This CI does not replace the full dual-Node
+`precontent:check` and contains no deployment or production-data authority.
 
 The focused checks must prove that the generic interaction route and browser
 bridge preserve classical prerequisite code, HTTP status and timed-retry
@@ -254,12 +254,12 @@ unlocked it only after the exact stable mutation succeeded.
 
 The formal staging/check and artifact-manifest check pass at 1,223 files. The
 release marker is `formal-stable`, 1,222 projected files, projected aggregate
-`a5172edec5e9e9d25bf24078c15869fe04c526166b79f30b0a1e3ebad9f42b91`,
+`d59d20fdb8a466e4d4589a710184b7bb7d66388ccdbe8aa00438a497bbe06117`,
 marker SHA-256
-`6ce4ad3e39657a792bc73f0478a4d68edf686fe9eb9f26ee271ac57c9266c13d`
+`0359d7faba41852c07e5658461eb70ef42aa44482b97b1a9aac3188a3e4966d0`
 and artifact-manifest aggregate
-`947f3e297f5031a18fbefd0d63b2e955a7ffde5dbd76e93b6170332d6f66c278`
-(164,367,668 bytes).
+`10144eec24d73e63fe51f271b6d200cf193e504a658f5738c4e258f42053e8be`
+(164,368,564 bytes).
 It includes the unchanged stable App release only (278 exact paths) and no new
 App candidate or pointer.
 
