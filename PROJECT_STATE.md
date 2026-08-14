@@ -41,6 +41,10 @@ Last updated: 2026-08-13
   Reading API passed 70/70, native-content passed 22/22 and release-site passed
   5/5. Formal Web-only artifact generation, commit/push and live readback remain
   separate release gates.
+- Clean external checkouts no longer require the ignored, non-shipping
+  `site/data/cache/` snapshot merely to prove removed lessons are absent. When
+  that local developer cache exists it is still checked; formal staging keeps
+  the entire prefix excluded and the release artifact remains content-addressed.
 
 ## 2026-08-13 external-executor release boundary
 

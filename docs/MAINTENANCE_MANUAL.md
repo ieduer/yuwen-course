@@ -728,6 +728,10 @@ paired command includes the paused App synchronization gate. It must remain
 fail-closed until App follow-up resumes; do not rewrite it as a Web pass.
 
 Run a staged secret scan before commit or push. Generated cache, `output/`, `.claude/`, Playwright profiles, local D1 state, backups, and secrets are not source artifacts.
+`site/data/cache/` is also excluded from formal release staging. Clean external
+checkouts therefore verify every shipped index without hydrating that ignored
+developer-only cache; a local cache, when present, receives the additional
+removed-lesson regression check.
 
 Reader media maintenance is deliberately explicit and never hidden inside an
 ordinary build:
