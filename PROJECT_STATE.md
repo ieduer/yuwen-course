@@ -2,21 +2,28 @@
 
 Last updated: 2026-08-14
 
-## 2026-08-14 preview identity-binding contract correction
+## 2026-08-14 dedicated precheck project correction
 
-- Pages preview now declares the exact `USER_CENTER_EVIDENCE` service binding
-  to `bdfz-user-center#YuwenEvidenceIdentity`. It continues to use only
-  `yuwen-reading-db-preview` and still has no Queue producer, production D1 or
-  production traffic authority.
-- This closes the source/configuration mismatch in the external UC+YW
-  transaction: the write-disabled preview can authenticate an existing test
-  account and reconcile central delivery receipts during the controlled v2
-  Queue/RPC precheck. Missing or drifted binding still fails closed with 503.
+- The primary `yuwen-course` Pages project again gives every preview only
+  `yuwen-reading-db-preview`: it has no User Center service binding and no
+  Queue producer. Pages applies `[env.preview]` to all preview deployments, so
+  adding the production-capable `YuwenEvidenceIdentity` entrypoint there would
+  expose it to historical preview code rather than only one reviewed branch.
+- `wrangler.precheck.toml` defines a separate Direct Upload project named
+  `yuwen-course-foundation-precheck`. Only that new project may bind the
+  preview D1 and `bdfz-user-center#YuwenEvidenceIdentity`; it has no Queue,
+  production D1, custom domain or production traffic authority. The external
+  executor must prove the project had no prior deployments, deploy exactly one
+  reviewed write-disabled artifact and read back the exact bindings before the
+  controlled Queue/RPC precheck.
+- The preview D1 is currently through migration 0004. Its additive 0005 apply
+  and ledger/schema/integrity/watermark readback must be a separate journaled
+  phase from production YW 0005 before the precheck project may be used.
 - No learning rule, score, catalog, artifact byte, App pointer, D1 row, Queue,
   Pages deployment or User Center source changed. Production remains disabled
   until the external executor completes its separately journaled gates.
-- Pull-request CI now includes the two preview-binding hostile checks alongside
-  the existing 41 learning-manifest/evidence checks, for 43 current focused
+- Pull-request CI now includes the three preview-binding hostile checks alongside
+  the existing 41 learning-manifest/evidence checks, for 44 current focused
   checks on each exact Node authority.
 
 ## 2026-08-13 structured-error and recovery closeout candidate

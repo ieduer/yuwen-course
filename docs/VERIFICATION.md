@@ -1,15 +1,19 @@
 # 核查標準 / Verification Standard
 
-## 2026-08-14 preview identity-binding correction
+## 2026-08-14 dedicated precheck project correction
 
-Run `npm run test:preview-bindings` on exact Node 24.18.0 and 22.21.1. It must
-prove that preview has exactly one `USER_CENTER_EVIDENCE` binding to
-`bdfz-user-center#YuwenEvidenceIdentity`, retains only the preview D1, has no
-Queue producer, and cannot fall back to public `/api/me`. Production must keep
-its exact D1, service and v2 Queue bindings. This source check is required
-before the external executor deploys its write-disabled preview and performs
-the controlled Queue/RPC precheck. Pull-request CI runs the resulting 43-test
-focused matrix on each exact Node authority.
+Run `npm run test:preview-bindings` and
+`npm run check:precheck-binding-types` on exact Node 24.18.0 and 22.21.1. They
+must prove that the primary project preview has only the preview D1 and no UC
+service or Queue, while `wrangler.precheck.toml` names only
+`yuwen-course-foundation-precheck` and declares the exact preview D1 plus
+`bdfz-user-center#YuwenEvidenceIdentity`, with no Queue, production D1 or
+production environment. Production keeps its exact D1, service and v2 Queue.
+The external executor must additionally prove the dedicated project is Direct
+Upload with zero history/no custom domain before its sole exact deployment,
+and separately apply/read back preview D1 migration 0005 before Queue/RPC
+precheck. Pull-request CI runs the resulting 44-test focused matrix on each
+exact Node authority.
 
 ## 2026-08-13 B6/B10/B12 closeout additions
 
