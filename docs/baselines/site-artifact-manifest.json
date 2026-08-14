@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1223,
-  "totalBytes": 164367668,
-  "aggregateSha256": "947f3e297f5031a18fbefd0d63b2e955a7ffde5dbd76e93b6170332d6f66c278",
+  "totalBytes": 164368564,
+  "aggregateSha256": "10144eec24d73e63fe51f271b6d200cf193e504a658f5738c4e258f42053e8be",
   "files": [
     {
       "path": "_headers",
@@ -12,13 +12,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 110224,
-      "sha256": "052ac27f759185e2c8c198631798b369afa5f5ad224a6c3b9acb5e9646a3700e"
+      "bytes": 110539,
+      "sha256": "01263c7d59a3c4c411ee4565ffaca0a2ad1c9bdf7a5e1f28f62803b0607b8277"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "6ce4ad3e39657a792bc73f0478a4d68edf686fe9eb9f26ee271ac57c9266c13d"
+      "sha256": "0359d7faba41852c07e5658461eb70ef42aa44482b97b1a9aac3188a3e4966d0"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1447,8 +1447,8 @@
     },
     {
       "path": "assets/learning-evidence.js",
-      "bytes": 1361,
-      "sha256": "b47db3fc8cd662d0c2df6055f73a280f3ef03456df7e832c6497eda15a52342c"
+      "bytes": 1942,
+      "sha256": "b076aef98167d6ea15b1adaa7cf0e015cf99d8f82c0629395318fd4f6ac151ce"
     },
     {
       "path": "assets/menu-icon.webp",
