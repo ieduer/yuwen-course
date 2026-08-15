@@ -9,8 +9,10 @@ Last updated: 2026-08-15
   accepts adjacent and fullwidth choice letters (`BC`, `選BC`, `ＢＣ`, `DBB`),
   common explanation connectors, Arabic equivalents for circled-number answers,
   traditional/simplified equivalents and whitespace sentence boundaries. An
-  explicitly prefixed single-choice answer wins over later explanation letters;
-  an unqualified `AB` or `A、B` remains invalid for a single-choice item.
+  explicitly prefixed single-choice answer wins over letters in a later
+  `B項…` explanation, but an immediate list/alternative tail such as `A和B`,
+  `A、B`, `A或B` or `A與B` remains invalid. An unqualified `AB` or `A、B`
+  likewise remains invalid for a single-choice item.
 - An uncommitted evaluator reservation is a 60-second durable lease. Initial
   `created_at` values use the canonical `.000Z` form; one exact-value D1 CAS may
   move an abandoned lease to `.001Z` and reuse the same source event. That marker
@@ -36,11 +38,11 @@ Last updated: 2026-08-15
   `1307286d4dd9f1e687553a30c4f87d5403fe237cac56727400233abfac36d334`,
   `2a6824db45cac416c4aee3a95ce83aba5be393b6a94034799d6d18cb56f9f998`
   and `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
-  The rebuilt formal artifact contains 1,223 files / 164,376,696 bytes with
+  The rebuilt formal artifact contains 1,223 files / 164,376,983 bytes with
   aggregate SHA-256
-  `11a7969a032eef0b5a79239a0bb0c36845649ab6c5cc8dae9dfc6a66c7c8230a`;
+  `b98548e130ff13ee407e09cb7102a253f7472c0920ed4cd5e398c9caf807d9ac`;
   its tracked manifest byte SHA-256 is
-  `2644042c064a60d52f3c3a59794dd4872782a506e2d70aa4a320df075cc29bfe`.
+  `ed35eaab78d6411a20c140b5b15704207f2ecb0bb7af4c2bde397f7494066b23`.
 - This is a `no-new-capability`, no-schema-change source correction. It made no
   deployment, D1/Queue/User Center write, traffic change or rollback. Any later
   release must independently review and pin the resulting exact commit before

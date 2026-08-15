@@ -7,8 +7,10 @@ Last reviewed: 2026-08-15 (America/Los_Angeles)
 - Keep objective grading source-owned in `site/study-guide-assessment.js`.
   Choice scanning occurs only in the answer lead after NFKC normalization and
   accepts adjacent/fullwidth A--D letters. For single choice, only an explicit
-  prefix such as `我選 A` may disambiguate later explanation letters; bare
-  multi-letter input must not be reduced to the first letter. Circled-number
+  prefix such as `我選 A` may disambiguate a later `B項…` explanation. An
+  immediate list or alternative tail (`和 B`, `與 B`, `或 B`, `、B`) is still
+  ambiguous and must be rejected; bare multi-letter input must not be reduced
+  to the first letter. Circled-number
   references alone enable equivalent Arabic input. Punctuation/segmentation
   comparison uses the existing bounded traditional-to-simplified map and treats
   whitespace as a boundary. These grader changes do not mint or alter a task

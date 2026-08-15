@@ -27,6 +27,10 @@ test("source-owned single and multiple choice answers are graded without browser
   assert.equal(deterministicStudyGuideAssessment(single, "我选C，B项说法没错")?.passed, true);
   assert.equal(deterministicStudyGuideAssessment(single, "我选A，C项才对")?.passed, false);
   assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "我选A，B项说法没错")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "我选A和B")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "我選A、B")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "答案是A或B")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "应选A与B")?.passed, false);
   assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "AB")?.passed, false);
   assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "A、B")?.passed, false);
   assert.equal(deterministicStudyGuideAssessment(multiple, "選 B 和 C。A 項是干擾項")?.passed, true);

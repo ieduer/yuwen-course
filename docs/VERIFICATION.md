@@ -33,8 +33,9 @@ git diff --check
 ```
 
 The focused gate must prove adjacent and fullwidth choice input, explanation
-pollution rejection, circled/Arabic equivalence, traditional/simplified and
-space segmentation parity, and catalog-unavailable fail-closed completion. For
+pollution rejection, prefixed single-choice list/alternative rejection,
+circled/Arabic equivalence, traditional/simplified and space segmentation
+parity, and catalog-unavailable fail-closed completion. For
 the evaluator lease it must prove ten simultaneous initial requests admit one
 evaluator, ten simultaneous stale retries admit one reclaim, the second expiry
 cannot call the evaluator again, and a late original plus reclaim produce one
@@ -45,13 +46,13 @@ the 15-minute window and exactly one new RPC after expiry.
 Completed source evidence on 2026-08-15: the focused matrix passed 57/57 on
 Node 24.18.0 and 57/57 on Node 22.21.1; complete `precontent:check` passed on
 both exact runtimes, including Reading API 70/70, native-content 22/22 and
-release-site 5/5. Formal build/check produced 1,223 files / 164,376,696 bytes,
+release-site 5/5. Formal build/check produced 1,223 files / 164,376,983 bytes,
 projected aggregate
-`bfca1ee46ef48085b44be0fa8c880e11760f3abf36a13e47e5e17c30d28d923e`,
+`5b86646b8f7e755598598372406ee9d42ae57c61c4edc87eb59ed42e322bea89`,
 artifact aggregate
-`11a7969a032eef0b5a79239a0bb0c36845649ab6c5cc8dae9dfc6a66c7c8230a`
+`b98548e130ff13ee407e09cb7102a253f7472c0920ed4cd5e398c9caf807d9ac`
 and tracked manifest byte SHA-256
-`2644042c064a60d52f3c3a59794dd4872782a506e2d70aa4a320df075cc29bfe`.
+`ed35eaab78d6411a20c140b5b15704207f2ecb0bb7af4c2bde397f7494066b23`.
 
 Catalog, formative manifest, learning manifest and App pointer byte SHA-256
 remain `4ac9e223be27316aa5324ab5c9b474e378f61ec703ac9140b590e1a42c3c89d0`,

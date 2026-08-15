@@ -48,8 +48,15 @@ function circledNumbers(value, allowArabic = false) {
 }
 
 function explicitSingleChoice(value) {
-  return answerLead(value).toUpperCase()
-    .match(/(?:^|[^A-Z])(?:我\s*)?(?:選擇|选择|應選|应选|選|选|答案(?:是|為|为)?)[\s：:]*([A-D])/)?.[1] || "";
+  const lead = answerLead(value).toUpperCase();
+  const match = lead.match(
+    /(?:^|[^A-Z])(?:我\s*)?(?:選擇|选择|應選|应选|選|选|答案(?:是|為|为)?)[\s：:]*([A-D])/,
+  );
+  if (!match) return "";
+  const tail = lead.slice(Number(match.index || 0) + match[0].length);
+  if (/^\s*(?:和|與|与|或|、|[/／]|[&＆])\s*[A-D]/u.test(tail)) return "";
+  if (/^\s*[,，]\s*[A-D](?!\s*(?:項|项))/u.test(tail)) return "";
+  return match[1];
 }
 
 function expectedChoiceSpec(referenceAnswer) {
