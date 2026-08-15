@@ -33,6 +33,15 @@ Last updated: 2026-08-15
   was supplied through a checksum-verified isolated 693-file subset of accepted
   archive `2026-08-15-textbook-ai-migration`; no archived or canonical source
   byte was modified.
+- The deterministic formal Web artifact remains 1,223 files and now totals
+  164,377,756 bytes. Its projected aggregate is
+  `35f7cd97f1d9b6f9571aac7259da6f6439158c81c52799c8227f6fd8f8499daa`,
+  artifact aggregate is
+  `c6c5fa8db7acf39317540ba731b706457b198aa1eb86e5b404d828d57e5166ef`,
+  and tracked manifest byte SHA-256 is
+  `c4911fcc95a05adda7104387666411ff65201f93f77b321b8007cac0771ef7d8`.
+  Only the Worker, reading identity source and derived release marker changed;
+  the stable native-content pointer and its 278 receipted paths are unchanged.
 
 ## 2026-08-15 prelaunch assessment and reservation-correctness candidate
 

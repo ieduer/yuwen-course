@@ -41,6 +41,17 @@ the shared-hub synchronized change gate. No Cloudflare, D1, Queue, Pages or App
 mutation belongs to this source check. Rollback is a normal revert of the exact
 candidate commit.
 
+Completed source evidence on 2026-08-15: focused matrix 44/44 and complete
+`precontent:check` passed on exact Node 24.18.0 and Node 22.21.1. The formal
+Web build/check remained 1,223 files / 164,377,756 bytes, with projected
+aggregate
+`35f7cd97f1d9b6f9571aac7259da6f6439158c81c52799c8227f6fd8f8499daa`,
+artifact aggregate
+`c6c5fa8db7acf39317540ba731b706457b198aa1eb86e5b404d828d57e5166ef`
+and tracked manifest byte SHA-256
+`c4911fcc95a05adda7104387666411ff65201f93f77b321b8007cac0771ef7d8`.
+The stable native-content pointer and its 278 receipted paths did not change.
+
 ## 2026-08-15 prelaunch assessment/reservation correctness
 
 Run the complete source gate and focused contract matrix under both exact Node
