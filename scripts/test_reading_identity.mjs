@@ -5,6 +5,7 @@ import {
   nativeAuthorizationDecision,
   nativeReadingIdentityProjection,
   readingCredentialDecision,
+  readingFormativeMasteryRpcDecision,
   readingIdentityDecision,
 } from "../site/reading-identity-source.js";
 
@@ -60,6 +61,26 @@ test("dual Web and native credentials must identify the same User Center user", 
   });
   assert.deepEqual(readingCredentialDecision(nativeUser, { userId: 41, slug: "web" }), {
     status: "unauthorized",
+  });
+});
+
+test("formative mastery selects one credential-bound RPC without fallback", () => {
+  const authorization = `Bearer ywat_${"a".repeat(43)}`;
+  const cookie = "bdfz_uc_session=web-session";
+  assert.deepEqual(readingFormativeMasteryRpcDecision("", cookie), {
+    status: "web",
+    rpcName: "getFormativeMastery",
+    credential: cookie,
+  });
+  assert.deepEqual(readingFormativeMasteryRpcDecision(authorization, cookie), {
+    status: "native",
+    rpcName: "getNativeFormativeMastery",
+    credential: authorization,
+  });
+  assert.deepEqual(readingFormativeMasteryRpcDecision(`${authorization}x`, cookie), {
+    status: "unauthorized",
+    rpcName: "",
+    credential: "",
   });
 });
 

@@ -2,6 +2,38 @@
 
 Last updated: 2026-08-15
 
+## 2026-08-15 native formative RPC handoff draft
+
+- This source-only draft starts from canonical main
+  `7c7e1e06bad67b17dfa16a500a64ca2e02ad08c1`. The accepted
+  `bdfz-native-auth/1` projection, exact native authorization format and
+  stable-user dual-credential gate already supersede the older isolated
+  reading-bridge implementation.
+- One behavior was not superseded: a native request that reaches
+  `/api/reading/formative-mastery` must use a native-session-bound RPC rather
+  than passing an empty Web cookie to `getFormativeMastery`. The draft selects
+  exactly `getNativeFormativeMastery` for native authorization and keeps
+  `getFormativeMastery` for cookie-only Web requests. A malformed native
+  authorization has no RPC or credential, and a missing selected method fails
+  closed without falling back across identities.
+- Canonical User Center main
+  `3e5dbcdcc02463437595ff828410a6ed3c1ba091` currently exposes
+  `resolveNativeSession` and cookie-only `getFormativeMastery`; it does not yet
+  expose `getNativeFormativeMastery`. Therefore this draft is not merge,
+  deployment or native-activation authority. A separately owned User Center
+  contract change, hostile tests and independent shared-hub review must land
+  first or in one reviewed synchronized transaction.
+- This is a `no-new-capability`, no-schema-change and no-data-write source
+  handoff. It changes no learning rule, formative denominator, scoring role,
+  manifest, App pointer, D1 row, Queue message, Pages deployment or production
+  traffic. Source rollback is a normal revert of the exact candidate commit.
+- Exact Node 24.18.0 and 22.21.1 each pass the focused 44/44 identity/evidence
+  matrix and the complete `precontent:check`, including Reading API 70/70,
+  native-content 22/22 and release-site 5/5. The archived textbook page input
+  was supplied through a checksum-verified isolated 693-file subset of accepted
+  archive `2026-08-15-textbook-ai-migration`; no archived or canonical source
+  byte was modified.
+
 ## 2026-08-15 prelaunch assessment and reservation-correctness candidate
 
 - This source-only candidate starts from canonical main
