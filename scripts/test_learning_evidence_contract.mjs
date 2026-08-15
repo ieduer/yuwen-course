@@ -12,9 +12,11 @@ import {
   LearningSubmissionInProgressError,
   LearningSubmissionRateLimitError,
   learningEvidenceContract,
+  OUTBOX_RECONCILE_SELECTION_SQL,
   OUTBOX_RETRY_SELECTION_SQL,
   assertLearningSubmissionAllowed,
   invalidateFormativeManifestCache,
+  reconcileEvidenceOutbox,
   recordLearningInteraction,
 } from "../site/learning-evidence-source.js";
 import worker from "../site/_worker.js";
@@ -74,6 +76,9 @@ function mockStatement(sql, writes, state) {
       }
       if (sql.includes("WHERE i.student_id = ? AND i.client_mutation_id = ?")) {
         return state.existingInteraction;
+      }
+      if (sql.includes("WHERE slot.source_event_id = ?")) {
+        return state.existingSubmissionSlot || null;
       }
       if (sql.includes("COALESCE(MAX(attempt_no)")) return { n: state.nextAttemptNo };
       if (sql.includes("FROM learning_interactions") && sql.includes("resource_key = ?")) {
@@ -138,6 +143,7 @@ function sourceEnvironment({
   globalSlotCount = globalSubmissionCount,
   nextAttemptNo = 1,
   existingInteraction = null,
+  existingSubmissionSlot = null,
   firstReadSubmitted = true,
   annotatedReadAcknowledged = true,
   vocabEvidenceExists = false,
@@ -153,6 +159,7 @@ function sourceEnvironment({
     globalSlotCount,
     nextAttemptNo,
     existingInteraction,
+    existingSubmissionSlot,
     firstReadSubmitted,
     annotatedReadAcknowledged,
     vocabEvidenceExists,
@@ -189,7 +196,7 @@ function sourceEnvironment({
             sql: statement.sql,
             values: statement.values,
           })));
-          return statements.map(() => ({ success: true }));
+          return statements.map(() => ({ success: true, meta: { changes: 1 } }));
         },
       },
       LEARNING_EVIDENCE_QUEUE: {
@@ -216,9 +223,10 @@ function writeStartingWith(writes, sqlPrefix) {
 }
 
 function sqliteD1(db) {
-  return {
+  const d1 = {
     prepare(sql) {
       return {
+        sql,
         values: [],
         bind(...values) {
           this.values = values;
@@ -236,7 +244,36 @@ function sqliteD1(db) {
         },
       };
     },
+    async batch(statements) {
+      db.exec("BEGIN IMMEDIATE");
+      try {
+        const results = statements.map((statement) => {
+          const result = db.prepare(statement.sql).run(...statement.values);
+          return { success: true, meta: { changes: Number(result.changes || 0) } };
+        });
+        db.exec("COMMIT");
+        return results;
+      } catch (error) {
+        db.exec("ROLLBACK");
+        throw error;
+      }
+    },
   };
+  return d1;
+}
+
+function initializeLearningContractDb(db) {
+  for (const migration of [
+    "migrations/0001_reading_constellation.sql",
+    "migrations/0003_learning_evidence_loop_v1.sql",
+    "migrations/0004_classical_first_read_and_outbox_index.sql",
+    "migrations/0005_learning_evidence_central_receipts.sql",
+  ]) {
+    db.exec(readFileSync(resolve(ROOT, migration), "utf8"));
+  }
+  db.prepare(
+    "INSERT INTO students (id, uc_slug, display_name, uc_user_id, identity_verified_at) VALUES (?, ?, ?, ?, ?)"
+  ).run(7, "lease-test-student", "Lease Test Student", 42, "2026-08-13T22:00:00.000Z");
 }
 
 function assertSynchronizedIneligibleAttempt(result, queued, writes) {
@@ -606,6 +643,7 @@ test("health probes and interactions reconcile central receipts before bounded r
   assert.match(workerSource, /handleLearningInteraction[\s\S]*drainEvidenceOutbox\(env, 5\)/);
   assert.match(evidenceSource, /delivery_status IN \('pending', 'enqueued'\)/);
   assert.match(evidenceSource, /datetime\(last_attempt_at\) < datetime\('now', '-15 minutes'\)/);
+  assert.match(evidenceSource, /central_receipted_at IS NULL OR datetime\(central_receipted_at\) < datetime\('now', '-15 minutes'\)/);
 });
 
 test("reading health exposes schema v5 only with the central receipt recovery index", () => {
@@ -636,6 +674,76 @@ test("ISO outbox attempt timestamps become retryable at the exact SQLite stale b
       (7, 'quarantined-old', '{"schema":"bdfz-learning-evidence-event-v2","contractVersion":"yw-aplus-e310-v2"}', 'pending', 'quarantined', strftime('%Y-%m-%dT%H:%M:%SZ', 'now', '-1 day'), datetime('now', '-1 day'))`);
     const rows = db.prepare(OUTBOX_RETRY_SELECTION_SQL).all(50);
     assert.deepEqual(rows.map((row) => row.source_event_id), ["pending-old", "enqueued-old"]);
+  } finally {
+    db.close();
+  }
+});
+
+test("central receipt reconciliation skips fresh health polls for fifteen minutes", () => {
+  const db = new DatabaseSync(":memory:");
+  try {
+    db.exec(`CREATE TABLE evidence_outbox (
+      id INTEGER PRIMARY KEY,
+      source_event_id TEXT NOT NULL,
+      envelope_json TEXT NOT NULL,
+      delivery_status TEXT NOT NULL,
+      central_disposition TEXT,
+      central_receipted_at TEXT,
+      last_attempt_at TEXT,
+      created_at TEXT NOT NULL
+    )`);
+    db.exec(`INSERT INTO evidence_outbox VALUES
+      (1, 'absent-old', '{"schema":"bdfz-learning-evidence-event-v2","contractVersion":"yw-aplus-e310-v2"}', 'enqueued', NULL, datetime('now', '-16 minutes'), datetime('now', '-16 minutes'), datetime('now', '-16 minutes')),
+      (2, 'absent-fresh', '{"schema":"bdfz-learning-evidence-event-v2","contractVersion":"yw-aplus-e310-v2"}', 'enqueued', NULL, datetime('now', '-14 minutes'), datetime('now', '-14 minutes'), datetime('now', '-14 minutes')),
+      (3, 'mapping-old', '{"schema":"bdfz-learning-evidence-event-v2","contractVersion":"yw-aplus-e310-v2"}', 'enqueued', 'pending_mapping', datetime('now', '-16 minutes'), datetime('now', '-1 day'), datetime('now', '-1 day')),
+      (4, 'mapping-fresh', '{"schema":"bdfz-learning-evidence-event-v2","contractVersion":"yw-aplus-e310-v2"}', 'enqueued', 'pending_mapping', datetime('now', '-14 minutes'), datetime('now', '-1 day'), datetime('now', '-1 day'))`);
+    const rows = db.prepare(OUTBOX_RECONCILE_SELECTION_SQL).all(50);
+    assert.deepEqual(rows.map((row) => row.source_event_id), ["absent-old", "mapping-old"]);
+  } finally {
+    db.close();
+  }
+});
+
+test("receipt reconciliation cooldown is D1-backed across concurrent isolates", async () => {
+  const db = new DatabaseSync(":memory:");
+  try {
+    db.exec(`CREATE TABLE evidence_outbox (
+      id INTEGER PRIMARY KEY,
+      source_event_id TEXT NOT NULL UNIQUE,
+      envelope_json TEXT NOT NULL,
+      delivery_status TEXT NOT NULL,
+      central_disposition TEXT,
+      central_receipted_at TEXT,
+      last_attempt_at TEXT,
+      created_at TEXT NOT NULL
+    )`);
+    db.exec(`INSERT INTO evidence_outbox VALUES
+      (1, 'cross-isolate-poll', '{"schema":"bdfz-learning-evidence-event-v2","contractVersion":"yw-aplus-e310-v2"}', 'enqueued', NULL, NULL, datetime('now', '-16 minutes'), datetime('now', '-16 minutes'))`);
+    let rpcCalls = 0;
+    const environments = Array.from({ length: 20 }, () => ({
+      READING_DB: sqliteD1(db),
+      USER_CENTER_EVIDENCE: {
+        async getLearningEvidenceDeliveryReceipts() {
+          rpcCalls += 1;
+          await Promise.resolve();
+          return {
+            schemaVersion: "bdfz-learning-evidence-delivery-receipts-v1",
+            sourceSiteKey: "yw",
+            contractVersion: "yw-aplus-e310-v2",
+            receipts: [],
+          };
+        },
+      },
+    }));
+    const firstWave = await Promise.all(environments.map((env) => reconcileEvidenceOutbox(env, 50)));
+    assert.equal(rpcCalls, 1);
+    assert.equal(firstWave.reduce((sum, result) => sum + result.checked, 0), 1);
+    assert.deepEqual(await reconcileEvidenceOutbox(environments[0], 50), { checked: 0, receipted: 0 });
+    assert.equal(rpcCalls, 1);
+
+    db.exec("UPDATE evidence_outbox SET central_receipted_at = datetime('now', '-16 minutes')");
+    assert.deepEqual(await reconcileEvidenceOutbox(environments[0], 50), { checked: 1, receipted: 0 });
+    assert.equal(rpcCalls, 2);
   } finally {
     db.close();
   }
@@ -702,7 +810,7 @@ test("malformed central receipt is ignored and cannot terminate a source outbox 
   )), false);
 });
 
-test("unchanged pending-mapping receipt is read without an hourly D1 rewrite", async () => {
+test("unchanged pending-mapping receipt refreshes only the bounded poll lease", async () => {
   const id = "018f1234-5678-7abc-9def-012345678905";
   const receipt = sourceEnvironment({
     outboxRows: [{
@@ -720,6 +828,7 @@ test("unchanged pending-mapping receipt is read without an hourly D1 rewrite", a
   const result = await drainEvidenceOutbox(receipt.env, 50);
   assert.deepEqual(result.reconciled, { checked: 1, receipted: 0 });
   assert.equal(receipt.writes.some((write) => write.sql.includes("SET central_disposition = ?")), false);
+  assert.equal(receipt.writes.some((write) => write.sql.includes("SET central_receipted_at = ?")), true);
   assert.equal(receipt.queued.length, 0);
 });
 
@@ -1157,6 +1266,7 @@ test("the bounded scoring submission window permits ordinary revision and idempo
     maxAttempts: 8,
     windowSeconds: 600,
   });
+  assert.equal(learningEvidenceContract.submissionReservationLeaseSeconds, 60);
 
   const allowed = sourceEnvironment({ recentSubmissionCount: 7, nextAttemptNo: 8 });
   const eighth = await recordLearningInteraction({
@@ -1238,6 +1348,7 @@ test("submission reservations count durable slots and the same mutation cannot t
       window_start TEXT NOT NULL,
       resource_slot_no INTEGER NOT NULL,
       global_slot_no INTEGER NOT NULL,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
       UNIQUE (student_id, resource_key, window_start, resource_slot_no),
       UNIQUE (student_id, window_start, global_slot_no)
     );`);
@@ -1259,9 +1370,31 @@ test("submission reservations count durable slots and the same mutation cannot t
         occurredAt: "2026-08-13T22:00:01.000Z",
       }),
       (error) => error instanceof LearningSubmissionInProgressError
-        && error.retryAfterSeconds === 599,
+        && error.retryAfterSeconds === 59,
     );
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
+
+    const reclaimed = await acquireLearningSubmissionReservation({
+      db: d1,
+      studentId: 7,
+      clientMutationId: "stable-evaluator-mutation",
+      resourceKey: "formative:lesson-1:comprehension:revision",
+      occurredAt: "2026-08-13T22:01:01.000Z",
+    });
+    assert.equal(reclaimed.sourceEventId, first.sourceEventId);
+    assert.equal(reclaimed.reclaimed, true);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
+    await assert.rejects(
+      acquireLearningSubmissionReservation({
+        db: d1,
+        studentId: 7,
+        clientMutationId: "stable-evaluator-mutation",
+        resourceKey: "formative:lesson-1:comprehension:revision",
+        occurredAt: "2026-08-13T22:01:02.000Z",
+      }),
+      (error) => error instanceof LearningSubmissionInProgressError
+        && error.retryAfterSeconds === 60,
+    );
 
     await assert.rejects(
       acquireLearningSubmissionReservation({
@@ -1294,19 +1427,30 @@ test("durable reservations alone exhaust the evaluator limit after failed evalua
       window_start TEXT NOT NULL,
       resource_slot_no INTEGER NOT NULL,
       global_slot_no INTEGER NOT NULL,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
       UNIQUE (student_id, resource_key, window_start, resource_slot_no),
       UNIQUE (student_id, window_start, global_slot_no)
     );`);
     const d1 = sqliteD1(db);
     for (let index = 0; index < 8; index += 1) {
-      await acquireLearningSubmissionReservation({
+      const reservation = await acquireLearningSubmissionReservation({
         db: d1,
         studentId: 7,
         clientMutationId: `failed-evaluator-${index}`,
         resourceKey: "formative:lesson-1:comprehension:revision",
         occurredAt: "2026-08-13T22:00:00.000Z",
       });
+      if (index === 0) assert.match(reservation.sourceEventId, /^[a-f0-9-]{36}$/);
     }
+    const reusedAtCapacity = await acquireLearningSubmissionReservation({
+      db: d1,
+      studentId: 7,
+      clientMutationId: "failed-evaluator-0",
+      resourceKey: "formative:lesson-1:comprehension:revision",
+      occurredAt: "2026-08-13T22:01:01.000Z",
+    });
+    assert.equal(reusedAtCapacity.reclaimed, true, "same answer reuses its stale slot even at quota");
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 8);
     await assert.rejects(
       acquireLearningSubmissionReservation({
         db: d1,
@@ -1318,6 +1462,145 @@ test("durable reservations alone exhaust the evaluator limit after failed evalua
       (error) => error instanceof LearningSubmissionRateLimitError,
     );
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 8);
+  } finally {
+    db.close();
+  }
+});
+
+test("ten-way initial and abandoned-lease races admit only one evaluator each", async () => {
+  const db = new DatabaseSync(":memory:");
+  try {
+    db.exec(`CREATE TABLE learning_interactions (
+      source_event_id TEXT PRIMARY KEY,
+      student_id INTEGER NOT NULL,
+      resource_key TEXT NOT NULL,
+      occurred_at TEXT NOT NULL
+    );
+    CREATE TABLE learning_submission_slots (
+      source_event_id TEXT PRIMARY KEY,
+      student_id INTEGER NOT NULL,
+      resource_key TEXT NOT NULL,
+      window_start TEXT NOT NULL,
+      resource_slot_no INTEGER NOT NULL,
+      global_slot_no INTEGER NOT NULL,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      UNIQUE (student_id, resource_key, window_start, resource_slot_no),
+      UNIQUE (student_id, window_start, global_slot_no)
+    );`);
+    const d1 = sqliteD1(db);
+    const input = {
+      db: d1,
+      studentId: 7,
+      clientMutationId: "concurrent-abandoned-evaluator",
+      resourceKey: "formative:lesson-1:comprehension:revision",
+    };
+    let evaluatorCalls = 0;
+    const enterEvaluator = async (occurredAt) => {
+      const reservation = await acquireLearningSubmissionReservation({ ...input, occurredAt });
+      evaluatorCalls += 1;
+      return reservation;
+    };
+    const initial = await Promise.allSettled(Array.from(
+      { length: 10 },
+      () => enterEvaluator("2026-08-13T22:00:00.000Z"),
+    ));
+    assert.equal(initial.filter((result) => result.status === "fulfilled").length, 1);
+    assert.equal(evaluatorCalls, 1);
+
+    evaluatorCalls = 0;
+    const contenders = await Promise.allSettled(Array.from(
+      { length: 10 },
+      () => enterEvaluator("2026-08-13T22:01:01.000Z"),
+    ));
+    assert.equal(contenders.filter((result) => result.status === "fulfilled").length, 1);
+    assert.equal(evaluatorCalls, 1);
+    assert.ok(contenders
+      .filter((result) => result.status === "rejected")
+      .every((result) => result.reason instanceof LearningSubmissionInProgressError));
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
+
+    await assert.rejects(
+      enterEvaluator("2026-08-13T22:02:02.000Z"),
+      (error) => error instanceof LearningSubmissionRateLimitError
+        && error.retryAfterSeconds === 478,
+    );
+    assert.equal(evaluatorCalls, 1, "a second lease expiry cannot burn another evaluator call");
+  } finally {
+    db.close();
+  }
+});
+
+test("a late original and reclaimed evaluator commit one immutable ledger set", async () => {
+  const db = new DatabaseSync(":memory:");
+  try {
+    initializeLearningContractDb(db);
+    const source = sourceEnvironment();
+    source.env.READING_DB = sqliteD1(db);
+    const request = new Request("https://yw.bdfz.net/api/interaction-check");
+    const student = { id: 7, ucUserId: 42 };
+    const payload = {
+      word: "站立",
+      creation: "同一答案的原請求與安全重試只能形成一組台賬。",
+      clientMutationId: "late-original-reclaimed-final",
+    };
+    const original = await assertLearningSubmissionAllowed({
+      request,
+      env: source.env,
+      student,
+      lesson: wordCreationLesson,
+      interactionKey: "wordCreation",
+      payload,
+      occurredAt: "2026-08-13T22:00:00.000Z",
+    });
+    const reclaimed = await assertLearningSubmissionAllowed({
+      request,
+      env: source.env,
+      student,
+      lesson: wordCreationLesson,
+      interactionKey: "wordCreation",
+      payload,
+      occurredAt: "2026-08-13T22:01:01.000Z",
+    });
+    assert.equal(original.deduped, false);
+    assert.equal(reclaimed.deduped, false);
+    assert.equal(
+      original.submissionReservation.sourceEventId,
+      reclaimed.submissionReservation.sourceEventId,
+    );
+
+    const evaluation = {
+      score: 80,
+      correctness: "passed",
+      provider: "apis",
+      verdict: "passed",
+    };
+    const results = await Promise.all([
+      recordLearningInteraction({
+        request,
+        env: source.env,
+        student,
+        lesson: wordCreationLesson,
+        interactionKey: "wordCreation",
+        payload,
+        evaluation,
+        submissionReservation: original.submissionReservation,
+      }),
+      recordLearningInteraction({
+        request,
+        env: source.env,
+        student,
+        lesson: wordCreationLesson,
+        interactionKey: "wordCreation",
+        payload,
+        evaluation,
+        submissionReservation: reclaimed.submissionReservation,
+      }),
+    ]);
+    assert.deepEqual(results.map((result) => result.deduped).sort(), [false, true]);
+    for (const table of ["learning_interactions", "learning_evaluations", "evidence_outbox"]) {
+      assert.equal(db.prepare(`SELECT COUNT(*) AS n FROM ${table}`).get().n, 1, table);
+    }
+    assert.equal(source.queued.length, 1);
   } finally {
     db.close();
   }

@@ -1,5 +1,74 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-15 prelaunch assessment/reservation correctness
+
+Run the complete source gate and focused contract matrix under both exact Node
+authorities:
+
+```zsh
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run precontent:check
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
+  node --test scripts/test_learning_manifest.mjs \
+  scripts/test_learning_evidence_contract.mjs \
+  scripts/test_preview_binding_isolation.mjs \
+  scripts/test_study_guide_assessment.mjs
+
+mkdir -p /private/tmp/yw-node22-exact-bin
+test -L /private/tmp/yw-node22-exact-bin/node || \
+  ln -s /usr/local/libexec/bdfz-release/node-v22.21.1 \
+  /private/tmp/yw-node22-exact-bin/node
+PATH=/private/tmp/yw-node22-exact-bin:/usr/local/libexec/bdfz-release/npm-v11.6.2/bin:$PATH \
+  npm run precontent:check
+/usr/local/libexec/bdfz-release/node-v22.21.1 --test \
+  scripts/test_learning_manifest.mjs \
+  scripts/test_learning_evidence_contract.mjs \
+  scripts/test_preview_binding_isolation.mjs \
+  scripts/test_study_guide_assessment.mjs
+
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:release-site
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:release-site
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:artifact-manifest
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:artifact-manifest
+git diff --check
+```
+
+The focused gate must prove adjacent and fullwidth choice input, explanation
+pollution rejection, prefixed single-choice list/alternative rejection,
+circled/Arabic equivalence, traditional/simplified and space segmentation
+parity, and catalog-unavailable fail-closed completion. For
+the evaluator lease it must prove ten simultaneous initial requests admit one
+evaluator, ten simultaneous stale retries admit one reclaim, the second expiry
+cannot call the evaluator again, and a late original plus reclaim produce one
+immutable ledger set and one Queue send. Receipt reconciliation must use shared
+D1 state so twenty independent environments produce one User Center RPC inside
+the 15-minute window and exactly one new RPC after expiry.
+
+Completed source evidence on 2026-08-15: the focused matrix passed 57/57 on
+Node 24.18.0 and 57/57 on Node 22.21.1; complete `precontent:check` passed on
+both exact runtimes, including Reading API 70/70, native-content 22/22 and
+release-site 5/5. Formal build/check produced 1,223 files / 164,376,983 bytes,
+projected aggregate
+`5b86646b8f7e755598598372406ee9d42ae57c61c4edc87eb59ed42e322bea89`,
+artifact aggregate
+`b98548e130ff13ee407e09cb7102a253f7472c0920ed4cd5e398c9caf807d9ac`
+and tracked manifest byte SHA-256
+`ed35eaab78d6411a20c140b5b15704207f2ecb0bb7af4c2bde397f7494066b23`.
+
+Catalog, formative manifest, learning manifest and App pointer byte SHA-256
+remain `4ac9e223be27316aa5324ab5c9b474e378f61ec703ac9140b590e1a42c3c89d0`,
+`1307286d4dd9f1e687553a30c4f87d5403fe237cac56727400233abfac36d334`,
+`2a6824db45cac416c4aee3a95ce83aba5be393b6a94034799d6d18cb56f9f998`
+and `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
+No semantic revision, schema, deployment, D1 row, Queue message, User Center
+state, production traffic or App pointer changed.
+
+For the local Node 22 full-suite command, `/private/tmp/yw-node22-exact-bin/node`
+was a task-local symlink to
+`/usr/local/libexec/bdfz-release/node-v22.21.1`; this PATH pin is required
+because invoking the npm CLI with Node 22 alone does not pin the `node` binary
+used by child scripts. CI obtains the same child-process guarantee from
+`actions/setup-node`.
+
 ## 2026-08-14 dedicated precheck project correction
 
 Run `npm run test:preview-bindings` and

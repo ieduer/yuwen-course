@@ -16,9 +16,23 @@ test("source-owned single and multiple choice answers are graded without browser
   assert.equal(deterministicStudyGuideAssessment(single, "C、A")?.passed, false);
   const multiple = { detailTag: "multiple_choice", referenceAnswer: ["B", "C"] };
   assert.equal(deterministicStudyGuideAssessment(multiple, "C、B")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(multiple, "BC")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(multiple, "选BC")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(multiple, "ＢＣ")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(multiple, "B和C")?.passed, true);
   assert.equal(deterministicStudyGuideAssessment(multiple, "B")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment(multiple, "BCD")?.passed, false);
   assert.equal(deterministicStudyGuideAssessment(single, "C。因為 B 項的說法不成立")?.passed, true);
   assert.equal(deterministicStudyGuideAssessment(single, "A。因為 C 項正確")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment(single, "我选C，B项说法没错")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(single, "我选A，C项才对")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "我选A，B项说法没错")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "我选A和B")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "我選A、B")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "答案是A或B")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "应选A与B")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "AB")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment({ detailTag: "choice", referenceAnswer: "A" }, "A、B")?.passed, false);
   assert.equal(deterministicStudyGuideAssessment(multiple, "選 B 和 C。A 項是干擾項")?.passed, true);
   assert.equal(deterministicStudyGuideAssessment(multiple, "B、C、D")?.passed, false);
 });
@@ -30,6 +44,8 @@ test("evidence identification accepts the exact source option or equivalent circ
   };
   assert.equal(deterministicStudyGuideAssessment(item, "A")?.passed, true);
   assert.equal(deterministicStudyGuideAssessment(item, "①②④")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(item, "124")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(item, "1、2、4")?.passed, true);
   assert.equal(deterministicStudyGuideAssessment(item, "①②③")?.passed, false);
 });
 
@@ -43,7 +59,11 @@ test("compound objective sets retain the source answer order", () => {
     },
   };
   assert.equal(deterministicStudyGuideAssessment(item, "D B B")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(item, "DBB")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(item, "D、B、B")?.passed, true);
   assert.equal(deterministicStudyGuideAssessment(item, "D B C")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment(item, "DBC")?.passed, false);
+  assert.equal(deterministicStudyGuideAssessment(item, "DBBC")?.passed, false);
 });
 
 test("punctuation and sentence segmentation normalize speech punctuation deterministically", () => {
@@ -61,6 +81,10 @@ test("punctuation and sentence segmentation normalize speech punctuation determi
   };
   assert.equal(
     deterministicStudyGuideAssessment(segmentation, "其平居教他子弟，常用此语；吾耳熟焉，故能详也")?.passed,
+    true,
+  );
+  assert.equal(
+    deterministicStudyGuideAssessment(segmentation, "其平居教他子弟 常用此語 吾耳熟焉 故能詳也")?.passed,
     true,
   );
 });

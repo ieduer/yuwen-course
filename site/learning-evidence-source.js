@@ -12,6 +12,7 @@ const SUBMISSION_RATE_LIMIT = Object.freeze({
   maxAttempts: 8,
   windowSeconds: 10 * 60,
 });
+const SUBMISSION_RESERVATION_LEASE_SECONDS = 60;
 const registryCache = { value: null, expiresAt: 0 };
 const manifestCache = { value: null, expiresAt: 0 };
 const formativeManifestCache = { value: null, expiresAt: 0 };
@@ -55,9 +56,9 @@ export class LearningSubmissionRateLimitError extends Error {
 }
 
 export class LearningSubmissionInProgressError extends Error {
-  constructor(retryAfterSeconds = SUBMISSION_RATE_LIMIT.windowSeconds) {
-    const wait = Math.max(1, Number(retryAfterSeconds) || SUBMISSION_RATE_LIMIT.windowSeconds);
-    super(`本次提交已进入评阅；若未返回结果，请在 ${wait} 秒后使用同一提交重试`);
+  constructor(retryAfterSeconds = SUBMISSION_RESERVATION_LEASE_SECONDS) {
+    const wait = Math.max(1, Number(retryAfterSeconds) || SUBMISSION_RESERVATION_LEASE_SECONDS);
+    super(`上一次提交仍在评阅中，请在 ${wait} 秒后使用同一答案重试`);
     this.name = "LearningSubmissionInProgressError";
     this.code = "learning_submission_in_progress";
     this.retryAfterSeconds = wait;
@@ -673,6 +674,116 @@ async function deterministicReservationId(studentId, clientMutationId, windowSta
   return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-5${hex.slice(13, 16)}-${variantNibble}${hex.slice(17, 20)}-${hex.slice(20, 32)}`;
 }
 
+function reservationTimestampMs(value) {
+  const raw = clean(value, 40);
+  if (!raw) return NaN;
+  const explicitZone = /(?:Z|[+-]\d{2}:?\d{2})$/i.test(raw);
+  return Date.parse(explicitZone ? raw : `${raw.replace(" ", "T")}Z`);
+}
+
+// `created_at` is the only existing mutable reservation field. New leases are
+// written at .000Z; the one permitted abandoned-lease reclaim is written at
+// .001Z. Both remain ordinary SQLite/ISO timestamps, while the millisecond bit
+// makes the once-only policy durable across isolates without a schema change.
+function reservationLeaseTimestamp(value, reclaimed = false) {
+  const milliseconds = typeof value === "number" ? value : reservationTimestampMs(value);
+  const date = new Date(Number.isFinite(milliseconds) ? milliseconds : Date.now());
+  date.setUTCMilliseconds(reclaimed ? 1 : 0);
+  return date.toISOString();
+}
+
+function submissionSlotWasReclaimed(createdAt) {
+  return /\.001Z$/i.test(clean(createdAt, 40));
+}
+
+async function readSubmissionSlot(db, sourceEventId) {
+  return db.prepare(
+    `SELECT slot.source_event_id, slot.student_id, slot.resource_key, slot.window_start,
+            slot.resource_slot_no, slot.global_slot_no, slot.created_at,
+            EXISTS (
+              SELECT 1 FROM learning_interactions interaction
+               WHERE interaction.source_event_id = slot.source_event_id
+            ) AS interaction_committed
+       FROM learning_submission_slots slot
+      WHERE slot.source_event_id = ?`
+  ).bind(sourceEventId).first();
+}
+
+function assertSubmissionSlotMatches(slot, sourceEventId, studentId, resourceKey, windowStart) {
+  if (slot?.source_event_id !== sourceEventId
+    || Number(slot.student_id) !== Number(studentId)
+    || clean(slot.resource_key, 220) !== resourceKey
+    || String(slot.window_start || "") !== windowStart) {
+    const conflict = new Error("client mutation id already belongs to another learning item");
+    conflict.code = "learning_mutation_conflict";
+    throw conflict;
+  }
+}
+
+async function reuseOrWaitForSubmissionSlot(
+  db,
+  slot,
+  sourceEventId,
+  studentId,
+  resourceKey,
+  windowStart,
+  occurredAt,
+) {
+  assertSubmissionSlotMatches(slot, sourceEventId, studentId, resourceKey, windowStart);
+  const reservation = {
+    sourceEventId,
+    windowStart,
+    resourceSlotNo: Number(slot.resource_slot_no),
+    globalSlotNo: Number(slot.global_slot_no),
+  };
+  if (Number(slot.interaction_committed) === 1) return { ...reservation, committed: true };
+
+  const nowMs = reservationTimestampMs(occurredAt);
+  const createdAtMs = reservationTimestampMs(slot.created_at);
+  const leaseMs = SUBMISSION_RESERVATION_LEASE_SECONDS * 1000;
+  if (!Number.isFinite(nowMs) || !Number.isFinite(createdAtMs) || nowMs - createdAtMs < leaseMs) {
+    const remainingMs = Number.isFinite(nowMs) && Number.isFinite(createdAtMs)
+      ? leaseMs - Math.max(0, nowMs - createdAtMs)
+      : leaseMs;
+    throw new LearningSubmissionInProgressError(Math.max(1, Math.ceil(remainingMs / 1000)));
+  }
+
+  if (submissionSlotWasReclaimed(slot.created_at)) {
+    const windowEndMs = reservationTimestampMs(windowStart)
+      + SUBMISSION_RATE_LIMIT.windowSeconds * 1000;
+    throw new LearningSubmissionRateLimitError(Math.max(1, Math.ceil((windowEndMs - nowMs) / 1000)));
+  }
+
+  const leaseStartedAt = reservationLeaseTimestamp(nowMs, true);
+  const claimed = await db.prepare(
+    `UPDATE learning_submission_slots
+        SET created_at = ?
+      WHERE source_event_id = ?
+        AND created_at = ?
+        AND created_at NOT LIKE '%.001Z'
+        AND datetime(created_at) <= datetime(?, '-${SUBMISSION_RESERVATION_LEASE_SECONDS} seconds')
+        AND NOT EXISTS (
+          SELECT 1 FROM learning_interactions interaction
+           WHERE interaction.source_event_id = learning_submission_slots.source_event_id
+        )`
+  ).bind(leaseStartedAt, sourceEventId, slot.created_at, leaseStartedAt).run();
+  if (Number(claimed?.meta?.changes || 0) === 1) {
+    return { ...reservation, reclaimed: true };
+  }
+
+  const current = await readSubmissionSlot(db, sourceEventId);
+  if (current) {
+    assertSubmissionSlotMatches(current, sourceEventId, studentId, resourceKey, windowStart);
+    if (Number(current.interaction_committed) === 1) return { ...reservation, committed: true };
+    const currentCreatedAtMs = reservationTimestampMs(current.created_at);
+    const remainingMs = Number.isFinite(currentCreatedAtMs)
+      ? leaseMs - Math.max(0, nowMs - currentCreatedAtMs)
+      : leaseMs;
+    throw new LearningSubmissionInProgressError(Math.max(1, Math.ceil(remainingMs / 1000)));
+  }
+  throw new LearningSubmissionInProgressError();
+}
+
 async function reserveSubmissionSlot(
   db,
   studentId,
@@ -682,6 +793,24 @@ async function reserveSubmissionSlot(
   occurredAt,
   retry = 0,
 ) {
+  const occurredAtMs = reservationTimestampMs(occurredAt);
+  const windowMs = SUBMISSION_RATE_LIMIT.windowSeconds * 1000;
+  const windowStartMs = Math.floor((Number.isFinite(occurredAtMs) ? occurredAtMs : Date.now()) / windowMs) * windowMs;
+  const windowStart = new Date(windowStartMs).toISOString();
+  const sourceEventId = await deterministicReservationId(studentId, clientMutationId, windowStart);
+  const existingSlot = await readSubmissionSlot(db, sourceEventId);
+  if (existingSlot) {
+    return reuseOrWaitForSubmissionSlot(
+      db,
+      existingSlot,
+      sourceEventId,
+      studentId,
+      resourceKey,
+      windowStart,
+      occurredAt,
+    );
+  }
+
   const rateReservation = await enforceSubmissionRateLimit(
     db,
     studentId,
@@ -689,12 +818,11 @@ async function reserveSubmissionSlot(
     definition,
     occurredAt,
   );
-  const sourceEventId = await deterministicReservationId(studentId, clientMutationId, rateReservation.windowStart);
   try {
     await db.prepare(
       `INSERT INTO learning_submission_slots (
-         source_event_id, student_id, resource_key, window_start, resource_slot_no, global_slot_no
-       ) VALUES (?, ?, ?, ?, ?, ?)`
+         source_event_id, student_id, resource_key, window_start, resource_slot_no, global_slot_no, created_at
+       ) VALUES (?, ?, ?, ?, ?, ?, ?)`
     ).bind(
       sourceEventId,
       studentId,
@@ -702,28 +830,21 @@ async function reserveSubmissionSlot(
       rateReservation.windowStart,
       rateReservation.resourceSlotNo,
       rateReservation.globalSlotNo,
+      reservationLeaseTimestamp(Number.isFinite(occurredAtMs) ? occurredAtMs : Date.now()),
     ).run();
   } catch (error) {
     if (isUniqueConstraintError(error)) {
-      const sameMutation = await db.prepare(
-        `SELECT source_event_id, student_id, resource_key, window_start
-           FROM learning_submission_slots WHERE source_event_id = ?`
-      ).bind(sourceEventId).first();
+      const sameMutation = await readSubmissionSlot(db, sourceEventId);
       if (sameMutation?.source_event_id === sourceEventId) {
-        if (Number(sameMutation.student_id) !== Number(studentId)
-          || clean(sameMutation.resource_key, 220) !== resourceKey
-          || String(sameMutation.window_start || "") !== rateReservation.windowStart) {
-          const conflict = new Error("client mutation id already belongs to another learning item");
-          conflict.code = "learning_mutation_conflict";
-          throw conflict;
-        }
-        const windowEndMs = Date.parse(rateReservation.windowStart)
-          + SUBMISSION_RATE_LIMIT.windowSeconds * 1000;
-        const occurredAtMs = Date.parse(occurredAt);
-        const retryAfterSeconds = Math.max(1, Math.ceil(
-          (windowEndMs - (Number.isFinite(occurredAtMs) ? occurredAtMs : Date.now())) / 1000,
-        ));
-        throw new LearningSubmissionInProgressError(retryAfterSeconds);
+        return reuseOrWaitForSubmissionSlot(
+          db,
+          sameMutation,
+          sourceEventId,
+          studentId,
+          resourceKey,
+          rateReservation.windowStart,
+          occurredAt,
+        );
       }
       if (Number(retry) < 3) {
         return reserveSubmissionSlot(
@@ -864,6 +985,19 @@ export async function assertLearningSubmissionAllowed({
     context.definition,
     occurredAt,
   );
+  if (slot.committed) {
+    const committed = await existingInteraction(env.READING_DB, student.id, clientMutationId);
+    if (!committed) throw new LearningSubmissionInProgressError(1);
+    assertIdempotentReplayMatches(committed, context.resourceKey, interactionKey, raw.serialized);
+    return {
+      allowed: true,
+      deduped: true,
+      sourceEventId: committed.source_event_id,
+      attemptNo: Number(committed.attempt_no),
+      eligibilityStatus: clean(committed.eligibility_status, 32),
+      evaluation: storedEvaluation(committed),
+    };
+  }
   const submissionReservation = {
     sourceEventId: slot.sourceEventId,
     occurredAt,
@@ -1154,6 +1288,15 @@ export async function retryPendingEvidence(env, limit = 10) {
 const CENTRAL_RECEIPT_SCHEMA = "bdfz-learning-evidence-delivery-receipts-v1";
 const CENTRAL_RECEIPT_DISPOSITIONS = new Set(["accepted", "pending_mapping", "quarantined"]);
 
+export const OUTBOX_RECONCILE_SELECTION_SQL = `SELECT source_event_id, central_disposition, central_receipted_at FROM evidence_outbox
+  WHERE (central_disposition IS NULL OR central_disposition = 'pending_mapping')
+    AND json_extract(envelope_json, '$.schema') = '${ENVELOPE_SCHEMA}'
+    AND json_extract(envelope_json, '$.contractVersion') = '${CURRENT_A_PLUS_CONTRACT_VERSION}'
+    AND delivery_status IN ('pending', 'enqueued')
+    AND (central_receipted_at IS NULL OR datetime(central_receipted_at) < datetime('now', '-15 minutes'))
+  ORDER BY COALESCE(central_receipted_at, created_at), id
+  LIMIT ?`;
+
 function exactCentralDeliveryReceipt(value, requestedAttemptIds) {
   if (!value || typeof value !== "object" || Array.isArray(value)) return null;
   if (Object.keys(value).sort().join("\n") !== [
@@ -1187,16 +1330,39 @@ export async function reconcileEvidenceOutbox(env, limit = 50) {
     || typeof env.USER_CENTER_EVIDENCE?.getLearningEvidenceDeliveryReceipts !== "function") {
     return { checked: 0, receipted: 0 };
   }
-  const rows = await env.READING_DB.prepare(
-    `SELECT source_event_id, central_disposition FROM evidence_outbox
-      WHERE (central_disposition IS NULL OR central_disposition = 'pending_mapping')
-        AND json_extract(envelope_json, '$.schema') = '${ENVELOPE_SCHEMA}'
-        AND json_extract(envelope_json, '$.contractVersion') = '${CURRENT_A_PLUS_CONTRACT_VERSION}'
-        AND delivery_status IN ('pending', 'enqueued')
-      ORDER BY COALESCE(last_attempt_at, created_at), id
-      LIMIT ?`
-  ).bind(Math.max(1, Math.min(50, Number(limit) || 50))).all();
-  const attemptIds = [...new Set((rows.results || [])
+  const rows = await env.READING_DB.prepare(OUTBOX_RECONCILE_SELECTION_SQL)
+    .bind(Math.max(1, Math.min(50, Number(limit) || 50))).all();
+  const candidates = rows.results || [];
+  if (!candidates.length) return { checked: 0, receipted: 0 };
+
+  // `central_receipted_at` is also the durable receipt-readback lease. The
+  // timestamp alone never proves acceptance; only central_disposition does.
+  // Exact observed-value CAS makes one isolate the sole RPC owner per row for
+  // fifteen minutes, including when UC is unavailable or returns no receipt.
+  const pollStartedAt = isoNow();
+  let claims;
+  try {
+    claims = await env.READING_DB.batch(candidates.map((row) => env.READING_DB.prepare(
+      `UPDATE evidence_outbox
+          SET central_receipted_at = ?
+        WHERE source_event_id = ?
+          AND ((? IS NULL AND central_disposition IS NULL) OR central_disposition = ?)
+          AND ((? IS NULL AND central_receipted_at IS NULL) OR central_receipted_at = ?)
+          AND (central_receipted_at IS NULL OR datetime(central_receipted_at) < datetime('now', '-15 minutes'))
+          AND delivery_status IN ('pending', 'enqueued')`
+    ).bind(
+      pollStartedAt,
+      row.source_event_id,
+      row.central_disposition ?? null,
+      row.central_disposition ?? null,
+      row.central_receipted_at ?? null,
+      row.central_receipted_at ?? null,
+    )));
+  } catch {
+    return { checked: 0, receipted: 0 };
+  }
+  const claimedRows = candidates.filter((_row, index) => Number(claims?.[index]?.meta?.changes || 0) === 1);
+  const attemptIds = [...new Set(claimedRows
     .map((row) => clean(row.source_event_id, 100))
     .filter(Boolean))];
   if (!attemptIds.length) return { checked: 0, receipted: 0 };
@@ -1208,7 +1374,7 @@ export async function reconcileEvidenceOutbox(env, limit = 50) {
   }
   const receipts = exactCentralDeliveryReceipt(response, attemptIds);
   if (!receipts) return { checked: attemptIds.length, receipted: 0 };
-  const currentDispositions = new Map((rows.results || []).map((row) => [
+  const currentDispositions = new Map(claimedRows.map((row) => [
     clean(row.source_event_id, 100),
     clean(row.central_disposition, 32),
   ]));
@@ -1252,4 +1418,5 @@ export const learningEvidenceContract = Object.freeze({
   sourceSiteKey: SOURCE_SITE_KEY,
   academicYearFor,
   submissionRateLimit: SUBMISSION_RATE_LIMIT,
+  submissionReservationLeaseSeconds: SUBMISSION_RESERVATION_LEASE_SECONDS,
 });

@@ -27,6 +27,7 @@ import {
   normalizeInteractionAssessment,
   normalizeOpenStudyGuideAssessment,
   studyGuideAssessmentPrompt,
+  toSimplifiedText,
 } from "./study-guide-assessment.js";
 import {
   BLUEPRINT_MODE_TECHNIQUES,
@@ -177,10 +178,10 @@ function authenticatedEvaluationRequiredResponse() {
 }
 
 function learningSubmissionInProgressResponse(error) {
-  const retryAfterSeconds = Math.max(1, Number(error?.retryAfterSeconds) || 600);
+  const retryAfterSeconds = Math.max(1, Number(error?.retryAfterSeconds) || 60);
   return json({
     ok: false,
-    error: error?.message || "本次提交已进入评阅，請稍後使用同一提交重試",
+    error: error?.message || "上一次提交仍在評閱中，請稍後使用同一答案重試",
     code: "learning_submission_in_progress",
     retryable: true,
     retryAfterSeconds,
@@ -1298,19 +1299,12 @@ const identityCache = new Map(); // token -> { user, exp }
 let wordGroupCache = { index: null, exp: 0 };
 let vocabIndexCache = { data: null, exp: 0 };
 
-// 常用繁→簡折算（覆蓋三詞評議高頻字；未覆蓋的字保持原樣，僅影響聚類不影響記錄）
-const T2S_PAIRS = "愛爱蒼苍傷伤憂忧鬱郁懷怀舊旧憶忆戀恋靜静麗丽華华絢绚濃浓豔艳質质樸朴潔洁簡简練练煉炼縝缜嚴严謹谨轉转蘊蕴壯壮闊阔渾浑開开細细膩腻銳锐鋒锋潑泼諧谐風风謔谑誠诚摯挚懇恳熱热揚扬熾炽寧宁適适詳详謐谧閒闲沖冲遠远雋隽剛刚堅坚韌韧頑顽強强執执獨独遙遥飄飘達达灑洒脫脱羈羁縛缚諷讽貶贬擊击評评讚赞頌颂憫悯憐怜惻恻隱隐關关實实錄录觀观莊庄肅肃鄭郑暢畅曉晓順顺張张對对節节韻韵聲声鏗铿鏘锵徵征託托結结構构佈布鋪铺墊垫筆笔應应畫画點点負负國国報报濟济願愿夢梦靈灵動动傳传鮮鲜涼凉淒凄愴怆蕭萧邁迈曠旷淨净學学讀读書书語语詞词課课見见覺觉說说話话寫写體体為为這这們们裡里後后發发經经過过還还沒没來来時时間间長长門门問问聞闻氣气電电車车馬马鳥鸟魚鱼龍龙鳳凤廣广慶庆億亿儀仪價价優优傑杰稱称藝艺術术歷历樂乐藥药醫医難难嘆叹觸触顯显現现圖图詩诗賦赋";
-const T2S = new Map();
-for (let i = 0; i + 1 < T2S_PAIRS.length; i += 2) T2S.set(T2S_PAIRS[i], T2S_PAIRS[i + 1]);
-
 function normalizeWord(value) {
   const cleaned = String(value || "")
     .normalize("NFKC")
     .toLowerCase()
     .replace(/[\s，。！？、；：""''「」『』《》〈〉（）()\[\]【】·…—～~,.!?;:'"<>@#$%^&*+=/\\|-]+/g, "");
-  let out = "";
-  for (const ch of cleaned) out += T2S.get(ch) || ch;
-  return out.slice(0, 12);
+  return toSimplifiedText(cleaned).slice(0, 12);
 }
 
 async function sha256Hex(text) {

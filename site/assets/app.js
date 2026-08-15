@@ -789,6 +789,7 @@ function studyGuideRecordMatches(item, record) {
 }
 
 function studyGuideCompletedFor(lesson, competencyTags) {
+  if (state.studyGuideCatalogStatus !== "available") return false;
   const active = studyGuideItemsFor(lesson, competencyTags).filter((item) => item.activeForSelfTest);
   if (!active.length) return true;
   const records = studyGuideProgress(lessonProgress(lesson?.id));
@@ -2882,7 +2883,7 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
       if (error.code === "authenticated_evaluation_required") {
         toast("請先登入 My，再提交並記錄本次學習證據");
       } else if (error.code === "learning_submission_in_progress" && error.retryAfterSeconds > 0) {
-        toast(`本次提交仍在評閱，${error.retryAfterSeconds} 秒後可再次查詢`);
+        toast(`上一次提交仍在評閱中，請 ${error.retryAfterSeconds} 秒後用同一答案重試`);
       } else {
         toast(error.message || "暫時無法完成評估");
       }
@@ -3073,8 +3074,8 @@ function bindCheckStage() {
         classical_annotated_reading_required: "請先讀完帶註釋正文，再回來核對本題。",
         study_guide_catalog_changed: "題目版本已更新，請重新載入後作答。",
         learning_submission_in_progress: result?.retryAfterSeconds
-          ? `本次提交已保留；若沒有返回結果，請在 ${result.retryAfterSeconds} 秒後重試。`
-          : "本次提交已保留，請稍後使用同一答案重試。",
+          ? `上一次提交仍在評閱中，請 ${result.retryAfterSeconds} 秒後用同一答案重試。`
+          : "上一次提交仍在評閱中，請稍後用同一答案重試。",
       }[result?.code];
       toast(gateMessage || (result?.status === 401
         ? "參考答案已顯示；登入後可重試形成性評閱"
