@@ -1,6 +1,50 @@
 # Project State
 
-Last updated: 2026-08-14
+Last updated: 2026-08-15
+
+## 2026-08-15 prelaunch assessment and reservation-correctness candidate
+
+- This source-only candidate starts from canonical main
+  `2f061c59b53c9ef749126d174ee8624d67082be4`. Deterministic assessment now
+  accepts adjacent and fullwidth choice letters (`BC`, `選BC`, `ＢＣ`, `DBB`),
+  common explanation connectors, Arabic equivalents for circled-number answers,
+  traditional/simplified equivalents and whitespace sentence boundaries. An
+  explicitly prefixed single-choice answer wins over later explanation letters;
+  an unqualified `AB` or `A、B` remains invalid for a single-choice item.
+- An uncommitted evaluator reservation is a 60-second durable lease. Initial
+  `created_at` values use the canonical `.000Z` form; one exact-value D1 CAS may
+  move an abandoned lease to `.001Z` and reuse the same source event. That marker
+  permits at most one reclaim across isolates. A fresh contender waits, a second
+  expiry remains blocked by the original ten-minute rate window, and a late
+  original plus its permitted reclaim can commit only one interaction,
+  evaluation, outbox row and Queue send. Both guarded evaluation routes use this
+  same helper and the UI no longer claims that an uncommitted answer was saved.
+- Study-guide completion now fails closed unless the catalog status is
+  `available`. Receipt reconciliation uses `central_receipted_at` as a durable
+  15-minute readback-poll lease acquired by exact observed-value CAS; the
+  timestamp alone is never acceptance evidence, and `central_disposition`
+  remains the only receipt fact. This bounds health-driven User Center RPCs
+  across Worker isolates without delaying Queue retry state.
+- Pull-request CI includes the deterministic study-guide assessment suite. The
+  focused contract matrix passes 57/57 on exact Node 24.18.0 and 22.21.1, and
+  the complete `precontent:check` passes on both. Hostile coverage includes
+  ten-way initial/reclaim races, late-original commit, second-expiry rejection
+  and twenty-isolate receipt-poll contention.
+- No catalog, formative authority, learning manifest, semantic revision or App
+  pointer changed. Their SHA-256 values remain respectively
+  `4ac9e223be27316aa5324ab5c9b474e378f61ec703ac9140b590e1a42c3c89d0`,
+  `1307286d4dd9f1e687553a30c4f87d5403fe237cac56727400233abfac36d334`,
+  `2a6824db45cac416c4aee3a95ce83aba5be393b6a94034799d6d18cb56f9f998`
+  and `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
+  The rebuilt formal artifact contains 1,223 files / 164,376,696 bytes with
+  aggregate SHA-256
+  `11a7969a032eef0b5a79239a0bb0c36845649ab6c5cc8dae9dfc6a66c7c8230a`;
+  its tracked manifest byte SHA-256 is
+  `2644042c064a60d52f3c3a59794dd4872782a506e2d70aa4a320df075cc29bfe`.
+- This is a `no-new-capability`, no-schema-change source correction. It made no
+  deployment, D1/Queue/User Center write, traffic change or rollback. Any later
+  release must independently review and pin the resulting exact commit before
+  using the external executor.
 
 ## 2026-08-14 dedicated precheck project correction
 

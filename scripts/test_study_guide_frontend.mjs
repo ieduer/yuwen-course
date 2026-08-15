@@ -52,6 +52,15 @@ test("study-guide catalog failure is isolated from core textbook startup", () =>
   assert.match(rendering, /學案知能清算資料暫時無法載入/);
 });
 
+test("study-guide completion fails closed while the catalog is unavailable", () => {
+  const body = section("function studyGuideCompletedFor", "function progressPercent");
+  assert.match(body, /state\.studyGuideCatalogStatus !== "available"\) return false/);
+  assert.ok(
+    body.indexOf("studyGuideCatalogStatus") < body.indexOf("if (!active.length) return true"),
+    "catalog availability must be checked before accepting an empty active set",
+  );
+});
+
 test("AI interaction feedback is accepted only with a durable My evidence receipt", () => {
   const decision = section("function interactionEvidenceDecision", "async function submitInteraction");
   assert.match(decision, /normalized === "anonymous"[\s\S]*accepted: false/);

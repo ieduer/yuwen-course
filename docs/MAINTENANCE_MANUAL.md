@@ -1,6 +1,53 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-08-14 (America/Los_Angeles)
+Last reviewed: 2026-08-15 (America/Los_Angeles)
+
+## 2026-08-15 assessment tolerance and durable retry contract
+
+- Keep objective grading source-owned in `site/study-guide-assessment.js`.
+  Choice scanning occurs only in the answer lead after NFKC normalization and
+  accepts adjacent/fullwidth A--D letters. For single choice, only an explicit
+  prefix such as `我選 A` may disambiguate later explanation letters; bare
+  multi-letter input must not be reduced to the first letter. Circled-number
+  references alone enable equivalent Arabic input. Punctuation/segmentation
+  comparison uses the existing bounded traditional-to-simplified map and treats
+  whitespace as a boundary. These grader changes do not mint or alter a task
+  semantic revision.
+- `studyGuideCompletedFor` must return false whenever the catalog status is not
+  `available`. Catalog-load degradation may preserve textbook reading, but it
+  must never unlock a study-guide checkpoint from an empty in-memory catalog.
+- Guarded AI evaluation uses `learning_submission_slots.created_at` as a
+  60-second lease without deleting a slot or changing schema. A new reservation
+  is written with `.000Z`. If no matching `learning_interactions` row exists and
+  the lease is stale, exactly one compare-and-swap may write `.001Z` and reuse
+  the same `source_event_id`; `.001Z` is the durable once-only reclaim marker.
+  Fresh duplicates return `learning_submission_in_progress`. A reclaimed slot
+  may not be reclaimed again and remains counted until the original ten-minute
+  window expires. Both `/api/reading/study-guide-attempt` and
+  `/api/interaction-check` must call `assertLearningSubmissionAllowed` before
+  APIS. The final ledger's unique keys resolve a late original/reclaim race to
+  one interaction, evaluation, outbox row and Queue send.
+- Student-facing in-progress text must state only that the previous submission
+  is still being reviewed and that the same answer may be retried after the
+  reported interval. Do not say that an answer is saved until a durable
+  interaction exists.
+- `central_receipted_at` has two deliberately distinct interpretations: while
+  `central_disposition` is null or `pending_mapping`, it is the last durable
+  receipt-readback poll lease; when a disposition is updated, it is the receipt
+  update time. A timestamp by itself is never a receipt. Reconciliation selects
+  only rows older than 15 minutes and exact-value CAS claims them in D1 before
+  any User Center RPC. This is the cross-isolate cooldown authority; do not
+  replace it with module-local state or reuse Queue `last_attempt_at`.
+- Pull-request CI must retain `scripts/test_study_guide_assessment.mjs` beside
+  the learning manifest, evidence and preview-isolation suites on exact Node
+  24.18.0 and 22.21.1. The hostile evidence tests must keep the ten-way lease
+  races, late-original race, second-expiry rejection and cross-isolate poll
+  contention.
+- This maintenance is a `no-new-capability` source-only change: existing Pages,
+  D1, Queue and User Center service-binding contracts remain unchanged. Source
+  rollback is to revert the exact candidate commit and regenerate/check the
+  formal artifact manifest; there is no production rollback action because this
+  task performs no deployment or data mutation.
 
 ## 2026-08-14 dedicated precheck project contract
 
