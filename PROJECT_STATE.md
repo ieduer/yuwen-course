@@ -131,20 +131,26 @@ Last updated: 2026-08-15
   This is a `no-new-capability` source correction. It performs no deployment,
   D1/Queue/User Center write, traffic change or rollback; any release still
   requires independent exact-commit review and the external production gate.
-- A separately received JSON described as “2026 北京卷语文” is an unverified
-  candidate, not a YW source input. Current GKS `master`
-  `bd7926453ce971683af9a5294edac3760faa16a8` still records
-  `2026-beijing-chinese-written` as `missing_full_paper`,
-  `writing_prompts_only`, `blocked_no_complete_question_set`, `blocked`, with
-  zero sources, in coverage SHA-256
-  `91c0412e0580eadfb1435c57b3cd56febb4d8a1d343a561681020ec71b46e0dd`.
-  YW must not import, publish or derive from that JSON. Only after the GKS
-  coverage authority has a continuous original paper, two independent sources,
-  per-page/per-question visual evidence and crop SHA-256, independent Codex
-  answers, dual sign-off and publication-hash binding may a separate YW PR add
-  a source-pinned, link-only transfer overlay. GKS remains the evidence owner;
-  no copied question/answer, YW scoring event, D1/Queue write, User Center or
-  App change is authorized.
+- A separately received JSON described as “2026 北京卷语文” remains an
+  unverified YW input. GKS source and live state are currently divergent:
+  canonical `master` `bd7926453ce971683af9a5294edac3760faa16a8` still has
+  the zero-source blocked coverage snapshot at SHA-256
+  `91c0412e0580eadfb1435c57b3cd56febb4d8a1d343a561681020ec71b46e0dd`,
+  while GKS draft PR #1 head
+  `6f46f96416dd896b2c60e70711fd63ba243fc899` has been used by the live
+  service. The live `/api/papers` readback now exposes published paper
+  `2026-beijing-chinese` with 22 questions, `candidate_hash_bound` credibility,
+  `visual_review_complete_pending_independent_attestations`, and explicit
+  one-time single-source and direct-review waivers. That unmerged, waived live
+  release is not a reusable YW derivation or publication authority.
+- YW must not import, publish or derive content from the supplied JSON or copy
+  question/answer text from the waived live release. A future, separately
+  reviewed YW PR may add only a source-pinned, link-only transfer overlay after
+  GKS source and live authority are reconciled and the YW gate independently
+  has a continuous original paper, two independent sources, per-page and
+  per-question visual evidence with crop SHA-256, independent Codex answers,
+  dual sign-off and publication-hash binding. GKS remains the evidence owner;
+  no YW scoring event, D1/Queue write, User Center or App change is authorized.
 
 ## 2026-08-14 dedicated precheck project correction
 

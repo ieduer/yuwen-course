@@ -113,15 +113,27 @@ Last reviewed: 2026-08-15 (America/Los_Angeles)
 
 ### Future GKS Beijing-paper relationship (currently blocked)
 
-The claimed “2026 北京卷语文” JSON is unverified and must not be treated as a
-question bank, answer authority or release input. GKS owns this evidence. Its
-current authoritative component `2026-beijing-chinese-written` is still
-`missing_full_paper / writing_prompts_only /
-blocked_no_complete_question_set / blocked` with `sources=[]` in
-`data/source-manifests/beijing/2026/coverage.json` at GKS `master`
-`bd7926453ce971683af9a5294edac3760faa16a8` (coverage SHA-256
-`91c0412e0580eadfb1435c57b3cd56febb4d8a1d343a561681020ec71b46e0dd`).
-No YW synchronization may begin until that ledger binds a continuous original
+The claimed “2026 北京卷语文” JSON remains an unverified YW input and must not
+be treated as a YW question bank, answer authority or release input. GKS owns
+the upstream evidence, but its source and live state are now divergent:
+
+- canonical GKS `master` `bd7926453ce971683af9a5294edac3760faa16a8`
+  still records `2026-beijing-chinese-written` as
+  `missing_full_paper / writing_prompts_only /
+  blocked_no_complete_question_set / blocked`, with `sources=[]`, at coverage
+  SHA-256
+  `91c0412e0580eadfb1435c57b3cd56febb4d8a1d343a561681020ec71b46e0dd`;
+- unmerged GKS draft PR #1 head
+  `6f46f96416dd896b2c60e70711fd63ba243fc899` has been used by the live
+  service; live `/api/papers` now exposes published paper
+  `2026-beijing-chinese` with 22 questions, `candidate_hash_bound` credibility,
+  `visual_review_complete_pending_independent_attestations`, and explicit
+  one-time single-source and direct-review waivers.
+
+The live waiver is neither canonical-main convergence nor reusable YW
+authority. No YW synchronization may begin from either the supplied JSON or
+that waived release. A future YW transaction must first re-read a reconciled
+GKS source/live authority and independently require a continuous original
 paper, two independent sources, per-page/per-question visual evidence and crop
 SHA-256, independent Codex answers, dual sign-off and the public release hashes.
 
