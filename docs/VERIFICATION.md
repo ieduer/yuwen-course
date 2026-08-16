@@ -1,6 +1,6 @@
 # 核查標準 / Verification Standard
 
-## 2026-08-15 native formative RPC handoff draft
+## 2026-08-15 combined assessment, retry and native formative source gate
 
 Run the focused identity/evidence contract and the complete source gate under
 both exact Node authorities. `test:native-content` also requires the immutable
@@ -17,7 +17,9 @@ PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
   scripts/test_learning_evidence_contract.mjs \
   scripts/test_preview_binding_isolation.mjs \
   scripts/test_reading_identity.mjs \
-  scripts/test_study_guide_assessment.mjs
+  scripts/test_study_guide_assessment.mjs \
+  scripts/test_study_guide_frontend.mjs \
+  scripts/test_lesson_blueprint_quality.mjs
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run precontent:check
 
 mkdir -p /private/tmp/yw-node22-exact-bin
@@ -29,7 +31,9 @@ test -L /private/tmp/yw-node22-exact-bin/node || \
   scripts/test_learning_evidence_contract.mjs \
   scripts/test_preview_binding_isolation.mjs \
   scripts/test_reading_identity.mjs \
-  scripts/test_study_guide_assessment.mjs
+  scripts/test_study_guide_assessment.mjs \
+  scripts/test_study_guide_frontend.mjs \
+  scripts/test_lesson_blueprint_quality.mjs
 PATH=/private/tmp/yw-node22-exact-bin:/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
   npm run precontent:check
 
@@ -56,7 +60,17 @@ synchronized change gate. No Cloudflare, D1, Queue, Pages or App mutation
 belongs to this source check. Rollback is a normal revert of the exact candidate
 commit.
 
-## 2026-08-15 assessment, retry and anonymous-AI source gate
+Current live readback is deliberately different from this source gate:
+`yw.bdfz.net` serves rollback deployment
+`8da16237-ac91-47e1-afe2-7843e2d4c8a4` from metadata source
+`0ff5d5604ceefef92c99c07033f1e900d9edaaed`, with formal marker SHA-256
+`ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`,
+reading schema v4/evidence v1 and the v1 Queue producer. V2 main/DLQ remain
+paused and unconnected, and User Center production remains the v251 rollback.
+The combined source checks must never be reported as live native/v2 or A--F
+acceptance.
+
+### Assessment, retry and anonymous-AI coverage
 
 The combined source tree must regenerate the formal release site and tracked
 artifact manifest once after both the native identity and assessment/retry
@@ -72,6 +86,7 @@ PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
   node --test scripts/test_learning_manifest.mjs \
   scripts/test_learning_evidence_contract.mjs \
   scripts/test_preview_binding_isolation.mjs \
+  scripts/test_reading_identity.mjs \
   scripts/test_study_guide_assessment.mjs \
   scripts/test_study_guide_frontend.mjs \
   scripts/test_lesson_blueprint_quality.mjs
@@ -86,6 +101,7 @@ PATH=/private/tmp/yw-node22-exact-bin:/usr/local/libexec/bdfz-release/npm-v11.6.
   scripts/test_learning_manifest.mjs \
   scripts/test_learning_evidence_contract.mjs \
   scripts/test_preview_binding_isolation.mjs \
+  scripts/test_reading_identity.mjs \
   scripts/test_study_guide_assessment.mjs \
   scripts/test_study_guide_frontend.mjs \
   scripts/test_lesson_blueprint_quality.mjs
@@ -110,19 +126,21 @@ Existing receipt reconciliation, late-original immutability and Queue hostile
 checks remain required.
 
 Completed local source evidence on 2026-08-15: exact Node 24.18.0 and 22.21.1
-each passed the complete `precontent:check`; the focused PR matrix passed 76/76,
+each passed the complete `precontent:check`; the unified focused matrix passed 85/85,
 Reading API 70/70, native content 22/22 and release-site 5/5 on each runtime.
-The native test used 693 exact page files restored from the accepted
-path-preserving Drive archive; `rclone check --checksum --one-way` reported
-693 matches and zero differences, and the native builder independently checked
-every referenced SHA-256 against the canonical page inventory.
+The native test used 693 exact page files / 75,196,340 bytes restored from the
+accepted path-preserving Drive archive; an isolated readback matched all 693
+files against the canonical page SHA-256 inventory, and the native builder
+independently checked every referenced SHA-256.
 
-Formal build/check produced 1,223 files / 164,377,105 bytes, projected aggregate
-`cf14869373cd12fa81e969e24737f5986a86c4558b7e45554f5b69c485f519eb`,
+Formal build/check produced 1,223 files / 164,378,212 bytes, projected aggregate
+`21485dbc7c0c167925a0f3d56835ee19b379ce413aff23aab4c102b244e1f922`,
 artifact aggregate
-`758433ad9a75c7af87e9c0d5b4ea54ae69ef2472f1a20c995a0f5657ed32531c`
+`ae7c907010f3a148f7b68a3bfc5442220091759202acb85ce5a11e04f742f0a2`
 and tracked manifest byte SHA-256
-`e7ef2b0c60db7661fb41c564ee13c7b0008362d31fa71ff5ac1e0a79a7fa9948`.
+`48b94d286f50a33f9cb9095e05655f6eba2d4ae712c1adb99f033ac6162339e4`.
+The formal marker byte SHA-256 is
+`dd2c63801c44d266428efa495b6cf872665980a520ea40c21be0ac52045dc07a`.
 Catalog, formative manifest, learning manifest and App pointer byte SHA-256
 remain `4ac9e223be27316aa5324ab5c9b474e378f61ec703ac9140b590e1a42c3c89d0`,
 `1307286d4dd9f1e687553a30c4f87d5403fe237cac56727400233abfac36d334`,
@@ -310,8 +328,9 @@ publication time, current content audit and compatible App disposition.
 
 ## 2026-08-11 Web reading release gate
 
-This current Web-only gate supersedes the 2026-08-09 pre-migration/503 release
-disposition below. It does not authorize App or User Center work.
+This is the retained 2026-08-11 Web-only release receipt. The 2026-08-15 live
+rollback paragraph above supersedes its former current-production claim. It
+does not authorize App or User Center work.
 
 ### Required commands
 

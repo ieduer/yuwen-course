@@ -2,7 +2,7 @@
 
 Last updated: 2026-08-15
 
-## 2026-08-15 native formative RPC handoff draft
+## 2026-08-15 combined assessment, retry and native formative source draft
 
 - This source-only draft starts from canonical main
   `7c7e1e06bad67b17dfa16a500a64ca2e02ad08c1`. The accepted
@@ -34,15 +34,53 @@ Last updated: 2026-08-15
   handoff. It changes no learning rule, formative denominator, scoring role,
   manifest, App pointer, D1 row, Queue message, Pages deployment or production
   traffic. Source rollback is a normal revert of the exact candidate commit.
-- Exact Node 24.18.0 and 22.21.1 each pass the focused 66/66 identity/evidence
+- Exact Node 24.18.0 and 22.21.1 each pass the unified focused 85/85 contract
   matrix and the complete `precontent:check`, including Reading API 70/70,
   native-content 22/22 and release-site 5/5. The archived textbook page input
-  was supplied through a checksum-verified isolated 693-file subset of accepted
-  archive `2026-08-15-textbook-ai-migration`; no archived or canonical source
-  byte was modified.
-- The final combined formal Web artifact authority is regenerated only after
-  both source corrections are present in one tree. Neither predecessor PR's
-  artifact count or digest is accepted as authority for this combined draft.
+  was supplied through a checksum-verified isolated 693-file / 75,196,340-byte
+  subset of accepted archive `2026-08-15-textbook-ai-migration`; all 693 files
+  match the canonical page SHA-256 inventory, and no archived or canonical
+  source byte was modified.
+- The one formal build from the combined tree contains 1,223 files / 164,378,212
+  bytes. Its projected aggregate is
+  `21485dbc7c0c167925a0f3d56835ee19b379ce413aff23aab4c102b244e1f922`,
+  artifact aggregate is
+  `ae7c907010f3a148f7b68a3bfc5442220091759202acb85ce5a11e04f742f0a2`,
+  tracked manifest byte SHA-256 is
+  `48b94d286f50a33f9cb9095e05655f6eba2d4ae712c1adb99f033ac6162339e4`,
+  and formal marker byte SHA-256 is
+  `dd2c63801c44d266428efa495b6cf872665980a520ea40c21be0ac52045dc07a`.
+  The stable App pointer remains
+  `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`
+  with the same 278 receipted native paths. Neither predecessor PR's artifact
+  count or digest is accepted as authority for this combined draft.
+
+## 2026-08-15 current production rollback authority (read-only)
+
+- The canonical `yw.bdfz.net` alias currently serves Pages deployment
+  `8da16237-ac91-47e1-afe2-7843e2d4c8a4`, whose deployment metadata records
+  rollback source commit `0ff5d5604ceefef92c99c07033f1e900d9edaaed` and whose live formal marker
+  SHA-256 is
+  `ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`.
+  It is not the canonical source main or this combined candidate.
+- Production D1 retains migrations 0001--0005 and all historical rows. Live
+  reading health remains `reading-schema-v4` with
+  `bdfz-learning-evidence-v1`. Learning health advertises the current formal
+  e310 source family but still projects formative authority
+  `yw-formative-20a7145bd573bbb7` / 1,019 items and explicitly reports
+  transport/formative-only activation, no runtime scoring, no A+ effect and no
+  persistence claim.
+- The v1 Queue remains the rollback producer path. The v2 main and DLQ remain
+  paused with no producer or consumer. User Center production remains its v251
+  rollback; the existing Web binding is usable for the legacy cookie path, but
+  native identity/v2 mastery is not live. No source-only result below changes
+  those facts or authorizes a deployment, migration, Queue change, User Center
+  change, App publication or student-data write.
+- Later sections that call the 2026-08-11 carrier "current production" are
+  retained historical receipts. This section is the current live disposition,
+  and production remains NO-GO until a separately authorized synchronized
+  transaction proves the exact combined source, hub contract, backup/restore,
+  v2 delivery and real-account A--F readback.
 
 ## 2026-08-15 assessment, bounded evaluator retry and anonymous-AI retirement candidate
 
@@ -75,17 +113,19 @@ Last updated: 2026-08-15
   source-deterministic blueprint without any anonymous APIS call. No IP limiter,
   new binding or mutable request-global state was introduced.
 - Pull-request CI runs the learning manifest, evidence, preview-isolation,
-  46-case assessment, both UI retry paths and all 189 deterministic lesson
-  blueprints on exact Node 24.18.0 and 22.21.1 before the formal artifact gate.
+  reading-identity, 46-case assessment, both UI retry paths and all 189
+  deterministic lesson blueprints on exact Node 24.18.0 and 22.21.1 before the
+  formal artifact gate.
   The complete local source gate passes on both exact Node authorities; the
-  focused matrix is 76/76 per runtime, Reading API is 70/70, native content is
-  22/22 and release-site is 5/5. The rebuilt formal artifact is 1,223 files /
-  164,377,105 bytes with aggregate SHA-256
-  `758433ad9a75c7af87e9c0d5b4ea54ae69ef2472f1a20c995a0f5657ed32531c`;
+  unified focused matrix is 85/85 per runtime, Reading API is 70/70, native
+  content is 22/22 and release-site is 5/5. The rebuilt formal artifact is
+  1,223 files /
+  164,378,212 bytes with aggregate SHA-256
+  `ae7c907010f3a148f7b68a3bfc5442220091759202acb85ce5a11e04f742f0a2`;
   its projected aggregate is
-  `cf14869373cd12fa81e969e24737f5986a86c4558b7e45554f5b69c485f519eb`
+  `21485dbc7c0c167925a0f3d56835ee19b379ce413aff23aab4c102b244e1f922`
   and tracked manifest byte SHA-256 is
-  `e7ef2b0c60db7661fb41c564ee13c7b0008362d31fa71ff5ac1e0a79a7fa9948`.
+  `48b94d286f50a33f9cb9095e05655f6eba2d4ae712c1adb99f033ac6162339e4`.
 - No catalog, formative authority, learning manifest, semantic revision,
   schema, binding, route topology, Queue, User Center or App pointer changed.
   This is a `no-new-capability` source correction. It performs no deployment,
@@ -327,6 +367,10 @@ Production serves Pages deployment
 2026-08-09 candidate/release narrative.
 
 ## 2026-08-11 Web reading finalization
+
+This section is retained as the 2026-08-11 release receipt. Its former
+"current production" wording is superseded by the 2026-08-15 rollback
+authority above.
 
 - Students can use 189 lesson units. The source manifest retains 191 records,
   including two hidden system records; all 189 student-visible pages use one

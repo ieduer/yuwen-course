@@ -2,7 +2,7 @@
 
 Last reviewed: 2026-08-15 (America/Los_Angeles)
 
-## 2026-08-15 native formative RPC handoff draft
+## 2026-08-15 combined assessment, retry and native formative source draft
 
 - Native reading identity remains owned by the accepted
   `bdfz-native-auth/1` projection. Do not restore the historical
@@ -45,6 +45,31 @@ Last reviewed: 2026-08-15 (America/Los_Angeles)
   preview-binding and assessment suites. Route-level tests must retain the
   non-native-Web, malformed-native-401, cross-identity-401 and missing native
   method 503 cases.
+- The combined source candidate is verified only by the unified 85/85 focused
+  matrix plus both exact-Node complete source gates. Its sole formal artifact
+  authority is 1,223 files / 164,378,212 bytes, projected aggregate
+  `21485dbc7c0c167925a0f3d56835ee19b379ce413aff23aab4c102b244e1f922`,
+  artifact aggregate
+  `ae7c907010f3a148f7b68a3bfc5442220091759202acb85ce5a11e04f742f0a2`
+  and tracked manifest byte SHA-256
+  `48b94d286f50a33f9cb9095e05655f6eba2d4ae712c1adb99f033ac6162339e4`.
+  Do not reuse either predecessor PR's artifact receipt.
+
+### Current production boundary
+
+- `yw.bdfz.net` currently resolves to rollback deployment
+  `8da16237-ac91-47e1-afe2-7843e2d4c8a4`, with deployment metadata source
+  `0ff5d5604ceefef92c99c07033f1e900d9edaaed` and live formal marker SHA-256
+  `ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`.
+- Keep production D1 migrations 0001--0005 and all existing rows intact. Live
+  reading remains schema v4/evidence v1; the current producer is the v1 Queue,
+  while v2 main/DLQ remain paused with no producer or consumer. Learning health
+  remains transport/formative-only and cannot be cited as scoring or A+ proof.
+- User Center production remains the v251 rollback. The existing Web cookie
+  binding is not native/v2 authority, and neither production nor current UC
+  source implements the native mastery method required by this YW candidate.
+  Treat every later 2026-08-11 "current production" paragraph as historical.
+  Do not deploy from this source draft.
 
 ## 2026-08-15 assessment and bounded evaluator-retry contract
 
@@ -347,9 +372,9 @@ of the grade-authoritative hot path.
 
 ## 2026-08-11 Web reading finalization override
 
-This is the current operational disposition. Older paired Web/App and
-2026-08-09 candidate sections remain as historical evidence, but their blocked
-pre-migration and 503 statements no longer describe production.
+This is retained as the 2026-08-11 operational receipt. The 2026-08-15 current
+production boundary at the top supersedes its former current-production claim.
+Older paired Web/App and 2026-08-09 candidate sections remain historical.
 
 ### Current student flow
 
