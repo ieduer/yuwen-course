@@ -2,6 +2,53 @@
 
 Last updated: 2026-08-15
 
+## 2026-08-15 native formative RPC handoff draft
+
+- This source-only draft starts from canonical main
+  `7c7e1e06bad67b17dfa16a500a64ca2e02ad08c1`. The accepted
+  `bdfz-native-auth/1` projection, exact native authorization format and
+  stable-user dual-credential gate already supersede the older isolated
+  reading-bridge implementation.
+- One behavior was not superseded: an exact native request that reaches
+  `/api/reading/formative-mastery` must use a native-session-bound RPC rather
+  than passing an empty Web cookie to `getFormativeMastery`. The source now
+  classifies authorization as absent, non-native, exact-native or malformed
+  native-looking. Absent/non-native authorization may use Web
+  `resolveSession`/`getFormativeMastery` only with a valid bounded
+  `bdfz_uc_session` cookie. A header in the native `Bearer ywat_` namespace
+  that fails the exact token shape remains 401 even when that cookie is also
+  present. Exact native authorization selects only
+  `getNativeFormativeMastery`; a missing selected method remains 503.
+- An exact native request with a Web cookie resolves both identities before
+  reading reconciliation. Different stable User Center ids remain 401; a
+  same-user cookie is only a conflict check and never becomes a mastery-RPC
+  fallback. At this PR's reviewed User Center baseline,
+  `3e5dbcdcc02463437595ff828410a6ed3c1ba091`, the named entrypoint did not
+  expose `getNativeFormativeMastery`. This YW PR therefore remains draft,
+  unmerged and undeployed until a separately owned User Center contract change,
+  hostile tests and independent shared-hub review complete one synchronized
+  transaction. This source handoff does not claim current live hub readiness.
+- This is a `no-new-capability`, no-schema-change and no-data-write source
+  handoff. It changes no learning rule, formative denominator, scoring role,
+  manifest, App pointer, D1 row, Queue message, Pages deployment or production
+  traffic. Source rollback is a normal revert of the exact candidate commit.
+- Exact Node 24.18.0 and 22.21.1 each pass the focused 66/66 identity/evidence
+  matrix and the complete `precontent:check`, including Reading API 70/70,
+  native-content 22/22 and release-site 5/5. The archived textbook page input
+  was supplied through a checksum-verified isolated 693-file subset of accepted
+  archive `2026-08-15-textbook-ai-migration`; no archived or canonical source
+  byte was modified.
+- The deterministic formal Web artifact remains 1,223 files and now totals
+  164,378,090 bytes. Its projected aggregate is
+  `2252abef1439d79b0125b3e21f15608dce4a297c5197911a0e05cb0d0e2cf9bc`,
+  artifact aggregate is
+  `b8f8865771e0ebb88be3ec169d4c138c4cd8deb1168076ed0272b4109a56d8a3`,
+  and tracked manifest byte SHA-256 is
+  `f99289d3fb1d1acff93066cfc0b2f5d10e46277d9bc24205ef4781d0cab1fc66`.
+  The formal marker byte SHA-256 is
+  `997ffebffca11724d41dea4e460499f6e794fc0f305fe1fe8efb96db06226906`.
+  The stable native-content pointer and its 278 receipted paths are unchanged.
+
 ## 2026-08-15 prelaunch assessment and reservation-correctness candidate
 
 - This source-only candidate starts from canonical main

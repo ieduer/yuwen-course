@@ -19,6 +19,7 @@ import {
   nativeAuthorizationDecision,
   nativeReadingIdentityProjection,
   readingCredentialDecision,
+  readingFormativeMasteryRpcDecision,
   reconcileReadingStudent,
 } from "./reading-identity-source.js";
 import {
@@ -1376,7 +1377,9 @@ async function getReadingStudent(request, env) {
   const cookieHeader = userCenterSessionCookieHeader(request);
   const nativeAuthorization = nativeAuthorizationDecision(request.headers.get("authorization"));
   if (nativeAuthorization.status === "unauthorized") return null;
-  const authorizationHeader = nativeAuthorization.authorizationHeader;
+  const authorizationHeader = nativeAuthorization.status === "authorized"
+    ? nativeAuthorization.authorizationHeader
+    : "";
   let nativeUser = null;
   if (authorizationHeader) {
     if (typeof env.USER_CENTER_EVIDENCE?.resolveNativeSession !== "function") {
@@ -2404,7 +2407,11 @@ export function publicFormativeMastery(projection, interestRows, currentManifest
 }
 
 async function handleReadingFormativeMastery(request, env, student) {
-  if (typeof env.USER_CENTER_EVIDENCE?.getFormativeMastery !== "function") {
+  const rpc = readingFormativeMasteryRpcDecision(
+    request.headers.get("authorization"),
+    userCenterSessionCookieHeader(request),
+  );
+  if (!rpc.rpcName || typeof env.USER_CENTER_EVIDENCE?.[rpc.rpcName] !== "function") {
     return readingError("formative mastery unavailable", 503);
   }
   let result;
@@ -2415,7 +2422,7 @@ async function handleReadingFormativeMastery(request, env, student) {
     ));
     if (!manifestResponse.ok) throw new Error("formative manifest unavailable");
     [result, currentManifest] = await Promise.all([
-      env.USER_CENTER_EVIDENCE.getFormativeMastery(userCenterSessionCookieHeader(request)),
+      env.USER_CENTER_EVIDENCE[rpc.rpcName](rpc.credential),
       manifestResponse.json(),
     ]);
   } catch (error) {

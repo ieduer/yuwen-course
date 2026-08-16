@@ -1,5 +1,74 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-15 native formative RPC handoff draft
+
+Run the focused identity/evidence contract and the complete source gate under
+both exact Node authorities. `test:native-content` also requires the immutable
+textbook page inputs. When the former default local tree is absent, restore the
+needed pages from accepted archive `2026-08-15-textbook-ai-migration`, verify
+them against its receipt, and point `YW_PAGE_IMAGE_ROOT` at that isolated
+`pages/` directory before running the complete gate:
+
+```zsh
+export YW_PAGE_IMAGE_ROOT=/absolute/path/to/receipt-verified/pages
+
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
+  node --test scripts/test_learning_manifest.mjs \
+  scripts/test_learning_evidence_contract.mjs \
+  scripts/test_preview_binding_isolation.mjs \
+  scripts/test_reading_identity.mjs \
+  scripts/test_study_guide_assessment.mjs
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run precontent:check
+
+mkdir -p /private/tmp/yw-node22-exact-bin
+test -L /private/tmp/yw-node22-exact-bin/node || \
+  ln -s /usr/local/libexec/bdfz-release/node-v22.21.1 \
+  /private/tmp/yw-node22-exact-bin/node
+/usr/local/libexec/bdfz-release/node-v22.21.1 --test \
+  scripts/test_learning_manifest.mjs \
+  scripts/test_learning_evidence_contract.mjs \
+  scripts/test_preview_binding_isolation.mjs \
+  scripts/test_reading_identity.mjs \
+  scripts/test_study_guide_assessment.mjs
+PATH=/private/tmp/yw-node22-exact-bin:/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
+  npm run precontent:check
+
+git diff --check
+```
+
+The hostile contract must prove that absent or non-native authorization with a
+valid bounded User Center cookie selects only Web
+`resolveSession`/`getFormativeMastery`; a native-looking header beginning in
+the `Bearer ywat_` namespace but failing the exact native shape returns 401
+without either identity RPC even when a cookie is present. Exact native
+authorization selects only `getNativeFormativeMastery`; a simultaneous cookie
+must resolve to the same stable user and cannot replace native mastery
+authority. A missing native method remains 503. The selected RPC's existing
+exact `bdfz-yw-formative-mastery-rpc-v1` response validation, non-scoring flags
+and manifest projection remain unchanged.
+
+Local and CI success is source evidence only. Merge and deployment remain
+blocked until the exact canonical User Center source selected for the
+synchronized transaction exposes `getNativeFormativeMastery`; the separately
+owned hub change must add its own native expiry, revocation, wrong-client,
+cross-user, response-shape and log-redaction tests and then pass the shared-hub
+synchronized change gate. No Cloudflare, D1, Queue, Pages or App mutation
+belongs to this source check. Rollback is a normal revert of the exact candidate
+commit.
+
+Completed source evidence on 2026-08-15: focused matrix 66/66 and complete
+`precontent:check` passed on exact Node 24.18.0 and Node 22.21.1. The formal
+Web build/check remained 1,223 files / 164,378,090 bytes, with projected
+aggregate
+`2252abef1439d79b0125b3e21f15608dce4a297c5197911a0e05cb0d0e2cf9bc`,
+artifact aggregate
+`b8f8865771e0ebb88be3ec169d4c138c4cd8deb1168076ed0272b4109a56d8a3`
+and tracked manifest byte SHA-256
+`f99289d3fb1d1acff93066cfc0b2f5d10e46277d9bc24205ef4781d0cab1fc66`.
+The formal release-marker byte SHA-256 is
+`997ffebffca11724d41dea4e460499f6e794fc0f305fe1fe8efb96db06226906`.
+The stable native-content pointer and its 278 receipted paths did not change.
+
 ## 2026-08-15 prelaunch assessment/reservation correctness
 
 Run the complete source gate and focused contract matrix under both exact Node
