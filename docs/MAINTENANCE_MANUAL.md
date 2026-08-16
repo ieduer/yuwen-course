@@ -2,6 +2,33 @@
 
 Last reviewed: 2026-08-15 (America/Los_Angeles)
 
+## 2026-08-15 native formative RPC handoff draft
+
+- Native reading identity remains owned by the accepted
+  `bdfz-native-auth/1` projection. Do not restore the historical
+  `bdfz-yw-native-session-rpc-v1` shape or duplicate native identity parsing in
+  `site/_worker.js`.
+- After `getReadingStudent` has authenticated and reconciled the stable User
+  Center user, formative mastery must still preserve the request's credential
+  class. Cookie-only Web requests call `getFormativeMastery` with the bounded
+  User Center cookie. Exact native authorization calls
+  `getNativeFormativeMastery` with that native authority. A native request
+  never falls back to the Web RPC, even if a same-user cookie is also present.
+- `readingFormativeMasteryRpcDecision` is the single source-side selector.
+  Malformed native authorization returns no method and no credential. If the
+  selected named-entrypoint method is unavailable, the Worker returns 503 and
+  performs no alternative RPC; it must not reinterpret an infrastructure or
+  contract gap as an anonymous student result.
+- User Center main `3e5dbcdc...` does not yet implement the native formative
+  method. This YW draft must stay unmerged and undeployed until a separately
+  owned User Center change defines the exact request/response contract, keeps
+  the existing non-scoring projection byte-compatible, and passes native
+  expiry, revocation, wrong-client, cross-user, malformed-result and sensitive
+  logging tests plus shared-hub review.
+- The change adds no Cloudflare capability, binding, migration or data path.
+  It does not authorize User Center, D1, Queue, Pages, App or production work.
+  Roll back source with a normal revert of the exact YW commit.
+
 ## 2026-08-15 assessment and bounded evaluator-retry contract
 
 - Keep objective grading source-owned in `site/study-guide-assessment.js` and

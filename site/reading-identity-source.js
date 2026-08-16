@@ -70,6 +70,25 @@ export function nativeAuthorizationDecision(value) {
     : { status: "unauthorized", authorizationHeader: "" };
 }
 
+export function readingFormativeMasteryRpcDecision(authorizationValue, cookieHeader) {
+  const nativeAuthorization = nativeAuthorizationDecision(authorizationValue);
+  if (nativeAuthorization.status === "unauthorized") {
+    return { status: "unauthorized", rpcName: "", credential: "" };
+  }
+  if (nativeAuthorization.status === "authorized") {
+    return {
+      status: "native",
+      rpcName: "getNativeFormativeMastery",
+      credential: nativeAuthorization.authorizationHeader,
+    };
+  }
+  return {
+    status: "web",
+    rpcName: "getFormativeMastery",
+    credential: String(cookieHeader || ""),
+  };
+}
+
 export function readingCredentialDecision(nativeUser, webUser) {
   if (!nativeUser) return webUser ? { status: "authenticated", user: webUser } : { status: "unauthorized" };
   if (!webUser) return { status: "authenticated", user: nativeUser };

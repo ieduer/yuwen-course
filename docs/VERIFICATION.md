@@ -1,5 +1,46 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-15 native formative RPC handoff draft
+
+Run the focused identity/evidence contract and the complete source gate under
+both exact Node authorities. `test:native-content` also requires the immutable
+textbook page inputs. When the former default local tree is absent, restore the
+needed pages from accepted archive `2026-08-15-textbook-ai-migration`, verify
+them against its receipt, and point `YW_PAGE_IMAGE_ROOT` at that isolated
+`pages/` directory before running the complete gate:
+
+```zsh
+export YW_PAGE_IMAGE_ROOT=/absolute/path/to/receipt-verified/pages
+
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
+  node --test scripts/test_reading_identity.mjs \
+  scripts/test_learning_evidence_contract.mjs
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run precontent:check
+
+PATH=/Users/ylsuen/.nvm/versions/node/v22.21.1/bin:$PATH \
+  node --test scripts/test_reading_identity.mjs \
+  scripts/test_learning_evidence_contract.mjs
+PATH=/Users/ylsuen/.nvm/versions/node/v22.21.1/bin:$PATH npm run precontent:check
+
+git diff --check
+```
+
+The hostile contract must prove that cookie-only Web requests select only
+`getFormativeMastery`, exact native authorization selects only
+`getNativeFormativeMastery`, a simultaneous cookie cannot replace the native
+authority, malformed native input yields no method or credential, and the
+Worker has no direct cookie-only fallback. The selected RPC's existing exact
+`bdfz-yw-formative-mastery-rpc-v1` response validation, non-scoring flags and
+manifest projection remain unchanged.
+
+Local and CI success is source evidence only. Merge and deployment remain
+blocked while canonical User Center lacks `getNativeFormativeMastery`; the
+separately owned hub change must add its own native expiry, revocation,
+wrong-client, cross-user, response-shape and log-redaction tests and then pass
+the shared-hub synchronized change gate. No Cloudflare, D1, Queue, Pages or App
+mutation belongs to this source check. Rollback is a normal revert of the exact
+candidate commit.
+
 ## 2026-08-15 assessment, retry and anonymous-AI source gate
 
 Run the complete source gate and focused contract matrix under both exact Node

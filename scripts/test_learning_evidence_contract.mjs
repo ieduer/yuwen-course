@@ -406,6 +406,185 @@ test("YW exposes compound health and the exact existing A+ source activation rec
   });
 });
 
+test("native formative mastery cannot fall back to the Web session RPC", async () => {
+  assert.match(workerSource, /readingFormativeMasteryRpcDecision\(/);
+  assert.match(workerSource, /typeof env\.USER_CENTER_EVIDENCE\?\.\[rpc\.rpcName\] !== "function"/);
+  assert.match(workerSource, /env\.USER_CENTER_EVIDENCE\[rpc\.rpcName\]\(rpc\.credential\)/);
+  assert.doesNotMatch(
+    workerSource,
+    /getFormativeMastery\(userCenterSessionCookieHeader\(request\)\)/,
+  );
+
+  let totalItems = 0;
+  let competencyUnitCount = 0;
+  const lessons = formativeManifest.lessons.map((lessonItem) => ({
+    lessonId: lessonItem.lessonId,
+    lessonTitle: lessonItem.lessonTitle || lessonItem.lessonId,
+    competencies: lessonItem.competencies.map((competency) => {
+      const total = Number(competency.activeItemCount);
+      totalItems += total;
+      if (total > 0) competencyUnitCount += 1;
+      return {
+        competencyTag: competency.competencyTag,
+        status: total > 0 ? "available" : "unavailable",
+        completedItems: 0,
+        totalItems: total,
+        masteryRate: total > 0 ? 0 : null,
+      };
+    }),
+  }));
+  const rpcResult = {
+    ok: true,
+    schemaVersion: "bdfz-yw-formative-mastery-rpc-v1",
+    status: "available",
+    httpStatus: 200,
+    nonScoring: true,
+    affectsGrowthScore: false,
+    affectsAPlus: false,
+    projection: {
+      schemaVersion: "bdfz-yw-formative-mastery-v1",
+      status: "available",
+      unit: "lesson_competency",
+      manifestVersion: formativeManifest.manifestVersion,
+      nonScoring: true,
+      affectsGrowthScore: false,
+      affectsAPlus: false,
+      summary: {
+        lessonCount: lessons.length,
+        competencyUnitCount,
+        completedItems: 0,
+        totalItems,
+        masteryRate: totalItems > 0 ? 0 : null,
+      },
+      lessons,
+    },
+  };
+  const nativeAuthorization = `Bearer ywat_${"n".repeat(43)}`;
+  const nativeCalls = [];
+  const nativeEnv = sourceEnvironment().env;
+  nativeEnv.USER_CENTER_EVIDENCE = {
+    async resolveNativeSession(authorization) {
+      nativeCalls.push(["resolveNativeSession", authorization]);
+      return {
+        schemaVersion: "bdfz-native-auth/1",
+        status: 200,
+        authenticated: true,
+        sourceSiteKey: "yw",
+        clientId: "yuwen-native-android",
+        capability: "data",
+        userId: 42,
+        slug: "native-formative-student",
+        displayName: "Native Formative Student",
+      };
+    },
+    async resolveSession(cookie) {
+      nativeCalls.push(["resolveSession", cookie]);
+      return {
+        authenticated: true,
+        sourceSiteKey: "yw",
+        userId: 42,
+        slug: "native-formative-student",
+        displayName: "Native Formative Student",
+      };
+    },
+    async getNativeFormativeMastery(authorization) {
+      nativeCalls.push(["getNativeFormativeMastery", authorization]);
+      return rpcResult;
+    },
+    async getFormativeMastery(cookie) {
+      nativeCalls.push(["getFormativeMastery", cookie]);
+      return rpcResult;
+    },
+  };
+  const nativeResponse = await worker.fetch(new Request(
+    "https://yw.bdfz.net/api/reading/formative-mastery",
+    {
+      headers: {
+        authorization: nativeAuthorization,
+        cookie: "bdfz_uc_session=native-formative-web-peer",
+      },
+    },
+  ), nativeEnv, {});
+  assert.equal(nativeResponse.status, 200);
+  assert.deepEqual(nativeCalls.map(([method]) => method), [
+    "resolveNativeSession",
+    "resolveSession",
+    "getNativeFormativeMastery",
+  ]);
+  assert.equal(nativeCalls[2][1], nativeAuthorization);
+  assert.doesNotMatch(await nativeResponse.text(), /ywat_/);
+
+  const webCalls = [];
+  const webEnv = sourceEnvironment().env;
+  webEnv.USER_CENTER_EVIDENCE = {
+    async resolveSession(cookie) {
+      webCalls.push(["resolveSession", cookie]);
+      return {
+        authenticated: true,
+        sourceSiteKey: "yw",
+        userId: 42,
+        slug: "web-formative-student",
+        displayName: "Web Formative Student",
+      };
+    },
+    async getFormativeMastery(cookie) {
+      webCalls.push(["getFormativeMastery", cookie]);
+      return rpcResult;
+    },
+  };
+  const webResponse = await worker.fetch(new Request(
+    "https://yw.bdfz.net/api/reading/formative-mastery",
+    { headers: { cookie: "bdfz_uc_session=web-formative-only" } },
+  ), webEnv, {});
+  assert.equal(webResponse.status, 200);
+  assert.deepEqual(webCalls, [
+    ["resolveSession", "bdfz_uc_session=web-formative-only"],
+    ["getFormativeMastery", "bdfz_uc_session=web-formative-only"],
+  ]);
+
+  const unavailableCalls = [];
+  const unavailableEnv = sourceEnvironment().env;
+  unavailableEnv.USER_CENTER_EVIDENCE = {
+    async resolveNativeSession() {
+      return {
+        schemaVersion: "bdfz-native-auth/1",
+        status: 200,
+        authenticated: true,
+        sourceSiteKey: "yw",
+        clientId: "yuwen-native-android",
+        capability: "data",
+        userId: 42,
+        slug: "native-formative-student",
+        displayName: "Native Formative Student",
+      };
+    },
+    async resolveSession() {
+      return {
+        authenticated: true,
+        sourceSiteKey: "yw",
+        userId: 42,
+        slug: "native-formative-student",
+        displayName: "Native Formative Student",
+      };
+    },
+    async getFormativeMastery(cookie) {
+      unavailableCalls.push(cookie);
+      return rpcResult;
+    },
+  };
+  const unavailableResponse = await worker.fetch(new Request(
+    "https://yw.bdfz.net/api/reading/formative-mastery",
+    {
+      headers: {
+        authorization: nativeAuthorization,
+        cookie: "bdfz_uc_session=native-method-absent",
+      },
+    },
+  ), unavailableEnv, {});
+  assert.equal(unavailableResponse.status, 503);
+  assert.deepEqual(unavailableCalls, []);
+});
+
 test("generic learning route preserves the classical prerequisite code and retry shape", async () => {
   invalidateFormativeManifestCache();
   const source = sourceEnvironment({ firstReadSubmitted: false });
