@@ -542,6 +542,122 @@ test("native formative mastery cannot fall back to the Web session RPC", async (
     ["getFormativeMastery", "bdfz_uc_session=web-formative-only"],
   ]);
 
+  const nonNativeCalls = [];
+  const nonNativeEnv = sourceEnvironment().env;
+  nonNativeEnv.USER_CENTER_EVIDENCE = {
+    async resolveSession(cookie) {
+      nonNativeCalls.push(["resolveSession", cookie]);
+      return {
+        authenticated: true,
+        sourceSiteKey: "yw",
+        userId: 42,
+        slug: "non-native-formative-student",
+        displayName: "Non-native Formative Student",
+      };
+    },
+    async getFormativeMastery(cookie) {
+      nonNativeCalls.push(["getFormativeMastery", cookie]);
+      return rpcResult;
+    },
+  };
+  const nonNativeResponse = await worker.fetch(new Request(
+    "https://yw.bdfz.net/api/reading/formative-mastery",
+    {
+      headers: {
+        authorization: "Bearer unrelated",
+        cookie: "bdfz_uc_session=non-native-web-session",
+      },
+    },
+  ), nonNativeEnv, {});
+  assert.equal(nonNativeResponse.status, 200);
+  assert.deepEqual(nonNativeCalls, [
+    ["resolveSession", "bdfz_uc_session=non-native-web-session"],
+    ["getFormativeMastery", "bdfz_uc_session=non-native-web-session"],
+  ]);
+
+  const malformedNativeCalls = [];
+  const malformedNativeEnv = sourceEnvironment().env;
+  malformedNativeEnv.USER_CENTER_EVIDENCE = {
+    async resolveNativeSession() {
+      malformedNativeCalls.push("resolveNativeSession");
+      throw new Error("malformed native authorization must be rejected before RPC");
+    },
+    async resolveSession() {
+      malformedNativeCalls.push("resolveSession");
+      throw new Error("malformed native authorization must not downgrade to Web auth");
+    },
+    async getNativeFormativeMastery() {
+      malformedNativeCalls.push("getNativeFormativeMastery");
+      throw new Error("malformed native authorization must not reach mastery RPC");
+    },
+    async getFormativeMastery() {
+      malformedNativeCalls.push("getFormativeMastery");
+      throw new Error("malformed native authorization must not reach mastery RPC");
+    },
+  };
+  const malformedNativeResponse = await worker.fetch(new Request(
+    "https://yw.bdfz.net/api/reading/formative-mastery",
+    {
+      headers: {
+        authorization: `Bearer ywat_${"m".repeat(42)}`,
+        cookie: "bdfz_uc_session=must-not-authorize-malformed-native",
+      },
+    },
+  ), malformedNativeEnv, {});
+  assert.equal(malformedNativeResponse.status, 401);
+  assert.deepEqual(malformedNativeCalls, []);
+
+  const conflictingIdentityCalls = [];
+  const conflictingIdentityEnv = sourceEnvironment().env;
+  conflictingIdentityEnv.USER_CENTER_EVIDENCE = {
+    async resolveNativeSession(authorization) {
+      conflictingIdentityCalls.push(["resolveNativeSession", authorization]);
+      return {
+        schemaVersion: "bdfz-native-auth/1",
+        status: 200,
+        authenticated: true,
+        sourceSiteKey: "yw",
+        clientId: "yuwen-native-android",
+        capability: "data",
+        userId: 42,
+        slug: "native-conflict-student",
+        displayName: "Native Conflict Student",
+      };
+    },
+    async resolveSession(cookie) {
+      conflictingIdentityCalls.push(["resolveSession", cookie]);
+      return {
+        authenticated: true,
+        sourceSiteKey: "yw",
+        userId: 41,
+        slug: "web-conflict-student",
+        displayName: "Web Conflict Student",
+      };
+    },
+    async getNativeFormativeMastery(authorization) {
+      conflictingIdentityCalls.push(["getNativeFormativeMastery", authorization]);
+      return rpcResult;
+    },
+    async getFormativeMastery(cookie) {
+      conflictingIdentityCalls.push(["getFormativeMastery", cookie]);
+      return rpcResult;
+    },
+  };
+  const conflictingIdentityResponse = await worker.fetch(new Request(
+    "https://yw.bdfz.net/api/reading/formative-mastery",
+    {
+      headers: {
+        authorization: nativeAuthorization,
+        cookie: "bdfz_uc_session=conflicting-web-session",
+      },
+    },
+  ), conflictingIdentityEnv, {});
+  assert.equal(conflictingIdentityResponse.status, 401);
+  assert.deepEqual(conflictingIdentityCalls.map(([method]) => method), [
+    "resolveNativeSession",
+    "resolveSession",
+  ]);
+
   const unavailableCalls = [];
   const unavailableEnv = sourceEnvironment().env;
   unavailableEnv.USER_CENTER_EVIDENCE = {

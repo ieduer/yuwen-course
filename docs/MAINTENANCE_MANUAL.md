@@ -10,24 +10,41 @@ Last reviewed: 2026-08-15 (America/Los_Angeles)
   `site/_worker.js`.
 - After `getReadingStudent` has authenticated and reconciled the stable User
   Center user, formative mastery must still preserve the request's credential
-  class. Cookie-only Web requests call `getFormativeMastery` with the bounded
-  User Center cookie. Exact native authorization calls
-  `getNativeFormativeMastery` with that native authority. A native request
-  never falls back to the Web RPC, even if a same-user cookie is also present.
-- `readingFormativeMasteryRpcDecision` is the single source-side selector.
+  class. Absent or non-native authorization may call Web `resolveSession` and
+  `getFormativeMastery` only with the bounded User Center cookie. Exact native
+  authorization calls `getNativeFormativeMastery` with that native authority.
+  A native request never falls back to the Web RPC, even if a same-user cookie
+  is also present.
+- `nativeAuthorizationDecision` is shared by `getReadingStudent` and
+  `readingFormativeMasteryRpcDecision`. It treats an unrelated Bearer or other
+  authorization scheme as non-native, so a valid Web cookie remains usable.
+  Any header in the case-insensitive `Bearer ywat_` namespace that fails the
+  exact native format is native-looking malformed input: it returns 401 before
+  either identity RPC and cannot downgrade through the cookie. If exact native
+  and Web credentials resolve to different stable User Center ids, the request
+  also remains 401.
+- `readingFormativeMasteryRpcDecision` is the single source-side RPC selector.
   Malformed native authorization returns no method and no credential. If the
   selected named-entrypoint method is unavailable, the Worker returns 503 and
   performs no alternative RPC; it must not reinterpret an infrastructure or
   contract gap as an anonymous student result.
-- User Center main `3e5dbcdc...` does not yet implement the native formative
-  method. This YW draft must stay unmerged and undeployed until a separately
-  owned User Center change defines the exact request/response contract, keeps
-  the existing non-scoring projection byte-compatible, and passes native
-  expiry, revocation, wrong-client, cross-user, malformed-result and sensitive
-  logging tests plus shared-hub review.
+- The reviewed User Center source baseline
+  `80369e7f04ca9b94b32a82cbb6cabfa5ad2f31fa` implements
+  `resolveNativeSession` and cookie-only `getFormativeMastery`, but still does
+  not implement `getNativeFormativeMastery`. This YW draft must stay unmerged
+  and undeployed until a
+  separately owned User Center change defines the exact request/response
+  contract, keeps the existing non-scoring projection byte-compatible, and
+  passes native expiry, revocation, wrong-client, cross-user, malformed-result
+  and sensitive logging tests plus shared-hub review.
 - The change adds no Cloudflare capability, binding, migration or data path.
   It does not authorize User Center, D1, Queue, Pages, App or production work.
   Roll back source with a normal revert of the exact YW commit.
+- Pull-request CI must retain `scripts/test_reading_identity.mjs` in the exact
+  Node 24.18.0/22.21.1 focused matrix alongside the manifest, evidence,
+  preview-binding and assessment suites. Route-level tests must retain the
+  non-native-Web, malformed-native-401, cross-identity-401 and missing native
+  method 503 cases.
 
 ## 2026-08-15 assessment and bounded evaluator-retry contract
 

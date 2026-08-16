@@ -33,7 +33,7 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
       - name: Verify focused learning contracts
-        run: node --test scripts/test_learning_manifest.mjs scripts/test_learning_evidence_contract.mjs scripts/test_preview_binding_isolation.mjs scripts/test_study_guide_assessment.mjs scripts/test_study_guide_frontend.mjs scripts/test_lesson_blueprint_quality.mjs
+        run: node --test scripts/test_learning_manifest.mjs scripts/test_learning_evidence_contract.mjs scripts/test_preview_binding_isolation.mjs scripts/test_reading_identity.mjs scripts/test_study_guide_assessment.mjs scripts/test_study_guide_frontend.mjs scripts/test_lesson_blueprint_quality.mjs
       - name: Verify dedicated precheck binding types
         run: npm run check:precheck-binding-types
       - name: Verify formal Web artifact authority
