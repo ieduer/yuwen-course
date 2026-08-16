@@ -13,6 +13,10 @@ const SUBMISSION_RATE_LIMIT = Object.freeze({
   windowSeconds: 10 * 60,
 });
 const SUBMISSION_RESERVATION_LEASE_SECONDS = 60;
+const SUBMISSION_RATE_LIMIT_REASONS = Object.freeze({
+  windowCapacity: "window_capacity",
+  evaluatorRetryExhausted: "evaluator_retry_exhausted",
+});
 const registryCache = { value: null, expiresAt: 0 };
 const manifestCache = { value: null, expiresAt: 0 };
 const formativeManifestCache = { value: null, expiresAt: 0 };
@@ -47,11 +51,20 @@ const A_PLUS_COMPATIBILITY_KEYS = Object.freeze([
 ]);
 
 export class LearningSubmissionRateLimitError extends Error {
-  constructor(retryAfterSeconds = SUBMISSION_RATE_LIMIT.windowSeconds) {
-    super("提交过于频繁，请稍后继续修改");
+  constructor(
+    retryAfterSeconds = SUBMISSION_RATE_LIMIT.windowSeconds,
+    limitReason = SUBMISSION_RATE_LIMIT_REASONS.windowCapacity,
+  ) {
+    const reason = Object.values(SUBMISSION_RATE_LIMIT_REASONS).includes(limitReason)
+      ? limitReason
+      : SUBMISSION_RATE_LIMIT_REASONS.windowCapacity;
+    super(reason === SUBMISSION_RATE_LIMIT_REASONS.evaluatorRetryExhausted
+      ? "本次答案的两次评阅均未完成，请稍后再试"
+      : "提交过于频繁，请稍后继续修改");
     this.name = "LearningSubmissionRateLimitError";
     this.code = "learning_submission_rate_limited";
     this.retryAfterSeconds = Math.max(1, Number(retryAfterSeconds) || SUBMISSION_RATE_LIMIT.windowSeconds);
+    this.limitReason = reason;
   }
 }
 
@@ -659,7 +672,10 @@ async function enforceSubmissionRateLimit(db, studentId, resourceKey, definition
   const resourceUsed = Math.max(Number(recent?.n || 0), Number(resourceSlots?.n || 0));
   const globalUsed = Math.max(Number(globalRecent?.n || 0), Number(globalSlots?.n || 0));
   if (resourceUsed >= resourceLimit || globalUsed >= globalLimit) {
-    throw new LearningSubmissionRateLimitError(Math.max(1, Math.ceil((windowStartMs + windowMs - windowEndMs) / 1000)));
+    throw new LearningSubmissionRateLimitError(
+      Math.max(1, Math.ceil((windowStartMs + windowMs - windowEndMs) / 1000)),
+      SUBMISSION_RATE_LIMIT_REASONS.windowCapacity,
+    );
   }
   return {
     windowStart,
@@ -735,6 +751,8 @@ async function reuseOrWaitForSubmissionSlot(
     windowStart,
     resourceSlotNo: Number(slot.resource_slot_no),
     globalSlotNo: Number(slot.global_slot_no),
+    leaseStartedAt: String(slot.created_at || ""),
+    reclaimed: submissionSlotWasReclaimed(slot.created_at),
   };
   if (Number(slot.interaction_committed) === 1) return { ...reservation, committed: true };
 
@@ -751,7 +769,10 @@ async function reuseOrWaitForSubmissionSlot(
   if (submissionSlotWasReclaimed(slot.created_at)) {
     const windowEndMs = reservationTimestampMs(windowStart)
       + SUBMISSION_RATE_LIMIT.windowSeconds * 1000;
-    throw new LearningSubmissionRateLimitError(Math.max(1, Math.ceil((windowEndMs - nowMs) / 1000)));
+    throw new LearningSubmissionRateLimitError(
+      Math.max(1, Math.ceil((windowEndMs - nowMs) / 1000)),
+      SUBMISSION_RATE_LIMIT_REASONS.evaluatorRetryExhausted,
+    );
   }
 
   const leaseStartedAt = reservationLeaseTimestamp(nowMs, true);
@@ -768,7 +789,7 @@ async function reuseOrWaitForSubmissionSlot(
         )`
   ).bind(leaseStartedAt, sourceEventId, slot.created_at, leaseStartedAt).run();
   if (Number(claimed?.meta?.changes || 0) === 1) {
-    return { ...reservation, reclaimed: true };
+    return { ...reservation, leaseStartedAt, reclaimed: true };
   }
 
   const current = await readSubmissionSlot(db, sourceEventId);
@@ -818,6 +839,7 @@ async function reserveSubmissionSlot(
     definition,
     occurredAt,
   );
+  const leaseStartedAt = reservationLeaseTimestamp(Number.isFinite(occurredAtMs) ? occurredAtMs : Date.now());
   try {
     await db.prepare(
       `INSERT INTO learning_submission_slots (
@@ -830,7 +852,7 @@ async function reserveSubmissionSlot(
       rateReservation.windowStart,
       rateReservation.resourceSlotNo,
       rateReservation.globalSlotNo,
-      reservationLeaseTimestamp(Number.isFinite(occurredAtMs) ? occurredAtMs : Date.now()),
+      leaseStartedAt,
     ).run();
   } catch (error) {
     if (isUniqueConstraintError(error)) {
@@ -860,7 +882,7 @@ async function reserveSubmissionSlot(
     }
     throw error;
   }
-  return { sourceEventId, ...rateReservation };
+  return { sourceEventId, ...rateReservation, leaseStartedAt, reclaimed: false };
 }
 
 function assertTrustedSubmissionReservation(
@@ -1001,6 +1023,8 @@ export async function assertLearningSubmissionAllowed({
   const submissionReservation = {
     sourceEventId: slot.sourceEventId,
     occurredAt,
+    leaseStartedAt: slot.leaseStartedAt,
+    reclaimed: slot.reclaimed === true,
     studentId: Number(student.id),
     lessonId: lesson.id,
     interactionKey,
@@ -1020,6 +1044,45 @@ export async function assertLearningSubmissionAllowed({
     deduped: false,
     resourceKey: context.resourceKey,
     submissionReservation,
+  };
+}
+
+export async function releaseLearningSubmissionReservation({ env, submissionReservation }) {
+  if (!env?.READING_DB
+    || !submissionReservation
+    || !trustedSubmissionReservations.has(submissionReservation)) {
+    throw new Error("learning submission reservation release invalid");
+  }
+  const leaseStartedAt = clean(submissionReservation.leaseStartedAt, 40);
+  const leaseStartedAtMs = reservationTimestampMs(leaseStartedAt);
+  if (!Number.isFinite(leaseStartedAtMs)
+    || submissionReservation.sourceEventId !== clean(submissionReservation.sourceEventId, 100)) {
+    throw new Error("learning submission reservation lease invalid");
+  }
+  const reclaimed = submissionReservation.reclaimed === true || submissionSlotWasReclaimed(leaseStartedAt);
+  const expiredLeaseAt = reservationLeaseTimestamp(
+    leaseStartedAtMs - (SUBMISSION_RESERVATION_LEASE_SECONDS + 1) * 1000,
+    reclaimed,
+  );
+  const released = await env.READING_DB.prepare(
+    `UPDATE learning_submission_slots
+        SET created_at = ?
+      WHERE source_event_id = ?
+        AND created_at = ?
+        AND NOT EXISTS (
+          SELECT 1 FROM learning_interactions interaction
+           WHERE interaction.source_event_id = learning_submission_slots.source_event_id
+        )`
+  ).bind(expiredLeaseAt, submissionReservation.sourceEventId, leaseStartedAt).run();
+  trustedSubmissionReservations.delete(submissionReservation);
+  const changed = Number(released?.meta?.changes || 0) === 1;
+  const windowEndMs = reservationTimestampMs(submissionReservation.rateReservation?.windowStart)
+    + SUBMISSION_RATE_LIMIT.windowSeconds * 1000;
+  const occurredAtMs = reservationTimestampMs(submissionReservation.occurredAt);
+  return {
+    released: changed,
+    evaluatorAttemptsExhausted: reclaimed && changed,
+    retryAfterSeconds: Math.max(1, Math.ceil((windowEndMs - occurredAtMs) / 1000)),
   };
 }
 
@@ -1418,5 +1481,6 @@ export const learningEvidenceContract = Object.freeze({
   sourceSiteKey: SOURCE_SITE_KEY,
   academicYearFor,
   submissionRateLimit: SUBMISSION_RATE_LIMIT,
+  submissionRateLimitReasons: SUBMISSION_RATE_LIMIT_REASONS,
   submissionReservationLeaseSeconds: SUBMISSION_RESERVATION_LEASE_SECONDS,
 });

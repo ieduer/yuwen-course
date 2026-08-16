@@ -2803,6 +2803,24 @@ function interactionEvidenceDecision(status, score) {
   return { accepted: false, recorded: false, completed: false, evidenceStatus: "unavailable" };
 }
 
+function learningSubmissionRetryMessage(code, retryAfterSeconds = 0, limitReason = "") {
+  const wait = Number(retryAfterSeconds) > 0 ? Number(retryAfterSeconds) : 0;
+  if (code === "learning_submission_in_progress") {
+    return wait
+      ? `上一次提交仍在評閱中，請 ${wait} 秒後用同一答案重試`
+      : "上一次提交仍在評閱中，請稍後用同一答案重試";
+  }
+  if (code === "learning_submission_rate_limited") {
+    if (limitReason === "evaluator_retry_exhausted") {
+      return wait
+        ? `本次答案的兩次評閱均未完成，請 ${wait} 秒後再試`
+        : "本次答案的兩次評閱均未完成，請稍後再試";
+    }
+    return wait ? `提交較頻繁，請 ${wait} 秒後再試` : "提交較頻繁，請稍後再試";
+  }
+  return "";
+}
+
 async function submitInteraction(key, button = null, { silent = false } = {}) {
   const input = interactionInput(key);
   const compactLength = interactionInputLength(input);
@@ -2846,6 +2864,7 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
       const error = new Error(payload.error || `評估失敗 ${response.status}`);
       error.code = String(payload.code || "");
       error.retryAfterSeconds = Number(payload.retryAfterSeconds || 0);
+      error.limitReason = String(payload.limitReason || "");
       throw error;
     }
     const result = payload.assessment || {};
@@ -2882,8 +2901,8 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     if (!silent) {
       if (error.code === "authenticated_evaluation_required") {
         toast("請先登入 My，再提交並記錄本次學習證據");
-      } else if (error.code === "learning_submission_in_progress" && error.retryAfterSeconds > 0) {
-        toast(`上一次提交仍在評閱中，請 ${error.retryAfterSeconds} 秒後用同一答案重試`);
+      } else if (["learning_submission_in_progress", "learning_submission_rate_limited"].includes(error.code)) {
+        toast(learningSubmissionRetryMessage(error.code, error.retryAfterSeconds, error.limitReason));
       } else {
         toast(error.message || "暫時無法完成評估");
       }
@@ -2973,6 +2992,7 @@ async function submitStudyGuideAttempt({ lessonId, itemKey, response, referenceR
         status: result.status,
         code: payload.code || "",
         retryAfterSeconds: Number(payload.retryAfterSeconds) || null,
+        limitReason: String(payload.limitReason || ""),
         reason: payload.error || (result.status === 401 ? "anonymous" : `http-${result.status}`),
       };
     }
@@ -3073,9 +3093,16 @@ function bindCheckStage() {
         classical_first_read_required: "請先完成無標點初讀，再回來核對本題。",
         classical_annotated_reading_required: "請先讀完帶註釋正文，再回來核對本題。",
         study_guide_catalog_changed: "題目版本已更新，請重新載入後作答。",
-        learning_submission_in_progress: result?.retryAfterSeconds
-          ? `上一次提交仍在評閱中，請 ${result.retryAfterSeconds} 秒後用同一答案重試。`
-          : "上一次提交仍在評閱中，請稍後用同一答案重試。",
+        learning_submission_in_progress: learningSubmissionRetryMessage(
+          result?.code,
+          result?.retryAfterSeconds,
+          result?.limitReason,
+        ),
+        learning_submission_rate_limited: learningSubmissionRetryMessage(
+          result?.code,
+          result?.retryAfterSeconds,
+          result?.limitReason,
+        ),
       }[result?.code];
       toast(gateMessage || (result?.status === 401
         ? "參考答案已顯示；登入後可重試形成性評閱"

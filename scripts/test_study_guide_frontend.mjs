@@ -68,8 +68,22 @@ test("AI interaction feedback is accepted only with a durable My evidence receip
   assert.match(submission, /authenticated_evaluation_required/);
   assert.match(submission, /請先登入 My/);
   assert.match(submission, /learning_submission_in_progress/);
+  assert.match(submission, /learning_submission_rate_limited/);
   assert.match(submission, /retryAfterSeconds/);
+  assert.match(submission, /limitReason/);
   assert.match(submission, /interactionMutationIds\.get\(mutationKey\)/);
   assert.match(submission, /interactionMutationIds\.set\(mutationKey, clientMutationId\)/);
   assert.match(submission, /interactionMutationIds\.delete\(mutationKey\)/);
+});
+
+test("interaction and study-guide retry messages distinguish active work from exhausted evaluation", () => {
+  const retryMessage = section("function learningSubmissionRetryMessage", "async function submitInteraction");
+  assert.match(retryMessage, /learning_submission_in_progress/);
+  assert.match(retryMessage, /learning_submission_rate_limited/);
+  assert.match(retryMessage, /evaluator_retry_exhausted/);
+  assert.match(retryMessage, /兩次評閱均未完成/);
+  assert.match(retryMessage, /提交較頻繁/);
+  const studyGuideSubmission = section("function bindCheckStage", "function openLexicon");
+  assert.match(studyGuideSubmission, /learning_submission_rate_limited/);
+  assert.match(studyGuideSubmission, /learningSubmissionRetryMessage/);
 });
