@@ -2,6 +2,30 @@
 
 Last updated: 2026-08-15
 
+## 2026-08-15 downstream textbook derivation contract and freeze
+
+- `docs/TEXTBOOK_DERIVATION_CONTRACT.md` now records the exact source-only
+  interface from YW textbook lessons to FLX, Gaokao Wenyan, Gaokao Sanwen and
+  Shici. Current baselines are 18 / 22 / 9 / 37 derived items; the two question
+  corpora contain 110 / 45 questions. The contract binds the exact YW lesson
+  blobs, consumer source pins, generator/output ownership and the rule that a
+  true-paper generator must never write a textbook corpus.
+- The Gaokao Wenyan and Gaokao Sanwen separation fixes are committed and pushed
+  on exact release branches, but they are not on canonical `main`; both current
+  mains still let `scripts/build_data.mjs` write `public/data/corpus.json`.
+  Canonical YW-to-downstream reprojection therefore remains `NO-TOUCH`. Do not
+  run a consumer build from those mains or from another task's worktree.
+- `/Users/ylsuen/CF/yuwen-course` remains a non-authoritative historical dirty
+  checkout at `756e51646d5fbf4306471de6ca4826f463b3d9df`. Its modified `AGENTS.md`
+  and untracked `docs/OPERATIONS.md` are preserved; remote `main` has no
+  accepted `docs/OPERATIONS.md`. The workspace resource index also still cites
+  an older User Center v242 fact while live is the v251 rollback. Those facts
+  require separate operations-documentation review and are not repaired or
+  promoted by this source-only contract.
+- This documentation adds no generator run, corpus write, artifact rebuild,
+  APIS call, User Center/Queue/D1/App change or deployment. Rollback is a normal
+  revert of the contract commit; all existing consumer data remains intact.
+
 ## 2026-08-15 combined assessment, retry and native formative source draft
 
 - This source-only draft starts from canonical main

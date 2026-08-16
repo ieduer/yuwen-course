@@ -2,6 +2,23 @@
 
 Last reviewed: 2026-08-15 (America/Los_Angeles)
 
+## Downstream textbook derivation freeze
+
+The exact ownership map, source pins, lesson-selection digests and release gate
+are in `docs/TEXTBOOK_DERIVATION_CONTRACT.md`. Operators must treat the current
+transaction as `NO-TOUCH`: do not run FLX, Gaokao Wenyan, Gaokao Sanwen or Shici
+generators from a canonical dirty worktree or from current Gaokao Wenyan /
+Gaokao Sanwen `main`. Their safe `zhenti.json` separation fixes are remotely
+durable only on the pinned release branches and have not reached canonical
+`main`.
+
+Before any future reprojection, use clean isolated exact-pinned checkouts,
+recompute the YW lesson-selection digests, prove the opposite corpus byte hash
+is unchanged, compare ids/counts offline without APIS, and close all four
+consumer dispositions under one shared `change_id`. Documentation or source
+success never authorizes deployment, User Center delivery, D1/Queue mutation,
+App publication or A--F acceptance.
+
 ## 2026-08-15 combined assessment, retry and native formative source draft
 
 - Native reading identity remains owned by the accepted
