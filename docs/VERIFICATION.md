@@ -1,6 +1,6 @@
 # 核查標準 / Verification Standard
 
-## 2026-08-15 prelaunch assessment/reservation correctness
+## 2026-08-15 assessment, retry and anonymous-AI source gate
 
 Run the complete source gate and focused contract matrix under both exact Node
 authorities:
@@ -11,7 +11,9 @@ PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
   node --test scripts/test_learning_manifest.mjs \
   scripts/test_learning_evidence_contract.mjs \
   scripts/test_preview_binding_isolation.mjs \
-  scripts/test_study_guide_assessment.mjs
+  scripts/test_study_guide_assessment.mjs \
+  scripts/test_study_guide_frontend.mjs \
+  scripts/test_lesson_blueprint_quality.mjs
 
 mkdir -p /private/tmp/yw-node22-exact-bin
 test -L /private/tmp/yw-node22-exact-bin/node || \
@@ -23,7 +25,9 @@ PATH=/private/tmp/yw-node22-exact-bin:/usr/local/libexec/bdfz-release/npm-v11.6.
   scripts/test_learning_manifest.mjs \
   scripts/test_learning_evidence_contract.mjs \
   scripts/test_preview_binding_isolation.mjs \
-  scripts/test_study_guide_assessment.mjs
+  scripts/test_study_guide_assessment.mjs \
+  scripts/test_study_guide_frontend.mjs \
+  scripts/test_lesson_blueprint_quality.mjs
 
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:release-site
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:release-site
@@ -32,35 +36,39 @@ PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:artifact-
 git diff --check
 ```
 
-The focused gate must prove adjacent and fullwidth choice input, explanation
-pollution rejection, prefixed single-choice list/alternative rejection,
-circled/Arabic equivalence, traditional/simplified and space segmentation
-parity, and catalog-unavailable fail-closed completion. For
-the evaluator lease it must prove ten simultaneous initial requests admit one
-evaluator, ten simultaneous stale retries admit one reclaim, the second expiry
-cannot call the evaluator again, and a late original plus reclaim produce one
-immutable ledger set and one Queue send. Receipt reconciliation must use shared
-D1 state so twenty independent environments produce one User Center RPC inside
-the 15-minute window and exactly one new RPC after expiry.
+The focused gate must prove all 46 source-owned response fixtures, including
+the required simplified/traditional single-choice forms, explanation-letter
+pollution, the known ambiguous tradeoff and circled-glyph display. It must prove
+that the first evaluator-stage failure releases only the exact initial lease,
+one of ten immediate contenders reuses the same slot/event, the second failure
+keeps `.001Z` and blocks a third evaluator, and recording failures never release.
+Both browser retry surfaces must preserve reason plus retry seconds. Retired
+chat and learning-check routes must spend zero APIS calls; every one of 189
+lesson blueprints must remain deterministic and text-anchored with zero APIS.
+Existing receipt reconciliation, late-original immutability and Queue hostile
+checks remain required.
 
-Completed source evidence on 2026-08-15: the focused matrix passed 57/57 on
-Node 24.18.0 and 57/57 on Node 22.21.1; complete `precontent:check` passed on
-both exact runtimes, including Reading API 70/70, native-content 22/22 and
-release-site 5/5. Formal build/check produced 1,223 files / 164,376,983 bytes,
-projected aggregate
-`5b86646b8f7e755598598372406ee9d42ae57c61c4edc87eb59ed42e322bea89`,
+Completed local source evidence on 2026-08-15: exact Node 24.18.0 and 22.21.1
+each passed the complete `precontent:check`; the focused PR matrix passed 76/76,
+Reading API 70/70, native content 22/22 and release-site 5/5 on each runtime.
+The native test used 693 exact page files restored from the accepted
+path-preserving Drive archive; `rclone check --checksum --one-way` reported
+693 matches and zero differences, and the native builder independently checked
+every referenced SHA-256 against the canonical page inventory.
+
+Formal build/check produced 1,223 files / 164,377,105 bytes, projected aggregate
+`cf14869373cd12fa81e969e24737f5986a86c4558b7e45554f5b69c485f519eb`,
 artifact aggregate
-`b98548e130ff13ee407e09cb7102a253f7472c0920ed4cd5e398c9caf807d9ac`
+`758433ad9a75c7af87e9c0d5b4ea54ae69ef2472f1a20c995a0f5657ed32531c`
 and tracked manifest byte SHA-256
-`ed35eaab78d6411a20c140b5b15704207f2ecb0bb7af4c2bde397f7494066b23`.
-
+`e7ef2b0c60db7661fb41c564ee13c7b0008362d31fa71ff5ac1e0a79a7fa9948`.
 Catalog, formative manifest, learning manifest and App pointer byte SHA-256
 remain `4ac9e223be27316aa5324ab5c9b474e378f61ec703ac9140b590e1a42c3c89d0`,
 `1307286d4dd9f1e687553a30c4f87d5403fe237cac56727400233abfac36d334`,
 `2a6824db45cac416c4aee3a95ce83aba5be393b6a94034799d6d18cb56f9f998`
 and `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
-No semantic revision, schema, deployment, D1 row, Queue message, User Center
-state, production traffic or App pointer changed.
+No focused green result by itself authorizes a deployment, migration,
+Queue/config mutation, User Center write or production claim.
 
 For the local Node 22 full-suite command, `/private/tmp/yw-node22-exact-bin/node`
 was a task-local symlink to

@@ -14,6 +14,7 @@ import {
   learningEvidenceContract,
   OUTBOX_RECONCILE_SELECTION_SQL,
   OUTBOX_RETRY_SELECTION_SQL,
+  releaseLearningSubmissionReservation,
   assertLearningSubmissionAllowed,
   invalidateFormativeManifestCache,
   reconcileEvidenceOutbox,
@@ -298,6 +299,21 @@ function assertSynchronizedIneligibleAttempt(result, queued, writes) {
   assert.equal(queued[0].envelope.eligibilityStatus, "ineligible");
 }
 
+test("submission rate responses distinguish capacity from evaluator retry exhaustion", () => {
+  const capacity = new LearningSubmissionRateLimitError(17, "window_capacity");
+  const exhausted = new LearningSubmissionRateLimitError(29, "evaluator_retry_exhausted");
+  assert.equal(capacity.code, "learning_submission_rate_limited");
+  assert.equal(capacity.limitReason, "window_capacity");
+  assert.equal(capacity.retryAfterSeconds, 17);
+  assert.match(capacity.message, /提交过于频繁/);
+  assert.equal(exhausted.code, "learning_submission_rate_limited");
+  assert.equal(exhausted.limitReason, "evaluator_retry_exhausted");
+  assert.equal(exhausted.retryAfterSeconds, 29);
+  assert.match(exhausted.message, /两次评阅/);
+  assert.match(workerSource, /limitReason: error\?\.limitReason \|\| "window_capacity"/);
+  assert.match(workerSource, /releaseAfterEvaluatorFailure/);
+});
+
 test("current formal resources publish one exact e310/v2 source contract with complete lineage", () => {
   const compatibility = registry.compatibilityContracts.aPlusGate;
   assert.equal(compatibility.contractVersion, "yw-aplus-e310-v2");
@@ -554,7 +570,7 @@ test("the Worker checks the per-user resource bound before AI work and vocabular
 
   const apisPrompt = workerSource.slice(
     workerSource.indexOf("async function callApisPrompt"),
-    workerSource.indexOf("async function callApisGateway"),
+    workerSource.indexOf("// ---------------- 閱讀星圖"),
   );
   assert.match(apisPrompt, /AbortController/);
   assert.match(apisPrompt, /20_000/);
@@ -589,6 +605,232 @@ test("the Worker checks the per-user resource bound before AI work and vocabular
   );
   assert.match(workerSource, /status:\s*429/);
   assert.match(workerSource, /"retry-after"/);
+});
+
+test("retired public evaluators spend no APIS calls and learning-check keeps My authentication", async () => {
+  const originalFetch = globalThis.fetch;
+  let fetchCalls = 0;
+  globalThis.fetch = async () => {
+    fetchCalls += 1;
+    throw new Error("retired public evaluator must not call APIS");
+  };
+  try {
+    const chat = await worker.fetch(new Request("https://yw.bdfz.net/api/chat", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ messages: [{ role: "user", content: "請解釋" }] }),
+    }), {});
+    assert.equal(chat.status, 410);
+    assert.equal((await chat.json()).code, "legacy_chat_retired");
+
+    const anonymous = await worker.fetch(new Request("https://yw.bdfz.net/api/learning-check", {
+      method: "POST",
+    }), {});
+    assert.equal(anonymous.status, 401);
+    assert.equal((await anonymous.json()).code, "authenticated_evaluation_required");
+
+    const authenticatedSource = sourceEnvironment();
+    authenticatedSource.env.READING_TEST_SLUG = "retired-learning-check-test";
+    const authenticated = await worker.fetch(new Request("https://yw.bdfz.net/api/learning-check", {
+      method: "POST",
+    }), authenticatedSource.env);
+    assert.equal(authenticated.status, 410);
+    assert.equal((await authenticated.json()).code, "untracked_learning_check_retired");
+    assert.equal(fetchCalls, 0);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("an evaluator outage permits one immediate same-answer route retry without another slot", async () => {
+  const db = new DatabaseSync(":memory:");
+  const originalFetch = globalThis.fetch;
+  try {
+    initializeLearningContractDb(db);
+    const siteManifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/manifest.json"), "utf8"));
+    const lessonData = JSON.parse(readFileSync(resolve(ROOT, "site/data/lessons/lesson-1497.json"), "utf8"));
+    const queued = [];
+    const env = {
+      READING_TEST_SLUG: "route-evaluator-retry",
+      READING_DB: sqliteD1(db),
+      LEARNING_EVIDENCE_QUEUE: {
+        async send(envelope, options) { queued.push({ envelope, options }); },
+      },
+      ASSETS: {
+        async fetch(request) {
+          const pathname = new URL(request.url).pathname;
+          if (pathname === "/data/manifest.json") return Response.json(siteManifest);
+          if (pathname === "/data/lessons/lesson-1497.json") return Response.json(lessonData);
+          if (pathname === "/data/interaction-definitions.json") return Response.json(registry);
+          if (pathname === "/data/learning-manifest.json") return Response.json(manifest);
+          if (pathname === "/data/lesson-competency-manifest.json") return Response.json(formativeManifest);
+          return new Response("not found", { status: 404 });
+        },
+      },
+    };
+    let evaluatorCalls = 0;
+    let evaluatorMode = "outage-once";
+    globalThis.fetch = async () => {
+      evaluatorCalls += 1;
+      if (evaluatorMode === "outage-once" && evaluatorCalls === 1) {
+        throw new Error("simulated evaluator outage");
+      }
+      if (evaluatorMode === "non-json") return Response.json({ answer: "not-json" });
+      if (evaluatorMode === "invalid-normalized") {
+        return Response.json({ answer: JSON.stringify({
+          score: "82",
+          verdict: "格式錯誤",
+          strength: "格式錯誤",
+          gap: "格式錯誤",
+          nextQuestion: "格式錯誤",
+        }) });
+      }
+      return Response.json({
+        answer: JSON.stringify({
+          score: 82,
+          verdict: "已完成評閱。",
+          strength: "能用新學詞造句。",
+          gap: "還可補充語境。",
+          nextQuestion: "這個詞在原句中有何語氣？",
+        }),
+      });
+    };
+    const request = (clientMutationId = "route-immediate-evaluator-retry") => new Request("https://yw.bdfz.net/api/interaction-check", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        lessonId: "lesson-1497",
+        interaction: "wordCreation",
+        mode: "poetry",
+        input: {
+          word: "同袍",
+          creation: "風雪同行，彼此如同袍般守望。",
+        },
+        clientMutationId,
+      }),
+    });
+
+    const failed = await worker.fetch(request(), env, {});
+    assert.equal(failed.status, 502);
+    assert.match((await failed.json()).error, /simulated evaluator outage/);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 0);
+
+    const retried = await worker.fetch(request(), env, {});
+    const retriedBody = await retried.json();
+    assert.equal(retried.status, 200);
+    assert.equal(retriedBody.assessment.score, 82);
+    assert.equal(evaluatorCalls, 2);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 1);
+    assert.ok(queued.length <= 1, "the retry cannot enqueue more than one evidence envelope");
+
+    const replay = await worker.fetch(request(), env, {});
+    assert.equal(replay.status, 200);
+    assert.equal((await replay.json()).deduped, true);
+    assert.equal(evaluatorCalls, 2);
+
+    evaluatorMode = "non-json";
+    const nonJson = await worker.fetch(request("route-non-json-evaluator-retry"), env, {});
+    assert.equal(nonJson.status, 502);
+    assert.match((await nonJson.json()).error, /格式無效/);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 2);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 1);
+
+    evaluatorMode = "invalid-normalized";
+    const invalidNormalized = await worker.fetch(request("route-invalid-normalized-evaluator-retry"), env, {});
+    assert.equal(invalidNormalized.status, 502);
+    assert.match((await invalidNormalized.json()).error, /分數無效/);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 3);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 1);
+  } finally {
+    globalThis.fetch = originalFetch;
+    db.close();
+  }
+});
+
+test("a ledger recording failure keeps the evaluator lease live and blocks another APIS call", async () => {
+  const db = new DatabaseSync(":memory:");
+  const originalFetch = globalThis.fetch;
+  try {
+    initializeLearningContractDb(db);
+    const siteManifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/manifest.json"), "utf8"));
+    const lessonData = JSON.parse(readFileSync(resolve(ROOT, "site/data/lessons/lesson-1497.json"), "utf8"));
+    const d1 = sqliteD1(db);
+    const env = {
+      READING_TEST_SLUG: "route-recording-failure",
+      READING_DB: {
+        prepare: d1.prepare.bind(d1),
+        async batch() {
+          throw new Error("simulated ledger record failure");
+        },
+      },
+      LEARNING_EVIDENCE_QUEUE: {
+        async send() {
+          throw new Error("record failure must occur before queue delivery");
+        },
+      },
+      ASSETS: {
+        async fetch(request) {
+          const pathname = new URL(request.url).pathname;
+          if (pathname === "/data/manifest.json") return Response.json(siteManifest);
+          if (pathname === "/data/lessons/lesson-1497.json") return Response.json(lessonData);
+          if (pathname === "/data/interaction-definitions.json") return Response.json(registry);
+          if (pathname === "/data/learning-manifest.json") return Response.json(manifest);
+          if (pathname === "/data/lesson-competency-manifest.json") return Response.json(formativeManifest);
+          return new Response("not found", { status: 404 });
+        },
+      },
+    };
+    let evaluatorCalls = 0;
+    globalThis.fetch = async () => {
+      evaluatorCalls += 1;
+      return Response.json({
+        answer: JSON.stringify({
+          score: 82,
+          verdict: "已完成評閱。",
+          strength: "能用新學詞造句。",
+          gap: "還可補充語境。",
+          nextQuestion: "這個詞在原句中有何語氣？",
+        }),
+      });
+    };
+    const request = () => new Request("https://yw.bdfz.net/api/interaction-check", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        lessonId: "lesson-1497",
+        interaction: "wordCreation",
+        mode: "poetry",
+        input: {
+          word: "同袍",
+          creation: "風雪同行，彼此如同袍般守望。",
+        },
+        clientMutationId: "route-ledger-recording-failure",
+      }),
+    });
+
+    const failed = await worker.fetch(request(), env, {});
+    assert.equal(failed.status, 502);
+    assert.match((await failed.json()).error, /simulated ledger record failure/);
+    assert.equal(evaluatorCalls, 1);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 0);
+    assert.match(
+      db.prepare("SELECT created_at FROM learning_submission_slots").get().created_at,
+      /\.000Z$/,
+    );
+
+    const immediateRetry = await worker.fetch(request(), env, {});
+    const retryBody = await immediateRetry.json();
+    assert.equal(immediateRetry.status, 409);
+    assert.equal(retryBody.code, "learning_submission_in_progress");
+    assert.equal(evaluatorCalls, 1);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 0);
+  } finally {
+    globalThis.fetch = originalFetch;
+    db.close();
+  }
 });
 
 test("YW evaluation self-report remains a v2 non-scoring event", async () => {
@@ -1530,6 +1772,105 @@ test("ten-way initial and abandoned-lease races admit only one evaluator each", 
   }
 });
 
+test("an evaluator failure releases one slot for one immediate retry and then exhausts safely", async () => {
+  const db = new DatabaseSync(":memory:");
+  try {
+    initializeLearningContractDb(db);
+    const source = sourceEnvironment();
+    source.env.READING_DB = sqliteD1(db);
+    const request = new Request("https://yw.bdfz.net/api/interaction-check");
+    const student = { id: 7, ucUserId: 42 };
+    const payload = {
+      word: "站立",
+      creation: "同一答案評閱失敗後只重用原有的提交槽。",
+      clientMutationId: "immediate-evaluator-retry",
+    };
+    const initial = await assertLearningSubmissionAllowed({
+      request,
+      env: source.env,
+      student,
+      lesson: wordCreationLesson,
+      interactionKey: "wordCreation",
+      payload,
+      occurredAt: "2026-08-13T22:00:00.000Z",
+    });
+    const releases = await Promise.all(Array.from(
+      { length: 10 },
+      () => releaseLearningSubmissionReservation({
+        env: source.env,
+        submissionReservation: initial.submissionReservation,
+      }),
+    ));
+    assert.equal(releases.filter((result) => result.released).length, 1);
+    assert.ok(releases.every((result) => result.evaluatorAttemptsExhausted === false));
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
+    assert.match(
+      db.prepare("SELECT created_at FROM learning_submission_slots").get().created_at,
+      /\.000Z$/,
+    );
+
+    const retryContenders = await Promise.allSettled(Array.from(
+      { length: 10 },
+      () => assertLearningSubmissionAllowed({
+        request,
+        env: source.env,
+        student,
+        lesson: wordCreationLesson,
+        interactionKey: "wordCreation",
+        payload,
+        occurredAt: "2026-08-13T22:00:00.001Z",
+      }),
+    ));
+    const admitted = retryContenders.find((result) => result.status === "fulfilled")?.value;
+    assert.ok(admitted);
+    assert.equal(retryContenders.filter((result) => result.status === "fulfilled").length, 1);
+    assert.ok(retryContenders
+      .filter((result) => result.status === "rejected")
+      .every((result) => result.reason instanceof LearningSubmissionInProgressError));
+    assert.equal(admitted.submissionReservation.reclaimed, true);
+    assert.match(admitted.submissionReservation.leaseStartedAt, /\.001Z$/);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
+
+    const secondFailure = await releaseLearningSubmissionReservation({
+      env: source.env,
+      submissionReservation: admitted.submissionReservation,
+    });
+    assert.deepEqual(secondFailure, {
+      released: true,
+      evaluatorAttemptsExhausted: true,
+      retryAfterSeconds: 600,
+    });
+    await assert.rejects(
+      assertLearningSubmissionAllowed({
+        request,
+        env: source.env,
+        student,
+        lesson: wordCreationLesson,
+        interactionKey: "wordCreation",
+        payload,
+        occurredAt: "2026-08-13T22:00:00.002Z",
+      }),
+      (error) => error instanceof LearningSubmissionRateLimitError
+        && error.limitReason === "evaluator_retry_exhausted",
+    );
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 0);
+    await assert.rejects(
+      releaseLearningSubmissionReservation({
+        env: source.env,
+        submissionReservation: initial.submissionReservation,
+      }),
+      /release invalid/,
+    );
+    assert.match(
+      db.prepare("SELECT created_at FROM learning_submission_slots").get().created_at,
+      /\.001Z$/,
+    );
+  } finally {
+    db.close();
+  }
+});
+
 test("a late original and reclaimed evaluator commit one immutable ledger set", async () => {
   const db = new DatabaseSync(":memory:");
   try {
@@ -1601,6 +1942,66 @@ test("a late original and reclaimed evaluator commit one immutable ledger set", 
       assert.equal(db.prepare(`SELECT COUNT(*) AS n FROM ${table}`).get().n, 1, table);
     }
     assert.equal(source.queued.length, 1);
+  } finally {
+    db.close();
+  }
+});
+
+test("a reclaimed evaluator failure does not claim exhaustion after the original commits", async () => {
+  const db = new DatabaseSync(":memory:");
+  try {
+    initializeLearningContractDb(db);
+    const source = sourceEnvironment();
+    source.env.READING_DB = sqliteD1(db);
+    const request = new Request("https://yw.bdfz.net/api/interaction-check");
+    const student = { id: 7, ucUserId: 42 };
+    const payload = {
+      word: "站立",
+      creation: "原請求成功後，回收請求不可誤報兩次評閱都失敗。",
+      clientMutationId: "late-original-before-reclaimed-failure",
+    };
+    const original = await assertLearningSubmissionAllowed({
+      request,
+      env: source.env,
+      student,
+      lesson: wordCreationLesson,
+      interactionKey: "wordCreation",
+      payload,
+      occurredAt: "2026-08-13T22:00:00.000Z",
+    });
+    const reclaimed = await assertLearningSubmissionAllowed({
+      request,
+      env: source.env,
+      student,
+      lesson: wordCreationLesson,
+      interactionKey: "wordCreation",
+      payload,
+      occurredAt: "2026-08-13T22:01:01.000Z",
+    });
+
+    await recordLearningInteraction({
+      request,
+      env: source.env,
+      student,
+      lesson: wordCreationLesson,
+      interactionKey: "wordCreation",
+      payload,
+      evaluation: {
+        score: 80,
+        correctness: "passed",
+        provider: "apis",
+        verdict: "passed",
+      },
+      submissionReservation: original.submissionReservation,
+    });
+    const lateFailure = await releaseLearningSubmissionReservation({
+      env: source.env,
+      submissionReservation: reclaimed.submissionReservation,
+    });
+    assert.equal(lateFailure.released, false);
+    assert.equal(lateFailure.evaluatorAttemptsExhausted, false);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 1);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
   } finally {
     db.close();
   }
