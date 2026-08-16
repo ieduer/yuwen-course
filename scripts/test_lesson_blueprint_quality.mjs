@@ -107,24 +107,19 @@ test("normalizer rejects author impersonation and accepts only anchored mode-spe
   assert.deepEqual(normalizeLessonBlueprint({ structureFocus: acceptedText }, context), { structureFocus: acceptedText });
 });
 
-test("lesson-blueprint endpoint fails closed to deterministic prompt when APIS returns the old template", async () => {
+test("lesson-blueprint endpoint is deterministic and never spends anonymous APIS capacity", async () => {
   const originalFetch = globalThis.fetch;
   const originalCaches = globalThis.caches;
-  const cache = new Map();
-  let sentPrompt = "";
+  let fetchCalls = 0;
   globalThis.caches = {
     default: {
-      async match(request) { return cache.get(request.url) || null; },
-      async put(request, response) { cache.set(request.url, response); },
+      async match() { throw new Error("deterministic blueprint must not read runtime cache"); },
+      async put() { throw new Error("deterministic blueprint must not write runtime cache"); },
     },
   };
-  globalThis.fetch = async (_url, init) => {
-    sentPrompt = JSON.parse(init.body).prompt;
-    return new Response(JSON.stringify({
-      answer: JSON.stringify({
-        structureFocus: "我是狄更斯。我把最关键的材料放在这里；你能说清若抽掉或换序，全文会失去什么吗？",
-      }),
-    }), { status: 200, headers: { "content-type": "application/json" } });
+  globalThis.fetch = async () => {
+    fetchCalls += 1;
+    throw new Error("anonymous APIS call forbidden");
   };
 
   try {
@@ -138,11 +133,11 @@ test("lesson-blueprint endpoint fails closed to deterministic prompt when APIS r
     const payload = await response.json();
 
     assert.equal(response.status, 200);
-    assert.equal(payload.provider, "local-fallback");
+    assert.equal(payload.provider, "source-deterministic");
+    assert.equal(payload.cached, false);
     assert.equal(inspectLessonBlueprint(payload.blueprint.structureFocus, context).ok, true);
     assert.doesNotMatch(payload.blueprint.structureFocus, bannedStudentPrompt);
-    assert.match(sentPrompt, /不得冒充作者/u);
-    assert.match(sentPrompt, /前後至少兩處原文/u);
+    assert.equal(fetchCalls, 0);
   } finally {
     globalThis.fetch = originalFetch;
     globalThis.caches = originalCaches;

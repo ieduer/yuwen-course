@@ -2,51 +2,67 @@
 
 Last updated: 2026-08-15
 
-## 2026-08-15 prelaunch assessment and reservation-correctness candidate
+## 2026-08-15 assessment, bounded evaluator retry and anonymous-AI retirement candidate
 
 - This source-only candidate starts from canonical main
-  `2f061c59b53c9ef749126d174ee8624d67082be4`. Deterministic assessment now
-  accepts adjacent and fullwidth choice letters (`BC`, `選BC`, `ＢＣ`, `DBB`),
-  common explanation connectors, Arabic equivalents for circled-number answers,
-  traditional/simplified equivalents and whitespace sentence boundaries. An
-  explicitly prefixed single-choice answer wins over letters in a later
-  `B項…` explanation, but an immediate list/alternative tail such as `A和B`,
-  `A、B`, `A或B` or `A與B` remains invalid. An unqualified `AB` or `A、B`
-  likewise remains invalid for a single-choice item.
-- An uncommitted evaluator reservation is a 60-second durable lease. Initial
-  `created_at` values use the canonical `.000Z` form; one exact-value D1 CAS may
-  move an abandoned lease to `.001Z` and reuse the same source event. That marker
-  permits at most one reclaim across isolates. A fresh contender waits, a second
-  expiry remains blocked by the original ten-minute rate window, and a late
-  original plus its permitted reclaim can commit only one interaction,
-  evaluation, outbox row and Queue send. Both guarded evaluation routes use this
-  same helper and the UI no longer claims that an uncommitted answer was saved.
-- Study-guide completion now fails closed unless the catalog status is
-  `available`. Receipt reconciliation uses `central_receipted_at` as a durable
-  15-minute readback-poll lease acquired by exact observed-value CAS; the
-  timestamp alone is never acceptance evidence, and `central_disposition`
-  remains the only receipt fact. This bounds health-driven User Center RPCs
-  across Worker isolates without delaying Queue retry state.
-- Pull-request CI includes the deterministic study-guide assessment suite. The
-  focused contract matrix passes 57/57 on exact Node 24.18.0 and 22.21.1, and
-  the complete `precontent:check` passes on both. Hostile coverage includes
-  ten-way initial/reclaim races, late-original commit, second-expiry rejection
-  and twenty-isolate receipt-poll contention.
-- No catalog, formative authority, learning manifest, semantic revision or App
-  pointer changed. Their SHA-256 values remain respectively
-  `4ac9e223be27316aa5324ab5c9b474e378f61ec703ac9140b590e1a42c3c89d0`,
-  `1307286d4dd9f1e687553a30c4f87d5403fe237cac56727400233abfac36d334`,
-  `2a6824db45cac416c4aee3a95ce83aba5be393b6a94034799d6d18cb56f9f998`
-  and `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
-  The rebuilt formal artifact contains 1,223 files / 164,376,983 bytes with
-  aggregate SHA-256
-  `b98548e130ff13ee407e09cb7102a253f7472c0920ed4cd5e398c9caf807d9ac`;
-  its tracked manifest byte SHA-256 is
-  `ed35eaab78d6411a20c140b5b15704207f2ecb0bb7af4c2bde397f7494066b23`.
-- This is a `no-new-capability`, no-schema-change source correction. It made no
-  deployment, D1/Queue/User Center write, traffic change or rollback. Any later
-  release must independently review and pin the resulting exact commit before
-  using the external executor.
+  `7c7e1e06bad67b17dfa16a500a64ca2e02ad08c1`. Single-choice grading now applies
+  one fail-closed precedence to the full normalized response: an explicit
+  single-choice phrase, exactly one answer-lead letter, or exactly one deduped
+  A--D letter in the full response. Multiple distinct letters remain ambiguous.
+  The source-owned 46-case fixture corpus locks simplified/traditional wording,
+  explanation-letter pollution, punctuation, circled choices and the known
+  ambiguous `A项错误，B项正确` tradeoff. Student feedback displays source circled
+  glyphs such as `①②④` while comparison stays numeric.
+- A first evaluator-stage APIS, parse or normalization failure expires only its
+  exact `.000Z` reservation by D1 compare-and-swap. One immediate same-mutation
+  retry may reclaim the same source event as `.001Z`; ten concurrent contenders
+  still admit one evaluator and the slot count remains one. A second evaluator
+  failure expires `.001Z` only for truthful timing and returns
+  `evaluator_retry_exhausted`; it never permits a third evaluation. Recording or
+  D1 failures do not release a reservation. The exact guarantee is one durable
+  YW slot and at most two APIS invocations, not preservation of upstream APIS
+  quota.
+- Capacity exhaustion and evaluator-retry exhaustion retain the compatible
+  `learning_submission_rate_limited` code but expose distinct `limitReason`
+  values and the exact `retryAfterSeconds`. Both interaction and study-guide UI
+  paths give reason-specific retry guidance without suggesting an immediate
+  retry after exhaustion.
+- `/api/learning-check` authenticates through the normal My identity path before
+  returning its existing retired 410 response. Unused `/api/chat` is retired
+  with 410, and the active `/api/lesson-blueprint` now returns the existing
+  source-deterministic blueprint without any anonymous APIS call. No IP limiter,
+  new binding or mutable request-global state was introduced.
+- Pull-request CI runs the learning manifest, evidence, preview-isolation,
+  46-case assessment, both UI retry paths and all 189 deterministic lesson
+  blueprints on exact Node 24.18.0 and 22.21.1 before the formal artifact gate.
+  The complete local source gate passes on both exact Node authorities; the
+  focused matrix is 76/76 per runtime, Reading API is 70/70, native content is
+  22/22 and release-site is 5/5. The rebuilt formal artifact is 1,223 files /
+  164,377,105 bytes with aggregate SHA-256
+  `758433ad9a75c7af87e9c0d5b4ea54ae69ef2472f1a20c995a0f5657ed32531c`;
+  its projected aggregate is
+  `cf14869373cd12fa81e969e24737f5986a86c4558b7e45554f5b69c485f519eb`
+  and tracked manifest byte SHA-256 is
+  `e7ef2b0c60db7661fb41c564ee13c7b0008362d31fa71ff5ac1e0a79a7fa9948`.
+- No catalog, formative authority, learning manifest, semantic revision,
+  schema, binding, route topology, Queue, User Center or App pointer changed.
+  This is a `no-new-capability` source correction. It performs no deployment,
+  D1/Queue/User Center write, traffic change or rollback; any release still
+  requires independent exact-commit review and the external production gate.
+- A separately received JSON described as “2026 北京卷语文” is an unverified
+  candidate, not a YW source input. Current GKS `master`
+  `bd7926453ce971683af9a5294edac3760faa16a8` still records
+  `2026-beijing-chinese-written` as `missing_full_paper`,
+  `writing_prompts_only`, `blocked_no_complete_question_set`, `blocked`, with
+  zero sources, in coverage SHA-256
+  `91c0412e0580eadfb1435c57b3cd56febb4d8a1d343a561681020ec71b46e0dd`.
+  YW must not import, publish or derive from that JSON. Only after the GKS
+  coverage authority has a continuous original paper, two independent sources,
+  per-page/per-question visual evidence and crop SHA-256, independent Codex
+  answers, dual sign-off and publication-hash binding may a separate YW PR add
+  a source-pinned, link-only transfer overlay. GKS remains the evidence owner;
+  no copied question/answer, YW scoring event, D1/Queue write, User Center or
+  App change is authorized.
 
 ## 2026-08-14 dedicated precheck project correction
 
