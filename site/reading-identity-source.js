@@ -65,9 +65,36 @@ export function nativeReadingIdentityProjection(value) {
 export function nativeAuthorizationDecision(value) {
   const authorizationHeader = String(value || "");
   if (!authorizationHeader) return { status: "absent", authorizationHeader: "" };
-  return /^Bearer ywat_[A-Za-z0-9_-]{43}$/.test(authorizationHeader)
-    ? { status: "authorized", authorizationHeader }
-    : { status: "unauthorized", authorizationHeader: "" };
+  if (/^Bearer ywat_[A-Za-z0-9_-]{43}$/.test(authorizationHeader)) {
+    return { status: "authorized", authorizationHeader };
+  }
+  if (/^Bearer\s+ywat_/i.test(authorizationHeader.trim())) {
+    return { status: "unauthorized", authorizationHeader: "" };
+  }
+  return { status: "non_native", authorizationHeader: "" };
+}
+
+export function readingFormativeMasteryRpcDecision(authorizationValue, cookieHeader) {
+  const nativeAuthorization = nativeAuthorizationDecision(authorizationValue);
+  if (nativeAuthorization.status === "unauthorized") {
+    return { status: "unauthorized", rpcName: "", credential: "" };
+  }
+  if (nativeAuthorization.status === "authorized") {
+    return {
+      status: "native",
+      rpcName: "getNativeFormativeMastery",
+      credential: nativeAuthorization.authorizationHeader,
+    };
+  }
+  const webCredential = String(cookieHeader || "");
+  if (!webCredential) {
+    return { status: "unauthorized", rpcName: "", credential: "" };
+  }
+  return {
+    status: "web",
+    rpcName: "getFormativeMastery",
+    credential: webCredential,
+  };
 }
 
 export function readingCredentialDecision(nativeUser, webUser) {

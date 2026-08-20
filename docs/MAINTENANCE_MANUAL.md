@@ -2,54 +2,162 @@
 
 Last reviewed: 2026-08-15 (America/Los_Angeles)
 
-## 2026-08-15 assessment tolerance and durable retry contract
+## 2026-08-15 combined assessment, retry and native formative source draft
 
-- Keep objective grading source-owned in `site/study-guide-assessment.js`.
-  Choice scanning occurs only in the answer lead after NFKC normalization and
-  accepts adjacent/fullwidth A--D letters. For single choice, only an explicit
-  prefix such as `我選 A` may disambiguate a later `B項…` explanation. An
-  immediate list or alternative tail (`和 B`, `與 B`, `或 B`, `、B`) is still
-  ambiguous and must be rejected; bare multi-letter input must not be reduced
-  to the first letter. Circled-number
-  references alone enable equivalent Arabic input. Punctuation/segmentation
-  comparison uses the existing bounded traditional-to-simplified map and treats
-  whitespace as a boundary. These grader changes do not mint or alter a task
-  semantic revision.
-- `studyGuideCompletedFor` must return false whenever the catalog status is not
-  `available`. Catalog-load degradation may preserve textbook reading, but it
-  must never unlock a study-guide checkpoint from an empty in-memory catalog.
-- Guarded AI evaluation uses `learning_submission_slots.created_at` as a
-  60-second lease without deleting a slot or changing schema. A new reservation
-  is written with `.000Z`. If no matching `learning_interactions` row exists and
-  the lease is stale, exactly one compare-and-swap may write `.001Z` and reuse
-  the same `source_event_id`; `.001Z` is the durable once-only reclaim marker.
-  Fresh duplicates return `learning_submission_in_progress`. A reclaimed slot
-  may not be reclaimed again and remains counted until the original ten-minute
-  window expires. Both `/api/reading/study-guide-attempt` and
-  `/api/interaction-check` must call `assertLearningSubmissionAllowed` before
-  APIS. The final ledger's unique keys resolve a late original/reclaim race to
-  one interaction, evaluation, outbox row and Queue send.
-- Student-facing in-progress text must state only that the previous submission
-  is still being reviewed and that the same answer may be retried after the
-  reported interval. Do not say that an answer is saved until a durable
-  interaction exists.
-- `central_receipted_at` has two deliberately distinct interpretations: while
-  `central_disposition` is null or `pending_mapping`, it is the last durable
-  receipt-readback poll lease; when a disposition is updated, it is the receipt
-  update time. A timestamp by itself is never a receipt. Reconciliation selects
-  only rows older than 15 minutes and exact-value CAS claims them in D1 before
-  any User Center RPC. This is the cross-isolate cooldown authority; do not
-  replace it with module-local state or reuse Queue `last_attempt_at`.
-- Pull-request CI must retain `scripts/test_study_guide_assessment.mjs` beside
-  the learning manifest, evidence and preview-isolation suites on exact Node
-  24.18.0 and 22.21.1. The hostile evidence tests must keep the ten-way lease
-  races, late-original race, second-expiry rejection and cross-isolate poll
-  contention.
-- This maintenance is a `no-new-capability` source-only change: existing Pages,
-  D1, Queue and User Center service-binding contracts remain unchanged. Source
-  rollback is to revert the exact candidate commit and regenerate/check the
-  formal artifact manifest; there is no production rollback action because this
-  task performs no deployment or data mutation.
+- Native reading identity remains owned by the accepted
+  `bdfz-native-auth/1` projection. Do not restore the historical
+  `bdfz-yw-native-session-rpc-v1` shape or duplicate native identity parsing in
+  `site/_worker.js`.
+- After `getReadingStudent` has authenticated and reconciled the stable User
+  Center user, formative mastery must still preserve the request's credential
+  class. Absent or non-native authorization may call Web `resolveSession` and
+  `getFormativeMastery` only with the bounded User Center cookie. Exact native
+  authorization calls `getNativeFormativeMastery` with that native authority.
+  A native request never falls back to the Web RPC, even if a same-user cookie
+  is also present.
+- `nativeAuthorizationDecision` is shared by `getReadingStudent` and
+  `readingFormativeMasteryRpcDecision`. It treats an unrelated Bearer or other
+  authorization scheme as non-native, so a valid Web cookie remains usable.
+  Any header in the case-insensitive `Bearer ywat_` namespace that fails the
+  exact native format is native-looking malformed input: it returns 401 before
+  either identity RPC and cannot downgrade through the cookie. If exact native
+  and Web credentials resolve to different stable User Center ids, the request
+  also remains 401.
+- `readingFormativeMasteryRpcDecision` is the single source-side RPC selector.
+  Malformed native authorization returns no method and no credential. If the
+  selected named-entrypoint method is unavailable, the Worker returns 503 and
+  performs no alternative RPC; it must not reinterpret an infrastructure or
+  contract gap as an anonymous student result.
+- The reviewed User Center source baseline
+  `80369e7f04ca9b94b32a82cbb6cabfa5ad2f31fa` implements
+  `resolveNativeSession` and cookie-only `getFormativeMastery`, but still does
+  not implement `getNativeFormativeMastery`. This YW draft must stay unmerged
+  and undeployed until a
+  separately owned User Center change defines the exact request/response
+  contract, keeps the existing non-scoring projection byte-compatible, and
+  passes native expiry, revocation, wrong-client, cross-user, malformed-result
+  and sensitive logging tests plus shared-hub review.
+- The change adds no Cloudflare capability, binding, migration or data path.
+  It does not authorize User Center, D1, Queue, Pages, App or production work.
+  Roll back source with a normal revert of the exact YW commit.
+- Pull-request CI must retain `scripts/test_reading_identity.mjs` in the exact
+  Node 24.18.0/22.21.1 focused matrix alongside the manifest, evidence,
+  preview-binding and assessment suites. Route-level tests must retain the
+  non-native-Web, malformed-native-401, cross-identity-401 and missing native
+  method 503 cases.
+- The combined source candidate is verified only by the unified 85/85 focused
+  matrix plus both exact-Node complete source gates. Its sole formal artifact
+  authority is 1,223 files / 164,378,212 bytes, projected aggregate
+  `21485dbc7c0c167925a0f3d56835ee19b379ce413aff23aab4c102b244e1f922`,
+  artifact aggregate
+  `ae7c907010f3a148f7b68a3bfc5442220091759202acb85ce5a11e04f742f0a2`
+  and tracked manifest byte SHA-256
+  `48b94d286f50a33f9cb9095e05655f6eba2d4ae712c1adb99f033ac6162339e4`.
+  Do not reuse either predecessor PR's artifact receipt.
+
+### Current production boundary
+
+- `yw.bdfz.net` currently resolves to rollback deployment
+  `8da16237-ac91-47e1-afe2-7843e2d4c8a4`, with deployment metadata source
+  `0ff5d5604ceefef92c99c07033f1e900d9edaaed` and live formal marker SHA-256
+  `ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`.
+- Keep production D1 migrations 0001--0005 and all existing rows intact. Live
+  reading remains schema v4/evidence v1; the current producer is the v1 Queue,
+  while v2 main/DLQ remain paused with no producer or consumer. Learning health
+  remains transport/formative-only and cannot be cited as scoring or A+ proof.
+- User Center production remains the v251 rollback. The existing Web cookie
+  binding is not native/v2 authority, and neither production nor current UC
+  source implements the native mastery method required by this YW candidate.
+  Treat every later 2026-08-11 "current production" paragraph as historical.
+  Do not deploy from this source draft.
+
+## 2026-08-15 assessment and bounded evaluator-retry contract
+
+- Keep objective grading source-owned in `site/study-guide-assessment.js` and
+  the realistic corpus in `scripts/study-guide-answer-fixtures.json`. A
+  single-choice response is accepted only by this precedence: one explicit
+  choice on the full response; exactly one answer-lead A--D letter; or exactly
+  one deduped A--D letter in the full response. Multiple distinct letters are
+  ambiguous. Do not reintroduce `而` as a lead splitter: ordinary phrases such
+  as `从文意而言，应选A` and `而A项的解释有误` must remain intact. Preserve the
+  explicit known rejection of `A项错误，B项正确`. Circled-source feedback renders
+  the source glyphs (`①②④`) even though grading compares numeric identities.
+- `learning_submission_slots.created_at` remains the schema-free durable lease.
+  A first evaluator-stage failure may exact-CAS the current `.000Z` lease into
+  an expired time, allowing one immediate contender to reuse the same event and
+  write the once-only `.001Z` reclaim marker. Concurrent release/reclaim races
+  must admit one change/evaluator, never a new slot. If the reclaimed evaluator
+  fails, expire its timing without removing `.001Z` and return
+  `evaluator_retry_exhausted`; every later attempt remains rate-limited. Never
+  release for D1, final-ledger, outbox or Queue-recording failures. The bounded
+  promise is one YW slot and at most two APIS calls, not zero upstream cost.
+- Keep `learning_submission_rate_limited` backward compatible while preserving
+  `limitReason=window_capacity|evaluator_retry_exhausted` and the exact positive
+  `retryAfterSeconds`. Both browser surfaces must distinguish capacity from
+  exhausted evaluator retries; neither may tell a student to loop immediately.
+- `/api/learning-check` remains retired, but its request must pass the normal My
+  authentication boundary before 410. `/api/chat` is unused and retired with
+  410. `/api/lesson-blueprint` must stay source-deterministic and spend zero APIS
+  calls for anonymous or authenticated requests. Do not replace this with an IP
+  limiter or a per-request mutable global; any future runtime-AI restoration is
+  a separate authenticated capability transaction.
+- Pull-request CI must retain the manifest, evidence, preview isolation,
+  assessment fixture, browser retry and deterministic lesson-blueprint suites
+  under exact Node 24.18.0 and 22.21.1. Hostile coverage must include evaluator
+  call/parse/normalize failure, immediate retry, ten-way release and reclaim,
+  `.001Z` preservation, third-evaluation rejection, and zero-APIS retired routes.
+- This is a `no-new-capability` source-only change. Existing Pages, D1, Queue,
+  User Center, App and scoring contracts remain unchanged. Rollback is to revert
+  the exact candidate commit and regenerate/check the formal artifact manifest;
+  there is no production rollback because this task deploys and writes nothing.
+
+### Future GKS Beijing-paper relationship (currently blocked)
+
+The claimed “2026 北京卷语文” JSON remains an unverified YW input and must not
+be treated as a YW question bank, answer authority or release input. GKS owns
+the upstream evidence, but its source and live state are now divergent:
+
+- canonical GKS `master` `bd7926453ce971683af9a5294edac3760faa16a8`
+  still records `2026-beijing-chinese-written` as
+  `missing_full_paper / writing_prompts_only /
+  blocked_no_complete_question_set / blocked`, with `sources=[]`, at coverage
+  SHA-256
+  `91c0412e0580eadfb1435c57b3cd56febb4d8a1d343a561681020ec71b46e0dd`;
+- unmerged GKS draft PR #1 head
+  `6f46f96416dd896b2c60e70711fd63ba243fc899` has been used by the live
+  service; live `/api/papers` now exposes published paper
+  `2026-beijing-chinese` with 22 questions, `candidate_hash_bound` credibility,
+  `visual_review_complete_pending_independent_attestations`, and explicit
+  one-time single-source and direct-review waivers.
+
+The live waiver is neither canonical-main convergence nor reusable YW
+authority. No YW synchronization may begin from either the supplied JSON or
+that waived release. A future YW transaction must first re-read a reconciled
+GKS source/live authority and independently require a continuous original
+paper, two independent sources, per-page/per-question visual evidence and crop
+SHA-256, independent Codex answers, dual sign-off and the public release hashes.
+
+After that gate, use a separate PR from the then-current YW `main`. The only
+intended first-stage surface is a hash-pinned, link-only overlay rendered in
+`site/assets/app.js#renderMatrix()` inside the existing
+`site/index.html#transfer-matrix`. A deterministic new mapping may contain only
+GKS source pins, `resourceKey`, `resourceVersion`, `questionType`, order, crop
+SHA-256, exact GKS deep link, and a manually reviewed YW lesson/competency
+association. It must copy neither question text nor answers, use
+`credentials: "omit"`, keep `evidenceOwner=gks` and `scoringRole=none`, and
+hide on coverage/manifest/version drift. The existing forum-blockquote “本課真題
+錨點” is presentation content, not GKS publication proof.
+
+Until that independent transaction is authorized, do not touch
+`site/data/manifest.json`, `site/data/lessons/**`,
+`site/data/learning-manifest.json`, `site/data/lesson-competency-manifest.json`,
+`site/data/study-guide-catalog.json`, vocab/reader-document data,
+`site/app-content/**`, `site/app-content/latest-stable.json`, `site/_worker.js`,
+preview registries, `wrangler*.toml`, migrations, Pages projects, D1, Queue,
+User Center, APIS, nav, Pulse, Companion or either native content repository.
+Do not run `build:data` or route exact GKS links through the YW preview proxy.
+Those are explicit production/shared-hub NO-GO boundaries, not deferred work
+inside this assessment/retry candidate.
 
 ## 2026-08-14 dedicated precheck project contract
 
@@ -276,9 +384,9 @@ of the grade-authoritative hot path.
 
 ## 2026-08-11 Web reading finalization override
 
-This is the current operational disposition. Older paired Web/App and
-2026-08-09 candidate sections remain as historical evidence, but their blocked
-pre-migration and 503 statements no longer describe production.
+This is retained as the 2026-08-11 operational receipt. The 2026-08-15 current
+production boundary at the top supersedes its former current-production claim.
+Older paired Web/App and 2026-08-09 candidate sections remain historical.
 
 ### Current student flow
 
@@ -468,6 +576,21 @@ Reader media is separately bound by
 `site/data/reader-media-receipts.v1.json`: ledger `2026-08-09.1`, 165 objects,
 28,066,373 bytes, inventory
 `2c7672e88dc8e1bb0ea1e4af84e59ccaf521ded73e774e35c03abd5547f69d03`.
+
+The textbook-page source used by the native-content verifier is archived from
+the absent local root `/Users/ylsuen/textbook_ai_migration` at
+`gdrive:Backups/CF-Archive-v1/files/Users/ylsuen/textbook_ai_migration`. The
+accepted path-preserving authority is
+`/Users/ylsuen/CF/reports/storage_archive_records/2026-08-15-textbook-ai-migration.json`:
+107,108 regular files / 8,571,954,882 bytes, with 107,108 checksum matches,
+zero differences and an exact 608-directory set. Restore only into the absent
+canonical destination with
+`/Users/ylsuen/CF/scripts/restore_gdrive_archived_path.sh Users/ylsuen/textbook_ai_migration`,
+then run the receipt's recorded `rclone check --checksum --one-way` before any
+build or publication. A source-only verifier may hydrate only its exact
+referenced page subset into private task scratch, but every page must still
+match `/Users/ylsuen/CF/jc-textbook-reader/manifests/page-images.sha256`; that
+scratch is derived, disposable and never a new source authority.
 
 ### Release disposition
 

@@ -1,6 +1,81 @@
 # 核查標準 / Verification Standard
 
-## 2026-08-15 prelaunch assessment/reservation correctness
+## 2026-08-15 combined assessment, retry and native formative source gate
+
+Run the focused identity/evidence contract and the complete source gate under
+both exact Node authorities. `test:native-content` also requires the immutable
+textbook page inputs. When the former default local tree is absent, restore the
+needed pages from accepted archive `2026-08-15-textbook-ai-migration`, verify
+them against its receipt, and point `YW_PAGE_IMAGE_ROOT` at that isolated
+`pages/` directory before running the complete gate:
+
+```zsh
+export YW_PAGE_IMAGE_ROOT=/absolute/path/to/receipt-verified/pages
+
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
+  node --test scripts/test_learning_manifest.mjs \
+  scripts/test_learning_evidence_contract.mjs \
+  scripts/test_preview_binding_isolation.mjs \
+  scripts/test_reading_identity.mjs \
+  scripts/test_study_guide_assessment.mjs \
+  scripts/test_study_guide_frontend.mjs \
+  scripts/test_lesson_blueprint_quality.mjs
+PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run precontent:check
+
+mkdir -p /private/tmp/yw-node22-exact-bin
+test -L /private/tmp/yw-node22-exact-bin/node || \
+  ln -s /usr/local/libexec/bdfz-release/node-v22.21.1 \
+  /private/tmp/yw-node22-exact-bin/node
+/usr/local/libexec/bdfz-release/node-v22.21.1 --test \
+  scripts/test_learning_manifest.mjs \
+  scripts/test_learning_evidence_contract.mjs \
+  scripts/test_preview_binding_isolation.mjs \
+  scripts/test_reading_identity.mjs \
+  scripts/test_study_guide_assessment.mjs \
+  scripts/test_study_guide_frontend.mjs \
+  scripts/test_lesson_blueprint_quality.mjs
+PATH=/private/tmp/yw-node22-exact-bin:/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
+  npm run precontent:check
+
+git diff --check
+```
+
+The hostile contract must prove that absent or non-native authorization with a
+valid bounded User Center cookie selects only Web
+`resolveSession`/`getFormativeMastery`; a native-looking header beginning in
+the `Bearer ywat_` namespace but failing the exact native shape returns 401
+without either identity RPC even when a cookie is present. Exact native
+authorization selects only `getNativeFormativeMastery`; a simultaneous cookie
+must resolve to the same stable user and cannot replace native mastery
+authority. A missing native method remains 503. The selected RPC's existing
+exact `bdfz-yw-formative-mastery-rpc-v1` response validation, non-scoring flags
+and manifest projection remain unchanged.
+
+Local and CI success is source evidence only. Merge and deployment remain
+blocked until the exact canonical User Center source selected for the
+synchronized transaction exposes `getNativeFormativeMastery`; the separately
+owned hub change must add its own native expiry, revocation, wrong-client,
+cross-user, response-shape and log-redaction tests and then pass the shared-hub
+synchronized change gate. No Cloudflare, D1, Queue, Pages or App mutation
+belongs to this source check. Rollback is a normal revert of the exact candidate
+commit.
+
+Current live readback is deliberately different from this source gate:
+`yw.bdfz.net` serves rollback deployment
+`8da16237-ac91-47e1-afe2-7843e2d4c8a4` from metadata source
+`0ff5d5604ceefef92c99c07033f1e900d9edaaed`, with formal marker SHA-256
+`ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`,
+reading schema v4/evidence v1 and the v1 Queue producer. V2 main/DLQ remain
+paused and unconnected, and User Center production remains the v251 rollback.
+The combined source checks must never be reported as live native/v2 or A--F
+acceptance.
+
+### Assessment, retry and anonymous-AI coverage
+
+The combined source tree must regenerate the formal release site and tracked
+artifact manifest once after both the native identity and assessment/retry
+changes are present. Per-PR predecessor artifact hashes are not valid combined
+authority.
 
 Run the complete source gate and focused contract matrix under both exact Node
 authorities:
@@ -11,7 +86,10 @@ PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
   node --test scripts/test_learning_manifest.mjs \
   scripts/test_learning_evidence_contract.mjs \
   scripts/test_preview_binding_isolation.mjs \
-  scripts/test_study_guide_assessment.mjs
+  scripts/test_reading_identity.mjs \
+  scripts/test_study_guide_assessment.mjs \
+  scripts/test_study_guide_frontend.mjs \
+  scripts/test_lesson_blueprint_quality.mjs
 
 mkdir -p /private/tmp/yw-node22-exact-bin
 test -L /private/tmp/yw-node22-exact-bin/node || \
@@ -23,7 +101,10 @@ PATH=/private/tmp/yw-node22-exact-bin:/usr/local/libexec/bdfz-release/npm-v11.6.
   scripts/test_learning_manifest.mjs \
   scripts/test_learning_evidence_contract.mjs \
   scripts/test_preview_binding_isolation.mjs \
-  scripts/test_study_guide_assessment.mjs
+  scripts/test_reading_identity.mjs \
+  scripts/test_study_guide_assessment.mjs \
+  scripts/test_study_guide_frontend.mjs \
+  scripts/test_lesson_blueprint_quality.mjs
 
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run build:release-site
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:release-site
@@ -32,35 +113,41 @@ PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH npm run check:artifact-
 git diff --check
 ```
 
-The focused gate must prove adjacent and fullwidth choice input, explanation
-pollution rejection, prefixed single-choice list/alternative rejection,
-circled/Arabic equivalence, traditional/simplified and space segmentation
-parity, and catalog-unavailable fail-closed completion. For
-the evaluator lease it must prove ten simultaneous initial requests admit one
-evaluator, ten simultaneous stale retries admit one reclaim, the second expiry
-cannot call the evaluator again, and a late original plus reclaim produce one
-immutable ledger set and one Queue send. Receipt reconciliation must use shared
-D1 state so twenty independent environments produce one User Center RPC inside
-the 15-minute window and exactly one new RPC after expiry.
+The focused gate must prove all 46 source-owned response fixtures, including
+the required simplified/traditional single-choice forms, explanation-letter
+pollution, the known ambiguous tradeoff and circled-glyph display. It must prove
+that the first evaluator-stage failure releases only the exact initial lease,
+one of ten immediate contenders reuses the same slot/event, the second failure
+keeps `.001Z` and blocks a third evaluator, and recording failures never release.
+Both browser retry surfaces must preserve reason plus retry seconds. Retired
+chat and learning-check routes must spend zero APIS calls; every one of 189
+lesson blueprints must remain deterministic and text-anchored with zero APIS.
+Existing receipt reconciliation, late-original immutability and Queue hostile
+checks remain required.
 
-Completed source evidence on 2026-08-15: the focused matrix passed 57/57 on
-Node 24.18.0 and 57/57 on Node 22.21.1; complete `precontent:check` passed on
-both exact runtimes, including Reading API 70/70, native-content 22/22 and
-release-site 5/5. Formal build/check produced 1,223 files / 164,376,983 bytes,
-projected aggregate
-`5b86646b8f7e755598598372406ee9d42ae57c61c4edc87eb59ed42e322bea89`,
+Completed local source evidence on 2026-08-15: exact Node 24.18.0 and 22.21.1
+each passed the complete `precontent:check`; the unified focused matrix passed 85/85,
+Reading API 70/70, native content 22/22 and release-site 5/5 on each runtime.
+The native test used 693 exact page files / 75,196,340 bytes restored from the
+accepted path-preserving Drive archive; an isolated readback matched all 693
+files against the canonical page SHA-256 inventory, and the native builder
+independently checked every referenced SHA-256.
+
+Formal build/check produced 1,223 files / 164,378,212 bytes, projected aggregate
+`21485dbc7c0c167925a0f3d56835ee19b379ce413aff23aab4c102b244e1f922`,
 artifact aggregate
-`b98548e130ff13ee407e09cb7102a253f7472c0920ed4cd5e398c9caf807d9ac`
+`ae7c907010f3a148f7b68a3bfc5442220091759202acb85ce5a11e04f742f0a2`
 and tracked manifest byte SHA-256
-`ed35eaab78d6411a20c140b5b15704207f2ecb0bb7af4c2bde397f7494066b23`.
-
+`48b94d286f50a33f9cb9095e05655f6eba2d4ae712c1adb99f033ac6162339e4`.
+The formal marker byte SHA-256 is
+`dd2c63801c44d266428efa495b6cf872665980a520ea40c21be0ac52045dc07a`.
 Catalog, formative manifest, learning manifest and App pointer byte SHA-256
 remain `4ac9e223be27316aa5324ab5c9b474e378f61ec703ac9140b590e1a42c3c89d0`,
 `1307286d4dd9f1e687553a30c4f87d5403fe237cac56727400233abfac36d334`,
 `2a6824db45cac416c4aee3a95ce83aba5be393b6a94034799d6d18cb56f9f998`
 and `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
-No semantic revision, schema, deployment, D1 row, Queue message, User Center
-state, production traffic or App pointer changed.
+No focused green result by itself authorizes a deployment, migration,
+Queue/config mutation, User Center write or production claim.
 
 For the local Node 22 full-suite command, `/private/tmp/yw-node22-exact-bin/node`
 was a task-local symlink to
@@ -241,8 +328,9 @@ publication time, current content audit and compatible App disposition.
 
 ## 2026-08-11 Web reading release gate
 
-This current Web-only gate supersedes the 2026-08-09 pre-migration/503 release
-disposition below. It does not authorize App or User Center work.
+This is the retained 2026-08-11 Web-only release receipt. The 2026-08-15 live
+rollback paragraph above supersedes its former current-production claim. It
+does not authorize App or User Center work.
 
 ### Required commands
 

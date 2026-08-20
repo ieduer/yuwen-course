@@ -4,6 +4,7 @@ import {
   invalidateFormativeManifestCache,
   LearningSubmissionInProgressError,
   LearningSubmissionRateLimitError,
+  releaseLearningSubmissionReservation,
   recordLearningInteraction,
   validateAPlusCompatibilityContract,
 } from "./learning-evidence-source.js";
@@ -19,6 +20,7 @@ import {
   nativeAuthorizationDecision,
   nativeReadingIdentityProjection,
   readingCredentialDecision,
+  readingFormativeMasteryRpcDecision,
   reconcileReadingStudent,
 } from "./reading-identity-source.js";
 import {
@@ -31,11 +33,8 @@ import {
 } from "./study-guide-assessment.js";
 import {
   BLUEPRINT_MODE_TECHNIQUES,
-  LESSON_BLUEPRINT_CACHE_VERSION,
   deterministicLessonBlueprint,
-  lessonBlueprintPromptAnchor,
   normalizeBlueprintMode,
-  normalizeLessonBlueprint,
 } from "./lesson-blueprint-rules.js";
 
 const OWNER = "ieduer";
@@ -150,14 +149,26 @@ function learningRateLimitResponse(error) {
   const retryAfterSeconds = Math.max(1, Number(error?.retryAfterSeconds) || 600);
   return json({
     ok: false,
-    error: "提交过于频繁，请稍后继续修改",
+    error: error?.message || "提交过于频繁，请稍后继续修改",
     code: "learning_submission_rate_limited",
+    limitReason: error?.limitReason || "window_capacity",
     retryable: true,
     retryAfterSeconds,
   }, {
     status: 429,
     headers: { "retry-after": String(retryAfterSeconds) },
   });
+}
+
+async function releaseAfterEvaluatorFailure(env, submissionReservation, evaluatorError) {
+  const released = await releaseLearningSubmissionReservation({ env, submissionReservation });
+  if (released.evaluatorAttemptsExhausted) {
+    throw new LearningSubmissionRateLimitError(
+      released.retryAfterSeconds,
+      "evaluator_retry_exhausted",
+    );
+  }
+  throw evaluatorError;
 }
 
 function learningMutationConflictResponse() {
@@ -991,61 +1002,12 @@ function stripMarker(value) {
   return value.replace(/<!--[\s\S]*?-->/g, "").trim();
 }
 
-async function handleChat(request, env) {
-  const payload = await request.json().catch(() => ({}));
-  const messages = Array.isArray(payload.messages) ? payload.messages.slice(-12) : [];
-  const lessonTitle = cleanText(payload.lessonTitle, 120);
-  const blockTitle = cleanText(payload.blockTitle, 40);
-  const excerpt = cleanText(payload.excerpt, 900);
-  const resourceLines = Array.isArray(payload.resources)
-    ? payload.resources.slice(0, 16).map((item) => {
-      const text = cleanText(item.text || item.href, 120);
-      const href = cleanText(item.href, 220);
-      const kind = cleanText(item.kind, 24);
-      const postNumber = cleanText(item.postNumber, 12);
-      return `#${postNumber || "?"} ${kind || "resource"} ${text} ${href}`.trim();
-    }).join("\n").slice(0, 1800)
-    : "";
-  const pageLines = Array.isArray(payload.textbookPages)
-    ? payload.textbookPages.slice(0, 12).map((item) => `${cleanText(item.label, 24)} ${cleanText(item.src, 180)}`.trim()).join("\n").slice(0, 1200)
-    : "";
-
-  if (!messages.length) return json({ error: "messages required" }, { status: 400 });
-
-  const system = [
-    "你是高中語文學習教練，不替學生完成作業，而是把問題拆成可學會的步驟。",
-    "回答要緊扣課文、教材圖頁、論壇資源和學生已提出的問題。",
-    "每次優先給：文本證據、思路拆解、下一個可操作問題。語氣直接、清楚、有啟發。",
-    "用繁體中文回答；必要時引用簡短原文，但避免大段搬運。",
-    "",
-    `當前課文：${blockTitle} / ${lessonTitle}`,
-    `課文摘錄：${excerpt}`,
-    resourceLines ? `學習資源：\n${resourceLines}` : "",
-    pageLines ? `教材圖頁：\n${pageLines}` : "",
-  ].join("\n");
-
-  const apiMessages = [
-    { role: "system", content: system },
-    ...messages.map((message) => ({
-      role: message.role === "assistant" ? "assistant" : "user",
-      content: cleanText(message.content, 2000),
-    })),
-  ];
-
-  try {
-    const reply = await callApisGateway(env, apiMessages);
-    return json({ provider: "apis", reply });
-  } catch {
-    const last = cleanText(messages[messages.length - 1]?.content, 500);
-    return json({
-      provider: "local-fallback",
-      reply: [
-        `先把問題扣回《${lessonTitle}》。`,
-        `你剛才問的是：「${last}」。`,
-        "可先做三步：1. 找一句原文作證據；2. 說清這句的字面意思與語氣；3. 再問它和本課核心問題的關係。若要更精準，把你選中的原句貼進來，我再逐句拆。",
-      ].join("\n"),
-    });
-  }
+async function handleChat() {
+  return json({
+    ok: false,
+    error: "此舊聊天入口已停用；目前頁面使用獨立的閱讀助教入口",
+    code: "legacy_chat_retired",
+  }, { status: 410 });
 }
 
 function extractJsonObject(value) {
@@ -1064,65 +1026,20 @@ function extractJsonObject(value) {
   }
 }
 
-async function handleLessonBlueprint(request, env, ctx) {
+async function handleLessonBlueprint(request) {
   const payload = await request.json().catch(() => ({}));
   const lessonId = cleanText(payload.lessonId, 80);
   const lessonTitle = cleanText(payload.lessonTitle, 160);
   const blockTitle = cleanText(payload.blockTitle, 80);
   const mode = cleanText(payload.mode, 40);
-  const genres = Array.isArray(payload.genres) ? payload.genres.map((item) => cleanText(item, 40)).filter(Boolean).slice(0, 8) : [];
   const excerpt = cleanText(payload.excerpt, 4200);
   if (!lessonId || !lessonTitle || excerpt.length < 80) return json({ error: "lesson id, title and excerpt are required" }, { status: 400 });
   const blueprintContext = { lessonId, lessonTitle, blockTitle, mode, excerpt };
-  const normalizedMode = normalizeBlueprintMode(mode);
-  const technique = BLUEPRINT_MODE_TECHNIQUES[normalizedMode];
-  const anchor = lessonBlueprintPromptAnchor(blueprintContext);
-  const lessonLabel = [blockTitle, lessonTitle].filter(Boolean).join(" · ");
-  const cache = caches.default;
-  const cacheUrl = new URL(`/api/lesson-blueprint-cache/${encodeURIComponent(lessonId)}`, request.url);
-  cacheUrl.searchParams.set("v", LESSON_BLUEPRINT_CACHE_VERSION);
-  cacheUrl.searchParams.set("mode", normalizedMode);
-  if (blockTitle) cacheUrl.searchParams.set("block", blockTitle);
-  const cacheKey = new Request(cacheUrl.toString(), { method: "GET" });
-  const cached = await cache.match(cacheKey);
-  if (cached) {
-    const payload = await cached.json();
-    return json({ ...payload, cached: true }, {
-      headers: { "cache-control": "public, max-age=604800", "x-yw-blueprint-cache": "HIT" },
-    });
-  }
-  const prompt = [
-    "你是高中語文教材的細讀任務設計員。只根據提供的正文，設計一個可由學生用原文驗證的章法問題。",
-    "不得冒充作者，不得使用作者第一人稱，不得使用“抽掉”“換序”或放諸四海皆準的模板。",
-    `structureFocus 必須逐字包含本課定位「${lessonLabel}」、正文錨點「${anchor}」和文體技法「${technique}」。`,
-    "要求學生比較前後至少兩處原文，說清技法怎樣形成篇目的表達效果；不得只問段意或感想。",
-    "只輸出 JSON：structureFocus(一句具體結構追問)。不要 Markdown。",
-    `篇目：${lessonLabel}`,
-    `掌握模式：${mode}`,
-    `多層文體：${genres.join(" / ")}`,
-    `正文摘錄：${excerpt}`,
-  ].join("\n");
-  try {
-    const raw = await callApisPrompt(env, prompt, "lesson-plan", "medium");
-    const parsed = extractJsonObject(raw);
-    const normalized = normalizeLessonBlueprint(parsed, blueprintContext);
-    const provider = normalized.structureFocus === cleanText(parsed?.structureFocus, 300) ? "apis" : "local-fallback";
-    const response = json({ provider, cached: false, blueprint: normalized }, {
-      headers: { "cache-control": "public, max-age=604800", "x-yw-blueprint-cache": "MISS" },
-    });
-    ctx.waitUntil(cache.put(cacheKey, response.clone()));
-    return response;
-  } catch {
-    const response = json({
-      provider: "local-fallback",
-      cached: false,
-      blueprint: deterministicLessonBlueprint(blueprintContext),
-    }, {
-      headers: { "cache-control": "public, max-age=604800", "x-yw-blueprint-cache": "MISS" },
-    });
-    ctx.waitUntil(cache.put(cacheKey, response.clone()));
-    return response;
-  }
+  return json({
+    provider: "source-deterministic",
+    cached: false,
+    blueprint: deterministicLessonBlueprint(blueprintContext),
+  }, { headers: { "cache-control": "no-store" } });
 }
 
 async function handleInteractionCheck(request, env) {
@@ -1212,9 +1129,14 @@ async function handleInteractionCheck(request, env) {
         deduped: true,
       });
     }
-    const raw = await callApisPrompt(env, prompt, "feedback", "medium");
-    const parsed = extractJsonObject(raw);
-    const assessment = normalizeInteractionAssessment(parsed, parsed ? "" : raw);
+    let assessment;
+    try {
+      const raw = await callApisPrompt(env, prompt, "feedback", "medium");
+      const parsed = extractJsonObject(raw);
+      assessment = normalizeInteractionAssessment(parsed, parsed ? "" : raw);
+    } catch (error) {
+      await releaseAfterEvaluatorFailure(env, submissionGuard.submissionReservation, error);
+    }
     const recorded = await recordLearningInteraction({
       request,
       env,
@@ -1246,7 +1168,15 @@ async function handleInteractionCheck(request, env) {
   }
 }
 
-async function handleLearningCheck() {
+async function handleLearningCheck(request, env) {
+  let student;
+  try {
+    student = await getReadingStudent(request, env);
+  } catch (error) {
+    if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
+    throw error;
+  }
+  if (!student) return authenticatedEvaluationRequiredResponse();
   return json({
     ok: false,
     error: "此舊評閱入口已停用；請使用會寫入 My 證據閉環的 /api/interaction-check",
@@ -1279,14 +1209,6 @@ async function callApisPrompt(env, prompt, taskType = "chat", thinkingLevel = "l
   const answer = cleanText(data.answer, 8000);
   if (!answer) throw new Error("APIS returned empty answer");
   return answer;
-}
-
-async function callApisGateway(env, apiMessages) {
-  const prompt = apiMessages.map((message) => {
-    const label = message.role === "system" ? "系統" : message.role === "assistant" ? "AI" : "學生";
-    return `${label}：${message.content}`;
-  }).join("\n\n");
-  return callApisPrompt(env, prompt, "chat", env.APIS_THINKING_LEVEL || "low");
 }
 
 // ---------------- 閱讀星圖：三詞初讀評議持久層（D1: READING_DB） ----------------
@@ -1376,7 +1298,9 @@ async function getReadingStudent(request, env) {
   const cookieHeader = userCenterSessionCookieHeader(request);
   const nativeAuthorization = nativeAuthorizationDecision(request.headers.get("authorization"));
   if (nativeAuthorization.status === "unauthorized") return null;
-  const authorizationHeader = nativeAuthorization.authorizationHeader;
+  const authorizationHeader = nativeAuthorization.status === "authorized"
+    ? nativeAuthorization.authorizationHeader
+    : "";
   let nativeUser = null;
   if (authorizationHeader) {
     if (typeof env.USER_CENTER_EVIDENCE?.resolveNativeSession !== "function") {
@@ -2067,9 +1991,13 @@ async function handleReadingStudyGuideAttempt(request, env, student) {
 
   let assessment = deterministicStudyGuideAssessment(item, responseText);
   if (!assessment) {
-    const raw = await callApisPrompt(env, studyGuideAssessmentPrompt(item, responseText), "feedback", "medium");
-    const parsed = extractJsonObject(raw);
-    assessment = normalizeOpenStudyGuideAssessment(parsed);
+    try {
+      const raw = await callApisPrompt(env, studyGuideAssessmentPrompt(item, responseText), "feedback", "medium");
+      const parsed = extractJsonObject(raw);
+      assessment = normalizeOpenStudyGuideAssessment(parsed);
+    } catch (error) {
+      await releaseAfterEvaluatorFailure(env, submissionGuard.submissionReservation, error);
+    }
   }
 
   const recorded = await recordLearningInteraction({
@@ -2404,7 +2332,11 @@ export function publicFormativeMastery(projection, interestRows, currentManifest
 }
 
 async function handleReadingFormativeMastery(request, env, student) {
-  if (typeof env.USER_CENTER_EVIDENCE?.getFormativeMastery !== "function") {
+  const rpc = readingFormativeMasteryRpcDecision(
+    request.headers.get("authorization"),
+    userCenterSessionCookieHeader(request),
+  );
+  if (!rpc.rpcName || typeof env.USER_CENTER_EVIDENCE?.[rpc.rpcName] !== "function") {
     return readingError("formative mastery unavailable", 503);
   }
   let result;
@@ -2415,7 +2347,7 @@ async function handleReadingFormativeMastery(request, env, student) {
     ));
     if (!manifestResponse.ok) throw new Error("formative manifest unavailable");
     [result, currentManifest] = await Promise.all([
-      env.USER_CENTER_EVIDENCE.getFormativeMastery(userCenterSessionCookieHeader(request)),
+      env.USER_CENTER_EVIDENCE[rpc.rpcName](rpc.credential),
       manifestResponse.json(),
     ]);
   } catch (error) {
