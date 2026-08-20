@@ -1,17 +1,151 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-20 post-PR-#12 server-authority reconciliation
+
+Use only a task-owned clean checkout. The durable page-image authority is the
+accepted path-preserving archive receipt at
+`/Users/ylsuen/CF/reports/storage_archive_records/2026-08-15-textbook-ai-migration.json`,
+checked against tracked inventory
+`/Users/ylsuen/CF/jc-textbook-reader/manifests/page-images.sha256`. If the
+canonical local source is absent, restore the whole archived path and verify it
+before either complete source gate:
+
+```zsh
+test ! -e /Users/ylsuen/textbook_ai_migration
+/Users/ylsuen/CF/scripts/restore_gdrive_archived_path.sh \
+  Users/ylsuen/textbook_ai_migration
+rclone check \
+  gdrive:Backups/CF-Archive-v1/files/Users/ylsuen/textbook_ai_migration \
+  /Users/ylsuen/textbook_ai_migration \
+  --checksum --one-way
+```
+
+There is no accepted selective 693-file restore command. After the canonical
+whole-path restore, run the complete source gate under both exact Node
+authorities using its default page root:
+
+```zsh
+source /Users/ylsuen/.nvm/nvm.sh
+nvm use 24.18.0
+npm run precontent:check
+
+nvm use 22.21.1
+npm run precontent:check
+```
+
+The 2026-08-20 run used a disposable 693-file subset restored under the task's
+temporary directory. All 693 files matched the tracked page inventory; that
+temporary location is historical evidence only, not a reproducible command or
+durable resource. The accepted archive was last read back on 2026-08-15 and was
+not re-read from Drive during this hardening task.
+
+The Reading API gate must prove all of the following with local synthetic
+identity and temporary D1 only:
+
+- browser `aiScore`, `aiVerdict` and `source` cannot set stored authority;
+- an unassessed dedupe clears a legacy score/verdict, while constellation and
+  history ignore every stored score that lacks matching source evidence, and a
+  valid source assessment for a different, unsubmitted three-word set cannot
+  brighten the lesson;
+- an absent lesson cannot create a reading star/submission or learning event;
+- an orphan first-read asset cannot mutate mark/session/evidence tables through
+  mark, delete, submit or resolve;
+- an unknown source event cannot authorize a reading score;
+- brightness excludes browser-forged scores;
+- the existing reading, first-read, study-guide, vocabulary, idempotency and
+  rate-limit invariants remain green.
+
+The evidence-contract gate must independently prove that a score lookup is
+bound to source event, student, lesson, `contextWords`, `a_plus_gate`,
+`source_ai_assessment` and the identical normalized three words, including a
+hostile word-mismatch rejection.
+
+It must also table-drive all ten cookie-authenticated mutation routes and prove
+that missing/foreign Origin, `Origin: null`, missing content type and
+`text/plain` fail before binding access, identity resolution, APIS, D1, outbox
+or Queue. Exact same-origin Web JSON must remain functional. Exact native header
+authentication remains Origin-independent only after JSON and the existing
+native session projection pass; a rejected native session and native
+`text/plain` must have zero side effects. The local identity seam cannot bypass
+the request gate.
+
+The blueprint and retired-discussion hostile gates must also prove:
+
+- a known lesson ignores forged browser title/block/excerpt/mode/genres and
+  returns the source-deterministic blueprint derived only from the hydrated
+  authoritative lesson plus server taxonomy, with zero APIS or runtime-cache
+  operation and `cache-control: no-store`;
+- interaction scoring ignores forged mode/genres/authors/title/excerpt, derives
+  mode/genres/author/speaker from the exact server taxonomy, stores only the
+  allowlisted student response, and returns 503 with zero side effects when the
+  taxonomy row is unavailable;
+- an unknown lesson or known lesson without taxonomy performs zero APIS and
+  cache read/write operations;
+- `POST /api/discussions/:lessonId` returns 410/no-store with zero outbound,
+  D1 or Queue operation even when the legacy credential binding name exists.
+
+Build the deterministic formal Web artifact on Node 24, then check the same
+bytes on Node 22:
+
+```zsh
+source /Users/ylsuen/.nvm/nvm.sh
+nvm use 24.18.0
+YW_STUDY_GUIDE_SOURCE_DIR=/Users/ylsuen/CF/output/pdf_study_guides_web \
+  npm run verify:study-guide-sources
+npm run build:release-site
+npm run check:release-site
+npm run build:artifact-manifest
+npm run check:artifact-manifest
+
+nvm use 22.21.1
+YW_STUDY_GUIDE_SOURCE_DIR=/Users/ylsuen/CF/output/pdf_study_guides_web \
+  npm run verify:study-guide-sources
+npm run check:release-site
+npm run check:artifact-manifest
+git diff --check
+```
+
+The earlier predecessor receipts are not authority for the combined tree. PR
+#12 was merged unchanged as `10177b360077ef1347db531c14ca287757ef2d8f`;
+PR #14 then ordinary-merged that exact main. Exact Node 24.18.0 and 22.21.1
+each passed the complete `precontent:check`, the 96/96 focused matrix, Reading
+74/74, evidence 52/52, blueprint 6/6, native-content 22/22 and release-site
+5/5; both also verified all five PDF/extraction receipts. After both complete
+gates, Node 24 rebuilt the formal artifact and both runtimes checked the same
+1,223 files / 164,387,142 bytes. Projected aggregate SHA-256 is
+`ac6efa919a516c272209a94e0f078373bbfaabdf5c28766dd188cb0b077ec65e`,
+artifact aggregate SHA-256 is
+`3fcc42802b5f2478e0cc3ec3ffa720ce7feacff6fe9a14ae17c0dddf32085825`,
+tracked manifest byte SHA-256 is
+`9ff27ae8abd5b7dcafc503aa493809d2ff4b119cb176bdbf481f9298dda975a6`,
+and formal marker byte SHA-256 is
+`4d8fe8ad0b72955b0ff284c87d9c61c99d400b5744ffe0bc1cae225a4f910a60`.
+PR #14 remains Draft pending exact-head GitHub CI and a fresh independent
+P0/P1 review; it must not be marked ready or merged before both are green.
+
+The release gate remains deliberately red. With the verified page fixture,
+both exact Node authorities must be rechecked to stop at:
+
+```text
+current canonical source graph lacks an approved audit receipt
+```
+
+That is a release **NO-GO**, not a test waiver. This task does not generate the
+separately owned native Web/App receipt, deploy Pages, migrate/write D1, send or
+drain Queue data, or mutate User Center. Production remains deployment
+`18213286-37d1-4b71-80b6-78e8b986ed3d` / source `a97eba7` until a separately
+authorized paired release passes that gate and authenticated live acceptance.
+
 ## 2026-08-15 combined assessment, retry and native formative source gate
 
 Run the focused identity/evidence contract and the complete source gate under
 both exact Node authorities. `test:native-content` also requires the immutable
-textbook page inputs. When the former default local tree is absent, restore the
-needed pages from accepted archive `2026-08-15-textbook-ai-migration`, verify
-them against its receipt, and point `YW_PAGE_IMAGE_ROOT` at that isolated
-`pages/` directory before running the complete gate:
+textbook page inputs. Use the exact whole-path restore and checksum procedure in
+the preceding section. A private task may instead use a disposable exact-page
+subset only when every byte matches the tracked SHA-256 inventory; such scratch
+is not a durable restore authority. Then run:
 
 ```zsh
-export YW_PAGE_IMAGE_ROOT=/absolute/path/to/receipt-verified/pages
-
 PATH=/Users/ylsuen/.nvm/versions/node/v24.18.0/bin:$PATH \
   node --test scripts/test_learning_manifest.mjs \
   scripts/test_learning_evidence_contract.mjs \
@@ -61,14 +195,13 @@ belongs to this source check. Rollback is a normal revert of the exact candidate
 commit.
 
 Current live readback is deliberately different from this source gate:
-`yw.bdfz.net` serves rollback deployment
-`8da16237-ac91-47e1-afe2-7843e2d4c8a4` from metadata source
-`0ff5d5604ceefef92c99c07033f1e900d9edaaed`, with formal marker SHA-256
-`ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`,
-reading schema v4/evidence v1 and the v1 Queue producer. V2 main/DLQ remain
-paused and unconnected, and User Center production remains the v251 rollback.
-The combined source checks must never be reported as live native/v2 or A--F
-acceptance.
+`yw.bdfz.net` serves Pages deployment
+`18213286-37d1-4b71-80b6-78e8b986ed3d` from source
+`a97eba7589ed6afa7df30ba4f37f2241a22d90d0`. Deployment
+`8da16237-ac91-47e1-afe2-7843e2d4c8a4` / source
+`0ff5d5604ceefef92c99c07033f1e900d9edaaed` is the stable rollback, not current
+production. The combined source checks must never be reported as live
+native/v2 or A--F acceptance.
 
 ### Assessment, retry and anonymous-AI coverage
 
@@ -76,7 +209,6 @@ The combined source tree must regenerate the formal release site and tracked
 artifact manifest once after both the native identity and assessment/retry
 changes are present. Per-PR predecessor artifact hashes are not valid combined
 authority.
-
 Run the complete source gate and focused contract matrix under both exact Node
 authorities:
 

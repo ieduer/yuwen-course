@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1223,
-  "totalBytes": 164378212,
-  "aggregateSha256": "ae7c907010f3a148f7b68a3bfc5442220091759202acb85ce5a11e04f742f0a2",
+  "totalBytes": 164387142,
+  "aggregateSha256": "3fcc42802b5f2478e0cc3ec3ffa720ce7feacff6fe9a14ae17c0dddf32085825",
   "files": [
     {
       "path": "_headers",
@@ -12,13 +12,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 105040,
-      "sha256": "07b7f79766956588db960ed52e9479c087a2e7f617416994445cc4aebb6e0f6f"
+      "bytes": 113978,
+      "sha256": "981f16f75407373b5549f0134b4a0aa91f4069f88746d42230df70919a263943"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "dd2c63801c44d266428efa495b6cf872665980a520ea40c21be0ac52045dc07a"
+      "sha256": "4d8fe8ad0b72955b0ff284c87d9c61c99d400b5744ffe0bc1cae225a4f910a60"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1412,8 +1412,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 169232,
-      "sha256": "7ba0ddd1899e12da9652c65663c84125cdb4207063bf02df9728badaefe8435c"
+      "bytes": 169221,
+      "sha256": "4981677747eb5d3210772bae49f87e3e899c23e156cdbd885e73fb591f2fd3a7"
     },
     {
       "path": "assets/atlas.css",
@@ -6047,8 +6047,8 @@
     },
     {
       "path": "lesson-blueprint-rules.js",
-      "bytes": 14402,
-      "sha256": "9d348f3ce42e0d33406e4f466bb914c87cb71bca8cced483450667ff48c04849"
+      "bytes": 14405,
+      "sha256": "6cc14b89bda9535623a19ace2636e96abf535161d45d0d7dfe72337193455ca9"
     },
     {
       "path": "media/lesson-media/lesson-1458/sha256-cbf43aa4198be042f4724aec8cba24e94e27457f6938cd17bae4a5b6bec730c0.pdf",

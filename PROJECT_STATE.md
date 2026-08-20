@@ -1,6 +1,109 @@
 # Project State
 
-Last updated: 2026-08-15
+Last updated: 2026-08-20
+
+## 2026-08-20 server-authority hardening Draft candidate
+
+- This source-only candidate is branch
+  `codex/yw-server-authority-hardening-20260820`. PR #12 was merged unchanged as
+  canonical main `10177b360077ef1347db531c14ca287757ef2d8f`; this branch now
+  contains an ordinary, non-force merge of that exact main. Conflict resolution
+  preserves PR #12's deterministic zero-APIS blueprint, bounded evaluator retry
+  and native `getNativeFormativeMastery` routing together with every PR #14
+  authority, CSRF, catalog and retired-discussion correction. PR #14 remains a
+  Draft until the combined tree rebuilds, passes both exact Node authorities and
+  receives a fresh exact-head independent review.
+- Hostile regression against the unmodified base proved that an authenticated
+  browser could set `submissions.ai_score`, `ai_verdict` and `source` directly,
+  and that a syntactically valid but catalog-absent lesson could create both a
+  reading submission/star and a semantic learning interaction. Independent
+  P0/P1 review then proved three further release blockers: a deduped legacy
+  browser score could remain in `MAX(ai_score)` and be relabelled `live`;
+  first-read helpers could mutate D1 before, or without, authoritative catalog
+  resolution; and `/api/lesson-blueprint` could spend APIS capacity and seed a
+  week-long public cache from browser-provided title/excerpt. The retired
+  discussion POST was also an unauthenticated GitHub write proxy. Those paths
+  violated the existing server, data and cost-authority contracts.
+- A later independent review reopened this Draft with four additional P1
+  classes. `/api/interaction-check` still trusted browser `mode` and `authors`
+  in the scoring prompt; ten cookie-authenticated mutation routes accepted
+  missing/foreign Origin and non-JSON requests; pull-request CI did not execute
+  the changed blueprint or Reading API suites; and the verification manual
+  presented a disposable page fixture as a durable command. Tests first proved
+  all four failures against the prior Draft head.
+- The browser now gives `/api/reading/submission` only its three words and the
+  durable `contextWords` source-event reference. The Worker derives score and
+  verdict only from the same student's, same lesson's, same three words'
+  `source_ai_assessment`; a missing, cross-user, cross-lesson, wrong-interaction
+  or word-mismatched event fails HTTP 422. Browser `aiScore`, `aiVerdict` and
+  `source` fields are ignored, and `source` is derived only from the local test
+  seam versus production runtime. An unassessed dedupe clears any legacy stored
+  score/verdict, and constellation/detail/history views derive score authority
+  only from same-student `contextWords` + `a_plus_gate` +
+  `source_ai_assessment` ledger rows whose normalized three-word set intersects
+  an actual submission. Legacy `submissions.ai_score` is no longer a read or
+  brightness authority, and lesson history projects `source` from the current
+  trusted runtime instead of returning the old browser-writable column.
+- Lesson fallback remains available in `getLessonMeta` / `getLessonData` for
+  read compatibility. Every current lesson-bearing mutation route instead
+  resolves the exact lesson from `site/data/manifest.json`; all four first-read
+  mutation handlers do so before their helper can touch D1. Lesson blueprint
+  title/block/excerpt now come from the hydrated authoritative lesson, while
+  mode/genres come from `site/data/literary-taxonomy.json`. The endpoint returns
+  the source-deterministic blueprint with `Cache-Control: no-store`; it makes no
+  APIS call and does not read or write the runtime cache. An absent lesson fails
+  HTTP 400 and missing authoritative taxonomy/content fails HTTP 503, both with
+  zero APIS/cache side effects. The removed UI's
+  legacy discussion POST is fail-closed HTTP 410/no-store and makes no GitHub,
+  D1 or Queue call; discussion GET remains read-only. There is no schema,
+  migration, scoring-policy, manifest or semantic-revision change.
+- `/api/interaction-check` now ignores browser lesson metadata and derives
+  normalized mode, genres, author names and response speaker from the exact
+  `site/data/literary-taxonomy.json` row. A missing taxonomy row returns HTTP
+  503 before identity resolution, APIS, D1 or Queue. The APIS prompt continues
+  to use only the hydrated authoritative title/block/excerpt, and the evidence
+  ledger retains only allowlisted student answer fields rather than forged
+  title/excerpt/mode/genre/author metadata.
+- All ten cookie-authenticated POST mutation routes require exact
+  `Origin: https://yw.bdfz.net` and `application/json` before reading a binding
+  or resolving identity. An exact-format native authorization header may omit
+  Origin but must still use JSON and must subsequently pass the existing exact
+  `resolveNativeSession` projection before reconciliation or business work; a
+  rejected native session produces no D1, APIS or Queue side effect. The local
+  `READING_TEST_SLUG` seam cannot bypass this request gate.
+- Exact Node 24.18.0 and 22.21.1 each pass the complete
+  `precontent:check`. On both runtimes the combined focused matrix passes 96/96,
+  Reading API passes 74/74, evidence contract passes 52/52, blueprint quality
+  passes 6/6, native-content passes 22/22 and release-site passes 5/5. Five
+  study-guide PDF/extraction receipts verify on both runtimes. After both full
+  gates, Node 24 rebuilt the deterministic formal staging and both runtimes
+  checked the same bytes: 1,223 files / 164,387,142 bytes, projected SHA-256
+  `ac6efa919a516c272209a94e0f078373bbfaabdf5c28766dd188cb0b077ec65e`
+  and artifact aggregate SHA-256
+  `3fcc42802b5f2478e0cc3ec3ffa720ce7feacff6fe9a14ae17c0dddf32085825`;
+  the tracked manifest byte SHA-256 is
+  `9ff27ae8abd5b7dcafc503aa493809d2ff4b119cb176bdbf481f9298dda975a6`.
+  Pull-request CI executes the exact evidence, blueprint and local-D1 Reading
+  suites under both Node authorities before the artifact checks; its combined
+  exact-head result remains pending until the branch is pushed.
+- The predecessor exact-head `P0/P1=0` review does not cover the merged tree. A
+  fresh independent exact-head review is required after rebuild, tests and CI;
+  until then the source candidate remains a Draft, not a merge authority.
+- Production remains unchanged at Pages deployment
+  `18213286-37d1-4b71-80b6-78e8b986ed3d` / source `a97eba7` (full source
+  `a97eba7589ed6afa7df30ba4f37f2241a22d90d0`). Its deployed Worker and current
+  static interaction assets remain a mixed generation, and live
+  `/api/learning/health` remains unavailable. This candidate has not been
+  deployed.
+- Formal release remains **NO-GO**: on both exact Node authorities
+  `check:native-content:deploy-sync` fails closed with `current canonical source
+  graph lacks an approved audit receipt`. A separately owned Web/App receipt,
+  paired User Center/YW review and authenticated live acceptance are still
+  required. This task made no deployment, D1/Queue/User Center/GitHub-discussion
+  write, binding/configuration change or student-data mutation.
+- This is `no-new-capability`. Source rollback is to revert the exact candidate
+  commit and rebuild/check the formal artifact manifest. No production or data
+  rollback applies unless a later, separately authorized release occurs.
 
 ## 2026-08-15 combined assessment, retry and native formative source draft
 
@@ -22,14 +125,12 @@ Last updated: 2026-08-15
 - An exact native request with a Web cookie resolves both identities before
   reading reconciliation. Different stable User Center ids remain 401; a
   same-user cookie is only a conflict check and never becomes a mastery-RPC
-  fallback. At the current reviewed User Center source baseline,
-  `80369e7f04ca9b94b32a82cbb6cabfa5ad2f31fa`, the named entrypoint exposes
-  `resolveNativeSession` and cookie-only `getFormativeMastery`, but still does
-  not expose `getNativeFormativeMastery`. This combined YW source candidate
-  therefore remains draft,
-  unmerged and undeployed until a separately owned User Center contract change,
-  hostile tests and independent shared-hub review complete one synchronized
-  transaction. This source handoff does not claim current live hub readiness.
+  fallback. The paired User Center entrypoint must independently expose and
+  verify the exact `getNativeFormativeMastery` RPC before any release. This YW
+  source candidate therefore remains Draft and undeployed until that separately
+  owned User Center contract, hostile tests and shared-hub review complete one
+  synchronized transaction; this source handoff does not claim live hub
+  readiness.
 - This is a `no-new-capability`, no-schema-change and no-data-write source
   handoff. It changes no learning rule, formative denominator, scoring role,
   manifest, App pointer, D1 row, Queue message, Pages deployment or production
@@ -55,14 +156,15 @@ Last updated: 2026-08-15
   with the same 278 receipted native paths. Neither predecessor PR's artifact
   count or digest is accepted as authority for this combined draft.
 
-## 2026-08-15 current production rollback authority (read-only)
+## 2026-08-20 current production and rollback authority (read-only)
 
 - The canonical `yw.bdfz.net` alias currently serves Pages deployment
-  `8da16237-ac91-47e1-afe2-7843e2d4c8a4`, whose deployment metadata records
-  rollback source commit `0ff5d5604ceefef92c99c07033f1e900d9edaaed` and whose live formal marker
-  SHA-256 is
-  `ef1856ce0622f2a0ceeada513465ab48ef5947a3a9150e5b5115785062ed9ad2`.
-  It is not the canonical source main or this combined candidate.
+  `18213286-37d1-4b71-80b6-78e8b986ed3d`, whose deployment metadata records
+  source commit `a97eba7589ed6afa7df30ba4f37f2241a22d90d0`. The previously
+  described deployment `8da16237-ac91-47e1-afe2-7843e2d4c8a4` / source
+  `0ff5d5604ceefef92c99c07033f1e900d9edaaed` is the verified rollback
+  authority, not current production. Neither deployment is canonical source
+  main or this combined candidate.
 - Production D1 retains migrations 0001--0005 and all historical rows. Live
   reading health remains `reading-schema-v4` with
   `bdfz-learning-evidence-v1`. Learning health advertises the current formal
@@ -132,17 +234,12 @@ Last updated: 2026-08-15
   D1/Queue/User Center write, traffic change or rollback; any release still
   requires independent exact-commit review and the external production gate.
 - A separately received JSON described as “2026 北京卷语文” remains an
-  unverified YW input. GKS source and live state are currently divergent:
-  canonical `master` `bd7926453ce971683af9a5294edac3760faa16a8` still has
-  the zero-source blocked coverage snapshot at SHA-256
-  `91c0412e0580eadfb1435c57b3cd56febb4d8a1d343a561681020ec71b46e0dd`,
-  while GKS draft PR #1 head
-  `6f46f96416dd896b2c60e70711fd63ba243fc899` has been used by the live
-  service. The live `/api/papers` readback now exposes published paper
-  `2026-beijing-chinese` with 22 questions, `candidate_hash_bound` credibility,
-  `visual_review_complete_pending_independent_attestations`, and explicit
-  one-time single-source and direct-review waivers. That unmerged, waived live
-  release is not a reusable YW derivation or publication authority.
+  unverified YW input. Current GKS canonical `master` is
+  `c741e66add56d458df37bcf678ba8fec61779645` and its current rolling-five
+  catalog is 2022--2026 with 119 items. GKS draft PR #1 remains an open Draft at
+  `6f46f96416dd896b2c60e70711fd63ba243fc899`; it is a historical conflicting
+  branch, not current source authority. Neither that branch nor a separately
+  supplied JSON is a reusable YW derivation or publication authority.
 - YW must not import, publish or derive content from the supplied JSON or copy
   question/answer text from the waived live release. A future, separately
   reviewed YW PR may add only a source-pinned, link-only transfer overlay after

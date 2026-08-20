@@ -65,14 +65,15 @@ identity 緩存 5 分鐘。未登入請求一律 `401 {authRequired:true}`，前
 | 端點 | 方法 | 鑒權 | 說明 |
 | --- | --- | --- | --- |
 | `/health` | GET | 無 | `{ok, students, submissions, nodes, rulesVersion}`，健康探針 |
-| `/submission` | POST | UC | `{lessonId, words[3], aiScore?, aiVerdict?}` → `{ok, deduped, version, born[]}` |
+| `/submission` | POST | UC | `{lessonId, words[3], sourceEventId?}` → `{ok, deduped, version, born[]}`；分數只由匹配的來源證據台賬派生 |
 | `/constellation` | GET | UC | 全量星圖：`nodes[]`（id/kind/seq/c/meta）、`links[]`、`stats`、`groupLabels` |
 | `/lesson/<id>` | GET | UC | 該課三詞沿革（全版本）、字詞掌握、課級高頻詞 |
 | `/history` | GET | UC | 最近 200 條提交流水 |
 | `/vocab-attempt` | POST | UC | `{lessonId, itemId, correct, answer}` → 掌握狀態（首答對即 mastered，否則兩次答對） |
 | `/vocab-state/<id>` | GET | UC | 該課逐題掌握狀態 |
 
-前端寫入點：`app.js` 的 contextWords 評議成功後 `saveReadingSubmission()`；
+前端寫入點：`app.js` 的 contextWords 評議成功後 `saveReadingSubmission()`；該函數只傳三詞與
+`contextWords` 的 `sourceEventId`，不得傳 `aiScore`、`aiVerdict` 或 `source`。
 字詞題每次作答 `recordVocabAttempt()`。均 fire-and-forget，未登入時僅保留本地進度。
 User Center 側繼續走既有 `identity.syncProgress / recordEvent`（`vocab-quiz:<lessonId>` 完課事件），
 供 my.bdfz.net 統一活動數據使用。

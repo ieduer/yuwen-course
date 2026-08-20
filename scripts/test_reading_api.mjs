@@ -26,6 +26,7 @@ for (const file of [
   "data/study-guide-catalog.json",
   "data/preview-targets.json",
   "data/manifest.json",
+  "data/literary-taxonomy.json",
   "data/lessons/lesson-1468.json",
   "data/lessons/lesson-1484.json",
   "data/classical-first-read/lesson-1484.json",
@@ -66,7 +67,10 @@ async function api(path, body) {
   }
   const response = await fetch(`${BASE}${path}`, body ? {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers: {
+      "content-type": "application/json",
+      origin: "https://yw.bdfz.net",
+    },
     body: JSON.stringify(payload),
   } : undefined);
   return { status: response.status, data: await response.json().catch(() => ({})) };
@@ -118,9 +122,23 @@ try {
   console.log(`synthetic student: ${SLUG}`);
 
   // 1. 提交
-  const first = await api("/api/reading/submission", { lessonId: "lesson-1484", words: ["逍遙", "質樸", "蓬之心"], aiScore: 88, aiVerdict: "ok" });
+  const first = await api("/api/reading/submission", {
+    lessonId: "lesson-1484",
+    words: ["逍遙", "質樸", "蓬之心"],
+    aiScore: 100,
+    aiVerdict: "browser-forged-perfect",
+    source: "live",
+  });
   assert("first submission accepted", first.data.ok && first.data.deduped === false && first.data.version === 1, JSON.stringify(first.data));
   assert("nodes born (1 lesson + 3 words)", (first.data.born || []).length === 4);
+  const firstDetail = await api("/api/reading/lesson/lesson-1484");
+  assert(
+    "browser score, verdict and source cannot forge reading authority",
+    firstDetail.data.history?.[0]?.aiScore === null
+      && firstDetail.data.history?.[0]?.aiVerdict === ""
+      && firstDetail.data.history?.[0]?.source === "synthetic",
+    JSON.stringify(firstDetail.data.history?.[0]),
+  );
 
   // 2. 冪等：原樣重發 / 重排 / 繁簡變體
   const dup = await api("/api/reading/submission", { lessonId: "lesson-1484", words: ["逍遙", "質樸", "蓬之心"] });
@@ -146,6 +164,28 @@ try {
   assert("two words rejected", bad.status === 400);
   const same = await api("/api/reading/submission", { lessonId: "lesson-1484", words: ["好", "好", "妙"] });
   assert("duplicate words rejected", same.status === 400);
+  const unknownLessonSubmission = await api("/api/reading/submission", {
+    lessonId: "lesson-hostile-unknown",
+    words: ["越權", "偽造", "課文"],
+  });
+  assert(
+    "unknown lesson cannot enter reading submissions",
+    unknownLessonSubmission.status === 400
+      && unknownLessonSubmission.data.error === "lesson absent from authoritative catalog",
+    JSON.stringify(unknownLessonSubmission),
+  );
+  const forgedAssessmentLink = await api("/api/reading/submission", {
+    lessonId: "lesson-1484",
+    words: ["挪用", "來源", "偽造"],
+    sourceEventId: "browser-forged-source-event",
+    aiScore: 100,
+  });
+  assert(
+    "unmatched source event cannot authorize a reading score",
+    forgedAssessmentLink.status === 422
+      && forgedAssessmentLink.data.error === "source assessment does not match submission",
+    JSON.stringify(forgedAssessmentLink),
+  );
 
   // 6. 星圖載荷不變量
   const constellation = (await api("/api/reading/constellation")).data;
@@ -161,7 +201,7 @@ try {
   const groupLinks = constellation.links.filter((link) => String(link[2]).startsWith("group:"));
   assert("semantic group link 旷达–豪迈", groupLinks.length >= 1);
   const lesson1484 = lessonNodes.find((node) => node.ref === "lesson-1484");
-  assert("brightness reflects versions+score", Math.abs(lesson1484.c - (1 + 0.5 * Math.log2(3) + 0.5)) < 0.01, String(lesson1484.c));
+  assert("brightness excludes browser-forged scores", Math.abs(lesson1484.c - (1 + 0.5 * Math.log2(3))) < 0.01, String(lesson1484.c));
 
   // 7. 星點穩定：再提交其他課後 seq 不變
   const seqBefore = Object.fromEntries(constellation.nodes.map((node) => [node.id, node.seq]));
@@ -499,6 +539,18 @@ try {
   // 11. 互動註冊表：未知事件拒絕；已註冊語義事件進入源端賬本。
   const unknown = await api("/api/learning/interactions", { lessonId: "lesson-1484", interactionKey: "mousemove" });
   assert("unknown/raw telemetry rejected", unknown.status === 400);
+  const unknownLessonInteraction = await api("/api/learning/interactions", {
+    lessonId: "lesson-hostile-unknown",
+    interactionKey: "noteOpened",
+    clientMutationId: `unknown-lesson-${SLUG}`,
+    data: { noteRef: "forged" },
+  });
+  assert(
+    "unknown lesson cannot enter semantic evidence",
+    unknownLessonInteraction.status === 400
+      && unknownLessonInteraction.data.error === "lesson absent from authoritative catalog",
+    JSON.stringify(unknownLessonInteraction),
+  );
   const trace = await api("/api/learning/interactions", {
     lessonId: "lesson-1484",
     interactionKey: "noteOpened",
