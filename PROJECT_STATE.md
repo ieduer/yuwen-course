@@ -5,13 +5,14 @@ Last updated: 2026-08-20
 ## 2026-08-20 server-authority hardening Draft candidate
 
 - This source-only candidate is branch
-  `codex/yw-server-authority-hardening-20260820`, based on exact canonical main
-  `7c7e1e06bad67b17dfa16a500a64ca2e02ad08c1`. It does not modify, merge, close
-  or replace PR #12. The two branches now have real merge conflicts in the
-  Worker, tests, manuals and artifact manifest: suen must merge PR #12 unchanged
-  first; only then may this Draft be rebuilt/rebased onto the resulting main,
-  rebuild its artifact and receive a fresh exact-head review. PR #14 must not be
-  marked ready or merged before that sequence completes.
+  `codex/yw-server-authority-hardening-20260820`. PR #12 was merged unchanged as
+  canonical main `10177b360077ef1347db531c14ca287757ef2d8f`; this branch now
+  contains an ordinary, non-force merge of that exact main. Conflict resolution
+  preserves PR #12's deterministic zero-APIS blueprint, bounded evaluator retry
+  and native `getNativeFormativeMastery` routing together with every PR #14
+  authority, CSRF, catalog and retired-discussion correction. PR #14 remains a
+  Draft until the combined tree rebuilds, passes both exact Node authorities and
+  receives a fresh exact-head independent review.
 - Hostile regression against the unmodified base proved that an authenticated
   browser could set `submissions.ai_score`, `ai_verdict` and `source` directly,
   and that a syntactically valid but catalog-absent lesson could create both a
@@ -48,10 +49,11 @@ Last updated: 2026-08-20
   resolves the exact lesson from `site/data/manifest.json`; all four first-read
   mutation handlers do so before their helper can touch D1. Lesson blueprint
   title/block/excerpt now come from the hydrated authoritative lesson, while
-  mode/genres come from `site/data/literary-taxonomy.json`. Cache authority is
-  bumped to `participation-matrix-v7-server-authority`; an absent lesson stops
-  before cache lookup/write or APIS, and pre-hardening cache keys cannot hit.
-  The removed UI's
+  mode/genres come from `site/data/literary-taxonomy.json`. The endpoint returns
+  the source-deterministic blueprint with `Cache-Control: no-store`; it makes no
+  APIS call and does not read or write the runtime cache. An absent lesson fails
+  HTTP 400 and missing authoritative taxonomy/content fails HTTP 503, both with
+  zero APIS/cache side effects. The removed UI's
   legacy discussion POST is fail-closed HTTP 410/no-store and makes no GitHub,
   D1 or Queue call; discussion GET remains read-only. There is no schema,
   migration, scoring-policy, manifest or semantic-revision change.
@@ -70,22 +72,23 @@ Last updated: 2026-08-20
   rejected native session produces no D1, APIS or Queue side effect. The local
   `READING_TEST_SLUG` seam cannot bypass this request gate.
 - Exact Node 24.18.0 and 22.21.1 each pass the complete
-  `precontent:check`. On both runtimes Reading API passes 74/74, evidence
-  contract passes 45/45, blueprint quality passes 7/7, native-content passes
-  22/22 and release-site passes 5/5. Five study-guide PDF/extraction receipts
-  verify on both runtimes. The deterministic formal staging has 1,223 files /
-  164,385,738 bytes, projected SHA-256
-  `263ee59551937b688d441155017e55114d1e9b5ce502976c5eace0543936d665`
+  `precontent:check`. On both runtimes the combined focused matrix passes 96/96,
+  Reading API passes 74/74, evidence contract passes 52/52, blueprint quality
+  passes 6/6, native-content passes 22/22 and release-site passes 5/5. Five
+  study-guide PDF/extraction receipts verify on both runtimes. After both full
+  gates, Node 24 rebuilt the deterministic formal staging and both runtimes
+  checked the same bytes: 1,223 files / 164,387,142 bytes, projected SHA-256
+  `ac6efa919a516c272209a94e0f078373bbfaabdf5c28766dd188cb0b077ec65e`
   and artifact aggregate SHA-256
-  `e945e7b720c76f2d07d3faea5e7e466b27351098ea17151f5778a488cadc997e`;
+  `3fcc42802b5f2478e0cc3ec3ffa720ce7feacff6fe9a14ae17c0dddf32085825`;
   the tracked manifest byte SHA-256 is
-  `da2e155b0fe0e1cee67b729bb51a9d08246011e9ce7104cc86b74ccab2e3d8ce`.
-  Pull-request CI now executes the exact evidence, blueprint and local-D1
-  Reading suites under both Node authorities before the artifact checks.
-- The earlier `P0/P1=0` statement is withdrawn because it predates the reopened
-  findings. A fresh independent exact-head review is required after these fixes,
-  and another fresh review is required after the mandatory post-PR-#12 rebase.
-  Until then the source candidate remains a Draft, not a merge authority.
+  `9ff27ae8abd5b7dcafc503aa493809d2ff4b119cb176bdbf481f9298dda975a6`.
+  Pull-request CI executes the exact evidence, blueprint and local-D1 Reading
+  suites under both Node authorities before the artifact checks; its combined
+  exact-head result remains pending until the branch is pushed.
+- The predecessor exact-head `P0/P1=0` review does not cover the merged tree. A
+  fresh independent exact-head review is required after rebuild, tests and CI;
+  until then the source candidate remains a Draft, not a merge authority.
 - Production remains unchanged at Pages deployment
   `18213286-37d1-4b71-80b6-78e8b986ed3d` / source `a97eba7` (full source
   `a97eba7589ed6afa7df30ba4f37f2241a22d90d0`). Its deployed Worker and current
@@ -102,51 +105,149 @@ Last updated: 2026-08-20
   commit and rebuild/check the formal artifact manifest. No production or data
   rollback applies unless a later, separately authorized release occurs.
 
-## 2026-08-15 prelaunch assessment and reservation-correctness candidate
+## 2026-08-15 combined assessment, retry and native formative source draft
+
+- This source-only draft starts from canonical main
+  `7c7e1e06bad67b17dfa16a500a64ca2e02ad08c1`. The accepted
+  `bdfz-native-auth/1` projection, exact native authorization format and
+  stable-user dual-credential gate already supersede the older isolated
+  reading-bridge implementation.
+- One behavior was not superseded: an exact native request that reaches
+  `/api/reading/formative-mastery` must use a native-session-bound RPC rather
+  than passing an empty Web cookie to `getFormativeMastery`. The source now
+  classifies authorization as absent, non-native, exact-native or malformed
+  native-looking. Absent/non-native authorization may use Web
+  `resolveSession`/`getFormativeMastery` only with a valid bounded
+  `bdfz_uc_session` cookie. A header in the native `Bearer ywat_` namespace
+  that fails the exact token shape remains 401 even when that cookie is also
+  present. Exact native authorization selects only
+  `getNativeFormativeMastery`; a missing selected method remains 503.
+- An exact native request with a Web cookie resolves both identities before
+  reading reconciliation. Different stable User Center ids remain 401; a
+  same-user cookie is only a conflict check and never becomes a mastery-RPC
+  fallback. The paired User Center entrypoint must independently expose and
+  verify the exact `getNativeFormativeMastery` RPC before any release. This YW
+  source candidate therefore remains Draft and undeployed until that separately
+  owned User Center contract, hostile tests and shared-hub review complete one
+  synchronized transaction; this source handoff does not claim live hub
+  readiness.
+- This is a `no-new-capability`, no-schema-change and no-data-write source
+  handoff. It changes no learning rule, formative denominator, scoring role,
+  manifest, App pointer, D1 row, Queue message, Pages deployment or production
+  traffic. Source rollback is a normal revert of the exact candidate commit.
+- Exact Node 24.18.0 and 22.21.1 each pass the unified focused 85/85 contract
+  matrix and the complete `precontent:check`, including Reading API 70/70,
+  native-content 22/22 and release-site 5/5. The archived textbook page input
+  was supplied through a checksum-verified isolated 693-file / 75,196,340-byte
+  subset of accepted archive `2026-08-15-textbook-ai-migration`; all 693 files
+  match the canonical page SHA-256 inventory, and no archived or canonical
+  source byte was modified.
+- The one formal build from the combined tree contains 1,223 files / 164,378,212
+  bytes. Its projected aggregate is
+  `21485dbc7c0c167925a0f3d56835ee19b379ce413aff23aab4c102b244e1f922`,
+  artifact aggregate is
+  `ae7c907010f3a148f7b68a3bfc5442220091759202acb85ce5a11e04f742f0a2`,
+  tracked manifest byte SHA-256 is
+  `48b94d286f50a33f9cb9095e05655f6eba2d4ae712c1adb99f033ac6162339e4`,
+  and formal marker byte SHA-256 is
+  `dd2c63801c44d266428efa495b6cf872665980a520ea40c21be0ac52045dc07a`.
+  The stable App pointer remains
+  `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`
+  with the same 278 receipted native paths. Neither predecessor PR's artifact
+  count or digest is accepted as authority for this combined draft.
+
+## 2026-08-20 current production and rollback authority (read-only)
+
+- The canonical `yw.bdfz.net` alias currently serves Pages deployment
+  `18213286-37d1-4b71-80b6-78e8b986ed3d`, whose deployment metadata records
+  source commit `a97eba7589ed6afa7df30ba4f37f2241a22d90d0`. The previously
+  described deployment `8da16237-ac91-47e1-afe2-7843e2d4c8a4` / source
+  `0ff5d5604ceefef92c99c07033f1e900d9edaaed` is the verified rollback
+  authority, not current production. Neither deployment is canonical source
+  main or this combined candidate.
+- Production D1 retains migrations 0001--0005 and all historical rows. Live
+  reading health remains `reading-schema-v4` with
+  `bdfz-learning-evidence-v1`. Learning health advertises the current formal
+  e310 source family but still projects formative authority
+  `yw-formative-20a7145bd573bbb7` / 1,019 items and explicitly reports
+  transport/formative-only activation, no runtime scoring, no A+ effect and no
+  persistence claim.
+- The v1 Queue remains the rollback producer path. The v2 main and DLQ remain
+  paused with no producer or consumer. User Center production remains its v251
+  rollback; the existing Web binding is usable for the legacy cookie path, but
+  native identity/v2 mastery is not live. No source-only result below changes
+  those facts or authorizes a deployment, migration, Queue change, User Center
+  change, App publication or student-data write.
+- Later sections that call the 2026-08-11 carrier "current production" are
+  retained historical receipts. This section is the current live disposition,
+  and production remains NO-GO until a separately authorized synchronized
+  transaction proves the exact combined source, hub contract, backup/restore,
+  v2 delivery and real-account A--F readback.
+
+## 2026-08-15 assessment, bounded evaluator retry and anonymous-AI retirement candidate
 
 - This source-only candidate starts from canonical main
-  `2f061c59b53c9ef749126d174ee8624d67082be4`. Deterministic assessment now
-  accepts adjacent and fullwidth choice letters (`BC`, `選BC`, `ＢＣ`, `DBB`),
-  common explanation connectors, Arabic equivalents for circled-number answers,
-  traditional/simplified equivalents and whitespace sentence boundaries. An
-  explicitly prefixed single-choice answer wins over letters in a later
-  `B項…` explanation, but an immediate list/alternative tail such as `A和B`,
-  `A、B`, `A或B` or `A與B` remains invalid. An unqualified `AB` or `A、B`
-  likewise remains invalid for a single-choice item.
-- An uncommitted evaluator reservation is a 60-second durable lease. Initial
-  `created_at` values use the canonical `.000Z` form; one exact-value D1 CAS may
-  move an abandoned lease to `.001Z` and reuse the same source event. That marker
-  permits at most one reclaim across isolates. A fresh contender waits, a second
-  expiry remains blocked by the original ten-minute rate window, and a late
-  original plus its permitted reclaim can commit only one interaction,
-  evaluation, outbox row and Queue send. Both guarded evaluation routes use this
-  same helper and the UI no longer claims that an uncommitted answer was saved.
-- Study-guide completion now fails closed unless the catalog status is
-  `available`. Receipt reconciliation uses `central_receipted_at` as a durable
-  15-minute readback-poll lease acquired by exact observed-value CAS; the
-  timestamp alone is never acceptance evidence, and `central_disposition`
-  remains the only receipt fact. This bounds health-driven User Center RPCs
-  across Worker isolates without delaying Queue retry state.
-- Pull-request CI includes the deterministic study-guide assessment suite. The
-  focused contract matrix passes 57/57 on exact Node 24.18.0 and 22.21.1, and
-  the complete `precontent:check` passes on both. Hostile coverage includes
-  ten-way initial/reclaim races, late-original commit, second-expiry rejection
-  and twenty-isolate receipt-poll contention.
-- No catalog, formative authority, learning manifest, semantic revision or App
-  pointer changed. Their SHA-256 values remain respectively
-  `4ac9e223be27316aa5324ab5c9b474e378f61ec703ac9140b590e1a42c3c89d0`,
-  `1307286d4dd9f1e687553a30c4f87d5403fe237cac56727400233abfac36d334`,
-  `2a6824db45cac416c4aee3a95ce83aba5be393b6a94034799d6d18cb56f9f998`
-  and `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
-  The rebuilt formal artifact contains 1,223 files / 164,376,983 bytes with
-  aggregate SHA-256
-  `b98548e130ff13ee407e09cb7102a253f7472c0920ed4cd5e398c9caf807d9ac`;
-  its tracked manifest byte SHA-256 is
-  `ed35eaab78d6411a20c140b5b15704207f2ecb0bb7af4c2bde397f7494066b23`.
-- This is a `no-new-capability`, no-schema-change source correction. It made no
-  deployment, D1/Queue/User Center write, traffic change or rollback. Any later
-  release must independently review and pin the resulting exact commit before
-  using the external executor.
+  `7c7e1e06bad67b17dfa16a500a64ca2e02ad08c1`. Single-choice grading now applies
+  one fail-closed precedence to the full normalized response: an explicit
+  single-choice phrase, exactly one answer-lead letter, or exactly one deduped
+  A--D letter in the full response. Multiple distinct letters remain ambiguous.
+  The source-owned 46-case fixture corpus locks simplified/traditional wording,
+  explanation-letter pollution, punctuation, circled choices and the known
+  ambiguous `A项错误，B项正确` tradeoff. Student feedback displays source circled
+  glyphs such as `①②④` while comparison stays numeric.
+- A first evaluator-stage APIS, parse or normalization failure expires only its
+  exact `.000Z` reservation by D1 compare-and-swap. One immediate same-mutation
+  retry may reclaim the same source event as `.001Z`; ten concurrent contenders
+  still admit one evaluator and the slot count remains one. A second evaluator
+  failure expires `.001Z` only for truthful timing and returns
+  `evaluator_retry_exhausted`; it never permits a third evaluation. Recording or
+  D1 failures do not release a reservation. The exact guarantee is one durable
+  YW slot and at most two APIS invocations, not preservation of upstream APIS
+  quota.
+- Capacity exhaustion and evaluator-retry exhaustion retain the compatible
+  `learning_submission_rate_limited` code but expose distinct `limitReason`
+  values and the exact `retryAfterSeconds`. Both interaction and study-guide UI
+  paths give reason-specific retry guidance without suggesting an immediate
+  retry after exhaustion.
+- `/api/learning-check` authenticates through the normal My identity path before
+  returning its existing retired 410 response. Unused `/api/chat` is retired
+  with 410, and the active `/api/lesson-blueprint` now returns the existing
+  source-deterministic blueprint without any anonymous APIS call. No IP limiter,
+  new binding or mutable request-global state was introduced.
+- Pull-request CI runs the learning manifest, evidence, preview-isolation,
+  reading-identity, 46-case assessment, both UI retry paths and all 189
+  deterministic lesson blueprints on exact Node 24.18.0 and 22.21.1 before the
+  formal artifact gate.
+  The complete local source gate passes on both exact Node authorities; the
+  unified focused matrix is 85/85 per runtime, Reading API is 70/70, native
+  content is 22/22 and release-site is 5/5. The rebuilt formal artifact is
+  1,223 files /
+  164,378,212 bytes with aggregate SHA-256
+  `ae7c907010f3a148f7b68a3bfc5442220091759202acb85ce5a11e04f742f0a2`;
+  its projected aggregate is
+  `21485dbc7c0c167925a0f3d56835ee19b379ce413aff23aab4c102b244e1f922`
+  and tracked manifest byte SHA-256 is
+  `48b94d286f50a33f9cb9095e05655f6eba2d4ae712c1adb99f033ac6162339e4`.
+- No catalog, formative authority, learning manifest, semantic revision,
+  schema, binding, route topology, Queue, User Center or App pointer changed.
+  This is a `no-new-capability` source correction. It performs no deployment,
+  D1/Queue/User Center write, traffic change or rollback; any release still
+  requires independent exact-commit review and the external production gate.
+- A separately received JSON described as “2026 北京卷语文” remains an
+  unverified YW input. Current GKS canonical `master` is
+  `c741e66add56d458df37bcf678ba8fec61779645` and its current rolling-five
+  catalog is 2022--2026 with 119 items. GKS draft PR #1 remains an open Draft at
+  `6f46f96416dd896b2c60e70711fd63ba243fc899`; it is a historical conflicting
+  branch, not current source authority. Neither that branch nor a separately
+  supplied JSON is a reusable YW derivation or publication authority.
+- YW must not import, publish or derive content from the supplied JSON or copy
+  question/answer text from the waived live release. A future, separately
+  reviewed YW PR may add only a source-pinned, link-only transfer overlay after
+  GKS source and live authority are reconciled and the YW gate independently
+  has a continuous original paper, two independent sources, per-page and
+  per-question visual evidence with crop SHA-256, independent Codex answers,
+  dual sign-off and publication-hash binding. GKS remains the evidence owner;
+  no YW scoring event, D1/Queue write, User Center or App change is authorized.
 
 ## 2026-08-14 dedicated precheck project correction
 
@@ -369,6 +470,10 @@ Production serves Pages deployment
 2026-08-09 candidate/release narrative.
 
 ## 2026-08-11 Web reading finalization
+
+This section is retained as the 2026-08-11 release receipt. Its former
+"current production" wording is superseded by the 2026-08-15 rollback
+authority above.
 
 - Students can use 189 lesson units. The source manifest retains 191 records,
   including two hidden system records; all 189 student-visible pages use one

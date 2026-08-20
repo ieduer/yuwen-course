@@ -5,13 +5,22 @@ import {
   nativeAuthorizationDecision,
   nativeReadingIdentityProjection,
   readingCredentialDecision,
+  readingFormativeMasteryRpcDecision,
   readingIdentityDecision,
 } from "../site/reading-identity-source.js";
 
-test("native reading authorization is exact and malformed credentials fail closed", () => {
+test("native reading authorization distinguishes non-native credentials from malformed native credentials", () => {
   const token = `Bearer ywat_${"a".repeat(43)}`;
   assert.deepEqual(nativeAuthorizationDecision(""), { status: "absent", authorizationHeader: "" });
   assert.deepEqual(nativeAuthorizationDecision(token), { status: "authorized", authorizationHeader: token });
+  assert.deepEqual(nativeAuthorizationDecision("Bearer unrelated"), {
+    status: "non_native",
+    authorizationHeader: "",
+  });
+  assert.deepEqual(nativeAuthorizationDecision("Basic unrelated"), {
+    status: "non_native",
+    authorizationHeader: "",
+  });
   assert.deepEqual(nativeAuthorizationDecision(`bearer ${token.slice(7)}`), {
     status: "unauthorized",
     authorizationHeader: "",
@@ -60,6 +69,41 @@ test("dual Web and native credentials must identify the same User Center user", 
   });
   assert.deepEqual(readingCredentialDecision(nativeUser, { userId: 41, slug: "web" }), {
     status: "unauthorized",
+  });
+});
+
+test("formative mastery selects one credential-bound RPC without fallback", () => {
+  const authorization = `Bearer ywat_${"a".repeat(43)}`;
+  const cookie = "bdfz_uc_session=web-session";
+  assert.deepEqual(readingFormativeMasteryRpcDecision("", cookie), {
+    status: "web",
+    rpcName: "getFormativeMastery",
+    credential: cookie,
+  });
+  assert.deepEqual(readingFormativeMasteryRpcDecision("Bearer unrelated", cookie), {
+    status: "web",
+    rpcName: "getFormativeMastery",
+    credential: cookie,
+  });
+  assert.deepEqual(readingFormativeMasteryRpcDecision("Bearer unrelated", ""), {
+    status: "unauthorized",
+    rpcName: "",
+    credential: "",
+  });
+  assert.deepEqual(readingFormativeMasteryRpcDecision("", ""), {
+    status: "unauthorized",
+    rpcName: "",
+    credential: "",
+  });
+  assert.deepEqual(readingFormativeMasteryRpcDecision(authorization, cookie), {
+    status: "native",
+    rpcName: "getNativeFormativeMastery",
+    credential: authorization,
+  });
+  assert.deepEqual(readingFormativeMasteryRpcDecision(`${authorization}x`, cookie), {
+    status: "unauthorized",
+    rpcName: "",
+    credential: "",
   });
 });
 

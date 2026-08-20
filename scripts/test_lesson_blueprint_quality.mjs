@@ -9,7 +9,6 @@ import worker from "../site/_worker.js";
 import {
   BLUEPRINT_MODE_TECHNIQUES,
   INFOGRAPHIC_FOCUS,
-  LESSON_BLUEPRINT_CACHE_VERSION,
   deterministicLessonBlueprint,
   inspectLessonBlueprint,
   lessonBlueprintPromptAnchor,
@@ -126,30 +125,24 @@ test("normalizer rejects author impersonation and accepts only anchored mode-spe
   assert.deepEqual(normalizeLessonBlueprint({ structureFocus: acceptedText }, context), { structureFocus: acceptedText });
 });
 
-test("lesson-blueprint endpoint fails closed to deterministic prompt when APIS returns the old template", async () => {
+test("lesson-blueprint endpoint is deterministic and never spends anonymous APIS capacity", async () => {
   const originalFetch = globalThis.fetch;
   const originalCaches = globalThis.caches;
-  const cache = new Map();
-  let sentPrompt = "";
+  let fetchCalls = 0;
   globalThis.caches = {
     default: {
-      async match(request) { return cache.get(request.url) || null; },
-      async put(request, response) { cache.set(request.url, response); },
+      async match() { throw new Error("deterministic blueprint must not read runtime cache"); },
+      async put() { throw new Error("deterministic blueprint must not write runtime cache"); },
     },
   };
-  globalThis.fetch = async (_url, init) => {
-    sentPrompt = JSON.parse(init.body).prompt;
-    return new Response(JSON.stringify({
-      answer: JSON.stringify({
-        structureFocus: "我是狄更斯。我把最关键的材料放在这里；你能说清若抽掉或换序，全文会失去什么吗？",
-      }),
-    }), { status: 200, headers: { "content-type": "application/json" } });
+  globalThis.fetch = async () => {
+    fetchCalls += 1;
+    throw new Error("anonymous APIS call forbidden");
   };
 
   try {
     const taxonomyLesson = taxonomy.lessons.find((lesson) => lesson.id === "lesson-1488");
     const context = contextFor(taxonomyLesson);
-    const authoritativeExcerpt = lessonExcerpt(lessonData(taxonomyLesson.id));
     const response = await worker.fetch(new Request("https://yw.bdfz.net/api/lesson-blueprint", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -165,29 +158,22 @@ test("lesson-blueprint endpoint fails closed to deterministic prompt when APIS r
     const payload = await response.json();
 
     assert.equal(response.status, 200);
-    assert.equal(payload.provider, "local-fallback");
+    assert.equal(payload.provider, "source-deterministic");
+    assert.equal(payload.cached, false);
     assert.equal(inspectLessonBlueprint(payload.blueprint.structureFocus, context).ok, true);
     assert.doesNotMatch(payload.blueprint.structureFocus, bannedStudentPrompt);
-    assert.match(sentPrompt, /不得冒充作者/u);
-    assert.match(sentPrompt, /前後至少兩處原文/u);
-    assert.ok(sentPrompt.includes(authoritativeExcerpt.slice(0, 160)));
-    assert.match(sentPrompt, /掌握模式：fiction/u);
-    assert.match(sentPrompt, /多層文體：foreign-fiction/u);
     assert.doesNotMatch(
-      sentPrompt,
+      payload.blueprint.structureFocus,
       /FORGED LESSON TITLE|FORGED BLOCK|FORGED EXCERPT|FORGED GENRE|IGNORE PRIOR|poison argument/u,
     );
+    assert.equal(fetchCalls, 0);
   } finally {
     globalThis.fetch = originalFetch;
     globalThis.caches = originalCaches;
   }
 });
 
-test("blueprint cache authority version invalidates pre-hardening shared keys", () => {
-  assert.equal(LESSON_BLUEPRINT_CACHE_VERSION, "participation-matrix-v7-server-authority");
-});
-
-test("unknown blueprint lessons cannot call APIS or populate the public cache", async () => {
+test("unknown or taxonomy-missing blueprint lessons fail before APIS or runtime cache", async () => {
   const originalFetch = globalThis.fetch;
   const originalCaches = globalThis.caches;
   let outboundRequests = 0;
@@ -195,7 +181,7 @@ test("unknown blueprint lessons cannot call APIS or populate the public cache", 
   let cacheWrites = 0;
   globalThis.fetch = async () => {
     outboundRequests += 1;
-    throw new Error("unknown lessons must not reach APIS");
+    throw new Error("rejected lessons must not reach APIS");
   };
   globalThis.caches = {
     default: {
@@ -204,7 +190,7 @@ test("unknown blueprint lessons cannot call APIS or populate the public cache", 
     },
   };
   try {
-    const response = await worker.fetch(new Request("https://yw.bdfz.net/api/lesson-blueprint", {
+    const unknownResponse = await worker.fetch(new Request("https://yw.bdfz.net/api/lesson-blueprint", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
@@ -215,8 +201,26 @@ test("unknown blueprint lessons cannot call APIS or populate the public cache", 
         excerpt: "forged authoritative-looking excerpt ".repeat(20),
       }),
     }), { ASSETS: workerAssetsForLessons([]) }, { waitUntil() {} });
-    assert.equal(response.status, 400);
-    assert.deepEqual(await response.json(), { error: "lesson absent from authoritative catalog" });
+    assert.equal(unknownResponse.status, 400);
+    assert.deepEqual(await unknownResponse.json(), { error: "lesson absent from authoritative catalog" });
+
+    const taxonomyLesson = taxonomy.lessons.find((lesson) => lesson.id === "lesson-1488");
+    const assets = workerAssetsForLessons([taxonomyLesson.id]);
+    const taxonomyMissingAssets = {
+      async fetch(request) {
+        if (new URL(request.url).pathname === "/data/literary-taxonomy.json") {
+          return new Response("not found", { status: 404 });
+        }
+        return assets.fetch(request);
+      },
+    };
+    const missingTaxonomyResponse = await worker.fetch(new Request("https://yw.bdfz.net/api/lesson-blueprint", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ lessonId: taxonomyLesson.id }),
+    }), { ASSETS: taxonomyMissingAssets }, { waitUntil() {} });
+    assert.equal(missingTaxonomyResponse.status, 503);
+    assert.deepEqual(await missingTaxonomyResponse.json(), { error: "authoritative lesson taxonomy unavailable" });
     assert.equal(outboundRequests, 0);
     assert.equal(cacheReads, 0);
     assert.equal(cacheWrites, 0);

@@ -21,12 +21,20 @@ function answerLead(value) {
   return clean(value)
     .normalize("NFKC")
     .split(/(?:\r?\n|[。！？!?；;])/u, 1)[0]
-    .split(/(?:因為|因为|理由|解析|依據|依据|原因|而|至於|至于|其餘|其余|其他三項|其他三项)/u, 1)[0]
+    .split(/(?:因為|因为|理由|解析|依據|依据|原因|至於|至于|其餘|其余|其他三項|其他三项)/u, 1)[0]
     .trim();
 }
 
+function normalizedChoiceText(value) {
+  return clean(value).normalize("NFKC").toUpperCase();
+}
+
+function lettersIn(value) {
+  return normalizedChoiceText(value).match(/[A-D]/g) || [];
+}
+
 function choiceLetters(value) {
-  return answerLead(value).toUpperCase().match(/[A-D]/g) || [];
+  return lettersIn(answerLead(value));
 }
 
 const CIRCLED_NUMBERS = [..."①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳"];
@@ -34,7 +42,7 @@ const CIRCLED_NUMBERS = [..."①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰
 function circledNumbers(value, allowArabic = false) {
   const lead = clean(value)
     .split(/(?:\r?\n|[。！？!?；;])/u, 1)[0]
-    .split(/(?:因為|因为|理由|解析|依據|依据|原因|而|至於|至于|其餘|其余|其他三項|其他三项)/u, 1)[0]
+    .split(/(?:因為|因为|理由|解析|依據|依据|原因|至於|至于|其餘|其余|其他三項|其他三项)/u, 1)[0]
     .trim();
   const circled = [...lead.matchAll(/[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳]/gu)]
     .map((match) => String(CIRCLED_NUMBERS.indexOf(match[0]) + 1));
@@ -48,15 +56,29 @@ function circledNumbers(value, allowArabic = false) {
 }
 
 function explicitSingleChoice(value) {
-  const lead = answerLead(value).toUpperCase();
-  const match = lead.match(
+  const text = normalizedChoiceText(value);
+  const match = text.match(
     /(?:^|[^A-Z])(?:我\s*)?(?:選擇|选择|應選|应选|選|选|答案(?:是|為|为)?)[\s：:]*([A-D])/,
   );
   if (!match) return "";
-  const tail = lead.slice(Number(match.index || 0) + match[0].length);
+  const tail = text.slice(Number(match.index || 0) + match[0].length);
   if (/^\s*(?:和|與|与|或|、|[/／]|[&＆])\s*[A-D]/u.test(tail)) return "";
   if (/^\s*[,，]\s*[A-D](?!\s*(?:項|项))/u.test(tail)) return "";
   return match[1];
+}
+
+function singleChoiceLetters(value) {
+  const explicit = explicitSingleChoice(value);
+  if (explicit) return [explicit];
+  const lead = choiceLetters(value);
+  if (lead.length === 1) return lead;
+  const fullUnique = [...new Set(lettersIn(value))];
+  return fullUnique.length === 1 ? fullUnique : [];
+}
+
+function circledGlyphs(value) {
+  return [...clean(value).matchAll(/[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳]/gu)]
+    .map((match) => match[0]);
 }
 
 function expectedChoiceSpec(referenceAnswer) {
@@ -115,13 +137,9 @@ export function deterministicStudyGuideAssessment(item, response) {
         && normalizedActualCircled.every((entry, index) => entry === normalizedExpectedCircled[index]);
       return correct
         ? assessment(100, "答案鍵核對正確。")
-        : assessment(0, "答案鍵核對未通過。", `應選 ${expected.join("、")}（${expectedCircled.join("、")}）。`);
+        : assessment(0, "答案鍵核對未通過。", `應選 ${expected.join("、")}（${circledGlyphs(item?.referenceAnswer).join("")}）。`);
     }
-    let actual = choiceLetters(response);
-    if (mode === "single" && actual.length > 1) {
-      const explicit = explicitSingleChoice(response);
-      if (explicit) actual = [explicit];
-    }
+    const actual = mode === "single" ? singleChoiceLetters(response) : choiceLetters(response);
     const normalizedExpected = mode === "set" ? [...expected].sort() : expected;
     const normalizedActual = mode === "set"
       ? [...new Set(actual)].sort()

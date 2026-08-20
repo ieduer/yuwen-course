@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1223,
-  "totalBytes": 164385738,
-  "aggregateSha256": "e945e7b720c76f2d07d3faea5e7e466b27351098ea17151f5778a488cadc997e",
+  "totalBytes": 164387142,
+  "aggregateSha256": "3fcc42802b5f2478e0cc3ec3ffa720ce7feacff6fe9a14ae17c0dddf32085825",
   "files": [
     {
       "path": "_headers",
@@ -12,13 +12,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 117938,
-      "sha256": "1505821acde9fca226f2cff3207d378fdab3da6e5834126d3a99315157ffb318"
+      "bytes": 113978,
+      "sha256": "981f16f75407373b5549f0134b4a0aa91f4069f88746d42230df70919a263943"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "858444f3a1d1e5c9a417ecd6174cccd2aaee23c3b6b1091478a35cc1180bf6c1"
+      "sha256": "4d8fe8ad0b72955b0ff284c87d9c61c99d400b5744ffe0bc1cae225a4f910a60"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1412,8 +1412,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 168203,
-      "sha256": "71e01e2e63b00fdd7c7d9c61f6bace202b96b397e20a988e5118a93d8fd736e2"
+      "bytes": 169221,
+      "sha256": "4981677747eb5d3210772bae49f87e3e899c23e156cdbd885e73fb591f2fd3a7"
     },
     {
       "path": "assets/atlas.css",
@@ -6042,8 +6042,8 @@
     },
     {
       "path": "learning-evidence-source.js",
-      "bytes": 61060,
-      "sha256": "e2cc4d24bc4f45ef9fe66eda31b3831fa1f32f712b4d02ddeae0541eacfa2645"
+      "bytes": 63971,
+      "sha256": "3cfb2d289723fef6a37f38752e903516a94b9086a1d5dcfaa74c6b08c104537c"
     },
     {
       "path": "lesson-blueprint-rules.js",
@@ -6107,8 +6107,8 @@
     },
     {
       "path": "reading-identity-source.js",
-      "bytes": 6320,
-      "sha256": "055865690f79367af9b9e3d9ea0add5bd074c2e0e315e569e2bcbe6f795376f1"
+      "bytes": 7210,
+      "sha256": "a042389011fef4a5c58bf3be8f0757c66b180a6d5659db413e46a99b2c1a3802"
     },
     {
       "path": "star.html",
@@ -6117,8 +6117,8 @@
     },
     {
       "path": "study-guide-assessment.js",
-      "bytes": 10587,
-      "sha256": "6bb73aed50cae6eb5c37b47b4f761719c9b7c36357e313a1195be6fb0d5c81bd"
+      "bytes": 11132,
+      "sha256": "89151f4e08f9932d405a932df4d608b5d671deb21dda1e3f500d8099d8f8a50b"
     }
   ]
 }

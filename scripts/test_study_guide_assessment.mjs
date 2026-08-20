@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import test from "node:test";
 
 import {
@@ -8,6 +10,33 @@ import {
   normalizeOpenStudyGuideAssessment,
   studyGuideAssessmentPrompt,
 } from "../site/study-guide-assessment.js";
+
+const fixtureCorpus = JSON.parse(readFileSync(
+  resolve(import.meta.dirname, "study-guide-answer-fixtures.json"),
+  "utf8",
+));
+
+test("realistic study-guide answer fixture corpus stays source-owned and fail-closed", () => {
+  assert.equal(fixtureCorpus.schemaVersion, "yw-study-guide-answer-fixtures-v1");
+  assert.ok(Number.isInteger(fixtureCorpus.minimumCaseCount));
+  assert.ok(fixtureCorpus.cases.length >= fixtureCorpus.minimumCaseCount);
+  assert.equal(new Set(fixtureCorpus.cases.map((entry) => entry.id)).size, fixtureCorpus.cases.length);
+  const coverage = new Set(fixtureCorpus.cases.flatMap((entry) => entry.covers || []));
+  for (const required of ["M1", "M6", "N1", "N2", "known-tradeoff", "single", "multiple", "sequence", "circled", "punctuation"]) {
+    assert.ok(coverage.has(required), `fixture coverage ${required}`);
+  }
+  for (const fixture of fixtureCorpus.cases) {
+    const actual = deterministicStudyGuideAssessment(fixture.item, fixture.response);
+    assert.ok(actual, fixture.id);
+    assert.deepEqual({
+      provider: actual.provider,
+      score: actual.score,
+      correctness: actual.correctness,
+      passed: actual.passed,
+      gap: actual.gap,
+    }, fixture.expected, fixture.id);
+  }
+});
 
 test("source-owned single and multiple choice answers are graded without browser claims", () => {
   const single = { detailTag: "content-discrimination", referenceAnswer: "C" };
