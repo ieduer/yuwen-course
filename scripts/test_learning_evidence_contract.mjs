@@ -412,6 +412,70 @@ test("YW exposes compound health and the exact existing A+ source activation rec
     containsIdentityData: false,
   });
   assert.deepEqual(calls.map(({ method }) => method), ["health", "source"]);
+  assert.deepEqual(calls[0].descriptor, {
+    schemaVersion: "bdfz-learning-source-health-descriptor-v1",
+    sources: [{
+      sourceSiteKey: "yw",
+      sourceSystem: "yuwen-course",
+      contractVersion: "yw-aplus-e310-v2",
+      registryVersion: "yw-interactions-2026-08-09-v2",
+      resourceCatalog: {
+        catalogVersion: registry.compatibilityContracts.aPlusGate.sourceReleaseId,
+        manifestVersion: manifest.manifestVersion,
+        manifestDigest: manifest.resourceKeyHash,
+        sourceReleaseId: registry.compatibilityContracts.aPlusGate.sourceReleaseId,
+        mappingVersion: "yw-canonical-learning-mapping-v1",
+        publishedItemCount: manifest.itemCount,
+      },
+      activeAPlusProjection: {
+        assessmentKind: "performance",
+        scoringRole: "a_plus_gate",
+        excludedQuestionKinds: ["evaluation"],
+        excludedItemCount: 101,
+        eligibleItemCount: 768,
+        thresholdPolicy: {
+          percent: 90,
+          activationBaselineEligibleUnits: 768,
+          requiredDistinctCreditUnits: 692,
+          annualStabilityRule: "fixed_for_academic_year_task_pool_append_does_not_raise_requirement",
+        },
+        academicYearPolicy: {
+          status: "active",
+          policyVersion: "yw-aplus-2026-2027-v1",
+          academicYear: "2026-2027",
+          scoringMode: "fixed_distinct_credit_unit_a_plus_gate",
+        },
+      },
+      preActivationTransportCanaryPolicy: {
+        status: "active",
+        startsAt: "2026-08-11T16:00:00.000Z",
+        expiresAt: "2026-08-31T16:00:00.000Z",
+        acceptedAcademicYear: "2025-2026",
+        interactionKey: "lessonOpened",
+        eventType: "lesson_opened",
+        assessmentKind: "trace",
+        scoringRole: "none",
+        eligibilityStatus: "non_scoring",
+        verificationMethod: "source_route",
+        lessonPhase: "release_canary",
+        numericResultPolicy: "all_null",
+        effect: "audit_only_no_credit_no_grade",
+      },
+    }],
+    capabilities: [{
+      sourceSiteKey: "yw",
+      capabilityKey: "formative_mastery",
+      registryVersion: registry.registryVersion,
+      formal: {
+        manifestVersion: manifest.manifestVersion,
+        manifestDigest: manifest.resourceKeyHash,
+        itemCount: manifest.itemCount,
+      },
+      manifestVersion: formativeManifest.manifestVersion,
+      manifestDigest: formativeManifest.manifestDigest,
+      itemCount: formativeManifest.itemCount,
+    }],
+  });
   assert.deepEqual(calls[1].descriptor, {
     sourceSiteKey: "yw",
     manifestVersion: registry.compatibilityContracts.aPlusGate.sourceVersion,
