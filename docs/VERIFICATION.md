@@ -2,19 +2,42 @@
 
 ## 2026-08-20 server-authority hardening
 
-Use only the task-owned clean checkout and the verified page-image fixture. Run
-the complete source gate under both exact Node authorities:
+Use only a task-owned clean checkout. The durable page-image authority is the
+accepted path-preserving archive receipt at
+`/Users/ylsuen/CF/reports/storage_archive_records/2026-08-15-textbook-ai-migration.json`,
+checked against tracked inventory
+`/Users/ylsuen/CF/jc-textbook-reader/manifests/page-images.sha256`. If the
+canonical local source is absent, restore the whole archived path and verify it
+before either complete source gate:
+
+```zsh
+test ! -e /Users/ylsuen/textbook_ai_migration
+/Users/ylsuen/CF/scripts/restore_gdrive_archived_path.sh \
+  Users/ylsuen/textbook_ai_migration
+rclone check \
+  gdrive:Backups/CF-Archive-v1/files/Users/ylsuen/textbook_ai_migration \
+  /Users/ylsuen/textbook_ai_migration \
+  --checksum --one-way
+```
+
+There is no accepted selective 693-file restore command. After the canonical
+whole-path restore, run the complete source gate under both exact Node
+authorities using its default page root:
 
 ```zsh
 source /Users/ylsuen/.nvm/nvm.sh
 nvm use 24.18.0
-YW_PAGE_IMAGE_ROOT=/private/tmp/yw-final-audit-20260820.gzvy0h/page-fixtures \
-  npm run precontent:check
+npm run precontent:check
 
 nvm use 22.21.1
-YW_PAGE_IMAGE_ROOT=/private/tmp/yw-final-audit-20260820.gzvy0h/page-fixtures \
-  npm run precontent:check
+npm run precontent:check
 ```
+
+The 2026-08-20 run used a disposable 693-file subset restored under the task's
+temporary directory. All 693 files matched the tracked page inventory; that
+temporary location is historical evidence only, not a reproducible command or
+durable resource. The accepted archive was last read back on 2026-08-15 and was
+not re-read from Drive during this hardening task.
 
 The Reading API gate must prove all of the following with local synthetic
 identity and temporary D1 only:
@@ -37,10 +60,23 @@ bound to source event, student, lesson, `contextWords`, `a_plus_gate`,
 `source_ai_assessment` and the identical normalized three words, including a
 hostile word-mismatch rejection.
 
+It must also table-drive all ten cookie-authenticated mutation routes and prove
+that missing/foreign Origin, `Origin: null`, missing content type and
+`text/plain` fail before binding access, identity resolution, APIS, D1, outbox
+or Queue. Exact same-origin Web JSON must remain functional. Exact native header
+authentication remains Origin-independent only after JSON and the existing
+native session projection pass; a rejected native session and native
+`text/plain` must have zero side effects. The local identity seam cannot bypass
+the request gate.
+
 The blueprint and retired-discussion hostile gates must also prove:
 
 - a known lesson ignores forged browser title/block/excerpt/mode/genres and
   sends only the hydrated authoritative lesson plus server taxonomy to APIS;
+- interaction scoring ignores forged mode/genres/authors/title/excerpt, derives
+  mode/genres/author/speaker from the exact server taxonomy, stores only the
+  allowlisted student response, and returns 503 with zero side effects when the
+  taxonomy row is unavailable;
 - the v7 server-authority cache version cannot reuse a pre-hardening week-long
   cache entry;
 - an unknown lesson performs zero APIS and cache read/write operations;
@@ -70,16 +106,22 @@ git diff --check
 
 Completed source evidence on 2026-08-20: complete `precontent:check` passed on
 Node 24.18.0 and 22.21.1; Reading API passed 74/74 on each; evidence contract
-41/41 and blueprint quality 7/7 on each; native-content 22/22 and release-site
+45/45 and blueprint quality 7/7 on each; native-content 22/22 and release-site
 5/5 on each; five study-guide source receipts verified on each. Formal staging
-contains 1,223 files / 164,384,113 bytes with projected SHA-256
-`e04ccfe54d6f639d437e575d5cd17a163e3d00889c95e6ca1452cfe3279c67a8`,
+contains 1,223 files / 164,385,738 bytes with projected SHA-256
+`263ee59551937b688d441155017e55114d1e9b5ce502976c5eace0543936d665`,
 artifact aggregate
-`909593b431f5ed29b3e37bf1ae0ada6d9b9a6175dc301d27e73edca47872c8d2`
+`e945e7b720c76f2d07d3faea5e7e466b27351098ea17151f5778a488cadc997e`
 and tracked manifest byte SHA-256
-`9c717073cedb2be51a52bc64402174a8aaffea020569c5b4fdd482a62213a147`.
-Final independent P0/P1 review of the complete diff and hostile cases found
-zero remaining P0 and zero remaining P1 issue.
+`da2e155b0fe0e1cee67b729bb51a9d08246011e9ce7104cc86b74ccab2e3d8ce`.
+The earlier zero-P0/P1 statement predates the reopened findings and is not
+current review authority. Fresh independent exact-head review is required after
+this patch and again after the mandatory post-PR-#12 rebase.
+
+PR #14 must remain Draft. PR #12 is merged by suen unchanged first; then PR #14
+is rebuilt/rebased on the resulting main, its artifact is regenerated, and the
+full tests plus independent review are repeated. Current local or CI green
+status does not authorize ready or merge before that ordering gate completes.
 
 This source gate is green, but the release gate is deliberately red. With the
 verified page fixture, exact Node 24.18.0 and 22.21.1 both stop at:

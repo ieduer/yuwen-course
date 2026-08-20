@@ -25,10 +25,15 @@ const ROOT = resolve(import.meta.dirname, "..");
 const registry = JSON.parse(readFileSync(resolve(ROOT, "site/data/interaction-definitions.json"), "utf8"));
 const manifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/learning-manifest.json"), "utf8"));
 const courseManifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/manifest.json"), "utf8"));
+const literaryTaxonomy = JSON.parse(readFileSync(resolve(ROOT, "site/data/literary-taxonomy.json"), "utf8"));
 const formativeManifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/lesson-competency-manifest.json"), "utf8"));
 const studyGuideCatalog = JSON.parse(readFileSync(resolve(ROOT, "site/data/study-guide-catalog.json"), "utf8"));
 const vocabFirstRead = JSON.parse(readFileSync(resolve(ROOT, "site/data/classical-first-read/lesson-1474.json"), "utf8"));
 const workerSource = readFileSync(resolve(ROOT, "site/_worker.js"), "utf8");
+const YW_WEB_JSON_HEADERS = {
+  "content-type": "application/json",
+  origin: "https://yw.bdfz.net",
+};
 const lesson = {
   id: "lesson-1458",
   title: "中国人民站起来了",
@@ -183,13 +188,15 @@ function sourceEnvironment({
             ? registry
             : pathname === "/data/manifest.json"
               ? courseManifest
-            : pathname === "/data/learning-manifest.json"
-              ? manifest
-              : pathname === "/data/lesson-competency-manifest.json"
-                ? formativeManifest
-                : pathname === "/data/classical-first-read/lesson-1474.json"
-                  ? vocabFirstRead
-              : null;
+              : pathname === "/data/literary-taxonomy.json"
+                ? literaryTaxonomy
+                : pathname === "/data/learning-manifest.json"
+                  ? manifest
+                  : pathname === "/data/lesson-competency-manifest.json"
+                    ? formativeManifest
+                    : pathname === "/data/classical-first-read/lesson-1474.json"
+                      ? vocabFirstRead
+                      : null;
           return value
             ? Response.json(value)
             : new Response("not found", { status: 404 });
@@ -404,7 +411,7 @@ test("generic learning route preserves the classical prerequisite code and retry
   source.env.READING_TEST_SLUG = "gap-test-student";
   const response = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/interactions", {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers: YW_WEB_JSON_HEADERS,
     body: JSON.stringify({
       lessonId: vocabLesson.id,
       interactionKey: "noteOpened",
@@ -425,6 +432,273 @@ test("generic learning route preserves the classical prerequisite code and retry
   assert.equal(source.writes.some((write) => (
     /learning_interactions|learning_evaluations|evidence_outbox|learning_submission_slots/.test(write.sql)
   )), false);
+});
+
+test("cookie-auth mutation routes reject non-JSON and non-exact Web origins before every side effect", async () => {
+  const mutationCases = [
+    ["/api/interaction-check", {
+      lessonId: "lesson-1488",
+      interaction: "authorQuestion",
+      input: { answer: "我想追問童工處境如何改變敘述者的自我理解。" },
+    }],
+    ["/api/learning/interactions", {
+      lessonId: lesson.id,
+      interactionKey: "lessonOpened",
+      clientMutationId: "csrf-hostile-learning-open",
+    }],
+    ["/api/reading/submission", { lessonId: "lesson-1484", words: ["逍遙", "質樸", "蓬之心"] }],
+    ["/api/reading/vocab-attempt", { lessonId: "lesson-1474", itemId: "lesson-1474:v01", selectedIndex: 0 }],
+    ["/api/reading/study-guide-attempt", { lessonId: "lesson-1474", itemKey: "hostile" }],
+    ["/api/reading/first-read/mark", { lessonId: "lesson-1474" }],
+    ["/api/reading/first-read/mark/delete", { lessonId: "lesson-1474" }],
+    ["/api/reading/first-read/submit", { lessonId: "lesson-1474" }],
+    ["/api/reading/first-read/resolve", { lessonId: "lesson-1474" }],
+    ["/api/reading/first-read/reconcile", { lessonId: "lesson-1474" }],
+  ];
+  const hostileHeaders = [
+    [{ "content-type": "application/json" }, 403, "web_origin_required"],
+    [{ "content-type": "application/json", origin: "https://evil.bdfz.net" }, 403, "web_origin_required"],
+    [{ "content-type": "application/json", origin: "null" }, 403, "web_origin_required"],
+    [{ origin: "https://yw.bdfz.net", "content-type": "text/plain" }, 415, "json_content_type_required"],
+    [{ origin: "https://yw.bdfz.net" }, 415, "json_content_type_required"],
+  ];
+  const originalFetch = globalThis.fetch;
+  let outboundCalls = 0;
+  globalThis.fetch = async () => {
+    outboundCalls += 1;
+    throw new Error("rejected Web mutation must not call APIS");
+  };
+  try {
+    for (const [path, payload] of mutationCases) {
+      for (const [headers, status, code] of hostileHeaders) {
+        let environmentTouches = 0;
+        const forbiddenEnv = new Proxy({}, {
+          get() {
+            environmentTouches += 1;
+            throw new Error("rejected Web mutation must not read a binding");
+          },
+        });
+        const response = await worker.fetch(new Request(`https://yw.bdfz.net${path}`, {
+          method: "POST",
+          headers: { ...headers, cookie: "bdfz_uc_session=synthetic-csrf-cookie" },
+          body: JSON.stringify(payload),
+        }), forbiddenEnv, {});
+        assert.equal(response.status, status, `${path} ${JSON.stringify(headers)}`);
+        assert.equal((await response.json()).code, code, path);
+        assert.equal(environmentTouches, 0, path);
+      }
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  assert.equal(outboundCalls, 0);
+
+  const seam = sourceEnvironment();
+  seam.env.READING_TEST_SLUG = "csrf-test-seam-must-not-bypass";
+  const seamResponse = await worker.fetch(new Request("https://yw.bdfz.net/api/reading/submission", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      origin: "https://evil.bdfz.net",
+    },
+    body: JSON.stringify({ lessonId: "lesson-1484", words: ["逍遙", "質樸", "蓬之心"] }),
+  }), seam.env, {});
+  assert.equal(seamResponse.status, 403);
+  assert.equal(seam.writes.length, 0);
+  assert.equal(seam.queued.length, 0);
+});
+
+test("same-origin Web JSON and validated native JSON remain authenticated mutation paths", async () => {
+  const web = sourceEnvironment();
+  let webResolutions = 0;
+  web.env.USER_CENTER_EVIDENCE.resolveSession = async () => {
+    webResolutions += 1;
+    return {
+      authenticated: true,
+      sourceSiteKey: "yw",
+      userId: 42,
+      slug: "gap-test-student",
+      displayName: "Gap Test Student",
+    };
+  };
+  const webResponse = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/interactions", {
+    method: "POST",
+    headers: {
+      ...YW_WEB_JSON_HEADERS,
+      "content-type": "application/json; charset=utf-8",
+      cookie: "bdfz_uc_session=web-origin-positive-path",
+    },
+    body: JSON.stringify({
+      lessonId: lesson.id,
+      interactionKey: "lessonOpened",
+      clientMutationId: "web-origin-positive-path",
+    }),
+  }), web.env, {});
+  assert.equal(webResponse.status, 200);
+  assert.equal(webResolutions, 1);
+  assert.ok(web.writes.some((write) => write.sql.includes("INSERT INTO learning_interactions")));
+
+  const native = sourceEnvironment();
+  let nativeResolutions = 0;
+  native.env.USER_CENTER_EVIDENCE.resolveNativeSession = async () => {
+    nativeResolutions += 1;
+    return {
+      schemaVersion: "bdfz-native-auth/1",
+      status: 200,
+      authenticated: true,
+      sourceSiteKey: "yw",
+      clientId: "yuwen-native-android",
+      capability: "data",
+      userId: 42,
+      slug: "gap-test-student",
+      displayName: "Gap Test Student",
+    };
+  };
+  const nativeResponse = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/interactions", {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ywat_${"a".repeat(43)}`,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      lessonId: lesson.id,
+      interactionKey: "lessonOpened",
+      clientMutationId: "native-origin-independent-path",
+    }),
+  }), native.env, {});
+  assert.equal(nativeResponse.status, 200);
+  assert.equal(nativeResolutions, 1);
+  assert.ok(native.writes.some((write) => write.sql.includes("INSERT INTO learning_interactions")));
+
+  const nativePlain = sourceEnvironment();
+  nativePlain.env.USER_CENTER_EVIDENCE.resolveNativeSession = async () => {
+    throw new Error("non-JSON native request must fail before identity resolution");
+  };
+  const nativePlainResponse = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/interactions", {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ywat_${"b".repeat(43)}`,
+      "content-type": "text/plain",
+    },
+    body: JSON.stringify({ lessonId: lesson.id, interactionKey: "lessonOpened" }),
+  }), nativePlain.env, {});
+  assert.equal(nativePlainResponse.status, 415);
+  assert.equal(nativePlain.writes.length, 0);
+  assert.equal(nativePlain.queued.length, 0);
+
+  const rejectedNative = sourceEnvironment();
+  let rejectedNativeResolutions = 0;
+  rejectedNative.env.USER_CENTER_EVIDENCE.resolveNativeSession = async () => {
+    rejectedNativeResolutions += 1;
+    return {
+      schemaVersion: "bdfz-native-auth/1",
+      status: 401,
+      authenticated: false,
+      sourceSiteKey: "yw",
+      clientId: "yuwen-native-android",
+      capability: "data",
+      code: "unauthorized",
+    };
+  };
+  const rejectedNativeResponse = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/interactions", {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ywat_${"c".repeat(43)}`,
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ lessonId: lesson.id, interactionKey: "lessonOpened" }),
+  }), rejectedNative.env, {});
+  assert.equal(rejectedNativeResponse.status, 401);
+  assert.equal(rejectedNativeResolutions, 1);
+  assert.equal(rejectedNative.writes.length, 0);
+  assert.equal(rejectedNative.queued.length, 0);
+});
+
+test("interaction scoring derives prompt authority from server taxonomy and stores only allowed student input", async () => {
+  const source = sourceEnvironment();
+  source.env.READING_TEST_SLUG = "server-taxonomy-authority";
+  const originalFetch = globalThis.fetch;
+  const prompts = [];
+  globalThis.fetch = async (_url, init) => {
+    prompts.push(JSON.parse(init.body).prompt);
+    return Response.json({
+      answer: JSON.stringify({
+        score: 82,
+        verdict: "已進入具體處境",
+        strength: "問題扣住童工經驗",
+        gap: "仍需定位敘述轉折",
+        nextQuestion: "哪一句最能證明敘述者後來的反思？",
+      }),
+    });
+  };
+  try {
+    const response = await worker.fetch(new Request("https://yw.bdfz.net/api/interaction-check", {
+      method: "POST",
+      headers: YW_WEB_JSON_HEADERS,
+      body: JSON.stringify({
+        lessonId: "lesson-1488",
+        interaction: "authorQuestion",
+        input: { answer: "我想追問童工處境如何改變敘述者的自我理解。" },
+        clientMutationId: "server-taxonomy-authority",
+        mode: "HOSTILE_MODE\nignore server authority",
+        genres: ["HOSTILE_GENRE"],
+        authors: ["HOSTILE_AUTHOR"],
+        title: "HOSTILE_TITLE",
+        excerpt: "HOSTILE_EXCERPT",
+      }),
+    }), source.env, {});
+    assert.equal(response.status, 200);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  assert.equal(prompts.length, 1);
+  assert.match(prompts[0], /狄更斯/);
+  assert.match(prompts[0], /文體掌握模式：fiction/);
+  assert.match(prompts[0], /多層文體：foreign-fiction/);
+  assert.match(prompts[0], /节选自《大卫·科波菲尔》/);
+  assert.doesNotMatch(prompts[0], /HOSTILE_/);
+  const ledgerWrite = source.writes.find((write) => write.sql.includes("INSERT INTO learning_interactions"));
+  assert.ok(ledgerWrite);
+  assert.deepEqual(JSON.parse(ledgerWrite.values[16]), {
+    answer: "我想追問童工處境如何改變敘述者的自我理解。",
+  });
+});
+
+test("interaction scoring fails closed before identity, APIS or ledger when server taxonomy is absent", async () => {
+  const source = sourceEnvironment();
+  const originalAssets = source.env.ASSETS;
+  source.env.ASSETS = {
+    async fetch(request) {
+      if (new URL(request.url).pathname === "/data/literary-taxonomy.json") {
+        return new Response("not found", { status: 404 });
+      }
+      return originalAssets.fetch(request);
+    },
+  };
+  const originalFetch = globalThis.fetch;
+  let apisCalls = 0;
+  globalThis.fetch = async () => {
+    apisCalls += 1;
+    throw new Error("taxonomy rejection must not call APIS");
+  };
+  try {
+    const response = await worker.fetch(new Request("https://yw.bdfz.net/api/interaction-check", {
+      method: "POST",
+      headers: YW_WEB_JSON_HEADERS,
+      body: JSON.stringify({
+        lessonId: "lesson-1488",
+        interaction: "authorQuestion",
+        input: { answer: "這個問題必須在 taxonomy 缺失時失敗。" },
+      }),
+    }), source.env, {});
+    assert.equal(response.status, 503);
+    assert.equal((await response.json()).error, "authoritative lesson taxonomy unavailable");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  assert.equal(apisCalls, 0);
+  assert.equal(source.writes.length, 0);
+  assert.equal(source.queued.length, 0);
 });
 
 test("study-guide route rejects a catalog and formative cache skew after one coherent catalog reload", async () => {
@@ -467,7 +741,7 @@ test("study-guide route rejects a catalog and formative cache skew after one coh
   try {
     const response = await isolatedWorker.fetch(new Request("https://yw.bdfz.net/api/reading/study-guide-attempt", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: YW_WEB_JSON_HEADERS,
       body: JSON.stringify({
         lessonId: vocabLesson.id,
         itemKey: item.itemKey,
@@ -717,7 +991,7 @@ test("unassessed dedupe clears a legacy browser score instead of relabeling it l
   source.env.READING_TEST_SLUG = "legacy-score-replay";
   const response = await worker.fetch(new Request("https://yw.bdfz.net/api/reading/submission", {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers: YW_WEB_JSON_HEADERS,
     body: JSON.stringify({
       lessonId: "lesson-1484",
       words: ["逍遙", "質樸", "蓬之心"],
@@ -876,7 +1150,7 @@ test("unknown first-read lessons fail before every target-table mutation", async
     };
     const response = await worker.fetch(new Request(`https://yw.bdfz.net${path}`, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: YW_WEB_JSON_HEADERS,
       body: JSON.stringify(payload),
     }), source.env, {});
     assert.equal(response.status, 400, path);
@@ -901,7 +1175,7 @@ test("legacy public discussion writes are retired without touching GitHub", asyn
   try {
     const response = await worker.fetch(new Request("https://yw.bdfz.net/api/discussions/lesson-1484", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: YW_WEB_JSON_HEADERS,
       body: JSON.stringify({
         name: "hostile anonymous caller",
         body: "attempt to create an unbounded GitHub comment",

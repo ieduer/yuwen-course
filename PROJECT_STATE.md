@@ -6,8 +6,12 @@ Last updated: 2026-08-20
 
 - This source-only candidate is branch
   `codex/yw-server-authority-hardening-20260820`, based on exact canonical main
-  `7c7e1e06bad67b17dfa16a500a64ca2e02ad08c1`. It is independent of PR #12 and
-  does not modify, merge, close or replace that branch.
+  `7c7e1e06bad67b17dfa16a500a64ca2e02ad08c1`. It does not modify, merge, close
+  or replace PR #12. The two branches now have real merge conflicts in the
+  Worker, tests, manuals and artifact manifest: suen must merge PR #12 unchanged
+  first; only then may this Draft be rebuilt/rebased onto the resulting main,
+  rebuild its artifact and receive a fresh exact-head review. PR #14 must not be
+  marked ready or merged before that sequence completes.
 - Hostile regression against the unmodified base proved that an authenticated
   browser could set `submissions.ai_score`, `ai_verdict` and `source` directly,
   and that a syntactically valid but catalog-absent lesson could create both a
@@ -19,6 +23,13 @@ Last updated: 2026-08-20
   week-long public cache from browser-provided title/excerpt. The retired
   discussion POST was also an unauthenticated GitHub write proxy. Those paths
   violated the existing server, data and cost-authority contracts.
+- A later independent review reopened this Draft with four additional P1
+  classes. `/api/interaction-check` still trusted browser `mode` and `authors`
+  in the scoring prompt; ten cookie-authenticated mutation routes accepted
+  missing/foreign Origin and non-JSON requests; pull-request CI did not execute
+  the changed blueprint or Reading API suites; and the verification manual
+  presented a disposable page fixture as a durable command. Tests first proved
+  all four failures against the prior Draft head.
 - The browser now gives `/api/reading/submission` only its three words and the
   durable `contextWords` source-event reference. The Worker derives score and
   verdict only from the same student's, same lesson's, same three words'
@@ -44,22 +55,37 @@ Last updated: 2026-08-20
   legacy discussion POST is fail-closed HTTP 410/no-store and makes no GitHub,
   D1 or Queue call; discussion GET remains read-only. There is no schema,
   migration, scoring-policy, manifest or semantic-revision change.
+- `/api/interaction-check` now ignores browser lesson metadata and derives
+  normalized mode, genres, author names and response speaker from the exact
+  `site/data/literary-taxonomy.json` row. A missing taxonomy row returns HTTP
+  503 before identity resolution, APIS, D1 or Queue. The APIS prompt continues
+  to use only the hydrated authoritative title/block/excerpt, and the evidence
+  ledger retains only allowlisted student answer fields rather than forged
+  title/excerpt/mode/genre/author metadata.
+- All ten cookie-authenticated POST mutation routes require exact
+  `Origin: https://yw.bdfz.net` and `application/json` before reading a binding
+  or resolving identity. An exact-format native authorization header may omit
+  Origin but must still use JSON and must subsequently pass the existing exact
+  `resolveNativeSession` projection before reconciliation or business work; a
+  rejected native session produces no D1, APIS or Queue side effect. The local
+  `READING_TEST_SLUG` seam cannot bypass this request gate.
 - Exact Node 24.18.0 and 22.21.1 each pass the complete
   `precontent:check`. On both runtimes Reading API passes 74/74, evidence
-  contract passes 41/41, blueprint quality passes 7/7, native-content passes
+  contract passes 45/45, blueprint quality passes 7/7, native-content passes
   22/22 and release-site passes 5/5. Five study-guide PDF/extraction receipts
   verify on both runtimes. The deterministic formal staging has 1,223 files /
-  164,384,113 bytes, projected SHA-256
-  `e04ccfe54d6f639d437e575d5cd17a163e3d00889c95e6ca1452cfe3279c67a8`
+  164,385,738 bytes, projected SHA-256
+  `263ee59551937b688d441155017e55114d1e9b5ce502976c5eace0543936d665`
   and artifact aggregate SHA-256
-  `909593b431f5ed29b3e37bf1ae0ada6d9b9a6175dc301d27e73edca47872c8d2`;
+  `e945e7b720c76f2d07d3faea5e7e466b27351098ea17151f5778a488cadc997e`;
   the tracked manifest byte SHA-256 is
-  `9c717073cedb2be51a52bc64402174a8aaffea020569c5b4fdd482a62213a147`.
-- Final independent P0/P1 review of the complete diff and hostile boundaries
-  found no remaining P0 or P1 issue. The review explicitly rechecked score/
-  word/source projection, all four first-read prechecks, server-owned blueprint
-  context and cache authority, retired discussion side effects, SQL privacy and
-  bounded runtime cost.
+  `da2e155b0fe0e1cee67b729bb51a9d08246011e9ce7104cc86b74ccab2e3d8ce`.
+  Pull-request CI now executes the exact evidence, blueprint and local-D1
+  Reading suites under both Node authorities before the artifact checks.
+- The earlier `P0/P1=0` statement is withdrawn because it predates the reopened
+  findings. A fresh independent exact-head review is required after these fixes,
+  and another fresh review is required after the mandatory post-PR-#12 rebase.
+  Until then the source candidate remains a Draft, not a merge authority.
 - Production remains unchanged at Pages deployment
   `18213286-37d1-4b71-80b6-78e8b986ed3d` / source `a97eba7` (full source
   `a97eba7589ed6afa7df30ba4f37f2241a22d90d0`). Its deployed Worker and current

@@ -26,6 +26,7 @@ for (const file of [
   "data/study-guide-catalog.json",
   "data/preview-targets.json",
   "data/manifest.json",
+  "data/literary-taxonomy.json",
   "data/lessons/lesson-1468.json",
   "data/lessons/lesson-1484.json",
   "data/classical-first-read/lesson-1484.json",
@@ -66,7 +67,10 @@ async function api(path, body) {
   }
   const response = await fetch(`${BASE}${path}`, body ? {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers: {
+      "content-type": "application/json",
+      origin: "https://yw.bdfz.net",
+    },
     body: JSON.stringify(payload),
   } : undefined);
   return { status: response.status, data: await response.json().catch(() => ({})) };

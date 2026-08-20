@@ -46,6 +46,7 @@ let shugeSession = { cookie: "", expiresAt: 0 };
 const previewRegistryCache = { value: null, expiresAt: 0 };
 const studyGuideCatalogCache = { value: null, expiresAt: 0 };
 const BROWSER_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
+const YW_WEB_ORIGIN = "https://yw.bdfz.net";
 
 export default {
   async fetch(request, env, ctx) {
@@ -60,9 +61,13 @@ export default {
       return handleLessonBlueprint(request, env, ctx);
     }
     if (url.pathname === "/api/interaction-check" && request.method === "POST") {
+      const rejected = authenticatedMutationRequestRejection(request);
+      if (rejected) return rejected;
       return handleInteractionCheck(request, env);
     }
     if (url.pathname === "/api/learning/interactions" && request.method === "POST") {
+      const rejected = authenticatedMutationRequestRejection(request);
+      if (rejected) return rejected;
       return handleLearningInteraction(request, env, ctx);
     }
     if (url.pathname === "/api/learning/health" && request.method === "GET") {
@@ -144,6 +149,22 @@ function json(data, init = {}) {
       ...(init.headers || {}),
     },
   });
+}
+
+function authenticatedMutationRequestRejection(request) {
+  const contentType = String(request.headers.get("content-type") || "")
+    .split(";", 1)[0]
+    .trim()
+    .toLowerCase();
+  if (contentType !== "application/json") {
+    return readingError("application/json content type required", 415, "json_content_type_required");
+  }
+  const nativeAuthorization = nativeAuthorizationDecision(request.headers.get("authorization"));
+  if (nativeAuthorization.status === "authorized") return null;
+  if (request.headers.get("origin") !== YW_WEB_ORIGIN) {
+    return readingError("exact Web origin required", 403, "web_origin_required");
+  }
+  return null;
 }
 
 function learningRateLimitResponse(error) {
@@ -1156,10 +1177,20 @@ async function handleInteractionCheck(request, env) {
   }
   const lesson = await getAuthoritativeLessonData(request, env, lessonId);
   if (!lesson) return json({ error: "lesson absent from authoritative catalog" }, { status: 400 });
+  const taxonomyLesson = await getAuthoritativeLessonTaxonomy(request, env, lessonId);
+  if (!taxonomyLesson) return json({ error: "authoritative lesson taxonomy unavailable" }, { status: 503 });
   const lessonTitle = cleanText(lesson.title || lesson.tocLabel, 160);
   const blockTitle = cleanText(lesson.blockTitle, 80);
-  const mode = cleanText(payload.mode, 40);
-  const authors = Array.isArray(payload.authors) ? payload.authors.map((item) => cleanText(item, 40)).filter(Boolean).slice(0, 4) : [];
+  const mode = normalizeBlueprintMode(cleanText(taxonomyLesson.mode, 40));
+  const genres = Array.isArray(taxonomyLesson.genres)
+    ? taxonomyLesson.genres.map((item) => cleanText(item, 40)).filter(Boolean).slice(0, 8)
+    : [];
+  const authors = Array.isArray(taxonomyLesson.authors)
+    ? taxonomyLesson.authors
+      .map((item) => cleanText(typeof item === "string" ? item : item?.name, 40))
+      .filter(Boolean)
+      .slice(0, 4)
+    : [];
   const speaker = authors[0] || (mode.startsWith("unit") ? "編者" : "作者");
   const interaction = cleanText(payload.interaction, 40);
   const excerpt = cleanText(
@@ -1202,6 +1233,8 @@ async function handleInteractionCheck(request, env) {
     responseSchema,
     `課文：${blockTitle} / ${lessonTitle}`,
     `文體掌握模式：${mode}`,
+    `多層文體：${genres.join(" / ")}`,
+    `作者權威：${authors.join(" / ") || speaker}`,
     `互動類型：${interaction}`,
     `正文摘錄：${excerpt}`,
     `學生輸入：\n${inputText}`,
@@ -2691,8 +2724,12 @@ async function handleReadingHealth(env) {
 }
 
 async function handleReading(request, env, url) {
-  if (!env.READING_DB) return readingError("reading store not configured", 503);
   const path = url.pathname.replace(/\/+$/, "");
+  if (request.method === "POST") {
+    const rejected = authenticatedMutationRequestRejection(request);
+    if (rejected) return rejected;
+  }
+  if (!env.READING_DB) return readingError("reading store not configured", 503);
   try {
     if (path === "/api/reading/health" && request.method === "GET") return await handleReadingHealth(env);
     const student = await getReadingStudent(request, env);

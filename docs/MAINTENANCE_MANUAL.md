@@ -43,6 +43,24 @@ Last reviewed: 2026-08-20 (America/Los_Angeles)
   request. Keep cache authority at
   `participation-matrix-v7-server-authority` or a later reviewed version so
   pre-hardening week-long entries cannot be reused.
+- `/api/interaction-check` accepts browser lesson metadata only as untrusted
+  compatibility input. The scoring prompt must derive normalized mode, genres,
+  author names and the response speaker from the exact
+  `site/data/literary-taxonomy.json` row, and title/block/excerpt from the exact
+  hydrated manifest lesson. A missing taxonomy row is HTTP 503 before identity,
+  APIS, D1, outbox or Queue work. The learning ledger may retain only the
+  registry-allowlisted student response and mutation/session fields; it must not
+  retain browser title, excerpt, mode, genres or authors.
+- The ten authenticated Web mutation routes are `/api/interaction-check`,
+  `/api/learning/interactions`, and Reading submission, vocabulary,
+  study-guide, first-read mark/delete/submit/resolve/reconcile. Before reading
+  any binding or resolving identity, every Web Cookie request must carry exact
+  `Origin: https://yw.bdfz.net` plus `application/json`. Native authorization
+  remains Origin-independent only for the exact existing header format, still
+  requires JSON, and must pass `resolveNativeSession` plus the exact native
+  projection before identity reconciliation or any business side effect. A
+  syntactically valid but rejected native token is not authorization. The local
+  `READING_TEST_SLUG` seam never bypasses the gate.
 - `POST /api/discussions/:lessonId` is a retired legacy write surface. It always
   returns HTTP 410 with `discussion_write_retired` and `cache-control:
   no-store`, without parsing the body, reading a credential, or calling GitHub,
@@ -57,6 +75,10 @@ Last reviewed: 2026-08-20 (America/Los_Angeles)
   first-read or semantic ledgers; blueprint absence has zero APIS/cache effect;
   retired discussion POST has zero outbound/data effect; and valid source
   evidence is bound by exact user/lesson/interaction/method SQL predicates.
+- Pull-request CI must run the evidence contract, lesson-blueprint quality and
+  local-D1 Reading API suites on both exact Node 24.18.0 and 22.21.1. Those
+  focused suites do not require the archived 693-page fixture and do not grant
+  deployment, D1, Queue or User Center mutation authority.
 - The 2026-08-20 Cloudflare readback still names production deployment
   `18213286-37d1-4b71-80b6-78e8b986ed3d` at source `a97eba7`. Do not infer that
   this Draft source correction is live. The live carrier/static-contract drift
@@ -66,8 +88,13 @@ Last reviewed: 2026-08-20 (America/Los_Angeles)
   `check:native-content:deploy-sync` reports that the canonical source graph
   lacks an approved audit receipt. Do not generate or approve that separately
   owned Web/App receipt as part of a server-authority patch.
+- PR #14 and PR #12 have real overlapping source/artifact/doc conflicts. Keep
+  PR #14 Draft. Suen must merge PR #12 unchanged first; then rebuild/rebase PR
+  #14 from the resulting main, regenerate the artifact and repeat exact-head
+  tests plus independent P0/P1 review. Neither the current green local suite nor
+  the current Draft head authorizes ready or merge before that sequence.
 - This is a `no-new-capability`, source-only correction with no schema,
-  migration, Queue, binding, route or configuration change. Roll back source by
+  migration, Queue, binding, new route or configuration change. Roll back source by
   reverting the exact candidate commit and rebuilding/checking
   `docs/baselines/site-artifact-manifest.json`; preserve D1 history. There is no
   production rollback action for this Draft because it performs no deployment.
@@ -538,6 +565,45 @@ Reader media is separately bound by
 `site/data/reader-media-receipts.v1.json`: ledger `2026-08-09.1`, 165 objects,
 28,066,373 bytes, inventory
 `2c7672e88dc8e1bb0ea1e4af84e59ccaf521ded73e774e35c03abd5547f69d03`.
+
+Textbook page images used by native-content and full precontent verification
+have a separate durable, path-preserving restore authority. The canonical local
+root is:
+
+```text
+/Users/ylsuen/textbook_ai_migration/platform/frontend/assets/pages
+```
+
+These are non-personal copyrighted build inputs whose archived bytes are the
+source authority for verification; the canonical local root is normally absent
+and is restored only as a disposable whole-path working copy. The archive and
+tracked inventory are retained for rebuild and source rollback; no page-image
+fixture belongs in this repository.
+
+The accepted archive receipt is
+`/Users/ylsuen/CF/reports/storage_archive_records/2026-08-15-textbook-ai-migration.json`;
+the byte authority is the tracked
+`/Users/ylsuen/CF/jc-textbook-reader/manifests/page-images.sha256`. The receipt
+records 107,108 archived files with full checksum parity and long-term
+retention. The verified restore is whole-path only; do not invent or document a
+selective 693-file hydrate command. With the canonical destination absent,
+restore and verify it as follows:
+
+```zsh
+test ! -e /Users/ylsuen/textbook_ai_migration
+/Users/ylsuen/CF/scripts/restore_gdrive_archived_path.sh \
+  Users/ylsuen/textbook_ai_migration
+rclone check \
+  gdrive:Backups/CF-Archive-v1/files/Users/ylsuen/textbook_ai_migration \
+  /Users/ylsuen/textbook_ai_migration \
+  --checksum --one-way
+```
+
+`scripts/build_native_content.mjs` then checks each referenced page against the
+tracked SHA-256 inventory before using it. This restore authority was accepted
+and read back on 2026-08-15. The 2026-08-20 hardening run used a disposable
+693-file subset that matched that inventory; it did not re-read Drive and the
+subset is not a retained project resource or release authority.
 
 ### Release disposition
 
