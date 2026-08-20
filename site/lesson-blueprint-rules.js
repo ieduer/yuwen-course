@@ -1,4 +1,4 @@
-export const LESSON_BLUEPRINT_CACHE_VERSION = "participation-matrix-v6-text-anchored";
+export const LESSON_BLUEPRINT_CACHE_VERSION = "participation-matrix-v7-server-authority";
 
 export const BLUEPRINT_MODE_TECHNIQUES = Object.freeze({
   classical: "語意轉折、敘事或論說章法",

@@ -2870,7 +2870,7 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
         evidenceStatus: evidence.evidenceStatus,
       };
     }
-    if (key === "contextWords") void saveReadingSubmission(input, result);
+    if (key === "contextWords") void saveReadingSubmission(input, payload.evidence?.sourceEventId);
     if (!silent) {
       const label = trackFor().find((item) => item[0] === progressKey)?.[1] || "互動";
       if (evidence.evidenceStatus === "ineligible") toast(`${label} · ${score} 分，已記錄但不計入本次完成`);
@@ -2896,7 +2896,7 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
   }
 }
 
-async function saveReadingSubmission(input, result) {
+async function saveReadingSubmission(input, sourceEventId) {
   try {
     const words = String(input.words || "").split(/[，,、\s]+/).filter(Boolean).slice(0, 3);
     if (words.length !== 3 || !state.current) return;
@@ -2906,8 +2906,7 @@ async function saveReadingSubmission(input, result) {
       body: JSON.stringify({
         lessonId: state.current.id,
         words,
-        aiScore: Number(result?.score || 0),
-        aiVerdict: String(result?.verdict || ""),
+        sourceEventId: String(sourceEventId || ""),
       }),
     });
   } catch { /* 未登入或離線時僅保留本地進度，星圖等待下次有效提交 */ }

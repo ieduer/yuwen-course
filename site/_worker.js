@@ -862,14 +862,34 @@ async function getLessonMeta(request, env, lessonId) {
   return manifest?.lessons?.find((item) => item.id === lessonId) || { id: lessonId, title: lessonId, blockTitle: "課文" };
 }
 
-async function getLessonData(request, env, lessonId) {
-  const meta = await getLessonMeta(request, env, lessonId);
+async function getAuthoritativeLessonMeta(request, env, lessonId) {
+  const manifest = await getManifest(request, env);
+  return manifest?.lessons?.find((item) => item.id === lessonId) || null;
+}
+
+async function hydrateLessonData(request, env, lessonId, meta) {
   if (!meta?.dataUrl || meta.id !== lessonId) return meta;
   const url = new URL(`/${String(meta.dataUrl).replace(/^\/+/, "")}`, request.url);
   const response = await env.ASSETS.fetch(new Request(url.toString(), { method: "GET" }));
   if (!response.ok) return meta;
   const lesson = await response.json().catch(() => null);
   return lesson?.id === lessonId ? { ...meta, ...lesson } : meta;
+}
+
+async function getLessonData(request, env, lessonId) {
+  return hydrateLessonData(request, env, lessonId, await getLessonMeta(request, env, lessonId));
+}
+
+async function getAuthoritativeLessonData(request, env, lessonId) {
+  return hydrateLessonData(request, env, lessonId, await getAuthoritativeLessonMeta(request, env, lessonId));
+}
+
+async function getAuthoritativeLessonTaxonomy(request, env, lessonId) {
+  const url = new URL("/data/literary-taxonomy.json", request.url);
+  const response = await env.ASSETS.fetch(new Request(url.toString(), { method: "GET" }));
+  if (!response.ok) return null;
+  const taxonomy = await response.json().catch(() => null);
+  return taxonomy?.lessons?.find((item) => item.id === lessonId) || null;
 }
 
 function githubHeaders(env) {
@@ -964,27 +984,14 @@ async function handleDiscussionGet(request, env, lessonId) {
   }
 }
 
-async function handleDiscussionPost(request, env, lessonId) {
-  if (!env.GITHUB_TOKEN) return json({ error: "GITHUB_TOKEN is not configured" }, { status: 503 });
-  const payload = await request.json().catch(() => ({}));
-  if (payload.website) return json({ ok: true, ignored: true });
-  const body = cleanText(payload.body, 4000);
-  const name = cleanText(payload.name, 40).replace(/[\n\r]/g, " ") || "匿名同學";
-  if (body.length < 2) return json({ error: "body is required" }, { status: 400 });
-  try {
-    const lesson = await getLessonMeta(request, env, lessonId);
-    let issue = await findIssue(env, lessonId);
-    if (!issue) issue = await createIssue(env, lesson);
-    const comment = await githubFetch(env, `/repos/${OWNER}/${REPO}/issues/${issue.number}/comments`, {
-      method: "POST",
-      body: JSON.stringify({
-        body: `**${name}**\n\n${body}`,
-      }),
-    });
-    return json({ ok: true, issueUrl: issue.html_url, commentUrl: comment.html_url });
-  } catch (error) {
-    return json({ error: error.message }, { status: 502 });
-  }
+function handleDiscussionPost() {
+  return json({
+    error: "legacy discussion writes are retired",
+    code: "discussion_write_retired",
+  }, {
+    status: 410,
+    headers: { "cache-control": "no-store" },
+  });
 }
 
 function stripMarker(value) {
@@ -1067,15 +1074,31 @@ function extractJsonObject(value) {
 async function handleLessonBlueprint(request, env, ctx) {
   const payload = await request.json().catch(() => ({}));
   const lessonId = cleanText(payload.lessonId, 80);
-  const lessonTitle = cleanText(payload.lessonTitle, 160);
-  const blockTitle = cleanText(payload.blockTitle, 80);
-  const mode = cleanText(payload.mode, 40);
-  const genres = Array.isArray(payload.genres) ? payload.genres.map((item) => cleanText(item, 40)).filter(Boolean).slice(0, 8) : [];
-  const excerpt = cleanText(payload.excerpt, 4200);
-  if (!lessonId || !lessonTitle || excerpt.length < 80) return json({ error: "lesson id, title and excerpt are required" }, { status: 400 });
+  if (!/^lesson-[\w-]{1,60}$/.test(lessonId)) {
+    return json({ error: "valid lesson id required" }, { status: 400 });
+  }
+  const lesson = await getAuthoritativeLessonData(request, env, lessonId);
+  if (!lesson) return json({ error: "lesson absent from authoritative catalog" }, { status: 400 });
+  const taxonomyLesson = await getAuthoritativeLessonTaxonomy(request, env, lessonId);
+  if (!taxonomyLesson) return json({ error: "authoritative lesson taxonomy unavailable" }, { status: 503 });
+  const lessonTitle = cleanText(lessonTitleForMeta(lesson), 160);
+  const blockTitle = cleanText(lesson.blockTitle, 80);
+  const mode = normalizeBlueprintMode(cleanText(taxonomyLesson.mode, 40));
+  const genres = Array.isArray(taxonomyLesson.genres)
+    ? taxonomyLesson.genres.map((item) => cleanText(item, 40)).filter(Boolean).slice(0, 8)
+    : [];
+  const excerpt = cleanText(
+    lesson.posts?.find((post) => post.kind === "primary")?.plain_text
+      || lesson.posts?.[0]?.plain_text
+      || lesson.excerpt,
+    4200,
+  );
+  if (!lessonTitle || excerpt.length < 80) {
+    return json({ error: "authoritative lesson content unavailable" }, { status: 503 });
+  }
   const blueprintContext = { lessonId, lessonTitle, blockTitle, mode, excerpt };
-  const normalizedMode = normalizeBlueprintMode(mode);
-  const technique = BLUEPRINT_MODE_TECHNIQUES[normalizedMode];
+  const normalizedMode = mode;
+  const technique = BLUEPRINT_MODE_TECHNIQUES[mode];
   const anchor = lessonBlueprintPromptAnchor(blueprintContext);
   const lessonLabel = [blockTitle, lessonTitle].filter(Boolean).join(" · ");
   const cache = caches.default;
@@ -1131,7 +1154,8 @@ async function handleInteractionCheck(request, env) {
   if (!/^lesson-[\w-]{1,60}$/.test(lessonId)) {
     return json({ error: "valid lesson id required" }, { status: 400 });
   }
-  const lesson = await getLessonData(request, env, lessonId);
+  const lesson = await getAuthoritativeLessonData(request, env, lessonId);
+  if (!lesson) return json({ error: "lesson absent from authoritative catalog" }, { status: 400 });
   const lessonTitle = cleanText(lesson.title || lesson.tocLabel, 160);
   const blockTitle = cleanText(lesson.blockTitle, 80);
   const mode = cleanText(payload.mode, 40);
@@ -1312,6 +1336,100 @@ async function sha256Hex(text) {
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
+function normalizedContextWords(rawPayloadJson) {
+  let payload = null;
+  try {
+    payload = JSON.parse(String(rawPayloadJson || "{}"));
+  } catch {
+    return [];
+  }
+  const values = Array.isArray(payload?.words)
+    ? payload.words
+    : String(payload?.words || "").split(/[，,、\s]+/);
+  return values.map(normalizeWord).filter(Boolean);
+}
+
+export async function authoritativeReadingAssessmentForSubmission(db, studentId, lessonId, sourceEventId, normWords) {
+  const eventId = cleanText(sourceEventId, 100);
+  if (!db || !eventId || !Number.isInteger(Number(studentId)) || !Array.isArray(normWords) || normWords.length !== 3) {
+    return null;
+  }
+  const row = await db.prepare(
+    `SELECT i.raw_payload_json, e.raw_value, e.evaluation_json
+       FROM learning_interactions i
+       JOIN learning_evaluations e ON e.source_event_id = i.source_event_id
+      WHERE i.source_event_id = ?
+        AND i.student_id = ?
+        AND i.lesson_id = ?
+        AND i.interaction_key = 'contextWords'
+        AND i.scoring_role = 'a_plus_gate'
+        AND e.verification_method = 'source_ai_assessment'`
+  ).bind(eventId, Number(studentId), lessonId).first();
+  if (!row) return null;
+  const submittedWords = [...normWords].sort();
+  const assessedWords = normalizedContextWords(row.raw_payload_json).sort();
+  if (assessedWords.length !== 3 || assessedWords.some((word, index) => word !== submittedWords[index])) return null;
+  if (row.raw_value === null || row.raw_value === undefined) return null;
+  const rawScore = Number(row.raw_value);
+  if (!Number.isFinite(rawScore)) return null;
+  let evaluation = {};
+  try {
+    evaluation = JSON.parse(String(row.evaluation_json || "{}"));
+  } catch { /* 分數仍由結構化欄位提供；壞評語不阻塞已核實分數。 */ }
+  return {
+    score: Math.max(0, Math.min(100, Math.round(rawScore))),
+    verdict: cleanText(evaluation?.verdict, 160),
+  };
+}
+
+function readingSubmissionAssessmentKey(lessonId, words) {
+  const values = Array.isArray(words) ? words : [];
+  const normalized = values.map(normalizeWord).filter(Boolean);
+  if (normalized.length !== 3 || new Set(normalized).size !== 3) return "";
+  return `${lessonId}\n${normalized.sort().join("\n")}`;
+}
+
+function submissionWordsFromJson(value) {
+  try {
+    const words = JSON.parse(String(value || "[]"));
+    return Array.isArray(words) ? words : [];
+  } catch {
+    return [];
+  }
+}
+
+async function loadAuthoritativeReadingAssessments(db, studentId, lessonId = "") {
+  const scopedSql = lessonId ? " AND i.lesson_id = ?" : "";
+  const statement = db.prepare(
+    `SELECT i.lesson_id, i.raw_payload_json, e.raw_value, e.evaluation_json
+       FROM learning_interactions i
+       JOIN learning_evaluations e ON e.source_event_id = i.source_event_id
+      WHERE i.student_id = ?
+        AND i.interaction_key = 'contextWords'
+        AND i.scoring_role = 'a_plus_gate'
+        AND e.verification_method = 'source_ai_assessment'${scopedSql}
+      ORDER BY i.occurred_at DESC, i.source_event_id DESC`
+  );
+  const rows = lessonId
+    ? await statement.bind(Number(studentId), lessonId).all()
+    : await statement.bind(Number(studentId)).all();
+  const bySubmission = new Map();
+  for (const row of rows.results || []) {
+    const key = readingSubmissionAssessmentKey(row.lesson_id, normalizedContextWords(row.raw_payload_json));
+    const rawScore = Number(row.raw_value);
+    if (!key || !Number.isFinite(rawScore)) continue;
+    let evaluation = {};
+    try { evaluation = JSON.parse(String(row.evaluation_json || "{}")); } catch { /* 可用結構化分數，忽略壞評語。 */ }
+    const assessment = {
+      score: Math.max(0, Math.min(100, Math.round(rawScore))),
+      verdict: cleanText(evaluation?.verdict, 160),
+    };
+    const current = bySubmission.get(key);
+    if (!current || assessment.score > current.score) bySubmission.set(key, assessment);
+  }
+  return { bySubmission };
+}
+
 function userCenterSessionCookieHeader(request) {
   const entry = String(request.headers.get("cookie") || "")
     .split(";")
@@ -1426,8 +1544,8 @@ async function handleLearningInteraction(request, env, ctx) {
   if (!/^lesson-[\w-]{1,60}$/.test(lessonId) || !DIRECT_LEARNING_INTERACTIONS.has(interactionKey)) {
     return readingError("registered direct interaction required");
   }
-  const lesson = await getLessonData(request, env, lessonId);
-  if (lesson?.id !== lessonId) return readingError("lesson absent from authoritative catalog");
+  const lesson = await getAuthoritativeLessonData(request, env, lessonId);
+  if (!lesson) return readingError("lesson absent from authoritative catalog");
   try {
     const recorded = await recordLearningInteraction({
       request,
@@ -1572,10 +1690,18 @@ async function handleReadingSubmission(request, env, student) {
   const normWords = rawWords.map(normalizeWord);
   if (normWords.some((w) => !w || w.length > 12)) return readingError("word out of range");
   if (new Set(normWords).size !== 3) return readingError("words must be distinct");
-  const meta = await getLessonMeta(request, env, lessonId);
-  const aiScore = Number.isFinite(Number(payload.aiScore)) ? Math.max(0, Math.min(100, Math.round(Number(payload.aiScore)))) : null;
-  const aiVerdict = cleanText(payload.aiVerdict, 160);
-  const source = payload.source === "synthetic" ? "synthetic" : "live";
+  const meta = await getAuthoritativeLessonMeta(request, env, lessonId);
+  if (!meta) return readingError("lesson absent from authoritative catalog");
+  const sourceEventId = cleanText(payload.sourceEventId, 100);
+  const assessment = sourceEventId
+    ? await authoritativeReadingAssessmentForSubmission(env.READING_DB, student.id, lessonId, sourceEventId, normWords)
+    : null;
+  if (sourceEventId && !assessment) {
+    return readingError("source assessment does not match submission", 422);
+  }
+  const aiScore = assessment?.score ?? null;
+  const aiVerdict = assessment?.verdict || "";
+  const source = env.READING_TEST_SLUG ? "synthetic" : "live";
   const contentHash = await sha256Hex(`${lessonId}\n${[...normWords].sort().join("\n")}`);
   const db = env.READING_DB;
 
@@ -1583,15 +1709,19 @@ async function handleReadingSubmission(request, env, student) {
     "SELECT id, is_active, version FROM submissions WHERE student_id = ? AND lesson_id = ? AND content_hash = ?"
   ).bind(student.id, lessonId, contentHash).first();
   if (existing) {
+    const activate = assessment
+      ? db.prepare("UPDATE submissions SET is_active = 1, ai_score = ?, ai_verdict = ?, source = ? WHERE id = ?")
+        .bind(aiScore, aiVerdict, source, existing.id)
+      : db.prepare("UPDATE submissions SET is_active = 1, ai_score = NULL, ai_verdict = '', source = ? WHERE id = ?")
+        .bind(source, existing.id);
     if (!existing.is_active) {
       await db.batch([
-        db.prepare("UPDATE submissions SET is_active = 0 WHERE student_id = ? AND lesson_id = ?").bind(student.id, lessonId),
-        db.prepare("UPDATE submissions SET is_active = 1, ai_score = COALESCE(?, ai_score), ai_verdict = CASE WHEN ? != '' THEN ? ELSE ai_verdict END WHERE id = ?")
-          .bind(aiScore, aiVerdict, aiVerdict, existing.id),
+        db.prepare("UPDATE submissions SET is_active = 0 WHERE student_id = ? AND lesson_id = ?")
+          .bind(student.id, lessonId),
+        activate,
       ]);
-    } else if (aiScore !== null || aiVerdict) {
-      await db.prepare("UPDATE submissions SET ai_score = COALESCE(?, ai_score), ai_verdict = CASE WHEN ? != '' THEN ? ELSE ai_verdict END WHERE id = ?")
-        .bind(aiScore, aiVerdict, aiVerdict, existing.id).run();
+    } else {
+      await activate.run();
     }
     return json({ ok: true, deduped: true, version: existing.version });
   }
@@ -1649,12 +1779,11 @@ function wordBrightness(lessonCount, hasGroupPeer) {
 
 async function handleReadingConstellation(request, env, student) {
   const db = env.READING_DB;
-  const [nodes, activeSubs, activeWords, masteryRows, vocabIndex] = await Promise.all([
+  const [nodes, activeSubs, activeWords, masteryRows, vocabIndex, assessmentIndex, submittedWordSets] = await Promise.all([
     db.prepare("SELECT node_id, kind, ref, seq, born_at FROM star_nodes WHERE student_id = ? ORDER BY seq").bind(student.id).all(),
     db.prepare(
-      "SELECT s.lesson_id, s.block_id, s.block_title, s.lesson_title, s.words_raw, s.words_norm, s.ai_score, s.created_at, " +
-      "(SELECT COUNT(*) FROM submissions v WHERE v.student_id = s.student_id AND v.lesson_id = s.lesson_id) AS version_count, " +
-      "(SELECT MAX(COALESCE(ai_score, 0)) FROM submissions v WHERE v.student_id = s.student_id AND v.lesson_id = s.lesson_id) AS best_score " +
+      "SELECT s.lesson_id, s.block_id, s.block_title, s.lesson_title, s.words_raw, s.words_norm, s.created_at, " +
+      "(SELECT COUNT(*) FROM submissions v WHERE v.student_id = s.student_id AND v.lesson_id = s.lesson_id) AS version_count " +
       "FROM submissions s WHERE s.student_id = ? AND s.is_active = 1"
     ).bind(student.id).all(),
     db.prepare(
@@ -1665,6 +1794,8 @@ async function handleReadingConstellation(request, env, student) {
       "SELECT lesson_id, item_id, status FROM vocab_mastery WHERE student_id = ?"
     ).bind(student.id).all(),
     loadVocabIndex(request, env),
+    loadAuthoritativeReadingAssessments(db, student.id),
+    db.prepare("SELECT lesson_id, words_norm FROM submissions WHERE student_id = ?").bind(student.id).all(),
   ]);
   const siteTop = await db.prepare(
     "SELECT word_norm, freq FROM agg_word_freq WHERE scope = 'site' AND scope_key = 'all' ORDER BY freq DESC, word_norm LIMIT 16"
@@ -1678,6 +1809,13 @@ async function handleReadingConstellation(request, env, student) {
   const firstLessonByWord = new Map((firstRows.results || []).map((row) => [row.word_norm, row.lesson_id]));
 
   const subByLesson = new Map((activeSubs.results || []).map((row) => [row.lesson_id, row]));
+  const bestScoreByLesson = new Map();
+  for (const row of submittedWordSets.results || []) {
+    const key = readingSubmissionAssessmentKey(row.lesson_id, submissionWordsFromJson(row.words_norm));
+    const assessment = key ? assessmentIndex.bySubmission.get(key) : null;
+    if (!assessment) continue;
+    bestScoreByLesson.set(row.lesson_id, Math.max(bestScoreByLesson.get(row.lesson_id) || 0, assessment.score));
+  }
   const masteryByLesson = currentVocabMastery(masteryRows.results || [], vocabIndex);
   const wordRows = activeWords.results || [];
   const lessonsByWord = new Map();
@@ -1705,14 +1843,15 @@ async function handleReadingConstellation(request, env, student) {
       if (!sub) continue; // 全部版本被清時，星點保留 seq 但不出圖
       const mastery = masteryByLesson.get(node.ref) || { attempted: 0, mastered: 0 };
       const bankTotal = Number(vocabIndex.lessons?.[node.ref] || 0);
+      const bestScore = Number(bestScoreByLesson.get(node.ref) || 0);
       outNodes.push({
         id: node.node_id, kind: "lesson", ref: node.ref, seq: node.seq,
         label: sub.lesson_title || node.ref,
         blockId: sub.block_id, blockTitle: sub.block_title,
-        c: lessonBrightness(Number(sub.version_count || 1), Number(sub.best_score || 0), Number(mastery.mastered || 0), bankTotal),
+        c: lessonBrightness(Number(sub.version_count || 1), bestScore, Number(mastery.mastered || 0), bankTotal),
         meta: {
           versions: Number(sub.version_count || 1),
-          bestScore: Number(sub.best_score || 0),
+          bestScore,
           vocabMastered: Number(mastery.mastered || 0),
           vocabAttempted: Number(mastery.attempted || 0),
           vocabTotal: bankTotal,
@@ -1765,7 +1904,7 @@ async function handleReadingConstellation(request, env, student) {
 async function handleReadingLesson(request, env, student, lessonId) {
   if (!/^lesson-[\w-]{1,60}$/.test(lessonId)) return readingError("lessonId invalid");
   const db = env.READING_DB;
-  const [history, mastery, lessonTop, bank] = await Promise.all([
+  const [history, mastery, lessonTop, bank, assessmentIndex] = await Promise.all([
     db.prepare(
       "SELECT version, words_raw, words_norm, ai_score, ai_verdict, is_active, source, created_at " +
       "FROM submissions WHERE student_id = ? AND lesson_id = ? ORDER BY version DESC"
@@ -1777,6 +1916,7 @@ async function handleReadingLesson(request, env, student, lessonId) {
       "SELECT word_norm, freq FROM agg_word_freq WHERE scope = 'lesson' AND scope_key = ? ORDER BY freq DESC, word_norm LIMIT 12"
     ).bind(lessonId).all(),
     loadVocabBank(request, env, lessonId).catch(() => null),
+    loadAuthoritativeReadingAssessments(db, student.id, lessonId),
   ]);
   const activeIds = new Set(
     (bank?.inventory || []).filter((item) => item?.decision === "question").map((item) => item.id),
@@ -1784,38 +1924,52 @@ async function handleReadingLesson(request, env, student, lessonId) {
   return json({
     ok: true,
     lessonId,
-    history: (history.results || []).map((row) => ({
-      version: row.version,
-      words: JSON.parse(row.words_raw || "[]"),
-      wordsNorm: JSON.parse(row.words_norm || "[]"),
-      aiScore: row.ai_score,
-      aiVerdict: row.ai_verdict,
-      active: !!row.is_active,
-      source: row.source,
-      createdAt: row.created_at,
-    })),
+    history: (history.results || []).map((row) => {
+      const words = submissionWordsFromJson(row.words_raw);
+      const wordsNorm = submissionWordsFromJson(row.words_norm);
+      const assessment = assessmentIndex.bySubmission.get(readingSubmissionAssessmentKey(lessonId, wordsNorm));
+      return {
+        version: row.version,
+        words,
+        wordsNorm,
+        aiScore: assessment?.score ?? null,
+        aiVerdict: assessment?.verdict || "",
+        active: !!row.is_active,
+        source: env.READING_TEST_SLUG ? "synthetic" : "live",
+        createdAt: row.created_at,
+      };
+    }),
     vocab: (mastery.results || []).filter((row) => activeIds.has(row.item_id)),
     lessonTopWords: (lessonTop.results || []).map((row) => [row.word_norm, row.freq]),
   }, { headers: { "cache-control": "no-store" } });
 }
 
 async function handleReadingHistory(request, env, student) {
-  const rows = await env.READING_DB.prepare(
-    "SELECT lesson_id, lesson_title, block_title, version, words_raw, ai_score, is_active, created_at " +
-    "FROM submissions WHERE student_id = ? ORDER BY created_at DESC, id DESC LIMIT 200"
-  ).bind(student.id).all();
+  const [rows, assessmentIndex] = await Promise.all([
+    env.READING_DB.prepare(
+      "SELECT lesson_id, lesson_title, block_title, version, words_raw, words_norm, is_active, created_at " +
+      "FROM submissions WHERE student_id = ? ORDER BY created_at DESC, id DESC LIMIT 200"
+    ).bind(student.id).all(),
+    loadAuthoritativeReadingAssessments(env.READING_DB, student.id),
+  ]);
   return json({
     ok: true,
-    items: (rows.results || []).map((row) => ({
-      lessonId: row.lesson_id,
-      lessonTitle: row.lesson_title,
-      blockTitle: row.block_title,
-      version: row.version,
-      words: JSON.parse(row.words_raw || "[]"),
-      aiScore: row.ai_score,
-      active: !!row.is_active,
-      createdAt: row.created_at,
-    })),
+    items: (rows.results || []).map((row) => {
+      const assessment = assessmentIndex.bySubmission.get(readingSubmissionAssessmentKey(
+        row.lesson_id,
+        submissionWordsFromJson(row.words_norm),
+      ));
+      return {
+        lessonId: row.lesson_id,
+        lessonTitle: row.lesson_title,
+        blockTitle: row.block_title,
+        version: row.version,
+        words: submissionWordsFromJson(row.words_raw),
+        aiScore: assessment?.score ?? null,
+        active: !!row.is_active,
+        createdAt: row.created_at,
+      };
+    }),
   }, { headers: { "cache-control": "no-store" } });
 }
 
@@ -1833,7 +1987,8 @@ async function handleReadingVocabAttempt(request, env, student) {
   if (!authoritativeItem || !Array.isArray(authoritativeItem.options) || selectedIndex >= authoritativeItem.options.length) {
     return readingError("vocabulary item absent from authoritative bank");
   }
-  const lesson = await getLessonData(request, env, lessonId);
+  const lesson = await getAuthoritativeLessonData(request, env, lessonId);
+  if (!lesson) return readingError("lesson absent from authoritative catalog");
   const db = env.READING_DB;
   const clientMutationId = cleanText(payload.clientMutationId, 100);
   if (!clientMutationId) return readingError("clientMutationId required");
@@ -2000,7 +2155,7 @@ async function handleReadingStudyGuideAttempt(request, env, student) {
   }
   let [{ catalog, itemByKey }, lesson] = await Promise.all([
     loadStudyGuideCatalog(request, env),
-    getLessonData(request, env, lessonId),
+    getAuthoritativeLessonData(request, env, lessonId),
   ]);
   let item = itemByKey.get(`${lessonId}\n${itemKey}`);
   if (!item || lesson?.id !== lessonId) return readingError("active study-guide item absent");
@@ -2102,22 +2257,33 @@ async function handleClassicalFirstReadState(request, env, student, lessonId) {
   return json(state, { headers: { "cache-control": "no-store" } });
 }
 
+async function authoritativeClassicalFirstReadLesson(request, env, payload) {
+  const lessonId = cleanText(payload?.lessonId, 80);
+  if (!/^lesson-[\w-]{1,60}$/.test(lessonId)) return null;
+  return getAuthoritativeLessonData(request, env, lessonId);
+}
+
 async function handleClassicalFirstReadMark(request, env, student) {
   const payload = await request.json().catch(() => ({}));
+  const lesson = await authoritativeClassicalFirstReadLesson(request, env, payload);
+  if (!lesson) return readingError("lesson absent from authoritative catalog");
   const result = await upsertClassicalFirstReadMark(request, env, student, payload);
   return json(result);
 }
 
 async function handleClassicalFirstReadMarkDelete(request, env, student) {
   const payload = await request.json().catch(() => ({}));
+  const lesson = await authoritativeClassicalFirstReadLesson(request, env, payload);
+  if (!lesson) return readingError("lesson absent from authoritative catalog");
   const result = await deleteClassicalFirstReadMark(request, env, student, payload);
   return json(result);
 }
 
 async function handleClassicalFirstReadSubmit(request, env, student) {
   const payload = await request.json().catch(() => ({}));
+  const lesson = await authoritativeClassicalFirstReadLesson(request, env, payload);
+  if (!lesson) return readingError("lesson absent from authoritative catalog");
   const result = await submitClassicalFirstRead(request, env, student, payload);
-  const lesson = await getLessonData(request, env, result.lessonId);
   const evidence = await recordLearningInteraction({
     request,
     env,
@@ -2150,7 +2316,8 @@ async function handleClassicalFirstReadReconcile(request, env, student) {
   if (!state.submitted || state.textVersionId !== requestedVersion) {
     return readingError("submitted first-read state required", 409);
   }
-  const lesson = await getLessonData(request, env, lessonId);
+  const lesson = await getAuthoritativeLessonData(request, env, lessonId);
+  if (!lesson) return readingError("lesson absent from authoritative catalog");
   const submitted = await recordLearningInteraction({
     request,
     env,
@@ -2193,12 +2360,13 @@ async function handleClassicalFirstReadReconcile(request, env, student) {
 
 async function handleClassicalFirstReadResolve(request, env, student) {
   const payload = await request.json().catch(() => ({}));
+  const lesson = await authoritativeClassicalFirstReadLesson(request, env, payload);
+  if (!lesson) return readingError("lesson absent from authoritative catalog");
   const result = await resolveClassicalFirstReadMark(request, env, student, payload);
   let evidence = null;
   if (result.allResolved) {
     const lessonId = cleanText(payload.lessonId, 80);
     const textVersionId = cleanText(payload.textVersionId, 96);
-    const lesson = await getLessonData(request, env, lessonId);
     evidence = await recordLearningInteraction({
       request,
       env,

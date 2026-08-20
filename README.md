@@ -243,7 +243,7 @@ transaction and must not reuse the stale `yw-82a4...` receipt.
 Never store values in Git or documentation.
 
 - `READING_DB`: D1 binding, required in production
-- `GITHUB_TOKEN`: optional GitHub Issues integration secret
+- `GITHUB_TOKEN`: legacy read-only GitHub Issues lookup credential; discussion POST is retired with HTTP 410
 - `CTEXT_USER` / `CTEXT_USERNAME`, `CTEXT_PASS` / `CTEXT_PASSWORD`: controlled China Text Project preview credentials
 - `APIS_ENDPOINT`, `APIS_THINKING_LEVEL`: optional non-secret gateway routing overrides; default gateway is `https://apis.bdfz.net`
 - `READING_TEST_SLUG`: local test seam only; forbidden in production

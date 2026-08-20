@@ -1,6 +1,80 @@
 # Project State
 
-Last updated: 2026-08-15
+Last updated: 2026-08-20
+
+## 2026-08-20 server-authority hardening Draft candidate
+
+- This source-only candidate is branch
+  `codex/yw-server-authority-hardening-20260820`, based on exact canonical main
+  `7c7e1e06bad67b17dfa16a500a64ca2e02ad08c1`. It is independent of PR #12 and
+  does not modify, merge, close or replace that branch.
+- Hostile regression against the unmodified base proved that an authenticated
+  browser could set `submissions.ai_score`, `ai_verdict` and `source` directly,
+  and that a syntactically valid but catalog-absent lesson could create both a
+  reading submission/star and a semantic learning interaction. Independent
+  P0/P1 review then proved three further release blockers: a deduped legacy
+  browser score could remain in `MAX(ai_score)` and be relabelled `live`;
+  first-read helpers could mutate D1 before, or without, authoritative catalog
+  resolution; and `/api/lesson-blueprint` could spend APIS capacity and seed a
+  week-long public cache from browser-provided title/excerpt. The retired
+  discussion POST was also an unauthenticated GitHub write proxy. Those paths
+  violated the existing server, data and cost-authority contracts.
+- The browser now gives `/api/reading/submission` only its three words and the
+  durable `contextWords` source-event reference. The Worker derives score and
+  verdict only from the same student's, same lesson's, same three words'
+  `source_ai_assessment`; a missing, cross-user, cross-lesson, wrong-interaction
+  or word-mismatched event fails HTTP 422. Browser `aiScore`, `aiVerdict` and
+  `source` fields are ignored, and `source` is derived only from the local test
+  seam versus production runtime. An unassessed dedupe clears any legacy stored
+  score/verdict, and constellation/detail/history views derive score authority
+  only from same-student `contextWords` + `a_plus_gate` +
+  `source_ai_assessment` ledger rows whose normalized three-word set intersects
+  an actual submission. Legacy `submissions.ai_score` is no longer a read or
+  brightness authority, and lesson history projects `source` from the current
+  trusted runtime instead of returning the old browser-writable column.
+- Lesson fallback remains available in `getLessonMeta` / `getLessonData` for
+  read compatibility. Every current lesson-bearing mutation route instead
+  resolves the exact lesson from `site/data/manifest.json`; all four first-read
+  mutation handlers do so before their helper can touch D1. Lesson blueprint
+  title/block/excerpt now come from the hydrated authoritative lesson, while
+  mode/genres come from `site/data/literary-taxonomy.json`. Cache authority is
+  bumped to `participation-matrix-v7-server-authority`; an absent lesson stops
+  before cache lookup/write or APIS, and pre-hardening cache keys cannot hit.
+  The removed UI's
+  legacy discussion POST is fail-closed HTTP 410/no-store and makes no GitHub,
+  D1 or Queue call; discussion GET remains read-only. There is no schema,
+  migration, scoring-policy, manifest or semantic-revision change.
+- Exact Node 24.18.0 and 22.21.1 each pass the complete
+  `precontent:check`. On both runtimes Reading API passes 74/74, evidence
+  contract passes 41/41, blueprint quality passes 7/7, native-content passes
+  22/22 and release-site passes 5/5. Five study-guide PDF/extraction receipts
+  verify on both runtimes. The deterministic formal staging has 1,223 files /
+  164,384,113 bytes, projected SHA-256
+  `e04ccfe54d6f639d437e575d5cd17a163e3d00889c95e6ca1452cfe3279c67a8`
+  and artifact aggregate SHA-256
+  `909593b431f5ed29b3e37bf1ae0ada6d9b9a6175dc301d27e73edca47872c8d2`;
+  the tracked manifest byte SHA-256 is
+  `9c717073cedb2be51a52bc64402174a8aaffea020569c5b4fdd482a62213a147`.
+- Final independent P0/P1 review of the complete diff and hostile boundaries
+  found no remaining P0 or P1 issue. The review explicitly rechecked score/
+  word/source projection, all four first-read prechecks, server-owned blueprint
+  context and cache authority, retired discussion side effects, SQL privacy and
+  bounded runtime cost.
+- Production remains unchanged at Pages deployment
+  `18213286-37d1-4b71-80b6-78e8b986ed3d` / source `a97eba7` (full source
+  `a97eba7589ed6afa7df30ba4f37f2241a22d90d0`). Its deployed Worker and current
+  static interaction assets remain a mixed generation, and live
+  `/api/learning/health` remains unavailable. This candidate has not been
+  deployed.
+- Formal release remains **NO-GO**: on both exact Node authorities
+  `check:native-content:deploy-sync` fails closed with `current canonical source
+  graph lacks an approved audit receipt`. A separately owned Web/App receipt,
+  paired User Center/YW review and authenticated live acceptance are still
+  required. This task made no deployment, D1/Queue/User Center/GitHub-discussion
+  write, binding/configuration change or student-data mutation.
+- This is `no-new-capability`. Source rollback is to revert the exact candidate
+  commit and rebuild/check the formal artifact manifest. No production or data
+  rollback applies unless a later, separately authorized release occurs.
 
 ## 2026-08-15 prelaunch assessment and reservation-correctness candidate
 

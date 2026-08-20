@@ -1,6 +1,76 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-08-15 (America/Los_Angeles)
+Last reviewed: 2026-08-20 (America/Los_Angeles)
+
+## 2026-08-20 lesson, reading-score and retired-write authority contract
+
+- `site/data/manifest.json` is the lesson identity authority for every mutation.
+  Keep `getLessonMeta` / `getLessonData` fallback semantics only for read
+  compatibility. Mutation handlers must call the authoritative variants and
+  stop a catalog-absent lesson before APIS, D1, outbox or Queue work. A lesson
+  ID that merely matches `lesson-*` is not authority. In particular,
+  first-read mark, delete, submit and resolve must resolve the exact manifest
+  lesson before calling a helper that can mutate D1.
+- `/api/reading/submission` accepts the student's exact three words plus an
+  optional `sourceEventId`. It must never read a browser-provided `aiScore`,
+  `aiVerdict` or `source`. With no source event, the submission remains valid
+  but has no score bonus. With a source event, the Worker joins
+  `learning_interactions` to `learning_evaluations` and requires the same
+  student, lesson, `contextWords` interaction, `a_plus_gate` role,
+  `source_ai_assessment` method and normalized three-word set. Any mismatch is
+  HTTP 422 and creates no submission.
+- `source` is runtime-owned: `synthetic` exists only when the explicit local
+  `READING_TEST_SLUG` seam is present; otherwise it is `live`. Never add a
+  production binding for `READING_TEST_SLUG`. History responses must project
+  this current trusted runtime value and never return the legacy stored column,
+  which older browsers could set. Reordering or simplified/traditional
+  normalization may dedupe the same three words, but it cannot borrow an
+  assessment for a different word set.
+- `submissions.ai_score` and `ai_verdict` are compatibility storage, not read
+  authority. A dedupe without a matching source event must clear both fields.
+  Constellation brightness and the lesson/history projections derive scores
+  only from `learning_interactions` joined to `learning_evaluations` with the
+  same server-owned role and method predicates, then intersect the normalized
+  three-word evidence key with an actual submission key. A valid assessment
+  for an unsubmitted word set does not brighten a lesson. Never restore a
+  `MAX(submissions.ai_score)` brightness path: pre-hardening browser values
+  cannot be distinguished in that column without a migration/data rewrite.
+- `/api/lesson-blueprint` accepts only `lessonId` as lesson authority. It must
+  load the exact manifest lesson and literary-taxonomy row, derive title, block,
+  excerpt, allowlisted normalized mode and genres from those server assets, and
+  ignore browser title/block/excerpt/mode/genres before cache access or APIS.
+  Unknown lessons return HTTP 400 with zero cache read/write and zero APIS
+  request. Keep cache authority at
+  `participation-matrix-v7-server-authority` or a later reviewed version so
+  pre-hardening week-long entries cannot be reused.
+- `POST /api/discussions/:lessonId` is a retired legacy write surface. It always
+  returns HTTP 410 with `discussion_write_retired` and `cache-control:
+  no-store`, without parsing the body, reading a credential, or calling GitHub,
+  D1 or Queue. The removed UI must not be restored implicitly. GET remains the
+  bounded read-only compatibility path; any future student discussion feature
+  requires a separate authenticated, privacy-reviewed, rate-bounded design.
+- Preserve the hostile gates in `scripts/test_reading_api.mjs` and
+  `scripts/test_learning_evidence_contract.mjs`, plus blueprint coverage in
+  `scripts/test_lesson_blueprint_quality.mjs`: browser-forged score/verdict/
+  source stays null/empty/runtime-owned; legacy scores cannot brighten or appear
+  without source evidence; a nonexistent lesson cannot enter submission,
+  first-read or semantic ledgers; blueprint absence has zero APIS/cache effect;
+  retired discussion POST has zero outbound/data effect; and valid source
+  evidence is bound by exact user/lesson/interaction/method SQL predicates.
+- The 2026-08-20 Cloudflare readback still names production deployment
+  `18213286-37d1-4b71-80b6-78e8b986ed3d` at source `a97eba7`. Do not infer that
+  this Draft source correction is live. The live carrier/static-contract drift
+  and unavailable `/api/learning/health` remain release blockers.
+- Before any release, run the 2026-08-20 section of `docs/VERIFICATION.md` on
+  exact Node 24.18.0 and 22.21.1. Formal release must stay blocked while
+  `check:native-content:deploy-sync` reports that the canonical source graph
+  lacks an approved audit receipt. Do not generate or approve that separately
+  owned Web/App receipt as part of a server-authority patch.
+- This is a `no-new-capability`, source-only correction with no schema,
+  migration, Queue, binding, route or configuration change. Roll back source by
+  reverting the exact candidate commit and rebuilding/checking
+  `docs/baselines/site-artifact-manifest.json`; preserve D1 history. There is no
+  production rollback action for this Draft because it performs no deployment.
 
 ## 2026-08-15 assessment tolerance and durable retry contract
 
@@ -723,7 +793,7 @@ Browser / Companion legacy WebView
        -> my.bdfz.net named RPC: immutable user ID with source key fixed to yw
        -> source-specific Queue: privacy-minimized process-evidence projection
        -> apis.bdfz.net: AI dialogue and authoring gateway
-       -> GitHub Issues: optional lesson discussion integration
+       -> GitHub Issues: read-only legacy lesson discussion lookup (POST retired)
 
 Static/UI dependencies
   -> qx.bdfz.net: author portraits and figure dossiers

@@ -1,5 +1,99 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-20 server-authority hardening
+
+Use only the task-owned clean checkout and the verified page-image fixture. Run
+the complete source gate under both exact Node authorities:
+
+```zsh
+source /Users/ylsuen/.nvm/nvm.sh
+nvm use 24.18.0
+YW_PAGE_IMAGE_ROOT=/private/tmp/yw-final-audit-20260820.gzvy0h/page-fixtures \
+  npm run precontent:check
+
+nvm use 22.21.1
+YW_PAGE_IMAGE_ROOT=/private/tmp/yw-final-audit-20260820.gzvy0h/page-fixtures \
+  npm run precontent:check
+```
+
+The Reading API gate must prove all of the following with local synthetic
+identity and temporary D1 only:
+
+- browser `aiScore`, `aiVerdict` and `source` cannot set stored authority;
+- an unassessed dedupe clears a legacy score/verdict, while constellation and
+  history ignore every stored score that lacks matching source evidence, and a
+  valid source assessment for a different, unsubmitted three-word set cannot
+  brighten the lesson;
+- an absent lesson cannot create a reading star/submission or learning event;
+- an orphan first-read asset cannot mutate mark/session/evidence tables through
+  mark, delete, submit or resolve;
+- an unknown source event cannot authorize a reading score;
+- brightness excludes browser-forged scores;
+- the existing reading, first-read, study-guide, vocabulary, idempotency and
+  rate-limit invariants remain green.
+
+The evidence-contract gate must independently prove that a score lookup is
+bound to source event, student, lesson, `contextWords`, `a_plus_gate`,
+`source_ai_assessment` and the identical normalized three words, including a
+hostile word-mismatch rejection.
+
+The blueprint and retired-discussion hostile gates must also prove:
+
+- a known lesson ignores forged browser title/block/excerpt/mode/genres and
+  sends only the hydrated authoritative lesson plus server taxonomy to APIS;
+- the v7 server-authority cache version cannot reuse a pre-hardening week-long
+  cache entry;
+- an unknown lesson performs zero APIS and cache read/write operations;
+- `POST /api/discussions/:lessonId` returns 410/no-store with zero outbound,
+  D1 or Queue operation even when the legacy credential binding name exists.
+
+Build the deterministic formal Web artifact on Node 24, then check the same
+bytes on Node 22:
+
+```zsh
+source /Users/ylsuen/.nvm/nvm.sh
+nvm use 24.18.0
+YW_STUDY_GUIDE_SOURCE_DIR=/Users/ylsuen/CF/output/pdf_study_guides_web \
+  npm run verify:study-guide-sources
+npm run build:release-site
+npm run check:release-site
+npm run build:artifact-manifest
+npm run check:artifact-manifest
+
+nvm use 22.21.1
+YW_STUDY_GUIDE_SOURCE_DIR=/Users/ylsuen/CF/output/pdf_study_guides_web \
+  npm run verify:study-guide-sources
+npm run check:release-site
+npm run check:artifact-manifest
+git diff --check
+```
+
+Completed source evidence on 2026-08-20: complete `precontent:check` passed on
+Node 24.18.0 and 22.21.1; Reading API passed 74/74 on each; evidence contract
+41/41 and blueprint quality 7/7 on each; native-content 22/22 and release-site
+5/5 on each; five study-guide source receipts verified on each. Formal staging
+contains 1,223 files / 164,384,113 bytes with projected SHA-256
+`e04ccfe54d6f639d437e575d5cd17a163e3d00889c95e6ca1452cfe3279c67a8`,
+artifact aggregate
+`909593b431f5ed29b3e37bf1ae0ada6d9b9a6175dc301d27e73edca47872c8d2`
+and tracked manifest byte SHA-256
+`9c717073cedb2be51a52bc64402174a8aaffea020569c5b4fdd482a62213a147`.
+Final independent P0/P1 review of the complete diff and hostile cases found
+zero remaining P0 and zero remaining P1 issue.
+
+This source gate is green, but the release gate is deliberately red. With the
+verified page fixture, exact Node 24.18.0 and 22.21.1 both stop at:
+
+```text
+current canonical source graph lacks an approved audit receipt
+```
+
+That is a release **NO-GO**, not a test waiver. This task must not generate the
+separately owned native Web/App receipt, deploy Pages, migrate/write D1, send or
+drain Queue data, or mutate User Center. Production remains deployment
+`18213286-37d1-4b71-80b6-78e8b986ed3d` / source `a97eba7` until a separately
+authorized paired release passes that gate and authenticated live acceptance.
+
 ## 2026-08-15 prelaunch assessment/reservation correctness
 
 Run the complete source gate and focused contract matrix under both exact Node
