@@ -2,6 +2,44 @@
 
 Last reviewed: 2026-08-20 (America/Los_Angeles)
 
+## 2026-08-20 production launch authority
+
+Current production is Pages deployment
+`6426b70e-d39b-4ba9-898b-0f5e7a1c3859`, exact source
+`26f126bfb38c62b251bbe8815d6ef32c4594bce7`. Immediate static rollback is
+`581a0180-2085-4960-8cd0-4aee17cb2abd`, source
+`04ca518767b39b75832740007be11b5b902b0a8c`. Production uses the existing D1,
+service binding and YW v2 producer unchanged. The v2 main Queue is intentionally
+open; its 2026-08-21 readback is `delivery_paused=false`, main backlog zero and
+v2 DLQ backlog zero. Emergency rollback pauses only
+`bdfz-learning-evidence-yw-v2`; never pause v1 or either DLQ as a substitute.
+
+Authenticated launch acceptance used a normal UI lesson open, not a fabricated
+envelope. It advanced source interactions 284 to 285 and central YW evidence
+277 to 278. The new row is the exact preactivation canary shape, enters the
+`mapped_accepted` branch, persists as durable `accepted`, has non-scoring
+eligibility, null numeric values and null scoring policy, and creates no credit
+or weekly/A+ change. Five prior `academic_year_invalid` samples remain intact
+and are never replayed. This validates transport, not September scoring; the
+first real 2026-2027 scoring event is checked read-only after the automatic
+2026-09-01 00:00 Asia/Shanghai handoff.
+
+The source receipt reconciler has a 15-minute CAS lease. After that lease
+expired, a normal HTTP 200 learning-health request ran the existing drain and
+the source outbox read back `central_disposition=accepted` with a receipt
+timestamp. Never replace that path with a manual D1 update.
+
+The one-shot read-only Codex heartbeat `yw-9` is active for 2026-09-01 00:05
+Asia/Shanghai. It may verify the first genuine scoring event but must report
+waiting when no real sample exists; it has no deploy, Queue or data-write
+authority.
+
+PR #16 GitHub run `32447617539` passed both exact Node jobs. Returning and fresh
+browsers both load 189 lessons from the source-hash entry assets. A direct APIS
+probe with the exact YW headers returned 200 in 4,118 ms. If APIS later misses
+the 20-second boundary, the UI receives the reviewed retryable 503 instead of
+an opaque 502 and no false evidence is written.
+
 ## 2026-08-20 Web launch, cache and pre-activation transport contract
 
 - Treat the five local entry assets in `site/index.html` as immutable browser
@@ -25,11 +63,11 @@ Last reviewed: 2026-08-20 (America/Los_Angeles)
   attempt continues to return the existing 429 exhaustion result. Never
   fabricate a score or record an unassessed response as evidence to make the
   UI appear successful.
-- Current pre-change production and rollback authority for this transaction is
-  Pages deployment `581a0180-2085-4960-8cd0-4aee17cb2abd`, source
-  `04ca518767b39b75832740007be11b5b902b0a8c`. A later deployment must replace
-  this sentence and the matching `PROJECT_STATE.md` fact with the exact live
-  deployment/source readback; chat output is not an operations authority.
+- The pre-change deployment for this transaction was
+  `581a0180-2085-4960-8cd0-4aee17cb2abd`, source
+  `04ca518767b39b75832740007be11b5b902b0a8c`; it is now the immediate rollback.
+  The production authority is the exact live readback in the closeout section
+  above; chat output is not an operations authority.
 
 This is `no-new-capability`: it uses the existing Pages Functions, static
 assets, D1, service binding and v2 Queue producer only. It changes no schema,

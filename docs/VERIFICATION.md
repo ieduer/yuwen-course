@@ -1,5 +1,34 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-20 production acceptance evidence
+
+The exact source deployed to production is
+`26f126bfb38c62b251bbe8815d6ef32c4594bce7`; Pages readback is
+`6426b70e-d39b-4ba9-898b-0f5e7a1c3859` and immediate rollback is
+`581a0180-2085-4960-8cd0-4aee17cb2abd`. GitHub run `32447617539` passed both
+Node jobs. Independent detached clean-clone full gates passed Node 22.21.1 and
+24.18.0 with Reading 74/74, evidence 54/54, native-content 22/22 and
+release-site 5/5.
+
+A previously failing cached browser and a fresh authenticated browser both
+loaded 189 student-visible lessons and opened a real lesson after deployment.
+The exact normal lesson-open request produced one server-tagged canary: source
+284 to 285, UC YW evidence 277 to 278, mapped-accepted admission, durable
+accepted disposition, non-scoring, null scoring policy and null numeric values.
+Quarantine remained five, credit remained zero, authenticated weekly reading
+and A+ were unchanged, and main/DLQ backlog both read zero. The Queue terminal
+state is `delivery_paused=false`. After the designed 15-minute source receipt
+lease, an ordinary HTTP 200 learning-health drain reconciled the source outbox
+to `central_disposition=accepted` with a receipt timestamp; no direct database
+update was used.
+
+The APIS direct probe with exact production headers returned HTTP 200 in
+4,118 ms with a non-empty answer. The evaluator failure tests prove the live
+artifact's friendly 503/15-second retry contract without injecting an outage
+into production. This acceptance proves transport and correct scoring
+isolation. The first real 2026-2027 scoring event remains a scheduled read-only
+post-handoff verification, not a completed 8-month scoring sample.
+
 ## 2026-08-20 Web launch-readiness correction
 
 In an exact clean checkout, install with `npm ci`, then run the complete
