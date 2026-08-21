@@ -2,6 +2,43 @@
 
 Last updated: 2026-08-20
 
+## 2026-08-20 production launch closeout
+
+- PR #16 merged as canonical main
+  `26f126bfb38c62b251bbe8815d6ef32c4594bce7`. GitHub Actions recovered for
+  this repository during the PR: run `32447617539` passed the exact Node
+  22.21.1 and 24.18.0 jobs, so PR #16 has no deferred CI replay debt. The
+  complete detached clean-clone `precontent:check` also passed on both Node
+  authorities with Reading 74/74, evidence 54/54, native-content 22/22 and
+  release-site 5/5.
+- Production is Pages deployment
+  `6426b70e-d39b-4ba9-898b-0f5e7a1c3859` at that exact source. The immediate
+  rollback is `581a0180-2085-4960-8cd0-4aee17cb2abd` / source
+  `04ca518767b39b75832740007be11b5b902b0a8c`. The formal 1,223-file artifact
+  kept the existing stable native pointer. No migration, route, binding,
+  consumer setting or native/App pointer changed.
+- Returning-browser and fresh-context live checks both show 189 student-visible
+  lessons and open a real lesson without the former immutable-cache helper
+  mismatch. The v2 Queue is deliberately open (`delivery_paused=false`,
+  modified `2026-08-21T04:48:55.704168Z`); main and DLQ metrics are both zero.
+- A normal authenticated UI lesson open created one exact
+  `2025-2026 / lessonOpened / release_canary` source event. Source interactions
+  advanced 284 to 285 and central YW evidence 277 to 278. UC took the
+  `mapped_accepted` admission branch and stored one durable accepted,
+  non-scoring, null-policy, all-null-numeric reading evidence row. Existing
+  quarantine stayed five, credit stayed zero, and the authenticated weekly
+  reading/A+ projection was unchanged. After the designed 15-minute source
+  receipt lease, a normal health drain reconciled the source outbox to
+  `central_disposition=accepted` with a receipt timestamp; no manual database
+  update was used. This proves transport only; it does not claim that September
+  scoring has a real sample.
+- APIS direct readback with the exact YW headers returned HTTP 200 in 4,118 ms.
+  The local evaluator outage path remains a friendly retryable 503 with no
+  false ledger/outbox write. The next production action is the read-only
+  2026-09-01 first-real-scoring-event check after the academic-year handoff;
+  one-shot Codex heartbeat `yw-9` is active for 00:05 Asia/Shanghai and has no
+  mutation authority.
+
 ## 2026-08-20 Web launch-readiness correction
 
 - The current production alias is Pages deployment
@@ -42,8 +79,9 @@ Last updated: 2026-08-20
   aggregate SHA-256
   `96080e7e8eff4e7899e268394b055aef453a39a1980041c506e7f72f6f01c2f9`;
   it preserves the exact existing stable native pointer and excludes every
-  candidate/historical native tree. Release remains pending exact detached
-  clean-clone fallback evidence, merge, deployment and live readback.
+  candidate/historical native tree. The exact candidate was subsequently
+  verified, merged and deployed; the production closeout above supersedes this
+  pre-release status without rewriting the historical candidate evidence.
 
 ## 2026-08-20 server-authority hardening Draft candidate
 
