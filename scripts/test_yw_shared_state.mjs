@@ -579,6 +579,6 @@ test("app integration uses the versioned state routes and removes generic progre
   assert.match(source, /stableAnchor:\s*"lesson-root"/);
   assert.match(source, /recordEvidence:\s*false/);
   assert.match(source, /SHARED_STATE_ASSET_VERSION = "20260730-owner-v1"/);
-  assert.match(index, /assets\/app\.js\?v=20260812-a-f-truth-v1/);
+  assert.match(index, /assets\/app\.js\?v=49914e5f9bbda034/);
   assert.equal(YW_SHARED_STATE_CONTRACT.CLIENT, "yuwen-web");
 });

@@ -211,6 +211,6 @@ test("student lesson count and startup exclude hidden system records", () => {
   assert.match(anonymousSource, /const hashLessonId = studentVisibleLessons\(\)\.find/);
   assert.match(anonymousSource, /const storedStudentLessonId = studentVisibleLessons\(\)\.find/);
   assert.match(anonymousSource, /const lessonId = hashLessonId \|\| storedStudentLessonId/);
-  assert.match(indexHtml, /assets\/app\.js\?v=20260812-a-f-truth-v1/);
+  assert.match(indexHtml, /assets\/app\.js\?v=49914e5f9bbda034/);
   assert.doesNotMatch(indexHtml, /assets\/app\.js\?v=20260811-(?:embed-scroll-layout-v4|student-units-v5)/);
 });
