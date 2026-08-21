@@ -1,5 +1,37 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-20 Web launch-readiness correction
+
+In an exact clean checkout, install with `npm ci`, then run the complete
+`precontent:check` under Node 24.18.0 and 22.21.1. The focused minimum is:
+
+```zsh
+npm run test:static-asset-cache
+npm run test:evidence-contract
+npm run test:vocab-progress
+npm run test:release-site
+```
+
+The cache test must bind every local CSS/JS entry asset to its tracked source
+byte hash. Evidence tests must prove the server-only canary phase boundary, a
+friendly retryable evaluator 503, immediate same-answer retry, second-attempt
+exhaustion, and zero interaction/outbox writes on evaluator failure.
+
+After deployment, use a fresh browser context and a context that previously
+cached the old July vocabulary helper. Both must load the 191-record catalog,
+show 189 student-visible lessons and open one real lesson without
+`formalVocabularyResourceKeys` or other console errors. Read back the canonical
+Pages deployment ID and source SHA. Only then may the single authorized v2
+Queue resume proceed and remain open.
+
+The authenticated transport canary passes only when a normal UI lesson open
+creates exactly one new source event/outbox attempt, UC accepts exactly one new
+`mapped_accepted` evidence row with `non_scoring` and null scoring policy, the
+source reconciles the terminal receipt, quarantine and DLQ do not increase, and
+weekly reading/A+ plus credit/snapshot/F counts remain unchanged. Existing
+quarantine samples are read-only audit evidence and must not be replayed or
+deleted.
+
 ## 2026-08-20 post-PR-#12 server-authority reconciliation
 
 Use only a task-owned clean checkout. The durable page-image authority is the

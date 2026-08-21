@@ -46,6 +46,21 @@ const previewRegistryCache = { value: null, expiresAt: 0 };
 const studyGuideCatalogCache = { value: null, expiresAt: 0 };
 const BROWSER_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
 const YW_WEB_ORIGIN = "https://yw.bdfz.net";
+const YW_PRE_ACTIVATION_TRANSPORT_CANARY = Object.freeze({
+  status: "active",
+  startsAt: "2026-08-11T16:00:00.000Z",
+  expiresAt: "2026-08-31T16:00:00.000Z",
+  acceptedAcademicYear: "2025-2026",
+  interactionKey: "lessonOpened",
+  eventType: "lesson_opened",
+  assessmentKind: "trace",
+  scoringRole: "none",
+  eligibilityStatus: "non_scoring",
+  verificationMethod: "source_route",
+  lessonPhase: "release_canary",
+  numericResultPolicy: "all_null",
+  effect: "audit_only_no_credit_no_grade",
+});
 
 export default {
   async fetch(request, env, ctx) {
@@ -220,6 +235,20 @@ function learningSubmissionInProgressResponse(error) {
   }, { status: 409, headers: { "retry-after": String(retryAfterSeconds) } });
 }
 
+export function learningEvaluatorUnavailableResponse() {
+  const retryAfterSeconds = 15;
+  return json({
+    ok: false,
+    error: "評閱服務暫時繁忙，本次答案尚未記錄，請稍後重試",
+    code: "learning_evaluator_unavailable",
+    retryable: true,
+    retryAfterSeconds,
+  }, {
+    status: 503,
+    headers: { "retry-after": String(retryAfterSeconds) },
+  });
+}
+
 function cleanText(value, max = 4000) {
   return String(value || "").replace(/\r/g, "").trim().slice(0, max);
 }
@@ -344,19 +373,7 @@ async function handleLearningEvidenceHealth(env) {
           },
         },
         preActivationTransportCanaryPolicy: {
-          status: "active",
-          startsAt: "2026-08-11T16:00:00.000Z",
-          expiresAt: "2026-08-31T16:00:00.000Z",
-          acceptedAcademicYear: "2025-2026",
-          interactionKey: "lessonOpened",
-          eventType: "lesson_opened",
-          assessmentKind: "trace",
-          scoringRole: "none",
-          eligibilityStatus: "non_scoring",
-          verificationMethod: "source_route",
-          lessonPhase: "release_canary",
-          numericResultPolicy: "all_null",
-          effect: "audit_only_no_credit_no_grade",
+          ...YW_PRE_ACTIVATION_TRANSPORT_CANARY,
         },
       }],
       capabilities: [{
@@ -1200,7 +1217,13 @@ async function handleInteractionCheck(request, env) {
       const parsed = extractJsonObject(raw);
       assessment = normalizeInteractionAssessment(parsed, parsed ? "" : raw);
     } catch (error) {
-      await releaseAfterEvaluatorFailure(env, submissionGuard.submissionReservation, error);
+      try {
+        await releaseAfterEvaluatorFailure(env, submissionGuard.submissionReservation, error);
+      } catch (releasedError) {
+        if (releasedError instanceof LearningSubmissionRateLimitError) throw releasedError;
+        if (releasedError !== error) throw releasedError;
+        return learningEvaluatorUnavailableResponse();
+      }
     }
     const recorded = await recordLearningInteraction({
       request,
@@ -1490,6 +1513,18 @@ const DIRECT_LEARNING_INTERACTIONS = new Set([
   "lessonCompleted",
 ]);
 
+export function preActivationTransportLessonPhase(interactionKey, requestedPhase, now = Date.now()) {
+  if (cleanText(interactionKey, 40) !== YW_PRE_ACTIVATION_TRANSPORT_CANARY.interactionKey) {
+    return cleanText(requestedPhase, 60);
+  }
+  const nowMs = Number(now);
+  const startsAtMs = Date.parse(YW_PRE_ACTIVATION_TRANSPORT_CANARY.startsAt);
+  const expiresAtMs = Date.parse(YW_PRE_ACTIVATION_TRANSPORT_CANARY.expiresAt);
+  return Number.isFinite(nowMs) && nowMs >= startsAtMs && nowMs < expiresAtMs
+    ? YW_PRE_ACTIVATION_TRANSPORT_CANARY.lessonPhase
+    : "";
+}
+
 async function handleLearningInteraction(request, env, ctx) {
   if (!env.READING_DB) return readingError("learning evidence store not configured", 503);
   let student;
@@ -1522,7 +1557,7 @@ async function handleLearningInteraction(request, env, ctx) {
         ...(payload.data && typeof payload.data === "object" ? payload.data : {}),
         clientMutationId: cleanText(payload.clientMutationId, 100),
         classSessionId: cleanText(payload.classSessionId, 100),
-        lessonPhase: cleanText(payload.lessonPhase, 60),
+        lessonPhase: preActivationTransportLessonPhase(interactionKey, payload.lessonPhase),
       },
     });
     if (ctx?.waitUntil) ctx.waitUntil(drainEvidenceOutbox(env, 5));

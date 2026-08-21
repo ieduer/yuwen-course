@@ -20,7 +20,11 @@ import {
   reconcileEvidenceOutbox,
   recordLearningInteraction,
 } from "../site/learning-evidence-source.js";
-import worker, { authoritativeReadingAssessmentForSubmission } from "../site/_worker.js";
+import worker, {
+  authoritativeReadingAssessmentForSubmission,
+  learningEvaluatorUnavailableResponse,
+  preActivationTransportLessonPhase,
+} from "../site/_worker.js";
 
 const ROOT = resolve(import.meta.dirname, "..");
 const registry = JSON.parse(readFileSync(resolve(ROOT, "site/data/interaction-definitions.json"), "utf8"));
@@ -1248,6 +1252,58 @@ test("the Worker checks the per-user resource bound before AI work and vocabular
   assert.match(workerSource, /"retry-after"/);
 });
 
+test("normal lesson opening is server-tagged only during the pre-activation transport window", () => {
+  assert.equal(
+    preActivationTransportLessonPhase("lessonOpened", "browser-supplied", Date.parse("2026-08-11T16:00:00.000Z")),
+    "release_canary",
+  );
+  assert.equal(
+    preActivationTransportLessonPhase("lessonOpened", "browser-supplied", Date.parse("2026-08-31T15:59:59.999Z")),
+    "release_canary",
+  );
+  assert.equal(
+    preActivationTransportLessonPhase("lessonOpened", "browser-supplied", Date.parse("2026-08-31T16:00:00.000Z")),
+    "",
+  );
+  assert.equal(
+    preActivationTransportLessonPhase("readAcknowledged", "annotated_reading", Date.parse("2026-08-20T12:00:00.000Z")),
+    "annotated_reading",
+  );
+  const directHandler = workerSource.slice(
+    workerSource.indexOf("async function handleLearningInteraction"),
+    workerSource.indexOf("async function loadWordGroups"),
+  );
+  assert.match(
+    directHandler,
+    /lessonPhase: preActivationTransportLessonPhase\(interactionKey, payload\.lessonPhase\)/,
+  );
+});
+
+test("an APIS evaluator outage is a retryable friendly 503 with no false receipt", async () => {
+  const response = learningEvaluatorUnavailableResponse();
+  assert.equal(response.status, 503);
+  assert.equal(response.headers.get("retry-after"), "15");
+  assert.deepEqual(await response.json(), {
+    ok: false,
+    error: "評閱服務暫時繁忙，本次答案尚未記錄，請稍後重試",
+    code: "learning_evaluator_unavailable",
+    retryable: true,
+    retryAfterSeconds: 15,
+  });
+  const interactionHandler = workerSource.slice(
+    workerSource.indexOf("async function handleInteractionCheck"),
+    workerSource.indexOf("async function handleLearningCheck"),
+  );
+  assert.ok(
+    interactionHandler.indexOf("releaseAfterEvaluatorFailure")
+      < interactionHandler.indexOf("return learningEvaluatorUnavailableResponse()"),
+  );
+  assert.ok(
+    interactionHandler.indexOf("return learningEvaluatorUnavailableResponse()")
+      < interactionHandler.indexOf("recordLearningInteraction"),
+  );
+});
+
 test("retired public evaluators spend no APIS calls and learning-check keeps My authentication", async () => {
   const originalFetch = globalThis.fetch;
   let fetchCalls = 0;
@@ -1356,8 +1412,15 @@ test("an evaluator outage permits one immediate same-answer route retry without 
     });
 
     const failed = await worker.fetch(request(), env, {});
-    assert.equal(failed.status, 502);
-    assert.match((await failed.json()).error, /simulated evaluator outage/);
+    assert.equal(failed.status, 503);
+    assert.equal(failed.headers.get("retry-after"), "15");
+    assert.deepEqual(await failed.json(), {
+      ok: false,
+      error: "評閱服務暫時繁忙，本次答案尚未記錄，請稍後重試",
+      code: "learning_evaluator_unavailable",
+      retryable: true,
+      retryAfterSeconds: 15,
+    });
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 0);
 
@@ -1377,15 +1440,15 @@ test("an evaluator outage permits one immediate same-answer route retry without 
 
     evaluatorMode = "non-json";
     const nonJson = await worker.fetch(request("route-non-json-evaluator-retry"), env, {});
-    assert.equal(nonJson.status, 502);
-    assert.match((await nonJson.json()).error, /格式無效/);
+    assert.equal(nonJson.status, 503);
+    assert.equal((await nonJson.json()).code, "learning_evaluator_unavailable");
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 2);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 1);
 
     evaluatorMode = "invalid-normalized";
     const invalidNormalized = await worker.fetch(request("route-invalid-normalized-evaluator-retry"), env, {});
-    assert.equal(invalidNormalized.status, 502);
-    assert.match((await invalidNormalized.json()).error, /分數無效/);
+    assert.equal(invalidNormalized.status, 503);
+    assert.equal((await invalidNormalized.json()).code, "learning_evaluator_unavailable");
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 3);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 1);
   } finally {

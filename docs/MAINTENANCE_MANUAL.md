@@ -2,6 +2,39 @@
 
 Last reviewed: 2026-08-20 (America/Los_Angeles)
 
+## 2026-08-20 Web launch, cache and pre-activation transport contract
+
+- Treat the five local entry assets in `site/index.html` as immutable browser
+  resources. Each `?v=` value is the first 16 hex characters of that tracked
+  source asset's SHA-256. Run `npm run test:static-asset-cache` after changing
+  any of those source bytes. A date, feature label or unchanged query value is
+  not cache authority; it can strand returning students on mutually
+  incompatible script generations.
+- During the exact pre-activation window recorded by
+  `YW_PRE_ACTIVATION_TRANSPORT_CANARY`, the server—not the browser—maps a normal
+  `lessonOpened` request to `lessonPhase=release_canary`. At expiry it returns
+  to an empty lesson-open phase automatically. Do not add a test-only public
+  ingest, hand-construct an envelope, trust client occurrence time, or extend
+  the window by accepting a browser phase. Acceptance requires a normal
+  authenticated lesson open plus source ledger, Queue, UC evidence and source
+  terminal-receipt readback; credit/snapshot/grade/F deltas must remain zero.
+- APIS evaluation remains bounded to 20 seconds. The first evaluator failure
+  may release the existing durable reservation for one same-answer retry and
+  must return `learning_evaluator_unavailable`, HTTP 503 and `Retry-After: 15`
+  without writing an interaction or outbox row. A second failed evaluator
+  attempt continues to return the existing 429 exhaustion result. Never
+  fabricate a score or record an unassessed response as evidence to make the
+  UI appear successful.
+- Current pre-change production and rollback authority for this transaction is
+  Pages deployment `581a0180-2085-4960-8cd0-4aee17cb2abd`, source
+  `04ca518767b39b75832740007be11b5b902b0a8c`. A later deployment must replace
+  this sentence and the matching `PROJECT_STATE.md` fact with the exact live
+  deployment/source readback; chat output is not an operations authority.
+
+This is `no-new-capability`: it uses the existing Pages Functions, static
+assets, D1, service binding and v2 Queue producer only. It changes no schema,
+binding, route, Queue configuration, scoring rule or native content pointer.
+
 ## 2026-08-20 post-PR-#12 combined authority contract
 
 PR #12 was merged unchanged as

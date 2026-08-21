@@ -2,6 +2,49 @@
 
 Last updated: 2026-08-20
 
+## 2026-08-20 Web launch-readiness correction
+
+- The current production alias is Pages deployment
+  `581a0180-2085-4960-8cd0-4aee17cb2abd` at canonical source
+  `04ca518767b39b75832740007be11b5b902b0a8c`; it is also the rollback anchor
+  for this candidate. A real browser with previously cached immutable assets
+  fails before loading the lesson catalog because `site/index.html` kept the
+  July `vocab-progress.js` cache key after the file added the formal vocabulary
+  authority API. The resulting mixed generation throws
+  `formalVocabularyResourceKeys is not a function`. The candidate replaces all
+  five mutable local entry-asset labels with the first 16 hex characters of
+  their tracked source asset SHA-256 and adds an executable gate that fails
+  whenever source bytes and HTML cache authority drift again.
+- A normal `lessonOpened` UI request previously carried an empty
+  `lessonPhase`, while the already-published pre-activation transport canary
+  accepts only `release_canary`. The direct interaction handler now derives
+  that phase from server time only during
+  `[2026-08-11T16:00:00Z, 2026-08-31T16:00:00Z)` and clears it for lesson opens
+  outside the window. Browser phase input cannot create or extend the canary.
+  The event remains `trace / none / non_scoring` with null numeric results and
+  cannot award credit, change a score snapshot, alter A+ progress or issue F.
+- A direct APIS `feedback / medium` diagnostic with the exact YW Origin and
+  project headers returned HTTP 200 in 13.392 seconds. The production 20-second
+  evaluator boundary remains intentionally bounded, but an APIS timeout,
+  invalid model JSON or invalid normalized assessment now releases the exact
+  durable submission reservation and returns retryable HTTP 503 with a
+  15-second `Retry-After` and a student-safe message. It creates no learning
+  interaction, evaluation or outbox receipt. A reservation-release failure
+  remains a hard error, and the existing second-attempt exhaustion stays 429.
+- This is a `no-new-capability` Web correction: no schema, migration, D1 data,
+  Queue state, route, binding, source manifest, scoring policy or native/App
+  pointer changes. Source rollback is a normal revert. Production rollback is
+  the recorded Pages deployment above. The task-owned author checkout passes
+  the complete `precontent:check` under exact Node 22.21.1 and 24.18.0,
+  including Reading 74/74, evidence 54/54, native-content 22/22 and release-site
+  5/5 on each runtime. The five external study-guide PDF/extraction byte and
+  page receipts also pass. The formal 1,223-file Web artifact is current at
+  aggregate SHA-256
+  `96080e7e8eff4e7899e268394b055aef453a39a1980041c506e7f72f6f01c2f9`;
+  it preserves the exact existing stable native pointer and excludes every
+  candidate/historical native tree. Release remains pending exact detached
+  clean-clone fallback evidence, merge, deployment and live readback.
+
 ## 2026-08-20 server-authority hardening Draft candidate
 
 - This source-only candidate is branch
