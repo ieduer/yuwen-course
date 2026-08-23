@@ -1,6 +1,66 @@
 # Project State
 
-Last updated: 2026-08-22
+Last updated: 2026-08-23
+
+## 2026-08-23 evaluator timeout and failure-attribution repair candidate
+
+- The currently served Pages deployment is
+  `2471f1e4-884a-4e80-9801-589ebbace476`, source
+  `fa93ca825e9b0d914b4608c971152dcf581ae9ac`, with atomic URL
+  `https://2471f1e4.yuwen-course.pages.dev`. Both the custom and atomic HTML
+  currently pin `assets/app.js?v=3fb3009cc5200181`. This deployment is still
+  `candidate_pending_acceptance`; do not accept it or describe it as the
+  evaluator repair. The immediate rollback remains
+  `619024c7-a261-405b-a13f-8581a90111ac` / source `16b8277`.
+- Production timing reproduced the missing failure chain. The same open-answer
+  feedback prompt took 40.0 seconds (operator timeout), 27.5, 28.3 and 19.8
+  seconds, while the Worker aborted every APIS call at 20 seconds and the
+  browser aborted at 25 seconds. The release path then attributed the upstream
+  failure to the learner: a second failure returned
+  `evaluator_retry_exhausted` with the remainder of the ten-minute learner
+  window (observed 478 seconds). That server-owned failure stranded the study-
+  guide stage and therefore kept downstream structure and author-question
+  controls locked.
+- This candidate gives `taskType=feedback` a separate 45-second Worker budget
+  and a 55-second browser budget while retaining `thinkingLevel=medium`.
+  Evaluator timeout, upstream 5xx and invalid upstream JSON now move the exact
+  mutation into a 15-second evaluator-owned cooldown marker that is excluded
+  from learner resource/global capacity. The same answer can retry after that
+  short cooldown. The response remains structured
+  `learning_evaluator_unavailable` 503 and cannot write false interaction,
+  evaluation, outbox or Queue evidence. Only genuine learner window capacity
+  returns `learning_submission_rate_limited`; the former
+  `evaluator_retry_exhausted` contract is retired.
+- Focused verification passes evidence 63/63, study-guide frontend 27/27,
+  Worker/source syntax and `git diff --check`. Exact Node 24.18.0 and 22.21.1
+  complete gates each pass 245/245 TAP tests with zero skip and zero fail, plus
+  the non-TAP first-read, annotation, mobile-touch, source and staging checks.
+  Both runtimes verify all five study-guide PDF/extraction receipts and the
+  same 693-file / 75,196,340-byte textbook-page subset against the tracked
+  inventory. A bounded 20-request
+  feedback/medium probe produced 19 valid grounded responses and one transport
+  `TypeError`; successful-response p95 was 24.401 seconds and the maximum was
+  25.908 seconds, below the 45-second Worker budget. Five low-thinking samples
+  included one invalid response, so `medium` remains the quality authority.
+  The checksum-fixed formal artifact passes both runtimes: 1,223 files /
+  164,458,961 bytes, projected aggregate
+  `520aabbb9a462c3b18d491aa1163b37cba0e05b50aceec2c18463b4f692cee55`,
+  artifact aggregate
+  `31f5a020549387589336ecd6be29bea5416c166084672b411024c9f00ae94101`
+  and marker SHA-256
+  `870ae05d50a41a98cc44355277416d70a0cd7c9987e768c8cf81d65527aee3ae`.
+  Authenticated production acceptance remains pending deployment authorization
+  and is not a completed claim.
+- The repair preserves the already-reviewed same-page first-read/checkpoint
+  rerendering and server-derived multi-turn formal dialogue. It changes no
+  route, binding, schema, migration, direct D1 data, Queue, APIS, User Center,
+  App/native pointer or shared-hub configuration: this remains a leaf-only
+  `no-new-capability` change with those dependencies `verified_no_change`.
+- The existing external executor is frozen to source `fa93ca8` and must not be
+  edited or reused for a different SHA. After merge and exact-main artifact
+  verification, production may change only through a new, separately reviewed,
+  one-use YW-Pages-only executor bound to the exact merged SHA and rollback
+  `619024c7`; direct checkout upload remains forbidden.
 
 ## 2026-08-22 lesson 1474 staged-loop recovery source closeout
 
@@ -460,6 +520,11 @@ Last updated: 2026-08-22
   v2 delivery and real-account A--F readback.
 
 ## 2026-08-15 assessment, bounded evaluator retry and anonymous-AI retirement candidate
+
+> **Superseded on 2026-08-23:** the historical two-evaluator limit below is
+> incident evidence only. The current `.002Z` evaluator-owned cooldown at the
+> top of this file consumes no learner slot and returns no
+> `evaluator_retry_exhausted` result.
 
 - This source-only candidate starts from canonical main
   `7c7e1e06bad67b17dfa16a500a64ca2e02ad08c1`. Single-choice grading now applies

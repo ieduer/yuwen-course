@@ -1,6 +1,62 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-08-22 (America/Los_Angeles)
+Last reviewed: 2026-08-23 (America/Los_Angeles)
+
+## 2026-08-23 evaluator availability override
+
+Current production serves Pages deployment
+`2471f1e4-884a-4e80-9801-589ebbace476` / source
+`fa93ca825e9b0d914b4608c971152dcf581ae9ac`, but that deployment remains
+`candidate_pending_acceptance` because it does not contain this evaluator
+repair. Its immediate rollback is
+`619024c7-a261-405b-a13f-8581a90111ac` / source `16b8277`. Do not accept the
+pending deployment and do not change either production alias while this source
+candidate is under verification.
+
+The active evaluator contract is:
+
+- keep the shared APIS request at `taskType=feedback` and
+  `thinkingLevel=medium`; feedback receives a 45-second Worker timeout while
+  other APIS task types retain 20 seconds. Both formal-dialogue and study-guide
+  browser calls use 55 seconds so the client remains longer than the Worker;
+- classify Worker abort, upstream 5xx and invalid upstream JSON as an evaluator-
+  owned failure. Release the positive learner slot into a `.002Z` cooldown
+  marker with negative slot numbers. The marker lasts 15 seconds, is excluded
+  from learner resource/global window capacity, and permits the same mutation
+  to reserve a fresh positive slot after expiry;
+- return structured `learning_evaluator_unavailable` 503 with
+  `Retry-After <= 30`, preserve the browser's exact answer and mutation receipt,
+  and write no false interaction, evaluation, outbox or Queue evidence;
+- reserve `learning_submission_rate_limited` 429 for real learner
+  `window_capacity` only. The historical `evaluator_retry_exhausted` reason,
+  its two-evaluator ceiling and its ten-minute wait are superseded and must not
+  be restored;
+- keep the ordinary `.000Z` lease, `.001Z` abandoned-lease reclaim,
+  idempotency, concurrency and server-owned scoring contracts unchanged. A D1
+  or final-ledger write failure is not relabelled as an evaluator failure.
+
+The feedback/medium latency gate is 20 bounded samples with p95 below 45
+seconds. The current pre-release sample produced 19 valid grounded responses,
+one transport `TypeError`, p95 24.401 seconds and max 25.908 seconds. A five-
+sample low-thinking comparison produced one invalid response, so latency alone
+does not authorize lowering quality. Focused source verification is evidence
+63/63 and frontend 27/27. Exact Node 24.18.0 and 22.21.1 each pass 245/245 TAP
+tests with zero skip/fail plus every non-TAP gate; both verify the five study-
+guide receipts and the 693-file textbook-page subset. The checksum-fixed formal
+artifact is 1,223 files / 164,458,961 bytes with projected aggregate
+`520aabbb9a462c3b18d491aa1163b37cba0e05b50aceec2c18463b4f692cee55`,
+artifact aggregate
+`31f5a020549387589336ecd6be29bea5416c166084672b411024c9f00ae94101`
+and marker SHA-256
+`870ae05d50a41a98cc44355277416d70a0cd7c9987e768c8cf81d65527aee3ae`.
+Only the one-pass live learner acceptance remains pending authorization under
+`docs/VERIFICATION.md`.
+
+This is a YW leaf-only `no-new-capability` repair. Do not mutate UC, D1 schema
+or data directly, Queue, APIS, App/native content, bindings, routes or the
+existing executor. The old one-use executor remains exact-bound to `fa93ca8`.
+Any repaired deployment requires a separate reviewed one-use YW-Pages-only
+executor bound to the merged SHA and exact rollback `619024c7`.
 
 ## 2026-08-22 lesson 1474 staged-loop recovery contract
 
@@ -239,6 +295,10 @@ an opaque 502 and no false evidence is written.
   the window by accepting a browser phase. Acceptance requires a normal
   authenticated lesson open plus source ledger, Queue, UC evidence and source
   terminal-receipt readback; credit/snapshot/grade/F deltas must remain zero.
+> **Superseded on 2026-08-23:** the following historical 20-second/two-attempt
+> rule is retained only as incident evidence. The evaluator availability
+> override at the top of this manual is authoritative.
+
 - APIS evaluation remains bounded to 20 seconds. The first evaluator failure
   may release the existing durable reservation for one same-answer retry and
   must return `learning_evaluator_unavailable`, HTTP 503 and `Retry-After: 15`
@@ -436,6 +496,11 @@ following server-authority boundaries in one deterministic artifact.
   Do not deploy from this source draft.
 
 ## 2026-08-15 assessment and bounded evaluator-retry contract
+
+> **Superseded on 2026-08-23:** the following historical `.001Z` evaluator-
+> exhaustion contract is retained only as incident evidence. Evaluator-owned
+> failures now use the top-of-file `.002Z` short-cooldown contract and consume
+> no learner slot.
 
 - Keep objective grading source-owned in `site/study-guide-assessment.js` and
   the realistic corpus in `scripts/study-guide-answer-fixtures.json`. A

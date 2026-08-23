@@ -1,5 +1,93 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-23 evaluator timeout and failure-attribution release gate
+
+This is the newest eight-point authority. It adds to, and where necessary
+supersedes, the retained 2026-08-22 standard below.
+
+1. **Source of truth.** Start from exact `fa93ca825e9b0d914b4608c971152dcf581ae9ac`
+   in the one retained `ieduer/yuwen-course` clone. The repair commit and merged
+   default-branch SHA must be ordinary descendants. Rebuild the formal artifact
+   from the exact merged SHA; no second clone, raw `site/` upload or dirty
+   compatibility checkout is authority.
+2. **Health and current-live probe.** Before mutation, prove that custom and
+   atomic production still serve deployment
+   `2471f1e4-884a-4e80-9801-589ebbace476`, source `fa93ca8`, and the same
+   content-hashed app, while rollback
+   `619024c7-a261-405b-a13f-8581a90111ac` remains readable. Keep the current
+   journal at `candidate_pending_acceptance`; do not accept or roll it back.
+   After the repaired deployment, compare custom and new atomic HTML/assets,
+   `/api/learning/health`, deployment UUID and exact merged source.
+3. **Contract and latency checks.** Under exact Node 24.18.0 and 22.21.1 run
+   `npm run precontent:check` and `npm run verify:study-guide-sources`. Build,
+   check and manifest the formal artifact under Node 24.18.0, then check its
+   manifest under Node 22.21.1. In addition, tests must prove:
+   - feedback uses a 45-second Worker timeout and both browser evaluator paths
+     use 55 seconds; all other APIS task types retain 20 seconds;
+   - abort, upstream 5xx and invalid upstream JSON return structured
+     `learning_evaluator_unavailable` 503, no interaction/evaluation/outbox/
+     Queue evidence, and no consumed learner resource/global slot;
+   - the exact same mutation receives at most a 15-second evaluator cooldown,
+     can reserve a fresh positive slot after expiry, and never returns
+     `evaluator_retry_exhausted`; genuine learner `window_capacity` remains a
+     rate-limited 429;
+   - reservation concurrency, abandoned `.001Z` lease reclaim, idempotent
+     replay and monotonic formal completion remain unchanged.
+
+   Before release, take 20 bounded `feedback`/`medium` samples using the real
+   study-guide prompt contract and retain only aggregate timing/validity. Gate
+   on successful-response p95 below 45 seconds and investigate every transport
+   or invalid response. The current sample is 19/20 valid, one transport
+   `TypeError`, p95 24.401 seconds and max 25.908 seconds. A five-sample `low`
+   comparison had one invalid response, so keep `medium`.
+4. **Deploy and forbidden actions.** The old one-use external executor remains
+   frozen to `fa93ca8`. Do not edit, relabel or reuse it. Only a separate,
+   independently reviewed, single-stage executor may deploy YW Pages, and it
+   must be bound to the exact merged SHA, checksum-fixed formal artifact,
+   project `yuwen-course` and rollback `619024c7`. It must have no UC, D1,
+   Queue, APIS, App/native, binding, route or other Cloudflare mutation path.
+   Re-run the >=25 GiB disk gate immediately before artifact build and deploy
+   for this release; do not lower the threshold or force past it.
+5. **Dependency regression.** Verify User Center identity, APIS response
+   envelope, Reading health, Queue contract, local-practice negative controls,
+   mobile trusted-touch navigation and Companion/native disposition as
+   `verified_no_change`. No shared consumer source or configuration changes.
+6. **Backup and restore.** This repair changes Pages code/static assets only.
+   Ordinary authenticated learner UI records are retained and never rewritten
+   for cleanup; there is no schema or administrative D1 restore. Preserve
+   rollback `619024c7`, its source/hash readback and the checksum-fixed rebuilt
+   artifact authority.
+7. **Rollback.** Any failed custom/atomic hash, health, authenticated flow,
+   unexpected 503 or `evaluator_retry_exhausted` 429 restores exact deployment
+   `619024c7` through the reviewed executor. Then repeat custom/atomic hashes,
+   health, mobile navigation and representative formal/local controls. Never
+   delete D1, outbox or Queue history during code rollback.
+8. **Single live acceptance.** After deployment, use only the configured env
+   student through ordinary UI paths and run lesson 1474 once end-to-end. On
+   the same page, first-read submit must expose annotated reading; annotated
+   completion must expose vocabulary; the final vocabulary/study-guide item
+   must unlock structure, evaluation and author-question. Structure and
+   author-question must each retain at least two server-derived dialogue turns
+   without reload. Across the run, `learning_evaluator_unavailable` 503 count
+   must be zero and `evaluator_retry_exhausted` 429 count must be zero. Retain
+   only aggregate outcomes, durations, status codes and asset hashes—never the
+   student identity, cookie, session, mutation ID or answer text. Also prove a
+   local-practice lesson makes no formal POST. Only after all gates pass may
+   the new candidate be accepted; otherwise execute point 7.
+
+Pre-release local gate last verified 2026-08-23 PDT: exact Node 24.18.0 and
+22.21.1 each pass 245/245 TAP tests with zero skip/fail and every non-TAP gate;
+five study-guide PDF/extraction receipts and 693 textbook-page files /
+75,196,340 bytes match their tracked authorities. The formal artifact passes
+both runtimes at 1,223 files / 164,458,961 bytes, projected aggregate
+`520aabbb9a462c3b18d491aa1163b37cba0e05b50aceec2c18463b4f692cee55`,
+artifact aggregate
+`31f5a020549387589336ecd6be29bea5416c166084672b411024c9f00ae94101`
+and marker SHA-256
+`870ae05d50a41a98cc44355277416d70a0cd7c9987e768c8cf81d65527aee3ae`.
+No repaired Pages deployment or authenticated production acceptance has been
+performed; those remain blocked on a new explicit executor authorization.
+
 ## 2026-08-22 lesson 1474 staged-loop recovery and dialogue
 
 This eight-point standard is the release authority for the lesson 1474 repair.

@@ -9,6 +9,7 @@ import { resolve } from "node:path";
 import {
   acquireLearningSubmissionReservation,
   drainEvidenceOutbox,
+  LearningEvaluatorCooldownError,
   LearningSubmissionInProgressError,
   LearningSubmissionRateLimitError,
   learningEvidenceContract,
@@ -385,19 +386,28 @@ function assertSynchronizedIneligibleAttempt(result, queued, writes) {
   assert.equal(queued[0].envelope.eligibilityStatus, "ineligible");
 }
 
-test("submission rate responses distinguish capacity from evaluator retry exhaustion", () => {
+test("submission capacity remains distinct from the short evaluator cooldown", () => {
   const capacity = new LearningSubmissionRateLimitError(17, "window_capacity");
-  const exhausted = new LearningSubmissionRateLimitError(29, "evaluator_retry_exhausted");
+  const cooldown = new LearningEvaluatorCooldownError(29);
   assert.equal(capacity.code, "learning_submission_rate_limited");
   assert.equal(capacity.limitReason, "window_capacity");
   assert.equal(capacity.retryAfterSeconds, 17);
   assert.match(capacity.message, /提交过于频繁/);
-  assert.equal(exhausted.code, "learning_submission_rate_limited");
-  assert.equal(exhausted.limitReason, "evaluator_retry_exhausted");
-  assert.equal(exhausted.retryAfterSeconds, 29);
-  assert.match(exhausted.message, /两次评阅/);
+  assert.equal(cooldown.code, "learning_evaluator_unavailable");
+  assert.equal(cooldown.retryAfterSeconds, 15);
+  assert.match(cooldown.message, /評閱服務暫時繁忙/);
+  assert.deepEqual(learningEvidenceContract.submissionRateLimitReasons, {
+    windowCapacity: "window_capacity",
+  });
+  assert.equal(learningEvidenceContract.evaluatorFailureCooldownSeconds, 15);
   assert.match(workerSource, /limitReason: error\?\.limitReason \|\| "window_capacity"/);
   assert.match(workerSource, /releaseAfterEvaluatorFailure/);
+  assert.doesNotMatch(workerSource, /evaluatorAttemptsExhausted/);
+  assert.equal(
+    (workerSource.match(/error instanceof LearningEvaluatorCooldownError/g) || []).length,
+    3,
+    "formal, direct-learning and Reading routes must all map cooldown to the friendly 503",
+  );
 });
 
 test("current formal resources publish one exact e310/v2 source contract with complete lineage", () => {
@@ -1440,7 +1450,9 @@ test("the Worker checks the per-user resource bound before AI work and vocabular
     workerSource.indexOf("// ---------------- 閱讀星圖"),
   );
   assert.match(apisPrompt, /AbortController/);
-  assert.match(apisPrompt, /20_000/);
+  assert.match(workerSource, /APIS_DEFAULT_TIMEOUT_MS = 20_000/);
+  assert.match(workerSource, /APIS_FEEDBACK_TIMEOUT_MS = 45_000/);
+  assert.match(apisPrompt, /taskType === "feedback" \? APIS_FEEDBACK_TIMEOUT_MS : APIS_DEFAULT_TIMEOUT_MS/);
   assert.match(apisPrompt, /signal: controller\.signal/);
   assert.match(apisPrompt, /clearTimeout\(timeout\)/);
 
@@ -1561,6 +1573,28 @@ test("APIS timeout remains active until the response body is consumed", async ()
     globalThis.clearTimeout = originalClearTimeout;
   }
   assert.equal(bodyAborts, 1);
+});
+
+test("feedback evaluation receives 45 seconds while non-feedback APIS work stays at 20 seconds", async () => {
+  const originalFetch = globalThis.fetch;
+  const originalSetTimeout = globalThis.setTimeout;
+  const originalClearTimeout = globalThis.clearTimeout;
+  const delays = [];
+  globalThis.setTimeout = (_callback, delay) => {
+    delays.push(delay);
+    return delays.length;
+  };
+  globalThis.clearTimeout = () => {};
+  globalThis.fetch = async () => Response.json({ answer: "ok" });
+  try {
+    assert.equal(await callApisPrompt({}, "chat"), "ok");
+    assert.equal(await callApisPrompt({}, "feedback", "feedback", "medium"), "ok");
+  } finally {
+    globalThis.fetch = originalFetch;
+    globalThis.setTimeout = originalSetTimeout;
+    globalThis.clearTimeout = originalClearTimeout;
+  }
+  assert.deepEqual(delays, [20_000, 45_000]);
 });
 
 test("an APIS evaluator outage is a retryable friendly 503 with no false receipt", async () => {
@@ -1753,7 +1787,7 @@ test("lesson 1474 formal interactions carry server-owned history across real rou
   }
 });
 
-test("an evaluator outage permits one immediate same-answer route retry without another slot", async () => {
+test("an evaluator outage consumes no learner slot and retries after only the short cooldown", async () => {
   const db = new DatabaseSync(":memory:");
   const originalFetch = globalThis.fetch;
   try {
@@ -1838,6 +1872,26 @@ test("an evaluator outage permits one immediate same-answer route retry without 
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 0);
 
+    const cooldownRow = db.prepare(
+      "SELECT created_at, resource_slot_no, global_slot_no FROM learning_submission_slots"
+    ).get();
+    assert.match(cooldownRow.created_at, /\.002Z$/);
+    assert.ok(cooldownRow.resource_slot_no < 0);
+    assert.ok(cooldownRow.global_slot_no < 0);
+    assert.equal(db.prepare(
+      "SELECT COUNT(*) AS n FROM learning_submission_slots WHERE created_at NOT LIKE '%.002Z'"
+    ).get().n, 0, "the upstream failure must consume no learner capacity");
+
+    const earlyRetry = await worker.fetch(request(), env, {});
+    assert.equal(earlyRetry.status, 503);
+    assert.equal((await earlyRetry.json()).code, "learning_evaluator_unavailable");
+    assert.equal(evaluatorCalls, 1, "the D1 cooldown must prevent an immediate second APIS call");
+
+    const expiredCooldown = new Date(Date.parse(cooldownRow.created_at) - 16_000)
+      .toISOString()
+      .replace(/\.\d{3}Z$/, ".002Z");
+    db.prepare("UPDATE learning_submission_slots SET created_at = ?").run(expiredCooldown);
+
     const retried = await worker.fetch(request(), env, {});
     const retriedBody = await retried.json();
     assert.equal(retried.status, 200);
@@ -1865,6 +1919,9 @@ test("an evaluator outage permits one immediate same-answer route retry without 
     assert.equal((await invalidNormalized.json()).code, "learning_evaluator_unavailable");
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 3);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 1);
+    assert.equal(db.prepare(
+      "SELECT COUNT(*) AS n FROM learning_submission_slots WHERE created_at NOT LIKE '%.002Z'"
+    ).get().n, 1, "only the committed learner submission counts toward capacity");
   } finally {
     globalThis.fetch = originalFetch;
     db.close();
@@ -3056,7 +3113,7 @@ test("submission reservations count durable slots and the same mutation cannot t
   }
 });
 
-test("durable reservations alone exhaust the evaluator limit after failed evaluations", async () => {
+test("unreleased evaluator leases still enforce the learner submission capacity", async () => {
   const db = new DatabaseSync(":memory:");
   try {
     db.exec(`CREATE TABLE learning_interactions (
@@ -3164,18 +3221,19 @@ test("ten-way initial and abandoned-lease races admit only one evaluator each", 
       .every((result) => result.reason instanceof LearningSubmissionInProgressError));
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
 
+    const secondReclaim = await enterEvaluator("2026-08-13T22:02:02.000Z");
+    assert.equal(secondReclaim.reclaimed, true);
+    assert.equal(evaluatorCalls, 2, "each expired lease admits exactly one new evaluator call");
     await assert.rejects(
-      enterEvaluator("2026-08-13T22:02:02.000Z"),
-      (error) => error instanceof LearningSubmissionRateLimitError
-        && error.retryAfterSeconds === 478,
+      enterEvaluator("2026-08-13T22:02:03.000Z"),
+      (error) => error instanceof LearningSubmissionInProgressError,
     );
-    assert.equal(evaluatorCalls, 1, "a second lease expiry cannot burn another evaluator call");
   } finally {
     db.close();
   }
 });
 
-test("an evaluator failure releases one slot for one immediate retry and then exhausts safely", async () => {
+test("evaluator failures enter a short cooldown without consuming learner capacity", async () => {
   const db = new DatabaseSync(":memory:");
   try {
     initializeLearningContractDb(db);
@@ -3205,12 +3263,35 @@ test("an evaluator failure releases one slot for one immediate retry and then ex
       }),
     ));
     assert.equal(releases.filter((result) => result.released).length, 1);
-    assert.ok(releases.every((result) => result.evaluatorAttemptsExhausted === false));
+    assert.ok(releases.every((result) => result.retryAfterSeconds === 15));
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
-    assert.match(
-      db.prepare("SELECT created_at FROM learning_submission_slots").get().created_at,
-      /\.000Z$/,
+    db.prepare("UPDATE learning_submission_slots SET created_at = ?")
+      .run("2026-08-13T22:00:00.002Z");
+    const firstCooldown = db.prepare(
+      "SELECT created_at, resource_slot_no, global_slot_no FROM learning_submission_slots"
+    ).get();
+    assert.match(firstCooldown.created_at, /\.002Z$/);
+    assert.ok(firstCooldown.resource_slot_no < 0);
+    assert.ok(firstCooldown.global_slot_no < 0);
+    assert.equal(db.prepare(
+      "SELECT COUNT(*) AS n FROM learning_submission_slots WHERE created_at NOT LIKE '%.002Z'"
+    ).get().n, 0);
+
+    await assert.rejects(
+      assertLearningSubmissionAllowed({
+        request,
+        env: source.env,
+        student,
+        lesson: wordCreationLesson,
+        interactionKey: "wordCreation",
+        payload,
+        occurredAt: new Date(Date.parse(firstCooldown.created_at) + 1_000).toISOString(),
+      }),
+      (error) => error instanceof LearningEvaluatorCooldownError
+        && error.retryAfterSeconds <= 15,
     );
+
+    const retryAt = new Date(Date.parse(firstCooldown.created_at) + 16_000).toISOString();
 
     const retryContenders = await Promise.allSettled(Array.from(
       { length: 10 },
@@ -3221,7 +3302,7 @@ test("an evaluator failure releases one slot for one immediate retry and then ex
         lesson: wordCreationLesson,
         interactionKey: "wordCreation",
         payload,
-        occurredAt: "2026-08-13T22:00:00.001Z",
+        occurredAt: retryAt,
       }),
     ));
     const admitted = retryContenders.find((result) => result.status === "fulfilled")?.value;
@@ -3230,34 +3311,20 @@ test("an evaluator failure releases one slot for one immediate retry and then ex
     assert.ok(retryContenders
       .filter((result) => result.status === "rejected")
       .every((result) => result.reason instanceof LearningSubmissionInProgressError));
-    assert.equal(admitted.submissionReservation.reclaimed, true);
-    assert.match(admitted.submissionReservation.leaseStartedAt, /\.001Z$/);
+    assert.equal(admitted.submissionReservation.reclaimed, false);
+    assert.match(admitted.submissionReservation.leaseStartedAt, /\.000Z$/);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
 
     const secondFailure = await releaseLearningSubmissionReservation({
       env: source.env,
       submissionReservation: admitted.submissionReservation,
     });
-    assert.deepEqual(secondFailure, {
-      released: true,
-      evaluatorAttemptsExhausted: true,
-      retryAfterSeconds: 600,
-    });
-    await assert.rejects(
-      assertLearningSubmissionAllowed({
-        request,
-        env: source.env,
-        student,
-        lesson: wordCreationLesson,
-        interactionKey: "wordCreation",
-        payload,
-        occurredAt: "2026-08-13T22:00:00.002Z",
-      }),
-      (error) => error instanceof LearningSubmissionRateLimitError
-        && error.limitReason === "evaluator_retry_exhausted",
-    );
+    assert.deepEqual(secondFailure, { released: true, retryAfterSeconds: 15 });
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 0);
+    assert.equal(db.prepare(
+      "SELECT COUNT(*) AS n FROM learning_submission_slots WHERE created_at NOT LIKE '%.002Z'"
+    ).get().n, 0);
     await assert.rejects(
       releaseLearningSubmissionReservation({
         env: source.env,
@@ -3267,7 +3334,7 @@ test("an evaluator failure releases one slot for one immediate retry and then ex
     );
     assert.match(
       db.prepare("SELECT created_at FROM learning_submission_slots").get().created_at,
-      /\.001Z$/,
+      /\.002Z$/,
     );
   } finally {
     db.close();
@@ -3402,7 +3469,7 @@ test("a reclaimed evaluator failure does not claim exhaustion after the original
       submissionReservation: reclaimed.submissionReservation,
     });
     assert.equal(lateFailure.released, false);
-    assert.equal(lateFailure.evaluatorAttemptsExhausted, false);
+    assert.equal(lateFailure.retryAfterSeconds, 15);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 1);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
   } finally {

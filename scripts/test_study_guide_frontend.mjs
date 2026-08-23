@@ -159,6 +159,8 @@ test("persisted in-flight study-guide work hydrates as an idempotent retry", () 
 });
 
 test("AI waits are bounded and formal dialogue keeps a monotonic transcript", () => {
+  assert.equal((source.match(/controller\.abort\(\), 55_000/g) || []).length, 2,
+    "both evaluator clients must outlive the 45-second Worker feedback budget");
   const studyGuide = section("async function submitStudyGuideAttempt", "function bindCheckStage");
   assert.match(studyGuide, /new AbortController\(\)/);
   assert.match(studyGuide, /controller\.abort\(\)/);
@@ -744,15 +746,17 @@ test("AI interaction feedback is accepted only with a durable My evidence receip
   assert.match(submission, /答案或提交狀態已變更/);
 });
 
-test("interaction and study-guide retry messages distinguish active work from exhausted evaluation", () => {
+test("interaction and study-guide retry messages distinguish active work, capacity and upstream cooldown", () => {
   const retryMessage = section("function learningSubmissionRetryMessage", "async function submitInteraction");
   assert.match(retryMessage, /learning_submission_in_progress/);
   assert.match(retryMessage, /learning_submission_rate_limited/);
-  assert.match(retryMessage, /evaluator_retry_exhausted/);
-  assert.match(retryMessage, /兩次評閱均未完成/);
+  assert.match(retryMessage, /learning_evaluator_unavailable/);
+  assert.match(retryMessage, /來源端評閱暫時不可用/);
+  assert.doesNotMatch(retryMessage, /evaluator_retry_exhausted/);
   assert.match(retryMessage, /提交較頻繁/);
   const studyGuideSubmission = section("function bindCheckStage", "function openLexicon");
   assert.match(studyGuideSubmission, /learning_submission_rate_limited/);
+  assert.match(studyGuideSubmission, /learning_evaluator_unavailable/);
   assert.match(studyGuideSubmission, /learningSubmissionRetryMessage/);
 });
 

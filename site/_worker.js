@@ -2,6 +2,7 @@ import {
   assertLearningSubmissionAllowed,
   drainEvidenceOutbox,
   invalidateFormativeManifestCache,
+  LearningEvaluatorCooldownError,
   LearningResourceNotPublishedError,
   LearningSubmissionInProgressError,
   LearningSubmissionRateLimitError,
@@ -47,6 +48,8 @@ const previewRegistryCache = { value: null, expiresAt: 0 };
 const studyGuideCatalogCache = { value: null, expiresAt: 0 };
 const BROWSER_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
 const YW_WEB_ORIGIN = "https://yw.bdfz.net";
+const APIS_DEFAULT_TIMEOUT_MS = 20_000;
+const APIS_FEEDBACK_TIMEOUT_MS = 45_000;
 const YW_PRE_ACTIVATION_TRANSPORT_CANARY = Object.freeze({
   status: "active",
   startsAt: "2026-08-11T16:00:00.000Z",
@@ -198,13 +201,7 @@ function learningRateLimitResponse(error) {
 }
 
 async function releaseAfterEvaluatorFailure(env, submissionReservation, evaluatorError) {
-  const released = await releaseLearningSubmissionReservation({ env, submissionReservation });
-  if (released.evaluatorAttemptsExhausted) {
-    throw new LearningSubmissionRateLimitError(
-      released.retryAfterSeconds,
-      "evaluator_retry_exhausted",
-    );
-  }
+  await releaseLearningSubmissionReservation({ env, submissionReservation });
   throw evaluatorError;
 }
 
@@ -246,8 +243,8 @@ function learningSubmissionInProgressResponse(error) {
   }, { status: 409, headers: { "retry-after": String(retryAfterSeconds) } });
 }
 
-export function learningEvaluatorUnavailableResponse() {
-  const retryAfterSeconds = 15;
+export function learningEvaluatorUnavailableResponse(retryAfter = 15) {
+  const retryAfterSeconds = Math.max(1, Math.min(30, Number(retryAfter) || 15));
   return json({
     ok: false,
     error: "評閱服務暫時繁忙，本次答案尚未記錄，請稍後重試",
@@ -1389,6 +1386,7 @@ async function handleInteractionCheck(request, env) {
   } catch (error) {
     if (error instanceof LearningResourceNotPublishedError) return learningResourceNotPublishedResponse(error);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
+    if (error instanceof LearningEvaluatorCooldownError) return learningEvaluatorUnavailableResponse(error.retryAfterSeconds);
     if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
     if (["classical_first_read_required", "classical_annotated_reading_required"].includes(error?.code)) {
@@ -1416,7 +1414,8 @@ async function handleLearningCheck(request, env) {
 
 export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLevel = "low") {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort("APIS evaluation timeout"), 20_000);
+  const timeoutMs = taskType === "feedback" ? APIS_FEEDBACK_TIMEOUT_MS : APIS_DEFAULT_TIMEOUT_MS;
+  const timeout = setTimeout(() => controller.abort("APIS evaluation timeout"), timeoutMs);
   try {
     const response = await fetch(env.APIS_ENDPOINT || "https://apis.bdfz.net", {
       method: "POST",
@@ -1716,6 +1715,7 @@ async function handleLearningInteraction(request, env, ctx) {
     if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
     if (error instanceof LearningResourceNotPublishedError) return learningResourceNotPublishedResponse(error);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
+    if (error instanceof LearningEvaluatorCooldownError) return learningEvaluatorUnavailableResponse(error.retryAfterSeconds);
     if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
     if (["classical_first_read_required", "classical_annotated_reading_required"].includes(error?.code)) {
@@ -2882,6 +2882,7 @@ async function handleReading(request, env, url) {
     if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
     if (error instanceof LearningResourceNotPublishedError) return learningResourceNotPublishedResponse(error);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
+    if (error instanceof LearningEvaluatorCooldownError) return learningEvaluatorUnavailableResponse(error.retryAfterSeconds);
     if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
     if (["classical_first_read_required", "classical_annotated_reading_required"].includes(error?.code)) {
