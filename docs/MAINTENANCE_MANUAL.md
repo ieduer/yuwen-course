@@ -6,8 +6,8 @@ Last reviewed: 2026-08-22 (America/Los_Angeles)
 
 Production remains deployment `619024c7-a261-405b-a13f-8581a90111ac`, source
 `16b8277afdf32618043703de4eb9b4098858b888`. PR #20 merged the reviewed repair
-as canonical main `ef6272778db1dd3cfed227b47ac4cf17163eba3f`; the merged source
-is not live.
+as runtime source `ef6272778db1dd3cfed227b47ac4cf17163eba3f`; PR #21 synchronized
+the source/production boundary in project documentation. The merged source is not live.
 Its first-read, study-guide, same-page checkpoint and formal dialogue changes
 are governed by the newest eight-point standard in `docs/VERIFICATION.md`.
 
@@ -84,7 +84,7 @@ and tracked manifest aggregate
 Independent final reviews found no remaining P0-P3.
 
 GitHub Actions run `32623520208` passed the exact PR head under Node 24.18.0
-and 22.21.1. A clean detached exact-main `ef627277...` rebuild reproduced the
+and 22.21.1. A clean detached default-main rebuild after the documentation merge reproduced the
 same formal marker, projected aggregate and tracked manifest aggregate above.
 
 This is a leaf-only `no-new-capability` correction. It changes no route,
