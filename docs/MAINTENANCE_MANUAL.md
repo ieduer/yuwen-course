@@ -5,7 +5,9 @@ Last reviewed: 2026-08-22 (America/Los_Angeles)
 ## 2026-08-22 lesson 1474 staged-loop recovery contract
 
 Production remains deployment `619024c7-a261-405b-a13f-8581a90111ac`, source
-`16b8277afdf32618043703de4eb9b4098858b888`. The task candidate is not live.
+`16b8277afdf32618043703de4eb9b4098858b888`. PR #20 merged the reviewed repair
+as canonical main `ef6272778db1dd3cfed227b47ac4cf17163eba3f`; the merged source
+is not live.
 Its first-read, study-guide, same-page checkpoint and formal dialogue changes
 are governed by the newest eight-point standard in `docs/VERIFICATION.md`.
 
@@ -81,12 +83,16 @@ and tracked manifest aggregate
 `4c46462b0798048ce69eac8b5c0ba2691d9979af41388d2299e7738a3b172f06`.
 Independent final reviews found no remaining P0-P3.
 
+GitHub Actions run `32623520208` passed the exact PR head under Node 24.18.0
+and 22.21.1. A clean detached exact-main `ef627277...` rebuild reproduced the
+same formal marker, projected aggregate and tracked manifest aggregate above.
+
 This is a leaf-only `no-new-capability` correction. It changes no route,
 binding, schema, migration, direct D1 state, Queue/APIS/User Center
 configuration, learning-manifest membership or native/App pointer. Those
 dependencies remain `verified_no_change`.
 
-Release is fail-closed at `.release/site`. Project policy permits Pages deploy
+Release is fail-closed at `.release/site` after source merge. Project policy permits Pages deploy
 and rollback only through an independently reviewed external UC+YW executor.
 The currently inspected external workflow is explicitly source-only and exits
 before credentials, so neither checkout/manual Wrangler upload nor its prior

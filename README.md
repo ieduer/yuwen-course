@@ -2,9 +2,9 @@
 
 `yw.bdfz.net` is the student-centred learning matrix for the five senior-high Chinese textbooks. It combines lesson text and resources, author and literary-taxonomy links, vocabulary mastery, reading evidence, and a D1-backed reading constellation.
 
-## 2026-08-22 staged-learning recovery candidate
+## 2026-08-22 staged-learning recovery source
 
-The current source candidate makes committed classical first-read transitions,
+The current canonical source makes committed classical first-read transitions,
 interrupted study-guide evaluation and downstream checkpoint unlocks converge
 on the same page without a refresh. Transient `submitting` state is never
 restored as a permanent spinner; evaluator outage is a structured retryable
@@ -28,7 +28,7 @@ catalog failure no longer requires a reload. Replacing the identity object for
 the same owner preserves its pending reading/font mutation; a different owner
 still discards it.
 
-This candidate is not the current production release. It is a leaf-only
+This merged source is not the current production release. It is a leaf-only
 `no-new-capability` change and stops at a checked `.release/site` artifact until
 the separately reviewed external UC+YW deploy and rollback executor is
 callable. See `PROJECT_STATE.md`, `docs/MAINTENANCE_MANUAL.md` and
