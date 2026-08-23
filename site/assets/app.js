@@ -9,13 +9,14 @@ const DEFAULT_FONT_INDEX = 3;
 const STAGE_MARKS = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
 const SHARED_STATE_ASSET_VERSION = "20260730-owner-v1";
 const ANONYMOUS_UI_SCOPE = "anonymous-v2";
+const compactAtlasMedia = matchMedia("(max-width: 1180px)");
 const APP_SCRIPT_URL = document.currentScript?.src || new URL("assets/app.js", document.baseURI).href;
 const SHARED_STATE_MODULE_URL = new URL(
   `yw-shared-state.js?v=${SHARED_STATE_ASSET_VERSION}`,
   APP_SCRIPT_URL,
 ).href;
 const LESSON_BLUEPRINT_RULES_URL = new URL(
-  "../lesson-blueprint-rules.js?v=20260811-text-anchored-v1",
+  "../lesson-blueprint-rules.js?v=8498ddbb5a69645b",
   APP_SCRIPT_URL,
 ).href;
 
@@ -27,6 +28,7 @@ let lessonBlueprintRules = null;
 let sharedStateGeneration = 0;
 let sharedStateUiScope = ANONYMOUS_UI_SCOPE;
 let progressOwnerScope = ANONYMOUS_UI_SCOPE;
+let interactionIdentityResolved = false;
 let pendingSharedReadingPosition = null;
 let pendingSharedTextScale = null;
 
@@ -113,6 +115,7 @@ const state = {
   vocabEligibility: null,
   vocabIndex: { activeItemIds: {} },
   formalVocabResourceKeys: new Set(),
+  formalInteractionResourceKeys: new Set(),
   firstReads: new Map(),
   studyGuideLessons: new Map(),
   studyGuideCatalogStatus: "loading",
@@ -255,6 +258,13 @@ function setProgressOwnerScope(scope) {
   if (progressOwnerScope === nextScope) return;
   progressOwnerScope = nextScope;
   state.progress = loadStoredProgress(nextScope);
+  refreshLocalProgressViews();
+}
+
+function setInteractionIdentityResolved(resolved) {
+  const next = resolved === true;
+  if (interactionIdentityResolved === next) return;
+  interactionIdentityResolved = next;
   refreshLocalProgressViews();
 }
 
@@ -548,23 +558,27 @@ async function hydrateSharedStateOnce() {
   const session = await identity.getSession?.().catch(() => null);
   if (!session || typeof session.authenticated !== "boolean") {
     setAuthenticatedState(false);
+    setInteractionIdentityResolved(false);
     setProgressOwnerScope(null);
     return;
   }
   if (!session.authenticated) {
     setAuthenticatedState(false);
+    setInteractionIdentityResolved(true);
     setProgressOwnerScope(ANONYMOUS_UI_SCOPE);
     await applyAnonymousSharedState();
     return;
   }
 
   setAuthenticatedState(true);
+  setInteractionIdentityResolved(false);
   setProgressOwnerScope(null);
   const sharedState = await loadSharedStateModule();
   if (!sharedState) return;
   const discoveryPayload = await identity.api("/api/yw/v1/state").catch(() => null);
   const discovery = sharedState.normalizeSharedStateResponse(discoveryPayload);
   if (!discovery?.ownerScope) return;
+  setInteractionIdentityResolved(true);
   setProgressOwnerScope(discovery.ownerScope);
 
   if (sharedStateClient?.ownerScope !== discovery.ownerScope) {
@@ -798,6 +812,14 @@ function studyGuideCompletedFor(lesson, competencyTags) {
 
 function progressPercent(progress = lessonProgress(), lesson = state.current) {
   return trackFor(lesson).reduce((sum, [key, _label, _detail, weight]) => sum + (checkpointDone(progress, key, lesson) ? weight : 0), 0);
+}
+
+function completionEventEligible(progress = lessonProgress(), lesson = state.current) {
+  const checkpoints = trackFor(lesson);
+  if (!checkpoints.length || !checkpoints.every(([key]) => checkpointDone(progress, key, lesson))) return false;
+  const evidenceKeys = new Set(checkpoints.map(([key]) => key));
+  if (evidenceKeys.has("vocabulary")) evidenceKeys.add("wordCreation");
+  return [...evidenceKeys].every((key) => progress[key]?.evidenceStatus !== "local_practice");
 }
 
 function toast(message) {
@@ -2178,6 +2200,9 @@ function interactionResult(progress, key) {
   const result = progress[key]?.result;
   if (!result) return "";
   const evidenceStatus = progress[key]?.evidenceStatus;
+  if (evidenceStatus === "local_practice") {
+    return `<div class="interaction-result local-practice"><header><strong>${esc(result.verdict)}</strong><span>本機試做</span></header><em class="interaction-evidence-status anonymous">未送出正式評閱 · 不計入 A+</em><p>${esc(result.strength)}</p><p><b>自核要點：</b>${esc(result.gap)}</p><p><b>再想一步：</b>${esc(result.nextQuestion)}</p></div>`;
+  }
   const evidenceLabel = evidenceStatus === "anonymous"
     ? '<em class="interaction-evidence-status anonymous">試做回饋 · 未記錄</em>'
     : evidenceStatus === "ineligible"
@@ -2331,8 +2356,8 @@ function renderWordCreation(lesson, progress) {
   const value = progress.wordCreation && typeof progress.wordCreation === "object" ? progress.wordCreation : {};
   const mode = modeFor(lesson);
   const ending = mode === "poetry" ? "三行短詩" : mode === "drama" ? "三句對白" : mode === "fiction" ? "三句微型敘事" : "三句話";
-  const body = `<p class="word-creation-prompt">選一個剛疏通的詞，用它寫${ending}。</p><input data-field="wordCreation.word" value="${esc(value.word || "")}" aria-label="本文新學到的一個字詞"><textarea data-field="wordCreation.creation" rows="5" aria-label="用這個字詞寫${ending}">${esc(value.creation || "")}</textarea>`;
-  return authorDialogue(lesson, body, interactionResult(progress, "wordCreation"), `<button class="check-action" type="button" data-ai-check="wordCreation">核對</button>`);
+  const body = `${interactionModeNotice("wordCreation", lesson)}<p class="word-creation-prompt">選一個剛疏通的詞，用它寫${ending}。</p><input data-field="wordCreation.word" value="${esc(value.word || "")}" aria-label="本文新學到的一個字詞"><textarea data-field="wordCreation.creation" rows="5" aria-label="用這個字詞寫${ending}">${esc(value.creation || "")}</textarea>`;
+  return authorDialogue(lesson, body, interactionResult(progress, "wordCreation"), interactionAction("wordCreation", "核對", lesson));
 }
 
 function wadangMark(label) {
@@ -2423,6 +2448,62 @@ function classicalRoundLocked(key, lesson, progress) {
   return "";
 }
 
+function formalInteractionResourceKeys(manifest) {
+  return new Set((manifest?.items || [])
+    .filter((item) => item?.sourceKind === "lesson-interaction"
+      && item?.lifecycleStatus === "active"
+      && item?.sourceId
+      && item?.questionKind)
+    .map((item) => `${item.sourceId}\n${item.questionKind}`));
+}
+
+function isFormalInteraction(resourceKeys, lessonId, interactionKey) {
+  return resourceKeys instanceof Set
+    && resourceKeys.has(`${String(lessonId || "")}\n${String(interactionKey || "")}`);
+}
+
+function interactionSubmissionMode(interactionKey, lesson = state.current) {
+  if (!interactionIdentityResolved || !progressOwnerScope) return "pending_identity";
+  if (!isFormalInteraction(state.formalInteractionResourceKeys, lesson?.id, interactionKey)) return "local";
+  if (progressOwnerScope === ANONYMOUS_UI_SCOPE) return "login_required";
+  return "formal";
+}
+
+function learningIdentityNoticeMode(
+  identityResolved = interactionIdentityResolved,
+  ownerScope = progressOwnerScope,
+) {
+  if (!identityResolved || !ownerScope) return "pending";
+  if (ownerScope === ANONYMOUS_UI_SCOPE) return "anonymous";
+  return "authenticated";
+}
+
+function interactionModeNotice(interactionKey, lesson = state.current) {
+  const mode = interactionSubmissionMode(interactionKey, lesson);
+  if (mode === "formal") {
+    return '<p class="vocabulary-evidence-mode interaction-evidence-mode">本題評閱會寫入正式學習證據；達標結果依既有 A+ 契約計入。</p>';
+  }
+  if (mode === "local") {
+    return '<p class="vocabulary-evidence-mode interaction-evidence-mode">本課未納入選必 A+ 正式題目清單；作答只作本機試做，不呼叫評閱服務、不寫正式證據。</p>';
+  }
+  if (mode === "login_required") {
+    return `<p class="vocabulary-evidence-mode interaction-evidence-mode">登入 My 後才可取得本題正式評閱；目前不會送出答案。 <a href="${esc(userCenterLoginUrl())}" target="_blank" rel="noopener noreferrer">前往登入</a></p>`;
+  }
+  return '<p class="vocabulary-evidence-mode interaction-evidence-mode">正在確認登入狀態，確認後即可評閱。</p>';
+}
+
+function interactionAction(interactionKey, label, lesson = state.current) {
+  const mode = interactionSubmissionMode(interactionKey, lesson);
+  if (mode === "login_required") {
+    return `<a class="check-action" href="${esc(userCenterLoginUrl())}" target="_blank" rel="noopener noreferrer">登入後評閱</a>`;
+  }
+  if (mode === "pending_identity") {
+    return '<button class="check-action" type="button" disabled>確認登入中</button>';
+  }
+  const actionLabel = mode === "local" ? "記下本機試做" : label;
+  return `<button class="check-action" type="button" data-ai-check="${esc(interactionKey)}">${esc(actionLabel)}</button>`;
+}
+
 function renderInteractionBody(key, lesson, progress, blueprint) {
   const rawValue = progress[key];
   const value = rawValue && typeof rawValue === "object" ? rawValue : (rawValue === true ? { done: true } : {});
@@ -2435,7 +2516,7 @@ function renderInteractionBody(key, lesson, progress, blueprint) {
   }
   if (key === "context") {
     const words = String(value.words || "").split(/[，,、\s]+/).filter(Boolean).slice(0, 3);
-    const body = `<div class="three-word-check"><div class="three-word-fields">${[0, 1, 2].map((index) => `<input data-context-word data-field="context.word${index + 1}" value="${esc(words[index] || "")}" maxlength="12" aria-label="第${index + 1}個詞" autocomplete="off">`).join("")}</div><span class="auto-check-status" data-auto-status="contextWords" aria-live="polite">${words.length === 3 ? "已記下" : `${words.length}/3`}</span></div>`;
+    const body = `${interactionModeNotice("contextWords", lesson)}<div class="three-word-check"><div class="three-word-fields">${[0, 1, 2].map((index) => `<input data-context-word data-field="context.word${index + 1}" value="${esc(words[index] || "")}" maxlength="12" aria-label="第${index + 1}個詞" autocomplete="off">`).join("")}</div><span class="auto-check-status" data-auto-status="contextWords" aria-live="polite">${words.length === 3 ? "已記下" : `${words.length}/3`}</span></div>`;
     return authorDialogue(lesson, body, interactionResult(progress, "context"));
   }
   if (key === "vocabulary") {
@@ -2455,9 +2536,9 @@ function renderInteractionBody(key, lesson, progress, blueprint) {
     </div>${completed && sourceModeFor(lesson) === "poetry" ? renderWordCreation(lesson, progress) : ""}`, lesson);
   }
   if (key === "read") return `<label class="read-check"><input type="checkbox" data-read-check ${value.checked || value.done ? "checked" : ""}><span>我已完成一次不中斷的正文通讀</span></label>`;
-  if (key === "authorQuestion") return authorDialogue(lesson, `<textarea data-field="authorQuestion.answer" rows="4" aria-label="你想問作者的問題" placeholder="你最想我的問題是什麼，你問，我答。">${esc(value.answer || "")}</textarea>`, interactionResult(progress, key), `<button class="check-action" type="button" data-ai-check="authorQuestion">問</button>`);
-  if (key === "revision") return authorDialogue(lesson, `<div class="revision-row"><input data-field="revision.original" value="${esc(value.original || "")}" aria-label="原文"><select data-field="revision.action" aria-label="增刪調"><option ${value.action === "調" ? "selected" : ""}>調</option><option ${value.action === "增" ? "selected" : ""}>增</option><option ${value.action === "刪" ? "selected" : ""}>刪</option></select><input data-field="revision.revised" value="${esc(value.revised || "")}" aria-label="改文"></div><textarea data-field="revision.reason" rows="4" aria-label="改動理由" placeholder="請說明如何修改的緣由">${esc(value.reason || "")}</textarea>`, interactionResult(progress, key), `<button class="check-action" type="button" data-ai-check="revision">核對</button>`);
-  if (key === "structure") return `${authorDialogue(lesson, `<p class="structure-focus">${esc(blueprint.structureFocus)}</p><textarea data-field="structure.reason" rows="4" aria-label="回答作者的章法問題">${esc(value.reason || "")}</textarea>`, interactionResult(progress, key), `<button class="check-action" type="button" data-ai-check="structure">回應</button>`)}${sourceModeFor(lesson) === "classical" ? renderStudyGuideCards(lesson, ["comprehension"]) : ""}`;
+  if (key === "authorQuestion") return authorDialogue(lesson, `${interactionModeNotice("authorQuestion", lesson)}<textarea data-field="authorQuestion.answer" rows="4" aria-label="你想問作者的問題" placeholder="你最想我的問題是什麼，你問，我答。">${esc(value.answer || "")}</textarea>`, interactionResult(progress, key), interactionAction("authorQuestion", "問", lesson));
+  if (key === "revision") return authorDialogue(lesson, `${interactionModeNotice("revision", lesson)}<div class="revision-row"><input data-field="revision.original" value="${esc(value.original || "")}" aria-label="原文"><select data-field="revision.action" aria-label="增刪調"><option ${value.action === "調" ? "selected" : ""}>調</option><option ${value.action === "增" ? "selected" : ""}>增</option><option ${value.action === "刪" ? "selected" : ""}>刪</option></select><input data-field="revision.revised" value="${esc(value.revised || "")}" aria-label="改文"></div><textarea data-field="revision.reason" rows="4" aria-label="改動理由" placeholder="請說明如何修改的緣由">${esc(value.reason || "")}</textarea>`, interactionResult(progress, key), interactionAction("revision", "核對", lesson));
+  if (key === "structure") return `${authorDialogue(lesson, `${interactionModeNotice("structure", lesson)}<p class="structure-focus">${esc(blueprint.structureFocus)}</p><textarea data-field="structure.reason" rows="4" aria-label="回答作者的章法問題">${esc(value.reason || "")}</textarea>`, interactionResult(progress, key), interactionAction("structure", "回應", lesson))}${sourceModeFor(lesson) === "classical" ? renderStudyGuideCards(lesson, ["comprehension"]) : ""}`;
   if (key === "evaluation") {
     const rating = Number.isFinite(Number(value.rating)) ? clamp(Number(value.rating), 0, 100) : 50;
     return `<div class="interest-rating" style="--rating:${rating}%">
@@ -2474,10 +2555,13 @@ function renderCheckStage(lesson) {
   const progress = lessonProgress();
   const blueprint = state.blueprints.get(blueprintKey(lesson)) || blueprintFallback(lesson);
   const track = trackFor(lesson);
-  const anonymousNotice = progressOwnerScope === ANONYMOUS_UI_SCOPE
-    ? `<aside class="anonymous-learning-notice" role="note"><strong>目前是試做模式</strong><span>你仍可取得核對分數與修改提示，但本次不記入完成度，也不進入 User Center 的 A–F 評價。</span><a href="${esc(userCenterLoginUrl())}" target="_blank" rel="noopener noreferrer">登入後正式學習</a></aside>`
-    : "";
-  els.checkStage.innerHTML = anonymousNotice + track.map(([key, label, _detail, weight], index) => {
+  const identityNoticeMode = learningIdentityNoticeMode();
+  const identityNotice = identityNoticeMode === "anonymous"
+    ? `<aside class="anonymous-learning-notice" role="note"><strong>目前是試做模式</strong><span>未發布為正式題目的課文可作本機試做；正式題目須登入後才會評閱、記錄與計入既有 A+ 契約。試做不進入 User Center 的 A–F 評價。</span><a href="${esc(userCenterLoginUrl())}" target="_blank" rel="noopener noreferrer">登入後正式學習</a></aside>`
+    : identityNoticeMode === "pending"
+      ? '<aside class="anonymous-learning-notice" role="note"><strong>正在確認登入</strong><span>身份與學情歸屬確認前，本頁作答不會保存或送出。</span></aside>'
+      : "";
+  els.checkStage.innerHTML = identityNotice + track.map(([key, label, _detail, weight], index) => {
     const locked = classicalRoundLocked(key, lesson, progress);
     return `
     <section class="check-round ${checkpointDone(progress, key) ? "complete" : ""} ${locked ? "locked" : ""}" data-round="${key}" ${locked ? "aria-disabled=\"true\"" : ""}>
@@ -2624,7 +2708,7 @@ function syncProgress({ event = false } = {}) {
   const percent = progressPercent();
   const send = async () => {
     const progress = lessonProgress();
-    if (event && percent === 100 && !progress.completionEventSent) {
+    if (event && percent === 100 && completionEventEligible(progress) && !progress.completionEventSent) {
       const evidence = await recordLearning("lessonCompleted", {
         checkpointCount: trackFor().filter(([key]) => checkpointDone(progress, key)).length,
         checkpointTotal: trackFor().length,
@@ -2789,6 +2873,79 @@ function interactionInputLength(input) {
   return Object.values(input).join("").replace(/\s+/g, "").length;
 }
 
+function localPracticeFeedback(key) {
+  return {
+    contextWords: {
+      verdict: "三詞本機練習已記下",
+      strength: "你已用三個詞形成對篇目的初步判斷。",
+      gap: "逐一回到正文，確認每個詞都有不同的字句依據，而不是泛泛感想。",
+      nextQuestion: "這三個詞合在一起，能否說清文章的整體氣質或核心矛盾？",
+    },
+    authorQuestion: {
+      verdict: "追問本機練習已記下",
+      strength: "你已把閱讀轉化成一個可繼續追查的問題。",
+      gap: "檢查問題是否指向具體字句、結構選擇或價值矛盾，且不能脫離本文回答。",
+      nextQuestion: "你準備用哪一句原文證明這個問題確實從本文生出？",
+    },
+    revision: {
+      verdict: "改寫本機練習已記下",
+      strength: "你已留下原文、改文與改動理由。",
+      gap: "把理由落到語義、語氣、節奏、意象、人物或論證的實際得失。",
+      nextQuestion: "改動後最明顯改變的是哪一層表達效果？",
+    },
+    structure: {
+      verdict: "章法本機練習已記下",
+      strength: "你已嘗試用前後材料解釋篇章組織。",
+      gap: "至少標出兩處可定位原文，再說清兩處如何共同形成文體效果。",
+      nextQuestion: "若只保留其中一處證據，你的判斷還成立嗎？",
+    },
+    wordCreation: {
+      verdict: "造句本機練習已記下",
+      strength: "你已把新學字詞放入新的語境。",
+      gap: "再核對詞義、搭配與整段語氣是否都成立。",
+      nextQuestion: "換掉這個詞後，語境中哪一層意思會消失？",
+    },
+  }[key] || {
+    verdict: "本機練習已記下",
+    strength: "已保存本次作答。",
+    gap: "請回到正文自行核對。",
+    nextQuestion: "哪一處原文最能支持你的判斷？",
+  };
+}
+
+function saveLocalInteractionPractice(key, input, options = {}) {
+  const { silent = false } = options;
+  if (!interactionIdentityResolved || !progressOwnerScope) {
+    if (!silent) toast("登入狀態尚未確認，本次試做未保存");
+    return false;
+  }
+  const progressKey = key === "contextWords" ? "context" : key;
+  const feedback = localPracticeFeedback(key);
+  lessonProgress()[progressKey] = {
+    ...lessonProgress()[progressKey],
+    ...input,
+    done: true,
+    score: null,
+    result: feedback,
+    evidenceStatus: "local_practice",
+  };
+  if (key === "wordCreation" && !lessonVocabulary(state.current).length) {
+    lessonProgress().vocabulary = {
+      ...(lessonProgress().vocabulary || {}),
+      done: true,
+      reviewed: [],
+      evidenceStatus: "local_practice",
+    };
+  }
+  syncProgress();
+  renderCheckStage(state.current);
+  if (!silent) {
+    const label = trackFor().find((item) => item[0] === progressKey)?.[1] || "互動";
+    toast(`${label} · 本機試做已記下，不計入正式 A+ 題目`);
+  }
+  return true;
+}
+
 function interactionEvidenceDecision(status, score) {
   const normalized = String(status || "").trim();
   if (normalized === "anonymous") {
@@ -2836,6 +2993,20 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     button.textContent = "核對中";
   }
   if (autoStatus) autoStatus.textContent = "核對中";
+  const submissionMode = interactionSubmissionMode(key, state.current);
+  if (submissionMode === "local") {
+    saveLocalInteractionPractice(key, input, { silent });
+    return;
+  }
+  if (submissionMode !== "formal") {
+    if (button) {
+      button.disabled = false;
+      button.textContent = submissionMode === "login_required" ? "登入後評閱" : "確認登入中";
+    }
+    if (autoStatus) autoStatus.textContent = submissionMode === "login_required" ? "登入後評閱" : "確認登入中";
+    if (!silent && submissionMode === "login_required") toast("請先登入 My，再提交正式評閱");
+    return;
+  }
   try {
     const mutationKey = `${state.current.id}\n${key}`;
     const clientMutationId = interactionMutationIds.get(mutationKey)
@@ -3654,12 +3825,12 @@ function bindEvents() {
     setMasteryCollapsed(collapsed, { persist: true });
   });
   window.addEventListener("scroll", updateReadProgress, { passive: true });
-  window.addEventListener("resize", () => requestAnimationFrame(() => {
-    if (matchMedia("(max-width: 1180px)").matches && els.body.classList.contains("atlas-open")) {
+  compactAtlasMedia.addEventListener("change", (event) => {
+    if (event.matches && els.body.classList.contains("atlas-open")) {
       closeAtlas();
     }
-    fitLessonTitle();
-  }), { passive: true });
+  });
+  window.addEventListener("resize", () => requestAnimationFrame(fitLessonTitle), { passive: true });
   if (window.ResizeObserver && els.title?.parentElement) {
     const titleObserver = new ResizeObserver(() => requestAnimationFrame(fitLessonTitle));
     titleObserver.observe(els.title.parentElement);
@@ -3710,7 +3881,7 @@ async function init() {
   new MutationObserver((mutations) => mutations.forEach((mutation) => mutation.addedNodes.forEach((node) => {
     if (node.nodeType === Node.ELEMENT_NODE) enforceNewTabLinks(node);
   }))).observe(document.body, { childList: true, subtree: true });
-  if (matchMedia("(min-width: 1181px)").matches) openAtlas(); else closeAtlas();
+  if (compactAtlasMedia.matches) closeAtlas(); else openAtlas();
   try {
     const [
       manifest,
@@ -3764,6 +3935,7 @@ async function init() {
     state.formalVocabResourceKeys = window.YwVocabProgress.formalVocabularyResourceKeys(
       learningManifest,
     );
+    state.formalInteractionResourceKeys = formalInteractionResourceKeys(learningManifest);
     window.YwVocabProgress.validateVocabularyAuthority(
       state.formalVocabResourceKeys,
       state.vocabIndex.activeItemIds,

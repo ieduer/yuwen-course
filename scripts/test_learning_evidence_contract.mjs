@@ -1043,6 +1043,117 @@ test("interaction scoring derives prompt authority from server taxonomy and stor
   });
 });
 
+test("unpublished required-volume interactions keep the auth gate and fail before APIS or evidence writes", async () => {
+  const requiredLessonId = "lesson-1727";
+  const interactions = [
+    ["structure", { reason: "我先定位兩處原文，再說明敘事轉折如何共同推進燭之武的說辭。" }],
+    ["authorQuestion", { answer: "若把秦晉利益關係說得更直白，這場勸說還會有同樣的力量嗎？" }],
+  ];
+  const formalKeys = new Set(manifest.items.map((item) => item.resourceKey));
+  assert.equal(formalKeys.has(`effect:${requiredLessonId}:interaction:structure`), false);
+  assert.equal(formalKeys.has(`effect:${requiredLessonId}:interaction:authorQuestion`), false);
+
+  const originalFetch = globalThis.fetch;
+  let apisCalls = 0;
+  globalThis.fetch = async () => {
+    apisCalls += 1;
+    throw new Error("an unpublished interaction must not call APIS");
+  };
+  try {
+    const anonymousSource = sourceEnvironment();
+    const anonymousResponse = await worker.fetch(new Request("https://yw.bdfz.net/api/interaction-check", {
+      method: "POST",
+      headers: YW_WEB_JSON_HEADERS,
+      body: JSON.stringify({
+        lessonId: requiredLessonId,
+        interaction: "structure",
+        input: interactions[0][1],
+        clientMutationId: "required-volume-anonymous-structure",
+      }),
+    }), anonymousSource.env, {});
+    const anonymousBody = await anonymousResponse.json();
+    assert.equal(anonymousResponse.status, 401);
+    assert.equal(anonymousBody.code, "authenticated_evaluation_required");
+    assert.equal(anonymousSource.writes.length, 0);
+    assert.equal(anonymousSource.queued.length, 0);
+
+    for (const [interaction, input] of interactions) {
+      const authenticatedSource = sourceEnvironment();
+      authenticatedSource.env.READING_TEST_SLUG = `required-volume-${interaction}`;
+      const response = await worker.fetch(new Request("https://yw.bdfz.net/api/interaction-check", {
+        method: "POST",
+        headers: YW_WEB_JSON_HEADERS,
+        body: JSON.stringify({
+          lessonId: requiredLessonId,
+          interaction,
+          input,
+          clientMutationId: `required-volume-${interaction}`,
+        }),
+      }), authenticatedSource.env, {});
+      const body = await response.json();
+      assert.equal(response.status, 422);
+      assert.equal(body.ok, false);
+      assert.equal(body.code, "learning_resource_not_published");
+      assert.equal(body.localPracticeAvailable, true);
+      assert.equal(authenticatedSource.writes.some((write) => (
+        /learning_interactions|learning_evaluations|evidence_outbox|learning_submission_slots/.test(write.sql)
+      )), false);
+      assert.equal(authenticatedSource.queued.length, 0);
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  assert.equal(apisCalls, 0);
+});
+
+test("a published selected-volume interaction still reaches APIS and the formal evidence ledger", async () => {
+  const interaction = "structure";
+  const resourceKey = `effect:${wordCreationLesson.id}:interaction:${interaction}`;
+  assert.equal(manifest.items.some((item) => item.resourceKey === resourceKey), true);
+  const source = sourceEnvironment();
+  source.env.READING_TEST_SLUG = "published-selected-volume-structure";
+  const originalFetch = globalThis.fetch;
+  let apisCalls = 0;
+  globalThis.fetch = async () => {
+    apisCalls += 1;
+    return Response.json({
+      answer: JSON.stringify({
+        score: 82,
+        verdict: "已用兩處原文說清章法推進。",
+        strength: "能把重章與情感推進連在一起。",
+        gap: "還可補出語氣變化的證據。",
+        nextQuestion: "第二章與第三章的換詞如何改變語勢？",
+      }),
+    });
+  };
+  try {
+    const response = await worker.fetch(new Request("https://yw.bdfz.net/api/interaction-check", {
+      method: "POST",
+      headers: YW_WEB_JSON_HEADERS,
+      body: JSON.stringify({
+        lessonId: wordCreationLesson.id,
+        interaction,
+        input: { reason: "我用兩章反覆與換詞的原文，說明征人情感如何逐層推進並形成整體語勢。" },
+        clientMutationId: "published-selected-volume-structure",
+      }),
+    }), source.env, {});
+    const body = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(body.assessment.score, 82);
+    assert.equal(body.evidence.status, "enqueued");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  assert.equal(apisCalls, 1);
+  assert.equal(source.writes.some((write) => write.sql.includes("INSERT INTO learning_submission_slots")), true);
+  assert.equal(source.writes.some((write) => write.sql.includes("INSERT INTO learning_interactions")), true);
+  assert.equal(source.writes.some((write) => write.sql.includes("INSERT INTO learning_evaluations")), true);
+  assert.equal(source.writes.some((write) => write.sql.includes("INSERT INTO evidence_outbox")), true);
+  assert.equal(source.queued.length, 1);
+  assert.equal(source.queued[0].envelope.resourceKey, resourceKey);
+  assert.equal(source.queued[0].envelope.scoringRole, "a_plus_gate");
+});
+
 test("interaction scoring fails closed before identity, APIS or ledger when server taxonomy is absent", async () => {
   const source = sourceEnvironment();
   const originalAssets = source.env.ASSETS;

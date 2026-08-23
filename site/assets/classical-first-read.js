@@ -65,11 +65,22 @@
       authMode = "offline";
     }
 
+    if (authMode === "authenticated" && (
+      String(remote?.lessonId || "") !== asset.lessonId
+      || String(remote?.textVersionId || "") !== asset.textVersionId
+      || String(remote?.textDigest || "") !== asset.textDigest
+    )) {
+      throw new Error("初讀權威版本與正文不一致");
+    }
+
     clearLegacyLocal(asset);
     const fallback = remote || {};
     const session = {
       asset,
       authMode,
+      authorityLessonId: fallback.lessonId || null,
+      authorityTextVersionId: fallback.textVersionId || null,
+      authorityTextDigest: fallback.textDigest || null,
       submitted: Boolean(fallback.submitted || fallback.unlocked),
       submittedAt: fallback.submittedAt || null,
       annotatedReadCompleted: Boolean(fallback.annotatedReadCompleted),
@@ -326,10 +337,46 @@
     const cleanSummary = String(summary || "").trim();
     if (session.marks.length < 3) throw new Error("至少完成 3 處疑難標記");
     if ([...cleanSummary].length < 12) throw new Error("初讀感知至少 12 字");
-    const result = await apiPost("/api/reading/first-read/submit", session, {
-      summary: cleanSummary,
-      clientMutationId: mutationId(session, "first-read-submit"),
-    });
+    let result;
+    try {
+      result = await apiPost("/api/reading/first-read/submit", session, {
+        summary: cleanSummary,
+        clientMutationId: mutationId(session, "first-read-submit"),
+      });
+    } catch (submitError) {
+      // The source session is committed before its compensating learning-evidence
+      // write. A timeout or post-commit failure is therefore ambiguous: read the
+      // authenticated source of truth before leaving the student on a stale gate.
+      let authoritative = null;
+      try {
+        authoritative = await load(session.asset.lessonId);
+      } catch {
+        // Preserve the original submit error when the authority cannot be read.
+      }
+      if (!authoritative?.submitted
+          || authoritative.authMode !== "authenticated"
+          || authoritative.authorityLessonId !== (session.authorityLessonId || session.asset.lessonId)
+          || authoritative.authorityTextVersionId !== (session.authorityTextVersionId || session.asset.textVersionId)
+          || authoritative.authorityTextDigest !== (session.authorityTextDigest || session.asset.textDigest)) {
+        throw submitError;
+      }
+      Object.assign(session, {
+        authMode: authoritative.authMode,
+        authorityLessonId: authoritative.authorityLessonId,
+        authorityTextVersionId: authoritative.authorityTextVersionId,
+        authorityTextDigest: authoritative.authorityTextDigest,
+        submitted: true,
+        submittedAt: authoritative.submittedAt,
+        annotatedReadCompleted: authoritative.annotatedReadCompleted,
+        summary: authoritative.summary,
+        elapsedMs: authoritative.elapsedMs,
+        openedAt: authoritative.openedAt,
+        marks: authoritative.marks,
+        pending: null,
+      });
+      handlers.onUnlock?.(session);
+      return;
+    }
     session.submittedAt = result.submittedAt;
     session.summary = cleanSummary;
     session.submitted = true;

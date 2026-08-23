@@ -104,7 +104,7 @@ const BANNED_BLUEPRINT_PATTERNS = Object.freeze([
   /你看见了吗/u,
 ]);
 
-const META_SENTENCE_PATTERN = /(?:節選自|节选自|選自|选自|選入教材|选入教材|這裡節選|这里节选|出自|原載|原载|語出|语出|學習提示|学习提示|作者簡介|作者简介|小說前面的情節|小说前面的情节|譯(?:本|者|。|$)|译(?:本|者|。|$)|有改動|有改动|題目是編者加的|题目是编者加的|詞牌名|词牌名|樂府舊題|乐府旧题|作於|作于|作此詞|作此词|寫於|写于|收錄|收录|代表作|代表劇作|代表剧作|全劇|全剧|著有|曾主持|原名|今屬|今属|\d{4}\s*[—-]\s*\d{4}|\s攝(?:\s|$)|\s摄(?:\s|$)|英國小說家|英国小说家|美國小說家|美国小说家|劇作家|剧作家|詩人|诗人|作家|學者|学者|共\s*\d+\s*分|閱讀下面|阅读下面|Search this site|Page updated|20\d{2}\s*年版本|本課|本课|本單元|本单元|以下是經過格式調整|以下是经过格式调整)/u;
+const META_SENTENCE_PATTERN = /(?:節選自|节选自|選自|选自|選入教材|选入教材|這裡節選|这里节选|出自|原載|原载|語出|语出|學習提示|学习提示|作者簡介|作者简介|小說前面的情節|小说前面的情节|形勢簡圖|形势简图|示意圖|示意图|譯(?:本|者|。|$)|译(?:本|者|。|$)|有改動|有改动|題目是編者加的|题目是编者加的|詞牌名|词牌名|樂府舊題|乐府旧题|作於|作于|作此詞|作此词|寫於|写于|收錄|收录|代表作|代表劇作|代表剧作|全劇|全剧|著有|曾主持|原名|今屬|今属|\d{4}\s*[—-]\s*\d{4}|\s攝(?:\s|$)|\s摄(?:\s|$)|英國小說家|英国小说家|美國小說家|美国小说家|劇作家|剧作家|詩人|诗人|作家|學者|学者|共\s*\d+\s*分|閱讀下面|阅读下面|Search this site|Page updated|20\d{2}\s*年版本|本課|本课|本單元|本单元|以下是經過格式調整|以下是经过格式调整)/u;
 
 export function normalizeBlueprintMode(mode) {
   const value = String(mode || "").trim();
@@ -131,11 +131,16 @@ function trimAnchor(value, max = 22) {
 
 export function lessonBlueprintAnchor(excerpt, lessonTitle = "") {
   const normalized = normalizeExcerpt(excerpt);
+  const normalizedTitle = normalizeExcerpt(lessonTitle).replace(/^\d+\s*/u, "");
   const candidates = normalized
     .split(/[。！？!?]+/u)
     .map((raw) => ({ raw, anchor: trimAnchor(raw) }))
     .filter((item) => (item.anchor.match(/[\p{Script=Han}A-Za-z]/gu) || []).length >= 10);
-  const contentCandidate = candidates.find((item) => !META_SENTENCE_PATTERN.test(item.raw));
+  const contentCandidate = candidates.find((item) => (
+    !META_SENTENCE_PATTERN.test(item.raw)
+    && !BANNED_BLUEPRINT_PATTERNS.some((pattern) => pattern.test(item.raw))
+    && !(normalizedTitle && normalizeExcerpt(item.raw).startsWith(normalizedTitle))
+  ));
   if (contentCandidate) return contentCandidate.anchor;
   return trimAnchor(lessonTitle, 18) || "本課正文";
 }

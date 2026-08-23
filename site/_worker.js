@@ -2,6 +2,7 @@ import {
   assertLearningSubmissionAllowed,
   drainEvidenceOutbox,
   invalidateFormativeManifestCache,
+  LearningResourceNotPublishedError,
   LearningSubmissionInProgressError,
   LearningSubmissionRateLimitError,
   releaseLearningSubmissionReservation,
@@ -213,6 +214,16 @@ function learningMutationConflictResponse() {
     error: "本次提交标识已用于另一学习项目，请刷新后重试",
     code: "learning_mutation_conflict",
   }, { status: 409 });
+}
+
+function learningResourceNotPublishedResponse(error) {
+  return json({
+    ok: false,
+    error: error?.message || "本課互動未納入目前的正式學習資源清單",
+    code: "learning_resource_not_published",
+    interactionKey: cleanText(error?.interactionKey, 40),
+    localPracticeAvailable: true,
+  }, { status: 422 });
 }
 
 function authenticatedEvaluationRequiredResponse() {
@@ -1246,6 +1257,7 @@ async function handleInteractionCheck(request, env) {
     const evidence = { status: recorded.delivery || "recorded", sourceEventId: recorded.sourceEventId, attemptNo: recorded.attemptNo };
     return json({ provider: "apis", assessment, evidence });
   } catch (error) {
+    if (error instanceof LearningResourceNotPublishedError) return learningResourceNotPublishedResponse(error);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
     if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
@@ -1570,6 +1582,7 @@ async function handleLearningInteraction(request, env, ctx) {
     });
   } catch (error) {
     if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
+    if (error instanceof LearningResourceNotPublishedError) return learningResourceNotPublishedResponse(error);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
     if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
@@ -2729,6 +2742,7 @@ async function handleReading(request, env, url) {
     return readingError("not found", 404);
   } catch (error) {
     if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
+    if (error instanceof LearningResourceNotPublishedError) return learningResourceNotPublishedResponse(error);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
     if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();

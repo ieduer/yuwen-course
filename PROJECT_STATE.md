@@ -1,6 +1,61 @@
 # Project State
 
-Last updated: 2026-08-20
+Last updated: 2026-08-22
+
+## 2026-08-22 mobile and learning-stage repair candidate
+
+- The task-owned candidate is branch
+  `codex/yw-mobile-phase-formative-fix-20260822`, based on canonical main
+  `d7efad85e435f2d1618538433dc0156beb7227af`. A fresh Cloudflare readback on
+  2026-08-22 still names production deployment
+  `6426b70e-d39b-4ba9-898b-0f5e7a1c3859` / source `26f126b`; the immediate
+  rollback remains `581a0180-2085-4960-8cd0-4aee17cb2abd` / source `04ca518`.
+- Mobile atlas scrolling was not blocked by the scroll container. The drawer
+  had `overflow-y:auto`, `touch-action:pan-y` and accepted trusted touch input,
+  but a global `resize` handler closed it whenever width was at most 1180px.
+  Safari toolbar, keyboard and dynamic-viewport height changes therefore
+  closed the drawer during an ordinary swipe. The candidate closes only on an
+  actual media-query transition from wide to compact; height-only changes now
+  preserve the open drawer.
+- The classical first-read source session commits before its compensating
+  learning-evidence write. A post-commit evidence error or ambiguous response
+  therefore returned non-2xx after the source was already submitted. The UI
+  treated every non-2xx as an uncommitted attempt and stayed on the first-read
+  gate, while reload read the committed source state and unlocked correctly.
+  The client now performs one authenticated authoritative readback on a failed
+  submit and unlocks in place only when the authoritative lesson ID, text
+  version and text digest all match and that exact source is confirmed
+  submitted; an actually uncommitted or mismatched attempt stays retryable.
+- All 189 student-visible lessons render the structure and author-question
+  stages, but the frozen formal A+ manifest publishes those interactions for
+  only 101 selected-volume lessons. The other 88 lessons, including
+  `lesson-1727`, previously reached the formal evidence resolver and failed
+  before APIS or D1 with a generic 502. The UI now classifies manifest-listed
+  questions as formal and the other 88 as explicit local practice. Local
+  practice is disabled until identity ownership is resolved, then makes no
+  evaluator request and no D1, Queue or User Center write. Stale authenticated
+  clients receive stable HTTP 422 `learning_resource_not_published` after the
+  existing identity reconciliation but before APIS or any formal interaction,
+  evaluation, reservation, outbox or Queue write. The existing 101-lesson A+
+  denominator is unchanged. A lesson completion that depends on local practice
+  is UI-only and cannot emit the hidden `lessonCompleted` evidence event.
+  Lesson 1727's structure anchor also skips its title, source label and map
+  caption before selecting正文.
+- This is a `no-new-capability`, leaf-only Web correction. It changes no route,
+  binding, migration, schema, D1 row, Queue setting, User Center contract,
+  learning-manifest membership, stable native-content pointer or Companion App
+  contract. Source rollback is an ordinary revert; production rollback is the
+  recorded Pages deployment above. The native deploy-sync gate remains red for
+  any new App-pointer promotion; the reviewed 2026-08-20 Web-only path permits
+  a leaf Web release only while the existing stable native pointer and all
+  referenced objects remain byte-identical. The exact Node 24.18.0 / 22.21.1
+  `precontent:check` and five-file study-guide source verification now pass;
+  Reading is 74/74, evidence 56/56, native object checks 22/22 and release-site
+  checks 5/5 on each runtime. The formal author artifact contains 1,223 files.
+  Independent exact-diff review found no remaining P0-P3 defect or code-level
+  release blocker. Release remains pending green pull-request checks, a clean
+  merged-main rebuild, deployment readback and live browser acceptance defined
+  in `docs/VERIFICATION.md`.
 
 ## 2026-08-20 production launch closeout
 

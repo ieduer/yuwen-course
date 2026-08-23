@@ -78,6 +78,15 @@ export class LearningSubmissionInProgressError extends Error {
   }
 }
 
+export class LearningResourceNotPublishedError extends Error {
+  constructor(interactionKey = "") {
+    super("本課互動未納入目前的正式學習資源清單");
+    this.name = "LearningResourceNotPublishedError";
+    this.code = "learning_resource_not_published";
+    this.interactionKey = clean(interactionKey, 40);
+  }
+}
+
 function isoNow() {
   return new Date().toISOString();
 }
@@ -552,7 +561,7 @@ async function resolveInteractionContext(request, env, student, lesson, interact
     }
     : (definition.resourceKind.startsWith("manifest_") ? manifest.itemByKey.get(resourceKey) : null);
   if (definition.scoringRole === "a_plus_gate" && !manifestItem) {
-    throw new Error("interaction absent from authoritative learning manifest");
+    throw new LearningResourceNotPublishedError(interactionKey);
   }
   await assertClassicalFirstReadGate({
     request,

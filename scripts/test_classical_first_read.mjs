@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import vm from "node:vm";
 import {
   buildClassicalFirstReadArtifacts,
   checkClassicalFirstReadArtifacts,
@@ -120,7 +122,8 @@ assert.equal(
 const browserContractSource = readFileSync(resolve(ROOT, "site/assets/classical-first-read.js"), "utf8");
 const appSource = readFileSync(resolve(ROOT, "site/assets/app.js"), "utf8");
 const indexSource = readFileSync(resolve(ROOT, "site/index.html"), "utf8");
-assert.match(indexSource, /assets\/classical-first-read\.js\?v=a98c524389568dec/);
+const browserContractHash = createHash("sha256").update(browserContractSource).digest("hex").slice(0, 16);
+assert.ok(indexSource.includes(`assets/classical-first-read.js?v=${browserContractHash}`));
 assert.doesNotMatch(indexSource, /assets\/classical-first-read\.js\?v=20260811-annotated-read-v2/);
 assert.match(browserContractSource, /asset\.schema\s*!==\s*"yw-classical-first-read-v1"/);
 assert.match(browserContractSource, /Number\(asset\.schemaVersion\)\s*!==\s*1/);
@@ -184,4 +187,182 @@ assert.throws(
   "--check must reject a generated artifact that no longer matches the reviewed build",
 );
 checkClassicalFirstReadArtifacts(artifacts);
-console.log(`classical first-read tests passed: ${artifacts.lessons.length} lessons, ${paragraphKeys.size} paragraphs`);
+
+function firstReadSubmitController({
+  authoritativeSubmitted,
+  authoritativeLessonId,
+  authoritativeTextVersionId,
+  authoritativeTextDigest,
+}) {
+  const asset = artifacts.lessons.find((lesson) => lesson.lessonId === "lesson-1534");
+  const marks = asset.paragraphs.slice(0, 3).map((paragraph, index) => ({
+    markId: `controller-mark-${index + 1}`,
+    paragraphKey: paragraph.key,
+    startOffset: 0,
+    endOffset: Math.min(2, paragraph.text.length),
+    selectedText: paragraph.text.slice(0, 2),
+    guess: `第 ${index + 1} 處第一直覺`,
+    correction: "",
+    resolutionStatus: "open",
+    createdAt: "2026-08-22T00:00:00.000Z",
+    updatedAt: "2026-08-22T00:00:00.000Z",
+  }));
+  const authoritativeSummary = "權威初讀狀態已提交，應在同一頁直接展開下一階段。";
+  const calls = {
+    stateReads: 0,
+    reconciles: 0,
+    unlocks: 0,
+    toasts: [],
+  };
+  const fetch = async (input) => {
+    const path = typeof input === "string" ? input : input.url;
+    if (path === `data/classical-first-read/${asset.lessonId}.json`) {
+      return Response.json(asset);
+    }
+    if (path === `/api/reading/first-read/state/${asset.lessonId}`) {
+      calls.stateReads += 1;
+      return Response.json({
+        ok: true,
+        lessonId: authoritativeLessonId ?? asset.lessonId,
+        textVersionId: authoritativeTextVersionId ?? asset.textVersionId,
+        textDigest: authoritativeTextDigest ?? asset.textDigest,
+        submitted: authoritativeSubmitted,
+        unlocked: authoritativeSubmitted,
+        annotatedReadCompleted: false,
+        submittedAt: authoritativeSubmitted ? "2026-08-22T00:01:00.000Z" : null,
+        elapsedMs: 60000,
+        summary: authoritativeSubmitted ? authoritativeSummary : "",
+        markCount: marks.length,
+        resolvedCount: 0,
+        marks,
+      });
+    }
+    if (path === "/api/reading/first-read/submit") {
+      return Response.json({
+        ok: false,
+        error: "post-commit evidence failure",
+      }, { status: 500 });
+    }
+    if (path === "/api/reading/first-read/reconcile") {
+      calls.reconciles += 1;
+      return Response.json({ ok: true });
+    }
+    throw new Error(`unexpected controller request: ${path}`);
+  };
+  const window = {};
+  class ControllerFormData {
+    constructor(form) {
+      this.form = form;
+    }
+
+    get(name) {
+      return this.form.values?.[name] ?? null;
+    }
+  }
+  vm.runInNewContext(browserContractSource, {
+    window,
+    performance: { now: () => 1000 },
+    localStorage: { removeItem() {} },
+    location: { href: `https://yw.bdfz.net/#${asset.lessonId}` },
+    crypto: { randomUUID: () => "controller-test-mutation" },
+    fetch,
+    FormData: ControllerFormData,
+    Node: { ELEMENT_NODE: 1 },
+    Response,
+  });
+
+  const listeners = {};
+  const submitButton = { disabled: false };
+  const submitForm = {
+    values: { summary: "我先辨人物處境，再核對字句與篇章推進關係。" },
+    addEventListener(type, listener) {
+      listeners[type] = listener;
+    },
+  };
+  const sidebar = {
+    querySelector(selector) {
+      return selector === "[data-first-read-submit]" ? submitForm : null;
+    },
+    querySelectorAll() {
+      return [];
+    },
+  };
+  const root = {
+    querySelector(selector) {
+      return selector === "[data-first-read-sidebar]" ? sidebar : null;
+    },
+  };
+  const session = {
+    asset,
+    authMode: "authenticated",
+    authorityLessonId: asset.lessonId,
+    authorityTextVersionId: asset.textVersionId,
+    authorityTextDigest: asset.textDigest,
+    submitted: false,
+    submittedAt: null,
+    annotatedReadCompleted: false,
+    summary: "",
+    elapsedMs: 0,
+    openedAt: 0,
+    marks,
+    pending: null,
+  };
+  window.YwClassicalFirstRead.bindGate(root, session, {
+    onUnlock() {
+      calls.unlocks += 1;
+    },
+    toast(message) {
+      calls.toasts.push(message);
+    },
+  });
+
+  return {
+    calls,
+    session,
+    submitButton,
+    authoritativeSummary,
+    async submit() {
+      await listeners.submit({
+        preventDefault() {},
+        currentTarget: submitForm,
+        submitter: submitButton,
+      });
+      await Promise.resolve();
+    },
+  };
+}
+
+const committedController = firstReadSubmitController({ authoritativeSubmitted: true });
+await committedController.submit();
+assert.equal(committedController.calls.stateReads, 1, "a failed submit must read back authoritative state");
+assert.equal(committedController.calls.unlocks, 1, "a committed first read must unlock without reloading");
+assert.equal(committedController.calls.reconciles, 1, "a recovered commit must reconcile learning evidence");
+assert.equal(committedController.session.submitted, true);
+assert.equal(committedController.session.summary, committedController.authoritativeSummary);
+
+const rejectedController = firstReadSubmitController({ authoritativeSubmitted: false });
+await rejectedController.submit();
+assert.equal(rejectedController.calls.stateReads, 1, "a failed submit must confirm that no commit exists");
+assert.equal(rejectedController.calls.unlocks, 0, "an uncommitted first read must remain locked");
+assert.equal(rejectedController.calls.reconciles, 0, "an uncommitted first read has nothing to reconcile");
+assert.equal(rejectedController.session.submitted, false);
+assert.equal(rejectedController.submitButton.disabled, false, "an uncommitted submit must remain retryable");
+
+for (const authorityMismatch of [
+  { authoritativeLessonId: "lesson-1535", label: "lesson id" },
+  { authoritativeTextVersionId: "cfr-lesson-1534-0000000000000000", label: "text version" },
+  { authoritativeTextDigest: `sha256:${"0".repeat(64)}`, label: "text digest" },
+]) {
+  const mismatchController = firstReadSubmitController({
+    authoritativeSubmitted: true,
+    ...authorityMismatch,
+  });
+  await mismatchController.submit();
+  assert.equal(mismatchController.calls.stateReads, 1, `${authorityMismatch.label} mismatch must read authority once`);
+  assert.equal(mismatchController.calls.unlocks, 0, `${authorityMismatch.label} mismatch must remain locked`);
+  assert.equal(mismatchController.calls.reconciles, 0, `${authorityMismatch.label} mismatch must not reconcile`);
+  assert.equal(mismatchController.session.submitted, false, `${authorityMismatch.label} mismatch must not become submitted`);
+  assert.equal(mismatchController.submitButton.disabled, false, `${authorityMismatch.label} mismatch must remain retryable`);
+}
+
+console.log(`classical first-read tests passed: ${artifacts.lessons.length} lessons, ${paragraphKeys.size} paragraphs, authority-bound ambiguous-submit recovery`);

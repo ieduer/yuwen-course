@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1223,
-  "totalBytes": 164388369,
-  "aggregateSha256": "96080e7e8eff4e7899e268394b055aef453a39a1980041c506e7f72f6f01c2f9",
+  "totalBytes": 164400129,
+  "aggregateSha256": "c744b7ac352c11b5cea45377ce297d69d4a3b142027a768bcb59dbf76bcd98b1",
   "files": [
     {
       "path": "_headers",
@@ -12,13 +12,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 115244,
-      "sha256": "d60f5e26d24e16b254a1a30d77a0f805fa935a17b1aeb1a802476cf3b405f5c6"
+      "bytes": 115953,
+      "sha256": "4c42a51d2d64276b17391cb7d0f38669c1942e949a98c03963d4a36525adfd6f"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "88b2f7e92fd7f45b63b932845ecb48583929be79ed37b7ba0cd38969d793f4b8"
+      "sha256": "86e90d43976fb55f59b1da51ba119c115fe703d7b8f580490309cc4a84493f60"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1412,8 +1412,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 169221,
-      "sha256": "4981677747eb5d3210772bae49f87e3e899c23e156cdbd885e73fb591f2fd3a7"
+      "bytes": 177544,
+      "sha256": "c7e8de9f04ab9c7666f294226d02834892407d2c6e6cacaaa445438d80af67f2"
     },
     {
       "path": "assets/atlas.css",
@@ -1432,8 +1432,8 @@
     },
     {
       "path": "assets/classical-first-read.js",
-      "bytes": 23977,
-      "sha256": "a98c524389568dec4b2e247d626e844a025eab1d911442ad70ad2fbad1113ea4"
+      "bytes": 26090,
+      "sha256": "241cd5b2d0dae47a8d22c1b6adb575b9023451b37c37199d338eebfd85451094"
     },
     {
       "path": "assets/insights.css",
@@ -6033,7 +6033,7 @@
     {
       "path": "index.html",
       "bytes": 11637,
-      "sha256": "93db84aa29c395e035ee7b03ae1f651c2349dc3159cf50e8696fcdf2dc0f5710"
+      "sha256": "e74817cbb7eeacc0d740543cc4ed4c0cbbdb7eccd5fa4219011cefd0104bd69a"
     },
     {
       "path": "insights.html",
@@ -6042,13 +6042,13 @@
     },
     {
       "path": "learning-evidence-source.js",
-      "bytes": 63971,
-      "sha256": "3cfb2d289723fef6a37f38752e903516a94b9086a1d5dcfaa74c6b08c104537c"
+      "bytes": 64289,
+      "sha256": "a9d66d5a0834cfe7715744f94f01333b0c3eb211e8adb4586d84abe0037f18d2"
     },
     {
       "path": "lesson-blueprint-rules.js",
-      "bytes": 14405,
-      "sha256": "6cc14b89bda9535623a19ace2636e96abf535161d45d0d7dfe72337193455ca9"
+      "bytes": 14702,
+      "sha256": "8498ddbb5a69645b3ef69de9535b64a7215224aeb22e84914ca192910a91cfba"
     },
     {
       "path": "media/lesson-media/lesson-1458/sha256-cbf43aa4198be042f4724aec8cba24e94e27457f6938cd17bae4a5b6bec730c0.pdf",

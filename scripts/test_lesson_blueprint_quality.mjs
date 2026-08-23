@@ -109,6 +109,18 @@ test("Dickens prompt targets retrospective child-labour narration instead of a g
   assert.doesNotMatch(prompt, bannedStudentPrompt);
 });
 
+test("lesson 1727 structure prompt skips title, source label and map caption before anchoring正文", () => {
+  const taxonomyLesson = taxonomy.lessons.find((lesson) => lesson.id === "lesson-1727");
+  assert.ok(taxonomyLesson);
+  const context = contextFor(taxonomyLesson);
+  const anchor = lessonBlueprintPromptAnchor(context);
+  const prompt = deterministicLessonBlueprint(context).structureFocus;
+
+  assert.doesNotMatch(anchor, /烛之武退秦师|左传|形势简图/u);
+  assert.match(anchor, /晋军函陵|佚之狐|公从之|臣之壮/u);
+  assert.ok(prompt.includes(anchor));
+});
+
 test("normalizer rejects author impersonation and accepts only anchored mode-specific API output", () => {
   const taxonomyLesson = taxonomy.lessons.find((lesson) => lesson.id === "lesson-1488");
   const context = contextFor(taxonomyLesson);
