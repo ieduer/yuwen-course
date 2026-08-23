@@ -2,13 +2,14 @@
 
 Last updated: 2026-08-22
 
-## 2026-08-22 lesson 1474 staged-loop recovery candidate
+## 2026-08-22 lesson 1474 staged-loop recovery source closeout
 
-- The task-owned candidate is branch
-  `codex/yw-1474-learning-loop-20260822`, based on clean canonical main
-  `61272266705957f60ac7cdae2b59455bd442b869`. Production is unchanged at
+- PR #20 merged the reviewed source as canonical main
+  `ef6272778db1dd3cfed227b47ac4cf17163eba3f`; its exact-head Actions run
+  `32623520208` passed Node 24.18.0 in 1m12s and Node 22.21.1 in 1m16s.
+  Production is unchanged at
   Pages deployment `619024c7-a261-405b-a13f-8581a90111ac`, source
-  `16b8277afdf32618043703de4eb9b4098858b888`; this candidate has not been
+  `16b8277afdf32618043703de4eb9b4098858b888`; the merged repair has not been
   represented as live.
 - Classical first-read had a post-commit UI ordering boundary: host storage or
   ancillary progress synchronization could throw before the annotated-text
@@ -76,7 +77,8 @@ Last updated: 2026-08-22
   canonical inventory; the canonical Drive token returned `invalid_grant`, so
   this run does not claim a fresh archive readback. Independent final source
   and UI-state reviews reported no remaining P0-P3.
-- The rebuilt checksum-fixed formal artifact contains 1,223 files, projected
+- A clean detached rebuild from exact merged main `ef627277...` reproduced the
+  checksum-fixed formal artifact: 1,223 files, projected
   aggregate `3eee253710281c30747e7ba6570f8da6cf0ef080836096b5aea8cbf6c336f0f1`
   and tracked artifact-manifest aggregate
   `4c46462b0798048ce69eac8b5c0ba2691d9979af41388d2299e7738a3b172f06`
@@ -87,8 +89,8 @@ Last updated: 2026-08-22
   D1 administration, route, binding, Queue/APIS/User Center configuration,
   learning-manifest membership or native/App pointer change. User Center,
   APIS, Queue and Companion are `verified_no_change` consumers.
-- Production release is currently fail-closed after checksum-fixed artifact
-  creation. Project policy permits Pages deploy and rollback only through an
+- Production release is currently fail-closed after merge and exact-main
+  checksum-fixed artifact creation. Project policy permits Pages deploy and rollback only through an
   independently reviewed external UC+YW executor; the current external
   workflow is explicitly source-only and exits before credentials, and no
   callable reviewed rollback path has been demonstrated. Manual Pages upload,

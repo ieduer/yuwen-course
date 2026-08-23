@@ -131,7 +131,10 @@ operator to upload Pages directly.
    `3eee253710281c30747e7ba6570f8da6cf0ef080836096b5aea8cbf6c336f0f1`
    and tracked manifest aggregate
    `4c46462b0798048ce69eac8b5c0ba2691d9979af41388d2299e7738a3b172f06`.
-   PR/CI and merged-SHA rebuild remain required before executor handoff.
+   PR #20 is merged as exact main
+   `ef6272778db1dd3cfed227b47ac4cf17163eba3f`; Actions run `32623520208`
+   passed both exact Node jobs, and a clean detached merged-main rebuild
+   reproduced the same formal marker and aggregates.
    Production remains unchanged while the external deploy/rollback executor is
    unavailable.
 
