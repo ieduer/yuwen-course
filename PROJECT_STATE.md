@@ -4,9 +4,10 @@ Last updated: 2026-08-22
 
 ## 2026-08-22 lesson 1474 staged-loop recovery source closeout
 
-- PR #20 merged the reviewed source as canonical main
+- PR #20 merged the reviewed runtime source as
   `ef6272778db1dd3cfed227b47ac4cf17163eba3f`; its exact-head Actions run
   `32623520208` passed Node 24.18.0 in 1m12s and Node 22.21.1 in 1m16s.
+  PR #21 synchronized this source/production boundary in project documentation.
   Production is unchanged at
   Pages deployment `619024c7-a261-405b-a13f-8581a90111ac`, source
   `16b8277afdf32618043703de4eb9b4098858b888`; the merged repair has not been
@@ -77,7 +78,7 @@ Last updated: 2026-08-22
   canonical inventory; the canonical Drive token returned `invalid_grant`, so
   this run does not claim a fresh archive readback. Independent final source
   and UI-state reviews reported no remaining P0-P3.
-- A clean detached rebuild from exact merged main `ef627277...` reproduced the
+- A clean detached rebuild from default main after the documentation merge reproduced the
   checksum-fixed formal artifact: 1,223 files, projected
   aggregate `3eee253710281c30747e7ba6570f8da6cf0ef080836096b5aea8cbf6c336f0f1`
   and tracked artifact-manifest aggregate
