@@ -133,6 +133,18 @@ assert.match(browserContractSource, /renderSubmittedReading/);
 assert.match(browserContractSource, /data-first-read-submitted-review/);
 assert.match(browserContractSource, /session\.authMode\s*!==\s*"authenticated"/);
 assert.doesNotMatch(browserContractSource, /localStorage\.setItem/);
+assert.match(browserContractSource, /new AbortController\(\)/);
+assert.match(browserContractSource, /signal: controller\.signal/);
+assert.match(browserContractSource, /return await consume\(response\)/);
+assert.match(browserContractSource, /fetchWithTimeout\(`\/api\/reading\/first-read\/state/);
+assert.match(browserContractSource, /fetchWithTimeout\(`data\/classical-first-read/);
+assert.match(browserContractSource, /notifyUnlock\(session, handlers\)/);
+assert.match(browserContractSource, /handlers\.onUnlockFailure\?\.\(session, error\)/);
+assert.ok(
+  appSource.indexOf("renderCommittedFirstReadTransition(lesson)", appSource.indexOf("onUnlock: () =>"))
+    < appSource.indexOf("syncProgress({ event: true });", appSource.indexOf("onUnlock: () =>")),
+  "the committed next-stage UI must render before ancillary progress synchronization",
+);
 assert.match(browserContractSource, /localStorage\.removeItem\(localKey\(asset\)\)/);
 assert.match(appSource, /data-inline-note role="note" hidden/);
 assert.match(appSource, /aria-expanded="false" aria-controls=/);
@@ -141,6 +153,78 @@ assert.match(appSource, /note\.dataset\.typed = "true"/);
 assert.match(appSource, /event\.key === "Escape"/);
 assert.match(appSource, /closeInlineNote\(openNote\)/);
 assert.match(appSource, /noteButton\?\.focus\(\{ preventScroll: true \}\)/);
+assert.match(appSource, /function renderCommittedFirstReadRecovery/);
+assert.match(appSource, /data-first-read-render-retry/);
+assert.match(appSource, /onUnlockFailure: \(\) =>/);
+
+function firstReadLoadHarness() {
+  const asset = artifacts.lessons.find((lesson) => lesson.lessonId === "lesson-1534");
+  const calls = { assets: 0, authority: 0 };
+  const window = {};
+  const fetch = async (input) => {
+    const path = typeof input === "string" ? input : new URL(input.url).pathname;
+    if (path === `data/classical-first-read/${asset.lessonId}.json`) {
+      calls.assets += 1;
+      return Response.json(asset);
+    }
+    if (path === `/api/reading/first-read/state/${asset.lessonId}`) {
+      calls.authority += 1;
+      return Response.json({
+        ok: true,
+        lessonId: asset.lessonId,
+        textVersionId: asset.textVersionId,
+        textDigest: asset.textDigest,
+        submitted: false,
+        unlocked: false,
+        annotatedReadCompleted: false,
+        submittedAt: null,
+        elapsedMs: 0,
+        summary: "",
+        markCount: 0,
+        resolvedCount: 0,
+        marks: [],
+      });
+    }
+    throw new Error(`unexpected load request: ${path}`);
+  };
+  vm.runInNewContext(browserContractSource, {
+    window,
+    performance: { now: () => 1000 },
+    localStorage: { removeItem() {} },
+    location: { href: `https://yw.bdfz.net/#${asset.lessonId}` },
+    fetch,
+    AbortController,
+    setTimeout,
+    clearTimeout,
+    Response,
+  });
+  return { asset, calls, load: window.YwClassicalFirstRead.load };
+}
+
+for (const fallbackAuthMode of ["offline", "local"]) {
+  const harness = firstReadLoadHarness();
+  const session = await harness.load(harness.asset.lessonId, {
+    readAuthority: false,
+    fallbackAuthMode,
+  });
+  assert.equal(harness.calls.assets, 1, `${fallbackAuthMode} public load must read the reviewed asset once`);
+  assert.equal(harness.calls.authority, 0, `${fallbackAuthMode} public load must not read private authority`);
+  assert.equal(session.authMode, fallbackAuthMode);
+  assert.equal(session.authorityLessonId, null);
+  assert.equal(session.submitted, false);
+}
+
+const privateLoadHarness = firstReadLoadHarness();
+const privateSession = await privateLoadHarness.load(privateLoadHarness.asset.lessonId, {
+  readAuthority: true,
+  fallbackAuthMode: "offline",
+});
+assert.equal(privateLoadHarness.calls.assets, 1);
+assert.equal(privateLoadHarness.calls.authority, 1, "an authority-enabled load must retain the private state read");
+assert.equal(privateSession.authMode, "authenticated");
+assert.equal(privateSession.authorityLessonId, privateLoadHarness.asset.lessonId);
+assert.equal(privateSession.authorityTextVersionId, privateLoadHarness.asset.textVersionId);
+assert.equal(privateSession.authorityTextDigest, privateLoadHarness.asset.textDigest);
 
 const quyuan = artifacts.lessons.find((lesson) => lesson.lessonId === "lesson-1534");
 assert.deepEqual(quyuan.source.segments, [{ startBlock: 0, endBlock: 13 }]);
@@ -193,6 +277,13 @@ function firstReadSubmitController({
   authoritativeLessonId,
   authoritativeTextVersionId,
   authoritativeTextDigest,
+  hangRecoveryAsset = false,
+  hangRecoveryAssetBody = false,
+  hangSubmit = false,
+  hangSubmitBody = false,
+  immediateTimeout = false,
+  unlockThrows = false,
+  submitReceipt = null,
 }) {
   const asset = artifacts.lessons.find((lesson) => lesson.lessonId === "lesson-1534");
   const marks = asset.paragraphs.slice(0, 3).map((paragraph, index) => ({
@@ -212,11 +303,55 @@ function firstReadSubmitController({
     stateReads: 0,
     reconciles: 0,
     unlocks: 0,
+    unlockFailures: 0,
+    bodyAborts: 0,
     toasts: [],
   };
-  const fetch = async (input) => {
+  let timeoutCallback = null;
+  let timeoutActive = false;
+  const runControlledTimeout = () => {
+    if (!timeoutActive || !timeoutCallback) return false;
+    timeoutActive = false;
+    const callback = timeoutCallback;
+    timeoutCallback = null;
+    callback();
+    return true;
+  };
+  const controlledSetTimeout = (callback) => {
+    timeoutCallback = callback;
+    timeoutActive = true;
+    return 1;
+  };
+  const controlledClearTimeout = () => {
+    timeoutActive = false;
+    timeoutCallback = null;
+  };
+  const hangingBodyResponse = (signal) => ({
+    ok: true,
+    status: 200,
+    async json() {
+      return new Promise((_resolve, reject) => {
+        const rejectAbort = () => {
+          calls.bodyAborts += 1;
+          reject(new DOMException("aborted", "AbortError"));
+        };
+        if (signal?.aborted) rejectAbort();
+        else signal?.addEventListener("abort", rejectAbort, { once: true });
+        if (!runControlledTimeout()) reject(new Error("timeout cleared before response body was consumed"));
+      });
+    },
+  });
+  const fetch = async (input, init = {}) => {
     const path = typeof input === "string" ? input : input.url;
     if (path === `data/classical-first-read/${asset.lessonId}.json`) {
+      if (hangRecoveryAsset) {
+        if (init.signal?.aborted) throw new DOMException("aborted", "AbortError");
+        return new Promise((_resolve, reject) => {
+          init.signal?.addEventListener("abort", () => reject(new DOMException("aborted", "AbortError")), { once: true });
+          runControlledTimeout();
+        });
+      }
+      if (hangRecoveryAssetBody) return hangingBodyResponse(init.signal);
       return Response.json(asset);
     }
     if (path === `/api/reading/first-read/state/${asset.lessonId}`) {
@@ -238,6 +373,15 @@ function firstReadSubmitController({
       });
     }
     if (path === "/api/reading/first-read/submit") {
+      if (hangSubmit) {
+        if (init.signal?.aborted) throw new DOMException("aborted", "AbortError");
+        return new Promise((_resolve, reject) => {
+          init.signal?.addEventListener("abort", () => reject(new DOMException("aborted", "AbortError")), { once: true });
+          runControlledTimeout();
+        });
+      }
+      if (hangSubmitBody) return hangingBodyResponse(init.signal);
+      if (submitReceipt) return Response.json(submitReceipt);
       return Response.json({
         ok: false,
         error: "post-commit evidence failure",
@@ -266,6 +410,9 @@ function firstReadSubmitController({
     location: { href: `https://yw.bdfz.net/#${asset.lessonId}` },
     crypto: { randomUUID: () => "controller-test-mutation" },
     fetch,
+    AbortController,
+    setTimeout: immediateTimeout ? controlledSetTimeout : setTimeout,
+    clearTimeout: immediateTimeout ? controlledClearTimeout : clearTimeout,
     FormData: ControllerFormData,
     Node: { ELEMENT_NODE: 1 },
     Response,
@@ -310,6 +457,10 @@ function firstReadSubmitController({
   window.YwClassicalFirstRead.bindGate(root, session, {
     onUnlock() {
       calls.unlocks += 1;
+      if (unlockThrows) throw new Error("host render failed");
+    },
+    onUnlockFailure() {
+      calls.unlockFailures += 1;
     },
     toast(message) {
       calls.toasts.push(message);
@@ -332,6 +483,77 @@ function firstReadSubmitController({
   };
 }
 
+const validReceiptController = firstReadSubmitController({
+  authoritativeSubmitted: false,
+  submitReceipt: {
+    ok: true,
+    lessonId: "lesson-1534",
+    textVersionId: "cfr-lesson-1534-c332d4cede431f64",
+    submittedAt: "2026-08-22T00:01:00.000Z",
+  },
+});
+await validReceiptController.submit();
+assert.equal(validReceiptController.calls.stateReads, 0, "a complete matching 2xx receipt must not need authority recovery");
+assert.equal(validReceiptController.calls.unlocks, 1);
+assert.equal(validReceiptController.session.submitted, true);
+
+for (const malformedReceipt of [
+  {
+    ok: false,
+    lessonId: "lesson-1534",
+    textVersionId: "cfr-lesson-1534-c332d4cede431f64",
+    submittedAt: "2026-08-22T00:01:00.000Z",
+  },
+  {
+    ok: true,
+    lessonId: "lesson-1534",
+    textVersionId: "cfr-lesson-1534-c332d4cede431f64",
+    submittedAt: "not-a-date",
+  },
+]) {
+  const malformedReceiptController = firstReadSubmitController({
+    authoritativeSubmitted: false,
+    submitReceipt: malformedReceipt,
+  });
+  await malformedReceiptController.submit();
+  assert.equal(malformedReceiptController.calls.stateReads, 1, "a malformed 2xx receipt must read authority");
+  assert.equal(malformedReceiptController.calls.unlocks, 0, "an unconfirmed malformed receipt must remain locked");
+  assert.equal(malformedReceiptController.session.submitted, false);
+  assert.equal(malformedReceiptController.submitButton.disabled, false, "an unconfirmed malformed receipt must remain retryable");
+}
+
+for (const receiptMismatch of [
+  {
+    label: "lesson id",
+    submitReceipt: {
+      ok: true,
+      lessonId: "lesson-1535",
+      textVersionId: "cfr-lesson-1534-c332d4cede431f64",
+      submittedAt: "2026-08-22T00:01:00.000Z",
+    },
+  },
+  {
+    label: "text version",
+    submitReceipt: {
+      ok: true,
+      lessonId: "lesson-1534",
+      textVersionId: "cfr-lesson-1534-0000000000000000",
+      submittedAt: "2026-08-22T00:01:00.000Z",
+    },
+  },
+]) {
+  const mismatchController = firstReadSubmitController({
+    authoritativeSubmitted: true,
+    submitReceipt: receiptMismatch.submitReceipt,
+  });
+  await mismatchController.submit();
+  assert.equal(mismatchController.calls.stateReads, 1, `a cross-${receiptMismatch.label} 2xx receipt must read authority`);
+  assert.equal(mismatchController.calls.unlocks, 1, `a cross-${receiptMismatch.label} receipt may unlock only after authority confirms the commit`);
+  assert.equal(mismatchController.calls.reconciles, 1);
+  assert.equal(mismatchController.session.submitted, true);
+  assert.equal(mismatchController.session.summary, mismatchController.authoritativeSummary);
+}
+
 const committedController = firstReadSubmitController({ authoritativeSubmitted: true });
 await committedController.submit();
 assert.equal(committedController.calls.stateReads, 1, "a failed submit must read back authoritative state");
@@ -347,6 +569,53 @@ assert.equal(rejectedController.calls.unlocks, 0, "an uncommitted first read mus
 assert.equal(rejectedController.calls.reconciles, 0, "an uncommitted first read has nothing to reconcile");
 assert.equal(rejectedController.session.submitted, false);
 assert.equal(rejectedController.submitButton.disabled, false, "an uncommitted submit must remain retryable");
+
+const hangingSubmitController = firstReadSubmitController({
+  authoritativeSubmitted: false,
+  hangSubmit: true,
+  immediateTimeout: true,
+});
+await hangingSubmitController.submit();
+assert.equal(hangingSubmitController.calls.unlocks, 0);
+assert.equal(hangingSubmitController.submitButton.disabled, false, "a never-settling submit must time out and become retryable");
+
+const hangingAssetReadbackController = firstReadSubmitController({
+  authoritativeSubmitted: true,
+  hangRecoveryAsset: true,
+  immediateTimeout: true,
+});
+await hangingAssetReadbackController.submit();
+assert.equal(hangingAssetReadbackController.calls.stateReads, 0);
+assert.equal(hangingAssetReadbackController.calls.unlocks, 0);
+assert.equal(hangingAssetReadbackController.submitButton.disabled, false, "a never-settling authority asset read must time out and become retryable");
+
+const hangingSubmitBodyController = firstReadSubmitController({
+  authoritativeSubmitted: true,
+  hangSubmitBody: true,
+  immediateTimeout: true,
+});
+await hangingSubmitBodyController.submit();
+assert.equal(hangingSubmitBodyController.calls.bodyAborts, 1, "the submit timer must remain active while its response body is consumed");
+assert.equal(hangingSubmitBodyController.calls.stateReads, 1);
+assert.equal(hangingSubmitBodyController.calls.unlocks, 1, "a body timeout after commit must recover from authority without reloading");
+
+const hangingAssetBodyReadbackController = firstReadSubmitController({
+  authoritativeSubmitted: true,
+  hangRecoveryAssetBody: true,
+  immediateTimeout: true,
+});
+await hangingAssetBodyReadbackController.submit();
+assert.equal(hangingAssetBodyReadbackController.calls.bodyAborts, 1, "the authority timer must remain active while its asset body is consumed");
+assert.equal(hangingAssetBodyReadbackController.calls.unlocks, 0);
+assert.equal(hangingAssetBodyReadbackController.submitButton.disabled, false, "a never-settling authority body must become retryable");
+
+const failedHostRenderController = firstReadSubmitController({
+  authoritativeSubmitted: true,
+  unlockThrows: true,
+});
+await failedHostRenderController.submit();
+assert.equal(failedHostRenderController.calls.unlocks, 1);
+assert.equal(failedHostRenderController.calls.unlockFailures, 1, "a committed source must invoke the host recovery UI when critical rendering throws");
 
 for (const authorityMismatch of [
   { authoritativeLessonId: "lesson-1535", label: "lesson id" },

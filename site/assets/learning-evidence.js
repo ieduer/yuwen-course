@@ -10,20 +10,41 @@
 
   async function record(interactionKey, lessonId, data = {}, options = {}) {
     if (!interactionKey || !lessonId || !root.fetch) return { ok: false, reason: "invalid" };
-    const response = await root.fetch("/api/learning/interactions", {
-      method: "POST",
-      credentials: "include",
-      headers: { "content-type": "application/json", accept: "application/json" },
-      body: JSON.stringify({
-        lessonId,
-        interactionKey,
-        clientMutationId: options.clientMutationId || mutationId(interactionKey, lessonId),
-        classSessionId: options.classSessionId || "",
-        lessonPhase: options.lessonPhase || "",
-        data,
-      }),
-    });
-    const payload = await response.json().catch(() => ({}));
+    const controller = new AbortController();
+    const timeout = root.setTimeout(() => controller.abort(), 20000);
+    let response;
+    let payload;
+    try {
+      response = await root.fetch("/api/learning/interactions", {
+        method: "POST",
+        credentials: "include",
+        headers: { "content-type": "application/json", accept: "application/json" },
+        signal: controller.signal,
+        body: JSON.stringify({
+          lessonId,
+          interactionKey,
+          clientMutationId: options.clientMutationId || mutationId(interactionKey, lessonId),
+          classSessionId: options.classSessionId || "",
+          lessonPhase: options.lessonPhase || "",
+          data,
+        }),
+      });
+      payload = await response.json().catch((error) => {
+        if (error?.name === "AbortError") throw error;
+        return {};
+      });
+    } catch (error) {
+      return {
+        ok: false,
+        status: 0,
+        code: error?.name === "AbortError" ? "learning_evidence_timeout" : "",
+        retryable: true,
+        retryAfterSeconds: null,
+        reason: error?.name === "AbortError" ? "學習記錄同步逾時" : "unavailable",
+      };
+    } finally {
+      root.clearTimeout(timeout);
+    }
     if (!response.ok) {
       const retryHeader = Number(response.headers?.get?.("retry-after"));
       const retryPayload = Number(payload.retryAfterSeconds);

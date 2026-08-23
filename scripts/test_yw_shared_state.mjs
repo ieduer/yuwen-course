@@ -579,6 +579,10 @@ test("app integration uses the versioned state routes and removes generic progre
   assert.match(source, /stableAnchor:\s*"lesson-root"/);
   assert.match(source, /recordEvidence:\s*false/);
   assert.match(source, /SHARED_STATE_ASSET_VERSION = "20260730-owner-v1"/);
+  assert.match(
+    source,
+    /api:\s*\(path, options\)\s*=>\s*waitForSharedStateIdentity\(\s*\(\)\s*=>\s*identity\.api\(path, options\)/,
+  );
   const sourceHash = createHash("sha256").update(source).digest("hex").slice(0, 16);
   assert.ok(index.includes(`assets/app.js?v=${sourceHash}`));
   assert.equal(YW_SHARED_STATE_CONTRACT.CLIENT, "yuwen-web");

@@ -2,6 +2,100 @@
 
 Last updated: 2026-08-22
 
+## 2026-08-22 lesson 1474 staged-loop recovery candidate
+
+- The task-owned candidate is branch
+  `codex/yw-1474-learning-loop-20260822`, based on clean canonical main
+  `61272266705957f60ac7cdae2b59455bd442b869`. Production is unchanged at
+  Pages deployment `619024c7-a261-405b-a13f-8581a90111ac`, source
+  `16b8277afdf32618043703de4eb9b4098858b888`; this candidate has not been
+  represented as live.
+- Classical first-read had a post-commit UI ordering boundary: host storage or
+  ancillary progress synchronization could throw before the annotated-text
+  action rendered, so reload appeared to repair an already committed source.
+  Critical rendering now precedes ancillary synchronization, storage failures
+  are contained, ancillary renderer failures cannot replace an already visible
+  annotated text, POST and authoritative state readback are bounded through
+  response-body consumption, and an
+  exact submitted lesson/text-version/digest readback unlocks in place without
+  converting an uncommitted or mismatched attempt to success.
+- Study-guide answers persisted the transient `submitting` flag. A killed tab,
+  owner-scope transition or request that never returned could therefore restore
+  a permanent `正在進行來源端評閱…` state. Stored snapshots now normalize an
+  interrupted submit to a retryable `pendingSync` receipt while preserving its
+  mutation ID, answer and reference-reveal time. The browser request is bounded,
+  including a response body that never finishes; all exit paths clear the
+  spinner, and an unavailable evaluator returns the
+  existing structured 503 contract without writing false interaction,
+  evaluation, outbox or Queue evidence.
+- Completing the last active study-guide item already recomputes the vocabulary
+  checkpoint. With the stale submit repaired, the same page now rerenders the
+  structure, evaluation and author-question controls as soon as vocabulary,
+  study-guide vocabulary/syntax and first-read corrections all converge; no
+  reload is part of the contract.
+- Formal structure and author-question stages were repeated one-shot checks,
+  not conversations: only the current input reached APIS and the UI replaced
+  the previous result. The Worker now derives a student/resource/interaction-
+  scoped transcript from the existing evidence ledger, includes at most four
+  prior turns in the next evaluator prompt and returns at most six turns to the
+  browser. The UI presents those turns as a continuing dialogue; idempotent
+  replay does not create another turn, and a later lower score cannot relock an
+  already completed checkpoint. Author/coach labels, true attempt numbers,
+  the six-turn display window and latest-turn accessibility focus now share
+  the same authority. A formal request is not sent if its retry receipt cannot
+  first be persisted. Lessons with no authoritative author use a text-reading
+  coach instead of falsely impersonating an author. The 88
+  unpublished local-practice lessons remain local and do not call APIS.
+- Identity discovery is now an explicit mutation boundary. Before the exact
+  owner is resolved, reading position, font preference, lesson-open evidence,
+  first-read callbacks and every check-stage control remain inert or
+  anonymous-local; no ownerless mutation can later be rebound to another
+  student. Session lookup, owner discovery and every shared-state owner check
+  and mutation have a 12-second full-promise bound and retry in place. Identity/
+  lesson generations discard stale A→B→A callbacks and reload the visible
+  lesson from the current authority; replacing the identity object for the
+  same owner atomically carries its pending reading/font mutation into the new
+  generation, while changing owner still discards it.
+- A real authenticated production run using the configured student environment
+  completed lesson 1474 from submitted first read through 12/12 vocabulary,
+  3/3 corrections, 19/19 active study-guide items, evaluation, structure and
+  author-question. The old production exposed one generic study-guide 500 and
+  a structured evaluator 503, and its repeated formal turns contained no
+  conversation transcript; those observations reproduce the repaired paths.
+  The final study-guide completion removed every downstream lock on the same
+  page. No test account identifier, cookie, answer text or raw learner record
+  is retained in this repository.
+- The final candidate passes, on exact Node 24.18.0 and 22.21.1, first-read
+  30 lessons/102 paragraphs, study-guide frontend 27/27, evidence 62/62,
+  local-progress 24/24, learning-manifest 11/11 and the shared-state browser
+  contract. Both complete `precontent:check` runs passed, including trusted-
+  touch mobile 13/13, Reading 74/74, native projection 22/22 and formal staging
+  5/5. Both runtimes verified all five PDF/extraction source receipts. The
+  native-page gate used a disposable 693-file / 75,196,340-byte subset fetched
+  from the exact tracked live public URLs and checked file-by-file against the
+  canonical inventory; the canonical Drive token returned `invalid_grant`, so
+  this run does not claim a fresh archive readback. Independent final source
+  and UI-state reviews reported no remaining P0-P3.
+- The rebuilt checksum-fixed formal artifact contains 1,223 files, projected
+  aggregate `3eee253710281c30747e7ba6570f8da6cf0ef080836096b5aea8cbf6c336f0f1`
+  and tracked artifact-manifest aggregate
+  `4c46462b0798048ce69eac8b5c0ba2691d9979af41388d2299e7738a3b172f06`
+  over 164,456,389 bytes. The release marker and tracked manifest file hashes
+  are respectively `a53b53fda4908d2380a6c2eda104057b2cfa01c376edf735b3de16445fc40455`
+  and `7333bb8bb23007b5291b5eed08491a2bdc392ed57db3364c96d1a7a7c4e4ef36`.
+- This is a leaf-only `no-new-capability` change. It adds no migration, direct
+  D1 administration, route, binding, Queue/APIS/User Center configuration,
+  learning-manifest membership or native/App pointer change. User Center,
+  APIS, Queue and Companion are `verified_no_change` consumers.
+- Production release is currently fail-closed after checksum-fixed artifact
+  creation. Project policy permits Pages deploy and rollback only through an
+  independently reviewed external UC+YW executor; the current external
+  workflow is explicitly source-only and exits before credentials, and no
+  callable reviewed rollback path has been demonstrated. Manual Pages upload,
+  raw `site/` upload, policy bypass and relabelling the dormant executor are
+  forbidden. A separately reviewed executor activation and rollback readback
+  are required before this candidate can become production.
+
 ## 2026-08-22 mobile and learning-stage production closeout
 
 - PR #18 merged as canonical source

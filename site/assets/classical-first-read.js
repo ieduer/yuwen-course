@@ -26,7 +26,13 @@
   }
 
   async function responseJson(response) {
-    const payload = await response.json().catch(() => ({}));
+    let payload;
+    try {
+      payload = await response.json();
+    } catch (error) {
+      if (error?.name === "AbortError") throw error;
+      payload = {};
+    }
     if (!response.ok) {
       const error = new Error(payload.error || `請求失敗 ${response.status}`);
       error.status = response.status;
@@ -35,13 +41,34 @@
     return payload;
   }
 
-  async function load(lessonId) {
-    const assetResponse = await fetch(`data/classical-first-read/${encodeURIComponent(lessonId)}.json`, {
+  async function fetchWithTimeout(input, init = {}, consume = (response) => response, timeoutMs = 15000) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(input, { ...init, signal: controller.signal });
+      return await consume(response);
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
+  async function load(
+    lessonId,
+    {
+      readAuthority = true,
+      fallbackAuthMode = "offline",
+      canReconcile = () => true,
+    } = {},
+  ) {
+    const assetResult = await fetchWithTimeout(`data/classical-first-read/${encodeURIComponent(lessonId)}.json`, {
       headers: { accept: "application/json" },
       cache: "no-cache",
-    });
-    if (!assetResponse.ok) return null;
-    const asset = await assetResponse.json();
+    }, async (response) => ({
+      ok: response.ok,
+      asset: response.ok ? await response.json() : null,
+    }));
+    if (!assetResult.ok) return null;
+    const asset = assetResult.asset;
     if (asset.schema !== "yw-classical-first-read-v1"
         || Number(asset.schemaVersion) !== 1
         || asset.offsetUnit !== "utf16_code_unit"
@@ -50,19 +77,24 @@
     }
 
     let remote = null;
-    let authMode = "offline";
-    try {
-      const response = await fetch(`/api/reading/first-read/state/${encodeURIComponent(lessonId)}`, {
-        headers: { accept: "application/json" },
-        cache: "no-store",
-      });
-      if (response.status === 401) authMode = "local";
-      else {
-        remote = await responseJson(response);
-        authMode = "authenticated";
+    let authMode = fallbackAuthMode === "local" ? "local" : "offline";
+    if (readAuthority) {
+      try {
+        const stateResult = await fetchWithTimeout(`/api/reading/first-read/state/${encodeURIComponent(lessonId)}`, {
+          headers: { accept: "application/json" },
+          cache: "no-store",
+        }, async (response) => ({
+          status: response.status,
+          payload: response.status === 401 ? null : await responseJson(response),
+        }));
+        if (stateResult.status === 401) authMode = "local";
+        else {
+          remote = stateResult.payload;
+          authMode = "authenticated";
+        }
+      } catch {
+        authMode = "offline";
       }
-    } catch {
-      authMode = "offline";
     }
 
     if (authMode === "authenticated" && (
@@ -90,7 +122,7 @@
       marks: Array.isArray(fallback.marks) ? fallback.marks : [],
       pending: null,
     };
-    if (authMode === "authenticated" && session.submitted) {
+    if (authMode === "authenticated" && session.submitted && canReconcile(session) !== false) {
       void apiPost("/api/reading/first-read/reconcile", session, {}).catch(() => {});
     }
     return session;
@@ -267,13 +299,35 @@
     bindGate(root, session, handlers);
   }
 
+  function handlerSessionIsCurrent(handlers, session) {
+    return handlers.isCurrent?.(session) !== false;
+  }
+
+  function stopForStaleSession(handlers, session) {
+    if (handlerSessionIsCurrent(handlers, session)) return false;
+    try { handlers.onStale?.(session); } catch { /* host cache recovery is best effort */ }
+    return true;
+  }
+
   function mutationId(session, action, extra = "") {
     const stable = [action, session.asset.lessonId, session.asset.textVersionId, extra].join(":");
     return stable.length <= 100 ? stable : `${action}:${crypto.randomUUID()}`;
   }
 
+  function assertValidSubmitReceipt(result, session) {
+    const submittedAt = typeof result?.submittedAt === "string" ? result.submittedAt.trim() : "";
+    if (result?.ok !== true
+        || String(result.lessonId || "") !== session.asset.lessonId
+        || String(result.textVersionId || "") !== session.asset.textVersionId
+        || !submittedAt
+        || !Number.isFinite(Date.parse(submittedAt))) {
+      throw new Error("初讀提交回執不完整，正在核對權威狀態");
+    }
+    return result;
+  }
+
   async function apiPost(path, session, payload) {
-    const response = await fetch(path, {
+    return fetchWithTimeout(path, {
       method: "POST",
       headers: { "content-type": "application/json", accept: "application/json" },
       body: JSON.stringify({
@@ -283,8 +337,18 @@
         elapsedMs: Math.round(elapsedMs(session)),
         ...payload,
       }),
-    });
-    return responseJson(response);
+    }, responseJson);
+  }
+
+  function notifyUnlock(session, handlers) {
+    try {
+      handlers.onUnlock?.(session);
+    } catch (error) {
+      // The source commit has already succeeded. A noncritical host rerender
+      // must not be reported as a failed submit or roll the gate back.
+      try { handlers.onUnlockFailure?.(session, error); } catch { /* fallback unavailable */ }
+      handlers.toast?.("初讀已保存；下一階段正在重新整理");
+    }
   }
 
   function paragraphForPending(session) {
@@ -309,6 +373,7 @@
       ...pending,
       clientMutationId: mutationId(session, "first-read-mark", `${pending.paragraphKey}:${pending.startOffset}:${pending.endOffset}`),
     });
+    if (stopForStaleSession(handlers, session)) return;
     mark = result.mark;
     const existing = session.marks.findIndex((item) => (
       item.paragraphKey === mark.paragraphKey
@@ -327,6 +392,7 @@
     const mark = session.marks.find((item) => item.markId === markId);
     if (!mark) return;
     await apiPost("/api/reading/first-read/mark/delete", session, { markId });
+    if (stopForStaleSession(handlers, session)) return;
     session.marks = session.marks.filter((item) => item.markId !== markId);
     refreshGate(root, session, handlers);
     handlers.onChange?.(session);
@@ -339,17 +405,20 @@
     if ([...cleanSummary].length < 12) throw new Error("初讀感知至少 12 字");
     let result;
     try {
-      result = await apiPost("/api/reading/first-read/submit", session, {
+      result = assertValidSubmitReceipt(await apiPost("/api/reading/first-read/submit", session, {
         summary: cleanSummary,
         clientMutationId: mutationId(session, "first-read-submit"),
-      });
+      }), session);
     } catch (submitError) {
       // The source session is committed before its compensating learning-evidence
       // write. A timeout or post-commit failure is therefore ambiguous: read the
       // authenticated source of truth before leaving the student on a stale gate.
+      if (stopForStaleSession(handlers, session)) return;
       let authoritative = null;
       try {
-        authoritative = await load(session.asset.lessonId);
+        authoritative = await load(session.asset.lessonId, {
+          canReconcile: () => handlerSessionIsCurrent(handlers, session),
+        });
       } catch {
         // Preserve the original submit error when the authority cannot be read.
       }
@@ -360,6 +429,7 @@
           || authoritative.authorityTextDigest !== (session.authorityTextDigest || session.asset.textDigest)) {
         throw submitError;
       }
+      if (stopForStaleSession(handlers, session)) return;
       Object.assign(session, {
         authMode: authoritative.authMode,
         authorityLessonId: authoritative.authorityLessonId,
@@ -374,15 +444,16 @@
         marks: authoritative.marks,
         pending: null,
       });
-      handlers.onUnlock?.(session);
+      notifyUnlock(session, handlers);
       return;
     }
+    if (stopForStaleSession(handlers, session)) return;
     session.submittedAt = result.submittedAt;
     session.summary = cleanSummary;
     session.submitted = true;
     session.elapsedMs = Math.round(elapsedMs(session));
     session.openedAt = performance.now();
-    handlers.onUnlock?.(session);
+    notifyUnlock(session, handlers);
   }
 
   function bindGate(root, session, handlers = {}) {
@@ -395,6 +466,7 @@
       try {
         await savePending(root, session, handlers, new FormData(event.currentTarget).get("guess"));
       } catch (error) {
+        if (stopForStaleSession(handlers, session)) return;
         handlers.toast?.(error.message || "標記未保存");
         if (button) button.disabled = false;
       }
@@ -430,6 +502,7 @@
         session.pending = { paragraphKey, startOffset, endOffset, selectedText };
         await savePending(root, session, handlers, values.get("guess"));
       } catch (error) {
+        if (stopForStaleSession(handlers, session)) return;
         handlers.toast?.(error.message || "標記未保存");
         if (button) button.disabled = false;
       }
@@ -439,6 +512,7 @@
       try {
         await deleteMark(root, session, handlers, button.dataset.firstReadDelete);
       } catch (error) {
+        if (stopForStaleSession(handlers, session)) return;
         handlers.toast?.(error.message || "標記未刪除");
         button.disabled = false;
       }
@@ -450,6 +524,7 @@
       try {
         await submitGate(root, session, handlers, new FormData(event.currentTarget).get("summary"));
       } catch (error) {
+        if (stopForStaleSession(handlers, session)) return;
         handlers.toast?.(error.message || "初讀未提交");
         if (button) button.disabled = false;
       }
@@ -546,11 +621,13 @@
           markId: mark.markId,
           correction,
         });
+        if (stopForStaleSession(handlers, session)) return;
         mark.correction = correction;
         mark.resolutionStatus = "resolved";
         mark.updatedAt = new Date().toISOString();
         handlers.onChange?.(session);
       } catch (error) {
+        if (stopForStaleSession(handlers, session)) return;
         handlers.toast?.(error.message || "訂正未保存");
         if (button) button.disabled = false;
       }

@@ -61,7 +61,7 @@ const PROGRESS_KEY = "yw-matrix-progress-v2";
 const LEGACY_PROGRESS_KEY = "yw-matrix-progress-v1";
 const ANONYMOUS_UI_SCOPE = "anonymous-v2";
 const scopedUiStorageKey = (baseKey, scope) => `${baseKey}:scope:${scope}`;
-const loadSource = section("function loadStoredProgress", "function saveStoredProgress");
+const loadSource = section("function normalizeInterruptedStudyGuideSubmissions", "function saveStoredProgress");
 
 function makeProgressLoader(localStorage, progressOwnerScope = ANONYMOUS_UI_SCOPE) {
   return new Function(
@@ -101,21 +101,306 @@ test("authenticated hydration clears unowned progress until stable owner scope a
   const hydrateSource = section("async function hydrateSharedStateOnce", "function flushSharedState");
   const unknownSessionIndex = hydrateSource.indexOf('typeof session.authenticated !== "boolean"');
   const anonymousIndex = hydrateSource.indexOf("setProgressOwnerScope(ANONYMOUS_UI_SCOPE)");
+  const anonymousResolvedIndex = hydrateSource.indexOf("setInteractionIdentityResolved(true)", anonymousIndex);
   const clearIndices = [...hydrateSource.matchAll(/setProgressOwnerScope\(null\)/g)].map((match) => match.index);
   const authenticatedClearIndex = clearIndices.at(-1);
   const discoveryIndex = hydrateSource.indexOf('identity.api("/api/yw/v1/state")');
-  const ownerIndex = hydrateSource.indexOf("setProgressOwnerScope(discovery.ownerScope)");
+  const hydratedIndex = hydrateSource.indexOf("if (!hydrated.ok)");
+  const ownerIndex = hydrateSource.indexOf("setProgressOwnerScope(ownerScope)");
+  const ownerResolvedIndex = hydrateSource.indexOf("setInteractionIdentityResolved(true)", ownerIndex);
 
   assert.ok(unknownSessionIndex > -1);
   assert.ok(anonymousIndex > unknownSessionIndex);
+  assert.ok(anonymousResolvedIndex > anonymousIndex, "anonymous owner scope must bind before identity becomes interactive");
   assert.equal(clearIndices.length, 2);
   assert.ok(discoveryIndex > authenticatedClearIndex);
-  assert.ok(ownerIndex > discoveryIndex);
+  assert.ok(hydratedIndex > discoveryIndex);
+  assert.ok(ownerIndex > hydratedIndex, "owner scope must remain unresolved until client owner re-verification succeeds");
+  assert.ok(ownerResolvedIndex > ownerIndex, "authenticated owner scope must bind before identity becomes interactive");
+  assert.match(
+    hydrateSource,
+    /api:\s*\(path, options\)\s*=>\s*waitForSharedStateIdentity\(\s*\(\)\s*=>\s*identity\.api\(path, options\)/,
+    "owner rechecks and mutation receipts must use the same bounded identity request",
+  );
+});
+
+function sharedStateIdentityTimeoutHarness(identity) {
+  const waitSource = namedFunction("waitForSharedStateIdentity");
+  const hydrateSource = `async ${namedFunction("hydrateSharedStateOnce")}`;
+  const timers = [];
+  const controls = new Function(
+    "deps",
+    `const window = { BdfzIdentity: deps.identity };
+     let sharedStateHydrationEpoch = 0;
+     const SHARED_STATE_IDENTITY_TIMEOUT_MS = 1;
+     const setTimeout = deps.setTimeout;
+     const clearTimeout = deps.clearTimeout;
+     const setAuthenticatedState = deps.noop;
+     const setInteractionIdentityResolved = deps.noop;
+     const setProgressOwnerScope = deps.noop;
+     const loadSharedStateModule = async () => ({
+       normalizeSharedStateResponse: () => null,
+     });
+     ${waitSource}
+     ${hydrateSource}
+     return { hydrate: () => hydrateSharedStateOnce(0) };`,
+  )({
+    identity,
+    noop() {},
+    setTimeout(callback, delay) {
+      const timer = { callback, delay, cleared: false };
+      timers.push(timer);
+      return timer;
+    },
+    clearTimeout(timer) {
+      if (timer) timer.cleared = true;
+    },
+  });
+  return { controls, timers };
+}
+
+test("a never-settling identity session request times out as retryable hydration", async () => {
+  const harness = sharedStateIdentityTimeoutHarness({
+    getSession: () => new Promise(() => {}),
+    api: async () => null,
+  });
+  const hydration = harness.controls.hydrate();
+  assert.equal(harness.timers.length, 1);
+  harness.timers[0].callback();
+  assert.equal(await hydration, "retry");
+  assert.equal(harness.timers[0].cleared, true);
+});
+
+test("a never-settling owner discovery request times out as retryable hydration", async () => {
+  let stateReads = 0;
+  const harness = sharedStateIdentityTimeoutHarness({
+    getSession: async () => ({ authenticated: true }),
+    api: () => {
+      stateReads += 1;
+      return new Promise(() => {});
+    },
+  });
+  const hydration = harness.controls.hydrate();
+  for (let turn = 0; turn < 20 && stateReads === 0; turn += 1) await Promise.resolve();
+  assert.equal(stateReads, 1);
+  const discoveryTimer = harness.timers.find((timer) => !timer.cleared);
+  assert.ok(discoveryTimer, "owner discovery must have an active bounded timer");
+  discoveryTimer.callback();
+  assert.equal(await hydration, "retry");
+  assert.equal(discoveryTimer.cleared, true);
+});
+
+test("a hanging shared-state module times out and the next attempt uses a fresh URL", async () => {
+  const loaderSource = namedFunction("loadSharedStateModule");
+  const timers = [];
+  const urls = [];
+  let imports = 0;
+  const controls = new Function(
+    "deps",
+    `let sharedStateModulePromise = null;
+     let sharedStateModuleAttempt = 0;
+     const SHARED_STATE_MODULE_URL = "https://yw.bdfz.net/assets/yw-shared-state.js?v=test";
+     const SHARED_STATE_MODULE_TIMEOUT_MS = 1;
+     const importSharedStateModule = deps.importSharedStateModule;
+     const setTimeout = deps.setTimeout;
+     const clearTimeout = deps.clearTimeout;
+     ${loaderSource}
+     return { load: loadSharedStateModule, pending: () => sharedStateModulePromise };`,
+  )({
+    importSharedStateModule(url) {
+      urls.push(url);
+      imports += 1;
+      return imports === 1 ? new Promise(() => {}) : Promise.resolve({ ready: true });
+    },
+    setTimeout(callback) {
+      const timer = { callback, cleared: false };
+      timers.push(timer);
+      return timer;
+    },
+    clearTimeout(timer) {
+      if (timer) timer.cleared = true;
+    },
+  });
+
+  const first = controls.load();
+  assert.equal(urls.length, 1);
+  timers[0].callback();
+  assert.equal(await first, null);
+  assert.equal(controls.pending(), null, "timeout must release the cached pending promise");
+  assert.deepEqual(await controls.load(), { ready: true });
+  assert.equal(urls.length, 2);
+  assert.notEqual(urls[0], urls[1]);
+  assert.match(urls[1], /[?&]retry=1$/);
+});
+
+test("shared-state hydration retries in-place after a retryable failure", async () => {
+  const retrySource = [
+    namedFunction("clearSharedStateRetry"),
+    namedFunction("scheduleSharedStateRetry"),
+    namedFunction("flushSharedState"),
+  ].join("\n");
+  const timers = [];
+  let hydrationCalls = 0;
+  const controls = new Function(
+    "deps",
+    `let sharedStateRefreshPromise = null;
+     let sharedStateRefreshRequested = false;
+     let sharedStateHydrationEpoch = 0;
+     let sharedStateRetryTimer = null;
+     let sharedStateRetryAttempt = 0;
+     const SHARED_STATE_RETRY_DELAYS_MS = [1, 2, 3, 4];
+     const hydrateSharedStateOnce = deps.hydrateSharedStateOnce;
+     const setTimeout = deps.setTimeout;
+     const clearTimeout = deps.clearTimeout;
+     ${retrySource}
+     return {
+       flush: flushSharedState,
+       pending: () => sharedStateRefreshPromise,
+       retryAttempt: () => sharedStateRetryAttempt,
+     };`,
+  )({
+    async hydrateSharedStateOnce() {
+      hydrationCalls += 1;
+      return hydrationCalls === 1 ? "retry" : "ok";
+    },
+    setTimeout(callback, delay) {
+      const timer = { callback, delay, cleared: false };
+      timers.push(timer);
+      return timer;
+    },
+    clearTimeout(timer) {
+      if (timer) timer.cleared = true;
+    },
+  });
+
+  await controls.flush();
+  assert.equal(hydrationCalls, 1);
+  assert.equal(controls.pending(), null, "retryable hydration must release the active refresh promise");
+  const retry = timers.find((timer) => !timer.cleared);
+  assert.ok(retry, "retryable hydration failure must schedule a same-page retry");
+  retry.callback();
+  await Promise.resolve();
+  await controls.pending();
+  assert.equal(hydrationCalls, 2);
+  assert.equal(controls.retryAttempt(), 0, "successful hydration resets the bounded retry budget");
+
+  const hydrateSource = section("async function hydrateSharedStateOnce", "function clearSharedStateRetry");
+  assert.match(hydrateSource, /requestStillCurrent/);
+  assert.match(hydrateSource, /identity !== window\.BdfzIdentity/);
+  assert.match(hydrateSource, /client !== sharedStateClient/);
+});
+
+test("first-read sessions are visible only inside their resolved owner scope", () => {
+  const helperSource = section("function activeFirstReadOwnerScope", "function invalidateFirstReadSessions");
+  const state = { firstReads: new Map() };
+  const controls = new Function(
+    "state",
+    `let interactionIdentityResolved = false;
+     let progressOwnerScope = "owner-a";
+     ${helperSource}
+     return {
+       get: firstReadForLesson,
+       current: firstReadCallbackIsCurrent,
+       setIdentity: (value) => { interactionIdentityResolved = value; },
+       setOwner: (value) => { progressOwnerScope = value; },
+     };`,
+  )(state);
+  const sessionA = { ownerScope: "owner-a", summary: "owner-a-private" };
+  state.firstReads.set("lesson-1474", sessionA);
+  assert.equal(controls.get("lesson-1474"), null, "unresolved identity must hide a cached private session");
+  controls.setIdentity(true);
+  assert.equal(controls.get("lesson-1474"), sessionA);
+  assert.equal(controls.current("lesson-1474", sessionA), false, "a background lesson is never current");
+  controls.setOwner(null);
+  assert.equal(controls.get("lesson-1474"), null);
+  controls.setOwner("owner-b");
+  assert.equal(controls.get("lesson-1474"), null, "owner B must not see owner A's first-read state");
+});
+
+test("first-read authority loading is identity-gated and stale loads cannot enter the cache", () => {
+  const showLessonSource = section("async function showLesson", "function fieldValue");
+  assert.match(showLessonSource, /readAuthority: Boolean\([\s\S]*interactionIdentityResolved[\s\S]*firstReadOwnerScope !== ANONYMOUS_UI_SCOPE/);
+  assert.match(showLessonSource, /fallbackAuthMode:[\s\S]*ANONYMOUS_UI_SCOPE[\s\S]*\? "local"[\s\S]*: "offline"/);
+  assert.match(showLessonSource, /authorityGeneration !== firstReadAuthorityGeneration/);
+  assert.match(showLessonSource, /firstReadOwnerScope !== activeFirstReadOwnerScope\(\)/);
+  assert.ok(
+    showLessonSource.indexOf("authorityGeneration !== firstReadAuthorityGeneration")
+      < showLessonSource.indexOf("state.firstReads.set(id, firstRead)"),
+    "owner/generation guards must run before a private session enters the cache",
+  );
+});
+
+test("a stale first-read callback invalidates same-owner cache and reloads the visible lesson", async () => {
+  const helperSource = namedFunction("invalidateStaleFirstReadAuthority");
+  const stale = { ownerScope: "owner-a", submitted: false };
+  const replacement = { ownerScope: "owner-a", submitted: false };
+  const state = {
+    current: { id: "lesson-1474" },
+    firstReads: new Map([["lesson-1474", replacement]]),
+  };
+  const queued = [];
+  const calls = { renders: 0, reloads: 0 };
+  const controls = new Function(
+    "state",
+    "deps",
+    `let firstReadAuthorityGeneration = 4;
+     let ownerScope = "owner-a";
+     const activeFirstReadOwnerScope = () => ownerScope;
+     const renderLesson = () => { deps.calls.renders += 1; };
+     const queueMicrotask = (callback) => deps.queued.push(callback);
+     const showLesson = async () => { deps.calls.reloads += 1; };
+     ${helperSource}
+     return {
+       invalidate: invalidateStaleFirstReadAuthority,
+       setOwner: (owner) => { ownerScope = owner; },
+     };`,
+  )(state, { queued, calls });
+  assert.equal(controls.invalidate("lesson-1474", stale, "owner-a"), true);
+  assert.equal(state.firstReads.has("lesson-1474"), false);
+  assert.equal(calls.renders, 1);
+  assert.equal(queued.length, 1);
+  queued.shift()();
+  await Promise.resolve();
+  assert.equal(calls.reloads, 1);
+
+  state.firstReads.set("lesson-1474", { ownerScope: "owner-b" });
+  controls.setOwner("owner-b");
+  assert.equal(controls.invalidate("lesson-1474", stale, "owner-a"), false);
+  assert.equal(state.firstReads.get("lesson-1474").ownerScope, "owner-b");
+
+  const controller = await readFile(new URL("../site/assets/classical-first-read.js", import.meta.url), "utf8");
+  assert.match(controller, /handlers\.onStale\?\.\(session\)/);
+  const annotated = section("async function completeAnnotatedReading", "function absoluteResourceUrl");
+  assert.match(annotated, /invalidateStaleFirstReadAuthority\(lesson\.id, session, ownerScope\)/);
+});
+
+test("owner-scoped persistence failure is contained and cannot abort a committed UI transition", () => {
+  const saveSource = namedFunction("saveStoredProgress");
+  const saveStoredProgress = new Function(
+    "localStorage",
+    "progressOwnerScope",
+    "interactionIdentityResolved",
+    "scopedUiStorageKey",
+    "PROGRESS_KEY",
+    "progressSnapshotForStorage",
+    "state",
+    `${saveSource}; return saveStoredProgress;`,
+  )(
+    { setItem() { throw new DOMException("quota", "QuotaExceededError"); } },
+    "owner-a",
+    true,
+    scopedUiStorageKey,
+    PROGRESS_KEY,
+    (progress) => progress,
+    { progress: { "lesson-1474": { firstRead: { done: true } } } },
+  );
+  assert.doesNotThrow(() => saveStoredProgress());
+  assert.equal(saveStoredProgress(), false);
 });
 
 const saveEvaluationSource = section("async function saveEvaluation", "function bindCheckStage");
 
-function evaluationHarness(evidence) {
+function evaluationHarness(evidence, { identityResolved = true, submissionMode = "formal" } = {}) {
   const state = { current: { id: "lesson-1" }, progress: { "lesson-1": {} } };
   const calls = { saved: 0, synced: 0, toasts: [] };
   const lessonProgress = (id = state.current?.id) => (state.progress[id] ||= {});
@@ -124,22 +409,26 @@ function evaluationHarness(evidence) {
     "lessonProgress",
     "fieldValue",
     "syncProgress",
-    "recordLearning",
+    "recordLearningForLesson",
     "saveStoredProgress",
     "toast",
     "state",
     "progressOwnerScope",
+    "interactionIdentityResolved",
+    "interactionSubmissionMode",
     `${saveEvaluationSource}; return saveEvaluation;`,
   )(
     { checkStage: { querySelector: () => null } },
     lessonProgress,
     () => "理由",
     () => { calls.synced += 1; },
-    async () => evidence,
+    async (...args) => typeof evidence === "function" ? evidence(...args) : evidence,
     () => { calls.saved += 1; return true; },
     (message) => calls.toasts.push(message),
     state,
     "owner-a",
+    identityResolved,
+    () => submissionMode,
   );
   return { saveEvaluation, state, calls };
 }
@@ -165,6 +454,102 @@ test("evaluation reports synchronized only after successful evidence response", 
   assert.equal(result.synced, true);
   assert.equal(harness.state.progress["lesson-1"].evaluation.synced, true);
   assert.match(harness.calls.toasts.at(-1), /已同步為 88%/);
+});
+
+test("out-of-order evaluation responses cannot overwrite the newest local rating", async () => {
+  let resolveFirst;
+  let resolveSecond;
+  let call = 0;
+  const firstEvidence = new Promise((resolve) => { resolveFirst = resolve; });
+  const secondEvidence = new Promise((resolve) => { resolveSecond = resolve; });
+  const harness = evaluationHarness(() => {
+    call += 1;
+    return call === 1 ? firstEvidence : secondEvidence;
+  });
+  const first = harness.saveEvaluation(20, { reason: "第一個評價" });
+  const second = harness.saveEvaluation(85, { reason: "較新的評價" });
+  resolveSecond({ ok: true, status: 200 });
+  await second;
+  resolveFirst({ ok: false, status: 503, reason: "unavailable" });
+  await first;
+  assert.equal(harness.state.progress["lesson-1"].evaluation.rating, 85);
+  assert.equal(harness.state.progress["lesson-1"].evaluation.synced, true);
+
+  const binding = section("$$('[data-interest-slider]'", "$$('[data-quiz-option]'");
+  assert.match(binding, /clearTimeout\(saveEvaluation\.timer\)/);
+  assert.match(binding, /evaluationSaveAttempt/);
+  const reasonBinding = section("const reason = els.checkStage.querySelector", "function openLexicon");
+  assert.match(reasonBinding, /String\(liveRating\) !== String\(rating\)/);
+  assert.match(reasonBinding, /reason\.value !== evaluationReason/);
+});
+
+test("identity-pending mutations perform zero storage writes and zero evidence posts", async () => {
+  assert.match(source, /let progressOwnerScope = null/);
+  const saveSource = namedFunction("saveStoredProgress");
+  let storageWrites = 0;
+  const saveStoredProgress = new Function(
+    "localStorage",
+    "progressOwnerScope",
+    "interactionIdentityResolved",
+    "scopedUiStorageKey",
+    "PROGRESS_KEY",
+    "progressSnapshotForStorage",
+    "state",
+    `${saveSource}; return saveStoredProgress;`,
+  )(
+    { setItem() { storageWrites += 1; } },
+    "owner-a",
+    false,
+    scopedUiStorageKey,
+    PROGRESS_KEY,
+    (progress) => progress,
+    { progress: { lesson: { read: { done: true } } } },
+  );
+  assert.equal(saveStoredProgress(), false);
+  assert.equal(storageWrites, 0);
+
+  let evidencePosts = 0;
+  const recordSource = namedFunction("recordLearningForLesson");
+  const recordLearningForLesson = new Function(
+    "window",
+    "learningMutationOwnerResolved",
+    `${recordSource}; return recordLearningForLesson;`,
+  )(
+    { YwLearningEvidence: { record() { evidencePosts += 1; } } },
+    () => false,
+  );
+  assert.equal((await recordLearningForLesson("evaluation", "lesson-1")).reason, "identity-unavailable");
+  assert.equal(evidencePosts, 0);
+
+  const pendingEvaluation = evaluationHarness({ ok: true }, { identityResolved: false });
+  const result = await pendingEvaluation.saveEvaluation(75);
+  assert.equal(result.savedLocal, false);
+  assert.equal(pendingEvaluation.state.progress["lesson-1"].evaluation, undefined);
+  assert.equal(pendingEvaluation.calls.synced, 0);
+
+  const renderSource = namedFunction("renderCheckStage");
+  assert.match(renderSource, /identityNoticeMode === "pending" \? "inert aria-disabled/);
+  const vocabBinding = section("$$('[data-quiz-option]'", "$$('[data-quiz-lookup]'");
+  assert.ok(
+    vocabBinding.indexOf("learningMutationOwnerResolved(ownerScope)")
+      < vocabBinding.indexOf("const progress = lessonProgress(lessonId)"),
+    "vocabulary must reject pending identity before creating mutable quiz state",
+  );
+});
+
+test("anonymous unpublished evaluation stays local while formal evaluation remains login-gated", async () => {
+  const local = evaluationHarness({ ok: true }, { submissionMode: "local" });
+  const localResult = await local.saveEvaluation(67);
+  assert.equal(localResult.savedLocal, true);
+  assert.equal(localResult.synced, false);
+  assert.equal(local.state.progress["lesson-1"].evaluation.evidenceStatus, "local_practice");
+  assert.equal(local.calls.synced, 1);
+
+  const loginRequired = evaluationHarness({ ok: true }, { submissionMode: "login_required" });
+  const loginResult = await loginRequired.saveEvaluation(67);
+  assert.equal(loginResult.savedLocal, false);
+  assert.equal(loginRequired.state.progress["lesson-1"].evaluation, undefined);
+  assert.equal(loginRequired.calls.synced, 0);
 });
 
 test("local completion labels do not claim formative mastery", () => {
@@ -307,9 +692,11 @@ test("local-practice completion never emits hidden lesson-completed learning evi
     "progressPercent",
     "lessonProgress",
     "completionEventEligible",
-    "recordLearning",
+    "recordLearningForLesson",
     "trackFor",
     "checkpointDone",
+    "progressOwnerScope",
+    "learningMutationOwnerResolved",
     `${syncSource}; return syncProgress;`,
   )(
     () => { calls.saved += 1; },
@@ -323,6 +710,8 @@ test("local-practice completion never emits hidden lesson-completed learning evi
     async () => { calls.learning += 1; return { ok: true }; },
     trackFor,
     checkpointDone,
+    "owner-local",
+    () => true,
   );
   syncProgress({ event: true });
   await Promise.resolve();

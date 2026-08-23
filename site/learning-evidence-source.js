@@ -1002,6 +1002,7 @@ export async function assertLearningSubmissionAllowed({
     return {
       allowed: true,
       deduped: true,
+      resourceKey: context.resourceKey,
       sourceEventId: existing.source_event_id,
       attemptNo: Number(existing.attempt_no),
       eligibilityStatus: clean(existing.eligibility_status, 32),
@@ -1023,6 +1024,7 @@ export async function assertLearningSubmissionAllowed({
     return {
       allowed: true,
       deduped: true,
+      resourceKey: context.resourceKey,
       sourceEventId: committed.source_event_id,
       attemptNo: Number(committed.attempt_no),
       eligibilityStatus: clean(committed.eligibility_status, 32),

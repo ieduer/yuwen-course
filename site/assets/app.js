@@ -7,9 +7,16 @@ const MASTERY_COLLAPSED_KEY = "yw-matrix-mastery-collapsed-v1";
 const FONT_STEPS = [0.92, 1, 1.12, 1.26, 1.42, 1.6];
 const DEFAULT_FONT_INDEX = 3;
 const STAGE_MARKS = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+const STUDY_GUIDE_CATALOG_RETRY_DELAYS_MS = [1500, 4000, 10000, 30000];
+const STUDY_GUIDE_CATALOG_TIMEOUT_MS = 12000;
+const SHARED_STATE_MODULE_TIMEOUT_MS = 12000;
+const SHARED_STATE_IDENTITY_TIMEOUT_MS = 12000;
+const SHARED_STATE_RETRY_DELAYS_MS = [1500, 4000, 10000, 30000];
 const SHARED_STATE_ASSET_VERSION = "20260730-owner-v1";
 const ANONYMOUS_UI_SCOPE = "anonymous-v2";
 const compactAtlasMedia = matchMedia("(max-width: 1180px)");
+const compactToolsMedia = matchMedia("(max-width: 900px)");
+let atlasInteractionGeneration = 0;
 const APP_SCRIPT_URL = document.currentScript?.src || new URL("assets/app.js", document.baseURI).href;
 const SHARED_STATE_MODULE_URL = new URL(
   `yw-shared-state.js?v=${SHARED_STATE_ASSET_VERSION}`,
@@ -21,13 +28,22 @@ const LESSON_BLUEPRINT_RULES_URL = new URL(
 ).href;
 
 let sharedStateClient = null;
+let sharedStateClientIdentity = null;
 let sharedStateModulePromise = null;
+let sharedStateModuleAttempt = 0;
 let sharedStateRefreshPromise = null;
+let sharedStateHydrationEpoch = 0;
+let sharedStateRetryTimer = null;
+let sharedStateRetryAttempt = 0;
+let studyGuideCatalogRefreshPromise = null;
+let studyGuideCatalogRetryTimer = null;
+let studyGuideCatalogRetryAttempt = 0;
 let sharedStateRefreshRequested = false;
 let lessonBlueprintRules = null;
 let sharedStateGeneration = 0;
+let firstReadAuthorityGeneration = 0;
 let sharedStateUiScope = ANONYMOUS_UI_SCOPE;
-let progressOwnerScope = ANONYMOUS_UI_SCOPE;
+let progressOwnerScope = null;
 let interactionIdentityResolved = false;
 let pendingSharedReadingPosition = null;
 let pendingSharedTextScale = null;
@@ -52,6 +68,21 @@ function bindUnownedPendingState(ownerScope, generation) {
     pendingSharedTextScale = {
       ...pendingSharedTextScale,
       ownerScope,
+      generation,
+    };
+  }
+}
+
+function rebindOwnedPendingState(ownerScope, generation) {
+  if (pendingSharedReadingPosition?.ownerScope === ownerScope) {
+    pendingSharedReadingPosition = {
+      ...pendingSharedReadingPosition,
+      generation,
+    };
+  }
+  if (pendingSharedTextScale?.ownerScope === ownerScope) {
+    pendingSharedTextScale = {
+      ...pendingSharedTextScale,
       generation,
     };
   }
@@ -116,6 +147,8 @@ const state = {
   vocabIndex: { activeItemIds: {} },
   formalVocabResourceKeys: new Set(),
   formalInteractionResourceKeys: new Set(),
+  interactionRequestsInFlight: new Set(),
+  vocabAttemptsInFlight: new Set(),
   firstReads: new Map(),
   studyGuideLessons: new Map(),
   studyGuideCatalogStatus: "loading",
@@ -134,7 +167,6 @@ const state = {
   activeAuthorId: "",
 };
 
-const interactionMutationIds = new Map();
 const noteAnimations = new WeakMap();
 
 const $ = (selector, root = document) => root.querySelector(selector);
@@ -220,6 +252,30 @@ function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
 
+function normalizeInterruptedStudyGuideSubmissions(progress) {
+  if (!progress || typeof progress !== "object") return progress;
+  for (const lesson of Object.values(progress)) {
+    const records = lesson?.studyGuide?.items;
+    if (!records || typeof records !== "object") continue;
+    for (const [itemKey, record] of Object.entries(records)) {
+      if (!record || typeof record !== "object" || record.submitting !== true) continue;
+      records[itemKey] = {
+        ...record,
+        submitting: false,
+        pendingSync: true,
+        lastError: record.lastError || "上次評閱在完成前中斷，請用同一答案重試",
+        lastErrorCode: record.lastErrorCode || "learning_evaluator_interrupted",
+      };
+    }
+  }
+  return progress;
+}
+
+function progressSnapshotForStorage(progress) {
+  const snapshot = JSON.parse(JSON.stringify(progress || {}));
+  return normalizeInterruptedStudyGuideSubmissions(snapshot);
+}
+
 function loadStoredProgress(scope = progressOwnerScope) {
   if (!scope) return {};
   try {
@@ -230,19 +286,29 @@ function loadStoredProgress(scope = progressOwnerScope) {
       if (current !== null) localStorage.setItem(storageKey, current);
     }
     const parsed = JSON.parse(current || "{}");
-    return parsed && typeof parsed === "object" ? parsed : {};
+    return parsed && typeof parsed === "object"
+      ? normalizeInterruptedStudyGuideSubmissions(parsed)
+      : {};
   } catch {
     return {};
   }
 }
 
 function saveStoredProgress() {
-  if (!progressOwnerScope) return false;
-  localStorage.setItem(
-    scopedUiStorageKey(PROGRESS_KEY, progressOwnerScope),
-    JSON.stringify(state.progress),
-  );
-  return true;
+  if (!interactionIdentityResolved || !progressOwnerScope) return false;
+  try {
+    localStorage.setItem(
+      scopedUiStorageKey(PROGRESS_KEY, progressOwnerScope),
+      JSON.stringify(progressSnapshotForStorage(state.progress)),
+    );
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function learningMutationOwnerResolved(ownerScope = progressOwnerScope) {
+  return interactionIdentityResolved === true && Boolean(ownerScope);
 }
 
 function refreshLocalProgressViews() {
@@ -253,11 +319,81 @@ function refreshLocalProgressViews() {
   renderMastery();
 }
 
+function activeFirstReadOwnerScope() {
+  return interactionIdentityResolved && progressOwnerScope ? progressOwnerScope : null;
+}
+
+function firstReadForLesson(lessonId) {
+  const session = state.firstReads.get(lessonId);
+  return session?.ownerScope === activeFirstReadOwnerScope() ? session : null;
+}
+
+function firstReadCallbackIsCurrent(lessonId, session, ownerScope = session?.ownerScope) {
+  return Boolean(
+    lessonId
+    && state.current?.id === lessonId
+    && ownerScope === activeFirstReadOwnerScope()
+    && firstReadForLesson(lessonId) === session
+  );
+}
+
+function invalidateStaleFirstReadAuthority(lessonId, session, ownerScope = session?.ownerScope) {
+  const cached = state.firstReads.get(lessonId);
+  if (
+    !lessonId
+    || ownerScope !== activeFirstReadOwnerScope()
+    || !cached
+    || cached.ownerScope !== ownerScope
+  ) return false;
+  state.firstReads.delete(lessonId);
+  const lesson = state.current?.id === lessonId ? state.current : null;
+  if (lesson) {
+    firstReadAuthorityGeneration += 1;
+    const generation = firstReadAuthorityGeneration;
+    renderLesson(lesson);
+    queueMicrotask(() => {
+      if (
+        generation !== firstReadAuthorityGeneration
+        || state.current?.id !== lessonId
+        || ownerScope !== activeFirstReadOwnerScope()
+      ) return;
+      void showLesson(lessonId, {
+        push: false,
+        recordEvidence: false,
+        syncSharedState: false,
+      });
+    });
+  }
+  return true;
+}
+
+function invalidateFirstReadSessions({ reload = true } = {}) {
+  firstReadAuthorityGeneration += 1;
+  const generation = firstReadAuthorityGeneration;
+  state.firstReads.clear();
+  const lesson = state.current;
+  if (!lesson || sourceModeFor(lesson) !== "classical" || !state.manifest) return;
+  // Remove the prior owner's private state from the DOM synchronously. The
+  // replacement session is loaded only after the new identity scope settles.
+  renderLesson(lesson);
+  if (!reload) return;
+  const lessonId = lesson.id;
+  queueMicrotask(() => {
+    if (generation !== firstReadAuthorityGeneration || state.current?.id !== lessonId) return;
+    void showLesson(lessonId, {
+      push: false,
+      recordEvidence: false,
+      syncSharedState: false,
+    });
+  });
+}
+
 function setProgressOwnerScope(scope) {
   const nextScope = scope || null;
   if (progressOwnerScope === nextScope) return;
   progressOwnerScope = nextScope;
   state.progress = loadStoredProgress(nextScope);
+  invalidateFirstReadSessions();
   refreshLocalProgressViews();
 }
 
@@ -265,6 +401,7 @@ function setInteractionIdentityResolved(resolved) {
   const next = resolved === true;
   if (interactionIdentityResolved === next) return;
   interactionIdentityResolved = next;
+  invalidateFirstReadSessions();
   refreshLocalProgressViews();
 }
 
@@ -294,8 +431,37 @@ function setAuthenticatedState(authenticated) {
   els.authLogin.hidden = Boolean(authenticated);
 }
 
+function importSharedStateModule(moduleUrl) {
+  return import(moduleUrl);
+}
+
+function waitForSharedStateIdentity(request) {
+  let timeout = null;
+  const attempted = Promise.resolve().then(request).catch(() => null);
+  const timedOut = new Promise((resolve) => {
+    timeout = setTimeout(() => resolve(null), SHARED_STATE_IDENTITY_TIMEOUT_MS);
+  });
+  return Promise.race([attempted, timedOut]).finally(() => clearTimeout(timeout));
+}
+
 function loadSharedStateModule() {
-  sharedStateModulePromise ||= import(SHARED_STATE_MODULE_URL).catch(() => null);
+  if (!sharedStateModulePromise) {
+    const attempt = sharedStateModuleAttempt++;
+    const moduleUrl = attempt === 0
+      ? SHARED_STATE_MODULE_URL
+      : `${SHARED_STATE_MODULE_URL}&retry=${attempt}`;
+    let timeout = null;
+    const imported = importSharedStateModule(moduleUrl).catch(() => null);
+    const timedOut = new Promise((resolve) => {
+      timeout = setTimeout(() => resolve(null), SHARED_STATE_MODULE_TIMEOUT_MS);
+    });
+    const attemptPromise = Promise.race([imported, timedOut]).then((module) => {
+      clearTimeout(timeout);
+      if (!module && sharedStateModulePromise === attemptPromise) sharedStateModulePromise = null;
+      return module;
+    });
+    sharedStateModulePromise = attemptPromise;
+  }
   return sharedStateModulePromise;
 }
 
@@ -496,6 +662,7 @@ async function persistPendingSharedState(client, ownerScope) {
 async function applyAnonymousSharedState() {
   sharedStateGeneration += 1;
   sharedStateClient = null;
+  sharedStateClientIdentity = null;
   sharedStateUiScope = ANONYMOUS_UI_SCOPE;
   if (pendingSharedReadingPosition?.ownerScope === null) {
     writeScopedUiValue(
@@ -548,46 +715,63 @@ async function applyAnonymousSharedState() {
   }
 }
 
-async function hydrateSharedStateOnce() {
+async function hydrateSharedStateOnce(hydrationEpoch = sharedStateHydrationEpoch) {
+  const requestStillCurrent = () => hydrationEpoch === sharedStateHydrationEpoch;
   const deadline = Date.now() + 6000;
   while (!window.BdfzIdentity && Date.now() < deadline) {
     await new Promise((resolve) => setTimeout(resolve, 120));
   }
+  if (!requestStillCurrent()) return "stale";
   const identity = window.BdfzIdentity;
-  if (!identity?.api) return;
-  const session = await identity.getSession?.().catch(() => null);
+  if (!identity?.api) return "retry";
+  const session = await waitForSharedStateIdentity(() => identity.getSession?.());
+  if (!requestStillCurrent() || identity !== window.BdfzIdentity) return "stale";
   if (!session || typeof session.authenticated !== "boolean") {
     setAuthenticatedState(false);
     setInteractionIdentityResolved(false);
     setProgressOwnerScope(null);
-    return;
+    return "retry";
   }
   if (!session.authenticated) {
     setAuthenticatedState(false);
-    setInteractionIdentityResolved(true);
     setProgressOwnerScope(ANONYMOUS_UI_SCOPE);
+    setInteractionIdentityResolved(true);
     await applyAnonymousSharedState();
-    return;
+    return requestStillCurrent() ? "ok" : "stale";
   }
 
   setAuthenticatedState(true);
   setInteractionIdentityResolved(false);
   setProgressOwnerScope(null);
   const sharedState = await loadSharedStateModule();
-  if (!sharedState) return;
-  const discoveryPayload = await identity.api("/api/yw/v1/state").catch(() => null);
+  if (!requestStillCurrent() || identity !== window.BdfzIdentity) return "stale";
+  if (!sharedState) return "retry";
+  const discoveryPayload = await waitForSharedStateIdentity(
+    () => identity.api("/api/yw/v1/state"),
+  );
+  if (!requestStillCurrent() || identity !== window.BdfzIdentity) return "stale";
   const discovery = sharedState.normalizeSharedStateResponse(discoveryPayload);
-  if (!discovery?.ownerScope) return;
-  setInteractionIdentityResolved(true);
-  setProgressOwnerScope(discovery.ownerScope);
+  if (!discovery?.ownerScope) return "retry";
 
-  if (sharedStateClient?.ownerScope !== discovery.ownerScope) {
+  if (
+    sharedStateClient?.ownerScope !== discovery.ownerScope
+    || sharedStateClientIdentity !== identity
+  ) {
+    const replacingSameOwner = (
+      sharedStateClient?.ownerScope === discovery.ownerScope
+      && sharedStateClientIdentity !== identity
+    );
     discardPendingStateForOtherOwner(discovery.ownerScope);
     sharedStateGeneration += 1;
     const generation = sharedStateGeneration;
     bindUnownedPendingState(discovery.ownerScope, generation);
-    sharedStateClient = sharedState.createSharedStateClient({
-      api: (path, options) => identity.api(path, options),
+    if (replacingSameOwner) {
+      rebindOwnedPendingState(discovery.ownerScope, generation);
+    }
+    const replacementClient = sharedState.createSharedStateClient({
+      api: (path, options) => waitForSharedStateIdentity(
+        () => identity.api(path, options),
+      ),
       storage: localStorage,
       storageKey: `yw-shared-state-outbox/2:${discovery.ownerScope}`,
       ownerScope: discovery.ownerScope,
@@ -596,6 +780,8 @@ async function hydrateSharedStateOnce() {
         { ...context, generation },
       ),
     });
+    sharedStateClient = replacementClient;
+    sharedStateClientIdentity = identity;
   } else {
     bindUnownedPendingState(discovery.ownerScope, sharedStateGeneration);
   }
@@ -605,20 +791,53 @@ async function hydrateSharedStateOnce() {
     pendingKinds: pendingSharedKinds(ownerScope),
     initialState: discoveryPayload,
   });
-  if (!hydrated.ok || client !== sharedStateClient) return;
+  if (!requestStillCurrent() || client !== sharedStateClient) return "stale";
+  if (!hydrated.ok) return "retry";
+  // Discovery alone is not enough to make learning controls interactive. The
+  // client re-verifies the owner before and after applying the projection;
+  // only that completed contract may bind private progress to this account.
+  setProgressOwnerScope(ownerScope);
+  setInteractionIdentityResolved(true);
   await persistPendingSharedState(client, ownerScope);
+  return requestStillCurrent() ? "ok" : "stale";
+}
+
+function clearSharedStateRetry() {
+  if (sharedStateRetryTimer !== null) {
+    clearTimeout(sharedStateRetryTimer);
+    sharedStateRetryTimer = null;
+  }
+  sharedStateRetryAttempt = 0;
+}
+
+function scheduleSharedStateRetry() {
+  if (
+    sharedStateRetryTimer !== null
+    || sharedStateRetryAttempt >= SHARED_STATE_RETRY_DELAYS_MS.length
+  ) return false;
+  const delay = SHARED_STATE_RETRY_DELAYS_MS[sharedStateRetryAttempt];
+  sharedStateRetryAttempt += 1;
+  sharedStateRetryTimer = setTimeout(() => {
+    sharedStateRetryTimer = null;
+    void flushSharedState();
+  }, delay);
+  return true;
 }
 
 function flushSharedState() {
+  sharedStateHydrationEpoch += 1;
   sharedStateRefreshRequested = true;
   if (sharedStateRefreshPromise) return sharedStateRefreshPromise;
   sharedStateRefreshPromise = (async () => {
     while (sharedStateRefreshRequested) {
       sharedStateRefreshRequested = false;
       try {
-        await hydrateSharedStateOnce();
+        const result = await hydrateSharedStateOnce(sharedStateHydrationEpoch);
+        if (result === "ok") clearSharedStateRetry();
+        else if (result === "retry") scheduleSharedStateRetry();
       } catch {
         // The local textbook remains available while shared state is unavailable.
+        scheduleSharedStateRetry();
       }
     }
   })().finally(() => {
@@ -628,22 +847,31 @@ function flushSharedState() {
 }
 
 function queueSharedReadingPosition(lesson) {
-  if (!lesson?.id) return;
+  if (!lesson?.id || !interactionIdentityResolved || !progressOwnerScope) return;
+  if (progressOwnerScope === ANONYMOUS_UI_SCOPE) {
+    writeScopedUiValue(LAST_LESSON_KEY, lesson.id, ANONYMOUS_UI_SCOPE);
+    return;
+  }
   pendingSharedReadingPosition = {
     contentVersion: state.sharedContentVersion,
     lessonId: lesson.id,
     documentId: "body",
     stableAnchor: "lesson-root",
-    ownerScope: sharedStateClient?.ownerScope || null,
+    ownerScope: progressOwnerScope,
     generation: sharedStateGeneration,
   };
   void flushSharedState();
 }
 
 function queueSharedTextScale() {
+  if (!interactionIdentityResolved || !progressOwnerScope) return;
+  if (progressOwnerScope === ANONYMOUS_UI_SCOPE) {
+    writeScopedUiValue(FONT_KEY, state.fontIndex, ANONYMOUS_UI_SCOPE);
+    return;
+  }
   pendingSharedTextScale = {
     value: FONT_STEPS[state.fontIndex],
-    ownerScope: sharedStateClient?.ownerScope || null,
+    ownerScope: progressOwnerScope,
     generation: sharedStateGeneration,
   };
   void flushSharedState();
@@ -761,7 +989,7 @@ function trackFor(lesson = state.current) {
 function checkpointDone(progress, key, lesson = state.current) {
   if (!progressOwnerScope || progressOwnerScope === ANONYMOUS_UI_SCOPE) return false;
   if (key === "firstRead") {
-    const session = state.firstReads.get(lesson?.id);
+    const session = firstReadForLesson(lesson?.id);
     return Boolean(session?.authMode === "authenticated" && session?.submitted);
   }
   if (key === "read" || key === "context") return progress[key] === true || Boolean(progress[key]?.done);
@@ -772,7 +1000,7 @@ function checkpointDone(progress, key, lesson = state.current) {
     );
     if (!vocabularyDone || sourceModeFor(lesson) !== "classical") return vocabularyDone;
     if (!studyGuideCompletedFor(lesson, ["vocabulary", "syntax"])) return false;
-    const session = state.firstReads.get(lesson?.id);
+    const session = firstReadForLesson(lesson?.id);
     return Boolean(session?.submitted && session.marks.length > 0
       && session.marks.every((mark) => mark.resolutionStatus === "resolved"));
   }
@@ -836,6 +1064,85 @@ async function fetchJson(url, { cache = "default" } = {}) {
   });
   if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
   return response.json();
+}
+
+async function fetchStudyGuideCatalog() {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), STUDY_GUIDE_CATALOG_TIMEOUT_MS);
+  try {
+    const response = await fetch("data/study-guide-catalog.json", {
+      headers: { accept: "application/json" },
+      cache: "no-cache",
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+    return await response.json();
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+function installStudyGuideCatalog(catalog) {
+  const valid = Boolean(
+    catalog?.schemaVersion === "yw-study-guide-catalog-v1"
+    && /^yw-study-guides-[a-f0-9]{16}$/.test(String(catalog.catalogVersion || ""))
+    && /^sha256:[a-f0-9]{64}$/.test(String(catalog.catalogDigest || ""))
+    && Array.isArray(catalog.lessons)
+    && Number(catalog.lessonCount) === catalog.lessons.length
+  );
+  if (!valid) return false;
+  state.studyGuideLessons = new Map(catalog.lessons.map((lesson) => [lesson.lessonId, lesson]));
+  state.studyGuideCatalogStatus = "available";
+  clearStudyGuideCatalogRetry();
+  return true;
+}
+
+function clearStudyGuideCatalogRetry({ resetAttempt = true } = {}) {
+  if (studyGuideCatalogRetryTimer !== null) {
+    clearTimeout(studyGuideCatalogRetryTimer);
+    studyGuideCatalogRetryTimer = null;
+  }
+  if (resetAttempt) studyGuideCatalogRetryAttempt = 0;
+}
+
+function scheduleStudyGuideCatalogRetry() {
+  if (
+    state.studyGuideCatalogStatus !== "unavailable"
+    || studyGuideCatalogRetryTimer !== null
+    || studyGuideCatalogRetryAttempt >= STUDY_GUIDE_CATALOG_RETRY_DELAYS_MS.length
+  ) return false;
+  const delay = STUDY_GUIDE_CATALOG_RETRY_DELAYS_MS[studyGuideCatalogRetryAttempt];
+  studyGuideCatalogRetryAttempt += 1;
+  studyGuideCatalogRetryTimer = setTimeout(async () => {
+    studyGuideCatalogRetryTimer = null;
+    const restored = await refreshStudyGuideCatalog({ scheduleRetry: false });
+    if (!restored) scheduleStudyGuideCatalogRetry();
+  }, delay);
+  return true;
+}
+
+function refreshStudyGuideCatalog({ scheduleRetry = true } = {}) {
+  if (studyGuideCatalogRefreshPromise) return studyGuideCatalogRefreshPromise;
+  studyGuideCatalogRefreshPromise = (async () => {
+    try {
+      const catalog = await fetchStudyGuideCatalog();
+      if (!installStudyGuideCatalog(catalog)) throw new Error("學案知能清算資料版本不一致");
+      if (state.current) {
+        renderCheckStage(state.current);
+        renderMatrix(state.current);
+        renderMastery();
+      }
+      return true;
+    } catch {
+      state.studyGuideCatalogStatus = "unavailable";
+      if (state.current) renderCheckStage(state.current);
+      if (scheduleRetry) scheduleStudyGuideCatalogRetry();
+      return false;
+    }
+  })().finally(() => {
+    studyGuideCatalogRefreshPromise = null;
+  });
+  return studyGuideCatalogRefreshPromise;
 }
 
 function hexDigest(buffer) {
@@ -994,7 +1301,11 @@ function activeAuthorFor(lesson = state.current) {
 }
 
 function authorNameFor(lesson = state.current) {
-  return activeAuthorFor(lesson)?.name || (modeFor(lesson).startsWith("unit") ? "編者" : "作者");
+  return activeAuthorFor(lesson)?.name || "文本細讀教練";
+}
+
+function formalResponseAuthorFor(lesson = state.current) {
+  return taxonomyFor(lesson).authors?.[0] || null;
 }
 
 function blueprintKey(lesson = state.current) {
@@ -1014,15 +1325,21 @@ function currentMeta() {
 }
 
 function openAtlas() {
+  atlasInteractionGeneration += 1;
   els.body.classList.add("atlas-open");
+  els.atlas.inert = false;
   els.atlas.setAttribute("aria-hidden", "false");
   els.atlasOpen.setAttribute("aria-expanded", "true");
 }
 
-function closeAtlas() {
+function closeAtlas({ restoreFocus = false } = {}) {
+  const returnFocus = restoreFocus || els.atlas.contains(document.activeElement);
+  atlasInteractionGeneration += 1;
   els.body.classList.remove("atlas-open");
+  els.atlas.inert = true;
   els.atlas.setAttribute("aria-hidden", "true");
   els.atlasOpen.setAttribute("aria-expanded", "false");
+  if (returnFocus) els.atlasOpen.focus({ preventScroll: true });
 }
 
 function renderBooks() {
@@ -1232,8 +1549,8 @@ function renderOrientation(lesson) {
 }
 
 function renderLessonMedia(lesson) {
-  const firstRead = state.firstReads.get(lesson.id);
-  if (sourceModeFor(lesson) === "classical" && firstRead && !firstRead.submitted) {
+  const firstRead = firstReadForLesson(lesson.id);
+  if (sourceModeFor(lesson) === "classical" && !firstRead?.submitted) {
     els.lessonMediaSection.hidden = true;
     els.lessonMediaStatus.textContent = "初讀後解鎖";
     els.lessonMediaContent.innerHTML = "";
@@ -1483,14 +1800,65 @@ function renderReaderDocument(document, canonicalAsset = null, learningTip = nul
     </div>`;
 }
 
+function renderCommittedFirstReadRecovery(lesson) {
+  els.textbookTitle.textContent = "帶註釋正文";
+  els.textFlow.innerHTML = `<section class="annotated-read-completion first-read-render-recovery" role="status">
+    <strong>初讀已保存</strong>
+    <p>帶註釋正文剛才沒有完整展開；已提交的初讀不會丟失，請在本頁重新展開。</p>
+    <button type="button" data-first-read-render-retry data-lesson-id="${esc(lesson.id)}">重新展開帶註釋正文</button>
+  </section>`;
+}
+
+function renderCommittedFirstReadTransition(lesson) {
+  try {
+    renderText(lesson);
+    return true;
+  } catch {
+    renderCommittedFirstReadRecovery(lesson);
+    return false;
+  }
+}
+
+function safelyRenderCommittedFirstReadPart(renderer) {
+  try {
+    renderer();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function renderCommittedFirstReadAncillary(lesson) {
+  const results = [
+    () => renderMaterials(lesson),
+    () => renderLessonMedia(lesson),
+    () => renderCheckStage(lesson),
+    () => renderLessonChat(lesson),
+    () => renderMatrix(lesson),
+  ].map(safelyRenderCommittedFirstReadPart);
+  return results.every(Boolean);
+}
+
 function renderText(lesson) {
-  const firstRead = state.firstReads.get(lesson.id);
-  if (sourceModeFor(lesson) === "classical" && firstRead && !firstRead.submitted) {
+  const firstRead = firstReadForLesson(lesson.id);
+  if (sourceModeFor(lesson) === "classical" && !firstRead) {
+    els.textbookTitle.textContent = "起始 · 無注疏初讀";
+    els.textFlow.innerHTML = `<section class="first-read-awaiting-owner" role="status">
+      <strong>正在確認本課初讀狀態…</strong>
+      <p>確認登入與本課記錄後，會在本頁顯示正確的初讀階段。</p>
+    </section>`;
+    return;
+  }
+  if (sourceModeFor(lesson) === "classical" && !firstRead.submitted) {
+    const firstReadOwnerScope = firstRead.ownerScope;
     els.textbookTitle.textContent = "起始 · 無注疏初讀";
     els.textFlow.innerHTML = window.YwClassicalFirstRead.renderGate(firstRead);
     window.YwClassicalFirstRead.bindGate(els.textFlow, firstRead, {
       toast,
+      isCurrent: () => firstReadCallbackIsCurrent(lesson.id, firstRead, firstReadOwnerScope),
+      onStale: () => invalidateStaleFirstReadAuthority(lesson.id, firstRead, firstReadOwnerScope),
       onChange: () => {
+        if (!firstReadCallbackIsCurrent(lesson.id, firstRead, firstReadOwnerScope)) return;
         lessonProgress(lesson.id).firstRead = {
           ...(lessonProgress(lesson.id).firstRead || {}),
           markCount: firstRead.marks.length,
@@ -1500,26 +1868,43 @@ function renderText(lesson) {
         renderCheckStage(lesson);
       },
       onUnlock: () => {
+        if (!firstReadCallbackIsCurrent(lesson.id, firstRead, firstReadOwnerScope)) return;
         lessonProgress(lesson.id).firstRead = {
           done: true,
           markCount: firstRead.marks.length,
           summary: firstRead.summary,
           textVersionId: firstRead.asset.textVersionId,
         };
-        syncProgress({ event: true });
         els.body.classList.remove("first-read-locked");
         els.pageOpen.disabled = !state.pages.length;
         els.resourcesOpen.disabled = false;
         els.pageOpen.title = "";
         els.resourcesOpen.title = "";
-        renderText(lesson);
-        renderMaterials(lesson);
-        renderLessonMedia(lesson);
-        renderCheckStage(lesson);
-        renderLessonChat(lesson);
-        renderMatrix(lesson);
-        toast("初讀已保存；正文與隨文註釋已展開，讀完後解鎖查詞");
+        // Render the committed transition before ancillary persistence and
+        // mastery work so a storage failure cannot leave a stale gate visible.
+        if (!renderCommittedFirstReadTransition(lesson)) {
+          toast("初讀已保存；帶註釋正文可在本頁重新展開");
+          return;
+        }
+        try {
+          syncProgress({ event: true });
+        } catch {
+          // The authoritative first-read state remains committed. A later load
+          // can reconcile ancillary progress without relocking this page.
+        }
+        const ancillaryReady = renderCommittedFirstReadAncillary(lesson);
+        toast(ancillaryReady
+          ? "初讀已保存；正文與隨文註釋已展開，讀完後解鎖查詞"
+          : "初讀已保存，正文與隨文註釋已展開；部分附屬區域稍後可再載入");
         document.querySelector("#textbook-text")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      },
+      onUnlockFailure: () => {
+        if (!firstReadCallbackIsCurrent(lesson.id, firstRead, firstReadOwnerScope)) return;
+        els.body.classList.remove("first-read-locked");
+        const annotatedTextVisible = Boolean(els.textFlow.querySelector(
+          "[data-annotated-read-complete], .annotated-read-completion.complete",
+        ));
+        if (!annotatedTextVisible) renderCommittedFirstReadRecovery(lesson);
       },
     });
     return;
@@ -1544,17 +1929,22 @@ function renderText(lesson) {
 
 async function completeAnnotatedReading(button) {
   const lesson = state.current;
-  const session = state.firstReads.get(lesson?.id);
+  const session = firstReadForLesson(lesson?.id);
   if (!lesson || !session?.submitted || session.annotatedReadCompleted) return;
+  const ownerScope = session.ownerScope;
   button.disabled = true;
   button.textContent = "正在保存閱讀確認…";
   const clientMutationId = `annotated-read:${lesson.id}:${session.asset.textVersionId}`.slice(0, 100);
-  const result = await recordLearning(
+  const result = await recordLearningForLesson(
     "readAcknowledged",
+    lesson.id,
     { threshold: 1 },
     { clientMutationId, lessonPhase: "annotated_reading" },
   );
-  if (state.current?.id !== lesson.id) return;
+  if (!firstReadCallbackIsCurrent(lesson.id, session, ownerScope)) {
+    invalidateStaleFirstReadAuthority(lesson.id, session, ownerScope);
+    return;
+  }
   if (result?.ok !== true) {
     button.disabled = false;
     button.textContent = "我已讀完帶註釋正文，進入詞級疏通";
@@ -2078,8 +2468,8 @@ function renderSupplementaryMaterials(lesson) {
 }
 
 function renderMaterials(lesson) {
-  const firstRead = state.firstReads.get(lesson.id);
-  if (sourceModeFor(lesson) === "classical" && firstRead && !firstRead.submitted) {
+  const firstRead = firstReadForLesson(lesson.id);
+  if (sourceModeFor(lesson) === "classical" && !firstRead?.submitted) {
     els.materialsSection.hidden = true;
     els.materialsCount.textContent = "初讀後解鎖";
     els.materialStream.innerHTML = "";
@@ -2196,7 +2586,14 @@ async function ensureBlueprint(lesson) {
   }
 }
 
-function interactionResult(progress, key) {
+function interactionResponseRole(lesson, key) {
+  return key === "authorQuestion" && formalResponseAuthorFor(lesson)
+    ? formalResponseAuthorFor(lesson).name
+    : "文本細讀教練";
+}
+
+function interactionResult(progress, key, lesson = state.current) {
+  const turns = Array.isArray(progress[key]?.turns) ? progress[key].turns.slice(-6) : [];
   const result = progress[key]?.result;
   if (!result) return "";
   const evidenceStatus = progress[key]?.evidenceStatus;
@@ -2210,12 +2607,38 @@ function interactionResult(progress, key) {
       : evidenceStatus === "recorded"
         ? '<em class="interaction-evidence-status recorded">已記錄到正式學習證據</em>'
         : "";
+  if (turns.length) {
+    const responseRole = interactionResponseRole(lesson, key);
+    const latestAttemptNo = Math.max(...turns.map((turn, index) => Number(turn?.attemptNo) || index + 1));
+    const windowLabel = latestAttemptNo > turns.length
+      ? `已進行 ${latestAttemptNo} 輪 · 顯示最近 ${turns.length} 輪`
+      : `已進行 ${latestAttemptNo} 輪`;
+    return `<section class="interaction-transcript" data-interaction-transcript aria-label="AI 多輪細讀記錄">
+      <header><strong>多輪細讀</strong><span>${windowLabel}</span></header>
+      ${turns.map((turn, index) => {
+        const assessment = turn?.assessment || {};
+        const turnNumber = Number(turn?.attemptNo) || index + 1;
+        const latest = index === turns.length - 1;
+        const inputText = Object.values(turn?.input || {})
+          .map((value) => String(value || "").trim()).filter(Boolean).join(" · ");
+        return `<article class="interaction-turn" ${latest ? "data-interaction-latest-turn" : ""}>
+          <header ${latest ? 'data-interaction-latest-feedback tabindex="-1"' : ""}><b>第 ${turnNumber} 輪</b><span>${Number(assessment.score) || 0} / 100</span></header>
+          <p class="interaction-turn-student"><strong>我的回應</strong>${esc(inputText)}</p>
+          <p ${latest ? 'role="status" aria-live="polite" aria-atomic="true"' : ""}><strong>${esc(responseRole)}回饋</strong>${esc(assessment.verdict || "")}</p>
+          ${assessment.strength ? `<p><b>已做到：</b>${esc(assessment.strength)}</p>` : ""}
+          ${assessment.gap ? `<p><b>還差一步：</b>${esc(assessment.gap)}</p>` : ""}
+          ${assessment.nextQuestion ? `<p><b>下一輪追問：</b>${esc(assessment.nextQuestion)}</p>` : ""}
+        </article>`;
+      }).join("")}
+      ${evidenceLabel}
+    </section>`;
+  }
   return `<div class="interaction-result"><header><strong>${esc(result.verdict)}</strong><span>${esc(result.score)} / 100</span></header>${evidenceLabel}<p>${esc(result.strength)}</p><p><b>還差一步：</b>${esc(result.gap)}</p><p><b>追問：</b>${esc(result.nextQuestion)}</p></div>`;
 }
 
-function authorDialogue(lesson, body, result = "", action = "") {
-  const author = activeAuthorFor(lesson);
-  const name = authorNameFor(lesson);
+function authorDialogue(lesson, body, result = "", action = "", { coach = false, author: fixedAuthor } = {}) {
+  const author = coach ? null : (fixedAuthor === undefined ? activeAuthorFor(lesson) : fixedAuthor);
+  const name = coach ? "文本細讀教練" : (author?.name || "文本細讀教練");
   return `<div class="author-dialog" data-author-dialog="${esc(name)}">
     <div class="author-dialog-head">
       <span class="author-dialog-avatar">${author?.url ? `<img src="https://qx.bdfz.net/img/figures/${encodeURIComponent(author.id)}.webp" alt="" onerror="this.remove()">` : ""}<b>${esc(name.slice(0, 1))}</b></span>
@@ -2290,8 +2713,16 @@ function renderVocabularyQuiz(lesson, progress, bank) {
       item.id,
     ) === true
   );
+  const identityMode = learningIdentityNoticeMode();
+  const submissionLocked = identityMode === "pending" || (formal && identityMode === "anonymous");
   const header = `<div class="vocabulary-progress" aria-label="字詞題 ${solved} / ${questions.length}"><span></span><b>${solved} / ${questions.length}</b></div>
-    <p class="vocabulary-evidence-mode">${formal ? "本課字詞結果同步至正式學習證據。" : "本課字詞保留為本機練習，不計入正式 A+ 題目。"}</p>`;
+    <p class="vocabulary-evidence-mode">${formal
+      ? identityMode === "anonymous"
+        ? "本課字詞屬正式學習證據；請先登入 My 再作答。"
+        : identityMode === "pending"
+          ? "正在確認登入；確認前不會保存或送出答案。"
+          : "本課字詞結果同步至正式學習證據。"
+      : "本課字詞保留為本機練習，不計入正式 A+ 題目。"}</p>`;
   if (!current) {
     const firstTry = questions.filter((item) => quizItemState(quiz, item.id).mastered).length;
     return `<div class="vocabulary-step vocab-quiz" style="--vocabulary-progress:${percent}%">${header}
@@ -2301,16 +2732,30 @@ function renderVocabularyQuiz(lesson, progress, bank) {
   const itemState = quizItemState(quiz, current.id);
   const answered = itemState.lastPick;
   const showExplain = itemState.attempts > 0;
+  const pendingAttempt = itemState.pendingAttempt;
+  const pendingInFlight = Boolean(
+    formal
+    && pendingAttempt?.clientMutationId
+    && state.vocabAttemptsInFlight.has(vocabAttemptRequestKey(
+      progressOwnerScope,
+      lesson.id,
+      current.id,
+      pendingAttempt.clientMutationId,
+    )),
+  );
   return `<div class="vocabulary-step vocab-quiz" style="--vocabulary-progress:${percent}%">${header}
     <div class="quiz-item" data-quiz-item="${esc(current.id)}">
       <p class="quiz-kicker"><b>${esc(QUIZ_TYPE_LABEL[current.type] || "字詞")}</b><i>難度 ${"◆".repeat(current.difficulty || 1)}</i><button type="button" class="quiz-lookup" data-quiz-lookup="${esc(current.word)}">查「${esc(current.word)}」</button></p>
       ${current.sourceSentence ? `<p class="quiz-sentence">${markSentence(current.sourceSentence, current.word)}</p>` : ""}
       <p class="quiz-question">${esc(current.question)}</p>
+      ${pendingAttempt?.clientMutationId ? `<p class="vocabulary-pending" role="status">${pendingInFlight ? "上一答案正在同步；請勿重複提交。" : "上一答案尚未確認；請點原選項用同一回執重試。"}</p>` : ""}
       <div class="quiz-options">${current.options.map((option, index) => {
         const picked = answered === index;
         const isAnswer = index === current.answerIndex;
         const tone = picked ? (isAnswer ? "correct" : "wrong") : (showExplain && isAnswer && itemState.revealed ? "correct" : "");
-        return `<button type="button" data-quiz-option="${index}" class="${tone}">${esc(option)}</button>`;
+        const pendingLocked = pendingAttempt?.clientMutationId
+          && Number(pendingAttempt.selectedIndex) !== index;
+        return `<button type="button" data-quiz-option="${index}" class="${tone}" ${submissionLocked || pendingInFlight || pendingLocked ? "disabled" : ""}>${esc(option)}</button>`;
       }).join("")}</div>
       ${itemState.correct || itemState.lastAnswerCorrect || itemState.revealed
         ? `<div class="quiz-explain ${itemState.correct || itemState.lastAnswerCorrect ? "good" : ""}">${itemState.correct ? "✓ 本題已完成。" : itemState.lastAnswerCorrect ? "✓ 本次答對；因先前有誤，請再確認一次。" : ""}${esc(current.explanation)}${current.sourceRefs?.length ? `<small>依據：${current.sourceRefs.map(esc).join("、")}</small>` : ""}</div>`
@@ -2319,36 +2764,93 @@ function renderVocabularyQuiz(lesson, progress, bank) {
   </div>`;
 }
 
-function recordLearning(interactionKey, data = {}, options = {}) {
-  if (!state.current?.id) return Promise.resolve({ ok: false, reason: "no-lesson" });
-  const pending = window.YwLearningEvidence?.record?.(interactionKey, state.current.id, data, options);
+function recordLearningForLesson(interactionKey, lessonId, data = {}, options = {}) {
+  if (!lessonId) return Promise.resolve({ ok: false, reason: "no-lesson" });
+  if (!learningMutationOwnerResolved()) {
+    return Promise.resolve({ ok: false, reason: "identity-unavailable" });
+  }
+  const pending = window.YwLearningEvidence?.record?.(interactionKey, lessonId, data, options);
   return pending
     ? pending.catch(() => ({ ok: false, reason: "unavailable" }))
     : Promise.resolve({ ok: false, reason: "identity-unavailable" });
 }
 
-async function recordVocabAttempt(itemId, selectedIndex, lessonId = state.current?.id) {
-  if (!lessonId) return { ok: false, reason: "no-lesson" };
+function recordLearning(interactionKey, data = {}, options = {}) {
+  return recordLearningForLesson(interactionKey, state.current?.id, data, options);
+}
+
+function pendingVocabAttempt(record, selectedIndex, createMutationId) {
+  const existing = record?.pendingAttempt;
+  if (existing?.clientMutationId && Number(existing.selectedIndex) === Number(selectedIndex)) {
+    return existing;
+  }
+  return {
+    clientMutationId: createMutationId(),
+    selectedIndex: Number(selectedIndex),
+  };
+}
+
+function vocabAttemptRequestKey(ownerScope, lessonId, itemId, clientMutationId) {
+  return `${ownerScope || "none"}\n${lessonId || "none"}\n${itemId || "none"}\n${clientMutationId || "none"}`;
+}
+
+function currentVocabAttempt(ownerScope, lessonId, itemId, pending) {
+  if (progressOwnerScope !== ownerScope) return null;
+  const progress = state.progress[lessonId];
+  const quiz = progress?.vocabularyQuiz;
+  const record = quiz?.answers?.[itemId];
+  if (
+    !record
+    || record.pendingAttempt?.clientMutationId !== pending?.clientMutationId
+    || Number(record.pendingAttempt?.selectedIndex) !== Number(pending?.selectedIndex)
+  ) return null;
+  return { progress, quiz, record };
+}
+
+async function recordVocabAttempt(
+  itemId,
+  selectedIndex,
+  lessonId = state.current?.id,
+  clientMutationId = "",
+) {
+  if (!lessonId || !clientMutationId) return { ok: false, reason: "missing-retry-receipt" };
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 20000);
   try {
     const response = await fetch("/api/reading/vocab-attempt", {
       method: "POST",
       credentials: "include",
       headers: { "content-type": "application/json", accept: "application/json" },
+      signal: controller.signal,
       body: JSON.stringify({
         lessonId,
         itemId,
         selectedIndex,
-        clientMutationId: window.YwLearningEvidence?.mutationId?.("vocabAnswer", lessonId)
-          || `yw:${lessonId}:vocabAnswer:${crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`}`.slice(0, 100),
+        clientMutationId,
       }),
     });
-    const payload = await response.json().catch(() => ({}));
+    const payload = await response.json().catch((error) => {
+      if (error?.name === "AbortError") throw error;
+      return {};
+    });
     if (!response.ok || payload.ok !== true) {
-      return { ok: false, reason: response.status === 401 ? "anonymous" : payload.error || `http-${response.status}` };
+      return {
+        ok: false,
+        status: response.status,
+        code: String(payload.code || ""),
+        reason: response.status === 401 ? "anonymous" : payload.error || `http-${response.status}`,
+      };
     }
     return payload;
-  } catch {
-    return { ok: false, reason: "unavailable" };
+  } catch (error) {
+    return {
+      ok: false,
+      status: 0,
+      code: error?.name === "AbortError" ? "vocabulary_attempt_timeout" : "",
+      reason: error?.name === "AbortError" ? "字詞答案同步逾時" : "unavailable",
+    };
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
@@ -2357,7 +2859,7 @@ function renderWordCreation(lesson, progress) {
   const mode = modeFor(lesson);
   const ending = mode === "poetry" ? "三行短詩" : mode === "drama" ? "三句對白" : mode === "fiction" ? "三句微型敘事" : "三句話";
   const body = `${interactionModeNotice("wordCreation", lesson)}<p class="word-creation-prompt">選一個剛疏通的詞，用它寫${ending}。</p><input data-field="wordCreation.word" value="${esc(value.word || "")}" aria-label="本文新學到的一個字詞"><textarea data-field="wordCreation.creation" rows="5" aria-label="用這個字詞寫${ending}">${esc(value.creation || "")}</textarea>`;
-  return authorDialogue(lesson, body, interactionResult(progress, "wordCreation"), interactionAction("wordCreation", "核對", lesson));
+  return authorDialogue(lesson, body, interactionResult(progress, "wordCreation", lesson), interactionAction("wordCreation", "核對", lesson, value));
 }
 
 function wadangMark(label) {
@@ -2401,8 +2903,11 @@ function renderStudyGuideAssessment(record) {
 }
 
 function renderStudyGuideCards(lesson, competencyTags) {
+  if (state.studyGuideCatalogStatus === "loading") {
+    return `<section class="study-guide-deck" aria-label="學案知能清算"><p class="study-guide-sync pending" role="status">正在載入學案知能清算；教材正文與其他功能可先使用。</p></section>`;
+  }
   if (state.studyGuideCatalogStatus === "unavailable") {
-    return `<section class="study-guide-deck" aria-label="學案知能清算"><p class="study-guide-sync pending" role="status">學案知能清算資料暫時無法載入；教材閱讀與其他學習步驟仍可繼續。</p></section>`;
+    return `<section class="study-guide-deck" aria-label="學案知能清算"><p class="study-guide-sync pending" role="status">學案知能清算資料暫時無法載入；重新載入成功後，本頁會自動核對完成度並解鎖後續互動。</p><button type="button" data-study-guide-catalog-retry>重新載入學案知能清算</button></section>`;
   }
   const items = studyGuideItemsFor(lesson, competencyTags);
   if (!items.length) return "";
@@ -2432,14 +2937,14 @@ function renderStudyGuideCards(lesson, competencyTags) {
 
 function appendFirstReadCorrections(body, lesson) {
   if (sourceModeFor(lesson) !== "classical") return body;
-  const session = state.firstReads.get(lesson.id);
+  const session = firstReadForLesson(lesson.id);
   return `${body}${renderStudyGuideCards(lesson, ["vocabulary", "syntax"])}${window.YwClassicalFirstRead?.renderCorrections?.(session) || ""}`;
 }
 
 function classicalRoundLocked(key, lesson, progress) {
   if (sourceModeFor(lesson) !== "classical" || key === "firstRead") return "";
   if (!checkpointDone(progress, "firstRead", lesson)) return "先完成無標點初讀，才會解鎖這一關。";
-  const session = state.firstReads.get(lesson.id);
+  const session = firstReadForLesson(lesson.id);
   if (!session?.annotatedReadCompleted) return "先讀完帶註釋正文，再進入詞級疏通。";
   if (["structure", "evaluation", "authorQuestion"].includes(key)
       && !checkpointDone(progress, "vocabulary", lesson)) {
@@ -2492,13 +2997,27 @@ function interactionModeNotice(interactionKey, lesson = state.current) {
   return '<p class="vocabulary-evidence-mode interaction-evidence-mode">正在確認登入狀態，確認後即可評閱。</p>';
 }
 
-function interactionAction(interactionKey, label, lesson = state.current) {
+function interactionRequestKey(ownerScope, lessonId, interactionKey, clientMutationId) {
+  return `${ownerScope || "none"}\n${lessonId || "none"}\n${interactionKey || "none"}\n${clientMutationId || "none"}`;
+}
+
+function interactionAction(interactionKey, label, lesson = state.current, record = {}) {
   const mode = interactionSubmissionMode(interactionKey, lesson);
   if (mode === "login_required") {
     return `<a class="check-action" href="${esc(userCenterLoginUrl())}" target="_blank" rel="noopener noreferrer">登入後評閱</a>`;
   }
   if (mode === "pending_identity") {
     return '<button class="check-action" type="button" disabled>確認登入中</button>';
+  }
+  const pending = record?.pendingSubmission;
+  if (mode === "formal" && pending?.clientMutationId) {
+    const inFlight = state.interactionRequestsInFlight.has(interactionRequestKey(
+      progressOwnerScope,
+      lesson?.id,
+      interactionKey,
+      pending.clientMutationId,
+    ));
+    return `<button class="check-action" type="button" data-ai-check="${esc(interactionKey)}" ${inFlight ? "disabled" : ""}>${inFlight ? "正在評閱上一輪…" : "重試上一輪評閱"}</button>`;
   }
   const actionLabel = mode === "local" ? "記下本機試做" : label;
   return `<button class="check-action" type="button" data-ai-check="${esc(interactionKey)}">${esc(actionLabel)}</button>`;
@@ -2508,7 +3027,7 @@ function renderInteractionBody(key, lesson, progress, blueprint) {
   const rawValue = progress[key];
   const value = rawValue && typeof rawValue === "object" ? rawValue : (rawValue === true ? { done: true } : {});
   if (key === "firstRead") {
-    const session = state.firstReads.get(lesson.id);
+    const session = firstReadForLesson(lesson.id);
     if (!session?.submitted) {
       return `<p class="first-read-round-status">在上方無標點正文完成至少 3 處紅筆標記，寫下第一直覺與初讀感知。</p>`;
     }
@@ -2516,8 +3035,26 @@ function renderInteractionBody(key, lesson, progress, blueprint) {
   }
   if (key === "context") {
     const words = String(value.words || "").split(/[，,、\s]+/).filter(Boolean).slice(0, 3);
-    const body = `${interactionModeNotice("contextWords", lesson)}<div class="three-word-check"><div class="three-word-fields">${[0, 1, 2].map((index) => `<input data-context-word data-field="context.word${index + 1}" value="${esc(words[index] || "")}" maxlength="12" aria-label="第${index + 1}個詞" autocomplete="off">`).join("")}</div><span class="auto-check-status" data-auto-status="contextWords" aria-live="polite">${words.length === 3 ? "已記下" : `${words.length}/3`}</span></div>`;
-    return authorDialogue(lesson, body, interactionResult(progress, "context"));
+    const wordsValue = words.join("、");
+    const pending = value.pendingSubmission;
+    const pendingInFlight = pending?.clientMutationId && state.interactionRequestsInFlight.has(
+      interactionRequestKey(progressOwnerScope, lesson?.id, "contextWords", pending.clientMutationId),
+    );
+    const assessedCurrentWords = Boolean(
+      words.length === 3
+      && value.result
+      && (!value.assessedInputSignature
+        || value.assessedInputSignature === interactionInputSignature({ words: wordsValue })),
+    );
+    const statusLabel = pending?.clientMutationId
+      ? (pendingInFlight ? "正在評閱上一組…" : "上一組待重試")
+      : assessedCurrentWords
+        ? "已核對"
+        : words.length === 3
+          ? "待核對"
+          : `${words.length}/3`;
+    const body = `${interactionModeNotice("contextWords", lesson)}<div class="three-word-check"><div class="three-word-fields">${[0, 1, 2].map((index) => `<input data-context-word data-field="context.word${index + 1}" value="${esc(words[index] || "")}" maxlength="12" aria-label="第${index + 1}個詞" autocomplete="off">`).join("")}</div><span class="auto-check-status" data-auto-status="contextWords" aria-live="polite">${statusLabel}</span></div>`;
+    return authorDialogue(lesson, body, interactionResult(progress, "context", lesson));
   }
   if (key === "vocabulary") {
     const bank = state.vocabBanks.get(lesson.id);
@@ -2536,16 +3073,21 @@ function renderInteractionBody(key, lesson, progress, blueprint) {
     </div>${completed && sourceModeFor(lesson) === "poetry" ? renderWordCreation(lesson, progress) : ""}`, lesson);
   }
   if (key === "read") return `<label class="read-check"><input type="checkbox" data-read-check ${value.checked || value.done ? "checked" : ""}><span>我已完成一次不中斷的正文通讀</span></label>`;
-  if (key === "authorQuestion") return authorDialogue(lesson, `${interactionModeNotice("authorQuestion", lesson)}<textarea data-field="authorQuestion.answer" rows="4" aria-label="你想問作者的問題" placeholder="你最想我的問題是什麼，你問，我答。">${esc(value.answer || "")}</textarea>`, interactionResult(progress, key), interactionAction("authorQuestion", "問", lesson));
-  if (key === "revision") return authorDialogue(lesson, `${interactionModeNotice("revision", lesson)}<div class="revision-row"><input data-field="revision.original" value="${esc(value.original || "")}" aria-label="原文"><select data-field="revision.action" aria-label="增刪調"><option ${value.action === "調" ? "selected" : ""}>調</option><option ${value.action === "增" ? "selected" : ""}>增</option><option ${value.action === "刪" ? "selected" : ""}>刪</option></select><input data-field="revision.revised" value="${esc(value.revised || "")}" aria-label="改文"></div><textarea data-field="revision.reason" rows="4" aria-label="改動理由" placeholder="請說明如何修改的緣由">${esc(value.reason || "")}</textarea>`, interactionResult(progress, key), interactionAction("revision", "核對", lesson));
-  if (key === "structure") return `${authorDialogue(lesson, `${interactionModeNotice("structure", lesson)}<p class="structure-focus">${esc(blueprint.structureFocus)}</p><textarea data-field="structure.reason" rows="4" aria-label="回答作者的章法問題">${esc(value.reason || "")}</textarea>`, interactionResult(progress, key), interactionAction("structure", "回應", lesson))}${sourceModeFor(lesson) === "classical" ? renderStudyGuideCards(lesson, ["comprehension"]) : ""}`;
+  if (key === "authorQuestion") {
+    const responseRole = interactionResponseRole(lesson, key);
+    return authorDialogue(lesson, `${interactionModeNotice("authorQuestion", lesson)}<textarea data-field="authorQuestion.answer" rows="4" aria-label="向${esc(responseRole)}回應或提出追問" placeholder="把問題或回應落到具體字句；收到追問後可回答，也可提出更深一層的問題。">${esc(value.answer || "")}</textarea>`, interactionResult(progress, key, lesson), interactionAction("authorQuestion", value.turns?.length ? "回應／追問" : "問", lesson, value), { author: formalResponseAuthorFor(lesson) });
+  }
+  if (key === "revision") return authorDialogue(lesson, `${interactionModeNotice("revision", lesson)}<div class="revision-row"><input data-field="revision.original" value="${esc(value.original || "")}" aria-label="原文"><select data-field="revision.action" aria-label="增刪調"><option ${value.action === "調" ? "selected" : ""}>調</option><option ${value.action === "增" ? "selected" : ""}>增</option><option ${value.action === "刪" ? "selected" : ""}>刪</option></select><input data-field="revision.revised" value="${esc(value.revised || "")}" aria-label="改文"></div><textarea data-field="revision.reason" rows="4" aria-label="改動理由" placeholder="請說明如何修改的緣由">${esc(value.reason || "")}</textarea>`, interactionResult(progress, key, lesson), interactionAction("revision", "核對", lesson, value));
+  if (key === "structure") return `${authorDialogue(lesson, `${interactionModeNotice("structure", lesson)}<p class="structure-focus">${esc(blueprint.structureFocus)}</p><textarea data-field="structure.reason" rows="4" aria-label="回答文本細讀教練的章法問題">${esc(value.reason || "")}</textarea>`, interactionResult(progress, key, lesson), interactionAction("structure", value.turns?.length ? "繼續回應" : "回應", lesson, value), { coach: true })}${sourceModeFor(lesson) === "classical" ? renderStudyGuideCards(lesson, ["comprehension"]) : ""}`;
   if (key === "evaluation") {
     const rating = Number.isFinite(Number(value.rating)) ? clamp(Number(value.rating), 0, 100) : 50;
+    const evaluationMode = interactionSubmissionMode("evaluation", lesson);
+    const evaluationLocked = ["pending_identity", "login_required"].includes(evaluationMode);
     return `<div class="interest-rating" style="--rating:${rating}%">
       <div class="interest-rating-head"><span>本篇有意思</span><output data-interest-output>${rating}% · ${esc(interestLabel(rating))}</output></div>
-      <input type="range" min="0" max="100" step="1" value="${rating}" data-interest-slider aria-label="本篇有意思程度，0 到 100">
+      <input type="range" min="0" max="100" step="1" value="${rating}" data-interest-slider aria-label="本篇有意思程度，0 到 100" ${evaluationLocked ? "disabled" : ""}>
       <div class="interest-rating-scale" aria-hidden="true"><span>枯燥乏味</span><span>差強人意</span><span>拍案叫絕</span></div>
-      <span class="auto-save-status" aria-live="polite">${value.synced ? "已同步" : value.done ? "本機已存／尚未同步" : "拖動後自動保存"}</span>
+      <span class="auto-save-status" aria-live="polite">${evaluationMode === "pending_identity" ? "正在確認登入" : evaluationMode === "login_required" ? "登入後評閱" : value.synced ? "已同步" : value.done ? "本機已存／尚未同步" : "拖動後自動保存"}</span>
     </div>`;
   }
   return "";
@@ -2564,7 +3106,7 @@ function renderCheckStage(lesson) {
   els.checkStage.innerHTML = identityNotice + track.map(([key, label, _detail, weight], index) => {
     const locked = classicalRoundLocked(key, lesson, progress);
     return `
-    <section class="check-round ${checkpointDone(progress, key) ? "complete" : ""} ${locked ? "locked" : ""}" data-round="${key}" ${locked ? "aria-disabled=\"true\"" : ""}>
+    <section class="check-round ${checkpointDone(progress, key) ? "complete" : ""} ${locked ? "locked" : ""}" data-round="${key}" ${identityNoticeMode === "pending" ? "inert aria-disabled=\"true\"" : locked ? "aria-disabled=\"true\"" : ""}>
       <header>${wadangMark(STAGE_MARKS[index] || index + 1)}<h3>${esc(label)}</h3><b>${checkpointDone(progress, key) ? "本課完成" : `本課 ${weight}%`}</b></header>
       ${locked ? `<p class="round-lock"><span aria-hidden="true">鎖</span>${esc(locked)}</p>` : renderInteractionBody(key, lesson, progress, blueprint)}
     </section>
@@ -2685,8 +3227,8 @@ function renderLessonChat(lesson) {
     || !els.lessonChatPlaceholder
     || !els.lessonChatLoad
   ) return;
-  const firstRead = state.firstReads.get(lesson.id);
-  const locked = sourceModeFor(lesson) === "classical" && firstRead && !firstRead.submitted;
+  const firstRead = firstReadForLesson(lesson.id);
+  const locked = sourceModeFor(lesson) === "classical" && !firstRead?.submitted;
   els.lessonChatSection.hidden = locked;
   resetLessonChat();
   if (locked) {
@@ -2701,19 +3243,25 @@ function renderLessonChat(lesson) {
 function syncProgress({ event = false } = {}) {
   saveStoredProgress();
   if (!state.current || !state.manifest) return;
+  const lesson = state.current;
+  const lessonId = lesson.id;
+  const ownerScope = progressOwnerScope;
+  const requestProgress = lessonProgress(lessonId);
   renderMastery();
   renderLessonIndex();
-  renderMatrix(state.current);
+  renderMatrix(lesson);
   if (!state.current) return;
   const percent = progressPercent();
   const send = async () => {
-    const progress = lessonProgress();
-    if (event && percent === 100 && completionEventEligible(progress) && !progress.completionEventSent) {
-      const evidence = await recordLearning("lessonCompleted", {
-        checkpointCount: trackFor().filter(([key]) => checkpointDone(progress, key)).length,
-        checkpointTotal: trackFor().length,
+    if (!learningMutationOwnerResolved(ownerScope)) return;
+    if (event && percent === 100 && completionEventEligible(requestProgress) && !requestProgress.completionEventSent) {
+      const track = trackFor(lesson);
+      const evidence = await recordLearningForLesson("lessonCompleted", lessonId, {
+        checkpointCount: track.filter(([key]) => checkpointDone(requestProgress, key, lesson)).length,
+        checkpointTotal: track.length,
       });
-      progress.completionEventSent = evidence?.ok === true;
+      if (progressOwnerScope !== ownerScope || state.progress[lessonId] !== requestProgress) return;
+      requestProgress.completionEventSent = evidence?.ok === true;
       saveStoredProgress();
     }
   };
@@ -2729,8 +3277,8 @@ function renderLesson(lesson) {
   const position = readingLessons.findIndex((item) => item.id === lesson.id);
   els.mastheadPosition.textContent = position >= 0 ? `第 ${String(position + 1).padStart(2, "0")} 篇` : (isUnitTask(lesson) ? "研習任務" : "單元導讀");
   document.title = `${lessonTitle(lesson)} · 課文`;
-  const firstRead = state.firstReads.get(lesson.id);
-  const firstReadLocked = Boolean(sourceModeFor(lesson) === "classical" && firstRead && !firstRead.submitted);
+  const firstRead = firstReadForLesson(lesson.id);
+  const firstReadLocked = Boolean(sourceModeFor(lesson) === "classical" && !firstRead?.submitted);
   els.body.classList.toggle("first-read-locked", firstReadLocked);
   els.pageOpen.disabled = firstReadLocked;
   els.resourcesOpen.disabled = firstReadLocked;
@@ -2754,12 +3302,18 @@ function renderLesson(lesson) {
   });
 }
 
-function setToolsOpen(open) {
-  els.body.classList.toggle("tools-open", open);
+function syncToolsAccessibility() {
+  const open = els.body.classList.contains("tools-open");
   els.mobileToolsToggle.setAttribute("aria-expanded", String(open));
   els.mobileToolsToggle.setAttribute("aria-label", open ? "關閉篇目工具" : "打開篇目工具");
-  if (matchMedia("(max-width: 900px)").matches) els.topbarActions.inert = !open;
-  else els.topbarActions.inert = false;
+  els.topbarActions.inert = compactToolsMedia.matches && !open;
+}
+
+function setToolsOpen(open) {
+  const returnFocus = !open && els.topbarActions.contains(document.activeElement);
+  els.body.classList.toggle("tools-open", open);
+  syncToolsAccessibility();
+  if (returnFocus) els.mobileToolsToggle.focus({ preventScroll: true });
 }
 
 function fitLessonTitle() {
@@ -2806,9 +3360,11 @@ async function showLesson(
     recordEvidence = true,
     syncSharedState = true,
     stateGuard = null,
+    closeAtlasOnCompact = false,
   } = {},
 ) {
   const token = ++lessonToken;
+  const atlasGenerationAtStart = atlasInteractionGeneration;
   try {
     const meta = state.manifest.lessons.find((lesson) => lesson.id === id);
     if (!meta) throw new Error("找不到課文");
@@ -2819,20 +3375,45 @@ async function showLesson(
       lesson.readerDocument = await loadReaderDocument(id);
       shouldCache = true;
     }
-    if (sourceModeFor(lesson) === "classical" && !state.firstReads.has(id)) {
-      const firstRead = await window.YwClassicalFirstRead.load(id);
+    if (sourceModeFor(lesson) === "classical" && !firstReadForLesson(id)) {
+      const firstReadOwnerScope = activeFirstReadOwnerScope();
+      const authorityGeneration = firstReadAuthorityGeneration;
+      const firstRead = await window.YwClassicalFirstRead.load(id, {
+        readAuthority: Boolean(
+          interactionIdentityResolved
+          && firstReadOwnerScope
+          && firstReadOwnerScope !== ANONYMOUS_UI_SCOPE
+        ),
+        fallbackAuthMode: interactionIdentityResolved
+          && firstReadOwnerScope === ANONYMOUS_UI_SCOPE
+          ? "local"
+          : "offline",
+        canReconcile: () => (
+          token === lessonToken
+          && authorityGeneration === firstReadAuthorityGeneration
+          && firstReadOwnerScope === activeFirstReadOwnerScope()
+        ),
+      });
       if (!firstRead) throw new Error("無標點初讀正文缺失");
+      if (
+        token !== lessonToken
+        || authorityGeneration !== firstReadAuthorityGeneration
+        || firstReadOwnerScope !== activeFirstReadOwnerScope()
+      ) return;
+      firstRead.ownerScope = firstReadOwnerScope;
       state.firstReads.set(id, firstRead);
-      const progress = lessonProgress(id);
-      progress.firstRead = {
-        ...(progress.firstRead || {}),
-        done: firstRead.submitted,
-        markCount: firstRead.marks.length,
-        resolvedCount: firstRead.marks.filter((mark) => mark.resolutionStatus === "resolved").length,
-        summary: firstRead.summary,
-        textVersionId: firstRead.asset.textVersionId,
-      };
-      saveStoredProgress();
+      if (firstReadOwnerScope) {
+        const progress = lessonProgress(id);
+        progress.firstRead = {
+          ...(progress.firstRead || {}),
+          done: firstRead.submitted,
+          markCount: firstRead.marks.length,
+          resolvedCount: firstRead.marks.filter((mark) => mark.resolutionStatus === "resolved").length,
+          summary: firstRead.summary,
+          textVersionId: firstRead.asset.textVersionId,
+        };
+        saveStoredProgress();
+      }
     }
     if (token !== lessonToken) return;
     if (stateGuard && !await stateGuard()) return;
@@ -2845,7 +3426,11 @@ async function showLesson(
     if (recordEvidence) void recordLearning("lessonOpened");
     if (syncSharedState) queueSharedReadingPosition(lesson);
     if (push) history.replaceState(null, "", `#${lesson.id}`);
-    if (matchMedia("(max-width: 900px)").matches) closeAtlas();
+    if (
+      closeAtlasOnCompact
+      && matchMedia("(max-width: 900px)").matches
+      && atlasInteractionGeneration === atlasGenerationAtStart
+    ) closeAtlas({ restoreFocus: true });
     scrollTo({ top: 0, behavior: "auto" });
   } catch {
     if (token !== lessonToken) return;
@@ -2978,23 +3563,110 @@ function learningSubmissionRetryMessage(code, retryAfterSeconds = 0, limitReason
   return "";
 }
 
-async function submitInteraction(key, button = null, { silent = false } = {}) {
-  const input = interactionInput(key);
+function interactionInputSignature(input) {
+  const canonical = Object.fromEntries(
+    Object.keys(input || {}).sort().map((inputKey) => [inputKey, String(input[inputKey] ?? "")]),
+  );
+  return JSON.stringify(canonical);
+}
+
+function pendingInteractionMutation(record, input, createMutationId) {
+  const inputSignature = interactionInputSignature(input);
+  const existing = record?.pendingSubmission;
+  if (existing?.inputSignature === inputSignature && existing.clientMutationId) {
+    return {
+      clientMutationId: existing.clientMutationId,
+      inputSignature,
+      input: existing.input && typeof existing.input === "object"
+        ? existing.input
+        : JSON.parse(inputSignature),
+    };
+  }
+  return {
+    clientMutationId: createMutationId(),
+    inputSignature,
+    input: { ...input },
+  };
+}
+
+function pendingInteractionInput(record) {
+  const pending = record?.pendingSubmission;
+  if (!pending?.clientMutationId) return null;
+  if (pending.input && typeof pending.input === "object") return { ...pending.input };
+  try {
+    const parsed = JSON.parse(pending.inputSignature || "");
+    return parsed && typeof parsed === "object" ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+function interactionPendingMatches(record, pending) {
+  return Boolean(
+    record?.pendingSubmission?.clientMutationId
+    && record.pendingSubmission.clientMutationId === pending?.clientMutationId
+    && record.pendingSubmission.inputSignature === pending?.inputSignature,
+  );
+}
+
+function mergeInteractionConversation(existingTurns, incomingTurns, fallbackTurn = null) {
+  const merged = new Map();
+  const stableKey = (turn, index) => String(
+    turn?.sourceEventId
+      || (Number(turn?.attemptNo) > 0 ? `attempt:${Number(turn.attemptNo)}` : `position:${index}`),
+  );
+  const append = (turns) => (Array.isArray(turns) ? turns : []).forEach((turn, index) => {
+    if (!turn || typeof turn !== "object") return;
+    merged.set(stableKey(turn, index), turn);
+  });
+  append(existingTurns);
+  if (fallbackTurn && typeof fallbackTurn === "object") append([fallbackTurn]);
+  append(incomingTurns);
+  return [...merged.values()]
+    .sort((left, right) => Number(left?.attemptNo || 0) - Number(right?.attemptNo || 0))
+    .slice(-6);
+}
+
+function interactionInputProblem(key, input) {
   const compactLength = interactionInputLength(input);
   const minimum = key === "contextWords" ? 3 : key === "authorQuestion" ? 12 : 24;
   if (compactLength < minimum) {
-    if (!silent) toast(key === "contextWords" ? "請輸入三個詞" : key === "authorQuestion" ? "問題需要更具體，至少 12 字" : "先寫完整");
-    return;
+    return key === "contextWords"
+      ? "請輸入三個詞"
+      : key === "authorQuestion"
+        ? "回應或追問需要更具體，至少 12 字"
+        : "先寫完整";
   }
-  if (key === "contextWords" && input.words.split(/[，,、\s]+/).filter(Boolean).length !== 3) { if (!silent) toast("請恰好輸入三個詞"); return; }
+  if (key === "contextWords" && input.words.split(/[，,、\s]+/).filter(Boolean).length !== 3) {
+    return "請恰好輸入三個詞";
+  }
+  return "";
+}
+
+async function submitInteraction(key, button = null, { silent = false } = {}) {
+  const requestLesson = state.current;
+  const requestLessonId = requestLesson?.id;
+  const requestOwnerScope = progressOwnerScope;
+  if (!requestLessonId) return;
+  let input = interactionInput(key);
   const autoStatus = els.checkStage.querySelector(`[data-auto-status="${key}"]`);
   if (button) {
     button.disabled = true;
     button.textContent = "核對中";
   }
   if (autoStatus) autoStatus.textContent = "核對中";
-  const submissionMode = interactionSubmissionMode(key, state.current);
+  const submissionMode = interactionSubmissionMode(key, requestLesson);
   if (submissionMode === "local") {
+    const problem = interactionInputProblem(key, input);
+    if (problem) {
+      if (button) {
+        button.disabled = false;
+        button.textContent = "核對";
+      }
+      if (autoStatus) autoStatus.textContent = "未核對";
+      if (!silent) toast(problem);
+      return;
+    }
     saveLocalInteractionPractice(key, input, { silent });
     return;
   }
@@ -3007,94 +3679,228 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     if (!silent && submissionMode === "login_required") toast("請先登入 My，再提交正式評閱");
     return;
   }
-  try {
-    const mutationKey = `${state.current.id}\n${key}`;
-    const clientMutationId = interactionMutationIds.get(mutationKey)
-      || window.YwLearningEvidence?.mutationId?.(key, state.current.id);
-    if (!clientMutationId) throw new Error("無法建立穩定提交標識，請刷新後重試");
-    interactionMutationIds.set(mutationKey, clientMutationId);
-    const response = await fetch("/api/interaction-check", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        lessonId: state.current.id,
-        lessonTitle: lessonTitle(state.current),
-        blockTitle: state.current.blockTitle,
-        mode: modeFor(state.current),
-        genres: genreNodesFor(state.current).map((genre) => genre.label),
-        authors: [authorNameFor(state.current)],
-        interaction: key,
-        blueprint: state.blueprints.get(blueprintKey(state.current)) || blueprintFallback(state.current),
-        excerpt: String(primaryPost(state.current)?.plain_text || state.current.excerpt || "").slice(0, 4200),
-        input,
-        clientMutationId,
-      }),
-    });
-    const payload = await response.json();
-    if (!response.ok) {
-      const error = new Error(payload.error || `評估失敗 ${response.status}`);
-      error.code = String(payload.code || "");
-      error.retryAfterSeconds = Number(payload.retryAfterSeconds || 0);
-      error.limitReason = String(payload.limitReason || "");
-      throw error;
-    }
-    const result = payload.assessment || {};
-    const progressKey = key === "contextWords" ? "context" : key;
-    const score = Number(result.score || 0);
-    const evidence = interactionEvidenceDecision(payload.evidence?.status, score);
-    if (!evidence.accepted) throw new Error("學習證據回執無效，未計入完成度");
-    interactionMutationIds.delete(mutationKey);
-    lessonProgress()[progressKey] = {
-      ...lessonProgress()[progressKey],
-      ...input,
-      done: evidence.completed,
-      score,
-      result,
-      evidenceStatus: evidence.evidenceStatus,
-    };
-    if (key === "wordCreation" && !lessonVocabulary(state.current).length) {
-      lessonProgress().vocabulary = {
-        ...(lessonProgress().vocabulary || {}),
-        done: evidence.completed,
-        reviewed: [],
-        evidenceStatus: evidence.evidenceStatus,
-      };
-    }
-    if (key === "contextWords") void saveReadingSubmission(input, payload.evidence?.sourceEventId);
-    if (!silent) {
-      const label = trackFor().find((item) => item[0] === progressKey)?.[1] || "互動";
-      if (evidence.evidenceStatus === "ineligible") toast(`${label} · ${score} 分，已記錄但不計入本次完成`);
-      else toast(`${label} · ${score} 分，已記錄`);
-    }
-    syncProgress({ event: true });
-    renderCheckStage(state.current);
-  } catch (error) {
-    if (!silent) {
-      if (error.code === "authenticated_evaluation_required") {
-        toast("請先登入 My，再提交並記錄本次學習證據");
-      } else if (["learning_submission_in_progress", "learning_submission_rate_limited"].includes(error.code)) {
-        toast(learningSubmissionRetryMessage(error.code, error.retryAfterSeconds, error.limitReason));
-      } else {
-        toast(error.message || "暫時無法完成評估");
-      }
-    }
+  const progressKey = key === "contextWords" ? "context" : key;
+  const requestProgress = lessonProgress(requestLessonId);
+  const retryInput = pendingInteractionInput(requestProgress[progressKey] || {});
+  if (retryInput) input = retryInput;
+  const preserveLiveDraftDuringRetry = Boolean(retryInput)
+    && ["contextWords", "structure", "authorQuestion"].includes(key);
+  const problem = interactionInputProblem(key, input);
+  if (problem) {
     if (button) {
       button.disabled = false;
       button.textContent = "重試";
     }
     if (autoStatus) autoStatus.textContent = "未核對";
+    if (!silent) toast(problem);
+    return;
+  }
+  const pending = pendingInteractionMutation(
+    requestProgress[progressKey] || {},
+    input,
+    () => window.YwLearningEvidence?.mutationId?.(key, requestLessonId),
+  );
+  if (!pending.clientMutationId) {
+    if (button) {
+      button.disabled = false;
+      button.textContent = "重試";
+    }
+    if (autoStatus) autoStatus.textContent = "未核對";
+    if (!silent) toast("無法建立穩定提交標識，請稍後重試");
+    return;
+  }
+  const requestInFlightKey = interactionRequestKey(
+    requestOwnerScope,
+    requestLessonId,
+    key,
+    pending.clientMutationId,
+  );
+  if (state.interactionRequestsInFlight.has(requestInFlightKey)) {
+    if (button) {
+      button.disabled = true;
+      button.textContent = "正在評閱上一輪…";
+    }
+    if (autoStatus) autoStatus.textContent = "評閱中";
+    return;
+  }
+  const previousRequestRecord = requestProgress[progressKey] || {};
+  requestProgress[progressKey] = {
+    ...previousRequestRecord,
+    ...(preserveLiveDraftDuringRetry ? {} : input),
+    pendingSubmission: pending,
+  };
+  if (!saveStoredProgress()) {
+    requestProgress[progressKey] = { ...previousRequestRecord, ...input };
+    if (button) {
+      button.disabled = false;
+      button.textContent = "重試";
+    }
+    if (autoStatus) autoStatus.textContent = "未送出";
+    if (!silent) toast("瀏覽器無法保存本次提交，尚未送出；請允許網站儲存後重試");
+    return;
+  }
+  state.interactionRequestsInFlight.add(requestInFlightKey);
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 25000);
+    let response;
+    let payload;
+    try {
+      response = await fetch("/api/interaction-check", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        signal: controller.signal,
+        body: JSON.stringify({
+          lessonId: requestLessonId,
+          interaction: key,
+          input,
+          clientMutationId: pending.clientMutationId,
+        }),
+      });
+      payload = await response.json().catch((error) => {
+        if (error?.name === "AbortError") throw error;
+        return {};
+      });
+    } finally {
+      clearTimeout(timeout);
+    }
+    state.interactionRequestsInFlight.delete(requestInFlightKey);
+    if (progressOwnerScope !== requestOwnerScope) return;
+    if (!response.ok) {
+      const error = new Error(payload.error || `評估失敗 ${response.status}`);
+      error.code = String(payload.code || "");
+      error.status = response.status;
+      error.retryAfterSeconds = Number(payload.retryAfterSeconds || 0);
+      error.limitReason = String(payload.limitReason || "");
+      throw error;
+    }
+    const result = payload.assessment || {};
+    const score = Number(result.score || 0);
+    const evidence = interactionEvidenceDecision(payload.evidence?.status, score);
+    if (!evidence.accepted) throw new Error("學習證據回執無效，未計入完成度");
+    const liveProgress = lessonProgress(requestLessonId);
+    const liveRecord = liveProgress[progressKey] || {};
+    if (!interactionPendingMatches(liveRecord, pending)) return;
+    const { pendingSubmission: _pendingSubmission, ...previousProgress } = liveRecord;
+    const multiTurn = ["structure", "authorQuestion"].includes(key);
+    const draftPreservingInteraction = multiTurn || key === "contextWords";
+    const liveDraft = Object.fromEntries(
+      Object.keys(input).map((inputKey) => [inputKey, String(previousProgress[inputKey] ?? "")]),
+    );
+    const preserveDraft = draftPreservingInteraction
+      && interactionInputSignature(liveDraft) !== pending.inputSignature;
+    const nextInput = preserveDraft
+      ? liveDraft
+      : multiTurn
+        ? Object.fromEntries(Object.keys(input).map((inputKey) => [inputKey, ""]))
+        : input;
+    const fallbackTurn = multiTurn ? {
+      sourceEventId: String(payload.evidence?.sourceEventId || ""),
+      attemptNo: Number(payload.evidence?.attemptNo) || null,
+      input,
+      assessment: result,
+    } : null;
+    liveProgress[progressKey] = {
+      ...previousProgress,
+      ...nextInput,
+      done: previousProgress.done === true || evidence.completed,
+      score,
+      bestScore: Math.max(Number(previousProgress.bestScore || previousProgress.score || 0), score),
+      result,
+      turns: multiTurn
+        ? mergeInteractionConversation(previousProgress.turns, payload.conversation, fallbackTurn)
+        : (previousProgress.turns || []),
+      ...(key === "contextWords" ? { assessedInputSignature: pending.inputSignature } : {}),
+      evidenceStatus: evidence.evidenceStatus,
+    };
+    if (key === "wordCreation" && !lessonVocabulary(requestLesson).length) {
+      liveProgress.vocabulary = {
+        ...(liveProgress.vocabulary || {}),
+        done: evidence.completed,
+        reviewed: [],
+        evidenceStatus: evidence.evidenceStatus,
+      };
+    }
+    if (key === "contextWords") void saveReadingSubmission(input, payload.evidence?.sourceEventId, requestLessonId);
+    const requestStillCurrent = state.current?.id === requestLessonId;
+    if (!silent && requestStillCurrent) {
+      const label = trackFor(requestLesson).find((item) => item[0] === progressKey)?.[1] || "互動";
+      if (evidence.evidenceStatus === "ineligible") toast(`${label} · ${score} 分，已記錄但不計入本次完成`);
+      else toast(`${label} · ${score} 分，已記錄`);
+    }
+    if (requestStillCurrent) {
+      syncProgress({ event: true });
+      renderCheckStage(requestLesson);
+      if (key === "contextWords" && preserveDraft) {
+        const expectedSignature = interactionInputSignature(liveDraft);
+        clearTimeout(submitInteraction.contextTimer);
+        submitInteraction.contextTimer = setTimeout(() => {
+          if (
+            state.current?.id !== requestLessonId
+            || progressOwnerScope !== requestOwnerScope
+            || interactionInputSignature(interactionInput("contextWords")) !== expectedSignature
+          ) return;
+          void submitInteraction("contextWords", null, { silent: true });
+        }, 720);
+      }
+      if (multiTurn) {
+        els.checkStage.querySelector(`[data-round="${progressKey}"] [data-interaction-latest-feedback]`)
+          ?.focus({ preventScroll: true });
+      }
+    } else {
+      saveStoredProgress();
+      renderLessonIndex();
+      renderMastery();
+    }
+  } catch (error) {
+    state.interactionRequestsInFlight.delete(requestInFlightKey);
+    if (progressOwnerScope !== requestOwnerScope) return;
+    const liveProgress = lessonProgress(requestLessonId);
+    const liveRecord = liveProgress[progressKey] || {};
+    if (error.code === "learning_mutation_conflict" && interactionPendingMatches(liveRecord, pending)) {
+      const { pendingSubmission: _pendingSubmission, ...retryableRecord } = liveRecord;
+      liveProgress[progressKey] = retryableRecord;
+      saveStoredProgress();
+    }
+    const requestStillCurrent = state.current?.id === requestLessonId;
+    if (!silent && requestStillCurrent) {
+      if (error.code === "authenticated_evaluation_required") {
+        toast("請先登入 My，再提交並記錄本次學習證據");
+      } else if (error.code === "learning_mutation_conflict") {
+        toast("答案或提交狀態已變更；請再次提交，系統會建立新一輪");
+      } else if (["learning_submission_in_progress", "learning_submission_rate_limited"].includes(error.code)) {
+        toast(learningSubmissionRetryMessage(error.code, error.retryAfterSeconds, error.limitReason));
+      } else if (error?.name === "AbortError") {
+        toast("來源端評閱逾時；答案已保留，請稍後用同一內容重試");
+      } else {
+        toast(error.message || "暫時無法完成評估");
+      }
+    }
+    if (requestStillCurrent) {
+      // Rebuild from the owner-scoped record so a draft typed while the prior
+      // round was pending stays visible, while the action names the exact
+      // previous-round retry that will reuse the durable mutation receipt.
+      renderCheckStage(requestLesson);
+    }
+    if (button?.isConnected) {
+      button.disabled = false;
+      button.textContent = "重試";
+    }
+    if (autoStatus?.isConnected) autoStatus.textContent = "未核對";
+  } finally {
+    state.interactionRequestsInFlight.delete(requestInFlightKey);
   }
 }
 
-async function saveReadingSubmission(input, sourceEventId) {
+async function saveReadingSubmission(input, sourceEventId, lessonId = state.current?.id) {
   try {
     const words = String(input.words || "").split(/[，,、\s]+/).filter(Boolean).slice(0, 3);
-    if (words.length !== 3 || !state.current) return;
+    if (words.length !== 3 || !lessonId) return;
     await fetch("/api/reading/submission", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        lessonId: state.current.id,
+        lessonId,
         words,
         sourceEventId: String(sourceEventId || ""),
       }),
@@ -3102,28 +3908,78 @@ async function saveReadingSubmission(input, sourceEventId) {
   } catch { /* 未登入或離線時僅保留本地進度，星圖等待下次有效提交 */ }
 }
 
-async function saveEvaluation(explicitRating = null, { quiet = false } = {}) {
+async function saveEvaluation(
+  explicitRating = null,
+  {
+    quiet = false,
+    lessonId = state.current?.id,
+    ownerScope = progressOwnerScope,
+    reason: explicitReason = null,
+  } = {},
+) {
+  if (
+    !interactionIdentityResolved
+    || !lessonId
+    || !ownerScope
+    || state.current?.id !== lessonId
+    || progressOwnerScope !== ownerScope
+  ) {
+    return { ok: false, synced: false, savedLocal: false, rating: null, reason: "stale-evaluation" };
+  }
+  const submissionMode = interactionSubmissionMode("evaluation", state.current);
+  if (["pending_identity", "login_required"].includes(submissionMode)) {
+    if (!quiet && submissionMode === "login_required") toast("請先登入 My，再提交並記錄本次篇目評價");
+    return {
+      ok: false,
+      synced: false,
+      savedLocal: false,
+      rating: null,
+      reason: submissionMode,
+    };
+  }
   const candidate = explicitRating === null || explicitRating === undefined
-    ? (els.checkStage.querySelector("[data-interest-slider]")?.value ?? lessonProgress().evaluation?.rating)
+    ? (els.checkStage.querySelector("[data-interest-slider]")?.value ?? lessonProgress(lessonId).evaluation?.rating)
     : explicitRating;
   const rating = Number(candidate);
-  const reason = fieldValue("evaluation.reason");
-  const lessonId = state.current?.id;
-  if (!lessonId || !Number.isFinite(rating) || rating < 0 || rating > 100) {
+  const evaluationReason = explicitReason === null
+    ? fieldValue("evaluation.reason")
+    : String(explicitReason || "");
+  if (!Number.isFinite(rating) || rating < 0 || rating > 100) {
     return { ok: false, synced: false, savedLocal: false, rating: null, reason: "invalid-evaluation" };
   }
-  const ownerScope = progressOwnerScope;
-  const localEvaluation = { rating, reason, done: true, synced: false };
+  const localEvaluation = {
+    rating,
+    reason: evaluationReason,
+    done: submissionMode === "local",
+    synced: false,
+    ...(submissionMode === "local" ? { evidenceStatus: "local_practice" } : {}),
+  };
   lessonProgress(lessonId).evaluation = localEvaluation;
-  syncProgress({ event: true });
-  const evidence = await recordLearning("evaluation", { rating, reason: reason.slice(0, 300) });
+  syncProgress({ event: submissionMode === "local" });
+  if (submissionMode === "local") {
+    return {
+      ok: true,
+      synced: false,
+      savedLocal: true,
+      rating,
+      status: null,
+      reason: "local_practice",
+    };
+  }
+  const evidence = await recordLearningForLesson(
+    "evaluation",
+    lessonId,
+    { rating, reason: evaluationReason.slice(0, 300) },
+  );
   const synced = evidence?.ok === true;
   if (
     progressOwnerScope === ownerScope
     && state.progress[lessonId]?.evaluation === localEvaluation
   ) {
     localEvaluation.synced = synced;
-    saveStoredProgress();
+    localEvaluation.done = synced;
+    localEvaluation.evidenceStatus = synced ? "recorded" : "unavailable";
+    syncProgress({ event: synced });
   }
   const result = {
     ok: synced,
@@ -3133,7 +3989,7 @@ async function saveEvaluation(explicitRating = null, { quiet = false } = {}) {
     status: Number(evidence?.status) || null,
     reason: evidence?.reason || (synced ? "synced" : "unavailable"),
   };
-  if (!quiet) {
+  if (!quiet && state.current?.id === lessonId && progressOwnerScope === ownerScope) {
     toast(synced
       ? `有意思程度已同步為 ${rating}%`
       : result.savedLocal
@@ -3148,14 +4004,26 @@ function studyGuideMutationId(lessonId) {
     || `yw:${lessonId}:studyGuideItemCompleted:${crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`}`.slice(0, 100);
 }
 
+function currentStudyGuideAttemptRecords(ownerScope, lessonId, itemKey, clientMutationId) {
+  if (progressOwnerScope !== ownerScope) return null;
+  const records = studyGuideProgress(lessonProgress(lessonId));
+  return records[itemKey]?.clientMutationId === clientMutationId ? records : null;
+}
+
 async function submitStudyGuideAttempt({ lessonId, itemKey, response, referenceRevealedAt, clientMutationId }) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 25000);
   try {
     const result = await fetch("/api/reading/study-guide-attempt", {
       method: "POST",
       headers: { "content-type": "application/json", accept: "application/json" },
+      signal: controller.signal,
       body: JSON.stringify({ lessonId, itemKey, response, referenceRevealedAt, clientMutationId }),
     });
-    const payload = await result.json().catch(() => ({}));
+    const payload = await result.json().catch((error) => {
+      if (error?.name === "AbortError") throw error;
+      return {};
+    });
     if (!result.ok || payload.ok !== true) {
       return {
         ok: false,
@@ -3167,32 +4035,62 @@ async function submitStudyGuideAttempt({ lessonId, itemKey, response, referenceR
       };
     }
     return payload;
-  } catch {
-    return { ok: false, status: 0, reason: "unavailable" };
+  } catch (error) {
+    return {
+      ok: false,
+      status: 0,
+      code: error?.name === "AbortError" ? "learning_evaluator_timeout" : "",
+      reason: error?.name === "AbortError" ? "來源端評閱逾時" : "unavailable",
+    };
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
 function bindCheckStage() {
-  const firstRead = state.firstReads.get(state.current?.id);
-  if (firstRead) {
+  $$('[data-study-guide-catalog-retry]', els.checkStage).forEach((button) => button.addEventListener("click", async () => {
+    button.disabled = true;
+    button.textContent = "正在重新載入…";
+    const restored = await refreshStudyGuideCatalog();
+    if (!restored && button.isConnected) {
+      button.disabled = false;
+      button.textContent = "重新載入學案知能清算";
+      toast("學案知能清算仍無法載入，請稍後重試");
+    }
+  }));
+  const firstReadLesson = state.current;
+  const firstRead = firstReadForLesson(firstReadLesson?.id);
+  const firstReadOwnerScope = firstRead?.ownerScope;
+  if (firstReadLesson && firstRead) {
     window.YwClassicalFirstRead?.bindCorrections?.(els.checkStage, firstRead, {
       toast,
+      isCurrent: () => firstReadCallbackIsCurrent(firstReadLesson.id, firstRead, firstReadOwnerScope),
+      onStale: () => invalidateStaleFirstReadAuthority(
+        firstReadLesson.id,
+        firstRead,
+        firstReadOwnerScope,
+      ),
       onChange: () => {
+        if (!firstReadCallbackIsCurrent(firstReadLesson.id, firstRead, firstReadOwnerScope)) return;
         const resolvedCount = firstRead.marks.filter((mark) => mark.resolutionStatus === "resolved").length;
-        lessonProgress().firstRead = {
-          ...(lessonProgress().firstRead || {}),
+        lessonProgress(firstReadLesson.id).firstRead = {
+          ...(lessonProgress(firstReadLesson.id).firstRead || {}),
           done: true,
           markCount: firstRead.marks.length,
           resolvedCount,
         };
         syncProgress({ event: true });
-        renderCheckStage(state.current);
+        renderCheckStage(firstReadLesson);
         if (resolvedCount === firstRead.marks.length) toast("初讀疑難已全部完成藍筆訂正");
       },
     });
   }
   $$('[data-study-response]', els.checkStage).forEach((form) => form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (!learningMutationOwnerResolved() || progressOwnerScope === ANONYMOUS_UI_SCOPE) {
+      toast("請先完成登入確認，再提交學案形成性評閱");
+      return;
+    }
     const response = String(new FormData(form).get("response") || "").trim();
     if (!response) {
       toast("請先寫下自己的答案，再看參考答案");
@@ -3223,11 +4121,24 @@ function bindCheckStage() {
       referenceRevealedAt,
       clientMutationId,
       submitting: true,
-      pendingSync: false,
+      // Keep the exact replay receipt durable while the spinner remains a
+      // memory-only state. A reload becomes a safe idempotent retry.
+      pendingSync: true,
       completed: false,
       assessment: replayPending ? previous.assessment : null,
     };
     records[itemKey] = pendingRecord;
+    if (!saveStoredProgress()) {
+      records[itemKey] = {
+        ...pendingRecord,
+        submitting: false,
+        lastError: "瀏覽器無法保存重試回執，本次答案尚未送出",
+        lastErrorCode: "local_progress_storage_unavailable",
+      };
+      renderCheckStage(state.current);
+      toast("瀏覽器無法保存本次答案，尚未送出；請允許網站儲存後重試");
+      return;
+    }
     syncProgress();
     renderCheckStage(state.current);
     const result = await submitStudyGuideAttempt({
@@ -3237,28 +4148,39 @@ function bindCheckStage() {
       referenceRevealedAt,
       clientMutationId,
     });
-    if (progressOwnerScope !== ownerScope || records[itemKey]?.clientMutationId !== clientMutationId) return;
+    // Identity hydration can replace state.progress even when it resolves back
+    // to the same owner string. Reacquire the live scoped record after await;
+    // never update the detached object captured before the request.
+    const liveRecords = currentStudyGuideAttemptRecords(ownerScope, lessonId, itemKey, clientMutationId);
+    if (!liveRecords) return;
     const completed = result?.ok === true
       && result.passed === true
       && result.evidence?.eligibilityStatus === "eligible";
-    records[itemKey] = {
-      ...records[itemKey],
+    liveRecords[itemKey] = {
+      ...liveRecords[itemKey],
       submitting: false,
       pendingSync: result?.ok !== true,
       completed,
-      assessment: result?.ok === true ? result.assessment : records[itemKey]?.assessment || null,
+      assessment: result?.ok === true ? result.assessment : liveRecords[itemKey]?.assessment || null,
       evidence: result?.ok === true ? result.evidence : null,
       lastError: result?.ok === true ? "" : result?.reason || "unavailable",
       lastErrorCode: result?.ok === true ? "" : result?.code || "",
       assessedAt: result?.ok === true ? new Date().toISOString() : null,
     };
-    syncProgress({ event: true });
-    if (state.current?.id === lessonId) renderCheckStage(state.current);
-    if (completed) {
-      toast(`本次達標 ${Number(result.assessment?.score) || 0} 分，已同步形成性掌握度`);
-    } else if (result?.ok === true) {
-      toast(`本次 ${Number(result.assessment?.score) || 0} 分，已記錄；請依提示重答`);
+    const requestStillCurrent = state.current?.id === lessonId;
+    if (requestStillCurrent) {
+      syncProgress({ event: true });
+      renderCheckStage(state.current);
     } else {
+      saveStoredProgress();
+      renderLessonIndex();
+      renderMastery();
+    }
+    if (completed && requestStillCurrent) {
+      toast(`本次達標 ${Number(result.assessment?.score) || 0} 分，已同步形成性掌握度`);
+    } else if (result?.ok === true && requestStillCurrent) {
+      toast(`本次 ${Number(result.assessment?.score) || 0} 分，已記錄；請依提示重答`);
+    } else if (requestStillCurrent) {
       const gateMessage = {
         classical_first_read_required: "請先完成無標點初讀，再回來核對本題。",
         classical_annotated_reading_required: "請先讀完帶註釋正文，再回來核對本題。",
@@ -3273,6 +4195,8 @@ function bindCheckStage() {
           result?.retryAfterSeconds,
           result?.limitReason,
         ),
+        learning_evaluator_unavailable: "來源端評閱暫時不可用；答案已保留，請稍後重試。",
+        learning_evaluator_timeout: "來源端評閱逾時；答案已保留，請稍後重試。",
       }[result?.code];
       toast(gateMessage || (result?.status === 401
         ? "參考答案已顯示；登入後可重試形成性評閱"
@@ -3280,6 +4204,7 @@ function bindCheckStage() {
     }
   }));
   $$('[data-study-retry]', els.checkStage).forEach((button) => button.addEventListener("click", () => {
+    if (!learningMutationOwnerResolved() || progressOwnerScope === ANONYMOUS_UI_SCOPE) return;
     const records = studyGuideProgress();
     records[button.dataset.studyRetry] = {
       ...(records[button.dataset.studyRetry] || {}),
@@ -3289,21 +4214,70 @@ function bindCheckStage() {
     syncProgress();
     renderCheckStage(state.current);
   }));
+  $$('[data-field="structure.reason"], [data-field="authorQuestion.answer"]', els.checkStage)
+    .forEach((field) => {
+      const lessonId = state.current?.id;
+      const ownerScope = progressOwnerScope;
+      const [progressKey, inputKey] = String(field.dataset.field || "").split(".", 2);
+      field.addEventListener("input", () => {
+        if (
+          !learningMutationOwnerResolved(ownerScope)
+          ||
+          !lessonId
+          || !progressKey
+          || !inputKey
+          || state.current?.id !== lessonId
+          || progressOwnerScope !== ownerScope
+        ) return;
+        const progress = lessonProgress(lessonId);
+        progress[progressKey] = {
+          ...(progress[progressKey] && typeof progress[progressKey] === "object"
+            ? progress[progressKey]
+            : {}),
+          [inputKey]: field.value,
+        };
+        saveStoredProgress();
+      });
+    });
   $$('[data-ai-check]', els.checkStage).forEach((button) => button.addEventListener("click", () => submitInteraction(button.dataset.aiCheck, button)));
   const contextWords = $$('[data-context-word]', els.checkStage);
   if (contextWords.length) contextWords.forEach((field) => field.addEventListener("input", () => {
     clearTimeout(submitInteraction.contextTimer);
     const parts = contextWords.map((item) => item.value.trim()).filter(Boolean);
     const words = parts.join("、");
+    const lessonId = state.current?.id;
+    const ownerScope = progressOwnerScope;
+    if (lessonId && learningMutationOwnerResolved(ownerScope)) {
+      const progress = lessonProgress(lessonId);
+      progress.context = {
+        ...(progress.context && typeof progress.context === "object" ? progress.context : {}),
+        words,
+      };
+      saveStoredProgress();
+    }
     const status = els.checkStage.querySelector('[data-auto-status="contextWords"]');
     if (status) status.textContent = parts.length === 3 ? "待核對" : `${parts.length}/3`;
     if (parts.length !== 3) return;
     const saved = lessonProgress().context;
-    if (saved?.words === words && saved?.result) {
+    if (
+      saved?.words === words
+      && saved?.result
+      && (!saved.assessedInputSignature
+        || saved.assessedInputSignature === interactionInputSignature({ words }))
+    ) {
       if (status) status.textContent = "已核對";
       return;
     }
-    submitInteraction.contextTimer = setTimeout(() => void submitInteraction("contextWords", null, { silent: true }), 720);
+    submitInteraction.contextTimer = setTimeout(() => {
+      const liveWords = contextWords.map((item) => item.value.trim()).filter(Boolean).join("、");
+      if (
+        state.current?.id !== lessonId
+        || progressOwnerScope !== ownerScope
+        || contextWords.some((item) => !item.isConnected)
+        || liveWords !== words
+      ) return;
+      void submitInteraction("contextWords", null, { silent: true });
+    }, 720);
   }));
   $$('[data-interest-slider]', els.checkStage).forEach((slider) => {
     const update = () => {
@@ -3317,11 +4291,30 @@ function bindCheckStage() {
     };
     slider.addEventListener("input", update);
     slider.addEventListener("change", () => {
+      clearTimeout(saveEvaluation.timer);
       const rating = clamp(Number(slider.value), 0, 100);
       const status = slider.closest(".interest-rating")?.querySelector(".auto-save-status");
-      if (status) status.textContent = `正在保存 ${rating}%…`;
-      void saveEvaluation(rating, { quiet: true }).then((result) => {
-        if (!status) return;
+      const lessonId = state.current?.id;
+      const ownerScope = progressOwnerScope;
+      if (!learningMutationOwnerResolved(ownerScope)) return;
+      const evaluationReason = fieldValue("evaluation.reason");
+      const statusAttempt = String((saveEvaluation.statusSequence = Number(saveEvaluation.statusSequence || 0) + 1));
+      if (status) {
+        status.dataset.evaluationSaveAttempt = statusAttempt;
+        status.textContent = `正在保存 ${rating}%…`;
+      }
+      void saveEvaluation(rating, {
+        quiet: true,
+        lessonId,
+        ownerScope,
+        reason: evaluationReason,
+      }).then((result) => {
+        if (
+          !status?.isConnected
+          || state.current?.id !== lessonId
+          || progressOwnerScope !== ownerScope
+          || status.dataset.evaluationSaveAttempt !== statusAttempt
+        ) return;
         status.textContent = result?.synced
           ? `已同步 ${rating}%`
           : result?.savedLocal
@@ -3332,29 +4325,96 @@ function bindCheckStage() {
   });
   $$('[data-quiz-option]', els.checkStage).forEach((button) => button.addEventListener("click", async () => {
     const lessonId = state.current?.id;
+    const ownerScope = progressOwnerScope;
     const bank = state.vocabBanks.get(lessonId);
     const itemHost = button.closest("[data-quiz-item]");
     if (!lessonId || !bank || !itemHost) return;
+    if (!learningMutationOwnerResolved(ownerScope)) return;
     if (itemHost.dataset.submitting === "1") return;
     const item = bank.questions.find((entry) => entry.id === itemHost.dataset.quizItem);
     if (!item) return;
     const progress = lessonProgress(lessonId);
     const quiz = quizRecord(progress);
-    const previous = quiz.answers[item.id] || { attempts: 0, correct: false, mastered: false };
+    let previous = quiz.answers[item.id] || { attempts: 0, correct: false, mastered: false };
     if (previous.correct) return;
     const pick = Number(button.dataset.quizOption);
-    itemHost.dataset.submitting = "1";
-    const optionButtons = $$('[data-quiz-option]', itemHost);
-    optionButtons.forEach((option) => { option.disabled = true; });
     const formal = window.YwVocabProgress?.isFormalVocabularyQuestion?.(
       state.formalVocabResourceKeys,
       lessonId,
       item.id,
     ) === true;
-    const result = formal
-      ? await recordVocabAttempt(item.id, pick, lessonId)
-      : { ok: true, localPractice: true };
-    if (state.current?.id !== lessonId) return;
+    if (formal && ownerScope === ANONYMOUS_UI_SCOPE) {
+      toast("請先登入 My，再完成正式字詞自測");
+      return;
+    }
+    let pending = null;
+    let requestKey = "";
+    if (formal) {
+      if (
+        previous.pendingAttempt?.clientMutationId
+        && Number(previous.pendingAttempt.selectedIndex) !== pick
+      ) {
+        toast("上一答案尚未確認；請先點原選項用同一回執重試");
+        renderCheckStage(state.current);
+        return;
+      }
+      pending = pendingVocabAttempt(
+        previous,
+        pick,
+        () => window.YwLearningEvidence?.mutationId?.("vocabAnswer", lessonId)
+          || `yw:${lessonId}:vocabAnswer:${crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`}`.slice(0, 100),
+      );
+      if (!pending.clientMutationId) {
+        toast("無法建立穩定字詞提交標識，請稍後重試");
+        return;
+      }
+      requestKey = vocabAttemptRequestKey(ownerScope, lessonId, item.id, pending.clientMutationId);
+      if (state.vocabAttemptsInFlight.has(requestKey)) return;
+      quiz.answers[item.id] = { ...previous, pendingAttempt: pending };
+      if (!saveStoredProgress()) {
+        quiz.answers[item.id] = previous;
+        toast("瀏覽器無法保存字詞重試回執，本次答案尚未送出");
+        return;
+      }
+      state.vocabAttemptsInFlight.add(requestKey);
+    }
+    itemHost.dataset.submitting = "1";
+    const optionButtons = $$('[data-quiz-option]', itemHost);
+    optionButtons.forEach((option) => { option.disabled = true; });
+    let result;
+    try {
+      result = formal
+        ? await recordVocabAttempt(item.id, pick, lessonId, pending.clientMutationId)
+        : { ok: true, localPractice: true };
+    } catch {
+      result = { ok: false, reason: "unavailable" };
+    } finally {
+      if (requestKey) state.vocabAttemptsInFlight.delete(requestKey);
+    }
+    let liveProgress = progress;
+    let liveQuiz = quiz;
+    if (formal) {
+      const live = currentVocabAttempt(ownerScope, lessonId, item.id, pending);
+      if (!live) return;
+      if (result?.ok !== true) {
+        const requestStillCurrent = state.current?.id === lessonId && progressOwnerScope === ownerScope;
+        if (requestStillCurrent) {
+          renderCheckStage(state.current);
+          toast(result?.reason === "anonymous"
+            ? "請先登入，再完成字詞自測"
+            : result?.code === "vocabulary_attempt_timeout"
+              ? "字詞答案同步逾時；已保留同一回執，請點原選項重試"
+              : "本次答案尚未同步；已保留同一回執，請稍後重試");
+        } else {
+          saveStoredProgress();
+        }
+        return;
+      }
+      liveProgress = live.progress;
+      liveQuiz = live.quiz;
+      const { pendingAttempt: _pendingAttempt, ...confirmedPrevious } = live.record;
+      previous = confirmedPrevious;
+    }
     const entry = formal
       ? window.YwVocabProgress?.applyServerAttempt?.(previous, result, pick)
       : window.YwVocabProgress?.applyLocalPracticeAttempt?.(
@@ -3363,25 +4423,33 @@ function bindCheckStage() {
         pick,
       );
     if (!entry) {
-      itemHost.dataset.submitting = "0";
-      optionButtons.forEach((option) => { option.disabled = false; });
-      toast(result?.reason === "anonymous" ? "請先登入，再完成字詞自測" : "本次答案尚未同步，請恢復連線後重試");
+      if (state.current?.id === lessonId && progressOwnerScope === ownerScope) {
+        renderCheckStage(state.current);
+        toast("本次字詞回執無效；答案未計入，請用同一選項重試");
+      }
       return;
     }
-    quiz.answers[item.id] = entry;
-    quiz.cursorId = entry.correct
-      ? window.YwVocabProgress?.nextCursor?.(bank.questions, quiz.answers)
-        ?? bank.questions.find((question) => !quizItemState(quiz, question.id).correct)?.id
+    liveQuiz.answers[item.id] = entry;
+    liveQuiz.cursorId = entry.correct
+      ? window.YwVocabProgress?.nextCursor?.(bank.questions, liveQuiz.answers)
+        ?? bank.questions.find((question) => !quizItemState(liveQuiz, question.id).correct)?.id
         ?? null
       : item.id;
-    const solvedAll = bank.questions.every((question) => quizRecord(progress).answers[question.id]?.correct);
-    progress.vocabulary = {
-      ...(progress.vocabulary || {}),
+    const solvedAll = bank.questions.every((question) => liveQuiz.answers[question.id]?.correct);
+    liveProgress.vocabulary = {
+      ...(liveProgress.vocabulary || {}),
       done: solvedAll,
       quiz: solvedAll,
     };
     if (solvedAll) {
-      quiz.completionSent = Boolean(result.completionEvidence);
+      liveQuiz.completionSent = Boolean(result.completionEvidence);
+    }
+    const requestStillCurrent = state.current?.id === lessonId && progressOwnerScope === ownerScope;
+    if (!requestStillCurrent) {
+      saveStoredProgress();
+      renderLessonIndex();
+      renderMastery();
+      return;
     }
     syncProgress({ event: true });
     if (!entry.correct) {
@@ -3396,7 +4464,7 @@ function bindCheckStage() {
         state.current?.id,
         lessonId,
       ) ?? state.current?.id === lessonId;
-      if (!canAdvance) return;
+      if (!canAdvance || progressOwnerScope !== ownerScope) return;
       renderCheckStage(state.current);
       const round = els.checkStage.querySelector('[data-round="vocabulary"]');
       round?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
@@ -3406,6 +4474,7 @@ function bindCheckStage() {
     openLexicon(button.dataset.quizLookup);
   }));
   $$('[data-vocabulary]', els.checkStage).forEach((button) => button.addEventListener("click", () => {
+    if (!learningMutationOwnerResolved()) return;
     const progress = lessonProgress();
     progress.vocabulary ||= { reviewed: [], done: false };
     const reviewed = new Set(progress.vocabulary.reviewed || []);
@@ -3418,6 +4487,10 @@ function bindCheckStage() {
     renderCheckStage(state.current);
   }));
   $$('[data-read-check]', els.checkStage).forEach((checkbox) => checkbox.addEventListener("change", () => {
+    if (!learningMutationOwnerResolved()) {
+      checkbox.checked = false;
+      return;
+    }
     const previous = lessonProgress().read && typeof lessonProgress().read === "object" ? lessonProgress().read : {};
     lessonProgress().read = { ...previous, checked: checkbox.checked, done: checkbox.checked };
     syncProgress();
@@ -3429,9 +4502,42 @@ function bindCheckStage() {
   if (reason) {
     reason.addEventListener("input", () => {
       clearTimeout(saveEvaluation.timer);
-      saveEvaluation.timer = setTimeout(() => void saveEvaluation(null, { quiet: true }), 700);
+      const lessonId = state.current?.id;
+      const ownerScope = progressOwnerScope;
+      if (!learningMutationOwnerResolved(ownerScope)) return;
+      const rating = els.checkStage.querySelector("[data-interest-slider]")?.value ?? null;
+      const evaluationReason = reason.value;
+      saveEvaluation.timer = setTimeout(() => {
+        const liveRating = els.checkStage.querySelector("[data-interest-slider]")?.value ?? null;
+        if (
+          !reason.isConnected
+          || state.current?.id !== lessonId
+          || progressOwnerScope !== ownerScope
+          || String(liveRating) !== String(rating)
+          || reason.value !== evaluationReason
+        ) return;
+        void saveEvaluation(rating, {
+          quiet: true,
+          lessonId,
+          ownerScope,
+          reason: evaluationReason,
+        });
+      }, 700);
     });
-    reason.addEventListener("blur", () => void saveEvaluation(null, { quiet: true }));
+    reason.addEventListener("blur", () => {
+      clearTimeout(saveEvaluation.timer);
+      const lessonId = state.current?.id;
+      const ownerScope = progressOwnerScope;
+      if (!learningMutationOwnerResolved(ownerScope)) return;
+      const rating = els.checkStage.querySelector("[data-interest-slider]")?.value ?? null;
+      const evaluationReason = reason.value;
+      void saveEvaluation(rating, {
+        quiet: true,
+        lessonId,
+        ownerScope,
+        reason: evaluationReason,
+      });
+    });
   }
 }
 
@@ -3478,8 +4584,8 @@ function preparePages(lesson) {
   const context = (lesson.textbook?.contextPageImages || []).filter((page) => page.matched);
   state.pages = direct.length ? direct : context;
   state.pageIndex = 0;
-  const firstRead = state.firstReads.get(lesson.id);
-  const firstReadLocked = Boolean(sourceModeFor(lesson) === "classical" && firstRead && !firstRead.submitted);
+  const firstRead = firstReadForLesson(lesson.id);
+  const firstReadLocked = Boolean(sourceModeFor(lesson) === "classical" && !firstRead?.submitted);
   els.pageOpen.disabled = firstReadLocked || !state.pages.length;
 }
 
@@ -3496,8 +4602,8 @@ function showPage(index) {
 }
 
 function openPages(index = 0) {
-  const firstRead = state.firstReads.get(state.current?.id);
-  if (sourceModeFor(state.current) === "classical" && firstRead && !firstRead.submitted) {
+  const firstRead = firstReadForLesson(state.current?.id);
+  if (sourceModeFor(state.current) === "classical" && !firstRead?.submitted) {
     toast("完成無標點初讀後再打開教材原圖");
     return;
   }
@@ -3624,18 +4730,22 @@ function toggleInlineNote(button) {
 }
 
 function onSelection() {
-  const firstRead = state.firstReads.get(state.current?.id);
+  const lesson = state.current;
+  const firstRead = firstReadForLesson(lesson?.id);
   if (firstRead && !firstRead.submitted) {
+    const ownerScope = firstRead.ownerScope;
     window.YwClassicalFirstRead?.captureSelection?.(els.textFlow, firstRead, {
       toast,
+      isCurrent: () => firstReadCallbackIsCurrent(lesson.id, firstRead, ownerScope),
       onChange: () => {
-        lessonProgress().firstRead = {
-          ...(lessonProgress().firstRead || {}),
+        if (!firstReadCallbackIsCurrent(lesson.id, firstRead, ownerScope)) return;
+        lessonProgress(lesson.id).firstRead = {
+          ...(lessonProgress(lesson.id).firstRead || {}),
           markCount: firstRead.marks.length,
           done: false,
         };
         syncProgress();
-        renderCheckStage(state.current);
+        renderCheckStage(lesson);
       },
     });
     return;
@@ -3720,7 +4830,7 @@ function bindEvents() {
   });
   els.lessonIndex.addEventListener("click", (event) => {
     const button = event.target.closest("[data-lesson]");
-    if (button) showLesson(button.dataset.lesson);
+    if (button) showLesson(button.dataset.lesson, { closeAtlasOnCompact: true });
   });
   els.materialStream.addEventListener("click", (event) => {
     const button = event.target.closest("[data-resource-index]");
@@ -3738,6 +4848,19 @@ function bindEvents() {
     });
   });
   els.textFlow.addEventListener("click", (event) => {
+    const firstReadRenderRetry = event.target.closest("[data-first-read-render-retry]");
+    if (firstReadRenderRetry) {
+      event.preventDefault();
+      const lesson = state.current;
+      if (!lesson || lesson.id !== firstReadRenderRetry.dataset.lessonId) return;
+      if (renderCommittedFirstReadTransition(lesson)) {
+        const ancillaryReady = renderCommittedFirstReadAncillary(lesson);
+        toast(ancillaryReady ? "帶註釋正文已重新展開" : "帶註釋正文已展開；部分附屬區域稍後可再載入");
+      } else {
+        toast("帶註釋正文仍未展開，請稍後再試");
+      }
+      return;
+    }
     const annotatedReadButton = event.target.closest("[data-annotated-read-complete]");
     if (annotatedReadButton) {
       event.preventDefault();
@@ -3830,6 +4953,7 @@ function bindEvents() {
       closeAtlas();
     }
   });
+  compactToolsMedia.addEventListener("change", syncToolsAccessibility);
   window.addEventListener("resize", () => requestAnimationFrame(fitLessonTitle), { passive: true });
   if (window.ResizeObserver && els.title?.parentElement) {
     const titleObserver = new ResizeObserver(() => requestAnimationFrame(fitLessonTitle));
@@ -3845,10 +4969,14 @@ function bindEvents() {
       showLesson(id, { push: false });
     }
   });
-  window.addEventListener("online", flushSharedState);
-  window.addEventListener("focus", flushSharedState);
+  const refreshRecoverableLearningState = () => {
+    void flushSharedState();
+    if (state.studyGuideCatalogStatus === "unavailable") void refreshStudyGuideCatalog();
+  };
+  window.addEventListener("online", refreshRecoverableLearningState);
+  window.addEventListener("focus", refreshRecoverableLearningState);
   document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") flushSharedState();
+    if (document.visibilityState === "visible") refreshRecoverableLearningState();
     else resetLessonChat();
   });
   window.addEventListener("pagehide", resetLessonChat);
@@ -3882,6 +5010,9 @@ async function init() {
     if (node.nodeType === Node.ELEMENT_NODE) enforceNewTabLinks(node);
   }))).observe(document.body, { childList: true, subtree: true });
   if (compactAtlasMedia.matches) closeAtlas(); else openAtlas();
+  // The catalog is a recoverable learning enhancement. Start it in parallel,
+  // but never put the core textbook first paint behind its network/body wait.
+  const studyGuideCatalogPromise = fetchStudyGuideCatalog().catch(() => null);
   try {
     const [
       manifest,
@@ -3890,7 +5021,6 @@ async function init() {
       vocabEligibility,
       vocabIndex,
       learningManifest,
-      studyGuideCatalog,
       wechatArchiveMap,
       previewScreenshots,
       previewTargets,
@@ -3904,7 +5034,6 @@ async function init() {
       fetchJson("data/vocab-eligibility.json", { cache: "no-cache" }),
       fetchJson("data/vocab/index.json", { cache: "no-cache" }),
       fetchJson("data/learning-manifest.json", { cache: "no-cache" }),
-      fetchJson("data/study-guide-catalog.json", { cache: "no-cache" }).catch(() => null),
       fetchJson("data/wechat-archive-map.json", { cache: "no-cache" }),
       fetchJson("data/preview-screenshots.json", { cache: "no-cache" }),
       fetchJson("data/preview-targets.json", { cache: "no-cache" }),
@@ -3940,14 +5069,6 @@ async function init() {
       state.formalVocabResourceKeys,
       state.vocabIndex.activeItemIds,
     );
-    if (studyGuideCatalog?.schemaVersion === "yw-study-guide-catalog-v1"
-      && Array.isArray(studyGuideCatalog.lessons)) {
-      state.studyGuideLessons = new Map(studyGuideCatalog.lessons.map((lesson) => [lesson.lessonId, lesson]));
-      state.studyGuideCatalogStatus = "available";
-    } else {
-      state.studyGuideLessons = new Map();
-      state.studyGuideCatalogStatus = "unavailable";
-    }
     state.wechatArchiveBySource = new Map(wechatArchiveMap.entries.map((entry) => [resourceIdentity(entry.sourceUrl), entry]));
     state.previewScreenshotBySource = new Map(previewScreenshots.entries.map((entry) => [resourceIdentity(entry.sourceUrl), entry]));
     state.directRemoteAppRoots = new Set(previewTargets.directRemoteAppRoots);
@@ -3970,6 +5091,21 @@ async function init() {
       || defaultBlock?.lessons.find((lesson) => !isUnitHeading(lesson) && !isRetiredMirror(lesson) && (lesson.excerpt || "").length > 100)
       || studentLessons[0];
     if (initial) await showLesson(initial.id, { push: true, syncSharedState: false });
+    void studyGuideCatalogPromise.then((studyGuideCatalog) => {
+      if (state.studyGuideCatalogStatus !== "loading") return;
+      if (installStudyGuideCatalog(studyGuideCatalog)) {
+        if (state.current) {
+          renderCheckStage(state.current);
+          renderMatrix(state.current);
+          renderMastery();
+        }
+        return;
+      }
+      state.studyGuideLessons = new Map();
+      state.studyGuideCatalogStatus = "unavailable";
+      if (state.current) renderCheckStage(state.current);
+      scheduleStudyGuideCatalogRetry();
+    });
     void flushSharedState();
   } catch (error) {
     els.atlasStatus.textContent = "教材資料載入失敗";

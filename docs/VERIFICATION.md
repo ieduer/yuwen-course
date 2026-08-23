@@ -1,5 +1,140 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-22 lesson 1474 staged-loop recovery and dialogue
+
+This eight-point standard is the release authority for the lesson 1474 repair.
+It supersedes any older dated wording that appears to authorize a checkout or
+operator to upload Pages directly.
+
+1. **Source of truth.** Use a clean clone of `ieduer/yuwen-course`. The reviewed
+   pull-request head must be an ordinary descendant of current remote `main`,
+   and every release artifact must be rebuilt from the exact merged-main SHA.
+   `/Users/ylsuen/CF/yuwen-course` is a dirty compatibility checkout and remains
+   read-only; it is neither build nor deploy authority.
+2. **Health probe.** Before release, read back the current production deployment
+   UUID, branch, source SHA, custom-domain `/` and `/api/learning/health`.
+   After any future authorized release, repeat those checks against both the
+   custom domain and the atomic Pages URL and compare the content-hashed app,
+   first-read controller, manifest and learning-health bytes/status. A command
+   exit code, Git merge, browser screenshot or task-pane state is not release
+   proof.
+3. **Contract checks.** Under exact Node 24.18.0 and 22.21.1, run
+   `npm run precontent:check` and `npm run verify:study-guide-sources`. Under
+   Node 24.18.0 run `npm run build:release-site`,
+   `npm run check:release-site`, `npm run build:artifact-manifest` and
+   `npm run check:artifact-manifest`; check the resulting artifact manifest
+   again under Node 22.21.1. The focused minimum is:
+
+   ```zsh
+   npm run test:classical-first-read
+   npm run test:study-guide-frontend
+   npm run test:evidence-contract
+   npm run test:local-progress
+   npm run test:reading-api
+   npm run test:static-asset-cache
+   ```
+
+   The first-read controller must prove that critical next-stage rendering
+   precedes storage/progress synchronization; storage failure cannot undo a
+   committed source; an ancillary renderer failure cannot replace an already
+   visible annotated text; POST and state readback are bounded through JSON
+   body consumption, including a response body that never finishes; and only an exact
+   authoritative lesson ID, text version and text digest with
+   `submitted=true` unlocks after an ambiguous response. Uncommitted and all
+   authority-mismatch branches remain retryable and locked.
+
+   Study-guide tests must prove that a persisted `submitting=true` snapshot is
+   restored as retryable `pendingSync`, retaining its mutation ID, answer and
+   reference-reveal timestamp; storage failure and owner-scope change do not
+   strand the spinner; the browser evaluator call is bounded through response
+   body consumption; a request cannot start unless its stable retry receipt is
+   durably stored; and evaluator
+   failure returns structured 503 with no false interaction, evaluation,
+   outbox or Queue write. Completing the last active lesson-1474 study-guide
+   item must recompute the checkpoint and expose every eligible downstream
+   control without reload.
+
+   Identity tests must prove zero owner-scoped storage writes, evidence posts
+   or shared-state mutations before exact owner discovery; ownerless reading
+   position/font changes must never be rebound to the discovered student.
+   First-read, shared-state and lesson callbacks are generation-bound across
+   owner and lesson replacement. A hung shared-state module or study-guide
+   catalog body must time out, clear its promise and retry on the same page with
+   a fresh request while the core lesson remains usable. Session lookup, owner
+   discovery and every client owner check/mutation must have the same bounded
+   full-promise behavior. Replacing the identity object for the same owner must
+   preserve and deliver that owner's pending reading/font state under the new
+   generation; changing owner must discard it.
+
+   Formal lesson-1474 structure and author-question integration tests must use
+   the real Worker route with an isolated SQLite evidence ledger and two turns.
+   The second prompt must contain the first evaluator answer and next question,
+   history must be derived only from the authenticated student/resource/
+   interaction ledger, replaying the same mutation must not call APIS again,
+   completion must be monotonic, and a lesson with no author must use the
+   text-reading-coach role. Author/coach labels must match across the prompt,
+   visual dialogue, transcript and accessible name; use authoritative attempt
+   numbers after truncation and announce/focus only the latest feedback. Return
+   at most six transcript turns and include at most four prior turns in a new
+   evaluator prompt. The Worker-to-APIS timeout must also cover a response body
+   that never finishes. The 88 local-practice
+   lessons must retain zero APIS/formal-evidence calls.
+4. **Deploy and forbidden actions.** A checkout stops after producing and
+   checking checksum-fixed `.release/site`; it must not call `wrangler pages
+   deploy`, move a production alias or perform rollback. Pages production and
+   rollback require the independently reviewed external UC+YW executor named
+   by project policy, with a stable change ID, exact merged SHA, artifact
+   checksum, callable preflight, rollback target and post-deploy readback. The
+   currently inspected external workflow is explicitly source-only and exits
+   before credentials, so it is not a production executor. Do not upload raw
+   `site/`, deploy from a dirty checkout, use global Wrangler, change policy to
+   bypass the gate, run a D1 migration/admin write, change Queue/APIS/User
+   Center configuration, alter a route/binding/schema, change formal manifest
+   membership or move the stable native pointer in this transaction.
+5. **Dependency regression.** Retain Reading, first-read, study-guide,
+   vocabulary, learning-evidence, shared-state, local-progress, native-content
+   object and formal-artifact checks. `check:native-content:deploy-sync`
+   remains a separate fail-closed App-promotion gate; do not relabel its known
+   rejection as green or mutate the stable pointer for this Web-only repair.
+   Verify User Center identity, APIS contract, Queue and Companion as
+   `verified_no_change`, including one formal lesson and one local-practice
+   lesson. No shared-hub source/config change is authorized here.
+6. **Backup and restore.** Normal authenticated student UI checks create only
+   ordinary learner-owned records and must not be deleted or rewritten for
+   cleanup. There is no schema or administrative data mutation and therefore
+   no D1 restore. Preserve the current production deployment UUID/source SHA
+   and a checksum-verified rebuild authority for rollback.
+7. **Rollback.** Before release, the external executor must demonstrate a
+   callable rollback or verified production-alias restoration to deployment
+   `619024c7-a261-405b-a13f-8581a90111ac` / source `16b8277`; otherwise release
+   remains blocked. Wrangler 4.100.0 has no Pages deployment rollback command,
+   and an old manual direct upload is forensic evidence rather than reusable
+   authority. After rollback, repeat points 2, 3 and 5. Never delete or rewrite
+   D1/outbox/Queue evidence during code rollback.
+8. **Last verified.** On 2026-08-22 PDT, current production remained deployment
+   `619024c7-a261-405b-a13f-8581a90111ac` and learning health was HTTP 200
+   healthy. A real authenticated configured-student run completed lesson 1474:
+   12/12 vocabulary, 3/3 corrections, 19/19 active study-guide items and all
+   downstream checkpoints. It reproduced the old generic study-guide 500,
+   verified retry, same-page final unlock, and proved old production returned
+   only one-shot formal results with no transcript. On exact Node 24.18.0 and
+   22.21.1 the candidate passes first-read 30 lessons/102 paragraphs,
+   study-guide frontend 27/27, evidence 62/62, local progress 24/24, learning
+   manifest 11/11 and the shared-state browser contract. Both complete
+   `precontent:check` runs pass, including trusted-touch mobile 13/13, Reading
+   74/74, native projection 22/22 and formal staging 5/5, and both verify five
+   PDF/extraction byte receipts. The native gate used 693 exact tracked live
+   public page files / 75,196,340 bytes; the canonical Drive token returned
+   `invalid_grant`, so this is not a fresh archive readback. Two independent
+   final reviews reported no remaining P0-P3. The checksum-fixed 1,223-file /
+   164,456,389-byte artifact has projected aggregate
+   `3eee253710281c30747e7ba6570f8da6cf0ef080836096b5aea8cbf6c336f0f1`
+   and tracked manifest aggregate
+   `4c46462b0798048ce69eac8b5c0ba2691d9979af41388d2299e7738a3b172f06`.
+   PR/CI and merged-SHA rebuild remain required before executor handoff.
+   Production remains unchanged while the external deploy/rollback executor is
+   unavailable.
+
 ## 2026-08-22 mobile, first-read and formative-stage correction
 
 This eight-point standard is the release authority for the 2026-08-22 repair.
