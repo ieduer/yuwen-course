@@ -2,6 +2,48 @@
 
 Last updated: 2026-08-22
 
+## 2026-08-22 mobile and learning-stage production closeout
+
+- PR #18 merged as canonical source
+  `16b8277afdf32618043703de4eb9b4098858b888`; GitHub Actions run
+  `32607440011` passed the exact Node 22.21.1 and 24.18.0 jobs. A second clean,
+  detached checkout of that merged SHA passed the complete Node 24.18.0
+  `precontent:check`, verified all five study-guide PDF/extraction receipts and
+  rebuilt the formal 1,223-file Web artifact. Its projected aggregate is
+  `223f05a5aa6333ba3e4be61f04aafc00afafac98359d979a3d1c942678d2e724`
+  and tracked artifact-manifest aggregate is
+  `c744b7ac352c11b5cea45377ce297d69d4a3b142027a768bcb59dbf76bcd98b1`.
+- Production is now Pages deployment
+  `619024c7-a261-405b-a13f-8581a90111ac`, branch `main`, exact source
+  `16b8277afdf32618043703de4eb9b4098858b888`, with atomic URL
+  `https://619024c7.yuwen-course.pages.dev`. The immediate rollback is the
+  previously verified deployment `6426b70e-d39b-4ba9-898b-0f5e7a1c3859` /
+  source `26f126b`; `581a0180-2085-4960-8cd0-4aee17cb2abd` remains the next
+  older anchor. No direct D1 command or migration, Queue/APIS/User Center
+  configuration change, route, binding, schema or native/App pointer mutation
+  occurred; the authenticated readback retained the existing identity-
+  reconciliation boundary.
+- Custom-domain and atomic readback both returned HTTP 200 and byte-identical
+  `app.js`, `classical-first-read.js` and lesson manifest assets. The live
+  learning-health receipt is healthy. Real trusted-touch checks passed 7/7 at
+  390x844 and iPad 1024x768, including height-only viewport changes and the
+  wide-to-compact close control.
+- In an existing authenticated browser, live lesson 1727 read its submitted
+  first-read source, displayed 3 marked difficulties and 13/13 vocabulary,
+  and exposed both unlocked local-practice stages with zero console errors.
+  No new learner submission was created for acceptance. The exact
+  commit-then-error same-page transition is instead covered by the executable
+  authoritative-readback controller, including submitted, uncommitted and all
+  three authority-mismatch branches. In a fresh anonymous browser, both local
+  question types on lesson 1693 saved their self-check result without any
+  `/api/interaction-check` request or completion claim; formal lesson 1497
+  remained login-gated. Live taxonomy and manifest readback preserve the
+  symmetric 189 = 101 formal + 88 local split.
+- The next action is normal monitoring only. If the custom host, first-read
+  authority, 1727 local path or 1497 formal path regresses, roll back to
+  `6426b70e-d39b-4ba9-898b-0f5e7a1c3859` and rerun the eight-point standard in
+  `docs/VERIFICATION.md`.
+
 ## 2026-08-22 mobile and learning-stage repair candidate
 
 - The task-owned candidate is branch
@@ -53,9 +95,9 @@ Last updated: 2026-08-22
   Reading is 74/74, evidence 56/56, native object checks 22/22 and release-site
   checks 5/5 on each runtime. The formal author artifact contains 1,223 files.
   Independent exact-diff review found no remaining P0-P3 defect or code-level
-  release blocker. Release remains pending green pull-request checks, a clean
-  merged-main rebuild, deployment readback and live browser acceptance defined
-  in `docs/VERIFICATION.md`.
+  release blocker. The production closeout above supersedes this candidate
+  status and records the green pull-request checks, clean merged-source build,
+  deployment readback and live browser acceptance.
 
 ## 2026-08-20 production launch closeout
 

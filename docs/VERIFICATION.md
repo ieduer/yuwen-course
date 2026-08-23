@@ -86,13 +86,58 @@ This eight-point standard is the release authority for the 2026-08-22 repair.
    artifact contains 1,223 files. `site/app-content` is byte-identical to
    remote main at tree `809cdb9cb19d9531b156a0e07d89f2e7590b75c4`.
    Independent exact-diff review found no remaining P0-P3 defect or code-level
-   release blocker. PR/CI, clean merged-source artifact identity, live
-   deployment UUID, authenticated same-page acceptance and final rollback
-   readback remain release-blocking until recorded here. The observed
+   release blocker. PR #18 and GitHub Actions run `32607440011` passed; a clean
+   detached rebuild of merged source
+   `16b8277afdf32618043703de4eb9b4098858b888` reproduced the formal artifact.
+   Production readback is deployment
+   `619024c7-a261-405b-a13f-8581a90111ac`; the final live evidence is recorded
+   below. The observed
    native deploy-sync
    rejection (`current canonical source graph lacks an approved audit receipt`)
    is an App promotion blocker and must be recorded, not overridden or
    relabelled green.
+
+### Production acceptance receipt
+
+- **Deployment identity:** Pages environment `production`, branch `main`,
+  source `16b8277afdf32618043703de4eb9b4098858b888`, deployment
+  `619024c7-a261-405b-a13f-8581a90111ac`, atomic URL
+  `https://619024c7.yuwen-course.pages.dev`. Immediate rollback is
+  `6426b70e-d39b-4ba9-898b-0f5e7a1c3859` / source `26f126b`.
+- **Artifact identity:** both the custom host and atomic URL returned HTTP 200
+  with `app.js` SHA-256
+  `c7e8de9f04ab9c7666f294226d02834892407d2c6e6cacaaa445438d80af67f2`,
+  `classical-first-read.js` SHA-256
+  `241cd5b2d0dae47a8d22c1b6adb575b9023451b37c37199d338eebfd85451094`
+  and lesson-manifest SHA-256
+  `53f0ab67393128a3da1c2696b24d261e30b05eb1faf9fcff6f6280842d217a91`,
+  exactly matching the clean formal staging. `/api/learning/health` returned
+  HTTP 200 with `status=healthy`; anonymous `/api/interaction-check` remained
+  rejected with HTTP 403.
+- **Mobile:** the live custom host passed all 7 trusted-touch checks at 390x844
+  and 1024x768. The drawer reached its final lesson, survived height-only
+  changes and closed only on the 1280-to-1024 compact-boundary transition.
+- **First read:** an existing authenticated browser loaded live lesson 1727
+  with the submitted first-read source, 3 marked difficulties, completed
+  13/13 vocabulary and both later local-practice stages unlocked; the page had
+  zero console errors. Acceptance deliberately did not create a new learner
+  row. The exact post-commit non-2xx same-page branch is proven by
+  `test:classical-first-read`: a matching authoritative submitted state
+  unlocks without reload and reconciles once, while uncommitted and
+  lesson/version/digest mismatch controls remain locked.
+- **Cross-lesson controls:** in a fresh anonymous browser, lesson 1693 saved
+  both structure and author-question local self-checks, rendered local feedback
+  and sent zero `/api/interaction-check` requests; anonymous completion stayed
+  false. Live lesson 1727 exposed the same two local-practice notices. Formal
+  lesson 1497 exposed only the login-gated formal controls. Live taxonomy and
+  learning-manifest bytes classify all 189 student lessons symmetrically as
+  101 formal and 88 local for each question kind.
+- **Mutation boundary:** no direct D1 command/migration, Queue/APIS/User Center
+  configuration change, route, binding, schema or native/App pointer mutation
+  was made. The authenticated readback exercised the existing identity-
+  reconciliation boundary but created no new learning submission. The only
+  browser submission was anonymous local practice in the isolated acceptance
+  profile.
 
 ## 2026-08-20 production acceptance evidence
 
