@@ -1,5 +1,99 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-22 mobile, first-read and formative-stage correction
+
+This eight-point standard is the release authority for the 2026-08-22 repair.
+
+1. **Source of truth.** Work only from a clean clone of
+   `ieduer/yuwen-course`; the reviewed pull-request head must be an ordinary
+   descendant of current remote `main`. The release artifact must be rebuilt
+   from the exact merged-main SHA. The dirty compatibility checkout at
+   `/Users/ylsuen/CF/yuwen-course` is read-only and is not a build or deploy
+   authority.
+2. **Health probe.** Before and after release, require HTTP 200 for `/`, the
+   content-hashed `assets/app.js` and `assets/classical-first-read.js`, and
+   `/api/learning/health`. Read back the Pages deployment UUID, environment,
+   branch and source SHA; do not infer release from an upload command alone.
+3. **Contract checks.** Under exact Node 24.18.0 and 22.21.1, run
+   `npm run precontent:check` and `npm run verify:study-guide-sources`. Build
+   the formal Web artifact once under Node 24.18.0 with
+   `npm run build:release-site`, `npm run check:release-site` and
+   `npm run build:artifact-manifest`; check that manifest under both runtimes
+   with `npm run check:artifact-manifest`. The focused minimum is:
+
+   ```zsh
+   npm run test:mobile-atlas
+   npm run test:classical-first-read
+   npm run test:lesson-blueprints
+   npm run test:evidence-contract
+   npm run test:local-progress
+   npm run test:static-asset-cache
+   ```
+
+   The mobile test must use trusted touch input at 390x844 and 1024x768, reach
+   the final lesson, keep the drawer open across a height-only resize and still
+   close it when crossing 1280 to 1024. The first-read test must prove both
+   branches of an ambiguous non-2xx: authoritative `submitted=true` unlocks on
+   the same page and schedules reconcile once; authoritative
+   `submitted=false` does not unlock and remains retryable; a submitted state
+   with a mismatched lesson ID, text version or text digest must also remain
+   locked. The interaction tests must prove identity-pending clients cannot
+   save local practice; once ownership resolves, lesson 1727
+   structure/author-question are local practice, perform no fetch or formal
+   write, remain ineligible for hidden `lessonCompleted` telemetry even after
+   an eventful 100% progress refresh, and give stale authenticated clients a
+   stable 422 after identity
+   reconciliation but before APIS or any formal interaction, evaluation,
+   reservation, outbox or Queue write. Lesson 1497 must remain a formal
+   positive path that reaches APIS and the existing evidence ledger. The
+   blueprint test must cover all 189 lessons and keep 1727 away from title,
+   source-label and map-caption anchors.
+4. **Deploy and forbidden actions.** After green PR checks and merge, rebuild
+   `.release/site` in a second clean clone of the exact merged SHA, then upload
+   only that formal artifact with lockfile Wrangler 4.100.0 to Pages project
+   `yuwen-course`, branch `main`, recording the exact commit hash. Do not deploy
+   `site/` directly, deploy from a dirty checkout, run a D1 migration, change a
+   Queue state, alter a binding/route, regenerate learning-manifest membership,
+   move the stable native pointer or publish an App build in this transaction.
+5. **Dependency regression.** The Web gates must retain the existing Reading,
+   learning-evidence, study-guide, vocabulary, shared-state, native-content
+   object and formal-release checks. Run
+   `npm run check:native-content:deploy-sync` separately: its known rejection
+   remains release-blocking for any App or stable-pointer promotion, but is not
+   rewritten as a Web failure for this already-reviewed leaf-only Web path.
+   Prove instead that the shipped stable pointer and every referenced native
+   object are byte-identical to the pre-release source. Post-release smoke must
+   cover the custom domain and the atomic Pages URL, anonymous identity gating,
+   one manifest-listed formal lesson, lesson 1727 local practice, and the
+   189-lesson catalog. No hub consumer requires a source change; User Center,
+   APIS, Queue and Companion remain `verified_no_change` unless live evidence
+   says otherwise.
+6. **Backup and restore.** This transaction has no data mutation, so no D1
+   restore is permitted or required. Retain the pre-release Pages deployment
+   UUID and its source SHA as the complete static/Worker rollback anchor.
+   Existing D1, outbox and Queue records must survive either code version.
+7. **Rollback.** If the custom domain, authenticated first-read, formal 1497
+   path or representative negative controls regress, immediately redeploy the
+   verified pre-release production deployment
+   `6426b70e-d39b-4ba9-898b-0f5e7a1c3859` (source `26f126b`), then repeat points
+   2, 3 and 5. Do not delete or rewrite D1/Queue evidence during code rollback.
+8. **Last verified.** Pre-release focused Node 24 checks on 2026-08-22 pass:
+   mobile 7/7, blueprint 7/7 across 189 lessons, first-read ambiguous-submit
+   recovery, evidence 56/56, local-progress 13/13 and static cache 1/1. The
+   complete Node 24.18.0 and 22.21.1 Web gates also pass with Reading 74/74,
+   native object checks 22/22 and release-site checks 5/5 on each runtime; both
+   verify all five study-guide PDF/extraction receipts. The formal author
+   artifact contains 1,223 files. `site/app-content` is byte-identical to
+   remote main at tree `809cdb9cb19d9531b156a0e07d89f2e7590b75c4`.
+   Independent exact-diff review found no remaining P0-P3 defect or code-level
+   release blocker. PR/CI, clean merged-source artifact identity, live
+   deployment UUID, authenticated same-page acceptance and final rollback
+   readback remain release-blocking until recorded here. The observed
+   native deploy-sync
+   rejection (`current canonical source graph lacks an approved audit receipt`)
+   is an App promotion blocker and must be recorded, not overridden or
+   relabelled green.
+
 ## 2026-08-20 production acceptance evidence
 
 The exact source deployed to production is

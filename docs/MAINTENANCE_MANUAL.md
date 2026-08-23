@@ -1,6 +1,54 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-08-20 (America/Los_Angeles)
+Last reviewed: 2026-08-22 (America/Los_Angeles)
+
+## 2026-08-22 mobile and staged-learning repair contract
+
+The current release candidate repairs three coupled UI/authority failures
+without changing the published learning-manifest denominator:
+
+- atlas ownership belongs to the width media-query boundary. A viewport-height
+  resize may refit the title but must never close an already open compact
+  drawer; only entering `(max-width: 1180px)` from a wide viewport may close it;
+- a failed first-read submit is ambiguous because the source session can be
+  committed before downstream evidence. Read back the authenticated source
+  once and unlock only when its lesson ID, `textVersionId` and `textDigest` all
+  match and that exact source is already submitted.
+  Never convert a downstream evidence failure to success without this source
+  readback or a separately designed durable compensation contract;
+- `site/data/learning-manifest.json` is the formal interaction authority.
+  Its 101 selected-volume lesson interactions retain the existing APIS,
+  evidence and A+ behavior. The other 88 student-visible lessons are explicit
+  local practice only after identity ownership resolves: no
+  `/api/interaction-check` request, no formal score and no D1/Queue/User Center
+  write. Any 100% UI completion that depends on local practice remains
+  ineligible for the hidden `lessonCompleted` evidence event. A stale
+  authenticated client receives HTTP 422
+  `learning_resource_not_published` after the existing identity reconciliation
+  but before APIS or any formal interaction, evaluation, reservation, outbox or
+  Queue write. Expanding those 88 lessons into the formal denominator is a
+  separate synchronized learning contract change and is forbidden in this
+  repair.
+
+`lesson-1727` is the canonical negative/formative regression: its structure and
+author-question controls must remain usable as local practice, and its
+deterministic structure prompt must anchor正文 rather than the lesson title,
+`《左傳》` source label or the Spring-and-Autumn map caption. `lesson-1497` is
+the canonical published positive control and must retain formal evaluation.
+
+This is a `no-new-capability` decision. Existing Pages/Workers Static Assets,
+D1, Queue, APIS service access, User Center identity and native-content pointer
+are sufficient; the change adds no runtime capability, binding, schema, route,
+data class, cost surface or App dependency. Current pre-release production was
+re-read on 2026-08-22 as deployment
+`6426b70e-d39b-4ba9-898b-0f5e7a1c3859` / source `26f126b`; immediate rollback
+is `581a0180-2085-4960-8cd0-4aee17cb2abd` / source `04ca518`. Use the executable
+release and live-acceptance gate in `docs/VERIFICATION.md`; chat or screenshots
+are not release evidence. The App deploy-sync gate remains intentionally red
+without a new approved App audit receipt. A Web-only release may proceed only
+through the existing reviewed path while preserving the stable native pointer
+and every referenced native object byte-for-byte; never fabricate an audit
+receipt or relabel that App gate as green.
 
 ## 2026-08-20 production launch authority
 

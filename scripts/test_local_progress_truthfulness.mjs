@@ -1,13 +1,16 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const APP_PATH = new URL("../site/assets/app.js", import.meta.url);
 const INDEX_PATH = new URL("../site/index.html", import.meta.url);
 const MANIFEST_PATH = new URL("../site/data/manifest.json", import.meta.url);
+const LEARNING_MANIFEST_PATH = new URL("../site/data/learning-manifest.json", import.meta.url);
 const source = await readFile(APP_PATH, "utf8");
 const indexHtml = await readFile(INDEX_PATH, "utf8");
 const manifest = JSON.parse(await readFile(MANIFEST_PATH, "utf8"));
+const learningManifest = JSON.parse(await readFile(LEARNING_MANIFEST_PATH, "utf8"));
 
 function section(start, end) {
   const startIndex = source.indexOf(start);
@@ -15,6 +18,34 @@ function section(start, end) {
   assert.notEqual(startIndex, -1, `missing ${start}`);
   assert.notEqual(endIndex, -1, `missing ${end}`);
   return source.slice(startIndex, endIndex);
+}
+
+function namedFunction(name) {
+  const start = source.indexOf(`function ${name}(`);
+  assert.notEqual(start, -1, `missing function ${name}`);
+  const parametersOpen = source.indexOf("(", start);
+  let parametersDepth = 0;
+  let parametersClose = -1;
+  for (let index = parametersOpen; index < source.length; index += 1) {
+    if (source[index] === "(") parametersDepth += 1;
+    if (source[index] !== ")") continue;
+    parametersDepth -= 1;
+    if (parametersDepth === 0) {
+      parametersClose = index;
+      break;
+    }
+  }
+  assert.notEqual(parametersClose, -1, `unterminated parameters ${name}`);
+  const open = source.indexOf("{", parametersClose);
+  assert.notEqual(open, -1, `missing function body ${name}`);
+  let depth = 0;
+  for (let index = open; index < source.length; index += 1) {
+    if (source[index] === "{") depth += 1;
+    if (source[index] !== "}") continue;
+    depth -= 1;
+    if (depth === 0) return source.slice(start, index + 1);
+  }
+  assert.fail(`unterminated function ${name}`);
 }
 
 function storage(initial = {}) {
@@ -146,6 +177,22 @@ test("local completion labels do not claim formative mastery", () => {
   assert.match(source, /不進入 User Center 的 A–F 評價/);
 });
 
+test("identity-pending learning UI never claims that local practice can be saved", () => {
+  const noticeModeSource = namedFunction("learningIdentityNoticeMode");
+  const learningIdentityNoticeMode = new Function(
+    "ANONYMOUS_UI_SCOPE",
+    `${noticeModeSource}; return learningIdentityNoticeMode;`,
+  )(ANONYMOUS_UI_SCOPE);
+  assert.equal(learningIdentityNoticeMode(false, ANONYMOUS_UI_SCOPE), "pending");
+  assert.equal(learningIdentityNoticeMode(false, null), "pending");
+  assert.equal(learningIdentityNoticeMode(true, ANONYMOUS_UI_SCOPE), "anonymous");
+  assert.equal(learningIdentityNoticeMode(true, "owner-a"), "authenticated");
+
+  const renderSource = namedFunction("renderCheckStage");
+  assert.match(renderSource, /identityNoticeMode === "pending"/);
+  assert.match(renderSource, /身份與學情歸屬確認前，本頁作答不會保存或送出/);
+});
+
 const interactionEvidenceDecisionSource = section(
   "function interactionEvidenceDecision",
   "async function submitInteraction",
@@ -180,6 +227,109 @@ test("recorded interaction completes only after a passing score", () => {
   assert.equal(interactionEvidenceDecision("unknown", 100).accepted, false);
 });
 
+test("formal interaction authority sends required-volume questions to local practice before network evaluation", () => {
+  const authorityFunctions = [
+    namedFunction("formalInteractionResourceKeys"),
+    namedFunction("isFormalInteraction"),
+  ].join("\n");
+  const authority = new Function(
+    `${authorityFunctions}; return { formalInteractionResourceKeys, isFormalInteraction };`,
+  )();
+  const resourceKeys = authority.formalInteractionResourceKeys(learningManifest);
+  const expectedKeys = new Set(learningManifest.items
+    .filter((item) => item.sourceKind === "lesson-interaction" && item.lifecycleStatus === "active")
+    .map((item) => `${item.sourceId}\n${item.questionKind}`));
+  assert.ok(resourceKeys instanceof Set);
+  assert.deepEqual([...resourceKeys].sort(), [...expectedKeys].sort());
+  assert.equal(authority.isFormalInteraction(resourceKeys, "lesson-1727", "structure"), false);
+  assert.equal(authority.isFormalInteraction(resourceKeys, "lesson-1727", "authorQuestion"), false);
+  assert.equal(authority.isFormalInteraction(resourceKeys, "lesson-1497", "structure"), true);
+  assert.equal(authority.isFormalInteraction(resourceKeys, "lesson-1497", "authorQuestion"), true);
+
+  const initSource = section("async function init", "init();");
+  assert.match(
+    initSource,
+    /state\.formalInteractionResourceKeys\s*=\s*formalInteractionResourceKeys\(\s*learningManifest\s*\)/,
+  );
+  const modeSource = namedFunction("interactionSubmissionMode");
+  const pendingIdentityIndex = modeSource.indexOf("!interactionIdentityResolved");
+  const localAuthorityIndex = modeSource.indexOf("!isFormalInteraction");
+  assert.ok(pendingIdentityIndex >= 0, "local practice must wait for identity ownership");
+  assert.ok(
+    localAuthorityIndex > pendingIdentityIndex,
+    "identity ownership must resolve before an unpublished question becomes local practice",
+  );
+  assert.match(
+    modeSource,
+    /isFormalInteraction\(state\.formalInteractionResourceKeys,\s*lesson\?\.id,\s*interactionKey\)/,
+  );
+  const submissionSource = section("async function submitInteraction", "async function saveReadingSubmission");
+  const localDecisionIndex = submissionSource.indexOf("interactionSubmissionMode(");
+  const requestIndex = submissionSource.indexOf('fetch("/api/interaction-check"');
+  assert.ok(localDecisionIndex >= 0, "submission must consult formal interaction authority");
+  assert.ok(requestIndex > localDecisionIndex, "local-practice decision must happen before network evaluation");
+  const localPracticeBranch = submissionSource.slice(localDecisionIndex, requestIndex);
+  assert.match(localPracticeBranch, /saveLocalInteractionPractice\(/);
+  assert.match(localPracticeBranch, /return/);
+  const localSaveSource = namedFunction("saveLocalInteractionPractice");
+  assert.match(localSaveSource, /!interactionIdentityResolved\s*\|\|\s*!progressOwnerScope/);
+  assert.match(localSaveSource, /本次試做未保存/);
+  assert.match(localSaveSource, /lessonProgress\(/);
+  assert.match(localSaveSource, /本機(?:試做|練習)/);
+  assert.doesNotMatch(localSaveSource, /恢復連線|連線失敗|同步失敗/);
+});
+
+test("local-practice completion never emits hidden lesson-completed learning evidence", async () => {
+  const completionSource = namedFunction("completionEventEligible");
+  const syncSource = namedFunction("syncProgress");
+  const progress = {
+    context: { done: true, evidenceStatus: "local_practice" },
+    read: { done: true },
+  };
+  const calls = { learning: 0, saved: 0 };
+  const trackFor = () => [["context"], ["read"]];
+  const checkpointDone = (current, key) => Boolean(current[key]?.done);
+  const completionEventEligible = new Function(
+    "trackFor",
+    "checkpointDone",
+    "state",
+    "lessonProgress",
+    `${completionSource}; return completionEventEligible;`,
+  )(trackFor, checkpointDone, { current: { id: "lesson-local" } }, () => progress);
+  assert.equal(completionEventEligible(progress, { id: "lesson-local" }), false);
+
+  const syncProgress = new Function(
+    "saveStoredProgress",
+    "state",
+    "renderMastery",
+    "renderLessonIndex",
+    "renderMatrix",
+    "progressPercent",
+    "lessonProgress",
+    "completionEventEligible",
+    "recordLearning",
+    "trackFor",
+    "checkpointDone",
+    `${syncSource}; return syncProgress;`,
+  )(
+    () => { calls.saved += 1; },
+    { current: { id: "lesson-local" }, manifest: {} },
+    () => {},
+    () => {},
+    () => {},
+    () => 100,
+    () => progress,
+    completionEventEligible,
+    async () => { calls.learning += 1; return { ok: true }; },
+    trackFor,
+    checkpointDone,
+  );
+  syncProgress({ event: true });
+  await Promise.resolve();
+  assert.equal(calls.learning, 0);
+  assert.equal(progress.completionEventSent, undefined);
+});
+
 test("student lesson count and startup exclude hidden system records", () => {
   const retiredSource = section("function isRetiredMirror", "function genreFor");
   const studentLessonsSource = section("function studentVisibleLessons", "function visibleLessons");
@@ -211,6 +361,7 @@ test("student lesson count and startup exclude hidden system records", () => {
   assert.match(anonymousSource, /const hashLessonId = studentVisibleLessons\(\)\.find/);
   assert.match(anonymousSource, /const storedStudentLessonId = studentVisibleLessons\(\)\.find/);
   assert.match(anonymousSource, /const lessonId = hashLessonId \|\| storedStudentLessonId/);
-  assert.match(indexHtml, /assets\/app\.js\?v=49914e5f9bbda034/);
+  const appHash = createHash("sha256").update(source).digest("hex").slice(0, 16);
+  assert.ok(indexHtml.includes(`assets/app.js?v=${appHash}`));
   assert.doesNotMatch(indexHtml, /assets\/app\.js\?v=20260811-(?:embed-scroll-layout-v4|student-units-v5)/);
 });
