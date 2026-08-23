@@ -262,3 +262,50 @@ test("authenticated browser bridge submits semantic source events without score 
   assert.equal(globalThis.BdfzIdentity, undefined);
   delete globalThis.fetch;
 });
+
+test("browser evidence timeout covers a response body that never finishes", async () => {
+  delete globalThis.YwLearningEvidence;
+  const originalSetTimeout = globalThis.setTimeout;
+  const originalClearTimeout = globalThis.clearTimeout;
+  let capturedBody = null;
+  let abortedBodies = 0;
+  globalThis.setTimeout = (callback) => {
+    queueMicrotask(callback);
+    return 1;
+  };
+  globalThis.clearTimeout = () => {};
+  globalThis.fetch = async (_url, options) => {
+    capturedBody = JSON.parse(options.body);
+    return {
+      ok: true,
+      status: 200,
+      json: () => new Promise((_resolve, reject) => {
+        const rejectAbort = () => {
+          abortedBodies += 1;
+          reject(new DOMException("aborted", "AbortError"));
+        };
+        if (options.signal.aborted) rejectAbort();
+        else options.signal.addEventListener("abort", rejectAbort, { once: true });
+      }),
+    };
+  };
+  try {
+    await import(`${EVIDENCE_MODULE}?body-timeout=${Date.now()}`);
+    const result = await globalThis.YwLearningEvidence.record(
+      "readAcknowledged",
+      "lesson-1474",
+      { threshold: 1 },
+      { clientMutationId: "annotated-read:lesson-1474:stable-version" },
+    );
+    assert.equal(result.ok, false);
+    assert.equal(result.code, "learning_evidence_timeout");
+    assert.equal(result.retryable, true);
+    assert.equal(abortedBodies, 1);
+    assert.equal(capturedBody.clientMutationId, "annotated-read:lesson-1474:stable-version");
+  } finally {
+    delete globalThis.fetch;
+    delete globalThis.YwLearningEvidence;
+    globalThis.setTimeout = originalSetTimeout;
+    globalThis.clearTimeout = originalClearTimeout;
+  }
+});

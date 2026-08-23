@@ -72,6 +72,7 @@ async function drawerState(page) {
     const toggle = document.querySelector("#atlas-open");
     return {
       open: body.classList.contains("atlas-open"),
+      inert: Boolean(atlas?.inert),
       ariaHidden: atlas?.getAttribute("aria-hidden") || "",
       expanded: toggle?.getAttribute("aria-expanded") || "",
       viewport: [innerWidth, innerHeight],
@@ -80,7 +81,7 @@ async function drawerState(page) {
 }
 
 function isOpen(state) {
-  return state.open && state.ariaHidden === "false" && state.expanded === "true";
+  return state.open && state.inert === false && state.ariaHidden === "false" && state.expanded === "true";
 }
 
 async function openDrawer(page) {
@@ -172,9 +173,31 @@ async function verifyTouchViewport(browser, {
   const page = await context.newPage();
   try {
     await waitForLesson(page);
+    const initiallyClosed = await drawerState(page);
+    await page.locator("#lesson-search").focus();
+    const hiddenSearchFocused = await page.evaluate(() => document.activeElement?.id === "lesson-search");
+    check(
+      `${label} 關閉目錄不可進入鍵盤焦點`,
+      !initiallyClosed.open
+        && initiallyClosed.inert === true
+        && initiallyClosed.ariaHidden === "true"
+        && hiddenSearchFocused === false,
+      JSON.stringify({ initiallyClosed, hiddenSearchFocused }),
+    );
     await openDrawer(page);
     const opened = await drawerState(page);
     check(`${label} 目錄可打開`, isOpen(opened), JSON.stringify(opened));
+
+    await page.locator("#atlas-close").focus();
+    await page.keyboard.press("Enter");
+    await page.waitForFunction(() => !document.body.classList.contains("atlas-open"));
+    const focusAfterClose = await page.evaluate(() => document.activeElement?.id || "");
+    check(
+      `${label} 關閉目錄後焦點回到開啟按鈕`,
+      focusAfterClose === "atlas-open",
+      JSON.stringify({ focusAfterClose }),
+    );
+    await openDrawer(page);
 
     await page.setViewportSize({ width, height: resizedHeight });
     await page.waitForTimeout(120);
@@ -201,6 +224,27 @@ async function verifyTouchViewport(browser, {
         && touch.after.lastVisible,
       JSON.stringify(touch),
     );
+
+    if (width <= 900) {
+      const target = page.locator("#lesson-index .lesson-link:last-of-type");
+      const targetLessonId = await target.getAttribute("data-lesson");
+      await target.click();
+      await page.waitForFunction((lessonId) => (
+        location.hash === `#${lessonId}`
+          && !document.body.classList.contains("atlas-open")
+      ), targetLessonId);
+      const selectedState = await drawerState(page);
+      const focusAfterSelection = await page.evaluate(() => document.activeElement?.id || "");
+      check(
+        `${label} 選課載入後收合目錄並把焦點交回開啟按鈕`,
+        !selectedState.open
+          && selectedState.inert === true
+          && selectedState.ariaHidden === "true"
+          && selectedState.expanded === "false"
+          && focusAfterSelection === "atlas-open",
+        JSON.stringify({ targetLessonId, selectedState, focusAfterSelection }),
+      );
+    }
   } finally {
     await context.close();
   }
@@ -225,9 +269,52 @@ async function verifyBreakpointTransition(browser) {
       "1280→1024 跨入緊湊斷點仍關閉目錄",
       isOpen(wide)
         && !compact.open
+        && compact.inert === true
         && compact.ariaHidden === "true"
         && compact.expanded === "false",
       JSON.stringify({ wide, compact }),
+    );
+  } finally {
+    await context.close();
+  }
+}
+
+async function verifyToolsBreakpointAccessibility(browser) {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    deviceScaleFactor: 2,
+    hasTouch: true,
+    isMobile: true,
+  });
+  const page = await context.newPage();
+  try {
+    await waitForLesson(page);
+    const state = () => page.evaluate(() => ({
+      inert: document.querySelector("#topbar-actions")?.inert,
+      expanded: document.querySelector("#mobile-tools-toggle")?.getAttribute("aria-expanded"),
+      open: document.body.classList.contains("tools-open"),
+    }));
+    const compactClosed = await state();
+    await page.locator("#mobile-tools-toggle").click();
+    await page.locator("#topbar-actions a").first().focus();
+    await page.locator("#topbar-actions").dispatchEvent("click");
+    const compactFocusAfterClose = await page.evaluate(() => document.activeElement?.id || "");
+    await page.setViewportSize({ width: 1000, height: 844 });
+    await page.waitForTimeout(120);
+    const desktop = await state();
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.waitForTimeout(120);
+    const compactAgain = await state();
+    check(
+      "390→1000→390 工具列 inert 隨斷點即時重算",
+      compactClosed.inert === true
+        && compactClosed.expanded === "false"
+        && compactFocusAfterClose === "mobile-tools-toggle"
+        && desktop.inert === false
+        && desktop.expanded === "false"
+        && compactAgain.inert === true
+        && compactAgain.expanded === "false",
+      JSON.stringify({ compactClosed, compactFocusAfterClose, desktop, compactAgain }),
     );
   } finally {
     await context.close();
@@ -261,6 +348,7 @@ try {
     resizedHeight: 700,
   });
   await verifyBreakpointTransition(browser);
+  await verifyToolsBreakpointAccessibility(browser);
 } finally {
   await browser?.close();
   if (localServer) {

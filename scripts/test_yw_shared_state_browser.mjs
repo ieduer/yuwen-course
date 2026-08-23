@@ -240,16 +240,29 @@ try {
   await page.evaluate(() => window.__releaseStateGate());
 
   const ownerAOutbox = `yw-shared-state-outbox/2:${OWNER_A}`;
-  await page.waitForFunction((storageKey) => {
-    const outbox = JSON.parse(localStorage.getItem(storageKey) || "null");
-    return outbox?.mutations?.length === 0
-      && window.__acceptedMutations.some(
-        (call) => call.body.mutation.kind === "READING_POSITION",
-      )
-      && window.__acceptedMutations.some(
-        (call) => call.body.mutation.kind === "READER_PREFERENCE",
-      );
-  }, ownerAOutbox);
+  try {
+    await page.waitForFunction(({ storageKey, ownerA }) => {
+      const outbox = JSON.parse(localStorage.getItem(storageKey) || "null");
+      return location.hash === "#lesson-1576"
+        && getComputedStyle(document.documentElement)
+          .getPropertyValue("--reader-scale").trim() === "1.26"
+        && localStorage.getItem(`yw-matrix-last-lesson-v1:scope:${ownerA}`) === "lesson-1576"
+        && (outbox === null || outbox.mutations?.length === 0);
+    }, { storageKey: ownerAOutbox, ownerA: OWNER_A });
+  } catch (error) {
+    const diagnostic = await page.evaluate(({ storageKey, ownerA }) => ({
+      hash: location.hash,
+      scale: getComputedStyle(document.documentElement)
+        .getPropertyValue("--reader-scale").trim(),
+      storedLesson: localStorage.getItem(`yw-matrix-last-lesson-v1:scope:${ownerA}`),
+      storedFont: localStorage.getItem(`yw-matrix-font-v1:scope:${ownerA}`),
+      outbox: JSON.parse(localStorage.getItem(storageKey) || "null"),
+      stateGets: structuredClone(window.__sharedStateGets),
+      calls: structuredClone(window.__sharedStateCalls),
+    }), { storageKey: ownerAOutbox, ownerA: OWNER_A });
+    process.stderr.write(`initial identity diagnostic=${JSON.stringify(diagnostic)}\n`);
+    throw error;
+  }
 
   const initWindow = await page.evaluate(({ ownerA, storageKey }) => ({
     lessonId: location.hash.slice(1),
@@ -263,28 +276,100 @@ try {
     calls: structuredClone(window.__acceptedMutations),
     evidenceCalls: window.__evidenceCalls.map((call) => call.slice(0, 2)),
   }), { ownerA: OWNER_A, storageKey: ownerAOutbox });
-  assert.equal(initWindow.lessonId, "lesson-1579");
-  assert.equal(initWindow.scale, "1.42");
-  assert.equal(initWindow.lessonScope, "lesson-1579");
-  assert.equal(initWindow.fontScope, "4");
-  assert.deepEqual(initWindow.outbox.mutations, []);
-  assert.deepEqual(initWindow.evidenceCalls, [
-    ["lessonOpened", "lesson-1458"],
-    ["lessonOpened", "lesson-1579"],
-  ]);
-
-  const initReading = initWindow.calls.find(
-    (call) => call.body.mutation.kind === "READING_POSITION",
+  assert.equal(initWindow.lessonId, "lesson-1576");
+  assert.equal(initWindow.scale, "1.26");
+  assert.equal(initWindow.lessonScope, "lesson-1576");
+  assert.equal(initWindow.fontScope, "3");
+  assert.equal(initWindow.outbox, null);
+  assert.deepEqual(
+    initWindow.calls,
+    [],
+    "unowned reading and font changes must not be rebound to the discovered owner",
   );
-  assert.deepEqual(initReading.body.mutation, {
-    kind: "READING_POSITION",
-    contentVersion: CONTENT_VERSION,
-    lessonId: "lesson-1579",
-    documentId: "body",
-    stableAnchor: "lesson-root",
-    updatedAtEpochMillis: initReading.body.mutation.updatedAtEpochMillis,
+  assert.deepEqual(
+    initWindow.evidenceCalls,
+    [],
+    "lesson opens that occurred before owner discovery must not be replayed under a guessed owner",
+  );
+
+  const textScaleCallCount = await page.evaluate(
+    () => window.__acceptedMutations.length,
+  );
+  await page.evaluate(() => document.querySelector("#font-up").click());
+  await page.waitForFunction((fromIndex) => window.__acceptedMutations.slice(fromIndex).some(
+    (call) => call.body.mutation.kind === "READER_PREFERENCE"
+      && call.body.mutation.key === "TEXT_SCALE"
+      && call.body.mutation.value === 1.42,
+  ), textScaleCallCount);
+  const ownerATextScale = await page.evaluate((fromIndex) => structuredClone(
+    window.__acceptedMutations.slice(fromIndex).find(
+      (call) => call.body.mutation.kind === "READER_PREFERENCE",
+    ),
+  ), textScaleCallCount);
+  assert.equal(ownerATextScale.ownerAtRequest, OWNER_A);
+  assert.equal(ownerATextScale.body.ownerScope, OWNER_A);
+  assert.equal(
+    await page.evaluate((ownerA) => localStorage.getItem(
+      `yw-matrix-font-v1:scope:${ownerA}`,
+    ), OWNER_A),
+    "4",
+  );
+
+  const replacementMutationStart = await page.evaluate(() => {
+    const previousIdentity = window.BdfzIdentity;
+    window.__replacementWorkingApi = previousIdentity.api.bind(previousIdentity);
+    window.__replacementWorkingSession = previousIdentity.getSession.bind(previousIdentity);
+    previousIdentity.api = () => new Promise(() => {});
+    const before = window.__acceptedMutations.length;
+    document.querySelector("#font-up").click();
+    return before;
   });
-  assert.equal(initReading.body.ownerScope, OWNER_A);
+  await page.waitForFunction(() => (
+    getComputedStyle(document.documentElement)
+      .getPropertyValue("--reader-scale").trim() === "1.6"
+  ));
+  const replacedIdentityStart = await page.evaluate(() => {
+    window.BdfzIdentity = {
+      getSession: window.__replacementWorkingSession,
+      api: window.__replacementWorkingApi,
+    };
+    const before = window.__sharedStateGets.length;
+    window.dispatchEvent(new Event("focus"));
+    return before;
+  });
+  await page.waitForFunction((before) => (
+    window.__sharedStateGets.length >= before + 3
+  ), replacedIdentityStart);
+  assert.ok(
+    await page.evaluate((before) => window.__sharedStateGets.length - before, replacedIdentityStart)
+      >= 3,
+    "same-owner identity replacement must rebuild and re-verify the client instead of calling the stale object",
+  );
+  await page.waitForFunction((fromIndex) => window.__acceptedMutations.slice(fromIndex).some(
+    (call) => call.body.mutation.kind === "READER_PREFERENCE"
+      && call.body.mutation.key === "TEXT_SCALE"
+      && call.body.mutation.value === 1.6,
+  ), replacementMutationStart);
+  const replacementMutation = await page.evaluate((fromIndex) => structuredClone(
+    window.__acceptedMutations.slice(fromIndex).find(
+      (call) => call.body.mutation.kind === "READER_PREFERENCE"
+        && call.body.mutation.value === 1.6,
+    ),
+  ), replacementMutationStart);
+  assert.equal(replacementMutation.ownerAtRequest, OWNER_A);
+  assert.equal(replacementMutation.body.ownerScope, OWNER_A);
+  assert.equal(
+    await page.evaluate(() => getComputedStyle(document.documentElement)
+      .getPropertyValue("--reader-scale").trim()),
+    "1.6",
+    "same-owner identity replacement must preserve the newest pending text scale",
+  );
+  assert.equal(
+    await page.evaluate((ownerA) => localStorage.getItem(
+      `yw-matrix-font-v1:scope:${ownerA}`,
+    ), OWNER_A),
+    "5",
+  );
 
   const initialCallCount = await page.evaluate(
     () => window.__sharedStateCalls.length,
@@ -425,11 +510,7 @@ try {
     aFont: null,
     bLesson: "lesson-1576",
     bFont: "0",
-    evidenceCalls: [
-      ["lessonOpened", "lesson-1458"],
-      ["lessonOpened", "lesson-1579"],
-      ["lessonOpened", "lesson-1458"],
-    ],
+    evidenceCalls: [["lessonOpened", "lesson-1458"]],
   });
   assert.equal(
     /answer|correct|score|mastery|lessonOpened|progress/i.test(
@@ -459,22 +540,39 @@ try {
     window.__currentOwner = ownerB;
     window.__releaseStateGate();
   }, OWNER_B);
-  await racePage.waitForFunction((ownerB) => (
-    location.hash === "#lesson-1576"
-    && getComputedStyle(document.documentElement)
-      .getPropertyValue("--reader-scale").trim() === "0.92"
-    && localStorage.getItem(`yw-matrix-last-lesson-v1:scope:${ownerB}`)
-      === "lesson-1576"
-  ), OWNER_B);
+  try {
+    await racePage.waitForFunction((ownerB) => (
+      location.hash === "#lesson-1576"
+      && getComputedStyle(document.documentElement)
+        .getPropertyValue("--reader-scale").trim() === "0.92"
+      && localStorage.getItem(`yw-matrix-last-lesson-v1:scope:${ownerB}`)
+        === "lesson-1576"
+    ), OWNER_B);
+  } catch (error) {
+    const diagnostic = await racePage.evaluate((ownerB) => ({
+      hash: location.hash,
+      title: document.querySelector("#lesson-title")?.textContent || "",
+      scale: getComputedStyle(document.documentElement)
+        .getPropertyValue("--reader-scale").trim(),
+      storedLesson: localStorage.getItem(`yw-matrix-last-lesson-v1:scope:${ownerB}`),
+      currentOwner: window.__currentOwner,
+      stateGets: structuredClone(window.__sharedStateGets),
+      calls: structuredClone(window.__sharedStateCalls),
+    }), OWNER_B);
+    process.stderr.write(`race diagnostic=${JSON.stringify(diagnostic)}\n`);
+    error.message += `; race diagnostic=${JSON.stringify(diagnostic)}`;
+    throw error;
+  }
   const racedGeneration = await racePage.evaluate(() => ({
     calls: structuredClone(window.__sharedStateCalls),
     evidenceCalls: window.__evidenceCalls.map((call) => call.slice(0, 2)),
   }));
   assert.deepEqual(racedGeneration.calls, []);
-  assert.deepEqual(racedGeneration.evidenceCalls, [
-    ["lessonOpened", "lesson-1458"],
-    ["lessonOpened", "lesson-1579"],
-  ]);
+  assert.deepEqual(
+    racedGeneration.evidenceCalls,
+    [],
+    "identity-raced lesson opens must never be attributed to the replacement owner",
+  );
   assert.deepEqual(racePageErrors, []);
   await racePage.close();
 
@@ -504,22 +602,36 @@ try {
     stateGets: 0,
   });
 
-  await anonymousPage.evaluate(() => {
-    localStorage.setItem("yw-matrix-font-v1:scope:anonymous-v2", "4");
-    window.dispatchEvent(new Event("focus"));
-  });
+  await anonymousPage.evaluate(() => document.querySelector("#font-up").click());
   await anonymousPage.waitForFunction(() => (
     getComputedStyle(document.documentElement)
       .getPropertyValue("--reader-scale").trim() === "1.42"
+  ));
+  await anonymousPage.evaluate(() => {
+    location.hash = "#lesson-1579";
+  });
+  await anonymousPage.waitForFunction(() => (
+    location.hash === "#lesson-1579"
+      && document.querySelector("#lesson-title")?.textContent.includes("归去来兮辞")
+      && localStorage.getItem("yw-matrix-last-lesson-v1:scope:anonymous-v2") === "lesson-1579"
   ));
   assert.deepEqual(
     await anonymousPage.evaluate(() => ({
       fontScope: localStorage.getItem(
         "yw-matrix-font-v1:scope:anonymous-v2",
       ),
+      lessonScope: localStorage.getItem(
+        "yw-matrix-last-lesson-v1:scope:anonymous-v2",
+      ),
       stateGets: window.__sharedStateGets.length,
+      stateMutations: window.__sharedStateCalls.length,
     })),
-    { fontScope: "4", stateGets: 0 },
+    {
+      fontScope: "4",
+      lessonScope: "lesson-1579",
+      stateGets: 0,
+      stateMutations: 0,
+    },
   );
   assert.deepEqual(anonymousPageErrors, []);
   await anonymousPage.close();

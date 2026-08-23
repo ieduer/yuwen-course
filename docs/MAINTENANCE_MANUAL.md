@@ -2,6 +2,99 @@
 
 Last reviewed: 2026-08-22 (America/Los_Angeles)
 
+## 2026-08-22 lesson 1474 staged-loop recovery contract
+
+Production remains deployment `619024c7-a261-405b-a13f-8581a90111ac`, source
+`16b8277afdf32618043703de4eb9b4098858b888`. The task candidate is not live.
+Its first-read, study-guide, same-page checkpoint and formal dialogue changes
+are governed by the newest eight-point standard in `docs/VERIFICATION.md`.
+
+Operational invariants:
+
+- a committed classical first-read source is independent of ancillary progress
+  synchronization. Render the authoritative next-stage UI first, contain
+  storage failures, bound both mutation and readback, and unlock after an
+  ambiguous response only on an exact submitted lesson/text-version/digest;
+  the bound includes response-body consumption. A stalled body cannot leave
+  the UI pending, and an ancillary renderer failure cannot replace annotated
+  text that has already rendered successfully;
+- `submitting` is memory-only UI state. Persist a retryable `pendingSync`
+  receipt with stable mutation ID, answer and reference-reveal time, normalize
+  interrupted legacy snapshots on hydrate, and clear the spinner on success,
+  structured failure, header/body timeout, storage failure and owner-scope
+  transition. Do not send a formal assessment unless the exact retry receipt
+  was first persisted;
+- an unavailable study-guide evaluator returns the shared structured 503
+  learning-evaluator contract before formal evidence, outbox or Queue writes.
+  Generic 500 is not an acceptable dependency response;
+- vocabulary checkpoint completion requires vocabulary, every active
+  study-guide vocabulary/syntax item and every first-read correction. The
+  final successful item rerenders progress and the check-stage controls on the
+  same page; a refresh is never required for unlock;
+- formal structure and author-question interactions are bounded multi-turn
+  learning dialogues. History is reconstructed server-side only from the
+  authenticated student/resource/interaction evidence ledger: at most four
+  prior turns enter the next prompt and at most six return to the browser.
+  Client-supplied history is never authority. Mutation replay is idempotent,
+  and later lower scores cannot relock an already completed checkpoint. Keep
+  author/coach identity consistent in the evaluator prompt, visual dialogue,
+  transcript and accessible name; preserve authoritative attempt numbers when
+  displaying a six-turn window and announce/focus only the latest feedback;
+- when lesson taxonomy has no authoritative author, label and prompt the role
+  as a text-reading coach. Never invent or impersonate an author. The 88
+  local-practice lessons remain local/self-check, make no APIS/formal-evidence
+  call and are outside this formal dialogue contract.
+- identity discovery is fail-closed. Do not persist or enqueue reading
+  position, font preference, first-read, lesson-open or check-stage mutations
+  until the exact owner scope is resolved. Bind every asynchronous callback to
+  its identity/lesson generation, discard stale A→B→A work, and never rebind an
+  ownerless mutation to the newly discovered account. Bound session lookup,
+  owner discovery and every shared-state owner check/mutation to 12 seconds.
+  If the identity object is replaced for the same owner, rebind that owner's
+  pending reading/font state to the new generation; a different owner must
+  still discard it;
+- the study-guide catalog and shared-state module are non-blocking startup
+  dependencies with bounded body/import timeouts and same-page backoff. A
+  failure must expose retry state while leaving core lesson text usable; a
+  successful retry rerenders the current lesson without focus/online/reload.
+
+The authenticated production acceptance used only the configured student
+environment and ordinary UI writes. It completed lesson 1474 from first read
+through 12 vocabulary items, three corrections, 19 active study-guide items,
+evaluation and both formal interactions. Retain only aggregate receipts; never
+record the account identifier, cookie, session, answer text or raw learner
+content.
+
+Final candidate verification passed on exact Node 24.18.0 and 22.21.1:
+first-read 30 lessons/102 paragraphs, study-guide frontend 27/27, evidence
+62/62, local progress 24/24, learning manifest 11/11 and the shared-state
+browser contract. Both complete gates passed mobile trusted-touch 13/13,
+Reading 74/74, native projection 22/22 and formal staging 5/5; both runtimes
+verified five PDF/extraction receipts. Native-page verification used a
+disposable 693-file / 75,196,340-byte subset fetched from the exact tracked
+live public URLs and checked against the canonical inventory. The canonical
+Drive token returned `invalid_grant`; do not describe this run as a fresh
+archive readback. The formal staging contains 1,223 files / 164,456,389 bytes
+with projected aggregate
+`3eee253710281c30747e7ba6570f8da6cf0ef080836096b5aea8cbf6c336f0f1`
+and tracked manifest aggregate
+`4c46462b0798048ce69eac8b5c0ba2691d9979af41388d2299e7738a3b172f06`.
+Independent final reviews found no remaining P0-P3.
+
+This is a leaf-only `no-new-capability` correction. It changes no route,
+binding, schema, migration, direct D1 state, Queue/APIS/User Center
+configuration, learning-manifest membership or native/App pointer. Those
+dependencies remain `verified_no_change`.
+
+Release is fail-closed at `.release/site`. Project policy permits Pages deploy
+and rollback only through an independently reviewed external UC+YW executor.
+The currently inspected external workflow is explicitly source-only and exits
+before credentials, so neither checkout/manual Wrangler upload nor its prior
+forensic upload command is release authority. Before production, a separate
+review must activate a callable executor and prove rollback to current
+deployment `619024c7-a261-405b-a13f-8581a90111ac`. Do not edit project policy,
+use raw `site/`, or create an ad-hoc deploy script to bypass this gate.
+
 ## 2026-08-22 mobile and staged-learning production authority
 
 Current production is Pages deployment

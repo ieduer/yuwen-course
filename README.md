@@ -2,6 +2,38 @@
 
 `yw.bdfz.net` is the student-centred learning matrix for the five senior-high Chinese textbooks. It combines lesson text and resources, author and literary-taxonomy links, vocabulary mastery, reading evidence, and a D1-backed reading constellation.
 
+## 2026-08-22 staged-learning recovery candidate
+
+The current source candidate makes committed classical first-read transitions,
+interrupted study-guide evaluation and downstream checkpoint unlocks converge
+on the same page without a refresh. Transient `submitting` state is never
+restored as a permanent spinner; evaluator outage is a structured retryable
+503 with no false evidence write. All evaluator timeouts cover response-body
+consumption, and formal requests fail closed before network access if their
+stable retry receipt cannot be persisted.
+
+Published structure and author-question stages are continuing AI learning
+dialogues backed by the authenticated interaction ledger, with bounded
+server-derived history, idempotent mutation replay and monotonic completion.
+Author/coach identity and true attempt numbers remain consistent across the
+prompt, transcript and accessible UI. Lessons without an authoritative author
+use a text-reading coach, while the 88
+unpublished local-practice lessons remain local and do not call APIS.
+
+Identity resolution is fail-closed: owner-scoped progress, first-read state,
+shared reading preferences and evidence cannot be queued before the exact
+student owner is known or rebound after an account/lesson race. Catalog and
+shared-state loading have bounded same-page retries, so a transient module or
+catalog failure no longer requires a reload. Replacing the identity object for
+the same owner preserves its pending reading/font mutation; a different owner
+still discards it.
+
+This candidate is not the current production release. It is a leaf-only
+`no-new-capability` change and stops at a checked `.release/site` artifact until
+the separately reviewed external UC+YW deploy and rollback executor is
+callable. See `PROJECT_STATE.md`, `docs/MAINTENANCE_MANUAL.md` and
+`docs/VERIFICATION.md` for evidence and release gates.
+
 ## 2026-08-12 User Center A+—F and native App candidate
 
 - YW remains the source owner. The browser and Android App submit only raw
