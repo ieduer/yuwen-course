@@ -2,6 +2,40 @@
 
 Last reviewed: 2026-08-22 (America/Los_Angeles)
 
+## 2026-08-22 mobile and staged-learning production authority
+
+Current production is Pages deployment
+`619024c7-a261-405b-a13f-8581a90111ac`, branch `main`, exact source
+`16b8277afdf32618043703de4eb9b4098858b888`, with atomic URL
+`https://619024c7.yuwen-course.pages.dev`. It was built only from the clean
+formal `.release/site` staging: 1,223 files, projected aggregate
+`223f05a5aa6333ba3e4be61f04aafc00afafac98359d979a3d1c942678d2e724`,
+artifact-manifest aggregate
+`c744b7ac352c11b5cea45377ce297d69d4a3b142027a768bcb59dbf76bcd98b1`.
+PR #18 / GitHub run `32607440011` passed both exact Node authorities before
+the detached merged-source rebuild.
+
+Custom and atomic routes read back the exact content-hashed app,
+first-read controller and manifest bytes; learning health is HTTP 200 healthy.
+Live trusted-touch mobile checks passed 7/7. Authenticated lesson 1727 read an
+already-submitted first-read source and exposed both downstream local-practice
+stages without a console error; no new learner submission was created.
+Anonymous lesson 1693 exercised both local-practice controls with no formal
+evaluation request, while formal lesson 1497 remained login-gated. The live
+authority remains 189 student lessons = 101 formal + 88 local for both
+structure and author-question.
+
+Immediate production rollback is
+`6426b70e-d39b-4ba9-898b-0f5e7a1c3859` / source `26f126b`; the older
+`581a0180-2085-4960-8cd0-4aee17cb2abd` anchor remains available. Rollback is a
+Pages code/static action only: never delete or rewrite D1/outbox/Queue history.
+After rollback, rerun the custom/atomic asset hashes, learning health, live
+mobile touch suite, lesson 1727 negative and lesson 1497 positive controls.
+This release ran no direct D1 command or migration and changed no Queue/APIS/
+User Center configuration, route, binding, schema or stable native/App
+pointer. Authenticated acceptance retained the existing identity-
+reconciliation boundary and created no new learning submission.
+
 ## 2026-08-22 mobile and staged-learning repair contract
 
 The current release candidate repairs three coupled UI/authority failures
@@ -44,7 +78,9 @@ re-read on 2026-08-22 as deployment
 `6426b70e-d39b-4ba9-898b-0f5e7a1c3859` / source `26f126b`; immediate rollback
 is `581a0180-2085-4960-8cd0-4aee17cb2abd` / source `04ca518`. Use the executable
 release and live-acceptance gate in `docs/VERIFICATION.md`; chat or screenshots
-are not release evidence. The App deploy-sync gate remains intentionally red
+are not release evidence. This paragraph is the pre-release snapshot; the
+production authority and rollback that supersede it are recorded immediately
+above. The App deploy-sync gate remains intentionally red
 without a new approved App audit receipt. A Web-only release may proceed only
 through the existing reviewed path while preserving the stable native pointer
 and every referenced native object byte-for-byte; never fabricate an audit
