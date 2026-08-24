@@ -35,6 +35,21 @@
 failure；p50 `10.194s`、p95 `24.401s`、max `25.908s` 只按成功回應計。另 5 次外部
 探測有 1 次超過 40 秒仍無回應。這不等於「503 已解決」，也不是穩態故障率。
 
+#### R1-C1 — APIS shared feedback admission saturation（獨立容量風險）
+
+YW 全部 feedback 依 `traffic-gate:v1:<project>|<taskType>|<path>` 共用一道 APIS gate，
+無 student／session／mutation 維度。2026-08-24 的 v6.7.0 唯讀 live export 已確認現值
+仍是 `80/min` 與 `6 concurrency`。YW feedback 不在既有等待白名單；滿載時立即回通用
+429。現行 `REQUEST_TIMEOUT_MS_BY_TASK.feedback=12000` 是單次上游嘗試控制，不是整個
+gateway deadline；19–28 秒端到端成功回應不能證明它失真。
+
+按現值 6 與成功 p50 `10.194s` 估算，理想天花板約 `35.3 calls/min`：30 人各 34 calls
+的 1,020 calls 至少約 28.9 分鐘；38 calls 完整流程約 32.3 分鐘；按 40 calls 重試規劃
+則約 34.0 分鐘。這是 p50 推算的樂觀上限，不是班級 SLO。獨立 APIS change
+`20260824-apis-yw-feedback-admission-v1` 建議只補 typed concurrency disposition，並把
+精確的 `yw.bdfz.net + feedback` 納入既有 10 秒／250ms 有界等待。這可削平短 burst，但
+不提高並發 6，故另有容量實測前不得宣稱「班級規模達標」。
+
 ### R2 — 多輪對話正確性
 
 達標條件：在一課 current-formal classical 與一課 current-formal 非 classical 上，
@@ -145,11 +160,19 @@ mutation／窗口約兩次的事實上呼叫上界。APIS gate 以
 `project + taskType + path` 聚合，沒有 student／session／mutation 維度；因此修復版
 在另有 fail-closed、與 learner capacity 分離的 evaluator-call budget 前不得發布。
 
-方案 A（YW D1 獨立 evaluator-call ledger）已獲設計方向批准；不可變條件、完整狀態機
-複核範圍及 APIS 扇出邊界見
+方案 A（YW D1 獨立 evaluator-call ledger）已獲設計方向批准，但**暫停實作**；不可變
+條件、完整狀態機複核範圍及 APIS 扇出邊界見
 [`docs/EVALUATOR_RELEASE_SAFETY_PLAN.md`](EVALUATOR_RELEASE_SAFETY_PLAN.md)。任何 APIS
 身份粒度新能力都屬共享樞紐變更，必須使用獨立 change id；不得夾帶進 `7256098`。
-方案 A 尚未實作，仍是 evaluator 發布硬阻斷。
+已批准的實作常數是每學生每 10 分鐘 60 次已接納 evaluator call、每 mutation 4 次；
+gateway admission rejection 不計數，真正評閱失敗與結果不明仍計數。方案 A 同時必須
+有送出側 admission smoothing，不能只有計數；它尚未實作，仍是 evaluator 發布硬阻斷。
+
+現行 v6.7.0 已證實另一個實作硬門：內部雖有 `concurrency_limit` reason，外部只回通用
+HTTP 429，而上游 key pool 真正呼叫失敗也可能回 429。因此不得按 status、缺 header 或
+中文字串猜「尚未進 evaluator」。先完成並審定 APIS change
+`20260824-apis-yw-feedback-admission-v1` 的 typed disposition 與精確 YW feedback 有界
+等待後，方案 A 才能安全免計數並進 admission waiting；這兩步都尚未獲實作授權。
 
 ### D1 runtime DELETE 與 Time Travel
 

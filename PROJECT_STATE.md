@@ -52,15 +52,50 @@ Last updated: 2026-08-24
 - Evaluator publication remains hard-blocked. Commit `7256098` prevents an
   evaluator outage from consuming learner capacity but removes the old per-
   mutation call ceiling; APIS has no student/session/mutation gate. The operator
-  selected option A, a separate fail-closed YW D1 evaluator-call ledger, as the
-  next independently identified change; it is not implemented or numerically
-  approved. Its append-only call reservation must be reviewed together with
+  selected option A, a separate fail-closed YW D1 evaluator-call ledger plus
+  outbound admission smoothing, as the next independently identified change,
+  but its implementation is now paused on the APIS typed-disposition precondition.
+  The approved limits are 60 admitted evaluator calls per student per ten-minute
+  window and 4 per mutation; neither the ledger nor smoothing is implemented.
+  A positively identified APIS admission rejection must reuse one logical-call
+  row, release its budget hold, avoid `.002Z` cooldown and show a persisted
+  waiting state instead of evaluator failure. A real or outcome-unknown call
+  remains counted. The combined call/admission reservation must be reviewed with
   `.002Z` learner-row deletion/re-reservation, `MAX(slot_no)+1`, negative rowid
   allocation and idempotent replay across the complete merged state machine,
   not as an isolated diff. The runtime `.002Z` DELETE is a governed D1 data
   mutation, superseding the older statement below that the candidate changes no
   direct D1 data. Wrangler 4.100.0 exposes `d1 time-travel info` to retrieve a
   bookmark and `restore` to use one; neither command was executed in this pass.
+- APIS feedback admission is an independent R1 capacity risk. A read-only live
+  export at 2026-08-24T11:37:00Z confirms APIS v6.7.0 deployment
+  `f87fd4a2-e34b-452c-a8dc-bba7edd63d18`, immutable version
+  `21adf19d-4eb6-478f-bad1-7ea73b486b7a`, and current feedback limits of
+  80/minute and concurrency 6. The gate key is project plus task type plus path,
+  so all YW feedback shares one gate. The existing bounded wait remains limited
+  to OCR for `mx.bdfz.net` and `moxie-functions`; YW feedback is rejected
+  immediately at saturation. At the measured 10.194-second success p50,
+  concurrency 6 implies an optimistic
+  35.3 calls/minute ceiling: about 28.9 minutes for 1,020 calls, 32.3 minutes
+  for 30 complete 38-call flows, or 34.0 minutes at the 40-call retry envelope.
+  This is a current-value capacity estimate, not a class-scale SLO. The live
+  source still has `REQUEST_TIMEOUT_MS_BY_TASK.feedback=12000`; that is a
+  per-upstream-attempt control in the multi-key path, so 19-28 second end-to-end
+  successes do not prove the field stale.
+- Live v6.7.0 exposes `concurrency_limit` internally but still returns only a
+  generic external 429 with no typed code or Retry-After; actual upstream key-
+  pool failures can also return 429. HTTP status, missing headers and localized
+  text therefore cannot safely release evaluator budget. Option A is NO-GO
+  until independent APIS shared-hub change
+  `20260824-apis-yw-feedback-admission-v1` adds an additive typed concurrency
+  disposition and precisely extends the existing bounded admission wait to
+  `yw.bdfz.net + feedback`. The proposed first wait cap is the existing 10
+  seconds at 250ms polling; it smooths short bursts but does not change the
+  six-slot throughput ceiling. Fresh fan-out freezes 36 registered consumers
+  (21 current service bindings plus 15 HTTP/App callers), all of which require
+  synchronized disposition and representative regression if implementation is
+  later authorized. No APIS change was made here, and YW string matching of
+  `"系統繁忙"` is explicitly forbidden.
 - R3 excludes environment and test identities, so a successful canary cannot
   increase its numerator. Engineering remains responsible for proving source
   persistence, UC projection and source drilldown with a test identity; only
