@@ -13,9 +13,14 @@ const SUBMISSION_RATE_LIMIT = Object.freeze({
   windowSeconds: 10 * 60,
 });
 const SUBMISSION_RESERVATION_LEASE_SECONDS = 60;
+const EVALUATOR_FAILURE_COOLDOWN_SECONDS = 15;
+export const learningEvaluatorCallBudget = Object.freeze({
+  studentWindowLimit: 60,
+  mutationWindowLimit: 4,
+  windowSeconds: SUBMISSION_RATE_LIMIT.windowSeconds,
+});
 const SUBMISSION_RATE_LIMIT_REASONS = Object.freeze({
   windowCapacity: "window_capacity",
-  evaluatorRetryExhausted: "evaluator_retry_exhausted",
 });
 const registryCache = { value: null, expiresAt: 0 };
 const manifestCache = { value: null, expiresAt: 0 };
@@ -58,9 +63,7 @@ export class LearningSubmissionRateLimitError extends Error {
     const reason = Object.values(SUBMISSION_RATE_LIMIT_REASONS).includes(limitReason)
       ? limitReason
       : SUBMISSION_RATE_LIMIT_REASONS.windowCapacity;
-    super(reason === SUBMISSION_RATE_LIMIT_REASONS.evaluatorRetryExhausted
-      ? "本次答案的两次评阅均未完成，请稍后再试"
-      : "提交过于频繁，请稍后继续修改");
+    super("提交过于频繁，请稍后继续修改");
     this.name = "LearningSubmissionRateLimitError";
     this.code = "learning_submission_rate_limited";
     this.retryAfterSeconds = Math.max(1, Number(retryAfterSeconds) || SUBMISSION_RATE_LIMIT.windowSeconds);
@@ -74,6 +77,40 @@ export class LearningSubmissionInProgressError extends Error {
     super(`上一次提交仍在评阅中，请在 ${wait} 秒后使用同一答案重试`);
     this.name = "LearningSubmissionInProgressError";
     this.code = "learning_submission_in_progress";
+    this.retryAfterSeconds = wait;
+  }
+}
+
+export class LearningEvaluatorCooldownError extends Error {
+  constructor(retryAfterSeconds = EVALUATOR_FAILURE_COOLDOWN_SECONDS) {
+    const wait = Math.max(1, Math.min(
+      EVALUATOR_FAILURE_COOLDOWN_SECONDS,
+      Number(retryAfterSeconds) || EVALUATOR_FAILURE_COOLDOWN_SECONDS,
+    ));
+    super(`評閱服務暫時繁忙，請在 ${wait} 秒後使用同一答案重試`);
+    this.name = "LearningEvaluatorCooldownError";
+    this.code = "learning_evaluator_unavailable";
+    this.retryAfterSeconds = wait;
+  }
+}
+
+export class LearningEvaluatorBudgetExceededError extends Error {
+  constructor(retryAfterSeconds = learningEvaluatorCallBudget.windowSeconds, limitReason = "student_window_capacity") {
+    const wait = Math.max(1, Number(retryAfterSeconds) || learningEvaluatorCallBudget.windowSeconds);
+    super(`本輪評閱次數已達安全上限，請在 ${wait} 秒後使用同一答案重試`);
+    this.name = "LearningEvaluatorBudgetExceededError";
+    this.code = "learning_evaluator_budget_exhausted";
+    this.retryAfterSeconds = wait;
+    this.limitReason = limitReason === "mutation_capacity" ? limitReason : "student_window_capacity";
+  }
+}
+
+export class LearningEvaluatorBudgetUnavailableError extends Error {
+  constructor(retryAfterSeconds = EVALUATOR_FAILURE_COOLDOWN_SECONDS) {
+    const wait = Math.max(1, Number(retryAfterSeconds) || EVALUATOR_FAILURE_COOLDOWN_SECONDS);
+    super("評閱安全額度暫時無法核對，本次答案尚未送出，請稍後重試");
+    this.name = "LearningEvaluatorBudgetUnavailableError";
+    this.code = "learning_evaluator_budget_unavailable";
     this.retryAfterSeconds = wait;
   }
 }
@@ -670,12 +707,16 @@ async function enforceSubmissionRateLimit(db, studentId, resourceKey, definition
         WHERE student_id = ? AND occurred_at >= ? AND occurred_at < ?`
     ).bind(studentId, windowStart, windowEnd).first(),
     db.prepare(
-      `SELECT COUNT(*) AS n FROM learning_submission_slots
-        WHERE student_id = ? AND resource_key = ? AND window_start = ?`
+      `SELECT COUNT(*) AS n, COALESCE(MAX(resource_slot_no), 0) AS max_slot
+         FROM learning_submission_slots
+        WHERE student_id = ? AND resource_key = ? AND window_start = ?
+          AND created_at NOT LIKE '%.002Z'`
     ).bind(studentId, resourceKey, windowStart).first(),
     db.prepare(
-      `SELECT COUNT(*) AS n FROM learning_submission_slots
-        WHERE student_id = ? AND window_start = ?`
+      `SELECT COUNT(*) AS n, COALESCE(MAX(global_slot_no), 0) AS max_slot
+         FROM learning_submission_slots
+        WHERE student_id = ? AND window_start = ?
+          AND created_at NOT LIKE '%.002Z'`
     ).bind(studentId, windowStart).first(),
   ]);
   const resourceUsed = Math.max(Number(recent?.n || 0), Number(resourceSlots?.n || 0));
@@ -688,8 +729,8 @@ async function enforceSubmissionRateLimit(db, studentId, resourceKey, definition
   }
   return {
     windowStart,
-    resourceSlotNo: Number(resourceSlots?.n || 0) + 1,
-    globalSlotNo: Number(globalSlots?.n || 0) + 1,
+    resourceSlotNo: Number(resourceSlots?.max_slot || 0) + 1,
+    globalSlotNo: Number(globalSlots?.max_slot || 0) + 1,
   };
 }
 
@@ -706,10 +747,11 @@ function reservationTimestampMs(value) {
   return Date.parse(explicitZone ? raw : `${raw.replace(" ", "T")}Z`);
 }
 
-// `created_at` is the only existing mutable reservation field. New leases are
-// written at .000Z; the one permitted abandoned-lease reclaim is written at
-// .001Z. Both remain ordinary SQLite/ISO timestamps, while the millisecond bit
-// makes the once-only policy durable across isolates without a schema change.
+// `created_at` is the reservation state marker. New leases use .000Z; every
+// expired non-cooldown lease reclaim rewrites the current time at .001Z, so
+// .001Z is not a once-only retry counter. Evaluator-owned failures use .002Z,
+// are excluded from learner capacity for a 15-second cooldown, and move both
+// slot numbers into negative rowid space before a later fresh reservation.
 function reservationLeaseTimestamp(value, reclaimed = false) {
   const milliseconds = typeof value === "number" ? value : reservationTimestampMs(value);
   const date = new Date(Number.isFinite(milliseconds) ? milliseconds : Date.now());
@@ -719,6 +761,16 @@ function reservationLeaseTimestamp(value, reclaimed = false) {
 
 function submissionSlotWasReclaimed(createdAt) {
   return /\.001Z$/i.test(clean(createdAt, 40));
+}
+
+function submissionSlotIsEvaluatorCooldown(createdAt) {
+  return /\.002Z$/i.test(clean(createdAt, 40));
+}
+
+function evaluatorCooldownTimestamp(value = Date.now()) {
+  const date = new Date(Number.isFinite(Number(value)) ? Number(value) : Date.now());
+  date.setUTCMilliseconds(2);
+  return date.toISOString();
 }
 
 async function readSubmissionSlot(db, sourceEventId) {
@@ -749,10 +801,13 @@ async function reuseOrWaitForSubmissionSlot(
   db,
   slot,
   sourceEventId,
+  clientMutationId,
   studentId,
   resourceKey,
   windowStart,
+  definition,
   occurredAt,
+  retry = 0,
 ) {
   assertSubmissionSlotMatches(slot, sourceEventId, studentId, resourceKey, windowStart);
   const reservation = {
@@ -767,6 +822,52 @@ async function reuseOrWaitForSubmissionSlot(
 
   const nowMs = reservationTimestampMs(occurredAt);
   const createdAtMs = reservationTimestampMs(slot.created_at);
+  if (submissionSlotIsEvaluatorCooldown(slot.created_at)) {
+    const cooldownMs = EVALUATOR_FAILURE_COOLDOWN_SECONDS * 1000;
+    const remainingMs = Number.isFinite(nowMs) && Number.isFinite(createdAtMs)
+      ? cooldownMs - Math.max(0, nowMs - createdAtMs)
+      : cooldownMs;
+    if (remainingMs > 0) {
+      throw new LearningEvaluatorCooldownError(Math.ceil(remainingMs / 1000));
+    }
+    const removed = await db.prepare(
+      `DELETE FROM learning_submission_slots
+        WHERE source_event_id = ?
+          AND created_at = ?
+          AND created_at LIKE '%.002Z'
+          AND NOT EXISTS (
+            SELECT 1 FROM learning_interactions interaction
+             WHERE interaction.source_event_id = learning_submission_slots.source_event_id
+          )`
+    ).bind(sourceEventId, slot.created_at).run();
+    if (Number(removed?.meta?.changes || 0) === 1) {
+      return reserveSubmissionSlot(
+        db,
+        studentId,
+        clientMutationId,
+        resourceKey,
+        definition,
+        occurredAt,
+        Number(retry) + 1,
+      );
+    }
+    const current = await readSubmissionSlot(db, sourceEventId);
+    if (current && Number(retry) < 3) {
+      return reuseOrWaitForSubmissionSlot(
+        db,
+        current,
+        sourceEventId,
+        clientMutationId,
+        studentId,
+        resourceKey,
+        windowStart,
+        definition,
+        occurredAt,
+        Number(retry) + 1,
+      );
+    }
+    throw new LearningSubmissionInProgressError(1);
+  }
   const leaseMs = SUBMISSION_RESERVATION_LEASE_SECONDS * 1000;
   if (!Number.isFinite(nowMs) || !Number.isFinite(createdAtMs) || nowMs - createdAtMs < leaseMs) {
     const remainingMs = Number.isFinite(nowMs) && Number.isFinite(createdAtMs)
@@ -775,22 +876,13 @@ async function reuseOrWaitForSubmissionSlot(
     throw new LearningSubmissionInProgressError(Math.max(1, Math.ceil(remainingMs / 1000)));
   }
 
-  if (submissionSlotWasReclaimed(slot.created_at)) {
-    const windowEndMs = reservationTimestampMs(windowStart)
-      + SUBMISSION_RATE_LIMIT.windowSeconds * 1000;
-    throw new LearningSubmissionRateLimitError(
-      Math.max(1, Math.ceil((windowEndMs - nowMs) / 1000)),
-      SUBMISSION_RATE_LIMIT_REASONS.evaluatorRetryExhausted,
-    );
-  }
-
   const leaseStartedAt = reservationLeaseTimestamp(nowMs, true);
   const claimed = await db.prepare(
     `UPDATE learning_submission_slots
         SET created_at = ?
       WHERE source_event_id = ?
         AND created_at = ?
-        AND created_at NOT LIKE '%.001Z'
+        AND created_at NOT LIKE '%.002Z'
         AND datetime(created_at) <= datetime(?, '-${SUBMISSION_RESERVATION_LEASE_SECONDS} seconds')
         AND NOT EXISTS (
           SELECT 1 FROM learning_interactions interaction
@@ -834,10 +926,13 @@ async function reserveSubmissionSlot(
       db,
       existingSlot,
       sourceEventId,
+      clientMutationId,
       studentId,
       resourceKey,
       windowStart,
+      definition,
       occurredAt,
+      retry,
     );
   }
 
@@ -871,10 +966,13 @@ async function reserveSubmissionSlot(
           db,
           sameMutation,
           sourceEventId,
+          clientMutationId,
           studentId,
           resourceKey,
           rateReservation.windowStart,
+          definition,
           occurredAt,
+          retry,
         );
       }
       if (Number(retry) < 3) {
@@ -1058,6 +1156,94 @@ export async function assertLearningSubmissionAllowed({
   };
 }
 
+function evaluatorBudgetRetryAfterSeconds(windowStart, occurredAt = isoNow()) {
+  const windowStartMs = reservationTimestampMs(windowStart);
+  const occurredAtMs = reservationTimestampMs(occurredAt);
+  if (!Number.isFinite(windowStartMs) || !Number.isFinite(occurredAtMs)) {
+    return learningEvaluatorCallBudget.windowSeconds;
+  }
+  return Math.max(1, Math.ceil(
+    (windowStartMs + learningEvaluatorCallBudget.windowSeconds * 1000 - occurredAtMs) / 1000,
+  ));
+}
+
+export async function reserveLearningEvaluatorCall({
+  env,
+  submissionReservation,
+  occurredAt = isoNow(),
+}) {
+  if (!env?.READING_DB
+    || !submissionReservation
+    || !trustedSubmissionReservations.has(submissionReservation)
+    || !Number.isInteger(Number(submissionReservation.studentId))
+    || Number(submissionReservation.studentId) <= 0
+    || !clean(submissionReservation.sourceEventId, 100)
+    || !clean(submissionReservation.resourceKey, 220)
+    || !clean(submissionReservation.rateReservation?.windowStart, 40)) {
+    throw new LearningEvaluatorBudgetUnavailableError();
+  }
+  const db = env.READING_DB;
+  const studentId = Number(submissionReservation.studentId);
+  const sourceEventId = clean(submissionReservation.sourceEventId, 100);
+  const resourceKey = clean(submissionReservation.resourceKey, 220);
+  const windowStart = clean(submissionReservation.rateReservation.windowStart, 40);
+  const createdAt = clean(occurredAt, 40) || isoNow();
+  try {
+    const inserted = await db.prepare(
+      `INSERT INTO learning_evaluator_calls (
+         student_id, source_event_id, resource_key, window_start, created_at
+       )
+       SELECT ?, ?, ?, ?, ?
+        WHERE (
+          SELECT COUNT(*) FROM learning_evaluator_calls
+           WHERE student_id = ? AND window_start = ?
+        ) < ${learningEvaluatorCallBudget.studentWindowLimit}
+          AND (
+          SELECT COUNT(*) FROM learning_evaluator_calls
+           WHERE student_id = ? AND source_event_id = ? AND window_start = ?
+        ) < ${learningEvaluatorCallBudget.mutationWindowLimit}`
+    ).bind(
+      studentId,
+      sourceEventId,
+      resourceKey,
+      windowStart,
+      createdAt,
+      studentId,
+      windowStart,
+      studentId,
+      sourceEventId,
+      windowStart,
+    ).run();
+    if (Number(inserted?.meta?.changes || 0) === 1) {
+      return { counted: true, studentId, sourceEventId, windowStart, createdAt };
+    }
+    const [studentWindow, mutationWindow] = await Promise.all([
+      db.prepare(
+        "SELECT COUNT(*) AS n FROM learning_evaluator_calls WHERE student_id = ? AND window_start = ?"
+      ).bind(studentId, windowStart).first(),
+      db.prepare(
+        "SELECT COUNT(*) AS n FROM learning_evaluator_calls WHERE student_id = ? AND source_event_id = ? AND window_start = ?"
+      ).bind(studentId, sourceEventId, windowStart).first(),
+    ]);
+    const mutationUsed = Number(mutationWindow?.n || 0);
+    const studentUsed = Number(studentWindow?.n || 0);
+    if (mutationUsed >= learningEvaluatorCallBudget.mutationWindowLimit
+      || studentUsed >= learningEvaluatorCallBudget.studentWindowLimit) {
+      throw new LearningEvaluatorBudgetExceededError(
+        evaluatorBudgetRetryAfterSeconds(windowStart, occurredAt),
+        mutationUsed >= learningEvaluatorCallBudget.mutationWindowLimit
+          ? "mutation_capacity"
+          : "student_window_capacity",
+      );
+    }
+    throw new LearningEvaluatorBudgetUnavailableError();
+  } catch (error) {
+    if (error instanceof LearningEvaluatorBudgetExceededError
+      || error instanceof LearningEvaluatorBudgetUnavailableError) throw error;
+    throw new LearningEvaluatorBudgetUnavailableError();
+  }
+}
+
 export async function releaseLearningSubmissionReservation({ env, submissionReservation }) {
   if (!env?.READING_DB
     || !submissionReservation
@@ -1070,30 +1256,24 @@ export async function releaseLearningSubmissionReservation({ env, submissionRese
     || submissionReservation.sourceEventId !== clean(submissionReservation.sourceEventId, 100)) {
     throw new Error("learning submission reservation lease invalid");
   }
-  const reclaimed = submissionReservation.reclaimed === true || submissionSlotWasReclaimed(leaseStartedAt);
-  const expiredLeaseAt = reservationLeaseTimestamp(
-    leaseStartedAtMs - (SUBMISSION_RESERVATION_LEASE_SECONDS + 1) * 1000,
-    reclaimed,
-  );
+  const cooldownStartedAt = evaluatorCooldownTimestamp();
   const released = await env.READING_DB.prepare(
     `UPDATE learning_submission_slots
-        SET created_at = ?
+        SET created_at = ?,
+            resource_slot_no = -ABS(rowid),
+            global_slot_no = -ABS(rowid)
       WHERE source_event_id = ?
         AND created_at = ?
         AND NOT EXISTS (
           SELECT 1 FROM learning_interactions interaction
            WHERE interaction.source_event_id = learning_submission_slots.source_event_id
         )`
-  ).bind(expiredLeaseAt, submissionReservation.sourceEventId, leaseStartedAt).run();
+  ).bind(cooldownStartedAt, submissionReservation.sourceEventId, leaseStartedAt).run();
   trustedSubmissionReservations.delete(submissionReservation);
   const changed = Number(released?.meta?.changes || 0) === 1;
-  const windowEndMs = reservationTimestampMs(submissionReservation.rateReservation?.windowStart)
-    + SUBMISSION_RATE_LIMIT.windowSeconds * 1000;
-  const occurredAtMs = reservationTimestampMs(submissionReservation.occurredAt);
   return {
     released: changed,
-    evaluatorAttemptsExhausted: reclaimed && changed,
-    retryAfterSeconds: Math.max(1, Math.ceil((windowEndMs - occurredAtMs) / 1000)),
+    retryAfterSeconds: EVALUATOR_FAILURE_COOLDOWN_SECONDS,
   };
 }
 
@@ -1494,4 +1674,5 @@ export const learningEvidenceContract = Object.freeze({
   submissionRateLimit: SUBMISSION_RATE_LIMIT,
   submissionRateLimitReasons: SUBMISSION_RATE_LIMIT_REASONS,
   submissionReservationLeaseSeconds: SUBMISSION_RESERVATION_LEASE_SECONDS,
+  evaluatorFailureCooldownSeconds: EVALUATOR_FAILURE_COOLDOWN_SECONDS,
 });

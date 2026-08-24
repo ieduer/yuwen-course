@@ -1,6 +1,194 @@
 # Project State
 
-Last updated: 2026-08-22
+Last updated: 2026-08-24
+
+## 2026-08-24 evaluator-call budget release in progress
+
+- The operator authorized one bounded YW-only release transaction under change
+  id `20260824-yw-evaluator-budget-release-v1`. APIS admission work is backlog
+  and is not part of this change. The implementation uses conservative
+  accounting: every feedback call actually sent to APIS consumes one immutable
+  evaluator-call row, including success, timeout, upstream 5xx, invalid JSON,
+  gateway 429 and outcome-unknown cases. No localized error-string heuristic is
+  used.
+- Additive migration `0006_learning_evaluator_call_ledger.sql` creates
+  `learning_evaluator_calls` plus student-window and mutation-window indexes.
+  The limits are 60 calls per authenticated student per ten-minute window and
+  4 per `source_event_id` per window. Capacity or ledger unavailability fails
+  closed before APIS, releases the learner reservation into the existing short
+  cooldown, preserves the answer/mutation receipt, returns structured 503 plus
+  `Retry-After`, and writes no interaction, evaluation or outbox record.
+- The complete learner-reservation plus evaluator-budget state machine has been
+  reviewed against the five Phase 0 questions. No P0 was found; the review
+  remains `non-independent, pending independent confirmation`. Focused source
+  evidence currently passes 68/68 and the study-guide frontend 27/27. These are
+  pre-merge results and do not replace the required exact merged-SHA gates.
+- A pre-migration D1 Time Travel bookmark was captured at
+  `2026-08-24T12:21:39Z`, then migration 0006 was applied remotely. Readback
+  proves the new table and both indexes exist with zero call rows, while the
+  existing students/interactions/evaluations/outbox/submission-slot aggregate
+  counts are unchanged. The restore command is held in the redacted release
+  receipt; it may be used only under a separately controlled D1 incident, never
+  as part of an ordinary Pages rollback.
+- Production is still deployment
+  `2471f1e4-884a-4e80-9801-589ebbace476` / source `fa93ca8`; no new Pages
+  deployment or env-student acceptance has yet occurred. The release must use a
+  new one-use YW-Pages-only executor bound to the final merged SHA and a new
+  journal. Its first Pages rollback target is `2471f1e4`; `619024c7` remains the
+  second-level anchor. Only successful dual-mode acceptance may seal the new
+  candidate.
+
+## 2026-08-24 reliability-first goal recalibration (documentation-only draft)
+
+- The active objective is no longer content or lesson-coverage expansion. The
+  16/67 ancient-text and 0/67 complement-bucket measurements remain background
+  only. The review draft now uses three outcome measures: R1 existing-
+  interaction reliability split by `mode=classical` versus all other modes,
+  R2 server-owned multi-turn correctness on both sides, and R3 real-student
+  scoring events that become normalized, competency-faceted, source-drillable
+  User Center evaluations. No lesson content, manifest membership or runtime
+  contract changed in this pass.
+- Fresh SELECT-only YW and UC aggregation excludes the configured environment
+  student and five test accounts through five current UC identity mappings plus
+  the direct YW account keys. Real students currently have **zero**
+  `a_plus_gate`/`formative` source events and **zero** qualifying UC
+  evaluations. The 48 historical v1 rows are exactly 20 `lessonOpened`, 19
+  `noteOpened`, 6 `readAcknowledged`, 2 `initialReadingSubmitted` and 1
+  `chatOpened`; all five interaction kinds are `scoringRole=none`, and all 48
+  normalized values are null. The two initial-reading rows have a competency
+  facet but still are not qualifying evaluations.
+- The same 48 source events already exist in UC. Their missing central
+  disposition is a legacy-v1 orphan-receipt/accounting P1 because current retry
+  and reconcile selectors are v2-only. It is not a Queue outage and cannot
+  create an R3 numerator: receipt closure must never retroactively score these
+  trace events or blindly replay them.
+- Forty current-formal non-ancient, non-activity lessons publish both
+  `structure` and `authorQuestion`. Frontend and Worker source inspection shows
+  that these interactions share `/api/interaction-check`, APIS feedback,
+  reservation/cooldown, the student/resource/interaction conversation ledger,
+  evaluation, outbox and error mapping with classical lessons. Mode changes the
+  text-analysis technique and author/coach prompt semantics, not the state or
+  transport path. Classical locking applies only to `mode=classical`; the 40
+  other lessons are open but have no formal two-turn production acceptance.
+- Poetry remains vocabulary-eligible while outside the classical prerequisite
+  chain. The operator has instructed this task to preserve the current
+  interaction model, so non-blocking poetry is a regression contract here, not
+  a code change. A future prerequisite change would need separate design and
+  authorization.
+- Source tests prove two route turns for both `structure` and `authorQuestion`
+  on classical lesson 1474, and one non-classical author-question route turn on
+  lesson 1488. They do not prove a non-classical two-turn live flow, refresh
+  recovery or UC drilldown. The pending post-release plan therefore uses
+  current-formal lessons 1474 and 1569 and requires two turns of both
+  interactions on each side. Lesson 1569 is deliberately `modern-prose`:
+  production source `fa93ca8` already normalizes that mode to `argument`, so
+  its canary must record whether the feedback applies argumentative technique
+  to lyric prose. This is a pre-existing R2 quality issue, not a regression in
+  commit `7256098` and not part of its release change id.
+- Commit `7256098` removed the old implicit evaluator-call ceiling while
+  preventing evaluator outages from consuming learner capacity. The follow-up
+  ledger described in the current section closes that unbounded-call exposure.
+  The operator withdrew the earlier admission-fairness requirement: gateway
+  rejection is conservatively counted like every other sent call, so typed APIS
+  disposition is not a dependency. Admission smoothing remains backlog. The
+  runtime `.002Z` DELETE and the additive evaluator ledger are both governed D1
+  changes and were reviewed together with `MAX(slot_no)+1`, negative rowid
+  allocation, idempotent replay and the two independent table lifecycles.
+- APIS feedback admission is an independent R1 capacity risk. A read-only live
+  export at 2026-08-24T11:37:00Z confirms APIS v6.7.0 deployment
+  `f87fd4a2-e34b-452c-a8dc-bba7edd63d18`, immutable version
+  `21adf19d-4eb6-478f-bad1-7ea73b486b7a`, and current feedback limits of
+  80/minute and concurrency 6. The gate key is project plus task type plus path,
+  so all YW feedback shares one gate. The existing bounded wait remains limited
+  to OCR for `mx.bdfz.net` and `moxie-functions`; YW feedback is rejected
+  immediately at saturation. At the measured 10.194-second success p50,
+  concurrency 6 implies an optimistic
+  35.3 calls/minute ceiling: about 28.9 minutes for 1,020 calls, 32.3 minutes
+  for 30 complete 38-call flows, or 34.0 minutes at the 40-call retry envelope.
+  This is a current-value capacity estimate, not a class-scale SLO. The live
+  source still has `REQUEST_TIMEOUT_MS_BY_TASK.feedback=12000`; that is a
+  per-upstream-attempt control in the multi-key path, so 19-28 second end-to-end
+  successes do not prove the field stale.
+- Live v6.7.0 exposes `concurrency_limit` internally but returns only a generic
+  external 429 with no typed code or `Retry-After`; actual upstream key-pool
+  failures can also return 429. The current YW release therefore does not try
+  to distinguish them: every sent call consumes budget. Independent APIS change
+  `20260824-apis-yw-feedback-admission-v1` is backlog, not a dependency or part
+  of this release. No APIS change is authorized, and YW string matching of
+  `"系統繁忙"` remains forbidden.
+- R3 excludes environment and test identities, so a successful canary cannot
+  increase its numerator. Engineering remains responsible for proving source
+  persistence, UC projection and source drilldown with a test identity; only
+  after all three work does a continued zero real-student numerator primarily
+  become a classroom-usage question.
+- The branch retains evaluator source commit `7256098` and records the R1/R2/R3
+  ledger, interaction matrix, selected-option safety design, Time Travel
+  command templates and dual-mode acceptance plan as documentation-only work.
+  Production remains deployment `2471f1e4-884a-4e80-9801-589ebbace476`, source
+  `fa93ca8`, with rollback
+  `619024c7-a261-405b-a13f-8581a90111ac`. No accept, executor, merge, deploy,
+  journal, APIS, UC, Queue, D1 write, bookmark, restore or student E2E action was
+  performed.
+
+## 2026-08-23 evaluator timeout and failure-attribution repair candidate
+
+- The currently served Pages deployment is
+  `2471f1e4-884a-4e80-9801-589ebbace476`, source
+  `fa93ca825e9b0d914b4608c971152dcf581ae9ac`, with atomic URL
+  `https://2471f1e4.yuwen-course.pages.dev`. Both the custom and atomic HTML
+  currently pin `assets/app.js?v=3fb3009cc5200181`. This deployment is still
+  `candidate_pending_acceptance`; do not accept it or describe it as the
+  evaluator repair. The immediate rollback remains
+  `619024c7-a261-405b-a13f-8581a90111ac` / source `16b8277`.
+- Production timing reproduced the missing failure chain. The same open-answer
+  feedback prompt took 40.0 seconds (operator timeout), 27.5, 28.3 and 19.8
+  seconds, while the Worker aborted every APIS call at 20 seconds and the
+  browser aborted at 25 seconds. The release path then attributed the upstream
+  failure to the learner: a second failure returned
+  `evaluator_retry_exhausted` with the remainder of the ten-minute learner
+  window (observed 478 seconds). That server-owned failure stranded the study-
+  guide stage and therefore kept downstream structure and author-question
+  controls locked.
+- This candidate gives `taskType=feedback` a separate 45-second Worker budget
+  and a 55-second browser budget while retaining `thinkingLevel=medium`.
+  Evaluator timeout, upstream 5xx and invalid upstream JSON now move the exact
+  mutation into a 15-second evaluator-owned cooldown marker that is excluded
+  from learner resource/global capacity. The same answer can retry after that
+  short cooldown. The response remains structured
+  `learning_evaluator_unavailable` 503 and cannot write false interaction,
+  evaluation, outbox or Queue evidence. Only genuine learner window capacity
+  returns `learning_submission_rate_limited`; the former
+  `evaluator_retry_exhausted` contract is retired.
+- Focused verification passes evidence 63/63, study-guide frontend 27/27,
+  Worker/source syntax and `git diff --check`. Exact Node 24.18.0 and 22.21.1
+  complete gates each pass 245/245 TAP tests with zero skip and zero fail, plus
+  the non-TAP first-read, annotation, mobile-touch, source and staging checks.
+  Both runtimes verify all five study-guide PDF/extraction receipts and the
+  same 693-file / 75,196,340-byte textbook-page subset against the tracked
+  inventory. A bounded 20-request
+  feedback/medium probe produced 19 valid grounded responses and one transport
+  `TypeError`; successful-response p95 was 24.401 seconds and the maximum was
+  25.908 seconds, below the 45-second Worker budget. Five low-thinking samples
+  included one invalid response, so `medium` remains the quality authority.
+  The checksum-fixed formal artifact passes both runtimes: 1,223 files /
+  164,458,961 bytes, projected aggregate
+  `520aabbb9a462c3b18d491aa1163b37cba0e05b50aceec2c18463b4f692cee55`,
+  artifact aggregate
+  `31f5a020549387589336ecd6be29bea5416c166084672b411024c9f00ae94101`
+  and marker SHA-256
+  `870ae05d50a41a98cc44355277416d70a0cd7c9987e768c8cf81d65527aee3ae`.
+  Authenticated production acceptance remains pending deployment authorization
+  and is not a completed claim.
+- The repair preserves the already-reviewed same-page first-read/checkpoint
+  rerendering and server-derived multi-turn formal dialogue. It changes no
+  route, binding, schema, migration, direct D1 data, Queue, APIS, User Center,
+  App/native pointer or shared-hub configuration: this remains a leaf-only
+  `no-new-capability` change with those dependencies `verified_no_change`.
+- The existing external executor is frozen to source `fa93ca8` and must not be
+  edited or reused for a different SHA. After merge and exact-main artifact
+  verification, production may change only through a new, separately reviewed,
+  one-use YW-Pages-only executor bound to the exact merged SHA and rollback
+  `619024c7`; direct checkout upload remains forbidden.
 
 ## 2026-08-22 lesson 1474 staged-loop recovery source closeout
 
@@ -460,6 +648,11 @@ Last updated: 2026-08-22
   v2 delivery and real-account A--F readback.
 
 ## 2026-08-15 assessment, bounded evaluator retry and anonymous-AI retirement candidate
+
+> **Superseded on 2026-08-23:** the historical two-evaluator limit below is
+> incident evidence only. The current `.002Z` evaluator-owned cooldown at the
+> top of this file consumes no learner slot and returns no
+> `evaluator_retry_exhausted` result.
 
 - This source-only candidate starts from canonical main
   `7c7e1e06bad67b17dfa16a500a64ca2e02ad08c1`. Single-choice grading now applies

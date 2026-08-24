@@ -3552,12 +3552,22 @@ function learningSubmissionRetryMessage(code, retryAfterSeconds = 0, limitReason
       ? `上一次提交仍在評閱中，請 ${wait} 秒後用同一答案重試`
       : "上一次提交仍在評閱中，請稍後用同一答案重試";
   }
+  if (code === "learning_evaluator_unavailable") {
+    return wait
+      ? `來源端評閱暫時不可用；答案已保留，請 ${wait} 秒後用同一內容重試`
+      : "來源端評閱暫時不可用；答案已保留，請稍後用同一內容重試";
+  }
+  if (code === "learning_evaluator_budget_exhausted") {
+    return wait
+      ? `本輪評閱次數已達安全上限；答案已保留，請 ${wait} 秒後用同一內容重試`
+      : "本輪評閱次數已達安全上限；答案已保留，請稍後用同一內容重試";
+  }
+  if (code === "learning_evaluator_budget_unavailable") {
+    return wait
+      ? `評閱安全額度暫時無法核對；答案已保留，請 ${wait} 秒後用同一內容重試`
+      : "評閱安全額度暫時無法核對；答案已保留，請稍後用同一內容重試";
+  }
   if (code === "learning_submission_rate_limited") {
-    if (limitReason === "evaluator_retry_exhausted") {
-      return wait
-        ? `本次答案的兩次評閱均未完成，請 ${wait} 秒後再試`
-        : "本次答案的兩次評閱均未完成，請稍後再試";
-    }
     return wait ? `提交較頻繁，請 ${wait} 秒後再試` : "提交較頻繁，請稍後再試";
   }
   return "";
@@ -3742,7 +3752,7 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
   state.interactionRequestsInFlight.add(requestInFlightKey);
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 25000);
+    const timeout = setTimeout(() => controller.abort(), 55_000);
     let response;
     let payload;
     try {
@@ -3868,7 +3878,13 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
         toast("請先登入 My，再提交並記錄本次學習證據");
       } else if (error.code === "learning_mutation_conflict") {
         toast("答案或提交狀態已變更；請再次提交，系統會建立新一輪");
-      } else if (["learning_submission_in_progress", "learning_submission_rate_limited"].includes(error.code)) {
+      } else if ([
+        "learning_submission_in_progress",
+        "learning_submission_rate_limited",
+        "learning_evaluator_unavailable",
+        "learning_evaluator_budget_exhausted",
+        "learning_evaluator_budget_unavailable",
+      ].includes(error.code)) {
         toast(learningSubmissionRetryMessage(error.code, error.retryAfterSeconds, error.limitReason));
       } else if (error?.name === "AbortError") {
         toast("來源端評閱逾時；答案已保留，請稍後用同一內容重試");
@@ -4012,7 +4028,7 @@ function currentStudyGuideAttemptRecords(ownerScope, lessonId, itemKey, clientMu
 
 async function submitStudyGuideAttempt({ lessonId, itemKey, response, referenceRevealedAt, clientMutationId }) {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 25000);
+  const timeout = setTimeout(() => controller.abort(), 55_000);
   try {
     const result = await fetch("/api/reading/study-guide-attempt", {
       method: "POST",
@@ -4195,7 +4211,21 @@ function bindCheckStage() {
           result?.retryAfterSeconds,
           result?.limitReason,
         ),
-        learning_evaluator_unavailable: "來源端評閱暫時不可用；答案已保留，請稍後重試。",
+        learning_evaluator_unavailable: learningSubmissionRetryMessage(
+          result.code,
+          result.retryAfterSeconds,
+          result.limitReason,
+        ),
+        learning_evaluator_budget_exhausted: learningSubmissionRetryMessage(
+          result.code,
+          result.retryAfterSeconds,
+          result.limitReason,
+        ),
+        learning_evaluator_budget_unavailable: learningSubmissionRetryMessage(
+          result.code,
+          result.retryAfterSeconds,
+          result.limitReason,
+        ),
         learning_evaluator_timeout: "來源端評閱逾時；答案已保留，請稍後重試。",
       }[result?.code];
       toast(gateMessage || (result?.status === 401
