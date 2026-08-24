@@ -2,9 +2,9 @@
 
 > 基線時間：2026-08-24。本文以來源碼、機器契約及 YW／UC D1 的 SELECT-only
 > 回讀為準；不把部署、題目覆蓋、點擊、outbox 狀態或測試帳號冒充學習成效。
-> 2026-08-24 最新授權把工作限定為現有互動可靠性：不擴充內容、不改 APIS；允許
-> YW-only evaluator-call ledger、D1 bookmark／additive migration、PR／合併、一次性
-> Pages 發布及 classical／非 classical 單次驗收。部署與 live 結果只在實際回讀後記錄。
+> 2026-08-24 的 YW evaluator candidate 已在驗收失敗後回滾。當前授權只包含：修正
+> academic-year envelope 並提交／推送，以及對 APIS 做唯讀配對取樣與一項待批設計；
+> 不包含 APIS 實作、YW PR／合併／部署、accept、D1／UC／Queue 寫入或 env E2E。
 
 ## 0. 最終目標
 
@@ -29,12 +29,36 @@
 
 | 側別 | 已證實 | 尚未證實／阻斷 |
 |---|---|---|
-| `mode=classical` | 舊線上版本已實際暴露 evaluator 503，重試後可落入 `evaluator_retry_exhausted`；候選來源把單次失敗改為 15 秒 cooldown，並以 append-only 60／4 ledger 關閉無上界敞口 | 修復未部署；尚無新版 live 通過值 |
+| `mode=classical` | 2026-08-24 候選 live 驗收完成詞級 12/12、學案 15/19；21 次 evaluator call／16 mutations 中沒有 429 `evaluator_retry_exhausted` | 同一第 16 個學案 mutation 連續四次 503，15 秒 cooldown 後仍未恢復；候選已回滾，R1 未達標 |
 | 非 `classical` | 補集中的 40 課其正式 `structure`／`authorQuestion` 與 classical 共用 `/api/interaction-check`、APIS feedback、預約、ledger、outbox；其他 mode 亦走同一狀態路徑；`lesson-1488` 有一次非 classical server-route 單輪測試 | 沒有任一非 classical 課的正式雙輪 live 驗收，也沒有分側的生產失敗率 |
 
 既有小樣本只作風險基線：20 次 feedback/medium 中 19 次成功、1 次 transport
 failure；p50 `10.194s`、p95 `24.401s`、max `25.908s` 只按成功回應計。另 5 次外部
 探測有 1 次超過 40 秒仍無回應。這不等於「503 已解決」，也不是穩態故障率。
+
+#### R1-T1 — feedback 12 秒重試階梯與不變的 YW 45 秒硬線
+
+2026-08-24 v6.7.0 live export 確認 APIS 對 feedback 的每次 Google 嘗試上限為 12 秒，
+同一 key 最多 3 次並退避 250ms、500ms；所以單 key 全逾時階梯約為
+`3 × 12s + 0.75s = 36.75s`。同一精確 prompt 先前 35.905 秒成功，以及兩次在 50 秒
+client deadline 前沒有 response，均與重試／換 key 階梯相容；但公開 response 沒有
+per-attempt trace，不能把單次 35.905 秒成功寫成已證明的「第三次嘗試」。10+10
+feedback／chat 唯讀配對取樣及其限制另見 APIS change
+`20260824-apis-feedback-timeout-30s-v1`。
+
+該 exact-prompt、medium-thinking 配對實測為：feedback 0/10 成功、10/10 在 60 秒 client
+deadline 前無 response；chat 5/10 成功，另 4 次 60 秒 deadline、1 次 25.894 秒
+`fetch failed`。chat 成功 p50 51.751 秒、max 57.080 秒，五次都超過 YW 45 秒。這支持
+feedback 的 task-specific timeout／admission 組合是主因，但 chat 與 feedback 使用不同
+traffic gate（concurrency 10 vs 6），所以不能把差異全歸因於 12 秒，也不能把 30 秒寫
+成已驗收值。
+
+待批 APIS 提案只把 `REQUEST_TIMEOUT_MS_BY_TASK.feedback` 從 12000 調為 30000，目的是
+讓實測 12–30 秒內的真實成功在第一次嘗試返回，減少重複上游 call 與典型 tail；它也
+會把真正全逾時時的單 key 最壞階梯增至約 90.75 秒，因此必須 canary、測 tail 並可立即
+回滾。**YW 的 `APIS_FEEDBACK_TIMEOUT_MS=45_000` 保持不變；不得放寬到 60／75 秒。**
+放寬葉子 deadline 只會掩蓋 gateway retry amplification，並讓學生等待超過一分鐘，
+不構成根因修復。
 
 #### R1-C1 — APIS shared feedback admission saturation（backlog；不阻斷本次發布）
 
@@ -58,7 +82,7 @@ gateway deadline；19–28 秒端到端成功回應不能證明它失真。
 `structure`、`authorQuestion` 各連續至少兩輪；server-owned attempt 單調增加，下一輪
 prompt 接續上一輪，刷新後對話仍由來源 ledger 恢復，且不退化為一次性聊天。
 
-現值：**classical 只有來源級證據；非 classical 未驗，整體未達標**。
+現值：**classical live 在進入多輪前被持續 503 阻斷；非 classical 未驗，整體未達標**。
 
 - `lesson-1474` 的來源測試已讓 `structure` 與 `authorQuestion` 各走兩輪真實 Worker
   route，驗證第二輪 prompt 帶入第一輪學生輸入與追問；idempotent replay 不新增 APIS
@@ -69,6 +93,8 @@ prompt 接續上一輪，刷新後對話仍由來源 ledger 恢復，且不退�
   conversation ledger、evidence/outbox 或錯誤映射。
 - 尚無非 classical 正式雙輪 route 測試、刷新驗收或 UC 下鑽驗收；因此不得把共用
   程式路徑等同於該側已通過。
+- 2026-08-24 唯一 live 驗收在 lesson-1474 學案 15/19 後失敗並回滾，故沒有生成
+  classical 或非 classical 的雙輪／刷新證據；lesson-1569 未被執行。
 
 #### R2-Q1 — `modern-prose` 被歸一化為 `argument`（既有品質缺陷）
 
@@ -128,6 +154,19 @@ R3 永遠排除 env／測試帳號，因此發布驗收無論成功與否都不�
 `sourceUrl + sourcePayloadRef` 下鑽。只有三段已通過後，真實學生仍沒有新計分事件時，
 後續增量才主要取決於真實課堂使用；在此之前，落庫、投遞或下鑽故障仍是工程責任。
 不得用 env canary 冒充 R3，也不得為了「推分子」製造測試或追溯性評價。
+
+2026-08-24 env canary 的工程讀回同樣未閉環：YW 保存了 12 條
+`a_plus_gate` 與 15 條 `formative`，27 條 normalized value 非空；UC 卻把同期 28
+條 envelope 全部以 `academic_year_invalid` 隔離，新增合格評價為 0。這些 env 行永遠
+不增加 R3 真實學生分子，但此結果證明工程側的投遞／評價門仍未通過，不能轉稱為純課堂
+使用問題。
+
+根因已定位為 YW 曾按 `occurredAt` 的上海月份推算 academic year：8 月產出
+`2025-2026`，而同一 compatibility contract 的 active policy 明確要求 `2026-2027`。
+來源修正 `7f401d7` 已刪除日期 fallback，改為只使用通過完整 contract 驗證的
+`academicYearPolicy.academicYear`；政策缺失或版本錯配直接 fail closed。Node 24.18.0
+與 22.21.1 的 focused evidence-contract 測試各 69/69，但此 commit 尚未 PR／合併／部署，
+故 live R3 與工程鏈路狀態仍未改變。
 
 ## 2. 現有互動機器契約
 
@@ -197,7 +236,7 @@ additive migration 0006。新表與兩個索引存在、row count 0，既有五�
 
 ## 6. 發布後雙側驗收
 
-本次已授權的單次發布後驗收使用 current-formal `lesson-1474`（classical）與
+下一次另獲發布與 env 驗收授權後，必須使用 current-formal `lesson-1474`（classical）與
 `lesson-1569`《一個消逝了的山村》（taxonomy genre `lyric-prose`、
 `mode=modern-prose`），不用 `lesson-1458`（`speech-letter`，映射到 `argument` 本就
 合理，不能暴露 R2-Q1）。兩課各跑 `structure`、`authorQuestion` 兩輪以上、刷新恢復、
