@@ -1,311 +1,193 @@
-# YW / yw.bdfz.net — 學習證據與評價目標台賬（審閱草案）
-
-> 本文只使用 2026-08-24 本輪來源碼、資料檔、runtime contract 與遠端 D1
-> 唯讀回讀所得的事實。它是未提交、未發布的審閱草案，不授予合併、部署、D1
-> 寫入或共享樞紐變更權。
-
-## 0. 最終目標（一句話）
-
-**一個學生能在 yw.bdfz.net 完成與文體相稱的學習，原始證據可回指，並在
-my.bdfz.net 形成可下鑽的規範化能力評價。**
-
-## 0.1 唯一進度口徑
-
-| 口徑 | 實測基線 | 分母／範圍 | 分子成立條件 |
-|---|---:|---:|---|
-| A：古詩文完整階梯 | **16 / 67** | 67 個古詩文 runtime bucket 課文 | 同一課同時具備初讀、詞級疏通、學案知能清算、考辨與章法＋遷移與追問四階 runtime contract |
-| B：現當代完整階梯 | **0 / 67** | 67 個現當代 runtime bucket 課文 | G0 的現當代階梯先獲審定，再按獲准 contract 判定四階全備 |
-| C：UC 可下鑽評價 | **0 課** | A+B 的 134 課；測試帳號與 env 學生永遠排除 | 真實學生在 UC 同時具備非空 competency facet、非空 normalizedValue，且 `sourceUrl`＋`sourcePayloadRef` 能回到 YW source-owned 原始互動／作答 |
-
-`commit`、部署、題目數、通過測試數、outbox `delivered`／`enqueued` 均不增加
-A、B、C 分子。學習活動另列 55 項，但不進 A/B 分母。
-
-「現當代」在本文是為了與現行 runtime 學習軌對齊而採用的非學習活動、非古詩文
-補集，不是年代學分類；其中可能包含古代小說或戲劇。G0 審定前不得把這個機器桶
-誤寫成已成立的現當代教學階梯。
-
-## 1. 分母與粒度裁決（2026-08-24）
-
-### 1.1 三種粒度
-
-- **lesson 實體檔**：`site/data/lessons/lesson-*.json` 的物理檔／物理 id，共 204。
-- **logical lesson**：以 `derivedFrom || id` 折疊 35 個多部課文子檔後的邏輯 id，
-  共 169。這個粒度適合追查來源檔家族，不適合直接代表教材目錄項。
-- **taxonomy item**：`literary-taxonomy.json.lessons[]` 的教材目錄項，共 189。
-  它保留多部課文各篇的目錄粒度。
-- runtime 還有 `lesson-competency-manifest.json` 191 行與 reader index 191 行：兩者都
-  是 189 個 taxonomy item 加上 2 個工具／歷史記錄，並不把分母擴成 191 篇教材課文。
-
-### 1.2 兩份差集
-
-lessons logical id 有、taxonomy 無的 15 項：
-
-`lesson-11637`、`lesson-11705`、`lesson-1692`、`lesson-1701`、
-`lesson-1704`、`lesson-1705`、`lesson-1706`、`lesson-1711`、
-`lesson-1717`、`lesson-1719`、`lesson-1722`、`lesson-1726`、
-`lesson-1743`、`lesson-1753`、`lesson-1755`。
-
-taxonomy 有、logical id 無的 35 項：
-
-`lesson-1692-p1`、`lesson-1692-p2`、`lesson-1692-p3`、`lesson-1692-p4`；
-`lesson-1701-p1`、`lesson-1701-p2`；
-`lesson-1704-p1`、`lesson-1704-p2`；
-`lesson-1705-p1`、`lesson-1705-p2`、`lesson-1705-p3`；
-`lesson-1706-p1`、`lesson-1706-p2`、`lesson-1706-p3`；
-`lesson-1711-p1`、`lesson-1711-p2`；
-`lesson-1717-p1`、`lesson-1717-p2`；
-`lesson-1719-p1`、`lesson-1719-p2`；
-`lesson-1722-p1`、`lesson-1722-p2`、`lesson-1722-p3`、`lesson-1722-p4`；
-`lesson-1726-p1`、`lesson-1726-p2`、`lesson-1726-p3`；
-`lesson-1743-p1`、`lesson-1743-p2`；
-`lesson-1753-p1`、`lesson-1753-p2`；
-`lesson-1755-p1`、`lesson-1755-p2`、`lesson-1755-p3`、`lesson-1755-p4`。
-
-可證明的成因：13 個合篇父記錄仍保留物理檔，taxonomy 則把它們展開為 35 個教材
-目錄子篇；用 logical id 折疊後，父 id 出現在第一份差集，子篇 id 出現在第二份差集。
-另外，`lesson-11637`（Google site 版）與 `lesson-11705`（課堂進度記錄）沒有教材
-目錄頁、正文與學習任務，是工具／歷史記錄而不是教材課文。
-
-### 1.3 權威分母
-
-- **教材目錄覆蓋**：taxonomy 189 項為權威。
-- **可執行課文覆蓋**：taxonomy、runtime manifest、reader index 三者交集為權威；
-  本輪交集也是 189 項。兩個工具記錄不計。
-- A 古詩文：`mode=classical` 的 30 篇，加上 genre 祖先為
-  `classical-poetry` 的 37 篇，共 67。
-- B 現當代 runtime bucket：排除 55 個學習活動與 67 個古詩文後的 67 篇。
-- 學習活動：`unit-intro`、`unit-task`、`whole-book`、
-  `language-activity`、`review`，共 55。
-
-## 2. 四階 runtime contract 覆蓋
-
-覆蓋只按 schema、資料檔與 runtime contract 判定。初讀必須先拆開兩個不同謂詞：
-
-- **A 採用的審定初讀**：只認
-  `classical-first-read/index.json` 的政策
-  `yw-classical-first-read-reviewed-2026-08-09-v1`。現有 30 個 taxonomy 課文檔，
-  將 `-pN` 子篇折回父 id 後為 24 個 logical lessons，全部屬古詩文。
-- **先前表格的廣義 runtime 初讀**：審定初讀 30 項與正式
-  `contextWords` manifest 85 項的聯集。後者在 A/B 分母內為古詩文 19、現當代
-  40，另有學習活動 26；所以 A+B 聯集是 89，不是 89 個
-  `initial_reading_submitted` 項。`interaction-definitions.json` 雖全域註冊
-  `initialReadingSubmitted`，`learning-manifest.json` 對該 question kind 實為 0 項。
-- 詞級疏通：有效 vocabulary contract／正式 `vocabAnswer`，且符合 runtime eligibility。
-- 學案知能清算：有效 study-guide catalog 與 server-side 評閱證據。
-- 考辨與章法＋遷移與追問：正式 `structure` 與 `authorQuestion` 同時存在，並由
-  server-owned evidence／多輪 runtime contract 承接。
-
-| 初讀謂詞 | 古詩文（67） | 現當代 runtime bucket（67） | 學習活動（55） | A+B 合計 |
-|---|---:|---:|---:|---:|
-| 已審定帶註釋初讀 | **30 / 67**（30 檔；折疊後 24 logical lessons） | 0 / 67 | 0 / 55 | **30 / 134** |
-| 先前廣義 runtime 聯集（審定初讀 ∪ 正式 `contextWords`） | 49 / 67 | 40 / 67 | 26 / 55 | **89 / 134** |
-
-| 類別 | 初讀（A/B 分子採審定口徑） | 詞級疏通 | 學案知能清算 | 考辨與章法＋遷移與追問 | 四階全備 |
-|---|---:|---:|---:|---:|---:|
-| 古詩文（67） | 30 / 67（44.8%） | 67 / 67（100%） | 16 / 67（23.9%） | 35 / 67（52.2%） | **16 / 67（23.9%）** |
-| 現當代 runtime bucket（67） | 0 / 67（G0 尚未審定） | 10 / 67（14.9%） | 0 / 67（0%） | 40 / 67（59.7%） | **0 / 67（0%）** |
-| 學習活動（55，不進 A/B） | 0 / 55（不適用 A/B 審定口徑） | 0 / 55（0%） | 0 / 55（0%） | 26 / 55（47.3%） | 0 / 55（0%） |
-
-古詩文四階全備 16 課：`lesson-1474`、`lesson-1476`、`lesson-1477`、
-`lesson-1483`、`lesson-1484`、`lesson-1485`、`lesson-1534`、
-`lesson-1535`、`lesson-1536`、`lesson-1537`、`lesson-1576`、
-`lesson-1577`、`lesson-1578`、`lesson-1579`、`lesson-1580`、
-`lesson-1581`。
-
-原表所稱「僅缺學案知能清算」的 19 課為：`lesson-1497`、
-`lesson-1498`、`lesson-1499`、`lesson-1500`、`lesson-1547`、
-`lesson-1548`、`lesson-1550`、`lesson-1549`、`lesson-1556`、
-`lesson-1557`、`lesson-1558`、`lesson-1559`、`lesson-1560`、
-`lesson-1561`、`lesson-1562`、`lesson-1588`、`lesson-1589`、
-`lesson-1590`、`lesson-1591`。該說法只在廣義 runtime 聯集下成立；19 課全部不在
-審定初讀 30 項內，因此按 A 的嚴格口徑同時缺「已審定帶註釋初讀」與「學案知能
-清算」，不能列為僅差一階。重算後，A 的「僅缺一階」課數是 **0**。
-
-原 A=16 的程式使用了廣義聯集；以審定初讀重算後仍為 16，且同一 16 課逐一都在
-審定 30 項內，故 A 分子不變。這是集合交集相同，不是沿用錯誤代理口徑。
-
-## 3. UC 三層唯讀基線（2026-08-24T08:32:47Z）
-
-排除集由 `/Users/ylsuen/.secrets.env` 的 1 個 env 學生鍵與 5 個測試帳號鍵建立；
-不輸出帳號、UC id 或原始作答。6 個鍵互異，5 個可在 UC 權威身份表映射為 5 個
-UC user；餘下 1 個沒有 UC 身份，也沒有 YW 直接帳號命中，因此不可能產生現行
-authenticated evidence。YW／UC 聚合查詢同時按映射 user id 與直接帳號鍵排除。
-
-### 3.1 傳輸層：YW `evidence_outbox`
-
-未排除前有 529 行：`delivered/(null)` 2、`enqueued/(null)` 277、
-`enqueued/accepted` 67、`enqueued/quarantined` 183。排除 env／測試帳號後只剩：
-
-| delivery_status | central disposition | 行 | 課文 | 真實學生 | 最舊建立 | 最新活動 |
-|---|---|---:|---:|---:|---|---|
-| `enqueued` | null | **48** | **3** | **2** | 2026-07-29 06:29:13Z | 2026-08-17T09:32:22.702Z |
-
-按 lesson＋competencyTag：
-
-| 類別 | lesson | competencyTag | 行 | 真實學生 |
-|---|---|---|---:|---:|
-| 古詩文 | `lesson-1711-p2` | 無 | 21 | 1 |
-| 古詩文 | `lesson-1711-p2` | `first_read_process` | 1 | 1 |
-| 古詩文 | `lesson-1727` | 無 | 15 | 1 |
-| 古詩文 | `lesson-1727` | `first_read_process` | 1 | 1 |
-| 現當代 runtime bucket | `lesson-1458` | 無 | 10 | 2 |
+# YW / User Center — 現有互動可靠性與評價閉環台賬（審閱草案）
 
-真實學生沒有任何 `learning_evidence_deliveries` 或 terminal receipt 行；單看
-outbox，48 條 `enqueued` 當然不能證明 UC 已接收。但 2026-08-24 的精確
-`source_event_id` 交叉回讀證明，UC `learning_evidence` 已有同一批 **48 / 48** v1
-證據，落庫時間為 2026-07-29 06:29:19Z 至 2026-08-17 09:32:27Z。最後一筆只比
-YW 最新 transport activity 晚約 5 秒，因此不是 Queue consumer 一週未工作；缺的是
-v1 回執／評價投影閉環。`delivered`、`enqueued` 或 outbox 行數仍不得代替評價成立。
-
-### 3.2 評價層：UC `learning_evidence`
-
-UC 可回讀到 48 條排除後的 `source_system=yuwen-course`、`source_site_key=yw`
-舊式證據，覆蓋 2 名真實學生：
-
-- 48 / 48 均為 `event_schema=bdfz-learning-evidence-v1`、`non_scoring`；
-- 48 / 48 的 normalizedValue 為空；
-- 2 / 48 有非空 competency facet，46 / 48 沒有；
-- 48 / 48 有 lesson facet、sourceUrl 與 sourcePayloadRef；
-- 同時具備「非空 competency facet＋非空 normalizedValue」者為 **0 條、0 課、0 名
-  真實學生**；古詩文 0、現當代 0。
-
-### 3.3 可下鑽層
-
-本層的分母只能是 3.2 中已成立的合格評價。合格評價為 0，因此能再由
-`sourceUrl`＋`sourcePayloadRef` 回到 YW `learning_interactions.raw_payload_json`
-原始互動／作答者也是 **0 條、0 課、0 名真實學生**。這是實測零值，不是把
-`enqueued` 當評價，也不是因 join key 或權限不足而估算。
-
-## 4. 目標與阻斷
-
-### G0 — 現當代階梯定義【必須先由 suen 審定】
-
-- 古文「三詞猜義」不得複製到現當代課文。
-- 現當代初讀先產生「整體感知＋思路脈絡」的可觀察證據。
-- 詞級疏通只有在證據有效性獲核准後才可與古文共用。
-- 學案知能清算、考辨與章法、遷移與追問都須按現當代文體重新定義。
-- `classical_first_read_*` 舊表是復用並提升為通用 contract，還是另立現當代 schema，
-  是 suen 必須拍板的 schema 決策；本草案不自行選擇。
-
-第一里程碑是「現當代階梯定義獲審定」，不是新增若干課。G0 未通過前，B 分子保持 0。
-
-### G1 — 古詩文以完整整包為建設單位
-
-一個完整整包的確切構成：
-
-1. 課文在 taxonomy、reader、manifest 三個 authority 間身份一致；
-2. 與古詩文相稱的 server-owned 初讀；
-3. 詞級疏通 contract 與作答證據；
-4. 學案知能清算、server-side 評閱與明確 competency；
-5. 考辨與章法，以及遷移與追問的 AI 多輪互動；
-6. 四階無刷新推進、原始互動留在 YW、UC 形成 normalized competency evaluation，
-   並能用 `sourceUrl`＋`sourcePayloadRef` 回指；
-7. schema／runtime／mobile 驗證與可回滾發布收據。
-
-本輪沒有建構新課，故沒有可冒充「單包製作工時」的新樣本；已知基線仍是
-**19 小時／單課**。按 A 的審定初讀重算後沒有「僅缺一階」的古詩文包；原列 19 課
-同時缺審定初讀與學案知能清算。G1 排程不得再把這 19 課當成單階補齊候選；即使補課，
-也仍須整包驗收，不能把局部完成直接當成 A 分子。
-
-### G2 — 評估可靠性與 evaluator 發布門【硬阻斷】
-
-兩條量化驗收門同時成立才可談發布：
-
-- 成功回應的 feedback p95 **< 45 秒**；
-- `429 evaluator_retry_exhausted = 0`。
-
-既有小樣本必須完整保留：20 次中 19 次成功、1 次 transport failure；p50
-10.194 秒、p95 24.401 秒、max 25.908 秒只按成功回應計。另一組 5 次外部探測有
-1 次超過 40 秒仍無回應。不得寫成「503 已解決」。修復的預期作用只是把單次上游
-評閱失敗的學生代價由 10 分鐘窗口鎖降為 15 秒 cooldown。
-
-`7256098` 同時新移除了唯一的 evaluator 呼叫上界：修復前第二次失敗會以懲罰學生的
-方式鎖住同一 mutation；修復後 `.002Z` cooldown 行可刪除並重新預約，learner
-capacity 會回落。APIS live `traffic_gate` 只按 project＋task type＋path，沒有
-student／session／mutation 粒度。因此 evaluator 版在新增「與 learner capacity
-分離、fail-closed 的 evaluator-call 上限」前不得發布。
-
-APIS 的 `80/min`、`6 concurrency` 只來自 2026-06-13 Worker `v6.5.2` 導出，
-**未經現行線上數值確認**。該導出的 feedback request timeout 為 12 秒，已與本輪
-19–28 秒成功回應觀測矛盾；現行 `/health` 是 `v6.7.0`。數值不作發布裁決輸入；
-硬阻斷只依賴已確認的架構事實：gate key 沒有學生／session／mutation 維度。
-
-該限流屬 APIS 約 28 個依賴站的共享扇出新能力，必須使用新的 change id、獨立授權、
-完整扇出與回滾；不得夾帶進 `7256098`。runtime DELETE 上線前另須建立 D1 Time
-Travel bookmark／備份點並取得相應資料變更授權。
-
-### G3 — UC 評價鏈三層目標【待 suen 審定】
-
-建議審定值，尚未獲批准：
-
-- 傳輸：合格 scoring evidence 100% 在 5 分鐘內得到中央 disposition；超過 15 分鐘
-  仍為 `pending`／`enqueued` 者為 0。
-- 評價：中央 accepted 的合格 scoring evidence 100% 形成非空 competency facet 與
-  normalizedValue；錯配／quarantine 不得計入。
-- 可下鑽：上述合格評價 100% 以精確 `sourceUrl`＋`sourcePayloadRef` 回到同一真實
-  學生、同一課、同一 source event 的 YW 原始互動。
-
-三層必須分開回報；`delivered`、`enqueued`、題目完成或點擊都不等於評價。
-
-### G3a — v1 回執／評價投影斷層【P1；C 收口硬阻斷；在線獨立缺陷】
-
-這項缺陷與 evaluator 修復無關，須另行授權處置；唯讀裁決如下：
-
-- consumer 是 live `bdfz-user-center` Worker（`git-665ca51e28e084307100910a254453aac2a36948`），
-  同時掛載 v1、v1 DLQ、v2、v2 DLQ。現行 v2 鏈仍活著：YW 最近成功取得中央
-  disposition 的時間是 `2026-08-24T01:17:39.902Z`。
-- 這 48 條全部為 `bdfz-learning-evidence-v1`，envelope、YW raw payload 與 YW
-  evaluation 各 48 / 48 尚在；UC 也已 48 / 48 落成 v1 `non_scoring` evidence。
-- `OUTBOX_RETRY_SELECTION_SQL` 與 `OUTBOX_RECONCILE_SELECTION_SQL` 都硬性只選
-  `bdfz-learning-evidence-event-v2 + yw-aplus-e310-v2`；48 條的兩個 selection
-  命中均為 0，所以現行自動 drain 永遠選不中它們，也永遠補不上中央 disposition。
-- 資料未過期，也沒有依事件年齡淘汰的來源規則；但「直接重放即可修復」不成立：
-  其中 39 條是 v1 schema 搭配 `yw-interactions-2026-08-09-v2` registry，現行 v1
-  legacy adapter 不接受；而 48 條本就已在 UC，重送只會重複／拒絕，不能把
-  `non_scoring + normalizedValue=null` 變成合格評價。需要另行設計並授權精確的
-  v1 歷史 receipt reconciliation，以及 forward-only 的合格 v2 evaluation 路徑；
-  不得做 Queue 盲重放，更不得把舊 trace／點擊事後改寫成 scoring evaluation。
-
-因此 C=0 必須拆成兩層：第一，已到 UC 的 48 條全是舊式 non-scoring evidence，
-沒有合格 competency evaluation；第二，YW v1 outbox 沒有可進入現行 v2 回執輪詢的
-狀態遷移。第二層是在線閉環／可觀測性缺陷，但不是「48 條尚未送到 UC」。
-
-### G4 — 成本收斂【待 suen 審定】
-
-- 已知不可持續基線：19 小時／單課。
-- 本輪是審核與測量，沒有建構新課；由 rollout／action-log 時戳按主要活動互斥
-  歸類，`2026-08-24T07:29:56Z` 至 closeout 前驗證凍結點 `08:46:36Z` 的
-  wall time 為 76 分 40 秒：
-
-  | 定位 | 建構測量手段 | 修正 | 治理 | 合計 |
-  |---:|---:|---:|---:|---:|
-  | 31 分 | 17 分 | 15 分 | 13 分 40 秒 | 76 分 40 秒 |
-
-  這個樣本不能換算為單包工時。
-- 本輪 Phase 0–4 closeout 的 rollout 增量更正為 **17,712,726 bytes**；rollout
-  gate 仍為約 74 GiB，超過 64 GiB 閘門。`archived_sessions` 的任何治理均待獨立
-  授權，本輪未夾帶處置。
-- 建議下一個 5 包批次的收斂目標：完整包中位數 **≤ 6 小時／課**、P90
-  **≤ 8 小時／課**；任一包到 **8 小時**仍未滿足七項整包 contract 即 fail closed，
-  停止把殘缺包算進 A，另請 suen 決定拆阻斷或追加投入。這些數字只是待審建議。
-
-## 5. 古詩文／現當代差距表
-
-| 階段 | 古詩文阻斷 | 現當代阻斷 | 目標 |
-|---|---|---|---|
-| 初讀 | 審定初讀僅 30 / 67；37 / 67 尚無審定 contract | G0 未審定；現有審定口徑 0 / 67（廣義 runtime 聯集 40 / 67 不計 B 分子） | G0、G1 |
-| 詞級疏通 | 67 / 67 有 contract，但仍須整包證據驗收 | 僅 10 / 67 有現行 contract，且共用有效性未審 | G0、G1 |
-| 學案知能清算 | 僅 16 / 67；原列 19 課還同時缺審定初讀，嚴格口徑沒有僅差此階者 | 0 / 67，知能清算定義亦未審 | G0、G1 |
-| 考辨與章法＋遷移與追問 | 僅 35 / 67；多輪與 server evidence 仍須逐包驗 | 40 / 67 有機器 contract，但文體適切性未審 | G0、G1 |
-| 評估可靠性 | evaluator-call 無獨立上限；發布硬阻斷 | 同一共享 evaluator／APIS 風險 | G2 |
-| UC 評價與下鑽 | 真實學生合格評價 0 課；v1 outbox 回執永遠選不中 | 真實學生合格評價 0 課；同一 v1 投影／回執斷層 | G3、G3a |
-
-## 6. 記錄紀律
-
-每輪 YW closeout 必答：
-
-1. A、B、C 哪個分子推進多少；為 0 時寫出原因。
-2. 時間分為「定位／建構測量手段／修正／治理」四段。
-3. 本輪建立與刪除的臨時樹數、rollout 增量 bytes、所有保留／刪除／歸檔／阻塞路徑。
-4. Git dirty tree、測試、線上版本、回滾點與未解風險。
-5. 未獲授權的動作列為未執行，不得用計畫語氣冒充完成。
+> 基線時間：2026-08-24。本文以來源碼、機器契約及 YW／UC D1 的 SELECT-only
+> 回讀為準；不把部署、題目覆蓋、點擊、outbox 狀態或測試帳號冒充學習成效。
+> 本次只作 docs-only commit／push，不授予內容擴充、runtime 變更、PR／合併、
+> 部署或資料寫入權。
+
+## 0. 最終目標
+
+**保持 YW 現有互動模式，讓 `mode=classical` 與非 `classical` 課文的已啟用互動都能
+穩定完成，多輪上下文不斷裂，並讓真實學生的計分互動在 My 形成可回指原始作答的
+規範化能力評價。**
+
+## 1. 唯一北極星：R1／R2／R3
+
+### R1 — 現有互動可靠性
+
+按 `sourceModeFor(lesson) === "classical"` 與非 `classical` 分列，不以新增課文為進度：
+
+- 硬門檻一：`429 evaluator_retry_exhausted = 0`。
+- 硬門檻二：成功 feedback 回應的 p95 `< 45s`；同時單列 transport failure、503
+  與逾時，禁止只用成功樣本掩蓋尾部。
+- 上游評閱失敗必須 fail closed：不寫假 interaction／evaluation／outbox，不消耗
+  learner capacity；短 cooldown 後同一答案可重試，不阻斷學生繼續同一課。
+- classical 與非 classical 都要各自有 live 驗收；任一側未驗都不能宣稱 R1 達標。
+
+現值：**未達標**。
+
+| 側別 | 已證實 | 尚未證實／阻斷 |
+|---|---|---|
+| `mode=classical` | 舊線上版本已實際暴露 evaluator 503，重試後可落入 `evaluator_retry_exhausted`；修復來源把單次失敗改為 15 秒 cooldown | 修復未部署；尚無新版 live 通過值；獨立 evaluator-call budget 未建立 |
+| 非 `classical` | 補集中的 40 課其正式 `structure`／`authorQuestion` 與 classical 共用 `/api/interaction-check`、APIS feedback、預約、ledger、outbox；其他 mode 亦走同一狀態路徑；`lesson-1488` 有一次非 classical server-route 單輪測試 | 沒有任一非 classical 課的正式雙輪 live 驗收，也沒有分側的生產失敗率 |
+
+既有小樣本只作風險基線：20 次 feedback/medium 中 19 次成功、1 次 transport
+failure；p50 `10.194s`、p95 `24.401s`、max `25.908s` 只按成功回應計。另 5 次外部
+探測有 1 次超過 40 秒仍無回應。這不等於「503 已解決」，也不是穩態故障率。
+
+### R2 — 多輪對話正確性
+
+達標條件：在一課 current-formal classical 與一課 current-formal 非 classical 上，
+`structure`、`authorQuestion` 各連續至少兩輪；server-owned attempt 單調增加，下一輪
+prompt 接續上一輪，刷新後對話仍由來源 ledger 恢復，且不退化為一次性聊天。
+
+現值：**classical 只有來源級證據；非 classical 未驗，整體未達標**。
+
+- `lesson-1474` 的來源測試已讓 `structure` 與 `authorQuestion` 各走兩輪真實 Worker
+  route，驗證第二輪 prompt 帶入第一輪學生輸入與追問；idempotent replay 不新增 APIS
+  呼叫或 turn。
+- server 以 `student_id + resource_key + interaction_key` 回讀最近 6 輪；prompt 使用
+  最近 4 輪。瀏覽器合併按 `sourceEventId`／`attemptNo` 去重、單調排序並保留最近 6 輪。
+- `mode` 只改變章法 technique 與作者／文本細讀教練語義；不改 route、reservation、
+  conversation ledger、evidence/outbox 或錯誤映射。
+- 尚無非 classical 正式雙輪 route 測試、刷新驗收或 UC 下鑽驗收；因此不得把共用
+  程式路徑等同於該側已通過。
+
+#### R2-Q1 — `modern-prose` 被歸一化為 `argument`（既有品質缺陷）
+
+`normalizeBlueprintMode()` 在現行線上來源 `fa93ca8` 已把 `speech-letter` 與
+`modern-prose` 映射為 `argument`，未知 mode 也 fallback 到 `argument`；
+`fa93ca8..7256098` 對 `site/lesson-blueprint-rules.js` 零差異，所以這不是 evaluator
+修復引入的回歸。今天線上的 6 個 current-formal `modern-prose` 課已被送入
+「概念界定、論據組織與推理」技術語的評閱 prompt。prompt 同時仍帶原始 genre，故已
+證實的是文體訊號衝突與判錯風險，不是在未實測前宣稱每次輸出必然錯誤。
+
+此項獨立掛為 **R2-Q1 既有品質缺陷**，不併入 evaluator 發布 change id，也不阻斷該
+修復本身；但非 classical 驗收必須明確記錄評語是否出現論證文／抒情散文錯位。任何
+映射修正都屬另一個 runtime／教學 contract 變更，須另行授權。
+
+### R3 — 真實學生計分事件與 UC 合格評價
+
+R3 同時報兩個分子，測試帳號與 env 學生永遠排除：
+
+1. YW source ledger 中真實學生產生的 `a_plus_gate`／`formative` 計分事件數；
+2. 其中在 UC 同時具備非空 competency facet、非空 `normalizedValue`，並可用
+   `sourceUrl + sourcePayloadRef` 回到同一 YW source event 原始作答的合格評價數。
+
+2026-08-24 SELECT-only 即時基線：**0 個計分事件／0 個 UC 合格評價**，覆蓋 0 課、
+0 名真實學生。這是實測零值，不是 measurement blocked。
+
+排除口徑：從 `/Users/ylsuen/.secrets.env` 取得 1 個 env 學生鍵與 5 個測試帳號鍵；
+5 個鍵經 UC `seiue_accounts.email` 映射為 UC user id，查詢同時按 UC id 與直接 YW
+帳號鍵排除。查詢只輸出聚合值，不輸出帳號、ID 或原始作答。
+
+#### 48 條真實學生舊事件的精確分布
+
+YW 的 48 條 v1 outbox 行與 UC 的同一批 48 條 evidence 完全一致；它們只落在
+19 個註冊定義中 `scoringRole=none` 的 5 種，而不是 11 種 non-scoring 定義全都有：
+
+| interactionKey | event_type | scoring_role | eligibility | 行 | 課 | 學生 | normalized 非空 |
+|---|---|---|---|---:|---:|---:|---:|
+| `lessonOpened` | `lesson_opened` | `none` | `non_scoring` | 20 | 3 | 2 | 0 |
+| `noteOpened` | `note_opened` | `none` | `non_scoring` | 19 | 1 | 1 | 0 |
+| `readAcknowledged` | `text_read_acknowledged` | `none` | `non_scoring` | 6 | 1 | 1 | 0 |
+| `initialReadingSubmitted` | `initial_reading_submitted` | `none` | `non_scoring` | 2 | 2 | 1 | 0 |
+| `chatOpened` | `chat_opened` | `none` | `non_scoring` | 1 | 1 | 1 | 0 |
+| **合計** |  |  |  | **48** | **3** | **2** | **0** |
+
+UC 中只有兩條 `initialReadingSubmitted` 帶 competency facet；其 normalizedValue 仍為
+空，所以仍不是合格評價。註冊表中能形成計分事件的是 6 個 `a_plus_gate` 與 2 個
+`formative` 定義；真實學生目前一條也沒有完成並落入 source ledger。
+
+已證實的因果只到這一步：**現有 48 條 trace／participation 事件在契約上不能增加
+R3；R3 只能由 8 個計分定義的實際完成產生。** 資料沒有記錄學生是否曾嘗試但在寫入
+前失敗，因此「0 完全由學案 evaluator 故障造成」不是這 48 條資料本身能證明的結論。
+舊 env E2E 確曾重現 classical 學案卡住與後續鎖未解，但該帳號被 R3 排除。
+
+#### R3 的工程邊界
+
+R3 永遠排除 env／測試帳號，因此發布驗收無論成功與否都不增加 R3 分子。工程交付的
+直接終點是以測試身份證實三段均可用：YW source ledger 落庫、投遞／UC projection、
+`sourceUrl + sourcePayloadRef` 下鑽。只有三段已通過後，真實學生仍沒有新計分事件時，
+後續增量才主要取決於真實課堂使用；在此之前，落庫、投遞或下鑽故障仍是工程責任。
+不得用 env canary 冒充 R3，也不得為了「推分子」製造測試或追溯性評價。
+
+## 2. 現有互動機器契約
+
+完整的 40 課清單、round 與驗證狀態見
+[`docs/INTERACTION_RELIABILITY_MATRIX.md`](INTERACTION_RELIABILITY_MATRIX.md)。核心裁決：
+
+- 40 個非古詩文、非學習活動的 current-formal 課都發布了 `structure` 與
+  `authorQuestion`，兩者都走同一 `/api/interaction-check` 和同一多輪 ledger。
+- 前端 `classicalRoundLocked` 只對 `mode=classical` 生效；這 40 課的多輪 round
+  直接開放，不是「因沒有 classical 學案而永遠解不開」。
+- `poetry` 有詞級疏通資格，但不受 classical 解鎖鏈約束。依 2026-08-24 操作者
+  「保持 YW 現有互動模式」的指示，本輪把它列為需保留的現行 contract：詞級疏通是
+  可用 round，不是 `structure`／`authorQuestion` prerequisite；不自行改 runtime。
+- 共用程式路徑只能降低差異風險，不能代替雙側 live 驗收。
+
+## 3. G3a — v1 孤兒回執帳務收口（與 R3 分開）
+
+48 條事件早已在 UC 落庫；consumer 沒有一週中斷。它們仍停在 YW
+`delivery_status=enqueued`、`central_disposition IS NULL`，是因現行 retry／reconcile
+SQL 只選 v2 schema＋`yw-aplus-e310-v2`，v1 行永遠選不中。
+
+G3a 是需另行授權的歷史回執／可觀測性 P1：應精確收口帳務，禁止 Queue 盲重放，也
+禁止把舊 trace 事後改寫為 scoring。它**不是 R3 分子的生成路徑，也不是 evaluator
+發布的技術依賴**；即使 48 條全部補上 receipt，R3 仍是 0／0。
+
+## 4. 發布前硬阻斷與待審設計
+
+### G2 — evaluator-call budget
+
+`7256098` 讓 evaluator failure 不再消耗 learner capacity，卻同時移除了舊版每
+mutation／窗口約兩次的事實上呼叫上界。APIS gate 以
+`project + taskType + path` 聚合，沒有 student／session／mutation 維度；因此修復版
+在另有 fail-closed、與 learner capacity 分離的 evaluator-call budget 前不得發布。
+
+方案 A（YW D1 獨立 evaluator-call ledger）已獲設計方向批准；不可變條件、完整狀態機
+複核範圍及 APIS 扇出邊界見
+[`docs/EVALUATOR_RELEASE_SAFETY_PLAN.md`](EVALUATOR_RELEASE_SAFETY_PLAN.md)。任何 APIS
+身份粒度新能力都屬共享樞紐變更，必須使用獨立 change id；不得夾帶進 `7256098`。
+方案 A 尚未實作，仍是 evaluator 發布硬阻斷。
+
+### D1 runtime DELETE 與 Time Travel
+
+`.002Z` cooldown 的 runtime DELETE 是受管制 D1 data mutation，雖不含學生原始作答
+且有 `source_event_id + created_at + LIKE + NOT EXISTS interaction` 守衛，上線前仍須
+取得 D1 備份／還原授權。Wrangler 4.100.0 沒有「create bookmark」子命令；正確流程
+是用 `d1 time-travel info` 取得指定時點 bookmark，再由獨立 restore 授權使用。
+精確待授權命令亦在安全方案中；本輪沒有執行 info 或 restore。
+
+## 5. A／B 覆蓋率只保留為背景
+
+以下數字描述既有資料覆蓋，**不是北極星、不是本輪目標，也不觸發內容編寫**：
+
+| 舊口徑 | 2026-08-24 基線 | 本輪用途 |
+|---|---:|---|
+| A：古詩文四階全備 | 16 / 67 | 背景風險分層，不作進度分子 |
+| B：原稱「現當代 runtime bucket」四階全備 | 0 / 67 | 背景；該桶是機器補集，不是年代學分類 |
+| 學習活動 | 55 項 | 不進 A/B，也不影響 R1/R2/R3 |
+
+物理 lesson 檔 204、折疊 logical lesson 169、taxonomy item 189 的粒度裁決仍有效；
+但不得用「新增第 17 課」、題目數、commit、測試數或部署數代表學生互動可靠性。
+
+## 6. 發布後雙側驗收
+
+待逐步授權的驗收使用 current-formal `lesson-1474`（classical）與
+`lesson-1569`《一個消逝了的山村》（taxonomy genre `lyric-prose`、
+`mode=modern-prose`），不用 `lesson-1458`（`speech-letter`，映射到 `argument` 本就
+合理，不能暴露 R2-Q1）。兩課各跑 `structure`、`authorQuestion` 兩輪以上、刷新恢復、
+YW ledger／evaluation／outbox、UC competency＋normalizedValue＋下鑽；`lesson-1569`
+另須逐輪記錄評語是否把抒情散文錯當論證文。完整步驟見安全方案。env canary 永遠不
+增加 R3；它只證明工程鏈路可用。
+
+## 7. 每輪 closeout 紀律
+
+此後 YW closeout 只以 R1／R2／R3 為主：
+
+1. R1：classical／非 classical 各自新增多少可靠性證據；429、503、逾時與 p95。
+2. R2：兩側各自新增多少已驗多輪／刷新證據；共用程式碼不算另一側通過。
+3. R3：真實學生計分事件與 UC 合格可下鑽評價各增加多少；為 0 必須寫原因。
+4. 同時列時間四分法、臨時樹、rollout bytes、Git dirty tree、測試、live 版本、
+   rollback 與所有未獲授權／未執行動作。

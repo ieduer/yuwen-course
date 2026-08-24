@@ -1,6 +1,79 @@
 # Project State
 
-Last updated: 2026-08-23
+Last updated: 2026-08-24
+
+## 2026-08-24 reliability-first goal recalibration (documentation-only draft)
+
+- The active objective is no longer content or lesson-coverage expansion. The
+  16/67 ancient-text and 0/67 complement-bucket measurements remain background
+  only. The review draft now uses three outcome measures: R1 existing-
+  interaction reliability split by `mode=classical` versus all other modes,
+  R2 server-owned multi-turn correctness on both sides, and R3 real-student
+  scoring events that become normalized, competency-faceted, source-drillable
+  User Center evaluations. No lesson content, manifest membership or runtime
+  contract changed in this pass.
+- Fresh SELECT-only YW and UC aggregation excludes the configured environment
+  student and five test accounts through five current UC identity mappings plus
+  the direct YW account keys. Real students currently have **zero**
+  `a_plus_gate`/`formative` source events and **zero** qualifying UC
+  evaluations. The 48 historical v1 rows are exactly 20 `lessonOpened`, 19
+  `noteOpened`, 6 `readAcknowledged`, 2 `initialReadingSubmitted` and 1
+  `chatOpened`; all five interaction kinds are `scoringRole=none`, and all 48
+  normalized values are null. The two initial-reading rows have a competency
+  facet but still are not qualifying evaluations.
+- The same 48 source events already exist in UC. Their missing central
+  disposition is a legacy-v1 orphan-receipt/accounting P1 because current retry
+  and reconcile selectors are v2-only. It is not a Queue outage and cannot
+  create an R3 numerator: receipt closure must never retroactively score these
+  trace events or blindly replay them.
+- Forty current-formal non-ancient, non-activity lessons publish both
+  `structure` and `authorQuestion`. Frontend and Worker source inspection shows
+  that these interactions share `/api/interaction-check`, APIS feedback,
+  reservation/cooldown, the student/resource/interaction conversation ledger,
+  evaluation, outbox and error mapping with classical lessons. Mode changes the
+  text-analysis technique and author/coach prompt semantics, not the state or
+  transport path. Classical locking applies only to `mode=classical`; the 40
+  other lessons are open but have no formal two-turn production acceptance.
+- Poetry remains vocabulary-eligible while outside the classical prerequisite
+  chain. The operator has instructed this task to preserve the current
+  interaction model, so non-blocking poetry is a regression contract here, not
+  a code change. A future prerequisite change would need separate design and
+  authorization.
+- Source tests prove two route turns for both `structure` and `authorQuestion`
+  on classical lesson 1474, and one non-classical author-question route turn on
+  lesson 1488. They do not prove a non-classical two-turn live flow, refresh
+  recovery or UC drilldown. The pending post-release plan therefore uses
+  current-formal lessons 1474 and 1569 and requires two turns of both
+  interactions on each side. Lesson 1569 is deliberately `modern-prose`:
+  production source `fa93ca8` already normalizes that mode to `argument`, so
+  its canary must record whether the feedback applies argumentative technique
+  to lyric prose. This is a pre-existing R2 quality issue, not a regression in
+  commit `7256098` and not part of its release change id.
+- Evaluator publication remains hard-blocked. Commit `7256098` prevents an
+  evaluator outage from consuming learner capacity but removes the old per-
+  mutation call ceiling; APIS has no student/session/mutation gate. The operator
+  selected option A, a separate fail-closed YW D1 evaluator-call ledger, as the
+  next independently identified change; it is not implemented or numerically
+  approved. Its append-only call reservation must be reviewed together with
+  `.002Z` learner-row deletion/re-reservation, `MAX(slot_no)+1`, negative rowid
+  allocation and idempotent replay across the complete merged state machine,
+  not as an isolated diff. The runtime `.002Z` DELETE is a governed D1 data
+  mutation, superseding the older statement below that the candidate changes no
+  direct D1 data. Wrangler 4.100.0 exposes `d1 time-travel info` to retrieve a
+  bookmark and `restore` to use one; neither command was executed in this pass.
+- R3 excludes environment and test identities, so a successful canary cannot
+  increase its numerator. Engineering remains responsible for proving source
+  persistence, UC projection and source drilldown with a test identity; only
+  after all three work does a continued zero real-student numerator primarily
+  become a classroom-usage question.
+- The branch retains evaluator source commit `7256098` and records the R1/R2/R3
+  ledger, interaction matrix, selected-option safety design, Time Travel
+  command templates and dual-mode acceptance plan as documentation-only work.
+  Production remains deployment `2471f1e4-884a-4e80-9801-589ebbace476`, source
+  `fa93ca8`, with rollback
+  `619024c7-a261-405b-a13f-8581a90111ac`. No accept, executor, merge, deploy,
+  journal, APIS, UC, Queue, D1 write, bookmark, restore or student E2E action was
+  performed.
 
 ## 2026-08-23 evaluator timeout and failure-attribution repair candidate
 
