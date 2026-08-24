@@ -2,8 +2,9 @@
 
 > 基線時間：2026-08-24。本文以來源碼、機器契約及 YW／UC D1 的 SELECT-only
 > 回讀為準；不把部署、題目覆蓋、點擊、outbox 狀態或測試帳號冒充學習成效。
-> 本次只作 docs-only commit／push，不授予內容擴充、runtime 變更、PR／合併、
-> 部署或資料寫入權。
+> 2026-08-24 最新授權把工作限定為現有互動可靠性：不擴充內容、不改 APIS；允許
+> YW-only evaluator-call ledger、D1 bookmark／additive migration、PR／合併、一次性
+> Pages 發布及 classical／非 classical 單次驗收。部署與 live 結果只在實際回讀後記錄。
 
 ## 0. 最終目標
 
@@ -28,14 +29,14 @@
 
 | 側別 | 已證實 | 尚未證實／阻斷 |
 |---|---|---|
-| `mode=classical` | 舊線上版本已實際暴露 evaluator 503，重試後可落入 `evaluator_retry_exhausted`；修復來源把單次失敗改為 15 秒 cooldown | 修復未部署；尚無新版 live 通過值；獨立 evaluator-call budget 未建立 |
+| `mode=classical` | 舊線上版本已實際暴露 evaluator 503，重試後可落入 `evaluator_retry_exhausted`；候選來源把單次失敗改為 15 秒 cooldown，並以 append-only 60／4 ledger 關閉無上界敞口 | 修復未部署；尚無新版 live 通過值 |
 | 非 `classical` | 補集中的 40 課其正式 `structure`／`authorQuestion` 與 classical 共用 `/api/interaction-check`、APIS feedback、預約、ledger、outbox；其他 mode 亦走同一狀態路徑；`lesson-1488` 有一次非 classical server-route 單輪測試 | 沒有任一非 classical 課的正式雙輪 live 驗收，也沒有分側的生產失敗率 |
 
 既有小樣本只作風險基線：20 次 feedback/medium 中 19 次成功、1 次 transport
 failure；p50 `10.194s`、p95 `24.401s`、max `25.908s` 只按成功回應計。另 5 次外部
 探測有 1 次超過 40 秒仍無回應。這不等於「503 已解決」，也不是穩態故障率。
 
-#### R1-C1 — APIS shared feedback admission saturation（獨立容量風險）
+#### R1-C1 — APIS shared feedback admission saturation（backlog；不阻斷本次發布）
 
 YW 全部 feedback 依 `traffic-gate:v1:<project>|<taskType>|<path>` 共用一道 APIS gate，
 無 student／session／mutation 維度。2026-08-24 的 v6.7.0 唯讀 live export 已確認現值
@@ -46,9 +47,10 @@ gateway deadline；19–28 秒端到端成功回應不能證明它失真。
 按現值 6 與成功 p50 `10.194s` 估算，理想天花板約 `35.3 calls/min`：30 人各 34 calls
 的 1,020 calls 至少約 28.9 分鐘；38 calls 完整流程約 32.3 分鐘；按 40 calls 重試規劃
 則約 34.0 分鐘。這是 p50 推算的樂觀上限，不是班級 SLO。獨立 APIS change
-`20260824-apis-yw-feedback-admission-v1` 建議只補 typed concurrency disposition，並把
+`20260824-apis-yw-feedback-admission-v1` 可另案補 typed concurrency disposition，並把
 精確的 `yw.bdfz.net + feedback` 納入既有 10 秒／250ms 有界等待。這可削平短 burst，但
-不提高並發 6，故另有容量實測前不得宣稱「班級規模達標」。
+不提高並發 6。操作者已裁決學生不會全班同時操作，故此項不在本次關鍵路徑；仍不得在
+沒有容量實測時宣稱「班級規模達標」，本輪也不改 APIS。
 
 ### R2 — 多輪對話正確性
 
@@ -151,7 +153,7 @@ G3a 是需另行授權的歷史回執／可觀測性 P1：應精確收口帳務�
 禁止把舊 trace 事後改寫為 scoring。它**不是 R3 分子的生成路徑，也不是 evaluator
 發布的技術依賴**；即使 48 條全部補上 receipt，R3 仍是 0／0。
 
-## 4. 發布前硬阻斷與待審設計
+## 4. 發布安全控制
 
 ### G2 — evaluator-call budget
 
@@ -160,27 +162,25 @@ mutation／窗口約兩次的事實上呼叫上界。APIS gate 以
 `project + taskType + path` 聚合，沒有 student／session／mutation 維度；因此修復版
 在另有 fail-closed、與 learner capacity 分離的 evaluator-call budget 前不得發布。
 
-方案 A（YW D1 獨立 evaluator-call ledger）已獲設計方向批准，但**暫停實作**；不可變
-條件、完整狀態機複核範圍及 APIS 扇出邊界見
+方案 A（YW D1 獨立 evaluator-call ledger）已按最新授權實作。不可變條件、完整狀態機
+複核與歷史 APIS 設計沿革見
 [`docs/EVALUATOR_RELEASE_SAFETY_PLAN.md`](EVALUATOR_RELEASE_SAFETY_PLAN.md)。任何 APIS
 身份粒度新能力都屬共享樞紐變更，必須使用獨立 change id；不得夾帶進 `7256098`。
-已批准的實作常數是每學生每 10 分鐘 60 次已接納 evaluator call、每 mutation 4 次；
-gateway admission rejection 不計數，真正評閱失敗與結果不明仍計數。方案 A 同時必須
-有送出側 admission smoothing，不能只有計數；它尚未實作，仍是 evaluator 發布硬阻斷。
-
-現行 v6.7.0 已證實另一個實作硬門：內部雖有 `concurrency_limit` reason，外部只回通用
-HTTP 429，而上游 key pool 真正呼叫失敗也可能回 429。因此不得按 status、缺 header 或
-中文字串猜「尚未進 evaluator」。先完成並審定 APIS change
-`20260824-apis-yw-feedback-admission-v1` 的 typed disposition 與精確 YW feedback 有界
-等待後，方案 A 才能安全免計數並進 admission waiting；這兩步都尚未獲實作授權。
+常數為每學生每 10 分鐘 60 次、每 mutation 4 次。採保守計數：成功、逾時、5xx、無效
+JSON、gateway 429 與 outcome unknown 全部在 APIS 前 append 並不退款；因此不依賴 typed
+disposition 或 admission smoothing，也禁止按 HTTP／header／中文字串猜測 gateway 類型。
+額度滿或 D1／可信身份不可用時不呼叫 APIS，回結構化 503＋`Retry-After`，不消耗正數
+learner slot，也不寫 interaction／evaluation／outbox。完整狀態機 Phase 0 結論為無 P0，
+標籤 `non-independent, pending independent confirmation`。
 
 ### D1 runtime DELETE 與 Time Travel
 
 `.002Z` cooldown 的 runtime DELETE 是受管制 D1 data mutation，雖不含學生原始作答
 且有 `source_event_id + created_at + LIKE + NOT EXISTS interaction` 守衛，上線前仍須
-取得 D1 備份／還原授權。Wrangler 4.100.0 沒有「create bookmark」子命令；正確流程
-是用 `d1 time-travel info` 取得指定時點 bookmark，再由獨立 restore 授權使用。
-精確待授權命令亦在安全方案中；本輪沒有執行 info 或 restore。
+取得 D1 備份／還原授權。Wrangler 4.100.0 沒有「create bookmark」子命令；本輪已用
+`d1 time-travel info` 取得 `2026-08-24T12:21:39Z` pre-migration bookmark，隨後成功套用
+additive migration 0006。新表與兩個索引存在、row count 0，既有五項聚合不變；restore
+命令已記錄但未執行，只有事故授權、寫入隔離與 rescue bookmark 後才可使用。
 
 ## 5. A／B 覆蓋率只保留為背景
 
@@ -197,7 +197,7 @@ HTTP 429，而上游 key pool 真正呼叫失敗也可能回 429。因此不得�
 
 ## 6. 發布後雙側驗收
 
-待逐步授權的驗收使用 current-formal `lesson-1474`（classical）與
+本次已授權的單次發布後驗收使用 current-formal `lesson-1474`（classical）與
 `lesson-1569`《一個消逝了的山村》（taxonomy genre `lyric-prose`、
 `mode=modern-prose`），不用 `lesson-1458`（`speech-letter`，映射到 `argument` 本就
 合理，不能暴露 R2-Q1）。兩課各跑 `structure`、`authorQuestion` 兩輪以上、刷新恢復、

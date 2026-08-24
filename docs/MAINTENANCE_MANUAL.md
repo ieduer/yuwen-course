@@ -1,6 +1,51 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-08-23 (America/Los_Angeles)
+Last reviewed: 2026-08-24 (America/Los_Angeles)
+
+## 2026-08-24 evaluator-call budget and release override
+
+This section is the current authority where it conflicts with retained dated
+history below. The release change id is
+`20260824-yw-evaluator-budget-release-v1`; it is YW-only and makes no APIS,
+User Center, Queue, binding, route or native-App change.
+
+Migration `0006_learning_evaluator_call_ledger.sql` adds the append-only
+`learning_evaluator_calls` table and two count indexes. Before the remote
+migration, an exact D1 Time Travel bookmark was captured and recorded in the
+redacted release receipt. Readback after migration proves the new table/indexes
+exist with zero rows and the aggregate counts of the five pre-existing learning
+tables are unchanged. The bookmark is a D1-incident anchor only: ordinary Pages
+rollback must not restore D1 history.
+
+Before every APIS feedback call, YW performs one conditional ledger insert
+which enforces both limits:
+
+- 60 calls per authenticated student per ten-minute window;
+- 4 calls per `source_event_id` (the server-owned mutation key) per window.
+
+Accounting is deliberately conservative. Success, timeout, upstream 5xx,
+invalid JSON, gateway 429 and outcome-unknown calls all remain counted. A call
+that never obtains a ledger row is never sent to APIS. Do not add localized
+error-string matching such as `"系統繁忙"`, and do not refund or delete a call
+row from the request path.
+
+If either limit is full, trusted identity is incomplete, or D1 budget access is
+unavailable, fail closed before APIS. Convert the independent learner
+reservation to the existing `.002Z` short-cooldown form, preserve the answer
+and mutation receipt, return structured 503
+`learning_evaluator_budget_exhausted` or
+`learning_evaluator_budget_unavailable` with `Retry-After`, and write no
+interaction, evaluation or outbox record. A budget failure must never consume
+a positive learner slot. Health contract `reading-schema-v6` requires the new
+table and both indexes.
+
+The pre-release integrated Phase 0 review found no P0 and is labeled
+`non-independent, pending independent confirmation`. Final acceptance still
+requires exact merged-SHA gates under Node 24.18.0 and 22.21.1, a checksum-fixed
+formal artifact, the one-use Pages executor, and the dual-mode live acceptance
+in `docs/VERIFICATION.md`. The first code rollback target is deployment
+`2471f1e4-884a-4e80-9801-589ebbace476`; the older `619024c7` deployment is the
+second-level anchor.
 
 ## 2026-08-23 evaluator availability override
 

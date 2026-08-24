@@ -1,12 +1,15 @@
 import {
   assertLearningSubmissionAllowed,
   drainEvidenceOutbox,
+  LearningEvaluatorBudgetExceededError,
+  LearningEvaluatorBudgetUnavailableError,
   invalidateFormativeManifestCache,
   LearningEvaluatorCooldownError,
   LearningResourceNotPublishedError,
   LearningSubmissionInProgressError,
   LearningSubmissionRateLimitError,
   releaseLearningSubmissionReservation,
+  reserveLearningEvaluatorCall,
   recordLearningInteraction,
   validateAPlusCompatibilityContract,
 } from "./learning-evidence-source.js";
@@ -205,6 +208,19 @@ async function releaseAfterEvaluatorFailure(env, submissionReservation, evaluato
   throw evaluatorError;
 }
 
+async function countEvaluatorCallOrRelease(env, submissionReservation) {
+  try {
+    return await reserveLearningEvaluatorCall({ env, submissionReservation });
+  } catch (error) {
+    try {
+      await releaseLearningSubmissionReservation({ env, submissionReservation });
+    } catch {
+      throw new LearningEvaluatorBudgetUnavailableError();
+    }
+    throw error;
+  }
+}
+
 function learningMutationConflictResponse() {
   return json({
     ok: false,
@@ -249,6 +265,22 @@ export function learningEvaluatorUnavailableResponse(retryAfter = 15) {
     ok: false,
     error: "評閱服務暫時繁忙，本次答案尚未記錄，請稍後重試",
     code: "learning_evaluator_unavailable",
+    retryable: true,
+    retryAfterSeconds,
+  }, {
+    status: 503,
+    headers: { "retry-after": String(retryAfterSeconds) },
+  });
+}
+
+export function learningEvaluatorBudgetResponse(error) {
+  const retryAfterSeconds = Math.max(1, Number(error?.retryAfterSeconds) || 15);
+  const exhausted = error instanceof LearningEvaluatorBudgetExceededError;
+  return json({
+    ok: false,
+    error: error?.message || "評閱安全額度暫時無法核對，本次答案尚未送出，請稍後重試",
+    code: exhausted ? "learning_evaluator_budget_exhausted" : "learning_evaluator_budget_unavailable",
+    limitReason: exhausted ? error.limitReason : "budget_store_unavailable",
     retryable: true,
     retryAfterSeconds,
   }, {
@@ -1333,10 +1365,13 @@ async function handleInteractionCheck(request, env) {
         })
         : [];
       const prompt = promptFor(history);
+      await countEvaluatorCallOrRelease(env, submissionGuard.submissionReservation);
       const raw = await callApisPrompt(env, prompt, "feedback", "medium");
       const parsed = extractJsonObject(raw);
       assessment = normalizeInteractionAssessment(parsed, parsed ? "" : raw);
     } catch (error) {
+      if (error instanceof LearningEvaluatorBudgetExceededError
+        || error instanceof LearningEvaluatorBudgetUnavailableError) throw error;
       try {
         await releaseAfterEvaluatorFailure(env, submissionGuard.submissionReservation, error);
       } catch (releasedError) {
@@ -1386,6 +1421,8 @@ async function handleInteractionCheck(request, env) {
   } catch (error) {
     if (error instanceof LearningResourceNotPublishedError) return learningResourceNotPublishedResponse(error);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
+    if (error instanceof LearningEvaluatorBudgetExceededError
+      || error instanceof LearningEvaluatorBudgetUnavailableError) return learningEvaluatorBudgetResponse(error);
     if (error instanceof LearningEvaluatorCooldownError) return learningEvaluatorUnavailableResponse(error.retryAfterSeconds);
     if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
@@ -1715,6 +1752,8 @@ async function handleLearningInteraction(request, env, ctx) {
     if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
     if (error instanceof LearningResourceNotPublishedError) return learningResourceNotPublishedResponse(error);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
+    if (error instanceof LearningEvaluatorBudgetExceededError
+      || error instanceof LearningEvaluatorBudgetUnavailableError) return learningEvaluatorBudgetResponse(error);
     if (error instanceof LearningEvaluatorCooldownError) return learningEvaluatorUnavailableResponse(error.retryAfterSeconds);
     if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
@@ -2367,6 +2406,7 @@ async function handleReadingStudyGuideAttempt(request, env, student) {
 
   let assessment = deterministicStudyGuideAssessment(item, responseText);
   if (!assessment) {
+    await countEvaluatorCallOrRelease(env, submissionGuard.submissionReservation);
     try {
       const raw = await callApisPrompt(env, studyGuideAssessmentPrompt(item, responseText), "feedback", "medium");
       const parsed = extractJsonObject(raw);
@@ -2802,6 +2842,7 @@ async function handleReadingHealth(env) {
         AND name IN (
           'classical_first_read_sessions',
           'classical_first_read_marks',
+          'learning_evaluator_calls',
           'learning_submission_slots',
           'student_identity_links'
         )`
@@ -2814,6 +2855,8 @@ async function handleReadingHealth(env) {
           'idx_evidence_outbox_pending_id',
           'idx_evidence_outbox_v2_recovery',
           'idx_learning_interactions_attempt_unique',
+          'idx_learning_evaluator_calls_student_window',
+          'idx_learning_evaluator_calls_mutation_window',
           'idx_vocab_attempts_mutation_unique',
           'idx_vocab_attempts_attempt_unique',
           'idx_learning_submission_slots_window',
@@ -2821,12 +2864,12 @@ async function handleReadingHealth(env) {
         )`
     ).first(),
   ]);
-  if (Number(tables?.n) !== 4 || Number(indexes?.n) !== 9) {
+  if (Number(tables?.n) !== 5 || Number(indexes?.n) !== 11) {
     return readingError("reading schema unavailable", 503);
   }
   const result = {
     ok: true,
-    schemaVersion: "reading-schema-v5",
+    schemaVersion: "reading-schema-v6",
     rulesVersion: "constellation-rules-v1",
     evidenceContractVersion: "bdfz-learning-evidence-event-v2",
   };
@@ -2882,6 +2925,8 @@ async function handleReading(request, env, url) {
     if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
     if (error instanceof LearningResourceNotPublishedError) return learningResourceNotPublishedResponse(error);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
+    if (error instanceof LearningEvaluatorBudgetExceededError
+      || error instanceof LearningEvaluatorBudgetUnavailableError) return learningEvaluatorBudgetResponse(error);
     if (error instanceof LearningEvaluatorCooldownError) return learningEvaluatorUnavailableResponse(error.retryAfterSeconds);
     if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();

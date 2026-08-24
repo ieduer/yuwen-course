@@ -1,12 +1,42 @@
-# YW evaluator 發布安全方案（設計稿；未授權執行）
+# YW evaluator 發布安全方案
 
-本文件記錄已選定但暫停實作的方案 A、已批准的 evaluator-call 上限、APIS 入場平滑
-前置契約、被保留的替代方案、D1 Time Travel 待授權命令，以及 classical／非 classical
-雙側驗收計畫。它不實作 schema/runtime，不取得 bookmark，不 restore、不合併、不部署。
+## 0. 2026-08-24 現行執行權威
 
-## 1. 不可變條件
+本節取代下方仍保留作決策沿革的「APIS typed disposition 是方案 A 前置條件」與
+「未授權實作」敘述。操作者已撤銷「gateway admission rejection 不計數」這項公平性
+優化，並批准 **保守計數**：每次真正送往 APIS 的 feedback 呼叫，不論成功、逾時、
+5xx、無效 JSON、gateway 429 或結果不明，均先寫入且永久占用本窗口名額。因而不需要
+辨識 APIS admission 類型，也不得用 `系統繁忙` 等字串推測；APIS admission／併發改善
+降為獨立 backlog，本次不改 APIS。
 
-任何方案都必須同時滿足：
+現行 YW-only 方案 A 是：
+
+- additive migration `0006_learning_evaluator_call_ledger.sql` 新增 append-only
+  `learning_evaluator_calls` 與兩個索引；不保存 answer、prompt、response、payload 或
+  `client_mutation_id`；
+- 每學生每十分鐘 60 次、每 `source_event_id`／mutation 每窗口 4 次；一條 conditional
+  INSERT 同時檢查兩個計數，呼叫前成功插入才可送 APIS；
+- 額度滿或 budget store／可信身份不可用時不送 APIS；learner reservation 轉為不計
+  learner capacity 的 `.002Z`，回結構化 503＋`Retry-After`，不寫 interaction、
+  evaluation 或 outbox；
+- cooldown DELETE 只作用於 `learning_submission_slots`，永不刪除或退款 evaluator-call
+  row。gateway 429 與所有其他 evaluator failure 一樣計數。
+
+主代理已在完整 learner＋evaluator 狀態機上重做五問，結果為 **無 P0**，標籤仍是
+`non-independent, pending independent confirmation`；精確推理與殘餘風險見本輪
+Phase 0 回執。聚焦測試在本狀態為 evidence 68/68、study-guide frontend 27/27。
+
+YW D1 pre-migration Time Travel bookmark 已於 `2026-08-24T12:21:39Z` 取得；migration
+0006 隨後成功套用，表與兩個索引 readback 正確且 evaluator rows 為 0，既有 students／
+interactions／evaluations／outbox／submission-slot 聚合不變。restore 只可在事故授權、
+寫入隔離及新 rescue bookmark 後執行；Pages rollback 不 restore D1。
+
+下方第 1–3 節保留的是此前 admission-fairness 設計沿革；凡與本節衝突者均已作廢。
+
+## 1. 已撤回的 admission-fairness 設計沿革（非現行門禁）
+
+下列清單記錄曾被考慮的公平性版本。第 3、7 項及其衍生的等待狀態已由第 0 節的
+保守計數裁決取代；其餘不變量仍可作安全背景，但本節不是現行發布門禁。
 
 1. evaluator call budget 與 8 次／10 分鐘 learner capacity 分離；上游失敗不消耗
    學生的 committed attempt／learner slot。
@@ -28,10 +58,11 @@
    4 次**。這是實作常數，不得自行改動；仍須在合併後狀態機上做併發測試與獨立審核。
 
 2026-08-24 的現行 APIS v6.7.0 唯讀導出證實：concurrency gate 拒絕仍沒有機器可讀
-disposition。所以上述第 3、7 項目前**不可正確實作**，方案 A 維持 NO-GO。YW 不得以
-`"系統繁忙"`、HTTP 429、是否缺少 `Retry-After` 或其他啟發式猜測入場結果。
+disposition。因此這個已撤回的公平性版本不可正確實作。現行版本不分類入場結果，
+全部保守計數；YW 仍不得以 `"系統繁忙"`、HTTP 429、是否缺少 `Retry-After` 或其他
+啟發式猜測入場結果。
 
-## 2. 設計選項
+## 2. 原設計選項（歷史；現行方案見第 0 節）
 
 | 選項 | 核心做法 | 優點 | 主要風險／授權 |
 |---|---|---|---|
@@ -39,11 +70,9 @@ disposition。所以上述第 3、7 項目前**不可正確實作**，方案 A �
 | B — YW identity-scoped Durable Object gate | 以不可逆 pseudonymous student key 定位 DO，DO 原子維護 global＋mutation budget；D1 只保存學習證據 | 原子序列天然，避免 MAX+1 競爭；可把短期 budget 與長期學習資料分開 | 新 binding／新能力／成本與恢復面；仍須持久性、逐出、故障 fail-closed 證明；獨立 YW change id |
 | C — APIS identity-aware outer gate | APIS 在 project＋task＋path 外新增經簽名 caller-subject 維度，作共享外層保護 | 可防單一 caller 壓垮 YW project bucket，也能成為共享一致能力 | 現行凍結扇出 36 個 consumer；身份／隱私與 spoofing contract 複雜；必須獨立 change id、全 fan-out、App 回歸，不能夾帶 `7256098` |
 
-2026-08-24 操作者已批准 **方案 A** 的設計方向；B、C 只保留為已比較但未選的替代
-方案。C 即使日後另作共享外層能力，也不能取代來源站自己的 fail-closed 身份 budget。
-60／10 分鐘／學生與 4／mutation 已獲批准；但方案 A 依賴 APIS typed disposition，現已
-暫停實作。方案選定及數值批准仍不等於批准 migration、實作、Time Travel、PR／合併
-或部署。
+這張表是保留的決策沿革。操作者其後批准第 0 節的保守計數版本並授權 migration、實作、
+Time Travel、PR／合併及單次發布；B、C 仍只是未選替代。任何日後共享外層能力都不能
+取代來源站自己的 fail-closed 身份 budget。
 
 ### 選項 A 的最小資料不變量（供審閱，非 migration）
 
@@ -127,7 +156,7 @@ reservation；此時先前**已接納**的 call row 必須持續計數，admissi
 `non-independent, pending independent confirmation`，但被複核對象必須是合併後的完整
 learner＋evaluator-call 狀態機。任一 P0 立即停止發布路徑。
 
-## 3. APIS 現值、NO-GO 與獨立樞紐變更設計
+## 3. APIS 現值與已降級的樞紐 backlog
 
 ### 3.1 v6.7.0 唯讀 live authority
 
@@ -154,13 +183,12 @@ version 是 `21adf19d-4eb6-478f-bad1-7ea73b486b7a`。現行來源證實：
 1,200 calls／約 **34.0 分鐘**。這是樂觀容量天花板，不是 SLO；短等待只減少瞬時拒絕，
 不會提高並發 6 或持續吞吐。
 
-### 3.2 方案 A 的硬門
+### 3.2 已撤回的 fairness 硬門
 
-現行對外契約無法可靠區分 concurrency admission rejection 與其他 HTTP 429；所以
-**方案 A 暫停實作**。它的「admission rejection 不計 60／4、不進 `.002Z`」規則必須
-以前置 typed disposition 為條件。不得在 YW 比對 `"系統繁忙"`，不得把「429 無
-`Retry-After`」當類型，也不得把所有 429 都免計。無法分類的 429 仍須 fail closed，視為
-已嘗試或 outcome unknown 並保留計數。
+現行對外契約無法可靠區分 concurrency admission rejection 與其他 HTTP 429，因此舊版
+「admission rejection 不計 60／4、不進 `.002Z`」公平性規則被撤回，而不是以字串猜測
+實作。第 0 節的現行方案把所有實際送出的 429 視為已嘗試或 outcome unknown 並永久
+計數；typed disposition 與排隊只保留為非阻斷 backlog。
 
 ### 3.3 待審 APIS shared-hub change
 

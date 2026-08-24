@@ -2,6 +2,42 @@
 
 Last updated: 2026-08-24
 
+## 2026-08-24 evaluator-call budget release in progress
+
+- The operator authorized one bounded YW-only release transaction under change
+  id `20260824-yw-evaluator-budget-release-v1`. APIS admission work is backlog
+  and is not part of this change. The implementation uses conservative
+  accounting: every feedback call actually sent to APIS consumes one immutable
+  evaluator-call row, including success, timeout, upstream 5xx, invalid JSON,
+  gateway 429 and outcome-unknown cases. No localized error-string heuristic is
+  used.
+- Additive migration `0006_learning_evaluator_call_ledger.sql` creates
+  `learning_evaluator_calls` plus student-window and mutation-window indexes.
+  The limits are 60 calls per authenticated student per ten-minute window and
+  4 per `source_event_id` per window. Capacity or ledger unavailability fails
+  closed before APIS, releases the learner reservation into the existing short
+  cooldown, preserves the answer/mutation receipt, returns structured 503 plus
+  `Retry-After`, and writes no interaction, evaluation or outbox record.
+- The complete learner-reservation plus evaluator-budget state machine has been
+  reviewed against the five Phase 0 questions. No P0 was found; the review
+  remains `non-independent, pending independent confirmation`. Focused source
+  evidence currently passes 68/68 and the study-guide frontend 27/27. These are
+  pre-merge results and do not replace the required exact merged-SHA gates.
+- A pre-migration D1 Time Travel bookmark was captured at
+  `2026-08-24T12:21:39Z`, then migration 0006 was applied remotely. Readback
+  proves the new table and both indexes exist with zero call rows, while the
+  existing students/interactions/evaluations/outbox/submission-slot aggregate
+  counts are unchanged. The restore command is held in the redacted release
+  receipt; it may be used only under a separately controlled D1 incident, never
+  as part of an ordinary Pages rollback.
+- Production is still deployment
+  `2471f1e4-884a-4e80-9801-589ebbace476` / source `fa93ca8`; no new Pages
+  deployment or env-student acceptance has yet occurred. The release must use a
+  new one-use YW-Pages-only executor bound to the final merged SHA and a new
+  journal. Its first Pages rollback target is `2471f1e4`; `619024c7` remains the
+  second-level anchor. Only successful dual-mode acceptance may seal the new
+  candidate.
+
 ## 2026-08-24 reliability-first goal recalibration (documentation-only draft)
 
 - The active objective is no longer content or lesson-coverage expansion. The
@@ -49,24 +85,15 @@ Last updated: 2026-08-24
   its canary must record whether the feedback applies argumentative technique
   to lyric prose. This is a pre-existing R2 quality issue, not a regression in
   commit `7256098` and not part of its release change id.
-- Evaluator publication remains hard-blocked. Commit `7256098` prevents an
-  evaluator outage from consuming learner capacity but removes the old per-
-  mutation call ceiling; APIS has no student/session/mutation gate. The operator
-  selected option A, a separate fail-closed YW D1 evaluator-call ledger plus
-  outbound admission smoothing, as the next independently identified change,
-  but its implementation is now paused on the APIS typed-disposition precondition.
-  The approved limits are 60 admitted evaluator calls per student per ten-minute
-  window and 4 per mutation; neither the ledger nor smoothing is implemented.
-  A positively identified APIS admission rejection must reuse one logical-call
-  row, release its budget hold, avoid `.002Z` cooldown and show a persisted
-  waiting state instead of evaluator failure. A real or outcome-unknown call
-  remains counted. The combined call/admission reservation must be reviewed with
-  `.002Z` learner-row deletion/re-reservation, `MAX(slot_no)+1`, negative rowid
-  allocation and idempotent replay across the complete merged state machine,
-  not as an isolated diff. The runtime `.002Z` DELETE is a governed D1 data
-  mutation, superseding the older statement below that the candidate changes no
-  direct D1 data. Wrangler 4.100.0 exposes `d1 time-travel info` to retrieve a
-  bookmark and `restore` to use one; neither command was executed in this pass.
+- Commit `7256098` removed the old implicit evaluator-call ceiling while
+  preventing evaluator outages from consuming learner capacity. The follow-up
+  ledger described in the current section closes that unbounded-call exposure.
+  The operator withdrew the earlier admission-fairness requirement: gateway
+  rejection is conservatively counted like every other sent call, so typed APIS
+  disposition is not a dependency. Admission smoothing remains backlog. The
+  runtime `.002Z` DELETE and the additive evaluator ledger are both governed D1
+  changes and were reviewed together with `MAX(slot_no)+1`, negative rowid
+  allocation, idempotent replay and the two independent table lifecycles.
 - APIS feedback admission is an independent R1 capacity risk. A read-only live
   export at 2026-08-24T11:37:00Z confirms APIS v6.7.0 deployment
   `f87fd4a2-e34b-452c-a8dc-bba7edd63d18`, immutable version
@@ -82,20 +109,13 @@ Last updated: 2026-08-24
   source still has `REQUEST_TIMEOUT_MS_BY_TASK.feedback=12000`; that is a
   per-upstream-attempt control in the multi-key path, so 19-28 second end-to-end
   successes do not prove the field stale.
-- Live v6.7.0 exposes `concurrency_limit` internally but still returns only a
-  generic external 429 with no typed code or Retry-After; actual upstream key-
-  pool failures can also return 429. HTTP status, missing headers and localized
-  text therefore cannot safely release evaluator budget. Option A is NO-GO
-  until independent APIS shared-hub change
-  `20260824-apis-yw-feedback-admission-v1` adds an additive typed concurrency
-  disposition and precisely extends the existing bounded admission wait to
-  `yw.bdfz.net + feedback`. The proposed first wait cap is the existing 10
-  seconds at 250ms polling; it smooths short bursts but does not change the
-  six-slot throughput ceiling. Fresh fan-out freezes 36 registered consumers
-  (21 current service bindings plus 15 HTTP/App callers), all of which require
-  synchronized disposition and representative regression if implementation is
-  later authorized. No APIS change was made here, and YW string matching of
-  `"系統繁忙"` is explicitly forbidden.
+- Live v6.7.0 exposes `concurrency_limit` internally but returns only a generic
+  external 429 with no typed code or `Retry-After`; actual upstream key-pool
+  failures can also return 429. The current YW release therefore does not try
+  to distinguish them: every sent call consumes budget. Independent APIS change
+  `20260824-apis-yw-feedback-admission-v1` is backlog, not a dependency or part
+  of this release. No APIS change is authorized, and YW string matching of
+  `"系統繁忙"` remains forbidden.
 - R3 excludes environment and test identities, so a successful canary cannot
   increase its numerator. Engineering remains responsible for proving source
   persistence, UC projection and source drilldown with a test identity; only

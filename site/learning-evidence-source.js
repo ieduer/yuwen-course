@@ -14,6 +14,11 @@ const SUBMISSION_RATE_LIMIT = Object.freeze({
 });
 const SUBMISSION_RESERVATION_LEASE_SECONDS = 60;
 const EVALUATOR_FAILURE_COOLDOWN_SECONDS = 15;
+export const learningEvaluatorCallBudget = Object.freeze({
+  studentWindowLimit: 60,
+  mutationWindowLimit: 4,
+  windowSeconds: SUBMISSION_RATE_LIMIT.windowSeconds,
+});
 const SUBMISSION_RATE_LIMIT_REASONS = Object.freeze({
   windowCapacity: "window_capacity",
 });
@@ -85,6 +90,27 @@ export class LearningEvaluatorCooldownError extends Error {
     super(`評閱服務暫時繁忙，請在 ${wait} 秒後使用同一答案重試`);
     this.name = "LearningEvaluatorCooldownError";
     this.code = "learning_evaluator_unavailable";
+    this.retryAfterSeconds = wait;
+  }
+}
+
+export class LearningEvaluatorBudgetExceededError extends Error {
+  constructor(retryAfterSeconds = learningEvaluatorCallBudget.windowSeconds, limitReason = "student_window_capacity") {
+    const wait = Math.max(1, Number(retryAfterSeconds) || learningEvaluatorCallBudget.windowSeconds);
+    super(`本輪評閱次數已達安全上限，請在 ${wait} 秒後使用同一答案重試`);
+    this.name = "LearningEvaluatorBudgetExceededError";
+    this.code = "learning_evaluator_budget_exhausted";
+    this.retryAfterSeconds = wait;
+    this.limitReason = limitReason === "mutation_capacity" ? limitReason : "student_window_capacity";
+  }
+}
+
+export class LearningEvaluatorBudgetUnavailableError extends Error {
+  constructor(retryAfterSeconds = EVALUATOR_FAILURE_COOLDOWN_SECONDS) {
+    const wait = Math.max(1, Number(retryAfterSeconds) || EVALUATOR_FAILURE_COOLDOWN_SECONDS);
+    super("評閱安全額度暫時無法核對，本次答案尚未送出，請稍後重試");
+    this.name = "LearningEvaluatorBudgetUnavailableError";
+    this.code = "learning_evaluator_budget_unavailable";
     this.retryAfterSeconds = wait;
   }
 }
@@ -1128,6 +1154,94 @@ export async function assertLearningSubmissionAllowed({
     resourceKey: context.resourceKey,
     submissionReservation,
   };
+}
+
+function evaluatorBudgetRetryAfterSeconds(windowStart, occurredAt = isoNow()) {
+  const windowStartMs = reservationTimestampMs(windowStart);
+  const occurredAtMs = reservationTimestampMs(occurredAt);
+  if (!Number.isFinite(windowStartMs) || !Number.isFinite(occurredAtMs)) {
+    return learningEvaluatorCallBudget.windowSeconds;
+  }
+  return Math.max(1, Math.ceil(
+    (windowStartMs + learningEvaluatorCallBudget.windowSeconds * 1000 - occurredAtMs) / 1000,
+  ));
+}
+
+export async function reserveLearningEvaluatorCall({
+  env,
+  submissionReservation,
+  occurredAt = isoNow(),
+}) {
+  if (!env?.READING_DB
+    || !submissionReservation
+    || !trustedSubmissionReservations.has(submissionReservation)
+    || !Number.isInteger(Number(submissionReservation.studentId))
+    || Number(submissionReservation.studentId) <= 0
+    || !clean(submissionReservation.sourceEventId, 100)
+    || !clean(submissionReservation.resourceKey, 220)
+    || !clean(submissionReservation.rateReservation?.windowStart, 40)) {
+    throw new LearningEvaluatorBudgetUnavailableError();
+  }
+  const db = env.READING_DB;
+  const studentId = Number(submissionReservation.studentId);
+  const sourceEventId = clean(submissionReservation.sourceEventId, 100);
+  const resourceKey = clean(submissionReservation.resourceKey, 220);
+  const windowStart = clean(submissionReservation.rateReservation.windowStart, 40);
+  const createdAt = clean(occurredAt, 40) || isoNow();
+  try {
+    const inserted = await db.prepare(
+      `INSERT INTO learning_evaluator_calls (
+         student_id, source_event_id, resource_key, window_start, created_at
+       )
+       SELECT ?, ?, ?, ?, ?
+        WHERE (
+          SELECT COUNT(*) FROM learning_evaluator_calls
+           WHERE student_id = ? AND window_start = ?
+        ) < ${learningEvaluatorCallBudget.studentWindowLimit}
+          AND (
+          SELECT COUNT(*) FROM learning_evaluator_calls
+           WHERE student_id = ? AND source_event_id = ? AND window_start = ?
+        ) < ${learningEvaluatorCallBudget.mutationWindowLimit}`
+    ).bind(
+      studentId,
+      sourceEventId,
+      resourceKey,
+      windowStart,
+      createdAt,
+      studentId,
+      windowStart,
+      studentId,
+      sourceEventId,
+      windowStart,
+    ).run();
+    if (Number(inserted?.meta?.changes || 0) === 1) {
+      return { counted: true, studentId, sourceEventId, windowStart, createdAt };
+    }
+    const [studentWindow, mutationWindow] = await Promise.all([
+      db.prepare(
+        "SELECT COUNT(*) AS n FROM learning_evaluator_calls WHERE student_id = ? AND window_start = ?"
+      ).bind(studentId, windowStart).first(),
+      db.prepare(
+        "SELECT COUNT(*) AS n FROM learning_evaluator_calls WHERE student_id = ? AND source_event_id = ? AND window_start = ?"
+      ).bind(studentId, sourceEventId, windowStart).first(),
+    ]);
+    const mutationUsed = Number(mutationWindow?.n || 0);
+    const studentUsed = Number(studentWindow?.n || 0);
+    if (mutationUsed >= learningEvaluatorCallBudget.mutationWindowLimit
+      || studentUsed >= learningEvaluatorCallBudget.studentWindowLimit) {
+      throw new LearningEvaluatorBudgetExceededError(
+        evaluatorBudgetRetryAfterSeconds(windowStart, occurredAt),
+        mutationUsed >= learningEvaluatorCallBudget.mutationWindowLimit
+          ? "mutation_capacity"
+          : "student_window_capacity",
+      );
+    }
+    throw new LearningEvaluatorBudgetUnavailableError();
+  } catch (error) {
+    if (error instanceof LearningEvaluatorBudgetExceededError
+      || error instanceof LearningEvaluatorBudgetUnavailableError) throw error;
+    throw new LearningEvaluatorBudgetUnavailableError();
+  }
 }
 
 export async function releaseLearningSubmissionReservation({ env, submissionReservation }) {

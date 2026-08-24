@@ -9,13 +9,17 @@ import { resolve } from "node:path";
 import {
   acquireLearningSubmissionReservation,
   drainEvidenceOutbox,
+  LearningEvaluatorBudgetExceededError,
+  LearningEvaluatorBudgetUnavailableError,
   LearningEvaluatorCooldownError,
   LearningSubmissionInProgressError,
   LearningSubmissionRateLimitError,
   learningEvidenceContract,
   OUTBOX_RECONCILE_SELECTION_SQL,
   OUTBOX_RETRY_SELECTION_SQL,
+  learningEvaluatorCallBudget,
   releaseLearningSubmissionReservation,
+  reserveLearningEvaluatorCall,
   assertLearningSubmissionAllowed,
   invalidateFormativeManifestCache,
   reconcileEvidenceOutbox,
@@ -25,6 +29,7 @@ import worker, {
   authoritativeReadingAssessmentForSubmission,
   callApisPrompt,
   formalInteractionHistoryPrompt,
+  learningEvaluatorBudgetResponse,
   learningEvaluatorUnavailableResponse,
   loadFormalInteractionConversation,
   normalizeFormalInteractionConversationRows,
@@ -356,6 +361,7 @@ function initializeLearningContractDb(db) {
     "migrations/0003_learning_evidence_loop_v1.sql",
     "migrations/0004_classical_first_read_and_outbox_index.sql",
     "migrations/0005_learning_evidence_central_receipts.sql",
+    "migrations/0006_learning_evaluator_call_ledger.sql",
   ]) {
     db.exec(readFileSync(resolve(ROOT, migration), "utf8"));
   }
@@ -1622,6 +1628,124 @@ test("an APIS evaluator outage is a retryable friendly 503 with no false receipt
   );
 });
 
+test("evaluator budget responses are structured 503s with the exact retry window", async () => {
+  const exhausted = learningEvaluatorBudgetResponse(
+    new LearningEvaluatorBudgetExceededError(321, "mutation_capacity"),
+  );
+  assert.equal(exhausted.status, 503);
+  assert.equal(exhausted.headers.get("retry-after"), "321");
+  assert.deepEqual(await exhausted.json(), {
+    ok: false,
+    error: "本輪評閱次數已達安全上限，請在 321 秒後使用同一答案重試",
+    code: "learning_evaluator_budget_exhausted",
+    limitReason: "mutation_capacity",
+    retryable: true,
+    retryAfterSeconds: 321,
+  });
+  const unavailable = learningEvaluatorBudgetResponse(new LearningEvaluatorBudgetUnavailableError());
+  assert.equal(unavailable.status, 503);
+  assert.equal(unavailable.headers.get("retry-after"), "15");
+  assert.equal((await unavailable.json()).code, "learning_evaluator_budget_unavailable");
+});
+
+test("append-only evaluator ledger caps one mutation at four without storing student text", async () => {
+  const db = new DatabaseSync(":memory:");
+  try {
+    initializeLearningContractDb(db);
+    const source = sourceEnvironment();
+    source.env.READING_DB = sqliteD1(db);
+    const occurredAt = "2026-08-24T12:05:00.000Z";
+    const allowed = await assertLearningSubmissionAllowed({
+      request: new Request("https://yw.bdfz.net/api/interaction-check"),
+      env: source.env,
+      student: { id: 7, ucUserId: 42 },
+      lesson: wordCreationLesson,
+      interactionKey: "wordCreation",
+      payload: {
+        word: "同袍",
+        creation: "風雪同行，彼此守望。",
+        clientMutationId: "evaluator-budget-mutation-four",
+      },
+      occurredAt,
+    });
+    const contenders = await Promise.allSettled(Array.from({ length: 10 }, () => (
+      reserveLearningEvaluatorCall({
+        env: source.env,
+        submissionReservation: allowed.submissionReservation,
+        occurredAt,
+      })
+    )));
+    assert.equal(contenders.filter((result) => result.status === "fulfilled").length, 4);
+    assert.ok(contenders
+      .filter((result) => result.status === "rejected")
+      .every((result) => result.reason instanceof LearningEvaluatorBudgetExceededError
+        && result.reason.limitReason === "mutation_capacity"
+        && result.reason.retryAfterSeconds === 300));
+    assert.equal(
+      db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls").get().n,
+      learningEvaluatorCallBudget.mutationWindowLimit,
+    );
+    const columns = db.prepare("PRAGMA table_info(learning_evaluator_calls)").all().map((row) => row.name);
+    assert.deepEqual(columns, ["id", "student_id", "source_event_id", "resource_key", "window_start", "created_at"]);
+    assert.equal(columns.some((name) => /raw|answer|prompt|payload|client_mutation/i.test(name)), false);
+  } finally {
+    db.close();
+  }
+});
+
+test("append-only evaluator ledger caps a student window at sixty across mutations", async () => {
+  const db = new DatabaseSync(":memory:");
+  try {
+    initializeLearningContractDb(db);
+    const source = sourceEnvironment();
+    source.env.READING_DB = sqliteD1(db);
+    const occurredAt = "2026-08-24T12:05:00.000Z";
+    const windowStart = "2026-08-24T12:00:00.000Z";
+    const insert = db.prepare(
+      `INSERT INTO learning_evaluator_calls (
+         student_id, source_event_id, resource_key, window_start, created_at
+       ) VALUES (?, ?, ?, ?, ?)`
+    );
+    for (let index = 0; index < learningEvaluatorCallBudget.studentWindowLimit - 1; index += 1) {
+      insert.run(7, `other-mutation-${index}`, `other-resource-${index}`, windowStart, occurredAt);
+    }
+    const allowed = await assertLearningSubmissionAllowed({
+      request: new Request("https://yw.bdfz.net/api/interaction-check"),
+      env: source.env,
+      student: { id: 7, ucUserId: 42 },
+      lesson: wordCreationLesson,
+      interactionKey: "wordCreation",
+      payload: {
+        word: "同袍",
+        creation: "風雪同行，彼此守望。",
+        clientMutationId: "evaluator-budget-student-sixty",
+      },
+      occurredAt,
+    });
+    await reserveLearningEvaluatorCall({
+      env: source.env,
+      submissionReservation: allowed.submissionReservation,
+      occurredAt,
+    });
+    await assert.rejects(
+      reserveLearningEvaluatorCall({
+        env: source.env,
+        submissionReservation: allowed.submissionReservation,
+        occurredAt,
+      }),
+      (error) => error instanceof LearningEvaluatorBudgetExceededError
+        && error.limitReason === "student_window_capacity",
+    );
+    assert.equal(
+      db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls WHERE student_id = ? AND window_start = ?")
+        .get(7, windowStart).n,
+      learningEvaluatorCallBudget.studentWindowLimit,
+    );
+  } finally {
+    db.close();
+  }
+});
+
 test("retired public evaluators spend no APIS calls and learning-check keeps My authentication", async () => {
   const originalFetch = globalThis.fetch;
   let fetchCalls = 0;
@@ -1821,6 +1945,9 @@ test("an evaluator outage consumes no learner slot and retries after only the sh
       if (evaluatorMode === "outage-once" && evaluatorCalls === 1) {
         throw new Error("simulated evaluator outage");
       }
+      if (evaluatorMode === "gateway-429") {
+        return Response.json({ error: "opaque gateway admission rejection" }, { status: 429 });
+      }
       if (evaluatorMode === "non-json") return Response.json({ answer: "not-json" });
       if (evaluatorMode === "invalid-normalized") {
         return Response.json({ answer: JSON.stringify({
@@ -1871,6 +1998,7 @@ test("an evaluator outage consumes no learner slot and retries after only the sh
     });
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 0);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls").get().n, 1);
 
     const cooldownRow = db.prepare(
       "SELECT created_at, resource_slot_no, global_slot_no FROM learning_submission_slots"
@@ -1886,6 +2014,7 @@ test("an evaluator outage consumes no learner slot and retries after only the sh
     assert.equal(earlyRetry.status, 503);
     assert.equal((await earlyRetry.json()).code, "learning_evaluator_unavailable");
     assert.equal(evaluatorCalls, 1, "the D1 cooldown must prevent an immediate second APIS call");
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls").get().n, 1);
 
     const expiredCooldown = new Date(Date.parse(cooldownRow.created_at) - 16_000)
       .toISOString()
@@ -1897,6 +2026,7 @@ test("an evaluator outage consumes no learner slot and retries after only the sh
     assert.equal(retried.status, 200);
     assert.equal(retriedBody.assessment.score, 82);
     assert.equal(evaluatorCalls, 2);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls").get().n, 2);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 1);
     assert.ok(queued.length <= 1, "the retry cannot enqueue more than one evidence envelope");
@@ -1905,6 +2035,7 @@ test("an evaluator outage consumes no learner slot and retries after only the sh
     assert.equal(replay.status, 200);
     assert.equal((await replay.json()).deduped, true);
     assert.equal(evaluatorCalls, 2);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls").get().n, 2);
 
     evaluatorMode = "non-json";
     const nonJson = await worker.fetch(request("route-non-json-evaluator-retry"), env, {});
@@ -1912,6 +2043,7 @@ test("an evaluator outage consumes no learner slot and retries after only the sh
     assert.equal((await nonJson.json()).code, "learning_evaluator_unavailable");
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 2);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 1);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls").get().n, 3);
 
     evaluatorMode = "invalid-normalized";
     const invalidNormalized = await worker.fetch(request("route-invalid-normalized-evaluator-retry"), env, {});
@@ -1919,9 +2051,158 @@ test("an evaluator outage consumes no learner slot and retries after only the sh
     assert.equal((await invalidNormalized.json()).code, "learning_evaluator_unavailable");
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 3);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 1);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls").get().n, 4);
+    evaluatorMode = "gateway-429";
+    const gatewayRejected = await worker.fetch(request("route-gateway-429-counted"), env, {});
+    assert.equal(gatewayRejected.status, 503);
+    assert.equal((await gatewayRejected.json()).code, "learning_evaluator_unavailable");
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls").get().n, 5);
+    assert.doesNotMatch(workerSource, /(?:includes|match|test)\([^\n]*[\"']系統繁忙[\"']/);
     assert.equal(db.prepare(
       "SELECT COUNT(*) AS n FROM learning_submission_slots WHERE created_at NOT LIKE '%.002Z'"
     ).get().n, 1, "only the committed learner submission counts toward capacity");
+  } finally {
+    globalThis.fetch = originalFetch;
+    db.close();
+  }
+});
+
+test("an unavailable evaluator ledger fails closed before APIS and releases learner capacity", async () => {
+  const db = new DatabaseSync(":memory:");
+  const originalFetch = globalThis.fetch;
+  try {
+    initializeLearningContractDb(db);
+    const siteManifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/manifest.json"), "utf8"));
+    const lessonData = JSON.parse(readFileSync(resolve(ROOT, "site/data/lessons/lesson-1497.json"), "utf8"));
+    const d1 = sqliteD1(db);
+    const env = {
+      READING_TEST_SLUG: "budget-store-unavailable",
+      READING_DB: {
+        prepare(sql) {
+          if (sql.includes("INSERT INTO learning_evaluator_calls")) {
+            return {
+              bind() { return this; },
+              async run() { throw new Error("simulated evaluator ledger unavailable"); },
+            };
+          }
+          return d1.prepare(sql);
+        },
+        batch: d1.batch.bind(d1),
+      },
+      LEARNING_EVIDENCE_QUEUE: { async send() {} },
+      ASSETS: {
+        async fetch(request) {
+          const pathname = new URL(request.url).pathname;
+          if (pathname === "/data/manifest.json") return Response.json(siteManifest);
+          if (pathname === "/data/lessons/lesson-1497.json") return Response.json(lessonData);
+          if (pathname === "/data/literary-taxonomy.json") return Response.json(literaryTaxonomy);
+          if (pathname === "/data/interaction-definitions.json") return Response.json(registry);
+          if (pathname === "/data/learning-manifest.json") return Response.json(manifest);
+          if (pathname === "/data/lesson-competency-manifest.json") return Response.json(formativeManifest);
+          return new Response("not found", { status: 404 });
+        },
+      },
+    };
+    let apisCalls = 0;
+    globalThis.fetch = async () => {
+      apisCalls += 1;
+      throw new Error("APIS must not run when the evaluator ledger is unavailable");
+    };
+    const isolatedWorkerUrl = new URL("../site/_worker.js?budget-store-unavailable=1", import.meta.url);
+    const { default: isolatedWorker } = await import(isolatedWorkerUrl);
+    const response = await isolatedWorker.fetch(new Request("https://yw.bdfz.net/api/interaction-check", {
+      method: "POST",
+      headers: YW_WEB_JSON_HEADERS,
+      body: JSON.stringify({
+        lessonId: "lesson-1497",
+        interaction: "wordCreation",
+        input: { word: "同袍", creation: "風雪同行，彼此守望。" },
+        clientMutationId: "budget-store-unavailable",
+      }),
+    }), env, {});
+    const body = await response.json();
+    assert.equal(response.status, 503);
+    assert.equal(response.headers.get("retry-after"), "15");
+    assert.equal(body.code, "learning_evaluator_budget_unavailable");
+    assert.equal(apisCalls, 0);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls").get().n, 0);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 0);
+    assert.equal(db.prepare(
+      "SELECT COUNT(*) AS n FROM learning_submission_slots WHERE created_at NOT LIKE '%.002Z'"
+    ).get().n, 0);
+  } finally {
+    globalThis.fetch = originalFetch;
+    db.close();
+  }
+});
+
+test("a full evaluator window returns structured 503 without APIS or learner-slot consumption", async () => {
+  const db = new DatabaseSync(":memory:");
+  const originalFetch = globalThis.fetch;
+  try {
+    initializeLearningContractDb(db);
+    const now = Date.now();
+    const windowMs = learningEvaluatorCallBudget.windowSeconds * 1000;
+    const windowStart = new Date(Math.floor(now / windowMs) * windowMs).toISOString();
+    const createdAt = new Date(now).toISOString();
+    const insert = db.prepare(
+      `INSERT INTO learning_evaluator_calls (
+         student_id, source_event_id, resource_key, window_start, created_at
+       ) VALUES (?, ?, ?, ?, ?)`
+    );
+    for (let index = 0; index < learningEvaluatorCallBudget.studentWindowLimit; index += 1) {
+      insert.run(7, `preexisting-budget-call-${index}`, `preexisting-resource-${index}`, windowStart, createdAt);
+    }
+    const siteManifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/manifest.json"), "utf8"));
+    const lessonData = JSON.parse(readFileSync(resolve(ROOT, "site/data/lessons/lesson-1497.json"), "utf8"));
+    const env = {
+      READING_TEST_SLUG: "lease-test-student",
+      READING_DB: sqliteD1(db),
+      LEARNING_EVIDENCE_QUEUE: { async send() {} },
+      ASSETS: {
+        async fetch(request) {
+          const pathname = new URL(request.url).pathname;
+          if (pathname === "/data/manifest.json") return Response.json(siteManifest);
+          if (pathname === "/data/lessons/lesson-1497.json") return Response.json(lessonData);
+          if (pathname === "/data/literary-taxonomy.json") return Response.json(literaryTaxonomy);
+          if (pathname === "/data/interaction-definitions.json") return Response.json(registry);
+          if (pathname === "/data/learning-manifest.json") return Response.json(manifest);
+          if (pathname === "/data/lesson-competency-manifest.json") return Response.json(formativeManifest);
+          return new Response("not found", { status: 404 });
+        },
+      },
+    };
+    let apisCalls = 0;
+    globalThis.fetch = async () => {
+      apisCalls += 1;
+      throw new Error("APIS must not run after evaluator budget exhaustion");
+    };
+    const isolatedWorkerUrl = new URL("../site/_worker.js?budget-window-full=1", import.meta.url);
+    const { default: isolatedWorker } = await import(isolatedWorkerUrl);
+    const response = await isolatedWorker.fetch(new Request("https://yw.bdfz.net/api/interaction-check", {
+      method: "POST",
+      headers: YW_WEB_JSON_HEADERS,
+      body: JSON.stringify({
+        lessonId: "lesson-1497",
+        interaction: "wordCreation",
+        input: { word: "同袍", creation: "風雪同行，彼此守望。" },
+        clientMutationId: "budget-window-full",
+      }),
+    }), env, {});
+    const body = await response.json();
+    assert.equal(response.status, 503);
+    assert.equal(body.code, "learning_evaluator_budget_exhausted");
+    assert.equal(body.limitReason, "student_window_capacity");
+    assert.ok(Number(body.retryAfterSeconds) >= 1 && Number(body.retryAfterSeconds) <= 600);
+    assert.equal(response.headers.get("retry-after"), String(body.retryAfterSeconds));
+    assert.equal(apisCalls, 0);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls").get().n, 60);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 0);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_evaluations").get().n, 0);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM evidence_outbox").get().n, 0);
+    assert.equal(db.prepare(
+      "SELECT COUNT(*) AS n FROM learning_submission_slots WHERE created_at NOT LIKE '%.002Z'"
+    ).get().n, 0);
   } finally {
     globalThis.fetch = originalFetch;
     db.close();
@@ -2348,10 +2629,11 @@ test("health probes and interactions reconcile central receipts before bounded r
   assert.match(evidenceSource, /central_receipted_at IS NULL OR datetime\(central_receipted_at\) < datetime\('now', '-15 minutes'\)/);
 });
 
-test("reading health exposes schema v5 only with the central receipt recovery index", () => {
+test("reading health exposes schema v6 only with evaluator-budget and receipt indexes", () => {
   assert.match(workerSource, /'idx_evidence_outbox_v2_recovery'/);
-  assert.match(workerSource, /Number\(indexes\?\.n\) !== 9/);
-  assert.match(workerSource, /schemaVersion: "reading-schema-v5"/);
+  assert.match(workerSource, /Number\(tables\?\.n\) !== 5/);
+  assert.match(workerSource, /Number\(indexes\?\.n\) !== 11/);
+  assert.match(workerSource, /schemaVersion: "reading-schema-v6"/);
 });
 
 test("ISO outbox attempt timestamps become retryable at the exact SQLite stale boundary", () => {

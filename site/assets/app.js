@@ -3557,6 +3557,16 @@ function learningSubmissionRetryMessage(code, retryAfterSeconds = 0, limitReason
       ? `來源端評閱暫時不可用；答案已保留，請 ${wait} 秒後用同一內容重試`
       : "來源端評閱暫時不可用；答案已保留，請稍後用同一內容重試";
   }
+  if (code === "learning_evaluator_budget_exhausted") {
+    return wait
+      ? `本輪評閱次數已達安全上限；答案已保留，請 ${wait} 秒後用同一內容重試`
+      : "本輪評閱次數已達安全上限；答案已保留，請稍後用同一內容重試";
+  }
+  if (code === "learning_evaluator_budget_unavailable") {
+    return wait
+      ? `評閱安全額度暫時無法核對；答案已保留，請 ${wait} 秒後用同一內容重試`
+      : "評閱安全額度暫時無法核對；答案已保留，請稍後用同一內容重試";
+  }
   if (code === "learning_submission_rate_limited") {
     return wait ? `提交較頻繁，請 ${wait} 秒後再試` : "提交較頻繁，請稍後再試";
   }
@@ -3872,6 +3882,8 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
         "learning_submission_in_progress",
         "learning_submission_rate_limited",
         "learning_evaluator_unavailable",
+        "learning_evaluator_budget_exhausted",
+        "learning_evaluator_budget_unavailable",
       ].includes(error.code)) {
         toast(learningSubmissionRetryMessage(error.code, error.retryAfterSeconds, error.limitReason));
       } else if (error?.name === "AbortError") {
@@ -4200,6 +4212,16 @@ function bindCheckStage() {
           result?.limitReason,
         ),
         learning_evaluator_unavailable: learningSubmissionRetryMessage(
+          result.code,
+          result.retryAfterSeconds,
+          result.limitReason,
+        ),
+        learning_evaluator_budget_exhausted: learningSubmissionRetryMessage(
+          result.code,
+          result.retryAfterSeconds,
+          result.limitReason,
+        ),
+        learning_evaluator_budget_unavailable: learningSubmissionRetryMessage(
           result.code,
           result.retryAfterSeconds,
           result.limitReason,

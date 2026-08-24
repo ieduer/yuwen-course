@@ -1,5 +1,68 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-24 bounded-evaluator release gate
+
+This is the newest eight-point authority. It supersedes conflicting retained
+2026-08-23 wording, including the old no-schema-change assumption, the old
+rollback-first target, the classical-only acceptance and the requirement that
+every 503 be absent.
+
+1. **Source of truth.** Use only the retained worktree and branch containing
+   `7256098` plus additive migration `0006_learning_evaluator_call_ledger.sql`.
+   Open and merge an ordinary PR into `main`; rebuild everything from the exact
+   final merged SHA. No second clone, raw `site/` upload, dirty checkout or
+   pre-merge artifact is release authority.
+2. **Health and live probes.** Before Pages mutation, prove the canonical live
+   deployment is still `2471f1e4-884a-4e80-9801-589ebbace476` / `fa93ca8`, and
+   preserve `619024c7-a261-405b-a13f-8581a90111ac` as the second-level anchor.
+   After deployment, compare custom and atomic HTML/app pins, source SHA and
+   `/api/learning/health`; the latter must report `reading-schema-v6` with the
+   evaluator table and both indexes.
+3. **Contract and test gates.** On the exact merged SHA, exact Node 24.18.0 and
+   22.21.1 must each pass the complete `precontent:check` and study-guide-source
+   verification. Node 24 builds/checks the formal artifact and its manifest;
+   Node 22 independently checks the same artifact. Full Chromium mobile-atlas
+   must be green. Tests must prove atomic 60/student/window and
+   4/mutation/window admission, conservative accounting of every sent outcome,
+   no APIS call when budget or D1/identity is unavailable, structured 503 plus
+   `Retry-After`, preserved retry receipt, and no false interaction/evaluation/
+   outbox or positive learner-capacity consumption.
+4. **Deploy and forbidden actions.** Deploy only through a new one-use external
+   executor bound to change id `20260824-yw-evaluator-budget-release-v1`, exact
+   merged SHA, checksum-fixed artifact, project `yuwen-course`, a new journal
+   directory and rollback deployment `2471f1e4`. The executor must not mutate
+   APIS, UC, Queue, D1 schema/data, bindings, routes, Secrets Store, App or any
+   other Pages project. Never reuse `.yw-pages-release-20260823`.
+5. **Dependency regression.** Treat APIS typed admission, concurrency tuning,
+   legacy UC orphan receipts, poetry prerequisites and `modern-prose` mapping as
+   recorded backlog, not this release. Still verify the unchanged APIS response
+   envelope, UC projection/drilldown, local-practice negative control, mobile
+   navigation and Reading health through the authorized acceptance.
+6. **Backup and restore.** The pre-migration D1 Time Travel bookmark and exact
+   restore command are recorded in the redacted release receipt. A D1 restore
+   is destructive and requires separate incident authority, write isolation and
+   a new rescue bookmark. Pages rollback never restores D1. Migration 0006 is
+   additive and remains compatible with the old Pages code.
+7. **Rollback and stop conditions.** A failed live acceptance rolls Pages back
+   to `2471f1e4` and leaves D1 history intact; `619024c7` remains the next anchor.
+   Stop for operator input only on a Phase 0 P0, a non-green final-SHA Node or
+   mobile gate, a deploy/accept executor-gate failure, or live
+   `evaluator_retry_exhausted` 429 / inability to complete two dialogue turns.
+   A 503 that recovers with the same answer after the 15-second cooldown and a
+   pre-existing `modern-prose` feedback mismatch are recorded, not stop events.
+8. **Single dual-mode acceptance.** Use the authorized env student exactly once
+   after deployment. On lesson 1474, verify no-refresh first-read to annotated
+   text, annotated completion to vocabulary, final vocabulary/study-guide
+   completion to unlocked structure and author-question. On lessons 1474 and
+   1569, run both `structure` and `authorQuestion` for at least two server-owned
+   turns, refresh once and prove monotonically accumulated context is restored.
+   For lesson 1569, record whether `modern-prose -> argument` produces a genre-
+   misplaced evaluation but do not repair it here. Finally prove at least one
+   `a_plus_gate` source event is projected to UC with competency facet and
+   non-null normalized value and is drillable through
+   `sourceUrl + sourcePayloadRef` to the YW-owned answer. Acceptance evidence
+   must be redacted: no account, cookie, session, mutation id or answer text.
+
 ## 2026-08-23 evaluator timeout and failure-attribution release gate
 
 This is the newest eight-point authority. It adds to, and where necessary

@@ -751,12 +751,18 @@ test("interaction and study-guide retry messages distinguish active work, capaci
   assert.match(retryMessage, /learning_submission_in_progress/);
   assert.match(retryMessage, /learning_submission_rate_limited/);
   assert.match(retryMessage, /learning_evaluator_unavailable/);
+  assert.match(retryMessage, /learning_evaluator_budget_exhausted/);
+  assert.match(retryMessage, /learning_evaluator_budget_unavailable/);
   assert.match(retryMessage, /來源端評閱暫時不可用/);
+  assert.match(retryMessage, /評閱次數已達安全上限/);
+  assert.match(retryMessage, /評閱安全額度暫時無法核對/);
   assert.doesNotMatch(retryMessage, /evaluator_retry_exhausted/);
   assert.match(retryMessage, /提交較頻繁/);
   const studyGuideSubmission = section("function bindCheckStage", "function openLexicon");
   assert.match(studyGuideSubmission, /learning_submission_rate_limited/);
   assert.match(studyGuideSubmission, /learning_evaluator_unavailable/);
+  assert.match(studyGuideSubmission, /learning_evaluator_budget_exhausted/);
+  assert.match(studyGuideSubmission, /learning_evaluator_budget_unavailable/);
   assert.match(studyGuideSubmission, /learningSubmissionRetryMessage/);
 });
 
