@@ -24,6 +24,7 @@ import {
   invalidateFormativeManifestCache,
   reconcileEvidenceOutbox,
   recordLearningInteraction,
+  validateAPlusCompatibilityContract,
 } from "../site/learning-evidence-source.js";
 import worker, {
   authoritativeReadingAssessmentForSubmission,
@@ -2328,6 +2329,35 @@ test("YW evaluation self-report remains a v2 non-scoring event", async () => {
   const enqueueReceipt = writes.find((write) => write.sql.startsWith("UPDATE evidence_outbox SET"));
   assert.match(enqueueReceipt?.sql || "", /delivery_status = 'enqueued'/);
   assert.doesNotMatch(enqueueReceipt?.sql || "", /delivery_status = 'delivered'/);
+});
+
+test("evidence academic year follows the validated active policy during August", async () => {
+  const source = sourceEnvironment();
+  await recordLearningInteraction({
+    request: new Request("https://yw.bdfz.net/api/learning/interactions"),
+    env: source.env,
+    student: { id: 7, ucUserId: 42 },
+    lesson,
+    interactionKey: "evaluation",
+    payload: { rating: 5, reason: "八月仍以現行政策學年為準" },
+    occurredAt: "2026-08-24T12:00:00.000Z",
+  });
+
+  assert.equal(source.queued[0].envelope.academicYear, "2026-2027");
+
+  const missingPolicy = structuredClone(registry);
+  delete missingPolicy.compatibilityContracts.aPlusGate.academicYearPolicy;
+  assert.throws(
+    () => validateAPlusCompatibilityContract(missingPolicy, manifest),
+    /A\+ producer compatibility contract invalid/,
+  );
+
+  const mismatchedPolicy = structuredClone(registry);
+  mismatchedPolicy.compatibilityContracts.aPlusGate.academicYearPolicy.policyVersion = "yw-aplus-2025-2026-v1";
+  assert.throws(
+    () => validateAPlusCompatibilityContract(mismatchedPolicy, manifest),
+    /A\+ producer compatibility contract invalid/,
+  );
 });
 
 test("normal interaction route rejects client-forged occurrence time or academic year", () => {
