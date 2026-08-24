@@ -721,11 +721,11 @@ function reservationTimestampMs(value) {
   return Date.parse(explicitZone ? raw : `${raw.replace(" ", "T")}Z`);
 }
 
-// `created_at` is the only existing mutable reservation field. New leases are
-// written at .000Z, abandoned-lease reclaims at .001Z, and evaluator-owned
-// failures at .002Z. The .002Z marker is excluded from learner submission
-// capacity and enforces only the short evaluator cooldown. Its slot numbers
-// are moved to negative rowid space so a fresh positive slot cannot collide.
+// `created_at` is the reservation state marker. New leases use .000Z; every
+// expired non-cooldown lease reclaim rewrites the current time at .001Z, so
+// .001Z is not a once-only retry counter. Evaluator-owned failures use .002Z,
+// are excluded from learner capacity for a 15-second cooldown, and move both
+// slot numbers into negative rowid space before a later fresh reservation.
 function reservationLeaseTimestamp(value, reclaimed = false) {
   const milliseconds = typeof value === "number" ? value : reservationTimestampMs(value);
   const date = new Date(Number.isFinite(milliseconds) ? milliseconds : Date.now());
