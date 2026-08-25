@@ -1,6 +1,27 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-08-24 (America/Los_Angeles)
+Last reviewed: 2026-08-25 (America/Los_Angeles)
+
+## 2026-08-25 accepted release authority
+
+The accepted live authority is Pages deployment
+`f190cd2c-3023-40ac-8a88-c9d92c450627` from exact source
+`26761feec523847b9f60dcda5b5328843b413c0b`, with app asset pin
+`85fa19b1ba2a427d`. Its journal is
+`/Users/ylsuen/CF/.yw-pages-release-20260825-academic-year-policy-v1`; acceptance
+is bound to the redacted composite receipt under
+`/Users/ylsuen/CF/_meta/reports/uc_yw_academic_year_release_20260825/`.
+
+The acceptance covers classical lesson 1474 and non-classical lesson 1569,
+two-or-more server-owned turns in both structure and author-question rounds,
+refresh restoration, zero `evaluator_retry_exhausted` 429 responses, and a
+fresh `2026-2027` formative event accepted by User Center with competency,
+normalized value, and an exact source-owned drill-down. Test identities prove
+the engineering path but never increment the real-student R3 numerator.
+
+Rollback Pages first to `2471f1e4-884a-4e80-9801-589ebbace476`, then to
+`619024c7-a261-405b-a13f-8581a90111ac` if necessary. Preserve D1 history and
+the evaluator-call ledger during an ordinary Pages rollback.
 
 ## 2026-08-24 evidence academic-year authority and feedback timeout boundary
 

@@ -1,6 +1,30 @@
 # Project State
 
-Last updated: 2026-08-24
+Last updated: 2026-08-25
+
+## 2026-08-25 accepted interaction and evaluation closure
+
+- Current accepted Pages deployment is
+  `f190cd2c-3023-40ac-8a88-c9d92c450627`, exact source
+  `26761feec523847b9f60dcda5b5328843b413c0b`, serving
+  `assets/app.js?v=85fa19b1ba2a427d`. The acceptance journal is
+  `/Users/ylsuen/CF/.yw-pages-release-20260825-academic-year-policy-v1`.
+- The same immutable candidate has browser proof for lesson 1474 and lesson
+  1569. Lesson 1474 completed vocabulary 12/12, study guide 19/19, structure
+  six turns and author-question four turns; lesson 1569 completed two turns in
+  each multi-turn round. Refresh restored server-owned context, and the run had
+  zero `evaluator_retry_exhausted` 429 responses.
+- A fresh post-UC-release formative event used policy year `2026-2027` and was
+  accepted by User Center with a competency facet and non-empty normalized
+  value. Its `sourceUrl` and `sourcePayloadRef` resolved to exactly one YW
+  source-owned interaction. Environment/test identity remains excluded from
+  the real-student R3 numerator; this is engineering-chain proof, not a claim
+  of real-classroom adoption.
+- Immediate Pages rollback is
+  `2471f1e4-884a-4e80-9801-589ebbace476`; second anchor is
+  `619024c7-a261-405b-a13f-8581a90111ac`. User Center rollback is Worker
+  `13b16c9a-b878-42d8-99a3-dabd073ae1e0`. Ordinary rollback must preserve D1
+  history and the additive evaluator ledger.
 
 ## 2026-08-24 academic-year policy fix and APIS timeout proposal (not live)
 
