@@ -1,29 +1,46 @@
 # Project State
 
-Last updated: 2026-08-24
+Last updated: 2026-08-25
 
-## 2026-08-25 academic-year retry candidate failed harness acceptance and rolled back
+## 2026-08-25 dual-mode interaction pass, UC contract failure and exact rollback
 
 - PR #24 merged the evaluator ledger, policy-owned academic year and controlled
   artifact manifest as exact main SHA
   `26761feec523847b9f60dcda5b5328843b413c0b`. The exact SHA passed the scoped
   Node 24.18.0 and 22.21.1 Pages-only gates (229/229, zero fail/skip on each)
   and full Chromium mobile-atlas 13/13.
-- One-use change `20260825-yw-evaluator-academic-year-release-v2` deployed
-  candidate `f190cd2c-3023-40ac-8a88-c9d92c450627`; custom and atomic URLs
-  pinned `assets/app.js?v=85fa19b1ba2a427d` before acceptance.
-- The only authorized browser plan failed twice before any study-guide or model
-  evaluation: first because it incorrectly assumed pre-existing first-read
-  state, then because its keyboard first-read selector was absent after the
-  targeted correction. No live `evaluator_retry_exhausted` 429 or upstream
-  response was observed, but R1/R2/R3 acceptance was not established. The
-  two-attempt browser/selector boundary forbids a third harness rewrite in this
-  transaction.
+- The earlier stop was correctly reclassified as a harness failure rather than
+  product evidence. Change `20260825-yw-harness-revalidate-release-v3` first
+  proved a state-aware harness against current production, then promoted the
+  already checksum-matched candidate
+  `f190cd2c-3023-40ac-8a88-c9d92c450627` without uploading a duplicate artifact.
+  Candidate HTML pinned `assets/app.js?v=85fa19b1ba2a427d` and exact source
+  `26761fe`.
+- The corrected candidate harness passed in 968 seconds. Lesson 1474 completed
+  vocabulary 12/12 and study guide 19/19, unlocked without refresh, then added
+  two fresh server-owned turns to each of `structure` and `authorQuestion` with
+  refresh recovery. Lesson 1569 added two fresh turns to both interactions and
+  also recovered its first turns after refresh. Across 45 API responses, 39
+  were 200, six evaluator 503s recovered after the 15-second cooldown, and
+  `evaluator_retry_exhausted` 429 was zero. This is candidate evidence that R1
+  and R2 work on both sides; it is not evidence that the fix is currently live.
+- R3 failed at the UC contract boundary. The acceptance window created 39
+  scoring source events (35 on lesson 1474, four on lesson 1569); all 39 had a
+  non-null normalized value, source-owned raw payload and policy year
+  `2026-2027`. UC produced zero evidence and terminally quarantined all 39 as
+  `academic_year_invalid`. Its current validator first requires the Shanghai
+  calendar year derived from August `occurredAt` (`2025-2026`) and later also
+  requires the active YW policy year (`2026-2027`). Those predicates are
+  mutually incompatible during August. Another YW-only deployment cannot close
+  this failure; it needs a separately authorized UC shared-hub contract decision
+  and regression of all affected source contracts.
 - The candidate was not accepted. The executor restored
   `2471f1e4-884a-4e80-9801-589ebbace476` / `fa93ca8`; custom and atomic HTML
-  again pin `assets/app.js?v=3fb3009cc5200181`, journal sequence 6 is
-  `rolled_back`, and D1 history was not restored. Main contains the fixes, but
-  production remains `reading-schema-v5` and does not serve them.
+  again pin `assets/app.js?v=3fb3009cc5200181`. The new journal terminates at
+  sequence 6 `rolled_back` with file SHA-256
+  `fb88edb174c71634396b5f07ee17c77fa036ba3fb2040d4c8f3d1338952fed79`;
+  D1 history was retained. Main contains the fixes, but production remains on
+  the old carrier and does not serve them. Acceptance was not executed.
 
 ## 2026-08-24 academic-year policy fix and APIS timeout proposal (not live)
 
@@ -38,7 +55,7 @@ Last updated: 2026-08-24
   mismatched policy fails closed. Node 24.18.0 and 22.21.1 focused evidence-
   contract suites each pass 69/69. The merged candidate was deployed but not
   accepted and was rolled back, so production remains unchanged.
-- Current APIS v6.7.0 source applies a 12-second timeout to each feedback
+- The retained 2026-08-24 APIS v6.7.0 export applies a 12-second timeout to each feedback
   upstream attempt, with two retries and 250/500ms backoff. A one-constant
   shared-hub proposal (`20260824-apis-feedback-timeout-30s-v1`) has been
   prepared to raise only that per-attempt value to 30 seconds; it is not

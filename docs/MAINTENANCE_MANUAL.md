@@ -1,24 +1,43 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-08-24 (America/Los_Angeles)
+Last reviewed: 2026-08-25 (America/Los_Angeles)
 
-## 2026-08-25 release retry terminal state
+## 2026-08-25 dual-mode acceptance and UC-blocked terminal state
 
 PR #24 merged the evaluator ledger and academic-year authority as main SHA
 `26761feec523847b9f60dcda5b5328843b413c0b`. Both scoped Node gates passed
 229/229 with zero fail/skip and mobile-atlas passed 13/13. One-use candidate
 `f190cd2c-3023-40ac-8a88-c9d92c450627` was deployed but never accepted.
 
-The authorized browser harness failed twice before any model evaluation: its
-first run assumed a pre-existing first-read submission, and its one targeted
-correction could not locate the keyboard first-read control. This is an
-acceptance-harness failure, not evidence that evaluator reliability or UC
-projection passed or failed. Do not infer an upstream response: none was
-reached. The executor restored `2471f1e4-884a-4e80-9801-589ebbace476`, both
-public and atomic HTML pins are again `assets/app.js?v=3fb3009cc5200181`, and
-the new journal terminates at `rolled_back`. D1 history and migration 0006
-remain intact. A future release requires a new one-use authority and a reviewed
-first-read harness; do not make a third selector rewrite under this change.
+The earlier stop was a harness failure. A corrected state-aware harness was
+first proved on the old carrier, then run on the exact candidate through change
+`20260825-yw-harness-revalidate-release-v3`. It completed lesson 1474 vocabulary
+12/12, study guide 19/19 and two fresh `structure` plus two fresh
+`authorQuestion` turns, and completed the same two-by-two dialogue on lesson
+1569. Both lessons preserved their first fresh turns across a page refresh.
+The run saw 39 HTTP 200 responses, six recoverable evaluator 503 responses and
+zero `evaluator_retry_exhausted` 429. Harness receipt SHA-256 is
+`7cfa42c201957cf78eb95a69e9d29798ff61e38f115c45e142ae5f0b42eae191`.
+
+Acceptance still failed on a product boundary. YW persisted 39 scoring events
+with policy year `2026-2027`, non-null normalized values and source-owned raw
+payloads. UC created zero evidence and quarantined all 39 with
+`academic_year_invalid`. Current UC normalization first rejects any academic
+year different from the Shanghai calendar derivation of `occurredAt`; for an
+August event that is `2025-2026`. The same current-source path later requires
+YW policy year `2026-2027`. Until UC receives a separately authorized
+shared-hub contract correction, an August current-policy scoring envelope
+cannot satisfy both predicates. Do not work around this by restoring date
+derivation in YW, changing timestamps, or weakening the acceptance query.
+
+The candidate was not accepted. The executor restored
+`2471f1e4-884a-4e80-9801-589ebbace476`; public and atomic HTML again pin
+`assets/app.js?v=3fb3009cc5200181`. Journal sequence 6 is `rolled_back` and the
+journal file SHA-256 is
+`fb88edb174c71634396b5f07ee17c77fa036ba3fb2040d4c8f3d1338952fed79`.
+D1 history and migration 0006 remain intact. A future release needs the UC
+contract decision first, then a new one-use YW authority and the now-proved
+state-aware harness.
 
 ## 2026-08-24 evidence academic-year authority and feedback timeout boundary
 
@@ -31,7 +50,7 @@ this source rule and has focused Node 24.18.0/22.21.1 evidence-contract results
 of 69/69 each. It is merged in main but is not live after the failed candidate
 was rolled back.
 
-YW's feedback deadline remains 45 seconds. Current APIS v6.7.0 uses 12 seconds
+YW's feedback deadline remains 45 seconds. The retained 2026-08-24 APIS v6.7.0 export uses 12 seconds
 per feedback upstream attempt, two retries, and 250/500ms backoff. The proposed
 shared-hub change `20260824-apis-feedback-timeout-30s-v1` may change only the
 APIS per-attempt feedback constant after separate approval; it must not be

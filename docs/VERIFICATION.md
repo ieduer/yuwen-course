@@ -1,18 +1,36 @@
 # 核查標準 / Verification Standard
 
-## 2026-08-25 retry receipt
+## 2026-08-25 final retry receipt
 
 Main SHA `26761feec523847b9f60dcda5b5328843b413c0b` passed both scoped Node
 Pages-only gates (229/229 each, zero fail/skip) and full Chromium mobile-atlas
-13/13. Candidate `f190cd2c-3023-40ac-8a88-c9d92c450627` was deployed through
-one-use change `20260825-yw-evaluator-academic-year-release-v2`, but the browser
-acceptance harness failed twice at first-read setup before any study-guide or
-model evaluation. It therefore supplied no R1/R2/R3 or UC drilldown proof and
-was not accepted. Journal sequence 6 is `rolled_back`; production is restored
-to `2471f1e4-884a-4e80-9801-589ebbace476` / `fa93ca8`, and D1 history remains
-unchanged. Any retry must use a new one-use authority and a separately reviewed
-first-read harness; the failed transaction must not receive a third selector
-rewrite.
+13/13. Change `20260825-yw-harness-revalidate-release-v3` promoted the exact
+existing candidate `f190cd2c-3023-40ac-8a88-c9d92c450627` only after the
+state-aware harness had been proved on the old carrier.
+
+Candidate interaction acceptance passed: lesson 1474 reached vocabulary 12/12
+and study guide 19/19, both lessons added two fresh server-owned `structure`
+and `authorQuestion` turns, and refresh restored the first fresh turn before
+the second. Of 45 API responses, 39 were 200 and six 503s recovered after the
+15-second cooldown; `evaluator_retry_exhausted` 429 was zero. Redacted receipt
+SHA-256 is
+`7cfa42c201957cf78eb95a69e9d29798ff61e38f115c45e142ae5f0b42eae191`.
+
+UC acceptance failed: 39 source scoring events all carried policy year
+`2026-2027`, non-null normalized values and source-owned raw payloads, but UC
+created zero evidence and quarantined 39/39 as `academic_year_invalid`.
+Redacted drilldown receipt SHA-256 is
+`912cd33c21d037989734085519391aae90111497f67aafd398f94802603e94fd`.
+The UC source validator currently requires both the date-derived August year
+`2025-2026` and the active policy year `2026-2027`; this is a product-side
+cross-system contract failure, not a harness failure.
+
+The candidate was not accepted. Journal sequence 6 is `rolled_back`;
+production is restored to `2471f1e4-884a-4e80-9801-589ebbace476` / `fa93ca8`
+with app pin `3fb3009cc5200181`, and D1 history remains intact. Any retry must
+follow a separately authorized UC shared-hub decision and then use a new
+one-use YW release authority. The proved harness may be reused without changing
+product code or relaxing acceptance.
 
 ## 2026-08-24 bounded-evaluator release gate
 

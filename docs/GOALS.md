@@ -2,9 +2,10 @@
 
 > 基線時間：2026-08-24。本文以來源碼、機器契約及 YW／UC D1 的 SELECT-only
 > 回讀為準；不把部署、題目覆蓋、點擊、outbox 狀態或測試帳號冒充學習成效。
-> 2026-08-25 重試候選 `f190cd2c…` 在瀏覽器驗收腳本連續兩次未越過初讀設定後
-> 回滾；未觸發學案或模型評閱，不能據此宣稱 R1／R2／R3 通過或產品失敗。線上已恢復
-> `2471f1e4…`，main 的 evaluator／academic-year 修復尚未上線。
+> 2026-08-25 已先在舊線上證明 state-aware harness，後以同一 harness 完成候選
+> `f190cd2c…` 的文言／非文言雙側互動驗收。R1／R2 候選證據通過，但 UC 將本次 39
+> 條計分事件全部以 `academic_year_invalid` 隔離，R3 工程鏈路失敗。候選未 accept，
+> 已精確回滾 `2471f1e4…`；main 的 evaluator／academic-year 修復仍未上線。
 
 ## 0. 最終目標
 
@@ -25,12 +26,12 @@
   learner capacity；短 cooldown 後同一答案可重試，不阻斷學生繼續同一課。
 - classical 與非 classical 都要各自有 live 驗收；任一側未驗都不能宣稱 R1 達標。
 
-現值：**未達標**。
+現值：**候選雙側驗收通過；現行生產仍未達標，因 R3 產品失敗已回滾候選**。
 
 | 側別 | 已證實 | 尚未證實／阻斷 |
 |---|---|---|
-| `mode=classical` | 2026-08-24 候選 live 驗收完成詞級 12/12、學案 15/19；21 次 evaluator call／16 mutations 中沒有 429 `evaluator_retry_exhausted` | 同一第 16 個學案 mutation 連續四次 503，15 秒 cooldown 後仍未恢復；候選已回滾，R1 未達標 |
-| 非 `classical` | 補集中的 40 課其正式 `structure`／`authorQuestion` 與 classical 共用 `/api/interaction-check`、APIS feedback、預約、ledger、outbox；其他 mode 亦走同一狀態路徑；`lesson-1488` 有一次非 classical server-route 單輪測試 | 沒有任一非 classical 課的正式雙輪 live 驗收，也沒有分側的生產失敗率 |
+| `mode=classical` | 候選 lesson 1474 完成詞級 12/12、學案 19/19，無刷新解鎖，`structure`／`authorQuestion` 各新增兩輪且刷新不丟；整次 45 個 API 回應中 39×200、6×可恢復 503、0×`evaluator_retry_exhausted` 429 | 候選因跨系統 R3 失敗已回滾；這些結果尚不是現行生產 SLO |
+| 非 `classical` | 候選 lesson 1569 的 `structure`／`authorQuestion` 各新增兩輪；刷新後第一輪由 server ledger 恢復，再單調增加第二輪 | 同樣因 R3 失敗未保留在線；仍缺真實班級尺度的分側失敗率 |
 
 既有小樣本只作風險基線：20 次 feedback/medium 中 19 次成功、1 次 transport
 failure；p50 `10.194s`、p95 `24.401s`、max `25.908s` 只按成功回應計。另 5 次外部
@@ -82,7 +83,8 @@ gateway deadline；19–28 秒端到端成功回應不能證明它失真。
 `structure`、`authorQuestion` 各連續至少兩輪；server-owned attempt 單調增加，下一輪
 prompt 接續上一輪，刷新後對話仍由來源 ledger 恢復，且不退化為一次性聊天。
 
-現值：**classical live 在進入多輪前被持續 503 阻斷；非 classical 未驗，整體未達標**。
+現值：**候選上的 classical／非 classical 均通過雙輪與刷新恢復；因 R3 失敗回滾，
+現行生產未承載此證據對應的版本**。
 
 - `lesson-1474` 的來源測試已讓 `structure` 與 `authorQuestion` 各走兩輪真實 Worker
   route，驗證第二輪 prompt 帶入第一輪學生輸入與追問；idempotent replay 不新增 APIS
@@ -91,10 +93,10 @@ prompt 接續上一輪，刷新後對話仍由來源 ledger 恢復，且不退�
   最近 4 輪。瀏覽器合併按 `sourceEventId`／`attemptNo` 去重、單調排序並保留最近 6 輪。
 - `mode` 只改變章法 technique 與作者／文本細讀教練語義；不改 route、reservation、
   conversation ledger、evidence/outbox 或錯誤映射。
-- 尚無非 classical 正式雙輪 route 測試、刷新驗收或 UC 下鑽驗收；因此不得把共用
-  程式路徑等同於該側已通過。
-- 2026-08-24 唯一 live 驗收在 lesson-1474 學案 15/19 後失敗並回滾，故沒有生成
-  classical 或非 classical 的雙輪／刷新證據；lesson-1569 未被執行。
+- 2026-08-25 候選驗收已補上非 classical 正式雙輪與刷新證據，不再以共用程式碼
+  代替該側驗收。lesson 1474 最終 UI turn 為 structure 6、authorQuestion 4；其中本輪
+  各新增兩輪。lesson 1569 從零開始，兩項均達 turn 2。
+- 本輪仍未通過 UC 下鑽；這不推翻 R2 的 server-owned 多輪證據，但阻斷整體發布。
 
 #### R2-Q1 — `modern-prose` 被歸一化為 `argument`（既有品質缺陷）
 
@@ -161,12 +163,18 @@ R3 永遠排除 env／測試帳號，因此發布驗收無論成功與否都不�
 不增加 R3 真實學生分子，但此結果證明工程側的投遞／評價門仍未通過，不能轉稱為純課堂
 使用問題。
 
-根因已定位為 YW 曾按 `occurredAt` 的上海月份推算 academic year：8 月產出
-`2025-2026`，而同一 compatibility contract 的 active policy 明確要求 `2026-2027`。
-來源修正 `7f401d7` 已刪除日期 fallback，改為只使用通過完整 contract 驗證的
-`academicYearPolicy.academicYear`；政策缺失或版本錯配直接 fail closed。Node 24.18.0
-與 22.21.1 的 focused evidence-contract 測試各 69/69，但此 commit 尚未 PR／合併／部署，
-故 live R3 與工程鏈路狀態仍未改變。
+2026-08-25 候選驗收證明 YW 的政策來源修正已生效：本輪 39 條計分事件全部帶
+`academicYear=2026-2027`、非空 normalized value 與 source-owned raw payload；但 UC
+產生 0 條 evidence，39/39 terminal receipt 均為 `academic_year_invalid`。因此 env 工程
+閉環仍是 **39 條 source scoring event／0 條 UC 合格可下鑽評價**；真實學生 R3 分子
+仍是 **0／0**。
+
+最終根因不是 YW 仍在按日期推算，而是 UC 現行 validator 的兩個互斥前置條件：它先
+要求 `academicYearFor(occurredAt) === academicYear`，8 月事件因此只能是
+`2025-2026`；同一 current-source 路徑稍後又要求 active YW policy year
+`2026-2027`。本月任何 current-policy 計分信封都無法同時滿足兩者。`7f401d7` 已合併
+入 main 且候選證明其輸出正確；不得把 YW 改回日期 fallback。R3 的下一個工程動作是
+另獲 UC shared-hub contract 變更授權、完成 fan-out 與回歸，再建立新的 YW 發布交易。
 
 ## 2. 現有互動機器契約
 
@@ -234,15 +242,17 @@ additive migration 0006。新表與兩個索引存在、row count 0，既有五�
 物理 lesson 檔 204、折疊 logical lesson 169、taxonomy item 189 的粒度裁決仍有效；
 但不得用「新增第 17 課」、題目數、commit、測試數或部署數代表學生互動可靠性。
 
-## 6. 發布後雙側驗收
+## 6. 雙側驗收結果與重跑條件
 
-下一次另獲發布與 env 驗收授權後，必須使用 current-formal `lesson-1474`（classical）與
-`lesson-1569`《一個消逝了的山村》（taxonomy genre `lyric-prose`、
-`mode=modern-prose`），不用 `lesson-1458`（`speech-letter`，映射到 `argument` 本就
-合理，不能暴露 R2-Q1）。兩課各跑 `structure`、`authorQuestion` 兩輪以上、刷新恢復、
-YW ledger／evaluation／outbox、UC competency＋normalizedValue＋下鑽；`lesson-1569`
-另須逐輪記錄評語是否把抒情散文錯當論證文。完整步驟見安全方案。env canary 永遠不
-增加 R3；它只證明工程鏈路可用。
+2026-08-25 已按此口徑跑 current-formal `lesson-1474`（classical）與
+`lesson-1569`《一個消逝了的山村》（`lyric-prose`／`modern-prose`）。兩課各完成
+`structure`、`authorQuestion` 兩輪以上及刷新恢復；lesson 1474 另完成詞級 12/12、
+學案 19/19 與無刷新解鎖。lesson 1569 的本次回應未觀測到明確 argument 術語錯位，
+但這個小樣本不關閉 R2-Q1。
+
+重跑只能發生在 UC 合約另案修正並通過 shared-hub 回歸之後；仍須使用同一雙課、同一
+多輪／刷新口徑，並把至少一條計分事件驗到 UC competency＋normalizedValue＋可下鑽。
+env canary 永遠不增加真實學生 R3；它只證明工程鏈路可用。
 
 ## 7. 每輪 closeout 紀律
 
