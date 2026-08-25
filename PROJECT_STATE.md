@@ -24,6 +24,11 @@ Last updated: 2026-08-25
   were 200, six evaluator 503s recovered after the 15-second cooldown, and
   `evaluator_retry_exhausted` 429 was zero. This is candidate evidence that R1
   and R2 work on both sides; it is not evidence that the fix is currently live.
+  Both successful lesson 1569 `structure` responses triggered the harness's
+  argument-language marker, while both successful `authorQuestion` responses
+  did not. This is live evidence of the pre-existing `modern-prose -> argument`
+  quality risk, not an evaluator-state failure or a change introduced by this
+  candidate.
 - R3 failed at the UC contract boundary. The acceptance window created 39
   scoring source events (35 on lesson 1474, four on lesson 1569); all 39 had a
   non-null normalized value, source-owned raw payload and policy year

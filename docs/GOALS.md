@@ -247,8 +247,9 @@ additive migration 0006。新表與兩個索引存在、row count 0，既有五�
 2026-08-25 已按此口徑跑 current-formal `lesson-1474`（classical）與
 `lesson-1569`《一個消逝了的山村》（`lyric-prose`／`modern-prose`）。兩課各完成
 `structure`、`authorQuestion` 兩輪以上及刷新恢復；lesson 1474 另完成詞級 12/12、
-學案 19/19 與無刷新解鎖。lesson 1569 的本次回應未觀測到明確 argument 術語錯位，
-但這個小樣本不關閉 R2-Q1。
+學案 19/19 與無刷新解鎖。lesson 1569 的兩次成功 `structure` 回應都觸發 harness 的
+argument-language 觀測標記，兩次成功 `authorQuestion` 回應則沒有；這是 R2-Q1
+既有文體品質風險的實測信號，不是 evaluator 狀態機故障，也不是本候選引入的迴歸。
 
 重跑只能發生在 UC 合約另案修正並通過 shared-hub 回歸之後；仍須使用同一雙課、同一
 多輪／刷新口徑，並把至少一條計分事件驗到 UC competency＋normalizedValue＋可下鑽。
