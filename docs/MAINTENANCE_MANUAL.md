@@ -2,6 +2,34 @@
 
 Last reviewed: 2026-08-24 (America/Los_Angeles)
 
+## 2026-08-24 evidence academic-year authority and feedback timeout boundary
+
+Every evidence envelope must take `academicYear` from the already validated
+`compatibilityContracts.aPlusGate.academicYearPolicy.academicYear`. Never
+derive it from `occurredAt`, a calendar boundary or browser input. The same
+validation requires the active policy version and exact academic year; absence
+or mismatch fails closed before evidence persistence. Commit `7f401d7` applies
+this source rule and has focused Node 24.18.0/22.21.1 evidence-contract results
+of 69/69 each, but it is not merged or live.
+
+YW's feedback deadline remains 45 seconds. Current APIS v6.7.0 uses 12 seconds
+per feedback upstream attempt, two retries, and 250/500ms backoff. The proposed
+shared-hub change `20260824-apis-feedback-timeout-30s-v1` may change only the
+APIS per-attempt feedback constant after separate approval; it must not be
+emulated by raising YW to 60/75 seconds. A 30-second attempt can reduce typical
+duplicate calls when upstream succeeds in 12-30 seconds, but increases the
+single-key all-timeout bound from about 36.75 to 90.75 seconds. Treat both
+effects as canary measurements, not assumptions. No APIS source or runtime was
+changed by this documentation update.
+
+The 2026-08-24 exact-prompt paired read-only probe is diagnostic only:
+feedback had 0/10 responses within 60 seconds; chat had 5/10 normalized 200s,
+four 60-second deadlines and one fetch failure, with every successful chat
+response still above 45 seconds. Chat and feedback use separate traffic gates
+(concurrency 10 versus 6), so this supports a task-specific APIS cause but does
+not isolate the timeout constant or prove that 30 seconds will pass YW. Retain
+the 45-second YW gate and require an authorized APIS canary.
+
 ## 2026-08-24 evaluator-call budget and release override
 
 This section is the current authority where it conflicts with retained dated
@@ -39,13 +67,17 @@ interaction, evaluation or outbox record. A budget failure must never consume
 a positive learner slot. Health contract `reading-schema-v6` requires the new
 table and both indexes.
 
-The pre-release integrated Phase 0 review found no P0 and is labeled
-`non-independent, pending independent confirmation`. Final acceptance still
-requires exact merged-SHA gates under Node 24.18.0 and 22.21.1, a checksum-fixed
-formal artifact, the one-use Pages executor, and the dual-mode live acceptance
-in `docs/VERIFICATION.md`. The first code rollback target is deployment
-`2471f1e4-884a-4e80-9801-589ebbace476`; the older `619024c7` deployment is the
-second-level anchor.
+The integrated Phase 0 review found no P0 and remains labeled
+`non-independent, pending independent confirmation`. Final source `1f19094`
+passed the scoped Node 24.18.0／22.21.1 and mobile gates and was deployed as
+candidate `c99a3ec8-2673-44bf-a942-631a820599fc`, but live acceptance failed:
+lesson 1474 reached vocabulary 12/12 and study-guide 15/19, then the same answer
+received four 503s despite 15-second cooldowns. UC also quarantined all 28
+canary envelopes as `academic_year_invalid`. The candidate was not accepted;
+the executor restored `2471f1e4-884a-4e80-9801-589ebbace476`, while D1 history
+and the additive ledger schema were retained. Any retry requires a new change
+authority after both failures are resolved. `619024c7` remains the second-level
+anchor.
 
 ## 2026-08-23 evaluator availability override
 

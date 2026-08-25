@@ -142,20 +142,6 @@ function clamp01(value) {
   return number === null ? null : Math.max(0, Math.min(1, number));
 }
 
-function academicYearFor(occurredAt) {
-  const date = new Date(occurredAt);
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone: "Asia/Shanghai",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).formatToParts(date);
-  const year = Number(parts.find((part) => part.type === "year")?.value || date.getUTCFullYear());
-  const month = Number(parts.find((part) => part.type === "month")?.value || 1);
-  const start = month >= 9 ? year : year - 1;
-  return `${start}-${start + 1}`;
-}
-
 async function loadAssetJson(request, env, pathname) {
   const url = new URL(pathname, request.url);
   const response = await env.ASSETS.fetch(new Request(url.toString(), { method: "GET" }));
@@ -289,6 +275,7 @@ function evidenceVersions(registry, manifest, definition, formativeManifest) {
   if (definition.scoringRole === "a_plus_gate") {
     return {
       contractVersion: sourceContract.contractVersion,
+      academicYear: sourceContract.academicYearPolicy.academicYear,
       sourceVersion: sourceContract.sourceVersion,
       sourceReleaseId: sourceContract.sourceReleaseId,
       mappingVersion: sourceContract.mappingVersion,
@@ -299,6 +286,7 @@ function evidenceVersions(registry, manifest, definition, formativeManifest) {
   if (formativeManifest?.manifestVersion) {
     return {
       contractVersion: sourceContract.contractVersion,
+      academicYear: sourceContract.academicYearPolicy.academicYear,
       sourceVersion: formativeManifest.manifestVersion,
       sourceReleaseId: `yw-formative-release-${formativeManifest.manifestVersion.replace("yw-formative-", "")}`,
       mappingVersion: "yw-formative-learning-mapping-v1",
@@ -308,6 +296,7 @@ function evidenceVersions(registry, manifest, definition, formativeManifest) {
   }
   return {
     contractVersion: sourceContract.contractVersion,
+    academicYear: sourceContract.academicYearPolicy.academicYear,
     sourceVersion: manifest.manifestVersion,
     sourceReleaseId: sourceContract.sourceReleaseId,
     mappingVersion: sourceContract.mappingVersion,
@@ -1384,7 +1373,7 @@ export async function recordLearningInteraction({
     mappingVersion: versions.mappingVersion,
     registryVersion: versions.registryVersion,
     userId: Number(student.ucUserId || 0),
-    academicYear: academicYearFor(effectiveOccurredAt),
+    academicYear: versions.academicYear,
     dimensionKey: definition.dimensionKey,
     eventType: definition.eventType,
     interactionKey,
@@ -1670,7 +1659,6 @@ export const learningEvidenceContract = Object.freeze({
   envelopeSchema: ENVELOPE_SCHEMA,
   sourceSystem: SOURCE_SYSTEM,
   sourceSiteKey: SOURCE_SITE_KEY,
-  academicYearFor,
   submissionRateLimit: SUBMISSION_RATE_LIMIT,
   submissionRateLimitReasons: SUBMISSION_RATE_LIMIT_REASONS,
   submissionReservationLeaseSeconds: SUBMISSION_RESERVATION_LEASE_SECONDS,

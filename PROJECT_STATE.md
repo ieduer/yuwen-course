@@ -2,7 +2,38 @@
 
 Last updated: 2026-08-24
 
-## 2026-08-24 evaluator-call budget release in progress
+## 2026-08-24 academic-year policy fix and APIS timeout proposal (not live)
+
+- YW evidence envelopes previously derived `academicYear` from `occurredAt`.
+  During August this produced `2025-2026`, while the already validated active
+  compatibility policy requires `2026-2027`; UC therefore quarantined all 28
+  canary envelopes as `academic_year_invalid`.
+- Commit `7f401d71a8d03cde03602784246c01573d4c312a` on remote branch
+  `codex/yw-academic-year-evaluator-json-20260824` removes the date fallback.
+  Every envelope now uses the academic year from the same fully validated
+  compatibility policy that supplies the contract version; missing or
+  mismatched policy fails closed. Node 24.18.0 and 22.21.1 focused evidence-
+  contract suites each pass 69/69. The commit is pushed but has no PR, merge or
+  deployment, so production remains unchanged.
+- Current APIS v6.7.0 source applies a 12-second timeout to each feedback
+  upstream attempt, with two retries and 250/500ms backoff. A one-constant
+  shared-hub proposal (`20260824-apis-feedback-timeout-30s-v1`) has been
+  prepared to raise only that per-attempt value to 30 seconds; it is not
+  implemented or authorized for release. The exact 36-consumer fan-out remains
+  blocked pending review.
+- The paired exact-prompt medium-thinking probe produced feedback 0/10 success
+  with ten 60-second client deadlines. Chat produced 5/10 normalized HTTP 200,
+  four deadlines and one 25.894-second fetch failure; its successful p50 was
+  51.751 seconds and all five successes exceeded YW's 45-second deadline. This
+  supports a feedback task-specific timeout/admission cause, but separate gates
+  (chat concurrency 10, feedback 6) prevent attributing the difference solely
+  to 12 seconds. It is proposal evidence, not a passed canary.
+- YW's `APIS_FEEDBACK_TIMEOUT_MS=45_000` is unchanged and must not be raised to
+  60/75 seconds to hide gateway retry amplification. Any future APIS canary
+  must measure both the expected reduction in duplicate attempts and the worse
+  90.75-second single-key all-timeout bound introduced by a 30-second attempt.
+
+## 2026-08-24 evaluator-call budget release failed acceptance and rolled back
 
 - The operator authorized one bounded YW-only release transaction under change
   id `20260824-yw-evaluator-budget-release-v1`. APIS admission work is backlog
@@ -20,9 +51,10 @@ Last updated: 2026-08-24
   `Retry-After`, and writes no interaction, evaluation or outbox record.
 - The complete learner-reservation plus evaluator-budget state machine has been
   reviewed against the five Phase 0 questions. No P0 was found; the review
-  remains `non-independent, pending independent confirmation`. Focused source
-  evidence currently passes 68/68 and the study-guide frontend 27/27. These are
-  pre-merge results and do not replace the required exact merged-SHA gates.
+  remains `non-independent, pending independent confirmation`. The final
+  pre-release source passed its exact merged-SHA gates; the subsequent focused
+  academic-year regression now passes 69/69 on both required Node versions.
+  Neither result authorizes another release.
 - A pre-migration D1 Time Travel bookmark was captured at
   `2026-08-24T12:21:39Z`, then migration 0006 was applied remotely. Readback
   proves the new table and both indexes exist with zero call rows, while the
@@ -30,13 +62,30 @@ Last updated: 2026-08-24
   counts are unchanged. The restore command is held in the redacted release
   receipt; it may be used only under a separately controlled D1 incident, never
   as part of an ordinary Pages rollback.
-- Production is still deployment
-  `2471f1e4-884a-4e80-9801-589ebbace476` / source `fa93ca8`; no new Pages
-  deployment or env-student acceptance has yet occurred. The release must use a
-  new one-use YW-Pages-only executor bound to the final merged SHA and a new
-  journal. Its first Pages rollback target is `2471f1e4`; `619024c7` remains the
-  second-level anchor. Only successful dual-mode acceptance may seal the new
-  candidate.
+- Final merged source `1f19094` passed the operator-approved Pages-only dual-Node
+  gates and was deployed as candidate
+  `c99a3ec8-2673-44bf-a942-631a820599fc`. The one authorized env-student run
+  restored the existing authenticated first-read state, completed vocabulary
+  12/12 and reached study-guide 15/19. The next item then returned four 503s on
+  the same preserved answer after the required 15-second cooldowns. No 429
+  `evaluator_retry_exhausted` occurred, but the required recovery did not occur,
+  so lesson 1569 and both lessons' multi-turn checks were not reached.
+- The candidate was not accepted. The one-use executor rolled Pages back to
+  `2471f1e4-884a-4e80-9801-589ebbace476` / source `fa93ca8`; custom and atomic
+  HTML again pin `assets/app.js?v=3fb3009cc5200181`. Journal terminal state is
+  `rolled_back`. Ordinary Pages rollback did not restore or rewrite D1 history.
+- SELECT-only readback shows the canary created 21 evaluator-call rows across
+  16 mutations, 12 A+ vocabulary events and 15 formative study-guide events;
+  all 27 scoring events have non-null normalized values in YW. UC nevertheless
+  admitted none: the post-rollback health reconcile marked all 28 YW outbox
+  rows centrally quarantined, and UC recorded all 28 as
+  `academic_year_invalid`, so no competency/normalized/drillable UC evaluation
+  was proven. The redacted receipt is
+  `/Users/ylsuen/CF/_meta/reports/yw_evaluator_budget_release_20260824/acceptance_and_rollback_receipt.json`.
+- This release is closed as failed and rolled back. Any retry needs a new exact
+  candidate, a fresh one-use release authority and explicit resolution of both
+  the persistent evaluator-unavailable path and the academic-year admission
+  mismatch; the additive D1 ledger schema and append-only canary evidence remain.
 
 ## 2026-08-24 reliability-first goal recalibration (documentation-only draft)
 
