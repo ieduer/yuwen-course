@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1223,
-  "totalBytes": 164467101,
-  "aggregateSha256": "23497b81d48bf46a2701dd5abfbd4b560ae56af69b0ca18df47b923dd32af6e7",
+  "totalBytes": 164466759,
+  "aggregateSha256": "cce3b26de9e29ebef10839f794da7d1cecc77447310784ac7edb8faaa4251501",
   "files": [
     {
       "path": "_headers",
@@ -18,7 +18,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "7da07d49df94e8efbe7243c82b889a36eca5b646f378f317c889f058f83222cd"
+      "sha256": "76fb870ebe45e48d8140db12cdcf9cf6d28156fd336eb9d9feccf49642acc154"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -6042,8 +6042,8 @@
     },
     {
       "path": "learning-evidence-source.js",
-      "bytes": 71268,
-      "sha256": "2d4de43406a8b0ebb763b63e1d257a73159c23bfef53c0e133e7b6837f45cdf7"
+      "bytes": 70926,
+      "sha256": "9c5a9f54dafc359c02e619e4b77df05458ac44bc6ab06133e5d8e6292ab117d6"
     },
     {
       "path": "lesson-blueprint-rules.js",
