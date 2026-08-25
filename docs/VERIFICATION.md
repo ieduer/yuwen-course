@@ -1,5 +1,19 @@
 # 核查標準 / Verification Standard
 
+## 2026-08-25 retry receipt
+
+Main SHA `26761feec523847b9f60dcda5b5328843b413c0b` passed both scoped Node
+Pages-only gates (229/229 each, zero fail/skip) and full Chromium mobile-atlas
+13/13. Candidate `f190cd2c-3023-40ac-8a88-c9d92c450627` was deployed through
+one-use change `20260825-yw-evaluator-academic-year-release-v2`, but the browser
+acceptance harness failed twice at first-read setup before any study-guide or
+model evaluation. It therefore supplied no R1/R2/R3 or UC drilldown proof and
+was not accepted. Journal sequence 6 is `rolled_back`; production is restored
+to `2471f1e4-884a-4e80-9801-589ebbace476` / `fa93ca8`, and D1 history remains
+unchanged. Any retry must use a new one-use authority and a separately reviewed
+first-read harness; the failed transaction must not receive a third selector
+rewrite.
+
 ## 2026-08-24 bounded-evaluator release gate
 
 This is the newest eight-point authority. It supersedes conflicting retained

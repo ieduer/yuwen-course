@@ -2,19 +2,42 @@
 
 Last updated: 2026-08-24
 
+## 2026-08-25 academic-year retry candidate failed harness acceptance and rolled back
+
+- PR #24 merged the evaluator ledger, policy-owned academic year and controlled
+  artifact manifest as exact main SHA
+  `26761feec523847b9f60dcda5b5328843b413c0b`. The exact SHA passed the scoped
+  Node 24.18.0 and 22.21.1 Pages-only gates (229/229, zero fail/skip on each)
+  and full Chromium mobile-atlas 13/13.
+- One-use change `20260825-yw-evaluator-academic-year-release-v2` deployed
+  candidate `f190cd2c-3023-40ac-8a88-c9d92c450627`; custom and atomic URLs
+  pinned `assets/app.js?v=85fa19b1ba2a427d` before acceptance.
+- The only authorized browser plan failed twice before any study-guide or model
+  evaluation: first because it incorrectly assumed pre-existing first-read
+  state, then because its keyboard first-read selector was absent after the
+  targeted correction. No live `evaluator_retry_exhausted` 429 or upstream
+  response was observed, but R1/R2/R3 acceptance was not established. The
+  two-attempt browser/selector boundary forbids a third harness rewrite in this
+  transaction.
+- The candidate was not accepted. The executor restored
+  `2471f1e4-884a-4e80-9801-589ebbace476` / `fa93ca8`; custom and atomic HTML
+  again pin `assets/app.js?v=3fb3009cc5200181`, journal sequence 6 is
+  `rolled_back`, and D1 history was not restored. Main contains the fixes, but
+  production remains `reading-schema-v5` and does not serve them.
+
 ## 2026-08-24 academic-year policy fix and APIS timeout proposal (not live)
 
 - YW evidence envelopes previously derived `academicYear` from `occurredAt`.
   During August this produced `2025-2026`, while the already validated active
   compatibility policy requires `2026-2027`; UC therefore quarantined all 28
   canary envelopes as `academic_year_invalid`.
-- Commit `7f401d71a8d03cde03602784246c01573d4c312a` on remote branch
-  `codex/yw-academic-year-evaluator-json-20260824` removes the date fallback.
+- Commit `7f401d71a8d03cde03602784246c01573d4c312a`, now merged through PR #24,
+  removes the date fallback.
   Every envelope now uses the academic year from the same fully validated
   compatibility policy that supplies the contract version; missing or
   mismatched policy fails closed. Node 24.18.0 and 22.21.1 focused evidence-
-  contract suites each pass 69/69. The commit is pushed but has no PR, merge or
-  deployment, so production remains unchanged.
+  contract suites each pass 69/69. The merged candidate was deployed but not
+  accepted and was rolled back, so production remains unchanged.
 - Current APIS v6.7.0 source applies a 12-second timeout to each feedback
   upstream attempt, with two retries and 250/500ms backoff. A one-constant
   shared-hub proposal (`20260824-apis-feedback-timeout-30s-v1`) has been

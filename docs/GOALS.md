@@ -2,9 +2,9 @@
 
 > 基線時間：2026-08-24。本文以來源碼、機器契約及 YW／UC D1 的 SELECT-only
 > 回讀為準；不把部署、題目覆蓋、點擊、outbox 狀態或測試帳號冒充學習成效。
-> 2026-08-24 的 YW evaluator candidate 已在驗收失敗後回滾。當前授權只包含：修正
-> academic-year envelope 並提交／推送，以及對 APIS 做唯讀配對取樣與一項待批設計；
-> 不包含 APIS 實作、YW PR／合併／部署、accept、D1／UC／Queue 寫入或 env E2E。
+> 2026-08-25 重試候選 `f190cd2c…` 在瀏覽器驗收腳本連續兩次未越過初讀設定後
+> 回滾；未觸發學案或模型評閱，不能據此宣稱 R1／R2／R3 通過或產品失敗。線上已恢復
+> `2471f1e4…`，main 的 evaluator／academic-year 修復尚未上線。
 
 ## 0. 最終目標
 

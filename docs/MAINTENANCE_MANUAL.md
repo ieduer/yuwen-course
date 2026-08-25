@@ -2,6 +2,24 @@
 
 Last reviewed: 2026-08-24 (America/Los_Angeles)
 
+## 2026-08-25 release retry terminal state
+
+PR #24 merged the evaluator ledger and academic-year authority as main SHA
+`26761feec523847b9f60dcda5b5328843b413c0b`. Both scoped Node gates passed
+229/229 with zero fail/skip and mobile-atlas passed 13/13. One-use candidate
+`f190cd2c-3023-40ac-8a88-c9d92c450627` was deployed but never accepted.
+
+The authorized browser harness failed twice before any model evaluation: its
+first run assumed a pre-existing first-read submission, and its one targeted
+correction could not locate the keyboard first-read control. This is an
+acceptance-harness failure, not evidence that evaluator reliability or UC
+projection passed or failed. Do not infer an upstream response: none was
+reached. The executor restored `2471f1e4-884a-4e80-9801-589ebbace476`, both
+public and atomic HTML pins are again `assets/app.js?v=3fb3009cc5200181`, and
+the new journal terminates at `rolled_back`. D1 history and migration 0006
+remain intact. A future release requires a new one-use authority and a reviewed
+first-read harness; do not make a third selector rewrite under this change.
+
 ## 2026-08-24 evidence academic-year authority and feedback timeout boundary
 
 Every evidence envelope must take `academicYear` from the already validated
@@ -10,7 +28,8 @@ derive it from `occurredAt`, a calendar boundary or browser input. The same
 validation requires the active policy version and exact academic year; absence
 or mismatch fails closed before evidence persistence. Commit `7f401d7` applies
 this source rule and has focused Node 24.18.0/22.21.1 evidence-contract results
-of 69/69 each, but it is not merged or live.
+of 69/69 each. It is merged in main but is not live after the failed candidate
+was rolled back.
 
 YW's feedback deadline remains 45 seconds. Current APIS v6.7.0 uses 12 seconds
 per feedback upstream attempt, two retries, and 250/500ms backoff. The proposed
