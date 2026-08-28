@@ -5,8 +5,8 @@ Last reviewed: 2026-08-28 (America/Los_Angeles)
 ## 2026-08-28 APIS caller-auth release authority
 
 The accepted live Pages deployment is
-`52447a91-dd19-4980-a407-f19a752de19a`, source
-`45c268324052f691aa0d483a00a308706e1b0509`. YW now calls `apis`
+`12a0f7db-d4dc-49bd-b12b-84dc64befd3b`, source
+`89819f6650955b1d2d0b3a139384402788c799c8`. YW now calls `apis`
 only through the production `APIS` service binding and requires the dedicated
 server secret `APIS_CALLER_TOKEN`; the caller id is `yw.bdfz.net`. No Origin or
 public gateway fallback remains. Missing binding or identity fails before an
@@ -19,7 +19,8 @@ formal `.release/site` build/check, and the 1,223-file artifact manifest
 `03b17d3f15ba206d513ec3d8ab53d814f5809ba9dff60287e24c4d06bd4c227b`.
 Custom and immutable-host `/api/learning/health` both returned typed 200.
 Immediate Pages rollback is deployment
-`f190cd2c-3023-40ac-8a88-c9d92c450627`; ordinary rollback preserves D1
+`52447a91-dd19-4980-a407-f19a752de19a`; the prechange anchor remains
+`f190cd2c-3023-40ac-8a88-c9d92c450627`. Ordinary rollback preserves D1
 history and the evaluator ledger. The enforce-era verified product-path 200 is
 recorded by the shared APIS receipt after registry activation.
 
