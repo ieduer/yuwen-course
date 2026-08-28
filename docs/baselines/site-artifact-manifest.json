@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1223,
-  "totalBytes": 164466759,
-  "aggregateSha256": "cce3b26de9e29ebef10839f794da7d1cecc77447310784ac7edb8faaa4251501",
+  "totalBytes": 164466946,
+  "aggregateSha256": "03b17d3f15ba206d513ec3d8ab53d814f5809ba9dff60287e24c4d06bd4c227b",
   "files": [
     {
       "path": "_headers",
@@ -12,13 +12,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 124625,
-      "sha256": "5111f0a00dc9c360abdfb3f52c5e0230cc813ecbe2b851af10c06c452813e1c9"
+      "bytes": 124812,
+      "sha256": "8f99dccb10609dae72f9efdfb34abefb950b37356f3f82b95e3419e95dfa15ef"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "76fb870ebe45e48d8140db12cdcf9cf6d28156fd336eb9d9feccf49642acc154"
+      "sha256": "4fd12318ec5420ed60776e48783864e13fce650bac537c8aee09c8e3a682f757"
     },
     {
       "path": "app-content/latest-stable.json",
