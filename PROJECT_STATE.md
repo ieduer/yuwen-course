@@ -4,6 +4,28 @@ Last updated: 2026-08-28
 
 ## 2026-08-28 APIS caller-auth release
 
+- The current source adds authenticated POST
+  `/api/learning/ai-readiness` as the bounded no-business-write product probe
+  for caller-auth acceptance. It requires an exact Web origin and a valid My
+  session, resolves identity through the existing User Center binding, calls
+  APIS once with a fixed readiness prompt, returns no model text, and performs
+  no D1, Queue, learning-evidence, content, discussion, or App write. Anonymous
+  and wrong-origin requests fail before APIS.
+- The Worker-only release gate keeps the stable native pointer byte-identical
+  at SHA-256 `a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
+  Node 24.18.0 passed evidence 70/70, native-content 22/22,
+  release-site 5/5, Reading 74/74, mobile-atlas 13/13, the remaining
+  precontent suites, and the formal 1,223-file artifact manifest
+  `6f4c2fc1610a00f2b0360a11e71542029f0c1d8d47d129318799caaa3d3e6f0c`.
+  The deliberate App deploy-sync gate remains red because this Web carrier
+  has no new App audit receipt; do not relabel it green.
+- The separately required study-guide source directory has been empty since
+  2026-08-24. Exact local, Drive archive-path, full Drive filename, Trash,
+  Spotlight and bounded local-path searches found no original PDF/extraction
+  bytes. `verify:study-guide-sources` therefore remains unavailable and must
+  not be reported as passing. This release changes no study-guide, catalog,
+  content, native object or stable pointer byte; source recovery is a distinct
+  resource-preservation incident.
 - Current Pages deployment is `12a0f7db-d4dc-49bd-b12b-84dc64befd3b`, exact
   source `89819f6650955b1d2d0b3a139384402788c799c8`.
 - Production evaluator calls are binding-only and require the dedicated
@@ -14,8 +36,11 @@ Last updated: 2026-08-28
 - Immediate rollback is Pages deployment
   `52447a91-dd19-4980-a407-f19a752de19a`; prechange anchor
   `f190cd2c-3023-40ac-8a88-c9d92c450627`; preserve D1 history.
-- Remaining APIS gate: after registry activation, run one real no-write product
-  path and record its verified caller-auth 200 without fabricating student data.
+- Remaining APIS gate: release this bounded route through the normal Pages
+  gate, invoke it once from the signed-in YW product origin, and record the
+  APIS request ID and verified caller identity. A provider timeout or typed 503
+  proves the identity gate pre-enforce; the post-enforce acceptance still
+  requires 200.
 
 ## 2026-08-25 accepted interaction and evaluation closure
 

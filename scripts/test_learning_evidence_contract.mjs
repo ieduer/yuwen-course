@@ -1808,6 +1808,80 @@ test("retired public evaluators spend no APIS calls and learning-check keeps My 
   }
 });
 
+test("authenticated AI readiness proves the YW caller without writing learning data", async () => {
+  const bindingRequests = [];
+  let identityCalls = 0;
+  const env = {
+    APIS_CALLER_TOKEN: "fixture-token",
+    APIS: {
+      async fetch(request) {
+        bindingRequests.push(request);
+        return Response.json({ answer: "READY" });
+      },
+    },
+    USER_CENTER_EVIDENCE: {
+      async resolveSession(cookieHeader) {
+        identityCalls += 1;
+        assert.equal(cookieHeader, "bdfz_uc_session=ai-readiness-fixture");
+        return {
+          authenticated: true,
+          sourceSiteKey: "yw",
+          userId: 7,
+          slug: "ai-readiness-user",
+          displayName: "Readiness User",
+        };
+      },
+    },
+  };
+  const request = () => new Request("https://yw.bdfz.net/api/learning/ai-readiness", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      origin: "https://yw.bdfz.net",
+      cookie: "bdfz_uc_session=ai-readiness-fixture",
+    },
+    body: "{}",
+  });
+
+  const response = await worker.fetch(request(), env);
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), { ok: true, provider: "apis", ready: true });
+  assert.equal(identityCalls, 1);
+  assert.equal(bindingRequests.length, 1);
+  assert.equal(bindingRequests[0].url, "https://apis.internal/");
+  assert.equal(bindingRequests[0].headers.get("x-project-name"), "yw.bdfz.net");
+  assert.equal(bindingRequests[0].headers.get("x-internal-token"), "fixture-token");
+  assert.deepEqual(await bindingRequests[0].json(), {
+    prompt: "這是語文課程 AI 可用性檢查。只回覆 READY，不要提供課程內容。",
+    taskType: "chat",
+    thinkingLevel: "low",
+  });
+
+  const missingOrigin = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/ai-readiness", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      cookie: "bdfz_uc_session=ai-readiness-fixture",
+    },
+    body: "{}",
+  }), env);
+  assert.equal(missingOrigin.status, 403);
+  assert.equal((await missingOrigin.json()).code, "web_origin_required");
+  assert.equal(bindingRequests.length, 1);
+
+  const anonymous = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/ai-readiness", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      origin: "https://yw.bdfz.net",
+    },
+    body: "{}",
+  }), env);
+  assert.equal(anonymous.status, 401);
+  assert.equal((await anonymous.json()).code, "authenticated_evaluation_required");
+  assert.equal(bindingRequests.length, 1);
+});
+
 test("lesson 1474 formal interactions carry server-owned history across real route turns", async () => {
   const db = new DatabaseSync(":memory:");
   const originalFetch = globalThis.fetch;

@@ -95,6 +95,11 @@ export default {
       if (ctx?.waitUntil) ctx.waitUntil(drainEvidenceOutbox(env, 50));
       return handleLearningEvidenceHealth(env);
     }
+    if (url.pathname === "/api/learning/ai-readiness" && request.method === "POST") {
+      const rejected = authenticatedMutationRequestRejection(request);
+      if (rejected) return rejected;
+      return handleAiReadiness(request, env);
+    }
     if (url.pathname === "/api/wy-articles" && request.method === "GET") {
       return handleWyArticles(request, env);
     }
@@ -1480,6 +1485,33 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
     return answer;
   } finally {
     clearTimeout(timeout);
+  }
+}
+
+async function handleAiReadiness(request, env) {
+  let user;
+  try {
+    user = await resolveWebReadingUser(userCenterSessionCookieHeader(request), env);
+  } catch (error) {
+    if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
+    throw error;
+  }
+  if (!user) return authenticatedEvaluationRequiredResponse();
+  try {
+    await callApisPrompt(
+      env,
+      "這是語文課程 AI 可用性檢查。只回覆 READY，不要提供課程內容。",
+      "chat",
+      "low",
+    );
+    return json({ ok: true, provider: "apis", ready: true });
+  } catch {
+    return json({
+      ok: false,
+      error: "AI 服務暫時不可用",
+      code: "ai_readiness_unavailable",
+      retryable: true,
+    }, { status: 503, headers: { "retry-after": "15" } });
   }
 }
 

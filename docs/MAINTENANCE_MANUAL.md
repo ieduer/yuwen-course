@@ -4,6 +4,32 @@ Last reviewed: 2026-08-28 (America/Los_Angeles)
 
 ## 2026-08-28 APIS caller-auth release authority
 
+The source includes authenticated POST `/api/learning/ai-readiness` as the
+caller-auth acceptance path. It is deliberately not a public model proxy: the
+request must be same-origin JSON and carry a valid My session; the Worker asks
+APIS one fixed readiness question and discards the model text. It does not
+reserve an evaluator slot or write D1, Queue, learning evidence, discussions,
+content, or App state. Anonymous and wrong-origin requests fail before the
+binding call. Use this path only for bounded release acceptance and retain its
+per-caller quota protection after APIS enforcement.
+
+This is a Worker-only Web release. Its formal artifact contains 1,223 files
+with aggregate SHA-256
+`6f4c2fc1610a00f2b0360a11e71542029f0c1d8d47d129318799caaa3d3e6f0c`;
+the stable native pointer remains byte-identical at
+`a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
+The deliberate App deploy-sync gate remains red because no new App audit
+receipt exists, exactly as required by the current Web-only release rule.
+
+The external study-guide source directory is currently empty and its mtime is
+2026-08-24, before this transaction. Searches of the canonical local path,
+the accepted Drive archive prefix, the full connected Drive by exact filename,
+Trash, Spotlight, `/private/tmp`, Downloads, Desktop and Documents found no
+original PDF/extraction bytes. Therefore `verify:study-guide-sources` is not a
+pass and must not be represented as one. This Worker release changes no
+study-guide, catalog, content, native object or stable-pointer byte; restoring
+those original bytes is a separate resource-preservation incident.
+
 The accepted live Pages deployment is
 `12a0f7db-d4dc-49bd-b12b-84dc64befd3b`, source
 `89819f6650955b1d2d0b3a139384402788c799c8`. YW now calls `apis`
