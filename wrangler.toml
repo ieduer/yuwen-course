@@ -19,6 +19,10 @@ binding = "USER_CENTER_EVIDENCE"
 service = "bdfz-user-center"
 entrypoint = "YuwenEvidenceIdentity"
 
+[[env.production.services]]
+binding = "APIS"
+service = "apis"
+
 [[env.production.queues.producers]]
 binding = "LEARNING_EVIDENCE_QUEUE"
 queue = "bdfz-learning-evidence-yw-v2"
