@@ -224,6 +224,25 @@ function mockStatement(sql, writes, state) {
   };
 }
 
+function testApisBindings() {
+  return {
+    APIS_CALLER_TOKEN: "fixture-token",
+    APIS: {
+      async fetch(request) {
+        const body = ["GET", "HEAD"].includes(request.method)
+          ? undefined
+          : await request.clone().text();
+        return globalThis.fetch(request.url, {
+          method: request.method,
+          headers: request.headers,
+          body,
+          signal: request.signal,
+        });
+      },
+    },
+  };
+}
+
 function sourceEnvironment({
   recentSubmissionCount = 0,
   globalSubmissionCount = 0,
@@ -260,6 +279,7 @@ function sourceEnvironment({
     queued,
     state,
     env: {
+      ...testApisBindings(),
       ASSETS: {
         async fetch(request) {
           const pathname = new URL(request.url).pathname;
@@ -1462,6 +1482,9 @@ test("the Worker checks the per-user resource bound before AI work and vocabular
   assert.match(apisPrompt, /taskType === "feedback" \? APIS_FEEDBACK_TIMEOUT_MS : APIS_DEFAULT_TIMEOUT_MS/);
   assert.match(apisPrompt, /signal: controller\.signal/);
   assert.match(apisPrompt, /clearTimeout\(timeout\)/);
+  assert.match(apisPrompt, /env\.APIS\.fetch\(new Request\("https:\/\/apis\.internal\//);
+  assert.match(apisPrompt, /"x-internal-token": callerToken/);
+  assert.doesNotMatch(apisPrompt, /https:\/\/apis\.bdfz\.net|APIS_ENDPOINT|"origin"/);
 
   const vocabHandler = workerSource.slice(
     workerSource.indexOf("async function handleReadingVocabAttempt"),
@@ -1547,7 +1570,7 @@ test("APIS timeout remains active until the response body is consumed", async ()
     timeoutCallback = null;
     timeoutActive = false;
   };
-  globalThis.fetch = async (_url, init) => ({
+  const apis = async (request) => ({
     ok: true,
     status: 200,
     async json() {
@@ -1556,8 +1579,8 @@ test("APIS timeout remains active until the response body is consumed", async ()
           bodyAborts += 1;
           reject(new DOMException("aborted", "AbortError"));
         };
-        if (init.signal.aborted) rejectAbort();
-        else init.signal.addEventListener("abort", rejectAbort, { once: true });
+        if (request.signal.aborted) rejectAbort();
+        else request.signal.addEventListener("abort", rejectAbort, { once: true });
         if (timeoutActive && timeoutCallback) {
           timeoutActive = false;
           const callback = timeoutCallback;
@@ -1571,7 +1594,7 @@ test("APIS timeout remains active until the response body is consumed", async ()
   });
   try {
     await assert.rejects(
-      callApisPrompt({ APIS_ENDPOINT: "https://apis.test.invalid" }, "test"),
+      callApisPrompt({ APIS_CALLER_TOKEN: "fixture-token", APIS: { fetch: apis } }, "test"),
       (error) => error?.name === "AbortError",
     );
   } finally {
@@ -1592,10 +1615,13 @@ test("feedback evaluation receives 45 seconds while non-feedback APIS work stays
     return delays.length;
   };
   globalThis.clearTimeout = () => {};
-  globalThis.fetch = async () => Response.json({ answer: "ok" });
+  const env = {
+    APIS_CALLER_TOKEN: "fixture-token",
+    APIS: { fetch: async () => Response.json({ answer: "ok" }) },
+  };
   try {
-    assert.equal(await callApisPrompt({}, "chat"), "ok");
-    assert.equal(await callApisPrompt({}, "feedback", "feedback", "medium"), "ok");
+    assert.equal(await callApisPrompt(env, "chat"), "ok");
+    assert.equal(await callApisPrompt(env, "feedback", "feedback", "medium"), "ok");
   } finally {
     globalThis.fetch = originalFetch;
     globalThis.setTimeout = originalSetTimeout;
@@ -1818,6 +1844,7 @@ test("lesson 1474 formal interactions carry server-owned history across real rou
       });
     };
     const env = {
+      ...testApisBindings(),
       READING_TEST_SLUG: "lease-test-student",
       READING_DB: sqliteD1(db),
       LEARNING_EVIDENCE_QUEUE: { async send() {} },
@@ -1921,6 +1948,7 @@ test("an evaluator outage consumes no learner slot and retries after only the sh
     const lessonData = JSON.parse(readFileSync(resolve(ROOT, "site/data/lessons/lesson-1497.json"), "utf8"));
     const queued = [];
     const env = {
+      ...testApisBindings(),
       READING_TEST_SLUG: "route-evaluator-retry",
       READING_DB: sqliteD1(db),
       LEARNING_EVIDENCE_QUEUE: {
@@ -2219,6 +2247,7 @@ test("a ledger recording failure keeps the evaluator lease live and blocks anoth
     const lessonData = JSON.parse(readFileSync(resolve(ROOT, "site/data/lessons/lesson-1497.json"), "utf8"));
     const d1 = sqliteD1(db);
     const env = {
+      ...testApisBindings(),
       READING_TEST_SLUG: "route-recording-failure",
       READING_DB: {
         prepare: d1.prepare.bind(d1),

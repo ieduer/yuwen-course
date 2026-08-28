@@ -1450,22 +1450,26 @@ async function handleLearningCheck(request, env) {
 }
 
 export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLevel = "low") {
+  const callerToken = cleanText(env.APIS_CALLER_TOKEN, 256);
+  if (!env.APIS?.fetch || !callerToken) {
+    throw new Error("APIS service binding or caller credential unavailable");
+  }
   const controller = new AbortController();
   const timeoutMs = taskType === "feedback" ? APIS_FEEDBACK_TIMEOUT_MS : APIS_DEFAULT_TIMEOUT_MS;
   const timeout = setTimeout(() => controller.abort("APIS evaluation timeout"), timeoutMs);
   try {
-    const response = await fetch(env.APIS_ENDPOINT || "https://apis.bdfz.net", {
+    const response = await env.APIS.fetch(new Request("https://apis.internal/", {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "origin": "https://yw.bdfz.net",
         "x-project-name": "yw.bdfz.net",
         "x-task-type": taskType,
         "x-thinking-level": thinkingLevel,
+        "x-internal-token": callerToken,
       },
       body: JSON.stringify({ prompt, taskType, thinkingLevel }),
       signal: controller.signal,
-    });
+    }));
     const data = await response.json().catch((error) => {
       if (error?.name === "AbortError") throw error;
       return {};
