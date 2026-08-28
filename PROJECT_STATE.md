@@ -1,6 +1,20 @@
 # Project State
 
-Last updated: 2026-08-25
+Last updated: 2026-08-28
+
+## 2026-08-28 APIS caller-auth release
+
+- Current Pages deployment is `52447a91-dd19-4980-a407-f19a752de19a`, exact
+  source `45c268324052f691aa0d483a00a308706e1b0509`.
+- Production evaluator calls are binding-only and require the dedicated
+  `APIS_CALLER_TOKEN` for caller `yw.bdfz.net`; there is no public fallback.
+- Focused evidence tests passed 69/69, mobile-atlas passed 13/13, and the formal
+  1,223-file release artifact/manifest passed. Live custom and immutable health
+  returned typed 200. No D1, Queue, User Center, content, or App state changed.
+- Immediate rollback is Pages deployment
+  `f190cd2c-3023-40ac-8a88-c9d92c450627`; preserve D1 history.
+- Remaining APIS gate: after registry activation, run one real no-write product
+  path and record its verified caller-auth 200 without fabricating student data.
 
 ## 2026-08-25 accepted interaction and evaluation closure
 
