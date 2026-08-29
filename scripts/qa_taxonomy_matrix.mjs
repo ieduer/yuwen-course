@@ -6,7 +6,6 @@ const executablePath = "/Applications/Brave Browser.app/Contents/MacOS/Brave Bro
 const manifest = JSON.parse(fs.readFileSync(new URL("../site/data/manifest.json", import.meta.url), "utf8"));
 const taxonomy = JSON.parse(fs.readFileSync(new URL("../site/data/literary-taxonomy.json", import.meta.url), "utf8"));
 const atlasSource = fs.readFileSync(new URL("../site/assets/atlas.js", import.meta.url), "utf8");
-const insightsSource = fs.readFileSync(new URL("../site/assets/insights.js", import.meta.url), "utf8");
 const failures = [];
 const checks = [];
 const layoutOnly = process.env.YW_LAYOUT_ONLY === "1";
@@ -377,7 +376,7 @@ check("叩問作者移至見效最後", chenqing.checkLabels.at(-1) === "叩問�
 check("學習效果確認改名見效", await page.locator("#check-title", { hasText: "見效" }).count() === 1 && await page.getByText("學習效果確認", { exact: true }).count() === 0);
 check("正文三段標題精簡", (await page.locator("#orientation-title").innerText()) === "起始" && (await page.locator("#textbook-title").innerText()) === "細讀" && (await page.locator("#materials-title").innerText()) === "延伸");
 check("閱讀起點鏈接新頁打開", await page.locator("#orientation-content a:not([target='_blank'])").count() === 0);
-check("文體書目星圖己身登入均在新頁", await page.locator("#topbar-actions a[href]:not([target='_blank'])").count() === 0 && await page.locator("#topbar-actions a[data-same-tab]").count() === 0);
+check("文體書目星圖登入均在新頁", await page.locator("#topbar-actions a[href]:not([target='_blank'])").count() === 0 && await page.locator("#topbar-actions a[data-same-tab]").count() === 0);
 check(
   "其餘鏈接均新頁打開",
   await page.locator("a[href]:not([target='_blank']):not([data-same-tab]):not([href^='#'])").count() === 0,
@@ -528,7 +527,6 @@ check(
   JSON.stringify({ ...chatAfterActivation, chatDocumentRequests }),
 );
 check("閱讀起點不再重複文體與學習路線", await page.locator(".reading-contract").count() === 0);
-check("右上角個人圖入口命名為己身", await page.locator('.topbar-actions a[href="insights.html"]', { hasText: "己身" }).count() === 1);
 
 await page.locator("#text-flow .primary-text").evaluate((node) => {
   const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
@@ -760,7 +758,7 @@ for (const atlas of ["genres.html#biao", "books.html?q=文选"]) {
   check(`${atlas} 無桌面橫向溢出`, !state.overflow);
   check(`${atlas} 可由 URL 定位節點`, state.detailVisible, state.detailTitle);
   check(`${atlas} 啟用 3D 星圖畫布`, state.canvasReady && state.threeDimensionalHint, JSON.stringify(state));
-  check(`${atlas} 三圖互鏈留在當前頁`, await page.locator(".atlas-topbar nav a[data-same-tab]:not([target])").count() === 3);
+  check(`${atlas} 雙圖互鏈留在當前頁`, await page.locator(".atlas-topbar nav a[data-same-tab]:not([target])").count() === 2);
   check(`${atlas} 其餘鏈接新頁打開`, await page.locator("a[href]:not([target='_blank']):not([data-same-tab])").count() === 0);
   check(`${atlas} 詳情呈現時代與關係`, (await page.locator("#detail-kicker").innerText()).length > 2 && await page.locator("#detail-description p").count() === 1);
   await page.screenshot({ path: `output/playwright/yw-audit/${atlas.startsWith("genres") ? "genres-galaxy" : "books-galaxy"}.png`, fullPage: true });
@@ -839,21 +837,6 @@ const identityState = await identityPage.evaluate(() => ({
 }));
 check("User Center 登入後回灌進度", identityState.stored.context === true && identityState.stored.read === true, JSON.stringify(identityState));
 check("課文不重複顯示用戶中心狀態", identityState.progressUi === 0, String(identityState.progressUi));
-await identityPage.goto(`${base}/insights.html`, { waitUntil: "domcontentloaded" });
-await identityPage.waitForFunction(() => document.querySelector("#sync-status")?.textContent.includes("已連接 User Center"));
-const insightState = await identityPage.evaluate(() => ({
-  values: document.querySelectorAll(".value-row").length,
-  words: document.querySelectorAll("#word-chart button").length,
-  mastery: document.querySelectorAll(".mastery-item").length,
-  overflow: document.documentElement.scrollWidth > innerWidth + 1,
-  canvasReady: document.querySelector("#insight-canvas")?.width > 300,
-}));
-check("我的閱讀圖呈現篇目評價與新詞", insightState.values > 0 && insightState.words > 0 && insightState.mastery > 0, JSON.stringify(insightState));
-check("我的閱讀圖移動端無橫向溢出", !insightState.overflow);
-check("我的閱讀圖啟用個人星圖畫布", insightState.canvasReady);
-check("己身三圖互鏈留在當前頁", await identityPage.locator(".insight-nav nav a[data-same-tab]:not([target])").count() === 3);
-check("己身其餘鏈接新頁打開", await identityPage.locator("a[href]:not([target='_blank']):not([data-same-tab])").count() === 0);
-await identityPage.screenshot({ path: "output/playwright/yw-audit/insights-mobile.png", fullPage: true });
 await identityContext.close();
 
 const api = await page.request.post(`${base}/api/interaction-check`, {

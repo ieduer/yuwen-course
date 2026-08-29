@@ -2,6 +2,31 @@
 
 Last updated: 2026-08-28
 
+## 2026-08-28 personal-page decision candidate
+
+- `/insights` is retired rather than repaired. The candidate deletes
+  `site/insights.html`, `site/assets/insights.js` and
+  `site/assets/insights.css`, removes every current navigation/QA reference,
+  and adds permanent `/insights` and `/insights.html` redirects to `/star`.
+  `scripts/test_release_site.mjs` proves `_redirects` is copied into the formal
+  release artifact. The regenerated artifact contains 1,221 files with SHA-256
+  `a6e79f71a9a6af0c8b05b68a9510ebec21b56b98ac05cf0c5f0b262d1c7a1853`
+  and contains none of the three retired files.
+- `docs/READING_CONSTELLATION_V2.md` is design-only. It proposes exact
+  source-row provenance, stable layout anchors and a fourth `record` node
+  class. It does not authorize or implement a D1 migration, backfill,
+  `/star` code change, local-context submission fix, retry/status change or
+  health-contract change. Those remain blocked pending station-owner review.
+- This is a `no-new-capability` change: it retains Pages, Assets, the existing
+  Pages redirect mechanism and all current bindings. No D1, Queue, User
+  Center, APIS, App/native pointer, registration or student record changes are
+  part of the candidate.
+- Production remains Pages deployment
+  `12a0f7db-d4dc-49bd-b12b-84dc64befd3b`, source
+  `89819f6650955b1d2d0b3a139384402788c799c8`, until the candidate is merged,
+  released through the external executor and browser-verified. Immediate
+  rollback remains `52447a91-dd19-4980-a407-f19a752de19a`.
+
 ## 2026-08-28 APIS caller-auth release
 
 - The current source adds authenticated POST

@@ -393,7 +393,6 @@ async function verifyTopLinks(page) {
     ["文體", '#topbar-actions a[href="genres.html"]'],
     ["書目", '#topbar-actions a[href="books.html"]'],
     ["星圖", '#topbar-actions a[href="star.html"]'],
-    ["己身", '#topbar-actions a[href="insights.html"]'],
     ["登入", "#auth-login"],
   ];
   for (const [label, selector] of selectors) {
