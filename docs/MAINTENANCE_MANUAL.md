@@ -38,6 +38,28 @@ and signed-in real browser sessions, confirm `/star` renders, and read back the
 exact Pages deployment. Static rollback restores the recorded predecessor;
 D1 is preserved and never dropped or cleared.
 
+Accepted source is GitHub main
+`9cd9daf10ea8ab4427c2962b46ab620f08c5a7fe`. The separately reviewed,
+one-use executor released the exact 1,221-file `formal-stable` artifact as
+Pages deployment `bb605868-d563-49d8-81db-21113bb8442b`. The immutable host,
+custom domain and Pages deployment list agree on source `9cd9daf`; the stable
+App pointer remains byte-identical at SHA-256
+`a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7`.
+Both redirect paths returned 301 + `Location: /star` on the custom and
+immutable hosts. Fresh anonymous Playwright and an existing authenticated
+browser session both reached a visible `/star`; the authenticated session
+showed the normal empty constellation, not the login or offline state. The
+deleted JS/CSS bytes are absent from the artifact; unknown retired asset paths
+currently fall through to an HTML shell rather than serving the old assets.
+
+Post-release custom and immutable learning-health receipts remained healthy.
+The remote D1 aggregate was `submissions=0`, `star_nodes=0`,
+`submission_words=0`, with `rows_written=0` and `changed_db=false`. No
+student-data rollback applies. Immediate static rollback is prior production
+deployment `12a0f7db-d4dc-49bd-b12b-84dc64befd3b`; secondary anchor
+`52447a91-dd19-4980-a407-f19a752de19a` remains available. Preserve all D1
+history during either rollback.
+
 ## 2026-08-28 APIS caller-auth release authority
 
 The source includes authenticated POST `/api/learning/ai-readiness` as the
