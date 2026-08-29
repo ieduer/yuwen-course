@@ -160,6 +160,9 @@ function createFixture() {
   const appContentRoot = path.join(sourceRoot, "app-content");
   mkdirSync(appContentRoot, { recursive: true });
   writeBytes(path.join(sourceRoot, "index.html"), Buffer.from("<!doctype html><title>YW preview</title>\n"));
+  writeBytes(path.join(sourceRoot, "_redirects"), Buffer.from(
+    "/insights      /star   301\n/insights.html /star   301\n",
+  ));
   writeBytes(path.join(sourceRoot, "data", "fixture.json"), serialize({
     title: "课文与注释保持不变",
     href: "https://example.com/lesson",
@@ -310,6 +313,10 @@ test("formal staging contains only the exact stable pointer and receipted releas
     assert.equal(
       readFileSync(path.join(releaseRoot, "app-content", "latest-stable.json"), "utf8"),
       readFileSync(path.join(fixture.appContentRoot, "latest-stable.json"), "utf8"),
+    );
+    assert.equal(
+      readFileSync(path.join(releaseRoot, "_redirects"), "utf8"),
+      "/insights      /star   301\n/insights.html /star   301\n",
     );
     verifyReleaseStaging({ releaseRoot, releaseKind: "formal-stable" });
     const markerFile = path.join(releaseRoot, ".bdfz-release-artifact.json");

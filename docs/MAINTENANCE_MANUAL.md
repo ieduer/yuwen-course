@@ -2,6 +2,42 @@
 
 Last reviewed: 2026-08-28 (America/Los_Angeles)
 
+## 2026-08-28 `/insights` retirement and `/star` v2 design boundary
+
+The personal page at `/insights` is retired because both of its data sources
+are obsolete and its signed-in status text can claim cross-device records that
+it did not load. The release source deletes the page and both dedicated assets,
+removes its entry from the lesson and atlas navigation, and installs these
+formal Pages redirects:
+
+```text
+/insights      /star   301
+/insights.html /star   301
+```
+
+`scripts/test_release_site.mjs` is the executable copy contract for
+`_redirects`. The generated formal artifact has 1,221 files and aggregate
+SHA-256
+`a6e79f71a9a6af0c8b05b68a9510ebec21b56b98ac05cf0c5f0b262d1c7a1853`;
+its manifest includes `_redirects` and excludes `insights.html`,
+`assets/insights.js` and `assets/insights.css`.
+
+`docs/READING_CONSTELLATION_V2.md` is the sole review draft for changing
+`/star` to durable-record origins. It maps every proposed lesson, word and
+record node to a source D1 primary key, freezes existing layout inputs before
+new origins, defines traceable brightness and retains the no-fabrication/A+
+boundary. Do not implement its schema, backfill, node classes, three local
+submission/status/health fixes or production canary until Suen explicitly
+approves the design. Design approval would still not authorize a production
+historical backfill.
+
+This release adds no Cloudflare capability, migration, binding, Queue, native
+pointer or student-data mutation. Release only the reviewed formal artifact
+through the external UC+YW executor. Verify both redirect paths in signed-out
+and signed-in real browser sessions, confirm `/star` renders, and read back the
+exact Pages deployment. Static rollback restores the recorded predecessor;
+D1 is preserved and never dropped or cleared.
+
 ## 2026-08-28 APIS caller-auth release authority
 
 The source includes authenticated POST `/api/learning/ai-readiness` as the

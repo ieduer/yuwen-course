@@ -1,14 +1,19 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1223,
-  "totalBytes": 164468000,
-  "aggregateSha256": "6f4c2fc1610a00f2b0360a11e71542029f0c1d8d47d129318799caaa3d3e6f0c",
+  "fileCount": 1221,
+  "totalBytes": 164441915,
+  "aggregateSha256": "a6e79f71a9a6af0c8b05b68a9510ebec21b56b98ac05cf0c5f0b262d1c7a1853",
   "files": [
     {
       "path": "_headers",
       "bytes": 382,
       "sha256": "89de9dfcc3c72856b40738dfd60c54d45b91bd66ac01260893a8741318318580"
+    },
+    {
+      "path": "_redirects",
+      "bytes": 54,
+      "sha256": "246a967b8745299318633d308a38336b3a725f03328547db18881d95c89f7fd5"
     },
     {
       "path": "_worker.js",
@@ -18,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "06b58c16b7619b0ee8b94a3753bae148f7afc6ecd6abdbcc872731801b3afc0d"
+      "sha256": "713baf02a069596077b6ca76a1f6521afd5b32ba4060c11ec4daeaa32580626f"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1434,16 +1439,6 @@
       "path": "assets/classical-first-read.js",
       "bytes": 29185,
       "sha256": "842731d4a33b0777f2d8829fb80d9c017e0e57bb6ea1bd394e1e94fab94ee298"
-    },
-    {
-      "path": "assets/insights.css",
-      "bytes": 6807,
-      "sha256": "68520187a39467b261269391b07d8ac10b4d15140106131af8cb1a5b7982f728"
-    },
-    {
-      "path": "assets/insights.js",
-      "bytes": 16470,
-      "sha256": "5814294e5ce0942aed644968f5b5abd31966fa64479ec0a2c2a3ee0cfc9dd28b"
     },
     {
       "path": "assets/learning-evidence.js",
@@ -3122,8 +3117,8 @@
     },
     {
       "path": "books.html",
-      "bytes": 2246,
-      "sha256": "561ce9dfa9f056995881fce5f327b3a23ebda3384f5b62a542d327ad2052dadf"
+      "bytes": 2198,
+      "sha256": "526e900f66818e1fd1adb47eb0079f12821f10766d2350260de89f319dccdb89"
     },
     {
       "path": "classical-first-read-source.js",
@@ -6027,18 +6022,13 @@
     },
     {
       "path": "genres.html",
-      "bytes": 2267,
-      "sha256": "976c52ba401de8eaddfc6be0047145d8193c8183563fcef882e87913b1359ecc"
+      "bytes": 2219,
+      "sha256": "998f9c890c585422c357fe0e6adfd7377e6c43ab5c2641a4e91a2bd66f8cfc42"
     },
     {
       "path": "index.html",
-      "bytes": 11637,
-      "sha256": "457b90c7a04005ab445ca199a446cfec4ff39eed382745caf145d4509a0ed815"
-    },
-    {
-      "path": "insights.html",
-      "bytes": 2639,
-      "sha256": "c6429f2cba8a4bbabdd60442d0c338708a9e4bd6d954cb01f1896ee2ec3a7497"
+      "bytes": 11510,
+      "sha256": "47103fdfafc435a7f51603146ca3b3f7d5c8ca24473fef8ca048566aaa7c8cb6"
     },
     {
       "path": "learning-evidence-source.js",
