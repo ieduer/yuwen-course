@@ -2,7 +2,7 @@
 
 Last updated: 2026-08-28
 
-## 2026-08-28 personal-page decision candidate
+## 2026-08-28 personal-page decision release
 
 - `/insights` is retired rather than repaired. The candidate deletes
   `site/insights.html`, `site/assets/insights.js` and
@@ -21,11 +21,22 @@ Last updated: 2026-08-28
   Pages redirect mechanism and all current bindings. No D1, Queue, User
   Center, APIS, App/native pointer, registration or student record changes are
   part of the candidate.
-- Production remains Pages deployment
-  `12a0f7db-d4dc-49bd-b12b-84dc64befd3b`, source
-  `89819f6650955b1d2d0b3a139384402788c799c8`, until the candidate is merged,
-  released through the external executor and browser-verified. Immediate
-  rollback remains `52447a91-dd19-4980-a407-f19a752de19a`.
+- GitHub main is `9cd9daf10ea8ab4427c2962b46ab620f08c5a7fe`. The
+  exact-SHA external executor released Pages deployment
+  `bb605868-d563-49d8-81db-21113bb8442b`; the immutable host and deployment
+  list both read back source `9cd9daf`. Immediate rollback is the prior
+  production deployment `12a0f7db-d4dc-49bd-b12b-84dc64befd3b`; the earlier
+  secondary anchor is `52447a91-dd19-4980-a407-f19a752de19a`.
+- Custom and immutable hosts return 301 + `Location: /star` for both retired
+  URLs and 200 for `/star`. Fresh anonymous Playwright and an existing
+  authenticated browser session both reached visible `/star`; the authenticated
+  session showed the ordinary empty constellation rather than the login or
+  offline state. The two retired asset paths no longer serve their JS/CSS
+  bytes; the current catch-all returns an HTML shell for unknown asset paths.
+- Post-release remote D1 aggregation remained `submissions=0`, `star_nodes=0`,
+  `submission_words=0`, with `rows_written=0` and `changed_db=false`.
+  Custom and immutable `/api/learning/health` remained healthy. No D1, Queue,
+  User Center, APIS, App/native pointer, binding, secret or route changed.
 
 ## 2026-08-28 APIS caller-auth release
 
