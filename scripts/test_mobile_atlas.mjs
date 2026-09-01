@@ -5,7 +5,7 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import path from "node:path";
-import { chromium } from "playwright";
+import { launchTestBrowser } from "./playwright_macos_launcher.mjs";
 
 const SITE_ROOT = path.resolve(import.meta.dirname, "../site");
 const REQUESTED_BASE_URL = process.env.BASE_URL?.replace(/\/$/, "") || "";
@@ -323,6 +323,7 @@ async function verifyToolsBreakpointAccessibility(browser) {
 
 let localServer = null;
 let browser = null;
+let closeBrowser = null;
 
 try {
   if (!baseUrl) {
@@ -331,10 +332,9 @@ try {
     assert.ok(address && typeof address === "object");
     baseUrl = `http://127.0.0.1:${address.port}`;
   }
-  browser = await chromium.launch({
-    ...(executablePath ? { executablePath } : {}),
-    headless: true,
-  });
+  const launched = await launchTestBrowser({ executablePath });
+  browser = launched.browser;
+  closeBrowser = launched.close;
   await verifyTouchViewport(browser, {
     label: "390×844",
     width: 390,
@@ -350,7 +350,7 @@ try {
   await verifyBreakpointTransition(browser);
   await verifyToolsBreakpointAccessibility(browser);
 } finally {
-  await browser?.close();
+  await closeBrowser?.();
   if (localServer) {
     await new Promise((resolve, reject) => {
       localServer.close((error) => (error ? reject(error) : resolve()));

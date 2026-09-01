@@ -1,6 +1,72 @@
 # Project State
 
-Last updated: 2026-08-28
+Last updated: 2026-09-01
+
+## 2026-09-01 cross-browser portrait jitter repair candidate
+
+- Production `bb605868-d563-49d8-81db-21113bb8442b` and GitHub
+  `main@481736ab88e7a6ef2f57e878c83142449172ea2f` serve byte-identical
+  `assets/styles.css`. At an otherwise stable 1280x800 viewport, two frames
+  120 ms apart changed 1,635 pixels only inside the 314x314 lesson-portrait
+  ring. Pausing `portrait-orbit` reduced the same comparison to zero changed
+  pixels; the page geometry, viewport and scroll position remained stable.
+- The ring is rotationally symmetric, so its 28-second infinite rotation adds
+  no information. Safari and some Chromium compositors resample its thin
+  circles on fractional pixels, rendering that paint-only motion as persistent
+  shimmer or jitter. The leaf-only candidate removes the animation and unused
+  keyframes while preserving the ring, portraits, layout and all interactions.
+- `scripts/test_release_site.mjs` now blocks any animation from being restored
+  on this decoration. Real-browser acceptance must prove zero running
+  `portrait-orbit` animations and byte-stable settled frames in Chrome and
+  Brave at desktop and 390px mobile widths; reduced-motion must remain stable.
+- Candidate readback passed in Chrome 152 and Brave 152 at 1280x800, 390x844
+  and desktop reduced-motion: every settled comparison had zero changed pixels,
+  zero running `portrait-orbit` animations and no horizontal overflow. The
+  release-site and static-cache suites pass on Node 24.19.0 and 22.21.1; the
+  content projection check covers all 398 JSON inputs.
+- A later formal mobile-atlas rerun was blocked before page execution by two
+  consecutive macOS application-registration aborts, first in Brave and then
+  in the controlled Chrome-for-Testing alternative. Per the browser runbook,
+  no further browser was launched in this task. This is a launcher-layer
+  blocker, not a failed product assertion; the formal 13-case suite remains
+  unaccepted until it can run normally.
+- `CAPABILITY_FIT=no-new-capability`: Pages, Worker, bindings, D1, Queue, User
+  Center, APIS, Pulse and native/App content remain unchanged. Production is
+  unchanged. At candidate creation, exact Node 24.18.0, approved canonical-
+  source audit, selected study-guide source bytes, the formal mobile-atlas
+  rerun and suen go/no-go were release-blocking.
+- suen supplied `GO` on 2026-09-01 for this exact Web-only repair, resolving the
+  independent-review decision but not waiving executable release gates. The
+  release preflight restored official Node 24.18.0 and verified its published
+  SHA-256. Formal mobile-atlas then reproduced the same pre-page-execution
+  macOS `_RegisterApplication` / `TransformProcessType` `SIGABRT`; the selected
+  study-guide source-byte check and canonical native-content audit check also
+  failed closed. No Cloudflare mutation ran. Production therefore remains
+  `bb605868-d563-49d8-81db-21113bb8442b`; the three non-review blockers must be
+  resolved in their owning workflows before a new exact-SHA release attempt.
+- Suen then authorized the bounded blocker repair with `擴大`. Brave
+  `152.1.94.117` had 823 identical empty `com.apple.FinderInfo` attributes in
+  its signed bundle. They were backed up exactly, removed transactionally, and
+  the bundle then passed strict deep code-signing and LaunchServices lookup.
+  The macOS LaunchServices + loopback-CDP test path now closes the real browser
+  process rather than merely disconnecting Playwright. Mobile atlas passed
+  13/13; shared-state passed 13/13 plus its browser contract; no task profile,
+  process or new Brave crash receipt remained.
+- The accepted encrypted archive restored the external study-guide authority
+  exactly: 18 files / 17,307,171 bytes. Staging and canonical paths are
+  byte-identical; all five PDF/extraction receipts and the 241-item catalog
+  pass. These bytes are now `retain_hot` and the exact encrypted restore
+  authority is recorded in the maintenance manual.
+- Three isolated native-content builds were byte-identical at semantic digest
+  `sha256:2d6d3d7b4a5cf14e61ee15b9819e7b5b76fe5a60be5a1c851fbeba266b9f8293`,
+  305 objects and 17,017,937 core bytes. The current receipt now includes the
+  existing 30 classical first-read lessons / 102 paragraphs and passes with no
+  audit issue. The Android importer suite passed 14/14 and the release-candidate
+  verifier passed 46/46. The independent App importer then validated the exact
+  clean-source blocked candidate: 304 immutable objects, 189 reader documents,
+  2,932 annotations, 2,933 annotation references, 379 vocabulary tombstones and
+  869 learning-manifest items, with `activationAllowed=false`. This Web-only
+  task does not move `latest-stable` or publish an App.
 
 ## 2026-08-28 personal-page decision release
 

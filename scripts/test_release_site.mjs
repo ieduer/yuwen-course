@@ -18,6 +18,8 @@ import {
   verifyReleaseStaging,
 } from "./build_release_site.mjs";
 import { privacyIssueCounts } from "./native_content_url_sanitizer.mjs";
+
+const REPO_ROOT = path.resolve(import.meta.dirname, "..");
 import {
   REMOVED_WEB_RESOURCE_URLS,
   isRemovedWebResource,
@@ -59,6 +61,17 @@ function writeBytes(file, bytes) {
   mkdirSync(path.dirname(file), { recursive: true });
   writeFileSync(file, bytes);
 }
+
+test("lesson portrait decoration has no perpetual motion", () => {
+  const css = readFileSync(
+    path.join(REPO_ROOT, "site", "assets", "styles.css"),
+    "utf8",
+  );
+  const portraitDecoration = css.match(/\.lesson-portraits::before\s*\{([^}]*)\}/s);
+  assert.ok(portraitDecoration, "lesson portrait decoration must remain styled");
+  assert.doesNotMatch(portraitDecoration[1], /\banimation(?:-name)?\s*:/i);
+  assert.doesNotMatch(css, /@keyframes\s+portrait-orbit\b/i);
+});
 
 function collectFiles(root, prefix = "") {
   if (!existsSync(path.join(root, prefix))) return [];
