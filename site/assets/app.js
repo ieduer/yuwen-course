@@ -3316,11 +3316,18 @@ function setToolsOpen(open) {
   if (returnFocus) els.mobileToolsToggle.focus({ preventScroll: true });
 }
 
-function fitLessonTitle() {
+let lessonTitleFitSignature = "";
+
+function fitLessonTitle({ force = false } = {}) {
   const title = els.title;
   if (!title) return;
+  const compact = matchMedia("(max-width: 620px)").matches;
+  const available = title.parentElement?.clientWidth || title.clientWidth;
+  const signature = `${title.textContent}\n${available}\n${compact}`;
+  if (!force && signature === lessonTitleFitSignature) return;
+  lessonTitleFitSignature = signature;
   title.style.removeProperty("font-size");
-  if (matchMedia("(max-width: 620px)").matches) {
+  if (compact) {
     let size = parseFloat(getComputedStyle(title).fontSize) || 24;
     let lineHeight = parseFloat(getComputedStyle(title).lineHeight) || size * 1.05;
     while (title.scrollHeight > lineHeight * 2 + 1 && size > 18) {
@@ -3330,7 +3337,6 @@ function fitLessonTitle() {
     }
     return;
   }
-  const available = title.parentElement?.clientWidth || title.clientWidth;
   let size = parseFloat(getComputedStyle(title).fontSize) || 92;
   while (title.scrollWidth > available && size > 16) {
     size -= 1;
@@ -4989,6 +4995,7 @@ function bindEvents() {
     const titleObserver = new ResizeObserver(() => requestAnimationFrame(fitLessonTitle));
     titleObserver.observe(els.title.parentElement);
   }
+  void document.fonts?.ready.then(() => fitLessonTitle({ force: true }));
   window.addEventListener("hashchange", () => {
     const id = location.hash.slice(1);
     if (

@@ -73,6 +73,26 @@ test("lesson portrait decoration has no perpetual motion", () => {
   assert.doesNotMatch(css, /@keyframes\s+portrait-orbit\b/i);
 });
 
+test("lesson title fitting is idempotent under ResizeObserver callbacks", () => {
+  const app = readFileSync(
+    path.join(REPO_ROOT, "site", "assets", "app.js"),
+    "utf8",
+  );
+  const start = app.indexOf("function fitLessonTitle(");
+  const end = app.indexOf("function renderReaderLoadFailure", start);
+  assert.ok(start >= 0 && end > start, "fitLessonTitle implementation must remain discoverable");
+  const implementation = app.slice(start, end);
+  const unchangedGeometryGuard = implementation.indexOf("signature === lessonTitleFitSignature");
+  const resetFontSize = implementation.indexOf('removeProperty("font-size")');
+  assert.ok(unchangedGeometryGuard >= 0, "unchanged title geometry must have an idempotency guard");
+  assert.ok(
+    unchangedGeometryGuard < resetFontSize,
+    "the idempotency guard must run before resetting the live title font size",
+  );
+  assert.match(app, /new ResizeObserver\(\(\) => requestAnimationFrame\(fitLessonTitle\)\)/);
+  assert.match(app, /document\.fonts\?\.ready\.then\(\(\) => fitLessonTitle\(\{ force: true \}\)\)/);
+});
+
 function collectFiles(root, prefix = "") {
   if (!existsSync(path.join(root, prefix))) return [];
   const files = [];
