@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { chromium } from "playwright";
+import { launchTestBrowser } from "./playwright_macos_launcher.mjs";
 
 const SITE_ROOT = path.resolve(import.meta.dirname, "../site");
 const BRAVE = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser";
@@ -199,11 +199,14 @@ async function configurePage(
 
 let server;
 let browser;
+let closeBrowser;
 try {
   server = await startStaticServer();
   const address = server.address();
   const base = `http://127.0.0.1:${address.port}`;
-  browser = await chromium.launch({ executablePath: BRAVE, headless: true });
+  const launched = await launchTestBrowser({ executablePath: BRAVE });
+  browser = launched.browser;
+  closeBrowser = launched.close;
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   const pageErrors = [];
   await configurePage(page, base, pageErrors);
@@ -638,6 +641,6 @@ try {
 
   process.stdout.write("YW shared-state browser contract passed\n");
 } finally {
-  await browser?.close();
+  await closeBrowser?.();
   if (server) await new Promise((resolve) => server.close(resolve));
 }

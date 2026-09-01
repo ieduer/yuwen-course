@@ -25,6 +25,14 @@ or student record. Publish only through the ordinary formal Pages gate from an
 exact clean merged SHA. Immediate rollback remains the pre-change Pages
 deployment recorded in `PROJECT_STATE.md`; Pages rollback preserves all data.
 
+The expanded blocker repair on 2026-09-01 restored the exact external
+study-guide bytes and approved the already-present native source graph without
+moving `site/app-content/latest-stable.json`. Three isolated native projections
+were byte-identical, and the independent Android importer and release-candidate
+contract suites passed. The Web release must preserve the existing App pointer;
+publishing native objects, moving that pointer or releasing an APK remains a
+separate transaction.
+
 ## 2026-08-28 `/insights` retirement and `/star` v2 design boundary
 
 The personal page at `/insights` is retired because both of its data sources
@@ -1212,11 +1220,41 @@ scripts/study-guide-curation/selected-compulsory-lower.json
 
 `npm run verify:study-guide-sources` must read the actual PDF/extraction bytes
 and page metadata before a release. The JSON catalog under `site/data/` is
-derived and regenerable; the PDFs are not committed. No accepted remote archive
-or restore authority is currently recorded, so these five PDFs and extraction
-files **must remain local and must not be deleted or replaced**. Until a
-path-preserving archive receipt is added, there is intentionally no claimed
-restore command.
+derived and regenerable; the PDFs are not committed. The canonical directory
+is `retain_hot`: on 2026-09-01 it was restored as 18 files / 17,307,171 bytes
+and verified against every tracked curation receipt.
+
+The accepted encrypted archive authority is bundle group
+`output/pdf_study_guides_web/part-001` in these private receipts:
+
+```text
+/Users/ylsuen/CF/reports/private/local-files-cloud-first-20260824/cf-historical-archive-v3.private.json
+/Users/ylsuen/CF/reports/private/local-files-cloud-first-20260824/cf-historical-archive-v3-state.private.json
+```
+
+The encrypted bundle has Drive object ID
+`1N-l2NI2HK5v3iXOcMHSgZxJI1_f_93uG`, 13,415,032 ciphertext bytes and SHA-256
+`008767930718051a25b7b39da35bda3069f94a6bffb790d5ac4ef3ba884b57cb`.
+Restore is deliberately whole-bundle and must target an absent staging root:
+
+```zsh
+restore_root=/private/tmp/cf-task-<TASK_ID>/source-restore
+test ! -e "$restore_root"
+node /Users/ylsuen/CF/scripts/restore_grouped_sensitive_archive.mjs \
+  --manifest /Users/ylsuen/CF/reports/private/local-files-cloud-first-20260824/cf-historical-archive-v3.private.json \
+  --source-path '/Users/ylsuen/CF/_archive/content/output/pdf_study_guides_web/选必下合集（27届修订版）.pdf' \
+  --destination "$restore_root"
+diff -qr \
+  "$restore_root/Users/ylsuen/CF/_archive/content/output/pdf_study_guides_web" \
+  /Users/ylsuen/CF/output/pdf_study_guides_web
+YW_STUDY_GUIDE_SOURCE_DIR=/Users/ylsuen/CF/output/pdf_study_guides_web \
+  npm run verify:study-guide-sources
+```
+
+The restore helper verifies all 18 files and plaintext bytes before success.
+Do not delete or replace the retained canonical source merely because the
+encrypted archive exists; repeat the full restore/readback gate before any
+future disposition change.
 
 Reader media is separately bound by
 `site/data/reader-media-receipts.v1.json`: ledger `2026-08-09.1`, 165 objects,

@@ -44,6 +44,27 @@ Last updated: 2026-09-01
   failed closed. No Cloudflare mutation ran. Production therefore remains
   `bb605868-d563-49d8-81db-21113bb8442b`; the three non-review blockers must be
   resolved in their owning workflows before a new exact-SHA release attempt.
+- Suen then authorized the bounded blocker repair with `擴大`. Brave
+  `152.1.94.117` had 823 identical empty `com.apple.FinderInfo` attributes in
+  its signed bundle. They were backed up exactly, removed transactionally, and
+  the bundle then passed strict deep code-signing and LaunchServices lookup.
+  The macOS LaunchServices + loopback-CDP test path now closes the real browser
+  process rather than merely disconnecting Playwright. Mobile atlas passed
+  13/13; shared-state passed 13/13 plus its browser contract; no task profile,
+  process or new Brave crash receipt remained.
+- The accepted encrypted archive restored the external study-guide authority
+  exactly: 18 files / 17,307,171 bytes. Staging and canonical paths are
+  byte-identical; all five PDF/extraction receipts and the 241-item catalog
+  pass. These bytes are now `retain_hot` and the exact encrypted restore
+  authority is recorded in the maintenance manual.
+- Three isolated native-content builds were byte-identical at semantic digest
+  `sha256:2d6d3d7b4a5cf14e61ee15b9819e7b5b76fe5a60be5a1c851fbeba266b9f8293`,
+  305 objects and 17,017,937 core bytes. The current receipt now includes the
+  existing 30 classical first-read lessons / 102 paragraphs and passes with no
+  audit issue. The Android importer suite passed 14/14 and the release-candidate
+  verifier passed 46/46. This Web-only task does not move `latest-stable` or
+  publish an App; exact clean-source candidate validation remains the final App
+  audit step before the Web artifact is released.
 
 ## 2026-08-28 personal-page decision release
 
