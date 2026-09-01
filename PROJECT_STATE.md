@@ -1,6 +1,40 @@
 # Project State
 
-Last updated: 2026-08-28
+Last updated: 2026-09-01
+
+## 2026-09-01 cross-browser portrait jitter repair candidate
+
+- Production `bb605868-d563-49d8-81db-21113bb8442b` and GitHub
+  `main@481736ab88e7a6ef2f57e878c83142449172ea2f` serve byte-identical
+  `assets/styles.css`. At an otherwise stable 1280x800 viewport, two frames
+  120 ms apart changed 1,635 pixels only inside the 314x314 lesson-portrait
+  ring. Pausing `portrait-orbit` reduced the same comparison to zero changed
+  pixels; the page geometry, viewport and scroll position remained stable.
+- The ring is rotationally symmetric, so its 28-second infinite rotation adds
+  no information. Safari and some Chromium compositors resample its thin
+  circles on fractional pixels, rendering that paint-only motion as persistent
+  shimmer or jitter. The leaf-only candidate removes the animation and unused
+  keyframes while preserving the ring, portraits, layout and all interactions.
+- `scripts/test_release_site.mjs` now blocks any animation from being restored
+  on this decoration. Real-browser acceptance must prove zero running
+  `portrait-orbit` animations and byte-stable settled frames in Chrome and
+  Brave at desktop and 390px mobile widths; reduced-motion must remain stable.
+- Candidate readback passed in Chrome 152 and Brave 152 at 1280x800, 390x844
+  and desktop reduced-motion: every settled comparison had zero changed pixels,
+  zero running `portrait-orbit` animations and no horizontal overflow. The
+  release-site and static-cache suites pass on Node 24.19.0 and 22.21.1; the
+  content projection check covers all 398 JSON inputs.
+- A later formal mobile-atlas rerun was blocked before page execution by two
+  consecutive macOS application-registration aborts, first in Brave and then
+  in the controlled Chrome-for-Testing alternative. Per the browser runbook,
+  no further browser was launched in this task. This is a launcher-layer
+  blocker, not a failed product assertion; the formal 13-case suite remains
+  unaccepted until it can run normally.
+- `CAPABILITY_FIT=no-new-capability`: Pages, Worker, bindings, D1, Queue, User
+  Center, APIS, Pulse and native/App content remain unchanged. Production is
+  unchanged. Exact Node 24.18.0, approved canonical-source audit, selected
+  study-guide source bytes, the formal mobile-atlas rerun and suen go/no-go are
+  still release-blocking.
 
 ## 2026-08-28 personal-page decision release
 

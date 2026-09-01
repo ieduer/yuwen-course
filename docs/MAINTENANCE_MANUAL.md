@@ -1,6 +1,29 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-08-28 (America/Los_Angeles)
+Last reviewed: 2026-09-01 (America/Los_Angeles)
+
+## 2026-09-01 browser-dependent portrait jitter override
+
+The lesson masthead portrait ring must be visually static. It is a concentric,
+rotationally symmetric decoration; rotating it cannot communicate state. The
+former `portrait-orbit` infinite transform caused continuous compositor
+resampling of thin circular lines. Safari and some Chromium builds can render
+that subpixel paint churn as a persistent shimmer or page jitter even though
+DOM geometry does not move.
+
+Do not restore a perpetual animation on `.lesson-portraits::before`. The ring,
+portrait controls, responsive layout and entry animations remain present. The
+release test must reject an `animation` property on that pseudo-element and a
+`portrait-orbit` keyframe. Browser acceptance waits for lesson data to settle,
+then compares two frames at least 120 ms apart: the affected portrait region
+must be byte-stable and `document.getAnimations()` must contain no running
+`portrait-orbit` animation.
+
+This is a leaf-only `no-new-capability` CSS repair. It changes no content graph,
+App pointer, Worker code, D1, Queue, User Center, APIS, binding, route, secret
+or student record. Publish only through the ordinary formal Pages gate from an
+exact clean merged SHA. Immediate rollback remains the pre-change Pages
+deployment recorded in `PROJECT_STATE.md`; Pages rollback preserves all data.
 
 ## 2026-08-28 `/insights` retirement and `/star` v2 design boundary
 

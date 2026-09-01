@@ -1,5 +1,44 @@
 # 核查標準 / Verification Standard
 
+## 2026-09-01 portrait-jitter repair gate
+
+1. **Source of truth.** Start from clean GitHub
+   `main@481736ab88e7a6ef2f57e878c83142449172ea2f`; production baseline is
+   Pages `bb605868-d563-49d8-81db-21113bb8442b`. Confirm live and source CSS
+   hashes match before judging causality.
+2. **Health.** Root, `/api/health` and `/api/learning/health` must remain 200 on
+   custom and immutable hosts. This CSS repair has no API write path.
+3. **Contract.** `test:release-site` must prove the portrait pseudo-element has
+   no animation and no `portrait-orbit` keyframes. Existing content, evidence,
+   reading, preview, mobile-atlas and release-site suites remain green.
+4. **Browser acceptance.** After lesson data settles, Chrome and Brave at
+   1280x800 and 390x844 must report zero running `portrait-orbit` animations.
+   Two settled frames 120 ms apart must be byte-stable in the portrait region;
+   repeat with `prefers-reduced-motion: reduce`. Record console/page errors and
+   horizontal overflow.
+5. **Dependencies.** User Center, APIS, nav, Pulse, D1, Queue and App/native
+   content are `verified_no_change`; the App disposition is
+   `compatible-no-client-release`.
+6. **Release stop.** Missing study-guide source authority, failed App audit,
+   failed exact-SHA tests, dirty/unpushed source, missing suen go/no-go or an
+   executor mismatch blocks publication. Do not bypass a gate for a CSS fix.
+7. **Rollback.** If an authorized release regresses layout, health or content,
+   restore Pages deployment `bb605868-d563-49d8-81db-21113bb8442b`; preserve
+   D1, Queue, User Center and App state.
+8. **Capability fit.** `no-new-capability`; no runtime, binding, route, storage,
+   identity, cost or observability model changes.
+
+Current candidate result: the target stability checks passed in Chrome 152 and
+Brave 152 at desktop, 390px mobile and desktop reduced-motion, with zero changed
+pixels, zero running `portrait-orbit` animations and no horizontal overflow.
+The release-site/static-cache suites pass under Node 24.19.0 and 22.21.1, and
+the 398-input content projection check passes. Publication remains blocked by
+the absent exact Node 24.18.0 executor, the canonical-source/App audit gate,
+missing selected study-guide source bytes, a formal mobile-atlas rerun that was
+prevented by two consecutive macOS application-registration aborts, and suen
+go/no-go. The browser aborts occurred before page assertions and therefore are
+recorded as an environment blocker rather than a product regression.
+
 ## 2026-08-24 bounded-evaluator release gate
 
 This is the newest eight-point authority. It supersedes conflicting retained

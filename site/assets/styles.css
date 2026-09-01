@@ -404,7 +404,6 @@ body:not(.atlas-open) .lesson-shell { margin-left: 0; }
   border-radius: 50%;
   background: repeating-radial-gradient(circle, transparent 0 38px, rgba(189,66,44,.055) 39px 40px);
   content: "";
-  animation: portrait-orbit 28s linear infinite;
 }
 
 .lesson-portraits .portrait-choice {
@@ -1342,8 +1341,6 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
   0%, 55% { opacity: 1; transform: translateY(0); }
   100% { opacity: 0; transform: translateY(-8px); }
 }
-
-@keyframes portrait-orbit { to { transform: rotate(360deg); } }
 
 @media (prefers-reduced-motion: reduce) {
   .vocab-quiz .quiz-item.quiz-advancing { animation: none; }
