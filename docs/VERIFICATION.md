@@ -28,7 +28,7 @@
 8. **Capability fit.** `no-new-capability`; no runtime, binding, route, storage,
    identity, cost or observability model changes.
 
-Current candidate result: the target stability checks passed in Chrome 152 and
+Initial candidate result: the target stability checks passed in Chrome 152 and
 Brave 152 at desktop, 390px mobile and desktop reduced-motion, with zero changed
 pixels, zero running `portrait-orbit` animations and no horizontal overflow.
 The release-site/static-cache suites pass under Node 24.19.0 and 22.21.1, and
@@ -38,6 +38,16 @@ missing selected study-guide source bytes, a formal mobile-atlas rerun that was
 prevented by two consecutive macOS application-registration aborts, and suen
 go/no-go. The browser aborts occurred before page assertions and therefore are
 recorded as an environment blocker rather than a product regression.
+
+Release-attempt update: suen supplied `GO` on 2026-09-01 and official Node
+24.18.0 was restored with its published SHA-256 verified. The formal
+mobile-atlas launch immediately reproduced the same macOS registration-layer
+`SIGABRT` before page execution. `verify:study-guide-sources` independently
+failed because `selected-compulsory-lower.json` source bytes are absent, and
+`check:native-content:deploy-sync` failed because the current canonical source
+graph has no approved audit receipt. These three failures stop publication;
+they are not waived by `GO`. No Pages deployment or other Cloudflare mutation
+was attempted.
 
 ## 2026-08-24 bounded-evaluator release gate
 

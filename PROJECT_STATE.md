@@ -32,9 +32,18 @@ Last updated: 2026-09-01
   unaccepted until it can run normally.
 - `CAPABILITY_FIT=no-new-capability`: Pages, Worker, bindings, D1, Queue, User
   Center, APIS, Pulse and native/App content remain unchanged. Production is
-  unchanged. Exact Node 24.18.0, approved canonical-source audit, selected
-  study-guide source bytes, the formal mobile-atlas rerun and suen go/no-go are
-  still release-blocking.
+  unchanged. At candidate creation, exact Node 24.18.0, approved canonical-
+  source audit, selected study-guide source bytes, the formal mobile-atlas
+  rerun and suen go/no-go were release-blocking.
+- suen supplied `GO` on 2026-09-01 for this exact Web-only repair, resolving the
+  independent-review decision but not waiving executable release gates. The
+  release preflight restored official Node 24.18.0 and verified its published
+  SHA-256. Formal mobile-atlas then reproduced the same pre-page-execution
+  macOS `_RegisterApplication` / `TransformProcessType` `SIGABRT`; the selected
+  study-guide source-byte check and canonical native-content audit check also
+  failed closed. No Cloudflare mutation ran. Production therefore remains
+  `bb605868-d563-49d8-81db-21113bb8442b`; the three non-review blockers must be
+  resolved in their owning workflows before a new exact-SHA release attempt.
 
 ## 2026-08-28 personal-page decision release
 
