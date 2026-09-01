@@ -29,9 +29,12 @@ The expanded blocker repair on 2026-09-01 restored the exact external
 study-guide bytes and approved the already-present native source graph without
 moving `site/app-content/latest-stable.json`. Three isolated native projections
 were byte-identical, and the independent Android importer and release-candidate
-contract suites passed. The Web release must preserve the existing App pointer;
-publishing native objects, moving that pointer or releasing an APK remains a
-separate transaction.
+contract suites passed. The exact clean blocked candidate also passed importer
+validation with 304 immutable objects, the full reader/annotation graph, 379
+vocabulary tombstones and 869 learning-manifest items while explicitly keeping
+`activationAllowed=false`. The Web release must preserve the existing App
+pointer; publishing native objects, moving that pointer or releasing an APK
+remains a separate transaction.
 
 ## 2026-08-28 `/insights` retirement and `/star` v2 design boundary
 

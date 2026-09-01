@@ -62,9 +62,11 @@ Last updated: 2026-09-01
   305 objects and 17,017,937 core bytes. The current receipt now includes the
   existing 30 classical first-read lessons / 102 paragraphs and passes with no
   audit issue. The Android importer suite passed 14/14 and the release-candidate
-  verifier passed 46/46. This Web-only task does not move `latest-stable` or
-  publish an App; exact clean-source candidate validation remains the final App
-  audit step before the Web artifact is released.
+  verifier passed 46/46. The independent App importer then validated the exact
+  clean-source blocked candidate: 304 immutable objects, 189 reader documents,
+  2,932 annotations, 2,933 annotation references, 379 vocabulary tombstones and
+  869 learning-manifest items, with `activationAllowed=false`. This Web-only
+  task does not move `latest-stable` or publish an App.
 
 ## 2026-08-28 personal-page decision release
 
