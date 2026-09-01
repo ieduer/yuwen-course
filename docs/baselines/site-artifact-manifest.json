@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1221,
-  "totalBytes": 164441801,
-  "aggregateSha256": "d5a42460104ffa91d5b527d899cbf9096ddfbdd639828ec300a364a8a408e7a1",
+  "totalBytes": 164442131,
+  "aggregateSha256": "06c8b3c3a9d45da64aff0792c966fc1a4ad7354c736581b42d92bc295188e790",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "0464c08566ad9b597acbd9dcf754d90b89c4e6c2c8b303c3e57ed9afc884cb3e"
+      "sha256": "77cd8e1d04eea0e7f69d4437632c773914ec93a736ec2b54d21da0aff4c2108b"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1417,8 +1417,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 223908,
-      "sha256": "0dd1fb28525fbb518ede0815782d307b29240eb4dbb5fa074a9fd85a1024157d"
+      "bytes": 224238,
+      "sha256": "eb610ae422ad7e06f86a78dedfb6c9c5697ad69ed9889263777d318e7b97eff0"
     },
     {
       "path": "assets/atlas.css",
@@ -6028,7 +6028,7 @@
     {
       "path": "index.html",
       "bytes": 11510,
-      "sha256": "2cab24d425043c5105a525970166721bb216d5996f4960de4c3d2d60952df2c1"
+      "sha256": "6fbbd6198d5bf934dfdd53fe38ba8ade560b0db84b616b814be154dda9262ab0"
     },
     {
       "path": "learning-evidence-source.js",

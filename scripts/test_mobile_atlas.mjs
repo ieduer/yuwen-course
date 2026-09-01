@@ -321,6 +321,76 @@ async function verifyToolsBreakpointAccessibility(browser) {
   }
 }
 
+async function verifyLessonTitleStability(browser) {
+  const cases = [
+    { label: "desktop", width: 1280, height: 800, reducedMotion: "no-preference" },
+    { label: "desktop-reduced-motion", width: 1280, height: 800, reducedMotion: "reduce" },
+    { label: "mobile", width: 390, height: 844, reducedMotion: "no-preference" },
+  ];
+  for (const testCase of cases) {
+    const context = await browser.newContext({
+      viewport: { width: testCase.width, height: testCase.height },
+      reducedMotion: testCase.reducedMotion,
+    });
+    const page = await context.newPage();
+    try {
+      await page.goto(`${baseUrl}/#lesson-1458`, { waitUntil: "domcontentloaded" });
+      await page.waitForFunction(() => (
+        document.querySelector("#lesson-title")?.textContent.includes("中国人民站起来了")
+      ), null, { timeout: 20_000 });
+      await page.evaluate(async () => {
+        await document.fonts?.ready;
+        await Promise.all([...document.querySelectorAll("#lesson-portraits img")].map((image) => (
+          image.complete ? image.decode().catch(() => {}) : new Promise((resolve) => {
+            image.addEventListener("load", resolve, { once: true });
+            image.addEventListener("error", resolve, { once: true });
+          })
+        )));
+      });
+      await page.waitForTimeout(1_500);
+      const before = await page.evaluate(() => {
+        const title = document.querySelector("#lesson-title");
+        const portrait = document.querySelector("#lesson-portraits");
+        window.__ywTitleStyleMutations = 0;
+        window.__ywTitleStyleObserver = new MutationObserver((mutations) => {
+          window.__ywTitleStyleMutations += mutations.filter(
+            (mutation) => mutation.type === "attributes" && mutation.attributeName === "style",
+          ).length;
+        });
+        window.__ywTitleStyleObserver.observe(title, { attributes: true, attributeFilter: ["style"] });
+        const rect = portrait.getBoundingClientRect();
+        return {
+          fontSize: title.style.fontSize,
+          rect: { x: rect.x, y: rect.y, width: rect.width, height: rect.height },
+        };
+      });
+      await page.waitForTimeout(2_000);
+      const after = await page.evaluate(() => {
+        const title = document.querySelector("#lesson-title");
+        const portrait = document.querySelector("#lesson-portraits");
+        const rect = portrait.getBoundingClientRect();
+        window.__ywTitleStyleObserver.disconnect();
+        return {
+          fontSize: title.style.fontSize,
+          rect: { x: rect.x, y: rect.y, width: rect.width, height: rect.height },
+          styleMutations: window.__ywTitleStyleMutations,
+          portraitAnimation: getComputedStyle(portrait, "::before").animationName,
+        };
+      });
+      check(
+        `${testCase.label} 標題適配不重置版面`,
+        after.styleMutations === 0
+          && after.fontSize === before.fontSize
+          && JSON.stringify(after.rect) === JSON.stringify(before.rect)
+          && after.portraitAnimation === "none",
+        JSON.stringify({ before, after }),
+      );
+    } finally {
+      await context.close();
+    }
+  }
+}
+
 let localServer = null;
 let browser = null;
 let closeBrowser = null;
@@ -349,6 +419,7 @@ try {
   });
   await verifyBreakpointTransition(browser);
   await verifyToolsBreakpointAccessibility(browser);
+  await verifyLessonTitleStability(browser);
 } finally {
   await closeBrowser?.();
   if (localServer) {
