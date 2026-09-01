@@ -2,7 +2,7 @@
 
 Last reviewed: 2026-09-01 (America/Los_Angeles)
 
-## 2026-09-01 browser-dependent portrait jitter override
+## 2026-09-01 browser-dependent jitter release authority
 
 The lesson masthead portrait ring must be visually static. It is a concentric,
 rotationally symmetric decoration; rotating it cannot communicate state. The
@@ -18,6 +18,15 @@ release test must reject an `animation` property on that pseudo-element and a
 then compares two frames at least 120 ms apart: the affected portrait region
 must be byte-stable and `document.getAnimations()` must contain no running
 `portrait-orbit` animation.
+
+The same incident exposed an independent title-layout feedback loop.
+`ResizeObserver` watches the title container, so `fitLessonTitle()` must be
+idempotent when title text, available width and the compact breakpoint are
+unchanged. Never restore unconditional removal and reapplication of the live
+title font size inside an observer callback. A font-ready event may force one
+bounded refit. The mobile-atlas browser suite must keep the title style and
+portrait geometry unchanged for two seconds at desktop, desktop
+reduced-motion and mobile widths.
 
 This is a leaf-only `no-new-capability` CSS repair. It changes no content graph,
 App pointer, Worker code, D1, Queue, User Center, APIS, binding, route, secret
@@ -35,6 +44,27 @@ vocabulary tombstones and 869 learning-manifest items while explicitly keeping
 `activationAllowed=false`. The Web release must preserve the existing App
 pointer; publishing native objects, moving that pointer or releasing an APK
 remains a separate transaction.
+
+Accepted source is GitHub
+`main@33c2d3610552a4fa48aeb2effba10f027167ea21` (PR #30 on top of PR
+#29). The one-use v2 executor released the exact 1,221-file / 164,442,131-byte
+formal artifact, aggregate SHA-256
+`06c8b3c3a9d45da64aff0792c966fc1a4ad7354c736581b42d92bc295188e790`,
+as Pages deployment `6ddd891e-cbb5-438f-8803-26ed4faf44b5`. Custom and
+immutable hosts read back the exact CSS `3f02460f4bd1671c…`, App
+`eb610ae422ad7e06…`, marker `77cd8e1d04eea0e7…` and unchanged stable App
+pointer `a5ccd441deb7b011…`.
+
+Live Brave acceptance covered both hosts at 1280x800, 390x844 and desktop
+reduced-motion. All six cases had zero running portrait animations, zero
+settled changed pixels, unchanged portrait geometry, no overflow and no page
+errors. Forty root and `/api/learning/health` requests returned 40 HTTP 200
+responses and zero 5xx. The first deployment
+`859a70fe-9a4d-4222-a0ba-ee3578d7daa2` was never accepted because it revealed
+the title feedback loop; it was rolled back before v2. Immediate rollback for
+the accepted release is `bb605868-d563-49d8-81db-21113bb8442b` at source
+`9cd9daf10ea8ab4427c2962b46ab620f08c5a7fe`. Pages rollback preserves D1,
+Queue, User Center and App state.
 
 ## 2026-08-28 `/insights` retirement and `/star` v2 design boundary
 

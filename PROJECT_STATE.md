@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-01
 
-## 2026-09-01 cross-browser portrait jitter repair candidate
+## 2026-09-01 cross-browser jitter repair accepted release
 
 - Production `bb605868-d563-49d8-81db-21113bb8442b` and GitHub
   `main@481736ab88e7a6ef2f57e878c83142449172ea2f` serve byte-identical
@@ -67,6 +67,32 @@ Last updated: 2026-09-01
   2,932 annotations, 2,933 annotation references, 379 vocabulary tombstones and
   869 learning-manifest items, with `activationAllowed=false`. This Web-only
   task does not move `latest-stable` or publish an App.
+- Live acceptance of the first CSS-only deployment exposed a second independent
+  loop: `ResizeObserver` watched the title container while `fitLessonTitle()`
+  removed and re-applied the live title font size on every callback. On the
+  affected immutable-host reduced-motion case, the portrait region alternated
+  between y=167.5 and y=194.578125. That first deployment
+  `859a70fe-9a4d-4222-a0ba-ee3578d7daa2` was never accepted and was rolled
+  back to `bb605868-d563-49d8-81db-21113bb8442b`.
+- PR #30 makes title fitting idempotent for unchanged title text, available
+  width and breakpoint, while retaining one forced refit after fonts settle.
+  `scripts/test_mobile_atlas.mjs` now observes desktop, reduced-motion and
+  mobile title style/portrait geometry for two seconds and blocks any reset or
+  movement. Exact Node 24.18.0 precontent passed, the browser suite passed
+  16/16, and hosted Node 24.18.0 plus 22.21.1 runners passed.
+- GitHub `main@33c2d3610552a4fa48aeb2effba10f027167ea21` is live as
+  Pages deployment `6ddd891e-cbb5-438f-8803-26ed4faf44b5`. The formal artifact
+  contains 1,221 files / 164,442,131 bytes at aggregate SHA-256
+  `06c8b3c3a9d45da64aff0792c966fc1a4ad7354c736581b42d92bc295188e790`.
+  Custom and immutable hosts have exact CSS, App, marker and stable-App-pointer
+  bytes. Six settled Brave cases (two hosts x desktop/mobile/reduced-motion)
+  each had zero changed pixels, zero running portrait animations, stable
+  geometry and no overflow; 40 root/learning-health requests returned 40 HTTP
+  200 responses and zero 5xx. The release journal is terminal `accepted`.
+- Immediate rollback is Pages `bb605868-d563-49d8-81db-21113bb8442b` at
+  source `9cd9daf10ea8ab4427c2962b46ab620f08c5a7fe`. Preserve D1, Queue,
+  User Center and App state. No production data write, native pointer move,
+  binding, route, secret or runtime capability change occurred.
 
 ## 2026-08-28 personal-page decision release
 
