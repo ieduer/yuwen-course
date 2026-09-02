@@ -148,6 +148,7 @@ const state = {
   formalVocabResourceKeys: new Set(),
   formalInteractionResourceKeys: new Set(),
   interactionRequestsInFlight: new Set(),
+  pendingReplayAttempted: new Set(),
   vocabAttemptsInFlight: new Set(),
   firstReads: new Map(),
   studyGuideLessons: new Map(),
@@ -799,6 +800,7 @@ async function hydrateSharedStateOnce(hydrationEpoch = sharedStateHydrationEpoch
   setProgressOwnerScope(ownerScope);
   setInteractionIdentityResolved(true);
   await persistPendingSharedState(client, ownerScope);
+  void autoReplayPendingInteractions(state.current);
   return requestStillCurrent() ? "ok" : "stale";
 }
 
@@ -3295,6 +3297,7 @@ function renderLesson(lesson) {
   preparePages(lesson);
   renderLessonIndex();
   void ensureBlueprint(lesson);
+  void autoReplayPendingInteractions(lesson);
   els.body.classList.remove("lesson-enter");
   requestAnimationFrame(() => {
     fitLessonTitle();
@@ -3623,6 +3626,54 @@ function interactionPendingMatches(record, pending) {
     && record.pendingSubmission.clientMutationId === pending?.clientMutationId
     && record.pendingSubmission.inputSignature === pending?.inputSignature,
   );
+}
+
+async function autoReplayPendingInteractions(lesson = state.current) {
+  if (!lesson?.id || !interactionIdentityResolved
+    || !progressOwnerScope || progressOwnerScope === ANONYMOUS_UI_SCOPE) return;
+  const progress = lessonProgress(lesson.id);
+  const localEntries = [
+    ["contextWords", progress.context],
+    ["authorQuestion", progress.authorQuestion],
+    ["revision", progress.revision],
+    ["structure", progress.structure],
+    ["wordCreation", progress.wordCreation],
+  ].filter(([, record]) => record?.pendingSubmission?.clientMutationId);
+  for (const [interaction, record] of localEntries) {
+    const mutationId = record.pendingSubmission.clientMutationId;
+    if (state.pendingReplayAttempted.has(mutationId)) continue;
+    state.pendingReplayAttempted.add(mutationId);
+    await submitInteraction(interaction, null, { silent: true });
+  }
+  let pending;
+  try {
+    const response = await fetch(`/api/learning/pending-interactions?lessonId=${encodeURIComponent(lesson.id)}`, {
+      headers: { accept: "application/json" },
+      cache: "no-store",
+    });
+    const body = await response.json().catch(() => ({}));
+    if (!response.ok || !Array.isArray(body.submissions)) return;
+    pending = body.submissions;
+  } catch {
+    return;
+  }
+  let resumed = false;
+  for (const item of pending) {
+    const mutationId = String(item?.clientMutationId || "");
+    if (!mutationId || state.pendingReplayAttempted.has(mutationId)) continue;
+    state.pendingReplayAttempted.add(mutationId);
+    try {
+      const response = await fetch("/api/learning/pending-interactions/resume", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ clientMutationId: mutationId }),
+      });
+      resumed = response.ok || resumed;
+    } catch {
+      // The server-side captured answer remains retryable on the next session.
+    }
+  }
+  if (resumed) void flushSharedState();
 }
 
 function mergeInteractionConversation(existingTurns, incomingTurns, fallbackTurn = null) {

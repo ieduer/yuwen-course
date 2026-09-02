@@ -18,6 +18,8 @@ import {
   OUTBOX_RECONCILE_SELECTION_SQL,
   OUTBOX_RETRY_SELECTION_SQL,
   learningEvaluatorCallBudget,
+  listPendingLearningSubmissions,
+  loadPendingLearningSubmission,
   releaseLearningSubmissionReservation,
   reserveLearningEvaluatorCall,
   assertLearningSubmissionAllowed,
@@ -383,6 +385,7 @@ function initializeLearningContractDb(db) {
     "migrations/0004_classical_first_read_and_outbox_index.sql",
     "migrations/0005_learning_evidence_central_receipts.sql",
     "migrations/0006_learning_evaluator_call_ledger.sql",
+    "migrations/0007_learning_pending_submissions.sql",
   ]) {
     db.exec(readFileSync(resolve(ROOT, migration), "utf8"));
   }
@@ -3751,6 +3754,99 @@ test("evaluator failures enter a short cooldown without consuming learner capaci
       db.prepare("SELECT created_at FROM learning_submission_slots").get().created_at,
       /\.002Z$/,
     );
+  } finally {
+    db.close();
+  }
+});
+
+test("captured evaluator input is private, resumable, and completed atomically with evidence", async () => {
+  const db = new DatabaseSync(":memory:");
+  try {
+    initializeLearningContractDb(db);
+    const source = sourceEnvironment();
+    source.env.READING_DB = sqliteD1(db);
+    const request = new Request("https://yw.bdfz.net/api/interaction-check");
+    const student = { id: 7, ucUserId: 42 };
+    const payload = {
+      word: "站立",
+      creation: "這是已由學生提交並在模型呼叫前持久化的原始答案。",
+      clientMutationId: "server-captured-resume",
+    };
+    const initial = await assertLearningSubmissionAllowed({
+      request,
+      env: source.env,
+      student,
+      lesson: wordCreationLesson,
+      interactionKey: "wordCreation",
+      payload,
+      occurredAt: new Date(Date.now() - 1_000).toISOString(),
+    });
+    const captured = db.prepare(
+      "SELECT status, attempt_count, raw_payload_json FROM learning_pending_submissions"
+    ).get();
+    assert.equal(captured.status, "captured");
+    assert.equal(captured.attempt_count, 0);
+    assert.equal(JSON.parse(captured.raw_payload_json).creation, payload.creation);
+
+    const summaries = await listPendingLearningSubmissions({
+      env: source.env,
+      student,
+      lessonId: wordCreationLesson.id,
+    });
+    assert.deepEqual(Object.keys(summaries[0]).sort(), [
+      "clientMutationId", "interaction", "lessonId", "status", "updatedAt",
+    ]);
+    assert.equal(JSON.stringify(summaries).includes(payload.creation), false);
+    const replay = await loadPendingLearningSubmission({
+      env: source.env,
+      student,
+      clientMutationId: payload.clientMutationId,
+    });
+    assert.equal(replay.clientMutationId, payload.clientMutationId);
+    assert.equal(replay.input.creation, payload.creation);
+
+    await releaseLearningSubmissionReservation({
+      env: source.env,
+      submissionReservation: initial.submissionReservation,
+    });
+    const retryable = db.prepare(
+      "SELECT status, attempt_count FROM learning_pending_submissions"
+    ).get();
+    assert.equal(retryable.status, "retryable");
+    assert.equal(retryable.attempt_count, 1);
+    const cooldownStartedAt = db.prepare(
+      "SELECT created_at FROM learning_submission_slots"
+    ).get().created_at;
+    const retryAt = new Date(Date.parse(cooldownStartedAt) + 16_000).toISOString();
+    const resumed = await assertLearningSubmissionAllowed({
+      request,
+      env: source.env,
+      student,
+      lesson: wordCreationLesson,
+      interactionKey: "wordCreation",
+      payload,
+      occurredAt: retryAt,
+    });
+    await recordLearningInteraction({
+      request,
+      env: source.env,
+      student,
+      lesson: wordCreationLesson,
+      interactionKey: "wordCreation",
+      payload,
+      evaluation: { score: 80, correctness: "passed", provider: "apis" },
+      submissionReservation: resumed.submissionReservation,
+    });
+    const completed = db.prepare(
+      "SELECT status, attempt_count FROM learning_pending_submissions"
+    ).get();
+    assert.equal(completed.status, "completed");
+    assert.equal(completed.attempt_count, 2);
+    assert.equal(await loadPendingLearningSubmission({
+      env: source.env,
+      student,
+      clientMutationId: payload.clientMutationId,
+    }), null);
   } finally {
     db.close();
   }
