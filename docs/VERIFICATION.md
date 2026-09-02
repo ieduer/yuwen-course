@@ -1,5 +1,54 @@
 # 核查標準 / Verification Standard
 
+## 2026-09-02 caller repair and pending replay accepted gate
+
+1. **Source of truth.** Use GitHub
+   `main@17c24f50b7baef71f0a48dd21cbcf76bfc453069`, Pages deployment
+   `9ec50748-5e2f-4c8f-a2b3-a759b439f61d`, APIS version
+   `3742f239-31c5-4330-b385-fe666ce334e0`, and D1 migration 0007. Never deploy
+   either standard dirty checkout.
+2. **Health.** Require APIS health `ok`, valid 27/27 digest-policy parity,
+   caller auth `log-only`, quota `off`, wildcard CORS, YW learning health
+   `healthy`, and `transportPending=0` on the custom and immutable hosts.
+3. **Contract.** Run the evidence, local-progress, static-cache, release-site
+   and artifact-manifest suites. They must prove pre-AI capture, privacy-safe
+   list output, server-only resume by original mutation ID, retryable evaluator
+   failure, atomic completion, conflict rejection and idempotent duplicate
+   handling.
+4. **Deploy and forbidden actions.** Apply only additive migration 0007, rotate
+   the APIS/YW caller pair through the 0% identity gate, and deploy the formal
+   artifact from the exact merged SHA. Do not enable APIS auth/quota/exact-CORS,
+   move the App pointer, deploy a native client, expose raw payloads or change
+   another consumer.
+5. **Dependency regression.** Prove `/caller-identity` and the authenticated
+   no-write readiness route, User Center central disposition, Pulse meta/range,
+   custom/immutable asset parity and the retained stable App pointer. Other 26
+   enrolled callers are `verified_no_change` because only YW's digest changed.
+6. **Backup and restore.** Preserve the D1 Time Travel bookmark recorded in the
+   maintenance manual. Do not restore D1 for an application rollback; migration
+   0007 is compatible with the predecessor Worker and accepted evidence is
+   durable history.
+7. **Rollback.** Restore Pages
+   `6ddd891e-cbb5-438f-8803-26ed4faf44b5` while preserving D1, Queue, User
+   Center and the current caller pair. Credential recovery is a new paired
+   rotation with 0% identity proof; never deploy old APIS version `660723ce`
+   alone because the prior raw YW secret is not retrievable.
+8. **Acceptance.** In a real authenticated browser, require readiness 200,
+   submit one formal interaction, reload while its local pending receipt exists,
+   and verify exactly one completed captured row, one interaction, one eligible
+   evaluation, one evaluator call, one slot and one centrally accepted outbox
+   row. Report only counts/statuses, never payload or identity.
+
+Accepted result: exact Node 24.18.0 passed 71/71 evidence and 24/24 local
+progress tests plus formal artifact checks; GitHub run `33682405726` passed on
+Node 24.18.0 and 22.21.1. Brave readiness returned 200, then the formal
+submission plus 0.9-second reload converged to one completed mutation with a
+passed evaluation and central acceptance. Pulse reported 3,335 requests and
+zero YW errors on 2026-09-02. The formal artifact contains 1,221 files at
+aggregate SHA-256
+`bf5055013f8311ae8ff2b9aeae89c2965a1101f3ec3e22d79119ac693c49d581`.
+App disposition is `compatible-no-client-release`; no native pointer moved.
+
 ## 2026-09-01 cross-browser jitter accepted gate
 
 1. **Source of truth.** Accepted source is clean GitHub
