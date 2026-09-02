@@ -1,6 +1,55 @@
 # Project State
 
-Last updated: 2026-09-01
+Last updated: 2026-09-02
+
+## 2026-09-02 APIS caller repair and resumable evaluation accepted release
+
+- GitHub PR #32 merged as
+  `17c24f50b7baef71f0a48dd21cbcf76bfc453069`. The exact merged SHA built the
+  1,221-file formal artifact at aggregate SHA-256
+  `bf5055013f8311ae8ff2b9aeae89c2965a1101f3ec3e22d79119ac693c49d581`
+  and is live as Pages deployment `9ec50748-5e2f-4c8f-a2b3-a759b439f61d`.
+- Migration `0007_learning_pending_submissions.sql` is applied to
+  `yuwen-reading-db`. It stores an authenticated, normalized submission before
+  the APIS evaluator call, with `captured`, `retryable`, and `completed`
+  states. Public pending-list responses expose only mutation ID, lesson,
+  interaction, status and update time; raw answers, identity and session data
+  never enter the response or structured logs.
+- The browser preserves the original `clientMutationId` in local pending state,
+  automatically retries after identity hydration, and can resume a server-
+  captured submission from another tab by sending only that mutation ID. A
+  successful evidence transaction marks the pending row completed in the same
+  D1 batch as the interaction, evaluation and outbox receipt.
+- Exact Node 24.18.0 passed the 71/71 evidence contract, 24/24 local-progress
+  contract, static-cache and formal artifact checks. GitHub run `33682405726`
+  passed the complete focused contract on Node 24.18.0 and 22.21.1. The full
+  precontent gate also passed; the retained stable App pointer differs from the
+  current audited native graph, so this Web-only release remains
+  `compatible-no-client-release` and does not move or publish native content.
+- APIS/YW credential rotation was verified first against APIS version
+  `3742f239-31c5-4330-b385-fe666ce334e0` at 0% and then promoted in deployment
+  `9b94a01c-4a44-42c5-a706-5baab1479777`. Production `/caller-identity` and
+  the authenticated zero-write `/api/learning/ai-readiness` both returned 200
+  with verified caller identity; APIS remains log-only, quota remains off and
+  CORS remains wildcard with valid 27/27 digest-policy parity.
+- Real authenticated Brave acceptance submitted one formal `structure`
+  interaction and reloaded 0.9 seconds later. Server readback shows exactly one
+  completed captured row, one interaction, one eligible/passed evaluation, one
+  evaluator call, one admission slot and one centrally accepted outbox row for
+  the original mutation ID. No raw answer, student identity, cookie, session or
+  caller credential was written to task evidence.
+- Post-release learning health is healthy with zero transport-pending rows.
+  Pulse reports `yw`, `zone_host_analytics`, `tracked`, 3,335 requests and zero
+  errors for 2026-09-02. `CAPABILITY_FIT=no-new-capability`: the release adds
+  one table and two authenticated routes inside existing Pages/D1/APIS/Queue
+  architecture and adopts no new Cloudflare product or maturity risk.
+- Immediate code rollback is Pages deployment
+  `6ddd891e-cbb5-438f-8803-26ed4faf44b5`; preserve migration 0007 and all D1,
+  Queue and User Center history. Credential rollback must never split the APIS
+  digest from the YW secret: because prior secret plaintext is intentionally
+  unreadable, recovery is a fresh paired rotation with a 0% APIS identity gate,
+  not promotion of old APIS version `660723ce-af45-496a-8690-59ba506426f7`
+  alone.
 
 ## 2026-09-01 cross-browser jitter repair accepted release
 

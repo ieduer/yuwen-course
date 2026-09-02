@@ -1,6 +1,59 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-09-01 (America/Los_Angeles)
+Last reviewed: 2026-09-02 (America/Los_Angeles)
+
+## 2026-09-02 resumable learning-evaluation authority
+
+Every authenticated formal `/api/interaction-check` submission must be stored
+in `learning_pending_submissions` before APIS is called. The authoritative
+states are `captured`, `retryable`, and `completed`; the unique owner/mutation
+constraint and source-event primary key make the original `clientMutationId`
+the idempotency authority. Do not reconstruct, infer, or fabricate an answer
+from logs, UI text or an AI response. Resume only the encrypted-at-rest D1 value
+captured from the original authenticated request.
+
+`GET /api/learning/pending-interactions?lessonId=<LESSON_ID>` returns only the
+privacy-safe summary fields needed by the browser. `POST
+/api/learning/pending-interactions/resume` accepts only a
+`clientMutationId`, re-resolves the current authenticated owner, loads the
+server-captured payload, and re-enters the ordinary evaluation transaction.
+Neither route may return or log the raw answer, identity, session material or
+caller token. The frontend first replays its same-browser pending item with the
+original mutation ID, then resumes any server-only item after identity
+hydration; failures remain retryable and must not be rendered as completion.
+
+Production authority is GitHub
+`main@17c24f50b7baef71f0a48dd21cbcf76bfc453069`, Pages
+`9ec50748-5e2f-4c8f-a2b3-a759b439f61d`, and additive D1 migration 0007. The
+pre-migration Time Travel bookmark is
+`000002e5-00000008-000050da-a400788edb2aa159331df56ad9e3654a` at
+`2026-09-02T20:46:00Z`. Do not restore that bookmark for an application-only
+rollback: the new table is backward-compatible and completed evidence must be
+preserved. A destructive D1 restore requires a separate incident transaction,
+new rescue bookmark and exact impact review.
+
+The APIS/YW caller pair is part of the same synchronized transaction. Current
+APIS deployment `9b94a01c-4a44-42c5-a706-5baab1479777` serves secret-change
+version `3742f239-31c5-4330-b385-fe666ce334e0` at 100%. Never promote the old
+digest version while leaving the new Pages secret, or restore old Pages code
+while changing only APIS credentials. The old raw caller token is not readable
+from Cloudflare by design; credential recovery therefore mints a fresh value,
+updates the 27-entry APIS digest map at 0%, proves `/caller-identity`, promotes
+APIS, then installs the matching YW secret. No raw token or digest map belongs
+in this manual.
+
+The live release gate is: valid 27/27 APIS registry-policy parity, exact caller
+identity, authenticated readiness 200, a real formal interaction with one
+captured/completed row, one interaction/evaluation/evaluator-call/slot, one
+central accepted disposition, healthy learning receipt, zero transport
+pending, and Pulse `tracked` with no YW errors. Roll back code to Pages
+`6ddd891e-cbb5-438f-8803-26ed4faf44b5` if those invariants regress, while
+preserving D1, Queue, User Center and the working caller pair.
+
+This is `CAPABILITY_FIT=no-new-capability`. The stable App pointer remains
+`yw-3e77f0f7ffa5d042a6d06763`; the independently audited current native graph
+is not activated. The explicit App disposition is
+`compatible-no-client-release`.
 
 ## 2026-09-01 browser-dependent jitter release authority
 
