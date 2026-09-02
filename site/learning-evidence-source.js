@@ -624,6 +624,122 @@ async function existingInteraction(db, studentId, clientMutationId) {
   ).bind(studentId, clientMutationId).first();
 }
 
+async function existingPendingSubmission(db, studentId, clientMutationId) {
+  if (!clientMutationId) return null;
+  return db.prepare(
+    `SELECT source_event_id, student_id, client_mutation_id, lesson_id, interaction_key,
+            resource_key, raw_payload_json, status, attempt_count, captured_at, updated_at
+       FROM learning_pending_submissions
+      WHERE student_id = ? AND client_mutation_id = ?`
+  ).bind(studentId, clientMutationId).first();
+}
+
+function assertPendingSubmissionMatches(existing, expected) {
+  if (clean(existing?.source_event_id, 100) !== expected.sourceEventId
+    || Number(existing?.student_id) !== Number(expected.studentId)
+    || clean(existing?.lesson_id, 80) !== expected.lessonId
+    || clean(existing?.interaction_key, 60) !== expected.interactionKey
+    || clean(existing?.resource_key, 220) !== expected.resourceKey
+    || String(existing?.raw_payload_json || "") !== expected.rawPayloadJson) {
+    const error = new Error("client mutation id already belongs to another learning item");
+    error.code = "learning_mutation_conflict";
+    throw error;
+  }
+}
+
+async function capturePendingSubmission(db, expected, occurredAt) {
+  const existing = await existingPendingSubmission(
+    db,
+    expected.studentId,
+    expected.clientMutationId,
+  );
+  if (existing) {
+    assertPendingSubmissionMatches(existing, expected);
+    if (existing.status !== "completed") {
+      await db.prepare(
+        `UPDATE learning_pending_submissions
+            SET status = 'captured', updated_at = ?
+          WHERE source_event_id = ? AND status != 'completed'`
+      ).bind(occurredAt, expected.sourceEventId).run();
+    }
+    return;
+  }
+  try {
+    await db.prepare(
+      `INSERT INTO learning_pending_submissions (
+         source_event_id, student_id, client_mutation_id, lesson_id, interaction_key,
+         resource_key, raw_payload_json, status, captured_at, updated_at
+       ) VALUES (?, ?, ?, ?, ?, ?, ?, 'captured', ?, ?)`
+    ).bind(
+      expected.sourceEventId,
+      expected.studentId,
+      expected.clientMutationId,
+      expected.lessonId,
+      expected.interactionKey,
+      expected.resourceKey,
+      expected.rawPayloadJson,
+      occurredAt,
+      occurredAt,
+    ).run();
+  } catch (error) {
+    if (!isUniqueConstraintError(error)) throw error;
+    const winner = await existingPendingSubmission(db, expected.studentId, expected.clientMutationId);
+    assertPendingSubmissionMatches(winner, expected);
+  }
+}
+
+export async function listPendingLearningSubmissions({ env, student, lessonId = "" }) {
+  if (!env?.READING_DB || !Number.isInteger(Number(student?.id)) || Number(student.id) <= 0) {
+    throw new Error("learning pending source unavailable");
+  }
+  const normalizedLessonId = clean(lessonId, 80);
+  const query = normalizedLessonId
+    ? `SELECT client_mutation_id, lesson_id, interaction_key, status, updated_at
+         FROM learning_pending_submissions
+        WHERE student_id = ? AND lesson_id = ? AND status IN ('captured', 'retryable')
+        ORDER BY updated_at LIMIT 8`
+    : `SELECT client_mutation_id, lesson_id, interaction_key, status, updated_at
+         FROM learning_pending_submissions
+        WHERE student_id = ? AND status IN ('captured', 'retryable')
+        ORDER BY updated_at LIMIT 8`;
+  const statement = env.READING_DB.prepare(query);
+  const result = normalizedLessonId
+    ? await statement.bind(Number(student.id), normalizedLessonId).all()
+    : await statement.bind(Number(student.id)).all();
+  return (result?.results || []).map((row) => ({
+    clientMutationId: clean(row.client_mutation_id, 100),
+    lessonId: clean(row.lesson_id, 80),
+    interaction: clean(row.interaction_key, 60),
+    status: clean(row.status, 20),
+    updatedAt: clean(row.updated_at, 40),
+  }));
+}
+
+export async function loadPendingLearningSubmission({ env, student, clientMutationId }) {
+  if (!env?.READING_DB || !Number.isInteger(Number(student?.id)) || Number(student.id) <= 0) {
+    throw new Error("learning pending source unavailable");
+  }
+  const mutationId = clean(clientMutationId, 100);
+  if (!mutationId) throw new Error("client mutation id required");
+  const row = await existingPendingSubmission(env.READING_DB, Number(student.id), mutationId);
+  if (!row || row.status === "completed") return null;
+  let input;
+  try {
+    input = JSON.parse(row.raw_payload_json);
+  } catch {
+    throw new Error("captured learning payload invalid");
+  }
+  if (!input || typeof input !== "object" || Array.isArray(input)) {
+    throw new Error("captured learning payload invalid");
+  }
+  return {
+    lessonId: clean(row.lesson_id, 80),
+    interaction: clean(row.interaction_key, 60),
+    input,
+    clientMutationId: mutationId,
+  };
+}
+
 function isUniqueConstraintError(error) {
   const message = [error?.message, error?.cause?.message]
     .filter(Boolean)
@@ -1118,6 +1234,15 @@ export async function assertLearningSubmissionAllowed({
       evaluation: storedEvaluation(committed),
     };
   }
+  await capturePendingSubmission(env.READING_DB, {
+    sourceEventId: slot.sourceEventId,
+    studentId: Number(student.id),
+    clientMutationId,
+    lessonId: lesson.id,
+    interactionKey,
+    resourceKey: context.resourceKey,
+    rawPayloadJson: raw.serialized,
+  }, occurredAt);
   const submissionReservation = {
     sourceEventId: slot.sourceEventId,
     occurredAt,
@@ -1258,8 +1383,15 @@ export async function releaseLearningSubmissionReservation({ env, submissionRese
            WHERE interaction.source_event_id = learning_submission_slots.source_event_id
         )`
   ).bind(cooldownStartedAt, submissionReservation.sourceEventId, leaseStartedAt).run();
-  trustedSubmissionReservations.delete(submissionReservation);
   const changed = Number(released?.meta?.changes || 0) === 1;
+  if (changed) {
+    await env.READING_DB.prepare(
+      `UPDATE learning_pending_submissions
+          SET status = 'retryable', attempt_count = attempt_count + 1, updated_at = ?
+        WHERE source_event_id = ? AND status != 'completed'`
+    ).bind(isoNow(), submissionReservation.sourceEventId).run();
+  }
+  trustedSubmissionReservations.delete(submissionReservation);
   return {
     released: changed,
     retryAfterSeconds: EVALUATOR_FAILURE_COOLDOWN_SECONDS,
@@ -1460,6 +1592,12 @@ export async function recordLearningInteraction({
     env.READING_DB.prepare(
       "INSERT INTO evidence_outbox (source_event_id, envelope_json) VALUES (?, ?)"
     ).bind(sourceEventId, JSON.stringify(envelope)),
+    env.READING_DB.prepare(
+      `UPDATE learning_pending_submissions
+          SET status = 'completed', attempt_count = attempt_count + 1,
+              updated_at = ?, completed_at = ?
+        WHERE source_event_id = ? AND student_id = ? AND client_mutation_id = ?`
+    ).bind(effectiveOccurredAt, effectiveOccurredAt, sourceEventId, student.id, clientMutationId),
   ];
   try {
     await env.READING_DB.batch(statements);
@@ -1490,6 +1628,8 @@ export async function recordLearningInteraction({
     }
     throw error;
   }
+
+  if (trustedReservation) trustedSubmissionReservations.delete(trustedReservation);
 
   const delivery = await enqueueOutbox(env, sourceEventId, envelope);
   return {

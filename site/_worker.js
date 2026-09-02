@@ -8,6 +8,8 @@ import {
   LearningResourceNotPublishedError,
   LearningSubmissionInProgressError,
   LearningSubmissionRateLimitError,
+  listPendingLearningSubmissions,
+  loadPendingLearningSubmission,
   releaseLearningSubmissionReservation,
   reserveLearningEvaluatorCall,
   recordLearningInteraction,
@@ -85,6 +87,14 @@ export default {
       const rejected = authenticatedMutationRequestRejection(request);
       if (rejected) return rejected;
       return handleInteractionCheck(request, env);
+    }
+    if (url.pathname === "/api/learning/pending-interactions" && request.method === "GET") {
+      return handlePendingInteractionsList(request, env, url);
+    }
+    if (url.pathname === "/api/learning/pending-interactions/resume" && request.method === "POST") {
+      const rejected = authenticatedMutationRequestRejection(request);
+      if (rejected) return rejected;
+      return handlePendingInteractionResume(request, env);
     }
     if (url.pathname === "/api/learning/interactions" && request.method === "POST") {
       const rejected = authenticatedMutationRequestRejection(request);
@@ -1242,8 +1252,8 @@ export function formalInteractionHistoryPrompt(turns, responseRole = "文本細�
   ].join("\n");
 }
 
-async function handleInteractionCheck(request, env) {
-  const payload = await request.json().catch(() => ({}));
+async function handleInteractionCheck(request, env, capturedPayload = null, authenticatedStudent = null) {
+  const payload = capturedPayload || await request.json().catch(() => ({}));
   const lessonId = cleanText(payload.lessonId, 80);
   if (!/^lesson-[\w-]{1,60}$/.test(lessonId)) {
     return json({ error: "valid lesson id required" }, { status: 400 });
@@ -1277,12 +1287,14 @@ async function handleInteractionCheck(request, env) {
   if (!lessonTitle || !["contextWords", "authorQuestion", "revision", "structure", "wordCreation"].includes(interaction) || inputText.length < 6) {
     return json({ error: "valid lesson, interaction and student input are required" }, { status: 400 });
   }
-  let student;
-  try {
-    student = await getReadingStudent(request, env);
-  } catch (error) {
-    if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
-    throw error;
+  let student = authenticatedStudent;
+  if (!student) {
+    try {
+      student = await getReadingStudent(request, env);
+    } catch (error) {
+      if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
+      throw error;
+    }
   }
   if (!student) return authenticatedEvaluationRequiredResponse();
   const criteria = {
@@ -1436,6 +1448,43 @@ async function handleInteractionCheck(request, env) {
     }
     return json({ error: error.message || "interaction assessment unavailable" }, { status: 502 });
   }
+}
+
+async function authenticatedReadingStudent(request, env) {
+  try {
+    return await getReadingStudent(request, env);
+  } catch (error) {
+    if (error?.code === "reading_identity_unavailable") return { error: readingError(error.message, 503) };
+    throw error;
+  }
+}
+
+async function handlePendingInteractionsList(request, env, url) {
+  const student = await authenticatedReadingStudent(request, env);
+  if (student?.error) return student.error;
+  if (!student) return authenticatedEvaluationRequiredResponse();
+  const lessonId = cleanText(url.searchParams.get("lessonId"), 80);
+  if (lessonId && !/^lesson-[\w-]{1,60}$/.test(lessonId)) {
+    return json({ error: "valid lesson id required" }, { status: 400 });
+  }
+  const submissions = await listPendingLearningSubmissions({ env, student, lessonId });
+  return json({ ok: true, submissions });
+}
+
+async function handlePendingInteractionResume(request, env) {
+  const student = await authenticatedReadingStudent(request, env);
+  if (student?.error) return student.error;
+  if (!student) return authenticatedEvaluationRequiredResponse();
+  const body = await request.json().catch(() => ({}));
+  const captured = await loadPendingLearningSubmission({
+    env,
+    student,
+    clientMutationId: body.clientMutationId,
+  });
+  if (!captured) {
+    return json({ error: "pending learning submission not found", code: "learning_pending_not_found" }, { status: 404 });
+  }
+  return handleInteractionCheck(request, env, captured, student);
 }
 
 async function handleLearningCheck(request, env) {
