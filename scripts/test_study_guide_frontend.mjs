@@ -36,6 +36,7 @@ function interactionHarness(fetchImpl, {
       current: { id: "lesson-a" },
       progress: { "lesson-a": {}, "lesson-b": {} },
       interactionRequestsInFlight: new Set(),
+      pendingReplayAttempted: new Set(),
     },
     input: initialInput || { reason: "以兩處具體章句說明前後照應、語勢轉折與整體章法如何逐層推進。" },
     interactionKey,

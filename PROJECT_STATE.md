@@ -2,6 +2,29 @@
 
 Last updated: 2026-09-02
 
+## 2026-09-02 pending-evaluation replay and typed-error candidate
+
+- Retryable captured submissions are no longer page-lifetime blocked after a
+  failed automatic replay. Network, focus and visible-page recovery reuse the
+  original mutation ID; one pass cannot submit the same local and server row
+  twice, while terminal contract/auth failures remain blocked for that page.
+- APIS response and transport failures retain stable error code, HTTP status,
+  retryability, retry delay, request correlation, operation/source/stage and
+  duration. Diagnostics contain no prompt, answer, identity, session or raw
+  payload. Deadline failures normalize to `APIS_DEADLINE_EXCEEDED` rather than
+  a browser-specific numeric DOM exception code.
+- The user-facing 503 now states the durable truth: the answer is preserved,
+  but has not yet been evaluated or counted. It never claims that a captured
+  answer was not recorded.
+- Exact Node 24.18.0 targeted evidence/replay tests pass 100/100. The complete
+  precontent sequence passes when the Wrangler integration and the 16/16 mobile
+  plus 13/13 shared-state browser suites run with their required local registry
+  and GUI permissions; the sandbox-only aggregate command cannot supply those
+  permissions. Real authenticated offline/reload/reconnect acceptance remains
+  a release gate. Production stays on Pages
+  `9ec50748-5e2f-4c8f-a2b3-a759b439f61d`; no D1, Queue, APIS, User Center,
+  binding, route, secret or model policy changed.
+
 ## 2026-09-02 APIS caller repair and resumable evaluation accepted release
 
 - GitHub PR #32 merged as

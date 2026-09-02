@@ -2,6 +2,32 @@
 
 Last reviewed: 2026-09-02 (America/Los_Angeles)
 
+## 2026-09-02 retryable replay and APIS error boundary candidate
+
+Automatic replay uses the original `clientMutationId` and admits at most one
+local/server attempt for that mutation in a single pass. A retryable HTTP,
+provider, timeout or transport outcome releases only the in-memory replay guard
+so online/focus/visible-page recovery can try again; terminal authentication,
+contract and conflict outcomes remain blocked for the page. The captured D1
+answer stays authoritative and is never copied into logs or list responses.
+
+YW preserves upstream APIS error code, HTTP status, retryability, retry delay
+and request correlation. Privacy-safe diagnostics contain operation, stage,
+source key, task type and duration but never prompt, answer, identity, session
+or raw payload. Abort deadlines are always `APIS_DEADLINE_EXCEEDED`. A retryable
+503 must say that the answer is preserved but not evaluated or counted; it must
+not tell the learner that a durably captured answer was not recorded.
+
+Exact Node 24.18.0 source verification passed the complete precontent sequence,
+including 100/100 focused evidence/replay tests, 74/74 local Worker integration
+checks, 16/16 mobile browser checks and the 13/13 plus browser shared-state
+contract. The Wrangler and browser components require their normal local
+registry and GUI permissions and therefore run separately from a sandbox-only
+aggregate invocation. Real authenticated offline/reload/reconnect acceptance
+is still required. Until that passes, retain Pages
+`9ec50748-5e2f-4c8f-a2b3-a759b439f61d`; code rollback never deletes migration
+0007, D1 pending rows, Queue history or central evidence.
+
 ## 2026-09-02 resumable learning-evaluation authority
 
 Every authenticated formal `/api/interaction-check` submission must be stored

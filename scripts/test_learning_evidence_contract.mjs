@@ -48,6 +48,7 @@ const formativeManifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/lesso
 const studyGuideCatalog = JSON.parse(readFileSync(resolve(ROOT, "site/data/study-guide-catalog.json"), "utf8"));
 const vocabFirstRead = JSON.parse(readFileSync(resolve(ROOT, "site/data/classical-first-read/lesson-1474.json"), "utf8"));
 const workerSource = readFileSync(resolve(ROOT, "site/_worker.js"), "utf8");
+const appSource = readFileSync(resolve(ROOT, "site/assets/app.js"), "utf8");
 const YW_WEB_JSON_HEADERS = {
   "content-type": "application/json",
   origin: "https://yw.bdfz.net",
@@ -1633,13 +1634,71 @@ test("feedback evaluation receives 45 seconds while non-feedback APIS work stays
   assert.deepEqual(delays, [20_000, 45_000]);
 });
 
+test("YW preserves typed APIS failure metadata without logging prompts or answers", async () => {
+  const originalWarn = console.warn;
+  const warnings = [];
+  console.warn = (line) => warnings.push(JSON.parse(String(line)));
+  try {
+    await assert.rejects(
+      callApisPrompt({
+        APIS_CALLER_TOKEN: "fixture-token",
+        APIS: {
+          fetch: async () => new Response(JSON.stringify({
+            error: "gateway unavailable",
+            error_code: "MODEL_CIRCUIT_OPEN",
+            retry_after_seconds: 37,
+            requestId: "gateway-request-fixture",
+          }), {
+            status: 503,
+            headers: { "content-type": "application/json", "retry-after": "37" },
+          }),
+        },
+      }, "private fixture prompt", "feedback", "medium"),
+      (error) => error?.name === "ApisGatewayError"
+        && error.code === "MODEL_CIRCUIT_OPEN"
+        && error.status === 503
+        && error.retryable === true
+        && error.retryAfterSeconds === 37
+        && error.requestId === "gateway-request-fixture",
+    );
+  } finally {
+    console.warn = originalWarn;
+  }
+  assert.deepEqual(warnings, [{
+    event: "yw_apis_failure",
+    operation: "call_apis_prompt",
+    stage: "gateway_response",
+    source_site_key: "yw",
+    task_type: "feedback",
+    error_code: "MODEL_CIRCUIT_OPEN",
+    http_status: 503,
+    retryable: true,
+    retry_after_seconds: 37,
+    request_id: "gateway-request-fixture",
+    duration_ms: warnings[0].duration_ms,
+  }]);
+  assert.ok(Number.isFinite(warnings[0].duration_ms));
+  assert.doesNotMatch(JSON.stringify(warnings), /private fixture prompt|gateway unavailable/);
+});
+
+test("same-page recovery releases only retryable replay guards and retries on reconnect", () => {
+  const replaySource = appSource.slice(
+    appSource.indexOf("function pendingReplayErrorIsRetryable"),
+    appSource.indexOf("function mergeInteractionConversation"),
+  );
+  assert.match(replaySource, /const attemptedThisPass = new Set\(\)/);
+  assert.match(replaySource, /attemptedThisPass\.has\(mutationId\)/);
+  assert.match(replaySource, /pendingReplayAttempted\.delete\(mutationId\)/);
+  assert.match(appSource, /const refreshRecoverableLearningState = \(\) => \{[\s\S]*autoReplayPendingInteractions\(state\.current\)/);
+});
+
 test("an APIS evaluator outage is a retryable friendly 503 with no false receipt", async () => {
   const response = learningEvaluatorUnavailableResponse();
   assert.equal(response.status, 503);
   assert.equal(response.headers.get("retry-after"), "15");
   assert.deepEqual(await response.json(), {
     ok: false,
-    error: "評閱服務暫時繁忙，本次答案尚未記錄，請稍後重試",
+    error: "評閱服務暫時繁忙；答案已保留，但尚未完成評閱或計入完成度，請使用同一內容重試",
     code: "learning_evaluator_unavailable",
     retryable: true,
     retryAfterSeconds: 15,
@@ -1650,10 +1709,10 @@ test("an APIS evaluator outage is a retryable friendly 503 with no false receipt
   );
   assert.ok(
     interactionHandler.indexOf("releaseAfterEvaluatorFailure")
-      < interactionHandler.indexOf("return learningEvaluatorUnavailableResponse()"),
+      < interactionHandler.indexOf("return learningEvaluatorUnavailableResponse("),
   );
   assert.ok(
-    interactionHandler.indexOf("return learningEvaluatorUnavailableResponse()")
+    interactionHandler.indexOf("return learningEvaluatorUnavailableResponse(")
       < interactionHandler.indexOf("recordLearningInteraction"),
   );
 });
@@ -2097,10 +2156,11 @@ test("an evaluator outage consumes no learner slot and retries after only the sh
     assert.equal(failed.headers.get("retry-after"), "15");
     assert.deepEqual(await failed.json(), {
       ok: false,
-      error: "評閱服務暫時繁忙，本次答案尚未記錄，請稍後重試",
+      error: "評閱服務暫時繁忙；答案已保留，但尚未完成評閱或計入完成度，請使用同一內容重試",
       code: "learning_evaluator_unavailable",
       retryable: true,
       retryAfterSeconds: 15,
+      upstreamErrorCode: "APIS_TRANSPORT_ERROR",
     });
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 0);

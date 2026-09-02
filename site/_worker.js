@@ -274,14 +274,18 @@ function learningSubmissionInProgressResponse(error) {
   }, { status: 409, headers: { "retry-after": String(retryAfterSeconds) } });
 }
 
-export function learningEvaluatorUnavailableResponse(retryAfter = 15) {
+export function learningEvaluatorUnavailableResponse(retryAfter = 15, upstream = {}) {
   const retryAfterSeconds = Math.max(1, Math.min(30, Number(retryAfter) || 15));
+  const upstreamErrorCode = cleanText(upstream?.errorCode, 80);
+  const upstreamRequestId = cleanText(upstream?.requestId, 100);
   return json({
     ok: false,
-    error: "評閱服務暫時繁忙，本次答案尚未記錄，請稍後重試",
+    error: "評閱服務暫時繁忙；答案已保留，但尚未完成評閱或計入完成度，請使用同一內容重試",
     code: "learning_evaluator_unavailable",
     retryable: true,
     retryAfterSeconds,
+    ...(upstreamErrorCode ? { upstreamErrorCode } : {}),
+    ...(upstreamRequestId ? { upstreamRequestId } : {}),
   }, {
     status: 503,
     headers: { "retry-after": String(retryAfterSeconds) },
@@ -1394,7 +1398,10 @@ async function handleInteractionCheck(request, env, capturedPayload = null, auth
       } catch (releasedError) {
         if (releasedError instanceof LearningSubmissionRateLimitError) throw releasedError;
         if (releasedError !== error) throw releasedError;
-        return learningEvaluatorUnavailableResponse();
+        return learningEvaluatorUnavailableResponse(error?.retryAfterSeconds, {
+          errorCode: error?.code,
+          requestId: error?.requestId,
+        });
       }
     }
     const recorded = await recordLearningInteraction({
@@ -1510,6 +1517,7 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
   }
   const controller = new AbortController();
   const timeoutMs = taskType === "feedback" ? APIS_FEEDBACK_TIMEOUT_MS : APIS_DEFAULT_TIMEOUT_MS;
+  const startedAt = Date.now();
   const timeout = setTimeout(() => controller.abort("APIS evaluation timeout"), timeoutMs);
   try {
     const response = await env.APIS.fetch(new Request("https://apis.internal/", {
@@ -1528,10 +1536,78 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
       if (error?.name === "AbortError") throw error;
       return {};
     });
-    if (!response.ok) throw new Error(data.error || `APIS ${response.status}`);
+    if (!response.ok) {
+      const typed = data?.error && typeof data.error === "object" ? data.error : {};
+      const errorCode = cleanText(
+        typed.code || data.error_code || data.code || `APIS_HTTP_${response.status}`,
+        80,
+      );
+      const retryAfterHeader = Number(response.headers.get("retry-after"));
+      const retryAfterSeconds = Math.max(1, Math.min(300, Number(
+        typed.retryAfterSeconds
+          ?? data.retry_after_seconds
+          ?? data.retryAfterSeconds
+          ?? retryAfterHeader
+          ?? 15,
+      ) || 15));
+      const error = new Error(
+        cleanText(typed.message || (typeof data.error === "string" ? data.error : "") || `APIS ${response.status}`, 240),
+      );
+      error.name = "ApisGatewayError";
+      error.code = errorCode;
+      error.status = response.status;
+      error.retryAfterSeconds = retryAfterSeconds;
+      error.requestId = cleanText(
+        typed.requestId || data.requestId || response.headers.get("x-request-id"),
+        100,
+      );
+      error.retryable = Boolean(
+        typed.retryable ?? data.retryable ?? (response.status === 429 || response.status >= 500),
+      );
+      console.warn(JSON.stringify({
+        event: "yw_apis_failure",
+        operation: "call_apis_prompt",
+        stage: "gateway_response",
+        source_site_key: "yw",
+        task_type: cleanText(taskType, 40),
+        error_code: error.code,
+        http_status: error.status,
+        retryable: error.retryable,
+        retry_after_seconds: error.retryAfterSeconds,
+        request_id: error.requestId,
+        duration_ms: Math.max(0, Date.now() - startedAt),
+      }));
+      throw error;
+    }
     const answer = cleanText(data.answer, 8000);
     if (!answer) throw new Error("APIS returned empty answer");
     return answer;
+  } catch (error) {
+    if (error?.name === "ApisGatewayError") throw error;
+    const transportError = new Error(cleanText(error?.message, 240) || "APIS transport unavailable");
+    transportError.name = cleanText(error?.name, 80) || "Error";
+    transportError.cause = error;
+    transportError.code = error?.name === "AbortError"
+      ? "APIS_DEADLINE_EXCEEDED"
+      : (cleanText(error?.code, 80) || "APIS_TRANSPORT_ERROR");
+    transportError.status = Number(error?.status) || 0;
+    transportError.retryAfterSeconds = Math.max(1, Math.min(30, Number(error?.retryAfterSeconds) || 15));
+    transportError.requestId = cleanText(error?.requestId, 100);
+    transportError.retryable = true;
+    console.warn(JSON.stringify({
+      event: "yw_apis_failure",
+      operation: "call_apis_prompt",
+      stage: transportError.name === "AbortError" ? "gateway_deadline" : "gateway_transport",
+      source_site_key: "yw",
+      task_type: cleanText(taskType, 40),
+      error_code: transportError.code,
+      http_status: transportError.status,
+      retryable: true,
+      retry_after_seconds: transportError.retryAfterSeconds,
+      request_id: transportError.requestId,
+      duration_ms: Math.max(0, Date.now() - startedAt),
+    }));
+    throw transportError;
   } finally {
     clearTimeout(timeout);
   }
@@ -2502,7 +2578,10 @@ async function handleReadingStudyGuideAttempt(request, env, student) {
       } catch (releasedError) {
         if (releasedError instanceof LearningSubmissionRateLimitError) throw releasedError;
         if (releasedError !== error) throw releasedError;
-        return learningEvaluatorUnavailableResponse();
+        return learningEvaluatorUnavailableResponse(error?.retryAfterSeconds, {
+          errorCode: error?.code,
+          requestId: error?.requestId,
+        });
       }
     }
   }
