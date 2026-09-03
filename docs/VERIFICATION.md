@@ -10,11 +10,12 @@
 2. **Health.** Require APIS health `ok`, valid 27/27 digest-policy parity,
    caller auth `log-only`, quota `off`, wildcard CORS, YW learning health
    `healthy`, and `transportPending=0` on the custom and immutable hosts.
-3. **Contract.** Run the evidence, local-progress, static-cache, release-site
+3. **Contract.** Run the evidence, local-progress, study-guide frontend,
+   static-cache, release-site
    and artifact-manifest suites. They must prove pre-AI capture, privacy-safe
    list output, server-only resume by original mutation ID, retryable evaluator
-   failure, atomic completion, conflict rejection and idempotent duplicate
-   handling.
+   failure, same-page replay-guard release, persisted-BFCache recovery, atomic
+   completion, conflict rejection and idempotent duplicate handling.
 4. **Deploy and forbidden actions.** Apply only additive migration 0007, rotate
    the APIS/YW caller pair through the 0% identity gate, and deploy the formal
    artifact from the exact merged SHA. Do not enable APIS auth/quota/exact-CORS,

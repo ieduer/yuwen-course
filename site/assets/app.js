@@ -3582,6 +3582,24 @@ function learningSubmissionRetryMessage(code, retryAfterSeconds = 0, limitReason
   return "";
 }
 
+function pendingReplayErrorIsRetryable(error) {
+  const code = String(error?.code || "");
+  return error?.name === "AbortError"
+    || error?.name === "TypeError"
+    || Number(error?.status) === 401
+    || Number(error?.status) === 408
+    || Number(error?.status) === 429
+    || Number(error?.status) >= 500
+    || [
+      "authenticated_evaluation_required",
+      "learning_submission_in_progress",
+      "learning_submission_rate_limited",
+      "learning_evaluator_unavailable",
+      "learning_evaluator_budget_exhausted",
+      "learning_evaluator_budget_unavailable",
+    ].includes(code);
+}
+
 function interactionInputSignature(input) {
   const canonical = Object.fromEntries(
     Object.keys(input || {}).sort().map((inputKey) => [inputKey, String(input[inputKey] ?? "")]),
@@ -3632,6 +3650,7 @@ async function autoReplayPendingInteractions(lesson = state.current) {
   if (!lesson?.id || !interactionIdentityResolved
     || !progressOwnerScope || progressOwnerScope === ANONYMOUS_UI_SCOPE) return;
   const progress = lessonProgress(lesson.id);
+  const attemptedThisPass = new Set();
   const localEntries = [
     ["contextWords", progress.context],
     ["authorQuestion", progress.authorQuestion],
@@ -3643,6 +3662,7 @@ async function autoReplayPendingInteractions(lesson = state.current) {
     const mutationId = record.pendingSubmission.clientMutationId;
     if (state.pendingReplayAttempted.has(mutationId)) continue;
     state.pendingReplayAttempted.add(mutationId);
+    attemptedThisPass.add(mutationId);
     await submitInteraction(interaction, null, { silent: true });
   }
   let pending;
@@ -3660,17 +3680,26 @@ async function autoReplayPendingInteractions(lesson = state.current) {
   let resumed = false;
   for (const item of pending) {
     const mutationId = String(item?.clientMutationId || "");
-    if (!mutationId || state.pendingReplayAttempted.has(mutationId)) continue;
+    if (!mutationId || attemptedThisPass.has(mutationId) || state.pendingReplayAttempted.has(mutationId)) continue;
     state.pendingReplayAttempted.add(mutationId);
+    attemptedThisPass.add(mutationId);
     try {
       const response = await fetch("/api/learning/pending-interactions/resume", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ clientMutationId: mutationId }),
       });
+      const payload = await response.json().catch(() => ({}));
       resumed = response.ok || resumed;
+      if (!response.ok && pendingReplayErrorIsRetryable({
+        code: payload.code,
+        status: response.status,
+      })) {
+        state.pendingReplayAttempted.delete(mutationId);
+      }
     } catch {
       // The server-side captured answer remains retryable on the next session.
+      state.pendingReplayAttempted.delete(mutationId);
     }
   }
   if (resumed) void flushSharedState();
@@ -3928,6 +3957,9 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
       const { pendingSubmission: _pendingSubmission, ...retryableRecord } = liveRecord;
       liveProgress[progressKey] = retryableRecord;
       saveStoredProgress();
+    }
+    if (pendingReplayErrorIsRetryable(error)) {
+      state.pendingReplayAttempted.delete(pending.clientMutationId);
     }
     const requestStillCurrent = state.current?.id === requestLessonId;
     if (!silent && requestStillCurrent) {
@@ -5059,10 +5091,14 @@ function bindEvents() {
   });
   const refreshRecoverableLearningState = () => {
     void flushSharedState();
+    void autoReplayPendingInteractions(state.current);
     if (state.studyGuideCatalogStatus === "unavailable") void refreshStudyGuideCatalog();
   };
   window.addEventListener("online", refreshRecoverableLearningState);
   window.addEventListener("focus", refreshRecoverableLearningState);
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) refreshRecoverableLearningState();
+  });
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") refreshRecoverableLearningState();
     else resetLessonChat();

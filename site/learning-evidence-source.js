@@ -108,7 +108,7 @@ export class LearningEvaluatorBudgetExceededError extends Error {
 export class LearningEvaluatorBudgetUnavailableError extends Error {
   constructor(retryAfterSeconds = EVALUATOR_FAILURE_COOLDOWN_SECONDS) {
     const wait = Math.max(1, Number(retryAfterSeconds) || EVALUATOR_FAILURE_COOLDOWN_SECONDS);
-    super("評閱安全額度暫時無法核對，本次答案尚未送出，請稍後重試");
+    super("評閱安全額度暫時無法核對；答案已保留，但尚未完成評閱，請稍後使用同一內容重試");
     this.name = "LearningEvaluatorBudgetUnavailableError";
     this.code = "learning_evaluator_budget_unavailable";
     this.retryAfterSeconds = wait;

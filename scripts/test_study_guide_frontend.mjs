@@ -36,6 +36,7 @@ function interactionHarness(fetchImpl, {
       current: { id: "lesson-a" },
       progress: { "lesson-a": {}, "lesson-b": {} },
       interactionRequestsInFlight: new Set(),
+      pendingReplayAttempted: new Set(),
     },
     input: initialInput || { reason: "以兩處具體章句說明前後照應、語勢轉折與整體章法如何逐層推進。" },
     interactionKey,
@@ -77,6 +78,20 @@ function interactionHarness(fetchImpl, {
      ${body}
      return {
        submit: () => submitInteraction(deps.interactionKey),
+       seedPending: (mutationId) => {
+         const progressKey = deps.interactionKey === "contextWords" ? "context" : deps.interactionKey;
+         const input = interactionInput(deps.interactionKey);
+         state.progress[state.current.id][progressKey] = {
+           ...input,
+           pendingSubmission: {
+             clientMutationId: mutationId,
+             inputSignature: interactionInputSignature(input),
+             input: { ...input },
+           },
+         };
+       },
+       addReplayGuard: (mutationId) => state.pendingReplayAttempted.add(mutationId),
+       hasReplayGuard: (mutationId) => state.pendingReplayAttempted.has(mutationId),
        setLesson: (id) => { state.current = { id }; },
        setOwner: (owner, progress) => { progressOwnerScope = owner; state.progress = progress; },
        setDraft: (value) => {
@@ -721,6 +736,55 @@ test("catalog transient failure retries in-place without focus online or reload"
   assert.equal(controls.retryAttempt(), 0);
 });
 
+test("BFCache restoration replays recoverable learning state", () => {
+  const recoverySource = section(
+    "  const refreshRecoverableLearningState = () => {",
+    "  document.addEventListener(\"keydown\"",
+  );
+  const windowListeners = new Map();
+  const documentListeners = new Map();
+  const calls = { shared: 0, replay: 0, catalog: 0, reset: 0 };
+  const window = {
+    addEventListener(name, listener) {
+      windowListeners.set(name, listener);
+    },
+  };
+  const document = {
+    visibilityState: "hidden",
+    addEventListener(name, listener) {
+      documentListeners.set(name, listener);
+    },
+  };
+  const state = {
+    current: { id: "lesson-a" },
+    studyGuideCatalogStatus: "available",
+  };
+  new Function(
+    "window",
+    "document",
+    "state",
+    "flushSharedState",
+    "autoReplayPendingInteractions",
+    "refreshStudyGuideCatalog",
+    "resetLessonChat",
+    recoverySource,
+  )(
+    window,
+    document,
+    state,
+    () => { calls.shared += 1; },
+    () => { calls.replay += 1; },
+    () => { calls.catalog += 1; },
+    () => { calls.reset += 1; },
+  );
+
+  assert.equal(typeof windowListeners.get("pageshow"), "function");
+  windowListeners.get("pageshow")({ persisted: false });
+  assert.deepEqual(calls, { shared: 0, replay: 0, catalog: 0, reset: 0 });
+  windowListeners.get("pageshow")({ persisted: true });
+  assert.deepEqual(calls, { shared: 1, replay: 1, catalog: 0, reset: 0 });
+});
+
 test("study-guide completion fails closed while the catalog is unavailable", () => {
   const body = section("function studyGuideCompletedFor", "function progressPercent");
   assert.match(body, /state\.studyGuideCatalogStatus !== "available"\) return false/);
@@ -744,6 +808,33 @@ test("AI interaction feedback is accepted only with a durable My evidence receip
   assert.match(submission, /pendingSubmission: pending/);
   assert.match(submission, /interactionPendingMatches\(liveRecord, pending\)/);
   assert.match(submission, /答案或提交狀態已變更/);
+});
+
+test("a transient evaluator failure releases the same-page replay guard", async () => {
+  let attempt = 0;
+  const harness = interactionHarness(async () => {
+    attempt += 1;
+    if (attempt === 1) {
+      return new Response(JSON.stringify({
+        error: "temporary",
+        code: "learning_evaluator_unavailable",
+        retryable: true,
+      }), { status: 503, headers: { "content-type": "application/json" } });
+    }
+    return Response.json({
+      assessment: { score: 90 },
+      evidence: { status: "accepted", sourceEventId: "fixture-event", attemptNo: 1 },
+    });
+  });
+  harness.seedPending("mutation-retryable-1");
+  harness.addReplayGuard("mutation-retryable-1");
+
+  await harness.submit();
+  assert.equal(harness.hasReplayGuard("mutation-retryable-1"), false);
+  await harness.submit();
+  assert.equal(harness.deps.calls.requests.length, 2);
+  assert.equal(harness.deps.calls.requests[0].clientMutationId, "mutation-retryable-1");
+  assert.equal(harness.deps.calls.requests[1].clientMutationId, "mutation-retryable-1");
 });
 
 test("interaction and study-guide retry messages distinguish active work, capacity and upstream cooldown", () => {

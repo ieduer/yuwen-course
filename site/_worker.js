@@ -278,7 +278,7 @@ export function learningEvaluatorUnavailableResponse(retryAfter = 15) {
   const retryAfterSeconds = Math.max(1, Math.min(30, Number(retryAfter) || 15));
   return json({
     ok: false,
-    error: "評閱服務暫時繁忙，本次答案尚未記錄，請稍後重試",
+    error: "評閱服務暫時繁忙；答案已保留，但尚未完成評閱或計入完成度，請使用同一內容重試",
     code: "learning_evaluator_unavailable",
     retryable: true,
     retryAfterSeconds,

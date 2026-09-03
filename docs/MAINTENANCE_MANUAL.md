@@ -2,6 +2,32 @@
 
 Last reviewed: 2026-09-02 (America/Los_Angeles)
 
+## 2026-09-02 retryable replay candidate
+
+Automatic replay uses the original `clientMutationId` and admits at most one
+local/server attempt for that mutation in a single pass. A retryable HTTP,
+provider, timeout, transport or restorable-authentication outcome releases only
+the in-memory replay guard so online/focus/visible-page or persisted-BFCache
+recovery can try again; terminal contract and conflict outcomes remain blocked
+for the page. The captured D1 answer stays authoritative and is never copied
+into logs or list responses.
+
+A retryable 503 must say that the answer is preserved but not evaluated or
+counted; it must not tell the learner that a durably captured answer was not
+recorded. APIS transport/error taxonomy and diagnostic-contract changes remain
+outside this Phase 2 transaction.
+
+Exact Node 24.18.0 source verification passed the complete precontent sequence,
+including the focused evidence/replay matrix, 29/29 study-guide frontend cases,
+72/72 evidence-contract cases, 74/74 local Worker integration checks, 16/16
+mobile browser checks and the 13/13 plus browser shared-state contract. The
+formal artifact contains 1,221 files / 164,453,537 bytes at aggregate SHA-256
+`dfa64b4d179904e83c1ff2c6506e1a83e5fa5f0c8eab764e1b392c6cb78d70bc`.
+Real authenticated offline/reload/reconnect acceptance is still required.
+Until that passes, retain Pages
+`9ec50748-5e2f-4c8f-a2b3-a759b439f61d`; code rollback never deletes migration
+0007, D1 pending rows, Queue history or central evidence.
+
 ## 2026-09-02 resumable learning-evaluation authority
 
 Every authenticated formal `/api/interaction-check` submission must be stored

@@ -48,6 +48,7 @@ const formativeManifest = JSON.parse(readFileSync(resolve(ROOT, "site/data/lesso
 const studyGuideCatalog = JSON.parse(readFileSync(resolve(ROOT, "site/data/study-guide-catalog.json"), "utf8"));
 const vocabFirstRead = JSON.parse(readFileSync(resolve(ROOT, "site/data/classical-first-read/lesson-1474.json"), "utf8"));
 const workerSource = readFileSync(resolve(ROOT, "site/_worker.js"), "utf8");
+const appSource = readFileSync(resolve(ROOT, "site/assets/app.js"), "utf8");
 const YW_WEB_JSON_HEADERS = {
   "content-type": "application/json",
   origin: "https://yw.bdfz.net",
@@ -1633,13 +1634,24 @@ test("feedback evaluation receives 45 seconds while non-feedback APIS work stays
   assert.deepEqual(delays, [20_000, 45_000]);
 });
 
+test("same-page recovery releases only retryable replay guards and retries on reconnect", () => {
+  const replaySource = appSource.slice(
+    appSource.indexOf("function pendingReplayErrorIsRetryable"),
+    appSource.indexOf("function mergeInteractionConversation"),
+  );
+  assert.match(replaySource, /const attemptedThisPass = new Set\(\)/);
+  assert.match(replaySource, /attemptedThisPass\.has\(mutationId\)/);
+  assert.match(replaySource, /pendingReplayAttempted\.delete\(mutationId\)/);
+  assert.match(appSource, /const refreshRecoverableLearningState = \(\) => \{[\s\S]*autoReplayPendingInteractions\(state\.current\)/);
+});
+
 test("an APIS evaluator outage is a retryable friendly 503 with no false receipt", async () => {
   const response = learningEvaluatorUnavailableResponse();
   assert.equal(response.status, 503);
   assert.equal(response.headers.get("retry-after"), "15");
   assert.deepEqual(await response.json(), {
     ok: false,
-    error: "評閱服務暫時繁忙，本次答案尚未記錄，請稍後重試",
+    error: "評閱服務暫時繁忙；答案已保留，但尚未完成評閱或計入完成度，請使用同一內容重試",
     code: "learning_evaluator_unavailable",
     retryable: true,
     retryAfterSeconds: 15,
@@ -2097,7 +2109,7 @@ test("an evaluator outage consumes no learner slot and retries after only the sh
     assert.equal(failed.headers.get("retry-after"), "15");
     assert.deepEqual(await failed.json(), {
       ok: false,
-      error: "評閱服務暫時繁忙，本次答案尚未記錄，請稍後重試",
+      error: "評閱服務暫時繁忙；答案已保留，但尚未完成評閱或計入完成度，請使用同一內容重試",
       code: "learning_evaluator_unavailable",
       retryable: true,
       retryAfterSeconds: 15,
