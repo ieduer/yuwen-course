@@ -2,22 +2,20 @@
 
 Last reviewed: 2026-09-02 (America/Los_Angeles)
 
-## 2026-09-02 retryable replay and APIS error boundary candidate
+## 2026-09-02 retryable replay candidate
 
 Automatic replay uses the original `clientMutationId` and admits at most one
 local/server attempt for that mutation in a single pass. A retryable HTTP,
-provider, timeout or transport outcome releases only the in-memory replay guard
-so online/focus/visible-page or persisted-BFCache recovery can try again;
-terminal authentication, contract and conflict outcomes remain blocked for the
-page. The captured D1 answer stays authoritative and is never copied into logs
-or list responses.
+provider, timeout, transport or restorable-authentication outcome releases only
+the in-memory replay guard so online/focus/visible-page or persisted-BFCache
+recovery can try again; terminal contract and conflict outcomes remain blocked
+for the page. The captured D1 answer stays authoritative and is never copied
+into logs or list responses.
 
-YW preserves upstream APIS error code, HTTP status, retryability, retry delay
-and request correlation. Privacy-safe diagnostics contain operation, stage,
-source key, task type and duration but never prompt, answer, identity, session
-or raw payload. Abort deadlines are always `APIS_DEADLINE_EXCEEDED`. A retryable
-503 must say that the answer is preserved but not evaluated or counted; it must
-not tell the learner that a durably captured answer was not recorded.
+A retryable 503 must say that the answer is preserved but not evaluated or
+counted; it must not tell the learner that a durably captured answer was not
+recorded. APIS transport/error taxonomy and diagnostic-contract changes remain
+outside this Phase 2 transaction.
 
 Exact Node 24.18.0 source verification passed the complete precontent sequence,
 including the focused evidence/replay matrix, 29/29 study-guide frontend cases,

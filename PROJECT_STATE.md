@@ -2,18 +2,14 @@
 
 Last updated: 2026-09-02
 
-## 2026-09-02 pending-evaluation replay and typed-error candidate
+## 2026-09-02 pending-evaluation replay candidate
 
 - Retryable captured submissions are no longer page-lifetime blocked after a
   failed automatic replay. Network, focus, visible-page and persisted-BFCache
   recovery reuse the original mutation ID; one pass cannot submit the same
-  local and server row twice, while terminal contract/auth failures remain
-  blocked for that page.
-- APIS response and transport failures retain stable error code, HTTP status,
-  retryability, retry delay, request correlation, operation/source/stage and
-  duration. Diagnostics contain no prompt, answer, identity, session or raw
-  payload. Deadline failures normalize to `APIS_DEADLINE_EXCEEDED` rather than
-  a browser-specific numeric DOM exception code.
+  local and server row twice. A restored login may retry the same receipt;
+  terminal contract and mutation-conflict outcomes remain blocked for that
+  page.
 - The user-facing 503 now states the durable truth: the answer is preserved,
   but has not yet been evaluated or counted. It never claims that a captured
   answer was not recorded.

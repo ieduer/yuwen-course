@@ -1634,53 +1634,6 @@ test("feedback evaluation receives 45 seconds while non-feedback APIS work stays
   assert.deepEqual(delays, [20_000, 45_000]);
 });
 
-test("YW preserves typed APIS failure metadata without logging prompts or answers", async () => {
-  const originalWarn = console.warn;
-  const warnings = [];
-  console.warn = (line) => warnings.push(JSON.parse(String(line)));
-  try {
-    await assert.rejects(
-      callApisPrompt({
-        APIS_CALLER_TOKEN: "fixture-token",
-        APIS: {
-          fetch: async () => new Response(JSON.stringify({
-            error: "gateway unavailable",
-            error_code: "MODEL_CIRCUIT_OPEN",
-            retry_after_seconds: 37,
-            requestId: "gateway-request-fixture",
-          }), {
-            status: 503,
-            headers: { "content-type": "application/json", "retry-after": "37" },
-          }),
-        },
-      }, "private fixture prompt", "feedback", "medium"),
-      (error) => error?.name === "ApisGatewayError"
-        && error.code === "MODEL_CIRCUIT_OPEN"
-        && error.status === 503
-        && error.retryable === true
-        && error.retryAfterSeconds === 37
-        && error.requestId === "gateway-request-fixture",
-    );
-  } finally {
-    console.warn = originalWarn;
-  }
-  assert.deepEqual(warnings, [{
-    event: "yw_apis_failure",
-    operation: "call_apis_prompt",
-    stage: "gateway_response",
-    source_site_key: "yw",
-    task_type: "feedback",
-    error_code: "MODEL_CIRCUIT_OPEN",
-    http_status: 503,
-    retryable: true,
-    retry_after_seconds: 37,
-    request_id: "gateway-request-fixture",
-    duration_ms: warnings[0].duration_ms,
-  }]);
-  assert.ok(Number.isFinite(warnings[0].duration_ms));
-  assert.doesNotMatch(JSON.stringify(warnings), /private fixture prompt|gateway unavailable/);
-});
-
 test("same-page recovery releases only retryable replay guards and retries on reconnect", () => {
   const replaySource = appSource.slice(
     appSource.indexOf("function pendingReplayErrorIsRetryable"),
@@ -1709,10 +1662,10 @@ test("an APIS evaluator outage is a retryable friendly 503 with no false receipt
   );
   assert.ok(
     interactionHandler.indexOf("releaseAfterEvaluatorFailure")
-      < interactionHandler.indexOf("return learningEvaluatorUnavailableResponse("),
+      < interactionHandler.indexOf("return learningEvaluatorUnavailableResponse()"),
   );
   assert.ok(
-    interactionHandler.indexOf("return learningEvaluatorUnavailableResponse(")
+    interactionHandler.indexOf("return learningEvaluatorUnavailableResponse()")
       < interactionHandler.indexOf("recordLearningInteraction"),
   );
 });
@@ -2160,7 +2113,6 @@ test("an evaluator outage consumes no learner slot and retries after only the sh
       code: "learning_evaluator_unavailable",
       retryable: true,
       retryAfterSeconds: 15,
-      upstreamErrorCode: "APIS_TRANSPORT_ERROR",
     });
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_submission_slots").get().n, 1);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 0);
