@@ -1,5 +1,31 @@
 # 核查標準 / Verification Standard
 
+## 2026-09-03 Phase 2 Web-only release gate
+
+1. Build from the clean pushed `origin/main` SHA only. Run `precontent:check`,
+   `verify:study-guide-sources`, `build:release-site`, `check:release-site`,
+   `build:artifact-manifest`, and `check:artifact-manifest` in that order.
+2. Populate the existing Phase 2 receipt's `path_decision.web_only_release`
+   with the same source SHA, formal artifact count/bytes/digest, exact
+   `compatible-no-client-release` disposition, and current stable App pointer
+   plus full App-content tree hashes.
+3. Run `npm run check:native-content:web-only -- --receipt <ABSOLUTE_RECEIPT>`.
+   Missing mode/receipt, wrong SHA/digest/disposition/hash, invalid native
+   audit/object receipt, dirty source, unpushed source, or any App-byte change
+   must fail closed. The default deploy-sync gate remains unchanged.
+4. Upload the same `.release/site` bytes to a non-`main` preview, prove binding
+   isolation plus static/anonymous rendering, recheck SHA/manifest/marker, and
+   stop on any mismatch. Preview cannot prove production identity, D1, Queue,
+   evaluator, central projection or replay behavior.
+5. Without rebuilding, upload the identical artifact to `main`, perform
+   write-after-readback on the production deployment/custom/atomic hosts, and
+   then run the seven production acceptance scenarios from the Phase 2
+   directive and receipt.
+6. On failure, restore the exact pre-mutation production Pages deployment, then
+   the pre-mutation User Center Worker if needed. Preserve all data and the App
+   pointer. The final IDs and aggregate-only acceptance evidence live in the
+   validated shared-hub receipt.
+
 ## 2026-09-02 caller repair and pending replay accepted gate
 
 1. **Source of truth.** Use GitHub

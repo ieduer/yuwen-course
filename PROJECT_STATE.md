@@ -1,6 +1,23 @@
 # Project State
 
-Last updated: 2026-09-02
+Last updated: 2026-09-03
+
+## 2026-09-03 Phase 2 Web-only release gate
+
+- The bounded `compatible-no-client-release` mode is now explicit and receipt
+  bound. It runs only after the formal artifact exists and requires the exact
+  clean pushed `origin/main` SHA, artifact file/byte/digest identity, and
+  unchanged stable App pointer plus immutable App-content tree hashes.
+- The default native deploy-sync path remains fail-closed and unchanged; there
+  is no environment-variable override, native object publication, or App
+  pointer movement.
+- The same frozen `.release/site` must pass an isolated non-`main` preview
+  artifact smoke before direct upload to `main`; preview is not a production
+  canary or rollback authority. Final deployment IDs and the seven production
+  acceptance results are recorded in shared-hub receipt
+  `2026-09-02-user-center-yw-progress-resilience-v2.json`.
+- Code rollback restores the receipt-recorded pre-mutation Pages deployment and
+  preserves D1, pending rows, Queue/DLQ, central evidence and the App pointer.
 
 ## 2026-09-02 pending-evaluation replay candidate
 

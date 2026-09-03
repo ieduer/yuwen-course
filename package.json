@@ -35,6 +35,7 @@
     "build:native-content": "node scripts/build_native_content.mjs",
     "build:native-content:stable": "node scripts/build_native_content.mjs --app-disposition compatible-and-synced --promote-stable",
     "check:native-content:deploy-sync": "node scripts/check_native_content_deploy_sync.mjs",
+    "check:native-content:web-only": "node scripts/check_native_content_deploy_sync.mjs --mode compatible-no-client-release",
     "verify:native-content:live": "node scripts/verify_deployed_native_content.mjs",
     "check:web-url-projection": "node scripts/build_release_site.mjs --check-source --preview",
     "build:release-site": "node scripts/build_release_site.mjs",
