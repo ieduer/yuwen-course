@@ -20,6 +20,7 @@ import {
   createUrlSanitizer,
   privacyIssueCounts,
 } from "./native_content_url_sanitizer.mjs";
+import { validateWebOnlyReceipt } from "./check_native_content_deploy_sync.mjs";
 import { nativeContentAssetContentTypeMatches } from "../site/_worker.js";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -1367,4 +1368,48 @@ test("formal artifact gates cannot restore checkout production entrypoints", () 
     FOUNDATION_WAVE_APP_POINTER_SHA256,
     "foundation wave must preserve the live and Android-compatible App pointer",
   );
+});
+
+test("Web-only native gate binds exact receipt source artifact disposition and App hashes", () => {
+  const context = {
+    sourceSha: "a".repeat(40),
+    artifact: {
+      aggregateSha256: "b".repeat(64),
+      fileCount: 1221,
+      totalBytes: 164453537,
+    },
+    pointerSha256: "c".repeat(64),
+    appTree: { aggregateSha256: "d".repeat(64) },
+  };
+  const receipt = {
+    change_id: "20260902-user-center-yw-progress-resilience-v2",
+    path_decision: {
+      web_only_release: {
+        change_id: "20260902-user-center-yw-progress-resilience-v2",
+        gate_status: "prepared",
+        disposition: "compatible-no-client-release",
+        yuwen_main_sha: context.sourceSha,
+        artifact: {
+          aggregate_sha256: context.artifact.aggregateSha256,
+          file_count: context.artifact.fileCount,
+          total_bytes: context.artifact.totalBytes,
+        },
+        app_pointer_sha256: context.pointerSha256,
+        app_tree_sha256: context.appTree.aggregateSha256,
+      },
+    },
+  };
+
+  assert.doesNotThrow(() => validateWebOnlyReceipt(receipt, context));
+  for (const [field, mutate, pattern] of [
+    ["source SHA", (value) => { value.path_decision.web_only_release.yuwen_main_sha = "e".repeat(40); }, /main SHA/],
+    ["artifact digest", (value) => { value.path_decision.web_only_release.artifact.aggregate_sha256 = "e".repeat(64); }, /artifact aggregate/],
+    ["disposition", (value) => { value.path_decision.web_only_release.disposition = "blocked"; }, /disposition/],
+    ["pointer hash", (value) => { value.path_decision.web_only_release.app_pointer_sha256 = "e".repeat(64); }, /pointer hash/],
+    ["App tree hash", (value) => { value.path_decision.web_only_release.app_tree_sha256 = "e".repeat(64); }, /App tree hash/],
+  ]) {
+    const changed = structuredClone(receipt);
+    mutate(changed);
+    assert.throws(() => validateWebOnlyReceipt(changed, context), pattern, field);
+  }
 });

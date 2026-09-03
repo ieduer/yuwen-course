@@ -1,6 +1,37 @@
 # `yw.bdfz.net` maintenance manual
 
-Last reviewed: 2026-09-02 (America/Los_Angeles)
+Last reviewed: 2026-09-03 (America/Los_Angeles)
+
+## 2026-09-03 Phase 2 bounded Web-only release gate
+
+The App pointer is intentionally not part of this Web release. The default
+`npm run check:native-content:deploy-sync` behavior remains unchanged and
+fail-closed whenever the current Web graph differs from `latest-stable.json`.
+There is no environment-variable bypass.
+
+For change `20260902-user-center-yw-progress-resilience-v2` only, build and
+verify one `formal-stable` `.release/site` tree, update the existing shared-hub
+receipt with `path_decision.web_only_release`, and run:
+
+```sh
+npm run check:native-content:web-only -- \
+  --receipt /Users/ylsuen/CF/reports/operations/shared_hub_changes/2026-09-02-user-center-yw-progress-resilience-v2.json
+```
+
+The gate requires an exact clean pushed `origin/main` SHA; the formal artifact
+file count, byte count and aggregate digest; the exact
+`compatible-no-client-release` disposition; and pre/post equality of both the
+stable App pointer hash and the complete immutable App-content tree hash. It
+still validates the current native audit, pointer schema/source-clean flag,
+manifest, core bundle, immutable object inventory and release receipt. Only the
+new Web graph's equality to the older stable App semantic digest is exempted.
+
+Upload that same frozen artifact first to a non-`main` preview branch for
+artifact/static/anonymous smoke, then without rebuilding to `main`. Preview is
+neither a traffic canary nor a rollback target. Production acceptance and exact
+live/rollback deployment IDs remain authoritative in the shared-hub receipt;
+Pages rollback preserves D1, pending submissions, Queue/DLQ and central
+evidence, and never moves the App pointer.
 
 ## 2026-09-02 retryable replay candidate
 

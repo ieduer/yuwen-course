@@ -117,6 +117,15 @@ Run the source, content, reader-media, learning-manifest, evidence-contract,
 reading, release-site, artifact, browser, API/auth, D1, dependency, Pulse, and
 Web/App receipt checks in `docs/VERIFICATION.md`.
 
+For the bounded Phase 2 Web-only release while the App pointer is intentionally
+unchanged, build the formal artifact first and then run
+`npm run check:native-content:web-only -- --receipt <ABSOLUTE_PHASE2_RECEIPT>`.
+That mode must bind the clean pushed `origin/main` SHA, formal artifact digest,
+exact `compatible-no-client-release` disposition, and unchanged App pointer and
+immutable tree hashes. The ordinary `check:native-content:deploy-sync` command
+remains the default fail-closed App-release gate and accepts no receipt or
+override.
+
 Production mutation is disabled in this checkout. `package.json` intentionally
 contains no `deploy` or `predeploy` script. Keep `release:check` and the artifact
 builders as source-verification inputs, but Pages deployment, D1 migration,
