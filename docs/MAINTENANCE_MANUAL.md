@@ -19,12 +19,12 @@ outside this Phase 2 transaction.
 
 Exact Node 24.18.0 source verification passed the complete precontent sequence,
 including the focused evidence/replay matrix, 29/29 study-guide frontend cases,
-74/74 local Worker integration
-checks, 16/16 mobile browser checks and the 13/13 plus browser shared-state
-contract. The Wrangler and browser components require their normal local
-registry and GUI permissions and therefore run separately from a sandbox-only
-aggregate invocation. Real authenticated offline/reload/reconnect acceptance
-is still required. Until that passes, retain Pages
+72/72 evidence-contract cases, 74/74 local Worker integration checks, 16/16
+mobile browser checks and the 13/13 plus browser shared-state contract. The
+formal artifact contains 1,221 files / 164,453,537 bytes at aggregate SHA-256
+`dfa64b4d179904e83c1ff2c6506e1a83e5fa5f0c8eab764e1b392c6cb78d70bc`.
+Real authenticated offline/reload/reconnect acceptance is still required.
+Until that passes, retain Pages
 `9ec50748-5e2f-4c8f-a2b3-a759b439f61d`; code rollback never deletes migration
 0007, D1 pending rows, Queue history or central evidence.
 

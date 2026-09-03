@@ -13,13 +13,14 @@ Last updated: 2026-09-02
 - The user-facing 503 now states the durable truth: the answer is preserved,
   but has not yet been evaluated or counted. It never claims that a captured
   answer was not recorded.
-- Exact Node 24.18.0 targeted evidence/replay tests pass, including 29/29
-  study-guide frontend cases and a behavioral BFCache recovery case. The complete
-  precontent sequence passes when the Wrangler integration and the 16/16 mobile
-  plus 13/13 shared-state browser suites run with their required local registry
-  and GUI permissions; the sandbox-only aggregate command cannot supply those
-  permissions. Real authenticated offline/reload/reconnect acceptance remains
-  a release gate. Production stays on Pages
+- Exact Node 24.18.0 verification passes the complete precontent sequence,
+  including 29/29 study-guide frontend cases, 72/72 evidence-contract cases,
+  74/74 local Worker integration checks, 16/16 mobile browser checks and the
+  13/13 plus browser shared-state contract. The formal artifact contains 1,221
+  files / 164,453,537 bytes at aggregate SHA-256
+  `dfa64b4d179904e83c1ff2c6506e1a83e5fa5f0c8eab764e1b392c6cb78d70bc`.
+  Real authenticated offline/reload/reconnect acceptance remains a release
+  gate. Production stays on Pages
   `9ec50748-5e2f-4c8f-a2b3-a759b439f61d`; no D1, Queue, APIS, User Center,
   binding, route, secret or model policy changed.
 
