@@ -7,9 +7,10 @@ Last reviewed: 2026-09-02 (America/Los_Angeles)
 Automatic replay uses the original `clientMutationId` and admits at most one
 local/server attempt for that mutation in a single pass. A retryable HTTP,
 provider, timeout or transport outcome releases only the in-memory replay guard
-so online/focus/visible-page recovery can try again; terminal authentication,
-contract and conflict outcomes remain blocked for the page. The captured D1
-answer stays authoritative and is never copied into logs or list responses.
+so online/focus/visible-page or persisted-BFCache recovery can try again;
+terminal authentication, contract and conflict outcomes remain blocked for the
+page. The captured D1 answer stays authoritative and is never copied into logs
+or list responses.
 
 YW preserves upstream APIS error code, HTTP status, retryability, retry delay
 and request correlation. Privacy-safe diagnostics contain operation, stage,
@@ -19,7 +20,8 @@ or raw payload. Abort deadlines are always `APIS_DEADLINE_EXCEEDED`. A retryable
 not tell the learner that a durably captured answer was not recorded.
 
 Exact Node 24.18.0 source verification passed the complete precontent sequence,
-including 100/100 focused evidence/replay tests, 74/74 local Worker integration
+including the focused evidence/replay matrix, 29/29 study-guide frontend cases,
+74/74 local Worker integration
 checks, 16/16 mobile browser checks and the 13/13 plus browser shared-state
 contract. The Wrangler and browser components require their normal local
 registry and GUI permissions and therefore run separately from a sandbox-only

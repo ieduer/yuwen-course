@@ -5096,6 +5096,9 @@ function bindEvents() {
   };
   window.addEventListener("online", refreshRecoverableLearningState);
   window.addEventListener("focus", refreshRecoverableLearningState);
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) refreshRecoverableLearningState();
+  });
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") refreshRecoverableLearningState();
     else resetLessonChat();

@@ -5,9 +5,10 @@ Last updated: 2026-09-02
 ## 2026-09-02 pending-evaluation replay and typed-error candidate
 
 - Retryable captured submissions are no longer page-lifetime blocked after a
-  failed automatic replay. Network, focus and visible-page recovery reuse the
-  original mutation ID; one pass cannot submit the same local and server row
-  twice, while terminal contract/auth failures remain blocked for that page.
+  failed automatic replay. Network, focus, visible-page and persisted-BFCache
+  recovery reuse the original mutation ID; one pass cannot submit the same
+  local and server row twice, while terminal contract/auth failures remain
+  blocked for that page.
 - APIS response and transport failures retain stable error code, HTTP status,
   retryability, retry delay, request correlation, operation/source/stage and
   duration. Diagnostics contain no prompt, answer, identity, session or raw
@@ -16,7 +17,8 @@ Last updated: 2026-09-02
 - The user-facing 503 now states the durable truth: the answer is preserved,
   but has not yet been evaluated or counted. It never claims that a captured
   answer was not recorded.
-- Exact Node 24.18.0 targeted evidence/replay tests pass 100/100. The complete
+- Exact Node 24.18.0 targeted evidence/replay tests pass, including 29/29
+  study-guide frontend cases and a behavioral BFCache recovery case. The complete
   precontent sequence passes when the Wrangler integration and the 16/16 mobile
   plus 13/13 shared-state browser suites run with their required local registry
   and GUI permissions; the sandbox-only aggregate command cannot supply those
