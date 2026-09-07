@@ -329,7 +329,8 @@ test("preview Worker denies unregistered targets and never emits wildcard CORS",
       env,
       {},
     );
-    assert.equal(redirected.status, 502);
+    assert.equal(redirected.status, 403);
+    assert.equal(redirected.headers.get("x-preview-error-code"), "preview_redirect_denied");
   } finally {
     globalThis.fetch = originalFetch;
   }

@@ -26,3 +26,7 @@ service = "apis"
 [[env.production.queues.producers]]
 binding = "LEARNING_EVIDENCE_QUEUE"
 queue = "bdfz-learning-evidence-yw-v2"
+
+[[env.production.services]]
+binding = "PREVIEW_LOGS"
+service = "yw-preview-logs"

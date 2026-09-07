@@ -1,6 +1,129 @@
 # `yw.bdfz.net` maintenance manual
 
+## 2026-09-07 preview telemetry and persistence candidate
+
+Owner `codex-restorability`, task `20260907-restorability-p0`, source branch
+`codex/yw-preview-telemetry-20260907` based on the reviewed lifecycle candidate
+`1e8b087` and live `9842940`. Canonical five dirty files remain untouched.
+This candidate is not yet deployed; production remains Pages
+`e0ffb33c-5604-449f-9ace-b34bb2f7b94f`.
+
+- Adds fixed `YW_PREVIEW_STAGE_STARTED` and `YW_PREVIEW_TERMINAL` events with
+  an opaque request UUID, stage, public host/MIME class, status, fetch/redirect/
+  retry counts, byte/timing measurements and censored failure classification.
+  No full URL/query, resource/student identifier, cookies, credentials, body or
+  raw exception is logged. `response_constructed` means the Response object
+  exists; it is not proof that headers reached the network/client. Raw upstream
+  bytes are counted once, excluding transformed HTML output.
+- Pages logs do not persist. A proposed private `yw-preview-logs` Worker,
+  callable only through production `PREVIEW_LOGS`, independently sanitizes
+  <=4096-byte event bodies and writes Workers Logs at 100% sampling. Public
+  workers.dev, preview URLs and automatic invocation logs are disabled. No
+  D1/KV/R2/Queue, Google, APIS or User Center writes are involved. The Worker
+  resource and binding remain candidates, not existing live facts.
+- Delivery uses `ctx.waitUntil`, a 1500 ms abort and at most 20 stage events
+  plus one terminal event per request. A sink failure emits one safe local
+  `YW_PREVIEW_LOG_DELIVERY_FAILED` and preserves the preview response. It is
+  best-effort diagnostics, not a durable exactly-once queue. Events may arrive
+  out of order; correlate by UUID/stage/duration, not arrival order.
+- Prior lifecycle changes retain registry/SSRF/HTML/CSP/Range rules, cancel
+  discarded streams and classify upstream errors. Actual timeoutMs/maxBytes
+  remain unset pending representative natural timing/size evidence. The
+  May12 compatibility date/flags are unchanged, so actual incoming-signal
+  disconnect notification remains unproven; output-body cancellation is tested.
+- 61 focused tests pass, including workerd HTML/PDF failures, real handler
+  delivery into the receiver, receiver privacy/size rejection, and sink failure
+  isolation. Wrangler4.100 strict logger dry-run is 4.57KiB. Full precontent
+  initially stopped at macOS direct-browser SIGABRT; the existing LaunchServices
+  launcher passed16/16 with approved local execution. The rest of precontent
+  passed after adding the new modules to the Reading API fixture:74/74Reading
+  checks,30/30native/release checks, and five PDF/extraction receipts verified.
+  Formal staging and artifact-manifest checks pass: 1224 files, digest
+  `ce3d9268253e984726abb86e34d047afb1a0fe9d16104c4d3cb43ac5b7075662`.
+  The exact merged-source Web-only App receipt remains pending.
+  See docs/PREVIEW_TELEMETRY.md for capability fit and per-operation cost bounds.
+- Release must use an exact renewed external UC+YW executor, merged clean
+  source, formal artifact, Web-only App receipt, private logger readback and
+  live persisted event query after closing the Pages tail. No direct Pages
+  Wrangler bypass. Rollback Pages e0ffb33c preserving data, credentials and
+  App content; the private log Worker can remain inert for its evidence window.
+
+Resource location: all new code is in this YW repository under `site/`,
+`diagnostics/` and `scripts/`; no external source dataset is added. Private
+receipts live in workspace `reports/operations/.restorability-p0-20260907`,
+with runtime builds only under the registered task root. Source is retain_hot;
+reproducible builds/profiles are remove-on-closeout. Restore source from the
+reviewed Git commit into an absent manifest-registered worktree and verify Git
+SHA/clean state before building. Logger data is provider-retained diagnostics,
+not restore authority for student records.
+
 Last reviewed: 2026-09-03 (America/Los_Angeles)
+
+## 2026-09-07 preview lifecycle candidate — not released
+
+Owner: codex-yw-preview-candidate. Candidate branch
+`codex/yw-preview-lifecycle-20260907` in the existing YW object store; base is
+GitHub `main@984294096954892993467f02cab2b307724d5fa3`. Pages GET on
+2026-09-07 05:35/05:42 UTC still reports production
+`e0ffb33c-5604-449f-9ace-b34bb2f7b94f`, with that SHA and clean metadata.
+Metadata is a source pointer, not rebuilt artifact parity or user acceptance.
+
+The leaf-only candidate cancels unused redirect/retry/auth/fallback bodies and
+owns upstream and sanitized output streams until completion or cancellation.
+It preserves the exact registry, SSRF policy, redirect ceiling, Range/HEAD,
+HTML sanitization, successful-response cache headers and authentication rules.
+HTTP failures retain their status and Retry-After and cannot turn into a PDF
+fallback 200. Error responses intentionally use no-store and safe generic text;
+network failures remain 502, redirect-policy refusal is 403. Before response
+commit, source-injected deadlines produce 504; after commit they error the
+stream and cannot change its status. Stream error details may be lost at the
+transport/client boundary and require real browser acceptance.
+
+**Hold:** `timeoutMs` and `maxBytes` remain null in the actual route. No
+upstream/body p99 exists, and exact live source had no preview-specific byte
+cap. Fixture limits only prove machinery; this is not a deployed bounded-time
+fix. Registry ASSETS fetch/json and short-URL asset lookup precede this
+external-transfer lifetime and retain their current behavior. Ctext login is
+an existing upstream POST/session-cache side effect; abort is not rollback and
+no new retry is introduced. Other preview fetches are existing GET/HEAD.
+
+Live Pages compatibility date is 2026-05-12 with no flags. Incoming client
+Request.signal notification is gated by `enable_request_signal` in the current
+Cloudflare docs; do not claim real pre-header disconnect cleanup from injected
+Node signals. Outbound AbortController and output-body cancellation are tested.
+No compatibility flag, date, binding, capability or production setting changed.
+CAPABILITY_FIT: leaf `no-new-capability`; same runtime, stores, costs and hubs.
+
+Run Node 24.18.0 `npm run test:preview-transfer`, `npm run test:preview-workerd`,
+`npm run test:preview-targets`, preview binding/resource/screenshot/import
+suites, and `npm run check:preview-targets`. `release:check` contains no deploy,
+but invokes the whole content/browser/precheck suite, native graph build and
+formal staging/manifest gates. It is not the focused test for this candidate;
+full release/build/browser/real-user verification remains unrun and required
+before release. No install, alternate cache or browser was created.
+
+Release remains exclusively through the separately reviewed external UC+YW
+executor required by AGENTS.md lines 129–134. That is an explicit project
+execution rule, not an inferred request for new user approval or permission to
+change UC. The historical one-use executor is bound to an older exact SHA;
+its callable authority for this candidate is unverified. Freeze current leaf
+consumers before release: YW iframe/HEAD-preflight, sanitized HTML, PDF/download,
+Range media; verify App no-content-change and shared-hub no-contract-change
+dispositions. No full current fan-out or executor approval is claimed here.
+Re-read production before release; the currently live e0ffb33c deployment is a
+prospective code rollback anchor, not a tested rollback operation. Preserve
+D1, Queue, central evidence, APIS credential pair and App pointers.
+
+Candidate resource/recovery: the source branch above is `retain_hot` pending
+review by suen/command task on 2026-09-08. It is local-only, not remote backup.
+The disposable worktree is removed only after its commit is verified in the
+canonical object store. After disk/manifest preflight and with the destination
+absent, restore with `git -C /Users/ylsuen/CF/sites/chinese/yuwen-course worktree
+add /private/tmp/cf-task-<TASK_ID>/worktree codex/yw-preview-lifecycle-20260907`;
+verify `git rev-parse HEAD` against the candidate receipt and `git diff --exit-code`.
+No external input was moved or archived; original dirty files remain untouched.
+Receipt and measurement/release holds:
+`/Users/ylsuen/CF/reports/operations/yw_preview_candidate_20260907.md`.
 
 ## 2026-09-03 Phase 2 bounded Web-only release gate
 
