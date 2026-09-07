@@ -24,6 +24,7 @@ import {
 } from "./classical-first-read-source.js";
 import { previewUrlHasPublicHostname } from "./preview-network-policy.js";
 import { createPreviewTransfer, PreviewFailure } from "./preview-transfer.js";
+import { createPreviewEmitter, createPreviewTelemetry } from "./preview-telemetry.js";
 import {
   nativeAuthorizationDecision,
   nativeReadingIdentityProjection,
@@ -118,7 +119,7 @@ export default {
       return handleReading(request, env, url);
     }
     if (url.pathname === "/api/preview" && (request.method === "GET" || request.method === "HEAD")) {
-      return handlePreview(request, env);
+      return handlePreview(request, env, {}, ctx);
     }
     const discussionMatch = url.pathname.match(/^\/api\/discussions\/([^/]+)$/);
     if (discussionMatch) {
@@ -657,26 +658,28 @@ function redirectLookupKeys(url) {
   return [...new Set(keys)];
 }
 
-async function getResourceRedirects(request, env) {
+async function getResourceRedirects(request, env, telemetry) {
   try {
     const assetUrl = new URL("/data/resource_redirects.json", request.url);
     const response = await env.ASSETS.fetch(new Request(assetUrl.toString(), { method: "GET" }));
-    if (!response.ok) return {};
+    if (!response.ok) { telemetry.lookup("unavailable"); return {}; }
     const data = await response.json();
+    telemetry.lookup("ok");
     return data?.redirects || {};
   } catch {
+    telemetry.lookup("unavailable");
     return {};
   }
 }
 
-async function resolvePreviewTarget(request, env, target) {
+async function resolvePreviewTarget(request, env, target, telemetry) {
   if (
     target.hostname.toLowerCase() !== "forum.rdfzer.com"
     || !target.pathname.startsWith("/uploads/short-url/")
   ) {
     return target;
   }
-  const redirects = await getResourceRedirects(request, env);
+  const redirects = await getResourceRedirects(request, env, telemetry);
   for (const key of redirectLookupKeys(target)) {
     if (redirects[key]) return new URL(redirects[key]);
   }
@@ -718,10 +721,11 @@ async function getCtextCookie(env, transfer) {
   return cookie;
 }
 
-async function fetchPreviewUpstream(request, initialTarget, baseHeaders, env, registry, transfer) {
+async function fetchPreviewUpstream(request, initialTarget, baseHeaders, env, registry, transfer, telemetry) {
   let target = initialTarget;
   for (let redirectCount = 0; redirectCount <= 5; redirectCount += 1) {
     if (!previewRedirectAllowed(registry, target)) throw new PreviewFailure("preview_redirect_denied", "redirect", 403);
+    telemetry.target(target);
     const headers = new Headers(baseHeaders);
     if (shouldUseCtextAuth(target)) {
       const cookie = await getCtextCookie(env, transfer);
@@ -750,6 +754,7 @@ async function fetchPreviewUpstream(request, initialTarget, baseHeaders, env, re
         };
       }
       if (response.status === 403 && shugeSession.cookie) {
+        telemetry.retry();
         headers.set("cookie", shugeSession.cookie);
         transfer.discard(response);
         response = await transfer.fetch(target.toString(), {
@@ -761,6 +766,7 @@ async function fetchPreviewUpstream(request, initialTarget, baseHeaders, env, re
     }
     if (![301, 302, 303, 307, 308].includes(response.status)) return { response, target };
     const location = response.headers.get("location");
+    telemetry.redirect();
     transfer.discard(response);
     if (!location) throw new PreviewFailure("preview_redirect_missing", "redirect");
     if (redirectCount === 5) throw new PreviewFailure("preview_redirect_limit", "redirect");
@@ -883,49 +889,65 @@ function previewError(status, message, code = "", stage = "") {
   });
 }
 
-export async function handlePreview(request, env, limits = {}) {
+export async function handlePreview(request, env, limits = {}, ctx = null) {
+  const telemetry = createPreviewTelemetry(request, { emit: createPreviewEmitter(env.PREVIEW_LOGS, ctx) });
+  const reject = (status, message, code, stage) => {
+    const response = telemetry.response(previewError(status, message, code, stage));
+    telemetry.finish(new PreviewFailure(code, stage, status));
+    return response;
+  };
+  telemetry.phase("admission");
   const requestUrl = new URL(request.url);
   const targetRaw = requestUrl.searchParams.get("url") || "";
   let target;
   try {
     target = new URL(targetRaw);
   } catch {
-    return new Response("bad url", { status: 400 });
+    return reject(400, "bad url", "preview_bad_url", "admission");
   }
-  if (!previewAllowed(target)) return new Response("url is not allowed", { status: 400 });
+  if (!previewAllowed(target)) return reject(400, "url is not allowed", "preview_target_denied", "admission");
+  telemetry.phase("registry");
   let registry;
   try {
     registry = await getPreviewRegistry(request, env);
   } catch {
-    return new Response("preview registry unavailable", { status: 503 });
+    return reject(503, "preview registry unavailable", "preview_registry_unavailable", "registry");
   }
   if (!registry.targets.has(normalizedPreviewTarget(target))) {
-    return new Response("url is not registered for preview", { status: 403 });
+    return reject(403, "url is not registered for preview", "preview_target_unregistered", "registry");
   }
+  telemetry.target(target);
+  telemetry.phase("target_resolution");
   const requestedTarget = target;
-  target = await resolvePreviewTarget(request, env, target);
+  try {
+    target = await resolvePreviewTarget(request, env, target, telemetry);
+  } catch {
+    return reject(503, "preview target resolution unavailable", "preview_target_resolution_failed", "target_resolution");
+  }
   if (
     normalizedPreviewTarget(target) !== normalizedPreviewTarget(requestedTarget)
     && !registry.redirectTargets.has(normalizedPreviewTarget(target))
-  ) return new Response("preview redirect is not registered", { status: 403 });
-  if (!previewRedirectAllowed(registry, target)) return new Response("url is not allowed", { status: 400 });
+  ) return reject(403, "preview redirect is not registered", "preview_redirect_denied", "target_resolution");
+  if (!previewRedirectAllowed(registry, target)) return reject(400, "url is not allowed", "preview_target_denied", "admission");
   const headers = new Headers({
     "user-agent": "bdfz-yuwen-course-preview",
     "accept": request.headers.get("accept") || "*/*",
   });
   const range = request.headers.get("range");
   if (range) headers.set("range", range);
-  const transfer = createPreviewTransfer(request.signal, limits);
+  const transfer = createPreviewTransfer(request.signal, { ...limits, observer: telemetry });
   let upstream;
   let streaming = false;
   try {
-    const result = await fetchPreviewUpstream(request, target, headers, env, registry, transfer);
+    const result = await fetchPreviewUpstream(request, target, headers, env, registry, transfer, telemetry);
     upstream = result.response;
     const finalTarget = result.target;
     if (upstream.status >= 400) {
       const response = previewError(upstream.status, "preview upstream returned an error", "preview_upstream_http", "headers");
       const retryAfter = upstream.headers.get("retry-after");
       if (retryAfter) response.headers.set("retry-after", retryAfter);
+      telemetry.response(response);
+      telemetry.finish(new PreviewFailure("preview_upstream_http", "headers", upstream.status));
       return response;
     }
     const responseHeaders = new Headers(upstream.headers);
@@ -946,10 +968,12 @@ export async function handlePreview(request, env, limits = {}) {
       responseHeaders.set("content-type", "text/html; charset=utf-8");
       responseHeaders.set("cache-control", "public, max-age=120");
       responseHeaders.set("content-security-policy", "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; sandbox");
-      return new Response(unavailablePdfHtml(finalTarget), {
+      const response = telemetry.response(new Response(unavailablePdfHtml(finalTarget), {
         status: 200,
         headers: responseHeaders,
-      });
+      }));
+      telemetry.finish(new PreviewFailure("preview_pdf_unavailable", "response", 200));
+      return response;
     }
     if (isHtml && request.method !== "HEAD") {
       const body = transfer.body(upstream, { final: false });
@@ -961,21 +985,21 @@ export async function handlePreview(request, env, limits = {}) {
       const output = transfer.body(sanitized, { enforceSize: false });
       const response = new Response(output, sanitized);
       streaming = Boolean(output);
-      return response;
+      return telemetry.response(response);
     }
     if (isHtml) {
       responseHeaders.set("content-type", "text/html; charset=utf-8");
       responseHeaders.set("content-security-policy", "default-src 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox");
       responseHeaders.set("cache-control", "no-store");
-      return new Response(null, {
+      return telemetry.response(new Response(null, {
         status: upstream.status,
         statusText: upstream.statusText,
         headers: responseHeaders,
-      });
+      }));
     }
-    if (pdfPath && !isPdf) return previewError(415, "preview content type does not match the registered PDF target");
+    if (pdfPath && !isPdf) return reject(415, "preview content type does not match the registered PDF target", "preview_mime_unsupported", "response");
     if (!isPdf && !SAFE_INLINE_PREVIEW_MIME_TYPES.has(mimeType)) {
-      return previewError(415, "preview content type is not supported");
+      return reject(415, "preview content type is not supported", "preview_mime_unsupported", "response");
     }
     if (isPdf) responseHeaders.set("content-type", "application/pdf");
     responseHeaders.set("content-security-policy", "default-src 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox");
@@ -986,12 +1010,14 @@ export async function handlePreview(request, env, limits = {}) {
       headers: responseHeaders,
     });
     streaming = Boolean(body);
-    return response;
+    return telemetry.response(response);
   } catch (error) {
     const failure = error instanceof PreviewFailure ? error
       : new PreviewFailure("preview_response_failed", "response");
+    const response = telemetry.response(previewError(failure.status, failure.code, failure.code, failure.stage));
+    telemetry.finish(failure);
     transfer.abort(failure);
-    return previewError(failure.status, failure.code, failure.code, failure.stage);
+    return response;
   } finally {
     if (!streaming) {
       transfer.discard(upstream);

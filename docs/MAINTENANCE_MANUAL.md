@@ -1,5 +1,62 @@
 # `yw.bdfz.net` maintenance manual
 
+## 2026-09-07 preview telemetry and persistence candidate
+
+Owner `codex-restorability`, task `20260907-restorability-p0`, source branch
+`codex/yw-preview-telemetry-20260907` based on the reviewed lifecycle candidate
+`1e8b087` and live `9842940`. Canonical five dirty files remain untouched.
+This candidate is not yet deployed; production remains Pages
+`e0ffb33c-5604-449f-9ace-b34bb2f7b94f`.
+
+- Adds fixed `YW_PREVIEW_STAGE_STARTED` and `YW_PREVIEW_TERMINAL` events with
+  an opaque request UUID, stage, public host/MIME class, status, fetch/redirect/
+  retry counts, byte/timing measurements and censored failure classification.
+  No full URL/query, resource/student identifier, cookies, credentials, body or
+  raw exception is logged. `response_constructed` means the Response object
+  exists; it is not proof that headers reached the network/client. Raw upstream
+  bytes are counted once, excluding transformed HTML output.
+- Pages logs do not persist. A proposed private `yw-preview-logs` Worker,
+  callable only through production `PREVIEW_LOGS`, independently sanitizes
+  <=4096-byte event bodies and writes Workers Logs at 100% sampling. Public
+  workers.dev, preview URLs and automatic invocation logs are disabled. No
+  D1/KV/R2/Queue, Google, APIS or User Center writes are involved. The Worker
+  resource and binding remain candidates, not existing live facts.
+- Delivery uses `ctx.waitUntil`, a 1500 ms abort and at most 20 stage events
+  plus one terminal event per request. A sink failure emits one safe local
+  `YW_PREVIEW_LOG_DELIVERY_FAILED` and preserves the preview response. It is
+  best-effort diagnostics, not a durable exactly-once queue. Events may arrive
+  out of order; correlate by UUID/stage/duration, not arrival order.
+- Prior lifecycle changes retain registry/SSRF/HTML/CSP/Range rules, cancel
+  discarded streams and classify upstream errors. Actual timeoutMs/maxBytes
+  remain unset pending representative natural timing/size evidence. The
+  May12 compatibility date/flags are unchanged, so actual incoming-signal
+  disconnect notification remains unproven; output-body cancellation is tested.
+- 61 focused tests pass, including workerd HTML/PDF failures, real handler
+  delivery into the receiver, receiver privacy/size rejection, and sink failure
+  isolation. Wrangler4.100 strict logger dry-run is 4.57KiB. Full precontent
+  initially stopped at macOS direct-browser SIGABRT; the existing LaunchServices
+  launcher passed16/16 with approved local execution. The rest of precontent
+  passed after adding the new modules to the Reading API fixture:74/74Reading
+  checks,30/30native/release checks, and five PDF/extraction receipts verified.
+  Formal staging and artifact-manifest checks pass: 1224 files, digest
+  `ce3d9268253e984726abb86e34d047afb1a0fe9d16104c4d3cb43ac5b7075662`.
+  The exact merged-source Web-only App receipt remains pending.
+  See docs/PREVIEW_TELEMETRY.md for capability fit and per-operation cost bounds.
+- Release must use an exact renewed external UC+YW executor, merged clean
+  source, formal artifact, Web-only App receipt, private logger readback and
+  live persisted event query after closing the Pages tail. No direct Pages
+  Wrangler bypass. Rollback Pages e0ffb33c preserving data, credentials and
+  App content; the private log Worker can remain inert for its evidence window.
+
+Resource location: all new code is in this YW repository under `site/`,
+`diagnostics/` and `scripts/`; no external source dataset is added. Private
+receipts live in workspace `reports/operations/.restorability-p0-20260907`,
+with runtime builds only under the registered task root. Source is retain_hot;
+reproducible builds/profiles are remove-on-closeout. Restore source from the
+reviewed Git commit into an absent manifest-registered worktree and verify Git
+SHA/clean state before building. Logger data is provider-retained diagnostics,
+not restore authority for student records.
+
 Last reviewed: 2026-09-03 (America/Los_Angeles)
 
 ## 2026-09-07 preview lifecycle candidate — not released

@@ -85,7 +85,7 @@
     "prepare:release-artifact": "npm run check:native-content:deploy-sync && npm run build:release-site && npm run build:artifact-manifest",
     "release:check": "npm run precontent:check && npm run verify:study-guide-sources && npm run check:native-content:deploy-sync && npm run build:release-site && npm run check:release-site && npm run check:artifact-manifest",
     "serve": "npx wrangler pages dev site",
-    "test:preview-transfer": "node --test scripts/test_preview_transfer.mjs"
+    "test:preview-transfer": "node --test scripts/test_preview_transfer.mjs scripts/test_preview_telemetry.mjs"
   },
   "devDependencies": {
     "linkedom": "0.18.13",

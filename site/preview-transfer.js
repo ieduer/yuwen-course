@@ -11,7 +11,7 @@ export class PreviewFailure extends Error {
 // One lifetime across authentication, redirects, retries and the returned body.
 // Limits stay unset until upstream timing and resource-size evidence is reviewed.
 // They are source-only inputs, never request parameters or environment overrides.
-export function createPreviewTransfer(signal, { timeoutMs = null, maxBytes = null } = {}) {
+export function createPreviewTransfer(signal, { timeoutMs = null, maxBytes = null, observer = null } = {}) {
   for (const value of [timeoutMs, maxBytes]) {
     if (value !== null && (!Number.isSafeInteger(value) || value <= 0)) {
       throw new TypeError("invalid preview limit");
@@ -21,14 +21,18 @@ export function createPreviewTransfer(signal, { timeoutMs = null, maxBytes = nul
   let stage = "headers";
   let timer;
   let finished = false;
+  let failure = null;
   const stopBodies = new Set();
   const finish = () => {
+    if (finished) return;
     finished = true;
     clearTimeout(timer);
     signal?.removeEventListener("abort", clientAbort);
+    observer?.finish(failure);
   };
   const abort = (error) => {
     if (finished) return;
+    failure = error;
     controller.abort(error);
     for (const stop of [...stopBodies]) stop(error);
     finish();
@@ -51,6 +55,7 @@ export function createPreviewTransfer(signal, { timeoutMs = null, maxBytes = nul
     abort,
     async fetch(url, options, phase = "headers") {
       stage = phase;
+      observer?.fetching(phase);
       controller.signal.throwIfAborted();
       let onAbort;
       const interrupted = new Promise((_, reject) => {
@@ -65,7 +70,9 @@ export function createPreviewTransfer(signal, { timeoutMs = null, maxBytes = nul
           }
           return response;
         });
-        return await Promise.race([pending, interrupted]);
+        const response = await Promise.race([pending, interrupted]);
+        observer?.fetched(response);
+        return response;
       } catch (error) {
         throw controller.signal.aborted ? controller.signal.reason
           : new PreviewFailure("preview_upstream_network", stage);
@@ -75,6 +82,7 @@ export function createPreviewTransfer(signal, { timeoutMs = null, maxBytes = nul
     },
     body(response, { final = true, enforceSize = true } = {}) {
       stage = "body";
+      if (enforceSize) observer?.phase("body");
       controller.signal.throwIfAborted();
       if (!response.body) {
         if (final) finish();
@@ -114,6 +122,7 @@ export function createPreviewTransfer(signal, { timeoutMs = null, maxBytes = nul
               return;
             }
             bytes += chunk.value.byteLength;
+            if (enforceSize) observer?.chunk(chunk.value.byteLength);
             if (enforceSize && maxBytes !== null && bytes > maxBytes) {
               abort(new PreviewFailure("preview_body_too_large", stage));
               return;
