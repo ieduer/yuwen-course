@@ -1,8 +1,9 @@
-# Preview incident logging — candidate specification
+# Preview incident logging — accepted production contract
 
 Task `20260907-restorability-p0`, owner `codex-restorability`, 2026-09-07.
-This is a leaf logging and stream-lifecycle change. Runtime publication remains
-held until the exact external executor and acceptance evidence are complete.
+This is a leaf logging and stream-lifecycle change. Production was accepted on2026-09-07 as Pages c66da540 / source a9d7f65
+through external executor c4e5f480. See the current acceptance section in
+MAINTENANCE_MANUAL.md and VERIFICATION.md for exact receipts.
 
 The incident is eight user-facing `/api/preview` 502 responses in the measured
 September7 window; early-Hints504s are a separate population. Existing Pages
@@ -23,7 +24,8 @@ used elsewhere in this workspace. This applies them only to this leaf; it does
 not create a shared gateway or migrate the Pages site. Compilation accepts the
 same May12 compatibility date, no flags, with explicit observability configuration.
 No storage migration, new secret, public domain/route, Cron or queue is added.
-The proposed Worker did not exist on the initial exact-name API readback.
+The Worker was absent at initial readback and was created once through the
+reviewed executor; live version is36279914-26b8-4f80-8e74-fb1828ee281e.
 
 The sole consumer is production YW via `PREVIEW_LOGS`. Preview has no log service
 binding and remains isolated from production. Public `workers_dev` and preview
