@@ -1,5 +1,53 @@
 # Project State
 
+## 2026-09-07 preview lifecycle and persisted diagnostics accepted
+
+Release code is `a9d7f6549c017fc4f392a35f797103ff2d9707c9` (PR36), Pages
+`c66da540-07dc-4f2f-9adf-dbf27fdd251d`. The exact external executor is
+`ieduer/cf-ops-scripts@c4e5f4805b0242889fc92446c82aac7f4d66004b` (PR32).
+Its one-use journal reached `accepted` on September7 after source/configuration,
+full deployment history, formal artifact and custom/atomic host readback.
+The 1224-file artifact is `ce3d9268253e984726abb86e34d047afb1a0fe9d16104c4d3cb43ac5b7075662`.
+The isolated preview `6057d79f-0121-4783-80d5-5942aef701ef` was accepted first.
+
+Private receiver `yw-preview-logs` version
+`36279914-26b8-4f80-8e74-fb1828ee281e` is live through production `PREVIEW_LOGS`
+only. Source, 10ms CPU cap, 100% custom logs, no other bindings, disabled
+workers.dev/preview URLs/invocation logs/traces were read back. Preview has no
+receiver binding. No model, UC, D1, Queue, credential or App data changed.
+The Web-only receipt passed with unchanged App pointer `a5ccd441` and all276
+immutable App objects; no client release is required.
+
+Real anonymous Brave acceptance loaded189 lessons, rendered the registered
+three-page PDF and visibly turned to page2, opened the registered HTML material,
+and rendered HTML again after reload. HEAD returned200 with no body; Range
+returned206 and exactly1024 PDF bytes. Two browser response UUIDs each matched
+five stored stage events and one terminal success after reload, with104/77ms
+and91353 bytes. No Pages/Workers tail was started for this acceptance. Stored
+natural failures separately identified redirect-denied403 and upstream522.
+The original eight502 causes are not retrospectively proven. Best-effort log
+delivery, unset timeout/byte caps and unproven incoming-disconnect notification
+remain explicit limits. No learner submission was used.
+
+Evidence: workspace `reports/operations/.restorability-p0-20260907/` contains
+`yw-production-acceptance.json` (SHA256 `b42a9f07933d1c526ef72fa0f467a3d649fbbacbe5faea20061a7443b55efde6`),
+`yw-browser-correlated-log-readback.json`, `yw-head-range-readback.json`, and
+`yw-release/journal.jsonl`; public transaction is
+`reports/operations/shared_hub_changes/2026-09-07-yw-preview-logs.json`.
+The provider query omits null-valued fields; never invent an error code from an
+absent field on a successful terminal record. Events may arrive out of order.
+
+Rollback uses the exact executor's `rollback` command with clean checkouts pinned
+to the above executor and release-code commits and the existing journal. It
+restores Pages `e0ffb33c-5604-449f-9ace-b34bb2f7b94f` / source `9842940`,
+preserving D1, Queue, credentials and App content. The private binding may remain
+inert. Do not repeat `deploy`, modify its immutable journal, or bypass the gate.
+New documentation commits do not change the deployed code SHA. Source is
+`retain_hot`; private evidence is retained for review on2026-10-07; reproducible
+worktrees/builds/profiles remain owned by the original task for exact cleanup.
+This accepted section supersedes the historical candidate statuses below.
+
+
 ## 2026-09-07 preview telemetry and persistence candidate
 
 Owner `codex-restorability`, task `20260907-restorability-p0`, source branch
