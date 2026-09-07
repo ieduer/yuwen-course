@@ -23,6 +23,7 @@ import {
   upsertClassicalFirstReadMark,
 } from "./classical-first-read-source.js";
 import { previewUrlHasPublicHostname } from "./preview-network-policy.js";
+import { createPreviewTransfer, PreviewFailure } from "./preview-transfer.js";
 import {
   nativeAuthorizationDecision,
   nativeReadingIdentityProjection,
@@ -682,7 +683,7 @@ async function resolvePreviewTarget(request, env, target) {
   return target;
 }
 
-async function getCtextCookie(env) {
+async function getCtextCookie(env, transfer) {
   const username = env.CTEXT_USERNAME || env.CTEXT_USER || "";
   const password = env.CTEXT_PASSWORD || env.CTEXT_PASS || "";
   if (!username || !password) return "";
@@ -695,7 +696,7 @@ async function getCtextCookie(env) {
   body.set("redirect", "/pre-qin-and-han/zh");
   body.set("nologout", "on");
 
-  const response = await fetch("https://ctext.org/account.pl", {
+  const response = await transfer.fetch("https://ctext.org/account.pl", {
     method: "POST",
     headers: {
       "user-agent": "bdfz-yuwen-course-preview",
@@ -706,7 +707,8 @@ async function getCtextCookie(env) {
     },
     body,
     redirect: "manual",
-  });
+  }, "auth_headers");
+  transfer.discard(response);
   const cookie = cookieHeaderFromSetCookies(setCookieHeaders(response.headers));
   if (!cookie) return "";
   ctextSession = {
@@ -716,13 +718,13 @@ async function getCtextCookie(env) {
   return cookie;
 }
 
-async function fetchPreviewUpstream(request, initialTarget, baseHeaders, env, registry) {
+async function fetchPreviewUpstream(request, initialTarget, baseHeaders, env, registry, transfer) {
   let target = initialTarget;
   for (let redirectCount = 0; redirectCount <= 5; redirectCount += 1) {
-    if (!previewRedirectAllowed(registry, target)) throw new Error("preview redirect is not allowed");
+    if (!previewRedirectAllowed(registry, target)) throw new PreviewFailure("preview_redirect_denied", "redirect", 403);
     const headers = new Headers(baseHeaders);
     if (shouldUseCtextAuth(target)) {
-      const cookie = await getCtextCookie(env);
+      const cookie = await getCtextCookie(env, transfer);
       if (cookie) headers.set("cookie", cookie);
       headers.set("accept", "text/html,application/xhtml+xml");
       headers.set("referer", "https://ctext.org/");
@@ -734,7 +736,7 @@ async function fetchPreviewUpstream(request, initialTarget, baseHeaders, env, re
       headers.set("referer", "https://www.shuge.org/");
       if (shugeSession.cookie && Date.now() < shugeSession.expiresAt) headers.set("cookie", shugeSession.cookie);
     }
-    let response = await fetch(target.toString(), {
+    let response = await transfer.fetch(target.toString(), {
       method: request.method,
       headers,
       redirect: "manual",
@@ -749,7 +751,8 @@ async function fetchPreviewUpstream(request, initialTarget, baseHeaders, env, re
       }
       if (response.status === 403 && shugeSession.cookie) {
         headers.set("cookie", shugeSession.cookie);
-        response = await fetch(target.toString(), {
+        transfer.discard(response);
+        response = await transfer.fetch(target.toString(), {
           method: request.method,
           headers,
           redirect: "manual",
@@ -758,10 +761,16 @@ async function fetchPreviewUpstream(request, initialTarget, baseHeaders, env, re
     }
     if (![301, 302, 303, 307, 308].includes(response.status)) return { response, target };
     const location = response.headers.get("location");
-    if (!location || redirectCount === 5) throw new Error("preview redirect limit exceeded");
-    target = new URL(location, target);
+    transfer.discard(response);
+    if (!location) throw new PreviewFailure("preview_redirect_missing", "redirect");
+    if (redirectCount === 5) throw new PreviewFailure("preview_redirect_limit", "redirect");
+    try {
+      target = new URL(location, target);
+    } catch {
+      throw new PreviewFailure("preview_redirect_invalid", "redirect");
+    }
   }
-  throw new Error("preview redirect limit exceeded");
+  throw new PreviewFailure("preview_redirect_limit", "redirect");
 }
 
 function safePreviewAttributeUrl(raw, target, { image = false } = {}) {
@@ -860,10 +869,11 @@ function previewMimeType(contentType) {
   return String(contentType || "").split(";", 1)[0].trim().toLowerCase();
 }
 
-function previewError(status, message) {
+function previewError(status, message, code = "", stage = "") {
   return new Response(message, {
     status,
     headers: {
+      ...(code ? { "x-preview-error-code": code, "x-preview-error-stage": stage } : {}),
       "content-type": "text/plain; charset=utf-8",
       "cache-control": "no-store",
       "content-security-policy": "default-src 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox",
@@ -873,7 +883,7 @@ function previewError(status, message) {
   });
 }
 
-async function handlePreview(request, env) {
+export async function handlePreview(request, env, limits = {}) {
   const requestUrl = new URL(request.url);
   const targetRaw = requestUrl.searchParams.get("url") || "";
   let target;
@@ -905,60 +915,89 @@ async function handlePreview(request, env) {
   });
   const range = request.headers.get("range");
   if (range) headers.set("range", range);
+  const transfer = createPreviewTransfer(request.signal, limits);
   let upstream;
-  let finalTarget;
+  let streaming = false;
   try {
-    ({ response: upstream, target: finalTarget } = await fetchPreviewUpstream(request, target, headers, env, registry));
-  } catch {
-    return new Response("preview upstream unavailable", { status: 502 });
-  }
-  const responseHeaders = new Headers(upstream.headers);
-  const type = responseHeaders.get("content-type") || "";
-  const mimeType = previewMimeType(type);
-  const pdfPath = /\.pdf$/i.test(finalTarget.pathname);
-  const isHtml = mimeType === "text/html" || mimeType === "application/xhtml+xml";
-  const isPdf = mimeType === "application/pdf"
-    || (pdfPath && (!mimeType || mimeType === "application/octet-stream"));
-  clearFrameBlockingHeaders(responseHeaders);
-  responseHeaders.set("x-content-type-options", "nosniff");
-  responseHeaders.set("cross-origin-resource-policy", "same-origin");
-  responseHeaders.set(
-    "content-disposition",
-    contentDispositionValue(requestUrl.searchParams.get("download") ? "attachment" : "inline", filenameFromUrl(finalTarget))
-  );
-  if (pdfPath && isHtml && request.method !== "HEAD") {
-    responseHeaders.set("content-type", "text/html; charset=utf-8");
-    responseHeaders.set("cache-control", "public, max-age=120");
-    responseHeaders.set("content-security-policy", "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; sandbox");
-    return new Response(unavailablePdfHtml(finalTarget), {
-      status: 200,
-      headers: responseHeaders,
-    });
-  }
-  if (isHtml && request.method !== "HEAD") {
-    return sanitizePreviewHtml(upstream, finalTarget, responseHeaders);
-  }
-  if (isHtml) {
-    responseHeaders.set("content-type", "text/html; charset=utf-8");
+    const result = await fetchPreviewUpstream(request, target, headers, env, registry, transfer);
+    upstream = result.response;
+    const finalTarget = result.target;
+    if (upstream.status >= 400) {
+      const response = previewError(upstream.status, "preview upstream returned an error", "preview_upstream_http", "headers");
+      const retryAfter = upstream.headers.get("retry-after");
+      if (retryAfter) response.headers.set("retry-after", retryAfter);
+      return response;
+    }
+    const responseHeaders = new Headers(upstream.headers);
+    const type = responseHeaders.get("content-type") || "";
+    const mimeType = previewMimeType(type);
+    const pdfPath = /\.pdf$/i.test(finalTarget.pathname);
+    const isHtml = mimeType === "text/html" || mimeType === "application/xhtml+xml";
+    const isPdf = mimeType === "application/pdf"
+      || (pdfPath && (!mimeType || mimeType === "application/octet-stream"));
+    clearFrameBlockingHeaders(responseHeaders);
+    responseHeaders.set("x-content-type-options", "nosniff");
+    responseHeaders.set("cross-origin-resource-policy", "same-origin");
+    responseHeaders.set(
+      "content-disposition",
+      contentDispositionValue(requestUrl.searchParams.get("download") ? "attachment" : "inline", filenameFromUrl(finalTarget))
+    );
+    if (pdfPath && isHtml && request.method !== "HEAD") {
+      responseHeaders.set("content-type", "text/html; charset=utf-8");
+      responseHeaders.set("cache-control", "public, max-age=120");
+      responseHeaders.set("content-security-policy", "default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; sandbox");
+      return new Response(unavailablePdfHtml(finalTarget), {
+        status: 200,
+        headers: responseHeaders,
+      });
+    }
+    if (isHtml && request.method !== "HEAD") {
+      const body = transfer.body(upstream, { final: false });
+      const sanitized = sanitizePreviewHtml(new Response(body, {
+        status: upstream.status, statusText: upstream.statusText, headers: upstream.headers,
+      }), finalTarget, responseHeaders);
+      // HTMLRewriter may finish partial output after an input error. Guard the
+      // output too, so a failed input cannot become a successful truncated HTML.
+      const output = transfer.body(sanitized, { enforceSize: false });
+      const response = new Response(output, sanitized);
+      streaming = Boolean(output);
+      return response;
+    }
+    if (isHtml) {
+      responseHeaders.set("content-type", "text/html; charset=utf-8");
+      responseHeaders.set("content-security-policy", "default-src 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox");
+      responseHeaders.set("cache-control", "no-store");
+      return new Response(null, {
+        status: upstream.status,
+        statusText: upstream.statusText,
+        headers: responseHeaders,
+      });
+    }
+    if (pdfPath && !isPdf) return previewError(415, "preview content type does not match the registered PDF target");
+    if (!isPdf && !SAFE_INLINE_PREVIEW_MIME_TYPES.has(mimeType)) {
+      return previewError(415, "preview content type is not supported");
+    }
+    if (isPdf) responseHeaders.set("content-type", "application/pdf");
     responseHeaders.set("content-security-policy", "default-src 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox");
-    responseHeaders.set("cache-control", "no-store");
-    return new Response(null, {
+    const body = request.method === "HEAD" ? null : transfer.body(upstream);
+    const response = new Response(body, {
       status: upstream.status,
       statusText: upstream.statusText,
       headers: responseHeaders,
     });
+    streaming = Boolean(body);
+    return response;
+  } catch (error) {
+    const failure = error instanceof PreviewFailure ? error
+      : new PreviewFailure("preview_response_failed", "response");
+    transfer.abort(failure);
+    return previewError(failure.status, failure.code, failure.code, failure.stage);
+  } finally {
+    if (!streaming) {
+      transfer.discard(upstream);
+      transfer.finish();
+    }
   }
-  if (pdfPath && !isPdf) return previewError(415, "preview content type does not match the registered PDF target");
-  if (!isPdf && !SAFE_INLINE_PREVIEW_MIME_TYPES.has(mimeType)) {
-    return previewError(415, "preview content type is not supported");
-  }
-  if (isPdf) responseHeaders.set("content-type", "application/pdf");
-  responseHeaders.set("content-security-policy", "default-src 'none'; base-uri 'none'; frame-ancestors 'self'; sandbox");
-  return new Response(request.method === "HEAD" ? null : upstream.body, {
-    status: upstream.status,
-    statusText: upstream.statusText,
-    headers: responseHeaders,
-  });
 }
 
 async function getManifest(request, env) {

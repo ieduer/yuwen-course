@@ -1,5 +1,17 @@
 # 核查標準 / Verification Standard
 
+## 2026-09-07 preview candidate verification
+
+Use the focused preview suites and limits listed in the maintenance manual's
+2026-09-07 candidate section. New executable lifecycle tests are wired into
+`precontent:check`. Fixtures cover headers deadline, body/stream stalls,
+redirect denial and cleanup, explicit upstream status, size budget, client
+cancellation and timer/listener cleanup; workerd verifies actual HTMLRewriter
+and PDF failure propagation internally. None is real-user or production p99
+acceptance. Full release, external executor and post-release browser evidence
+remain held. See `reports/operations/yw_preview_candidate_20260907.md` in the
+workspace for source, measurements, limitations and rollback requirements.
+
 ## 2026-09-03 Phase 2 Web-only release gate
 
 1. Build from the clean pushed `origin/main` SHA only. Run `precontent:check`,

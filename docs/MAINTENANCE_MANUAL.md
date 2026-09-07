@@ -2,6 +2,72 @@
 
 Last reviewed: 2026-09-03 (America/Los_Angeles)
 
+## 2026-09-07 preview lifecycle candidate — not released
+
+Owner: codex-yw-preview-candidate. Candidate branch
+`codex/yw-preview-lifecycle-20260907` in the existing YW object store; base is
+GitHub `main@984294096954892993467f02cab2b307724d5fa3`. Pages GET on
+2026-09-07 05:35/05:42 UTC still reports production
+`e0ffb33c-5604-449f-9ace-b34bb2f7b94f`, with that SHA and clean metadata.
+Metadata is a source pointer, not rebuilt artifact parity or user acceptance.
+
+The leaf-only candidate cancels unused redirect/retry/auth/fallback bodies and
+owns upstream and sanitized output streams until completion or cancellation.
+It preserves the exact registry, SSRF policy, redirect ceiling, Range/HEAD,
+HTML sanitization, successful-response cache headers and authentication rules.
+HTTP failures retain their status and Retry-After and cannot turn into a PDF
+fallback 200. Error responses intentionally use no-store and safe generic text;
+network failures remain 502, redirect-policy refusal is 403. Before response
+commit, source-injected deadlines produce 504; after commit they error the
+stream and cannot change its status. Stream error details may be lost at the
+transport/client boundary and require real browser acceptance.
+
+**Hold:** `timeoutMs` and `maxBytes` remain null in the actual route. No
+upstream/body p99 exists, and exact live source had no preview-specific byte
+cap. Fixture limits only prove machinery; this is not a deployed bounded-time
+fix. Registry ASSETS fetch/json and short-URL asset lookup precede this
+external-transfer lifetime and retain their current behavior. Ctext login is
+an existing upstream POST/session-cache side effect; abort is not rollback and
+no new retry is introduced. Other preview fetches are existing GET/HEAD.
+
+Live Pages compatibility date is 2026-05-12 with no flags. Incoming client
+Request.signal notification is gated by `enable_request_signal` in the current
+Cloudflare docs; do not claim real pre-header disconnect cleanup from injected
+Node signals. Outbound AbortController and output-body cancellation are tested.
+No compatibility flag, date, binding, capability or production setting changed.
+CAPABILITY_FIT: leaf `no-new-capability`; same runtime, stores, costs and hubs.
+
+Run Node 24.18.0 `npm run test:preview-transfer`, `npm run test:preview-workerd`,
+`npm run test:preview-targets`, preview binding/resource/screenshot/import
+suites, and `npm run check:preview-targets`. `release:check` contains no deploy,
+but invokes the whole content/browser/precheck suite, native graph build and
+formal staging/manifest gates. It is not the focused test for this candidate;
+full release/build/browser/real-user verification remains unrun and required
+before release. No install, alternate cache or browser was created.
+
+Release remains exclusively through the separately reviewed external UC+YW
+executor required by AGENTS.md lines 129–134. That is an explicit project
+execution rule, not an inferred request for new user approval or permission to
+change UC. The historical one-use executor is bound to an older exact SHA;
+its callable authority for this candidate is unverified. Freeze current leaf
+consumers before release: YW iframe/HEAD-preflight, sanitized HTML, PDF/download,
+Range media; verify App no-content-change and shared-hub no-contract-change
+dispositions. No full current fan-out or executor approval is claimed here.
+Re-read production before release; the currently live e0ffb33c deployment is a
+prospective code rollback anchor, not a tested rollback operation. Preserve
+D1, Queue, central evidence, APIS credential pair and App pointers.
+
+Candidate resource/recovery: the source branch above is `retain_hot` pending
+review by suen/command task on 2026-09-08. It is local-only, not remote backup.
+The disposable worktree is removed only after its commit is verified in the
+canonical object store. After disk/manifest preflight and with the destination
+absent, restore with `git -C /Users/ylsuen/CF/sites/chinese/yuwen-course worktree
+add /private/tmp/cf-task-<TASK_ID>/worktree codex/yw-preview-lifecycle-20260907`;
+verify `git rev-parse HEAD` against the candidate receipt and `git diff --exit-code`.
+No external input was moved or archived; original dirty files remain untouched.
+Receipt and measurement/release holds:
+`/Users/ylsuen/CF/reports/operations/yw_preview_candidate_20260907.md`.
+
 ## 2026-09-03 Phase 2 bounded Web-only release gate
 
 The App pointer is intentionally not part of this Web release. The default

@@ -1,6 +1,20 @@
 # Project State
 
-Last updated: 2026-09-03
+## 2026-09-07 preview lifecycle candidate — not released
+
+Owner: codex-yw-preview-candidate. Local candidate branch
+`codex/yw-preview-lifecycle-20260907`, based on current GitHub main
+`984294096954892993467f02cab2b307724d5fa3`. Pages GET at 05:35/05:42 UTC
+still reports `e0ffb33c-5604-449f-9ace-b34bb2f7b94f`; no production changes.
+The preview lifecycle/diagnostic candidate and focused tests are complete.
+Timeout and byte-cap constants are held pending evidence; full release gates,
+real browser acceptance and callable external executor remain unverified.
+Candidate source is retain_hot in the existing object store through review on
+2026-09-08; disposable worktree will be removed after verified local commit.
+Next task: review candidate and the measurement/release holds, not deploy.
+See the maintenance manual's 2026-09-07 section for recovery/verification,
+prospective rollback anchor and preserved dependencies; exact commit and test
+results live in `/Users/ylsuen/CF/reports/operations/yw_preview_candidate_20260907.md`.
 
 ## 2026-09-03 Phase 2 Web-only release gate
 

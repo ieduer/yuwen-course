@@ -127,3 +127,47 @@ test("workerd executes HTMLRewriter and rejects executable preview MIME types", 
     await mf.dispose();
   }
 });
+
+test("workerd cancels stalled HTMLRewriter and PDF bodies with a source-injected deadline", { timeout: 10000 }, async () => {
+  for (const mime of ["text/html", "application/pdf"]) {
+    const mf = new Miniflare({
+      compatibilityDate: "2026-05-12",
+      modules: true,
+      modulesRules: [{ type: "ESModule", include: ["**/*.js"] }],
+      modulesRoot: resolve(ROOT, "site"),
+      scriptPath: resolve(ROOT, "site/preview-deadline-fixture.js"),
+      script: `
+        import { handlePreview } from "./_worker.js";
+        export default {
+          async fetch(request, env) {
+            const response = await handlePreview(request, env, { timeoutMs: 500 });
+            try {
+              await response.arrayBuffer();
+              return Response.json({ status: response.status, completed: true });
+            } catch (error) {
+              return Response.json({ status: response.status, code: error.code, message: error.message });
+            }
+          }
+        };
+      `,
+      log: new Log(LogLevel.NONE),
+      serviceBindings: {
+        ASSETS() { return Response.json(registry); },
+      },
+      outboundService() {
+        return new Response(new ReadableStream({
+          start(output) { output.enqueue(new TextEncoder().encode(mime === "text/html" ? "<html><body>fixture" : "%PDF fixture")); },
+        }), { headers: { "content-type": mime } });
+      },
+    });
+    try {
+      const response = await mf.dispatchFetch(`https://yw.bdfz.net/api/preview?url=${encodeURIComponent(HTML_TARGET)}`);
+      assert.equal(response.status, 200);
+      const result = await response.json();
+      assert.equal(result.status, 200);
+      assert.equal(result.code, "preview_timeout", JSON.stringify(result));
+    } finally {
+      await mf.dispose();
+    }
+  }
+});
