@@ -1,5 +1,24 @@
 # Project State
 
+## 2026-09-07 backup transaction remains unaccepted
+
+YW preview runtime acceptance remains unchanged. The separate backup-only
+transaction20260907-restorability-p0 now has full UC private-files offsite restore
+proof, which is not YW D1 proof. YW database99c541e7-e70b-4584-b939-7e88a6dd68c5
+still requires cloud-side encrypted export and full real temporary Cloudflare D1
+restore with every-table API counts, sample integrity and exact deletion/readback.
+The existing GitHub encryption key is usable in its environment, but the old
+readonly credential's actual UC export failed401; new SUEN D1 Read credential
+creation is blocked by automatic approval review pending fresh explicit approval.
+No new D1 credential, data import, production database write or schedule occurred.
+Existing master and five original environment secrets are preserved. Original
+12R2baseline objects remain; their presence is not current full-restore acceptance.
+Report and recovery owner: `/Users/ylsuen/CF/reports/operations/restorability_p0_20260907.md`,
+codex-restorability. R3first/repeat/stale tests have not started. This documentation
+commit is not a new Pages or logger deployment; canonical YW5dirty files unchanged.
+`CAPABILITY_FIT=no-new-capability`.
+
+
 ## 2026-09-07 preview lifecycle and persisted diagnostics accepted
 
 Release code is `a9d7f6549c017fc4f392a35f797103ff2d9707c9` (PR36), Pages
