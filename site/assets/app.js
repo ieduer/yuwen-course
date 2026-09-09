@@ -156,6 +156,7 @@ const state = {
   lessonMedia: new Map(),
   wechatArchiveBySource: new Map(),
   previewScreenshotBySource: new Map(),
+  previewScreenshotCapturedAt: "",
   directRemoteAppRoots: new Set(),
   classicalLearningTips: new Map(),
   sharedContentVersion: "",
@@ -2083,6 +2084,13 @@ function directRemoteAppRootFor(href) {
   }
 }
 
+const CTEXT_LOCAL_PREVIEW_REFERENCES = new Set([
+  "https://ctext.org/analects/zh?searchu=%E6%95%8F",
+  "https://ctext.org/liji/tan-gong-i/zh",
+  "https://ctext.org/lunyu-zhushu/zh",
+  "https://ctext.org/pre-qin-and-han/zh?searchu=%20%E6%99%8B%E4%BE%AF%E8%A8%80%E5%8D%AB%E4%BE%AF%E4%B9%8B%E7%BD%AA",
+]);
+
 function resourcePreviewPlan(resource) {
   const rawHref = String(resource?.href || resource?.sourceUrl || "").trim();
   if (!rawHref) {
@@ -2109,6 +2117,18 @@ function resourcePreviewPlan(resource) {
   if (disposition === "source-only") return externalOnly("此條目只保留原始出處，沒有可驗證的頁內版本。");
   if (disposition.startsWith("blocked-")) return externalOnly("來源審核狀態不允許頁內載入，仍保留原始地址供核對。");
   if (hostname === "accounts.google.com") return externalOnly("此來源要求外部帳號登入，不能在課文頁內安全預覽。");
+  if (CTEXT_LOCAL_PREVIEW_REFERENCES.has(`${url.origin}${url.pathname}${url.search}`) && fallbackScreenshotSrc) {
+    const capturedDate = state.previewScreenshotCapturedAt;
+    return {
+      mode: "image",
+      src: fallbackScreenshotSrc,
+      externalHref,
+      fallbackScreenshotSrc: "",
+      reason: `${capturedDate ? `${capturedDate} 保存的` : "已保存的"}首屏截圖，並非全文；可放大查看，完整內容請另頁開啟原站。`,
+      screenshot: true,
+      ctextSnapshot: true,
+    };
+  }
   if (hostname === "sites.google.com" && fallbackScreenshotSrc) {
     return {
       mode: "image",
@@ -2361,6 +2381,13 @@ function mountResourcePreview(host, plan, title, { eager = false, expanded = fal
     updateNote(plan.reason);
   }, { once: true });
   element.addEventListener("error", () => {
+    if (plan.ctextSnapshot) {
+      const reason = "已保存的首屏截圖目前無法載入；請使用原頁連結。";
+      host.innerHTML = previewPlaceholder({ mode: "unavailable", reason });
+      host.dataset.previewState = "failed";
+      updateNote(reason);
+      return;
+    }
     const fallback = screenshotFallbackPlan(plan);
     if (fallback) {
       mountResourcePreview(host, fallback, title, { eager: true, expanded, preflight: false });
@@ -5195,6 +5222,9 @@ async function init() {
     );
     state.wechatArchiveBySource = new Map(wechatArchiveMap.entries.map((entry) => [resourceIdentity(entry.sourceUrl), entry]));
     state.previewScreenshotBySource = new Map(previewScreenshots.entries.map((entry) => [resourceIdentity(entry.sourceUrl), entry]));
+    state.previewScreenshotCapturedAt = typeof previewScreenshots.capturedAt === "string"
+      && /^\d{4}-\d{2}-\d{2}T/.test(previewScreenshots.capturedAt)
+      ? previewScreenshots.capturedAt.slice(0, 10) : "";
     state.directRemoteAppRoots = new Set(previewTargets.directRemoteAppRoots);
     state.classicalLearningTips = new Map(classicalLearningTips.lessons.map((entry) => [entry.lessonId, entry]));
     lessonBlueprintRules = loadedBlueprintRules;

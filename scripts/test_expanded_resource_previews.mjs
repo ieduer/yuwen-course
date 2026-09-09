@@ -12,6 +12,8 @@ const WECHAT_MAP_PATH = new URL("../site/data/wechat-archive-map.json", import.m
 const source = await readFile(APP_PATH, "utf8");
 const indexHtml = await readFile(INDEX_PATH, "utf8");
 const wechatArchiveMap = JSON.parse(await readFile(WECHAT_MAP_PATH, "utf8"));
+const previewScreenshots = JSON.parse(await readFile(new URL("../site/data/preview-screenshots.json", import.meta.url), "utf8"));
+const ctextLesson = JSON.parse(await readFile(new URL("../site/data/reader-documents/lesson-1474.json", import.meta.url), "utf8"));
 
 function section(start, end) {
   const startIndex = source.indexOf(start);
@@ -214,6 +216,177 @@ test("preview plan uses safe qx fragments, screenshot-first Wikisource, clickabl
   const missing = resourcePreviewPlan({});
   assert.equal(missing.mode, "unavailable");
   assert.match(missing.reason, /仍予保留/);
+});
+
+const ctextReferences = ctextLesson.resources.filter((resource) => new URL(resource.href, "https://yw.bdfz.net").hostname === "ctext.org");
+const screenshotStateSource = section("    state.previewScreenshotBySource =", "    state.directRemoteAppRoots =");
+const screenshotLookupSource = section("function previewScreenshotFor", "function directRemoteAppRootFor");
+
+function ctextPreviewPlanner(screenshots = previewScreenshots) {
+  return new Function(
+    "location", "resourcePreviewUrl", "resourceIdentity", "state", "previewScreenshots",
+    `${screenshotStateSource}\n${screenshotLookupSource}\n${previewPlanSource}; return resourcePreviewPlan;`,
+  )(
+    { href: "https://yw.bdfz.net/#lesson-1474", origin: "https://yw.bdfz.net" },
+    (href) => `/api/preview?url=${encodeURIComponent(href)}`,
+    resourceIdentity,
+    { directRemoteAppRoots: new Set() },
+    screenshots,
+  );
+}
+
+test("the four reviewed CText references use dated first-viewport images and retain full source URLs", () => {
+  const planFor = ctextPreviewPlanner();
+  assert.equal(ctextReferences.length, 4);
+  for (const resource of ctextReferences) {
+    const entry = previewScreenshots.entries.find((entry) => resourceIdentity(entry.sourceUrl) === resourceIdentity(resource.href));
+    assert.ok(entry);
+    const plan = planFor(resource);
+    assert.equal(plan.mode, "image");
+    assert.equal(plan.src, entry.screenshotUrl);
+    assert.equal(plan.externalHref, resource.href);
+    assert.equal(plan.screenshot, true);
+    assert.equal(plan.ctextSnapshot, true);
+    assert.equal(plan.fallbackScreenshotSrc, "");
+    assert.match(plan.reason, /2026-08-11 保存的首屏截圖，並非全文/);
+    assert.match(plan.reason, /另頁開啟原站/);
+  }
+  assert.ok(ctextReferences.some((resource) => resource.href.endsWith("#n9662")));
+  assert.equal(ctextReferences.filter((resource) => new URL(resource.href).search).length, 2);
+});
+
+test("CText local plans still obey source, protocol and screenshot-availability guards", () => {
+  const planFor = ctextPreviewPlanner();
+  const missingImagePlanFor = ctextPreviewPlanner({ ...previewScreenshots, entries: [] });
+  for (const resource of ctextReferences) {
+    for (const disposition of ["source-only", "blocked-external"]) {
+      const plan = planFor({ ...resource, disposition });
+      assert.equal(plan.mode, "external-only");
+      assert.equal(plan.ctextSnapshot, undefined);
+    }
+    const http = planFor({ ...resource, href: resource.href.replace("https:", "http:") });
+    assert.equal(http.mode, "external-only");
+    assert.equal(http.ctextSnapshot, undefined);
+    const missingImage = missingImagePlanFor(resource);
+    assert.equal(missingImage.mode, "iframe");
+    assert.match(missingImage.src, /^\/api\/preview\?/);
+    assert.equal(missingImage.ctextSnapshot, undefined);
+  }
+  assert.equal(planFor({ href: "javascript:alert(1)" }).mode, "unavailable");
+  for (const capturedAt of [null, undefined, [previewScreenshots.capturedAt]]) {
+    const missingDate = ctextPreviewPlanner({ ...previewScreenshots, capturedAt })(ctextReferences[0]);
+    assert.match(missingDate.reason, /^已保存的首屏截圖，並非全文/);
+    assert.doesNotMatch(missingDate.reason, /2026|undefined|null/);
+  }
+});
+
+test("other CText references and future semantic queries retain the existing remote-first policy", () => {
+  const future = "https://ctext.org/analects/zh?searchu=%E5%AD%B8";
+  const screenshots = {
+    ...previewScreenshots,
+    entries: [...previewScreenshots.entries, { sourceUrl: future, screenshotUrl: "/assets/preview-screenshots/future.webp" }],
+  };
+  const planFor = ctextPreviewPlanner(screenshots);
+  const other = previewScreenshots.entries.find((entry) => entry.sourceUrl === "https://ctext.org/shiji/li-sheng-lu-jia-lie-zhuan/zh");
+  assert.ok(other);
+  for (const href of [other.sourceUrl, future, "https://ctext.org/analects/zh?searchu=%E6%95%8F&searchmode=showall"]) {
+    const plan = planFor({ href });
+    assert.equal(plan.mode, "iframe");
+    assert.match(plan.src, /^\/api\/preview\?/);
+    assert.equal(plan.externalHref, href);
+    assert.equal(plan.ctextSnapshot, undefined);
+  }
+  assert.equal(planFor({ href: other.sourceUrl }).fallbackScreenshotSrc, other.screenshotUrl);
+});
+
+function previewMountFixture() {
+  const requests = [];
+  const dialogs = [];
+  const makeHost = (inDialog = false) => {
+    const note = { textContent: "" };
+    const host = {
+      isConnected: true, dataset: {}, children: [], innerHTML: "", note,
+      closest: () => inDialog ? null : { querySelector: () => note },
+      classList: { add() {} },
+      append(element) { this.children.push(element); },
+      replaceChildren(...elements) { this.children = elements; },
+    };
+    return host;
+  };
+  const document = {
+    createElement(tag) {
+      return {
+        tag, events: new Map(),
+        setAttribute() {},
+        addEventListener(event, handler) { this.events.set(event, handler); },
+      };
+    },
+  };
+  const mountSource = section("function previewPlaceholder", "function isNonContentResource");
+  const mount = new Function(
+    "document", "fetch", "esc", "openResourcePlan",
+    `${mountSource}; return mountResourcePreview;`,
+  )(
+    document,
+    async (url) => { requests.push(url); return new Response("upstream unavailable", { status: 521 }); },
+    (value) => String(value),
+    (plan, title) => {
+      const host = makeHost(true);
+      dialogs.push({ host, plan });
+      mount(host, plan, title, { eager: true, expanded: true });
+    },
+  );
+  return { mount, makeHost, requests, dialogs };
+}
+
+test("actual CText image mounting and enlargement issue no automatic proxy requests", async () => {
+  const fixture = previewMountFixture();
+  const planFor = ctextPreviewPlanner();
+  for (const resource of ctextReferences) {
+    const plan = planFor(resource);
+    const host = fixture.makeHost();
+    fixture.mount(host, plan, resource.label);
+    assert.equal(host.children[0].tag, "img");
+    assert.equal(host.children[0].src, plan.src);
+    host.children[0].events.get("load")();
+    assert.equal(host.dataset.previewState, "screenshot");
+    host.children.find((element) => element.tag === "button").events.get("click")({ preventDefault() {}, stopPropagation() {} });
+  }
+  await new Promise(setImmediate);
+  assert.equal(fixture.requests.length, 0);
+  assert.equal(fixture.dialogs.length, 4);
+  fixture.dialogs.forEach(({ host, plan }, index) => {
+    assert.equal(host.children[0].tag, "img");
+    assert.equal(host.children[0].src, plan.src);
+    assert.equal(plan.externalHref, ctextReferences[index].href);
+  });
+});
+
+test("a missing CText snapshot displays a failure in both card and dialog without retrying the proxy", async () => {
+  const fixture = previewMountFixture();
+  const plan = ctextPreviewPlanner()(ctextReferences[0]);
+  for (const inDialog of [false, true]) {
+    const host = fixture.makeHost(inDialog);
+    fixture.mount(host, plan, "CText", { expanded: inDialog });
+    host.children[0].events.get("error")();
+    assert.equal(host.dataset.previewState, "failed");
+    assert.match(host.innerHTML, /首屏截圖目前無法載入/);
+    assert.match(host.innerHTML, /原頁連結/);
+  }
+  await new Promise(setImmediate);
+  assert.equal(fixture.requests.length, 0);
+});
+
+test("an unrelated CText 521 still follows the existing screenshot fallback", async () => {
+  const fixture = previewMountFixture();
+  const plan = ctextPreviewPlanner()({ href: "https://ctext.org/shiji/li-sheng-lu-jia-lie-zhuan/zh" });
+  const host = fixture.makeHost();
+  fixture.mount(host, plan, "史記");
+  await new Promise(setImmediate);
+  assert.equal(fixture.requests.length, 1);
+  assert.match(fixture.requests[0], /^\/api\/preview\?/);
+  assert.equal(host.children[0].tag, "img");
+  assert.equal(host.children[0].src, plan.fallbackScreenshotSrc);
 });
 
 test("same-origin lesson pages and documents preview directly", () => {
