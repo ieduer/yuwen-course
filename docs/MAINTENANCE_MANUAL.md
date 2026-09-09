@@ -1,5 +1,66 @@
 # `yw.bdfz.net` maintenance manual
 
+## 2026-09-09 CText 521 incident — repair prepared, not yet deployed
+
+Owner: `codex-my-architecture-serial7`; independent transaction
+`20260909-yw-ctext-local-preview`. Current live Pages is
+`c66da540-07dc-4f2f-9adf-dbf27fdd251d`, runtime source
+`a9d7f6549c017fc4f392a35f797103ff2d9707c9`. This is also the immediate
+rollback anchor for the new repair; preserve the older e0ffb33c anchor as history.
+
+Four persisted requests at 2026-09-09 05:35:42Z failed with upstream CText521
+in `/api/preview`, all in lesson-1474《論語》十二章. These are not proof of a
+whole-site origin outage. The 13:45 Beijing alert reports9/50; a separate
+05:35–05:50 sampled aggregate reports8/31 with sample interval8. Those counts
+and the four stored terminal records have different scopes. One later200
+under very low traffic does not establish recovery.
+
+The candidate uses four existing reviewed local screenshots before attempting
+remote preview. It labels them as first-screen captures from2026-08-11, not
+full text; original URLs, queries and #n9662 remain accessible. Local image
+failure stays visible. Other resources retain their current behavior, and the
+backend continues recording/returning real upstream errors. This changes only
+Web presentation and the entry-asset cache hash; lesson data, stable IDs,
+learning evidence, D1/Queue, authentication, APIS, native content, and the
+private logger remain unchanged. `CAPABILITY_FIT=no-new-capability`;
+Node24.18.0 and Wrangler4.100.0 remain the exact release tools.
+
+Release uses the renewed existing v2 external executor in cf-ops-scripts,
+with one new journal under the evidence directory below. The previous accepted
+journal is immutable. Existing logger36279914 is verified read-only; this repair
+must never create/upload a logger or mutate a binding. Current user authorization
+delegates release methods and publication; no additional authorization schema,
+credential or security exception is introduced. Exact published source and
+executor pins, artifact digest and pending/accepted state belong to the new
+transaction receipt, not to a guessed deployment ID.
+
+Evidence authority: `/Users/ylsuen/CF/reports/operations/.my-architecture-serial7-20260909/`
+(`yw-521-control-readback.json`, `yw-521-preview-log-readback.json`,
+`yw-521-target-map.json`, `yw-521-preview-implementation.json`, root review,
+formal build and release receipts). Transaction receipt:
+`reports/operations/shared_hub_changes/2026-09-09-yw-ctext-local-preview.json`.
+Executable checklist: `docs/VERIFICATION_STANDARD.md` and existing
+`docs/VERIFICATION.md`. Local checks are distinct from actual authenticated
+lesson navigation, enlarged previews and post-reload acceptance, which remain
+pending. Do not report full CText source availability as fixed by screenshots.
+
+Do not use `/api/learning/health` as a read-only probe: it drains the outbox.
+`/api/preview` may perform the configured CText login POST; it is not a
+read-only diagnostics endpoint. Inspect persisted events and control-plane
+records first. No submission, credential change or notification is needed for
+this presentation acceptance.
+
+Resource location and restore: source and the four existing WebP inputs remain
+Git-backed under this project; no external source or new data archive is added.
+The owned release worktree is `/private/tmp/cf-task-20260909-my-architecture-serial7/yw-ctext-release`;
+restore source from the exact published branch/commit recorded in the receipt
+into an absent worktree, then run the pinned verification and artifact checks.
+Canonical pre-existing dirty documents are preserved; the release worktree owns
+only its declared files. Git source is retain_hot, private evidence retain_hot
+with review2026-09-16 while this incident and the larger fleet goal remain open;
+reproducible task worktrees/builds/profiles are removed at root cleanup.
+
+
 ## 2026-09-07 backup transaction remains unaccepted
 
 YW preview runtime acceptance remains unchanged. The separate backup-only
