@@ -1,3 +1,15 @@
+## Current APIS rollback and task safety checkpoint — 2026-09-10T08:05:47.442579+00:00
+
+This supersedes earlier current-version/unuploaded-candidate statements below. APIS is `95a1ec95-95a8-4d8f-8bcb-17b0a3cc7c0f@100`, deployment `dcd24e5f-e3b1-48ea-bdd7-68bd7da836c8`. Candidate `242ea9a7-0d60-4ad2-bc92-93cea907bfc3`, source `ed7ed488a76e4e1c3216cd5f2eb1b53c09d74605`, is inactive/unaccepted. One upload matched71bindings/51Storebindings and194445-byte bundle03bd7502374024cc6cf2250fade3e6a91f66f41bfeeac2af2888d8d5b37ae85b; only expected upload annotations changed.
+
+0% attachment and1% qualification passed: complete persisted ABR1/count-matched evidence contains3candidate200s/3providerattempts/0hard or auth failures. First5%request returned503/UPSTREAM_UNAVAILABLE after5004ms with1providerattempt. No replacement request, no100%stage. The finite controller verified rollback before its deadline and terminated. This failure does not prove the TIMEOUT recovery branch executed; failed5%server telemetry remains uncollected. Total operational intents7of12 (3historical+3at1%+1at5%);5remain. Separate Gemini3.8grant unused. Local74workerd/38controller/20readback tests and strictbuild passed; online repair and real product acceptance did not.
+
+Evidence authority: `/Users/ylsuen/CF/_meta/reports/operations/.my-architecture-serial7-20260909/apis-terminal-timeout-recovery-OUTCOME.md`; same-directory upload-result, plan.json.journal.jsonl, stage-1-query-1, stage-5-probes and two verdicts share this prefix. Controllers/publishers are terminal; never replay. Preserve forwardDO data and slot6 exclusion. No credential, caller, quota, admission, paid-pool or notification change. No-new-capability. Source/evidence retain_hot ownercodex-my-architecture-serial7, review2026-09-16; derivatives remain root-manifest cleanup obligations.
+
+YW latest passive extension05:26:41.564–07:30:56.404Z:114adaptive observations,0HTTP5xx/521, intervals1–6; not raw request counts. Earlier sixstudy-guide503 and KZAI503 remain unresolved. UC remains separately accepteddb98888d@100/deployment94b1b739; its196source→My→reload passed, natural limit error reduction pending.
+
+After rollback the active root rollout measured134220109bytes, exceeding134217728(128MiB). Only safety/closeout/handoff now permitted by the workspace gate. Whole My/fleet goal is incomplete. No new task, agent or automation created. All other purposes remain independently open in the root handoff.
+
 ## Terminal deadline release rejected and rolled back — 2026-09-10T06:40:04.068419+00:00
 
 Current APIS `95a1ec95-95a8-4d8f-8bcb-17b0a3cc7c0f@100`, deployment `60068a8f-f7ba-4cae-9f1e-367264d0cae0`. Candidate `ae7c199b-7c54-44da-894a-ccde08d30690` is inactive and unaccepted. Its sole1% qualification request returned503/DEADLINE_EXCEEDED after21069ms; no replacement POSTs, no5%/100% promotion. Root explicitly rejected the stage and the finite controller restored95a within its deadline. The3totalhistorical/current intents consume the same12-request authorization;9remain. The separate Gemini3.8grant is unused. No credential, D1/DO, model-chain, D11 or slot6 configuration change.
