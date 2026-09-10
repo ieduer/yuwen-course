@@ -1,3 +1,35 @@
+## 2026-09-10 — 521 follow-up and independent study-guide503
+
+Pages remains0670bd26-e2d8-494b-bef0-97ebce877ce5, runtime5ed3e1b7262c510de0434d4d690465f04931f7d4;
+the CText preview mitigation and its original authenticated acceptance remain in effect.
+The repeated alert refers to2026-09-09 05:45Z. Passive aggregate readback at05:36Z covers
+2026-09-09 06:44 through2026-09-10 05:26Z:1060 adaptive observations,0HTTP521 and6HTTP503.
+Sampling intervals range1–6; these are not raw request totals. All six503 observations
+are /api/reading/study-guide-attempt, across01:10/01:11/01:15/05:10/05:11Z; error-group
+sampling is1 and both grouped totals agree. No site/preview/health/provider call was made.
+
+The accepted source invokes APIS for non-deterministic study-guide assessment and returns
+learning_evaluator_unavailable on evaluation failure/cooldown. Bounded APIS fetch telemetry
+in01:09–01:17 and05:09–05:13 finds five identifiedYW traces ending503 after providerTIMEOUT,
+and two identifiedYW200s. This is an APIS-internal trace join; it does not identify every
+source503 across services. The two lateYW failures each used only3.5-lite and aborted at8s
+although20.631/20.729s of the total request budget remained when fetch began.
+
+Independent repair20260910-apis-terminal-deadline is being tested against that exact
+unused-budget defect. No YW source, auth, credentials, D1/Queue, evaluator budget, student
+answers, evidence, content graph or native pointer changed. CText rollback is not a remedy
+for these evaluation failures. Keep rollbackc66da540/sourcea9d7f654 and all forward data.
+Full study-guide evaluation→source evidence→My→reload acceptance and online503 reduction
+remain open; earlier preview/initial-reading acceptance cannot substitute for them.
+
+EvidenceE7: yw-521-passive-refresh-1789018601564.json,
+yw-503-passive-paths-v2-20260910.json, yw-503-apis-provider-detail-early.json and
+ yw-503-apis-provider-detail-late.json. The first path query requested an unsupported
+method dimension and failed before producing a receipt; v2 uses the already verified
+schema and explicitly reports method unavailable. No raw answers, identities, headers,
+URLs with queries or credentials were retained. Source/evidence retain_hot, root owner
+codex-my-architecture-serial7, review2026-09-16. Whole fleet goal remains unfinished.
+
 # Project State
 
 ## 2026-09-09 — CText preview mitigation accepted in production
