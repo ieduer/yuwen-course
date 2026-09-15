@@ -246,7 +246,7 @@ test("the four reviewed CText references use dated first-viewport images and ret
     assert.equal(plan.src, entry.screenshotUrl);
     assert.equal(plan.externalHref, resource.href);
     assert.equal(plan.screenshot, true);
-    assert.equal(plan.ctextSnapshot, true);
+    assert.equal(plan.savedSnapshot, true);
     assert.equal(plan.fallbackScreenshotSrc, "");
     assert.match(plan.reason, /2026-08-11 保存的首屏截圖，並非全文/);
     assert.match(plan.reason, /另頁開啟原站/);
@@ -262,15 +262,15 @@ test("CText local plans still obey source, protocol and screenshot-availability 
     for (const disposition of ["source-only", "blocked-external"]) {
       const plan = planFor({ ...resource, disposition });
       assert.equal(plan.mode, "external-only");
-      assert.equal(plan.ctextSnapshot, undefined);
+      assert.equal(plan.savedSnapshot, undefined);
     }
     const http = planFor({ ...resource, href: resource.href.replace("https:", "http:") });
     assert.equal(http.mode, "external-only");
-    assert.equal(http.ctextSnapshot, undefined);
+    assert.equal(http.savedSnapshot, undefined);
     const missingImage = missingImagePlanFor(resource);
     assert.equal(missingImage.mode, "iframe");
     assert.match(missingImage.src, /^\/api\/preview\?/);
-    assert.equal(missingImage.ctextSnapshot, undefined);
+    assert.equal(missingImage.savedSnapshot, undefined);
   }
   assert.equal(planFor({ href: "javascript:alert(1)" }).mode, "unavailable");
   for (const capturedAt of [null, undefined, [previewScreenshots.capturedAt]]) {
@@ -294,7 +294,7 @@ test("other CText references and future semantic queries retain the existing rem
     assert.equal(plan.mode, "iframe");
     assert.match(plan.src, /^\/api\/preview\?/);
     assert.equal(plan.externalHref, href);
-    assert.equal(plan.ctextSnapshot, undefined);
+    assert.equal(plan.savedSnapshot, undefined);
   }
   assert.equal(planFor({ href: other.sourceUrl }).fallbackScreenshotSrc, other.screenshotUrl);
 });
@@ -435,4 +435,37 @@ test("reviewed embeds expand immediately, use real remote sites, and never resto
   assert.match(indexHtml, /id="resource-dialog-stage"/);
   assert.doesNotMatch(indexHtml, /id="resource-frame"/);
   assert.match(indexHtml, />簡報預覽</);
+});
+
+
+test("the failing University Yuque source uses its verified first viewport, including the enlarged view", async () => {
+  const href = "https://pkuschool.yuque.com/qrvbic/sylxbs/rv463p?singleDoc#";
+  const planFor = ctextPreviewPlanner();
+  const plan = planFor({ href });
+  assert.equal(plan.mode, "image");
+  assert.equal(plan.src, "/assets/preview-screenshots/49db95bef8d2020345bd9680.webp");
+  assert.equal(plan.externalHref, href);
+  assert.equal(plan.savedSnapshot, true);
+  assert.match(plan.reason, /首屏截圖，並非全文/);
+  const fixture = previewMountFixture();
+  const host = fixture.makeHost();
+  fixture.mount(host, plan, "大学之道");
+  host.children.find((element) => element.tag === "button").events.get("click")({ preventDefault() {}, stopPropagation() {} });
+  await new Promise(setImmediate);
+  assert.equal(fixture.requests.length, 0);
+  assert.equal(fixture.dialogs.length, 1);
+  assert.equal(fixture.dialogs[0].host.children[0].src, plan.src);
+  for (const expanded of [false, true]) {
+    const failed = fixture.makeHost(expanded);
+    fixture.mount(failed, plan, "大学之道", { expanded });
+    failed.children[0].events.get("error")();
+    assert.equal(failed.dataset.previewState, "failed");
+    assert.match(failed.innerHTML, /原頁連結/);
+  }
+  assert.equal(fixture.requests.length, 0);
+  for (const disposition of ["source-only", "blocked-external"]) {
+    assert.equal(planFor({ href, disposition }).mode, "external-only");
+  }
+  assert.equal(ctextPreviewPlanner({ ...previewScreenshots, entries: [] })({ href }).savedSnapshot, undefined);
+  assert.equal(planFor({ href: href.replace("rv463p", "another-document") }).savedSnapshot, undefined);
 });
