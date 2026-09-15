@@ -23,6 +23,27 @@ function deferred() {
   return { promise, resolve, reject };
 }
 
+test("empty source rubric is explained and assessment failures retain their actual category", () => {
+  const body = section("function studyGuideFailureMessage", "function renderStudyGuideCards");
+  const { failure, rubric, assessment } = new Function("esc", "renderReferenceAnswer", "learningSubmissionRetryMessage", `${body}; return { failure: studyGuideFailureMessage, rubric: renderStudyGuideRubric, assessment: renderStudyGuideAssessment };`)(
+    value => String(value).replaceAll("<", "&lt;"),
+    value => `<p>${JSON.stringify(value)}</p>`,
+    (code, seconds) => `評閱暫時不可用：${code}，${seconds}秒後重試`,
+  );
+  const item = catalog.lessons.flatMap(lesson => lesson.items).find(item => item.itemKey === "lesson-1474-p23-ancient-modern-01");
+  assert.deepEqual(item.rubric, []);
+  assert.match(rubric(item.rubric), /來源未另列核對標準/);
+  assert.match(rubric(["保留來源標準"]), /保留來源標準/);
+  assert.match(failure({ lastErrorStatus: 401 }), /請登入/);
+  assert.doesNotMatch(failure({ lastErrorCode: "learning_evaluator_timeout" }), /登入|連線/);
+  assert.match(failure({ lastErrorCode: "learning_evaluator_unavailable", retryAfterSeconds: 30 }), /30秒/);
+  assert.match(failure({ lastErrorCode: "classical_annotated_reading_required" }), /帶註釋正文/);
+  const html = assessment({ pendingSync: true, lastErrorCode: "learning_evaluator_timeout" });
+  assert.match(html, /尚未計分/);
+  assert.doesNotMatch(html, /0 \/ 100|已達標|恢復登入/);
+  assert.match(assessment({ pendingSync: true }), /尚未取得評閱結果/);
+});
+
 function interactionHarness(fetchImpl, {
   persistSucceeds = true,
   setTimeoutImpl = globalThis.setTimeout,

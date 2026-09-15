@@ -2915,11 +2915,37 @@ function renderReferenceAnswer(value) {
   return `<p>${esc(value || "本題須先人工複核，暫不提供唯一答案。")}</p>`;
 }
 
+function studyGuideFailureMessage(record) {
+  const code = record?.lastErrorCode || "";
+  if (record?.lastErrorStatus === 401 || record?.lastError === "anonymous") return "尚未完成評閱；請登入後重試，答案已保留。";
+  const messages = {
+    classical_first_read_required: "尚未完成評閱；請先完成無標點初讀，再回來核對本題。",
+    classical_annotated_reading_required: "尚未完成評閱；請先讀完帶註釋正文，再回來核對本題。",
+    study_guide_catalog_changed: "題目版本已更新；請重新載入後作答，原答案已保留。",
+    learning_evaluator_timeout: "來源端評閱逾時；答案已保留，本次尚未計分，請稍後重試。",
+    reading_identity_unavailable: "暫時無法確認登入狀態；答案已保留，請稍後重試。",
+  };
+  if (messages[code]) return messages[code];
+  if (["learning_submission_in_progress", "learning_submission_rate_limited", "learning_evaluator_unavailable", "learning_evaluator_budget_exhausted", "learning_evaluator_budget_unavailable"].includes(code)) {
+    return learningSubmissionRetryMessage(code, record?.retryAfterSeconds, record?.limitReason);
+  }
+  return "尚未取得評閱結果；答案已保留，本次尚未計分，請稍後重試。";
+}
+
+function renderStudyGuideRubric(rubric) {
+  const populated = Array.isArray(rubric) ? rubric.length > 0
+    : rubric && typeof rubric === "object" ? Object.keys(rubric).length > 0
+      : typeof rubric === "string" && rubric.trim().length > 0;
+  return `<div class="study-guide-rubric"><strong>核對標準</strong>${populated
+    ? renderReferenceAnswer(rubric)
+    : "<p>來源未另列核對標準，請參照上方答案與解析。</p>"}</div>`;
+}
+
 function renderStudyGuideAssessment(record) {
   const assessment = record?.assessment;
   if (!assessment) {
     if (record?.submitting) return `<p class="study-guide-sync pending" role="status">正在進行來源端評閱…</p>`;
-    if (record?.pendingSync) return `<p class="study-guide-sync pending" role="status">參考答案已顯示；本次評閱尚未同步，恢復登入或連線後請重試。</p>`;
+    if (record?.pendingSync) return `<p class="study-guide-sync pending" role="status">${esc(studyGuideFailureMessage(record))}</p>`;
     return "";
   }
   const passed = record.completed === true;
@@ -2956,7 +2982,7 @@ function renderStudyGuideCards(lesson, competencyTags) {
       <div class="study-guide-source"><span>PDF ${Number(current.pdfPage) || "—"}${current.printedPage ? ` · 印 ${Number(current.printedPage)}` : ""}</span><i>${esc(current.detailTag || current.competencyTag)}</i></div>
       <h4>${esc(current.prompt)}</h4>
       ${current.qualityNotes?.length ? `<p class="study-guide-quality-notes"><strong>核對說明</strong>${esc(current.qualityNotes.join("；"))}</p>` : ""}
-      ${record.revealed ? `<div class="study-guide-response-saved"><span>我的作答</span><p>${esc(record.response || "")}</p></div><div class="study-guide-answer"><b>${esc(current.answerLabel)}</b>${renderReferenceAnswer(current.referenceAnswer)}${current.explanation ? `<p class="study-guide-explanation">${esc(current.explanation)}</p>` : ""}${current.rubric ? `<div class="study-guide-rubric"><strong>核對標準</strong>${renderReferenceAnswer(current.rubric)}</div>` : ""}</div>
+      ${record.revealed ? `<div class="study-guide-response-saved"><span>我的作答</span><p>${esc(record.response || "")}</p></div><div class="study-guide-answer"><b>${esc(current.answerLabel)}</b>${renderReferenceAnswer(current.referenceAnswer)}${current.explanation ? `<p class="study-guide-explanation">${esc(current.explanation)}</p>` : ""}${renderStudyGuideRubric(current.rubric)}</div>
         ${renderStudyGuideAssessment(record)}
         ${record.completed ? "" : `<div class="study-guide-actions"><button type="button" data-study-retry="${esc(current.itemKey)}" ${record.submitting ? "disabled" : ""}>${record.pendingSync ? "返回作答並重試" : "依提示重答"}</button></div>`}`
         : `<form class="study-guide-response" data-study-response="${esc(current.itemKey)}"><label>先寫下你的答案<textarea name="response" rows="4" maxlength="2000" required>${esc(record.response || "")}</textarea></label><button class="study-guide-reveal" type="submit">提交作答並核對</button></form>`}
@@ -4298,6 +4324,9 @@ function bindCheckStage() {
       evidence: result?.ok === true ? result.evidence : null,
       lastError: result?.ok === true ? "" : result?.reason || "unavailable",
       lastErrorCode: result?.ok === true ? "" : result?.code || "",
+      lastErrorStatus: result?.ok === true ? null : result?.status ?? null,
+      retryAfterSeconds: result?.ok === true ? null : result?.retryAfterSeconds ?? null,
+      limitReason: result?.ok === true ? "" : result?.limitReason || "",
       assessedAt: result?.ok === true ? new Date().toISOString() : null,
     };
     const requestStillCurrent = state.current?.id === lessonId;
