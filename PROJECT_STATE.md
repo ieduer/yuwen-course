@@ -1,3 +1,43 @@
+## 2026-09-15 — Yuque preview incident; candidate prepared
+
+Status: source candidate only, not deployed. Pages remains
+`0670bd26-e2d8-494b-bef0-97ebce877ce5`, source `5ed3e1b`.
+The 07:00–07:15Z eyeball-only re-query has141adaptive observations and6failures:
+2preview525 and4study-guide503. The user's alert denominator is142 and is kept
+separate. Internal edge fetches and EarlyHints504s are not user failures.
+The 09:00Z recovery alert predates any deployment and is natural recovery.
+
+A bounded registered-resource probe reproduced525 for the existing Yuque
+`rv463p?singleDoc` resource in lesson1476《大学之道》. Direct public HEAD returns200;
+this does not prove the Worker-side path works. The original two terminal logs
+identify only `other_registered`, so the new reproduction is not a retrospective
+per-request identification of those two historical targets.
+
+The candidate extends the existing first-viewport policy to this one exact
+registered Yuque URL, using the unchanged reviewed16228-byte WebP with SHA256
+`49db95bef8d2020345bd9680fed97840de58f95b49a17fa46232caa6411e518a`.
+It labels the saved first screen as not full text, keeps the original link and
+supports enlargement. A missing local image remains visibly failed without an
+automatic remote retry. This mitigates preview availability; it does not repair
+Yuque's full-text service. CText behavior remains covered by regression tests.
+
+14 preview tests pass; formal staging and artifact checks pass with1224files.
+The backend, source data, scoring, D1/Queue, logger, credentials and immutable
+native objects/pointer are byte-preserved. The native default synchronization
+gate reports an existing stale semantic digest, so release must use the existing
+`compatible-no-client-release` receipt path after source publication/review;
+do not move the native pointer or claim a full release gate has passed.
+
+The independent assessment failures remain unresolved: complete125-event APIS
+readback identifies8YWinvocations,6HTTP200 and2HTTP503/TIMEOUT. The remaining
+2source503s are not attributed without evidence. The user separately authorized APIS repair with at most6new model calls;
+qualification and production acceptance remain pending in the incident report.
+
+Single incident evidence and review checklist:
+`/Users/ylsuen/CF/reports/operations/yw-uc-incident-20260915/REPORT.md`.
+Candidate rollback after an authorized release is the exact current0670bd26;
+the earlierc66da540 anchor stays historical. No rollback or deployment occurred.
+
 # Project State
 
 ## 2026-09-09 — CText preview mitigation accepted in production
