@@ -1,3 +1,9 @@
+## 2026-09-15 — assessment failure and empty rubric repair prepared
+
+Incident continuation confirms the supplied lesson-1474 screen has no completed grade: the source retained one retryable assessment at10:05Z, and the matching APIS window contains a Lite8000ms TIMEOUT/503. The public source rubric is an empty array. The frontend now preserves typed failure status/cooldown and displays the appropriate durable retry guidance; missing rubric is explicitly disclosed without inventing criteria. Existing answer, mutation identity, score authority and retry deduplication remain unchanged.40 focused assessment/frontend tests pass. This is prepared source, not production acceptance.
+
+Release evidence and persistent 上線 /16-provider-call authority: `/Users/ylsuen/CF/reports/operations/yw-uc-incident-20260915/HANDOFF-release.md`; current continuation evidence in `serial-release/`. Pages rollback0670bd26 preserves forward data; App pointer remains unchanged under compatible-no-client-release.
+
 ## 2026-09-15 — Yuque preview incident; candidate prepared
 
 Status: source candidate only, not deployed. Pages remains
