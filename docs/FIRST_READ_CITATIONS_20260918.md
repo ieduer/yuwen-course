@@ -1,6 +1,7 @@
 # 《论语》十二章初读出处分行
 
-Status: local candidate, not deployed. Prepared from main
+Status: deployed and accepted as Pages `ec81bef8-4c28-47c4-8093-378be3666b31`,
+runtime source `d08bc39ffc4ce4a9c60ecd7096d3392be30cef00`. Prepared from main
 `0a26dabca3456aeb49b35dc79e51a5e1335cde88` on 2026-09-18.
 
 The first-read renderer previously removed punctuation and displayed chapter
@@ -45,7 +46,11 @@ Web/App disposition: `compatible-no-client-release` for this Web presentation
 candidate. Canonical lesson data, immutable native content and App pointers are
 unchanged. This does not claim a native-client presentation change.
 
-Release remains pending explicit authorization and the existing production
-release checks. Source rollback is a revert of this scoped candidate; there is
-no data migration or data rollback. The unrelated existing canonical checkout
-changes were preserved.
+The user explicitly authorized publication. Preview `67b4224e` and production
+`ec81bef8` passed actual desktop/mobile display, exact JS/CSS hash and ordinary
+reload checks. The v2 controller at `5ee7ec16f0c481bbc88a86536324d60dbb803225`
+recorded `accepted`; immediate rollback is Pages
+`43b6e706-bfc0-4f5c-a11b-d956e2955d0e`, preserving all data.
+The unrelated existing canonical checkout changes were preserved.
+Full receipts and exact rollback requirements:
+`/Users/ylsuen/CF/reports/operations/yw-first-read-citations-20260918/release/RELEASE.md`.

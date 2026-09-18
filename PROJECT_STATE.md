@@ -1,11 +1,14 @@
-## 2026-09-18 — Lunyu first-read citations prepared, not deployed
+## 2026-09-18 — Lunyu citation display released and accepted
 
-The twelve lesson-1474 chapter sources now render on separate, smaller lines in
-both initial and submitted first-read views. Existing source bytes, text
-versions and mark offsets are preserved. Focused 30-lesson/102-paragraph checks
-and local desktop/mobile rendering and selection checks pass. Production
-release is pending authorization; this candidate changes no backend, learning
-records or native content pointer. Details: [citation repair](docs/FIRST_READ_CITATIONS_20260918.md).
+Pages `ec81bef8-4c28-47c4-8093-378be3666b31`, runtime source
+`d08bc39ffc4ce4a9c60ecd7096d3392be30cef00`, is accepted. Twelve chapter citations
+now appear on separate smaller lines. Actual desktop/mobile and ordinary reload
+checks pass, with exact controller/stylesheet hashes and zero reading API writes.
+The backend, lesson text/versions, saved mark offsets and native App content are
+unchanged. Immediate rollback is `43b6e706-bfc0-4f5c-a11b-d956e2955d0e`; preserve
+all forward data. [Implementation and verification](docs/FIRST_READ_CITATIONS_20260918.md).
+Full release/controller/rollback evidence:
+`/Users/ylsuen/CF/reports/operations/yw-first-read-citations-20260918/release/RELEASE.md`.
 
 ## 2026-09-15 — web repair deployed and browser display accepted
 

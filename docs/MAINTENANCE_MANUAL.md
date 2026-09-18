@@ -1,3 +1,15 @@
+## 2026-09-18 — Lunyu citation display released and accepted
+
+Pages `ec81bef8-4c28-47c4-8093-378be3666b31`, runtime source
+`d08bc39ffc4ce4a9c60ecd7096d3392be30cef00`, is accepted. Twelve chapter citations
+now appear on separate smaller lines. Actual desktop/mobile and ordinary reload
+checks pass, with exact controller/stylesheet hashes and zero reading API writes.
+The backend, lesson text/versions, saved mark offsets and native App content are
+unchanged. Immediate rollback is `43b6e706-bfc0-4f5c-a11b-d956e2955d0e`; preserve
+all forward data. [Implementation and verification](FIRST_READ_CITATIONS_20260918.md).
+Full release/controller/rollback evidence:
+`/Users/ylsuen/CF/reports/operations/yw-first-read-citations-20260918/release/RELEASE.md`.
+
 ## 2026-09-15 — web repair deployed and browser display accepted
 
 Production Pages `43b6e706-bfc0-4f5c-a11b-d956e2955d0e`, runtime source `7ff736fd900ca0857666395e6188e528945b43d8`, formal artifact `6fa5f5749109843bdaa46a7bcefdd9cd6ef96accae97562049dfac50fc296be0` (1224 files). The renewed existing v2 leaf control accepted this deployment after source/build/CI, exact project/config/App readbacks, isolated public preview, and authenticated production browser checks. User-approved release-validation annotations in lesson1476 were saved (3 x HTTP200), first-read submitted (200), and reloaded with submitted/unlocked=true and all three labeled marks retained. The ordinary unlocked Yuque resource shows the saved first viewport, its 2026-08-11 date and not-full-text caption; original link and enlarged image were visually verified. No external full-text access is claimed.
