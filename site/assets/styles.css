@@ -1380,6 +1380,16 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
 .first-read-instruction { margin: 0 0 24px; color: var(--ink-soft); font: 650 .84rem/1.65 var(--sans); }
 .first-read-text { counter-reset: first-read-paragraph; font: calc(1.12rem * var(--reader-scale))/2.15 var(--serif); letter-spacing: .055em; }
 .first-read-paragraph { position: relative; margin: 0 0 1.55em; text-align: justify; text-justify: inter-ideograph; }
+.first-read-source {
+  display: block;
+  margin-top: .35em;
+  color: var(--ink-soft);
+  font: 500 .78em/1.65 var(--sans);
+  letter-spacing: .02em;
+  text-align: right;
+}
+.first-read-source::before { content: "出處：《"; }
+.first-read-source::after { content: "》"; }
 .first-read-paragraph::before {
   position: absolute;
   right: calc(100% + 12px);

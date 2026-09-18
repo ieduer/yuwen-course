@@ -226,6 +226,55 @@ assert.equal(privateSession.authorityLessonId, privateLoadHarness.asset.lessonId
 assert.equal(privateSession.authorityTextVersionId, privateLoadHarness.asset.textVersionId);
 assert.equal(privateSession.authorityTextDigest, privateLoadHarness.asset.textDigest);
 
+// Chapter citations are presentation metadata: splitting them must preserve
+// every original character and saved selection, including legacy cross-boundary marks.
+const browserWindow = {};
+vm.runInNewContext(browserContractSource, { window: browserWindow });
+const lunyu = artifacts.lessons.find((lesson) => lesson.lessonId === "lesson-1474");
+const lunyuReader = JSON.parse(readFileSync(resolve(ROOT, "site/data/reader-documents/lesson-1474.json"), "utf8"));
+const lunyuCanonical = extractCanonicalParagraphs(lunyuReader, policy.lessons.find((lesson) => lesson.lessonId === lunyu.lessonId));
+const displaySession = { asset: lunyu, authMode: "authenticated", marks: [] };
+const paragraphHtml = (session) => Array.from(
+  browserWindow.YwClassicalFirstRead.renderGate(session).matchAll(/<p class="first-read-paragraph"[^>]*>(.*?)<\/p>/gs),
+  (match) => match[1],
+);
+const displayedLunyu = paragraphHtml(displaySession);
+assert.equal(displayedLunyu.length, 12);
+assert.deepEqual(Array.from(
+  browserWindow.YwClassicalFirstRead.renderSubmittedReading({ ...displaySession, submitted: true }).matchAll(/<p class="first-read-paragraph"[^>]*>(.*?)<\/p>/gs),
+  (match) => match[1],
+), displayedLunyu);
+for (const [index, html] of displayedLunyu.entries()) {
+  const source = lunyuCanonical.paragraphs[index].text.match(/（《([^》]+)》）$/u)?.[1].trim();
+  assert.ok(source, `chapter source missing for paragraph ${index + 1}`);
+  const sourceHtml = html.match(/<span class="first-read-source"[^>]*>(.*?)<\/span>/s)?.[1];
+  assert.equal(sourceHtml, source);
+  assert.equal(html.replace(/<[^>]+>/g, ""), lunyu.paragraphs[index].text);
+  assert.equal(html.match(/<span class="first-read-body">(.*?)<\/span>/s)?.[1], lunyu.paragraphs[index].text.slice(0, -source.length));
+}
+const shortParagraph = lunyu.paragraphs[2];
+for (const [startOffset, endOffset, resolutionStatus] of [[2, 5, "open"], [9, 11, "resolved"], [8, 11, "open"]]) {
+  const selectedText = shortParagraph.text.slice(startOffset, endOffset);
+  const html = paragraphHtml({
+    ...displaySession,
+    marks: [{ markId: "existing-mark", paragraphKey: shortParagraph.key, startOffset, endOffset, selectedText, resolutionStatus }],
+  })[2];
+  const highlightedText = Array.from(html.matchAll(/<mark[^>]*>(.*?)<\/mark>/gs), (match) => match[1]).join("");
+  assert.equal(highlightedText, selectedText);
+  assert.equal(html.replace(/<[^>]+>/g, ""), shortParagraph.text);
+}
+const changedParagraph = { ...shortParagraph, key: "unreviewed-key" };
+assert.doesNotMatch(paragraphHtml({ ...displaySession, asset: { ...lunyu, paragraphs: [changedParagraph] } })[0], /first-read-source/);
+assert.doesNotMatch(paragraphHtml({ ...displaySession, asset: { ...lunyu, paragraphs: [{ ...shortParagraph, text: "新的正文" }] } })[0], /first-read-source/);
+for (const lesson of artifacts.lessons.filter((lesson) => lesson.lessonId !== lunyu.lessonId)) {
+  const paragraphs = paragraphHtml({ ...displaySession, asset: lesson });
+  assert.equal(paragraphs.length, lesson.paragraphs.length);
+  paragraphs.forEach((html, index) => {
+    assert.doesNotMatch(html, /first-read-source/);
+    assert.equal(html.replace(/<[^>]+>/g, ""), lesson.paragraphs[index].text);
+  });
+}
+
 const quyuan = artifacts.lessons.find((lesson) => lesson.lessonId === "lesson-1534");
 assert.deepEqual(quyuan.source.segments, [{ startBlock: 0, endBlock: 13 }]);
 assert.deepEqual(quyuan.paragraphs.map((paragraph) => paragraph.sourceBlockIndex), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
