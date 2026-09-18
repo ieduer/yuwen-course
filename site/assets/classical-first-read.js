@@ -4,6 +4,23 @@
   const STORAGE_PREFIX = "yw-classical-first-read-local-v1";
   const MAX_SELECTION_CHARS = 120;
 
+  // Reviewed against reader-documents/lesson-1474.json. Exact paragraph keys
+  // keep this presentation-only split tied to the existing source text.
+  const PARAGRAPH_SOURCES = Object.freeze({
+    "cfrp:lesson-1474:8da1dd474b72f805:01": "学而",
+    "cfrp:lesson-1474:c351fda9391e5029:01": "八佾",
+    "cfrp:lesson-1474:ec946aa0a2aa8861:01": "里仁",
+    "cfrp:lesson-1474:0d903bea1e2f02d6:01": "里仁",
+    "cfrp:lesson-1474:de9ecb49d5cb4a05:01": "里仁",
+    "cfrp:lesson-1474:19cf5fe29ae3747b:01": "雍也",
+    "cfrp:lesson-1474:09dbdd780822fbb3:01": "泰伯",
+    "cfrp:lesson-1474:367fbbf8fde1e71a:01": "子罕",
+    "cfrp:lesson-1474:cbd2b3853dfb51e2:01": "子罕",
+    "cfrp:lesson-1474:dfca6b36e7bd67bf:01": "颜渊",
+    "cfrp:lesson-1474:846d062d8a546ebc:01": "卫灵公",
+    "cfrp:lesson-1474:c0ac826dfa86a312:01": "阳货",
+  });
+
   function esc(value) {
     return String(value ?? "").replace(/[&<>"']/g, (char) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;",
@@ -153,21 +170,33 @@
     return visible;
   }
 
-  function markedText(session, paragraph) {
+  function markedText(session, paragraph, start = 0, end = paragraph.text.length) {
     const marks = sortedVisibleMarks(session, paragraph.key);
-    let cursor = 0;
+    let cursor = start;
     const parts = [];
     marks.forEach((mark) => {
-      parts.push(esc(paragraph.text.slice(cursor, mark.startOffset)));
-      parts.push(`<mark class="first-read-mark ${mark.resolutionStatus === "resolved" ? "resolved" : ""}" data-mark-id="${esc(mark.markId)}">${esc(paragraph.text.slice(mark.startOffset, mark.endOffset))}</mark>`);
-      cursor = mark.endOffset;
+      const markStart = Math.max(start, mark.startOffset);
+      const markEnd = Math.min(end, mark.endOffset);
+      if (markStart >= markEnd) return;
+      parts.push(esc(paragraph.text.slice(cursor, markStart)));
+      parts.push(`<mark class="first-read-mark ${mark.resolutionStatus === "resolved" ? "resolved" : ""}" data-mark-id="${esc(mark.markId)}">${esc(paragraph.text.slice(markStart, markEnd))}</mark>`);
+      cursor = markEnd;
     });
-    parts.push(esc(paragraph.text.slice(cursor)));
+    parts.push(esc(paragraph.text.slice(cursor, end)));
     return parts.join("");
   }
 
+  function paragraphContent(session, paragraph) {
+    const source = PARAGRAPH_SOURCES[paragraph.key];
+    if (!source || !paragraph.text.endsWith(source)) return markedText(session, paragraph);
+    const boundary = paragraph.text.length - source.length;
+    // No extra DOM text: saved UTF-16 offsets and browser selection ranges
+    // must continue to refer to exactly the original paragraph string.
+    return `<span class="first-read-body">${markedText(session, paragraph, 0, boundary)}</span><span class="first-read-source" aria-label="出處：${esc(source)}">${markedText(session, paragraph, boundary)}</span>`;
+  }
+
   function renderParagraphs(session) {
-    return session.asset.paragraphs.map((paragraph) => `<p class="first-read-paragraph" tabindex="0" data-first-read-paragraph="${esc(paragraph.key)}" data-ordinal="${Number(paragraph.ordinal)}">${markedText(session, paragraph)}</p>`).join("");
+    return session.asset.paragraphs.map((paragraph) => `<p class="first-read-paragraph" tabindex="0" data-first-read-paragraph="${esc(paragraph.key)}" data-ordinal="${Number(paragraph.ordinal)}">${paragraphContent(session, paragraph)}</p>`).join("");
   }
 
   function renderMarkList(session) {
@@ -245,7 +274,7 @@
 
   function renderSubmittedParagraphs(session) {
     return session.asset.paragraphs.map((paragraph) => `
-      <p class="first-read-paragraph" data-first-read-submitted-paragraph="${esc(paragraph.key)}" data-ordinal="${Number(paragraph.ordinal)}">${markedText(session, paragraph)}</p>`).join("");
+      <p class="first-read-paragraph" data-first-read-submitted-paragraph="${esc(paragraph.key)}" data-ordinal="${Number(paragraph.ordinal)}">${paragraphContent(session, paragraph)}</p>`).join("");
   }
 
   function renderSubmittedMarks(session) {

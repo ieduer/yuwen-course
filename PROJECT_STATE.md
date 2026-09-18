@@ -1,3 +1,12 @@
+## 2026-09-18 — Lunyu first-read citations prepared, not deployed
+
+The twelve lesson-1474 chapter sources now render on separate, smaller lines in
+both initial and submitted first-read views. Existing source bytes, text
+versions and mark offsets are preserved. Focused 30-lesson/102-paragraph checks
+and local desktop/mobile rendering and selection checks pass. Production
+release is pending authorization; this candidate changes no backend, learning
+records or native content pointer. Details: [citation repair](docs/FIRST_READ_CITATIONS_20260918.md).
+
 ## 2026-09-15 — web repair deployed and browser display accepted
 
 Production Pages `43b6e706-bfc0-4f5c-a11b-d956e2955d0e`, runtime source `7ff736fd900ca0857666395e6188e528945b43d8`, formal artifact `6fa5f5749109843bdaa46a7bcefdd9cd6ef96accae97562049dfac50fc296be0` (1224 files). The renewed existing v2 leaf control accepted this deployment after source/build/CI, exact project/config/App readbacks, isolated public preview, and authenticated production browser checks. User-approved release-validation annotations in lesson1476 were saved (3 x HTTP200), first-read submitted (200), and reloaded with submitted/unlocked=true and all three labeled marks retained. The ordinary unlocked Yuque resource shows the saved first viewport, its 2026-08-11 date and not-full-text caption; original link and enlarged image were visually verified. No external full-text access is claimed.
