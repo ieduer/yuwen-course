@@ -25,7 +25,13 @@ Validation:
 - `node scripts/build_classical_first_read.mjs --check`: all 30 assets match.
 - `node scripts/build_release_site.mjs --check-source --preview`: source
   projection passes. The `--preview` build and `--check-staging --preview` also
-  pass; this is not a production build or deployment acceptance.
+  pass. The formal build and staging/manifest checks also pass after refreshing
+  the tracked artifact manifest for this frontend change. This is build
+  evidence, not deployment acceptance.
+- Formal artifact: 1,224 files / 164,477,073 bytes; aggregate SHA-256
+  `2e1768bc8ce924499953fb59e48a964cfbfde81d03da8359ad622d125ff4be57`.
+  Only the three frontend files and generated release receipt changed within
+  the artifact; native content and all lesson data remain byte-identical.
 - `node --check site/assets/classical-first-read.js` and `git diff --check` pass.
 - Local Brave/Playwright at widths 1440 and 390: twelve separate source lines,
   smaller source font, exact paragraph text, no horizontal overflow; inspected
