@@ -637,6 +637,21 @@ try {
     },
   );
   assert.deepEqual(anonymousPageErrors, []);
+  await anonymousPage.evaluate(async () => {
+    await document.fonts.ready;
+    await new Promise(requestAnimationFrame);
+    await Promise.all(document.getAnimations()
+      .filter((animation) => Number.isFinite(animation.effect.getTiming().iterations))
+      .map((animation) => animation.finished.catch(() => {})));
+    window.__anonymousReader = document.querySelector("#text-flow").firstElementChild;
+    window.scrollTo({ top: 300, behavior: "instant" });
+    window.__anonymousY = scrollY;
+    window.dispatchEvent(new Event("focus"));
+  });
+  await anonymousPage.waitForFunction(() => interactionIdentityResolved && !sharedStateRefreshPromise);
+  assert.equal(await anonymousPage.evaluate(() => window.__anonymousReader
+    === document.querySelector("#text-flow").firstElementChild && scrollY === window.__anonymousY),
+  true, "anonymous focus refresh must also retain the reader and position");
   await anonymousPage.close();
 
   // Returning to an already authenticated classical lesson must not rebuild

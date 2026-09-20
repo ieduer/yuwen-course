@@ -743,10 +743,10 @@ async function hydrateSharedStateOnce(hydrationEpoch = sharedStateHydrationEpoch
   if (!identity?.api) return "retry";
   const previousOwnerScope = progressOwnerScope;
   const preserveSessions = Boolean(
-    previousOwnerScope
-    && previousOwnerScope !== ANONYMOUS_UI_SCOPE
-    && sharedStateClient?.ownerScope === previousOwnerScope
-    && sharedStateClientIdentity === identity
+    previousOwnerScope === ANONYMOUS_UI_SCOPE
+    || (previousOwnerScope
+      && sharedStateClient?.ownerScope === previousOwnerScope
+      && sharedStateClientIdentity === identity)
   );
   setInteractionIdentityResolved(false, { preserveSessions });
   const session = await waitForSharedStateIdentity(() => identity.getSession?.());
@@ -760,7 +760,12 @@ async function hydrateSharedStateOnce(hydrationEpoch = sharedStateHydrationEpoch
   if (!session.authenticated) {
     setAuthenticatedState(false);
     setProgressOwnerScope(ANONYMOUS_UI_SCOPE);
-    setInteractionIdentityResolved(true);
+    setInteractionIdentityResolved(true, {
+      preserveSessions: preserveSessions && previousOwnerScope === ANONYMOUS_UI_SCOPE && (
+        sourceModeFor(state.current) !== "classical"
+        || state.firstReads.get(state.current?.id)?.ownerScope === ANONYMOUS_UI_SCOPE
+      ),
+    });
     await applyAnonymousSharedState();
     return requestStillCurrent() ? "ok" : "stale";
   }

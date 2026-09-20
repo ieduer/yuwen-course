@@ -101,7 +101,7 @@ test("hydration pauses writes and binds progress only after stable owner verific
   const hydrateSource = section("async function hydrateSharedStateOnce", "function flushSharedState");
   const unknownSessionIndex = hydrateSource.indexOf('typeof session.authenticated !== "boolean"');
   const anonymousIndex = hydrateSource.indexOf("setProgressOwnerScope(ANONYMOUS_UI_SCOPE)");
-  const anonymousResolvedIndex = hydrateSource.indexOf("setInteractionIdentityResolved(true)", anonymousIndex);
+  const anonymousResolvedIndex = hydrateSource.indexOf("setInteractionIdentityResolved(true,", anonymousIndex);
   const pauseIndex = hydrateSource.indexOf("setInteractionIdentityResolved(false, { preserveSessions })");
   const sessionIndex = hydrateSource.indexOf("identity.getSession");
   const discoveryIndex = hydrateSource.indexOf('identity.api("/api/yw/v1/state")');

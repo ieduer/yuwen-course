@@ -3,7 +3,7 @@
 Authenticated production focus reproduced scrollY 1440 → 0. The Web repair
 preserves the same owner's reader during background verification, pauses
 writes without false logout, and prevents cloud resume from taking over the
-open lesson. Desktop/mobile and full precontent checks pass, including actual
+open lesson. Desktop/mobile and full precontent checks pass, including simulated
 account-switch/logout isolation and navigation during a pending identity check.
 This source is prepared; deployment and live acceptance are recorded separately.
 [Cause and verification](SCROLL_AUTH_REPAIR_20260920.md).
