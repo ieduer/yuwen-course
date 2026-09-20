@@ -2028,6 +2028,75 @@ test("lesson 1474 formal interactions carry server-owned history across real rou
   }
 });
 
+test("pending resume dispatches captured study-guide answers across a rate window without trusting client payload", async (t) => {
+  t.mock.timers.enable({ apis: ["Date"], now: new Date("2026-09-20T02:19:54.000Z") });
+  invalidateFormativeManifestCache();
+  const { default: isolatedWorker } = await import("../site/_worker.js?study-guide-pending-resume=1");
+  const db = new DatabaseSync(":memory:");
+  const originalFetch = globalThis.fetch;
+  try {
+    initializeLearningContractDb(db);
+    const source = sourceEnvironment();
+    source.env.READING_DB = sqliteD1(db);
+    source.env.READING_TEST_SLUG = "lease-test-student";
+    const studyLesson = JSON.parse(readFileSync(resolve(ROOT, "site/data/lessons/lesson-1484.json"), "utf8"));
+    const firstRead = JSON.parse(readFileSync(resolve(ROOT, "site/data/classical-first-read/lesson-1484.json"), "utf8"));
+    db.prepare("INSERT INTO classical_first_read_sessions (student_id, lesson_id, text_version_id, text_digest, submitted_at) VALUES (?, ?, ?, ?, ?)")
+      .run(7, studyLesson.id, firstRead.textVersionId, firstRead.textDigest, "2026-09-20T02:00:00.000Z");
+    const assetFetch = source.env.ASSETS.fetch.bind(source.env.ASSETS);
+    source.env.ASSETS.fetch = async (request) => {
+      const path = new URL(request.url).pathname;
+      if (path === "/data/study-guide-catalog.json") return Response.json(studyGuideCatalog);
+      if (path === `/data/lessons/${studyLesson.id}.json`) return Response.json(studyLesson);
+      if (path === `/data/classical-first-read/${studyLesson.id}.json`) return Response.json(firstRead);
+      return assetFetch(request);
+    };
+    globalThis.fetch = async () => { throw new Error("objective resume must not call a provider"); };
+    const item = studyGuideCatalog.lessons.find((entry) => entry.lessonId === studyLesson.id)
+      .items.find((entry) => entry.activeForSelfTest && /choice|discrimination|identification|objective|knowledge/i.test(entry.detailTag));
+    assert.ok(item);
+    const payload = {
+      itemKey: item.itemKey, response: "A", referenceRevealedAt: "2026-09-20T02:19:00.000Z",
+      clientMutationId: "study-guide-server-captured-resume", lessonPhase: "knowledge_accounting",
+    };
+    const initial = await assertLearningSubmissionAllowed({
+      request: new Request("https://yw.bdfz.net/api/reading/study-guide-attempt"),
+      env: source.env, student: { id: 7, ucUserId: 42 }, lesson: studyLesson,
+      interactionKey: "studyGuideItemCompleted", payload,
+      expectedStudyGuideCatalogDigest: studyGuideCatalog.catalogDigest,
+    });
+    await releaseLearningSubmissionReservation({ env: source.env, submissionReservation: initial.submissionReservation });
+    const request = () => new Request("https://yw.bdfz.net/api/learning/pending-interactions/resume", {
+      method: "POST", headers: YW_WEB_JSON_HEADERS,
+      body: JSON.stringify({ clientMutationId: payload.clientMutationId,
+        lessonId: "lesson-wrong", itemKey: "wrong", response: "client replacement", interaction: "wordCreation" }),
+    });
+    const foreign = await isolatedWorker.fetch(request(), { ...source.env, READING_TEST_SLUG: "another-test-student" }, {});
+    assert.equal(foreign.status, 404, "another owner cannot resume this capture");
+    const cooldown = await isolatedWorker.fetch(request(), source.env, {});
+    assert.equal(cooldown.status, 503, "resume preserves evaluator cooldown");
+    t.mock.timers.tick(16_000);
+    const resumed = await isolatedWorker.fetch(request(), source.env, {});
+    const body = await resumed.json();
+    assert.equal(resumed.status, 200, JSON.stringify(body));
+    assert.equal(body.evidence.sourceEventId, initial.submissionReservation.sourceEventId);
+    assert.equal(db.prepare("SELECT window_start FROM learning_submission_slots").get().window_start, "2026-09-20T02:20:00.000Z");
+    const row = db.prepare("SELECT interaction_key, raw_payload_json FROM learning_interactions").get();
+    assert.equal(row.interaction_key, "studyGuideItemCompleted");
+    assert.equal(JSON.parse(row.raw_payload_json).response, payload.response);
+    assert.equal(db.prepare("SELECT status FROM learning_pending_submissions").get().status, "completed");
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM evidence_outbox").get().n, 1);
+    assert.equal(source.queued.length, 1);
+    assert.doesNotMatch(JSON.stringify(source.queued), /client replacement/);
+    assert.equal((await isolatedWorker.fetch(request(), source.env, {})).status, 404, "completed capture cannot be evaluated twice");
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions").get().n, 1);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls").get().n, 0);
+  } finally {
+    globalThis.fetch = originalFetch;
+    db.close();
+  }
+});
+
 test("an evaluator outage consumes no learner slot and retries after only the short cooldown", async () => {
   const db = new DatabaseSync(":memory:");
   const originalFetch = globalThis.fetch;
@@ -3771,7 +3840,8 @@ test("evaluator failures enter a short cooldown without consuming learner capaci
   }
 });
 
-test("captured evaluator input is private, resumable, and completed atomically with evidence", async () => {
+test("captured evaluator input is private, resumable across rate windows, and completed atomically with evidence", async (t) => {
+  t.mock.timers.enable({ apis: ["Date"], now: new Date("2026-09-20T02:19:54.000Z") });
   const db = new DatabaseSync(":memory:");
   try {
     initializeLearningContractDb(db);
@@ -3830,6 +3900,16 @@ test("captured evaluator input is private, resumable, and completed atomically w
       "SELECT created_at FROM learning_submission_slots"
     ).get().created_at;
     const retryAt = new Date(Date.parse(cooldownStartedAt) + 16_000).toISOString();
+    await assert.rejects(assertLearningSubmissionAllowed({
+      request, env: source.env, student, lesson: wordCreationLesson,
+      interactionKey: "wordCreation", payload,
+      occurredAt: new Date(Date.parse(cooldownStartedAt) + 7_000).toISOString(),
+    }), LearningEvaluatorCooldownError);
+    await assert.rejects(assertLearningSubmissionAllowed({
+      request, env: source.env, student, lesson: wordCreationLesson,
+      interactionKey: "wordCreation", payload: { ...payload, creation: "changed answer" },
+      occurredAt: retryAt,
+    }), (error) => error.code === "learning_mutation_conflict");
     const resumed = await assertLearningSubmissionAllowed({
       request,
       env: source.env,
@@ -3839,6 +3919,8 @@ test("captured evaluator input is private, resumable, and completed atomically w
       payload,
       occurredAt: retryAt,
     });
+    assert.equal(resumed.submissionReservation.sourceEventId, initial.submissionReservation.sourceEventId);
+    assert.equal(resumed.submissionReservation.rateReservation.windowStart, "2026-09-20T02:20:00.000Z");
     await recordLearningInteraction({
       request,
       env: source.env,
@@ -3884,8 +3966,13 @@ test("a late original and reclaimed evaluator commit one immutable ledger set", 
       lesson: wordCreationLesson,
       interactionKey: "wordCreation",
       payload,
-      occurredAt: "2026-08-13T22:00:00.000Z",
+      occurredAt: "2026-08-13T22:09:50.000Z",
     });
+    await assert.rejects(assertLearningSubmissionAllowed({
+      request, env: source.env, student, lesson: wordCreationLesson,
+      interactionKey: "wordCreation", payload,
+      occurredAt: "2026-08-13T22:10:05.000Z",
+    }), LearningSubmissionInProgressError);
     const reclaimed = await assertLearningSubmissionAllowed({
       request,
       env: source.env,
@@ -3893,7 +3980,7 @@ test("a late original and reclaimed evaluator commit one immutable ledger set", 
       lesson: wordCreationLesson,
       interactionKey: "wordCreation",
       payload,
-      occurredAt: "2026-08-13T22:01:01.000Z",
+      occurredAt: "2026-08-13T22:11:01.000Z",
     });
     assert.equal(original.deduped, false);
     assert.equal(reclaimed.deduped, false);
@@ -3935,6 +4022,39 @@ test("a late original and reclaimed evaluator commit one immutable ledger set", 
       assert.equal(db.prepare(`SELECT COUNT(*) AS n FROM ${table}`).get().n, 1, table);
     }
     assert.equal(source.queued.length, 1);
+  } finally {
+    db.close();
+  }
+});
+
+test("captured retries reacquire current-window capacity without losing the stored answer", async () => {
+  const db = new DatabaseSync(":memory:");
+  try {
+    initializeLearningContractDb(db);
+    const source = sourceEnvironment();
+    source.env.READING_DB = sqliteD1(db);
+    const request = new Request("https://yw.bdfz.net/api/interaction-check");
+    const student = { id: 7, ucUserId: 42 };
+    const payload = { word: "站立", creation: "保留原提交並遵守目前額度。", clientMutationId: "cross-window-capacity" };
+    const input = { request, env: source.env, student, lesson: wordCreationLesson, interactionKey: "wordCreation", payload };
+    const initial = await assertLearningSubmissionAllowed({ ...input, occurredAt: "2026-09-18T02:00:00.000Z" });
+    const retryAt = "2026-09-20T02:20:00.000Z";
+    for (let index = 0; index < 8; index += 1) {
+      await acquireLearningSubmissionReservation({
+        db: source.env.READING_DB, studentId: student.id,
+        clientMutationId: `current-capacity-${index}`, resourceKey: initial.resourceKey,
+        scoringRole: "a_plus_gate", occurredAt: retryAt,
+      });
+    }
+    await assert.rejects(assertLearningSubmissionAllowed({ ...input, occurredAt: retryAt }), LearningSubmissionRateLimitError);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_pending_submissions").get().n, 1);
+    const pending = db.prepare("SELECT source_event_id,raw_payload_json FROM learning_pending_submissions").get();
+    assert.equal(pending.source_event_id, initial.submissionReservation.sourceEventId);
+    assert.equal(JSON.parse(pending.raw_payload_json).creation, payload.creation);
+    assert.equal(source.queued.length, 0);
+    const resumed = await assertLearningSubmissionAllowed({ ...input, occurredAt: "2026-09-20T02:30:00.000Z" });
+    assert.equal(resumed.submissionReservation.sourceEventId, initial.submissionReservation.sourceEventId);
+    assert.equal(resumed.submissionReservation.rateReservation.windowStart, "2026-09-20T02:30:00.000Z");
   } finally {
     db.close();
   }

@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1224,
-  "totalBytes": 164479283,
-  "aggregateSha256": "7eaf9ea23d2d8de864500d0501f24d12afcca063e9c35eb74239deefb0fe97af",
+  "totalBytes": 164481515,
+  "aggregateSha256": "41f25b48859197a16a4cc14226a630ec22cdc1bca62e71e0b1cca3c541501e2e",
   "files": [
     {
       "path": "_headers",
@@ -17,13 +17,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 131693,
-      "sha256": "9fd04bcc46c641bb213aaa7b751b36a1d61d8dcb54a8590416385fbc1e8f1d92"
+      "bytes": 132087,
+      "sha256": "a446bff7f385b01152d04a411349455c04d9bb1b6c317246b6ee526ed0a7c312"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "f0470a90ae925d39c1a3fdf78ff241c624d1b3ed4ea893add8fb3a2688b8cb53"
+      "sha256": "81e197ffae7fb0c940c1735cad31b45266c2540e6d60c9306d9aa7ecf16469c9"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -3102,8 +3102,8 @@
     },
     {
       "path": "assets/styles.css",
-      "bytes": 84028,
-      "sha256": "274f7583cb87d67f301924547dd7f56d87ff1110ac5ef579186e80ea8a1b7546"
+      "bytes": 84120,
+      "sha256": "ad83d2d6d30f78f5f2cd76f421ee3ef15591c1fa985f254efd6c6ec13746f3d9"
     },
     {
       "path": "assets/vocab-progress.js",
@@ -6028,12 +6028,12 @@
     {
       "path": "index.html",
       "bytes": 11614,
-      "sha256": "07a45aa4060c3241e4cce86132693828dfd2f9938b610ff86864f8ee0c462f6f"
+      "sha256": "8b9c5fea4f7d6ab830a2a910fdcd8913d4a0b5651038a012502805822a6179b0"
     },
     {
       "path": "learning-evidence-source.js",
-      "bytes": 76725,
-      "sha256": "91b9291fed2f488038d99827ab7f3100184f68e5fdab421cd9d23c68b09edc0b"
+      "bytes": 78471,
+      "sha256": "34e4b7a791fde38424538c883310711b679ddf6fd675a9ea0ed59d081a0f2594"
     },
     {
       "path": "lesson-blueprint-rules.js",

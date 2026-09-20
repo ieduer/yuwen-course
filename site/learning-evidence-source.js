@@ -914,10 +914,11 @@ async function reuseOrWaitForSubmissionSlot(
   occurredAt,
   retry = 0,
 ) {
-  assertSubmissionSlotMatches(slot, sourceEventId, studentId, resourceKey, windowStart);
+  const slotWindowStart = String(slot.window_start || "");
+  assertSubmissionSlotMatches(slot, sourceEventId, studentId, resourceKey, slotWindowStart);
   const reservation = {
     sourceEventId,
-    windowStart,
+    windowStart: slotWindowStart,
     resourceSlotNo: Number(slot.resource_slot_no),
     globalSlotNo: Number(slot.global_slot_no),
     leaseStartedAt: String(slot.created_at || ""),
@@ -954,6 +955,7 @@ async function reuseOrWaitForSubmissionSlot(
         definition,
         occurredAt,
         Number(retry) + 1,
+        sourceEventId,
       );
     }
     const current = await readSubmissionSlot(db, sourceEventId);
@@ -979,6 +981,30 @@ async function reuseOrWaitForSubmissionSlot(
       ? leaseMs - Math.max(0, nowMs - createdAtMs)
       : leaseMs;
     throw new LearningSubmissionInProgressError(Math.max(1, Math.ceil(remainingMs / 1000)));
+  }
+
+  if (slotWindowStart !== windowStart) {
+    // A captured answer keeps its original event identity. An expired lease
+    // must still acquire capacity in the current rate window before retrying.
+    const removed = await db.prepare(
+      `DELETE FROM learning_submission_slots
+        WHERE source_event_id = ? AND created_at = ?
+          AND NOT EXISTS (
+            SELECT 1 FROM learning_interactions interaction
+             WHERE interaction.source_event_id = learning_submission_slots.source_event_id
+          )`
+    ).bind(sourceEventId, slot.created_at).run();
+    if (Number(removed?.meta?.changes || 0) === 1) {
+      return reserveSubmissionSlot(db, studentId, clientMutationId, resourceKey,
+        definition, occurredAt, Number(retry) + 1, sourceEventId);
+    }
+    const current = await readSubmissionSlot(db, sourceEventId);
+    if (current && Number(retry) < 3) {
+      return reuseOrWaitForSubmissionSlot(db, current, sourceEventId,
+        clientMutationId, studentId, resourceKey, windowStart, definition,
+        occurredAt, Number(retry) + 1);
+    }
+    throw new LearningSubmissionInProgressError(1);
   }
 
   const leaseStartedAt = reservationLeaseTimestamp(nowMs, true);
@@ -1019,12 +1045,14 @@ async function reserveSubmissionSlot(
   definition,
   occurredAt,
   retry = 0,
+  capturedSourceEventId = "",
 ) {
   const occurredAtMs = reservationTimestampMs(occurredAt);
   const windowMs = SUBMISSION_RATE_LIMIT.windowSeconds * 1000;
   const windowStartMs = Math.floor((Number.isFinite(occurredAtMs) ? occurredAtMs : Date.now()) / windowMs) * windowMs;
   const windowStart = new Date(windowStartMs).toISOString();
-  const sourceEventId = await deterministicReservationId(studentId, clientMutationId, windowStart);
+  const sourceEventId = capturedSourceEventId
+    || await deterministicReservationId(studentId, clientMutationId, windowStart);
   const existingSlot = await readSubmissionSlot(db, sourceEventId);
   if (existingSlot) {
     return reuseOrWaitForSubmissionSlot(
@@ -1089,6 +1117,7 @@ async function reserveSubmissionSlot(
           definition,
           occurredAt,
           Number(retry) + 1,
+          sourceEventId,
         );
       }
     }
@@ -1212,6 +1241,17 @@ export async function assertLearningSubmissionAllowed({
       evaluation: storedEvaluation(existing),
     };
   }
+  const pending = await existingPendingSubmission(env.READING_DB, student.id, clientMutationId);
+  if (pending) {
+    assertPendingSubmissionMatches(pending, {
+      sourceEventId: pending.source_event_id,
+      studentId: Number(student.id),
+      lessonId: lesson.id,
+      interactionKey,
+      resourceKey: context.resourceKey,
+      rawPayloadJson: raw.serialized,
+    });
+  }
   const slot = await reserveSubmissionSlot(
     env.READING_DB,
     student.id,
@@ -1219,6 +1259,8 @@ export async function assertLearningSubmissionAllowed({
     context.resourceKey,
     context.definition,
     occurredAt,
+    0,
+    pending?.source_event_id || "",
   );
   if (slot.committed) {
     const committed = await existingInteraction(env.READING_DB, student.id, clientMutationId);

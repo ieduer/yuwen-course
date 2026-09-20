@@ -34,6 +34,7 @@
   font: .8rem var(--sans);
   pointer-events: none;
 }
+.identity-status[hidden] { display: none; }
 
 html {
   scroll-behavior: smooth;
@@ -105,10 +106,10 @@ summary:focus-visible {
 .icon-button:hover { border-color: var(--accent); color: var(--accent); }
 .icon-button:disabled { opacity: .35; cursor: not-allowed; }
 
-.atlas-open > span { display: grid; width: 16px; gap: 3px; }
-.atlas-open > span i { display: block; height: 1px; background: currentColor; transition: width .2s ease, transform .2s ease; }
-.atlas-open > span i:nth-child(2) { width: 11px; }
-.atlas-open:hover > span i:nth-child(2) { width: 16px; }
+.icon-button.atlas-open > span { display: grid; width: 16px; gap: 3px; }
+.icon-button.atlas-open > span i { display: block; height: 1px; background: currentColor; transition: width .2s ease, transform .2s ease; }
+.icon-button.atlas-open > span i:nth-child(2) { width: 11px; }
+.icon-button.atlas-open:hover > span i:nth-child(2) { width: 16px; }
 
 .topbar {
   position: fixed;

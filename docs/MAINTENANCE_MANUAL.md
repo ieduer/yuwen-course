@@ -1,3 +1,16 @@
+## 2026-09-20 — identity status and durable retry repair prepared
+
+See [the exact diagnosis and validation](SESSION_EVIDENCE_REPAIR_20260920.md).
+The candidate fixes an atlas/status CSS collision and preserves captured
+submission identity when reacquiring current-window retry capacity. Source/My
+1449-event reconciliation has no missing records. Existing pending evaluations,
+history, grades, Queue transport, shared contracts and App content are preserved.
+The accepted runtime and rollback are recorded in the linked task report;
+this preparation section alone is not deployment acceptance.
+
+Study-guide pending captures now resume through their original evaluator using
+server-owned input and the same structured errors as direct submissions.
+
 ## 2026-09-20 — YW reader stability repair released and accepted
 
 Production Pages `6d7ed869-9ca5-49e8-93bd-e0c920bcca85`, runtime YW
