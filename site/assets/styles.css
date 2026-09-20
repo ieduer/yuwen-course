@@ -34,7 +34,8 @@
   font: .8rem var(--sans);
   pointer-events: none;
 }
-.identity-status[hidden] { display: none; }
+.identity-status[hidden],
+#auth-login[hidden] { display: none; }
 
 html {
   scroll-behavior: smooth;

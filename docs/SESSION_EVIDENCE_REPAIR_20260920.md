@@ -48,3 +48,15 @@ and cannot identify every historical cause. Full evidence, current deployment
 acceptance and code-only rollback are recorded in
 `/Users/ylsuen/CF/reports/operations/yw-session-evidence-20260920/REPORT.md`.
 Production acceptance is recorded separately from this prepared source.
+
+Final visual acceptance also exposed `.text-button { display: inline-grid }`
+overriding the hidden authenticated login link. Explicitly hide `#auth-login`
+when its hidden attribute is present, and assert actual link invisibility in
+the same desktop/mobile atlas regression. This follow-up fixes presentation and
+cache pins; the accepted retry handlers and source/My contract are unchanged.
+
+The same real browser pass showed three HTTP412 preview failures, all from
+Bilibili video pages. Those pages now use the existing external-only preview
+mode immediately, preserving the complete original URL and playback query or
+fragment. No failed proxy retry, fabricated preview, new embed origin or
+security exception is introduced. Other preview policies are unchanged.
