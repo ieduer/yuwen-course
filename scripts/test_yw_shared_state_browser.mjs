@@ -691,6 +691,13 @@ try {
     await stablePage.goto(`${base}/#lesson-1474`, { waitUntil: "domcontentloaded" });
     await stablePage.waitForFunction(() => interactionIdentityResolved
       && document.querySelector(".first-read-submitted-review"));
+    for (let toggle = 0; toggle < 2; toggle += 1) {
+      assert.equal(await stablePage.locator("#identity-status").isVisible(), false,
+        "resolved identity must be visually hidden with the atlas open or closed");
+      const atlasOpen = await stablePage.evaluate(() => document.body.classList.contains("atlas-open"));
+      await stablePage.locator(atlasOpen && width < 900 ? "#atlas-close" : "#atlas-open").click();
+    }
+    assert.equal(await stablePage.locator("#identity-status").isVisible(), false);
     await stablePage.evaluate(async () => {
       await document.fonts.ready;
       await new Promise(requestAnimationFrame);
@@ -747,6 +754,8 @@ try {
       window.dispatchEvent(new Event("focus"));
     });
     await stablePage.waitForFunction(() => !sharedStateRefreshPromise && !interactionIdentityResolved);
+    assert.equal(await stablePage.locator("#identity-status").isVisible(), true,
+      "an unresolved identity must still have a truthful visible status");
     assert.deepEqual(await stablePage.evaluate(() => ({
       loginVisible: !document.querySelector("#auth-login").hidden,
       sameReader: window.__stableFlow === document.querySelector("#text-flow").firstElementChild,
@@ -759,6 +768,8 @@ try {
       window.dispatchEvent(new Event("online"));
     });
     await stablePage.waitForFunction(() => interactionIdentityResolved);
+    assert.equal(await stablePage.locator("#identity-status").isVisible(), false,
+      "the pending status must disappear after reconnect resolves identity");
     assert.equal(await stablePage.evaluate(() => window.__stableFlow
       === document.querySelector("#text-flow").firstElementChild), true);
 

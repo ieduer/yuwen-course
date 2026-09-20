@@ -1,3 +1,14 @@
+## 2026-09-20 — identity status and durable retry repair prepared
+
+The lingering status is an atlas CSS selector collision; captured evaluation
+retries also lost event identity across ten-minute rate windows. Generic
+pending resume incorrectly rejected study-guide captures with 400. All three
+paths are repaired; local browser and SQLite HTTP/source regressions pass. Exact source/My
+comparison confirms 1449/1449 recent events with no loss. The 41 older pending
+evaluations retain their original submissions for authenticated retry.
+[Cause and validation](docs/SESSION_EVIDENCE_REPAIR_20260920.md). Release and
+production acceptance remain separate in the linked operations report.
+
 ## 2026-09-20 — YW reader stability repair released and accepted
 
 Production Pages `6d7ed869-9ca5-49e8-93bd-e0c920bcca85`, runtime YW

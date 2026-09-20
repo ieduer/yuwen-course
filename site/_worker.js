@@ -1549,6 +1549,13 @@ async function handlePendingInteractionResume(request, env) {
   if (!captured) {
     return json({ error: "pending learning submission not found", code: "learning_pending_not_found" }, { status: 404 });
   }
+  if (captured.interaction === "studyGuideItemCompleted") {
+    return handleReadingStudyGuideAttempt(request, env, student, {
+      ...captured.input,
+      lessonId: captured.lessonId,
+      clientMutationId: captured.clientMutationId,
+    }).catch(readingApiFailureResponse);
+  }
   return handleInteractionCheck(request, env, captured, student);
 }
 
@@ -2473,8 +2480,8 @@ async function loadStudyGuideCatalog(request, env) {
   return value;
 }
 
-async function handleReadingStudyGuideAttempt(request, env, student) {
-  const payload = await request.json().catch(() => ({}));
+async function handleReadingStudyGuideAttempt(request, env, student, capturedPayload = null) {
+  const payload = capturedPayload || await request.json().catch(() => ({}));
   const lessonId = cleanText(payload.lessonId, 80);
   const itemKey = cleanText(payload.itemKey, 180);
   const responseText = cleanText(payload.response, 4000);
@@ -3072,17 +3079,21 @@ async function handleReading(request, env, url) {
     if (vocabMatch && request.method === "GET") return await handleReadingVocabState(request, env, student, vocabMatch[1]);
     return readingError("not found", 404);
   } catch (error) {
-    if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
-    if (error instanceof LearningResourceNotPublishedError) return learningResourceNotPublishedResponse(error);
-    if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
-    if (error instanceof LearningEvaluatorBudgetExceededError
-      || error instanceof LearningEvaluatorBudgetUnavailableError) return learningEvaluatorBudgetResponse(error);
-    if (error instanceof LearningEvaluatorCooldownError) return learningEvaluatorUnavailableResponse(error.retryAfterSeconds);
-    if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
-    if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
-    if (["classical_first_read_required", "classical_annotated_reading_required"].includes(error?.code)) {
-      return readingError(error.message, 422, error.code);
-    }
-    return readingError(error?.message || "reading api failure", 500);
+    return readingApiFailureResponse(error);
   }
+}
+
+function readingApiFailureResponse(error) {
+  if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
+  if (error instanceof LearningResourceNotPublishedError) return learningResourceNotPublishedResponse(error);
+  if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
+  if (error instanceof LearningEvaluatorBudgetExceededError
+    || error instanceof LearningEvaluatorBudgetUnavailableError) return learningEvaluatorBudgetResponse(error);
+  if (error instanceof LearningEvaluatorCooldownError) return learningEvaluatorUnavailableResponse(error.retryAfterSeconds);
+  if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
+  if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
+  if (["classical_first_read_required", "classical_annotated_reading_required"].includes(error?.code)) {
+    return readingError(error.message, 422, error.code);
+  }
+  return readingError(error?.message || "reading api failure", 500);
 }
