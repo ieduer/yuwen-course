@@ -637,7 +637,173 @@ try {
     },
   );
   assert.deepEqual(anonymousPageErrors, []);
+  await anonymousPage.evaluate(async () => {
+    await document.fonts.ready;
+    await new Promise(requestAnimationFrame);
+    await Promise.all(document.getAnimations()
+      .filter((animation) => Number.isFinite(animation.effect.getTiming().iterations))
+      .map((animation) => animation.finished.catch(() => {})));
+    window.__anonymousReader = document.querySelector("#text-flow").firstElementChild;
+    window.scrollTo({ top: 300, behavior: "instant" });
+    window.__anonymousY = scrollY;
+    window.dispatchEvent(new Event("focus"));
+  });
+  await anonymousPage.waitForFunction(() => interactionIdentityResolved && !sharedStateRefreshPromise);
+  assert.equal(await anonymousPage.evaluate(() => window.__anonymousReader
+    === document.querySelector("#text-flow").firstElementChild && scrollY === window.__anonymousY),
+  true, "anonymous focus refresh must also retain the reader and position");
   await anonymousPage.close();
+
+  // Returning to an already authenticated classical lesson must not rebuild
+  // the reader or let a remote resume position take over the active page.
+  for (const width of [1280, 390]) {
+    const stablePage = await browser.newPage({ viewport: { width, height: 900 } });
+    const stableErrors = [];
+    await configurePage(stablePage, base, stableErrors);
+    await stablePage.route("https://my.bdfz.net/site-auth.js", (route) => route.fulfill({
+      contentType: "text/javascript",
+      body: `${siteAuthStub}
+        window.__remoteSharedStates[OWNER_A].state.readingPosition.lessonId = "lesson-1474";
+        window.__remoteSharedStates[OWNER_B].state.readingPosition.lessonId = "lesson-1474";
+        window.__releaseStateGate();`,
+    }));
+    let firstReadLoads = 0;
+    await stablePage.route(`${base}/api/reading/**`, async (route) => {
+      if (route.request().method() !== "GET") {
+        await route.fulfill({ json: { ok: true } });
+        return;
+      }
+      firstReadLoads += 1;
+      const lessonId = new URL(route.request().url()).pathname.split("/").at(-1);
+      const firstReadAsset = JSON.parse(await readFile(
+        path.join(SITE_ROOT, `data/classical-first-read/${lessonId}.json`), "utf8",
+      ));
+      const owner = await stablePage.evaluate(() => window.__currentOwner);
+      await route.fulfill({ json: {
+        lessonId: firstReadAsset.lessonId,
+        textVersionId: firstReadAsset.textVersionId,
+        textDigest: firstReadAsset.textDigest,
+        submitted: true,
+        summary: owner === OWNER_A ? "fixture-owner-a" : "fixture-owner-b",
+        marks: [],
+      } });
+    });
+    await stablePage.goto(`${base}/#lesson-1474`, { waitUntil: "domcontentloaded" });
+    await stablePage.waitForFunction(() => interactionIdentityResolved
+      && document.querySelector(".first-read-submitted-review"));
+    await stablePage.evaluate(async () => {
+      await document.fonts.ready;
+      await new Promise(requestAnimationFrame);
+      await Promise.all(document.getAnimations()
+        .filter((animation) => Number.isFinite(animation.effect.getTiming().iterations))
+        .map((animation) => animation.finished.catch(() => {})));
+    });
+    const firstReadLoadsBefore = firstReadLoads;
+    const stableBefore = await stablePage.evaluate(() => {
+      window.__stableFlow = document.querySelector("#text-flow").firstElementChild;
+      window.scrollTo({ top: 1400, behavior: "instant" });
+      return { y: scrollY, gets: window.__sharedStateGets.length };
+    });
+    assert.ok(stableBefore.y >= 1000, "the fixture must actually be scrolled before refresh");
+    await stablePage.evaluate(() => window.dispatchEvent(new Event("focus")));
+    await stablePage.waitForFunction((before) => interactionIdentityResolved
+      && window.__sharedStateGets.length >= before + 3, stableBefore.gets);
+    const stableAfter = await stablePage.evaluate(() => ({
+      y: scrollY,
+      sameReader: window.__stableFlow === document.querySelector("#text-flow").firstElementChild,
+      loginVisible: !document.querySelector("#auth-login").hidden,
+    }));
+    assert.equal(stableAfter.y, stableBefore.y, "same-owner focus must preserve reading position");
+    assert.equal(stableAfter.sameReader, true, "same-owner refresh must retain the reader DOM and drafts");
+    assert.equal(stableAfter.loginVisible, false);
+    assert.equal(firstReadLoads, firstReadLoadsBefore, "focus must not refetch an unchanged first-read session");
+    const remoteChangeStart = await stablePage.evaluate(() => {
+      window.__remoteSharedStates[window.__currentOwner].state.readingPosition.lessonId = "lesson-1458";
+      const before = window.__sharedStateGets.length;
+      window.dispatchEvent(new Event("focus"));
+      return before;
+    });
+    await stablePage.waitForFunction((before) => interactionIdentityResolved
+      && window.__sharedStateGets.length >= before + 3, remoteChangeStart);
+    assert.equal(await stablePage.evaluate(() => location.hash), "#lesson-1474",
+      "background cloud resume must not replace the active lesson");
+
+    const burstStart = await stablePage.evaluate(() => {
+      const before = window.__sharedStateGets.length;
+      window.dispatchEvent(new Event("focus"));
+      document.dispatchEvent(new Event("visibilitychange"));
+      window.dispatchEvent(new Event("online"));
+      return before;
+    });
+    await stablePage.waitForFunction((before) => interactionIdentityResolved
+      && window.__sharedStateGets.length >= before + 3, burstStart);
+    assert.equal(await stablePage.evaluate(() => window.__stableFlow
+      === document.querySelector("#text-flow").firstElementChild), true,
+    "overlapping recovery events must retain the same reader");
+
+    await stablePage.evaluate(() => {
+      window.__healthySession = window.BdfzIdentity.getSession;
+      window.BdfzIdentity.getSession = async () => { throw new TypeError("offline"); };
+      window.dispatchEvent(new Event("focus"));
+    });
+    await stablePage.waitForFunction(() => !sharedStateRefreshPromise && !interactionIdentityResolved);
+    assert.deepEqual(await stablePage.evaluate(() => ({
+      loginVisible: !document.querySelector("#auth-login").hidden,
+      sameReader: window.__stableFlow === document.querySelector("#text-flow").firstElementChild,
+      readerInert: document.querySelector("#text-flow").inert,
+      answersInert: document.querySelector("#check-stage").inert,
+    })), { loginVisible: false, sameReader: true, readerInert: true, answersInert: true },
+    "network failure keeps the reader and pauses writes without claiming logout");
+    await stablePage.evaluate(() => {
+      window.BdfzIdentity.getSession = window.__healthySession;
+      window.dispatchEvent(new Event("online"));
+    });
+    await stablePage.waitForFunction(() => interactionIdentityResolved);
+    assert.equal(await stablePage.evaluate(() => window.__stableFlow
+      === document.querySelector("#text-flow").firstElementChild), true);
+
+    await stablePage.evaluate(() => {
+      window.BdfzIdentity.getSession = async () => {
+        await new Promise((resolve) => { window.__resumeIdentity = resolve; });
+        return window.__healthySession();
+      };
+      window.dispatchEvent(new Event("focus"));
+    });
+    await stablePage.waitForFunction(() => !interactionIdentityResolved && window.__resumeIdentity);
+    await stablePage.evaluate(() => { location.hash = "#lesson-1579"; });
+    await stablePage.waitForFunction(() => document.querySelector("#lesson-title")
+      .textContent.includes("归去来兮辞"));
+    await stablePage.evaluate(() => {
+      window.BdfzIdentity.getSession = window.__healthySession;
+      window.__resumeIdentity();
+    });
+    await stablePage.waitForFunction(() => interactionIdentityResolved
+      && firstReadForLesson("lesson-1579")?.authMode === "authenticated"
+      && document.querySelector(".first-read-submitted-review"));
+    assert.equal(await stablePage.evaluate(() => location.hash), "#lesson-1579",
+      "a lesson opened during re-verification must recover authenticated controls on that lesson");
+
+    await stablePage.evaluate((ownerB) => {
+      window.__currentOwner = ownerB;
+      window.dispatchEvent(new Event("focus"));
+    }, OWNER_B);
+    await stablePage.waitForFunction((ownerB) => interactionIdentityResolved
+      && progressOwnerScope === ownerB
+      && document.querySelector("#text-flow").textContent.includes("fixture-owner-b"), OWNER_B);
+    assert.equal(await stablePage.evaluate(() => document.querySelector("#text-flow")
+      .textContent.includes("fixture-owner-a")), false, "account switch removes prior private first-read state");
+
+    await stablePage.evaluate(() => {
+      window.__sharedStateTestAuthenticated = false;
+      window.dispatchEvent(new Event("focus"));
+    });
+    await stablePage.waitForFunction(() => interactionIdentityResolved
+      && progressOwnerScope === "anonymous-v2" && !document.querySelector("#auth-login").hidden);
+    assert.equal(await stablePage.evaluate(() => document.querySelector("#text-flow")
+      .textContent.includes("fixture-owner-b")), false, "confirmed logout removes private state");
+    assert.deepEqual(stableErrors, []);
+    await stablePage.close();
+  }
 
   process.stdout.write("YW shared-state browser contract passed\n");
 } finally {
