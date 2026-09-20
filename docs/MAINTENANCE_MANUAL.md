@@ -1,3 +1,17 @@
+## 2026-09-20 — YW reader stability repair released and accepted
+
+Production Pages `6d7ed869-9ca5-49e8-93bd-e0c920bcca85`, runtime YW
+`25f57937503ba2c696db6245df702e8774bb3aa2`, executor
+`dc791ac2b9c9587d38aec71cf2c869fcf2bd6271`. Authenticated desktop/mobile
+focus retained exactly1400px, the same reader DOM and login, with zero extra
+first-read fetches. Ordinary reload preserved login and existing first-read.
+Full precontent, focused browser/owner tests,113executor tests and both CI
+matrices passed. App pointer/tree and shared configuration are unchanged;
+compatible-no-client-release. Exact rollback `ec81bef8` preserves all forward
+data. [Single release, evidence and recovery authority](/Users/ylsuen/CF/reports/operations/yw-scroll-auth-20260920/REPORT.md).
+Earlier preparation sections below are historical; documentation commits do
+not change the pinned runtime or executor required for recovery.
+
 ## 2026-09-20 — reader scroll and identity refresh repair prepared
 
 Authenticated production focus reproduced scrollY 1440 → 0. The Web repair
