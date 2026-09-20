@@ -2154,6 +2154,9 @@ function resourcePreviewPlan(resource) {
   if (disposition === "source-only") return externalOnly("此條目只保留原始出處，沒有可驗證的頁內版本。");
   if (disposition.startsWith("blocked-")) return externalOnly("來源審核狀態不允許頁內載入，仍保留原始地址供核對。");
   if (hostname === "accounts.google.com") return externalOnly("此來源要求外部帳號登入，不能在課文頁內安全預覽。");
+  if (["www.bilibili.com", "bilibili.com"].includes(hostname) && pathname.startsWith("/video/")) {
+    return externalOnly("此影片來源不支援本站的頁內預覽，請另頁播放；原始影片連結已保留。");
+  }
   if (LOCAL_FIRST_VIEWPORT_REFERENCES.has(`${url.origin}${url.pathname}${url.search}`) && fallbackScreenshotSrc) {
     const capturedDate = state.previewScreenshotCapturedAt;
     return {

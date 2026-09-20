@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1224,
-  "totalBytes": 164481515,
-  "aggregateSha256": "41f25b48859197a16a4cc14226a630ec22cdc1bca62e71e0b1cca3c541501e2e",
+  "totalBytes": 164481764,
+  "aggregateSha256": "8ba92a17b405a2e67585d0a66d27cd2d529bcaf51ee40382aae2d5cab7e9b697",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "81e197ffae7fb0c940c1735cad31b45266c2540e6d60c9306d9aa7ecf16469c9"
+      "sha256": "7e54c80c64fab5d2ef0d7413eb5ad27c1e59e1b882bb129114ff0f1dba1c6b12"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1417,8 +1417,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 232776,
-      "sha256": "2ecbc37addfcd5e8ff45ddaee9821b19fc0f0b2f751128cd7ef9350875cdb803"
+      "bytes": 233004,
+      "sha256": "72ff8329b8d78c927c55a1be92f181963689b73e17ad41307b7184a8c81f16e5"
     },
     {
       "path": "assets/atlas.css",
@@ -3102,8 +3102,8 @@
     },
     {
       "path": "assets/styles.css",
-      "bytes": 84120,
-      "sha256": "ad83d2d6d30f78f5f2cd76f421ee3ef15591c1fa985f254efd6c6ec13746f3d9"
+      "bytes": 84141,
+      "sha256": "ad81d10ae072738a91775f92359fe58ba1541535b71e6f8276a10f84f8d7485e"
     },
     {
       "path": "assets/vocab-progress.js",
@@ -6028,7 +6028,7 @@
     {
       "path": "index.html",
       "bytes": 11614,
-      "sha256": "8b9c5fea4f7d6ab830a2a910fdcd8913d4a0b5651038a012502805822a6179b0"
+      "sha256": "ffebda0ff6fec69d2cd02ca554b1ad87ee83f4e3c05f35191b43d2a9e947b465"
     },
     {
       "path": "learning-evidence-source.js",

@@ -1,3 +1,14 @@
+## 2026-09-20 — authenticated login-link visibility follow-up
+
+The three initial session/evidence repairs are deployed as Pages c9e67cae.
+A real non-scoring lesson-open event reached My with an accepted receipt and
+matching source/central hash; reload restored central reading position. Final
+visual inspection additionally found the hidden login link overridden by
+`.text-button` styling. This follow-up fixes actual visibility, adds a desktop/mobile regression,
+and sends known-rejected Bilibili video previews to their intact original
+playback links without a repeated proxy failure. Release acceptance and exact rollback are
+tracked in `/Users/ylsuen/CF/reports/operations/yw-session-evidence-20260920/REPORT.md`.
+
 ## 2026-09-20 — identity status and durable retry repair prepared
 
 The lingering status is an atlas CSS selector collision; captured evaluation

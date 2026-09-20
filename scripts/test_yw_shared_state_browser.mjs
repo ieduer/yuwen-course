@@ -692,6 +692,8 @@ try {
     await stablePage.waitForFunction(() => interactionIdentityResolved
       && document.querySelector(".first-read-submitted-review"));
     for (let toggle = 0; toggle < 2; toggle += 1) {
+      assert.equal(await stablePage.locator("#auth-login").isVisible(), false,
+        "a signed-in owner must not see the login link");
       assert.equal(await stablePage.locator("#identity-status").isVisible(), false,
         "resolved identity must be visually hidden with the atlas open or closed");
       const atlasOpen = await stablePage.evaluate(() => document.body.classList.contains("atlas-open"));

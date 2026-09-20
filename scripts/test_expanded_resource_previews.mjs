@@ -209,6 +209,19 @@ test("preview plan uses safe qx fragments, screenshot-first Wikisource, clickabl
   assert.match(http.reason, /HTTP/);
   assert.equal(http.externalHref, "http://example.test/material");
 
+  for (const href of [
+    "https://www.bilibili.com/video/BV1ow411f76k/?p=2#reply",
+    "https://www.bilibili.com/video/BV1qt411j7pA/",
+    "https://www.bilibili.com/video/BV1rs411z7Cm/",
+  ]) {
+    const plan = resourcePreviewPlan({ href });
+    assert.equal(plan.mode, "external-only");
+    assert.equal(plan.externalHref, href, "preserve the source URL and playback position");
+    assert.equal(plan.src, undefined, "do not retry the known-rejected proxy preview");
+    assert.match(plan.reason, /另頁播放/);
+  }
+  assert.equal(resourcePreviewPlan({ href: "https://www.bilibili.com.example.test/video/BV1ow411f76k/" }).mode, "iframe");
+
   const sourceOnly = resourcePreviewPlan({ href: "https://example.test/source", disposition: "source-only" });
   assert.equal(sourceOnly.mode, "external-only");
   assert.match(sourceOnly.reason, /原始出處/);
