@@ -1,3 +1,24 @@
+## 2026-09-20 — YW session display and evidence repair accepted
+
+Production Pages `1c54b957-d7ce-4123-8558-1539f8b451d6`, runtime YW
+`593e34ace5718e236ebaf3bb291935401cecf110`, executor `accac35ca739cefa0ac16868ec303aab2d3574f5`.
+Resolved status and login controls are actually hidden on authenticated
+desktop/mobile atlas states. Study-guide pending resumes use the correct
+handler and retain captured event identity across rate windows. Bilibili
+video pages retain direct playback links without rejected proxy calls.
+
+Frozen seven-day source/My reconciliation matches 1453 events. A real
+non-scoring lesson-open event has one matching accepted My receipt and
+survives reload; central reading position and the current account remain
+consistent after the final release. Raw answers and historical pending or
+quarantined records are preserved, with no invented scores or bulk replay.
+Full precontent, focused browser/source/controller regressions and both CI
+matrices passed. Shared configuration and native content are unchanged.
+Immediate code-only rollback is `c9e67cae-cad8-43d5-80a7-6a83c4d7bb62`; preserve
+all forward D1/Queue/My data. The previous repair journal remains immutable.
+[Single diagnosis, acceptance and recovery authority](/Users/ylsuen/CF/reports/operations/yw-session-evidence-20260920/REPORT.md).
+Documentation commits do not change these pinned runtime/executor sources.
+
 ## 2026-09-20 — authenticated login-link visibility follow-up
 
 The three initial session/evidence repairs are deployed as Pages c9e67cae.
