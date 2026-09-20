@@ -203,6 +203,7 @@ const els = {
   lessonMediaSection: $("#lesson-media"),
   materialsSection: $("#classroom-materials"),
   authLogin: $("#auth-login"),
+  identityStatus: $("#identity-status"),
   checkStage: $("#check-stage"),
   matrixLinks: $("#matrix-links"),
   checkpointList: $("#checkpoint-list"),
@@ -399,12 +400,19 @@ function setProgressOwnerScope(scope) {
   refreshLocalProgressViews();
 }
 
-function setInteractionIdentityResolved(resolved) {
+function setInteractionIdentityResolved(resolved, { preserveSessions = false } = {}) {
   const next = resolved === true;
+  // Pause writes during re-verification without replacing the reader DOM.
+  // A confirmed owner change still clears private state synchronously.
+  els.textFlow.inert = !next;
+  els.checkStage.inert = !next;
+  if (els.identityStatus) els.identityStatus.hidden = next;
   if (interactionIdentityResolved === next) return;
   interactionIdentityResolved = next;
-  invalidateFirstReadSessions();
-  refreshLocalProgressViews();
+  if (!preserveSessions) {
+    invalidateFirstReadSessions();
+    refreshLocalProgressViews();
+  }
 }
 
 function enforceNewTabLinks(root = document) {
@@ -516,6 +524,7 @@ async function applyRemoteSharedState(
     && sharedStateClient?.ownerScope === ownerScope
   );
   if (!ownerStillCurrent()) return;
+  const restoreReadingPosition = sharedStateUiScope !== ownerScope;
   sharedStateUiScope = ownerScope;
 
   const currentPendingTextScale = pendingMatchesOwner(
@@ -581,6 +590,12 @@ async function applyRemoteSharedState(
     ),
   )?.id || defaultSharedLesson()?.id || "";
   if (!lessonId || !ownerStillCurrent()) return;
+  // Restore a cloud position when entering an account. Subsequent background
+  // sync updates the saved resume point without taking over the open lesson.
+  if (!restoreReadingPosition) {
+    if (!remoteReadingWasDeleted) writeScopedUiValue(LAST_LESSON_KEY, lessonId, ownerScope);
+    return;
+  }
   if (state.current?.id !== lessonId) {
     await showLesson(lessonId, {
       push: true,
@@ -726,12 +741,20 @@ async function hydrateSharedStateOnce(hydrationEpoch = sharedStateHydrationEpoch
   if (!requestStillCurrent()) return "stale";
   const identity = window.BdfzIdentity;
   if (!identity?.api) return "retry";
+  const previousOwnerScope = progressOwnerScope;
+  const preserveSessions = Boolean(
+    previousOwnerScope
+    && previousOwnerScope !== ANONYMOUS_UI_SCOPE
+    && sharedStateClient?.ownerScope === previousOwnerScope
+    && sharedStateClientIdentity === identity
+  );
+  setInteractionIdentityResolved(false, { preserveSessions });
   const session = await waitForSharedStateIdentity(() => identity.getSession?.());
   if (!requestStillCurrent() || identity !== window.BdfzIdentity) return "stale";
   if (!session || typeof session.authenticated !== "boolean") {
-    setAuthenticatedState(false);
-    setInteractionIdentityResolved(false);
-    setProgressOwnerScope(null);
+    // A failed request is unknown, not proof of logout. Keep the last reader
+    // visible but inert until a bounded retry verifies its account again.
+    if (!preserveSessions) setProgressOwnerScope(null);
     return "retry";
   }
   if (!session.authenticated) {
@@ -743,8 +766,7 @@ async function hydrateSharedStateOnce(hydrationEpoch = sharedStateHydrationEpoch
   }
 
   setAuthenticatedState(true);
-  setInteractionIdentityResolved(false);
-  setProgressOwnerScope(null);
+  if (!preserveSessions) setProgressOwnerScope(null);
   const sharedState = await loadSharedStateModule();
   if (!requestStillCurrent() || identity !== window.BdfzIdentity) return "stale";
   if (!sharedState) return "retry";
@@ -754,6 +776,7 @@ async function hydrateSharedStateOnce(hydrationEpoch = sharedStateHydrationEpoch
   if (!requestStillCurrent() || identity !== window.BdfzIdentity) return "stale";
   const discovery = sharedState.normalizeSharedStateResponse(discoveryPayload);
   if (!discovery?.ownerScope) return "retry";
+  if (discovery.ownerScope !== previousOwnerScope) setProgressOwnerScope(null);
 
   if (
     sharedStateClient?.ownerScope !== discovery.ownerScope
@@ -794,12 +817,20 @@ async function hydrateSharedStateOnce(hydrationEpoch = sharedStateHydrationEpoch
     initialState: discoveryPayload,
   });
   if (!requestStillCurrent() || client !== sharedStateClient) return "stale";
-  if (!hydrated.ok) return "retry";
+  if (!hydrated.ok) {
+    setProgressOwnerScope(null);
+    return "retry";
+  }
   // Discovery alone is not enough to make learning controls interactive. The
   // client re-verifies the owner before and after applying the projection;
   // only that completed contract may bind private progress to this account.
   setProgressOwnerScope(ownerScope);
-  setInteractionIdentityResolved(true);
+  setInteractionIdentityResolved(true, {
+    preserveSessions: preserveSessions && ownerScope === previousOwnerScope && (
+      sourceModeFor(state.current) !== "classical"
+      || state.firstReads.get(state.current?.id)?.ownerScope === ownerScope
+    ),
+  });
   await persistPendingSharedState(client, ownerScope);
   void autoReplayPendingInteractions(state.current);
   return requestStillCurrent() ? "ok" : "stale";
@@ -3427,6 +3458,7 @@ async function showLesson(
   } = {},
 ) {
   const token = ++lessonToken;
+  const changingLesson = state.current?.id !== id;
   const atlasGenerationAtStart = atlasInteractionGeneration;
   try {
     const meta = state.manifest.lessons.find((lesson) => lesson.id === id);
@@ -3494,7 +3526,7 @@ async function showLesson(
       && matchMedia("(max-width: 900px)").matches
       && atlasInteractionGeneration === atlasGenerationAtStart
     ) closeAtlas({ restoreFocus: true });
-    scrollTo({ top: 0, behavior: "auto" });
+    if (changingLesson) scrollTo({ top: 0, behavior: "auto" });
   } catch {
     if (token !== lessonToken) return;
     state.lessons.delete(id);

@@ -97,25 +97,25 @@ test("legacy global progress migrates only to anonymous scope", () => {
   assert.equal(localStorage.snapshot()[scopedUiStorageKey(PROGRESS_KEY, "owner-b")], undefined);
 });
 
-test("authenticated hydration clears unowned progress until stable owner scope arrives", () => {
+test("hydration pauses writes and binds progress only after stable owner verification", () => {
   const hydrateSource = section("async function hydrateSharedStateOnce", "function flushSharedState");
   const unknownSessionIndex = hydrateSource.indexOf('typeof session.authenticated !== "boolean"');
   const anonymousIndex = hydrateSource.indexOf("setProgressOwnerScope(ANONYMOUS_UI_SCOPE)");
   const anonymousResolvedIndex = hydrateSource.indexOf("setInteractionIdentityResolved(true)", anonymousIndex);
-  const clearIndices = [...hydrateSource.matchAll(/setProgressOwnerScope\(null\)/g)].map((match) => match.index);
-  const authenticatedClearIndex = clearIndices.at(-1);
+  const pauseIndex = hydrateSource.indexOf("setInteractionIdentityResolved(false, { preserveSessions })");
+  const sessionIndex = hydrateSource.indexOf("identity.getSession");
   const discoveryIndex = hydrateSource.indexOf('identity.api("/api/yw/v1/state")');
   const hydratedIndex = hydrateSource.indexOf("if (!hydrated.ok)");
   const ownerIndex = hydrateSource.indexOf("setProgressOwnerScope(ownerScope)");
-  const ownerResolvedIndex = hydrateSource.indexOf("setInteractionIdentityResolved(true)", ownerIndex);
+  const ownerResolvedIndex = hydrateSource.indexOf("setInteractionIdentityResolved(true,", ownerIndex);
 
   assert.ok(unknownSessionIndex > -1);
   assert.ok(anonymousIndex > unknownSessionIndex);
   assert.ok(anonymousResolvedIndex > anonymousIndex, "anonymous owner scope must bind before identity becomes interactive");
-  assert.equal(clearIndices.length, 2);
-  assert.ok(discoveryIndex > authenticatedClearIndex);
+  assert.ok(pauseIndex >= 0 && pauseIndex < sessionIndex, "writes pause before the first asynchronous identity check");
+  assert.match(hydrateSource, /if \(discovery.ownerScope !== previousOwnerScope\) setProgressOwnerScope\(null\)/);
   assert.ok(hydratedIndex > discoveryIndex);
-  assert.ok(ownerIndex > hydratedIndex, "owner scope must remain unresolved until client owner re-verification succeeds");
+  assert.ok(ownerIndex > hydratedIndex, "new owner scope must bind only after client re-verification succeeds");
   assert.ok(ownerResolvedIndex > ownerIndex, "authenticated owner scope must bind before identity becomes interactive");
   assert.match(
     hydrateSource,
@@ -132,6 +132,10 @@ function sharedStateIdentityTimeoutHarness(identity) {
     "deps",
     `const window = { BdfzIdentity: deps.identity };
      let sharedStateHydrationEpoch = 0;
+     let progressOwnerScope = null;
+     let sharedStateClient = null;
+     let sharedStateClientIdentity = null;
+     const ANONYMOUS_UI_SCOPE = "anonymous-v2";
      const SHARED_STATE_IDENTITY_TIMEOUT_MS = 1;
      const setTimeout = deps.setTimeout;
      const clearTimeout = deps.clearTimeout;

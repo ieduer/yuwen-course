@@ -1,3 +1,13 @@
+## 2026-09-20 — reader scroll and identity refresh repair prepared
+
+Authenticated production focus reproduced scrollY 1440 → 0. The Web repair
+preserves the same owner's reader during background verification, pauses
+writes without false logout, and prevents cloud resume from taking over the
+open lesson. Desktop/mobile and full precontent checks pass, including actual
+account-switch/logout isolation and navigation during a pending identity check.
+This source is prepared; deployment and live acceptance are recorded separately.
+[Cause and verification](docs/SCROLL_AUTH_REPAIR_20260920.md).
+
 ## 2026-09-18 — Lunyu citation display released and accepted
 
 Pages `ec81bef8-4c28-47c4-8093-378be3666b31`, runtime source

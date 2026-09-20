@@ -21,6 +21,20 @@
 
 * { box-sizing: border-box; }
 
+.identity-status {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 60;
+  padding: .5rem .75rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--paper-light);
+  color: var(--ink-soft);
+  font: .8rem var(--sans);
+  pointer-events: none;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--topbar) + 28px);
