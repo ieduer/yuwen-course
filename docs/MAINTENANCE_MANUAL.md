@@ -1,3 +1,25 @@
+## 2026-09-21 16:13 UTC — foreground continuation release accepted within scope
+
+Production Pagescf2c9943-92a9-4157-9321-3aaa6f8b7c82, runtime sourcef817be5a91d99049f514cc4929359d2221da34e8, executorb388f07fc51930b95bdeb3cfd54eba6ad42c8984, formal artifact3e8d46f1653d552371a7d5f5b5631614cc6e833ceb2b5586d677090803aeb492.
+Saved submissions receive bounded authenticated foreground continuation and
+receipt-based study-guide card reconciliation. Accepted backend, source lease,
+rate budget, evidence dedupe, shared config and native pointer/content remain
+unchanged. Full precontent,46focused checks,85source contracts,108executor tests,
+both CI environments, exact immutable preview/production readback and real
+current-account UI reload passed. The isolated actual browser verified503,
+60second cooldown and same-capture success with no external/model call.
+
+The fixed16:00–16:10 natural window contained zero qualifying records. This
+release accepts the Web behavior and authenticated interface; it does not prove
+natural503 recovery or resolve the provider/Pulse incident. No generated formal
+answers or readiness probes. Closing all clients retains the capture but does
+not execute background grading. Immediate code-only rollback is Pages8b194940;
+preserve all forward D1/Queue/My data. Documentation commits do not change the
+pinned runtime or executor source.
+
+Single acceptance authority:
+/Users/ylsuen/CF/reports/operations/yw-pulse-permanent-repair-20260921/yw-continuation-production-acceptance.json.
+
 ## 2026-09-21 — saved evaluation continuation prepared
 
 Accepted live remains Pages8b194940/source962ebcd. The temporary readiness
