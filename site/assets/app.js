@@ -394,6 +394,7 @@ function invalidateFirstReadSessions({ reload = true } = {}) {
 function setProgressOwnerScope(scope) {
   const nextScope = scope || null;
   if (progressOwnerScope === nextScope) return;
+  state.pendingReplayController?.suspend();
   progressOwnerScope = nextScope;
   state.progress = loadStoredProgress(nextScope);
   invalidateFirstReadSessions();
@@ -408,6 +409,7 @@ function setInteractionIdentityResolved(resolved, { preserveSessions = false } =
   els.checkStage.inert = !next;
   if (els.identityStatus) els.identityStatus.hidden = next;
   if (interactionIdentityResolved === next) return;
+  if (!next) state.pendingReplayController?.suspend();
   interactionIdentityResolved = next;
   if (!preserveSessions) {
     invalidateFirstReadSessions();
@@ -3740,9 +3742,57 @@ function interactionPendingMatches(record, pending) {
   );
 }
 
+function pendingEvaluationRetryDelay(error) {
+  if (["learning_submission_in_progress", "learning_submission_rate_limited",
+    "learning_evaluator_unavailable", "learning_evaluator_budget_exhausted",
+    "learning_evaluator_budget_unavailable", "learning_evaluator_timeout"].includes(error?.code)
+    || ["AbortError", "TypeError"].includes(error?.name)) {
+    return Math.max(60, Number(error?.retryAfterSeconds) || 0);
+  }
+  return 0;
+}
+
 async function autoReplayPendingInteractions(lesson = state.current) {
+  if (!lesson?.id || lesson.id !== state.current?.id) return;
+  if (!state.pendingReplayController) {
+    state.pendingReplayModule ||= import(new URL("pending-evaluation-recovery.js?v=311f0fa80fc3ac83", APP_SCRIPT_URL).href)
+      .catch(() => { state.pendingReplayModule = null; return null; });
+    const module = await state.pendingReplayModule;
+    if (!module) return;
+    state.pendingReplayController ||= module.createPendingEvaluationRecovery({
+      context: () => ({
+        key: `${progressOwnerScope || ""}:${state.current?.id || ""}`,
+        lesson: state.current,
+        active: Boolean(state.current?.id && interactionIdentityResolved
+          && progressOwnerScope && progressOwnerScope !== ANONYMOUS_UI_SCOPE
+          && document.visibilityState === "visible" && navigator.onLine !== false),
+      }),
+      replay: (context, isCurrent) => replayCapturedLearningSubmissions(context.lesson, isCurrent),
+    });
+  }
+  state.pendingReplayController.request();
+}
+
+function reconcileResumedStudyGuide(lessonId, mutationId, result) {
+  if (result?.ok !== true || !result.evidence?.sourceEventId || !result.assessment) return false;
+  const records = studyGuideProgress(lessonProgress(lessonId));
+  const key = Object.keys(records).find((key) => records[key]?.clientMutationId === mutationId);
+  if (!key) return false;
+  records[key] = { ...records[key], submitting: false, pendingSync: false,
+    completed: result.passed === true && result.evidence?.eligibilityStatus === "eligible",
+    assessment: result.assessment, evidence: result.evidence, lastError: "", lastErrorCode: "",
+    lastErrorStatus: null, retryAfterSeconds: null, limitReason: "", assessedAt: new Date().toISOString() };
+  saveStoredProgress();
+  if (state.current?.id === lessonId) renderCheckStage(state.current);
+  return true;
+}
+
+async function replayCapturedLearningSubmissions(lesson, isCurrent) {
+  let retryAfterSeconds = 0;
+  const retry = (error) => { retryAfterSeconds = Math.max(retryAfterSeconds, pendingEvaluationRetryDelay(error)); };
   if (!lesson?.id || !interactionIdentityResolved
     || !progressOwnerScope || progressOwnerScope === ANONYMOUS_UI_SCOPE) return;
+  if (!isCurrent()) return {};
   const progress = lessonProgress(lesson.id);
   const attemptedThisPass = new Set();
   const localEntries = [
@@ -3753,38 +3803,57 @@ async function autoReplayPendingInteractions(lesson = state.current) {
     ["wordCreation", progress.wordCreation],
   ].filter(([, record]) => record?.pendingSubmission?.clientMutationId);
   for (const [interaction, record] of localEntries) {
+    if (!isCurrent()) return {};
     const mutationId = record.pendingSubmission.clientMutationId;
     if (state.pendingReplayAttempted.has(mutationId)) continue;
     state.pendingReplayAttempted.add(mutationId);
     attemptedThisPass.add(mutationId);
-    await submitInteraction(interaction, null, { silent: true });
+    const result = await submitInteraction(interaction, null, { silent: true });
+    if (!isCurrent()) { state.pendingReplayAttempted.delete(mutationId); return {}; }
+    retry(result);
+    if (result?.code === "authenticated_evaluation_required") return {};
   }
   let pending;
+  const listController = new AbortController();
+  const listTimeout = setTimeout(() => listController.abort(), 12_000);
   try {
     const response = await fetch(`/api/learning/pending-interactions?lessonId=${encodeURIComponent(lesson.id)}`, {
+      signal: listController.signal,
       headers: { accept: "application/json" },
       cache: "no-store",
     });
-    const body = await response.json().catch(() => ({}));
-    if (!response.ok || !Array.isArray(body.submissions)) return;
+    const body = await response.json().catch((error) => { if (error?.name === "AbortError") throw error; return {}; });
+    if (!isCurrent()) return {};
+    if (!response.ok || !Array.isArray(body.submissions)) return {};
     pending = body.submissions;
   } catch {
-    return;
-  }
+    return { retryAfterSeconds: 60 };
+  } finally { clearTimeout(listTimeout); }
   let resumed = false;
   for (const item of pending) {
+    if (!isCurrent()) return {};
     const mutationId = String(item?.clientMutationId || "");
     if (!mutationId || attemptedThisPass.has(mutationId) || state.pendingReplayAttempted.has(mutationId)) continue;
     state.pendingReplayAttempted.add(mutationId);
     attemptedThisPass.add(mutationId);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 55_000);
     try {
       const response = await fetch("/api/learning/pending-interactions/resume", {
+        signal: controller.signal,
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ clientMutationId: mutationId }),
       });
-      const payload = await response.json().catch(() => ({}));
+      const payload = await response.json().catch((error) => { if (error?.name === "AbortError") throw error; return {}; });
+      if (!isCurrent()) { state.pendingReplayAttempted.delete(mutationId); return {}; }
+      if (response.status === 401 || payload.code === "authenticated_evaluation_required") {
+        state.pendingReplayAttempted.delete(mutationId);
+        return {};
+      }
+      if (response.ok && item.interaction === "studyGuideItemCompleted") reconcileResumedStudyGuide(lesson.id, mutationId, payload);
       resumed = response.ok || resumed;
+      if (!response.ok) retry({ code: payload.code, status: response.status, retryAfterSeconds: payload.retryAfterSeconds });
       if (!response.ok && pendingReplayErrorIsRetryable({
         code: payload.code,
         status: response.status,
@@ -3792,11 +3861,13 @@ async function autoReplayPendingInteractions(lesson = state.current) {
         state.pendingReplayAttempted.delete(mutationId);
       }
     } catch {
-      // The server-side captured answer remains retryable on the next session.
+      retry({ name: "TypeError" });
+      // Resume retains the original capture; the server lease settles ambiguity.
       state.pendingReplayAttempted.delete(mutationId);
-    }
+    } finally { clearTimeout(timeout); }
   }
-  if (resumed) void flushSharedState();
+  if (isCurrent() && resumed) void flushSharedState();
+  return { retryAfterSeconds };
 }
 
 function mergeInteractionConversation(existingTurns, incomingTurns, fallbackTurn = null) {
@@ -4055,6 +4126,8 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     if (pendingReplayErrorIsRetryable(error)) {
       state.pendingReplayAttempted.delete(pending.clientMutationId);
     }
+    const recoveryDelay = pendingEvaluationRetryDelay(error);
+    if (recoveryDelay) state.pendingReplayController?.request(recoveryDelay);
     const requestStillCurrent = state.current?.id === requestLessonId;
     if (!silent && requestStillCurrent) {
       if (error.code === "authenticated_evaluation_required") {
@@ -4086,6 +4159,7 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
       button.textContent = "重試";
     }
     if (autoStatus?.isConnected) autoStatus.textContent = "未核對";
+    return { code: error.code, name: error.name, retryAfterSeconds: error.retryAfterSeconds };
   } finally {
     state.interactionRequestsInFlight.delete(requestInFlightKey);
   }
@@ -4369,6 +4443,8 @@ function bindCheckStage() {
       limitReason: result?.ok === true ? "" : result?.limitReason || "",
       assessedAt: result?.ok === true ? new Date().toISOString() : null,
     };
+    const recoveryDelay = pendingEvaluationRetryDelay(result);
+    if (result?.ok !== true && recoveryDelay) state.pendingReplayController?.request(recoveryDelay);
     const requestStillCurrent = state.current?.id === lessonId;
     if (requestStillCurrent) {
       syncProgress({ event: true });
@@ -5198,9 +5274,10 @@ function bindEvents() {
   });
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") refreshRecoverableLearningState();
-    else resetLessonChat();
+    else { state.pendingReplayController?.suspend(); resetLessonChat(); }
   });
-  window.addEventListener("pagehide", resetLessonChat);
+  window.addEventListener("offline", () => state.pendingReplayController?.suspend());
+  window.addEventListener("pagehide", () => { state.pendingReplayController?.suspend(); resetLessonChat(); });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       const openNote = $('[data-inline-note]:not([hidden])', els.textFlow);

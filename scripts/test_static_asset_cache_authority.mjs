@@ -38,3 +38,9 @@ test("every immutable local entry asset uses its current content hash", () => {
     );
   }
 });
+
+test("pending evaluation module uses its current immutable content hash", () => {
+  const source = readFileSync(resolve(ROOT, "site/assets/app.js"), "utf8");
+  const version = source.match(/pending-evaluation-recovery\.js\?v=([a-f0-9]{16})/);
+  assert.equal(version?.[1], contentVersion("assets/pending-evaluation-recovery.js"));
+});

@@ -51,7 +51,7 @@
     "test:star-formative": "node --test scripts/test_star_formative_ui.mjs",
     "test:reading-identity": "node --test scripts/test_reading_identity.mjs",
     "test:study-guide-assessment": "node --test scripts/test_study_guide_assessment.mjs",
-    "test:study-guide-frontend": "node --test scripts/test_study_guide_frontend.mjs",
+    "test:study-guide-frontend": "node --test scripts/test_study_guide_frontend.mjs scripts/test_pending_evaluation_recovery.mjs",
     "test:resource-previews": "node --test scripts/test_expanded_resource_previews.mjs scripts/test_preview_screenshots.mjs",
     "test:authenticated-preview-import": "node --test scripts/test_authenticated_preview_import.mjs",
     "test:local-progress": "node --test scripts/test_local_progress_truthfulness.mjs",

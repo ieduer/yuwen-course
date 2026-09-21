@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1225,
-  "totalBytes": 164485226,
-  "aggregateSha256": "8c4a06ea74ad5b3ca323e546745123fae0225c193d185dd05c85e6cd7cab26f8",
+  "fileCount": 1226,
+  "totalBytes": 164491307,
+  "aggregateSha256": "3e8d46f1653d552371a7d5f5b5631614cc6e833ceb2b5586d677090803aeb492",
   "files": [
     {
       "path": "_headers",
@@ -17,13 +17,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 133813,
-      "sha256": "20cec0ec74cf03066816eb208560534bee605340aac8569e62e3054c153049e7"
+      "bytes": 133212,
+      "sha256": "51fc4445e9610068715f93c14ca2bf839ca311b37472930b3058b221261a1827"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "b3c4d4fa3b72c1ffa38d3ae387f1b63d6663816df0d2ea9df1a3c3bbbe22e51a"
+      "sha256": "c3662938bde2d36c7352b718d32e68d80a4ddb0f767968db6b95f6359b0ae938"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1417,8 +1417,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 233004,
-      "sha256": "72ff8329b8d78c927c55a1be92f181963689b73e17ad41307b7184a8c81f16e5"
+      "bytes": 237629,
+      "sha256": "ef16980b2b9fd058246c33b48c6a0490fa6f4de8f377d4da91a97455cf3d725d"
     },
     {
       "path": "assets/atlas.css",
@@ -1449,6 +1449,11 @@
       "path": "assets/menu-icon.webp",
       "bytes": 2924,
       "sha256": "fbd0e15170822af927cd5bb04157e5050c33f6a6bc2f46db1d9c03cef5a41cb3"
+    },
+    {
+      "path": "assets/pending-evaluation-recovery.js",
+      "bytes": 2057,
+      "sha256": "311f0fa80fc3ac834d15aaa284111b78e62a5d4e7fb70a743424639f1b10e170"
     },
     {
       "path": "assets/preview-screenshots/0020a786efcbb5b606cf017c.webp",
@@ -6033,7 +6038,7 @@
     {
       "path": "index.html",
       "bytes": 11614,
-      "sha256": "ffebda0ff6fec69d2cd02ca554b1ad87ee83f4e3c05f35191b43d2a9e947b465"
+      "sha256": "9c0174bcbb45eaf51f42ad4c04fe9a0558d8d09e87f656cd9795ebde5f1eac59"
     },
     {
       "path": "learning-evidence-source.js",

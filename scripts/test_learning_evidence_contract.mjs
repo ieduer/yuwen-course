@@ -29,7 +29,6 @@ import {
   validateAPlusCompatibilityContract,
 } from "../site/learning-evidence-source.js";
 import worker, {
-  readinessApisVersion,
   authoritativeReadingAssessmentForSubmission,
   callApisPrompt,
   formalInteractionHistoryPrompt,
@@ -1855,9 +1854,8 @@ test("authenticated AI readiness proves the YW caller without writing learning d
       "content-type": "application/json",
       origin: "https://yw.bdfz.net",
       cookie: "bdfz_uc_session=ai-readiness-fixture",
-      "Cloudflare-Workers-Version-Overrides": 'apis="untrusted-client-version"',
     },
-    body: JSON.stringify({ prompt: "ignored", taskType: "chat", versionOverride: "untrusted" }),
+    body: "{}",
   });
 
   const response = await worker.fetch(request(), env);
@@ -1868,13 +1866,10 @@ test("authenticated AI readiness proves the YW caller without writing learning d
   assert.equal(bindingRequests[0].url, "https://apis.internal/");
   assert.equal(bindingRequests[0].headers.get("x-project-name"), "yw.bdfz.net");
   assert.equal(bindingRequests[0].headers.get("x-internal-token"), "fixture-token");
-  assert.match(bindingRequests[0].headers.get("x-request-id"), /^yw-readiness-[a-f0-9-]{36}$/);
-  assert.equal(bindingRequests[0].headers.get("Cloudflare-Workers-Version-Overrides"),
-    readinessApisVersion() ? `apis="${readinessApisVersion()}"` : null);
   assert.deepEqual(await bindingRequests[0].json(), {
     prompt: "這是語文課程 AI 可用性檢查。只回覆 READY，不要提供課程內容。",
-    taskType: "feedback",
-    thinkingLevel: "medium",
+    taskType: "chat",
+    thinkingLevel: "low",
   });
 
   const missingOrigin = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/ai-readiness", {
@@ -4265,10 +4260,4 @@ test("study-guide transient recovery counts both calls and records the captured 
     assert.equal(requests.length,2);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions WHERE interaction_key='studyGuideItemCompleted'").get().n,1);
   } finally { db.close(); }
-});
-
-test("readiness candidate routing expires at the fixed release deadline", () => {
-  assert.equal(readinessApisVersion(Date.parse("2026-09-21T17:59:59Z")), "d17a995b-9a4e-4964-b10a-18cbeb90d139");
-  assert.equal(readinessApisVersion(Date.parse("2026-09-21T18:00:00Z")), null);
-  assert.equal(readinessApisVersion(Date.parse("2026-09-22T00:00:00Z")), null);
 });
