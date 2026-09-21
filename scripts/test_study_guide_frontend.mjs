@@ -195,8 +195,8 @@ test("persisted in-flight study-guide work hydrates as an idempotent retry", () 
 });
 
 test("AI waits are bounded and formal dialogue keeps a monotonic transcript", () => {
-  assert.equal((source.match(/controller\.abort\(\), 55_000/g) || []).length, 2,
-    "both evaluator clients must outlive the 45-second Worker feedback budget");
+  assert.equal((source.match(/controller\.abort\(\), 55_000/g) || []).length, 3,
+    "formal, study-guide and captured-resume clients outlive the 45-second Worker feedback budget");
   const studyGuide = section("async function submitStudyGuideAttempt", "function bindCheckStage");
   assert.match(studyGuide, /new AbortController\(\)/);
   assert.match(studyGuide, /controller\.abort\(\)/);

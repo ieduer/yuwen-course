@@ -1,3 +1,27 @@
+## 2026-09-21 — saved evaluation continuation prepared
+
+Accepted live remains Pages8b194940/source962ebcd. The temporary readiness
+candidate was rolled back after its one verified upstream503; this source
+restores accepted readiness routing and removes the expired trial pin.
+
+Captured submissions now receive at most three serialized replay passes per
+active lesson/owner and ten-minute window, with at least60seconds between
+transient failures and longer server cooldowns respected. Visibility, offline,
+identity and lesson fences prevent stale callbacks from posting the next item.
+Closing the page retains the server capture; reopening uses the same authenticated
+resume path. No background service, model, schema, Queue or policy change.
+The original source lease, per-mutation/student budgets and source/My dedupe
+remain authoritative. Server-resumed study-guide results update the matching
+current card; missing receipts remain pending and ineligible results stay unpassed.
+
+Full precontent and final46focused frontend/recovery/cache checks passed;85source
+contracts passed. The actual isolated browser loaded the formal artifact and
+verified503,60second cooldown,same-capture success and source-receipt reconciliation
+with zero production/model calls. Exact external executor, publication and natural
+record acceptance remain pending;
+this does not claim provider recovery. Single authority:
+/Users/ylsuen/CF/reports/operations/yw-pulse-permanent-repair-20260921/YW_CONTINUATION_PLAN.md.
+
 ## 2026-09-21 — authenticated feedback readiness qualification prepared
 
 The existing AI-readiness endpoint now exercises feedback/medium through the verified YW service caller, using the same fixed non-student READY prompt. It retains authentication and same-origin enforcement, ignores client prompts and version headers, and writes no learning, grade or A+ records. Only this readiness call pins APIS candidate d17a995b until 2026-09-21 18:00 UTC; afterward it returns to normal routing. Formal evaluations retain their accepted behavior and normal routing.
