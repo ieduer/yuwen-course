@@ -1463,7 +1463,7 @@ test("the Worker checks the per-user resource bound before AI work and vocabular
   );
   assert.ok(
     interactionHandler.indexOf("assertLearningSubmissionAllowed") <
-      interactionHandler.indexOf('callApisPrompt(env, prompt, "feedback"'),
+      interactionHandler.indexOf('callLearningEvaluator(request, env, submissionGuard.submissionReservation, prompt)'),
   );
   assert.match(interactionHandler, /if \(!student\) return authenticatedEvaluationRequiredResponse\(\)/);
   assert.match(interactionHandler, /submissionReservation: submissionGuard\.submissionReservation/);
@@ -4216,4 +4216,48 @@ test("the producer registry cannot classify lesson interest as scoring evidence"
     resourceKind: "manifest_interaction",
     allowedPayloadKeys: ["rating", "reason"],
   });
+});
+
+
+test("study-guide transient recovery counts both calls and records the captured answer exactly once", async () => {
+  invalidateFormativeManifestCache();
+  const { default: isolatedWorker } = await import("../site/_worker.js?study-guide-transient-recovery=1");
+  const db = new DatabaseSync(":memory:");
+  try {
+    initializeLearningContractDb(db);
+    const source = sourceEnvironment();
+    source.env.READING_DB = sqliteD1(db);
+    source.env.READING_TEST_SLUG = "lease-test-student";
+    const firstRead = JSON.parse(readFileSync(resolve(ROOT, `site/data/classical-first-read/${vocabLesson.id}.json`), "utf8"));
+    db.prepare("INSERT INTO classical_first_read_sessions (student_id, lesson_id, text_version_id, text_digest, submitted_at) VALUES (?, ?, ?, ?, ?)")
+      .run(7, vocabLesson.id, firstRead.textVersionId, firstRead.textDigest, new Date().toISOString());
+    const originalAssets = source.env.ASSETS.fetch.bind(source.env.ASSETS);
+    source.env.ASSETS.fetch = async (request) => new URL(request.url).pathname === "/data/study-guide-catalog.json"
+      ? Response.json(studyGuideCatalog) : originalAssets(request);
+    const item = studyGuideCatalog.lessons.find(x => x.lessonId === vocabLesson.id).items.find(x => x.activeForSelfTest);
+    await recordLearningInteraction({request:new Request("https://yw.bdfz.net/api/learning/interactions"),env:source.env,student:{id:7,ucUserId:42},lesson:vocabLesson,interactionKey:"readAcknowledged",payload:{threshold:1,lessonPhase:"annotated_reading",clientMutationId:`annotated-read:${vocabLesson.id}:${firstRead.textVersionId}`.slice(0,100)}});
+    const requests = [];
+    source.env.APIS.fetch = async (request) => {
+      requests.push(request);
+      if (requests.length === 1) return Response.json({error_code:"DEADLINE_EXCEEDED"}, {status:503});
+      return Response.json({answer:JSON.stringify({score:90,correctness:"correct",passed:true,verdict:"回答符合原文",strength:"引用原句",gap:"可再補充",nextQuestion:"如何印證"})});
+    };
+    const request = () => new Request("https://yw.bdfz.net/api/reading/study-guide-attempt", {
+      method:"POST", headers:YW_WEB_JSON_HEADERS,
+      body:JSON.stringify({lessonId:vocabLesson.id,itemKey:item.itemKey,response:"我先依原句語境作答，再核對來源答案。",referenceRevealedAt:"2026-08-23T00:00:00.000Z",clientMutationId:"study-guide-transient-recovery"}),
+    });
+    const response = await isolatedWorker.fetch(request(),source.env,{});
+    const body = await response.json();
+    assert.equal(response.status,200,JSON.stringify(body));
+    assert.equal(requests.length,2);
+    assert.notEqual(requests[0].headers.get("x-request-id"),requests[1].headers.get("x-request-id"));
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls").get().n,2);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions WHERE interaction_key='studyGuideItemCompleted'").get().n,1);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_pending_submissions").get().n,1);
+    const replay = await isolatedWorker.fetch(request(),source.env,{});
+    assert.equal(replay.status,200);
+    assert.equal((await replay.json()).deduped,true);
+    assert.equal(requests.length,2);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions WHERE interaction_key='studyGuideItemCompleted'").get().n,1);
+  } finally { db.close(); }
 });

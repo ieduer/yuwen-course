@@ -46,7 +46,7 @@
     "check:learning-manifest": "node scripts/build_learning_manifest.mjs --check",
     "test:learning-manifest": "node --test scripts/test_learning_manifest.mjs",
     "test:manifest-textbook-images": "node --test scripts/test_manifest_textbook_images.mjs",
-    "test:evidence-contract": "node --test scripts/test_learning_evidence_contract.mjs",
+    "test:evidence-contract": "node --test scripts/test_learning_evidence_contract.mjs scripts/test_evaluator_recovery.mjs",
     "test:formative-mastery": "node --test scripts/test_formative_mastery_projection.mjs",
     "test:star-formative": "node --test scripts/test_star_formative_ui.mjs",
     "test:reading-identity": "node --test scripts/test_reading_identity.mjs",

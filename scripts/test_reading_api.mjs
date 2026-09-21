@@ -23,6 +23,7 @@ for (const file of [
   "preview-log-contract.js",
   "reading-identity-source.js",
   "study-guide-assessment.js",
+  "evaluator-recovery.js",
   "data/interaction-definitions.json",
   "data/learning-manifest.json",
   "data/lesson-competency-manifest.json",
