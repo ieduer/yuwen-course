@@ -1,3 +1,4 @@
+import { evaluateWithRecovery } from "./evaluator-recovery.js";
 import {
   assertLearningSubmissionAllowed,
   drainEvidenceOutbox,
@@ -1447,8 +1448,7 @@ async function handleInteractionCheck(request, env, capturedPayload = null, auth
         })
         : [];
       const prompt = promptFor(history);
-      await countEvaluatorCallOrRelease(env, submissionGuard.submissionReservation);
-      const raw = await callApisPrompt(env, prompt, "feedback", "medium");
+      const raw = await callLearningEvaluator(request, env, submissionGuard.submissionReservation, prompt);
       const parsed = extractJsonObject(raw);
       assessment = normalizeInteractionAssessment(parsed, parsed ? "" : raw);
     } catch (error) {
@@ -1559,6 +1559,14 @@ async function handlePendingInteractionResume(request, env) {
   return handleInteractionCheck(request, env, captured, student);
 }
 
+async function callLearningEvaluator(request, env, submissionReservation, prompt) {
+  return evaluateWithRecovery({
+    signal: request.signal,
+    reserve: () => countEvaluatorCallOrRelease(env, submissionReservation),
+    evaluate: (options) => callApisPrompt(env, prompt, "feedback", "medium", options),
+  });
+}
+
 async function handleLearningCheck(request, env) {
   let student;
   try {
@@ -1575,13 +1583,17 @@ async function handleLearningCheck(request, env) {
   }, { status: 410 });
 }
 
-export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLevel = "low") {
+export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLevel = "low", options = {}) {
   const callerToken = cleanText(env.APIS_CALLER_TOKEN, 256);
   if (!env.APIS?.fetch || !callerToken) {
     throw new Error("APIS service binding or caller credential unavailable");
   }
   const controller = new AbortController();
-  const timeoutMs = taskType === "feedback" ? APIS_FEEDBACK_TIMEOUT_MS : APIS_DEFAULT_TIMEOUT_MS;
+  const defaultTimeoutMs = taskType === "feedback" ? APIS_FEEDBACK_TIMEOUT_MS : APIS_DEFAULT_TIMEOUT_MS;
+  const timeoutMs = Math.min(defaultTimeoutMs, options.timeoutMs ?? defaultTimeoutMs);
+  const abort = () => controller.abort(options.signal.reason);
+  options.signal?.throwIfAborted();
+  options.signal?.addEventListener("abort", abort, { once: true });
   const timeout = setTimeout(() => controller.abort("APIS evaluation timeout"), timeoutMs);
   try {
     const response = await env.APIS.fetch(new Request("https://apis.internal/", {
@@ -1592,6 +1604,7 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
         "x-task-type": taskType,
         "x-thinking-level": thinkingLevel,
         "x-internal-token": callerToken,
+        ...(options.requestId ? { "x-request-id": options.requestId } : {}),
       },
       body: JSON.stringify({ prompt, taskType, thinkingLevel }),
       signal: controller.signal,
@@ -1600,12 +1613,20 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
       if (error?.name === "AbortError") throw error;
       return {};
     });
-    if (!response.ok) throw new Error(data.error || `APIS ${response.status}`);
+    if (!response.ok) {
+      // Never retain upstream error text: it can contain prompt/provider details.
+      const error = new Error(`APIS ${response.status}`);
+      error.apisStatus = response.status;
+      error.apisCode = ["DEADLINE_EXCEEDED", "UPSTREAM_UNAVAILABLE"].includes(data.error_code)
+        ? data.error_code : "NON_RETRYABLE";
+      throw error;
+    }
     const answer = cleanText(data.answer, 8000);
     if (!answer) throw new Error("APIS returned empty answer");
     return answer;
   } finally {
     clearTimeout(timeout);
+    options.signal?.removeEventListener("abort", abort);
   }
 }
 
@@ -2563,12 +2584,13 @@ async function handleReadingStudyGuideAttempt(request, env, student, capturedPay
 
   let assessment = deterministicStudyGuideAssessment(item, responseText);
   if (!assessment) {
-    await countEvaluatorCallOrRelease(env, submissionGuard.submissionReservation);
     try {
-      const raw = await callApisPrompt(env, studyGuideAssessmentPrompt(item, responseText), "feedback", "medium");
+      const raw = await callLearningEvaluator(request, env, submissionGuard.submissionReservation, studyGuideAssessmentPrompt(item, responseText));
       const parsed = extractJsonObject(raw);
       assessment = normalizeOpenStudyGuideAssessment(parsed);
     } catch (error) {
+      if (error instanceof LearningEvaluatorBudgetExceededError
+        || error instanceof LearningEvaluatorBudgetUnavailableError) throw error;
       try {
         await releaseAfterEvaluatorFailure(env, submissionGuard.submissionReservation, error);
       } catch (releasedError) {

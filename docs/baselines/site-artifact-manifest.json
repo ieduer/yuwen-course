@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1224,
-  "totalBytes": 164481764,
-  "aggregateSha256": "8ba92a17b405a2e67585d0a66d27cd2d529bcaf51ee40382aae2d5cab7e9b697",
+  "fileCount": 1225,
+  "totalBytes": 164484625,
+  "aggregateSha256": "c6eeebfe200c18549ef388df14f5510cbedce85bf809fa7147c42a7b5837278b",
   "files": [
     {
       "path": "_headers",
@@ -17,13 +17,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 132087,
-      "sha256": "a446bff7f385b01152d04a411349455c04d9bb1b6c317246b6ee526ed0a7c312"
+      "bytes": 133212,
+      "sha256": "51fc4445e9610068715f93c14ca2bf839ca311b37472930b3058b221261a1827"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "7e54c80c64fab5d2ef0d7413eb5ad27c1e59e1b882bb129114ff0f1dba1c6b12"
+      "sha256": "f73da6d81eee2b7da601c1540801ca445712ab4be8bf328937afc4906e4f03e9"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -6019,6 +6019,11 @@
       "path": "data/wy_articles.json",
       "bytes": 29859,
       "sha256": "411cb76ecac8e395b3343dc6200623061ede3f92e0428078877c47adda452111"
+    },
+    {
+      "path": "evaluator-recovery.js",
+      "bytes": 1736,
+      "sha256": "533ffd527a4e9682db00f78d4f41015da0bd1d6abfdb6a705ca42d82772fd849"
     },
     {
       "path": "genres.html",

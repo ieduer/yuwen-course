@@ -1,3 +1,11 @@
+## 2026-09-21 — bounded evaluator recovery prepared
+
+Study-guide and formal evaluations retain one captured submission and one lease while allowing at most two APIS calls within the existing 45-second total evaluation deadline. Only a completed HTTP503 response with structured DEADLINE_EXCEEDED or UPSTREAM_UNAVAILABLE qualifies, with at least ten seconds remaining. Each outbound call consumes the existing durable four-per-mutation / sixty-per-student-window budget. Quota, circuit, credential, transport/abort, malformed answer and strict-normalization failures do not trigger another call. Cancellation reaches APIS; success records one authoritative result and deduplicated replays make no provider call. Failed evaluations retain the answer and truthful retryable status.
+
+Opaque operation/attempt request IDs propagate into APIS logs; diagnostic events contain no identity, answer, prompt, credential or raw upstream message. Pages-log persistence remains a separate availability question. No APIS routing, model, global timeout, shared schema, frontend or native-content change. This repairs bounded leaf recovery; it does not claim the provider outage is cured. Immediate rollback is Pages1c54b957-d7ce-4123-8558-1539f8b451d6, preserving all forward data.
+
+Release and live business acceptance are pending. Evidence: /Users/ylsuen/CF/reports/operations/yw-pulse-permanent-repair-20260921/RELEASE.md.
+
 ## 2026-09-20 — YW session display and evidence repair accepted
 
 Production Pages `1c54b957-d7ce-4123-8558-1539f8b451d6`, runtime YW
