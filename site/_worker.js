@@ -1605,6 +1605,9 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
         "x-thinking-level": thinkingLevel,
         "x-internal-token": callerToken,
         ...(options.requestId ? { "x-request-id": options.requestId } : {}),
+        ...(options.versionOverride ? {
+          "Cloudflare-Workers-Version-Overrides": `apis="${options.versionOverride}"`,
+        } : {}),
       },
       body: JSON.stringify({ prompt, taskType, thinkingLevel }),
       signal: controller.signal,
@@ -1630,6 +1633,13 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
   }
 }
 
+// Qualification uses the authenticated, non-writing readiness route only.
+// Expiry returns readiness to normal routing; formal feedback never receives this pin.
+export function readinessApisVersion(now = Date.now()) {
+  return now < Date.parse("2026-09-21T18:00:00Z")
+    ? "d17a995b-9a4e-4964-b10a-18cbeb90d139" : null;
+}
+
 async function handleAiReadiness(request, env) {
   let user;
   try {
@@ -1643,8 +1653,12 @@ async function handleAiReadiness(request, env) {
     await callApisPrompt(
       env,
       "這是語文課程 AI 可用性檢查。只回覆 READY，不要提供課程內容。",
-      "chat",
-      "low",
+      "feedback",
+      "medium",
+      {
+        versionOverride: readinessApisVersion(),
+        requestId: `yw-readiness-${crypto.randomUUID()}`,
+      },
     );
     return json({ ok: true, provider: "apis", ready: true });
   } catch {

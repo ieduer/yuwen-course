@@ -1,3 +1,9 @@
+## 2026-09-21 — authenticated feedback readiness qualification prepared
+
+The existing AI-readiness endpoint now exercises feedback/medium through the verified YW service caller, using the same fixed non-student READY prompt. It retains authentication and same-origin enforcement, ignores client prompts and version headers, and writes no learning, grade or A+ records. Only this readiness call pins APIS candidate d17a995b until 2026-09-21 18:00 UTC; afterward it returns to normal routing. Formal evaluations retain their accepted behavior and normal routing.
+
+Local validation and exact-source release are tracked in /Users/ylsuen/CF/reports/operations/yw-pulse-permanent-repair-20260921/APIS_DEADLINE_PLAN.md. This preparation is not provider acceptance. Current YW baseline/rollback is Pages8b194940-58a4-4afc-af4d-f27ec7f061b9, source962ebcd; preserve all forward data and native content.
+
 ## 2026-09-21 — bounded evaluator recovery prepared
 
 Study-guide and formal evaluations retain one captured submission and one lease while allowing at most two APIS calls within the existing 45-second total evaluation deadline. Only a completed HTTP503 response with structured DEADLINE_EXCEEDED or UPSTREAM_UNAVAILABLE qualifies, with at least ten seconds remaining. Each outbound call consumes the existing durable four-per-mutation / sixty-per-student-window budget. Quota, circuit, credential, transport/abort, malformed answer and strict-normalization failures do not trigger another call. Cancellation reaches APIS; success records one authoritative result and deduplicated replays make no provider call. Failed evaluations retain the answer and truthful retryable status.
