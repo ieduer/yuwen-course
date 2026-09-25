@@ -35,6 +35,23 @@ function reviewedGlossAssessment(item, response) {
   };
 }
 
+function exactKnowledgeAssessment(item, response) {
+  // Vocabulary/syntax keys can be checked exactly; inquiry answers still need
+  // their rubric. Never accept an incomplete member of an array/object answer.
+  if (item?.activeForSelfTest !== true || item.reviewRequired === true
+    || !["vocabulary", "syntax"].includes(item.competencyTag)
+    || !["source_answer", "codex_reference"].includes(item.answerAuthority)
+    || typeof item.referenceAnswer !== "string") return null;
+  const expected = glossSignature(toSimplifiedText(item.referenceAnswer));
+  const actual = glossSignature(toSimplifiedText(response));
+  if (!expected || actual !== expected) return null;
+  return {
+    ...assessment(100, "答案與本題參考答案一致。"),
+    strength: "已完整回答本題要求，直接核對通過。",
+    nextQuestion: "可把答案代回原句，確認詞義或句法。",
+  };
+}
+
 // Shared, deliberately bounded traditional-to-simplified folding used by both
 // study-guide comparison and the three-word reading analysis. Characters not
 // present in the established project table remain unchanged.
@@ -194,7 +211,7 @@ export function deterministicStudyGuideAssessment(item, response) {
       ? assessment(100, "斷句與來源參考答案一致。")
       : assessment(0, "斷句尚未與來源參考答案一致。", "請逐一核對語意停頓與人物言語邊界。");
   }
-  return null;
+  return exactKnowledgeAssessment(item, response);
 }
 
 export function normalizeOpenStudyGuideAssessment(value) {

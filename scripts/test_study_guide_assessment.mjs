@@ -73,6 +73,31 @@ test("AI fallback assesses short glosses on the question requirements without in
   assert.match(prompt, /不要捏造錯誤或要求重答/);
 });
 
+test("all active vocabulary and syntax string keys avoid AI for an exact complete answer", () => {
+  const items = catalogItems.filter(item => item.activeForSelfTest && !item.reviewRequired
+    && ["vocabulary", "syntax"].includes(item.competencyTag)
+    && ["source_answer", "codex_reference"].includes(item.answerAuthority)
+    && !/(?:choice|discrimination|identification|objective|knowledge|punctuation|segmentation)/i.test(item.detailTag)
+    && typeof item.referenceAnswer === "string");
+  assert.ok(items.length > 80, "cover the catalog rather than only the screenshot");
+  for (const item of items) {
+    assert.equal(deterministicStudyGuideAssessment(item, item.referenceAnswer)?.passed, true, item.itemKey);
+    assert.notEqual(deterministicStudyGuideAssessment(item, `不是${item.referenceAnswer}`)?.passed, true, item.itemKey);
+  }
+});
+
+test("exact complete keys do not turn open, inactive, unreviewed or multi-part answers into automatic passes", () => {
+  const item = catalogItems.find(item => item.itemKey === "lesson-1474-p23-function-word-01");
+  assert.equal(deterministicStudyGuideAssessment(item, "连詞表順承可译為然后")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(item, "然後"), null, "meaning alone omits required usage");
+  for (const change of [{ competencyTag: "comprehension" }, { activeForSelfTest: false }, { reviewRequired: true }, { answerAuthority: "unreviewed" }, { referenceAnswer: [item.referenceAnswer] }]) {
+    assert.equal(deterministicStudyGuideAssessment({ ...item, ...change }, item.referenceAnswer), null);
+  }
+  for (const open of catalogItems.filter(item => item.detailTag.startsWith("wenyan.inquiry."))) {
+    assert.equal(deterministicStudyGuideAssessment(open, open.referenceAnswer), null, open.itemKey);
+  }
+});
+
 test("realistic study-guide answer fixture corpus stays source-owned and fail-closed", () => {
   assert.equal(fixtureCorpus.schemaVersion, "yw-study-guide-answer-fixtures-v1");
   assert.ok(Number.isInteger(fixtureCorpus.minimumCaseCount));

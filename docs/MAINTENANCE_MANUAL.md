@@ -2,11 +2,13 @@
 
 The screenshot answer 大人之學 now matches a server-owned reviewed gloss key;
 ten single-word ancient-meaning questions have exact question/reference-bound
-simplified/traditional equivalents. Unmatched phrasing still receives AI review,
+simplified/traditional equivalents. Another 86 active vocabulary/syntax string keys
+are checked for complete equality before AI; open and multi-part answers remain
+under rubric evaluation. Unmatched phrasing still receives AI review,
 with question-appropriate evidence requirements. Empty rubrics show practice
 guidance; evaluator failure explicitly means no verdict, not an incorrect answer.
 
-Local 123 tests and formal artifact build/check pass, including real Worker route
+Local 139 tests and formal artifact build/manifest checks pass, including real Worker route
 and SQLite proof of zero AI calls and idempotent evidence for the screenshot answer.
 Catalog, semantic resource revisions, App content, history and scoring thresholds
 are unchanged. Production release and live acceptance remain pending coordination
