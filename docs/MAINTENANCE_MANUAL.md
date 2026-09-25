@@ -1,5 +1,7 @@
 ## 2026-09-25 pending candidate (inactive; not release authority)
 
+Publication blocker: the separate Worker currently cannot be provisioned with the existing unreadable Pages-only APIS caller secret. Do not rotate APIS credentials or substitute the legacy global credential under this candidate. A signed machine-only Pages execution bridge is a proposed design change awaiting selection, not implemented.
+
 The accepted baseline remains PR59 ffa3689 / Pages ff11ac3d. Candidate migration0009 is additive: original submission records, evaluator jobs, append-only AI replies, fenced score commits, scheduler lease and alert delivery checkpoint. Original content stays in YW D1; central v2 evidence remains unchanged. Missing provider model revision is explicitly unavailable. Delayed reply receipt/evaluation timestamps remain distinct from original submission time.
 
 `YW_DURABLE_EVALUATION_ENABLED=true` is required on Pages; the dedicated `yw-evaluation-jobs` Worker uses `YW_BACKGROUND_EVALUATION_ENABLED=true` and `YW_EVALUATION_ALERTS_ENABLED=true` only after its exact-source registration, D1 backup/migration, APIS credential provisioning and paired release checks. Candidate defaults are false. Cron has no public execution endpoint; two jobs maximum per minute, one scheduler lease, at most four lifetime APIS calls per new submission including foreground, plus existing user/window budgets. Explicit old-pending resume keeps its accepted legacy path; no automatic historical backfill.
