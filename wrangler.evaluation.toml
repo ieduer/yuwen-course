@@ -1,0 +1,29 @@
+# Independent target: register and provision before its first production write.
+name = "yw-evaluation-jobs"
+main = "site/evaluation-scheduler.js"
+compatibility_date = "2026-05-12"
+workers_dev = false
+preview_urls = false
+
+[triggers]
+crons = ["* * * * *"]
+
+[vars]
+# Claiming starts only after the paired Pages/D1 release is accepted.
+YW_BACKGROUND_EVALUATION_ENABLED = "false"
+YW_EVALUATION_ALERTS_ENABLED = "false"
+
+[[d1_databases]]
+binding = "READING_DB"
+database_name = "yuwen-reading-db"
+database_id = "99c541e7-e70b-4584-b939-7e88a6dd68c5"
+migrations_dir = "migrations"
+
+[[services]]
+binding = "PULSE_ALERTS"
+service = "pulse"
+entrypoint = "PlatformErrorAlerts"
+
+[observability]
+enabled = true
+head_sampling_rate = 1

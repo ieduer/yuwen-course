@@ -1,6 +1,14 @@
+import { sourceEventStatement, evaluationEventBase, evaluationEventId, latestSourceEvent } from './learning-evaluation-events.js';
+import { EVALUATION_MACHINE_PATH, handleEvaluationMachine } from './evaluation-machine.js';
+import { EvaluationPending, pendingEvaluationResponse, createEvaluationJob,
+  claimEvaluationJob, saveEvaluationReply, latestEvaluationReply, deferEvaluationJob,
+  drainEvaluationJobs, loadEvaluationJob } from "./durable-evaluation-jobs.js";
 import { evaluateWithRecovery } from "./evaluator-recovery.js";
 import {
   assertLearningSubmissionAllowed,
+  snapshotEvaluationReservation,
+  ownedEvaluationStatus,
+  restoreEvaluationReservation,
   drainEvidenceOutbox,
   LearningEvaluatorBudgetExceededError,
   LearningEvaluatorBudgetUnavailableError,
@@ -77,6 +85,13 @@ const YW_PRE_ACTIVATION_TRANSPORT_CANARY = Object.freeze({
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if(url.pathname===EVALUATION_MACHINE_PATH) return handleEvaluationMachine(request,env,async job=>{
+      try {await completeDurableEvaluationJob(env,job);return 'completed';}
+      catch(error) {
+        if(error?.code!=='evaluation_execution_already_started') await deferEvaluationJob(env.READING_DB,job,error);
+        return 'pending';
+      }
+    });
     if (url.pathname === "/api/chat" && request.method === "POST") {
       return handleChat(request, env);
     }
@@ -1417,6 +1432,7 @@ async function handleInteractionCheck(request, env, capturedPayload = null, auth
       interactionKey: interaction,
       payload: sourcePayload,
     });
+    if (submissionGuard.pending) return pendingEvaluationResponse(submissionGuard.pending);
     if (submissionGuard.deduped) {
       let conversation = [];
       if (FORMAL_MULTI_TURN_INTERACTIONS.has(interaction)) {
@@ -1452,10 +1468,15 @@ async function handleInteractionCheck(request, env, capturedPayload = null, auth
         })
         : [];
       const prompt = promptFor(history);
-      const raw = await callLearningEvaluator(request, env, submissionGuard.submissionReservation, prompt);
+      const raw = await callLearningEvaluator(request, env, submissionGuard.submissionReservation, prompt, {student,lesson,payload:sourcePayload,kind:'interaction'});
       const parsed = extractJsonObject(raw);
+      if (submissionGuard.submissionReservation.evaluationJob && !validDurableAssessment(parsed)) {
+        const error = new Error('invalid AI assessment'); error.code='invalid_ai_assessment';
+        throw new EvaluationPending(await deferEvaluationJob(env.READING_DB, submissionGuard.submissionReservation.evaluationJob, error));
+      }
       assessment = normalizeInteractionAssessment(parsed, parsed ? "" : raw);
     } catch (error) {
+      if (error instanceof EvaluationPending) return pendingEvaluationResponse(error.job);
       if (error instanceof LearningEvaluatorBudgetExceededError
         || error instanceof LearningEvaluatorBudgetUnavailableError) throw error;
       try {
@@ -1511,6 +1532,7 @@ async function handleInteractionCheck(request, env, capturedPayload = null, auth
       || error instanceof LearningEvaluatorBudgetUnavailableError) return learningEvaluatorBudgetResponse(error);
     if (error instanceof LearningEvaluatorCooldownError) return learningEvaluatorUnavailableResponse(error.retryAfterSeconds);
     if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
+    if (error?.code === 'learning_payload_too_large') return json({error:error.message,code:error.code},{status:413});
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
     if (["classical_first_read_required", "classical_annotated_reading_required"].includes(error?.code)) {
       return readingError(error.message, 422, error.code);
@@ -1532,12 +1554,19 @@ async function handlePendingInteractionsList(request, env, url) {
   const student = await authenticatedReadingStudent(request, env);
   if (student?.error) return student.error;
   if (!student) return authenticatedEvaluationRequiredResponse();
+  const pendingId=cleanText(url.searchParams.get('pendingId'),100);
+  if(pendingId && env.YW_DURABLE_EVALUATION_ENABLED==='true') {
+    const status=await ownedEvaluationStatus(env,student,{pendingId});
+    if(!status) return json({error:'pending not found'},{status:404});
+    return status.job ? pendingEvaluationResponse(status.job)
+      : json(status.completed,{headers:{'Cache-Control':'private, no-store'}});
+  }
   const lessonId = cleanText(url.searchParams.get("lessonId"), 80);
   if (lessonId && !/^lesson-[\w-]{1,60}$/.test(lessonId)) {
     return json({ error: "valid lesson id required" }, { status: 400 });
   }
   const submissions = await listPendingLearningSubmissions({ env, student, lessonId });
-  return json({ ok: true, submissions });
+  return json({ ok: true, submissions },{headers:{'Cache-Control':'private, no-store'}});
 }
 
 async function handlePendingInteractionResume(request, env) {
@@ -1545,6 +1574,11 @@ async function handlePendingInteractionResume(request, env) {
   if (student?.error) return student.error;
   if (!student) return authenticatedEvaluationRequiredResponse();
   const body = await request.json().catch(() => ({}));
+  if(env.YW_DURABLE_EVALUATION_ENABLED==='true') {
+    const status=await ownedEvaluationStatus(env,student,{clientMutationId:cleanText(body.clientMutationId,100)});
+    if(status) return status.job ? pendingEvaluationResponse(status.job)
+      : json(status.completed,{headers:{'Cache-Control':'private, no-store'}});
+  }
   const captured = await loadPendingLearningSubmission({
     env,
     student,
@@ -1563,7 +1597,24 @@ async function handlePendingInteractionResume(request, env) {
   return handleInteractionCheck(request, env, captured, student);
 }
 
-async function callLearningEvaluator(request, env, submissionReservation, prompt) {
+async function callLearningEvaluator(request, env, submissionReservation, prompt, completion) {
+  if (env.YW_DURABLE_EVALUATION_ENABLED === 'true' && submissionReservation.durableEvaluationEligible) {
+    const reservation = snapshotEvaluationReservation(submissionReservation);
+    const snapshot = {schema:'yw-evaluation-snapshot-v1',rubricVersion:'yw-durable-assessment-v1',leafRelease:env.CF_VERSION_METADATA?.id || null,
+      prompt,reservation,completion:{...completion,
+        student:{id:completion.student.id,ucUserId:completion.student.ucUserId||null},
+        lesson:{id:completion.lesson.id,title:completion.lesson.title,
+          blockId:completion.lesson.blockId||'',blockTitle:completion.lesson.blockTitle||''}}};
+    const captured = await createEvaluationJob(env.READING_DB, submissionReservation, snapshot);
+    const job = await claimEvaluationJob(env.READING_DB,captured.source_event_id);
+    if (!job) throw new EvaluationPending(captured);
+    submissionReservation.evaluationJob=job;
+    try {
+      const reply=await evaluateDurableJob(env,job,submissionReservation,prompt);
+      submissionReservation.evaluationReply=reply;
+      return reply.answer_text;
+    } catch(error) { throw new EvaluationPending(await deferEvaluationJob(env.READING_DB,job,error)); }
+  }
   return evaluateWithRecovery({
     signal: request.signal,
     reserve: () => countEvaluatorCallOrRelease(env, submissionReservation),
@@ -1611,10 +1662,17 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
         ...(options.requestId ? { "x-request-id": options.requestId } : {}),
         ...(options.versionOverride ? { "Cloudflare-Workers-Version-Overrides": `apis="${options.versionOverride}"` } : {}),
       },
-      body: JSON.stringify({ prompt, taskType, thinkingLevel }),
+      body: JSON.stringify(options.returnMetadata ? {
+        contents:[{role:'user',parts:[{text:prompt}]}],taskType,thinkingLevel,
+        generationConfig:{temperature:0.7,topK:64,topP:0.95,maxOutputTokens:55555,responseMimeType:'text/plain'},
+      } : { prompt, taskType, thinkingLevel }),
       signal: controller.signal,
     }));
-    const data = await response.json().catch((error) => {
+    let rawResponseJson=null;
+    const data = await (options.returnMetadata ? response.text().then(text=>{
+      if(response.ok) rawResponseJson=text;
+      try {const parsed=JSON.parse(text);return parsed && typeof parsed==='object' && !Array.isArray(parsed)?parsed:{};} catch {return {};}
+    }) : response.json()).catch((error) => {
       if (error?.name === "AbortError") throw error;
       return {};
     });
@@ -1624,7 +1682,15 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
       error.apisStatus = response.status;
       error.apisCode = ["DEADLINE_EXCEEDED", "UPSTREAM_UNAVAILABLE"].includes(data.error_code)
         ? data.error_code : "NON_RETRYABLE";
+      error.retryAfterSeconds = Math.max(0, Number(response.headers.get('retry-after')) || 0);
       throw error;
+    }
+    if (options.returnMetadata) {
+      // Never label the requested alias as a provider revision. Missing remains unknown.
+      const value = typeof data.answer === 'string' ? data.answer : '';
+      const identifier = v => typeof v === 'string' && /^[A-Za-z0-9._:-]{1,160}$/.test(v) ? v : null;
+      return {answer:value, actualModel:identifier(data.model),
+        modelVersion:identifier(data.raw_response?.modelVersion), requestId:identifier(data.requestId)||options.requestId||'',rawResponseJson};
     }
     const answer = cleanText(data.answer, 8000);
     if (!answer) throw new Error("APIS returned empty answer");
@@ -1958,6 +2024,7 @@ async function handleLearningInteraction(request, env, ctx) {
       || error instanceof LearningEvaluatorBudgetUnavailableError) return learningEvaluatorBudgetResponse(error);
     if (error instanceof LearningEvaluatorCooldownError) return learningEvaluatorUnavailableResponse(error.retryAfterSeconds);
     if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
+    if (error?.code === 'learning_payload_too_large') return json({error:error.message,code:error.code},{status:413});
     if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
     if (["classical_first_read_required", "classical_annotated_reading_required"].includes(error?.code)) {
       return readingError(error.message, 422, error.code, {
@@ -2550,7 +2617,7 @@ async function handleReadingStudyGuideAttempt(request, env, student, capturedPay
 
   const attemptPayload = {
     itemKey,
-    response: responseText,
+    response: env.YW_DURABLE_EVALUATION_ENABLED === 'true' ? payload.response : responseText,
     referenceRevealedAt,
     clientMutationId,
     lessonPhase: "knowledge_accounting",
@@ -2588,6 +2655,7 @@ async function handleReadingStudyGuideAttempt(request, env, student, capturedPay
       expectedStudyGuideCatalogDigest: catalog.catalogDigest,
     });
   }
+  if (submissionGuard.pending) return pendingEvaluationResponse(submissionGuard.pending);
   if (submissionGuard.deduped) {
     const authoritative = authoritativeStudyGuideAssessment(null, submissionGuard);
     return json({
@@ -2609,10 +2677,16 @@ async function handleReadingStudyGuideAttempt(request, env, student, capturedPay
   let assessment = deterministicStudyGuideAssessment(item, responseText);
   if (!assessment) {
     try {
-      const raw = await callLearningEvaluator(request, env, submissionGuard.submissionReservation, studyGuideAssessmentPrompt(item, responseText));
+      const raw = await callLearningEvaluator(request, env, submissionGuard.submissionReservation, studyGuideAssessmentPrompt(item, responseText),
+        {student,lesson,payload:attemptPayload,kind:'study-guide'});
       const parsed = extractJsonObject(raw);
+      if (submissionGuard.submissionReservation.evaluationJob && !validDurableAssessment(parsed)) {
+        const error = new Error('invalid AI assessment'); error.code='invalid_ai_assessment';
+        throw new EvaluationPending(await deferEvaluationJob(env.READING_DB, submissionGuard.submissionReservation.evaluationJob, error));
+      }
       assessment = normalizeOpenStudyGuideAssessment(parsed);
     } catch (error) {
+      if (error instanceof EvaluationPending) return pendingEvaluationResponse(error.job);
       if (error instanceof LearningEvaluatorBudgetExceededError
         || error instanceof LearningEvaluatorBudgetUnavailableError) throw error;
       try {
@@ -3137,9 +3211,61 @@ function readingApiFailureResponse(error) {
     || error instanceof LearningEvaluatorBudgetUnavailableError) return learningEvaluatorBudgetResponse(error);
   if (error instanceof LearningEvaluatorCooldownError) return learningEvaluatorUnavailableResponse(error.retryAfterSeconds);
   if (error instanceof LearningSubmissionInProgressError) return learningSubmissionInProgressResponse(error);
+  if (error?.code === 'learning_payload_too_large') return readingError(error.message,413,error.code);
   if (error?.code === "learning_mutation_conflict") return learningMutationConflictResponse();
   if (["classical_first_read_required", "classical_annotated_reading_required"].includes(error?.code)) {
     return readingError(error.message, 422, error.code);
   }
   return readingError(error?.message || "reading api failure", 500);
+}
+
+function validDurableAssessment(parsed) {
+  // Use the same authoritative contract as foreground scoring. A saved but
+  // incomplete reply must block for reconciliation, never retry locally forever.
+  try { normalizeOpenStudyGuideAssessment(parsed); return true; }
+  catch { return false; }
+}
+async function evaluateDurableJob(env,job,reservation,prompt) {
+  const existing=await latestEvaluationReply(env.READING_DB,job.source_event_id);
+  if(existing) return saveEvaluationReply(env.READING_DB,{...job,lease_epoch:existing.lease_epoch},{
+    answer:existing.answer_text,actualModel:existing.actual_model,modelVersion:existing.model_version,
+    requestId:existing.request_id,rawResponseJson:existing.raw_response_json,
+  },existing.received_at); // Repair projection/commit without another model call.
+  const start=await env.READING_DB.prepare(`INSERT OR IGNORE INTO learning_evaluation_executions(source_event_id,lease_epoch,started_at)
+    SELECT source_event_id,lease_epoch,? FROM learning_evaluation_jobs
+    WHERE source_event_id=? AND lease_epoch=? AND state='leased' AND lease_until>=?`)
+    .bind(Date.now(),job.source_event_id,job.lease_epoch,Date.now()).run();
+  if(Number(start?.meta?.changes)!==1) {
+    const error=new Error('evaluation epoch already started');error.code='evaluation_execution_already_started';throw error;
+  }
+  const call=await reserveLearningEvaluatorCall({env,submissionReservation:reservation});
+  const requestId=crypto.randomUUID();
+  const retry=await latestSourceEvent(env.READING_DB,job.source_event_id,'ai.retry');
+  await (await sourceEventStatement(env.READING_DB,evaluationEventBase(job),{
+    action:'ai.request',kind:'request',key:call.callLedgerId,
+    parentId:retry?.event_id || await evaluationEventId(job.source_event_id,'submit'),at:call.createdAt,
+    content:{prompt},sourceContext:{requestId,attemptNumber:call.attemptNumber,callLedgerId:call.callLedgerId,
+      leaseEpoch:job.lease_epoch,jobState:'leased',taskType:'feedback',thinkingLevel:'medium',
+      routing:'apis_task_policy'},
+  })).run();
+  const result=await callApisPrompt(env,prompt,'feedback','medium',{
+    timeoutMs:25_000,requestId,returnMetadata:true,
+  });
+  return saveEvaluationReply(env.READING_DB,job,result);
+}
+export async function completeDurableEvaluationJob(env,job) {
+  const {snapshot,reservation}=await restoreEvaluationReservation(env,job);
+  const reply=await evaluateDurableJob(env,job,reservation,snapshot.prompt);
+  reservation.evaluationReply=reply;
+  const parsed=extractJsonObject(reply.answer_text);
+  if(!validDurableAssessment(parsed)) { const error=new Error('invalid AI assessment');error.code='invalid_ai_assessment';throw error; }
+  const normalized=normalizeInteractionAssessment(parsed,'');
+  const evaluation=snapshot.completion.kind==='study-guide'
+    ? normalizeOpenStudyGuideAssessment(parsed) : {...normalized,provider:'apis',
+      correctness:normalized.score>=60?'passed':'needs_revision'};
+  return recordLearningInteraction({request:new Request('https://yw.bdfz.net/internal-source-record'),env,
+    ...snapshot.completion,interactionKey:reservation.interactionKey,evaluation,submissionReservation:reservation});
+}
+export async function runDurableEvaluationScheduler(env) {
+  return drainEvaluationJobs(env,job=>completeDurableEvaluationJob(env,job));
 }

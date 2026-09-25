@@ -1,3 +1,6 @@
+import { loadEvaluationJob, JOB_POLICY } from "./durable-evaluation-jobs.js";
+import { sourceEventStatement, evaluationEventId, evaluationEventBase,
+  latestSourceEvent, replyAssessment, sourceEventJob } from './learning-evaluation-events.js';
 import {
   hasClassicalAnnotatedReadReceipt,
   loadClassicalFirstRead,
@@ -647,7 +650,7 @@ function assertPendingSubmissionMatches(existing, expected) {
   }
 }
 
-async function capturePendingSubmission(db, expected, occurredAt) {
+async function capturePendingSubmission(db, expected, occurredAt, originalPayloadJson = null) {
   const existing = await existingPendingSubmission(
     db,
     expected.studentId,
@@ -665,7 +668,7 @@ async function capturePendingSubmission(db, expected, occurredAt) {
     return;
   }
   try {
-    await db.prepare(
+    const capture = db.prepare(
       `INSERT INTO learning_pending_submissions (
          source_event_id, student_id, client_mutation_id, lesson_id, interaction_key,
          resource_key, raw_payload_json, status, captured_at, updated_at
@@ -680,7 +683,14 @@ async function capturePendingSubmission(db, expected, occurredAt) {
       expected.rawPayloadJson,
       occurredAt,
       occurredAt,
-    ).run();
+    );
+    if(originalPayloadJson !== null) {
+      await db.batch([capture,db.prepare(`INSERT INTO learning_submission_records
+        (source_event_id,student_id,submitted_payload_json,captured_at) VALUES(?,?,?,?)`)
+        .bind(expected.sourceEventId,expected.studentId,originalPayloadJson,occurredAt),
+        await sourceEventStatement(db,expected,{action:'answer.submit',kind:'submit',actor:'student',
+          status:'succeeded',at:occurredAt,content:{originalJson:originalPayloadJson}})]);
+    } else await capture.run();
   } catch (error) {
     if (!isUniqueConstraintError(error)) throw error;
     const winner = await existingPendingSubmission(db, expected.studentId, expected.clientMutationId);
@@ -1228,6 +1238,23 @@ export async function assertLearningSubmissionAllowed({
   const raw = boundedRawPayload(context.definition, context.normalizedPayload);
   const clientMutationId = clean(payload.clientMutationId, 100);
   if (!clientMutationId) throw new Error("client mutation id required before evaluation");
+  let originalPayloadJson = null;
+  let capturedOriginal = null;
+  if(env.YW_DURABLE_EVALUATION_ENABLED === 'true') {
+    const original = Object.fromEntries((context.definition.allowedPayloadKeys || [])
+      .filter(key => Object.hasOwn(payload,key)).map(key => [key,payload[key]]));
+    originalPayloadJson = JSON.stringify(original);
+    if(originalPayloadJson.length > MAX_RAW_PAYLOAD_CHARS) {
+      const error=new Error('答案超出可保存長度，尚未送出；請保留原文並縮短後重試');
+      error.code='learning_payload_too_large';throw error;
+    }
+    capturedOriginal=await env.READING_DB.prepare(`SELECT submitted_payload_json
+      FROM learning_submission_records r JOIN learning_pending_submissions p USING(source_event_id)
+      WHERE r.student_id=? AND p.client_mutation_id=?`).bind(student.id,clientMutationId).first();
+    if(capturedOriginal && capturedOriginal.submitted_payload_json!==originalPayloadJson) {
+      const error=new Error('original submission mutation conflict');error.code='learning_mutation_conflict';throw error;
+    }
+  }
   const existing = await existingInteraction(env.READING_DB, student.id, clientMutationId);
   if (existing) {
     assertIdempotentReplayMatches(existing, context.resourceKey, interactionKey, raw.serialized);
@@ -1251,6 +1278,10 @@ export async function assertLearningSubmissionAllowed({
       resourceKey: context.resourceKey,
       rawPayloadJson: raw.serialized,
     });
+  }
+  if (pending && env.YW_DURABLE_EVALUATION_ENABLED === "true") {
+    const job = await loadEvaluationJob(env.READING_DB, pending.source_event_id);
+    if (job && job.state !== "completed") return { allowed: true, pending: job };
   }
   const slot = await reserveSubmissionSlot(
     env.READING_DB,
@@ -1284,8 +1315,13 @@ export async function assertLearningSubmissionAllowed({
     interactionKey,
     resourceKey: context.resourceKey,
     rawPayloadJson: raw.serialized,
-  }, occurredAt);
+    resourceVersion:evidenceVersions(context.registry,context.manifest,context.definition,context.formativeManifest).sourceVersion,
+    leafRelease:env.CF_VERSION_METADATA?.id || null,
+  }, occurredAt, pending && !capturedOriginal ? null : originalPayloadJson);
   const submissionReservation = {
+    // Historical pending rows lack a pinned original snapshot. Explicit resume
+    // keeps their accepted legacy path; never enroll them in automatic grading.
+    durableEvaluationEligible: env.YW_DURABLE_EVALUATION_ENABLED === 'true' && (!pending || Boolean(capturedOriginal)),
     sourceEventId: slot.sourceEventId,
     occurredAt,
     leaseStartedAt: slot.leaseStartedAt,
@@ -1342,7 +1378,9 @@ export async function reserveLearningEvaluatorCall({
   const studentId = Number(submissionReservation.studentId);
   const sourceEventId = clean(submissionReservation.sourceEventId, 100);
   const resourceKey = clean(submissionReservation.resourceKey, 220);
-  const windowStart = clean(submissionReservation.rateReservation.windowStart, 40);
+  const windowStart = submissionReservation.evaluationJob
+    ? new Date(Math.floor(Date.parse(occurredAt) / 600_000) * 600_000).toISOString()
+    : clean(submissionReservation.rateReservation.windowStart, 40);
   const createdAt = clean(occurredAt, 40) || isoNow();
   try {
     const inserted = await db.prepare(
@@ -1357,7 +1395,13 @@ export async function reserveLearningEvaluatorCall({
           AND (
           SELECT COUNT(*) FROM learning_evaluator_calls
            WHERE student_id = ? AND source_event_id = ? AND window_start = ?
-        ) < ${learningEvaluatorCallBudget.mutationWindowLimit}`
+        ) < ${learningEvaluatorCallBudget.mutationWindowLimit}
+        ${submissionReservation.evaluationJob ? `AND (
+          SELECT COUNT(*) FROM learning_evaluator_calls WHERE source_event_id = ?
+        ) < ${JOB_POLICY.maxCalls} AND EXISTS (
+          SELECT 1 FROM learning_evaluation_jobs WHERE source_event_id = ?
+          AND state = 'leased' AND lease_epoch = ? AND lease_until >= ?
+        )` : ''}`
     ).bind(
       studentId,
       sourceEventId,
@@ -1369,8 +1413,15 @@ export async function reserveLearningEvaluatorCall({
       studentId,
       sourceEventId,
       windowStart,
+      ...(submissionReservation.evaluationJob ? [sourceEventId, sourceEventId,
+        submissionReservation.evaluationJob.lease_epoch, Date.now()] : []),
     ).run();
     if (Number(inserted?.meta?.changes || 0) === 1) {
+      if(submissionReservation.evaluationJob) {
+        const call=await db.prepare('SELECT MAX(id) AS id,COUNT(*) AS n FROM learning_evaluator_calls WHERE source_event_id=?')
+          .bind(sourceEventId).first();
+        return {counted:true,studentId,sourceEventId,windowStart,createdAt,callLedgerId:call.id,attemptNumber:call.n};
+      }
       return { counted: true, studentId, sourceEventId, windowStart, createdAt };
     }
     const [studentWindow, mutationWindow] = await Promise.all([
@@ -1444,18 +1495,42 @@ async function enqueueOutbox(env, sourceEventId, envelope) {
   if (!env.LEARNING_EVIDENCE_QUEUE || !Number.isInteger(Number(envelope.userId)) || Number(envelope.userId) <= 0) {
     return { status: "local_only" };
   }
+  const job=await sourceEventJob(env,sourceEventId),deliveryKey=job?crypto.randomUUID():null;
+  if(!job) {
+    // Preserve the accepted legacy Queue/error contract outside durable jobs.
+    try {
+      await env.LEARNING_EVIDENCE_QUEUE.send(envelope,{contentType:'json'});
+      await env.READING_DB.prepare("UPDATE evidence_outbox SET delivery_status = 'enqueued', delivery_attempts = delivery_attempts + 1, last_error_class = '', last_attempt_at = ?, delivered_at = NULL WHERE source_event_id = ?")
+        .bind(isoNow(),sourceEventId).run();
+      return {status:'enqueued'};
+    } catch(error) {
+      await env.READING_DB.prepare("UPDATE evidence_outbox SET delivery_status = 'pending', delivery_attempts = delivery_attempts + 1, last_error_class = ?, last_attempt_at = ? WHERE source_event_id = ?")
+        .bind(clean(error?.name || 'QueueError',80),isoNow(),sourceEventId).run();
+      return {status:'pending'};
+    }
+  }
+  const parent=job?await evaluationEventId(sourceEventId,'queue_request',deliveryKey):null;
+  if(job) await (await sourceEventStatement(env.READING_DB,evaluationEventBase(job),{
+    action:'completion.sync.request',kind:'queue_request',key:deliveryKey,
+    parentId:await evaluationEventId(sourceEventId,'sync_intent'),
+    sourceContext:{phase:'queue_send',retryKind:'receipt',sourceAttemptId:envelope.sourceAttemptId || sourceEventId}})).run();
+  let queueFailed=false;
   try {
     await env.LEARNING_EVIDENCE_QUEUE.send(envelope, { contentType: "json" });
-    await env.READING_DB.prepare(
-      "UPDATE evidence_outbox SET delivery_status = 'enqueued', delivery_attempts = delivery_attempts + 1, last_error_class = '', last_attempt_at = ?, delivered_at = NULL WHERE source_event_id = ?"
-    ).bind(isoNow(), sourceEventId).run();
-    return { status: "enqueued" };
-  } catch (error) {
-    await env.READING_DB.prepare(
+  } catch { queueFailed=true; }
+  const at=isoNow();
+  const update=queueFailed ? env.READING_DB.prepare(
       "UPDATE evidence_outbox SET delivery_status = 'pending', delivery_attempts = delivery_attempts + 1, last_error_class = ?, last_attempt_at = ? WHERE source_event_id = ?"
-    ).bind(clean(error?.name || "QueueError", 80), isoNow(), sourceEventId).run();
-    return { status: "pending" };
-  }
+    ).bind('QueueError',at,sourceEventId) : env.READING_DB.prepare(
+      "UPDATE evidence_outbox SET delivery_status = 'enqueued', delivery_attempts = delivery_attempts + 1, last_error_class = '', last_attempt_at = ?, delivered_at = NULL WHERE source_event_id = ?"
+    ).bind(at,sourceEventId);
+  if(job) await env.READING_DB.batch([update,await sourceEventStatement(env.READING_DB,evaluationEventBase(job),{
+    action:queueFailed?'completion.sync.failure':'completion.sync.request',kind:'queue_outcome',key:deliveryKey,
+    parentId:parent,status:queueFailed?'failed':'pending',at,
+    sourceContext:{phase:queueFailed?'queue_transport_unknown':'queue_enqueued',centralAcceptance:'unconfirmed',
+      sourceAttemptId:envelope.sourceAttemptId || sourceEventId}})]);
+  else await update.run();
+  return {status:queueFailed?'pending':'enqueued'};
 }
 
 export async function recordLearningInteraction({
@@ -1476,6 +1551,9 @@ export async function recordLearningInteraction({
     throw new Error("reserved submission cannot carry a separate source mutation");
   }
   const effectiveOccurredAt = submissionReservation?.occurredAt || occurredAt;
+  const evaluatedAt = submissionReservation?.evaluationReply
+    ? new Date(submissionReservation.evaluationReply.received_at).toISOString() : effectiveOccurredAt;
+  const completedAt = submissionReservation?.evaluationJob ? isoNow() : effectiveOccurredAt;
   const reservedContext = submissionReservation?.context || null;
   const {
     registry,
@@ -1529,7 +1607,8 @@ export async function recordLearningInteraction({
     eligibilityStatus,
     eligibilityReason,
   } = normalizedEvaluation;
-  const versions = evidenceVersions(registry, manifest, definition, formativeManifest);
+  const versions = trustedReservation?.capturedVersions
+    || evidenceVersions(registry, manifest, definition, formativeManifest);
   const summary = publicSummary(manifestItem, lesson, definition);
   const envelope = {
     schema: ENVELOPE_SCHEMA,
@@ -1586,6 +1665,9 @@ export async function recordLearningInteraction({
   };
 
   const statements = [
+    ...(trustedReservation?.evaluationJob ? [env.READING_DB.prepare(
+      "INSERT INTO learning_evaluation_commits(source_event_id,lease_epoch,committed_at) VALUES(?,?,?)"
+    ).bind(sourceEventId, trustedReservation.evaluationJob.lease_epoch, Date.now())] : []),
     ...(!trustedReservation ? [env.READING_DB.prepare(
       `INSERT INTO learning_submission_slots (
          source_event_id, student_id, resource_key, window_start, resource_slot_no, global_slot_no
@@ -1628,8 +1710,14 @@ export async function recordLearningInteraction({
         gap: clean(effectiveEvaluation?.gap, 500),
         nextQuestion: clean(effectiveEvaluation?.nextQuestion, 500),
         eligibilityReason,
+        ...(trustedReservation?.evaluationReply ? {
+          actualModel: trustedReservation.evaluationReply.actual_model,
+          modelVersion: trustedReservation.evaluationReply.model_version,
+          modelVersionStatus: trustedReservation.evaluationReply.version_status,
+          replyRecordId: trustedReservation.evaluationReply.id,
+        } : {}),
       }),
-      effectiveOccurredAt
+      evaluatedAt
     ),
     env.READING_DB.prepare(
       "INSERT INTO evidence_outbox (source_event_id, envelope_json) VALUES (?, ?)"
@@ -1639,8 +1727,27 @@ export async function recordLearningInteraction({
           SET status = 'completed', attempt_count = attempt_count + 1,
               updated_at = ?, completed_at = ?
         WHERE source_event_id = ? AND student_id = ? AND client_mutation_id = ?`
-    ).bind(effectiveOccurredAt, effectiveOccurredAt, sourceEventId, student.id, clientMutationId),
+    ).bind(completedAt, completedAt, sourceEventId, student.id, clientMutationId),
+    ...(trustedReservation?.evaluationJob ? [env.READING_DB.prepare(
+      "UPDATE learning_evaluation_jobs SET state='completed',completed_at=?,lease_until=0 WHERE source_event_id=? AND lease_epoch=?"
+    ).bind(Date.now(), sourceEventId, trustedReservation.evaluationJob.lease_epoch)] : []),
   ];
+  if(trustedReservation?.evaluationJob) {
+    const job=trustedReservation.evaluationJob,reply=trustedReservation.evaluationReply;
+    const parent=await evaluationEventId(sourceEventId,'reply',reply.lease_epoch);
+    const resultId=await evaluationEventId(sourceEventId,'result');
+    const base=evaluationEventBase(job);
+    statements.push(await sourceEventStatement(env.READING_DB,base,{
+      action:'evaluation.result',kind:'result',parentId:parent,status:'succeeded',at:completedAt,
+      content:{authoritativeResult:{numericScore,normalizedValue,correctness,verdict,eligibilityStatus,eligibilityReason},
+        modelSuggestion:{originalJson:reply.answer_text}},
+      sourceContext:{leaseEpoch:job.lease_epoch,jobState:'completed',replyRecordId:reply.id,
+        requestId:reply.request_id,evaluatedAt},assessment:replyAssessment(reply)}));
+    // This records durable delivery intent, not an accepted Queue or UC receipt.
+    statements.push(await sourceEventStatement(env.READING_DB,base,{
+      action:'completion.sync.request',kind:'sync_intent',parentId:resultId,at:completedAt,
+      sourceContext:{jobState:'completed',phase:'outbox_intent',sourceAttemptId:envelope.sourceAttemptId || sourceEventId}}));
+  }
   try {
     await env.READING_DB.batch(statements);
   } catch (error) {
@@ -1799,14 +1906,38 @@ export async function reconcileEvidenceOutbox(env, limit = 50) {
   }
   const attemptIds = [...claimedByAttempt.keys()];
   if (!attemptIds.length) return { checked: 0, receipted: 0 };
+  const pollEvents=new Map();
+  for(const row of claimedRows) {
+    const job=await sourceEventJob(env,row.source_event_id);
+    if(!job) continue;
+    const key=crypto.randomUUID(),base=evaluationEventBase(job);
+    const parent=await evaluationEventId(row.source_event_id,'receipt_request',key);
+    await (await sourceEventStatement(env.READING_DB,base,{
+      action:'completion.sync.request',kind:'receipt_request',key,
+      parentId:await evaluationEventId(row.source_event_id,'sync_intent'),at:pollStartedAt,
+      sourceContext:{phase:'central_receipt_read',retryKind:'receipt',sourceAttemptId:row.source_attempt_id || row.source_event_id}})).run();
+    pollEvents.set(row.source_attempt_id || row.source_event_id,{base,key,parent});
+  }
+  const recordReceiptFailure=async(code,ids=attemptIds)=>{
+    const statements=[];
+    for(const id of ids) {
+      const event=pollEvents.get(id);if(!event) continue;
+      statements.push(await sourceEventStatement(env.READING_DB,event.base,{
+        action:'completion.sync.failure',kind:'receipt_failure',key:event.key,parentId:event.parent,status:'failed',
+        sourceContext:{phase:'central_receipt_read',sourceAttemptId:id,reason:code,centralAcceptance:'unconfirmed'}}));
+    }
+    if(statements.length) await env.READING_DB.batch(statements);
+  };
   let response;
   try {
     response = await env.USER_CENTER_EVIDENCE.getLearningEvidenceDeliveryReceipts(attemptIds);
   } catch {
+    await recordReceiptFailure('receipt_transport_unknown');
     return { checked: attemptIds.length, receipted: 0 };
   }
   const receipts = exactCentralDeliveryReceipt(response, attemptIds);
-  if (!receipts) return { checked: attemptIds.length, receipted: 0 };
+  if (!receipts) {await recordReceiptFailure('receipt_schema_invalid');return { checked: attemptIds.length, receipted: 0 };}
+  await recordReceiptFailure('receipt_not_reported',attemptIds.filter(id=>!receipts.some(r=>r.sourceAttemptId===id)));
   let receipted = 0;
   for (const receipt of receipts) {
     const claimedRow = claimedByAttempt.get(receipt.sourceAttemptId);
@@ -1814,10 +1945,16 @@ export async function reconcileEvidenceOutbox(env, limit = 50) {
     // Health and interaction drains may overlap. Bind the exact observed state
     // so a stale poll cannot rewrite or misreport a newer central decision.
     const currentDisposition = clean(claimedRow.central_disposition, 32) || null;
-    if (currentDisposition === receipt.disposition) continue;
-    if (currentDisposition === "pending_mapping"
-      && !["accepted", "quarantined"].includes(receipt.disposition)) continue;
-    const result = await env.READING_DB.prepare(
+    if (currentDisposition === receipt.disposition || (currentDisposition === "pending_mapping"
+      && !["accepted", "quarantined"].includes(receipt.disposition))) {
+      const event=pollEvents.get(receipt.sourceAttemptId);
+      if(event) await (await sourceEventStatement(env.READING_DB,event.base,{
+        action:'completion.sync.result',kind:'receipt_result',key:event.key,parentId:event.parent,status:'succeeded',
+        sourceContext:{phase:'central_receipt_read',sourceAttemptId:receipt.sourceAttemptId,disposition:receipt.disposition,
+          centralAcceptance:receipt.disposition==='accepted'?'accepted':'not_accepted'}})).run();
+      continue;
+    }
+    const update = env.READING_DB.prepare(
       `UPDATE evidence_outbox
           SET central_disposition = ?, central_receipted_at = ?,
               delivered_at = COALESCE(delivered_at, ?), last_error_class = ''
@@ -1833,7 +1970,18 @@ export async function reconcileEvidenceOutbox(env, limit = 50) {
       currentDisposition,
       currentDisposition,
       receipt.sourceAttemptId,
-    ).run();
+    );
+    const event=pollEvents.get(receipt.sourceAttemptId);
+    let result;
+    if(event) {
+      // A returned receipt is a true observation even if another owner wins
+      // the mutable outbox CAS. It never changes the meaning of that CAS.
+      const results=await env.READING_DB.batch([update,await sourceEventStatement(env.READING_DB,event.base,{
+        action:'completion.sync.result',kind:'receipt_result',key:event.key,parentId:event.parent,status:'succeeded',
+        sourceContext:{phase:'central_receipt_read',sourceAttemptId:receipt.sourceAttemptId,disposition:receipt.disposition,
+          centralAcceptance:receipt.disposition==='accepted'?'accepted':'not_accepted'}})]);
+      result=results[0];
+    } else result=await update.run();
     if (Number(result?.meta?.changes || 0) === 1) receipted += 1;
   }
   return { checked: attemptIds.length, receipted };
@@ -1855,3 +2003,41 @@ export const learningEvidenceContract = Object.freeze({
   submissionReservationLeaseSeconds: SUBMISSION_RESERVATION_LEASE_SECONDS,
   evaluatorFailureCooldownSeconds: EVALUATOR_FAILURE_COOLDOWN_SECONDS,
 });
+
+export function snapshotEvaluationReservation(reservation) {
+  if (!trustedSubmissionReservations.has(reservation)) throw new Error('untrusted reservation snapshot');
+  const { registry,manifest,definition,formativeManifest,...context }=reservation.context;
+  return {...reservation, capturedVersions:evidenceVersions(registry,manifest,definition,formativeManifest),
+    context:{...context,definition,formativeManifest:{manifestVersion:formativeManifest?.manifestVersion}}};
+}
+export async function restoreEvaluationReservation(env,job) {
+  const current=await loadEvaluationJob(env.READING_DB,job.source_event_id);
+  if(!current || current.state!=='leased' || current.lease_epoch!==job.lease_epoch
+    || current.lease_until<Date.now()) throw new Error('evaluation lease unavailable');
+  const snapshot=JSON.parse(current.snapshot_json);
+  if(snapshot.schema!=='yw-evaluation-snapshot-v1' || snapshot.reservation.sourceEventId!==current.source_event_id
+    || snapshot.reservation.studentId!==current.student_id || snapshot.completion.student.id!==current.student_id
+    || snapshot.reservation.resourceKey!==current.resource_key) throw new Error('evaluation snapshot invalid');
+  const reservation={...snapshot.reservation,evaluationJob:current};
+  trustedSubmissionReservations.add(reservation);
+  return {snapshot,reservation};
+}
+
+export async function ownedEvaluationStatus(env,student,{pendingId='',clientMutationId=''}) {
+  if(!student?.id) return null;
+  const row=await env.READING_DB.prepare(`SELECT j.*,p.client_mutation_id,p.interaction_key
+    FROM learning_evaluation_jobs j JOIN learning_pending_submissions p USING(source_event_id)
+    WHERE j.student_id=? AND ${pendingId?'j.source_event_id':'p.client_mutation_id'}=?`)
+    .bind(Number(student.id),pendingId||clientMutationId).first();
+  if(!row) return null;
+  if(row.state!=='completed') return {job:row};
+  const existing=await existingInteraction(env.READING_DB,student.id,row.client_mutation_id);
+  if(!existing) throw new Error('completed evaluation source record missing');
+  const result=dedupedInteractionResult(existing);
+  return {completed:{ok:true,status:'completed',pendingId:row.source_event_id,
+    provider:result.evaluation.provider,assessment:result.evaluation,
+    passed:result.eligibilityStatus==='eligible' && Number(result.evaluation.score)>=60,
+    evidence:{status:result.eligibilityStatus==='ineligible'?'already_recorded_ineligible':'already_recorded',
+      delivery:result.delivery,sourceEventId:row.source_event_id,attemptNo:result.attemptNo,
+      eligibilityStatus:result.eligibilityStatus},deduped:true}};
+}

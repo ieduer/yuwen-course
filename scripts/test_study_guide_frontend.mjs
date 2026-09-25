@@ -53,8 +53,9 @@ function interactionHarness(fetchImpl, {
   clearTimeoutImpl = globalThis.clearTimeout,
   interactionKey = "structure",
   initialInput = null,
+  legacyBody = null,
 } = {}) {
-  const body = section("function learningSubmissionRetryMessage", "async function saveReadingSubmission");
+  const body = legacyBody || section("function learningSubmissionRetryMessage", "async function saveReadingSubmission");
   const deps = {
     state: {
       current: { id: "lesson-a" },
@@ -90,7 +91,7 @@ function interactionHarness(fetchImpl, {
      const setTimeout = deps.setTimeout;
      const clearTimeout = deps.clearTimeout;
      const fetch = deps.fetch;
-     const interactionEvidenceDecision = () => ({ accepted: true, completed: true, evidenceStatus: "recorded" });
+     ${legacyBody ? '' : 'const interactionEvidenceDecision = () => ({ accepted: true, completed: true, evidenceStatus: "recorded" });'}
      const lessonVocabulary = () => [];
      const saveReadingSubmission = async () => {};
      const trackFor = () => [[deps.interactionKey === "contextWords" ? "context" : deps.interactionKey, "互動"]];
@@ -972,4 +973,25 @@ test("formal vocabulary timeout covers a response body that never finishes", asy
   assert.equal(bodyAborts, 1);
   assert.equal(result.ok, false);
   assert.equal(result.code, "vocabulary_attempt_timeout");
+});
+
+test('202 pending preserves the submitted answer and mutation without fabricating completion',async()=>{
+  const h=interactionHarness(async()=>Response.json({ok:false,status:'pending',code:'learning_evaluation_pending',pendingId:'opaque-fixture',saved:true,assessment:null,error:'答案已保存，評閱稍後補上',retryAfterSeconds:60},{status:202}));
+  await h.submit('structure');
+  const record=h.deps.state.progress['lesson-a'].structure;
+  assert.equal(record.pendingSubmission.clientMutationId,'mutation-1');
+  assert.equal(record.pendingSubmission.pendingId,'opaque-fixture');
+  assert.equal(record.evaluationPending,true);
+  assert.notEqual(record.completed,true);
+  assert.equal(record.assessment,undefined);
+});
+
+test('accepted legacy web client receiving 202 retains its mutation and answer without scoring',async()=>{
+  const legacyBody=await readFile(new URL('./fixtures/legacy-interaction-client-ffa3689.js.txt',import.meta.url),'utf8');
+  const h=interactionHarness(async()=>Response.json({ok:false,status:'pending',code:'learning_evaluation_pending',pendingId:'opaque-fixture',saved:true,assessment:null},{status:202}),{legacyBody});
+  await h.submit('structure');
+  const record=h.deps.state.progress['lesson-a'].structure;
+  assert.equal(record.pendingSubmission.clientMutationId,'mutation-1');
+  assert.notEqual(record.completed,true);assert.equal(record.assessment,undefined);
+  assert.equal(h.deps.calls.synced,0);
 });
