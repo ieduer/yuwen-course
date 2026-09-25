@@ -1637,7 +1637,7 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
 // Fixed server-owned validation window; callers cannot select a Worker version.
 export function readinessApisVersion(now = Date.now()) {
   return now < Date.parse("2026-09-25T16:00:00.000Z")
-    ? "11eabd6c-b092-4267-97cf-f4782bfdb47c" : "";
+    ? "ac0d0697-9611-4713-86f4-42fa6e8a13aa" : "";
 }
 
 async function handleAiReadiness(request, env) {
