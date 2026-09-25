@@ -37,6 +37,7 @@ import worker, {
   loadFormalInteractionConversation,
   normalizeFormalInteractionConversationRows,
   preActivationTransportLessonPhase,
+  readinessApisVersion,
 } from "../site/_worker.js";
 
 const ROOT = resolve(import.meta.dirname, "..");
@@ -1868,9 +1869,23 @@ test("authenticated AI readiness proves the YW caller without writing learning d
   assert.equal(bindingRequests[0].headers.get("x-internal-token"), "fixture-token");
   assert.deepEqual(await bindingRequests[0].json(), {
     prompt: "這是語文課程 AI 可用性檢查。只回覆 READY，不要提供課程內容。",
-    taskType: "chat",
-    thinkingLevel: "low",
+    taskType: readinessApisVersion() ? "feedback" : "chat",
+    thinkingLevel: readinessApisVersion() ? "medium" : "low",
   });
+  assert.equal(bindingRequests[0].headers.get("Cloudflare-Workers-Version-Overrides"),
+    readinessApisVersion() ? `apis="${readinessApisVersion()}"` : null);
+  assert.equal(readinessApisVersion(Date.parse("2026-09-25T15:59:59Z")), "11eabd6c-b092-4267-97cf-f4782bfdb47c");
+  assert.equal(readinessApisVersion(Date.parse("2026-09-25T16:00:00Z")), "");
+  if (readinessApisVersion()) {
+    const page = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/ai-readiness", {
+      headers: { cookie: "bdfz_uc_session=ai-readiness-fixture" },
+    }), env);
+    assert.equal(page.status, 200);
+    assert.match(page.headers.get("cache-control"), /no-store/);
+    assert.match(page.headers.get("content-security-policy"), /frame-ancestors 'none'/);
+    assert.match(await page.text(), /執行一次驗證/);
+    assert.equal(bindingRequests.length, 1, "GET must never call the provider");
+  }
 
   const missingOrigin = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/ai-readiness", {
     method: "POST",

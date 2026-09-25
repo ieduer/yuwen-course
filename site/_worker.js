@@ -108,6 +108,9 @@ export default {
       if (ctx?.waitUntil) ctx.waitUntil(drainEvidenceOutbox(env, 50));
       return handleLearningEvidenceHealth(env);
     }
+    if (url.pathname === "/api/learning/ai-readiness" && request.method === "GET" && readinessApisVersion()) {
+      return handleAiReadiness(request, env);
+    }
     if (url.pathname === "/api/learning/ai-readiness" && request.method === "POST") {
       const rejected = authenticatedMutationRequestRejection(request);
       if (rejected) return rejected;
@@ -1605,6 +1608,7 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
         "x-thinking-level": thinkingLevel,
         "x-internal-token": callerToken,
         ...(options.requestId ? { "x-request-id": options.requestId } : {}),
+        ...(options.versionOverride ? { "Cloudflare-Workers-Version-Overrides": `apis="${options.versionOverride}"` } : {}),
       },
       body: JSON.stringify({ prompt, taskType, thinkingLevel }),
       signal: controller.signal,
@@ -1630,6 +1634,12 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
   }
 }
 
+// Fixed server-owned validation window; callers cannot select a Worker version.
+export function readinessApisVersion(now = Date.now()) {
+  return now < Date.parse("2026-09-25T16:00:00.000Z")
+    ? "11eabd6c-b092-4267-97cf-f4782bfdb47c" : "";
+}
+
 async function handleAiReadiness(request, env) {
   let user;
   try {
@@ -1639,12 +1649,26 @@ async function handleAiReadiness(request, env) {
     throw error;
   }
   if (!user) return authenticatedEvaluationRequiredResponse();
+  const versionOverride = readinessApisVersion();
+  if (request.method === "GET") {
+    if (!versionOverride) return new Response("Not found", { status: 404 });
+    const nonce = crypto.randomUUID();
+    return new Response(`<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><title>語文課服務驗證</title><h1>語文課服務驗證</h1><p>使用固定測試句，不讀取或寫入學習紀錄。入口於 2026-09-26 00:00（北京）到期。</p><button id="run">執行一次驗證</button><pre id="result">尚未執行</pre><script nonce="${nonce}">document.getElementById('run').onclick=async()=>{document.getElementById('run').disabled=true;const out=document.getElementById('result');out.textContent='驗證中';try{const r=await fetch('/api/learning/ai-readiness',{method:'POST',headers:{'content-type':'application/json'},body:'{}'});out.textContent=JSON.stringify({status:r.status,...await r.json()});}catch{out.textContent='驗證結果未確認；請勿重送';}};</script></html>`, {
+      headers: {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-store",
+        "content-security-policy": `default-src 'none'; script-src 'nonce-${nonce}'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'`,
+        "x-content-type-options": "nosniff",
+      },
+    });
+  }
   try {
     await callApisPrompt(
       env,
       "這是語文課程 AI 可用性檢查。只回覆 READY，不要提供課程內容。",
-      "chat",
-      "low",
+      versionOverride ? "feedback" : "chat",
+      versionOverride ? "medium" : "low",
+      versionOverride ? { versionOverride, requestId: `yw-readiness-${crypto.randomUUID()}` } : {},
     );
     return json({ ok: true, provider: "apis", ready: true });
   } catch {
