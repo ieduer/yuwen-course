@@ -1,3 +1,35 @@
+## 2026-09-25 — P11 bounded evidence replay prepared
+
+The owner decided on 2026-09-24 ("全部授權"):
+- replay the 75 events labelled 2026-2027, which User Center's old `occurredAt` check quarantined by mistake;
+- replay the 275 events labelled 2025-2026 (work from 2026-08-21 to 08-25) as 2026-2027 evidence;
+- delete nothing: User Center quarantine rows and every prior outbox envelope stay.
+
+User Center treats a quarantined attempt as terminal and requires `sourceAttemptId === sourceEventId` for YW event-v2. Each replay therefore gives the same outbox row one new deterministic attempt (`scripts/learning_evidence_replay.mjs`). The rest of the envelope is handled as follows:
+- `sourcePayloadRef` keeps pointing at the original `learning_interactions` row;
+- `occurredAt` and the learner's `attemptNo` are unchanged;
+- no supersession is used, because it would stall the new attempt in `pending_mapping`.
+
+Reconciliation now asks User Center for receipts by the envelope `sourceAttemptId`, falling back to `source_event_id`, and applies a receipt only to the row that still carries that attempt. For ordinary rows this is identical to before. For a replayed row, the old terminal receipt can no longer re-quarantine it.
+
+Additive migration `0008_learning_evidence_replay_ledger.sql` adds `evidence_replay_ledger`:
+- it archives the exact prior envelope and delivery state before the new attempt is written;
+- its primary key makes the replay idempotent.
+
+The operator executes an exact reviewed plan (350 = 275 + 75, one D1 batch per row) with a guarded dry run. It is never a public route. Delivery uses the existing `/api/learning/health` drain and User Center's hourly probe. Runtime tables, health contract `reading-schema-v6`, bindings, Queue, App content and native pointer are unchanged.
+
+Local proof, real code only:
+- 93/93 evidence contract tests, including the replay suite;
+- an end-to-end run of the real replay executor, the YW drain and User Center `94197b6` consumer, receipts and credit derivation on production-identical schemas;
+- result: 350/350 accepted (275 + 75), redelivery idempotent, old attempts still quarantined;
+- credits equal before ∪ replayed units exactly.
+
+Release, migration, run and acceptance are recorded in `/Users/ylsuen/CF/reports/operations/yw-evidence-replay-20260924/`.
+
+Rollback:
+- code: Pages `cf2c9943-92a9-4157-9321-3aaa6f8b7c82`;
+- data: the ledger archives every prior envelope, and the pre-run D1 Time Travel bookmarks are recorded in that report.
+
 ## 2026-09-21 16:13 UTC — foreground continuation release accepted within scope
 
 Production Pagescf2c9943-92a9-4157-9321-3aaa6f8b7c82, runtime sourcef817be5a91d99049f514cc4929359d2221da34e8, executorb388f07fc51930b95bdeb3cfd54eba6ad42c8984, formal artifact3e8d46f1653d552371a7d5f5b5631614cc6e833ceb2b5586d677090803aeb492.
