@@ -1,4 +1,6 @@
 -- Additive, private source records. Never delete these tables on rollback.
+-- Use trigger WHEN instead of unparenthesized CASE/END: remote D1 query
+-- splitting differs from local SQLite (cloudflare/workers-sdk#4727).
 CREATE TABLE learning_evaluation_jobs (
  source_event_id TEXT PRIMARY KEY REFERENCES learning_pending_submissions(source_event_id),
  student_id INTEGER NOT NULL,
@@ -32,11 +34,12 @@ CREATE TABLE learning_evaluation_commits (
  committed_at INTEGER NOT NULL
 );
 CREATE TRIGGER learning_evaluation_commit_fence BEFORE INSERT ON learning_evaluation_commits
-BEGIN
- SELECT CASE WHEN NOT EXISTS (
+WHEN NOT EXISTS (
   SELECT 1 FROM learning_evaluation_jobs j WHERE j.source_event_id=NEW.source_event_id
    AND j.state='leased' AND j.lease_epoch=NEW.lease_epoch AND j.lease_until>=NEW.committed_at
- ) THEN RAISE(ABORT,'evaluation lease expired') END;
+ )
+BEGIN
+ SELECT RAISE(ABORT,'evaluation lease expired');
 END;
 CREATE TABLE learning_evaluation_scheduler (
  id INTEGER PRIMARY KEY CHECK(id=1), lease_until INTEGER NOT NULL DEFAULT 0,
@@ -83,11 +86,11 @@ CREATE TABLE learning_evaluation_events (
 );
 CREATE INDEX learning_evaluation_events_source ON learning_evaluation_events(source_event_id,action);
 CREATE TRIGGER learning_event_conflict BEFORE INSERT ON learning_evaluation_events
-BEGIN
- SELECT CASE WHEN EXISTS (SELECT 1 FROM learning_evaluation_events e WHERE e.event_id=NEW.event_id
+WHEN EXISTS (SELECT 1 FROM learning_evaluation_events e WHERE e.event_id=NEW.event_id
   AND (e.payload_sha256!=NEW.payload_sha256 OR e.payload_json!=NEW.payload_json
    OR e.student_id!=NEW.student_id OR e.source_event_id!=NEW.source_event_id))
- THEN RAISE(ABORT,'immutable learning event conflict') END;
+BEGIN
+ SELECT RAISE(ABORT,'immutable learning event conflict');
 END;
 CREATE TRIGGER learning_event_no_update BEFORE UPDATE ON learning_evaluation_events
 BEGIN
