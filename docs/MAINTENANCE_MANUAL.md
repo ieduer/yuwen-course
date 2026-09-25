@@ -1,3 +1,7 @@
+## 2026-09-25 — second bounded APIS repair validation candidate
+
+Advance only the existing fixed readiness pin to APIS ac0d0697-9611-4713-86f4-42fa6e8a13aa / sourceae08fd30b96a59c0e53771863e3a646fb41b6002; expiry remains2026-09-25T16:00Z. Preserve accepted YW522edfd/Pages8950948e and P11. The first APIS batch stopped at11/12 after an actual503; no samples are replaced. Owner explicitly authorized a separate new batch of at most12 synthetic requests, all successful, max2provider attempts and under21s, across1/5/25/100 stages; first failure stops without replacement. Authentication, no-learning-write behavior, App content and original post-expiry behavior are unchanged. Evidence: /Users/ylsuen/CF/reports/operations/yw-http503-20260925/revision2/.
+
 ## 2026-09-25 — bounded APIS repair validation prepared
 
 User authorized at most12 synthetic requests across1/5/25/100 percent APIS stages. Existing authenticated AI-readiness route targets candidate11eabd6c-b092-4267-97cf-f4782bfdb47c as feedback until2026-09-25T16:00Z; a temporary authenticated GET page permits one explicit request per load. No student content, learning write, quota change, client-selected version, or App change. After expiry the existing POST resumes ordinary chat behavior and GET is unavailable. Preserve accepted P11 source23bd13d. Release/acceptance pending; authority and evidence: /Users/ylsuen/CF/reports/operations/yw-http503-20260925/. Web-only compatible-no-client-release.
