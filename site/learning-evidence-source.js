@@ -1713,7 +1713,12 @@ export async function retryPendingEvidence(env, limit = 10) {
 const CENTRAL_RECEIPT_SCHEMA = "bdfz-learning-evidence-delivery-receipts-v1";
 const CENTRAL_RECEIPT_DISPOSITIONS = new Set(["accepted", "pending_mapping", "quarantined"]);
 
-export const OUTBOX_RECONCILE_SELECTION_SQL = `SELECT source_event_id, central_disposition, central_receipted_at FROM evidence_outbox
+// Central receipts are keyed by the envelope's source-owned attempt. For every
+// ordinary row that attempt is the original source_event_id; a bounded replay
+// (evidence_replay_ledger) gives the same outbox row one new attempt.
+export const OUTBOX_RECONCILE_SELECTION_SQL = `SELECT source_event_id,
+    COALESCE(json_extract(envelope_json, '$.sourceAttemptId'), source_event_id) AS source_attempt_id,
+    central_disposition, central_receipted_at FROM evidence_outbox
   WHERE (central_disposition IS NULL OR central_disposition = 'pending_mapping')
     AND json_extract(envelope_json, '$.schema') = '${ENVELOPE_SCHEMA}'
     AND json_extract(envelope_json, '$.contractVersion') = '${CURRENT_A_PLUS_CONTRACT_VERSION}'
@@ -1787,9 +1792,12 @@ export async function reconcileEvidenceOutbox(env, limit = 50) {
     return { checked: 0, receipted: 0 };
   }
   const claimedRows = candidates.filter((_row, index) => Number(claims?.[index]?.meta?.changes || 0) === 1);
-  const attemptIds = [...new Set(claimedRows
-    .map((row) => clean(row.source_event_id, 100))
-    .filter(Boolean))];
+  const claimedByAttempt = new Map();
+  for (const row of claimedRows) {
+    const attemptId = clean(row.source_attempt_id || row.source_event_id, 100);
+    if (attemptId && !claimedByAttempt.has(attemptId)) claimedByAttempt.set(attemptId, row);
+  }
+  const attemptIds = [...claimedByAttempt.keys()];
   if (!attemptIds.length) return { checked: 0, receipted: 0 };
   let response;
   try {
@@ -1799,15 +1807,13 @@ export async function reconcileEvidenceOutbox(env, limit = 50) {
   }
   const receipts = exactCentralDeliveryReceipt(response, attemptIds);
   if (!receipts) return { checked: attemptIds.length, receipted: 0 };
-  const currentDispositions = new Map(claimedRows.map((row) => [
-    clean(row.source_event_id, 100),
-    clean(row.central_disposition, 32),
-  ]));
   let receipted = 0;
   for (const receipt of receipts) {
+    const claimedRow = claimedByAttempt.get(receipt.sourceAttemptId);
+    if (!claimedRow) continue;
     // Health and interaction drains may overlap. Bind the exact observed state
     // so a stale poll cannot rewrite or misreport a newer central decision.
-    const currentDisposition = currentDispositions.get(receipt.sourceAttemptId) || null;
+    const currentDisposition = clean(claimedRow.central_disposition, 32) || null;
     if (currentDisposition === receipt.disposition) continue;
     if (currentDisposition === "pending_mapping"
       && !["accepted", "quarantined"].includes(receipt.disposition)) continue;
@@ -1817,14 +1823,16 @@ export async function reconcileEvidenceOutbox(env, limit = 50) {
               delivered_at = COALESCE(delivered_at, ?), last_error_class = ''
         WHERE source_event_id = ?
           AND ((? IS NULL AND central_disposition IS NULL) OR central_disposition = ?)
-          AND delivery_status IN ('pending', 'enqueued')`
+          AND delivery_status IN ('pending', 'enqueued')
+          AND COALESCE(json_extract(envelope_json, '$.sourceAttemptId'), source_event_id) = ?`
     ).bind(
       receipt.disposition,
       isoNow(),
       isoNow(),
+      clean(claimedRow.source_event_id, 100),
+      currentDisposition,
+      currentDisposition,
       receipt.sourceAttemptId,
-      currentDisposition,
-      currentDisposition,
     ).run();
     if (Number(result?.meta?.changes || 0) === 1) receipted += 1;
   }
@@ -1839,6 +1847,7 @@ export async function drainEvidenceOutbox(env, limit = 50) {
 
 export const learningEvidenceContract = Object.freeze({
   envelopeSchema: ENVELOPE_SCHEMA,
+  contractVersion: CURRENT_A_PLUS_CONTRACT_VERSION,
   sourceSystem: SOURCE_SYSTEM,
   sourceSiteKey: SOURCE_SITE_KEY,
   submissionRateLimit: SUBMISSION_RATE_LIMIT,
