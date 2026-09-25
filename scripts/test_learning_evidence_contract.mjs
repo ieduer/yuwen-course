@@ -1926,18 +1926,14 @@ test("authenticated AI readiness proves the YW caller without writing learning d
   });
   assert.equal(bindingRequests[0].headers.get("Cloudflare-Workers-Version-Overrides"),
     readinessApisVersion() ? `apis="${readinessApisVersion()}"` : null);
-  assert.equal(readinessApisVersion(Date.parse("2026-09-25T15:59:59Z")), "ac0d0697-9611-4713-86f4-42fa6e8a13aa");
+  assert.equal(readinessApisVersion(Date.parse("2026-09-25T15:59:59Z")), "");
   assert.equal(readinessApisVersion(Date.parse("2026-09-25T16:00:00Z")), "");
-  if (readinessApisVersion()) {
-    const page = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/ai-readiness", {
-      headers: { cookie: "bdfz_uc_session=ai-readiness-fixture" },
-    }), env);
-    assert.equal(page.status, 200);
-    assert.match(page.headers.get("cache-control"), /no-store/);
-    assert.match(page.headers.get("content-security-policy"), /frame-ancestors 'none'/);
-    assert.match(await page.text(), /執行一次驗證/);
-    assert.equal(bindingRequests.length, 1, "GET must never call the provider");
-  }
+  const page = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/ai-readiness", {
+    headers: { cookie: "bdfz_uc_session=ai-readiness-fixture" },
+  }), env);
+  assert.equal(page.status, 404, "terminal validation GET stays unavailable");
+  assert.equal(bindingRequests.length, 1, "GET must never call the provider");
+
 
   const missingOrigin = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/ai-readiness", {
     method: "POST",

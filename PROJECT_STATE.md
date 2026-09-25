@@ -1,3 +1,21 @@
+## 2026-09-25 — PR59 serial release preparation and retired validation pin
+
+User authorized PR59 at original head 9ffda372. Integrated current main PR60;
+its b212a93a validation batch is terminal and the pin is now disabled at every
+time. Authenticated GET returns 404; ordinary authenticated POST retains the
+original chat/low path, admission and quota behavior. No validation batch is
+replayed, extended, or replaced. APIS and Recite publication remain separately owned.
+
+Observed live baseline is Pages a8d33941 / source e4705fe; prior accepted registry
+source remains 522edfd. The baseline is not retrospectively accepted. Release
+uses the existing v2 publisher, a new exact artifact and one-use journal; rollback
+preserves forward D1/Queue evidence. PR59 deterministically checks 111 complete
+string answers plus reviewed aliases without model calls. Catalog, resource
+versions, App content, scoring thresholds and historical records remain unchanged.
+
+Current release and signed-in readback evidence:
+`/Users/ylsuen/CF/reports/operations/yw-pr59-release-20260925/REPORT.md`.
+
 ## 2026-09-25 — study-guide concise-answer candidate
 
 The screenshot answer 大人之學 now matches a server-owned reviewed gloss key;
@@ -14,6 +32,10 @@ Catalog, semantic resource revisions, App content, history and scoring threshold
 are unchanged. Production release and live acceptance remain pending coordination
 with the existing YW/APIS incident publisher; do not mix into its bounded canary.
 Report: `/Users/ylsuen/CF/reports/operations/yw-study-guide-20260925/REPORT.md`.
+
+## 2026-09-25 integrated APIS readiness pin — pending publication
+
+The owner transferred APIS release ownership to task20260925-recite-repair, approved integration preserving YW ae08fd3, and authorized at most six model-bearing synthetic requests across YW and Recite. This source changes only the existing server-owned readiness pin from ac0d0697 to integrated b212a93a; the16:00Z expiry, authentication, fixed prompt, no-learning-write behavior, lesson content and App remain unchanged. Three YW readiness samples are planned; no previous candidate sample is reused. Exact report and source-bound qualification: /Users/ylsuen/CF/reports/operations/recite-repair-20260925/. Accepted existing features and the pending study-guide PR59 are preserved; PR59 is not included or implicitly published here.
 
 ## 2026-09-25 — second bounded APIS repair validation candidate
 
