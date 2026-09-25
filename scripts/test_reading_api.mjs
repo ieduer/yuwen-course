@@ -24,6 +24,7 @@ for (const file of [
   "reading-identity-source.js",
   "study-guide-assessment.js",
   "evaluator-recovery.js",
+  "durable-evaluation-jobs.js",
   "data/interaction-definitions.json",
   "data/learning-manifest.json",
   "data/lesson-competency-manifest.json",

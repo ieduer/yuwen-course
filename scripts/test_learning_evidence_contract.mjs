@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { claimEvaluationJob, loadEvaluationJob, createEvaluationJob, evaluationBacklog,
+  deferEvaluationJob, saveEvaluationReply, reportEvaluationBacklog, drainEvaluationJobs } from '../site/durable-evaluation-jobs.js';
 
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -38,6 +40,8 @@ import worker, {
   normalizeFormalInteractionConversationRows,
   preActivationTransportLessonPhase,
   readinessApisVersion,
+  completeDurableEvaluationJob,
+  runDurableEvaluationScheduler,
 } from "../site/_worker.js";
 
 const ROOT = resolve(import.meta.dirname, "..");
@@ -388,6 +392,7 @@ function initializeLearningContractDb(db) {
     "migrations/0005_learning_evidence_central_receipts.sql",
     "migrations/0006_learning_evaluator_call_ledger.sql",
     "migrations/0007_learning_pending_submissions.sql",
+    "migrations/0009_durable_evaluation_jobs.sql",
   ]) {
     db.exec(readFileSync(resolve(ROOT, migration), "utf8"));
   }
@@ -1516,7 +1521,7 @@ test("the Worker checks the per-user resource bound before AI work and vocabular
   );
   assert.ok(
     interactionHandler.indexOf("assertLearningSubmissionAllowed") <
-      interactionHandler.indexOf('callLearningEvaluator(request, env, submissionGuard.submissionReservation, prompt)'),
+      interactionHandler.indexOf('callLearningEvaluator(request, env, submissionGuard.submissionReservation, prompt,'),
   );
   assert.match(interactionHandler, /if \(!student\) return authenticatedEvaluationRequiredResponse\(\)/);
   assert.match(interactionHandler, /submissionReservation: submissionGuard\.submissionReservation/);
@@ -4323,4 +4328,263 @@ test("study-guide transient recovery counts both calls and records the captured 
     assert.equal(requests.length,2);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions WHERE interaction_key='studyGuideItemCompleted'").get().n,1);
   } finally { db.close(); }
+});
+
+function durableFixture(provider) {
+  const db=new DatabaseSync(':memory:'); initializeLearningContractDb(db);
+  const source=sourceEnvironment();source.env.READING_DB=sqliteD1(db);
+  Object.assign(source.env,{READING_TEST_SLUG:'lease-test-student',YW_DURABLE_EVALUATION_ENABLED:'true',YW_BACKGROUND_EVALUATION_ENABLED:'true'});
+  const calls=[];source.env.APIS.fetch=async request=>{calls.push(await request.json());return provider(calls.length);};
+  const body={lessonId:lesson.id,interaction:'structure',input:{reason:'我從兩處具體字句比較前後照應與結構推進，保留這份原始提交。'},clientMutationId:'durable-fixture'};
+  const request=()=>new Request('https://yw.bdfz.net/api/interaction-check',{method:'POST',headers:YW_WEB_JSON_HEADERS,body:JSON.stringify(body)});
+  return {db,source,calls,body,request};
+}
+const durableReply=()=>Response.json({answer:JSON.stringify({score:85,verdict:'合成評閱',strength:'有證據',gap:'可補充',nextQuestion:'哪一句？'}),model:'gemini-3.5-flash-lite',raw_response:{modelVersion:'gemini-3.5-flash-lite-001'},requestId:'synthetic-gateway-id'});
+
+test('durable pending saves input before 202; repeat and resume spend no model calls; background journals and commits exactly once',async()=>{
+  const f=durableFixture(n=>n===1?Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}):durableReply());
+  try {
+    const first=await worker.fetch(f.request(),f.source.env,{}),body=await first.json();
+    assert.equal(first.status,202,JSON.stringify(body));assert.equal(body.saved,true);assert.equal(body.assessment,null);
+    assert.equal(f.calls.length,1);assert.equal(f.calls[0].contents[0].parts[0].text.includes(f.body.input.reason),true);
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,0);
+    assert.equal(JSON.parse(f.db.prepare('SELECT raw_payload_json FROM learning_pending_submissions').get().raw_payload_json).reason,f.body.input.reason);
+    const duplicate=await worker.fetch(f.request(),f.source.env,{});assert.equal(duplicate.status,202);assert.equal((await duplicate.json()).pendingId,body.pendingId);assert.equal(f.calls.length,1);
+    const resume=await worker.fetch(new Request('https://yw.bdfz.net/api/learning/pending-interactions/resume',{method:'POST',headers:YW_WEB_JSON_HEADERS,body:JSON.stringify({clientMutationId:f.body.clientMutationId})}),f.source.env,{});
+    assert.equal(resume.status,202);assert.equal(f.calls.length,1);
+    f.db.prepare("UPDATE learning_evaluation_jobs SET next_attempt_at=0").run();
+    const job=await claimEvaluationJob(f.source.env.READING_DB,body.pendingId);assert.ok(job);
+    await completeDurableEvaluationJob(f.source.env,job);
+    assert.equal(f.calls.length,2);
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluator_calls').get().n,2);
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,1);
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM evidence_outbox').get().n,1);
+    const reply=f.db.prepare('SELECT * FROM learning_evaluation_replies').get();assert.match(reply.answer_text,/合成評閱/);assert.equal(reply.actual_model,'gemini-3.5-flash-lite');assert.equal(reply.model_version,'gemini-3.5-flash-lite-001');
+    assert.equal(f.db.prepare('SELECT eligibility_status FROM learning_evaluations').get().eligibility_status,'eligible');
+    const evaluation=JSON.parse(f.db.prepare('SELECT evaluation_json FROM learning_evaluations').get().evaluation_json);assert.equal(evaluation.modelVersion,reply.model_version);assert.equal(evaluation.replyRecordId,reply.id);
+    assert.equal(f.db.prepare('SELECT state FROM learning_evaluation_jobs').get().state,'completed');
+    const status=await worker.fetch(new Request('https://yw.bdfz.net/api/learning/pending-interactions?pendingId='+body.pendingId),f.source.env,{});
+    assert.equal(status.status,200);assert.equal((await status.json()).assessment.score,85);
+    assert.equal((await worker.fetch(f.request(),f.source.env,{})).status,200);assert.equal(f.calls.length,2);
+  } finally {f.db.close();}
+});
+
+test('successful foreground AI reply is durable with provenance before score commit; an expired owner cannot score',async()=>{
+  const f=durableFixture(durableReply);
+  try {
+    const response=await worker.fetch(f.request(),f.source.env,{});assert.equal(response.status,200,await response.clone().text());
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluation_replies').get().n,1);
+    const job=f.db.prepare('SELECT * FROM learning_evaluation_jobs').get();
+    await assert.rejects(completeDurableEvaluationJob(f.source.env,job),/lease unavailable/);
+    assert.equal(f.calls.length,1);assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,1);
+  } finally {f.db.close();}
+});
+
+test('invalid AI reply is kept as a learning source record and blocked without a fabricated score',async()=>{
+  const f=durableFixture(()=>Response.json({answer:'complete unparseable synthetic reply',model:'gemini-3.5-flash-lite'}));
+  try {
+    const r=await worker.fetch(f.request(),f.source.env,{});assert.equal(r.status,202,await r.clone().text());
+    assert.equal(f.db.prepare('SELECT state FROM learning_evaluation_jobs').get().state,'blocked');
+    assert.equal(f.db.prepare('SELECT answer_text FROM learning_evaluation_replies').get().answer_text,'complete unparseable synthetic reply');
+    assert.equal(f.db.prepare('SELECT version_status FROM learning_evaluation_replies').get().version_status,'unavailable');
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
+    await runDurableEvaluationScheduler(f.source.env);assert.equal(f.calls.length,1);
+  } finally {f.db.close();}
+});
+
+test('automatic calls are lifetime bounded across quota windows; backlog age never resets',async(t)=>{
+  t.mock.timers.enable({apis:['Date'],now:Date.now()});
+  const f=durableFixture(()=>Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}));
+  try {
+    const response=await worker.fetch(f.request(),f.source.env,{}),id=(await response.json()).pendingId;
+    for(let i=0;i<4;i++) {
+      t.mock.timers.tick(660000);
+      f.db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
+      const job=await claimEvaluationJob(f.source.env.READING_DB,id);if(!job)break;
+      try{await completeDurableEvaluationJob(f.source.env,job);}catch(error){await deferEvaluationJob(f.source.env.READING_DB,job,error);}
+    }
+    assert.equal(f.calls.length,4);assert.equal(f.db.prepare('SELECT state FROM learning_evaluation_jobs').get().state,'blocked');
+    const first=f.db.prepare('SELECT first_pending_at FROM learning_evaluation_jobs').get().first_pending_at;
+    const health=await evaluationBacklog(f.source.env.READING_DB,first+3601000);
+    assert.equal(health.pending_count,1);assert.equal(health.oldest_pending_age_seconds,3601);assert.equal(health.blocked_count,1);assert.equal(health.severity,'critical');
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluator_calls').get().n,4);
+  } finally {f.db.close();}
+});
+
+test('accepted original input is retained before normalization and changed suffix cannot reuse its mutation',async()=>{
+  const f=durableFixture(()=>Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}));
+  try {
+    f.body.input.reason='  '+ '甲'.repeat(3100)+'乙  ';
+    const r=await worker.fetch(f.request(),f.source.env,{});assert.equal(r.status,202,await r.clone().text());
+    const saved=JSON.parse(f.db.prepare('SELECT submitted_payload_json FROM learning_submission_records').get().submitted_payload_json);
+    assert.equal(saved.reason,f.body.input.reason);
+    f.body.input.reason=f.body.input.reason.replace('乙','丙');
+    assert.equal((await worker.fetch(f.request(),f.source.env,{})).status,409);assert.equal(f.calls.length,1);
+  }finally{f.db.close();}
+});
+
+test('failure to atomically save original input cannot acknowledge 202 or call a model',async()=>{
+  const f=durableFixture(durableReply);
+  try {
+    const original=f.source.env.READING_DB.batch;
+    f.source.env.READING_DB.batch=async statements=>{
+      if(statements.some(s=>s.sql.includes('INSERT INTO learning_submission_records')))throw new Error('fixture disk unavailable');
+      return original(statements);
+    };
+    const r=await worker.fetch(f.request(),f.source.env,{});assert.ok(r.status>=500);
+    assert.equal(f.calls.length,0);assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_pending_submissions').get().n,0);
+  }finally{f.db.close();}
+});
+
+test('a score transaction failure preserves the AI reply; expired execution recovers without re-evaluation',async()=>{
+  const f=durableFixture(durableReply);
+  try {
+    const original=f.source.env.READING_DB.batch;let fail=true;
+    f.source.env.READING_DB.batch=async statements=>{
+      if(fail&&statements.some(s=>s.sql.includes('INSERT INTO learning_evaluation_commits')))throw new Error('fixture commit unavailable');
+      return original(statements);
+    };
+    const r=await worker.fetch(f.request(),f.source.env,{});assert.ok(r.status>=500);
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluation_replies').get().n,1);
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,0);
+    fail=false;f.db.prepare('UPDATE learning_evaluation_jobs SET lease_until=0').run();
+    await runDurableEvaluationScheduler(f.source.env);
+    assert.equal(f.calls.length,1);assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,1);
+    assert.equal(f.db.prepare('SELECT state FROM learning_evaluation_jobs').get().state,'completed');
+  }finally{f.db.close();}
+});
+
+test('simultaneous claims and stale epoch commits cannot duplicate evaluation or overwrite a newer result',async()=>{
+  const f=durableFixture(()=>Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}));
+  try {
+    const r=await worker.fetch(f.request(),f.source.env,{}),id=(await r.json()).pendingId;
+    f.db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
+    const claims=await Promise.all(Array.from({length:10},()=>claimEvaluationJob(f.source.env.READING_DB,id)));
+    assert.equal(claims.filter(Boolean).length,1);
+    const old=claims.find(Boolean);
+    f.db.prepare("UPDATE learning_evaluation_jobs SET state='queued',lease_until=0").run();
+    const fresh=await claimEvaluationJob(f.source.env.READING_DB,id);assert.equal(fresh.lease_epoch,old.lease_epoch+1);
+    assert.throws(()=>f.db.prepare('INSERT INTO learning_evaluation_commits VALUES(?,?,?)').run(id,old.lease_epoch,Date.now()),/lease expired/);
+    await assert.rejects(completeDurableEvaluationJob(f.source.env,old),/lease unavailable/);
+    assert.equal(f.calls.length,1);
+  }finally{f.db.close();}
+});
+
+test('pending status is owner-scoped and never returns the submitted private fields',async()=>{
+  const f=durableFixture(()=>Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}));
+  try {
+    const response=await worker.fetch(f.request(),f.source.env,{}),id=(await response.json()).pendingId;
+    f.db.prepare('INSERT INTO students(id,uc_slug,display_name,uc_user_id,identity_verified_at) VALUES(8,?,?,43,?)').run('other-fixture','Other fixture',new Date().toISOString());
+    f.source.env.READING_TEST_SLUG='other-fixture';
+    const status=await worker.fetch(new Request('https://yw.bdfz.net/api/learning/pending-interactions?pendingId='+id),f.source.env,{});
+    assert.equal(status.status,404);assert.equal((await status.text()).includes(f.body.input.reason),false);assert.equal(f.calls.length,1);
+  }finally{f.db.close();}
+});
+
+test('late journaled reply repairs an uncertain job without another provider request',async()=>{
+  const f=durableFixture(()=>{throw new TypeError('synthetic transport uncertainty');});
+  try {
+    const response=await worker.fetch(f.request(),f.source.env,{}),id=(await response.json()).pendingId;
+    const job=await loadEvaluationJob(f.source.env.READING_DB,id);assert.equal(job.state,'uncertain');
+    await saveEvaluationReply(f.source.env.READING_DB,job,{answer:JSON.stringify({score:80,verdict:'late fixture',strength:'fixture strength',gap:'fixture gap',nextQuestion:'fixture next'}),actualModel:'gemini-3.5-flash-lite',modelVersion:'fixture-001'});
+    f.db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
+    await runDurableEvaluationScheduler(f.source.env);
+    assert.equal(f.calls.length,1);assert.equal(f.db.prepare('SELECT state FROM learning_evaluation_jobs').get().state,'completed');
+  }finally{f.db.close();}
+});
+
+
+test('incomplete journaled feedback is retained and blocked without repeated model or commit attempts',async()=>{
+  const f=durableFixture(()=>Response.json({answer:JSON.stringify({score:80,verdict:'incomplete fixture'}),model:'gemini-3.5-flash-lite'}));
+  try {
+    const response=await worker.fetch(f.request(),f.source.env,{});
+    assert.equal(response.status,202);assert.equal((await response.json()).pendingState,'blocked');
+    const reply=f.db.prepare('SELECT answer_text FROM learning_evaluation_replies').get();
+    assert.equal(JSON.parse(reply.answer_text).verdict,'incomplete fixture');
+    f.db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
+    await runDurableEvaluationScheduler(f.source.env);
+    assert.equal(f.calls.length,1);assert.equal(f.db.prepare('SELECT state FROM learning_evaluation_jobs').get().state,'blocked');
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,0);
+  }finally{f.db.close();}
+});
+
+
+test('explicit legacy pending resume does not silently enroll historical records into automatic grading',async()=>{
+  const f=durableFixture(()=>durableReply());
+  try {
+    f.source.env.YW_DURABLE_EVALUATION_ENABLED='false';
+    await assertLearningSubmissionAllowed({request:f.request(),env:f.source.env,student:{id:7,ucUserId:42},lesson,interactionKey:'structure',payload:{...f.body.input,clientMutationId:f.body.clientMutationId}});
+    f.db.prepare("UPDATE learning_submission_slots SET created_at='2020-01-01T00:00:00.000Z'").run();
+    f.source.env.YW_DURABLE_EVALUATION_ENABLED='true';
+    const response=await worker.fetch(f.request(),f.source.env,{});
+    assert.equal(response.status,200,await response.text());
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluation_jobs').get().n,0);
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,0);
+    assert.equal(f.calls.length,1);
+  }finally{f.db.close();}
+});
+
+
+test('backlog notification is content-free, preserves failed delivery, deduplicates and reports recovery',async()=>{
+  const f=durableFixture(()=>durableReply()),events=[];
+  try {
+    f.source.env.YW_EVALUATION_ALERTS_ENABLED='true';
+    f.source.env.PULSE_ALERTS={report:async event=>{events.push(event);if(events.length===1)throw new Error('synthetic RPC outage');return {accepted:true};}};
+    const health={severity:'critical',pending_count:3,oldest_pending_age_seconds:1000,blocked_count:0,uncertain_count:0,scheduler_stale:false};
+    await assert.rejects(reportEvaluationBacklog(f.source.env,health,1000000),/RPC outage/);
+    assert.equal(f.db.prepare('SELECT last_reported_at FROM learning_evaluation_alert_state').get().last_reported_at,0);
+    await reportEvaluationBacklog(f.source.env,health,1000001);
+    await reportEvaluationBacklog(f.source.env,health,1000002);
+    assert.equal(events.length,2);
+    assert.deepEqual(events[1].details,{occurrenceCount:3});
+    assert.equal(events[1].errorCode,'YW_EVALUATION_BACKLOG_OVER_15M');
+    assert.deepEqual(Object.keys(events[1]).sort(),['siteKey','host','surface','fingerprintKey','state','severity','errorCode','occurredAt','source','details'].sort());
+    await reportEvaluationBacklog(f.source.env,{...health,severity:'ok',pending_count:0},1000003);
+    assert.equal(events.length,3);assert.equal(events[2].state,'recovered');
+    await reportEvaluationBacklog(f.source.env,{...health,severity:'ok',pending_count:0},2000003);
+    assert.equal(events.length,3);
+  }finally{f.db.close();}
+});
+
+test('global scheduler lease prevents simultaneous drains from issuing concurrent evaluations',async()=>{
+  const f=durableFixture(()=>Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}));
+  try {
+    await worker.fetch(f.request(),f.source.env,{});
+    f.db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
+    let release,started;const start=new Promise(r=>{started=r;});const gate=new Promise(r=>{release=r;});
+    const first=drainEvaluationJobs(f.source.env,async()=>{started();await gate;});
+    await start;
+    assert.deepEqual(await drainEvaluationJobs(f.source.env,async()=>assert.fail('second scheduler executed')),{busy:true});
+    release();await first;assert.equal(f.calls.length,1);
+  }finally{f.db.close();}
+});
+
+test('study-guide pending pins the original rubric and completes with preserved reply without loading a newer catalog',async()=>{
+  invalidateFormativeManifestCache();
+  const f=durableFixture(n=>n===1?Response.json({error_code:'DEADLINE_EXCEEDED'},{status:503}):durableReply());
+  try {
+    const firstRead=JSON.parse(readFileSync(resolve(ROOT,`site/data/classical-first-read/${vocabLesson.id}.json`),'utf8'));
+    f.db.prepare('INSERT INTO classical_first_read_sessions(student_id,lesson_id,text_version_id,text_digest,submitted_at) VALUES(?,?,?,?,?)')
+      .run(7,vocabLesson.id,firstRead.textVersionId,firstRead.textDigest,new Date().toISOString());
+    const original=f.source.env.ASSETS.fetch.bind(f.source.env.ASSETS);
+    f.source.env.ASSETS.fetch=async request=>new URL(request.url).pathname==='/data/study-guide-catalog.json'?Response.json(studyGuideCatalog):original(request);
+    await recordLearningInteraction({request:f.request(),env:f.source.env,student:{id:7,ucUserId:42},lesson:vocabLesson,interactionKey:'readAcknowledged',payload:{threshold:1,lessonPhase:'annotated_reading',clientMutationId:`annotated-read:${vocabLesson.id}:${firstRead.textVersionId}`.slice(0,100)}});
+    const item=studyGuideCatalog.lessons.find(x=>x.lessonId===vocabLesson.id).items.find(x=>x.activeForSelfTest);
+    const request=new Request('https://yw.bdfz.net/api/reading/study-guide-attempt',{method:'POST',headers:YW_WEB_JSON_HEADERS,body:JSON.stringify({lessonId:vocabLesson.id,itemKey:item.itemKey,response:'依據原句語境核對並詳細說明這份合成答案。',referenceRevealedAt:'2026-08-23T00:00:00.000Z',clientMutationId:'durable-study-fixture'})});
+    const response=await worker.fetch(request,f.source.env,{}),body=await response.json();
+    assert.equal(response.status,202,JSON.stringify(body));assert.equal(f.calls.length,1);
+    const job=f.db.prepare('SELECT * FROM learning_evaluation_jobs').get();
+    const version=JSON.parse(job.snapshot_json).reservation.capturedVersions.sourceVersion;
+    f.source.env.ASSETS.fetch=()=>{throw new Error('newer catalog must not be read by delayed grading');};
+    f.db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
+    await runDurableEvaluationScheduler(f.source.env);
+    assert.equal(f.calls.length,2);assert.equal(f.db.prepare('SELECT state FROM learning_evaluation_jobs').get().state,'completed');
+    const record=f.db.prepare("SELECT * FROM learning_interactions WHERE interaction_key='studyGuideItemCompleted'").get();
+    assert.equal(record.resource_version,version);
+    const evaluation=f.db.prepare('SELECT * FROM learning_evaluations WHERE source_event_id=?').get(job.source_event_id);
+    assert.equal(JSON.parse(evaluation.evaluation_json).modelVersion,'gemini-3.5-flash-lite-001');
+    assert.equal(evaluation.eligibility_status,'eligible');
+    const reply=f.db.prepare('SELECT received_at FROM learning_evaluation_replies').get();
+    assert.equal(evaluation.evaluated_at,new Date(reply.received_at).toISOString());
+  }finally{f.db.close();}
 });

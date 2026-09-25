@@ -1,3 +1,13 @@
+## 2026-09-25 pending candidate (inactive; not release authority)
+
+The accepted baseline remains PR59 ffa3689 / Pages ff11ac3d. Candidate migration0009 is additive: original submission records, evaluator jobs, append-only AI replies, fenced score commits, scheduler lease and alert delivery checkpoint. Original content stays in YW D1; central v2 evidence remains unchanged. Missing provider model revision is explicitly unavailable. Delayed reply receipt/evaluation timestamps remain distinct from original submission time.
+
+`YW_DURABLE_EVALUATION_ENABLED=true` is required on Pages; the dedicated `yw-evaluation-jobs` Worker uses `YW_BACKGROUND_EVALUATION_ENABLED=true` and `YW_EVALUATION_ALERTS_ENABLED=true` only after its exact-source registration, D1 backup/migration, APIS credential provisioning and paired release checks. Candidate defaults are false. Cron has no public execution endpoint; two jobs maximum per minute, one scheduler lease, at most four lifetime APIS calls per new submission including foreground, plus existing user/window budgets. Explicit old-pending resume keeps its accepted legacy path; no automatic historical backfill.
+
+Temporary typed429/503 failures defer1/5/15minutes plus bounded jitter, honoring Retry-After. Unknown transport stays uncertain; invalid feedback stays blocked. Both remain in age/count signals and retain content. A saved reply retries only the local score transaction. Pulse's existing named RPC receives bounded site/code/count events; no identity or content, with existing dedupe/recovery. The worker emits detailed aggregate age logs. A fully absent Cron cannot self-report; independent scheduler-staleness monitoring is still a release gap and must not be claimed as accepted.
+
+Release must be paired: additive schema and disabled background, exact Pages candidate, then bounded activation; verify authenticated pending/reload/complete and source/outbox/central receipt without new synthetic model calls. Rollback first disables new background claims, reconciles leased work and preserves all forward records; only then roll back Pages. Never drop0009 tables, reset call counts, erase replies or resurrect the retired readiness pin. Existing Pages-only executor does not authorize schema/config/bootstrap writes; resolve those exact registered transactions before publication.
+
 ## 2026-09-25 — PR59 released; authenticated existing-record readback accepted
 
 Runtime source `ffa368975cba988b0427a86046a27efe986a6859` (PR59), Pages `ff11ac3d-2cd1-4aca-beb0-c2dc3e0cfd06`,

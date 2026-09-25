@@ -1,3 +1,4 @@
+import { loadEvaluationJob, JOB_POLICY } from "./durable-evaluation-jobs.js";
 import {
   hasClassicalAnnotatedReadReceipt,
   loadClassicalFirstRead,
@@ -647,7 +648,7 @@ function assertPendingSubmissionMatches(existing, expected) {
   }
 }
 
-async function capturePendingSubmission(db, expected, occurredAt) {
+async function capturePendingSubmission(db, expected, occurredAt, originalPayloadJson = null) {
   const existing = await existingPendingSubmission(
     db,
     expected.studentId,
@@ -665,7 +666,7 @@ async function capturePendingSubmission(db, expected, occurredAt) {
     return;
   }
   try {
-    await db.prepare(
+    const capture = db.prepare(
       `INSERT INTO learning_pending_submissions (
          source_event_id, student_id, client_mutation_id, lesson_id, interaction_key,
          resource_key, raw_payload_json, status, captured_at, updated_at
@@ -680,7 +681,12 @@ async function capturePendingSubmission(db, expected, occurredAt) {
       expected.rawPayloadJson,
       occurredAt,
       occurredAt,
-    ).run();
+    );
+    if(originalPayloadJson !== null) {
+      await db.batch([capture,db.prepare(`INSERT INTO learning_submission_records
+        (source_event_id,student_id,submitted_payload_json,captured_at) VALUES(?,?,?,?)`)
+        .bind(expected.sourceEventId,expected.studentId,originalPayloadJson,occurredAt)]);
+    } else await capture.run();
   } catch (error) {
     if (!isUniqueConstraintError(error)) throw error;
     const winner = await existingPendingSubmission(db, expected.studentId, expected.clientMutationId);
@@ -1228,6 +1234,23 @@ export async function assertLearningSubmissionAllowed({
   const raw = boundedRawPayload(context.definition, context.normalizedPayload);
   const clientMutationId = clean(payload.clientMutationId, 100);
   if (!clientMutationId) throw new Error("client mutation id required before evaluation");
+  let originalPayloadJson = null;
+  let capturedOriginal = null;
+  if(env.YW_DURABLE_EVALUATION_ENABLED === 'true') {
+    const original = Object.fromEntries((context.definition.allowedPayloadKeys || [])
+      .filter(key => Object.hasOwn(payload,key)).map(key => [key,payload[key]]));
+    originalPayloadJson = JSON.stringify(original);
+    if(originalPayloadJson.length > MAX_RAW_PAYLOAD_CHARS) {
+      const error=new Error('答案超出可保存長度，尚未送出；請保留原文並縮短後重試');
+      error.code='learning_payload_too_large';throw error;
+    }
+    capturedOriginal=await env.READING_DB.prepare(`SELECT submitted_payload_json
+      FROM learning_submission_records r JOIN learning_pending_submissions p USING(source_event_id)
+      WHERE r.student_id=? AND p.client_mutation_id=?`).bind(student.id,clientMutationId).first();
+    if(capturedOriginal && capturedOriginal.submitted_payload_json!==originalPayloadJson) {
+      const error=new Error('original submission mutation conflict');error.code='learning_mutation_conflict';throw error;
+    }
+  }
   const existing = await existingInteraction(env.READING_DB, student.id, clientMutationId);
   if (existing) {
     assertIdempotentReplayMatches(existing, context.resourceKey, interactionKey, raw.serialized);
@@ -1251,6 +1274,10 @@ export async function assertLearningSubmissionAllowed({
       resourceKey: context.resourceKey,
       rawPayloadJson: raw.serialized,
     });
+  }
+  if (pending && env.YW_DURABLE_EVALUATION_ENABLED === "true") {
+    const job = await loadEvaluationJob(env.READING_DB, pending.source_event_id);
+    if (job && job.state !== "completed") return { allowed: true, pending: job };
   }
   const slot = await reserveSubmissionSlot(
     env.READING_DB,
@@ -1284,8 +1311,11 @@ export async function assertLearningSubmissionAllowed({
     interactionKey,
     resourceKey: context.resourceKey,
     rawPayloadJson: raw.serialized,
-  }, occurredAt);
+  }, occurredAt, pending && !capturedOriginal ? null : originalPayloadJson);
   const submissionReservation = {
+    // Historical pending rows lack a pinned original snapshot. Explicit resume
+    // keeps their accepted legacy path; never enroll them in automatic grading.
+    durableEvaluationEligible: env.YW_DURABLE_EVALUATION_ENABLED === 'true' && (!pending || Boolean(capturedOriginal)),
     sourceEventId: slot.sourceEventId,
     occurredAt,
     leaseStartedAt: slot.leaseStartedAt,
@@ -1342,7 +1372,9 @@ export async function reserveLearningEvaluatorCall({
   const studentId = Number(submissionReservation.studentId);
   const sourceEventId = clean(submissionReservation.sourceEventId, 100);
   const resourceKey = clean(submissionReservation.resourceKey, 220);
-  const windowStart = clean(submissionReservation.rateReservation.windowStart, 40);
+  const windowStart = submissionReservation.evaluationJob
+    ? new Date(Math.floor(Date.parse(occurredAt) / 600_000) * 600_000).toISOString()
+    : clean(submissionReservation.rateReservation.windowStart, 40);
   const createdAt = clean(occurredAt, 40) || isoNow();
   try {
     const inserted = await db.prepare(
@@ -1357,7 +1389,13 @@ export async function reserveLearningEvaluatorCall({
           AND (
           SELECT COUNT(*) FROM learning_evaluator_calls
            WHERE student_id = ? AND source_event_id = ? AND window_start = ?
-        ) < ${learningEvaluatorCallBudget.mutationWindowLimit}`
+        ) < ${learningEvaluatorCallBudget.mutationWindowLimit}
+        ${submissionReservation.evaluationJob ? `AND (
+          SELECT COUNT(*) FROM learning_evaluator_calls WHERE source_event_id = ?
+        ) < ${JOB_POLICY.maxCalls} AND EXISTS (
+          SELECT 1 FROM learning_evaluation_jobs WHERE source_event_id = ?
+          AND state = 'leased' AND lease_epoch = ? AND lease_until >= ?
+        )` : ''}`
     ).bind(
       studentId,
       sourceEventId,
@@ -1369,6 +1407,8 @@ export async function reserveLearningEvaluatorCall({
       studentId,
       sourceEventId,
       windowStart,
+      ...(submissionReservation.evaluationJob ? [sourceEventId, sourceEventId,
+        submissionReservation.evaluationJob.lease_epoch, Date.now()] : []),
     ).run();
     if (Number(inserted?.meta?.changes || 0) === 1) {
       return { counted: true, studentId, sourceEventId, windowStart, createdAt };
@@ -1476,6 +1516,9 @@ export async function recordLearningInteraction({
     throw new Error("reserved submission cannot carry a separate source mutation");
   }
   const effectiveOccurredAt = submissionReservation?.occurredAt || occurredAt;
+  const evaluatedAt = submissionReservation?.evaluationReply
+    ? new Date(submissionReservation.evaluationReply.received_at).toISOString() : effectiveOccurredAt;
+  const completedAt = submissionReservation?.evaluationJob ? isoNow() : effectiveOccurredAt;
   const reservedContext = submissionReservation?.context || null;
   const {
     registry,
@@ -1529,7 +1572,8 @@ export async function recordLearningInteraction({
     eligibilityStatus,
     eligibilityReason,
   } = normalizedEvaluation;
-  const versions = evidenceVersions(registry, manifest, definition, formativeManifest);
+  const versions = trustedReservation?.capturedVersions
+    || evidenceVersions(registry, manifest, definition, formativeManifest);
   const summary = publicSummary(manifestItem, lesson, definition);
   const envelope = {
     schema: ENVELOPE_SCHEMA,
@@ -1586,6 +1630,9 @@ export async function recordLearningInteraction({
   };
 
   const statements = [
+    ...(trustedReservation?.evaluationJob ? [env.READING_DB.prepare(
+      "INSERT INTO learning_evaluation_commits(source_event_id,lease_epoch,committed_at) VALUES(?,?,?)"
+    ).bind(sourceEventId, trustedReservation.evaluationJob.lease_epoch, Date.now())] : []),
     ...(!trustedReservation ? [env.READING_DB.prepare(
       `INSERT INTO learning_submission_slots (
          source_event_id, student_id, resource_key, window_start, resource_slot_no, global_slot_no
@@ -1628,8 +1675,14 @@ export async function recordLearningInteraction({
         gap: clean(effectiveEvaluation?.gap, 500),
         nextQuestion: clean(effectiveEvaluation?.nextQuestion, 500),
         eligibilityReason,
+        ...(trustedReservation?.evaluationReply ? {
+          actualModel: trustedReservation.evaluationReply.actual_model,
+          modelVersion: trustedReservation.evaluationReply.model_version,
+          modelVersionStatus: trustedReservation.evaluationReply.version_status,
+          replyRecordId: trustedReservation.evaluationReply.id,
+        } : {}),
       }),
-      effectiveOccurredAt
+      evaluatedAt
     ),
     env.READING_DB.prepare(
       "INSERT INTO evidence_outbox (source_event_id, envelope_json) VALUES (?, ?)"
@@ -1639,7 +1692,10 @@ export async function recordLearningInteraction({
           SET status = 'completed', attempt_count = attempt_count + 1,
               updated_at = ?, completed_at = ?
         WHERE source_event_id = ? AND student_id = ? AND client_mutation_id = ?`
-    ).bind(effectiveOccurredAt, effectiveOccurredAt, sourceEventId, student.id, clientMutationId),
+    ).bind(completedAt, completedAt, sourceEventId, student.id, clientMutationId),
+    ...(trustedReservation?.evaluationJob ? [env.READING_DB.prepare(
+      "UPDATE learning_evaluation_jobs SET state='completed',completed_at=?,lease_until=0 WHERE source_event_id=? AND lease_epoch=?"
+    ).bind(Date.now(), sourceEventId, trustedReservation.evaluationJob.lease_epoch)] : []),
   ];
   try {
     await env.READING_DB.batch(statements);
@@ -1855,3 +1911,40 @@ export const learningEvidenceContract = Object.freeze({
   submissionReservationLeaseSeconds: SUBMISSION_RESERVATION_LEASE_SECONDS,
   evaluatorFailureCooldownSeconds: EVALUATOR_FAILURE_COOLDOWN_SECONDS,
 });
+
+export function snapshotEvaluationReservation(reservation) {
+  if (!trustedSubmissionReservations.has(reservation)) throw new Error('untrusted reservation snapshot');
+  const { registry,manifest,definition,formativeManifest,...context }=reservation.context;
+  return {...reservation, capturedVersions:evidenceVersions(registry,manifest,definition,formativeManifest),
+    context:{...context,definition,formativeManifest:{manifestVersion:formativeManifest?.manifestVersion}}};
+}
+export async function restoreEvaluationReservation(env,job) {
+  const current=await loadEvaluationJob(env.READING_DB,job.source_event_id);
+  if(!current || current.state!=='leased' || current.lease_epoch!==job.lease_epoch
+    || current.lease_until<Date.now()) throw new Error('evaluation lease unavailable');
+  const snapshot=JSON.parse(current.snapshot_json);
+  if(snapshot.schema!=='yw-evaluation-snapshot-v1' || snapshot.reservation.sourceEventId!==current.source_event_id
+    || snapshot.reservation.studentId!==current.student_id) throw new Error('evaluation snapshot invalid');
+  const reservation={...snapshot.reservation,evaluationJob:current};
+  trustedSubmissionReservations.add(reservation);
+  return {snapshot,reservation};
+}
+
+export async function ownedEvaluationStatus(env,student,{pendingId='',clientMutationId=''}) {
+  if(!student?.id) return null;
+  const row=await env.READING_DB.prepare(`SELECT j.*,p.client_mutation_id,p.interaction_key
+    FROM learning_evaluation_jobs j JOIN learning_pending_submissions p USING(source_event_id)
+    WHERE j.student_id=? AND ${pendingId?'j.source_event_id':'p.client_mutation_id'}=?`)
+    .bind(Number(student.id),pendingId||clientMutationId).first();
+  if(!row) return null;
+  if(row.state!=='completed') return {job:row};
+  const existing=await existingInteraction(env.READING_DB,student.id,row.client_mutation_id);
+  if(!existing) throw new Error('completed evaluation source record missing');
+  const result=dedupedInteractionResult(existing);
+  return {completed:{ok:true,status:'completed',pendingId:row.source_event_id,
+    provider:result.evaluation.provider,assessment:result.evaluation,
+    passed:result.eligibilityStatus==='eligible' && Number(result.evaluation.score)>=60,
+    evidence:{status:result.eligibilityStatus==='ineligible'?'already_recorded_ineligible':'already_recorded',
+      delivery:result.delivery,sourceEventId:row.source_event_id,attemptNo:result.attemptNo,
+      eligibilityStatus:result.eligibilityStatus},deduped:true}};
+}

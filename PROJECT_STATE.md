@@ -1,3 +1,9 @@
+## 2026-09-25 durable evaluation candidate — not published
+
+Candidate base is accepted PR59 runtime ffa368975cba988b0427a86046a27efe986a6859 (Pages ff11ac3d), including the retired PR60 pin; documentation from main02951cdd is preserved. New submissions can durably retain original input and every AI reply/model revision, return owner-scoped202 pending, and complete through a separately gated YW scheduler. Both activation flags default off; no production migration, background Worker, config change or student data write has occurred. Historical31retryable submissions are not automatically enrolled.
+
+Tests: existing full precontent passes;91 source contract tests and49 assessment/frontend tests pass, plus real dual-workerd/D1 foreground→scheduler→status readback with local providers only. Final precontent, formal artifact, additive migration backup/restore, new target registration/secret provisioning, paired publisher and authenticated natural readback remain release gates. No new model verification budget is requested. Pulse integration uses its existing PlatformErrorAlerts RPC without changing Pulse runtime or notification semantics; bindings/activation remain gated. Detailed evidence: reports/operations/yw-http503-20260925/review-20260925 in the CF workspace.
+
 ## 2026-09-25 — PR59 released; authenticated existing-record readback accepted
 
 Runtime source `ffa368975cba988b0427a86046a27efe986a6859` (PR59), Pages `ff11ac3d-2cd1-4aca-beb0-c2dc3e0cfd06`,

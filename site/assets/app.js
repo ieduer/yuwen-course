@@ -2958,6 +2958,7 @@ function renderReferenceAnswer(value) {
 
 function studyGuideFailureMessage(record) {
   const code = record?.lastErrorCode || "";
+  if(code === 'learning_evaluation_pending') return record.lastError || '答案已保存，評閱稍後補上；本次尚未計分。';
   if (record?.lastErrorStatus === 401 || record?.lastError === "anonymous") return "尚未完成評閱；請登入後重試，答案已保留。";
   const messages = {
     classical_first_read_required: "尚未完成評閱；請先完成無標點初讀，再回來核對本題。",
@@ -3114,7 +3115,7 @@ function interactionAction(interactionKey, label, lesson = state.current, record
       interactionKey,
       pending.clientMutationId,
     ));
-    return `<button class="check-action" type="button" data-ai-check="${esc(interactionKey)}" ${inFlight ? "disabled" : ""}>${inFlight ? "正在評閱上一輪…" : "重試上一輪評閱"}</button>`;
+    return `${pending.pendingId ? '<p role="status">答案已保存，評閱待補；可繼續學習，無需重新提交。</p>' : ''}<button class="check-action" type="button" data-ai-check="${esc(interactionKey)}" ${inFlight ? "disabled" : ""}>${inFlight ? "正在評閱上一輪…" : pending.pendingId ? "查看評閱進度" : "重試上一輪評閱"}</button>`;
   }
   const actionLabel = mode === "local" ? "記下本機試做" : label;
   return `<button class="check-action" type="button" data-ai-check="${esc(interactionKey)}">${esc(actionLabel)}</button>`;
@@ -3652,6 +3653,7 @@ function interactionEvidenceDecision(status, score) {
 
 function learningSubmissionRetryMessage(code, retryAfterSeconds = 0, limitReason = "") {
   const wait = Number(retryAfterSeconds) > 0 ? Number(retryAfterSeconds) : 0;
+  if (code === "learning_evaluation_pending") return "答案已保存，評閱稍後補上；不必重新提交，也不會計為答錯。";
   if (code === "learning_submission_in_progress") {
     return wait
       ? `上一次提交仍在評閱中，請 ${wait} 秒後用同一答案重試`
@@ -3744,7 +3746,7 @@ function interactionPendingMatches(record, pending) {
 
 function pendingEvaluationRetryDelay(error) {
   if (["learning_submission_in_progress", "learning_submission_rate_limited",
-    "learning_evaluator_unavailable", "learning_evaluator_budget_exhausted",
+    "learning_evaluation_pending", "learning_evaluator_unavailable", "learning_evaluator_budget_exhausted",
     "learning_evaluator_budget_unavailable", "learning_evaluator_timeout"].includes(error?.code)
     || ["AbortError", "TypeError"].includes(error?.name)) {
     return Math.max(60, Number(error?.retryAfterSeconds) || 0);
@@ -3850,6 +3852,11 @@ async function replayCapturedLearningSubmissions(lesson, isCurrent) {
       if (response.status === 401 || payload.code === "authenticated_evaluation_required") {
         state.pendingReplayAttempted.delete(mutationId);
         return {};
+      }
+      if (response.status === 202 && payload.status === 'pending') {
+        state.pendingReplayAttempted.delete(mutationId);
+        retry({code:'learning_evaluation_pending',retryAfterSeconds:60});
+        continue;
       }
       if (response.ok && item.interaction === "studyGuideItemCompleted") reconcileResumedStudyGuide(lesson.id, mutationId, payload);
       resumed = response.ok || resumed;
@@ -4007,7 +4014,9 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     let response;
     let payload;
     try {
-      response = await fetch("/api/interaction-check", {
+      response = pending.pendingId
+        ? await fetch(`/api/learning/pending-interactions?pendingId=${encodeURIComponent(pending.pendingId)}`,{signal:controller.signal,cache:'no-store'})
+        : await fetch("/api/interaction-check", {
         method: "POST",
         headers: { "content-type": "application/json" },
         signal: controller.signal,
@@ -4027,8 +4036,9 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     }
     state.interactionRequestsInFlight.delete(requestInFlightKey);
     if (progressOwnerScope !== requestOwnerScope) return;
-    if (!response.ok) {
+    if (!response.ok || (response.status === 202 && payload.status === 'pending')) {
       const error = new Error(payload.error || `評估失敗 ${response.status}`);
+      error.pendingId = payload.pendingId || '';
       error.code = String(payload.code || "");
       error.status = response.status;
       error.retryAfterSeconds = Number(payload.retryAfterSeconds || 0);
@@ -4064,6 +4074,7 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     liveProgress[progressKey] = {
       ...previousProgress,
       ...nextInput,
+      evaluationPending: false,
       done: previousProgress.done === true || evidence.completed,
       score,
       bestScore: Math.max(Number(previousProgress.bestScore || previousProgress.score || 0), score),
@@ -4118,6 +4129,11 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     if (progressOwnerScope !== requestOwnerScope) return;
     const liveProgress = lessonProgress(requestLessonId);
     const liveRecord = liveProgress[progressKey] || {};
+    if(error.code==='learning_evaluation_pending' && interactionPendingMatches(liveRecord,pending)) {
+      liveRecord.pendingSubmission.pendingId=error.pendingId;
+      liveRecord.evaluationPending=true;
+      saveStoredProgress();
+    }
     if (error.code === "learning_mutation_conflict" && interactionPendingMatches(liveRecord, pending)) {
       const { pendingSubmission: _pendingSubmission, ...retryableRecord } = liveRecord;
       liveProgress[progressKey] = retryableRecord;
@@ -4304,6 +4320,7 @@ async function submitStudyGuideAttempt({ lessonId, itemKey, response, referenceR
         code: payload.code || "",
         retryAfterSeconds: Number(payload.retryAfterSeconds) || null,
         limitReason: String(payload.limitReason || ""),
+        pendingId: payload.pendingId || '',
         reason: payload.error || (result.status === 401 ? "anonymous" : `http-${result.status}`),
       };
     }
@@ -4433,6 +4450,7 @@ function bindCheckStage() {
       ...liveRecords[itemKey],
       submitting: false,
       pendingSync: result?.ok !== true,
+      pendingId: result?.pendingId || liveRecords[itemKey]?.pendingId || '',
       completed,
       assessment: result?.ok === true ? result.assessment : liveRecords[itemKey]?.assessment || null,
       evidence: result?.ok === true ? result.evidence : null,
