@@ -1,3 +1,27 @@
+## 2026-09-25 — PR59 released; authenticated existing-record readback accepted
+
+Runtime source `ffa368975cba988b0427a86046a27efe986a6859` (PR59), Pages `ff11ac3d-2cd1-4aca-beb0-c2dc3e0cfd06`,
+existing v2 executor `e9dab38d0408c272a38d6f3d5408c8ee2fe4b2c0`, formal artifact
+`f096ba14941bc0a395d47febc19d63f7abdcc6aa08e3ea82075b39a46786e0d0` (1226 files).
+The terminal PR60 b212a93a pin is disabled; GET404 and ordinary authenticated
+POSTchat/low behavior are preserved.111complete string reference answers plus
+reviewed gloss aliases use deterministic server checking without a model call.
+
+All155focused tests, full precontent, five original PDF/extraction receipts,
+108publisher tests, and both CI runtimes pass. Exact preview and production
+config/assets/App readbacks pass. The currently signed-in browser reloaded
+lesson1476 and received the existing submitted initial-reading record with
+three marks, unchanged annotation gate and zero pending submissions. No new
+production answer/grade was created; live acceptance covers existing-record
+readback. Deterministic scoring/idempotency are proved by real Worker/SQLite
+local tests, not a fabricated student attempt. APIS availability is independent.
+
+Code-only rollback is Pagesa8d33941/sourcee4705fe (known previous pending baseline,
+not retrospective APIS acceptance), preserving all forward D1/Queue/My records.
+Accepted journal `d62cbcf27c7823b479863d5e1b0c86a078132e321b4a7311fc350bda6b944e6b`. App disposition remains
+compatible-no-client-release. Later documentation commits are not runtime source.
+Single report: `/Users/ylsuen/CF/reports/operations/yw-pr59-release-20260925/REPORT.md`.
+
 ## 2026-09-25 — PR59 serial release preparation and retired validation pin
 
 User authorized PR59 at original head 9ffda372. Integrated current main PR60;
