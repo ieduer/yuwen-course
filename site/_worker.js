@@ -108,7 +108,8 @@ export default {
       if (ctx?.waitUntil) ctx.waitUntil(drainEvidenceOutbox(env, 50));
       return handleLearningEvidenceHealth(env);
     }
-    if (url.pathname === "/api/learning/ai-readiness" && request.method === "GET" && readinessApisVersion()) {
+    if (url.pathname === "/api/learning/ai-readiness" && request.method === "GET") {
+      if (!readinessApisVersion()) return new Response("Not found", { status: 404 });
       return handleAiReadiness(request, env);
     }
     if (url.pathname === "/api/learning/ai-readiness" && request.method === "POST") {
@@ -1634,10 +1635,9 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
   }
 }
 
-// Fixed server-owned validation window; callers cannot select a Worker version.
-export function readinessApisVersion(now = Date.now()) {
-  return now < Date.parse("2026-09-25T16:00:00.000Z")
-    ? "b212a93a-dabd-46e4-bd99-fa414e908cc8" : "";
+// The bounded validation batch is terminal. Never pin ordinary readiness to it.
+export function readinessApisVersion(_now = Date.now()) {
+  return "";
 }
 
 async function handleAiReadiness(request, env) {

@@ -16,6 +16,88 @@ const fixtureCorpus = JSON.parse(readFileSync(
   "utf8",
 ));
 
+const catalog = JSON.parse(readFileSync(resolve(import.meta.dirname, "../site/data/study-guide-catalog.json"), "utf8"));
+const catalogItems = catalog.lessons.flatMap(lesson => lesson.items);
+const universityGloss = catalogItems.find(item => item.itemKey === "lesson-1476-p29-ancient-modern-01");
+
+test("the photographed university gloss accepts concise simplified and traditional answers without AI", () => {
+  for (const response of ["大人之学", "大人之學", "成人之學", " 「大人之學」。 ", universityGloss.referenceAnswer]) {
+    const result = deterministicStudyGuideAssessment(universityGloss, response);
+    assert.equal(result?.provider, "study-guide-answer-key", response);
+    assert.equal(result?.passed, true, response);
+    assert.equal(result?.score, 100);
+  }
+});
+
+test("every reviewed single-gloss question accepts its source answer and core equivalent", () => {
+  const examples = [
+    ["lesson-1474-p23-ancient-modern-01", "學生們"],
+    ["lesson-1474-p23-ancient-modern-02", "一個字"],
+    ["lesson-1476-p29-ancient-modern-01", "大人之學"],
+    ["lesson-1476-p29-ancient-modern-02", "全都"],
+    ["lesson-1477-p34-ancient-modern-01", "鄉里"],
+    ["lesson-1477-p34-ancient-modern-02", "這些"],
+    ["lesson-1477-p34-ancient-modern-03", "傷害"],
+    ["lesson-1477-p34-ancient-modern-04", "侍奉"],
+    ["lesson-1485-p50-ancient-modern-01", "弟弟和兒子"],
+    ["lesson-1485-p50-ancient-modern-02", "關愛他人"],
+  ];
+  for (const [key, response] of examples) {
+    const item = catalogItems.find(item => item.itemKey === key);
+    assert.equal(item?.activeForSelfTest, true, key);
+    assert.equal(deterministicStudyGuideAssessment(item, response)?.passed, true, key);
+    assert.equal(deterministicStudyGuideAssessment(item, item.referenceAnswer)?.passed, true, key);
+  }
+});
+
+test("unreviewed wording and negative or partial answers go to AI, never automatic zero or pass", () => {
+  for (const response of ["", "大学", "大人", "高等教育机构", "不是大人之學", "大人之学，也就是现代大学", "培养成人德行的学问", "大人之學？"]) {
+    assert.equal(deterministicStudyGuideAssessment(universityGloss, response), null, response);
+  }
+  const compound = catalogItems.find(item => item.itemKey === "lesson-1485-p50-ancient-modern-01");
+  assert.equal(deterministicStudyGuideAssessment(compound, "弟弟"), null);
+  assert.equal(deterministicStudyGuideAssessment(compound, "兒子"), null);
+});
+
+test("reviewed equivalents do not survive a different question, reference or type", () => {
+  for (const change of [{ prompt: "新題" }, { referenceAnswer: "新答案" }, { detailTag: "content_analysis" }, { itemKey: "other-item" }]) {
+    assert.equal(deterministicStudyGuideAssessment({ ...universityGloss, ...change }, "大人之學"), null);
+  }
+});
+
+test("AI fallback assesses short glosses on the question requirements without invented evidence demands", () => {
+  const prompt = studyGuideAssessmentPrompt(universityGloss, "培养成人德行的学问");
+  assert.match(prompt, /簡繁體、同義表述及省略非必要解析不扣分/);
+  assert.match(prompt, /也不另要求引用原句/);
+  assert.match(prompt, /要求分析、論證或文本證據的題目/);
+  assert.match(prompt, /不要捏造錯誤或要求重答/);
+});
+
+test("all active vocabulary and syntax string keys avoid AI for an exact complete answer", () => {
+  const items = catalogItems.filter(item => item.activeForSelfTest && !item.reviewRequired
+    && ["vocabulary", "syntax"].includes(item.competencyTag)
+    && ["source_answer", "codex_reference"].includes(item.answerAuthority)
+    && !/(?:choice|discrimination|identification|objective|knowledge|punctuation|segmentation)/i.test(item.detailTag)
+    && typeof item.referenceAnswer === "string");
+  assert.ok(items.length > 80, "cover the catalog rather than only the screenshot");
+  for (const item of items) {
+    assert.equal(deterministicStudyGuideAssessment(item, item.referenceAnswer)?.passed, true, item.itemKey);
+    assert.notEqual(deterministicStudyGuideAssessment(item, `不是${item.referenceAnswer}`)?.passed, true, item.itemKey);
+  }
+});
+
+test("exact complete keys do not turn open, inactive, unreviewed or multi-part answers into automatic passes", () => {
+  const item = catalogItems.find(item => item.itemKey === "lesson-1474-p23-function-word-01");
+  assert.equal(deterministicStudyGuideAssessment(item, "连詞表順承可译為然后")?.passed, true);
+  assert.equal(deterministicStudyGuideAssessment(item, "然後"), null, "meaning alone omits required usage");
+  for (const change of [{ competencyTag: "comprehension" }, { activeForSelfTest: false }, { reviewRequired: true }, { answerAuthority: "unreviewed" }, { referenceAnswer: [item.referenceAnswer] }]) {
+    assert.equal(deterministicStudyGuideAssessment({ ...item, ...change }, item.referenceAnswer), null);
+  }
+  for (const open of catalogItems.filter(item => item.detailTag.startsWith("wenyan.inquiry."))) {
+    assert.equal(deterministicStudyGuideAssessment(open, open.referenceAnswer), null, open.itemKey);
+  }
+});
+
 test("realistic study-guide answer fixture corpus stays source-owned and fail-closed", () => {
   assert.equal(fixtureCorpus.schemaVersion, "yw-study-guide-answer-fixtures-v1");
   assert.ok(Number.isInteger(fixtureCorpus.minimumCaseCount));
