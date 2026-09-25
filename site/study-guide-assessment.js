@@ -2,6 +2,39 @@ function clean(value, max = 4000) {
   return String(value || "").normalize("NFC").trim().slice(0, max);
 }
 
+// Reviewed equivalents of single-word glosses in the accepted catalog.
+// Bind each key to its exact question and reference: a later content edit must
+// be reviewed again. Never infer aliases by splitting an answer or substring.
+const REVIEWED_GLOSSES = {
+  "lesson-1474-p23-ancient-modern-01": ["解释“小子何莫学夫《诗》”中“小子”的古义。", "孔子对弟子们的称呼，可译为“学生们”或“弟子们”。", ["学生们", "學生們", "弟子们", "弟子們", "孔子的学生", "孔子的學生", "孔子的弟子"]],
+  "lesson-1474-p23-ancient-modern-02": ["解释“有一言而可以终身行之者乎”中“言”的古义。", "一个字；在本章语境中指“恕”字。", ["一个字", "一個字", "恕字", "恕"]],
+  "lesson-1476-p29-ancient-modern-01": ["解释“大学之道”中“大学”的古义。", "大人之学，即穷理、正心、修身、治人的学问。", ["大人之学", "大人之學", "成人之学", "成人之學"]],
+  "lesson-1476-p29-ancient-modern-02": ["解释“壹是皆以修身为本”中“壹”的古义。", "一概、全都。", ["一概", "全都"]],
+  "lesson-1477-p34-ancient-modern-01": ["解释“要誉于乡党朋友”中“党”的古义。", "乡党、乡里。", ["乡党", "鄉黨", "乡里", "鄉里"]],
+  "lesson-1477-p34-ancient-modern-02": ["解释“人之有是四端也”中“是”的古义。", "这、这些。", ["这", "這", "这些", "這些"]],
+  "lesson-1477-p34-ancient-modern-03": ["解释“自贼者也”中“贼”的古义。", "伤害。", ["伤害", "傷害"]],
+  "lesson-1477-p34-ancient-modern-04": ["解释“不足以事父母”中“事”的古义。", "侍奉。", ["侍奉"]],
+  "lesson-1485-p50-ancient-modern-01": ["解释“视弟子与臣若其身”中“弟子”的古义。", "弟弟和儿子。", ["弟弟和儿子", "弟弟和兒子", "弟弟与儿子", "弟弟與兒子"]],
+  "lesson-1485-p50-ancient-modern-02": ["解释“故子墨子曰不可以不劝爱人者”中“爱人”的古义。", "爱别人、关爱他人。", ["爱别人", "愛別人", "关爱他人", "關愛他人"]],
+};
+
+function glossSignature(value) {
+  return clean(value).normalize("NFKC").replace(/[\s，,。；;：:、「」『』“”‘’"']/g, "");
+}
+
+function reviewedGlossAssessment(item, response) {
+  const rule = REVIEWED_GLOSSES[item?.itemKey];
+  if (!rule || item.detailTag !== "ancient_modern"
+    || item.prompt !== rule[0] || item.referenceAnswer !== rule[1]) return null;
+  const signature = glossSignature(response);
+  if (![rule[1], ...rule[2]].some(answer => signature === glossSignature(answer))) return null;
+  return {
+    ...assessment(100, "古義核對正確。"),
+    strength: "已準確答出本題要求的古義；簡潔作答即可，不必照抄解析。",
+    nextQuestion: "可把這個意思代回原句，再讀一遍。",
+  };
+}
+
 // Shared, deliberately bounded traditional-to-simplified folding used by both
 // study-guide comparison and the three-word reading analysis. Characters not
 // present in the established project table remain unchanged.
@@ -125,6 +158,8 @@ function assessment(score, verdict, gap = "") {
 }
 
 export function deterministicStudyGuideAssessment(item, response) {
+  const gloss = reviewedGlossAssessment(item, response);
+  if (gloss) return gloss;
   const detailTag = clean(item?.detailTag, 100);
   const { choices: expected, mode } = expectedChoiceSpec(item?.referenceAnswer);
   if (expected.length > 0 && /(?:choice|discrimination|identification|objective|knowledge)/i.test(detailTag)) {
@@ -228,8 +263,10 @@ export function studyGuideAssessmentPrompt(item, response) {
   return [
     "你是高中語文學案形成性評閱員。只評學生這一次作答，不代寫，不改變其價值立場。",
     "先核對題目要求，再核對參考答案與量規中的必要證據。開放考辨題的參考答案不是唯一答案；立場不同但證據充分仍可通過。",
-    "不得因篇幅或術語給高分。沒有回應核心要求或沒有文本依據，最高59分。",
+    "按題目要求評閱，不得因篇幅或術語給高分。詞義、古今義、字音等簡答題，只要準確回答所問即可；簡繁體、同義表述及省略非必要解析不扣分，也不另要求引用原句。",
+    "要求分析、論證或文本證據的題目，沒有回應核心要求或缺少必要文本依據，最高59分。",
     "只輸出 JSON：score(0-100整數)、verdict(一句)、strength(已做到的一點)、gap(最關鍵缺口)、nextQuestion(一個促使重答的問題)。不要 Markdown。",
+    "正確且完整的簡答可以得100分。沒有缺口時，gap寫『本題要求已完成。』，nextQuestion可提供鞏固練習，不要捏造錯誤或要求重答。",
     `題目：${clean(item?.prompt)}`,
     `答案權威：${clean(item?.answerLabel || item?.answerAuthority, 80)}`,
     `參考答案：${JSON.stringify(item?.referenceAnswer ?? null)}`,

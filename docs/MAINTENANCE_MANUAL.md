@@ -1,3 +1,18 @@
+## 2026-09-25 — study-guide concise-answer candidate
+
+The screenshot answer 大人之學 now matches a server-owned reviewed gloss key;
+ten single-word ancient-meaning questions have exact question/reference-bound
+simplified/traditional equivalents. Unmatched phrasing still receives AI review,
+with question-appropriate evidence requirements. Empty rubrics show practice
+guidance; evaluator failure explicitly means no verdict, not an incorrect answer.
+
+Local 123 tests and formal artifact build/check pass, including real Worker route
+and SQLite proof of zero AI calls and idempotent evidence for the screenshot answer.
+Catalog, semantic resource revisions, App content, history and scoring thresholds
+are unchanged. Production release and live acceptance remain pending coordination
+with the existing YW/APIS incident publisher; do not mix into its bounded canary.
+Report: `/Users/ylsuen/CF/reports/operations/yw-study-guide-20260925/REPORT.md`.
+
 ## 2026-09-25 — bounded APIS repair validation prepared
 
 User authorized at most12 synthetic requests across1/5/25/100 percent APIS stages. Existing authenticated AI-readiness route targets candidate11eabd6c-b092-4267-97cf-f4782bfdb47c as feedback until2026-09-25T16:00Z; a temporary authenticated GET page permits one explicit request per load. No student content, learning write, quota change, client-selected version, or App change. After expiry the existing POST resumes ordinary chat behavior and GET is unavailable. Preserve accepted P11 source23bd13d. Release/acceptance pending; authority and evidence: /Users/ylsuen/CF/reports/operations/yw-http503-20260925/. Web-only compatible-no-client-release.

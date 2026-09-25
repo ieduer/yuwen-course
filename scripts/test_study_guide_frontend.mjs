@@ -32,7 +32,9 @@ test("empty source rubric is explained and assessment failures retain their actu
   );
   const item = catalog.lessons.flatMap(lesson => lesson.items).find(item => item.itemKey === "lesson-1474-p23-ancient-modern-01");
   assert.deepEqual(item.rubric, []);
-  assert.match(rubric(item.rubric), /來源未另列核對標準/);
+  assert.match(rubric(item.rubric), /作答提示/);
+  assert.match(rubric(item.rubric), /詞義題答出核心意思/);
+  assert.doesNotMatch(rubric(item.rubric), /來源未另列|<strong>核對標準/);
   assert.match(rubric(["保留來源標準"]), /保留來源標準/);
   assert.match(failure({ lastErrorStatus: 401 }), /請登入/);
   assert.doesNotMatch(failure({ lastErrorCode: "learning_evaluator_timeout" }), /登入|連線/);
@@ -40,6 +42,7 @@ test("empty source rubric is explained and assessment failures retain their actu
   assert.match(failure({ lastErrorCode: "classical_annotated_reading_required" }), /帶註釋正文/);
   const html = assessment({ pendingSync: true, lastErrorCode: "learning_evaluator_timeout" });
   assert.match(html, /尚未計分/);
+  assert.match(html, /這不表示答案錯誤/);
   assert.doesNotMatch(html, /0 \/ 100|已達標|恢復登入/);
   assert.match(assessment({ pendingSync: true }), /尚未取得評閱結果/);
 });
@@ -865,7 +868,12 @@ test("interaction and study-guide retry messages distinguish active work, capaci
   assert.match(retryMessage, /learning_evaluator_unavailable/);
   assert.match(retryMessage, /learning_evaluator_budget_exhausted/);
   assert.match(retryMessage, /learning_evaluator_budget_unavailable/);
-  assert.match(retryMessage, /來源端評閱暫時不可用/);
+  assert.match(retryMessage, /AI 評閱暫時未能完成/);
+  assert.match(retryMessage, /這不表示答案錯誤/);
+  const message = new Function(`${retryMessage}; return learningSubmissionRetryMessage;`)();
+  assert.match(message("learning_evaluator_unavailable", 15), /15 秒後/);
+  assert.match(message("learning_evaluator_unavailable", 15), /尚未計分/);
+  assert.doesNotMatch(message("learning_submission_in_progress", 15), /答案錯誤|尚未計分/);
   assert.match(retryMessage, /評閱次數已達安全上限/);
   assert.match(retryMessage, /評閱安全額度暫時無法核對/);
   assert.doesNotMatch(retryMessage, /evaluator_retry_exhausted/);

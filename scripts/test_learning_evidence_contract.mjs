@@ -1363,6 +1363,58 @@ test("study-guide route rejects a catalog and formative cache skew after one coh
   )), false);
 });
 
+test("reviewed university gloss records once and replays without any AI call", async () => {
+  invalidateFormativeManifestCache();
+  const { default: isolatedWorker } = await import("../site/_worker.js?reviewed-gloss=1");
+  const db = new DatabaseSync(":memory:");
+  try {
+    initializeLearningContractDb(db);
+    const source = sourceEnvironment();
+    source.env.READING_DB = sqliteD1(db);
+    source.env.READING_TEST_SLUG = "lease-test-student";
+    const lesson = JSON.parse(readFileSync(resolve(ROOT, "site/data/lessons/lesson-1476.json"), "utf8"));
+    const firstRead = JSON.parse(readFileSync(resolve(ROOT, "site/data/classical-first-read/lesson-1476.json"), "utf8"));
+    db.prepare("INSERT INTO classical_first_read_sessions (student_id, lesson_id, text_version_id, text_digest, submitted_at) VALUES (?, ?, ?, ?, ?)")
+      .run(7, lesson.id, firstRead.textVersionId, firstRead.textDigest, new Date().toISOString());
+    const originalAssets = source.env.ASSETS.fetch.bind(source.env.ASSETS);
+    source.env.ASSETS.fetch = async request => {
+      const pathname = new URL(request.url).pathname;
+      if (pathname === "/data/study-guide-catalog.json") return Response.json(studyGuideCatalog);
+      if (pathname === "/data/lessons/lesson-1476.json") return Response.json(lesson);
+      if (pathname === "/data/classical-first-read/lesson-1476.json") return Response.json(firstRead);
+      return originalAssets(request);
+    };
+    await recordLearningInteraction({
+      request: new Request("https://yw.bdfz.net/api/learning/interactions"),
+      env: source.env, student: { id: 7, ucUserId: 42 }, lesson,
+      interactionKey: "readAcknowledged",
+      payload: { threshold: 1, lessonPhase: "annotated_reading", clientMutationId: `annotated-read:${lesson.id}:${firstRead.textVersionId}`.slice(0, 100) },
+    });
+    let calls = 0;
+    source.env.APIS.fetch = async () => { calls += 1; throw new Error("AI is unavailable"); };
+    const request = () => new Request("https://yw.bdfz.net/api/reading/study-guide-attempt", {
+      method: "POST", headers: YW_WEB_JSON_HEADERS,
+      body: JSON.stringify({ lessonId: lesson.id, itemKey: "lesson-1476-p29-ancient-modern-01", response: "大人之學", referenceRevealedAt: new Date().toISOString(), clientMutationId: "reviewed-gloss-no-ai" }),
+    });
+    const firstRequest = request();
+    const replayRequest = firstRequest.clone();
+    const response = await isolatedWorker.fetch(firstRequest, source.env, {});
+    const body = await response.json();
+    assert.equal(response.status, 200, JSON.stringify(body));
+    assert.equal(body.passed, true);
+    assert.equal(body.assessment.score, 100);
+    assert.equal(body.evidence.eligibilityStatus, "eligible");
+    const replay = await isolatedWorker.fetch(replayRequest, source.env, {});
+    const replayBody = await replay.json();
+    assert.equal(replay.status, 200, JSON.stringify(replayBody));
+    assert.equal(replayBody.deduped, true);
+    assert.deepEqual(replayBody.assessment, body.assessment);
+    assert.equal(calls, 0);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_evaluator_calls").get().n, 0);
+    assert.equal(db.prepare("SELECT COUNT(*) AS n FROM learning_interactions WHERE interaction_key='studyGuideItemCompleted'").get().n, 1);
+  } finally { db.close(); }
+});
+
 test("study-guide evaluator outage returns retryable 503 without false mastery evidence", async () => {
   invalidateFormativeManifestCache();
   const isolatedWorkerUrl = new URL("../site/_worker.js?study-guide-evaluator-outage=1", import.meta.url);
