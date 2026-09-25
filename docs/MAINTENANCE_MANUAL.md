@@ -1,3 +1,37 @@
+## 2026-09-25 — P11 bounded evidence replay released and accepted
+
+The release went through the registered one-use executor `849785a`, taking production to Pages `8673f37d-dabf-4299-b0ca-3cc0361e8025` (source `23bd13d`, formal artifact `e4a7b28e…`).
+
+- Config, bindings, Queue, App pointer and content are unchanged.
+- Rollback: Pages `cf2c9943` (source `f817be5`).
+- Migration `0008` (additive `evidence_replay_ledger`) was applied after a full D1 export and Time Travel bookmarks. All existing table counts were identical before and after.
+
+One bounded run replayed exactly the 350 reviewed quarantined rows (plan `6b17793f…`):
+- 275 rows labelled 2025-2026 were relabelled 2026-2027 by owner decision;
+- 75 rows labelled 2026-2027 had been blocked by UC's old `occurredAt` check.
+
+Each row now carries one new source-owned attempt. The ledger archives the prior envelope and delivery state byte for byte.
+
+Delivery used the existing `/api/learning/health` drain.
+
+Results:
+- **UC:** accepted 350/350 (275 + 75), with 0 new quarantine claims.
+- **UC history:** unchanged. The old attempts remain terminal, and UC's quarantine table still has its 350 rows.
+- **Credits** (distinct canonical units, the 2 affected users): A+ 1 → 28 and formative 4 → 24. Both equal before ∪ replayed units exactly, so nothing is double-counted.
+- **yw reconciliation:** all 350 replayed rows reconciled to central `accepted` (outbox accepted 2898 → 3248; 0 enqueued/pending/pending_mapping/quarantined).
+
+Registry receipts, each registered and consumed once:
+- `20260925-yw-p11-evidence-replay` (Pages);
+- `20260925-yw-d1-0008-replay-ledger` (new data target `yw-reading-db-data`);
+- `20260925-yw-p11-replay-run`.
+
+Single authority: `/Users/ylsuen/CF/reports/operations/yw-evidence-replay-20260924/REPORT.md`.
+
+Rollback options:
+- **Code:** Pages `cf2c9943`.
+- **yw data:** the ledger restore.
+- **UC credits:** UC has no evidence withdrawal path, so withdrawing credits needs a separate owner decision, either a targeted removal of the 350 new attempts or a Time Travel restore.
+
 ## 2026-09-25 — P11 bounded evidence replay prepared
 
 The owner decided on 2026-09-24 ("全部授權"):
