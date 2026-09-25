@@ -1926,7 +1926,7 @@ test("authenticated AI readiness proves the YW caller without writing learning d
   });
   assert.equal(bindingRequests[0].headers.get("Cloudflare-Workers-Version-Overrides"),
     readinessApisVersion() ? `apis="${readinessApisVersion()}"` : null);
-  assert.equal(readinessApisVersion(Date.parse("2026-09-25T15:59:59Z")), "11eabd6c-b092-4267-97cf-f4782bfdb47c");
+  assert.equal(readinessApisVersion(Date.parse("2026-09-25T15:59:59Z")), "ac0d0697-9611-4713-86f4-42fa6e8a13aa");
   assert.equal(readinessApisVersion(Date.parse("2026-09-25T16:00:00Z")), "");
   if (readinessApisVersion()) {
     const page = await worker.fetch(new Request("https://yw.bdfz.net/api/learning/ai-readiness", {
