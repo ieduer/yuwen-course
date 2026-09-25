@@ -11,7 +11,7 @@ test('real workerd/D1 preserves a 202 submission across independent foreground a
     modulesRules:[{type:'ESModule',include:['**/*.js']}],
     d1Databases:{READING_DB:'durable-evaluation-fixture'},
     bindings:{READING_TEST_SLUG:'durable-workerd-fixture',APIS_CALLER_TOKEN:'fixture-not-a-secret',
-      YW_DURABLE_EVALUATION_ENABLED:'true',YW_BACKGROUND_EVALUATION_ENABLED:'true'},
+      YW_DURABLE_EVALUATION_ENABLED:'true',YW_BACKGROUND_EVALUATION_ENABLED:'true',YW_EVALUATION_MACHINE_SECRET:'cd'.repeat(32)},
     serviceBindings:{
       ASSETS(request){const pathname=new URL(request.url).pathname;
         if(!/^\/data\/[a-zA-Z0-9_./-]+\.json$/.test(pathname)||pathname.includes('..'))return new Response('not found',{status:404});
@@ -22,7 +22,14 @@ test('real workerd/D1 preserves a 202 submission across independent foreground a
   };
   const mf=new Miniflare({log:new Log(LogLevel.NONE),workers:[
     {...common,name:'foreground',scriptPath:resolve(ROOT,'site/_worker.js')},
-    {...common,serviceBindings:{APIS:common.serviceBindings.APIS},name:'scheduler',scriptPath:resolve(ROOT,'scripts/fixtures/durable-scheduler-harness.js')},
+    {...common,serviceBindings:{},bindings:{YW_BACKGROUND_EVALUATION_ENABLED:'true',YW_EVALUATION_MACHINE_SECRET:'cd'.repeat(32)},
+      name:'scheduler',scriptPath:resolve(ROOT,'scripts/fixtures/durable-scheduler-harness.js'),
+      // Native workerd bridge preserves the exact server-to-server headers.
+      // Node dispatchFetch injects sec-fetch-mode and correctly fails auth.
+      outboundService:'foreground'},
+    {name:'health-probe',compatibilityDate:'2026-05-12',modules:true,
+      script:"export default {async fetch(request,env){return Response.json(await env.HEALTH.read());}}",
+      serviceBindings:{HEALTH:{name:'scheduler',entrypoint:'EvaluationHealth'}}},
   ]});
   try {
     const db=await mf.getD1Database('READING_DB','foreground');
@@ -43,8 +50,13 @@ test('real workerd/D1 preserves a 202 submission across independent foreground a
     assert.equal((await mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',request())).status,202);assert.equal(attempts,1);
     assert.equal((await db.prepare('SELECT COUNT(*) n FROM learning_interactions').first()).n,0);
     await db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
-    const drained=await scheduler.fetch('https://fixture.invalid/');assert.equal(drained.status,200);assert.equal((await drained.json()).completed,1);
-    assert.equal(attempts,2);
+    const drained=await scheduler.fetch('https://fixture.invalid/');assert.equal(drained.status,200);
+    assert.equal((await drained.json()).completed,1);assert.equal(attempts,2);
+    assert.equal((await db.prepare('SELECT COUNT(*) n FROM learning_evaluation_machine_nonces').first()).n,1);
+    const health=await (await (await mf.getWorker('health-probe')).fetch('https://fixture.invalid/')).json();
+    assert.equal(health.schema,'yw-evaluation-health-v1');assert.equal(health.pendingCount,0);
+    assert.equal(health.backgroundEnabled,true);assert.ok(health.lastSuccessfulScanAt);
+    assert.deepEqual(Object.keys(health).sort(),['asOf','backgroundEnabled','lastSuccessfulScanAt','oldestPendingAgeSeconds','pendingCount','schema','version']);
     const facts=(await db.prepare('SELECT payload_json FROM learning_evaluation_events ORDER BY rowid').all()).results.map(r=>JSON.parse(r.payload_json));
     assert.deepEqual(facts.filter(r=>r.action==='ai.request').map(r=>r.context.sourceContext.attemptNumber),[1,2]);
     assert.equal(facts.filter(r=>r.action==='ai.failure').length,1);

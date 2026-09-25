@@ -26,6 +26,7 @@ for (const file of [
   "evaluator-recovery.js",
   "durable-evaluation-jobs.js",
   "learning-evaluation-events.js",
+  "evaluation-machine.js",
   "data/interaction-definitions.json",
   "data/learning-manifest.json",
   "data/lesson-competency-manifest.json",

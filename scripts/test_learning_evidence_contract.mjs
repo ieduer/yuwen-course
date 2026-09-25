@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { signedEvaluationRequest, executeEvaluationRemotely, EVALUATION_MACHINE_PATH } from '../site/evaluation-machine.js';
 import { sourceEventStatement, evaluationEventId, eventDigest, canonicalEventJson } from '../site/learning-evaluation-events.js';
 import { normalizeLearningOperation } from './fixtures/uc-learning-operation-journal-65be121.js';
 import { claimEvaluationJob, loadEvaluationJob, createEvaluationJob, evaluationBacklog,
@@ -4762,4 +4763,102 @@ test('non-JSON or null successful upstream bodies are saved intact and blocked w
       assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
     } finally {f.db.close();}
   }
+});
+
+const machineSecret='ab'.repeat(32); // Synthetic fixture; never provisioned.
+async function machineFixture(provider=durableReply) {
+  const f=durableFixture(n=>n===1?Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}):provider(n));
+  f.source.env.YW_EVALUATION_MACHINE_SECRET=machineSecret;
+  const r=await worker.fetch(f.request(),f.source.env,{}),body=await r.json();assert.equal(r.status,202);
+  f.db.exec('UPDATE learning_evaluation_jobs SET next_attempt_at=0');
+  f.job=await claimEvaluationJob(f.source.env.READING_DB,body.pendingId);
+  return f;
+}
+async function signedArbitraryMachineBody(body,overrides={}) {
+  const timestamp=String(Date.now()),nonce=crypto.randomUUID().replaceAll('-','');
+  const key=await crypto.subtle.importKey('raw',Uint8Array.from(machineSecret.match(/../g),x=>parseInt(x,16)),{name:'HMAC',hash:'SHA-256'},false,['sign']);
+  const signature=Buffer.from(await crypto.subtle.sign('HMAC',key,new TextEncoder().encode(['POST',EVALUATION_MACHINE_PATH,timestamp,nonce,body].join('\n')))).toString('hex');
+  return new Request('https://yw.bdfz.net'+EVALUATION_MACHINE_PATH,{method:'POST',headers:{'content-type':'application/json','x-yw-evaluation-timestamp':timestamp,'x-yw-evaluation-nonce':nonce,'x-yw-evaluation-signature':signature,...overrides},body});
+}
+
+test('machine authentication rejects absent/wrong/stale/browser/oversized/extra-field/incorrect-job requests with uniform404 and no APIS call',async()=>{
+  const f=await machineFixture();
+  try {
+    const cases=[
+      new Request('https://yw.bdfz.net'+EVALUATION_MACHINE_PATH),
+      await signedEvaluationRequest('cd'.repeat(32),f.job),
+      await signedEvaluationRequest(machineSecret,f.job,{now:Date.now()-61000}),
+      await signedEvaluationRequest(machineSecret,f.job,{now:Date.now()+61000}),
+      await signedEvaluationRequest(machineSecret,{...f.job,lease_epoch:f.job.lease_epoch+1}),
+      await signedEvaluationRequest(machineSecret,{...f.job,source_event_id:'nonexistent-job-id'}),
+      await signedArbitraryMachineBody(JSON.stringify({jobId:f.job.source_event_id,leaseEpoch:f.job.lease_epoch,prompt:'must not execute'})),
+      await signedArbitraryMachineBody(' '.repeat(257)),
+    ];
+    for(const header of ['origin','cookie','referer','authorization','sec-fetch-site']) {
+      const r=await signedEvaluationRequest(machineSecret,f.job);r.headers.set(header,'fixture');cases.push(r);
+    }
+    const tampered=await signedEvaluationRequest(machineSecret,f.job);tampered.headers.set('x-yw-evaluation-signature','0'.repeat(64));cases.push(tampered);
+    for(const request of cases) {
+      const result=await worker.fetch(request,f.source.env,{});assert.equal(result.status,404,request.url);assert.equal(await result.text(),'Not found');
+    }
+    assert.equal(f.calls.length,1);
+    const saved=f.db.prepare('SELECT snapshot_json FROM learning_evaluation_jobs').get().snapshot_json;
+    const wrong=JSON.parse(saved);wrong.completion.student.id=99;
+    f.db.prepare('UPDATE learning_evaluation_jobs SET snapshot_json=?').run(JSON.stringify(wrong));
+    assert.equal((await worker.fetch(await signedEvaluationRequest(machineSecret,f.job),f.source.env,{})).status,404);
+    f.db.prepare('UPDATE learning_evaluation_jobs SET snapshot_json=?,lease_until=0').run(saved);
+    assert.equal((await worker.fetch(await signedEvaluationRequest(machineSecret,f.job),f.source.env,{})).status,404);
+    assert.equal(f.calls.length,1);
+  } finally {f.db.close();}
+});
+
+test('machine nonce replay and two distinct signed requests for the same epoch cannot duplicate provider execution',async()=>{
+  let unblock,started;const executing=new Promise(resolve=>started=resolve);
+  const f=await machineFixture(()=>{started();return new Promise(resolve=>unblock=()=>resolve(durableReply()));});
+  try {
+    const request=await signedEvaluationRequest(machineSecret,f.job),replay=request.clone();
+    const first=worker.fetch(request,f.source.env,{});await executing;
+    assert.equal((await worker.fetch(replay,f.source.env,{})).status,404);
+    const second=await worker.fetch(await signedEvaluationRequest(machineSecret,f.job),f.source.env,{});
+    assert.equal(second.status,200);assert.equal((await second.json()).status,'pending');
+    assert.equal(f.calls.length,2,'foreground failure plus exactly one background provider call');
+    unblock();const result=await (await first).json();assert.equal(result.status,'completed');
+    assert.deepEqual(Object.keys(result).sort(),['jobId','leaseEpoch','ok','status']);
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluator_calls').get().n,2);
+    const again=await worker.fetch(await signedEvaluationRequest(machineSecret,f.job),f.source.env,{});
+    assert.equal((await again.json()).status,'completed');assert.equal(f.calls.length,2);
+  } finally {f.db.close();}
+});
+
+test('lost signed HTTP receipt after Pages commit preserves the completed result and never triggers another model',async()=>{
+  const f=await machineFixture();
+  try {
+    await assert.rejects(executeEvaluationRemotely(f.source.env,f.job,async request=>{
+      assert.equal(request.redirect,'manual');
+      const response=await worker.fetch(request,f.source.env,{});assert.equal((await response.json()).status,'completed');
+      throw new TypeError('synthetic lost HTTP receipt');
+    }),TypeError);
+    const current=await deferEvaluationJob(f.source.env.READING_DB,f.job,new TypeError('synthetic unknown'));
+    assert.equal(current.state,'completed');assert.equal(f.calls.length,2);
+    const recovered=await executeEvaluationRemotely(f.source.env,f.job,r=>worker.fetch(r,f.source.env,{}));
+    assert.equal(recovered.status,'completed');assert.equal(f.calls.length,2);
+    await assertSourceEventsValid(f.db);
+  } finally {f.db.close();}
+});
+
+test('machine service unavailable, invalid receipts and old epochs never obtain an extra model attempt',async()=>{
+  const f=await machineFixture();
+  try {
+    for(const send of [async()=>{throw new TypeError('offline');},async()=>new Response('unavailable',{status:503}),
+      async()=>new Response('',{status:302,headers:{location:'https://example.invalid/'}}),
+      async()=>new Response('not-json',{status:200}),
+      async()=>Response.json({ok:true,status:'completed',jobId:'other',leaseEpoch:f.job.lease_epoch}),
+      async()=>Response.json({ok:true,status:'completed',jobId:f.job.source_event_id,leaseEpoch:f.job.lease_epoch,assessment:'forbidden'})]) {
+      await assert.rejects(executeEvaluationRemotely(f.source.env,f.job,send),TypeError);
+    }
+    assert.equal(f.calls.length,1);
+    f.db.exec('UPDATE learning_evaluation_jobs SET lease_epoch=lease_epoch+1');
+    assert.equal((await worker.fetch(await signedEvaluationRequest(machineSecret,f.job),f.source.env,{})).status,404);
+    assert.equal(f.calls.length,1);
+  } finally {f.db.close();}
 });

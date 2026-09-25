@@ -1,4 +1,5 @@
 import { sourceEventStatement, evaluationEventBase, evaluationEventId, latestSourceEvent } from './learning-evaluation-events.js';
+import { EVALUATION_MACHINE_PATH, handleEvaluationMachine } from './evaluation-machine.js';
 import { EvaluationPending, pendingEvaluationResponse, createEvaluationJob,
   claimEvaluationJob, saveEvaluationReply, latestEvaluationReply, deferEvaluationJob,
   drainEvaluationJobs, loadEvaluationJob } from "./durable-evaluation-jobs.js";
@@ -84,6 +85,13 @@ const YW_PRE_ACTIVATION_TRANSPORT_CANARY = Object.freeze({
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if(url.pathname===EVALUATION_MACHINE_PATH) return handleEvaluationMachine(request,env,async job=>{
+      try {await completeDurableEvaluationJob(env,job);return 'completed';}
+      catch(error) {
+        if(error?.code!=='evaluation_execution_already_started') await deferEvaluationJob(env.READING_DB,job,error);
+        return 'pending';
+      }
+    });
     if (url.pathname === "/api/chat" && request.method === "POST") {
       return handleChat(request, env);
     }
@@ -3223,6 +3231,13 @@ async function evaluateDurableJob(env,job,reservation,prompt) {
     answer:existing.answer_text,actualModel:existing.actual_model,modelVersion:existing.model_version,
     requestId:existing.request_id,rawResponseJson:existing.raw_response_json,
   },existing.received_at); // Repair projection/commit without another model call.
+  const start=await env.READING_DB.prepare(`INSERT OR IGNORE INTO learning_evaluation_executions(source_event_id,lease_epoch,started_at)
+    SELECT source_event_id,lease_epoch,? FROM learning_evaluation_jobs
+    WHERE source_event_id=? AND lease_epoch=? AND state='leased' AND lease_until>=?`)
+    .bind(Date.now(),job.source_event_id,job.lease_epoch,Date.now()).run();
+  if(Number(start?.meta?.changes)!==1) {
+    const error=new Error('evaluation epoch already started');error.code='evaluation_execution_already_started';throw error;
+  }
   const call=await reserveLearningEvaluatorCall({env,submissionReservation:reservation});
   const requestId=crypto.randomUUID();
   const retry=await latestSourceEvent(env.READING_DB,job.source_event_id,'ai.retry');

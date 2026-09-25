@@ -2016,7 +2016,8 @@ export async function restoreEvaluationReservation(env,job) {
     || current.lease_until<Date.now()) throw new Error('evaluation lease unavailable');
   const snapshot=JSON.parse(current.snapshot_json);
   if(snapshot.schema!=='yw-evaluation-snapshot-v1' || snapshot.reservation.sourceEventId!==current.source_event_id
-    || snapshot.reservation.studentId!==current.student_id) throw new Error('evaluation snapshot invalid');
+    || snapshot.reservation.studentId!==current.student_id || snapshot.completion.student.id!==current.student_id
+    || snapshot.reservation.resourceKey!==current.resource_key) throw new Error('evaluation snapshot invalid');
   const reservation={...snapshot.reservation,evaluationJob:current};
   trustedSubmissionReservations.add(reservation);
   return {snapshot,reservation};

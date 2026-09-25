@@ -80,6 +80,8 @@ export async function latestEvaluationReply(db,id) {
   return db.prepare('SELECT * FROM learning_evaluation_replies WHERE source_event_id=? ORDER BY id DESC LIMIT 1').bind(id).first();
 }
 export async function deferEvaluationJob(db,job,error,now=Date.now()) {
+  const current=await loadEvaluationJob(db,job.source_event_id);
+  if(!current || current.lease_epoch!==job.lease_epoch || current.state!=='leased') return current;
   const calls=await db.prepare('SELECT COUNT(*) AS n FROM learning_evaluator_calls WHERE source_event_id=?').bind(job.source_event_id).first();
   const reply=await latestEvaluationReply(db,job.source_event_id);
   const temporary=error?.apisStatus===429 || (error?.apisStatus===503
@@ -200,7 +202,7 @@ export async function drainEvaluationJobs(env,execute,now=Date.now()) {
       if(!row) break;
       const job=await claimEvaluationJob(db,row.source_event_id);
       if(!job) break;
-      try { await execute(job); completed++; }
+      try { const result=await execute(job);if(result?.status!=='pending') completed++; }
       catch(error) { await deferEvaluationJob(db,job,error); }
       await db.prepare('UPDATE learning_evaluation_scheduler SET last_student_id=? WHERE id=1 AND owner=?')
         .bind(job.student_id,owner).run();

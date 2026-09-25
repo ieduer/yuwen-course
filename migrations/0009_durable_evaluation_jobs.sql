@@ -60,6 +60,15 @@ CREATE TABLE IF NOT EXISTS learning_evaluation_alert_state (
 );
 INSERT OR IGNORE INTO learning_evaluation_alert_state(id) VALUES(1);
 
+-- Machine authentication replay fence and per-epoch outbound start fence.
+CREATE TABLE learning_evaluation_machine_nonces (nonce TEXT PRIMARY KEY,used_at INTEGER NOT NULL);
+CREATE TABLE learning_evaluation_executions (
+ source_event_id TEXT NOT NULL REFERENCES learning_evaluation_jobs(source_event_id),
+ lease_epoch INTEGER NOT NULL,
+ started_at INTEGER NOT NULL,
+ PRIMARY KEY(source_event_id,lease_epoch)
+);
+
 -- Full immutable source facts; the unified recorder bridge supplies UC scope.
 CREATE TABLE learning_evaluation_events (
  event_id TEXT PRIMARY KEY,
