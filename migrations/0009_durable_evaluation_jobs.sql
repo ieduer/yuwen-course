@@ -19,6 +19,7 @@ CREATE TABLE learning_evaluation_replies (
  lease_epoch INTEGER NOT NULL,
  request_id TEXT NOT NULL,
  answer_text TEXT NOT NULL,
+ raw_response_json TEXT,
  actual_model TEXT,
  model_version TEXT,
  version_status TEXT NOT NULL,
@@ -58,3 +59,32 @@ CREATE TABLE IF NOT EXISTS learning_evaluation_alert_state (
   last_reported_at INTEGER NOT NULL DEFAULT 0
 );
 INSERT OR IGNORE INTO learning_evaluation_alert_state(id) VALUES(1);
+
+-- Full immutable source facts; the unified recorder bridge supplies UC scope.
+CREATE TABLE learning_evaluation_events (
+ event_id TEXT PRIMARY KEY,
+ source_event_id TEXT NOT NULL REFERENCES learning_pending_submissions(source_event_id),
+ student_id INTEGER NOT NULL,
+ action TEXT NOT NULL,
+ parent_event_id TEXT NOT NULL,
+ occurred_at TEXT NOT NULL,
+ payload_json TEXT NOT NULL,
+ payload_sha256 TEXT NOT NULL,
+ payload_bytes INTEGER NOT NULL
+);
+CREATE INDEX learning_evaluation_events_source ON learning_evaluation_events(source_event_id,action);
+CREATE TRIGGER learning_event_conflict BEFORE INSERT ON learning_evaluation_events
+BEGIN
+ SELECT CASE WHEN EXISTS (SELECT 1 FROM learning_evaluation_events e WHERE e.event_id=NEW.event_id
+  AND (e.payload_sha256!=NEW.payload_sha256 OR e.payload_json!=NEW.payload_json
+   OR e.student_id!=NEW.student_id OR e.source_event_id!=NEW.source_event_id))
+ THEN RAISE(ABORT,'immutable learning event conflict') END;
+END;
+CREATE TRIGGER learning_event_no_update BEFORE UPDATE ON learning_evaluation_events
+BEGIN
+ SELECT RAISE(ABORT,'immutable learning event');
+END;
+CREATE TRIGGER learning_event_no_delete BEFORE DELETE ON learning_evaluation_events
+BEGIN
+ SELECT RAISE(ABORT,'immutable learning event');
+END;

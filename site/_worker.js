@@ -1,3 +1,4 @@
+import { sourceEventStatement, evaluationEventBase, evaluationEventId, latestSourceEvent } from './learning-evaluation-events.js';
 import { EvaluationPending, pendingEvaluationResponse, createEvaluationJob,
   claimEvaluationJob, saveEvaluationReply, latestEvaluationReply, deferEvaluationJob,
   drainEvaluationJobs, loadEvaluationJob } from "./durable-evaluation-jobs.js";
@@ -1591,7 +1592,7 @@ async function handlePendingInteractionResume(request, env) {
 async function callLearningEvaluator(request, env, submissionReservation, prompt, completion) {
   if (env.YW_DURABLE_EVALUATION_ENABLED === 'true' && submissionReservation.durableEvaluationEligible) {
     const reservation = snapshotEvaluationReservation(submissionReservation);
-    const snapshot = {schema:'yw-evaluation-snapshot-v1',rubricVersion:'yw-durable-assessment-v1',
+    const snapshot = {schema:'yw-evaluation-snapshot-v1',rubricVersion:'yw-durable-assessment-v1',leafRelease:env.CF_VERSION_METADATA?.id || null,
       prompt,reservation,completion:{...completion,
         student:{id:completion.student.id,ucUserId:completion.student.ucUserId||null},
         lesson:{id:completion.lesson.id,title:completion.lesson.title,
@@ -1659,7 +1660,11 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
       } : { prompt, taskType, thinkingLevel }),
       signal: controller.signal,
     }));
-    const data = await response.json().catch((error) => {
+    let rawResponseJson=null;
+    const data = await (options.returnMetadata ? response.text().then(text=>{
+      if(response.ok) rawResponseJson=text;
+      try {const parsed=JSON.parse(text);return parsed && typeof parsed==='object' && !Array.isArray(parsed)?parsed:{};} catch {return {};}
+    }) : response.json()).catch((error) => {
       if (error?.name === "AbortError") throw error;
       return {};
     });
@@ -1677,7 +1682,7 @@ export async function callApisPrompt(env, prompt, taskType = "chat", thinkingLev
       const value = typeof data.answer === 'string' ? data.answer : '';
       const identifier = v => typeof v === 'string' && /^[A-Za-z0-9._:-]{1,160}$/.test(v) ? v : null;
       return {answer:value, actualModel:identifier(data.model),
-        modelVersion:identifier(data.raw_response?.modelVersion), requestId:identifier(data.requestId)||options.requestId||''};
+        modelVersion:identifier(data.raw_response?.modelVersion), requestId:identifier(data.requestId)||options.requestId||'',rawResponseJson};
     }
     const answer = cleanText(data.answer, 8000);
     if (!answer) throw new Error("APIS returned empty answer");
@@ -3214,10 +3219,22 @@ function validDurableAssessment(parsed) {
 }
 async function evaluateDurableJob(env,job,reservation,prompt) {
   const existing=await latestEvaluationReply(env.READING_DB,job.source_event_id);
-  if(existing) return existing; // Commit recovery never spends another model call.
-  await reserveLearningEvaluatorCall({env,submissionReservation:reservation});
+  if(existing) return saveEvaluationReply(env.READING_DB,{...job,lease_epoch:existing.lease_epoch},{
+    answer:existing.answer_text,actualModel:existing.actual_model,modelVersion:existing.model_version,
+    requestId:existing.request_id,rawResponseJson:existing.raw_response_json,
+  },existing.received_at); // Repair projection/commit without another model call.
+  const call=await reserveLearningEvaluatorCall({env,submissionReservation:reservation});
+  const requestId=crypto.randomUUID();
+  const retry=await latestSourceEvent(env.READING_DB,job.source_event_id,'ai.retry');
+  await (await sourceEventStatement(env.READING_DB,evaluationEventBase(job),{
+    action:'ai.request',kind:'request',key:call.callLedgerId,
+    parentId:retry?.event_id || await evaluationEventId(job.source_event_id,'submit'),at:call.createdAt,
+    content:{prompt},sourceContext:{requestId,attemptNumber:call.attemptNumber,callLedgerId:call.callLedgerId,
+      leaseEpoch:job.lease_epoch,jobState:'leased',taskType:'feedback',thinkingLevel:'medium',
+      routing:'apis_task_policy'},
+  })).run();
   const result=await callApisPrompt(env,prompt,'feedback','medium',{
-    timeoutMs:25_000,requestId:crypto.randomUUID(),returnMetadata:true,
+    timeoutMs:25_000,requestId,returnMetadata:true,
   });
   return saveEvaluationReply(env.READING_DB,job,result);
 }

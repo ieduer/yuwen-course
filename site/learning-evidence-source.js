@@ -1,4 +1,6 @@
 import { loadEvaluationJob, JOB_POLICY } from "./durable-evaluation-jobs.js";
+import { sourceEventStatement, evaluationEventId, evaluationEventBase,
+  latestSourceEvent, replyAssessment, sourceEventJob } from './learning-evaluation-events.js';
 import {
   hasClassicalAnnotatedReadReceipt,
   loadClassicalFirstRead,
@@ -685,7 +687,9 @@ async function capturePendingSubmission(db, expected, occurredAt, originalPayloa
     if(originalPayloadJson !== null) {
       await db.batch([capture,db.prepare(`INSERT INTO learning_submission_records
         (source_event_id,student_id,submitted_payload_json,captured_at) VALUES(?,?,?,?)`)
-        .bind(expected.sourceEventId,expected.studentId,originalPayloadJson,occurredAt)]);
+        .bind(expected.sourceEventId,expected.studentId,originalPayloadJson,occurredAt),
+        await sourceEventStatement(db,expected,{action:'answer.submit',kind:'submit',actor:'student',
+          status:'succeeded',at:occurredAt,content:{originalJson:originalPayloadJson}})]);
     } else await capture.run();
   } catch (error) {
     if (!isUniqueConstraintError(error)) throw error;
@@ -1311,6 +1315,8 @@ export async function assertLearningSubmissionAllowed({
     interactionKey,
     resourceKey: context.resourceKey,
     rawPayloadJson: raw.serialized,
+    resourceVersion:evidenceVersions(context.registry,context.manifest,context.definition,context.formativeManifest).sourceVersion,
+    leafRelease:env.CF_VERSION_METADATA?.id || null,
   }, occurredAt, pending && !capturedOriginal ? null : originalPayloadJson);
   const submissionReservation = {
     // Historical pending rows lack a pinned original snapshot. Explicit resume
@@ -1411,6 +1417,11 @@ export async function reserveLearningEvaluatorCall({
         submissionReservation.evaluationJob.lease_epoch, Date.now()] : []),
     ).run();
     if (Number(inserted?.meta?.changes || 0) === 1) {
+      if(submissionReservation.evaluationJob) {
+        const call=await db.prepare('SELECT MAX(id) AS id,COUNT(*) AS n FROM learning_evaluator_calls WHERE source_event_id=?')
+          .bind(sourceEventId).first();
+        return {counted:true,studentId,sourceEventId,windowStart,createdAt,callLedgerId:call.id,attemptNumber:call.n};
+      }
       return { counted: true, studentId, sourceEventId, windowStart, createdAt };
     }
     const [studentWindow, mutationWindow] = await Promise.all([
@@ -1484,18 +1495,42 @@ async function enqueueOutbox(env, sourceEventId, envelope) {
   if (!env.LEARNING_EVIDENCE_QUEUE || !Number.isInteger(Number(envelope.userId)) || Number(envelope.userId) <= 0) {
     return { status: "local_only" };
   }
+  const job=await sourceEventJob(env,sourceEventId),deliveryKey=job?crypto.randomUUID():null;
+  if(!job) {
+    // Preserve the accepted legacy Queue/error contract outside durable jobs.
+    try {
+      await env.LEARNING_EVIDENCE_QUEUE.send(envelope,{contentType:'json'});
+      await env.READING_DB.prepare("UPDATE evidence_outbox SET delivery_status = 'enqueued', delivery_attempts = delivery_attempts + 1, last_error_class = '', last_attempt_at = ?, delivered_at = NULL WHERE source_event_id = ?")
+        .bind(isoNow(),sourceEventId).run();
+      return {status:'enqueued'};
+    } catch(error) {
+      await env.READING_DB.prepare("UPDATE evidence_outbox SET delivery_status = 'pending', delivery_attempts = delivery_attempts + 1, last_error_class = ?, last_attempt_at = ? WHERE source_event_id = ?")
+        .bind(clean(error?.name || 'QueueError',80),isoNow(),sourceEventId).run();
+      return {status:'pending'};
+    }
+  }
+  const parent=job?await evaluationEventId(sourceEventId,'queue_request',deliveryKey):null;
+  if(job) await (await sourceEventStatement(env.READING_DB,evaluationEventBase(job),{
+    action:'completion.sync.request',kind:'queue_request',key:deliveryKey,
+    parentId:await evaluationEventId(sourceEventId,'sync_intent'),
+    sourceContext:{phase:'queue_send',retryKind:'receipt',sourceAttemptId:envelope.sourceAttemptId || sourceEventId}})).run();
+  let queueFailed=false;
   try {
     await env.LEARNING_EVIDENCE_QUEUE.send(envelope, { contentType: "json" });
-    await env.READING_DB.prepare(
-      "UPDATE evidence_outbox SET delivery_status = 'enqueued', delivery_attempts = delivery_attempts + 1, last_error_class = '', last_attempt_at = ?, delivered_at = NULL WHERE source_event_id = ?"
-    ).bind(isoNow(), sourceEventId).run();
-    return { status: "enqueued" };
-  } catch (error) {
-    await env.READING_DB.prepare(
+  } catch { queueFailed=true; }
+  const at=isoNow();
+  const update=queueFailed ? env.READING_DB.prepare(
       "UPDATE evidence_outbox SET delivery_status = 'pending', delivery_attempts = delivery_attempts + 1, last_error_class = ?, last_attempt_at = ? WHERE source_event_id = ?"
-    ).bind(clean(error?.name || "QueueError", 80), isoNow(), sourceEventId).run();
-    return { status: "pending" };
-  }
+    ).bind('QueueError',at,sourceEventId) : env.READING_DB.prepare(
+      "UPDATE evidence_outbox SET delivery_status = 'enqueued', delivery_attempts = delivery_attempts + 1, last_error_class = '', last_attempt_at = ?, delivered_at = NULL WHERE source_event_id = ?"
+    ).bind(at,sourceEventId);
+  if(job) await env.READING_DB.batch([update,await sourceEventStatement(env.READING_DB,evaluationEventBase(job),{
+    action:queueFailed?'completion.sync.failure':'completion.sync.request',kind:'queue_outcome',key:deliveryKey,
+    parentId:parent,status:queueFailed?'failed':'pending',at,
+    sourceContext:{phase:queueFailed?'queue_transport_unknown':'queue_enqueued',centralAcceptance:'unconfirmed',
+      sourceAttemptId:envelope.sourceAttemptId || sourceEventId}})]);
+  else await update.run();
+  return {status:queueFailed?'pending':'enqueued'};
 }
 
 export async function recordLearningInteraction({
@@ -1697,6 +1732,22 @@ export async function recordLearningInteraction({
       "UPDATE learning_evaluation_jobs SET state='completed',completed_at=?,lease_until=0 WHERE source_event_id=? AND lease_epoch=?"
     ).bind(Date.now(), sourceEventId, trustedReservation.evaluationJob.lease_epoch)] : []),
   ];
+  if(trustedReservation?.evaluationJob) {
+    const job=trustedReservation.evaluationJob,reply=trustedReservation.evaluationReply;
+    const parent=await evaluationEventId(sourceEventId,'reply',reply.lease_epoch);
+    const resultId=await evaluationEventId(sourceEventId,'result');
+    const base=evaluationEventBase(job);
+    statements.push(await sourceEventStatement(env.READING_DB,base,{
+      action:'evaluation.result',kind:'result',parentId:parent,status:'succeeded',at:completedAt,
+      content:{authoritativeResult:{numericScore,normalizedValue,correctness,verdict,eligibilityStatus,eligibilityReason},
+        modelSuggestion:{originalJson:reply.answer_text}},
+      sourceContext:{leaseEpoch:job.lease_epoch,jobState:'completed',replyRecordId:reply.id,
+        requestId:reply.request_id,evaluatedAt},assessment:replyAssessment(reply)}));
+    // This records durable delivery intent, not an accepted Queue or UC receipt.
+    statements.push(await sourceEventStatement(env.READING_DB,base,{
+      action:'completion.sync.request',kind:'sync_intent',parentId:resultId,at:completedAt,
+      sourceContext:{jobState:'completed',phase:'outbox_intent',sourceAttemptId:envelope.sourceAttemptId || sourceEventId}}));
+  }
   try {
     await env.READING_DB.batch(statements);
   } catch (error) {
@@ -1855,14 +1906,38 @@ export async function reconcileEvidenceOutbox(env, limit = 50) {
   }
   const attemptIds = [...claimedByAttempt.keys()];
   if (!attemptIds.length) return { checked: 0, receipted: 0 };
+  const pollEvents=new Map();
+  for(const row of claimedRows) {
+    const job=await sourceEventJob(env,row.source_event_id);
+    if(!job) continue;
+    const key=crypto.randomUUID(),base=evaluationEventBase(job);
+    const parent=await evaluationEventId(row.source_event_id,'receipt_request',key);
+    await (await sourceEventStatement(env.READING_DB,base,{
+      action:'completion.sync.request',kind:'receipt_request',key,
+      parentId:await evaluationEventId(row.source_event_id,'sync_intent'),at:pollStartedAt,
+      sourceContext:{phase:'central_receipt_read',retryKind:'receipt',sourceAttemptId:row.source_attempt_id || row.source_event_id}})).run();
+    pollEvents.set(row.source_attempt_id || row.source_event_id,{base,key,parent});
+  }
+  const recordReceiptFailure=async(code,ids=attemptIds)=>{
+    const statements=[];
+    for(const id of ids) {
+      const event=pollEvents.get(id);if(!event) continue;
+      statements.push(await sourceEventStatement(env.READING_DB,event.base,{
+        action:'completion.sync.failure',kind:'receipt_failure',key:event.key,parentId:event.parent,status:'failed',
+        sourceContext:{phase:'central_receipt_read',sourceAttemptId:id,reason:code,centralAcceptance:'unconfirmed'}}));
+    }
+    if(statements.length) await env.READING_DB.batch(statements);
+  };
   let response;
   try {
     response = await env.USER_CENTER_EVIDENCE.getLearningEvidenceDeliveryReceipts(attemptIds);
   } catch {
+    await recordReceiptFailure('receipt_transport_unknown');
     return { checked: attemptIds.length, receipted: 0 };
   }
   const receipts = exactCentralDeliveryReceipt(response, attemptIds);
-  if (!receipts) return { checked: attemptIds.length, receipted: 0 };
+  if (!receipts) {await recordReceiptFailure('receipt_schema_invalid');return { checked: attemptIds.length, receipted: 0 };}
+  await recordReceiptFailure('receipt_not_reported',attemptIds.filter(id=>!receipts.some(r=>r.sourceAttemptId===id)));
   let receipted = 0;
   for (const receipt of receipts) {
     const claimedRow = claimedByAttempt.get(receipt.sourceAttemptId);
@@ -1870,10 +1945,16 @@ export async function reconcileEvidenceOutbox(env, limit = 50) {
     // Health and interaction drains may overlap. Bind the exact observed state
     // so a stale poll cannot rewrite or misreport a newer central decision.
     const currentDisposition = clean(claimedRow.central_disposition, 32) || null;
-    if (currentDisposition === receipt.disposition) continue;
-    if (currentDisposition === "pending_mapping"
-      && !["accepted", "quarantined"].includes(receipt.disposition)) continue;
-    const result = await env.READING_DB.prepare(
+    if (currentDisposition === receipt.disposition || (currentDisposition === "pending_mapping"
+      && !["accepted", "quarantined"].includes(receipt.disposition))) {
+      const event=pollEvents.get(receipt.sourceAttemptId);
+      if(event) await (await sourceEventStatement(env.READING_DB,event.base,{
+        action:'completion.sync.result',kind:'receipt_result',key:event.key,parentId:event.parent,status:'succeeded',
+        sourceContext:{phase:'central_receipt_read',sourceAttemptId:receipt.sourceAttemptId,disposition:receipt.disposition,
+          centralAcceptance:receipt.disposition==='accepted'?'accepted':'not_accepted'}})).run();
+      continue;
+    }
+    const update = env.READING_DB.prepare(
       `UPDATE evidence_outbox
           SET central_disposition = ?, central_receipted_at = ?,
               delivered_at = COALESCE(delivered_at, ?), last_error_class = ''
@@ -1889,7 +1970,18 @@ export async function reconcileEvidenceOutbox(env, limit = 50) {
       currentDisposition,
       currentDisposition,
       receipt.sourceAttemptId,
-    ).run();
+    );
+    const event=pollEvents.get(receipt.sourceAttemptId);
+    let result;
+    if(event) {
+      // A returned receipt is a true observation even if another owner wins
+      // the mutable outbox CAS. It never changes the meaning of that CAS.
+      const results=await env.READING_DB.batch([update,await sourceEventStatement(env.READING_DB,event.base,{
+        action:'completion.sync.result',kind:'receipt_result',key:event.key,parentId:event.parent,status:'succeeded',
+        sourceContext:{phase:'central_receipt_read',sourceAttemptId:receipt.sourceAttemptId,disposition:receipt.disposition,
+          centralAcceptance:receipt.disposition==='accepted'?'accepted':'not_accepted'}})]);
+      result=results[0];
+    } else result=await update.run();
     if (Number(result?.meta?.changes || 0) === 1) receipted += 1;
   }
   return { checked: attemptIds.length, receipted };

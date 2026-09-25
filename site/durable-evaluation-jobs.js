@@ -1,4 +1,6 @@
 // All content belongs only in the authenticated source database, never logs.
+import { sourceEventStatement, evaluationEventId, evaluationEventBase,
+  latestSourceEvent, replyAssessment } from './learning-evaluation-events.js';
 export const JOB_POLICY = Object.freeze({ maxCalls: 4, leaseMs: 90_000, maxJobsPerTick: 2 });
 export class EvaluationPending extends Error {
   constructor(job) { super('答案已保存，評閱稍後補上'); this.code='learning_evaluation_pending'; this.job=job; }
@@ -14,11 +16,18 @@ export async function loadEvaluationJob(db,id) {
 }
 export async function createEvaluationJob(db,reservation,snapshot,now=Date.now()) {
   // The pending submission is already durable. Insert and readback precede 202.
-  await db.prepare(`INSERT OR IGNORE INTO learning_evaluation_jobs
+  const existing=await loadEvaluationJob(db,reservation.sourceEventId);
+  if(existing) return existing;
+  const insert=db.prepare(`INSERT OR IGNORE INTO learning_evaluation_jobs
     (source_event_id,student_id,resource_key,snapshot_json,state,first_pending_at,next_attempt_at)
     SELECT source_event_id,student_id,resource_key,?,'queued',?,?
     FROM learning_pending_submissions WHERE source_event_id=? AND student_id=? AND status!='completed'`)
-    .bind(JSON.stringify(snapshot),now,now,reservation.sourceEventId,reservation.studentId).run();
+    .bind(JSON.stringify(snapshot),now,now,reservation.sourceEventId,reservation.studentId);
+  const base=evaluationEventBase({source_event_id:reservation.sourceEventId,student_id:reservation.studentId,
+    resource_key:reservation.resourceKey,snapshot_json:JSON.stringify(snapshot)});
+  await db.batch([insert,await sourceEventStatement(db,base,{action:'evaluation.pending',kind:'pending',
+    parentId:await evaluationEventId(reservation.sourceEventId,'submit'),at:new Date(now).toISOString(),
+    sourceContext:{jobState:'queued',reason:'awaiting_evaluation'}})]);
   const job=await loadEvaluationJob(db,reservation.sourceEventId);
   if(!job) throw new Error('durable evaluation capture unavailable');
   return job;
@@ -38,14 +47,33 @@ export async function claimEvaluationJob(db,id,now=Date.now()) {
 }
 export async function saveEvaluationReply(db,job,result,now=Date.now()) {
   // Preserve late replies too. A stale owner may journal, but cannot score.
-  await db.prepare(`INSERT OR IGNORE INTO learning_evaluation_replies
-    (source_event_id,lease_epoch,request_id,answer_text,actual_model,model_version,version_status,received_at)
-    VALUES(?,?,?,?,?,?,?,?)`).bind(job.source_event_id,job.lease_epoch,result.requestId||'',
+  const prior=await db.prepare('SELECT * FROM learning_evaluation_replies WHERE source_event_id=? AND lease_epoch=?')
+    .bind(job.source_event_id,job.lease_epoch).first();
+  if(prior) {
+    if(prior.answer_text!==result.answer || prior.raw_response_json!==(result.rawResponseJson||null))
+      throw new Error('AI reply journal conflict');
+    now=prior.received_at;
+  }
+  const request=await latestSourceEvent(db,job.source_event_id,'ai.request',job.lease_epoch);
+  const requestContext=request?JSON.parse(request.payload_json).context.sourceContext:{};
+  // The irreplaceable provider reply wins over the secondary event projection:
+  // persist it first, then recover a failed projection locally from this row.
+  if(!prior) await db.prepare(`INSERT OR IGNORE INTO learning_evaluation_replies
+    (source_event_id,lease_epoch,request_id,answer_text,actual_model,model_version,version_status,received_at,raw_response_json)
+    VALUES(?,?,?,?,?,?,?,?,?)`).bind(job.source_event_id,job.lease_epoch,result.requestId||'',
       result.answer,result.actualModel||null,result.modelVersion||null,
-      result.modelVersion?'reported':'unavailable',now).run();
+      result.modelVersion?'reported':'unavailable',now,result.rawResponseJson||null).run();
   const saved=await db.prepare(`SELECT * FROM learning_evaluation_replies WHERE source_event_id=? AND lease_epoch=?`)
     .bind(job.source_event_id,job.lease_epoch).first();
-  if(!saved || saved.answer_text!==result.answer) throw new Error('AI reply journal readback failed');
+  if(!saved || saved.answer_text!==result.answer || saved.raw_response_json!==(result.rawResponseJson||null)
+    || saved.actual_model!==(result.actualModel||null) || saved.model_version!==(result.modelVersion||null))
+    throw new Error('AI reply journal readback failed');
+  await (await sourceEventStatement(db,evaluationEventBase(job),{action:'assistant.reply',kind:'reply',key:job.lease_epoch,
+      parentId:request?.event_id || '',actor:'assistant',status:'succeeded',at:new Date(now).toISOString(),
+      content:{text:result.answer,rawResponseJson:result.rawResponseJson||null},
+      sourceContext:{...requestContext,leaseEpoch:job.lease_epoch,requestId:result.requestId||null,
+        originatingRequestId:requestContext.requestId||null},
+      assessment:replyAssessment({actual_model:result.actualModel,model_version:result.modelVersion})})).run();
   return saved;
 }
 export async function latestEvaluationReply(db,id) {
@@ -64,9 +92,34 @@ export async function deferEvaluationJob(db,job,error,now=Date.now()) {
   const jitter=Array.from(job.source_event_id+':'+job.lease_epoch).reduce((n,c)=>(n*31+c.charCodeAt(0))%10001,0);
   const reason=reply?'reply_saved':state==='blocked'?'automatic_limit_or_permanent_failure'
     :state==='uncertain'?'transport_unknown':'temporary_unavailable';
-  await db.prepare(`UPDATE learning_evaluation_jobs SET state=?,next_attempt_at=?,lease_until=0,last_error_class=?
+  const nextAt=now+Math.max(delay,Math.max(0,Number(error?.retryAfterSeconds)||0)*1000)+jitter;
+  const statements=[db.prepare(`UPDATE learning_evaluation_jobs SET state=?,next_attempt_at=?,lease_until=0,last_error_class=?
     WHERE source_event_id=? AND state='leased' AND lease_epoch=?`)
-    .bind(state,now+Math.max(delay,Math.max(0,Number(error?.retryAfterSeconds)||0)*1000)+jitter,reason,job.source_event_id,job.lease_epoch).run();
+    .bind(state,nextAt,reason,job.source_event_id,job.lease_epoch)];
+  const request=await latestSourceEvent(db,job.source_event_id,'ai.request',job.lease_epoch);
+  const base=evaluationEventBase(job),at=new Date(now).toISOString();
+  const requestContext=request?JSON.parse(request.payload_json).context.sourceContext:{};
+  const failureKind=reply?'evaluation_failure':'failure';
+  const failureId=await evaluationEventId(job.source_event_id,failureKind,job.lease_epoch);
+  // Re-entry after a failed downstream step must not rewrite the first failure.
+  const prior=await db.prepare('SELECT event_id FROM learning_evaluation_events WHERE event_id=?').bind(failureId).first();
+  if(!prior) {
+    const classification=error?.code==='invalid_ai_assessment'?'invalid_ai_assessment'
+      :reply?'local_commit_failure':ambiguous?'transport_unknown'
+      :error?.code==='learning_evaluator_budget_exhausted'?'local_budget_exhausted'
+      :Number.isInteger(error?.apisStatus)?'apis_http_failure':'local_execution_failure';
+    statements.push(await sourceEventStatement(db,base,{action:reply?(state==='blocked'?'evaluation.blocked':'evaluation.pending'):'ai.failure',
+      kind:failureKind,key:job.lease_epoch,parentId:reply
+        ?await evaluationEventId(job.source_event_id,'reply',reply.lease_epoch):request?.event_id||await evaluationEventId(job.source_event_id,'pending'),
+      status:reply&&state==='queued'?'pending':ambiguous?'partial':'failed',at,sourceContext:{...requestContext,leaseEpoch:job.lease_epoch,
+        jobState:state,reason:classification,httpStatus:Number.isInteger(error?.apisStatus)?error.apisStatus:null,
+        errorCode:['DEADLINE_EXCEEDED','UPSTREAM_UNAVAILABLE','NON_RETRYABLE'].includes(error?.apisCode)?error.apisCode:null,
+        retryAfterSeconds:Number.isFinite(error?.retryAfterSeconds)?error.retryAfterSeconds:null}}));
+    if(state==='queued') statements.push(await sourceEventStatement(db,base,{action:'ai.retry',kind:'retry',key:job.lease_epoch,
+      parentId:failureId,at,sourceContext:{jobState:state,retryKind:'automatic',leaseEpoch:job.lease_epoch,
+        nextAttemptAt:new Date(nextAt).toISOString(),executionKind:reply?'local_commit_only':'apis_call'}}));
+  }
+  await db.batch(statements);
   return loadEvaluationJob(db,job.source_event_id);
 }
 export async function evaluationBacklog(db,now=Date.now()) {
@@ -116,12 +169,26 @@ export async function drainEvaluationJobs(env,execute,now=Date.now()) {
   if(Number(lock?.meta?.changes)!==1) return {busy:true};
   let completed=0;
   try {
-    // A crashed execution with a saved reply needs only a local commit retry.
-    await db.prepare(`UPDATE learning_evaluation_jobs SET state=CASE WHEN EXISTS
-      (SELECT 1 FROM learning_evaluation_replies r WHERE r.source_event_id=learning_evaluation_jobs.source_event_id)
-      THEN 'queued' ELSE 'uncertain' END,last_error_class='expired_execution'
-      WHERE (state='leased' AND lease_until<?) OR (state='uncertain' AND EXISTS
-        (SELECT 1 FROM learning_evaluation_replies r WHERE r.source_event_id=learning_evaluation_jobs.source_event_id))`).bind(now).run();
+    // Preserve recovery decisions too; never pretend an expired lease proves
+    // that its outbound request did not execute.
+    const recovering=await db.prepare(`SELECT * FROM learning_evaluation_jobs WHERE
+      (state='leased' AND lease_until<?) OR (state='uncertain' AND EXISTS
+        (SELECT 1 FROM learning_evaluation_replies r WHERE r.source_event_id=learning_evaluation_jobs.source_event_id))
+      ORDER BY first_pending_at LIMIT ${JOB_POLICY.maxJobsPerTick}`).bind(now).all();
+    for(const job of recovering.results || []) {
+      const reply=await latestEvaluationReply(db,job.source_event_id);
+      const request=await latestSourceEvent(db,job.source_event_id,'ai.request',job.lease_epoch);
+      const state=reply?'queued':'uncertain',at=new Date(now).toISOString();
+      const statement=await sourceEventStatement(db,evaluationEventBase(job),{
+        action:reply?'ai.retry':'ai.failure',kind:reply?'recover_reply':'expired',key:job.lease_epoch,
+        parentId:reply?await evaluationEventId(job.source_event_id,'reply',reply.lease_epoch):request?.event_id || '',
+        status:reply?'pending':'partial',at,
+        sourceContext:{leaseEpoch:job.lease_epoch,jobState:state,reason:'expired_execution',
+          retryKind:reply?'automatic':null,executionKind:reply?'local_commit_only':'transport_unknown'}});
+      await db.batch([db.prepare(`UPDATE learning_evaluation_jobs SET state=?,last_error_class='expired_execution'
+        WHERE source_event_id=? AND lease_epoch=? AND state=?`).bind(state,job.source_event_id,job.lease_epoch,job.state),statement]);
+    }
+
     for(let i=0;i<JOB_POLICY.maxJobsPerTick;i++) {
       const row=await db.prepare(`SELECT j.source_event_id FROM learning_evaluation_jobs j
         WHERE state='queued' AND next_attempt_at<=? AND NOT EXISTS (

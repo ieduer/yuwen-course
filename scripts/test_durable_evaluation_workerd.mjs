@@ -45,6 +45,13 @@ test('real workerd/D1 preserves a 202 submission across independent foreground a
     await db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
     const drained=await scheduler.fetch('https://fixture.invalid/');assert.equal(drained.status,200);assert.equal((await drained.json()).completed,1);
     assert.equal(attempts,2);
+    const facts=(await db.prepare('SELECT payload_json FROM learning_evaluation_events ORDER BY rowid').all()).results.map(r=>JSON.parse(r.payload_json));
+    assert.deepEqual(facts.filter(r=>r.action==='ai.request').map(r=>r.context.sourceContext.attemptNumber),[1,2]);
+    assert.equal(facts.filter(r=>r.action==='ai.failure').length,1);
+    assert.equal(facts.filter(r=>r.action==='evaluation.result').length,1);
+    const eventIds=new Set(facts.map(r=>r.operationId));
+    assert.ok(facts.every(r=>!r.parentOperationId || eventIds.has(r.parentOperationId)));
+    assert.ok(facts.every(r=>!Object.hasOwn(r,'scope')));
     const reply=await db.prepare('SELECT * FROM learning_evaluation_replies').first();
     assert.equal(reply.answer_text,answer);assert.equal(reply.model_version,'fixture-revision');
     assert.equal((await db.prepare('SELECT COUNT(*) n FROM learning_interactions').first()).n,1);

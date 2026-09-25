@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1228,
-  "totalBytes": 164524262,
-  "aggregateSha256": "eee2fef2a07f34d6c71a80ca9fe23ea197ef8b75321294d2b9d9139191c360fe",
+  "fileCount": 1229,
+  "totalBytes": 164542257,
+  "aggregateSha256": "44f009425535435743b147062713bc4a6228d90a690b3a026a7727a58af50d6e",
   "files": [
     {
       "path": "_headers",
@@ -17,13 +17,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 141784,
-      "sha256": "0b930b2fbf5a19b250e3fa2c1e6bfee279e67c47b1d29c84343ddd08c8df7e95"
+      "bytes": 143154,
+      "sha256": "284a9ae5f01fa88d8aeec8b4b14fbde8326a9f689581f2c3a111c7de12f3c1a9"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "6b8078eb80f73ac6f7704d4579ae8143551eb54df6dcc05995438e255247bbdd"
+      "sha256": "b08b997aff822d4654aed34a7c4567cd3179d15c9bb3df94a39b16bd4d121ea9"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -6027,8 +6027,8 @@
     },
     {
       "path": "durable-evaluation-jobs.js",
-      "bytes": 10963,
-      "sha256": "7824c219a65e499314265d04c701590d42f45a6e4d591aa9715d578754e562c8"
+      "bytes": 16447,
+      "sha256": "c79d6f817a9c9a77e6d7b22115e961475cc94fa7b8ed73e9b347a592c0532091"
     },
     {
       "path": "evaluation-scheduler.js",
@@ -6051,9 +6051,14 @@
       "sha256": "a432815558be61a4411c8b01b93325d99a55834cbeeee458d811ad2b845a0d0e"
     },
     {
+      "path": "learning-evaluation-events.js",
+      "bytes": 4401,
+      "sha256": "ab721302597ae0ea9e875158a402916b444ecf140da2678503529d185e77c34a"
+    },
+    {
       "path": "learning-evidence-source.js",
-      "bytes": 85542,
-      "sha256": "407991d3c1c0a13345dd6bd36f538793aa30769973f072fabf64812443c916dd"
+      "bytes": 92282,
+      "sha256": "b1f1c22380c69e82fe5138b0e04c792fe60b78fee629e143d8d35c30bd1c1b08"
     },
     {
       "path": "lesson-blueprint-rules.js",

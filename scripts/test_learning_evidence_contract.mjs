@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { sourceEventStatement, evaluationEventId, eventDigest, canonicalEventJson } from '../site/learning-evaluation-events.js';
+import { normalizeLearningOperation } from './fixtures/uc-learning-operation-journal-65be121.js';
 import { claimEvaluationJob, loadEvaluationJob, createEvaluationJob, evaluationBacklog,
   deferEvaluationJob, saveEvaluationReply, reportEvaluationBacklog, drainEvaluationJobs } from '../site/durable-evaluation-jobs.js';
 
@@ -4587,4 +4589,177 @@ test('study-guide pending pins the original rubric and completes with preserved 
     const reply=f.db.prepare('SELECT received_at FROM learning_evaluation_replies').get();
     assert.equal(evaluation.evaluated_at,new Date(reply.received_at).toISOString());
   }finally{f.db.close();}
+});
+
+function sourceEvents(db) {
+  return db.prepare('SELECT * FROM learning_evaluation_events ORDER BY rowid').all().map(row=>({...row,event:JSON.parse(row.payload_json)}));
+}
+async function assertSourceEventsValid(db) {
+  const rows=sourceEvents(db),ids=new Set(rows.map(r=>r.event_id));
+  for(const row of rows) {
+    assert.match(row.event_id,/^yw:[A-Za-z0-9:_-]{9,177}$/);
+    assert.equal(Object.hasOwn(row.event,'scope'),false,'source must not manufacture a UC scope');
+    // Format validation only. This synthetic scope is never used for auth/I/O.
+    assert.equal(normalizeLearningOperation({...row.event,scope:'0'.repeat(64)}).ok,true,row.action);
+    assert.equal(await eventDigest(row.payload_json),row.payload_sha256);
+    assert.equal(Buffer.byteLength(row.payload_json),row.payload_bytes);
+    assert.equal(canonicalEventJson(row.event),row.payload_json);
+    if(row.parent_event_id) assert.ok(ids.has(row.parent_event_id),'missing parent for '+row.action);
+    const ctx=row.event.context.sourceContext;
+    assert.equal(ctx.providerAttemptCount,null);
+    assert.equal(ctx.providerAttemptCountStatus,'not_reported');
+    assert.equal(row.event.assessment.thoughtsTokenCount,null);
+  }
+  return rows;
+}
+
+test('recorder source events preserve exact input, per-call failure/retry, model reply, authority and central receipts',async()=>{
+  const f=durableFixture(n=>n===1?Response.json({error_code:'DEADLINE_EXCEEDED'},{status:503,headers:{'retry-after':'2'}}):durableReply());
+  try {
+    const originalProvider=f.source.env.APIS.fetch;
+    f.source.env.APIS.fetch=async request=>{
+      const event=sourceEvents(f.db).filter(r=>r.action==='ai.request').at(-1).event;
+      assert.equal(event.context.sourceContext.requestId,request.headers.get('x-request-id'));
+      assert.equal(event.content.prompt,(await request.clone().json()).contents[0].parts[0].text);
+      return originalProvider(request);
+    };
+    const response=await worker.fetch(f.request(),f.source.env,{}),pending=await response.json();
+    assert.equal(response.status,202);
+    let rows=await assertSourceEventsValid(f.db);
+    assert.equal(JSON.parse(rows.find(r=>r.action==='answer.submit').event.content.originalJson).reason,f.body.input.reason);
+    const before=rows.map(r=>r.payload_json);
+    const failure=rows.find(r=>r.action==='ai.failure').event;
+    assert.equal(failure.context.sourceContext.errorCode,'DEADLINE_EXCEEDED');
+    assert.equal(failure.context.sourceContext.retryAfterSeconds,2);
+    f.db.exec('UPDATE learning_evaluation_jobs SET next_attempt_at=0');
+    await completeDurableEvaluationJob(f.source.env,await claimEvaluationJob(f.source.env.READING_DB,pending.pendingId));
+    rows=await assertSourceEventsValid(f.db);
+    assert.deepEqual(rows.slice(0,before.length).map(r=>r.payload_json),before);
+    assert.deepEqual(rows.filter(r=>r.action==='ai.request').map(r=>r.event.context.sourceContext.attemptNumber),[1,2]);
+    const reply=rows.find(r=>r.action==='assistant.reply').event;
+    assert.equal(reply.assessment.reportedModel,'gemini-3.5-flash-lite');
+    assert.equal(reply.assessment.modelVersion,'gemini-3.5-flash-lite-001');
+    assert.equal(JSON.parse(reply.content.rawResponseJson).answer,reply.content.text);
+    const result=rows.find(r=>r.action==='evaluation.result').event;
+    assert.equal(result.content.modelSuggestion.originalJson,reply.content.text);
+    assert.equal(result.content.authoritativeResult.numericScore,85);
+    assert.equal(rows.some(r=>r.action==='completion.sync.result'),false,'Queue ack is not a UC receipt');
+    f.source.env.USER_CENTER_EVIDENCE.getLearningEvidenceDeliveryReceipts=async ids=>({
+      schemaVersion:'bdfz-learning-evidence-delivery-receipts-v1',sourceSiteKey:'yw',contractVersion:'yw-aplus-e310-v2',
+      receipts:ids.map(sourceAttemptId=>({sourceAttemptId,disposition:'accepted'}))});
+    assert.equal((await reconcileEvidenceOutbox(f.source.env)).receipted,1);
+    rows=await assertSourceEventsValid(f.db);
+    assert.equal(rows.filter(r=>r.action==='completion.sync.result').length,1);
+    assert.equal(rows.at(-1).event.context.sourceContext.centralAcceptance,'accepted');
+    const count=rows.length;
+    await worker.fetch(f.request(),f.source.env,{});await reconcileEvidenceOutbox(f.source.env);
+    assert.equal(sourceEvents(f.db).length,count);assert.equal(f.calls.length,2);
+  } finally {f.db.close();}
+});
+
+test('immutable event IDs reject changed contents and hashes without overwriting a source fact',async()=>{
+  const f=durableFixture(durableReply);
+  try {
+    await worker.fetch(f.request(),f.source.env,{});
+    const row=sourceEvents(f.db)[0];
+    assert.throws(()=>f.db.prepare('UPDATE learning_evaluation_events SET occurred_at=? WHERE event_id=?').run('changed',row.event_id),/immutable/);
+    assert.throws(()=>f.db.prepare('DELETE FROM learning_evaluation_events WHERE event_id=?').run(row.event_id),/immutable/);
+    const sql='INSERT INTO learning_evaluation_events SELECT event_id,source_event_id,student_id,action,parent_event_id,occurred_at,?,payload_sha256,payload_bytes FROM learning_evaluation_events WHERE event_id=? ON CONFLICT(event_id) DO NOTHING';
+    assert.throws(()=>f.db.prepare(sql).run('{}',row.event_id),/conflict/);
+    assert.equal(sourceEvents(f.db)[0].payload_json,row.payload_json);
+    const hashed=await evaluationEventId('private-invalid/來源'.repeat(30),'request','1');
+    assert.match(hashed,/^yw:[a-f0-9]{64}$/);
+    assert.equal(hashed,await evaluationEventId('private-invalid/來源'.repeat(30),'request','1'));
+    assert.notEqual(hashed,await evaluationEventId('private-invalid/來源'.repeat(30),'request','2'));
+  } finally {f.db.close();}
+});
+
+test('submission and request event storage failures never acknowledge an unsaved input or issue an unrecorded model call',async()=>{
+  for(const action of ['answer.submit','ai.request']) {
+    const f=durableFixture(durableReply);
+    try {
+      f.db.exec(`CREATE TRIGGER fixture_event_failure BEFORE INSERT ON learning_evaluation_events WHEN NEW.action='${action}' BEGIN SELECT RAISE(ABORT,'synthetic event storage failure'); END;`);
+      const response=await worker.fetch(f.request(),f.source.env,{});
+      assert.equal(f.calls.length,0);
+      if(action==='answer.submit') {
+        assert.notEqual(response.status,202);
+        assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,0);
+        assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_pending_submissions').get().n,0);
+      } else {
+        assert.equal(response.status,202);
+        assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,1);
+        assert.equal(sourceEvents(f.db).filter(r=>r.action==='ai.request').length,0);
+      }
+    } finally {f.db.close();}
+  }
+});
+
+test('a result-event failure rolls back the grade and outbox but keeps the complete model reply for local recovery',async()=>{
+  const f=durableFixture(durableReply);
+  try {
+    f.db.exec("CREATE TRIGGER fixture_result_failure BEFORE INSERT ON learning_evaluation_events WHEN NEW.action='evaluation.result' BEGIN SELECT RAISE(ABORT,'synthetic result failure'); END;");
+    await worker.fetch(f.request(),f.source.env,{});
+    assert.equal(f.calls.length,1);
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,0);
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM evidence_outbox').get().n,0);
+    assert.equal(sourceEvents(f.db).filter(r=>r.action==='assistant.reply').length,1);
+    const original=sourceEvents(f.db).find(r=>r.action==='assistant.reply').payload_json;
+    f.db.exec('DROP TRIGGER fixture_result_failure; UPDATE learning_evaluation_jobs SET lease_until=0,next_attempt_at=0');
+    await drainEvaluationJobs(f.source.env,job=>completeDurableEvaluationJob(f.source.env,job));
+    assert.equal(f.calls.length,1);
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,1);
+    assert.equal(sourceEvents(f.db).find(r=>r.action==='assistant.reply').payload_json,original);
+    await assertSourceEventsValid(f.db);
+  } finally {f.db.close();}
+});
+
+test('receipt transport failures keep an immutable failure and a later accepted receipt without re-evaluation',async()=>{
+  const f=durableFixture(durableReply);
+  try {
+    await worker.fetch(f.request(),f.source.env,{});
+    f.source.env.USER_CENTER_EVIDENCE.getLearningEvidenceDeliveryReceipts=async()=>{throw new Error('synthetic confidential exception');};
+    await reconcileEvidenceOutbox(f.source.env);
+    const failure=sourceEvents(f.db).find(r=>r.action==='completion.sync.failure');
+    assert.equal(failure.event.context.sourceContext.reason,'receipt_transport_unknown');
+    assert.equal(failure.payload_json.includes('confidential'),false);
+    f.db.exec("UPDATE evidence_outbox SET central_receipted_at=datetime('now','-16 minutes')");
+    f.source.env.USER_CENTER_EVIDENCE.getLearningEvidenceDeliveryReceipts=async ids=>({schemaVersion:'bdfz-learning-evidence-delivery-receipts-v1',sourceSiteKey:'yw',contractVersion:'yw-aplus-e310-v2',receipts:ids.map(sourceAttemptId=>({sourceAttemptId,disposition:'accepted'}))});
+    await reconcileEvidenceOutbox(f.source.env);
+    const rows=await assertSourceEventsValid(f.db);
+    assert.equal(rows.find(r=>r.event_id===failure.event_id).payload_json,failure.payload_json);
+    assert.equal(rows.filter(r=>r.action==='completion.sync.result').length,1);assert.equal(f.calls.length,1);
+  } finally {f.db.close();}
+});
+
+
+test('reply-event projection failure preserves irreplaceable raw response and reconstructs the original event time without a model retry',async()=>{
+  const f=durableFixture(durableReply);
+  try {
+    f.db.exec("CREATE TRIGGER fixture_reply_event_failure BEFORE INSERT ON learning_evaluation_events WHEN NEW.action='assistant.reply' BEGIN SELECT RAISE(ABORT,'synthetic reply projection failure'); END;");
+    const response=await worker.fetch(f.request(),f.source.env,{});assert.equal(response.status,202);
+    const reply=f.db.prepare('SELECT * FROM learning_evaluation_replies').get();
+    assert.ok(reply.raw_response_json);assert.equal(JSON.parse(reply.raw_response_json).answer,reply.answer_text);
+    assert.equal(sourceEvents(f.db).filter(r=>r.action==='assistant.reply').length,0);
+    f.db.exec('DROP TRIGGER fixture_reply_event_failure; UPDATE learning_evaluation_jobs SET next_attempt_at=0');
+    const job=await claimEvaluationJob(f.source.env.READING_DB,reply.source_event_id);
+    await completeDurableEvaluationJob(f.source.env,job);
+    const rows=await assertSourceEventsValid(f.db),event=rows.find(r=>r.action==='assistant.reply').event;
+    assert.equal(event.occurredAt,new Date(reply.received_at).toISOString());
+    assert.equal(event.content.rawResponseJson,reply.raw_response_json);
+    assert.equal(f.calls.length,1);
+  } finally {f.db.close();}
+});
+
+test('non-JSON or null successful upstream bodies are saved intact and blocked without a score or invented model metadata',async()=>{
+  for(const raw of ['null','upstream returned malformed body']) {
+    const f=durableFixture(()=>new Response(raw,{status:200}));
+    try {
+      const response=await worker.fetch(f.request(),f.source.env,{});assert.equal(response.status,202);
+      const rows=await assertSourceEventsValid(f.db),reply=rows.find(r=>r.action==='assistant.reply').event;
+      assert.equal(reply.content.rawResponseJson,raw);assert.equal(reply.assessment.modelVersion,null);
+      assert.equal(reply.assessment.modelVersionStatus,'not_reported');
+      assert.equal(rows.some(r=>r.action==='evaluation.blocked'),true);
+      assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
+    } finally {f.db.close();}
+  }
 });
