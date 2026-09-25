@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1229,
-  "totalBytes": 164542257,
-  "aggregateSha256": "44f009425535435743b147062713bc4a6228d90a690b3a026a7727a58af50d6e",
+  "fileCount": 1230,
+  "totalBytes": 164550351,
+  "aggregateSha256": "f3e3ccd8d9bcce8a0534d0ef0fbf3be03fc848c974c1fa8e5786f1ea206a390b",
   "files": [
     {
       "path": "_headers",
@@ -17,13 +17,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 143154,
-      "sha256": "284a9ae5f01fa88d8aeec8b4b14fbde8326a9f689581f2c3a111c7de12f3c1a9"
+      "bytes": 144145,
+      "sha256": "b0dc3b9d0520d5a8f52d34b3c2b1f3d713cee807e59f5d45526dfdff7b0818c0"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "b08b997aff822d4654aed34a7c4567cd3179d15c9bb3df94a39b16bd4d121ea9"
+      "sha256": "73d08795ba3f5eb0b020fa13f9731f61269edc17ec61672c059b5242113fc181"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -6027,13 +6027,18 @@
     },
     {
       "path": "durable-evaluation-jobs.js",
-      "bytes": 16447,
-      "sha256": "c79d6f817a9c9a77e6d7b22115e961475cc94fa7b8ed73e9b347a592c0532091"
+      "bytes": 16655,
+      "sha256": "163247bad05328bf0b830caff66e4bb81a710a2ca2fbf554c33a04bd1f5f5f18"
+    },
+    {
+      "path": "evaluation-machine.js",
+      "bytes": 5869,
+      "sha256": "1dd9cceb2ad332450901e4350240a9682d91aaf57af6086cb6b9ca0e378cdd52"
     },
     {
       "path": "evaluation-scheduler.js",
-      "bytes": 246,
-      "sha256": "8080d31f669398a0a32d91d7dab6cb47996465281427a1ecdce70c887665d6a9"
+      "bytes": 1154,
+      "sha256": "5a89a5098a1c60dd4c1225db5fc5eb8180b79eb4ea7e7e18e5e821cf745ecdab"
     },
     {
       "path": "evaluator-recovery.js",
@@ -6057,8 +6062,8 @@
     },
     {
       "path": "learning-evidence-source.js",
-      "bytes": 92282,
-      "sha256": "b1f1c22380c69e82fe5138b0e04c792fe60b78fee629e143d8d35c30bd1c1b08"
+      "bytes": 92400,
+      "sha256": "995f150f477bfc116a9c19e88640cc1b5286d75cbcce5823d288962a4da12f41"
     },
     {
       "path": "lesson-blueprint-rules.js",
