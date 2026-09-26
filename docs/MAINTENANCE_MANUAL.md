@@ -1,3 +1,16 @@
+## 2026-09-25 — detailed-learning recorder candidate
+
+See [LEARNING_RECORDER_BRIDGE.md](LEARNING_RECORDER_BRIDGE.md). The Web candidate
+reads complete immutable source facts only for the authenticated owner, verifies
+canonical hashes, and durably hands them to the accepted UC `record_only`
+recorder. Its private full-content observations are separate from the unchanged
+minimized scoring projection. No S2S logger, source re-evaluation, history
+backfill, migration, shared contract, App pointer or background Worker change.
+Current production background and alerts are true; earlier disabled/unshipped
+sections below predate the completed source6049/Pagesf8808e83 rollout and window
+handoff. Natural completion acceptance still belongs to the original repair
+task; this new candidate is not production acceptance.
+
 ## 2026-09-25 20:33 UTC — additive migration compatibility correction
 
 PR62 signed pending runtime is merged at 1c5a32d but Pages remains accepted PR59 ffa3689 / ff11ac3d. A disabled scheduler was created and exact bytes read back. The private D1 backup restored correctly; remote0009 was atomically rejected with incomplete input, and readback confirms only0001–0008, no new schema objects and no Pages machine settings. Correct only the two trigger predicates from unparenthesized CASE/END to equivalent trigger WHEN conditions (Cloudflare workers-sdk#4727). Retain every lease and immutable-event abort. Local source/recovery/workerd tests pass with fixture models. The consumed transaction cannot replay; a new exact reconciliation/backup/config transaction and source-matched Pages gate are required. No accepted pending/background claim. Evidence: /Users/ylsuen/CF/reports/operations/yw-http503-20260925/review-20260925/migration-failure-readback.json.

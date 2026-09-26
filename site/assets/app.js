@@ -48,6 +48,30 @@ let interactionIdentityResolved = false;
 let pendingSharedReadingPosition = null;
 let pendingSharedTextScale = null;
 
+async function resumeDetailedRecords() {
+  if (!interactionIdentityResolved || !progressOwnerScope || progressOwnerScope === ANONYMOUS_UI_SCOPE) return;
+  try {
+    state.recorderBridgeModule ||= import(new URL('learning-recorder-bridge.js?v=937c6ac55ff674c0', APP_SCRIPT_URL).href)
+      .catch(error => { state.recorderBridgeModule = null; throw error; });
+    const module = await state.recorderBridgeModule;
+    state.recorderBridge ||= module.createRecorderBridge({
+      active: () => Boolean(interactionIdentityResolved && progressOwnerScope && progressOwnerScope !== ANONYMOUS_UI_SCOPE
+        && document.visibilityState !== 'hidden' && navigator.onLine !== false),
+      onState: value => {
+        const status = document.getElementById('learning-record-status');
+        if (!status) return;
+        const attention = ['needs_attention', 'storage_error'].includes(value.status);
+        status.hidden = !attention;
+        status.textContent = attention ? '學習記錄尚未同步；來源記錄仍保留，重新連線或開啟頁面後可續傳。' : '';
+      },
+    });
+    return await state.recorderBridge.run();
+  } catch {
+    const status = document.getElementById('learning-record-status');
+    if (status) { status.hidden = false; status.textContent = '學習記錄同步暫時無法載入，請重新開啟頁面。'; }
+  }
+}
+
 function pendingMatchesOwner(pending, ownerScope, generation = sharedStateGeneration) {
   return Boolean(
     pending
@@ -395,6 +419,7 @@ function setProgressOwnerScope(scope) {
   const nextScope = scope || null;
   if (progressOwnerScope === nextScope) return;
   state.pendingReplayController?.suspend();
+  state.recorderBridge?.suspend();
   progressOwnerScope = nextScope;
   state.progress = loadStoredProgress(nextScope);
   invalidateFirstReadSessions();
@@ -409,7 +434,7 @@ function setInteractionIdentityResolved(resolved, { preserveSessions = false } =
   els.checkStage.inert = !next;
   if (els.identityStatus) els.identityStatus.hidden = next;
   if (interactionIdentityResolved === next) return;
-  if (!next) state.pendingReplayController?.suspend();
+  if (!next) { state.pendingReplayController?.suspend(); state.recorderBridge?.suspend(); }
   interactionIdentityResolved = next;
   if (!preserveSessions) {
     invalidateFirstReadSessions();
@@ -839,6 +864,7 @@ async function hydrateSharedStateOnce(hydrationEpoch = sharedStateHydrationEpoch
     ),
   });
   await persistPendingSharedState(client, ownerScope);
+  void resumeDetailedRecords();
   void autoReplayPendingInteractions(state.current);
   return requestStillCurrent() ? "ok" : "stale";
 }
@@ -3769,7 +3795,10 @@ async function autoReplayPendingInteractions(lesson = state.current) {
           && progressOwnerScope && progressOwnerScope !== ANONYMOUS_UI_SCOPE
           && document.visibilityState === "visible" && navigator.onLine !== false),
       }),
-      replay: (context, isCurrent) => replayCapturedLearningSubmissions(context.lesson, isCurrent),
+      replay: async (context, isCurrent) => {
+        try { return await replayCapturedLearningSubmissions(context.lesson, isCurrent); }
+        finally { if (isCurrent()) void resumeDetailedRecords(); }
+      },
     });
   }
   state.pendingReplayController.request();
@@ -4178,6 +4207,7 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     return { code: error.code, name: error.name, retryAfterSeconds: error.retryAfterSeconds };
   } finally {
     state.interactionRequestsInFlight.delete(requestInFlightKey);
+    void resumeDetailedRecords();
   }
 }
 
@@ -4334,6 +4364,7 @@ async function submitStudyGuideAttempt({ lessonId, itemKey, response, referenceR
     };
   } finally {
     clearTimeout(timeout);
+    void resumeDetailedRecords();
   }
 }
 
@@ -5292,10 +5323,11 @@ function bindEvents() {
   });
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") refreshRecoverableLearningState();
-    else { state.pendingReplayController?.suspend(); resetLessonChat(); }
+    else { state.pendingReplayController?.suspend(); state.recorderBridge?.suspend(); resetLessonChat(); }
   });
-  window.addEventListener("offline", () => state.pendingReplayController?.suspend());
-  window.addEventListener("pagehide", () => { state.pendingReplayController?.suspend(); resetLessonChat(); });
+  window.addEventListener('bdfz:session-invalidated', () => state.recorderBridge?.suspend());
+  window.addEventListener("offline", () => { state.pendingReplayController?.suspend(); state.recorderBridge?.suspend(); });
+  window.addEventListener("pagehide", () => { state.pendingReplayController?.suspend(); state.recorderBridge?.suspend(); resetLessonChat(); });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       const openNote = $('[data-inline-note]:not([hidden])', els.textFlow);

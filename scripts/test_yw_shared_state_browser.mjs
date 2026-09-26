@@ -101,6 +101,7 @@ window.__remoteSharedStates = {
   [OWNER_B]: remoteState(OWNER_B, "lesson-1576", 0.92)
 };
 window.__stateGateOpen = false;
+window.__recorderScopes = [];
 window.__stateGate = new Promise((resolve) => {
   window.__releaseStateGate = () => {
     window.__stateGateOpen = true;
@@ -109,6 +110,12 @@ window.__stateGate = new Promise((resolve) => {
 });
 
 window.BdfzIdentity = {
+  createLearningRecorder: async () => {
+    const scope = (window.__currentOwner === OWNER_A ? 'a' : 'b').repeat(64);
+    window.__recorderScopes.push(scope);
+    return { scope, close() {}, async flush() {}, async pending() { return []; },
+      async record() { throw new Error('empty source fixture must not record'); } };
+  },
   getSession: async () => ({
     authenticated: window.__sharedStateTestAuthenticated !== false,
   }),
@@ -195,6 +202,11 @@ async function configurePage(
     contentType: "text/javascript; charset=utf-8",
     body: evidenceStub,
   }));
+  await page.route(`${base}/api/learning/recorder-events*`, async (route) => {
+    const scope = await page.evaluate(() => (window.__currentOwner.endsWith('a'.repeat(32)) ? 'a' : 'b').repeat(64));
+    const after = Number(new URL(route.request().url()).searchParams.get('after'));
+    await route.fulfill({ json: { ok: true, scope, events: [], nextCursor: after, hasMore: false } });
+  });
 }
 
 let server;
@@ -227,6 +239,8 @@ try {
     scale: "1.26",
     anonymousFont: null,
   });
+  assert.equal(await page.evaluate(() => window.__recorderScopes.length), 0,
+    'recorder must wait for resolved application identity');
 
   await page.evaluate(() => {
     location.hash = "#lesson-1579";
@@ -298,6 +312,7 @@ try {
   const textScaleCallCount = await page.evaluate(
     () => window.__acceptedMutations.length,
   );
+  await page.waitForFunction(() => window.__recorderScopes.includes('a'.repeat(64)));
   await page.evaluate(() => document.querySelector("#font-up").click());
   await page.waitForFunction((fromIndex) => window.__acceptedMutations.slice(fromIndex).some(
     (call) => call.body.mutation.kind === "READER_PREFERENCE"
@@ -322,6 +337,7 @@ try {
     const previousIdentity = window.BdfzIdentity;
     window.__replacementWorkingApi = previousIdentity.api.bind(previousIdentity);
     window.__replacementWorkingSession = previousIdentity.getSession.bind(previousIdentity);
+    window.__replacementWorkingRecorder = previousIdentity.createLearningRecorder.bind(previousIdentity);
     previousIdentity.api = () => new Promise(() => {});
     const before = window.__acceptedMutations.length;
     document.querySelector("#font-up").click();
@@ -334,6 +350,7 @@ try {
   const replacedIdentityStart = await page.evaluate(() => {
     window.BdfzIdentity = {
       getSession: window.__replacementWorkingSession,
+      createLearningRecorder: window.__replacementWorkingRecorder,
       api: window.__replacementWorkingApi,
     };
     const before = window.__sharedStateGets.length;
@@ -522,6 +539,9 @@ try {
     false,
   );
   assert.deepEqual(pageErrors, []);
+  const recorderScopes = await page.evaluate(() => window.__recorderScopes);
+  assert.ok(recorderScopes.includes('a'.repeat(64)) && recorderScopes.includes('b'.repeat(64)),
+    'actual app startup and account switch must each prepare the authenticated recorder');
 
   const racePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const racePageErrors = [];

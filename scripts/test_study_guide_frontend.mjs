@@ -84,6 +84,7 @@ function interactionHarness(fetchImpl, {
      const interactionInputLength = (input) => Object.values(input).join("").length;
      const interactionRequestKey = (...parts) => parts.join("\\n");
      const interactionSubmissionMode = () => "formal";
+     const resumeDetailedRecords = async () => {};
      const saveLocalInteractionPractice = () => false;
      const lessonProgress = (id = state.current?.id) => (state.progress[id] ||= {});
      const window = { YwLearningEvidence: { mutationId: () => \`mutation-\${++deps.mutationSequence}\` } };
@@ -276,7 +277,7 @@ test("study-guide timeout covers a response body that never finishes", async () 
     "setTimeout",
     "clearTimeout",
     "AbortController",
-    `${helperSource}; return submitStudyGuideAttempt;`,
+    `const resumeDetailedRecords = async () => {}; ${helperSource}; return submitStudyGuideAttempt;`,
   )(
     async (_path, init) => ({
       ok: true,

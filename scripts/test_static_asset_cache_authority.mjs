@@ -44,3 +44,9 @@ test("pending evaluation module uses its current immutable content hash", () => 
   const version = source.match(/pending-evaluation-recovery\.js\?v=([a-f0-9]{16})/);
   assert.equal(version?.[1], contentVersion("assets/pending-evaluation-recovery.js"));
 });
+
+test('learning recorder bridge uses its current immutable content hash', () => {
+  const source = readFileSync(resolve(ROOT, 'site/assets/app.js'), 'utf8');
+  const version = source.match(/learning-recorder-bridge\.js\?v=([a-f0-9]{16})/);
+  assert.equal(version?.[1], contentVersion('assets/learning-recorder-bridge.js'));
+});
