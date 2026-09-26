@@ -1,6 +1,6 @@
 # Authenticated detailed-learning recorder bridge
 
-Candidate, 2026-09-25. Base source: `6049d87b06b0874488484146cd2a993726e6aa19`.
+Candidate integrated 2026-09-26 with accepted binding correction PR65/source `41c8ceee28616308888a21af782475b57140ba1d`.
 This is a Web-only transport for the immutable `learning_evaluation_events`
 already introduced by migration0009. It does not re-evaluate an answer, replay
 grading, or change the existing v2 score outbox. No new schema, secret, service
@@ -60,8 +60,7 @@ fixtures verifies native IndexedDB, a 594011-byte private artifact, one lost
 reply and ordinary reload recovery with one central row per operation.
 Those fixtures do not establish production authentication or natural activity.
 
-Release remains pending. Current observed Pages is `f8808e83-909f-4221-bb8a-46e78ecb88d7`;
-its natural pending-completion acceptance is owned by the prior repair task.
+Recorder release remains pending. Corrected baseline Pages `51837754-3070-4868-87d2-155ada4687fb` is accepted after explicitly authorized dedicated synthetic pending/background and lesson frontend/reload acceptance. Same serial owner continues this recorder release.
 Use the registered external YW executor and a fresh exact-source transaction
 after the required acceptance; never reuse its consumed/expired journal. Planned
 App disposition is `compatible-no-client-release` with the unchanged pointer and
