@@ -1,3 +1,21 @@
+## 2026-09-26 — production runtime variable packaging correction
+
+Pages uses wrangler.toml to construct its uploaded Worker bindings. Declaring
+YW_DURABLE_EVALUATION_ENABLED only in project API settings is insufficient: the
+f8808e83 dedicated-account acceptance returned a legacy result with no durable
+job despite metadata reporting true. Keep `[env.production.vars]` with the string
+`YW_DURABLE_EVALUATION_ENABLED = "true"` in reviewed source. Preview must remain
+isolated and must not inherit that production variable or production services.
+`test:preview-bindings` now inspects actual Wrangler multipart bundle metadata
+for both environments, rather than relying solely on configuration text.
+
+This correction is prepared, not deployed or accepted. Use a fresh registered
+transaction to replace the failed prerequisite, then verify an actual202,
+signed background completion, complete original/reply/event chain and frontend
+readback on the authorized dedicated account. Preserve the independent remote
+machine secret, Worker flags and all forward D1; do not replay the failed batch
+or mark f8808e83 accepted. The separate recorder release follows full acceptance.
+
 ## 2026-09-25 20:33 UTC — additive migration compatibility correction
 
 PR62 signed pending runtime is merged at 1c5a32d but Pages remains accepted PR59 ffa3689 / ff11ac3d. A disabled scheduler was created and exact bytes read back. The private D1 backup restored correctly; remote0009 was atomically rejected with incomplete input, and readback confirms only0001–0008, no new schema objects and no Pages machine settings. Correct only the two trigger predicates from unparenthesized CASE/END to equivalent trigger WHEN conditions (Cloudflare workers-sdk#4727). Retain every lease and immutable-event abort. Local source/recovery/workerd tests pass with fixture models. The consumed transaction cannot replay; a new exact reconciliation/backup/config transaction and source-matched Pages gate are required. No accepted pending/background claim. Evidence: /Users/ylsuen/CF/reports/operations/yw-http503-20260925/review-20260925/migration-failure-readback.json.
