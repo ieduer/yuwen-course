@@ -1,3 +1,7 @@
+## 2026-09-26 — invalid-reply retry and blocked-job reconciliation (source candidate)
+
+After P0 `YW_EVALUATION_NEEDS_RECONCILIATION` (one lesson-1488 job blocked on a truncated APIS reply), invalid replies are kept but never reused and are retried with fresh calls within the four-call budget; the scheduler reconciles jobs blocked by the old rule. Pages must release before `yw-evaluation-jobs`. Accepted runtime unchanged (Pages 367e8f6 / edbb05d2; worker 6049d87 / 0aadc72b). See docs/MAINTENANCE_MANUAL.md.
+
 ## 2026-09-26 — corrected durable baseline accepted; recorder ready for its own release
 
 PR65 is accepted at Pages `51837754-3070-4868-87d2-155ada4687fb`, source

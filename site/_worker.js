@@ -2,7 +2,7 @@ import { sourceEventStatement, evaluationEventBase, evaluationEventId, latestSou
 import { readRecorderSource } from './learning-recorder-source.js';
 import { EVALUATION_MACHINE_PATH, handleEvaluationMachine } from './evaluation-machine.js';
 import { EvaluationPending, pendingEvaluationResponse, createEvaluationJob,
-  claimEvaluationJob, saveEvaluationReply, latestEvaluationReply, deferEvaluationJob,
+  claimEvaluationJob, saveEvaluationReply, latestUsableEvaluationReply, deferEvaluationJob,
   drainEvaluationJobs, loadEvaluationJob } from "./durable-evaluation-jobs.js";
 import { evaluateWithRecovery } from "./evaluator-recovery.js";
 import {
@@ -45,6 +45,7 @@ import {
 import {
   authoritativeStudyGuideAssessment,
   deterministicStudyGuideAssessment,
+  extractJsonObject,
   normalizeInteractionAssessment,
   normalizeOpenStudyGuideAssessment,
   studyGuideAssessmentPrompt,
@@ -1207,22 +1208,6 @@ async function handleChat() {
     error: "此舊聊天入口已停用；目前頁面使用獨立的閱讀助教入口",
     code: "legacy_chat_retired",
   }, { status: 410 });
-}
-
-function extractJsonObject(value) {
-  const text = String(value || "").replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
-  try {
-    return JSON.parse(text);
-  } catch {
-    const start = text.indexOf("{");
-    const end = text.lastIndexOf("}");
-    if (start < 0 || end <= start) return null;
-    try {
-      return JSON.parse(text.slice(start, end + 1));
-    } catch {
-      return null;
-    }
-  }
 }
 
 async function handleLessonBlueprint(request, env) {
@@ -3233,7 +3218,8 @@ function validDurableAssessment(parsed) {
   catch { return false; }
 }
 async function evaluateDurableJob(env,job,reservation,prompt) {
-  const existing=await latestEvaluationReply(env.READING_DB,job.source_event_id);
+  // An invalid saved reply stays in the journal but is never reused.
+  const existing=await latestUsableEvaluationReply(env.READING_DB,job.source_event_id);
   if(existing) return saveEvaluationReply(env.READING_DB,{...job,lease_epoch:existing.lease_epoch},{
     answer:existing.answer_text,actualModel:existing.actual_model,modelVersion:existing.model_version,
     requestId:existing.request_id,rawResponseJson:existing.raw_response_json,

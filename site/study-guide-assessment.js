@@ -214,6 +214,24 @@ export function deterministicStudyGuideAssessment(item, response) {
   return exactKnowledgeAssessment(item, response);
 }
 
+// The one parse of a model's JSON answer, shared by foreground scoring and the
+// durable job journal.
+export function extractJsonObject(value) {
+  const text = String(value || "").replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
+  try {
+    return JSON.parse(text);
+  } catch {
+    const start = text.indexOf("{");
+    const end = text.lastIndexOf("}");
+    if (start < 0 || end <= start) return null;
+    try {
+      return JSON.parse(text.slice(start, end + 1));
+    } catch {
+      return null;
+    }
+  }
+}
+
 export function normalizeOpenStudyGuideAssessment(value) {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
     throw new Error("開放題評閱格式無效");
