@@ -1,6 +1,7 @@
 // All content belongs only in the authenticated source database, never logs.
 import { sourceEventStatement, evaluationEventId, evaluationEventBase,
   latestSourceEvent, replyAssessment } from './learning-evaluation-events.js';
+import { extractJsonObject, normalizeOpenStudyGuideAssessment } from './study-guide-assessment.js';
 export const JOB_POLICY = Object.freeze({ maxCalls: 4, leaseMs: 90_000, maxJobsPerTick: 2 });
 export class EvaluationPending extends Error {
   constructor(job) { super('答案已保存，評閱稍後補上'); this.code='learning_evaluation_pending'; this.job=job; }
@@ -79,20 +80,37 @@ export async function saveEvaluationReply(db,job,result,now=Date.now()) {
 export async function latestEvaluationReply(db,id) {
   return db.prepare('SELECT * FROM learning_evaluation_replies WHERE source_event_id=? ORDER BY id DESC LIMIT 1').bind(id).first();
 }
+// A saved reply that fails the foreground scoring contract can never commit.
+// It stays in the journal as a source record, but a later lease asks the model
+// again instead of reusing it (2026-09-26: a split APIS answer saved as "{").
+export function usableEvaluationReply(reply) {
+  if(!reply) return false;
+  try { normalizeOpenStudyGuideAssessment(extractJsonObject(reply.answer_text)); return true; }
+  catch { return false; }
+}
+export async function latestUsableEvaluationReply(db,id) {
+  const rows=await db.prepare('SELECT * FROM learning_evaluation_replies WHERE source_event_id=? ORDER BY id DESC').bind(id).all();
+  return (rows.results || []).find(usableEvaluationReply) || null;
+}
 export async function deferEvaluationJob(db,job,error,now=Date.now()) {
   const current=await loadEvaluationJob(db,job.source_event_id);
   if(!current || current.lease_epoch!==job.lease_epoch || current.state!=='leased') return current;
   const calls=await db.prepare('SELECT COUNT(*) AS n FROM learning_evaluator_calls WHERE source_event_id=?').bind(job.source_event_id).first();
-  const reply=await latestEvaluationReply(db,job.source_event_id);
+  const reply=await latestUsableEvaluationReply(db,job.source_event_id);
+  // An invalid assessment is retried with a new call while the lifetime call
+  // budget remains; its reply stays preserved and linked.
+  const invalidReply=error?.code==='invalid_ai_assessment';
+  const invalidSaved=invalidReply?await db.prepare('SELECT lease_epoch FROM learning_evaluation_replies WHERE source_event_id=? AND lease_epoch=?')
+    .bind(job.source_event_id,job.lease_epoch).first():null;
   const temporary=error?.apisStatus===429 || (error?.apisStatus===503
     && ['DEADLINE_EXCEEDED','UPSTREAM_UNAVAILABLE'].includes(error?.apisCode))
     || error?.code==='learning_evaluator_budget_exhausted';
   const ambiguous=error?.name==='AbortError' || error?.name==='TypeError';
-  const state=error?.code==='invalid_ai_assessment' ? 'blocked' : reply ? 'queued' : Number(calls?.n)>=JOB_POLICY.maxCalls ? 'blocked'
-    : temporary ? 'queued' : ambiguous ? 'uncertain' : 'blocked';
+  const state=reply ? 'queued' : Number(calls?.n)>=JOB_POLICY.maxCalls ? 'blocked'
+    : temporary || invalidReply ? 'queued' : ambiguous ? 'uncertain' : 'blocked';
   const delay=[60_000,300_000,900_000][Math.min(2,Math.max(0,Number(calls?.n)-1))];
   const jitter=Array.from(job.source_event_id+':'+job.lease_epoch).reduce((n,c)=>(n*31+c.charCodeAt(0))%10001,0);
-  const reason=reply?'reply_saved':state==='blocked'?'automatic_limit_or_permanent_failure'
+  const reason=reply?'reply_saved':invalidReply?'invalid_reply':state==='blocked'?'automatic_limit_or_permanent_failure'
     :state==='uncertain'?'transport_unknown':'temporary_unavailable';
   const nextAt=now+Math.max(delay,Math.max(0,Number(error?.retryAfterSeconds)||0)*1000)+jitter;
   const statements=[db.prepare(`UPDATE learning_evaluation_jobs SET state=?,next_attempt_at=?,lease_until=0,last_error_class=?
@@ -112,7 +130,9 @@ export async function deferEvaluationJob(db,job,error,now=Date.now()) {
       :Number.isInteger(error?.apisStatus)?'apis_http_failure':'local_execution_failure';
     statements.push(await sourceEventStatement(db,base,{action:reply?(state==='blocked'?'evaluation.blocked':'evaluation.pending'):'ai.failure',
       kind:failureKind,key:job.lease_epoch,parentId:reply
-        ?await evaluationEventId(job.source_event_id,'reply',reply.lease_epoch):request?.event_id||await evaluationEventId(job.source_event_id,'pending'),
+        ?await evaluationEventId(job.source_event_id,'reply',reply.lease_epoch)
+        :invalidSaved?await evaluationEventId(job.source_event_id,'reply',invalidSaved.lease_epoch)
+        :request?.event_id||await evaluationEventId(job.source_event_id,'pending'),
       status:reply&&state==='queued'?'pending':ambiguous?'partial':'failed',at,sourceContext:{...requestContext,leaseEpoch:job.lease_epoch,
         jobState:state,reason:classification,httpStatus:Number.isInteger(error?.apisStatus)?error.apisStatus:null,
         errorCode:['DEADLINE_EXCEEDED','UPSTREAM_UNAVAILABLE','NON_RETRYABLE'].includes(error?.apisCode)?error.apisCode:null,
@@ -189,6 +209,30 @@ export async function drainEvaluationJobs(env,execute,now=Date.now()) {
           retryKind:reply?'automatic':null,executionKind:reply?'local_commit_only':'transport_unknown'}});
       await db.batch([db.prepare(`UPDATE learning_evaluation_jobs SET state=?,last_error_class='expired_execution'
         WHERE source_event_id=? AND lease_epoch=? AND state=?`).bind(state,job.source_event_id,job.lease_epoch,job.state),statement]);
+    }
+
+    // Reconciliation: before invalid replies became retryable, an invalid
+    // assessment blocked its job with the reply saved (the only way to reach
+    // blocked + reply_saved). Requeue such a job once while its lifetime call
+    // budget remains; the invalid reply stays in the journal, is never reused,
+    // and the planned retry is recorded like any other.
+    const reconcilable=await db.prepare(`SELECT * FROM learning_evaluation_jobs WHERE state='blocked'
+      AND last_error_class='reply_saved' ORDER BY first_pending_at LIMIT ${JOB_POLICY.maxJobsPerTick}`).all();
+    for(const job of reconcilable.results || []) {
+      if(await latestUsableEvaluationReply(db,job.source_event_id)) continue;
+      const calls=await db.prepare('SELECT COUNT(*) AS n FROM learning_evaluator_calls WHERE source_event_id=?').bind(job.source_event_id).first();
+      if(Number(calls?.n)>=JOB_POLICY.maxCalls) continue;
+      const blocked=await latestSourceEvent(db,job.source_event_id,'evaluation.blocked',job.lease_epoch);
+      const invalid=await latestEvaluationReply(db,job.source_event_id);
+      const at=new Date(now).toISOString();
+      const statement=await sourceEventStatement(db,evaluationEventBase(job),{action:'ai.retry',kind:'retry',
+        key:'reconcile-'+job.lease_epoch,at,parentId:blocked?.event_id
+          || (invalid?await evaluationEventId(job.source_event_id,'reply',invalid.lease_epoch):''),
+        sourceContext:{leaseEpoch:job.lease_epoch,jobState:'queued',reason:'invalid_reply',retryKind:'reconciliation',
+          nextAttemptAt:at,executionKind:'apis_call'}});
+      await db.batch([db.prepare(`UPDATE learning_evaluation_jobs SET state='queued',next_attempt_at=?,last_error_class='invalid_reply'
+        WHERE source_event_id=? AND lease_epoch=? AND state='blocked' AND last_error_class='reply_saved'`)
+        .bind(now,job.source_event_id,job.lease_epoch),statement]);
     }
 
     for(let i=0;i<JOB_POLICY.maxJobsPerTick;i++) {

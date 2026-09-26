@@ -1,3 +1,7 @@
+## 2026-09-26 — invalid-reply retry and blocked-job reconciliation (released, accepted)
+
+Pages 141bd3e / 6037b165 (rollback edbb05d2) and scheduler 141bd3e / 37b94ddc (rollback 4db3adc4). The blocked lesson-1488 job completed on the first scheduler tick; open jobs 0, alert recovered. Uncertain jobs still need manual review. See docs/MAINTENANCE_MANUAL.md.
+
 ## 2026-09-26 — detailed recorder published and accepted
 
 Current Web release is Pages `edbb05d2-8139-4c41-be98-d9c230d5b42e`, exact

@@ -4383,15 +4383,21 @@ test('successful foreground AI reply is durable with provenance before score com
   } finally {f.db.close();}
 });
 
-test('invalid AI reply is kept as a learning source record and blocked without a fabricated score',async()=>{
+test('invalid AI reply is kept as a learning source record, never scored, and retried with a fresh call',async()=>{
   const f=durableFixture(()=>Response.json({answer:'complete unparseable synthetic reply',model:'gemini-3.5-flash-lite'}));
   try {
     const r=await worker.fetch(f.request(),f.source.env,{});assert.equal(r.status,202,await r.clone().text());
-    assert.equal(f.db.prepare('SELECT state FROM learning_evaluation_jobs').get().state,'blocked');
+    assert.deepEqual({...f.db.prepare('SELECT state,last_error_class FROM learning_evaluation_jobs').get()},{state:'queued',last_error_class:'invalid_reply'});
     assert.equal(f.db.prepare('SELECT answer_text FROM learning_evaluation_replies').get().answer_text,'complete unparseable synthetic reply');
     assert.equal(f.db.prepare('SELECT version_status FROM learning_evaluation_replies').get().version_status,'unavailable');
     assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
+    // Not due yet: the retry waits out its backoff.
     await runDurableEvaluationScheduler(f.source.env);assert.equal(f.calls.length,1);
+    // Due: a fresh call, never a reuse of the invalid reply, which stays kept.
+    f.db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
+    await runDurableEvaluationScheduler(f.source.env);assert.equal(f.calls.length,2);
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluation_replies').get().n,2);
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
   } finally {f.db.close();}
 });
 
@@ -4497,16 +4503,17 @@ test('late journaled reply repairs an uncertain job without another provider req
 });
 
 
-test('incomplete journaled feedback is retained and blocked without repeated model or commit attempts',async()=>{
+test('incomplete journaled feedback is retained, never committed, and retried with fresh calls within budget',async()=>{
   const f=durableFixture(()=>Response.json({answer:JSON.stringify({score:80,verdict:'incomplete fixture'}),model:'gemini-3.5-flash-lite'}));
   try {
     const response=await worker.fetch(f.request(),f.source.env,{});
-    assert.equal(response.status,202);assert.equal((await response.json()).pendingState,'blocked');
+    assert.equal(response.status,202);assert.equal((await response.json()).pendingState,'queued');
     const reply=f.db.prepare('SELECT answer_text FROM learning_evaluation_replies').get();
     assert.equal(JSON.parse(reply.answer_text).verdict,'incomplete fixture');
     f.db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
     await runDurableEvaluationScheduler(f.source.env);
-    assert.equal(f.calls.length,1);assert.equal(f.db.prepare('SELECT state FROM learning_evaluation_jobs').get().state,'blocked');
+    assert.equal(f.calls.length,2);assert.equal(f.db.prepare('SELECT state FROM learning_evaluation_jobs').get().state,'queued');
+    assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluation_replies').get().n,2);
     assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,0);
   }finally{f.db.close();}
 });
@@ -4751,7 +4758,7 @@ test('reply-event projection failure preserves irreplaceable raw response and re
   } finally {f.db.close();}
 });
 
-test('non-JSON or null successful upstream bodies are saved intact and blocked without a score or invented model metadata',async()=>{
+test('non-JSON or null successful upstream bodies are saved intact and retried without a score or invented model metadata',async()=>{
   for(const raw of ['null','upstream returned malformed body']) {
     const f=durableFixture(()=>new Response(raw,{status:200}));
     try {
@@ -4759,7 +4766,9 @@ test('non-JSON or null successful upstream bodies are saved intact and blocked w
       const rows=await assertSourceEventsValid(f.db),reply=rows.find(r=>r.action==='assistant.reply').event;
       assert.equal(reply.content.rawResponseJson,raw);assert.equal(reply.assessment.modelVersion,null);
       assert.equal(reply.assessment.modelVersionStatus,'not_reported');
-      assert.equal(rows.some(r=>r.action==='evaluation.blocked'),true);
+      assert.equal(rows.some(r=>r.action==='ai.failure' && r.event.context.sourceContext.reason==='invalid_ai_assessment'),true);
+      assert.equal(rows.some(r=>r.action==='ai.retry' && r.event.context.sourceContext.executionKind==='apis_call'),true);
+      assert.equal(rows.some(r=>r.action==='evaluation.blocked'),false);
       assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
     } finally {f.db.close();}
   }

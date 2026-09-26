@@ -74,3 +74,89 @@ test('real workerd/D1 preserves a 202 submission across independent foreground a
     await scheduler.fetch('https://fixture.invalid/');assert.equal(attempts,2);
   }finally{await mf.dispose();}
 });
+
+// Invalid replies: preserved, never reused, retried within the four-call budget.
+const VALID=JSON.stringify({score:85,verdict:'fixture verdict',strength:'fixture strength',gap:'fixture gap',nextQuestion:'fixture question'});
+async function harness(answers) {
+  const calls={n:0};
+  const common={compatibilityDate:'2026-05-12',modules:true,modulesRoot:ROOT,
+    modulesRules:[{type:'ESModule',include:['**/*.js']}],
+    d1Databases:{READING_DB:'durable-evaluation-fixture'},
+    bindings:{READING_TEST_SLUG:'durable-workerd-fixture',APIS_CALLER_TOKEN:'fixture-not-a-secret',
+      YW_DURABLE_EVALUATION_ENABLED:'true',YW_BACKGROUND_EVALUATION_ENABLED:'true',YW_EVALUATION_MACHINE_SECRET:'cd'.repeat(32)},
+    serviceBindings:{
+      ASSETS(request){const pathname=new URL(request.url).pathname;
+        if(!/^\/data\/[a-zA-Z0-9_./-]+\.json$/.test(pathname)||pathname.includes('..'))return new Response('not found',{status:404});
+        try{return new Response(readFileSync(resolve(ROOT,'site'+pathname)),{headers:{'content-type':'application/json'}});}catch{return new Response('not found',{status:404});}},
+      APIS(){const answer=answers[Math.min(calls.n,answers.length-1)];calls.n++;
+        return Response.json({answer,model:'gemini-3.8-flash',raw_response:{modelVersion:'fixture-revision'}});},
+    },outboundService(){throw new Error('unexpected external request');},
+  };
+  const mf=new Miniflare({log:new Log(LogLevel.NONE),workers:[
+    {...common,name:'foreground',scriptPath:resolve(ROOT,'site/_worker.js')},
+    {...common,serviceBindings:{},bindings:{YW_BACKGROUND_EVALUATION_ENABLED:'true',YW_EVALUATION_MACHINE_SECRET:'cd'.repeat(32)},
+      name:'scheduler',scriptPath:resolve(ROOT,'scripts/fixtures/durable-scheduler-harness.js'),outboundService:'foreground'},
+  ]});
+  const db=await mf.getD1Database('READING_DB','foreground');
+  for(const file of readdirSync(resolve(ROOT,'migrations')).filter(x=>x.endsWith('.sql')).sort()){
+    const sql=readFileSync(resolve(ROOT,'migrations',file),'utf8').replace(/--[^\n]*/g,'');
+    for(const statement of sql.match(/\s*CREATE TRIGGER[\s\S]*?\nEND;|[^;]+;/gi)||[])await db.prepare(statement).run();
+  }
+  await db.prepare('INSERT INTO students(id,uc_slug,display_name,uc_user_id,identity_verified_at) VALUES(7,?,?,42,?)')
+    .bind('durable-workerd-fixture','Fixture',new Date().toISOString()).run();
+  const body={lessonId:'lesson-1458',interaction:'structure',input:{reason:'合成測試：比較兩處字句的前後照應，並說明文章結構推進。'},clientMutationId:'workerd-invalid-reply-fixture'};
+  const submit=()=>mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',{method:'POST',
+    headers:{'content-type':'application/json',origin:'https://yw.bdfz.net'},body:JSON.stringify(body)});
+  const drain=async()=>{await db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
+    return (await (await mf.getWorker('scheduler')).fetch('https://fixture.invalid/')).json();};
+  const facts=async()=>(await db.prepare('SELECT payload_json FROM learning_evaluation_events ORDER BY rowid').all()).results.map(r=>JSON.parse(r.payload_json));
+  const job=()=>db.prepare('SELECT state,last_error_class FROM learning_evaluation_jobs').first();
+  return {mf,db,calls,submit,drain,facts,job};
+}
+
+test('an invalid saved reply is kept, never reused, and a fresh call completes the evaluation',async()=>{
+  const h=await harness(['{',VALID]);
+  try {
+    const response=await h.submit(),pending=await response.json();
+    assert.equal(response.status,202);assert.equal(pending.pendingState,'queued');assert.equal(pending.error,'答案已保存，評閱稍後補上');
+    assert.deepEqual(await h.job(),{state:'queued',last_error_class:'invalid_reply'});
+    assert.equal((await h.drain()).completed,1);assert.equal(h.calls.n,2);
+    const replies=(await h.db.prepare('SELECT lease_epoch,answer_text FROM learning_evaluation_replies ORDER BY id').all()).results;
+    assert.deepEqual(replies.map(r=>r.answer_text),['{',VALID]);
+    assert.equal((await h.job()).state,'completed');
+    const facts=await h.facts(),ids=new Set(facts.map(r=>r.operationId));
+    const failure=facts.find(r=>r.action==='ai.failure');
+    assert.equal(failure.context.sourceContext.reason,'invalid_ai_assessment');
+    assert.ok(failure.parentOperationId.endsWith(':reply:'+replies[0].lease_epoch));
+    assert.equal(facts.find(r=>r.action==='ai.retry').context.sourceContext.executionKind,'apis_call');
+    assert.equal(facts.filter(r=>r.action==='evaluation.result').length,1);
+    assert.ok(facts.every(r=>!r.parentOperationId || ids.has(r.parentOperationId)));
+  } finally {await h.mf.dispose();}
+});
+
+test('invalid replies block only when the four-call budget is spent',async()=>{
+  const h=await harness(['{']);
+  try {
+    assert.equal((await h.submit()).status,202);
+    for(let i=0;i<3;i++) await h.drain();
+    assert.equal(h.calls.n,4);assert.deepEqual(await h.job(),{state:'blocked',last_error_class:'invalid_reply'});
+    await h.drain();assert.equal(h.calls.n,4,'no fifth call and no reconciliation of a spent budget');
+    assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM learning_evaluation_replies').first()).n,4);
+  } finally {await h.mf.dispose();}
+});
+
+test('a job blocked on an invalid reply before this change is reconciled once and completes',async()=>{
+  const h=await harness(['{',VALID]);
+  try {
+    assert.equal((await h.submit()).status,202);
+    // The state the previous release left: blocked with the invalid reply saved.
+    await h.db.prepare("UPDATE learning_evaluation_jobs SET state='blocked',last_error_class='reply_saved'").run();
+    assert.equal((await h.drain()).completed,1);assert.equal(h.calls.n,2);
+    assert.equal((await h.job()).state,'completed');
+    const facts=await h.facts(),ids=new Set(facts.map(r=>r.operationId));
+    const retry=facts.find(r=>r.context.sourceContext.retryKind==='reconciliation');
+    assert.equal(retry.action,'ai.retry');assert.equal(retry.context.sourceContext.reason,'invalid_reply');
+    assert.ok(ids.has(retry.parentOperationId));
+    await h.drain();assert.equal(h.calls.n,2);
+  } finally {await h.mf.dispose();}
+});
