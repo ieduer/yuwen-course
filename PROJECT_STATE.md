@@ -1,6 +1,6 @@
-## 2026-09-26 — invalid-reply retry and blocked-job reconciliation (source candidate)
+## 2026-09-26 — invalid-reply retry and blocked-job reconciliation (released, accepted)
 
-After P0 `YW_EVALUATION_NEEDS_RECONCILIATION` (one lesson-1488 job blocked on a truncated APIS reply), invalid replies are kept but never reused and are retried with fresh calls within the four-call budget; the scheduler reconciles jobs blocked by the old rule. Pages must release before `yw-evaluation-jobs`. Accepted runtime unchanged (Pages 367e8f6 / edbb05d2; worker 6049d87 / 0aadc72b). See docs/MAINTENANCE_MANUAL.md.
+Pages 141bd3e / 6037b165 (rollback edbb05d2) and scheduler 141bd3e / 37b94ddc (rollback 4db3adc4). The blocked lesson-1488 job completed on the first scheduler tick; open jobs 0, alert recovered. Uncertain jobs still need manual review. See docs/MAINTENANCE_MANUAL.md.
 
 ## 2026-09-26 — corrected durable baseline accepted; recorder ready for its own release
 
