@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1230,
-  "totalBytes": 164550351,
-  "aggregateSha256": "f3e3ccd8d9bcce8a0534d0ef0fbf3be03fc848c974c1fa8e5786f1ea206a390b",
+  "fileCount": 1232,
+  "totalBytes": 164561823,
+  "aggregateSha256": "0fdb1769cf25925dbe86a82ddd80531589d2014881865b9ea84ed7f88f74c773",
   "files": [
     {
       "path": "_headers",
@@ -17,13 +17,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 144145,
-      "sha256": "b0dc3b9d0520d5a8f52d34b3c2b1f3d713cee807e59f5d45526dfdff7b0818c0"
+      "bytes": 144563,
+      "sha256": "3ae1791b8460f8faed65415230449d3ecc35d2b36434a45289638c9aa920a74d"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "73d08795ba3f5eb0b020fa13f9731f61269edc17ec61672c059b5242113fc181"
+      "sha256": "97252a103e98a9b7da3f10611bdaf2bbfe4f0cc324117b71c9a051bfe0e8a580"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1417,8 +1417,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 239382,
-      "sha256": "2dfd37a7a122a7a71fcc7002e3fc0281b22daa4600d1661904287fca2ca6df7c"
+      "bytes": 241217,
+      "sha256": "8f1f5a508e693590563e5a20ae2ab6398239175d4409bb4a0d9d3dea4be9c0ef"
     },
     {
       "path": "assets/atlas.css",
@@ -1444,6 +1444,11 @@
       "path": "assets/learning-evidence.js",
       "bytes": 2606,
       "sha256": "0462cf0c8a8fef6036755e00b4c04ff2c990056f0d7f1d5a779a218eada3270c"
+    },
+    {
+      "path": "assets/learning-recorder-bridge.js",
+      "bytes": 6163,
+      "sha256": "937c6ac55ff674c0111101df89fc0cc27e29e296466b82912875a29c5693d804"
     },
     {
       "path": "assets/menu-icon.webp",
@@ -6052,8 +6057,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 11614,
-      "sha256": "a432815558be61a4411c8b01b93325d99a55834cbeeee458d811ad2b845a0d0e"
+      "bytes": 11703,
+      "sha256": "e467e1dfefe5544a406d73bbc303c985f14ae5d9c39287ff04714a1ecb2fd36f"
     },
     {
       "path": "learning-evaluation-events.js",
@@ -6064,6 +6069,11 @@
       "path": "learning-evidence-source.js",
       "bytes": 92400,
       "sha256": "995f150f477bfc116a9c19e88640cc1b5286d75cbcce5823d288962a4da12f41"
+    },
+    {
+      "path": "learning-recorder-source.js",
+      "bytes": 2967,
+      "sha256": "852391f05f78f4803958f3db6b9a2343f72cacce94e436b7a2c1c7ef19085e1d"
     },
     {
       "path": "lesson-blueprint-rules.js",
