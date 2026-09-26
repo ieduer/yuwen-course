@@ -2,6 +2,38 @@
 
 Pages 141bd3e / 6037b165 (rollback edbb05d2) and scheduler 141bd3e / 37b94ddc (rollback 4db3adc4). The blocked lesson-1488 job completed on the first scheduler tick; open jobs 0, alert recovered. Uncertain jobs still need manual review. See docs/MAINTENANCE_MANUAL.md.
 
+## 2026-09-26 — detailed recorder published and accepted
+
+Current Web release is Pages `edbb05d2-8139-4c41-be98-d9c230d5b42e`, exact
+runtime source `367e8f61026532a1f90e196f93b5f4a7bf8d0d6a` (PR64), accepted
+through the separately reviewed publisher `5d315c8561790dc04ea467ff96b9640478b8c283`
+(PR70). This documentation update does not change the deployed source.
+
+The dedicated synthetic account's three authorized submissions produced 32
+immutable operations. The normal production browser delivered them to the
+existing User Center recorder. Full content, original times, parent links,
+SHA-256 and record_only status matched; reload retained IDs/receipts, the
+source cursor was 32 and the local pending queue was empty. The initial 24
+captured events plus eight later synchronization observations (six requests,
+two receipts) reconcile completely. Recorder acceptance created no answers,
+model calls or notifications. Anonymous source and central reads returned 401.
+Different-owner isolation is covered by actual local two-owner Worker fixtures;
+only one dedicated account was used in production. Existing lost-ack/IndexedDB
+and large-event fixtures remain separate local evidence.
+
+The prerequisite PR65 binding repair was accepted first with real202 followed
+by signed scheduler completion, full replies and normal lesson UI/reload.
+Immediate rollback is that accepted Pages `51837754-3070-4868-87d2-155ada4687fb`
+at source `41c8ceee28616308888a21af782475b57140ba1d`. Preserve all forward D1,
+central and browser outbox data. Worker `yw-evaluation-jobs`, its enabled flags,
+App pointer and all276content objects remain unchanged. Consumed transactions
+cannot be replayed; any later rollback needs fresh exact authority.
+
+Canonical operational evidence:
+`/Users/ylsuen/CF/reports/operations/learning-records-validity-20260925/YW_RECORDER_RELEASE.md`.
+This proves the synthetic production path, not general natural-traffic recovery
+or a future report run. Earlier candidate/pending notes below are history.
+
 ## 2026-09-26 — corrected durable baseline accepted; recorder ready for its own release
 
 PR65 is accepted at Pages `51837754-3070-4868-87d2-155ada4687fb`, source
