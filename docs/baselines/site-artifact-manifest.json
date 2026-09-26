@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1232,
-  "totalBytes": 164561823,
-  "aggregateSha256": "0fdb1769cf25925dbe86a82ddd80531589d2014881865b9ea84ed7f88f74c773",
+  "totalBytes": 164565261,
+  "aggregateSha256": "e9a14631836b5fad4fc57a7b92e6d1a08f6bfef46e4afaa3a8b071efc9c66d7a",
   "files": [
     {
       "path": "_headers",
@@ -17,13 +17,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 144563,
-      "sha256": "3ae1791b8460f8faed65415230449d3ecc35d2b36434a45289638c9aa920a74d"
+      "bytes": 144248,
+      "sha256": "5ce90677a34d0b94a3a979b5202ab6c7f587273ea3f212bdc8045f4a30e71a01"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "97252a103e98a9b7da3f10611bdaf2bbfe4f0cc324117b71c9a051bfe0e8a580"
+      "sha256": "e23cc2e9a655438870eb05d62f19878c8e453831352795d150cea7898705462b"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -6032,8 +6032,8 @@
     },
     {
       "path": "durable-evaluation-jobs.js",
-      "bytes": 16655,
-      "sha256": "163247bad05328bf0b830caff66e4bb81a710a2ca2fbf554c33a04bd1f5f5f18"
+      "bytes": 19879,
+      "sha256": "3db701c93615217dc3f859359b51f17660131b5ee6c045c346ff690debd7ba5a"
     },
     {
       "path": "evaluation-machine.js",
@@ -6162,8 +6162,8 @@
     },
     {
       "path": "study-guide-assessment.js",
-      "bytes": 15482,
-      "sha256": "5ad843d360fc43899b4a1a158cd213309256b3bf5571c0ce4c83348a84d735f9"
+      "bytes": 16011,
+      "sha256": "0a7e6a88a3003853700b9a15b1aa54d0977c4767bd70966967c9ed8d3f6a7e1c"
     }
   ]
 }
