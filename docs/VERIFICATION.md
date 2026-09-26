@@ -1,3 +1,21 @@
+## 2026-09-25 — detailed-learning recorder candidate checks
+
+The isolated candidate passes194focused source/frontend/recovery/cache tests,
+74existing local reading-API assertions, the actual Worker/D1 two-owner bridge
+test, and the full shared-state browser contract with recorder startup/account
+switch assertions. A separate real IndexedDB browser fixture using the accepted
+UC recorder preserves a594011-byte private artifact and recovers one lost reply
+after ordinary reload with3unique central fixture rows. These use synthetic
+records, no external model calls, no production grades and no notifications.
+
+The preview-only build and staging check pass. They are not a formal publication
+artifact or deployment acceptance. Formal release checks, final clean pushed
+source/artifact binding, exact Web-only App receipt, registered external executor
+and authenticated production readback remain required after the currentf8808e83
+natural-acceptance gate. Keep the existing background/alerts switches true.
+See `LEARNING_RECORDER_BRIDGE.md` and workspace
+`reports/operations/learning-records-validity-20260925/` for evidence and limits.
+
 # 核查標準 / Verification Standard
 
 ## 2026-09-07 preview lifecycle and persisted diagnostics accepted

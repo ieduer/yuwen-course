@@ -1,4 +1,5 @@
 import { sourceEventStatement, evaluationEventBase, evaluationEventId, latestSourceEvent } from './learning-evaluation-events.js';
+import { readRecorderSource } from './learning-recorder-source.js';
 import { EVALUATION_MACHINE_PATH, handleEvaluationMachine } from './evaluation-machine.js';
 import { EvaluationPending, pendingEvaluationResponse, createEvaluationJob,
   claimEvaluationJob, saveEvaluationReply, latestEvaluationReply, deferEvaluationJob,
@@ -85,6 +86,12 @@ const YW_PRE_ACTIVATION_TRANSPORT_CANARY = Object.freeze({
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (url.pathname === '/api/learning/recorder-events' && request.method === 'GET') {
+      const student = await authenticatedReadingStudent(request, env);
+      if (student?.error) return student.error;
+      return readRecorderSource({ request, db: env.READING_DB, student,
+        cookieHeader: userCenterSessionCookieHeader(request) });
+    }
     if(url.pathname===EVALUATION_MACHINE_PATH) return handleEvaluationMachine(request,env,async job=>{
       try {await completeDurableEvaluationJob(env,job);return 'completed';}
       catch(error) {

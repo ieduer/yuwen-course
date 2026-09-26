@@ -1,3 +1,33 @@
+## 2026-09-26 — corrected durable baseline accepted; recorder ready for its own release
+
+PR65 is accepted at Pages `51837754-3070-4868-87d2-155ada4687fb`, source
+`41c8ceee28616308888a21af782475b57140ba1d`. The dedicated synthetic account
+verified a normal202 followed by signed scheduled completion, full original,
+reply and immutable events, then normal lesson UI submission and exact reload.
+Existing completed browser status and anonymous401 isolation also passed.
+The user explicitly authorized the account, finite model calls and same-thread
+publication. Evidence: workspace `reports/operations/learning-records-validity-20260925/yw-binding-production-acceptance.json`.
+
+This PR64 candidate now includes that production binding correction. Recorder
+JS remains the reviewed2a5c1e3 implementation. Its own exact source/artifact/App
+receipt, preview, controlled production transaction and real authenticated
+full-content/time/reload/account-isolation acceptance remain required. It must
+not inherit the prior release's consumed receipt. Preserve enabled scheduler,
+all forward D1/UC/private artifact/browser outbox data and unchanged App pointer.
+Earlier prepared/unshipped/f8808e83 acceptance claims below are retained history.
+
+## 2026-09-25 — detailed-learning recorder candidate
+
+See [LEARNING_RECORDER_BRIDGE.md](LEARNING_RECORDER_BRIDGE.md). The Web candidate
+reads complete immutable source facts only for the authenticated owner, verifies
+canonical hashes, and durably hands them to the accepted UC `record_only`
+recorder. Its private full-content observations are separate from the unchanged
+minimized scoring projection. No S2S logger, source re-evaluation, history
+backfill, migration, shared contract, App pointer or background Worker change.
+Current production background and alerts are true; earlier disabled/unshipped
+sections below predate the completed source6049/Pagesf8808e83 rollout and window
+handoff. Natural completion acceptance still belongs to the original repair
+task; this new candidate is not production acceptance.
 ## 2026-09-26 — production runtime variable packaging correction
 
 Pages uses wrangler.toml to construct its uploaded Worker bindings. Declaring
