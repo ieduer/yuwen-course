@@ -30,3 +30,7 @@ queue = "bdfz-learning-evidence-yw-v2"
 [[env.production.services]]
 binding = "PREVIEW_LOGS"
 service = "yw-preview-logs"
+
+# Pages bundles runtime vars from this file, not project API metadata.
+[env.production.vars]
+YW_DURABLE_EVALUATION_ENABLED = "true"

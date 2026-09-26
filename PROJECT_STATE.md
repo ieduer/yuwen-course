@@ -1,3 +1,20 @@
+# 2026-09-26 — production evaluation binding repair (not deployed)
+
+The authorized dedicated-account exercise on Pages f8808e83 returned a normal
+AI result through the legacy path, without a durable evaluation job. Project
+metadata reported the durable flag true, but the release's actual Wrangler
+bundle omitted it because wrangler.toml did not declare the production variable.
+The user explicitly authorized this minimal repair to replace that failed
+acceptance prerequisite before the separate PR64 recorder release.
+
+Declare the existing durable flag as production string true. Real multipart
+bundle tests verify the flag, production database/APIS, and preview isolation.
+Runtime JavaScript, HMAC/nonce/CAS, quotas, Worker flags, D1 schema, lesson/App
+content and secrets are unchanged. Local tests are not production acceptance;
+a fresh exact controlled deployment and complete synthetic pending/background/
+full-record/frontend chain remain required. Preserve all forward D1 records.
+Evidence: /Users/ylsuen/CF/reports/operations/learning-records-validity-20260925/YW_EIGHTH_BINDING_DIAGNOSIS.md.
+
 ## 2026-09-25 20:33 UTC — additive migration compatibility correction
 
 PR62 signed pending runtime is merged at 1c5a32d but Pages remains accepted PR59 ffa3689 / ff11ac3d. A disabled scheduler was created and exact bytes read back. The private D1 backup restored correctly; remote0009 was atomically rejected with incomplete input, and readback confirms only0001–0008, no new schema objects and no Pages machine settings. Correct only the two trigger predicates from unparenthesized CASE/END to equivalent trigger WHEN conditions (Cloudflare workers-sdk#4727). Retain every lease and immutable-event abort. Local source/recovery/workerd tests pass with fixture models. The consumed transaction cannot replay; a new exact reconciliation/backup/config transaction and source-matched Pages gate are required. No accepted pending/background claim. Evidence: /Users/ylsuen/CF/reports/operations/yw-http503-20260925/review-20260925/migration-failure-readback.json.
