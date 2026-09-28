@@ -3,22 +3,23 @@ import { sourceEventStatement, evaluationEventId, evaluationEventBase,
   latestSourceEvent, replyAssessment } from './learning-evaluation-events.js';
 import { extractJsonObject, normalizeOpenStudyGuideAssessment } from './study-guide-assessment.js';
 export const JOB_POLICY = Object.freeze({ maxCalls: 4, leaseMs: 90_000, maxJobsPerTick: 2 });
-// An owner-approved, expiring exception applies to one existing source job.
+// An owner-approved, expiring exception applies to a frozen list of at most 26 existing source jobs.
 // It never resets the ledger or changes the default four-call budget. The
 // fifth lease is the only eligible execution, so a failed/uncertain attempt
 // cannot be re-armed by leaving these variables configured.
 function oneShotScope(env,now) {
-  const hash=env?.YW_EVALUATION_ONE_SHOT_SHA256;
+  const hashes=String(env?.YW_EVALUATION_ONE_SHOT_SHA256 || "").split(",");
   const until=Date.parse(env?.YW_EVALUATION_ONE_SHOT_UNTIL || '');
-  return /^[a-f0-9]{64}$/.test(hash || '') && Number.isFinite(until)
-    && until>now && until-now<=86400000 ? hash : null;
+  return hashes.length<=26 && hashes.every(hash=>/^[a-f0-9]{64}$/.test(hash))
+    && new Set(hashes).size===hashes.length && Number.isFinite(until)
+    && until>now && until-now<=86400000 ? hashes : null;
 }
 export async function hasOwnerExtraAttempt(env,job,now=Date.now()) {
   const expected=oneShotScope(env,now);
   if(!expected || typeof job?.source_event_id!=='string') return false;
   const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(job.source_event_id)))]
     .map(x=>x.toString(16).padStart(2,'0')).join('');
-  return hash===expected;
+  return expected.includes(hash);
 }
 export async function evaluationCallLimit(env,job,now=Date.now()) {
   return job?.lease_epoch===5 && await hasOwnerExtraAttempt(env,job,now) ? 5 : JOB_POLICY.maxCalls;
@@ -235,6 +236,15 @@ export async function drainEvaluationJobs(env,execute,now=Date.now()) {
     // failures, no saved reply and the original fourth lease. Other blocked
     // jobs and transport-unknown work remain untouched.
     if(oneShotScope(env,now)) {
+      // Arm one scoped job per tick. A fifth lease not yet complete freezes
+      // further grants, including failed, uncertain and uncommitted replies.
+      // Existing local reply recovery still runs below; no ledger reset.
+      const extraAttempts=await db.prepare(`SELECT source_event_id,state FROM learning_evaluation_jobs WHERE lease_epoch>=5 OR (state='queued' AND last_error_class='owner_approved_extra_attempt')`).all();
+      let halted=false;
+      for(const prior of extraAttempts.results || []) {
+        if(prior.state!=='completed' && await hasOwnerExtraAttempt(env,prior,now)) { halted=true; break; }
+      }
+      if(!halted) {
       const candidates=await db.prepare(`SELECT * FROM learning_evaluation_jobs
         WHERE state='blocked' AND lease_epoch=4 AND last_error_class='automatic_limit_or_permanent_failure'
         ORDER BY first_pending_at LIMIT 50`).all();
@@ -255,6 +265,8 @@ export async function drainEvaluationJobs(env,execute,now=Date.now()) {
             reason:'owner_approved_extra_attempt',retryKind:'reconciliation',executionKind:'apis_call',nextAttemptAt:at}});
         await db.batch([db.prepare(`UPDATE learning_evaluation_jobs SET state='queued',next_attempt_at=?,last_error_class='owner_approved_extra_attempt'
           WHERE source_event_id=? AND state='blocked' AND lease_epoch=4`).bind(now,job.source_event_id),event]);
+        break;
+      }
       }
     }
 
@@ -295,8 +307,11 @@ export async function drainEvaluationJobs(env,execute,now=Date.now()) {
       if(!job) break;
       try { const result=await execute(job);if(result?.status!=='pending') completed++; }
       catch(error) { await deferEvaluationJob(db,job,error); }
+      const scopedAttempt=job.lease_epoch===5 && await hasOwnerExtraAttempt(env,job,now);
+      const scopedResult=scopedAttempt ? await loadEvaluationJob(db,job.source_event_id) : null;
       await db.prepare('UPDATE learning_evaluation_scheduler SET last_student_id=? WHERE id=1 AND owner=?')
         .bind(job.student_id,owner).run();
+      if(scopedAttempt && scopedResult?.state!=='completed') break;
     }
     await db.prepare('UPDATE learning_evaluation_scheduler SET last_scan_at=? WHERE id=1 AND owner=?')
       .bind(Date.now(),owner).run();

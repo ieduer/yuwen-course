@@ -232,3 +232,25 @@ test('owner-scoped recovery preserves the per-window call budget',async()=>{
     assert.equal((await h.facts()).at(-1).context.sourceContext.reason,'local_budget_exhausted');
   } finally {await h.mf.dispose();}
 });
+
+for(const successful of [true,false]) test(`frozen two-job scope serializes grants and stops after failure: ${successful}`,async()=>{
+  const failure={errorCode:'UPSTREAM_UNAVAILABLE'};
+  const h=await harness([...Array(8).fill(failure),successful?VALID:failure,VALID]);
+  try {
+    await h.submit();for(let i=0;i<3;i++)await h.drain();assert.equal(h.calls.n,4);
+    await h.db.prepare('INSERT INTO students(id,uc_slug,display_name,uc_user_id,identity_verified_at) VALUES(8,?,?,43,?)')
+      .bind('second-fixture','Second Fixture',new Date().toISOString()).run();
+    await h.configure({READING_TEST_SLUG:'second-fixture'});
+    await h.submit();for(let i=0;i<3;i++)await h.drain();assert.equal(h.calls.n,8);
+    await h.db.prepare("UPDATE learning_evaluator_calls SET window_start='2026-01-01T00:00:00.000Z'").run();
+    const jobs=(await h.db.prepare('SELECT source_event_id FROM learning_evaluation_jobs ORDER BY first_pending_at').all()).results;
+    assert.equal(jobs.length,2);
+    const scope={YW_EVALUATION_ONE_SHOT_SHA256:jobs.map(j=>createHash('sha256').update(j.source_event_id).digest('hex')).join(','),YW_EVALUATION_ONE_SHOT_UNTIL:new Date(Date.now()+3600000).toISOString()};
+    await h.configure(scope);await h.drain();assert.equal(h.calls.n,9,'one grant only in first tick');
+    await h.drain();await h.drain();assert.equal(h.calls.n,successful?10:9);
+    const rows=(await h.db.prepare('SELECT state,lease_epoch FROM learning_evaluation_jobs ORDER BY first_pending_at').all()).results;
+    assert.deepEqual(rows.map(j=>j.state),successful?['completed','completed']:['blocked','blocked']);
+    assert.deepEqual(rows.map(j=>j.lease_epoch),successful?[5,5]:[5,4]);
+    assert.equal((await h.db.prepare("SELECT COUNT(*) n FROM learning_evaluation_events WHERE action='ai.failure'").first()).n,successful?8:9);
+  } finally {await h.mf.dispose();}
+});
