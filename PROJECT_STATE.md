@@ -4,6 +4,10 @@ APIS v6.20.0 is active and a public short-answer grading request returned valid 
 
 Not yet deployed or claimed recovered. Local real D1/workerd tests cover two-job serial success and fail-stop. Release requires exact accepted Pages/scheduler pairing, preserved App artifact, and individual source/central result readback. Evidence and finite budget: `/Users/ylsuen/CF/reports/operations/apis-free-pool-release-20260928/yw-frozen-recovery-plan.json`. Code rollback preserves all forward records; never reset or erase the lifetime ledger.
 
+## 2026-09-28 — Single-job reconciliation released and accepted
+
+Source d21abfa (PR68 merged main). Pages649dbdb4-fe0b-4e02-9eab-d5c4bdd82e25; scheduler versiond834c2b0-eff5-4a4a-9391-85b3206cca39 / deployment5b1ebcfa-86f3-4713-bd75-a266fd27ea3c. Existing blocked job completed08:17:50Z with exactly5 lifetime APIS calls, one valid289-character reply/result/interaction; original and all prior calls/events unchanged. Backlog0 and recovered:ok at08:17:51Z. UC accepted at08:17:59Z; all6 previously affected jobs have central evidence. Source receipt mirror may lag. Grant is inert after completed lease5 and expires2026-09-29T07:00Z; no sixth call. Rollback Pages6037b165 / scheduler37b94ddc, preserving forward data. App pointer/276objects unchanged; existing exact-main Web-only gate passed. Evidence: /Users/ylsuen/CF/reports/operations/yw-apis-recovery-20260928/REPORT.md.
+
 ## 2026-09-28 — Single existing evaluation reconciliation (candidate)
 
 Owner authorized at most one additional APIS call for existing blocked job hash prefix930090dd2287f220 after APIS recovery. Default lifetime four-call policy remains. An expiring SHA256 scope applies only to that job, with four recorded definite APIS503 failures, no saved reply and original lease4. Reconciliation appends an immutable retry event; lease5 can reserve call5. A failed or ambiguous fifth call cannot be re-armed. Original submission, four prior failures, ledger, per-window budgets and all newer learning history remain intact. Wrong/missing/expired/overlong scopes fail closed. Bindings expire2026-09-29T07:00Z; no automatic sixth call.
