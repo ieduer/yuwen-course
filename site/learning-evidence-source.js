@@ -1,4 +1,4 @@
-import { loadEvaluationJob, JOB_POLICY } from "./durable-evaluation-jobs.js";
+import { loadEvaluationJob, JOB_POLICY, evaluationCallLimit } from "./durable-evaluation-jobs.js";
 import { sourceEventStatement, evaluationEventId, evaluationEventBase,
   latestSourceEvent, replyAssessment, sourceEventJob } from './learning-evaluation-events.js';
 import {
@@ -1382,6 +1382,7 @@ export async function reserveLearningEvaluatorCall({
     ? new Date(Math.floor(Date.parse(occurredAt) / 600_000) * 600_000).toISOString()
     : clean(submissionReservation.rateReservation.windowStart, 40);
   const createdAt = clean(occurredAt, 40) || isoNow();
+  const callLimit = await evaluationCallLimit(env,submissionReservation.evaluationJob);
   try {
     const inserted = await db.prepare(
       `INSERT INTO learning_evaluator_calls (
@@ -1398,7 +1399,7 @@ export async function reserveLearningEvaluatorCall({
         ) < ${learningEvaluatorCallBudget.mutationWindowLimit}
         ${submissionReservation.evaluationJob ? `AND (
           SELECT COUNT(*) FROM learning_evaluator_calls WHERE source_event_id = ?
-        ) < ${JOB_POLICY.maxCalls} AND EXISTS (
+        ) < ${callLimit} AND EXISTS (
           SELECT 1 FROM learning_evaluation_jobs WHERE source_event_id = ?
           AND state = 'leased' AND lease_epoch = ? AND lease_until >= ?
         )` : ''}`

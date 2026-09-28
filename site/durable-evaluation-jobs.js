@@ -3,6 +3,26 @@ import { sourceEventStatement, evaluationEventId, evaluationEventBase,
   latestSourceEvent, replyAssessment } from './learning-evaluation-events.js';
 import { extractJsonObject, normalizeOpenStudyGuideAssessment } from './study-guide-assessment.js';
 export const JOB_POLICY = Object.freeze({ maxCalls: 4, leaseMs: 90_000, maxJobsPerTick: 2 });
+// An owner-approved, expiring exception applies to one existing source job.
+// It never resets the ledger or changes the default four-call budget. The
+// fifth lease is the only eligible execution, so a failed/uncertain attempt
+// cannot be re-armed by leaving these variables configured.
+function oneShotScope(env,now) {
+  const hash=env?.YW_EVALUATION_ONE_SHOT_SHA256;
+  const until=Date.parse(env?.YW_EVALUATION_ONE_SHOT_UNTIL || '');
+  return /^[a-f0-9]{64}$/.test(hash || '') && Number.isFinite(until)
+    && until>now && until-now<=86400000 ? hash : null;
+}
+export async function hasOwnerExtraAttempt(env,job,now=Date.now()) {
+  const expected=oneShotScope(env,now);
+  if(!expected || typeof job?.source_event_id!=='string') return false;
+  const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(job.source_event_id)))]
+    .map(x=>x.toString(16).padStart(2,'0')).join('');
+  return hash===expected;
+}
+export async function evaluationCallLimit(env,job,now=Date.now()) {
+  return job?.lease_epoch===5 && await hasOwnerExtraAttempt(env,job,now) ? 5 : JOB_POLICY.maxCalls;
+}
 export class EvaluationPending extends Error {
   constructor(job) { super('答案已保存，評閱稍後補上'); this.code='learning_evaluation_pending'; this.job=job; }
 }
@@ -209,6 +229,33 @@ export async function drainEvaluationJobs(env,execute,now=Date.now()) {
           retryKind:reply?'automatic':null,executionKind:reply?'local_commit_only':'transport_unknown'}});
       await db.batch([db.prepare(`UPDATE learning_evaluation_jobs SET state=?,last_error_class='expired_execution'
         WHERE source_event_id=? AND lease_epoch=? AND state=?`).bind(state,job.source_event_id,job.lease_epoch,job.state),statement]);
+    }
+
+    // The one additional owner-approved request requires four definite APIS
+    // failures, no saved reply and the original fourth lease. Other blocked
+    // jobs and transport-unknown work remain untouched.
+    if(oneShotScope(env,now)) {
+      const candidates=await db.prepare(`SELECT * FROM learning_evaluation_jobs
+        WHERE state='blocked' AND lease_epoch=4 AND last_error_class='automatic_limit_or_permanent_failure'
+        ORDER BY first_pending_at LIMIT 50`).all();
+      for(const job of candidates.results || []) {
+        if(!await hasOwnerExtraAttempt(env,job,now)) continue;
+        const calls=await db.prepare('SELECT COUNT(*) n FROM learning_evaluator_calls WHERE source_event_id=?').bind(job.source_event_id).first();
+        if(Number(calls?.n)!==4 || await latestEvaluationReply(db,job.source_event_id)) continue;
+        const failures=await db.prepare(`SELECT COUNT(*) n FROM learning_evaluation_events WHERE source_event_id=?
+          AND action='ai.failure' AND json_extract(payload_json,'$.context.sourceContext.reason')='apis_http_failure'
+          AND json_extract(payload_json,'$.context.sourceContext.httpStatus')=503
+          AND json_extract(payload_json,'$.context.sourceContext.errorCode') IN ('DEADLINE_EXCEEDED','UPSTREAM_UNAVAILABLE')
+          AND json_extract(payload_json,'$.context.sourceContext.leaseEpoch') BETWEEN 1 AND 4`).bind(job.source_event_id).first();
+        const failure=await latestSourceEvent(db,job.source_event_id,'ai.failure',4);
+        if(Number(failures?.n)!==4 || !failure) continue;
+        const at=new Date(now).toISOString();
+        const event=await sourceEventStatement(db,evaluationEventBase(job),{action:'ai.retry',kind:'retry',
+          key:'owner-one-shot-5',parentId:failure.event_id,at,sourceContext:{leaseEpoch:4,jobState:'queued',
+            reason:'owner_approved_extra_attempt',retryKind:'reconciliation',executionKind:'apis_call',nextAttemptAt:at}});
+        await db.batch([db.prepare(`UPDATE learning_evaluation_jobs SET state='queued',next_attempt_at=?,last_error_class='owner_approved_extra_attempt'
+          WHERE source_event_id=? AND state='blocked' AND lease_epoch=4`).bind(now,job.source_event_id),event]);
+      }
     }
 
     // Reconciliation: before invalid replies became retryable, an invalid

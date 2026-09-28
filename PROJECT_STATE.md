@@ -1,3 +1,9 @@
+## 2026-09-28 — Single existing evaluation reconciliation (candidate)
+
+Owner authorized at most one additional APIS call for existing blocked job hash prefix930090dd2287f220 after APIS recovery. Default lifetime four-call policy remains. An expiring SHA256 scope applies only to that job, with four recorded definite APIS503 failures, no saved reply and original lease4. Reconciliation appends an immutable retry event; lease5 can reserve call5. A failed or ambiguous fifth call cannot be re-armed. Original submission, four prior failures, ledger, per-window budgets and all newer learning history remain intact. Wrong/missing/expired/overlong scopes fail closed. Bindings expire2026-09-29T07:00Z; no automatic sixth call.
+
+Release order: APIS text-feedback recovery, Pages call reservation, scheduler single-job reconciliation. Evidence: /Users/ylsuen/CF/reports/operations/yw-apis-recovery-20260928/. Candidate only until live result and authenticated readback. Rollback: Pages6037b165; scheduler37b94ddc; preserve forward D1 data. No schema, scoring, content, App contract or user-resubmission change.
+
 ## 2026-09-26 — invalid-reply retry and blocked-job reconciliation (released, accepted)
 
 Pages 141bd3e / 6037b165 (rollback edbb05d2) and scheduler 141bd3e / 37b94ddc (rollback 4db3adc4). The blocked lesson-1488 job completed on the first scheduler tick; open jobs 0, alert recovered. Uncertain jobs still need manual review. See docs/MAINTENANCE_MANUAL.md.

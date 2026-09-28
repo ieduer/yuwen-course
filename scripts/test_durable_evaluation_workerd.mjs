@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFileSync,readdirSync} from 'node:fs';
 import {resolve} from 'node:path';
+import {createHash} from 'node:crypto';
 import {Log,LogLevel,Miniflare} from 'miniflare';
 const ROOT=resolve(import.meta.dirname,'..');
 
@@ -89,15 +90,17 @@ async function harness(answers) {
         if(!/^\/data\/[a-zA-Z0-9_./-]+\.json$/.test(pathname)||pathname.includes('..'))return new Response('not found',{status:404});
         try{return new Response(readFileSync(resolve(ROOT,'site'+pathname)),{headers:{'content-type':'application/json'}});}catch{return new Response('not found',{status:404});}},
       APIS(){const answer=answers[Math.min(calls.n,answers.length-1)];calls.n++;
+        if(answer?.errorCode) return Response.json({error_code:answer.errorCode},{status:503});
         return Response.json({answer,model:'gemini-3.8-flash',raw_response:{modelVersion:'fixture-revision'}});},
     },outboundService(){throw new Error('unexpected external request');},
   };
-  const mf=new Miniflare({log:new Log(LogLevel.NONE),workers:[
-    {...common,name:'foreground',scriptPath:resolve(ROOT,'site/_worker.js')},
-    {...common,serviceBindings:{},bindings:{YW_BACKGROUND_EVALUATION_ENABLED:'true',YW_EVALUATION_MACHINE_SECRET:'cd'.repeat(32)},
+  const options=(extra={})=>({log:new Log(LogLevel.NONE),workers:[
+    {...common,bindings:{...common.bindings,...extra},name:'foreground',scriptPath:resolve(ROOT,'site/_worker.js')},
+    {...common,serviceBindings:{},bindings:{YW_BACKGROUND_EVALUATION_ENABLED:'true',YW_EVALUATION_MACHINE_SECRET:'cd'.repeat(32),...extra},
       name:'scheduler',scriptPath:resolve(ROOT,'scripts/fixtures/durable-scheduler-harness.js'),outboundService:'foreground'},
   ]});
-  const db=await mf.getD1Database('READING_DB','foreground');
+  const mf=new Miniflare(options());
+  let db=await mf.getD1Database('READING_DB','foreground');
   for(const file of readdirSync(resolve(ROOT,'migrations')).filter(x=>x.endsWith('.sql')).sort()){
     const sql=readFileSync(resolve(ROOT,'migrations',file),'utf8').replace(/--[^\n]*/g,'');
     for(const statement of sql.match(/\s*CREATE TRIGGER[\s\S]*?\nEND;|[^;]+;/gi)||[])await db.prepare(statement).run();
@@ -111,7 +114,8 @@ async function harness(answers) {
     return (await (await mf.getWorker('scheduler')).fetch('https://fixture.invalid/')).json();};
   const facts=async()=>(await db.prepare('SELECT payload_json FROM learning_evaluation_events ORDER BY rowid').all()).results.map(r=>JSON.parse(r.payload_json));
   const job=()=>db.prepare('SELECT state,last_error_class FROM learning_evaluation_jobs').first();
-  return {mf,db,calls,submit,drain,facts,job};
+  const configure=async extra=>{await mf.setOptions(options(extra));db=await mf.getD1Database('READING_DB','foreground');};
+  return {mf,get db(){return db;},calls,submit,drain,facts,job,configure};
 }
 
 test('an invalid saved reply is kept, never reused, and a fresh call completes the evaluation',async()=>{
@@ -158,5 +162,73 @@ test('a job blocked on an invalid reply before this change is reconciled once an
     assert.equal(retry.action,'ai.retry');assert.equal(retry.context.sourceContext.reason,'invalid_reply');
     assert.ok(ids.has(retry.parentOperationId));
     await h.drain();assert.equal(h.calls.n,2);
+  } finally {await h.mf.dispose();}
+});
+
+async function blockedWithOwnerScope(fifth=VALID,previousWindow=true) {
+  const failure={errorCode:'DEADLINE_EXCEEDED'};
+  const h=await harness([failure,failure,failure,failure,fifth]);
+  await h.submit();for(let i=0;i<3;i++)await h.drain();
+  assert.equal(h.calls.n,4);assert.equal((await h.job()).state,'blocked');
+  // Production failures spanned 24 minutes; the one-shot runs in a new window.
+  if(previousWindow) await h.db.prepare("UPDATE learning_evaluator_calls SET window_start='2026-01-01T00:00:00.000Z'").run();
+  const row=await h.db.prepare('SELECT source_event_id FROM learning_evaluation_jobs').first();
+  const scope={YW_EVALUATION_ONE_SHOT_SHA256:createHash('sha256').update(row.source_event_id).digest('hex'),
+    YW_EVALUATION_ONE_SHOT_UNTIL:new Date(Date.now()+3600000).toISOString()};
+  return {h,scope};
+}
+
+test('owner-scoped fifth call completes without erasing any failure, ledger or original answer',async()=>{
+  const {h,scope}=await blockedWithOwnerScope();
+  try {
+    const before=await h.facts();
+    const original=await h.db.prepare('SELECT submitted_payload_json FROM learning_submission_records').first();
+    await h.configure(scope);
+    assert.equal((await h.drain()).completed,1);assert.equal(h.calls.n,5);
+    assert.equal((await h.job()).state,'completed');
+    const facts=await h.facts();
+    for(const event of before)assert.deepEqual(facts.find(x=>x.operationId===event.operationId),event);
+    assert.equal(facts.filter(x=>x.action==='ai.failure').length,4);
+    assert.equal(facts.filter(x=>x.action==='evaluation.result').length,1);
+    assert.equal(facts.filter(x=>x.context.sourceContext.reason==='owner_approved_extra_attempt').length,1);
+    assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM learning_evaluator_calls').first()).n,5);
+    assert.deepEqual(await h.db.prepare('SELECT submitted_payload_json FROM learning_submission_records').first(),original);
+    await h.drain();assert.equal(h.calls.n,5);
+  } finally {await h.mf.dispose();}
+});
+
+test('a failed fifth call stays blocked after reload and repeated scheduler scans',async()=>{
+  const {h,scope}=await blockedWithOwnerScope({errorCode:'UPSTREAM_UNAVAILABLE'});
+  try {
+    await h.configure(scope);await h.drain();assert.equal(h.calls.n,5);
+    assert.equal((await h.job()).state,'blocked');
+    await h.configure(scope);await h.drain();await h.drain();
+    assert.equal(h.calls.n,5,'no sixth model call');
+    assert.equal((await h.facts()).filter(x=>x.action==='ai.failure').length,5);
+  } finally {await h.mf.dispose();}
+});
+
+for(const kind of ['absent','wrong-job','expired','malformed','too-long']) {
+  test(`owner-scoped reconciliation rejects ${kind} settings`,async()=>{
+    const {h,scope}=await blockedWithOwnerScope();
+    try {
+      if(kind==='absent')delete scope.YW_EVALUATION_ONE_SHOT_SHA256;
+      if(kind==='wrong-job')scope.YW_EVALUATION_ONE_SHOT_SHA256='ab'.repeat(32);
+      if(kind==='expired')scope.YW_EVALUATION_ONE_SHOT_UNTIL=new Date(Date.now()-1000).toISOString();
+      if(kind==='malformed')scope.YW_EVALUATION_ONE_SHOT_UNTIL='invalid';
+      if(kind==='too-long')scope.YW_EVALUATION_ONE_SHOT_UNTIL=new Date(Date.now()+2*86400000).toISOString();
+      await h.configure(scope);await h.drain();
+      assert.equal(h.calls.n,4);assert.equal((await h.job()).state,'blocked');
+    } finally {await h.mf.dispose();}
+  });
+}
+
+// Even explicit recovery cannot bypass the existing ten-minute caller budget.
+test('owner-scoped recovery preserves the per-window call budget',async()=>{
+  const {h,scope}=await blockedWithOwnerScope(VALID,false);
+  try {
+    await h.configure(scope);await h.drain();
+    assert.equal(h.calls.n,4);assert.equal((await h.job()).state,'blocked');
+    assert.equal((await h.facts()).at(-1).context.sourceContext.reason,'local_budget_exhausted');
   } finally {await h.mf.dispose();}
 });

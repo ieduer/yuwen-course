@@ -1,3 +1,9 @@
+## 2026-09-28 — Single existing evaluation reconciliation (candidate)
+
+Owner authorized at most one additional APIS call for existing blocked job hash prefix930090dd2287f220 after APIS recovery. Default lifetime four-call policy remains. An expiring SHA256 scope applies only to that job, with four recorded definite APIS503 failures, no saved reply and original lease4. Reconciliation appends an immutable retry event; lease5 can reserve call5. A failed or ambiguous fifth call cannot be re-armed. Original submission, four prior failures, ledger, per-window budgets and all newer learning history remain intact. Wrong/missing/expired/overlong scopes fail closed. Bindings expire2026-09-29T07:00Z; no automatic sixth call.
+
+Release order: APIS text-feedback recovery, Pages call reservation, scheduler single-job reconciliation. Evidence: /Users/ylsuen/CF/reports/operations/yw-apis-recovery-20260928/. Candidate only until live result and authenticated readback. Rollback: Pages6037b165; scheduler37b94ddc; preserve forward D1 data. No schema, scoring, content, App contract or user-resubmission change.
+
 ## 2026-09-26 — invalid replies retried within budget; blocked-invalid reconciliation
 
 Incident: P0 `YW_EVALUATION_NEEDS_RECONCILIATION` (pending_backlog, from 18:10 Beijing). One background job (lesson-1488, authorQuestion) blocked as `invalid_ai_assessment`: APIS v6.16.0 answered the grading request with gemini-3.8-flash, and APIS returned only the first of several text parts, so the saved reply was "{". APIS v6.16.1 (be251c01) now joins every non-thought part. On the YW side the job could never recover: blocked jobs are never scanned, and a later lease would have reused the saved invalid reply ("repair projection without another model call").
