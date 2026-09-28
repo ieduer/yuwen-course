@@ -1,3 +1,9 @@
+## 2026-09-28 frozen backlog recovery candidate
+
+APIS v6.20.0 is active and a public short-answer grading request returned valid output without student writes. This candidate extends the existing expiring one-shot setting to a frozen list of at most 26 SHA256 job identifiers. Each job can receive only its fifth lifetime gateway call; four recorded definite 503 failures and no saved reply remain prerequisites. No attempt/history reset. Only one grant per scheduler tick; any scoped fifth lease not completed, or an already queued grant, freezes further grants. Existing normal successor ordering and four-call budgets remain intact. The frozen scope expires at 2026-09-29T03:00Z. No database or identity schema changes.
+
+Not yet deployed or claimed recovered. Local real D1/workerd tests cover two-job serial success and fail-stop. Release requires exact accepted Pages/scheduler pairing, preserved App artifact, and individual source/central result readback. Evidence and finite budget: `/Users/ylsuen/CF/reports/operations/apis-free-pool-release-20260928/yw-frozen-recovery-plan.json`. Code rollback preserves all forward records; never reset or erase the lifetime ledger.
+
 ## 2026-09-28 — Single existing evaluation reconciliation (candidate)
 
 Owner authorized at most one additional APIS call for existing blocked job hash prefix930090dd2287f220 after APIS recovery. Default lifetime four-call policy remains. An expiring SHA256 scope applies only to that job, with four recorded definite APIS503 failures, no saved reply and original lease4. Reconciliation appends an immutable retry event; lease5 can reserve call5. A failed or ambiguous fifth call cannot be re-armed. Original submission, four prior failures, ledger, per-window budgets and all newer learning history remain intact. Wrong/missing/expired/overlong scopes fail closed. Bindings expire2026-09-29T07:00Z; no automatic sixth call.
