@@ -34,3 +34,6 @@ service = "yw-preview-logs"
 # Pages bundles runtime vars from this file, not project API metadata.
 [env.production.vars]
 YW_DURABLE_EVALUATION_ENABLED = "true"
+# Owner-approved single existing job; expires without re-arming the ledger.
+YW_EVALUATION_ONE_SHOT_SHA256 = "930090dd2287f22024db5ca931fc868beb6b16b977b2de0878131af9f2a02758"
+YW_EVALUATION_ONE_SHOT_UNTIL = "2026-09-29T07:00:00.000Z"
