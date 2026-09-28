@@ -1,3 +1,9 @@
+## 2026-09-28 serial business acceptance readback
+
+Frozen recovery accepted33/33 individually, with one reply, one interaction and central accepted evidence per original. Original/snapshot/call/event hashes preserved.137 total calls include104 prior calls,26 fifth lifetime calls and7 first successor calls. Global pending0; Pulse recovered at23:32:38.642Z. Exact07:27 Beijing alert five jobs reconcile to this cohort. Existing grant plan is consumed, never restart or increase it. App pointer/content remains unchanged.
+
+Evidence and exact runtime/rollback anchors: `/Users/ylsuen/CF/reports/operations/apis-free-pool-release-20260928/REPORT.md`. Existing history and unrelated canonical dirty work remain preserved.
+
 ## 2026-09-28 frozen backlog recovery candidate
 
 APIS v6.20.0 is active and a public short-answer grading request returned valid output without student writes. This candidate extends the existing expiring one-shot setting to a frozen list of at most 26 SHA256 job identifiers. Each job can receive only its fifth lifetime gateway call; four recorded definite 503 failures and no saved reply remain prerequisites. No attempt/history reset. Only one grant per scheduler tick; any scoped fifth lease not completed, or an already queued grant, freezes further grants. Existing normal successor ordering and four-call budgets remain intact. The frozen scope expires at 2026-09-29T03:00Z. No database or identity schema changes.
