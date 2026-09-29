@@ -1,3 +1,11 @@
+## 2026-09-29 bounded transient outage recovery candidate
+
+Owner approval: "批准，此後不要有類似錯誤不是這一次糾錯". New submissions from 2026-09-29T04:20Z retain the first four attempts, then may continue only with a complete ledger of definite APIS429 or503 DEADLINE_EXCEEDED/UPSTREAM_UNAVAILABLE failures and no replies. Total maximum8 requests within24hours; delays after failures1–7 are1min,5min,15min,1h,3h,6h,12h plus bounded jitter/Retry-After. Per-student/window quotas remain. Permanent errors, invalid replies, missing failure evidence and unknown transport never earn extra calls; valid saved replies still commit locally. Alerting remains truthful.
+
+Older jobs retain their budget. Exactly one approved original hash56de471fe5b283f48fade8d98cfbe5bf19a7a7be4b36b54d38601019b32e0e23 may take its fifth request before2026-09-29T05:30Z; failure or unknown outcome stops, no sixth. No ledger reset, migration, new submission, model-pool change or shared-hub change. User-facing saved-answer/result contracts and App content stay compatible.
+
+Candidate is not production acceptance. Paired Pages/scheduler release and original source/central/readback remain required. Exact evidence and rollback: /Users/ylsuen/CF/reports/operations/yw-durable-recovery-20260929/. Prior accepted Pages a6cd7cd7 and scheduler d593a75e, source87cdc041; preserve all forward data. This advances the production reliability of existing self-study lessons, not lesson count.
+
 ## 2026-09-28 frozen backlog recovery candidate
 
 APIS v6.20.0 is active and a public short-answer grading request returned valid output without student writes. This candidate extends the existing expiring one-shot setting to a frozen list of at most 26 SHA256 job identifiers. Each job can receive only its fifth lifetime gateway call; four recorded definite 503 failures and no saved reply remain prerequisites. No attempt/history reset. Only one grant per scheduler tick; any scoped fifth lease not completed, or an already queued grant, freezes further grants. Existing normal successor ordering and four-call budgets remain intact. The frozen scope expires at 2026-09-29T03:00Z. No database or identity schema changes.

@@ -78,7 +78,7 @@ test('real workerd/D1 preserves a 202 submission across independent foreground a
 
 // Invalid replies: preserved, never reused, retried within the four-call budget.
 const VALID=JSON.stringify({score:85,verdict:'fixture verdict',strength:'fixture strength',gap:'fixture gap',nextQuestion:'fixture question'});
-async function harness(answers) {
+async function harness(answers,{newPolicy=false}={}) {
   const calls={n:0};
   const common={compatibilityDate:'2026-05-12',modules:true,modulesRoot:ROOT,
     modulesRules:[{type:'ESModule',include:['**/*.js']}],
@@ -108,8 +108,12 @@ async function harness(answers) {
   await db.prepare('INSERT INTO students(id,uc_slug,display_name,uc_user_id,identity_verified_at) VALUES(7,?,?,42,?)')
     .bind('durable-workerd-fixture','Fixture',new Date().toISOString()).run();
   const body={lessonId:'lesson-1458',interaction:'structure',input:{reason:'合成測試：比較兩處字句的前後照應，並說明文章結構推進。'},clientMutationId:'workerd-invalid-reply-fixture'};
-  const submit=()=>mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',{method:'POST',
-    headers:{'content-type':'application/json',origin:'https://yw.bdfz.net'},body:JSON.stringify(body)});
+  const submit=async()=>{
+    const response=await mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',{method:'POST',
+      headers:{'content-type':'application/json',origin:'https://yw.bdfz.net'},body:JSON.stringify(body)});
+    if(!newPolicy) await db.prepare('UPDATE learning_evaluation_jobs SET first_pending_at=?').bind(Date.parse('2026-09-29T04:19:00Z')).run();
+    return response;
+  };
   const drain=async()=>{await db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
     return (await (await mf.getWorker('scheduler')).fetch('https://fixture.invalid/')).json();};
   const facts=async()=>(await db.prepare('SELECT payload_json FROM learning_evaluation_events ORDER BY rowid').all()).results.map(r=>JSON.parse(r.payload_json));
@@ -252,5 +256,62 @@ for(const successful of [true,false]) test(`frozen two-job scope serializes gran
     assert.deepEqual(rows.map(j=>j.state),successful?['completed','completed']:['blocked','blocked']);
     assert.deepEqual(rows.map(j=>j.lease_epoch),successful?[5,5]:[5,4]);
     assert.equal((await h.db.prepare("SELECT COUNT(*) n FROM learning_evaluation_events WHERE action='ai.failure'").first()).n,successful?8:9);
+  } finally {await h.mf.dispose();}
+});
+
+test('new transient outage survives four failures, defers an hour, then completes once without resubmission',async()=>{
+  const failure={errorCode:'UPSTREAM_UNAVAILABLE'};
+  const h=await harness([failure,failure,failure,failure,VALID],{newPolicy:true});
+  try {
+    await h.submit();for(let i=0;i<3;i++)await h.drain();
+    const j=await h.db.prepare('SELECT * FROM learning_evaluation_jobs').first();
+    assert.equal(j.state,'queued');assert.equal(h.calls.n,4);
+    assert(j.next_attempt_at-Date.now()>3_590_000,'four failures must not burn the next call immediately');
+    const before=await h.db.prepare('SELECT submitted_payload_json FROM learning_submission_records').first();
+    await (await h.mf.getWorker('scheduler')).fetch('https://fixture.invalid/');assert.equal(h.calls.n,4,'normal cron respects recovery time');
+    await h.drain();assert.equal(h.calls.n,4,'same-window budget still applies');assert.equal((await h.job()).state,'queued');
+    await h.db.prepare("UPDATE learning_evaluator_calls SET window_start='2026-01-01T00:00:00.000Z'").run();
+    await h.drain();assert.equal(h.calls.n,5);assert.equal((await h.job()).state,'completed');
+    assert.deepEqual(await h.db.prepare('SELECT submitted_payload_json FROM learning_submission_records').first(),before);
+    assert.equal((await h.facts()).filter(x=>x.action==='evaluation.result').length,1);
+    await h.drain();assert.equal(h.calls.n,5);
+  } finally {await h.mf.dispose();}
+});
+
+test('new outage has an eight-call lifetime ceiling and increasing recovery delays, never a ninth call',async()=>{
+  const h=await harness([{errorCode:'DEADLINE_EXCEEDED'}],{newPolicy:true});
+  try {
+    await h.submit();
+    for(let n=2;n<=8;n++){
+      await h.db.prepare("UPDATE learning_evaluator_calls SET window_start='2026-01-01T00:00:00.000Z'").run();
+      await h.drain();assert.equal(h.calls.n,n);
+      const j=await h.db.prepare('SELECT * FROM learning_evaluation_jobs').first();
+      if(n>=4&&n<8){assert.equal(j.state,'queued');assert(j.next_attempt_at-Date.now()>[0,0,0,0,3600000,10800000,21600000,43200000][n]-10000);}
+    }
+    assert.equal((await h.job()).state,'blocked');await h.drain();assert.equal(h.calls.n,8);
+    assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM learning_evaluator_calls').first()).n,8);
+  } finally {await h.mf.dispose();}
+});
+
+test('mixed invalid replies and permanent or unknown failures cannot earn extra recovery calls',async()=>{
+  for(const last of [{errorCode:'NON_RETRYABLE'},'{']){
+    const f={errorCode:'DEADLINE_EXCEEDED'},h=await harness([f,f,f,last],{newPolicy:true});
+    try {await h.submit();for(let i=0;i<3;i++)await h.drain();assert.equal((await h.job()).state,'blocked');await h.drain();assert.equal(h.calls.n,4);}
+    finally{await h.mf.dispose();}
+  }
+  const f={errorCode:'DEADLINE_EXCEEDED'},h=await harness(['{',f,f,f],{newPolicy:true});
+  try {await h.submit();for(let i=0;i<3;i++)await h.drain();assert.equal((await h.job()).state,'blocked');assert.equal(h.calls.n,4);}
+  finally{await h.mf.dispose();}
+});
+
+test('new recovery expires after 24 hours and ambiguous outcomes remain uncertain',async()=>{
+  const {evaluationCallLimit,deferEvaluationJob}=await import('../site/durable-evaluation-jobs.js');
+  const h=await harness([{errorCode:'DEADLINE_EXCEEDED'}],{newPolicy:true});
+  try {
+    await h.submit();const j=await h.db.prepare('SELECT * FROM learning_evaluation_jobs').first();
+    assert.equal(await evaluationCallLimit({READING_DB:h.db},j,j.first_pending_at+86400000),0);
+    await h.db.prepare("UPDATE learning_evaluation_jobs SET state='leased'").run();
+    const uncertain=await deferEvaluationJob(h.db,{...j,state:'leased'},new TypeError('unknown transport'));
+    assert.equal(uncertain.state,'uncertain');await h.drain();assert.equal(h.calls.n,1);
   } finally {await h.mf.dispose();}
 });
