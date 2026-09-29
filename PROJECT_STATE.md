@@ -1,3 +1,11 @@
+## 2026-09-29 outage recovery released and accepted
+
+Runtime sourcee79fdd5 (PR70); Pages6a3d5d0c, schedulerbca419d0/deployment3499bc7a. Original approved job completed on its fifth call at05:15:35Z, all original/failure hashes retained, exactly one source result and central accepted evidence, backlog0 and naturalrecovered. Source outboxaccepted receipt confirmed. No sixth request, data reset, App change or shared-service change.
+
+New submissions use transient-only8calls/24h recovery with1/5/15min then1/3/6/12h delays; old jobs retain original budgets. Permanent/invalid/unknown outcomes do not gain extra calls. Exact source/central acceptance,168focused/18source+18immutableworkerd tests,dualNodeCI,1232-file formal artifact,App-preservation and authenticated normal reload verified. Long-outage behavior is failure-injection tested, not a claim of future provider uptime or24h live observation. Original student browser impersonation was not performed.
+
+Immediate rollback: Pagesa6cd7cd7/schedulerd593a75e, source87cdc041; preserve all forward data and do not reset call counters. Canonical release/evidence/cleanup report: /Users/ylsuen/CF/reports/operations/yw-durable-recovery-20260929/REPORT.md. This accepted section supersedes the candidate section below. Reliability of existing self-study lessons advanced; lesson count unchanged.
+
 ## 2026-09-29 bounded transient outage recovery candidate
 
 Owner approval: "批准，此後不要有類似錯誤不是這一次糾錯". New submissions from 2026-09-29T04:20Z retain the first four attempts, then may continue only with a complete ledger of definite APIS429 or503 DEADLINE_EXCEEDED/UPSTREAM_UNAVAILABLE failures and no replies. Total maximum8 requests within24hours; delays after failures1–7 are1min,5min,15min,1h,3h,6h,12h plus bounded jitter/Retry-After. Per-student/window quotas remain. Permanent errors, invalid replies, missing failure evidence and unknown transport never earn extra calls; valid saved replies still commit locally. Alerting remains truthful.
