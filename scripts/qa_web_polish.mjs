@@ -62,6 +62,8 @@ function submittedState(lessonId) {
   return {
     schemaVersion: "yw-classical-first-read-state-v1",
     lessonId,
+    textVersionId: asset.textVersionId,
+    textDigest: asset.textDigest,
     submitted: true,
     unlocked: true,
     annotatedReadCompleted: false,

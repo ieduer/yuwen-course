@@ -2716,3 +2716,17 @@ Every material release updates:
   `2026-08-31T15:59:59.999Z`. It must produce zero credit, score-snapshot and F
   deltas. Never accept client-provided occurrence time or academic year, and
   never extend or replay this window after Beijing 2026-09-01 00:00.
+
+## 2026-09-29 mobile question readability candidate
+
+Study-guide headings retain source newlines (including the 11 multiline prompts),
+with wrapping and 44px mobile lookup/submit/retry targets. Only styles and the
+stylesheet cache key change. Lesson1476 remains「壹是」as printed on textbook
+page46. No question, assessment, student-data, API or native-content change.
+Use the existing compatible-no-client-release transaction and retain the accepted
+App pointer/objects byte-for-byte. Baseline Pages6a3d5d0c/sourcee79fdd5;
+release evidence and rollback: workspace
+`reports/operations/yw-text-mobile-20260929/REPORT.md`. Candidate until live acceptance.
+
+The existing Web polish fixture now includes the canonical text version and digest,
+so the current source-authority check can validate its synthetic submitted state.

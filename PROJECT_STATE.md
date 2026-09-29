@@ -2254,3 +2254,19 @@ hand the exact Web receipt to the App follow-up task.
   numeric results null. It is audit-only and can create no credit, snapshot,
   grade or F; delayed replay after the boundary is quarantined. The normal YW
   route explicitly rejects client-supplied `occurredAt` or `academicYear`.
+
+## 2026-09-29 mobile question readability candidate
+
+Owner requested optimization and deployment after textbook verification confirmed
+「壹是」in both the original page and all current Web/App projections. Preserve
+that source. This candidate preserves the 11 existing multiline study-guide
+prompts, wraps narrow metadata/action rows, and gives mobile lookup/submit/retry
+controls a minimum 44px height. It changes CSS and its cache version only;
+question IDs, answers, scoring, learning records and App content are unchanged.
+Exact browser evidence, release and rollback are tracked in
+`/Users/ylsuen/CF/reports/operations/yw-text-mobile-20260929/REPORT.md`.
+Release remains pending until the registered Pages transaction and live readback.
+Baseline Pages6a3d5d0c/sourcee79fdd5; preserve all forward data.
+
+The existing Web polish fixture now includes the canonical text version and digest,
+so the current source-authority check can validate its synthetic submitted state.
