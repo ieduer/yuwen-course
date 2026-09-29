@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1232,
-  "totalBytes": 164572642,
-  "aggregateSha256": "e5fa178daad8e642feb7532edd8af0700cde9a80e0f042dc9b5afea1cabf67a1",
+  "totalBytes": 164572890,
+  "aggregateSha256": "92389102d300f55e302c6e9f2f1d14ad83ba89e2a7093aabefe0e55309937e64",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "1f0d2830caa9e8ec903d7417bd1447db512a1ebafc5ecf1dba406e7cb90a51cb"
+      "sha256": "75c7371f13fc3e2762644e3cb37c7a88a088b53a40380277b19463a0b146daff"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -3112,8 +3112,8 @@
     },
     {
       "path": "assets/styles.css",
-      "bytes": 84141,
-      "sha256": "ad81d10ae072738a91775f92359fe58ba1541535b71e6f8276a10f84f8d7485e"
+      "bytes": 84389,
+      "sha256": "b57eec377431e0bd69ccf9c4df3790fa1a9174612a1b96b253577b4c799e9748"
     },
     {
       "path": "assets/vocab-progress.js",
@@ -6058,7 +6058,7 @@
     {
       "path": "index.html",
       "bytes": 11703,
-      "sha256": "e467e1dfefe5544a406d73bbc303c985f14ae5d9c39287ff04714a1ecb2fd36f"
+      "sha256": "b2deddfb360ef7644b745ad2f8b0bcb496cdbdb1f5f9f01e65f5aee990a2a640"
     },
     {
       "path": "learning-evaluation-events.js",

@@ -1569,7 +1569,7 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
 .study-guide-card { padding: clamp(16px, 3vw, 26px); border: 1px solid var(--rule); background: rgba(251, 249, 243, .62); }
 .study-guide-source { display: flex; justify-content: space-between; gap: 14px; color: var(--ink-soft); font-size: .66rem; }
 .study-guide-source i { font-style: normal; letter-spacing: .08em; text-transform: uppercase; }
-.study-guide-card h4 { margin: 14px 0 18px; font: 750 clamp(1.08rem, 2vw, 1.32rem)/1.65 var(--serif); }
+.study-guide-card h4 { margin: 14px 0 18px; font: 750 clamp(1.08rem, 2vw, 1.32rem)/1.65 var(--serif); white-space: pre-line; overflow-wrap: anywhere; }
 .study-guide-quality-notes { display: flex; gap: 8px; margin: -7px 0 16px; padding: 9px 11px; border-left: 2px solid var(--gold); color: var(--ink-soft); background: rgba(160, 124, 34, .06); font-size: .72rem; line-height: 1.55; }
 .study-guide-quality-notes strong { flex: 0 0 auto; color: #725714; }
 .study-guide-response { display: grid; gap: 12px; }
@@ -1608,7 +1608,7 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
 .study-guide-held { display: grid; gap: 8px; padding: 14px; border: 1px dashed var(--rule); color: var(--ink-soft); }
 .study-guide-held > strong { color: var(--ink); font-size: .74rem; }
 .study-guide-held article { display: grid; gap: 5px; padding-top: 10px; border-top: 1px solid var(--rule); }
-.study-guide-held h5 { margin: 0; color: var(--ink); font: 700 .86rem/1.55 var(--serif); }
+.study-guide-held h5 { margin: 0; color: var(--ink); font: 700 .86rem/1.55 var(--serif); white-space: pre-line; overflow-wrap: anywhere; }
 .study-guide-held small { font-size: .66rem; }
 .study-guide-held-answer { margin-top: 5px; padding: 11px; border-left: 2px solid var(--gold); color: var(--ink); background: rgba(255, 248, 213, .42); }
 .study-guide-held-answer > b { color: #725714; font-size: .68rem; }
@@ -1685,6 +1685,8 @@ body.focus-mode .read-progress span { box-shadow: 0 0 14px rgba(212,158,53,.22);
 
 @media (max-width: 620px) {
   .anonymous-learning-notice { grid-template-columns: 1fr; gap: 8px; }
+  .study-guide-source, .study-guide-actions { flex-wrap: wrap; }
+  .study-guide-actions button, .study-guide-reveal, .quiz-lookup { min-height: 44px; }
   .anonymous-learning-notice a { justify-self: start; }
   .first-read-heading { display: block; }
   .first-read-heading > p { margin-top: 10px; }
