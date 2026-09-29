@@ -99,7 +99,7 @@ function startStaticServer() {
   });
 }
 
-function authStub() {
+function authStub(authenticated = true) {
   return `
     const qaSharedState = {
       schemaVersion: "yw-shared-state/1",
@@ -108,16 +108,13 @@ function authStub() {
       state: { readingPosition: null, readerPreferences: {} }
     };
     window.BdfzIdentity = {
-      getSession: async () => ({ authenticated: true }),
+      getSession: async () => ({ authenticated: ${authenticated} }),
       api: async (path) => {
         if (path === "/api/yw/v1/state") return qaSharedState;
         throw new Error("shared-state mutation intentionally unavailable in Web-only QA");
       },
       mount: () => {}
     };
-    const exposeLogin = () => { const node = document.querySelector("#auth-login"); if (node) node.hidden = false; };
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", exposeLogin, { once: true });
-    else exposeLogin();
   `;
 }
 
@@ -398,12 +395,21 @@ async function verifyTopLinks(page) {
     ["登入", "#auth-login"],
   ];
   for (const [label, selector] of selectors) {
+    if (selector === "#auth-login") {
+      await page.context().route("https://my.bdfz.net/site-auth.js", (route) => route.fulfill({
+        contentType: "text/javascript; charset=utf-8",
+        body: authStub(false),
+      }));
+      await page.reload({ waitUntil: "domcontentloaded" });
+      await page.locator(selector).waitFor({ state: "visible" });
+    }
     const link = page.locator(selector);
     const attrs = await link.evaluate((node) => ({ target: node.target, rel: node.rel, href: node.href }));
     const before = page.url();
-    const popupPromise = page.waitForEvent("popup");
-    await link.click({ force: true });
-    const popup = await popupPromise;
+    const [popup] = await Promise.all([
+      page.waitForEvent("popup", { timeout: 15000 }),
+      link.click(),
+    ]);
     await popup.waitForURL((url) => url.href !== "about:blank", { timeout: 15000 }).catch(() => {});
     await popup.waitForLoadState("domcontentloaded", { timeout: 15000 }).catch(() => {});
     const openerNull = await popup.evaluate(() => window.opener === null).catch(() => false);
