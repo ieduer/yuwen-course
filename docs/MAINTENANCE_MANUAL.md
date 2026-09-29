@@ -1,3 +1,16 @@
+## 2026-09-29 mobile question readability released
+
+Pages `5ef8426e-2f9b-4a5d-a867-2d0ee24b1478`, runtime source `3109ae27f5269a0beb312ab36294ccbd13b1570d` (PR72).
+Preserves source newlines in 11 study-guide prompts, wraps narrow action/source
+rows, and sets mobile lookup/submit/retry controls to at least44px. Textbook
+「壹是」and all question/assessment/App data remain unchanged.
+Full precontent and source checks,964cards at5widths,11multiline prompts at4widths,
+both CI jobs, preview/production browser, exact versioned assets,278App files,
+health200 and anonymous401 passed. General Web polish29/31; two unchanged
+external zw iframe checks are blocked by its CSP and recorded explicitly.
+Rollback Pages6a3d5d0c/e79fdd5, preserving all forward data and native content.
+Single acceptance authority: `/Users/ylsuen/CF/reports/operations/yw-text-mobile-20260929/REPORT.md`.
+
 ## 2026-09-29 outage recovery released and accepted
 
 Runtime sourcee79fdd5 (PR70); Pages6a3d5d0c, schedulerbca419d0/deployment3499bc7a. Original approved job completed on its fifth call at05:15:35Z, all original/failure hashes retained, exactly one source result and central accepted evidence, backlog0 and naturalrecovered. Source outboxaccepted receipt confirmed. No sixth request, data reset, App change or shared-service change.
