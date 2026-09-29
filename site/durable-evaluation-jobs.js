@@ -21,8 +21,42 @@ export async function hasOwnerExtraAttempt(env,job,now=Date.now()) {
     .map(x=>x.toString(16).padStart(2,'0')).join('');
   return expected.includes(hash);
 }
+// Apply the new bounded outage policy only to new submissions. Existing jobs
+// retain their original budget; the explicitly scoped old job gets call five only.
+export const TRANSIENT_RECOVERY_POLICY = Object.freeze({
+  startsAt: Date.parse('2026-09-29T04:20:00.000Z'), maxCalls: 8, horizonMs: 86_400_000,
+  delays: Object.freeze([60_000,300_000,900_000,3_600_000,10_800_000,21_600_000,43_200_000]),
+});
+function usesTransientRecovery(job) {
+  return Number.isFinite(job?.first_pending_at) && job.first_pending_at>=TRANSIENT_RECOVERY_POLICY.startsAt;
+}
+function recoveryExpired(job,now) {
+  return usesTransientRecovery(job) && now-job.first_pending_at>=TRANSIENT_RECOVERY_POLICY.horizonMs;
+}
+async function transientHistory(db,job,calls,currentFailure=false) {
+  // Extra calls require a complete ledger of definite transient failures and
+  // zero replies. Never infer safety from time passing or a lease expiring.
+  const facts=await db.prepare(`SELECT
+    (SELECT COUNT(*) FROM learning_evaluation_replies WHERE source_event_id=?) replies,
+    (SELECT COUNT(*) FROM learning_evaluation_events WHERE source_event_id=? AND action='ai.failure'
+      AND json_extract(payload_json,'$.context.sourceContext.reason')='apis_http_failure'
+      AND (json_extract(payload_json,'$.context.sourceContext.httpStatus')=429 OR
+        (json_extract(payload_json,'$.context.sourceContext.httpStatus')=503 AND
+         json_extract(payload_json,'$.context.sourceContext.errorCode') IN ('DEADLINE_EXCEEDED','UPSTREAM_UNAVAILABLE')))
+      AND (?=0 OR json_extract(payload_json,'$.context.sourceContext.leaseEpoch')!=?)) failures`)
+    .bind(job.source_event_id,job.source_event_id,currentFailure?1:0,job.lease_epoch).first();
+  return Number(facts?.replies)===0 && Number(facts?.failures)===calls-(currentFailure?1:0);
+}
 export async function evaluationCallLimit(env,job,now=Date.now()) {
-  return job?.lease_epoch===5 && await hasOwnerExtraAttempt(env,job,now) ? 5 : JOB_POLICY.maxCalls;
+  if(job?.lease_epoch===5 && await hasOwnerExtraAttempt(env,job,now)) return 5;
+  if(recoveryExpired(job,now)) return 0;
+  if(usesTransientRecovery(job) && env?.READING_DB) {
+    const row=await env.READING_DB.prepare('SELECT COUNT(*) n FROM learning_evaluator_calls WHERE source_event_id=?').bind(job.source_event_id).first();
+    const calls=Number(row?.n);
+    if(calls>=JOB_POLICY.maxCalls && calls<TRANSIENT_RECOVERY_POLICY.maxCalls
+      && await transientHistory(env.READING_DB,job,calls)) return TRANSIENT_RECOVERY_POLICY.maxCalls;
+  }
+  return JOB_POLICY.maxCalls;
 }
 export class EvaluationPending extends Error {
   constructor(job) { super('答案已保存，評閱稍後補上'); this.code='learning_evaluation_pending'; this.job=job; }
@@ -127,9 +161,18 @@ export async function deferEvaluationJob(db,job,error,now=Date.now()) {
     && ['DEADLINE_EXCEEDED','UPSTREAM_UNAVAILABLE'].includes(error?.apisCode))
     || error?.code==='learning_evaluator_budget_exhausted';
   const ambiguous=error?.name==='AbortError' || error?.name==='TypeError';
-  const state=reply ? 'queued' : Number(calls?.n)>=JOB_POLICY.maxCalls ? 'blocked'
-    : temporary || invalidReply ? 'queued' : ambiguous ? 'uncertain' : 'blocked';
-  const delay=[60_000,300_000,900_000][Math.min(2,Math.max(0,Number(calls?.n)-1))];
+  const count=Number(calls?.n);
+  const definiteTransient=error?.apisStatus===429 || (error?.apisStatus===503
+    && ['DEADLINE_EXCEEDED','UPSTREAM_UNAVAILABLE'].includes(error?.apisCode));
+  const extended=usesTransientRecovery(job) && !recoveryExpired(job,now)
+    && (definiteTransient || error?.code==='learning_evaluator_budget_exhausted')
+    && count>=JOB_POLICY.maxCalls && count<TRANSIENT_RECOVERY_POLICY.maxCalls
+    && await transientHistory(db,job,count,definiteTransient);
+  const state=reply ? 'queued' : ambiguous ? 'uncertain'
+    : recoveryExpired(job,now) || (count>=JOB_POLICY.maxCalls && !extended) ? 'blocked'
+    : temporary || invalidReply ? 'queued' : 'blocked';
+  const delays=extended?TRANSIENT_RECOVERY_POLICY.delays:[60_000,300_000,900_000];
+  const delay=delays[Math.min(delays.length-1,Math.max(0,count-1))];
   const jitter=Array.from(job.source_event_id+':'+job.lease_epoch).reduce((n,c)=>(n*31+c.charCodeAt(0))%10001,0);
   const reason=reply?'reply_saved':invalidReply?'invalid_reply':state==='blocked'?'automatic_limit_or_permanent_failure'
     :state==='uncertain'?'transport_unknown':'temporary_unavailable';

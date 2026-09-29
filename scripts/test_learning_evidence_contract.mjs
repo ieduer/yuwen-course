@@ -4401,8 +4401,8 @@ test('invalid AI reply is kept as a learning source record, never scored, and re
   } finally {f.db.close();}
 });
 
-test('automatic calls are lifetime bounded across quota windows; backlog age never resets',async(t)=>{
-  t.mock.timers.enable({apis:['Date'],now:Date.now()});
+test('legacy automatic calls remain lifetime bounded across quota windows; backlog age never resets',async(t)=>{
+  t.mock.timers.enable({apis:['Date'],now:Date.parse('2026-09-29T04:19:00Z')});
   const f=durableFixture(()=>Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}));
   try {
     const response=await worker.fetch(f.request(),f.source.env,{}),id=(await response.json()).pendingId;
