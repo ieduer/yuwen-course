@@ -660,7 +660,7 @@
         handlers.toast?.(error.message || "訂正未保存");
         if (button) button.disabled = false;
       }
-    }));
+    }, { signal: handlers.signal }));
   }
 
   window.YwClassicalFirstRead = Object.freeze({

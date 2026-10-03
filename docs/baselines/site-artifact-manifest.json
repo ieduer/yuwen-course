@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1232,
-  "totalBytes": 164591518,
-  "aggregateSha256": "7c01c2cb6c220b09dcbe7d468f70edb46433d5e945abd0771a0b849e209763b7",
+  "totalBytes": 164596874,
+  "aggregateSha256": "7366460f0cde6c1c4a774ea0c1555883a54690abbd20bae1743238e4acc3b736",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "4716e9d0ceb8d10ca4270a82ed063fef0dd81a5619673a3b19c09778afa82fa0"
+      "sha256": "047baa425304187c268d55df49ab4bb2fd54e90a1878c531e5d59ab3eed84e0f"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1417,8 +1417,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 247207,
-      "sha256": "53c4416a704eae01735bf50daaaee504ad0b9b4501932185c6a18235ca97aade"
+      "bytes": 252448,
+      "sha256": "51e91cf070180554daea3e2f857740ad4c4a88d8b7623d2beeeb43114078d39f"
     },
     {
       "path": "assets/atlas.css",
@@ -1437,8 +1437,8 @@
     },
     {
       "path": "assets/classical-first-read.js",
-      "bytes": 30848,
-      "sha256": "c9238f9e8a6289ee9ae9a6bed88a9e03d75d532555013ccf46af2caba2b31c08"
+      "bytes": 30877,
+      "sha256": "17a01bc7647e3e1a7d935035a2937e9a2d9cd111c4a61a2f13f972f90fdb1c65"
     },
     {
       "path": "assets/learning-evidence.js",
@@ -3112,8 +3112,8 @@
     },
     {
       "path": "assets/styles.css",
-      "bytes": 84389,
-      "sha256": "b57eec377431e0bd69ccf9c4df3790fa1a9174612a1b96b253577b4c799e9748"
+      "bytes": 84475,
+      "sha256": "ea0af136aca440a5f6a0144d6bb77893774f5d6e244d6e7340740e3af5cc2c3d"
     },
     {
       "path": "assets/vocab-progress.js",
@@ -6058,7 +6058,7 @@
     {
       "path": "index.html",
       "bytes": 11703,
-      "sha256": "e1be1dd635be36e88a7de1f99100571804bea4286ae9c2485c43f47a3324e699"
+      "sha256": "2ee4fb99c6d40fbcc0a7bf967fdcdaea4c8664033a7fa8a0d9bee63115f6c363"
     },
     {
       "path": "learning-evaluation-events.js",
