@@ -1,3 +1,13 @@
+## 2026-10-03 immediate evaluation persistence released and accepted
+
+Runtime source `b3e1a93c6a91d0a069d979fa74027c39ccbf3c56` (PR74). Pages `e73ab78b-bd61-472b-839a-a92de74093c0`; scheduler version `a497bfd7-e27d-4392-b052-bad80c81decf`, deployment `241cf692-8667-4208-8db9-be537b652acf`.
+
+Immediate evaluation remains the first path. The full interaction/study-guide/resume and signed machine execution now retain `waitUntil` lifetime through saving the reply and result on caller disconnect; the independent scheduler handles unfinished saved jobs. The original real submission completed at03:08:57Z after one reviewed replacement: original/snapshot/history hashes unchanged,2 lifetime calls,one valid reply/result/interaction,central accepted at03:09:05Z and source receipt mirrored. Backlog0 and natural `recovered:ok`; no alert suppression, submission reset or production test answer.
+
+152 focused tests,26 exact-bundle workerd cases,dual Node CI,1232-file formal artifact,unchanged App contents,preview and both production domains passed. Current operator browser reloaded the original lesson and restored an existing acceptance record. The affected student was not impersonated; exact source/central readback is the result acceptance. The precise foreground termination cause remains unproven. Queue-first PR73 was preview-only and superseded before production by the owner's immediate-first instruction.
+
+Rollback Pages `5ef8426e-2f9b-4a5d-a867-2d0ee24b1478` / source3109ae27; scheduler `bca419d0-b562-472e-88b7-aa0783c0873f` / sourcee79fdd5c. Preserve all forward data and lifetime calls. The single recovery scope expires2026-10-03T05:30Z and cannot trigger a third call. Canonical evidence: `/Users/ylsuen/CF/reports/operations/yw-evaluation-durable-20261003/REPORT.md`. Public record: https://status.bdfz.net/?update=yw-evaluation-persistence-20261003&revision=1#updates . Existing lessons/content remain unchanged.
+
 ## 2026-10-03 immediate evaluation persistence and original-result recovery candidate
 
 A real saved study-guide submission reached APIS successfully but the foreground Pages invocation did not persist its response. The exact connection termination cause is unproven. Per the owner's clarification, submissions still start evaluation immediately and return the completed result when successful. The entire interaction, study-guide and pending-resume request retains a waitUntil lifetime through reply persistence and result commit if the browser leaves. The signed scheduler endpoint receives the same protection. The independent scheduler remains a fallback only for saved unfinished jobs.
