@@ -23,9 +23,11 @@ Exact source/preview/live acceptance and rollback will be recorded in
 `/Users/ylsuen/CF/reports/operations/yw-scroll-20261003/REPORT.md`. Never overwrite
 the active AI task's release window or roll back its accepted changes.
 
-## 2026-10-03 AI progress and recovery candidate
+## 2026-10-03 AI progress and recovery released and accepted
 
-Candidate, not yet released. The authenticated pending endpoint accepts either
+Runtime source `ce9326c1a02a01ba14415ca713ee6a464cfdf543` (PR76). Pages `8e5b0262-68a0-4d42-8679-c44f5da0d577` at08:24UTC; scheduler `dc6ab044-c426-4107-bd8f-60df41987129` at100%, deployment `f8ec16ce-5766-470f-b005-0f923a46d2ca` at08:37:52UTC. Exact bytes, bindings and configuration read back; existing expired grants unchanged.
+
+The authenticated pending endpoint accepts either
 stable mutation ID or source pending ID; both must match when supplied together.
 It projects saved/evaluating/retry/predecessor/reconciliation/attention/completed
 states without claims, evaluator calls, resumes or outbox delivery. The frontend
@@ -44,10 +46,16 @@ ordering, call ledgers,4/8-call/24h policies and consumed owner grants remain.
 Valid immutable replies bypass only the model retry clock, never commit fences.
 No schema, model, rubric, App content, identity or evidence contract change.
 
-Accepted baseline remains Pages e73ab78b / scheduler a497bfd7, source b3e1a93.
-Use fresh guarded paired transactions after exact-source validation. Code-only
-rollback preserves forward D1/UC data and the accepted waitUntil fix.
+Acceptance: authenticated existing synthetic result has identical full assessment by mutation ID and pending ID, identical reread, mismatch404 and anonymous401. Source calls/events/interactions did not increase; the central receipt and evidence remain accepted. The authorized operator browser restored existing Daxue and Lunyu records on normal reload; Lunyu12vocabulary/19study-guide items and ready controls returned. Natural scheduler readback after cutover:263completed,backlog0,recovered:ok,zero new calls or failure events in the bounded window. No new production answer or diagnostic provider request.
+
+Local exact-bundle workerd32/32,focused176,frontend/cache58 and dual-Node CI passed. Full precontent retains2 synthetic-touch failures reproduced unchanged on the accepted baseline; do not call the entire suite green. Delayed-result races and two-owner isolation passed local tests; neither was manufactured in production. One live Daxue→Lunyu switch left an identity-wait gate that cleared on direct reload; cause unproven and recorded for the separately owned UI follow-up.
+
+No natural50-job comparison exists; first-pass speed/success-rate improvement and20%P95 target remain unverified. APIS short-profile/low-thinking quality experiment is not enabled. Current single-item prompts already contain exact question/reference/rubric, so no speculative prompt trimming was released. No monitor, model migration or historical replay.
+
+Rollback: Pages `e73ab78b-bd61-472b-839a-a92de74093c0`; scheduler `a497bfd7-e27d-4392-b052-bad80c81decf`, both source `b3e1a93c6a91d0a069d979fa74027c39ccbf3c56`. Use a new exact guarded transaction and preserve forward D1/UC data, lifetime-call history and the waitUntil fix. No schema or App pointer change.
+
 Evidence: /Users/ylsuen/CF/reports/operations/yw-ai-latency-20261003/IMPLEMENTATION.md.
+Public update: https://status.bdfz.net/?update=yw-ai-progress-recovery-20261003&revision=1#updates . Runtime source stays ce9326c; this is documentation only. The separate scroll task starts from this accepted runtime and must refresh source/ownership before publication.
 
 ## 2026-10-03 immediate evaluation persistence released and accepted
 
