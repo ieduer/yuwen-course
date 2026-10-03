@@ -38,7 +38,8 @@
 #auth-login[hidden] { display: none; }
 
 html {
-  scroll-behavior: smooth;
+  /* Only explicit user navigation animates; focus/layout corrections are immediate. */
+  scroll-behavior: auto;
   scroll-padding-top: calc(var(--topbar) + 28px);
   background: var(--paper);
 }

@@ -3218,6 +3218,102 @@ function renderInteractionBody(key, lesson, progress, blueprint) {
   return "";
 }
 
+// Preserve the live controls (including unsent study-guide drafts and IME
+// composition) while refreshing results. A different lesson/owner/session always
+// gets fresh nodes, so private state and old callback authority cannot cross over.
+let checkStageRenderScope = null;
+let checkStageBindings = null;
+
+function checkStageNodeKey(node) {
+  if (node.nodeType !== Node.ELEMENT_NODE) return `node:${node.nodeType}`;
+  const identity = ["id", "data-round", "data-study-item", "data-study-response",
+    "data-quiz-item", "data-field", "data-correction-mark", "data-first-read-correction",
+    "data-quiz-option", "data-ai-check", "data-study-retry", "name"]
+    .find((name) => node.hasAttribute(name));
+  return `${node.tagName}:${identity ? `${identity}=${node.getAttribute(identity)}` : node.classList[0] || ""}`;
+}
+
+function patchCheckStageNode(current, next) {
+  if (current.nodeType !== Node.ELEMENT_NODE) {
+    if (current.nodeValue !== next.nodeValue) current.nodeValue = next.nodeValue;
+    return;
+  }
+  const isControl = current.matches("input, textarea, select");
+  const oldValue = isControl ? current.value : undefined;
+  const oldDefault = current.tagName === "SELECT"
+    ? ([...current.options].find((option) => option.defaultSelected) || current.options[0])?.value
+    : isControl ? current.defaultValue : undefined;
+  const nextDefault = current.tagName === "SELECT" ? next.value : next.defaultValue;
+  const nextValue = isControl ? next.value : undefined;
+  const open = current.tagName === "DETAILS" ? current.open : undefined;
+  for (const { name } of [...current.attributes]) {
+    if (!next.hasAttribute(name)) current.removeAttribute(name);
+  }
+  for (const { name, value } of next.attributes) {
+    if (current.getAttribute(name) !== value) current.setAttribute(name, value);
+  }
+  if (current.tagName === "TEXTAREA") {
+    // Changing textContent would disrupt a live editor/selection unnecessarily.
+    if (current.defaultValue !== next.defaultValue) current.defaultValue = next.defaultValue;
+  } else {
+    let cursor = current.firstChild;
+    for (const desired of [...next.childNodes]) {
+      const key = checkStageNodeKey(desired);
+      let match = cursor;
+      while (match && checkStageNodeKey(match) !== key) match = match.nextSibling;
+      if (match) {
+        if (match !== cursor) current.insertBefore(match, cursor);
+        patchCheckStageNode(match, desired);
+        cursor = match.nextSibling;
+      } else {
+        current.insertBefore(desired, cursor);
+      }
+    }
+    while (cursor) {
+      const remove = cursor;
+      cursor = cursor.nextSibling;
+      remove.remove();
+    }
+  }
+  if (isControl) {
+    // A blank model with an unchanged default is an unsent form draft. Keep it.
+    // A changed authoritative model (e.g. a completed dialogue) is applied.
+    const value = oldDefault === nextDefault ? oldValue : nextValue;
+    if (current.value !== value) current.value = value;
+    if (current.tagName === "INPUT" && /^(checkbox|radio)$/.test(current.type)) {
+      current.checked = next.checked;
+    }
+  }
+  if (open !== undefined) current.open = open;
+}
+
+function captureCheckStageViewport() {
+  const top = (document.querySelector(".topbar")?.getBoundingClientRect().bottom || 0) + 16;
+  const visible = (node) => {
+    const box = node.getBoundingClientRect();
+    return box.width > 0 && box.bottom > top && box.top < innerHeight;
+  };
+  const active = document.activeElement;
+  const candidates = [...els.checkStage.querySelectorAll(
+    ".vocab-quiz, [data-study-item], [data-field], [data-study-response], [data-round] > header, p, h4, summary",
+  ), els.checkStage.nextElementSibling, document.querySelector("#transfer-matrix")]
+    .filter((node) => node && visible(node));
+  const anchor = els.checkStage.contains(active) && visible(active) ? active
+    : candidates.sort((a, b) => Math.abs(a.getBoundingClientRect().top - top)
+      - Math.abs(b.getBoundingClientRect().top - top))[0];
+  if (!anchor) return () => {};
+  // If a question disappears on completion, retain its containing deck/round.
+  const anchors = [anchor, anchor.closest(".vocab-quiz, .study-guide-deck"), anchor.closest("[data-round]")]
+    .filter((node, index, all) => node && all.indexOf(node) === index)
+    .map((node) => ({ node, top: node.getBoundingClientRect().top }));
+  return () => {
+    const kept = anchors.find(({ node }) => node.isConnected);
+    if (!kept) return;
+    const delta = kept.node.getBoundingClientRect().top - kept.top;
+    if (Math.abs(delta) > 0.5) scrollBy({ top: delta, behavior: "instant" });
+  };
+}
+
 function renderCheckStage(lesson) {
   const progress = lessonProgress();
   const blueprint = state.blueprints.get(blueprintKey(lesson)) || blueprintFallback(lesson);
@@ -3228,7 +3324,14 @@ function renderCheckStage(lesson) {
     : identityNoticeMode === "pending"
       ? '<aside class="anonymous-learning-notice" role="note"><strong>正在確認登入</strong><span>身份與學情歸屬確認前，本頁作答不會保存或送出。</span></aside>'
       : "";
-  els.checkStage.innerHTML = identityNotice + track.map(([key, label, _detail, weight], index) => {
+  const session = firstReadForLesson(lesson.id);
+  const sameScope = checkStageRenderScope?.lessonId === lesson.id
+    && checkStageRenderScope.ownerScope === progressOwnerScope
+    && checkStageRenderScope.session === session
+    && checkStageRenderScope.identityMode === identityNoticeMode;
+  const restoreViewport = sameScope ? captureCheckStageViewport() : () => {};
+  const nextStage = document.createElement("div");
+  nextStage.innerHTML = identityNotice + track.map(([key, label, _detail, weight], index) => {
     const locked = classicalRoundLocked(key, lesson, progress);
     return `
     <section class="check-round ${checkpointDone(progress, key) ? "complete" : ""} ${locked ? "locked" : ""}" data-round="${key}" ${identityNoticeMode === "pending" ? "inert aria-disabled=\"true\"" : locked ? "aria-disabled=\"true\"" : ""}>
@@ -3236,7 +3339,19 @@ function renderCheckStage(lesson) {
       ${locked ? `<p class="round-lock"><span aria-hidden="true">鎖</span>${esc(locked)}</p>` : renderInteractionBody(key, lesson, progress, blueprint)}
     </section>
   `; }).join("");
+  checkStageBindings?.abort();
+  if (sameScope) {
+    // The permanent host's attributes include the identity layer's inert gate.
+    // Only its children belong to this renderer.
+    for (const { name, value } of els.checkStage.attributes) nextStage.setAttribute(name, value);
+    patchCheckStageNode(els.checkStage, nextStage);
+  } else {
+    els.checkStage.replaceChildren(...nextStage.childNodes);
+  }
+  checkStageRenderScope = { lessonId: lesson.id, ownerScope: progressOwnerScope, session, identityMode: identityNoticeMode };
+  checkStageBindings = new AbortController();
   bindCheckStage();
+  restoreViewport();
   void ensureBlueprint(lesson);
   if (lessonHasVocabulary(lesson)) void ensureVocabBank(lesson);
 }
@@ -4079,10 +4194,6 @@ function applyInteractionAssessment({key,input,pending,requestLesson,requestOwne
           void submitInteraction("contextWords", null, { silent: true });
         }, 720);
       }
-      if (multiTurn) {
-        els.checkStage.querySelector(`[data-round="${progressKey}"] [data-interaction-latest-feedback]`)
-          ?.focus({ preventScroll: true });
-      }
     } else {
       saveStoredProgress();
       renderLessonIndex();
@@ -4451,7 +4562,8 @@ async function submitStudyGuideAttempt({ lessonId, itemKey, response, referenceR
 }
 
 function bindCheckStage() {
-  $$('[data-study-guide-catalog-retry]', els.checkStage).forEach((button) => button.addEventListener("click", async () => {
+  const listen = (node, type, callback) => node.addEventListener(type, callback, { signal: checkStageBindings.signal });
+  $$('[data-study-guide-catalog-retry]', els.checkStage).forEach((button) => listen(button, "click", async () => {
     button.disabled = true;
     button.textContent = "正在重新載入…";
     const restored = await refreshStudyGuideCatalog();
@@ -4467,6 +4579,7 @@ function bindCheckStage() {
   if (firstReadLesson && firstRead) {
     window.YwClassicalFirstRead?.bindCorrections?.(els.checkStage, firstRead, {
       toast,
+      signal: checkStageBindings.signal,
       isCurrent: () => firstReadCallbackIsCurrent(firstReadLesson.id, firstRead, firstReadOwnerScope),
       onStale: () => invalidateStaleFirstReadAuthority(
         firstReadLesson.id,
@@ -4488,7 +4601,7 @@ function bindCheckStage() {
       },
     });
   }
-  $$('[data-study-response]', els.checkStage).forEach((form) => form.addEventListener("submit", async (event) => {
+  $$('[data-study-response]', els.checkStage).forEach((form) => listen(form, "submit", async (event) => {
     event.preventDefault();
     if (!learningMutationOwnerResolved() || progressOwnerScope === ANONYMOUS_UI_SCOPE) {
       toast("請先完成登入確認，再提交學案形成性評閱");
@@ -4630,7 +4743,7 @@ function bindCheckStage() {
         : "參考答案已顯示；評閱尚未同步，稍後請重試"));
     }
   }));
-  $$('[data-study-retry]', els.checkStage).forEach((button) => button.addEventListener("click", () => {
+  $$('[data-study-retry]', els.checkStage).forEach((button) => listen(button, "click", () => {
     if (!learningMutationOwnerResolved() || progressOwnerScope === ANONYMOUS_UI_SCOPE) return;
     const records = studyGuideProgress();
     records[button.dataset.studyRetry] = {
@@ -4646,7 +4759,7 @@ function bindCheckStage() {
       const lessonId = state.current?.id;
       const ownerScope = progressOwnerScope;
       const [progressKey, inputKey] = String(field.dataset.field || "").split(".", 2);
-      field.addEventListener("input", () => {
+      listen(field, "input", () => {
         if (
           !learningMutationOwnerResolved(ownerScope)
           ||
@@ -4666,9 +4779,9 @@ function bindCheckStage() {
         saveStoredProgress();
       });
     });
-  $$('[data-ai-check]', els.checkStage).forEach((button) => button.addEventListener("click", () => submitInteraction(button.dataset.aiCheck, button)));
+  $$('[data-ai-check]', els.checkStage).forEach((button) => listen(button, "click", () => submitInteraction(button.dataset.aiCheck, button)));
   const contextWords = $$('[data-context-word]', els.checkStage);
-  if (contextWords.length) contextWords.forEach((field) => field.addEventListener("input", () => {
+  if (contextWords.length) contextWords.forEach((field) => listen(field, "input", () => {
     clearTimeout(submitInteraction.contextTimer);
     const parts = contextWords.map((item) => item.value.trim()).filter(Boolean);
     const words = parts.join("、");
@@ -4716,8 +4829,8 @@ function bindCheckStage() {
       const status = host?.querySelector(".auto-save-status");
       if (status) status.textContent = "待保存";
     };
-    slider.addEventListener("input", update);
-    slider.addEventListener("change", () => {
+    listen(slider, "input", update);
+    listen(slider, "change", () => {
       clearTimeout(saveEvaluation.timer);
       const rating = clamp(Number(slider.value), 0, 100);
       const status = slider.closest(".interest-rating")?.querySelector(".auto-save-status");
@@ -4750,7 +4863,7 @@ function bindCheckStage() {
       });
     });
   });
-  $$('[data-quiz-option]', els.checkStage).forEach((button) => button.addEventListener("click", async () => {
+  $$('[data-quiz-option]', els.checkStage).forEach((button) => listen(button, "click", async () => {
     const lessonId = state.current?.id;
     const ownerScope = progressOwnerScope;
     const bank = state.vocabBanks.get(lessonId);
@@ -4893,14 +5006,12 @@ function bindCheckStage() {
       ) ?? state.current?.id === lessonId;
       if (!canAdvance || progressOwnerScope !== ownerScope) return;
       renderCheckStage(state.current);
-      const round = els.checkStage.querySelector('[data-round="vocabulary"]');
-      round?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
     }, reducedMotion ? 0 : 220);
   }));
-  $$('[data-quiz-lookup]', els.checkStage).forEach((button) => button.addEventListener("click", () => {
+  $$('[data-quiz-lookup]', els.checkStage).forEach((button) => listen(button, "click", () => {
     openLexicon(button.dataset.quizLookup);
   }));
-  $$('[data-vocabulary]', els.checkStage).forEach((button) => button.addEventListener("click", () => {
+  $$('[data-vocabulary]', els.checkStage).forEach((button) => listen(button, "click", () => {
     if (!learningMutationOwnerResolved()) return;
     const progress = lessonProgress();
     progress.vocabulary ||= { reviewed: [], done: false };
@@ -4913,7 +5024,7 @@ function bindCheckStage() {
     openLexicon(button.dataset.vocabulary);
     renderCheckStage(state.current);
   }));
-  $$('[data-read-check]', els.checkStage).forEach((checkbox) => checkbox.addEventListener("change", () => {
+  $$('[data-read-check]', els.checkStage).forEach((checkbox) => listen(checkbox, "change", () => {
     if (!learningMutationOwnerResolved()) {
       checkbox.checked = false;
       return;
@@ -4927,7 +5038,7 @@ function bindCheckStage() {
   }));
   const reason = els.checkStage.querySelector("[data-evaluation-reason]");
   if (reason) {
-    reason.addEventListener("input", () => {
+    listen(reason, "input", () => {
       clearTimeout(saveEvaluation.timer);
       const lessonId = state.current?.id;
       const ownerScope = progressOwnerScope;
@@ -4951,7 +5062,7 @@ function bindCheckStage() {
         });
       }, 700);
     });
-    reason.addEventListener("blur", () => {
+    listen(reason, "blur", () => {
       clearTimeout(saveEvaluation.timer);
       const lessonId = state.current?.id;
       const ownerScope = progressOwnerScope;
@@ -4978,7 +5089,7 @@ function openLexicon(text) {
   els.body.classList.add("lexicon-open");
   els.lexiconDock.setAttribute("aria-hidden", "false");
   updateLexiconFrame();
-  requestAnimationFrame(() => els.lexiconClose.focus());
+  requestAnimationFrame(() => els.lexiconClose.focus({ preventScroll: true }));
   void recordLearning("vocabularyLookup", {
     lookupKind: state.lexicon,
     termLength: [...clean].length,

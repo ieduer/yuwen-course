@@ -1,3 +1,28 @@
+## 2026-10-03 viewport stability candidate
+
+Candidate only, pending serial Pages publication after the AI latency release.
+Answer-stage refresh now preserves keyed live controls and visible anchors within
+the same lesson, owner, identity mode and first-read session. Unsent study-guide
+forms, Chinese composition, focus and selection survive background results;
+changing authority still discards old DOM. One abortable listener set prevents
+duplicate handlers. Correct vocabulary advancement no longer centers the entire
+round, and background dialogue results no longer move keyboard focus. Dictionary
+focus uses preventScroll. Global implicit smooth scrolling is disabled; explicit
+lesson/checkpoint navigation keeps its requested animation.
+
+Desktop1280/mobile390 baseline lost focus/selection and moved quiz content42/95px;
+initial corrected readback preserves node/focus/selection and measures0px quiz
+movement. Broader regression includes longer earlier feedback, unsent forms,
+correct/wrong answers and existing owner/reload contracts. Local synthetic
+composition does not establish physical-phone keyboard behavior. No new model
+calls or production answers. Worker, scheduler, learning content, scoring,
+identity contracts and native App content are unchanged; App disposition is
+compatible-no-client-release. Existing self-study lesson count is unchanged.
+
+Exact source/preview/live acceptance and rollback will be recorded in
+`/Users/ylsuen/CF/reports/operations/yw-scroll-20261003/REPORT.md`. Never overwrite
+the active AI task's release window or roll back its accepted changes.
+
 ## 2026-10-03 AI progress and recovery released and accepted
 
 Runtime source `ce9326c1a02a01ba14415ca713ee6a464cfdf543` (PR76). Pages `8e5b0262-68a0-4d42-8679-c44f5da0d577` at08:24UTC; scheduler `dc6ab044-c426-4107-bd8f-60df41987129` at100%, deployment `f8ec16ce-5766-470f-b005-0f923a46d2ca` at08:37:52UTC. Exact bytes, bindings and configuration read back; existing expired grants unchanged.

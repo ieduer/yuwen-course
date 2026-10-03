@@ -743,7 +743,21 @@ try {
     });
     await stablePage.waitForFunction(()=>document.querySelector('[data-evaluation-status="browser-evaluation-fixture"]')?.textContent.includes('正在評閱'));
     assert.equal(evaluationPosts,1);assert.ok(statusReads>=1);
-    await stablePage.evaluate(()=>{lessonProgress(state.current.id).structure.reason='下一輪草稿尚未提交';});
+    await stablePage.evaluate(() => closeAtlas());
+    await stablePage.waitForTimeout(400); // settle the intentional catalogue width transition
+    const draftField = stablePage.locator('[data-field="structure.reason"]');
+    await draftField.fill('下一輪草稿尚未提交');
+    await draftField.evaluate((field) => {
+      field.focus({ preventScroll: true });
+      field.setSelectionRange(2, 5);
+      scrollTo({ top: field.getBoundingClientRect().top + scrollY - 160, behavior: "instant" });
+      window.__draftField = field;
+      window.__draftTop = field.getBoundingClientRect().top;
+      els.checkStage.setAttribute("aria-busy", "true");
+      for (let i = 0; i < 3; i += 1) renderCheckStage(state.current);
+      if (els.checkStage.getAttribute("aria-busy") !== "true") throw new Error("Stage host attributes changed");
+      els.checkStage.removeAttribute("aria-busy");
+    });
     completed=true;
     await stablePage.waitForFunction(()=>lessonProgress(state.current.id).structure.result?.score===85,null,{timeout:10000});
     finishEvaluation();await stablePage.evaluate(()=>window.__evaluationSubmission);
@@ -752,7 +766,81 @@ try {
       return {draft:record.reason,turns:record.turns.length,pending:Boolean(record.pendingSubmission)};
     }),{draft:'下一輪草稿尚未提交',turns:1,pending:false});
     assert.equal(evaluationPosts,1);
-    await stablePage.evaluate(()=>{const session=firstReadForLesson(state.current.id);session.marks=[];session.annotatedReadCompleted=false;});
+    const draftPosition = await draftField.evaluate((field) => ({
+      same: field === window.__draftField, focused: document.activeElement === field,
+      start: field.selectionStart, end: field.selectionEnd,
+      delta: field.getBoundingClientRect().top - window.__draftTop,
+    }));
+    assert.equal(draftPosition.same, true, "background evaluation keeps the live input node");
+    assert.equal(draftPosition.focused, true, "background evaluation never steals typing focus");
+    assert.deepEqual([draftPosition.start, draftPosition.end], [2, 5]);
+    assert.ok(Math.abs(draftPosition.delta) <= 1, JSON.stringify(draftPosition));
+
+    // An unsubmitted study-guide form has no saved model yet. A delayed bank,
+    // blueprint or neighbouring result must not erase that live draft.
+    await stablePage.evaluate(() => {
+      const guide = state.studyGuideLessons.get(state.current.id);
+      guide.items.push({ ...guide.items[0], itemKey: "synthetic-scroll-draft", competencyTag: "comprehension", activeForSelfTest: true });
+      renderCheckStage(state.current);
+    });
+    const studyDraft = stablePage.locator('[data-study-response="synthetic-scroll-draft"] textarea');
+    await studyDraft.fill('尚未提交的學案中文草稿');
+    const studyPosition = await studyDraft.evaluate((field) => {
+      field.focus({ preventScroll: true });
+      field.setSelectionRange(3, 7);
+      scrollTo({ top: field.getBoundingClientRect().top + scrollY - 160, behavior: "instant" });
+      const top = field.getBoundingClientRect().top;
+      field.dispatchEvent(new CompositionEvent("compositionstart", { bubbles: true, data: "中" }));
+      // Grow an earlier result while the learner is working further down.
+      lessonProgress().structure.turns[0].assessment.strength = '前一輪新增評語。'.repeat(180);
+      renderCheckStage(state.current);
+      const kept = document.querySelector(`[data-study-response="${field.form.dataset.studyResponse}"] textarea`);
+      const result = { same: kept === field, value: kept.value, focused: document.activeElement === field,
+        start: kept.selectionStart, end: kept.selectionEnd, delta: kept.getBoundingClientRect().top - top };
+      field.dispatchEvent(new CompositionEvent("compositionend", { bubbles: true, data: "中文" }));
+      return result;
+    });
+    assert.equal(studyPosition.same, true);
+    assert.equal(studyPosition.value, '尚未提交的學案中文草稿');
+    assert.equal(studyPosition.focused, true);
+    assert.deepEqual([studyPosition.start, studyPosition.end], [3, 7]);
+    assert.ok(Math.abs(studyPosition.delta) <= 1, JSON.stringify(studyPosition));
+
+    // Each new vocabulary item appears in place, without the old forced
+    // centering; an incorrect answer must also leave the question readable.
+    await stablePage.waitForFunction(() => state.vocabBanks.get(state.current?.id));
+    const quiz = await stablePage.evaluate(() => {
+      window.__savedVocabKeys = state.formalVocabResourceKeys;
+      state.formalVocabResourceKeys = new Set(); // local synthetic practice only
+      renderCheckStage(state.current);
+      const bank = state.vocabBanks.get(state.current.id);
+      const item = bank.questions[0];
+      const el = document.querySelector('.vocab-quiz');
+      document.activeElement?.blur();
+      scrollTo({ top: el.getBoundingClientRect().top + scrollY - 140, behavior: "instant" });
+      return { id: item.id, answer: item.answerIndex, top: el.getBoundingClientRect().top, y: scrollY };
+    });
+    await stablePage.locator(`[data-quiz-option="${quiz.answer}"]`).click();
+    await stablePage.waitForFunction(id => document.querySelector('[data-quiz-item]')?.dataset.quizItem !== id, quiz.id);
+    // A bounded animation window catches any delayed automatic scroll.
+    await stablePage.waitForTimeout(450);
+    const afterQuiz = await stablePage.locator('.vocab-quiz').evaluate(el => ({ top: el.getBoundingClientRect().top, y: scrollY }));
+    assert.ok(Math.abs(afterQuiz.top - quiz.top) <= 1, JSON.stringify({ quiz, afterQuiz }));
+    assert.ok(Math.abs(afterQuiz.y - quiz.y) <= 1, JSON.stringify({ quiz, afterQuiz }));
+    const nextQuiz = await stablePage.evaluate(() => {
+      const bank = state.vocabBanks.get(state.current.id);
+      const item = bank.questions.find(q => q.id === document.querySelector('[data-quiz-item]').dataset.quizItem);
+      return { id: item.id, wrong: (item.answerIndex + 1) % item.options.length };
+    });
+    await stablePage.locator(`[data-quiz-option="${nextQuiz.wrong}"]`).click();
+    await stablePage.waitForFunction(id => quizRecord(lessonProgress()).answers[id]?.attempts === 1, nextQuiz.id);
+    assert.equal(await stablePage.locator('[data-quiz-item]').getAttribute('data-quiz-item'), nextQuiz.id);
+    assert.ok(Math.abs((await stablePage.locator('.vocab-quiz').boundingBox()).y - quiz.top) <= 1);
+    await stablePage.evaluate(() => {
+      state.formalVocabResourceKeys = window.__savedVocabKeys;
+      const session = firstReadForLesson(state.current.id);
+      session.marks = []; session.annotatedReadCompleted = false;
+    });
     await stablePage.unroute(`${base}/api/interaction-check`);
     await stablePage.unroute(`${base}/api/learning/pending-interactions*`);
     for (let toggle = 0; toggle < 2; toggle += 1) {
