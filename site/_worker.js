@@ -2,7 +2,7 @@ import { sourceEventStatement, evaluationEventBase, evaluationEventId, latestSou
 import { readRecorderSource } from './learning-recorder-source.js';
 import { EVALUATION_MACHINE_PATH, handleEvaluationMachine } from './evaluation-machine.js';
 import { EvaluationPending, pendingEvaluationResponse, createEvaluationJob,
-  saveEvaluationReply, latestUsableEvaluationReply, deferEvaluationJob,
+  claimEvaluationJob, saveEvaluationReply, latestUsableEvaluationReply, deferEvaluationJob,
   drainEvaluationJobs, loadEvaluationJob } from "./durable-evaluation-jobs.js";
 import { evaluateWithRecovery } from "./evaluator-recovery.js";
 import {
@@ -102,8 +102,7 @@ export default {
         }
       });
       // Finish saving the provider reply even if the scheduler connection ends.
-      ctx?.waitUntil?.(execution.then(()=>undefined,()=>undefined));
-      return execution;
+      return keepEvaluationAlive(execution, ctx);
     }
     if (url.pathname === "/api/chat" && request.method === "POST") {
       return handleChat(request, env);
@@ -117,7 +116,7 @@ export default {
     if (url.pathname === "/api/interaction-check" && request.method === "POST") {
       const rejected = authenticatedMutationRequestRejection(request);
       if (rejected) return rejected;
-      return handleInteractionCheck(request, env);
+      return keepEvaluationAlive(handleInteractionCheck(request, env), ctx);
     }
     if (url.pathname === "/api/learning/pending-interactions" && request.method === "GET") {
       return handlePendingInteractionsList(request, env, url);
@@ -125,7 +124,7 @@ export default {
     if (url.pathname === "/api/learning/pending-interactions/resume" && request.method === "POST") {
       const rejected = authenticatedMutationRequestRejection(request);
       if (rejected) return rejected;
-      return handlePendingInteractionResume(request, env);
+      return keepEvaluationAlive(handlePendingInteractionResume(request, env), ctx);
     }
     if (url.pathname === "/api/learning/interactions" && request.method === "POST") {
       const rejected = authenticatedMutationRequestRejection(request);
@@ -149,7 +148,9 @@ export default {
       return handleWyArticles(request, env);
     }
     if (url.pathname.startsWith("/api/reading/")) {
-      return handleReading(request, env, url);
+      const execution = handleReading(request, env, url);
+      return request.method === 'POST' && url.pathname.replace(/\/+$/, '') === '/api/reading/study-guide-attempt'
+        ? keepEvaluationAlive(execution, ctx) : execution;
     }
     if (url.pathname === "/api/preview" && (request.method === "GET" || request.method === "HEAD")) {
       return handlePreview(request, env, {}, ctx);
@@ -166,6 +167,13 @@ export default {
     return env.ASSETS.fetch(request);
   },
 };
+
+// Preserve immediate feedback and the entire save/commit path after a caller
+// disconnect. Failed or unfinished durable jobs remain available to the cron.
+function keepEvaluationAlive(execution, ctx) {
+  ctx?.waitUntil?.(execution.then(() => undefined, () => undefined));
+  return execution;
+}
 
 function isNativeContentAssetPath(pathname) {
   return pathname === "/app-content/latest-stable.json"
@@ -1603,10 +1611,14 @@ async function callLearningEvaluator(request, env, submissionReservation, prompt
         lesson:{id:completion.lesson.id,title:completion.lesson.title,
           blockId:completion.lesson.blockId||'',blockTitle:completion.lesson.blockTitle||''}}};
     const captured = await createEvaluationJob(env.READING_DB, submissionReservation, snapshot);
-    // The saved answer and snapshot precede this response. Only the independent
-    // scheduler may claim it: leaving/reloading a browser must not cancel AI or
-    // strand a successful reply before it reaches the source database.
-    throw new EvaluationPending(captured);
+    const job = await claimEvaluationJob(env.READING_DB,captured.source_event_id);
+    if (!job) throw new EvaluationPending(captured);
+    submissionReservation.evaluationJob=job;
+    try {
+      const reply=await evaluateDurableJob(env,job,submissionReservation,prompt);
+      submissionReservation.evaluationReply=reply;
+      return reply.answer_text;
+    } catch(error) { throw new EvaluationPending(await deferEvaluationJob(env.READING_DB,job,error)); }
   }
   return evaluateWithRecovery({
     signal: request.signal,
