@@ -418,7 +418,7 @@ function invalidateFirstReadSessions({ reload = true } = {}) {
 function setProgressOwnerScope(scope) {
   const nextScope = scope || null;
   if (progressOwnerScope === nextScope) return;
-  state.pendingReplayController?.suspend();
+  state.pendingReplayController?.suspend(); state.evaluationStatusPoller?.suspend();
   state.recorderBridge?.suspend();
   progressOwnerScope = nextScope;
   state.progress = loadStoredProgress(nextScope);
@@ -434,7 +434,7 @@ function setInteractionIdentityResolved(resolved, { preserveSessions = false } =
   els.checkStage.inert = !next;
   if (els.identityStatus) els.identityStatus.hidden = next;
   if (interactionIdentityResolved === next) return;
-  if (!next) { state.pendingReplayController?.suspend(); state.recorderBridge?.suspend(); }
+  if (!next) { state.pendingReplayController?.suspend(); state.evaluationStatusPoller?.suspend(); state.recorderBridge?.suspend(); }
   interactionIdentityResolved = next;
   if (!preserveSessions) {
     invalidateFirstReadSessions();
@@ -2983,6 +2983,7 @@ function renderReferenceAnswer(value) {
 }
 
 function studyGuideFailureMessage(record) {
+  if(record?.evaluationStatus) return record.evaluationStatus;
   const code = record?.lastErrorCode || "";
   if(code === 'learning_evaluation_pending') return record.lastError || '答案已保存，評閱稍後補上；本次尚未計分。';
   if (record?.lastErrorStatus === 401 || record?.lastError === "anonymous") return "尚未完成評閱；請登入後重試，答案已保留。";
@@ -3012,8 +3013,8 @@ function renderStudyGuideRubric(rubric) {
 function renderStudyGuideAssessment(record) {
   const assessment = record?.assessment;
   if (!assessment) {
-    if (record?.submitting) return `<p class="study-guide-sync pending" role="status">正在核對答案；已設定的答案直接核對，其他表述由 AI 評閱…</p>`;
-    if (record?.pendingSync) return `<p class="study-guide-sync pending" role="status">${esc(studyGuideFailureMessage(record))}</p>`;
+    if (record?.submitting) return `<p class="study-guide-sync pending" role="status" data-evaluation-status="${esc(record.clientMutationId || "")}">${esc(record.evaluationStatus || "正在提交；本機草稿已保留。")}</p>`;
+    if (record?.pendingSync) return `<p class="study-guide-sync pending" role="status" data-evaluation-status="${esc(record.clientMutationId || "")}">${esc(studyGuideFailureMessage(record))}</p>`;
     return "";
   }
   const passed = record.completed === true;
@@ -3141,7 +3142,7 @@ function interactionAction(interactionKey, label, lesson = state.current, record
       interactionKey,
       pending.clientMutationId,
     ));
-    return `${pending.pendingId ? '<p role="status">答案已保存，評閱待補；可繼續學習，無需重新提交。</p>' : ''}<button class="check-action" type="button" data-ai-check="${esc(interactionKey)}" ${inFlight ? "disabled" : ""}>${inFlight ? "正在評閱上一輪…" : pending.pendingId ? "查看評閱進度" : "重試上一輪評閱"}</button>`;
+    return `${`<p role="status" data-evaluation-status="${esc(pending.clientMutationId)}">${esc(record.evaluationStatus || (pending.pendingId ? "答案已保存，正在查詢評閱進度。" : "正在提交；本機草稿已保留。"))}</p>`}<button class="check-action" type="button" data-ai-check="${esc(interactionKey)}" ${inFlight ? "disabled" : ""}>${inFlight ? "正在評閱上一輪…" : pending.pendingId ? "查看評閱進度" : "重試上一輪評閱"}</button>`;
   }
   const actionLabel = mode === "local" ? "記下本機試做" : label;
   return `<button class="check-action" type="button" data-ai-check="${esc(interactionKey)}">${esc(actionLabel)}</button>`;
@@ -3177,7 +3178,7 @@ function renderInteractionBody(key, lesson, progress, blueprint) {
         : words.length === 3
           ? "待核對"
           : `${words.length}/3`;
-    const body = `${interactionModeNotice("contextWords", lesson)}<div class="three-word-check"><div class="three-word-fields">${[0, 1, 2].map((index) => `<input data-context-word data-field="context.word${index + 1}" value="${esc(words[index] || "")}" maxlength="12" aria-label="第${index + 1}個詞" autocomplete="off">`).join("")}</div><span class="auto-check-status" data-auto-status="contextWords" aria-live="polite">${statusLabel}</span></div>`;
+    const body = `${interactionModeNotice("contextWords", lesson)}<div class="three-word-check"><div class="three-word-fields">${[0, 1, 2].map((index) => `<input data-context-word data-field="context.word${index + 1}" value="${esc(words[index] || "")}" maxlength="12" aria-label="第${index + 1}個詞" autocomplete="off">`).join("")}</div><span class="auto-check-status" data-auto-status="contextWords" ${pending?.clientMutationId ? `data-evaluation-status="${esc(pending.clientMutationId)}"` : ""} aria-live="polite">${esc(value.evaluationStatus || statusLabel)}</span></div>`;
     return authorDialogue(lesson, body, interactionResult(progress, "context", lesson));
   }
   if (key === "vocabulary") {
@@ -3677,6 +3678,61 @@ function interactionEvidenceDecision(status, score) {
   return { accepted: false, recorded: false, completed: false, evidenceStatus: "unavailable" };
 }
 
+async function watchEvaluationStatus({lesson=state.current,mutationId,pendingId='',postActive=false}) {
+  const owner=progressOwnerScope;
+  if(!owner || owner===ANONYMOUS_UI_SCOPE || !lesson?.id || !interactionIdentityResolved) return;
+  state.pendingReplayModule ||= import(new URL("pending-evaluation-recovery.js?v=85f2e0c621566c17", APP_SCRIPT_URL).href)
+    .catch(()=>{state.pendingReplayModule=null;return null;});
+  const module=await state.pendingReplayModule;
+  if(!module || owner!==progressOwnerScope || lesson.id!==state.current?.id) return;
+  state.evaluationStatusPoller ||= module.createEvaluationStatusPoller({
+    context:()=>({key:`${progressOwnerScope || ''}:${state.current?.id || ''}`,
+      active:Boolean(interactionIdentityResolved && progressOwnerScope && progressOwnerScope!==ANONYMOUS_UI_SCOPE
+        && document.visibilityState==='visible' && navigator.onLine!==false)}),
+    read:async(mutation,pending)=>{
+      const params=new URLSearchParams({clientMutationId:mutation});if(pending)params.set('pendingId',pending);
+      const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),8000);
+      try {
+        const response=await fetch(`/api/learning/pending-interactions?${params}`,{cache:'no-store',signal:controller.signal});
+        const payload=await response.json();
+        if(response.status===401 || response.status===403)return {stop:true};
+        return payload;
+      } finally {clearTimeout(timeout);}
+    },
+  });
+  const isCurrent=()=>owner===progressOwnerScope && interactionIdentityResolved && lesson.id===state.current?.id;
+  return state.evaluationStatusPoller.watch({mutationId,pendingId,postActive,
+    onStatus:payload=>{
+      if(!isCurrent())return;
+      const progress=lessonProgress(lesson.id),message=module.evaluationStatusMessage(payload);
+      for(const record of Object.values(progress)) if(record?.pendingSubmission?.clientMutationId===mutationId) {
+        record.pendingSubmission.pendingId=payload.pendingId;record.evaluationPending=true;
+        record.evaluationStatus=message;
+      }
+      for(const record of Object.values(studyGuideProgress(progress))) if(record?.clientMutationId===mutationId && record.pendingSync) {
+        record.pendingId=payload.pendingId;record.evaluationStatus=message;
+      }
+      saveStoredProgress();
+      // Do not replace text fields or focus while the student edits a next draft.
+      for(const element of els.checkStage.querySelectorAll('[data-evaluation-status]'))
+        if(element.dataset.evaluationStatus===mutationId)element.textContent=message;
+    },
+    onResult:payload=>{
+      if(!isCurrent())return;
+      const progress=lessonProgress(lesson.id);
+      let applied=false;
+      for(const [key,record] of Object.entries(progress)) if(record?.pendingSubmission?.clientMutationId===mutationId) {
+        const pending=record.pendingSubmission;
+        applied=applyInteractionAssessment({key:key==='context'?'contextWords':key,input:pendingInteractionInput(record),
+          pending,requestLesson:lesson,requestOwnerScope:owner,payload,silent:true});
+      }
+      applied=reconcileResumedStudyGuide(lesson.id,mutationId,payload)||applied;
+      if(!applied) void flushSharedState();
+      void resumeDetailedRecords();
+    },
+  });
+}
+
 function learningSubmissionRetryMessage(code, retryAfterSeconds = 0, limitReason = "") {
   const wait = Number(retryAfterSeconds) > 0 ? Number(retryAfterSeconds) : 0;
   if (code === "learning_evaluation_pending") return "答案已保存，評閱稍後補上；不必重新提交，也不會計為答錯。";
@@ -3783,7 +3839,7 @@ function pendingEvaluationRetryDelay(error) {
 async function autoReplayPendingInteractions(lesson = state.current) {
   if (!lesson?.id || lesson.id !== state.current?.id) return;
   if (!state.pendingReplayController) {
-    state.pendingReplayModule ||= import(new URL("pending-evaluation-recovery.js?v=311f0fa80fc3ac83", APP_SCRIPT_URL).href)
+    state.pendingReplayModule ||= import(new URL("pending-evaluation-recovery.js?v=85f2e0c621566c17", APP_SCRIPT_URL).href)
       .catch(() => { state.pendingReplayModule = null; return null; });
     const module = await state.pendingReplayModule;
     if (!module) return;
@@ -3801,6 +3857,7 @@ async function autoReplayPendingInteractions(lesson = state.current) {
       },
     });
   }
+  state.evaluationStatusPoller?.request();
   state.pendingReplayController.request();
 }
 
@@ -3809,7 +3866,7 @@ function reconcileResumedStudyGuide(lessonId, mutationId, result) {
   const records = studyGuideProgress(lessonProgress(lessonId));
   const key = Object.keys(records).find((key) => records[key]?.clientMutationId === mutationId);
   if (!key) return false;
-  records[key] = { ...records[key], submitting: false, pendingSync: false,
+  records[key] = { ...records[key], submitting: false, pendingSync: false, evaluationStatus: "",
     completed: result.passed === true && result.evidence?.eligibilityStatus === "eligible",
     assessment: result.assessment, evidence: result.evidence, lastError: "", lastErrorCode: "",
     lastErrorStatus: null, retryAfterSeconds: null, limitReason: "", assessedAt: new Date().toISOString() };
@@ -3836,14 +3893,14 @@ async function replayCapturedLearningSubmissions(lesson, isCurrent) {
   for (const [interaction, record] of localEntries) {
     if (!isCurrent()) return {};
     const mutationId = record.pendingSubmission.clientMutationId;
-    if (state.pendingReplayAttempted.has(mutationId)) continue;
-    state.pendingReplayAttempted.add(mutationId);
-    attemptedThisPass.add(mutationId);
-    const result = await submitInteraction(interaction, null, { silent: true });
-    if (!isCurrent()) { state.pendingReplayAttempted.delete(mutationId); return {}; }
-    retry(result);
-    if (result?.code === "authenticated_evaluation_required") return {};
+    if(record.pendingSubmission.pendingId) attemptedThisPass.add(mutationId);
+    await watchEvaluationStatus({lesson,mutationId,pendingId:record.pendingSubmission.pendingId});
+    if (!isCurrent()) return {};
+
   }
+  for(const record of Object.values(studyGuideProgress(progress))) if(record?.pendingSync && record.clientMutationId)
+    await watchEvaluationStatus({lesson,mutationId:record.clientMutationId,pendingId:record.pendingId});
+  if(!isCurrent()) return {};
   let pending;
   const listController = new AbortController();
   const listTimeout = setTimeout(() => listController.abort(), 12_000);
@@ -3865,6 +3922,10 @@ async function replayCapturedLearningSubmissions(lesson, isCurrent) {
     if (!isCurrent()) return {};
     const mutationId = String(item?.clientMutationId || "");
     if (!mutationId || attemptedThisPass.has(mutationId) || state.pendingReplayAttempted.has(mutationId)) continue;
+    if(item.durable===true) {
+      await watchEvaluationStatus({lesson,mutationId});
+      continue;
+    }
     state.pendingReplayAttempted.add(mutationId);
     attemptedThisPass.add(mutationId);
     const controller = new AbortController();
@@ -3888,6 +3949,10 @@ async function replayCapturedLearningSubmissions(lesson, isCurrent) {
         continue;
       }
       if (response.ok && item.interaction === "studyGuideItemCompleted") reconcileResumedStudyGuide(lesson.id, mutationId, payload);
+      const local=localEntries.find(([,record])=>record.pendingSubmission?.clientMutationId===mutationId);
+      if(response.ok && response.status!==202 && local) applyInteractionAssessment({key:local[0],
+        input:pendingInteractionInput(local[1]),pending:local[1].pendingSubmission,requestLesson:lesson,
+        requestOwnerScope:progressOwnerScope,payload,silent:true});
       resumed = response.ok || resumed;
       if (!response.ok) retry({ code: payload.code, status: response.status, retryAfterSeconds: payload.retryAfterSeconds });
       if (!response.ok && pendingReplayErrorIsRetryable({
@@ -3938,6 +4003,92 @@ function interactionInputProblem(key, input) {
     return "請恰好輸入三個詞";
   }
   return "";
+}
+
+function applyInteractionAssessment({key,input,pending,requestLesson,requestOwnerScope,payload,silent=true}) {
+  if(progressOwnerScope!==requestOwnerScope) return;
+  const requestLessonId=requestLesson.id,progressKey=key==='contextWords'?'context':key;
+    const result = payload.assessment || {};
+    const score = Number(result.score || 0);
+    const evidence = interactionEvidenceDecision(payload.evidence?.status, score);
+    if (!evidence.accepted) throw new Error("學習證據回執無效，未計入完成度");
+    const liveProgress = lessonProgress(requestLessonId);
+    const liveRecord = liveProgress[progressKey] || {};
+    if (!interactionPendingMatches(liveRecord, pending)) return;
+    const { pendingSubmission: _pendingSubmission, ...previousProgress } = liveRecord;
+    const multiTurn = ["structure", "authorQuestion"].includes(key);
+    const draftPreservingInteraction = multiTurn || key === "contextWords";
+    const liveDraft = Object.fromEntries(
+      Object.keys(input).map((inputKey) => [inputKey, String(previousProgress[inputKey] ?? "")]),
+    );
+    const preserveDraft = draftPreservingInteraction
+      && interactionInputSignature(liveDraft) !== pending.inputSignature;
+    const nextInput = preserveDraft
+      ? liveDraft
+      : multiTurn
+        ? Object.fromEntries(Object.keys(input).map((inputKey) => [inputKey, ""]))
+        : input;
+    const fallbackTurn = multiTurn ? {
+      sourceEventId: String(payload.evidence?.sourceEventId || ""),
+      attemptNo: Number(payload.evidence?.attemptNo) || null,
+      input,
+      assessment: result,
+    } : null;
+    liveProgress[progressKey] = {
+      ...previousProgress,
+      ...nextInput,
+      evaluationPending: false,
+      evaluationStatus: "",
+      done: previousProgress.done === true || evidence.completed,
+      score,
+      bestScore: Math.max(Number(previousProgress.bestScore || previousProgress.score || 0), score),
+      result,
+      turns: multiTurn
+        ? mergeInteractionConversation(previousProgress.turns, payload.conversation, fallbackTurn)
+        : (previousProgress.turns || []),
+      ...(key === "contextWords" ? { assessedInputSignature: pending.inputSignature } : {}),
+      evidenceStatus: evidence.evidenceStatus,
+    };
+    if (key === "wordCreation" && !lessonVocabulary(requestLesson).length) {
+      liveProgress.vocabulary = {
+        ...(liveProgress.vocabulary || {}),
+        done: evidence.completed,
+        reviewed: [],
+        evidenceStatus: evidence.evidenceStatus,
+      };
+    }
+    if (key === "contextWords") void saveReadingSubmission(input, payload.evidence?.sourceEventId, requestLessonId);
+    const requestStillCurrent = state.current?.id === requestLessonId;
+    if (!silent && requestStillCurrent) {
+      const label = trackFor(requestLesson).find((item) => item[0] === progressKey)?.[1] || "互動";
+      if (evidence.evidenceStatus === "ineligible") toast(`${label} · ${score} 分，已記錄但不計入本次完成`);
+      else toast(`${label} · ${score} 分，已記錄`);
+    }
+    if (requestStillCurrent) {
+      syncProgress({ event: true });
+      renderCheckStage(requestLesson);
+      if (key === "contextWords" && preserveDraft) {
+        const expectedSignature = interactionInputSignature(liveDraft);
+        clearTimeout(submitInteraction.contextTimer);
+        submitInteraction.contextTimer = setTimeout(() => {
+          if (
+            state.current?.id !== requestLessonId
+            || progressOwnerScope !== requestOwnerScope
+            || interactionInputSignature(interactionInput("contextWords")) !== expectedSignature
+          ) return;
+          void submitInteraction("contextWords", null, { silent: true });
+        }, 720);
+      }
+      if (multiTurn) {
+        els.checkStage.querySelector(`[data-round="${progressKey}"] [data-interaction-latest-feedback]`)
+          ?.focus({ preventScroll: true });
+      }
+    } else {
+      saveStoredProgress();
+      renderLessonIndex();
+      renderMastery();
+    }
+    return true;
 }
 
 async function submitInteraction(key, button = null, { silent = false } = {}) {
@@ -4037,6 +4188,9 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     return;
   }
   state.interactionRequestsInFlight.add(requestInFlightKey);
+  const watcher=watchEvaluationStatus({lesson:requestLesson,mutationId:pending.clientMutationId,
+    pendingId:pending.pendingId,postActive:true});
+  let observedPayload;
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 55_000);
@@ -4044,7 +4198,7 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     let payload;
     try {
       response = pending.pendingId
-        ? await fetch(`/api/learning/pending-interactions?pendingId=${encodeURIComponent(pending.pendingId)}`,{signal:controller.signal,cache:'no-store'})
+        ? await fetch(`/api/learning/pending-interactions?pendingId=${encodeURIComponent(pending.pendingId)}&clientMutationId=${encodeURIComponent(pending.clientMutationId)}`,{signal:controller.signal,cache:'no-store'})
         : await fetch("/api/interaction-check", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -4063,101 +4217,26 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     } finally {
       clearTimeout(timeout);
     }
+    observedPayload={...payload,ok:response.ok && response.status!==202};
     state.interactionRequestsInFlight.delete(requestInFlightKey);
     if (progressOwnerScope !== requestOwnerScope) return;
     if (!response.ok || (response.status === 202 && payload.status === 'pending')) {
       const error = new Error(payload.error || `評估失敗 ${response.status}`);
       error.pendingId = payload.pendingId || '';
+      error.evaluationStatus=payload.phase;
       error.code = String(payload.code || "");
       error.status = response.status;
       error.retryAfterSeconds = Number(payload.retryAfterSeconds || 0);
       error.limitReason = String(payload.limitReason || "");
       throw error;
     }
-    const result = payload.assessment || {};
-    const score = Number(result.score || 0);
-    const evidence = interactionEvidenceDecision(payload.evidence?.status, score);
-    if (!evidence.accepted) throw new Error("學習證據回執無效，未計入完成度");
-    const liveProgress = lessonProgress(requestLessonId);
-    const liveRecord = liveProgress[progressKey] || {};
-    if (!interactionPendingMatches(liveRecord, pending)) return;
-    const { pendingSubmission: _pendingSubmission, ...previousProgress } = liveRecord;
-    const multiTurn = ["structure", "authorQuestion"].includes(key);
-    const draftPreservingInteraction = multiTurn || key === "contextWords";
-    const liveDraft = Object.fromEntries(
-      Object.keys(input).map((inputKey) => [inputKey, String(previousProgress[inputKey] ?? "")]),
-    );
-    const preserveDraft = draftPreservingInteraction
-      && interactionInputSignature(liveDraft) !== pending.inputSignature;
-    const nextInput = preserveDraft
-      ? liveDraft
-      : multiTurn
-        ? Object.fromEntries(Object.keys(input).map((inputKey) => [inputKey, ""]))
-        : input;
-    const fallbackTurn = multiTurn ? {
-      sourceEventId: String(payload.evidence?.sourceEventId || ""),
-      attemptNo: Number(payload.evidence?.attemptNo) || null,
-      input,
-      assessment: result,
-    } : null;
-    liveProgress[progressKey] = {
-      ...previousProgress,
-      ...nextInput,
-      evaluationPending: false,
-      done: previousProgress.done === true || evidence.completed,
-      score,
-      bestScore: Math.max(Number(previousProgress.bestScore || previousProgress.score || 0), score),
-      result,
-      turns: multiTurn
-        ? mergeInteractionConversation(previousProgress.turns, payload.conversation, fallbackTurn)
-        : (previousProgress.turns || []),
-      ...(key === "contextWords" ? { assessedInputSignature: pending.inputSignature } : {}),
-      evidenceStatus: evidence.evidenceStatus,
-    };
-    if (key === "wordCreation" && !lessonVocabulary(requestLesson).length) {
-      liveProgress.vocabulary = {
-        ...(liveProgress.vocabulary || {}),
-        done: evidence.completed,
-        reviewed: [],
-        evidenceStatus: evidence.evidenceStatus,
-      };
-    }
-    if (key === "contextWords") void saveReadingSubmission(input, payload.evidence?.sourceEventId, requestLessonId);
-    const requestStillCurrent = state.current?.id === requestLessonId;
-    if (!silent && requestStillCurrent) {
-      const label = trackFor(requestLesson).find((item) => item[0] === progressKey)?.[1] || "互動";
-      if (evidence.evidenceStatus === "ineligible") toast(`${label} · ${score} 分，已記錄但不計入本次完成`);
-      else toast(`${label} · ${score} 分，已記錄`);
-    }
-    if (requestStillCurrent) {
-      syncProgress({ event: true });
-      renderCheckStage(requestLesson);
-      if (key === "contextWords" && preserveDraft) {
-        const expectedSignature = interactionInputSignature(liveDraft);
-        clearTimeout(submitInteraction.contextTimer);
-        submitInteraction.contextTimer = setTimeout(() => {
-          if (
-            state.current?.id !== requestLessonId
-            || progressOwnerScope !== requestOwnerScope
-            || interactionInputSignature(interactionInput("contextWords")) !== expectedSignature
-          ) return;
-          void submitInteraction("contextWords", null, { silent: true });
-        }, 720);
-      }
-      if (multiTurn) {
-        els.checkStage.querySelector(`[data-round="${progressKey}"] [data-interaction-latest-feedback]`)
-          ?.focus({ preventScroll: true });
-      }
-    } else {
-      saveStoredProgress();
-      renderLessonIndex();
-      renderMastery();
-    }
+    applyInteractionAssessment({key,input,pending,requestLesson,requestOwnerScope,payload,silent});
   } catch (error) {
     state.interactionRequestsInFlight.delete(requestInFlightKey);
     if (progressOwnerScope !== requestOwnerScope) return;
     const liveProgress = lessonProgress(requestLessonId);
     const liveRecord = liveProgress[progressKey] || {};
+    if(!interactionPendingMatches(liveRecord,pending)) return;
     if(error.code==='learning_evaluation_pending' && interactionPendingMatches(liveRecord,pending)) {
       liveRecord.pendingSubmission.pendingId=error.pendingId;
       liveRecord.evaluationPending=true;
@@ -4206,6 +4285,7 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     if (autoStatus?.isConnected) autoStatus.textContent = "未核對";
     return { code: error.code, name: error.name, retryAfterSeconds: error.retryAfterSeconds };
   } finally {
+    void watcher.then(handle=>handle?.settle(observedPayload)).catch(()=>{});
     state.interactionRequestsInFlight.delete(requestInFlightKey);
     void resumeDetailedRecords();
   }
@@ -4329,11 +4409,13 @@ function currentStudyGuideAttemptRecords(ownerScope, lessonId, itemKey, clientMu
   return records[itemKey]?.clientMutationId === clientMutationId ? records : null;
 }
 
-async function submitStudyGuideAttempt({ lessonId, itemKey, response, referenceRevealedAt, clientMutationId }) {
+async function submitStudyGuideAttempt({ lessonId, itemKey, response, referenceRevealedAt, clientMutationId, pendingId }) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 55_000);
   try {
-    const result = await fetch("/api/reading/study-guide-attempt", {
+    const result = pendingId
+      ? await fetch(`/api/learning/pending-interactions?pendingId=${encodeURIComponent(pendingId)}&clientMutationId=${encodeURIComponent(clientMutationId)}`,{signal:controller.signal,cache:"no-store"})
+      : await fetch("/api/reading/study-guide-attempt", {
       method: "POST",
       headers: { "content-type": "application/json", accept: "application/json" },
       signal: controller.signal,
@@ -4462,18 +4544,21 @@ function bindCheckStage() {
     }
     syncProgress();
     renderCheckStage(state.current);
+    const watcher=watchEvaluationStatus({lesson:state.current,mutationId:clientMutationId,postActive:true});
     const result = await submitStudyGuideAttempt({
+      pendingId:previous.pendingId,
       lessonId,
       itemKey,
       response,
       referenceRevealedAt,
       clientMutationId,
     });
+    void watcher.then(handle=>handle?.settle(result)).catch(()=>{});
     // Identity hydration can replace state.progress even when it resolves back
     // to the same owner string. Reacquire the live scoped record after await;
     // never update the detached object captured before the request.
     const liveRecords = currentStudyGuideAttemptRecords(ownerScope, lessonId, itemKey, clientMutationId);
-    if (!liveRecords) return;
+    if (!liveRecords || liveRecords[itemKey].pendingSync===false) return;
     const completed = result?.ok === true
       && result.passed === true
       && result.evidence?.eligibilityStatus === "eligible";
@@ -4481,6 +4566,7 @@ function bindCheckStage() {
       ...liveRecords[itemKey],
       submitting: false,
       pendingSync: result?.ok !== true,
+      evaluationStatus: result?.ok===true ? "" : liveRecords[itemKey]?.evaluationStatus || "",
       pendingId: result?.pendingId || liveRecords[itemKey]?.pendingId || '',
       completed,
       assessment: result?.ok === true ? result.assessment : liveRecords[itemKey]?.assessment || null,
@@ -5323,11 +5409,11 @@ function bindEvents() {
   });
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") refreshRecoverableLearningState();
-    else { state.pendingReplayController?.suspend(); state.recorderBridge?.suspend(); resetLessonChat(); }
+    else { state.pendingReplayController?.suspend(); state.evaluationStatusPoller?.suspend(); state.recorderBridge?.suspend(); resetLessonChat(); }
   });
   window.addEventListener('bdfz:session-invalidated', () => state.recorderBridge?.suspend());
-  window.addEventListener("offline", () => { state.pendingReplayController?.suspend(); state.recorderBridge?.suspend(); });
-  window.addEventListener("pagehide", () => { state.pendingReplayController?.suspend(); state.recorderBridge?.suspend(); resetLessonChat(); });
+  window.addEventListener("offline", () => { state.pendingReplayController?.suspend(); state.evaluationStatusPoller?.suspend(); state.recorderBridge?.suspend(); });
+  window.addEventListener("pagehide", () => { state.pendingReplayController?.suspend(); state.evaluationStatusPoller?.suspend(); state.recorderBridge?.suspend(); resetLessonChat(); });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       const openNote = $('[data-inline-note]:not([hidden])', els.textFlow);

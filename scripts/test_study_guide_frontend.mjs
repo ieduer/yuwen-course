@@ -85,6 +85,7 @@ function interactionHarness(fetchImpl, {
      const interactionRequestKey = (...parts) => parts.join("\\n");
      const interactionSubmissionMode = () => "formal";
      const resumeDetailedRecords = async () => {};
+     const watchEvaluationStatus = async (options) => { deps.watcher=options; return {settle:()=>{}}; };
      const saveLocalInteractionPractice = () => false;
      const lessonProgress = (id = state.current?.id) => (state.progress[id] ||= {});
      const window = { YwLearningEvidence: { mutationId: () => \`mutation-\${++deps.mutationSequence}\` } };
@@ -104,6 +105,11 @@ function interactionHarness(fetchImpl, {
      ${body}
      return {
        submit: () => submitInteraction(deps.interactionKey),
+       receive: (payload) => {
+         const key=deps.interactionKey,record=state.progress[state.current.id][key==='contextWords'?'context':key];
+         return applyInteractionAssessment({key,input:pendingInteractionInput(record),pending:record.pendingSubmission,
+           requestLesson:state.current,requestOwnerScope:progressOwnerScope,payload,silent:true});
+       },
        seedPending: (mutationId) => {
          const progressKey = deps.interactionKey === "contextWords" ? "context" : deps.interactionKey;
          const input = interactionInput(deps.interactionKey);
@@ -206,7 +212,7 @@ test("AI waits are bounded and formal dialogue keeps a monotonic transcript", ()
   assert.match(studyGuide, /new AbortController\(\)/);
   assert.match(studyGuide, /controller\.abort\(\)/);
   assert.match(studyGuide, /learning_evaluator_timeout/);
-  const interaction = section("async function submitInteraction", "function bindCheckStage");
+  const interaction = section("function applyInteractionAssessment", "function bindCheckStage");
   assert.match(interaction, /signal: controller\.signal/);
   assert.match(interaction, /previousProgress\.done === true \|\| evidence\.completed/);
   assert.match(interaction, /bestScore: Math\.max/);
@@ -995,4 +1001,18 @@ test('accepted legacy web client receiving 202 retains its mutation and answer w
   assert.equal(record.pendingSubmission.clientMutationId,'mutation-1');
   assert.notEqual(record.completed,true);assert.equal(record.assessment,undefined);
   assert.equal(h.deps.calls.synced,0);
+});
+
+
+test("status result wins a late POST failure once and preserves a newer conversation draft", async () => {
+ const response=deferred();const f=interactionHarness(()=>response.promise);
+ const running=f.submit();f.setDraft("這是正在編輯的下一輪草稿，尚未提交。");
+ const payload={ok:true,assessment:{score:85,verdict:"合成回覆"},evidence:{status:"recorded",sourceEventId:"fixture-source",attemptNo:1}};
+ assert.equal(f.receive(payload),true);
+ response.resolve(Response.json({code:"learning_evaluation_pending",status:"pending",pendingId:"fixture-source"},{status:202}));
+ await running;
+ const record=f.deps.state.progress["lesson-a"].structure;
+ assert.equal(record.reason,"這是正在編輯的下一輪草稿，尚未提交。");
+ assert.equal(record.turns.length,1);assert.equal(record.pendingSubmission,undefined);
+ assert.equal(record.evaluationPending,false);assert.equal(f.deps.calls.requests.length,1);
 });

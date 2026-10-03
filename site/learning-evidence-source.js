@@ -1,4 +1,4 @@
-import { loadEvaluationJob, JOB_POLICY, evaluationCallLimit } from "./durable-evaluation-jobs.js";
+import { loadEvaluationJob, JOB_POLICY, evaluationCallLimit, evaluationProgress, latestUsableEvaluationReply } from "./durable-evaluation-jobs.js";
 import { sourceEventStatement, evaluationEventId, evaluationEventBase,
   latestSourceEvent, replyAssessment, sourceEventJob } from './learning-evaluation-events.js';
 import {
@@ -704,11 +704,13 @@ export async function listPendingLearningSubmissions({ env, student, lessonId = 
   }
   const normalizedLessonId = clean(lessonId, 80);
   const query = normalizedLessonId
-    ? `SELECT client_mutation_id, lesson_id, interaction_key, status, updated_at
+    ? `SELECT client_mutation_id, lesson_id, interaction_key, status, updated_at,
+          EXISTS(SELECT 1 FROM learning_evaluation_jobs j WHERE j.source_event_id=learning_pending_submissions.source_event_id) durable
          FROM learning_pending_submissions
         WHERE student_id = ? AND lesson_id = ? AND status IN ('captured', 'retryable')
         ORDER BY updated_at LIMIT 8`
-    : `SELECT client_mutation_id, lesson_id, interaction_key, status, updated_at
+    : `SELECT client_mutation_id, lesson_id, interaction_key, status, updated_at,
+          EXISTS(SELECT 1 FROM learning_evaluation_jobs j WHERE j.source_event_id=learning_pending_submissions.source_event_id) durable
          FROM learning_pending_submissions
         WHERE student_id = ? AND status IN ('captured', 'retryable')
         ORDER BY updated_at LIMIT 8`;
@@ -722,6 +724,7 @@ export async function listPendingLearningSubmissions({ env, student, lessonId = 
     interaction: clean(row.interaction_key, 60),
     status: clean(row.status, 20),
     updatedAt: clean(row.updated_at, 40),
+    durable: Boolean(row.durable),
   }));
 }
 
@@ -2025,17 +2028,31 @@ export async function restoreEvaluationReservation(env,job) {
 }
 
 export async function ownedEvaluationStatus(env,student,{pendingId='',clientMutationId=''}) {
-  if(!student?.id) return null;
+  if(!student?.id || (!pendingId && !clientMutationId)) return null;
   const row=await env.READING_DB.prepare(`SELECT j.*,p.client_mutation_id,p.interaction_key
     FROM learning_evaluation_jobs j JOIN learning_pending_submissions p USING(source_event_id)
     WHERE j.student_id=? AND ${pendingId?'j.source_event_id':'p.client_mutation_id'}=?`)
     .bind(Number(student.id),pendingId||clientMutationId).first();
-  if(!row) return null;
-  if(row.state!=='completed') return {job:row};
+  if(!row || (clientMutationId && row.client_mutation_id!==clientMutationId)) return null;
+  if(row.state!=='completed') {
+    // Read-only owner projection: no claims, resumes, model calls or delivery.
+    const progress=await env.READING_DB.prepare(`SELECT
+      EXISTS(SELECT 1 FROM learning_evaluation_jobs prior WHERE prior.student_id=?
+        AND prior.resource_key=? AND prior.state!='completed' AND
+        (prior.first_pending_at<? OR (prior.first_pending_at=? AND prior.source_event_id<?))) waiting_previous,
+      EXISTS(SELECT 1 FROM learning_evaluation_replies WHERE source_event_id=?) has_saved_reply,
+      (SELECT MAX(json_extract(payload_json,'$.occurredAt')) FROM learning_evaluation_events
+        WHERE source_event_id=?) last_progress_at`)
+      .bind(row.student_id,row.resource_key,row.first_pending_at,row.first_pending_at,row.source_event_id,
+        row.source_event_id,row.source_event_id).first();
+    // Invalid replies are not a result waiting to be committed.
+    return {job:{...row,...progress,has_saved_reply:progress.has_saved_reply && Boolean(await latestUsableEvaluationReply(env.READING_DB,row.source_event_id)),
+      last_progress_at:Date.parse(progress.last_progress_at)||row.first_pending_at}};
+  }
   const existing=await existingInteraction(env.READING_DB,student.id,row.client_mutation_id);
   if(!existing) throw new Error('completed evaluation source record missing');
   const result=dedupedInteractionResult(existing);
-  return {completed:{ok:true,status:'completed',pendingId:row.source_event_id,
+  return {completed:{ok:true,status:'completed',pendingId:row.source_event_id,...evaluationProgress(row),
     provider:result.evaluation.provider,assessment:result.evaluation,
     passed:result.eligibilityStatus==='eligible' && Number(result.evaluation.score)>=60,
     evidence:{status:result.eligibilityStatus==='ineligible'?'already_recorded_ineligible':'already_recorded',

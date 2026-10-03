@@ -1,3 +1,29 @@
+## 2026-10-03 AI progress and recovery candidate
+
+Candidate, not yet released. The authenticated pending endpoint accepts either
+stable mutation ID or source pending ID; both must match when supplied together.
+It projects saved/evaluating/retry/predecessor/reconciliation/attention/completed
+states without claims, evaluator calls, resumes or outbox delivery. The frontend
+keeps immediate POST evaluation and observes through a separate bounded GET lane.
+A delayed POST cannot replace an already applied result or a newer draft.
+Durable recovery uses GET; legacy non-durable resumes stay separate.
+
+Polling: four reads at3/8/15/25s while POST is active, then at most20reads per job
+per10minutes, one read per page; hidden/offline/unresolved identity suspends.
+Retry eligibility is independent of poll frequency. Legacy retryAfterSeconds60
+remains. Scheduler: up to10 valid saved replies in a separate5s dispatch budget,
+then up to4 new evaluations with at most2 concurrent, no new starts after15s.
+In-flight machine deadline35s, work lease90s and scheduler lock240s remain.
+Definite429/503 or unknown transport stops further dispatch. Same-resource
+ordering, call ledgers,4/8-call/24h policies and consumed owner grants remain.
+Valid immutable replies bypass only the model retry clock, never commit fences.
+No schema, model, rubric, App content, identity or evidence contract change.
+
+Accepted baseline remains Pages e73ab78b / scheduler a497bfd7, source b3e1a93.
+Use fresh guarded paired transactions after exact-source validation. Code-only
+rollback preserves forward D1/UC data and the accepted waitUntil fix.
+Evidence: /Users/ylsuen/CF/reports/operations/yw-ai-latency-20261003/IMPLEMENTATION.md.
+
 ## 2026-10-03 immediate evaluation persistence released and accepted
 
 Runtime source `b3e1a93c6a91d0a069d979fa74027c39ccbf3c56` (PR74). Pages `e73ab78b-bd61-472b-839a-a92de74093c0`; scheduler version `a497bfd7-e27d-4392-b052-bad80c81decf`, deployment `241cf692-8667-4208-8db9-be537b652acf`.
