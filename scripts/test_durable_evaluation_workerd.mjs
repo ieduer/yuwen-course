@@ -46,14 +46,17 @@ test('real workerd/D1 preserves a 202 submission across independent foreground a
     const body={lessonId:'lesson-1458',interaction:'structure',input:{reason:'合成測試：比較兩處字句的前後照應，並說明文章結構推進。'},clientMutationId:'workerd-durable-fixture'};
     const request=()=>({method:'POST',headers:{'content-type':'application/json',origin:'https://yw.bdfz.net'},body:JSON.stringify(body)});
     const scheduler=await mf.getWorker('scheduler');
-    const response=await mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',request()),pending=await response.json();
-    assert.equal(response.status,202,JSON.stringify(pending));assert.ok(pending.pendingId);assert.equal(attempts,1);
-    assert.equal((await mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',request())).status,202);assert.equal(attempts,1);
+    const foregroundAbort=new AbortController();
+    const response=await mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',{...request(),signal:foregroundAbort.signal}),pending=await response.json();
+    foregroundAbort.abort(); // The browser request has ended before any AI runs.
+    assert.equal(response.status,202,JSON.stringify(pending));assert.ok(pending.pendingId);assert.equal(attempts,0);
+    assert.equal((await mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',request())).status,202);assert.equal(attempts,0);
     assert.equal((await db.prepare('SELECT COUNT(*) n FROM learning_interactions').first()).n,0);
+    await scheduler.fetch('https://fixture.invalid/');assert.equal(attempts,1);
     await db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
     const drained=await scheduler.fetch('https://fixture.invalid/');assert.equal(drained.status,200);
     assert.equal((await drained.json()).completed,1);assert.equal(attempts,2);
-    assert.equal((await db.prepare('SELECT COUNT(*) n FROM learning_evaluation_machine_nonces').first()).n,1);
+    assert.equal((await db.prepare('SELECT COUNT(*) n FROM learning_evaluation_machine_nonces').first()).n,2);
     const health=await (await (await mf.getWorker('health-probe')).fetch('https://fixture.invalid/')).json();
     assert.equal(health.schema,'yw-evaluation-health-v1');assert.equal(health.pendingCount,0);
     assert.equal(health.backgroundEnabled,true);assert.ok(health.lastSuccessfulScanAt);
@@ -90,6 +93,7 @@ async function harness(answers,{newPolicy=false}={}) {
         if(!/^\/data\/[a-zA-Z0-9_./-]+\.json$/.test(pathname)||pathname.includes('..'))return new Response('not found',{status:404});
         try{return new Response(readFileSync(resolve(ROOT,'site'+pathname)),{headers:{'content-type':'application/json'}});}catch{return new Response('not found',{status:404});}},
       APIS(){const answer=answers[Math.min(calls.n,answers.length-1)];calls.n++;
+        if(answer?.transportUnknown) throw new TypeError("synthetic transport interruption");
         if(answer?.errorCode) return Response.json({error_code:answer.errorCode},{status:503});
         return Response.json({answer,model:'gemini-3.8-flash',raw_response:{modelVersion:'fixture-revision'}});},
     },outboundService(){throw new Error('unexpected external request');},
@@ -108,10 +112,12 @@ async function harness(answers,{newPolicy=false}={}) {
   await db.prepare('INSERT INTO students(id,uc_slug,display_name,uc_user_id,identity_verified_at) VALUES(7,?,?,42,?)')
     .bind('durable-workerd-fixture','Fixture',new Date().toISOString()).run();
   const body={lessonId:'lesson-1458',interaction:'structure',input:{reason:'合成測試：比較兩處字句的前後照應，並說明文章結構推進。'},clientMutationId:'workerd-invalid-reply-fixture'};
-  const submit=async()=>{
+  const submit=async({background=true}={})=>{
     const response=await mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',{method:'POST',
       headers:{'content-type':'application/json',origin:'https://yw.bdfz.net'},body:JSON.stringify(body)});
     if(!newPolicy) await db.prepare('UPDATE learning_evaluation_jobs SET first_pending_at=?').bind(Date.parse('2026-09-29T04:19:00Z')).run();
+    // Existing recovery cases begin after one independent scheduled attempt.
+    if(background) await (await mf.getWorker('scheduler')).fetch('https://fixture.invalid/');
     return response;
   };
   const drain=async()=>{await db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
@@ -313,5 +319,67 @@ test('new recovery expires after 24 hours and ambiguous outcomes remain uncertai
     await h.db.prepare("UPDATE learning_evaluation_jobs SET state='leased'").run();
     const uncertain=await deferEvaluationJob(h.db,{...j,state:'leased'},new TypeError('unknown transport'));
     assert.equal(uncertain.state,'uncertain');await h.drain();assert.equal(h.calls.n,1);
+  } finally {await h.mf.dispose();}
+});
+
+async function lostReplyFixture(result=VALID) {
+  const h=await harness([null,result],{newPolicy:true});
+  await h.submit({background:false});
+  assert.equal(h.calls.n,0,'the user request must not start AI');
+  const {claimEvaluationJob}=await import('../site/durable-evaluation-jobs.js');
+  const {sourceEventStatement,evaluationEventBase,evaluationEventId}=await import('../site/learning-evaluation-events.js');
+  const row=await h.db.prepare('SELECT source_event_id FROM learning_evaluation_jobs').first();
+  const job=await claimEvaluationJob(h.db,row.source_event_id);
+  // Restore the exact shape of a pre-fix invocation that ended after outbound
+  // dispatch. Synthetic D1 fixture only: no real request or record is replayed.
+  await h.db.prepare(`INSERT INTO learning_evaluator_calls(student_id,source_event_id,resource_key,window_start,created_at)
+    VALUES(?,?,?,'2026-01-01T00:00:00.000Z',?)`).bind(job.student_id,job.source_event_id,job.resource_key,new Date().toISOString()).run();
+  await h.db.prepare('INSERT INTO learning_evaluation_executions VALUES(?,?,?)').bind(job.source_event_id,1,Date.now()).run();
+  await (await sourceEventStatement(h.db,evaluationEventBase(job),{action:'ai.request',kind:'request',key:1,
+    parentId:await evaluationEventId(job.source_event_id,'submit'),sourceContext:{leaseEpoch:1,attemptNumber:1,requestId:'synthetic-lost-reply'}})).run();
+  h.calls.n=1;
+  await h.db.prepare('UPDATE learning_evaluation_jobs SET lease_until=0').run();
+  await h.drain();assert.equal((await h.job()).state,'uncertain');assert.equal(h.calls.n,1);
+  const scope={YW_EVALUATION_ONE_SHOT_MODE:'lost_reply',
+    YW_EVALUATION_ONE_SHOT_SHA256:createHash('sha256').update(job.source_event_id).digest('hex'),
+    YW_EVALUATION_ONE_SHOT_UNTIL:new Date(Date.now()+3600000).toISOString()};
+  return {h,scope};
+}
+
+test('reviewed lost response gets one background replacement, preserving input and all prior evidence',async()=>{
+  const {h,scope}=await lostReplyFixture();
+  try {
+    const before=await h.facts(),original=await h.db.prepare('SELECT submitted_payload_json FROM learning_submission_records').first();
+    await h.configure(scope);assert.equal((await h.drain()).completed,1);assert.equal(h.calls.n,2);
+    const after=await h.facts();for(const event of before)assert.deepEqual(after.find(x=>x.operationId===event.operationId),event);
+    assert.deepEqual(await h.db.prepare('SELECT submitted_payload_json FROM learning_submission_records').first(),original);
+    assert.equal(after.filter(x=>x.action==='evaluation.result').length,1);
+    assert.equal(after.filter(x=>x.context.sourceContext.reason==='owner_approved_lost_reply_recovery').length,1);
+    assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM learning_interactions').first()).n,1);
+    await h.configure({});await h.drain();assert.equal(h.calls.n,2);
+  } finally {await h.mf.dispose();}
+});
+
+for(const result of [{errorCode:'UPSTREAM_UNAVAILABLE'},'{',{transportUnknown:true}]) {
+  test(`lost-response grant cannot issue a third call after ${JSON.stringify(result)}`,async()=>{
+    const {h,scope}=await lostReplyFixture(result);
+    try {
+      await h.configure(scope);await h.drain();assert.equal(h.calls.n,2);
+      // Miniflare turns a thrown service-binding exception into HTTP 500.
+      // Both this definite failure and invalid output exhaust the reviewed grant.
+      assert.equal((await h.job()).state,'blocked');
+      await h.configure({});await h.drain();await h.drain();assert.equal(h.calls.n,2);
+      assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM learning_interactions').first()).n,0);
+    } finally {await h.mf.dispose();}
+  });
+}
+
+for(const invalid of ['missing-mode','wrong-job','expired']) test(`lost-response reconciliation rejects ${invalid}`,async()=>{
+  const {h,scope}=await lostReplyFixture();
+  try {
+    if(invalid==='missing-mode')delete scope.YW_EVALUATION_ONE_SHOT_MODE;
+    if(invalid==='wrong-job')scope.YW_EVALUATION_ONE_SHOT_SHA256='ab'.repeat(32);
+    if(invalid==='expired')scope.YW_EVALUATION_ONE_SHOT_UNTIL=new Date(Date.now()-1000).toISOString();
+    await h.configure(scope);await h.drain();assert.equal(h.calls.n,1);assert.equal((await h.job()).state,'uncertain');
   } finally {await h.mf.dispose();}
 });

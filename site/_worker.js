@@ -2,7 +2,7 @@ import { sourceEventStatement, evaluationEventBase, evaluationEventId, latestSou
 import { readRecorderSource } from './learning-recorder-source.js';
 import { EVALUATION_MACHINE_PATH, handleEvaluationMachine } from './evaluation-machine.js';
 import { EvaluationPending, pendingEvaluationResponse, createEvaluationJob,
-  claimEvaluationJob, saveEvaluationReply, latestUsableEvaluationReply, deferEvaluationJob,
+  saveEvaluationReply, latestUsableEvaluationReply, deferEvaluationJob,
   drainEvaluationJobs, loadEvaluationJob } from "./durable-evaluation-jobs.js";
 import { evaluateWithRecovery } from "./evaluator-recovery.js";
 import {
@@ -93,13 +93,18 @@ export default {
       return readRecorderSource({ request, db: env.READING_DB, student,
         cookieHeader: userCenterSessionCookieHeader(request) });
     }
-    if(url.pathname===EVALUATION_MACHINE_PATH) return handleEvaluationMachine(request,env,async job=>{
-      try {await completeDurableEvaluationJob(env,job);return 'completed';}
-      catch(error) {
-        if(error?.code!=='evaluation_execution_already_started') await deferEvaluationJob(env.READING_DB,job,error);
-        return 'pending';
-      }
-    });
+    if(url.pathname===EVALUATION_MACHINE_PATH) {
+      const execution=handleEvaluationMachine(request,env,async job=>{
+        try {await completeDurableEvaluationJob(env,job);return 'completed';}
+        catch(error) {
+          if(error?.code!=='evaluation_execution_already_started') await deferEvaluationJob(env.READING_DB,job,error);
+          return 'pending';
+        }
+      });
+      // Finish saving the provider reply even if the scheduler connection ends.
+      ctx?.waitUntil?.(execution.then(()=>undefined,()=>undefined));
+      return execution;
+    }
     if (url.pathname === "/api/chat" && request.method === "POST") {
       return handleChat(request, env);
     }
@@ -1598,14 +1603,10 @@ async function callLearningEvaluator(request, env, submissionReservation, prompt
         lesson:{id:completion.lesson.id,title:completion.lesson.title,
           blockId:completion.lesson.blockId||'',blockTitle:completion.lesson.blockTitle||''}}};
     const captured = await createEvaluationJob(env.READING_DB, submissionReservation, snapshot);
-    const job = await claimEvaluationJob(env.READING_DB,captured.source_event_id);
-    if (!job) throw new EvaluationPending(captured);
-    submissionReservation.evaluationJob=job;
-    try {
-      const reply=await evaluateDurableJob(env,job,submissionReservation,prompt);
-      submissionReservation.evaluationReply=reply;
-      return reply.answer_text;
-    } catch(error) { throw new EvaluationPending(await deferEvaluationJob(env.READING_DB,job,error)); }
+    // The saved answer and snapshot precede this response. Only the independent
+    // scheduler may claim it: leaving/reloading a browser must not cancel AI or
+    // strand a successful reply before it reaches the source database.
+    throw new EvaluationPending(captured);
   }
   return evaluateWithRecovery({
     signal: request.signal,

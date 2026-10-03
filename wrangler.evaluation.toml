@@ -12,9 +12,10 @@ crons = ["* * * * *"]
 # Claiming starts only after the paired Pages/D1 release is accepted.
 YW_BACKGROUND_EVALUATION_ENABLED = "false"
 YW_EVALUATION_ALERTS_ENABLED = "false"
-# Owner-approved single existing job; expires without re-arming the ledger.
-YW_EVALUATION_ONE_SHOT_SHA256 = "56de471fe5b283f48fade8d98cfbe5bf19a7a7be4b36b54d38601019b32e0e23"
-YW_EVALUATION_ONE_SHOT_UNTIL = "2026-09-29T05:30:00.000Z"
+# One reviewed lost response: one additional call in the original job.
+YW_EVALUATION_ONE_SHOT_MODE = "lost_reply"
+YW_EVALUATION_ONE_SHOT_SHA256 = "45a97c53d2b61075d92a5502fda033e2b5c6e227af308ef5094082d7d29cb6a1"
+YW_EVALUATION_ONE_SHOT_UNTIL = "2026-10-03T05:30:00.000Z"
 
 [[d1_databases]]
 binding = "READING_DB"

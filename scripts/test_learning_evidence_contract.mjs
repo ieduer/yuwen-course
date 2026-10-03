@@ -4342,17 +4342,26 @@ function durableFixture(provider) {
   const request=()=>new Request('https://yw.bdfz.net/api/interaction-check',{method:'POST',headers:YW_WEB_JSON_HEADERS,body:JSON.stringify(body)});
   return {db,source,calls,body,request};
 }
+// Recovery tests explicitly advance the independent scheduler after submission.
+// The foreground-only acceptance case below separately proves zero model calls.
+async function submitAndRunEvaluation(f,request=f.request()) {
+  const response=await worker.fetch(request,f.source.env,{});
+  if(response.status!==202)return response;
+  const pending=await response.clone().json();
+  await runDurableEvaluationScheduler(f.source.env);
+  return worker.fetch(new Request('https://yw.bdfz.net/api/learning/pending-interactions?pendingId='+pending.pendingId),f.source.env,{});
+}
 const durableReply=()=>Response.json({answer:JSON.stringify({score:85,verdict:'合成評閱',strength:'有證據',gap:'可補充',nextQuestion:'哪一句？'}),model:'gemini-3.5-flash-lite',raw_response:{modelVersion:'gemini-3.5-flash-lite-001'},requestId:'synthetic-gateway-id'});
 
 test('durable pending saves input before 202; repeat and resume spend no model calls; background journals and commits exactly once',async()=>{
   const f=durableFixture(n=>n===1?Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}):durableReply());
   try {
-    const first=await worker.fetch(f.request(),f.source.env,{}),body=await first.json();
+    const first=await submitAndRunEvaluation(f),body=await first.json();
     assert.equal(first.status,202,JSON.stringify(body));assert.equal(body.saved,true);assert.equal(body.assessment,null);
     assert.equal(f.calls.length,1);assert.equal(f.calls[0].contents[0].parts[0].text.includes(f.body.input.reason),true);
     assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,0);
     assert.equal(JSON.parse(f.db.prepare('SELECT raw_payload_json FROM learning_pending_submissions').get().raw_payload_json).reason,f.body.input.reason);
-    const duplicate=await worker.fetch(f.request(),f.source.env,{});assert.equal(duplicate.status,202);assert.equal((await duplicate.json()).pendingId,body.pendingId);assert.equal(f.calls.length,1);
+    const duplicate=await submitAndRunEvaluation(f);assert.equal(duplicate.status,202);assert.equal((await duplicate.json()).pendingId,body.pendingId);assert.equal(f.calls.length,1);
     const resume=await worker.fetch(new Request('https://yw.bdfz.net/api/learning/pending-interactions/resume',{method:'POST',headers:YW_WEB_JSON_HEADERS,body:JSON.stringify({clientMutationId:f.body.clientMutationId})}),f.source.env,{});
     assert.equal(resume.status,202);assert.equal(f.calls.length,1);
     f.db.prepare("UPDATE learning_evaluation_jobs SET next_attempt_at=0").run();
@@ -4368,14 +4377,14 @@ test('durable pending saves input before 202; repeat and resume spend no model c
     assert.equal(f.db.prepare('SELECT state FROM learning_evaluation_jobs').get().state,'completed');
     const status=await worker.fetch(new Request('https://yw.bdfz.net/api/learning/pending-interactions?pendingId='+body.pendingId),f.source.env,{});
     assert.equal(status.status,200);assert.equal((await status.json()).assessment.score,85);
-    assert.equal((await worker.fetch(f.request(),f.source.env,{})).status,200);assert.equal(f.calls.length,2);
+    assert.equal((await submitAndRunEvaluation(f)).status,200);assert.equal(f.calls.length,2);
   } finally {f.db.close();}
 });
 
-test('successful foreground AI reply is durable with provenance before score commit; an expired owner cannot score',async()=>{
+test('successful background AI reply is durable with provenance before score commit; an expired owner cannot score',async()=>{
   const f=durableFixture(durableReply);
   try {
-    const response=await worker.fetch(f.request(),f.source.env,{});assert.equal(response.status,200,await response.clone().text());
+    const response=await submitAndRunEvaluation(f);assert.equal(response.status,200,await response.clone().text());
     assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluation_replies').get().n,1);
     const job=f.db.prepare('SELECT * FROM learning_evaluation_jobs').get();
     await assert.rejects(completeDurableEvaluationJob(f.source.env,job),/lease unavailable/);
@@ -4386,7 +4395,7 @@ test('successful foreground AI reply is durable with provenance before score com
 test('invalid AI reply is kept as a learning source record, never scored, and retried with a fresh call',async()=>{
   const f=durableFixture(()=>Response.json({answer:'complete unparseable synthetic reply',model:'gemini-3.5-flash-lite'}));
   try {
-    const r=await worker.fetch(f.request(),f.source.env,{});assert.equal(r.status,202,await r.clone().text());
+    const r=await submitAndRunEvaluation(f);assert.equal(r.status,202,await r.clone().text());
     assert.deepEqual({...f.db.prepare('SELECT state,last_error_class FROM learning_evaluation_jobs').get()},{state:'queued',last_error_class:'invalid_reply'});
     assert.equal(f.db.prepare('SELECT answer_text FROM learning_evaluation_replies').get().answer_text,'complete unparseable synthetic reply');
     assert.equal(f.db.prepare('SELECT version_status FROM learning_evaluation_replies').get().version_status,'unavailable');
@@ -4405,7 +4414,7 @@ test('legacy automatic calls remain lifetime bounded across quota windows; backl
   t.mock.timers.enable({apis:['Date'],now:Date.parse('2026-09-29T04:19:00Z')});
   const f=durableFixture(()=>Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}));
   try {
-    const response=await worker.fetch(f.request(),f.source.env,{}),id=(await response.json()).pendingId;
+    const response=await submitAndRunEvaluation(f),id=(await response.json()).pendingId;
     for(let i=0;i<4;i++) {
       t.mock.timers.tick(660000);
       f.db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
@@ -4424,11 +4433,11 @@ test('accepted original input is retained before normalization and changed suffi
   const f=durableFixture(()=>Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}));
   try {
     f.body.input.reason='  '+ '甲'.repeat(3100)+'乙  ';
-    const r=await worker.fetch(f.request(),f.source.env,{});assert.equal(r.status,202,await r.clone().text());
+    const r=await submitAndRunEvaluation(f);assert.equal(r.status,202,await r.clone().text());
     const saved=JSON.parse(f.db.prepare('SELECT submitted_payload_json FROM learning_submission_records').get().submitted_payload_json);
     assert.equal(saved.reason,f.body.input.reason);
     f.body.input.reason=f.body.input.reason.replace('乙','丙');
-    assert.equal((await worker.fetch(f.request(),f.source.env,{})).status,409);assert.equal(f.calls.length,1);
+    assert.equal((await submitAndRunEvaluation(f)).status,409);assert.equal(f.calls.length,1);
   }finally{f.db.close();}
 });
 
@@ -4440,12 +4449,12 @@ test('failure to atomically save original input cannot acknowledge 202 or call a
       if(statements.some(s=>s.sql.includes('INSERT INTO learning_submission_records')))throw new Error('fixture disk unavailable');
       return original(statements);
     };
-    const r=await worker.fetch(f.request(),f.source.env,{});assert.ok(r.status>=500);
+    const r=await submitAndRunEvaluation(f);assert.ok(r.status>=500);
     assert.equal(f.calls.length,0);assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_pending_submissions').get().n,0);
   }finally{f.db.close();}
 });
 
-test('a score transaction failure preserves the AI reply; expired execution recovers without re-evaluation',async()=>{
+test('a background score transaction failure keeps the reply and recovers without re-evaluation',async()=>{
   const f=durableFixture(durableReply);
   try {
     const original=f.source.env.READING_DB.batch;let fail=true;
@@ -4453,10 +4462,10 @@ test('a score transaction failure preserves the AI reply; expired execution reco
       if(fail&&statements.some(s=>s.sql.includes('INSERT INTO learning_evaluation_commits')))throw new Error('fixture commit unavailable');
       return original(statements);
     };
-    const r=await worker.fetch(f.request(),f.source.env,{});assert.ok(r.status>=500);
+    const r=await submitAndRunEvaluation(f);assert.equal(r.status,202);
     assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluation_replies').get().n,1);
     assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,0);
-    fail=false;f.db.prepare('UPDATE learning_evaluation_jobs SET lease_until=0').run();
+    fail=false;f.db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
     await runDurableEvaluationScheduler(f.source.env);
     assert.equal(f.calls.length,1);assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,1);
     assert.equal(f.db.prepare('SELECT state FROM learning_evaluation_jobs').get().state,'completed');
@@ -4466,7 +4475,7 @@ test('a score transaction failure preserves the AI reply; expired execution reco
 test('simultaneous claims and stale epoch commits cannot duplicate evaluation or overwrite a newer result',async()=>{
   const f=durableFixture(()=>Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}));
   try {
-    const r=await worker.fetch(f.request(),f.source.env,{}),id=(await r.json()).pendingId;
+    const r=await submitAndRunEvaluation(f),id=(await r.json()).pendingId;
     f.db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
     const claims=await Promise.all(Array.from({length:10},()=>claimEvaluationJob(f.source.env.READING_DB,id)));
     assert.equal(claims.filter(Boolean).length,1);
@@ -4482,7 +4491,7 @@ test('simultaneous claims and stale epoch commits cannot duplicate evaluation or
 test('pending status is owner-scoped and never returns the submitted private fields',async()=>{
   const f=durableFixture(()=>Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}));
   try {
-    const response=await worker.fetch(f.request(),f.source.env,{}),id=(await response.json()).pendingId;
+    const response=await submitAndRunEvaluation(f),id=(await response.json()).pendingId;
     f.db.prepare('INSERT INTO students(id,uc_slug,display_name,uc_user_id,identity_verified_at) VALUES(8,?,?,43,?)').run('other-fixture','Other fixture',new Date().toISOString());
     f.source.env.READING_TEST_SLUG='other-fixture';
     const status=await worker.fetch(new Request('https://yw.bdfz.net/api/learning/pending-interactions?pendingId='+id),f.source.env,{});
@@ -4493,7 +4502,7 @@ test('pending status is owner-scoped and never returns the submitted private fie
 test('late journaled reply repairs an uncertain job without another provider request',async()=>{
   const f=durableFixture(()=>{throw new TypeError('synthetic transport uncertainty');});
   try {
-    const response=await worker.fetch(f.request(),f.source.env,{}),id=(await response.json()).pendingId;
+    const response=await submitAndRunEvaluation(f),id=(await response.json()).pendingId;
     const job=await loadEvaluationJob(f.source.env.READING_DB,id);assert.equal(job.state,'uncertain');
     await saveEvaluationReply(f.source.env.READING_DB,job,{answer:JSON.stringify({score:80,verdict:'late fixture',strength:'fixture strength',gap:'fixture gap',nextQuestion:'fixture next'}),actualModel:'gemini-3.5-flash-lite',modelVersion:'fixture-001'});
     f.db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
@@ -4506,7 +4515,7 @@ test('late journaled reply repairs an uncertain job without another provider req
 test('incomplete journaled feedback is retained, never committed, and retried with fresh calls within budget',async()=>{
   const f=durableFixture(()=>Response.json({answer:JSON.stringify({score:80,verdict:'incomplete fixture'}),model:'gemini-3.5-flash-lite'}));
   try {
-    const response=await worker.fetch(f.request(),f.source.env,{});
+    const response=await submitAndRunEvaluation(f);
     assert.equal(response.status,202);assert.equal((await response.json()).pendingState,'queued');
     const reply=f.db.prepare('SELECT answer_text FROM learning_evaluation_replies').get();
     assert.equal(JSON.parse(reply.answer_text).verdict,'incomplete fixture');
@@ -4526,7 +4535,7 @@ test('explicit legacy pending resume does not silently enroll historical records
     await assertLearningSubmissionAllowed({request:f.request(),env:f.source.env,student:{id:7,ucUserId:42},lesson,interactionKey:'structure',payload:{...f.body.input,clientMutationId:f.body.clientMutationId}});
     f.db.prepare("UPDATE learning_submission_slots SET created_at='2020-01-01T00:00:00.000Z'").run();
     f.source.env.YW_DURABLE_EVALUATION_ENABLED='true';
-    const response=await worker.fetch(f.request(),f.source.env,{});
+    const response=await submitAndRunEvaluation(f);
     assert.equal(response.status,200,await response.text());
     assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_evaluation_jobs').get().n,0);
     assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,0);
@@ -4559,7 +4568,7 @@ test('backlog notification is content-free, preserves failed delivery, deduplica
 test('global scheduler lease prevents simultaneous drains from issuing concurrent evaluations',async()=>{
   const f=durableFixture(()=>Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}));
   try {
-    await worker.fetch(f.request(),f.source.env,{});
+    await submitAndRunEvaluation(f);
     f.db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
     let release,started;const start=new Promise(r=>{started=r;});const gate=new Promise(r=>{release=r;});
     const first=drainEvaluationJobs(f.source.env,async()=>{started();await gate;});
@@ -4581,7 +4590,7 @@ test('study-guide pending pins the original rubric and completes with preserved 
     await recordLearningInteraction({request:f.request(),env:f.source.env,student:{id:7,ucUserId:42},lesson:vocabLesson,interactionKey:'readAcknowledged',payload:{threshold:1,lessonPhase:'annotated_reading',clientMutationId:`annotated-read:${vocabLesson.id}:${firstRead.textVersionId}`.slice(0,100)}});
     const item=studyGuideCatalog.lessons.find(x=>x.lessonId===vocabLesson.id).items.find(x=>x.activeForSelfTest);
     const request=new Request('https://yw.bdfz.net/api/reading/study-guide-attempt',{method:'POST',headers:YW_WEB_JSON_HEADERS,body:JSON.stringify({lessonId:vocabLesson.id,itemKey:item.itemKey,response:'依據原句語境核對並詳細說明這份合成答案。',referenceRevealedAt:'2026-08-23T00:00:00.000Z',clientMutationId:'durable-study-fixture'})});
-    const response=await worker.fetch(request,f.source.env,{}),body=await response.json();
+    const response=await submitAndRunEvaluation(f,request),body=await response.json();
     assert.equal(response.status,202,JSON.stringify(body));assert.equal(f.calls.length,1);
     const job=f.db.prepare('SELECT * FROM learning_evaluation_jobs').get();
     const version=JSON.parse(job.snapshot_json).reservation.capturedVersions.sourceVersion;
@@ -4631,7 +4640,7 @@ test('recorder source events preserve exact input, per-call failure/retry, model
       assert.equal(event.content.prompt,(await request.clone().json()).contents[0].parts[0].text);
       return originalProvider(request);
     };
-    const response=await worker.fetch(f.request(),f.source.env,{}),pending=await response.json();
+    const response=await submitAndRunEvaluation(f),pending=await response.json();
     assert.equal(response.status,202);
     let rows=await assertSourceEventsValid(f.db);
     assert.equal(JSON.parse(rows.find(r=>r.action==='answer.submit').event.content.originalJson).reason,f.body.input.reason);
@@ -4660,7 +4669,7 @@ test('recorder source events preserve exact input, per-call failure/retry, model
     assert.equal(rows.filter(r=>r.action==='completion.sync.result').length,1);
     assert.equal(rows.at(-1).event.context.sourceContext.centralAcceptance,'accepted');
     const count=rows.length;
-    await worker.fetch(f.request(),f.source.env,{});await reconcileEvidenceOutbox(f.source.env);
+    await submitAndRunEvaluation(f);await reconcileEvidenceOutbox(f.source.env);
     assert.equal(sourceEvents(f.db).length,count);assert.equal(f.calls.length,2);
   } finally {f.db.close();}
 });
@@ -4668,7 +4677,7 @@ test('recorder source events preserve exact input, per-call failure/retry, model
 test('immutable event IDs reject changed contents and hashes without overwriting a source fact',async()=>{
   const f=durableFixture(durableReply);
   try {
-    await worker.fetch(f.request(),f.source.env,{});
+    await submitAndRunEvaluation(f);
     const row=sourceEvents(f.db)[0];
     assert.throws(()=>f.db.prepare('UPDATE learning_evaluation_events SET occurred_at=? WHERE event_id=?').run('changed',row.event_id),/immutable/);
     assert.throws(()=>f.db.prepare('DELETE FROM learning_evaluation_events WHERE event_id=?').run(row.event_id),/immutable/);
@@ -4687,7 +4696,7 @@ test('submission and request event storage failures never acknowledge an unsaved
     const f=durableFixture(durableReply);
     try {
       f.db.exec(`CREATE TRIGGER fixture_event_failure BEFORE INSERT ON learning_evaluation_events WHEN NEW.action='${action}' BEGIN SELECT RAISE(ABORT,'synthetic event storage failure'); END;`);
-      const response=await worker.fetch(f.request(),f.source.env,{});
+      const response=await submitAndRunEvaluation(f);
       assert.equal(f.calls.length,0);
       if(action==='answer.submit') {
         assert.notEqual(response.status,202);
@@ -4706,7 +4715,7 @@ test('a result-event failure rolls back the grade and outbox but keeps the compl
   const f=durableFixture(durableReply);
   try {
     f.db.exec("CREATE TRIGGER fixture_result_failure BEFORE INSERT ON learning_evaluation_events WHEN NEW.action='evaluation.result' BEGIN SELECT RAISE(ABORT,'synthetic result failure'); END;");
-    await worker.fetch(f.request(),f.source.env,{});
+    await submitAndRunEvaluation(f);
     assert.equal(f.calls.length,1);
     assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,0);
     assert.equal(f.db.prepare('SELECT COUNT(*) n FROM evidence_outbox').get().n,0);
@@ -4724,7 +4733,7 @@ test('a result-event failure rolls back the grade and outbox but keeps the compl
 test('receipt transport failures keep an immutable failure and a later accepted receipt without re-evaluation',async()=>{
   const f=durableFixture(durableReply);
   try {
-    await worker.fetch(f.request(),f.source.env,{});
+    await submitAndRunEvaluation(f);
     f.source.env.USER_CENTER_EVIDENCE.getLearningEvidenceDeliveryReceipts=async()=>{throw new Error('synthetic confidential exception');};
     await reconcileEvidenceOutbox(f.source.env);
     const failure=sourceEvents(f.db).find(r=>r.action==='completion.sync.failure');
@@ -4744,7 +4753,7 @@ test('reply-event projection failure preserves irreplaceable raw response and re
   const f=durableFixture(durableReply);
   try {
     f.db.exec("CREATE TRIGGER fixture_reply_event_failure BEFORE INSERT ON learning_evaluation_events WHEN NEW.action='assistant.reply' BEGIN SELECT RAISE(ABORT,'synthetic reply projection failure'); END;");
-    const response=await worker.fetch(f.request(),f.source.env,{});assert.equal(response.status,202);
+    const response=await submitAndRunEvaluation(f);assert.equal(response.status,202);
     const reply=f.db.prepare('SELECT * FROM learning_evaluation_replies').get();
     assert.ok(reply.raw_response_json);assert.equal(JSON.parse(reply.raw_response_json).answer,reply.answer_text);
     assert.equal(sourceEvents(f.db).filter(r=>r.action==='assistant.reply').length,0);
@@ -4762,7 +4771,7 @@ test('non-JSON or null successful upstream bodies are saved intact and retried w
   for(const raw of ['null','upstream returned malformed body']) {
     const f=durableFixture(()=>new Response(raw,{status:200}));
     try {
-      const response=await worker.fetch(f.request(),f.source.env,{});assert.equal(response.status,202);
+      const response=await submitAndRunEvaluation(f);assert.equal(response.status,202);
       const rows=await assertSourceEventsValid(f.db),reply=rows.find(r=>r.action==='assistant.reply').event;
       assert.equal(reply.content.rawResponseJson,raw);assert.equal(reply.assessment.modelVersion,null);
       assert.equal(reply.assessment.modelVersionStatus,'not_reported');
@@ -4778,7 +4787,7 @@ const machineSecret='ab'.repeat(32); // Synthetic fixture; never provisioned.
 async function machineFixture(provider=durableReply) {
   const f=durableFixture(n=>n===1?Response.json({error_code:'UPSTREAM_UNAVAILABLE'},{status:503}):provider(n));
   f.source.env.YW_EVALUATION_MACHINE_SECRET=machineSecret;
-  const r=await worker.fetch(f.request(),f.source.env,{}),body=await r.json();assert.equal(r.status,202);
+  const r=await submitAndRunEvaluation(f),body=await r.json();assert.equal(r.status,202);
   f.db.exec('UPDATE learning_evaluation_jobs SET next_attempt_at=0');
   f.job=await claimEvaluationJob(f.source.env.READING_DB,body.pendingId);
   return f;
