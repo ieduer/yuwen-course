@@ -711,6 +711,50 @@ try {
     await stablePage.goto(`${base}/#lesson-1474`, { waitUntil: "domcontentloaded" });
     await stablePage.waitForFunction(() => interactionIdentityResolved
       && document.querySelector(".first-read-submitted-review"));
+    // Real app + imported polling module: a saved result wins a delayed POST.
+    // These are entirely local synthetic responses, with no model/central call.
+    let evaluationPosts=0,statusReads=0,finishEvaluation,completed=false;
+    await stablePage.route(`${base}/api/interaction-check`, async route=>{
+      evaluationPosts++;await new Promise(resolve=>{finishEvaluation=resolve;});
+      await route.fulfill({status:202,json:{ok:false,status:'pending',code:'learning_evaluation_pending',pendingId:'fixture-pending'}});
+    });
+    await stablePage.route(`${base}/api/learning/pending-interactions*`, async route=>{
+      const url=new URL(route.request().url());
+      assert.equal(route.request().method(),'GET','polling must never resume');
+      if(!url.searchParams.has('clientMutationId')){await route.fulfill({json:{submissions:[]}});return;}
+      statusReads++;
+      await route.fulfill({status:completed?200:202,json:completed
+        ?{ok:true,status:'completed',pendingId:'fixture-pending',assessment:{score:85,verdict:'合成評閱已完成',strength:'有依據',gap:'繼續比較',nextQuestion:'下一步'},evidence:{status:'already_recorded',sourceEventId:'fixture-pending',attemptNo:1,eligibilityStatus:'eligible'}}
+        :{ok:false,status:'pending',phase:'evaluating',saved:true,pendingId:'fixture-pending',pollAfterSeconds:3}});
+    });
+    await stablePage.evaluate(()=>{
+      const input={reason:'合成首輪：比較兩處字句的前後照應，並說明文章結構如何推進。'};
+      const mutation='browser-evaluation-fixture';
+      const session=firstReadForLesson(state.current.id),paragraph=session.asset.paragraphs[0];
+      session.annotatedReadCompleted=true;
+      session.marks=[{markId:'fixture-mark',paragraphKey:paragraph.key,startOffset:0,endOffset:2,
+        selectedText:paragraph.text.slice(0,2),resolutionStatus:'resolved',resolution:'fixture',guess:'fixture'}];
+      const progress=lessonProgress(state.current.id);progress.vocabulary={done:true};
+      for(const item of studyGuideItemsFor(state.current,['vocabulary','syntax']))
+        studyGuideProgress(progress)[item.itemKey]={completed:true,semanticRevision:item.semanticRevision};
+      lessonProgress(state.current.id).structure={...input,pendingSubmission:{clientMutationId:mutation,input,inputSignature:interactionInputSignature(input)}};
+      renderCheckStage(state.current);
+      window.__evaluationSubmission=submitInteraction('structure',null,{silent:true});
+    });
+    await stablePage.waitForFunction(()=>document.querySelector('[data-evaluation-status="browser-evaluation-fixture"]')?.textContent.includes('正在評閱'));
+    assert.equal(evaluationPosts,1);assert.ok(statusReads>=1);
+    await stablePage.evaluate(()=>{lessonProgress(state.current.id).structure.reason='下一輪草稿尚未提交';});
+    completed=true;
+    await stablePage.waitForFunction(()=>lessonProgress(state.current.id).structure.result?.score===85,null,{timeout:10000});
+    finishEvaluation();await stablePage.evaluate(()=>window.__evaluationSubmission);
+    assert.deepEqual(await stablePage.evaluate(()=>{
+      const record=lessonProgress(state.current.id).structure;
+      return {draft:record.reason,turns:record.turns.length,pending:Boolean(record.pendingSubmission)};
+    }),{draft:'下一輪草稿尚未提交',turns:1,pending:false});
+    assert.equal(evaluationPosts,1);
+    await stablePage.evaluate(()=>{const session=firstReadForLesson(state.current.id);session.marks=[];session.annotatedReadCompleted=false;});
+    await stablePage.unroute(`${base}/api/interaction-check`);
+    await stablePage.unroute(`${base}/api/learning/pending-interactions*`);
     for (let toggle = 0; toggle < 2; toggle += 1) {
       assert.equal(await stablePage.locator("#auth-login").isVisible(), false,
         "a signed-in owner must not see the login link");

@@ -3947,7 +3947,7 @@ test("captured evaluator input is private, resumable across rate windows, and co
       lessonId: wordCreationLesson.id,
     });
     assert.deepEqual(Object.keys(summaries[0]).sort(), [
-      "clientMutationId", "interaction", "lessonId", "status", "updatedAt",
+      "clientMutationId", "durable", "interaction", "lessonId", "status", "updatedAt",
     ]);
     assert.equal(JSON.stringify(summaries).includes(payload.creation), false);
     const replay = await loadPendingLearningSubmission({

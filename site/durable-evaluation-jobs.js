@@ -2,7 +2,8 @@
 import { sourceEventStatement, evaluationEventId, evaluationEventBase,
   latestSourceEvent, replyAssessment } from './learning-evaluation-events.js';
 import { extractJsonObject, normalizeOpenStudyGuideAssessment } from './study-guide-assessment.js';
-export const JOB_POLICY = Object.freeze({ maxCalls: 4, leaseMs: 90_000, maxJobsPerTick: 2 });
+export const JOB_POLICY = Object.freeze({ maxCalls: 4, leaseMs: 90_000, maxJobsPerTick: 4 });
+export const DRAIN_POLICY = Object.freeze({maxLocalCommits:10,localBudgetMs:5000,concurrency:2,dispatchBudgetMs:15000});
 // An owner-approved, expiring exception applies to a frozen list of at most 26 existing source jobs.
 // It never resets the ledger or changes the default four-call budget. The
 // fifth lease is the only eligible execution, so a failed/uncertain attempt
@@ -69,9 +70,26 @@ export async function evaluationCallLimit(env,job,now=Date.now()) {
 export class EvaluationPending extends Error {
   constructor(job) { super('答案已保存，評閱稍後補上'); this.code='learning_evaluation_pending'; this.job=job; }
 }
+export function evaluationProgress(job, now=Date.now()) {
+  const phase=job.state==='completed'?'completed'
+    : ['blocked','uncertain'].includes(job.state)?'needs_attention'
+    : job.has_saved_reply?'reconciling'
+    : job.state==='leased' && job.lease_until>now?'evaluating'
+    : job.waiting_previous?'waiting_previous'
+    : job.state==='leased'?'needs_attention'
+    : job.next_attempt_at>now?'waiting_retry':'submitting';
+  const iso=value=>Number.isFinite(value)&&value>0?new Date(value).toISOString():null;
+  return {phase,saved:true,createdAt:iso(job.first_pending_at),
+    lastProgressAt:iso(job.last_progress_at || job.completed_at || job.first_pending_at),
+    nextAttemptAt:phase==='waiting_retry'?iso(job.next_attempt_at):null,
+    pollAfterSeconds:phase==='completed'?0:phase==='needs_attention'?60
+      :phase==='waiting_previous'?10:phase==='waiting_retry'
+        ?Math.max(3,Math.min(60,Math.ceil((job.next_attempt_at-now)/1000))):3,
+    canStartNewTurn:phase==='completed'};
+}
 export function pendingEvaluationResponse(job) {
   return Response.json({ ok:false, status:'pending', code:'learning_evaluation_pending',
-    pendingId:job.source_event_id, pendingState:job.state, saved:true, assessment:null,
+    pendingId:job.source_event_id, pendingState:job.state, ...evaluationProgress(job), assessment:null,
     error:['blocked','uncertain'].includes(job.state)?'答案已保存，評閱需要處理；無需重新提交。':'答案已保存，評閱稍後補上', retryAfterSeconds:60 },
   {status:202,headers:{'Cache-Control':'private, no-store','Retry-After':'60'}});
 }
@@ -96,17 +114,20 @@ export async function createEvaluationJob(db,reservation,snapshot,now=Date.now()
   if(!job) throw new Error('durable evaluation capture unavailable');
   return job;
 }
-export async function claimEvaluationJob(db,id,now=Date.now()) {
+export async function claimEvaluationJob(db,id,now=Date.now(),{localReply=false}={}) {
+  // An immutable, validated reply can be committed without waiting for the
+  // model retry clock. This never authorizes a fresh evaluator call.
+  if(localReply && !await latestUsableEvaluationReply(db,id))return null;
   // Never reclaim an ambiguous in-flight call automatically. Journal recovery
   // after an expired lease is handled separately, without another model call.
   const updated=await db.prepare(`UPDATE learning_evaluation_jobs SET state='leased',
     lease_epoch=lease_epoch+1,lease_until=? WHERE source_event_id=? AND state='queued'
-    AND next_attempt_at<=? AND NOT EXISTS (
+    AND (?=1 OR next_attempt_at<=?) AND NOT EXISTS (
       SELECT 1 FROM learning_evaluation_jobs prior WHERE prior.student_id=learning_evaluation_jobs.student_id
       AND prior.resource_key=learning_evaluation_jobs.resource_key AND prior.state!='completed'
       AND (prior.first_pending_at<learning_evaluation_jobs.first_pending_at OR
        (prior.first_pending_at=learning_evaluation_jobs.first_pending_at AND prior.source_event_id<learning_evaluation_jobs.source_event_id)))`)
-    .bind(now+JOB_POLICY.leaseMs,id,now).run();
+    .bind(now+JOB_POLICY.leaseMs,id,localReply?1:0,now).run();
   return Number(updated?.meta?.changes)===1 ? loadEvaluationJob(db,id) : null;
 }
 export async function saveEvaluationReply(db,job,result,now=Date.now()) {
@@ -263,13 +284,14 @@ export async function drainEvaluationJobs(env,execute,now=Date.now()) {
     WHERE id=1 AND lease_until<=?`).bind(owner,now+240000,now).run();
   if(Number(lock?.meta?.changes)!==1) return {busy:true};
   let completed=0;
+  const scanStarted=Date.now();
   try {
     // Preserve recovery decisions too; never pretend an expired lease proves
     // that its outbound request did not execute.
     const recovering=await db.prepare(`SELECT * FROM learning_evaluation_jobs WHERE
       (state='leased' AND lease_until<?) OR (state='uncertain' AND EXISTS
         (SELECT 1 FROM learning_evaluation_replies r WHERE r.source_event_id=learning_evaluation_jobs.source_event_id))
-      ORDER BY first_pending_at LIMIT ${JOB_POLICY.maxJobsPerTick}`).bind(now).all();
+      ORDER BY first_pending_at LIMIT ${DRAIN_POLICY.maxLocalCommits}`).bind(now).all();
     for(const job of recovering.results || []) {
       const reply=await latestEvaluationReply(db,job.source_event_id);
       const request=await latestSourceEvent(db,job.source_event_id,'ai.request',job.lease_epoch);
@@ -371,25 +393,58 @@ export async function drainEvaluationJobs(env,execute,now=Date.now()) {
         .bind(now,job.source_event_id,job.lease_epoch),statement]);
     }
 
-    for(let i=0;i<JOB_POLICY.maxJobsPerTick;i++) {
-      const row=await db.prepare(`SELECT j.source_event_id FROM learning_evaluation_jobs j
-        WHERE state='queued' AND next_attempt_at<=? AND NOT EXISTS (
-          SELECT 1 FROM learning_evaluation_jobs prior WHERE prior.student_id=j.student_id
-          AND prior.resource_key=j.resource_key AND prior.state!='completed'
-          AND (prior.first_pending_at<j.first_pending_at OR
-            (prior.first_pending_at=j.first_pending_at AND prior.source_event_id<j.source_event_id))) ORDER BY
-        (student_id=(SELECT last_student_id FROM learning_evaluation_scheduler WHERE id=1)),first_pending_at LIMIT 1`).bind(Date.now()).first();
-      if(!row) break;
-      const job=await claimEvaluationJob(db,row.source_event_id);
-      if(!job) break;
-      try { const result=await execute(job);if(result?.status!=='pending') completed++; }
-      catch(error) { await deferEvaluationJob(db,job,error); }
-      const scopedAttempt=job.lease_epoch===5 && await hasOwnerExtraAttempt(env,job,now);
-      const scopedResult=scopedAttempt ? await loadEvaluationJob(db,job.source_event_id) : null;
+    const candidates=(savedOnly=false)=>db.prepare(`SELECT j.* FROM learning_evaluation_jobs j
+      WHERE state='queued' AND (?=1 OR next_attempt_at<=?) ${savedOnly?'AND EXISTS (SELECT 1 FROM learning_evaluation_replies r WHERE r.source_event_id=j.source_event_id)':''} AND NOT EXISTS (
+        SELECT 1 FROM learning_evaluation_jobs prior WHERE prior.student_id=j.student_id
+        AND prior.resource_key=j.resource_key AND prior.state!='completed'
+        AND (prior.first_pending_at<j.first_pending_at OR
+          (prior.first_pending_at=j.first_pending_at AND prior.source_event_id<j.source_event_id))) ORDER BY
+      (student_id=(SELECT last_student_id FROM learning_evaluation_scheduler WHERE id=1)),first_pending_at LIMIT 20`)
+      .bind(savedOnly?1:0,Date.now()).all();
+    const executeClaim=async job=>{
+      try {const result=await execute(job);if(result?.status!=='pending')completed++;}
+      catch(error) {await deferEvaluationJob(db,job,error);}
       await db.prepare('UPDATE learning_evaluation_scheduler SET last_student_id=? WHERE id=1 AND owner=?')
         .bind(job.student_id,owner).run();
-      if(scopedAttempt && scopedResult?.state!=='completed') break;
+      return loadEvaluationJob(db,job.source_event_id);
+    };
+    // Valid saved replies use a separate finite local-commit lane. The normal
+    // executor reuses this immutable reply before reserving any evaluator call.
+    const localStarted=Date.now();let localCommits=0;
+    while(localCommits<DRAIN_POLICY.maxLocalCommits && Date.now()-localStarted<DRAIN_POLICY.localBudgetMs) {
+      let chosen;
+      for(const row of (await candidates(true)).results || []) if(await latestUsableEvaluationReply(db,row.source_event_id)) {chosen=row;break;}
+      if(!chosen)break;
+      const job=await claimEvaluationJob(db,chosen.source_event_id,Date.now(),{localReply:true});if(!job)break;
+      localCommits++;await executeClaim(job);
     }
+    const running=new Set();let dispatched=0,halted=false,fatalError;
+    const launch=job=>{
+      const task=executeClaim(job).then(async current=>{
+        // Read the persisted failure, including the machine path's pending
+        // response. Never infer upstream health merely from HTTP200 here.
+        const failure=await latestSourceEvent(db,job.source_event_id,'ai.failure',job.lease_epoch);
+        const status=failure?JSON.parse(failure.payload_json).context.sourceContext.httpStatus:null;
+        if(status===429 || status===503 || current?.state==='uncertain')halted=true;
+        if(job.lease_epoch===5 && await hasOwnerExtraAttempt(env,job,now) && current?.state!=='completed')halted=true;
+      }).catch(error=>{halted=true;fatalError=error;}).finally(()=>running.delete(task));
+      running.add(task);return task;
+    };
+    try {
+      while(!halted && dispatched<JOB_POLICY.maxJobsPerTick && Date.now()-scanStarted<DRAIN_POLICY.dispatchBudgetMs) {
+        if(running.size>=DRAIN_POLICY.concurrency) {await Promise.race(running);continue;}
+        let chosen;
+        for(const row of (await candidates()).results || []) if(!await latestUsableEvaluationReply(db,row.source_event_id)) {chosen=row;break;}
+        if(!chosen)break;
+        const job=await claimEvaluationJob(db,chosen.source_event_id);if(!job)break;
+        dispatched++;
+        await db.prepare('UPDATE learning_evaluation_scheduler SET last_student_id=? WHERE id=1 AND owner=?').bind(job.student_id,owner).run();
+        const task=launch(job);
+        // Expiring owner grants keep their existing serial execution boundary.
+        if(await hasOwnerExtraAttempt(env,job,now))await task;
+      }
+    } finally {await Promise.allSettled([...running]);}
+    if(fatalError)throw fatalError;
     await db.prepare('UPDATE learning_evaluation_scheduler SET last_scan_at=? WHERE id=1 AND owner=?')
       .bind(Date.now(),owner).run();
     const health=await evaluationBacklog(db);

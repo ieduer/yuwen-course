@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1232,
-  "totalBytes": 164576288,
-  "aggregateSha256": "b7e0dd5b0d917145e3469493dbbd0851fe6cb6012706937d1c2b1fa90521817e",
+  "totalBytes": 164591518,
+  "aggregateSha256": "7c01c2cb6c220b09dcbe7d468f70edb46433d5e945abd0771a0b849e209763b7",
   "files": [
     {
       "path": "_headers",
@@ -17,13 +17,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 144947,
-      "sha256": "dff34821d69c0803c05ce6aa2e09b8529a520a9bad2dcd16f7181ed8f5a72083"
+      "bytes": 145068,
+      "sha256": "15cf1e4b9815e00eec920a041bbec7e195df0b021f6cd820e8e23c175e152af1"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "40887c9ca524d5d16e551b61881ec6b2e6852cc5bfe6d02965608cb9ab2c3bc1"
+      "sha256": "4716e9d0ceb8d10ca4270a82ed063fef0dd81a5619673a3b19c09778afa82fa0"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1417,8 +1417,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 241217,
-      "sha256": "8f1f5a508e693590563e5a20ae2ab6398239175d4409bb4a0d9d3dea4be9c0ef"
+      "bytes": 247207,
+      "sha256": "53c4416a704eae01735bf50daaaee504ad0b9b4501932185c6a18235ca97aade"
     },
     {
       "path": "assets/atlas.css",
@@ -1457,8 +1457,8 @@
     },
     {
       "path": "assets/pending-evaluation-recovery.js",
-      "bytes": 2057,
-      "sha256": "311f0fa80fc3ac834d15aaa284111b78e62a5d4e7fb70a743424639f1b10e170"
+      "bytes": 5885,
+      "sha256": "85f2e0c621566c1735c8be8a0bd8339955ef65da10cbbb427641eb4811243278"
     },
     {
       "path": "assets/preview-screenshots/0020a786efcbb5b606cf017c.webp",
@@ -6032,8 +6032,8 @@
     },
     {
       "path": "durable-evaluation-jobs.js",
-      "bytes": 29860,
-      "sha256": "b4c18cb0d02cc567fd40a0bec4d1a5caddac90672c82c51c680d38bf8dc578f8"
+      "bytes": 33559,
+      "sha256": "1729e34556ea5e1b2e91ff9905557a3d21cb65b1a346418c1ef8365cb69153cd"
     },
     {
       "path": "evaluation-machine.js",
@@ -6058,7 +6058,7 @@
     {
       "path": "index.html",
       "bytes": 11703,
-      "sha256": "b2deddfb360ef7644b745ad2f8b0bcb496cdbdb1f5f9f01e65f5aee990a2a640"
+      "sha256": "e1be1dd635be36e88a7de1f99100571804bea4286ae9c2485c43f47a3324e699"
     },
     {
       "path": "learning-evaluation-events.js",
@@ -6067,8 +6067,8 @@
     },
     {
       "path": "learning-evidence-source.js",
-      "bytes": 92499,
-      "sha256": "32c3a53c09d916eb41c696527fbc2a12a884c249725138ff970569a6ac813124"
+      "bytes": 94091,
+      "sha256": "bb85a88348d829845f85dfca3e963934216804c65ab66a57dcfe9d9882106167"
     },
     {
       "path": "learning-recorder-source.js",

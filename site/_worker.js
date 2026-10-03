@@ -1560,8 +1560,9 @@ async function handlePendingInteractionsList(request, env, url) {
   if (student?.error) return student.error;
   if (!student) return authenticatedEvaluationRequiredResponse();
   const pendingId=cleanText(url.searchParams.get('pendingId'),100);
-  if(pendingId && env.YW_DURABLE_EVALUATION_ENABLED==='true') {
-    const status=await ownedEvaluationStatus(env,student,{pendingId});
+  const clientMutationId=cleanText(url.searchParams.get('clientMutationId'),100);
+  if((pendingId || clientMutationId) && env.YW_DURABLE_EVALUATION_ENABLED==='true') {
+    const status=await ownedEvaluationStatus(env,student,{pendingId,clientMutationId});
     if(!status) return json({error:'pending not found'},{status:404});
     return status.job ? pendingEvaluationResponse(status.job)
       : json(status.completed,{headers:{'Cache-Control':'private, no-store'}});

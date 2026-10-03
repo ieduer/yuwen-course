@@ -89,7 +89,8 @@ async function harness(answers,{newPolicy=false}={}) {
       ASSETS(request){const pathname=new URL(request.url).pathname;
         if(!/^\/data\/[a-zA-Z0-9_./-]+\.json$/.test(pathname)||pathname.includes('..'))return new Response('not found',{status:404});
         try{return new Response(readFileSync(resolve(ROOT,'site'+pathname)),{headers:{'content-type':'application/json'}});}catch{return new Response('not found',{status:404});}},
-      APIS(){const answer=answers[Math.min(calls.n,answers.length-1)];calls.n++;
+      async APIS(){let answer=answers[Math.min(calls.n,answers.length-1)];calls.n++;
+        if(typeof answer==='function')answer=await answer();
         if(answer?.transportUnknown) throw new TypeError('synthetic transport interruption');
         if(answer?.errorCode) return Response.json({error_code:answer.errorCode},{status:503});
         return Response.json({answer,model:'gemini-3.8-flash',raw_response:{modelVersion:'fixture-revision'}});},
@@ -392,4 +393,110 @@ test('successful submissions return their immediate result without waiting for t
     assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM learning_interactions').first()).n,1);
     await h.drain();assert.equal(h.calls.n,1);
   } finally {await h.mf.dispose();}
+});
+
+test('owned status projects progress without changing calls, leases, events or evidence',async()=>{
+ const h=await harness([{errorCode:'UPSTREAM_UNAVAILABLE'},VALID],{newPolicy:true});
+ try {
+  const pending=await (await h.submit()).json();
+  const row=await h.db.prepare('SELECT * FROM learning_pending_submissions').first();
+  const read=async(params)=>{const response=await h.mf.dispatchFetch('https://yw.bdfz.net/api/learning/pending-interactions?'+new URLSearchParams(params));return {code:response.status,body:await response.json()};};
+  const before=await h.db.prepare('SELECT * FROM learning_evaluation_jobs').first(),facts=await h.facts();
+  const status=await read({clientMutationId:row.client_mutation_id});
+  assert.equal(status.code,202);assert.equal(status.body.phase,'waiting_retry');
+  assert.equal(status.body.saved,true);assert.equal(status.body.canStartNewTurn,false);
+  assert.ok(status.body.nextAttemptAt);assert.equal(status.body.retryAfterSeconds,60);
+  assert.equal((await read({pendingId:pending.pendingId,clientMutationId:'wrong'})).code,404);
+  assert.equal((await read({clientMutationId:'wrong'})).code,404);
+  assert.deepEqual(await h.db.prepare('SELECT * FROM learning_evaluation_jobs').first(),before);
+  assert.deepEqual(await h.facts(),facts);assert.equal(h.calls.n,1);
+  await h.db.prepare("UPDATE learning_evaluation_jobs SET state='leased',lease_until=?").bind(Date.now()+60000).run();
+  assert.equal((await read({pendingId:pending.pendingId})).body.phase,'evaluating');
+  for(const state of ['blocked','uncertain']) {
+   await h.db.prepare('UPDATE learning_evaluation_jobs SET state=?').bind(state).run();
+   const result=(await read({pendingId:pending.pendingId})).body;
+   assert.equal(result.phase,'needs_attention');assert.equal(result.nextAttemptAt,null);
+  }
+  // Switching the verified source identity cannot disclose the first owner's job.
+  await h.db.prepare('UPDATE students SET uc_slug=? WHERE id=7').bind('other-owner').run();
+  const privateResult=await read({pendingId:pending.pendingId});assert.notEqual(privateResult.code,200);assert.notEqual(privateResult.code,202);
+  assert.equal(h.calls.n,1);
+ } finally {await h.mf.dispose();}
+});
+
+test('completed mutation lookup reuses the existing result with no evaluator or outbox work',async()=>{
+ const h=await harness([VALID],{newPolicy:true});
+ try {
+  assert.equal((await h.submit()).status,200);
+  const row=await h.db.prepare('SELECT client_mutation_id FROM learning_pending_submissions').first();
+  const before=await h.facts();
+  for(let i=0;i<3;i++) {
+   const response=await h.mf.dispatchFetch('https://yw.bdfz.net/api/learning/pending-interactions?clientMutationId='+encodeURIComponent(row.client_mutation_id));
+   const result=await response.json();assert.equal(response.status,200);assert.equal(result.phase,'completed');
+   assert.equal(result.canStartNewTurn,true);assert.equal(result.assessment.score,85);
+  }
+  assert.equal(h.calls.n,1);assert.deepEqual(await h.facts(),before);
+  assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM evidence_outbox').first()).n,1);
+ } finally {await h.mf.dispose();}
+});
+
+
+async function seedIndependentJobs(h,count) {
+ for(let i=0;i<count;i++) {
+  if(i) {
+   await h.db.prepare('UPDATE students SET uc_slug=? WHERE uc_slug=?').bind('fixture-old-'+i,'durable-workerd-fixture').run();
+   await h.db.prepare('INSERT INTO students(id,uc_slug,display_name,uc_user_id,identity_verified_at) VALUES(?,?,?,?,?)')
+    .bind(7+i,'durable-workerd-fixture','Fixture',42+i,new Date().toISOString()).run();
+  }
+  assert.equal((await h.submit()).status,202);
+ }
+}
+
+test('twenty independent 8-second model jobs drain four per tick, at most two concurrent',async()=>{
+ let active=0,maximum=0;const answer=async()=>{active++;maximum=Math.max(maximum,active);await new Promise(resolve=>setTimeout(resolve,8000));active--;return VALID;};
+ const h=await harness([...Array(20).fill({errorCode:'UPSTREAM_UNAVAILABLE'}),answer],{newPolicy:true});
+ try {
+  await seedIndependentJobs(h,20);const counts=[];
+  for(let i=0;i<5;i++)counts.push((await h.drain()).completed);
+  assert.deepEqual(counts,[4,4,4,4,4]);assert.equal(maximum,2);assert.equal(h.calls.n,40);
+  assert.equal((await h.db.prepare("SELECT COUNT(*) n FROM learning_evaluation_jobs WHERE state!='completed'").first()).n,0);
+  assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM learning_interactions').first()).n,20);
+  assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM evidence_outbox').first()).n,20);
+ }finally{await h.mf.dispose();}
+});
+
+test('twenty valid saved replies use local recovery without reserving any new model calls',async()=>{
+ const h=await harness(Array(20).fill({errorCode:'UPSTREAM_UNAVAILABLE'}),{newPolicy:true});
+ try {
+  await seedIndependentJobs(h,20);
+  for(const row of (await h.db.prepare('SELECT source_event_id FROM learning_evaluation_jobs').all()).results)
+   await h.db.prepare("INSERT INTO learning_evaluation_replies(source_event_id,lease_epoch,request_id,answer_text,received_at,version_status) VALUES(?,1,?,?,?,'unavailable')")
+    .bind(row.source_event_id,'local-fixture-reply',VALID,Date.now()).run();
+  const counts=[];for(let i=0;i<3;i++)counts.push((await (await (await h.mf.getWorker("scheduler")).fetch("https://fixture.invalid/")).json()).completed);
+  assert.equal(counts.reduce((a,b)=>a+b,0),20);assert.ok(counts.every(n=>n<=10));assert.equal(h.calls.n,20);
+  assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM learning_interactions').first()).n,20);
+  assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM evidence_outbox').first()).n,20);
+ }finally{await h.mf.dispose();}
+});
+
+test('definite upstream outage stops dispatch after the in-flight pair and preserves queued work',async()=>{
+ const h=await harness([{errorCode:'UPSTREAM_UNAVAILABLE'}],{newPolicy:true});
+ try {
+  await seedIndependentJobs(h,8);const before=h.calls.n;
+  const result=await h.drain();assert.equal(result.completed,0);assert.ok(h.calls.n-before<=2);
+  assert.equal((await h.db.prepare("SELECT COUNT(*) n FROM learning_evaluation_jobs WHERE state='queued'").first()).n,8);
+ }finally{await h.mf.dispose();}
+});
+
+test('a later turn reports its own predecessor and never skips the resource fence',async()=>{
+ const h=await harness([{errorCode:'UPSTREAM_UNAVAILABLE'}],{newPolicy:true});
+ try {
+  assert.equal((await h.submit()).status,202);
+  const response=await h.mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',{method:'POST',headers:{'content-type':'application/json',origin:'https://yw.bdfz.net'},
+   body:JSON.stringify({lessonId:'lesson-1458',interaction:'structure',input:{reason:'合成第二輪：比較兩处前後照應與語勢轉折，說明結構的推進。'},clientMutationId:'later-turn-fixture'})});
+  assert.equal(response.status,202);
+  const status=await h.mf.dispatchFetch('https://yw.bdfz.net/api/learning/pending-interactions?clientMutationId=later-turn-fixture');
+  const body=await status.json();assert.equal(body.phase,'waiting_previous');assert.equal(body.canStartNewTurn,false);assert.equal(body.nextAttemptAt,null);
+  assert.equal(h.calls.n,1);assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM learning_interactions').first()).n,0);
+ }finally{await h.mf.dispose();}
 });
