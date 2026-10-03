@@ -21,6 +21,11 @@ export async function hasOwnerExtraAttempt(env,job,now=Date.now()) {
     .map(x=>x.toString(16).padStart(2,'0')).join('');
   return expected.includes(hash);
 }
+async function hasLostReplyRecovery(db,job) {
+  return Boolean(await db.prepare(`SELECT 1 FROM learning_evaluation_events WHERE source_event_id=?
+    AND action='ai.retry' AND json_extract(payload_json,'$.context.sourceContext.reason')='owner_approved_lost_reply_recovery'
+    LIMIT 1`).bind(job.source_event_id).first());
+}
 // Apply the new bounded outage policy only to new submissions. Existing jobs
 // retain their original budget; the explicitly scoped old job gets call five only.
 export const TRANSIENT_RECOVERY_POLICY = Object.freeze({
@@ -48,6 +53,9 @@ async function transientHistory(db,job,calls,currentFailure=false) {
   return Number(facts?.replies)===0 && Number(facts?.failures)===calls-(currentFailure?1:0);
 }
 export async function evaluationCallLimit(env,job,now=Date.now()) {
+  // The durable grant survives configuration expiry and cannot become a third
+  // call after a restart, another scan or a changed error classification.
+  if(env?.READING_DB && job?.source_event_id && await hasLostReplyRecovery(env.READING_DB,job)) return 2;
   if(job?.lease_epoch===5 && await hasOwnerExtraAttempt(env,job,now)) return 5;
   if(recoveryExpired(job,now)) return 0;
   if(usesTransientRecovery(job) && env?.READING_DB) {
@@ -168,8 +176,9 @@ export async function deferEvaluationJob(db,job,error,now=Date.now()) {
     && (definiteTransient || error?.code==='learning_evaluator_budget_exhausted')
     && count>=JOB_POLICY.maxCalls && count<TRANSIENT_RECOVERY_POLICY.maxCalls
     && await transientHistory(db,job,count,definiteTransient);
+  const lostReplyRecovery=await hasLostReplyRecovery(db,job);
   const state=reply ? 'queued' : ambiguous ? 'uncertain'
-    : recoveryExpired(job,now) || (count>=JOB_POLICY.maxCalls && !extended) ? 'blocked'
+    : lostReplyRecovery || recoveryExpired(job,now) || (count>=JOB_POLICY.maxCalls && !extended) ? 'blocked'
     : temporary || invalidReply ? 'queued' : 'blocked';
   const delays=extended?TRANSIENT_RECOVERY_POLICY.delays:[60_000,300_000,900_000];
   const delay=delays[Math.min(delays.length-1,Math.max(0,count-1))];
@@ -273,6 +282,31 @@ export async function drainEvaluationJobs(env,execute,now=Date.now()) {
           retryKind:reply?'automatic':null,executionKind:reply?'local_commit_only':'transport_unknown'}});
       await db.batch([db.prepare(`UPDATE learning_evaluation_jobs SET state=?,last_error_class='expired_execution'
         WHERE source_event_id=? AND lease_epoch=? AND state=?`).bind(state,job.source_event_id,job.lease_epoch,job.state),statement]);
+    }
+
+    // One explicitly reviewed lost response may be regenerated in the original
+    // job. Scope and expiry reuse the existing owner grant; no other uncertain
+    // job is retried, and the immutable grant permanently caps it at two calls.
+    if(env.YW_EVALUATION_ONE_SHOT_MODE==='lost_reply' && oneShotScope(env,now)?.length===1) {
+      const candidates=await db.prepare(`SELECT * FROM learning_evaluation_jobs WHERE state='uncertain'
+        AND lease_epoch=1 AND last_error_class='expired_execution' ORDER BY first_pending_at LIMIT 50`).all();
+      for(const job of candidates.results || []) {
+        if(!await hasOwnerExtraAttempt(env,job,now) || await latestEvaluationReply(db,job.source_event_id)
+          || await hasLostReplyRecovery(db,job)) continue;
+        const calls=await db.prepare('SELECT COUNT(*) n FROM learning_evaluator_calls WHERE source_event_id=?').bind(job.source_event_id).first();
+        const failure=await latestSourceEvent(db,job.source_event_id,'ai.failure',1);
+        const request=await latestSourceEvent(db,job.source_event_id,'ai.request',1);
+        if(Number(calls?.n)!==1 || !request || !failure
+          || JSON.parse(failure.payload_json).context.sourceContext.reason!=='expired_execution') continue;
+        const at=new Date(now).toISOString();
+        const event=await sourceEventStatement(db,evaluationEventBase(job),{action:'ai.retry',kind:'retry',
+          key:'owner-lost-reply-2',parentId:failure.event_id,at,sourceContext:{leaseEpoch:1,jobState:'queued',
+            reason:'owner_approved_lost_reply_recovery',retryKind:'reconciliation',executionKind:'apis_call',
+            recoveryBasis:'owner_reviewed_upstream_success',maxAdditionalCalls:1,nextAttemptAt:at}});
+        await db.batch([db.prepare(`UPDATE learning_evaluation_jobs SET state='queued',next_attempt_at=?,last_error_class='owner_approved_lost_reply_recovery'
+          WHERE source_event_id=? AND state='uncertain' AND lease_epoch=1`).bind(now,job.source_event_id),event]);
+        break;
+      }
     }
 
     // The one additional owner-approved request requires four definite APIS

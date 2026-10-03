@@ -1,3 +1,11 @@
+## 2026-10-03 detached evaluation and original-result recovery candidate
+
+A real saved study-guide submission reached APIS successfully but the foreground Pages invocation did not persist its response. The exact connection termination cause is unproven. Durable submissions now return202 after saving the answer and pinned evaluation snapshot; only the independent minute scheduler starts evaluation. The signed machine endpoint keeps its execution alive while saving the provider result even if its caller disconnects. Existing result polling/reload, scoring and native content contracts stay compatible.
+
+One reviewed original uncertain job is scoped by SHA256 and an expiry at2026-10-03T05:30Z. It may receive one replacement evaluation in the same job only after the original request and expired-execution evidence are verified, with no saved reply. Its immutable reconciliation event permanently caps total calls at2. All original answers, snapshots, calls and events remain; other uncertain jobs do not gain an automatic retry. A failed bounded replacement requires diagnosis and a new reviewed recovery action, not silent success or erased history.
+
+Candidate only until paired Pages/scheduler publication and individual source/central acceptance. Runtime rollback: Pages5ef8426e-2f9b-4a5d-a867-2d0ee24b1478/source3109ae27; schedulerbca419d0-b562-472e-88b7-aa0783c0873f/sourcee79fdd5c. Preserve all forward data. Evidence: /Users/ylsuen/CF/reports/operations/yw-evaluation-durable-20261003/. This improves reliability of existing self-study lessons; it adds no lesson or App release.
+
 ## 2026-09-29 mobile question readability released
 
 Pages `5ef8426e-2f9b-4a5d-a867-2d0ee24b1478`, runtime source `3109ae27f5269a0beb312ab36294ccbd13b1570d` (PR72).
