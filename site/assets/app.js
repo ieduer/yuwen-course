@@ -3341,9 +3341,9 @@ function renderCheckStage(lesson) {
   `; }).join("");
   checkStageBindings?.abort();
   if (sameScope) {
-    // Patch only children; the permanent stage's class/id belong to index.html.
-    nextStage.className = els.checkStage.className;
-    nextStage.id = els.checkStage.id;
+    // The permanent host's attributes include the identity layer's inert gate.
+    // Only its children belong to this renderer.
+    for (const { name, value } of els.checkStage.attributes) nextStage.setAttribute(name, value);
     patchCheckStageNode(els.checkStage, nextStage);
   } else {
     els.checkStage.replaceChildren(...nextStage.childNodes);

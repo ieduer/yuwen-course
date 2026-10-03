@@ -753,7 +753,10 @@ try {
       scrollTo({ top: field.getBoundingClientRect().top + scrollY - 160, behavior: "instant" });
       window.__draftField = field;
       window.__draftTop = field.getBoundingClientRect().top;
+      els.checkStage.setAttribute("aria-busy", "true");
       for (let i = 0; i < 3; i += 1) renderCheckStage(state.current);
+      if (els.checkStage.getAttribute("aria-busy") !== "true") throw new Error("Stage host attributes changed");
+      els.checkStage.removeAttribute("aria-busy");
     });
     completed=true;
     await stablePage.waitForFunction(()=>lessonProgress(state.current.id).structure.result?.score===85,null,{timeout:10000});
