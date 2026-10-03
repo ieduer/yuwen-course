@@ -1,6 +1,6 @@
-## 2026-10-03 viewport stability candidate
+## 2026-10-03 viewport stability released and accepted
 
-Candidate only, pending serial Pages publication after the AI latency release.
+Runtime source `da038fa268c400e79e4a20f29e98b572acfe4ae6` (PR77), Pages `b3db4a02-d625-470b-a24f-3b0b8d41d2e4`, effective 2026-10-03 08:52:25 UTC. Preview `c822746a-6000-45b9-bfb7-6edcb1dca93d` and production accepted; both domains serve the exact HTML-referenced versioned assets. Formal artifact aggregate `9fe0a1c8d90b64a537c653f147f4ac390b4abd606723836f8e7a9c0b037e4f2d` (1232 files).
 Answer-stage refresh now preserves keyed live controls and visible anchors within
 the same lesson, owner, identity mode and first-read session. Unsent study-guide
 forms, Chinese composition, focus and selection survive background results;
@@ -19,9 +19,9 @@ calls or production answers. Worker, scheduler, learning content, scoring,
 identity contracts and native App content are unchanged; App disposition is
 compatible-no-client-release. Existing self-study lesson count is unchanged.
 
-Exact source/preview/live acceptance and rollback will be recorded in
-`/Users/ylsuen/CF/reports/operations/yw-scroll-20261003/REPORT.md`. Never overwrite
-the active AI task's release window or roll back its accepted changes.
+Acceptance: 82 focused checks, dual-Node CI and desktop/mobile browser regression pass. Authenticated production 1280/390px rendering, identity gate, no overflow, focused input position and reload verified without new learner answers or model calls. Precontent's two macOS synthetic touch checks retain the documented baseline limitation. Bare immutable `assets/app.js` may retain an old cache entry; verify the versioned URL referenced by HTML. Only the exactly identified Cloudflare hidden content link is normalized in raw HTML parity checks; no cache/security settings changed.
+
+[Release evidence](/Users/ylsuen/CF/reports/operations/yw-scroll-20261003/REPORT.md). [Public update](https://status.bdfz.net/?update=yw-viewport-stability-20261003&revision=1). Immediate rollback: Pages `8e5b0262-68a0-4d42-8679-c44f5da0d577`, source `ce9326c1a02a01ba14415ca713ee6a464cfdf543`, using a fresh governed transaction and preserving forward data. Scheduler remains `dc6ab044-c426-4107-bd8f-60df41987129` at100%; its accepted AI behavior is retained.
 
 ## 2026-10-03 AI progress and recovery released and accepted
 
