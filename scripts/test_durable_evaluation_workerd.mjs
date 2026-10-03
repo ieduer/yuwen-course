@@ -46,17 +46,14 @@ test('real workerd/D1 preserves a 202 submission across independent foreground a
     const body={lessonId:'lesson-1458',interaction:'structure',input:{reason:'合成測試：比較兩處字句的前後照應，並說明文章結構推進。'},clientMutationId:'workerd-durable-fixture'};
     const request=()=>({method:'POST',headers:{'content-type':'application/json',origin:'https://yw.bdfz.net'},body:JSON.stringify(body)});
     const scheduler=await mf.getWorker('scheduler');
-    const foregroundAbort=new AbortController();
-    const response=await mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',{...request(),signal:foregroundAbort.signal}),pending=await response.json();
-    foregroundAbort.abort(); // The browser request has ended before any AI runs.
-    assert.equal(response.status,202,JSON.stringify(pending));assert.ok(pending.pendingId);assert.equal(attempts,0);
-    assert.equal((await mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',request())).status,202);assert.equal(attempts,0);
+    const response=await mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',request()),pending=await response.json();
+    assert.equal(response.status,202,JSON.stringify(pending));assert.ok(pending.pendingId);assert.equal(attempts,1);
+    assert.equal((await mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',request())).status,202);assert.equal(attempts,1);
     assert.equal((await db.prepare('SELECT COUNT(*) n FROM learning_interactions').first()).n,0);
-    await scheduler.fetch('https://fixture.invalid/');assert.equal(attempts,1);
     await db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
     const drained=await scheduler.fetch('https://fixture.invalid/');assert.equal(drained.status,200);
     assert.equal((await drained.json()).completed,1);assert.equal(attempts,2);
-    assert.equal((await db.prepare('SELECT COUNT(*) n FROM learning_evaluation_machine_nonces').first()).n,2);
+    assert.equal((await db.prepare('SELECT COUNT(*) n FROM learning_evaluation_machine_nonces').first()).n,1);
     const health=await (await (await mf.getWorker('health-probe')).fetch('https://fixture.invalid/')).json();
     assert.equal(health.schema,'yw-evaluation-health-v1');assert.equal(health.pendingCount,0);
     assert.equal(health.backgroundEnabled,true);assert.ok(health.lastSuccessfulScanAt);
@@ -93,7 +90,7 @@ async function harness(answers,{newPolicy=false}={}) {
         if(!/^\/data\/[a-zA-Z0-9_./-]+\.json$/.test(pathname)||pathname.includes('..'))return new Response('not found',{status:404});
         try{return new Response(readFileSync(resolve(ROOT,'site'+pathname)),{headers:{'content-type':'application/json'}});}catch{return new Response('not found',{status:404});}},
       APIS(){const answer=answers[Math.min(calls.n,answers.length-1)];calls.n++;
-        if(answer?.transportUnknown) throw new TypeError("synthetic transport interruption");
+        if(answer?.transportUnknown) throw new TypeError('synthetic transport interruption');
         if(answer?.errorCode) return Response.json({error_code:answer.errorCode},{status:503});
         return Response.json({answer,model:'gemini-3.8-flash',raw_response:{modelVersion:'fixture-revision'}});},
     },outboundService(){throw new Error('unexpected external request');},
@@ -112,12 +109,10 @@ async function harness(answers,{newPolicy=false}={}) {
   await db.prepare('INSERT INTO students(id,uc_slug,display_name,uc_user_id,identity_verified_at) VALUES(7,?,?,42,?)')
     .bind('durable-workerd-fixture','Fixture',new Date().toISOString()).run();
   const body={lessonId:'lesson-1458',interaction:'structure',input:{reason:'合成測試：比較兩處字句的前後照應，並說明文章結構推進。'},clientMutationId:'workerd-invalid-reply-fixture'};
-  const submit=async({background=true}={})=>{
+  const submit=async()=>{
     const response=await mf.dispatchFetch('https://yw.bdfz.net/api/interaction-check',{method:'POST',
       headers:{'content-type':'application/json',origin:'https://yw.bdfz.net'},body:JSON.stringify(body)});
     if(!newPolicy) await db.prepare('UPDATE learning_evaluation_jobs SET first_pending_at=?').bind(Date.parse('2026-09-29T04:19:00Z')).run();
-    // Existing recovery cases begin after one independent scheduled attempt.
-    if(background) await (await mf.getWorker('scheduler')).fetch('https://fixture.invalid/');
     return response;
   };
   const drain=async()=>{await db.prepare('UPDATE learning_evaluation_jobs SET next_attempt_at=0').run();
@@ -324,8 +319,12 @@ test('new recovery expires after 24 hours and ambiguous outcomes remain uncertai
 
 async function lostReplyFixture(result=VALID) {
   const h=await harness([null,result],{newPolicy:true});
-  await h.submit({background:false});
-  assert.equal(h.calls.n,0,'the user request must not start AI');
+  // Simulate a claim conflict while capturing a synthetic pending job. Only
+  // this local D1 fixture uses the trigger; remove it before normal execution.
+  await h.db.prepare(`CREATE TRIGGER fixture_defer_claim BEFORE UPDATE OF state ON learning_evaluation_jobs
+    WHEN NEW.state='leased' BEGIN SELECT RAISE(IGNORE); END`).run();
+  await h.submit();assert.equal(h.calls.n,0);
+  await h.db.prepare('DROP TRIGGER fixture_defer_claim').run();
   const {claimEvaluationJob}=await import('../site/durable-evaluation-jobs.js');
   const {sourceEventStatement,evaluationEventBase,evaluationEventId}=await import('../site/learning-evaluation-events.js');
   const row=await h.db.prepare('SELECT source_event_id FROM learning_evaluation_jobs').first();
@@ -381,5 +380,16 @@ for(const invalid of ['missing-mode','wrong-job','expired']) test(`lost-response
     if(invalid==='wrong-job')scope.YW_EVALUATION_ONE_SHOT_SHA256='ab'.repeat(32);
     if(invalid==='expired')scope.YW_EVALUATION_ONE_SHOT_UNTIL=new Date(Date.now()-1000).toISOString();
     await h.configure(scope);await h.drain();assert.equal(h.calls.n,1);assert.equal((await h.job()).state,'uncertain');
+  } finally {await h.mf.dispose();}
+});
+
+test('successful submissions return their immediate result without waiting for the scheduler',async()=>{
+  const h=await harness([VALID]);
+  try {
+    const response=await h.submit();assert.equal(response.status,200);
+    assert.equal(h.calls.n,1);assert.equal((await h.job()).state,'completed');
+    assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM learning_evaluation_replies').first()).n,1);
+    assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM learning_interactions').first()).n,1);
+    await h.drain();assert.equal(h.calls.n,1);
   } finally {await h.mf.dispose();}
 });
