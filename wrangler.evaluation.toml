@@ -28,6 +28,12 @@ binding = "PULSE_ALERTS"
 service = "pulse"
 entrypoint = "PlatformErrorAlerts"
 
+# Same source-scoped, read-only receipt contract already used by Pages.
+[[services]]
+binding = "USER_CENTER_EVIDENCE"
+service = "bdfz-user-center"
+entrypoint = "YuwenEvidenceIdentity"
+
 [observability]
 enabled = true
 head_sampling_rate = 1

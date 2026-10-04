@@ -33,6 +33,10 @@ export const TRANSIENT_RECOVERY_POLICY = Object.freeze({
   startsAt: Date.parse('2026-09-29T04:20:00.000Z'), maxCalls: 8, horizonMs: 86_400_000,
   delays: Object.freeze([60_000,300_000,900_000,3_600_000,10_800_000,21_600_000,43_200_000]),
 });
+// A definite gateway 503 is safe to retry without waiting five/fifteen minutes
+// during the first four-call window. Never accelerate 429, local capacity,
+// ambiguous transport, invalid replies, or the long outage recovery budget.
+export const EARLY_TRANSIENT_DELAYS = Object.freeze([30_000,60_000,120_000]);
 function usesTransientRecovery(job) {
   return Number.isFinite(job?.first_pending_at) && job.first_pending_at>=TRANSIENT_RECOVERY_POLICY.startsAt;
 }
@@ -201,7 +205,10 @@ export async function deferEvaluationJob(db,job,error,now=Date.now()) {
   const state=reply ? 'queued' : ambiguous ? 'uncertain'
     : lostReplyRecovery || recoveryExpired(job,now) || (count>=JOB_POLICY.maxCalls && !extended) ? 'blocked'
     : temporary || invalidReply ? 'queued' : 'blocked';
-  const delays=extended?TRANSIENT_RECOVERY_POLICY.delays:[60_000,300_000,900_000];
+  const earlyTransient=usesTransientRecovery(job) && error?.apisStatus===503
+    && ['DEADLINE_EXCEEDED','UPSTREAM_UNAVAILABLE'].includes(error?.apisCode);
+  const delays=extended?TRANSIENT_RECOVERY_POLICY.delays
+    :earlyTransient?EARLY_TRANSIENT_DELAYS:[60_000,300_000,900_000];
   const delay=delays[Math.min(delays.length-1,Math.max(0,count-1))];
   const jitter=Array.from(job.source_event_id+':'+job.lease_epoch).reduce((n,c)=>(n*31+c.charCodeAt(0))%10001,0);
   const reason=reply?'reply_saved':invalidReply?'invalid_reply':state==='blocked'?'automatic_limit_or_permanent_failure'
