@@ -1,22 +1,27 @@
-## 2026-10-04 — Same-lesson identity/render race repair candidate
+## 2026-10-04 — Same-lesson identity/render race released and accepted
 
-A same-lesson result/catalogue render during identity re-verification replaced the
-live editor with a pending projection. Successful same-owner hydration unlocked
-only the host, leaving five inert child rounds and a stale login notice. This
-does not require switching lessons. The repair defers same-scope answer rendering
-until identity settles, reconciles pending children, and restores only the same
-connected owner's editor/selection without scrolling. Unknown identity remains
-inert; account changes/logout discard prior authority and editor references.
+Runtime source `b26c3585e0c93d64b5079600650346d34a8b3ea5` (PR80); Pages `c6fbe908-2575-4dfa-bfbf-43743e3802f6`.
+Identity re-verification and an answer/result render could interleave without any
+lesson switch: old code left five inert child rounds and a stale login notice
+after the outer host recovered. Same-account rendering now waits until identity
+settles, then applies updates and restores the same connected editor/selection
+without scrolling. Account changes/logout still discard old authority and drafts.
 
-103 focused checks and desktop1280/mobile390 browser contracts pass. The actual
-submit-button fixture receives a successful response during identity checking,
-keeps the next draft/selection/position, accepts further typing without reload,
-and sends exactly one POST. Production learner answers/provider calls were not
-created. Worker, scoring, lesson data, shared contracts and App objects unchanged;
-compatible-no-client-release. Formal1232-file artifact changes only app/index and
-its marker. Publication and live acceptance remain pending. Existing self-study
-lesson count is unchanged. Exact evidence, publication and rollback authority:
-`/Users/ylsuen/CF/reports/operations/yw-auth-edit-20261004/REPORT.md`.
+103 focused tests, desktop1280/mobile390 actual submit/edit race, existing owner,
+logout, reconnect, delayed-result and route contracts pass. Both Node CI jobs
+passed. Formal1232-file artifact changes only app/index/release marker; Worker,
+scoring, content, shared contracts and all276App objects/pointer remain unchanged.
+Preview6eab31cc, both production domains, anonymous401 and exact config passed.
+Existing authenticated operator readback confirms unlocked controls, stable mobile
+focus/position and desktop normal reload. Actual submit/continued-typing race is
+verified with local synthetic responses; no production answers or provider calls.
+Physical mobile keyboard and affected student's exact browser remain untested.
+
+Immediate rollback: Pages `b3db4a02-d625-470b-a24f-3b0b8d41d2e4`, source
+`da038fa268c400e79e4a20f29e98b572acfe4ae6`, through a fresh governed transaction,
+preserving forward learner data. Compatible-no-client-release. Public update and
+closeout authority: `/Users/ylsuen/CF/reports/operations/yw-auth-edit-20261004/REPORT.md`.
+Existing self-study lesson count unchanged; six-site source review is untouched.
 
 ## 2026-10-03 viewport stability released and accepted
 
