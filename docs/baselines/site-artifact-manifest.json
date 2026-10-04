@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1232,
-  "totalBytes": 164599026,
-  "aggregateSha256": "27dad37745cb6cab0bf09e82537cf8b4ecc55d9f8bd722041dbb8dabd3ea6bcd",
+  "totalBytes": 164600233,
+  "aggregateSha256": "3634c4ce0bbf36a0ea127601ca5cef68227f82daef7896f72e07568abd0e0cd7",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "0cad12acf3ef97bca0d33153af2f835fe5a269625fae76ae3716b446f000a438"
+      "sha256": "643f091b908b03fc1f0992496d97984727774ee6f829f29b53be8d67faa2431f"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -6032,8 +6032,8 @@
     },
     {
       "path": "durable-evaluation-jobs.js",
-      "bytes": 33559,
-      "sha256": "1729e34556ea5e1b2e91ff9905557a3d21cb65b1a346418c1ef8365cb69153cd"
+      "bytes": 34069,
+      "sha256": "904e94fa8751a2a9abd9a8b19d883ec1fb44923c3b63ba76058b610d00c979c1"
     },
     {
       "path": "evaluation-machine.js",
@@ -6042,8 +6042,8 @@
     },
     {
       "path": "evaluation-scheduler.js",
-      "bytes": 1154,
-      "sha256": "5a89a5098a1c60dd4c1225db5fc5eb8180b79eb4ea7e7e18e5e821cf745ecdab"
+      "bytes": 1851,
+      "sha256": "2f3c20334592b79cf98389b2b4b510a5c5f780f916a293c81fd78f9bceaa8db3"
     },
     {
       "path": "evaluator-recovery.js",

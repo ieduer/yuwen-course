@@ -78,7 +78,7 @@ test('real workerd/D1 preserves a 202 submission across independent foreground a
 
 // Invalid replies: preserved, never reused, retried within the four-call budget.
 const VALID=JSON.stringify({score:85,verdict:'fixture verdict',strength:'fixture strength',gap:'fixture gap',nextQuestion:'fixture question'});
-async function harness(answers,{newPolicy=false}={}) {
+async function harness(answers,{newPolicy=false,schedulerReceipts=false}={}) {
   const calls={n:0};
   const common={compatibilityDate:'2026-05-12',modules:true,modulesRoot:ROOT,
     modulesRules:[{type:'ESModule',include:['**/*.js']}],
@@ -92,14 +92,25 @@ async function harness(answers,{newPolicy=false}={}) {
       async APIS(){let answer=answers[Math.min(calls.n,answers.length-1)];calls.n++;
         if(typeof answer==='function')answer=await answer();
         if(answer?.transportUnknown) throw new TypeError('synthetic transport interruption');
-        if(answer?.errorCode) return Response.json({error_code:answer.errorCode},{status:503});
+        if(answer?.errorCode) return Response.json({error_code:answer.errorCode},{status:answer.httpStatus||503,
+          headers:answer.retryAfter?{'retry-after':String(answer.retryAfter)}:{}});
         return Response.json({answer,model:'gemini-3.8-flash',raw_response:{modelVersion:'fixture-revision'}});},
     },outboundService(){throw new Error('unexpected external request');},
   };
   const options=(extra={})=>({log:new Log(LogLevel.NONE),workers:[
     {...common,bindings:{...common.bindings,...extra},name:'foreground',scriptPath:resolve(ROOT,'site/_worker.js')},
-    {...common,serviceBindings:{},bindings:{YW_BACKGROUND_EVALUATION_ENABLED:'true',YW_EVALUATION_MACHINE_SECRET:'cd'.repeat(32),...extra},
+    {...common,serviceBindings:schedulerReceipts?{USER_CENTER_EVIDENCE:{name:'receipts',entrypoint:'Receipts'}}:{},bindings:{YW_BACKGROUND_EVALUATION_ENABLED:'true',YW_EVALUATION_MACHINE_SECRET:'cd'.repeat(32),...extra},
       name:'scheduler',scriptPath:resolve(ROOT,'scripts/fixtures/durable-scheduler-harness.js'),outboundService:'foreground'},
+    ...(schedulerReceipts?[{name:'receipts',compatibilityDate:'2026-05-12',modules:true,
+      d1Databases:{READING_DB:'durable-evaluation-fixture'},
+      script:`import {WorkerEntrypoint} from 'cloudflare:workers';
+        export class Receipts extends WorkerEntrypoint {
+          async getLearningEvidenceDeliveryReceipts(ids) {
+            await this.env.READING_DB.prepare('INSERT INTO fixture_receipt_reads(n) VALUES(?)').bind(ids.length).run();
+            return {schemaVersion:'bdfz-learning-evidence-delivery-receipts-v1',sourceSiteKey:'yw',contractVersion:'yw-aplus-e310-v2',
+              receipts:ids.map(sourceAttemptId=>({sourceAttemptId,disposition:'accepted'}))};
+          }
+        } export default {fetch(){return new Response('unused',{status:404})}};`}]:[]),
   ]});
   const mf=new Miniflare(options());
   let db=await mf.getD1Database('READING_DB','foreground');
@@ -258,6 +269,69 @@ for(const successful of [true,false]) test(`frozen two-job scope serializes gran
     assert.deepEqual(rows.map(j=>j.state),successful?['completed','completed']:['blocked','blocked']);
     assert.deepEqual(rows.map(j=>j.lease_epoch),successful?[5,5]:[5,4]);
     assert.equal((await h.db.prepare("SELECT COUNT(*) n FROM learning_evaluation_events WHERE action='ai.failure'").first()).n,successful?8:9);
+  } finally {await h.mf.dispose();}
+});
+
+for(const errorCode of ['DEADLINE_EXCEEDED','UPSTREAM_UNAVAILABLE']) test(`definite ${errorCode} retries promptly without resetting calls or the original submission`,async()=>{
+  const f={errorCode},h=await harness([f,f,f,VALID],{newPolicy:true});
+  try {
+    await h.submit();
+    const original=await h.db.prepare('SELECT submitted_payload_json FROM learning_submission_records').first();
+    for(let n=1;n<=3;n++) {
+      const j=await h.db.prepare('SELECT * FROM learning_evaluation_jobs').first();
+      const failure=(await h.facts()).filter(x=>x.action==='ai.failure').at(-1);
+      const delay=j.next_attempt_at-Date.parse(failure.occurredAt);
+      assert.equal(j.state,'queued');assert.equal(h.calls.n,n);
+      assert(delay>=[30_000,60_000,120_000][n-1] && delay<=[40_000,70_000,130_000][n-1],`unexpected delay ${delay}`);
+      await (await h.mf.getWorker('scheduler')).fetch('https://fixture.invalid/');
+      assert.equal(h.calls.n,n,'natural tick must still honor the retry clock');
+      await h.drain();
+    }
+    assert.equal((await h.job()).state,'completed');assert.equal(h.calls.n,4);
+    assert.deepEqual(await h.db.prepare('SELECT submitted_payload_json FROM learning_submission_records').first(),original);
+    assert.equal((await h.facts()).filter(x=>x.action==='evaluation.result').length,1);
+    await h.drain();assert.equal(h.calls.n,4);
+  } finally {await h.mf.dispose();}
+});
+
+for(const httpStatus of [429,503]) test(`HTTP ${httpStatus} Retry-After remains a hard floor for accelerated recovery`,async()=>{
+  const h=await harness([{errorCode:'UPSTREAM_UNAVAILABLE',httpStatus,retryAfter:600}],{newPolicy:true});
+  try {
+    await h.submit();const j=await h.db.prepare('SELECT * FROM learning_evaluation_jobs').first();
+    const failure=(await h.facts()).find(x=>x.action==='ai.failure');
+    const delay=j.next_attempt_at-Date.parse(failure.occurredAt);
+    assert(delay>=600_000 && delay<=610_000);assert.equal(h.calls.n,1);
+    await (await h.mf.getWorker('scheduler')).fetch('https://fixture.invalid/');assert.equal(h.calls.n,1);
+  } finally {await h.mf.dispose();}
+});
+
+test('429 without Retry-After retains the existing five-minute second backoff',async()=>{
+  const h=await harness([{errorCode:'UPSTREAM_UNAVAILABLE',httpStatus:429}],{newPolicy:true});
+  try {
+    await h.submit();await h.drain();const j=await h.db.prepare('SELECT * FROM learning_evaluation_jobs').first();
+    const failure=(await h.facts()).filter(x=>x.action==='ai.failure').at(-1);
+    const delay=j.next_attempt_at-Date.parse(failure.occurredAt);
+    assert(delay>=300_000 && delay<=310_000);assert.equal(h.calls.n,2);
+  } finally {await h.mf.dispose();}
+});
+
+test('idle scheduled ticks reconcile exact central receipts without a browser, delivery replay or model call',async()=>{
+  const h=await harness([VALID],{newPolicy:true,schedulerReceipts:true});
+  try {
+    await h.db.prepare('CREATE TABLE fixture_receipt_reads(n INTEGER)').run();
+    assert.equal((await h.submit()).status,200);assert.equal(h.calls.n,1);
+    const before=await h.db.prepare('SELECT envelope_json,delivery_attempts FROM evidence_outbox').first();
+    assert.equal((await h.db.prepare('SELECT central_disposition FROM evidence_outbox').first()).central_disposition,null);
+    await h.configure({YW_BACKGROUND_EVALUATION_ENABLED:'false'});
+    await (await h.mf.getWorker('scheduler')).fetch('https://fixture.invalid/');
+    assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM fixture_receipt_reads').first()).n,0);
+    await h.configure({YW_BACKGROUND_EVALUATION_ENABLED:'true'});
+    await (await h.mf.getWorker('scheduler')).fetch('https://fixture.invalid/');
+    assert.equal((await h.db.prepare('SELECT central_disposition FROM evidence_outbox').first()).central_disposition,'accepted');
+    assert.deepEqual(await h.db.prepare('SELECT envelope_json,delivery_attempts FROM evidence_outbox').first(),before);
+    await (await h.mf.getWorker('scheduler')).fetch('https://fixture.invalid/');
+    assert.equal((await h.db.prepare('SELECT COUNT(*) n FROM fixture_receipt_reads').first()).n,1);
+    assert.equal(h.calls.n,1);assert.equal((await h.facts()).filter(x=>x.action==='evaluation.result').length,1);
   } finally {await h.mf.dispose();}
 });
 

@@ -1,3 +1,28 @@
+## 2026-10-04 — Evaluation backlog prevention candidate
+
+User authorized incident recovery and prevention. Candidate retains immediate
+evaluation, all source history, four/eight-call ceilings and the 24-hour recovery
+horizon. Only definite transient APIS503 responses on current-policy jobs use
+30/60/120-second early retry delays plus existing jitter. Retry-After remains a
+hard floor; 429, capacity, uncertain transport, invalid replies and the long
+outage backoff retain their accepted behavior. Existing queued deadlines are
+not rewritten and expired grants stay expired.
+
+The existing minute scheduler additionally reads at most20 central delivery
+receipts through the same YuwenEvidenceIdentity contract used by Pages. It uses
+the existing per-row CAS/15-minute receipt lease, creates no central evidence,
+never resends the outbox, and also runs on idle ticks when the learner leaves.
+USER_CENTER_EVIDENCE is the scheduler's only added binding. No shared hub code,
+model policy, schema, assessment rubric, learning content or App pointer changes.
+
+Incident submissions have naturally reached12/12 source results; central
+readback and final source receipt reconciliation remain part of acceptance.
+Candidate local regression and exact-artifact verification precede the paired
+Pages/scheduler guarded release. Current baseline: Pagesc6fbe908/b26c358,
+schedulerdc6ab044/ce9326c. Preserve both as rollback and preserve forward data.
+Live recovery, deployment and prevention acceptance remain separate claims.
+Single task record: /Users/ylsuen/CF/reports/operations/yw-backlog-20261004/REPAIR.md.
+
 ## 2026-10-04 — Same-lesson identity/render race released and accepted
 
 Runtime source `b26c3585e0c93d64b5079600650346d34a8b3ea5` (PR80); Pages `c6fbe908-2575-4dfa-bfbf-43743e3802f6`.
