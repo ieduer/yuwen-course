@@ -902,8 +902,103 @@ try {
       === document.querySelector("#text-flow").firstElementChild), true,
     "overlapping recovery events must retain the same reader");
 
+    // A result/catalogue render can arrive while identity is being checked.
+    // The old implementation leaves pending child gates after the host unlocks.
     await stablePage.evaluate(() => {
       window.__healthySession = window.BdfzIdentity.getSession;
+      const session = firstReadForLesson(state.current.id), paragraph = session.asset.paragraphs[0];
+      session.annotatedReadCompleted = true;
+      session.marks = [{ markId: 'identity-race', paragraphKey: paragraph.key, startOffset: 0,
+        endOffset: 2, selectedText: paragraph.text.slice(0, 2), resolutionStatus: 'resolved',
+        resolution: 'fixture', guess: 'fixture' }];
+      lessonProgress().vocabulary = { done: true };
+      renderCheckStage(state.current);
+      const field = document.querySelector('[data-field="structure.reason"]');
+      window.__identityDraft = field;
+      field.value = "登入核對期間仍要保留的草稿";
+      field.focus({ preventScroll: true });
+      field.setSelectionRange(3, 6);
+      window.__identityDraftY = scrollY;
+      window.BdfzIdentity.getSession = async () => {
+        await new Promise(resolve => { window.__resumeIdentity = resolve; });
+        return window.__healthySession();
+      };
+      window.dispatchEvent(new Event("focus"));
+    });
+    await stablePage.waitForFunction(() => !interactionIdentityResolved && window.__resumeIdentity);
+    await stablePage.evaluate(() => {
+      renderCheckStage(state.current);
+      window.BdfzIdentity.getSession = window.__healthySession;
+      window.__resumeIdentity();
+    });
+    await stablePage.waitForFunction(() => interactionIdentityResolved && !sharedStateRefreshPromise);
+    assert.deepEqual(await stablePage.evaluate(() => ({
+      pending: document.querySelectorAll('#check-stage [inert]').length,
+      notice: document.querySelector('#check-stage').textContent.includes('正在確認登入'),
+      same: document.querySelector('[data-field="structure.reason"]') === window.__identityDraft,
+      value: document.querySelector('[data-field="structure.reason"]')?.value,
+      focused: document.activeElement === window.__identityDraft,
+      selection: [window.__identityDraft.selectionStart, window.__identityDraft.selectionEnd],
+      shift: Math.abs(scrollY - window.__identityDraftY),
+    })), { pending: 0, notice: false, same: true, value: "登入核對期間仍要保留的草稿",
+      focused: true, selection: [3, 6], shift: 0 },
+    "same-owner verification must settle every gate and preserve the live editor");
+
+    // Exercise the actual submit button and response handler, with no lesson
+    // switch. A successful POST arrives during a suspended identity check.
+    let releasePost, observePost, postCount = 0;
+    const postObserved = new Promise(resolve => { observePost = resolve; });
+    await stablePage.route(`${base}/api/interaction-check`, async route => {
+      postCount += 1;
+      observePost();
+      await new Promise(resolve => { releasePost = resolve; });
+      await route.fulfill({ json: { ok: true,
+        assessment: { score: 85, verdict: '合成提交成功', nextQuestion: '繼續比較' },
+        evidence: { status: 'already_recorded', sourceEventId: 'identity-post',
+          attemptNo: 2, eligibilityStatus: 'eligible' } } });
+    });
+    await stablePage.route(`${base}/api/learning/pending-interactions*`, route =>
+      route.fulfill({ status: 202, json: { ok: false, status: 'pending', submissions: [] } }));
+    await stablePage.locator('[data-field="structure.reason"]').fill(
+      '合成作答：比較兩處字句的前後照應，並且說明文章結構如何逐步推進中心觀點。');
+    await stablePage.locator('[data-ai-check="structure"]').click();
+    await postObserved;
+    await stablePage.locator('[data-field="structure.reason"]').fill('提交後不刷新繼續編輯的下一輪草稿');
+    await stablePage.evaluate(() => {
+      window.__identityDraft = document.querySelector('[data-field="structure.reason"]');
+      window.__identityDraft.setSelectionRange(2, 5);
+      window.__identityDraftY = scrollY;
+      window.BdfzIdentity.getSession = async () => {
+        await new Promise(resolve => { window.__resumeIdentity = resolve; });
+        return window.__healthySession();
+      };
+      window.dispatchEvent(new Event('focus'));
+    });
+    await stablePage.waitForFunction(() => !interactionIdentityResolved && window.__resumeIdentity);
+    releasePost();
+    await stablePage.waitForFunction(() => lessonProgress().structure.result?.verdict === '合成提交成功');
+    await stablePage.evaluate(() => {
+      window.BdfzIdentity.getSession = window.__healthySession;
+      window.__resumeIdentity();
+    });
+    await stablePage.waitForFunction(() => interactionIdentityResolved && !sharedStateRefreshPromise);
+    assert.deepEqual(await stablePage.evaluate(() => ({
+      same: document.querySelector('[data-field="structure.reason"]') === window.__identityDraft,
+      value: window.__identityDraft.value,
+      focused: document.activeElement === window.__identityDraft,
+      pending: document.querySelectorAll('#check-stage [inert]').length,
+      selection: [window.__identityDraft.selectionStart, window.__identityDraft.selectionEnd],
+      shift: Math.abs(scrollY - window.__identityDraftY),
+    })), { same: true, value: '提交後不刷新繼續編輯的下一輪草稿', focused: true,
+      pending: 0, selection: [2, 5], shift: 0 });
+    assert.equal(postCount, 1, 'recovery must not duplicate a successful submission');
+    await stablePage.locator('[data-field="structure.reason"]').press('End');
+    await stablePage.locator('[data-field="structure.reason"]').pressSequentially('，可以繼續');
+    assert.ok((await stablePage.locator('[data-field="structure.reason"]').inputValue()).includes('，可以繼續'));
+    await stablePage.unroute(`${base}/api/interaction-check`);
+    await stablePage.unroute(`${base}/api/learning/pending-interactions*`);
+
+    await stablePage.evaluate(() => {
       window.BdfzIdentity.getSession = async () => { throw new TypeError("offline"); };
       window.dispatchEvent(new Event("focus"));
     });
