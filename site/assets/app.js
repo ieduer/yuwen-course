@@ -45,6 +45,7 @@ let firstReadAuthorityGeneration = 0;
 let sharedStateUiScope = ANONYMOUS_UI_SCOPE;
 let progressOwnerScope = null;
 let interactionIdentityResolved = false;
+let identityPausedEditor = null;
 let pendingSharedReadingPosition = null;
 let pendingSharedTextScale = null;
 
@@ -418,6 +419,7 @@ function invalidateFirstReadSessions({ reload = true } = {}) {
 function setProgressOwnerScope(scope) {
   const nextScope = scope || null;
   if (progressOwnerScope === nextScope) return;
+  identityPausedEditor = null;
   state.pendingReplayController?.suspend(); state.evaluationStatusPoller?.suspend();
   state.recorderBridge?.suspend();
   progressOwnerScope = nextScope;
@@ -428,6 +430,15 @@ function setProgressOwnerScope(scope) {
 
 function setInteractionIdentityResolved(resolved, { preserveSessions = false } = {}) {
   const next = resolved === true;
+  if (!next && interactionIdentityResolved) {
+    const node = document.activeElement;
+    identityPausedEditor = preserveSessions
+      && node?.matches("input, textarea, select")
+      && (els.textFlow.contains(node) || els.checkStage.contains(node))
+      ? { node, ownerScope: progressOwnerScope, lessonId: state.current?.id,
+        start: node.selectionStart, end: node.selectionEnd, direction: node.selectionDirection }
+      : null;
+  }
   // Pause writes during re-verification without replacing the reader DOM.
   // A confirmed owner change still clears private state synchronously.
   els.textFlow.inert = !next;
@@ -439,6 +450,23 @@ function setInteractionIdentityResolved(resolved, { preserveSessions = false } =
   if (!preserveSessions) {
     invalidateFirstReadSessions();
     refreshLocalProgressViews();
+  } else if (next && (checkStageRenderDeferred || checkStageRenderScope?.identityMode === "pending")) {
+    // The host and its rendered children must settle together. A result or
+    // lesson may have arrived while identity was unknown.
+    if (state.current) renderCheckStage(state.current);
+  }
+  if (next) {
+    const editor = identityPausedEditor;
+    identityPausedEditor = null;
+    if (preserveSessions && editor?.ownerScope === progressOwnerScope
+      && editor.lessonId === state.current?.id && editor.node.isConnected
+      && !editor.node.closest("[inert]") && !editor.node.disabled
+      && (document.activeElement === document.body || document.activeElement === editor.node)) {
+      editor.node.focus({ preventScroll: true });
+      if (Number.isInteger(editor.start) && Number.isInteger(editor.end)) {
+        editor.node.setSelectionRange(editor.start, editor.end, editor.direction);
+      }
+    }
   }
 }
 
@@ -3223,6 +3251,7 @@ function renderInteractionBody(key, lesson, progress, blueprint) {
 // gets fresh nodes, so private state and old callback authority cannot cross over.
 let checkStageRenderScope = null;
 let checkStageBindings = null;
+let checkStageRenderDeferred = false;
 
 function checkStageNodeKey(node) {
   if (node.nodeType !== Node.ELEMENT_NODE) return `node:${node.nodeType}`;
@@ -3315,6 +3344,18 @@ function captureCheckStageViewport() {
 }
 
 function renderCheckStage(lesson) {
+  // Same-account re-verification freezes the host, not the draft underneath.
+  // Replacing it with a pending/locked projection loses the live controls and
+  // leaves nested inert gates behind when only the host is unlocked.
+  if (!interactionIdentityResolved && progressOwnerScope
+    && checkStageRenderScope?.lessonId === lesson.id
+    && checkStageRenderScope.ownerScope === progressOwnerScope
+    && checkStageRenderScope.identityMode !== "pending"
+    && checkStageRenderScope.session === (state.firstReads.get(lesson.id) || null)) {
+    checkStageRenderDeferred = true;
+    return;
+  }
+  checkStageRenderDeferred = false;
   const progress = lessonProgress();
   const blueprint = state.blueprints.get(blueprintKey(lesson)) || blueprintFallback(lesson);
   const track = trackFor(lesson);

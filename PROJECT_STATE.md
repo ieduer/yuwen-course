@@ -1,3 +1,23 @@
+## 2026-10-04 — Same-lesson identity/render race repair candidate
+
+A same-lesson result/catalogue render during identity re-verification replaced the
+live editor with a pending projection. Successful same-owner hydration unlocked
+only the host, leaving five inert child rounds and a stale login notice. This
+does not require switching lessons. The repair defers same-scope answer rendering
+until identity settles, reconciles pending children, and restores only the same
+connected owner's editor/selection without scrolling. Unknown identity remains
+inert; account changes/logout discard prior authority and editor references.
+
+103 focused checks and desktop1280/mobile390 browser contracts pass. The actual
+submit-button fixture receives a successful response during identity checking,
+keeps the next draft/selection/position, accepts further typing without reload,
+and sends exactly one POST. Production learner answers/provider calls were not
+created. Worker, scoring, lesson data, shared contracts and App objects unchanged;
+compatible-no-client-release. Formal1232-file artifact changes only app/index and
+its marker. Publication and live acceptance remain pending. Existing self-study
+lesson count is unchanged. Exact evidence, publication and rollback authority:
+`/Users/ylsuen/CF/reports/operations/yw-auth-edit-20261004/REPORT.md`.
+
 ## 2026-10-03 viewport stability released and accepted
 
 Runtime source `da038fa268c400e79e4a20f29e98b572acfe4ae6` (PR77), Pages `b3db4a02-d625-470b-a24f-3b0b8d41d2e4`, effective 2026-10-03 08:52:25 UTC. Preview `c822746a-6000-45b9-bfb7-6edcb1dca93d` and production accepted; both domains serve the exact HTML-referenced versioned assets. Formal artifact aggregate `9fe0a1c8d90b64a537c653f147f4ac390b4abd606723836f8e7a9c0b037e4f2d` (1232 files).
