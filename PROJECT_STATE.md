@@ -1,27 +1,48 @@
-## 2026-10-04 — Evaluation backlog prevention candidate
+## 2026-10-04 — Evaluation backlog recovery and prevention released
 
-User authorized incident recovery and prevention. Candidate retains immediate
-evaluation, all source history, four/eight-call ceilings and the 24-hour recovery
-horizon. Only definite transient APIS503 responses on current-policy jobs use
-30/60/120-second early retry delays plus existing jitter. Retry-After remains a
-hard floor; 429, capacity, uncertain transport, invalid replies and the long
-outage backoff retain their accepted behavior. Existing queued deadlines are
-not rewritten and expired grants stay expired.
+Runtime source `a9ccd3251395a85cca212728468223d60f59154c` (PR82). Pages
+`b611beec-2922-4ea4-90c1-d37a64a30da2` at 12:52 UTC; scheduler version
+`a58850fe-975a-4df5-b898-919c1f6c4a5b` at 100%, deployment
+`946d8145-6c4c-4512-9e5b-fe644b6c2313`, effective 12:52:58 UTC (20:52:58 Beijing).
 
-The existing minute scheduler additionally reads at most20 central delivery
-receipts through the same YuwenEvidenceIdentity contract used by Pages. It uses
-the existing per-row CAS/15-minute receipt lease, creates no central evidence,
-never resends the outbox, and also runs on idle ticks when the learner leaves.
-USER_CENTER_EVIDENCE is the scheduler's only added binding. No shared hub code,
-model policy, schema, assessment rubric, learning content or App pointer changes.
+The current-policy jobs with definite APIS 503 DEADLINE_EXCEEDED or
+UPSTREAM_UNAVAILABLE use 30/60/120-second early retry delays plus existing
+0–10-second jitter. Actual starts also depend on minute ticks, same-resource
+ordering and the unchanged per-student/global budgets. Retry-After is a hard
+floor. Four/eight-call lifetime ceilings, 24-hour horizon, 429/capacity/uncertain
+transport handling and 1/3/6/12-hour extended backoff remain unchanged. Existing
+queued deadlines are not rewritten; expired grants remain expired.
 
-Incident submissions have naturally reached12/12 source results; central
-readback and final source receipt reconciliation remain part of acceptance.
-Candidate local regression and exact-artifact verification precede the paired
-Pages/scheduler guarded release. Current baseline: Pagesc6fbe908/b26c358,
-schedulerdc6ab044/ce9326c. Preserve both as rollback and preserve forward data.
-Live recovery, deployment and prevention acceptance remain separate claims.
-Single task record: /Users/ylsuen/CF/reports/operations/yw-backlog-20261004/REPAIR.md.
+The existing minute scheduler now reads up to 20 central delivery receipts even
+on idle ticks, through the existing Pages YuwenEvidenceIdentity contract. The
+only added binding is USER_CENTER_EVIDENCE. Per-row CAS and 15-minute leases
+preserve ownership; the reader does not resend the outbox or create central
+evidence. Shared hubs, model policy, schema, rubric, content and App remain unchanged.
+
+Acceptance: 135 focused checks, 38 exact workerd/D1 cases, dual-Node CI, isolated
+preview and 16 production asset checks pass. Existing dedicated acceptance
+record returns the identical assessment by mutation/pending ID and on reload;
+mismatch 404/anonymous 401, unchanged history and session revocation pass. Original
+12 incident jobs have 12/12 source and central accepted; original/snapshot/result
+hashes and provider-call counts are unchanged. They completed naturally before
+this repair; do not attribute their model recovery to the later deployment.
+New-version natural ticks independently read central receipts. The post-cutover
+window (629 seconds) has 0 Worker errors and 0 host 5xx,
+with backlog 0 and recovered:ok. No production answer or diagnostic provider call.
+Retry timing is verified locally; future provider availability and one-hour/
+24-hour behavior are not promised or claimed measured. Existing Pulse remains
+the monitor; no new schedule was created.
+
+Rollback through a fresh governed transaction: Pages
+`c6fbe908-2575-4dfa-bfbf-43743e3802f6` (source b26c358); scheduler
+`dc6ab044-c426-4107-bd8f-60df41987129` (source ce9326c). Preserve all forward
+D1/central records and call ledgers. Compatible-no-client-release; all 276 App
+objects and latest-stable pointer unchanged.
+
+[Public update](https://status.bdfz.net/?update=yw-evaluation-recovery-20261004&revision=1).
+Single release, acceptance and rollback authority:
+/Users/ylsuen/CF/reports/operations/yw-backlog-20261004/REPAIR.md.
+This closeout changes documentation only; runtime remains a9ccd325.
 
 ## 2026-10-04 — Same-lesson identity/render race released and accepted
 
