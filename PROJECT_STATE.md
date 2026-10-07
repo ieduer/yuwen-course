@@ -1,3 +1,12 @@
+## 2026-10-07 — Indexed backlog query candidate
+
+Source-only candidate: the existing backlog aggregate uses two state-index ranges
+instead of scanning completed jobs. Output fields, NULL behavior, age thresholds,
+alerts, scheduler, retry budgets and all data stay unchanged. No migration or
+new index is required. In-memory SQLite tests cover state/age boundaries and
+require the existing index to be used. This candidate is not deployed; the
+paired Pages/scheduler release and acceptance gates remain required.
+
 ## 2026-10-04 — Evaluation backlog recovery and prevention released
 
 Runtime source `a9ccd3251395a85cca212728468223d60f59154c` (PR82). Pages

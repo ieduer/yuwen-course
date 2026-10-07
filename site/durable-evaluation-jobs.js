@@ -249,7 +249,7 @@ export async function evaluationBacklog(db,now=Date.now()) {
   const r=await db.prepare(`SELECT COUNT(*) AS pending_count,MIN(first_pending_at) AS oldest,
     SUM(state='blocked') AS blocked_count,SUM(state='uncertain') AS uncertain_count,
     SUM(first_pending_at<?) AS over_5m,SUM(first_pending_at<?) AS over_15m,SUM(first_pending_at<?) AS over_60m
-    FROM learning_evaluation_jobs WHERE state!='completed'`).bind(now-300000,now-900000,now-3600000).first();
+    FROM learning_evaluation_jobs WHERE (state<'completed' OR state>'completed')`).bind(now-300000,now-900000,now-3600000).first();
   const scheduler=await db.prepare('SELECT last_scan_at FROM learning_evaluation_scheduler WHERE id=1').first();
   const age=r?.oldest==null?0:Math.max(0,Math.floor((now-r.oldest)/1000));
   const stale=Number(r?.pending_count)>0 && (!scheduler?.last_scan_at || now-scheduler.last_scan_at>180000);
