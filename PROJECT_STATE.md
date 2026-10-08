@@ -1,3 +1,7 @@
+## Current dictionary candidate — 2026-10-08T15:11:00Z
+
+Owner Codex01a11bd0. Shared dictionary dock prepared and locally checked; full-source launch authorized, suen reviews after publication. VPS shared module and this host's formal release remain pending. Preserve all prior accepted learning/content/poll/data features and the existing rollback baseline. See the new dictionary section in the operations handbook.
+
 ## 2026-10-07 — Indexed backlog query candidate
 
 Source-only candidate: the existing backlog aggregate uses two state-index ranges
