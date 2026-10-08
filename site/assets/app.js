@@ -5138,24 +5138,44 @@ function openLexicon(text) {
 }
 
 function closeLexicon() {
+  ++dictionarySerial;
+  els.lexiconFrame.replaceChildren();
   window.getSelection()?.removeAllRanges();
   els.lexiconDock.classList.remove("open");
   els.body.classList.remove("lexicon-open");
   els.lexiconDock.setAttribute("aria-hidden", "true");
   if (state.lexiconReturnFocus?.focus) state.lexiconReturnFocus.focus({ preventScroll: true });
   state.lexiconReturnFocus = null;
-  setTimeout(() => { if (!els.lexiconDock.classList.contains("open")) els.lexiconFrame.src = "about:blank"; }, 260);
+  setTimeout(() => { if (!els.lexiconDock.classList.contains("open")) els.lexiconFrame.replaceChildren(); }, 260);
 }
 
-function updateLexiconFrame() {
+let dictionaryModule;
+let dictionarySerial = 0;
+async function updateLexiconFrame() {
+  const serial = ++dictionarySerial;
   const word = state.selectedText;
-  const firstHan = (word.match(/[\u3400-\u9fff]/) || [word.charAt(0)])[0];
-  const url = state.lexicon === "dict"
-    ? `https://sun.bdfz.net/dict.html?q=${encodeURIComponent(word.slice(0, 16))}`
-    : `https://zi.tools/zi/${encodeURIComponent(firstHan)}`;
-  els.lexiconFrame.src = url;
-  els.lexiconFrame.title = state.lexicon === "dict" ? `辭典：${word}` : `字統：${firstHan}`;
+  const source = state.lexicon === "dict" ? "moe-revised" : "zi";
+  const query = source === "zi" ? ([...word].find(c => /\p{Script=Han}/u.test(c)) || [...word][0]) : word;
+  els.lexiconFrame.textContent = "正在開啟辭典…";
   els.moeExternal.href = `https://dict.revised.moe.edu.tw/search.jsp?md=1&word=${encodeURIComponent(word.slice(0, 20))}`;
+  try {
+    dictionaryModule ||= import("https://dict.bdfz.net/v1/c41ff5236bdbd65171a719a90c4a23593b06fc8d/src/component.mjs").catch(error => { dictionaryModule = null; throw error; });
+    await dictionaryModule;
+    if (serial !== dictionarySerial || !els.lexiconDock.classList.contains("open")) return;
+    const reader = document.createElement("student-dictionary");
+    reader.setAttribute("presentation", "embedded");
+    reader.setAttribute("endpoint", "https://dict.bdfz.net/api/v1/read");
+    reader.setAttribute("link-sources", "zi");
+    els.lexiconFrame.replaceChildren(reader);
+    await reader.lookup(query, { source });
+  } catch {
+    if (serial !== dictionarySerial || !els.lexiconDock.classList.contains("open")) return;
+    const link = document.createElement("a");
+    link.href = `https://dict.bdfz.net/#source=${source}&q=${encodeURIComponent(query)}`;
+    link.target = "_blank"; link.rel = "noopener noreferrer";
+    link.textContent = "在新頁開啟辭典 ↗";
+    els.lexiconFrame.replaceChildren(link);
+  }
 }
 
 function preparePages(lesson) {
@@ -5308,7 +5328,8 @@ function toggleInlineNote(button) {
   }
 }
 
-function onSelection() {
+function onSelection(event) {
+  if (event?.target instanceof Node && els.lexiconDock.contains(event.target)) return;
   const lesson = state.current;
   const firstRead = firstReadForLesson(lesson?.id);
   if (firstRead && !firstRead.submitted) {
@@ -5466,8 +5487,8 @@ function bindEvents() {
     event.preventDefault();
     openResource({ href: image.currentSrc || image.src, title: image.alt || lessonTitle(state.current), kind: "image" });
   });
-  document.addEventListener("mouseup", () => setTimeout(onSelection, 0));
-  document.addEventListener("touchend", () => setTimeout(onSelection, 80));
+  document.addEventListener("mouseup", (event) => setTimeout(() => onSelection(event), 0));
+  document.addEventListener("touchend", (event) => setTimeout(() => onSelection(event), 80));
   let keyboardSelectionTimer = 0;
   document.addEventListener("selectionchange", () => {
     clearTimeout(keyboardSelectionTimer);

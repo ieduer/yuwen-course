@@ -1,3 +1,9 @@
+## 2026-10-08 — Shared dictionary candidate
+
+Selected-word lookup uses the shared student-dictionary component pinned to c41ff5236bdbd65171a719a90c4a23593b06fc8d at dict.bdfz.net. The component preserves the host URL/theme and disconnects on close. Definitions, source scans and rare fonts use the dictionary VPS with credentials omitted; no additional Worker query chain. Original source wording, explicit variants and source caveats remain visible. Host learning/poll/content/identity contracts remain unchanged. YW disposition: compatible-no-client-release; no native pointer or content mutation. Production acceptance and public Status remain pending the registered release transaction. Suen explicitly reviews after publication.
+
+Local browser acceptance used a synthetic anonymous identity response for YW and the real local CY dataset; selected text opens the panel, CY search returns12 results, close unmounts, URL unchanged, no horizontal overflow (YW558px/YQ447px). The YW global mouse/touch selection handler excludes dock-origin events, preventing recursive lookup resets. These are candidate checks, not production acceptance. Evidence: /Users/ylsuen/CF/sites/tools/unified-dictionary-candidate/evidence/local-backend/hosts-local.json.
+
 ## 2026-10-07 — Indexed backlog query candidate
 
 Source-only candidate: the existing backlog aggregate uses two state-index ranges
