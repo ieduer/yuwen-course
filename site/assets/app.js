@@ -5138,13 +5138,16 @@ function openLexicon(text) {
 }
 
 function closeLexicon() {
+  if (!els.lexiconDock.classList.contains("open")) return;
   ++dictionarySerial;
   els.lexiconFrame.replaceChildren();
   window.getSelection()?.removeAllRanges();
   els.lexiconDock.classList.remove("open");
   els.body.classList.remove("lexicon-open");
   els.lexiconDock.setAttribute("aria-hidden", "true");
-  if (state.lexiconReturnFocus?.focus) state.lexiconReturnFocus.focus({ preventScroll: true });
+  const previousFocus = state.lexiconReturnFocus;
+  const returnFocus = previousFocus?.isConnected && previousFocus !== document.body && !els.lexiconDock.contains(previousFocus) ? previousFocus : els.textFlow;
+  returnFocus.focus({ preventScroll: true });
   state.lexiconReturnFocus = null;
   setTimeout(() => { if (!els.lexiconDock.classList.contains("open")) els.lexiconFrame.replaceChildren(); }, 260);
 }
