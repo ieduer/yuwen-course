@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="https://img.bdfz.net/20250503004.webp">
   <meta name="theme-color" content="#f4f0e6">
   <title>課文 · 語文學習矩陣</title>
-  <link rel="stylesheet" href="assets/styles.css?v=e1743337c29ccf18">
+  <link rel="stylesheet" href="assets/styles.css?v=d0ce91cb6ab04425">
 </head>
 <body>
   <a class="skip-link" href="#textbook-text" data-same-tab>跳到正文</a>
@@ -190,8 +190,13 @@
     <div class="page-stage">
       <button class="page-arrow" id="page-prev" type="button" aria-label="上一頁">‹</button>
       <figure>
-        <img id="page-image" alt="教材原圖">
-        <figcaption id="page-caption"></figcaption>
+        <img id="page-image" alt="教材原圖" hidden>
+        <figcaption>
+          <span id="page-caption"></span>
+          <a id="page-pdf-link" target="_blank" rel="noopener noreferrer" hidden>在 PDF 中打開 ↗</a>
+          <button id="page-retry" type="button" hidden>重試</button>
+          <span id="page-note" role="status" aria-live="polite"></span>
+        </figcaption>
       </figure>
       <button class="page-arrow" id="page-next" type="button" aria-label="下一頁">›</button>
     </div>
@@ -219,6 +224,6 @@
   <script defer src="assets/learning-evidence.js?v=0462cf0c8a8fef60"></script>
   <script defer src="assets/vocab-progress.js?v=b96e88a1cad8df4e"></script>
   <script defer src="assets/classical-first-read.js?v=17a01bc7647e3e1a"></script>
-  <script defer src="assets/app.js?v=c59cd6f5b9512fe1"></script>
+  <script defer src="assets/app.js?v=23e98b3783e34775"></script>
 </body>
 </html>

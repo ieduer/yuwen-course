@@ -1,0 +1,23 @@
+{
+  "schema": "yw-textbook-page-overrides-v1",
+  "note": "Lesson-level anchors to the current edition, used only where no legacy page of the lesson has a page-map row. Each one is proven from the held PDF's own text layer (scripts/verify_textbook_page_overrides.py) and is distinct from legacy page-map rows.",
+  "overrides": [
+    {
+      "lessonId": "lesson-1570",
+      "book": "xuanbi-xia",
+      "pdfSha256": "7da9104e683d3378773969d46cc842b6fce8f83709a17c313a8aca02b334ac15",
+      "basis": "current-edition-text-layer",
+      "firstPdf": 52,
+      "lastPdf": 55,
+      "titleLine": "风景谈",
+      "authorLine": "茅盾",
+      "nextTitleLine": "秦腔",
+      "nextAuthorLine": "贾平凹",
+      "nextTitlePdf": 56,
+      "replacesLegacy": [53],
+      "verifiedOn": "2026-10-11",
+      "extractor": "pymupdf 1.28.2 page text",
+      "decision": "sun-consolidation-20261010 coordinator decision 3 (owner confirmation pending before release)"
+    }
+  ]
+}

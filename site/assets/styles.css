@@ -1206,6 +1206,12 @@ dialog[open] { animation: dialog-in .28s cubic-bezier(.2,.8,.2,1) both; }
 .page-stage figure { display: grid; height: 100%; min-height: 0; margin: 0; place-items: center; grid-template-rows: minmax(0,1fr) auto; }
 .page-stage img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .page-stage figcaption { width: 100%; padding: 8px; color: #cdd2cd; font-size: .7rem; text-align: center; }
+.page-stage img[hidden] { display: none; }
+.page-stage figcaption a,
+.page-stage figcaption button { margin-left: 10px; padding: 0; border: 0; color: #f0d9a8; background: transparent; font: inherit; text-decoration: underline; cursor: pointer; }
+.page-stage figcaption [hidden] { display: none; }
+#page-note { display: block; margin-top: 4px; color: #e9dcc0; }
+#page-note:empty { display: none; }
 .page-arrow { height: 100%; border: 0; color: #fff; background: transparent; font-size: 2rem; cursor: pointer; }
 .page-arrow:hover { background: rgba(255,255,255,.05); }
 .page-arrow:disabled { opacity: .2; cursor: default; }
@@ -1220,7 +1226,8 @@ dialog[open] { animation: dialog-in .28s cubic-bezier(.2,.8,.2,1) both; }
 
 .page-strip button { display: grid; grid-template-columns: 48px auto; gap: 8px; align-items: center; flex: 0 0 auto; padding: 5px 9px 5px 5px; border: 1px solid var(--rule); background: transparent; cursor: pointer; }
 .page-strip button.active { border-color: var(--accent); }
-.page-strip img { width: 48px; height: 68px; object-fit: cover; }
+.page-strip img { width: 48px; height: 68px; object-fit: cover; background: rgba(0,0,0,.08); }
+.page-strip img[hidden] { display: block; visibility: hidden; }
 .page-strip span { font-size: .68rem; }
 
 .resource-dialog { width: 96vw; height: 94vh; background: #111513; }
