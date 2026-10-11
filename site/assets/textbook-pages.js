@@ -61,10 +61,10 @@ export function plateLabel(page) {
   return page.printed ? `第 ${page.printed} 頁` : `PDF 第 ${page.pdf} 頁`;
 }
 
-// Opaque, bounded reference for the non-scoring "textbook page opened" trace.
-export function plateReference(data, bookId, pdfPage) {
-  const book = bookFor(data, bookId);
-  return book && validPage(book, pdfPage) ? `pdf:${book.pdfSha12}:${pdfPage}` : "";
+// The non-scoring "textbook page opened" trace keeps its existing `p<index>`
+// form (the legacy image index of the page shown); "" when the page has none.
+export function plateTraceLabel(page) {
+  return Number.isInteger(page?.legacyRef) && page.legacyRef >= 0 ? `p${page.legacyRef}` : "";
 }
 
 // state: "unavailable" (no page data), "absent" (lesson has no textbook pages),
@@ -87,21 +87,24 @@ export function lessonPlates(data, lessonId, { large = false } = {}) {
       src,
       thumb,
       viewer: plateViewerUrl(data, entry.book, page.pdf),
-      reference: plateReference(data, entry.book, page.pdf),
+      traceLabel: plateTraceLabel(page),
+      fromOverride: page.override === true,
       revised: page.revised === true,
     });
   }
   const notes = [];
   const unmapped = Array.isArray(entry.unmappedLegacy) ? entry.unmappedLegacy.length : 0;
-  if (entry.status === "none" || pages.length === 0) {
+  if (pages.length === 0) {
     notes.push("本課原教材圖頁在現行版教材中沒有對應頁，故不顯示圖。");
   } else if (entry.status === "override") {
-    notes.push("本課圖頁取自現行版教材（依教材 PDF 文字層定位），不沿用舊圖頁。");
+    // The range was proven from the current edition itself, so nothing is said
+    // about legacy pages that have no counterpart.
+    notes.push("本課圖頁已依現行版教材的目錄與課題位置校定。");
   } else if (unmapped > 0) {
     notes.push(`本課原教材圖頁另有 ${unmapped} 頁在現行版教材中沒有對應頁，未顯示。`);
   }
-  if (Array.isArray(entry.unlistedBetween) && entry.unlistedBetween.length) {
-    notes.push(`現行版在本課範圍內另有 PDF 第 ${entry.unlistedBetween.join("、")} 頁，可在 PDF 中查看。`);
+  if (entry.status !== "override" && Array.isArray(entry.unlistedBetween) && entry.unlistedBetween.length) {
+    notes.push(`注意：現行版教材 PDF 第 ${entry.unlistedBetween.join("、")} 頁也屬本課範圍，但此處未顯示，請在 PDF 中打開閱讀，以免漏讀。`);
   }
   return {
     state: pages.length ? "ready" : "none",

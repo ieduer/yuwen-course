@@ -102,19 +102,27 @@ function loadBook(catalogDir, catalog, legacyKey, bookId) {
   };
 }
 
+const OVERRIDE_BASIS = "current-edition-text-layer";
+
 function pageEntry(book, pdf, legacy, basis, revised) {
   const entry = { pdf };
-  const printed = book.byPdf.get(pdf)?.printed;
-  if (printed) entry.printed = printed;
+  const row = book.byPdf.get(pdf);
+  if (row.printed) entry.printed = row.printed;
   entry.legacy = legacy;
+  // Legacy image index of the page actually shown (any lesson), kept only so the
+  // non-scoring "page opened" trace keeps its existing `p<index>` form.
+  if (row.legacy.length) entry.legacyRef = row.legacy[0];
   entry.basis = basis;
   if (revised) entry.revised = true;
   return entry;
 }
 
-function resolveLesson(lesson, book, override) {
+// Exact rows first.  A reviewed lesson-level override (proven from the PDF's own
+// text layer) then replaces the page list by its range: pages the exact rows
+// already gave keep their row; added pages are marked `override`.
+function resolveLesson(lesson, book, override, defaults) {
   const legacyPages = lesson.textbook.pages;
-  const pages = [];
+  let pages = [];
   const unmappedLegacy = [];
   for (const index of legacyPages) {
     const row = book.byLegacy.get(index);
@@ -137,44 +145,58 @@ function resolveLesson(lesson, book, override) {
 
   const entry = { book: lesson.blockId };
   if (override) {
-    if (pages.length !== 0) fail(`${lesson.id}: an override is only allowed when no legacy page resolves`);
+    const { firstPdf, lastPdf, nextTitlePdf } = override;
     if (override.book !== lesson.blockId || override.pdfSha256 !== book.pdfSha256) {
       fail(`${lesson.id}: override is bound to another book or PDF`);
     }
-    if (JSON.stringify(override.replacesLegacy) !== JSON.stringify(legacyPages)) {
-      fail(`${lesson.id}: override does not name the lesson's legacy pages`);
+    if (override.basis !== OVERRIDE_BASIS || !override.titleLine || !override.nextTitleLine || !override.reason) {
+      fail(`${lesson.id}: override lacks its text-layer evidence`);
     }
-    const { firstPdf, lastPdf } = override;
-    if (!Number.isInteger(firstPdf) || !Number.isInteger(lastPdf) || firstPdf < 1 || lastPdf < firstPdf || lastPdf > book.pdfPages) {
-      fail(`${lesson.id}: override page range is invalid`);
-    }
+    if (
+      !Number.isInteger(firstPdf) || !Number.isInteger(lastPdf) || !Number.isInteger(nextTitlePdf)
+      || firstPdf < 1 || lastPdf < firstPdf || lastPdf > book.pdfPages || lastPdf - firstPdf >= 30
+      || (nextTitlePdf !== lastPdf + 1 && nextTitlePdf !== lastPdf)
+      // The range stops before a title that opens the next page, or on the page it shares.
+      || (nextTitlePdf === lastPdf + 1 && override.nextTitleOpensItsPage !== true)
+    ) fail(`${lesson.id}: override page range is invalid`);
+    const exact = new Map(pages.map((page) => [page.pdf, page]));
+    const exactRowPages = pages.map((page) => page.pdf);
+    const ranged = [];
     for (let pdf = firstPdf; pdf <= lastPdf; pdf += 1) {
-      // An override may only take pages that no legacy page maps to.
-      if (book.byPdf.get(pdf).legacy.length) fail(`${lesson.id}: override page ${pdf} already has a legacy row`);
-      pages.push(pageEntry(book, pdf, [], override.basis, false));
+      ranged.push(exact.get(pdf) || { ...pageEntry(book, pdf, [], OVERRIDE_BASIS, false), override: true });
     }
+    const legacyOutsideOverride = pages
+      .filter((page) => page.pdf < firstPdf || page.pdf > lastPdf)
+      .flatMap((page) => page.legacy);
+    if (JSON.stringify(ranged.map((page) => page.pdf)) === JSON.stringify(exactRowPages)) {
+      fail(`${lesson.id}: override changes nothing`);
+    }
+    pages = ranged;
     entry.status = "override";
     entry.override = {
-      basis: override.basis,
+      basis: OVERRIDE_BASIS,
+      reason: override.reason,
       firstPdf,
       lastPdf,
       titleLine: override.titleLine,
       nextTitleLine: override.nextTitleLine,
-      nextTitlePdf: override.nextTitlePdf,
-      verifiedOn: override.verifiedOn,
-      extractor: override.extractor,
-      decision: override.decision,
+      nextTitlePdf,
+      nextTitleOpensItsPage: override.nextTitleOpensItsPage === true,
+      verifiedOn: defaults.verifiedOn,
+      extractor: defaults.extractor,
     };
-  } else if (pages.length === 0) {
-    entry.status = "none";
-  } else {
-    entry.status = unmappedLegacy.length ? "partial" : "mapped";
+    entry.exactRowPages = exactRowPages;
+    entry.pages = pages;
+    entry.unmappedLegacy = unmappedLegacy;
+    entry.legacyOutsideOverride = legacyOutsideOverride;
+    return entry;
   }
+  entry.status = pages.length === 0 ? "none" : (unmappedLegacy.length ? "partial" : "mapped");
   entry.pages = pages;
   entry.unmappedLegacy = unmappedLegacy;
   // Reported, never shown as an image: pages of the current edition that lie
   // between two resolved pages of this lesson and have no legacy counterpart.
-  if (!override && pages.length > 1) {
+  if (pages.length > 1) {
     const listed = new Set(pages.map((page) => page.pdf));
     const unlisted = [];
     for (let pdf = pages[0].pdf + 1; pdf < pages.at(-1).pdf; pdf += 1) {
@@ -192,7 +214,13 @@ export function buildTextbookPages(catalogDir) {
     fail("catalog copy is not one consistent sun-catalog-v1 release");
   }
   const overrideFile = json(OVERRIDES_PATH);
-  if (overrideFile.schema !== "yw-textbook-page-overrides-v1") fail("override file schema is invalid");
+  if (
+    overrideFile.schema !== "yw-textbook-page-overrides-v2"
+    || !/^\d{4}-\d{2}-\d{2}$/.test(overrideFile.verifiedOn || "")
+    || !overrideFile.extractor
+    || overrideFile.catalogRelease !== catalog.release_id
+  ) fail("override file is invalid or was proven against another catalog release");
+  const defaults = { verifiedOn: overrideFile.verifiedOn, extractor: overrideFile.extractor };
   const overrides = new Map(overrideFile.overrides.map((item) => [item.lessonId, item]));
   if (overrides.size !== overrideFile.overrides.length) fail("duplicate override");
 
@@ -211,7 +239,7 @@ export function buildTextbookPages(catalogDir) {
     }
     const book = books.get(lesson.blockId);
     if (book.legacyKey !== legacyKey || book.bookId !== textbook.bookId) fail(`${lesson.id}: block maps to two books`);
-    lessons[lesson.id] = resolveLesson(lesson, book, overrides.get(lesson.id));
+    lessons[lesson.id] = resolveLesson(lesson, book, overrides.get(lesson.id), defaults);
     overrides.delete(lesson.id);
   }
   if (overrides.size) fail(`override names an unknown lesson: ${[...overrides.keys()].join(", ")}`);
@@ -228,7 +256,7 @@ export function buildTextbookPages(catalogDir) {
       pdfPages: book.pdfPages,
     };
   }
-  const counts = { lessons: 0, mapped: 0, partial: 0, none: 0, override: 0, legacyPages: 0, unmappedLegacyPages: 0, pages: 0 };
+  const counts = { lessons: 0, mapped: 0, partial: 0, none: 0, override: 0, legacyPages: 0, unmappedLegacyPages: 0, pages: 0, overridePages: 0 };
   const sortedLessons = {};
   for (const id of Object.keys(lessons).sort((a, b) => a.localeCompare(b, "en"))) {
     const entry = lessons[id];
@@ -237,14 +265,16 @@ export function buildTextbookPages(catalogDir) {
     counts[entry.status] += 1;
     counts.pages += entry.pages.length;
     counts.unmappedLegacyPages += entry.unmappedLegacy.length;
-    counts.legacyPages += entry.unmappedLegacy.length + entry.pages.reduce((sum, page) => sum + page.legacy.length, 0);
+    counts.overridePages += entry.pages.filter((page) => page.override === true).length;
+    counts.legacyPages += entry.unmappedLegacy.length + (entry.legacyOutsideOverride || []).length
+      + entry.pages.reduce((sum, page) => sum + page.legacy.length, 0);
   }
   return {
     schema: SCHEMA,
     catalogContract: catalog.contract,
     catalogRelease: catalog.release_id,
     pageMapVersion: [...pageMapVersions][0],
-    resolution: "exact page-map rows (own row or legacy_also) only; no offset, no neighbouring page",
+    resolution: "exact page-map rows (own row or legacy_also) only; no offset, no neighbouring page; then reviewed lesson-level overrides proven from the PDF text layer",
     imageHost: IMAGE_HOST,
     widths: WIDTHS,
     counts,

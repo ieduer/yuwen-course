@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1234,
-  "totalBytes": 164678833,
-  "aggregateSha256": "ca2204203d8d4c5fb4ef5ccdbf4f0f1cd0cc8f492e03045958d88de640b9c646",
+  "totalBytes": 164707304,
+  "aggregateSha256": "3cf4cf2d30e24aa0168fac99310d0722d05802a0154063ca4c9bfc386123e9d1",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "60b5582d04422385af624eaf94152925e2bf1b0cb09db401f08a8877f9933fcf"
+      "sha256": "3886471057f8a2be6a797c771df7730398e58c8fcc09f39ca8036d91b27a7fed"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1417,8 +1417,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 259538,
-      "sha256": "7c19e29a00f66a6d69c798105d29b670bb0cbbba1fb78b9215ffc0a704eb7495"
+      "bytes": 259755,
+      "sha256": "f6af98e260c11e939179791d1e3c2ba22b422f3ded0746ffa6be475744b7a68d"
     },
     {
       "path": "assets/atlas.css",
@@ -3117,8 +3117,8 @@
     },
     {
       "path": "assets/textbook-pages.js",
-      "bytes": 8499,
-      "sha256": "991954c344c515021b6c31623d468efbc1b91d2716184f59584ee9826a48fc03"
+      "bytes": 8719,
+      "sha256": "bb005d6c44623afc8c80a813f0baa2d0b7e4a9a5836a674dd9098c3f4ed6eeb7"
     },
     {
       "path": "assets/vocab-progress.js",
@@ -5342,8 +5342,8 @@
     },
     {
       "path": "data/textbook-pages.v1.json",
-      "bytes": 64315,
-      "sha256": "126ea30871c0275592e97a7fc32f599348689e65a93f08ad64aaa699e00b28b3"
+      "bytes": 92349,
+      "sha256": "4e0c3aa7e3815f6c8af780f1310ff2efca27aa76ce9405bb7ba423bc5f1da599"
     },
     {
       "path": "data/vocab-eligibility.json",
@@ -6068,7 +6068,7 @@
     {
       "path": "index.html",
       "bytes": 11886,
-      "sha256": "593063d32f3a0f3ccd2af6b3efd1d35a67902d99937b9b8f430ec00f35928081"
+      "sha256": "5aef0874f7383079ec8590a0c49c0e85e16c7c7786bf8744be20eacdada60989"
     },
     {
       "path": "learning-evaluation-events.js",

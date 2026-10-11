@@ -26,7 +26,7 @@ const LESSON_BLUEPRINT_RULES_URL = new URL(
   "../lesson-blueprint-rules.js?v=8498ddbb5a69645b",
   APP_SCRIPT_URL,
 ).href;
-const TEXTBOOK_PAGES_MODULE_URL = new URL("textbook-pages.js?v=991954c344c51502", APP_SCRIPT_URL).href;
+const TEXTBOOK_PAGES_MODULE_URL = new URL("textbook-pages.js?v=bb005d6c44623afc", APP_SCRIPT_URL).href;
 
 let sharedStateClient = null;
 let sharedStateClientIdentity = null;
@@ -1475,7 +1475,11 @@ function renderLessonIndex() {
     const heading = isUnitHeading(lesson);
     if (!heading) sequence += 1;
     const done = progressPercent(state.progress[lesson.id] || {}, lesson) === 100;
-    const page = state.plateApi?.startPlateLabel(state.plateData, lesson.id) || "";
+    // Verified printed page from the page data; the previous `p<n>` when it could not load.
+    const legacyStart = lesson.textbookStartPage || lesson.textbook?.startPage;
+    const page = state.plateApi
+      ? state.plateApi.startPlateLabel(state.plateData, lesson.id)
+      : (legacyStart ? `p${legacyStart}` : "");
     return `
       ${heading ? `<div class="unit-marker">${esc(lessonTitle(lesson))}</div>` : ""}
       <button type="button" class="lesson-link ${state.current?.id === lesson.id ? "active" : ""} ${heading ? "overview" : ""}" data-lesson="${esc(lesson.id)}">
@@ -5306,7 +5310,7 @@ function openPages(index = 0) {
   if (!state.pages.length) return;
   void recordLearning("resourceOpened", {
     resourceKind: "textbook_page",
-    resourceRef: state.pages[state.pageIndex]?.reference || String(state.pageIndex + 1),
+    resourceRef: state.pages[index]?.traceLabel || String(index + 1),
   });
 }
 

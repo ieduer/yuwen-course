@@ -125,11 +125,11 @@ try {
   check("課文清單顯示已核實的印刷頁而非舊序號", await page.evaluate(() => document.querySelector('#lesson-index .lesson-link[data-lesson="lesson-1523"] small')?.textContent === "頁 29"));
   let state = await openPlates(page, { expectImage: true });
   check("lesson-1523 首頁取自 SUN 的 PDF 34（960）", /\/efe51d7a6773\/34\.webp\?w=960$/.test(state.imageSrc) && state.naturalWidth > 0, state.imageSrc);
-  check("lesson-1523 說明列為印刷頁 1/5", state.caption.includes("第 29 頁") && state.caption.endsWith("1/5"), state.caption);
+  check("lesson-1523 說明列為印刷頁 1/6", state.caption.includes("第 29 頁") && state.caption.endsWith("1/6"), state.caption);
   check("lesson-1523 PDF 連結", state.link === "https://sun.bdfz.net/?view=pdf&edition=cn-da694670-f25b-46a0-9c3f-a31f5a2f131a-efe51d7a6773&p=34", state.link);
   await page.waitForFunction(() => [...document.querySelectorAll("#page-strip img")].every((item) => item.complete && item.naturalWidth > 0), null, { timeout: 45_000 });
   state = await dialogState(page);
-  check("lesson-1523 五張縮圖均為 240", state.thumbs.length === 5 && state.thumbs.every((src) => PLATE.test(src) && src.endsWith("w=240")), state.thumbs.join(" "));
+  check("lesson-1523 六張縮圖均為 240", state.thumbs.length === 6 && state.thumbs.every((src) => PLATE.test(src) && src.endsWith("w=240")), state.thumbs.join(" "));
   await page.click("#page-next");
   await page.waitForFunction(() => /\/35\.webp/.test(document.querySelector("#page-image").getAttribute("src") || "") && document.querySelector("#page-image").naturalWidth > 0, null, { timeout: 45_000 });
   check("下一頁載入 PDF 35", true);
@@ -143,7 +143,17 @@ try {
   await openLesson(page, baseUrl, "lesson-1570");
   state = await openPlates(page, { expectImage: true });
   check("lesson-1570 顯示現行版 PDF 52（印刷頁 47），共 4 頁", /\/7da9104e683d\/52\.webp\?w=960$/.test(state.imageSrc) && state.caption.includes("第 47 頁") && state.caption.endsWith("1/4"), `${state.imageSrc} ${state.caption}`);
-  check("lesson-1570 說明圖頁取自現行版", state.note.includes("現行版教材"), state.note);
+  check("lesson-1570 說明圖頁已依現行版校定", state.note.includes("依現行版教材的目錄與課題位置校定"), state.note);
+  await page.keyboard.press("Escape");
+
+  // 2b. Inherited wrong pages replaced by the proven range; a skipped inside page shown.
+  await openLesson(page, baseUrl, "lesson-1722-p3");
+  state = await openPlates(page, { expectImage: true });
+  check("lesson-1722-p3《虞美人》顯示自己的 PDF 149，且不稱現行版無對應頁", /\/e635902fe131\/149\.webp\?w=960$/.test(state.imageSrc) && state.caption.endsWith("1/1") && !state.note.includes("沒有對應頁"), `${state.imageSrc} ${state.caption} ${state.note}`);
+  await page.keyboard.press("Escape");
+  await openLesson(page, baseUrl, "lesson-1520");
+  state = await openPlates(page, { expectImage: true });
+  check("lesson-1520 共 8 頁，含課內的 PDF 23", state.caption.endsWith("1/8") && state.thumbs.length === 8 && state.labels[3] === "第 18 頁", `${state.caption} ${state.labels.join(",")}`);
   await page.keyboard.press("Escape");
 
   // 3. Lesson whose pages have no counterpart: words, no image, no request.

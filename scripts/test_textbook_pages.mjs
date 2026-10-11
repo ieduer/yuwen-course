@@ -13,7 +13,7 @@ import {
   createPlateLoader,
   createThumbnailQueue,
   lessonPlates,
-  plateReference,
+  plateTraceLabel,
   plateRetryDelay,
   plateUrl,
   plateViewerUrl,
@@ -25,6 +25,10 @@ import { renderTextbookPages } from "./resolve_textbook_pages.mjs";
 const ROOT = resolve(import.meta.dirname, "..");
 const DEFAULT_CATALOG = "/private/tmp/cf-task-sun-consolidation-20261010/catalog-release/20261011T015939Z-24b58ca8";
 const CATALOG = process.env.YW_SUN_CATALOG || DEFAULT_CATALOG;
+// Release mode (YW_RELEASE_CHECK=1): the catalog copy must be present, so the
+// resolution check below fails instead of being skipped.
+const RELEASE_CHECK = process.env.YW_RELEASE_CHECK === "1";
+const overrideFile = JSON.parse(readFileSync(resolve(ROOT, "scripts/textbook_page_overrides.v1.json"), "utf8"));
 const read = (relative) => readFileSync(resolve(ROOT, relative), "utf8");
 const data = JSON.parse(read("site/data/textbook-pages.v1.json"));
 const lessonFiles = readdirSync(resolve(ROOT, "site/data/lessons")).filter((name) => name.endsWith(".json")).sort();
@@ -58,6 +62,8 @@ test("every displayed lesson page resolves to a SUN plate or is explicitly unmap
   let resolved = 0;
   let unmapped = 0;
   let withPages = 0;
+  let overridden = 0;
+  let outside = 0;
   for (const lesson of lessons) {
     const legacy = lesson.textbook?.pages || [];
     assert.equal((lesson.textbook?.pageImages || []).length, legacy.length, `${lesson.id}: displayed pages`);
@@ -86,7 +92,8 @@ test("every displayed lesson page resolves to a SUN plate or is explicitly unmap
         assert.equal(thumb[3], full[3]);
         assert.ok(Number(full[3]) <= data.books[entry.book].pdfPages);
         assert.equal(plate.viewer, `https://sun.bdfz.net/?view=pdf&edition=${full[1]}&p=${full[3]}`);
-        assert.equal(plate.reference, `pdf:${full[2]}:${full[3]}`);
+        assert.equal(plate.fromOverride, entry.pages[index].override === true);
+        assert.match(plate.traceLabel, /^(p\d+)?$/);
         assert.doesNotMatch(`${plate.src}${plate.thumb}${plate.viewer}`, /rdfzer|\/pages\//);
       }
     }
@@ -94,19 +101,40 @@ test("every displayed lesson page resolves to a SUN plate or is explicitly unmap
     const seen = new Map();
     for (const page of entry.pages) for (const index of page.legacy) seen.set(index, (seen.get(index) || 0) + 1);
     for (const index of entry.unmappedLegacy) seen.set(index, (seen.get(index) || 0) + 1);
+    for (const index of entry.legacyOutsideOverride || []) seen.set(index, (seen.get(index) || 0) + 1);
     if (entry.status === "override") {
-      assert.deepEqual(entry.unmappedLegacy, legacy);
-      assert.ok(entry.pages.every((page) => page.legacy.length === 0 && page.basis === entry.override.basis));
+      // The page list is exactly the proven range; pages the exact rows did not
+      // give are marked as coming from the override, and only those.
+      const range = entry.override;
+      assert.equal(range.basis, "current-edition-text-layer");
+      assert.deepEqual(entry.pages.map((page) => page.pdf), Array.from({ length: range.lastPdf - range.firstPdf + 1 }, (_, i) => range.firstPdf + i));
+      for (const page of entry.pages) {
+        assert.equal(page.override === true, !entry.exactRowPages.includes(page.pdf), `${lesson.id}: override mark on PDF ${page.pdf}`);
+        if (page.override) assert.deepEqual([page.legacy, page.basis], [[], range.basis]);
+      }
+      assert.notDeepEqual(entry.pages.map((page) => page.pdf), entry.exactRowPages);
+      overridden += 1;
+    } else {
+      assert.ok(entry.pages.every((page) => page.override === undefined));
+      assert.equal(entry.exactRowPages, undefined);
+      assert.equal(entry.legacyOutsideOverride, undefined);
     }
     assert.deepEqual([...seen.keys()].sort((a, b) => a - b), [...legacy].sort((a, b) => a - b), `${lesson.id}: legacy pages`);
     assert.ok([...seen.values()].every((count) => count === 1));
     resolved += entry.pages.reduce((sum, page) => sum + page.legacy.length, 0);
     unmapped += entry.unmappedLegacy.length;
+    outside += (entry.legacyOutsideOverride || []).length;
     const pdfPages = entry.pages.map((page) => page.pdf);
     assert.deepEqual(pdfPages, [...new Set(pdfPages)].sort((a, b) => a - b), `${lesson.id}: PDF pages increase`);
   }
   assert.equal(legacyPages, 742);
-  assert.equal(resolved + unmapped, 742);
+  assert.equal(resolved + unmapped + outside, 742);
+  assert.equal(unmapped, 13);
+  assert.equal(overridden, overrideFile.overrides.length);
+  assert.deepEqual(
+    Object.keys(data.lessons).filter((id) => data.lessons[id].status === "override").sort(),
+    overrideFile.overrides.map((item) => item.lessonId).sort(),
+  );
   assert.equal(Object.keys(data.lessons).length, withPages);
   assert.deepEqual(data.counts, {
     lessons: withPages,
@@ -117,6 +145,7 @@ test("every displayed lesson page resolves to a SUN plate or is explicitly unmap
     legacyPages: 742,
     unmappedLegacyPages: unmapped,
     pages: Object.values(data.lessons).reduce((sum, entry) => sum + entry.pages.length, 0),
+    overridePages: Object.values(data.lessons).reduce((sum, entry) => sum + entry.pages.filter((page) => page.override).length, 0),
   });
 });
 
@@ -130,23 +159,53 @@ test("unmapped, revised and override lessons say so instead of showing a wrong p
   assert.deepEqual(revised.pages.map((page) => [page.pdf, page.revised]), [[38, true]]);
   assert.match(revised.notes.join(""), /另有 4 頁/);
 
-  const override = data.lessons["lesson-1570"];
-  assert.equal(override.status, "override");
-  assert.equal(override.override.basis, "current-edition-text-layer");
-  assert.deepEqual(override.pages.map((page) => page.pdf), [52, 53, 54, 55]);
-  assert.deepEqual(override.unmappedLegacy, [53]);
-  assert.match(lessonPlates(data, "lesson-1570").notes.join(""), /現行版教材/);
-  assert.equal(Object.values(data.lessons).filter((entry) => entry.status === "override").length, 1);
+  // Lesson with no exact-row page at all, anchored from the PDF text layer.
+  const anchored = data.lessons["lesson-1570"];
+  assert.equal(anchored.status, "override");
+  assert.deepEqual(anchored.exactRowPages, []);
+  assert.deepEqual(anchored.pages.map((page) => [page.pdf, page.override]), [[52, true], [53, true], [54, true], [55, true]]);
+  assert.deepEqual(anchored.unmappedLegacy, [53]);
 
-  // 《人应当坚持正义》 resolves through its own exact rows; it needs no override.
-  assert.equal(data.lessons["lesson-1523"].status, "mapped");
-  assert.deepEqual(data.lessons["lesson-1523"].pages.map((page) => page.pdf), [34, 35, 36, 37, 38]);
+  // Inherited wrong pages are replaced by the proven range ...
+  const expected = {
+    "lesson-1722-p2": [148], "lesson-1722-p3": [149], "lesson-1722-p4": [150],
+    "lesson-1755-p2": [163], "lesson-1755-p3": [164], "lesson-1755-p4": [165],
+    "lesson-1705-p2": [68], "lesson-1705-p3": [69, 70, 71], "lesson-1711-p2": [92, 93, 94],
+    "lesson-1719-p2": [127, 128, 129], "lesson-1743-p2": [94, 95, 96, 97],
+    "lesson-1692-p3": [13, 14], "lesson-1692-p4": [14, 15, 16, 17, 18],
+    // ... and a page the exact rows skipped inside a lesson is shown.
+    "lesson-1520": [20, 21, 22, 23, 24, 25, 26, 27], "lesson-1581": [91, 92, 93],
+  };
+  for (const [id, pdfPages] of Object.entries(expected)) {
+    assert.deepEqual(data.lessons[id].pages.map((page) => page.pdf), pdfPages, id);
+    const plates = lessonPlates(data, id);
+    // ... with no claim that the current edition lacks the lesson's pages.
+    assert.doesNotMatch(plates.notes.join(""), /沒有對應頁/, id);
+    assert.match(plates.notes.join(""), /依現行版教材的目錄與課題位置校定/, id);
+  }
+  assert.deepEqual(data.lessons["lesson-1520"].pages.filter((page) => page.override).map((page) => page.pdf), [23]);
 
-  const partial = lessonPlates(data, "lesson-1755-p4");
-  assert.equal(partial.pages.length, 1);
-  assert.equal(partial.pages[0].label, "PDF 第 167 頁", "no printed label unless verified");
+  // Every override carries its evidence, and its first page differs from, or
+  // its range differs from, what exact rows alone would show.
+  for (const item of overrideFile.overrides) {
+    assert.ok(item.titleLine && item.nextTitleLine && item.reason && item.pdfSha256 === data.books[item.book].pdfSha256, item.lessonId);
+    assert.ok(item.nextTitlePdf === item.lastPdf + 1 ? item.nextTitleOpensItsPage === true : item.nextTitlePdf === item.lastPdf, item.lessonId);
+  }
+  assert.equal(overrideFile.catalogRelease, data.catalogRelease);
+
+  // A lesson that still skips a page inside its range must say that text is missing.
+  const skipping = structuredClone(data);
+  skipping.lessons["lesson-1523"] = { ...data.lessons["lesson-1523"], status: "mapped", unlistedBetween: [36] };
+  assert.match(lessonPlates(skipping, "lesson-1523").notes.join(""), /也屬本課範圍，但此處未顯示.*以免漏讀/);
+  assert.equal(Object.values(data.lessons).filter((entry) => entry.unlistedBetween).length, 0, "no lesson currently skips an inside page");
+
+  assert.equal(lessonPlates(data, "lesson-1755-p4").pages[0].label, "第 158 頁");
   assert.equal(startPlateLabel(data, "lesson-1523"), "頁 29");
   assert.equal(startPlateLabel(data, "lesson-1569"), "");
+  // The trace label keeps the legacy `p<index>` form of the page shown.
+  assert.equal(lessonPlates(data, "lesson-1523").pages[0].traceLabel, "p34");
+  assert.equal(plateTraceLabel({ legacy: [] }), "");
+  assert.equal(lessonPlates(data, "lesson-1570").pages[0].traceLabel, "");
 });
 
 test("address builders refuse anything outside the page data", () => {
@@ -156,7 +215,6 @@ test("address builders refuse anything outside the page data", () => {
     ["xuanbi-zhong", 38, 800], ["unknown", 1, 960], ["__proto__", 1, 960],
   ]) assert.equal(plateUrl(data, book, page, width), "");
   assert.equal(plateViewerUrl(data, "unknown", 1), "");
-  assert.equal(plateReference(data, "xuanbi-zhong", 999), "");
   assert.equal(lessonPlates(null, "lesson-1523").state, "unavailable");
   assert.equal(lessonPlates({ ...data, imageHost: "example.org" }, "lesson-1523").state, "unavailable");
   const tampered = structuredClone(data);
@@ -181,7 +239,12 @@ test("nothing shipped can request a legacy textbook page image", () => {
     assert.doesNotMatch(source, /imageBase|pageImages|contextPageImages/, `${relative} reads a legacy image field`);
   }
   const app = read("site/assets/app.js");
-  assert.doesNotMatch(app, /page\.src\b[^;]*=|textbookStartPage|textbook\?\.startPage/);
+  assert.doesNotMatch(app, /page\.src\b[^;]*=/);
+  // The sidebar keeps the previous `p<n>` only while the page data is not loaded.
+  assert.match(app, /state\.plateApi\s*\?\s*state\.plateApi\.startPlateLabel\(state\.plateData, lesson\.id\)\s*:\s*\(legacyStart \? `p\$\{legacyStart\}` : ""\)/);
+  // The non-scoring trace keeps its `p<index>` form and its previous fallback.
+  assert.match(app, /resourceRef: state\.pages\[index\]\?\.traceLabel \|\| String\(index \+ 1\),/);
+  assert.doesNotMatch(app, /pdf:\$\{|plateReference/);
   assert.match(app, /fetchJson\("data\/textbook-pages\.v1\.json"/);
   assert.match(app, /data-plate-thumb="\$\{esc\(page\.thumb\)\}"/);
   assert.doesNotMatch(app, /<img src="\$\{esc\(page\.(src|thumb)\)\}"/, "thumbnails must not load eagerly");
@@ -311,6 +374,10 @@ test("thumbnails load at most two at a time and stop when cancelled", () => {
   assert.equal(started(), 4, "nothing starts after cancel");
 });
 
-test("the page data equals a fresh resolution of the catalog release", { skip: existsSync(resolve(CATALOG, "catalog.json")) ? false : `catalog copy not present at ${CATALOG}` }, () => {
+const catalogPresent = existsSync(resolve(CATALOG, "catalog.json"));
+test("the page data equals a fresh resolution of the catalog release", {
+  skip: catalogPresent || RELEASE_CHECK ? false : `catalog copy not present at ${CATALOG} (set YW_RELEASE_CHECK=1 to make this a failure)`,
+}, () => {
+  assert.ok(catalogPresent, `release check needs the SUN catalog release copy (YW_SUN_CATALOG); none at ${CATALOG}`);
   assert.equal(renderTextbookPages(CATALOG), read("site/data/textbook-pages.v1.json"));
 });
