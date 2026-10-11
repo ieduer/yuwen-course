@@ -61,14 +61,18 @@ export function plateLabel(page) {
   return page.printed ? `第 ${page.printed} 頁` : `PDF 第 ${page.pdf} 頁`;
 }
 
-// The non-scoring "textbook page opened" trace keeps its existing `p<index>`
-// form (the legacy image index of the page shown); "" when the page has none.
-export function plateTraceLabel(page) {
-  return Number.isInteger(page?.legacyRef) && page.legacyRef >= 0 ? `p${page.legacyRef}` : "";
+// The non-scoring "textbook page opened" trace is derived from the lesson file
+// alone, exactly as before this page data existed: `p<legacy page index>` of the
+// page at that position, else the 1-based position.  It never depends on the
+// page data, so the recorded value is unchanged for every lesson.
+export function legacyTraceLabel(lesson, index = 0) {
+  const page = lesson?.textbook?.pages?.[index];
+  return Number.isInteger(page) ? `p${page}` : String(index + 1);
 }
 
 // state: "unavailable" (no page data), "absent" (lesson has no textbook pages),
-// "none" (its pages have no counterpart in the current edition) or "ready".
+// "none" (nothing to show: the lesson is not in the current edition, or its
+// pages have no counterpart) or "ready".
 export function lessonPlates(data, lessonId, { large = false } = {}) {
   if (!validTextbookPages(data)) return { state: "unavailable", pages: [], notes: [], bookTitle: "" };
   const entry = data.lessons[lessonId];
@@ -77,7 +81,8 @@ export function lessonPlates(data, lessonId, { large = false } = {}) {
   if (!book) return { state: "unavailable", pages: [], notes: [], bookTitle: "" };
   const fullWidth = large ? data.widths.large : data.widths.full;
   const pages = [];
-  for (const page of Array.isArray(entry.pages) ? entry.pages : []) {
+  // A lesson absent from the current edition shows no page, whatever the data holds.
+  for (const page of entry.status !== "absent" && Array.isArray(entry.pages) ? entry.pages : []) {
     const src = plateUrl(data, entry.book, page.pdf, fullWidth);
     const thumb = plateUrl(data, entry.book, page.pdf, data.widths.thumb);
     if (!src || !thumb) continue;
@@ -87,14 +92,23 @@ export function lessonPlates(data, lessonId, { large = false } = {}) {
       src,
       thumb,
       viewer: plateViewerUrl(data, entry.book, page.pdf),
-      traceLabel: plateTraceLabel(page),
       fromOverride: page.override === true,
       revised: page.revised === true,
     });
   }
   const notes = [];
   const unmapped = Array.isArray(entry.unmappedLegacy) ? entry.unmappedLegacy.length : 0;
-  if (pages.length === 0) {
+  let samePosition = null;
+  if (entry.status === "absent") {
+    // Never one of this lesson's pages: only a pointer to what now stands there.
+    notes.push("本課不在現行版教材中，故不顯示教材原圖。");
+    const pointer = Array.isArray(entry.samePosition) ? entry.samePosition[0] : null;
+    const viewer = pointer ? plateViewerUrl(data, entry.book, pointer.pdf) : "";
+    if (viewer) {
+      samePosition = { pdf: pointer.pdf, viewer };
+      notes.push(`現行版教材的相同位置為 PDF 第 ${pointer.pdf} 頁（內容已修訂）。`);
+    }
+  } else if (pages.length === 0) {
     notes.push("本課原教材圖頁在現行版教材中沒有對應頁，故不顯示圖。");
   } else if (entry.status === "override") {
     // The range was proven from the current edition itself, so nothing is said
@@ -109,6 +123,7 @@ export function lessonPlates(data, lessonId, { large = false } = {}) {
   return {
     state: pages.length ? "ready" : "none",
     pages,
+    samePosition,
     notes,
     bookTitle: String(book.title || ""),
   };

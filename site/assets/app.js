@@ -26,7 +26,7 @@ const LESSON_BLUEPRINT_RULES_URL = new URL(
   "../lesson-blueprint-rules.js?v=8498ddbb5a69645b",
   APP_SCRIPT_URL,
 ).href;
-const TEXTBOOK_PAGES_MODULE_URL = new URL("textbook-pages.js?v=bb005d6c44623afc", APP_SCRIPT_URL).href;
+const TEXTBOOK_PAGES_MODULE_URL = new URL("textbook-pages.js?v=91556289be7d3930", APP_SCRIPT_URL).href;
 
 let sharedStateClient = null;
 let sharedStateClientIdentity = null;
@@ -5266,8 +5266,14 @@ function showPage(index) {
     state.plateLoader?.show("");
     els.pageImage.alt = "";
     els.pageCaption.textContent = title;
-    els.pagePdfLink.hidden = true;
-    els.pagePdfLink.removeAttribute("href");
+    // No page of this lesson; at most a pointer to what now stands at its position.
+    if (state.plates.samePosition) {
+      els.pagePdfLink.href = state.plates.samePosition.viewer;
+      els.pagePdfLink.hidden = false;
+    } else {
+      els.pagePdfLink.hidden = true;
+      els.pagePdfLink.removeAttribute("href");
+    }
     els.pagePrev.disabled = true;
     els.pageNext.disabled = true;
     return;
@@ -5307,10 +5313,10 @@ function openPages(index = 0) {
   showPage(index);
   if (!els.pageDialog.open) els.pageDialog.showModal();
   state.plateThumbnails?.load($$('.page-strip img', els.pageStrip));
-  if (!state.pages.length) return;
+  // Unchanged trace: recorded on every open, with the value the lesson file alone gives.
   void recordLearning("resourceOpened", {
     resourceKind: "textbook_page",
-    resourceRef: state.pages[index]?.traceLabel || String(index + 1),
+    resourceRef: state.plateApi.legacyTraceLabel(state.current, index),
   });
 }
 

@@ -18,6 +18,7 @@ import { fileURLToPath } from "node:url";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 export const LESSONS_DIR = resolve(ROOT, "site/data/lessons");
 export const OVERRIDES_PATH = resolve(ROOT, "scripts/textbook_page_overrides.v1.json");
+export const ABSENT_PATH = resolve(ROOT, "scripts/textbook_absent_lessons.v1.json");
 export const OUTPUT_PATH = resolve(ROOT, "site/data/textbook-pages.v1.json");
 
 export const SCHEMA = "yw-textbook-pages-v1";
@@ -109,9 +110,6 @@ function pageEntry(book, pdf, legacy, basis, revised) {
   const row = book.byPdf.get(pdf);
   if (row.printed) entry.printed = row.printed;
   entry.legacy = legacy;
-  // Legacy image index of the page actually shown (any lesson), kept only so the
-  // non-scoring "page opened" trace keeps its existing `p<index>` form.
-  if (row.legacy.length) entry.legacyRef = row.legacy[0];
   entry.basis = basis;
   if (revised) entry.revised = true;
   return entry;
@@ -120,7 +118,7 @@ function pageEntry(book, pdf, legacy, basis, revised) {
 // Exact rows first.  A reviewed lesson-level override (proven from the PDF's own
 // text layer) then replaces the page list by its range: pages the exact rows
 // already gave keep their row; added pages are marked `override`.
-function resolveLesson(lesson, book, override, defaults) {
+function resolveLesson(lesson, book, override, defaults, absent, lessonIds) {
   const legacyPages = lesson.textbook.pages;
   let pages = [];
   const unmappedLegacy = [];
@@ -144,6 +142,36 @@ function resolveLesson(lesson, book, override, defaults) {
   }
 
   const entry = { book: lesson.blockId };
+  if (absent) {
+    // Not in the current edition: it never shows a page, least of all another
+    // lesson's.  A content-revised page at the same position is only pointed to.
+    if (override) fail(`${lesson.id}: a lesson absent from the current edition cannot have an override`);
+    if (
+      absent.book !== lesson.blockId || absent.pdfSha256 !== book.pdfSha256
+      || absent.contentsEntry !== false || !Array.isArray(absent.titleLinePages) || absent.titleLinePages.length !== 0
+      || !Array.isArray(absent.titlesChecked) || absent.titlesChecked.length === 0
+    ) fail(`${lesson.id}: absent-lesson entry lacks its evidence`);
+    entry.status = "absent";
+    entry.absent = {
+      basis: "no entry of the PDF contents pages; title is a line of no page",
+      titlesChecked: absent.titlesChecked,
+      verifiedOn: defaults.absentVerifiedOn,
+      extractor: defaults.absentExtractor,
+    };
+    entry.exactRowPages = pages.map((page) => page.pdf);
+    const samePosition = pages.filter((page) => page.revised === true).map((page) => {
+      const pointer = { pdf: page.pdf };
+      if (page.printed) pointer.printed = page.printed;
+      pointer.legacy = page.legacy;
+      pointer.revised = true;
+      return pointer;
+    });
+    if (samePosition.length) entry.samePosition = samePosition;
+    entry.legacyNotShown = pages.flatMap((page) => page.legacy);
+    entry.pages = [];
+    entry.unmappedLegacy = unmappedLegacy;
+    return entry;
+  }
   if (override) {
     const { firstPdf, lastPdf, nextTitlePdf } = override;
     if (override.book !== lesson.blockId || override.pdfSha256 !== book.pdfSha256) {
@@ -165,9 +193,15 @@ function resolveLesson(lesson, book, override, defaults) {
     for (let pdf = firstPdf; pdf <= lastPdf; pdf += 1) {
       ranged.push(exact.get(pdf) || { ...pageEntry(book, pdf, [], OVERRIDE_BASIS, false), override: true });
     }
-    const legacyOutsideOverride = pages
-      .filter((page) => page.pdf < firstPdf || page.pdf > lastPdf)
-      .flatMap((page) => page.legacy);
+    const dropped = pages.filter((page) => page.pdf < firstPdf || page.pdf > lastPdf);
+    const legacyOutsideOverride = dropped.flatMap((page) => page.legacy);
+    // An override may never remove a page the exact rows show unless it names
+    // the other yw lesson that owns that page.
+    const cited = Array.isArray(override.removedPages) ? override.removedPages : [];
+    if (
+      JSON.stringify(cited.map((item) => item.pdf)) !== JSON.stringify(dropped.map((page) => page.pdf))
+      || cited.some((item) => typeof item.ownerLesson !== "string" || item.ownerLesson === lesson.id || !lessonIds.has(item.ownerLesson))
+    ) fail(`${lesson.id}: override removes exact-row pages without naming the lesson that owns each of them`);
     if (JSON.stringify(ranged.map((page) => page.pdf)) === JSON.stringify(exactRowPages)) {
       fail(`${lesson.id}: override changes nothing`);
     }
@@ -182,6 +216,8 @@ function resolveLesson(lesson, book, override, defaults) {
       nextTitleLine: override.nextTitleLine,
       nextTitlePdf,
       nextTitleOpensItsPage: override.nextTitleOpensItsPage === true,
+      laterTextsOfThisLesson: override.laterTextsOfThisLesson || [],
+      removedPages: cited.map((item) => ({ pdf: item.pdf, ownerLesson: item.ownerLesson })),
       verifiedOn: defaults.verifiedOn,
       extractor: defaults.extractor,
     };
@@ -207,26 +243,41 @@ function resolveLesson(lesson, book, override, defaults) {
   return entry;
 }
 
-export function buildTextbookPages(catalogDir) {
+export function buildTextbookPages(catalogDir, inputs = {}) {
   const catalog = json(resolve(catalogDir, "catalog.json"));
   const release = json(resolve(catalogDir, "RELEASE.json"));
   if (catalog.contract !== "sun-catalog-v1" || catalog.release_id !== release.release_id) {
     fail("catalog copy is not one consistent sun-catalog-v1 release");
   }
-  const overrideFile = json(OVERRIDES_PATH);
+  const overrideFile = inputs.overrideFile || json(OVERRIDES_PATH);
+  const absentFile = inputs.absentFile || json(ABSENT_PATH);
+  if (
+    absentFile.schema !== "yw-textbook-absent-lessons-v1"
+    || !/^\d{4}-\d{2}-\d{2}$/.test(absentFile.verifiedOn || "")
+    || !absentFile.extractor
+    || absentFile.catalogRelease !== catalog.release_id
+  ) fail("absent-lesson file is invalid or was proven against another catalog release");
+  const absentLessons = new Map(absentFile.lessons.map((item) => [item.lessonId, item]));
+  if (absentLessons.size !== absentFile.lessons.length) fail("duplicate absent lesson");
   if (
     overrideFile.schema !== "yw-textbook-page-overrides-v2"
     || !/^\d{4}-\d{2}-\d{2}$/.test(overrideFile.verifiedOn || "")
     || !overrideFile.extractor
     || overrideFile.catalogRelease !== catalog.release_id
   ) fail("override file is invalid or was proven against another catalog release");
-  const defaults = { verifiedOn: overrideFile.verifiedOn, extractor: overrideFile.extractor };
+  const defaults = {
+    verifiedOn: overrideFile.verifiedOn,
+    extractor: overrideFile.extractor,
+    absentVerifiedOn: absentFile.verifiedOn,
+    absentExtractor: absentFile.extractor,
+  };
   const overrides = new Map(overrideFile.overrides.map((item) => [item.lessonId, item]));
   if (overrides.size !== overrideFile.overrides.length) fail("duplicate override");
 
   const books = new Map();
   const lessons = {};
   const files = readdirSync(LESSONS_DIR).filter((name) => name.endsWith(".json")).sort();
+  const lessonIds = new Set(files.map((name) => name.slice(0, -5)));
   for (const name of files) {
     const lesson = json(resolve(LESSONS_DIR, name));
     if (`${lesson.id}.json` !== name) fail(`lesson id does not match file name: ${name}`);
@@ -239,10 +290,23 @@ export function buildTextbookPages(catalogDir) {
     }
     const book = books.get(lesson.blockId);
     if (book.legacyKey !== legacyKey || book.bookId !== textbook.bookId) fail(`${lesson.id}: block maps to two books`);
-    lessons[lesson.id] = resolveLesson(lesson, book, overrides.get(lesson.id), defaults);
+    lessons[lesson.id] = resolveLesson(lesson, book, overrides.get(lesson.id), defaults, absentLessons.get(lesson.id), lessonIds);
     overrides.delete(lesson.id);
+    absentLessons.delete(lesson.id);
   }
   if (overrides.size) fail(`override names an unknown lesson: ${[...overrides.keys()].join(", ")}`);
+  if (absentLessons.size) fail(`absent list names an unknown lesson: ${[...absentLessons.keys()].join(", ")}`);
+  // A page dropped by an override must really be shown by the lesson named as
+  // its owner, when that lesson shows textbook pages at all.
+  for (const [id, entry] of Object.entries(lessons)) {
+    for (const item of entry.override?.removedPages || []) {
+      const owner = lessons[item.ownerLesson];
+      if (owner && owner.book !== entry.book) fail(`${id}: owner of PDF ${item.pdf} is in another book`);
+      if (owner && owner.status !== "absent" && !owner.pages.some((page) => page.pdf === item.pdf)) {
+        fail(`${id}: ${item.ownerLesson} is named as owner of PDF ${item.pdf} but does not show it`);
+      }
+    }
+  }
 
   const pageMapVersions = new Set([...books.values()].map((book) => book.pageMapVersion));
   if (pageMapVersions.size !== 1) fail("books use different page-map versions");
@@ -256,7 +320,7 @@ export function buildTextbookPages(catalogDir) {
       pdfPages: book.pdfPages,
     };
   }
-  const counts = { lessons: 0, mapped: 0, partial: 0, none: 0, override: 0, legacyPages: 0, unmappedLegacyPages: 0, pages: 0, overridePages: 0 };
+  const counts = { lessons: 0, mapped: 0, partial: 0, none: 0, override: 0, absent: 0, legacyPages: 0, unmappedLegacyPages: 0, pages: 0, overridePages: 0 };
   const sortedLessons = {};
   for (const id of Object.keys(lessons).sort((a, b) => a.localeCompare(b, "en"))) {
     const entry = lessons[id];
@@ -266,7 +330,7 @@ export function buildTextbookPages(catalogDir) {
     counts.pages += entry.pages.length;
     counts.unmappedLegacyPages += entry.unmappedLegacy.length;
     counts.overridePages += entry.pages.filter((page) => page.override === true).length;
-    counts.legacyPages += entry.unmappedLegacy.length + (entry.legacyOutsideOverride || []).length
+    counts.legacyPages += entry.unmappedLegacy.length + (entry.legacyOutsideOverride || []).length + (entry.legacyNotShown || []).length
       + entry.pages.reduce((sum, page) => sum + page.legacy.length, 0);
   }
   return {
@@ -283,8 +347,8 @@ export function buildTextbookPages(catalogDir) {
   };
 }
 
-export function renderTextbookPages(catalogDir) {
-  return `${JSON.stringify(buildTextbookPages(catalogDir))}\n`;
+export function renderTextbookPages(catalogDir, inputs = {}) {
+  return `${JSON.stringify(buildTextbookPages(catalogDir, inputs))}\n`;
 }
 
 function argument(name) {

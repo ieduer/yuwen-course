@@ -156,18 +156,24 @@ try {
   check("lesson-1520 共 8 頁，含課內的 PDF 23", state.caption.endsWith("1/8") && state.thumbs.length === 8 && state.labels[3] === "第 18 頁", `${state.caption} ${state.labels.join(",")}`);
   await page.keyboard.press("Escape");
 
-  // 3. Lesson whose pages have no counterpart: words, no image, no request.
-  await openLesson(page, baseUrl, "lesson-1569");
-  const before = requested.filter((url) => PLATE.test(url)).length;
-  state = await openPlates(page, { expectImage: false });
-  check("lesson-1569 無圖、無連結並以文字說明", state.imageHidden && !state.imageSrc && !state.link && state.thumbs.length === 0 && state.note.includes("沒有對應頁"), JSON.stringify(state));
-  check("lesson-1569 未發出任何圖頁請求", requested.filter((url) => PLATE.test(url)).length === before);
-  await page.keyboard.press("Escape");
+  // 3. Lessons absent from the current edition: words, no image, no request.
+  for (const [lessonId, name] of [["lesson-1569", "《一个消逝了的山村》"], ["lesson-1572", "《聽聽那冷雨》"]]) {
+    await openLesson(page, baseUrl, lessonId);
+    const before = requested.filter((url) => PLATE.test(url)).length;
+    state = await openPlates(page, { expectImage: false });
+    check(`${lessonId}${name} 無圖、無連結，說明不在現行版`, state.imageHidden && !state.imageSrc && !state.link && state.thumbs.length === 0 && state.note.startsWith("本課不在現行版教材中"), JSON.stringify(state));
+    check(`${lessonId} 未發出任何圖頁請求`, requested.filter((url) => PLATE.test(url)).length === before);
+    await page.keyboard.press("Escape");
+  }
 
-  // 4. Content-revised page.
+  // 4. Absent lesson with a content-revised page at the same position: pointer only.
   await openLesson(page, baseUrl, "lesson-1522");
-  state = await openPlates(page, { expectImage: true });
-  check("lesson-1522 只顯示 PDF 38 並標示內容已修訂及未對應頁數", /\/38\.webp/.test(state.imageSrc) && state.note.includes("內容已修訂") && state.note.includes("另有 4 頁"), state.note);
+  const beforePointer = requested.filter((url) => PLATE.test(url)).length;
+  state = await openPlates(page, { expectImage: false });
+  check("lesson-1522 無圖；指出相同位置為 PDF 38（內容已修訂）並可在 SUN 打開", state.imageHidden && !state.imageSrc && state.thumbs.length === 0
+    && state.note.includes("本課不在現行版教材中") && state.note.includes("相同位置為 PDF 第 38 頁（內容已修訂）")
+    && state.link === "https://sun.bdfz.net/?view=pdf&edition=cn-da694670-f25b-46a0-9c3f-a31f5a2f131a-efe51d7a6773&p=38", JSON.stringify(state));
+  check("lesson-1522 未發出任何圖頁請求", requested.filter((url) => PLATE.test(url)).length === beforePointer);
   await page.keyboard.press("Escape");
 
   // 5. A failing plate says "retrying", which is not the "no counterpart" text.
