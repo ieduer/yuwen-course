@@ -1,3 +1,7 @@
+## Textbook plates candidate — 2026-10-11
+
+Branch `claude/pdf-page-images-20261011` on accepted source `7bfe60c`: the "原圖" dialog reads current-edition PDF pages from sun.bdfz.net through `site/data/textbook-pages.v1.json` (catalog release `20261011T015939Z-24b58ca8`; 198 lesson files, 742 legacy page references: exact page-map rows first, then 41 lesson-level overrides proven from the PDF text layer, which replace inherited wrong page ranges and never drop a page without naming the lesson that owns it; 3 lessons absent from the current edition show no page; 2 lessons keep exact rows pending a human check). Leaf-only: scoring inputs, manifests, Worker, D1 schema and App content are byte-identical to `7bfe60c`. Local candidate only; not pushed, previewed or deployed. Production acceptance, the owner's signed-in write/readback and public Status remain pending the registered release transaction. See the 2026-10-11 section of the maintenance manual.
+
 ## Current dictionary candidate — 2026-10-08T15:11:00Z
 
 Owner Codex01a11bd0. Shared dictionary dock prepared and locally checked; full-source launch authorized, suen reviews after publication. VPS shared module and this host's formal release remain pending. Preserve all prior accepted learning/content/poll/data features and the existing rollback baseline. See the new dictionary section in the operations handbook.

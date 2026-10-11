@@ -1,0 +1,785 @@
+{
+ "schema": "yw-textbook-page-overrides-v2",
+ "note": "Lesson-level page ranges in the current edition, applied by scripts/resolve_textbook_pages.mjs after exact page-map rows. Each is proven from the held PDF's own text layer by scripts/audit_textbook_lesson_pages.py: contents entry -> verified printed page -> title line on that page; later texts of the same lesson absorbed; the boundary entry proven the same way; a page dropped from the exact rows must name the yw lesson that owns it. Regenerate with --write-overrides; re-prove with --verify-overrides.",
+ "catalogRelease": "20261011T015939Z-24b58ca8",
+ "verifiedOn": "2026-10-11",
+ "extractor": "pymupdf 1.28.2 page text",
+ "overrides": [
+  {
+   "lessonId": "lesson-1474",
+   "book": "xuanbi-shang",
+   "pdfSha256": "730bc6895463d46223204d6d54027530a75e33d541634c7d4daf0fa8a5e90e2c",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 49,
+   "lastPdf": 50,
+   "titleLine": "《论语》十二章",
+   "titlePrinted": "44",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "大学之道",
+   "nextTitlePdf": 50,
+   "nextTitleOpensItsPage": false,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1476",
+   "book": "xuanbi-shang",
+   "pdfSha256": "730bc6895463d46223204d6d54027530a75e33d541634c7d4daf0fa8a5e90e2c",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 50,
+   "lastPdf": 51,
+   "titleLine": "大学之道",
+   "titlePrinted": "45",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "人皆有不忍人之心",
+   "nextTitlePdf": 51,
+   "nextTitleOpensItsPage": false,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1483",
+   "book": "xuanbi-shang",
+   "pdfSha256": "730bc6895463d46223204d6d54027530a75e33d541634c7d4daf0fa8a5e90e2c",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 53,
+   "lastPdf": 54,
+   "titleLine": "《老子》四章",
+   "titlePrinted": "48",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "五石之瓠",
+   "nextTitlePdf": 54,
+   "nextTitleOpensItsPage": false,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1500",
+   "book": "xuanbi-shang",
+   "pdfSha256": "730bc6895463d46223204d6d54027530a75e33d541634c7d4daf0fa8a5e90e2c",
+   "basis": "current-edition-text-layer",
+   "reason": "pages owned by another lesson are shown",
+   "firstPdf": 111,
+   "lastPdf": 111,
+   "titleLine": "江城子·乙卯正月二十日夜记梦",
+   "titlePrinted": "106",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "后记",
+   "nextTitlePdf": 112,
+   "nextTitleOpensItsPage": true,
+   "removedPages": [
+    {
+     "pdf": 112,
+     "ownerLesson": "lesson-1501"
+    },
+    {
+     "pdf": 113,
+     "ownerLesson": "lesson-1501"
+    },
+    {
+     "pdf": 114,
+     "ownerLesson": "lesson-1501"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1518",
+   "book": "xuanbi-zhong",
+   "pdfSha256": "efe51d7a6773eb16f15282c9ad4f94b92c2a3402b1e12791b9ceb8918999857c",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 12,
+   "lastPdf": 18,
+   "titleLine": "改造我们的学习",
+   "titlePrinted": "7",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "人的正确思想是从哪里来的?",
+   "nextTitlePdf": 18,
+   "nextTitleOpensItsPage": false,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1520",
+   "book": "xuanbi-zhong",
+   "pdfSha256": "efe51d7a6773eb16f15282c9ad4f94b92c2a3402b1e12791b9ceb8918999857c",
+   "basis": "current-edition-text-layer",
+   "reason": "a page inside the lesson is skipped",
+   "firstPdf": 20,
+   "lastPdf": 27,
+   "titleLine": "实践是检验真理的唯一标准",
+   "titlePrinted": "15",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "深刻理解“两个结合”的重大意义",
+   "nextTitlePdf": 28,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1523",
+   "book": "xuanbi-zhong",
+   "pdfSha256": "efe51d7a6773eb16f15282c9ad4f94b92c2a3402b1e12791b9ceb8918999857c",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 34,
+   "lastPdf": 39,
+   "titleLine": "人应当坚持正义",
+   "titlePrinted": "29",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "单元研习任务",
+   "nextTitlePdf": 40,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1529",
+   "book": "xuanbi-zhong",
+   "pdfSha256": "efe51d7a6773eb16f15282c9ad4f94b92c2a3402b1e12791b9ceb8918999857c",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 66,
+   "lastPdf": 71,
+   "titleLine": "荷花淀",
+   "titlePrinted": "61",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "小二黑结婚(节选)",
+   "nextTitlePdf": 71,
+   "nextTitleOpensItsPage": false,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1530",
+   "book": "xuanbi-zhong",
+   "pdfSha256": "efe51d7a6773eb16f15282c9ad4f94b92c2a3402b1e12791b9ceb8918999857c",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 71,
+   "lastPdf": 76,
+   "titleLine": "小二黑结婚(节选)",
+   "titlePrinted": "66",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "党费",
+   "nextTitlePdf": 76,
+   "nextTitleOpensItsPage": false,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1536",
+   "book": "xuanbi-zhong",
+   "pdfSha256": "efe51d7a6773eb16f15282c9ad4f94b92c2a3402b1e12791b9ceb8918999857c",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 98,
+   "lastPdf": 101,
+   "titleLine": "过秦论",
+   "titlePrinted": "93",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "五代史伶官传序",
+   "nextTitlePdf": 101,
+   "nextTitleOpensItsPage": false,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1541",
+   "book": "xuanbi-zhong",
+   "pdfSha256": "efe51d7a6773eb16f15282c9ad4f94b92c2a3402b1e12791b9ceb8918999857c",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 122,
+   "lastPdf": 123,
+   "titleLine": "迷娘(之一)",
+   "titlePrinted": "117",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "致大海",
+   "nextTitlePdf": 123,
+   "nextTitleOpensItsPage": false,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1549",
+   "book": "xuanbi-zhong",
+   "pdfSha256": "efe51d7a6773eb16f15282c9ad4f94b92c2a3402b1e12791b9ceb8918999857c",
+   "basis": "current-edition-text-layer",
+   "reason": "pages owned by another lesson are shown",
+   "firstPdf": 135,
+   "lastPdf": 135,
+   "titleLine": "书愤",
+   "titlePrinted": "130",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "后记",
+   "nextTitlePdf": 136,
+   "nextTitleOpensItsPage": true,
+   "removedPages": [
+    {
+     "pdf": 136,
+     "ownerLesson": "lesson-1551"
+    },
+    {
+     "pdf": 137,
+     "ownerLesson": "lesson-1551"
+    },
+    {
+     "pdf": 138,
+     "ownerLesson": "lesson-1551"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1556",
+   "book": "xuanbi-xia",
+   "pdfSha256": "7da9104e683d3378773969d46cc842b6fce8f83709a17c313a8aca02b334ac15",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 7,
+   "lastPdf": 8,
+   "titleLine": "氓",
+   "titlePrinted": "2",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "离骚(节选)",
+   "nextTitlePdf": 8,
+   "nextTitleOpensItsPage": false,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1570",
+   "book": "xuanbi-xia",
+   "pdfSha256": "7da9104e683d3378773969d46cc842b6fce8f83709a17c313a8aca02b334ac15",
+   "basis": "current-edition-text-layer",
+   "reason": "no-exact-row-page",
+   "firstPdf": 52,
+   "lastPdf": 55,
+   "titleLine": "风景谈",
+   "titlePrinted": "47",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "秦腔",
+   "nextTitlePdf": 56,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1571",
+   "book": "xuanbi-xia",
+   "pdfSha256": "7da9104e683d3378773969d46cc842b6fce8f83709a17c313a8aca02b334ac15",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 56,
+   "lastPdf": 61,
+   "titleLine": "秦腔",
+   "titlePrinted": "51",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "茶馆(节选)",
+   "nextTitlePdf": 62,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1576",
+   "book": "xuanbi-xia",
+   "pdfSha256": "7da9104e683d3378773969d46cc842b6fce8f83709a17c313a8aca02b334ac15",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 77,
+   "lastPdf": 79,
+   "titleLine": "陈情表",
+   "titlePrinted": "72",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "项脊轩志",
+   "nextTitlePdf": 79,
+   "nextTitleOpensItsPage": false,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1580",
+   "book": "xuanbi-xia",
+   "pdfSha256": "7da9104e683d3378773969d46cc842b6fce8f83709a17c313a8aca02b334ac15",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 88,
+   "lastPdf": 90,
+   "titleLine": "种树郭橐驼传",
+   "titlePrinted": "83",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "石钟山记",
+   "nextTitlePdf": 91,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1581",
+   "book": "xuanbi-xia",
+   "pdfSha256": "7da9104e683d3378773969d46cc842b6fce8f83709a17c313a8aca02b334ac15",
+   "basis": "current-edition-text-layer",
+   "reason": "a page inside the lesson is skipped",
+   "firstPdf": 91,
+   "lastPdf": 93,
+   "titleLine": "石钟山记",
+   "titlePrinted": "86",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "单元研习任务",
+   "nextTitlePdf": 94,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1692-p1",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "pages owned by another lesson are shown",
+   "firstPdf": 11,
+   "lastPdf": 11,
+   "titleLine": "立在地球边上放号",
+   "titlePrinted": "4",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "红烛",
+   "nextTitlePdf": 11,
+   "nextTitleOpensItsPage": false,
+   "removedPages": [
+    {
+     "pdf": 12,
+     "ownerLesson": "lesson-1692-p2"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1692-p2",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 11,
+   "lastPdf": 13,
+   "titleLine": "红烛",
+   "titlePrinted": "4",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "峨日朵雪峰之侧",
+   "nextTitlePdf": 13,
+   "nextTitleOpensItsPage": false,
+   "removedPages": [
+    {
+     "pdf": 14,
+     "ownerLesson": "lesson-1692-p4"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1692-p3",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 13,
+   "lastPdf": 14,
+   "titleLine": "峨日朵雪峰之侧",
+   "titlePrinted": "6",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "致云雀",
+   "nextTitlePdf": 14,
+   "nextTitleOpensItsPage": false,
+   "removedPages": [
+    {
+     "pdf": 15,
+     "ownerLesson": "lesson-1692-p4"
+    },
+    {
+     "pdf": 16,
+     "ownerLesson": "lesson-1692-p4"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1692-p4",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 14,
+   "lastPdf": 18,
+   "titleLine": "致云雀",
+   "titlePrinted": "7",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "百合花",
+   "nextTitlePdf": 19,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1697",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "last page(s) of the lesson not shown",
+   "firstPdf": 39,
+   "lastPdf": 45,
+   "titleLine": "喜看稻菽千重浪——记首届国家最高科技奖获得者袁隆平",
+   "titlePrinted": "32",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "心有一团火,温暖众人心",
+   "nextTitlePdf": 45,
+   "nextTitleOpensItsPage": false,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1701-p2",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 60,
+   "lastPdf": 61,
+   "titleLine": "插秧歌",
+   "titlePrinted": "53",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "单元学习任务",
+   "nextTitlePdf": 62,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1705-p2",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 68,
+   "lastPdf": 68,
+   "titleLine": "登高",
+   "titlePrinted": "61",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "琵琶行并序",
+   "nextTitlePdf": 69,
+   "nextTitleOpensItsPage": true,
+   "removedPages": [
+    {
+     "pdf": 69,
+     "ownerLesson": "lesson-1705-p3"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1705-p3",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 69,
+   "lastPdf": 71,
+   "titleLine": "琵琶行并序",
+   "titlePrinted": "62",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "念奴娇·赤壁怀古",
+   "nextTitlePdf": 72,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1706-p2",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "pages owned by another lesson are shown",
+   "firstPdf": 73,
+   "lastPdf": 73,
+   "titleLine": "永遇乐·京口北固亭怀古",
+   "titlePrinted": "66",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "声声慢(寻寻觅觅)",
+   "nextTitlePdf": 74,
+   "nextTitleOpensItsPage": true,
+   "removedPages": [
+    {
+     "pdf": 74,
+     "ownerLesson": "lesson-1706-p3"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1706-p3",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 74,
+   "lastPdf": 75,
+   "titleLine": "声声慢(寻寻觅觅)",
+   "titlePrinted": "67",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "单元学习任务",
+   "nextTitlePdf": 76,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1711-p2",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 92,
+   "lastPdf": 94,
+   "titleLine": "师说",
+   "titlePrinted": "85",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "反对党八股(节选)",
+   "nextTitlePdf": 95,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1719-p2",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 127,
+   "lastPdf": 129,
+   "titleLine": "登泰山记",
+   "titlePrinted": "120",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "单元学习任务",
+   "nextTitlePdf": 130,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1720",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "pages owned by another lesson are shown",
+   "firstPdf": 130,
+   "lastPdf": 131,
+   "titleLine": "单元学习任务",
+   "titlePrinted": "123",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "第八单元词语积累与词语解释",
+   "nextTitlePdf": 132,
+   "nextTitleOpensItsPage": true,
+   "removedPages": [
+    {
+     "pdf": 132,
+     "ownerLesson": "lesson-1721"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1721",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 132,
+   "lastPdf": 146,
+   "titleLine": "第八单元词语积累与词语解释",
+   "titlePrinted": "125",
+   "laterTextsOfThisLesson": [
+    "学习活动一丰富词语积累",
+    "二把握古今词义的联系与区别",
+    "三词义的辨析和词语的使用"
+   ],
+   "nextTitleLine": "古诗词诵读",
+   "nextTitlePdf": 147,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1722-p1",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "pages owned by another lesson are shown",
+   "firstPdf": 147,
+   "lastPdf": 147,
+   "titleLine": "静女",
+   "titlePrinted": "140",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "涉江采芙蓉",
+   "nextTitlePdf": 148,
+   "nextTitleOpensItsPage": true,
+   "removedPages": [
+    {
+     "pdf": 148,
+     "ownerLesson": "lesson-1722-p2"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1722-p2",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 148,
+   "lastPdf": 148,
+   "titleLine": "涉江采芙蓉",
+   "titlePrinted": "141",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "虞美人(春花秋月何时了)",
+   "nextTitlePdf": 149,
+   "nextTitleOpensItsPage": true,
+   "removedPages": [
+    {
+     "pdf": 149,
+     "ownerLesson": "lesson-1722-p3"
+    },
+    {
+     "pdf": 150,
+     "ownerLesson": "lesson-1722-p4"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1722-p3",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 149,
+   "lastPdf": 149,
+   "titleLine": "虞美人(春花秋月何时了)",
+   "titlePrinted": "142",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "鹊桥仙(纤云弄巧)",
+   "nextTitlePdf": 150,
+   "nextTitleOpensItsPage": true,
+   "removedPages": [
+    {
+     "pdf": 151,
+     "ownerLesson": "lesson-1723"
+    },
+    {
+     "pdf": 152,
+     "ownerLesson": "lesson-1723"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1722-p4",
+   "book": "bixiu-shang",
+   "pdfSha256": "e635902fe13148feda47872803ea3dc298509641aa3f342ba5598a1104010fe7",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 150,
+   "lastPdf": 150,
+   "titleLine": "鹊桥仙(纤云弄巧)",
+   "titlePrinted": "143",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "后记",
+   "nextTitlePdf": 151,
+   "nextTitleOpensItsPage": true,
+   "removedPages": [
+    {
+     "pdf": 153,
+     "ownerLesson": "lesson-1723"
+    },
+    {
+     "pdf": 154,
+     "ownerLesson": "lesson-1723"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1743-p2",
+   "book": "bixiu-xia",
+   "pdfSha256": "b228cd12168cdf6455aae2ce2d02afc23d326a294f100b3f9fbc8c8ef9774fb6",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 94,
+   "lastPdf": 97,
+   "titleLine": "与妻书",
+   "titlePrinted": "87",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "单元学习任务",
+   "nextTitlePdf": 98,
+   "nextTitleOpensItsPage": true,
+   "removedPages": []
+  },
+  {
+   "lessonId": "lesson-1755-p1",
+   "book": "bixiu-xia",
+   "pdfSha256": "b228cd12168cdf6455aae2ce2d02afc23d326a294f100b3f9fbc8c8ef9774fb6",
+   "basis": "current-edition-text-layer",
+   "reason": "pages owned by another lesson are shown",
+   "firstPdf": 162,
+   "lastPdf": 162,
+   "titleLine": "登岳阳楼",
+   "titlePrinted": "155",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "桂枝香·金陵怀古",
+   "nextTitlePdf": 163,
+   "nextTitleOpensItsPage": true,
+   "removedPages": [
+    {
+     "pdf": 163,
+     "ownerLesson": "lesson-1755-p2"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1755-p2",
+   "book": "bixiu-xia",
+   "pdfSha256": "b228cd12168cdf6455aae2ce2d02afc23d326a294f100b3f9fbc8c8ef9774fb6",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 163,
+   "lastPdf": 163,
+   "titleLine": "桂枝香·金陵怀古",
+   "titlePrinted": "156",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "念奴娇·过洞庭",
+   "nextTitlePdf": 164,
+   "nextTitleOpensItsPage": true,
+   "removedPages": [
+    {
+     "pdf": 164,
+     "ownerLesson": "lesson-1755-p3"
+    },
+    {
+     "pdf": 165,
+     "ownerLesson": "lesson-1755-p4"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1755-p3",
+   "book": "bixiu-xia",
+   "pdfSha256": "b228cd12168cdf6455aae2ce2d02afc23d326a294f100b3f9fbc8c8ef9774fb6",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 164,
+   "lastPdf": 164,
+   "titleLine": "念奴娇·过洞庭",
+   "titlePrinted": "157",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "游园(【皂罗袍】)",
+   "nextTitlePdf": 165,
+   "nextTitleOpensItsPage": true,
+   "removedPages": [
+    {
+     "pdf": 166,
+     "ownerLesson": "lesson-1756"
+    }
+   ]
+  },
+  {
+   "lessonId": "lesson-1755-p4",
+   "book": "bixiu-xia",
+   "pdfSha256": "b228cd12168cdf6455aae2ce2d02afc23d326a294f100b3f9fbc8c8ef9774fb6",
+   "basis": "current-edition-text-layer",
+   "reason": "title-not-on-first-page",
+   "firstPdf": 165,
+   "lastPdf": 165,
+   "titleLine": "游园(【皂罗袍】)",
+   "titlePrinted": "158",
+   "laterTextsOfThisLesson": [],
+   "nextTitleLine": "后记",
+   "nextTitlePdf": 166,
+   "nextTitleOpensItsPage": true,
+   "removedPages": [
+    {
+     "pdf": 167,
+     "ownerLesson": "lesson-1756"
+    }
+   ]
+  }
+ ]
+}

@@ -26,6 +26,7 @@ const LESSON_BLUEPRINT_RULES_URL = new URL(
   "../lesson-blueprint-rules.js?v=8498ddbb5a69645b",
   APP_SCRIPT_URL,
 ).href;
+const TEXTBOOK_PAGES_MODULE_URL = new URL("textbook-pages.js?v=91556289be7d3930", APP_SCRIPT_URL).href;
 
 let sharedStateClient = null;
 let sharedStateClientIdentity = null;
@@ -162,6 +163,11 @@ const state = {
   current: null,
   pages: [],
   pageIndex: 0,
+  plateApi: null,
+  plateData: null,
+  plates: { state: "unavailable", pages: [], notes: [], bookTitle: "" },
+  plateLoader: null,
+  plateThumbnails: null,
   selectedText: "",
   lexicon: "dict",
   blueprints: new Map(),
@@ -260,6 +266,9 @@ const els = {
   pageDialogTitle: $("#page-dialog-title"),
   pageImage: $("#page-image"),
   pageCaption: $("#page-caption"),
+  pageNote: $("#page-note"),
+  pagePdfLink: $("#page-pdf-link"),
+  pageRetry: $("#page-retry"),
   pageStrip: $("#page-strip"),
   pagePrev: $("#page-prev"),
   pageNext: $("#page-next"),
@@ -1466,13 +1475,17 @@ function renderLessonIndex() {
     const heading = isUnitHeading(lesson);
     if (!heading) sequence += 1;
     const done = progressPercent(state.progress[lesson.id] || {}, lesson) === 100;
-    const page = lesson.textbookStartPage || lesson.textbook?.startPage;
+    // Verified printed page from the page data; the previous `p<n>` when it could not load.
+    const legacyStart = lesson.textbookStartPage || lesson.textbook?.startPage;
+    const page = state.plateApi
+      ? state.plateApi.startPlateLabel(state.plateData, lesson.id)
+      : (legacyStart ? `p${legacyStart}` : "");
     return `
       ${heading ? `<div class="unit-marker">${esc(lessonTitle(lesson))}</div>` : ""}
       <button type="button" class="lesson-link ${state.current?.id === lesson.id ? "active" : ""} ${heading ? "overview" : ""}" data-lesson="${esc(lesson.id)}">
         <span>${heading ? "導" : String(sequence).padStart(2, "0")}</span>
         <strong>${esc(lessonTitle(lesson))}</strong>
-        <small>${done ? "步驟完成" : page ? `p${page}` : isUnitTask(lesson) ? "任務" : ""}</small>
+        <small>${done ? "步驟完成" : page ? esc(page) : isUnitTask(lesson) ? "任務" : ""}</small>
       </button>
     `;
   }).join("") || `<p class="index-empty">沒有匹配的課文。</p>`;
@@ -1971,7 +1984,7 @@ function renderText(lesson) {
           textVersionId: firstRead.asset.textVersionId,
         };
         els.body.classList.remove("first-read-locked");
-        els.pageOpen.disabled = !state.pages.length;
+        els.pageOpen.disabled = !platesCanOpen();
         els.resourcesOpen.disabled = false;
         els.pageOpen.title = "";
         els.resourcesOpen.title = "";
@@ -5181,26 +5194,105 @@ async function updateLexiconFrame() {
   }
 }
 
+// Textbook plates come only from data/textbook-pages.v1.json (current-edition
+// PDF pages rendered by sun.bdfz.net); the lesson file's legacy image fields are
+// never read.  A lesson whose pages have no counterpart still opens the dialog,
+// to say so in words.
+function platesCanOpen() {
+  return state.plates.state === "ready" || state.plates.state === "none";
+}
+
 function preparePages(lesson) {
-  const direct = lesson.textbook?.pageImages || [];
-  const context = (lesson.textbook?.contextPageImages || []).filter((page) => page.matched);
-  state.pages = direct.length ? direct : context;
+  const large = (window.devicePixelRatio || 1) >= 2 && window.innerWidth >= 900;
+  state.plates = state.plateApi
+    ? state.plateApi.lessonPlates(state.plateData, lesson.id, { large })
+    : { state: "unavailable", pages: [], notes: [], bookTitle: "" };
+  state.pages = state.plates.pages;
   state.pageIndex = 0;
   const firstRead = firstReadForLesson(lesson.id);
   const firstReadLocked = Boolean(sourceModeFor(lesson) === "classical" && !firstRead?.submitted);
-  els.pageOpen.disabled = firstReadLocked || !state.pages.length;
+  els.pageOpen.disabled = firstReadLocked || !platesCanOpen();
+}
+
+async function loadTextbookPlates() {
+  try {
+    const [api, data] = await Promise.all([
+      import(TEXTBOOK_PAGES_MODULE_URL),
+      fetchJson("data/textbook-pages.v1.json", { cache: "no-cache" }),
+    ]);
+    if (!api.validTextbookPages(data)) throw new Error("textbook page data invalid");
+    state.plateApi = api;
+    state.plateData = data;
+    state.plateLoader = api.createPlateLoader({
+      image: els.pageImage,
+      onState: renderPlateState,
+      isHidden: () => document.hidden,
+    });
+    state.plateThumbnails = api.createThumbnailQueue();
+  } catch {
+    // The lesson, its exercises and records do not depend on the plates.
+    state.plateApi = null;
+    state.plateData = null;
+  }
+  if (state.manifest) renderLessonIndex();
+  if (state.current) preparePages(state.current);
+}
+
+function plateNoteText(extra = "") {
+  const page = state.pages[state.pageIndex];
+  return [
+    extra,
+    page?.revised ? "現行版教材此頁內容已修訂，與本課原對應頁文字不同。" : "",
+    ...state.plates.notes,
+  ].filter(Boolean).join(" ");
+}
+
+function renderPlateState(plateState) {
+  els.pageRetry.hidden = plateState !== "failed";
+  if (plateState === "retrying") {
+    els.pageNote.textContent = plateNoteText("圖頁載入較慢，正在自動重試…");
+  } else if (plateState === "failed") {
+    els.pageImage.hidden = true;
+    els.pageNote.textContent = plateNoteText("圖頁暫時無法載入（教材圖頁服務忙碌或網絡中斷），請稍後重試，或在 PDF 中打開。");
+  } else {
+    if (plateState === "loaded") els.pageImage.hidden = false;
+    els.pageNote.textContent = plateNoteText();
+  }
 }
 
 function showPage(index) {
-  if (!state.pages.length) return;
+  const title = state.plates.bookTitle || state.current?.blockTitle || "";
+  if (!state.pages.length) {
+    state.plateLoader?.show("");
+    els.pageImage.alt = "";
+    els.pageCaption.textContent = title;
+    // No page of this lesson; at most a pointer to what now stands at its position.
+    if (state.plates.samePosition) {
+      els.pagePdfLink.href = state.plates.samePosition.viewer;
+      els.pagePdfLink.hidden = false;
+    } else {
+      els.pagePdfLink.hidden = true;
+      els.pagePdfLink.removeAttribute("href");
+    }
+    els.pagePrev.disabled = true;
+    els.pageNext.disabled = true;
+    return;
+  }
   state.pageIndex = clamp(index, 0, state.pages.length - 1);
   const page = state.pages[state.pageIndex];
-  els.pageImage.src = page.src;
   els.pageImage.alt = `${lessonTitle(state.current)} ${page.label}`;
-  els.pageCaption.textContent = `${state.current.textbook?.bookTitle || state.current.blockTitle} · ${page.label} · ${state.pageIndex + 1}/${state.pages.length}`;
+  els.pageCaption.textContent = `${title} · ${page.label} · ${state.pageIndex + 1}/${state.pages.length}`;
+  els.pagePdfLink.href = page.viewer;
+  els.pagePdfLink.hidden = false;
   els.pagePrev.disabled = state.pageIndex === 0;
   els.pageNext.disabled = state.pageIndex === state.pages.length - 1;
   $$('.page-strip button', els.pageStrip).forEach((button, buttonIndex) => button.classList.toggle("active", buttonIndex === state.pageIndex));
+  state.plateLoader?.show(page.src);
+}
+
+function closePages() {
+  state.plateLoader?.cancel();
+  state.plateThumbnails?.cancel();
 }
 
 function openPages(index = 0) {
@@ -5209,20 +5301,22 @@ function openPages(index = 0) {
     toast("完成無標點初讀後再打開教材原圖");
     return;
   }
-  if (!state.pages.length) {
-    toast("本課尚未匹配到教材原圖");
+  if (!platesCanOpen()) {
+    toast(state.plates.state === "unavailable" ? "教材原圖資料暫時無法載入，請稍後重試" : "本課尚未匹配到教材原圖");
     return;
   }
   els.pageDialogTitle.textContent = lessonTitle(state.current);
   els.pageStrip.innerHTML = state.pages.map((page, pageIndex) => `
-    <button type="button" data-page-index="${pageIndex}"><img src="${esc(page.src)}" alt="${esc(page.label)}"><span>${esc(page.label)}</span></button>
+    <button type="button" data-page-index="${pageIndex}"><img data-plate-thumb="${esc(page.thumb)}" alt="" loading="lazy" decoding="async"><span>${esc(page.label)}</span></button>
   `).join("");
   $$('.page-strip button', els.pageStrip).forEach((button) => button.addEventListener("click", () => showPage(Number(button.dataset.pageIndex))));
   showPage(index);
   if (!els.pageDialog.open) els.pageDialog.showModal();
+  state.plateThumbnails?.load($$('.page-strip img', els.pageStrip));
+  // Unchanged trace: recorded on every open, with the value the lesson file alone gives.
   void recordLearning("resourceOpened", {
     resourceKind: "textbook_page",
-    resourceRef: state.pages[index]?.label || String(index + 1),
+    resourceRef: state.plateApi.legacyTraceLabel(state.current, index),
   });
 }
 
@@ -5511,6 +5605,11 @@ function bindEvents() {
   els.pageOpen.addEventListener("click", () => openPages());
   els.pagePrev.addEventListener("click", () => showPage(state.pageIndex - 1));
   els.pageNext.addEventListener("click", () => showPage(state.pageIndex + 1));
+  els.pageRetry.addEventListener("click", () => state.plateLoader?.retry());
+  els.pageDialog.addEventListener("close", closePages);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && els.pageDialog.open) state.plateLoader?.resume();
+  });
   els.resourcesOpen.addEventListener("click", () => {
     document.querySelector("#classroom-materials")?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
@@ -5620,6 +5719,8 @@ async function init() {
     if (node.nodeType === Node.ELEMENT_NODE) enforceNewTabLinks(node);
   }))).observe(document.body, { childList: true, subtree: true });
   if (compactAtlasMedia.matches) closeAtlas(); else openAtlas();
+  // Textbook plates are a recoverable enhancement and never gate the lesson.
+  void loadTextbookPlates();
   // The catalog is a recoverable learning enhancement. Start it in parallel,
   // but never put the core textbook first paint behind its network/body wait.
   const studyGuideCatalogPromise = fetchStudyGuideCatalog().catch(() => null);

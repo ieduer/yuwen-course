@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1232,
-  "totalBytes": 164601612,
-  "aggregateSha256": "262fead3931db309a107af72259735eca0606cae16a9eac0a3f5e857900978ff",
+  "fileCount": 1234,
+  "totalBytes": 164700836,
+  "aggregateSha256": "9921d13d9f8045d6d74b0108f23ffe03ec22808a248067d9817d6443e2933428",
   "files": [
     {
       "path": "_headers",
-      "bytes": 382,
-      "sha256": "89de9dfcc3c72856b40738dfd60c54d45b91bd66ac01260893a8741318318580"
+      "bytes": 449,
+      "sha256": "c7ed285e67d681588b39f377ca77bf38508774b39d30d4090a468c937d97e8fd"
     },
     {
       "path": "_redirects",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "da0952f2795722484733d342c66c884d492ed029d46fdd0234cc08868ef89530"
+      "sha256": "da7165603565caa166abca1e34faabe728ec87e3196becb83ed720e251da1699"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1417,8 +1417,8 @@
     },
     {
       "path": "assets/app.js",
-      "bytes": 255978,
-      "sha256": "b1478b433a97e46163b2f1efdc1ce68ce1b88615e193fcce0b81c8f04e641b59"
+      "bytes": 260058,
+      "sha256": "2e2e81144e49c3b369930dba79eddd430a7acff5c778d93aa3f9d97e4f540495"
     },
     {
       "path": "assets/atlas.css",
@@ -3112,8 +3112,13 @@
     },
     {
       "path": "assets/styles.css",
-      "bytes": 84561,
-      "sha256": "e1743337c29ccf18804d254d2306bd176832a8876a598e1e9fc5a5af5f616c68"
+      "bytes": 85051,
+      "sha256": "d0ce91cb6ab04425118465a785700fe7604f5b40ac1b0a9348de13ab282ed35b"
+    },
+    {
+      "path": "assets/textbook-pages.js",
+      "bytes": 9616,
+      "sha256": "91556289be7d3930a21a4f87d2a966a7c7c167cbf7beed27dfdfa7644a5015f2"
     },
     {
       "path": "assets/vocab-progress.js",
@@ -5336,6 +5341,11 @@
       "sha256": "4ac9e223be27316aa5324ab5c9b474e378f61ec703ac9140b590e1a42c3c89d0"
     },
     {
+      "path": "data/textbook-pages.v1.json",
+      "bytes": 84681,
+      "sha256": "98511c35bd8b70deec13113dc579d23a29064e420ab54ed7f32e3bbcb07ffb48"
+    },
+    {
       "path": "data/vocab-eligibility.json",
       "bytes": 558,
       "sha256": "bbd3a99141c35f7c57d94b5ed8dd7fbb2d8551ad2bab029954eb4530ba3d4b7e"
@@ -6057,8 +6067,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 11596,
-      "sha256": "3b8ddac2c641304564c6e19f23a1479b6f8e0748d199b1cc0e36f4f422f39dfb"
+      "bytes": 11886,
+      "sha256": "795e99d4675588c745abcb8f0c8141f24ffa810e147b042dfab30e9b635b9e41"
     },
     {
       "path": "learning-evaluation-events.js",

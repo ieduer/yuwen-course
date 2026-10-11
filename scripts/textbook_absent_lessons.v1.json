@@ -1,0 +1,40 @@
+{
+ "schema": "yw-textbook-absent-lessons-v1",
+ "note": "Lessons that are not in the current edition of their volume: no entry of the PDF's contents pages and their title is a line of no page. They show no textbook page. Proven by scripts/audit_textbook_lesson_pages.py (--write-absent / --verify-absent).",
+ "catalogRelease": "20261011T015939Z-24b58ca8",
+ "verifiedOn": "2026-10-11",
+ "extractor": "pymupdf 1.28.2 page text",
+ "lessons": [
+  {
+   "lessonId": "lesson-1522",
+   "book": "xuanbi-zhong",
+   "pdfSha256": "efe51d7a6773eb16f15282c9ad4f94b92c2a3402b1e12791b9ceb8918999857c",
+   "titlesChecked": [
+    "怜悯是人的天性"
+   ],
+   "contentsEntry": false,
+   "titleLinePages": []
+  },
+  {
+   "lessonId": "lesson-1569",
+   "book": "xuanbi-xia",
+   "pdfSha256": "7da9104e683d3378773969d46cc842b6fce8f83709a17c313a8aca02b334ac15",
+   "titlesChecked": [
+    "一个消逝了的山村"
+   ],
+   "contentsEntry": false,
+   "titleLinePages": []
+  },
+  {
+   "lessonId": "lesson-1572",
+   "book": "xuanbi-xia",
+   "pdfSha256": "7da9104e683d3378773969d46cc842b6fce8f83709a17c313a8aca02b334ac15",
+   "titlesChecked": [
+    "聽聽那冷雨",
+    "听听那冷雨"
+   ],
+   "contentsEntry": false,
+   "titleLinePages": []
+  }
+ ]
+}
