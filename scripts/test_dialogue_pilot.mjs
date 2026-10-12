@@ -8,14 +8,16 @@ import {handleDialogue,reconcileAbandonedCalls,callDialogueModel} from '../site/
 import {replyPrefix,consumeGatewayStream} from '../site/dialogue-stream.js';
 import {readDialogueEvents} from '../site/assets/dialogue-events.js';
 import {dialogueBudget,reconciledCost} from '../site/dialogue-budget.js';
+import {handleDialogueFirstRead} from '../site/_worker.js';
 const curriculum=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1717-p2.json'));
 const classical=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1711-p1.json'));
 const student={id:1,ucUserId:700001};
 const syntheticBudget=JSON.stringify({version:'synthetic-only',validUntil:'2099-01-01T00:00:00Z',currency:'USD',model:'gemini-test',globalDailyMicros:1000000,userDailyMicros:100000,lessonLifetimeMicros:500000,reserveMicros:1100,inputMicrosPerMillion:10000,outputMicrosPerMillion:10000});
-function fixture(){
+function fixture({classicalReady=false}={}){
  const sql=new DatabaseSync(':memory:');sql.exec('PRAGMA foreign_keys=ON;');
  for(const file of fs.readdirSync('migrations').filter(f=>f.endsWith('.sql')).sort())sql.exec(fs.readFileSync('migrations/'+file,'utf8'));
  sql.exec("INSERT INTO students(id,uc_slug,display_name) VALUES(1,'synthetic-one','Test'),(2,'synthetic-two','Test');");
+ if(classicalReady)sql.exec("INSERT INTO classical_first_read_sessions(student_id,lesson_id,text_version_id,text_digest,submitted_at) VALUES(1,'lesson-1711-p1','synthetic-ready','synthetic-digest','2020-01-01'); INSERT INTO learning_interactions(source_event_id,student_id,academic_year,lesson_id,interaction_key,event_type,assessment_kind,scoring_role,resource_key,resource_version,registry_version,client_mutation_id,lesson_phase,occurred_at) VALUES('synthetic-read',1,'2026-2027','lesson-1711-p1','readAcknowledged','read_acknowledged','participation','none','synthetic-read','v1','v1','annotated-read:lesson-1711-p1:synthetic-ready','annotated_reading','2020-01-01');");
  const wrap=(text,args=[])=>({bind:(...v)=>wrap(text,v),first:async()=>sql.prepare(text).get(...args)||null,all:async()=>({results:sql.prepare(text).all(...args)}),run:async()=>({meta:{changes:Number(sql.prepare(text).run(...args).changes)}}),runSync:()=>({meta:{changes:Number(sql.prepare(text).run(...args).changes)}})});
  const db={prepare:text=>wrap(text),batch:async statements=>{sql.exec('BEGIN');try{const r=statements.map(s=>s.runSync());sql.exec('COMMIT');return r;}catch(e){sql.exec('ROLLBACK');throw e;}}};
  const env={YW_DIALOGUE_BUDGET_JSON:syntheticBudget,READING_DB:db,YW_DIALOGUE_ENABLED:'true',ASSETS:{fetch:async request=>new Response(fs.readFileSync('site'+new URL(request.url).pathname))}};
@@ -225,10 +227,10 @@ test('same mutation with altered body conflicts without a new AI call',async()=>
 test('ten concurrent duplicates reserve one call and one answer',async()=>{const f=fixture();try{let count=0;await Promise.all(Array.from({length:10},()=>handleDialogue(req(body()),f.env,student,null,{callModel:async()=>{count++;return good();}})));assert.equal(count,1);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,1);assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_turns WHERE role='student'").get().n,1);}finally{f.close();}});
 test('unconfirmed model reply preserves student work and retries do not recall provider',async()=>{const f=fixture();try{let count=0;const options={callModel:async()=>{count++;throw Error('timeout');}};const data=await (await handleDialogue(req(body()),f.env,student,null,options)).json();assert.equal(data.turns[0].status,'needs_review');assert.equal(data.pending,false);await handleDialogue(req(body()),f.env,student,null,options);assert.equal(count,1);assert.equal(f.sql.prepare('SELECT state FROM dialogue_calls').get().state,'review');}finally{f.close();}});
 test('other account sees neither dialogue nor assessment and may not inject a session id',async()=>{const f=fixture();try{await handleDialogue(req(body()),f.env,student,null,{callModel:good});const data=await (await handleDialogue(req(),f.env,{id:2,ucUserId:700002})).json();assert.deepEqual(data.turns,[]);assert.equal(data.revision,0);}finally{f.close();}});
-test('refresh retains the exact outstanding question and criteria are absent from public question',async()=>{const f=fixture();try{const b={action:'question',objectiveId:classical.vocabulary[0].id};const one=await (await handleDialogue(req(b,classical.lessonId),f.env,student)).json();const two=await (await handleDialogue(req(b,classical.lessonId),f.env,student)).json();assert.equal(one.question.id,two.question.id);assert.equal(one.question.criteria,undefined);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_questions').get().n,1);}finally{f.close();}});
+test('refresh retains the exact outstanding question and criteria are absent from public question',async()=>{const f=fixture({classicalReady:true});try{const b={action:'question',objectiveId:classical.vocabulary[0].id};const one=await (await handleDialogue(req(b,classical.lessonId),f.env,student)).json();const two=await (await handleDialogue(req(b,classical.lessonId),f.env,student)).json();assert.equal(one.question.id,two.question.id);assert.equal(one.question.criteria,undefined);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_questions').get().n,1);}finally{f.close();}});
 test('question order varies by immutable session and covers every item despite repeated client selection',async()=>{
  const a=await vocabularyOrder(classical,'synthetic-session-a'),b=await vocabularyOrder(classical,'synthetic-session-b');assert.notDeepEqual(a,b);assert.deepEqual(a,await vocabularyOrder(classical,'synthetic-session-a'));assert.deepEqual([...a].sort(),classical.vocabulary.map(v=>v.id).sort());
- const f=fixture();try{
+ const f=fixture({classicalReady:true});try{
   const seen=[];
   for(let i=0;i<classical.vocabulary.length;i++){
    const payload={action:'question',objectiveId:classical.vocabulary[0].id};
@@ -251,7 +253,7 @@ test('budget exhaustion durably preserves one recoverable draft without another 
  f.sql.prepare("UPDATE dialogue_calls SET day='2000-01-01'").run();
  const resumed=await(await handleDialogue(req(deferred),f.env,student,null,options)).json();assert.equal(resumed.draft,null);assert.equal(resumed.revision,LIMITS.turnsPerDay+1);assert.equal(count,LIMITS.turnsPerDay+1);
 }finally{f.close();}});
-test('failed vocabulary requires confirmed student reformulation before another variant',async()=>{const f=fixture();try{
+test('failed vocabulary requires confirmed student reformulation before another variant',async()=>{const f=fixture({classicalReady:true});try{
  const qBody={action:'question',objectiveId:classical.vocabulary[0].id};const first=await (await handleDialogue(req(qBody,classical.lessonId),f.env,student)).json();
  await handleDialogue(req({...body(),questionId:first.question.id},classical.lessonId),f.env,student,null,{callModel:good});
  const escape=await handleDialogue(req({...qBody,objectiveId:classical.vocabulary.find(v=>v.id!==first.question.objectiveId).id},classical.lessonId),f.env,student);assert.equal((await escape.json()).code,'reformulation_required');
@@ -289,7 +291,7 @@ test('private owner reference changes across accounts and saved receipts are rec
  assert(first.ownerRef);assert(other.ownerRef);assert.notEqual(first.ownerRef,other.ownerRef);
  assert.equal(first.turns[0].mutationId,body().mutationId);assert.equal(first.turns[1].mutationId,null);
 }finally{f.close();}});
-test('owner export contains the evidence index, questions and events without granting teacher access',async()=>{const f=fixture();try{
+test('owner export contains the evidence index, questions and events without granting teacher access',async()=>{const f=fixture({classicalReady:true});try{
  await handleDialogue(req({action:'question',objectiveId:classical.vocabulary[0].id},classical.lessonId),f.env,student);
  const request=new Request(`https://yw.bdfz.net/api/dialogue/v1?lessonId=${classical.lessonId}&records=1`);
  const data=await(await handleDialogue(request,f.env,student)).json();
@@ -422,5 +424,37 @@ test('shared-history is opt-in, authenticated and unavailable without its approv
  assert.equal((await handleDialogue(request,f.env,null,null,options)).status,401);assert.equal(calls,1);
  assert.equal((await(await handleDialogue(request,f.env,student)).json()).sharedHistory.status,'unavailable');
  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_sessions').get().n,0);
+ }finally{f.close();}
+});
+
+test('classical dialogue reuses exact source first-reading handlers and gates annotations before any model call',async()=>{
+ const f=fixture();let modelCalls=0;f.env.APIS={fetch:()=>{throw Error('no_provider_for_first_read');}};
+ const options={callModel:async()=>{modelCalls++;return good();},firstReadAction:(op,payload)=>handleDialogueFirstRead(req(null,classical.lessonId),f.env,student,null,op,payload)};
+ const action=async(operation,payload={})=>handleDialogue(req({action:'first_read',operation,payload},classical.lessonId),f.env,student,null,options);
+ try{
+  assert.equal((await(await handleDialogue(req(null,classical.lessonId),f.env,student)).json()).readingGate.phase,'initial_reading');
+  const premature=await handleDialogue(req(body(),classical.lessonId),f.env,student,null,options);assert.equal(premature.status,409);assert.equal(modelCalls,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,0);
+  const state=await(await action('state')).json(),asset=JSON.parse(fs.readFileSync('site/data/classical-first-read/lesson-1711-p1.json'));
+  assert.equal(state.textVersionId,asset.textVersionId);assert.equal(state.submitted,false);
+  const base={textVersionId:asset.textVersionId,textDigest:asset.textDigest,elapsedMs:60000};
+  for(let i=0;i<3;i++){
+   const paragraph=asset.paragraphs[0],startOffset=i*3,endOffset=startOffset+2;
+   const response=await action('mark',{...base,lessonId:'lesson-1498',paragraphKey:paragraph.key,startOffset,endOffset,selectedText:paragraph.text.slice(startOffset,endOffset),guess:`原始猜測${i}`,clientMutationId:`synthetic-first-read-mark-${i}`});
+   assert.equal(response.status,200,JSON.stringify(await response.clone().json()));
+  }
+  const before=f.sql.prepare('SELECT mark_id,selected_text,guess_text FROM classical_first_read_marks ORDER BY mark_id').all();assert.equal(before.length,3);
+  const submitted=await action('submit',{...base,summary:'我初步理解學習需要持續積累也有未懂之處。',clientMutationId:'synthetic-first-read-submitted'});assert.equal(submitted.status,200,JSON.stringify(await submitted.clone().json()));
+  assert.equal((await(await handleDialogue(req(null,classical.lessonId),f.env,student)).json()).readingGate.phase,'annotated_reading');
+  const earlyQuestion=await handleDialogue(req({action:'question'},classical.lessonId),f.env,student);assert.equal((await earlyQuestion.json()).code,'reading_required');
+  const acknowledged=await action('acknowledge',base);assert.equal(acknowledged.status,200,JSON.stringify(await acknowledged.clone().json()));
+  const readback=await(await handleDialogue(req(null,classical.lessonId),f.env,student)).json();assert.equal(readback.readingGate.phase,'close_reading');
+  assert.equal(readback.readingGate.unresolvedMarks,3);assert.equal(readback.state.next.domain,'vocabulary');
+  const modelProposals=classical.objectives.map(o=>({objectiveId:o.id,outcome:'demonstrated',evidence:[]}));
+  assert.equal(projectState(classical,modelProposals,[],null,readback.readingGate).readyForShangyou,false,'model claims cannot bypass unresolved source marks');
+  const firstMark=before[0],resolved=await action('resolve',{...base,markId:firstMark.mark_id,correction:'根據本句與教材註釋，我修正原有猜測。'});assert.equal(resolved.status,200);
+  assert.deepEqual(f.sql.prepare('SELECT mark_id,selected_text,guess_text FROM classical_first_read_marks ORDER BY mark_id').all(),before);
+  const switched=await handleDialogue(req({action:'first_read',operation:'mark',payload:base},classical.lessonId),f.env,{id:2,ucUserId:700002},null,{firstReadAction:()=>{throw Error('must_not_reach_source');}});assert.equal(switched.status,409);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM classical_first_read_marks WHERE student_id=2').get().n,0);
+  const evaluations=f.sql.prepare('SELECT correctness,eligibility_status,normalized_value FROM learning_evaluations').all();assert(evaluations.every(e=>e.eligibility_status==='non_scoring'&&e.normalized_value===null));assert.equal(modelCalls,0);
  }finally{f.close();}
 });

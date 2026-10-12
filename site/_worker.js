@@ -97,7 +97,10 @@ export default {
       }
       const student = await authenticatedReadingStudent(request, env);
       if (student?.error) return student.error;
-      return handleDialogue(request, env, student, ctx, {readSharedHistory:()=>readSharedHistory(userCenterSessionCookieHeader(request))});
+      return handleDialogue(request, env, student, ctx, {
+        readSharedHistory:()=>readSharedHistory(userCenterSessionCookieHeader(request)),
+        firstReadAction:(operation,payload)=>handleDialogueFirstRead(request,env,student,ctx,operation,payload),
+      });
     }
 
     if (url.pathname === '/api/learning/recorder-events' && request.method === 'GET') {
@@ -1992,11 +1995,11 @@ export function preActivationTransportLessonPhase(interactionKey, requestedPhase
     : "";
 }
 
-async function handleLearningInteraction(request, env, ctx) {
+async function handleLearningInteraction(request, env, ctx, authenticatedStudent = null) {
   if (!env.READING_DB) return readingError("learning evidence store not configured", 503);
   let student;
   try {
-    student = await getReadingStudent(request, env);
+    student = authenticatedStudent || await getReadingStudent(request, env);
   } catch (error) {
     if (error?.code === "reading_identity_unavailable") return readingError(error.message, 503);
     throw error;
@@ -2746,6 +2749,24 @@ async function handleReadingStudyGuideAttempt(request, env, student, capturedPay
 async function handleClassicalFirstReadState(request, env, student, lessonId) {
   const state = await getClassicalFirstReadState(request, env, student, lessonId);
   return json(state, { headers: { "cache-control": "no-store" } });
+}
+
+// Reuse the original source handlers with the student already verified by the
+// dialogue owner fence. No browser identity, replacement score or model call.
+export async function handleDialogueFirstRead(request,env,student,ctx,operation,payload){
+  const headers=new Headers(request.headers);headers.delete('content-length');
+  const make=body=>new Request(request.url,{method:'POST',headers,body:JSON.stringify(body)});
+  try{
+    if(operation==='state')return await handleClassicalFirstReadState(request,env,student,payload.lessonId);
+    if(operation==='acknowledge'){
+      const source=await getClassicalFirstReadState(request,env,student,payload.lessonId);
+      if(!source.submitted||source.textVersionId!==payload.textVersionId||source.textDigest!==payload.textDigest)return readingError('請先讀回同版本已提交的初讀紀錄',409,'first_read_text_version_conflict');
+      return await handleLearningInteraction(make({lessonId:payload.lessonId,interactionKey:'readAcknowledged',data:{threshold:1},clientMutationId:`annotated-read:${payload.lessonId}:${source.textVersionId}`.slice(0,100),lessonPhase:'annotated_reading'}),env,ctx,student);
+    }
+    const handler={mark:handleClassicalFirstReadMark,delete:handleClassicalFirstReadMarkDelete,submit:handleClassicalFirstReadSubmit,resolve:handleClassicalFirstReadResolve}[operation];
+    if(!handler)return readingError('invalid first-read operation',400);
+    return await handler(make(payload),env,student);
+  }catch(error){return readingError(error?.message||'初讀來源暫時不可用',422,error?.code);}
 }
 
 async function authoritativeClassicalFirstReadLesson(request, env, payload) {

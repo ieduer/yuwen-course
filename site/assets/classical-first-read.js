@@ -75,6 +75,7 @@
       readAuthority = true,
       fallbackAuthMode = "offline",
       canReconcile = () => true,
+      transport = null,
     } = {},
   ) {
     const assetResult = await fetchWithTimeout(`data/classical-first-read/${encodeURIComponent(lessonId)}.json`, {
@@ -97,7 +98,7 @@
     let authMode = fallbackAuthMode === "local" ? "local" : "offline";
     if (readAuthority) {
       try {
-        const stateResult = await fetchWithTimeout(`/api/reading/first-read/state/${encodeURIComponent(lessonId)}`, {
+        const stateResult = transport ? {status:200,payload:await transport.readState()} : await fetchWithTimeout(`/api/reading/first-read/state/${encodeURIComponent(lessonId)}`, {
           headers: { accept: "application/json" },
           cache: "no-store",
         }, async (response) => ({
@@ -122,7 +123,7 @@
       throw new Error("初讀權威版本與正文不一致");
     }
 
-    clearLegacyLocal(asset);
+    if(!transport)clearLegacyLocal(asset);
     const fallback = remote || {};
     const session = {
       asset,
@@ -138,6 +139,7 @@
       openedAt: performance.now(),
       marks: Array.isArray(fallback.marks) ? fallback.marks : [],
       pending: null,
+      transport,
     };
     if (authMode === "authenticated" && session.submitted && canReconcile(session) !== false) {
       void apiPost("/api/reading/first-read/reconcile", session, {}).catch(() => {});
@@ -356,6 +358,7 @@
   }
 
   async function apiPost(path, session, payload) {
+    if(session.transport)return session.transport.mutate(path,{lessonId:session.asset.lessonId,textVersionId:session.asset.textVersionId,textDigest:session.asset.textDigest,elapsedMs:Math.round(elapsedMs(session)),...payload});
     return fetchWithTimeout(path, {
       method: "POST",
       headers: { "content-type": "application/json", accept: "application/json" },
@@ -446,7 +449,8 @@
       let authoritative = null;
       try {
         authoritative = await load(session.asset.lessonId, {
-          canReconcile: () => handlerSessionIsCurrent(handlers, session),
+          canReconcile: () => !session.transport && handlerSessionIsCurrent(handlers, session),
+          transport: session.transport,
         });
       } catch {
         // Preserve the original submit error when the authority cannot be read.

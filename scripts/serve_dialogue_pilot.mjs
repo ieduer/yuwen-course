@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
 import {handleDialogue} from '../site/dialogue-source.js';
+import {handleDialogueFirstRead} from '../site/_worker.js';
 import {POLICY_VERSION} from '../site/dialogue-policy.js';
 const root=path.resolve('site'),sql=new DatabaseSync(':memory:');sql.exec('PRAGMA foreign_keys=ON');
 for(const f of fs.readdirSync('migrations').filter(f=>f.endsWith('.sql')).sort())sql.exec(fs.readFileSync('migrations/'+f,'utf8'));
@@ -33,7 +34,7 @@ const server=http.createServer(async(req,res)=>{try{const url=new URL(req.url,'h
  if(url.pathname==='/api/dialogue/v1'){
  let body='';for await(const c of req){body+=c;if(body.length>16000){res.writeHead(413);res.end();return;}}
  const request=new Request('https://yw.bdfz.net'+req.url,{method:req.method,headers:{'content-type':'application/json',accept:req.headers.accept||'application/json'},...(body?{body}:{})});
- const response=await handleDialogue(request,env,syntheticAccount?{id:syntheticAccount,ucUserId:700000+syntheticAccount}:null,null,{callModel:async(_env,_prompt,_id,emit)=>{
+ const response=await handleDialogue(request,env,syntheticAccount?{id:syntheticAccount,ucUserId:700000+syntheticAccount}:null,null,{firstReadAction:(operation,payload)=>handleDialogueFirstRead(request,env,{id:syntheticAccount,ucUserId:700000+syntheticAccount},null,operation,payload),callModel:async(_env,_prompt,_id,emit)=>{
   const reply='【合成測試回應，不是正式 AI 評閱】\n請回到你剛才選出的原文，說說是哪個詞讓你產生了這個理解。你也可以保留不同解讀，並指出依據。';
   await emit(reply.slice(0,30));await new Promise(resolve=>setTimeout(resolve,responseDelayMs));await emit(reply);
   return {value:{reply,assessments:[]},model:'synthetic-offline-fixture',modelVersion:null};

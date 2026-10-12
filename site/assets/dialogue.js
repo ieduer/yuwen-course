@@ -1,7 +1,9 @@
 import {readDialogueEvents} from './dialogue-events.js';
 import {readBrowserHistory} from './dialogue-history.js';
+import {openFirstReading} from './dialogue-first-read.js';
 const $=id=>document.getElementById(id);
 let streamAbort=null;
+let firstReadView=null;
 let correctionTarget=null,correctionMutation=null,sharedHistory=null;
 let curriculum, snapshot, generation=0, selected=null, pending=null, pendingDraft=null, pollTimer=null, lastFocus=null, ownerRef=null;
 const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
@@ -11,11 +13,12 @@ const api=async(body,cursor,records=false,onEvent,correctionsFor,shared=false)=>
  const q=new URLSearchParams({lessonId:curriculum.lessonId,...(cursor?{beforeSeq:cursor.sequence}:{}),...(records?{records:'1'}:{}),...(correctionsFor?{correctionsFor}:{}),...(shared?{sharedHistory:'1'}:{})});
  const streamed=body&&typeof body.content==='string';
  if(streamed)streamAbort=new AbortController();
- const response=await fetch(`/api/dialogue/v1?${q}`,{credentials:'same-origin',cache:'no-store',...(streamed?{signal:streamAbort.signal}:{}),...(body?{method:'POST',headers:{'content-type':'application/json',...(streamed?{accept:'text/event-stream'}:{})},body:JSON.stringify({...body,ownerRef})}:{})});
+ const response=await fetch(`/api/dialogue/v1?${q}`,{credentials:'same-origin',cache:'no-store',...(streamed?{signal:streamAbort.signal}:body?.action==='first_read'?{signal:AbortSignal.timeout(12000)}:{}),...(body?{method:'POST',headers:{'content-type':'application/json',...(streamed?{accept:'text/event-stream'}:{})},body:JSON.stringify({...body,ownerRef})}:{})});
  current();
  if(response.ok&&response.headers.get('content-type')?.includes('text/event-stream')){const result=await readDialogueEvents(response,(event,data)=>{current();onEvent?.(event,data);});current();return result;}
- const value=await response.json().catch(()=>({}));current();
+ const value=await response.json().catch(()=>{throw Error('伺服器回應未完整讀取；請保留文字，讀回紀錄再繼續。');});current();
  if(expectedOwner&&value.ownerRef&&expectedOwner!==value.ownerRef){clearPrivateView();ownerRef=null;queueMicrotask(()=>void refresh());throw Object.assign(new Error('帳戶已切換，已清除舊紀錄；請重新查看或匯出。'),{code:'account_changed'});}
+ if(!response.ok&&value.code==='account_changed'){clearPrivateView();ownerRef=null;queueMicrotask(()=>void refresh());}
  if(!response.ok)throw Object.assign(new Error(value.message||value.error||'暫時無法連線，文字仍保留在本頁。'),{status:response.status,code:value.code,draftSaved:value.draftSaved});return value;
 };
 function renderPartial(partial){
@@ -42,13 +45,16 @@ function renderEvidence(report){
 function view(name){document.querySelector('.workspace').dataset.view=name;for(const id of ['text','conversation'])$(id+'-tab').setAttribute('aria-pressed',String(id===name));}
 function quotePassage(id,quote){const p=curriculum.passages.find(p=>p.id===id);if(!p)return;selected={id,text:quote||p.text.slice(0,600)};$('quote').textContent=selected.text;$('quote').hidden=false;view('conversation');$('answer').focus();}
 function renderText(){
+ const locked=curriculum.mode==='classical'&&(!snapshot||snapshot.readingGate?.phase==='initial_reading');
  $('title').textContent=curriculum.title;$('author').textContent=curriculum.author;$('source').href=curriculum.source;$('legacy').href=`/#${curriculum.lessonId}`;
+ $('source').hidden=locked;$('plates-details').hidden=locked;$('dictionary-details').hidden=locked;
  $('passages').replaceChildren();
- for(const p of curriculum.passages){const paragraph=node('p');paragraph.id=p.id;paragraph.dataset.passage=p.id;
+ for(const p of locked?[]:curriculum.passages){const paragraph=node('p');paragraph.id=p.id;paragraph.dataset.passage=p.id;
   if(p.block.runs){for(const run of p.block.runs){if(run.type==='annotation-ref'){const b=node('button',run.label||'注','passage-anchor');b.setAttribute('aria-label','查看注釋');b.onclick=()=>{const existing=paragraph.querySelector('.note');if(existing){existing.remove();return;}const a=curriculum.annotations.find(a=>a.noteId===run.noteId);paragraph.append(node('span',(a?.blocks||[]).flatMap(b=>(b.runs||[]).map(r=>r.text||'')).join('\n')||'注釋待核查','note'));};paragraph.append(b);}else paragraph.append(document.createTextNode(run.text||''));}}
   else paragraph.append(document.createTextNode(p.text));
   const discuss=node('button','↗','passage-anchor');discuss.setAttribute('aria-label','討論這一段');discuss.onclick=()=>quotePassage(p.id);paragraph.append(discuss);$('passages').append(paragraph);
  }
+ if(locked){$('requirements').replaceChildren(node('p','先自行斷句，保存至少三處疑點與猜測，再寫下初讀感知。原要求及原始紀錄保留。'));$('references').replaceChildren(node('p','完成無注疏初讀後，展開正文註釋與參考資料。'));return;}
  $('requirements').replaceChildren(...curriculum.objectives.map(o=>{const n=node('div',undefined,'requirement');n.append(node('strong',o.label),node('span',o.rule));return n;}));
  $('references').replaceChildren(node('p','原有補充資料、學案與教材原圖保留在上方的原有課程入口。'),...curriculum.annotations.map(a=>node('p',(a.blocks||[]).flatMap(b=>(b.runs||[]).map(r=>r.text||'')).join('\n'))));
  for(const entry of curriculum.dictionary||[]){
@@ -66,12 +72,14 @@ function renderText(){
 function renderTurns(turns,prepend=false){const fragment=document.createDocumentFragment();for(const t of turns){if(document.getElementById('turn-'+t.id))continue;const n=node('div',undefined,'turn '+t.role);n.id='turn-'+t.id;n.append(node('small',`${t.role==='student'?'你':curriculum.author+' · AI 教學模擬'} · ${new Date(t.createdAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`),node('span',t.content));
  const refs=t.content.match(/\[(lesson-[\w-]+:p\d+)\]/g)||[];for(const ref of new Set(refs)){const id=ref.slice(1,-1);if(!curriculum.passages.some(p=>p.id===id))continue;const a=node('a','回到原文');a.href='#'+encodeURIComponent(id);a.onclick=e=>{e.preventDefault();view('text');document.getElementById(id)?.scrollIntoView({block:'center',behavior:'auto'});document.getElementById(id)?.focus();};n.append(a);}if(t.status==='needs_review')n.append(node('small','回答已保存；AI 回應未確認，保留待覆核。'));const correction=node('button','查看／補充更正');correction.type='button';correction.onclick=()=>void openCorrection(t);n.append(correction);fragment.append(n);}if(prepend)$('turns').prepend(fragment);else $('turns').append(fragment);}
 function clearPrivateView(){generation++;streamAbort?.abort();streamAbort=null;
+ firstReadView?.dispose();firstReadView=null;
  $('correction').close();correctionTarget=null;correctionMutation=null;$('correction-original').textContent='';$('correction-history').replaceChildren();$('correction-note').value='';$('correction-proposed').value='';$('turns').replaceChildren();$('answer').value='';$('quote').hidden=true;
  selected=null;pending=null;pendingDraft=null;snapshot=null;clearTimeout(pollTimer);
  $('export-status').textContent='';$('evidence-summary').replaceChildren();sharedHistory=null;$('old-history').replaceChildren();$('old-history-load').disabled=true;
 }
 function update(data){
- if(ownerRef && data.ownerRef && ownerRef!==data.ownerRef)clearPrivateView();
+ let previousPhase=snapshot?.readingGate?.phase;
+ if(ownerRef && data.ownerRef && ownerRef!==data.ownerRef){clearPrivateView();previousPhase=null;}
  ownerRef=data.ownerRef||ownerRef;
  if(data.resumeCurriculum && data.resumeCurriculum.curriculumVersion!==curriculum.curriculumVersion){curriculum=data.resumeCurriculum;renderText();}
  if(pending && data.turns?.some(t=>t.role==='student' && t.mutationId===pending.mutationId)){
@@ -82,11 +90,18 @@ function update(data){
  if(data.draft && !$('answer').value && !pending){$('answer').value=data.draft.content;selected=null;$('quote').hidden=true;if(data.draft.revision===data.revision){pending={mutationId:data.draft.mutationId,revision:data.draft.revision,content:data.draft.content,questionId:data.draft.questionId};pendingDraft=data.draft.content;}$('status').textContent='已恢復伺服器保存的待送草稿；尚未呼叫 AI。';}
  if(data.question){$('next').replaceChildren(node('span',data.question.question));}
  else if(next && curriculum.vocabulary.some(v=>v.id===next.id)){const b=node('button','開始這個詞的語境提問');b.onclick=async()=>{try{update(await api({action:'question',objectiveId:next.id}));}catch(e){$('status').textContent=e.message;}};$('next').append(b);}
+ if(curriculum.mode==='classical'){
+  if(previousPhase!==data.readingGate?.phase)renderText();
+  const gen=generation,owner=ownerRef;
+  if(!firstReadView)firstReadView=openFirstReading({lessonId:curriculum.lessonId,root:$('first-reading'),isCurrent:()=>gen===generation&&owner===ownerRef,gate:()=>snapshot?.readingGate,action:(operation,payload)=>{if(gen!==generation||owner!==ownerRef)throw Error('帳戶或篇目已切換，請重新讀回。');return api({action:'first_read',operation,payload});},onStatus:message=>{$('status').textContent=message;},onUnlock:()=>void refresh(gen)});
+  if(data.readingGate?.phase==='annotated_reading')$('next').textContent='先讀完正文與隨文註釋，保存閱讀確認後，再進入字詞練習。';
+  if(data.readingGate?.phase==='initial_reading'){$('answer').disabled=true;$('send').disabled=true;$('next').textContent='先在左側正文標記疑點並保存初讀感知；完成後在這裡繼續細讀對話。';}
+ }
  performance.mark('dialogue-records-ready');
 }
 async function refresh(gen=generation){try{const data=await api();if(gen!==generation)return;update(data);return data;}catch(e){if(gen!==generation)return;$('status').textContent=e.status===404?'對話試點尚未開放。原文、注釋與原有課程仍可閱讀。':e.message;$('login').hidden=e.status!==401;if(e.status===401||e.status===404){clearPrivateView();ownerRef=null;}$('answer').disabled=true;$('send').disabled=true;}}
 function waitForReply(gen,deadline=Date.now()+25000){clearTimeout(pollTimer);pollTimer=setTimeout(async()=>{if(gen!==generation||document.hidden)return;const data=await refresh(gen);if(data?.pending && Date.now()<deadline)waitForReply(gen,deadline);else if(data?.pending)$('status').textContent='回答已保存；回應仍在處理。稍後回到此頁讀取，不需重送。';},2000);}
-async function loadLesson(){streamAbort?.abort();streamAbort=null;const gen=++generation;clearTimeout(pollTimer);snapshot=null;pending=null;pendingDraft=null;selected=null;$('turns').replaceChildren();$('quote').hidden=true;$('answer').value='';$('answer').disabled=true;$('send').disabled=true;const id=$('lesson').value;location.hash=id;try{const r=await fetch(`/dialogue-curriculum/${id}.json`,{cache:'no-cache'});if(!r.ok)throw new Error();const data=await r.json();if(gen!==generation)return;curriculum=data;renderText();view('text');void refresh(gen).then(data=>{if(data?.pending)waitForReply(gen);});}catch{$('title').textContent='課文暫時無法載入';$('status').textContent='請稍後再試，或回原有課程閱讀。';}}
+async function loadLesson(){clearPrivateView();ownerRef=null;const gen=generation;clearTimeout(pollTimer);snapshot=null;pending=null;pendingDraft=null;selected=null;$('turns').replaceChildren();$('quote').hidden=true;$('answer').value='';$('answer').disabled=true;$('send').disabled=true;const id=$('lesson').value;location.hash=id;try{const r=await fetch(`/dialogue-curriculum/${id}.json`,{cache:'no-cache'});if(!r.ok)throw new Error();const data=await r.json();if(gen!==generation)return;curriculum=data;renderText();view('text');void refresh(gen).then(data=>{if(data?.pending)waitForReply(gen);});}catch{$('title').textContent='課文暫時無法載入';$('status').textContent='請稍後再試，或回原有課程閱讀。';}}
 $('compose').onsubmit=async e=>{
  e.preventDefault();if(!snapshot||snapshot.pending)return;
  const text=$('answer').value.trim();if(!text)return;
@@ -130,14 +145,15 @@ $('compose').onsubmit=async e=>{
   $('send').disabled=!!snapshot?.pending;
  }
 };
-$('lesson').onchange=()=>{if($('answer').value.trim()||pending){$('lesson').value=curriculum.lessonId;$('status').textContent='請先送出或自行保存本頁尚未送出的文字，再切換篇目。';return;}loadLesson();};
+const hasFirstReadDraft=()=>[...$('first-reading').querySelectorAll('textarea,input')].some(input=>input.value.trim());
+$('lesson').onchange=()=>{if($('answer').value.trim()||pending||hasFirstReadDraft()){$('lesson').value=curriculum.lessonId;$('status').textContent='請先送出或自行保存本頁尚未送出的文字，再切換篇目。';return;}loadLesson();};
 $('text-tab').onclick=()=>view('text');$('conversation-tab').onclick=()=>view('conversation');
 $('materials-open').onclick=()=>{lastFocus=document.activeElement;$('materials').showModal();};$('materials-close').onclick=()=>{$('materials').close();lastFocus?.focus();};
 $('older').onclick=async()=>{if(!snapshot?.older)return;const cursor=snapshot.older;try{const data=await api(null,cursor);renderTurns(data.turns,true);snapshot.older=data.older;$('older').hidden=!data.older;}catch(e){$('status').textContent=e.message;}};
 $('review').onclick=async()=>{try{const r=await api({action:'review'});$('export-status').textContent=r.message;}catch(e){$('export-status').textContent=e.message;}};
 $('export').onclick=async()=>{try{let page=await api(null,null,true),turns=[...page.turns],cursor=page.older;for(let n=0;cursor && n<20;n++){const older=await api(null,cursor);turns.unshift(...older.turns);cursor=older.older;}if(cursor)throw new Error('紀錄超出單次匯出範圍，尚未完成匯出。');const blob=new Blob([JSON.stringify({...page,turns,additionalHistory:sharedHistory,exportedAt:new Date().toISOString(),privacy:'僅供本人及獲授權教師核對'},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download=`${curriculum.lessonId}-learning-record.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),0);$('export-status').textContent='已產生本課私人紀錄，請妥善保存。';}catch(e){$('export-status').textContent=e.message;}};
 document.addEventListener('selectionchange',()=>{const selection=getSelection();const p=selection?.anchorNode?.parentElement?.closest('[data-passage]');const valid=p&&selection.toString().trim().length>1&&selection.toString().length<=600&&$('reading').contains(selection.focusNode);$('discuss').hidden=!valid;if(valid)$('discuss').onclick=()=>{quotePassage(p.dataset.passage,selection.toString().trim());selection.removeAllRanges();$('discuss').hidden=true;};});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(pollTimer);else if(curriculum)void refresh().then(d=>{if(d?.pending)waitForReply(generation);});});window.addEventListener('focus',()=>{if(curriculum)void refresh();});window.addEventListener('bdfz:session-invalidated',()=>{clearPrivateView();ownerRef=null;$('answer').disabled=true;$('send').disabled=true;});window.addEventListener('pagehide',()=>clearTimeout(pollTimer));window.addEventListener('beforeunload',e=>{if($('answer').value.trim()||pending){e.preventDefault();e.returnValue='';}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(pollTimer);else if(curriculum)void refresh().then(d=>{if(d?.pending)waitForReply(generation);});});window.addEventListener('focus',()=>{if(curriculum)void refresh();});window.addEventListener('bdfz:session-invalidated',()=>{clearPrivateView();ownerRef=null;$('answer').disabled=true;$('send').disabled=true;});window.addEventListener('pagehide',()=>clearTimeout(pollTimer));window.addEventListener('beforeunload',e=>{if($('answer').value.trim()||pending||hasFirstReadDraft()){e.preventDefault();e.returnValue='';}});
 const id=location.hash.slice(1);if([...$('lesson').options].some(o=>o.value===id))$('lesson').value=id;void loadLesson();
 
 let dictionaryModule=null, dictionaryGeneration=0;

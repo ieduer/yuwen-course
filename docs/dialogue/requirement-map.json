@@ -3558,7 +3558,7 @@
           "id": "unannotated-first-read",
           "rule": "原初讀提交、至少一個疑點且全部解惑；vocabulary/syntax 學案完成才計詞級；comprehension 學案完成才計章法。",
           "storage": "classical_first_read_sessions/classical_first_read_marks and source study-guide records",
-          "status": "preserved-in-original-flow; new-flow-bridge-not-implemented"
+          "status": "source-first-read-gate-bridged; formal-study-guide-bridge-pending"
         }
       ],
       "sourceLesson": "data/lessons/lesson-1711-p1.json",

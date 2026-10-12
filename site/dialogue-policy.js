@@ -43,7 +43,7 @@ export function validateProposal(raw,{curriculum,turns,question=null,hints=[],re
  }
  return {reply:raw.reply,assessments:accepted};
 }
-export function projectState(curriculum,assessments,legacy=[],legacyCompletion=null) {
+export function projectState(curriculum,assessments,legacy=[],legacyCompletion=null,readingGate=null) {
  const objectives=curriculum.objectives.map(o=>{
   const prior=legacy.find(l=>l.objectiveId===o.id && (l.verified===true||l.previousCompletion===true));
   const rows=assessments.filter(a=>a.objectiveId===o.id);
@@ -52,9 +52,12 @@ export function projectState(curriculum,assessments,legacy=[],legacyCompletion=n
  });
  // No replacement grade, mastery threshold or historical downgrade is inferred.
  const ordinary=objectives.filter(o=>o.domain!=='shangyou');
- const ready=ordinary.every(o=>['preserved','demonstrated'].includes(o.status));
+ const sourceReady=!readingGate||(readingGate.phase==='close_reading'&&!readingGate.unresolvedMarks);
+ const ready=sourceReady&&ordinary.every(o=>['preserved','demonstrated'].includes(o.status));
  const shangyou=objectives.find(o=>o.domain==='shangyou');
- return {objectives,readyForShangyou:ready,completion:ready&&shangyou?.status==='demonstrated'?'evidence_ready_for_review':'in_progress',legacyCompletion,continuedStudyOptional:!!legacyCompletion,legacyGrades:'unchanged',next:legacyCompletion?null:objectives.find(o=>!['preserved','demonstrated'].includes(o.status) && o.status!=='historical_review' && (ready||o.domain!=='shangyou'))||null};
+ const pending=objectives.filter(o=>!['preserved','demonstrated'].includes(o.status)&&o.status!=='historical_review'&&(ready||o.domain!=='shangyou'));
+ const next=pending.find(o=>['firstRead','context'].includes(o.domain))||pending.find(o=>o.domain==='vocabulary')||pending[0]||null;
+ return {objectives,readingGate,readyForShangyou:ready,completion:ready&&shangyou?.status==='demonstrated'?'evidence_ready_for_review':'in_progress',legacyCompletion,continuedStudyOptional:!!legacyCompletion,legacyGrades:'unchanged',next:legacyCompletion?null:next};
 }
 export function createQuestion(curriculum,{objectiveId,attempt=1,previousVariant=null,random=crypto.getRandomValues(new Uint32Array(1))[0]}){
  const v=curriculum.vocabulary.find(v=>v.id===objectiveId);
@@ -96,7 +99,7 @@ export function contextFor({curriculum,state,turns,question,remediation=null,ass
  let used=0;const recent=[];for(const t of turns.slice(-10).reverse()){if(used+t.content.length>6500)break;used+=t.content.length;const {id,role,content,questionId}=t;recent.unshift({id,role,content,questionId});}
  const data={curriculumVersion:curriculum.curriculumVersion,persona:curriculum.persona,author:curriculum.author,title:curriculum.title,
   objectives:curriculum.objectives.filter(o=>!['legacy','studyGuide'].includes(o.domain)).map(o=>({id:o.id,criteria:o.criteria,rule:o.rule})),
-  state:state.objectives.map(o=>({id:o.id,status:o.status})),legacyCompletion:state.legacyCompletion,
+  state:state.objectives.map(o=>({id:o.id,status:o.status})),legacyCompletion:state.legacyCompletion,readingGate:state.readingGate,
   question,remediation,passages:curriculum.passages.map(({id,text})=>({id,text})),recent,
   languagePractice:(curriculum.languagePractice||[]).map(({id,sourceSentence,meaning,explanation,annotationIds,dictionaryId,assessmentStatus})=>({id,sourceSentence,meaning,explanation,annotationIds,dictionaryId,assessmentStatus})),
   examReferences:(curriculum.exam?.examples||[]).map(({id,year,paper,questionNumber,work,questionParaphrase,skill,sourceKind,url})=>({id,year,paper,questionNumber,work,questionParaphrase,skill,sourceKind,url}))};
