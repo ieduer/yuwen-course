@@ -10,6 +10,7 @@ const guides = read('study-guide-catalog.json');
 const vocabIndex = read('vocab/index.json');
 const pilotIds = ['lesson-1717-p2', 'lesson-1711-p1', 'lesson-1498'];
 const eligibility = read('vocab-eligibility.json');
+const references = JSON.parse(fs.readFileSync('scripts/dialogue-source-fixtures.json'));
 // Parse the literal source table, never execute the application during generation.
 const appSource = fs.readFileSync('site/assets/app.js','utf8');
 const trackLiteral = appSource.match(/const MODE_TRACKS = (\{[\s\S]+?\n\});/);
@@ -31,6 +32,20 @@ const contracts = {
  shangyou: ['尚友', '初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。', ['change','evidence','challenge']],
 };
 function flat(block) { return (block.runs||[]).map(r=>r.text||'').join('') || (block.blocks||block.items||[]).map(b=>Array.isArray(b)?b.map(flat).join('\n'):flat(b)).join('\n'); }
+function vocabularyVariants(v){
+ assert(v.question && Array.isArray(v.options) && Number.isInteger(v.answerIndex) && v.options[v.answerIndex],`missing original question contract: ${v.id}`);
+ const original=`語境：「${v.sourceSentence}」\n${v.question}\n${v.options.map((text,i)=>`${String.fromCharCode(65+i)}. ${text}`).join('\n')}\n請選出答案，並用自己的話說明判斷依據。`;
+ const alternate={
+  pronunciation:`「${v.sourceSentence}」中的「${v.word}」應如何讀（請寫拼音）？它在此處是甚麼意思？請說明依據。`,
+  'gu-jin':`回到「${v.sourceSentence}」：「${v.word}」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。`,
+  substitution:`請用恰當的現代說法替換「${v.sourceSentence}」中的「${v.word}」，並解釋這個替換如何保留原句的意思。`,
+  usage:`請改寫「${v.sourceSentence}」的句意，解釋「${v.word}」在句中的用法及語境依據；只報詞性名稱不足以說明。`,
+  interpretation:`「${v.sourceSentence}」中的「${v.word}」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。`,
+  'contextual-choice':`請解釋「${v.sourceSentence}」中「${v.word}」的意思，再用自己的話改寫這句話，說明語境依據。`,
+ }[v.type];
+ assert(alternate,`unmapped vocabulary type: ${v.type}`);
+ return [original,alternate];
+}
 const inventory = taxonomy.lessons.map(meta => {
  const lesson=read(`lessons/${meta.id}.json`);
  const mode=['whole-book','language-activity','review'].includes(meta.mode)?'unit-task':['speech-letter','modern-prose'].includes(meta.mode)?'argument':meta.mode;
@@ -67,12 +82,18 @@ for(const id of pilotIds){
  const lesson=read(`lessons/${id}.json`), reader=read(`reader-documents/${id}.json`), vocab=read(`vocab/${id}.json`);
  const passages=reader.main.blocks.map((block,i)=>({id:`${id}:p${i+1}`,text:flat(block),block})).filter(p=>p.text.trim());
  const objectives=[...row.legacyTracks.filter(k=>k!=='vocabulary'),...(row.formal.some(i=>i.questionKind==='wordCreation')?['wordCreation']:[]),'transfer','shangyou'].map(key=>({id:`${id}:${key}`,domain:key,label:contracts[key][0],criteria:contracts[key][2],rule:contracts[key][1],prerequisites:key==='shangyou'?['other_objectives']:[],sourcePassages:passages.map(p=>p.id),misconceptions:['迎合作者不等於理解','引用不能替代解釋'],remediation:'回到一處原句，比較兩種讀法，再請學生獨立改述。'}));
- const vocabulary=vocab.inventory.filter(v=>row.vocabularyIds.includes(v.id)).map(v=>({id:v.id,word:v.word,sourceSentence:v.sourceSentence,meaning:v.contextMeaning,explanation:v.explanation,type:v.type,difficulty:v.difficulty,question:v.question,options:v.options,answerIndex:v.answerIndex,sourceRefs:v.sourceRefs,version:vocab.questionSetVersion||hash(v),dictionaryStatus:'verify-context-against-source-image',variants:[`請解釋「${v.sourceSentence}」中「${v.word}」的意思，並說明語境依據。`,`回到「${v.sourceSentence}」：若換成現代常用義是否通順？請說出「${v.word}」在此處的含義及理由。`]}));
- for(const v of vocabulary)objectives.push({id:v.id,domain:'vocabulary',label:`字詞：${v.word}`,criteria:['context_meaning','explanation','independent'],rule:`準據：${v.meaning}。${v.explanation||''}`,sourcePassages:passages.filter(p=>p.text.includes(v.word)).map(p=>p.id),prerequisites:[],misconceptions:['照抄提示不算獨立掌握'],remediation:'解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。'});
+ const vocabulary=vocab.inventory.filter(v=>row.vocabularyIds.includes(v.id)).map(v=>({id:v.id,word:v.word,sourceSentence:v.sourceSentence,meaning:v.contextMeaning,explanation:v.explanation,type:v.type,difficulty:v.difficulty,question:v.question,options:v.options,answerIndex:v.answerIndex,sourceAnswer:v.options[v.answerIndex],sourceRefs:v.sourceRefs,version:vocab.questionSetVersion||hash(v),dictionaryStatus:'verify-context-against-source-image',variants:vocabularyVariants(v)}));
+ for(const v of vocabulary)objectives.push({id:v.id,domain:'vocabulary',label:`字詞：${v.word}`,criteria:['source_answer','context_meaning','explanation','independent'],rule:`沿用原題準據：${v.sourceAnswer}。語境義：${v.meaning}。${v.explanation||''}${v.type==='pronunciation'?' 讀音題必須核對拼音，不能僅以詞義代替。':''}`,sourcePassages:passages.filter(p=>p.text.includes(v.word)).map(p=>p.id),prerequisites:[],misconceptions:['照抄提示不算獨立掌握'],remediation:'解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。'});
  if(!vocabulary.length)objectives.push({id:`${id}:vocabulary`,domain:'vocabulary',label:contracts.vocabulary[0],criteria:contracts.vocabulary[2],rule:contracts.vocabulary[1],sourcePassages:passages.map(p=>p.id),prerequisites:[]});
  for(const item of row.formal)objectives.push({id:`legacy:${item.resourceKey}`,domain:'legacy',label:item.questionKind,criteria:['existing_source_assessment'],rule:'由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。',legacy:item});
  for(const g of (guides.lessons.find(x=>x.lessonId===id)?.items||[]).filter(g=>g.activeForSelfTest)) objectives.push({id:`study:${g.itemKey}`,domain:'studyGuide',label:g.prompt,criteria:['existing_source_assessment'],rule:'保留原學案題意及評價準據；未接既有服務端評價前保留待核對。',sourceItemKey:g.itemKey});
- const data={schemaVersion:1,lessonId:id,title:meta.title,mode:meta.mode,author:meta.authors[0]?.name||'作品傳統',persona:{kind:meta.authors.length===1?'author-simulation':'collective-simulation',notice:'AI 教學模擬，依據作品；並非作者本人。',narratorIsAuthor:false,rule:'以作者第一人稱討論文本選擇；不得把抒情主人公或敘述者的經歷當作作者生平。'},passages,annotations:reader.main.annotations,resources:reader.resources,source:lesson.forumUrl,objectives,vocabulary,legacy:row,exam:{status:'original-practice-only',reason:'本試點未核實可引用的北京真題原頁，禁止聲稱為真題或官方評分。'},curriculumVersion:''};
+ const languagePractice=(references.languageItems[id]||[]).map(item=>{
+  for(const noteId of item.annotationIds)assert(reader.main.annotations.some(a=>a.noteId===noteId),`missing textbook annotation ${noteId}`);
+  if(item.dictionaryId)assert(references.dictionary.some(d=>d.id===item.dictionaryId),`missing dictionary ${item.dictionaryId}`);
+  return {...item,assessmentStatus:'teaching-reference-only-awaiting-calibration'};
+ });
+ const dictionary=references.dictionary.filter(d=>languagePractice.some(i=>i.dictionaryId===d.id));
+ const data={schemaVersion:1,lessonId:id,title:meta.title,mode:meta.mode,author:meta.authors[0]?.name||'作品傳統',persona:{kind:meta.authors.length===1?'author-simulation':'collective-simulation',notice:'AI 教學模擬，依據作品；並非作者本人。',narratorIsAuthor:false,rule:'以作者第一人稱討論文本選擇；不得把抒情主人公或敘述者的經歷當作作者生平。'},passages,annotations:reader.main.annotations,resources:reader.resources,source:lesson.forumUrl,objectives,vocabulary,legacy:row,referenceVersion:references.version,languagePractice,dictionary,exam:{status:'original-practice-with-publisher-cited-examples',reason:'練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。',examples:references.examExamples},curriculumVersion:''};
  data.curriculumVersion='yw-dialogue-'+hash(data).slice(0,20);
  write(`site/dialogue-curriculum/${id}.json`,data);
 }

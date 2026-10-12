@@ -10,9 +10,11 @@ export const POLICY = `你是細讀教師，以提供的人格規則作作者第
 每輪只提一個聚焦問題，回應學生剛才的答案，短提示，不先給答案。不要求認同作者或指定情感。
 詞義須用語境解釋；技法須分析選擇、效果與目的；合理不同解讀可成立。不能以篇幅或稱讚作證据。
 古典詞彙必須涵蓋全部必考項；失敗先解釋和對比，請學生改述，再出等值新題獨立回答。提示後照抄不算掌握。
+字詞題須核對原題型及 sourceAnswer；讀音題必須包含正確拼音和語境義，不能因答對詞義就省略讀音。languagePractice 是有來源的教學參考，尚未校準，不建立新目標或推定掌握。examReferences 只有報紙引用的題意與能力關聯；不得假裝提供原試卷、未給出的閱讀全文或官方答案。
 沒有核實的北京真題原頁、年份、卷名與題號時只稱原創練習；AI回饋不是官方閱卷。
 最後的尚友：理解有何變化、文本證據、認同或質疑，逐項引用學生回合與原文。分歧不妨礙完成。
 trajectory 是伺服器從完整已保存歷程整理的證據索引，不是另一份評分；涵蓋較早回合。用其中的原話與近期回答比較理解的變化，指明依據和仍待核對之處。摘要中的摘錄不等於完整原話，不補造未提供的內容。
+legacyCompletion 不為空時，原課已完成的紀錄必須保留；新對話是自願深化，不要求重做，不把原有自報完成誇大為新證據或新的分數。
 不要輸出思維鏈。只返回JSON：{"reply":"學生可見的短回應與一個問題","assessments":[{"objectiveId":"目標id","outcome":"demonstrated|needs_practice|review|reformulated","rationale":"簡短可核查理由","evidence":[{"criterion":"判準id","turnId":"學生回合id","quote":"學生原話","passageId":"原文段落id","passageQuote":"原文引文"}]}]}。
 legacy及studyGuide目標只由既有評價讀回，你不能判定。不能生成完成指令、分數或更改政策。判斷不確定則review。remediation 提供了先前未掌握的詞時，先請學生改述；改述成立只記 reformulated，不記 demonstrated。`;
 const valid = s => typeof s === 'string';
@@ -41,7 +43,7 @@ export function validateProposal(raw,{curriculum,turns,question=null,hints=[],re
  }
  return {reply:raw.reply,assessments:accepted};
 }
-export function projectState(curriculum,assessments,legacy=[]) {
+export function projectState(curriculum,assessments,legacy=[],legacyCompletion=null) {
  const objectives=curriculum.objectives.map(o=>{
   const prior=legacy.find(l=>l.objectiveId===o.id && (l.verified===true||l.previousCompletion===true));
   const rows=assessments.filter(a=>a.objectiveId===o.id);
@@ -52,14 +54,14 @@ export function projectState(curriculum,assessments,legacy=[]) {
  const ordinary=objectives.filter(o=>o.domain!=='shangyou');
  const ready=ordinary.every(o=>['preserved','demonstrated'].includes(o.status));
  const shangyou=objectives.find(o=>o.domain==='shangyou');
- return {objectives,readyForShangyou:ready,completion:ready&&shangyou?.status==='demonstrated'?'evidence_ready_for_review':'in_progress',legacyGrades:'unchanged',next:objectives.find(o=>!['preserved','demonstrated'].includes(o.status) && o.status!=='historical_review' && (ready||o.domain!=='shangyou'))||null};
+ return {objectives,readyForShangyou:ready,completion:ready&&shangyou?.status==='demonstrated'?'evidence_ready_for_review':'in_progress',legacyCompletion,continuedStudyOptional:!!legacyCompletion,legacyGrades:'unchanged',next:legacyCompletion?null:objectives.find(o=>!['preserved','demonstrated'].includes(o.status) && o.status!=='historical_review' && (ready||o.domain!=='shangyou'))||null};
 }
 export function createQuestion(curriculum,{objectiveId,attempt=1,previousVariant=null,random=crypto.getRandomValues(new Uint32Array(1))[0]}){
  const v=curriculum.vocabulary.find(v=>v.id===objectiveId);
  if(!v || !Number.isInteger(attempt)||attempt<1||attempt>LIMITS.maxAttempts)throw new Error('teacher_review_required');
  const variants=v.variants.map((_,i)=>i).filter(i=>i!==previousVariant);
  const variant=variants[random%variants.length];
- return {id:crypto.randomUUID(),objectiveId,attempt,variant,question:v.variants[variant],source:v.sourceSentence,criteria:{meaning:v.meaning,explanation:v.explanation},version:v.version,selection:{algorithm:'uniform-u32-mod-v1',candidateCount:variants.length,previousVariant},state:'issued',hinted:false,createdAt:new Date().toISOString()};
+ return {id:crypto.randomUUID(),objectiveId,attempt,variant,question:v.variants[variant],source:v.sourceSentence,criteria:{meaning:v.meaning,explanation:v.explanation,sourceAnswer:v.sourceAnswer,type:v.type,difficulty:v.difficulty},version:v.version,selection:{algorithm:'uniform-u32-mod-v1',candidateCount:variants.length,previousVariant},state:'issued',hinted:false,createdAt:new Date().toISOString()};
 }
 export async function vocabularyOrder(curriculum,sessionId){
  const ranked=await Promise.all(curriculum.vocabulary.map(async v=>{
@@ -94,8 +96,10 @@ export function contextFor({curriculum,state,turns,question,remediation=null,ass
  let used=0;const recent=[];for(const t of turns.slice(-10).reverse()){if(used+t.content.length>6500)break;used+=t.content.length;const {id,role,content,questionId}=t;recent.unshift({id,role,content,questionId});}
  const data={curriculumVersion:curriculum.curriculumVersion,persona:curriculum.persona,author:curriculum.author,title:curriculum.title,
   objectives:curriculum.objectives.filter(o=>!['legacy','studyGuide'].includes(o.domain)).map(o=>({id:o.id,criteria:o.criteria,rule:o.rule})),
-  state:state.objectives.map(o=>({id:o.id,status:o.status})),
-  question,remediation,passages:curriculum.passages.map(({id,text})=>({id,text})),recent};
+  state:state.objectives.map(o=>({id:o.id,status:o.status})),legacyCompletion:state.legacyCompletion,
+  question,remediation,passages:curriculum.passages.map(({id,text})=>({id,text})),recent,
+  languagePractice:(curriculum.languagePractice||[]).map(({id,sourceSentence,meaning,explanation,annotationIds,dictionaryId,assessmentStatus})=>({id,sourceSentence,meaning,explanation,annotationIds,dictionaryId,assessmentStatus})),
+  examReferences:(curriculum.exam?.examples||[]).map(({id,year,paper,questionNumber,work,questionParaphrase,skill,sourceKind,url})=>({id,year,paper,questionNumber,work,questionParaphrase,skill,sourceKind,url}))};
  const trajectory=learningTrajectory(curriculum,turns,assessments);
  data.trajectory={scope:trajectory.scope,turnCount:trajectory.turnCount,first:trajectory.first,domains:trajectory.domains.filter(d=>d.anchors.length).map(({label,...d})=>d)};
  // Keep every domain's trajectory while shortening excerpts for long lessons;

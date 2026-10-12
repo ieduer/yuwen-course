@@ -1,4 +1,5 @@
 import {historicalEvidence} from './dialogue-legacy.js';
+import {recordCorrection} from './dialogue-corrections.js';
 import {consumeGatewayStream,studentStream} from './dialogue-stream.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
 import {POLICY_VERSION,LIMITS,PILOTS,validateProposal,projectState,contextFor,createQuestion,vocabularyOrder,evidenceReport} from './dialogue-policy.js';
@@ -33,12 +34,12 @@ async function snapshot(db,session,curriculum,before){
  const question=q?JSON.parse(q.instance_json):null;
  // Answer criteria are server-only and never included in the student question.
  const publicQuestion=question?{id:question.id,objectiveId:question.objectiveId,attempt:question.attempt,question:question.question,source:question.source,createdAt:question.createdAt}:null;
- const state=projectState(curriculum,assessments,preserved),completeTurns=await transcript(db,session);
+ const state=projectState(curriculum,assessments,preserved,legacy.completion),completeTurns=await transcript(db,session);
  const partialRows=await all(db.prepare(`SELECT c.content,c.sequence,c.created_at,t.id AS turn_id,t.status FROM dialogue_stream_chunks c JOIN dialogue_turns t ON t.id=c.turn_id WHERE t.session_id=? AND c.turn_id=(SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence DESC LIMIT 1) AND NOT EXISTS(SELECT 1 FROM dialogue_turns r WHERE r.reply_to=t.id AND r.role='teacher') ORDER BY c.sequence LIMIT 128`).bind(session.id,session.id));
  const partial=partialRows.length?{turnId:partialRows[0].turn_id,content:partialRows.map(c=>c.content).join(''),status:partialRows[0].status==='needs_review'?'unconfirmed':'streaming'}:null;
  return {partial,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending:!!session.inflight,curriculumVersion:session.curriculum_version,...page,state,assessments,report:evidenceReport(curriculum,state,assessments,completeTurns),question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at}:null,legacy};
 }
-export async function handleDialogue(request,env,student,ctx,{callModel=callDialogueModel}={}){
+export async function handleDialogue(request,env,student,ctx,{callModel=callDialogueModel,readSharedHistory=null}={}){
  if(!student)return json({error:'請先登入 My。',code:'authentication_required'},401);
  if(!admitted(env,student))return json({error:'試點尚未開放。',code:'pilot_unavailable'},404);
  const url=new URL(request.url),lessonId=url.searchParams.get('lessonId');
@@ -52,7 +53,18 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
  // The exact per-session contract remains interpretable even after static assets change.
  if(session){try{curriculum=JSON.parse(session.curriculum_json);if(curriculum.lessonId!==lessonId||curriculum.curriculumVersion!==session.curriculum_version)throw Error();}catch{return json({code:'stored_curriculum_requires_review'},503);}}
  if(request.method==='GET'){
-  if(!session){const legacy=await historicalEvidence(db,student.id,curriculum),state=projectState(curriculum,[],legacy.preserved);return json({ownerRef:await sha(`dialogue-owner:${student.id}`),revision:0,turns:[],question:null,state,legacy,report:evidenceReport(curriculum,state,[]),saved:false});}
+  if(url.searchParams.get('sharedHistory')==='1'){
+   const shared=readSharedHistory?await readSharedHistory():{status:'unavailable',reason:'shared_history_unavailable'};
+   return json({ownerRef:await sha(`dialogue-owner:${student.id}`),sharedHistory:shared});
+  }
+  if(url.searchParams.has('correctionsFor')){
+   const turnId=url.searchParams.get('correctionsFor');
+   const turn=session&&await db.prepare('SELECT id FROM dialogue_turns WHERE id=? AND session_id=?').bind(turnId,session.id).first();
+   if(!turn)return json({code:'turn_not_found'},404);
+   const rows=await all(db.prepare("SELECT id,details_json,created_at FROM dialogue_events WHERE session_id=? AND turn_id=? AND event_type='owner_correction_recorded' ORDER BY created_at,id LIMIT 8").bind(session.id,turnId));
+   return json({ownerRef:await sha(`dialogue-owner:${student.id}`),corrections:rows.map(r=>({id:r.id,createdAt:r.created_at,...JSON.parse(r.details_json)}))});
+  }
+  if(!session){const legacy=await historicalEvidence(db,student.id,curriculum),state=projectState(curriculum,[],legacy.preserved,legacy.completion);return json({ownerRef:await sha(`dialogue-owner:${student.id}`),revision:0,turns:[],question:null,state,legacy,report:evidenceReport(curriculum,state,[]),saved:false});}
   const before=url.searchParams.has('beforeSeq')?{sequence:Number(url.searchParams.get('beforeSeq'))}:null;
   if(before && (!Number.isSafeInteger(before.sequence)||before.sequence<1))return json({code:'invalid_cursor'},400);
   const result=await snapshot(db,session,curriculum,before);
@@ -77,6 +89,9 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
  if(!session){
   const at=now();await db.prepare('INSERT OR IGNORE INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?)').bind(uuid(),student.id,lessonId,curriculum.curriculumVersion,JSON.stringify(curriculum),POLICY_VERSION,at,at).run();
   session=await db.prepare('SELECT * FROM dialogue_sessions WHERE student_id=? AND lesson_id=? AND curriculum_version=?').bind(student.id,lessonId,curriculum.curriculumVersion).first();
+ }
+ if(body.action==='correction'){
+  const result=await recordCorrection(db,session,body,now());return json(result.value,result.status);
  }
  if(body.action==='question'){
   if(session.inflight)return json({code:'turn_in_progress'},409);
@@ -170,7 +185,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const remediationRow=await db.prepare("SELECT instance_json FROM dialogue_questions WHERE session_id=? AND state='needs_reformulation' ORDER BY created_at DESC LIMIT 1").bind(session.id).first();
   const remediation=remediationRow?JSON.parse(remediationRow.instance_json):null;
   const legacy=await historicalEvidence(db,session.student_id,curriculum);
-  const prompt=contextFor({curriculum,state:projectState(curriculum,assessments,legacy.preserved),turns:completeTurns,question,remediation,assessments});
+  const prompt=contextFor({curriculum,state:projectState(curriculum,assessments,legacy.preserved,legacy.completion),turns:completeTurns,question,remediation,assessments});
   let persisted='',sequence=0,lastPersist=0;
   const persistReply=async text=>{
    if(typeof text!=='string'||!text.startsWith(persisted)||text.length>LIMITS.replyChars)throw Error('invalid_visible_stream');

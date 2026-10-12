@@ -1,3 +1,12 @@
+## Current dialogue candidate — 2026-10-12T07:36:32Z
+
+Serial owner codex-01a12ee3. Candidate historical bridging now accepts the original evaluator's passed outcome, preserves non-scoring self-reports and original course completion, retains versioned first-read marks/tombstones, and reads owner-scoped browser/shared history on demand. Append-only correction notes preserve original turns and assessments, with owner isolation, idempotency and export. New dialogue is optional for an already-completed original course. No grade changes or cross-student grants.
+
+57 focused checks pass on Node22 and24; original Reading API74 passes. Synthetic browser saved and reloaded original plus correction. Real shared HTTP/account, model calibration, source-evaluator bridge, backup/restore and release acceptance remain open. Production unchanged; feature disabled and accepted self-study capacity has not increased. Evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12ee3/REPORT.md`. Prior candidate sections are historical; this section supersedes their history/correction/source-reference status.
+
+
+Source vocabulary type, options, answer and difficulty are retained in dialogue variants, including the pronunciation of 暴. Two dictionary original pages are visually verified; two Beijing examination newspaper question references are text-verified and explicitly distinguished from original papers/official marking. Four textbook/dictionary-grounded language examples are teaching references only, awaiting calibration and not new mastery gates. Source-reference rendering passed a synthetic browser check with no console errors. The canonical initial-reading gate still needs integration before release.
+
 ## Current candidate — 2026-10-12T06:47:49+00:00
 
 Serial owner: codex-01a12ea0; change `20261012-apis-yw-stream`. Production remains unchanged. All authenticated My accounts are authorized to use the three lessons and view only their own records. No cross-student teacher grant was supplied. Full visible conversations, partial responses, questions, attempts and original source facts are retained permanently; no purge job or deletion endpoint is introduced.

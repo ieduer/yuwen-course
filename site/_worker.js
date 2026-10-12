@@ -1,4 +1,5 @@
 import { handleDialogue } from './dialogue-source.js';
+import { readSharedHistory } from './dialogue-history.js';
 import { sourceEventStatement, evaluationEventBase, evaluationEventId, latestSourceEvent } from './learning-evaluation-events.js';
 import { readRecorderSource } from './learning-recorder-source.js';
 import { EVALUATION_MACHINE_PATH, handleEvaluationMachine } from './evaluation-machine.js';
@@ -96,7 +97,7 @@ export default {
       }
       const student = await authenticatedReadingStudent(request, env);
       if (student?.error) return student.error;
-      return handleDialogue(request, env, student, ctx);
+      return handleDialogue(request, env, student, ctx, {readSharedHistory:()=>readSharedHistory(userCenterSessionCookieHeader(request))});
     }
 
     if (url.pathname === '/api/learning/recorder-events' && request.method === 'GET') {

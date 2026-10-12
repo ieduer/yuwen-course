@@ -53,8 +53,8 @@ test('unfinished first reading retains source version and text without becoming 
 test('formal completion uses exact resource versions and preserves the corresponding domain without regrading',async()=>{
  const f=fixture();try{
   const c=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1498.json')),o=c.objectives.find(o=>o.domain==='legacy'&&o.legacy.questionKind==='revision');
-  f.sql.prepare("INSERT INTO learning_interactions(source_event_id,student_id,academic_year,lesson_id,interaction_key,event_type,assessment_kind,scoring_role,resource_key,resource_version,registry_version,occurred_at) VALUES('old-accepted',1,'2026-2027',?,'revision','revisionCompleted','ai_evaluation','a_plus_gate',?,?,'old-registry','2020-01-01')").run(c.lessonId,o.legacy.resourceKey,o.legacy.resourceVersion);
-  f.sql.exec("INSERT INTO learning_evaluations(source_event_id,verification_method,eligibility_status,raw_value,max_value,normalized_value,correctness,evaluated_at) VALUES('old-accepted','source_ai_evaluation','eligible',83,100,83,'correct','2020-01-01')");
+  f.sql.prepare("INSERT INTO learning_interactions(source_event_id,student_id,academic_year,lesson_id,interaction_key,event_type,assessment_kind,scoring_role,resource_key,resource_version,registry_version,occurred_at) VALUES('old-accepted',1,'2026-2027',?,'revision','revision_submitted','performance','a_plus_gate',?,?,'old-registry','2020-01-01')").run(c.lessonId,o.legacy.resourceKey,o.legacy.resourceVersion);
+  f.sql.exec("INSERT INTO learning_evaluations(source_event_id,verification_method,eligibility_status,raw_value,max_value,normalized_value,correctness,evaluated_at) VALUES('old-accepted','source_ai_assessment','eligible',83,100,0.83,'passed','2020-01-01')");
   const before=f.sql.prepare('SELECT * FROM learning_evaluations').all();
   const data=await(await handleDialogue(req(null,c.lessonId),f.env,student)).json();assert.equal(data.state.objectives.find(x=>x.domain==='revision').status,'preserved');
   f.sql.exec("UPDATE learning_interactions SET resource_version='different' WHERE source_event_id='old-accepted'");
@@ -179,6 +179,28 @@ test('fabricated citation, assistant evidence, praise, missing criterion and unk
 });
 test('legacy grades and study-guide results cannot be asserted by a model',()=>{const c=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1498.json')),o=c.objectives.find(o=>o.domain==='legacy');assert(o);assert.throws(()=>validateProposal({reply:'很好',assessments:[{objectiveId:o.id,outcome:'demonstrated',rationale:'學生要求',evidence:[]}]},{curriculum:c,turns:[]}));});
 test('question variants change without changing source/criteria; attempts are bounded',()=>{const id=classical.vocabulary[0].id,q=createQuestion(classical,{objectiveId:id,random:0}),r=createQuestion(classical,{objectiveId:id,attempt:2,previousVariant:q.variant,random:0});assert.notEqual(q.variant,r.variant);assert.equal(q.source,r.source);assert.deepEqual(q.criteria,r.criteria);assert.throws(()=>createQuestion(classical,{objectiveId:id,attempt:4}));});
+test('dialogue vocabulary keeps every source question type, answer and difficulty, including pronunciation',()=>{
+ for(const id of ['lesson-1717-p2','lesson-1711-p1','lesson-1498']){
+  const c=JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${id}.json`)),source=JSON.parse(fs.readFileSync(`site/data/vocab/${id}.json`));
+  for(const v of c.vocabulary){
+   const original=source.inventory.find(i=>i.id===v.id);assert(original);
+   for(const key of ['type','difficulty','question','options','answerIndex'])assert.deepEqual(v[key],original[key]);
+   assert.equal(v.sourceAnswer,original.options[original.answerIndex]);assert(v.variants[0].includes(original.question));for(const choice of original.options)assert(v.variants[0].includes(choice));
+   assert(c.objectives.find(o=>o.id===v.id).criteria.includes('source_answer'));
+  }
+ }
+ const v=classical.vocabulary.find(v=>v.word==='暴');assert.equal(v.type,'pronunciation');assert.equal(v.difficulty,2);assert.match(v.sourceAnswer,/pù/);
+ const q=createQuestion(classical,{objectiveId:v.id,random:1});assert.match(q.question,/拼音/);assert.match(q.criteria.sourceAnswer,/pù/);
+ const o=classical.objectives.find(o=>o.id===v.id),{t,a}=evidenceFor(o,classical);t.questionId=q.id;a.evidence=a.evidence.filter(e=>e.criterion!=='source_answer');
+ assert.throws(()=>validateProposal({reply:'尚缺讀音。',assessments:[a]},{curriculum:classical,turns:[t],question:q}),/missing_criterion/);
+});
+test('verified teaching references retain provenance and do not create uncalibrated mastery gates',()=>{
+ assert.equal(classical.languagePractice.length,4);
+ for(const item of classical.languagePractice){assert.equal(item.difficulty,null);assert.equal(item.assessmentStatus,'teaching-reference-only-awaiting-calibration');assert(!classical.objectives.some(o=>o.id===item.id));for(const id of item.annotationIds)assert(classical.annotations.some(a=>a.noteId===id));}
+ const entry=classical.dictionary.find(d=>d.id==='xc-er');assert.deepEqual(entry.pages.map(p=>[p.pdfPage,p.printedPage]),[[132,120],[133,121]]);assert(entry.pages.every(p=>p.url.startsWith('https://dict.bdfz.net/source/xc/images/')));
+ assert.deepEqual(classical.exam.examples.map(e=>[e.year,e.questionNumber]),[[2024,19],[2022,18]]);assert(classical.exam.examples.every(e=>e.sourceKind.includes('非原試卷')));
+ const prompt=contextFor({curriculum:classical,state:projectState(classical,[]),turns:[],question:null});assert(prompt.includes('teaching-reference-only-awaiting-calibration'));assert(prompt.includes('source_answer'));assert(prompt.includes('非原試卷或官方評分細則'));
+});
 test('hinted and unissued vocabulary cannot be credited as independent',()=>{const o=classical.objectives.find(o=>o.domain==='vocabulary'),{t,a}=evidenceFor(o,classical),q=createQuestion(classical,{objectiveId:o.id});t.questionId=q.id;assert.throws(()=>validateProposal({reply:'再試',assessments:[a]},{curriculum:classical,turns:[t]}));assert.throws(()=>validateProposal({reply:'再試',assessments:[a]},{curriculum:classical,turns:[t],question:{...q,hinted:true}}));});
 test('additive migration preserves each legacy row, schema, relationships and sequence',()=>{
  const sql=new DatabaseSync(':memory:');for(const f of fs.readdirSync('migrations').filter(f=>/000[1-9].*sql$/.test(f)).sort())sql.exec(fs.readFileSync('migrations/'+f,'utf8'));
@@ -190,7 +212,7 @@ test('additive migration preserves each legacy row, schema, relationships and se
   INSERT INTO classical_first_read_sessions(student_id,lesson_id,text_version_id,text_digest,elapsed_ms,summary_text) VALUES(1,'unfinished','old-text-v1','old-text-hash',91234,'未完成的原始想法');
   INSERT INTO classical_first_read_marks(mark_id,student_id,lesson_id,text_version_id,text_digest,paragraph_key,start_offset,end_offset,selected_text,guess_text) VALUES('original-mark',1,'unfinished','old-text-v1','old-text-hash','p3',2,4,'原文','待解惑');
   INSERT INTO learning_interactions(source_event_id,student_id,academic_year,lesson_id,interaction_key,event_type,assessment_kind,scoring_role,resource_key,resource_version,registry_version,raw_payload_json,occurred_at) VALUES('original-source-event',1,'2026-2027','old-lesson','structure','structureCompleted','ai_evaluation','a_plus_gate','original-resource','original-version','original-registry','{"answer":"original answer","ruleVersion":"original-rule"}','2026-09-01T00:00:00Z');
-  INSERT INTO learning_evaluations(source_event_id,verification_method,eligibility_status,raw_value,max_value,normalized_value,correctness,evaluation_json,evaluated_at) VALUES('original-source-event','source_ai_evaluation','eligible',83,100,83,'correct','{"ruleVersion":"original-rule","rationale":"original feedback"}','2026-09-01T00:00:01Z');
+  INSERT INTO learning_evaluations(source_event_id,verification_method,eligibility_status,raw_value,max_value,normalized_value,correctness,evaluation_json,evaluated_at) VALUES('original-source-event','source_ai_assessment','eligible',83,100,0.83,'passed','{"ruleVersion":"original-rule","rationale":"original feedback"}','2026-09-01T00:00:01Z');
   INSERT INTO evidence_outbox(source_event_id,envelope_json,delivery_status) VALUES('original-source-event','{"original":"envelope"}','accepted');
  `);
  const tables=sql.prepare("SELECT name,sql FROM sqlite_schema WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name").all();const before=tables.map(t=>({schema:t,rows:sql.prepare(`SELECT * FROM "${t.name}" ORDER BY rowid`).all()}));const seq=sql.prepare('SELECT * FROM sqlite_sequence ORDER BY name').all();
@@ -290,4 +312,115 @@ test('requirement mapping includes compound first-read gates and poetry word cre
  assert(m.lessons.find(l=>l.lessonId===classical.lessonId).compoundRequirements.some(r=>r.id==='unannotated-first-read'));
  const poem=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1498.json'));assert(poem.objectives.some(o=>o.domain==='wordCreation'));
  assert(!m.lessons.find(l=>l.lessonId===curriculum.lessonId).legacyTracks.includes('vocabulary'));
+});
+
+function historicalEvent(f,{id='historical',owner=1,lessonId=curriculum.lessonId,key='lessonCompleted',kind='self_report',role='none',resourceKey='lesson:'+lessonId,version='unknown',eligibility='non_scoring',correctness='not_verified',payload={}}={}){
+ f.sql.prepare('INSERT INTO learning_interactions(source_event_id,student_id,academic_year,lesson_id,interaction_key,event_type,assessment_kind,scoring_role,resource_key,resource_version,registry_version,occurred_at,raw_payload_json) VALUES(?,?,\'2026-2027\',?,?,\'synthetic\',?,?,?,?,\'source-fixture\',\'2020-01-01\',?)').run(id,owner,lessonId,key,kind,role,resourceKey,version,JSON.stringify(payload));
+ f.sql.prepare('INSERT INTO learning_evaluations(source_event_id,verification_method,eligibility_status,correctness,evaluated_at) VALUES(?,\'source-fixture\',?,?,\'2020-01-01\')').run(id,eligibility,correctness);
+}
+test('original self-report completion survives without becoming a score or new mastery',async()=>{
+ const f=fixture();try{
+  historicalEvent(f);historicalEvent(f,{id:'read',key:'readAcknowledged',kind:'participation'});
+  const before=f.sql.prepare('SELECT * FROM learning_interactions').all();
+  const data=await(await handleDialogue(req(),f.env,student)).json();
+  assert.equal(data.legacy.completion.kind,'self_report');assert.equal(data.state.legacyCompletion.status,'preserved');
+  assert.equal(data.state.objectives.find(o=>o.domain==='read').status,'preserved');assert.equal(data.state.next,null);
+  assert.equal(data.state.readyForShangyou,false);assert.equal(data.state.completion,'in_progress');assert.equal(data.state.legacyGrades,'unchanged');
+  const other=await(await handleDialogue(req(),f.env,{id:2,ucUserId:700002})).json();assert.equal(other.legacy.completion,null);
+  assert.deepEqual(f.sql.prepare('SELECT * FROM learning_interactions').all(),before);
+ }finally{f.close();}
+});
+test('negative personal evaluation is preserved as non-scoring self-report without correctness requirement',async()=>{
+ const f=fixture();try{
+  const c=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1498.json')),o=c.objectives.find(o=>o.domain==='legacy'&&o.legacy.questionKind==='evaluation');
+  historicalEvent(f,{lessonId:c.lessonId,key:'evaluation',resourceKey:o.legacy.resourceKey,version:o.legacy.resourceVersion,payload:{rating:0,reason:'我不認同。'}});
+  const data=await(await handleDialogue(req(null,c.lessonId),f.env,student)).json();
+  assert.equal(data.state.objectives.find(x=>x.id===o.id).status,'preserved');assert.equal(data.state.objectives.find(x=>x.domain==='evaluation').status,'preserved');
+  assert.equal(f.sql.prepare('SELECT raw_value FROM learning_evaluations').get().raw_value,null);
+ }finally{f.close();}
+});
+test('unregistered older performance stays preserved-review while failed or unevaluated work is never credited',async()=>{
+ const f=fixture();try{
+  historicalEvent(f,{key:'revision',kind:'performance',role:'a_plus_gate',eligibility:'eligible',correctness:'passed'});
+  historicalEvent(f,{id:'failed',key:'structure',kind:'performance',role:'a_plus_gate',eligibility:'ineligible',correctness:'needs_revision'});
+  const data=await(await handleDialogue(req(),f.env,student)).json();
+  assert.equal(data.state.objectives.find(o=>o.domain==='revision').status,'historical_review');assert.equal(data.state.objectives.find(o=>o.domain==='structure').status,'not_yet_observed');
+ }finally{f.close();}
+});
+test('study-guide credit follows semantic resource keys and reviewed aliases, never the manifest digest as item revision',async()=>{
+ const f=fixture();try{
+  const c=structuredClone(curriculum),item={itemKey:'synthetic-item',interactionKey:'studyGuideItemCompleted',semanticRevision:'1111111111111111',resourceKey:'formative:'+c.lessonId+':syntax:1111111111111111',resourceAliases:['formative:'+c.lessonId+':syntax:2222222222222222']};
+  c.legacy.formative.push(item);c.objectives.push({id:'study:synthetic-item',sourceItemKey:item.itemKey,domain:'studyGuide',criteria:['existing_source_assessment']});
+  f.env.ASSETS.fetch=async()=>new Response(JSON.stringify(c));
+  historicalEvent(f,{key:'studyGuideItemCompleted',kind:'performance',role:'formative',resourceKey:item.resourceAliases[0],version:'manifest-digest-not-semantic-revision',eligibility:'eligible',correctness:'passed',payload:{itemKey:item.itemKey}});
+  let data=await(await handleDialogue(req(),f.env,student)).json();assert.equal(data.state.objectives.find(o=>o.id==='study:synthetic-item').status,'preserved');
+  f.sql.prepare('UPDATE learning_interactions SET resource_key=?').run('formative:'+c.lessonId+':syntax:3333333333333333');
+  data=await(await handleDialogue(req(),f.env,student)).json();assert.equal(data.state.objectives.find(o=>o.id==='study:synthetic-item').status,'historical_review');
+ }finally{f.close();}
+});
+test('first-read original marks, guesses, corrections and tombstones remain bound to their exact old text version',async()=>{
+ const f=fixture();try{
+  f.sql.prepare("INSERT INTO classical_first_read_marks(mark_id,student_id,lesson_id,text_version_id,text_digest,paragraph_key,start_offset,end_offset,selected_text,guess_text,correction_text,resolution_status,deleted_at) VALUES('old-mark',1,?,'original-version','original-digest','old-p',4,6,'學習','原猜測','後來的訂正','resolved','2020-01-02')").run(classical.lessonId);
+  const before=f.sql.prepare('SELECT * FROM classical_first_read_marks').all();
+  const data=await(await handleDialogue(req(null,classical.lessonId),f.env,student)).json();
+  const mark=data.legacy.firstReadMarks[0];assert.equal(mark.text_version_id,'original-version');assert.equal(mark.start_offset,4);assert.equal(mark.guess_text,'原猜測');assert.equal(mark.correction_text,'後來的訂正');assert.equal(mark.deleted_at,'2020-01-02');
+  assert.deepEqual(f.sql.prepare('SELECT * FROM classical_first_read_marks').all(),before);
+  const other=await(await handleDialogue(req(null,classical.lessonId),f.env,{id:2,ucUserId:700002})).json();assert.deepEqual(other.legacy.firstReadMarks,[]);
+ }finally{f.close();}
+});
+test('owner corrections are append-only, idempotent, exported and require no provider call',async()=>{
+ const f=fixture();try{
+  const initial=await(await handleDialogue(req(body()),f.env,student,null,{callModel:good})).json(),turnId=initial.turns[0].id;
+  const before=f.sql.prepare('SELECT * FROM dialogue_turns').all(),assessments=f.sql.prepare('SELECT * FROM dialogue_assessments').all();
+  const correction={action:'correction',turnId,mutationId:'correction-mutation-01',note:'補充說明',proposedText:'我想說的是尚未完全解脫。'};
+  const options={callModel:()=>{throw Error('correction must never call provider');}};
+  const first=await(await handleDialogue(req(correction),f.env,student,null,options)).json();assert.equal(first.saved,true);
+  const repeated=await(await handleDialogue(req(correction),f.env,student,null,options)).json();assert.deepEqual(repeated,first);
+  assert.equal((await handleDialogue(req({...correction,note:'changed'}),f.env,student,null,options)).status,409);
+  const read=new Request(req().url+'&correctionsFor='+encodeURIComponent(turnId));const notes=await(await handleDialogue(read,f.env,student)).json();assert.equal(notes.corrections.length,1);assert.equal(notes.corrections[0].proposedText,correction.proposedText);
+  const exported=await(await handleDialogue(new Request(req().url+'&records=1'),f.env,student)).json();assert(exported.trace.events.some(e=>e.event_type==='owner_correction_recorded'&&e.details.originalPreserved));
+  assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_turns').all(),before);assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_assessments').all(),assessments);
+ }finally{f.close();}
+});
+test('correction ownership and concurrent quota reject cross-account access and preserve all accepted notes',async()=>{
+ const f=fixture();try{
+  const data=await(await handleDialogue(req(body()),f.env,student,null,{callModel:good})).json(),turnId=data.turns[1].id;
+  const base={action:'correction',turnId,note:'AI 回饋疑問',proposedText:'',mutationId:'correction-other-user'};
+  assert.equal((await handleDialogue(req(base,curriculum.lessonId,2),f.env,{id:2,ucUserId:700002})).status,404);
+  assert.equal((await handleDialogue(new Request(req().url+'&correctionsFor='+turnId),f.env,{id:2,ucUserId:700002})).status,404);
+  assert.equal((await handleDialogue(req(base),f.env,{id:2,ucUserId:700002})).status,409);
+  const responses=await Promise.all(Array.from({length:9},(_,i)=>handleDialogue(req({...base,mutationId:'concurrent-correction-'+i}),f.env,student)));
+  assert.equal(responses.filter(r=>r.status===200).length,8);assert.equal(responses.filter(r=>r.status===409).length,1);
+  const count=f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='owner_correction_recorded'").get().n;assert.equal(count,8);
+ }finally{f.close();}
+});
+
+test('shared history is read once with the already authenticated cookie, fixed destination and strict state shape',async()=>{
+ const {readSharedHistory}=await import('../site/dialogue-history.js');let calls=0;
+ const raw={schemaVersion:'yw-shared-state/1',siteKey:'yw',ownerScope:'ywo_'+'a'.repeat(32),state:{readingPosition:null,readerPreferences:{}}};
+ const value=await readSharedHistory('bdfz_uc_session=SYNTHETIC_ONLY',{fetcher:async(url,options)=>{calls++;assert.equal(url,'https://my.bdfz.net/api/yw/v1/state');assert.equal(options.method,'GET');assert.equal(options.headers.cookie,'bdfz_uc_session=SYNTHETIC_ONLY');assert.equal(options.redirect,'error');assert.equal(options.cache,'no-store');return new Response(JSON.stringify(raw));}});
+ assert.equal(value.status,'available');assert.equal(calls,1);assert.equal(value.scoringRole,'none');
+ assert.equal((await readSharedHistory('',{fetcher:()=>{throw Error('must not fetch');}})).reason,'web_session_required');
+ for(const response of [new Response('{}',{status:401}),new Response(JSON.stringify({...raw,ownerScope:'invalid'})),new Response('x'.repeat(16001))])assert.equal((await readSharedHistory('synthetic',{fetcher:async()=>response})).status,'unavailable');
+});
+test('browser history reads only the centrally verified owner namespace and never mutates or adopts unscoped work',async()=>{
+ const {readBrowserHistory}=await import('../site/assets/dialogue-history.js'),scope='ywo_'+'b'.repeat(32),reads=[];
+ const record={revision:{done:true,answer:'已保存的原話',score:83},context:{done:false,draft:'未完成'}},values=new Map([
+  ['yw-matrix-progress-v2:scope:'+scope,JSON.stringify({[curriculum.lessonId]:record})],
+  ['yw-matrix-progress-v2',JSON.stringify({private:'anonymous or unknown owner'})],
+ ]);
+ const storage={getItem:key=>{reads.push(key);return values.get(key)??null;},setItem:()=>{throw Error('must not write');}};
+ const result=readBrowserHistory(storage,scope,curriculum.lessonId);assert.deepEqual(result.record,record);assert.equal(result.authority,'browser_only_unverified');assert.deepEqual(reads,['yw-matrix-progress-v2:scope:'+scope]);
+ const other=readBrowserHistory(storage,'ywo_'+'c'.repeat(32),curriculum.lessonId);assert.equal(other.status,'not_found');
+ const before=reads.length;assert.equal(readBrowserHistory(storage,'anonymous',curriculum.lessonId).status,'unavailable');assert.equal(reads.length,before);
+ assert.equal(readBrowserHistory({getItem(){throw Error('storage denied');}},scope,curriculum.lessonId).status,'unavailable');
+});
+test('shared-history is opt-in, authenticated and unavailable without its approved reader',async()=>{
+ const f=fixture();try{let calls=0;const options={readSharedHistory:async()=>{calls++;return {status:'available',ownerScope:'ywo_'+'a'.repeat(32),readingPosition:null,readerPreferences:{}};}};
+ await handleDialogue(req(),f.env,student,null,options);assert.equal(calls,0);
+ const request=new Request(req().url+'&sharedHistory=1');const value=await(await handleDialogue(request,f.env,student,null,options)).json();assert.equal(calls,1);assert.equal(value.sharedHistory.status,'available');assert.equal(value.ownerRef,createHash('sha256').update('dialogue-owner:1').digest('hex'));
+ assert.equal((await handleDialogue(request,f.env,null,null,options)).status,401);assert.equal(calls,1);
+ assert.equal((await(await handleDialogue(request,f.env,student)).json()).sharedHistory.status,'unavailable');
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_sessions').get().n,0);
+ }finally{f.close();}
 });

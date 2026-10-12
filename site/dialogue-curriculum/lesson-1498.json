@@ -1201,11 +1201,12 @@
       "domain": "vocabulary",
       "label": "字詞：已",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：停止。「已」在古文中常作动词，意为停止、终结。此处指生命代代相传，永不停歇。",
+      "rule": "沿用原題準據：停止。語境義：停止。「已」在古文中常作动词，意为停止、终结。此处指生命代代相传，永不停歇。",
       "sourcePassages": [
         "lesson-1498:p7"
       ],
@@ -1220,11 +1221,12 @@
       "domain": "vocabulary",
       "label": "字詞：不胜",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：承受。此处「胜」意为承受、承担。「不胜愁」即愁绪过多，难以承受。",
+      "rule": "沿用原題準據：不能承受。語境義：承受。此处「胜」意为承受、承担。「不胜愁」即愁绪过多，难以承受。",
       "sourcePassages": [
         "lesson-1498:p9"
       ],
@@ -1239,11 +1241,12 @@
       "domain": "vocabulary",
       "label": "字詞：可怜",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：可爱、动人。古诗文中「可怜」多指可爱、值得赞美，选项C中亦指可爱。",
+      "rule": "沿用原題準據：可怜九月初三夜，露似真珠月似弓。。語境義：可爱、动人。古诗文中「可怜」多指可爱、值得赞美，选项C中亦指可爱。",
       "sourcePassages": [
         "lesson-1498:p11",
         "lesson-1498:p15"
@@ -1259,11 +1262,12 @@
       "domain": "vocabulary",
       "label": "字詞：逐",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：追随。「逐」在此处意为追随，表达思妇希望月光能陪伴远方游子。",
+      "rule": "沿用原題準據：追随。語境義：追随。「逐」在此处意为追随，表达思妇希望月光能陪伴远方游子。",
       "sourcePassages": [
         "lesson-1498:p13"
       ],
@@ -1278,11 +1282,12 @@
       "domain": "vocabulary",
       "label": "字詞：文",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：波纹。「文」通「纹」，指鱼儿游动在水面泛起的波纹。",
+      "rule": "沿用原題準據：纹理、波纹。語境義：波纹。「文」通「纹」，指鱼儿游动在水面泛起的波纹。",
       "sourcePassages": [
         "lesson-1498:p14"
       ],
@@ -1297,11 +1302,12 @@
       "domain": "vocabulary",
       "label": "字詞：摇",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：牵动、搅动。「摇」字以动写静，通过视觉上的光影摇动，传达出内心离愁的波动，使抽象的情感具象化。",
+      "rule": "沿用原題準據：落月的光辉与江树交织，引起了离人无限的别愁。。語境義：牵动、搅动。「摇」字以动写静，通过视觉上的光影摇动，传达出内心离愁的波动，使抽象的情感具象化。",
       "sourcePassages": [
         "lesson-1498:p18",
         "lesson-1498:p19"
@@ -1522,12 +1528,13 @@
         "罢了"
       ],
       "answerIndex": 2,
+      "sourceAnswer": "停止",
       "sourceRefs": [],
       "version": "vocab-set-8c786c5826b865f4",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「人生代代无穷已」中「已」的意思，並說明語境依據。",
-        "回到「人生代代无穷已」：若換成現代常用義是否通順？請說出「已」在此處的含義及理由。"
+        "語境：「人生代代无穷已」\n「人生代代无穷已」中「已」的意思是\nA. 已经\nB. 太、甚\nC. 停止\nD. 罢了\n請選出答案，並用自己的話說明判斷依據。",
+        "回到「人生代代无穷已」：「已」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
     {
@@ -1546,12 +1553,13 @@
         "不胜任"
       ],
       "answerIndex": 1,
+      "sourceAnswer": "不能承受",
       "sourceRefs": [],
       "version": "vocab-set-8c786c5826b865f4",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「青枫浦上不胜愁」中「不胜」的意思，並說明語境依據。",
-        "回到「青枫浦上不胜愁」：若換成現代常用義是否通順？請說出「不胜」在此處的含義及理由。"
+        "語境：「青枫浦上不胜愁」\n「青枫浦上不胜愁」中「不胜」的意思是\nA. 不胜利\nB. 不能承受\nC. 不优胜\nD. 不胜任\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「青枫浦上不胜愁」中「不胜」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -1570,12 +1578,13 @@
         "这只受伤的小狗看起来很可怜。"
       ],
       "answerIndex": 2,
+      "sourceAnswer": "可怜九月初三夜，露似真珠月似弓。",
       "sourceRefs": [],
       "version": "vocab-set-8c786c5826b865f4",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「可怜楼上月裴回」中「可怜」的意思，並說明語境依據。",
-        "回到「可怜楼上月裴回」：若換成現代常用義是否通順？請說出「可怜」在此處的含義及理由。"
+        "語境：「可怜楼上月裴回」\n下列句中「可怜」一词用法与「可怜楼上月裴回」相同的是\nA. 他那副可怜的样子让人心酸。\nB. 这孩子流浪街头，真是可怜。\nC. 可怜九月初三夜，露似真珠月似弓。\nD. 这只受伤的小狗看起来很可怜。\n請選出答案，並用自己的話說明判斷依據。",
+        "回到「可怜楼上月裴回」：「可怜」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
     {
@@ -1594,12 +1603,13 @@
         "驱逐"
       ],
       "answerIndex": 1,
+      "sourceAnswer": "追随",
       "sourceRefs": [],
       "version": "vocab-set-8c786c5826b865f4",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「愿逐月华流照君」中「逐」的意思，並說明語境依據。",
-        "回到「愿逐月华流照君」：若換成現代常用義是否通順？請說出「逐」在此處的含義及理由。"
+        "語境：「愿逐月华流照君」\n「愿逐月华流照君」中「逐」字换成下列哪个字最准确？\nA. 赶\nB. 追随\nC. 寻找\nD. 驱逐\n請選出答案，並用自己的話說明判斷依據。",
+        "請用恰當的現代說法替換「愿逐月华流照君」中的「逐」，並解釋這個替換如何保留原句的意思。"
       ]
     },
     {
@@ -1618,12 +1628,13 @@
         "修饰"
       ],
       "answerIndex": 2,
+      "sourceAnswer": "纹理、波纹",
       "sourceRefs": [],
       "version": "vocab-set-8c786c5826b865f4",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「鱼龙潜跃水成文」中「文」的意思，並說明語境依據。",
-        "回到「鱼龙潜跃水成文」：若換成現代常用義是否通順？請說出「文」在此處的含義及理由。"
+        "語境：「鱼龙潜跃水成文」\n「鱼龙潜跃水成文」中「文」的意思是\nA. 文字\nB. 文章\nC. 纹理、波纹\nD. 修饰\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「鱼龙潜跃水成文」中「文」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -1642,12 +1653,13 @@
         "落月的光辉与江树交织，引起了离人无限的别愁。"
       ],
       "answerIndex": 3,
+      "sourceAnswer": "落月的光辉与江树交织，引起了离人无限的别愁。",
       "sourceRefs": [],
       "version": "vocab-set-8c786c5826b865f4",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「落月摇情满江树」中「摇」的意思，並說明語境依據。",
-        "回到「落月摇情满江树」：若換成現代常用義是否通順？請說出「摇」在此處的含義及理由。"
+        "語境：「落月摇情满江树」\n对「落月摇情满江树」的理解，最恰当的一项是\nA. 落月把情思摇动，洒满了江边的树木。\nB. 落月摇晃着，把深情全部倾注在江边的树木上。\nC. 月光在树影间摇曳，使人产生离别的愁绪。\nD. 落月的光辉与江树交织，引起了离人无限的别愁。\n請選出答案，並用自己的話說明判斷依據。",
+        "「落月摇情满江树」中的「摇」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     }
   ],
@@ -2225,9 +2237,46 @@
       }
     ]
   },
+  "referenceVersion": "yw-dialogue-sources-20261012-v1",
+  "languagePractice": [],
+  "dictionary": [],
   "exam": {
-    "status": "original-practice-only",
-    "reason": "本試點未核實可引用的北京真題原頁，禁止聲稱為真題或官方評分。"
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
   },
-  "curriculumVersion": "yw-dialogue-b335aa4b91d396a8b1ec"
+  "curriculumVersion": "yw-dialogue-87df6a17ffdfcabbcfd3"
 }

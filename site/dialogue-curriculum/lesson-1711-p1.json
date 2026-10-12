@@ -1197,11 +1197,12 @@
       "domain": "vocabulary",
       "label": "字詞：劝",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：鼓励。教材明确注为“鼓励”。选项中只有“劝善惩恶”的“劝”是鼓励、勉励之意。",
+      "rule": "沿用原題準據：劝善惩恶，社会之本。語境義：鼓励。教材明确注为“鼓励”。选项中只有“劝善惩恶”的“劝”是鼓励、勉励之意。",
       "sourcePassages": [
         "lesson-1711-p1:p1",
         "lesson-1711-p1:p3",
@@ -1218,11 +1219,12 @@
       "domain": "vocabulary",
       "label": "字詞：已",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：停止。“已”在此处作动词，意为停止。",
+      "rule": "沿用原題準據：停止。語境義：停止。“已”在此处作动词，意为停止。",
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
@@ -1237,11 +1239,12 @@
       "domain": "vocabulary",
       "label": "字詞：暴",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：晒。教材注为“晒”，通“曝”，读pù。",
+      "rule": "沿用原題準據：pù，晒干。語境義：晒。教材注为“晒”，通“曝”，读pù。 讀音題必須核對拼音，不能僅以詞義代替。",
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
@@ -1256,11 +1259,12 @@
       "domain": "vocabulary",
       "label": "字詞：知",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：智慧。“知”通“智”，指智慧。B选项“蚤”通“早”。",
+      "rule": "沿用原題準據：旦日不可不蚤自来谢项王。語境義：智慧。“知”通“智”，指智慧。B选项“蚤”通“早”。",
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
@@ -1275,11 +1279,12 @@
       "domain": "vocabulary",
       "label": "字詞：假",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：借助。此处“假”意为借助、利用。",
+      "rule": "沿用原題準據：凭借、利用。語境義：借助。此处“假”意为借助、利用。",
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
@@ -1294,11 +1299,12 @@
       "domain": "vocabulary",
       "label": "字詞：疾",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：劲疾，强劲。文中“疾”指强劲。C项“疾风”也是强劲的风。",
+      "rule": "沿用原題準據：疾风知劲草。語境義：劲疾，强劲。文中“疾”指强劲。C项“疾风”也是强劲的风。",
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
@@ -1313,11 +1319,12 @@
       "domain": "vocabulary",
       "label": "字詞：绝",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：横渡。此处“绝”指横渡河流。",
+      "rule": "沿用原題準據：横渡。語境義：横渡。此处“绝”指横渡河流。",
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
@@ -1332,11 +1339,12 @@
       "domain": "vocabulary",
       "label": "字詞：生",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：天性。“生”通“性”，指人的天性。",
+      "rule": "沿用原題準據：天性。語境義：天性。“生”通“性”，指人的天性。",
       "sourcePassages": [
         "lesson-1711-p1:p1",
         "lesson-1711-p1:p4"
@@ -1352,11 +1360,12 @@
       "domain": "vocabulary",
       "label": "字詞：焉",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：于此，从这里。文中的“焉”为兼词，相当于“于此”。B项“圣心备焉”中的“焉”是语气词。",
+      "rule": "沿用原題準據：圣心备焉。語境義：于此，从这里。文中的“焉”为兼词，相当于“于此”。B项“圣心备焉”中的“焉”是语气词。",
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
@@ -1371,11 +1380,12 @@
       "domain": "vocabulary",
       "label": "字詞：爪牙",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：爪子和牙齿。古义指野兽的爪子和牙齿，今义多指坏人的党羽。",
+      "rule": "沿用原題準據：爪子和牙齿。語境義：爪子和牙齿。古义指野兽的爪子和牙齿，今义多指坏人的党羽。",
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
@@ -1390,11 +1400,12 @@
       "domain": "vocabulary",
       "label": "字詞：躁",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：浮躁，不专心。“躁”在这里与前文“用心一也”相对，指不专心。",
+      "rule": "沿用原題準據：心思杂乱，不专一。語境義：浮躁，不专心。“躁”在这里与前文“用心一也”相对，指不专心。",
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
@@ -1409,11 +1420,12 @@
       "domain": "vocabulary",
       "label": "字詞：锲",
       "criteria": [
+        "source_answer",
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "準據：刻。“锲”意为刻。",
+      "rule": "沿用原題準據：刻。語境義：刻。“锲”意为刻。",
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
@@ -1441,14 +1453,15 @@
         "劝止无益，只得离去"
       ],
       "answerIndex": 2,
+      "sourceAnswer": "劝善惩恶，社会之本",
       "sourceRefs": [
         "《汉语大词典》"
       ],
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「劝 学 《荀子》 君子 曰：学不可以已」中「劝」的意思，並說明語境依據。",
-        "回到「劝 学 《荀子》 君子 曰：学不可以已」：若換成現代常用義是否通順？請說出「劝」在此處的含義及理由。"
+        "語境：「劝 学 《荀子》 君子 曰：学不可以已」\n下列句中“劝”字的含义与“劝学”中的“劝”相同的一项是\nA. 苦口婆心，多方劝导\nB. 劝君更尽一杯酒\nC. 劝善惩恶，社会之本\nD. 劝止无益，只得离去\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「劝 学 《荀子》 君子 曰：学不可以已」中「劝」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -1467,14 +1480,15 @@
         "太久"
       ],
       "answerIndex": 2,
+      "sourceAnswer": "停止",
       "sourceRefs": [
         "王力《古汉语常用字字典》"
       ],
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「君子 曰：学不可以已」中「已」的意思，並說明語境依據。",
-        "回到「君子 曰：学不可以已」：若換成現代常用義是否通順？請說出「已」在此處的含義及理由。"
+        "語境：「君子 曰：学不可以已」\n“学不可以已”中“已”的意思是\nA. 完成\nB. 罢了\nC. 停止\nD. 太久\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「君子 曰：学不可以已」中「已」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -1493,14 +1507,15 @@
         "pù，暴雨"
       ],
       "answerIndex": 1,
+      "sourceAnswer": "pù，晒干",
       "sourceRefs": [
         "《汉语大词典》"
       ],
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「虽有槁暴 ，不复挺 者，𫐓使之然也。」中「暴」的意思，並說明語境依據。",
-        "回到「虽有槁暴 ，不复挺 者，𫐓使之然也。」：若換成現代常用義是否通順？請說出「暴」在此處的含義及理由。"
+        "語境：「虽有槁暴 ，不复挺 者，𫐓使之然也。」\n下列对“虽有槁暴”中“暴”的读音及含义判断正确的一项是\nA. bào，凶恶\nB. pù，晒干\nC. bào，暴露\nD. pù，暴雨\n請選出答案，並用自己的話說明判斷依據。",
+        "「虽有槁暴 ，不复挺 者，𫐓使之然也。」中的「暴」應如何讀（請寫拼音）？它在此處是甚麼意思？請說明依據。"
       ]
     },
     {
@@ -1519,14 +1534,15 @@
         "知己知彼"
       ],
       "answerIndex": 1,
+      "sourceAnswer": "旦日不可不蚤自来谢项王",
       "sourceRefs": [
         "王力《古汉语常用字字典》"
       ],
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「知 明而行无过矣。 」中「知」的意思，並說明語境依據。",
-        "回到「知 明而行无过矣。 」：若換成現代常用義是否通順？請說出「知」在此處的含義及理由。"
+        "語境：「知 明而行无过矣。 」\n“则知明而行无过矣”中“知”的用法与下列哪项相同\nA. 知之为知之\nB. 旦日不可不蚤自来谢项王\nC. 吾不知之\nD. 知己知彼\n請選出答案，並用自己的話說明判斷依據。",
+        "回到「知 明而行无过矣。 」：「知」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
     {
@@ -1545,14 +1561,15 @@
         "宽恕"
       ],
       "answerIndex": 1,
+      "sourceAnswer": "凭借、利用",
       "sourceRefs": [
         "《汉语大词典》"
       ],
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「 舆马 者，非利足 也，而致 千里；」中「假」的意思，並說明語境依據。",
-        "回到「 舆马 者，非利足 也，而致 千里；」：若換成現代常用義是否通順？請說出「假」在此處的含義及理由。"
+        "語境：「 舆马 者，非利足 也，而致 千里；」\n“假舆马者”中“假”的意思是\nA. 不真\nB. 凭借、利用\nC. 假期\nD. 宽恕\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「 舆马 者，非利足 也，而致 千里；」中「假」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -1571,14 +1588,15 @@
         "老弱病疾"
       ],
       "answerIndex": 2,
+      "sourceAnswer": "疾风知劲草",
       "sourceRefs": [
         "王力《古汉语常用字字典》"
       ],
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「顺风而呼，声非加疾 也，而闻者彰 。假」中「疾」的意思，並說明語境依據。",
-        "回到「顺风而呼，声非加疾 也，而闻者彰 。假」：若換成現代常用義是否通順？請說出「疾」在此處的含義及理由。"
+        "語境：「顺风而呼，声非加疾 也，而闻者彰 。假」\n下列句中“疾”的含义与“声非加疾也”中的“疾”含义相同的一项是\nA. 草枯鹰眼疾\nB. 君有疾在腠理\nC. 疾风知劲草\nD. 老弱病疾\n請選出答案，並用自己的話說明判斷依據。",
+        "回到「顺风而呼，声非加疾 也，而闻者彰 。假」：「疾」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
     {
@@ -1597,14 +1615,15 @@
         "穷尽"
       ],
       "answerIndex": 2,
+      "sourceAnswer": "横渡",
       "sourceRefs": [
         "《汉语大词典》"
       ],
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「假舟楫者，非能水 也，而绝 江河。」中「绝」的意思，並說明語境依據。",
-        "回到「假舟楫者，非能水 也，而绝 江河。」：若換成現代常用義是否通順？請說出「绝」在此處的含義及理由。"
+        "語境：「假舟楫者，非能水 也，而绝 江河。」\n“而绝江河”中“绝”的意思是\nA. 断绝\nB. 极，最\nC. 横渡\nD. 穷尽\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「假舟楫者，非能水 也，而绝 江河。」中「绝」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     },
     {
@@ -1623,14 +1642,15 @@
         "生长"
       ],
       "answerIndex": 1,
+      "sourceAnswer": "天性",
       "sourceRefs": [
         "王力《古汉语常用字字典》"
       ],
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「君子生非异 也，善假于物 也。 」中「生」的意思，並說明語境依據。",
-        "回到「君子生非异 也，善假于物 也。 」：若換成現代常用義是否通順？請說出「生」在此處的含義及理由。"
+        "語境：「君子生非异 也，善假于物 也。 」\n“君子生非异也”中“生”字可以替换为\nA. 生命\nB. 天性\nC. 生活\nD. 生长\n請選出答案，並用自己的話說明判斷依據。",
+        "請用恰當的現代說法替換「君子生非异 也，善假于物 也。 」中的「生」，並解釋這個替換如何保留原句的意思。"
       ]
     },
     {
@@ -1649,14 +1669,15 @@
         "寒暑易节，始一反焉"
       ],
       "answerIndex": 1,
+      "sourceAnswer": "圣心备焉",
       "sourceRefs": [
         "《古汉语常用字字典》"
       ],
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「积土成山，风雨兴焉 ；积水成渊，蛟龙生焉；」中「焉」的意思，並說明語境依據。",
-        "回到「积土成山，风雨兴焉 ；积水成渊，蛟龙生焉；」：若換成現代常用義是否通順？請說出「焉」在此處的含義及理由。"
+        "語境：「积土成山，风雨兴焉 ；积水成渊，蛟龙生焉；」\n下列各句中“焉”的用法与“风雨兴焉”中的“焉”相同的一项是\nA. 复驾言兮焉求\nB. 圣心备焉\nC. 且焉置土石\nD. 寒暑易节，始一反焉\n請選出答案，並用自己的話說明判斷依據。",
+        "請改寫「积土成山，风雨兴焉 ；积水成渊，蛟龙生焉；」的句意，解釋「焉」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
     {
@@ -1675,14 +1696,15 @@
         "得力助手"
       ],
       "answerIndex": 2,
+      "sourceAnswer": "爪子和牙齿",
       "sourceRefs": [
         "《汉语大词典》"
       ],
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「蚓无爪牙之利，筋骨之强，上食埃土 ，」中「爪牙」的意思，並說明語境依據。",
-        "回到「蚓无爪牙之利，筋骨之强，上食埃土 ，」：若換成現代常用義是否通順？請說出「爪牙」在此處的含義及理由。"
+        "語境：「蚓无爪牙之利，筋骨之强，上食埃土 ，」\n文中“爪牙”的古义是\nA. 帮凶\nB. 武器\nC. 爪子和牙齿\nD. 得力助手\n請選出答案，並用自己的話說明判斷依據。",
+        "回到「蚓无爪牙之利，筋骨之强，上食埃土 ，」：「爪牙」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
     {
@@ -1701,14 +1723,15 @@
         "身体虚弱"
       ],
       "answerIndex": 1,
+      "sourceAnswer": "心思杂乱，不专一",
       "sourceRefs": [
         "《汉语大词典》"
       ],
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「非蛇鳝之穴无可寄托者，用心躁 也。 《」中「躁」的意思，並說明語境依據。",
-        "回到「非蛇鳝之穴无可寄托者，用心躁 也。 《」：若換成現代常用義是否通順？請說出「躁」在此處的含義及理由。"
+        "語境：「非蛇鳝之穴无可寄托者，用心躁 也。 《」\n“用心躁也”中“躁”字强调了蟹的什么特点\nA. 动作敏捷\nB. 心思杂乱，不专一\nC. 脾气暴躁\nD. 身体虚弱\n請選出答案，並用自己的話說明判斷依據。",
+        "「非蛇鳝之穴无可寄托者，用心躁 也。 《」中的「躁」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
       ]
     },
     {
@@ -1727,14 +1750,15 @@
         "雕琢"
       ],
       "answerIndex": 1,
+      "sourceAnswer": "刻",
       "sourceRefs": [
         "王力《古汉语常用字字典》"
       ],
       "version": "vocab-set-ab7ea2a36ba88018",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "請解釋「 而舍之，朽木不折；锲而不舍，金石可镂 。」中「锲」的意思，並說明語境依據。",
-        "回到「 而舍之，朽木不折；锲而不舍，金石可镂 。」：若換成現代常用義是否通順？請說出「锲」在此處的含義及理由。"
+        "語境：「 而舍之，朽木不折；锲而不舍，金石可镂 。」\n“锲而舍之”中“锲”的意思是\nA. 坚持\nB. 刻\nC. 放弃\nD. 雕琢\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「 而舍之，朽木不折；锲而不舍，金石可镂 。」中「锲」的意思，再用自己的話改寫這句話，說明語境依據。"
       ]
     }
   ],
@@ -1889,9 +1913,141 @@
       }
     ]
   },
+  "referenceVersion": "yw-dialogue-sources-20261012-v1",
+  "languagePractice": [
+    {
+      "id": "language-er",
+      "word": "而",
+      "type": "function-word",
+      "sourceSentence": "順風而呼，聲非加疾也，而聞者彰；君子博學而日參省乎己。",
+      "meaning": "把「順風」與「呼」相接，表示修飾；「而聞者彰」與聲音未加強相轉折；「博學而日參省」表示遞進。",
+      "explanation": "比較每個而前後成分的關係；不同語境不套用同一個現代連詞。術語不能替代句意說明。",
+      "dictionaryId": "xc-er",
+      "annotationIds": [],
+      "difficulty": null,
+      "variants": [
+        "比較「順風而呼」與「而聞者彰」：兩個「而」連接的內容是甚麼，關係相同嗎？請用自己的話說明。",
+        "把「君子博學而日參省乎己」與「順風而呼」中的「而」換成適當的現代說法，解釋兩處為甚麼不能都機械譯成「但是」。"
+      ],
+      "assessmentStatus": "teaching-reference-only-awaiting-calibration"
+    },
+    {
+      "id": "language-yu",
+      "word": "于",
+      "type": "function-word",
+      "sourceSentence": "青，取之于藍，而青于藍。",
+      "meaning": "「取之于藍」的于引出來源；「青于藍」的于引出比較對象。",
+      "explanation": "依教材兩條註釋，分別還原成「從藍草取得」與「比藍草顏色深」；不只報詞性名稱。",
+      "annotationIds": [
+        "footnote-11143-3",
+        "footnote-11143-4"
+      ],
+      "dictionaryStatus": "specialist-entry-awaiting-verification",
+      "difficulty": null,
+      "variants": [
+        "「取之于藍」與「青于藍」中的「于」分別引出甚麼？請把兩處改寫成現代說法。",
+        "若把「青于藍」解作「從藍草取得」，會混淆哪兩個意思？請用兩處原句說明。"
+      ],
+      "assessmentStatus": "teaching-reference-only-awaiting-calibration"
+    },
+    {
+      "id": "grammar-water",
+      "word": "水",
+      "type": "grammar",
+      "sourceSentence": "假舟楫者，非能水也，而絕江河。",
+      "meaning": "「水」在此表示游泳這個動作；句意是借助舟船的人未必善於游泳，卻能渡過江河。",
+      "explanation": "教材註「能水：善於游水。水，游泳。」說明句法作用與語境，不能只報「活用」術語。",
+      "annotationIds": [
+        "footnote-11143-23"
+      ],
+      "difficulty": null,
+      "variants": [
+        "「非能水也」的「水」在句中指事物還是動作？請根據上下文說明，並改寫這句話。",
+        "如果把「水」只解釋為江水，為何無法說通「假舟楫者，非能水也」？請解釋它在這句中的作用。"
+      ],
+      "assessmentStatus": "teaching-reference-only-awaiting-calibration"
+    },
+    {
+      "id": "grammar-one",
+      "word": "一",
+      "type": "grammar",
+      "sourceSentence": "用心一也。",
+      "meaning": "「一」說的是專一，不是心的數量。",
+      "explanation": "沿用教材「一：專一」的註釋；把這一判斷與前文寫蚓的行為相連。",
+      "annotationIds": [
+        "footnote-11143-39"
+      ],
+      "difficulty": null,
+      "variants": [
+        "「用心一也」的「一」能否只譯成數量「一個」？請改寫句意，並說明與前文的關係。",
+        "課文用「一」說明蚓能做成事情的原因。它在此描述甚麼狀態？請用自己的話解釋。"
+      ],
+      "assessmentStatus": "teaching-reference-only-awaiting-calibration"
+    }
+  ],
+  "dictionary": [
+    {
+      "id": "xc-er",
+      "headword": "而",
+      "entryId": "e-p129_R-6",
+      "edition": "1999 年 2 月第 1 版",
+      "url": "https://xc.bdfz.net/#entry/e-p129_R-6",
+      "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p129_R-6",
+      "entryResponseSha256": "a9c4c60d847383a5ae3e78fbac0e6effc5c8fac8c6bf65bee6d9df4e651578b5",
+      "verification": "原書頁已目視核對；只確認下列例句與頁碼，未宣稱整個 OCR 詞條無誤。",
+      "pages": [
+        {
+          "pdfPage": 132,
+          "printedPage": 120,
+          "url": "https://dict.bdfz.net/source/xc/images/p132.png",
+          "example": "順風而呼，聲非加疾也，而聞者彰。"
+        },
+        {
+          "pdfPage": 133,
+          "printedPage": 121,
+          "url": "https://dict.bdfz.net/source/xc/images/p133.png",
+          "example": "君子博學而日參省乎己，則知明而行無過矣。"
+        }
+      ]
+    }
+  ],
   "exam": {
-    "status": "original-practice-only",
-    "reason": "本試點未核實可引用的北京真題原頁，禁止聲稱為真題或官方評分。"
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
   },
-  "curriculumVersion": "yw-dialogue-d5e0b70f7440b5198a2a"
+  "curriculumVersion": "yw-dialogue-397b73b81b5bb7ad997e"
 }

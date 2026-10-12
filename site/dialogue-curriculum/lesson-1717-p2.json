@@ -1093,9 +1093,46 @@
       }
     ]
   },
+  "referenceVersion": "yw-dialogue-sources-20261012-v1",
+  "languagePractice": [],
+  "dictionary": [],
   "exam": {
-    "status": "original-practice-only",
-    "reason": "本試點未核實可引用的北京真題原頁，禁止聲稱為真題或官方評分。"
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
   },
-  "curriculumVersion": "yw-dialogue-6028a2e1398c8648e510"
+  "curriculumVersion": "yw-dialogue-95b0fb1ee0ef56ccf150"
 }

@@ -1,0 +1,133 @@
+{
+  "version": "yw-dialogue-sources-20261012-v1",
+  "recordedAt": "2026-10-12T07:36:32Z",
+  "dictionary": [
+    {
+      "id": "xc-er",
+      "headword": "而",
+      "entryId": "e-p129_R-6",
+      "edition": "1999 年 2 月第 1 版",
+      "url": "https://xc.bdfz.net/#entry/e-p129_R-6",
+      "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p129_R-6",
+      "entryResponseSha256": "a9c4c60d847383a5ae3e78fbac0e6effc5c8fac8c6bf65bee6d9df4e651578b5",
+      "verification": "原書頁已目視核對；只確認下列例句與頁碼，未宣稱整個 OCR 詞條無誤。",
+      "pages": [
+        {
+          "pdfPage": 132,
+          "printedPage": 120,
+          "url": "https://dict.bdfz.net/source/xc/images/p132.png",
+          "example": "順風而呼，聲非加疾也，而聞者彰。"
+        },
+        {
+          "pdfPage": 133,
+          "printedPage": 121,
+          "url": "https://dict.bdfz.net/source/xc/images/p133.png",
+          "example": "君子博學而日參省乎己，則知明而行無過矣。"
+        }
+      ]
+    }
+  ],
+  "examExamples": [
+    {
+      "id": "beijing-2024-q19",
+      "year": 2024,
+      "paper": "北京卷·語文",
+      "questionNumber": 19,
+      "work": "談買書",
+      "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+      "skill": "聯繫多處語境解釋關鍵詞",
+      "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+      "publisher": "北京考試報",
+      "issue": 1816,
+      "printedPage": 8,
+      "publishedAt": "2024-12-11",
+      "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+      "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+    },
+    {
+      "id": "beijing-2022-q18",
+      "year": 2022,
+      "paper": "北京卷·語文",
+      "questionNumber": 18,
+      "work": "這城市已融入我的生命",
+      "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+      "skill": "把段落內容、前後關係與全文主旨連起來",
+      "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+      "publisher": "北京考試報",
+      "issue": 1816,
+      "printedPage": 8,
+      "publishedAt": "2024-12-11",
+      "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+      "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+    }
+  ],
+  "languageItems": {
+    "lesson-1711-p1": [
+      {
+        "id": "language-er",
+        "word": "而",
+        "type": "function-word",
+        "sourceSentence": "順風而呼，聲非加疾也，而聞者彰；君子博學而日參省乎己。",
+        "meaning": "把「順風」與「呼」相接，表示修飾；「而聞者彰」與聲音未加強相轉折；「博學而日參省」表示遞進。",
+        "explanation": "比較每個而前後成分的關係；不同語境不套用同一個現代連詞。術語不能替代句意說明。",
+        "dictionaryId": "xc-er",
+        "annotationIds": [],
+        "difficulty": null,
+        "variants": [
+          "比較「順風而呼」與「而聞者彰」：兩個「而」連接的內容是甚麼，關係相同嗎？請用自己的話說明。",
+          "把「君子博學而日參省乎己」與「順風而呼」中的「而」換成適當的現代說法，解釋兩處為甚麼不能都機械譯成「但是」。"
+        ]
+      },
+      {
+        "id": "language-yu",
+        "word": "于",
+        "type": "function-word",
+        "sourceSentence": "青，取之于藍，而青于藍。",
+        "meaning": "「取之于藍」的于引出來源；「青于藍」的于引出比較對象。",
+        "explanation": "依教材兩條註釋，分別還原成「從藍草取得」與「比藍草顏色深」；不只報詞性名稱。",
+        "annotationIds": [
+          "footnote-11143-3",
+          "footnote-11143-4"
+        ],
+        "dictionaryStatus": "specialist-entry-awaiting-verification",
+        "difficulty": null,
+        "variants": [
+          "「取之于藍」與「青于藍」中的「于」分別引出甚麼？請把兩處改寫成現代說法。",
+          "若把「青于藍」解作「從藍草取得」，會混淆哪兩個意思？請用兩處原句說明。"
+        ]
+      },
+      {
+        "id": "grammar-water",
+        "word": "水",
+        "type": "grammar",
+        "sourceSentence": "假舟楫者，非能水也，而絕江河。",
+        "meaning": "「水」在此表示游泳這個動作；句意是借助舟船的人未必善於游泳，卻能渡過江河。",
+        "explanation": "教材註「能水：善於游水。水，游泳。」說明句法作用與語境，不能只報「活用」術語。",
+        "annotationIds": [
+          "footnote-11143-23"
+        ],
+        "difficulty": null,
+        "variants": [
+          "「非能水也」的「水」在句中指事物還是動作？請根據上下文說明，並改寫這句話。",
+          "如果把「水」只解釋為江水，為何無法說通「假舟楫者，非能水也」？請解釋它在這句中的作用。"
+        ]
+      },
+      {
+        "id": "grammar-one",
+        "word": "一",
+        "type": "grammar",
+        "sourceSentence": "用心一也。",
+        "meaning": "「一」說的是專一，不是心的數量。",
+        "explanation": "沿用教材「一：專一」的註釋；把這一判斷與前文寫蚓的行為相連。",
+        "annotationIds": [
+          "footnote-11143-39"
+        ],
+        "difficulty": null,
+        "variants": [
+          "「用心一也」的「一」能否只譯成數量「一個」？請改寫句意，並說明與前文的關係。",
+          "課文用「一」說明蚓能做成事情的原因。它在此描述甚麼狀態？請用自己的話解釋。"
+        ]
+      }
+    ]
+  }
+}
