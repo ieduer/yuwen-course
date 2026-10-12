@@ -1,4 +1,12 @@
-## Current dialogue candidate — 2026-10-12T09:31:34.266872+00:00
+## Current dialogue candidate — 2026-10-12T09:40:33.995177+00:00
+
+Source-text correction only: the poem has18 unchanged original couplets. Its appended third-person teaching commentary and three document-preview blocks are now exact-hash-pinned reading materials, with every original block and resource preserved. The commentary is visible on demand and explicitly separate in model context; it cannot satisfy a poem-passage evidence citation. Original references are accessible in the materials view. No original reader/App/textbook source is changed or copied. Policyv3 records the changed source boundary; immutable earlier session snapshots remain preserved.
+
+81 dialogue checks pass on both pinned Nodes, including exact original-block reconstruction and rejection of commentary-as-poem evidence. Generated curriculum checks and formal artifact1251/52091bf292371f96137b726b1012b1caa69d86dd855ee67389d4288813f9faad pass. Previous208 core checks,74 Reading API checks and exact-head GitHub run38230577229 for562fc18 passed. Current source correction CI will be checked after push. Production remains unchanged, feature off, all0010–0013 unapplied; no provider call or source-data mutation. The complete12 original poem formal bridges remain implemented; other two pilots have no formal array.
+
+Next: substantive 尚友 conclusion and readiness/reference validation, classical grammar/difficulty calibration and remaining real source/account/mobile/weak-network/stream/cost/backup/restore/APIS fanout/release gates. Source images and screenshot limitations remain documented below. Central evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12f36/REPORT.md`.
+
+## Historical dialogue candidate — 2026-10-12T09:31:34.266872+00:00
 
 Serial owner codex-01a12f36. All12 original formal requirements in the poem pilot now have source-owned paths in the conversation: five original AI rubrics, six original selectedIndex vocabulary tasks and one non-scoring personal evaluation. The other two pilots have no formal array; none is invented. New vocabulary explanation remains separate from the original answer-key decision. Source attempts, old first-wrong/two-correct mastery rule, original source completion and every score remain unchanged. Previously mastered vocabulary lacking a reliable formal version goes to historical review without a retest.
 

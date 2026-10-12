@@ -129,5 +129,45 @@
         ]
       }
     ]
+  },
+  "textRoleCuration": {
+    "version": "yw-dialogue-text-roles-20261012-v1",
+    "recordedAt": "2026-10-12T09:36:23.747901+00:00",
+    "lessons": {
+      "lesson-1498": [
+        {
+          "blockIndex": 18,
+          "blockSha256": "5b0eaf6c4450cacf72f3736695cc346354faee269551bab1eecb43db568a26b8",
+          "role": "commentary",
+          "label": "原課附帶導讀（非詩作正文）",
+          "source": "data/reader-documents/lesson-1498.json#main.blocks",
+          "reason": "附詩後以第三人稱分析本詩並給出誦讀任務、畫作標題；非張若虛詩句。"
+        },
+        {
+          "blockIndex": 19,
+          "blockSha256": "9fba5d21cd385f26da63e41929aab4230430c40d4435c105f1499b5d2cf4b3aa",
+          "role": "reference-metadata",
+          "label": "原課參考資料",
+          "source": "data/reader-documents/lesson-1498.json#main.blocks",
+          "reason": "原帖雲端文獻連結的標籤與預覽文字，並非詩作正文。"
+        },
+        {
+          "blockIndex": 20,
+          "blockSha256": "57f225575962378c931c663ba06e36589250cb67bf603f64ead263e4e02672db",
+          "role": "reference-title",
+          "label": "原課參考資料",
+          "source": "data/reader-documents/lesson-1498.json#main.blocks",
+          "reason": "原帖雲端文獻連結的標籤與預覽文字，並非詩作正文。"
+        },
+        {
+          "blockIndex": 21,
+          "blockSha256": "0c826a2a3e23adf119c7f74aa7b5a2d95f63d790a2a8b35e117f4be675ce53af",
+          "role": "reference-metadata",
+          "label": "原課參考資料",
+          "source": "data/reader-documents/lesson-1498.json#main.blocks",
+          "reason": "原帖雲端文獻連結的標籤與預覽文字，並非詩作正文。"
+        }
+      ]
+    }
   }
 }

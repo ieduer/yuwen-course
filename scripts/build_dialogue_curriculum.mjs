@@ -80,7 +80,11 @@ write('docs/dialogue/requirement-map.json',mapping);
 for(const id of pilotIds){
  const meta=taxonomy.lessons.find(l=>l.id===id), row=inventory.find(l=>l.lessonId===id);
  const lesson=read(`lessons/${id}.json`), reader=read(`reader-documents/${id}.json`), vocab=read(`vocab/${id}.json`);
- const passages=reader.main.blocks.map((block,i)=>({id:`${id}:p${i+1}`,text:flat(block),block})).filter(p=>p.text.trim());
+ const roles=references.textRoleCuration?.lessons[id]||[];
+ for(const role of roles)assert.equal(hash(reader.main.blocks[role.blockIndex]),role.blockSha256,`text role source drift: ${id}:${role.blockIndex}`);
+ const sourceBlocks=reader.main.blocks.map((block,i)=>({id:`${id}:p${i+1}`,text:flat(block),block,curation:roles.find(r=>r.blockIndex===i)})).filter(p=>p.text.trim());
+ const passages=sourceBlocks.filter(p=>!p.curation).map(({curation,...p})=>p);
+ const readingMaterials=sourceBlocks.filter(p=>p.curation).map(({curation,...p})=>({...p,...curation}));
  const objectives=[...row.legacyTracks.filter(k=>k!=='vocabulary'),...(row.formal.some(i=>i.questionKind==='wordCreation')?['wordCreation']:[]),'transfer','shangyou'].map(key=>({id:`${id}:${key}`,domain:key,label:contracts[key][0],criteria:contracts[key][2],rule:contracts[key][1],prerequisites:key==='shangyou'?['other_objectives']:[],sourcePassages:passages.map(p=>p.id),misconceptions:['迎合作者不等於理解','引用不能替代解釋'],remediation:'回到一處原句，比較兩種讀法，再請學生獨立改述。'}));
  const vocabulary=vocab.inventory.filter(v=>row.vocabularyIds.includes(v.id)).map(v=>({id:v.id,word:v.word,sourceSentence:v.sourceSentence,meaning:v.contextMeaning,explanation:v.explanation,type:v.type,difficulty:v.difficulty,question:v.question,options:v.options,answerIndex:v.answerIndex,sourceAnswer:v.options[v.answerIndex],sourceRefs:v.sourceRefs,version:vocab.questionSetVersion||hash(v),dictionaryStatus:'verify-context-against-source-image',variants:vocabularyVariants(v)}));
  for(const v of vocabulary)objectives.push({id:v.id,domain:'vocabulary',label:`字詞：${v.word}`,criteria:['source_answer','context_meaning','explanation','independent'],rule:`沿用原題準據：${v.sourceAnswer}。語境義：${v.meaning}。${v.explanation||''}${v.type==='pronunciation'?' 讀音題必須核對拼音，不能僅以詞義代替。':''}`,sourcePassages:passages.filter(p=>p.text.includes(v.word)).map(p=>p.id),prerequisites:[],misconceptions:['照抄提示不算獨立掌握'],remediation:'解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。'});
@@ -94,6 +98,7 @@ for(const id of pilotIds){
  });
  const dictionary=references.dictionary.filter(d=>languagePractice.some(i=>i.dictionaryId===d.id));
  const data={schemaVersion:1,lessonId:id,title:meta.title,mode:meta.mode,author:meta.authors[0]?.name||'作品傳統',persona:{kind:meta.authors.length===1?'author-simulation':'collective-simulation',notice:'AI 教學模擬，依據作品；並非作者本人。',narratorIsAuthor:false,rule:'以作者第一人稱討論文本選擇；不得把抒情主人公或敘述者的經歷當作作者生平。'},passages,annotations:reader.main.annotations,resources:reader.resources,source:lesson.forumUrl,objectives,vocabulary,legacy:row,referenceVersion:references.version,languagePractice,dictionary,exam:{status:'original-practice-with-publisher-cited-examples',reason:'練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。',examples:references.examExamples},curriculumVersion:''};
+ data.readingMaterials=readingMaterials;data.textRoleVersion=references.textRoleCuration?.version||null;
  data.curriculumVersion='yw-dialogue-'+hash(data).slice(0,20);
  write(`site/dialogue-curriculum/${id}.json`,data);
 }

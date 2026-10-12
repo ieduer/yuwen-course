@@ -1,13 +1,13 @@
 # YW conversation pilot — one-page review
 
-As of 2026-10-12T09:31:34Z. **Recommendation: NO-GO for migration, production enablement or replacing the old workflow.** Proceed with review of the disabled candidate; no approval is being requested for an unfinished release.
+As of 2026-10-12T09:40:33.995177+00:00. **Recommendation: NO-GO for migration, production enablement or replacing the old workflow.** Proceed with review of the disabled candidate; no approval is being requested for an unfinished release.
 
 | Review item | Actual evidence / disposition |
 | --- | --- |
 | Source preservation | Isolated candidate from 175f8ae; unrelated dirty canonical checkout preserved; original curriculum, app and migrations unchanged |
 | Inventory | 189 lessons, 869 formal resources, 1,021 formative items, 193 active guide items; exact per-item map, gaps and compound gates |
 | Local implementation | Three text/conversation pilots, gated Worker, private owner storage, verifiable proposals, question instances, versioned resume and budget-deferred drafts |
-| Local checks | 80 dialogue +121 original source/recovery/replay +7 blueprint checks on both pinned Nodes;74 local Reading API;1251-file formal artifact. Earlier browser/APIS evidence remains scoped to prior reports |
+| Local checks | 81 current dialogue checks on both pinned Nodes; prior208 core and74 Reading API checks;562fc18 CI passed;1251-file current formal artifact. Earlier browser/APIS evidence remains scoped to prior reports |
 | Performance | Local n=3 first text: desktop median 25.6 ms; mobile weak-network median 786.6 ms; old medians 270.2 ms / 18,556.0 ms. Not a production speedup claim |
 | Long conversation | 200 synthetic turns; mobile CSS390x844, no horizontal overflow. Weak network150ms/200KB/s, n=3: text median983.1ms, record median1672.1ms. First-excerpt link restored all200 turns and reached the original. Physical keyboard/provider latency unverified |
 | Historical production evidence | No writes made; no live row comparison, new recoverable backup or restore acceptance obtained |

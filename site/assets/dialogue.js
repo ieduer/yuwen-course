@@ -56,7 +56,17 @@ function renderText(){
  }
  if(locked){$('requirements').replaceChildren(node('p','先自行斷句，保存至少三處疑點與猜測，再寫下初讀感知。原要求及原始紀錄保留。'));$('references').replaceChildren(node('p','完成無注疏初讀後，展開正文註釋與參考資料。'));return;}
  $('requirements').replaceChildren(...curriculum.objectives.map(o=>{const n=node('div',undefined,'requirement');n.append(node('strong',o.label),node('span',o.rule));return n;}));
- $('references').replaceChildren(node('p','原有補充資料、學案與教材原圖保留在上方的原有課程入口。'),...curriculum.annotations.map(a=>node('p',(a.blocks||[]).flatMap(b=>(b.runs||[]).map(r=>r.text||'')).join('\n'))));
+ $('references').replaceChildren(node('p','原課導讀與參考連結列在下方；其他補充資料、學案與教材原圖仍可由上方原有課程入口查看。'),...curriculum.annotations.map(a=>node('p',(a.blocks||[]).flatMap(b=>(b.runs||[]).map(r=>r.text||'')).join('\n'))));
+ for(const material of curriculum.readingMaterials||[]){
+  if(material.role!=='commentary')continue;
+  const section=node('section');section.id=material.id;section.append(node('h3',material.label),node('p',material.text));$('references').append(section);
+ }
+ const sourceLinks=new Set();
+ for(const resource of curriculum.resources||[]){
+  if(resource.kind!=='link'||sourceLinks.has(resource.href))continue;
+  let url;try{url=new URL(resource.href);if(!['https:','http:'].includes(url.protocol))continue;}catch{continue;}
+  sourceLinks.add(resource.href);const link=node('a',/^https?:/.test(resource.label||'')?url.hostname:resource.label||'原課參考資料');link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';const p=node('p');p.append(link);$('references').append(p);
+ }
  for(const entry of curriculum.dictionary||[]){
   const section=node('section');section.append(node('h3',`虛詞詞典：「${entry.headword}」`),node('p',`${entry.edition}。已核對以下例句的原書頁。`));
   for(const page of entry.pages){const link=node('a',`原書第 ${page.printedPage} 頁：${page.example}`);link.href=page.url;link.target='_blank';link.rel='noopener noreferrer';const paragraph=node('p');paragraph.append(link);section.append(paragraph);}

@@ -1,5 +1,11 @@
 # Dialogue candidate changelog
 
+## 2026-10-12T09:40:33.995177+00:00 — original poem/reference boundary; not released
+
+- Kept18 poem passages unchanged; preserved exact commentary/preview blocks as on-demand materials and retained all source links.
+- Excluded commentary from poem evidence while retaining it as labelled teaching context; changed policyv3.
+- Verified81 dialogue checks per Node, source-block reconstruction, generated curriculum and formal artifact. Prior original-task CI562fc18 passed; new exact-head CI pending.
+
 ## 2026-10-12T09:31:34.266872+00:00 — original answer-key tasks and non-scoring self-report; not released
 
 - Connected all six original poem vocabulary choices and the original0–100 interest self-report, preserving scoring/mastery/source completion rules.

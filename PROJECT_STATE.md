@@ -1,6 +1,6 @@
-## Current dialogue candidate — 2026-10-12T09:31:34.266872+00:00
+## Current dialogue candidate — 2026-10-12T09:40:33.995177+00:00
 
-All12 original formal poem requirements now have dialogue bridges: original AI rubrics, six answer-key choices and non-scoring self-report. Historical grades and source mastery rules stay unchanged; free task receipts and visible dialogue commit together.208 focused checks per pinned Node,74 local Reading API checks, generated map and formal artifact pass. Feature remains disabled; production capacity has not increased. Teaching conclusion/calibration, real restore and live release gates remain open. See [current evidence and blockers](docs/dialogue/PILOT.md).
+All12 poem formal bridges remain implemented and exact-head CI562fc18 passed. Poem text is now separated from preserved source commentary/preview labels;81 focused dialogue checks per pinned Node and formal artifact pass. Feature off; no production capacity increase. Teaching conclusion/calibration and real restore/release acceptance remain open. See [the current candidate contract](docs/dialogue/PILOT.md).
 
 ## Historical dialogue candidate — 2026-10-12T07:56:32Z
 
