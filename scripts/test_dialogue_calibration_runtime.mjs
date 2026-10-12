@@ -93,5 +93,5 @@ test('cost reserve and expiry remain enforced',async t=>{
 test('embedded execution packet exactly matches the original reproducible packet',async()=>{
  const {calibrationPacket}=await import('./dialogue_calibration.mjs');
  const generated=calibrationPacket(JSON.parse(fs.readFileSync('scripts/dialogue-calibration-cases.json')),id=>JSON.parse(fs.readFileSync('site/dialogue-curriculum/'+id+'.json')),policy);
- assert.deepEqual(packet,generated);assert.equal(packet.sourceDigest,'95b8f943e519191aba697a0c01984621ee8ea12549e164379363f5ef54a04f09');
+ assert.deepEqual(packet,JSON.parse(JSON.stringify(generated)));assert.equal(packet.sourceDigest,'95b8f943e519191aba697a0c01984621ee8ea12549e164379363f5ef54a04f09');
 });
