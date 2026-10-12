@@ -1,4 +1,4 @@
-## Current isolated acceptance — 2026-10-12T22:15Z
+## Current isolated acceptance — 2026-10-12T22:13Z
 
 Amendment2 source df42b7e874af454641cceb1a6a4097b82c452f10 deployed to isolated Pages f407ce01-c5b4-4d5a-a716-84c86f06f49b at 2026-10-12T22:00:46.394705Z. Restricted artifact ebaade2dbcf6e0052d29b9cbf59e243b58c5138bb2ae3f22976dd0e57099736c.142 focused checks on Node22/24 and exact CI38313823541 passed. Formal YW baseline175f8ae/Pagesb6f5ac67 and APIS53dbb568@100/66cfaab9@0 remain unchanged.
 
