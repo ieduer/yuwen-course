@@ -1,4 +1,10 @@
-## Current real acceptance — 2026-10-12T15:08:09.731392+00:00
+## Current prompt repair — 2026-10-12T15:25:26.047996+00:00
+
+Policyv6 makes the existing complete-criterion evidence contract explicit; evidencev3 and validator are unchanged. The real first failed response remains rejected and its original execution packet/ledger are immutable.105 focused checks pass on pinned Node22.21.1 and24.19.0; formal artifact1255files/d2f285b5cbe5b3ff220666cac16d8fed98471f96aa2808a0f0f1468e527bd730. This is local verification, not real semantic acceptance or deployment.
+
+Original paid operation remains STOPPED1/24,4678microUSD; no new call. Completing24 corrected cases needs25 total attempts and an explicit bounded continuation amendment, proposed maximumUS$2.100,20minutes,zero retries,original expiry retained. No implicit reset or production approval. Current runtime remains c2fcf53/Pagesc4fa78f4; APIS and production are unchanged. Exact source, regression, proposed packet and remaining gates: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a130b1-prompt-repair/REPORT.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a130b1-prompt-repair/REPORT.md).
+
+## Historical real acceptance — 2026-10-12T15:08:09.731392+00:00
 
 The actual owner553 My browser session saved and reloaded one synthetic first-read mark in the isolated D1: same ownerRef,markId,text and guess; HTTP200. No login replay or teacher-review request. The fixed24-case executor is now deployed only at yw-acceptance.bdfz.net: source `c2fcf53cde109b28f487ac3ebc70aee594146c2c`, Pages `c4fa78f4-5740-4086-8393-6a514164bb53`, artifact8758aa8d91246ac76518c283c8b054bee05d94809d6c37e960ec343305edc40d. Original packet95b8f943... remains exact; Node22/24 each26checks and actual bundle check pass.
 
@@ -6,7 +12,7 @@ Private APIS routing and real Gemini stream/usage are verified by the first fixe
 
 The original operation is STOPPED at1/24 under its first-failure rule;23cases remain unexecuted,no retry/reset. This is a failed model acceptance, not a production release. Any corrected prompt/packet and disposition for further calls need explicit handling of that stopped operation; do not silently start a replacement batch or weaken the validator. Formal YW unchanged; APIS baseline100/candidate0 unchanged; hard expiry2026-10-13T12:00Z. Evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-live-acceptance/REPORT.md`. Earlier current sections are history where superseded.
 
-## Current authenticated acceptance and fixed-case repair — 2026-10-12T14:57Z
+## Historical authenticated acceptance and fixed-case repair — 2026-10-12T14:57Z
 
 Real owner553 reused an existing My browser session. One synthetic first-read mark was saved through the normal UI and verified after reload: same ownerRef,markId,selected text and guess,HTTP200. No login replay, teacher-review request, model call or production write occurred. Evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-live-acceptance/OWNER-SAVE-RELOAD.json`.
 
@@ -14,27 +20,27 @@ The fixed24-case packet reproduces digest95b8f943e519191aba697a0c01984621ee8ea12
 
 This runtime repair is locally tested and built but NOT deployed. Its exact source/artifact needs a fresh consumed release transaction for the existing isolated project; the earlier publisher window has ended. Original model operation remains0/24,USD2.016,20 minutes from first actual attempt,20 seconds per request,no retries. Each result still needs semantic review before the next case. Private cloud APIS routing remains unverified until the first admitted exact case produces real provenance/usage. Current candidate review: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-live-acceptance/CALIBRATION-REVIEW.md`. Earlier current headings are history where superseded.
 
-## Current isolated deployment — 2026-10-12T14:36:21.588121+00:00
+## Historical isolated deployment — 2026-10-12T14:36:21.588121+00:00
 
 The isolated host https://yw-acceptance.bdfz.net/dialogue now passes six real public asset/auth/origin/host boundary probes. Runtime `4b5e345de8daad1057e5ff68824bdf057ba4243b`, deployment `ff26a501-1d2d-401a-9bac-16c42791aa5f`, artifact `0e7eb06b470b6f6e9bba9e781769c38bcc48013bc65e622a73b7ffbfa3f70226`. The narrow Pages extensionless-routing repair is live; Node22/24 isolation tests12 each and actual upload-bundle check pass. All1245 unique assets are indexed; the uploader now separates successful upload from hash-index confirmation and retains bounded transfer metrics. Prior missing-index observations did not prove missing physical content.
 
 Formal YW and APIS100/0 allocation remain unchanged; new synthetic D1 and original hard expiry2026-10-13T12:00Z remain. Model calls0. Same-owner authenticated save/reload, foreign-owner denial, actual private APIS version routing,24-case calibration and final production acceptance are still open. No public production release or Status success is claimed. Current evidence and exact resource/rollback/cleanup mapping: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-upload-repair/REPORT.md`. Earlier current entries are historical where superseded.
 
-## Current isolated routing repair — 2026-10-12T14:34Z
+## Historical isolated routing repair — 2026-10-12T14:34Z
 
 The separate acceptance project is deployed at `yw-acceptance.bdfz.net` from c1c050f, but its first public readback found a self-redirect: the wrapper rewrote `/dialogue` to `.html`, and Pages redirected it back. This scoped repair preserves the incoming asset path and lets Pages handle extensionless HTML; the fixture now models the real Pages redirect. Twelve isolation tests pass on Node22 and24. The user's instruction authorizes fixing blockers to this same isolated deployment; exact new source/artifact will be bound to a separate consumed release receipt before upload. Production YW, APIS100/0 allocation, credentials, synthetic database and expiry remain unchanged; no model calls. Live repair acceptance is pending and is recorded in the linked report when complete.
 
 The large-file upload has recovered: all1,245 unique assets are indexed. Upload ACK and asset-index absence were previously conflated; successful upload followed by upsert-hashes resolves that mismatch without retransmitting acknowledged content. Exact current evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-upload-repair/REPORT.md`. Earlier current-state headings below are historical where superseded.
 
-## Current isolated acceptance checkpoint — 2026-10-12T13:49:01.231865+00:00
+## Historical isolated acceptance checkpoint — 2026-10-12T13:49:01.231865+00:00
 
 APIS candidate66cfaab9 is attached at0% with accepted53dbb568 at100% (allocationb8f8ce5f, exact readback passed). New isolated D1c45988a6 has13 accepted migrations and Pages yuwen-course-dialogue-acceptance has verified private bindings. Asset continuation stopped: first2 assets acknowledged; next22MB payload unacknowledged at120s, no replay. No Pages deployment/domain or paid calls; student-usable capacity unchanged.33/34 control-plane reads used; original model budget unstarted. Runtime source remains YWc1c050f/APISc757068, not this documentation commit. Exact receipts, rollback and remaining work: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f/REPORT.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f/REPORT.md). Earlier preparation/secret-blocker statements are historical. Never replay consumed publishers or increase candidate traffic.
 
-## Current private APIS acceptance preparation — 2026-10-12T13:05Z
+## Historical private APIS acceptance preparation — 2026-10-12T13:05Z
 
 The isolated artifact now reuses APIS through a named private service binding and existing My session; the production Pages caller secret no longer needs to be recovered. Production YW and its credential remain unchanged. Twelve local YW isolation tests and the real workerd APIS transport scenario pass; live deployment/calibration have not begun. Revised exact sources and binding require release review; original expiry/budgets and final suen go/no-go remain. See [docs/dialogue/ISOLATED-ACCEPTANCE.md](docs/dialogue/ISOLATED-ACCEPTANCE.md). Earlier secret-recovery requirements are historical.
 
-## Current restricted acceptance preparation — 2026-10-12T12:07Z
+## Historical restricted acceptance preparation — 2026-10-12T12:07Z
 
 Suen approved preparation of a separate, expiring, owner-restricted My acceptance entry. The source now checks the designated numeric identity before D1 access, uses only a new synthetic DB, exposes only dialogue APIs/assets, omits central Queue/history, and pins APIS only in the separate acceptance context. Ordinary previews, production configuration, historical data and App content remain unchanged. Owner confirmed the designated account is non-student; successful one-attempt login and exact identity mapping are recorded privately in task evidence. No deployment, remote migration, provider call or learner-capacity change occurred.
 
@@ -96,7 +102,7 @@ it does not supersede the accepted release authority or historical evidence belo
 
 Branch `claude/pdf-page-images-20261011` on accepted source `7bfe60c`: the "原圖" dialog reads current-edition PDF pages from sun.bdfz.net through `site/data/textbook-pages.v1.json` (catalog release `20261011T015939Z-24b58ca8`; 198 lesson files, 742 legacy page references: exact page-map rows first, then 41 lesson-level overrides proven from the PDF text layer, which replace inherited wrong page ranges and never drop a page without naming the lesson that owns it; 3 lessons absent from the current edition show no page; 2 lessons keep exact rows pending a human check). Leaf-only: scoring inputs, manifests, Worker, D1 schema and App content are byte-identical to `7bfe60c`. Local candidate only; not pushed, previewed or deployed. Production acceptance, the owner's signed-in write/readback and public Status remain pending the registered release transaction. See the 2026-10-11 section of the maintenance manual.
 
-## Current dictionary candidate — 2026-10-08T15:11:00Z
+## Historical dictionary candidate — 2026-10-08T15:11:00Z
 
 Owner Codex01a11bd0. Shared dictionary dock prepared and locally checked; full-source launch authorized, suen reviews after publication. VPS shared module and this host's formal release remain pending. Preserve all prior accepted learning/content/poll/data features and the existing rollback baseline. See the new dictionary section in the operations handbook.
 

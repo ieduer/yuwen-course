@@ -1,0 +1,25 @@
+{
+  "caseId": "language-er-independent",
+  "originalPromptDigest": "6d8f6bc2e43b52bf1c91d1977c7a9d06e1d620029f6ddb99e91ee04955f60736",
+  "sourceDigest": "031bbb31c37efa51407a7069c310a7c51bff1ebbae982ab38fdacc69a6bf6f89",
+  "value": {
+    "reply": "你說得很好，能清楚區分「修飾」與「轉折」兩種不同關係。那麼，再看「君子博學而日參省乎己」，這裡的「而」又是連接什麼內容，前後是什麼關係呢？",
+    "assessments": [
+      {
+        "evidence": [
+          {
+            "criterion": "context_meaning",
+            "passageId": "lesson-1711-p1:p1",
+            "passageQuote": "顺风而呼，声非加疾也，而闻者彰",
+            "quote": "顺风而呼的而把顺风的方式接到呼喊上；而闻者彰却说声音虽没变强，听的人仍听得清楚，是前后转折",
+            "turnId": "calibration-answer:language-er-independent"
+          }
+        ],
+        "objectiveId": "lesson-1711-p1:language-er",
+        "outcome": "demonstrated",
+        "rationale": "學生準確分析了「順風而呼」（方式修飾）與「而聞者彰」（轉折）中「而」字前後的關係與語境義，獨立完成了比對。"
+      }
+    ]
+  },
+  "reason": "missing_criterion"
+}

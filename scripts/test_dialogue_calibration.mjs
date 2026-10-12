@@ -25,3 +25,34 @@ test('positive case needs actual demonstrated evidence, not an empty praise resp
  const r=evaluateCalibrationCase(c,{caseId:c.id,promptDigest:c.promptDigest,value:{reply:'很好！',assessments:[]}});
  assert.equal(r.expectedVerdictMatches,false);assert.equal(r.semanticReviewRequired,true);
 });
+
+test('real first-call regression preserves rejection and requires every criterion',()=>{
+ const failed=JSON.parse(fs.readFileSync('scripts/fixtures/dialogue-calibration-missing-criteria.json'));
+ const c=packet.cases.find(c=>c.id===failed.caseId);
+ assert.equal(c.sourceDigest,failed.sourceDigest);
+ assert.notEqual(c.promptDigest,failed.originalPromptDigest);
+ const result={caseId:c.id,promptDigest:c.promptDigest,value:failed.value};
+ assert.throws(()=>evaluateCalibrationCase(c,result),/missing_criterion/);
+ // Synthetic structural fixture only: never substitute this for the stored model result.
+ const full=structuredClone(failed.value),a=full.assessments[0],e=a.evidence[0];
+ const criteria=c.curriculum.objectives.find(o=>o.id===c.objectiveId).criteria;
+ a.evidence=criteria.map(criterion=>({...e,criterion}));
+ assert.equal(evaluateCalibrationCase(c,{...result,value:full}).expectedVerdictMatches,true);
+ for(const criterion of criteria){
+  const partial=structuredClone(full);partial.assessments[0].evidence=partial.assessments[0].evidence.filter(e=>e.criterion!==criterion);
+  assert.throws(()=>evaluateCalibrationCase(c,{...result,value:partial}),/missing_criterion/);
+ }
+ full.assessments[0].evidence[1].quote='這不是任何學生說過的話';
+ assert.throws(()=>evaluateCalibrationCase(c,{...result,value:full}),/unverifiable_evidence/);
+});
+test('all revised prompts request complete grounded criteria without changing old runtime packet',()=>{
+ const original=JSON.parse(fs.readFileSync('site/dialogue-calibration-packet.json'));
+ assert.equal(original.sourceDigest,'95b8f943e519191aba697a0c01984621ee8ea12549e164379363f5ef54a04f09');
+ assert.equal(original.policyVersion,'yw-dialogue-policy-v5');
+ assert.equal(packet.policyVersion,'yw-dialogue-policy-v6');
+ for(const c of packet.cases){
+  assert(c.prompt.includes('每個 criterion 至少一筆'));
+  assert(c.prompt.includes('缺少任何必要證據時不給 demonstrated'));
+  assert.equal(c.sourceDigest,original.cases.find(o=>o.id===c.id).sourceDigest);
+ }
+});

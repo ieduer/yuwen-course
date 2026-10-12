@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1255,
-  "totalBytes": 168026157,
-  "aggregateSha256": "e2200ca601ae852e2c577a6cf861408758c30579e86e03e7b2a89867528f1f53",
+  "totalBytes": 168027158,
+  "aggregateSha256": "d2f285b5cbe5b3ff220666cac16d8fed98471f96aa2808a0f0f1468e527bd730",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "ed1d16390a4f28475982c01e9720dae4cf5b517383d9ea708fc8de8490b1458a"
+      "sha256": "4de801b0027636ec8aecab43d4a5885cccd4a4dd411dec0fdae5713f545b858f"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -6127,8 +6127,8 @@
     },
     {
       "path": "dialogue-policy.js",
-      "bytes": 18569,
-      "sha256": "95d9e8c0814a49d545c9e55b8075c400346f06a21eb3abc39704339bca3de36b"
+      "bytes": 19570,
+      "sha256": "67ee11bbf7ef01a6c1dec1518dde53c2b612ecae10049b2c223b9b19b1047243"
     },
     {
       "path": "dialogue-source.js",
