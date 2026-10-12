@@ -16,8 +16,9 @@ service = "bdfz-user-center"
 entrypoint = "YuwenEvidenceIdentity"
 
 [[services]]
-binding = "APIS"
+binding = "APIS_ACCEPTANCE"
 service = "apis"
+entrypoint = "YwDialogueAcceptance20261012"
 
 [vars]
 YW_ACCEPTANCE_USER_ID = "0"

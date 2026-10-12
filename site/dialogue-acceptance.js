@@ -29,21 +29,31 @@ export function acceptanceEnvironment(request, bindings, now = Date.now()) {
     || bindings.READING_DB || bindings.READING_TEST_SLUG || bindings.LEARNING_EVIDENCE_QUEUE
     || typeof bindings.ACCEPTANCE_DB?.prepare !== 'function'
     || typeof bindings.USER_CENTER_EVIDENCE?.resolveSession !== 'function'
-    || typeof bindings.APIS?.fetch !== 'function' || !bindings.APIS_CALLER_TOKEN
+    || typeof bindings.APIS_ACCEPTANCE?.fetch !== 'function'
     || typeof bindings.ASSETS?.fetch !== 'function') throw Error('acceptance_configuration_invalid');
   // Capability allowlist: do not pass Queue, scheduler, legacy flags or any
   // additional service/data binding through to the real dialogue handlers.
   const identity = bindings.USER_CENTER_EVIDENCE;
+  const cookies = (request.headers.get('cookie') || '').split(';').map(x=>x.trim())
+    .filter(x=>x.startsWith('bdfz_uc_session='));
+  const cookie = cookies.length===1 && /^bdfz_uc_session=[^\s;\r\n]{1,2048}$/.test(cookies[0]) ? cookies[0] : '';
   const env = {
     ASSETS: bindings.ASSETS, READING_DB: bindings.ACCEPTANCE_DB,
-    APIS: bindings.APIS, APIS_CALLER_TOKEN: bindings.APIS_CALLER_TOKEN,
+    APIS: {fetch: async outgoing => {
+      if(Date.now()>=expires || !cookie) throw Error('acceptance_session_required');
+      const headers=new Headers(outgoing.headers);
+      headers.delete('x-internal-token');
+      headers.set('cookie',cookie);
+      headers.set('Cloudflare-Workers-Version-Overrides',`apis="${version}"`);
+      return bindings.APIS_ACCEPTANCE.fetch(new Request(outgoing,{headers}));
+    }},
     YW_DIALOGUE_ENABLED: 'true', YW_DIALOGUE_BUDGET_JSON: bindings.YW_DIALOGUE_BUDGET_JSON,
     USER_CENTER_EVIDENCE: {
       resolveSession: (...args) => identity.resolveSession(...args),
       resolveNativeSession: (...args) => identity.resolveNativeSession(...args),
     },
   };
-  contexts.set(env, Object.freeze({origin: ACCEPTANCE_ORIGIN, userId:Number(userId), version, expires}));
+  contexts.set(env, Object.freeze({origin: ACCEPTANCE_ORIGIN, userId:Number(userId), version, expires, transport:'service_binding_session'}));
   return env;
 }
 

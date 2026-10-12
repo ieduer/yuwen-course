@@ -1,7 +1,6 @@
 # Restricted dialogue acceptance preparation
 
-Current state: 2026-10-12. Suen approved preparation of this narrow exception.
-It is not deployed and does not authorize the first deployment or final release.
+Current state: 2026-10-12T13:05Z. First isolated deployment was approved for earlier exact sources. The revised private APIS transport is locally implemented and tested; its exact source and new binding require revised review before deployment. Final production release remains separate.
 Earlier statements that preparation permission is pending are superseded here.
 
 The separate entrypoint serves only `https://yw-acceptance.bdfz.net`. Its proposed
@@ -37,12 +36,18 @@ or a restored production export. The main `wrangler.toml` remains unchanged.
   acceptance remains separate. Original text/images and same-origin dialogue
   behavior remain available. No central SDK or learning telemetry is injected.
 
+## Existing APIS without credential copying
+
+The acceptance artifact binds `APIS_ACCEPTANCE` to `apis#YwDialogueAcceptance20261012` on the same 0%-pinned candidate. Its projected gateway closure forwards only the current request's one bounded My session cookie and server-fixed version override; it never forwards a caller credential or unrelated cookies. APIS independently verifies the My session and fixed owner 553 before using its own provider resources and existing YW caller accounting. Ordinary YW continues using its existing caller secret. The private entrypoint expires on 2026-10-13T12:00:00Z; no new secret or caller registry entry is needed. Its candidate-only identity binding is read-only. Browser requests cannot choose the APIS destination, version, model identity or owner.
+
+This preparation supersedes the old requirement to recover the production Pages secret. It changes the accepted source/artifact and adds a private authentication transport, so the earlier exact-source deployment receipt cannot be replayed. Local workerd proves named-entrypoint dispatch and original stream/accounting behavior using synthetic provider responses; cloud version override and zero-percent entrypoint registration remain unverified. Stop on platform rejection, never increase ordinary traffic to make the entrypoint available.
+
 ## Preparation and first-deployment review
 
 `wrangler.dialogue-acceptance.example.toml` is deliberately unusable: zero IDs,
-expired time and no caller credential or monetary policy. After review, pin the
+expired time and no monetary policy. After review, pin the
 actual returned new database UUID, exact candidate version UUID, designated My
-user ID, UTC expiry, existing caller credential and previously approved budget.
+user ID, UTC expiry, private APIS service binding and previously approved budget. No caller secret is copied.
 The configuration's database-ID label cannot introspect a D1 binding: provider
 configuration and actual upload metadata must independently prove the same new
 UUID, absence of production/preview DBs and absence of Queue before any request.

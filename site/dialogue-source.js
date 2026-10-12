@@ -1,5 +1,5 @@
 import {historicalEvidence} from './dialogue-legacy.js';
-import {acceptanceVersionHeaders} from './dialogue-acceptance.js';
+import {acceptanceVersionHeaders,acceptanceContext} from './dialogue-acceptance.js';
 import {recordCorrection} from './dialogue-corrections.js';
 import {hasClassicalAnnotatedReadReceipt} from './classical-first-read-source.js';
 import {consumeGatewayStream,studentStream} from './dialogue-stream.js';
@@ -328,9 +328,9 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
  }finally{stream?.close();}
 }
 export async function callDialogueModel(env,prompt,requestId,onReply,budget=dialogueBudget(env)){
- if(!env.APIS?.fetch||!env.APIS_CALLER_TOKEN)throw new Error('approved_gateway_unavailable');
+ if(!env.APIS?.fetch||(!env.APIS_CALLER_TOKEN&&!acceptanceContext(env)))throw new Error('approved_gateway_unavailable');
  const signal=AbortSignal.timeout(LIMITS.timeoutMs);
- const response=await env.APIS.fetch(new Request('https://apis.internal/api/yw/dialogue-stream',{method:'POST',headers:{'content-type':'application/json',accept:'text/event-stream','x-project-name':'yw.bdfz.net','x-task-type':'chat','x-thinking-level':'low','x-internal-token':env.APIS_CALLER_TOKEN,'x-request-id':requestId,...acceptanceVersionHeaders(env)},body:JSON.stringify({stream:true,model:budget.model,contents:[{role:'user',parts:[{text:prompt}]}],taskType:'chat',thinkingLevel:'low',generationConfig:{temperature:0.3,maxOutputTokens:LIMITS.outputTokens,responseMimeType:'application/json'}}),signal}));
+ const response=await env.APIS.fetch(new Request('https://apis.internal/api/yw/dialogue-stream',{method:'POST',headers:{'content-type':'application/json',accept:'text/event-stream','x-project-name':'yw.bdfz.net','x-task-type':'chat','x-thinking-level':'low',...(env.APIS_CALLER_TOKEN?{'x-internal-token':env.APIS_CALLER_TOKEN}:{}),'x-request-id':requestId,...acceptanceVersionHeaders(env)},body:JSON.stringify({stream:true,model:budget.model,contents:[{role:'user',parts:[{text:prompt}]}],taskType:'chat',thinkingLevel:'low',generationConfig:{temperature:0.3,maxOutputTokens:LIMITS.outputTokens,responseMimeType:'application/json'}}),signal}));
  if(!response.ok)throw new Error('gateway_unavailable');
  const result=await consumeGatewayStream(response,onReply,{maxReplyChars:LIMITS.replyChars,signal});
  if(result.model!==budget.model)throw Error('budget_model_mismatch');

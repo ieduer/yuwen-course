@@ -1,3 +1,7 @@
+## Current private APIS acceptance preparation — 2026-10-12T13:05Z
+
+The isolated artifact now reuses APIS through a named private service binding and existing My session; the production Pages caller secret no longer needs to be recovered. Production YW and its credential remain unchanged. Twelve local YW isolation tests and the real workerd APIS transport scenario pass; live deployment/calibration have not begun. Revised exact sources and binding require release review; original expiry/budgets and final suen go/no-go remain. See [docs/dialogue/ISOLATED-ACCEPTANCE.md](docs/dialogue/ISOLATED-ACCEPTANCE.md). Earlier secret-recovery requirements are historical.
+
 ## Current restricted acceptance preparation — 2026-10-12T12:07Z
 
 Suen approved preparation of a separate, expiring, owner-restricted My acceptance entry. The source now checks the designated numeric identity before D1 access, uses only a new synthetic DB, exposes only dialogue APIs/assets, omits central Queue/history, and pins APIS only in the separate acceptance context. Ordinary previews, production configuration, historical data and App content remain unchanged. Owner confirmed the designated account is non-student; successful one-attempt login and exact identity mapping are recorded privately in task evidence. No deployment, remote migration, provider call or learner-capacity change occurred.

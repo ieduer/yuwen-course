@@ -27,8 +27,9 @@ test('actual acceptance upload bundle has only the synthetic DB and reviewed ide
     assert.equal(byName('ACCEPTANCE_DB').type,'d1');
     assert.equal(byName('USER_CENTER_EVIDENCE').service,'bdfz-user-center');
     assert.equal(byName('USER_CENTER_EVIDENCE').entrypoint,'YuwenEvidenceIdentity');
-    assert.equal(byName('APIS').service,'apis');
-    for(const name of ['READING_DB','READING_TEST_SLUG','LEARNING_EVIDENCE_QUEUE','YW_DURABLE_EVALUATION_ENABLED'])assert.equal(byName(name),undefined);
+    assert.equal(byName('APIS_ACCEPTANCE').service,'apis');
+    assert.equal(byName('APIS_ACCEPTANCE').entrypoint,'YwDialogueAcceptance20261012');
+    for(const name of ['APIS_CALLER_TOKEN','APIS','READING_DB','READING_TEST_SLUG','LEARNING_EVIDENCE_QUEUE','YW_DURABLE_EVALUATION_ENABLED'])assert.equal(byName(name),undefined);
     assert.equal(byName('YW_ACCEPTANCE_USER_ID').text,'0','template must remain unconfigured');
     assert.doesNotMatch(bytes.toString(),/"id":"99c541e7-e70b-4584-b939-7e88a6dd68c5"/);
     const entry=await form.get(metadata.main_module).text();

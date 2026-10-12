@@ -25,7 +25,7 @@ function fixture(t) {
     USER_CENTER_EVIDENCE:{resolveSession:async()=>{calls.identity++;return user;},resolveNativeSession:async()=>({
       ...user,schemaVersion:'bdfz-native-auth/1',status:200,clientId:'yuwen-native-android',capability:'data',
     })},
-    APIS:{fetch:async()=>{calls.model++;return new Response(null,{status:503});}}, APIS_CALLER_TOKEN:'synthetic-only',
+    APIS_ACCEPTANCE:{fetch:async()=>{calls.model++;return new Response(null,{status:503});}},
   };
   const authenticated = (path,init={}) => request(path,{...init,headers:{cookie:'bdfz_uc_session=synthetic-'+crypto.randomUUID(),...init.headers}});
   return {sql,calls,bindings,user,authenticated};
@@ -40,7 +40,7 @@ test('unavailable, malformed and unsafe isolation configurations fail before all
     {YW_ACCEPTANCE_APIS_VERSION:'00000000-0000-0000-0000-000000000000'},
     {YW_ACCEPTANCE_DATABASE_ID:'39ed36d9-b3f3-40fd-933a-9a68a4066302'},
     {READING_DB:{}}, {READING_TEST_SLUG:'synthetic'}, {LEARNING_EVIDENCE_QUEUE:{}},
-    {ACCEPTANCE_DB:null}, {USER_CENTER_EVIDENCE:null}, {APIS:null}, {APIS_CALLER_TOKEN:''},
+    {ACCEPTANCE_DB:null}, {USER_CENTER_EVIDENCE:null}, {APIS_ACCEPTANCE:null},
   ]) assert.equal((await entry.fetch(f.authenticated(),{...f.bindings,...change})).status,503);
   for (const origin of ['https://yw.bdfz.net','https://preview.pages.dev','http://yw-acceptance.bdfz.net','https://yw-acceptance.bdfz.net:8443']) {
     assert.equal((await entry.fetch(new Request(origin+'/api/dialogue/v1'),f.bindings)).status,503);
@@ -118,12 +118,12 @@ test('shared learner history remains unavailable and capabilities are narrowly p
 
 test('only the acceptance context supplies the exact APIS version; normal env and client spoof cannot',async t=>{
   const f=fixture(t), observed=[];
-  f.bindings.APIS.fetch=async req=>{observed.push(req.headers.get('Cloudflare-Workers-Version-Overrides'));return new Response(null,{status:503});};
-  const env=acceptanceEnvironment(request(undefined,{headers:{'Cloudflare-Workers-Version-Overrides':'apis="spoof"'}}),f.bindings);
+  f.bindings.APIS_ACCEPTANCE.fetch=async req=>{observed.push(req.headers.get('Cloudflare-Workers-Version-Overrides'));assert.equal(req.headers.get('x-internal-token'),null);assert.equal(req.headers.get('cookie'),'bdfz_uc_session=synthetic');return new Response(null,{status:503});};
+  const env=acceptanceEnvironment(request(undefined,{headers:{cookie:'bdfz_uc_session=synthetic; unrelated=private','Cloudflare-Workers-Version-Overrides':'apis="spoof"'}}),f.bindings);
   const budget={model:'synthetic'};
   await assert.rejects(callDialogueModel(env,'synthetic','synthetic-request',()=>{},budget),/gateway_unavailable/);
-  await assert.rejects(callDialogueModel(f.bindings,'synthetic','synthetic-request',()=>{},budget),/gateway_unavailable/);
-  assert.deepEqual(observed,[`apis="${version}"`,null]);assert.equal(acceptanceContext(f.bindings),null);
+  await assert.rejects(callDialogueModel(f.bindings,'synthetic','synthetic-request',()=>{},budget),/approved_gateway_unavailable/);
+  assert.deepEqual(observed,[`apis="${version}"`]);assert.equal(acceptanceContext(f.bindings),null);
 });
 
 test('restricted static page uses original UI with no external script or central network capability',async t=>{
@@ -140,4 +140,11 @@ test('ordinary entrypoint is not enabled by acceptance variables',async t=>{
   const f=fixture(t);
   assert.equal((await worker.fetch(request(),f.bindings)).status,404);
   assert.deepEqual(f.calls,{db:0,identity:0,assets:0,model:0});
+});
+
+test('private acceptance never forwards duplicate cookies or a browser supplied caller secret',async t=>{
+ const f=fixture(t);let calls=0;f.bindings.APIS_ACCEPTANCE.fetch=async()=>{calls++;return new Response(null,{status:503});};
+ const env=acceptanceEnvironment(request(undefined,{headers:{cookie:'bdfz_uc_session=a; bdfz_uc_session=b','x-internal-token':'spoof'}}),f.bindings);
+ await assert.rejects(callDialogueModel(env,'synthetic','synthetic-request',()=>{},{model:'synthetic'}),/acceptance_session_required/);
+ assert.equal(calls,0);assert.equal(env.APIS_CALLER_TOKEN,undefined);
 });
