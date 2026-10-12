@@ -9,3 +9,4 @@
 - Documented explicit release blockers and source/restore/performance evidence. Existing Pulse and public Status remain unchanged because there is no accepted public release.
 
 - Fixed the existing Reading API fixture to copy both newly imported Worker modules. Its isolated local D1 run passes all 74 assertions; the first CI failure was a missing fixture module, not a student-data migration.
+- Regenerated the existing formal artifact baseline with the standard local build/check scripts after adding the pilot files. This is build evidence, not release authority.
