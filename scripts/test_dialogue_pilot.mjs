@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
-import {validateProposal,projectState,contextFor,createQuestion,LIMITS} from '../site/dialogue-policy.js';
+import {validateProposal,projectState,contextFor,createQuestion,vocabularyOrder,learningTrajectory,evidenceReport,LIMITS} from '../site/dialogue-policy.js';
 import {handleDialogue,reconcileAbandonedCalls,callDialogueModel} from '../site/dialogue-source.js';
 import {replyPrefix,consumeGatewayStream} from '../site/dialogue-stream.js';
 import {readDialogueEvents} from '../site/assets/dialogue-events.js';
@@ -204,6 +204,21 @@ test('ten concurrent duplicates reserve one call and one answer',async()=>{const
 test('unconfirmed model reply preserves student work and retries do not recall provider',async()=>{const f=fixture();try{let count=0;const options={callModel:async()=>{count++;throw Error('timeout');}};const data=await (await handleDialogue(req(body()),f.env,student,null,options)).json();assert.equal(data.turns[0].status,'needs_review');assert.equal(data.pending,false);await handleDialogue(req(body()),f.env,student,null,options);assert.equal(count,1);assert.equal(f.sql.prepare('SELECT state FROM dialogue_calls').get().state,'review');}finally{f.close();}});
 test('other account sees neither dialogue nor assessment and may not inject a session id',async()=>{const f=fixture();try{await handleDialogue(req(body()),f.env,student,null,{callModel:good});const data=await (await handleDialogue(req(),f.env,{id:2,ucUserId:700002})).json();assert.deepEqual(data.turns,[]);assert.equal(data.revision,0);}finally{f.close();}});
 test('refresh retains the exact outstanding question and criteria are absent from public question',async()=>{const f=fixture();try{const b={action:'question',objectiveId:classical.vocabulary[0].id};const one=await (await handleDialogue(req(b,classical.lessonId),f.env,student)).json();const two=await (await handleDialogue(req(b,classical.lessonId),f.env,student)).json();assert.equal(one.question.id,two.question.id);assert.equal(one.question.criteria,undefined);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_questions').get().n,1);}finally{f.close();}});
+test('question order varies by immutable session and covers every item despite repeated client selection',async()=>{
+ const a=await vocabularyOrder(classical,'synthetic-session-a'),b=await vocabularyOrder(classical,'synthetic-session-b');assert.notDeepEqual(a,b);assert.deepEqual(a,await vocabularyOrder(classical,'synthetic-session-a'));assert.deepEqual([...a].sort(),classical.vocabulary.map(v=>v.id).sort());
+ const f=fixture();try{
+  const seen=[];
+  for(let i=0;i<classical.vocabulary.length;i++){
+   const payload={action:'question',objectiveId:classical.vocabulary[0].id};
+   const data=await(await handleDialogue(req(payload,classical.lessonId),f.env,student)).json();seen.push(data.question.objectiveId);
+   const repeated=await(await handleDialogue(req({...payload,objectiveId:'attempt-to-choose-another'},classical.lessonId),f.env,student)).json();assert.equal(repeated.question.id,data.question.id);
+   const row=f.sql.prepare('SELECT instance_json FROM dialogue_questions WHERE id=?').get(data.question.id);const q=JSON.parse(row.instance_json);assert.equal(q.selection.coverageIndex,i);q.state='mastered';
+   f.sql.prepare("UPDATE dialogue_questions SET state='mastered',instance_json=? WHERE id=?").run(JSON.stringify(q),q.id);
+  }
+  assert.equal(new Set(seen).size,classical.vocabulary.length);assert.deepEqual([...seen].sort(),classical.vocabulary.map(v=>v.id).sort());
+  const done=await handleDialogue(req({action:'question'},classical.lessonId),f.env,student);assert.equal((await done.json()).code,'vocabulary_covered');
+ }finally{f.close();}
+});
 test('budget exhaustion durably preserves one recoverable draft without another AI call',async()=>{const f=fixture();try{
  let count=0;const options={callModel:async()=>{count++;return good();}};
  for(let i=0;i<LIMITS.turnsPerDay;i++)assert.equal((await handleDialogue(req(body(i,`synthetic-budget-${String(i).padStart(4,'0')}`)),f.env,student,null,options)).status,200);
@@ -217,10 +232,24 @@ test('budget exhaustion durably preserves one recoverable draft without another 
 test('failed vocabulary requires confirmed student reformulation before another variant',async()=>{const f=fixture();try{
  const qBody={action:'question',objectiveId:classical.vocabulary[0].id};const first=await (await handleDialogue(req(qBody,classical.lessonId),f.env,student)).json();
  await handleDialogue(req({...body(),questionId:first.question.id},classical.lessonId),f.env,student,null,{callModel:good});
+ const escape=await handleDialogue(req({...qBody,objectiveId:classical.vocabulary.find(v=>v.id!==first.question.objectiveId).id},classical.lessonId),f.env,student);assert.equal((await escape.json()).code,'reformulation_required');
  const blocked=await handleDialogue(req(qBody,classical.lessonId),f.env,student);assert.equal(blocked.status,409);assert.equal((await blocked.json()).code,'reformulation_required');
  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_questions').get().n,1);
 }finally{f.close();}});
-test('bounded context keeps recent evidence without resending long histories',()=>{const turns=Array.from({length:200},(_,i)=>({id:`turn-${i}`,role:i%2?'teacher':'student',content:'測'.repeat(2500)}));const prompt=contextFor({curriculum,state:projectState(curriculum,[]),turns,question:null});assert(prompt.length<LIMITS.contextChars+2000);assert(!prompt.includes('"turn-0"'));assert(prompt.includes('turn-199'));});
+test('bounded context keeps recent evidence without resending long histories',()=>{const turns=Array.from({length:200},(_,i)=>({id:`turn-${i}`,role:i%2?'teacher':'student',content:'測'.repeat(2500)}));const prompt=contextFor({curriculum,state:projectState(curriculum,[]),turns,question:null});assert(prompt.length<LIMITS.contextChars+2000);assert(prompt.includes('"turn-0"'));assert(!prompt.includes('"turn-20"'));assert(prompt.includes('turn-199'));});
+test('whole-history trajectory keeps early difficulty and later evidence outside the recent context window',()=>{
+ const turns=Array.from({length:100},(_,i)=>({id:`t-${i}`,role:i%2?'teacher':'student',content:i===0?'最初我只覺得寧靜，卻不懂最後的失落。':`第${i}輪原話`,createdAt:`2026-01-${String(i+1).padStart(2,'0')}`}));
+ const objective=curriculum.objectives.find(o=>o.domain==='context');
+ const assessments=[{objectiveId:objective.id,outcome:'needs_practice',evidence:[{turnId:'t-0',quote:'不懂最後的失落',passageId:curriculum.passages[1].id,passageQuote:'这几天心里颇不宁静'}]},{objectiveId:objective.id,outcome:'demonstrated',evidence:[{turnId:'t-40',quote:'第40輪原話',passageId:curriculum.passages[1].id,passageQuote:'这几天心里颇不宁静'}]}];
+ const trajectory=learningTrajectory(curriculum,turns,assessments);assert.equal(trajectory.turnCount,100);assert.equal(trajectory.first.turnId,'t-0');assert.equal(trajectory.latest.turnId,'t-98');
+ const prompt=contextFor({curriculum,state:projectState(curriculum,assessments),turns,assessments,question:null});assert(prompt.includes('不懂最後的失落'));assert(prompt.includes('t-40'));assert(!prompt.includes('第20輪原話'));
+ const report=evidenceReport(curriculum,projectState(curriculum,assessments),assessments,turns);assert.equal(report.teacher.turnIndex.length,100);assert.equal(report.student.summary[0].references[0].turnId,'t-0');assert.equal(report.student.trajectory.domains[0].outcomes.needs_practice,1);
+});
+test('complete classical trajectory still fits the fixed context budget at long-history limits',()=>{
+ const turns=Array.from({length:120},(_,i)=>({id:`long-${i}`,role:i%2?'teacher':'student',content:'長'.repeat(2400)}));
+ const assessments=classical.objectives.filter(o=>!['legacy','studyGuide'].includes(o.domain)).flatMap(o=>[0,2].map(i=>({objectiveId:o.id,outcome:i?'demonstrated':'needs_practice',evidence:[{turnId:turns[i].id,quote:'長'.repeat(120),passageId:classical.passages[0].id,passageQuote:classical.passages[0].text.slice(0,100)}]})));
+ const prompt=contextFor({curriculum:classical,state:projectState(classical,assessments),turns,assessments,question:null});assert(prompt.length<LIMITS.contextChars+2000);for(const v of classical.vocabulary)assert(prompt.includes(v.id));
+});
 test('long history uses a stable sequence cursor with no repeated or lost equal-time turns',async()=>{const f=fixture();try{
  await handleDialogue(req(body()),f.env,student,null,{callModel:good});const s=f.sql.prepare('SELECT * FROM dialogue_sessions').get();const at='2026-10-11T01:00:00.000Z';
  for(let i=0;i<100;i++)f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,'fixture','student','synthetic turn','saved','fixture',?)").run(`history-${i}`,s.id,`history-${i}`,at);

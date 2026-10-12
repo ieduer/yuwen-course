@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
 import {handleDialogue} from '../site/dialogue-source.js';
+import {POLICY_VERSION} from '../site/dialogue-policy.js';
 const root=path.resolve('site'),sql=new DatabaseSync(':memory:');sql.exec('PRAGMA foreign_keys=ON');
 for(const f of fs.readdirSync('migrations').filter(f=>f.endsWith('.sql')).sort())sql.exec(fs.readFileSync('migrations/'+f,'utf8'));
 sql.exec("INSERT INTO students(id,uc_slug,display_name) VALUES(1,'dialogue-synthetic-test','Synthetic test'),(2,'dialogue-synthetic-other','Synthetic other');");
@@ -18,6 +19,15 @@ const server=http.createServer(async(req,res)=>{try{const url=new URL(req.url,'h
  if(url.pathname==='/__synthetic/control' && req.method==='POST'){
   let text='';for await(const c of req){text+=c;if(text.length>1024)throw Error('oversize');}
   const value=JSON.parse(text);if(![0,1,2].includes(value.account)||!Number.isInteger(value.responseDelayMs)||value.responseDelayMs<0||value.responseDelayMs>3000)throw Error('invalid_fixture');
+  if(value.historyPairs!==undefined){
+   if(!value.account||!Number.isInteger(value.historyPairs)||value.historyPairs<1||value.historyPairs>120)throw Error('invalid_history_fixture');
+   const curriculum=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1717-p2.json'));
+   if(sql.prepare('SELECT id FROM dialogue_sessions WHERE student_id=?').get(value.account))throw Error('fixture_already_populated');
+   const id=crypto.randomUUID(),at=new Date().toISOString();
+   sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,revision,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?)').run(id,value.account,curriculum.lessonId,curriculum.curriculumVersion,JSON.stringify(curriculum),POLICY_VERSION,value.historyPairs,at,at);
+   const add=sql.prepare('INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,?,?,?,?,?)');
+   for(let n=0;n<value.historyPairs;n++)for(const role of ['student','teacher'])add.run(`long-${role}-${n}`,id,`history-${n}`,'synthetic-only',role,`【合成長對話 ${n+1}／${role}】`+'我從原句追問景物與感受之間的關係，保留不確定的解讀。'.repeat(30),'confirmed',POLICY_VERSION,at);
+  }
   syntheticAccount=value.account;responseDelayMs=value.responseDelayMs;res.writeHead(200,{'content-type':'application/json'});res.end('{"synthetic":true}');return;
  }
  if(url.pathname==='/api/dialogue/v1'){

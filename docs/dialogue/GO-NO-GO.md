@@ -1,18 +1,19 @@
 # YW conversation pilot — one-page review
 
-As of 2026-10-12T06:21:48+00:00. **Recommendation: NO-GO for migration, production enablement or replacing the old workflow.** Proceed with review of the disabled candidate; no approval is being requested for an unfinished release.
+As of 2026-10-12T06:47:49+00:00. **Recommendation: NO-GO for migration, production enablement or replacing the old workflow.** Proceed with review of the disabled candidate; no approval is being requested for an unfinished release.
 
 | Review item | Actual evidence / disposition |
 | --- | --- |
 | Source preservation | Isolated candidate from 175f8ae; unrelated dirty canonical checkout preserved; original curriculum, app and migrations unchanged |
 | Inventory | 189 lessons, 869 formal resources, 1,021 formative items, 193 active guide items; exact per-item map, gaps and compound gates |
 | Local implementation | Three text/conversation pilots, gated Worker, private owner storage, verifiable proposals, question instances, versioned resume and budget-deferred drafts |
-| Local checks | 42 focused dialogue checks; APIS 271 regression plus final 10 stream checks; 74 existing Reading API assertions in local D1; strengthened migration fixture passes; synthetic mobile save, quote return and account switch checked |
+| Local checks | 45 focused dialogue checks; APIS 271 regression plus final 10 stream checks; 74 existing Reading API assertions in local D1; strengthened migration fixture passes; synthetic mobile save, quote return and account switch checked |
 | Performance | Local n=3 first text: desktop median 25.6 ms; mobile weak-network median 786.6 ms; old medians 270.2 ms / 18,556.0 ms. Not a production speedup claim |
+| Long conversation | 200 synthetic turns; mobile CSS390x844, no horizontal overflow. Weak network150ms/200KB/s, n=3: text median983.1ms, record median1672.1ms. First-excerpt link restored all200 turns and reached the original. Physical keyboard/provider latency unverified |
 | Historical production evidence | No writes made; no live row comparison, new recoverable backup or restore acceptance obtained |
 | Teaching/scoring bridge | Original vocab mastery, submitted/unfinished first reading and exact-version formal credit are projected read-only; shared/browser progress and guide/formal answer assembly remain incomplete. Current state is only evidence_ready_for_review, never an official grade |
-| AI quality / 尚友 | Structural validation tested; real model calibration, whole-conversation evidence summary and adversarial persona review still pending |
-| Classical mastery | Source vocabulary and stable variants implemented; whole-lesson randomized order, grammar coverage/difficulty and approved consequential thresholds unresolved |
+| AI quality / 尚友 | Structural validation tested; full-history evidence index and original-turn links implemented; real model conclusion calibration and adversarial persona review still pending |
+| Classical mastery | Source vocabulary, stable variants and session-stable randomized whole-lesson order implemented; grammar coverage/difficulty, real calibration and approved consequential thresholds unresolved |
 | Streaming / cost | APIS/YW real SSE and hard-crash fencing implemented locally. User-approved US$50/day Gemini policy reserved atomically. Live stream/cost acceptance and shared fan-out release remain pending |
 | Privacy / teacher use | All authenticated My accounts, own records only; permanent retention approved. Owner export/review request implemented; teacher grants/dashboard and append-only correction remain pending |
 | Sources / mobile | Dictionary fails visibly to 待核查; original-image success unverified. Actual past-paper examples and physical keyboard/accessibility audit pending |
@@ -26,4 +27,4 @@ As of 2026-10-12T06:21:48+00:00. **Recommendation: NO-GO for migration, producti
 - **Privacy and budgets:** user-approved own-record-only My access, permanent retention and US$50 daily Gemini cap are incorporated. No cross-student teacher grant exists; corrections must preserve originals. Do not infer a teacher role from general My membership.
 - **Access/ownership:** same-account documented read access recovered. Reconcile the existing staged publisher and verified backup/restore before a governed release. The connector itself is not repaired.
 
-Local remaining engineering (teacher interface, remaining bridge, full 尚友 summaries and missing source fixtures) is still required even if these decisions are accepted. Do not treat a sign-off on the design as permission to skip that work or acceptance checks. The project-local AGENTS instruction names suen (or a suen-designated reviewer) as the independent reviewer; this candidate does not self-certify that review.
+Local remaining engineering (teacher interface, remaining bridge, real grounded 尚友 conclusions and missing source fixtures) is still required even if these decisions are accepted. Do not treat a sign-off on the design as permission to skip that work or acceptance checks. The project-local AGENTS instruction names suen (or a suen-designated reviewer) as the independent reviewer; this candidate does not self-certify that review.

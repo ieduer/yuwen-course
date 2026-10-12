@@ -1,7 +1,7 @@
 import {historicalEvidence} from './dialogue-legacy.js';
 import {consumeGatewayStream,studentStream} from './dialogue-stream.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
-import {POLICY_VERSION,LIMITS,PILOTS,validateProposal,projectState,contextFor,createQuestion,evidenceReport} from './dialogue-policy.js';
+import {POLICY_VERSION,LIMITS,PILOTS,validateProposal,projectState,contextFor,createQuestion,vocabularyOrder,evidenceReport} from './dialogue-policy.js';
 const now=()=>new Date().toISOString();
 const uuid=()=>crypto.randomUUID();
 const json=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'private, no-store','x-content-type-options':'nosniff'}});
@@ -21,6 +21,11 @@ async function history(db,session,before=null){
  const more=rows.length>LIMITS.historyPage;rows.splice(LIMITS.historyPage);
  return {turns:rows.reverse().map(t=>({id:t.id,sequence:t.sequence,mutationId:t.role==='student'?t.mutation_id:null,role:t.role,content:t.content,status:t.status,questionId:t.question_id,createdAt:t.created_at,model:t.model,modelVersion:t.model_version})),older:more?{sequence:rows[0].sequence}:null};
 }
+async function transcript(db,session){
+ const rows=await all(db.prepare('SELECT id,sequence,role,content,question_id AS questionId,status,created_at AS createdAt FROM dialogue_turns WHERE session_id=? ORDER BY sequence LIMIT ?').bind(session.id,LIMITS.lessonLifetime*2+1));
+ if(rows.length>LIMITS.lessonLifetime*2)throw Error('transcript_requires_review');
+ return rows;
+}
 async function assessmentRows(db,id){return (await all(db.prepare('SELECT * FROM dialogue_assessments WHERE session_id=? ORDER BY created_at,id').bind(id))).map(a=>({objectiveId:a.objective_id,outcome:a.outcome,evidence:JSON.parse(a.evidence_json),rationale:a.rationale,ruleVersion:a.rule_version,createdAt:a.created_at}));}
 async function snapshot(db,session,curriculum,before){
  const [page,assessments,q,draft]=await Promise.all([history(db,session,before),assessmentRows(db,session.id),db.prepare("SELECT instance_json FROM dialogue_questions WHERE session_id=? AND state='issued'").bind(session.id).first(),db.prepare('SELECT mutation_id,revision,content,question_id,created_at FROM dialogue_drafts WHERE session_id=? AND submitted_turn_id IS NULL ORDER BY created_at DESC LIMIT 1').bind(session.id).first()]);
@@ -28,10 +33,10 @@ async function snapshot(db,session,curriculum,before){
  const question=q?JSON.parse(q.instance_json):null;
  // Answer criteria are server-only and never included in the student question.
  const publicQuestion=question?{id:question.id,objectiveId:question.objectiveId,attempt:question.attempt,question:question.question,source:question.source,createdAt:question.createdAt}:null;
- const state=projectState(curriculum,assessments,preserved);
+ const state=projectState(curriculum,assessments,preserved),completeTurns=await transcript(db,session);
  const partialRows=await all(db.prepare(`SELECT c.content,c.sequence,c.created_at,t.id AS turn_id,t.status FROM dialogue_stream_chunks c JOIN dialogue_turns t ON t.id=c.turn_id WHERE t.session_id=? AND c.turn_id=(SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence DESC LIMIT 1) AND NOT EXISTS(SELECT 1 FROM dialogue_turns r WHERE r.reply_to=t.id AND r.role='teacher') ORDER BY c.sequence LIMIT 128`).bind(session.id,session.id));
  const partial=partialRows.length?{turnId:partialRows[0].turn_id,content:partialRows.map(c=>c.content).join(''),status:partialRows[0].status==='needs_review'?'unconfirmed':'streaming'}:null;
- return {partial,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending:!!session.inflight,curriculumVersion:session.curriculum_version,...page,state,assessments,report:evidenceReport(curriculum,state,assessments),question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at}:null,legacy};
+ return {partial,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending:!!session.inflight,curriculumVersion:session.curriculum_version,...page,state,assessments,report:evidenceReport(curriculum,state,assessments,completeTurns),question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at}:null,legacy};
 }
 export async function handleDialogue(request,env,student,ctx,{callModel=callDialogueModel}={}){
  if(!student)return json({error:'請先登入 My。',code:'authentication_required'},401);
@@ -79,14 +84,21 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   if(outstanding)return json(await snapshot(db,session,curriculum));
   const legacy=await historicalEvidence(db,student.id,curriculum);
   if(legacy.preserved.some(p=>p.objectiveId===body.objectiveId))return json({code:'already_demonstrated',message:'原有掌握紀錄已保留，不需重做。'},409);
-  const previous=await db.prepare('SELECT instance_json FROM dialogue_questions WHERE session_id=? AND objective_id=? ORDER BY attempt DESC LIMIT 1').bind(session.id,body.objectiveId||'').first();
-  const prior=previous?JSON.parse(previous.instance_json):null;
+  const order=await vocabularyOrder(curriculum,session.id);
+  const priorRows=await all(db.prepare('SELECT instance_json FROM dialogue_questions WHERE session_id=? ORDER BY attempt,id').bind(session.id));
+  const priorById=new Map(priorRows.map(r=>{const q=JSON.parse(r.instance_json);return [q.objectiveId,q];}));
+  const remaining=order.filter(id=>!legacy.preserved.some(p=>p.objectiveId===id)&&priorById.get(id)?.state!=='mastered');
+  // A new browser-supplied objective cannot bypass an unanswered remediation.
+  const objectiveId=remaining.find(id=>priorById.get(id)?.state==='needs_reformulation')||remaining[0];
+  if(!objectiveId)return json({code:'vocabulary_covered',message:'原有與本次字詞證據已保留，可繼續其他閱讀。'},409);
+  const prior=priorById.get(objectiveId)||null;
   if(prior?.state==='mastered')return json({code:'already_demonstrated'},409);
   if(prior){
     const reformulated=await db.prepare("SELECT id FROM dialogue_assessments WHERE session_id=? AND objective_id=? AND outcome='reformulated' AND created_at>? LIMIT 1").bind(session.id,prior.objectiveId,prior.answeredAt||prior.createdAt).first();
     if(!reformulated)return json({code:'reformulation_required',message:'請先用自己的話改述剛才的詞義與語境依據，確認後再換一題獨立作答。'},409);
   }
-  let q;try{q=createQuestion(curriculum,{objectiveId:body.objectiveId,attempt:(prior?.attempt||0)+1,previousVariant:prior?.variant??null});}catch{return json({code:'teacher_review_required',message:'請保留答案與提示，交由教師覆核；其他閱讀可繼續。'},409);}
+  let q;try{q=createQuestion(curriculum,{objectiveId,attempt:(prior?.attempt||0)+1,previousVariant:prior?.variant??null});}catch{return json({code:'teacher_review_required',message:'請保留答案與提示，交由教師覆核；其他閱讀可繼續。'},409);}
+  q.selection={...q.selection,orderAlgorithm:'sha256-session-v1',coverageOrder:order,coverageIndex:order.indexOf(objectiveId)};
   await db.prepare('INSERT OR IGNORE INTO dialogue_questions(id,session_id,objective_id,attempt,instance_json,state,created_at) VALUES(?,?,?,?,?,?,?)').bind(q.id,session.id,q.objectiveId,q.attempt,JSON.stringify(q),q.state,q.createdAt).run();
   return json(await snapshot(db,session,curriculum));
  }
@@ -154,11 +166,11 @@ export async function reconcileAbandonedCalls(db,at=now()){
 }
 async function finishTurn({env,db,session,curriculum,question,turnId,body,callModel,stream,budget}){
  try{
-  const page=await history(db,session),assessments=await assessmentRows(db,session.id);
+  const completeTurns=await transcript(db,session),assessments=await assessmentRows(db,session.id);
   const remediationRow=await db.prepare("SELECT instance_json FROM dialogue_questions WHERE session_id=? AND state='needs_reformulation' ORDER BY created_at DESC LIMIT 1").bind(session.id).first();
   const remediation=remediationRow?JSON.parse(remediationRow.instance_json):null;
   const legacy=await historicalEvidence(db,session.student_id,curriculum);
-  const prompt=contextFor({curriculum,state:projectState(curriculum,assessments,legacy.preserved),turns:page.turns,question,remediation});
+  const prompt=contextFor({curriculum,state:projectState(curriculum,assessments,legacy.preserved),turns:completeTurns,question,remediation,assessments});
   let persisted='',sequence=0,lastPersist=0;
   const persistReply=async text=>{
    if(typeof text!=='string'||!text.startsWith(persisted)||text.length>LIMITS.replyChars)throw Error('invalid_visible_stream');
@@ -171,7 +183,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
    stream?.send('delta',{turnId,sequence,text:delta,persisted:true});
   };
   const result=await callModel(env,prompt,turnId,persistReply,budget);
-  const proposal=validateProposal(result.value,{curriculum,turns:page.turns,question,remediation,hints:page.turns.filter(t=>t.role==='teacher').map(t=>t.content)});
+  const proposal=validateProposal(result.value,{curriculum,turns:completeTurns,question,remediation,assessments,hints:completeTurns.filter(t=>t.role==='teacher').map(t=>t.content)});
   const at=now(),teacherId=uuid();
   const claimed=await db.prepare("UPDATE dialogue_calls SET state='finishing',finished_at=? WHERE turn_id=? AND state='reserved'").bind(at,turnId).run();
   if(!claimed.meta.changes)throw Error('call_already_reconciled');

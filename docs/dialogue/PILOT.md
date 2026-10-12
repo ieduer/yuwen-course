@@ -1,4 +1,4 @@
-## Current candidate — 2026-10-12T06:21:48+00:00
+## Current candidate — 2026-10-12T06:47:49+00:00
 
 Serial owner: codex-01a12ea0; change `20261012-apis-yw-stream`. Production remains unchanged. All authenticated My accounts are authorized to use the three lessons and view only their own records. No cross-student teacher grant was supplied. Full visible conversations, partial responses, questions, attempts and original source facts are retained permanently; no purge job or deletion endpoint is introduced.
 
@@ -8,9 +8,11 @@ Real upstream SSE is implemented in a separate APIS candidate. It admits only ve
 
 Read-only historical bridging now preserves existing vocab mastery, submitted first reading and exact-version accepted formal items before the first new dialogue. Original attempts, scores, versions and unfinished first-read text/positions remain in their original tables. Older accepted resource versions appear as historical mapping review, not a requirement to redo completed work. Browser-only/shared progress and full formal answer assembly still need reconciliation; this is not a complete historical equivalence claim.
 
-Current source tests: 42 dialogue checks, APIS 271 regression checks plus 10 focused checks after the exact-model and separate-path guards; original Reading API 74 checks passed again after the final legacy-module import. Controlled browser evidence proves incremental display ~3 seconds before synthetic completion and owner-switch isolation, not actual provider latency or real-account acceptance. See the successor report at `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12ea0/`.
+The full saved dialogue now supplies a bounded evidence trajectory (initial student excerpt, per-objective early/latest evidence and counts) alongside recent turns. The owner report retains all decision references and a complete turn index. Summary links load older pages back to the cited original. This index is not a semantic final conclusion or a grade. Classical vocabulary order is stable per immutable session, varies across sessions, covers every source item and cannot be changed by refresh/client choice; unresolved reformulation remains required.
 
-Still NO-GO for migration/enablement: verified live backup/restore and row reconciliation, full shared APIS fan-out/release receipt, whole-conversation grounded conclusion, classical randomized coverage/grammar/calibration, source-image/exam evidence and independent suen review remain. No deployment, production data write, paid call or public Status publication occurred. A disabled candidate is not a released course.
+Current source tests: 45 dialogue checks, APIS 271 regression checks plus 10 focused checks after the exact-model and separate-path guards; original Reading API 74 checks passed again after the final legacy-module import. Controlled browser evidence proves incremental display ~3 seconds before synthetic completion and owner-switch isolation, not actual provider latency or real-account acceptance. See the successor report at `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12ea0/`.
+
+Still NO-GO for migration/enablement: verified live backup/restore and row reconciliation, full shared APIS fan-out/release receipt, real grounded final-conclusion calibration, classical grammar/difficulty calibration, source-image/exam evidence and independent suen review remain. No deployment, production data write, paid call or public Status publication occurred. A disabled candidate is not a released course.
 
 The earlier candidate notes below are history, superseded by this section.
 

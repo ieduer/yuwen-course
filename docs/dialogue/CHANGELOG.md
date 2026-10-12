@@ -1,5 +1,12 @@
 # Dialogue candidate changelog
 
+## 2026-10-12T06:47:49+00:00 — streamed, owner-only candidate; not released
+
+- Implemented approved My own-record access, permanent visible dialogue retention, Gemini-only streaming and conservative US$50 per UTC-day reservations. No live settings changed.
+- Preserved student work before streaming, partial text across interruption, budget-deferred drafts and historical source credit; fenced late completions and account switches.
+- Added full-history evidence trajectories with original-turn links and stable randomized vocabulary coverage with required reformulation. No replacement historical grade or semantic completion claim.
+- Verified45 focused dialogue tests,200-turn weak-network browser readback and formal artifact build; remaining live restore, history bridge, real model quality, independent review and release gates remain explicit.
+
 ## 2026-10-12T04:16:33+00:00 — disabled three-lesson candidate, not released
 
 - Added a generated per-resource requirement map with source versions, compound first-read/guide gates and poetry word creation; retained all legacy source files and grade behavior.
