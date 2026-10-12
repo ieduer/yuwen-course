@@ -1,3 +1,11 @@
+## Current real acceptance — 2026-10-12T15:08:09.731392+00:00
+
+The actual owner553 My browser session saved and reloaded one synthetic first-read mark in the isolated D1: same ownerRef,markId,text and guess; HTTP200. No login replay or teacher-review request. The fixed24-case executor is now deployed only at yw-acceptance.bdfz.net: source `c2fcf53cde109b28f487ac3ebc70aee594146c2c`, Pages `c4fa78f4-5740-4086-8393-6a514164bb53`, artifact8758aa8d91246ac76518c283c8b054bee05d94809d6c37e960ec343305edc40d. Original packet95b8f943... remains exact; Node22/24 each26checks and actual bundle check pass.
+
+Private APIS routing and real Gemini stream/usage are verified by the first fixed case. At2026-10-12T15:03:35.502Z, gemini-3.6-flash returned228 output tokens,5097 input,total5325; first token2817ms,total3179ms; actual-equivalent4678microUSD. The model claimed demonstrated but returned onlycontext_meaning evidence, omittingexplanation andindependent; validateProposal rejected missing_criterion. Raw response,three partial chunks and exact same-case readback are preserved. No grade/assessment was accepted.
+
+The original operation is STOPPED at1/24 under its first-failure rule;23cases remain unexecuted,no retry/reset. This is a failed model acceptance, not a production release. Any corrected prompt/packet and disposition for further calls need explicit handling of that stopped operation; do not silently start a replacement batch or weaken the validator. Formal YW unchanged; APIS baseline100/candidate0 unchanged; hard expiry2026-10-13T12:00Z. Evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-live-acceptance/REPORT.md`. Earlier current sections are history where superseded.
+
 ## Current authenticated acceptance and fixed-case repair — 2026-10-12T14:57Z
 
 Real owner553 reused an existing My browser session. One synthetic first-read mark was saved through the normal UI and verified after reload: same ownerRef,markId,selected text and guess,HTTP200. No login replay, teacher-review request, model call or production write occurred. Evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-live-acceptance/OWNER-SAVE-RELOAD.json`.
