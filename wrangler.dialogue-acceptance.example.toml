@@ -25,6 +25,6 @@ YW_ACCEPTANCE_USER_ID = "0"
 YW_ACCEPTANCE_EXPIRES_AT = "2000-01-01T00:00:00Z"
 YW_ACCEPTANCE_DATABASE_ID = "00000000-0000-0000-0000-000000000000"
 YW_ACCEPTANCE_APIS_VERSION = "00000000-0000-0000-0000-000000000000"
-# Exact reviewed budget policy and existing YW caller secret are supplied only
+# Exact reviewed budget policy and private APIS entrypoint are configured only
 # after source/host/account/artifact approval. No production D1, Queue, scheduler,
 # test-slug, inherited production variables, or additional service bindings.
