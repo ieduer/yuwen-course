@@ -1,5 +1,21 @@
 ## Textbook plates candidate — 2026-10-11
 
+## 2026-10-12T04:16:33+00:00 — Conversation pilot candidate; production unchanged
+
+The conversation-led three-lesson redesign is a disabled, unaccepted candidate on
+`codex/yw-dialogue-pilot-20261012`, based on `175f8ae42dc5fd58f1b697a76567e79c954d9f7f`.
+No production migration, student write, paid AI call or deployment occurred. Existing
+accepted self-study capacity did not increase. 56 focused local checks pass; live
+backup/restore, historical completion equivalence, teacher/privacy policy, real AI
+quality/streaming/cost and hard-interruption recovery remain unresolved.
+
+Candidate design/inventory: [dialogue pilot](docs/dialogue/PILOT.md).
+Review and exact blockers: [go/no-go](docs/dialogue/GO-NO-GO.md).
+Central evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/REPORT.md`.
+This entry supersedes earlier dialogue design notes for the current candidate only;
+it does not supersede the accepted release authority or historical evidence below.
+
+
 Branch `claude/pdf-page-images-20261011` on accepted source `7bfe60c`: the "原圖" dialog reads current-edition PDF pages from sun.bdfz.net through `site/data/textbook-pages.v1.json` (catalog release `20261011T015939Z-24b58ca8`; 198 lesson files, 742 legacy page references: exact page-map rows first, then 41 lesson-level overrides proven from the PDF text layer, which replace inherited wrong page ranges and never drop a page without naming the lesson that owns it; 3 lessons absent from the current edition show no page; 2 lessons keep exact rows pending a human check). Leaf-only: scoring inputs, manifests, Worker, D1 schema and App content are byte-identical to `7bfe60c`. Local candidate only; not pushed, previewed or deployed. Production acceptance, the owner's signed-in write/readback and public Status remain pending the registered release transaction. See the 2026-10-11 section of the maintenance manual.
 
 ## Current dictionary candidate — 2026-10-08T15:11:00Z

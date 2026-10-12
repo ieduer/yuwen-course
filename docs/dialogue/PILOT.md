@@ -1,0 +1,76 @@
+# Conversation-led close reading — disabled pilot candidate
+
+As of 2026-10-12T04:16:33+00:00. This is a local candidate, **NO-GO for student rollout**. It is not a completed replacement for YW. The original interface remains the entry point; no production configuration, migration, student record or paid provider call was changed. Source baseline: `175f8ae42dc5fd58f1b697a76567e79c954d9f7f`, branch `codex/yw-dialogue-pilot-20261012`.
+
+## Scope and inspected architecture
+
+The current application is static Pages content plus `site/_worker.js`, D1 `READING_DB`, User Center authentication, source-owned learning assessments/outbox, and the existing APIS service binding. The authenticated student contract is `id` plus `ucUserId`, not a client-supplied identity. Existing curriculum manifests and server assessment rules remain the authority. The candidate imports no provider key and creates no account system, shared-hub change, queue, schedule or public transcript route.
+
+The old entry waits for several large curriculum/reference indexes before loading the selected lesson and reader document. The local comparison measured approximately 3.41 MB of decoded resources before the old first readable text; the candidate renders from one lesson contract first and defers identity, images and dictionary work. This isolates a frontend delay; it does not diagnose current APIS queue or live D1 latency. The approved APIS path inspected here returns complete JSON, not a verified incremental stream.
+
+Pilot lessons: modern prose 《荷塘月色》 (`lesson-1717-p2`), classical prose 《劝学》 (`lesson-1711-p1`), poem 《春江花月夜》 (`lesson-1498`). No original textbook PDF/image is copied or converted. Images reuse the current `textbook-pages.v1.json` and existing renderer/shared URLs.
+
+## Requirement inventory and actual coverage
+
+[`requirement-map.json`](requirement-map.json) accounts for all 189 visible source lessons, 869 formal resources, 1,021 formative items, 193 active guide items and nine non-visible/composite source files. The latter are retained as source, not silently activated. Formal/formative overlap is linked by existing resource/completion keys and must not be double-counted.
+
+The inventory derives track definitions from the actual app table and honors vocabulary eligibility. It contains per-resource conversational equivalents, evidence rules, storage, source versions and implementation status. Classical first-read/mark resolution and guide prerequisites, and poetry word creation, are explicit compound requirements. Lesson tasks, inactive guide items and source gaps are preserved. Inventory completeness is not proof that every bridge or semantic assessment is implemented.
+
+| Existing requirement | Candidate conversation/evidence | Boundary |
+| --- | --- | --- |
+| 粗讀感悟 / 三詞初讀 | Initial impression, uncertainty or question; student and passage references | Three differentiated words and original rubric remain a separate formal obligation until equivalence is reviewed |
+| 無注疏初讀 | Original submission, timed session and unresolved marks remain available through original course | New first-read UI/gates and resume bridge are not implemented |
+| 字詞累積 | Every active source word has an objective and stable server-issued contextual question | Current open-response mastery is separate evidence; it does not replace legacy mastered verdicts |
+| 文章技法 / 章法 | Choice, effect, purpose and textual evidence must all be represented | Original requirement for two separate textual locations requires further semantic calibration |
+| 字句之改 | Original/revised wording and effects | No credit posted into old grading records |
+| 字詞創作 | Required word in three lines/sentences appropriate to genre | Poetry requirement retained; not converted to an official grade |
+| 篇目評價 | Personal response, including dissent | Original self-report remains non-scoring |
+| 叩問作者 / 高考關聯 | Text-grounded question and present-day transfer | All generated practice labelled original; verified paper examples not yet integrated |
+| 學案 | Exact item key, prompt, page, semantic revision and source rubric retained | Existing source evaluator bridge remains pending |
+| 尚友 | Change in understanding, supporting evidence, agreement or challenge | Summaries must cite student turns; no requirement to agree with the author |
+
+The existing A+ rule/version/threshold and all old source evaluators are untouched. New evidence never emits central scoring envelopes. Exact current resource/version matches with an eligible, correct existing source result are displayed as preserved; ambiguous or unmatched history stays unknown. **This is not yet a complete historical completion projection:** old shared progress, historic rule versions and unfinished first-read state must be reconciled before any student is routed into this workflow. Completed lessons must not be re-opened merely to satisfy a new objective.
+
+## Interface and privacy
+
+`/dialogue.html` provides original text and a continuous conversation, two mobile views, selectable annotations, passage-to-conversation links and return-to-passage links. Requirements, references, original course/history, dictionary, shared textbook images and private exports are on demand. The original navigation is unchanged; there is no public rollout link.
+
+The route is off unless both `YW_DIALOGUE_ENABLED=true` and the authenticated UC identity is in `YW_DIALOGUE_PILOT_USER_IDS`. Defaults require no new tables. Existing request-origin checks apply. Server queries scope sessions, evidence, drafts and exports by authenticated owner. Client owner references clear prior turns/drafts on an observed account change; unauthorized responses also clear private UI. Server ownership is the security boundary; screen clearing depends on identity refresh/focus/visibility events and is not instantaneous cross-device revocation.
+
+Private content is stored in the new source-owned tables, never generic debug logs or public pages. No training reuse, publication or notification is implemented. The owner may export full paginated turns, stored assessments, question history, event metadata, deferred drafts and versions. A deterministic student evidence summary and detailed teacher evidence index accompany the originals. The teacher index is an owner-controlled export, **not an authenticated teacher dashboard or proof of teacher delivery**. The review button persists a request and explicitly tells the student to hand the export to their teacher.
+
+Retention, authorized teacher scopes and correction/deletion procedures must be approved before real student collection. Proposed default: preserve original records and append attributed corrections; no automatic purge and no silent overwrite. This is a proposal, not an adopted retention period or implemented correction endpoint.
+
+## Backend state and assessment contract
+
+`site/dialogue-policy.js` owns policy and evidence-rule versions. Curriculum contracts contain source passages, criteria, misconceptions, remediation, prerequisites and persona rules. Every session stores the exact curriculum JSON/version; a later static curriculum revision resumes the existing contract instead of replacing it or resetting evidence.
+
+The model returns a short visible reply and structured proposals. The server rejects unknown objectives, changes to legacy/guide grades, unsupported outcomes, missing criteria, assistant-authored evidence, invented student quotations and invented passage quotations. Only exact student turns and source text can support transitions. Positive praise, length and instructions to complete do not advance state. This validates references and permitted transitions; it is **not an independent proof of semantic correctness**. Teacher calibration and alternative-interpretation fixtures remain required.
+
+Statuses are `not_yet_observed`, `needs_practice`, `review`, `reformulated`, `demonstrated` and preserved legacy credit. Demonstrated evidence is monotonic; subsequent uncertainty does not downgrade it. `readyForShangyou` requires all ordinary objectives. `evidence_ready_for_review` requires those plus 尚友. Neither status is a grade, official completion, new weight or central evidence event. Model assessment proposals can still arrive out of pedagogical order; stronger scheduling/prerequisite acceptance is pending.
+
+Question instances have stable IDs, source, rubric, version, attempt, variant-selection metadata and timestamps. An outstanding question is re-read on refresh and cannot be replaced. Two variants preserve the source/rubric; a failed answer requires verified reformulation before an equivalent different variant. Three attempts lead to review, not an endless retry loop. Exact copied hints cannot be credited as independent answers. This preserves first/later attempts separately. Random selection of variants is implemented; whole-lesson randomized order, broader grammar coverage and calibrated difficulty are still pending. The attempt limit is a non-scoring pilot bound, not an approved mastery threshold.
+
+Persona rules explicitly identify an AI author simulation, separate author/narrator/translator/speaker, prohibit invented memories or privileged intentions, accept disagreement and frame examinations as the student's contemporary context. Only the three named single-author pilots were generated. Anonymous, collective and translated works require dedicated reviewed persona fixtures before expansion.
+
+## Persistence and bounded AI use
+
+A D1 batch performs revision compare-and-swap, student-turn persistence, event recording and one leaf-call reservation before contacting APIS. A mutation ID and request hash make identical retries return saved records; changed content under the same receipt conflicts. Concurrent tabs cannot both advance the same revision. Saved UI reflects POST persistence plus GET readback. Continued typing is not erased by a returning response.
+
+If a budget blocks the call, one deferred draft per session revision is saved and read back; it is not a submitted answer or a grade. An explicit retry may submit it after capacity returns. A conflicting second deferred draft is rejected visibly, preserving the browser text. Unconfirmed/failed responses retain the student answer and mark review; automatic paid replays are forbidden. Hard worker termination can leave a reserved/inflight row requiring explicit reconciliation; that recovery path is a release blocker.
+
+Current proposed bounds: input 3,000 characters; serialized context 22,000 characters plus policy; reply 1,800 characters; generation output 2,400 tokens; last ten turns capped at 6,500 characters; 30 history rows/page; 40 leaf calls/user/UTC day; 400 globally/day; 120/session lifetime; four reserved calls globally; 20-second leaf timeout; zero automatic retries, hedges or model tool calls. These are leaf-call/token ceilings, **not a proven monetary budget or a bound on APIS internal fallback calls**. Pricing, per-lesson spending and gateway behavior require review before enablement.
+
+Complete transcripts remain in storage. The model sees bounded current state, objectives, source passages and recent turns; a grounded rolling summary/retrieval mechanism for whole-conversation 尚友 analysis is not yet implemented. Streaming is also not implemented. The UI reports saved/waiting states; it does not fabricate token streaming.
+
+## Dictionary and examination sources
+
+The candidate imports the currently approved shared dictionary component on demand and pins source `xc`. It queries only the selected lookup text, not a student answer. The source entry `https://xc.bdfz.net/#entry/e-p129_R-6` for 而 was inspected; its original-image reference is PDF page 129 / printed page 117. That image did not load in this session. The embedded component lookup also failed and correctly displayed 待核查; cause was not established. Neither OCR text nor a returned link is treated as image verification.
+
+Official examination-publication leads were checked without downloading a second textbook asset. The Beijing Examination News [2024-12-11 article](https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf) identifies 2024 Beijing Chinese Q19 (《谈买书》) and 2022 Q18 (《这城市已融入我的生命》). Text extraction succeeded, but page-image verification failed. These are source leads, not accepted in-app past-paper items. The candidate uses original practice only and never labels AI feedback official marking. No copyrighted full exam article was copied into the curriculum.
+
+## Verification and next step
+
+See [GO-NO-GO.md](GO-NO-GO.md), [MIGRATION.md](MIGRATION.md) and [CHANGELOG.md](CHANGELOG.md). Durable local evidence is `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/REPORT.md`.
+
+56 focused checks cover the actual disabled Worker route, origin rejection, actual identity shape, source inventory, evidence rejection, dissent, stable questions/remediation, row preservation, idempotency/concurrency, failed replies, deferred budget drafts, owner isolation, immutable curriculum resume and 102-turn cursor pagination. This is synthetic/local verification, not actual model calibration or production recovery. Full formal release, Web/App receipt and live authentication checks remain unrun because no release is authorized by the current acceptance state.

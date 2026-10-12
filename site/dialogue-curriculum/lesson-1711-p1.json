@@ -1,0 +1,1897 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1711-p1",
+  "title": "劝学",
+  "mode": "classical",
+  "author": "荀子",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公或敘述者的經歷當作作者生平。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1711-p1:p1",
+      "text": "劝 学\n\n《荀子》\n\n君子曰：学不可以已。青，取之于蓝，而青于蓝；冰，水为之，而寒于水。木直中绳，𫐓以为轮，其曲中规。虽有槁暴，不复挺者，𫐓使之然也。故木受绳则直，金就砺则利，君子博学而日参省乎己，则知明而行无过矣。\n\n吾尝终日而思矣，不如须臾之所学也；吾尝跂而望矣，不如登高之博见也。登高而招，臂非加长也，而见者远；顺风而呼，声非加疾也，而闻者彰。假舆马者，非利足也，而致千里；假舟楫者，非能水也，而绝江河。君子生非异也，善假于物也。\n\n积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。锲而舍之，朽木不折；锲而不舍，金石可镂。蚓无爪牙之利，筋骨之强，上食埃土，下饮黄泉，用心一也。蟹六跪而二螯，非蛇鳝之穴无可寄托者，用心躁也。",
+      "block": {
+        "runs": [
+          {
+            "text": "劝 学",
+            "type": "text"
+          },
+          {
+            "label": "[1]",
+            "noteId": "footnote-11143-1",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "\n\n《荀子》\n\n君子",
+            "type": "text"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-11143-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "曰：学不可以已。青，取之于蓝",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-11143-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，而青于蓝",
+            "type": "text"
+          },
+          {
+            "label": "[4]",
+            "noteId": "footnote-11143-4",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "；冰，水为之，而寒于水。木直中绳",
+            "type": "text"
+          },
+          {
+            "label": "[5]",
+            "noteId": "footnote-11143-5",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，𫐓以",
+            "type": "text"
+          },
+          {
+            "label": "[6]",
+            "noteId": "footnote-11143-6",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "为轮，其曲中规",
+            "type": "text"
+          },
+          {
+            "label": "[7]",
+            "noteId": "footnote-11143-7",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。虽有槁暴",
+            "type": "text"
+          },
+          {
+            "label": "[8]",
+            "noteId": "footnote-11143-8",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，不复挺",
+            "type": "text"
+          },
+          {
+            "label": "[9]",
+            "noteId": "footnote-11143-9",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "者，𫐓使之然也。故木受绳",
+            "type": "text"
+          },
+          {
+            "label": "[10]",
+            "noteId": "footnote-11143-10",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "则直，金",
+            "type": "text"
+          },
+          {
+            "label": "[11]",
+            "noteId": "footnote-11143-11",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "就砺",
+            "type": "text"
+          },
+          {
+            "label": "[12]",
+            "noteId": "footnote-11143-12",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "则利，君子博学而日参省乎己",
+            "type": "text"
+          },
+          {
+            "label": "[13]",
+            "noteId": "footnote-11143-13",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，则知",
+            "type": "text"
+          },
+          {
+            "label": "[14]",
+            "noteId": "footnote-11143-14",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "明而行无过矣。\n\n吾尝终日而思矣，不如须臾之所学也；吾尝跂",
+            "type": "text"
+          },
+          {
+            "label": "[15]",
+            "noteId": "footnote-11143-15",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "而望矣，不如登高之博见也。登高而招，臂非加长也，而见者远",
+            "type": "text"
+          },
+          {
+            "label": "[16]",
+            "noteId": "footnote-11143-16",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "；顺风而呼，声非加疾",
+            "type": "text"
+          },
+          {
+            "label": "[17]",
+            "noteId": "footnote-11143-17",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "也，而闻者彰",
+            "type": "text"
+          },
+          {
+            "label": "[18]",
+            "noteId": "footnote-11143-18",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。假",
+            "type": "text"
+          },
+          {
+            "label": "[19]",
+            "noteId": "footnote-11143-19",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "舆马",
+            "type": "text"
+          },
+          {
+            "label": "[20]",
+            "noteId": "footnote-11143-20",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "者，非利足",
+            "type": "text"
+          },
+          {
+            "label": "[21]",
+            "noteId": "footnote-11143-21",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "也，而致",
+            "type": "text"
+          },
+          {
+            "label": "[22]",
+            "noteId": "footnote-11143-22",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "千里；假舟楫者，非能水",
+            "type": "text"
+          },
+          {
+            "label": "[23]",
+            "noteId": "footnote-11143-23",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "也，而绝",
+            "type": "text"
+          },
+          {
+            "label": "[24]",
+            "noteId": "footnote-11143-24",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "江河。君子生非异",
+            "type": "text"
+          },
+          {
+            "label": "[25]",
+            "noteId": "footnote-11143-25",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "也，善假于物",
+            "type": "text"
+          },
+          {
+            "label": "[26]",
+            "noteId": "footnote-11143-26",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "也。\n\n积土成山，风雨兴焉",
+            "type": "text"
+          },
+          {
+            "label": "[27]",
+            "noteId": "footnote-11143-27",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "；积水成渊，蛟龙生焉；积善成德，而神明",
+            "type": "text"
+          },
+          {
+            "label": "[28]",
+            "noteId": "footnote-11143-28",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "自得，圣心",
+            "type": "text"
+          },
+          {
+            "label": "[29]",
+            "noteId": "footnote-11143-29",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "备焉。故不积跬步",
+            "type": "text"
+          },
+          {
+            "label": "[30]",
+            "noteId": "footnote-11143-30",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，无以",
+            "type": "text"
+          },
+          {
+            "label": "[31]",
+            "noteId": "footnote-11143-31",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "至千里；不积小流，无以成江海。骐骥",
+            "type": "text"
+          },
+          {
+            "label": "[32]",
+            "noteId": "footnote-11143-32",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "一跃，不能十步；驽马十驾",
+            "type": "text"
+          },
+          {
+            "label": "[33]",
+            "noteId": "footnote-11143-33",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，功在不舍",
+            "type": "text"
+          },
+          {
+            "label": "[34]",
+            "noteId": "footnote-11143-34",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。锲",
+            "type": "text"
+          },
+          {
+            "label": "[35]",
+            "noteId": "footnote-11143-35",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "而舍之，朽木不折；锲而不舍，金石可镂",
+            "type": "text"
+          },
+          {
+            "label": "[36]",
+            "noteId": "footnote-11143-36",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。蚓无爪牙之利，筋骨之强，上食埃土",
+            "type": "text"
+          },
+          {
+            "label": "[37]",
+            "noteId": "footnote-11143-37",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，下饮黄泉",
+            "type": "text"
+          },
+          {
+            "label": "[38]",
+            "noteId": "footnote-11143-38",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，用心一",
+            "type": "text"
+          },
+          {
+            "label": "[39]",
+            "noteId": "footnote-11143-39",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "也。蟹六跪",
+            "type": "text"
+          },
+          {
+            "label": "[40]",
+            "noteId": "footnote-11143-40",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "而二螯",
+            "type": "text"
+          },
+          {
+            "label": "[41]",
+            "noteId": "footnote-11143-41",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，非蛇鳝之穴无可寄托者，用心躁",
+            "type": "text"
+          },
+          {
+            "label": "[42]",
+            "noteId": "footnote-11143-42",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "也。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1711-p1:p3",
+      "text": "《劝学》和《师说》都是我国古代探讨学习问题的名篇。熟读这两篇文章，找出文中谈学习的名句，推敲句子的含义，以此为基础把握两篇文章关于学习的主要观点。",
+      "block": {
+        "runs": [
+          {
+            "text": "《劝学》和《师说》都是我国古代探讨学习问题的名篇。熟读这两篇文章，找出文中谈学习的名句，推敲句子的含义，以此为基础把握两篇文章关于学习的主要观点。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1711-p1:p4",
+      "text": "阅读时，要注意联系作者的思想主张和写作背景来理解文章的观点，分析作者提出观点的依据。例如，荀子为何如此强调后天学习的重要性？韩愈是针对怎样的现状倡导师道回归的？这需要分别结合荀子的“性恶论”、韩愈所处时代士大夫“耻学于师”的风气来理解。还可以结合今天的社会生活，说说荀子和韩愈的学习观中，哪些仍然值得借鉴，哪些需要更新并赋予其新的内涵。",
+      "block": {
+        "runs": [
+          {
+            "text": "阅读时，要注意联系作者的思想主张和写作背景来理解文章的观点，分析作者提出观点的依据。例如，荀子为何如此强调后天学习的重要性？韩愈是针对怎样的现状倡导师道回归的？这需要分别结合荀子的“性恶论”、韩愈所处时代士大夫“耻学于师”的风气来理解。还可以结合今天的社会生活，说说荀子和韩愈的学习观中，哪些仍然值得借鉴，哪些需要更新并赋予其新的内涵。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1711-p1:p5",
+      "text": "“而”是古代汉语中常见的连词，可用于表示并列、承接、递进、转折、修饰等多种语义关系。这两篇文章中的许多语句用了“而”，诵读时注意体会这些“而”字表现的语义关系。",
+      "block": {
+        "runs": [
+          {
+            "text": "“而”是古代汉语中常见的连词，可用于表示并列、承接、递进、转折、修饰等多种语义关系。这两篇文章中的许多语句用了“而”，诵读时注意体会这些“而”字表现的语义关系。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1711-p1:p6",
+      "text": "*背诵课文《劝学》全篇和《师说》的第1 段。",
+      "block": {
+        "runs": [
+          {
+            "text": "*背诵课文《劝学》全篇和《师说》的第1 段。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《荀子集解》卷一（中华书局1988 年版）。有删节。劝，鼓励。《荀子》全书现存32 篇，大部分为荀子自著，其余为荀子弟子记录的荀子言论和思想观点。荀子（约前313—前238），名况，字卿，赵国人，战国末期思想家。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "君子：这里指有学问、有修养的人。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "青，取之于蓝：靛（diàn）青从蓝草中取得。青，靛青，一种染料。蓝，草名，叶子可提取靛青。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-3"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "青于蓝：比蓝草颜色深。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-4"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "中（zhòng）绳：合乎木匠用来取直的墨线。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-5"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "𫐓（róu）：同“煣”，用火烘烤木材使之弯曲。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-6"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "规：圆规。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-7"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "虽有槁暴（gǎopù）：即使又晒干了。有，同“又”。槁暴，晒干。槁，枯。暴，晒。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-8"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "挺：直。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-9"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "受绳：经过墨线比量。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-10"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "金：指金属制的刀斧等。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-11"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "就砺：拿到磨刀石上去磨。就，接近、靠近。砺，磨刀石。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-12"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "参（cān）省（xǐng）乎己：对自己检查、省察。参，检验。省，省察。乎，相当于“于”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-13"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "知：同“智”，见识。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-14"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "跂（qǐ）：踮起脚后跟。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-15"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "见者远：意思是远处的人也能看见。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-16"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "疾：劲疾。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-17"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "彰：清楚。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-18"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "假：借助。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-19"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "舆马：车马。这里指车子。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-20"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "利足：善于奔走。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-21"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "致：到达。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-22"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "能水：善于游水。水，游泳。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-23"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "绝：横渡。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-24"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "生（xìng）非异：天性（同一般人）没有差别。生，同“性”，天性。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-25"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "物：外物，包括各种客观条件。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-26"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "兴焉：在这里兴起。兴，起。焉，兼词，相当于“于此”。下文“生焉”的“焉”同此。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-27"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "神明：非凡的智慧。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-28"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "圣心：圣人的心怀。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-29"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "跬（kuǐ）步：古代称跨出一脚为“跬”，跨出两脚为“步”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-30"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "无以：没有用来……的，无从。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-31"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "骐骥（qíjì）：骏马。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-32"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "驽马十驾：劣马拉车走十天。驾，一天的行程。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-33"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "功在不舍：功效来源于走个不停。舍，停止、止息。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-34"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "锲（qiè）：刻。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-35"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "镂：雕刻。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-36"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "埃土：泥土，尘土。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-37"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "黄泉：地下的泉水。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-38"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "一：专一。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-39"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "六跪：蟹的六条腿。“六”应是“八”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-40"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "螯：蟹钳。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-41"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "躁：浮躁，不专心。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11143-42"
+    }
+  ],
+  "resources": [],
+  "source": "https://forum.rdfzer.com/t/topic/1711",
+  "objectives": [
+    {
+      "id": "lesson-1711-p1:firstRead",
+      "domain": "firstRead",
+      "label": "無注疏初讀",
+      "criteria": [
+        "initial_response",
+        "uncertainty"
+      ],
+      "rule": "保留原無注疏初讀、疑點標記與解惑紀錄；在對話引用原記錄。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1711-p1:p1",
+        "lesson-1711-p1:p3",
+        "lesson-1711-p1:p4",
+        "lesson-1711-p1:p5",
+        "lesson-1711-p1:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1711-p1:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1711-p1:p1",
+        "lesson-1711-p1:p3",
+        "lesson-1711-p1:p4",
+        "lesson-1711-p1:p5",
+        "lesson-1711-p1:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1711-p1:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1711-p1:p1",
+        "lesson-1711-p1:p3",
+        "lesson-1711-p1:p4",
+        "lesson-1711-p1:p5",
+        "lesson-1711-p1:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1711-p1:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1711-p1:p1",
+        "lesson-1711-p1:p3",
+        "lesson-1711-p1:p4",
+        "lesson-1711-p1:p5",
+        "lesson-1711-p1:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1711-p1:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1711-p1:p1",
+        "lesson-1711-p1:p3",
+        "lesson-1711-p1:p4",
+        "lesson-1711-p1:p5",
+        "lesson-1711-p1:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1711-p1:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1711-p1:p1",
+        "lesson-1711-p1:p3",
+        "lesson-1711-p1:p4",
+        "lesson-1711-p1:p5",
+        "lesson-1711-p1:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1711-p1:v01",
+      "domain": "vocabulary",
+      "label": "字詞：劝",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "準據：鼓励。教材明确注为“鼓励”。选项中只有“劝善惩恶”的“劝”是鼓励、勉励之意。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1",
+        "lesson-1711-p1:p3",
+        "lesson-1711-p1:p6"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p1:v02",
+      "domain": "vocabulary",
+      "label": "字詞：已",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "準據：停止。“已”在此处作动词，意为停止。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p1:v03",
+      "domain": "vocabulary",
+      "label": "字詞：暴",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "準據：晒。教材注为“晒”，通“曝”，读pù。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p1:v04",
+      "domain": "vocabulary",
+      "label": "字詞：知",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "準據：智慧。“知”通“智”，指智慧。B选项“蚤”通“早”。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p1:v05",
+      "domain": "vocabulary",
+      "label": "字詞：假",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "準據：借助。此处“假”意为借助、利用。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p1:v06",
+      "domain": "vocabulary",
+      "label": "字詞：疾",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "準據：劲疾，强劲。文中“疾”指强劲。C项“疾风”也是强劲的风。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p1:v07",
+      "domain": "vocabulary",
+      "label": "字詞：绝",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "準據：横渡。此处“绝”指横渡河流。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p1:v08",
+      "domain": "vocabulary",
+      "label": "字詞：生",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "準據：天性。“生”通“性”，指人的天性。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1",
+        "lesson-1711-p1:p4"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p1:v09",
+      "domain": "vocabulary",
+      "label": "字詞：焉",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "準據：于此，从这里。文中的“焉”为兼词，相当于“于此”。B项“圣心备焉”中的“焉”是语气词。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p1:v10",
+      "domain": "vocabulary",
+      "label": "字詞：爪牙",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "準據：爪子和牙齿。古义指野兽的爪子和牙齿，今义多指坏人的党羽。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p1:v11",
+      "domain": "vocabulary",
+      "label": "字詞：躁",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "準據：浮躁，不专心。“躁”在这里与前文“用心一也”相对，指不专心。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p1:v12",
+      "domain": "vocabulary",
+      "label": "字詞：锲",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "準據：刻。“锲”意为刻。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "lesson-1711-p1:v01",
+      "word": "劝",
+      "sourceSentence": "劝 学 《荀子》 君子 曰：学不可以已",
+      "meaning": "鼓励",
+      "explanation": "教材明确注为“鼓励”。选项中只有“劝善惩恶”的“劝”是鼓励、勉励之意。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "下列句中“劝”字的含义与“劝学”中的“劝”相同的一项是",
+      "options": [
+        "苦口婆心，多方劝导",
+        "劝君更尽一杯酒",
+        "劝善惩恶，社会之本",
+        "劝止无益，只得离去"
+      ],
+      "answerIndex": 2,
+      "sourceRefs": [
+        "《汉语大词典》"
+      ],
+      "version": "vocab-set-ab7ea2a36ba88018",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "請解釋「劝 学 《荀子》 君子 曰：学不可以已」中「劝」的意思，並說明語境依據。",
+        "回到「劝 学 《荀子》 君子 曰：学不可以已」：若換成現代常用義是否通順？請說出「劝」在此處的含義及理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p1:v02",
+      "word": "已",
+      "sourceSentence": "君子 曰：学不可以已",
+      "meaning": "停止",
+      "explanation": "“已”在此处作动词，意为停止。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "“学不可以已”中“已”的意思是",
+      "options": [
+        "完成",
+        "罢了",
+        "停止",
+        "太久"
+      ],
+      "answerIndex": 2,
+      "sourceRefs": [
+        "王力《古汉语常用字字典》"
+      ],
+      "version": "vocab-set-ab7ea2a36ba88018",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "請解釋「君子 曰：学不可以已」中「已」的意思，並說明語境依據。",
+        "回到「君子 曰：学不可以已」：若換成現代常用義是否通順？請說出「已」在此處的含義及理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p1:v03",
+      "word": "暴",
+      "sourceSentence": "虽有槁暴 ，不复挺 者，𫐓使之然也。",
+      "meaning": "晒",
+      "explanation": "教材注为“晒”，通“曝”，读pù。",
+      "type": "pronunciation",
+      "difficulty": 2,
+      "question": "下列对“虽有槁暴”中“暴”的读音及含义判断正确的一项是",
+      "options": [
+        "bào，凶恶",
+        "pù，晒干",
+        "bào，暴露",
+        "pù，暴雨"
+      ],
+      "answerIndex": 1,
+      "sourceRefs": [
+        "《汉语大词典》"
+      ],
+      "version": "vocab-set-ab7ea2a36ba88018",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "請解釋「虽有槁暴 ，不复挺 者，𫐓使之然也。」中「暴」的意思，並說明語境依據。",
+        "回到「虽有槁暴 ，不复挺 者，𫐓使之然也。」：若換成現代常用義是否通順？請說出「暴」在此處的含義及理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p1:v04",
+      "word": "知",
+      "sourceSentence": "知 明而行无过矣。 ",
+      "meaning": "智慧",
+      "explanation": "“知”通“智”，指智慧。B选项“蚤”通“早”。",
+      "type": "gu-jin",
+      "difficulty": 2,
+      "question": "“则知明而行无过矣”中“知”的用法与下列哪项相同",
+      "options": [
+        "知之为知之",
+        "旦日不可不蚤自来谢项王",
+        "吾不知之",
+        "知己知彼"
+      ],
+      "answerIndex": 1,
+      "sourceRefs": [
+        "王力《古汉语常用字字典》"
+      ],
+      "version": "vocab-set-ab7ea2a36ba88018",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "請解釋「知 明而行无过矣。 」中「知」的意思，並說明語境依據。",
+        "回到「知 明而行无过矣。 」：若換成現代常用義是否通順？請說出「知」在此處的含義及理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p1:v05",
+      "word": "假",
+      "sourceSentence": " 舆马 者，非利足 也，而致 千里；",
+      "meaning": "借助",
+      "explanation": "此处“假”意为借助、利用。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "“假舆马者”中“假”的意思是",
+      "options": [
+        "不真",
+        "凭借、利用",
+        "假期",
+        "宽恕"
+      ],
+      "answerIndex": 1,
+      "sourceRefs": [
+        "《汉语大词典》"
+      ],
+      "version": "vocab-set-ab7ea2a36ba88018",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "請解釋「 舆马 者，非利足 也，而致 千里；」中「假」的意思，並說明語境依據。",
+        "回到「 舆马 者，非利足 也，而致 千里；」：若換成現代常用義是否通順？請說出「假」在此處的含義及理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p1:v06",
+      "word": "疾",
+      "sourceSentence": "顺风而呼，声非加疾 也，而闻者彰 。假",
+      "meaning": "劲疾，强劲",
+      "explanation": "文中“疾”指强劲。C项“疾风”也是强劲的风。",
+      "type": "gu-jin",
+      "difficulty": 2,
+      "question": "下列句中“疾”的含义与“声非加疾也”中的“疾”含义相同的一项是",
+      "options": [
+        "草枯鹰眼疾",
+        "君有疾在腠理",
+        "疾风知劲草",
+        "老弱病疾"
+      ],
+      "answerIndex": 2,
+      "sourceRefs": [
+        "王力《古汉语常用字字典》"
+      ],
+      "version": "vocab-set-ab7ea2a36ba88018",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "請解釋「顺风而呼，声非加疾 也，而闻者彰 。假」中「疾」的意思，並說明語境依據。",
+        "回到「顺风而呼，声非加疾 也，而闻者彰 。假」：若換成現代常用義是否通順？請說出「疾」在此處的含義及理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p1:v07",
+      "word": "绝",
+      "sourceSentence": "假舟楫者，非能水 也，而绝 江河。",
+      "meaning": "横渡",
+      "explanation": "此处“绝”指横渡河流。",
+      "type": "contextual-choice",
+      "difficulty": 2,
+      "question": "“而绝江河”中“绝”的意思是",
+      "options": [
+        "断绝",
+        "极，最",
+        "横渡",
+        "穷尽"
+      ],
+      "answerIndex": 2,
+      "sourceRefs": [
+        "《汉语大词典》"
+      ],
+      "version": "vocab-set-ab7ea2a36ba88018",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "請解釋「假舟楫者，非能水 也，而绝 江河。」中「绝」的意思，並說明語境依據。",
+        "回到「假舟楫者，非能水 也，而绝 江河。」：若換成現代常用義是否通順？請說出「绝」在此處的含義及理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p1:v08",
+      "word": "生",
+      "sourceSentence": "君子生非异 也，善假于物 也。 ",
+      "meaning": "天性",
+      "explanation": "“生”通“性”，指人的天性。",
+      "type": "substitution",
+      "difficulty": 2,
+      "question": "“君子生非异也”中“生”字可以替换为",
+      "options": [
+        "生命",
+        "天性",
+        "生活",
+        "生长"
+      ],
+      "answerIndex": 1,
+      "sourceRefs": [
+        "王力《古汉语常用字字典》"
+      ],
+      "version": "vocab-set-ab7ea2a36ba88018",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "請解釋「君子生非异 也，善假于物 也。 」中「生」的意思，並說明語境依據。",
+        "回到「君子生非异 也，善假于物 也。 」：若換成現代常用義是否通順？請說出「生」在此處的含義及理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p1:v09",
+      "word": "焉",
+      "sourceSentence": "积土成山，风雨兴焉 ；积水成渊，蛟龙生焉；",
+      "meaning": "于此，从这里",
+      "explanation": "文中的“焉”为兼词，相当于“于此”。B项“圣心备焉”中的“焉”是语气词。",
+      "type": "usage",
+      "difficulty": 3,
+      "question": "下列各句中“焉”的用法与“风雨兴焉”中的“焉”相同的一项是",
+      "options": [
+        "复驾言兮焉求",
+        "圣心备焉",
+        "且焉置土石",
+        "寒暑易节，始一反焉"
+      ],
+      "answerIndex": 1,
+      "sourceRefs": [
+        "《古汉语常用字字典》"
+      ],
+      "version": "vocab-set-ab7ea2a36ba88018",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "請解釋「积土成山，风雨兴焉 ；积水成渊，蛟龙生焉；」中「焉」的意思，並說明語境依據。",
+        "回到「积土成山，风雨兴焉 ；积水成渊，蛟龙生焉；」：若換成現代常用義是否通順？請說出「焉」在此處的含義及理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p1:v10",
+      "word": "爪牙",
+      "sourceSentence": "蚓无爪牙之利，筋骨之强，上食埃土 ，",
+      "meaning": "爪子和牙齿",
+      "explanation": "古义指野兽的爪子和牙齿，今义多指坏人的党羽。",
+      "type": "gu-jin",
+      "difficulty": 1,
+      "question": "文中“爪牙”的古义是",
+      "options": [
+        "帮凶",
+        "武器",
+        "爪子和牙齿",
+        "得力助手"
+      ],
+      "answerIndex": 2,
+      "sourceRefs": [
+        "《汉语大词典》"
+      ],
+      "version": "vocab-set-ab7ea2a36ba88018",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "請解釋「蚓无爪牙之利，筋骨之强，上食埃土 ，」中「爪牙」的意思，並說明語境依據。",
+        "回到「蚓无爪牙之利，筋骨之强，上食埃土 ，」：若換成現代常用義是否通順？請說出「爪牙」在此處的含義及理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p1:v11",
+      "word": "躁",
+      "sourceSentence": "非蛇鳝之穴无可寄托者，用心躁 也。 《",
+      "meaning": "浮躁，不专心",
+      "explanation": "“躁”在这里与前文“用心一也”相对，指不专心。",
+      "type": "interpretation",
+      "difficulty": 2,
+      "question": "“用心躁也”中“躁”字强调了蟹的什么特点",
+      "options": [
+        "动作敏捷",
+        "心思杂乱，不专一",
+        "脾气暴躁",
+        "身体虚弱"
+      ],
+      "answerIndex": 1,
+      "sourceRefs": [
+        "《汉语大词典》"
+      ],
+      "version": "vocab-set-ab7ea2a36ba88018",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "請解釋「非蛇鳝之穴无可寄托者，用心躁 也。 《」中「躁」的意思，並說明語境依據。",
+        "回到「非蛇鳝之穴无可寄托者，用心躁 也。 《」：若換成現代常用義是否通順？請說出「躁」在此處的含義及理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p1:v12",
+      "word": "锲",
+      "sourceSentence": " 而舍之，朽木不折；锲而不舍，金石可镂 。",
+      "meaning": "刻",
+      "explanation": "“锲”意为刻。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "“锲而舍之”中“锲”的意思是",
+      "options": [
+        "坚持",
+        "刻",
+        "放弃",
+        "雕琢"
+      ],
+      "answerIndex": 1,
+      "sourceRefs": [
+        "王力《古汉语常用字字典》"
+      ],
+      "version": "vocab-set-ab7ea2a36ba88018",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "請解釋「 而舍之，朽木不折；锲而不舍，金石可镂 。」中「锲」的意思，並說明語境依據。",
+        "回到「 而舍之，朽木不折；锲而不舍，金石可镂 。」：若換成現代常用義是否通順？請說出「锲」在此處的含義及理由。"
+      ]
+    }
+  ],
+  "legacy": {
+    "lessonId": "lesson-1711-p1",
+    "title": "劝学",
+    "mode": "classical",
+    "legacyTracks": [
+      "firstRead",
+      "vocabulary",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "firstRead",
+        "無注疏初讀",
+        "",
+        25
+      ],
+      [
+        "vocabulary",
+        "詞級疏通",
+        "",
+        30
+      ],
+      [
+        "structure",
+        "考辨與章法",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "本篇有意思",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "遷移與追問",
+        "",
+        15
+      ]
+    ],
+    "formal": [],
+    "formative": [
+      {
+        "lessonId": "lesson-1711-p1",
+        "competencyTag": "first_read_process",
+        "itemKey": "first-read:resolved",
+        "completionKey": "lesson:lesson-1711-p1#initialReadingResolved",
+        "interactionKey": "initialReadingResolved",
+        "resourceKey": "lesson:lesson-1711-p1",
+        "sourceKind": "classical_first_read",
+        "answerAuthority": "process_evidence",
+        "scoringRole": "none",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p1",
+        "competencyTag": "first_read_process",
+        "itemKey": "first-read:submitted",
+        "completionKey": "lesson:lesson-1711-p1#initialReadingSubmitted",
+        "interactionKey": "initialReadingSubmitted",
+        "resourceKey": "lesson:lesson-1711-p1",
+        "sourceKind": "classical_first_read",
+        "answerAuthority": "process_evidence",
+        "scoringRole": "none",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [
+      "lesson-1711-p1:v01",
+      "lesson-1711-p1:v02",
+      "lesson-1711-p1:v03",
+      "lesson-1711-p1:v04",
+      "lesson-1711-p1:v05",
+      "lesson-1711-p1:v06",
+      "lesson-1711-p1:v07",
+      "lesson-1711-p1:v08",
+      "lesson-1711-p1:v09",
+      "lesson-1711-p1:v10",
+      "lesson-1711-p1:v11",
+      "lesson-1711-p1:v12"
+    ],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "first-read:resolved",
+        "completionKey": "lesson:lesson-1711-p1#initialReadingResolved",
+        "source": "classical_first_read",
+        "dialogueDomain": "first_read_process",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "preserved-source; dialogue-bridge-not-implemented"
+      },
+      {
+        "requirementId": "first-read:submitted",
+        "completionKey": "lesson:lesson-1711-p1#initialReadingSubmitted",
+        "source": "classical_first_read",
+        "dialogueDomain": "first_read_process",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "preserved-source; dialogue-bridge-not-implemented"
+      }
+    ],
+    "compoundRequirements": [
+      {
+        "id": "unannotated-first-read",
+        "rule": "原初讀提交、至少一個疑點且全部解惑；vocabulary/syntax 學案完成才計詞級；comprehension 學案完成才計章法。",
+        "storage": "classical_first_read_sessions/classical_first_read_marks and source study-guide records",
+        "status": "preserved-in-original-flow; new-flow-bridge-not-implemented"
+      }
+    ],
+    "sourceLesson": "data/lessons/lesson-1711-p1.json",
+    "mapping": [
+      {
+        "legacy": "firstRead",
+        "dialogueDomain": "firstRead",
+        "evidenceRule": "保留原無注疏初讀、疑點標記與解惑紀錄；在對話引用原記錄。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "vocabulary",
+        "dialogueDomain": "vocabulary",
+        "evidenceRule": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ]
+  },
+  "exam": {
+    "status": "original-practice-only",
+    "reason": "本試點未核實可引用的北京真題原頁，禁止聲稱為真題或官方評分。"
+  },
+  "curriculumVersion": "yw-dialogue-d5e0b70f7440b5198a2a"
+}

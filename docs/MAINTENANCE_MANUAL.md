@@ -1,5 +1,21 @@
 ## 2026-10-11 — Textbook plates from the current-edition PDF (candidate, not deployed)
 
+## 2026-10-12T04:16:33+00:00 — Conversation pilot candidate; production unchanged
+
+The conversation-led three-lesson redesign is a disabled, unaccepted candidate on
+`codex/yw-dialogue-pilot-20261012`, based on `175f8ae42dc5fd58f1b697a76567e79c954d9f7f`.
+No production migration, student write, paid AI call or deployment occurred. Existing
+accepted self-study capacity did not increase. 56 focused local checks pass; live
+backup/restore, historical completion equivalence, teacher/privacy policy, real AI
+quality/streaming/cost and hard-interruption recovery remain unresolved.
+
+Candidate design/inventory: [dialogue pilot](dialogue/PILOT.md).
+Review and exact blockers: [go/no-go](dialogue/GO-NO-GO.md).
+Central evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/REPORT.md`.
+This entry supersedes earlier dialogue design notes for the current candidate only;
+it does not supersede the accepted release authority or historical evidence below.
+
+
 The "原圖" dialog no longer uses the lesson file's legacy page-image addresses. `site/data/textbook-pages.v1.json` maps each lesson to pages of the current edition's PDF, and `site/assets/textbook-pages.js` builds the only plate address, `https://sun.bdfz.net/files/page/<edition>/<sha12>/<pdf page>.webp?w=240|960|1440` (immutable; it names the edition and the PDF hash).
 
 - Regenerate: `node scripts/resolve_textbook_pages.mjs --catalog <local copy of the SUN catalog release>`; `--check` compares only. Offline and deterministic. A legacy page resolves only through its own page-map row or a `legacy_also` entry; no offset and no neighbouring page. The file records the catalog release it was resolved from; when sun.bdfz.net serves another release, regenerate, rerun the tests and release again.
