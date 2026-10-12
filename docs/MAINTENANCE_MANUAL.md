@@ -1,4 +1,8 @@
-## Current dialogue candidate — 2026-10-12T07:56:32Z
+## Current dialogue candidate — 2026-10-12T08:47:07Z
+
+Five original AI formal interactions now share the dialogue budget and commit source assessment, visible reply and usage atomically. Original results and unknown-attempt readback fences are preserved. Feature remains disabled; no new production capacity, migration or paid call. Exact checks, remaining frontend/teaching/restore/release work and the active goal are in [the current candidate contract](dialogue/PILOT.md). Earlier candidate entries below are historical.
+
+## Historical dialogue candidate — 2026-10-12T07:56:32Z
 
 Serial owner codex-01a12ee3. Candidate historical bridging now accepts the original evaluator's passed outcome, preserves non-scoring self-reports and original course completion, retains versioned first-read marks/tombstones, and reads owner-scoped browser/shared history on demand. Append-only correction notes preserve original turns and assessments, with owner isolation, idempotency and export. New dialogue is optional for an already-completed original course. No grade changes or cross-student grants.
 
@@ -7,7 +11,7 @@ Serial owner codex-01a12ee3. Candidate historical bridging now accepts the origi
 
 Source vocabulary type, options, answer and difficulty are retained in dialogue variants, including the pronunciation of 暴. Two dictionary original pages are visually verified; two Beijing examination newspaper question references are text-verified and explicitly distinguished from original papers/official marking. Four textbook/dictionary-grounded language examples are teaching references only, awaiting calibration and not new mastery gates. Source-reference rendering passed a synthetic browser check with no console errors. The dialogue UI now reuses the original first-read source/controller: unpunctuated text,3 marks,12-character summary, exact version/offset checks, annotated-read acknowledgement and original-guess-preserving correction. Owner-fenced transport does not delete local legacy records or automatically reconcile. Ambiguous submit recovers through one same-owner source read. Unresolved original marks block final readiness; vocabulary precedes later discussion. Original controller checks pass30 lessons/102 paragraphs; browser confirms save/unlock/reload/correction/acknowledgement with synthetic data. Full formal/guide evaluator bridge remains unimplemented.
 
-## Current dialogue candidate — 2026-10-12T06:47:49+00:00
+## Historical dialogue candidate — 2026-10-12T06:47:49+00:00
 
 Owner codex-01a12ea0; change `20261012-apis-yw-stream`. Local true-stream/persistence/budget and owner-only My admission are implemented; permanent retention is user-approved. Full-history evidence references and session-stable randomized vocabulary order now pass focused checks and a200-turn synthetic browser readback. Feature remains disabled. Production still serves source `175f8ae42dc5fd58f1b697a76567e79c954d9f7f`; no migration or paid provider request occurred. Accepted self-study capacity has not increased.
 

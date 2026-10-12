@@ -1,3 +1,7 @@
+## Current migration set — 2026-10-12T08:47:07Z
+
+Apply0010–0013 only after the existing verified backup/isolated restore and release gates. 0013 adds nullable `source_request_json` to the two new dialogue turn/draft tables, preserving exact original-task fields even when budget blocks evaluation. It does not modify a legacy learning table. The local preservation fixture compares every pre0010 schema, seeded row, relationship and sequence after all four migrations. No remote migration has occurred; live record comparison/restore remain unverified. Rollback preserves all four migrations and every forward record.
+
 ## Current candidate update — 2026-10-12T06:21:48+00:00
 
 The additive set is now 0010, 0011 (durable stream chunks and usage/timing) and 0012 (money reservations and policy snapshot). Apply all three only after the existing backup/restore, row-level reconciliation and exact release gates. The synthetic preservation test compares every pre-0010 table schema, every seeded row/relationship and SQLite sequence after the whole migration set. No live migration has occurred.

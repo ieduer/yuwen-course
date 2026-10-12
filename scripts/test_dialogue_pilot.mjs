@@ -8,7 +8,9 @@ import {handleDialogue,reconcileAbandonedCalls,callDialogueModel} from '../site/
 import {replyPrefix,consumeGatewayStream} from '../site/dialogue-stream.js';
 import {readDialogueEvents} from '../site/assets/dialogue-events.js';
 import {dialogueBudget,reconciledCost} from '../site/dialogue-budget.js';
-import {handleDialogueFirstRead} from '../site/_worker.js';
+import worker,{handleDialogueFirstRead,handleDialogueFormal} from '../site/_worker.js';
+import {prepareFormalInput} from '../site/dialogue-formal.js';
+import {loadPendingLearningSubmission,assertLearningSubmissionAllowed} from '../site/learning-evidence-source.js';
 const curriculum=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1717-p2.json'));
 const classical=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1711-p1.json'));
 const student={id:1,ucUserId:700001};
@@ -457,4 +459,139 @@ test('classical dialogue reuses exact source first-reading handlers and gates an
   assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM classical_first_read_marks WHERE student_id=2').get().n,0);
   const evaluations=f.sql.prepare('SELECT correctness,eligibility_status,normalized_value FROM learning_evaluations').all();assert(evaluations.every(e=>e.eligibility_status==='non_scoring'&&e.normalized_value===null));assert.equal(modelCalls,0);
  }finally{f.close();}
+});
+
+const poem=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1498.json'));
+const sourceInput={
+ contextWords:{words:'澄澈、流轉、追問'},
+ authorQuestion:{answer:'「江月年年望相似」與「人生代代無窮已」的相似，是否讓個人離愁更顯短暫？'},
+ revision:{original:'江月年年望相似',action:'改',revised:'江月年年都相同',reason:'「望」保留觀照的距離，相似亦容許差別；改句把不確定的凝視變為直接斷言。'},
+ structure:{reason:'前段「春江潮水連海平」從廣闊景象展開；後段「不知乘月幾人歸」收束到游子，將天地時間與離人相聯。'},
+ wordCreation:{word:'徘徊',creation:'他徘徊在江邊。月色移過石階。那封未寄出的信仍留在手中。'},
+};
+const formalBody=(kind='structure',revision=0,mutationId='synthetic-formal-00001')=>{
+ const objective=poem.objectives.find(o=>o.domain==='legacy'&&o.legacy.questionKind===kind);
+ const formal={objectiveId:objective.id,input:sourceInput[kind]};
+ return {formal,content:prepareFormalInput(poem,formal).content,revision,mutationId};
+};
+const formalResult=(score=83)=>({value:{reply:'我把江月的長久與離人的等待放在一起。你會如何理解結尾的歸途？',score,verdict:'有具體文本依據',strength:'能連結首尾',gap:'仍可細辨情緒轉折',nextQuestion:'結尾的落月改變了甚麼？'},model:'gemini-test',modelVersion:'synthetic-version',usage:{promptTokenCount:100,totalTokenCount:500}});
+const formalOptions=(f,callModel)=>({callModel,formalAction:(formal,id,evaluate,commit)=>handleDialogueFormal(req(null,poem.lessonId),f.env,student,formal,id,evaluate,commit)});
+
+test('five original formal rubrics use one budgeted call and atomically retain source answers, original scores and dialogue',async()=>{
+ for(const kind of Object.keys(sourceInput)){
+  const f=fixture();f.env.YW_DURABLE_EVALUATION_ENABLED='true';
+  try{
+   let calls=0,prompt;const submit=formalBody(kind),options=formalOptions(f,async(_e,p)=>{calls++;prompt=p;return formalResult();});
+   const response=await handleDialogue(req(submit,poem.lessonId),f.env,student,null,options),data=await response.json();
+   assert.equal(response.status,200);assert.equal(calls,1,kind);assert.equal(data.turns.length,2,JSON.stringify(data));
+   assert(prompt.includes('互動類型：'+kind));assert(prompt.includes('第一個欄位必須為 reply'));
+   assert.equal(f.sql.prepare('SELECT raw_value,correctness FROM learning_evaluations').get().raw_value,83);
+   assert.equal(f.sql.prepare('SELECT correctness FROM learning_evaluations').get().correctness,'passed');
+   assert.deepEqual(JSON.parse(f.sql.prepare('SELECT submitted_payload_json FROM learning_submission_records').get().submitted_payload_json),sourceInput[kind]);
+   const source=f.sql.prepare('SELECT * FROM learning_interactions').get();assert(source.client_mutation_id.startsWith('yw-dialogue:'));
+   const outbox=JSON.parse(f.sql.prepare('SELECT envelope_json FROM evidence_outbox').get().envelope_json);assert.equal(outbox.sourceEventId,source.source_event_id);assert.equal(outbox.rawValue,83);
+   const c=f.sql.prepare('SELECT * FROM dialogue_calls').get();assert.equal(c.state,'finished');assert.equal(c.accounted_micros,5);
+   assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluation_jobs').get().n,0);
+   assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluator_calls').get().n,0);
+   const duplicate=await handleDialogue(req(submit,poem.lessonId),f.env,student,null,options);assert.equal(duplicate.status,200);assert.equal(calls,1);
+   const retry=await handleDialogue(req(formalBody(kind,1,'synthetic-formal-00002'),poem.lessonId),f.env,student,null,options);assert.equal(retry.status,409);assert.equal(calls,1);
+  }finally{f.close();}
+ }
+});
+test('formal failed score keeps original needs_revision and may only receive a new explicit answer',async()=>{
+ const f=fixture();try{
+  let calls=0;const options=formalOptions(f,async()=>{calls++;return formalResult(42);});
+  const response=await handleDialogue(req(formalBody(),poem.lessonId),f.env,student,null,options);assert.equal(response.status,200);
+  const evaluation=f.sql.prepare('SELECT * FROM learning_evaluations').get();assert.equal(evaluation.raw_value,42);assert.equal(evaluation.correctness,'needs_revision');assert.equal(evaluation.eligibility_status,'ineligible');
+  const updated=formalBody('structure',1,'synthetic-formal-00002');updated.formal.input={reason:sourceInput.structure.reason+' 江月照見的是不同世代的離人，時間的循環並未消除個體的等待。'};updated.content=prepareFormalInput(poem,updated.formal).content;
+  await handleDialogue(req(updated,poem.lessonId),f.env,student,null,options);
+  assert.equal(calls,2);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,2);
+ }finally{f.close();}
+});
+test('unknown formal result keeps full reserved cost and is blocked from every legacy retry path',async()=>{
+ const f=fixture();try{
+  let calls=0;await handleDialogue(req(formalBody(),poem.lessonId),f.env,student,null,formalOptions(f,async()=>{calls++;throw Error('uncertain');}));
+  const pending=f.sql.prepare('SELECT * FROM learning_pending_submissions').get();assert(pending);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluation_jobs').get().n,0);
+  assert.equal(f.sql.prepare('SELECT state FROM dialogue_calls').get().state,'review');assert.equal(f.sql.prepare('SELECT accounted_micros FROM dialogue_calls').get().accounted_micros,null);
+  await assert.rejects(loadPendingLearningSubmission({env:f.env,student,clientMutationId:pending.client_mutation_id}),{code:'dialogue_readback_only'});
+  await assert.rejects(assertLearningSubmissionAllowed({request:req(),env:f.env,student,lesson:{id:poem.lessonId},interactionKey:'structure',payload:{reason:sourceInput.structure.reason,clientMutationId:pending.client_mutation_id}}),{code:'dialogue_readback_only'});
+  const publicRequest=new Request('https://yw.bdfz.net/api/interaction-check',{method:'POST',headers:{'content-type':'application/json',origin:'https://yw.bdfz.net'},body:JSON.stringify({clientMutationId:pending.client_mutation_id})});
+  const rejected=await worker.fetch(publicRequest,f.env,{});assert.equal(rejected.status,409);assert.equal((await rejected.json()).code,'dialogue_readback_only');assert.equal(calls,1);
+  const replay=await handleDialogue(req(formalBody('structure',1,'synthetic-formal-new-id'),poem.lessonId),f.env,student,null,formalOptions(f,()=>{throw Error('must not re-evaluate');}));assert.equal(replay.status,409);assert.equal((await replay.json()).code,'source_result_unconfirmed');
+ }finally{f.close();}
+});
+test('formal late replies cannot write a grade after same-attempt reconciliation',async()=>{
+ const f=fixture();try{
+  await handleDialogue(req(formalBody(),poem.lessonId),f.env,student,null,formalOptions(f,async()=>{
+   f.sql.exec("UPDATE dialogue_calls SET created_at='2000-01-01T00:00:00Z'");await reconcileAbandonedCalls(f.db);return formalResult();
+  }));
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_turns').get().n,1);
+  assert.equal(f.sql.prepare('SELECT state FROM dialogue_calls').get().state,'review');
+ }finally{f.close();}
+});
+test('a source-ledger write failure rolls back final dialogue, cost reconciliation and grade together',async()=>{
+ const f=fixture();try{
+  f.sql.exec("CREATE TRIGGER synthetic_fail BEFORE INSERT ON evidence_outbox BEGIN SELECT RAISE(ABORT,'synthetic write failure'); END;");
+  await handleDialogue(req(formalBody(),poem.lessonId),f.env,student,null,formalOptions(f,async()=>formalResult()));
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_turns').get().n,1);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,1);
+  assert.equal(f.sql.prepare('SELECT state FROM dialogue_calls').get().state,'review');assert.equal(f.sql.prepare('SELECT accounted_micros FROM dialogue_calls').get().accounted_micros,null);
+ }finally{f.close();}
+});
+test('budget-blocked formal draft retains exact original fields and cannot become an ordinary dialogue by losing its metadata',async()=>{
+ const f=fixture();delete f.env.YW_DIALOGUE_BUDGET_JSON;
+ try{
+  const r=await handleDialogue(req(formalBody(),poem.lessonId),f.env,student,null,formalOptions(f,()=>{throw Error('forbidden');}));assert.equal(r.status,503);
+  const data=await(await handleDialogue(req(null,poem.lessonId),f.env,student)).json();assert.deepEqual(data.draft.formal.input,sourceInput.structure);
+  f.env.YW_DIALOGUE_BUDGET_JSON=syntheticBudget;const {formal,...ordinary}=formalBody();
+  const changed=await handleDialogue(req(ordinary,poem.lessonId),f.env,student,null,{callModel:()=>{throw Error('must not lose original fields');}});assert.equal(changed.status,409);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,0);
+ }finally{f.close();}
+});
+test('formal request cannot invent objectives or claim source input different from visible dialogue',async()=>{
+ const f=fixture();try{
+  const b=formalBody();const options=formalOptions(f,()=>{throw Error('forbidden');});
+  assert.equal((await handleDialogue(req(b),f.env,student,null,options)).status,400);
+  assert.equal((await handleDialogue(req({...b,content:'other text'},poem.lessonId),f.env,student,null,options)).status,400);
+  assert.equal((await handleDialogue(req({...b,formal:{...b.formal,input:{...b.formal.input,score:100}}},poem.lessonId),f.env,student,null,options)).status,400);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,0);
+ }finally{f.close();}
+});
+test('formal assessment shares the global money cap with ordinary dialogue calls',async()=>{
+ const f=fixture();f.env.YW_DIALOGUE_BUDGET_JSON=JSON.stringify({...JSON.parse(syntheticBudget),globalDailyMicros:1100});
+ try{
+  let calls=0;await handleDialogue(req(body()),f.env,student,null,{callModel:async()=>{calls++;throw Error('unknown');}});
+  const response=await handleDialogue(req(formalBody(),poem.lessonId),f.env,student,null,formalOptions(f,()=>{calls++;throw Error('over budget');}));
+  assert.equal(response.status,429);assert.equal(calls,1);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_pending_submissions').get().n,0);
+  const data=await(await handleDialogue(req(null,poem.lessonId),f.env,student)).json();assert.deepEqual(data.draft.formal.input,sourceInput.structure);
+ }finally{f.close();}
+});
+test('simultaneous formal duplicates cannot duplicate source events or paid attempts',async()=>{
+ const f=fixture();try{
+  let calls=0;const options=formalOptions(f,async()=>{calls++;return formalResult();});
+  const responses=await Promise.all(Array.from({length:6},()=>handleDialogue(req(formalBody(),poem.lessonId),f.env,student,null,options)));
+  assert.equal(calls,1);assert(responses.every(r=>[200,409].includes(r.status)));
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,1);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM evidence_outbox').get().n,1);
+ }finally{f.close();}
+});
+test('stored formal version drift stops before source capture and paid evaluation',async()=>{
+ const f=fixture(),fetchAsset=f.env.ASSETS.fetch;
+ f.env.ASSETS.fetch=async request=>{
+  const response=await fetchAsset(request);if(!new URL(request.url).pathname.includes('/dialogue-curriculum/'))return response;
+  const c=await response.json();for(const o of c.objectives.filter(o=>o.domain==='legacy'))o.legacy.resourceVersion='different';return Response.json(c);
+ };
+ try{
+  let calls=0;await handleDialogue(req(formalBody(),poem.lessonId),f.env,student,null,formalOptions(f,async()=>{calls++;return formalResult();}));
+  assert.equal(calls,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_pending_submissions').get().n,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
+ }finally{f.close();}
+});
+test('original scorer rejects incomplete or non-integer formal assessments without inventing a grade',async()=>{
+ for(const value of [{...formalResult().value,score:60.5},{...formalResult().value,gap:''}]){
+  const f=fixture();try{
+   await handleDialogue(req(formalBody(),poem.lessonId),f.env,student,null,formalOptions(f,async()=>({...formalResult(),value})));
+   assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,1);assert.equal(f.sql.prepare('SELECT state FROM dialogue_calls').get().state,'review');
+  }finally{f.close();}
+ }
 });

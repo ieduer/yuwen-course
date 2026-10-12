@@ -15,6 +15,7 @@ const STATE_ROOT = path.join(SERVER_ROOT, ".wrangler-state");
 for (const file of [
   "_worker.js",
   "dialogue-source.js",
+  "dialogue-formal.js",
   "dialogue-legacy.js",
   "dialogue-corrections.js",
   "dialogue-history.js",

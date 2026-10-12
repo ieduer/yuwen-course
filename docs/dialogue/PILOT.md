@@ -1,4 +1,12 @@
-## Current dialogue candidate — 2026-10-12T07:56:32Z
+## Current dialogue candidate — 2026-10-12T08:47:07Z
+
+Serial owner codex-01a12f36; active goal is the complete original twelve-section redesign. The five original AI formal interactions now have a backend bridge through the original rubric, strict normalizer, raw submission, evaluation and outbox. Every bridge attempt first shares dialogue's atomic dollar/count/concurrency reservation and single APIS stream; source result, visible teacher reply and cost reconciliation commit together. Original accepted results and earlier versions are preserved. Unknown attempts stay readback-only, including from legacy pending/resume; a new mutation cannot re-evaluate the identical saved answer. The original legacy grader remains unchanged for its own submissions.
+
+69 dialogue plus121 source/recovery/replay checks pass on Node22.21.1 and24.18.0; original local Reading API74 passes; formal staging/artifact passes1251 files, aggregate `c7fba97d593327d11315a01857b7adfa33b9a550d478def6a4adbf3032b248ab`. Additive0013 preserves exact formal fields in saved turns and budget-blocked drafts; all0010–0013 remain unapplied remotely. No paid provider call or production write. Feature remains off; accepted student-usable capacity has not increased.
+
+Backend integration is not the completed student experience. Next: collect exact original answer parts from student dialogue, expose their origin for confirmation without a parallel module menu, and connect original vocabulary selectedIndex and non-scoring evaluation. These three pilots have no active study guides; do not invent formal tasks for the two lessons with empty formal arrays. Grammar/semantic 尚友 calibration, actual source/account/phone/stream/cost acceptance, live backup and isolated row/relationship/sequence restore, APIS HTTP fan-out and suen review remain required. Previous source, first-read, correction and historical preservation evidence remains valid within its documented scope. Central report: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12f36/REPORT.md`.
+
+## Historical dialogue candidate — 2026-10-12T07:56:32Z
 
 Serial owner codex-01a12ee3. Candidate historical bridging now accepts the original evaluator's passed outcome, preserves non-scoring self-reports and original course completion, retains versioned first-read marks/tombstones, and reads owner-scoped browser/shared history on demand. Append-only correction notes preserve original turns and assessments, with owner isolation, idempotency and export. New dialogue is optional for an already-completed original course. No grade changes or cross-student grants.
 
@@ -7,7 +15,7 @@ Serial owner codex-01a12ee3. Candidate historical bridging now accepts the origi
 
 Source vocabulary type, options, answer and difficulty are retained in dialogue variants, including the pronunciation of 暴. Two dictionary original pages are visually verified; two Beijing examination newspaper question references are text-verified and explicitly distinguished from original papers/official marking. Four textbook/dictionary-grounded language examples are teaching references only, awaiting calibration and not new mastery gates. Source-reference rendering passed a synthetic browser check with no console errors. The dialogue UI now reuses the original first-read source/controller: unpunctuated text,3 marks,12-character summary, exact version/offset checks, annotated-read acknowledgement and original-guess-preserving correction. Owner-fenced transport does not delete local legacy records or automatically reconcile. Ambiguous submit recovers through one same-owner source read. Unresolved original marks block final readiness; vocabulary precedes later discussion. Original controller checks pass30 lessons/102 paragraphs; browser confirms save/unlock/reload/correction/acknowledgement with synthetic data. Full formal/guide evaluator bridge remains unimplemented.
 
-## Current candidate — 2026-10-12T06:47:49+00:00
+## Historical candidate — 2026-10-12T06:47:49+00:00
 
 Serial owner: codex-01a12ea0; change `20261012-apis-yw-stream`. Production remains unchanged. All authenticated My accounts are authorized to use the three lessons and view only their own records. No cross-student teacher grant was supplied. Full visible conversations, partial responses, questions, attempts and original source facts are retained permanently; no purge job or deletion endpoint is introduced.
 

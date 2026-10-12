@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1250,
-  "totalBytes": 164992636,
-  "aggregateSha256": "dc870614f9e1143bda90fca1c2052dab13cea7f900cb20aef45cebe6555ec2c0",
+  "fileCount": 1251,
+  "totalBytes": 165004135,
+  "aggregateSha256": "c7fba97d593327d11315a01857b7adfa33b9a550d478def6a4adbf3032b248ab",
   "files": [
     {
       "path": "_headers",
@@ -17,13 +17,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 147512,
-      "sha256": "ced0cd10fda16e67693c695ba45eb1dbd44757fceb2578e3d8c43b2351ca8f23"
+      "bytes": 149237,
+      "sha256": "6bfee1733acaa0cac5d85b6b5effe720a5535c2a1e5436d47bf7551bbb6bfe80"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "a228386554a2b2564c708dda7a5f40e6e7d433fe55407e5b98489f0eb61d1bb1"
+      "sha256": "731cd001a47f08c0a91ceb194cfaf7daac6a9d142d8e64a03a1c5219253f53f3"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -6091,6 +6091,11 @@
       "sha256": "2f733d53e4c0f34d4584f110f4879565025d00f19adb924f4fb0e3a1307a3d11"
     },
     {
+      "path": "dialogue-formal.js",
+      "bytes": 2459,
+      "sha256": "8565c95eb1d6f5903bd975ce5616cd7745db59487ba2618a2ed64dea3e68b23b"
+    },
+    {
       "path": "dialogue-history.js",
       "bytes": 1063,
       "sha256": "5b30b0e0337fe499c8d4324e2482a1185f7d0f8c6a87ee3f6b3d1cccd8fcae76"
@@ -6107,8 +6112,8 @@
     },
     {
       "path": "dialogue-source.js",
-      "bytes": 29445,
-      "sha256": "e2a43cee958a764a73e50024c5d69c66e6b52ff5225be8c353860925bf45b15e"
+      "bytes": 34586,
+      "sha256": "eb790cb94ae178d38f7b7ac9c823271fa3cf77324d6e36b7851ec02e8fc39818"
     },
     {
       "path": "dialogue-stream.js",
@@ -6157,8 +6162,8 @@
     },
     {
       "path": "learning-evidence-source.js",
-      "bytes": 94091,
-      "sha256": "bb85a88348d829845f85dfca3e963934216804c65ab66a57dcfe9d9882106167"
+      "bytes": 96265,
+      "sha256": "b1fccceda6236c168f49cdc5e13d38f0f80845ddd16a9a89d4a4f7127581d79a"
     },
     {
       "path": "learning-recorder-source.js",

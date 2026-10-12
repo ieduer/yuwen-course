@@ -1,4 +1,5 @@
 import { handleDialogue } from './dialogue-source.js';
+import { DIALOGUE_SOURCE_PREFIX, isDialogueSourceMutation } from './dialogue-formal.js';
 import { readSharedHistory } from './dialogue-history.js';
 import { sourceEventStatement, evaluationEventBase, evaluationEventId, latestSourceEvent } from './learning-evaluation-events.js';
 import { readRecorderSource } from './learning-recorder-source.js';
@@ -100,6 +101,7 @@ export default {
       return handleDialogue(request, env, student, ctx, {
         readSharedHistory:()=>readSharedHistory(userCenterSessionCookieHeader(request)),
         firstReadAction:(operation,payload)=>handleDialogueFirstRead(request,env,student,ctx,operation,payload),
+        formalAction:(formal,turnId,evaluate,commit)=>handleDialogueFormal(request,env,student,formal,turnId,evaluate,commit),
       });
     }
 
@@ -1358,8 +1360,11 @@ export function formalInteractionHistoryPrompt(turns, responseRole = "文本細�
   ].join("\n");
 }
 
-async function handleInteractionCheck(request, env, capturedPayload = null, authenticatedStudent = null) {
+async function handleInteractionCheck(request, env, capturedPayload = null, authenticatedStudent = null, dialogue = null) {
   const payload = capturedPayload || await request.json().catch(() => ({}));
+  if (!dialogue && isDialogueSourceMutation(payload.clientMutationId)) {
+    return json({code:'dialogue_readback_only',error:'新版對話的原評價請從對話紀錄讀回，不能由舊入口重送。'},{status:409});
+  }
   const lessonId = cleanText(payload.lessonId, 80);
   if (!/^lesson-[\w-]{1,60}$/.test(lessonId)) {
     return json({ error: "valid lesson id required" }, { status: 400 });
@@ -1452,6 +1457,7 @@ async function handleInteractionCheck(request, env, capturedPayload = null, auth
       lesson,
       interactionKey: interaction,
       payload: sourcePayload,
+      ...(dialogue ? {dialogueTurnId:dialogue.turnId,expectedResourceKey:dialogue.formal.resourceKey,expectedResourceVersion:dialogue.formal.resourceVersion} : {}),
     });
     if (submissionGuard.pending) return pendingEvaluationResponse(submissionGuard.pending);
     if (submissionGuard.deduped) {
@@ -1489,14 +1495,20 @@ async function handleInteractionCheck(request, env, capturedPayload = null, auth
         })
         : [];
       const prompt = promptFor(history);
-      const raw = await callLearningEvaluator(request, env, submissionGuard.submissionReservation, prompt, {student,lesson,payload:sourcePayload,kind:'interaction'});
+      const raw = dialogue
+        ? await dialogue.evaluate(prompt)
+        : await callLearningEvaluator(request, env, submissionGuard.submissionReservation, prompt, {student,lesson,payload:sourcePayload,kind:'interaction'});
       const parsed = extractJsonObject(raw);
+      if (dialogue && !validDurableAssessment(parsed)) throw new Error('invalid_dialogue_source_assessment');
       if (submissionGuard.submissionReservation.evaluationJob && !validDurableAssessment(parsed)) {
         const error = new Error('invalid AI assessment'); error.code='invalid_ai_assessment';
         throw new EvaluationPending(await deferEvaluationJob(env.READING_DB, submissionGuard.submissionReservation.evaluationJob, error));
       }
       assessment = normalizeInteractionAssessment(parsed, parsed ? "" : raw);
     } catch (error) {
+      // New dialogue owns its attempt and dollars. Never create/defer a legacy
+      // grading job or release this capture into legacy automatic recovery.
+      if (dialogue) throw error;
       if (error instanceof EvaluationPending) return pendingEvaluationResponse(error.job);
       if (error instanceof LearningEvaluatorBudgetExceededError
         || error instanceof LearningEvaluatorBudgetUnavailableError) throw error;
@@ -1508,6 +1520,7 @@ async function handleInteractionCheck(request, env, capturedPayload = null, auth
         return learningEvaluatorUnavailableResponse();
       }
     }
+    if (dialogue) submissionGuard.submissionReservation.dialogueCommitStatements = await dialogue.commit(submissionGuard.submissionReservation, assessment);
     const recorded = await recordLearningInteraction({
       request,
       env,
@@ -1547,6 +1560,7 @@ async function handleInteractionCheck(request, env, capturedPayload = null, auth
     }
     return json({ provider: "apis", assessment, evidence, conversation });
   } catch (error) {
+    if (dialogue) throw error;
     if (error instanceof LearningResourceNotPublishedError) return learningResourceNotPublishedResponse(error);
     if (error instanceof LearningSubmissionRateLimitError) return learningRateLimitResponse(error);
     if (error instanceof LearningEvaluatorBudgetExceededError
@@ -1560,6 +1574,16 @@ async function handleInteractionCheck(request, env, capturedPayload = null, auth
     }
     return json({ error: error.message || "interaction assessment unavailable" }, { status: 502 });
   }
+}
+
+export async function handleDialogueFormal(request, env, student, formal, turnId, evaluate, commit) {
+  return handleInteractionCheck(request, env, {
+    lessonId: formal.lessonId,
+    interaction: formal.interaction,
+    input: formal.input,
+    clientMutationId: `${DIALOGUE_SOURCE_PREFIX}${turnId}`,
+    lessonPhase: 'dialogue',
+  }, student, {formal,turnId,evaluate,commit});
 }
 
 async function authenticatedReadingStudent(request, env) {
@@ -1596,6 +1620,7 @@ async function handlePendingInteractionResume(request, env) {
   if (student?.error) return student.error;
   if (!student) return authenticatedEvaluationRequiredResponse();
   const body = await request.json().catch(() => ({}));
+  if (isDialogueSourceMutation(body.clientMutationId)) return json({code:'dialogue_readback_only',error:'此對話評價只可讀回，不會重送。'},{status:409});
   if(env.YW_DURABLE_EVALUATION_ENABLED==='true') {
     const status=await ownedEvaluationStatus(env,student,{clientMutationId:cleanText(body.clientMutationId,100)});
     if(status) return status.job ? pendingEvaluationResponse(status.job)

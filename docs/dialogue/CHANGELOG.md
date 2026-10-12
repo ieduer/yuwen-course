@@ -1,5 +1,12 @@
 # Dialogue candidate changelog
 
+## 2026-10-12T08:47:07Z — original formal evaluator backend; not released
+
+- Routed five original AI formal interactions through the unchanged source rubric/normalizer/ledger with the dialogue's single-attempt budget and stream.
+- Atomically committed original results, visible reply and cost; fenced late replies, source-write failure, duplicate/changed requests and legacy replay. Exact original answer snapshots and budget-blocked drafts remain exportable.
+- Added0013 without touching historical learning tables. Verified190 focused checks on both pinned Nodes,74 original Reading API checks and the formal artifact. Student answer assembly, non-AI original tasks and all real acceptance gates remain open.
+
+
 ## 2026-10-12T06:47:49+00:00 — streamed, owner-only candidate; not released
 
 - Implemented approved My own-record access, permanent visible dialogue retention, Gemini-only streaming and conservative US$50 per UTC-day reservations. No live settings changed.

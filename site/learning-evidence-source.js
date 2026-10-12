@@ -1,4 +1,5 @@
 import { loadEvaluationJob, JOB_POLICY, evaluationCallLimit, evaluationProgress, latestUsableEvaluationReply } from "./durable-evaluation-jobs.js";
+import { DIALOGUE_SOURCE_PREFIX, isDialogueSourceMutation } from './dialogue-formal.js';
 import { sourceEventStatement, evaluationEventId, evaluationEventBase,
   latestSourceEvent, replyAssessment, sourceEventJob } from './learning-evaluation-events.js';
 import {
@@ -29,6 +30,11 @@ const registryCache = { value: null, expiresAt: 0 };
 const manifestCache = { value: null, expiresAt: 0 };
 const formativeManifestCache = { value: null, expiresAt: 0 };
 const trustedSubmissionReservations = new WeakSet();
+function dialogueReadbackOnly() {
+  const error = new Error('新版對話評價只可讀回原結果，不可從舊入口重送。');
+  error.code = 'dialogue_readback_only';
+  return error;
+}
 const A_PLUS_COMPATIBILITY_KEYS = Object.freeze([
   "schemaVersion",
   "contractVersion",
@@ -708,11 +714,13 @@ export async function listPendingLearningSubmissions({ env, student, lessonId = 
           EXISTS(SELECT 1 FROM learning_evaluation_jobs j WHERE j.source_event_id=learning_pending_submissions.source_event_id) durable
          FROM learning_pending_submissions
         WHERE student_id = ? AND lesson_id = ? AND status IN ('captured', 'retryable')
+          AND client_mutation_id NOT LIKE 'yw-dialogue:%'
         ORDER BY updated_at LIMIT 8`
     : `SELECT client_mutation_id, lesson_id, interaction_key, status, updated_at,
           EXISTS(SELECT 1 FROM learning_evaluation_jobs j WHERE j.source_event_id=learning_pending_submissions.source_event_id) durable
          FROM learning_pending_submissions
         WHERE student_id = ? AND status IN ('captured', 'retryable')
+          AND client_mutation_id NOT LIKE 'yw-dialogue:%'
         ORDER BY updated_at LIMIT 8`;
   const statement = env.READING_DB.prepare(query);
   const result = normalizedLessonId
@@ -734,6 +742,7 @@ export async function loadPendingLearningSubmission({ env, student, clientMutati
   }
   const mutationId = clean(clientMutationId, 100);
   if (!mutationId) throw new Error("client mutation id required");
+  if (isDialogueSourceMutation(mutationId)) throw dialogueReadbackOnly();
   const row = await existingPendingSubmission(env.READING_DB, Number(student.id), mutationId);
   if (!row || row.status === "completed") return null;
   let input;
@@ -1229,9 +1238,27 @@ export async function assertLearningSubmissionAllowed({
   payload = {},
   occurredAt = isoNow(),
   expectedStudyGuideCatalogDigest = "",
+  dialogueTurnId = null,
+  expectedResourceKey = '',
+  expectedResourceVersion = '',
 }) {
   if (!env.READING_DB || !student?.id || !lesson?.id) throw new Error("learning evidence source unavailable");
+  const dialogueMutation = isDialogueSourceMutation(payload.clientMutationId);
+  if (dialogueMutation !== !!dialogueTurnId
+    || (dialogueTurnId && payload.clientMutationId !== `${DIALOGUE_SOURCE_PREFIX}${dialogueTurnId}`)) throw dialogueReadbackOnly();
+  if (dialogueTurnId) {
+    const call = await env.READING_DB.prepare(`SELECT c.turn_id FROM dialogue_calls c
+      JOIN dialogue_sessions s ON s.id=c.session_id
+      WHERE c.turn_id=? AND c.student_id=? AND s.lesson_id=? AND s.inflight=c.turn_id AND c.state='reserved'`)
+      .bind(dialogueTurnId, student.id, lesson.id).first();
+    if (!call) throw dialogueReadbackOnly();
+  }
   const context = await resolveInteractionContext(request, env, student, lesson, interactionKey, payload);
+  if (dialogueTurnId && (context.resourceKey !== expectedResourceKey
+    || context.manifestItem?.resourceVersion !== expectedResourceVersion)) {
+    const error = new Error('原題版本與本次對話保存的版本不同，保留作答待覆核。');
+    error.code = 'dialogue_source_version_changed'; throw error;
+  }
   if (expectedStudyGuideCatalogDigest
     && context.formativeManifest.studyGuideCatalogDigest !== expectedStudyGuideCatalogDigest) {
     const error = new Error("study-guide and formative catalogs are not the same release");
@@ -1243,7 +1270,7 @@ export async function assertLearningSubmissionAllowed({
   if (!clientMutationId) throw new Error("client mutation id required before evaluation");
   let originalPayloadJson = null;
   let capturedOriginal = null;
-  if(env.YW_DURABLE_EVALUATION_ENABLED === 'true') {
+  if(env.YW_DURABLE_EVALUATION_ENABLED === 'true' || dialogueTurnId) {
     const original = Object.fromEntries((context.definition.allowedPayloadKeys || [])
       .filter(key => Object.hasOwn(payload,key)).map(key => [key,payload[key]]));
     originalPayloadJson = JSON.stringify(original);
@@ -1272,6 +1299,9 @@ export async function assertLearningSubmissionAllowed({
     };
   }
   const pending = await existingPendingSubmission(env.READING_DB, student.id, clientMutationId);
+  // A reserved dialogue call has exactly one source capture. A crash or an
+  // uncertain write cannot reclaim its legacy lease and spend again.
+  if (dialogueTurnId && pending) throw dialogueReadbackOnly();
   if (pending) {
     assertPendingSubmissionMatches(pending, {
       sourceEventId: pending.source_event_id,
@@ -1324,7 +1354,8 @@ export async function assertLearningSubmissionAllowed({
   const submissionReservation = {
     // Historical pending rows lack a pinned original snapshot. Explicit resume
     // keeps their accepted legacy path; never enroll them in automatic grading.
-    durableEvaluationEligible: env.YW_DURABLE_EVALUATION_ENABLED === 'true' && (!pending || Boolean(capturedOriginal)),
+    durableEvaluationEligible: !dialogueTurnId && env.YW_DURABLE_EVALUATION_ENABLED === 'true' && (!pending || Boolean(capturedOriginal)),
+    dialogueTurnId,
     sourceEventId: slot.sourceEventId,
     occurredAt,
     leaseStartedAt: slot.leaseStartedAt,
@@ -1378,6 +1409,7 @@ export async function reserveLearningEvaluatorCall({
     throw new LearningEvaluatorBudgetUnavailableError();
   }
   const db = env.READING_DB;
+  if (submissionReservation.dialogueTurnId || isDialogueSourceMutation(submissionReservation.clientMutationId)) throw dialogueReadbackOnly();
   const studentId = Number(submissionReservation.studentId);
   const sourceEventId = clean(submissionReservation.sourceEventId, 100);
   const resourceKey = clean(submissionReservation.resourceKey, 220);
@@ -1581,6 +1613,8 @@ export async function recordLearningInteraction({
       rawPayloadJson: raw.serialized,
     })
     : null;
+  if (isDialogueSourceMutation(clientMutationId)
+    && (!trustedReservation?.dialogueTurnId || !Array.isArray(trustedReservation.dialogueCommitStatements))) throw dialogueReadbackOnly();
   const existing = await existingInteraction(env.READING_DB, student.id, clientMutationId);
   if (existing) {
     assertIdempotentReplayMatches(existing, resourceKey, interactionKey, raw.serialized);
@@ -1669,6 +1703,7 @@ export async function recordLearningInteraction({
   };
 
   const statements = [
+    ...(trustedReservation?.dialogueCommitStatements || []),
     ...(trustedReservation?.evaluationJob ? [env.READING_DB.prepare(
       "INSERT INTO learning_evaluation_commits(source_event_id,lease_epoch,committed_at) VALUES(?,?,?)"
     ).bind(sourceEventId, trustedReservation.evaluationJob.lease_epoch, Date.now())] : []),
