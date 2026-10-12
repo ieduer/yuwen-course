@@ -1,4 +1,12 @@
-## Current dialogue candidate — 2026-10-12T11:07:15.466196+00:00
+## Current source-inventory checkpoint — 2026-10-12T11:42Z
+
+The complete conservative APIS source-reference inventory is now reconciled:116 Workers,42 Pages dispositions,108 aliases/source roots (not108 products), and2,868 unchanged local reference hashes. The existing shared-hub receipt validates. APIS live module SHA81cd964 matches accepted111fa29/version53dbb568 at100%; YW remains the newer textbook release175f8ae/Pagesb6f5ac67. No runtime, data, flag, model call or deployment changed. Exact evidence and finite request ledgers: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12fd6/FANOUT.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12fd6/FANOUT.md).
+
+Real acceptance remains open. Ordinary YW previews intentionally lack production identity/evidence bindings, and Web mutations require the exact YW Origin. APIS exports Durable Objects, so ordinary Version URLs are unavailable; an explicit0% version override would require the existing governed deployment transaction. A narrow owner decision is pending before preparing any new authenticated preview exception. Do not forge Origin, enable ordinary-preview identity, reset provider quotas or infer release acceptance. The24-case budget remains0used; the accepted backup/restore must not be repeated. Prior checks and runtime artifacts remain unchanged.
+
+Earlier checkpoint sections below are historical where superseded by this entry.
+
+## Historical dialogue candidate — 2026-10-12T11:07:15.466196+00:00
 
 Nine source-linked language items now have separate, versioned question instances and evidence: six for 劝学 and three for 春江花月夜. Original vocabulary/questions/grades and completed courses stay unchanged; immutable older curricula do not acquire these items. New language mastery is rejected until semantic calibration and required dictionary-image verification are accepted. Numeric difficulty remains null; proposed demand labels are explicit. Literal copied hints with a wrapper and bare source quotations cannot prove independent explanation. Review outcomes preserve answers and permit other questions without repeated retries. Student next-step text no longer exposes the answer rubric.
 

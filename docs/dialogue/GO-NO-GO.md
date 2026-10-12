@@ -1,6 +1,6 @@
 # YW conversation pilot — one-page review
 
-As of 2026-10-12T11:07:15.466196+00:00. **Recommendation: NO-GO for migration, production enablement or replacing the old workflow.** Proceed with review of the disabled candidate; no approval is being requested for an unfinished release.
+As of 2026-10-12T11:42Z. **Recommendation: NO-GO for migration, production enablement or replacing the old workflow.** Proceed with review of the disabled candidate; no approval is being requested for an unfinished release.
 
 | Review item | Actual evidence / disposition |
 | --- | --- |
@@ -14,7 +14,7 @@ As of 2026-10-12T11:07:15.466196+00:00. **Recommendation: NO-GO for migration, p
 | Teaching/scoring bridge | Original vocab mastery, submitted/unfinished first reading and exact-version formal credit are projected read-only; owner history and original first-read/corrections are integrated. Five AI formal tasks now use the original evaluator; student-quote confirmation invokes them; six original choices and the non-scoring self-report now commit with the visible conversation. New dialogue mastery remains separate from original formal grades |
 | AI quality / 尚友 | Ready-only five-domain model synthesis, chronological student quotes, text references and atomic reload/export implemented and structurally tested. Real semantic calibration and adversarial persona review remain pending |
 | Classical mastery | Source vocabulary, stable variants and session-stable randomized whole-lesson order implemented; nine additional language instances and non-scoring evidence implemented; dictionary images verified for 而/于/何/但; empirical difficulty and real calibration remain unresolved |
-| Streaming / cost | APIS/YW real SSE and hard-crash fencing implemented locally. User-approved US$50/day Gemini policy reserved atomically. Live stream/cost acceptance and shared fan-out release remain pending |
+| Streaming / cost | APIS/YW real SSE and hard-crash fencing implemented locally. User-approved US$50/day Gemini policy reserved atomically. Complete108-alias source-reference inventory is reconciled; live stream/cost acceptance and shared-hub release remain pending |
 | Privacy / teacher use | All authenticated My accounts, own records only; permanent retention approved. Owner export/review request implemented; append-only correction implemented; no cross-student grants/dashboard authorized |
 | Sources / mobile | Eight original dictionary pages visually verified; Beijing newspaper question references text-verified. Original papers/official marking, grammar calibration and physical keyboard/accessibility remain pending |
 | Infrastructure access | Earlier canonical same-account credential readback confirmed Pages/D1 metadata and APIS runtime; refresh only at the relevant boundary; connector still has no account. Verified source backup and complete isolated restore accepted; no production data mutation |
@@ -23,7 +23,7 @@ As of 2026-10-12T11:07:15.466196+00:00. **Recommendation: NO-GO for migration, p
 ## Remaining work and existing review gate
 
 - **Equivalence:** proposed approach keeps each original task's exact rubric, resource/version and scoring role; dialogue may collect its required answer parts across turns, but the existing source evaluator alone produces credit. A verified old completion stays complete; uncertain mappings go to review. The authorized bridge preserves these rules; any new scoring policy would still require approval. No new weights or replacement historical thresholds are proposed.
-- **Shared streaming:** already authorized by suen; code is implemented and tested locally. Finish the existing complete fan-out/release gate and actual stream acceptance. No direct provider path or Claude API is added.
+- **Shared streaming:** already authorized by suen; code is implemented and tested locally. The complete source-reference inventory is reconciled; finish isolated authentication, the existing release gate and actual stream acceptance. No direct provider path or Claude API is added.
 - **Privacy and budgets:** user-approved own-record-only My access, permanent retention and US$50 daily Gemini cap are incorporated. No cross-student teacher grant exists; corrections must preserve originals. Do not infer a teacher role from general My membership.
 - **Access/ownership:** same-account documented read access recovered. Reconcile the staged publisher and recheck release-time live/backup coverage before a governed release; this dated snapshot has verified backup/restore. The connector itself is not repaired.
 

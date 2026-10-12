@@ -1,4 +1,12 @@
-## Current dialogue candidate — 2026-10-12T11:07:15.466196+00:00
+## Current source-inventory checkpoint — 2026-10-12T11:42Z
+
+The complete conservative APIS source-reference inventory is now reconciled:116 Workers,42 Pages dispositions,108 aliases/source roots (not108 products), and2,868 unchanged local reference hashes. The existing shared-hub receipt validates. APIS live module SHA81cd964 matches accepted111fa29/version53dbb568 at100%; YW remains the newer textbook release175f8ae/Pagesb6f5ac67. No runtime, data, flag, model call or deployment changed. Exact evidence and finite request ledgers: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12fd6/FANOUT.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12fd6/FANOUT.md).
+
+Real acceptance remains open. Ordinary YW previews intentionally lack production identity/evidence bindings, and Web mutations require the exact YW Origin. APIS exports Durable Objects, so ordinary Version URLs are unavailable; an explicit0% version override would require the existing governed deployment transaction. A narrow owner decision is pending before preparing any new authenticated preview exception. Do not forge Origin, enable ordinary-preview identity, reset provider quotas or infer release acceptance. The24-case budget remains0used; the accepted backup/restore must not be repeated. Prior checks and runtime artifacts remain unchanged.
+
+Earlier checkpoint sections below are historical where superseded by this entry.
+
+## Historical dialogue candidate — 2026-10-12T11:07:15.466196+00:00
 
 Nine language items, review continuation and anti-copy guards are implemented;99 focused checks per pinned Node and Reading API74 pass. The24-case real-model calibration is prepared but unexecuted. Student-usable production capacity remains unchanged because source/semantic, APIS fanout and real acceptance gates remain open. See [current candidate](docs/dialogue/PILOT.md) and its CALIBRATION reference. The serial goal remains active. Source review now accepts six existing XC images for 于/何/但; semantic calibration remains pending. Explicitly approved encrypted backup and native isolated D1 restore now pass; full28-table/39,540-row typed/schema/sequence comparison and local additive migration preservation pass. See [data preservation](docs/dialogue/DATA-PRESERVATION.md).
 
