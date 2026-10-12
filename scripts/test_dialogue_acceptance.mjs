@@ -21,7 +21,9 @@ function fixture(t) {
     YW_ACCEPTANCE_EXPIRES_AT:new Date(Date.now()+3600000).toISOString(), YW_ACCEPTANCE_USER_ID:'700001',
     YW_ACCEPTANCE_APIS_VERSION:version, YW_ACCEPTANCE_DATABASE_ID:'aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee',
     ACCEPTANCE_DB:{prepare:text=>{calls.db++;return wrap(text);}, batch:async statements=>Promise.all(statements.map(s=>s.run()))},
-    ASSETS:{fetch:async req=>{calls.assets++;return new Response(fs.readFileSync('site'+new URL(req.url).pathname));}},
+    ASSETS:{fetch:async req=>{calls.assets++;const pathname=new URL(req.url).pathname;
+      if(pathname==='/dialogue.html')return new Response(null,{status:308,headers:{location:'/dialogue'}});
+      return new Response(fs.readFileSync('site'+(pathname==='/dialogue'?'/dialogue.html':pathname)));}},
     USER_CENTER_EVIDENCE:{resolveSession:async()=>{calls.identity++;return user;},resolveNativeSession:async()=>({
       ...user,schemaVersion:'bdfz-native-auth/1',status:200,clientId:'yuwen-native-android',capability:'data',
     })},

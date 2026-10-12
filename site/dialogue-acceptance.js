@@ -88,7 +88,8 @@ export function createAcceptanceWorker(worker) {
       || !(PUBLIC_ASSETS.has(url.pathname) || /^\/dialogue-curriculum\/lesson-(1717-p2|1711-p1|1498)\.json$/.test(url.pathname))) {
       return rejection('not_found', 404);
     }
-    if (url.pathname === '/dialogue') url.pathname = '/dialogue.html';
+    // Pages serves extensionless HTML itself. Rewriting to .html redirects back
+    // to /dialogue and loops through this wrapper on every browser request.
     const response = await env.ASSETS.fetch(new Request(url, request));
     const headers = new Headers(response.headers);
     headers.set('cache-control', 'no-store');
