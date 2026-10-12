@@ -1,4 +1,14 @@
-## Current text-role repair, not deployed — 2026-10-12T16:12:14.285549+00:00
+## Current approved calibration amendment 2 — 2026-10-12T21:55Z
+
+Direct suen approval and instruction to fix ordinary errors supersede the earlier first-failure overall stop. The isolated executor pins both consumed receipts, source/prompt metadata, unknown reservation and immutable packet fixtures. Cumulative limits are 26 attempts and 2,184,000 microUSD reserved; two prior attempts retain 4,678 known plus 84,000 unknown microUSD. The new 24-attempt pool includes recovery. No formal production publication is authorized by this amendment.
+
+A durable first-intent clock gives 20 minutes, capped at 2026-10-13T12:00Z. Each new attempt has its own id and reservation. Repeating its POST only reads back. Subsequent requests must acknowledge the immediately preceding terminal receipt; unresolved in-flight calls, credential rejection, rate limiting, model drift, source drift, exhausted limits or expiry cannot be bypassed. A known semantic failure permits at most one separately charged recovery for that case; unknown provider outcomes cannot be retried. Other fixed cases may continue after their predecessor is reconciled. Failed rows never become successful merely through a later result. No fallback, hedge, grade, learner assessment or central write is added.
+
+Fresh current-source packet 4fb2ac79… uses policy v6/evidence v3. Strict mastery and conclusion validation are unchanged. The two old packet files remain byte-pinned. Real calibration, physical mobile/keyboard, weak-network/stream/accounting and independent suen final go/no-go remain pending. Current isolated live baseline remains 5045fb9 / eb519808 until this new exact-source transaction is deployed. Formal YW and APIS allocations remain unchanged.
+
+Evidence and current acceptance disposition: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13217/REPORT.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13217/REPORT.md). Earlier current headings below are historical where superseded.
+
+## Historical text-role repair, not deployed — 2026-10-12T16:12:14.285549+00:00
 
 Four textbook editor guidance blocks in 劝学 are preserved verbatim as labelled teaching references, excluded from author passages/assessment citations. Original resources, learning guidance (including memorization instruction), scoring rules and stored curricula remain preserved. This is source-role correction, not a new recitation score or waived requirement. The two pilot classical-first-read mapping rows now describe the implemented original process bridge. Same-owner real first-read submit/acknowledge/three corrections now survive reload with original guesses intact; see the linked report. Physical mobile remains unverified.
 
