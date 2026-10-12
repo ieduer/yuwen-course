@@ -16,6 +16,7 @@ for (const file of [
   "_worker.js",
   "dialogue-source.js",
   "dialogue-calibration.js",
+  "dialogue-calibration-contract.js",
   "dialogue-calibration-packet.json",
   "dialogue-acceptance.js",
   "dialogue-formal.js",

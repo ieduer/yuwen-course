@@ -1,6 +1,7 @@
 // Reusable offline preparation/readback for the real, governed APIS calibration.
 // This tool cannot send a provider request, change a flag or award learner credit.
 import fs from 'node:fs';
+import {CALIBRATION_CONTRACT as amendment} from '../site/dialogue-calibration-contract.js';
 import crypto from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {POLICY_VERSION,RULE_VERSION,contextFor,projectState,createQuestion,validateProposal,LIMITS} from '../site/dialogue-policy.js';
@@ -26,7 +27,7 @@ export function calibrationPacket(corpus,loadCurriculum,budget){
   return {...spec,sourceCurriculumVersion:source.curriculumVersion,sourceDigest:digest(source),fixtureOverrides:'hypothetical calibration/source acceptance only; does not approve sources or mastery',curriculum,state,turns,question,prompt,promptDigest:digest(prompt)};
  });
  if(cases.length!==24)throw Error('fixed_calibration_budget_requires_24_cases');
- return {version:corpus.version,operation:'yw-dialogue-real-calibration-20261012-v1',policyVersion:POLICY_VERSION,ruleVersion:RULE_VERSION,model:budget.model,transport:'authenticated isolated YW acceptance -> APIS /api/yw/dialogue-stream -> Gemini single stream',limits:{totalAttempts:24,attemptsPerCase:1,retries:0,deadlineMinutes:20,reservedMicros:24*budget.reserveMicros,requestTimeoutMs:LIMITS.timeoutMs},stop:'first admission failure, unknown response, model mismatch, missing usage, source mismatch, unsafe persona, false mastery or budget exhaustion; read back same attempt, never replay',dataClass:'synthetic-only',sourceDigest:digest(cases.map(c=>({id:c.id,sourceDigest:c.sourceDigest,promptDigest:c.promptDigest}))),cases};
+ return {version:corpus.version,operation:amendment.operation,amendment,policyVersion:POLICY_VERSION,ruleVersion:RULE_VERSION,model:budget.model,transport:'authenticated isolated YW acceptance -> APIS /api/yw/dialogue-stream -> Gemini single stream',limits:{totalAttempts:24,attemptsPerCase:1,retries:0,deadlineMinutes:20,reservedMicros:24*budget.reserveMicros,requestTimeoutMs:LIMITS.timeoutMs},stop:'first admission failure, unknown response, model mismatch, missing usage, source mismatch, unsafe persona, false mastery or budget exhaustion; read back same attempt, never replay',dataClass:'synthetic-only',sourceDigest:digest(cases.map(c=>({id:c.id,sourceDigest:c.sourceDigest,promptDigest:c.promptDigest}))),cases};
 }
 export function evaluateCalibrationCase(c,result){
  if(result.caseId!==c.id||result.promptDigest!==c.promptDigest)throw Error('calibration_source_mismatch');

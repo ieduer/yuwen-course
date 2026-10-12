@@ -1,4 +1,12 @@
-## Current prompt repair — 2026-10-12T15:25:26.047996+00:00
+## Current approved calibration amendment — 2026-10-12T15:41:47.024876+00:00
+
+Suen explicitly approved cumulative25attempts (old failure1 plus corrected24), cumulative conservative reservationUS$2.100,20minutes from the first corrected attempt,zero retries,first mismatch stop; original host expiry2026-10-13T12:00Z unchanged. The amended server admission requires the exact same-owner original failed receipt, preserves all old rows, counts old+new attempts and reservations, and exposes prior evidence in readback. Old POST action cannot trigger a corrected attempt. Neither policy evidence requirements nor validator is weakened. Original packet is preserved byte-for-byte in scripts/fixtures/dialogue-calibration-stopped-packet.json; corrected packet887a2537… uses policyv6/evidencev3 and a distinct amendment namespace.
+
+126focused checks pass on Node22.21.1 and24.19.0, plus actual isolated bundle binding check. Formal1256file artifact5dd9118f… and restricted artifact194b3d95… built. No new provider request or deployment yet at this checkpoint. Existing sourcec2fcf53/Pagesc4fa78f4 remains live until a fresh transaction is consumed. Existing source/backup/fanout evidence retained;170 inventory intents are not170 runtime regression passes. Production gate remains independent suen go/no-go. Physical mobile inventory found the already-running ADB service but no attached device; no pairing or device change was attempted.
+
+Current evidence and authorization: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a130b1-calibration/AUTHORIZATION.json](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a130b1-calibration/AUTHORIZATION.json). The linked dated REPORT.md owns subsequent deployment and per-case results. Earlier sections below are history where superseded.
+
+## Historical prompt repair — 2026-10-12T15:25:26.047996+00:00
 
 Policyv6 makes the existing complete-criterion evidence contract explicit; evidencev3 and validator are unchanged. The real first failed response remains rejected and its original execution packet/ledger are immutable.105 focused checks pass on pinned Node22.21.1 and24.19.0; formal artifact1255files/d2f285b5cbe5b3ff220666cac16d8fed98471f96aa2808a0f0f1468e527bd730. This is local verification, not real semantic acceptance or deployment.
 
