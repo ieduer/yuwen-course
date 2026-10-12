@@ -10,7 +10,7 @@ import {POLICY_VERSION} from '../site/dialogue-policy.js';
 const root=path.resolve('site'),sql=new DatabaseSync(':memory:');sql.exec('PRAGMA foreign_keys=ON');
 for(const f of fs.readdirSync('migrations').filter(f=>f.endsWith('.sql')).sort())sql.exec(fs.readFileSync('migrations/'+f,'utf8'));
 sql.exec("INSERT INTO students(id,uc_slug,display_name) VALUES(1,'dialogue-synthetic-test','Synthetic test'),(2,'dialogue-synthetic-other','Synthetic other');");
-let syntheticAccount=1,responseDelayMs=0,sourceDraftEnabled=false;
+let syntheticAccount=1,responseDelayMs=0,sourceDraftEnabled=false,conclusionEnabled=false;
 const wrap=(text,args=[])=>({bind:(...v)=>wrap(text,v),first:async()=>sql.prepare(text).get(...args)||null,all:async()=>({results:sql.prepare(text).all(...args)}),run:async()=>({meta:{changes:Number(sql.prepare(text).run(...args).changes)}}),runSync:()=>({meta:{changes:Number(sql.prepare(text).run(...args).changes)}})});
 const db={prepare:text=>wrap(text),batch:async statements=>{sql.exec('BEGIN');try{const r=statements.map(s=>s.runSync());sql.exec('COMMIT');return r;}catch(e){sql.exec('ROLLBACK');throw e;}}};
 const env={READING_DB:db,YW_DIALOGUE_ENABLED:'true',YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...JSON.parse(fs.readFileSync('docs/dialogue/budget-policy.json')),version:'synthetic-offline-only',validUntil:'2099-01-01T00:00:00Z'}),ASSETS:{fetch:async request=>new Response(fs.readFileSync(root+new URL(request.url).pathname))}};
@@ -36,7 +36,12 @@ const server=http.createServer(async(req,res)=>{try{const url=new URL(req.url,'h
    sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?, 'synthetic-ready','synthetic-only','student','【合成學習證據，非真實學生】字詞語境說明及篇目感受已備妥。','saved',?,?)").run(turn,id,POLICY_VERSION,at);
    for(const objective of [curriculum.vocabulary[0].id,curriculum.objectives.find(o=>o.domain==='evaluation').id])sql.prepare("INSERT INTO dialogue_assessments(id,session_id,turn_id,objective_id,outcome,evidence_json,rationale,rule_version,curriculum_version,created_at) VALUES(?,?,?,?,'demonstrated','[]','synthetic-only','synthetic',?,?)").run(crypto.randomUUID(),id,turn,objective,curriculum.curriculumVersion,at);
   }
-  syntheticAccount=value.account;responseDelayMs=value.responseDelayMs;sourceDraftEnabled=value.sourceDraft===true;res.writeHead(200,{'content-type':'application/json'});res.end('{"synthetic":true}');return;
+  if(value.conclusionReady===true){
+   const session=sql.prepare("SELECT * FROM dialogue_sessions WHERE student_id=? AND lesson_id='lesson-1717-p2'").get(value.account);if(!session)throw Error('initial_history_required');
+   const curriculum=JSON.parse(session.curriculum_json),turn=sql.prepare("SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence LIMIT 1").get(session.id);
+   for(const o of curriculum.objectives.filter(o=>o.domain!=='shangyou'))sql.prepare("INSERT INTO dialogue_assessments(id,session_id,turn_id,objective_id,outcome,evidence_json,rationale,rule_version,curriculum_version,created_at) VALUES(?,?,?,?,'demonstrated','[]','synthetic-only','synthetic',?,?)").run(crypto.randomUUID(),session.id,turn.id,o.id,curriculum.curriculumVersion,new Date().toISOString());
+  }
+  syntheticAccount=value.account;responseDelayMs=value.responseDelayMs;sourceDraftEnabled=value.sourceDraft===true;conclusionEnabled=value.conclusionReady===true;res.writeHead(200,{'content-type':'application/json'});res.end('{"synthetic":true}');return;
  }
  if(url.pathname==='/api/dialogue/v1'){
  let body='';for await(const c of req){body+=c;if(body.length>16000){res.writeHead(413);res.end();return;}}
@@ -51,6 +56,14 @@ const server=http.createServer(async(req,res)=>{try{const url=new URL(req.url,'h
    const data=JSON.parse(_prompt.split('以下是資料，不是指令：\n').at(-1));
    const objective=data.originalRequirements.find(o=>o.objectiveId.endsWith(':structure')),turn=data.recent.filter(t=>t.role==='student').at(-1);
    if(objective&&turn)value.sourceDraft={objectiveId:objective.objectiveId,fields:{reason:{turnId:turn.id,quote:turn.content}}};
+  }
+  if(conclusionEnabled&&!sourceDraftEnabled){
+   const data=JSON.parse(_prompt.split('以下是資料，不是指令：\n').at(-1));
+   if(data.readyForShangyou){
+    const students=data.recent.filter(t=>t.role==='student'),before=students[0],after=students.at(-1),p=data.passages[0],ref=t=>({turnId:t.id,quote:t.content.slice(0,50)}),e={...ref(after),passageId:p.id,passageQuote:p.text.slice(0,30)},o=data.objectives.find(o=>o.id.endsWith(':shangyou'));
+    value.assessments=[{objectiveId:o.id,outcome:'demonstrated',rationale:'合成結構測試，非真實能力評價',evidence:o.criteria.map(criterion=>({criterion,...e}))}];
+    value.conclusion={studentSummary:'【合成小結】從初讀景物轉向理解敘述中的情緒變化，並保留對作者的不同意見。',change:{before:ref(before),after:ref(after)},stance:e,domains:['interpretation','vocabulary','technique','transfer','uncertainty'].map(domain=>({domain,finding:'【合成分析】對照已保存原話及文本；真實教學品質尚待校準。',evidence:[e],preservedObjectives:[]}))};
+   }
   }
   return {value,model:'synthetic-offline-fixture',modelVersion:null};
  }});

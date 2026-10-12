@@ -1,5 +1,11 @@
 # Dialogue candidate changelog
 
+## 2026-10-12T10:01:56+00:00 — grounded review synthesis; not released
+
+- Require existing readiness and exact chronological student/text anchors for five-domain 尚友 conclusion, saved atomically with the reply; preserve dissent and original grades.
+- Exclude obsolete remediation after newer mastery without deleting failed attempts; expose summary and original-turn links.
+- Verified91 focused checks per Node22/24,74 Reading API checks, formal artifact1252/2b636abe and synthetic browser save/reload with actual screenshot. Real teaching and all release gates remain open.
+
 ## 2026-10-12T09:40:33.995177+00:00 — original poem/reference boundary; not released
 
 - Kept18 poem passages unchanged; preserved exact commentary/preview blocks as on-demand materials and retained all source links.

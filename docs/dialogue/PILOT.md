@@ -1,4 +1,14 @@
-## Current dialogue candidate — 2026-10-12T09:40:33.995177+00:00
+## Current dialogue candidate — 2026-10-12T10:01:56+00:00
+
+The disabled candidate now saves a grounded 尚友 synthesis only after the server's existing readiness gates. It compares earlier/later exact student words, records a text-grounded position including dissent, and requires five evidence-backed domains: interpretation, vocabulary, technique, transfer and remaining uncertainty. This is model synthesis for review, never a new formal grade. The visible reply, conclusion and assessments commit together; duplicate/foreign-owner readback is fenced. Student summary and original-turn links survive reload/export. Policyv4 and evidencev2 preserve older records.
+
+Old failed vocabulary question instances remain stored, while a newer mastered instance or accepted historical mastery no longer leaves obsolete remediation in the next prompt. All12 original poem formal requirements remain bridged and source grades stay unchanged. The poem's18 passages and4 separate reference blocks remain preserved.
+
+Validation:84 dialogue +7 blueprint checks on each pinned Node22/24 (91 each), Reading API74, formal staging/artifact1252 files with aggregate `2b636abe98f9824bb75ffae9a160b2988d195edf9ff0d4155f87cffdd8852976`. Synthetic local browser saved the five-domain report, expanded it and read it after reload; an actual desktop screenshot is retained. This is structural/transaction/UI evidence, not real model teaching-quality or physical-mobile acceptance. Previous source-text commitfb9be46 passed both exact-head CI jobs; current atomic CI is recorded in the central report after push.
+
+Feature off; remote0010–0013 unapplied. No paid model call, live data write, backup/export, migration, deployment or Status publication. Remaining: classical grammar/difficulty and real teaching calibration, verified backup/isolated row+relationship+sequence restore, source/authenticated account/mobile/weak-network/stream/cost acceptance, APIS HTTP fan-out (budget122/160 GETs used; do not reset), exact-source release and suen review. Continue serially from the durable handoff after this task's second compaction. Central evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12f36/REPORT.md`.
+
+## Historical dialogue candidate — 2026-10-12T09:40:33.995177+00:00
 
 Source-text correction only: the poem has18 unchanged original couplets. Its appended third-person teaching commentary and three document-preview blocks are now exact-hash-pinned reading materials, with every original block and resource preserved. The commentary is visible on demand and explicitly separate in model context; it cannot satisfy a poem-passage evidence citation. Original references are accessible in the materials view. No original reader/App/textbook source is changed or copied. Policyv3 records the changed source boundary; immutable earlier session snapshots remain preserved.
 

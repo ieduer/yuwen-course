@@ -37,6 +37,15 @@ async function revealTurn(turnId){
 }
 function renderEvidence(report){
  const box=$('evidence-summary');box.replaceChildren(node('p',report.student.notice));
+ if(report.conclusion){
+  const c=report.conclusion;box.append(node('h3','這次尚友的理解與回望'),node('p',c.studentSummary),node('p','這是依據本課紀錄形成的教學總結，仍可請教師覆核；不替代原對話或成績。'));
+  const jump=(label,ref)=>{const b=node('button',`${label}：「${ref.quote}」`);b.onclick=()=>void revealTurn(ref.turnId).catch(e=>{$('export-status').textContent=e.message;});return b;};
+  box.append(jump('較早的理解',c.change.before),jump('現在的理解',c.change.after),jump('你的認同或質疑',c.stance));
+  const detail=node('details');detail.append(node('summary','查看逐項分析與依據'));
+  const labels={interpretation:'理解與文本',vocabulary:'字詞語境',technique:'寫法與效果',transfer:'遷移與應用',uncertainty:'仍待釐清'};
+  for(const row of c.domains){detail.append(node('h4',labels[row.domain]),node('p',row.finding));for(const ref of row.evidence)detail.append(jump('查看原話',ref));if(row.preservedObjectives.length)detail.append(node('p','沿用下方已保留的原有學習證據，本次未重新評分。'));}
+  box.append(detail);
+ }
  const first=report.student.trajectory?.first;if(first){const b=node('button',`初讀摘錄：「${first.quote}」${first.truncated?'…':''}`);b.onclick=()=>void revealTurn(first.turnId).catch(e=>{$('export-status').textContent=e.message;});box.append(b);}
  for(const item of report.student.summary||[]){box.append(node('p',item.text));for(const ref of item.references){const b=node('button',`查看原話：「${ref.quote}」`);b.onclick=()=>void revealTurn(ref.turnId).catch(e=>{$('export-status').textContent=e.message;});box.append(b);}}
  for(const o of report.student.observed)box.append(node('p',`已有證據：${o.label}`));
@@ -153,6 +162,7 @@ function update(data){
   if(data.readingGate?.phase==='annotated_reading')$('next').textContent='先讀完正文與隨文註釋，保存閱讀確認後，再進入字詞練習。';
   if(data.readingGate?.phase==='initial_reading'){$('answer').disabled=true;$('send').disabled=true;$('next').textContent='先在左側正文標記疑點並保存初讀感知；完成後在這裡繼續細讀對話。';}
  }
+ if(data.report?.conclusion){const b=node('button','查看這次尚友小結');b.onclick=()=>{$('evidence-summary').closest('details').open=true;$('materials').showModal();$('evidence-summary').scrollIntoView({block:'start'});};$('next').append(b);}
  renderSourceDraft(data);
  performance.mark('dialogue-records-ready');
 }

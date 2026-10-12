@@ -1,4 +1,8 @@
-## Current dialogue candidate — 2026-10-12T09:40:33.995177+00:00
+## Current dialogue candidate — 2026-10-12T10:01:56+00:00
+
+Grounded 尚友 conclusion/readiness gates and stale-remediation fix implemented in the disabled candidate.91 focused checks per pinned Node,74 Reading API checks, formal artifact1252/2b636abe and synthetic save/reload/UI pass. Real teaching calibration and all live restore/release gates remain open; production capacity has not increased. See [current candidate](docs/dialogue/PILOT.md). Second compaction requires one fresh serial continuation; exact source and cleanup in the central HANDOFF.
+
+## Historical dialogue candidate — 2026-10-12T09:40:33.995177+00:00
 
 All12 poem formal bridges remain implemented and exact-head CI562fc18 passed. Poem text is now separated from preserved source commentary/preview labels;81 focused dialogue checks per pinned Node and formal artifact pass. Feature off; no production capacity increase. Teaching conclusion/calibration and real restore/release acceptance remain open. See [the current candidate contract](docs/dialogue/PILOT.md).
 

@@ -16,6 +16,7 @@ for (const file of [
   "_worker.js",
   "dialogue-source.js",
   "dialogue-formal.js",
+  "dialogue-conclusion.js",
   "dialogue-legacy.js",
   "dialogue-corrections.js",
   "dialogue-history.js",

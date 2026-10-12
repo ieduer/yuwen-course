@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1251,
-  "totalBytes": 165026982,
-  "aggregateSha256": "52091bf292371f96137b726b1012b1caa69d86dd855ee67389d4288813f9faad",
+  "fileCount": 1252,
+  "totalBytes": 165033782,
+  "aggregateSha256": "2b636abe98f9824bb75ffae9a160b2988d195edf9ff0d4155f87cffdd8852976",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "a514f3afff6a50dbb43e4783680fbfd11d7eaab14a6a86a844d9488860f0e7c0"
+      "sha256": "dfee76b06781202b12e88dfc5fc8bff1b2f5fd26b9eecf477bba511953847447"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1462,8 +1462,8 @@
     },
     {
       "path": "assets/dialogue.js",
-      "bytes": 33456,
-      "sha256": "2db456751bf923c618834d14bace0db83c948cabca1db4abade24d9b3a99030a"
+      "bytes": 34857,
+      "sha256": "8ae7bb2a49e360dac151376280f2a3b99863041390eec72a98740e94a70e9743"
     },
     {
       "path": "assets/learning-evidence.js",
@@ -6071,6 +6071,11 @@
       "sha256": "e690bcf202fb914352ce620dfa3aed531fea0322327c3292e5314179613f6259"
     },
     {
+      "path": "dialogue-conclusion.js",
+      "bytes": 2503,
+      "sha256": "e777ca72e095eb455204bf9859d5ebda8ae6dfd3e31c716959bb78498586ae60"
+    },
+    {
       "path": "dialogue-corrections.js",
       "bytes": 2490,
       "sha256": "82d0ebd0230b9246d39e18e4d738a9293a3e5290b1cf1692ed28062cd7245c47"
@@ -6107,13 +6112,13 @@
     },
     {
       "path": "dialogue-policy.js",
-      "bytes": 14833,
-      "sha256": "92a91e7597d346ef8b9709a3e641472d0254d9da112b68cc89eabfc67d6e9e2f"
+      "bytes": 16700,
+      "sha256": "5c9c769668673eb3086ee5b6b0c0ed23e76ece312d4fc710c7d4d498b6a69bbf"
     },
     {
       "path": "dialogue-source.js",
-      "bytes": 39997,
-      "sha256": "dafa098f5c88c43f7d54e48fe4cd6bf6ae4e924cdefaafcf552ea3402c7bdeb5"
+      "bytes": 41026,
+      "sha256": "b2d6d9c3e23f60017442d96f3eb3da2908444dff53f23f4dc1ad0733c8c73a71"
     },
     {
       "path": "dialogue-stream.js",
@@ -6123,7 +6128,7 @@
     {
       "path": "dialogue.html",
       "bytes": 5360,
-      "sha256": "dde8120bf63d2726a80a1645eb826a967b19d56a989b9c84a7ae3d42d1f522c4"
+      "sha256": "00551b0d5032172d8ff32749b80b88240260d0fd35c9b687a3f8df34b26636dc"
     },
     {
       "path": "durable-evaluation-jobs.js",

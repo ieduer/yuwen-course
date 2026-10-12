@@ -1,7 +1,8 @@
 // Source-owned policy. This module never writes grades or emits central evidence.
 import {validateFormalDraft,originalRequirements} from './dialogue-formal.js';
-export const POLICY_VERSION = 'yw-dialogue-policy-v3';
-export const RULE_VERSION = 'yw-dialogue-evidence-v1';
+import {validateConclusion} from './dialogue-conclusion.js';
+export const POLICY_VERSION = 'yw-dialogue-policy-v4';
+export const RULE_VERSION = 'yw-dialogue-evidence-v2';
 export const LIMITS = Object.freeze({inputChars:3000,contextChars:22000,replyChars:1800,outputTokens:2400,turnsPerDay:40,globalPerDay:400,lessonLifetime:120,concurrency:4,timeoutMs:20000,historyPage:30,maxAttempts:3});
 export const PILOTS = Object.freeze(['lesson-1717-p2','lesson-1711-p1','lesson-1498']);
 export const POLICY = `你是細讀教師，以提供的人格規則作作者第一人稱的AI教學模擬。不是作者本人。
@@ -13,7 +14,8 @@ export const POLICY = `你是細讀教師，以提供的人格規則作作者第
 古典詞彙必須涵蓋全部必考項；失敗先解釋和對比，請學生改述，再出等值新題獨立回答。提示後照抄不算掌握。
 字詞題須核對原題型及 sourceAnswer；讀音題必須包含正確拼音和語境義，不能因答對詞義就省略讀音。languagePractice 是有來源的教學參考，尚未校準，不建立新目標或推定掌握。examReferences 只有報紙引用的題意與能力關聯；不得假裝提供原試卷、未給出的閱讀全文或官方答案。
 沒有核實的北京真題原頁、年份、卷名與題號時只稱原創練習；AI回饋不是官方閱卷。
-最後的尚友：理解有何變化、文本證據、認同或質疑，逐項引用學生回合與原文。分歧不妨礙完成。
+最後的尚友：理解有何變化、文本證據、認同或質疑，逐項引用學生回合與原文。分歧不妨礙完成。只有readyForShangyou=true才可提出尚友demonstrated；尚未達到時可討論或記review，不宣告結課。
+尚友達標時，同一JSON必須附conclusion：{studentSummary:"180字內",change:{before:{turnId,quote},after:{turnId,quote}},stance:{turnId,quote,passageId,passageQuote},domains:[{domain:"interpretation|vocabulary|technique|transfer|uncertainty",finding:"90字內",evidence:[{turnId,quote,passageId,passageQuote}],preservedObjectives:[]}]}。五個domain各一項；比較較早與較晚的學生原話，分析理解、字詞、寫法、遷移與尚待核對處。每項至少一處學生原話及詩文，或同domain已preserved的objectiveId；每項至多一處引文、兩個舊紀錄。引文逐字且各60字內。保留舊掌握不等於本次重新檢驗。結語只作有證據的教學總結，不給新分數、不稱官方結論，reply保持300字內的簡短作者模擬回應。不用讚美代替分析；有分歧可成立。已保存結語時，除有新理解需補充外不反覆生成。
 trajectory 是伺服器從完整已保存歷程整理的證據索引，不是另一份評分；涵蓋較早回合。用其中的原話與近期回答比較理解的變化，指明依據和仍待核對之處。摘要中的摘錄不等於完整原話，不補造未提供的內容。
 legacyCompletion 不為空時，原課已完成的紀錄必須保留；新對話是自願深化，不要求重做，不把原有自報完成誇大為新證據或新的分數。
 不要輸出思維鏈。只返回JSON：{"reply":"學生可見的短回應與一個問題","assessments":[{"objectiveId":"目標id","outcome":"demonstrated|needs_practice|review|reformulated","rationale":"簡短可核查理由","evidence":[{"criterion":"判準id","turnId":"學生回合id","quote":"學生原話","passageId":"原文段落id","passageQuote":"原文引文"}]}]}。
@@ -21,7 +23,7 @@ legacy及studyGuide目標只由既有評價讀回，你不能判定。不能生�
 originalRequirements 是尚未取得原評價的既有要求，按其原判準自然追問，勿另開一套選單。若學生已在對話中寫齊其中一项的所有欄位，可以在同一JSON加可選sourceDraft:{objectiveId,fields:{欄位名:{turnId,quote}}}。quote必须逐字來自指定學生回合，不能拼造、润飾、改寫或引用教師話語；未齊全則繼續聚焦追問。一次至多一項，當前question或remediation未解決時不整理其他原題。這只是供學生核對的整理，不能宣告通過；原評價另行核驗。不把已完成或歷史待核對的要求重新提出。`;
 const valid = s => typeof s === 'string';
 const normalized = s => String(s||'').replace(/[\s\p{P}]/gu,'');
-export function validateProposal(raw,{curriculum,turns,question=null,hints=[],remediation=null}) {
+export function validateProposal(raw,{curriculum,turns,state=null,question=null,hints=[],remediation=null}) {
  if(!raw || !valid(raw.reply) || !raw.reply.trim() || raw.reply.length>LIMITS.replyChars || !Array.isArray(raw.assessments) || raw.assessments.length>8) throw new Error('invalid_model_reply');
  const accepted=[], seen=new Set();
  for(const a of raw.assessments){
@@ -45,9 +47,15 @@ export function validateProposal(raw,{curriculum,turns,question=null,hints=[],re
  }
  const sourceDraft=validateFormalDraft(curriculum,turns,raw.sourceDraft);
  if(sourceDraft&&(question||remediation))throw Error('source_draft_during_vocabulary');
- return {reply:raw.reply,assessments:accepted,sourceDraft};
+ const conclusion=validateConclusion(raw.conclusion,{curriculum,state,turns});
+ if(conclusion&&raw.reply.length>300)throw Error('conclusion_reply_too_long');
+ const shangyou=curriculum.objectives.find(o=>o.domain==='shangyou');
+ const final=accepted.some(a=>a.objectiveId===shangyou?.id&&a.outcome==='demonstrated');
+ if(final&&(!state?.readyForShangyou||!conclusion))throw Error('shangyou_conclusion_required');
+ if(conclusion&&!final&&state.objectives.find(o=>o.id===shangyou?.id)?.status!=='demonstrated')throw Error('shangyou_evidence_required');
+ return {reply:raw.reply,assessments:accepted,sourceDraft,conclusion};
 }
-export function projectState(curriculum,assessments,legacy=[],legacyCompletion=null,readingGate=null) {
+export function projectState(curriculum,assessments,legacy=[],legacyCompletion=null,readingGate=null,conclusion=null) {
  const objectives=curriculum.objectives.map(o=>{
   const prior=legacy.find(l=>l.objectiveId===o.id && (l.verified===true||l.previousCompletion===true));
   const rows=assessments.filter(a=>a.objectiveId===o.id);
@@ -59,9 +67,9 @@ export function projectState(curriculum,assessments,legacy=[],legacyCompletion=n
  const sourceReady=!readingGate||(readingGate.phase==='close_reading'&&!readingGate.unresolvedMarks);
  const ready=sourceReady&&ordinary.every(o=>['preserved','demonstrated'].includes(o.status));
  const shangyou=objectives.find(o=>o.domain==='shangyou');
- const pending=objectives.filter(o=>!['preserved','demonstrated'].includes(o.status)&&o.status!=='historical_review'&&(ready||o.domain!=='shangyou'));
+ const pending=objectives.filter(o=>(!['preserved','demonstrated'].includes(o.status)||o.domain==='shangyou'&&ready&&!conclusion)&&o.status!=='historical_review'&&(ready||o.domain!=='shangyou'));
  const next=pending.find(o=>['firstRead','context'].includes(o.domain))||pending.find(o=>o.domain==='vocabulary')||pending[0]||null;
- return {objectives,readingGate,readyForShangyou:ready,completion:ready&&shangyou?.status==='demonstrated'?'evidence_ready_for_review':'in_progress',legacyCompletion,continuedStudyOptional:!!legacyCompletion,legacyGrades:'unchanged',next:legacyCompletion?null:next};
+ return {objectives,readingGate,readyForShangyou:ready,hasConclusion:!!conclusion,completion:ready&&shangyou?.status==='demonstrated'&&conclusion?'evidence_ready_for_review':'in_progress',legacyCompletion,continuedStudyOptional:!!legacyCompletion,legacyGrades:'unchanged',next:legacyCompletion?null:next};
 }
 export function createQuestion(curriculum,{objectiveId,attempt=1,previousVariant=null,random=crypto.getRandomValues(new Uint32Array(1))[0]}){
  const v=curriculum.vocabulary.find(v=>v.id===objectiveId);
@@ -90,12 +98,12 @@ export function learningTrajectory(curriculum,turns,assessments){
  });
  return {scope:'all-saved-turns-and-assessments',turnCount:turns.length,studentTurnCount:students.length,first:excerpt(students[0]),latest:excerpt(students.at(-1)),domains};
 }
-export function evidenceReport(curriculum,state,assessments,turns=[]){
+export function evidenceReport(curriculum,state,assessments,turns=[],conclusion=null){
  const trajectory=learningTrajectory(curriculum,turns,assessments);
  const items=state.objectives.map(o=>({objectiveId:o.id,label:o.label,domain:o.domain,status:o.status,preservedEvidence:['preserved','historical_review'].includes(o.status)?o.evidence:null,
   decisions:assessments.filter(a=>a.objectiveId===o.id).map(a=>({outcome:a.outcome,rationale:a.rationale,evidence:a.evidence,ruleVersion:a.ruleVersion,createdAt:a.createdAt}))}));
  const demonstrated=items.filter(o=>['preserved','demonstrated'].includes(o.status));
- return {kind:'evidence-index-not-official-grade',curriculumVersion:curriculum.curriculumVersion,ruleVersion:RULE_VERSION,
+ return {kind:'evidence-index-not-official-grade',curriculumVersion:curriculum.curriculumVersion,ruleVersion:RULE_VERSION,conclusion,
   student:{trajectory,summary:trajectory.domains.filter(d=>Object.values(d.outcomes).some(Boolean)).map(d=>({objectiveId:d.objectiveId,text:`${d.label}：${d.outcomes.needs_practice} 次待練習、${d.outcomes.reformulated} 次改述、${d.outcomes.demonstrated} 次有證據支持、${d.outcomes.review} 次待覆核。`,references:d.anchors})),observed:demonstrated.map(o=>({objectiveId:o.objectiveId,label:o.label,status:o.status})),remaining:items.filter(o=>!['preserved','demonstrated'].includes(o.status)).map(o=>({objectiveId:o.objectiveId,label:o.label,status:o.status})),next:state.next,completion:state.completion,notice:'摘要涵蓋本課已保存歷程；次數不是分數，未觀察不等於不會，原始對話及舊成績永久保留。'},
   teacher:{items,turnIndex:turns.map(t=>({turnId:t.id,role:t.role,status:t.status,createdAt:t.createdAt})),reviewRequired:items.filter(o=>['review','historical_review'].includes(o.status)).map(o=>o.objectiveId),notice:'完整回合索引與各次判定供核對；教師端未獲跨帳戶授權，不代表已通知或覆核。'}};
 }
@@ -103,7 +111,7 @@ export function contextFor({curriculum,state,turns,question,remediation=null,ass
  let used=0;const recent=[];for(const t of turns.slice(-10).reverse()){if(used+t.content.length>6500)break;used+=t.content.length;const {id,role,content,questionId}=t;recent.unshift({id,role,content,questionId});}
  const data={curriculumVersion:curriculum.curriculumVersion,persona:curriculum.persona,author:curriculum.author,title:curriculum.title,
   objectives:curriculum.objectives.filter(o=>!['legacy','studyGuide'].includes(o.domain)).map(o=>({id:o.id,criteria:o.criteria,rule:o.rule})),
-  state:state.objectives.map(o=>({id:o.id,status:o.status})),legacyCompletion:state.legacyCompletion,readingGate:state.readingGate,
+  state:state.objectives.map(o=>({id:o.id,status:o.status})),legacyCompletion:state.legacyCompletion,readingGate:state.readingGate,readyForShangyou:state.readyForShangyou,hasConclusion:state.hasConclusion,
   originalRequirements:state.legacyCompletion?[]:originalRequirements(curriculum,state),
   teachingReferences:(curriculum.readingMaterials||[]).filter(m=>m.role==='commentary').map(({id,label,text,source})=>({id,label,text,source})),
   question,remediation,passages:curriculum.passages.map(({id,text})=>({id,text})),recent,
