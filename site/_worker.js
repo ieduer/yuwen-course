@@ -1,5 +1,5 @@
 import { handleDialogue } from './dialogue-source.js';
-import { DIALOGUE_SOURCE_PREFIX, isDialogueSourceMutation, formalRubric } from './dialogue-formal.js';
+import { DIALOGUE_SOURCE_PREFIX, DIALOGUE_LOCAL_PREFIX, isDialogueSourceMutation, formalRubric } from './dialogue-formal.js';
 import { readSharedHistory } from './dialogue-history.js';
 import { sourceEventStatement, evaluationEventBase, evaluationEventId, latestSourceEvent } from './learning-evaluation-events.js';
 import { readRecorderSource } from './learning-recorder-source.js';
@@ -102,6 +102,7 @@ export default {
         readSharedHistory:()=>readSharedHistory(userCenterSessionCookieHeader(request)),
         firstReadAction:(operation,payload)=>handleDialogueFirstRead(request,env,student,ctx,operation,payload),
         formalAction:(formal,turnId,evaluate,commit)=>handleDialogueFormal(request,env,student,formal,turnId,evaluate,commit),
+        originalAction:(formal,turnId,commit)=>handleDialogueOriginal(request,env,student,formal,turnId,commit),
       });
     }
 
@@ -1580,6 +1581,15 @@ export async function handleDialogueFormal(request, env, student, formal, turnId
   }, student, {formal,turnId,evaluate,commit});
 }
 
+export async function handleDialogueOriginal(request,env,student,formal,turnId,commit){
+  const dialogueLocal={turnId,resourceKey:formal.resourceKey,resourceVersion:formal.resourceVersion,commit};
+  const payload={lessonId:formal.lessonId,clientMutationId:`${DIALOGUE_LOCAL_PREFIX}${turnId}`,lessonPhase:'dialogue'};
+  const make=data=>new Request(request.url,{method:'POST',headers:request.headers,body:JSON.stringify(data)});
+  if(formal.interaction==='vocabAnswer')return handleReadingVocabAttempt(make({...payload,...formal.input}),env,student,dialogueLocal);
+  if(formal.interaction==='evaluation')return handleLearningInteraction(make({...payload,interactionKey:'evaluation',data:formal.input}),env,null,student,dialogueLocal);
+  return readingError('unsupported original task',400);
+}
+
 async function authenticatedReadingStudent(request, env) {
   try {
     return await getReadingStudent(request, env);
@@ -2014,7 +2024,7 @@ export function preActivationTransportLessonPhase(interactionKey, requestedPhase
     : "";
 }
 
-async function handleLearningInteraction(request, env, ctx, authenticatedStudent = null) {
+async function handleLearningInteraction(request, env, ctx, authenticatedStudent = null, dialogueLocal = null) {
   if (!env.READING_DB) return readingError("learning evidence store not configured", 503);
   let student;
   try {
@@ -2042,6 +2052,7 @@ async function handleLearningInteraction(request, env, ctx, authenticatedStudent
       student,
       lesson,
       interactionKey,
+      dialogueLocal,
       payload: {
         ...(payload.data && typeof payload.data === "object" ? payload.data : {}),
         clientMutationId: cleanText(payload.clientMutationId, 100),
@@ -2467,7 +2478,7 @@ async function handleReadingHistory(request, env, student) {
   }, { headers: { "cache-control": "no-store" } });
 }
 
-async function handleReadingVocabAttempt(request, env, student) {
+async function handleReadingVocabAttempt(request, env, student, dialogueLocal = null) {
   const payload = await request.json().catch(() => ({}));
   const lessonId = String(payload.lessonId || "").trim();
   const itemId = String(payload.itemId || "").trim().slice(0, 80);
@@ -2501,6 +2512,7 @@ async function handleReadingVocabAttempt(request, env, student) {
     student,
     lesson,
     interactionKey: "vocabAnswer",
+    dialogueLocal,
     payload: evidencePayload,
     sourceMutation: async ({ attemptNo }) => {
       const current = await db.prepare(

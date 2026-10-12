@@ -59,6 +59,8 @@ export async function historicalEvidence(db,studentId,curriculum){
  }
  for(const row of mastery.filter(r=>r.status==='mastered')){
   if(curriculum.vocabulary.some(v=>v.id===row.item_id))preserved.push({objectiveId:row.item_id,verified:true,sourceRef:{table:'vocab_mastery',lessonId:curriculum.lessonId,itemId:row.item_id,at:row.last_at,ruleVersion:null,policy:'preserve-original-mastery-not-new-independent-test'}});
+  const formal=curriculum.objectives.find(o=>o.domain==='legacy'&&o.legacy.questionKind==='vocabulary'&&o.legacy.resourceKey===`effect:${curriculum.lessonId}:vocab:${row.item_id}`);
+  if(formal&&!preserved.some(p=>p.objectiveId===formal.id))preserved.push({objectiveId:formal.id,verified:false,previousCompletion:true,sourceRef:{table:'vocab_mastery',lessonId:curriculum.lessonId,itemId:row.item_id,at:row.last_at,ruleVersion:null,policy:'original-mastery-preserved-missing-formal-version-requires-review'}});
  }
  const submitted=firstRead.find(r=>r.submitted_at),initial=curriculum.objectives.find(o=>o.domain==='firstRead');
  if(submitted&&initial)preserved.push({objectiveId:initial.id,verified:true,sourceRef:{table:'classical_first_read_sessions',lessonId:curriculum.lessonId,textVersionId:submitted.text_version_id,textDigest:submitted.text_digest,at:submitted.submitted_at,policy:'preserve-original-submission-no-offset-remapping'}});

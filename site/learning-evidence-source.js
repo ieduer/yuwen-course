@@ -1,5 +1,5 @@
 import { loadEvaluationJob, JOB_POLICY, evaluationCallLimit, evaluationProgress, latestUsableEvaluationReply } from "./durable-evaluation-jobs.js";
-import { DIALOGUE_SOURCE_PREFIX, isDialogueSourceMutation } from './dialogue-formal.js';
+import { DIALOGUE_SOURCE_PREFIX, DIALOGUE_LOCAL_PREFIX, isDialogueSourceMutation } from './dialogue-formal.js';
 import { sourceEventStatement, evaluationEventId, evaluationEventBase,
   latestSourceEvent, replyAssessment, sourceEventJob } from './learning-evaluation-events.js';
 import {
@@ -1581,6 +1581,7 @@ export async function recordLearningInteraction({
   sourceMutation = null,
   submissionReservation = null,
   contentionRetry = 0,
+  dialogueLocal = null,
 }) {
   if (!env.READING_DB || !student?.id || !lesson?.id) throw new Error("learning evidence source unavailable");
   if (submissionReservation && sourceMutation) {
@@ -1614,7 +1615,12 @@ export async function recordLearningInteraction({
     })
     : null;
   if (isDialogueSourceMutation(clientMutationId)
-    && (!trustedReservation?.dialogueTurnId || !Array.isArray(trustedReservation.dialogueCommitStatements))) throw dialogueReadbackOnly();
+    && (!trustedReservation?.dialogueTurnId || !Array.isArray(trustedReservation.dialogueCommitStatements))
+    && !dialogueLocal) throw dialogueReadbackOnly();
+  if(dialogueLocal && (!['vocabAnswer','evaluation'].includes(interactionKey)
+    || clientMutationId!==`${DIALOGUE_LOCAL_PREFIX}${dialogueLocal.turnId}`
+    || resourceKey!==dialogueLocal.resourceKey || manifestItem?.resourceVersion!==dialogueLocal.resourceVersion
+    || typeof dialogueLocal.commit!=='function'))throw dialogueReadbackOnly();
   const existing = await existingInteraction(env.READING_DB, student.id, clientMutationId);
   if (existing) {
     assertIdempotentReplayMatches(existing, resourceKey, interactionKey, raw.serialized);
@@ -1703,6 +1709,8 @@ export async function recordLearningInteraction({
   };
 
   const statements = [
+    ...(dialogueLocal ? dialogueLocal.commit({sourceEventId,attemptNo,resourceKey,resourceVersion:manifestItem.resourceVersion,
+      evaluation:{numericScore,normalizedValue,correctness,eligibilityStatus},result:mutation?.result||null}) : []),
     ...(trustedReservation?.dialogueCommitStatements || []),
     ...(trustedReservation?.evaluationJob ? [env.READING_DB.prepare(
       "INSERT INTO learning_evaluation_commits(source_event_id,lease_epoch,committed_at) VALUES(?,?,?)"
@@ -1811,6 +1819,7 @@ export async function recordLearningInteraction({
           sourceMutation,
           submissionReservation,
           contentionRetry: Number(contentionRetry) + 1,
+          dialogueLocal,
         });
       }
     }

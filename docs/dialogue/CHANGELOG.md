@@ -1,5 +1,11 @@
 # Dialogue candidate changelog
 
+## 2026-10-12T09:31:34.266872+00:00 — original answer-key tasks and non-scoring self-report; not released
+
+- Connected all six original poem vocabulary choices and the original0–100 interest self-report, preserving scoring/mastery/source completion rules.
+- Committed visible dialogue and original evidence together without a provider call; protected owner/revision/version and preserved historical mastery with missing formal metadata.
+- Corrected the moved-rubric CI assertion;208 local checks per pinned Node,74 Reading API checks, generated mapping/formal artifact and mobile synthetic double-submit/reload pass. Exact-head CI pending after push; teaching/live acceptance remains open.
+
 ## 2026-10-12T09:10:38.522159+00:00 — verified student-quote confirmation; not released
 
 - Connected exact student quotations to original-task confirmation with original rubric/turn links; suggestions alone award nothing.

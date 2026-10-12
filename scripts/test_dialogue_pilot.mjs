@@ -8,9 +8,9 @@ import {handleDialogue,reconcileAbandonedCalls,callDialogueModel} from '../site/
 import {replyPrefix,consumeGatewayStream} from '../site/dialogue-stream.js';
 import {readDialogueEvents} from '../site/assets/dialogue-events.js';
 import {dialogueBudget,reconciledCost} from '../site/dialogue-budget.js';
-import worker,{handleDialogueFirstRead,handleDialogueFormal} from '../site/_worker.js';
+import worker,{handleDialogueFirstRead,handleDialogueFormal,handleDialogueOriginal} from '../site/_worker.js';
 import {prepareFormalInput} from '../site/dialogue-formal.js';
-import {loadPendingLearningSubmission,assertLearningSubmissionAllowed} from '../site/learning-evidence-source.js';
+import {loadPendingLearningSubmission,assertLearningSubmissionAllowed,recordLearningInteraction} from '../site/learning-evidence-source.js';
 const curriculum=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1717-p2.json'));
 const classical=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1711-p1.json'));
 const student={id:1,ucUserId:700001};
@@ -484,7 +484,7 @@ test('five original formal rubrics use one budgeted call and atomically retain s
    let calls=0,prompt;const submit=formalBody(kind),options=formalOptions(f,async(_e,p)=>{calls++;prompt=p;return formalResult();});
    const response=await handleDialogue(req(submit,poem.lessonId),f.env,student,null,options),data=await response.json();
    assert.equal(response.status,200);assert.equal(calls,1,kind);assert.equal(data.turns.length,2,JSON.stringify(data));assert.equal(data.state.objectives.find(o=>o.id===submit.formal.objectiveId).status,'preserved');
-   assert(prompt.includes('互動類型：'+kind));assert(prompt.includes('第一個欄位必須為 reply'));
+   assert(prompt.includes('互動類型：'+kind));if(kind==='structure')assert(prompt.includes('正文定位至少兩處證據'));assert(prompt.includes('第一個欄位必須為 reply'));
    assert.equal(f.sql.prepare('SELECT raw_value,correctness FROM learning_evaluations').get().raw_value,83);
    assert.equal(f.sql.prepare('SELECT correctness FROM learning_evaluations').get().correctness,'passed');
    assert.deepEqual(JSON.parse(f.sql.prepare('SELECT submitted_payload_json FROM learning_submission_records').get().submitted_payload_json),sourceInput[kind]);
@@ -633,5 +633,99 @@ test('current formal item version is read only from its exact source envelope; m
   f.sql.prepare('UPDATE evidence_outbox SET envelope_json=?').run(row.envelope_json);
   const data=await(await handleDialogue(req(null,poem.lessonId),f.env,student)).json();assert.equal(data.state.objectives.find(o=>o.id===formalBody().formal.objectiveId).status,'preserved');
   assert.equal(f.sql.prepare('SELECT raw_value FROM learning_evaluations').get().raw_value,83);
+ }finally{f.close();}
+});
+
+async function readyOriginal(f,kind='vocabulary'){
+ await handleDialogue(req(body(),poem.lessonId),f.env,student,null,{callModel:good});
+ const session=f.sql.prepare('SELECT * FROM dialogue_sessions').get();
+ const o=kind==='vocabulary'?poem.vocabulary[0]:poem.objectives.find(o=>o.domain==='evaluation');
+ f.sql.prepare("INSERT INTO dialogue_assessments(id,session_id,turn_id,objective_id,outcome,evidence_json,rationale,rule_version,curriculum_version,created_at) VALUES(?,?,(SELECT id FROM dialogue_turns WHERE role='student' LIMIT 1),?,'demonstrated','[]','synthetic setup','synthetic',?,'2026-10-12')").run(crypto.randomUUID(),session.id,o.id,poem.curriculumVersion);
+ const data=await(await handleDialogue(req(null,poem.lessonId),f.env,student)).json();
+ return {data,task:data.originalTask,v:o};
+}
+const originalOptions=f=>({callModel:()=>{throw Error('non-AI original task must never invoke provider');},originalAction:(formal,turnId,commit)=>handleDialogueOriginal(req(null,poem.lessonId),f.env,student,formal,turnId,commit)});
+test('original vocabulary choice and full dialogue commit once with the unchanged answer key and zero added provider calls',async()=>{
+ const f=fixture();try{
+  const {data,task,v}=await readyOriginal(f);assert.equal(task.kind,'vocabulary');assert.equal(task.answerIndex,undefined);
+  const b={action:'original',objectiveId:task.objectiveId,input:{selectedIndex:v.answerIndex},mutationId:'synthetic-original-0001',revision:data.revision};
+  const response=await handleDialogue(req(b,poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(response.status,200);const saved=await response.json();
+  assert.equal(saved.turns.length,4);assert.equal(saved.state.objectives.find(o=>o.id===task.objectiveId).status,'preserved');
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,1);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM vocab_attempts').get().n,1);
+  assert.equal(f.sql.prepare('SELECT correct FROM vocab_attempts').get().correct,1);assert.equal(f.sql.prepare('SELECT raw_value FROM learning_evaluations').get().raw_value,100);
+  const replay=await handleDialogue(req(b,poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(replay.status,200);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM vocab_attempts').get().n,1);
+  const changed=await handleDialogue(req({...b,input:{selectedIndex:(v.answerIndex+1)%v.options.length}},poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(changed.status,409);
+ }finally{f.close();}
+});
+test('original personal evaluation remains non-scoring including a zero rating',async()=>{
+ const f=fixture();try{
+  const {data,task}=await readyOriginal(f,'evaluation');assert.equal(task.kind,'evaluation');
+  const b={action:'original',objectiveId:task.objectiveId,input:{rating:0,reason:'我目前仍不喜歡這篇，但能理解它的時間意識。'},mutationId:'synthetic-rating-0001',revision:data.revision};
+  const response=await handleDialogue(req(b,poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(response.status,200);const saved=await response.json();assert.equal(saved.turns.length,4);
+  const row=f.sql.prepare('SELECT * FROM learning_evaluations').get();assert.equal(row.raw_value,null);assert.equal(row.normalized_value,null);assert.equal(row.eligibility_status,'non_scoring');assert(saved.turns.at(-1).content.includes('不計入成績'));
+  const source=f.sql.prepare('SELECT raw_payload_json FROM learning_interactions').get();assert.equal(JSON.parse(source.raw_payload_json).rating,0);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,1);
+ }finally{f.close();}
+});
+test('original source failure cannot partly persist a choice or dialogue and budget absence does not block a free task',async()=>{
+ const f=fixture();try{
+  const {data,task,v}=await readyOriginal(f);const b={action:'original',objectiveId:task.objectiveId,input:{selectedIndex:v.answerIndex},mutationId:'synthetic-atomic-choice',revision:data.revision};
+  f.sql.exec("CREATE TRIGGER synthetic_reject_evaluation BEFORE INSERT ON learning_evaluations BEGIN SELECT RAISE(ABORT,'synthetic failure'); END");
+  const failed=await handleDialogue(req(b,poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(failed.status,503);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM vocab_attempts').get().n,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_turns').get().n,2);assert.equal(f.sql.prepare('SELECT revision FROM dialogue_sessions').get().revision,1);
+  f.sql.exec('DROP TRIGGER synthetic_reject_evaluation');delete f.env.YW_DIALOGUE_BUDGET_JSON;
+  const saved=await handleDialogue(req(b,poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(saved.status,200);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM vocab_attempts').get().n,1);
+ }finally{f.close();}
+});
+test('original source bridge rejects changed manifest versions, other owners and forged source writes',async()=>{
+ const f=fixture();try{
+  const {data,task,v}=await readyOriginal(f);const b={action:'original',objectiveId:task.objectiveId,input:{selectedIndex:v.answerIndex},mutationId:'synthetic-version-choice',revision:data.revision};
+  const frozen=JSON.parse(f.sql.prepare('SELECT curriculum_json FROM dialogue_sessions').get().curriculum_json);frozen.objectives.find(o=>o.id===task.objectiveId).legacy.resourceVersion='sha256:'+'f'.repeat(64);f.sql.prepare('UPDATE dialogue_sessions SET curriculum_json=?').run(JSON.stringify(frozen));
+  await assert.rejects(recordLearningInteraction({request:req(null,poem.lessonId),env:f.env,student,lesson:JSON.parse(fs.readFileSync('site/data/lessons/'+poem.lessonId+'.json')),interactionKey:'vocabAnswer',payload:{itemId:v.id,selectedIndex:v.answerIndex,clientMutationId:'yw-dialogue-local:forged'}}));
+  const changed=await handleDialogue(req(b,poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(changed.status,503);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM vocab_attempts').get().n,0);
+  const foreign=await handleDialogue(req(b,poem.lessonId),f.env,{id:2,ucUserId:700002},null,originalOptions(f));assert.equal(foreign.status,409);
+ }finally{f.close();}
+});
+
+test('original vocabulary keeps the first-wrong then two-correct mastery rule and preserves completed historical mastery',async()=>{
+ const f=fixture();try{
+  let {data,task,v}=await readyOriginal(f);const choices=[(v.answerIndex+1)%v.options.length,v.answerIndex,v.answerIndex];
+  for(let i=0;i<choices.length;i++){
+   const response=await handleDialogue(req({action:'original',objectiveId:task.objectiveId,input:{selectedIndex:choices[i]},mutationId:'synthetic-mastery-'+i,revision:data.revision},poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(response.status,200);data=await response.json();
+   assert.equal(f.sql.prepare('SELECT status FROM vocab_mastery').get().status,i===2?'mastered':'learning');if(i<2)assert.equal(data.originalTask.objectiveId,task.objectiveId);
+  }
+  assert.equal(data.originalTask,null);assert.equal(f.sql.prepare('SELECT wrong_count FROM vocab_mastery').get().wrong_count,1);assert.equal(f.sql.prepare('SELECT correct_count FROM vocab_mastery').get().correct_count,2);
+  const values=f.sql.prepare('SELECT raw_value FROM learning_evaluations ORDER BY rowid').all().map(r=>r.raw_value);assert.deepEqual(values,[0,100,100]);
+  f.sql.exec('DELETE FROM evidence_outbox; DELETE FROM learning_evaluations; DELETE FROM learning_interactions;');
+  const historical=await(await handleDialogue(req(null,poem.lessonId),f.env,student)).json();assert.equal(historical.originalTask,null);assert.equal(historical.state.objectives.find(o=>o.id===task.objectiveId).status,'historical_review');
+ }finally{f.close();}
+});
+test('concurrent original submissions have one atomic winner and a failed response is reconciled from the saved turn',async()=>{
+ const f=fixture();try{
+  const {data,task,v}=await readyOriginal(f),b={action:'original',objectiveId:task.objectiveId,input:{selectedIndex:v.answerIndex},mutationId:'synthetic-concurrent-choice1',revision:data.revision};
+  const options=originalOptions(f),real=options.originalAction;options.originalAction=async(...args)=>{await real(...args);return new Response(JSON.stringify({error:'synthetic response loss'}),{status:502});};
+  const results=await Promise.all([handleDialogue(req(b,poem.lessonId),f.env,student,null,options),handleDialogue(req({...b,mutationId:'synthetic-concurrent-choice2'},poem.lessonId),f.env,student,null,options)]);
+  assert.equal(results.filter(r=>r.status===200).length,1);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM vocab_attempts').get().n,1);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_turns').get().n,4);
+ }finally{f.close();}
+});
+
+test('every original poem vocabulary resource retains its exact source result and the source-owned quiz completion',async()=>{
+ const f=fixture();try{
+  let {data}=await readyOriginal(f);const session=f.sql.prepare('SELECT id FROM dialogue_sessions').get();
+  for(const v of poem.vocabulary.slice(1))f.sql.prepare("INSERT INTO dialogue_assessments(id,session_id,turn_id,objective_id,outcome,evidence_json,rationale,rule_version,curriculum_version,created_at) VALUES(?,?,(SELECT id FROM dialogue_turns WHERE role='student' LIMIT 1),?,'demonstrated','[]','synthetic setup','synthetic',?,'2026-10-12')").run(crypto.randomUUID(),session.id,v.id,poem.curriculumVersion);
+  for(let i=0;i<poem.vocabulary.length;i++){
+   data=await(await handleDialogue(req(null,poem.lessonId),f.env,student)).json();const task=data.originalTask;assert.equal(task.kind,'vocabulary');const v=poem.vocabulary.find(v=>v.id===task.itemId);
+   const response=await handleDialogue(req({action:'original',objectiveId:task.objectiveId,input:{selectedIndex:v.answerIndex},mutationId:'synthetic-all-original-'+i,revision:data.revision},poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(response.status,200);data=await response.json();assert.equal(data.state.objectives.find(o=>o.id===task.objectiveId).status,'preserved');
+  }
+  assert.equal(data.originalTask,null);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM vocab_attempts').get().n,6);assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='vocabQuizCompleted'").get().n,1);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,1);
+ }finally{f.close();}
+});
+
+test('free original tasks respect the same bounded lesson history without spending or partially grading',async()=>{
+ const f=fixture();try{
+  const {data,task,v}=await readyOriginal(f),session=f.sql.prepare('SELECT id FROM dialogue_sessions').get();
+  for(let i=1;i<LIMITS.lessonLifetime;i++)f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,'synthetic','student','synthetic','saved','synthetic','2026-10-12')").run('synthetic-turn-'+i,session.id,'synthetic-limit-'+i);
+  const response=await handleDialogue(req({action:'original',objectiveId:task.objectiveId,input:{selectedIndex:v.answerIndex},mutationId:'synthetic-limit-original',revision:data.revision},poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(response.status,409);assert.equal((await response.json()).code,'lesson_review_required');assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM vocab_attempts').get().n,0);
  }finally{f.close();}
 });

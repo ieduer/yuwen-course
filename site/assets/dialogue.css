@@ -6,3 +6,5 @@
 #first-reading .correction-card span,#first-reading .first-read-mark-card>span{display:block;font-size:12px;color:#687163;margin:5px 0}#first-reading .first-read-mark-card{margin:12px 0}
 .source-draft{margin:1rem 0;padding:1rem;border:1px solid var(--line,#d7d2c8);border-radius:.7rem;background:var(--paper,#fffdf8)}
 .source-draft h3{margin:0 0 .6rem;font-size:1rem}.source-draft p,.source-draft blockquote{white-space:pre-wrap;overflow-wrap:anywhere}.source-draft blockquote{margin:.7rem 0;padding-left:.8rem;border-left:2px solid #b09a72}.source-draft blockquote button{display:block;margin-top:.4rem}.source-draft button{min-height:44px}
+
+#source-draft form{display:grid;gap:1rem}#source-draft fieldset{border:0;padding:0;display:grid;gap:.5rem}#source-draft label{display:block;min-height:44px;padding:.5rem;line-height:1.6}#source-draft input[type=radio]{width:auto;min-height:auto;margin-right:.6rem}#source-draft input[type=number]{display:block;width:7rem;min-height:44px}#source-draft textarea{display:block;width:100%;min-height:5rem}

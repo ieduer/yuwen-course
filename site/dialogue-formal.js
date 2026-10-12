@@ -2,7 +2,35 @@ import { BLUEPRINT_MODE_TECHNIQUES, normalizeBlueprintMode } from './lesson-blue
 // Original-source submissions have a reserved, server-generated mutation namespace.
 // Legacy routes may read these receipts, but must never re-evaluate them.
 export const DIALOGUE_SOURCE_PREFIX = 'yw-dialogue:';
-export const isDialogueSourceMutation = value => String(value || '').trim().startsWith(DIALOGUE_SOURCE_PREFIX);
+export const DIALOGUE_LOCAL_PREFIX = 'yw-dialogue-local:';
+export const isDialogueSourceMutation = value => [DIALOGUE_SOURCE_PREFIX,DIALOGUE_LOCAL_PREFIX].some(prefix=>String(value || '').trim().startsWith(prefix));
+
+// These original tasks use the answer key or the student's own interest rating,
+// never a model score. The full frozen item is checked again by the source route.
+export function originalTask(curriculum,state,mastery=[]){
+  if(state.legacyCompletion)return null;
+  const originals=curriculum.objectives.filter(o=>o.domain==='legacy');
+  const pending=originals.filter(o=>!['preserved','historical_review'].includes(state.objectives.find(x=>x.id===o.id)?.status));
+  for(const o of originals.filter(o=>o.legacy.questionKind==='vocabulary')){
+    const v=curriculum.vocabulary.find(v=>o.legacy.resourceKey===`effect:${curriculum.lessonId}:vocab:${v.id}`);
+    const status=state.objectives.find(x=>x.id===o.id)?.status,current=mastery.find(m=>m.item_id===v?.id);
+    if(status==='historical_review'||status==='preserved'&&current?.status!=='learning')continue;
+    if(v&&state.objectives.find(x=>x.id===v.id)?.status==='demonstrated')return {objectiveId:o.id,kind:'vocabulary',itemId:v.id,question:v.question,source:v.sourceSentence,options:v.options,originalMastery:current?{status:current.status,correctCount:current.correct_count,wrongCount:current.wrong_count}:null};
+  }
+  const evaluation=pending.find(o=>o.legacy.questionKind==='evaluation');
+  if(evaluation&&(state.next?.domain==='evaluation'||state.objectives.find(o=>o.domain==='evaluation')?.status==='demonstrated'))return {objectiveId:evaluation.id,kind:'evaluation'};
+  return null;
+}
+export function prepareOriginalInput(curriculum,task,input){
+  const o=curriculum.objectives.find(o=>o.id===task.objectiveId&&o.domain==='legacy');
+  if(!o||!input||typeof input!=='object'||Array.isArray(input))throw Error('invalid_original_input');
+  if(task.kind==='vocabulary'){
+    if(Object.keys(input).some(k=>k!=='selectedIndex')||!Number.isInteger(input.selectedIndex)||!task.options[input.selectedIndex])throw Error('invalid_original_choice');
+    return {objectiveId:o.id,interaction:'vocabAnswer',input:{itemId:task.itemId,selectedIndex:input.selectedIndex},content:`原題：${task.question}\n我的選擇：${task.options[input.selectedIndex]}`,resourceKey:o.legacy.resourceKey,resourceVersion:o.legacy.resourceVersion};
+  }
+  if(Object.keys(input).some(k=>!['rating','reason'].includes(k))||!Number.isFinite(input.rating)||input.rating<0||input.rating>100||typeof input.reason!=='string'||input.reason.length>300)throw Error('invalid_original_rating');
+  return {objectiveId:o.id,interaction:'evaluation',input:{rating:input.rating,reason:input.reason},content:`本篇有意思程度：${input.rating}%（自評，不計分）${input.reason?'\n理由：'+input.reason:''}`,resourceKey:o.legacy.resourceKey,resourceVersion:o.legacy.resourceVersion};
+}
 export const FORMAL_FIELDS = Object.freeze({
   contextWords: ['words'],
   authorQuestion: ['answer'],

@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
 import {handleDialogue} from '../site/dialogue-source.js';
-import {handleDialogueFirstRead,handleDialogueFormal} from '../site/_worker.js';
+import {handleDialogueFirstRead,handleDialogueFormal,handleDialogueOriginal} from '../site/_worker.js';
 import {POLICY_VERSION} from '../site/dialogue-policy.js';
 const root=path.resolve('site'),sql=new DatabaseSync(':memory:');sql.exec('PRAGMA foreign_keys=ON');
 for(const f of fs.readdirSync('migrations').filter(f=>f.endsWith('.sql')).sort())sql.exec(fs.readFileSync('migrations/'+f,'utf8'));
@@ -29,13 +29,20 @@ const server=http.createServer(async(req,res)=>{try{const url=new URL(req.url,'h
    const add=sql.prepare('INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,?,?,?,?,?)');
    for(let n=0;n<value.historyPairs;n++)for(const role of ['student','teacher'])add.run(`long-${role}-${n}`,id,`history-${n}`,'synthetic-only',role,`【合成長對話 ${n+1}／${role}】`+'我從原句追問景物與感受之間的關係，保留不確定的解讀。'.repeat(30),'confirmed',POLICY_VERSION,at);
   }
+  if(value.originalReady===true){
+   if(!value.account||sql.prepare('SELECT id FROM dialogue_sessions WHERE student_id=?').get(value.account))throw Error('fixture_already_populated');
+   const curriculum=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1498.json')),id=crypto.randomUUID(),turn=crypto.randomUUID(),at=new Date().toISOString();
+   sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,revision,created_at,updated_at) VALUES(?,?,?,?,?,?,1,?,?)').run(id,value.account,curriculum.lessonId,curriculum.curriculumVersion,JSON.stringify(curriculum),POLICY_VERSION,at,at);
+   sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?, 'synthetic-ready','synthetic-only','student','【合成學習證據，非真實學生】字詞語境說明及篇目感受已備妥。','saved',?,?)").run(turn,id,POLICY_VERSION,at);
+   for(const objective of [curriculum.vocabulary[0].id,curriculum.objectives.find(o=>o.domain==='evaluation').id])sql.prepare("INSERT INTO dialogue_assessments(id,session_id,turn_id,objective_id,outcome,evidence_json,rationale,rule_version,curriculum_version,created_at) VALUES(?,?,?,?,'demonstrated','[]','synthetic-only','synthetic',?,?)").run(crypto.randomUUID(),id,turn,objective,curriculum.curriculumVersion,at);
+  }
   syntheticAccount=value.account;responseDelayMs=value.responseDelayMs;sourceDraftEnabled=value.sourceDraft===true;res.writeHead(200,{'content-type':'application/json'});res.end('{"synthetic":true}');return;
  }
  if(url.pathname==='/api/dialogue/v1'){
  let body='';for await(const c of req){body+=c;if(body.length>16000){res.writeHead(413);res.end();return;}}
  const request=new Request('https://yw.bdfz.net'+req.url,{method:req.method,headers:{'content-type':'application/json',accept:req.headers.accept||'application/json'},...(body?{body}:{})});
  const student=syntheticAccount?{id:syntheticAccount,ucUserId:700000+syntheticAccount}:null;
- const response=await handleDialogue(request,env,student,null,{firstReadAction:(operation,payload)=>handleDialogueFirstRead(request,env,student,null,operation,payload),formalAction:(formal,id,evaluate,commit)=>handleDialogueFormal(request,env,student,formal,id,evaluate,commit),callModel:async(_env,_prompt,_id,emit)=>{
+ const response=await handleDialogue(request,env,student,null,{firstReadAction:(operation,payload)=>handleDialogueFirstRead(request,env,student,null,operation,payload),formalAction:(formal,id,evaluate,commit)=>handleDialogueFormal(request,env,student,formal,id,evaluate,commit),originalAction:(formal,id,commit)=>handleDialogueOriginal(request,env,student,formal,id,commit),callModel:async(_env,_prompt,_id,emit)=>{
   const reply='【合成測試回應，不是正式 AI 評閱】\n請回到你剛才選出的原文，說說是哪個詞讓你產生了這個理解。你也可以保留不同解讀，並指出依據。';
   await emit(reply.slice(0,30));await new Promise(resolve=>setTimeout(resolve,responseDelayMs));await emit(reply);
   let value={reply,assessments:[]};

@@ -1,6 +1,6 @@
-## Current dialogue candidate — 2026-10-12T09:10:38Z
+## Current dialogue candidate — 2026-10-12T09:31:34.266872+00:00
 
-Exact student-quote answer confirmation now connects five original formal tasks to their unchanged source rubric and budgeted evaluator. Strict same-event item-version readback preserves source credit. Feature remains disabled; no production capacity, migration or paid call. 193 focused checks pass per pinned Node and the formal artifact is current. Original non-AI tasks and real teaching/restore/release gates remain open. See [the current candidate contract](docs/dialogue/PILOT.md) for exact evidence and blockers. Earlier entries are historical.
+All12 original formal poem requirements now have dialogue bridges: original AI rubrics, six answer-key choices and non-scoring self-report. Historical grades and source mastery rules stay unchanged; free task receipts and visible dialogue commit together.208 focused checks per pinned Node,74 local Reading API checks, generated map and formal artifact pass. Feature remains disabled; production capacity has not increased. Teaching conclusion/calibration, real restore and live release gates remain open. See [current evidence and blockers](docs/dialogue/PILOT.md).
 
 ## Historical dialogue candidate — 2026-10-12T07:56:32Z
 

@@ -3,7 +3,7 @@ import {recordCorrection} from './dialogue-corrections.js';
 import {hasClassicalAnnotatedReadReceipt} from './classical-first-read-source.js';
 import {consumeGatewayStream,studentStream} from './dialogue-stream.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
-import {prepareFormalInput,formalPrompt} from './dialogue-formal.js';
+import {prepareFormalInput,formalPrompt,originalTask,prepareOriginalInput} from './dialogue-formal.js';
 import {POLICY_VERSION,LIMITS,PILOTS,validateProposal,projectState,contextFor,createQuestion,vocabularyOrder,evidenceReport} from './dialogue-policy.js';
 const now=()=>new Date().toISOString();
 const uuid=()=>crypto.randomUUID();
@@ -57,9 +57,9 @@ async function snapshot(db,session,curriculum,before){
  const state=projectState(curriculum,assessments,preserved,legacy.completion,await readingGate(db,session.student_id,curriculum,legacy)),completeTurns=await transcript(db,session);
  const partialRows=await all(db.prepare(`SELECT c.content,c.sequence,c.created_at,t.id AS turn_id,t.status FROM dialogue_stream_chunks c JOIN dialogue_turns t ON t.id=c.turn_id WHERE t.session_id=? AND c.turn_id=(SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence DESC LIMIT 1) AND NOT EXISTS(SELECT 1 FROM dialogue_turns r WHERE r.reply_to=t.id AND r.role='teacher') ORDER BY c.sequence LIMIT 128`).bind(session.id,session.id));
  const partial=partialRows.length?{turnId:partialRows[0].turn_id,content:partialRows.map(c=>c.content).join(''),status:partialRows[0].status==='needs_review'?'unconfirmed':'streaming'}:null;
- return {sourceDraft:await proposedSourceDraft(db,session,legacy),partial,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending:!!session.inflight,curriculumVersion:session.curriculum_version,...page,state,assessments,report:evidenceReport(curriculum,state,assessments,completeTurns),question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at,formal:draft.source_request_json?JSON.parse(draft.source_request_json):null}:null,legacy,readingGate:state.readingGate};
+ return {originalTask:originalTask(curriculum,state,legacy.mastery),sourceDraft:await proposedSourceDraft(db,session,legacy),partial,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending:!!session.inflight,curriculumVersion:session.curriculum_version,...page,state,assessments,report:evidenceReport(curriculum,state,assessments,completeTurns),question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at,formal:draft.source_request_json?JSON.parse(draft.source_request_json):null}:null,legacy,readingGate:state.readingGate};
 }
-export async function handleDialogue(request,env,student,ctx,{callModel=callDialogueModel,readSharedHistory=null,firstReadAction=null,formalAction=null}={}){
+export async function handleDialogue(request,env,student,ctx,{callModel=callDialogueModel,readSharedHistory=null,firstReadAction=null,formalAction=null,originalAction=null}={}){
  if(!student)return json({error:'請先登入 My。',code:'authentication_required'},401);
  if(!admitted(env,student))return json({error:'試點尚未開放。',code:'pilot_unavailable'},404);
  const url=new URL(request.url),lessonId=url.searchParams.get('lessonId');
@@ -118,6 +118,39 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
  }
  if(body.action==='correction'){
   const result=await recordCorrection(db,session,body,now());return json(result.value,result.status);
+ }
+ if(body.action==='original'){
+  if(!originalAction)return json({code:'original_source_unavailable'},503);
+  if(!/^[a-zA-Z0-9_-]{16,80}$/.test(body.mutationId||'')||!Number.isSafeInteger(body.revision))return json({code:'invalid_input'},400);
+  const requestHash=await sha(JSON.stringify(['original',body.objectiveId,body.input,body.revision]));
+  const duplicate=await db.prepare("SELECT request_hash FROM dialogue_turns WHERE session_id=? AND mutation_id=? AND role='student'").bind(session.id,body.mutationId).first();
+  if(duplicate)return duplicate.request_hash===requestHash?json(await snapshot(db,session,curriculum)):json({code:'idempotency_conflict'},409);
+  if(session.inflight||session.revision!==body.revision)return json({code:'stale_revision'},409);
+  const count=await db.prepare("SELECT COUNT(*) n FROM dialogue_turns WHERE session_id=? AND role='student'").bind(session.id).first();
+  if(count.n>=LIMITS.lessonLifetime)return json({code:'lesson_review_required',message:'本課已達會話上限；已保存紀錄保留，請匯出交由教師覆核。這次選擇尚未保存。'},409);
+  const data=await snapshot(db,session,curriculum),task=data.originalTask;
+  if(data.question||!task||task.objectiveId!==body.objectiveId)return json({code:'original_task_not_ready',message:'請先完成目前的語境說明；已完成的原有結果不重做。'},409);
+  let formal;try{formal=prepareOriginalInput(curriculum,task,body.input);}catch{return json({code:'invalid_original_input'},400);}
+  const turnId=uuid(),teacherId=uuid(),at=now();
+  try{
+   const response=await originalAction({...formal,lessonId},turnId,result=>{
+    const reply=formal.interaction==='evaluation'?'你的篇目自評已保存；高低都不計入成績。':result.evaluation.correctness==='correct'?'這個選項符合原題準據，原有作答紀錄已保存。請保留剛才對語境的解釋，繼續細讀。':'這次選擇與原題準據不同，第一次及後續作答會分開保留。回到原句核對語境，再在對話說說你改變的判斷。';
+    return [
+     db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,(SELECT id FROM dialogue_sessions WHERE id=? AND student_id=? AND revision=? AND inflight IS NULL AND (SELECT COUNT(*) FROM dialogue_turns WHERE session_id=? AND role='student')<?),?,'original_source_saved',?,?)`).bind(`${turnId}:source`,session.id,student.id,body.revision,session.id,LIMITS.lessonLifetime,turnId,JSON.stringify({objectiveId:formal.objectiveId,...result}),at),
+     db.prepare(`INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at,source_request_json) VALUES(?,?,?,?,'student',?,'saved',?,?,?)`).bind(turnId,session.id,body.mutationId,requestHash,formal.content,POLICY_VERSION,at,JSON.stringify(formal)),
+     db.prepare(`INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,reply_to,status,model,policy_version,created_at) VALUES(?,?,?,'original-answer-key','teacher',?,?,'saved','source-owned',?,?)`).bind(teacherId,session.id,body.mutationId,reply,turnId,POLICY_VERSION,at),
+     db.prepare('UPDATE dialogue_sessions SET revision=revision+1,updated_at=? WHERE id=? AND revision=? AND inflight IS NULL').bind(at,session.id,body.revision),
+    ];
+   });
+   if(!response.ok){
+    const saved=await db.prepare("SELECT id FROM dialogue_turns WHERE session_id=? AND mutation_id=? AND role='student'").bind(session.id,body.mutationId).first();
+    if(!saved){const value=await response.json();return json(value,response.status);}
+   }
+  }catch{
+   const saved=await db.prepare("SELECT id FROM dialogue_turns WHERE session_id=? AND mutation_id=? AND role='student'").bind(session.id,body.mutationId).first();
+   if(!saved)return json({code:'original_source_unconfirmed',message:'尚未確認原題保存；請保留選擇並讀回紀錄，重送會使用同一回執。'},503);
+  }
+  session=await db.prepare('SELECT * FROM dialogue_sessions WHERE id=?').bind(session.id).first();return json(await snapshot(db,session,curriculum));
  }
  if(body.action==='question'){
   if(session.inflight)return json({code:'turn_in_progress'},409);
@@ -186,7 +219,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   db.prepare(`UPDATE dialogue_sessions SET revision=revision+1,inflight=?,updated_at=? WHERE id=? AND revision=? AND inflight IS NULL
    AND (SELECT COUNT(*) FROM dialogue_calls WHERE day=?)<?
    AND (SELECT COUNT(*) FROM dialogue_calls WHERE student_id=? AND day=?)<?
-   AND (SELECT COUNT(*) FROM dialogue_calls WHERE session_id=?)<?
+   AND (SELECT COUNT(*) FROM dialogue_turns WHERE session_id=? AND role='student')<?
    AND (SELECT COUNT(*) FROM dialogue_calls WHERE state IN ('reserved','finishing'))<?
    AND NOT EXISTS(SELECT 1 FROM dialogue_calls WHERE budget_policy_json IS NULL)
    AND (SELECT COALESCE(SUM(COALESCE(accounted_micros,reserved_micros)),0) FROM dialogue_calls WHERE day=?)+?<=?

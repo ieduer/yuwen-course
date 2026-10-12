@@ -107,7 +107,7 @@
       "disposition": "preserved_existing_nonvisible_or_composite_source; not silently assigned new requirements"
     }
   ],
-  "policy": "additive-dialogue-v1-no-grade-write",
+  "policy": "additive-dialogue-v2-original-source-only-no-regrade",
   "sourcePins": {
     "formal": "yw-e310d45b1d81e9ad",
     "formative": "yw-formative-65a150df80285f4e",
@@ -25013,8 +25013,8 @@
           "dialogueDomain": "context",
           "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
           "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-          "storage": "legacy learning_interactions/learning_evaluations unchanged; new dialogue_turns/dialogue_assessments separate",
-          "status": "inventory-complete; consequential-equivalence-bridge-not-implemented"
+          "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+          "status": "student-quote-confirmation-original-rubric-bridged"
         },
         {
           "requirementId": "effect:lesson-1498:interaction:revision",
@@ -25023,8 +25023,8 @@
           "dialogueDomain": "revision",
           "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
           "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-          "storage": "legacy learning_interactions/learning_evaluations unchanged; new dialogue_turns/dialogue_assessments separate",
-          "status": "inventory-complete; consequential-equivalence-bridge-not-implemented"
+          "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+          "status": "student-quote-confirmation-original-rubric-bridged"
         },
         {
           "requirementId": "effect:lesson-1498:interaction:structure",
@@ -25033,8 +25033,8 @@
           "dialogueDomain": "structure",
           "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
           "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-          "storage": "legacy learning_interactions/learning_evaluations unchanged; new dialogue_turns/dialogue_assessments separate",
-          "status": "inventory-complete; consequential-equivalence-bridge-not-implemented"
+          "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+          "status": "student-quote-confirmation-original-rubric-bridged"
         },
         {
           "requirementId": "effect:lesson-1498:interaction:evaluation",
@@ -25043,8 +25043,8 @@
           "dialogueDomain": "evaluation",
           "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
           "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-          "storage": "legacy learning_interactions/learning_evaluations unchanged; new dialogue_turns/dialogue_assessments separate",
-          "status": "inventory-complete; consequential-equivalence-bridge-not-implemented"
+          "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+          "status": "original-non-scoring-self-report-bridged"
         },
         {
           "requirementId": "effect:lesson-1498:interaction:authorQuestion",
@@ -25053,8 +25053,8 @@
           "dialogueDomain": "authorQuestion",
           "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
           "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-          "storage": "legacy learning_interactions/learning_evaluations unchanged; new dialogue_turns/dialogue_assessments separate",
-          "status": "inventory-complete; consequential-equivalence-bridge-not-implemented"
+          "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+          "status": "student-quote-confirmation-original-rubric-bridged"
         },
         {
           "requirementId": "effect:lesson-1498:vocab:lesson-1498:v03",
@@ -25063,8 +25063,8 @@
           "dialogueDomain": "vocabulary",
           "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
           "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-          "storage": "legacy learning_interactions/learning_evaluations unchanged; new dialogue_turns/dialogue_assessments separate",
-          "status": "inventory-complete; consequential-equivalence-bridge-not-implemented"
+          "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+          "status": "original-selectedIndex-answer-key-bridged"
         },
         {
           "requirementId": "effect:lesson-1498:vocab:lesson-1498:v04",
@@ -25073,8 +25073,8 @@
           "dialogueDomain": "vocabulary",
           "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
           "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-          "storage": "legacy learning_interactions/learning_evaluations unchanged; new dialogue_turns/dialogue_assessments separate",
-          "status": "inventory-complete; consequential-equivalence-bridge-not-implemented"
+          "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+          "status": "original-selectedIndex-answer-key-bridged"
         },
         {
           "requirementId": "effect:lesson-1498:vocab:lesson-1498:v05",
@@ -25083,8 +25083,8 @@
           "dialogueDomain": "vocabulary",
           "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
           "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-          "storage": "legacy learning_interactions/learning_evaluations unchanged; new dialogue_turns/dialogue_assessments separate",
-          "status": "inventory-complete; consequential-equivalence-bridge-not-implemented"
+          "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+          "status": "original-selectedIndex-answer-key-bridged"
         },
         {
           "requirementId": "effect:lesson-1498:vocab:lesson-1498:v06",
@@ -25093,8 +25093,8 @@
           "dialogueDomain": "vocabulary",
           "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
           "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-          "storage": "legacy learning_interactions/learning_evaluations unchanged; new dialogue_turns/dialogue_assessments separate",
-          "status": "inventory-complete; consequential-equivalence-bridge-not-implemented"
+          "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+          "status": "original-selectedIndex-answer-key-bridged"
         },
         {
           "requirementId": "effect:lesson-1498:vocab:lesson-1498:v07",
@@ -25103,8 +25103,8 @@
           "dialogueDomain": "vocabulary",
           "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
           "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-          "storage": "legacy learning_interactions/learning_evaluations unchanged; new dialogue_turns/dialogue_assessments separate",
-          "status": "inventory-complete; consequential-equivalence-bridge-not-implemented"
+          "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+          "status": "original-selectedIndex-answer-key-bridged"
         },
         {
           "requirementId": "effect:lesson-1498:vocab:lesson-1498:v08",
@@ -25113,8 +25113,8 @@
           "dialogueDomain": "vocabulary",
           "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
           "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-          "storage": "legacy learning_interactions/learning_evaluations unchanged; new dialogue_turns/dialogue_assessments separate",
-          "status": "inventory-complete; consequential-equivalence-bridge-not-implemented"
+          "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+          "status": "original-selectedIndex-answer-key-bridged"
         },
         {
           "requirementId": "effect:lesson-1498:interaction:wordCreation",
@@ -25123,8 +25123,8 @@
           "dialogueDomain": "wordCreation",
           "conversationEquivalent": "選一個剛疏通的詞，用於三行短詩（詩歌）、三句對白（戲劇）、三句微型敘事（小說）或三句話；核對詞義、語境及搭配。",
           "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-          "storage": "legacy learning_interactions/learning_evaluations unchanged; new dialogue_turns/dialogue_assessments separate",
-          "status": "inventory-complete; consequential-equivalence-bridge-not-implemented"
+          "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+          "status": "student-quote-confirmation-original-rubric-bridged"
         },
         {
           "requirementId": "formal:effect:lesson-1498:interaction:authorQuestion",
@@ -25134,7 +25134,7 @@
           "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
           "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
           "storage": "existing formative/source records unchanged; dialogue_assessments references",
-          "status": "preserved-source; dialogue-bridge-not-implemented"
+          "status": "same-original-formal-receipt-no-duplicate-score"
         },
         {
           "requirementId": "formal:effect:lesson-1498:interaction:contextWords",
@@ -25144,7 +25144,7 @@
           "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
           "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
           "storage": "existing formative/source records unchanged; dialogue_assessments references",
-          "status": "preserved-source; dialogue-bridge-not-implemented"
+          "status": "same-original-formal-receipt-no-duplicate-score"
         },
         {
           "requirementId": "formal:effect:lesson-1498:interaction:structure",
@@ -25154,7 +25154,7 @@
           "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
           "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
           "storage": "existing formative/source records unchanged; dialogue_assessments references",
-          "status": "preserved-source; dialogue-bridge-not-implemented"
+          "status": "same-original-formal-receipt-no-duplicate-score"
         },
         {
           "requirementId": "formal:effect:lesson-1498:interaction:revision",
@@ -25164,7 +25164,7 @@
           "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
           "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
           "storage": "existing formative/source records unchanged; dialogue_assessments references",
-          "status": "preserved-source; dialogue-bridge-not-implemented"
+          "status": "same-original-formal-receipt-no-duplicate-score"
         },
         {
           "requirementId": "formal:effect:lesson-1498:interaction:wordCreation",
@@ -25174,7 +25174,7 @@
           "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
           "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
           "storage": "existing formative/source records unchanged; dialogue_assessments references",
-          "status": "preserved-source; dialogue-bridge-not-implemented"
+          "status": "same-original-formal-receipt-no-duplicate-score"
         },
         {
           "requirementId": "formal:effect:lesson-1498:vocab:lesson-1498:v03",
@@ -25184,7 +25184,7 @@
           "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
           "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
           "storage": "existing formative/source records unchanged; dialogue_assessments references",
-          "status": "preserved-source; dialogue-bridge-not-implemented"
+          "status": "same-original-formal-receipt-no-duplicate-score"
         },
         {
           "requirementId": "formal:effect:lesson-1498:vocab:lesson-1498:v04",
@@ -25194,7 +25194,7 @@
           "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
           "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
           "storage": "existing formative/source records unchanged; dialogue_assessments references",
-          "status": "preserved-source; dialogue-bridge-not-implemented"
+          "status": "same-original-formal-receipt-no-duplicate-score"
         },
         {
           "requirementId": "formal:effect:lesson-1498:vocab:lesson-1498:v05",
@@ -25204,7 +25204,7 @@
           "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
           "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
           "storage": "existing formative/source records unchanged; dialogue_assessments references",
-          "status": "preserved-source; dialogue-bridge-not-implemented"
+          "status": "same-original-formal-receipt-no-duplicate-score"
         },
         {
           "requirementId": "formal:effect:lesson-1498:vocab:lesson-1498:v06",
@@ -25214,7 +25214,7 @@
           "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
           "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
           "storage": "existing formative/source records unchanged; dialogue_assessments references",
-          "status": "preserved-source; dialogue-bridge-not-implemented"
+          "status": "same-original-formal-receipt-no-duplicate-score"
         },
         {
           "requirementId": "formal:effect:lesson-1498:vocab:lesson-1498:v07",
@@ -25224,7 +25224,7 @@
           "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
           "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
           "storage": "existing formative/source records unchanged; dialogue_assessments references",
-          "status": "preserved-source; dialogue-bridge-not-implemented"
+          "status": "same-original-formal-receipt-no-duplicate-score"
         },
         {
           "requirementId": "formal:effect:lesson-1498:vocab:lesson-1498:v08",
@@ -25234,7 +25234,7 @@
           "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
           "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
           "storage": "existing formative/source records unchanged; dialogue_assessments references",
-          "status": "preserved-source; dialogue-bridge-not-implemented"
+          "status": "same-original-formal-receipt-no-duplicate-score"
         }
       ],
       "compoundRequirements": [
@@ -25242,7 +25242,7 @@
           "id": "poetry-word-creation",
           "rule": "選一個剛疏通的詞，用於三行短詩（詩歌）、三句對白（戲劇）、三句微型敘事（小說）或三句話；核對詞義、語境及搭配。",
           "storage": "original wordCreation record + separate new dialogue evidence",
-          "status": "dialogue-proposal-no-grade-write"
+          "status": "original-word-creation-rubric-bridged-new-mastery-separate"
         }
       ],
       "sourceLesson": "data/lessons/lesson-1498.json",
