@@ -38,20 +38,20 @@ export function validateProposal(raw,{curriculum,turns,question=null,hints=[],re
   }
   accepted.push({objectiveId:o.id,outcome:a.outcome,rationale:a.rationale,evidence,ruleVersion:RULE_VERSION});
  }
- return {reply:raw.reply.trim(),assessments:accepted};
+ return {reply:raw.reply,assessments:accepted};
 }
 export function projectState(curriculum,assessments,legacy=[]) {
  const objectives=curriculum.objectives.map(o=>{
-  const prior=legacy.find(l=>l.objectiveId===o.id && l.verified===true);
+  const prior=legacy.find(l=>l.objectiveId===o.id && (l.verified===true||l.previousCompletion===true));
   const rows=assessments.filter(a=>a.objectiveId===o.id);
   const best=rows.find(a=>a.outcome==='demonstrated');
-  return {id:o.id,label:o.label,domain:o.domain,status:prior?'preserved':best?'demonstrated':rows.at(-1)?.outcome||'not_yet_observed',evidence:prior?.sourceEventId||best?.evidence||[],rule:o.rule};
+  return {id:o.id,label:o.label,domain:o.domain,status:prior?.verified?'preserved':best?'demonstrated':prior?.previousCompletion?'historical_review':rows.at(-1)?.outcome||'not_yet_observed',evidence:prior?.sourceRef||prior?.sourceEventId||best?.evidence||[],rule:o.rule};
  });
  // No replacement grade, mastery threshold or historical downgrade is inferred.
  const ordinary=objectives.filter(o=>o.domain!=='shangyou');
  const ready=ordinary.every(o=>['preserved','demonstrated'].includes(o.status));
  const shangyou=objectives.find(o=>o.domain==='shangyou');
- return {objectives,readyForShangyou:ready,completion:ready&&shangyou?.status==='demonstrated'?'evidence_ready_for_review':'in_progress',legacyGrades:'unchanged',next:objectives.find(o=>!['preserved','demonstrated'].includes(o.status) && (ready||o.domain!=='shangyou'))||null};
+ return {objectives,readyForShangyou:ready,completion:ready&&shangyou?.status==='demonstrated'?'evidence_ready_for_review':'in_progress',legacyGrades:'unchanged',next:objectives.find(o=>!['preserved','demonstrated'].includes(o.status) && o.status!=='historical_review' && (ready||o.domain!=='shangyou'))||null};
 }
 export function createQuestion(curriculum,{objectiveId,attempt=1,previousVariant=null,random=crypto.getRandomValues(new Uint32Array(1))[0]}){
  const v=curriculum.vocabulary.find(v=>v.id===objectiveId);
@@ -62,7 +62,7 @@ export function createQuestion(curriculum,{objectiveId,attempt=1,previousVariant
 }
 // This is a deterministic evidence index, not a second model assessment or a grade.
 export function evidenceReport(curriculum,state,assessments){
- const items=state.objectives.map(o=>({objectiveId:o.id,label:o.label,domain:o.domain,status:o.status,
+ const items=state.objectives.map(o=>({objectiveId:o.id,label:o.label,domain:o.domain,status:o.status,preservedEvidence:['preserved','historical_review'].includes(o.status)?o.evidence:null,
   decisions:assessments.filter(a=>a.objectiveId===o.id).map(a=>({outcome:a.outcome,rationale:a.rationale,evidence:a.evidence,ruleVersion:a.ruleVersion,createdAt:a.createdAt}))}));
  const demonstrated=items.filter(o=>['preserved','demonstrated'].includes(o.status));
  return {kind:'evidence-index-not-official-grade',curriculumVersion:curriculum.curriculumVersion,ruleVersion:RULE_VERSION,

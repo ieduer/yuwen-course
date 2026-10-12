@@ -1,3 +1,10 @@
+## Current dialogue candidate — 2026-10-12T06:21:48+00:00
+
+Owner codex-01a12ea0; change `20261012-apis-yw-stream`. Local true-stream/persistence/budget and owner-only My admission are implemented; permanent retention is user-approved. Feature remains disabled. Production still serves source `175f8ae42dc5fd58f1b697a76567e79c954d9f7f`; no migration or paid provider request occurred. Accepted self-study capacity has not increased.
+
+See [the current candidate contract](docs/dialogue/PILOT.md) for exact behavior, validation and remaining historical/teaching/live acceptance gates; source evidence is in `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12ea0/`. Earlier candidate statements below are historical and superseded by that linked current section.
+
+
 ## Textbook plates candidate — 2026-10-11
 
 ## 2026-10-12T04:16:33+00:00 — Conversation pilot candidate; production unchanged

@@ -1,3 +1,19 @@
+## Current candidate — 2026-10-12T06:21:48+00:00
+
+Serial owner: codex-01a12ea0; change `20261012-apis-yw-stream`. Production remains unchanged. All authenticated My accounts are authorized to use the three lessons and view only their own records. No cross-student teacher grant was supplied. Full visible conversations, partial responses, questions, attempts and original source facts are retained permanently; no purge job or deletion endpoint is introduced.
+
+The new dialogue budget is US$50 per UTC day, following the human's answer to the daily-limit question. Existing Gemini pool only. `budget-policy.json` is the source-owned candidate for deployment, not active runtime configuration: conservative paid-equivalent accounting includes thinking and reserves unknown outcomes; expiry fails closed. The cost ceiling applies to this new dialogue route, not unrelated legacy routes or the provider invoice. Existing count bounds remain 40/user/day, 400/site/day, 120/session, 4 concurrent. No extra cumulative site lifetime cap is imposed.
+
+Real upstream SSE is implemented in a separate APIS candidate. It admits only verified YW chat requests, the configured exact model, text input and <=2400 output tokens, with one provider attempt and no fallback/hedging. YW persists the student turn before streaming and durable partial chunks before displaying them. Refresh is readback only. Stale reserved work is marked unconfirmed after 60 seconds, capacity is released without refund/replay, and late completions cannot grant evidence. A POST must carry the authenticated owner reference previously returned by GET; account changes cannot save old text under a new owner. Pending UI operations are invalidated on an observed account change.
+
+Read-only historical bridging now preserves existing vocab mastery, submitted first reading and exact-version accepted formal items before the first new dialogue. Original attempts, scores, versions and unfinished first-read text/positions remain in their original tables. Older accepted resource versions appear as historical mapping review, not a requirement to redo completed work. Browser-only/shared progress and full formal answer assembly still need reconciliation; this is not a complete historical equivalence claim.
+
+Current source tests: 42 dialogue checks, APIS 271 regression checks plus 9 focused checks after the exact-model guard; original Reading API 74 checks passed again after the final legacy-module import. Controlled browser evidence proves incremental display ~3 seconds before synthetic completion and owner-switch isolation, not actual provider latency or real-account acceptance. See the successor report at `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12ea0/`.
+
+Still NO-GO for migration/enablement: verified live backup/restore and row reconciliation, full shared APIS fan-out/release receipt, whole-conversation grounded conclusion, classical randomized coverage/grammar/calibration, source-image/exam evidence and independent suen review remain. No deployment, production data write, paid call or public Status publication occurred. A disabled candidate is not a released course.
+
+The earlier candidate notes below are history, superseded by this section.
+
 # Conversation-led close reading — disabled pilot candidate
 
 As of 2026-10-12T04:16:33+00:00. This is a local candidate, **NO-GO for student rollout**. It is not a completed replacement for YW. The original interface remains the entry point; no production configuration, migration, student record or paid provider call was changed. Source baseline: `175f8ae42dc5fd58f1b697a76567e79c954d9f7f`, branch `codex/yw-dialogue-pilot-20261012`.

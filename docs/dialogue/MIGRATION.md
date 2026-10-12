@@ -1,3 +1,11 @@
+## Current candidate update — 2026-10-12T06:21:48+00:00
+
+The additive set is now 0010, 0011 (durable stream chunks and usage/timing) and 0012 (money reservations and policy snapshot). Apply all three only after the existing backup/restore, row-level reconciliation and exact release gates. The synthetic preservation test compares every pre-0010 table schema, every seeded row/relationship and SQLite sequence after the whole migration set. No live migration has occurred.
+
+Owner-only all-My access and permanent transcript retention are user-approved. No teacher cross-account access is enabled. The feature and APIS streaming flags remain off; the cost policy is not loaded in production. Recovery disables new calls while retaining every forward row and permanent transcript. Unknown provider outcomes retain their monetary reservation; stale work is reconciled without automatic replay. Export includes questions, events, drafts, partial chunks and policy/usage/timing receipts.
+
+Historical notes below describe the first candidate; their unimplemented-stream/recovery and retention-pending statements are superseded by this update and PILOT.md. Remaining current acceptance gates are in GO-NO-GO.md.
+
 # Migration and rollback — preparation only
 
 As of 2026-10-12T04:16:33+00:00. Migration `0010_dialogue_pilot.sql` has **not been applied to a remote database**. It creates seven new tables plus indexes. It does not alter, update, backfill, delete or regrade existing learning tables. Do not run it from this document alone.

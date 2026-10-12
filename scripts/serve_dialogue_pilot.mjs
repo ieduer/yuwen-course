@@ -1,5 +1,6 @@
 // Local synthetic acceptance harness only: no credentials, provider calls or persistent DB.
 import http from 'node:http';
+import {Readable} from 'node:stream';
 import fs from 'node:fs';
 import path from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
@@ -10,7 +11,7 @@ sql.exec("INSERT INTO students(id,uc_slug,display_name) VALUES(1,'dialogue-synth
 let syntheticAccount=1,responseDelayMs=0;
 const wrap=(text,args=[])=>({bind:(...v)=>wrap(text,v),first:async()=>sql.prepare(text).get(...args)||null,all:async()=>({results:sql.prepare(text).all(...args)}),run:async()=>({meta:{changes:Number(sql.prepare(text).run(...args).changes)}}),runSync:()=>({meta:{changes:Number(sql.prepare(text).run(...args).changes)}})});
 const db={prepare:text=>wrap(text),batch:async statements=>{sql.exec('BEGIN');try{const r=statements.map(s=>s.runSync());sql.exec('COMMIT');return r;}catch(e){sql.exec('ROLLBACK');throw e;}}};
-const env={READING_DB:db,YW_DIALOGUE_ENABLED:'true',YW_DIALOGUE_PILOT_USER_IDS:'700001,700002',ASSETS:{fetch:async request=>new Response(fs.readFileSync(root+new URL(request.url).pathname))}};
+const env={READING_DB:db,YW_DIALOGUE_ENABLED:'true',YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...JSON.parse(fs.readFileSync('docs/dialogue/budget-policy.json')),version:'synthetic-offline-only',validUntil:'2099-01-01T00:00:00Z'}),ASSETS:{fetch:async request=>new Response(fs.readFileSync(root+new URL(request.url).pathname))}};
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.json':'application/json','.css':'text/css','.webp':'image/webp','.png':'image/png','.pdf':'application/pdf'};
 const instrumentation=`<script>new MutationObserver(()=>{if(!window.__baselineReadable && document.querySelector('#text-flow')?.textContent.length>200){window.__baselineReadable=performance.now();performance.mark('baseline-readable-text')}}).observe(document,{childList:true,subtree:true})</script>`;
 const server=http.createServer(async(req,res)=>{try{const url=new URL(req.url,'http://127.0.0.1:4177');
@@ -21,8 +22,15 @@ const server=http.createServer(async(req,res)=>{try{const url=new URL(req.url,'h
  }
  if(url.pathname==='/api/dialogue/v1'){
  let body='';for await(const c of req){body+=c;if(body.length>16000){res.writeHead(413);res.end();return;}}
- const request=new Request('https://yw.bdfz.net'+req.url,{method:req.method,headers:{'content-type':'application/json'},...(body?{body}:{})});
- const response=await handleDialogue(request,env,syntheticAccount?{id:syntheticAccount,ucUserId:700000+syntheticAccount}:null,null,{callModel:async()=>{await new Promise(resolve=>setTimeout(resolve,responseDelayMs));return {value:{reply:'【合成測試回應，不是正式 AI 評閱】\n我在「不寧靜」與眼前景物之間留下了距離。你讀到「但熱鬧是它們的，我什麼也沒有」時，覺得這個距離發生了什麼變化？ [lesson-1717-p2:p7]',assessments:[]},model:'synthetic-offline-fixture',modelVersion:null};}});res.writeHead(response.status,Object.fromEntries(response.headers));res.end(await response.text());return;}
+ const request=new Request('https://yw.bdfz.net'+req.url,{method:req.method,headers:{'content-type':'application/json',accept:req.headers.accept||'application/json'},...(body?{body}:{})});
+ const response=await handleDialogue(request,env,syntheticAccount?{id:syntheticAccount,ucUserId:700000+syntheticAccount}:null,null,{callModel:async(_env,_prompt,_id,emit)=>{
+  const reply='【合成測試回應，不是正式 AI 評閱】\n請回到你剛才選出的原文，說說是哪個詞讓你產生了這個理解。你也可以保留不同解讀，並指出依據。';
+  await emit(reply.slice(0,30));await new Promise(resolve=>setTimeout(resolve,responseDelayMs));await emit(reply);
+  return {value:{reply,assessments:[]},model:'synthetic-offline-fixture',modelVersion:null};
+ }});
+ res.writeHead(response.status,Object.fromEntries(response.headers));
+ if(response.body)Readable.fromWeb(response.body).on('error',()=>res.destroy()).pipe(res);else res.end();return;}
+
  if(url.pathname.startsWith('/api/')){res.writeHead(404,{'content-type':'application/json'});res.end('{"code":"synthetic_server_no_legacy_api"}');return;}
  const original=url.pathname==='/original';const target=path.resolve(root,'.'+(original?'/index.html':url.pathname==='/'?'/dialogue.html':url.pathname));if(!target.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}
  let content=fs.readFileSync(target);if(original)content=content.toString().replace('<head>','<head>'+instrumentation);
