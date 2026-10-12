@@ -7,7 +7,7 @@ As of 2026-10-12T06:21:48+00:00. **Recommendation: NO-GO for migration, producti
 | Source preservation | Isolated candidate from 175f8ae; unrelated dirty canonical checkout preserved; original curriculum, app and migrations unchanged |
 | Inventory | 189 lessons, 869 formal resources, 1,021 formative items, 193 active guide items; exact per-item map, gaps and compound gates |
 | Local implementation | Three text/conversation pilots, gated Worker, private owner storage, verifiable proposals, question instances, versioned resume and budget-deferred drafts |
-| Local checks | 42 focused dialogue checks; APIS 271 regression plus final 9 stream checks; 74 existing Reading API assertions in local D1; strengthened migration fixture passes; synthetic mobile save, quote return and account switch checked |
+| Local checks | 42 focused dialogue checks; APIS 271 regression plus final 10 stream checks; 74 existing Reading API assertions in local D1; strengthened migration fixture passes; synthetic mobile save, quote return and account switch checked |
 | Performance | Local n=3 first text: desktop median 25.6 ms; mobile weak-network median 786.6 ms; old medians 270.2 ms / 18,556.0 ms. Not a production speedup claim |
 | Historical production evidence | No writes made; no live row comparison, new recoverable backup or restore acceptance obtained |
 | Teaching/scoring bridge | Original vocab mastery, submitted/unfinished first reading and exact-version formal credit are projected read-only; shared/browser progress and guide/formal answer assembly remain incomplete. Current state is only evidence_ready_for_review, never an official grade |

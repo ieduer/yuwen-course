@@ -150,7 +150,7 @@ test('JSON prefix exposes only reply text with split escapes and never assessmen
 test('gateway adapter requires ordered complete SSE, persists exact usage, never falls back to JSON',async()=>{
  const answer=JSON.stringify({reply:'你好',assessments:[]}),enc=new TextEncoder();let observedRequest;
  const data=`id: 1\nevent: delta\ndata: ${JSON.stringify({text:answer})}\n\nid: 2\nevent: done\ndata: ${JSON.stringify({answer,model:'gemini-test',modelVersion:'test-1',providerAttemptCount:1,usage:{totalTokenCount:20},firstTokenMs:42,totalDurationMs:100})}\n\n`;
- const env={YW_DIALOGUE_BUDGET_JSON:syntheticBudget,APIS_CALLER_TOKEN:'fixture-only',APIS:{fetch:async r=>{observedRequest=await r.json();return new Response(enc.encode(data),{headers:{'content-type':'text/event-stream'}});}}};
+ const env={YW_DIALOGUE_BUDGET_JSON:syntheticBudget,APIS_CALLER_TOKEN:'fixture-only',APIS:{fetch:async r=>{assert.equal(new URL(r.url).pathname,'/api/yw/dialogue-stream');observedRequest=await r.json();return new Response(enc.encode(data),{headers:{'content-type':'text/event-stream'}});}}};
  const visible=[];const value=await callDialogueModel(env,'bounded synthetic prompt','request-1',t=>visible.push(t));
  assert.equal(observedRequest.stream,true);assert.deepEqual(visible,['你好']);assert.equal(value.usage.totalTokenCount,20);assert.equal(value.firstTokenMs,42);
  for(const broken of [data.replace('id: 2','id: 3'),data.split('id: 2')[0],data.replace('"providerAttemptCount":1','"providerAttemptCount":2')])await assert.rejects(()=>consumeGatewayStream(new Response(broken,{headers:{'content-type':'text/event-stream'}}),()=>{}));
