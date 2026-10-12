@@ -1,3 +1,11 @@
+## Current authenticated acceptance and fixed-case repair — 2026-10-12T14:57Z
+
+Real owner553 reused an existing My browser session. One synthetic first-read mark was saved through the normal UI and verified after reload: same ownerRef,markId,selected text and guess,HTTP200. No login replay, teacher-review request, model call or production write occurred. Evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-live-acceptance/OWNER-SAVE-RELOAD.json`.
+
+The fixed24-case packet reproduces digest95b8f943e519191aba697a0c01984621ee8ea12549e164379363f5ef54a04f09, but the deployed normal dialogue endpoint cannot execute its hypothetical fixture states. The new candidate adds a capability-gated fixed-case branch inside the same isolated API. It accepts only case IDs and ownerRef, uses server-pinned prompts and source hashes, reserves through existing dialogue_calls with original shared count/cost limits, persists partial/result/usage evidence and forbids replay, reorder,source drift or continuation after a failed/unknown case. Fixture sessions use a separate lesson namespace and never write assessments or central evidence. Existing curriculum remains pending; no real grade is awarded. No schema migration,APIS change,new caller or credential is required.
+
+This runtime repair is locally tested and built but NOT deployed. Its exact source/artifact needs a fresh consumed release transaction for the existing isolated project; the earlier publisher window has ended. Original model operation remains0/24,USD2.016,20 minutes from first actual attempt,20 seconds per request,no retries. Each result still needs semantic review before the next case. Private cloud APIS routing remains unverified until the first admitted exact case produces real provenance/usage. Current candidate review: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-live-acceptance/CALIBRATION-REVIEW.md`. Earlier current headings are history where superseded.
+
 # Real dialogue calibration — prepared, not executed
 
 Current: 2026-10-12T11:42Z. Owner codex-01a12fd6. Paid attempts across this goal remain **0**. This document fixes a finite test operation; it is not a release approval, source-image acceptance or substitute scoring policy.

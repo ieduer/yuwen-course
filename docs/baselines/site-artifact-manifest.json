@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1253,
-  "totalBytes": 165064545,
-  "aggregateSha256": "1ee14bc984f3efeee0a3ca6521df813762c3828ab2f6b5e314ac42d03b536798",
+  "fileCount": 1255,
+  "totalBytes": 168026157,
+  "aggregateSha256": "e2200ca601ae852e2c577a6cf861408758c30579e86e03e7b2a89867528f1f53",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "85b1a9aaaf5b6ab1ce3b96a468c56b0bb6e128cbc3fe22a164a241386bd53149"
+      "sha256": "ed1d16390a4f28475982c01e9720dae4cf5b517383d9ea708fc8de8490b1458a"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -6076,6 +6076,16 @@
       "sha256": "e690bcf202fb914352ce620dfa3aed531fea0322327c3292e5314179613f6259"
     },
     {
+      "path": "dialogue-calibration-packet.json",
+      "bytes": 2951527,
+      "sha256": "1632051137cb468fdc3119c51a4a6812686ef813282a659eb507ef747c998949"
+    },
+    {
+      "path": "dialogue-calibration.js",
+      "bytes": 9927,
+      "sha256": "09b39239fe2cedb0a19ded66dec945e67b31573510bfee3b6a057c4561e5f147"
+    },
+    {
       "path": "dialogue-conclusion.js",
       "bytes": 2503,
       "sha256": "e777ca72e095eb455204bf9859d5ebda8ae6dfd3e31c716959bb78498586ae60"
@@ -6122,8 +6132,8 @@
     },
     {
       "path": "dialogue-source.js",
-      "bytes": 41470,
-      "sha256": "b8e66b88411b4796ab565828d55b8308c02fdd6e406c66bb6dbdc6082eb85f5f"
+      "bytes": 41628,
+      "sha256": "2a51455cf461c9c5136ba9e90d5b1e03733b3ea43ce0c211027f9639fd9bb2b6"
     },
     {
       "path": "dialogue-stream.js",

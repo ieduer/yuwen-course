@@ -1,3 +1,4 @@
+import {handleCalibration} from './dialogue-calibration.js';
 import {historicalEvidence} from './dialogue-legacy.js';
 import {acceptanceVersionHeaders,acceptanceContext} from './dialogue-acceptance.js';
 import {recordCorrection} from './dialogue-corrections.js';
@@ -66,6 +67,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
  if(!student)return json({error:'請先登入 My。',code:'authentication_required'},401);
  if(!admitted(env,student))return json({error:'試點尚未開放。',code:'pilot_unavailable'},404);
  const url=new URL(request.url),lessonId=url.searchParams.get('lessonId');
+ if(url.searchParams.has('calibration'))return handleCalibration(request,env,student,callModel);
  if(!PILOTS.includes(lessonId))return json({code:'lesson_not_in_pilot'},404);
  let curriculum;try{curriculum=await loadDialogueCurriculum(env,lessonId);}catch{return json({code:'curriculum_unavailable'},503);}
  const db=env.READING_DB;
