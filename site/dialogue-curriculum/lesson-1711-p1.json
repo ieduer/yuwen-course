@@ -401,58 +401,6 @@
         ],
         "type": "paragraph"
       }
-    },
-    {
-      "id": "lesson-1711-p1:p3",
-      "text": "《劝学》和《师说》都是我国古代探讨学习问题的名篇。熟读这两篇文章，找出文中谈学习的名句，推敲句子的含义，以此为基础把握两篇文章关于学习的主要观点。",
-      "block": {
-        "runs": [
-          {
-            "text": "《劝学》和《师说》都是我国古代探讨学习问题的名篇。熟读这两篇文章，找出文中谈学习的名句，推敲句子的含义，以此为基础把握两篇文章关于学习的主要观点。",
-            "type": "text"
-          }
-        ],
-        "type": "paragraph"
-      }
-    },
-    {
-      "id": "lesson-1711-p1:p4",
-      "text": "阅读时，要注意联系作者的思想主张和写作背景来理解文章的观点，分析作者提出观点的依据。例如，荀子为何如此强调后天学习的重要性？韩愈是针对怎样的现状倡导师道回归的？这需要分别结合荀子的“性恶论”、韩愈所处时代士大夫“耻学于师”的风气来理解。还可以结合今天的社会生活，说说荀子和韩愈的学习观中，哪些仍然值得借鉴，哪些需要更新并赋予其新的内涵。",
-      "block": {
-        "runs": [
-          {
-            "text": "阅读时，要注意联系作者的思想主张和写作背景来理解文章的观点，分析作者提出观点的依据。例如，荀子为何如此强调后天学习的重要性？韩愈是针对怎样的现状倡导师道回归的？这需要分别结合荀子的“性恶论”、韩愈所处时代士大夫“耻学于师”的风气来理解。还可以结合今天的社会生活，说说荀子和韩愈的学习观中，哪些仍然值得借鉴，哪些需要更新并赋予其新的内涵。",
-            "type": "text"
-          }
-        ],
-        "type": "paragraph"
-      }
-    },
-    {
-      "id": "lesson-1711-p1:p5",
-      "text": "“而”是古代汉语中常见的连词，可用于表示并列、承接、递进、转折、修饰等多种语义关系。这两篇文章中的许多语句用了“而”，诵读时注意体会这些“而”字表现的语义关系。",
-      "block": {
-        "runs": [
-          {
-            "text": "“而”是古代汉语中常见的连词，可用于表示并列、承接、递进、转折、修饰等多种语义关系。这两篇文章中的许多语句用了“而”，诵读时注意体会这些“而”字表现的语义关系。",
-            "type": "text"
-          }
-        ],
-        "type": "paragraph"
-      }
-    },
-    {
-      "id": "lesson-1711-p1:p6",
-      "text": "*背诵课文《劝学》全篇和《师说》的第1 段。",
-      "block": {
-        "runs": [
-          {
-            "text": "*背诵课文《劝学》全篇和《师说》的第1 段。",
-            "type": "text"
-          }
-        ],
-        "type": "paragraph"
-      }
     }
   ],
   "annotations": [
@@ -1059,11 +1007,7 @@
       "rule": "保留原無注疏初讀、疑點標記與解惑紀錄；在對話引用原記錄。",
       "prerequisites": [],
       "sourcePassages": [
-        "lesson-1711-p1:p1",
-        "lesson-1711-p1:p3",
-        "lesson-1711-p1:p4",
-        "lesson-1711-p1:p5",
-        "lesson-1711-p1:p6"
+        "lesson-1711-p1:p1"
       ],
       "misconceptions": [
         "迎合作者不等於理解",
@@ -1084,11 +1028,7 @@
       "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
       "prerequisites": [],
       "sourcePassages": [
-        "lesson-1711-p1:p1",
-        "lesson-1711-p1:p3",
-        "lesson-1711-p1:p4",
-        "lesson-1711-p1:p5",
-        "lesson-1711-p1:p6"
+        "lesson-1711-p1:p1"
       ],
       "misconceptions": [
         "迎合作者不等於理解",
@@ -1106,11 +1046,7 @@
       "rule": "保留自評；不要求正面感受，不加分。",
       "prerequisites": [],
       "sourcePassages": [
-        "lesson-1711-p1:p1",
-        "lesson-1711-p1:p3",
-        "lesson-1711-p1:p4",
-        "lesson-1711-p1:p5",
-        "lesson-1711-p1:p6"
+        "lesson-1711-p1:p1"
       ],
       "misconceptions": [
         "迎合作者不等於理解",
@@ -1130,11 +1066,7 @@
       "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
       "prerequisites": [],
       "sourcePassages": [
-        "lesson-1711-p1:p1",
-        "lesson-1711-p1:p3",
-        "lesson-1711-p1:p4",
-        "lesson-1711-p1:p5",
-        "lesson-1711-p1:p6"
+        "lesson-1711-p1:p1"
       ],
       "misconceptions": [
         "迎合作者不等於理解",
@@ -1154,11 +1086,7 @@
       "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
       "prerequisites": [],
       "sourcePassages": [
-        "lesson-1711-p1:p1",
-        "lesson-1711-p1:p3",
-        "lesson-1711-p1:p4",
-        "lesson-1711-p1:p5",
-        "lesson-1711-p1:p6"
+        "lesson-1711-p1:p1"
       ],
       "misconceptions": [
         "迎合作者不等於理解",
@@ -1180,11 +1108,7 @@
         "other_objectives"
       ],
       "sourcePassages": [
-        "lesson-1711-p1:p1",
-        "lesson-1711-p1:p3",
-        "lesson-1711-p1:p4",
-        "lesson-1711-p1:p5",
-        "lesson-1711-p1:p6"
+        "lesson-1711-p1:p1"
       ],
       "misconceptions": [
         "迎合作者不等於理解",
@@ -1204,9 +1128,7 @@
       ],
       "rule": "沿用原題準據：劝善惩恶，社会之本。語境義：鼓励。教材明确注为“鼓励”。选项中只有“劝善惩恶”的“劝”是鼓励、勉励之意。",
       "sourcePassages": [
-        "lesson-1711-p1:p1",
-        "lesson-1711-p1:p3",
-        "lesson-1711-p1:p6"
+        "lesson-1711-p1:p1"
       ],
       "prerequisites": [],
       "misconceptions": [
@@ -1346,8 +1268,7 @@
       ],
       "rule": "沿用原題準據：天性。語境義：天性。“生”通“性”，指人的天性。",
       "sourcePassages": [
-        "lesson-1711-p1:p1",
-        "lesson-1711-p1:p4"
+        "lesson-1711-p1:p1"
       ],
       "prerequisites": [],
       "misconceptions": [
@@ -1984,7 +1905,7 @@
         "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
         "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
         "storage": "existing formative/source records unchanged; dialogue_assessments references",
-        "status": "preserved-source; dialogue-bridge-not-implemented"
+        "status": "original-first-read-process-bridged-no-new-score"
       },
       {
         "requirementId": "first-read:submitted",
@@ -1994,7 +1915,7 @@
         "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
         "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
         "storage": "existing formative/source records unchanged; dialogue_assessments references",
-        "status": "preserved-source; dialogue-bridge-not-implemented"
+        "status": "original-first-read-process-bridged-no-new-score"
       }
     ],
     "compoundRequirements": [
@@ -2338,7 +2259,84 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-6ce4da607bc1b88fb3f2",
-  "readingMaterials": [],
-  "textRoleVersion": "yw-dialogue-text-roles-20261012-v1"
+  "curriculumVersion": "yw-dialogue-412b42c08cf5858a1d1d",
+  "readingMaterials": [
+    {
+      "id": "lesson-1711-p1:p3",
+      "text": "《劝学》和《师说》都是我国古代探讨学习问题的名篇。熟读这两篇文章，找出文中谈学习的名句，推敲句子的含义，以此为基础把握两篇文章关于学习的主要观点。",
+      "block": {
+        "runs": [
+          {
+            "text": "《劝学》和《师说》都是我国古代探讨学习问题的名篇。熟读这两篇文章，找出文中谈学习的名句，推敲句子的含义，以此为基础把握两篇文章关于学习的主要观点。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "blockIndex": 2,
+      "blockSha256": "11797d41fbe386b3796ff9529c2d3d891b2d94a75ca330b09565965834076039",
+      "role": "commentary",
+      "label": "教材學習提示（非荀子原文）",
+      "source": "data/reader-documents/lesson-1711-p1.json#main.blocks",
+      "reason": "分隔線後的教材編者學習提示與背誦任務，提及《師說》、韓愈及當代學習者；保留供閱讀參考，不可充當荀子原文或作者自述。"
+    },
+    {
+      "id": "lesson-1711-p1:p4",
+      "text": "阅读时，要注意联系作者的思想主张和写作背景来理解文章的观点，分析作者提出观点的依据。例如，荀子为何如此强调后天学习的重要性？韩愈是针对怎样的现状倡导师道回归的？这需要分别结合荀子的“性恶论”、韩愈所处时代士大夫“耻学于师”的风气来理解。还可以结合今天的社会生活，说说荀子和韩愈的学习观中，哪些仍然值得借鉴，哪些需要更新并赋予其新的内涵。",
+      "block": {
+        "runs": [
+          {
+            "text": "阅读时，要注意联系作者的思想主张和写作背景来理解文章的观点，分析作者提出观点的依据。例如，荀子为何如此强调后天学习的重要性？韩愈是针对怎样的现状倡导师道回归的？这需要分别结合荀子的“性恶论”、韩愈所处时代士大夫“耻学于师”的风气来理解。还可以结合今天的社会生活，说说荀子和韩愈的学习观中，哪些仍然值得借鉴，哪些需要更新并赋予其新的内涵。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "blockIndex": 3,
+      "blockSha256": "20036e32a6f4476dd08a8e665c50da37b187af5b7aa2bef5050d213a9c4cc39d",
+      "role": "commentary",
+      "label": "教材學習提示（非荀子原文）",
+      "source": "data/reader-documents/lesson-1711-p1.json#main.blocks",
+      "reason": "分隔線後的教材編者學習提示與背誦任務，提及《師說》、韓愈及當代學習者；保留供閱讀參考，不可充當荀子原文或作者自述。"
+    },
+    {
+      "id": "lesson-1711-p1:p5",
+      "text": "“而”是古代汉语中常见的连词，可用于表示并列、承接、递进、转折、修饰等多种语义关系。这两篇文章中的许多语句用了“而”，诵读时注意体会这些“而”字表现的语义关系。",
+      "block": {
+        "runs": [
+          {
+            "text": "“而”是古代汉语中常见的连词，可用于表示并列、承接、递进、转折、修饰等多种语义关系。这两篇文章中的许多语句用了“而”，诵读时注意体会这些“而”字表现的语义关系。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "blockIndex": 4,
+      "blockSha256": "b416e2083aa0461b1a962fc6811f322ff8b0eb78dd8c7e78a5655a3d4c75738c",
+      "role": "commentary",
+      "label": "教材學習提示（非荀子原文）",
+      "source": "data/reader-documents/lesson-1711-p1.json#main.blocks",
+      "reason": "分隔線後的教材編者學習提示與背誦任務，提及《師說》、韓愈及當代學習者；保留供閱讀參考，不可充當荀子原文或作者自述。"
+    },
+    {
+      "id": "lesson-1711-p1:p6",
+      "text": "*背诵课文《劝学》全篇和《师说》的第1 段。",
+      "block": {
+        "runs": [
+          {
+            "text": "*背诵课文《劝学》全篇和《师说》的第1 段。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "blockIndex": 5,
+      "blockSha256": "4212cde31911e3a1ba79f274d0544e04522d73360d9e4352dd805bc9bc28c248",
+      "role": "commentary",
+      "label": "教材學習提示（非荀子原文）",
+      "source": "data/reader-documents/lesson-1711-p1.json#main.blocks",
+      "reason": "分隔線後的教材編者學習提示與背誦任務，提及《師說》、韓愈及當代學習者；保留供閱讀參考，不可充當荀子原文或作者自述。"
+    }
+  ],
+  "textRoleVersion": "yw-dialogue-text-roles-20261012-v2"
 }

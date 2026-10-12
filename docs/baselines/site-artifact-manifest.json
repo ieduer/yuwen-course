@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1256,
-  "totalBytes": 168055190,
-  "aggregateSha256": "5dd9118f87e63ea80d1ac2e376cee25f36690f2543e62b223a3a05a90059578c",
+  "totalBytes": 168056255,
+  "aggregateSha256": "ea601097f38c1b5eb93b75b82f7df11c8144bb2ffd93402e8107c6f9d3005c3d",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "92257b26031e44631b5a1fc8d877a4f7b380f4bf7320c3f15c78747309a76ceb"
+      "sha256": "3aceb981b8aa63264affaf64d28007ddac2660ea29d23c9ada472957724e70c1"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -6103,17 +6103,17 @@
     {
       "path": "dialogue-curriculum/lesson-1498.json",
       "bytes": 92780,
-      "sha256": "7aaf7fd6694b67cd975a262b4094fb703f9b8cbe751a7f832327658245d53d50"
+      "sha256": "cbf220acdb47900d0fefb4242e1cddf08215b4c09ce8bffdd01c316ed6f58c96"
     },
     {
       "path": "dialogue-curriculum/lesson-1711-p1.json",
-      "bytes": 78252,
-      "sha256": "10fb7eea12702fa2f33f97827ec1bff1c140c48a06481f0687e7f9c24a3ba365"
+      "bytes": 79317,
+      "sha256": "2af4d6ce4ea520f78fa86419765432585be892d726098a3f203974704186cac5"
     },
     {
       "path": "dialogue-curriculum/lesson-1717-p2.json",
       "bytes": 36583,
-      "sha256": "2490d5b82ec930ff9f95ce58046d3b5c73e002a25eb4ff639bc663a1afe71df4"
+      "sha256": "ebfa855e6ea4f5910ef94e6734b3b7e89b975d65e75f08dee9210266d15f39d2"
     },
     {
       "path": "dialogue-formal.js",

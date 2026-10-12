@@ -29,7 +29,9 @@ test('positive case needs actual demonstrated evidence, not an empty praise resp
 test('real first-call regression preserves rejection and requires every criterion',()=>{
  const failed=JSON.parse(fs.readFileSync('scripts/fixtures/dialogue-calibration-missing-criteria.json'));
  const c=packet.cases.find(c=>c.id===failed.caseId);
- assert.equal(c.sourceDigest,failed.sourceDigest);
+ const recorded=JSON.parse(fs.readFileSync('site/dialogue-calibration-packet.json')).cases.find(x=>x.id===failed.caseId);
+ assert.equal(recorded.sourceDigest,failed.sourceDigest);assert.notEqual(c.sourceDigest,failed.sourceDigest);
+ assert.throws(()=>evaluateCalibrationCase(recorded,{caseId:recorded.id,promptDigest:recorded.promptDigest,value:failed.value}),/missing_criterion/);
  assert.notEqual(c.promptDigest,failed.originalPromptDigest);
  const result={caseId:c.id,promptDigest:c.promptDigest,value:failed.value};
  assert.throws(()=>evaluateCalibrationCase(c,result),/missing_criterion/);
@@ -53,6 +55,7 @@ test('all revised prompts request complete grounded criteria without changing ol
  for(const c of packet.cases){
   assert(c.prompt.includes('每個 criterion 至少一筆'));
   assert(c.prompt.includes('缺少任何必要證據時不給 demonstrated'));
-  assert.equal(c.sourceDigest,original.cases.find(o=>o.id===c.id).sourceDigest);
+  assert.notEqual(c.sourceDigest,original.cases.find(o=>o.id===c.id).sourceDigest);
+  assert.equal(packet.operation,'unapproved-source-preview');assert.equal(packet.amendment,null);
  }
 });

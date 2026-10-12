@@ -3540,7 +3540,7 @@
           "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
           "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
           "storage": "existing formative/source records unchanged; dialogue_assessments references",
-          "status": "preserved-source; dialogue-bridge-not-implemented"
+          "status": "original-first-read-process-bridged-no-new-score"
         },
         {
           "requirementId": "first-read:submitted",
@@ -3550,7 +3550,7 @@
           "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
           "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
           "storage": "existing formative/source records unchanged; dialogue_assessments references",
-          "status": "preserved-source; dialogue-bridge-not-implemented"
+          "status": "original-first-read-process-bridged-no-new-score"
         }
       ],
       "compoundRequirements": [

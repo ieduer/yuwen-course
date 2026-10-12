@@ -1,4 +1,12 @@
-## Current stopped calibration — 2026-10-12T15:52:39.443855+00:00
+## Current text-role repair, not deployed — 2026-10-12T16:12:14.285549+00:00
+
+Four textbook editor guidance blocks in 劝学 are preserved verbatim as labelled teaching references, excluded from author passages/assessment citations. Original resources, learning guidance (including memorization instruction), scoring rules and stored curricula remain preserved. This is source-role correction, not a new recitation score or waived requirement. The two pilot classical-first-read mapping rows now describe the implemented original process bridge. Same-owner real first-read submit/acknowledge/three corrections now survive reload with original guesses intact; see the linked report. Physical mobile remains unverified.
+
+127focused checks pass on Node22.21.1/24.19.0; formal1256-file artifactea601097f38c1b5eb93b75b82f7df11c8144bb2ffd93402e8107c6f9d3005c3d builds/checks. Two consumed calibration packets remain byte-identical; regression tests reconstruct their exact source by digest rather than silently rebind them to revised curricula. Actual current-source drift blocks the old executor before reservation. Newly prepared24-case digest4fb2ac792516d95c00022ad08bda42063e8606bec4989b3d46bc6b86c6a67317 is unapproved-source-preview, with no amendment authority. Original2attempts/4678known+84000unknownmicroUSD remain unchanged. The reviewed proposal is26cumulative attempts/US$2.184,20minutes,zero retry,firstfailure stop,unchanged expiry; it is not permission. No deployment/provider call in this repair. Isolated runtime remains5045fb9/eb519808; formal YW and APIS allocations remain unchanged.
+
+Current report, exact verification, remaining12-part acceptance, proposed continuation and cleanup: [text-role repair](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a130b1-text-role/REPORT.md). Earlier current statements below are history where superseded.
+
+## Historical stopped calibration — 2026-10-12T15:52:39.443855+00:00
 
 Approved amendment source5045fb9f22b5b26b45b5005c2a94d0fe255113c1 deployed once to isolated Pages eb519808-5804-4dd6-a8bb-76a9f4d0953e; restricted artifact194b3d959b0f64fa4a4ef55960e30d8efec78be54d127c6108a3fbcbac15407a. Exact CI38272132831 passes on Node22.21.1/24.18.0;126 local focused checks each on22.21.1/24.19.0 and bundle binding check pass. Formal YW remains175f8ae/Pagesb6f5ac67, APIS53dbb568@100/66cfaab9@0 unchanged.
 

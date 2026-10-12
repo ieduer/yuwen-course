@@ -1,3 +1,7 @@
+## 2026-10-12 — Source-role correction candidate
+
+Preserve four classical textbook guidance blocks as labelled references while excluding them from author-evidence citations; correct two already-implemented first-read mappings. Preserve both consumed calibration packets; new-source offline preparation is explicitly unapproved. No deployment or model call. See /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a130b1-text-role/REPORT.md.
+
 # Dialogue candidate changelog
 
 ## 2026-10-12T11:07:15.466196+00:00 — data-preservation gate accepted; not released
