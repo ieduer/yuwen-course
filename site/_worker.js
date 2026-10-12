@@ -1,4 +1,5 @@
 import { handleDialogue } from './dialogue-source.js';
+import { acceptanceContext, acceptanceAllowsIdentity } from './dialogue-acceptance.js';
 import { DIALOGUE_SOURCE_PREFIX, DIALOGUE_LOCAL_PREFIX, isDialogueSourceMutation, formalRubric } from './dialogue-formal.js';
 import { readSharedHistory } from './dialogue-history.js';
 import { sourceEventStatement, evaluationEventBase, evaluationEventId, latestSourceEvent } from './learning-evaluation-events.js';
@@ -93,13 +94,13 @@ export default {
     if (url.pathname === '/api/dialogue/v1') {
       if (env.YW_DIALOGUE_ENABLED !== 'true') return new Response('Not found', {status:404});
       if (request.method === 'POST') {
-        const rejected = authenticatedMutationRequestRejection(request);
+        const rejected = authenticatedMutationRequestRejection(request, env);
         if (rejected) return rejected;
       }
       const student = await authenticatedReadingStudent(request, env);
       if (student?.error) return student.error;
       return handleDialogue(request, env, student, ctx, {
-        readSharedHistory:()=>readSharedHistory(userCenterSessionCookieHeader(request)),
+        readSharedHistory:acceptanceContext(env) ? null : ()=>readSharedHistory(userCenterSessionCookieHeader(request)),
         firstReadAction:(operation,payload)=>handleDialogueFirstRead(request,env,student,ctx,operation,payload),
         formalAction:(formal,turnId,evaluate,commit)=>handleDialogueFormal(request,env,student,formal,turnId,evaluate,commit),
         originalAction:(formal,turnId,commit)=>handleDialogueOriginal(request,env,student,formal,turnId,commit),
@@ -249,7 +250,7 @@ function json(data, init = {}) {
   });
 }
 
-function authenticatedMutationRequestRejection(request) {
+function authenticatedMutationRequestRejection(request, env = {}) {
   const contentType = String(request.headers.get("content-type") || "")
     .split(";", 1)[0]
     .trim()
@@ -258,8 +259,9 @@ function authenticatedMutationRequestRejection(request) {
     return readingError("application/json content type required", 415, "json_content_type_required");
   }
   const nativeAuthorization = nativeAuthorizationDecision(request.headers.get("authorization"));
-  if (nativeAuthorization.status === "authorized") return null;
-  if (request.headers.get("origin") !== YW_WEB_ORIGIN) {
+  const acceptance = acceptanceContext(env);
+  if (nativeAuthorization.status === "authorized" && !acceptance) return null;
+  if (request.headers.get("origin") !== (acceptance?.origin || YW_WEB_ORIGIN)) {
     return readingError("exact Web origin required", 403, "web_origin_required");
   }
   return null;
@@ -1937,7 +1939,7 @@ async function resolveWebReadingUser(cookieHeader, env) {
     throw readingIdentityUnavailable();
   }
   const token = cookieHeader.slice(UC_SESSION_COOKIE.length + 1);
-  const cached = identityCache.get(token);
+  const cached = acceptanceContext(env) ? null : identityCache.get(token);
   let user = cached && cached.exp > Date.now() ? cached.user : null;
   if (!user) {
     let resolved;
@@ -1960,8 +1962,10 @@ async function resolveWebReadingUser(cookieHeader, env) {
       slug: String(resolved.slug).slice(0, 80),
       displayName: String(resolved.displayName || "").slice(0, 80),
     };
-    if (identityCache.size > 500) identityCache.clear();
-    identityCache.set(token, { user, exp: Date.now() + 5 * 60 * 1000 });
+    if (!acceptanceContext(env)) {
+      if (identityCache.size > 500) identityCache.clear();
+      identityCache.set(token, { user, exp: Date.now() + 5 * 60 * 1000 });
+    }
   }
   return user;
 }
@@ -1997,6 +2001,7 @@ async function getReadingStudent(request, env) {
   const webUser = await resolveWebReadingUser(cookieHeader, env);
   const decision = readingCredentialDecision(nativeUser, webUser);
   if (decision.status !== "authenticated") return null;
+  if (!acceptanceAllowsIdentity(env, decision.user)) return null;
   return reconcileReadingStudent(env.READING_DB, decision.user);
 }
 

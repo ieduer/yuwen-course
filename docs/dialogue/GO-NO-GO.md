@@ -1,3 +1,11 @@
+# Preparation decision update — 2026-10-12
+
+The restricted acceptance preparation is owner-approved and locally verified;
+see [implementation boundary](ISOLATED-ACCEPTANCE.md). This supersedes the earlier
+pending design decision below. First deployment still needs the concrete
+source/host/account/artifact review, and this final production gate remains
+NO-GO until the original teaching, live acceptance and independent review pass.
+
 # YW conversation pilot — one-page review
 
 As of 2026-10-12T11:42Z. **Recommendation: NO-GO for migration, production enablement or replacing the old workflow.** Proceed with review of the disabled candidate; no approval is being requested for an unfinished release.

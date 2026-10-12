@@ -1,4 +1,10 @@
-## Current source-inventory checkpoint — 2026-10-12T11:42Z
+## Current restricted acceptance preparation — 2026-10-12T12:07Z
+
+Suen approved preparation of a separate, expiring, owner-restricted My acceptance entry. The source now checks the designated numeric identity before D1 access, uses only a new synthetic DB, exposes only dialogue APIs/assets, omits central Queue/history, and pins APIS only in the separate acceptance context. Ordinary previews, production configuration, historical data and App content remain unchanged. Owner confirmed the designated account is non-student; successful one-attempt login and exact identity mapping are recorded privately in task evidence. No deployment, remote migration, provider call or learner-capacity change occurred.
+
+117 focused checks pass per pinned Node22/24, including actual upload binding metadata; original Reading API74 passes. See [implementation and first-deployment boundary](dialogue/ISOLATED-ACCEPTANCE.md). First deployment still requires suen's exact source/host/account/artifact review; real calibration remains0/24 and final production go/no-go is separate. The accepted backup/restore and terminal source inventory must not be replayed. Earlier checkpoints below are historical where superseded by this entry.
+
+## Historical source-inventory checkpoint — 2026-10-12T11:42Z
 
 The complete conservative APIS source-reference inventory is now reconciled:116 Workers,42 Pages dispositions,108 aliases/source roots (not108 products), and2,868 unchanged local reference hashes. The existing shared-hub receipt validates. APIS live module SHA81cd964 matches accepted111fa29/version53dbb568 at100%; YW remains the newer textbook release175f8ae/Pagesb6f5ac67. No runtime, data, flag, model call or deployment changed. Exact evidence and finite request ledgers: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12fd6/FANOUT.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12fd6/FANOUT.md).
 

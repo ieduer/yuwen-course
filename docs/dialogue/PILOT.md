@@ -1,3 +1,11 @@
+# Restricted acceptance update — 2026-10-12
+
+Suen approved preparation and the separate host/owner/expiry boundary is now
+implemented and locally verified. See [isolated acceptance](ISOLATED-ACCEPTANCE.md)
+for the exact behavior and first-deployment review requirement. Earlier claims
+below that preparation permission is pending are historical. Feature, remote
+migrations and model calibration remain unexecuted; production is unchanged.
+
 ## Current source-inventory checkpoint — 2026-10-12T11:42Z
 
 The complete conservative APIS source-reference inventory is now reconciled:116 Workers,42 Pages dispositions,108 aliases/source roots (not108 products), and2,868 unchanged local reference hashes. The existing shared-hub receipt validates. APIS live module SHA81cd964 matches accepted111fa29/version53dbb568 at100%; YW remains the newer textbook release175f8ae/Pagesb6f5ac67. No runtime, data, flag, model call or deployment changed. Exact evidence and finite request ledgers: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12fd6/FANOUT.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12fd6/FANOUT.md).
