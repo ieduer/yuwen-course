@@ -1,6 +1,6 @@
-## Current dialogue candidate — 2026-10-12T10:45:17.391026+00:00
+## Current dialogue candidate — 2026-10-12T11:07:15.466196+00:00
 
-Nine language items, review continuation and anti-copy guards are implemented;99 focused checks per pinned Node and Reading API74 pass. The24-case real-model calibration is prepared but unexecuted. Student-usable production capacity remains unchanged because source/semantic, backup/restore, APIS fanout and real acceptance gates remain open. See [current candidate](docs/dialogue/PILOT.md) and its CALIBRATION reference. The serial goal remains active. Source review now accepts six existing XC images for 于/何/但; semantic calibration remains pending. Backup transaction is prepared but automatic approval review requires explicit authorization of the encrypted student-data destination.
+Nine language items, review continuation and anti-copy guards are implemented;99 focused checks per pinned Node and Reading API74 pass. The24-case real-model calibration is prepared but unexecuted. Student-usable production capacity remains unchanged because source/semantic, APIS fanout and real acceptance gates remain open. See [current candidate](docs/dialogue/PILOT.md) and its CALIBRATION reference. The serial goal remains active. Source review now accepts six existing XC images for 于/何/但; semantic calibration remains pending. Explicitly approved encrypted backup and native isolated D1 restore now pass; full28-table/39,540-row typed/schema/sequence comparison and local additive migration preservation pass. See [data preservation](docs/dialogue/DATA-PRESERVATION.md).
 
 ## Historical dialogue candidate — 2026-10-12T10:01:56+00:00
 

@@ -1,5 +1,11 @@
 # Dialogue candidate changelog
 
+## 2026-10-12T11:07:15.466196+00:00 — data-preservation gate accepted; not released
+
+- Record explicitly approved private encrypted YW backup and full native isolated D1 restore:28application tables,39,540typed rows,62schema objects and autoincrement state match.
+- Local0010–0013dry run preserves all legacy rows/schema/sequence and relationships;8new tables empty. No production migration or grade change.
+- Preserve first upload-timeout evidence; separately approved restore completed within its600second upload limit. Both temporary D1s and746,645,518bytes of local private payloads removed.
+
 ## 2026-10-12T10:45:17.391026+00:00 — bounded dictionary image review; not released
 
 - Verify six existing XC source images for 于/何/但 with exact hashes and printed-page mapping; add the relevant 何 noun-modifier page. No copied or newly rendered assets.
