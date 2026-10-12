@@ -1,6 +1,6 @@
-## Current dialogue candidate — 2026-10-12T10:25:59Z
+## Current dialogue candidate — 2026-10-12T10:45:17.391026+00:00
 
-Nine separately recorded language questions now use the same bounded instance/review path while original grades and immutable old curricula remain preserved.99 focused checks per Node22/24 and Reading API74 pass. No new remote state or accepted capacity. The only current teaching/calibration state is [PILOT.md](dialogue/PILOT.md), with exact24-case budget and remaining gates in [CALIBRATION.md](dialogue/CALIBRATION.md). Earlier candidate sections are history.
+Nine separately recorded language questions now use the same bounded instance/review path while original grades and immutable old curricula remain preserved.99 focused checks per Node22/24 and Reading API74 pass. No new remote state or accepted capacity. The only current teaching/calibration state is [PILOT.md](dialogue/PILOT.md), with exact24-case budget and remaining gates in [CALIBRATION.md](dialogue/CALIBRATION.md). Earlier candidate sections are history. Source review now accepts six existing XC images for 于/何/但; semantic calibration remains pending. Backup transaction is prepared but automatic approval review requires explicit authorization of the encrypted student-data destination.
 
 ## Historical dialogue candidate — 2026-10-12T08:47:07Z
 

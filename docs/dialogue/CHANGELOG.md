@@ -1,5 +1,11 @@
 # Dialogue candidate changelog
 
+## 2026-10-12T10:45:17.391026+00:00 — bounded dictionary image review; not released
+
+- Verify six existing XC source images for 于/何/但 with exact hashes and printed-page mapping; add the relevant 何 noun-modifier page. No copied or newly rendered assets.
+- Keep real semantic calibration pending, update the pinned 24-case packet without spending/restarting its budget, and retain a synthetic unresolved-image negative guard.
+- 99 focused checks per pinned Node and1252-file formal artifact pass. The prepared backup/restore remains blocked before execution pending explicit destination authorization.
+
 ## 2026-10-12T10:25:59Z — language coverage and calibration corpus; not released
 
 - Add9 separately versioned language questions without changing original grades, curriculum histories or old source difficulty.

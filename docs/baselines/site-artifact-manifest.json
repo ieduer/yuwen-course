@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1252,
-  "totalBytes": 165056546,
-  "aggregateSha256": "6217335ab11befcc5b822bce96e1d206d8559ec5d0c601236cb58ea64bc83ae8",
+  "totalBytes": 165058196,
+  "aggregateSha256": "e7fc243191f6b2934586eef6dfed5357e9a965a5fd9cccd9a08363180f79f3c7",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "3b216864661d3beec73f5e4f643d0e484e7d66c459ed2fa2c1f556e3ae2a7e00"
+      "sha256": "7d94cdaa3f753009c2ca4f878ce003baa989d0fdacebef7bf734dfd8b8c95c94"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -6082,18 +6082,18 @@
     },
     {
       "path": "dialogue-curriculum/lesson-1498.json",
-      "bytes": 91822,
-      "sha256": "22c48bfa8d6fe5b0d512670e9bb7eda7f410bbc2282be065f1d54d21585ad627"
+      "bytes": 92780,
+      "sha256": "7aaf7fd6694b67cd975a262b4094fb703f9b8cbe751a7f832327658245d53d50"
     },
     {
       "path": "dialogue-curriculum/lesson-1711-p1.json",
-      "bytes": 77560,
-      "sha256": "7500b44aaf7b20a259e176687b6ad12adb45ec474742838e7ba144d8ebeab7cb"
+      "bytes": 78252,
+      "sha256": "10fb7eea12702fa2f33f97827ec1bff1c140c48a06481f0687e7f9c24a3ba365"
     },
     {
       "path": "dialogue-curriculum/lesson-1717-p2.json",
       "bytes": 36583,
-      "sha256": "dd8201b110435b7ebed9fc84cee80ebfba8b16fefdd054d21ae353124136ef17"
+      "sha256": "2490d5b82ec930ff9f95ce58046d3b5c73e002a25eb4ff639bc663a1afe71df4"
     },
     {
       "path": "dialogue-formal.js",

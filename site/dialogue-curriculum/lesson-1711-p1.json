@@ -2039,7 +2039,7 @@
       }
     ]
   },
-  "referenceVersion": "yw-dialogue-sources-20261012-v2",
+  "referenceVersion": "yw-dialogue-sources-20261012-v3",
   "languagePractice": [
     {
       "id": "lesson-1711-p1:language-er",
@@ -2084,7 +2084,7 @@
         "footnote-11143-3",
         "footnote-11143-4"
       ],
-      "dictionaryStatus": "specialist-image-awaiting-verification",
+      "dictionaryStatus": "source-image-verified",
       "difficulty": null,
       "variants": [
         "「取之于藍」與「青于藍」中的「于」分別引出甚麼？請把兩處改寫成現代說法。",
@@ -2104,7 +2104,7 @@
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
-      "version": "yw-language-50b8112c5181e260cf47",
+      "version": "yw-language-1188333bfbdca4576eb2",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     },
     {
@@ -2267,8 +2267,8 @@
       "edition": "1999 年 2 月第 1 版",
       "url": "https://xc.bdfz.net/#entry/e-p773_L-6",
       "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p773_L-6",
-      "verification": "指定 xc 已接受來源 OCR 定位；本輪公開讀取 403，原頁影像未目視核對，釋義待覆核。",
-      "verificationStatus": "image-review-pending",
+      "verification": "本輪直接目視核對既有指定版本頁圖，僅確認下列詞義與頁碼；詩文中的具體運用及修辭效果屬語境分析，不宣稱詞典收錄該課例句或整條 OCR 已校勘。",
+      "verificationStatus": "source-image-verified",
       "sourcePdfSha256": "a60dcbdca401b2445eeca3e09d6db0fb879d9f5d641781bc2b27c7757249cfaa",
       "localSource": {
         "path": "xuci-ocr/work/final/cols/p773_L.txt",
@@ -2278,19 +2278,26 @@
         {
           "pdfPage": 773,
           "printedPage": 761,
-          "url": "https://dict.bdfz.net/source/xc/images/p773.png"
+          "url": "https://dict.bdfz.net/source/xc/images/p773.png",
+          "imageSha256": "2c6522b957f7a8c2ee9be702541f2364d501e8aa8a1e1d004cde3a0d5696b41b",
+          "verifiedScope": "詞頭與介詞用法起點；印刷761頁。"
         },
         {
           "pdfPage": 774,
           "printedPage": 762,
-          "url": "https://dict.bdfz.net/source/xc/images/p774.png"
+          "url": "https://dict.bdfz.net/source/xc/images/p774.png",
+          "imageSha256": "a28ad6161658070c0bb79e68e11448ae40aa67a0e5f1979f9c2492ca8ba80d7b",
+          "verifiedScope": "介詞一（二）：引進動作的起始處或來源，可譯從、由、自。"
         },
         {
           "pdfPage": 776,
           "printedPage": 764,
-          "url": "https://dict.bdfz.net/source/xc/images/p776.png"
+          "url": "https://dict.bdfz.net/source/xc/images/p776.png",
+          "imageSha256": "cab0709507c8145dc2d47cb04cd3a1777136d91a50040321848622dbf2dfae50",
+          "verifiedScope": "介詞十：引進比較對象、表示程度比較，可譯比。"
         }
-      ]
+      ],
+      "verifiedAt": "2026-10-12T10:43:49.102360+00:00"
     }
   ],
   "exam": {
@@ -2331,7 +2338,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-7c7c0d3a3d53d99e1ba3",
+  "curriculumVersion": "yw-dialogue-6ce4da607bc1b88fb3f2",
   "readingMaterials": [],
   "textRoleVersion": "yw-dialogue-text-roles-20261012-v1"
 }

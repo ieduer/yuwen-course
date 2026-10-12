@@ -799,7 +799,7 @@ test('classical language source coverage and versioned equivalents remain separa
 });
 
 test('language semantic calibration cannot substitute for unresolved specialist source images',()=>{
- const c=structuredClone(classical),v=c.languagePractice.find(v=>v.dictionaryId==='xc-yu');v.calibrationStatus='accepted';
+ const c=structuredClone(classical),v=c.languagePractice.find(v=>v.dictionaryId==='xc-yu');v.calibrationStatus='accepted';c.dictionary.find(d=>d.id==='xc-yu').verificationStatus='image-review-pending';
  const o=c.objectives.find(o=>o.id===v.id),q=createQuestion(c,{objectiveId:v.id}),{t,a}=evidenceFor(o,c);t.questionId=q.id;
  assert.throws(()=>validateProposal({reply:'理解了。',assessments:[a]},{curriculum:c,turns:[t],question:q}),/language_calibration_required/);
 });

@@ -2121,7 +2121,7 @@
       }
     ]
   },
-  "referenceVersion": "yw-dialogue-sources-20261012-v2",
+  "referenceVersion": "yw-dialogue-sources-20261012-v3",
   "languagePractice": [
     {
       "id": "lesson-1498:language-he",
@@ -2147,11 +2147,11 @@
         "照抄提示，未獨立改述"
       ],
       "dictionaryId": "xc-he",
-      "dictionaryStatus": "specialist-image-awaiting-verification",
+      "dictionaryStatus": "source-image-verified",
       "sourcePassages": [
         "lesson-1498:p6"
       ],
-      "version": "yw-language-a13fc88f1466bc335a6b",
+      "version": "yw-language-627dc6f4d0b4aed28638",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     },
     {
@@ -2178,11 +2178,11 @@
         "照抄提示，未獨立改述"
       ],
       "dictionaryId": "xc-dan",
-      "dictionaryStatus": "specialist-image-awaiting-verification",
+      "dictionaryStatus": "source-image-verified",
       "sourcePassages": [
         "lesson-1498:p8"
       ],
-      "version": "yw-language-ad85ada9a45077c7e76c",
+      "version": "yw-language-35b872a75c1e71d07ec4",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     },
     {
@@ -2225,8 +2225,8 @@
       "edition": "1999 年 2 月第 1 版",
       "url": "https://xc.bdfz.net/#entry/e-p207_L-7",
       "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p207_L-7",
-      "verification": "指定 xc 已接受來源 OCR 定位；本輪公開讀取 403，原頁影像未目視核對，釋義待覆核。",
-      "verificationStatus": "image-review-pending",
+      "verification": "本輪直接目視核對既有指定版本頁圖，僅確認下列詞義與頁碼；詩文中的具體運用及修辭效果屬語境分析，不宣稱詞典收錄該課例句或整條 OCR 已校勘。",
+      "verificationStatus": "source-image-verified",
       "sourcePdfSha256": "a60dcbdca401b2445eeca3e09d6db0fb879d9f5d641781bc2b27c7757249cfaa",
       "localSource": {
         "path": "xuci-ocr/work/final/cols/p207_L.txt",
@@ -2236,9 +2236,19 @@
         {
           "pdfPage": 207,
           "printedPage": 195,
-          "url": "https://dict.bdfz.net/source/xc/images/p207.png"
+          "url": "https://dict.bdfz.net/source/xc/images/p207.png",
+          "imageSha256": "a001a5c1da59694f8aa14ffa8343d071302a16cf71194e147a6715dd6d1b8bdb",
+          "verifiedScope": "詞頭何與疑問代詞總類。"
+        },
+        {
+          "pdfPage": 211,
+          "printedPage": 199,
+          "url": "https://dict.bdfz.net/source/xc/images/p211.png",
+          "imageSha256": "85fc5f5252c532068dd65b2380e3cb2bc083d9becc6186fd643d3cd532f0f141",
+          "verifiedScope": "代詞六：用於名詞前作修飾語，可譯甚麼、甚麼樣；含何人例句。"
         }
-      ]
+      ],
+      "verifiedAt": "2026-10-12T10:43:49.102360+00:00"
     },
     {
       "id": "xc-dan",
@@ -2247,8 +2257,8 @@
       "edition": "1999 年 2 月第 1 版",
       "url": "https://xc.bdfz.net/#entry/e-p096_R-8",
       "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p096_R-8",
-      "verification": "指定 xc 已接受來源 OCR 定位；本輪公開讀取 403，原頁影像未目視核對，釋義待覆核。",
-      "verificationStatus": "image-review-pending",
+      "verification": "本輪直接目視核對既有指定版本頁圖，僅確認下列詞義與頁碼；詩文中的具體運用及修辭效果屬語境分析，不宣稱詞典收錄該課例句或整條 OCR 已校勘。",
+      "verificationStatus": "source-image-verified",
       "sourcePdfSha256": "a60dcbdca401b2445eeca3e09d6db0fb879d9f5d641781bc2b27c7757249cfaa",
       "localSource": {
         "path": "xuci-ocr/work/final/cols/p096_R.txt",
@@ -2258,9 +2268,12 @@
         {
           "pdfPage": 96,
           "printedPage": 84,
-          "url": "https://dict.bdfz.net/source/xc/images/p096.png"
+          "url": "https://dict.bdfz.net/source/xc/images/p096.png",
+          "imageSha256": "865417ed6d5248ef52a334b9236fd84071cf6e4d84eed47a0e0df6f6e14ab49a",
+          "verifiedScope": "詞頭但；副詞一：限制動作範圍，可譯只、僅僅。"
         }
-      ]
+      ],
+      "verifiedAt": "2026-10-12T10:43:49.102360+00:00"
     }
   ],
   "exam": {
@@ -2301,7 +2314,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-e08014aa0b3c65f129ca",
+  "curriculumVersion": "yw-dialogue-8e788193767339e844d2",
   "readingMaterials": [
     {
       "id": "lesson-1498:p19",
