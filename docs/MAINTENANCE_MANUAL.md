@@ -1,4 +1,8 @@
-## Current dialogue candidate — 2026-10-12T08:47:07Z
+## Current dialogue candidate — 2026-10-12T10:25:59Z
+
+Nine separately recorded language questions now use the same bounded instance/review path while original grades and immutable old curricula remain preserved.99 focused checks per Node22/24 and Reading API74 pass. No new remote state or accepted capacity. The only current teaching/calibration state is [PILOT.md](dialogue/PILOT.md), with exact24-case budget and remaining gates in [CALIBRATION.md](dialogue/CALIBRATION.md). Earlier candidate sections are history.
+
+## Historical dialogue candidate — 2026-10-12T08:47:07Z
 
 Five original AI formal interactions now share the dialogue budget and commit source assessment, visible reply and usage atomically. Original results and unknown-attempt readback fences are preserved. Feature remains disabled; no new production capacity, migration or paid call. Exact checks, remaining frontend/teaching/restore/release work and the active goal are in [the current candidate contract](dialogue/PILOT.md). Earlier candidate entries below are historical.
 

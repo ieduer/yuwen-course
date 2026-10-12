@@ -1330,6 +1330,69 @@
         "questionKind": "wordCreation",
         "scoringRole": "a_plus_gate"
       }
+    },
+    {
+      "id": "lesson-1498:language-he",
+      "domain": "vocabulary",
+      "label": "語言：何",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "何人問人，何年問時間；兩問把個人的初見擴展到人與月的久遠關係。 疑問用法與本詩的追問是兩層：先說清問甚麼，再依前後詩句分析；不把修辭效果冒充詞典釋義。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "sourcePassages": [
+        "lesson-1498:p6"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "remediation": "說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。",
+      "scoringRole": "none"
+    },
+    {
+      "id": "lesson-1498:language-dan",
+      "domain": "vocabulary",
+      "label": "語言：但",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "但見是只見，限制眼前能看見的範圍，不宜直接套成現代轉折詞「但是」。 詞義依指定虛詞詞典的副詞用法核對；上下句從不知到但見的認知變化是文本解讀，允許有證據的不同表述。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "sourcePassages": [
+        "lesson-1498:p8"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "remediation": "說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。",
+      "scoringRole": "none"
+    },
+    {
+      "id": "lesson-1498:grammar-moon",
+      "domain": "vocabulary",
+      "label": "語言：卷不去、拂还来",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "卷不去、拂還來的是月光；承接前面的月，動作與不能排遣的相思聯繫起來。 沿用教材對玉戶簾中卷不去的註解。省略內容的還原須有前句依據；不把月光真的有意志當作者生平事實。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "sourcePassages": [
+        "lesson-1498:p12"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "remediation": "說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。",
+      "scoringRole": "none"
     }
   ],
   "vocabulary": [
@@ -2058,9 +2121,148 @@
       }
     ]
   },
-  "referenceVersion": "yw-dialogue-sources-20261012-v1",
-  "languagePractice": [],
-  "dictionary": [],
+  "referenceVersion": "yw-dialogue-sources-20261012-v2",
+  "languagePractice": [
+    {
+      "id": "lesson-1498:language-he",
+      "word": "何",
+      "type": "function-word",
+      "sourceSentence": "江畔何人初见月？江月何年初照人？",
+      "passageQuotes": [
+        "江畔何人初见月？江月何年初照人？"
+      ],
+      "meaning": "何人問人，何年問時間；兩問把個人的初見擴展到人與月的久遠關係。",
+      "explanation": "疑問用法與本詩的追問是兩層：先說清問甚麼，再依前後詩句分析；不把修辭效果冒充詞典釋義。",
+      "annotationIds": [],
+      "difficulty": null,
+      "proposedDemand": "context-comparison",
+      "calibrationStatus": "pending-real-model",
+      "scoringRole": "none",
+      "variants": [
+        "「何人」和「何年」各在追問甚麼？若只說「何是疑問詞」，還缺少哪一層句意？",
+        "請把這兩問改為自己的話，再說明「初」和兩個「何」怎樣把問題推向久遠的時間。"
+      ],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "dictionaryId": "xc-he",
+      "dictionaryStatus": "specialist-image-awaiting-verification",
+      "sourcePassages": [
+        "lesson-1498:p6"
+      ],
+      "version": "yw-language-a13fc88f1466bc335a6b",
+      "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
+    },
+    {
+      "id": "lesson-1498:language-dan",
+      "word": "但",
+      "type": "function-word",
+      "sourceSentence": "不知江月待何人，但见长江送流水。",
+      "passageQuotes": [
+        "不知江月待何人，但见长江送流水。"
+      ],
+      "meaning": "但見是只見，限制眼前能看見的範圍，不宜直接套成現代轉折詞「但是」。",
+      "explanation": "詞義依指定虛詞詞典的副詞用法核對；上下句從不知到但見的認知變化是文本解讀，允許有證據的不同表述。",
+      "annotationIds": [],
+      "difficulty": null,
+      "proposedDemand": "context-comparison",
+      "calibrationStatus": "pending-real-model",
+      "scoringRole": "none",
+      "variants": [
+        "「但見」若換成「只看見」，與上句「不知」有何聯繫？請解釋，不能只把但譯成但是。",
+        "這裡的「但」限制了甚麼？請分別說明詩中人不知道的事與眼前看見的事。"
+      ],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "dictionaryId": "xc-dan",
+      "dictionaryStatus": "specialist-image-awaiting-verification",
+      "sourcePassages": [
+        "lesson-1498:p8"
+      ],
+      "version": "yw-language-ad85ada9a45077c7e76c",
+      "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
+    },
+    {
+      "id": "lesson-1498:grammar-moon",
+      "word": "卷不去、拂还来",
+      "type": "grammar",
+      "sourceSentence": "玉户帘中卷不去，捣衣砧上拂还来。",
+      "passageQuotes": [
+        "玉户帘中卷不去，捣衣砧上拂还来。"
+      ],
+      "meaning": "卷不去、拂還來的是月光；承接前面的月，動作與不能排遣的相思聯繫起來。",
+      "explanation": "沿用教材對玉戶簾中卷不去的註解。省略內容的還原須有前句依據；不把月光真的有意志當作者生平事實。",
+      "annotationIds": [
+        "footnote-10076-11"
+      ],
+      "difficulty": null,
+      "proposedDemand": "syntax-and-effect",
+      "calibrationStatus": "pending-real-model",
+      "scoringRole": "none",
+      "variants": [
+        "「卷不去」「拂還來」省略了甚麼？請從前後詩句找到依據，再說明為甚麼不直接寫思念。",
+        "請把兩句省略的對象補回，說明兩個動作為甚麼都未奏效；不要只報省略句這個名稱。"
+      ],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "sourcePassages": [
+        "lesson-1498:p12"
+      ],
+      "version": "yw-language-efbf60f7627ea59f5f04",
+      "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
+    }
+  ],
+  "dictionary": [
+    {
+      "id": "xc-he",
+      "headword": "何",
+      "entryId": "e-p207_L-7",
+      "edition": "1999 年 2 月第 1 版",
+      "url": "https://xc.bdfz.net/#entry/e-p207_L-7",
+      "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p207_L-7",
+      "verification": "指定 xc 已接受來源 OCR 定位；本輪公開讀取 403，原頁影像未目視核對，釋義待覆核。",
+      "verificationStatus": "image-review-pending",
+      "sourcePdfSha256": "a60dcbdca401b2445eeca3e09d6db0fb879d9f5d641781bc2b27c7757249cfaa",
+      "localSource": {
+        "path": "xuci-ocr/work/final/cols/p207_L.txt",
+        "sha256": "bdebdef771c51c89a65477bd68517595b836eae51a9a1520d4a091aea45d0bfa"
+      },
+      "pages": [
+        {
+          "pdfPage": 207,
+          "printedPage": 195,
+          "url": "https://dict.bdfz.net/source/xc/images/p207.png"
+        }
+      ]
+    },
+    {
+      "id": "xc-dan",
+      "headword": "但",
+      "entryId": "e-p096_R-8",
+      "edition": "1999 年 2 月第 1 版",
+      "url": "https://xc.bdfz.net/#entry/e-p096_R-8",
+      "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p096_R-8",
+      "verification": "指定 xc 已接受來源 OCR 定位；本輪公開讀取 403，原頁影像未目視核對，釋義待覆核。",
+      "verificationStatus": "image-review-pending",
+      "sourcePdfSha256": "a60dcbdca401b2445eeca3e09d6db0fb879d9f5d641781bc2b27c7757249cfaa",
+      "localSource": {
+        "path": "xuci-ocr/work/final/cols/p096_R.txt",
+        "sha256": "5999416bcd0fbcf6920fe8291794ba9a6955164092c6891e8c34ef457a7c4bf9"
+      },
+      "pages": [
+        {
+          "pdfPage": 96,
+          "printedPage": 84,
+          "url": "https://dict.bdfz.net/source/xc/images/p096.png"
+        }
+      ]
+    }
+  ],
   "exam": {
     "status": "original-practice-with-publisher-cited-examples",
     "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
@@ -2099,7 +2301,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-76ba19ac1bdd58dc0d55",
+  "curriculumVersion": "yw-dialogue-e08014aa0b3c65f129ca",
   "readingMaterials": [
     {
       "id": "lesson-1498:p19",

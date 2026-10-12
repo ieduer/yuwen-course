@@ -1,4 +1,8 @@
-## Current dialogue candidate — 2026-10-12T10:01:56+00:00
+## Current dialogue candidate — 2026-10-12T10:25:59Z
+
+Nine language items, review continuation and anti-copy guards are implemented;99 focused checks per pinned Node and Reading API74 pass. The24-case real-model calibration is prepared but unexecuted. Student-usable production capacity remains unchanged because source/semantic, backup/restore, APIS fanout and real acceptance gates remain open. See [current candidate](docs/dialogue/PILOT.md) and its CALIBRATION reference. The serial goal remains active.
+
+## Historical dialogue candidate — 2026-10-12T10:01:56+00:00
 
 Grounded 尚友 conclusion/readiness gates and stale-remediation fix implemented in the disabled candidate.91 focused checks per pinned Node,74 Reading API checks, formal artifact1252/2b636abe and synthetic save/reload/UI pass. Real teaching calibration and all live restore/release gates remain open; production capacity has not increased. See [current candidate](docs/dialogue/PILOT.md). Second compaction requires one fresh serial continuation; exact source and cleanup in the central HANDOFF.
 

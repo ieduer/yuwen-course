@@ -1,19 +1,19 @@
 # YW conversation pilot — one-page review
 
-As of 2026-10-12T10:01:56+00:00. **Recommendation: NO-GO for migration, production enablement or replacing the old workflow.** Proceed with review of the disabled candidate; no approval is being requested for an unfinished release.
+As of 2026-10-12T10:25:59Z. **Recommendation: NO-GO for migration, production enablement or replacing the old workflow.** Proceed with review of the disabled candidate; no approval is being requested for an unfinished release.
 
 | Review item | Actual evidence / disposition |
 | --- | --- |
 | Source preservation | Isolated candidate from 175f8ae; unrelated dirty canonical checkout preserved; original curriculum, app and migrations unchanged |
 | Inventory | 189 lessons, 869 formal resources, 1,021 formative items, 193 active guide items; exact per-item map, gaps and compound gates |
 | Local implementation | Three text/conversation pilots, gated Worker, private owner storage, verifiable proposals, question instances, versioned resume and budget-deferred drafts |
-| Local checks | 84 dialogue +7 blueprint checks on both pinned Nodes; Reading API74;1252-file current formal artifact. Priorfb9be46 exact-head CI passed; current CI in central report; local synthesis save/reload screenshot retained |
+| Local checks | 89 dialogue +3 calibration +7 blueprint checks on both pinned Nodes; Reading API74;1252-file current formal artifact. Priorfb9be46 exact-head CI passed; current CI in central report; local synthesis save/reload screenshot retained |
 | Performance | Local n=3 first text: desktop median 25.6 ms; mobile weak-network median 786.6 ms; old medians 270.2 ms / 18,556.0 ms. Not a production speedup claim |
 | Long conversation | 200 synthetic turns; mobile CSS390x844, no horizontal overflow. Weak network150ms/200KB/s, n=3: text median983.1ms, record median1672.1ms. First-excerpt link restored all200 turns and reached the original. Physical keyboard/provider latency unverified |
 | Historical production evidence | No writes made; no live row comparison, new recoverable backup or restore acceptance obtained |
 | Teaching/scoring bridge | Original vocab mastery, submitted/unfinished first reading and exact-version formal credit are projected read-only; owner history and original first-read/corrections are integrated. Five AI formal tasks now use the original evaluator; student-quote confirmation invokes them; six original choices and the non-scoring self-report now commit with the visible conversation. New dialogue mastery remains separate from original formal grades |
 | AI quality / 尚友 | Ready-only five-domain model synthesis, chronological student quotes, text references and atomic reload/export implemented and structurally tested. Real semantic calibration and adversarial persona review remain pending |
-| Classical mastery | Source vocabulary, stable variants and session-stable randomized whole-lesson order implemented; grammar coverage/difficulty, real calibration and approved consequential thresholds unresolved |
+| Classical mastery | Source vocabulary, stable variants and session-stable randomized whole-lesson order implemented; nine additional language instances and non-scoring evidence implemented; source-image acceptance, empirical difficulty and real calibration remain unresolved |
 | Streaming / cost | APIS/YW real SSE and hard-crash fencing implemented locally. User-approved US$50/day Gemini policy reserved atomically. Live stream/cost acceptance and shared fan-out release remain pending |
 | Privacy / teacher use | All authenticated My accounts, own records only; permanent retention approved. Owner export/review request implemented; append-only correction implemented; no cross-student grants/dashboard authorized |
 | Sources / mobile | Two original dictionary pages visually verified; Beijing newspaper question references text-verified. Original papers/official marking, grammar calibration and physical keyboard/accessibility remain pending |
@@ -27,4 +27,4 @@ As of 2026-10-12T10:01:56+00:00. **Recommendation: NO-GO for migration, producti
 - **Privacy and budgets:** user-approved own-record-only My access, permanent retention and US$50 daily Gemini cap are incorporated. No cross-student teacher grant exists; corrections must preserve originals. Do not infer a teacher role from general My membership.
 - **Access/ownership:** same-account documented read access recovered. Reconcile the existing staged publisher and verified backup/restore before a governed release. The connector itself is not repaired.
 
-Local remaining engineering (owner evidence report, real semantic calibration, grammar/difficulty and missing source fixtures) is still required even if these decisions are accepted. Do not treat a sign-off on the design as permission to skip that work or acceptance checks. The project-local AGENTS instruction names suen (or a suen-designated reviewer) as the independent reviewer; this candidate does not self-certify that review.
+Remaining source/teaching acceptance (real semantic calibration, empirical difficulty and pending dictionary images) is still required even if these decisions are accepted. Do not treat a sign-off on the design as permission to skip that work or acceptance checks. The project-local AGENTS instruction names suen (or a suen-designated reviewer) as the independent reviewer; this candidate does not self-certify that review.

@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1252,
-  "totalBytes": 165033782,
-  "aggregateSha256": "2b636abe98f9824bb75ffae9a160b2988d195edf9ff0d4155f87cffdd8852976",
+  "totalBytes": 165056546,
+  "aggregateSha256": "6217335ab11befcc5b822bce96e1d206d8559ec5d0c601236cb58ea64bc83ae8",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44500,
-      "sha256": "dfee76b06781202b12e88dfc5fc8bff1b2f5fd26b9eecf477bba511953847447"
+      "sha256": "3b216864661d3beec73f5e4f643d0e484e7d66c459ed2fa2c1f556e3ae2a7e00"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1462,8 +1462,8 @@
     },
     {
       "path": "assets/dialogue.js",
-      "bytes": 34857,
-      "sha256": "8ae7bb2a49e360dac151376280f2a3b99863041390eec72a98740e94a70e9743"
+      "bytes": 35181,
+      "sha256": "540e5cbf24309f659ffa9d2e41a6aad310d3c8460bf6168e4e81b07c9c10586a"
     },
     {
       "path": "assets/learning-evidence.js",
@@ -6082,18 +6082,18 @@
     },
     {
       "path": "dialogue-curriculum/lesson-1498.json",
-      "bytes": 83041,
-      "sha256": "ef4a647db719f7bcdc6e63b0695c417eca1664bf7d6cd77b7ef05cb1cf0057c3"
+      "bytes": 91822,
+      "sha256": "22c48bfa8d6fe5b0d512670e9bb7eda7f410bbc2282be065f1d54d21585ad627"
     },
     {
       "path": "dialogue-curriculum/lesson-1711-p1.json",
-      "bytes": 66037,
-      "sha256": "77b1f562d5d55814e1ccc3beedc5558f2bdc92091da6a7be832819bb8dc755fc"
+      "bytes": 77560,
+      "sha256": "7500b44aaf7b20a259e176687b6ad12adb45ec474742838e7ba144d8ebeab7cb"
     },
     {
       "path": "dialogue-curriculum/lesson-1717-p2.json",
       "bytes": 36583,
-      "sha256": "49d679b27e8268d163d2e79864c9a3c73d6be3136777d5864308f72efdfc9638"
+      "sha256": "dd8201b110435b7ebed9fc84cee80ebfba8b16fefdd054d21ae353124136ef17"
     },
     {
       "path": "dialogue-formal.js",
@@ -6112,13 +6112,13 @@
     },
     {
       "path": "dialogue-policy.js",
-      "bytes": 16700,
-      "sha256": "5c9c769668673eb3086ee5b6b0c0ed23e76ece312d4fc710c7d4d498b6a69bbf"
+      "bytes": 18569,
+      "sha256": "95d9e8c0814a49d545c9e55b8075c400346f06a21eb3abc39704339bca3de36b"
     },
     {
       "path": "dialogue-source.js",
-      "bytes": 41026,
-      "sha256": "b2d6d9c3e23f60017442d96f3eb3da2908444dff53f23f4dc1ad0733c8c73a71"
+      "bytes": 41293,
+      "sha256": "866490b17bd5818496cf8e2fdf70cd9e43aee28840cfe933d2ba213465227d4e"
     },
     {
       "path": "dialogue-stream.js",

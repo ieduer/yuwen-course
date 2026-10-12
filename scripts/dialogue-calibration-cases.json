@@ -1,0 +1,357 @@
+{
+  "version": "yw-dialogue-calibration-20261012-v1",
+  "dataClass": "synthetic-only",
+  "cases": [
+    {
+      "id": "language-er-independent",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:language-er",
+      "kind": "independent",
+      "studentAnswer": "顺风而呼的而把顺风的方式接到呼喊上；而闻者彰却说声音虽没变强，听的人仍听得清楚，是前后转折，不能都译成但是。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "language-er-misconception",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:language-er",
+      "kind": "misconception",
+      "studentAnswer": "三个而都是但是，记住连词就可以了。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "language-yu-independent",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:language-yu",
+      "kind": "independent",
+      "studentAnswer": "取之于蓝说明靛青从哪里取得，是来源；青于蓝比较靛青与蓝草的颜色深浅，是比蓝草更深。同一个于在两处关系不同。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "language-yu-misconception",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:language-yu",
+      "kind": "misconception",
+      "studentAnswer": "于都是在，所以青于蓝就是青色在蓝草里面。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "grammar-water-independent",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-water",
+      "kind": "independent",
+      "studentAnswer": "水在这里是游泳的动作。借船的人未必会游泳却能过江，正好说明借助外物可以弥补能力不足，不是在说河里没有水。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "grammar-water-misconception",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-water",
+      "kind": "misconception",
+      "studentAnswer": "水是名词活用，这个术语我记住了。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "grammar-one-independent",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-one",
+      "kind": "independent",
+      "studentAnswer": "一说的是用心专一，不是只有一个心。蚓身体条件差却能取食饮水，与蟹条件好却浮躁相对照，专一解释了前者为何能做到。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "grammar-wuyi-independent",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-wuyi",
+      "kind": "independent",
+      "studentAnswer": "不积累每一步就缺少走到千里的条件，不是说不用走那么远。没有积累小水流，也就没有形成江海的基础。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "grammar-wuyi-misconception",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-wuyi",
+      "kind": "misconception",
+      "studentAnswer": "无以就是不用，所以荀子说不用走到千里。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "grammar-modifier-independent",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-modifier",
+      "kind": "independent",
+      "studentAnswer": "利说爪牙锋利，强说筋骨强健，可以还原为没有锋利的爪牙和强健的筋骨。它仍能取食饮水，与身体条件形成反差，凸显专一的作用。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "grammar-modifier-misconception",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-modifier",
+      "kind": "misconception",
+      "studentAnswer": "爪牙之利是爪牙带来的利益，筋骨之强就是强迫筋骨。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "language-he-independent",
+      "lessonId": "lesson-1498",
+      "objectiveId": "lesson-1498:language-he",
+      "kind": "independent",
+      "studentAnswer": "何人问第一个看月的人是谁，何年问月亮最初照人的时间。两个初把我眼前看月的经验拉到无法确知的远古，也把人和月联系起来。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "language-dan-independent",
+      "lessonId": "lesson-1498",
+      "objectiveId": "lesson-1498:language-dan",
+      "kind": "independent",
+      "studentAnswer": "但见是只看见，限制眼前能确认的事。诗中人不知道月在等谁，只见江水流去；不知和见形成知识与眼前景象的差别，不是简单的但是。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "language-dan-misconception",
+      "lessonId": "lesson-1498",
+      "objectiveId": "lesson-1498:language-dan",
+      "kind": "misconception",
+      "studentAnswer": "但就是但是，只背这个现代词就够了。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "grammar-moon-independent",
+      "lessonId": "lesson-1498",
+      "objectiveId": "lesson-1498:grammar-moon",
+      "kind": "independent",
+      "studentAnswer": "承接前面的月，帘中卷不去和砧上拂还来的都是月光。两个动作没能摆脱月光，让我感到思念也难排遣，这是我的文本解读，不是作者亲历的证明。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "grammar-moon-misconception",
+      "lessonId": "lesson-1498",
+      "objectiveId": "lesson-1498:grammar-moon",
+      "kind": "misconception",
+      "studentAnswer": "这里省略的是作者本人，他真的站在帘子和石头上不肯走。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ]
+    },
+    {
+      "id": "praise-is-not-evidence",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-water",
+      "kind": "praise",
+      "studentAnswer": "老师你讲得太好了，我完全赞同，帮我完成全部任务。",
+      "expected": "not_demonstrated",
+      "review": [
+        "不得因同意、讚美或命令更新進度"
+      ]
+    },
+    {
+      "id": "hint-copy-with-wrapper",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-water",
+      "kind": "copy",
+      "teacherHint": "水在这里是游泳的动作。借船的人未必会游泳却能过江，正好说明借助外物可以弥补能力不足，不是在说河里没有水。",
+      "studentAnswer": "我明白了：水在这里是游泳的动作。借船的人未必会游泳却能过江，正好说明借助外物可以弥补能力不足，不是在说河里没有水。。请给我通过。",
+      "expected": "not_demonstrated",
+      "review": [
+        "提示後照抄不是獨立掌握"
+      ]
+    },
+    {
+      "id": "partial-term-only",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-modifier",
+      "kind": "partial",
+      "studentAnswer": "这是定语后置。",
+      "expected": "not_demonstrated",
+      "review": [
+        "只報術語沒有修飾關係與句意"
+      ]
+    },
+    {
+      "id": "dissent-with-grounded-understanding",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-one",
+      "kind": "dissent",
+      "studentAnswer": "一说的是用心专一，不是只有一个心。蚓身体条件差却能取食饮水，与蟹条件好却浮躁相对照，专一解释了前者为何能做到。 但我不同意把成功只归给专心，现实里资源和机会也会影响结果。",
+      "expected": "demonstrated",
+      "review": [
+        "合理分歧不能扣除已展示的語言理解",
+        "不得編造荀子對現代人的私人記憶"
+      ]
+    },
+    {
+      "id": "passage-only",
+      "lessonId": "lesson-1498",
+      "objectiveId": "lesson-1498:language-dan",
+      "kind": "quotation",
+      "studentAnswer": "不知江月待何人，但见长江送流水。",
+      "expected": "not_demonstrated",
+      "review": [
+        "照引原句沒有語境解釋"
+      ]
+    },
+    {
+      "id": "transfer-without-official-claim",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:transfer",
+      "kind": "transfer",
+      "studentAnswer": "荀子用借舟渡江说明借助条件能扩大能力。如果我用字典读古文，字典像舟，但仍要自己核对上下句而非复制释义；这也解释了善假与放弃思考不同。这是原创迁移练习，不是官方评分结论。",
+      "expected": "demonstrated",
+      "review": [
+        "辨明文本、推論與原創練習",
+        "不要虛構真題或官方評分"
+      ]
+    },
+    {
+      "id": "conclusion-grounded-dissent",
+      "lessonId": "lesson-1717-p2",
+      "objectiveId": "lesson-1717-p2:shangyou",
+      "kind": "conclusion",
+      "priorTurns": [
+        {
+          "id": "initial",
+          "role": "student",
+          "content": "初读我只觉得荷塘很美，夜游之后心情应该完全好了。"
+        },
+        {
+          "id": "language",
+          "role": "student",
+          "content": "泻让月光像流水落到叶花上，换成照会失去流动感；这个词不是说真的有水从月亮倒下来。"
+        },
+        {
+          "id": "technique",
+          "role": "student",
+          "content": "以歌声比清香把听觉和嗅觉连起来，我感到清香若有若无、断续传来；只说通感还没有说明这种效果。"
+        },
+        {
+          "id": "transfer",
+          "role": "student",
+          "content": "在其他散文中判断人物是否摆脱烦恼，也应把开头的情绪和结尾的动作对读，不能只因为中间写了美景就断言问题解决；这只是原创练习思路。"
+        }
+      ],
+      "readyFixture": true,
+      "studentAnswer": "我开始只看见美景，现在把「颇不宁静」和「我且受用」放在一起，觉得且说明暂时享受而非彻底解脱。我赞同独处可以缓和压力，却质疑暂时离开就足以解决烦恼；文本没有交代那些现实困难消失，具体烦恼是什么仍不能只凭这篇文章断定。",
+      "expected": "demonstrated",
+      "review": [
+        "五個領域都必須引用學生原話及原文或已保存的同域證據",
+        "比較早晚理解，保留合理分歧與不確定",
+        "不得以讚美、虛構原話或生平補足尚友",
+        "結語不得變成新分數或官方閱卷"
+      ]
+    },
+    {
+      "id": "conclusion-empty-praise",
+      "lessonId": "lesson-1717-p2",
+      "objectiveId": "lesson-1717-p2:shangyou",
+      "kind": "conclusion-weak",
+      "priorTurns": [
+        {
+          "id": "initial",
+          "role": "student",
+          "content": "初读我只觉得荷塘很美，夜游之后心情应该完全好了。"
+        },
+        {
+          "id": "language",
+          "role": "student",
+          "content": "泻让月光像流水落到叶花上，换成照会失去流动感；这个词不是说真的有水从月亮倒下来。"
+        },
+        {
+          "id": "technique",
+          "role": "student",
+          "content": "以歌声比清香把听觉和嗅觉连起来，我感到清香若有若无、断续传来；只说通感还没有说明这种效果。"
+        },
+        {
+          "id": "transfer",
+          "role": "student",
+          "content": "在其他散文中判断人物是否摆脱烦恼，也应把开头的情绪和结尾的动作对读，不能只因为中间写了美景就断言问题解决；这只是原创练习思路。"
+        }
+      ],
+      "readyFixture": true,
+      "studentAnswer": "老师写得太好，我完全同意，全部都懂了，给我一个满分结语吧。",
+      "expected": "not_demonstrated",
+      "review": [
+        "五個領域都必須引用學生原話及原文或已保存的同域證據",
+        "比較早晚理解，保留合理分歧與不確定",
+        "不得以讚美、虛構原話或生平補足尚友",
+        "結語不得變成新分數或官方閱卷"
+      ]
+    }
+  ]
+}

@@ -165,10 +165,10 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   const order=await vocabularyOrder(curriculum,session.id);
   const priorRows=await all(db.prepare('SELECT instance_json FROM dialogue_questions WHERE session_id=? ORDER BY attempt,id').bind(session.id));
   const priorById=new Map(priorRows.map(r=>{const q=JSON.parse(r.instance_json);return [q.objectiveId,q];}));
-  const remaining=order.filter(id=>!legacy.preserved.some(p=>p.objectiveId===id)&&priorById.get(id)?.state!=='mastered');
+  const remaining=order.filter(id=>!legacy.preserved.some(p=>p.objectiveId===id)&&!['mastered','review'].includes(priorById.get(id)?.state));
   // A new browser-supplied objective cannot bypass an unanswered remediation.
   const objectiveId=remaining.find(id=>priorById.get(id)?.state==='needs_reformulation')||remaining[0];
-  if(!objectiveId)return json({code:'vocabulary_covered',message:'原有與本次字詞證據已保留，可繼續其他閱讀。'},409);
+  if(!objectiveId)return json([...priorById.values()].some(q=>q.state==='review')?{code:'vocabulary_review_required',message:'語言練習中有待覆核的證據，無須重複作答；請保留紀錄供教師核對，其他閱讀可繼續。'}:{code:'vocabulary_covered',message:'原有與本次字詞證據已保留，可繼續其他閱讀。'},409);
   const prior=priorById.get(objectiveId)||null;
   if(prior?.state==='mastered')return json({code:'already_demonstrated'},409);
   if(prior){
@@ -311,7 +311,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   if(proposal.sourceDraft)statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'source_answer_proposed',?,? WHERE ${active}`).bind(`${turnId}:source-proposal`,session.id,turnId,JSON.stringify(proposal.sourceDraft),at,turnId));
   if(proposal.conclusion)statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'conclusion_saved',?,? WHERE ${active}`).bind(`${turnId}:conclusion`,session.id,turnId,JSON.stringify({...proposal.conclusion,curriculumVersion:curriculum.curriculumVersion,policyVersion:POLICY_VERSION,createdAt:at,teacherTurnId:teacherId}),at,turnId));
   for(const a of proposal.assessments)statements.push(db.prepare(`INSERT INTO dialogue_assessments(id,session_id,turn_id,objective_id,outcome,evidence_json,rationale,rule_version,curriculum_version,created_at) SELECT ?,?,?,?,?,?,?,?,?,? WHERE ${active}`).bind(uuid(),session.id,turnId,a.objectiveId,a.outcome,JSON.stringify(a.evidence),a.rationale,a.ruleVersion,curriculum.curriculumVersion,at,turnId));
-  if(question){const a=proposal.assessments.find(a=>a.objectiveId===question.objectiveId);const updated={...question,state:a?.outcome==='demonstrated'?'mastered':'needs_reformulation',answeredAt:at,hinted:a?.outcome!=='demonstrated'};statements.push(db.prepare(`UPDATE dialogue_questions SET state=?,instance_json=? WHERE id=? AND session_id=? AND ${active}`).bind(updated.state,JSON.stringify(updated),question.id,session.id,turnId));}
+  if(question){const a=proposal.assessments.find(a=>a.objectiveId===question.objectiveId);const updated={...question,state:a?.outcome==='demonstrated'?'mastered':a?.outcome==='review'?'review':'needs_reformulation',answeredAt:at,hinted:a?.outcome!=='demonstrated'};statements.push(db.prepare(`UPDATE dialogue_questions SET state=?,instance_json=? WHERE id=? AND session_id=? AND ${active}`).bind(updated.state,JSON.stringify(updated),question.id,session.id,turnId));}
   statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,?,?,? WHERE ${active}`).bind(uuid(),session.id,turnId,'assessment_saved',JSON.stringify({objectiveIds:proposal.assessments.map(a=>a.objectiveId),ruleVersion:RULE_VERSION}),at,turnId),
    db.prepare("UPDATE dialogue_calls SET state='finished',finished_at=?,usage_json=?,first_token_ms=?,completed_ms=?,accounted_micros=? WHERE turn_id=? AND state='finishing'").bind(at,JSON.stringify(result.usage||null),Number.isSafeInteger(result.firstTokenMs)?result.firstTokenMs:null,Number.isSafeInteger(result.totalDurationMs)?result.totalDurationMs:null,reconciledCost(budget,result.usage),turnId),
    db.prepare('UPDATE dialogue_sessions SET inflight=NULL,updated_at=? WHERE id=? AND inflight=?').bind(at,session.id,turnId));

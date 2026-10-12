@@ -88,7 +88,7 @@
     "test:preview-transfer": "node --test scripts/test_preview_transfer.mjs scripts/test_preview_telemetry.mjs",
     "test:durable-evaluation": "node --test scripts/test_durable_evaluation_workerd.mjs",
     "test:learning-recorder": "node --test scripts/test_learning_recorder_bridge.mjs scripts/test_learning_recorder_workerd.mjs",
-    "test:dialogue": "node --test scripts/test_dialogue_pilot.mjs",
+    "test:dialogue": "node --test scripts/test_dialogue_pilot.mjs scripts/test_dialogue_calibration.mjs",
     "check:dialogue-curriculum": "node scripts/build_dialogue_curriculum.mjs --check",
     "serve:dialogue-synthetic": "node scripts/serve_dialogue_pilot.mjs"
   },

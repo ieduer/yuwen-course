@@ -1,5 +1,12 @@
 # Dialogue candidate changelog
 
+## 2026-10-12T10:25:59Z — language coverage and calibration corpus; not released
+
+- Add9 separately versioned language questions without changing original grades, curriculum histories or old source difficulty.
+- Keep uncalibrated/source-unverified mastery blocked; review can continue to other work without repeating the reviewed item.
+- Reject literal copied hints/quotation-only explanations, and remove answer disclosure from next-step text.
+- Prepare24 synthetic language/transfer/尚友 cases with finite real-call budget; paid calls0.99 focused checks per Node22/24, Reading API74 and formal1252-file artifact pass.
+
 ## 2026-10-12T10:01:56+00:00 — grounded review synthesis; not released
 
 - Require existing readiness and exact chronological student/text anchors for five-domain 尚友 conclusion, saved atomically with the reply; preserve dissent and original grades.

@@ -94,7 +94,12 @@ for(const id of pilotIds){
  const languagePractice=(references.languageItems[id]||[]).map(item=>{
   for(const noteId of item.annotationIds)assert(reader.main.annotations.some(a=>a.noteId===noteId),`missing textbook annotation ${noteId}`);
   if(item.dictionaryId)assert(references.dictionary.some(d=>d.id===item.dictionaryId),`missing dictionary ${item.dictionaryId}`);
-  return {...item,assessmentStatus:'teaching-reference-only-awaiting-calibration'};
+  const sourcePassages=passages.filter(p=>item.passageQuotes.some(q=>p.text.includes(q))).map(p=>p.id);
+  for(const quote of item.passageQuotes)assert(passages.some(p=>p.text.includes(quote)),`language source drift: ${id}:${item.id}`);
+  assert(item.variants.length>=2 && new Set(item.variants).size===item.variants.length,`language variants: ${item.id}`);
+  const language={...item,id:`${id}:${item.id}`,sourcePassages,version:'yw-language-'+hash({item,dictionary:references.dictionary.find(d=>d.id===item.dictionaryId)||null}).slice(0,20),assessmentStatus:'separate-unscored-mastery-awaiting-calibration'};
+  objectives.push({id:language.id,domain:'vocabulary',label:`語言：${item.word}`,criteria:['context_meaning','explanation','independent'],rule:`${item.meaning} ${item.explanation} 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。`,sourcePassages,prerequisites:[],misconceptions:item.misconceptions,remediation:'說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。',scoringRole:'none'});
+  return language;
  });
  const dictionary=references.dictionary.filter(d=>languagePractice.some(i=>i.dictionaryId===d.id));
  const data={schemaVersion:1,lessonId:id,title:meta.title,mode:meta.mode,author:meta.authors[0]?.name||'作品傳統',persona:{kind:meta.authors.length===1?'author-simulation':'collective-simulation',notice:'AI 教學模擬，依據作品；並非作者本人。',narratorIsAuthor:false,rule:'以作者第一人稱討論文本選擇；不得把抒情主人公或敘述者的經歷當作作者生平。'},passages,annotations:reader.main.annotations,resources:reader.resources,source:lesson.forumUrl,objectives,vocabulary,legacy:row,referenceVersion:references.version,languagePractice,dictionary,exam:{status:'original-practice-with-publisher-cited-examples',reason:'練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。',examples:references.examExamples},curriculumVersion:''};

@@ -1434,6 +1434,132 @@
         "照抄提示不算獨立掌握"
       ],
       "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p1:language-er",
+      "domain": "vocabulary",
+      "label": "語言：而",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "把「順風」與「呼」相接，表示修飾；「而聞者彰」與聲音未加強相轉折；「博學而日參省」表示遞進。 比較每個而前後成分的關係；不同語境不套用同一個現代連詞。術語不能替代句意說明。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "remediation": "說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。",
+      "scoringRole": "none"
+    },
+    {
+      "id": "lesson-1711-p1:language-yu",
+      "domain": "vocabulary",
+      "label": "語言：于",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "「取之于藍」的于引出來源；「青于藍」的于引出比較對象。 依教材兩條註釋，分別還原成「從藍草取得」與「比藍草顏色深」；不只報詞性名稱。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "remediation": "說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。",
+      "scoringRole": "none"
+    },
+    {
+      "id": "lesson-1711-p1:grammar-water",
+      "domain": "vocabulary",
+      "label": "語言：水",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "「水」在此表示游泳這個動作；句意是借助舟船的人未必善於游泳，卻能渡過江河。 教材註「能水：善於游水。水，游泳。」說明句法作用與語境，不能只報「活用」術語。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "remediation": "說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。",
+      "scoringRole": "none"
+    },
+    {
+      "id": "lesson-1711-p1:grammar-one",
+      "domain": "vocabulary",
+      "label": "語言：一",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "「一」說的是專一，不是心的數量。 沿用教材「一：專一」的註釋；把這一判斷與前文寫蚓的行為相連。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "remediation": "說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。",
+      "scoringRole": "none"
+    },
+    {
+      "id": "lesson-1711-p1:grammar-wuyi",
+      "domain": "vocabulary",
+      "label": "語言：无以",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "無以是沒有用來達成某事的條件或辦法，不是「不用」。 沿用教材無以註釋，對比條件的缺乏與主動放棄；保留積累與結果的關係。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "remediation": "說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。",
+      "scoringRole": "none"
+    },
+    {
+      "id": "lesson-1711-p1:grammar-modifier",
+      "domain": "vocabulary",
+      "label": "語言：爪牙之利、筋骨之强",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "蚯蚓沒有鋒利的爪牙、強健的筋骨，卻能向上吃泥土、向下飲地下水；此處利、強說明爪牙與筋骨的性質。 語序分析是依課文作的教學解釋，不冒充教材已有的句式註釋；接受能還原修飾關係的說明，不能只答定語後置。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "remediation": "說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。",
+      "scoringRole": "none"
     }
   ],
   "vocabulary": [
@@ -1913,10 +2039,10 @@
       }
     ]
   },
-  "referenceVersion": "yw-dialogue-sources-20261012-v1",
+  "referenceVersion": "yw-dialogue-sources-20261012-v2",
   "languagePractice": [
     {
-      "id": "language-er",
+      "id": "lesson-1711-p1:language-er",
       "word": "而",
       "type": "function-word",
       "sourceSentence": "順風而呼，聲非加疾也，而聞者彰；君子博學而日參省乎己。",
@@ -1929,10 +2055,26 @@
         "比較「順風而呼」與「而聞者彰」：兩個「而」連接的內容是甚麼，關係相同嗎？請用自己的話說明。",
         "把「君子博學而日參省乎己」與「順風而呼」中的「而」換成適當的現代說法，解釋兩處為甚麼不能都機械譯成「但是」。"
       ],
-      "assessmentStatus": "teaching-reference-only-awaiting-calibration"
+      "proposedDemand": "context-comparison",
+      "calibrationStatus": "pending-real-model",
+      "scoringRole": "none",
+      "passageQuotes": [
+        "顺风而呼",
+        "而闻者彰",
+        "君子博学而日参省乎己"
+      ],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "version": "yw-language-122753d3067f12088b3e",
+      "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     },
     {
-      "id": "language-yu",
+      "id": "lesson-1711-p1:language-yu",
       "word": "于",
       "type": "function-word",
       "sourceSentence": "青，取之于藍，而青于藍。",
@@ -1942,16 +2084,31 @@
         "footnote-11143-3",
         "footnote-11143-4"
       ],
-      "dictionaryStatus": "specialist-entry-awaiting-verification",
+      "dictionaryStatus": "specialist-image-awaiting-verification",
       "difficulty": null,
       "variants": [
         "「取之于藍」與「青于藍」中的「于」分別引出甚麼？請把兩處改寫成現代說法。",
         "若把「青于藍」解作「從藍草取得」，會混淆哪兩個意思？請用兩處原句說明。"
       ],
-      "assessmentStatus": "teaching-reference-only-awaiting-calibration"
+      "proposedDemand": "context-comparison",
+      "calibrationStatus": "pending-real-model",
+      "scoringRole": "none",
+      "passageQuotes": [
+        "青，取之于蓝，而青于蓝"
+      ],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "dictionaryId": "xc-yu",
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "version": "yw-language-50b8112c5181e260cf47",
+      "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     },
     {
-      "id": "grammar-water",
+      "id": "lesson-1711-p1:grammar-water",
       "word": "水",
       "type": "grammar",
       "sourceSentence": "假舟楫者，非能水也，而絕江河。",
@@ -1965,10 +2122,24 @@
         "「非能水也」的「水」在句中指事物還是動作？請根據上下文說明，並改寫這句話。",
         "如果把「水」只解釋為江水，為何無法說通「假舟楫者，非能水也」？請解釋它在這句中的作用。"
       ],
-      "assessmentStatus": "teaching-reference-only-awaiting-calibration"
+      "proposedDemand": "context-reformulation",
+      "calibrationStatus": "pending-real-model",
+      "scoringRole": "none",
+      "passageQuotes": [
+        "假舟楫者，非能水也，而绝江河"
+      ],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "version": "yw-language-af65b1aa431ac194d7af",
+      "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     },
     {
-      "id": "grammar-one",
+      "id": "lesson-1711-p1:grammar-one",
       "word": "一",
       "type": "grammar",
       "sourceSentence": "用心一也。",
@@ -1982,7 +2153,85 @@
         "「用心一也」的「一」能否只譯成數量「一個」？請改寫句意，並說明與前文的關係。",
         "課文用「一」說明蚓能做成事情的原因。它在此描述甚麼狀態？請用自己的話解釋。"
       ],
-      "assessmentStatus": "teaching-reference-only-awaiting-calibration"
+      "proposedDemand": "context-reformulation",
+      "calibrationStatus": "pending-real-model",
+      "scoringRole": "none",
+      "passageQuotes": [
+        "用心一也"
+      ],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "version": "yw-language-0219d3606820b188770c",
+      "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
+    },
+    {
+      "id": "lesson-1711-p1:grammar-wuyi",
+      "word": "无以",
+      "type": "grammar",
+      "sourceSentence": "故不积跬步，无以至千里；不积小流，无以成江海。",
+      "passageQuotes": [
+        "故不积跬步，无以至千里；不积小流，无以成江海。"
+      ],
+      "meaning": "無以是沒有用來達成某事的條件或辦法，不是「不用」。",
+      "explanation": "沿用教材無以註釋，對比條件的缺乏與主動放棄；保留積累與結果的關係。",
+      "annotationIds": [
+        "footnote-11143-31"
+      ],
+      "difficulty": null,
+      "proposedDemand": "context-reformulation",
+      "calibrationStatus": "pending-real-model",
+      "scoringRole": "none",
+      "variants": [
+        "「無以至千里」能不能理解為「不用走到千里」？請改寫整句，說明差別。",
+        "把「不積小流，無以成江海」改寫為自己的話，說明前後兩部分的條件關係。"
+      ],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "version": "yw-language-7264fd7e0d59255136ce",
+      "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
+    },
+    {
+      "id": "lesson-1711-p1:grammar-modifier",
+      "word": "爪牙之利、筋骨之强",
+      "type": "grammar",
+      "sourceSentence": "蚓无爪牙之利，筋骨之强，上食埃土，下饮黄泉，用心一也。",
+      "passageQuotes": [
+        "蚓无爪牙之利，筋骨之强，上食埃土，下饮黄泉，用心一也。"
+      ],
+      "meaning": "蚯蚓沒有鋒利的爪牙、強健的筋骨，卻能向上吃泥土、向下飲地下水；此處利、強說明爪牙與筋骨的性質。",
+      "explanation": "語序分析是依課文作的教學解釋，不冒充教材已有的句式註釋；接受能還原修飾關係的說明，不能只答定語後置。",
+      "annotationIds": [
+        "footnote-11143-37",
+        "footnote-11143-38",
+        "footnote-11143-39"
+      ],
+      "difficulty": null,
+      "proposedDemand": "syntax-and-effect",
+      "calibrationStatus": "pending-real-model",
+      "scoringRole": "none",
+      "variants": [
+        "「爪牙之利，筋骨之強」中的利、強分別說明甚麼？請改成現代語序，並說明作者為甚麼接著寫蚓能做的事。",
+        "如果把「爪牙之利」讀成「爪牙帶來的利益」，與本句前後有何衝突？請還原兩組修飾關係。"
+      ],
+      "misconceptions": [
+        "只報術語，未解釋語境",
+        "照抄提示，未獨立改述"
+      ],
+      "sourcePassages": [
+        "lesson-1711-p1:p1"
+      ],
+      "version": "yw-language-ca9a661e074a200de9dd",
+      "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     }
   ],
   "dictionary": [
@@ -2007,6 +2256,39 @@
           "printedPage": 121,
           "url": "https://dict.bdfz.net/source/xc/images/p133.png",
           "example": "君子博學而日參省乎己，則知明而行無過矣。"
+        }
+      ],
+      "verificationStatus": "source-image-verified"
+    },
+    {
+      "id": "xc-yu",
+      "headword": "于",
+      "entryId": "e-p773_L-6",
+      "edition": "1999 年 2 月第 1 版",
+      "url": "https://xc.bdfz.net/#entry/e-p773_L-6",
+      "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p773_L-6",
+      "verification": "指定 xc 已接受來源 OCR 定位；本輪公開讀取 403，原頁影像未目視核對，釋義待覆核。",
+      "verificationStatus": "image-review-pending",
+      "sourcePdfSha256": "a60dcbdca401b2445eeca3e09d6db0fb879d9f5d641781bc2b27c7757249cfaa",
+      "localSource": {
+        "path": "xuci-ocr/work/final/cols/p773_L.txt",
+        "sha256": "3af92b096b6ccbdb2c2e1fb9f083e4232d9adf6e819a381f17e77a7ee3fe4c5c"
+      },
+      "pages": [
+        {
+          "pdfPage": 773,
+          "printedPage": 761,
+          "url": "https://dict.bdfz.net/source/xc/images/p773.png"
+        },
+        {
+          "pdfPage": 774,
+          "printedPage": 762,
+          "url": "https://dict.bdfz.net/source/xc/images/p774.png"
+        },
+        {
+          "pdfPage": 776,
+          "printedPage": 764,
+          "url": "https://dict.bdfz.net/source/xc/images/p776.png"
         }
       ]
     }
@@ -2049,7 +2331,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-9619f426328cbe758f1c",
+  "curriculumVersion": "yw-dialogue-7c7c0d3a3d53d99e1ba3",
   "readingMaterials": [],
   "textRoleVersion": "yw-dialogue-text-roles-20261012-v1"
 }

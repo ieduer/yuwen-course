@@ -1,4 +1,12 @@
-## Current dialogue candidate — 2026-10-12T10:01:56+00:00
+## Current dialogue candidate — 2026-10-12T10:25:59Z
+
+Nine source-linked language items now have separate, versioned question instances and evidence: six for 劝学 and three for 春江花月夜. Original vocabulary/questions/grades and completed courses stay unchanged; immutable older curricula do not acquire these items. New language mastery is rejected until semantic calibration and required dictionary-image verification are accepted. Numeric difficulty remains null; proposed demand labels are explicit. Literal copied hints with a wrapper and bare source quotations cannot prove independent explanation. Review outcomes preserve answers and permit other questions without repeated retries. Student next-step text no longer exposes the answer rubric.
+
+All99 relevant checks (89 dialogue,3 calibration,7 blueprint) pass on Node22.21.1 and24.18.0. Original Reading API74 passes; formal staging/artifact1252 files, aggregate6217335ab11befcc5b822bce96e1d206d8559ec5d0c601236cb58ea64bc83ae8. Context still fits22000 data characters with all-domain trajectory and latest response, while raw history is retained. A pinned24-case synthetic calibration packet covers the three pilots including substantive/empty-praise 尚友. Preparation makes zero paid requests; exact operation/budget and remaining live dependencies are in [CALIBRATION.md](CALIBRATION.md).
+
+Feature/APIS stream OFF; remote0010–0013 unapplied. No live data, backup/export, migration, paid model call, deployment or Status write. Source-image/semantic acceptance, live backup/restore and identity/mobile/weak-network/stream/cost acceptance, APIS fanout and suen review remain required. APIS metadata budget stays122/160 with its original expired four-minute deadline; no new APIS reads were made. Central evidence: /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12f95/REPORT.md.
+
+## Historical dialogue candidate — 2026-10-12T10:01:56+00:00
 
 The disabled candidate now saves a grounded 尚友 synthesis only after the server's existing readiness gates. It compares earlier/later exact student words, records a text-grounded position including dissent, and requires five evidence-backed domains: interpretation, vocabulary, technique, transfer and remaining uncertainty. This is model synthesis for review, never a new formal grade. The visible reply, conclusion and assessments commit together; duplicate/foreign-owner readback is fenced. Student summary and original-turn links survive reload/export. Policyv4 and evidencev2 preserve older records.
 
