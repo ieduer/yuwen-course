@@ -1,4 +1,14 @@
-## Current dialogue candidate — 2026-10-12T08:47:07Z
+## Current dialogue candidate — 2026-10-12T09:10:38.522159+00:00
+
+Serial owner codex-01a12f36; active goal remains the complete original twelve-section redesign. A model may propose exact student quotations for one existing formal task; server validation rejects fabricated, teacher-authored or unregistered answers. A compact in-conversation card exposes each original quote and the unchanged rubric. Only explicit student confirmation invokes the existing source evaluator through the shared single-stream budget. Suggestions alone create no grades; accepted/historical results remain protected. Budget-blocked original fields retain their identity for retry. Policy v2 is stored per new turn; earlier records are unchanged.
+
+Fixed readback of source item versions: learning_interactions carries the manifest version, while the same-event evidence envelope pins the individual resource. Credit requires matching event, resource, source version/site/system; mismatches remain historical review. No old score is modified.
+
+72 dialogue +121 original source/recovery/replay checks pass on both pinned Nodes (193 each); original Reading API74 from the preceding backend step remains scoped evidence. Formal build/staging/manifest passes1251 files, aggregate `773a134ac72a98e63f13590c0945c18af1dec582cc938120867027d42d12c2b9`. Synthetic mobile390px: no overflow, original quote navigation, double-submit/reload gives one source assessment, and account changes clear private content. Three bounded screenshot attempts timed out; no new screenshot or real phone/provider acceptance claimed. Task browser/server and six exact temporary browser files are closed/removed.
+
+Feature remains off; all0010–0013 are unapplied remotely. Original non-AI vocabulary selectedIndex and non-scoring evaluation integration, grammar/semantic 尚友 calibration, source/account/phone/stream/cost acceptance, backup/isolated restore, APIS HTTP fan-out and suen review remain required. Source text/reference classification also needs inspection: the poem reader includes appended textbook/Drive material. No paid provider call, live data write or production publication. Central evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12f36/REPORT.md`.
+
+## Historical dialogue candidate — 2026-10-12T08:47:07Z
 
 Serial owner codex-01a12f36; active goal is the complete original twelve-section redesign. The five original AI formal interactions now have a backend bridge through the original rubric, strict normalizer, raw submission, evaluation and outbox. Every bridge attempt first shares dialogue's atomic dollar/count/concurrency reservation and single APIS stream; source result, visible teacher reply and cost reconciliation commit together. Original accepted results and earlier versions are preserved. Unknown attempts stay readback-only, including from legacy pending/resume; a new mutation cannot re-evaluate the identical saved answer. The original legacy grader remains unchanged for its own submissions.
 

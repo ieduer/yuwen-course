@@ -1,5 +1,11 @@
 # Dialogue candidate changelog
 
+## 2026-10-12T09:10:38.522159+00:00 — verified student-quote confirmation; not released
+
+- Connected exact student quotations to original-task confirmation with original rubric/turn links; suggestions alone award nothing.
+- Corrected strict same-event source item-version readback while preserving every original score. Versioned the changed dialogue policy.
+- Verified193 focused checks per pinned Node, formal artifact and synthetic390px double-submit/reload/account isolation. Original non-AI tasks and real acceptance remain open; three screenshot attempts timed out.
+
 ## 2026-10-12T08:47:07Z — original formal evaluator backend; not released
 
 - Routed five original AI formal interactions through the unchanged source rubric/normalizer/ledger with the dialogue's single-attempt budget and stream.

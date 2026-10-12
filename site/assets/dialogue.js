@@ -75,7 +75,27 @@ function clearPrivateView(){generation++;streamAbort?.abort();streamAbort=null;
  firstReadView?.dispose();firstReadView=null;
  $('correction').close();correctionTarget=null;correctionMutation=null;$('correction-original').textContent='';$('correction-history').replaceChildren();$('correction-note').value='';$('correction-proposed').value='';$('turns').replaceChildren();$('answer').value='';$('quote').hidden=true;
  selected=null;pending=null;pendingDraft=null;snapshot=null;clearTimeout(pollTimer);
- $('export-status').textContent='';$('evidence-summary').replaceChildren();sharedHistory=null;$('old-history').replaceChildren();$('old-history-load').disabled=true;
+ $('source-draft').replaceChildren();$('source-draft').hidden=true;$('export-status').textContent='';$('evidence-summary').replaceChildren();sharedHistory=null;$('old-history').replaceChildren();$('old-history-load').disabled=true;
+}
+function renderSourceDraft(data){
+ const box=$('source-draft');box.replaceChildren();box.hidden=true;
+ const deferred=data.draft?.formal?data.draft:null;
+ const draft=deferred?{formal:deferred.formal,label:'原有要求',references:[]}:data.sourceDraft;
+ if(!draft||data.pending||data.question)return;
+ box.hidden=false;box.append(node('h3',`核對「${draft.label}」的作答`),node('p','這些是你已寫出的內容。確認後，會按本篇原有判準評閱並保存；不改動過去的成績。'));
+ if(draft.rule){const detail=node('details'),summary=node('summary','查看原有判準');detail.append(summary,node('p',draft.rule));box.append(detail);}
+ if(draft.references.length){
+  for(const ref of draft.references){const quote=node('blockquote',`${ref.label}：${ref.quote}`),link=node('button','查看這段原話');link.type='button';link.onclick=()=>void revealTurn(ref.turnId).catch(e=>{$('status').textContent=e.message;});quote.append(link);box.append(quote);}
+ }else box.append(node('p',draft.formal.content));
+ const gen=generation,owner=ownerRef,button=node('button',deferred?'配額恢復後送出這份答案':'確認內容，按原判準評閱');button.type='button';
+ button.onclick=async()=>{
+  if(gen!==generation||owner!==ownerRef||snapshot?.pending)return;
+  if($('answer').value.trim()||pending&&!pending.formal){$('status').textContent='本頁還有待送文字，請先保存或送出，再核對這份答案。';return;}
+  if(deferred&&deferred.revision!==snapshot.revision){$('status').textContent='這份草稿屬於較早的對話位置；請保留原文並繼續對話核對，不自動重送。';return;}
+  pending||={mutationId:deferred?.mutationId||crypto.randomUUID(),revision:deferred?.revision??snapshot.revision,content:draft.formal.content,questionId:null,formal:{objectiveId:draft.formal.objectiveId,input:draft.formal.input}};
+  pendingDraft=null;button.disabled=true;try{await sendTurn(pending,null,gen);}finally{if(gen===generation&&button.isConnected)button.disabled=!!snapshot?.pending;}
+ };
+ box.append(button,node('p','若內容有缺漏，直接在對話中補充；不必重寫已清楚表達的部分。'));
 }
 function update(data){
  let previousPhase=snapshot?.readingGate?.phase;
@@ -87,7 +107,7 @@ function update(data){
   pending=null;pendingDraft=null;
  }
  snapshot=data;$('old-history-load').disabled=false;renderPartial(data.partial);if(data.report)renderEvidence(data.report);if(data.legacy?.completion)$('evidence-summary').append(node('p','原課已完成（原有自報紀錄，非新增成績）；新增對話另存。'));if(data.legacy?.firstRead?.length)$('evidence-summary').append(node('p','原有初讀及未完成的標記仍保留，可由「原有課程」繼續；原文版本不同時不自動套用舊位置。'));renderTurns(data.turns||[]);$('older').hidden=!data.older;$('status').textContent=data.pending?'你的回答已保存，正在等候回應。':data.saved===false?'尚未開始對話；原有學習紀錄保持不變。':'已讀取伺服器保存紀錄。';$('answer').disabled=false;$('send').disabled=!!data.pending;const next=data.state?.next;$('next').replaceChildren(node('span',data.state?.legacyCompletion?'原課的完成紀錄已保留。你可以自願繼續細讀，不必重做；新對話不改寫原成績。':next?`接下來：${next.rule}`:data.state?.completion==='evidence_ready_for_review'?'證據已齊，等待教師覆核。':'原有完成紀錄待核對，無需重做已完成內容。'));
- if(data.draft && !$('answer').value && !pending){$('answer').value=data.draft.content;selected=null;$('quote').hidden=true;if(data.draft.revision===data.revision){pending={mutationId:data.draft.mutationId,revision:data.draft.revision,content:data.draft.content,questionId:data.draft.questionId};pendingDraft=data.draft.content;}$('status').textContent='已恢復伺服器保存的待送草稿；尚未呼叫 AI。';}
+ if(data.draft && !data.draft.formal && !$('answer').value && !pending){$('answer').value=data.draft.content;selected=null;$('quote').hidden=true;if(data.draft.revision===data.revision){pending={mutationId:data.draft.mutationId,revision:data.draft.revision,content:data.draft.content,questionId:data.draft.questionId};pendingDraft=data.draft.content;}$('status').textContent='已恢復伺服器保存的待送草稿；尚未呼叫 AI。';}
  if(data.question){$('next').replaceChildren(node('span',data.question.question));}
  else if(next && curriculum.vocabulary.some(v=>v.id===next.id)){const b=node('button','開始這個詞的語境提問');b.onclick=async()=>{try{update(await api({action:'question',objectiveId:next.id}));}catch(e){$('status').textContent=e.message;}};$('next').append(b);}
  if(curriculum.mode==='classical'){
@@ -97,6 +117,7 @@ function update(data){
   if(data.readingGate?.phase==='annotated_reading')$('next').textContent='先讀完正文與隨文註釋，保存閱讀確認後，再進入字詞練習。';
   if(data.readingGate?.phase==='initial_reading'){$('answer').disabled=true;$('send').disabled=true;$('next').textContent='先在左側正文標記疑點並保存初讀感知；完成後在這裡繼續細讀對話。';}
  }
+ renderSourceDraft(data);
  performance.mark('dialogue-records-ready');
 }
 async function refresh(gen=generation){try{const data=await api();if(gen!==generation)return;update(data);return data;}catch(e){if(gen!==generation)return;$('status').textContent=e.status===404?'對話試點尚未開放。原文、注釋與原有課程仍可閱讀。':e.message;$('login').hidden=e.status!==401;if(e.status===401||e.status===404){clearPrivateView();ownerRef=null;}$('answer').disabled=true;$('send').disabled=true;}}
@@ -114,7 +135,9 @@ $('compose').onsubmit=async e=>{
  }
  pending||={mutationId:crypto.randomUUID(),revision:snapshot.revision,content,questionId:snapshot.question?.id||null};
  pendingDraft=$('answer').value;
- const submitted=pending,submittedDraft=pendingDraft;
+ await sendTurn(pending,pendingDraft,gen);
+};
+async function sendTurn(submitted,submittedDraft,gen=generation){
  $('send').disabled=true;$('status').textContent='正在保存你的回應…';
  try{
   let visibleReply='';
@@ -122,7 +145,7 @@ $('compose').onsubmit=async e=>{
    if(gen!==generation)return;
    if(event==='saved'){
     if(pending===submitted){pending=null;pendingDraft=null;}
-    if($('answer').value===submittedDraft){$('answer').value='';selected=null;$('quote').hidden=true;}
+    if(submittedDraft!==null&&$('answer').value===submittedDraft){$('answer').value='';selected=null;$('quote').hidden=true;}
     snapshot={...snapshot,revision:data.revision,pending:true};
     renderTurns([{id:data.turnId,role:'student',content:submitted.content,status:'saved',createdAt:data.createdAt}]);
     $('status').textContent='你的回答已保存，正在生成回應…';
@@ -133,7 +156,7 @@ $('compose').onsubmit=async e=>{
    }
   });if(gen!==generation)return;
   if(pending===submitted){pending=null;pendingDraft=null;}
-  if($('answer').value===submittedDraft){$('answer').value='';selected=null;$('quote').hidden=true;}
+  if(submittedDraft!==null&&$('answer').value===submittedDraft){$('answer').value='';selected=null;$('quote').hidden=true;}
   await refresh(gen);if(result.pending)waitForReply(gen);
  }catch(error){
   if(gen!==generation)return;
@@ -144,7 +167,7 @@ $('compose').onsubmit=async e=>{
   else{await refresh(gen);if(gen!==generation)return;$('status').textContent=error.code?error.message:pending?'尚未確認保存；文字保留在本頁。重送會使用同一回執。':'連線中斷，已讀回保存紀錄；AI 不會自動重跑。';if(snapshot?.pending)waitForReply(gen);}
   $('send').disabled=!!snapshot?.pending;
  }
-};
+}
 const hasFirstReadDraft=()=>[...$('first-reading').querySelectorAll('textarea,input')].some(input=>input.value.trim());
 $('lesson').onchange=()=>{if($('answer').value.trim()||pending||hasFirstReadDraft()){$('lesson').value=curriculum.lessonId;$('status').textContent='請先送出或自行保存本頁尚未送出的文字，再切換篇目。';return;}loadLesson();};
 $('text-tab').onclick=()=>view('text');$('conversation-tab').onclick=()=>view('conversation');

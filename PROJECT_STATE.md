@@ -1,6 +1,6 @@
-## Current dialogue candidate — 2026-10-12T08:47:07Z
+## Current dialogue candidate — 2026-10-12T09:10:38Z
 
-Five original AI formal interactions now share the dialogue budget and commit source assessment, visible reply and usage atomically. Original results and unknown-attempt readback fences are preserved. Feature remains disabled; no new production capacity, migration or paid call. Exact checks, remaining frontend/teaching/restore/release work and the active goal are in [the current candidate contract](docs/dialogue/PILOT.md). Earlier candidate entries below are historical.
+Exact student-quote answer confirmation now connects five original formal tasks to their unchanged source rubric and budgeted evaluator. Strict same-event item-version readback preserves source credit. Feature remains disabled; no production capacity, migration or paid call. 193 focused checks pass per pinned Node and the formal artifact is current. Original non-AI tasks and real teaching/restore/release gates remain open. See [the current candidate contract](docs/dialogue/PILOT.md) for exact evidence and blockers. Earlier entries are historical.
 
 ## Historical dialogue candidate — 2026-10-12T07:56:32Z
 

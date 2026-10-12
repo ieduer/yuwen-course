@@ -1,5 +1,5 @@
 import { handleDialogue } from './dialogue-source.js';
-import { DIALOGUE_SOURCE_PREFIX, isDialogueSourceMutation } from './dialogue-formal.js';
+import { DIALOGUE_SOURCE_PREFIX, isDialogueSourceMutation, formalRubric } from './dialogue-formal.js';
 import { readSharedHistory } from './dialogue-history.js';
 import { sourceEventStatement, evaluationEventBase, evaluationEventId, latestSourceEvent } from './learning-evaluation-events.js';
 import { readRecorderSource } from './learning-recorder-source.js';
@@ -1408,13 +1408,7 @@ async function handleInteractionCheck(request, env, capturedPayload = null, auth
     }
   }
   if (!student) return authenticatedEvaluationRequiredResponse();
-  const criteria = {
-    contextWords: "核查學生給出的三個詞是否各有區分度，並能由作者、文體、字句或立意得到支持。泛泛的好、優美、感人不得超過59分；恰好三詞且能形成對作者與文章的整體判斷才可高分。",
-    authorQuestion: "判斷這個問題能否證明提問者讀到了具體字句、結構選擇或價值矛盾。只問常識、感想或可脫離文本回答的問題不得超過59分。",
-    revision: "判斷增、刪、調是否抵達文字底層。必須比較原文和改文在語義、語氣、節奏、意象、人物、論證或結構上的實際得失；只說更生動更好不得超過59分。",
-    structure: `核查學生能否在正文定位至少兩處證據，並用${BLUEPRINT_MODE_TECHNIQUES[normalizeBlueprintMode(mode)]}說清前後材料如何共同形成表達效果。只概括段意或只說“更好”不得超過59分。`,
-    wordCreation: "核查新學字詞在三句小說、短詩、對白、微報道或微論證中的詞義、語境和搭配是否成立；創作短但準確可得高分。",
-  }[interaction];
+  const criteria = formalRubric(interaction, mode);
   const coachRole = interaction === "structure" || authors.length === 0;
   const responseRole = coachRole
     ? `你是《${lessonTitle}》的文本細讀教練。不得冒充作者或編者，不得使用“我是${speaker}”一類身分話術。`

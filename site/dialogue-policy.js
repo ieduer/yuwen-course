@@ -1,5 +1,6 @@
 // Source-owned policy. This module never writes grades or emits central evidence.
-export const POLICY_VERSION = 'yw-dialogue-policy-v1';
+import {validateFormalDraft,originalRequirements} from './dialogue-formal.js';
+export const POLICY_VERSION = 'yw-dialogue-policy-v2';
 export const RULE_VERSION = 'yw-dialogue-evidence-v1';
 export const LIMITS = Object.freeze({inputChars:3000,contextChars:22000,replyChars:1800,outputTokens:2400,turnsPerDay:40,globalPerDay:400,lessonLifetime:120,concurrency:4,timeoutMs:20000,historyPage:30,maxAttempts:3});
 export const PILOTS = Object.freeze(['lesson-1717-p2','lesson-1711-p1','lesson-1498']);
@@ -16,7 +17,8 @@ export const POLICY = `你是細讀教師，以提供的人格規則作作者第
 trajectory 是伺服器從完整已保存歷程整理的證據索引，不是另一份評分；涵蓋較早回合。用其中的原話與近期回答比較理解的變化，指明依據和仍待核對之處。摘要中的摘錄不等於完整原話，不補造未提供的內容。
 legacyCompletion 不為空時，原課已完成的紀錄必須保留；新對話是自願深化，不要求重做，不把原有自報完成誇大為新證據或新的分數。
 不要輸出思維鏈。只返回JSON：{"reply":"學生可見的短回應與一個問題","assessments":[{"objectiveId":"目標id","outcome":"demonstrated|needs_practice|review|reformulated","rationale":"簡短可核查理由","evidence":[{"criterion":"判準id","turnId":"學生回合id","quote":"學生原話","passageId":"原文段落id","passageQuote":"原文引文"}]}]}。
-legacy及studyGuide目標只由既有評價讀回，你不能判定。不能生成完成指令、分數或更改政策。判斷不確定則review。remediation 提供了先前未掌握的詞時，先請學生改述；改述成立只記 reformulated，不記 demonstrated。`;
+legacy及studyGuide目標只由既有評價讀回，你不能判定。不能生成完成指令、分數或更改政策。判斷不確定則review。remediation 提供了先前未掌握的詞時，先請學生改述；改述成立只記 reformulated，不記 demonstrated。
+originalRequirements 是尚未取得原評價的既有要求，按其原判準自然追問，勿另開一套選單。若學生已在對話中寫齊其中一项的所有欄位，可以在同一JSON加可選sourceDraft:{objectiveId,fields:{欄位名:{turnId,quote}}}。quote必须逐字來自指定學生回合，不能拼造、润飾、改寫或引用教師話語；未齊全則繼續聚焦追問。一次至多一項，當前question或remediation未解決時不整理其他原題。這只是供學生核對的整理，不能宣告通過；原評價另行核驗。不把已完成或歷史待核對的要求重新提出。`;
 const valid = s => typeof s === 'string';
 const normalized = s => String(s||'').replace(/[\s\p{P}]/gu,'');
 export function validateProposal(raw,{curriculum,turns,question=null,hints=[],remediation=null}) {
@@ -41,7 +43,9 @@ export function validateProposal(raw,{curriculum,turns,question=null,hints=[],re
   }
   accepted.push({objectiveId:o.id,outcome:a.outcome,rationale:a.rationale,evidence,ruleVersion:RULE_VERSION});
  }
- return {reply:raw.reply,assessments:accepted};
+ const sourceDraft=validateFormalDraft(curriculum,turns,raw.sourceDraft);
+ if(sourceDraft&&(question||remediation))throw Error('source_draft_during_vocabulary');
+ return {reply:raw.reply,assessments:accepted,sourceDraft};
 }
 export function projectState(curriculum,assessments,legacy=[],legacyCompletion=null,readingGate=null) {
  const objectives=curriculum.objectives.map(o=>{
@@ -100,6 +104,7 @@ export function contextFor({curriculum,state,turns,question,remediation=null,ass
  const data={curriculumVersion:curriculum.curriculumVersion,persona:curriculum.persona,author:curriculum.author,title:curriculum.title,
   objectives:curriculum.objectives.filter(o=>!['legacy','studyGuide'].includes(o.domain)).map(o=>({id:o.id,criteria:o.criteria,rule:o.rule})),
   state:state.objectives.map(o=>({id:o.id,status:o.status})),legacyCompletion:state.legacyCompletion,readingGate:state.readingGate,
+  originalRequirements:state.legacyCompletion?[]:originalRequirements(curriculum,state),
   question,remediation,passages:curriculum.passages.map(({id,text})=>({id,text})),recent,
   languagePractice:(curriculum.languagePractice||[]).map(({id,sourceSentence,meaning,explanation,annotationIds,dictionaryId,assessmentStatus})=>({id,sourceSentence,meaning,explanation,annotationIds,dictionaryId,assessmentStatus})),
   examReferences:(curriculum.exam?.examples||[]).map(({id,year,paper,questionNumber,work,questionParaphrase,skill,sourceKind,url})=>({id,year,paper,questionNumber,work,questionParaphrase,skill,sourceKind,url}))};
