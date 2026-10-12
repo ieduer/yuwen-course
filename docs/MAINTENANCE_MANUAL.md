@@ -1,4 +1,14 @@
-## Current approved calibration amendment — 2026-10-12T15:41:47.024876+00:00
+## Current stopped calibration — 2026-10-12T15:52:39.443855+00:00
+
+Approved amendment source5045fb9f22b5b26b45b5005c2a94d0fe255113c1 deployed once to isolated Pages eb519808-5804-4dd6-a8bb-76a9f4d0953e; restricted artifact194b3d959b0f64fa4a4ef55960e30d8efec78be54d127c6108a3fbcbac15407a. Exact CI38272132831 passes on Node22.21.1/24.18.0;126 local focused checks each on22.21.1/24.19.0 and bundle binding check pass. Formal YW remains175f8ae/Pagesb6f5ac67, APIS53dbb568@100/66cfaab9@0 unchanged.
+
+First revised case at15:44:56.122Z returned gateway_unavailable; same-case GET readback matches. One bounded telemetry query returned14/14 events at ABR1, one candidate invocation in15:44:50–15:45:05Z. Identity verified and admission allowed; exactly one gemini-3.6-flash provider attempt returned503 UNAVAILABLE at1053ms; broker completion confirmed; fallback/hedge/background calls0. No model text or usage arrived. This is upstream availability failure, not a semantic calibration result. Old semantic failure remains immutable at4678microUSD; new unknown cost retains84000microUSD reservation. Cumulative provider attempts2, known-plus-unknown conservative accounting88678microUSD.23 revised cases were not executed. Neither failed row may be replayed, replaced, refunded, or reset automatically.
+
+Operation is terminal under the approved first-failure stop rule; the original20minute deadline16:04:46.609188Z and host expiry2026-10-13T12:00Z remain. No automatic retry or new allowance is authorized. Completing24 corrected cases would require a separately approved cumulative26-attempt/US$2.184 amendment, preserving both prior receipts and the unknown reservation; proposal is review-only. Teacher-review denial, real physical mobile/keyboard, weak-network/stream/accounting and full semantic acceptance remain open. Physical device inventory was empty.170 fanout source inventory intents do not mean170 runtime regression passes. Final production go/no-go and publication/Status remain separate.
+
+Current evidence, stopped ledger, diagnosis, restoration pins and cleanup receipt: [calibration report](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a130b1-calibration/REPORT.md). Earlier entries below are history.
+
+## Historical approved calibration amendment — 2026-10-12T15:41:47.024876+00:00
 
 Suen explicitly approved cumulative25attempts (old failure1 plus corrected24), cumulative conservative reservationUS$2.100,20minutes from the first corrected attempt,zero retries,first mismatch stop; original host expiry2026-10-13T12:00Z unchanged. The amended server admission requires the exact same-owner original failed receipt, preserves all old rows, counts old+new attempts and reservations, and exposes prior evidence in readback. Old POST action cannot trigger a corrected attempt. Neither policy evidence requirements nor validator is weakened. Original packet is preserved byte-for-byte in scripts/fixtures/dialogue-calibration-stopped-packet.json; corrected packet887a2537… uses policyv6/evidencev3 and a distinct amendment namespace.
 
