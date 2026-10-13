@@ -1,3 +1,7 @@
+## Current local entry-routing repair — 2026-10-13T23:18:35.235671+00:00
+
+Exact-head PR CI38483277443 exposed an early feature-flag read before hostile legacy Web mutation rejection. The homepage branch now checks root path and GET/HEAD before reading YW_DIALOGUE_ENABLED; original authentication/origin/content-type rejection remains unchanged. Node22.21.1 and24.18.0 each pass107 evidence/entrypoint checks. No thresholds or assertions weakened. New exact-head CI and artifact verification pending; no deployment. Previous local preload and full189 evidence remains valid within its stated limits.
+
 ## Current local module preloading candidate — 2026-10-13T19:42:14.998115+00:00
 
 Six existing immutable dialogue dependencies are now modulepreloaded to remove serial discovery delay. No lesson/source/score or API contract change. Node22 frontend/cache51/51 pass. Same local weak-network profile150ms/200000bytes per second, disabled cache, three first-readable-text samples2823.4/2859.3/2828.6ms, all below3000ms; actual CSS391x846, no overflow. This is one-lesson local browser acceptance, not all189/production/real-device acceptance. Historical failing3006ms sample retained. Evidence: /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/preload-performance-01a135d5.json. All model/central/native/formal-release gates remain open. Earlier current section below is superseded by this entry, its evidence preserved.
