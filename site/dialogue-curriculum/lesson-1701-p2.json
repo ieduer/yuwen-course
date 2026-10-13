@@ -796,13 +796,13 @@
     {
       "id": "lesson-1701-p2:corpus-grammar",
       "domain": "vocabulary",
-      "label": "語言：省略賓語（待核驗）",
+      "label": "語言：人物、動作與共同對象",
       "criteria": [
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "需取得可讀的出版社或教研機構對這兩動作的釋讀，或可定位的一級語法論證；人教社搜尋索引所示材料僅列為未讀線索。 目前僅作可討論的讀法，不作權威釋義或掌握結論。 四個分句各有施事，接、插承前省略秧苗這一對象。 田夫拋、田婦接、小兒拔、大兒插構成協作；補足省略項須依前文，不增加未出現的農具或人物。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "rule": "本項為具逐項來源支持的語境教學分析，只在所列人物、動作或問答關係範圍內採納；不是唯一句法分類，也不是模型校準、學生掌握或原教材評分結論。 田夫、田婦、小兒、大兒分別拋、接、拔、插秧苗；接、插的對象可由同句的秧補出。 用自己的話說清四位人物各做甚麼，以及接、插的是甚麼，即可表明理解。不要求使用省略賓語一詞，不添加原句未交代的人物或農具，也不把詩句排列當成四個動作的實際時間順序。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
       "sourcePassages": [
         "lesson-1701-p2:p1"
       ],
@@ -1851,21 +1851,21 @@
     },
     {
       "id": "lesson-1701-p2:corpus-grammar",
-      "word": "省略賓語",
+      "word": "人物、動作與共同對象",
       "type": "grammar",
       "sourceSentence": "田夫抛秧田妇接，小儿拔秧大儿插",
       "passageQuotes": [
         "田夫抛秧田妇接，小儿拔秧大儿插"
       ],
-      "meaning": "四個分句各有施事，接、插承前省略秧苗這一對象。",
-      "explanation": "田夫拋、田婦接、小兒拔、大兒插構成協作；補足省略項須依前文，不增加未出現的農具或人物。",
+      "meaning": "田夫、田婦、小兒、大兒分別拋、接、拔、插秧苗；接、插的對象可由同句的秧補出。",
+      "explanation": "用自己的話說清四位人物各做甚麼，以及接、插的是甚麼，即可表明理解。不要求使用省略賓語一詞，不添加原句未交代的人物或農具，也不把詩句排列當成四個動作的實際時間順序。",
       "annotationIds": [],
       "proposedDemand": "context-comparison-and-independent-explanation",
       "difficulty": null,
       "calibrationStatus": "pending-real-model",
       "scoringRole": "none",
       "variants": [
-        "讀「田夫抛秧田妇接，小儿拔秧大儿插」。請用自己的話改寫句意，說明「省略賓語」涉及哪些成分及其關係，並說明你的補足或語序調整。",
+        "讀「田夫抛秧田妇接，小儿拔秧大儿插」。四位人物分別做甚麼？接、插的是甚麼？請依原句改寫，並指出補充內容的依據。",
         "有人把「田夫抛秧田妇接，小儿拔秧大儿插」理解為「四個動作全由田夫一人完成」。請判斷這樣理解是否成立，引用原句或相鄰文句說明，再提出準確的改寫。"
       ],
       "misconceptions": [
@@ -1874,11 +1874,11 @@
       "masteryCriteria": [
         {
           "id": "source_reading",
-          "requirement": "準確引用原句並辨認目標詞或句法成分。"
+          "requirement": "準確引用與回答相關的原句，辨明人物、動作、對象或疑問焦點；不以術語背誦替代句意理解。"
         },
         {
           "id": "context_analysis",
-          "requirement": "四個分句各有施事，接、插承前省略秧苗這一對象。 田夫拋、田婦接、小兒拔、大兒插構成協作；補足省略項須依前文，不增加未出現的農具或人物。"
+          "requirement": "田夫、田婦、小兒、大兒分別拋、接、拔、插秧苗；接、插的對象可由同句的秧補出。 用自己的話說清四位人物各做甚麼，以及接、插的是甚麼，即可表明理解。不要求使用省略賓語一詞，不添加原句未交代的人物或農具，也不把詩句排列當成四個動作的實際時間順序。"
         },
         {
           "id": "independent_transfer",
@@ -1896,13 +1896,13 @@
         "supplementVersion": "yw-dialogue-classical-language-20261013-v2"
       },
       "sourceVerification": {
-        "status": "pending-verification",
-        "reviewId": "yw-grammar-source-convergence-20261013-v1",
-        "reviewedAt": "2026-10-13T03:05:31.744Z",
+        "status": "source-context-reviewed",
+        "reviewId": "yw-three-grammar-source-followup-20261013-v1",
+        "reviewedAt": "2026-10-13T04:42:53Z",
         "analysisStatus": "authored-contextual-interpretation",
-        "scope": "四個明示人物分別配合拋、接、拔、插，接與插可據前項補秧苗；原文直接支持協作關係，未見內容錯誤。",
-        "notice": "需取得可讀的出版社或教研機構對這兩動作的釋讀，或可定位的一級語法論證；人教社搜尋索引所示材料僅列為未讀線索。 目前僅作可討論的讀法，不作權威釋義或掌握結論。",
-        "authority": "independent-review-source-gap-preserved",
+        "scope": "原文引用首聯並解釋接過拋來的秧把後栽插，支持接、插的共同對象；不把省略賓語術語或詩句順序等同實際工序作唯一門檻。",
+        "notice": "本項為具逐項來源支持的語境教學分析，只在所列人物、動作或問答關係範圍內採納；不是唯一句法分類，也不是模型校準、學生掌握或原教材評分結論。",
+        "authority": "independent-primary-source-context-review",
         "evidence": {
           "readerPath": "data/reader-documents/lesson-1701-p2.json",
           "readerSha256": "8e56b5f6f77589d9c0b771c16b090601c681f819399a61c130a46ca74e7061b8",
@@ -1918,13 +1918,29 @@
           "annotations": [],
           "readingMaterials": []
         },
-        "primaryReferences": [],
-        "analysisSha256": "f0e0b7ead14f977d6ea03cca720c4d388345fde396d6eed6e7f34038227bd58e"
+        "primaryReferences": [
+          {
+            "sourceId": "ihns-zeng-xiongsheng-jiangnan-rice-section1",
+            "title": "曾雄生〈江南稻作文化中的若干問題略論——評河野通明《江南稻作文化與日本》〉",
+            "publisher": "中國科學院自然科學史研究所農業史網站；作者曾雄生",
+            "url": "https://agri-history.ihns.ac.cn/scholars/zxs/jiangnan%20rice.htm",
+            "page": null,
+            "pdfPage": null,
+            "zeroBasedPdfPage": null,
+            "locator": "第一節「一、水稻生產中的婦女」，以「但拔秧畢竟不等於插秧」開頭的段落；工具抽取第31行。HTML無印刷頁碼，未建立紙本刊期。",
+            "supportKind": "primary authored scholarly interpretation on the author institution website",
+            "scope": "原文引用首聯並解釋接過拋來的秧把後栽插，支持接、插的共同對象；不把省略賓語術語或詩句順序等同實際工序作唯一門檻。",
+            "access": "actual source text read through web tool; no local PDF, page-image or render created",
+            "readStatus": "actual-content-read",
+            "reviewedAt": "2026-10-13T04:42:53Z"
+          }
+        ],
+        "analysisSha256": "f95561967f7d0a13352bafb3523e27fccf92cfb55db7ad3e8a3f9c7d77d8921b"
       },
       "sourcePassages": [
         "lesson-1701-p2:p1"
       ],
-      "version": "yw-language-cc329449b9363083b767",
+      "version": "yw-language-a0e3f68aceb1ce10c04d",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     }
   ],
@@ -2022,7 +2038,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-dba3a7bb4f9db3c996eb",
+  "curriculumVersion": "yw-dialogue-9db8687cead27972bae1",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

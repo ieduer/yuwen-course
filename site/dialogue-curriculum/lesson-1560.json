@@ -748,13 +748,13 @@
     {
       "id": "lesson-1560:corpus-grammar",
       "domain": "vocabulary",
-      "label": "語言：疑問句與語序（待核驗）",
+      "label": "語言：疑問焦點與句意",
       "criteria": [
         "context_meaning",
         "explanation",
         "independent"
       ],
-      "rule": "需可精確定位的一級釋文或語法教學依據。MOE祠堂詞條的搜尋結果只證殿宇詞義及引用本句，不能替代句式支持。 目前僅作可討論的讀法，不作權威釋義或掌握結論。 何處作處所疑問，尋的對象丞相祠堂提前呈現。 可改寫到哪裡尋找丞相祠堂，次句回答位置；此處不強求倒裝術語，只核对疑問焦點與動賓關係。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "rule": "本項為具逐項來源支持的語境教學分析，只在所列人物、動作或問答關係範圍內採納；不是唯一句法分類，也不是模型校準、學生掌握或原教材評分結論。 首句詢問到哪裡尋找丞相祠堂，次句指出錦官城外柏樹繁茂之處。 何處詢問地點；尋找的對象是丞相祠堂。把首聯的問答關係說清即可，不要求以倒裝、賓語前置或話題句中的任何一種作唯一標籤，也不要求認定作者確實不知地點、曾向旁人問路。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
       "sourcePassages": [
         "lesson-1560:p1"
       ],
@@ -1801,21 +1801,22 @@
     },
     {
       "id": "lesson-1560:corpus-grammar",
-      "word": "疑問句與語序",
+      "word": "疑問焦點與句意",
       "type": "grammar",
       "sourceSentence": "丞相祠堂何处寻",
       "passageQuotes": [
-        "丞相祠堂何处寻"
+        "丞相祠堂何处寻",
+        "锦官城外柏森森"
       ],
-      "meaning": "何處作處所疑問，尋的對象丞相祠堂提前呈現。",
-      "explanation": "可改寫到哪裡尋找丞相祠堂，次句回答位置；此處不強求倒裝術語，只核对疑問焦點與動賓關係。",
+      "meaning": "首句詢問到哪裡尋找丞相祠堂，次句指出錦官城外柏樹繁茂之處。",
+      "explanation": "何處詢問地點；尋找的對象是丞相祠堂。把首聯的問答關係說清即可，不要求以倒裝、賓語前置或話題句中的任何一種作唯一標籤，也不要求認定作者確實不知地點、曾向旁人問路。",
       "annotationIds": [],
       "proposedDemand": "context-comparison-and-independent-explanation",
       "difficulty": null,
       "calibrationStatus": "pending-real-model",
       "scoringRole": "none",
       "variants": [
-        "讀「丞相祠堂何处寻」。請用自己的話改寫句意，說明「疑問句與語序」涉及哪些成分及其關係，並說明你的補足或語序調整。",
+        "讀「丞相祠堂何处寻？锦官城外柏森森」。首句在問甚麼？次句如何回答？請用自己的話改寫，並說明尋找的對象。",
         "有人把「丞相祠堂何处寻」理解為「何處是尋找祠堂的那個人」。請判斷這樣理解是否成立，引用原句或相鄰文句說明，再提出準確的改寫。"
       ],
       "misconceptions": [
@@ -1824,11 +1825,11 @@
       "masteryCriteria": [
         {
           "id": "source_reading",
-          "requirement": "準確引用原句並辨認目標詞或句法成分。"
+          "requirement": "準確引用與回答相關的原句，辨明人物、動作、對象或疑問焦點；不以術語背誦替代句意理解。"
         },
         {
           "id": "context_analysis",
-          "requirement": "何處作處所疑問，尋的對象丞相祠堂提前呈現。 可改寫到哪裡尋找丞相祠堂，次句回答位置；此處不強求倒裝術語，只核对疑問焦點與動賓關係。"
+          "requirement": "首句詢問到哪裡尋找丞相祠堂，次句指出錦官城外柏樹繁茂之處。 何處詢問地點；尋找的對象是丞相祠堂。把首聯的問答關係說清即可，不要求以倒裝、賓語前置或話題句中的任何一種作唯一標籤，也不要求認定作者確實不知地點、曾向旁人問路。"
         },
         {
           "id": "independent_transfer",
@@ -1846,13 +1847,13 @@
         "supplementVersion": "yw-dialogue-classical-language-20261013-v2"
       },
       "sourceVerification": {
-        "status": "pending-verification",
-        "reviewId": "yw-grammar-source-convergence-20261013-v1",
-        "reviewedAt": "2026-10-13T03:05:31.744Z",
+        "status": "source-context-reviewed",
+        "reviewId": "yw-three-grammar-source-followup-20261013-v1",
+        "reviewedAt": "2026-10-13T04:42:53Z",
         "analysisStatus": "authored-contextual-interpretation",
-        "scope": "第一句何處尋與第二句錦官城外互相問答，祠堂是所尋；基本句意一致，且現有任務明言不強求倒裝術語，風險較低。",
-        "notice": "需可精確定位的一級釋文或語法教學依據。MOE祠堂詞條的搜尋結果只證殿宇詞義及引用本句，不能替代句式支持。 目前僅作可討論的讀法，不作權威釋義或掌握結論。",
-        "authority": "independent-review-source-gap-preserved",
+        "scope": "直接把首聯譯為尋找諸葛亮祠堂及成都城外柏樹茂密的位置；支持疑問焦點和對象，不支持唯一語序術語或實際問路經過。",
+        "notice": "本項為具逐項來源支持的語境教學分析，只在所列人物、動作或問答關係範圍內採納；不是唯一句法分類，也不是模型校準、學生掌握或原教材評分結論。",
+        "authority": "independent-primary-source-context-review",
         "evidence": {
           "readerPath": "data/reader-documents/lesson-1560.json",
           "readerSha256": "f32151f51b09456e9036eac7624f3b415db695c8a3f369026429aa71da7ebd89",
@@ -1861,7 +1862,8 @@
               "id": "lesson-1560:p1",
               "sha256": "7ddc9c88741d0bfbb1f7020ea7a1bc551fd08ada4948935acba7fca4a3b5a4a0",
               "quotes": [
-                "丞相祠堂何处寻"
+                "丞相祠堂何处寻",
+                "锦官城外柏森森"
               ]
             }
           ],
@@ -1874,13 +1876,29 @@
             }
           ]
         },
-        "primaryReferences": [],
-        "analysisSha256": "4e7c3a15928b0a07bafbbbe5aecffce818a302924c1e9db6d0118418290d2082"
+        "primaryReferences": [
+          {
+            "sourceId": "hcsh-110-new-student-chinese-poetry-19",
+            "title": "110學年度高一新生入學須知暨新生暑假作業：國文科詩詞背誦第19篇〈蜀相〉",
+            "publisher": "臺北市立華江高級中學",
+            "url": "https://www.hcsh.tp.edu.tw/static/webroot/G157051521735936/application/NN162657264053902.pdf#page=19",
+            "page": 17,
+            "pdfPage": 19,
+            "zeroBasedPdfPage": 18,
+            "locator": "第19篇，譯文首句；印刷頁17，PDF第19頁（P18）；工具抽取第530–538行。原詩首聯在前一頁。",
+            "supportKind": "primary institutional teaching interpretation; school-issued exercise, not a publisher textbook edition",
+            "scope": "直接把首聯譯為尋找諸葛亮祠堂及成都城外柏樹茂密的位置；支持疑問焦點和對象，不支持唯一語序術語或實際問路經過。",
+            "access": "actual source text read through web tool; no local PDF, page-image or render created",
+            "readStatus": "actual-content-read",
+            "reviewedAt": "2026-10-13T04:42:53Z"
+          }
+        ],
+        "analysisSha256": "45b3b7fcf1b553af0bc07b590ca6935eeea7fcfd8f462141662018f8d27567f8"
       },
       "sourcePassages": [
         "lesson-1560:p1"
       ],
-      "version": "yw-language-385c23e428288d72455c",
+      "version": "yw-language-1788e3900d3aea4f680e",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     }
   ],
@@ -1963,7 +1981,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-6e924d42ddd20846a017",
+  "curriculumVersion": "yw-dialogue-a79a96660ad5bda29c74",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

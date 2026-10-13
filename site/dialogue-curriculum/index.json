@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "curriculumVersion": "yw-dialogue-catalog-be0aa251ecc15337503b",
+  "curriculumVersion": "yw-dialogue-catalog-8a1e655ecdc43de71837",
   "lessons": [
     {
       "lessonId": "lesson-1690",
@@ -173,7 +173,7 @@
       "mode": "poetry",
       "blockId": "bixiu-shang",
       "blockTitle": "必修上",
-      "curriculumVersion": "yw-dialogue-dba3a7bb4f9db3c996eb",
+      "curriculumVersion": "yw-dialogue-9db8687cead27972bae1",
       "personaKind": "author-simulation",
       "status": "source-ready",
       "sourceReviewRequired": false
@@ -1262,7 +1262,7 @@
       "mode": "poetry",
       "blockId": "xuanbi-shang",
       "blockTitle": "選必上",
-      "curriculumVersion": "yw-dialogue-af7cdee0371a71d31f9e",
+      "curriculumVersion": "yw-dialogue-4d90bbb92cf082bab25d",
       "personaKind": "author-simulation",
       "status": "source-ready",
       "sourceReviewRequired": false
@@ -1735,7 +1735,7 @@
       "mode": "poetry",
       "blockId": "xuanbi-xia",
       "blockTitle": "選必下",
-      "curriculumVersion": "yw-dialogue-6e924d42ddd20846a017",
+      "curriculumVersion": "yw-dialogue-a79a96660ad5bda29c74",
       "personaKind": "author-simulation",
       "status": "source-ready",
       "sourceReviewRequired": false

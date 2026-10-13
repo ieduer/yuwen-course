@@ -9,6 +9,7 @@ import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
 import {requestDialogueBudget,combinedProviderAccounting,operatorCost,continuationDisposition,budgetDenial} from './dialogue-recovery.js';
 import {prepareFormalInput,formalPrompt,originalTask,prepareOriginalInput} from './dialogue-formal.js';
 import {learningTurn,collectedFormal} from './dialogue-learning-turn.js';
+import {lessonCallLimit} from './dialogue-lesson-limits.js';
 import {sanitizeDialogueCurriculum} from './dialogue-public-curriculum.js';
 import {approvedSupplement} from './dialogue-completion-exemptions.js';
 import {withProspectiveFormalScope} from './formal-scope-policy.js';
@@ -97,7 +98,9 @@ async function snapshot(db,session,curriculum,before){
   partial.continuation=continuationDisposition(call,failed?JSON.parse(failed.details_json):null,!!continued);
  }
  const records=await learningRecords(db,session),sourceDraft=await proposedSourceDraft(db,session,legacy);
- return {learningTurn:learningTurn(curriculum,state,{revision:session.revision,...records,sourceDraft,question:publicQuestion,mastery:legacy.mastery}),sourceSubmissions:records.submissions,originalTask:originalTask(curriculum,state,legacy.mastery),sourceDraft,partial,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending,curriculumVersion:session.curriculum_version,...page,state,assessments,report:evidenceReport(curriculum,state,assessments,completeTurns,conclusion),question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at,formal:draft.source_request_json?JSON.parse(draft.source_request_json):null,learningRequest:draft.source_request_json?JSON.parse(draft.source_request_json).learningRequest||null:null}:null,legacy,readingGate:state.readingGate};
+ const statusEvent=await db.prepare("SELECT details_json FROM dialogue_events WHERE session_id=? AND event_type='source_status' AND turn_id=(SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence DESC LIMIT 1) ORDER BY created_at DESC LIMIT 1").bind(session.id,session.id).first();
+ const statusNotice=statusEvent?JSON.parse(statusEvent.details_json).message:null;
+ return {statusNotice,learningTurn:learningTurn(curriculum,state,{revision:session.revision,...records,sourceDraft,question:publicQuestion,mastery:legacy.mastery}),sourceSubmissions:records.submissions,originalTask:originalTask(curriculum,state,legacy.mastery),sourceDraft,partial,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending,curriculumVersion:session.curriculum_version,...page,state,assessments,report:evidenceReport(curriculum,state,assessments,completeTurns,conclusion),question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at,formal:draft.source_request_json?JSON.parse(draft.source_request_json):null,learningRequest:draft.source_request_json?JSON.parse(draft.source_request_json).learningRequest||null:null}:null,legacy,readingGate:state.readingGate};
 }
 export async function handleDialogue(request,env,student,ctx,{callModel=callDialogueModel,readSharedHistory=null,firstReadAction=null,formalAction=null,originalAction=null}={}){
  if(!student)return json({error:'請先登入 My。',code:'authentication_required'},401);
@@ -194,7 +197,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
     const writes=await db.batch([
      db.prepare(`INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,(SELECT id FROM dialogue_sessions WHERE id=? AND revision=? AND inflight IS NULL AND (SELECT COUNT(*) FROM dialogue_turns WHERE session_id=? AND role='student')<?),?,?,'student',?,'saved',?,?)`).bind(turnId,session.id,body.revision,session.id,LIMITS.lessonLifetime,body.mutationId,learningHash,body.content,POLICY_VERSION,at),
      db.prepare("INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,'source_field_saved',?,?)").bind(`${turnId}:field`,session.id,turnId,JSON.stringify(learningField),at),
-     db.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,reply_to,status,model,policy_version,created_at) VALUES(?,?,?,'source-field-prompt','teacher',?,?,'saved','source-owned',?,?)").bind(uuid(),session.id,body.mutationId,next.prompt,turnId,POLICY_VERSION,at),
+     db.prepare("INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,'source_status',?,?)").bind(`${turnId}:status`,session.id,turnId,JSON.stringify({message:next.prompt}),at),
      db.prepare('UPDATE dialogue_sessions SET revision=revision+1,updated_at=? WHERE id=? AND revision=? AND inflight IS NULL').bind(at,session.id,body.revision),
     ]).catch(()=>null);
     if(!writes)return json({code:'learning_save_unconfirmed',message:'尚未確認保存；請保留文字並讀回本輪紀錄。'},409);
@@ -224,14 +227,14 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   const data=await snapshot(db,session,curriculum),task=learningOriginal||data.originalTask;
   if(data.question||!task||task.objectiveId!==body.objectiveId)return json({code:'original_task_not_ready',message:'請先完成目前的語境說明；已完成的原有結果不重做。'},409);
   let formal;try{formal=prepareOriginalInput(curriculum,task,body.input);}catch{return json({code:'invalid_original_input'},400);}
-  const turnId=uuid(),teacherId=uuid(),at=now();
+  const turnId=uuid(),at=now();
   try{
    const response=await originalAction({...formal,lessonId},turnId,result=>{
     const reply=formal.interaction==='readAcknowledged'?'已保存你的閱讀確認。繼續說說你對這篇作品的初步理解。':formal.interaction==='evaluation'?'你的篇目自評已保存；高低都不計入成績。':result.evaluation.correctness==='correct'?'這個選項符合原題準據，原有作答紀錄已保存。請保留剛才對語境的解釋，繼續細讀。':'這次選擇與原題準據不同，第一次及後續作答會分開保留。回到原句核對語境，再說說你改變的判斷。';
     return [
      db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,(SELECT id FROM dialogue_sessions WHERE id=? AND student_id=? AND revision=? AND inflight IS NULL AND (SELECT COUNT(*) FROM dialogue_turns WHERE session_id=? AND role='student')<?),?,'original_source_saved',?,?)`).bind(`${turnId}:source`,session.id,student.id,body.revision,session.id,LIMITS.lessonLifetime,turnId,JSON.stringify({objectiveId:formal.objectiveId,...result}),at),
      db.prepare(`INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at,source_request_json) VALUES(?,?,?,?,'student',?,'saved',?,?,?)`).bind(turnId,session.id,body.mutationId,requestHash,learningOriginal&&body.content?body.content:formal.content,POLICY_VERSION,at,JSON.stringify(formal)),
-     db.prepare(`INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,reply_to,status,model,policy_version,created_at) VALUES(?,?,?,'original-answer-key','teacher',?,?,'saved','source-owned',?,?)`).bind(teacherId,session.id,body.mutationId,reply,turnId,POLICY_VERSION,at),
+     db.prepare("INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,'source_status',?,?)").bind(`${turnId}:status`,session.id,turnId,JSON.stringify({message:reply}),at),
      db.prepare('UPDATE dialogue_sessions SET revision=revision+1,updated_at=? WHERE id=? AND revision=? AND inflight IS NULL').bind(at,session.id,body.revision),
     ];
    });
@@ -321,7 +324,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
    AND NOT EXISTS(SELECT 1 FROM dialogue_calls WHERE budget_policy_json IS NULL)
    AND (SELECT COALESCE(SUM(COALESCE(accounted_micros,reserved_micros)),0) FROM dialogue_calls WHERE day=?)+?<=?
    AND (SELECT COALESCE(SUM(COALESCE(accounted_micros,reserved_micros)),0) FROM dialogue_calls WHERE student_id=? AND day=?)+?<=?
-   AND (SELECT COALESCE(SUM(COALESCE(c.accounted_micros,c.reserved_micros)),0) FROM dialogue_calls c JOIN dialogue_sessions s ON s.id=c.session_id WHERE c.student_id=? AND s.lesson_id=?)+?<=?`).bind(turnId,at,session.id,body.revision,...callAdmission.args,session.id,LIMITS.lessonLifetime,session.id,LIMITS.paidLessonLifetime,LIMITS.concurrency,day,budget.reserveMicros,budget.globalDailyMicros,student.id,day,budget.reserveMicros,budget.userDailyMicros,student.id,lessonId,budget.reserveMicros,budget.lessonLifetimeMicros),
+   AND (SELECT COALESCE(SUM(COALESCE(c.accounted_micros,c.reserved_micros)),0) FROM dialogue_calls c JOIN dialogue_sessions s ON s.id=c.session_id WHERE c.student_id=? AND s.lesson_id=?)+?<=?`).bind(turnId,at,session.id,body.revision,...callAdmission.args,session.id,LIMITS.lessonLifetime,session.id,lessonCallLimit(curriculum,LIMITS.paidLessonLifetime),LIMITS.concurrency,day,budget.reserveMicros,budget.globalDailyMicros,student.id,day,budget.reserveMicros,budget.userDailyMicros,student.id,lessonId,budget.reserveMicros,budget.lessonLifetimeMicros),
   ...(learningQuestion?[db.prepare("INSERT OR IGNORE INTO dialogue_questions(id,session_id,objective_id,attempt,instance_json,state,created_at) SELECT ?,id,?,?,?,'issued',? FROM dialogue_sessions WHERE id=? AND inflight=?").bind(learningQuestion.id,learningQuestion.objectiveId,learningQuestion.attempt,JSON.stringify(learningQuestion),learningQuestion.createdAt,session.id,turnId)]:[]),
   db.prepare(`INSERT OR IGNORE INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,question_id,status,policy_version,created_at,source_request_json) SELECT ?,id,?,?, 'student',?,?, 'saved',?,?,? FROM dialogue_sessions WHERE id=? AND inflight=?`).bind(turnId,body.mutationId,requestHash,body.content,body.questionId||null,POLICY_VERSION,at,formal?JSON.stringify(formal):null,session.id,turnId),
   db.prepare(`INSERT OR IGNORE INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,reserved_micros,budget_policy_json) SELECT ?,id,?,?,?,'reserved',?,?,? FROM dialogue_sessions WHERE id=? AND inflight=?`).bind(turnId,student.id,day,LIMITS.outputTokens,at,budget.reserveMicros,JSON.stringify(budget),session.id,turnId),
@@ -335,7 +338,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   await db.prepare('INSERT OR IGNORE INTO dialogue_drafts(id,session_id,mutation_id,request_hash,revision,content,question_id,created_at,source_request_json) VALUES(?,?,?,?,?,?,?,?,?)').bind(uuid(),session.id,body.mutationId,requestHash,body.revision,body.content,body.questionId||null,at,draftRequest?JSON.stringify(draftRequest):null).run();
   const saved=await db.prepare('SELECT request_hash FROM dialogue_drafts WHERE session_id=? AND mutation_id=?').bind(session.id,body.mutationId).first();
   if(saved?.request_hash!==requestHash)return json({code:'draft_conflict',message:'伺服器已有另一份待送草稿；目前文字仍保留在本頁，請先核對匯出紀錄。'},409);
-  return json({...await budgetDenial(db,session,student,budget,LIMITS,day),draftSaved:true},429);
+  return json({...await budgetDenial(db,session,student,budget,{...LIMITS,paidLessonLifetime:lessonCallLimit(curriculum,LIMITS.paidLessonLifetime)},day),draftSaved:true},429);
  }
  const stream=request.headers.get('accept')?.includes('text/event-stream')?studentStream():null;
  stream?.send('saved',{saved:true,turnId,mutationId:body.mutationId,revision:body.revision+1,createdAt:at});

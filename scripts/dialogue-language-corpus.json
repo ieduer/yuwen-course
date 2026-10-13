@@ -1066,21 +1066,21 @@
       },
       {
         "id": "corpus-grammar",
-        "word": "省略賓語",
+        "word": "人物、動作與共同對象",
         "type": "grammar",
         "sourceSentence": "田夫抛秧田妇接，小儿拔秧大儿插",
         "passageQuotes": [
           "田夫抛秧田妇接，小儿拔秧大儿插"
         ],
-        "meaning": "四個分句各有施事，接、插承前省略秧苗這一對象。",
-        "explanation": "田夫拋、田婦接、小兒拔、大兒插構成協作；補足省略項須依前文，不增加未出現的農具或人物。",
+        "meaning": "田夫、田婦、小兒、大兒分別拋、接、拔、插秧苗；接、插的對象可由同句的秧補出。",
+        "explanation": "用自己的話說清四位人物各做甚麼，以及接、插的是甚麼，即可表明理解。不要求使用省略賓語一詞，不添加原句未交代的人物或農具，也不把詩句排列當成四個動作的實際時間順序。",
         "annotationIds": [],
         "proposedDemand": "context-comparison-and-independent-explanation",
         "difficulty": null,
         "calibrationStatus": "pending-real-model",
         "scoringRole": "none",
         "variants": [
-          "讀「田夫抛秧田妇接，小儿拔秧大儿插」。請用自己的話改寫句意，說明「省略賓語」涉及哪些成分及其關係，並說明你的補足或語序調整。",
+          "讀「田夫抛秧田妇接，小儿拔秧大儿插」。四位人物分別做甚麼？接、插的是甚麼？請依原句改寫，並指出補充內容的依據。",
           "有人把「田夫抛秧田妇接，小儿拔秧大儿插」理解為「四個動作全由田夫一人完成」。請判斷這樣理解是否成立，引用原句或相鄰文句說明，再提出準確的改寫。"
         ],
         "misconceptions": [
@@ -1089,11 +1089,11 @@
         "masteryCriteria": [
           {
             "id": "source_reading",
-            "requirement": "準確引用原句並辨認目標詞或句法成分。"
+            "requirement": "準確引用與回答相關的原句，辨明人物、動作、對象或疑問焦點；不以術語背誦替代句意理解。"
           },
           {
             "id": "context_analysis",
-            "requirement": "四個分句各有施事，接、插承前省略秧苗這一對象。 田夫拋、田婦接、小兒拔、大兒插構成協作；補足省略項須依前文，不增加未出現的農具或人物。"
+            "requirement": "田夫、田婦、小兒、大兒分別拋、接、拔、插秧苗；接、插的對象可由同句的秧補出。 用自己的話說清四位人物各做甚麼，以及接、插的是甚麼，即可表明理解。不要求使用省略賓語一詞，不添加原句未交代的人物或農具，也不把詩句排列當成四個動作的實際時間順序。"
           },
           {
             "id": "independent_transfer",
@@ -1111,13 +1111,13 @@
           "supplementVersion": "yw-dialogue-classical-language-20261013-v2"
         },
         "sourceVerification": {
-          "status": "pending-verification",
-          "reviewId": "yw-grammar-source-convergence-20261013-v1",
-          "reviewedAt": "2026-10-13T03:05:31.744Z",
+          "status": "source-context-reviewed",
+          "reviewId": "yw-three-grammar-source-followup-20261013-v1",
+          "reviewedAt": "2026-10-13T04:42:53Z",
           "analysisStatus": "authored-contextual-interpretation",
-          "scope": "四個明示人物分別配合拋、接、拔、插，接與插可據前項補秧苗；原文直接支持協作關係，未見內容錯誤。",
-          "notice": "需取得可讀的出版社或教研機構對這兩動作的釋讀，或可定位的一級語法論證；人教社搜尋索引所示材料僅列為未讀線索。 目前僅作可討論的讀法，不作權威釋義或掌握結論。",
-          "authority": "independent-review-source-gap-preserved",
+          "scope": "原文引用首聯並解釋接過拋來的秧把後栽插，支持接、插的共同對象；不把省略賓語術語或詩句順序等同實際工序作唯一門檻。",
+          "notice": "本項為具逐項來源支持的語境教學分析，只在所列人物、動作或問答關係範圍內採納；不是唯一句法分類，也不是模型校準、學生掌握或原教材評分結論。",
+          "authority": "independent-primary-source-context-review",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1701-p2.json",
             "readerSha256": "8e56b5f6f77589d9c0b771c16b090601c681f819399a61c130a46ca74e7061b8",
@@ -1133,8 +1133,24 @@
             "annotations": [],
             "readingMaterials": []
           },
-          "primaryReferences": [],
-          "analysisSha256": "f0e0b7ead14f977d6ea03cca720c4d388345fde396d6eed6e7f34038227bd58e"
+          "primaryReferences": [
+            {
+              "sourceId": "ihns-zeng-xiongsheng-jiangnan-rice-section1",
+              "title": "曾雄生〈江南稻作文化中的若干問題略論——評河野通明《江南稻作文化與日本》〉",
+              "publisher": "中國科學院自然科學史研究所農業史網站；作者曾雄生",
+              "url": "https://agri-history.ihns.ac.cn/scholars/zxs/jiangnan%20rice.htm",
+              "page": null,
+              "pdfPage": null,
+              "zeroBasedPdfPage": null,
+              "locator": "第一節「一、水稻生產中的婦女」，以「但拔秧畢竟不等於插秧」開頭的段落；工具抽取第31行。HTML無印刷頁碼，未建立紙本刊期。",
+              "supportKind": "primary authored scholarly interpretation on the author institution website",
+              "scope": "原文引用首聯並解釋接過拋來的秧把後栽插，支持接、插的共同對象；不把省略賓語術語或詩句順序等同實際工序作唯一門檻。",
+              "access": "actual source text read through web tool; no local PDF, page-image or render created",
+              "readStatus": "actual-content-read",
+              "reviewedAt": "2026-10-13T04:42:53Z"
+            }
+          ],
+          "analysisSha256": "f95561967f7d0a13352bafb3523e27fccf92cfb55db7ad3e8a3f9c7d77d8921b"
         }
       }
     ],
@@ -3939,21 +3955,23 @@
       },
       {
         "id": "corpus-grammar",
-        "word": "省略主語與視角",
+        "word": "夢境中的人物與動作",
         "type": "grammar",
         "sourceSentence": "小轩窗，正梳妆",
         "passageQuotes": [
-          "小轩窗，正梳妆"
+          "小轩窗，正梳妆",
+          "夜来幽梦忽还乡",
+          "相顾无言"
         ],
-        "meaning": "正梳妝的主體是夢中相見的妻子，須從上下文補出。",
-        "explanation": "與夜來幽夢忽還鄉、相顧相接，兩人的視角與動作不同；不能把全段省略主語都補為我。",
+        "meaning": "夢中還鄉後所見的是妻子在窗前梳妝；相顧寫夢中的我與妻子相對。",
+        "explanation": "結合幽夢、原注所述亡妻及後文相顧，辨明夢中觀看者與梳妝者。能說清人物和動作的關係即可，不要求使用省略主語或視角轉換一詞，也不延伸判定結尾料得等句的唯一視角。",
         "annotationIds": [],
         "proposedDemand": "context-comparison-and-independent-explanation",
         "difficulty": null,
         "calibrationStatus": "pending-real-model",
         "scoringRole": "none",
         "variants": [
-          "讀「小轩窗，正梳妆」。請用自己的話改寫句意，說明「省略主語與視角」涉及哪些成分及其關係，並說明你的補足或語序調整。",
+          "讀「夜来幽梦忽还乡。小轩窗，正梳妆」，再聯繫「相顾无言」。誰夢中還鄉？所見誰在梳妝？請依上下文改寫，說明人物與動作的關係。",
           "有人把「小轩窗，正梳妆」理解為「我還鄉所以正梳妝的一定也是我」。請判斷這樣理解是否成立，引用原句或相鄰文句說明，再提出準確的改寫。"
         ],
         "misconceptions": [
@@ -3962,11 +3980,11 @@
         "masteryCriteria": [
           {
             "id": "source_reading",
-            "requirement": "準確引用原句並辨認目標詞或句法成分。"
+            "requirement": "準確引用與回答相關的原句，辨明人物、動作、對象或疑問焦點；不以術語背誦替代句意理解。"
           },
           {
             "id": "context_analysis",
-            "requirement": "正梳妝的主體是夢中相見的妻子，須從上下文補出。 與夜來幽夢忽還鄉、相顧相接，兩人的視角與動作不同；不能把全段省略主語都補為我。"
+            "requirement": "夢中還鄉後所見的是妻子在窗前梳妝；相顧寫夢中的我與妻子相對。 結合幽夢、原注所述亡妻及後文相顧，辨明夢中觀看者與梳妝者。能說清人物和動作的關係即可，不要求使用省略主語或視角轉換一詞，也不延伸判定結尾料得等句的唯一視角。"
           },
           {
             "id": "independent_transfer",
@@ -3984,13 +4002,13 @@
           "supplementVersion": "yw-dialogue-classical-language-20261013-v2"
         },
         "sourceVerification": {
-          "status": "pending-verification",
-          "reviewId": "yw-grammar-source-convergence-20261013-v1",
-          "reviewedAt": "2026-10-13T03:05:31.744Z",
+          "status": "source-context-reviewed",
+          "reviewId": "yw-three-grammar-source-followup-20261013-v1",
+          "reviewedAt": "2026-10-13T04:42:53Z",
           "analysisStatus": "authored-contextual-interpretation",
-          "scope": "幽夢還鄉後夢見亡妻梳妝的閱讀與悼亡背景、下句相顧一致，現有核心解讀沒有發現反例。",
-          "notice": "香港教育局直接釋讀PDF僅見搜尋索引，尚未在本次按共享資產邊界核讀。須取得既有可讀權威釋讀；學校刊物英譯僅作旁證，不替代直接文言教學權威。 目前僅作可討論的讀法，不作權威釋義或掌握結論。",
-          "authority": "independent-review-source-gap-preserved",
+          "scope": "直接說明夢中重見妻子梳妝及兩人相顧；不採用結尾視角作唯一判準。",
+          "notice": "本項為具逐項來源支持的語境教學分析，只在所列人物、動作或問答關係範圍內採納；不是唯一句法分類，也不是模型校準、學生掌握或原教材評分結論。",
+          "authority": "independent-primary-source-context-review",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1500.json",
             "readerSha256": "9536261771f27ff453fb8075e7f50347094cb4c33b1e084fb012fe5861fcabd2",
@@ -3999,7 +4017,15 @@
                 "id": "lesson-1500:p4",
                 "sha256": "c552e4f1691a3fd93e88817b6c52365156bb51b1025acdf63197e1826015fe3c",
                 "quotes": [
-                  "小轩窗，正梳妆"
+                  "小轩窗，正梳妆",
+                  "夜来幽梦忽还乡"
+                ]
+              },
+              {
+                "id": "lesson-1500:p5",
+                "sha256": "5293542b54313b732f3c5c3ab56db6950fc196a46524261189a432c3aeee3234",
+                "quotes": [
+                  "相顾无言"
                 ]
               }
             ],
@@ -4019,8 +4045,24 @@
             ],
             "readingMaterials": []
           },
-          "primaryReferences": [],
-          "analysisSha256": "edde87290d8e06a6db179a1bc20b7da2c78316f1ed644d073758c4d57c7e50f7"
+          "primaryReferences": [
+            {
+              "sourceId": "edb-pth-lt-26-jiang-cheng-zi",
+              "title": "《江城子》朗讀小提示（編號26）",
+              "publisher": "香港教育局",
+              "url": "https://www.edb.gov.hk/attachment/tc/curriculum-development/kla/chi-edu/resources/pth_lt/26_jiang_cheng_zi.pdf",
+              "page": null,
+              "pdfPage": 1,
+              "zeroBasedPdfPage": 0,
+              "locator": "單頁PDF，朗讀小提示：下片記夢段；工具抽取第16–17行。頁面沒有印刷頁碼。",
+              "supportKind": "primary institutional teaching interpretation",
+              "scope": "直接說明夢中重見妻子梳妝及兩人相顧；不採用結尾視角作唯一判準。",
+              "access": "actual source text read through web tool; no local PDF, page-image or render created",
+              "readStatus": "actual-content-read",
+              "reviewedAt": "2026-10-13T04:42:53Z"
+            }
+          ],
+          "analysisSha256": "17acfeb23e67ff3a215fec9c9971131ae661ed1009f5947b6f5d78274e2f6b57"
         }
       }
     ],
@@ -4978,21 +5020,22 @@
       },
       {
         "id": "corpus-grammar",
-        "word": "疑問句與語序",
+        "word": "疑問焦點與句意",
         "type": "grammar",
         "sourceSentence": "丞相祠堂何处寻",
         "passageQuotes": [
-          "丞相祠堂何处寻"
+          "丞相祠堂何处寻",
+          "锦官城外柏森森"
         ],
-        "meaning": "何處作處所疑問，尋的對象丞相祠堂提前呈現。",
-        "explanation": "可改寫到哪裡尋找丞相祠堂，次句回答位置；此處不強求倒裝術語，只核对疑問焦點與動賓關係。",
+        "meaning": "首句詢問到哪裡尋找丞相祠堂，次句指出錦官城外柏樹繁茂之處。",
+        "explanation": "何處詢問地點；尋找的對象是丞相祠堂。把首聯的問答關係說清即可，不要求以倒裝、賓語前置或話題句中的任何一種作唯一標籤，也不要求認定作者確實不知地點、曾向旁人問路。",
         "annotationIds": [],
         "proposedDemand": "context-comparison-and-independent-explanation",
         "difficulty": null,
         "calibrationStatus": "pending-real-model",
         "scoringRole": "none",
         "variants": [
-          "讀「丞相祠堂何处寻」。請用自己的話改寫句意，說明「疑問句與語序」涉及哪些成分及其關係，並說明你的補足或語序調整。",
+          "讀「丞相祠堂何处寻？锦官城外柏森森」。首句在問甚麼？次句如何回答？請用自己的話改寫，並說明尋找的對象。",
           "有人把「丞相祠堂何处寻」理解為「何處是尋找祠堂的那個人」。請判斷這樣理解是否成立，引用原句或相鄰文句說明，再提出準確的改寫。"
         ],
         "misconceptions": [
@@ -5001,11 +5044,11 @@
         "masteryCriteria": [
           {
             "id": "source_reading",
-            "requirement": "準確引用原句並辨認目標詞或句法成分。"
+            "requirement": "準確引用與回答相關的原句，辨明人物、動作、對象或疑問焦點；不以術語背誦替代句意理解。"
           },
           {
             "id": "context_analysis",
-            "requirement": "何處作處所疑問，尋的對象丞相祠堂提前呈現。 可改寫到哪裡尋找丞相祠堂，次句回答位置；此處不強求倒裝術語，只核对疑問焦點與動賓關係。"
+            "requirement": "首句詢問到哪裡尋找丞相祠堂，次句指出錦官城外柏樹繁茂之處。 何處詢問地點；尋找的對象是丞相祠堂。把首聯的問答關係說清即可，不要求以倒裝、賓語前置或話題句中的任何一種作唯一標籤，也不要求認定作者確實不知地點、曾向旁人問路。"
           },
           {
             "id": "independent_transfer",
@@ -5023,13 +5066,13 @@
           "supplementVersion": "yw-dialogue-classical-language-20261013-v2"
         },
         "sourceVerification": {
-          "status": "pending-verification",
-          "reviewId": "yw-grammar-source-convergence-20261013-v1",
-          "reviewedAt": "2026-10-13T03:05:31.744Z",
+          "status": "source-context-reviewed",
+          "reviewId": "yw-three-grammar-source-followup-20261013-v1",
+          "reviewedAt": "2026-10-13T04:42:53Z",
           "analysisStatus": "authored-contextual-interpretation",
-          "scope": "第一句何處尋與第二句錦官城外互相問答，祠堂是所尋；基本句意一致，且現有任務明言不強求倒裝術語，風險較低。",
-          "notice": "需可精確定位的一級釋文或語法教學依據。MOE祠堂詞條的搜尋結果只證殿宇詞義及引用本句，不能替代句式支持。 目前僅作可討論的讀法，不作權威釋義或掌握結論。",
-          "authority": "independent-review-source-gap-preserved",
+          "scope": "直接把首聯譯為尋找諸葛亮祠堂及成都城外柏樹茂密的位置；支持疑問焦點和對象，不支持唯一語序術語或實際問路經過。",
+          "notice": "本項為具逐項來源支持的語境教學分析，只在所列人物、動作或問答關係範圍內採納；不是唯一句法分類，也不是模型校準、學生掌握或原教材評分結論。",
+          "authority": "independent-primary-source-context-review",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1560.json",
             "readerSha256": "f32151f51b09456e9036eac7624f3b415db695c8a3f369026429aa71da7ebd89",
@@ -5038,7 +5081,8 @@
                 "id": "lesson-1560:p1",
                 "sha256": "7ddc9c88741d0bfbb1f7020ea7a1bc551fd08ada4948935acba7fca4a3b5a4a0",
                 "quotes": [
-                  "丞相祠堂何处寻"
+                  "丞相祠堂何处寻",
+                  "锦官城外柏森森"
                 ]
               }
             ],
@@ -5051,8 +5095,24 @@
               }
             ]
           },
-          "primaryReferences": [],
-          "analysisSha256": "4e7c3a15928b0a07bafbbbe5aecffce818a302924c1e9db6d0118418290d2082"
+          "primaryReferences": [
+            {
+              "sourceId": "hcsh-110-new-student-chinese-poetry-19",
+              "title": "110學年度高一新生入學須知暨新生暑假作業：國文科詩詞背誦第19篇〈蜀相〉",
+              "publisher": "臺北市立華江高級中學",
+              "url": "https://www.hcsh.tp.edu.tw/static/webroot/G157051521735936/application/NN162657264053902.pdf#page=19",
+              "page": 17,
+              "pdfPage": 19,
+              "zeroBasedPdfPage": 18,
+              "locator": "第19篇，譯文首句；印刷頁17，PDF第19頁（P18）；工具抽取第530–538行。原詩首聯在前一頁。",
+              "supportKind": "primary institutional teaching interpretation; school-issued exercise, not a publisher textbook edition",
+              "scope": "直接把首聯譯為尋找諸葛亮祠堂及成都城外柏樹茂密的位置；支持疑問焦點和對象，不支持唯一語序術語或實際問路經過。",
+              "access": "actual source text read through web tool; no local PDF, page-image or render created",
+              "readStatus": "actual-content-read",
+              "reviewedAt": "2026-10-13T04:42:53Z"
+            }
+          ],
+          "analysisSha256": "45b3b7fcf1b553af0bc07b590ca6935eeea7fcfd8f462141662018f8d27567f8"
         }
       }
     ],

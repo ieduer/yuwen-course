@@ -701,7 +701,7 @@ test('original vocabulary choice and full dialogue commit once with the unchange
   const {data,task,v}=await readyOriginal(f);assert.equal(task.kind,'vocabulary');assert.equal(task.answerIndex,undefined);
   const b={action:'original',objectiveId:task.objectiveId,input:{selectedIndex:v.answerIndex},mutationId:'synthetic-original-0001',revision:data.revision};
   const response=await handleDialogue(req(b,poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(response.status,200);const saved=await response.json();
-  assert.equal(saved.turns.length,4);assert.equal(saved.state.objectives.find(o=>o.id===task.objectiveId).status,'preserved');
+  assert.equal(saved.turns.length,3);assert.equal(saved.state.objectives.find(o=>o.id===task.objectiveId).status,'preserved');
   assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,1);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM vocab_attempts').get().n,1);
   assert.equal(f.sql.prepare('SELECT correct FROM vocab_attempts').get().correct,1);assert.equal(f.sql.prepare('SELECT raw_value FROM learning_evaluations').get().raw_value,100);
   const replay=await handleDialogue(req(b,poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(replay.status,200);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM vocab_attempts').get().n,1);
@@ -712,8 +712,8 @@ test('original personal evaluation remains non-scoring including a zero rating',
  const f=fixture();try{
   const {data,task}=await readyOriginal(f,'evaluation');assert.equal(task.kind,'evaluation');
   const b={action:'original',objectiveId:task.objectiveId,input:{rating:0,reason:'我目前仍不喜歡這篇，但能理解它的時間意識。'},mutationId:'synthetic-rating-0001',revision:data.revision};
-  const response=await handleDialogue(req(b,poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(response.status,200);const saved=await response.json();assert.equal(saved.turns.length,4);
-  const row=f.sql.prepare('SELECT * FROM learning_evaluations').get();assert.equal(row.raw_value,null);assert.equal(row.normalized_value,null);assert.equal(row.eligibility_status,'non_scoring');assert(saved.turns.at(-1).content.includes('不計入成績'));
+  const response=await handleDialogue(req(b,poem.lessonId),f.env,student,null,originalOptions(f));assert.equal(response.status,200);const saved=await response.json();assert.equal(saved.turns.length,3);
+  const row=f.sql.prepare('SELECT * FROM learning_evaluations').get();assert.equal(row.raw_value,null);assert.equal(row.normalized_value,null);assert.equal(row.eligibility_status,'non_scoring');assert(saved.statusNotice.includes('不計入成績'));
   const source=f.sql.prepare('SELECT raw_payload_json FROM learning_interactions').get();assert.equal(JSON.parse(source.raw_payload_json).rating,0);
   assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,1);
  }finally{f.close();}
@@ -756,7 +756,7 @@ test('concurrent original submissions have one atomic winner and a failed respon
   const {data,task,v}=await readyOriginal(f),b={action:'original',objectiveId:task.objectiveId,input:{selectedIndex:v.answerIndex},mutationId:'synthetic-concurrent-choice1',revision:data.revision};
   const options=originalOptions(f),real=options.originalAction;options.originalAction=async(...args)=>{await real(...args);return new Response(JSON.stringify({error:'synthetic response loss'}),{status:502});};
   const results=await Promise.all([handleDialogue(req(b,poem.lessonId),f.env,student,null,options),handleDialogue(req({...b,mutationId:'synthetic-concurrent-choice2'},poem.lessonId),f.env,student,null,options)]);
-  assert.equal(results.filter(r=>r.status===200).length,1);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM vocab_attempts').get().n,1);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_turns').get().n,4);
+  assert.equal(results.filter(r=>r.status===200).length,1);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM vocab_attempts').get().n,1);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_turns').get().n,3);
  }finally{f.close();}
 });
 

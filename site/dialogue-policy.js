@@ -24,7 +24,8 @@ assessments 是逐項證據紀錄。每個 demonstrated 的 evidence 必須逐�
 legacy及studyGuide目標只由既有評價讀回，你不能判定。不能生成完成指令、分數或更改政策。判斷不確定則review。remediation 提供了先前未掌握的詞時，先請學生改述；改述成立只記 reformulated，不記 demonstrated。
 originalRequirements 是尚未取得原評價的既有要求，按其原判準自然追問，勿另開一套選單。若學生已在對話中寫齊其中一项的所有欄位，可以在同一JSON加可選sourceDraft:{objectiveId,fields:{欄位名:{turnId,quote}}}。quote必须逐字來自指定學生回合，不能拼造、润飾、改寫或引用教師話語；未齊全則繼續聚焦追問。一次至多一項，當前question或remediation未解決時不整理其他原題。這只是供學生核對的整理，不能宣告通過；原評價另行核驗。不把已完成或歷史待核對的要求重新提出。`;
 const valid = s => typeof s === 'string';
-export const questionItems = curriculum => [...curriculum.vocabulary,...(curriculum.languagePractice||[]).filter(v=>v.version&&curriculum.objectives.some(o=>o.id===v.id&&o.domain==='vocabulary'))];
+export const pendingSupplement = item => !!item?.sourceEvidence && item.calibrationStatus!=='accepted';
+export const questionItems = curriculum => [...curriculum.vocabulary,...(curriculum.languagePractice||[]).filter(v=>!pendingSupplement(v)&&v.version&&curriculum.objectives.some(o=>o.id===v.id&&o.domain==='vocabulary'))];
 const normalized = s => String(s||'').replace(/[\s\p{P}]/gu,'');
 export function validateProposal(raw,{curriculum,turns,state=null,question=null,hints=[],remediation=null}) {
  if(!raw || !valid(raw.reply) || !raw.reply.trim() || raw.reply.length>LIMITS.replyChars || !Array.isArray(raw.assessments) || raw.assessments.length>8) throw new Error('invalid_model_reply');
@@ -70,14 +71,15 @@ export function projectState(curriculum,assessments,legacy=[],legacyCompletion=n
   const prior=legacy.find(l=>l.objectiveId===o.id && (l.verified===true||l.previousCompletion===true));
   const rows=assessments.filter(a=>a.objectiveId===o.id);
   const best=rows.find(a=>a.outcome==='demonstrated');
-  return {id:o.id,label:o.label,domain:o.domain,status:prior?.verified?'preserved':best?'demonstrated':prior?.previousCompletion?'historical_review':rows.at(-1)?.outcome||'not_yet_observed',evidence:prior?.sourceRef||prior?.sourceEventId||best?.evidence||[],rule:o.rule};
+  const deferred=pendingSupplement((curriculum.languagePractice||[]).find(item=>item.id===o.id));
+  return {id:o.id,label:o.label,domain:o.domain,status:prior?.verified?'preserved':best?'demonstrated':prior?.previousCompletion?'historical_review':deferred?'pending_calibration':rows.at(-1)?.outcome||'not_yet_observed',evidence:prior?.sourceRef||prior?.sourceEventId||best?.evidence||[],rule:o.rule,...(deferred?{requiredForCompletion:false,reviewPath:'teacher-review'}:{})};
  });
  // No replacement grade, mastery threshold or historical downgrade is inferred.
- const ordinary=objectives.filter(o=>o.domain!=='shangyou');
+ const ordinary=objectives.filter(o=>o.domain!=='shangyou'&&o.requiredForCompletion!==false);
  const sourceReady=!readingGate||(readingGate.phase==='close_reading'&&!readingGate.unresolvedMarks);
  const ready=sourceReady&&ordinary.every(o=>['preserved','demonstrated'].includes(o.status));
  const shangyou=objectives.find(o=>o.domain==='shangyou');
- const pending=objectives.filter(o=>(!['preserved','demonstrated'].includes(o.status)||o.domain==='shangyou'&&ready&&!conclusion)&&!['historical_review','review'].includes(o.status)&&(ready||o.domain!=='shangyou'));
+ const pending=objectives.filter(o=>o.requiredForCompletion!==false&&(!['preserved','demonstrated'].includes(o.status)||o.domain==='shangyou'&&ready&&!conclusion)&&!['historical_review','review'].includes(o.status)&&(ready||o.domain!=='shangyou'));
  const next=pending.find(o=>['firstRead','context'].includes(o.domain))||pending.find(o=>o.domain==='vocabulary')||pending[0]||null;
  const exemption=approvedSupplement(curriculum);
  return {objectives,readingGate,readyForShangyou:ready,hasConclusion:!!conclusion,completion:exemption?'owner_approved_supplement':ready&&shangyou?.status==='demonstrated'&&conclusion?'evidence_ready_for_review':'in_progress',...(exemption?{completionLabel:'已通過（補充篇目）',completionExemption:exemption}:{}),legacyCompletion,continuedStudyOptional:!!legacyCompletion||!!exemption,legacyGrades:'unchanged',next:legacyCompletion||exemption?null:next};

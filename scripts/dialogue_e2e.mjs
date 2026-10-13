@@ -221,7 +221,7 @@ function openJournal(file,manifestPath){
  const fd=fs.openSync(absolute,'wx',0o600);let previous='0'.repeat(64);
  return {record:e=>{const row={...e,previousHash:previous};row.hash=hash(row);fs.writeSync(fd,JSON.stringify(row)+'\n');fs.fsyncSync(fd);previous=row.hash;},close:()=>fs.closeSync(fd)};
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
+if(typeof process!=='undefined'&&process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
  const [command,...args]=process.argv.slice(2);const plan=preparePlan();
  if(command==='plan'&&!args.length)process.stdout.write(JSON.stringify(plan,null,2)+'\n');
  else if(command==='execute'&&args.length===3){

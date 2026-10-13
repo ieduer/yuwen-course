@@ -1,3 +1,9 @@
+## Current execution — 2026-10-13T06:07:00Z
+
+All189 remain in scope. Isolated a574847/9ee0199e is live; formal production unchanged. Seven calibration cases touched,0 semantic passes; one real Hetang scored turn saved but unconfirmed. Google503/model cooldown blocks paid acceptance; user direction requested, no replay. Unreleased69-item non-gating, per-lesson limits135/137, status-only save templates and three grammar-source corrections pass335 tests perNode22/24. Full dialogues, central receipt/reload and remaining browser/device acceptance are incomplete.
+
+Exact evidence, constraints, authority extension, cleanup and next actions: [maintenance manual](docs/MAINTENANCE_MANUAL.md) and /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/CHECKPOINT-ALL-LESSONS.md. Older sections below are historical.
+
 ## Current all-lesson candidate and authority — 2026-10-13T04:13:40.301264+00:00
 
 The unexecuted amendment4 packet now uses the existing deterministic release projection, with raw source provenance retained. All28 source/prompt pins match; exactly six1498 source pins changed, no prompt/rubric/question changed. Packet035b8a62d1a66095352adca4deb44da38011460246a5dee6aaf0ec7690086c80;99 focused tests pass perNode22.21.1/24.18.0. Prior packet and all7 paid receipts remain immutable.

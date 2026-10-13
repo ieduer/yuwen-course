@@ -221,9 +221,9 @@ test('supplemental language tasks preserve exact primary quotations, distinct va
       const p=c.passages.find(p=>p.id===item.sourceEvidence.passageId);
       assert.equal(item.sourceEvidence.passageSha256,hash(p));
       assert.equal(item.sourceEvidence.readerSha256,c.sourceInventory.readerSha256);
-      for(const q of item.passageQuotes)assert(p.text.includes(q));
       const generated=c.languagePractice.find(l=>l.id===id+':'+item.id);
       assert(generated);
+      for(const q of item.passageQuotes)assert(c.passages.some(p=>generated.sourcePassages.includes(p.id)&&p.text.includes(q)));
       assert.deepEqual(generated.masteryCriteria,item.masteryCriteria);
       assert.equal(c.objectives.find(o=>o.id===generated.id).scoringRole,'none');
       if(item.type==='function-word'){const d=c.dictionary.find(d=>d.id===item.dictionaryId);assert(d);assert.equal(item.sourceVerification.xcEntryId,d.entryId);assert.deepEqual(item.sourceVerification.printedPages,d.pages.map(p=>p.printedPage));}else{
@@ -265,11 +265,8 @@ test('all grammar source reviews bind exact interpretation, original passages, n
     }
   }
   assert.equal(reviews.length,22);
-  assert.equal(reviews.filter(x=>x.status==='source-context-reviewed').length,19);
-  assert.deepEqual(reviews.filter(x=>x.status==='pending-verification').map(x=>x.id).sort(),[
-    'lesson-1500:corpus-grammar','lesson-1560:corpus-grammar',
-    'lesson-1701-p2:corpus-grammar',
-  ].sort());
+  assert.equal(reviews.filter(x=>x.status==='source-context-reviewed').length,22);
+  assert.deepEqual(reviews.filter(x=>x.status==='pending-verification').map(x=>x.id),[]);
   const modifier=representatives.languageItems['lesson-1711-p1'].find(x=>x.id==='grammar-modifier');
   const scholarly=modifier.sourceVerification.primaryReferences.find(x=>x.publisher?.includes('東海'));
   assert.equal(scholarly.page,7);assert.equal(scholarly.pdfPage,7);assert.equal(scholarly.zeroBasedPdfPage,6);
