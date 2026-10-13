@@ -1,4 +1,12 @@
-## Current isolated acceptance — 2026-10-12T22:13Z
+## Current Web acceptance reassessment — 2026-10-13T00:42:57.951660+00:00
+
+Teacher review action only writes an idempotent own-session marker; it does not send notifications. UI save/duplicate/reload passed2026-10-13T00:32:57.908Z with one unchanged event/zero model calls. Android APK installation/physical-phone requirements do not apply automatically to this Web candidate. Mobile Web keyboard-layout and Enter checks passed; physical IME is separately unverified.
+
+Runtime remains df42b7e/Pagesf407ce01 on the isolated host; formal175f8ae and the full twelve-part objective are unchanged. The expired calibration window does not stop independent Web work. No new paid call or production approval is inferred.
+
+Current requirement-by-requirement disposition, root causes and evidence: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13217/TARGET-STATUS.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13217/TARGET-STATUS.md). Earlier conflicting entries below are history.
+
+## Historical isolated acceptance — 2026-10-12T22:13Z
 
 Amendment2 source df42b7e874af454641cceb1a6a4097b82c452f10 deployed to isolated Pages f407ce01-c5b4-4d5a-a716-84c86f06f49b at 2026-10-12T22:00:46.394705Z. Restricted artifact ebaade2dbcf6e0052d29b9cbf59e243b58c5138bb2ae3f22976dd0e57099736c.142 focused checks on Node22/24 and exact CI38313823541 passed. Formal YW baseline175f8ae/Pagesb6f5ac67 and APIS53dbb568@100/66cfaab9@0 remain unchanged.
 

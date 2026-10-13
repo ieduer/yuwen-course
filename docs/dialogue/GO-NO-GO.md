@@ -1,4 +1,12 @@
-# Preparation decision update — 2026-10-12
+## Current Web acceptance reassessment — 2026-10-13T00:42:57.951660+00:00
+
+Recommendation remains NO-GO for formal publication until real24-case semantic/persona/synthesis and stream/accounting acceptance pass. Remove the unrelated Android APK physical-phone requirement and the mistaken external-notification blocker from this Web checklist; real Web input and own-marker persistence evidence now exist. Independent reviewer remains suen. Do not request final publication sign-off before remaining teaching acceptance is reviewable.
+
+Runtime remains df42b7e/Pagesf407ce01 on the isolated host; formal175f8ae and the full twelve-part objective are unchanged. The expired calibration window does not stop independent Web work. No new paid call or production approval is inferred.
+
+Current requirement-by-requirement disposition, root causes and evidence: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13217/TARGET-STATUS.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13217/TARGET-STATUS.md). Earlier conflicting entries below are history.
+
+# Historical preparation decision update — 2026-10-12
 
 The restricted acceptance preparation is owner-approved and locally verified;
 see [implementation boundary](ISOLATED-ACCEPTANCE.md). This supersedes the earlier

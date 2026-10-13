@@ -1,4 +1,12 @@
-## Current text-role repair, not deployed — 2026-10-12T16:12:14.285549+00:00
+## Current Web acceptance reassessment — 2026-10-13T00:42:57.951660+00:00
+
+Four consumed calls and all costs remain immutable; the26-call20minute execution window expired2026-10-12T22:21:24.094399Z. The proposed30-call/US$2.520/60minute continuation is still awaiting explicit finite-limit confirmation. Previous0%-candidate empty telemetry was not provider outage evidence. New baseline read-only metadata shows scheduled probes skipped, not successful generation; availability requires a bounded same-path model attempt after authority is resolved. No fallback, hedge or evidence-rule weakening.
+
+Runtime remains df42b7e/Pagesf407ce01 on the isolated host; formal175f8ae and the full twelve-part objective are unchanged. The expired calibration window does not stop independent Web work. No new paid call or production approval is inferred.
+
+Current requirement-by-requirement disposition, root causes and evidence: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13217/TARGET-STATUS.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13217/TARGET-STATUS.md). Earlier conflicting entries below are history.
+
+## Historical text-role repair, not deployed — 2026-10-12T16:12:14.285549+00:00
 
 Four textbook editor guidance blocks in 劝学 are preserved verbatim as labelled teaching references, excluded from author passages/assessment citations. Original resources, learning guidance (including memorization instruction), scoring rules and stored curricula remain preserved. This is source-role correction, not a new recitation score or waived requirement. The two pilot classical-first-read mapping rows now describe the implemented original process bridge. Same-owner real first-read submit/acknowledge/three corrections now survive reload with original guesses intact; see the linked report. Physical mobile remains unverified.
 
