@@ -1,4 +1,28 @@
-## Current finite continuation implementation — 2026-10-13T01:04:56.532337+00:00
+## Current all-lesson candidate and authority — 2026-10-13T03:25:31.813111+00:00
+
+All189 lessons are the delivery scope; three representative lessons remain validation samples. Full189 generated curriculum now maps1633 source items and1697 formative units, with193 active study-guide items. Original869formal/1021formative objects, historical grades/completion/drafts and annual A+768baseline/692threshold remain preserved. New88compulsory lessons add676 formally scored/displayed units plus88 non-scoring selfreports; every new unit is excluded from the existing A+gate. Effective policy yw-formal-scope-20261013-v2 begins2026-10-13T02:03:44.252Z for newanswers only. Exact descriptors are in FORMAL-SCOPE-CANDIDATE.json, not this prose. UC compatible consumer and authenticated central acceptance remain candidate work.
+
+Lesson1572 is ownerapproved supplemental pass with zero fabricated score; source missing正文 remains recorded. All67classical/traditionalpoetry lessons have source-linked vocabulary/functionword/grammar area presence, not an exhaustivelexicalinventory or semanticpass. Of69new supplements,52 carryXCentryIDs/pages and17 authoredgrammar analyses now contain14 source-context-reviewed and3 pendingverification items; separate five representative grammar items are source-context-reviewed. All22 remain authored teaching analysis, never dictionary authority; all nine representative real-model language calibrations are pending. Modelcalibration remains separate from source verification.
+
+Conversation now hides source-owned bookkeeping in the materialdrawer; grades and correction controls remain on demand. Original source records are retained. Node22/24 curriculum16 and E2Edriver17 checks pass; source scope164 perversion passed independently. Frontend32 and partial-retry backend83 checks passed. Final dialogue328, native23 and release-site7 checks pass on Node22.21.1/24.18.0. Broader integration completed with two mobile touch-scroll failures reproduced on635299 baseline; not passed. CI/newartifact/realmodelacceptance remain pending. Historical-local-answer edit defect was found in independent review and repaired with actual input-event→Send/reload tests29 perNodeversion. Local synthetic desktop/390x844 checks and actual exported-file readback passed, separately from real model evidence.
+
+Amendment3 expired2026-10-13T02:13:38.293Z and is closed withoutreplay. Three newattempts involved2uniquecases,0passed,22unrun; cumulative7attempts,known10267+unknownreserved420000microUSD,588000reserved. Realfirsttoken6055ms missed5000target. User subsequently authorized alltaskcosts and directcontinuouswork, superseding pendingcostapproval and serialhandoff instructions only. Newamendment4 and separate120call fullE2E remain finite/sourcepinned, may execute aftercandidatechecks; nooldledgerreset. Exactauthority COST-EXECUTION-AUTHORITY.json and closedwindow CALIBRATION-WINDOW-3-CLOSEOUT.json.
+
+Currentisolatedlive source635299bd8f4d1a85bffe583ba5e34f8180307e8e / Pages7ca300f6-7744-4ed6-90de-4615af0825f4. FormalYW175f8ae/Pagesb6f5ac67 and APIS53dbb568@100/66cfaab9@0 unchanged. Newall189/score-only/streamretry source is not yet deployed. Formalproduction remains subject to actualgo/no-go evidence; do not infer acceptance from tests orcostauthority.
+
+Requiredremainingacceptance: fullreal semantic/persona/difficultycases; complete3dialogues with尚友; same-model sequentialmax3retry andpartialcontinuation/accounting; actualUCsource→consumer→reload; secondrealaccountisolation; real-dialogue export (local synthetic actual file already verified); nativephoneIME; paid120vsdocumentedlongremediationpaths; accessibility; all78 supplemental language items across54 lessons real calibration (28initialcases cover9representativeitems,69remaining need individual acceptance); reversibleexactrelease andpublicStatus afteracceptance. Rootownsresourcecloseout; allchildren FINAL-only and exactdispositions recorded.
+
+Canonical current evidence: /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/REPORT.md. All conflicting dated sections below are historical.
+
+## Historical objective and checkpoint — 2026-10-13T01:44Z
+
+Deliver all189 lessons through continuous dialogue, internally preserving every original requirement/score/history. Three representative lessons do not bound delivery. Local all-lesson curriculum, seamless source-evaluator bridge and frontend implementation are under independent review; formal publication is not authorized by the finite isolated model approval.
+
+Owner explicitly passes supplementary lesson1572; exactnon-scoring exemption retains source uncertainty and historicalgrades. Other lessons must complete source-grounded verification. Fullclassical coverage, integratedbrowser checks and realsemantic acceptance remain open. Isolatedlive635299/7ca300f6; partialstream attempt3 stoppedpaidcalls after7cumulative, without ledgerreset. Current finitewindow deadline02:13:38.293Z; no fallback/hedge or quotareset.
+
+Current authority/evidence: /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/REPORT.md; OWNER-EXEMPTION-1572.json; MODEL-STOP-03.json. All preceding conflicting states below are history.
+
+## Historical finite continuation implementation — 2026-10-13T01:04:56.532337+00:00
 
 Suen confirmed amendment3 at2026-10-13T00:54:51Z; authority is `continuation-01a13217/AUTHORIZATION-3.json`. Four immutable old calls remain:4678microUSD known plus252000 unknown reserved. New distinct namespace allows26 new attempts for24 unchanged fixed cases and at most2 recoveries,30 cumulative and2520000microUSD cumulative reservation. First new intent starts60minutes; hard expiry remains2026-10-13T12:00Z. The clock started2026-10-13T01:13:38.293Z and expires02:13:38.293Z; it never resets. Formal publication still needs independent suen go/no-go.
 

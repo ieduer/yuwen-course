@@ -1,0 +1,1465 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1717-p1",
+  "title": "故都的秋",
+  "mode": "modern-prose",
+  "author": "郁达夫",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1717-p1:p1",
+      "text": "故都的秋\n\n郁达夫",
+      "block": {
+        "runs": [
+          {
+            "text": "故都的秋",
+            "type": "text"
+          },
+          {
+            "label": "[1]",
+            "noteId": "footnote-11151-1",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "\n\n郁达夫",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1717-p1:p2",
+      "text": "秋天，无论在什么地方的秋天，总是好的；可是啊，北国的秋，却特别地来得清，来得静，来得悲凉。我的不远千里，要从杭州赶上青岛，更要从青岛赶上北平来的理由，也不过想饱尝一尝这“秋”，这故都的秋味。",
+      "block": {
+        "runs": [
+          {
+            "text": "秋天，无论在什么地方的秋天，总是好的；可是啊，北国的秋，却特别地来得清，来得静，来得悲凉。我的不远千里，要从杭州赶上青岛，更要从青岛赶上北平来的理由，也不过想饱尝一尝这“秋”，这故都的秋味。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1717-p1:p3",
+      "text": "江南，秋当然也是有的；但草木凋得慢，空气来得润，天的颜色显得淡，并且又时常多雨而少风；一个人夹在苏州上海杭州，或厦门香港广州的市民中间，混混沌沌地过去，只能感到一点点清凉，秋的味，秋的色，秋的意境与姿态，总看不饱，尝不透，赏玩不到十足。秋并不是名花，也并不是美酒，那一种半开、半醉的状态，在领略秋的过程上，是不合适的。",
+      "block": {
+        "runs": [
+          {
+            "text": "江南，秋当然也是有的；但草木凋得慢，空气来得润，天的颜色显得淡，并且又时常多雨而少风；一个人夹在苏州上海杭州，或厦门香港广州的市民中间，混混沌沌地过去，只能感到一点点清凉，秋的味，秋的色，秋的意境与姿态，总看不饱，尝不透，赏玩不到十足。秋并不是名花，也并不是美酒，那一种半开、半醉的状态，在领略秋的过程上，是不合适的。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1717-p1:p4",
+      "text": "不逢北国之秋，已将近十年了。在南方每年到了秋天，总要想起陶然亭的芦花，钓鱼台的柳影，西山的虫唱，玉泉的夜月，潭柘寺的钟声。在北平即使不出门去吧，就是在皇城人海之中，租人家一椽破屋来住着，早晨起来，泡一碗浓茶，向院子一坐，你也能看得到很高很高的碧绿的天色，听得到青天下驯鸽的飞声。从槐树叶底，朝东细数着一丝一丝漏下来的日光，或在破壁腰中，静对着像喇叭似的牵牛花（朝荣）的蓝朵，自然而然地也能够感觉到十分的秋意。说到了牵牛花，我以为以蓝色或白色者为佳，紫黑色次之，淡红者最下。最好，还要在牵牛花底，教长着几根疏疏落落的尖细且长的秋草，使作陪衬。",
+      "block": {
+        "runs": [
+          {
+            "text": "不逢北国之秋，已将近十年了。在南方每年到了秋天，总要想起陶然亭",
+            "type": "text"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-11151-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的芦花，钓鱼台",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-11151-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的柳影，西山",
+            "type": "text"
+          },
+          {
+            "label": "[4]",
+            "noteId": "footnote-11151-4",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的虫唱，玉泉",
+            "type": "text"
+          },
+          {
+            "label": "[5]",
+            "noteId": "footnote-11151-5",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的夜月，潭柘寺",
+            "type": "text"
+          },
+          {
+            "label": "[6]",
+            "noteId": "footnote-11151-6",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的钟声。在北平即使不出门去吧，就是在皇城人海之中，租人家一椽",
+            "type": "text"
+          },
+          {
+            "label": "[7]",
+            "noteId": "footnote-11151-7",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "破屋来住着，早晨起来，泡一碗浓茶，向院子一坐，你也能看得到很高很高的碧绿的天色，听得到青天下驯鸽的飞声。从槐树叶底，朝东细数着一丝一丝漏下来的日光，或在破壁腰中，静对着像喇叭似的牵牛花（朝荣）的蓝朵，自然而然地也能够感觉到十分的秋意。说到了牵牛花，我以为以蓝色或白色者为佳，紫黑色次之，淡红者最下。最好，还要在牵牛花底，教长着几根疏疏落落的尖细且长的秋草，使作陪衬。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1717-p1:p5",
+      "text": "北国的槐树，也是一种能使人联想起秋来的点缀。像花而又不是花的那一种落蕊，早晨起来，会铺得满地。脚踏上去，声音也没有，气味也没有，只能感出一点点极微细极柔软的触觉。扫街的在树影下一阵扫后，灰土上留下来的一条条扫帚的丝纹，看起来既觉得细腻，又觉得清闲，潜意识下并且还觉得有点儿落寞，古人所说的梧桐一叶而天下知秋的遥想，大约也就在这些深沉的地方。",
+      "block": {
+        "runs": [
+          {
+            "text": "北国的槐树，也是一种能使人联想起秋来的点缀。像花而又不是花的那一种落蕊，早晨起来，会铺得满地。脚踏上去，声音也没有，气味也没有，只能感出一点点极微细极柔软的触觉。扫街的在树影下一阵扫后，灰土上留下来的一条条扫帚的丝纹，看起来既觉得细腻，又觉得清闲，潜意识下并且还觉得有点儿落寞，古人所说的梧桐一叶而天下知秋",
+            "type": "text"
+          },
+          {
+            "label": "[8]",
+            "noteId": "footnote-11151-8",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的遥想，大约也就在这些深沉的地方。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1717-p1:p6",
+      "text": "秋蝉的衰弱的残声，更是北国的特产；因为北平处处全长着树，屋子又低，所以无论在什么地方，都听得见它们的啼唱。在南方是非要上郊外或山上去才听得到的。这嘶叫的秋蝉，在北平可和蟋蟀耗子一样，简直像是家家户户都养在家里的家虫。",
+      "block": {
+        "runs": [
+          {
+            "text": "秋蝉的衰弱的残声，更是北国的特产；因为北平处处全长着树，屋子又低，所以无论在什么地方，都听得见它们的啼唱。在南方是非要上郊外或山上去才听得到的。这嘶叫的秋蝉，在北平可和蟋蟀耗子一样，简直像是家家户户都养在家里的家虫。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1717-p1:p7",
+      "text": "还有秋雨哩，北方的秋雨，也似乎比南方的下得奇，下得有味，下得更像样。",
+      "block": {
+        "runs": [
+          {
+            "text": "还有秋雨哩，北方的秋雨，也似乎比南方的下得奇，下得有味，下得更像样。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1717-p1:p8",
+      "text": "在灰沉沉的天底下，忽而来一阵凉风，便息列索落地下起雨来了。一层雨过，云渐渐地卷向了西去，天又青了，太阳又露出脸来了；着着很厚的青布单衣或夹袄的都市闲人，咬着烟管，在雨后的斜桥影里，上桥头树底去一立，遇见熟人，便会用了缓慢悠闲的声调，微叹着互答着地说：\n\n“唉，天可真凉了——”（这了字念得很高，拖得很长。）\n\n“可不是吗？一层秋雨一层凉啦！”",
+      "block": {
+        "runs": [
+          {
+            "text": "在灰沉沉的天底下，忽而来一阵凉风，便息列索落地下起雨来了。一层雨过，云渐渐地卷向了西去，天又青了，太阳又露出脸来了；着",
+            "type": "text"
+          },
+          {
+            "label": "[9]",
+            "noteId": "footnote-11151-9",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "着很厚的青布单衣或夹袄的都市闲人，咬着烟管，在雨后的斜桥影里，上桥头树底去一立，遇见熟人，便会用了缓慢悠闲的声调，微叹着互答着地说：\n\n“唉，天可真凉了——”（这了字念得很高，拖得很长。）\n\n“可不是吗？一层秋雨一层凉啦！”",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1717-p1:p9",
+      "text": "北方人念阵字，总老像是层字，平平仄仄起来，这念错的歧韵，倒来得正好。",
+      "block": {
+        "runs": [
+          {
+            "text": "北方人念阵字，总老像是层字，平平仄仄",
+            "type": "text"
+          },
+          {
+            "label": "[10]",
+            "noteId": "footnote-11151-10",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "起来，这念错的歧韵，倒来得正好。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1717-p1:p10",
+      "text": "北方的果树，到秋来，也是一种奇景。第一是枣子树；屋角，墙头，茅房边上，灶房门口，它都会一株株地长大起来。像橄榄又像鸽蛋似的这枣子颗儿，在小椭圆形的细叶中间，显出淡绿微黄的颜色的时候，正是秋的全盛时期；等枣树叶落，枣子红完，西北风就要起来了，北方便是尘沙灰土的世界，只有这枣子、柿子、葡萄，成熟到八九分的七八月之交，是北国的清秋的佳日，是一年之中最好也没有的Golden Days。",
+      "block": {
+        "runs": [
+          {
+            "text": "北方的果树，到秋来，也是一种奇景。第一是枣子树；屋角，墙头，茅房边上，灶房门口，它都会一株株地长大起来。像橄榄又像鸽蛋似的这枣子颗儿，在小椭圆形的细叶中间，显出淡绿微黄的颜色的时候，正是秋的全盛时期；等枣树叶落，枣子红完，西北风就要起来了，北方便是尘沙灰土的世界，只有这枣子、柿子、葡萄，成熟到八九分的七八月之交，是北国的清秋的佳日，是一年之中最好也没有的Golden Days",
+            "type": "text"
+          },
+          {
+            "label": "[11]",
+            "noteId": "footnote-11151-11",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1717-p1:p11",
+      "text": "有些批评家说，中国的文人学士，尤其是诗人，都带着很浓厚的颓废色彩，所以中国的诗文里，颂赞秋的文字特别多。但外国的诗人，又何尝不然？我虽则外国诗文念得不多，也不想开出账来，做一篇秋的诗歌散文钞，但你若去一翻英德法意等诗人的集子，或各国的诗文的Anthology来，总能够看到许多关于秋的歌颂与悲啼。各著名的大诗人的长篇田园诗或四季诗里，也总以关于秋的部分，写得最出色而最有味。足见有感觉的动物，有情趣的人类，对于秋，总是一样地能特别引起深沉、幽远、严厉、萧索的感触来的。不单是诗人，就是被关闭在牢狱里的囚犯，到了秋天，我想也一定会感到一种不能自已的深情；秋之于人，何尝有国别，更何尝有人种阶级的区别呢？不过在中国，文字里有一个“秋士”的成语，读本里又有着很普遍的欧阳子的《秋声》与苏东坡的《赤壁赋》等，就觉得中国的文人，与秋的关系特别深了。可是这秋的深味，尤其是中国的秋的深味，非要在北方，才感受得到底。",
+      "block": {
+        "runs": [
+          {
+            "text": "有些批评家说，中国的文人学士，尤其是诗人，都带着很浓厚的颓废色彩，所以中国的诗文里，颂赞秋的文字特别多。但外国的诗人，又何尝不然？我虽则外国诗文念得不多，也不想开出账来，做一篇秋的诗歌散文钞",
+            "type": "text"
+          },
+          {
+            "label": "[12]",
+            "noteId": "footnote-11151-12",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，但你若去一翻英德法意等诗人的集子，或各国的诗文的Anthology",
+            "type": "text"
+          },
+          {
+            "label": "[13]",
+            "noteId": "footnote-11151-13",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "来，总能够看到许多关于秋的歌颂与悲啼。各著名的大诗人的长篇田园诗或四季诗里，也总以关于秋的部分，写得最出色而最有味。足见有感觉的动物，有情趣的人类，对于秋，总是一样地能特别引起深沉、幽远、严厉、萧索的感触来的。不单是诗人，就是被关闭在牢狱里的囚犯，到了秋天，我想也一定会感到一种不能自已的深情；秋之于人，何尝有国别，更何尝有人种阶级的区别呢？不过在中国，文字里有一个“秋士”",
+            "type": "text"
+          },
+          {
+            "label": "[14]",
+            "noteId": "footnote-11151-14",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的成语，读本里又有着很普遍的欧阳子的《秋声》",
+            "type": "text"
+          },
+          {
+            "label": "[15]",
+            "noteId": "footnote-11151-15",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "与苏东坡的《赤壁赋》等，就觉得中国的文人，与秋的关系特别深了。可是这秋的深味，尤其是中国的秋的深味，非要在北方，才感受得到底。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1717-p1:p12",
+      "text": "南国之秋，当然是也有它的特异的地方的，譬如廿四桥的明月，钱塘江的秋潮，普陀山的凉雾，荔枝湾的残荷，等等，可是色彩不浓，回味不永。比起北国的秋来，正像是黄酒之与白干，稀饭之与馍馍，鲈鱼之与大蟹，黄犬之与骆驼。",
+      "block": {
+        "runs": [
+          {
+            "text": "南国之秋，当然是也有它的特异的地方的，譬如廿四桥的明月",
+            "type": "text"
+          },
+          {
+            "label": "[16]",
+            "noteId": "footnote-11151-16",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，钱塘江的秋潮",
+            "type": "text"
+          },
+          {
+            "label": "[17]",
+            "noteId": "footnote-11151-17",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，普陀山",
+            "type": "text"
+          },
+          {
+            "label": "[18]",
+            "noteId": "footnote-11151-18",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的凉雾，荔枝湾",
+            "type": "text"
+          },
+          {
+            "label": "[19]",
+            "noteId": "footnote-11151-19",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的残荷，等等，可是色彩不浓，回味不永。比起北国的秋来，正像是黄酒之与白干，稀饭之与馍馍，鲈鱼之与大蟹，黄犬之与骆驼。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1717-p1:p13",
+      "text": "秋天，这北国的秋天，若留得住的话，我愿意把寿命的三分之二折去，换得一个三分之一的零头。",
+      "block": {
+        "runs": [
+          {
+            "text": "秋天，这北国的秋天，若留得住的话，我愿意把寿命的三分之二折去，换得一个三分之一的零头。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1717-p1:p14",
+      "text": "1934年8月，在北平",
+      "block": {
+        "runs": [
+          {
+            "text": "1934年8月，在北平",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《郁达夫全集》第三卷（浙江大学出版社2007年版）。略有改动。郁达夫（1896—1945），原名郁文，浙江富阳人，小说家、散文家。因在南洋从事抗日活动，1945年9月17日被日本宪兵秘密杀害于印度尼西亚的苏门答腊。1952年，中央人民政府追认他为革命烈士。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "陶然亭：在北京城南，亭名出自唐白居易《与梦得沽酒闲饮且约后期》：“更待菊黄家酿熟，共君一醉一陶然。”",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "钓鱼台：在北京阜成门外三里河，玉渊潭公园北面，环境清幽，“台下有泉涌出，汇为池，其水至冬不竭”（《明一统志》卷一）。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-3"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "西山：北京西郊群山的总称，是京郊名胜。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-4"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "玉泉：指玉泉山，是西山东麓支脉。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-5"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "潭柘（zhè）寺：在北京西山，“相传寺址本在青龙潭上，有古柘千章，“寺以此得名”（《日下旧闻考》卷一〇五）。”",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-6"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "椽（chuán）：本指放在房檩（lǐn）上架着屋面板和瓦的木条。这里作量词。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-7"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "梧桐一叶而天下知秋：语出《淮南子·说山训》：“见一叶落而知岁之将暮。”《太平御览》卷二十四引作“一叶落而知天下秋”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-8"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "着（zhuó）：穿。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-9"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "平平仄仄：这里指推敲字的声韵。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-10"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "Golden Days：意思是黄金般的日子。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-11"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "钞：文学作品等经过选录而成的集子。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-12"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "Anthology：英语中指“选集”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-13"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "秋士：古时指到了暮年仍不得志的知识分子。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-14"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "欧阳子的《秋声》：指北宋欧阳修的《秋声赋》。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-15"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "廿四桥的明月：唐杜牧《寄扬州韩绰判官》中有“二十四桥明月夜，玉人何处教吹箫”的诗句。廿四桥，即二十四桥，在江苏扬州瘦西湖。相传隋炀帝曾在月夜令宫女二十四人吹箫于此，故名。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-16"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "钱塘江的秋潮：钱塘江位于浙江，出杭州湾，入东海，江口为喇叭状。每年中秋节前后涨潮时，受江口地形收缩和水深骤减的影响，江面波涛汹涌，潮水以排山倒海之势奔腾向前，形成“钱塘怒潮”景观。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-17"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "普陀山：在浙江舟山群岛中的一座小岛上。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-18"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "荔枝湾：在广州市。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11151-19"
+    }
+  ],
+  "resources": [],
+  "source": "https://forum.rdfzer.com/t/topic/1717",
+  "objectives": [
+    {
+      "id": "lesson-1717-p1:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1717-p1:p1",
+        "lesson-1717-p1:p2",
+        "lesson-1717-p1:p3",
+        "lesson-1717-p1:p4",
+        "lesson-1717-p1:p5",
+        "lesson-1717-p1:p6",
+        "lesson-1717-p1:p7",
+        "lesson-1717-p1:p8",
+        "lesson-1717-p1:p9",
+        "lesson-1717-p1:p10",
+        "lesson-1717-p1:p11",
+        "lesson-1717-p1:p12",
+        "lesson-1717-p1:p13",
+        "lesson-1717-p1:p14"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1717-p1:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1717-p1:p1",
+        "lesson-1717-p1:p2",
+        "lesson-1717-p1:p3",
+        "lesson-1717-p1:p4",
+        "lesson-1717-p1:p5",
+        "lesson-1717-p1:p6",
+        "lesson-1717-p1:p7",
+        "lesson-1717-p1:p8",
+        "lesson-1717-p1:p9",
+        "lesson-1717-p1:p10",
+        "lesson-1717-p1:p11",
+        "lesson-1717-p1:p12",
+        "lesson-1717-p1:p13",
+        "lesson-1717-p1:p14"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1717-p1:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1717-p1:p1",
+        "lesson-1717-p1:p2",
+        "lesson-1717-p1:p3",
+        "lesson-1717-p1:p4",
+        "lesson-1717-p1:p5",
+        "lesson-1717-p1:p6",
+        "lesson-1717-p1:p7",
+        "lesson-1717-p1:p8",
+        "lesson-1717-p1:p9",
+        "lesson-1717-p1:p10",
+        "lesson-1717-p1:p11",
+        "lesson-1717-p1:p12",
+        "lesson-1717-p1:p13",
+        "lesson-1717-p1:p14"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1717-p1:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1717-p1:p1",
+        "lesson-1717-p1:p2",
+        "lesson-1717-p1:p3",
+        "lesson-1717-p1:p4",
+        "lesson-1717-p1:p5",
+        "lesson-1717-p1:p6",
+        "lesson-1717-p1:p7",
+        "lesson-1717-p1:p8",
+        "lesson-1717-p1:p9",
+        "lesson-1717-p1:p10",
+        "lesson-1717-p1:p11",
+        "lesson-1717-p1:p12",
+        "lesson-1717-p1:p13",
+        "lesson-1717-p1:p14"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1717-p1:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1717-p1:p1",
+        "lesson-1717-p1:p2",
+        "lesson-1717-p1:p3",
+        "lesson-1717-p1:p4",
+        "lesson-1717-p1:p5",
+        "lesson-1717-p1:p6",
+        "lesson-1717-p1:p7",
+        "lesson-1717-p1:p8",
+        "lesson-1717-p1:p9",
+        "lesson-1717-p1:p10",
+        "lesson-1717-p1:p11",
+        "lesson-1717-p1:p12",
+        "lesson-1717-p1:p13",
+        "lesson-1717-p1:p14"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1717-p1:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1717-p1:p1",
+        "lesson-1717-p1:p2",
+        "lesson-1717-p1:p3",
+        "lesson-1717-p1:p4",
+        "lesson-1717-p1:p5",
+        "lesson-1717-p1:p6",
+        "lesson-1717-p1:p7",
+        "lesson-1717-p1:p8",
+        "lesson-1717-p1:p9",
+        "lesson-1717-p1:p10",
+        "lesson-1717-p1:p11",
+        "lesson-1717-p1:p12",
+        "lesson-1717-p1:p13",
+        "lesson-1717-p1:p14"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1717-p1:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1717-p1:p1",
+        "lesson-1717-p1:p2",
+        "lesson-1717-p1:p3",
+        "lesson-1717-p1:p4",
+        "lesson-1717-p1:p5",
+        "lesson-1717-p1:p6",
+        "lesson-1717-p1:p7",
+        "lesson-1717-p1:p8",
+        "lesson-1717-p1:p9",
+        "lesson-1717-p1:p10",
+        "lesson-1717-p1:p11",
+        "lesson-1717-p1:p12",
+        "lesson-1717-p1:p13",
+        "lesson-1717-p1:p14"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1717-p1:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1717-p1:p1",
+        "lesson-1717-p1:p2",
+        "lesson-1717-p1:p3",
+        "lesson-1717-p1:p4",
+        "lesson-1717-p1:p5",
+        "lesson-1717-p1:p6",
+        "lesson-1717-p1:p7",
+        "lesson-1717-p1:p8",
+        "lesson-1717-p1:p9",
+        "lesson-1717-p1:p10",
+        "lesson-1717-p1:p11",
+        "lesson-1717-p1:p12",
+        "lesson-1717-p1:p13",
+        "lesson-1717-p1:p14"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "legacy:effect:lesson-1717-p1:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1717-p1:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1717-p1:interaction:contextWords",
+        "resourceVersion": "sha256:2498318fe43e12ce06743a384ff982004241350e81b74c5870c1aef80a5c8be6",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1717-p1:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1717-p1:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1717-p1:interaction:revision",
+        "resourceVersion": "sha256:94dfa815e34205fb4c7933497abeddcfc81e1a7fcd0fc1a45125e18c219dd4fc",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1717-p1:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1717-p1:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1717-p1:interaction:structure",
+        "resourceVersion": "sha256:5aa8f7800d2fe751c7579e7c55788cfc88afa6ac73cecb8de20fd0c9f05aa3a6",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1717-p1:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1717-p1:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1717-p1:interaction:evaluation",
+        "resourceVersion": "sha256:a378cebe36eedf03c9d49d759c458cee6dced1c21b200f03de5d3f085d156755",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1717-p1:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1717-p1:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1717-p1:interaction:authorQuestion",
+        "resourceVersion": "sha256:391952403f9ed8d04700f8cd2962a3332640bced9a421fde990a987831c0f8b3",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    }
+  ],
+  "vocabulary": [],
+  "legacy": {
+    "lessonId": "lesson-1717-p1",
+    "title": "故都的秋",
+    "mode": "modern-prose",
+    "legacyTracks": [
+      "context",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "初讀評議",
+        "",
+        10
+      ],
+      [
+        "read",
+        "通讀正文",
+        "",
+        10
+      ],
+      [
+        "revision",
+        "字句之改",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "論證骨架",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "觀點評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "叩問作者",
+        "",
+        10
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1717-p1:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1717-p1:interaction:contextWords",
+        "resourceVersion": "sha256:2498318fe43e12ce06743a384ff982004241350e81b74c5870c1aef80a5c8be6",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1717-p1:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1717-p1:interaction:revision",
+        "resourceVersion": "sha256:94dfa815e34205fb4c7933497abeddcfc81e1a7fcd0fc1a45125e18c219dd4fc",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1717-p1:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1717-p1:interaction:structure",
+        "resourceVersion": "sha256:5aa8f7800d2fe751c7579e7c55788cfc88afa6ac73cecb8de20fd0c9f05aa3a6",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1717-p1:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1717-p1:interaction:evaluation",
+        "resourceVersion": "sha256:a378cebe36eedf03c9d49d759c458cee6dced1c21b200f03de5d3f085d156755",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1717-p1:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1717-p1:interaction:authorQuestion",
+        "resourceVersion": "sha256:391952403f9ed8d04700f8cd2962a3332640bced9a421fde990a987831c0f8b3",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1717-p1",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1717-p1:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1717-p1:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1717-p1:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1717-p1",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1717-p1:interaction:contextWords",
+        "completionKey": "effect:lesson-1717-p1:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1717-p1:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1717-p1",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1717-p1:interaction:structure",
+        "completionKey": "effect:lesson-1717-p1:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1717-p1:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1717-p1",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1717-p1:interaction:revision",
+        "completionKey": "effect:lesson-1717-p1:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1717-p1:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1717-p1:interaction:contextWords",
+        "sourceVersion": "sha256:2498318fe43e12ce06743a384ff982004241350e81b74c5870c1aef80a5c8be6",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1717-p1:interaction:revision",
+        "sourceVersion": "sha256:94dfa815e34205fb4c7933497abeddcfc81e1a7fcd0fc1a45125e18c219dd4fc",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1717-p1:interaction:structure",
+        "sourceVersion": "sha256:5aa8f7800d2fe751c7579e7c55788cfc88afa6ac73cecb8de20fd0c9f05aa3a6",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1717-p1:interaction:evaluation",
+        "sourceVersion": "sha256:a378cebe36eedf03c9d49d759c458cee6dced1c21b200f03de5d3f085d156755",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1717-p1:interaction:authorQuestion",
+        "sourceVersion": "sha256:391952403f9ed8d04700f8cd2962a3332640bced9a421fde990a987831c0f8b3",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1717-p1:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1717-p1:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1717-p1:interaction:contextWords",
+        "completionKey": "effect:lesson-1717-p1:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1717-p1:interaction:structure",
+        "completionKey": "effect:lesson-1717-p1:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1717-p1:interaction:revision",
+        "completionKey": "effect:lesson-1717-p1:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [],
+    "sourceLesson": "data/lessons/lesson-1717-p1.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 5,
+        "formativeCount": 4,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-0a55350b6939237fd41d",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [],
+  "guidance": [],
+  "media": [],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1717-p1.json",
+    "lessonSha256": "24bce7117f668e51138bbbfc33d931d2c20b9b1f7b092dd488d1f81e2f1281d1",
+    "reader": "data/reader-documents/lesson-1717-p1.json",
+    "readerSha256": "8f1a1dd484b0def14c4ca5d6ec2608a190a9e523306bc4b4343d05a5ffe90496",
+    "sourcePostId": "11151-1",
+    "sourcePostNumber": 1,
+    "blockCount": 14,
+    "annotationCount": 19,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 5,
+      "formativeCount": 4,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

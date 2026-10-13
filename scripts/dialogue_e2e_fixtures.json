@@ -1,0 +1,570 @@
+{
+  "schemaVersion": 1,
+  "operation": "yw-e2e-real-dialogue-01a132c3",
+  "dataClass": "synthetic-authored-student-answers-no-real-student-records",
+  "status": "offline-prepared-not-executed",
+  "scope": "ordinary student-visible /api/dialogue/v1 only; no calibration endpoint, model proposal injection, direct score writes or assumed outcomes; unchanged source evaluators may save new synthetic answer scores",
+  "lessons": {
+    "lesson-1717-p2": {
+      "anchors": [
+        {
+          "passageId": "lesson-1717-p2:p2",
+          "quote": "这几天心里颇不宁静。"
+        },
+        {
+          "passageId": "lesson-1717-p2:p4",
+          "quote": "我且受用这无边的荷香月色好了。"
+        },
+        {
+          "passageId": "lesson-1717-p2:p5",
+          "quote": "仿佛远处高楼上渺茫的歌声似的。"
+        },
+        {
+          "passageId": "lesson-1717-p2:p7",
+          "quote": "但热闹是它们的，我什么也没有。"
+        },
+        {
+          "passageId": "lesson-1717-p2:p13",
+          "quote": "这令我到底惦着江南了。"
+        }
+      ],
+      "formal": {
+        "contextWords": {
+          "words": "幽静、自由、隔膜。初讀「我且受用这无边的荷香月色好了」，我以為獨處已使敘述者徹底恢復平靜；但「这几天心里颇不宁静」與後面的「我什么也没有」讓我疑惑這份自由能持續多久。"
+        },
+        "revision": {
+          "original": "我且受用这无边的荷香月色好了。",
+          "action": "刪掉「且」，比較暫時享受與確定解脫的差別。",
+          "revised": "我受用这无边的荷香月色好了。",
+          "reason": "原句的「且」讓享受帶有暫時擱置煩惱的意味；刪掉後語氣更肯定，容易誤以為不寧靜已消失。後文「但热闹是它们的，我什么也没有」顯出這份自由並不穩固，原句因此比改句更能承接心情的波折。"
+        },
+        "structure": {
+          "reason": "文章以夜遊的行蹤串起心情變化：開頭「这几天心里颇不宁静」促使出門，中段「我且受用这无边的荷香月色好了」寫短暫超脫，蝉蛙之聲後卻說「但热闹是它们的，我什么也没有」。再由採蓮想像到「这令我到底惦着江南了」並回到家門。行蹤形成環形結構，情绪却没有简单回到安宁；景物描写与感情推进相互牵动。"
+        },
+        "authorQuestion": {
+          "answer": "您寫「但热闹是它们的，我什么也没有」，是否意味獨處必然失敗？我不這樣看：「我且受用这无边的荷香月色好了」承認有限的休息仍有價值。我認同人在壓力中需要暫停，但不把夜遊當作解決所有現實問題的辦法。今天離開手機去散步也可能讓人重新觀察環境，回來仍需面對任務。文本能支持暫時調節，不能據此推定您的某一具體政治心事。"
+        }
+      },
+      "dialogue": {
+        "context": "初讀我以為景美就等於心情已平復；「这几天心里颇不宁静」和「但热闹是它们的，我什么也没有」卻使我不敢把這篇只讀成快樂的夜遊。我想追問景色能讓人暫時自由到甚麼程度。",
+        "transfer": "若原創閱讀題問「歌聲」比喻荷香的作用，我會先指出「微风过处，送来缕缕清香，仿佛远处高楼上渺茫的歌声似的」把嗅覺轉成聽覺，突出香氣隱約、斷續、似有若無；再聯繫「我且受用」說這種感受提供短暫慰藉，而非宣告煩惱消失。遷移到描寫雨後草木時，也須說明另一感官如何呈現強弱節奏，不能只報「通感」。這是原創練習，不是假稱某年真題。",
+        "shangyou": "我最初把「自由」理解為夜遊已徹底消除不寧靜，現在把它理解成有限的喘息。「我且受用这无边的荷香月色好了」中的「且」提示暫時；「但热闹是它们的，我什么也没有」又讓距離感回來。用荷香比遠處歌聲，使感覺若有若無；首尾出門歸家串起這種波折。做閱讀題時我會先解釋字句，再比較兩處證據及表達效果。我認同暫時休息有價值，也質疑把美景當作現實困境的答案；文章沒有交代全部原因，我保留這份不確定，不把敘述者的感覺編成作者生平。"
+      },
+      "rating": 82,
+      "ratingReason": "我喜歡細緻的感官描寫，但更在意文章沒有強迫人立即變得快樂。",
+      "vocabulary": {},
+      "language": {},
+      "title": "荷塘月色",
+      "baselineCurriculumVersion": "yw-dialogue-5b979adeb1db5ee89f62",
+      "sourcePins": {
+        "readerSha256": "65bb0a4e779895bc9e8e6f12e36e868a5f2fa8ca74ea6a677c253ef05ff772c3",
+        "formal": [
+          [
+            "legacy:effect:lesson-1717-p2:interaction:contextWords",
+            "sha256:72c0a499e0b851ab0f4f2feefd735f8a3c2e1b4a182cca2ec1d351dd63f3b0df"
+          ],
+          [
+            "legacy:effect:lesson-1717-p2:interaction:revision",
+            "sha256:01866323c6579ac3bc41d7ef46e86bb5225e58ae30185d323b83c580fda39706"
+          ],
+          [
+            "legacy:effect:lesson-1717-p2:interaction:structure",
+            "sha256:efd71f2d0aa36a0ce40a83346eb217d9f62e8d3ff0e9f8e26896d690d76068a7"
+          ],
+          [
+            "legacy:effect:lesson-1717-p2:interaction:evaluation",
+            "sha256:c975bc7c0f946b7ba54cee87614c445e228bbbacd341a56f0c70e92786fd0822"
+          ],
+          [
+            "legacy:effect:lesson-1717-p2:interaction:authorQuestion",
+            "sha256:2d64def5a20e541e0ecfa6f0ce95765d1febfe565057a663fbe7792a9c6f19d8"
+          ]
+        ],
+        "objectiveIds": [
+          "lesson-1717-p2:context",
+          "lesson-1717-p2:read",
+          "lesson-1717-p2:revision",
+          "lesson-1717-p2:structure",
+          "lesson-1717-p2:evaluation",
+          "lesson-1717-p2:authorQuestion",
+          "lesson-1717-p2:transfer",
+          "lesson-1717-p2:shangyou",
+          "legacy:effect:lesson-1717-p2:interaction:contextWords",
+          "legacy:effect:lesson-1717-p2:interaction:revision",
+          "legacy:effect:lesson-1717-p2:interaction:structure",
+          "legacy:effect:lesson-1717-p2:interaction:evaluation",
+          "legacy:effect:lesson-1717-p2:interaction:authorQuestion"
+        ],
+        "curriculumVersion": "yw-dialogue-317d4d31b2ab0181cd8e",
+        "sourceDigest": "7a69b7fe66d5731d67a3fbe39fe79295a44316a48fed1d2ccd8f79085cbfc51a"
+      }
+    },
+    "lesson-1711-p1": {
+      "anchors": [
+        {
+          "passageId": "lesson-1711-p1:p1",
+          "quote": "学不可以已"
+        },
+        {
+          "passageId": "lesson-1711-p1:p1",
+          "quote": "顺风而呼，声非加疾也，而闻者彰"
+        },
+        {
+          "passageId": "lesson-1711-p1:p1",
+          "quote": "君子生非异也，善假于物也"
+        },
+        {
+          "passageId": "lesson-1711-p1:p1",
+          "quote": "非能水也，而绝江河"
+        },
+        {
+          "passageId": "lesson-1711-p1:p1",
+          "quote": "蚓无爪牙之利，筋骨之强"
+        },
+        {
+          "passageId": "lesson-1711-p1:p1",
+          "quote": "锲而不舍，金石可镂"
+        }
+      ],
+      "firstRead": {
+        "marks": [
+          {
+            "selectedText": "学不可以已",
+            "guess": "我猜「已」與結束有關，暫時不確定是已經还是停止。",
+            "correction": "對照註釋後理解「已」為停止：學習不可中止，不是說學習已經完成。",
+            "paragraphKey": "cfrp:lesson-1711-p1:b8857b89960c7dd4:01",
+            "startOffset": 3,
+            "endOffset": 8
+          },
+          {
+            "selectedText": "善假于物也",
+            "guess": "我先猜「假」與利用外物有關，但不確定是否指虛假的東西。",
+            "correction": "「假」是借助；前面的車馬、舟楫能補足自身能力，外物並非假的物品。",
+            "paragraphKey": "cfrp:lesson-1711-p1:b8857b89960c7dd4:01",
+            "startOffset": 166,
+            "endOffset": 171
+          },
+          {
+            "selectedText": "用心一也",
+            "guess": "我猜與只用一顆心有关，尚不能說清是數量還是專注。",
+            "correction": "「一」說心思專一，與蟹的「用心躁也」相對；蚓沒有強健肢體仍能取得所需。",
+            "paragraphKey": "cfrp:lesson-1711-p1:b8857b89960c7dd4:01",
+            "startOffset": 269,
+            "endOffset": 273
+          }
+        ],
+        "summary": "我初讀抓到學習不能停止，但一度以為反覆舉例只是要求更用力；對「假」與「一」的理解仍不確定。",
+        "textVersionId": "cfr-lesson-1711-p1-29fb3c127104daa7",
+        "textDigest": "sha256:29fb3c127104daa7c65a634b0307136ad1c51602f8ac87491a76fdfea2695d2d"
+      },
+      "formal": {
+        "structure": {
+          "reason": "先用「青，取之于蓝，而青于蓝」等比喻說學習能改變、提升自身，再以車馬舟楫說「君子生非异也，善假于物也」，強調借助條件。最後「锲而舍之，朽木不折；锲而不舍，金石可镂」以對比說持續，蚓與蟹又對照專一與浮躁。例子不是並列堆砌：由學習的作用到方法，再到積累與態度，一起支撐「学不可以已」。"
+        },
+        "authorQuestion": {
+          "answer": "您說「君子生非异也，善假于物也」，是否任何外部工具都必然促進學習？我贊同能力不只由天性決定，也受方法影響；但舟楫需要能掌握方向，今日直接抄搜尋或AI答案未必等於會用工具。我會先獨立解釋，再用工具比較證據，這才與「博学而日参省乎己」的自省呼應。文章支持善用条件，不替不加辨別的依賴背書。"
+        }
+      },
+      "dialogue": {
+        "firstRead": "初讀我以為「学不可以已」只是勸人更用力，對「假」「一」有所疑惑。讀過註釋後，我注意到「君子生非异也，善假于物也」把方法與條件放進論證，而「用心一也」又補上專注；這不是靠苦撐就能概括的。",
+        "transfer": "若原創論證題要求比較兩組比喻，我會把「假舟楫者，非能水也，而绝江河」還原為借工具補能力，把「锲而不舍，金石可镂」還原為持续行動產生成果；兩者分別回答方法與態度，不能只列「比喻論證」。遷移到檢索資料，工具擴大材料範圍，但仍須逐日核對與自省；只複製結果並未證明自己理解。",
+        "shangyou": "我的初讀只剩下「要努力」，現在理解文章把可改變性、借助外物、積累與專注結合起來。「君子生非异也，善假于物也」讓我不再用天賦解釋一切；「非能水也，而绝江河」的水是游泳的動作，说明借工具可補能力。對比「锲而舍之」與「锲而不舍」後，我學會說清不同例子的論證職責。遇到新閱讀題，我會先還原句意，再把例子連回主張。我認同善用工具與自省，但仍追問工具何時反而遮蔽理解；不能用幾個成功比喻證明所有人的学习条件完全相同。"
+      },
+      "rating": 88,
+      "ratingReason": "比喻讓學習的方法容易理解，但我仍想討論學習條件的差異。",
+      "vocabulary": {
+        "lesson-1711-p1:v01": {
+          "answer": "「勸」在題目中是鼓勵學習，不是勸阻別人。原題對應「劝善惩恶，社会之本」：鼓勵善行。正文以「学不可以已」開篇，後面反覆說學習的益處，正是在推動人去學。",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:v02": {
+          "answer": "「已」在「学不可以已」中指停止，是不可以後面的動作；代回去就是學習不可停止。若讀成副詞已經，後面缺少相應動作，也破壞了持續學習的勸告。",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:v03": {
+          "answer": "「暴」讀 pù，通「曝」，是曝曬、晒乾。「虽有槁暴，不复挺者」說即使木頭乾枯曬乾，也不再恢復挺直，因為加工已改變形狀；不是 bào 的暴烈。",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:v04": {
+          "answer": "「知明」的知通「智」，意思是智慧明達。原題通假類型對應「旦日不可不蚤自来谢项王」，其中蚤通早；不能因字形相同就把知在各處都判為通假，要看與明、行無過的搭配。",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:v05": {
+          "answer": "「假」是憑借、利用。車馬、舟楫是所借的條件；人本來沒有利足或游泳本領，仍能到遠方、渡過江河，因此不是虛構或放假。",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:v06": {
+          "answer": "「疾」在「声非加疾也」指聲音更強勁，不是生病或痛恨。原題「疾风知劲草」的疾也說風強；順風讓別人聽得清楚，並不意味呼喊者的聲量真的加大。",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:v07": {
+          "answer": "「绝江河」就是橫渡江河，江河是渡過的對象。前面說假舟楫，所以應理解成借船過河，不能改成斷絕河流。",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:v08": {
+          "answer": "「生」通「性」，說人的天性。「君子生非异也」不是說出生地相同，而是先否定君子有不同天性，再用「善假于物」解释表现差异。",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:v09": {
+          "answer": "「风雨兴焉」的焉包含「於此」，即從積土成山的地方興起。原題問不同用法時應選「圣心备焉」：那個焉收束語氣，不是另一處地點。要先代回句意，不能一概說成於此。",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:v10": {
+          "answer": "「爪牙」是爪子和牙齒，指能幫動物活動取食的身體條件；「蚓无爪牙之利」说它没有锋利爪牙，不能用今義壞人的幫兇解釋蚯蚓。",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:v11": {
+          "answer": "「躁」是心思浮動、不專一，與「用心一也」相對。蟹有六跪二螯卻找不到自造的住處，作者用這個反差說明不專注的問題，不只是脾氣急。",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:v12": {
+          "answer": "「锲」是刻，因為後面對舉朽木、金石和「可镂」，都圍繞持續雕刻。不是放棄；是否放棄由後面的舍或不舍表達。",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        }
+      },
+      "language": {
+        "lesson-1711-p1:language-er": {
+          "answer": "「顺风而呼」的而把借風的方式與呼喊相連，並不是先順風完才做另一件事；「声非加疾也，而闻者彰」則把聲量未增與聽者更清楚相對照。「博学而日参省乎己」在廣學上又加每日自省，意思有所推進。要比較兩邊成分，不能每個而都譯但是。",
+          "itemVersion": "yw-language-122753d3067f12088b3e",
+          "requiredCalibration": "accepted in deployed server curriculum for this exact item/source/version; independent evidence receipt retained",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:language-yu": {
+          "answer": "「青，取之于蓝」指青色從藍草取得，于引出來源；「而青于蓝」說成品顏色比藍草更深，于引出比較對象。若都譯成在，就既說不清從哪裡來，也失去由學習而提升的對比。",
+          "itemVersion": "yw-language-1188333bfbdca4576eb2",
+          "requiredCalibration": "accepted in deployed server curriculum for this exact item/source/version; independent evidence receipt retained",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:grammar-water": {
+          "answer": "「非能水也」中的水在能後面表示游泳這個動作。借助舟楫的人未必會游泳，仍能「绝江河」，說明工具能擴展能力；若把水當成喝水的液體，前後就不構成這組對照。",
+          "itemVersion": "yw-language-091667b2a67ffd030406",
+          "requiredCalibration": "accepted in deployed server curriculum for this exact item/source/version; independent evidence receipt retained",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:grammar-one": {
+          "answer": "「用心一也」說蚓專心，不是在數有幾顆心。「上食埃土，下饮黄泉」是前面的表現，與蟹的「用心躁也」形成對照；因此要保留專一與浮躁的關係，不能只報活用名詞。",
+          "itemVersion": "yw-language-264ecdc8e336d1cd76f2",
+          "requiredCalibration": "accepted in deployed server curriculum for this exact item/source/version; independent evidence receipt retained",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:grammar-wuyi": {
+          "answer": "「不积跬步，无以至千里」是沒有累積小步，就缺少到千里的條件或辦法；不是不必走到千里。前句否定積累，後句說結果無由達成，所以無以不能改作不用。",
+          "itemVersion": "yw-language-84f1a722e9a48f41ba3b",
+          "requiredCalibration": "accepted in deployed server curriculum for this exact item/source/version; independent evidence receipt retained",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        },
+        "lesson-1711-p1:grammar-modifier": {
+          "answer": "「蚓无爪牙之利，筋骨之强」可以還原成蚓沒有鋒利的爪牙、強健的筋骨：利修飾爪牙，強修飾筋骨。它仍能上下取食，與蟹外在條件较好却浮躁相对；只說定語後置不能交代修飾誰和對比甚麼。",
+          "itemVersion": "yw-language-001756db9acbca59b674",
+          "requiredCalibration": "accepted in deployed server curriculum for this exact item/source/version; independent evidence receipt retained",
+          "sourcePassageId": "lesson-1711-p1:p1"
+        }
+      },
+      "title": "劝学",
+      "baselineCurriculumVersion": "yw-dialogue-da6f21573655b1a4d310",
+      "sourcePins": {
+        "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+        "formal": [
+          [
+            "legacy:effect:lesson-1711-p1:interaction:structure",
+            "sha256:dbc29cd9660ec76604569abcc64c366e175c703042b491897312496e753afe0c"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:interaction:evaluation",
+            "sha256:4a7df07ca9182c2885e204f32de1ab4f93b9cda8322812ee22bdea5c1b1cab53"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:interaction:authorQuestion",
+            "sha256:b4dad51b28c6f35c1afe0a92123613b4ee2821b94efa8491cb38701cc556cca6"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v01",
+            "sha256:44db3ded73a000c1c5d30290e9f22496da39148f4e4fe122002fff226665a81e"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v02",
+            "sha256:9e8b0f8cbcb1f0d0c7260ffccfdd3fdc8fd70a532ba1dadef79701ddf4b67e32"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v03",
+            "sha256:2d778730799f3f04ddc1db7cf23f789fd929f124fde07442a98afa05d7f82aed"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v04",
+            "sha256:7bc5cf6ef3eb3e1b4ced3d18b634efd02dde699224b3af129eeb33d03b9cbf05"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v05",
+            "sha256:54a2bec798f54320ceb7055a74e6378fcefaaaad525ee5f1cb5660dc36a80459"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v06",
+            "sha256:5d335884d30a306933428055a34d6328670ac4df22ac73f1cdac84b0a4f6d18e"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v07",
+            "sha256:176ead944603cb6bec8ee7ca94b6012d4d57156aff9bcee26dedc6d11e53d5ba"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v08",
+            "sha256:77e00c0b51d0fd17f9603bb287262e37225431889c00881c6c8ab0ec59a51c53"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v09",
+            "sha256:a578e4f250cd9670731bbd96db3094eabe113aa95c9b6bcb6ca1938d8dd97e1a"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v10",
+            "sha256:5e2217f65141b87feb90762afeab85845e6efaf8becd6aeae46d5de47d9f1b59"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v11",
+            "sha256:f547692fada75750880a6dfb13ebd1c7e266ce5415c3c7ff81f626d770bae415"
+          ],
+          [
+            "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v12",
+            "sha256:c122611444071015293e85c8ba91d191efc04bd7047b1b8a1e806ab6d8bd2726"
+          ]
+        ],
+        "objectiveIds": [
+          "lesson-1711-p1:firstRead",
+          "lesson-1711-p1:structure",
+          "lesson-1711-p1:evaluation",
+          "lesson-1711-p1:authorQuestion",
+          "lesson-1711-p1:transfer",
+          "lesson-1711-p1:shangyou",
+          "lesson-1711-p1:v01",
+          "lesson-1711-p1:v02",
+          "lesson-1711-p1:v03",
+          "lesson-1711-p1:v04",
+          "lesson-1711-p1:v05",
+          "lesson-1711-p1:v06",
+          "lesson-1711-p1:v07",
+          "lesson-1711-p1:v08",
+          "lesson-1711-p1:v09",
+          "lesson-1711-p1:v10",
+          "lesson-1711-p1:v11",
+          "lesson-1711-p1:v12",
+          "legacy:effect:lesson-1711-p1:interaction:structure",
+          "legacy:effect:lesson-1711-p1:interaction:evaluation",
+          "legacy:effect:lesson-1711-p1:interaction:authorQuestion",
+          "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v01",
+          "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v02",
+          "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v03",
+          "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v04",
+          "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v05",
+          "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v06",
+          "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v07",
+          "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v08",
+          "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v09",
+          "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v10",
+          "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v11",
+          "legacy:effect:lesson-1711-p1:vocab:lesson-1711-p1:v12",
+          "lesson-1711-p1:language-er",
+          "lesson-1711-p1:language-yu",
+          "lesson-1711-p1:grammar-water",
+          "lesson-1711-p1:grammar-one",
+          "lesson-1711-p1:grammar-wuyi",
+          "lesson-1711-p1:grammar-modifier"
+        ],
+        "curriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
+        "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd"
+      }
+    },
+    "lesson-1498": {
+      "anchors": [
+        {
+          "passageId": "lesson-1498:p1",
+          "quote": "海上明月共潮生"
+        },
+        {
+          "passageId": "lesson-1498:p6",
+          "quote": "江畔何人初见月？江月何年初照人？"
+        },
+        {
+          "passageId": "lesson-1498:p7",
+          "quote": "人生代代无穷已"
+        },
+        {
+          "passageId": "lesson-1498:p8",
+          "quote": "不知江月待何人，但见长江送流水"
+        },
+        {
+          "passageId": "lesson-1498:p12",
+          "quote": "玉户帘中卷不去，捣衣砧上拂还来"
+        },
+        {
+          "passageId": "lesson-1498:p13",
+          "quote": "此时相望不相闻，愿逐月华流照君"
+        },
+        {
+          "passageId": "lesson-1498:p18",
+          "quote": "落月摇情满江树"
+        }
+      ],
+      "formal": {
+        "contextWords": {
+          "words": "澄明、追问、离愁。初讀「海上明月共潮生」，我以為這首詩只是讚美共同看到的春夜；讀到「此时相望不相闻」才疑惑，同一月亮為何既連起人，又不能讓人團聚。"
+        },
+        "revision": {
+          "original": "落月摇情满江树。",
+          "action": "把「搖」換成「留」，比較牽動與停留的效果。",
+          "revised": "落月留情满江树。",
+          "reason": "原句「摇」把落月光影與情緒波動連在一起，離情像在江樹間擴散；「留」偏於靜止保存，不能同樣呈現牽動。對照「江潭落月复西斜」，月在移動、夜將結束，人的感情也未停止，保留搖更能結合動態景象與內心。"
+        },
+        "structure": {
+          "reason": "開篇「海上明月共潮生」把月置於開闊江海，接著「江畔何人初见月？江月何年初照人？」由景色轉向人與時間。到「此时相望不相闻」轉入離人兩地相思，最後「落月摇情满江树」又把情感放回月景。月的升落贯穿景、理、情，各部分並非三段互不相干的材料。"
+        },
+        "authorQuestion": {
+          "answer": "詩中「此时相望不相闻，愿逐月华流照君」使我想到：共同看見月亮是否足以消除孤獨？我認同共享景象能寄託關懷，但「不相聞」保留了不能交流的限制。今天看同一張照片或同時上線也不等於彼此理解，還需真正回應。我不把樓上離人直接當成作者本人，這是詩中安排的視角。"
+        },
+        "wordCreation": {
+          "word": "逐",
+          "creation": "我逐著晚風走向渡口，\n把沒說完的話放進月色，\n仍盼一封真正回來的信。\n「逐」在這裡是追隨，不是驅趕；我借動作寫想接近遠方的人，也保留等待回應的距離。"
+        }
+      },
+      "dialogue": {
+        "context": "我初讀把「海上明月共潮生」的共理解成所有人因此相聚；但「此时相望不相闻」否定了這種簡單等同。月能共享，聲音和人卻未必相通，這讓我想追問共同景象與個人孤獨的關係。",
+        "transfer": "若原創題要求解釋「月」如何串聯全詩，我會連接「海上明月共潮生」的景象、「江月何年初照人」的時間追問與「此时相望不相闻」的兩地相思，再以「落月摇情满江树」收束。每處都說明功能，不能只答借景抒情。遷移到其他詩歌時，我會檢查同一意象在不同位置是否改變作用，而不把月一概譯成思鄉。",
+        "shangyou": "初讀我把「共」當作團聚的保證，現在發現共同月色與個人阻隔可以並存。「此时相望不相闻」限制了交流，而「愿逐月华流照君」仍保留追隨與祝願；逐是追隨，不是驅趕。「玉户帘中卷不去，捣衣砧上拂还来」省略的月光將不能排遣的相思寫得可感，結尾「落月摇情满江树」又把情放回景中。我會用這種逐句比較的方法分析陌生詩，而不是套一個術語。我認同寄情景物的價值，也保留對它能否代替真實溝通的疑問；不把詩中離人直接認作作者生平。"
+      },
+      "rating": 91,
+      "ratingReason": "月亮在不同段落承擔不同作用，但相思也包含無法溝通的限制。",
+      "vocabulary": {
+        "lesson-1498:v03": {
+          "answer": "「人生代代无穷已」的已是停止；無窮已與代代相承合起來，說生命世代延續沒有止境。不是已經，否則句中沒有它應修飾的完成動作。",
+          "sourcePassageId": "lesson-1498:p7"
+        },
+        "lesson-1498:v04": {
+          "answer": "「青枫浦上不胜愁」的勝是承受，不勝就是難以承受過多愁緒，並非打敗憂愁。上一句白雲悠悠離去，轉入離人的哀愁，所以需保留感情的重量。",
+          "sourcePassageId": "lesson-1498:p9"
+        },
+        "lesson-1498:v05": {
+          "answer": "「可怜楼上月裴回」的可憐是可愛、動人；同義例句是「可怜九月初三夜，露似真珠月似弓」。這裡首先形容月色牽人，而非說月亮遭遇可悲的命運；下文再讓月光引發相思。",
+          "sourcePassageId": "lesson-1498:p11"
+        },
+        "lesson-1498:v06": {
+          "answer": "「愿逐月华流照君」的逐是追隨，說願自己的心意隨月光照到你那裡；月華是跟隨的對象。若讀成驅逐月光，便和願其照君相反。",
+          "sourcePassageId": "lesson-1498:p13"
+        },
+        "lesson-1498:v07": {
+          "answer": "「鱼龙潜跃水成文」的文通紋，是魚龍游動泛起的水紋。潛躍是動作，水面波紋是留下的樣子，不是魚在寫文字。",
+          "sourcePassageId": "lesson-1498:p14"
+        },
+        "lesson-1498:v08": {
+          "answer": "「落月摇情满江树」的搖是牽動、搅动離情；落月光輝與江樹相交，使抽象的思念有了搖曳可見的形狀。它承接月落和人未歸，不能把情理解成樹上真的掛著物件。",
+          "sourcePassageId": "lesson-1498:p18"
+        }
+      },
+      "language": {
+        "lesson-1498:language-he": {
+          "answer": "「江畔何人初见月」問最初見月的人，「江月何年初照人」問月初照人的時間；何修飾的名詞不同。兩句把眼前春夜擴展到人與月的久遠關係，再接「人生代代无穷已」，並非期待讀者查出一個確切姓名與年份。",
+          "itemVersion": "yw-language-627dc6f4d0b4aed28638",
+          "requiredCalibration": "accepted in deployed server curriculum for this exact item/source/version; independent evidence receipt retained",
+          "sourcePassageId": "lesson-1498:p6"
+        },
+        "lesson-1498:language-dan": {
+          "answer": "「不知江月待何人，但见长江送流水」的但表示只：不知道月在等誰，眼前能看見的只是流水。它限制可知、可見的範圍，不能不看句意便套作但是；對照也留出人面對時間的不確定。",
+          "itemVersion": "yw-language-35b872a75c1e71d07ec4",
+          "requiredCalibration": "accepted in deployed server curriculum for this exact item/source/version; independent evidence receipt retained",
+          "sourcePassageId": "lesson-1498:p8"
+        },
+        "lesson-1498:grammar-moon": {
+          "answer": "「玉户帘中卷不去，捣衣砧上拂还来」承接前面的月，卷不去、拂還來的是月光，不是簾子自己走來。以日常卷簾拂砧的動作寫月光無處不在，也讓相思難以排遣有了具體形象。",
+          "itemVersion": "yw-language-494b4393766eeae528f9",
+          "requiredCalibration": "accepted in deployed server curriculum for this exact item/source/version; independent evidence receipt retained",
+          "sourcePassageId": "lesson-1498:p12"
+        }
+      },
+      "title": "春江花月夜/张若虚",
+      "baselineCurriculumVersion": "yw-dialogue-0afa570f57cf958020b4",
+      "sourcePins": {
+        "readerSha256": "e865b8f73d9a4beb512f1f92e4fbedda6f2b5b82717d68142ab4b8e843bbee75",
+        "formal": [
+          [
+            "legacy:effect:lesson-1498:interaction:contextWords",
+            "sha256:816acc50d74aa9c4f4cc2217e7fb5e9e9ff378bdb4d70ad8533a06af2cef021a"
+          ],
+          [
+            "legacy:effect:lesson-1498:interaction:revision",
+            "sha256:15c6ae688778b3d27e6548d7b1cf56a011e02eaff3379b4d02b640a9b888d902"
+          ],
+          [
+            "legacy:effect:lesson-1498:interaction:structure",
+            "sha256:df5443229f5fffb89b325b5074e1ce386f6b9168403807d0e052968b56e3fb80"
+          ],
+          [
+            "legacy:effect:lesson-1498:interaction:evaluation",
+            "sha256:b1788f5438be31636074d0667f792fd16d8a1743ef6d3dccac5da2831f498723"
+          ],
+          [
+            "legacy:effect:lesson-1498:interaction:authorQuestion",
+            "sha256:5f4966f2eb3341d159ca62ea12ed06d4c2364b275b3e4659be46d4b319f82222"
+          ],
+          [
+            "legacy:effect:lesson-1498:vocab:lesson-1498:v03",
+            "sha256:4931f018a5a5ef01bcfc93541ccc1174514e7055db6b01b76d5a9d375991df68"
+          ],
+          [
+            "legacy:effect:lesson-1498:vocab:lesson-1498:v04",
+            "sha256:fc9e1be2e913f4e0ca3f1c30dcee06bbc53fdbcb04fb25de85a69401b2db40ba"
+          ],
+          [
+            "legacy:effect:lesson-1498:vocab:lesson-1498:v05",
+            "sha256:06c038b6e3ffb6e3dcfbe8af21b580c447de6ab65eb3a77e9a6ca10ed5fee5e4"
+          ],
+          [
+            "legacy:effect:lesson-1498:vocab:lesson-1498:v06",
+            "sha256:167ef21a9485d47a9e56a25c8fb5034a1940cb3059801c8483d26a7b4ca12296"
+          ],
+          [
+            "legacy:effect:lesson-1498:vocab:lesson-1498:v07",
+            "sha256:be107ee2110e398563f8a0ba3e523273ee245567e2255e2bef82bb31ce81cb33"
+          ],
+          [
+            "legacy:effect:lesson-1498:vocab:lesson-1498:v08",
+            "sha256:b5f8579039ece9428c84bc92ccfa8fbfb54ea9ad08a6dce5aafd99608c987e89"
+          ],
+          [
+            "legacy:effect:lesson-1498:interaction:wordCreation",
+            "sha256:f70957c4fdab30601cc7e12046983034af7832f1c55d3d8ae227657fcd73809f"
+          ]
+        ],
+        "objectiveIds": [
+          "lesson-1498:context",
+          "lesson-1498:read",
+          "lesson-1498:revision",
+          "lesson-1498:structure",
+          "lesson-1498:evaluation",
+          "lesson-1498:authorQuestion",
+          "lesson-1498:wordCreation",
+          "lesson-1498:transfer",
+          "lesson-1498:shangyou",
+          "lesson-1498:v03",
+          "lesson-1498:v04",
+          "lesson-1498:v05",
+          "lesson-1498:v06",
+          "lesson-1498:v07",
+          "lesson-1498:v08",
+          "legacy:effect:lesson-1498:interaction:contextWords",
+          "legacy:effect:lesson-1498:interaction:revision",
+          "legacy:effect:lesson-1498:interaction:structure",
+          "legacy:effect:lesson-1498:interaction:evaluation",
+          "legacy:effect:lesson-1498:interaction:authorQuestion",
+          "legacy:effect:lesson-1498:vocab:lesson-1498:v03",
+          "legacy:effect:lesson-1498:vocab:lesson-1498:v04",
+          "legacy:effect:lesson-1498:vocab:lesson-1498:v05",
+          "legacy:effect:lesson-1498:vocab:lesson-1498:v06",
+          "legacy:effect:lesson-1498:vocab:lesson-1498:v07",
+          "legacy:effect:lesson-1498:vocab:lesson-1498:v08",
+          "legacy:effect:lesson-1498:interaction:wordCreation",
+          "lesson-1498:language-he",
+          "lesson-1498:language-dan",
+          "lesson-1498:grammar-moon"
+        ],
+        "curriculumVersion": "yw-dialogue-38d5ca7cdcd81dc39614",
+        "sourceDigest": "965c5a403fc2f7a20b94ebc23aeafe582f0986b74446b237c2ca8ab374eca08d"
+      }
+    }
+  }
+}

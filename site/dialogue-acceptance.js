@@ -9,7 +9,7 @@ const PUBLIC_ASSETS = new Set([
   '/assets/dialogue-events.js', '/assets/dialogue-history.js',
   '/assets/dialogue-first-read.js', '/assets/classical-first-read.js',
   '/assets/textbook-pages.js', '/data/textbook-pages.v1.json',
-  '/data/classical-first-read/lesson-1711-p1.json',
+  '/dialogue-curriculum/index.json',
 ]);
 const rejection = (code, status) => new Response(JSON.stringify({code}), {
   status, headers: {'content-type':'application/json', 'cache-control':'private, no-store'},
@@ -48,12 +48,16 @@ export function acceptanceEnvironment(request, bindings, now = Date.now()) {
       return bindings.APIS_ACCEPTANCE.fetch(new Request(outgoing,{headers}));
     }},
     YW_DIALOGUE_ENABLED: 'true', YW_DIALOGUE_BUDGET_JSON: bindings.YW_DIALOGUE_BUDGET_JSON,
+    YW_CALIBRATION_AMENDMENT4_JSON: bindings.YW_CALIBRATION_AMENDMENT4_JSON,
+    YW_DIALOGUE_PROVIDER_ATTEMPTS: bindings.YW_DIALOGUE_PROVIDER_ATTEMPTS,
+    YW_E2E_AUTHORITY_JSON: bindings.YW_E2E_AUTHORITY_JSON,
     USER_CENTER_EVIDENCE: {
       resolveSession: (...args) => identity.resolveSession(...args),
       resolveNativeSession: (...args) => identity.resolveNativeSession(...args),
     },
   };
-  contexts.set(env, Object.freeze({origin: ACCEPTANCE_ORIGIN, userId:Number(userId), version, expires, transport:'service_binding_session'}));
+  contexts.set(env, Object.freeze({origin: ACCEPTANCE_ORIGIN, userId:Number(userId), version, databaseId,
+    activationDigest: bindings.YW_ACCEPTANCE_ACTIVATION_SHA256, expires, transport:'service_binding_session'}));
   return env;
 }
 
@@ -84,8 +88,20 @@ export function createAcceptanceWorker(worker) {
       }
       return worker.fetch(request, env, ctx);
     }
+    // Curriculum contains server-only answer keys. The normal worker returns
+    // the same sanitized projection here; never expose the raw asset binding.
+    if (['GET', 'HEAD'].includes(request.method)
+      && /^\/dialogue-curriculum\/lesson-[\w-]{1,60}\.json$/.test(url.pathname)) {
+      return worker.fetch(request, env, ctx);
+    }
+    const firstRead = url.pathname.match(/^\/data\/classical-first-read\/(lesson-[\w-]{1,60})\.json$/);
+    let registeredFirstRead = false;
+    if (firstRead && ['GET', 'HEAD'].includes(request.method)) {
+      const catalog = await env.ASSETS.fetch(new Request(ACCEPTANCE_ORIGIN+'/dialogue-curriculum/index.json'));
+      registeredFirstRead = catalog.ok && (await catalog.json()).lessons?.some(row=>row.lessonId===firstRead[1]);
+    }
     if (!['GET', 'HEAD'].includes(request.method)
-      || !(PUBLIC_ASSETS.has(url.pathname) || /^\/dialogue-curriculum\/lesson-(1717-p2|1711-p1|1498)\.json$/.test(url.pathname))) {
+      || !(PUBLIC_ASSETS.has(url.pathname) || registeredFirstRead)) {
       return rejection('not_found', 404);
     }
     // Pages serves extensionless HTML itself. Rewriting to .html redirects back

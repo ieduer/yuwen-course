@@ -616,7 +616,7 @@ test("recorded interaction completes only after a passing score", () => {
   assert.equal(interactionEvidenceDecision("unknown", 100).accepted, false);
 });
 
-test("formal interaction authority sends required-volume questions to local practice before network evaluation", () => {
+test("expanded formal authority includes required volumes while unknown controls remain local", () => {
   const authorityFunctions = [
     namedFunction("formalInteractionResourceKeys"),
     namedFunction("isFormalInteraction"),
@@ -630,8 +630,8 @@ test("formal interaction authority sends required-volume questions to local prac
     .map((item) => `${item.sourceId}\n${item.questionKind}`));
   assert.ok(resourceKeys instanceof Set);
   assert.deepEqual([...resourceKeys].sort(), [...expectedKeys].sort());
-  assert.equal(authority.isFormalInteraction(resourceKeys, "lesson-1727", "structure"), false);
-  assert.equal(authority.isFormalInteraction(resourceKeys, "lesson-1727", "authorQuestion"), false);
+  assert.equal(authority.isFormalInteraction(resourceKeys, "lesson-1727", "structure"), true);
+  assert.equal(authority.isFormalInteraction(resourceKeys, "lesson-1727", "authorQuestion"), true);
   assert.equal(authority.isFormalInteraction(resourceKeys, "lesson-1497", "structure"), true);
   assert.equal(authority.isFormalInteraction(resourceKeys, "lesson-1497", "authorQuestion"), true);
 
@@ -757,4 +757,102 @@ test("student lesson count and startup exclude hidden system records", () => {
   const appHash = createHash("sha256").update(source).digest("hex").slice(0, 16);
   assert.ok(indexHtml.includes(`assets/app.js?v=${appHash}`));
   assert.doesNotMatch(indexHtml, /assets\/app\.js\?v=20260811-(?:embed-scroll-layout-v4|student-units-v5)/);
+});
+
+test('scope expansion never auto-evaluates an unchanged saved local answer',async()=>{
+ const old={words:'寂靜、自由、惆悵',done:true,score:null,evidenceStatus:'local_practice',result:{verdict:'舊本機練習'}};
+ const progress={context:structuredClone(old)},state={current:{id:'lesson-1717-p2'}};let calls=0;
+ const deps={state,progressOwnerScope:'owner',interactionInput:()=>({words:old.words}),els:{checkStage:{querySelector:()=>null}},interactionSubmissionMode:()=> 'formal',lessonProgress:()=>progress,interactionInputSignature:JSON.stringify,toast:()=>{},fetch:()=>{calls++;throw Error('must not evaluate historical local work');}};
+ const submit=new Function(...Object.keys(deps),`async ${namedFunction('submitInteraction')};return submitInteraction;`)(...Object.values(deps));
+ await submit('contextWords',null,{silent:true});assert.equal(calls,0);assert.deepEqual(progress.context,old);
+});
+
+test('scope expansion preserves old self-rating and only records a newly changed rating',async()=>{
+ let posts=0;const harness=evaluationHarness(()=>{posts++;return {ok:true,status:200};});
+ const old={rating:60,reason:'理由',done:true,synced:false,evidenceStatus:'local_practice'};
+ harness.state.progress['lesson-1'].evaluation=structuredClone(old);
+ const same=await harness.saveEvaluation(60);assert.equal(same.reason,'historical_local_practice_preserved');assert.equal(posts,0);assert.deepEqual(harness.state.progress['lesson-1'].evaluation,old);
+ await harness.saveEvaluation(75);assert.equal(posts,1);assert.deepEqual(harness.state.progress['lesson-1'].evaluation.historicalPractice,[old]);
+});
+
+function localPracticeEditHarness(key, record, { pendingResponse = false } = {}) {
+  const lessonId = 'lesson-1717-p2', owner = 'practice-owner';
+  const progressKey = key === 'contextWords' ? 'context' : key;
+  const fieldKey = {contextWords:'words',authorQuestion:'answer',structure:'reason'}[key];
+  const localStorage = storage({[scopedUiStorageKey(PROGRESS_KEY, owner)]:JSON.stringify({[lessonId]:{[progressKey]:record}})});
+  const progress = makeProgressLoader(localStorage, owner)()[lessonId];
+  const state = {current:{id:lessonId},interactionRequestsInFlight:new Set(),pendingReplayAttempted:new Set()};
+  const fields = key === 'contextWords'
+    ? String(progress[progressKey].words).split('、').map((value,i)=>({value,dataset:{field:`context.word${i+1}`},isConnected:true,listeners:{}}))
+    : [{value:progress[progressKey][fieldKey],dataset:{field:`${progressKey}.${fieldKey}`},isConnected:true,listeners:{}}];
+  const button = {dataset:{aiCheck:key},isConnected:true,listeners:{}}, timers=[], requests=[], assessments=[];
+  const input = () => ({[fieldKey]:key==='contextWords'?fields.map(f=>f.value.trim()).filter(Boolean).join('、'):fields[0].value.trim()});
+  const deps = {
+    state,progressOwnerScope:owner,els:{checkStage:{querySelector:()=>null}},
+    $$:selector=>selector.includes('data-context-word')?(key==='contextWords'?fields:[]):selector.includes('data-ai-check')?(key==='contextWords'?[]:[button]):(key==='contextWords'?[]:fields),
+    listen:(element,type,handler)=>{element.listeners[type]=handler;},learningMutationOwnerResolved:()=>true,
+    lessonProgress:()=>progress,interactionInput:input,interactionSubmissionMode:()=> 'formal',toast:()=>{},
+    saveStoredProgress:()=>{localStorage.setItem(scopedUiStorageKey(PROGRESS_KEY,owner),JSON.stringify({[lessonId]:progress}));return true;},
+    window:{YwLearningEvidence:{mutationId:()=>`new-${key}-mutation`}},
+    setTimeout:(callback,delay)=>{const timer={callback,delay,cleared:false};timers.push(timer);return timer;},clearTimeout:timer=>{if(timer)timer.cleared=true;},
+    watchEvaluationStatus:async()=>({settle:()=>{}}),resumeDetailedRecords:()=>{},renderCheckStage:()=>{},
+    pendingReplayErrorIsRetryable:()=>false,pendingEvaluationRetryDelay:()=>0,
+    fetch:async(_url,options)=>{requests.push(JSON.parse(options.body));return {ok:true,status:pendingResponse?202:200,json:async()=>pendingResponse?{status:'pending',code:'learning_evaluation_pending',pendingId:'preserved-pending-id'}:{assessment:{score:88}}};},
+    applyInteractionAssessment:value=>{assessments.push(value);},
+  };
+  const functions = ['preserveLocalPracticeBeforeEdit','interactionInputSignature','interactionInputLength','interactionInputProblem','pendingInteractionInput','pendingInteractionMutation','interactionPendingMatches','interactionRequestKey'].map(namedFunction).join('\n');
+  const bindings = section(`  $$('[data-field="structure.reason"], [data-field="authorQuestion.answer"]'`, `  $$('[data-interest-slider]'`);
+  const controls = new Function(...Object.keys(deps),`${functions}\nasync ${namedFunction('submitInteraction')}\n${bindings}\nreturn {submit:()=>submitInteraction('${key}',null,{silent:true})};`)(...Object.values(deps));
+  return {progress,progressKey,requests,assessments,
+    change(value){if(key==='contextWords'){value.split('、').forEach((part,i)=>{fields[i].value=part;});fields[0].listeners.input();}else{fields[0].value=value;fields[0].listeners.input();}},
+    async send(){if(key==='contextWords'){for(const timer of timers.filter(t=>t.delay===720&&!t.cleared)){timer.cleared=true;timer.callback();}for(let i=0;i<12;i++)await Promise.resolve();}else await button.listeners.click();},
+    submit:controls.submit,
+    reloadRecord(){return makeProgressLoader(localStorage,owner)()[lessonId][progressKey];},
+  };
+}
+
+const practiceExamples = [
+  {key:'contextWords',field:'words',old:'寂靜、自由、惆悵',edited:'朦朧、孤獨、暫慰'},
+  {key:'authorQuestion',field:'answer',old:'荷塘能否消除作者這幾天心中的不寧靜？',edited:'我想問月光與流水的比喻如何改變眼前景象給人的感受？'},
+  {key:'structure',field:'reason',old:'文章開頭與結尾都回到家庭，顯示作者遊覽荷塘後仍未完全擺脫內心的不寧靜。',edited:'開頭的不寧靜和末尾回家的腳步互相呼應，中間對月色的描写只提供暫時的舒展而非徹底解脫。'},
+];
+const oldPractice = example => ({[example.field]:example.old,done:true,score:null,evidenceStatus:'local_practice',id:'old-local-id',createdAt:'2026-10-01T00:00:00Z',result:{verdict:'舊本機回饋',details:{retained:true}}});
+
+test('real input handlers preserve original local text and Send admits a changed answer for all three affected tasks',async()=>{
+  for(const example of practiceExamples){
+    const old=oldPractice(example),h=localPracticeEditHarness(example.key,old);
+    h.change(example.edited);
+    assert.deepEqual(h.progress[h.progressKey].localPracticeBaseline,old,example.key);
+    assert.deepEqual(h.reloadRecord().localPracticeBaseline,old,example.key);
+    assert.equal(h.requests.length,0,'typing must not synchronously evaluate');
+    await h.send();
+    assert.equal(h.requests.length,1,example.key);assert.deepEqual(h.requests[0].input,{[example.field]:example.edited});
+    assert.equal(h.assessments.length,1);assert.deepEqual(h.progress[h.progressKey].historicalPractice,[old]);
+    assert.equal(h.progress[h.progressKey].localPracticeBaseline,undefined);
+  }
+});
+
+test('unchanged and reverted local practice remains ungraded after input events and a storage reload',async()=>{
+  for(const example of practiceExamples){
+    const old=oldPractice(example),untouched=localPracticeEditHarness(example.key,old);
+    await untouched.submit();assert.equal(untouched.requests.length,0);assert.deepEqual(untouched.reloadRecord(),old);
+    const edited=localPracticeEditHarness(example.key,old);edited.change(example.edited);
+    const reloaded=localPracticeEditHarness(example.key,edited.reloadRecord());
+    assert.equal(reloaded.requests.length,0);reloaded.change(example.old);await reloaded.send();await reloaded.submit();
+    assert.equal(reloaded.requests.length,0,example.key);assert.deepEqual(reloaded.reloadRecord().localPracticeBaseline,old);
+    assert.equal(reloaded.progress[reloaded.progressKey].evidenceStatus,'local_practice');
+  }
+});
+
+test('changed drafts survive reload and a pending new assessment resumes its original input and mutation without duplicating history',async()=>{
+  for(const example of practiceExamples){
+    const old=oldPractice(example),editing=localPracticeEditHarness(example.key,old);editing.change(example.edited);
+    const reloaded=localPracticeEditHarness(example.key,editing.reloadRecord(),{pendingResponse:true});
+    assert.equal(reloaded.requests.length,0);await reloaded.submit();
+    assert.deepEqual(reloaded.progress[reloaded.progressKey].historicalPractice,[old]);
+    const resumed=localPracticeEditHarness(example.key,reloaded.reloadRecord());
+    assert.equal(resumed.requests.length,0);resumed.change(example.edited+'補充');await resumed.submit();
+    assert.equal(resumed.requests.length,1);assert.deepEqual(resumed.requests[0],reloaded.requests[0],example.key);
+    assert.deepEqual(resumed.progress[resumed.progressKey].historicalPractice,[old]);
+  }
 });

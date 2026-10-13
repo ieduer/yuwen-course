@@ -4,12 +4,14 @@ import {readFileSync,readdirSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {Log,LogLevel,Miniflare} from 'miniflare';
+import {bundleWorkerd} from './workerd-test-bundle.mjs';
 const ROOT=resolve(import.meta.dirname,'..');
+const foregroundBundle=await bundleWorkerd(resolve(ROOT,'site/_worker.js'));
+const schedulerBundle=await bundleWorkerd(resolve(ROOT,'scripts/fixtures/durable-scheduler-harness.js'));
 
 test('real workerd/D1 preserves a 202 submission across independent foreground and scheduler runtimes',async()=>{
   let attempts=0;const answer=JSON.stringify({score:85,verdict:'fixture verdict',strength:'fixture strength',gap:'fixture gap',nextQuestion:'fixture question'});
-  const common={compatibilityDate:'2026-05-12',modules:true,modulesRoot:ROOT,
-    modulesRules:[{type:'ESModule',include:['**/*.js']}],
+  const common={compatibilityDate:'2026-05-12',
     d1Databases:{READING_DB:'durable-evaluation-fixture'},
     bindings:{READING_TEST_SLUG:'durable-workerd-fixture',APIS_CALLER_TOKEN:'fixture-not-a-secret',
       YW_DURABLE_EVALUATION_ENABLED:'true',YW_BACKGROUND_EVALUATION_ENABLED:'true',YW_EVALUATION_MACHINE_SECRET:'cd'.repeat(32)},
@@ -22,9 +24,9 @@ test('real workerd/D1 preserves a 202 submission across independent foreground a
     },outboundService(){throw new Error('unexpected external request');},
   };
   const mf=new Miniflare({log:new Log(LogLevel.NONE),workers:[
-    {...common,name:'foreground',scriptPath:resolve(ROOT,'site/_worker.js')},
+    {...common,name:'foreground',...foregroundBundle},
     {...common,serviceBindings:{},bindings:{YW_BACKGROUND_EVALUATION_ENABLED:'true',YW_EVALUATION_MACHINE_SECRET:'cd'.repeat(32)},
-      name:'scheduler',scriptPath:resolve(ROOT,'scripts/fixtures/durable-scheduler-harness.js'),
+      name:'scheduler',...schedulerBundle,
       // Native workerd bridge preserves the exact server-to-server headers.
       // Node dispatchFetch injects sec-fetch-mode and correctly fails auth.
       outboundService:'foreground'},
@@ -80,8 +82,7 @@ test('real workerd/D1 preserves a 202 submission across independent foreground a
 const VALID=JSON.stringify({score:85,verdict:'fixture verdict',strength:'fixture strength',gap:'fixture gap',nextQuestion:'fixture question'});
 async function harness(answers,{newPolicy=false,schedulerReceipts=false}={}) {
   const calls={n:0};
-  const common={compatibilityDate:'2026-05-12',modules:true,modulesRoot:ROOT,
-    modulesRules:[{type:'ESModule',include:['**/*.js']}],
+  const common={compatibilityDate:'2026-05-12',
     d1Databases:{READING_DB:'durable-evaluation-fixture'},
     bindings:{READING_TEST_SLUG:'durable-workerd-fixture',APIS_CALLER_TOKEN:'fixture-not-a-secret',
       YW_DURABLE_EVALUATION_ENABLED:'true',YW_BACKGROUND_EVALUATION_ENABLED:'true',YW_EVALUATION_MACHINE_SECRET:'cd'.repeat(32)},
@@ -98,9 +99,9 @@ async function harness(answers,{newPolicy=false,schedulerReceipts=false}={}) {
     },outboundService(){throw new Error('unexpected external request');},
   };
   const options=(extra={})=>({log:new Log(LogLevel.NONE),workers:[
-    {...common,bindings:{...common.bindings,...extra},name:'foreground',scriptPath:resolve(ROOT,'site/_worker.js')},
+    {...common,bindings:{...common.bindings,...extra},name:'foreground',...foregroundBundle},
     {...common,serviceBindings:schedulerReceipts?{USER_CENTER_EVIDENCE:{name:'receipts',entrypoint:'Receipts'}}:{},bindings:{YW_BACKGROUND_EVALUATION_ENABLED:'true',YW_EVALUATION_MACHINE_SECRET:'cd'.repeat(32),...extra},
-      name:'scheduler',scriptPath:resolve(ROOT,'scripts/fixtures/durable-scheduler-harness.js'),outboundService:'foreground'},
+      name:'scheduler',...schedulerBundle,outboundService:'foreground'},
     ...(schedulerReceipts?[{name:'receipts',compatibilityDate:'2026-05-12',modules:true,
       d1Databases:{READING_DB:'durable-evaluation-fixture'},
       script:`import {WorkerEntrypoint} from 'cloudflare:workers';

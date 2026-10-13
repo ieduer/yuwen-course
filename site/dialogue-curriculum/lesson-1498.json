@@ -8,7 +8,9 @@
     "kind": "author-simulation",
     "notice": "AI 教學模擬，依據作品；並非作者本人。",
     "narratorIsAuthor": false,
-    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公或敘述者的經歷當作作者生平。"
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
   },
   "passages": [
     {
@@ -1152,7 +1154,9 @@
         "canonicalUnitId": "yw:lesson-1498:interaction:contextWords",
         "resourceVersion": "sha256:816acc50d74aa9c4f4cc2217e7fb5e9e9ff378bdb4d70ad8533a06af2cef021a",
         "questionKind": "contextWords",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
     {
@@ -1168,7 +1172,9 @@
         "canonicalUnitId": "yw:lesson-1498:interaction:revision",
         "resourceVersion": "sha256:15c6ae688778b3d27e6548d7b1cf56a011e02eaff3379b4d02b640a9b888d902",
         "questionKind": "revision",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
     {
@@ -1184,7 +1190,9 @@
         "canonicalUnitId": "yw:lesson-1498:interaction:structure",
         "resourceVersion": "sha256:df5443229f5fffb89b325b5074e1ce386f6b9168403807d0e052968b56e3fb80",
         "questionKind": "structure",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
     {
@@ -1200,7 +1208,9 @@
         "canonicalUnitId": "yw:lesson-1498:interaction:evaluation",
         "resourceVersion": "sha256:b1788f5438be31636074d0667f792fd16d8a1743ef6d3dccac5da2831f498723",
         "questionKind": "evaluation",
-        "scoringRole": "non_scoring"
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
     {
@@ -1216,7 +1226,9 @@
         "canonicalUnitId": "yw:lesson-1498:interaction:authorQuestion",
         "resourceVersion": "sha256:5f4966f2eb3341d159ca62ea12ed06d4c2364b275b3e4659be46d4b319f82222",
         "questionKind": "authorQuestion",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
     {
@@ -1232,7 +1244,9 @@
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v03",
         "resourceVersion": "sha256:4931f018a5a5ef01bcfc93541ccc1174514e7055db6b01b76d5a9d375991df68",
         "questionKind": "vocabulary",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
     {
@@ -1248,7 +1262,9 @@
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v04",
         "resourceVersion": "sha256:fc9e1be2e913f4e0ca3f1c30dcee06bbc53fdbcb04fb25de85a69401b2db40ba",
         "questionKind": "vocabulary",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
     {
@@ -1264,7 +1280,9 @@
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v05",
         "resourceVersion": "sha256:06c038b6e3ffb6e3dcfbe8af21b580c447de6ab65eb3a77e9a6ca10ed5fee5e4",
         "questionKind": "vocabulary",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
     {
@@ -1280,7 +1298,9 @@
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v06",
         "resourceVersion": "sha256:167ef21a9485d47a9e56a25c8fb5034a1940cb3059801c8483d26a7b4ca12296",
         "questionKind": "vocabulary",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
     {
@@ -1296,7 +1316,9 @@
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v07",
         "resourceVersion": "sha256:be107ee2110e398563f8a0ba3e523273ee245567e2255e2bef82bb31ce81cb33",
         "questionKind": "vocabulary",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
     {
@@ -1312,7 +1334,9 @@
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v08",
         "resourceVersion": "sha256:b5f8579039ece9428c84bc92ccfa8fbfb54ea9ad08a6dce5aafd99608c987e89",
         "questionKind": "vocabulary",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
     {
@@ -1328,7 +1352,9 @@
         "canonicalUnitId": "yw:lesson-1498:interaction:wordCreation",
         "resourceVersion": "sha256:f70957c4fdab30601cc7e12046983034af7832f1c55d3d8ae227657fcd73809f",
         "questionKind": "wordCreation",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
     {
@@ -1340,7 +1366,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "何人問人，何年問時間；兩問把個人的初見擴展到人與月的久遠關係。 疑問用法與本詩的追問是兩層：先說清問甚麼，再依前後詩句分析；不把修辭效果冒充詞典釋義。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "rule": " 何人問人，何年問時間；兩問把個人的初見擴展到人與月的久遠關係。 疑問用法與本詩的追問是兩層：先說清問甚麼，再依前後詩句分析；不把修辭效果冒充詞典釋義。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
       "sourcePassages": [
         "lesson-1498:p6"
       ],
@@ -1361,7 +1387,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "但見是只見，限制眼前能看見的範圍，不宜直接套成現代轉折詞「但是」。 詞義依指定虛詞詞典的副詞用法核對；上下句從不知到但見的認知變化是文本解讀，允許有證據的不同表述。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "rule": " 但見是只見，限制眼前能看見的範圍，不宜直接套成現代轉折詞「但是」。 詞義依指定虛詞詞典的副詞用法核對；上下句從不知到但見的認知變化是文本解讀，允許有證據的不同表述。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
       "sourcePassages": [
         "lesson-1498:p8"
       ],
@@ -1382,7 +1408,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "卷不去、拂還來的是月光；承接前面的月，動作與不能排遣的相思聯繫起來。 沿用教材對玉戶簾中卷不去的註解。省略內容的還原須有前句依據；不把月光真的有意志當作者生平事實。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "rule": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。 卷不去、拂還來的是月光；承接前面的月，動作與不能排遣的相思聯繫起來。 沿用教材對玉戶簾中卷不去的註解。省略內容的還原須有前句依據；不把月光真的有意志當作者生平事實。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
       "sourcePassages": [
         "lesson-1498:p12"
       ],
@@ -1610,84 +1636,108 @@
         "canonicalUnitId": "yw:lesson-1498:interaction:contextWords",
         "resourceVersion": "sha256:816acc50d74aa9c4f4cc2217e7fb5e9e9ff378bdb4d70ad8533a06af2cef021a",
         "questionKind": "contextWords",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1498:interaction:revision",
         "canonicalUnitId": "yw:lesson-1498:interaction:revision",
         "resourceVersion": "sha256:15c6ae688778b3d27e6548d7b1cf56a011e02eaff3379b4d02b640a9b888d902",
         "questionKind": "revision",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1498:interaction:structure",
         "canonicalUnitId": "yw:lesson-1498:interaction:structure",
         "resourceVersion": "sha256:df5443229f5fffb89b325b5074e1ce386f6b9168403807d0e052968b56e3fb80",
         "questionKind": "structure",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1498:interaction:evaluation",
         "canonicalUnitId": "yw:lesson-1498:interaction:evaluation",
         "resourceVersion": "sha256:b1788f5438be31636074d0667f792fd16d8a1743ef6d3dccac5da2831f498723",
         "questionKind": "evaluation",
-        "scoringRole": "non_scoring"
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1498:interaction:authorQuestion",
         "canonicalUnitId": "yw:lesson-1498:interaction:authorQuestion",
         "resourceVersion": "sha256:5f4966f2eb3341d159ca62ea12ed06d4c2364b275b3e4659be46d4b319f82222",
         "questionKind": "authorQuestion",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1498:vocab:lesson-1498:v03",
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v03",
         "resourceVersion": "sha256:4931f018a5a5ef01bcfc93541ccc1174514e7055db6b01b76d5a9d375991df68",
         "questionKind": "vocabulary",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1498:vocab:lesson-1498:v04",
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v04",
         "resourceVersion": "sha256:fc9e1be2e913f4e0ca3f1c30dcee06bbc53fdbcb04fb25de85a69401b2db40ba",
         "questionKind": "vocabulary",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1498:vocab:lesson-1498:v05",
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v05",
         "resourceVersion": "sha256:06c038b6e3ffb6e3dcfbe8af21b580c447de6ab65eb3a77e9a6ca10ed5fee5e4",
         "questionKind": "vocabulary",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1498:vocab:lesson-1498:v06",
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v06",
         "resourceVersion": "sha256:167ef21a9485d47a9e56a25c8fb5034a1940cb3059801c8483d26a7b4ca12296",
         "questionKind": "vocabulary",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1498:vocab:lesson-1498:v07",
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v07",
         "resourceVersion": "sha256:be107ee2110e398563f8a0ba3e523273ee245567e2255e2bef82bb31ce81cb33",
         "questionKind": "vocabulary",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1498:vocab:lesson-1498:v08",
         "canonicalUnitId": "yw:lesson-1498:vocabulary:lesson-1498:v08",
         "resourceVersion": "sha256:b5f8579039ece9428c84bc92ccfa8fbfb54ea9ad08a6dce5aafd99608c987e89",
         "questionKind": "vocabulary",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1498:interaction:wordCreation",
         "canonicalUnitId": "yw:lesson-1498:interaction:wordCreation",
         "resourceVersion": "sha256:f70957c4fdab30601cc7e12046983034af7832f1c55d3d8ae227657fcd73809f",
         "questionKind": "wordCreation",
-        "scoringRole": "a_plus_gate"
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     ],
     "formative": [
@@ -1843,7 +1893,7 @@
         "dialogueDomain": "context",
         "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
         "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-        "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
         "status": "student-quote-confirmation-original-rubric-bridged"
       },
       {
@@ -1853,7 +1903,7 @@
         "dialogueDomain": "revision",
         "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
         "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-        "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
         "status": "student-quote-confirmation-original-rubric-bridged"
       },
       {
@@ -1863,7 +1913,7 @@
         "dialogueDomain": "structure",
         "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
         "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-        "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
         "status": "student-quote-confirmation-original-rubric-bridged"
       },
       {
@@ -1873,7 +1923,7 @@
         "dialogueDomain": "evaluation",
         "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
         "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-        "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
         "status": "original-non-scoring-self-report-bridged"
       },
       {
@@ -1883,7 +1933,7 @@
         "dialogueDomain": "authorQuestion",
         "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
         "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-        "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
         "status": "student-quote-confirmation-original-rubric-bridged"
       },
       {
@@ -1893,7 +1943,7 @@
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
         "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-        "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
         "status": "original-selectedIndex-answer-key-bridged"
       },
       {
@@ -1903,7 +1953,7 @@
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
         "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-        "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
         "status": "original-selectedIndex-answer-key-bridged"
       },
       {
@@ -1913,7 +1963,7 @@
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
         "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-        "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
         "status": "original-selectedIndex-answer-key-bridged"
       },
       {
@@ -1923,7 +1973,7 @@
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
         "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-        "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
         "status": "original-selectedIndex-answer-key-bridged"
       },
       {
@@ -1933,7 +1983,7 @@
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
         "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-        "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
         "status": "original-selectedIndex-answer-key-bridged"
       },
       {
@@ -1943,7 +1993,7 @@
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
         "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-        "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
         "status": "original-selectedIndex-answer-key-bridged"
       },
       {
@@ -1953,7 +2003,7 @@
         "dialogueDomain": "wordCreation",
         "conversationEquivalent": "選一個剛疏通的詞，用於三行短詩（詩歌）、三句對白（戲劇）、三句微型敘事（小說）或三句話；核對詞義、語境及搭配。",
         "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
-        "storage": "original source submissions/evaluations/outbox + dialogue turns/events committed together; historical grades unchanged; new mastery separate",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
         "status": "student-quote-confirmation-original-rubric-bridged"
       },
       {
@@ -2119,9 +2169,74 @@
         "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
         "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
       }
-    ]
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "vocabulary",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 12,
+        "formativeCount": 11,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": true,
+        "status": "source-items-present-calibration-pending",
+        "areaSources": {
+          "vocabulary": [
+            "lesson-1498:v03",
+            "lesson-1498:v04",
+            "lesson-1498:v05",
+            "lesson-1498:v06",
+            "lesson-1498:v07",
+            "lesson-1498:v08"
+          ],
+          "functionWords": [
+            "lesson-1498:language-he",
+            "lesson-1498:language-dan"
+          ],
+          "grammar": [
+            "lesson-1498:grammar-moon"
+          ]
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [
+          "xc-he",
+          "xc-dan"
+        ],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
   },
-  "referenceVersion": "yw-dialogue-sources-20261012-v3",
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
   "languagePractice": [
     {
       "id": "lesson-1498:language-he",
@@ -2210,10 +2325,41 @@
         "只報術語，未解釋語境",
         "照抄提示，未獨立改述"
       ],
+      "sourceVerification": {
+        "status": "source-context-reviewed",
+        "reviewId": "yw-grammar-source-convergence-20261013-v1",
+        "reviewedAt": "2026-10-13T03:05:31.744Z",
+        "analysisStatus": "authored-contextual-interpretation",
+        "authority": "root-authorized-independent-scoped-source-review-01a132c3",
+        "scope": "原注及相鄰月、月華等句支持卷不去、拂還來的是月光；相思效果是有據的文本解讀，允許不同表述。",
+        "notice": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。",
+        "evidence": {
+          "readerPath": "data/reader-documents/lesson-1498.json",
+          "readerSha256": "e865b8f73d9a4beb512f1f92e4fbedda6f2b5b82717d68142ab4b8e843bbee75",
+          "passages": [
+            {
+              "id": "lesson-1498:p12",
+              "sha256": "60fa29f338d85529a2b616b4e84ab4be13d50691b9a8dfe977442fda9288e2fd",
+              "quotes": [
+                "玉户帘中卷不去，捣衣砧上拂还来。"
+              ]
+            }
+          ],
+          "annotations": [
+            {
+              "noteId": "footnote-10076-11",
+              "sha256": "5627328859d48ac288845cf0eff09f3618c197ff3269c880f21a58e3a8127394"
+            }
+          ],
+          "readingMaterials": []
+        },
+        "primaryReferences": [],
+        "analysisSha256": "49a086fbe923d591909177b958b199f6cf18ad5c1c1e1add566a2ea8e712b64d"
+      },
       "sourcePassages": [
         "lesson-1498:p12"
       ],
-      "version": "yw-language-efbf60f7627ea59f5f04",
+      "version": "yw-language-494b4393766eeae528f9",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     }
   ],
@@ -2314,7 +2460,23 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-4ea36b7fb95672466248",
+  "curriculumVersion": "yw-dialogue-38d5ca7cdcd81dc39614",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
   "readingMaterials": [
     {
       "id": "lesson-1498:p19",
@@ -2483,5 +2645,137 @@
       "reason": "原帖雲端文獻連結的標籤與預覽文字，並非詩作正文。"
     }
   ],
-  "textRoleVersion": "yw-dialogue-text-roles-20261012-v2"
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《全唐诗》卷二十一（中华书局1999 年版）。\n\n春江花月夜，乐府旧题。张若虚（约660—约720），扬州（今属江苏）人，唐代诗人。与贺知章、张旭、包融并称“吴中四士”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "type": "quote"
+    }
+  ],
+  "guidance": [],
+  "media": [
+    {
+      "alt": "",
+      "bytes": 62397,
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/34acd1dcd582979755fe61bbbf898ddd6c0924d4.jpeg",
+      "height": 572,
+      "id": "media-cf0931367453d577a8ed",
+      "mediaType": "image/jpeg",
+      "nativeDisposition": "verified-in-app",
+      "receiptCollectedAt": "2026-07-30T01:10:43.464Z",
+      "receiptRequired": true,
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29",
+      "sha256": "a7ee075cad0e8361cfc547162a15450f39cfc221f7dd65434605d06fe853315d",
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/34acd1dcd582979755fe61bbbf898ddd6c0924d4.jpeg",
+      "webDisposition": "source-url",
+      "width": 289
+    },
+    {
+      "alt": "",
+      "bytes": 153032,
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/3a7bd7702a97970cc3c961e829d7088b8c10f42c.jpeg",
+      "height": 371,
+      "id": "media-72c6580b02a52dc244ae",
+      "mediaType": "image/jpeg",
+      "nativeDisposition": "verified-in-app",
+      "receiptCollectedAt": "2026-07-30T01:10:43.464Z",
+      "receiptRequired": true,
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29",
+      "sha256": "bbc713eb6aa70adfbc90d677de43450e50d590e50f06aa3d2a4ffd56428051e5",
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/3a7bd7702a97970cc3c961e829d7088b8c10f42c.jpeg",
+      "webDisposition": "source-url",
+      "width": 937
+    }
+  ],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1498.json",
+    "lessonSha256": "485373d68e7e501ddef2e2a2ea2525039bb4f74748464e2bcc549c1f165acdb8",
+    "reader": "data/reader-documents/lesson-1498.json",
+    "readerSha256": "e865b8f73d9a4beb512f1f92e4fbedda6f2b5b82717d68142ab4b8e843bbee75",
+    "sourcePostId": 10076,
+    "sourcePostNumber": 1,
+    "blockCount": 22,
+    "annotationCount": 17,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "vocabulary",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 12,
+      "formativeCount": 11,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": true,
+      "status": "source-items-present-calibration-pending",
+      "areaSources": {
+        "vocabulary": [
+          "lesson-1498:v03",
+          "lesson-1498:v04",
+          "lesson-1498:v05",
+          "lesson-1498:v06",
+          "lesson-1498:v07",
+          "lesson-1498:v08"
+        ],
+        "functionWords": [
+          "lesson-1498:language-he",
+          "lesson-1498:language-dan"
+        ],
+        "grammar": [
+          "lesson-1498:grammar-moon"
+        ]
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [
+        "xc-he",
+        "xc-dan"
+      ],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
 }

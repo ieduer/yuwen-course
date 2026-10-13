@@ -57,6 +57,8 @@ test('all revised prompts request complete grounded criteria without changing ol
   assert(c.prompt.includes('每個 criterion 至少一筆'));
   assert(c.prompt.includes('缺少任何必要證據時不給 demonstrated'));
   assert.notEqual(c.sourceDigest,original.cases.find(o=>o.id===c.id).sourceDigest);
-  assert.equal(packet.operation,'yw-dialogue-real-calibration-20261012-v1-amendment-3');assert.equal(packet.amendment.maxTotalAttempts,30);
+  // Current all-lesson source is intentionally distinct from the consumed
+  // amendment-3 snapshot; generating it must not reactivate that authority.
+  assert.equal(packet.operation,'unapproved-source-preview');assert.equal(packet.amendment,null);
  }
 });

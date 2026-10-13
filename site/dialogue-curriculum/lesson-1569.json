@@ -1,0 +1,1009 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1569",
+  "title": "7 一个消逝了的山村/ 冯至",
+  "mode": "modern-prose",
+  "author": "冯至",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1569:p1",
+      "text": "在人口稀少的地带，我们走入任何一座森林，或是一片草原，总觉得它们在洪荒时代大半就是这样。人类的历史演变了几千年，它们却在人类以外。不起一些变化，千百年如一日，默默地对着永恒。其中可能发生的事迹，不外乎空中的风雨，草里的虫蛇，林中出没的走兽和树间的鸣鸟。我们刚到这里来时，对于这座山林，也是那样感想，绝不会问道：这里也曾有过人烟吗？但是一条窄窄的石路的残迹泄露了一些秘密。",
+      "block": {
+        "runs": [
+          {
+            "text": "在人口稀少的地带，我们走入任何一座森林，或是一片草原，总觉得它们在洪荒时代大半就是这样。人类的历史演变了几千年，它们却在人类以外。不起一些变化，千百年如一日，默默地对着永恒。其中可能发生的事迹，不外乎空中的风雨，草里的虫蛇，林中出没的走兽和树间的鸣鸟。我们刚到这里来时，对于这座山林，也是那样感想，绝不会问道：这里也曾有过人烟吗？但是一条窄窄的石路的残迹泄露了一些秘密。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1569:p2",
+      "text": "我们走入山谷，沿着小溪，走两三里到了水源，转上山坡，便是我们居住的地方。我们住的房屋，建筑起来不过二三十年，我们走的路，是二三十年来经营山林的人们一步步踏出来的，处处表露出新开辟的样子。眼前的浓绿浅绿，没有一点历史的重担。但是我们从城内向这里来的中途，忽然觉得踏上了一条旧路。那条路是用石块砌成，从距谷口还有四五里远的一个村庄里伸出，向山谷这边引来，先是断断续续，随后就隐隐约约地消失了。它无人修理，无日不在继续着埋没下去。我在那条路上走时，好像是走着两条道路：一条路引我走近山居，另一条路是引我走到过去。因为我想，这条石路一定有一个时期宛宛转转地一直伸入谷口，在谷内溪水的两旁，现在只有树木的地带，曾经有过房屋，只有草的山坡上，曾经有过田园。",
+      "block": {
+        "runs": [
+          {
+            "text": "我们走入山谷，沿着小溪，走两三里到了水源，转上山坡，便是我们居住的地方。我们住的房屋，建筑起来不过二三十年，我们走的路，是二三十年来经营山林的人们一步步踏出来的，处处表露出新开辟的样子。眼前的浓绿浅绿，没有一点历史的重担。但是我们从城内向这里来的中途，忽然觉得踏上了一条旧路。那条路是用石块砌成，从距谷口还有四五里远的一个村庄里伸出，向山谷这边引来，先是断断续续，随后就隐隐约约地消失了。它无人修理，无日不在继续着埋没下去。我在那条路上走时，好像是走着两条道路：一条路引我走近山居，另一条路是引我走到过去。因为我想，这条石路一定有一个时期宛宛转转地一直伸入谷口，在谷内溪水的两旁，现在只有树木的地带，曾经有过房屋，只有草的山坡上，曾经有过田园。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1569:p3",
+      "text": "过了许久，我才知道，这里实际上有过村落。在七十年前，云南省的大部分，经过一场浩劫，有多少村庄城镇在这里衰落了。现在就是一间房屋的地基都寻不到了，只剩下树林、草原、溪水，除却我们的住房外，周围四五里内没有人家，但是每座山，每个幽隐的地方还都留有一个名称。这些名称现在只生存在从四邻村里走来的砍柴、背松毛、放牛牧羊的人们的口里。此外它们却没有什么意义；若有，就是使我们想到有些地方曾经和人生过关系，都隐藏着一小段兴衰的历史吧。",
+      "block": {
+        "runs": [
+          {
+            "text": "过了许久，我才知道，这里实际上有过村落。在七十年前，云南省的大部分，经过一场浩劫，有多少村庄城镇在这里衰落了。现在就是一间房屋的地基都寻不到了，只剩下树林、草原、溪水，除却我们的住房外，周围四五里内没有人家，但是每座山，每个幽隐的地方还都留有一个名称。这些名称现在只生存在从四邻村里走来的砍柴、背松毛、放牛牧羊的人们的口里。此外它们却没有什么意义；若有，就是使我们想到有些地方曾经和人生过关系，都隐藏着一小段兴衰的历史吧。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1569:p4",
+      "text": "我不能研究这个山村的历史，也不愿用想象来装饰它。它像是一个民族在这世界里消亡了，随着它一起消亡的是它所孕育的传说和故事。我们没有方法去追寻它们，只有在草木之间感到一些它们的余韵。",
+      "block": {
+        "runs": [
+          {
+            "text": "我不能研究这个山村的历史，也不愿用想象来装饰它。它像是一个民族在这世界里消亡了，随着它一起消亡的是它所孕育的传说和故事。我们没有方法去追寻它们，只有在草木之间感到一些它们的余韵。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1569:p5",
+      "text": "最可爱的是那条小溪的水源，从我们对面山的山脚下涌出的泉水，它不分昼夜地在那儿流，几棵树环绕着它形成一个阴凉的所在。我们感谢它，若是没有它，我们就不能在这里居住，那山村也不会曾经在这里滋长。这清冽的泉水，养育我们，同时也养育过往日那村里的人们。人和人，只要是共同吃过一棵树上的果实，共同饮过一条河里的水，或是共同担受过一个地方的风雨，不管是时间或空间把他们隔离得有多么远，彼此都会感到几分亲切，彼此的生命都有些声息相通的地方。我深深理解了古人一首情诗里的句子：“日日思君不见君，共饮长江水语出宋李之仪词《卜算子》（我住长江头）。”",
+      "block": {
+        "runs": [
+          {
+            "text": "最可爱的是那条小溪的水源，从我们对面山的山脚下涌出的泉水，它不分昼夜地在那儿流，几棵树环绕着它形成一个阴凉的所在。我们感谢它，若是没有它，我们就不能在这里居住，那山村也不会曾经在这里滋长。这清冽的泉水，养育我们，同时也养育过往日那村里的人们。人和人，只要是共同吃过一棵树上的果实，共同饮过一条河里的水，或是共同担受过一个地方的风雨，不管是时间或空间把他们隔离得有多么远，彼此都会感到几分亲切，彼此的生命都有些声息相通的地方。我深深理解了古人一首情诗里的句子：“日日思君不见君，共饮长江水语出宋李之仪词《卜算子》（我住长江头）。”",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1569:p6",
+      "text": "其次就是鼠麹qū草一年生草本植物，茎、叶可入药。这种在欧洲非登上阿尔卑斯山的高处不容易采撷得到的名贵的小草，在这里每逢暮春和初秋却一年两季地长遍了山坡。我爱它那从叶子演变成的、有白色茸毛的花朵，谦虚地掺杂在乱草的中间。但是在这谦虚里没有卑躬，只有纯洁，没有矜持，只有坚强。有谁要认识这小草的意义吗？我愿意指给他看：在夕阳里一座山丘的顶上，坐着一个村女，她聚精会神地在那里缝什么，一任她的羊在远远近近的山坡上吃草，四面是山，四面是树，她从不抬起头来张望一下，陪伴着她的是一丛一丛的鼠麹从杂草中露出头来。这时我正从城里来，我看见这幅图像，觉得我随身带来的纷扰都变成深秋的黄叶，自然而然地凋落了。这使我知道，一个小生命是怎样鄙弃了一切浮夸，孑然一身担当着一个大宇宙。那消逝了的村庄必定也曾经像是这个少女，抱着自己的朴质，春秋佳日，被这些白色的小草围绕着，在山腰里一言不语地负担着一切。后来一个横来的运命使它骤然死去，不留下一些夸耀后人的事迹。",
+      "block": {
+        "runs": [
+          {
+            "text": "其次就是鼠麹qū草一年生草本植物，茎、叶可入药。这种在欧洲非登上阿尔卑斯山的高处不容易采撷得到的名贵的小草，在这里每逢暮春和初秋却一年两季地长遍了山坡。我爱它那从叶子演变成的、有白色茸毛的花朵，谦虚地掺杂在乱草的中间。但是在这谦虚里没有卑躬，只有纯洁，没有矜持，只有坚强。有谁要认识这小草的意义吗？我愿意指给他看：在夕阳里一座山丘的顶上，坐着一个村女，她聚精会神地在那里缝什么，一任她的羊在远远近近的山坡上吃草，四面是山，四面是树，她从不抬起头来张望一下，陪伴着她的是一丛一丛的鼠麹从杂草中露出头来。这时我正从城里来，我看见这幅图像，觉得我随身带来的纷扰都变成深秋的黄叶，自然而然地凋落了。这使我知道，一个小生命是怎样鄙弃了一切浮夸，孑然一身担当着一个大宇宙。那消逝了的村庄必定也曾经像是这个少女，抱着自己的朴质，春秋佳日，被这些白色的小草围绕着，在山腰里一言不语地负担着一切。后来一个横来的运命使它骤然死去，不留下一些夸耀后人的事迹。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1569:p7",
+      "text": "雨季是山上最热闹的时代，天天早晨我们都醒在一片山歌里。那是些从五六里外趁早上山来采菌子的人。下了一夜的雨，第二天太阳出来一蒸发，草间的菌子，俯拾皆是：有的红如胭脂，青如青苔，褐如牛肝，白如蛋白，还有一种赭色的，放在水里立即变成靛蓝的颜色。我们望着对面的山上，人人踏着潮湿，在草丛里，树根处，低头寻找新鲜的菌子。这是一种热闹，人们在其中并不忘却自己，各人盯着各人目前的世界。这景象，在七十年前也不会两样。这些彩菌，不知点缀过多少民族的童话，它们一定也滋养过那山村里的人们的身体和儿童的幻想吧。",
+      "block": {
+        "runs": [
+          {
+            "text": "雨季是山上最热闹的时代，天天早晨我们都醒在一片山歌里。那是些从五六里外趁早上山来采菌子的人。下了一夜的雨，第二天太阳出来一蒸发，草间的菌子，俯拾皆是：有的红如胭脂，青如青苔，褐如牛肝，白如蛋白，还有一种赭色的，放在水里立即变成靛蓝的颜色。我们望着对面的山上，人人踏着潮湿，在草丛里，树根处，低头寻找新鲜的菌子。这是一种热闹，人们在其中并不忘却自己，各人盯着各人目前的世界。这景象，在七十年前也不会两样。这些彩菌，不知点缀过多少民族的童话，它们一定也滋养过那山村里的人们的身体和儿童的幻想吧。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1569:p8",
+      "text": "这中间，高高耸立起来那植物界里最高的树木，有加利树即桉树。有时在月夜里，月光把被微风摇摆的叶子镀成银色，我们望着它每瞬间都在生长，仿佛把我们的身体，我们的周围，甚至全山都带着生长起来。望久了，自己的灵魂有些担当不起，感到悚然，好像对着一个崇高的严峻的圣者，你不随着他走，就得和他离开，中间不容有妥协。——但是，这种树本来是异乡的，移植到这里来并不久，那个山村恐怕不会梦想到它，正如一个人不会想到它死后的坟旁要栽什么树木。",
+      "block": {
+        "runs": [
+          {
+            "text": "这中间，高高耸立起来那植物界里最高的树木，有加利树即桉树。有时在月夜里，月光把被微风摇摆的叶子镀成银色，我们望着它每瞬间都在生长，仿佛把我们的身体，我们的周围，甚至全山都带着生长起来。望久了，自己的灵魂有些担当不起，感到悚然，好像对着一个崇高的严峻的圣者，你不随着他走，就得和他离开，中间不容有妥协。——但是，这种树本来是异乡的，移植到这里来并不久，那个山村恐怕不会梦想到它，正如一个人不会想到它死后的坟旁要栽什么树木。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1569:p9",
+      "text": "秋后，树林显出萧疏。刚过黄昏，野狗便四出寻食，有时远远在山沟里，有时近到墙外，做出种种求群求食的嗥叫的声音。更加上夜夜常起的狂风，好像要把一切都给刮走。这时有如身在荒原，所有精神方面所体验的，物质方面所获得的，都失却了功用。使人想到海上的飓风，寒带的雪潮，自己一点也不能做主。风声稍息，是野狗的嗥声，野狗声音刚过去，松林里又起了涛浪。这风夜中的嗥声对于当时的那个村落，一定也是一种威胁——尤其是对于无眠的老人，夜半惊醒的儿童和抚慰病儿的寡妇。",
+      "block": {
+        "runs": [
+          {
+            "text": "秋后，树林显出萧疏。刚过黄昏，野狗便四出寻食，有时远远在山沟里，有时近到墙外，做出种种求群求食的嗥叫的声音。更加上夜夜常起的狂风，好像要把一切都给刮走。这时有如身在荒原，所有精神方面所体验的，物质方面所获得的，都失却了功用。使人想到海上的飓风，寒带的雪潮，自己一点也不能做主。风声稍息，是野狗的嗥声，野狗声音刚过去，松林里又起了涛浪。这风夜中的嗥声对于当时的那个村落，一定也是一种威胁——尤其是对于无眠的老人，夜半惊醒的儿童和抚慰病儿的寡妇。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1569:p10",
+      "text": "在比较平静的夜里，野狗的野性似乎也被夜的温柔驯服了不少。代替野狗的是麂子的嘶声。这温良而机警的兽，自然要时时躲避野狗，但是逃不开人的诡计。月色朦胧的夜半，有一二猎夫，会效仿麂子的嘶声，往往登高一呼，麂子便成群地走来。……据说，前些年，在人迹罕到的树丛里还往往有一只鹿出现。不知是这里曾经有过一个繁盛的鹿群，最后只剩下了一只，还是根本是从外边偶然走来而迷失在这里不能回去呢？反正这是近乎传说了。这美丽的兽，如果我们在庄严的松林里散步，它不期然地在我们对面出现，我们真会像是传说中的圣人一般，在它的两角之间看见了幻境。",
+      "block": {
+        "runs": [
+          {
+            "text": "在比较平静的夜里，野狗的野性似乎也被夜的温柔驯服了不少。代替野狗的是麂子的嘶声。这温良而机警的兽，自然要时时躲避野狗，但是逃不开人的诡计。月色朦胧的夜半，有一二猎夫，会效仿麂子的嘶声，往往登高一呼，麂子便成群地走来。……据说，前些年，在人迹罕到的树丛里还往往有一只鹿出现。不知是这里曾经有过一个繁盛的鹿群，最后只剩下了一只，还是根本是从外边偶然走来而迷失在这里不能回去呢？反正这是近乎传说了。这美丽的兽，如果我们在庄严的松林里散步，它不期然地在我们对面出现，我们真会像是传说中的圣人一般，在它的两角之间看见了幻境。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1569:p11",
+      "text": "两三年来，这一切，给我的生命许多滋养。但我相信它们也曾以同样的坦白和恩惠对待那消逝了的村庄。这些风物，好像至今还在述说它的运命。在风雨如晦的时刻，我踏着那村里的人们也踏过的土地，觉得彼此相隔虽然将及一世纪，但在生命的深处，却和他们有着意味不尽的关联。",
+      "block": {
+        "runs": [
+          {
+            "text": "两三年来，这一切，给我的生命许多滋养。但我相信它们也曾以同样的坦白和恩惠对待那消逝了的村庄。这些风物，好像至今还在述说它的运命。在风雨如晦的时刻，我踏着那村里的人们也踏过的土地，觉得彼此相隔虽然将及一世纪，但在生命的深处，却和他们有着意味不尽的关联。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1569:p12",
+      "text": "1942 年，写于昆明。",
+      "block": {
+        "runs": [
+          {
+            "text": "1942 年，写于昆明。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [],
+  "resources": [
+    {
+      "disposition": "system-browser",
+      "href": "https://sites.google.com/view/pkuschool/%e9%81%b8%e5%bf%85%e4%b8%8b/%e7%ac%ac%e4%ba%8c%e5%8d%95%e5%85%83/7-%e4%b8%80%e4%b8%aa%e6%b6%88%e9%80%9d%e4%ba%86%e7%9a%84%e5%b1%b1%e6%9d%91-%e5%86%af%e8%87%b3",
+      "kind": "link",
+      "label": "https://sites.google.com/view/pkuschool/%e9%81%b8%e5%bf%85%e4%b8%8b/%e7%ac%ac%e4%ba%8c%e5%8d%95%e5%85%83/7-%e4%b8%80%e4%b8%aa%e6%b6%88%e9%80%9d%e4%ba%86%e7%9a%8",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://sites.google.com/view/pkuschool/%e9%81%b8%e5%bf%85%e4%b8%8b/%e7%ac%ac%e4%ba%8c%e5%8d%95%e5%85%83/7-%e4%b8%80%e4%b8%aa%e6%b6%88%e9%80%9d%e4%ba%86%e7%9a%84%e5%b1%b1%e6%9d%91-%e5%86%af%e8%87%b3"
+    }
+  ],
+  "source": "https://forum.rdfzer.com/t/topic/1569",
+  "objectives": [
+    {
+      "id": "lesson-1569:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1569:p1",
+        "lesson-1569:p2",
+        "lesson-1569:p3",
+        "lesson-1569:p4",
+        "lesson-1569:p5",
+        "lesson-1569:p6",
+        "lesson-1569:p7",
+        "lesson-1569:p8",
+        "lesson-1569:p9",
+        "lesson-1569:p10",
+        "lesson-1569:p11",
+        "lesson-1569:p12"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1569:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1569:p1",
+        "lesson-1569:p2",
+        "lesson-1569:p3",
+        "lesson-1569:p4",
+        "lesson-1569:p5",
+        "lesson-1569:p6",
+        "lesson-1569:p7",
+        "lesson-1569:p8",
+        "lesson-1569:p9",
+        "lesson-1569:p10",
+        "lesson-1569:p11",
+        "lesson-1569:p12"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1569:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1569:p1",
+        "lesson-1569:p2",
+        "lesson-1569:p3",
+        "lesson-1569:p4",
+        "lesson-1569:p5",
+        "lesson-1569:p6",
+        "lesson-1569:p7",
+        "lesson-1569:p8",
+        "lesson-1569:p9",
+        "lesson-1569:p10",
+        "lesson-1569:p11",
+        "lesson-1569:p12"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1569:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1569:p1",
+        "lesson-1569:p2",
+        "lesson-1569:p3",
+        "lesson-1569:p4",
+        "lesson-1569:p5",
+        "lesson-1569:p6",
+        "lesson-1569:p7",
+        "lesson-1569:p8",
+        "lesson-1569:p9",
+        "lesson-1569:p10",
+        "lesson-1569:p11",
+        "lesson-1569:p12"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1569:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1569:p1",
+        "lesson-1569:p2",
+        "lesson-1569:p3",
+        "lesson-1569:p4",
+        "lesson-1569:p5",
+        "lesson-1569:p6",
+        "lesson-1569:p7",
+        "lesson-1569:p8",
+        "lesson-1569:p9",
+        "lesson-1569:p10",
+        "lesson-1569:p11",
+        "lesson-1569:p12"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1569:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1569:p1",
+        "lesson-1569:p2",
+        "lesson-1569:p3",
+        "lesson-1569:p4",
+        "lesson-1569:p5",
+        "lesson-1569:p6",
+        "lesson-1569:p7",
+        "lesson-1569:p8",
+        "lesson-1569:p9",
+        "lesson-1569:p10",
+        "lesson-1569:p11",
+        "lesson-1569:p12"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1569:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1569:p1",
+        "lesson-1569:p2",
+        "lesson-1569:p3",
+        "lesson-1569:p4",
+        "lesson-1569:p5",
+        "lesson-1569:p6",
+        "lesson-1569:p7",
+        "lesson-1569:p8",
+        "lesson-1569:p9",
+        "lesson-1569:p10",
+        "lesson-1569:p11",
+        "lesson-1569:p12"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1569:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1569:p1",
+        "lesson-1569:p2",
+        "lesson-1569:p3",
+        "lesson-1569:p4",
+        "lesson-1569:p5",
+        "lesson-1569:p6",
+        "lesson-1569:p7",
+        "lesson-1569:p8",
+        "lesson-1569:p9",
+        "lesson-1569:p10",
+        "lesson-1569:p11",
+        "lesson-1569:p12"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "legacy:effect:lesson-1569:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1569:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1569:interaction:contextWords",
+        "resourceVersion": "sha256:01cd4117682dac87ee546ad30741bfa1a9e3a7136761974f0f9f48762b00e08e",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1569:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1569:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1569:interaction:revision",
+        "resourceVersion": "sha256:4bf131a39732e9815b0114dfe3040e53dc1e9e5372eb1389b88982bfaf66945f",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1569:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1569:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1569:interaction:structure",
+        "resourceVersion": "sha256:194a13465fee0fbdd09ad180ebec5b1496daba0deec7ea599e7240d174dcdf81",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1569:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1569:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1569:interaction:evaluation",
+        "resourceVersion": "sha256:89ed934af0ecb270be248e1b735ecf3bb940404b3910593a16cd9519f5301c60",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1569:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1569:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1569:interaction:authorQuestion",
+        "resourceVersion": "sha256:c6143c14a6f21783b9688b56cc5b833dd4a93308192fdbe7e40dd5a1a026cb85",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    }
+  ],
+  "vocabulary": [],
+  "legacy": {
+    "lessonId": "lesson-1569",
+    "title": "7 一个消逝了的山村/ 冯至",
+    "mode": "modern-prose",
+    "legacyTracks": [
+      "context",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "初讀評議",
+        "",
+        10
+      ],
+      [
+        "read",
+        "通讀正文",
+        "",
+        10
+      ],
+      [
+        "revision",
+        "字句之改",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "論證骨架",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "觀點評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "叩問作者",
+        "",
+        10
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1569:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1569:interaction:contextWords",
+        "resourceVersion": "sha256:01cd4117682dac87ee546ad30741bfa1a9e3a7136761974f0f9f48762b00e08e",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1569:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1569:interaction:revision",
+        "resourceVersion": "sha256:4bf131a39732e9815b0114dfe3040e53dc1e9e5372eb1389b88982bfaf66945f",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1569:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1569:interaction:structure",
+        "resourceVersion": "sha256:194a13465fee0fbdd09ad180ebec5b1496daba0deec7ea599e7240d174dcdf81",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1569:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1569:interaction:evaluation",
+        "resourceVersion": "sha256:89ed934af0ecb270be248e1b735ecf3bb940404b3910593a16cd9519f5301c60",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1569:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1569:interaction:authorQuestion",
+        "resourceVersion": "sha256:c6143c14a6f21783b9688b56cc5b833dd4a93308192fdbe7e40dd5a1a026cb85",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1569",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1569:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1569:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1569:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1569",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1569:interaction:contextWords",
+        "completionKey": "effect:lesson-1569:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1569:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1569",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1569:interaction:structure",
+        "completionKey": "effect:lesson-1569:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1569:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1569",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1569:interaction:revision",
+        "completionKey": "effect:lesson-1569:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1569:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1569:interaction:contextWords",
+        "sourceVersion": "sha256:01cd4117682dac87ee546ad30741bfa1a9e3a7136761974f0f9f48762b00e08e",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1569:interaction:revision",
+        "sourceVersion": "sha256:4bf131a39732e9815b0114dfe3040e53dc1e9e5372eb1389b88982bfaf66945f",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1569:interaction:structure",
+        "sourceVersion": "sha256:194a13465fee0fbdd09ad180ebec5b1496daba0deec7ea599e7240d174dcdf81",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1569:interaction:evaluation",
+        "sourceVersion": "sha256:89ed934af0ecb270be248e1b735ecf3bb940404b3910593a16cd9519f5301c60",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1569:interaction:authorQuestion",
+        "sourceVersion": "sha256:c6143c14a6f21783b9688b56cc5b833dd4a93308192fdbe7e40dd5a1a026cb85",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1569:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1569:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1569:interaction:contextWords",
+        "completionKey": "effect:lesson-1569:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1569:interaction:structure",
+        "completionKey": "effect:lesson-1569:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1569:interaction:revision",
+        "completionKey": "effect:lesson-1569:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [],
+    "sourceLesson": "data/lessons/lesson-1569.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 5,
+        "formativeCount": 4,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-07d16c8c7f2945846b38",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《山水》（河北教育出版社1994 年版）。有删改。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        },
+        {
+          "runs": [
+            {
+              "text": "冯至（1905—1993），河北涿州人，诗人、学者、翻译家。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "type": "quote"
+    }
+  ],
+  "guidance": [],
+  "media": [],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1569.json",
+    "lessonSha256": "f93e4969e200135d2d7fd18fd8e0aa80aeaadc5c87214969a12800185f375a25",
+    "reader": "data/reader-documents/lesson-1569.json",
+    "readerSha256": "33c90c599651bba6daa18420f3939d925e0f8600a524388c7a0a63fbaa4a6dd7",
+    "sourcePostId": 10478,
+    "sourcePostNumber": 1,
+    "blockCount": 12,
+    "annotationCount": 0,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 5,
+      "formativeCount": 4,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

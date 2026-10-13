@@ -1,4 +1,5 @@
-import { handleDialogue } from './dialogue-source.js';
+import { handleDialogue,loadDialogueCurriculum } from './dialogue-source.js';
+import { sanitizeDialogueCurriculum } from './dialogue-public-curriculum.js';
 import { acceptanceContext, acceptanceAllowsIdentity } from './dialogue-acceptance.js';
 import { DIALOGUE_SOURCE_PREFIX, DIALOGUE_LOCAL_PREFIX, isDialogueSourceMutation, formalRubric } from './dialogue-formal.js';
 import { readSharedHistory } from './dialogue-history.js';
@@ -91,6 +92,13 @@ const YW_PRE_ACTIVATION_TRANSPORT_CANARY = Object.freeze({
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    let decodedPath;try{decodedPath=decodeURIComponent(url.pathname).replace(/\/{2,}/g,'/');}catch{return new Response('Invalid path',{status:400});}
+    const dialogueAsset=/^\/dialogue-curriculum\/(lesson-[\w-]{1,60})\.json$/.exec(decodedPath);
+    if(dialogueAsset){
+      if(request.method!=='GET')return new Response('Method not allowed',{status:405});
+      try{return json(sanitizeDialogueCurriculum(await loadDialogueCurriculum(env,dialogueAsset[1])),{headers:{'cache-control':'no-store'}});}catch{return new Response('Not found',{status:404});}
+    }
+    if(decodedPath.startsWith('/dialogue-curriculum/')&&decodedPath!=='/dialogue-curriculum/index.json')return new Response('Not found',{status:404});
     if (url.pathname === '/api/dialogue/v1') {
       if (env.YW_DIALOGUE_ENABLED !== 'true') return new Response('Not found', {status:404});
       if (request.method === 'POST') {
@@ -480,7 +488,7 @@ async function handleLearningEvidenceHealth(env) {
           eligibleItemCount: Number(compatibility.eligibleItemCount),
           thresholdPolicy: {
             percent: Number(compatibility.thresholdPercent),
-            activationBaselineEligibleUnits: Number(compatibility.eligibleItemCount),
+            activationBaselineEligibleUnits: 768,
             requiredDistinctCreditUnits: Number(compatibility.thresholdCount),
             annualStabilityRule: "fixed_for_academic_year_task_pool_append_does_not_raise_requirement",
           },
@@ -1574,6 +1582,7 @@ async function handleInteractionCheck(request, env, capturedPayload = null, auth
 }
 
 export async function handleDialogueFormal(request, env, student, formal, turnId, evaluate, commit) {
+  if(formal.interaction==='studyGuideItemCompleted')return handleReadingStudyGuideAttempt(request,env,student,{lessonId:formal.lessonId,...formal.input,clientMutationId:`${DIALOGUE_SOURCE_PREFIX}${turnId}`},{formal,turnId,evaluate,commit});
   return handleInteractionCheck(request, env, {
     lessonId: formal.lessonId,
     interaction: formal.interaction,
@@ -1588,7 +1597,7 @@ export async function handleDialogueOriginal(request,env,student,formal,turnId,c
   const payload={lessonId:formal.lessonId,clientMutationId:`${DIALOGUE_LOCAL_PREFIX}${turnId}`,lessonPhase:'dialogue'};
   const make=data=>new Request(request.url,{method:'POST',headers:request.headers,body:JSON.stringify(data)});
   if(formal.interaction==='vocabAnswer')return handleReadingVocabAttempt(make({...payload,...formal.input}),env,student,dialogueLocal);
-  if(formal.interaction==='evaluation')return handleLearningInteraction(make({...payload,interactionKey:'evaluation',data:formal.input}),env,null,student,dialogueLocal);
+  if(['evaluation','readAcknowledged'].includes(formal.interaction))return handleLearningInteraction(make({...payload,interactionKey:formal.interaction,data:formal.input}),env,null,student,dialogueLocal);
   return readingError('unsupported original task',400);
 }
 
@@ -1849,7 +1858,7 @@ export async function authoritativeReadingAssessmentForSubmission(db, studentId,
         AND i.student_id = ?
         AND i.lesson_id = ?
         AND i.interaction_key = 'contextWords'
-        AND i.scoring_role = 'a_plus_gate'
+        AND i.scoring_role IN ('a_plus_gate', 'formative')
         AND e.verification_method = 'source_ai_assessment'`
   ).bind(eventId, Number(studentId), lessonId).first();
   if (!row) return null;
@@ -1893,7 +1902,7 @@ async function loadAuthoritativeReadingAssessments(db, studentId, lessonId = "")
        JOIN learning_evaluations e ON e.source_event_id = i.source_event_id
       WHERE i.student_id = ?
         AND i.interaction_key = 'contextWords'
-        AND i.scoring_role = 'a_plus_gate'
+        AND i.scoring_role IN ('a_plus_gate', 'formative')
         AND e.verification_method = 'source_ai_assessment'${scopedSql}
       ORDER BY i.occurred_at DESC, i.source_event_id DESC`
   );
@@ -2650,7 +2659,7 @@ async function loadStudyGuideCatalog(request, env) {
   return value;
 }
 
-async function handleReadingStudyGuideAttempt(request, env, student, capturedPayload = null) {
+async function handleReadingStudyGuideAttempt(request, env, student, capturedPayload = null, dialogue = null) {
   const payload = capturedPayload || await request.json().catch(() => ({}));
   const lessonId = cleanText(payload.lessonId, 80);
   const itemKey = cleanText(payload.itemKey, 180);
@@ -2690,6 +2699,7 @@ async function handleReadingStudyGuideAttempt(request, env, student, capturedPay
       interactionKey: "studyGuideItemCompleted",
       payload: attemptPayload,
       expectedStudyGuideCatalogDigest: catalog.catalogDigest,
+      ...(dialogue?{dialogueTurnId:dialogue.turnId,expectedResourceKey:dialogue.formal.resourceKey,expectedResourceVersion:dialogue.formal.resourceVersion}:{}),
     });
   } catch (error) {
     if (error?.code !== "study_guide_catalog_drift") throw error;
@@ -2711,6 +2721,7 @@ async function handleReadingStudyGuideAttempt(request, env, student, capturedPay
       interactionKey: "studyGuideItemCompleted",
       payload: attemptPayload,
       expectedStudyGuideCatalogDigest: catalog.catalogDigest,
+      ...(dialogue?{dialogueTurnId:dialogue.turnId,expectedResourceKey:dialogue.formal.resourceKey,expectedResourceVersion:dialogue.formal.resourceVersion}:{}),
     });
   }
   if (submissionGuard.pending) return pendingEvaluationResponse(submissionGuard.pending);
@@ -2735,15 +2746,18 @@ async function handleReadingStudyGuideAttempt(request, env, student, capturedPay
   let assessment = deterministicStudyGuideAssessment(item, responseText);
   if (!assessment) {
     try {
-      const raw = await callLearningEvaluator(request, env, submissionGuard.submissionReservation, studyGuideAssessmentPrompt(item, responseText),
+      const prompt=studyGuideAssessmentPrompt(item,responseText);
+      const raw = dialogue?await dialogue.evaluate(prompt):await callLearningEvaluator(request, env, submissionGuard.submissionReservation, prompt,
         {student,lesson,payload:attemptPayload,kind:'study-guide'});
       const parsed = extractJsonObject(raw);
+      if(dialogue&&!validDurableAssessment(parsed))throw Error('invalid_dialogue_source_assessment');
       if (submissionGuard.submissionReservation.evaluationJob && !validDurableAssessment(parsed)) {
         const error = new Error('invalid AI assessment'); error.code='invalid_ai_assessment';
         throw new EvaluationPending(await deferEvaluationJob(env.READING_DB, submissionGuard.submissionReservation.evaluationJob, error));
       }
       assessment = normalizeOpenStudyGuideAssessment(parsed);
     } catch (error) {
+      if(dialogue)throw error;
       if (error instanceof EvaluationPending) return pendingEvaluationResponse(error.job);
       if (error instanceof LearningEvaluatorBudgetExceededError
         || error instanceof LearningEvaluatorBudgetUnavailableError) throw error;
@@ -2757,6 +2771,7 @@ async function handleReadingStudyGuideAttempt(request, env, student, capturedPay
     }
   }
 
+  if(dialogue)submissionGuard.submissionReservation.dialogueCommitStatements=await dialogue.commit(submissionGuard.submissionReservation,assessment);
   const recorded = await recordLearningInteraction({
     request,
     env,

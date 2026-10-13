@@ -1,0 +1,1520 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1713",
+  "title": "12 拿来主义",
+  "mode": "argument",
+  "author": "鲁迅",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1713:p1",
+      "text": "拿来主义\n\n鲁 迅",
+      "block": {
+        "runs": [
+          {
+            "text": "拿来主义",
+            "type": "text"
+          },
+          {
+            "label": "[1]",
+            "noteId": "footnote-11146-1",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "\n\n鲁 迅",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1713:p2",
+      "text": "中国一向是所谓“闭关主义”，自己不去，别人也不许来。自从给枪炮打破了大门之后，又碰了一串钉子，到现在，成了什么都是“送去主义”了。别的且不说罢，单是学艺上的东西，近来就先送一批古董到巴黎去展览，但终“不知后事如何”；还有几位“大师”们捧着几张古画和新画，在欧洲各国一路的挂过去，叫作“发扬国光”。听说不远还要送梅兰芳博士到苏联去，以催进“象征主义”，此后是顺便到欧洲传道。我在这里不想讨论梅博士演艺和象征主义的关系，总之，活人替代了古董，我敢说，也可以算得显出一点进步了。",
+      "block": {
+        "runs": [
+          {
+            "text": "中国一向是所谓“闭关主义”",
+            "type": "text"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-11146-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，自己不去，别人也不许来。自从给枪炮打破了大门之后，又碰了一串钉子",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-11146-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，到现在，成了什么都是“送去主义”了。别的且不说罢，单是学艺",
+            "type": "text"
+          },
+          {
+            "label": "[4]",
+            "noteId": "footnote-11146-4",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "上的东西，近来就先送一批古董到巴黎去展览",
+            "type": "text"
+          },
+          {
+            "label": "[5]",
+            "noteId": "footnote-11146-5",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，但终“不知后事如何”；还有几位“大师”们捧着几张古画和新画，在欧洲各国一路的挂过去，叫作“发扬国光”",
+            "type": "text"
+          },
+          {
+            "label": "[6]",
+            "noteId": "footnote-11146-6",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。听说不远还要送梅兰芳博士到苏联去，以催进“象征主义”",
+            "type": "text"
+          },
+          {
+            "label": "[7]",
+            "noteId": "footnote-11146-7",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，此后是顺便到欧洲传道。我在这里不想讨论梅博士演艺和象征主义的关系，总之，活人替代了古董，我敢说，也可以算得显出一点进步了。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1713:p3",
+      "text": "但我们没有人根据了“礼尚往来”的仪节，说道：拿来！",
+      "block": {
+        "runs": [
+          {
+            "text": "但我们没有人根据了“礼尚往来”的仪节，说道：拿来！",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1713:p4",
+      "text": "当然，能够只是送出去，也不算坏事情，一者见得丰富，二者见得大度。尼采就自诩过他是太阳，光热无穷，只是给与，不想取得。然而尼采究竟不是太阳，他发了疯。中国也不是，虽然有人说，掘起地下的煤来，就足够全世界几百年之用。但是，几百年之后呢？几百年之后，我们当然是化为魂灵，或上天堂，或落了地狱，但我们的子孙是在的，所以还应该给他们留下一点礼品。要不然，则当佳节大典之际，他们拿不出东西来，只好磕头贺喜，讨一点残羹冷炙做奖赏。",
+      "block": {
+        "runs": [
+          {
+            "text": "当然，能够只是送出去，也不算坏事情，一者见得丰富，二者见得大度。尼采",
+            "type": "text"
+          },
+          {
+            "label": "[8]",
+            "noteId": "footnote-11146-8",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "就自诩过他是太阳，光热无穷，只是给与，不想取得。然而尼采究竟不是太阳，他发了疯。中国也不是，虽然有人说，掘起地下的煤来，就足够全世界几百年之用。但是，几百年之后呢？几百年之后，我们当然是化为魂灵，或上天堂，或落了地狱，但我们的子孙是在的，所以还应该给他们留下一点礼品。要不然，则当佳节大典之际，他们拿不出东西来，只好磕头贺喜，讨一点残羹冷炙",
+            "type": "text"
+          },
+          {
+            "label": "[9]",
+            "noteId": "footnote-11146-9",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "做奖赏。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1713:p5",
+      "text": "这种奖赏，不要误解为“抛来”的东西，这是“抛给”的，说得冠冕些，可以称之为“送来”，我在这里不想举出实例。",
+      "block": {
+        "runs": [
+          {
+            "text": "这种奖赏，不要误解为“抛来”的东西，这是“抛给”的，说得冠冕",
+            "type": "text"
+          },
+          {
+            "label": "[10]",
+            "noteId": "footnote-11146-10",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "些，可以称之为“送来”，我在这里不想举出实例",
+            "type": "text"
+          },
+          {
+            "label": "[11]",
+            "noteId": "footnote-11146-11",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1713:p6",
+      "text": "我在这里也并不想对于“送去”再说什么，否则太不“摩登”了。我只想鼓吹我们再吝啬一点，“送去”之外，还得“拿来”，是为“拿来主义”。",
+      "block": {
+        "runs": [
+          {
+            "text": "我在这里也并不想对于“送去”再说什么，否则太不“摩登”",
+            "type": "text"
+          },
+          {
+            "label": "[12]",
+            "noteId": "footnote-11146-12",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "了。我只想鼓吹我们再吝啬一点，“送去”之外，还得“拿来”，是为“拿来主义”。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1713:p7",
+      "text": "但我们被“送来”的东西吓怕了。先有英国的鸦片，德国的废枪炮，后有法国的香粉，美国的电影，日本的印着“完全国货”的各种小东西。于是连清醒的青年们，也对于洋货发生了恐怖。其实，这正是因为那是“送来”的，而不是“拿来”的缘故。",
+      "block": {
+        "runs": [
+          {
+            "text": "但我们被“送来”的东西吓怕了。先有英国的鸦片，德国的废枪炮，后有法国的香粉，美国的电影，日本的印着“完全国货”的各种小东西。于是连清醒的青年们，也对于洋货发生了恐怖。其实，这正是因为那是“送来”的，而不是“拿来”的缘故。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1713:p8",
+      "text": "所以我们要运用脑髓，放出眼光，自己来拿！",
+      "block": {
+        "runs": [
+          {
+            "text": "所以我们要运用脑髓，放出眼光，自己来拿！",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1713:p9",
+      "text": "譬如罢，我们之中的一个穷青年，因为祖上的阴功（姑且让我这么说说罢），得了一所大宅子，且不问他是骗来的，抢来的，或合法继承的，或是做了女婿换来的。那么，怎么办呢？我想，首先是不管三七二十一，“拿来”！但是，如果反对这宅子的旧主人，怕给他的东西染污了，徘徊不敢走进门，是孱头；勃然大怒，放一把火烧光，算是保存自己的清白，则是昏蛋。不过因为原是羡慕这宅子的旧主人的，而这回接受一切，欣欣然的蹩进卧室，大吸剩下的鸦片，那当然更是废物。",
+      "block": {
+        "runs": [
+          {
+            "text": "譬如罢，我们之中的一个穷青年，因为祖上的阴功",
+            "type": "text"
+          },
+          {
+            "label": "[13]",
+            "noteId": "footnote-11146-13",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "（姑且让我这么说说罢），得了一所大宅子，且不问他是骗来的，抢来的，或合法继承的，或是做了女婿换来的",
+            "type": "text"
+          },
+          {
+            "label": "[14]",
+            "noteId": "footnote-11146-14",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。那么，怎么办呢？我想，首先是不管三七二十一，“拿来”！但是，如果反对这宅子的旧主人，怕给他的东西染污了，徘徊不敢走进门，是孱头",
+            "type": "text"
+          },
+          {
+            "label": "[15]",
+            "noteId": "footnote-11146-15",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "；勃然大怒，放一把火烧光，算是保存自己的清白，则是昏蛋。不过因为原是羡慕这宅子的旧主人的，而这回接受一切，欣欣然的蹩进卧室，大吸剩下的鸦片，那当然更是废物。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1713:p10",
+      "text": "“拿来主义”者是全不这样的。",
+      "block": {
+        "runs": [
+          {
+            "text": "“拿来主义”者是全不这样的。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1713:p11",
+      "text": "他占有，挑选。看见鱼翅，并不就抛在路上以显其“平民化”，只要有养料，也和朋友们像萝卜白菜一样的吃掉，只不用它来宴大宾；看见鸦片，也不当众摔在毛厕里，以见其彻底革命，只送到药房里去，以供治病之用，却不弄“出售存膏，售完即止”的玄虚。只有烟枪和烟灯，虽然形式和印度，波斯，阿剌伯的烟具都不同，确可以算是一种国粹，倘使背着周游世界，一定会有人看，但我想，除了送一点进博物馆之外，其余的是大可以毁掉的了。还有一群姨太太，也大以请她们各自走散为是，要不然，“拿来主义”怕未免有些危机。",
+      "block": {
+        "runs": [
+          {
+            "text": "他占有，挑选。看见鱼翅，并不就抛在路上以显其“平民化”，只要有养料，也和朋友们像萝卜白菜一样的吃掉，只不用它来宴大宾；看见鸦片，也不当众摔在毛厕",
+            "type": "text"
+          },
+          {
+            "label": "[16]",
+            "noteId": "footnote-11146-16",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "里，以见其彻底革命，只送到药房里去，以供治病之用，却不弄“出售存膏，售完即止”的玄虚",
+            "type": "text"
+          },
+          {
+            "label": "[17]",
+            "noteId": "footnote-11146-17",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。只有烟枪和烟灯，虽然形式和印度，波斯",
+            "type": "text"
+          },
+          {
+            "label": "[18]",
+            "noteId": "footnote-11146-18",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，阿剌伯",
+            "type": "text"
+          },
+          {
+            "label": "[19]",
+            "noteId": "footnote-11146-19",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的烟具都不同，确可以算是一种国粹",
+            "type": "text"
+          },
+          {
+            "label": "[20]",
+            "noteId": "footnote-11146-20",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，倘使背着周游世界，一定会有人看，但我想，除了送一点进博物馆之外，其余的是大可以毁掉的了。还有一群姨太太，也大以请她们各自走散为是，要不然，“拿来主义”怕未免有些危机。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1713:p12",
+      "text": "总之，我们要拿来。我们要或使用，或存放，或毁灭。那么，主人是新主人，宅子也就会成为新宅子。然而首先要这人沉着，勇猛，有辨别，不自私。没有拿来的，人不能自成为新人，没有拿来的，文艺不能自成为新文艺。",
+      "block": {
+        "runs": [
+          {
+            "text": "总之，我们要拿来。我们要或使用，或存放，或毁灭。那么，主人是新主人，宅子也就会成为新宅子。然而首先要这人沉着，勇猛，有辨别，不自私。没有拿来的，人不能自成为新人，没有拿来的，文艺不能自成为新文艺。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1713:p13",
+      "text": "六月四日",
+      "block": {
+        "runs": [
+          {
+            "text": "六月四日",
+            "type": "text"
+          },
+          {
+            "label": "[21]",
+            "noteId": "footnote-11146-21",
+            "type": "annotation-ref"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《且介亭杂文》（《鲁迅全集》第六卷，人民文学出版社2005年版）。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "闭关主义：指清政府奉行的闭关自守政策。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "碰了一串钉子：指鸦片战争以后，清政府与英、法、俄、日、美、德、意等国家相继签订了一系列丧权辱国的不平等条约。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-3"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "学艺：泛指学术文艺。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-4"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "送一批古董到巴黎去展览：指当时国民党政府在巴黎举办的中国古典艺术展览。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-5"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "发扬国光：1932年至1934年间，美术家徐悲鸿、刘海粟曾分别去欧洲一些国家举办中国美术展览或个人美术作品展览。“发扬国光”是1934年5月28日《大晚报》报道这些消息时的用语。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-6"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "象征主义：1934年5月28日《大晚报》报道：“苏俄艺术界向分写实与象征两派，现写实主义已渐没落，而象征主义则经朝野一致提倡，引成欣欣向荣之概。自彼邦艺术家见我国之书画作品深合象征派后，即忆及中国戏剧亦必采取象征主义。因拟……邀中国戏曲名家梅兰芳等前往奏艺。”鲁迅曾在《谁在没落？》一文中批评《大晚报》的这种歪曲报道。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-7"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "尼采（1844—1900）：德国哲学家，唯意志论者。宣扬“超人”哲学。这里所述尼采的话，见于他的《查拉图斯特拉如是说·序言》。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-8"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "残羹冷炙：吃剩的饭菜，喻指权贵的施舍。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-9"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "冠冕：意思是很体面，有气派。冕，天子、诸侯、卿、大夫所戴的礼帽，后来专指帝王的礼帽。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-10"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "我在这里不想举出实例：1933年6月4日，国民党政府和美国在华盛顿签订五千万美元的“棉麦借款”协定，购买美国的小麦、面粉和棉花。这里指的可能是这一类事。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-11"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "摩登：英语modern的音译，意思是现代的、时髦的。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-12"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "阴功：迷信的说法，认为人们做了好事，阴间就给记功，可以泽及后代子孙。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-13"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "做了女婿换来的：这里是讽刺以做富翁家的女婿为荣的邵洵美等人。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-14"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "孱（càn）头：懦弱无能的人。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-15"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "毛厕：现在写作“茅厕”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-16"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "玄虚：这里指用来掩盖真相、使人迷惑的手段。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-17"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "波斯：伊朗的旧称。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-18"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "阿剌伯：现在译作“阿拉伯”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-19"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "国粹：原指我国 固有文化中的精华，这里是反语。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-20"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "指1934 年6 月4 日。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11146-21"
+    }
+  ],
+  "resources": [],
+  "source": "https://forum.rdfzer.com/t/topic/1713",
+  "objectives": [
+    {
+      "id": "lesson-1713:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1713:p1",
+        "lesson-1713:p2",
+        "lesson-1713:p3",
+        "lesson-1713:p4",
+        "lesson-1713:p5",
+        "lesson-1713:p6",
+        "lesson-1713:p7",
+        "lesson-1713:p8",
+        "lesson-1713:p9",
+        "lesson-1713:p10",
+        "lesson-1713:p11",
+        "lesson-1713:p12",
+        "lesson-1713:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1713:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1713:p1",
+        "lesson-1713:p2",
+        "lesson-1713:p3",
+        "lesson-1713:p4",
+        "lesson-1713:p5",
+        "lesson-1713:p6",
+        "lesson-1713:p7",
+        "lesson-1713:p8",
+        "lesson-1713:p9",
+        "lesson-1713:p10",
+        "lesson-1713:p11",
+        "lesson-1713:p12",
+        "lesson-1713:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1713:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1713:p1",
+        "lesson-1713:p2",
+        "lesson-1713:p3",
+        "lesson-1713:p4",
+        "lesson-1713:p5",
+        "lesson-1713:p6",
+        "lesson-1713:p7",
+        "lesson-1713:p8",
+        "lesson-1713:p9",
+        "lesson-1713:p10",
+        "lesson-1713:p11",
+        "lesson-1713:p12",
+        "lesson-1713:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1713:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1713:p1",
+        "lesson-1713:p2",
+        "lesson-1713:p3",
+        "lesson-1713:p4",
+        "lesson-1713:p5",
+        "lesson-1713:p6",
+        "lesson-1713:p7",
+        "lesson-1713:p8",
+        "lesson-1713:p9",
+        "lesson-1713:p10",
+        "lesson-1713:p11",
+        "lesson-1713:p12",
+        "lesson-1713:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1713:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1713:p1",
+        "lesson-1713:p2",
+        "lesson-1713:p3",
+        "lesson-1713:p4",
+        "lesson-1713:p5",
+        "lesson-1713:p6",
+        "lesson-1713:p7",
+        "lesson-1713:p8",
+        "lesson-1713:p9",
+        "lesson-1713:p10",
+        "lesson-1713:p11",
+        "lesson-1713:p12",
+        "lesson-1713:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1713:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1713:p1",
+        "lesson-1713:p2",
+        "lesson-1713:p3",
+        "lesson-1713:p4",
+        "lesson-1713:p5",
+        "lesson-1713:p6",
+        "lesson-1713:p7",
+        "lesson-1713:p8",
+        "lesson-1713:p9",
+        "lesson-1713:p10",
+        "lesson-1713:p11",
+        "lesson-1713:p12",
+        "lesson-1713:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1713:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1713:p1",
+        "lesson-1713:p2",
+        "lesson-1713:p3",
+        "lesson-1713:p4",
+        "lesson-1713:p5",
+        "lesson-1713:p6",
+        "lesson-1713:p7",
+        "lesson-1713:p8",
+        "lesson-1713:p9",
+        "lesson-1713:p10",
+        "lesson-1713:p11",
+        "lesson-1713:p12",
+        "lesson-1713:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1713:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1713:p1",
+        "lesson-1713:p2",
+        "lesson-1713:p3",
+        "lesson-1713:p4",
+        "lesson-1713:p5",
+        "lesson-1713:p6",
+        "lesson-1713:p7",
+        "lesson-1713:p8",
+        "lesson-1713:p9",
+        "lesson-1713:p10",
+        "lesson-1713:p11",
+        "lesson-1713:p12",
+        "lesson-1713:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "legacy:effect:lesson-1713:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1713:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1713:interaction:contextWords",
+        "resourceVersion": "sha256:e5ad30ef5701c44c8da73c07e0bb3c4bfe7dc4c22abf9251f84ff39f75bc5e16",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1713:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1713:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1713:interaction:revision",
+        "resourceVersion": "sha256:0bdad476c55a931dd49de68ce89e2d4a1f3ac0ae22698253abab03e7bd3fdaab",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1713:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1713:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1713:interaction:structure",
+        "resourceVersion": "sha256:94c53e476c4a1867d8b40cd26526111a4b660d9daff0ab775aa4b47d6a1615c0",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1713:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1713:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1713:interaction:evaluation",
+        "resourceVersion": "sha256:209204cf295c65dbe4f750a7b1590e0ff1befd48605f10b0127b450a8dff81d2",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1713:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1713:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1713:interaction:authorQuestion",
+        "resourceVersion": "sha256:5ba49c1cdc881912c30348ad6336ed99ade98409700b1cca35383b65fe6d9177",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    }
+  ],
+  "vocabulary": [],
+  "legacy": {
+    "lessonId": "lesson-1713",
+    "title": "12 拿来主义",
+    "mode": "argument",
+    "legacyTracks": [
+      "context",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "初讀評議",
+        "",
+        10
+      ],
+      [
+        "read",
+        "通讀正文",
+        "",
+        10
+      ],
+      [
+        "revision",
+        "字句之改",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "論證骨架",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "觀點評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "叩問作者",
+        "",
+        10
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1713:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1713:interaction:contextWords",
+        "resourceVersion": "sha256:e5ad30ef5701c44c8da73c07e0bb3c4bfe7dc4c22abf9251f84ff39f75bc5e16",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1713:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1713:interaction:revision",
+        "resourceVersion": "sha256:0bdad476c55a931dd49de68ce89e2d4a1f3ac0ae22698253abab03e7bd3fdaab",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1713:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1713:interaction:structure",
+        "resourceVersion": "sha256:94c53e476c4a1867d8b40cd26526111a4b660d9daff0ab775aa4b47d6a1615c0",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1713:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1713:interaction:evaluation",
+        "resourceVersion": "sha256:209204cf295c65dbe4f750a7b1590e0ff1befd48605f10b0127b450a8dff81d2",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1713:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1713:interaction:authorQuestion",
+        "resourceVersion": "sha256:5ba49c1cdc881912c30348ad6336ed99ade98409700b1cca35383b65fe6d9177",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1713",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1713:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1713:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1713:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1713",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1713:interaction:contextWords",
+        "completionKey": "effect:lesson-1713:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1713:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1713",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1713:interaction:structure",
+        "completionKey": "effect:lesson-1713:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1713:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1713",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1713:interaction:revision",
+        "completionKey": "effect:lesson-1713:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1713:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1713:interaction:contextWords",
+        "sourceVersion": "sha256:e5ad30ef5701c44c8da73c07e0bb3c4bfe7dc4c22abf9251f84ff39f75bc5e16",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1713:interaction:revision",
+        "sourceVersion": "sha256:0bdad476c55a931dd49de68ce89e2d4a1f3ac0ae22698253abab03e7bd3fdaab",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1713:interaction:structure",
+        "sourceVersion": "sha256:94c53e476c4a1867d8b40cd26526111a4b660d9daff0ab775aa4b47d6a1615c0",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1713:interaction:evaluation",
+        "sourceVersion": "sha256:209204cf295c65dbe4f750a7b1590e0ff1befd48605f10b0127b450a8dff81d2",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1713:interaction:authorQuestion",
+        "sourceVersion": "sha256:5ba49c1cdc881912c30348ad6336ed99ade98409700b1cca35383b65fe6d9177",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1713:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1713:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1713:interaction:contextWords",
+        "completionKey": "effect:lesson-1713:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1713:interaction:structure",
+        "completionKey": "effect:lesson-1713:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1713:interaction:revision",
+        "completionKey": "effect:lesson-1713:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [],
+    "sourceLesson": "data/lessons/lesson-1713.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 5,
+        "formativeCount": 4,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-a865428a2cd867f3b088",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [
+    {
+      "id": "lesson-1713:p14",
+      "text": "*议论性文章往往具有鲜明的针对性。查找相关资料，了解本文的写作背景，思考文章是针对什么问题而写的，提出了怎样的观点，对我们有什么启示。\n\n*这篇文章将不同现象进行归类，直接予以批驳，确立自己的观点。阅读时，梳理和把握论述的脉络层次，学习破立结合的写法，感受文章蕴含的批判力量。\n作者善于运用比喻来证明观点，阐述自己的主张。找出文中比喻论证的例子，分析作者是怎样有效地进行论证的，体会比喻论证的表达效果。",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "*议论性文章往往具有鲜明的针对性。查找相关资料，了解本文的写作背景，思考文章是针对什么问题而写的，提出了怎样的观点，对我们有什么启示。\n\n*这篇文章将不同现象进行归类，直接予以批驳，确立自己的观点。阅读时，梳理和把握论述的脉络层次，学习破立结合的写法，感受文章蕴含的批判力量。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "作者善于运用比喻来证明观点，阐述自己的主张。找出文中比喻论证的例子，分析作者是怎样有效地进行论证的，体会比喻论证的表达效果。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      },
+      "blockIndex": 13,
+      "blockSha256": "7cf000aae489eff38ab878c4bcaf035b1ed37ff8f26e0a6909b8b7e73ccb8b77",
+      "role": "commentary",
+      "label": "原課導讀與教學參考（非本篇正文）",
+      "source": "data/reader-documents/lesson-1713.json#main.blocks[13]",
+      "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+    }
+  ],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [],
+  "guidance": [],
+  "media": [],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1713.json",
+    "lessonSha256": "d40129027a7dd1023f124316a9f31c74ceff3f3ae432f90ba7e0dd12e17df75c",
+    "reader": "data/reader-documents/lesson-1713.json",
+    "readerSha256": "3c7ad469874700578ff3e9b78bacd42e17e9fbb99e8c6a14ab065bfe56c3ded7",
+    "sourcePostId": 11146,
+    "sourcePostNumber": 1,
+    "blockCount": 14,
+    "annotationCount": 21,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 5,
+      "formativeCount": 4,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

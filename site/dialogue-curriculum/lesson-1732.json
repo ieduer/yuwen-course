@@ -1,0 +1,1277 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1732",
+  "title": "5 雷雨(节选)曹 禺",
+  "mode": "drama",
+  "author": "曹禺",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1732:p1",
+      "text": "午饭后，天气更阴沉，更郁热，低沉潮湿的空气，使人异常烦躁。",
+      "block": {
+        "level": 3,
+        "runs": [
+          {
+            "text": "午饭后，天气更阴沉，更郁热，低沉潮湿的空气，使人异常烦躁",
+            "type": "text"
+          },
+          {
+            "label": "[1]",
+            "noteId": "footnote-11179-1",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。",
+            "type": "text"
+          }
+        ],
+        "type": "heading"
+      }
+    },
+    {
+      "id": "lesson-1732:p2",
+      "text": "……\n\n周朴园 （点着一支吕宋烟，看见桌上的雨衣，向侍萍）这是太太找出来的雨衣吗？\n\n鲁侍萍 （看着他）大概是的。\n\n周朴园 （拿起看看）不对，不对，这都是新的。我要我的旧雨衣，你回头跟太太说。\n\n鲁侍萍 嗯。\n\n周朴园 （看她不走）你不知道这间房子底下人不准随便进来吗？\n\n鲁侍萍 （看着他）不知道，老爷。\n\n周朴园 你是新来的下人？\n\n鲁侍萍 不是的，我找我的女儿来的。\n\n周朴园 你的女儿？",
+      "block": {
+        "runs": [
+          {
+            "text": "……\n\n周朴园 （点着一支吕宋烟",
+            "type": "text"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-11179-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，看见桌上的雨衣，向侍萍）这是太太找出来的雨衣吗？\n\n鲁侍萍 （看着他）大概是的。\n\n周朴园 （拿起看看）不对，不对，这都是新的。我要我的旧雨衣，你回头跟太太说。\n\n鲁侍萍 嗯。\n\n周朴园 （看她不走）你不知道这间房子底下人不准随便进来吗？\n\n鲁侍萍 （看着他）不知道，老爷。\n\n周朴园 你是新来的下人？\n\n鲁侍萍 不是的，我找我的女儿来的。\n\n周朴园 你的女儿？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1732:p4",
+      "text": "鲁侍萍 四凤是我的女儿。\n\n周朴园 那你走错屋子了。\n\n鲁侍萍 哦。——老爷没有事了？\n\n周朴园 （指窗）窗户谁叫打开的？\n\n鲁侍萍 哦。（很自然地走到窗前，关上窗户，慢慢地走向中门）\n\n周朴园 （看她关好窗门，忽然觉得她很奇怪）你站一站。（侍萍停）你——你贵姓？\n\n鲁侍萍 我姓鲁。\n\n周朴园 姓鲁。你的口音不像北方人。\n\n鲁侍萍 对了，我不是，我是江苏的。\n\n周朴园 你好像有点无锡口音。\n\n鲁侍萍 我自小就在无锡长大的。\n\n周朴园 （沉思）无锡？嗯，无锡，（忽而）你在无锡是什么时候？\n\n鲁侍萍 光绪二十年，离现在有三十多年了。\n\n周朴园 哦，三十年前你在无锡？\n\n鲁侍萍 是的，三十多年前呢，那时候我记得我们还没有用洋火呢。\n\n周朴园 （沉思）三十多年前，是的，很远啦，我想想，我大概是二十多岁的时候。那时候我还在无锡呢。\n\n鲁侍萍 老爷是那个地方的人？\n\n周朴园 嗯，（沉吟）无锡是个好地方。\n\n鲁侍萍 哦，好地方。\n\n周朴园 你三十年前在无锡吗？\n\n鲁侍萍 是，老爷。\n\n周朴园 三十年前，在无锡有一件很出名的事情——\n\n鲁侍萍 哦。\n\n周朴园 你知道吗？\n\n鲁侍萍 也许记得，不知道老爷说的是哪一件？\n\n周朴园 哦，很远的，提起来大家都忘了。\n\n鲁侍萍 说不定，也许记得的。\n\n周朴园 我问过许多那个时候到过无锡的人，我想打听打听。可是那个时候在无锡的人，到现在不是老了就是死了。活着的多半是不知道的，或者忘了。\n\n鲁侍萍 如若老爷想打听的话，无论什么事，无锡那边我还有认识的人，虽然许久不通音信，托他们打听点事情总还可以的。",
+      "block": {
+        "runs": [
+          {
+            "text": "鲁侍萍 四凤是我的女儿。\n\n周朴园 那你走错屋子了。\n\n鲁侍萍 哦。——老爷没有事了？\n\n周朴园 （指窗）窗户谁叫打开的？\n\n鲁侍萍 哦。（很自然地走到窗前，关上窗户，慢慢地走向中门）\n\n周朴园 （看她关好窗门，忽然觉得她很奇怪）你站一站。（侍萍停）你——你贵姓？\n\n鲁侍萍 我姓鲁。\n\n周朴园 姓鲁。你的口音不像北方人。\n\n鲁侍萍 对了，我不是，我是江苏的。\n\n周朴园 你好像有点无锡口音。\n\n鲁侍萍 我自小就在无锡长大的。\n\n周朴园 （沉思）无锡？嗯，无锡，（忽而）你在无锡是什么时候？\n\n鲁侍萍 光绪二十年，离现在有三十多年了。\n\n周朴园 哦，三十年前你在无锡？\n\n鲁侍萍 是的，三十多年前呢，那时候我记得我们还没有用洋火呢。\n\n周朴园 （沉思）三十多年前，是的，很远啦，我想想，我大概是二十多岁的时候。那时候我还在无锡呢。\n\n鲁侍萍 老爷是那个地方的人？\n\n周朴园 嗯，（沉吟）无锡是个好地方。\n\n鲁侍萍 哦，好地方。\n\n周朴园 你三十年前在无锡吗？\n\n鲁侍萍 是，老爷。\n\n周朴园 三十年前，在无锡有一件很出名的事情——\n\n鲁侍萍 哦。\n\n周朴园 你知道吗？\n\n鲁侍萍 也许记得，不知道老爷说的是哪一件？\n\n周朴园 哦，很远的，提起来大家都忘了。\n\n鲁侍萍 说不定，也许记得的。\n\n周朴园 我问过许多那个时候到过无锡的人，我想打听打听。可是那个时候在无锡的人，到现在不是老了就是死了。活着的多半是不知道的，或者忘了。\n\n鲁侍萍 如若老爷想打听的话，无论什么事，无锡那边我还有认识的人，虽然许久不通音信，托他们打听点事情总还可以的。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1732:p5",
+      "text": "周朴园 我派人到无锡打听过。——不过也许凑巧你会知道。三十年前在无锡有一家姓梅的。\n\n鲁侍萍 姓梅的？\n\n周朴园 梅家的一个年轻小姐，很贤惠，也很规矩。有一天夜里，忽然地投水死了。后来，后来，——你知道吗？\n\n鲁侍萍 不敢说。\n\n周朴园 哦。\n\n鲁侍萍 我倒认识一个年轻的姑娘姓梅的。\n\n周朴园 哦？你说说看。\n\n鲁侍萍 可是她不是小姐，她也不贤惠，并且听说是不大规矩的。\n\n周朴园 也许，也许你弄错了，不过你不妨说说看。\n\n鲁侍萍 这个梅姑娘倒是有一天晚上跳的河，可是不是一个，她手里抱着一个刚生下三天的男孩。听人说她生前是不规矩的。\n\n周朴园 （苦痛）哦！\n\n鲁侍萍 她是个下等人，不很守本分的。听说她跟那时周公馆的少爷有点不清白，生了两个儿子。生了第二个，才过三天，忽然周少爷不要她了。大孩子就放在周公馆，刚生的孩子她抱在怀里，在年三十夜里投河死的。\n\n周朴园 （汗涔涔地）哦。\n\n鲁侍萍 她不是小姐，她是无锡周公馆梅妈的女儿，她叫侍萍。\n\n周朴园 （抬起头来）你姓什么？\n\n鲁侍萍 我姓鲁，老爷。\n\n周朴园 （喘出一口气，沉思地）侍萍，侍萍，对了。这个女孩子的尸首，说是有一个穷人见着埋了。你可以打听到她的坟在哪儿吗？\n\n鲁侍萍 老爷问这些闲事干什么？\n\n周朴园 这个人跟我们有点亲戚。\n\n鲁侍萍 亲戚？\n\n周朴园 嗯，——我们想把她的坟墓修一修。\n\n鲁侍萍 哦，——那用不着了。\n\n周朴园 怎么？\n\n鲁侍萍 这个人现在还活着。\n\n周朴园 （惊愕）什么？",
+      "block": {
+        "runs": [
+          {
+            "text": "周朴园 我派人到无锡打听过。——不过也许凑巧你会知道。三十年前在无锡有一家姓梅的。\n\n鲁侍萍 姓梅的？\n\n周朴园 梅家的一个年轻小姐，很贤惠，也很规矩。有一天夜里，忽然地投水死了。后来，后来，——你知道吗？\n\n鲁侍萍 不敢说。\n\n周朴园 哦。\n\n鲁侍萍 我倒认识一个年轻的姑娘姓梅的。\n\n周朴园 哦？你说说看。\n\n鲁侍萍 可是她不是小姐，她也不贤惠，并且听说是不大规矩的。\n\n周朴园 也许，也许你弄错了，不过你不妨说说看。\n\n鲁侍萍 这个梅姑娘倒是有一天晚上跳的河，可是不是一个，她手里抱着一个刚生下三天的男孩。听人说她生前是不规矩的。\n\n周朴园 （苦痛）哦！\n\n鲁侍萍 她是个下等人，不很守本分的。听说她跟那时周公馆的少爷有点不清白，生了两个儿子。生了第二个，才过三天，忽然周少爷不要她了。大孩子就放在周公馆，刚生的孩子她抱在怀里，在年三十夜里投河死的。\n\n周朴园 （汗涔涔",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-11179-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "地）哦。\n\n鲁侍萍 她不是小姐，她是无锡周公馆梅妈的女儿，她叫侍萍。\n\n周朴园 （抬起头来）你姓什么？\n\n鲁侍萍 我姓鲁，老爷。\n\n周朴园 （喘出一口气，沉思地）侍萍，侍萍，对了。这个女孩子的尸首，说是有一个穷人见着埋了。你可以打听到她的坟在哪儿吗？\n\n鲁侍萍 老爷问这些闲事干什么？\n\n周朴园 这个人跟我们有点亲戚。\n\n鲁侍萍 亲戚？\n\n周朴园 嗯，——我们想把她的坟墓修一修。\n\n鲁侍萍 哦，——那用不着了。\n\n周朴园 怎么？\n\n鲁侍萍 这个人现在还活着。\n\n周朴园 （惊愕）什么？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1732:p7",
+      "text": "鲁侍萍 她没有死。\n\n周朴园 她还在？不会吧？我看见她河边上的衣服，里面有她的绝命书。\n\n鲁侍萍 不过她被一个慈善的人救活了。\n\n周朴园 哦，救活啦？\n\n鲁侍萍 以后无锡的人是没见着她，以为她那夜晚死了。\n\n周朴园 那么，她呢？\n\n鲁侍萍 一个人在外乡活着。\n\n周朴园 那个小孩呢？\n\n鲁侍萍 也活着。\n\n周朴园 （忽然立起）你是谁？\n\n鲁侍萍 我是这儿四凤的妈，老爷。\n\n周朴园 哦。\n\n鲁侍萍 她现在老了，嫁给一个下等人，又生了个女孩，境况很不好。\n\n周朴园 你知道她现在在哪儿？\n\n鲁侍萍 我前几天还见着她！\n\n周朴园 什么？她就在这儿？此地？\n\n鲁侍萍 嗯，就在此地。\n\n周朴园 哦！\n\n鲁侍萍 老爷，您想见一见她吗？\n\n周朴园 不，不。谢谢你。\n\n鲁侍萍 她的命很苦。离开了周家，周家少爷就娶了一位有钱有门第的小姐。她一个单身人，无亲无故，带着一个孩子在外乡，什么事都做：讨饭，缝衣服，当老妈子，在学校里伺候人。\n\n周朴园 她为什么不再找到周家？\n\n鲁侍萍 大概她是不愿意吧。为着她自己的孩子，她嫁过两次。\n\n周朴园 嗯，以后她又嫁过两次。\n\n鲁侍萍 嗯，都是很下等的人。她遇人都很不如意，老爷想帮一帮她吗？\n\n周朴园 好，你先下去。让我想一想。\n\n鲁侍萍 老爷，没有事了？（望着朴园，眼泪要涌出）老爷，您那雨衣，我怎么说？\n\n周朴园 你去告诉四凤，叫她把我樟木箱子里那件旧雨衣拿出来，顺便把那箱子里的几件旧衬衣也捡出来。\n\n鲁侍萍 旧衬衣？\n\n周朴园 你告诉她在我那顶老的箱子里，纺绸的衬衣，没有领子的。",
+      "block": {
+        "runs": [
+          {
+            "text": "鲁侍萍 她没有死。\n\n周朴园 她还在？不会吧？我看见她河边上的衣服，里面有她的绝命书。\n\n鲁侍萍 不过她被一个慈善的人救活了。\n\n周朴园 哦，救活啦？\n\n鲁侍萍 以后无锡的人是没见着她，以为她那夜晚死了。\n\n周朴园 那么，她呢？\n\n鲁侍萍 一个人在外乡活着。\n\n周朴园 那个小孩呢？\n\n鲁侍萍 也活着。\n\n周朴园 （忽然立起）你是谁？\n\n鲁侍萍 我是这儿四凤的妈，老爷。\n\n周朴园 哦。\n\n鲁侍萍 她现在老了，嫁给一个下等人，又生了个女孩，境况很不好。\n\n周朴园 你知道她现在在哪儿？\n\n鲁侍萍 我前几天还见着她！\n\n周朴园 什么？她就在这儿？此地？\n\n鲁侍萍 嗯，就在此地。\n\n周朴园 哦！\n\n鲁侍萍 老爷，您想见一见她吗？\n\n周朴园 不，不。谢谢你。\n\n鲁侍萍 她的命很苦。离开了周家，周家少爷就娶了一位有钱有门第的小姐。她一个单身人，无亲无故，带着一个孩子在外乡，什么事都做：讨饭，缝衣服，当老妈子，在学校里伺候人。\n\n周朴园 她为什么不再找到周家？\n\n鲁侍萍 大概她是不愿意吧。为着她自己的孩子，她嫁过两次。\n\n周朴园 嗯，以后她又嫁过两次。\n\n鲁侍萍 嗯，都是很下等的人。她遇人都很不如意，老爷想帮一帮她吗？\n\n周朴园 好，你先下去。让我想一想。\n\n鲁侍萍 老爷，没有事了？（望着朴园，眼泪要涌出）老爷，您那雨衣，我怎么说？\n\n周朴园 你去告诉四凤，叫她把我樟木箱子里那件旧雨衣拿出来，顺便把那箱子里的几件旧衬衣也捡出来。\n\n鲁侍萍 旧衬衣？\n\n周朴园 你告诉她在我那顶老的箱子里，纺绸的衬衣，没有领子的。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1732:p8",
+      "text": "鲁侍萍 老爷那种绸衬衣不是一共有五件？您要哪一件？\n\n周朴园 要哪一件？\n\n鲁侍萍 不是有一件，在右袖襟上有个烧破的窟窿，后来用丝线绣成一朵梅花补上的？还有一件，——\n\n周朴园 （惊愕）梅花？\n\n鲁侍萍 还有一件绸衬衣，左袖襟也绣着一朵梅花，旁边还绣着一个萍字。还有一件，——\n\n周朴园 （徐徐立起）哦，你，你，你是——\n\n鲁侍萍 我是从前伺候过老爷的下人。\n\n周朴园 哦，侍萍！（低声）怎么，是你？\n\n鲁侍萍 你自然想不到，侍萍的相貌有一天也会老得连你都不认识了。\n\n周朴园 你——侍萍？（不觉地望望柜上的相片，又望侍萍）\n\n鲁侍萍 朴园，你找侍萍吗？侍萍在这儿。\n\n周朴园 （忽然严厉地）你来干什么？\n\n鲁侍萍 不是我要来的。\n\n周朴园 谁指使你来的？\n\n鲁侍萍 （悲愤）命！不公平的命指使我来的。\n\n周朴园 （冷冷地）三十年的工夫你还是找到这儿来了。\n\n鲁侍萍 （愤怨）我没有找你，我没有找你，我以为你早死了。我今天没想到到这儿来，这是天要我在这儿又碰见你。\n\n周朴园 你可以冷静点。现在你我都是有子女的人。如果你觉得心里有委屈，这么大年纪，我们先可以不必哭哭啼啼的。\n\n鲁侍萍 哭？哼，我的眼泪早哭干了，我没有委屈，我有的是恨，是悔，是三十年一天一天我自己受的苦。你大概已经忘了你做的事了！三十年前，过年三十的晚上我生下你的第二个儿子才三天，你为了要赶紧娶那位有钱有门第的小姐，你们逼着我冒着大雪出去，要我离开你们周家的门。\n\n周朴园 从前的旧恩怨，过了几十年，又何必再提呢？\n\n鲁侍萍 那是因为周大少爷一帆风顺，现在也是社会上的好人物。可是自从我被你们家赶出来以后，我没有死成，我把我的母亲可给气死了，我亲生的两个孩子你们家里逼着我留在你们家里。\n\n周朴园 你的第二个孩子你不是已经抱走了吗？\n\n鲁侍萍 那是你们老太太看着孩子快死了，才叫我带走的。（自语）哦，天哪，我觉得我像在做梦。\n\n周朴园 我看过去的事不必再提起来吧。\n\n鲁侍萍 我要提，我要提，我闷了三十年了！你结了婚，就搬了家，我以为这一辈子也见不着你了；谁知道我自己的孩子偏偏命定要跑到周家来，又做我从前在你们家里做过的事。\n\n周朴园 怪不得四凤这样像你。\n\n鲁侍萍 我伺候你，我的孩子再伺候你生的少爷们。这是我的报应，我的报应。\n\n周朴园 你静一静。把脑子放清醒点。你不要以为我的心是死了，你以为一个人做了一件于心不忍的事就会忘了吗？你看这些家具都是你从前顶喜欢的东西，多少年我总是留着，为着纪念你。\n\n鲁侍萍 （低头）哦。\n\n周朴园 你的生日——四月十八——每年我总记得。一切都照着你是正式嫁过周家的人看，甚至于你因为生萍儿，受了病，总要关窗户，这些习惯我都保留着，为的是不忘你，弥补我的罪过。\n\n鲁侍萍 （叹一口气）现在我们都是上了年纪的人，这些傻话请你也不必说了。\n\n周朴园 那更好了。那么我们可以明明白白地谈一谈。\n\n鲁侍萍 不过我觉得没有什么可谈的。\n\n周朴园 话很多。我看你的性情好像没有大改，——鲁贵像是个很不老实的人。\n\n鲁侍萍 你不要怕。他永远不会知道的。\n\n周朴园 那双方面都好。再有，我要问你的，你自己带走的儿子在哪儿？\n\n鲁侍萍 他在你的矿上做工。\n\n周朴园 我问，他现在在哪儿？\n\n鲁侍萍 就在门房等着见你呢。\n\n周朴园 什么？鲁大海？他！我的儿子？\n\n鲁侍萍 他的脚指头因为你的不小心，现在还是少一个的。\n\n周朴园 （冷笑）这么说，我自己的骨肉在矿上鼓动罢工，反对我！\n\n鲁侍萍 他跟你现在完完全全是两样的人。\n\n周朴园 （沉静）他还是我的儿子。\n\n鲁侍萍 你不要以为他还会认你作父亲。\n\n周朴园 （忽然）好！痛痛快快的！你现在要多少钱吧？\n\n鲁侍萍 什么？\n\n周朴园 留着你养老。\n\n鲁侍萍 （苦笑）哼，你还以为我是故意来敲诈你，才来的吗？\n\n周朴园 也好，我们暂且不提这一层。那么，我先说我的意思。你听着，鲁贵我现在要辞退的，四凤也要回家。不过——\n\n鲁侍萍 你不要怕，你以为我会用这种关系来敲诈你吗？你放心，我不会的。大后天我就带着四凤回到我原来的地方。这是一场梦，这地方我绝对不会再住下去。\n\n周朴园 好得很，那么一切路费、用费，都归我担负。\n\n鲁侍萍 什么？\n\n周朴园 这于我的心也安一点。\n\n鲁侍萍 你？（笑）三十年我一个人都过了，现在我反而要你的钱？\n\n周朴园 好，好，好，那么，你现在要什么？\n\n鲁侍萍 （停一停）我，我要点东西。\n\n周朴园 什么？说吧。\n\n鲁侍萍 （泪满眼）我——我——我只要见见我的萍儿。\n\n周朴园 你想见他？\n\n鲁侍萍 嗯，他在哪儿？\n\n周朴园 他现在在楼上陪着他的母亲看病。我叫他，他就可以下来见你。不过是——\n\n鲁侍萍 不过是什么？\n\n周朴园 他很大了。\n\n鲁侍萍 （追忆）他大概是二十八了吧？我记得他比大海只大一岁。\n\n周朴园 并且他以为他母亲早就死了的。\n\n鲁侍萍 哦，你以为我会哭哭啼啼地叫他认母亲吗？我不会那样傻的。我明白他的地位，他的教育，不容他承认这样的母亲。这些年我也学乖了，我只想看看他，他究竟是我生的孩子。你不要怕，我就是告诉他，白白地增加他的烦恼，他自己也不愿意认我的。\n\n周朴园 那么，我们就这样解决了。我叫他下来，你看一看他，以后鲁家的人永远不许再到周家来。\n\n鲁侍萍 好，我希望这一生不至于再见你。\n\n周朴园 （由衣内取出皮夹的支票签好）很好，这是一张五千块钱的支票，你可以先拿去用。算是弥补我一点罪过。\n\n鲁侍萍 （接过支票）谢谢你。（慢慢撕碎支票）\n\n周朴园 侍萍。\n\n鲁侍萍 我这些年的苦不是你拿钱算得清的。\n\n周朴园 可是你——",
+      "block": {
+        "runs": [
+          {
+            "text": "鲁侍萍 老爷那种绸衬衣不是一共有五件？您要哪一件？\n\n周朴园 要哪一件？\n\n鲁侍萍 不是有一件，在右袖襟上有个烧破的窟窿，后来用丝线绣成一朵梅花补上的？还有一件，——\n\n周朴园 （惊愕）梅花？\n\n鲁侍萍 还有一件绸衬衣，左袖襟也绣着一朵梅花，旁边还绣着一个萍字。还有一件，——\n\n周朴园 （徐徐立起）哦，你，你，你是——\n\n鲁侍萍 我是从前伺候过老爷的下人。\n\n周朴园 哦，侍萍！（低声）怎么，是你？\n\n鲁侍萍 你自然想不到，侍萍的相貌有一天也会老得连你都不认识了。\n\n周朴园 你——侍萍？（不觉地望望柜上的相片，又望侍萍）\n\n鲁侍萍 朴园，你找侍萍吗？侍萍在这儿。\n\n周朴园 （忽然严厉地）你来干什么？\n\n鲁侍萍 不是我要来的。\n\n周朴园 谁指使你来的？\n\n鲁侍萍 （悲愤）命！不公平的命指使我来的。\n\n周朴园 （冷冷地）三十年的工夫你还是找到这儿来了。\n\n鲁侍萍 （愤怨）我没有找你，我没有找你，我以为你早死了。我今天没想到到这儿来，这是天要我在这儿又碰见你。\n\n周朴园 你可以冷静点。现在你我都是有子女的人。如果你觉得心里有委屈，这么大年纪，我们先可以不必哭哭啼啼的。\n\n鲁侍萍 哭？哼，我的眼泪早哭干了，我没有委屈，我有的是恨，是悔，是三十年一天一天我自己受的苦。你大概已经忘了你做的事了！三十年前，过年三十的晚上我生下你的第二个儿子才三天，你为了要赶紧娶那位有钱有门第的小姐，你们逼着我冒着大雪出去，要我离开你们周家的门。\n\n周朴园 从前的旧恩怨，过了几十年，又何必再提呢？\n\n鲁侍萍 那是因为周大少爷一帆风顺，现在也是社会上的好人物。可是自从我被你们家赶出来以后，我没有死成，我把我的母亲可给气死了，我亲生的两个孩子你们家里逼着我留在你们家里。\n\n周朴园 你的第二个孩子你不是已经抱走了吗？\n\n鲁侍萍 那是你们老太太看着孩子快死了，才叫我带走的。（自语）哦，天哪，我觉得我像在做梦。\n\n周朴园 我看过去的事不必再提起来吧。\n\n鲁侍萍 我要提，我要提，我闷了三十年了！你结了婚，就搬了家，我以为这一辈子也见不着你了；谁知道我自己的孩子偏偏命定要跑到周家来，又做我从前在你们家里做过的事。\n\n周朴园 怪不得四凤这样像你。\n\n鲁侍萍 我伺候你，我的孩子再伺候你生的少爷们。这是我的报应，我的报应。\n\n周朴园 你静一静。把脑子放清醒点。你不要以为我的心是死了，你以为一个人做了一件于心不忍的事就会忘了吗？你看这些家具都是你从前顶喜欢的东西，多少年我总是留着，为着纪念你。\n\n鲁侍萍 （低头）哦。\n\n周朴园 你的生日——四月十八——每年我总记得。一切都照着你是正式嫁过周家的人看，甚至于你因为生萍儿，受了病，总要关窗户，这些习惯我都保留着，为的是不忘你，弥补我的罪过。\n\n鲁侍萍 （叹一口气）现在我们都是上了年纪的人，这些傻话请你也不必说了。\n\n周朴园 那更好了。那么我们可以明明白白地谈一谈。\n\n鲁侍萍 不过我觉得没有什么可谈的。\n\n周朴园 话很多。我看你的性情好像没有大改，——鲁贵像是个很不老实的人。\n\n鲁侍萍 你不要怕。他永远不会知道的。\n\n周朴园 那双方面都好。再有，我要问你的，你自己带走的儿子在哪儿？\n\n鲁侍萍 他在你的矿上做工。\n\n周朴园 我问，他现在在哪儿？\n\n鲁侍萍 就在门房等着见你呢。\n\n周朴园 什么？鲁大海？他！我的儿子？\n\n鲁侍萍 他的脚指头因为你的不小心，现在还是少一个的。\n\n周朴园 （冷笑）这么说，我自己的骨肉在矿上鼓动罢工，反对我！\n\n鲁侍萍 他跟你现在完完全全是两样的人。\n\n周朴园 （沉静）他还是我的儿子。\n\n鲁侍萍 你不要以为他还会认你作父亲。\n\n周朴园 （忽然）好！痛痛快快的！你现在要多少钱吧？\n\n鲁侍萍 什么？\n\n周朴园 留着你养老。\n\n鲁侍萍 （苦笑）哼，你还以为我是故意来敲诈你，才来的吗？\n\n周朴园 也好，我们暂且不提这一层。那么，我先说我的意思。你听着，鲁贵我现在要辞退的，四凤也要回家。不过——\n\n鲁侍萍 你不要怕，你以为我会用这种关系来敲诈你吗？你放心，我不会的。大后天我就带着四凤回到我原来的地方。这是一场梦，这地方我绝对不会再住下去。\n\n周朴园 好得很，那么一切路费、用费，都归我担负。\n\n鲁侍萍 什么？\n\n周朴园 这于我的心也安一点。\n\n鲁侍萍 你？（笑）三十年我一个人都过了，现在我反而要你的钱？\n\n周朴园 好，好，好，那么，你现在要什么？\n\n鲁侍萍 （停一停）我，我要点东西。\n\n周朴园 什么？说吧。\n\n鲁侍萍 （泪满眼）我——我——我只要见见我的萍儿。\n\n周朴园 你想见他？\n\n鲁侍萍 嗯，他在哪儿？\n\n周朴园 他现在在楼上陪着他的母亲看病。我叫他，他就可以下来见你。不过是——\n\n鲁侍萍 不过是什么？\n\n周朴园 他很大了。\n\n鲁侍萍 （追忆）他大概是二十八了吧？我记得他比大海只大一岁。\n\n周朴园 并且他以为他母亲早就死了的。\n\n鲁侍萍 哦，你以为我会哭哭啼啼地叫他认母亲吗？我不会那样傻的。我明白他的地位，他的教育，不容他承认这样的母亲。这些年我也学乖了，我只想看看他，他究竟是我生的孩子。你不要怕，我就是告诉他，白白地增加他的烦恼，他自己也不愿意认我的。\n\n周朴园 那么，我们就这样解决了。我叫他下来，你看一看他，以后鲁家的人永远不许再到周家来。\n\n鲁侍萍 好，我希望这一生不至于再见你。\n\n周朴园 （由衣内取出皮夹的支票签好）很好，这是一张五千块钱的支票，你可以先拿去用。算是弥补我一点罪过。\n\n鲁侍萍 （接过支票）谢谢你。（慢慢撕碎支票）\n\n周朴园 侍萍。\n\n鲁侍萍 我这些年的苦不是你拿钱算得清的。\n\n周朴园 可是你——",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1732:p9",
+      "text": "（外面争吵声。鲁大海的声音：“放开我，我要进去。”三四个男仆声：“不成，不成，老爷睡觉呢。”）\n\n周朴园 （走至中门）来人！（仆人由中门进）谁在吵？\n\n仆 人 就是那个工人鲁大海！他不讲理，非见老爷不可。\n\n周朴园 哦。（沉吟）那你就叫他进来吧。等一等，叫人到楼上请大少爷下来，我有话问他。\n\n仆 人 是，老爷。（由中门下）\n\n周朴园 （向侍萍）侍萍，你不要太固执。这一点钱你不收下，将来你会后悔的。",
+      "block": {
+        "runs": [
+          {
+            "text": "（外面争吵声。鲁大海的声音：“放开我，我要进去。”三四个男仆声：“不成，不成，老爷睡觉呢。”）\n\n周朴园 （走至中门）来人！（仆人由中门进）谁在吵？\n\n仆 人 就是那个工人鲁大海！他不讲理，非见老爷不可。\n\n周朴园 哦。（沉吟）那你就叫他进来吧。等一等，叫人到楼上请大少爷下来，我有话问他。\n\n仆 人 是，老爷。（由中门下）\n\n周朴园 （向侍萍）侍萍，你不要太固执。这一点钱你不收下，将来你会后悔的。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1732:p10",
+      "text": "（侍萍望着周朴园，一句话也不说。仆人领大海进。大海站在左边，三四个仆人立一旁。）\n\n鲁大海 （见侍萍）妈，您还在这儿？\n\n周朴园 （打量大海）你叫什么名字？\n\n鲁大海 （大笑）董事长，您不要同我摆架子，您难道不知道我是谁吗？\n\n周朴园 你？我只知道你是罢工闹得最凶的工人代表。\n\n鲁大海 对了，一点儿也不错，所以才来拜望拜望您。\n\n周朴园 你有什么事吧？\n\n鲁大海 董事长当然知道我是为什么来的。\n\n周朴园 （摇头）我不知道。\n\n鲁大海 我们老远从矿上来，今天我又在您府上大门房里从早上六点钟一直等到现在，我就是要问问董事长，对于我们工人的条件，究竟是答应不答应？\n\n周朴园 哦，——那么，那三个代表呢？\n\n鲁大海 我跟你说吧，他们现在正在联络旁的工会呢。\n\n周朴园 哦，——他们没有告诉你旁的事情吗？\n\n鲁大海 告诉不告诉于你没有关系。——我问你，你的意思，忽而软，忽而硬，究竟是怎么回事？",
+      "block": {
+        "runs": [
+          {
+            "text": "（侍萍望着周朴园，一句话也不说。仆人领大海进。大海站在左边，三四个仆人立一旁。）\n\n鲁大海 （见侍萍）妈，您还在这儿？\n\n周朴园 （打量大海）你叫什么名字？\n\n鲁大海 （大笑）董事长，您不要同我摆架子，您难道不知道我是谁吗？\n\n周朴园 你？我只知道你是罢工闹得最凶的工人代表。\n\n鲁大海 对了，一点儿也不错，所以才来拜望拜望您。\n\n周朴园 你有什么事吧？\n\n鲁大海 董事长当然知道我是为什么来的。\n\n周朴园 （摇头）我不知道。\n\n鲁大海 我们老远从矿上来，今天我又在您府上大门房里从早上六点钟一直等到现在，我就是要问问董事长，对于我们工人的条件，究竟是答应不答应？\n\n周朴园 哦，——那么，那三个代表呢？\n\n鲁大海 我跟你说吧，他们现在正在联络旁的工会呢。\n\n周朴园 哦，——他们没有告诉你旁的事情吗？\n\n鲁大海 告诉不告诉于你没有关系。——我问你，你的意思，忽而软，忽而硬，究竟是怎么回事？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1732:p11",
+      "text": "（周萍由饭厅上，见有人，即想退回。）\n\n周朴园 （看周萍）不要走，萍儿！（视侍萍，侍萍知周萍为其子，眼泪汪汪地望着他）\n\n周 萍 是，爸爸。\n\n周朴园 （指身侧）萍儿，你站在这儿。（向大海）你这么只凭意气是不行的。",
+      "block": {
+        "runs": [
+          {
+            "text": "（周萍由饭厅上，见有人，即想退回。）\n\n周朴园 （看周萍）不要走，萍儿！（视侍萍，侍萍知周萍为其子，眼泪汪汪地望着他）\n\n周 萍 是，爸爸。\n\n周朴园 （指身侧）萍儿，你站在这儿。（向大海）你这么只凭意气是不行的。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1732:p12",
+      "text": "《雷雨》剧照鲁大海 哼，你们的手段，我都明白。你们这样拖延时候，不过是想去花钱收买少数不要脸的败类，暂时把我们骗在这儿。周朴园 你的见地也不是没有道理。鲁大海 可是你完全错了。我们这次罢工是团结的，有组织的。我们代表这次来，并不是来求你们。你听清楚，不求你们。你们答应就答应；不答应，我们一直罢工到底，我们知道你们不到两个月整个地就要关门的。周朴园 你以为你们那些代表们，那些领袖们都可靠吗？鲁大海 至少比你们只认识洋钱的结合要可靠得多。周朴园 那么我给你一件东西看。",
+      "block": {
+        "runs": [
+          {
+            "text": "《雷雨》剧照鲁大海 哼，你们的手段，我都明白。你们这样拖延时候，不过是想去花钱收买少数不要脸的败类，暂时把我们骗在这儿。周朴园 你的见地也不是没有道理。鲁大海 可是你完全错了。我们这次罢工是团结的，有组织的。我们代表这次来，并不是来求你们。你听清楚，不求你们。你们答应就答应；不答应，我们一直罢工到底，我们知道你们不到两个月整个地就要关门的。周朴园 你以为你们那些代表们，那些领袖们都可靠吗？鲁大海 至少比你们只认识洋钱的结合要可靠得多。周朴园 那么我给你一件东西看。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1732:p13",
+      "text": "（周朴园在桌上找电报，仆人递给他；此时周冲偷偷由左书房进，在旁谛听。）\n\n周朴园 （给大海电报）这是昨天从矿上来的电报。\n\n鲁大海 （拿过去读）什么？他们又上工了。（放下电报）不会，不会。\n\n周朴园 矿上的工人已经在昨天早上复工，你当代表的反而不知道吗？\n\n鲁大海 （惊，怒）怎么矿上警察开枪打死三十个工人就白打了吗？（又看电报，忽然笑起来）哼，这是假的。你们自己假造的电报。",
+      "block": {
+        "runs": [
+          {
+            "text": "（周朴园在桌上找电报，仆人递给他；此时周冲",
+            "type": "text"
+          },
+          {
+            "label": "[4]",
+            "noteId": "footnote-11179-4",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "偷偷由左书房进，在旁谛听。）\n\n周朴园 （给大海电报）这是昨天从矿上来的电报。\n\n鲁大海 （拿过去读）什么？他们又上工了。（放下电报）不会，不会。\n\n周朴园 矿上的工人已经在昨天早上复工，你当代表的反而不知道吗？\n\n鲁大海 （惊，怒）怎么矿上警察开枪打死三十个工人就白打了吗？（又看电报，忽然笑起来）哼，这是假的。你们自己假造的电报。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1732:p14",
+      "text": "鲁大海 报来离间我们的。（笑）哼，你们这种卑鄙无赖的行为！\n\n周萍 （忍不住）你是谁？敢在这儿胡说？\n\n周朴园 萍儿！没有你的话。（低声向大海）你就这样相信你那同来的几个代表吗？\n\n鲁大海 你不用多说，我明白你这些话的用意。\n\n周朴园 好，那我把那复工的合同给你瞧瞧。\n\n鲁大海 （笑）你不要骗小孩子，复工的合同没有我们代表的签字是不生效力的。\n\n周朴园 哦，（向仆人）合同！（仆人由桌上拿合同递他）你看，这是他们三个人签字的合同。\n\n鲁大海 （看合同）什么？（慢慢地，低声）他们三个人签了字。他们怎么会不告诉我，自己就签了字呢？他们就这样把我不理啦。\n\n周朴园 对了，傻小子，没有经验只会胡喊是不成的。\n\n鲁大海 那三个代表呢？\n\n周朴园 昨天晚车就回去了。\n\n鲁大海 （如梦初醒）他们三个就骗了我了，这三个没有骨头的东西！他们就把矿上的工人们卖了。哼，你们这些不要脸的董事长，你们的钱这次又灵了。\n\n周萍 （怒）你混账！\n\n周朴园 不许多说话。（回头向大海）鲁大海，你现在没有资格跟我说话——矿上已经把你开除了。\n\n鲁大海 开除了？！\n\n周冲 爸爸，这是不公平的。\n\n周朴园 （向周冲）你少多嘴，出去！",
+      "block": {
+        "runs": [
+          {
+            "text": "鲁大海 报来离间我们的。（笑）哼，你们这种卑鄙无赖的行为！\n\n周萍 （忍不住）你是谁？敢在这儿胡说？\n\n周朴园 萍儿！没有你的话。（低声向大海）你就这样相信你那同来的几个代表吗？\n\n鲁大海 你不用多说，我明白你这些话的用意。\n\n周朴园 好，那我把那复工的合同给你瞧瞧。\n\n鲁大海 （笑）你不要骗小孩子，复工的合同没有我们代表的签字是不生效力的。\n\n周朴园 哦，（向仆人）合同！（仆人由桌上拿合同递他）你看，这是他们三个人签字的合同。\n\n鲁大海 （看合同）什么？（慢慢地，低声）他们三个人签了字。他们怎么会不告诉我，自己就签了字呢？他们就这样把我不理啦。\n\n周朴园 对了，傻小子，没有经验只会胡喊是不成的。\n\n鲁大海 那三个代表呢？\n\n周朴园 昨天晚车就回去了。\n\n鲁大海 （如梦初醒）他们三个就骗了我了，这三个没有骨头的东西！他们就把矿上的工人们卖了。哼，你们这些不要脸的董事长，你们的钱这次又灵了。\n\n周萍 （怒）你混账！\n\n周朴园 不许多说话。（回头向大海）鲁大海，你现在没有资格跟我说话——矿上已经把你开除了。\n\n鲁大海 开除了？！\n\n周冲 爸爸，这是不公平的。\n\n周朴园 （向周冲）你少多嘴，出去！",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1732:p15",
+      "text": "（周冲愤然由中门下。）\n\n鲁大海 哦，好，好，（切齿）你的手段我早就领教过，只要你能弄钱，你什么都做得出来。你叫警察杀了矿上许多工人，你还——\n\n周朴园 你胡说！\n\n鲁侍萍 （至大海前）别说了，走吧。\n\n鲁大海 哼，你的来历我都知道，你从前在哈尔滨包修江桥，故意叫江堤出险，——\n\n周朴园 （厉声）下去！\n\n仆人们 （拉大海）走！走！\n\n鲁大海 （对仆人）你们这些混账东西，放开我。我要说，你故意淹死了两千二百个小工，每一个小工的性命你扣三百块钱！姓周的，你发的是绝子绝孙的昧心财！你现在还——\n\n周萍 （忍不住气，走到大海面前，重重地打他两个嘴巴）你这种混账东西！\n\n鲁大海 立刻要还手，但是被周宅的仆人们拉住。\n\n周萍 打他！\n\n鲁大海 （向周萍高声）你，你！（正要骂，仆人一起打大海。大海头流血。侍萍哭喊着护大海）\n\n周朴园 （厉声）不要打人！",
+      "block": {
+        "runs": [
+          {
+            "text": "（周冲愤然由中门下。）\n\n鲁大海 哦，好，好，（切齿）你的手段我早就领教过，只要你能弄钱，你什么都做得出来。你叫警察杀了矿上许多工人，你还——\n\n周朴园 你胡说！\n\n鲁侍萍 （至大海前）别说了，走吧。\n\n鲁大海 哼，你的来历我都知道，你从前在哈尔滨包修江桥，故意叫江堤出险，——\n\n周朴园 （厉声）下去！\n\n仆人们 （拉大海）走！走！\n\n鲁大海 （对仆人）你们这些混账东西，放开我。我要说，你故意淹死了两千二百个小工，每一个小工的性命你扣三百块钱！姓周的，你发的是绝子绝孙的昧心财！你现在还——\n\n周萍 （忍不住气，走到大海面前，重重地打他两个嘴巴）你这种混账东西！\n\n鲁大海 立刻要还手，但是被周宅的仆人们拉住。\n\n周萍 打他！\n\n鲁大海 （向周萍高声）你，你！（正要骂，仆人一起打大海。大海头流血。侍萍哭喊着护大海）\n\n周朴园 （厉声）不要打人！",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1732:p16",
+      "text": "（仆人们住手，仍拉住大海。）\n\n鲁大海 （挣扎）放开我，你们这一群强盗！\n\n周萍 （向仆人们）把他拉下去！\n\n鲁侍萍 （大哭起来）哦，这真是一群强盗！（走至周萍面前，抽咽）你是萍，——凭，——凭什么打我的儿子？\n\n周萍 你是谁？\n\n鲁侍萍 我是你的——你打的这个人的妈。\n\n鲁大海 妈，别理这东西，您小心吃了他们的亏。\n\n鲁侍萍 （呆呆地看着周萍的脸，忽而又大哭起来）大海，走吧，我们走吧。（抱着大海受伤的头哭）",
+      "block": {
+        "runs": [
+          {
+            "text": "（仆人们住手，仍拉住大海。）\n\n鲁大海 （挣扎）放开我，你们这一群强盗！\n\n周萍 （向仆人们）把他拉下去！\n\n鲁侍萍 （大哭起来）哦，这真是一群强盗！（走至周萍面前，抽咽）你是萍，——凭，——凭什么打我的儿子？\n\n周萍 你是谁？\n\n鲁侍萍 我是你的——你打的这个人的妈。\n\n鲁大海 妈，别理这东西，您小心吃了他们的亏。\n\n鲁侍萍 （呆呆地看着周萍的脸，忽而又大哭起来）大海，走吧，我们走吧。（抱着大海受伤的头哭）",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1732:p17",
+      "text": "（大海为仆人们拥下，侍萍亦下。）",
+      "block": {
+        "runs": [
+          {
+            "text": "（大海为仆人们拥下，侍萍亦下。）",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "午饭后……使人异常烦躁：这是第二幕开始时的一段舞台说明。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11179-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "吕宋烟：雪茄烟，因菲律宾吕宋岛所产的烟质量好而得名。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11179-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "涔（cén）涔 形容汗水不断地流下。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11179-3"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "﹝周冲﹞周朴园和蘩漪的儿子。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11179-4"
+    }
+  ],
+  "resources": [],
+  "source": "https://forum.rdfzer.com/t/topic/1732",
+  "objectives": [
+    {
+      "id": "lesson-1732:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1732:p1",
+        "lesson-1732:p2",
+        "lesson-1732:p4",
+        "lesson-1732:p5",
+        "lesson-1732:p7",
+        "lesson-1732:p8",
+        "lesson-1732:p9",
+        "lesson-1732:p10",
+        "lesson-1732:p11",
+        "lesson-1732:p12",
+        "lesson-1732:p13",
+        "lesson-1732:p14",
+        "lesson-1732:p15",
+        "lesson-1732:p16",
+        "lesson-1732:p17"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1732:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1732:p1",
+        "lesson-1732:p2",
+        "lesson-1732:p4",
+        "lesson-1732:p5",
+        "lesson-1732:p7",
+        "lesson-1732:p8",
+        "lesson-1732:p9",
+        "lesson-1732:p10",
+        "lesson-1732:p11",
+        "lesson-1732:p12",
+        "lesson-1732:p13",
+        "lesson-1732:p14",
+        "lesson-1732:p15",
+        "lesson-1732:p16",
+        "lesson-1732:p17"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1732:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1732:p1",
+        "lesson-1732:p2",
+        "lesson-1732:p4",
+        "lesson-1732:p5",
+        "lesson-1732:p7",
+        "lesson-1732:p8",
+        "lesson-1732:p9",
+        "lesson-1732:p10",
+        "lesson-1732:p11",
+        "lesson-1732:p12",
+        "lesson-1732:p13",
+        "lesson-1732:p14",
+        "lesson-1732:p15",
+        "lesson-1732:p16",
+        "lesson-1732:p17"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1732:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1732:p1",
+        "lesson-1732:p2",
+        "lesson-1732:p4",
+        "lesson-1732:p5",
+        "lesson-1732:p7",
+        "lesson-1732:p8",
+        "lesson-1732:p9",
+        "lesson-1732:p10",
+        "lesson-1732:p11",
+        "lesson-1732:p12",
+        "lesson-1732:p13",
+        "lesson-1732:p14",
+        "lesson-1732:p15",
+        "lesson-1732:p16",
+        "lesson-1732:p17"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1732:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1732:p1",
+        "lesson-1732:p2",
+        "lesson-1732:p4",
+        "lesson-1732:p5",
+        "lesson-1732:p7",
+        "lesson-1732:p8",
+        "lesson-1732:p9",
+        "lesson-1732:p10",
+        "lesson-1732:p11",
+        "lesson-1732:p12",
+        "lesson-1732:p13",
+        "lesson-1732:p14",
+        "lesson-1732:p15",
+        "lesson-1732:p16",
+        "lesson-1732:p17"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1732:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1732:p1",
+        "lesson-1732:p2",
+        "lesson-1732:p4",
+        "lesson-1732:p5",
+        "lesson-1732:p7",
+        "lesson-1732:p8",
+        "lesson-1732:p9",
+        "lesson-1732:p10",
+        "lesson-1732:p11",
+        "lesson-1732:p12",
+        "lesson-1732:p13",
+        "lesson-1732:p14",
+        "lesson-1732:p15",
+        "lesson-1732:p16",
+        "lesson-1732:p17"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1732:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1732:p1",
+        "lesson-1732:p2",
+        "lesson-1732:p4",
+        "lesson-1732:p5",
+        "lesson-1732:p7",
+        "lesson-1732:p8",
+        "lesson-1732:p9",
+        "lesson-1732:p10",
+        "lesson-1732:p11",
+        "lesson-1732:p12",
+        "lesson-1732:p13",
+        "lesson-1732:p14",
+        "lesson-1732:p15",
+        "lesson-1732:p16",
+        "lesson-1732:p17"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1732:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1732:p1",
+        "lesson-1732:p2",
+        "lesson-1732:p4",
+        "lesson-1732:p5",
+        "lesson-1732:p7",
+        "lesson-1732:p8",
+        "lesson-1732:p9",
+        "lesson-1732:p10",
+        "lesson-1732:p11",
+        "lesson-1732:p12",
+        "lesson-1732:p13",
+        "lesson-1732:p14",
+        "lesson-1732:p15",
+        "lesson-1732:p16",
+        "lesson-1732:p17"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "legacy:effect:lesson-1732:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1732:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1732:interaction:contextWords",
+        "resourceVersion": "sha256:b00ba8242a8f9701792fd9c09dcda4e1f76fada4f6cd6b6acaaa2d68df8846f2",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1732:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1732:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1732:interaction:revision",
+        "resourceVersion": "sha256:7f42db387024335f93e7b6b6727085a8a44a1459200895cdf8c448ea724fdc39",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1732:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1732:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1732:interaction:structure",
+        "resourceVersion": "sha256:9a4c61c734a1bb971a2f8f1f4ed86b0513e529f8ce528690aca6b9c847de700a",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1732:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1732:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1732:interaction:evaluation",
+        "resourceVersion": "sha256:6c5d9ede76bb9663c85cd90ec19f4f52df7c4d9fc2a3f79ca1c981871eac0378",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1732:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1732:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1732:interaction:authorQuestion",
+        "resourceVersion": "sha256:cac1a79f3d5ebf153cd91114677394c8f82f9ca51547ff0f0d55a6d6fbe78b25",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    }
+  ],
+  "vocabulary": [],
+  "legacy": {
+    "lessonId": "lesson-1732",
+    "title": "5 雷雨(节选)曹 禺",
+    "mode": "drama",
+    "legacyTracks": [
+      "context",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "初讀評議",
+        "",
+        10
+      ],
+      [
+        "read",
+        "通讀正文",
+        "",
+        10
+      ],
+      [
+        "revision",
+        "字句之改",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "場面調度",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "篇目評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "叩問作者",
+        "",
+        10
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1732:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1732:interaction:contextWords",
+        "resourceVersion": "sha256:b00ba8242a8f9701792fd9c09dcda4e1f76fada4f6cd6b6acaaa2d68df8846f2",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1732:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1732:interaction:revision",
+        "resourceVersion": "sha256:7f42db387024335f93e7b6b6727085a8a44a1459200895cdf8c448ea724fdc39",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1732:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1732:interaction:structure",
+        "resourceVersion": "sha256:9a4c61c734a1bb971a2f8f1f4ed86b0513e529f8ce528690aca6b9c847de700a",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1732:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1732:interaction:evaluation",
+        "resourceVersion": "sha256:6c5d9ede76bb9663c85cd90ec19f4f52df7c4d9fc2a3f79ca1c981871eac0378",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1732:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1732:interaction:authorQuestion",
+        "resourceVersion": "sha256:cac1a79f3d5ebf153cd91114677394c8f82f9ca51547ff0f0d55a6d6fbe78b25",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1732",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1732:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1732:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1732:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1732",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1732:interaction:contextWords",
+        "completionKey": "effect:lesson-1732:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1732:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1732",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1732:interaction:structure",
+        "completionKey": "effect:lesson-1732:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1732:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1732",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1732:interaction:revision",
+        "completionKey": "effect:lesson-1732:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1732:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1732:interaction:contextWords",
+        "sourceVersion": "sha256:b00ba8242a8f9701792fd9c09dcda4e1f76fada4f6cd6b6acaaa2d68df8846f2",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1732:interaction:revision",
+        "sourceVersion": "sha256:7f42db387024335f93e7b6b6727085a8a44a1459200895cdf8c448ea724fdc39",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1732:interaction:structure",
+        "sourceVersion": "sha256:9a4c61c734a1bb971a2f8f1f4ed86b0513e529f8ce528690aca6b9c847de700a",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1732:interaction:evaluation",
+        "sourceVersion": "sha256:6c5d9ede76bb9663c85cd90ec19f4f52df7c4d9fc2a3f79ca1c981871eac0378",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1732:interaction:authorQuestion",
+        "sourceVersion": "sha256:cac1a79f3d5ebf153cd91114677394c8f82f9ca51547ff0f0d55a6d6fbe78b25",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1732:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1732:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1732:interaction:contextWords",
+        "completionKey": "effect:lesson-1732:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1732:interaction:structure",
+        "completionKey": "effect:lesson-1732:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1732:interaction:revision",
+        "completionKey": "effect:lesson-1732:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [],
+    "sourceLesson": "data/lessons/lesson-1732.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 5,
+        "formativeCount": 4,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-82307b79e33eb4a0bf21",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [
+    {
+      "id": "lesson-1732:p18",
+      "text": "曹禺认为“写戏主要是写‘人’”（《看话剧〈丹心谱〉》）。《雷雨》在刻画人物时避免了脸谱化和扁平化，用多个细节充分地展现人物性格、心理的复杂性，取得了巨大的成功。阅读本文时要抓住人物关系，初步理解人物性格。最好能阅读全剧，更全面地理解剧中人物。可以围绕“周朴园对侍萍的怀念中到底有几分真情”“鲁侍萍是坚强还是软弱”等问题进行探讨，深入把握《雷雨》中主要人物的性格特点。\n选段中的**“周朴园与鲁侍萍相认”、“鲁大海与周朴园冲突”**是两段充分展现人物内心世界的“重场戏”，阅读时要注意作者如何设置尖锐复杂的冲突，以展开情节、刻画人物、揭示主题。\n《雷雨》的台词一直为人称道，要深入体会台词对揭示人物内心活动、推动情节发展的作用。戏剧中的人物语言常常有“言外之意”，也就是潜台词，阅读时要细加揣摩。",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "曹禺认为“写戏主要是写‘人’”（《看话剧〈丹心谱〉》）。《雷雨》在刻画人物时避免了脸谱化和扁平化，用多个细节充分地展现人物性格、心理的复杂性，取得了巨大的成功。阅读本文时要抓住人物关系，初步理解人物性格。最好能阅读全剧，更全面地理解剧中人物。可以围绕“周朴园对侍萍的怀念中到底有几分真情”“鲁侍萍是坚强还是软弱”等问题进行探讨，深入把握《雷雨》中主要人物的性格特点。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "选段中的**“周朴园与鲁侍萍相认”、“鲁大海与周朴园冲突”**是两段充分展现人物内心世界的“重场戏”，阅读时要注意作者如何设置尖锐复杂的冲突，以展开情节、刻画人物、揭示主题。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "《雷雨》的台词一直为人称道，要深入体会台词对揭示人物内心活动、推动情节发展的作用。戏剧中的人物语言常常有“言外之意”，也就是潜台词，阅读时要细加揣摩。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      },
+      "blockIndex": 17,
+      "blockSha256": "f23cf64d9bbb033ecfad7df73ebff09cca7a125cae5f6c2d351803c112022120",
+      "role": "commentary",
+      "label": "原課導讀與教學參考（非本篇正文）",
+      "source": "data/reader-documents/lesson-1732.json#main.blocks[17]",
+      "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+    }
+  ],
+  "structuralBlocks": [
+    {
+      "id": "lesson-1732:p3",
+      "text": "",
+      "block": {
+        "type": "divider"
+      }
+    },
+    {
+      "id": "lesson-1732:p6",
+      "text": "",
+      "block": {
+        "type": "divider"
+      }
+    }
+  ],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《曹禺选集》（人民文学出版社2004 年版）。有改动。曹禺（1910—1996），原名万家宝，字小石，湖北潜江人，生于天津，剧作家。代表剧作有《雷雨》《日出》《原野》《北京人》等。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        },
+        {
+          "runs": [
+            {
+              "text": "《雷雨》是中国话剧艺术由发展走向成熟的标志，共四幕，这里选的是第二幕的片段。《雷雨》故事发生在20 世纪初期中国北方某个闷热的夏日。 剧本从鲁妈（侍萍）来看望在周家帮佣的女儿四凤写起，牵出周家和鲁家30 年的恩怨情仇。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        },
+        {
+          "runs": [
+            {
+              "text": "30 年前在无锡，周家大少爷周朴园爱上女佣梅妈的女儿侍萍。后来周家为了给周朴园娶有钱有门第的小姐，大年三十把侍萍赶出家门。走投无路的侍萍带着出生仅三天的第二个儿子投河自尽，被人救起，流落北方受苦受难。谁知30 年后，侍萍的女儿四凤又进入已搬到北方、成为大矿主的周朴园家做女佣，并且与周家大少爷——正是四凤同母异父的哥哥——周萍相爱。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        },
+        {
+          "runs": [
+            {
+              "text": "而此时在周家，如同即将在沙漠里干渴而死的周朴园妻子蘩漪，拼命抓住她与周萍的“罪恶的爱”企图拯救自己；周萍却对与蘩漪的关系感到悔恨和厌恶，紧紧抓住与四凤的爱情来洗涤自己的灵魂；侍萍早年带走的周朴园第二个儿子鲁大海，作为周朴园矿上罢工的工人代表进入周家与周朴园谈判斗争。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        },
+        {
+          "runs": [
+            {
+              "text": "错综复杂的矛盾冲突由此展开。 侍萍眼见自己的儿女相爱而呼天抢地，诅咒命运的不公。蘩漪抓不住周萍的爱随即发泄最不忍的恨，先是叫出也爱四凤的周冲意欲阻拦周萍和四凤的出走，继而当着众人的面揭开自己与周萍的关系真相，接着又报复性地喊来周朴园要他看看这个“体面的家庭”。周鲁两家30 年的恩怨情仇终于真相大白。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        },
+        {
+          "runs": [
+            {
+              "text": "四凤痛苦万分，冲出门外，碰着漏电的电线死去，周冲跑出来伸手去拉她，也触电而亡。周萍走进书房开枪自杀。剧作通过周家这个“最圆满、最有秩序的家庭”所暗藏的污浊和腐朽，暴露了封建大家庭的罪恶，揭示了它所依存的社会必然走向崩溃的历史发展趋势。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "type": "quote"
+    }
+  ],
+  "guidance": [],
+  "media": [
+    {
+      "alt": "",
+      "bytes": 250123,
+      "finalUrl": "https://files.rdfzer.com/original/2X/8/8a9a7b35ecb0af9339dde91f9f099d9a3355730c.jpeg",
+      "height": 750,
+      "id": "media-d7278287db1d0738bcab",
+      "mediaType": "image/jpeg",
+      "nativeDisposition": "verified-in-app",
+      "receiptCollectedAt": "2026-07-30T01:10:43.464Z",
+      "receiptRequired": true,
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29",
+      "sha256": "e77186338aa035b2214eeda47b9bc5b6c32cb0acb8f54b20486a59f4fd7524c7",
+      "sourceUrl": "https://files.rdfzer.com/original/2X/8/8a9a7b35ecb0af9339dde91f9f099d9a3355730c.jpeg",
+      "webDisposition": "source-url",
+      "width": 1121
+    }
+  ],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1732.json",
+    "lessonSha256": "2adf74011ce489b03f1f2c7093ed25728a462afa42d2b476fec034b31f7e5fe9",
+    "reader": "data/reader-documents/lesson-1732.json",
+    "readerSha256": "b44366bbd5916d9af82f360e85f6ebb285b2b0ae900e440cf994e5a79e2008c3",
+    "sourcePostId": 11179,
+    "sourcePostNumber": 1,
+    "blockCount": 18,
+    "annotationCount": 4,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 5,
+      "formativeCount": 4,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

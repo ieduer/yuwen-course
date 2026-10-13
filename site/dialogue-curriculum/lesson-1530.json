@@ -1,0 +1,1375 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1530",
+  "title": "* 小二黑结婚(节选)/ 赵树理",
+  "mode": "fiction",
+  "author": "赵树理",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1530:p1",
+      "text": "二诸葛的神课",
+      "block": {
+        "level": 2,
+        "runs": [
+          {
+            "text": "二诸葛的神课",
+            "type": "text"
+          }
+        ],
+        "type": "heading"
+      }
+    },
+    {
+      "id": "lesson-1530:p2",
+      "text": "邻居们见是兴旺弟兄们捆人，也没有人敢给小二黑讲情，直等到他们走后，才把二诸葛招呼回家。",
+      "block": {
+        "runs": [
+          {
+            "text": "邻居们见是兴旺弟兄们捆人，也没有人敢给小二黑讲情，直等到他们走后，才把二诸葛招呼回家。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p3",
+      "text": "二诸葛连连摇头说：“唉！我知道这几天要出事啦！前天早上我上地去，才上到岭上，碰上个骑驴媳妇，穿了一身孝，我就知道坏了。我今年是罗睺hóu星照运，要谨防戴孝的冲了运气，因此哪里也不敢去，谁知躲也躲不过。昨天晚上二黑他娘梦见庙里唱戏。今天早上一个老鸦落在东房上叫了十几声……唉！反正是时运，躲也躲不过。”他啰里啰唆念了一大堆，邻居们听了有些厌烦，又给他说了一会儿宽心话，就都散了。",
+      "block": {
+        "runs": [
+          {
+            "text": "二诸葛连连摇头说：“唉！我知道这几天要出事啦！前天早上我上地去，才上到岭上，碰上个骑驴媳妇，穿了一身孝，我就知道坏了。我今年是罗睺hóu星照运",
+            "type": "text"
+          },
+          {
+            "label": "[1]",
+            "noteId": "footnote-10234-1",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，要谨防戴孝的冲了运气，因此哪里也不敢去，谁知躲也躲不过。昨天晚上二黑他娘梦见庙里唱戏。今天早上一个老鸦落在东房上叫了十几声……唉！反正是时运，躲也躲不过。”他啰里啰唆念了一大堆，邻居们听了有些厌烦，又给他说了一会儿宽心话，就都散了。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p4",
+      "text": "有事人哪里睡得着？人散了之后，二诸葛家里除了童养媳之外，三个人谁也没有睡。二诸葛摸了摸脸，取出三个制钱占了一卦，占出之后吓得他面色如土。他说：“了不得呀了不得！丑土的父母动出午火的官鬼，火旺于夏，恐怕有些危险了。唉！人家把他选成青年队长，我就说过不叫他当，小杂种硬要充人物头！人家说要按军法处理，要不当队长哪里犯得了军法？”老婆也拍手跺脚道：“小爹呀！谁知道你要闯这么大的事啦？”大黑劝道：“不怕！事已经出下了，由他去吧！我想这又不是人命事，也犯不了什么大罪！既然他们送到区上了，我先到区上打听打听！你们都睡吧！”说着点了个灯笼就走了。",
+      "block": {
+        "runs": [
+          {
+            "text": "有事人哪里睡得着？人散了之后，二诸葛家里除了童养媳之外，三个人谁也没有睡。二诸葛摸了摸脸，取出三个制钱占了一卦，占出之后吓得他面色如土。他说：“了不得呀了不得！丑土的父母动出午火的官鬼，火旺于夏，恐怕有些危险了。唉！人家把他选成青年队长，我就说过不叫他当，小杂种硬要充人物头！人家说要按军法处理，要不当队长哪里犯得了军法？”老婆也拍手跺脚道：“小爹呀！谁知道你要闯这么大的事啦？”大黑劝道：“不怕！事已经出下了，由他去吧！我想这又不是人命事，也犯不了什么大罪！既然他们送到区上了，我先到区上打听打听！你们都睡吧！”说着点了个灯笼就走了。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p5",
+      "text": "二诸葛打发大黑去后，仍然低头细细研究方才占的那一卦。停了一会儿，远远听着有个女人哭，越哭越近，不大一会儿就来到窗下，一推门就进来了。二诸葛还没有看清是谁，这女人就一把把他拉住，带哭带闹说：“刘修德！还我闺女！你的孩子把我的闺女勾引到哪里了？还我……”二诸葛老婆正气得死去活来，一看见来的是三仙姑，正赶上出气，从炕上跳下来拉住她道：“你来了好！省得我去找你！你母女两个好生生把我个孩子勾引坏，你倒有脸来找我！咱两人就也到区上说说理！”两个女人滚成一团，二诸葛一个人拉也拉不开，也再顾不上研究他的卦。三仙姑见二诸葛老婆已经不顾了命，自己先胆怯了几分，不敢恋战，少闹了一会儿挣脱出来就走了。二诸葛老婆追出门来，被二诸葛拦回去，还骂个不休。",
+      "block": {
+        "runs": [
+          {
+            "text": "二诸葛打发大黑去后，仍然低头细细研究方才占的那一卦。停了一会儿，远远听着有个女人哭，越哭越近，不大一会儿就来到窗下，一推门就进来了。二诸葛还没有看清是谁，这女人就一把把他拉住，带哭带闹说：“刘修德！还我闺女！你的孩子把我的闺女勾引到哪里了？还我……”二诸葛老婆正气得死去活来，一看见来的是三仙姑，正赶上出气，从炕上跳下来拉住她道：“你来了好！省得我去找你！你母女两个好生生把我个孩子勾引坏，你倒有脸来找我！咱两人就也到区上说说理！”两个女人滚成一团，二诸葛一个人拉也拉不开，也再顾不上研究他的卦。三仙姑见二诸葛老婆已经不顾了命，自己先胆怯了几分，不敢恋战，少闹了一会儿挣脱出来就走了。二诸葛老婆追出门来，被二诸葛拦回去，还骂个不休。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p6",
+      "text": "小二黑结婚 丁聪 作",
+      "block": {
+        "runs": [
+          {
+            "text": "小二黑结婚 丁聪 作",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p7",
+      "text": "恩典恩典",
+      "block": {
+        "level": 2,
+        "runs": [
+          {
+            "text": "恩典恩典",
+            "type": "text"
+          }
+        ],
+        "type": "heading"
+      }
+    },
+    {
+      "id": "lesson-1530:p8",
+      "text": "二诸葛一夜没有睡，一遍一遍念：“大黑怎么还不回来，大黑怎么还不回来。”第二天天不明就起程往区上走，走到半路，远远看见大黑、三个民兵已都回来了，还来了区上一个助理员，一个交通员。他远远就喊叫道：“大黑！怎么样？要紧不要紧？”大黑说：“没有事！不怕！”说着就走到跟前，助理员跟三个民兵先走了。大黑告交通员说：“这就是我爹！”又向二诸葛说：“区上添传你跟于福老婆。你去吧，没有事！二黑跟小芹两个人，一到区上就放开了。区上早就说兴旺跟金旺两个人不是东西，已经把他两个人押起来了，还派助理员到咱村开大会调查他们横行霸道的证据。我赶到那里人家就问罢了，听说区上还许咱二黑跟小芹结婚。”二诸葛说：“不犯罪就好，结婚可不行，命相不对！你没有听说添传我做什么？”大黑说：“不知道，大约也没有什么大事。你去吧，我先回去告我娘说。”交通员说：“老汉！这就算见了你了！你去吧，我再传那一个去！”说了就跟大黑相跟着走了。",
+      "block": {
+        "runs": [
+          {
+            "text": "二诸葛一夜没有睡，一遍一遍念：“大黑怎么还不回来，大黑怎么还不回来。”第二天天不明就起程往区上走，走到半路，远远看见大黑、三个民兵已都回来了，还来了区上一个助理员，一个交通员。他远远就喊叫道：“大黑！怎么样？要紧不要紧？”大黑说：“没有事！不怕！”说着就走到跟前，助理员跟三个民兵先走了。大黑告交通员说：“这就是我爹！”又向二诸葛说：“区上添传你跟于福老婆。你去吧，没有事！二黑跟小芹两个人，一到区上就放开了。区上早就说兴旺跟金旺两个人不是东西，已经把他两个人押起来了，还派助理员到咱村开大会调查他们横行霸道的证据。我赶到那里人家就问罢了，听说区上还许咱二黑跟小芹结婚。”二诸葛说：“不犯罪就好，结婚可不行，命相不对！你没有听说添传我做什么？”大黑说：“不知道，大约也没有什么大事。你去吧，我先回去告我娘说。”交通员说：“老汉！这就算见了你了！你去吧，我再传那一个去！”说了就跟大黑相跟着走了。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p9",
+      "text": "二诸葛到了区上，看见小二黑跟小芹坐在一条板凳上，他就指着小二黑骂道：“闯祸东西！放了你你还不快回去？你把老子吓死了！不要脸！”区长道：“干什么？区公所是骂人的地方？”二诸葛不说话了。区长问：“你就是刘修德？”二诸葛答：“是！”问：“你给刘二黑收了个童养媳？”答：“是！”问：“今年几岁了？”答：“属猴的，十二岁了。”区长说：“女不过十五岁不能订婚，把人家退回娘家去，刘二黑已经跟于小芹订婚了！”二诸葛说：“她只有个爹，也不知逃难逃到哪里去了，退也没处退。女不过十五不能订婚，那不过是官家规定，其实乡间七八岁订婚的多着哩。请区长恩典恩典就过去了……”区长说：“凡是不合法的订婚，只要有一方面不愿意都得退！”二诸葛说：“我这是两家情愿！”区长问小二黑道：“刘二黑，你愿意不愿意？”小二黑说：“不愿意！”二诸葛的脾气又上来了，瞪了小二黑一眼道：“由你啦？”区长道：“给他订婚不由他，难道由你啦？老汉！如今是婚姻自主，由不得你了，你家养的那个小姑娘，要真是没有娘家，就算成你的闺女好了。”二诸葛道：“那也可以，不过还得请区长恩典恩典，不能叫他跟于福这闺女订婚！”区长说：“这你就管不着了！”二诸葛发急道：“千万请区长恩典恩典，命相不对，这是一辈子的事！”又向小二黑道：“二黑！你不要糊涂了！这是你一辈子的事！”区长道：“老汉！你不要糊涂了！强逼着你十九岁的孩子娶上个十二岁的小姑娘，恐怕要生一辈子气！ 我不过是劝一劝你，其实只要人家两个人愿意，你愿意不愿意都不相干。回去吧！童养媳没处退就算成你的闺女！”二诸葛还要请区长“恩典恩典”，一个交通员把他推出来了。",
+      "block": {
+        "runs": [
+          {
+            "text": "二诸葛到了区上，看见小二黑跟小芹坐在一条板凳上，他就指着小二黑骂道：“闯祸东西！放了你你还不快回去？你把老子吓死了！不要脸！”区长道：“干什么？区公所是骂人的地方？”二诸葛不说话了。区长问：“你就是刘修德？”二诸葛答：“是！”问：“你给刘二黑收了个童养媳？”答：“是！”问：“今年几岁了？”答：“属猴的，十二岁了。”区长说：“女不过十五岁不能订婚，把人家退回娘家去，刘二黑已经跟于小芹订婚了！”二诸葛说：“她只有个爹，也不知逃难逃到哪里去了，退也没处退。女不过十五不能订婚，那不过是官家规定，其实乡间七八岁订婚的多着哩。请区长恩典恩典就过去了……”区长说：“凡是不合法的订婚，只要有一方面不愿意都得退！”二诸葛说：“我这是两家情愿！”区长问小二黑道：“刘二黑，你愿意不愿意？”小二黑说：“不愿意！”二诸葛的脾气又上来了，瞪了小二黑一眼道：“由你啦？”区长道：“给他订婚不由他，难道由你啦？老汉！如今是婚姻自主，由不得你了，你家养的那个小姑娘，要真是没有娘家，就算成你的闺女好了。”二诸葛道：“那也可以，不过还得请区长恩典恩典，不能叫他跟于福这闺女订婚！”区长说：“这你就管不着了！”二诸葛发急道：“千万请区长恩典恩典，命相不对，这是一辈子的事！”又向小二黑道：“二黑！你不要糊涂了！这是你一辈子的事！”区长道：“老汉！你不要糊涂了！强逼着你十九岁的孩子娶上个十二岁的小姑娘，恐怕要生一辈子气！ 我不过是劝一劝你，其实只要人家两个人愿意，你愿意不愿意都不相干。回去吧！童养媳没处退就算成你的闺女！”二诸葛还要请区长“恩典恩典”，一个交通员把他推出来了。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p10",
+      "text": "看看仙姑",
+      "block": {
+        "level": 2,
+        "runs": [
+          {
+            "text": "看看仙姑",
+            "type": "text"
+          }
+        ],
+        "type": "heading"
+      }
+    },
+    {
+      "id": "lesson-1530:p11",
+      "text": "三仙姑去寻二诸葛，一来为的是逞逞闹气的本领，二来为的是遮遮外人的耳目，其实让小芹吃一吃亏她很高兴，所以跟二诸葛老婆闹了一阵之后，回去就睡了。第二天早上，她起得很迟，于福虽比她着急，可是自己既没有主意，又不敢叫醒她，只好自己先去做饭；饭快成的时候，三仙姑慢慢起来梳妆，于福问她道：“不去打听打听小芹？”她说：“打听她做甚啦？她的本领多大啦？”于福也再没有敢说什么，把饭菜做成了放在炉边等，直等到她梳妆罢了才开饭。",
+      "block": {
+        "runs": [
+          {
+            "text": "三仙姑去寻二诸葛，一来为的是逞逞闹气的本领，二来为的是遮遮外人的耳目，其实让小芹吃一吃亏她很高兴，所以跟二诸葛老婆闹了一阵之后，回去就睡了。第二天早上，她起得很迟，于福虽比她着急，可是自己既没有主意，又不敢叫醒她，只好自己先去做饭；饭快成的时候，三仙姑慢慢起来梳妆，于福问她道：“不去打听打听小芹？”她说：“打听她做甚啦？她的本领多大啦？”于福也再没有敢说什么，把饭菜做成了放在炉边等，直等到她梳妆罢了才开饭。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p12",
+      "text": "饭还没有吃罢，区上的交通员来传她。她好像很得意，嗓子拉得长长地说：“闺女大了咱管不了，就去请区长替咱管教管教！”她吃完了饭，换上新衣服、新首帕、绣花鞋、镶边裤，又擦了一次粉，加了几件首饰，然后叫于福给她备上驴，她骑上，于福给她赶上，往区上去。",
+      "block": {
+        "runs": [
+          {
+            "text": "饭还没有吃罢，区上的交通员来传她。她好像很得意，嗓子拉得长长地说：“闺女大了咱管不了，就去请区长替咱管教管教！”她吃完了饭，换上新衣服、新首帕、绣花鞋、镶边裤，又擦了一次粉，加了几件首饰，然后叫于福给她备上驴，她骑上，于福给她赶上，往区上去。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p13",
+      "text": "到了区上，交通员把她引到区长房子里，她趴下就磕头，连声叫道：“区长老爷，你可要给我做主！”区长正伏在桌上写字，见她低着头跪在地下，头上戴了满头银首饰，还以为是前两天跟婆婆生了气的那个年轻媳妇，便说道：“你婆婆不是有保人吗？为什么不找保人？”三仙姑莫名其妙，抬头看了看区长的脸。区长见是个擦着粉的老太婆，才知道是认错人了。交通员道：“认错人了！这就是于小芹的娘！”区长打量了她一眼道：“你就是小芹的娘呀？起来！不要装神做鬼！我什么都清楚！起来！”三仙姑站起来了。区长问：“你今年多大数？”三仙姑说：“四十五。”区长说：“你自己看看你打扮得像个人不像？”门边站着老乡一个十来岁的小闺女嘻嘻嘻笑了。交通员说：“到外边耍！”小闺女跑了。区长问：“你会下神是不是？”三仙姑不敢答话。区长问：“你给你闺女找了个婆家？”三仙姑答：“找下了！”问：“使了多少钱？”答：“三千五！”问：“还有些什么？”答：“有些首饰布匹！”问：“跟你闺女商量过没有？”答：“没有！”问：“你闺女愿意不愿意？”答：“不知道！”区长道：“我给你叫来你亲自问问她！”又向交通员道：“去叫于小芹！”",
+      "block": {
+        "runs": [
+          {
+            "text": "到了区上，交通员把她引到区长房子里，她趴下就磕头，连声叫道：“区长老爷，你可要给我做主！”区长正伏在桌上写字，见她低着头跪在地下，头上戴了满头银首饰，还以为是前两天跟婆婆生了气的那个年轻媳妇，便说道：“你婆婆不是有保人吗？为什么不找保人？”三仙姑莫名其妙，抬头看了看区长的脸。区长见是个擦着粉的老太婆，才知道是认错人了。交通员道：“认错人了！这就是于小芹的娘！”区长打量了她一眼道：“你就是小芹的娘呀？起来！不要装神做鬼！我什么都清楚！起来！”三仙姑站起来了。区长问：“你今年多大数？”三仙姑说：“四十五。”区长说：“你自己看看你打扮得像个人不像？”门边站着老乡一个十来岁的小闺女嘻嘻嘻笑了。交通员说：“到外边耍！”小闺女跑了。区长问：“你会下神是不是？”三仙姑不敢答话。区长问：“你给你闺女找了个婆家？”三仙姑答：“找下了！”问：“使了多少钱？”答：“三千五！”问：“还有些什么？”答：“有些首饰布匹！”问：“跟你闺女商量过没有？”答：“没有！”问：“你闺女愿意不愿意？”答：“不知道！”区长道：“我给你叫来你亲自问问她！”又向交通员道：“去叫于小芹！”",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p14",
+      "text": "刚才跑出去那个小闺女，跑到外边一宣传，说有个打官司的老婆，四十五了，擦着粉，穿着花鞋。邻近的女人们都跑来看，挤了半院，唧唧哝哝说：“看看！四十五了！”“看那裤腿！”“看那鞋！”三仙姑半辈子没有脸红过，偏这会儿撑不住气了，一道道热汗在脸上流。交通员领着小芹来了，故意说：“看什么？人家也是个人吧，没有见过？闪开路！”一伙女人们哈哈大笑。",
+      "block": {
+        "runs": [
+          {
+            "text": "刚才跑出去那个小闺女，跑到外边一宣传，说有个打官司的老婆，四十五了，擦着粉，穿着花鞋。邻近的女人们都跑来看，挤了半院，唧唧哝哝说：“看看！四十五了！”“看那裤腿！”“看那鞋！”三仙姑半辈子没有脸红过，偏这会儿撑不住气了，一道道热汗在脸上流。交通员领着小芹来了，故意说：“看什么？人家也是个人吧，没有见过？闪开路！”一伙女人们哈哈大笑。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p15",
+      "text": "把小芹叫来，区长说：“你问问你闺女愿意不愿意！”三仙姑只听见院里人说“四十五”“穿花鞋”，羞得只顾擦汗，再也开不得口。院里的人们忽然又转了话头，都说“那是人家的闺女”“闺女不如娘会打扮”，也有人说“听说还会下神”，偏又有个知道底细的断断续讲“米烂了”的，这时三仙姑恨不得一头碰死。",
+      "block": {
+        "runs": [
+          {
+            "text": "把小芹叫来，区长说：“你问问你闺女愿意不愿意！”三仙姑只听见院里人说“四十五”“穿花鞋”，羞得只顾擦汗，再也开不得口。院里的人们忽然又转了话头，都说“那是人家的闺女”“闺女不如娘会打扮”，也有人说“听说还会下神”，偏又有个知道底细的断断续讲“米烂了”的",
+            "type": "text"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-10234-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，这时三仙姑恨不得一头碰死。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p16",
+      "text": "区长说：“你不问我替你问！于小芹，你娘给你找的婆家你愿意跟人家结婚不愿意？”小芹说：“不愿意！我知道人家是谁？”区长问三仙姑道：“你听见了吧？”又给她讲了一会儿婚姻自主的法令，说小芹跟小二黑订婚完全合法，还吩咐她把吴家送来的钱和东西原封退了，让小芹跟小二黑结婚。她羞愧之下，一一答应了下来。",
+      "block": {
+        "runs": [
+          {
+            "text": "区长说：“你不问我替你问！于小芹，你娘给你找的婆家你愿意跟人家结婚不愿意？”小芹说：“不愿意！我知道人家是谁？”区长问三仙姑道：“你听见了吧？”又给她讲了一会儿婚姻自主的法令，说小芹跟小二黑订婚完全合法，还吩咐她把吴家送来的钱和东西原封退了，让小芹跟小二黑结婚。她羞愧之下，一一答应了下来。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p17",
+      "text": "怎么到底",
+      "block": {
+        "level": 2,
+        "runs": [
+          {
+            "text": "怎么到底",
+            "type": "text"
+          }
+        ],
+        "type": "heading"
+      }
+    },
+    {
+      "id": "lesson-1530:p18",
+      "text": "三个民兵回到刘家峧，一说区上把兴旺金旺二人押起来，又派助理员来调查他们的罪恶，真是人人拍手称快。午饭后，庙里开一个群众大会，村长报告了开会宗旨，就请大家举他两个人的作恶事实。起先大家还怕扳不倒人家，人家再返回来报仇，老大一会儿没有人说话；有几个胆子太小的人，还悄悄劝大家说：“忍事者安然。”有个被他两人作践垮了的年轻人说：“我从前没有忍过？越忍越不得安然！你们不说我说！” 他先从金旺领着土匪到他家绑票说起，一连说了四五款，才说道：“我歇歇再说，先让别人也说几款！”他一说开了头，许多受过害的人也都抢着说起来：有给他们花过钱的，有被他们逼着上过吊的，也有产业被他们霸了的，老婆被他们奸淫过的；他两人还派上民兵给他们自己割柴，拨上民夫给他们自己锄地；浮收粮，私派款，强迫民兵捆人……你一宗他一宗，从晌午说到太阳落，一共说了五六十款。区上根据这些罪状把他两人送到县里，县里把罪状一一证实之后，除叫他们赔偿大家损失外，又判了十五年徒刑。",
+      "block": {
+        "runs": [
+          {
+            "text": "三个民兵回到刘家峧",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-10234-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，一说区上把兴旺金旺二人押起来，又派助理员来调查他们的罪恶，真是人人拍手称快。午饭后，庙里开一个群众大会，村长报告了开会宗旨，就请大家举他两个人的作恶事实。起先大家还怕扳不倒人家，人家再返回来报仇，老大一会儿没有人说话；有几个胆子太小的人，还悄悄劝大家说：“忍事者安然。”有个被他两人作践垮了的年轻人说：“我从前没有忍过？越忍越不得安然！你们不说我说！” 他先从金旺领着土匪到他家绑票说起，一连说了四五款，才说道：“我歇歇再说，先让别人也说几款！”他一说开了头，许多受过害的人也都抢着说起来：有给他们花过钱的，有被他们逼着上过吊的，也有产业被他们霸了的，老婆被他们奸淫过的；他两人还派上民兵给他们自己割柴，拨上民夫给他们自己锄地；浮收粮，私派款，强迫民兵捆人……你一宗他一宗，从晌午说到太阳落，一共说了五六十款。区上根据这些罪状把他两人送到县里，县里把罪状一一证实之后，除叫他们赔偿大家损失外，又判了十五年徒刑。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p19",
+      "text": "经过这次大会之后，村里人也都敢出头了。不久，村干部又都经过大改选，村里人再也不敢乱投坏人的票了。这期间，金旺老婆自然也落了选。偏她还变了口吻，说：“以后我也要进步了。”",
+      "block": {
+        "runs": [
+          {
+            "text": "经过这次大会之后，村里人也都敢出头了。不久，村干部又都经过大改选，村里人再也不敢乱投坏人的票了。这期间，金旺老婆自然也落了选。偏她还变了口吻，说：“以后我也要进步了。”",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p20",
+      "text": "两个神仙也有了变化：三仙姑那天在区上被一伙妇女围住看了半天，实在觉着不好意思，回去对着镜子研究了一下，真有点儿打扮得不像话；又想到自己的女儿快要跟人结婚，自己还卖什么老俏？这才下了个决心，把自己的打扮从顶到底换了一遍，弄得像个当长辈人的样子，把三十年来装神弄鬼的那张香案也悄悄拆去。",
+      "block": {
+        "runs": [
+          {
+            "text": "两个神仙也有了变化：三仙姑那天在区上被一伙妇女围住看了半天，实在觉着不好意思，回去对着镜子研究了一下，真有点儿打扮得不像话；又想到自己的女儿快要跟人结婚，自己还卖什么老俏？这才下了个决心，把自己的打扮从顶到底换了一遍，弄得像个当长辈人的样子，把三十年来装神弄鬼的那张香案也悄悄拆去。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p21",
+      "text": "二诸葛那天从区上回去，又向老婆提起二黑跟小芹的命相不对，他老婆道：“把你的鬼八卦收起吧！你不是说二黑这回了不得吗？你一辈子放个屁也要卜一课，究竟抵了些什么事？我看小芹蛮不错，能跟咱二黑过就很好！什么命相对不对？你就不记得‘不宜栽种？”二诸葛见老婆都不信自己的阴阳，也就不好意思再到别人跟前卖弄他那一套了。",
+      "block": {
+        "runs": [
+          {
+            "text": "二诸葛那天从区上回去，又向老婆提起二黑跟小芹的命相不对，他老婆道：“把你的鬼八卦收起吧！你不是说二黑这回了不得吗？你一辈子放个屁也要卜一课，究竟抵了些什么事？我看小芹蛮不错，能跟咱二黑过就很好！什么命相对不对？你就不记得‘不宜栽种",
+            "type": "text"
+          },
+          {
+            "label": "[4]",
+            "noteId": "footnote-10234-4",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "？”二诸葛见老婆都不信自己的阴阳，也就不好意思再到别人跟前卖弄他那一套了。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p22",
+      "text": "小芹和小二黑各回各家，见老人们的脾气都有些改变，托邻居们趁势和说和说，两位神仙也就顺水推舟同意他们结婚。后来两家都准备了一下，就过门。过门之后，小两口都十分得意，邻居们都说是村里第一对好夫妻。",
+      "block": {
+        "runs": [
+          {
+            "text": "小芹和小二黑各回各家，见老人们的脾气都有些改变，托邻居们趁势和说和说，两位神仙也就顺水推舟同意他们结婚。后来两家都准备了一下，就过门。过门之后，小两口都十分得意，邻居们都说是村里第一对好夫妻。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p23",
+      "text": "夫妻们在自己卧房里有时候免不了说玩话：小二黑好学三仙姑下神时候唱“前世姻缘由天定”，小芹好学二诸葛说“区长恩典，命相不对”。淘气的孩子们去听窗，学会了这两句话，就给两位神仙加了新外号：三仙姑叫“前世姻缘”，二诸葛叫“命相不对”。",
+      "block": {
+        "runs": [
+          {
+            "text": "夫妻们在自己卧房里有时候免不了说玩话：小二黑好学三仙姑下神时候唱“前世姻缘由天定”，小芹好学二诸葛说“区长恩典，命相不对”。淘气的孩子们去听窗，学会了这两句话，就给两位神仙加了新外号：三仙姑叫“前世姻缘”，二诸葛叫“命相不对”。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1530:p24",
+      "text": "1943 年5 月，写于太行",
+      "block": {
+        "runs": [
+          {
+            "text": "1943 年5 月，写于太行",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "罗睺（hóu）星照运：罗睺星管着命运，不吉利。这是迷信的说法。罗睺星，星命家附会为能支配人事祸福的星。照运，主管命运。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10234-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "“米烂了”的故事：小说第一节中提到：三仙姑有一次设香案扮神给人问病，趁人出去时对小芹说：“快去捞饭！米烂了！”不料被人听见，传为笑谈。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10234-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "峧：读jiāo。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10234-3"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "不宜栽种：小说第一节中提到：有一年春天大旱，大家趁着难得的雨水抢着种地，二诸葛却因为看了历书说“不宜栽种”，结果误了农时，遭人嘲笑。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10234-4"
+    }
+  ],
+  "resources": [
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/uploads/short-url/fRA8ru3aWpX2MVviKu1thu3PAsI.pdf",
+      "kind": "link",
+      "label": "赵树理文集(全四册) (赵树理).pdf",
+      "postId": 53572,
+      "postNumber": null,
+      "sourceUrl": "https://forum.rdfzer.com/uploads/short-url/fRA8ru3aWpX2MVviKu1thu3PAsI.pdf"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://sites.google.com/view/pkuschool/xbz000/%e7%ac%ac%e4%ba%8c%e5%8d%95%e5%85%83/%e5%b0%8f%e4%ba%8c%e9%bb%91%e7%bb%93%e5%a9%9a%e8%8a%82%e9%80%89-%e8%b5%b5%e6%a0%91%e7%90%86",
+      "kind": "link",
+      "label": "https://sites.google.com/view/pkuschool/xbz000/%e7%ac%ac%e4%ba%8c%e5%8d%95%e5%85%83/%e5%b0%8f%e4%ba%8c%e9%bb%91%e7%bb%93%e5%a9%9a%e8%8a%82%e9%80%89-%e8%b5%b5%e6",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://sites.google.com/view/pkuschool/xbz000/%e7%ac%ac%e4%ba%8c%e5%8d%95%e5%85%83/%e5%b0%8f%e4%ba%8c%e9%bb%91%e7%bb%93%e5%a9%9a%e8%8a%82%e9%80%89-%e8%b5%b5%e6%a0%91%e7%90%86"
+    }
+  ],
+  "source": "https://forum.rdfzer.com/t/topic/1530",
+  "objectives": [
+    {
+      "id": "lesson-1530:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1530:p1",
+        "lesson-1530:p2",
+        "lesson-1530:p3",
+        "lesson-1530:p4",
+        "lesson-1530:p5",
+        "lesson-1530:p6",
+        "lesson-1530:p7",
+        "lesson-1530:p8",
+        "lesson-1530:p9",
+        "lesson-1530:p10",
+        "lesson-1530:p11",
+        "lesson-1530:p12",
+        "lesson-1530:p13",
+        "lesson-1530:p14",
+        "lesson-1530:p15",
+        "lesson-1530:p16",
+        "lesson-1530:p17",
+        "lesson-1530:p18",
+        "lesson-1530:p19",
+        "lesson-1530:p20",
+        "lesson-1530:p21",
+        "lesson-1530:p22",
+        "lesson-1530:p23",
+        "lesson-1530:p24"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1530:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1530:p1",
+        "lesson-1530:p2",
+        "lesson-1530:p3",
+        "lesson-1530:p4",
+        "lesson-1530:p5",
+        "lesson-1530:p6",
+        "lesson-1530:p7",
+        "lesson-1530:p8",
+        "lesson-1530:p9",
+        "lesson-1530:p10",
+        "lesson-1530:p11",
+        "lesson-1530:p12",
+        "lesson-1530:p13",
+        "lesson-1530:p14",
+        "lesson-1530:p15",
+        "lesson-1530:p16",
+        "lesson-1530:p17",
+        "lesson-1530:p18",
+        "lesson-1530:p19",
+        "lesson-1530:p20",
+        "lesson-1530:p21",
+        "lesson-1530:p22",
+        "lesson-1530:p23",
+        "lesson-1530:p24"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1530:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1530:p1",
+        "lesson-1530:p2",
+        "lesson-1530:p3",
+        "lesson-1530:p4",
+        "lesson-1530:p5",
+        "lesson-1530:p6",
+        "lesson-1530:p7",
+        "lesson-1530:p8",
+        "lesson-1530:p9",
+        "lesson-1530:p10",
+        "lesson-1530:p11",
+        "lesson-1530:p12",
+        "lesson-1530:p13",
+        "lesson-1530:p14",
+        "lesson-1530:p15",
+        "lesson-1530:p16",
+        "lesson-1530:p17",
+        "lesson-1530:p18",
+        "lesson-1530:p19",
+        "lesson-1530:p20",
+        "lesson-1530:p21",
+        "lesson-1530:p22",
+        "lesson-1530:p23",
+        "lesson-1530:p24"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1530:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1530:p1",
+        "lesson-1530:p2",
+        "lesson-1530:p3",
+        "lesson-1530:p4",
+        "lesson-1530:p5",
+        "lesson-1530:p6",
+        "lesson-1530:p7",
+        "lesson-1530:p8",
+        "lesson-1530:p9",
+        "lesson-1530:p10",
+        "lesson-1530:p11",
+        "lesson-1530:p12",
+        "lesson-1530:p13",
+        "lesson-1530:p14",
+        "lesson-1530:p15",
+        "lesson-1530:p16",
+        "lesson-1530:p17",
+        "lesson-1530:p18",
+        "lesson-1530:p19",
+        "lesson-1530:p20",
+        "lesson-1530:p21",
+        "lesson-1530:p22",
+        "lesson-1530:p23",
+        "lesson-1530:p24"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1530:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1530:p1",
+        "lesson-1530:p2",
+        "lesson-1530:p3",
+        "lesson-1530:p4",
+        "lesson-1530:p5",
+        "lesson-1530:p6",
+        "lesson-1530:p7",
+        "lesson-1530:p8",
+        "lesson-1530:p9",
+        "lesson-1530:p10",
+        "lesson-1530:p11",
+        "lesson-1530:p12",
+        "lesson-1530:p13",
+        "lesson-1530:p14",
+        "lesson-1530:p15",
+        "lesson-1530:p16",
+        "lesson-1530:p17",
+        "lesson-1530:p18",
+        "lesson-1530:p19",
+        "lesson-1530:p20",
+        "lesson-1530:p21",
+        "lesson-1530:p22",
+        "lesson-1530:p23",
+        "lesson-1530:p24"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1530:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1530:p1",
+        "lesson-1530:p2",
+        "lesson-1530:p3",
+        "lesson-1530:p4",
+        "lesson-1530:p5",
+        "lesson-1530:p6",
+        "lesson-1530:p7",
+        "lesson-1530:p8",
+        "lesson-1530:p9",
+        "lesson-1530:p10",
+        "lesson-1530:p11",
+        "lesson-1530:p12",
+        "lesson-1530:p13",
+        "lesson-1530:p14",
+        "lesson-1530:p15",
+        "lesson-1530:p16",
+        "lesson-1530:p17",
+        "lesson-1530:p18",
+        "lesson-1530:p19",
+        "lesson-1530:p20",
+        "lesson-1530:p21",
+        "lesson-1530:p22",
+        "lesson-1530:p23",
+        "lesson-1530:p24"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1530:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1530:p1",
+        "lesson-1530:p2",
+        "lesson-1530:p3",
+        "lesson-1530:p4",
+        "lesson-1530:p5",
+        "lesson-1530:p6",
+        "lesson-1530:p7",
+        "lesson-1530:p8",
+        "lesson-1530:p9",
+        "lesson-1530:p10",
+        "lesson-1530:p11",
+        "lesson-1530:p12",
+        "lesson-1530:p13",
+        "lesson-1530:p14",
+        "lesson-1530:p15",
+        "lesson-1530:p16",
+        "lesson-1530:p17",
+        "lesson-1530:p18",
+        "lesson-1530:p19",
+        "lesson-1530:p20",
+        "lesson-1530:p21",
+        "lesson-1530:p22",
+        "lesson-1530:p23",
+        "lesson-1530:p24"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1530:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1530:p1",
+        "lesson-1530:p2",
+        "lesson-1530:p3",
+        "lesson-1530:p4",
+        "lesson-1530:p5",
+        "lesson-1530:p6",
+        "lesson-1530:p7",
+        "lesson-1530:p8",
+        "lesson-1530:p9",
+        "lesson-1530:p10",
+        "lesson-1530:p11",
+        "lesson-1530:p12",
+        "lesson-1530:p13",
+        "lesson-1530:p14",
+        "lesson-1530:p15",
+        "lesson-1530:p16",
+        "lesson-1530:p17",
+        "lesson-1530:p18",
+        "lesson-1530:p19",
+        "lesson-1530:p20",
+        "lesson-1530:p21",
+        "lesson-1530:p22",
+        "lesson-1530:p23",
+        "lesson-1530:p24"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "legacy:effect:lesson-1530:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1530:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1530:interaction:contextWords",
+        "resourceVersion": "sha256:069a05ec7b1147e71a703fc0ce5f75b2f9ffb0dda93bf55a025bcd45b84b86f5",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1530:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1530:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1530:interaction:revision",
+        "resourceVersion": "sha256:ba3e33b9ca80ea9e517165034b42c7a80ce82741217f59601c409a0987ae953f",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1530:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1530:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1530:interaction:structure",
+        "resourceVersion": "sha256:3755aac05b18ac42840b7a387d68d5f024346fe89ba984436b6253e7cb8d4e3b",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1530:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1530:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1530:interaction:evaluation",
+        "resourceVersion": "sha256:98ad140bbc860d472c97e06af56067f2aa6e8c2fc376fe2f128fd1d15b2517cf",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1530:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1530:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1530:interaction:authorQuestion",
+        "resourceVersion": "sha256:74034c4a9cbf1f509e732399d70095a999a6abe00164a9b80ca93d6b3c6f1588",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    }
+  ],
+  "vocabulary": [],
+  "legacy": {
+    "lessonId": "lesson-1530",
+    "title": "* 小二黑结婚(节选)/ 赵树理",
+    "mode": "fiction",
+    "legacyTracks": [
+      "context",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "初讀評議",
+        "",
+        10
+      ],
+      [
+        "read",
+        "通讀正文",
+        "",
+        10
+      ],
+      [
+        "revision",
+        "字句之改",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "敘事機關",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "篇目評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "叩問作者",
+        "",
+        10
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1530:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1530:interaction:contextWords",
+        "resourceVersion": "sha256:069a05ec7b1147e71a703fc0ce5f75b2f9ffb0dda93bf55a025bcd45b84b86f5",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1530:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1530:interaction:revision",
+        "resourceVersion": "sha256:ba3e33b9ca80ea9e517165034b42c7a80ce82741217f59601c409a0987ae953f",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1530:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1530:interaction:structure",
+        "resourceVersion": "sha256:3755aac05b18ac42840b7a387d68d5f024346fe89ba984436b6253e7cb8d4e3b",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1530:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1530:interaction:evaluation",
+        "resourceVersion": "sha256:98ad140bbc860d472c97e06af56067f2aa6e8c2fc376fe2f128fd1d15b2517cf",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1530:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1530:interaction:authorQuestion",
+        "resourceVersion": "sha256:74034c4a9cbf1f509e732399d70095a999a6abe00164a9b80ca93d6b3c6f1588",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1530",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1530:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1530:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1530:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1530",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1530:interaction:contextWords",
+        "completionKey": "effect:lesson-1530:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1530:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1530",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1530:interaction:structure",
+        "completionKey": "effect:lesson-1530:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1530:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1530",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1530:interaction:revision",
+        "completionKey": "effect:lesson-1530:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1530:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1530:interaction:contextWords",
+        "sourceVersion": "sha256:069a05ec7b1147e71a703fc0ce5f75b2f9ffb0dda93bf55a025bcd45b84b86f5",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1530:interaction:revision",
+        "sourceVersion": "sha256:ba3e33b9ca80ea9e517165034b42c7a80ce82741217f59601c409a0987ae953f",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1530:interaction:structure",
+        "sourceVersion": "sha256:3755aac05b18ac42840b7a387d68d5f024346fe89ba984436b6253e7cb8d4e3b",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1530:interaction:evaluation",
+        "sourceVersion": "sha256:98ad140bbc860d472c97e06af56067f2aa6e8c2fc376fe2f128fd1d15b2517cf",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1530:interaction:authorQuestion",
+        "sourceVersion": "sha256:74034c4a9cbf1f509e732399d70095a999a6abe00164a9b80ca93d6b3c6f1588",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1530:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1530:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1530:interaction:contextWords",
+        "completionKey": "effect:lesson-1530:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1530:interaction:structure",
+        "completionKey": "effect:lesson-1530:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1530:interaction:revision",
+        "completionKey": "effect:lesson-1530:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [],
+    "sourceLesson": "data/lessons/lesson-1530.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 5,
+        "formativeCount": 4,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-c644b150c938c97b5c30",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《赵树理文集》第一卷（中国工人出版社2000年版）。\n\n小说共十二节，这里节选的是第九至十二节。\n\n赵树理（1906—1970），山西沁水人，作家。著有小说《小二黑结婚》《李有才板话》等。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "type": "quote"
+    }
+  ],
+  "guidance": [],
+  "media": [
+    {
+      "alt": "",
+      "bytes": 51162,
+      "finalUrl": "https://files.rdfzer.com/original/2X/3/394937431e3e933ae587ec2f1ff07687d6d1ae5c.jpeg",
+      "height": 353,
+      "id": "media-fa51893978d4c43699f8",
+      "mediaType": "image/jpeg",
+      "nativeDisposition": "verified-in-app",
+      "receiptCollectedAt": "2026-07-30T01:10:43.464Z",
+      "receiptRequired": true,
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29",
+      "sha256": "1a0d58a90c5338cbac679d5734376fadd445c275d33b128c420822a6ab9bd8bb",
+      "sourceUrl": "https://files.rdfzer.com/original/2X/3/394937431e3e933ae587ec2f1ff07687d6d1ae5c.jpeg",
+      "webDisposition": "source-url",
+      "width": 389
+    }
+  ],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1530.json",
+    "lessonSha256": "47b73821d772d7a3d23bdcf6ad0ce808f4aa689daf3b50de25db5252a072cb06",
+    "reader": "data/reader-documents/lesson-1530.json",
+    "readerSha256": "5645ca2ed0a505ddd70ed064cb3e08b412cb92f451ff6167e250118021748f25",
+    "sourcePostId": 10234,
+    "sourcePostNumber": 1,
+    "blockCount": 24,
+    "annotationCount": 4,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 5,
+      "formativeCount": 4,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

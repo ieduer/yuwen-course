@@ -1,6 +1,8 @@
 // Fixed synthetic operation on the existing owner-only acceptance context.
 // No browser prompt, curriculum override, grades or central evidence writes.
 import {CALIBRATION_CONTRACT as amendment} from './dialogue-calibration-contract.js';
+import {AMENDMENT4_CONTRACT} from './dialogue-calibration-amendment4-contract.js';
+import {handleAmendment4Calibration} from './dialogue-calibration-amendment4-runtime.js';
 import packet from './dialogue-calibration-packet.json' with {type:'json'};
 import {acceptanceContext} from './dialogue-acceptance.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
@@ -28,7 +30,18 @@ export function terminalDisposition(row,digest,readbacks){
  if(fact.kind==='semantic_correction'&&typeof fact.correction==='string'&&fact.correction.trim()&&row.accounted_micros!==null&&(result.received||result.value))return fact;
  return null;
 }
-export async function handleCalibration(request,env,student,callModel,{recoveryReadbacks=amendment.recoveryReadbacks}={}){
+export async function handleCalibration(request,env,student,callModel,options={}){
+ const context=acceptanceContext(env),url=new URL(request.url);
+ if(!context||Number(student.ucUserId)!==context.userId||Date.now()>=Math.min(context.expires,hardExpiry))return json({code:'not_found'},404);
+ if(url.searchParams.get('calibrationOperation')===AMENDMENT4_CONTRACT.operation)return handleAmendment4Calibration(request,env,student,callModel);
+ // Direct owner instruction permanently closes this consumed operation.
+ // Readback is retained; no new POST, replacement intent or replay is admitted.
+ if(request.method==='POST')return json({code:'calibration_operation_retired',operation:OP,readbackAvailable:true},409);
+ return handleRecordedCalibrationForOfflineTest(request,env,student,callModel,options);
+}
+// Historical offline regression hook. No production route uses this writer;
+// the sole routed handleCalibration above rejects every amendment-3 POST.
+export async function handleRecordedCalibrationForOfflineTest(request,env,student,callModel,{recoveryReadbacks=amendment.recoveryReadbacks}={}){
  const context=acceptanceContext(env),url=new URL(request.url);
  if(!context||Number(student.ucUserId)!==context.userId||Date.now()>=Math.min(context.expires,hardExpiry))return json({code:'not_found'},404);
  if(packet.operation!==OP||packet.sourceDigest!==DIGEST||packet.cases.length!==24)return json({code:'calibration_packet_invalid'},503);

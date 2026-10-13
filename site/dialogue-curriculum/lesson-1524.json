@@ -1,0 +1,998 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1524",
+  "title": "单元研习任务",
+  "mode": "unit-task",
+  "author": "教材學習引導",
+  "persona": {
+    "kind": "curriculum-guide",
+    "notice": "AI 閱讀引導，依據原教材與已署名來源；不冒充作者。",
+    "narratorIsAuthor": false,
+    "rule": "以閱讀引導者身份討論來源，逐一區分作者、引文說話者、人物、譯者與教材編者；不得把代表人物或被引述者冒充作者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1524:p1",
+      "text": "一 理论对于实践有着重要的指导意义，阅读理论文章，可以给我们多方面的启发和引领。阅读本单元前四篇课文，领会文章的理论价值，完成下列任务。",
+      "block": {
+        "runs": [
+          {
+            "text": "一 理论对于实践有着重要的指导意义，阅读理论文章，可以给我们多方面的启发和引领。阅读本单元前四篇课文，领会文章的理论价值，完成下列任务。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1524:p2",
+      "text": "四篇课文观点鲜明，论述透彻，思维缜密，语言准确。阅读这类文章，有助于我们丰富思想，发展思维，提升语言运用能力，也有助于我们形成辩证唯物主义的世界观和方法论。请任选一篇课文，选取一个角度（如思想观点、论述方法、思维方式、语言表达），写一则读后感，谈谈自己阅读重大理论文章的收获。\n正确而深刻的理论文章对国家进步、社会发展也会产生重大的影响，《实践是检验真理的唯一标准》就是这样一篇具有里程碑意义的文章，在特定历史时期，对人们的思想起到了正本清源的作用。随着改革开放的不断深入，文章的观点又不断得到历史的验证。请联系社会发展实际，或结合其他学科所学，谈谈你对这篇文章核心观点的认识。注意用改革开放以来我国社会发生巨大变化的事实来论证你的观点。",
+      "block": {
+        "items": [
+          {
+            "blocks": [
+              {
+                "runs": [
+                  {
+                    "text": "四篇课文观点鲜明，论述透彻，思维缜密，语言准确。阅读这类文章，有助于我们丰富思想，发展思维，提升语言运用能力，也有助于我们形成辩证唯物主义的世界观和方法论。请任选一篇课文，选取一个角度（如思想观点、论述方法、思维方式、语言表达），写一则读后感，谈谈自己阅读重大理论文章的收获。",
+                    "type": "text"
+                  }
+                ],
+                "type": "paragraph"
+              }
+            ]
+          },
+          {
+            "blocks": [
+              {
+                "runs": [
+                  {
+                    "text": "正确而深刻的理论文章对国家进步、社会发展也会产生重大的影响，《实践是检验真理的唯一标准》就是这样一篇具有里程碑意义的文章，在特定历史时期，对人们的思想起到了正本清源的作用。随着改革开放的不断深入，文章的观点又不断得到历史的验证。请联系社会发展实际，或结合其他学科所学，谈谈你对这篇文章核心观点的认识。注意用改革开放以来我国社会发生巨大变化的事实来论证你的观点。",
+                    "type": "text"
+                  }
+                ],
+                "type": "paragraph"
+              }
+            ]
+          }
+        ],
+        "ordered": true,
+        "type": "list"
+      }
+    },
+    {
+      "id": "lesson-1524:p3",
+      "text": "二 《修辞立其诚》强调为文为人要“真”，《怜悯是人的天性》认为人的天性为“善”，《人应当坚持正义》实际上也是强调要真诚。三篇文章都涉及立身处世的原则问题。在充分理解文章主旨的基础上，完成下列研习任务。",
+      "block": {
+        "runs": [
+          {
+            "text": "二 《修辞立其诚》强调为文为人要“真”，《怜悯是人的天性》认为人的天性为“善”，《人应当坚持正义》实际上也是强调要真诚。三篇文章都涉及立身处世的原则问题。在充分理解文章主旨的基础上，完成下列研习任务。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1524:p4",
+      "text": "概括三篇文章的主要观点，并说说这些观点之间的联系。结合课文的阅读，联系下列材料和自己的生活经验，谈谈你对人性的理解，或谈谈做人应当遵循的基本原则。",
+      "block": {
+        "items": [
+          {
+            "blocks": [
+              {
+                "runs": [
+                  {
+                    "text": "概括三篇文章的主要观点，并说说这些观点之间的联系。结合课文的阅读，联系下列材料和自己的生活经验，谈谈你对人性的理解，或谈谈做人应当遵循的基本原则。",
+                    "type": "text"
+                  }
+                ],
+                "type": "paragraph"
+              }
+            ]
+          }
+        ],
+        "ordered": true,
+        "type": "list"
+      }
+    },
+    {
+      "id": "lesson-1524:p5",
+      "text": "① 唯天下至诚，为能经纶天下之大经，立天下之大本，知天下之化育。（《礼记·中庸》）\n\n② 恻隐之心，人皆有之；羞恶之心，人皆有之；恭敬之心，人皆有之；是非之心，人皆有之。恻隐之心，仁也；羞恶之心，义也；恭敬之心，礼也；是非之心，智也。仁义礼智，非由外铄我也，我固有之也，弗思耳矣。故曰：“求则得之，舍则失之。”（ 《孟子·告子上》）\n\n③ 人之性恶，其善者伪也。（《荀子·性恶》）",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "① 唯天下至诚，为能经纶天下之大经，立天下之大本，知天下之化育。（《礼记·中庸》）\n\n② 恻隐之心，人皆有之；羞恶之心，人皆有之；恭敬之心，人皆有之；是非之心，人皆有之。恻隐之心，仁也；羞恶之心，义也；恭敬之心，礼也；是非之心，智也。仁义礼智，非由外铄我也，我固有之也，弗思耳矣。故曰：“求则得之，舍则失之。”（ 《孟子·告子上》）\n\n③ 人之性恶，其善者伪也。（《荀子·性恶》）",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      }
+    },
+    {
+      "id": "lesson-1524:p6",
+      "text": "苏格拉底拒绝越狱逃跑的态度及其所体现的精神历来广受赞赏，但也有人认为，雅典法庭判处苏格拉底死刑的罪名是“不敬神明”，这种判决是不正义的，苏格拉底欣然接受不正义的判决，这种态度不值得赞赏。你怎样看？为什么？可以根据不同观点组成两个小组展开辩论。",
+      "block": {
+        "items": [
+          {
+            "blocks": [
+              {
+                "runs": [
+                  {
+                    "text": "苏格拉底拒绝越狱逃跑的态度及其所体现的精神历来广受赞赏，但也有人认为，雅典法庭判处苏格拉底死刑的罪名是“不敬神明”，这种判决是不正义的，苏格拉底欣然接受不正义的判决，这种态度不值得赞赏。你怎样看？为什么？可以根据不同观点组成两个小组展开辩论。",
+                    "type": "text"
+                  }
+                ],
+                "type": "paragraph"
+              }
+            ]
+          }
+        ],
+        "ordered": true,
+        "type": "list"
+      }
+    },
+    {
+      "id": "lesson-1524:p7",
+      "text": "三 运用理性思维深入思考，有理有据地把道理说清楚，是发表言论、阐述见解的基本要求。从下列任务中任选一项完成，并与同学交流。交流前拟一个提纲，列出自己的主要观点和依据；交流过程中注意记录不同意见并加以思考。",
+      "block": {
+        "runs": [
+          {
+            "text": "三 运用理性思维深入思考，有理有据地把道理说清楚，是发表言论、阐述见解的基本要求。从下列任务中任选一项完成，并与同学交流。交流前拟一个提纲，列出自己的主要观点和依据；交流过程中注意记录不同意见并加以思考。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1524:p8",
+      "text": "认识事物时，我们的判断常常会受到一些因素的影响，如笃信古人、权威和书本，听信大多数人的意见等。“自古以来”“著名专家表示”“书上说”“大多数人认为”等常见说法，就体现了这些影响。围绕这样的短语，延伸思考，充实依据，选取合适的角度，写一篇不少于800 字的文章，题目自拟。\n人们在获得一些新的东西时，也有可能失去另一些东西。互联网为人们的生活带来不少便捷，那么人们可能会失去什么呢？就这个问题进行深入思考，写一篇不少于800 字的文章，题目自拟。",
+      "block": {
+        "items": [
+          {
+            "blocks": [
+              {
+                "runs": [
+                  {
+                    "text": "认识事物时，我们的判断常常会受到一些因素的影响，如笃信古人、权威和书本，听信大多数人的意见等。“自古以来”“著名专家表示”“书上说”“大多数人认为”等常见说法，就体现了这些影响。围绕这样的短语，延伸思考，充实依据，选取合适的角度，写一篇不少于800 字的文章，题目自拟。",
+                    "type": "text"
+                  }
+                ],
+                "type": "paragraph"
+              }
+            ]
+          },
+          {
+            "blocks": [
+              {
+                "runs": [
+                  {
+                    "text": "人们在获得一些新的东西时，也有可能失去另一些东西。互联网为人们的生活带来不少便捷，那么人们可能会失去什么呢？就这个问题进行深入思考，写一篇不少于800 字的文章，题目自拟。",
+                    "type": "text"
+                  }
+                ],
+                "type": "paragraph"
+              }
+            ]
+          }
+        ],
+        "ordered": true,
+        "type": "list"
+      }
+    },
+    {
+      "id": "lesson-1524:p9",
+      "text": "深化理性思考\n\n1978 年，《实践是检验真理的唯一标准》的发表引发了关于真理标准问题的大讨论。这场讨论重新确立了实事求是的马克思主义思想路线，成为拨乱反正和改革开放的思想先导。文章以无所畏惧的勇气、实事求是的精神、简约平易的言说，引导人们理性思考一个时代的大问题。那么如何做到理性思考呢？\n\n理性思考要透过表象探究被忽略的事实真相，推导事物的发展趋势。我们在论说和阐述观点时，应该在“有理有据”的基础上更进一步向理性深化，逼近事物的本质。比如，毛泽东的《改造我们的学习》先指出中国共产党二十年来出现的“好现象”，然后退一步说依然存在的缺点，并透过缺点深入分析其危害，进而通过阐述两种对立的观点，提出自己的主张，指明了改造学习的方向，论述一步步深化，道理愈说愈明。\n\n理性思考要敢于质疑，勇于追问，对事物作出理性的判断。比如“近朱者赤，近墨者黑”这句话，历来被视为至理名言。而在今天，我们可以进一步推论：对个人成长来说，外因虽然重要，但起决定作用的仍是内因，“近墨者”如果能有清醒的认识和坚定的意志，则未必会“黑”。\n\n理性思考还要注意提高思维品质，对看似简单的事物作深层思考，不能把问题简单化。如果把事物放在更广阔的背景中去观察、分析，往往就能突破思维定式，深化对问题的认识。论述时应注意辩证地观察事物，理性地辨别是非曲直；论说不偏激，有分寸，不危言耸听，不咄咄逼人，留有余地，这样文章才更有说服力。",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "深化理性思考\n\n1978 年，《实践是检验真理的唯一标准》的发表引发了关于真理标准问题的大讨论。这场讨论重新确立了实事求是的马克思主义思想路线，成为拨乱反正和改革开放的思想先导。文章以无所畏惧的勇气、实事求是的精神、简约平易的言说，引导人们理性思考一个时代的大问题。那么如何做到理性思考呢？\n\n理性思考要透过表象探究被忽略的事实真相，推导事物的发展趋势。我们在论说和阐述观点时，应该在“有理有据”的基础上更进一步向理性深化，逼近事物的本质。比如，毛泽东的《改造我们的学习》先指出中国共产党二十年来出现的“好现象”，然后退一步说依然存在的缺点，并透过缺点深入分析其危害，进而通过阐述两种对立的观点，提出自己的主张，指明了改造学习的方向，论述一步步深化，道理愈说愈明。\n\n理性思考要敢于质疑，勇于追问，对事物作出理性的判断。比如“近朱者赤，近墨者黑”这句话，历来被视为至理名言。而在今天，我们可以进一步推论：对个人成长来说，外因虽然重要，但起决定作用的仍是内因，“近墨者”如果能有清醒的认识和坚定的意志，则未必会“黑”。\n\n理性思考还要注意提高思维品质，对看似简单的事物作深层思考，不能把问题简单化。如果把事物放在更广阔的背景中去观察、分析，往往就能突破思维定式，深化对问题的认识。论述时应注意辩证地观察事物，理性地辨别是非曲直；论说不偏激，有分寸，不危言耸听，不咄咄逼人，留有余地，这样文章才更有说服力。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      }
+    }
+  ],
+  "annotations": [],
+  "resources": [
+    {
+      "disposition": "system-browser",
+      "href": "https://sites.google.com/view/pkuschool/xbz000/xbz001/xbz009",
+      "kind": "link",
+      "label": "https://sites.google.com/view/pkuschool/xbz000/xbz001/xbz009",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://sites.google.com/view/pkuschool/xbz000/xbz001/xbz009"
+    }
+  ],
+  "source": "https://forum.rdfzer.com/t/topic/1524",
+  "objectives": [
+    {
+      "id": "lesson-1524:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1524:p1",
+        "lesson-1524:p2",
+        "lesson-1524:p3",
+        "lesson-1524:p4",
+        "lesson-1524:p5",
+        "lesson-1524:p6",
+        "lesson-1524:p7",
+        "lesson-1524:p8",
+        "lesson-1524:p9"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1524:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1524:p1",
+        "lesson-1524:p2",
+        "lesson-1524:p3",
+        "lesson-1524:p4",
+        "lesson-1524:p5",
+        "lesson-1524:p6",
+        "lesson-1524:p7",
+        "lesson-1524:p8",
+        "lesson-1524:p9"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1524:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1524:p1",
+        "lesson-1524:p2",
+        "lesson-1524:p3",
+        "lesson-1524:p4",
+        "lesson-1524:p5",
+        "lesson-1524:p6",
+        "lesson-1524:p7",
+        "lesson-1524:p8",
+        "lesson-1524:p9"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1524:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1524:p1",
+        "lesson-1524:p2",
+        "lesson-1524:p3",
+        "lesson-1524:p4",
+        "lesson-1524:p5",
+        "lesson-1524:p6",
+        "lesson-1524:p7",
+        "lesson-1524:p8",
+        "lesson-1524:p9"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1524:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1524:p1",
+        "lesson-1524:p2",
+        "lesson-1524:p3",
+        "lesson-1524:p4",
+        "lesson-1524:p5",
+        "lesson-1524:p6",
+        "lesson-1524:p7",
+        "lesson-1524:p8",
+        "lesson-1524:p9"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1524:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1524:p1",
+        "lesson-1524:p2",
+        "lesson-1524:p3",
+        "lesson-1524:p4",
+        "lesson-1524:p5",
+        "lesson-1524:p6",
+        "lesson-1524:p7",
+        "lesson-1524:p8",
+        "lesson-1524:p9"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1524:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1524:p1",
+        "lesson-1524:p2",
+        "lesson-1524:p3",
+        "lesson-1524:p4",
+        "lesson-1524:p5",
+        "lesson-1524:p6",
+        "lesson-1524:p7",
+        "lesson-1524:p8",
+        "lesson-1524:p9"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1524:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1524:p1",
+        "lesson-1524:p2",
+        "lesson-1524:p3",
+        "lesson-1524:p4",
+        "lesson-1524:p5",
+        "lesson-1524:p6",
+        "lesson-1524:p7",
+        "lesson-1524:p8",
+        "lesson-1524:p9"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "legacy:effect:lesson-1524:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1524:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1524:interaction:contextWords",
+        "resourceVersion": "sha256:7d61a0ff017d15ad447e117bc11fdd95de9b8cef4c24139d471bb80b9bef5bf3",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1524:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1524:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1524:interaction:revision",
+        "resourceVersion": "sha256:8b8e007303f48deddb8d3de78dd9dd54c17e343eefc589ec139e6f796bf20ee7",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1524:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1524:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1524:interaction:structure",
+        "resourceVersion": "sha256:d7edb3268009e3c172adafe881357afed59c4e0f7f7418341185003873f25671",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1524:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1524:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1524:interaction:evaluation",
+        "resourceVersion": "sha256:f406a1404861a7bf72ebab286d5c06bf18c4c6cdf888c75aa915ad2c9e01ce32",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1524:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1524:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1524:interaction:authorQuestion",
+        "resourceVersion": "sha256:e2196fd02b60377b7f1ab5bf50e21f6af9e2c11ff4249f90211a9322706896af",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    }
+  ],
+  "vocabulary": [],
+  "legacy": {
+    "lessonId": "lesson-1524",
+    "title": "单元研习任务",
+    "mode": "unit-task",
+    "legacyTracks": [
+      "context",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "單元定位",
+        "",
+        15
+      ],
+      [
+        "read",
+        "拆解要求",
+        "",
+        15
+      ],
+      [
+        "revision",
+        "改造任務",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "成果路徑",
+        "",
+        25
+      ],
+      [
+        "evaluation",
+        "任務評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "提出問題",
+        "",
+        20
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1524:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1524:interaction:contextWords",
+        "resourceVersion": "sha256:7d61a0ff017d15ad447e117bc11fdd95de9b8cef4c24139d471bb80b9bef5bf3",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1524:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1524:interaction:revision",
+        "resourceVersion": "sha256:8b8e007303f48deddb8d3de78dd9dd54c17e343eefc589ec139e6f796bf20ee7",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1524:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1524:interaction:structure",
+        "resourceVersion": "sha256:d7edb3268009e3c172adafe881357afed59c4e0f7f7418341185003873f25671",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1524:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1524:interaction:evaluation",
+        "resourceVersion": "sha256:f406a1404861a7bf72ebab286d5c06bf18c4c6cdf888c75aa915ad2c9e01ce32",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1524:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1524:interaction:authorQuestion",
+        "resourceVersion": "sha256:e2196fd02b60377b7f1ab5bf50e21f6af9e2c11ff4249f90211a9322706896af",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1524",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1524:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1524:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1524:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1524",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1524:interaction:contextWords",
+        "completionKey": "effect:lesson-1524:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1524:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1524",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1524:interaction:structure",
+        "completionKey": "effect:lesson-1524:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1524:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1524",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1524:interaction:revision",
+        "completionKey": "effect:lesson-1524:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1524:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1524:interaction:contextWords",
+        "sourceVersion": "sha256:7d61a0ff017d15ad447e117bc11fdd95de9b8cef4c24139d471bb80b9bef5bf3",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1524:interaction:revision",
+        "sourceVersion": "sha256:8b8e007303f48deddb8d3de78dd9dd54c17e343eefc589ec139e6f796bf20ee7",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1524:interaction:structure",
+        "sourceVersion": "sha256:d7edb3268009e3c172adafe881357afed59c4e0f7f7418341185003873f25671",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1524:interaction:evaluation",
+        "sourceVersion": "sha256:f406a1404861a7bf72ebab286d5c06bf18c4c6cdf888c75aa915ad2c9e01ce32",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1524:interaction:authorQuestion",
+        "sourceVersion": "sha256:e2196fd02b60377b7f1ab5bf50e21f6af9e2c11ff4249f90211a9322706896af",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1524:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1524:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1524:interaction:contextWords",
+        "completionKey": "effect:lesson-1524:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1524:interaction:structure",
+        "completionKey": "effect:lesson-1524:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1524:interaction:revision",
+        "completionKey": "effect:lesson-1524:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [],
+    "sourceLesson": "data/lessons/lesson-1524.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "curriculum-guide",
+        "attributionStatus": "source-guide-no-impersonation"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 5,
+        "formativeCount": 4,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-0995c322b22dccd4daff",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [],
+  "guidance": [],
+  "media": [],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1524.json",
+    "lessonSha256": "5b4924204eba8326cdd329bb10e91ff8fe59b74a580a739496eb245975bcc2e8",
+    "reader": "data/reader-documents/lesson-1524.json",
+    "readerSha256": "5eec72747e3e499adefe041c7e5780bfa694905ccde92a67b00cec5395398d90",
+    "sourcePostId": 10207,
+    "sourcePostNumber": 1,
+    "blockCount": 9,
+    "annotationCount": 0,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "curriculum-guide",
+      "attributionStatus": "source-guide-no-impersonation"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 5,
+      "formativeCount": 4,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

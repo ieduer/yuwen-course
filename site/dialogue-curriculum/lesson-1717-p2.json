@@ -8,7 +8,9 @@
     "kind": "author-simulation",
     "notice": "AI 教學模擬，依據作品；並非作者本人。",
     "narratorIsAuthor": false,
-    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公或敘述者的經歷當作作者生平。"
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
   },
   "passages": [
     {
@@ -967,31 +969,99 @@
       "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
     },
     {
-      "id": "lesson-1717-p2:vocabulary",
-      "domain": "vocabulary",
-      "label": "字詞累積／詞級疏通",
+      "id": "legacy:effect:lesson-1717-p2:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
       "criteria": [
-        "context_meaning",
-        "explanation"
+        "existing_source_assessment"
       ],
-      "rule": "回到原句，自述語境義及依據；每個必考詞分別核對。",
-      "sourcePassages": [
-        "lesson-1717-p2:p1",
-        "lesson-1717-p2:p2",
-        "lesson-1717-p2:p3",
-        "lesson-1717-p2:p4",
-        "lesson-1717-p2:p5",
-        "lesson-1717-p2:p6",
-        "lesson-1717-p2:p7",
-        "lesson-1717-p2:p8",
-        "lesson-1717-p2:p9",
-        "lesson-1717-p2:p10",
-        "lesson-1717-p2:p11",
-        "lesson-1717-p2:p12",
-        "lesson-1717-p2:p13",
-        "lesson-1717-p2:p14"
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1717-p2:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1717-p2:interaction:contextWords",
+        "resourceVersion": "sha256:72c0a499e0b851ab0f4f2feefd735f8a3c2e1b4a182cca2ec1d351dd63f3b0df",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1717-p2:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
       ],
-      "prerequisites": []
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1717-p2:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1717-p2:interaction:revision",
+        "resourceVersion": "sha256:01866323c6579ac3bc41d7ef46e86bb5225e58ae30185d323b83c580fda39706",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1717-p2:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1717-p2:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1717-p2:interaction:structure",
+        "resourceVersion": "sha256:efd71f2d0aa36a0ce40a83346eb217d9f62e8d3ff0e9f8e26896d690d76068a7",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1717-p2:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1717-p2:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1717-p2:interaction:evaluation",
+        "resourceVersion": "sha256:c975bc7c0f946b7ba54cee87614c445e228bbbacd341a56f0c70e92786fd0822",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1717-p2:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1717-p2:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1717-p2:interaction:authorQuestion",
+        "resourceVersion": "sha256:2d64def5a20e541e0ecfa6f0ce95765d1febfe565057a663fbe7792a9c6f19d8",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
     }
   ],
   "vocabulary": [],
@@ -1045,13 +1115,204 @@
         10
       ]
     ],
-    "formal": [],
-    "formative": [],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1717-p2:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1717-p2:interaction:contextWords",
+        "resourceVersion": "sha256:72c0a499e0b851ab0f4f2feefd735f8a3c2e1b4a182cca2ec1d351dd63f3b0df",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1717-p2:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1717-p2:interaction:revision",
+        "resourceVersion": "sha256:01866323c6579ac3bc41d7ef46e86bb5225e58ae30185d323b83c580fda39706",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1717-p2:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1717-p2:interaction:structure",
+        "resourceVersion": "sha256:efd71f2d0aa36a0ce40a83346eb217d9f62e8d3ff0e9f8e26896d690d76068a7",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1717-p2:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1717-p2:interaction:evaluation",
+        "resourceVersion": "sha256:c975bc7c0f946b7ba54cee87614c445e228bbbacd341a56f0c70e92786fd0822",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1717-p2:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1717-p2:interaction:authorQuestion",
+        "resourceVersion": "sha256:2d64def5a20e541e0ecfa6f0ce95765d1febfe565057a663fbe7792a9c6f19d8",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1717-p2",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1717-p2:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1717-p2:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1717-p2:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1717-p2",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1717-p2:interaction:contextWords",
+        "completionKey": "effect:lesson-1717-p2:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1717-p2:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1717-p2",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1717-p2:interaction:structure",
+        "completionKey": "effect:lesson-1717-p2:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1717-p2:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1717-p2",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1717-p2:interaction:revision",
+        "completionKey": "effect:lesson-1717-p2:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1717-p2:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      }
+    ],
     "vocabularyIds": [],
     "studyGuide": [],
     "sourceGaps": [],
     "sourceTasks": [],
-    "requirementMappings": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1717-p2:interaction:contextWords",
+        "sourceVersion": "sha256:72c0a499e0b851ab0f4f2feefd735f8a3c2e1b4a182cca2ec1d351dd63f3b0df",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1717-p2:interaction:revision",
+        "sourceVersion": "sha256:01866323c6579ac3bc41d7ef46e86bb5225e58ae30185d323b83c580fda39706",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1717-p2:interaction:structure",
+        "sourceVersion": "sha256:efd71f2d0aa36a0ce40a83346eb217d9f62e8d3ff0e9f8e26896d690d76068a7",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1717-p2:interaction:evaluation",
+        "sourceVersion": "sha256:c975bc7c0f946b7ba54cee87614c445e228bbbacd341a56f0c70e92786fd0822",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1717-p2:interaction:authorQuestion",
+        "sourceVersion": "sha256:2d64def5a20e541e0ecfa6f0ce95765d1febfe565057a663fbe7792a9c6f19d8",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1717-p2:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1717-p2:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1717-p2:interaction:contextWords",
+        "completionKey": "effect:lesson-1717-p2:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1717-p2:interaction:structure",
+        "completionKey": "effect:lesson-1717-p2:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1717-p2:interaction:revision",
+        "completionKey": "effect:lesson-1717-p2:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
     "compoundRequirements": [],
     "sourceLesson": "data/lessons/lesson-1717-p2.json",
     "mapping": [
@@ -1091,9 +1352,58 @@
         "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
         "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
       }
-    ]
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 5,
+        "formativeCount": 4,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
   },
-  "referenceVersion": "yw-dialogue-sources-20261012-v3",
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
   "languagePractice": [],
   "dictionary": [],
   "exam": {
@@ -1134,7 +1444,91 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-3f40046cb1b0de65e3bc",
+  "curriculumVersion": "yw-dialogue-317d4d31b2ab0181cd8e",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
   "readingMaterials": [],
-  "textRoleVersion": "yw-dialogue-text-roles-20261012-v2"
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [],
+  "guidance": [],
+  "media": [],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1717-p2.json",
+    "lessonSha256": "4f90d14b744e3374afad1d65cf44ca7b53b3908624b2959a9bfef93bdc127e3e",
+    "reader": "data/reader-documents/lesson-1717-p2.json",
+    "readerSha256": "65bb0a4e779895bc9e8e6f12e36e868a5f2fa8ca74ea6a677c253ef05ff772c3",
+    "sourcePostId": "11152-2",
+    "sourcePostNumber": 1,
+    "blockCount": 14,
+    "annotationCount": 22,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 5,
+      "formativeCount": 4,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
 }

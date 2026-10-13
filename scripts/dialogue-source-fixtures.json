@@ -1,6 +1,6 @@
 {
-  "version": "yw-dialogue-sources-20261012-v3",
-  "recordedAt": "2026-10-12T10:43:49.102360+00:00",
+  "version": "yw-dialogue-sources-20261013-v5",
+  "recordedAt": "2026-10-13T03:14:28.588Z",
   "dictionary": [
     {
       "id": "xc-er",
@@ -240,7 +240,38 @@
         "misconceptions": [
           "只報術語，未解釋語境",
           "照抄提示，未獨立改述"
-        ]
+        ],
+        "sourceVerification": {
+          "status": "source-context-reviewed",
+          "reviewId": "yw-grammar-source-convergence-20261013-v1",
+          "reviewedAt": "2026-10-13T03:05:31.744Z",
+          "analysisStatus": "authored-contextual-interpretation",
+          "authority": "root-authorized-independent-scoped-source-review-01a132c3",
+          "scope": "原注水為游泳，還原借舟渡河者不以自身善泳為前提；不以活用術語替代理解。",
+          "notice": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。",
+          "evidence": {
+            "readerPath": "data/reader-documents/lesson-1711-p1.json",
+            "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+            "passages": [
+              {
+                "id": "lesson-1711-p1:p1",
+                "sha256": "3a3c9c1def022e78b7c7ff6dbd48be5bd140f7dd7ab41bfa5d03af490aa4342c",
+                "quotes": [
+                  "假舟楫者，非能水也，而绝江河"
+                ]
+              }
+            ],
+            "annotations": [
+              {
+                "noteId": "footnote-11143-23",
+                "sha256": "578822ce5541beb5aa75f35a9a4767f45ceb589d64ba27ad80844d2827711c96"
+              }
+            ],
+            "readingMaterials": []
+          },
+          "primaryReferences": [],
+          "analysisSha256": "bb392a3b41d063831d2c26c9b62eb1914f747023a299018ea483c6702659c7a6"
+        }
       },
       {
         "id": "grammar-one",
@@ -266,7 +297,38 @@
         "misconceptions": [
           "只報術語，未解釋語境",
           "照抄提示，未獨立改述"
-        ]
+        ],
+        "sourceVerification": {
+          "status": "source-context-reviewed",
+          "reviewId": "yw-grammar-source-convergence-20261013-v1",
+          "reviewedAt": "2026-10-13T03:05:31.744Z",
+          "analysisStatus": "authored-contextual-interpretation",
+          "authority": "root-authorized-independent-scoped-source-review-01a132c3",
+          "scope": "原注一為專一；以蚓的行為與用心狀態相連，不解成心的數量。",
+          "notice": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。",
+          "evidence": {
+            "readerPath": "data/reader-documents/lesson-1711-p1.json",
+            "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+            "passages": [
+              {
+                "id": "lesson-1711-p1:p1",
+                "sha256": "3a3c9c1def022e78b7c7ff6dbd48be5bd140f7dd7ab41bfa5d03af490aa4342c",
+                "quotes": [
+                  "用心一也"
+                ]
+              }
+            ],
+            "annotations": [
+              {
+                "noteId": "footnote-11143-39",
+                "sha256": "a60bd016967811c3ce9a0f304e871b42659b02c112f4d339e5546a1b30a75a00"
+              }
+            ],
+            "readingMaterials": []
+          },
+          "primaryReferences": [],
+          "analysisSha256": "91cd9213b3c8263cbeddf9de698f465eb61c586ca7c388534a1f7064308bb0ff"
+        }
       },
       {
         "id": "grammar-wuyi",
@@ -292,7 +354,38 @@
         "misconceptions": [
           "只報術語，未解釋語境",
           "照抄提示，未獨立改述"
-        ]
+        ],
+        "sourceVerification": {
+          "status": "source-context-reviewed",
+          "reviewId": "yw-grammar-source-convergence-20261013-v1",
+          "reviewedAt": "2026-10-13T03:05:31.744Z",
+          "analysisStatus": "authored-contextual-interpretation",
+          "authority": "root-authorized-independent-scoped-source-review-01a132c3",
+          "scope": "原注無以為沒有用來……的、無從；保留積累為達成結果條件的關係，不解成不用。",
+          "notice": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。",
+          "evidence": {
+            "readerPath": "data/reader-documents/lesson-1711-p1.json",
+            "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+            "passages": [
+              {
+                "id": "lesson-1711-p1:p1",
+                "sha256": "3a3c9c1def022e78b7c7ff6dbd48be5bd140f7dd7ab41bfa5d03af490aa4342c",
+                "quotes": [
+                  "故不积跬步，无以至千里；不积小流，无以成江海。"
+                ]
+              }
+            ],
+            "annotations": [
+              {
+                "noteId": "footnote-11143-31",
+                "sha256": "7bfae14de1e0d50f87e19d9d331b0bccb626aebcd14cb661adbc084578b30c27"
+              }
+            ],
+            "readingMaterials": []
+          },
+          "primaryReferences": [],
+          "analysisSha256": "6c5762278aafeeb208dadd12cff8ed644ab9cbc15c15e4f243f9c8173ddd2b29"
+        }
       },
       {
         "id": "grammar-modifier",
@@ -303,7 +396,7 @@
           "蚓无爪牙之利，筋骨之强，上食埃土，下饮黄泉，用心一也。"
         ],
         "meaning": "蚯蚓沒有鋒利的爪牙、強健的筋骨，卻能向上吃泥土、向下飲地下水；此處利、強說明爪牙與筋骨的性質。",
-        "explanation": "語序分析是依課文作的教學解釋，不冒充教材已有的句式註釋；接受能還原修飾關係的說明，不能只答定語後置。",
+        "explanation": "原注支持埃土、黃泉、一的詞義；呂珍玉〈《詩經》疑難詞語辨析（1）〉第7頁直接以本句說明利、強與爪牙、筋骨的偏正關係。接受能還原修飾關係的說明，不要求唯一「定語後置」術語，也不冒充教材已有的句式註釋。",
         "annotationIds": [
           "footnote-11143-37",
           "footnote-11143-38",
@@ -320,7 +413,66 @@
         "misconceptions": [
           "只報術語，未解釋語境",
           "照抄提示，未獨立改述"
-        ]
+        ],
+        "sourceVerification": {
+          "status": "source-context-reviewed",
+          "reviewId": "yw-grammar-source-convergence-20261013-v1",
+          "reviewedAt": "2026-10-13T03:14:28.582Z",
+          "analysisStatus": "authored-contextual-interpretation",
+          "authority": "root-authorized-primary-scholarly-source-review-01a132c3",
+          "scope": "利說明爪牙的鋒利，強說明筋骨的強健；接受還原這兩組修飾關係，不要求唯一後置定語標籤。",
+          "notice": "原文、原注及學者對本句偏正關係的直接分析已核對；只接受所列修飾關係，不推定唯一語法標籤。來源核驗不等於模型校準或學生掌握。",
+          "evidence": {
+            "readerPath": "data/reader-documents/lesson-1711-p1.json",
+            "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+            "passages": [
+              {
+                "id": "lesson-1711-p1:p1",
+                "sha256": "3a3c9c1def022e78b7c7ff6dbd48be5bd140f7dd7ab41bfa5d03af490aa4342c",
+                "quotes": [
+                  "蚓无爪牙之利，筋骨之强，上食埃土，下饮黄泉，用心一也。"
+                ]
+              }
+            ],
+            "annotations": [
+              {
+                "noteId": "footnote-11143-37",
+                "sha256": "a027077c838dc521a086d92882ffea42845d5af76eb68ae0b20919dcc1838616"
+              },
+              {
+                "noteId": "footnote-11143-38",
+                "sha256": "d65041578409aeaed9bef109579d734751fd2522e763d83b5164a88152fa1273"
+              },
+              {
+                "noteId": "footnote-11143-39",
+                "sha256": "a60bd016967811c3ce9a0f304e871b42659b02c112f4d339e5546a1b30a75a00"
+              }
+            ],
+            "readingMaterials": []
+          },
+          "primaryReferences": [
+            {
+              "title": "教育部《重編國語辭典修訂本》爪牙",
+              "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=115459&la=0&powerMode=0",
+              "locator": "義項1，引荀子勸學原句；支持爪牙為動物的尖爪利牙，沒有直接解析之字結構。",
+              "page": null,
+              "supportKind": "primary ministry dictionary; word meaning only, insufficient for the pending syntax claim"
+            },
+            {
+              "title": "呂珍玉〈《詩經》疑難詞語辨析（1）〉",
+              "publisher": "東海大學中文系《東海中文學報》第24期，2012年7月，頁1–50",
+              "url": "https://chinese.thu.edu.tw/upload/newspaper_upload/24/01%E5%91%82%E7%8F%8D%E7%8E%89.pdf#page=7",
+              "page": 7,
+              "pdfPage": 7,
+              "zeroBasedPdfPage": 6,
+              "locator": "二、葛之覃兮，總結段；解析器第182–184行，印刷頁7",
+              "supportKind": "primary scholarly article; author explicitly interprets the cited Xunzi phrase as sharp claws and strong muscles/bones, linked by a modifier-head relation",
+              "scope": "直接支持本題的兩組修飾關係；不聲稱論文要求學生必答定語後置。",
+              "access": "independently read extracted page text through web tool; no local PDF copy or rendering"
+            }
+          ],
+          "analysisSha256": "4a8d9dcb81f97b658948d722a3add70004f4ef1459af434a1a166530e11e6c6c"
+        }
       }
     ],
     "lesson-1498": [
@@ -400,7 +552,38 @@
         "misconceptions": [
           "只報術語，未解釋語境",
           "照抄提示，未獨立改述"
-        ]
+        ],
+        "sourceVerification": {
+          "status": "source-context-reviewed",
+          "reviewId": "yw-grammar-source-convergence-20261013-v1",
+          "reviewedAt": "2026-10-13T03:05:31.744Z",
+          "analysisStatus": "authored-contextual-interpretation",
+          "authority": "root-authorized-independent-scoped-source-review-01a132c3",
+          "scope": "原注及相鄰月、月華等句支持卷不去、拂還來的是月光；相思效果是有據的文本解讀，允許不同表述。",
+          "notice": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。",
+          "evidence": {
+            "readerPath": "data/reader-documents/lesson-1498.json",
+            "readerSha256": "e865b8f73d9a4beb512f1f92e4fbedda6f2b5b82717d68142ab4b8e843bbee75",
+            "passages": [
+              {
+                "id": "lesson-1498:p12",
+                "sha256": "60fa29f338d85529a2b616b4e84ab4be13d50691b9a8dfe977442fda9288e2fd",
+                "quotes": [
+                  "玉户帘中卷不去，捣衣砧上拂还来。"
+                ]
+              }
+            ],
+            "annotations": [
+              {
+                "noteId": "footnote-10076-11",
+                "sha256": "5627328859d48ac288845cf0eff09f3618c197ff3269c880f21a58e3a8127394"
+              }
+            ],
+            "readingMaterials": []
+          },
+          "primaryReferences": [],
+          "analysisSha256": "49a086fbe923d591909177b958b199f6cf18ad5c1c1e1add566a2ea8e712b64d"
+        }
       }
     ]
   },

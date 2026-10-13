@@ -105,7 +105,7 @@ test("local-only practice mirrors mastery without claiming formal evidence sync"
   );
 });
 
-test("authoritative manifest gates 382 formal questions while retaining all 723 in the UI", () => {
+test("expanded authority admits all 723 current questions and retains original answer identities", () => {
   const dataRoot = path.resolve(import.meta.dirname, "../site/data");
   const learningManifest = JSON.parse(fs.readFileSync(
     path.join(dataRoot, "learning-manifest.json"),
@@ -127,10 +127,10 @@ test("authoritative manifest gates 382 formal questions while retaining all 723 
     globalThis.YwVocabProgress.isFormalVocabularyQuestion(formalKeys, lessonId, itemId)
   );
   assert.equal(active.length, 723);
-  assert.equal(formal.length, 382);
-  assert.equal(active.length - formal.length, 341);
+  assert.equal(formal.length, 723);
+  assert.equal(active.length - formal.length, 0);
   assert.equal(formalKeys.size, formal.length);
-  assert.deepEqual(counts, { active: 723, formal: 382, localPractice: 341 });
+  assert.deepEqual(counts, { active: 723, formal: 723, localPractice: 0 });
 });
 
 test("a formal question absent from the active index fails closed", () => {
@@ -141,4 +141,14 @@ test("a formal question absent from the active index fails closed", () => {
     ),
     /not active/,
   );
+});
+
+test('future formal vocabulary attempts preserve prior local practice without crediting its counters',()=>{
+  const local=globalThis.YwVocabProgress.applyLocalPracticeAttempt(null,false,2);
+  const before=structuredClone(local);
+  const formal=globalThis.YwVocabProgress.applyServerAttempt(local,{ok:true,status:'learning',attemptNo:1,wrongCount:1,correctCount:0,correct:false},1);
+  assert.deepEqual(local,before);assert.deepEqual(formal.historicalPractice,[before]);
+  assert.equal(formal.attempts,1);assert.equal(formal.wrongCount,1);assert.equal(formal.formalEvidence,true);
+  const later=globalThis.YwVocabProgress.applyServerAttempt(formal,{ok:true,status:'learning',attemptNo:2,wrongCount:1,correctCount:1,correct:true},0);
+  assert.deepEqual(later.historicalPractice,[before]);assert.equal(later.correct,false);
 });

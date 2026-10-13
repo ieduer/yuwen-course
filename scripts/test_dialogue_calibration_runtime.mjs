@@ -36,7 +36,7 @@ function fixture(t) {
 
 
 import {CALIBRATION_CONTRACT as amendment} from '../site/dialogue-calibration-contract.js';
-import {handleCalibration} from '../site/dialogue-calibration.js';
+import {handleRecordedCalibrationForOfflineTest as handleCalibration,handleCalibration as routedCalibration} from '../site/dialogue-calibration.js';
 import packet from '../site/dialogue-calibration-packet.json' with {type:'json'};
 const policy=JSON.parse(fs.readFileSync('docs/dialogue/budget-policy.json'));
 // Reconstruct the recorded source, not today's curriculum, for the consumed
@@ -89,7 +89,19 @@ function response(index=0,demonstrated=true){
  const c=packet.cases[index],o=c.curriculum.objectives.find(o=>o.id===c.objectiveId),t=c.turns.at(-1),p=c.curriculum.passages[0];
  return {value:{reply:'你區分了語境關係。可以再說說句子如何支持這個判斷嗎？',assessments:demonstrated?[{objectiveId:o.id,outcome:'demonstrated',rationale:'Synthetic transport fixture only',evidence:o.criteria.map(criterion=>({criterion,turnId:t.id,quote:t.content,passageId:p.id,passageQuote:p.text.slice(0,10)}))}]:[]},model:policy.model,modelVersion:'synthetic',usage:{promptTokenCount:100,totalTokenCount:200},firstTokenMs:12,totalDurationMs:40};
 }
-test('calibration requires acceptance capability and fixed owner/input; no arbitrary prompts or reordering',async t=>{
+test('routed amendment3 is retired: every POST stops without mutation or calls and GET preserves receipt',async t=>{
+ const f=await setup(t);let calls=0;
+ const first=await(await handleCalibration(f.req(),f.env,f.student,async()=>response())).json();
+ const before=f.sql.prepare('SELECT * FROM dialogue_calls ORDER BY turn_id').all();
+ const blocked=await routedCalibration(f.req(1),f.env,f.student,()=>{calls++;throw Error('must not call');});
+ assert.equal(blocked.status,409);assert.equal((await blocked.json()).code,'calibration_operation_retired');
+ const read=await(await routedCalibration(f.req(0,{},'GET'),f.env,f.student,()=>{calls++;})).json();
+ assert.equal(read.receiptDigest,first.receiptDigest);assert.equal(calls,0);assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_calls ORDER BY turn_id').all(),before);
+ const proposed=new URL(f.req().url);proposed.searchParams.set('calibrationOperation','yw-dialogue-real-calibration-20261012-v1-amendment-4');
+ const planned=await routedCalibration(new Request(proposed,{method:'POST',headers:f.req().headers,body:JSON.stringify({action:'calibration_amendment4',ownerRef:first.ownerRef})}),f.env,f.student,()=>calls++);
+ assert.equal(planned.status,409);assert.equal((await planned.json()).code,'amendment4_activation_required');assert.equal(calls,0);
+});
+test('historical offline calibration requires acceptance capability and fixed owner/input; no arbitrary prompts or reordering',async t=>{
  const f=await setup(t),model=()=>{throw Error('must not call')};
  assert.equal((await handleCalibration(f.req(),{...f.env},f.student,model)).status,404);
  assert.equal((await handleCalibration(f.req(),f.env,{...f.student,ucUserId:700002},model)).status,404);
@@ -133,12 +145,15 @@ test('cost reserve and expiry remain enforced',async t=>{
  const now=Date.now(),expired=acceptanceEnvironment(f.authenticated(),{...f.bindings,YW_ACCEPTANCE_EXPIRES_AT:new Date(now+1000).toISOString()},now);t.mock.method(Date,'now',()=>now+1001);assert.equal((await handleCalibration(f.req(),expired,f.student,blocked)).status,404);
 });
 
-test('both consumed packets remain byte pinned and new packet reproduces exact current source',async()=>{
+test('all consumed packets remain byte pinned; current source cannot inherit their operation',async()=>{
  const {calibrationPacket}=await import('./dialogue_calibration.mjs');
  assert.equal(createHash('sha256').update(fs.readFileSync('scripts/fixtures/dialogue-calibration-stopped-packet.json')).digest('hex'),'3abb6baa1af51b56d8a17013568f7b8a40fd1d61fdfb71c28bfca2f7e72f2ff7');
  assert.equal(createHash('sha256').update(fs.readFileSync('scripts/fixtures/dialogue-calibration-amendment1-packet.json')).digest('hex'),'2f106a61cbc381f40bde2824037c22207b98333cb28b5dbfec258d24ea190274');
  const generated=JSON.parse(JSON.stringify(calibrationPacket(JSON.parse(fs.readFileSync('scripts/dialogue-calibration-cases.json')),id=>JSON.parse(fs.readFileSync('site/dialogue-curriculum/'+id+'.json')),policy)));
- assert.deepEqual(packet,generated);assert.equal(packet.sourceDigest,'4fb2ac792516d95c00022ad08bda42063e8606bec4989b3d46bc6b86c6a67317');
+ assert.equal(createHash('sha256').update(fs.readFileSync('site/dialogue-calibration-packet.json')).digest('hex'),'7ae578d95c084c9cff53beaddeeb1c0cf16de3881d6874a5701e90247b811b94');
+ assert.equal(packet.sourceDigest,'4fb2ac792516d95c00022ad08bda42063e8606bec4989b3d46bc6b86c6a67317');
+ assert.notEqual(packet.sourceDigest,generated.sourceDigest);assert.equal(generated.operation,'unapproved-source-preview');assert.equal(generated.amendment,null);
+ for(const c of packet.cases){assert.equal(createHash('sha256').update(JSON.stringify(c.prompt)).digest('hex'),c.promptDigest);recordedSource(c.lessonId);}
 });
 
 for(const corruption of ['absent','cost','state','owner','source','reason','extra-original'])test('amendment refuses '+corruption+' parent receipt without model call',async t=>{
@@ -264,4 +279,80 @@ test('gateway cooldown is retained but generic503 never proves completion',async
  const at=Date.now();t.mock.method(Date,'now',()=>at+240001);
  assert.equal((await handleCalibration(f.req(0,{},'POST',2),f.env,f.student,()=>{throw Error('no')},{recoveryReadbacks:[providerProof(first)]})).status,409);
  assert.equal((await(await handleCalibration(f.req(0,{},'POST',2),f.env,f.student,()=>{throw Error('no')},{recoveryReadbacks:[providerProof(first,{retryAfterMs:300000})]})).json()).code,'calibration_cooldown');
+});
+
+const amendment4Packet=(await import('../site/dialogue-calibration-amendment4-packet.json',{with:{type:'json'}})).default;
+const amendment4=(await import('../site/dialogue-calibration-amendment4-contract.js')).AMENDMENT4_CONTRACT;
+const POLICY_VERSION_FOR_FIXTURE='yw-dialogue-policy-v6';
+async function setupAmendment4(t){
+ const f=await setup(t),at='2026-10-13T01:32:00.000Z';
+ for(let n=1;n<=3;n++){
+  const id=amendment.operation+':attempt-'+n,sid=id+':session',c=packet.cases[n===1?0:1];
+  f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)').run(sid,f.student.id,'calibration:'+c.lessonId,id,JSON.stringify({caseId:c.id,sourceDigest:c.sourceDigest,promptDigest:c.promptDigest}),POLICY_VERSION_FOR_FIXTURE,at,at);
+  f.sql.prepare('INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,?,?,?,?,?)').run(id,sid,c.id,c.promptDigest,'student','synthetic historical attempt','synthetic_calibration',POLICY_VERSION_FOR_FIXTURE,at);
+  f.sql.prepare('INSERT INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,finished_at,reserved_micros,accounted_micros,budget_policy_json) VALUES(?,?,?,?,?,?,?,?,?,?,?)').run(id,sid,f.student.id,at.slice(0,10),2400,'review',at,at,84000,n===1?5589:null,JSON.stringify(policy));
+  f.sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(id+':result',sid,id,'synthetic_calibration_unconfirmed','{"syntheticOnly":true,"reason":"preserved"}',at);
+ }
+ f.env.ASSETS={fetch:async request=>Response.json(JSON.parse(fs.readFileSync('site'+new URL(request.url).pathname)))};
+ const ownerRef=createHash('sha256').update(`dialogue-owner:${f.student.id}`).digest('hex');
+ const request4=(index=0,attempt=1,extra={},method='POST')=>{const c=amendment4Packet.cases[index];return f.authenticated('/api/dialogue/v1?lessonId='+c.lessonId+'&calibration='+c.id+'&attempt='+attempt+'&calibrationOperation='+amendment4.operation,{method,headers:{origin:ACCEPTANCE_ORIGIN,'content-type':'application/json'},...(method==='POST'?{body:JSON.stringify({action:amendment4.action,ownerRef,...extra})}:{})});};
+ const preflight=await(await routedCalibration(request4(0,1,{},'GET'),f.env,f.student,()=>{throw Error('no');})).json();
+ f.env.YW_CALIBRATION_AMENDMENT4_JSON=JSON.stringify({enabled:true,operation:amendment4.operation,packetDigest:amendment4.packetDigest,authorityDigest:amendment4.authorityDigest,maxProviderAttempts:1,singleProviderAttemptReceiptDigest:'e'.repeat(64),registryReceiptDigest:'f'.repeat(64),priorReceiptSetDigest:preflight.history.receiptSetDigest,readyAt:amendment4.authorizedAt,hardExpiry:amendment4.hardExpiry,recoveryReadbacks:[]});
+ return {...f,request4};
+}
+function response4(index=0){
+ const c=amendment4Packet.cases[index],o=c.curriculum.objectives.find(o=>o.id===c.objectiveId),t=c.turns.at(-1),p=c.curriculum.passages[0];
+ return {value:{reply:'請繼續說明原文依據。',assessments:[{objectiveId:o.id,outcome:'demonstrated',rationale:'Synthetic transport test only',evidence:o.criteria.map(criterion=>({criterion,turnId:t.id,quote:t.content,passageId:p.id,passageQuote:p.text.slice(0,10)}))}]},model:policy.model,modelVersion:'synthetic',usage:{promptTokenCount:100,totalTokenCount:200},firstTokenMs:6055,totalDurationMs:7000};
+}
+test('amendment4 runtime keeps seven historical rows, advances after unknown partial and preserves 6055ms miss',async t=>{
+ const f=await setupAmendment4(t),before=f.sql.prepare('SELECT * FROM dialogue_calls ORDER BY turn_id').all();let calls=0;
+ const failed=await(await routedCalibration(f.request4(),f.env,f.student,async(e,p,id,reply)=>{calls++;await reply('保留這段未完成回應');throw Error('gateway_stream_unconfirmed');})).json();
+ assert.equal(failed.call.state,'review');assert.equal(failed.call.accounted_micros,null);assert.equal(failed.chunks.length,1);
+ const next=await(await routedCalibration(f.request4(27),f.env,f.student,async()=>{calls++;return response4(27);})).json();
+ assert.equal(next.call.state,'finished');assert.equal(next.result.firstTokenTargetMet,false);assert.equal(calls,2);
+ const duplicate=await(await routedCalibration(f.request4(),f.env,f.student,()=>calls++)).json();assert.equal(duplicate.receiptDigest,failed.receiptDigest);assert.equal(calls,2);
+ assert.equal(f.sql.prepare('SELECT count(*) n FROM dialogue_assessments').get().n,0);
+ for(const r of before)assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_calls WHERE turn_id=?').get(r.turn_id),r);
+});
+test('amendment4 partial FETCH_ERROR recovers once with separate receipt/reservation and atomic duplicate protection',async t=>{
+ const f=await setupAmendment4(t);let calls=0;const failed=await(await routedCalibration(f.request4(),f.env,f.student,async(e,p,id,reply)=>{calls++;await reply('部分文字');throw Error('gateway_stream_unconfirmed');})).json();
+ const proof={attemptId:failed.attemptId,requestId:failed.attemptId,caseId:failed.caseId,receiptDigest:failed.receiptDigest,kind:'fetch_error',providerStatus:'FETCH_ERROR',providerAttemptCount:1,brokerCompleted:true,noOutput:false,partialOutput:true,model:policy.model,fallback:false,hedge:false,backgroundCalls:0,retryAfterMs:0,evidenceRef:'synthetic-only/fetch.json',evidenceSha256:'e'.repeat(64),invocationHash:'f'.repeat(64)};
+ const pin=JSON.parse(f.env.YW_CALIBRATION_AMENDMENT4_JSON);pin.recoveryReadbacks=[proof];f.env.YW_CALIBRATION_AMENDMENT4_JSON=JSON.stringify(pin);
+ const at=Date.now();t.mock.method(Date,'now',()=>at+120001);
+ const extra={recoveryOf:failed.attemptId,previousReceipt:failed.receiptDigest},model=async()=>{calls++;return response4();};
+ const responses=await Promise.all([routedCalibration(f.request4(0,2,extra),f.env,f.student,model),routedCalibration(f.request4(0,2,extra),f.env,f.student,model)]);
+ assert(responses.some(r=>r.status===200));assert.equal(calls,2);
+ const recovery=await(await routedCalibration(f.request4(0,2,{},'GET'),f.env,f.student,()=>calls++)).json();assert.notEqual(recovery.receiptDigest,failed.receiptDigest);assert.equal(recovery.call.reserved_micros,84000);
+ const original=await(await routedCalibration(f.request4(0,1,{},'GET'),f.env,f.student,()=>calls++)).json();assert.equal(original.receiptDigest,failed.receiptDigest);assert.equal(original.call.accounted_micros,null);assert.equal(original.chunks[0].content,'部分文字');
+ assert.equal((await routedCalibration(f.request4(0,3,extra),f.env,f.student,model)).status,400);assert.equal(calls,2);
+});
+test('amendment4 runtime refuses unpinned history/source and cannot take activation from request',async t=>{
+ const f=await setupAmendment4(t);let calls=0;const pin=JSON.parse(f.env.YW_CALIBRATION_AMENDMENT4_JSON);
+ f.env.YW_CALIBRATION_AMENDMENT4_JSON=JSON.stringify({...pin,priorReceiptSetDigest:'a'.repeat(64)});
+ assert.equal((await(await routedCalibration(f.request4(),f.env,f.student,()=>calls++)).json()).code,'amendment4_history_reconciliation_required');
+ f.env.YW_CALIBRATION_AMENDMENT4_JSON=JSON.stringify(pin);f.env.ASSETS={fetch:async()=>Response.json({changed:true})};
+ assert.equal((await(await routedCalibration(f.request4(),f.env,f.student,()=>calls++)).json()).code,'calibration_source_mismatch');
+ assert.equal((await routedCalibration(f.request4(0,1,{authority:pin}),f.env,f.student,()=>calls++)).status,400);assert.equal(calls,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,7);
+});
+test('amendment4 pending source creates no call or model request and does not block another case',async t=>{
+ // Synthetic module fixture only; no source file or real receipt is changed.
+ const changed=amendment4Packet.cases.filter(c=>['grammar-modifier-independent','grammar-modifier-misconception','partial-term-only'].includes(c.id)).map(c=>{const item=c.curriculum.languagePractice.find(x=>x.id===c.objectiveId),prior=item.sourceVerification;item.sourceVerification={status:'pending-verification'};return {item,prior};});
+ t.after(()=>{for(const {item,prior} of changed)item.sourceVerification=prior;});
+ const f=await setupAmendment4(t);let calls=0;
+ for(const id of ['grammar-modifier-independent','grammar-modifier-misconception','partial-term-only']){
+  const index=amendment4Packet.cases.findIndex(c=>c.id===id),get=await(await routedCalibration(f.request4(index,1,{},'GET'),f.env,f.student,()=>calls++)).json();
+  assert.equal(get.sourceReadiness.eligible,false);assert.equal(get.call,null);
+  const blocked=await(await routedCalibration(f.request4(index),f.env,f.student,()=>calls++)).json();
+  assert.equal(blocked.code,'amendment4_case_source_verification_required');assert.equal(blocked.scope,'case');assert.equal(blocked.caseId,id);
+ }
+ assert.equal(calls,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,7);
+ const next=await(await routedCalibration(f.request4(27),f.env,f.student,async()=>{calls++;return response4(27);})).json();
+ assert.equal(next.call.state,'finished');assert.equal(calls,1);
+});
+test('amendment4 pins one provider attempt even beside the ordinary max3 capability',async t=>{
+ const f=await setupAmendment4(t);f.env.YW_DIALOGUE_PROVIDER_ATTEMPTS='3';
+ f.env.YW_DIALOGUE_BUDGET_JSON=JSON.stringify({...policy,providerAttemptLimit:3,logicalProviderAttemptLimit:3});
+ let calls=0;const result=await(await routedCalibration(f.request4(),f.env,f.student,async(env,prompt,id,reply,budget)=>{
+  calls++;assert.equal(budget.providerAttemptLimit,1);assert.equal(budget.logicalProviderAttemptLimit,1);assert.equal(budget.reserveMicros,84000);return response4();
+ })).json();assert.equal(result.call.state,'finished');assert.equal(result.call.reserved_micros,84000);assert.equal(calls,1);
 });

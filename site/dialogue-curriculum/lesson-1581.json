@@ -1,0 +1,3563 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1581",
+  "title": "12 * 石钟山记/ 苏轼",
+  "mode": "classical",
+  "author": "苏轼",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1581:p2",
+      "text": "《水经》云：“彭蠡之口有石钟山焉。”郦元以为下临深潭，微风鼓浪，水石相搏，声如洪钟。是说也，人常疑之。今以钟磬置水中，虽大风浪不能鸣也，而况石乎！至唐李渤始访其遗踪，得双石于潭上，扣而聆之，南声函胡，北音清越，桴止响腾，余韵徐歇。自以为得之矣。然是说也，余尤疑之。石之铿然有声者，所在皆是也，而此独以钟名，何哉？\n\n元丰七年六月丁丑，余自齐安舟行适临汝，而长子迈将赴饶之德兴尉，送之至湖口，因得观所谓石钟者。寺僧使小童持斧，于乱石间择其一二扣之，硿硿焉。余固笑而不信也。至暮夜月明，独与迈乘小舟，至绝壁下。大石侧立千尺，如猛兽奇鬼，森然欲搏人；而山上栖鹘，闻人声亦惊起，磔磔云霄间；又有若老人咳且笑于山谷中者，或曰此鹳鹤也。余方心动欲还，而大声发于水上，噌吰如钟鼓不绝。舟人大恐。徐而察之，则山下皆石穴罅，不知其浅深，微波入焉，涵澹澎湃而为此也。舟回至两山间，将入港口，有大石当中流，可坐百人，空中而多窍，与风水相吞吐，有窾坎镗鞳之声，与向之噌吰者相应，如乐作焉。因笑谓迈曰：“汝识之乎 ？噌吰者，周景王之无射也；窾坎镗鞳者，魏庄子之歌钟也。古之人不余欺也 ！”\n\n事不目见耳闻，而臆断其有无，可乎？郦元之所见闻，殆与余同，而言之不详；士大夫终不肯以小舟夜泊绝壁之下，故莫能知；而渔工水师虽知而不能言。此世所以不传也。而陋者乃以斧斤考击而求之，自以为得其实。余是以记之，盖叹郦元之简，而笑李渤之陋也。",
+      "block": {
+        "runs": [
+          {
+            "text": "《水经》云：“彭蠡",
+            "type": "text"
+          },
+          {
+            "label": "[1]",
+            "noteId": "footnote-10550-1",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "之口有石钟山焉。”郦元",
+            "type": "text"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-10550-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "以为下临深潭，微风鼓",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-10550-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "浪，水石相搏，声如洪钟。是说也，人常疑之。今以钟磬",
+            "type": "text"
+          },
+          {
+            "label": "[4]",
+            "noteId": "footnote-10550-4",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "置水中，虽大风浪不能鸣也，而况石乎！至唐李渤",
+            "type": "text"
+          },
+          {
+            "label": "[5]",
+            "noteId": "footnote-10550-5",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "始访其遗踪",
+            "type": "text"
+          },
+          {
+            "label": "[6]",
+            "noteId": "footnote-10550-6",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，得双石于潭上，扣而聆之，南声函胡",
+            "type": "text"
+          },
+          {
+            "label": "[7]",
+            "noteId": "footnote-10550-7",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，北音清越",
+            "type": "text"
+          },
+          {
+            "label": "[8]",
+            "noteId": "footnote-10550-8",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，桴止响腾",
+            "type": "text"
+          },
+          {
+            "label": "[9]",
+            "noteId": "footnote-10550-9",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，余韵徐歇",
+            "type": "text"
+          },
+          {
+            "label": "[10]",
+            "noteId": "footnote-10550-10",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。自以为得之矣。然是说也，余尤疑之。石之铿然",
+            "type": "text"
+          },
+          {
+            "label": "[11]",
+            "noteId": "footnote-10550-11",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "有声者，所在皆是也，而此独以钟名，何哉？\n\n元丰七年六月丁丑，余自齐安",
+            "type": "text"
+          },
+          {
+            "label": "[12]",
+            "noteId": "footnote-10550-12",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "舟行适临汝",
+            "type": "text"
+          },
+          {
+            "label": "[13]",
+            "noteId": "footnote-10550-13",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，而长子迈将赴饶之德兴尉",
+            "type": "text"
+          },
+          {
+            "label": "[14]",
+            "noteId": "footnote-10550-14",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，送之至湖口",
+            "type": "text"
+          },
+          {
+            "label": "[15]",
+            "noteId": "footnote-10550-15",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，因得观所谓石钟者。寺僧使小童持斧，于乱石间择其一二扣之，硿硿焉",
+            "type": "text"
+          },
+          {
+            "label": "[16]",
+            "noteId": "footnote-10550-16",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。余固笑而不信也。至暮夜月明，独与迈乘小舟，至绝壁下。大石侧立千尺，如猛兽奇鬼，森然",
+            "type": "text"
+          },
+          {
+            "label": "[17]",
+            "noteId": "footnote-10550-17",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "欲搏人；而山上栖鹘",
+            "type": "text"
+          },
+          {
+            "label": "[18]",
+            "noteId": "footnote-10550-18",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，闻人声亦惊起，磔磔",
+            "type": "text"
+          },
+          {
+            "label": "[19]",
+            "noteId": "footnote-10550-19",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "云霄间；又有若老人咳且笑于山谷中者，或曰此鹳鹤",
+            "type": "text"
+          },
+          {
+            "label": "[20]",
+            "noteId": "footnote-10550-20",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "也。余方心动",
+            "type": "text"
+          },
+          {
+            "label": "[21]",
+            "noteId": "footnote-10550-21",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "欲还，而大声发于水上，噌吰",
+            "type": "text"
+          },
+          {
+            "label": "[22]",
+            "noteId": "footnote-10550-22",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "如钟鼓不绝。舟人大恐。徐而察之，则山下皆石穴罅",
+            "type": "text"
+          },
+          {
+            "label": "[23]",
+            "noteId": "footnote-10550-23",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，不知其浅深，微波入焉，涵澹澎湃",
+            "type": "text"
+          },
+          {
+            "label": "[24]",
+            "noteId": "footnote-10550-24",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "而为此也。舟回至两山间，将入港口，有大石当中流",
+            "type": "text"
+          },
+          {
+            "label": "[25]",
+            "noteId": "footnote-10550-25",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，可坐百人，空中",
+            "type": "text"
+          },
+          {
+            "label": "[26]",
+            "noteId": "footnote-10550-26",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "而多窍，与风水相吞吐，有窾坎镗鞳",
+            "type": "text"
+          },
+          {
+            "label": "[27]",
+            "noteId": "footnote-10550-27",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "之声，与向之噌吰者相应，如乐作焉。因笑谓迈曰：“汝识之乎",
+            "type": "text"
+          },
+          {
+            "label": "[28]",
+            "noteId": "footnote-10550-28",
+            "type": "annotation-ref"
+          },
+          {
+            "text": " ？噌吰者，周景王之无射",
+            "type": "text"
+          },
+          {
+            "label": "[29]",
+            "noteId": "footnote-10550-29",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "也；窾坎镗鞳者，魏庄子之歌钟",
+            "type": "text"
+          },
+          {
+            "label": "[30]",
+            "noteId": "footnote-10550-30",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "也。古之人不余欺也",
+            "type": "text"
+          },
+          {
+            "label": "[31]",
+            "noteId": "footnote-10550-31",
+            "type": "annotation-ref"
+          },
+          {
+            "text": " ！”\n\n事不目见耳闻，而臆断其有无，可乎？郦元之所见闻，殆与余同，而言之不详；士大夫终不肯以小舟夜泊绝壁之下，故莫能知；而渔工水师虽知而不能言。此世所以不传也",
+            "type": "text"
+          },
+          {
+            "label": "[32]",
+            "noteId": "footnote-10550-32",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。而陋者乃以斧斤考击而求之，自以为得其实。余是以记之，盖叹郦元之简，而笑李渤之陋也。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔彭蠡〕鄱阳湖的别称。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔郦元〕即郦道元。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔鼓〕激荡，掀动。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-3"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔磬〕古代打击乐器，形状像曲尺，用玉或石制成。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-4"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔李渤〕唐代洛阳人，写过一篇《辨石钟山记》。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-5"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔遗踪〕旧址，陈迹。这里指所在地。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-6"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔南声函胡〕南边那块山石的声音重浊模糊。函胡，同“含糊”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-7"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔北音清越〕北边那块山石的声音清脆悠扬。清越，清脆悠扬。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-8"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔桴（fú）止响腾〕鼓槌停止了（敲击），声音还在传播。腾，传播。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-9"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔余韵徐歇〕余音慢慢消失。韵，声音。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-10"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔铿然〕形容敲击金石发出的响亮的声音。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-11"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔齐安〕今湖北黄冈。齐安是黄州所在旧郡名。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-12"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔临汝〕汝州的旧称。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-13"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔饶之德兴尉〕饶州德兴县的县尉。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-14"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔湖口〕县名，今属江西。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-15"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔硿（kōng）硿焉〕硿硿地响。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-16"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔森然〕阴森的样子。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-17"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔栖鹘（hú）〕宿巢的隼。鹘，隼的旧称。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-18"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔磔（zhé）磔〕鸟鸣声。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-19"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔鹳鹤〕水鸟，似鹤而顶不红，颈和嘴都比鹤长，夜宿高树。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-20"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔心动〕内心惊恐。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-21"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔噌吰（chēnghóng）〕形容钟鼓的声音。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-22"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔罅（xià）〕裂缝。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-23"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔涵澹澎湃〕（波浪）激荡冲击。涵澹，水波动荡。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-24"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔中流〕江河水流中央。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-25"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔空中〕中间是空的。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-26"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔窾坎（kuǎnkǎn）镗鞳（tāngtà）〕窾坎，击物声。镗鞳，钟鼓声。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-27"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔汝识之乎〕你知道吗？",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-28"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔周景王之无射（yì）〕《国语·周语下》记载，周景王曾命铸造“无射”。无射，钟名。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-29"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔魏庄子之歌钟〕《左传·襄公十一年》记载，鲁襄公十一年（前562），郑人以歌钟和其他乐器献给晋侯，晋侯分一半赐给晋大夫魏绛。魏庄子，魏绛谥“庄”，故名。歌钟，古乐器。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-30"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔古之人不余欺也〕古代的人（称这山为“石钟山”）没有欺骗我啊！不余欺，即“不欺余”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-31"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔此世所以不传也〕这就是世上没有流传（石钟山得名由来）的缘故。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10550-32"
+    }
+  ],
+  "resources": [
+    {
+      "disposition": "system-browser",
+      "href": "https://blog.bdfzer.com/2024/02/blog-post_20.html#more",
+      "kind": "link",
+      "label": "blog.bdfzer.com",
+      "postId": null,
+      "postNumber": 5,
+      "sourceUrl": "https://blog.bdfzer.com/2024/02/blog-post_20.html#more"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://ctext.org/library.pl?if=gb&file=192833&page=112&remap=gb",
+      "kind": "link",
+      "label": "ctext.org",
+      "postId": 64588,
+      "postNumber": null,
+      "sourceUrl": "https://ctext.org/library.pl?if=gb&file=192833&page=112&remap=gb"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://ctext.org/wiki.pl?if=gb&chapter=830693#p3",
+      "kind": "link",
+      "label": "ctext.org",
+      "postId": null,
+      "postNumber": 5,
+      "sourceUrl": "https://ctext.org/wiki.pl?if=gb&chapter=830693#p3"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://digitalarchive.npm.gov.tw/Collection/Detail/12055?dep=P",
+      "kind": "link",
+      "label": "digitalarchive.npm.gov.tw",
+      "postId": null,
+      "postNumber": 6,
+      "sourceUrl": "https://digitalarchive.npm.gov.tw/Collection/Detail/12055?dep=P"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://files.rdfzer.com/original/2X/c/c54e30db8183a4b8917baf6c91db6dad2574f5f9.png",
+      "kind": "link",
+      "label": "https://files.rdfzer.com/original/2X/c/c54e30db8183a4b8917baf6c91db6dad2574f5f9.png",
+      "postId": 64588,
+      "postNumber": null,
+      "sourceUrl": "https://files.rdfzer.com/original/2X/c/c54e30db8183a4b8917baf6c91db6dad2574f5f9.png"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://files.rdfzer.com/original/2X/c/ce121297981d5d5b30a9080c322a64e10705c30d.png",
+      "kind": "link",
+      "label": "https://files.rdfzer.com/original/2X/c/ce121297981d5d5b30a9080c322a64e10705c30d.png",
+      "postId": 64588,
+      "postNumber": null,
+      "sourceUrl": "https://files.rdfzer.com/original/2X/c/ce121297981d5d5b30a9080c322a64e10705c30d.png"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://files.rdfzer.com/original/2X/d/da4a9180d64a6f2b8f4c90ffb836581be4d3422f.png",
+      "kind": "link",
+      "label": "https://files.rdfzer.com/original/2X/d/da4a9180d64a6f2b8f4c90ffb836581be4d3422f.png",
+      "postId": 64588,
+      "postNumber": null,
+      "sourceUrl": "https://files.rdfzer.com/original/2X/d/da4a9180d64a6f2b8f4c90ffb836581be4d3422f.png"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/u/creative",
+      "kind": "link",
+      "label": "@Creative",
+      "postId": null,
+      "postNumber": 10,
+      "sourceUrl": "https://forum.rdfzer.com/u/creative"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/uploads/short-url/l62eYrjytgVGqJ0ICmcx0myz4yF.pdf",
+      "kind": "link",
+      "label": "Pages from 二十四史.20.宋史.496卷.元.脱脱等撰.清乾隆时期武英殿刊本.书号09753.灰度胶片.pdf",
+      "postId": 65345,
+      "postNumber": null,
+      "sourceUrl": "https://forum.rdfzer.com/uploads/short-url/l62eYrjytgVGqJ0ICmcx0myz4yF.pdf"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://sites.google.com/view/pkuschool/%e9%81%b8%e5%bf%85%e4%b8%8b/%e7%ac%ac%e4%b8%89%e5%8d%95%e5%85%83/12-%e7%9f%b3%e9%92%9f%e5%b1%b1%e8%ae%b0-%e8%8b%8f%e8%bd%bc",
+      "kind": "link",
+      "label": "https://sites.google.com/view/pkuschool/%e9%81%b8%e5%bf%85%e4%b8%8b/%e7%ac%ac%e4%b8%89%e5%8d%95%e5%85%83/12-%e7%9f%b3%e9%92%9f%e5%b1%b1%e8%ae%b0-%e8%8b%8f%e8%bd",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://sites.google.com/view/pkuschool/%e9%81%b8%e5%bf%85%e4%b8%8b/%e7%ac%ac%e4%b8%89%e5%8d%95%e5%85%83/12-%e7%9f%b3%e9%92%9f%e5%b1%b1%e8%ae%b0-%e8%8b%8f%e8%bd%bc"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://www.wikidata.org/wiki/Q18862643",
+      "kind": "link",
+      "label": "数据项",
+      "postId": null,
+      "postNumber": 9,
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18862643"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://zh.wikisource.org/wiki/%E5%85%A8%E5%94%90%E6%96%87/%E5%8D%B70712",
+      "kind": "link",
+      "label": "全唐文/卷0712",
+      "postId": null,
+      "postNumber": 10,
+      "sourceUrl": "https://zh.wikisource.org/wiki/%E5%85%A8%E5%94%90%E6%96%87/%E5%8D%B70712"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://zh.wikisource.org/wiki/%E6%9D%B1%E5%9D%A1%E5%85%A8%E9%9B%86",
+      "kind": "link",
+      "label": "東坡全集‎",
+      "postId": null,
+      "postNumber": 9,
+      "sourceUrl": "https://zh.wikisource.org/wiki/%E6%9D%B1%E5%9D%A1%E5%85%A8%E9%9B%86"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://zh.wikisource.org/wiki/Author:%E6%9D%8E%E6%B8%A4",
+      "kind": "link",
+      "label": "李渤",
+      "postId": null,
+      "postNumber": 10,
+      "sourceUrl": "https://zh.wikisource.org/wiki/Author:%E6%9D%8E%E6%B8%A4"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://zh.wikisource.org/wiki/Author:%E8%98%87%E8%BB%BE",
+      "kind": "link",
+      "label": "蘇軾",
+      "postId": null,
+      "postNumber": 9,
+      "sourceUrl": "https://zh.wikisource.org/wiki/Author:%E8%98%87%E8%BB%BE"
+    }
+  ],
+  "source": "https://forum.rdfzer.com/t/topic/1581",
+  "objectives": [
+    {
+      "id": "lesson-1581:firstRead",
+      "domain": "firstRead",
+      "label": "無注疏初讀",
+      "criteria": [
+        "initial_response",
+        "uncertainty"
+      ],
+      "rule": "保留原無注疏初讀、疑點標記與解惑紀錄；在對話引用原記錄。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1581:p2"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1581:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1581:p2"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1581:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1581:p2"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1581:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1581:p2"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1581:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1581:p2"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1581:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1581:p2"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1581:v01",
+      "domain": "vocabulary",
+      "label": "字詞：鼓",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：激盪。語境義：激盪，掀動。「鼓」在此處為動詞，意為風吹動水面，使波浪掀起。",
+      "sourcePassages": [
+        "lesson-1581:p2"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1581:v03",
+      "domain": "vocabulary",
+      "label": "字詞：桴",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：鼓槌停止敲擊，聲音還在傳播。語境義：鼓槌。桴，指鼓槌。全句意為鼓槌停止敲擊，聲音還在傳播。",
+      "sourcePassages": [
+        "lesson-1581:p2"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1581:v04",
+      "domain": "vocabulary",
+      "label": "字詞：騰",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：傳播。語境義：傳播。「騰」在此處指聲音的傳播與餘韻。",
+      "sourcePassages": [],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1581:v05",
+      "domain": "vocabulary",
+      "label": "字詞：心動",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：看到那詭異的景象，我不禁感到心動。語境義：內心驚恐。文中「心動」意為內心驚恐。選項B意為驚恐，與文意一致。",
+      "sourcePassages": [],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1581:v06",
+      "domain": "vocabulary",
+      "label": "字詞：罅",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：縫隙。語境義：裂縫。罅，指裂縫或縫隙。",
+      "sourcePassages": [
+        "lesson-1581:p2"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1581:v07",
+      "domain": "vocabulary",
+      "label": "字詞：空中",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：（大石）中間是空的，且有很多孔竅。語境義：中間是空的。「空中」在古代漢語中常指物體中間空虛，此處形容大石的結構。",
+      "sourcePassages": [
+        "lesson-1581:p2"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1581:v08",
+      "domain": "vocabulary",
+      "label": "字詞：識",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：知道。語境義：知道，明白。「識」在句中為動詞，意為知道、明白。",
+      "sourcePassages": [],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1581:v09",
+      "domain": "vocabulary",
+      "label": "字詞：臆斷",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：憑藉臆想做出的判斷。語境義：憑主觀臆想做判斷。「臆」指胸臆、主觀想法，「斷」指判斷。臆斷意為憑主觀臆想做判斷。",
+      "sourcePassages": [],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1581:v10",
+      "domain": "vocabulary",
+      "label": "字詞：殆",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：幾乎，大概。語境義：大概，幾乎。「殆」在此處作為副詞，表示程度或推測，意為大概、幾乎。",
+      "sourcePassages": [
+        "lesson-1581:p2"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1581:v11",
+      "domain": "vocabulary",
+      "label": "字詞：傳",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：流傳。語境義：流傳。「傳」在此處指石鐘山得名的緣由沒有被世人所正確流傳。",
+      "sourcePassages": [],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "legacy:effect:lesson-1581:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1581:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1581:interaction:structure",
+        "resourceVersion": "sha256:79389aa3ae53f170e08404e01d734918c2a6c700fcc716061711a1641462d6f5",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1581:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1581:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1581:interaction:evaluation",
+        "resourceVersion": "sha256:d09340184b5408a97eabb3d46c27940a3bdd4a84120457920cfb600a601f7d54",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1581:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1581:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1581:interaction:authorQuestion",
+        "resourceVersion": "sha256:29403af1ec35fa21e7498afac543c496044a0e52ea52cd7255c1559dc4cbc275",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1581:vocab:lesson-1581:v01",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v01",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v01",
+        "resourceVersion": "sha256:1bf3ca630381d4cc144da7165480d294ccca0d8c8b69d83d3f7ad82433f037b8",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1581:vocab:lesson-1581:v03",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v03",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v03",
+        "resourceVersion": "sha256:2fa5ff5a4796bf94961e601628f0c90574a14dc21b4032c57c99bd656a07ca64",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1581:vocab:lesson-1581:v04",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v04",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v04",
+        "resourceVersion": "sha256:c0f7fbcc354598054dff2d9ef483fe751f1b33e74b067a11a7ad9a3587977bec",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1581:vocab:lesson-1581:v05",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v05",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v05",
+        "resourceVersion": "sha256:7ed6ddf6280ad0bda5d6973e3da1fe0d817e8ec5a9a9bc0b993be275bd6c5e94",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1581:vocab:lesson-1581:v06",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v06",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v06",
+        "resourceVersion": "sha256:2fc0d7afac04f1368025f4231e26a101488e31c777c20e9b46ce2e4fef903b12",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1581:vocab:lesson-1581:v07",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v07",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v07",
+        "resourceVersion": "sha256:ddace12242982def07ce9519c3c8a13fe2e907dd8fa7b7f34cfc7791631b7af3",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1581:vocab:lesson-1581:v08",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v08",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v08",
+        "resourceVersion": "sha256:112b8f70bf4c86db0c6a528af3cc70fd5efdc34e36567949239bf69e0da4c040",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1581:vocab:lesson-1581:v09",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v09",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v09",
+        "resourceVersion": "sha256:d8e500f19545790360e95495f1fdd720230f3500020e56665b6d507594fefd17",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1581:vocab:lesson-1581:v10",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v10",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v10",
+        "resourceVersion": "sha256:3aeeaed0f1eafa67bc264adfde5929390be581b75705b1d07aaee29f0d0e6471",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1581:vocab:lesson-1581:v11",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v11",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v11",
+        "resourceVersion": "sha256:6052f824de84112eb5fe7b31569ec3bd2fcc1f7ef74effe7da55f882636ecbc8",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "study:lesson-1581-p100-vocabulary-01",
+      "domain": "studyGuide",
+      "label": "指出“南声函胡”中的通假字并解释。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1581-p100-vocabulary-01"
+    },
+    {
+      "id": "study:lesson-1581-p101-ancient-modern-01",
+      "domain": "studyGuide",
+      "label": "说明“其实、空中、心动、水师”的古义和今义。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1581-p101-ancient-modern-01"
+    },
+    {
+      "id": "study:lesson-1581-p101-lexical-activation-01",
+      "domain": "studyGuide",
+      "label": "指出“鼓、名、舟、侧、目、耳、夜、鸣”的活用类型并解释。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1581-p101-lexical-activation-01"
+    },
+    {
+      "id": "study:lesson-1581-p101-sentence-pattern-01",
+      "domain": "studyGuide",
+      "label": "辨析并翻译：石之铿然有声者，所在皆是也；或曰此鹳鹤也；噌吰者，周景王之无射也；此世所以不传也；古之人不余欺也；余是以记之；得双石于潭上；又有若老人咳且笑于山谷中者；而大声发于水上。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1581-p101-sentence-pattern-01"
+    },
+    {
+      "id": "study:lesson-1581-p103-content-discrimination-01",
+      "domain": "studyGuide",
+      "label": "课后任务第1至3题：分别选择正确断句、文化常识解说不正确项、内容概括不正确项。请依次提交三个选项字母。\n第1题：下列对文中画波浪线部分的断句，正确的一项是？\nA. 入之其中／透漏玲珑／乳石如天花散漫／垂垂欲落\nB. 入之／其中透漏玲珑／乳石如天花散漫／垂垂欲落\nC. 入之／其中透漏玲珑／乳石如天花／散漫垂垂欲落\nD. 入之其中／透漏／玲珑乳石如天花／散漫垂垂欲落\n第2题：下列对文中加点词语的相关内容的解说，不正确的一项是？\nA. 元丰，皇帝的年号，年号是中国封建王朝用来纪年的一种名号，先秦至汉初无年号，汉武帝即位后首创年号。始创年号为建元，一个皇帝只有一个年号。\nB. 公元前522年周景王铸造了一套名叫“无射（yì）”的大型编钟。无射是十二律中的第十一律，因钟声合乎无射的音律，故用“无射”作钟名。\nC. 笔记，一种随笔记录的文体，笔记文包括史料笔记、考据笔记和笔记小说。\nD. 丹房，指道教炼丹的地方，后指道观；也指神仙的住所。本文指的是神仙的住所。\n第3题：下列对原文有关内容的概括和分析，不正确的一项是？\nA. 文段（一）是通过记游来发表议论的别开生面的文章，它既有记叙文写景状物形象生动的特点，又有议论文剖析事理、探讨问题的性质。\nB. 文段（一）中作者用栖鹘和鹳鹤的声音渲染了一种阴森恐怖的气氛，使人心惊胆战，侧面凸显出了作者的不怕艰险、勇于探索的精神。\nC. 文段（二）认为苏轼只看到了下钟山的山形似钟，而没看到上钟山亦然。\nD. 文段（二）认为苏轼考察石钟山，以为其得名是因风水相吞吐而为声，这也没有探察到问题的根本。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1581-p103-content-discrimination-01"
+    },
+    {
+      "id": "lesson-1581:corpus-function-word",
+      "domain": "vocabulary",
+      "label": "語言：而",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "字典所列詞義範圍已核對；本課語境分析為教學解讀，並非原書收錄答案。 連詞，表示動作相承。 敲擊後聆聽聲音，以此求證命名；要說清敲與聽的關係，不把它當互相轉折。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "sourcePassages": [
+        "lesson-1581:p2"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "而表示雖然敲卻完全不聽"
+      ],
+      "remediation": "說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。",
+      "scoringRole": "none"
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "lesson-1581:v01",
+      "word": "鼓",
+      "sourceSentence": "微风鼓浪",
+      "meaning": "激盪，掀動",
+      "explanation": "「鼓」在此處為動詞，意為風吹動水面，使波浪掀起。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "「微风鼓浪」中「鼓」的意思是",
+      "options": [
+        "敲擊",
+        "激盪",
+        "鼓起",
+        "發動"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "激盪",
+      "sourceRefs": [
+        "王力《古漢語常用字字典》"
+      ],
+      "version": "vocab-set-9f76377843dd3cf2",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「微风鼓浪」\n「微风鼓浪」中「鼓」的意思是\nA. 敲擊\nB. 激盪\nC. 鼓起\nD. 發動\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「微风鼓浪」中「鼓」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1581:v03",
+      "word": "桴",
+      "sourceSentence": "桴止响腾",
+      "meaning": "鼓槌",
+      "explanation": "桴，指鼓槌。全句意為鼓槌停止敲擊，聲音還在傳播。",
+      "type": "interpretation",
+      "difficulty": 2,
+      "question": "對「桴止响腾」一句理解正確的是",
+      "options": [
+        "鼓槌停止敲擊，聲音還在傳播",
+        "鼓聲停止，響聲飛騰起來",
+        "船槳停止划動，響聲傳得很遠",
+        "音樂停止了，餘音還在迴盪"
+      ],
+      "answerIndex": 0,
+      "sourceAnswer": "鼓槌停止敲擊，聲音還在傳播",
+      "sourceRefs": [
+        "《漢語大詞典》"
+      ],
+      "version": "vocab-set-9f76377843dd3cf2",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「桴止响腾」\n對「桴止响腾」一句理解正確的是\nA. 鼓槌停止敲擊，聲音還在傳播\nB. 鼓聲停止，響聲飛騰起來\nC. 船槳停止划動，響聲傳得很遠\nD. 音樂停止了，餘音還在迴盪\n請選出答案，並用自己的話說明判斷依據。",
+        "「桴止响腾」中的「桴」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
+      ]
+    },
+    {
+      "id": "lesson-1581:v04",
+      "word": "騰",
+      "sourceSentence": "桴止响腾",
+      "meaning": "傳播",
+      "explanation": "「騰」在此處指聲音的傳播與餘韻。",
+      "type": "contextual-choice",
+      "difficulty": 2,
+      "question": "「桴止响腾」中「腾」的意思是",
+      "options": [
+        "奔跑",
+        "上升",
+        "傳播",
+        "翻騰"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "傳播",
+      "sourceRefs": [
+        "《漢語大詞典》"
+      ],
+      "version": "vocab-set-9f76377843dd3cf2",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「桴止响腾」\n「桴止响腾」中「腾」的意思是\nA. 奔跑\nB. 上升\nC. 傳播\nD. 翻騰\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「桴止响腾」中「騰」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1581:v05",
+      "word": "心動",
+      "sourceSentence": "余方心动欲还",
+      "meaning": "內心驚恐",
+      "explanation": "文中「心動」意為內心驚恐。選項B意為驚恐，與文意一致。",
+      "type": "gu-jin",
+      "difficulty": 2,
+      "question": "下列選項中「心動」的含義與文中「余方心动欲还」一致的是",
+      "options": [
+        "這份精美的禮物讓他十分心動",
+        "看到那詭異的景象，我不禁感到心動",
+        "她對這份工作很心動，決定去面試",
+        "聽到這則消息，他久久不能心動"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "看到那詭異的景象，我不禁感到心動",
+      "sourceRefs": [
+        "王力《古漢語常用字字典》"
+      ],
+      "version": "vocab-set-9f76377843dd3cf2",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「余方心动欲还」\n下列選項中「心動」的含義與文中「余方心动欲还」一致的是\nA. 這份精美的禮物讓他十分心動\nB. 看到那詭異的景象，我不禁感到心動\nC. 她對這份工作很心動，決定去面試\nD. 聽到這則消息，他久久不能心動\n請選出答案，並用自己的話說明判斷依據。",
+        "回到「余方心动欲还」：「心動」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
+      ]
+    },
+    {
+      "id": "lesson-1581:v06",
+      "word": "罅",
+      "sourceSentence": "则山下皆石穴罅",
+      "meaning": "裂縫",
+      "explanation": "罅，指裂縫或縫隙。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "「则山下皆石穴罅」中「罅」的意思是",
+      "options": [
+        "洞穴",
+        "縫隙",
+        "深處",
+        "岩石"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "縫隙",
+      "sourceRefs": [
+        "《漢語大詞典》"
+      ],
+      "version": "vocab-set-9f76377843dd3cf2",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「则山下皆石穴罅」\n「则山下皆石穴罅」中「罅」的意思是\nA. 洞穴\nB. 縫隙\nC. 深處\nD. 岩石\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「则山下皆石穴罅」中「罅」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1581:v07",
+      "word": "空中",
+      "sourceSentence": "空中而多窍",
+      "meaning": "中間是空的",
+      "explanation": "「空中」在古代漢語中常指物體中間空虛，此處形容大石的結構。",
+      "type": "gu-jin",
+      "difficulty": 2,
+      "question": "對「空中而多窍」一句理解正確的是",
+      "options": [
+        "在天空中有很多孔竅",
+        "半空中有很多孔竅",
+        "（大石）中間是空的，且有很多孔竅",
+        "大石懸浮在空中，有很多孔竅"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "（大石）中間是空的，且有很多孔竅",
+      "sourceRefs": [
+        "王力《古漢語常用字字典》"
+      ],
+      "version": "vocab-set-9f76377843dd3cf2",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「空中而多窍」\n對「空中而多窍」一句理解正確的是\nA. 在天空中有很多孔竅\nB. 半空中有很多孔竅\nC. （大石）中間是空的，且有很多孔竅\nD. 大石懸浮在空中，有很多孔竅\n請選出答案，並用自己的話說明判斷依據。",
+        "回到「空中而多窍」：「空中」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
+      ]
+    },
+    {
+      "id": "lesson-1581:v08",
+      "word": "識",
+      "sourceSentence": "汝识之乎",
+      "meaning": "知道，明白",
+      "explanation": "「識」在句中為動詞，意為知道、明白。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "「汝识之乎」中「识」的意思是",
+      "options": [
+        "認識",
+        "標識",
+        "知道",
+        "記憶"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "知道",
+      "sourceRefs": [
+        "王力《古漢語常用字字典》"
+      ],
+      "version": "vocab-set-9f76377843dd3cf2",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「汝识之乎」\n「汝识之乎」中「识」的意思是\nA. 認識\nB. 標識\nC. 知道\nD. 記憶\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「汝识之乎」中「識」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1581:v09",
+      "word": "臆斷",
+      "sourceSentence": "而臆断其有无",
+      "meaning": "憑主觀臆想做判斷",
+      "explanation": "「臆」指胸臆、主觀想法，「斷」指判斷。臆斷意為憑主觀臆想做判斷。",
+      "type": "discrimination",
+      "difficulty": 2,
+      "question": "下列對「臆斷」一詞的理解，最準確的是",
+      "options": [
+        "果斷地判斷",
+        "憑藉臆想做出的判斷",
+        "經過推斷做出的結論",
+        "斷斷續續的判斷"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "憑藉臆想做出的判斷",
+      "sourceRefs": [
+        "《漢語大詞典》"
+      ],
+      "version": "vocab-set-9f76377843dd3cf2",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「而臆断其有无」\n下列對「臆斷」一詞的理解，最準確的是\nA. 果斷地判斷\nB. 憑藉臆想做出的判斷\nC. 經過推斷做出的結論\nD. 斷斷續續的判斷\n請選出答案，並用自己的話說明判斷依據。",
+        "請比較以下各項在原句中的意思：\nA. 果斷地判斷\nB. 憑藉臆想做出的判斷\nC. 經過推斷做出的結論\nD. 斷斷續續的判斷\n下列對「臆斷」一詞的理解，最準確的是。選出一項後逐一說明比較依據，不能只報字母。"
+      ]
+    },
+    {
+      "id": "lesson-1581:v10",
+      "word": "殆",
+      "sourceSentence": "郦元之所见闻,殆与余同",
+      "meaning": "大概，幾乎",
+      "explanation": "「殆」在此處作為副詞，表示程度或推測，意為大概、幾乎。",
+      "type": "contextual-choice",
+      "difficulty": 2,
+      "question": "「郦元之所见闻，殆与余同」中「殆」的意思是",
+      "options": [
+        "危險",
+        "幾乎，大概",
+        "必定",
+        "完全"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "幾乎，大概",
+      "sourceRefs": [
+        "王力《古漢語常用字字典》"
+      ],
+      "version": "vocab-set-9f76377843dd3cf2",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「郦元之所见闻,殆与余同」\n「郦元之所见闻，殆与余同」中「殆」的意思是\nA. 危險\nB. 幾乎，大概\nC. 必定\nD. 完全\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「郦元之所见闻,殆与余同」中「殆」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1581:v11",
+      "word": "傳",
+      "sourceSentence": "此世所以不传也",
+      "meaning": "流傳",
+      "explanation": "「傳」在此處指石鐘山得名的緣由沒有被世人所正確流傳。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "「此世所以不传也」中「传」的意思是",
+      "options": [
+        "傳授",
+        "傳遞",
+        "流傳",
+        "傳記"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "流傳",
+      "sourceRefs": [
+        "王力《古漢語常用字字典》"
+      ],
+      "version": "vocab-set-9f76377843dd3cf2",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「此世所以不传也」\n「此世所以不传也」中「传」的意思是\nA. 傳授\nB. 傳遞\nC. 流傳\nD. 傳記\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「此世所以不传也」中「傳」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    }
+  ],
+  "legacy": {
+    "lessonId": "lesson-1581",
+    "title": "12 * 石钟山记/ 苏轼",
+    "mode": "classical",
+    "legacyTracks": [
+      "firstRead",
+      "vocabulary",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "firstRead",
+        "無注疏初讀",
+        "",
+        25
+      ],
+      [
+        "vocabulary",
+        "詞級疏通",
+        "",
+        30
+      ],
+      [
+        "structure",
+        "考辨與章法",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "本篇有意思",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "遷移與追問",
+        "",
+        15
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1581:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1581:interaction:structure",
+        "resourceVersion": "sha256:79389aa3ae53f170e08404e01d734918c2a6c700fcc716061711a1641462d6f5",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1581:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1581:interaction:evaluation",
+        "resourceVersion": "sha256:d09340184b5408a97eabb3d46c27940a3bdd4a84120457920cfb600a601f7d54",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1581:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1581:interaction:authorQuestion",
+        "resourceVersion": "sha256:29403af1ec35fa21e7498afac543c496044a0e52ea52cd7255c1559dc4cbc275",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v01",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v01",
+        "resourceVersion": "sha256:1bf3ca630381d4cc144da7165480d294ccca0d8c8b69d83d3f7ad82433f037b8",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v03",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v03",
+        "resourceVersion": "sha256:2fa5ff5a4796bf94961e601628f0c90574a14dc21b4032c57c99bd656a07ca64",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v04",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v04",
+        "resourceVersion": "sha256:c0f7fbcc354598054dff2d9ef483fe751f1b33e74b067a11a7ad9a3587977bec",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v05",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v05",
+        "resourceVersion": "sha256:7ed6ddf6280ad0bda5d6973e3da1fe0d817e8ec5a9a9bc0b993be275bd6c5e94",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v06",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v06",
+        "resourceVersion": "sha256:2fc0d7afac04f1368025f4231e26a101488e31c777c20e9b46ce2e4fef903b12",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v07",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v07",
+        "resourceVersion": "sha256:ddace12242982def07ce9519c3c8a13fe2e907dd8fa7b7f34cfc7791631b7af3",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v08",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v08",
+        "resourceVersion": "sha256:112b8f70bf4c86db0c6a528af3cc70fd5efdc34e36567949239bf69e0da4c040",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v09",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v09",
+        "resourceVersion": "sha256:d8e500f19545790360e95495f1fdd720230f3500020e56665b6d507594fefd17",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v10",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v10",
+        "resourceVersion": "sha256:3aeeaed0f1eafa67bc264adfde5929390be581b75705b1d07aaee29f0d0e6471",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v11",
+        "canonicalUnitId": "yw:lesson-1581:vocabulary:lesson-1581:v11",
+        "resourceVersion": "sha256:6052f824de84112eb5fe7b31569ec3bd2fcc1f7ef74effe7da55f882636ecbc8",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1581:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1581:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1581:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1581:interaction:structure",
+        "completionKey": "effect:lesson-1581:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1581:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "comprehension",
+        "itemKey": "lesson-1581-p103-content-discrimination-01",
+        "semanticRevision": "eee7930637f90d69",
+        "completionKey": "formative:lesson-1581:comprehension:eee7930637f90d69#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1581:comprehension:eee7930637f90d69",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "first_read_process",
+        "itemKey": "first-read:resolved",
+        "completionKey": "lesson:lesson-1581#initialReadingResolved",
+        "interactionKey": "initialReadingResolved",
+        "resourceKey": "lesson:lesson-1581",
+        "sourceKind": "classical_first_read",
+        "answerAuthority": "process_evidence",
+        "scoringRole": "none",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "first_read_process",
+        "itemKey": "first-read:submitted",
+        "completionKey": "lesson:lesson-1581#initialReadingSubmitted",
+        "interactionKey": "initialReadingSubmitted",
+        "resourceKey": "lesson:lesson-1581",
+        "sourceKind": "classical_first_read",
+        "answerAuthority": "process_evidence",
+        "scoringRole": "none",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "syntax",
+        "itemKey": "lesson-1581-p101-sentence-pattern-01",
+        "semanticRevision": "a7876d645e986a3d",
+        "completionKey": "formative:lesson-1581:syntax:a7876d645e986a3d#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1581:syntax:a7876d645e986a3d",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1581:vocab:lesson-1581:v01",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v01#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v01",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1581:vocab:lesson-1581:v03",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v03#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v03",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1581:vocab:lesson-1581:v04",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v04#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v04",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1581:vocab:lesson-1581:v05",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v05#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v05",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1581:vocab:lesson-1581:v06",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v06#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v06",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1581:vocab:lesson-1581:v07",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v07#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v07",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1581:vocab:lesson-1581:v08",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v08#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v08",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1581:vocab:lesson-1581:v09",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v09#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v09",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1581:vocab:lesson-1581:v10",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v10#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v10",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1581:vocab:lesson-1581:v11",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v11#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1581:vocab:lesson-1581:v11",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1581-p101-lexical-activation-01",
+        "semanticRevision": "5e50252a6d49336d",
+        "completionKey": "formative:lesson-1581:vocabulary:5e50252a6d49336d#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1581:vocabulary:5e50252a6d49336d",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1581-p101-ancient-modern-01",
+        "semanticRevision": "ac98c90f4fc0c4a9",
+        "completionKey": "formative:lesson-1581:vocabulary:ac98c90f4fc0c4a9#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1581:vocabulary:ac98c90f4fc0c4a9",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1581",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1581-p100-vocabulary-01",
+        "semanticRevision": "d0cf760a10362c10",
+        "completionKey": "formative:lesson-1581:vocabulary:d0cf760a10362c10#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1581:vocabulary:d0cf760a10362c10",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [
+      "lesson-1581:v01",
+      "lesson-1581:v03",
+      "lesson-1581:v04",
+      "lesson-1581:v05",
+      "lesson-1581:v06",
+      "lesson-1581:v07",
+      "lesson-1581:v08",
+      "lesson-1581:v09",
+      "lesson-1581:v10",
+      "lesson-1581:v11"
+    ],
+    "studyGuide": [
+      {
+        "itemKey": "lesson-1581-p100-comprehension-02",
+        "active": false,
+        "reviewRequired": false,
+        "semanticRevision": "c4a4587413c44014",
+        "pdfPage": 100,
+        "printedPage": 97,
+        "competencyTag": "comprehension"
+      },
+      {
+        "itemKey": "lesson-1581-p100-comprehension-03",
+        "active": false,
+        "reviewRequired": false,
+        "semanticRevision": "f5cea4d1d9595aab",
+        "pdfPage": 100,
+        "printedPage": 97,
+        "competencyTag": "comprehension"
+      },
+      {
+        "itemKey": "lesson-1581-p100-vocabulary-01",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "d0cf760a10362c10",
+        "pdfPage": 100,
+        "printedPage": 97,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1581-p101-ancient-modern-01",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "ac98c90f4fc0c4a9",
+        "pdfPage": 101,
+        "printedPage": 98,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1581-p101-lexical-activation-01",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "5e50252a6d49336d",
+        "pdfPage": 101,
+        "printedPage": 98,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1581-p101-sentence-pattern-01",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "a7876d645e986a3d",
+        "pdfPage": 101,
+        "printedPage": 98,
+        "competencyTag": "syntax"
+      },
+      {
+        "itemKey": "lesson-1581-p103-comprehension-04",
+        "active": false,
+        "reviewRequired": false,
+        "semanticRevision": "9bf91f3705abe007",
+        "pdfPage": 103,
+        "printedPage": 100,
+        "competencyTag": "comprehension"
+      },
+      {
+        "itemKey": "lesson-1581-p103-content-discrimination-01",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "eee7930637f90d69",
+        "pdfPage": 103,
+        "printedPage": 100,
+        "competencyTag": "comprehension"
+      },
+      {
+        "itemKey": "lesson-1581-p99-comprehension-01",
+        "active": false,
+        "reviewRequired": false,
+        "semanticRevision": "e592b7645cc730e6",
+        "pdfPage": 99,
+        "printedPage": 96,
+        "competencyTag": "comprehension"
+      }
+    ],
+    "sourceGaps": [
+      "PDF第102页特殊句式第7项“石之铿然有声者”与第1项同义重复，curation中仅保留一次。"
+    ],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1581:interaction:structure",
+        "sourceVersion": "sha256:79389aa3ae53f170e08404e01d734918c2a6c700fcc716061711a1641462d6f5",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1581:interaction:evaluation",
+        "sourceVersion": "sha256:d09340184b5408a97eabb3d46c27940a3bdd4a84120457920cfb600a601f7d54",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1581:interaction:authorQuestion",
+        "sourceVersion": "sha256:29403af1ec35fa21e7498afac543c496044a0e52ea52cd7255c1559dc4cbc275",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1581:vocab:lesson-1581:v01",
+        "sourceVersion": "sha256:1bf3ca630381d4cc144da7165480d294ccca0d8c8b69d83d3f7ad82433f037b8",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1581:vocab:lesson-1581:v03",
+        "sourceVersion": "sha256:2fa5ff5a4796bf94961e601628f0c90574a14dc21b4032c57c99bd656a07ca64",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1581:vocab:lesson-1581:v04",
+        "sourceVersion": "sha256:c0f7fbcc354598054dff2d9ef483fe751f1b33e74b067a11a7ad9a3587977bec",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1581:vocab:lesson-1581:v05",
+        "sourceVersion": "sha256:7ed6ddf6280ad0bda5d6973e3da1fe0d817e8ec5a9a9bc0b993be275bd6c5e94",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1581:vocab:lesson-1581:v06",
+        "sourceVersion": "sha256:2fc0d7afac04f1368025f4231e26a101488e31c777c20e9b46ce2e4fef903b12",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1581:vocab:lesson-1581:v07",
+        "sourceVersion": "sha256:ddace12242982def07ce9519c3c8a13fe2e907dd8fa7b7f34cfc7791631b7af3",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1581:vocab:lesson-1581:v08",
+        "sourceVersion": "sha256:112b8f70bf4c86db0c6a528af3cc70fd5efdc34e36567949239bf69e0da4c040",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1581:vocab:lesson-1581:v09",
+        "sourceVersion": "sha256:d8e500f19545790360e95495f1fdd720230f3500020e56665b6d507594fefd17",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1581:vocab:lesson-1581:v10",
+        "sourceVersion": "sha256:3aeeaed0f1eafa67bc264adfde5929390be581b75705b1d07aaee29f0d0e6471",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1581:vocab:lesson-1581:v11",
+        "sourceVersion": "sha256:6052f824de84112eb5fe7b31569ec3bd2fcc1f7ef74effe7da55f882636ecbc8",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1581:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1581:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1581:interaction:structure",
+        "completionKey": "effect:lesson-1581:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "lesson-1581-p103-content-discrimination-01",
+        "completionKey": "formative:lesson-1581:comprehension:eee7930637f90d69#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "comprehension",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "first-read:resolved",
+        "completionKey": "lesson:lesson-1581#initialReadingResolved",
+        "source": "classical_first_read",
+        "dialogueDomain": "first_read_process",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-first-read-process-bridged-no-new-score"
+      },
+      {
+        "requirementId": "first-read:submitted",
+        "completionKey": "lesson:lesson-1581#initialReadingSubmitted",
+        "source": "classical_first_read",
+        "dialogueDomain": "first_read_process",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-first-read-process-bridged-no-new-score"
+      },
+      {
+        "requirementId": "lesson-1581-p101-sentence-pattern-01",
+        "completionKey": "formative:lesson-1581:syntax:a7876d645e986a3d#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "syntax",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1581:vocab:lesson-1581:v01",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v01#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1581:vocab:lesson-1581:v03",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v03#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1581:vocab:lesson-1581:v04",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v04#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1581:vocab:lesson-1581:v05",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v05#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1581:vocab:lesson-1581:v06",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v06#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1581:vocab:lesson-1581:v07",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v07#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1581:vocab:lesson-1581:v08",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v08#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1581:vocab:lesson-1581:v09",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v09#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1581:vocab:lesson-1581:v10",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v10#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1581:vocab:lesson-1581:v11",
+        "completionKey": "effect:lesson-1581:vocab:lesson-1581:v11#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "lesson-1581-p101-lexical-activation-01",
+        "completionKey": "formative:lesson-1581:vocabulary:5e50252a6d49336d#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1581-p101-ancient-modern-01",
+        "completionKey": "formative:lesson-1581:vocabulary:ac98c90f4fc0c4a9#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1581-p100-vocabulary-01",
+        "completionKey": "formative:lesson-1581:vocabulary:d0cf760a10362c10#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1581-p100-comprehension-02",
+        "source": "study-guide",
+        "active": false,
+        "sourceVersion": "c4a4587413c44014",
+        "dialogueDomain": "comprehension",
+        "conversationEquivalent": "苏轼实地考察后认为“古之人不余欺也”，请分析这一论断的内在逻辑。",
+        "evidenceRule": [
+          "准确概括郦道元的发声说，1分",
+          "答出石穴罅与风水形成噌吰声，1分",
+          "答出中流大石多窍与风水形成另一钟声，1分",
+          "说明两声与古钟类比并印证古说，1分"
+        ],
+        "sourcePage": {
+          "pdf": 100,
+          "printed": 97
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "inactive-preserved-not-reactivated"
+      },
+      {
+        "requirementId": "lesson-1581-p100-comprehension-03",
+        "source": "study-guide",
+        "active": false,
+        "sourceVersion": "f5cea4d1d9595aab",
+        "dialogueDomain": "comprehension",
+        "conversationEquivalent": "苏轼如何描绘月夜绝壁之景？为什么着力描写这段景物？",
+        "evidenceRule": [
+          "概括绝壁巨石、栖鹘鹳鹤等景物，1分",
+          "指出视觉听觉结合及比喻、拟人等手法，1分",
+          "说明阴森惊险氛围，1分",
+          "说明反衬求实勇气或为钟声出现蓄势，1分"
+        ],
+        "sourcePage": {
+          "pdf": 100,
+          "printed": 97
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "inactive-preserved-not-reactivated"
+      },
+      {
+        "requirementId": "lesson-1581-p100-vocabulary-01",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "d0cf760a10362c10",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "指出“南声函胡”中的通假字并解释。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 100,
+          "printed": 97
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1581-p101-ancient-modern-01",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "ac98c90f4fc0c4a9",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "说明“其实、空中、心动、水师”的古义和今义。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 101,
+          "printed": 98
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1581-p101-lexical-activation-01",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "5e50252a6d49336d",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "指出“鼓、名、舟、侧、目、耳、夜、鸣”的活用类型并解释。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 101,
+          "printed": 98
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1581-p101-sentence-pattern-01",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "a7876d645e986a3d",
+        "dialogueDomain": "syntax",
+        "conversationEquivalent": "辨析并翻译：石之铿然有声者，所在皆是也；或曰此鹳鹤也；噌吰者，周景王之无射也；此世所以不传也；古之人不余欺也；余是以记之；得双石于潭上；又有若老人咳且笑于山谷中者；而大声发于水上。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 101,
+          "printed": 98
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1581-p103-comprehension-04",
+        "source": "study-guide",
+        "active": false,
+        "sourceVersion": "9bf91f3705abe007",
+        "dialogueDomain": "comprehension",
+        "conversationEquivalent": "简要分析彭雪琴批驳苏轼对石钟山命名看法的思路。",
+        "evidenceRule": [
+          "答出以普遍发声现象反驳声说，1分",
+          "答出冬季水落入洞的实地观察，1分",
+          "答出全山中空如钟且上下钟山皆然，1分",
+          "答出苏轼过门未入、考察不完整，1分",
+          "归纳以形论而非仅以声论，1分"
+        ],
+        "sourcePage": {
+          "pdf": 103,
+          "printed": 100
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "inactive-preserved-not-reactivated"
+      },
+      {
+        "requirementId": "lesson-1581-p103-content-discrimination-01",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "eee7930637f90d69",
+        "dialogueDomain": "comprehension",
+        "conversationEquivalent": "课后任务第1至3题：分别选择正确断句、文化常识解说不正确项、内容概括不正确项。请依次提交三个选项字母。\n第1题：下列对文中画波浪线部分的断句，正确的一项是？\nA. 入之其中／透漏玲珑／乳石如天花散漫／垂垂欲落\nB. 入之／其中透漏玲珑／乳石如天花散漫／垂垂欲落\nC. 入之／其中透漏玲珑／乳石如天花／散漫垂垂欲落\nD. 入之其中／透漏／玲珑乳石如天花／散漫垂垂欲落\n第2题：下列对文中加点词语的相关内容的解说，不正确的一项是？\nA. 元丰，皇帝的年号，年号是中国封建王朝用来纪年的一种名号，先秦至汉初无年号，汉武帝即位后首创年号。始创年号为建元，一个皇帝只有一个年号。\nB. 公元前522年周景王铸造了一套名叫“无射（yì）”的大型编钟。无射是十二律中的第十一律，因钟声合乎无射的音律，故用“无射”作钟名。\nC. 笔记，一种随笔记录的文体，笔记文包括史料笔记、考据笔记和笔记小说。\nD. 丹房，指道教炼丹的地方，后指道观；也指神仙的住所。本文指的是神仙的住所。\n第3题：下列对原文有关内容的概括和分析，不正确的一项是？\nA. 文段（一）是通过记游来发表议论的别开生面的文章，它既有记叙文写景状物形象生动的特点，又有议论文剖析事理、探讨问题的性质。\nB. 文段（一）中作者用栖鹘和鹳鹤的声音渲染了一种阴森恐怖的气氛，使人心惊胆战，侧面凸显出了作者的不怕艰险、勇于探索的精神。\nC. 文段（二）认为苏轼只看到了下钟山的山形似钟，而没看到上钟山亦然。\nD. 文段（二）认为苏轼考察石钟山，以为其得名是因风水相吞吐而为声，这也没有探察到问题的根本。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 103,
+          "printed": 100
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1581-p99-comprehension-01",
+        "source": "study-guide",
+        "active": false,
+        "sourceVersion": "e592b7645cc730e6",
+        "dialogueDomain": "comprehension",
+        "conversationEquivalent": "结合课文和相关史料，评价苏轼对石钟山命名原因的考察与批评是否合理。",
+        "evidenceRule": [
+          "肯定实地考察、反对臆断的方法价值，1分",
+          "指出苏轼反驳李渤浅尝式考察的合理性，1分",
+          "指出一次观察、特定条件的样本局限，1分",
+          "指出未考察山体空洞或形状，1分",
+          "提出需综合声形与多条件证据的审慎结论，1分"
+        ],
+        "sourcePage": {
+          "pdf": 99,
+          "printed": 96
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "inactive-preserved-not-reactivated"
+      }
+    ],
+    "compoundRequirements": [
+      {
+        "id": "unannotated-first-read",
+        "rule": "原初讀提交、依既有初讀門檻標記疑點且全部解惑；vocabulary/syntax 學案完成才計詞級；comprehension 學案完成才計章法。",
+        "storage": "classical_first_read_sessions/classical_first_read_marks and source study-guide records",
+        "status": "source-first-read-gate-and-original-study-guide-bridged"
+      }
+    ],
+    "sourceLesson": "data/lessons/lesson-1581.json",
+    "mapping": [
+      {
+        "legacy": "firstRead",
+        "dialogueDomain": "firstRead",
+        "evidenceRule": "保留原無注疏初讀、疑點標記與解惑紀錄；在對話引用原記錄。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "vocabulary",
+        "dialogueDomain": "vocabulary",
+        "evidenceRule": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "firstRead",
+          "vocabulary",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 13,
+        "formativeCount": 19,
+        "activeStudyGuideCount": 5,
+        "inactiveStudyGuideCount": 4,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": true,
+        "status": "source-items-present-calibration-pending",
+        "areaSources": {
+          "vocabulary": [
+            "lesson-1581:v01",
+            "lesson-1581:v03",
+            "lesson-1581:v04",
+            "lesson-1581:v05",
+            "lesson-1581:v06",
+            "lesson-1581:v07",
+            "lesson-1581:v08",
+            "lesson-1581:v09",
+            "lesson-1581:v10",
+            "lesson-1581:v11",
+            "lesson-1581-p100-vocabulary-01",
+            "lesson-1581-p101-ancient-modern-01",
+            "lesson-1581-p101-lexical-activation-01"
+          ],
+          "functionWords": [
+            "lesson-1581:corpus-function-word"
+          ],
+          "grammar": [
+            "lesson-1581-p101-sentence-pattern-01"
+          ]
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [
+          "xc-corpus-而"
+        ],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "original-source-process",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [
+        "PDF第102页特殊句式第7项“石之铿然有声者”与第1项同义重复，curation中仅保留一次。"
+      ],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [
+    {
+      "id": "lesson-1581:corpus-function-word",
+      "word": "而",
+      "type": "function-word",
+      "sourceSentence": "扣而聆之",
+      "passageQuotes": [
+        "扣而聆之"
+      ],
+      "meaning": "連詞，表示動作相承。",
+      "explanation": "敲擊後聆聽聲音，以此求證命名；要說清敲與聽的關係，不把它當互相轉折。",
+      "annotationIds": [],
+      "proposedDemand": "context-comparison-and-independent-explanation",
+      "difficulty": null,
+      "calibrationStatus": "pending-real-model",
+      "scoringRole": "none",
+      "variants": [
+        "讀「扣而聆之」。請用自己的話改寫句意，說明「而」在此句的意思、所連接或修飾的內容，並引用原句作依據。",
+        "有人把「扣而聆之」理解為「而表示雖然敲卻完全不聽」。請判斷這樣理解是否成立，引用原句或相鄰文句說明，再提出準確的改寫。"
+      ],
+      "misconceptions": [
+        "而表示雖然敲卻完全不聽"
+      ],
+      "masteryCriteria": [
+        {
+          "id": "source_reading",
+          "requirement": "準確引用原句並辨認目標詞或句法成分。"
+        },
+        {
+          "id": "context_analysis",
+          "requirement": "連詞，表示動作相承。 敲擊後聆聽聲音，以此求證命名；要說清敲與聽的關係，不把它當互相轉折。"
+        },
+        {
+          "id": "independent_transfer",
+          "requirement": "獨立說明另一個提問中的誤讀，保留原句施受、時間、語氣或邏輯關係；只抄提示不足。"
+        }
+      ],
+      "sourceEvidence": {
+        "kind": "new-unscored-contextual-analysis",
+        "readerPath": "data/reader-documents/lesson-1581.json",
+        "readerSha256": "9616eddd316019b3acf3bec793453b5e7fcb93166613e601d71996bb512a8fe9",
+        "passageId": "lesson-1581:p2",
+        "passageSha256": "5fa2f4715608150359caf1ec6ece66d9f215a9d157e0629a3e4fb9108bc62a65",
+        "quotationPolicy": "exact-original-substring",
+        "analysisAuthority": "authored-learning-support; not-original-consequential-rubric",
+        "supplementVersion": "yw-dialogue-classical-language-20261013-v2"
+      },
+      "dictionaryId": "xc-corpus-而",
+      "dictionaryStatus": "source-image-verified",
+      "sourceVerification": {
+        "status": "xc-page-scope-verified",
+        "xcEntryId": "e-p129_R-6",
+        "printedPages": [
+          119,
+          120
+        ],
+        "pdfPages": [
+          131,
+          132
+        ],
+        "analysisStatus": "authored-contextual-interpretation",
+        "notice": "字典所列詞義範圍已核對；本課語境分析為教學解讀，並非原書收錄答案。"
+      },
+      "sourcePassages": [
+        "lesson-1581:p2"
+      ],
+      "version": "yw-language-20d2d42c3049733a312d",
+      "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
+    }
+  ],
+  "dictionary": [
+    {
+      "id": "xc-corpus-而",
+      "headword": "而",
+      "entryId": "e-p129_R-6",
+      "edition": "1999 年 2 月第 1 版",
+      "url": "https://xc.bdfz.net/#entry/e-p129_R-6",
+      "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p129_R-6",
+      "sourcePdfSha256": "a60dcbdca401b2445eeca3e09d6db0fb879d9f5d641781bc2b27c7757249cfaa",
+      "localSources": [
+        {
+          "path": "xuci-ocr/work/final/cols/p131_L.txt",
+          "sha256": "3bb2481dfa9d1b3129efa0e6d9ea0e5df4d9439ec968e4a936915eea98246c8e"
+        },
+        {
+          "path": "xuci-ocr/work/final/cols/p131_R.txt",
+          "sha256": "9f8f974ebd96bbf98aff39c9b946eff71f7c55a33e26c8b60e3c72e4b1239954"
+        },
+        {
+          "path": "xuci-ocr/work/final/cols/p132_L.txt",
+          "sha256": "8751aac736f7e44103283dcb04432b27844f0b44de7411015fa1d9b1a75fac47"
+        },
+        {
+          "path": "xuci-ocr/work/final/cols/p132_R.txt",
+          "sha256": "f87c41eabf79a7bf4e8ec670c63b4b0cbc46dc1a4234908492c242194e3fdab9"
+        }
+      ],
+      "pages": [
+        {
+          "pdfPage": 131,
+          "printedPage": 119,
+          "url": "https://dict.bdfz.net/source/xc/images/p131.png",
+          "imageSha256": "0249012841b7904240edf6ea29b0aed2a9a9cf4f3cb64e751b7bd8d9e73dbc53",
+          "verifiedScope": "連詞二：前後順承。"
+        },
+        {
+          "pdfPage": 132,
+          "printedPage": 120,
+          "url": "https://dict.bdfz.net/source/xc/images/p132.png",
+          "imageSha256": "f20ce89ea610e84c0595f44647e92a7701cfda3196fcc9286eba563ff18d6b99",
+          "verifiedScope": "連詞三：狀語與謂語；五及六起點：轉折。"
+        }
+      ],
+      "verificationStatus": "source-image-verified",
+      "verifiedAt": "2026-10-13T01:49:02Z",
+      "verification": "只目視核對所列頁圖中的指定詞義範圍；不宣稱整部 OCR 或整個詞條完成校勘。各課具體句法與效果為另行撰寫的語境分析，不宣稱字典收錄每一課例句。",
+      "entryLocator": {
+        "columnPath": "xuci-ocr/work/final/cols/p129_R.txt",
+        "zeroBasedLine": 6,
+        "columnSha256": "c382d8847e1193a2b514cf88790e6b025a8724e7b76e1d90643d252f3e74127a",
+        "observedHeading": "而ér",
+        "basis": "XC canonical build entry identity from adjudicated column; image verification limited to listed page scopes"
+      },
+      "sourceRootAlias": "CF/sites/tools"
+    }
+  ],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-d0e15f35a17e60ac42df",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [
+    {
+      "id": "lesson-1581:p1",
+      "text": "石钟山 陆俨少 作",
+      "block": {
+        "runs": [
+          {
+            "text": "石钟山 陆俨少 作",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "blockIndex": 0,
+      "blockSha256": "1c2c566d8d58cadaf0bd6926863ff096971076ff760610c0efc434df17051ed9",
+      "role": "image-caption",
+      "label": "原課插圖說明",
+      "source": "data/reader-documents/lesson-1581.json#main.blocks[0]",
+      "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+    },
+    {
+      "id": "lesson-1581:p3",
+      "text": "《石钟山记》是一篇游记，详述出游之缘由、见闻和感想。其中深夜乘舟“至绝壁下”一段，将山水之间万籁俱作、鸟鸣浪涌、众声纷起之状，写得妙趣横生，兴会淋漓，堪称“绘声”文字中的上品。文章不只是记游，在登山临水的兴致之中，始终萦绕着求真辨伪的旨趣。出游之因，乃疑前人之说，既析之以理，又验之以实；父子出游，不避夜深舟小，亲身探访，终有所得；进而引申出事须“目见耳闻”、不可臆断的道理。全文将情趣与理趣融为一体，由小事入，由深理出，其中体现的质疑和求实的精神值得我们学习。\n古代散文中，有的格局谨严而不乏情采，有的潇洒随性而自有法度，《石钟山记》可谓后一类文章的典范。阅读时对这一点要多加关注，反复诵读，细心体会。",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "《石钟山记》是一篇游记，详述出游之缘由、见闻和感想。其中深夜乘舟“至绝壁下”一段，将山水之间万籁俱作、鸟鸣浪涌、众声纷起之状，写得妙趣横生，兴会淋漓，堪称“绘声”文字中的上品。文章不只是记游，在登山临水的兴致之中，始终萦绕着求真辨伪的旨趣。出游之因，乃疑前人之说，既析之以理，又验之以实；父子出游，不避夜深舟小，亲身探访，终有所得；进而引申出事须“目见耳闻”、不可臆断的道理。全文将情趣与理趣融为一体，由小事入，由深理出，其中体现的质疑和求实的精神值得我们学习。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "古代散文中，有的格局谨严而不乏情采，有的潇洒随性而自有法度，《石钟山记》可谓后一类文章的典范。阅读时对这一点要多加关注，反复诵读，细心体会。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      },
+      "blockIndex": 2,
+      "blockSha256": "a3ddbe93cdd0de7c50848e797eb8efe1f3f9d0581ca546f5f629479e35bc5157",
+      "role": "commentary",
+      "label": "原課導讀與教學參考（非本篇正文）",
+      "source": "data/reader-documents/lesson-1581.json#main.blocks[2]",
+      "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+    }
+  ],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《苏轼文集》卷十一（中华书局1986 年版）。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        },
+        {
+          "runs": [
+            {
+              "text": "宋神宗元丰七年（1084）六月，苏轼由黄州团练副使调任汝州（今属河南）团练副使时，顺便送他的长子苏迈到饶州德兴县（今属江西）任县尉，途经湖口县，游览了石钟山，写了这篇文章。石钟山，在今江西湖口鄱阳湖东岸，有南、北二山，在县城南边的叫上钟山，在县城北边的叫下钟山。关于其得名原因，明代有人认为，“盖全山皆空，如钟覆地，故得钟名”。今人经过考察，认为石钟山之所以得名，是因为它既具有钟之“声”，又具有钟之“形”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "type": "quote"
+    }
+  ],
+  "guidance": [],
+  "media": [
+    {
+      "alt": "",
+      "bytes": 171540,
+      "finalUrl": "https://files.rdfzer.com/original/2X/1/13e1fa74c5de99516a2f25a6eaa2c8c60c1885b6.jpeg",
+      "height": 798,
+      "id": "media-4909aaadf2ba2d9d8c6f",
+      "mediaType": "image/jpeg",
+      "nativeDisposition": "verified-in-app",
+      "receiptCollectedAt": "2026-07-30T01:10:43.464Z",
+      "receiptRequired": true,
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29",
+      "sha256": "8b3c891eab5584a804117c9ab42c5fd71209c8e48f12e0f511d0e9026c643470",
+      "sourceUrl": "https://files.rdfzer.com/original/2X/1/13e1fa74c5de99516a2f25a6eaa2c8c60c1885b6.jpeg",
+      "webDisposition": "source-url",
+      "width": 416
+    }
+  ],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [
+    {
+      "lessonId": "lesson-1581",
+      "itemKey": "lesson-1581-p100-comprehension-02",
+      "pdfPage": 100,
+      "printedPage": 97,
+      "competencyTag": "comprehension",
+      "detailTag": "reasoning-chain",
+      "prompt": "苏轼实地考察后认为“古之人不余欺也”，请分析这一论断的内在逻辑。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": [
+        "郦道元说微风鼓浪、水石相搏，声音如洪钟。",
+        "苏轼夜泊时听到噌吰、窾坎镗鞳两类钟声，并观察到石穴罅及中流大石多窍与风水吞吐。",
+        "他把两类声音分别比作周景王无射钟和魏庄子歌钟，认为自己的观察印证了古人的“声如洪钟”说。",
+        "因此得出郦道元所见闻大体可信，只是叙述不够详尽，并说“古之人不余欺”。"
+      ],
+      "explanation": "完整逻辑链为古说—现场声源和声音—钟声类比—印证古说。",
+      "rubric": [
+        "准确概括郦道元的发声说，1分",
+        "答出石穴罅与风水形成噌吰声，1分",
+        "答出中流大石多窍与风水形成另一钟声，1分",
+        "说明两声与古钟类比并印证古说，1分"
+      ],
+      "reviewRequired": false,
+      "qualityNotes": [
+        "主观题，参考答案非唯一。"
+      ],
+      "activeForSelfTest": false,
+      "semanticRevision": "c4a4587413c44014",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1581",
+      "itemKey": "lesson-1581-p100-comprehension-03",
+      "pdfPage": 100,
+      "printedPage": 97,
+      "competencyTag": "comprehension",
+      "detailTag": "rhetoric-analysis",
+      "prompt": "苏轼如何描绘月夜绝壁之景？为什么着力描写这段景物？",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "作者以“大石侧立千尺，如猛兽奇鬼”写视觉形态，以栖鹘磔磔、鹳鹤如老人咳笑写听觉，并用比喻、拟人和以声衬静营造阴森惊险的氛围。这样既交代夜探环境、增强游记的现场感和张力，也反衬苏轼不畏艰险、亲自求证的精神，并为后文突然出现的钟鼓声蓄势。",
+      "explanation": "应从描写内容、手法、氛围和结构作用四方面作答。",
+      "rubric": [
+        "概括绝壁巨石、栖鹘鹳鹤等景物，1分",
+        "指出视觉听觉结合及比喻、拟人等手法，1分",
+        "说明阴森惊险氛围，1分",
+        "说明反衬求实勇气或为钟声出现蓄势，1分"
+      ],
+      "reviewRequired": false,
+      "qualityNotes": [
+        "主观题，参考答案非唯一。"
+      ],
+      "activeForSelfTest": false,
+      "semanticRevision": "f5cea4d1d9595aab",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1581",
+      "itemKey": "lesson-1581-p100-vocabulary-01",
+      "pdfPage": 100,
+      "printedPage": 97,
+      "competencyTag": "vocabulary",
+      "detailTag": "phonetic-loan",
+      "prompt": "指出“南声函胡”中的通假字并解释。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "“函胡”通“含糊”，指声音重浊而模糊。",
+      "explanation": "该词用来概括南声的听觉特点。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "d0cf760a10362c10",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1581",
+      "itemKey": "lesson-1581-p101-ancient-modern-01",
+      "pdfPage": 101,
+      "printedPage": 98,
+      "competencyTag": "vocabulary",
+      "detailTag": "ancient-modern-meaning",
+      "prompt": "说明“其实、空中、心动、水师”的古义和今义。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": {
+        "其实": {
+          "古义": "事情的真相。",
+          "今义": "表示所说的是实际情况。"
+        },
+        "空中": {
+          "古义": "中间是空的。",
+          "今义": "天空中。"
+        },
+        "心动": {
+          "古义": "心惊、害怕。",
+          "今义": "产生爱慕或受到吸引。"
+        },
+        "水师": {
+          "古义": "船工。",
+          "今义": "水军、海军。"
+        }
+      },
+      "explanation": "古义均由夜探、辨声和对渔工船工的叙述语境确定。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "ac98c90f4fc0c4a9",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1581",
+      "itemKey": "lesson-1581-p101-lexical-activation-01",
+      "pdfPage": 101,
+      "printedPage": 98,
+      "competencyTag": "vocabulary",
+      "detailTag": "lexical-activation",
+      "prompt": "指出“鼓、名、舟、侧、目、耳、夜、鸣”的活用类型并解释。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": {
+        "鼓": "名词作动词，激荡、掀起。",
+        "名": "名词作动词，命名。",
+        "舟": "名词作状语，乘船。",
+        "侧": "名词作状语，侧着。",
+        "目、耳": "名词作状语，亲眼、亲耳。",
+        "夜": "名词作状语，在夜里。",
+        "鸣": "使动用法，使……发出声音。"
+      },
+      "explanation": "“目见耳闻”强调亲自感知，是全文求实论证的重要词法表达。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "5e50252a6d49336d",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1581",
+      "itemKey": "lesson-1581-p101-sentence-pattern-01",
+      "pdfPage": 101,
+      "printedPage": 98,
+      "competencyTag": "syntax",
+      "detailTag": "sentence-pattern",
+      "prompt": "辨析并翻译：石之铿然有声者，所在皆是也；或曰此鹳鹤也；噌吰者，周景王之无射也；此世所以不传也；古之人不余欺也；余是以记之；得双石于潭上；又有若老人咳且笑于山谷中者；而大声发于水上。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": [
+        {
+          "sentence": "石之铿然有声者，所在皆是也",
+          "pattern": "定语后置句兼判断句",
+          "normalOrder": "铿然有声之石，所在皆是也",
+          "translation": "敲击后能发出铿锵声的石头，到处都是。"
+        },
+        {
+          "sentence": "或曰此鹳鹤也",
+          "pattern": "判断句",
+          "translation": "有人说这是鹳鹤。"
+        },
+        {
+          "sentence": "噌吰者，周景王之无射也",
+          "pattern": "判断句",
+          "translation": "噌吰的声音，是周景王无射钟的声音。"
+        },
+        {
+          "sentence": "此世所以不传也",
+          "pattern": "判断句",
+          "translation": "这就是世上没有流传石钟山得名真相的原因。"
+        },
+        {
+          "sentence": "古之人不余欺也",
+          "pattern": "宾语前置句",
+          "normalOrder": "古之人不欺余也",
+          "translation": "古人没有欺骗我啊。"
+        },
+        {
+          "sentence": "余是以记之",
+          "pattern": "宾语前置句",
+          "normalOrder": "余以是记之",
+          "translation": "我因此记下这件事。"
+        },
+        {
+          "sentence": "得双石于潭上",
+          "pattern": "状语后置句",
+          "normalOrder": "于潭上得双石",
+          "translation": "在深潭边找到两块山石。"
+        },
+        {
+          "sentence": "又有若老人咳且笑于山谷中者",
+          "pattern": "状语后置句",
+          "normalOrder": "又有若老人在山谷中咳且笑者",
+          "translation": "又有像老人在山谷中边咳边笑的声音。"
+        },
+        {
+          "sentence": "而大声发于水上",
+          "pattern": "状语后置句",
+          "normalOrder": "而大声于水上发",
+          "translation": "忽然有巨大的声音从水面上传来。"
+        }
+      ],
+      "explanation": "已去除原题第7项与第1项重复的“石之铿然有声者”，只保留一次。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [
+        "题组始于PDF第101页并续至第102页；页码记录采用题组起始页。"
+      ],
+      "activeForSelfTest": true,
+      "semanticRevision": "a7876d645e986a3d",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1581",
+      "itemKey": "lesson-1581-p103-comprehension-04",
+      "pdfPage": 103,
+      "printedPage": 100,
+      "competencyTag": "comprehension",
+      "detailTag": "argument-analysis",
+      "prompt": "简要分析彭雪琴批驳苏轼对石钟山命名看法的思路。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": [
+        "先用一般性反例质疑：天下临水有罅隙的山都会因风水相遇发声，不足以说明石钟山独因声得名。",
+        "再以长期居住和冬季水落时的实地观察为证，指出下钟山内部有巨大空洞。",
+        "说明洞中通透、乳石密布、全山中空，形如覆钟。",
+        "补充上钟山也中空，使上下两山能够由同一“形如钟”的原因解释。",
+        "最后指出苏轼只经过洞门而未深入，故其观察不完整，得出应以形论而不应只以声论的结论。"
+      ],
+      "explanation": "论证路径是一般反例—实地证据—双山统一解释—指出苏轼考察边界—提出形说。",
+      "rubric": [
+        "答出以普遍发声现象反驳声说，1分",
+        "答出冬季水落入洞的实地观察，1分",
+        "答出全山中空如钟且上下钟山皆然，1分",
+        "答出苏轼过门未入、考察不完整，1分",
+        "归纳以形论而非仅以声论，1分"
+      ],
+      "reviewRequired": false,
+      "qualityNotes": [
+        "主观题，参考答案非唯一；能按证据链作同义概括即可。"
+      ],
+      "activeForSelfTest": false,
+      "semanticRevision": "9bf91f3705abe007",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1581",
+      "itemKey": "lesson-1581-p103-content-discrimination-01",
+      "pdfPage": 103,
+      "printedPage": 100,
+      "competencyTag": "comprehension",
+      "detailTag": "objective-question-set",
+      "prompt": "课后任务第1至3题：分别选择正确断句、文化常识解说不正确项、内容概括不正确项。请依次提交三个选项字母。\n第1题：下列对文中画波浪线部分的断句，正确的一项是？\nA. 入之其中／透漏玲珑／乳石如天花散漫／垂垂欲落\nB. 入之／其中透漏玲珑／乳石如天花散漫／垂垂欲落\nC. 入之／其中透漏玲珑／乳石如天花／散漫垂垂欲落\nD. 入之其中／透漏／玲珑乳石如天花／散漫垂垂欲落\n第2题：下列对文中加点词语的相关内容的解说，不正确的一项是？\nA. 元丰，皇帝的年号，年号是中国封建王朝用来纪年的一种名号，先秦至汉初无年号，汉武帝即位后首创年号。始创年号为建元，一个皇帝只有一个年号。\nB. 公元前522年周景王铸造了一套名叫“无射（yì）”的大型编钟。无射是十二律中的第十一律，因钟声合乎无射的音律，故用“无射”作钟名。\nC. 笔记，一种随笔记录的文体，笔记文包括史料笔记、考据笔记和笔记小说。\nD. 丹房，指道教炼丹的地方，后指道观；也指神仙的住所。本文指的是神仙的住所。\n第3题：下列对原文有关内容的概括和分析，不正确的一项是？\nA. 文段（一）是通过记游来发表议论的别开生面的文章，它既有记叙文写景状物形象生动的特点，又有议论文剖析事理、探讨问题的性质。\nB. 文段（一）中作者用栖鹘和鹳鹤的声音渲染了一种阴森恐怖的气氛，使人心惊胆战，侧面凸显出了作者的不怕艰险、勇于探索的精神。\nC. 文段（二）认为苏轼只看到了下钟山的山形似钟，而没看到上钟山亦然。\nD. 文段（二）认为苏轼考察石钟山，以为其得名是因风水相吞吐而为声，这也没有探察到问题的根本。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": {
+        "第1题": {
+          "option": "B",
+          "segmentation": "入之／其中透漏玲珑／乳石如天花散漫／垂垂欲落"
+        },
+        "第2题": {
+          "option": "A",
+          "reason": "古代一个皇帝在位期间可以改元、使用多个年号，并非一个皇帝只有一个年号。"
+        },
+        "第3题": {
+          "option": "C",
+          "reason": "俞樾所引彭雪琴之说认为苏轼只是经过下钟山洞门而未入洞，并非说苏轼已经看到下钟山山形似钟。"
+        }
+      },
+      "explanation": "三题分别依据动词宾语边界、年号制度和彭雪琴原话判断。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "eee7930637f90d69",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1581",
+      "itemKey": "lesson-1581-p99-comprehension-01",
+      "pdfPage": 99,
+      "printedPage": 96,
+      "competencyTag": "comprehension",
+      "detailTag": "argument-evaluation",
+      "prompt": "结合课文和相关史料，评价苏轼对石钟山命名原因的考察与批评是否合理。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "苏轼反对未经目见耳闻便臆断，也反对只敲击一两块石头便下结论，亲自夜泊实察的求真方法有重要价值；但他只在一次特定水位、风浪条件下听到声音，没有进入山体考察空洞与形状，也未充分排除许多临水孔穴都会发声这一反例，因此从一次声响直接断定山名由声而来仍有证据不足和推论过度。较稳妥的结论应继续比较声、形两说及不同季节、水位下的证据。",
+      "explanation": "评价应把方法上的进步与证据范围的局限分开，不作简单肯定或否定。",
+      "rubric": [
+        "肯定实地考察、反对臆断的方法价值，1分",
+        "指出苏轼反驳李渤浅尝式考察的合理性，1分",
+        "指出一次观察、特定条件的样本局限，1分",
+        "指出未考察山体空洞或形状，1分",
+        "提出需综合声形与多条件证据的审慎结论，1分"
+      ],
+      "reviewRequired": false,
+      "qualityNotes": [
+        "主观评价题，参考答案非唯一。"
+      ],
+      "activeForSelfTest": false,
+      "semanticRevision": "e592b7645cc730e6",
+      "semanticAliases": []
+    }
+  ],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1581.json",
+    "lessonSha256": "bd3d75b87792a8770efa27154cb90b49d63d7bee03789f95396d916a96a15097",
+    "reader": "data/reader-documents/lesson-1581.json",
+    "readerSha256": "9616eddd316019b3acf3bec793453b5e7fcb93166613e601d71996bb512a8fe9",
+    "sourcePostId": 10550,
+    "sourcePostNumber": 1,
+    "blockCount": 3,
+    "annotationCount": 32,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "firstRead",
+        "vocabulary",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 13,
+      "formativeCount": 19,
+      "activeStudyGuideCount": 5,
+      "inactiveStudyGuideCount": 4,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": true,
+      "status": "source-items-present-calibration-pending",
+      "areaSources": {
+        "vocabulary": [
+          "lesson-1581:v01",
+          "lesson-1581:v03",
+          "lesson-1581:v04",
+          "lesson-1581:v05",
+          "lesson-1581:v06",
+          "lesson-1581:v07",
+          "lesson-1581:v08",
+          "lesson-1581:v09",
+          "lesson-1581:v10",
+          "lesson-1581:v11",
+          "lesson-1581-p100-vocabulary-01",
+          "lesson-1581-p101-ancient-modern-01",
+          "lesson-1581-p101-lexical-activation-01"
+        ],
+        "functionWords": [
+          "lesson-1581:corpus-function-word"
+        ],
+        "grammar": [
+          "lesson-1581-p101-sentence-pattern-01"
+        ]
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [
+        "xc-corpus-而"
+      ],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "original-source-process",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [
+      "PDF第102页特殊句式第7项“石之铿然有声者”与第1项同义重复，curation中仅保留一次。"
+    ],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": true
+}

@@ -23,7 +23,8 @@ function fixture(t) {
     ACCEPTANCE_DB:{prepare:text=>{calls.db++;return wrap(text);}, batch:async statements=>Promise.all(statements.map(s=>s.run()))},
     ASSETS:{fetch:async req=>{calls.assets++;const pathname=new URL(req.url).pathname;
       if(pathname==='/dialogue.html')return new Response(null,{status:308,headers:{location:'/dialogue'}});
-      return new Response(fs.readFileSync('site'+(pathname==='/dialogue'?'/dialogue.html':pathname)));}},
+      const file='site'+(pathname==='/dialogue'?'/dialogue.html':pathname);
+      return fs.existsSync(file)?new Response(fs.readFileSync(file)):new Response(null,{status:404});}},
     USER_CENTER_EVIDENCE:{resolveSession:async()=>{calls.identity++;return user;},resolveNativeSession:async()=>({
       ...user,schemaVersion:'bdfz-native-auth/1',status:200,clientId:'yuwen-native-android',capability:'data',
     })},
@@ -111,8 +112,11 @@ test('same-origin owned save survives reload without model, Queue or central pub
 
 test('shared learner history remains unavailable and capabilities are narrowly projected',async t=>{
   const f=fixture(t);
-  const env=acceptanceEnvironment(request(),{...f.bindings,UNRELATED_DB:{},ARBITRARY_SECRET:'unused'});
+  const activation='{"operation":"synthetic-amendment4"}';
+  const env=acceptanceEnvironment(request(),{...f.bindings,YW_CALIBRATION_AMENDMENT4_JSON:activation,YW_DIALOGUE_PROVIDER_ATTEMPTS:'3',UNRELATED_DB:{},ARBITRARY_SECRET:'unused'});
   assert.equal(env.READING_DB,f.bindings.ACCEPTANCE_DB);assert.equal(env.UNRELATED_DB,undefined);assert.equal(env.ARBITRARY_SECRET,undefined);
+  assert.equal(env.YW_CALIBRATION_AMENDMENT4_JSON,activation);
+  assert.equal(env.YW_DIALOGUE_PROVIDER_ATTEMPTS,'3');
   assert.deepEqual(Object.keys(env.USER_CENTER_EVIDENCE).sort(),['resolveNativeSession','resolveSession']);
   const value=await(await entry.fetch(f.authenticated('/api/dialogue/v1?lessonId=lesson-1717-p2&sharedHistory=1'),f.bindings)).json();
   assert.equal(value.sharedHistory.status,'unavailable');assert.equal(f.calls.model,0);
@@ -135,7 +139,21 @@ test('restricted static page uses original UI with no external script or central
   assert.equal(r.headers.get('cache-control'),'no-store');assert.equal(f.calls.identity,0);
   const firstRead=await entry.fetch(request('/data/classical-first-read/lesson-1711-p1.json'),f.bindings);
   assert.equal(firstRead.status,200);assert.equal((await firstRead.json()).lessonId,'lesson-1711-p1');
-  assert.equal((await entry.fetch(request('/data/classical-first-read/lesson-1484.json'),f.bindings)).status,404);
+  assert.equal((await entry.fetch(request('/data/classical-first-read/lesson-1484.json'),f.bindings)).status,200);
+  assert.equal((await entry.fetch(request('/data/classical-first-read/lesson-999999.json'),f.bindings)).status,404);
+});
+
+test('full lesson catalog and sanitized curricula remain isolated from raw answer assets',async t=>{
+  const f=fixture(t);
+  const catalog=await(await entry.fetch(request('/dialogue-curriculum/index.json'),f.bindings)).json();
+  assert.equal(catalog.lessons.length,189);
+  const response=await entry.fetch(request('/dialogue-curriculum/lesson-1484.json'),f.bindings);
+  assert.equal(response.status,200);
+  const curriculum=await response.json();
+  assert.equal(curriculum.lessonId,'lesson-1484');
+  for(const item of curriculum.vocabulary||[]){assert.equal(item.answerIndex,undefined);assert.equal(item.sourceAnswer,undefined);assert.equal(item.variants,undefined);}
+  for(const pathname of ['/dialogue-source.js','/dialogue-calibration-contract.js','/dialogue-calibration-packet.json','/data/vocab/lesson-1484.json'])assert.equal((await entry.fetch(request(pathname),f.bindings)).status,404);
+  assert.equal(f.calls.model,0);assert.equal(f.calls.db,0);
 });
 
 test('ordinary entrypoint is not enabled by acceptance variables',async t=>{

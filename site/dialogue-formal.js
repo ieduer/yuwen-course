@@ -1,4 +1,5 @@
 import { BLUEPRINT_MODE_TECHNIQUES, normalizeBlueprintMode } from './lesson-blueprint-rules.js';
+import {assertNewFormalAnswerTime} from './formal-scope-policy.js';
 // Original-source submissions have a reserved, server-generated mutation namespace.
 // Legacy routes may read these receipts, but must never re-evaluate them.
 export const DIALOGUE_SOURCE_PREFIX = 'yw-dialogue:';
@@ -22,6 +23,10 @@ export function originalTask(curriculum,state,mastery=[]){
   return null;
 }
 export function prepareOriginalInput(curriculum,task,input){
+  if(task.kind==='read'){
+    if(!curriculum.objectives.some(o=>o.id===task.objectiveId&&o.domain==='read')||typeof input?.acknowledgement!=='string'||!/^(我)?已讀完[，。！\s]?/.test(input.acknowledgement.trim()))throw Error('reading_acknowledgement_required');
+    return {objectiveId:task.objectiveId,interaction:'readAcknowledged',input:{threshold:1},content:input.acknowledgement,resourceKey:`lesson:${curriculum.lessonId}`,resourceVersion:null};
+  }
   const o=curriculum.objectives.find(o=>o.id===task.objectiveId&&o.domain==='legacy');
   if(!o||!input||typeof input!=='object'||Array.isArray(input))throw Error('invalid_original_input');
   if(task.kind==='vocabulary'){
@@ -66,6 +71,7 @@ export function validateFormalDraft(curriculum, turns, proposed) {
   for(const key of keys){
     const ref=proposed.fields[key],turn=turns.find(t=>t.id===ref?.turnId&&t.role==='student');
     if(!turn||typeof ref.quote!=='string'||!ref.quote.trim()||!turn.content.includes(ref.quote))throw Error('source_draft_not_student_quote');
+    assertNewFormalAnswerTime(objective.legacy,turn.createdAt);
     input[key]=ref.quote;references.push({key,label:FIELD_LABELS[key],turnId:turn.id,quote:ref.quote});
   }
   const formal=prepareFormalInput(curriculum,{objectiveId:objective.id,input});
@@ -74,7 +80,7 @@ export function validateFormalDraft(curriculum, turns, proposed) {
 export function originalRequirements(curriculum, state) {
   return curriculum.objectives.filter(o=>o.domain==='legacy'&&FORMAL_FIELDS[o.legacy?.questionKind]
     && !['preserved','historical_review'].includes(state.objectives.find(x=>x.id===o.id)?.status))
-    .map(o=>({objectiveId:o.id,label:FORMAL_LABELS[o.legacy.questionKind],fields:FORMAL_FIELDS[o.legacy.questionKind].map(key=>({key,label:FIELD_LABELS[key]})),rule:formalRubric(o.legacy.questionKind,curriculum.mode)}));
+    .map(o=>({objectiveId:o.id,label:FORMAL_LABELS[o.legacy.questionKind],fields:FORMAL_FIELDS[o.legacy.questionKind].map(key=>({key,label:FIELD_LABELS[key]})),rule:formalRubric(o.legacy.questionKind,curriculum.mode),...(o.legacy.formalScopePolicyVersion?{newAnswersOnly:true,answerNotBefore:o.legacy.effectiveFrom}:{} )}));
 }
 export function formalPrompt(prompt) {
   if (typeof prompt !== 'string' || prompt.length > 21000) throw Error('source_context_budget_exceeded');

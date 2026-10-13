@@ -6,7 +6,8 @@ import path from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
 import {handleDialogue} from '../site/dialogue-source.js';
 import {handleDialogueFirstRead,handleDialogueFormal,handleDialogueOriginal} from '../site/_worker.js';
-import {POLICY_VERSION} from '../site/dialogue-policy.js';
+import {POLICY_VERSION,LIMITS} from '../site/dialogue-policy.js';
+import {sanitizeDialogueCurriculum} from '../site/dialogue-public-curriculum.js';
 const root=path.resolve('site'),sql=new DatabaseSync(':memory:');sql.exec('PRAGMA foreign_keys=ON');
 for(const f of fs.readdirSync('migrations').filter(f=>f.endsWith('.sql')).sort())sql.exec(fs.readFileSync('migrations/'+f,'utf8'));
 sql.exec("INSERT INTO students(id,uc_slug,display_name) VALUES(1,'dialogue-synthetic-test','Synthetic test'),(2,'dialogue-synthetic-other','Synthetic other');");
@@ -21,7 +22,7 @@ const server=http.createServer(async(req,res)=>{try{const url=new URL(req.url,'h
   let text='';for await(const c of req){text+=c;if(text.length>1024)throw Error('oversize');}
   const value=JSON.parse(text);if(![0,1,2].includes(value.account)||!Number.isInteger(value.responseDelayMs)||value.responseDelayMs<0||value.responseDelayMs>3000)throw Error('invalid_fixture');
   if(value.historyPairs!==undefined){
-   if(!value.account||!Number.isInteger(value.historyPairs)||value.historyPairs<1||value.historyPairs>120)throw Error('invalid_history_fixture');
+   if(!value.account||!Number.isInteger(value.historyPairs)||value.historyPairs<1||value.historyPairs>LIMITS.lessonLifetime)throw Error('invalid_history_fixture');
    const curriculum=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1717-p2.json'));
    if(sql.prepare('SELECT id FROM dialogue_sessions WHERE student_id=?').get(value.account))throw Error('fixture_already_populated');
    const id=crypto.randomUUID(),at=new Date().toISOString();
@@ -73,6 +74,7 @@ const server=http.createServer(async(req,res)=>{try{const url=new URL(req.url,'h
  if(url.pathname.startsWith('/api/')){res.writeHead(404,{'content-type':'application/json'});res.end('{"code":"synthetic_server_no_legacy_api"}');return;}
  const original=url.pathname==='/original';const target=path.resolve(root,'.'+(original?'/index.html':url.pathname==='/'?'/dialogue.html':url.pathname));if(!target.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}
  let content=fs.readFileSync(target);if(original)content=content.toString().replace('<head>','<head>'+instrumentation);
+ if(/^\/dialogue-curriculum\/lesson-[\w-]{1,60}\.json$/.test(url.pathname))content=JSON.stringify(sanitizeDialogueCurriculum(JSON.parse(content)));
  res.writeHead(200,{'content-type':types[path.extname(target)]||'application/octet-stream','cache-control':'no-store'});res.end(content);
  }catch{res.writeHead(404,{'content-type':'application/json'});res.end('{"code":"not_found"}');}});
 server.listen(4177,'127.0.0.1',()=>console.log('Synthetic-only preview: http://127.0.0.1:4177/dialogue.html'));

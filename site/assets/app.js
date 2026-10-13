@@ -3152,7 +3152,12 @@ function learningIdentityNoticeMode(
 function interactionModeNotice(interactionKey, lesson = state.current) {
   const mode = interactionSubmissionMode(interactionKey, lesson);
   if (mode === "formal") {
-    return '<p class="vocabulary-evidence-mode interaction-evidence-mode">本題評閱會寫入正式學習證據；達標結果依既有 A+ 契約計入。</p>';
+    const role = state.formalInteractionRoles?.get(`${lesson?.id}\n${interactionKey}`);
+    const notice = role === "formative" ? "本題會正式評分並保存結果，不列入既有 A+ 門檻。"
+      : role === "non_scoring" ? "本項是你的篇目自評，保存但不計分。"
+      : role === "a_plus_gate" ? "本題評閱會寫入正式學習證據；達標結果依既有 A+ 契約計入。"
+      : "本題評閱會保存正式結果，計分範圍依本題來源規則。";
+    return `<p class="vocabulary-evidence-mode interaction-evidence-mode">${notice}</p>`;
   }
   if (mode === "local") {
     return '<p class="vocabulary-evidence-mode interaction-evidence-mode">本課未納入選必 A+ 正式題目清單；作答只作本機試做，不呼叫評閱服務、不寫正式證據。</p>';
@@ -3374,7 +3379,7 @@ function renderCheckStage(lesson) {
   const track = trackFor(lesson);
   const identityNoticeMode = learningIdentityNoticeMode();
   const identityNotice = identityNoticeMode === "anonymous"
-    ? `<aside class="anonymous-learning-notice" role="note"><strong>目前是試做模式</strong><span>未發布為正式題目的課文可作本機試做；正式題目須登入後才會評閱、記錄與計入既有 A+ 契約。試做不進入 User Center 的 A–F 評價。</span><a href="${esc(userCenterLoginUrl())}" target="_blank" rel="noopener noreferrer">登入後正式學習</a></aside>`
+    ? `<aside class="anonymous-learning-notice" role="note"><strong>目前是試做模式</strong><span>未發布為正式題目的課文可作本機試做；正式題目須登入後才會評閱與記錄；必修的新作答不列入既有 A+ 門檻。試做不進入 User Center 的 A–F 評價。</span><a href="${esc(userCenterLoginUrl())}" target="_blank" rel="noopener noreferrer">登入後正式學習</a></aside>`
     : identityNoticeMode === "pending"
       ? '<aside class="anonymous-learning-notice" role="note"><strong>正在確認登入</strong><span>身份與學情歸屬確認前，本頁作答不會保存或送出。</span></aside>'
       : "";
@@ -3798,6 +3803,13 @@ function localPracticeFeedback(key) {
     gap: "請回到正文自行核對。",
     nextQuestion: "哪一處原文最能支持你的判斷？",
   };
+}
+
+function preserveLocalPracticeBeforeEdit(record, input) {
+  if (record?.evidenceStatus !== "local_practice" || record.localPracticeBaseline
+    || !Object.entries(input).some(([key, value]) => record[key] !== value)) return record;
+  const baseline = Object.fromEntries(Object.entries(record).filter(([key]) => key !== "historicalPractice"));
+  return { ...record, localPracticeBaseline: structuredClone(baseline) };
 }
 
 function saveLocalInteractionPractice(key, input, options = {}) {
@@ -4294,6 +4306,17 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
   }
   const progressKey = key === "contextWords" ? "context" : key;
   const requestProgress = lessonProgress(requestLessonId);
+  const savedLocal = requestProgress[progressKey];
+  if (savedLocal?.evidenceStatus === "local_practice") {
+    const baseline = savedLocal.localPracticeBaseline || savedLocal;
+    const oldInput = Object.fromEntries(Object.keys(input).map(field => [field, baseline[field] ?? ""]));
+    if (interactionInputSignature(oldInput) === interactionInputSignature(input)) {
+      if (button) { button.disabled = false; button.textContent = "核對"; }
+      if (autoStatus) autoStatus.textContent = "原練習已保留";
+      if (!silent) toast("原練習已保留，不重新評分；修改後的新作答才進入正式評閱。");
+      return;
+    }
+  }
   const retryInput = pendingInteractionInput(requestProgress[progressKey] || {});
   if (retryInput) input = retryInput;
   const preserveLiveDraftDuringRetry = Boolean(retryInput)
@@ -4336,7 +4359,16 @@ async function submitInteraction(key, button = null, { silent = false } = {}) {
     if (autoStatus) autoStatus.textContent = "評閱中";
     return;
   }
-  const previousRequestRecord = requestProgress[progressKey] || {};
+  let previousRequestRecord = requestProgress[progressKey] || {};
+  if (savedLocal?.evidenceStatus === "local_practice") {
+    const { localPracticeBaseline, ...draft } = savedLocal;
+    const baseline = localPracticeBaseline || Object.fromEntries(Object.entries(savedLocal).filter(([field]) => field !== "historicalPractice"));
+    previousRequestRecord = {
+      ...draft,
+      historicalPractice: [...(savedLocal.historicalPractice || []), structuredClone(baseline)],
+      evidenceStatus: "new_formal_answer_pending",
+    };
+  }
   requestProgress[progressKey] = {
     ...previousRequestRecord,
     ...(preserveLiveDraftDuringRetry ? {} : input),
@@ -4511,7 +4543,16 @@ async function saveEvaluation(
   if (!Number.isFinite(rating) || rating < 0 || rating > 100) {
     return { ok: false, synced: false, savedLocal: false, rating: null, reason: "invalid-evaluation" };
   }
+  const previousEvaluation = lessonProgress(lessonId).evaluation;
+  const historicalPractice = [...(previousEvaluation?.historicalPractice || [])];
+  if (submissionMode === "formal" && previousEvaluation?.evidenceStatus === "local_practice") {
+    if (previousEvaluation.rating === rating && (previousEvaluation.reason || "") === evaluationReason) {
+      return {ok:true,synced:false,savedLocal:true,rating,status:null,reason:"historical_local_practice_preserved"};
+    }
+    historicalPractice.push(Object.fromEntries(Object.entries(previousEvaluation).filter(([key]) => key !== "historicalPractice")));
+  }
   const localEvaluation = {
+    ...(historicalPractice.length ? {historicalPractice} : {}),
     rating,
     reason: evaluationReason,
     done: submissionMode === "local",
@@ -4824,9 +4865,10 @@ function bindCheckStage() {
           || progressOwnerScope !== ownerScope
         ) return;
         const progress = lessonProgress(lessonId);
+        const draft = preserveLocalPracticeBeforeEdit(progress[progressKey], { [inputKey]: field.value });
         progress[progressKey] = {
-          ...(progress[progressKey] && typeof progress[progressKey] === "object"
-            ? progress[progressKey]
+          ...(draft && typeof draft === "object"
+            ? draft
             : {}),
           [inputKey]: field.value,
         };
@@ -4844,7 +4886,7 @@ function bindCheckStage() {
     if (lessonId && learningMutationOwnerResolved(ownerScope)) {
       const progress = lessonProgress(lessonId);
       progress.context = {
-        ...(progress.context && typeof progress.context === "object" ? progress.context : {}),
+        ...preserveLocalPracticeBeforeEdit(progress.context, { words }),
         words,
       };
       saveStoredProgress();
@@ -4853,11 +4895,12 @@ function bindCheckStage() {
     if (status) status.textContent = parts.length === 3 ? "待核對" : `${parts.length}/3`;
     if (parts.length !== 3) return;
     const saved = lessonProgress().context;
+    const assessed = saved?.evidenceStatus === "local_practice" ? saved.localPracticeBaseline || saved : saved;
     if (
-      saved?.words === words
-      && saved?.result
-      && (!saved.assessedInputSignature
-        || saved.assessedInputSignature === interactionInputSignature({ words }))
+      assessed?.words === words
+      && assessed?.result
+      && (!assessed.assessedInputSignature
+        || assessed.assessedInputSignature === interactionInputSignature({ words }))
     ) {
       if (status) status.textContent = "已核對";
       return;
@@ -5776,6 +5819,7 @@ async function init() {
       learningManifest,
     );
     state.formalInteractionResourceKeys = formalInteractionResourceKeys(learningManifest);
+    state.formalInteractionRoles = new Map(learningManifest.items.filter(item => item.sourceKind === "lesson-interaction").map(item => [`${item.sourceId}\n${item.questionKind}`, item.evidenceRole]));
     window.YwVocabProgress.validateVocabularyAuthority(
       state.formalVocabResourceKeys,
       state.vocabIndex.activeItemIds,

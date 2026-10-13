@@ -56,3 +56,11 @@ test("textbook pages module uses its current immutable content hash", () => {
   const version = source.match(/textbook-pages\.js\?v=([a-f0-9]{16})/);
   assert.equal(version?.[1], contentVersion("assets/textbook-pages.js"));
 });
+
+// The dialogue entry is independently served with immutable assets.
+test('dialogue entry assets use the current content hashes', () => {
+  const html = readFileSync(resolve(ROOT, 'site/dialogue.html'), 'utf8');
+  for (const asset of ['dialogue.css', 'classical-first-read.js', 'dialogue.js']) {
+    assert.ok(html.includes(`/assets/${asset}?v=${contentVersion(`assets/${asset}`)}`), `${asset} cache authority must match the shipped bytes`);
+  }
+});

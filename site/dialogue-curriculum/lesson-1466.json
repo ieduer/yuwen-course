@@ -1,0 +1,1352 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1466",
+  "title": "3、别了,“不列颠尼亚”",
+  "mode": "journalism",
+  "author": "周婷、杨兴",
+  "persona": {
+    "kind": "source-guide",
+    "notice": "AI 閱讀引導，依據原教材與已署名來源；不冒充作者。",
+    "narratorIsAuthor": false,
+    "rule": "以閱讀引導者身份討論來源，逐一區分作者、引文說話者、人物、譯者與教材編者；不得把代表人物或被引述者冒充作者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1466:p1",
+      "text": "新华社香港1997年7月1日电 在香港飘扬了150 多年的英国米字旗最后一次在这里降落后，接载查尔斯王子和离任港督彭定康回国的英国皇家游轮“不列颠尼亚”号驶离维多利亚港湾——这是英国撤离香港的最后时刻。",
+      "block": {
+        "runs": [
+          {
+            "text": "新华社香港1997年7月1日电 在香港飘扬了150 多年的英国米字旗最后一次在这里降落后，接载查尔斯王子和离任港督彭定康回国的英国皇家游轮“不列颠尼亚”号驶离维多利亚港湾——这是英国撤离香港的最后时刻。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1466:p2",
+      "text": "英国的告别仪式是30日下午在港岛半山上的港督府拉开序幕的。在蒙蒙细雨中，末任港督告别了这个曾居住过25任港督的庭院。",
+      "block": {
+        "runs": [
+          {
+            "text": "英国的告别仪式是30日下午在港岛半山上的港督府拉开序幕的。在蒙蒙细雨中，末任港督告别了这个曾居住过25任港督的庭院。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1466:p3",
+      "text": "4 时30 分，面色凝重的彭定康注视着港督旗帜在“日落余音”的号角声中降下旗杆。根据传统，每一位港督离任时，都举行降旗仪式。但这一次不同：永远都不会有另一面港督旗帜从这里升起。",
+      "block": {
+        "runs": [
+          {
+            "text": "4 时30 分，面色凝重的彭定康注视着港督旗帜在“日落余音”的号角声中降下旗杆。根据传统，每一位港督离任时，都举行降旗仪式。但这一次不同：永远都不会有另一面港督旗帜从这里升起。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1466:p4",
+      "text": "4 时40 分，代表英国女王统治了香港5 年的彭定康登上带有皇家标记的黑色“劳斯莱斯”，最后一次离开了港督府。",
+      "block": {
+        "runs": [
+          {
+            "text": "4 时40 分，代表英国女王统治了香港5 年的彭定康登上带有皇家标记的黑色“劳斯莱斯”，最后一次离开了港督府。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1466:p5",
+      "text": "掩映在绿树丛中的港督府于1855 年建成，在以后的一个多世纪中，包括彭定康在内的许多港督曾对其进行过大规模改建、扩建和装修。随着末代港督的离去，这座古典风格的白色建筑成为历史的陈迹。",
+      "block": {
+        "runs": [
+          {
+            "text": "掩映在绿树丛中的",
+            "type": "text"
+          },
+          {
+            "disposition": "system-browser",
+            "href": "https://www.ceo.gov.hk/gh/chi/history.html",
+            "sourceUrl": "https://www.ceo.gov.hk/gh/chi/history.html",
+            "text": "港督府于1855 年",
+            "type": "link"
+          },
+          {
+            "text": "建成，在以后的一个多世纪中，包括彭定康在内的许多港督曾对其进行过大规模改建、扩建和装修。随着末代港督的离去，这座古典风格的白色建筑成为历史的陈迹。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1466:p6",
+      "text": "晚6 时15 分，象征英国管治结束的告别仪式在距离驻港英军总部不远的添马舰东面举行。停泊在港湾中的皇家游轮“不列颠尼亚”号和邻近大厦上悬挂的巨幅紫荆花图案，恰好构成这个“日落仪式”的背景。",
+      "block": {
+        "runs": [
+          {
+            "text": "晚6 时15 分，象征英国管治结束的告别仪式在距离驻港英军总部不远的添马舰东面举行。停泊在港湾中的皇家游轮“不列颠尼亚”号和邻近大厦上悬挂的巨幅紫荆花图案，恰好构成这个“日落仪式”的背景。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1466:p7",
+      "text": "此时，雨越下越大。查尔斯王子在雨中宣读英国女王赠言说：“英国国旗就要降下，中国国旗将飘扬于香港上空。150 多年的英国管治即将告终。”",
+      "block": {
+        "runs": [
+          {
+            "text": "此时，雨越下越大。查尔斯王子在雨中宣读英国女王赠言说：“英国国旗就要降下，中国国旗将飘扬于香港上空。150 多年的英国管治即将告终。”",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1466:p8",
+      "text": "7 时45 分，广场上灯火渐暗，开始了当天港岛上的第二次降旗仪式。156 年前，是一个叫爱德华·贝尔彻的英国舰长带领士兵占领了港岛，在这里升起了英国国旗；今天，另一名英国海军士兵在“威尔士亲王”军营旁的这个地方降下了米字旗。",
+      "block": {
+        "runs": [
+          {
+            "text": "7 时45 分，广场上灯火渐暗，开始了当天港岛上的第二次降旗仪式。156 年前，是一个叫爱德华·贝尔彻的英国舰长带领士兵占领了港岛，在这里升起了英国国旗；今天，另一名英国海军士兵在“威尔士亲王”军营旁的这个地方降下了米字旗。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1466:p9",
+      "text": "中英香港政权交接仪式",
+      "block": {
+        "runs": [
+          {
+            "text": "中英香港政权交接仪式",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1466:p10",
+      "text": "当然，最为世人瞩目的是子夜时分中英香港政权交接仪式上的易帜。在1997 年6 月30 日的最后一分钟，米字旗在香港最后一次降下，英国对香港长达一个半世纪的殖民统治宣告终结。",
+      "block": {
+        "runs": [
+          {
+            "text": "当然，最为世人瞩目的是子夜时分中英香港政权交接仪式上的易帜。在1997 年6 月30 日的最后一分钟，米字旗在香港最后一次降下，英国对香港长达一个半世纪的殖民统治宣告终结。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1466:p11",
+      "text": "在新的一天来临的第一分钟，五星红旗伴着《义勇军进行曲》冉冉rǎn升起，中国从此恢复对香港行使主权。与此同时，五星红旗在英军添马舰营区升起，两分钟前，“威尔士亲王”军营移交给中国人民解放军，解放军开始接管香港防务。",
+      "block": {
+        "runs": [
+          {
+            "text": "在新的一天来临的第一分钟，五星红旗伴着《义勇军进行曲》冉冉rǎn升起，中国从此恢复对香港行使主权。与此同时，五星红旗在英军添马舰营区升起，两分钟前，“威尔士亲王”军营移交给中国人民解放军，解放军开始接管香港防务。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1466:p12",
+      "text": "0 时40 分，刚刚参加了交接仪式的查尔斯王子和第28 任港督彭定康登上“不列颠尼亚”号的甲板。在英国军舰“漆咸”号及悬挂中国国旗和香港特别行政区区旗的香港水警汽艇护卫下，将于1997 年年底退役的“不列颠尼亚”号很快消失在南海的夜幕中。",
+      "block": {
+        "runs": [
+          {
+            "text": "0 时40 分，刚刚参加了交接仪式的查尔斯王子和第28 任港督彭定康登上“不列颠尼亚”号的甲板。在英国军舰“漆咸”号及悬挂中国国旗和香港特别行政区区旗的香港水警汽艇护卫下，将于1997 年年底退役的“不列颠尼亚”号很快消失在南海的夜幕中。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1466:p13",
+      "text": "从1841 年1 月26 日英国远征军第一次将米字旗插上港岛，至1997 年7 月1 日五星红旗在香港升起，一共过去了156 年5 个月零4天。大英帝国从海上来，又从海上去。",
+      "block": {
+        "runs": [
+          {
+            "text": "从1841 年1 月26 日英国远征军第一次将米字旗插上港岛，至1997 年7 月1 日五星红旗在香港升起，一共过去了156 年5 个月零4天。大英帝国从海上来，又从海上去。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [],
+  "resources": [
+    {
+      "disposition": "system-browser",
+      "href": "https://drive.google.com/file/d/1-INnPtDYF9eull5_cnUbJb7VJWlB8opn/view?usp=sharing",
+      "kind": "link",
+      "label": "drive.google.com",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://drive.google.com/file/d/1-INnPtDYF9eull5_cnUbJb7VJWlB8opn/view?usp=sharing"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/uploads/short-url/31qePR67OvS3FlyQKzf2tuNgYtC.pdf",
+      "kind": "document",
+      "label": "19970701.pdf",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://forum.rdfzer.com/uploads/short-url/31qePR67OvS3FlyQKzf2tuNgYtC.pdf"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://sites.google.com/view/pkuschool/cover3/xbs1/xbs5",
+      "kind": "link",
+      "label": "https://sites.google.com/view/pkuschool/cover3/xbs1/xbs5",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://sites.google.com/view/pkuschool/cover3/xbs1/xbs5"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://www.ceo.gov.hk/gh/chi/history.html",
+      "kind": "link",
+      "label": "港督府于1855 年",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://www.ceo.gov.hk/gh/chi/history.html"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://zh.wikisource.org/zh-hant/%E5%88%A5%E8%B3%A6",
+      "kind": "link",
+      "label": "zh.wikisource.org",
+      "postId": null,
+      "postNumber": 6,
+      "sourceUrl": "https://zh.wikisource.org/zh-hant/%E5%88%A5%E8%B3%A6"
+    }
+  ],
+  "source": "https://forum.rdfzer.com/t/topic/1466",
+  "objectives": [
+    {
+      "id": "lesson-1466:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1466:p1",
+        "lesson-1466:p2",
+        "lesson-1466:p3",
+        "lesson-1466:p4",
+        "lesson-1466:p5",
+        "lesson-1466:p6",
+        "lesson-1466:p7",
+        "lesson-1466:p8",
+        "lesson-1466:p9",
+        "lesson-1466:p10",
+        "lesson-1466:p11",
+        "lesson-1466:p12",
+        "lesson-1466:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1466:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1466:p1",
+        "lesson-1466:p2",
+        "lesson-1466:p3",
+        "lesson-1466:p4",
+        "lesson-1466:p5",
+        "lesson-1466:p6",
+        "lesson-1466:p7",
+        "lesson-1466:p8",
+        "lesson-1466:p9",
+        "lesson-1466:p10",
+        "lesson-1466:p11",
+        "lesson-1466:p12",
+        "lesson-1466:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1466:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1466:p1",
+        "lesson-1466:p2",
+        "lesson-1466:p3",
+        "lesson-1466:p4",
+        "lesson-1466:p5",
+        "lesson-1466:p6",
+        "lesson-1466:p7",
+        "lesson-1466:p8",
+        "lesson-1466:p9",
+        "lesson-1466:p10",
+        "lesson-1466:p11",
+        "lesson-1466:p12",
+        "lesson-1466:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1466:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1466:p1",
+        "lesson-1466:p2",
+        "lesson-1466:p3",
+        "lesson-1466:p4",
+        "lesson-1466:p5",
+        "lesson-1466:p6",
+        "lesson-1466:p7",
+        "lesson-1466:p8",
+        "lesson-1466:p9",
+        "lesson-1466:p10",
+        "lesson-1466:p11",
+        "lesson-1466:p12",
+        "lesson-1466:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1466:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1466:p1",
+        "lesson-1466:p2",
+        "lesson-1466:p3",
+        "lesson-1466:p4",
+        "lesson-1466:p5",
+        "lesson-1466:p6",
+        "lesson-1466:p7",
+        "lesson-1466:p8",
+        "lesson-1466:p9",
+        "lesson-1466:p10",
+        "lesson-1466:p11",
+        "lesson-1466:p12",
+        "lesson-1466:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1466:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1466:p1",
+        "lesson-1466:p2",
+        "lesson-1466:p3",
+        "lesson-1466:p4",
+        "lesson-1466:p5",
+        "lesson-1466:p6",
+        "lesson-1466:p7",
+        "lesson-1466:p8",
+        "lesson-1466:p9",
+        "lesson-1466:p10",
+        "lesson-1466:p11",
+        "lesson-1466:p12",
+        "lesson-1466:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1466:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1466:p1",
+        "lesson-1466:p2",
+        "lesson-1466:p3",
+        "lesson-1466:p4",
+        "lesson-1466:p5",
+        "lesson-1466:p6",
+        "lesson-1466:p7",
+        "lesson-1466:p8",
+        "lesson-1466:p9",
+        "lesson-1466:p10",
+        "lesson-1466:p11",
+        "lesson-1466:p12",
+        "lesson-1466:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1466:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1466:p1",
+        "lesson-1466:p2",
+        "lesson-1466:p3",
+        "lesson-1466:p4",
+        "lesson-1466:p5",
+        "lesson-1466:p6",
+        "lesson-1466:p7",
+        "lesson-1466:p8",
+        "lesson-1466:p9",
+        "lesson-1466:p10",
+        "lesson-1466:p11",
+        "lesson-1466:p12",
+        "lesson-1466:p13"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "legacy:effect:lesson-1466:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1466:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1466:interaction:contextWords",
+        "resourceVersion": "sha256:f82457852340fafe6bba70fe56cdafd628b28368e857460f68b6ae3391bc8c19",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1466:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1466:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1466:interaction:revision",
+        "resourceVersion": "sha256:bf59b37a7123b326af9a220b39859e98fa13d5736356af648585074eb1e2c6fa",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1466:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1466:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1466:interaction:structure",
+        "resourceVersion": "sha256:027bbe16ee9caa7e8af958ff48336dcefdafa2e9b722d4303d95c5e9cf18097c",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1466:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1466:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1466:interaction:evaluation",
+        "resourceVersion": "sha256:a880dace2ce17140a975d547cda7d5dde4c5592874583fb9049d41c4730eea84",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1466:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1466:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1466:interaction:authorQuestion",
+        "resourceVersion": "sha256:dec00fe7d87719aead412ea61441734f460e744b65e47660ee5bea16283261ee",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    }
+  ],
+  "vocabulary": [],
+  "legacy": {
+    "lessonId": "lesson-1466",
+    "title": "3、别了,“不列颠尼亚”",
+    "mode": "journalism",
+    "legacyTracks": [
+      "context",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "初讀評議",
+        "",
+        10
+      ],
+      [
+        "read",
+        "通讀正文",
+        "",
+        10
+      ],
+      [
+        "revision",
+        "字句之改",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "材料編排",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "報道評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "叩問作者",
+        "",
+        10
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1466:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1466:interaction:contextWords",
+        "resourceVersion": "sha256:f82457852340fafe6bba70fe56cdafd628b28368e857460f68b6ae3391bc8c19",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1466:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1466:interaction:revision",
+        "resourceVersion": "sha256:bf59b37a7123b326af9a220b39859e98fa13d5736356af648585074eb1e2c6fa",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1466:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1466:interaction:structure",
+        "resourceVersion": "sha256:027bbe16ee9caa7e8af958ff48336dcefdafa2e9b722d4303d95c5e9cf18097c",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1466:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1466:interaction:evaluation",
+        "resourceVersion": "sha256:a880dace2ce17140a975d547cda7d5dde4c5592874583fb9049d41c4730eea84",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1466:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1466:interaction:authorQuestion",
+        "resourceVersion": "sha256:dec00fe7d87719aead412ea61441734f460e744b65e47660ee5bea16283261ee",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1466",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1466:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1466:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1466:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1466",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1466:interaction:contextWords",
+        "completionKey": "effect:lesson-1466:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1466:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1466",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1466:interaction:structure",
+        "completionKey": "effect:lesson-1466:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1466:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1466",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1466:interaction:revision",
+        "completionKey": "effect:lesson-1466:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1466:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1466:interaction:contextWords",
+        "sourceVersion": "sha256:f82457852340fafe6bba70fe56cdafd628b28368e857460f68b6ae3391bc8c19",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1466:interaction:revision",
+        "sourceVersion": "sha256:bf59b37a7123b326af9a220b39859e98fa13d5736356af648585074eb1e2c6fa",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1466:interaction:structure",
+        "sourceVersion": "sha256:027bbe16ee9caa7e8af958ff48336dcefdafa2e9b722d4303d95c5e9cf18097c",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1466:interaction:evaluation",
+        "sourceVersion": "sha256:a880dace2ce17140a975d547cda7d5dde4c5592874583fb9049d41c4730eea84",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1466:interaction:authorQuestion",
+        "sourceVersion": "sha256:dec00fe7d87719aead412ea61441734f460e744b65e47660ee5bea16283261ee",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1466:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1466:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1466:interaction:contextWords",
+        "completionKey": "effect:lesson-1466:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1466:interaction:structure",
+        "completionKey": "effect:lesson-1466:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1466:interaction:revision",
+        "completionKey": "effect:lesson-1466:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [],
+    "sourceLesson": "data/lessons/lesson-1466.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "source-guide",
+        "attributionStatus": "source-guide-no-impersonation"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 5,
+        "formativeCount": 4,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-2bb0e4cd14acf2fad75f",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [
+    {
+      "id": "lesson-1466:p14",
+      "text": "学习提示\n这是两篇分别诞生于改革开放新时期和开始全面建设社会主义时期的新闻作品。《别了，“不列颠尼亚”》是消息，报道香港历经沧桑之后回归祖国这一重大历史事件，反映了中国人民对维护国家主权、民族尊严和领土完整的不懈追求；《县委书记的榜样——焦裕禄》是通讯，记述一位“党的好干部”全心全意为人民服务的光荣事迹，展示了我国社会主义建设的艰苦历程和中国共产党人改天换地的伟大信念。可以借助以前学过的有关新闻的知识，进一步把握这两种新闻体裁的不同特点，体会两篇作品的历史价值和现实意义。\n《别了，“不列颠尼亚”》视角独特，抓住几个重要时刻，真实再现了香港回归祖国的历史画面。作品既有生动的现场感，又有厚重的历史感，阅读时要关注文中时间、场景的转换，重点把握将新闻事实和背景材料融为一体的写法。对作品中那些富有意味的细节，要反复品味，并思考其中体现的作者的情感与态度。",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "学习提示",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "这是两篇分别诞生于改革开放新时期和开始全面建设社会主义时期的新闻作品。《别了，“不列颠尼亚”》是消息，报道香港历经沧桑之后回归祖国这一重大历史事件，反映了中国人民对维护国家主权、民族尊严和领土完整的不懈追求；《县委书记的榜样——焦裕禄》是通讯，记述一位“党的好干部”全心全意为人民服务的光荣事迹，展示了我国社会主义建设的艰苦历程和中国共产党人改天换地的伟大信念。可以借助以前学过的有关新闻的知识，进一步把握这两种新闻体裁的不同特点，体会两篇作品的历史价值和现实意义。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "《别了，“不列颠尼亚”》视角独特，抓住几个重要时刻，真实再现了香港回归祖国的历史画面。作品既有生动的现场感，又有厚重的历史感，阅读时要关注文中时间、场景的转换，重点把握将新闻事实和背景材料融为一体的写法。对作品中那些富有意味的细节，要反复品味，并思考其中体现的作者的情感与态度。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      },
+      "blockIndex": 13,
+      "blockSha256": "a2aa61d05c75bcfbd7bfad1dfa863dab119be3f6ad045eac4efb00ae9cff10a7",
+      "role": "commentary",
+      "label": "原課導讀與教學參考（非本篇正文）",
+      "source": "data/reader-documents/lesson-1466.json#main.blocks[13]",
+      "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+    },
+    {
+      "id": "lesson-1466:p15",
+      "text": "drive.google.com",
+      "block": {
+        "runs": [
+          {
+            "text": "drive.google.com",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "blockIndex": 14,
+      "blockSha256": "9fba5d21cd385f26da63e41929aab4230430c40d4435c105f1499b5d2cf4b3aa",
+      "role": "reference-metadata",
+      "label": "原課參考附件",
+      "source": "data/reader-documents/lesson-1466.json#main.blocks[14]",
+      "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+    },
+    {
+      "id": "lesson-1466:p16",
+      "text": "历史的定格和新闻的生命力_周树春.pdf",
+      "block": {
+        "level": 3,
+        "runs": [
+          {
+            "disposition": "system-browser",
+            "href": "https://drive.google.com/file/d/1-INnPtDYF9eull5_cnUbJb7VJWlB8opn/view?usp=sharing",
+            "sourceUrl": "https://drive.google.com/file/d/1-INnPtDYF9eull5_cnUbJb7VJWlB8opn/view?usp=sharing",
+            "text": "历史的定格和新闻的生命力_周树春.pdf",
+            "type": "link"
+          }
+        ],
+        "type": "heading"
+      },
+      "blockIndex": 15,
+      "blockSha256": "7dfa459d7d56c9b473ddcb0c36c04c6f2bb7dc5266b410422e64b48e80394cd7",
+      "role": "reference-metadata",
+      "label": "原課參考附件",
+      "source": "data/reader-documents/lesson-1466.json#main.blocks[15]",
+      "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+    },
+    {
+      "id": "lesson-1466:p17",
+      "text": "Google Drive file.",
+      "block": {
+        "runs": [
+          {
+            "text": "Google Drive file.",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "blockIndex": 16,
+      "blockSha256": "0c826a2a3e23adf119c7f74aa7b5a2d95f63d790a2a8b35e117f4be675ce53af",
+      "role": "reference-metadata",
+      "label": "原課參考附件",
+      "source": "data/reader-documents/lesson-1466.json#main.blocks[16]",
+      "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+    },
+    {
+      "id": "lesson-1466:p18",
+      "text": "据香港政权交接仪式新闻统计处统计，截至1997年5月7日报名截止，来自46个国家和地区的778家新闻媒体的申请共8423人。\n香港当地有106家机构，2816人；\n日本有45家，1300人；\n美国有108家，1047人；\n英国有63家，688人；\n台湾地区有42家，528人。\n中国内地有16家，610人。 历史上，为同一件事，在同一时刻、同一地点云集如此众多的新闻记者，是前所未有的。香港回归报道的竞争在当时被形容为“世纪新闻大战”和“世界传媒的奥林匹克”。\n作为内地报道回归的主力媒体之一，新华社派出了114人的前方报道团。 从倒计时100天的3月23日到回归后的7月5日，对国内发稿1254条，约100万字； 对外中、英、法、俄、西、阿六种文字共发稿5869条，约500万字，其中中文稿1177条，英文稿1478条。 仅对前方报道团开始发稿的6月17日到终止发稿的7月5日共19天统计，对内发稿381条，30多万字； 对外英文稿531条，对外中文稿378条，45万字；图片599底。 前后方累计，对内发稿超过2000条，对外发稿超过3000条，图片1000底。 在许多精彩的稿件中， 《历史，将铭记这一时刻》、 《当国歌再次奏响的时候》、 《特区上班第一天》、 《告慰小平》、 《香港之夜》、 《百年梦圆再谱华章》、 《为了回到祖国的怀抱》、 《江主席在港20小时》、 《替小平到自己的土地上走一走》等， 都是现场感强、饱含激情、写作讲究的好作品，受到广泛好评。 特别应该提到的是《别了，不列颠尼亚！》。\n这是四位年轻人集体写的一篇特写式的新闻，记录了查尔斯亲王代表英国接回末代港督彭定康撤离香港的具体情景，通过五个告别现场的描述和156年的沧桑回顾，体现了香港回归的划时代意义。\n这是各家媒体报道英方撤离活动稿件中给人印象最深的一篇。全篇1200字(中文)，笔法生动，感情深沉，简明精当，内涵丰厚，回味无穷，具有重要的历史价值。 这篇稿件不仅被评为新华社一级好稿，还获第八届中国新闻奖消息类一等奖，后来选入高中课本。",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "据香港政权交接仪式新闻统计处统计，截至1997年5月7日报名截止，来自46个国家和地区的778家新闻媒体的申请共8423人。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "香港当地有106家机构，2816人；",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "日本有45家，1300人；",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "美国有108家，1047人；",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "英国有63家，688人；",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "台湾地区有42家，528人。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "中国内地有16家，610人。 历史上，为同一件事，在同一时刻、同一地点云集如此众多的新闻记者，是前所未有的。香港回归报道的竞争在当时被形容为“世纪新闻大战”和“世界传媒的奥林匹克”。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "作为内地报道回归的主力媒体之一，新华社派出了114人的前方报道团。 从倒计时100天的3月23日到回归后的7月5日，对国内发稿1254条，约100万字； 对外中、英、法、俄、西、阿六种文字共发稿5869条，约500万字，其中中文稿1177条，英文稿1478条。 仅对前方报道团开始发稿的6月17日到终止发稿的7月5日共19天统计，对内发稿381条，30多万字； 对外英文稿531条，对外中文稿378条，45万字；图片599底。 前后方累计，对内发稿超过2000条，对外发稿超过3000条，图片1000底。 在许多精彩的稿件中， 《历史，将铭记这一时刻》、 《当国歌再次奏响的时候》、 《特区上班第一天》、 《告慰小平》、 《香港之夜》、 《百年梦圆再谱华章》、 《为了回到祖国的怀抱》、 《江主席在港20小时》、 《替小平到自己的土地上走一走》等， 都是现场感强、饱含激情、写作讲究的好作品，受到广泛好评。 特别应该提到的是《别了，不列颠尼亚！》。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "这是四位年轻人集体写的一篇特写式的新闻，记录了查尔斯亲王代表英国接回末代港督彭定康撤离香港的具体情景，通过五个告别现场的描述和156年的沧桑回顾，体现了香港回归的划时代意义。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "这是各家媒体报道英方撤离活动稿件中给人印象最深的一篇。全篇1200字(中文)，笔法生动，感情深沉，简明精当，内涵丰厚，回味无穷，具有重要的历史价值。 这篇稿件不仅被评为新华社一级好稿，还获第八届中国新闻奖消息类一等奖，后来选入高中课本。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      },
+      "blockIndex": 17,
+      "blockSha256": "0b827c32485988aa809b03f17eaa717fe000ed08cda89a65b7553649da6ceb77",
+      "role": "commentary",
+      "label": "原課導讀與教學參考（非本篇正文）",
+      "source": "data/reader-documents/lesson-1466.json#main.blocks[17]",
+      "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+    },
+    {
+      "id": "lesson-1466:p19",
+      "text": "19970701.pdf (3.8 MB)",
+      "block": {
+        "runs": [
+          {
+            "disposition": "internal",
+            "href": "https://forum.rdfzer.com/uploads/short-url/31qePR67OvS3FlyQKzf2tuNgYtC.pdf",
+            "sourceUrl": "https://forum.rdfzer.com/uploads/short-url/31qePR67OvS3FlyQKzf2tuNgYtC.pdf",
+            "text": "19970701.pdf",
+            "type": "link"
+          },
+          {
+            "text": " (3.8 MB)",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "blockIndex": 18,
+      "blockSha256": "46add69bf0968c860ac6e8aa48e88aabcd65d88a8d50d07ae486580d0f85fdce",
+      "role": "reference-metadata",
+      "label": "原課參考附件",
+      "source": "data/reader-documents/lesson-1466.json#main.blocks[18]",
+      "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+    }
+  ],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "周婷 杨兴\n\n选自《1949—1999 新华社优秀新闻作品选集·对外新闻选》（新华出版社1999 年版）。略有改动。\n\n本文署名为周婷、杨兴，实际上作者是四个人：周树春、杨国强、徐兴堂、胥晓婷。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "type": "quote"
+    }
+  ],
+  "guidance": [],
+  "media": [
+    {
+      "alt": "",
+      "bytes": 57825,
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/5aa85fe5da537fcee3a2f4a5dfb4396667ec0451.png",
+      "height": 1016,
+      "id": "media-187506945c8cb1b3cf30",
+      "mediaType": "image/png",
+      "nativeDisposition": "verified-in-app",
+      "receiptCollectedAt": "2026-07-30T01:10:43.464Z",
+      "receiptRequired": true,
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29",
+      "sha256": "c13ba82f6efc214197ce52e2c31bd3c986577431328c1365030b0fdffa8a34fe",
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/5aa85fe5da537fcee3a2f4a5dfb4396667ec0451.png",
+      "webDisposition": "source-url",
+      "width": 710
+    },
+    {
+      "alt": "",
+      "bytes": 148959,
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/a299c5e9e37787beb0431746e83e996db0bea059.jpeg",
+      "height": 372,
+      "id": "media-a7ce5132d936ae9150e1",
+      "mediaType": "image/jpeg",
+      "nativeDisposition": "verified-in-app",
+      "receiptCollectedAt": "2026-07-30T01:10:43.464Z",
+      "receiptRequired": true,
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29",
+      "sha256": "0b036952b1435e98961c69bf1629c14261022ac8421dc5a1791fe7e573d3526b",
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/a299c5e9e37787beb0431746e83e996db0bea059.jpeg",
+      "webDisposition": "source-url",
+      "width": 624
+    },
+    {
+      "alt": "",
+      "bytes": 59009,
+      "finalUrl": "https://files.rdfzer.com/original/2X/a/a3ee6862898e708e45362d4e544d3d1ee5136ad7.png",
+      "height": 1016,
+      "id": "media-da81291c6122e7faa145",
+      "mediaType": "image/png",
+      "nativeDisposition": "verified-in-app",
+      "receiptCollectedAt": "2026-07-30T01:10:43.464Z",
+      "receiptRequired": true,
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29",
+      "sha256": "8dc46b2d8dcea809f67aa7e5b42eb4e792e83639a6dea317fd81d4262dbf780f",
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/a3ee6862898e708e45362d4e544d3d1ee5136ad7.png",
+      "webDisposition": "source-url",
+      "width": 710
+    }
+  ],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1466.json",
+    "lessonSha256": "e0dc9f72c55e4b7d3c239f6518b81c78e053a4de95bb0fe206cd3bba0abd80c7",
+    "reader": "data/reader-documents/lesson-1466.json",
+    "readerSha256": "3d0232ff284b23c920586250840089a506ec5875ef096d92053dc25934b9ece7",
+    "sourcePostId": 9911,
+    "sourcePostNumber": 1,
+    "blockCount": 19,
+    "annotationCount": 0,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "source-guide",
+      "attributionStatus": "source-guide-no-impersonation"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 5,
+      "formativeCount": 4,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

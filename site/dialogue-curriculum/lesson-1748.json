@@ -1,0 +1,3222 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1748",
+  "title": "14 促织 蒲松龄",
+  "mode": "fiction",
+  "author": "蒲松龄",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1748:p1",
+      "text": "促 织\n\n蒲松龄",
+      "block": {
+        "runs": [
+          {
+            "text": "促 织",
+            "type": "text"
+          },
+          {
+            "label": "[1]",
+            "noteId": "footnote-11198-1",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "\n\n蒲松龄",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1748:p2",
+      "text": "宣德 间，宫中尚 促织之戏，岁征 民间。此物故非西 产；有华阴令欲媚上官，以一头进，试使斗而才，因责常供。令以责之里正。市中游侠儿得佳者笼养之，昂其直，居为奇货。里胥猾黠，假此科敛丁口，每责一头，辄倾数家之产。",
+      "block": {
+        "runs": [
+          {
+            "text": "宣德",
+            "type": "text"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-11198-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": " 间，宫中尚",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-11198-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": " 促织之戏",
+            "type": "text"
+          },
+          {
+            "label": "[4]",
+            "noteId": "footnote-11198-4",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，岁征",
+            "type": "text"
+          },
+          {
+            "label": "[5]",
+            "noteId": "footnote-11198-5",
+            "type": "annotation-ref"
+          },
+          {
+            "text": " 民间。此物故非西",
+            "type": "text"
+          },
+          {
+            "label": "[6]",
+            "noteId": "footnote-11198-6",
+            "type": "annotation-ref"
+          },
+          {
+            "text": " 产；有华阴令",
+            "type": "text"
+          },
+          {
+            "label": "[7]",
+            "noteId": "footnote-11198-7",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "欲媚上官，以一头进",
+            "type": "text"
+          },
+          {
+            "label": "[8]",
+            "noteId": "footnote-11198-8",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，试使斗而才",
+            "type": "text"
+          },
+          {
+            "label": "[9]",
+            "noteId": "footnote-11198-9",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，因责",
+            "type": "text"
+          },
+          {
+            "label": "[10]",
+            "noteId": "footnote-11198-10",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "常供。令以责之里正",
+            "type": "text"
+          },
+          {
+            "label": "[11]",
+            "noteId": "footnote-11198-11",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。市中游侠儿",
+            "type": "text"
+          },
+          {
+            "label": "[12]",
+            "noteId": "footnote-11198-12",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "得佳者笼养之，昂其直",
+            "type": "text"
+          },
+          {
+            "label": "[13]",
+            "noteId": "footnote-11198-13",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，居为奇货",
+            "type": "text"
+          },
+          {
+            "label": "[14]",
+            "noteId": "footnote-11198-14",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。里胥",
+            "type": "text"
+          },
+          {
+            "label": "[15]",
+            "noteId": "footnote-11198-15",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "猾黠，假此科敛丁口",
+            "type": "text"
+          },
+          {
+            "label": "[16]",
+            "noteId": "footnote-11198-16",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，每责一头，辄倾数家之产。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1748:p3",
+      "text": "邑有成名者，操童子业，久不售。为人迂讷，遂为猾胥报充里正役，百计营谋不能脱。不终岁，薄产累尽。会征促织，成不敢敛户口，而又无所赔偿，忧闷欲死。妻曰：“死何裨益？不如自行搜觅，冀有万一之得。”成然之。早出暮归，提竹筒铜丝笼，于败堵丛草处，探石发穴，靡计不施，迄无济。即捕得三两头，又劣弱不中于款。宰严限追比，旬余，杖至百，两股间脓血流离，并虫亦不能行捉矣。转侧床头，惟思自尽。",
+      "block": {
+        "runs": [
+          {
+            "text": "邑有成名者，操童子业",
+            "type": "text"
+          },
+          {
+            "label": "[17]",
+            "noteId": "footnote-11198-17",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，久不售",
+            "type": "text"
+          },
+          {
+            "label": "[18]",
+            "noteId": "footnote-11198-18",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。为人迂讷",
+            "type": "text"
+          },
+          {
+            "label": "[19]",
+            "noteId": "footnote-11198-19",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，遂为猾胥报充里正役，百计营谋不能脱。不终岁，薄产累尽",
+            "type": "text"
+          },
+          {
+            "label": "[20]",
+            "noteId": "footnote-11198-20",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。会征促织，成不敢敛户口，而又无所赔偿，忧闷欲死。妻曰：“死何裨益？不如自行搜觅，冀有万一之得。”成然之。早出暮归，提竹筒铜丝笼，于败堵",
+            "type": "text"
+          },
+          {
+            "label": "[21]",
+            "noteId": "footnote-11198-21",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "丛草处，探石发穴，靡计不施，迄无济",
+            "type": "text"
+          },
+          {
+            "label": "[22]",
+            "noteId": "footnote-11198-22",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。即捕得三两头，又劣弱不中于款",
+            "type": "text"
+          },
+          {
+            "label": "[23]",
+            "noteId": "footnote-11198-23",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。宰严限追比",
+            "type": "text"
+          },
+          {
+            "label": "[24]",
+            "noteId": "footnote-11198-24",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，旬余，杖至百，两股间脓血流离",
+            "type": "text"
+          },
+          {
+            "label": "[25]",
+            "noteId": "footnote-11198-25",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，并虫亦不能行",
+            "type": "text"
+          },
+          {
+            "label": "[26]",
+            "noteId": "footnote-11198-26",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "捉矣。转侧床头，惟思自尽。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1748:p4",
+      "text": "时村中来一驼背巫，能以神卜。成妻具资诣问。见红女白婆，填塞门户。入其舍，则密室垂帘，帘外设香几。问者爇香于鼎，再拜。巫从旁望空代祝，唇吻翕辟，不知何词。各各竦立以听。\n\n少间，帘内掷一纸出，即道人意中事，无毫发爽。成妻纳钱案上，焚拜如前人。食顷，帘动，片纸抛落。拾视之，非字而画：中绘殿阁，类兰若。后小山下，怪石乱卧，针针丛棘，青麻头伏焉。旁一蟆，若将跳舞。展玩不可晓。然睹促织，隐中胸怀。折藏之，归以示成。\n\n成反复自念，得无教我猎虫所耶？细瞻景状，与村东大佛阁真逼似。乃强起扶杖，执图诣寺后，有古陵蔚起。循陵而走，见蹲石鳞鳞，俨然类画。遂于蒿莱中侧听徐行，似寻针芥。而心目耳力俱穷，绝无踪响。冥搜未已，一癞头蟆猝然跃去。成益愕，急逐趁之，蟆入草间。蹑迹披求，见有虫伏棘根。遽扑之，入石穴中。掭以尖草，不出；以筒水灌之，始出，状极俊健。逐而得之。审视，巨身修尾，青项金翅。大喜，笼归，举家庆贺，虽连城拱璧不啻也。上于盆而养之，蟹白栗黄，备极护爱，留待限期，以塞官责。\n\n成有子九岁，窥父不在，窃发盆。虫跃掷径出，迅不可捉。及扑入手，已股落腹裂，斯须就毙。儿惧，啼告母。母闻之，面色灰死，大骂曰：“业根，死期至矣！而翁归，自与汝覆算耳！”儿涕而出。",
+      "block": {
+        "runs": [
+          {
+            "text": "时村中来一驼背巫，能以神卜",
+            "type": "text"
+          },
+          {
+            "label": "[27]",
+            "noteId": "footnote-11198-27",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。成妻具资诣问",
+            "type": "text"
+          },
+          {
+            "label": "[28]",
+            "noteId": "footnote-11198-28",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。见红女白婆，填塞门户。入其舍，则密室垂帘，帘外设香几。问者爇香",
+            "type": "text"
+          },
+          {
+            "label": "[29]",
+            "noteId": "footnote-11198-29",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "于鼎，再拜。巫从旁望空代祝",
+            "type": "text"
+          },
+          {
+            "label": "[30]",
+            "noteId": "footnote-11198-30",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，唇吻翕辟",
+            "type": "text"
+          },
+          {
+            "label": "[31]",
+            "noteId": "footnote-11198-31",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，不知何词。各各竦立",
+            "type": "text"
+          },
+          {
+            "label": "[32]",
+            "noteId": "footnote-11198-32",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "以听。\n\n少间，帘内掷一纸出，即道人意中事，无毫发爽",
+            "type": "text"
+          },
+          {
+            "label": "[33]",
+            "noteId": "footnote-11198-33",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。成妻纳钱案上，焚拜如前人。食顷",
+            "type": "text"
+          },
+          {
+            "label": "[34]",
+            "noteId": "footnote-11198-34",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，帘动，片纸抛落。拾视之，非字而画：中绘殿阁，类兰若",
+            "type": "text"
+          },
+          {
+            "label": "[35]",
+            "noteId": "footnote-11198-35",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。后小山下，怪石乱卧，针针丛棘，青麻头",
+            "type": "text"
+          },
+          {
+            "label": "[36]",
+            "noteId": "footnote-11198-36",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "伏焉。旁一蟆，若将跳舞。展玩不可晓。然睹促织，隐中胸怀。折藏之，归以示成。\n\n成反复自念，得无",
+            "type": "text"
+          },
+          {
+            "label": "[37]",
+            "noteId": "footnote-11198-37",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "教我猎虫所耶？细瞻景状，与村东大佛阁真逼似",
+            "type": "text"
+          },
+          {
+            "label": "[38]",
+            "noteId": "footnote-11198-38",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。乃强起扶杖，执图诣寺后，有古陵蔚起。循陵而走，见蹲石鳞鳞",
+            "type": "text"
+          },
+          {
+            "label": "[39]",
+            "noteId": "footnote-11198-39",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，俨然类画。遂于蒿莱中侧听徐行，似寻针芥。而心目耳力俱穷，绝无踪响。冥搜",
+            "type": "text"
+          },
+          {
+            "label": "[40]",
+            "noteId": "footnote-11198-40",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "未已，一癞头蟆猝然跃去。成益愕，急逐趁",
+            "type": "text"
+          },
+          {
+            "label": "[41]",
+            "noteId": "footnote-11198-41",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "之，蟆入草间。蹑迹披求",
+            "type": "text"
+          },
+          {
+            "label": "[42]",
+            "noteId": "footnote-11198-42",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，见有虫伏棘根。遽扑之，入石穴中。掭",
+            "type": "text"
+          },
+          {
+            "label": "[43]",
+            "noteId": "footnote-11198-43",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "以尖草，不出；以筒水灌之，始出，状极俊健。逐而得之。审视，巨身修尾，青项金翅。大喜，笼归，举家庆贺，虽连城拱璧不啻也",
+            "type": "text"
+          },
+          {
+            "label": "[44]",
+            "noteId": "footnote-11198-44",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。上于盆而养之，蟹白栗黄",
+            "type": "text"
+          },
+          {
+            "label": "[45]",
+            "noteId": "footnote-11198-45",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，备极护爱，留待限期，以塞",
+            "type": "text"
+          },
+          {
+            "label": "[46]",
+            "noteId": "footnote-11198-46",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "官责。\n\n成有子九岁，窥父不在，窃发",
+            "type": "text"
+          },
+          {
+            "label": "[47]",
+            "noteId": "footnote-11198-47",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "盆。虫跃掷径出，迅不可捉。及扑入手，已股落腹裂，斯须",
+            "type": "text"
+          },
+          {
+            "label": "[48]",
+            "noteId": "footnote-11198-48",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "就毙。儿惧，啼告母。母闻之，面色灰死，大骂曰：“业根",
+            "type": "text"
+          },
+          {
+            "label": "[49]",
+            "noteId": "footnote-11198-49",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，死期至矣！而翁",
+            "type": "text"
+          },
+          {
+            "label": "[50]",
+            "noteId": "footnote-11198-50",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "归，自与汝覆算",
+            "type": "text"
+          },
+          {
+            "label": "[51]",
+            "noteId": "footnote-11198-51",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "耳！”儿涕而出。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1748:p6",
+      "text": "未几，成归，闻妻言，如被冰雪。怒索儿，儿渺然不知所往。既得其尸于井，因而化怒为悲，抢呼欲绝。夫妻向隅，茅舍无烟，相对默然，不复聊赖。日将暮，取儿藁葬。近抚之，气息惙然。喜置榻上，半夜复苏。夫妻心稍慰，但蟋蟀笼虚，顾之则气断声吞，亦不敢复究儿。自昏达曙，目不交睫。东曦既驾，僵卧长愁。忽闻门外虫鸣，惊起觇视，虫宛然尚在。喜而捕之，一鸣辄跃去，行且速。覆之以掌，虚若无物；手裁举，则又超忽而跃。急趁之，折过墙隅，迷其所往。徘徊四顾，见虫伏壁上。审谛之，短小，黑赤色，顿非前物。成以其小，劣之。惟彷徨瞻顾，寻所逐者。壁上小虫忽跃落衿袖间。视之，形若土狗，梅花翅，方首，长胫，意似良。喜而收之。将献公堂，惴惴恐不当意，思试之斗以觇之。\n\n村中少年好事者驯养一虫，自名“蟹壳青”，日与子弟角，无不胜。欲居之以为利，而高其直，亦无售者。径造庐访成，视成所蓄，掩口胡卢而笑。因出己虫，纳比笼中。成视之，庞然修伟，自增惭怍，不敢与较。少年固强之。顾念蓄劣物终无所用，不如拼博一笑，因合纳斗盆。小虫伏不动，蠢若木鸡。少年又大笑。试以猪鬣毛撩拨虫须，仍不动。少年又笑。屡撩之，虫暴怒，直奔，遂相腾击，振奋作声。俄见小虫跃起，张尾伸须，直龁敌领。少年大骇，解令休止。虫翘然矜鸣，似报主知。成大喜。方共瞻玩，一鸡瞥来，径进以啄。成骇立愕呼。幸啄不中，虫跃去尺有咫。鸡健进，逐逼之，虫已在爪下矣。成仓猝莫知所救，顿足失色。旋见鸡伸颈摆扑，临视，则虫集冠上，力叮不释。成益惊喜，掇置笼中。\n\n翼日进宰，宰见其小，怒诃成。成述其异，宰不信。试与他虫斗，虫尽靡。又试之鸡，果如成言。乃赏成，献诸抚军。抚军大悦，以金笼进上，细疏其能。既入宫中，举天下所贡蝴蝶、螳螂、油利挞、青丝额一切异状遍试之，无出其右者。每闻琴瑟之声，则应节而舞。益奇之。上大嘉悦，诏赐抚臣名马衣缎。抚军不忘所自，无何，宰以卓异闻，宰悦，免成役。又嘱学使俾入邑庠。后岁余，成子精神复旧，自言身化促织，轻捷善斗，今始苏耳。抚军亦厚赉成。不数岁，田百顷，楼阁万椽，牛羊蹄躈各千计；一出门，裘马过世家焉。\n\n异史氏曰：“天子偶用一物，未必不过此已忘；而奉行者即为定例。加以官贪吏虐，民日贴妇卖儿，更无休止。故天子一跬步，皆关民命，不可忽也。独是成氏子以蠹贫，以促织富，裘马扬扬。当其为里正、受扑责时，岂意其至此哉？天将以酬长厚者，遂使抚臣、令尹，并受促织恩荫。闻之：一人飞升，仙及鸡犬。信夫！”",
+      "block": {
+        "runs": [
+          {
+            "text": "未几，成归，闻妻言，如被",
+            "type": "text"
+          },
+          {
+            "label": "[52]",
+            "noteId": "footnote-11198-52",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "冰雪。怒索儿，儿渺然不知所往。既得其尸于井，因而化怒为悲，抢呼欲绝",
+            "type": "text"
+          },
+          {
+            "label": "[53]",
+            "noteId": "footnote-11198-53",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。夫妻向隅",
+            "type": "text"
+          },
+          {
+            "label": "[54]",
+            "noteId": "footnote-11198-54",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，茅舍无烟，相对默然，不复聊赖",
+            "type": "text"
+          },
+          {
+            "label": "[55]",
+            "noteId": "footnote-11198-55",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。日将暮，取儿藁葬",
+            "type": "text"
+          },
+          {
+            "label": "[56]",
+            "noteId": "footnote-11198-56",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。近抚之，气息惙然",
+            "type": "text"
+          },
+          {
+            "label": "[57]",
+            "noteId": "footnote-11198-57",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。喜置榻上，半夜复苏。夫妻心稍慰，但蟋蟀笼虚，顾之则气断声吞",
+            "type": "text"
+          },
+          {
+            "label": "[58]",
+            "noteId": "footnote-11198-58",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，亦不敢复究儿。自昏达曙，目不交睫",
+            "type": "text"
+          },
+          {
+            "label": "[59]",
+            "noteId": "footnote-11198-59",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。东曦既驾",
+            "type": "text"
+          },
+          {
+            "label": "[60]",
+            "noteId": "footnote-11198-60",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，僵卧长愁。忽闻门外虫鸣，惊起觇视",
+            "type": "text"
+          },
+          {
+            "label": "[61]",
+            "noteId": "footnote-11198-61",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，虫宛然尚在。喜而捕之，一鸣辄跃去，行且速。覆之以掌，虚若无物；手裁",
+            "type": "text"
+          },
+          {
+            "label": "[62]",
+            "noteId": "footnote-11198-62",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "举，则又超忽",
+            "type": "text"
+          },
+          {
+            "label": "[63]",
+            "noteId": "footnote-11198-63",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "而跃。急趁之，折过墙隅，迷其所往。徘徊四顾，见虫伏壁上。审谛之",
+            "type": "text"
+          },
+          {
+            "label": "[64]",
+            "noteId": "footnote-11198-64",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，短小，黑赤色，顿非前物。成以其小，劣之。惟彷徨瞻顾，寻所逐者。壁上小虫忽跃落衿袖间。视之，形若土狗",
+            "type": "text"
+          },
+          {
+            "label": "[65]",
+            "noteId": "footnote-11198-65",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，梅花翅，方首，长胫",
+            "type": "text"
+          },
+          {
+            "label": "[66]",
+            "noteId": "footnote-11198-66",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，意似良。喜而收之。将献公堂，惴惴恐不当意，思试之斗以觇之。\n\n村中少年好事者驯养一虫，自名“蟹壳青”，日与子弟角",
+            "type": "text"
+          },
+          {
+            "label": "[67]",
+            "noteId": "footnote-11198-67",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，无不胜。欲居之以为利，而高其直，亦无售者",
+            "type": "text"
+          },
+          {
+            "label": "[68]",
+            "noteId": "footnote-11198-68",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。径造庐",
+            "type": "text"
+          },
+          {
+            "label": "[69]",
+            "noteId": "footnote-11198-69",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "访成，视成所蓄，掩口胡卢",
+            "type": "text"
+          },
+          {
+            "label": "[70]",
+            "noteId": "footnote-11198-70",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "而笑。因出己虫，纳比笼",
+            "type": "text"
+          },
+          {
+            "label": "[71]",
+            "noteId": "footnote-11198-71",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "中。成视之，庞然修伟，自增惭怍，不敢与较。少年固强之",
+            "type": "text"
+          },
+          {
+            "label": "[72]",
+            "noteId": "footnote-11198-72",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。顾",
+            "type": "text"
+          },
+          {
+            "label": "[73]",
+            "noteId": "footnote-11198-73",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "念蓄劣物终无所用，不如拼博一笑，因合纳斗盆。小虫伏不动，蠢若木鸡",
+            "type": "text"
+          },
+          {
+            "label": "[74]",
+            "noteId": "footnote-11198-74",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。少年又大笑。试以猪鬣毛",
+            "type": "text"
+          },
+          {
+            "label": "[75]",
+            "noteId": "footnote-11198-75",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "撩拨虫须，仍不动。少年又笑。屡撩之，虫暴怒，直奔，遂相腾击",
+            "type": "text"
+          },
+          {
+            "label": "[76]",
+            "noteId": "footnote-11198-76",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，振奋作声。俄见小虫跃起，张尾伸须，直龁敌领",
+            "type": "text"
+          },
+          {
+            "label": "[77]",
+            "noteId": "footnote-11198-77",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。少年大骇，解令休止。虫翘然矜鸣",
+            "type": "text"
+          },
+          {
+            "label": "[78]",
+            "noteId": "footnote-11198-78",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，似报主知。成大喜。方共瞻玩，一鸡瞥来",
+            "type": "text"
+          },
+          {
+            "label": "[79]",
+            "noteId": "footnote-11198-79",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，径进以啄。成骇立愕呼。幸啄不中，虫跃去尺有咫",
+            "type": "text"
+          },
+          {
+            "label": "[80]",
+            "noteId": "footnote-11198-80",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。鸡健进，逐逼之，虫已在爪下矣。成仓猝莫知所救，顿足失色。旋见鸡伸颈摆扑，临视，则虫集冠上",
+            "type": "text"
+          },
+          {
+            "label": "[81]",
+            "noteId": "footnote-11198-81",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，力叮不释。成益惊喜，掇置笼中。\n\n翼日",
+            "type": "text"
+          },
+          {
+            "label": "[82]",
+            "noteId": "footnote-11198-82",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "进宰，宰见其小，怒诃成。成述其异，宰不信。试与他虫斗，虫尽靡。又试之鸡，果如成言。乃赏成，献诸抚军",
+            "type": "text"
+          },
+          {
+            "label": "[83]",
+            "noteId": "footnote-11198-83",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。抚军大悦，以金笼进上，细疏",
+            "type": "text"
+          },
+          {
+            "label": "[84]",
+            "noteId": "footnote-11198-84",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "其能。既入宫中，举天下所贡蝴蝶、螳螂、油利挞、青丝额一切异状遍试之，无出其右者。每闻琴瑟之声，则应节而舞。益奇之。上大嘉悦，诏赐抚臣名马衣缎。抚军不忘所自",
+            "type": "text"
+          },
+          {
+            "label": "[85]",
+            "noteId": "footnote-11198-85",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，无何，宰以卓异",
+            "type": "text"
+          },
+          {
+            "label": "[86]",
+            "noteId": "footnote-11198-86",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "闻",
+            "type": "text"
+          },
+          {
+            "label": "[87]",
+            "noteId": "footnote-11198-87",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，宰悦，免成役。又嘱学使",
+            "type": "text"
+          },
+          {
+            "label": "[88]",
+            "noteId": "footnote-11198-88",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "俾入邑庠",
+            "type": "text"
+          },
+          {
+            "label": "[89]",
+            "noteId": "footnote-11198-89",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。后岁余，成子精神复旧，自言身化促织，轻捷善斗，今始苏耳。抚军亦厚赉",
+            "type": "text"
+          },
+          {
+            "label": "[90]",
+            "noteId": "footnote-11198-90",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "成。不数岁，田百顷",
+            "type": "text"
+          },
+          {
+            "label": "[91]",
+            "noteId": "footnote-11198-91",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，楼阁万椽，牛羊蹄躈",
+            "type": "text"
+          },
+          {
+            "label": "[92]",
+            "noteId": "footnote-11198-92",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "各千计；一出门，裘马过世家",
+            "type": "text"
+          },
+          {
+            "label": "[93]",
+            "noteId": "footnote-11198-93",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "焉。\n\n异史氏",
+            "type": "text"
+          },
+          {
+            "label": "[94]",
+            "noteId": "footnote-11198-94",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "曰：“天子偶用一物，未必不过此已忘；而奉行者即为定例。加以官贪吏虐，民日贴妇",
+            "type": "text"
+          },
+          {
+            "label": "[95]",
+            "noteId": "footnote-11198-95",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "卖儿，更无休止。故天子一跬步，皆关民命，不可忽也。独是",
+            "type": "text"
+          },
+          {
+            "label": "[96]",
+            "noteId": "footnote-11198-96",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "成氏子以蠹贫",
+            "type": "text"
+          },
+          {
+            "label": "[97]",
+            "noteId": "footnote-11198-97",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，以促织富，裘马扬扬",
+            "type": "text"
+          },
+          {
+            "label": "[98]",
+            "noteId": "footnote-11198-98",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。当其为里正、受扑责",
+            "type": "text"
+          },
+          {
+            "label": "[99]",
+            "noteId": "footnote-11198-99",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "时，岂意其至此哉？天将以酬长厚者，遂使抚臣、令尹",
+            "type": "text"
+          },
+          {
+            "label": "[100]",
+            "noteId": "footnote-11198-100",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，并受促织恩荫",
+            "type": "text"
+          },
+          {
+            "label": "[101]",
+            "noteId": "footnote-11198-101",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。闻之：一人飞升，仙及鸡犬",
+            "type": "text"
+          },
+          {
+            "label": "[102]",
+            "noteId": "footnote-11198-102",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。信夫！”",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《聊斋志异会校会注会评本》卷四（上海古籍出版社1986年版）。促织，蟋蟀的别名。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "宣德：明宣宗朱瞻基年号（1426—1435）。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "尚：崇尚，喜好。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-3"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "促织之戏：斗蟋蟀的游戏。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-4"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "征：征收。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-5"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "西：这里指陕西。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-6"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "华阴令：华阴县县令。华阴县，明代属西安府，治所在今陕西华阴。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-7"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "进：进奉。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-8"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "才：有才能。这里指勇猛善斗。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-9"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "责：责令。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-10"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "里正：里长。里，古代基层行政组织。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-11"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "游侠儿：这里指游手好闲、不务正业的年轻人。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-12"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "昂其直：抬高它的价钱。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-13"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "居为奇货：储存起来，当作稀奇的货物（等待高价）。居，囤积、储存。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-14"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "里胥：管理乡里事务的小吏。胥，官府的小吏。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-15"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "假此科敛丁口：借此向百姓摊派（进贡蟋蟀的）有关费用。假，凭借、利用。科敛，摊派、征收。丁口，即人口。明清时期年满十六周岁男子称丁，女子及未满十六岁男子称口。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-16"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "操童子业：意思是，正在读书，准备考秀才。操，从事。童子，童生。科举时代，还没考取秀才的读书人，不论年纪大小，都称为“童生”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-17"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "售：卖出。这里指考取秀才。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-18"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "迂讷（nè）：迂拙而又不善于言辞。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-19"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "薄产累尽：微薄的家产受牵累而耗尽。累，牵累，这里指受牵累。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-20"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "败堵：残破的墙垣。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-21"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "靡计不施，迄无济：什么办法都用上了，最终也没有成功。靡，无。迄，最终。济，成功。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-22"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "款：规格。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-23"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "宰严限追比：县令严定期限，按期查验追逼。追比，旧时地方官限期交税、交差等，过期以杖责、监禁等方式继续追逼。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-24"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "流离：形容液体湿淋淋地往下滴的样子。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-25"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "行：做，从事。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-26"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "能以神卜：能够凭借神力占卜。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-27"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "具资诣问：准备好钱财前去询问。具，准备。诣，到、前往。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-28"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "爇（ruò）香：点燃香。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-29"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "祝：祷告。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-30"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "翕（xī）辟：开合。翕，合。辟，开。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-31"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "竦（sǒng）立：恭敬地站着。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-32"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "无毫发爽：没有丝毫差失。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-33"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "食顷：一顿饭的工夫，形容时间很短。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-34"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "兰若（rě）：寺庙，梵语“阿兰若”的省称。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-35"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "青麻头：蟋蟀品名。下文的“蝴蝶”“螳螂”“油利挞”“青丝额”，也都是上品蟋蟀的名称。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-36"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "得无：莫非。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-37"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "逼似：非常相似。逼，非常。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-38"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "蹲石鳞鳞：蹲踞着的一块块石头像鱼鳞般排列。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-39"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "冥搜：尽力搜索。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-40"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "趁：追逐。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-41"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "蹑迹披求：跟随（蛤蟆的）踪迹，拨开（丛草）寻求。蹑，追随。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-42"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "掭（tiàn）：轻轻拨动。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-43"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "虽连城拱璧不啻（chì）也：即使价值连城的宝玉也比不上它。拱璧，大璧，指极为珍贵的东西。不啻，比不上。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-44"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "蟹白栗黄：蟹肉和栗实，指蟋蟀吃的精饲料。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-45"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "塞：充抵。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-46"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "发：打开。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-47"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "斯须：一会儿。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-48"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "业根：祸种，惹祸的东西。业，恶业，造成恶果的言语行为等。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-49"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "而翁：你父亲。而，你。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-50"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "覆算：追究。覆，审核。算，算账。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-51"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "被：覆盖。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-52"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "抢（qiāng）呼欲绝：头撞地，口呼天，几乎要绝命，形容十分悲痛。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-53"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "向隅：面对着墙角（哭泣）。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-54"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "不复聊赖：不再有所指望。意思是因绝望而精神郁闷。聊赖，依赖、指望。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-55"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "藁（gǎo）葬：用草席裹着尸体埋葬。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-56"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "惙（chuò）然：气息微弱的样子。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-57"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "气断声吞：出不来气，说不出话，形容极度悲伤。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-58"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "交睫：上下睫毛相交，指睡觉。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-59"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "东曦既驾：太阳已经升起。东曦，指初升的太阳。既驾，已经乘车出来。古代传说，太阳乘着六龙拉的车。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-60"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "觇（chān）视：窥视，探看。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-61"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "裁：同“才”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-62"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "超忽：形容跳得轻快而高。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-63"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "审谛之：仔细地看它。谛，细察。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-64"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "土狗：蝼蛄的别名。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-65"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "胫：腿。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-66"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "日与子弟角（jué）：天天和其他年轻人斗蟋蟀。子弟，年轻人。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-67"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "售者：这里指买主。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-68"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "造庐：到家。造，到。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-69"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "胡卢：从喉咙发出的笑声，这里有轻蔑的意味。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-70"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "比笼：用以盛放准备打斗的蟋蟀的容器。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-71"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "固强之：意思是，坚持要较量较量。固，坚持、一定。强，强迫、迫使。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-72"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "顾：但。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-73"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "蠢若木鸡：形容神貌呆笨。《庄子·达生》说，养斗鸡的，要把斗鸡训练得镇静沉着，仿佛是木头雕的，才能够不动声色，战胜别的斗鸡。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-74"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "猪鬣（liè）毛：猪颈项上稍长的毛，质硬而粗。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-75"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "腾击：跳起来攻击。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-76"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "直龁（hé）敌领：直接咬住敌方的脖子。龁，咬。领，脖子。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-77"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "翘然矜鸣：鼓起翅膀得意地叫。翘，举。矜，得意、骄傲。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-78"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "瞥来：突然而来。瞥，突然、倏然。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-79"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "尺有咫（zhǐ）：一尺多。咫，八寸。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-80"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "虫集冠上：蟋蟀停落在鸡冠上。集，止。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-81"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "翼日：次日。翼，同“翌”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-82"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "抚军：即巡抚，总管一省民政和军政的高级官员。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-83"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "细疏：在公文上详细地分条陈述。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-84"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "所自：由来，来源。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-85"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "卓异：（才能）优异。这是考核官吏政绩的评语。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-86"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "闻：上报。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-87"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "学使：即提学，负责一省学校事务，主持岁考、科考两试的官员。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-88"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "俾入邑庠：使（他）进入县学，即取中秀才。俾，使。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-89"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "赉（lài）：赠送，赏赐。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-90"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "百顷：和下文的“万椽”“各千计”等，都极言其多。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-91"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "蹄躈（qiào）：也作“蹄噭”，蹄为脚，躈为肛门，噭为口，计算牲畜数量时，以四蹄加一窍（肛门或口）为五，算一头牲畜。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-92"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "裘马过世家：穿的皮衣和驾车的马都超过世代做官的人家。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-93"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "异史氏：作者自称。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-94"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "贴妇：以妻子作为抵押品去借钱。贴，抵押。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-95"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "独是：唯独这个。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-96"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "以蠹（dù）贫：因胥吏侵害而贫穷。蠹，蛀虫，这里比喻胥吏。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-97"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "扬扬：得意的样子。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-98"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "扑责：杖击的责罚。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-99"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "令尹：县令、府尹。这里是沿用古称。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-100"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "恩荫：恩惠荫庇。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-101"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "一人飞升，仙及鸡犬：晋葛洪《神仙传》记载：西汉淮南王刘安修炼成仙，飞升天上。他剩下的仙药让鸡犬啄舐了，于是鸡犬也成了仙。比喻一个人发迹了，同他有关系的人都跟着得势。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11198-102"
+    }
+  ],
+  "resources": [],
+  "source": "https://forum.rdfzer.com/t/topic/1748",
+  "objectives": [
+    {
+      "id": "lesson-1748:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1748:p1",
+        "lesson-1748:p2",
+        "lesson-1748:p3",
+        "lesson-1748:p4",
+        "lesson-1748:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1748:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1748:p1",
+        "lesson-1748:p2",
+        "lesson-1748:p3",
+        "lesson-1748:p4",
+        "lesson-1748:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1748:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1748:p1",
+        "lesson-1748:p2",
+        "lesson-1748:p3",
+        "lesson-1748:p4",
+        "lesson-1748:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1748:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1748:p1",
+        "lesson-1748:p2",
+        "lesson-1748:p3",
+        "lesson-1748:p4",
+        "lesson-1748:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1748:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1748:p1",
+        "lesson-1748:p2",
+        "lesson-1748:p3",
+        "lesson-1748:p4",
+        "lesson-1748:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1748:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1748:p1",
+        "lesson-1748:p2",
+        "lesson-1748:p3",
+        "lesson-1748:p4",
+        "lesson-1748:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1748:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1748:p1",
+        "lesson-1748:p2",
+        "lesson-1748:p3",
+        "lesson-1748:p4",
+        "lesson-1748:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1748:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1748:p1",
+        "lesson-1748:p2",
+        "lesson-1748:p3",
+        "lesson-1748:p4",
+        "lesson-1748:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "legacy:effect:lesson-1748:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1748:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1748:interaction:contextWords",
+        "resourceVersion": "sha256:0c5b7736e9c45aa05b7f13d5bba942dfe2b64c6db2dfed4f62509d929b67bbfe",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1748:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1748:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1748:interaction:revision",
+        "resourceVersion": "sha256:9820c869eb8cf980da08c94185f8262bf40b4693dace9f61d4a7d0044e0170f4",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1748:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1748:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1748:interaction:structure",
+        "resourceVersion": "sha256:5787fa80ca694c291c900d15c96c8a651465a2f52a1e4c2dc9e5b08eeb638934",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1748:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1748:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1748:interaction:evaluation",
+        "resourceVersion": "sha256:f6bfb7262db0cd10b29aa154259520318ba7ea4bf593512a9dddc9e1c98c3e82",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1748:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1748:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1748:interaction:authorQuestion",
+        "resourceVersion": "sha256:cc450c323d6a203a6aebcd3d178d4f655cb150ad85aea325f70e33f3cae52f7c",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    }
+  ],
+  "vocabulary": [],
+  "legacy": {
+    "lessonId": "lesson-1748",
+    "title": "14 促织 蒲松龄",
+    "mode": "fiction",
+    "legacyTracks": [
+      "context",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "初讀評議",
+        "",
+        10
+      ],
+      [
+        "read",
+        "通讀正文",
+        "",
+        10
+      ],
+      [
+        "revision",
+        "字句之改",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "敘事機關",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "篇目評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "叩問作者",
+        "",
+        10
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1748:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1748:interaction:contextWords",
+        "resourceVersion": "sha256:0c5b7736e9c45aa05b7f13d5bba942dfe2b64c6db2dfed4f62509d929b67bbfe",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1748:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1748:interaction:revision",
+        "resourceVersion": "sha256:9820c869eb8cf980da08c94185f8262bf40b4693dace9f61d4a7d0044e0170f4",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1748:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1748:interaction:structure",
+        "resourceVersion": "sha256:5787fa80ca694c291c900d15c96c8a651465a2f52a1e4c2dc9e5b08eeb638934",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1748:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1748:interaction:evaluation",
+        "resourceVersion": "sha256:f6bfb7262db0cd10b29aa154259520318ba7ea4bf593512a9dddc9e1c98c3e82",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1748:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1748:interaction:authorQuestion",
+        "resourceVersion": "sha256:cc450c323d6a203a6aebcd3d178d4f655cb150ad85aea325f70e33f3cae52f7c",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1748",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1748:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1748:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1748:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1748",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1748:interaction:contextWords",
+        "completionKey": "effect:lesson-1748:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1748:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1748",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1748:interaction:structure",
+        "completionKey": "effect:lesson-1748:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1748:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1748",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1748:interaction:revision",
+        "completionKey": "effect:lesson-1748:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1748:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1748:interaction:contextWords",
+        "sourceVersion": "sha256:0c5b7736e9c45aa05b7f13d5bba942dfe2b64c6db2dfed4f62509d929b67bbfe",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1748:interaction:revision",
+        "sourceVersion": "sha256:9820c869eb8cf980da08c94185f8262bf40b4693dace9f61d4a7d0044e0170f4",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1748:interaction:structure",
+        "sourceVersion": "sha256:5787fa80ca694c291c900d15c96c8a651465a2f52a1e4c2dc9e5b08eeb638934",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1748:interaction:evaluation",
+        "sourceVersion": "sha256:f6bfb7262db0cd10b29aa154259520318ba7ea4bf593512a9dddc9e1c98c3e82",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1748:interaction:authorQuestion",
+        "sourceVersion": "sha256:cc450c323d6a203a6aebcd3d178d4f655cb150ad85aea325f70e33f3cae52f7c",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1748:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1748:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1748:interaction:contextWords",
+        "completionKey": "effect:lesson-1748:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1748:interaction:structure",
+        "completionKey": "effect:lesson-1748:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1748:interaction:revision",
+        "completionKey": "effect:lesson-1748:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [],
+    "sourceLesson": "data/lessons/lesson-1748.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 5,
+        "formativeCount": 4,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-fd2f704d60b3e9925b18",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [
+    {
+      "id": "lesson-1748:p5",
+      "text": "刘旦宅 作",
+      "block": {
+        "runs": [
+          {
+            "text": "刘旦宅 作",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "blockIndex": 4,
+      "blockSha256": "f5800ad22590b9c2858ec89637709ffcac8332d2910318d0ef13a964a5c5ad64",
+      "role": "image-caption",
+      "label": "原課插圖說明",
+      "source": "data/reader-documents/lesson-1748.json#main.blocks[4]",
+      "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+    }
+  ],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [],
+  "guidance": [],
+  "media": [
+    {
+      "alt": "",
+      "bytes": 116632,
+      "finalUrl": "https://files.rdfzer.com/original/2X/e/efd78108a51278bf9be67041cfda0324da311512.jpeg",
+      "height": 955,
+      "id": "media-ab0f92374c3a3fdbebc0",
+      "mediaType": "image/jpeg",
+      "nativeDisposition": "verified-in-app",
+      "receiptCollectedAt": "2026-07-30T01:10:43.464Z",
+      "receiptRequired": true,
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29",
+      "sha256": "7343ade75b7c968871a74e5bda56ef9d460fc5315d69accb2f79f66046789098",
+      "sourceUrl": "https://files.rdfzer.com/original/2X/e/efd78108a51278bf9be67041cfda0324da311512.jpeg",
+      "webDisposition": "source-url",
+      "width": 722
+    }
+  ],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1748.json",
+    "lessonSha256": "bc35bc856aae61e5fce2d722d1e00af7eced9a1e498d1cf0c19f6a18b2b097c7",
+    "reader": "data/reader-documents/lesson-1748.json",
+    "readerSha256": "ee20a0c7dd9464098e5c4171ba4c27e2c06cf6750d6da0597e62af6cf4c98313",
+    "sourcePostId": 11198,
+    "sourcePostNumber": 1,
+    "blockCount": 6,
+    "annotationCount": 102,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 5,
+      "formativeCount": 4,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

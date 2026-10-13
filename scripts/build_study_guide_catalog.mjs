@@ -287,7 +287,7 @@ export function buildLessonCompetencyManifest(catalog = buildStudyGuideCatalog()
       resourceKey: item.resourceKey,
       sourceKind: "formal_learning_manifest",
       answerAuthority: item.questionKind === "vocabulary" ? "source_answer" : "source_assessment",
-      scoringRole: "a_plus_gate",
+      scoringRole: item.evidenceRole,
       active: true,
     });
   }

@@ -2,76 +2,57 @@
 // 自起 wrangler pages dev（本地 D1 模擬）＋ 每輪唯一合成學生 → 斷言確定性。
 // 用法：node scripts/test_reading_api.mjs   （約 40–60 秒；退出碼非 0 即失敗）
 import { spawn, spawnSync } from "node:child_process";
-import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { bundleWorkerd } from "./workerd-test-bundle.mjs";
 
 const PORT = 8801;
 const SLUG = `test-${Date.now().toString(36)}`;
 const BASE = `http://127.0.0.1:${PORT}`;
 const ROOT = new URL("..", import.meta.url).pathname;
+// Resolve the actual entry's complete JS/JSON graph before materializing a
+// fixture. A hand-maintained module list silently falls behind new imports.
+const workerBundle = await bundleWorkerd(path.join(ROOT, "site/_worker.js"));
 const SERVER_ROOT = mkdtempSync(path.join(os.tmpdir(), "yuwen-reading-api-"));
 const STATE_ROOT = path.join(SERVER_ROOT, ".wrangler-state");
-for (const file of [
-  "_worker.js",
-  "dialogue-source.js",
-  "dialogue-calibration.js",
-  "dialogue-calibration-contract.js",
-  "dialogue-calibration-packet.json",
-  "dialogue-acceptance.js",
-  "dialogue-formal.js",
-  "dialogue-conclusion.js",
-  "dialogue-legacy.js",
-  "dialogue-corrections.js",
-  "dialogue-history.js",
-  "assets/yw-shared-state.js",
-  "dialogue-policy.js",
-  "dialogue-stream.js",
-  "dialogue-budget.js",
-  "lesson-blueprint-rules.js",
-  "learning-evidence-source.js",
-  "classical-first-read-source.js",
-  "preview-network-policy.js",
-  "preview-transfer.js",
-  "preview-telemetry.js",
-  "preview-log-contract.js",
-  "reading-identity-source.js",
-  "study-guide-assessment.js",
-  "evaluator-recovery.js",
-  "durable-evaluation-jobs.js",
-  "learning-evaluation-events.js",
-  "learning-recorder-source.js",
-  "evaluation-machine.js",
-  "data/interaction-definitions.json",
-  "data/learning-manifest.json",
-  "data/lesson-competency-manifest.json",
-  "data/study-guide-catalog.json",
-  "data/preview-targets.json",
-  "data/manifest.json",
-  "data/literary-taxonomy.json",
-  "data/lessons/lesson-1468.json",
-  "data/lessons/lesson-1484.json",
-  "data/classical-first-read/lesson-1484.json",
-  "data/vocab/index.json",
-  "data/vocab/lesson-1468.json",
-  "data/vocab/lesson-1484.json",
-]) {
-  const destination = path.join(SERVER_ROOT, file);
-  mkdirSync(path.dirname(destination), { recursive: true });
-  copyFileSync(new URL(`../site/${file}`, import.meta.url), destination);
+try {
+  writeFileSync(path.join(SERVER_ROOT, "_worker.js"), workerBundle.script);
+  for (const file of [
+    "assets/yw-shared-state.js",
+    "data/interaction-definitions.json",
+    "data/learning-manifest.json",
+    "data/lesson-competency-manifest.json",
+    "data/study-guide-catalog.json",
+    "data/preview-targets.json",
+    "data/manifest.json",
+    "data/literary-taxonomy.json",
+    "data/lessons/lesson-1468.json",
+    "data/lessons/lesson-1484.json",
+    "data/classical-first-read/lesson-1484.json",
+    "data/vocab/index.json",
+    "data/vocab/lesson-1468.json",
+    "data/vocab/lesson-1484.json",
+  ]) {
+    const destination = path.join(SERVER_ROOT, file);
+    mkdirSync(path.dirname(destination), { recursive: true });
+    copyFileSync(new URL(`../site/${file}`, import.meta.url), destination);
+  }
+  const migration = spawnSync("./node_modules/.bin/wrangler", [
+    "d1", "migrations", "apply", "READING_DB", "--local", "--persist-to", STATE_ROOT,
+  ], { cwd: ROOT, encoding: "utf8", input: "y\n" });
+  if (migration.status !== 0) {
+    throw new Error(`local D1 migration failed\n${migration.stdout || ""}\n${migration.stderr || ""}`);
+  }
+} catch (error) {
+  rmSync(SERVER_ROOT, { recursive: true, force: true });
+  throw error;
 }
 const firstReadAsset = JSON.parse(readFileSync(new URL("../site/data/classical-first-read/lesson-1484.json", import.meta.url), "utf8"));
 const studyGuideCatalog = JSON.parse(readFileSync(new URL("../site/data/study-guide-catalog.json", import.meta.url), "utf8"));
 const studyGuideItem = studyGuideCatalog.lessons
   .find((lesson) => lesson.lessonId === "lesson-1484")?.items
   .find((item) => item.activeForSelfTest && item.detailTag === "cultural_knowledge");
-
-const migration = spawnSync("./node_modules/.bin/wrangler", [
-  "d1", "migrations", "apply", "READING_DB", "--local", "--persist-to", STATE_ROOT,
-], { cwd: ROOT, encoding: "utf8", input: "y\n" });
-if (migration.status !== 0) {
-  throw new Error(`local D1 migration failed\n${migration.stdout || ""}\n${migration.stderr || ""}`);
-}
 let passed = 0;
 const failures = [];
 let apiMutationSequence = 0;
