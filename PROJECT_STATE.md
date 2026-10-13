@@ -1,4 +1,8 @@
-## Current local reading candidate — 2026-10-13T14:56:38.600580+00:00
+## Current local recovery candidate — 2026-10-13T15:24:43.421933+00:00
+
+Serial owner codex-01a135d5. Offline drafts remain editable; reconnect reads saved state once without resubmission. Expired-account response restores the login entry and keeps Send disabled. Node22 focused frontend/cache50/50 and real synthetic-browser offline/reconnect pass; real-account, model, central/My, native and production gates remain open. Reading/media behavior from the preceding candidate is preserved. Exact evidence and limitations: [OFFLINE-RECOVERY-01a135d5.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/OFFLINE-RECOVERY-01a135d5.md). No paid call, push or deploy; all189 goal and14T12:00Z expiry unchanged.
+
+## Historical local reading candidate — 2026-10-13T14:56:38.600580+00:00
 
 Serial owner codex-01a1359c. Policy v10 / opening v3; all189 goal remains active. Current review evidence: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/LOCAL-READING-REVIEW.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/LOCAL-READING-REVIEW.md). Textbook reader supports every registered lesson page, horizontal navigation, bottom controls and click-to-full-viewport/click-to-restore with Escape. Exported rich source retains paragraphs, line breaks, lists, tables and safe links. Explicit source footnotes now follow their references as collapsed inline notes (Hongmenyan89); unmatched notes are preserved. Media has one exclusive category: 圖片影音 holds a continuous lazy-loaded gallery and audio/video; 參考資料 holds non-media destinations. All189 lessons retain661 media objects with0 cross-category duplicates (403 duplicates across113 lessons removed). Overview and fullscreen navigation are preserved. These reading details are acceptance requirements for subsequent changes.
 

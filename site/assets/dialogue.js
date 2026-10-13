@@ -8,6 +8,7 @@ const $=id=>document.getElementById(id);
 // Server permits 360 learner turns with one reply each; history pages contain 30 records.
 const MAX_TRANSCRIPT_RECORDS=720,MAX_HISTORY_PAGES=24;
 let streamAbort=null;
+let reconnectNeeded=false;
 let continuationRequest=null;
 let firstReadView=null;
 let correctionTarget=null,correctionMutation=null,sharedHistory=null,originalDraft=null;
@@ -314,7 +315,7 @@ function renderTurns(turns,prepend=false){
  }
  if(prepend){$('turns').prepend(fragment);$('turn-review-list').prepend(records);}else{$('turns').append(fragment);$('turn-review-list').append(records);}
 }
-function clearPrivateView(){closeExpandedPlate?.();persistComposer();generation++;streamAbort?.abort();streamAbort=null;continuationRequest=null;
+function clearPrivateView(){reconnectNeeded=false;closeExpandedPlate?.();persistComposer();generation++;streamAbort?.abort();streamAbort=null;continuationRequest=null;
  firstReadView?.dispose();firstReadView=null;
  $('correction').close();correctionTarget=null;correctionMutation=null;$('correction-original').textContent='';$('correction-history').replaceChildren();$('correction-note').value='';$('correction-proposed').value='';$('turns').replaceChildren();$('turn-review-list').replaceChildren();$('answer').value='';$('quote').hidden=true;
  selected=null;pending=null;pendingDraft=null;originalDraft=null;composerDraft=null;snapshot=null;readingNotes=null;paintReadingMarks();clearTimeout(pollTimer);
@@ -520,7 +521,25 @@ function update(data){
  renderSourceDraft(data);
  performance.mark('dialogue-records-ready');
 }
-async function refresh(gen=generation){try{const data=await api();if(gen!==generation)return;update(data);return data;}catch(e){if(gen!==generation)return;$('status').textContent=e.status===404?'對話試點尚未開放。原文、注釋與原有課程仍可閱讀。':e.message;$('login').hidden=e.status!==401;if(e.status===401||e.status===404){clearPrivateView();ownerRef=null;}renderAccount();$('login').href='https://my.bdfz.net/?returnTo='+encodeURIComponent(location.href);$('answer').disabled=true;$('send').disabled=true;}}
+async function refresh(gen=generation){
+ try{const data=await api();if(gen!==generation)return;reconnectNeeded=false;update(data);return data;}
+ catch(e){
+  if(gen!==generation)return;
+  const terminal=e.status===401||e.status===404;
+  $('status').textContent=e.status===404?'對話試點尚未開放。原文、注釋與原有課程仍可閱讀。':e.message;$('login').hidden=e.status!==401;
+  if(terminal){clearPrivateView();ownerRef=null;}else reconnectNeeded=true;
+  renderAccount();$('login').href='https://my.bdfz.net/?returnTo='+encodeURIComponent(location.href);
+  $('answer').disabled=true;$('send').disabled=true;
+  // A transport failure does not invalidate the last confirmed account or its draft.
+  if(!terminal&&ownerRef&&snapshot){$('answer').disabled=false;renderLearningTurn(snapshot);}
+ }
+}
+window.addEventListener('online',()=>{
+ if(!reconnectNeeded||!curriculum||document.hidden)return;
+ reconnectNeeded=false;
+ // Reconcile once. Only an explicit learner action may submit or resume a turn.
+ void refresh();
+});
 function waitForReply(gen,deadline=Date.now()+25000){clearTimeout(pollTimer);pollTimer=setTimeout(async()=>{if(gen!==generation||document.hidden)return;const data=await refresh(gen);if(data?.pending && Date.now()<deadline)waitForReply(gen,deadline);else if(data?.pending)$('status').textContent='回答已保存；回應仍在處理。稍後回到此頁讀取，不需重送。';},2000);}
 async function loadLesson(){clearPrivateView();ownerRef=null;const gen=generation;clearTimeout(pollTimer);snapshot=null;pending=null;pendingDraft=null;selected=null;$('turns').replaceChildren();$('quote').hidden=true;$('answer').value='';$('answer').disabled=true;$('send').disabled=true;const id=$('lesson').value;location.hash=id;try{window.localStorage.setItem('yw-dialogue-last-lesson',id);}catch{}try{const r=await fetch(`/dialogue-curriculum/${id}.json`,{cache:'no-cache'});if(!r.ok)throw new Error();const data=await r.json();if(gen!==generation)return;curriculum=data;allNotesExpanded=false;$('notes-toggle').textContent='展開全部註釋';$('notes-toggle').setAttribute('aria-pressed','false');renderCatalog();$('catalog-panel').open=true;if(!catalogInitialized){setCatalogHidden((window.innerWidth||1024)<900);catalogInitialized=true;}void loadOriginalMaterials(data,gen);materialMode=curriculum.mode==='classical'?'unpunctuated':'annotated';renderText();view(conversationFlow?'conversation':'text');void refresh(gen).then(data=>{if(data?.pending)waitForReply(gen);});}catch{$('title').textContent='課文暫時無法載入';$('status').textContent='請稍後再試，或回原有課程閱讀。';}}
 $('compose').onsubmit=async e=>{
@@ -576,9 +595,9 @@ async function sendTurn(submitted,submittedDraft,gen=generation){
   if(error.code==='stale_revision'||error.code==='turn_in_progress'||error.code==='learning_task_changed'||error.status===400){
    pending=null;pendingDraft=null;persistComposer();await refresh(gen);$('status').textContent=error.message;
   }else if(error.draftSaved){$('status').textContent=error.message;}
-  else if(error.code==='account_changed'||error.status===401||error.status===404){clearPrivateView();ownerRef=null;await refresh(gen);}
+  else if(error.code==='account_changed'||error.status===401||error.status===404){clearPrivateView();ownerRef=null;await refresh();}
   else{await refresh(gen);if(gen!==generation)return;$('status').textContent=error.code?error.message:pending?'尚未確認保存；文字保留在本頁。重送會使用同一回執。':'連線中斷，已讀回保存紀錄；AI 不會自動重跑。';if(snapshot?.pending)waitForReply(gen);}
-  $('send').disabled=!!snapshot?.pending||(conversationFlow?['unavailable','exemption'].includes(snapshot?.learningTurn?.kind):snapshot?.learningTurn?.inputKind==='none'||!!(composerDraft&&snapshot?.learningTurn&&composerDraft.taskId!==snapshot.learningTurn.taskId));
+  $('send').disabled=!ownerRef||!snapshot||!!snapshot.pending||(conversationFlow?['unavailable','exemption'].includes(snapshot?.learningTurn?.kind):snapshot?.learningTurn?.inputKind==='none'||!!(composerDraft&&snapshot?.learningTurn&&composerDraft.taskId!==snapshot.learningTurn.taskId));
  }
 }
 const hasFirstReadDraft=()=>[...$('first-reading').querySelectorAll('textarea,input')].some(input=>input.value.trim());

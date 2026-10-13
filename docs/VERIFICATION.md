@@ -1,3 +1,7 @@
+## 2026-10-13 local offline recovery gate
+
+Run `node --test scripts/test_dialogue_frontend.mjs scripts/test_static_asset_cache_authority.mjs` on Node22. Browser: fail one local synthetic submission offline, confirm editable retained draft, restore network and confirm only GET reconciliation with no automatic POST; close exact test tab. Authentication expiry must clear private visible state, show login and disable Send. This does not replace real-account/physical-device or paid quality acceptance. Evidence: /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/OFFLINE-RECOVERY-01a135d5.md
+
 ## 2026-09-25 — detailed-learning recorder candidate checks
 
 The isolated candidate passes194focused source/frontend/recovery/cache tests,

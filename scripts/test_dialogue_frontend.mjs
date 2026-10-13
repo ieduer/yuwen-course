@@ -39,7 +39,7 @@ async function fixture({inputKind='text',hash='#lesson-189',post,get,logout,init
    const body=JSON.parse(options.body);if(post)return post(body,{data,setData:value=>{data=value;}});
    data={...data,revision:data.revision+1,turns:[...data.turns,{id:'saved-turn',role:'student',content:body.content,mutationId:body.mutationId,createdAt:'2026-10-13T00:00:00Z'}]};
   }
-  return Response.json(get?get(url,data):data);
+  const result=get?get(url,data):data;return result instanceof Response?result:Response.json(result);
  };
  const context=vm.createContext({PALETTES,originalRange,dialogueReadingAsset,window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,dialogueIdentity,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:()=>({dispose(){}}),localStorage:{},getSelection:()=>null});
  vm.runInContext(script+'\nglobalThis.frontend={renderPlates,materialText,update,refresh,refreshReadingMarks,clearPrivateView,view,renderSourceResults,renderOriginalMaterials,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
@@ -391,4 +391,36 @@ test('every lesson keeps media and reference destinations disjoint without losin
   lessons++;mediaCount+=media.length;
  }
  t.diagnostic(JSON.stringify({lessons,mediaCount,duplicateDestinations:duplicates.length}));assert.equal(lessons,189);assert(mediaCount>0);assert.equal(duplicates.length,0,JSON.stringify({duplicateDestinations:duplicates.length,affectedLessons:new Set(duplicates.map(item=>item.file)).size,samples:duplicates.slice(0,3)}));
+});
+
+
+test('offline draft stays editable and reconnect reads once without replaying the pending turn',async()=>{
+ let offline=false;
+ const f=await fixture({conversation:true,get:(url,data)=>{if(offline)throw Error('offline');return data;},post:()=>{throw Error('offline');}});
+ offline=true;f.answer('離線時的原話');await f.send();
+ const mutation=f.frontend.pending.mutationId;
+ assert.equal(f.document.getElementById('answer').disabled,false);
+ assert.equal(f.document.getElementById('answer').value,'離線時的原話');
+ const reads=()=>f.calls.filter(c=>c.url.startsWith('/api/')&&!c.url.includes('firstReadingState')&&!c.options.method).length;
+ offline=false;const before=reads();f.window.dispatchEvent(new f.window.Event('online'));await tick();await tick();
+ assert.equal(reads(),before+1);assert.equal(f.posts.length,1);
+ assert.equal(f.frontend.pending.mutationId,mutation);assert.equal(f.document.getElementById('answer').value,'離線時的原話');
+ f.window.dispatchEvent(new f.window.Event('online'));await tick();assert.equal(reads(),before+1);
+});
+
+test('reconnect settles a saved turn after lost acknowledgement without another POST',async()=>{
+ let offline=false;
+ const f=await fixture({conversation:true,get:(url,data)=>{if(offline)throw Error('offline');return data;},post:(body,{data,setData})=>{setData({...data,revision:1,turns:[{id:'saved-offline',role:'student',mutationId:body.mutationId,content:body.content}]});offline=true;throw Error('lost acknowledgement');}});
+ f.answer('已保存的原話');await f.send();assert.ok(f.frontend.pending);
+ offline=false;f.window.dispatchEvent(new f.window.Event('online'));await tick();await tick();
+ assert.equal(f.posts.length,1);assert.equal(f.frontend.pending,null);assert.equal(f.document.getElementById('answer').value,'');assert.match(f.document.getElementById('turns').textContent,/已保存的原話/);
+});
+
+
+test('expired account disables submission and shows login without network-triggered authentication replay',async()=>{
+ let expired=false;
+ const f=await fixture({conversation:true,get:(url,data)=>expired?Response.json({code:'authentication_required',error:'請先登入 My。'},{status:401}):data,post:()=>{expired=true;return Response.json({code:'authentication_required',error:'請先登入 My。'},{status:401});}});
+ f.answer('過期前草稿');await f.send();
+ assert.equal(f.document.getElementById('answer').disabled,true);assert.equal(f.document.getElementById('send').disabled,true);assert.equal(f.document.getElementById('login').hidden,false);assert.equal(f.document.getElementById('answer').value,'');
+ const before=f.calls.length;f.window.dispatchEvent(new f.window.Event('online'));await tick();assert.equal(f.calls.length,before);assert.equal(f.posts.length,1);
 });
