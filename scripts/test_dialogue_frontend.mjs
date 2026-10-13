@@ -1,3 +1,4 @@
+import {originalRange,dialogueReadingAsset} from '../site/dialogue-reading-material.js';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFileSync,readdirSync} from 'node:fs';
@@ -37,8 +38,8 @@ async function fixture({inputKind='text',hash='#lesson-189',post,get,initial={},
   }
   return Response.json(get?get(url,data):data);
  };
- const context=vm.createContext({window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:()=>({dispose(){}}),localStorage:{},getSelection:()=>null});
- vm.runInContext(script+'\nglobalThis.frontend={update,refresh,view,renderSourceResults,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
+ const context=vm.createContext({originalRange,dialogueReadingAsset,window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:()=>({dispose(){}}),localStorage:{},getSelection:()=>null});
+ vm.runInContext(script+'\nglobalThis.frontend={update,refresh,refreshReadingMarks,clearPrivateView,view,renderSourceResults,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
  for(let i=0;i<8&&!calls.some(c=>c.url.startsWith('/api/'));i++)await tick();await tick();
  return {document,window,calls,timers,downloads,frontend:context.frontend,context,setData:value=>{data=value;},get data(){return data;},get posts(){return calls.filter(c=>c.options.method==='POST').map(c=>JSON.parse(c.options.body));},answer(value){document.getElementById('answer').value=value;document.getElementById('answer').oninput();},send:()=>document.getElementById('compose').onsubmit({preventDefault(){}})};
 }
@@ -224,4 +225,20 @@ test('classical initial reading stays conversational and all three source views 
  assert.equal(f.document.getElementById('answer').disabled,false);assert.equal(f.document.querySelectorAll('#first-reading form').length,0);
  for(const id of ['version-unpunctuated','version-punctuated','version-annotated'])assert.ok(f.document.getElementById(id));
  f.answer('我想先試著斷句，可以嗎？');await f.send();assert.equal(f.posts[0].conversation,true);assert.match(f.posts[0].taskId,/reading-conversation$/);
+});
+
+
+test('poem red marks retain source punctuation, survive view switches and clear on account exit',async()=>{
+ const text='山，光！𠮷水。',passages=[{id:'lesson-189:p1',text,block:{runs:[{text:'山，光！'},{text:'𠮷水。'}]}}];
+ const asset=await dialogueReadingAsset({lessonId:'lesson-189',passages});
+ const mark={markId:'poem-mark',paragraphKey:'lesson-189:p1',startOffset:1,endOffset:4,selectedText:'光𠮷',guess:'最初理解',correction:'後來的訂正'};
+ let notes={...asset,marks:[mark]};
+ const f=await fixture({conversation:true,curriculumOverrides:{mode:'poetry',passages},get:(url,data)=>url.includes('firstReadingState')?notes:data});
+ await f.frontend.refreshReadingMarks();
+ const p=f.document.getElementById('lesson-189:p1'),labels=[...p.querySelectorAll('[data-reading-mark]')];
+ assert.equal(labels.map(n=>n.textContent).join(''),'光！𠮷');assert(labels.every(n=>n.title.includes('最初理解')&&n.title.includes('後來的訂正')));
+ labels[0].onclick();assert.equal(f.document.getElementById('quote').textContent,'光！𠮷');
+ f.document.getElementById('version-punctuated').onclick();assert.equal([...f.document.querySelectorAll('[data-reading-mark]')].map(n=>n.textContent).join(''),'光！𠮷');
+ f.frontend.clearPrivateView();assert.equal(f.document.querySelectorAll('[data-reading-mark]').length,0);assert(p.textContent.includes(text));
+ notes={...notes,textDigest:'different-source'};f.frontend.update(f.data);await f.frontend.refreshReadingMarks();assert.equal(f.document.querySelectorAll('[data-reading-mark]').length,0);
 });

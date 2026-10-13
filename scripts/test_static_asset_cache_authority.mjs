@@ -70,5 +70,7 @@ test('dialogue material imports are immutable and do not load the old form', () 
  const html=readFileSync(resolve(ROOT,'site/dialogue.html'),'utf8');
  assert(!html.includes('/assets/classical-first-read.js'));
  const code=readFileSync(resolve(ROOT,'site/assets/dialogue.js'),'utf8');
- for(const [path,file] of [['../dialogue-opening.js','dialogue-opening.js'],['./dialogue-events.js','assets/dialogue-events.js'],['./dialogue-history.js','assets/dialogue-history.js'],['./dialogue-first-read.js','assets/dialogue-first-read.js']])assert(code.includes(path+'?v='+contentVersion(file)),file);
+ for(const [path,file] of [['../dialogue-reading-material.js','dialogue-reading-material.js'],['../dialogue-opening.js','dialogue-opening.js'],['./dialogue-events.js','assets/dialogue-events.js'],['./dialogue-history.js','assets/dialogue-history.js'],['./dialogue-first-read.js','assets/dialogue-first-read.js']])assert(code.includes(path+'?v='+contentVersion(file)),file);
 });
+
+test('first reading helper pins its shared source identity module',()=>{const source=readFileSync(resolve(ROOT,'site/assets/dialogue-first-read.js'),'utf8');assert(source.includes('../dialogue-reading-material.js?v='+contentVersion('dialogue-reading-material.js')));});

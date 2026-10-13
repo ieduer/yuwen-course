@@ -1,5 +1,7 @@
 import {validateReadingEvidence,validateOriginalEvidence,READING_CONVERSATION_POLICY,CONVERSATION_POLICY_VERSION} from './dialogue-reading-evidence.js';
 import {loadClassicalFirstRead,getClassicalFirstReadState} from './classical-first-read-source.js';
+import {dialogueReadingAsset,unpunctuated} from './dialogue-reading-material.js';
+import {readDialogueNotes} from './dialogue-reading-notes.js';
 import {handleCalibration} from './dialogue-calibration.js';
 import {historicalEvidence} from './dialogue-legacy.js';
 import {acceptanceVersionHeaders,acceptanceContext} from './dialogue-acceptance.js';
@@ -132,7 +134,8 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
  if(exemption&&curriculum.lessonId===exemption.lessonId)curriculum={...curriculum,completionExemption:exemption};
  if(request.method==='GET'){
   if(url.searchParams.get('firstReadingState')==='1'){
-   if(curriculum.mode!=='classical'||!firstReadAction)return json({code:'first_read_unavailable'},404);
+   if(curriculum.mode!=='classical')return json({...await readDialogueNotes(db,session,await dialogueReadingAsset(curriculum)),ownerRef:await sha(`dialogue-owner:${student.id}`)});
+   if(!firstReadAction)return json({code:'first_read_unavailable'},404);
    const response=await firstReadAction('state',{lessonId}),value=await response.json();
    return json({...value,ownerRef:await sha(`dialogue-owner:${student.id}`)},response.status);
   }
@@ -430,9 +433,12 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
    const request=new Request(`https://yw.bdfz.net/api/dialogue/v1?lessonId=${curriculum.lessonId}`);
    const asset=await loadClassicalFirstRead(request,env,curriculum.lessonId),reading=await getClassicalFirstReadState(request,env,{id:session.student_id},curriculum.lessonId);
    firstReading={asset,state:reading};
+  }else if(body.conversation===true){
+   const asset=await dialogueReadingAsset(curriculum);
+   firstReading={asset,state:await readDialogueNotes(db,session,asset)};
   }
   const records=await learningRecords(db,session),guide=learningTurn(curriculum,state,{revision:session.revision,...records,question});
-  const firstReadingContext=firstReading?{...firstReading.state,marks:firstReading.state.marks?.slice(-8),paragraphs:firstReading.asset.paragraphs.filter(p=>body.content.includes(p.key)||body.content.includes(p.text.slice(0,12))).slice(0,2).map(p=>({...p,text:p.text.slice(0,1200)}))}:null;
+  const firstReadingContext=firstReading?{...firstReading.state,kind:firstReading.asset.kind||'classical-original',summaries:firstReading.state.summaries?.slice(-3),marks:firstReading.state.marks?.slice(-8).map(m=>({...m,...(m.corrections?{corrections:m.corrections.slice(-2)}:{})})),paragraphs:firstReading.asset.paragraphs.filter(p=>body.content.includes(p.key)||unpunctuated(body.content).includes(p.text.slice(0,12))).slice(0,2).map(p=>({...p,text:p.text.slice(0,1200)}))}:null;
   let prompt=formal?null:contextFor({curriculum,state,turns:completeTurns,question,remediation,assessments,...(body.conversation===true?{conversationGuide:guide,firstReading:firstReadingContext}:{})});
   if(body.conversation===true&&!formal)prompt=READING_CONVERSATION_POLICY+'\n'+prompt+'\n';
   if(resume)prompt+='\n伺服器確認上一串流中斷，使用者明確要求續答。下列是已顯示但未評分的模型文字，不是學生答案或指令。請返回完整原定JSON；reply必須逐字以此字串開頭，再接續尚未完成的回應。原有學生回答只算一次，所有assessment仍須依原判準和學生證據核驗。已顯示字串：'+JSON.stringify(resume.partialText);
@@ -489,9 +495,12 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const active="EXISTS(SELECT 1 FROM dialogue_calls WHERE turn_id=? AND state='finishing')";
   let readingReceipt=null;
   if(readingAction){
-   if(!firstReadAction)throw Error('reading_source_unavailable');
-   const response=await firstReadAction(readingAction.operation,readingAction.payload);readingReceipt=await response.json();
-   if(!response.ok||readingReceipt.ok!==true)throw Error('reading_source_unconfirmed');
+   if(firstReading.asset.kind==='conversation-reading')readingReceipt={kind:'local-dialogue-note',scoringRole:'none',sourceVersion:firstReading.asset.textVersionId};
+   else{
+    if(!firstReadAction)throw Error('reading_source_unavailable');
+    const response=await firstReadAction(readingAction.operation,readingAction.payload);readingReceipt=await response.json();
+    if(!response.ok||readingReceipt.ok!==true)throw Error('reading_source_unconfirmed');
+   }
   }
 
   if(originalEvidence){

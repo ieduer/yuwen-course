@@ -1,7 +1,8 @@
+import {originalRange,dialogueReadingAsset} from '../dialogue-reading-material.js?v=4735efcb1a2af88a';
 import {dialogueOpening} from '../dialogue-opening.js?v=77ec617a9f00ab8a';
 import {readDialogueEvents} from './dialogue-events.js?v=a7e6a9d3cf526331';
 import {readBrowserHistory} from './dialogue-history.js?v=4e50ee7bee866e26';
-import {openFirstReading} from './dialogue-first-read.js?v=47a48e70d0af5a7f';
+import {openFirstReading} from './dialogue-first-read.js?v=04d04aafd8657321';
 const $=id=>document.getElementById(id);
 // Server permits 360 learner turns with one reply each; history pages contain 30 records.
 const MAX_TRANSCRIPT_RECORDS=720,MAX_HISTORY_PAGES=24;
@@ -9,7 +10,7 @@ let streamAbort=null;
 let continuationRequest=null;
 let firstReadView=null;
 let correctionTarget=null,correctionMutation=null,sharedHistory=null,originalDraft=null;
-let composerDraft=null,lessonIndex=null,materialMode='annotated';
+let composerDraft=null,lessonIndex=null,materialMode='annotated',readingNotes=null;
 const conversationFlow=document.body.dataset.dialogueFlow==='conversation';
 let curriculum, snapshot, generation=0, selected=null, pending=null, pendingDraft=null, pollTimer=null, lastFocus=null, ownerRef=null;
 const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
@@ -110,17 +111,38 @@ function renderText(){
   for(const example of curriculum.exam.examples){const link=node('a',`${example.year} ${example.paper}第 ${example.questionNumber} 題：《${example.work}》`);link.href=example.url;link.target='_blank';link.rel='noopener noreferrer';section.append(link,node('p',`${example.questionParaphrase} 對應練習：${example.skill}。來源：${example.publisher}第 ${example.issue} 期第 ${example.printedPage} 版。`));}
   $('references').append(section);
  }
- renderReadingVariant();performance.mark('dialogue-readable-text');
+ paintReadingMarks();renderReadingVariant();performance.mark('dialogue-readable-text');
+}
+function paintReadingMarks(){
+ if(!curriculum)return;
+ for(const p of curriculum.passages){
+  const paragraph=document.getElementById(p.id);if(!paragraph)continue;
+  const parts=[...paragraph.childNodes].filter(n=>n.nodeType===3||n.nodeType===1&&n.dataset?.readingMark);
+  if(parts.map(n=>n.textContent).join('')!==p.text)continue;
+  const marks=readingNotes?.kind==='conversation-reading'?(readingNotes.marks||[]).filter(m=>m.paragraphKey===p.id).sort((a,b)=>a.startOffset-b.startOffset):[];
+  let offset=0;
+  for(const part of parts){
+   const text=part.textContent,fragment=document.createDocumentFragment();let used=0;
+   for(const mark of marks){
+    const range=originalRange(p.text,mark.startOffset,mark.endOffset);if(!range)continue;
+    const start=Math.max(0,range[0]-offset),end=Math.min(text.length,range[1]-offset);if(start<used||start>=end)continue;
+    fragment.append(document.createTextNode(text.slice(used,start)));
+    const n=node('mark',text.slice(start,end));n.dataset.readingMark=mark.markId;n.tabIndex=0;n.setAttribute('role','button');n.setAttribute('aria-label',`討論疑點：${mark.selectedText}`);n.title=`原猜測：${mark.guess}`+(mark.correction?`\n訂正：${mark.correction}`:'');
+    n.onclick=()=>quotePassage(p.id,p.text.slice(...range));n.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();n.onclick();}};fragment.append(n);used=end;
+   }
+   fragment.append(document.createTextNode(text.slice(used)));part.replaceWith(fragment);offset+=text.length;
+  }
+ }
 }
 function renderReadingVariant(){
  for(const mode of ['unpunctuated','punctuated','annotated'])$('version-'+mode).setAttribute('aria-pressed',String(mode===materialMode));
  $('first-reading').hidden=materialMode!=='unpunctuated';$('passages').hidden=materialMode==='unpunctuated';
  if(materialMode==='unpunctuated'&&!firstReadView){const gen=generation;firstReadView=openFirstReading({lessonId:curriculum.lessonId,curriculum,root:$('first-reading'),isCurrent:()=>gen===generation,onSelect:(id,text)=>{if(text.length>600)return;selected={id,text};$('quote').textContent=text;$('quote').hidden=false;$('discuss').hidden=false;$('discuss').onclick=()=>{view('conversation');$('answer').focus();$('discuss').hidden=true;};}});}
- if(ownerRef&&firstReadView&&curriculum.mode==='classical')void refreshReadingMarks();
+ if(ownerRef){if(firstReadView&&readingNotes)void firstReadView.setMarks?.(readingNotes);}
 }
 async function refreshReadingMarks(){
- const gen=generation,reader=firstReadView;if(!reader||!ownerRef||curriculum.mode!=='classical')return;
- try{const state=await api(null,null,false,null,null,false,true);if(gen===generation&&reader===firstReadView)await reader.setMarks?.(state);}catch{/* Saved chat remains authoritative; a missing readback never fabricates marks. */}
+ const gen=generation;if(!ownerRef)return;
+ try{const state=await api(null,null,false,null,null,false,true);if(gen===generation){if(curriculum.mode!=='classical'){const asset=await dialogueReadingAsset(curriculum);if(gen!==generation||asset.textDigest!==state.textDigest||asset.textVersionId!==state.textVersionId)return;}readingNotes=state;if(firstReadView)await firstReadView.setMarks?.(state);paintReadingMarks();}}catch{/* Saved chat remains authoritative; a missing readback never fabricates marks. */}
 }
 for(const mode of ['unpunctuated','punctuated','annotated'])$('version-'+mode).onclick=()=>{materialMode=mode;renderText();};
 function renderTurns(turns,prepend=false){
@@ -145,7 +167,7 @@ function renderTurns(turns,prepend=false){
 function clearPrivateView(){persistComposer();generation++;streamAbort?.abort();streamAbort=null;continuationRequest=null;
  firstReadView?.dispose();firstReadView=null;
  $('correction').close();correctionTarget=null;correctionMutation=null;$('correction-original').textContent='';$('correction-history').replaceChildren();$('correction-note').value='';$('correction-proposed').value='';$('turns').replaceChildren();$('turn-review-list').replaceChildren();$('answer').value='';$('quote').hidden=true;
- selected=null;pending=null;pendingDraft=null;originalDraft=null;composerDraft=null;snapshot=null;clearTimeout(pollTimer);
+ selected=null;pending=null;pendingDraft=null;originalDraft=null;composerDraft=null;snapshot=null;readingNotes=null;paintReadingMarks();clearTimeout(pollTimer);
  $('task-input').replaceChildren();$('task-context').replaceChildren();$('record-receipt').replaceChildren();$('source-results').replaceChildren();
  $('lesson-outcome').textContent='';$('draft-status').textContent='';
  $('next').replaceChildren(node('span','登入後，這裡會接續本帳戶的對話。'));

@@ -21,3 +21,5 @@
 @media(max-width:720px){.bar .lesson-picker{display:none}.bar .brand{margin-right:auto}.bar{flex-wrap:nowrap}.bar>button{white-space:nowrap}#catalog-results button{gap:12px}}
 
 .reading-versions{display:flex;gap:4px;flex-wrap:wrap;margin:0 0 24px;font:13px system-ui}.reading-versions button{border:0;border-radius:24px;padding:9px 16px}.reading-versions button[aria-pressed=true]{background:#e5ebe1;color:#244a37}#first-reading p{font:20px/2.05 "Songti TC",serif;white-space:pre-wrap;overflow-wrap:anywhere}.next small{display:block;color:#687163;font-size:11px}.next p{margin:8px 0 0}.next[hidden]{display:none}#copy-transcript{margin-right:8px}body[data-dialogue-flow=conversation] #task-context:empty{display:none}
+
+#passages mark[data-reading-mark]{background:#ffe5dd;color:#922e25;cursor:pointer;border-radius:2px}#passages mark[data-reading-mark]:focus-visible{outline:2px solid #922e25;outline-offset:3px}

@@ -1,3 +1,4 @@
+import {dialogueReadingAsset} from '../dialogue-reading-material.js?v=4735efcb1a2af88a';
 // Reading variants are materials, not a separate form or a progression gate.
 // Preserve the canonical first-read offsets whenever that source exists.
 export function openFirstReading({lessonId,root,isCurrent,curriculum,onSelect}){
@@ -25,7 +26,7 @@ export function openFirstReading({lessonId,root,isCurrent,curriculum,onSelect}){
     const response=await fetch(`/data/classical-first-read/${lessonId}.json`,{signal:abort.signal});
     if(!response.ok)throw Error('無標點版本暫時無法讀取；仍可閱讀標點版。');
     const asset=await response.json();sourceAsset=asset;paragraphs=asset.paragraphs;
-   }else paragraphs=curriculum.passages.map(p=>({key:p.id,text:p.text.replace(/[\p{P}\s]/gu,'')}));
+   }else {sourceAsset=await dialogueReadingAsset(curriculum);paragraphs=sourceAsset.paragraphs;}
    if(!isCurrent()||abort.signal.aborted)return;
    sourceAsset||={paragraphs};render();
    const select=()=>{
