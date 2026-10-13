@@ -125,3 +125,7 @@ test('money, lesson lifetime and global concurrency remain binding in isolated E
   const r=await send(f,body(1,'synthetic-e2e-guard-0002'),()=>{throw Error('remaining guard bypass');});assert.equal(r.status,429);assert.equal((await r.json()).code,{money:'daily_money_budget_exhausted',lesson:'paid_lesson_lifetime_exhausted',concurrency:'dialogue_concurrency_busy'}[mode]);
  }finally{f.close();}}
 });
+
+for(const smoke of [false,true])test('private lite smoke requires the exact server budget version '+smoke,()=>{const p={...policy,model:'gemini-3.5-flash-lite',version:smoke?'yw-dialogue-smoke-model35lite-20261013-v1':'unapproved-lite',inputMicrosPerMillion:300000,outputMicrosPerMillion:2500000};const f=fixture({bindingEdits:{YW_DIALOGUE_BUDGET_JSON:JSON.stringify(p)}});try{if(smoke){const b=requestDialogueBudget(f.env,student,lesson);assert.equal(b.isolatedAdmission.operation,E2E_OPERATION);assert.equal(b.isolatedAdmission.maxVisibleCalls,120);assert.equal(b.reserveMicros,252000);}else assert.throws(()=>requestDialogueBudget(f.env,student,lesson),/e2e_budget_mismatch/);}finally{f.close();}});
+
+test('ordinary deployment cannot acquire private lite smoke retries',()=>{const f=fixture({ordinary:true,bindingEdits:{YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...policy,model:'gemini-3.5-flash-lite',version:'yw-dialogue-smoke-model35lite-20261013-v1'})}});try{assert.throws(()=>requestDialogueBudget(f.env,student,lesson),/retry_model_mismatch/);}finally{f.close();}});

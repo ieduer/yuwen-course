@@ -1,4 +1,10 @@
-## Current isolated acceptance and HTTP failure repair — 2026-10-13T08:55:22.361406+00:00
+## Current single-dialogue smoke scope — 2026-10-13T10:36:51.163846+00:00
+
+Owner defers model quality verification during the planned APIS model update; only a real AI reply, source save and browser reload are requested now. All189 scope and historical work remain. Current isolated sourcee695dbb/Pages6d270ed2 and APISb8dd01e/32bf54d3 at0% verified; formalYW175f8ae and APIS53dbb568100% remain unchanged. Gemini3.8 stopped:15 primary cases unconfirmed/nooutput,13 unrun;3E2E calls remain counted. Quality28/full3E2E and language promotion deferred, not passed.
+
+This candidate permits gemini-3.5-flash-lite only under exact server policy yw-dialogue-smoke-model35lite-20261013-v1 inside the existing private owner553 capability,120-call namespace and14T12 expiry. One new logical turn,max3sequential same-model attempts,stop on success or terminal failure. No rubric weakening or invented score. Full calibration activation is disabled for the smoke deployment. APIS paired new private0% candidate required. Source write/readback is isolated; UC production and formal go/no-go remain gated. Runtime pending publication and real test; current evidence /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/CHECKPOINT-ALL-LESSONS.md.
+
+## Historical isolated acceptance and HTTP failure repair — 2026-10-13T08:55:22.361406+00:00
 
 YW source28a6c064 / Pagesd0a86416 and APIS source22b8823 / version6e3cb4e6 at0% are deployed. Formal YW175f8ae / Pagesb6f5ac67 and accepted APIS53dbb568 at100% remain unchanged. Both trusted isolated windows expire2026-10-14T12:00Z. Actual Gemini3.8 calibration:1/28 attempted,Google503,brokercomplete,nooutput;0semanticpasses,1unconfirmed,27unrun. Actual Hetang second logicalcall timed out after12000ms awaitingheaders,brokercomplete,nooutput. Max3 was correctly bounded by the original21s deadline: insufficient time remained for another full attempt. No deadline, lease, model, credential or retry limit is changed by this patch.
 

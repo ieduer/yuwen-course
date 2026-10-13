@@ -6,13 +6,13 @@ import {isolatedDialogueAdmission,isolatedCallCount} from './dialogue-e2e-admiss
 // never uses this wrapper. One logical learner turn reserves all three slots.
 export function requestDialogueBudget(env,student,lessonId){
  const policy=dialogueBudget(env),limit=env.YW_DIALOGUE_PROVIDER_ATTEMPTS==='3'?3:1;
- if(limit>1&&!['gemini-3.6-flash','gemini-3.8-flash'].includes(policy.model))throw Error('retry_model_mismatch');
  const reserveMicros=policy.reserveMicros*limit;
  if(reserveMicros>Math.min(policy.globalDailyMicros,policy.userDailyMicros,policy.lessonLifetimeMicros))throw Error('retry_reserve_exceeds_budget');
  const budget={...policy,perAttemptReserveMicros:policy.reserveMicros,providerAttemptLimit:limit,logicalProviderAttemptLimit:limit,reserveMicros};
  // The price policy cannot mint operation admission, even in server config.
  delete budget.isolatedAdmission;
  const admission=isolatedDialogueAdmission(env,student,lessonId,budget);
+ if(limit>1&&!['gemini-3.6-flash','gemini-3.8-flash'].includes(policy.model)&&!(admission&&policy.model==='gemini-3.5-flash-lite'&&policy.version==='yw-dialogue-smoke-model35lite-20261013-v1'))throw Error('retry_model_mismatch');
  return admission?{...budget,isolatedAdmission:admission}:budget;
 }
 

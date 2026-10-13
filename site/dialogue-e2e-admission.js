@@ -28,7 +28,8 @@ export function isolatedDialogueAdmission(env,student,lessonId,budget,at=Date.no
    ||!Array.isArray(pin.lessonIds)||JSON.stringify([...pin.lessonIds].sort())!==JSON.stringify(E2E_LESSONS)
    ||!E2E_LESSONS.includes(lessonId))throw Error('e2e_activation_invalid');
  if(!Number.isFinite(at)||at>=Math.min(context.expires,Date.parse(E2E_HARD_EXPIRY)))throw Error('e2e_activation_expired');
- if(budget.model!=='gemini-3.8-flash'||budget.logicalProviderAttemptLimit!==3
+ const smokeLite=budget.model==='gemini-3.5-flash-lite'&&budget.version==='yw-dialogue-smoke-model35lite-20261013-v1';
+ if((budget.model!=='gemini-3.8-flash'&&!smokeLite)||budget.logicalProviderAttemptLimit!==3
    ||budget.perAttemptReserveMicros!==84000||budget.reserveMicros!==252000)throw Error('e2e_budget_mismatch');
  return Object.freeze({version:VERSION,operation:E2E_OPERATION,ownerUserId:context.userId,
   databaseId:context.databaseId,registryReceiptDigest:pin.registryReceiptDigest,
