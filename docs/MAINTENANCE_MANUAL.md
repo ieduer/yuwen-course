@@ -1,6 +1,8 @@
-## Current local recovery candidate — 2026-10-13T15:24:43.421933+00:00
+## Current local recovery and accessibility candidate — 2026-10-13T15:31:27.732722+00:00
 
 Serial owner codex-01a135d5. Offline drafts remain editable; reconnect reads saved state once without resubmission. Expired-account response restores the login entry and keeps Send disabled. Node22 focused frontend/cache50/50 and real synthetic-browser offline/reconnect pass; real-account, model, central/My, native and production gates remain open. Reading/media behavior from the preceding candidate is preserved. Exact evidence and limitations: [OFFLINE-RECOVERY-01a135d5.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/OFFLINE-RECOVERY-01a135d5.md). No paid call, push or deploy; all189 goal and14T12:00Z expiry unchanged.
+
+Actual keyboard checks now cover dialog focus restoration, annotation controls, material tabs and fullscreen page/return. A195px header overflow was repaired;391px header remains compact. Screen-reader speech, actual200percent zoom and physicalIME remain unverified. Partial audit: [ACCESSIBILITY-01a135d5.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/ACCESSIBILITY-01a135d5.md).
 
 ## Historical local reading candidate — 2026-10-13T14:56:38.600580+00:00
 
