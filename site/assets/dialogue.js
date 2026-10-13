@@ -129,8 +129,8 @@ function materialText(text,cooked){
 }
 function referenceGallery(items){
  const section=node('section',undefined,'reference-gallery'),images=node('div',undefined,'reference-images'),toolbar=node('nav',undefined,'reference-gallery-toolbar');
- section.setAttribute('aria-label','參考圖片');images.dataset.layout='continuous';toolbar.setAttribute('aria-label','圖片閱讀方式');
- section.append(node('h3',`參考圖片 · ${items.length}`),images,toolbar);
+ section.setAttribute('aria-label','課程圖片');images.dataset.layout='continuous';toolbar.setAttribute('aria-label','圖片閱讀方式');
+ section.append(node('h3',`圖片 · ${items.length}`),images,toolbar);
  const open=index=>{const host=node('div',undefined,'reference-viewer-host');document.body.append(host);const viewer=renderPlates(host,{notes:[],pages:items},{initialIndex:index,label:'參考圖片閱讀器',unit:'張',onClose:()=>host.remove()});viewer.expand();};
  items.forEach((item,index)=>{
   const figure=node('figure'),button=node('button',undefined,'reference-image-open'),img=node('img'),caption=node('figcaption');
@@ -148,10 +148,17 @@ function renderOriginalMaterials(source,c=curriculum){
  const nav=node('div',undefined,'material-tabs');nav.setAttribute('role','tablist');nav.setAttribute('aria-label','學習資料類型');box.append(nav);
  const groups=new Map(),labels={guide:'閱讀提示',extra:'拓展閱讀',media:'圖片影音',study:'學案',links:'參考資料',plates:'教材圖版'};
  for(const [key,label] of Object.entries(labels)){const panel=node('section',undefined,'material-panel');panel.id='material-'+key;panel.setAttribute('role','tabpanel');panel.setAttribute('aria-label',label);panel.hidden=true;groups.set(key,panel);box.append(panel);}
- const seen=new Set(),links=new Set(),referenceImages=[];
+ const seen=new Set(),links=new Map(),referenceImages=[],imagesByUrl=new Map();
  const knownImages=new Set([...(source.forumImages||[]),...(source.posts||[]).flatMap(post=>post.images||[])].map(item=>item.src||item.href||item.sourceUrl).filter(Boolean));
- const addMedia=item=>{const url=item.src||item.sourceUrl||item.finalUrl||item.href;if(seen.has(url))return;const media=mediaFigure(item);if(media){seen.add(url);groups.get('media').append(media);}};
- const addLink=(url,label,item={})=>{if(!url||links.has(url))return;links.add(url);const row=node('div',undefined,'resource-row');if(appendSourceLink(row,url,label,'參考資料')){if(/\.(?:png|jpe?g|webp|gif|avif)(?:[?#]|$)/i.test(url)||item.mediaType?.startsWith('image/')||knownImages.has(url)){referenceImages.push({src:url,label:!label||label==='參考資料'||label===url?`第 ${referenceImages.length+1} 張圖片`:label});return;}const kind=/\.pdf(?:[?#]|$)/i.test(url)?'PDF':/youtube|youtu.be|\.(?:mp4|webm|mp3|wav|m4a)(?:[?#]|$)/i.test(url)?'影音':'網頁';row.prepend(node('small',kind));groups.get('links').append(row);}};
+ const addMedia=item=>{
+  const sourceUrl=item.src||item.sourceUrl||item.finalUrl||item.href;let url;try{const parsed=new URL(sourceUrl);if(!['https:','http:'].includes(parsed.protocol))return false;url=parsed.href;}catch{return false;}
+  if(seen.has(url)){const image=imagesByUrl.get(url),label=item.alt||item.label||item.text||item.title;if(image&&/^第 \d+ 張圖片$/.test(image.label)&&label&&label!=='參考資料'&&label!==url)image.label=label;return true;}
+  if(/\.(?:png|jpe?g|webp|gif|avif)(?:[?#]|$)/i.test(url)||item.mediaType?.startsWith('image/')||knownImages.has(sourceUrl)){
+   const label=item.alt||item.label||item.text||item.title,image={src:url,label:!label||label==='參考資料'||label===url?`第 ${referenceImages.length+1} 張圖片`:label};referenceImages.push(image);imagesByUrl.set(url,image);
+  }else{const media=mediaFigure({...item,src:url});if(!media)return false;groups.get('media').append(media);}
+  seen.add(url);links.get(url)?.remove();links.delete(url);return true;
+ };
+ const addLink=(url,label,item={})=>{if(!url)return;if(addMedia({...item,src:url,label}))return;let key;try{key=new URL(url).href;}catch{return;}if(links.has(key))return;const row=node('div',undefined,'resource-row');if(appendSourceLink(row,url,label,'參考資料')){links.set(key,row);const kind=/\.pdf(?:[?#]|$)/i.test(url)?'PDF':/youtube|youtu.be/i.test(url)?'影音':'網頁';row.prepend(node('small',kind));groups.get('links').append(row);}};
  const addText=(key,title,text,cooked)=>{if(!text&&!cooked)return;const section=node('section',undefined,'material-entry');section.append(node('h3',title),materialText(text,cooked));groups.get(key).append(section);};
  for(const [key,label,group] of [['frontMatter','篇前','guide'],['guidance','學習提示','guide'],['sourceOnlyBlocks','補充閱讀','extra']])addText(group,label,referenceText(c[key]));
  for(const item of c.readingMaterials||[])addText(item.role==='commentary'?'guide':'links',item.label||'補充閱讀',item.text||referenceText(item.block));
@@ -164,7 +171,7 @@ function renderOriginalMaterials(source,c=curriculum){
  }
  for(const item of source.forumImages||[])addMedia(item);
  for(const item of c.resources||[]){addMedia({...item,src:item.href||item.sourceUrl});addLink(item.href||item.sourceUrl,item.label,item);}
- if(referenceImages.length)groups.get('links').prepend(referenceGallery(referenceImages));
+ if(referenceImages.length)groups.get('media').prepend(referenceGallery(referenceImages));
  for(const item of c.studyGuide||[]){const section=node('section',undefined,'material-entry');section.append(materialText(item.prompt));if(item.referenceAnswer||item.explanation){const answer=node('details');answer.append(node('summary',item.answerLabel||'參考解說'),materialText([item.referenceAnswer,item.explanation].filter(Boolean).join('\n\n')));section.append(answer);}groups.get('study').append(section);}
  for(const task of source.learningTasks||[])addText('study','學習任務',typeof task==='string'?task:task.prompt||task.text||task.title);
  const pages=groups.get('plates');pages.dataset.lazy='true';

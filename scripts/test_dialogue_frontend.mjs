@@ -368,11 +368,27 @@ test('textbook reader reaches every lesson page with bottom controls, keyboard a
 test('image references display together in source order and share one navigable fullscreen reader',async()=>{
  const f=await fixture(),urls=['https://example.test/one.jpg','https://example.test/two.png?original=1','https://example.test/opaque'];
  f.frontend.renderOriginalMaterials({posts:[{links:[{href:urls[0],text:'第一張'},{href:urls[1],text:'第二張'},{href:urls[0],text:'重複連結'},{href:'https://example.test/reading.pdf',text:'參考PDF'}]}],forumImages:[{src:urls[2]}]}, {resources:[{href:urls[2],label:'第三張'}]});
- const panel=f.document.getElementById('material-links'),gallery=panel.querySelector('.reference-gallery'),images=gallery.querySelector('.reference-images');
+ const panel=f.document.getElementById('material-links'),gallery=f.document.getElementById('material-media').querySelector('.reference-gallery'),images=gallery.querySelector('.reference-images');
  assert.deepEqual([...images.querySelectorAll('img')].map(img=>img.getAttribute('src')),urls);assert.equal(images.dataset.layout,'continuous');assert([...images.querySelectorAll('img')].every(img=>img.loading==='lazy'));assert.match(panel.querySelector('.resource-row').textContent,/參考PDF/);
  const buttons=gallery.querySelectorAll('.reference-gallery-toolbar button');buttons[1].onclick();assert.equal(images.dataset.layout,'overview');buttons[0].onclick();assert.equal(images.dataset.layout,'continuous');
  images.querySelectorAll('.reference-image-open')[1].onclick();const dialog=f.document.querySelector('.plate-fullscreen'),stage=dialog.querySelector('.plate-stage');assert.equal(stage.querySelector('img').getAttribute('src'),urls[1]);dialog.querySelector('.plate-reader').onkeydown({key:'ArrowRight',target:stage,preventDefault(){}});assert.equal(stage.querySelector('img').getAttribute('src'),urls[2]);stage.onclick();assert.equal(f.document.querySelector('.plate-fullscreen'),null);assert.equal(f.document.querySelector('.reference-viewer-host'),null);
  const source=JSON.parse(readFileSync(new URL('../site/data/lessons/lesson-1458.json',import.meta.url),'utf8')),c=JSON.parse(readFileSync(new URL('../site/dialogue-curriculum/lesson-1458.json',import.meta.url),'utf8'));
- f.frontend.renderOriginalMaterials(source,c);const actual=[...f.document.querySelectorAll('#material-links .reference-images img')].map(img=>img.getAttribute('src'));
+ f.frontend.renderOriginalMaterials(source,c);const actual=[...f.document.querySelectorAll('#material-media .reference-images img')].map(img=>img.getAttribute('src'));
  const expected=[...new Set((source.posts||[]).flatMap(post=>[...(post.links||[]),...(post.attachments||[])]).map(item=>typeof item==='string'?item:item.href||item.url||item.src).filter(url=>/\.(?:png|jpe?g|webp|gif|avif)(?:[?#]|$)/i.test(url)))];assert.equal(expected.length,69);for(const url of expected)assert(actual.includes(url),url);
+});
+
+test('every lesson keeps media and reference destinations disjoint without losing media',async t=>{
+ const f=await fixture(),duplicates=[];let lessons=0,mediaCount=0;
+ const href=value=>{try{return new URL(value).href;}catch{return null;}};
+ for(const file of readdirSync(new URL('../site/dialogue-curriculum/',import.meta.url)).filter(n=>/^lesson-.*\.json$/.test(n))){
+  const c=JSON.parse(readFileSync(new URL('../site/dialogue-curriculum/'+file,import.meta.url),'utf8')),source=JSON.parse(readFileSync(new URL('../site/data/lessons/'+file,import.meta.url),'utf8'));
+  f.frontend.renderOriginalMaterials(source,c);const panel=f.document.getElementById('material-media'),references=f.document.getElementById('material-links');
+  const media=[...panel.querySelectorAll('img,audio,video')].map(el=>href(el.getAttribute('src')||el.src)).filter(Boolean),destinations=new Set([...references.querySelectorAll('a[href],img[src],audio[src],video[src]')].map(el=>href(el.getAttribute('href')||el.getAttribute('src'))).filter(Boolean));
+  for(const url of new Set(media))if(destinations.has(url))duplicates.push({file,url});
+  assert.equal(media.length,new Set(media).size,`${file} duplicate media objects`);
+  const originals=[...(c.media||[]),...(source.forumImages||[]),...(source.posts||[]).flatMap(post=>[...(post.images||[]),...(post.links||[]),...(post.attachments||[])]),...(c.resources||[])];
+  for(const item of originals){const url=href(typeof item==='string'?item:item.src||item.sourceUrl||item.finalUrl||item.href||item.url);if(url&&/\.(?:png|jpe?g|webp|gif|avif|mp3|wav|m4a|ogg|mp4|webm)(?:[?#]|$)/i.test(url))assert(media.includes(url),`${file} media lost: ${url}`);}
+  lessons++;mediaCount+=media.length;
+ }
+ t.diagnostic(JSON.stringify({lessons,mediaCount,duplicateDestinations:duplicates.length}));assert.equal(lessons,189);assert(mediaCount>0);assert.equal(duplicates.length,0,JSON.stringify({duplicateDestinations:duplicates.length,affectedLessons:new Set(duplicates.map(item=>item.file)).size,samples:duplicates.slice(0,3)}));
 });
