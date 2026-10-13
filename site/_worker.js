@@ -93,6 +93,11 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     let decodedPath;try{decodedPath=decodeURIComponent(url.pathname).replace(/\/{2,}/g,'/');}catch{return new Response('Invalid path',{status:400});}
+    // The existing feature flag also owns the student entrypoint. Legacy deep links
+    // retain their hash; explicit materials/history access keeps the old workspace.
+    if(env.YW_DIALOGUE_ENABLED==='true' && ['/', '/index.html'].includes(decodedPath) && url.searchParams.get('view')!=='legacy' && ['GET','HEAD'].includes(request.method)){
+      const target=new URL('/dialogue.html',url);return env.ASSETS.fetch(new Request(target,request));
+    }
     const dialogueAsset=/^\/dialogue-curriculum\/(lesson-[\w-]{1,60})\.json$/.exec(decodedPath);
     if(dialogueAsset){
       if(request.method!=='GET')return new Response('Method not allowed',{status:405});

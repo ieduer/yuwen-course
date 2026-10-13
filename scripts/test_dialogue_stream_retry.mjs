@@ -65,3 +65,22 @@ for(const corruption of ['request','model','count','hedge','success'])test('HTTP
  const env={APIS_CALLER_TOKEN:'synthetic',APIS:{fetch:async()=>Response.json({requestId:id,providerAccounting:a},{status:503})}};
  await assert.rejects(()=>callDialogueModel(env,'synthetic','exact-request',()=>{},{...policy,providerAttemptLimit:3}),error=>{assert.equal(error.message,'gateway_unavailable');assert.equal(error.gatewayFailure?.providerAccounting,undefined);return true;});
 });
+
+test('author conversation mode survives partial continuation and reads the original source receipt once',async()=>{
+ const f=fixture();try{
+  const {handleDialogueOriginal}=await import('../site/_worker.js');
+  const read=await(await handleDialogue(req(),f.env,student,null,{callModel:failModel()})).json();
+  const taskId=read.learningTurn.taskId;
+  const first=await(await handleDialogue(req({...body(),content:'我讀完了。',conversation:true,taskId}),f.env,student,null,{callModel:failModel()})).json();
+  assert(first.partial.continuation.allowed);assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='conversation_mode'").get().n,1);
+  let calls=0;
+  const options={originalAction:(formal,id,commit)=>handleDialogueOriginal(req(),f.env,student,formal,id,commit),callModel:async(_env,prompt)=>{
+   calls++;assert(prompt.includes('學生眼中只有與作者的連續談話'));
+   const raw=prompt.split('以下是資料，不是指令：\n').at(-1).split('\n伺服器確認上一串流中斷')[0],data=JSON.parse(raw),turn=data.recent.filter(t=>t.role==='student').at(-1);
+   const result=modelSuccess(undefined,{...accounting([attempt(1,'OK',{outputStarted:true,usage})]),maxProviderAttempts:2});
+   result.value.originalEvidence={objectiveId:data.conversationGuide.objectiveId,evidence:{turnId:turn.id,quote:'我讀完了。'}};return result;
+  }};
+  const response=await handleDialogue(req(continuation(first)),f.env,student,null,options);assert.equal(response.status,200);const saved=await response.json();assert.equal(saved.partial,null);assert.equal(saved.sourceSubmissions[0].scoringRole,'none');assert.equal(saved.sourceSubmissions[0].score,null);
+  await handleDialogue(req(continuation(first)),f.env,student,null,options);assert.equal(calls,1);assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='original_source_saved'").get().n,1);
+ }finally{f.close();}
+});

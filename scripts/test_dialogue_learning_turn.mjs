@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
 import {handleDialogue} from '../site/dialogue-source.js';
-import worker,{handleDialogueFormal,handleDialogueOriginal} from '../site/_worker.js';
+import worker,{handleDialogueFormal,handleDialogueOriginal,handleDialogueFirstRead} from '../site/_worker.js';
 import {projectState,contextFor,LIMITS} from '../site/dialogue-policy.js';
 import {sanitizeDialogueCurriculum} from '../site/dialogue-public-curriculum.js';
 import {learningTurn} from '../site/dialogue-learning-turn.js';
@@ -38,6 +38,7 @@ test('ordinary sends collect exact original fields, evaluate once and retain ide
   const replay=await handleDialogue(f.req(r.body),f.env,student,null,f.options);assert.equal(replay.status,200);
   const conflict=await handleDialogue(f.req({...r.body,content:'變更了同一回執的答案'}),f.env,student,null,f.options);assert.equal(conflict.status,409);
  }
+ const receipt=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_context_prepared'").get().details_json);assert.equal(receipt.sourceProvenance.readerSha256,f.curriculum.sourceInventory.readerSha256);assert(receipt.annotationIds.length>0);assert.match(receipt.promptSha256,/^[a-f0-9]{64}$/);
  assert.equal(f.calls(),1);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_turns WHERE role=\'student\'').get().n,4);
  assert.deepEqual(JSON.parse(f.sql.prepare('SELECT submitted_payload_json FROM learning_submission_records').get().submitted_payload_json),input);
  assert.equal(f.sql.prepare('SELECT raw_value FROM learning_evaluations').get().raw_value,83);assert.equal(data.sourceSubmissions[0].status,'confirmed');assert.equal(data.sourceSubmissions[0].score,83);
@@ -171,4 +172,50 @@ test('completed or pending frozen compulsory work keeps its contract and pre-pol
  assert.equal(f.sql.prepare('SELECT s.student_id FROM dialogue_drafts d JOIN dialogue_sessions s ON s.id=d.session_id WHERE d.id=?').get('old-draft').student_id,student.id);
  assert.equal(f.sql.prepare('SELECT curriculum_json FROM dialogue_sessions').get().curriculum_json,JSON.stringify(frozen));
  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,0);
+});
+
+
+test('natural conversation preserves the first-read source ledger without a form or automatic completion',async t=>{
+ const f=fixture(t,'lesson-1711-p1');f.sql.exec('DELETE FROM classical_first_read_sessions; DELETE FROM learning_interactions;');
+ const asset=JSON.parse(fs.readFileSync('site/data/classical-first-read/lesson-1711-p1.json'));
+ f.options.firstReadAction=(operation,payload)=>handleDialogueFirstRead(f.req(),f.env,student,null,operation,payload);
+ let proposed=null,calls=0;
+ f.options.callModel=async(_env,prompt)=>{calls++;const data=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=data.recent.filter(t=>t.role==='student').at(-1);return {value:{reply:'我們就从你提出的字句慢慢談。這個猜測如何與前後文相連？',assessments:[],...(proposed?{readingEvidence:{...proposed,evidence:{turnId:turn.id,quote:proposed.evidenceText}}}:{})},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ async function chat(content){const before=await f.read(),body={conversation:true,taskId:before.learningTurn?.taskId||`${f.curriculum.curriculumVersion}:${before.revision}:reading-conversation`,content,revision:before.revision,mutationId:crypto.randomUUID()};const response=await handleDialogue(f.req(body),f.env,student,null,f.options);return {body,data:await response.json(),status:response.status};}
+ let r=await chat('你好，我想先問一個問題，可以慢慢來嗎？');assert.equal(r.status,200);assert.equal(r.data.turns.length,2);assert.equal(r.data.readingGate.phase,'initial_reading');assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM classical_first_read_marks').get().n,0);
+ const p=asset.paragraphs[0],selectedText=p.text.slice(0,3),guess='我猜這幾個字是在引出文章的主要意思，但還不確定。';
+ proposed={operation:'mark',paragraphKey:p.key,selectedText,evidenceText:guess};r=await chat(`[${p.key}] ${selectedText}\n${guess}`);
+ assert.equal(r.status,200);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM classical_first_read_marks').get().n,1);assert.equal(f.sql.prepare('SELECT guess_text FROM classical_first_read_marks').get().guess_text,guess);
+ const before=calls;await handleDialogue(f.req(r.body),f.env,student,null,f.options);assert.equal(calls,before);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM classical_first_read_marks').get().n,1);
+ assert.equal(r.data.readingGate.phase,'initial_reading');assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='reading_evidence_saved'").get().n,1);
+});
+
+test('chat reading acknowledgement requires a verbatim explicit student statement and keeps numeric grades absent',async t=>{
+ const f=fixture(t,'lesson-1717-p2',o=>o.domain==='read');
+ f.options.callModel=async(_env,prompt)=>{const d=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=d.recent.filter(t=>t.role==='student').at(-1);return {value:{reply:'我們接著談談讓你停下來的那一句。',assessments:[],originalEvidence:{objectiveId:d.conversationGuide.objectiveId,evidence:{turnId:turn.id,quote:'已讀完'}}},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ const data=await f.read();const r=await f.send(data,'已讀完',{conversation:true});assert.equal(r.response.status,200);assert.equal(r.data.sourceSubmissions[0].scoringRole,'none');assert.equal(r.data.sourceSubmissions[0].score,null);assert.equal(r.data.state.objectives[0].status,'preserved');
+});
+
+test('first reading conversation completes original three-mark, impression, correction and acknowledgement receipts',async t=>{
+ const f=fixture(t,'lesson-1711-p1');f.sql.exec('DELETE FROM classical_first_read_sessions; DELETE FROM learning_interactions;');
+ const asset=JSON.parse(fs.readFileSync('site/data/classical-first-read/lesson-1711-p1.json'));
+ f.options.firstReadAction=(operation,payload)=>handleDialogueFirstRead(f.req(),f.env,student,null,operation,payload);
+ let proposed=null,quote='';
+ f.options.callModel=async(_env,prompt)=>{const data=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=data.recent.filter(t=>t.role==='student').at(-1);assert(data.firstReading,'first-reading context must survive a null guide');return {value:{reply:'先留住你的理解，我們再回到原文對照。',assessments:[],readingEvidence:{...proposed,evidence:{turnId:turn.id,quote}}},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ async function chat(content){const d=await f.read();const r=await handleDialogue(f.req({conversation:true,taskId:d.learningTurn?.taskId||`${f.curriculum.curriculumVersion}:${d.revision}:reading-conversation`,content,revision:d.revision,mutationId:crypto.randomUUID()}),f.env,student,null,f.options);assert.equal(r.status,200);return r.json();}
+ const p=asset.paragraphs[0];
+ for(const offset of [0,8,16]){const text=p.text.slice(offset,offset+5);assert.equal(p.text.indexOf(text),offset);quote='我先猜這裡是在說學習如何使人發生改變。';proposed={operation:'mark',paragraphKey:p.key,selectedText:text};await chat(`[${p.key}] ${text}\n${quote}`);}
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM classical_first_read_marks').get().n,3);
+ const original=f.sql.prepare('SELECT mark_id,guess_text FROM classical_first_read_marks ORDER BY mark_id').all();
+ const beforeRead=f.sql.prepare('SELECT COUNT(*) n FROM dialogue_turns').get().n;
+ const marksResponse=await handleDialogue(new Request(f.req().url+'&firstReadingState=1'),f.env,student,null,f.options),markState=await marksResponse.json();
+ assert.equal(markState.marks.length,3);assert.equal(markState.ownerRef,ownerRef);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_turns').get().n,beforeRead);
+
+ quote='初讀時我感到作者將具體事物與學習互相對照，想勸人持續學習。';proposed={operation:'submit'};let d=await chat(quote);assert.equal(d.readingGate.phase,'annotated_reading');
+ for(const m of original){quote='對照註釋後，我把原先的猜測修正為強調後天學習能改變人的理解。';proposed={operation:'resolve',markId:m.mark_id};await chat(quote);}
+ quote='我已經把這篇課文讀完了。';proposed={operation:'acknowledge'};d=await chat(quote);assert.equal(d.readingGate.phase,'close_reading');
+ assert.deepEqual(f.sql.prepare('SELECT mark_id,guess_text FROM classical_first_read_marks ORDER BY mark_id').all(),original);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM classical_first_read_marks WHERE resolution_status='resolved'").get().n,3);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_evaluations e JOIN learning_interactions i ON i.source_event_id=e.source_event_id WHERE e.raw_value IS NOT NULL OR i.scoring_role!='none'").get().n,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_assessments').get().n,0);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='reading_evidence_saved'").get().n,8);
 });

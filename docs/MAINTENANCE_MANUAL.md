@@ -1,4 +1,12 @@
-## Current dialogue connectivity accepted; quality deferred — 2026-10-13T11:04:37.969319+00:00
+## Current unpublished author-conversation/source-material candidate — 2026-10-13T12:28:03.022102+00:00
+
+All189 replacement remains active. New candidate uses author conversation for original learning stages; first-reading source receipts, device drafts/continuation, reading versions and full transcript copy/export are implemented locally. AI policyv7 now receives exact original annotations and source provenance, with per-dispatch context receipts and bounded, explicitly marked source windows. Original grading/history boundaries remain.189-source check,199 focused tests on each Node22/24 and30 cache/frontend checks passed; synthetic browser checks passed within the documented scope. No model/provider or production mutation.
+
+Full-suite snapshot408/349pass/59fail exposes stale v6 calibration pins; neither old packets nor consumed results were rewritten. Model quality/207 cases/full3E2E remain deferred, not passed. Formal UC central→My acceptance, native disposition, remaining browser/IME/performance checks, exact release package, owner go/no-go and publication remain outstanding. Current evidence and next actions: /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a134ff/IMPLEMENTATION-REVIEW.md. Runtime worktree remains active for the goal; owned browsers/server/build/download were closed or removed.
+
+Earlier connectivity and release sections below are historical baselines and do not validate this v7 candidate.
+
+## Historical dialogue connectivity accepted; quality deferred — 2026-10-13T11:04:37.969319+00:00
 
 Owner explicitly requests only successful AI dialogue while APIS models are being updated. One real Hetang turn passed on isolated YW88bc290/Pages132032f6 and private APIS8498919/versionb93868fb at0%; formalYW175f8ae/Pagesb6f5ac67 and APIS53dbb568100% remain unchanged. At11:00:54Z requestf83b76ae returned a154character reply in five persisted deltas; source revision8, one call row and browser reload equality verified. Actual providerCount1,brokerCompleted,true,no fallback/hedge/background. Serverfirsttoken886ms,browserfirstdelta2788ms,complete3959ms. Usage1780input+254output=2034;1169microUSD conservative tariff-equivalent,notinvoice. Original3 failedE2E rows retained, cumulative4/120.
 

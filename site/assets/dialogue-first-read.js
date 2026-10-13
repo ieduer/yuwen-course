@@ -1,39 +1,40 @@
-// Same source renderer, offsets and handlers as the original course. The host
-// supplies an owner-fenced transport; no local history is removed or adopted.
-export function openFirstReading({lessonId,root,action,isCurrent,onStatus,onUnlock,gate}){
- const controller=window.YwClassicalFirstRead,events=new AbortController();let session=null;
- const current=()=>!events.signal.aborted&&isCurrent();
- const transport={
-  readState:()=>action('state',{}),
-  mutate:(path,payload)=>{
-   if(!current())throw Error('帳戶或篇目已切換，請重新讀回。');
-   const operation={'/api/reading/first-read/mark':'mark','/api/reading/first-read/mark/delete':'delete','/api/reading/first-read/submit':'submit','/api/reading/first-read/resolve':'resolve'}[path];
-   if(!operation)throw Error('初讀操作未開放');return action(operation,payload);
-  },
+// Reading variants are materials, not a separate form or a progression gate.
+// Preserve the canonical first-read offsets whenever that source exists.
+export function openFirstReading({lessonId,root,isCurrent,curriculum,onSelect}){
+ const abort=new AbortController();
+ let sourceAsset=null,marks=[];
+ const render=()=>{
+  if(!sourceAsset||!isCurrent()||abort.signal.aborted)return;
+  root.replaceChildren();
+  for(const p of sourceAsset.paragraphs){
+   const line=document.createElement('p');line.dataset.readingKey=p.key;line.tabIndex=0;let offset=0;
+   for(const m of marks.filter(m=>m.paragraphKey===p.key).sort((a,b)=>a.startOffset-b.startOffset)){
+    if(m.startOffset<offset||p.text.slice(m.startOffset,m.endOffset)!==m.selectedText)continue;
+    line.append(document.createTextNode(p.text.slice(offset,m.startOffset)));
+    const mark=document.createElement('mark');mark.textContent=m.selectedText;mark.tabIndex=0;mark.setAttribute('role','button');mark.setAttribute('aria-label',`討論疑點：${m.selectedText}`);mark.title=m.correction?`原猜測：${m.guess}\n訂正：${m.correction}`:`原猜測：${m.guess}`;
+    const discuss=()=>onSelect(p.key,m.selectedText);mark.addEventListener('click',discuss);mark.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();discuss();}});
+    line.append(mark);offset=m.endOffset;
+   }
+   line.append(document.createTextNode(p.text.slice(offset)));root.append(line);
+  }
  };
- const handlers={signal:events.signal,isCurrent:current,toast:message=>{if(current())onStatus(message);},onChange:()=>{if(current()&&session.submitted){render();onUnlock();}},onUnlock:()=>{if(current()){render();onUnlock();}},onUnlockFailure:()=>{if(current())onUnlock();}};
- function render(){
-  if(!current())return;
-  root.replaceChildren();root.hidden=false;
-  if(!session.submitted&&gate()?.phase!=='initial_reading'){
-   root.textContent='原有完成及初讀版本已保留；不同版本的標記不套用到本版正文。原件可在本課紀錄核對。';return;
-  }
-  if(!session.submitted){root.innerHTML=controller.renderGate(session);controller.bindGate(root,session,handlers);return;}
-  const details=document.createElement('details'),summary=document.createElement('summary'),record=document.createElement('div');summary.textContent='原初讀與疑點訂正';record.innerHTML=controller.renderSubmittedReading(session)+controller.renderCorrections(session);details.append(summary,record);root.append(details);controller.bindCorrections(record,session,handlers);
-  if(!session.annotatedReadCompleted){
-   const button=document.createElement('button');button.textContent='我已讀完正文與註釋，進入字詞練習';
-   button.onclick=async()=>{button.disabled=true;try{
-    const receipt=await action('acknowledge',{textVersionId:session.asset.textVersionId,textDigest:session.asset.textDigest});if(receipt.ok!==true)throw Error('閱讀確認尚未讀回，請保留目前紀錄。');
-    if(!current())return;session.annotatedReadCompleted=true;render();onUnlock();
-   }catch(error){if(!current())return;onStatus(error.message);button.disabled=false;}};
-   root.append(button);
-  }
- }
- root.textContent='正在讀回無注疏正文及本帳戶的初讀紀錄…';root.hidden=false;
  const ready=(async()=>{
-  try{session=await controller.load(lessonId,{transport,canReconcile:()=>false});if(!current())return;if(!session)throw Error('本課無注疏正文暫時不可用');render();}
-  catch(error){if(current()){root.textContent=error.message;onStatus('初讀暫時未能確認；未解鎖註釋，也未改動紀錄。');}}
+  try{
+   let paragraphs;
+   if(curriculum.mode==='classical'){
+    const response=await fetch(`/data/classical-first-read/${lessonId}.json`,{signal:abort.signal});
+    if(!response.ok)throw Error('無標點版本暫時無法讀取；仍可閱讀標點版。');
+    const asset=await response.json();sourceAsset=asset;paragraphs=asset.paragraphs;
+   }else paragraphs=curriculum.passages.map(p=>({key:p.id,text:p.text.replace(/[\p{P}\s]/gu,'')}));
+   if(!isCurrent()||abort.signal.aborted)return;
+   sourceAsset||={paragraphs};render();
+   const select=()=>{
+    const selection=getSelection(),parent=selection?.anchorNode?.parentElement?.closest('[data-reading-key]');
+    if(parent&&root.contains(selection.focusNode)&&selection.toString().trim())onSelect(parent.dataset.readingKey,selection.toString().trim());
+   };
+   root.addEventListener('pointerup',select,{signal:abort.signal});
+   root.addEventListener('keyup',select,{signal:abort.signal});
+  }catch(error){if(!abort.signal.aborted&&isCurrent())root.textContent=error.message;}
  })();
- for(const event of ['pointerup','keyup'])root.addEventListener(event,()=>{if(current()&&session&&!session.submitted)controller.captureSelection(root,session,handlers);},{signal:events.signal});
- return {ready,dispose:()=>{events.abort();root.replaceChildren();root.hidden=true;}};
+ return {ready,setMarks:async state=>{await ready;if(!sourceAsset||state.textVersionId!==sourceAsset.textVersionId||state.textDigest!==sourceAsset.textDigest)return;const next=state.marks||[];if(JSON.stringify(next)!==JSON.stringify(marks)){marks=next;render();}},dispose:()=>{abort.abort();marks=[];root.replaceChildren();}};
 }

@@ -5,6 +5,7 @@ import vm from 'node:vm';
 import {parseHTML} from 'linkedom';
 import {LIMITS,projectState} from '../site/dialogue-policy.js';
 import {learningTurn} from '../site/dialogue-learning-turn.js';
+import {dialogueOpening} from '../site/dialogue-opening.js';
 import {readDialogueEvents} from '../site/assets/dialogue-events.js';
 
 const html=readFileSync(new URL('../site/dialogue.html',import.meta.url),'utf8');
@@ -13,9 +14,12 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
 function task(inputKind='text',id='task-one'){
  return {taskId:id,objectiveId:'source-objective',kind:inputKind==='choice'?'vocabulary':inputKind==='rating'?'evaluation':'formal',inputKind,prompt:'說說這一句如何照應前文。',...(inputKind==='choice'?{options:['第一個選項','第二個選項']}: {})};
 }
-async function fixture({inputKind='text',hash='#lesson-189',post,get,initial={},curriculumOverrides={}}={}){
+async function fixture({inputKind='text',hash='#lesson-189',post,get,initial={},curriculumOverrides={},storage=new Map(),conversation=false}={}){
  const {window,document}=parseHTML(html),calls=[],timers=new Map(),downloads=[];let timer=0;
+ document.body.dataset.dialogueFlow=conversation?'conversation':'structured';
  window.Element.prototype.scrollIntoView=()=>{};
+ window.localStorage={getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,value),removeItem:key=>storage.delete(key)};
+ window.sessionStorage={getItem:()=>null,removeItem:()=>{}};
  class FixtureURL extends URL{static createObjectURL(blob){downloads.push(blob);return 'blob:fixture';}static revokeObjectURL(){}}
  const lessons=Array.from({length:189},(_,i)=>({lessonId:`lesson-${i+1}`,title:`篇目 ${i+1}`,blockId:i<90?'a':'b',blockTitle:i<90?'上冊':'下冊',status:'source-ready'}));
  const curriculum={lessonId:'lesson-189',title:'篇目 189',author:'作者',source:'https://example.test/source',mode:'modern',curriculumVersion:'v1',passages:[{id:'lesson-189:p1',text:'原文的一句話。',block:{runs:[{text:'原文的一句話。'}]}}],annotations:[],objectives:[],vocabulary:[],resources:[],...curriculumOverrides};
@@ -33,7 +37,7 @@ async function fixture({inputKind='text',hash='#lesson-189',post,get,initial={},
   }
   return Response.json(get?get(url,data):data);
  };
- const context=vm.createContext({window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:()=>({dispose(){}}),localStorage:{},getSelection:()=>null});
+ const context=vm.createContext({window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:()=>({dispose(){}}),localStorage:{},getSelection:()=>null});
  vm.runInContext(script+'\nglobalThis.frontend={update,refresh,view,renderSourceResults,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
  for(let i=0;i<8&&!calls.some(c=>c.url.startsWith('/api/'));i++)await tick();await tick();
  return {document,window,calls,timers,downloads,frontend:context.frontend,context,setData:value=>{data=value;},get data(){return data;},get posts(){return calls.filter(c=>c.options.method==='POST').map(c=>JSON.parse(c.options.body));},answer(value){document.getElementById('answer').value=value;document.getElementById('answer').oninput();},send:()=>document.getElementById('compose').onsubmit({preventDefault(){}})};
@@ -102,7 +106,7 @@ test('a definite validation rejection allows correction without freezing or repl
 
 test('source unavailable blocks new submission while preserving original access and completed-history wording',async()=>{
  const f=await fixture({initial:{learningTurn:{...task(),'kind':'unavailable',inputKind:'none',prompt:'正文來源尚待核對'}},curriculumOverrides:{passages:[],sourceStatus:'source-unavailable'}});
- assert.match(f.document.getElementById('passages').textContent,/尚待核對/);assert.equal(f.document.getElementById('answer').disabled,true);f.answer('不能評分的回應');await f.send();assert.equal(f.posts.length,0);assert.equal(f.document.getElementById('legacy').getAttribute('href'),'/#lesson-189');
+ assert.match(f.document.getElementById('passages').textContent,/尚待核對/);assert.equal(f.document.getElementById('answer').disabled,true);f.answer('不能評分的回應');await f.send();assert.equal(f.posts.length,0);assert.equal(f.document.getElementById('legacy').getAttribute('href'),'/?view=legacy#lesson-189');
  const old=await fixture({initial:{state:{legacyCompletion:true,next:null,objectives:[],completion:'in_progress'}}});assert.match(old.document.getElementById('next').textContent,/原課已完成/);assert.match(old.document.getElementById('next').textContent,/繼續細讀由你決定/);
 });
 
@@ -190,4 +194,34 @@ test('continuation SSE appends the teacher reply without duplicating the student
  assert.equal(f.posts.length,1);assert.equal(f.document.querySelectorAll('#turns .student').length,1);
  assert.match(f.document.getElementById('turns').textContent,/我的原答案/);assert.match(f.document.getElementById('turns').textContent,/先看這一句，它如何照應前文？/);
  assert.equal(f.document.getElementById('answer').value,'我另外想到的問題');assert.equal(f.document.getElementById('partial-reply'),null);
+});
+
+
+test('unsent draft survives reload only for the confirmed owner and matching lesson',async()=>{
+ const storage=new Map();const first=await fixture({storage});first.answer('重新整理仍須保留的私密草稿');
+ const other=await fixture({storage,initial:{ownerRef:'owner-b'}});assert.equal(other.document.getElementById('answer').value,'');
+ const restored=await fixture({storage});assert.equal(restored.document.getElementById('answer').value,'重新整理仍須保留的私密草稿');assert.equal(restored.posts.length,0);
+ await restored.send();const again=await fixture({storage});assert.equal(again.document.getElementById('answer').value,'');
+});
+
+test('uncertain request survives reload with the same mutation and does not auto replay',async()=>{
+ const storage=new Map();const first=await fixture({storage,post:()=>{throw Error('offline');}});first.answer('原始待確認作答');await first.send();
+ const restored=await fixture({storage});assert.equal(restored.posts.length,0);await restored.send();assert.equal(restored.posts[0].mutationId,first.posts[0].mutationId);
+});
+
+test('search covers the whole catalogue without AI calls and handles no result',async()=>{
+ const f=await fixture();f.document.getElementById('catalog-open').onclick();assert.equal(f.document.querySelectorAll('#catalog-results button').length,189);
+ f.document.getElementById('lesson-search').value='篇目 189';f.document.getElementById('lesson-search').oninput();assert.equal(f.document.querySelectorAll('#catalog-results button').length,1);
+ f.document.getElementById('lesson-search').value='不存在';f.document.getElementById('lesson-search').oninput();assert.match(f.document.getElementById('catalog-results').textContent,/沒有找到/);assert.equal(f.posts.length,0);
+});
+
+test('conversation mode never turns an ordinary greeting into a form field or choice',async()=>{
+ const f=await fixture({conversation:true,inputKind:'choice'});assert.equal(f.document.querySelectorAll('#task-input input').length,0);
+ f.answer('你好，我想先聊聊我不理解的地方。');await f.send();assert.equal(f.posts[0].conversation,true);assert.equal(f.posts[0].selectedIndex,undefined);assert.equal(f.posts[0].content,'你好，我想先聊聊我不理解的地方。');
+});
+test('classical initial reading stays conversational and all three source views remain available',async()=>{
+ const f=await fixture({conversation:true,curriculumOverrides:{mode:'classical'},initial:{learningTurn:null,readingGate:{phase:'initial_reading'}}});
+ assert.equal(f.document.getElementById('answer').disabled,false);assert.equal(f.document.querySelectorAll('#first-reading form').length,0);
+ for(const id of ['version-unpunctuated','version-punctuated','version-annotated'])assert.ok(f.document.getElementById(id));
+ f.answer('我想先試著斷句，可以嗎？');await f.send();assert.equal(f.posts[0].conversation,true);assert.match(f.posts[0].taskId,/reading-conversation$/);
 });

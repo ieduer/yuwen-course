@@ -60,7 +60,15 @@ test("textbook pages module uses its current immutable content hash", () => {
 // The dialogue entry is independently served with immutable assets.
 test('dialogue entry assets use the current content hashes', () => {
   const html = readFileSync(resolve(ROOT, 'site/dialogue.html'), 'utf8');
-  for (const asset of ['dialogue.css', 'classical-first-read.js', 'dialogue.js']) {
+  for (const asset of ['dialogue.css', 'dialogue.js']) {
     assert.ok(html.includes(`/assets/${asset}?v=${contentVersion(`assets/${asset}`)}`), `${asset} cache authority must match the shipped bytes`);
   }
+});
+
+// Conversation materials no longer load the legacy first-read form.
+test('dialogue material imports are immutable and do not load the old form', () => {
+ const html=readFileSync(resolve(ROOT,'site/dialogue.html'),'utf8');
+ assert(!html.includes('/assets/classical-first-read.js'));
+ const code=readFileSync(resolve(ROOT,'site/assets/dialogue.js'),'utf8');
+ for(const [path,file] of [['../dialogue-opening.js','dialogue-opening.js'],['./dialogue-events.js','assets/dialogue-events.js'],['./dialogue-history.js','assets/dialogue-history.js'],['./dialogue-first-read.js','assets/dialogue-first-read.js']])assert(code.includes(path+'?v='+contentVersion(file)),file);
 });
