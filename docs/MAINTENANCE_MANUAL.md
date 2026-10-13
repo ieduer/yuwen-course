@@ -1,4 +1,12 @@
-## Current single-dialogue smoke scope — 2026-10-13T10:36:51.163846+00:00
+## Current dialogue connectivity accepted; quality deferred — 2026-10-13T11:04:37.969319+00:00
+
+Owner explicitly requests only successful AI dialogue while APIS models are being updated. One real Hetang turn passed on isolated YW88bc290/Pages132032f6 and private APIS8498919/versionb93868fb at0%; formalYW175f8ae/Pagesb6f5ac67 and APIS53dbb568100% remain unchanged. At11:00:54Z requestf83b76ae returned a154character reply in five persisted deltas; source revision8, one call row and browser reload equality verified. Actual providerCount1,brokerCompleted,true,no fallback/hedge/background. Serverfirsttoken886ms,browserfirstdelta2788ms,complete3959ms. Usage1780input+254output=2034;1169microUSD conservative tariff-equivalent,notinvoice. Original3 failedE2E rows retained, cumulative4/120.
+
+Transport/persistence/accounting acceptance only: model teaching quality,28calibration,full3lessons and69/207language calibration deferred, not passed. Model-generated score55 is retained as an isolated raw output and has not been quality validated; no central or historical rescoring. Old3.8 calibration15unconfirmed/13unrun closedwithoutreplay. Newcalibration activation disabled. All189 scope preserved. UC production controller and source→central→My write/readback remain owner-gated; no formal release.
+
+Evidence and recovery authority: /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/DIALOGUE-SMOKE-RESULT.json and CHECKPOINT-ALL-LESSONS.md. Consumed90s deployment timed out/noID and was readback-absent; independent180s same-artifact1POST returned handle and exact4GET reconciliation confirmed deployment. No old publisher replay. Unique source/proposals and receipts retained; task-owned build/dependencies/checkouts being removed after source/handle checks. NativeApp pointer unchanged; partial-stream continuation, fullaccessibility/nativeIME/twolegacy touchchecks remain unpassed.
+
+## Historical single-dialogue smoke scope — 2026-10-13T10:36:51.163846+00:00
 
 Owner defers model quality verification during the planned APIS model update; only a real AI reply, source save and browser reload are requested now. All189 scope and historical work remain. Current isolated sourcee695dbb/Pages6d270ed2 and APISb8dd01e/32bf54d3 at0% verified; formalYW175f8ae and APIS53dbb568100% remain unchanged. Gemini3.8 stopped:15 primary cases unconfirmed/nooutput,13 unrun;3E2E calls remain counted. Quality28/full3E2E and language promotion deferred, not passed.
 
