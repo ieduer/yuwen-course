@@ -1,3 +1,7 @@
+## Current local artifact baseline — 2026-10-13T23:22:59.438943+00:00
+
+CI38483467298 passed evidence, blueprint, dialogue, Reading API and binding checks, then rejected the stale tracked artifact manifest. Rebuilt the unchanged repaired runtime from published b6f3b1a:1464files/196192003bytes, full artifact SHA2565209b77255dc6f993b50ab1f99c30c5cba173fb06a1e33dde22139bc1f93045f. Staging verification and exact Node22/24 manifest checks passed. Delta from prior baseline:6new dialogue modules,9changed files including release marker,0removed. Updated only the existing generated baseline; no validation bypass or production acceptance.
+
 ## Current local entry-routing repair — 2026-10-13T23:18:35.235671+00:00
 
 Exact-head PR CI38483277443 exposed an early feature-flag read before hostile legacy Web mutation rejection. The homepage branch now checks root path and GET/HEAD before reading YW_DIALOGUE_ENABLED; original authentication/origin/content-type rejection remains unchanged. Node22.21.1 and24.18.0 each pass107 evidence/entrypoint checks. No thresholds or assertions weakened. New exact-head CI and artifact verification pending; no deployment. Previous local preload and full189 evidence remains valid within its stated limits.
