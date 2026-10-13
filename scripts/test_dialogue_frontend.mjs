@@ -1,3 +1,4 @@
+import {PALETTES} from '../site/assets/dialogue-palettes.js';
 import {originalRange,dialogueReadingAsset} from '../site/dialogue-reading-material.js';
 import assert from 'node:assert/strict';
 import test from 'node:test';
@@ -6,7 +7,7 @@ import vm from 'node:vm';
 import {parseHTML} from 'linkedom';
 import {LIMITS,projectState} from '../site/dialogue-policy.js';
 import {learningTurn} from '../site/dialogue-learning-turn.js';
-import {dialogueOpening} from '../site/dialogue-opening.js';
+import {dialogueOpening,dialogueIdentity} from '../site/dialogue-opening.js';
 import {readDialogueEvents} from '../site/assets/dialogue-events.js';
 
 const html=readFileSync(new URL('../site/dialogue.html',import.meta.url),'utf8');
@@ -15,10 +16,11 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
 function task(inputKind='text',id='task-one'){
  return {taskId:id,objectiveId:'source-objective',kind:inputKind==='choice'?'vocabulary':inputKind==='rating'?'evaluation':'formal',inputKind,prompt:'說說這一句如何照應前文。',...(inputKind==='choice'?{options:['第一個選項','第二個選項']}: {})};
 }
-async function fixture({inputKind='text',hash='#lesson-189',post,get,initial={},curriculumOverrides={},storage=new Map(),conversation=false}={}){
+async function fixture({inputKind='text',hash='#lesson-189',post,get,logout,initial={},curriculumOverrides={},storage=new Map(),conversation=false}={}){
  const {window,document}=parseHTML(html),calls=[],timers=new Map(),downloads=[];let timer=0;
  document.body.dataset.dialogueFlow=conversation?'conversation':'structured';
  window.Element.prototype.scrollIntoView=()=>{};
+ const createElement=document.createElement.bind(document);document.createElement=(name,...args)=>{const element=createElement(name,...args);if(name==='dialog'){element.showModal=()=>{element.open=true;};element.close=()=>{element.open=false;};}return element;};
  window.localStorage={getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,value),removeItem:key=>storage.delete(key)};
  window.sessionStorage={getItem:()=>null,removeItem:()=>{}};
  class FixtureURL extends URL{static createObjectURL(blob){downloads.push(blob);return 'blob:fixture';}static revokeObjectURL(){}}
@@ -30,6 +32,7 @@ async function fixture({inputKind='text',hash='#lesson-189',post,get,initial={},
  for(const element of document.querySelectorAll('*'))element.scrollIntoView=()=>{};
  const fetch=async(url,options={})=>{
   calls.push({url,options});
+  if(url==='https://my.bdfz.net/api/logout')return logout?logout():Response.json({ok:true});
   if(url==='/dialogue-curriculum/index.json')return Response.json({schemaVersion:1,lessons});
   if(url.startsWith('/dialogue-curriculum/'))return Response.json({...curriculum,lessonId:url.split('/').at(-1).replace('.json','')});
   if(options.method==='POST'){
@@ -38,8 +41,8 @@ async function fixture({inputKind='text',hash='#lesson-189',post,get,initial={},
   }
   return Response.json(get?get(url,data):data);
  };
- const context=vm.createContext({originalRange,dialogueReadingAsset,window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:()=>({dispose(){}}),localStorage:{},getSelection:()=>null});
- vm.runInContext(script+'\nglobalThis.frontend={update,refresh,refreshReadingMarks,clearPrivateView,view,renderSourceResults,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
+ const context=vm.createContext({PALETTES,originalRange,dialogueReadingAsset,window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,dialogueIdentity,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:()=>({dispose(){}}),localStorage:{},getSelection:()=>null});
+ vm.runInContext(script+'\nglobalThis.frontend={renderPlates,materialText,update,refresh,refreshReadingMarks,clearPrivateView,view,renderSourceResults,renderOriginalMaterials,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
  for(let i=0;i<8&&!calls.some(c=>c.url.startsWith('/api/'));i++)await tick();await tick();
  return {document,window,calls,timers,downloads,frontend:context.frontend,context,setData:value=>{data=value;},get data(){return data;},get posts(){return calls.filter(c=>c.options.method==='POST').map(c=>JSON.parse(c.options.body));},answer(value){document.getElementById('answer').value=value;document.getElementById('answer').oninput();},send:()=>document.getElementById('compose').onsubmit({preventDefault(){}})};
 }
@@ -155,7 +158,7 @@ test('exact owner-approved supplementary lesson displays passed without a score,
 test('source receipts stay in the drawer while the conversation has one teacher and discreet save status',async()=>{
  const f=await fixture({initial:{turns:[{id:'source-receipt',role:'teacher',model:'source-owned',content:'已保存你的閱讀確認。繼續說說…',createdAt:'2026-10-13T00:00:00Z'},{id:'teacher-one',role:'teacher',model:'gemini-3.6-flash',content:'這句話讓你想到什麼？',createdAt:'2026-10-13T00:00:01Z'}]}});
  assert.doesNotMatch(f.document.getElementById('turns').textContent,/原題紀錄|已保存你的閱讀確認|查看／補充更正/);
- assert.match(f.document.getElementById('turns').textContent,/作者 · AI 教學模擬/);
+ assert.match(f.document.getElementById('turns').textContent,/作者/);
  assert.match(f.document.getElementById('turn-review-list').textContent,/已保存你的閱讀確認/);
  assert.equal(f.document.querySelectorAll('#turn-review-list button').length,2);
  f.frontend.renderSourceResults({sourceSubmissions:[{status:'confirmed',score:83}]});
@@ -211,7 +214,7 @@ test('uncertain request survives reload with the same mutation and does not auto
 });
 
 test('search covers the whole catalogue without AI calls and handles no result',async()=>{
- const f=await fixture();f.document.getElementById('catalog-open').onclick();assert.equal(f.document.querySelectorAll('#catalog-results button').length,189);
+ const f=await fixture();f.document.getElementById('lesson-search').oninput();assert.equal(f.document.querySelectorAll('#catalog-results button').length,189);
  f.document.getElementById('lesson-search').value='篇目 189';f.document.getElementById('lesson-search').oninput();assert.equal(f.document.querySelectorAll('#catalog-results button').length,1);
  f.document.getElementById('lesson-search').value='不存在';f.document.getElementById('lesson-search').oninput();assert.match(f.document.getElementById('catalog-results').textContent,/沒有找到/);assert.equal(f.posts.length,0);
 });
@@ -220,11 +223,26 @@ test('conversation mode never turns an ordinary greeting into a form field or ch
  const f=await fixture({conversation:true,inputKind:'choice'});assert.equal(f.document.querySelectorAll('#task-input input').length,0);
  f.answer('你好，我想先聊聊我不理解的地方。');await f.send();assert.equal(f.posts[0].conversation,true);assert.equal(f.posts[0].selectedIndex,undefined);assert.equal(f.posts[0].content,'你好，我想先聊聊我不理解的地方。');
 });
-test('classical initial reading stays conversational and all three source views remain available',async()=>{
+test('classical initial reading stays conversational and unpunctuated and merged annotated source views remain available',async()=>{
  const f=await fixture({conversation:true,curriculumOverrides:{mode:'classical'},initial:{learningTurn:null,readingGate:{phase:'initial_reading'}}});
  assert.equal(f.document.getElementById('answer').disabled,false);assert.equal(f.document.querySelectorAll('#first-reading form').length,0);
- for(const id of ['version-unpunctuated','version-punctuated','version-annotated'])assert.ok(f.document.getElementById(id));
+ for(const id of ['version-unpunctuated','version-annotated'])assert.ok(f.document.getElementById(id));
+ assert.equal(f.document.getElementById('version-unpunctuated').hidden,false);
  f.answer('我想先試著斷句，可以嗎？');await f.send();assert.equal(f.posts[0].conversation,true);assert.match(f.posts[0].taskId,/reading-conversation$/);
+});
+
+for(const mode of ['modern','poetry'])test(mode+' keeps punctuation and annotations without an unpunctuated option',async()=>{
+ const f=await fixture({conversation:true,curriculumOverrides:{mode}});
+ const unpunctuated=f.document.getElementById('version-unpunctuated');
+ assert.equal(unpunctuated.hidden,true);
+ unpunctuated.onclick();
+ assert.equal(f.document.getElementById('first-reading').hidden,true);
+ assert.equal(f.document.getElementById('passages').hidden,false);
+ for(const version of ['annotated']){
+  f.document.getElementById('version-'+version).onclick();
+  assert.equal(f.document.getElementById('version-'+version).getAttribute('aria-pressed'),'true');
+  assert.equal(unpunctuated.hidden,true);
+ }
 });
 
 
@@ -238,7 +256,123 @@ test('poem red marks retain source punctuation, survive view switches and clear 
  const p=f.document.getElementById('lesson-189:p1'),labels=[...p.querySelectorAll('[data-reading-mark]')];
  assert.equal(labels.map(n=>n.textContent).join(''),'光！𠮷');assert(labels.every(n=>n.title.includes('最初理解')&&n.title.includes('後來的訂正')));
  labels[0].onclick();assert.equal(f.document.getElementById('quote').textContent,'光！𠮷');
- f.document.getElementById('version-punctuated').onclick();assert.equal([...f.document.querySelectorAll('[data-reading-mark]')].map(n=>n.textContent).join(''),'光！𠮷');
+ f.document.getElementById('version-annotated').onclick();assert.equal([...f.document.querySelectorAll('[data-reading-mark]')].map(n=>n.textContent).join(''),'光！𠮷');
  f.frontend.clearPrivateView();assert.equal(f.document.querySelectorAll('[data-reading-mark]').length,0);assert(p.textContent.includes(text));
  notes={...notes,textDigest:'different-source'};f.frontend.update(f.data);await f.frontend.refreshReadingMarks();assert.equal(f.document.querySelectorAll('[data-reading-mark]').length,0);
+});
+
+ test('author introduces themselves before input without changing saved turns',async()=>{
+ const f=await fixture({conversation:true,curriculumOverrides:{author:'朱自清',title:'荷塘月色',persona:{kind:'author-simulation'}}});
+ assert.equal(f.document.getElementById('conversation-title').textContent,'與朱自清談');
+ assert.match(f.document.getElementById('next').textContent,/我是朱自清/);
+ assert.equal(f.posts.length,0);assert.equal(f.data.turns.length,0);
+ assert.doesNotMatch(f.document.querySelector('.conversation').textContent,/尚未開始對話|選取原文，即可帶入對話|AI 教學模擬|回應會保存，評閱沿用原有判準/);
+});
+ test('foreign author introductions contain original language and Chinese without invented biography',()=>{
+ const intro=dialogueOpening({author:'海明威',title:'老人與海',persona:{kind:'author-simulation'}});
+ assert.match(intro.content,/I’m Ernest Hemingway/);assert.match(intro.content,/我是海明威/);
+ const guide=dialogueOpening({author:'教材學習引導',title:'單元導讀',persona:{kind:'curriculum-guide'}});assert.doesNotMatch(guide.content,/我是|吾乃/);
+});
+
+test('account logout clears the visible private session but retains the owner draft and server history',async()=>{
+ const storage=new Map(),f=await fixture({storage,initial:{turns:[{id:'old',role:'student',content:'既有紀錄'}]}});
+ f.answer('尚未送出的文字');
+ await f.document.getElementById('account-logout').onclick();
+ assert.equal(f.document.getElementById('account-login').hidden,false);assert.equal(f.document.getElementById('account-logout').hidden,true);
+ assert.equal(f.document.getElementById('turns').textContent,'');assert.equal(f.document.getElementById('answer').value,'');assert.equal(f.document.getElementById('send').disabled,true);
+ assert.equal(f.data.turns[0].content,'既有紀錄');assert([...storage.values()].some(v=>v.includes('尚未送出的文字')));
+ assert.equal(f.calls.filter(c=>c.url==='https://my.bdfz.net/api/logout').length,1);
+});
+test('unconfirmed logout keeps the visible session and never retries',async()=>{
+ const f=await fixture({logout:()=>Response.json({ok:false},{status:503})});f.answer('保留草稿');await f.document.getElementById('account-logout').onclick();
+ assert.equal(f.document.getElementById('account-logout').hidden,false);assert.equal(f.document.getElementById('answer').value,'保留草稿');
+ assert.match(f.document.getElementById('status').textContent,/登出尚未確認/);assert.equal(f.calls.filter(c=>c.url==='https://my.bdfz.net/api/logout').length,1);
+});
+
+test('all original lesson text, images and supplements remain available in the reading surface',async()=>{
+ const f=await fixture();let posts=0,images=0;
+ for(const file of readdirSync(new URL('../site/dialogue-curriculum/',import.meta.url)).filter(n=>/^lesson-.*\.json$/.test(n))){
+  const c=JSON.parse(readFileSync(new URL('../site/dialogue-curriculum/'+file,import.meta.url),'utf8'));
+  const source=JSON.parse(readFileSync(new URL('../site/data/lessons/'+file,import.meta.url),'utf8'));
+  f.frontend.renderOriginalMaterials(source,c);const box=f.document.getElementById('original-materials');
+  for(const p of source.posts||[]){
+   // cooked is the original structured source; plain_text has normalized punctuation and rewritten URLs.
+   let expected=p.plain_text||'';
+   if(p.cooked){const template=f.document.createElement('template');template.innerHTML=p.cooked;for(const unsafe of template.content.querySelectorAll('script,style,iframe,object,embed,form,input,button,svg,math'))unsafe.remove();for(const note of template.content.querySelectorAll('.footnote-item')){const body=note.cloneNode(true);for(const back of body.querySelectorAll('.footnote-backref'))back.remove();assert(box.textContent.replace(/\s/g,'').includes(body.textContent.replace(/\s/g,'')),`${file} note ${note.id}`);}for(const item of template.content.querySelectorAll('.footnotes-list,.footnote-ref'))item.remove();expected=[...template.content.childNodes].map(n=>n.textContent||'').join('');}
+   const body=box.cloneNode(true);for(const note of body.querySelectorAll('.inline-note,.annotation-toggle'))note.remove();if(expected)assert(body.textContent.replace(/\s/g,'').includes(expected.replace(/\s/g,'')),`${file} post ${p.post_number}`);posts++;
+  }
+  const urls=new Set([...box.querySelectorAll('img')].map(n=>n.getAttribute('src')));
+  for(const item of source.forumImages||[]){if(/^https?:\/\//.test(item.src)&&/\.(png|jpe?g|webp|gif|avif)([?#]|$)/i.test(item.src)){assert(urls.has(item.src),`${file} ${item.src}`);images++;}}
+  for(const item of c.studyGuide||[])if(item.prompt)assert(box.textContent.includes(item.prompt),`${file} study guide`);
+ }
+ assert(posts>189);assert(images>100);
+});
+
+test('traditional Analects voices leave source authorship unchanged and remove UI AI labels',async()=>{
+ const c={title:'《论语》十二章',author:'原作未署個人作者',persona:{kind:'source-guide'}};
+ const f=await fixture({conversation:true,curriculumOverrides:c});
+ assert.equal(f.document.getElementById('conversation-title').textContent,'與孔子及孔門弟子談');
+ assert.match(f.document.getElementById('next').textContent,/孔子：吾名丘/);
+ assert.doesNotMatch(f.document.querySelector('.conversation').textContent,/AI 模擬|原作未署個人作者/);
+ assert.equal(c.author,'原作未署個人作者');assert.match(f.document.querySelector('.author-avatar img').getAttribute('src'),/kongzi\.webp/);
+ f.document.getElementById('catalog-toggle').onclick();assert.equal(f.document.getElementById('catalog').hidden,true);
+ f.document.getElementById('catalog-toggle').onclick();assert.equal(f.document.getElementById('catalog').hidden,false);
+ assert(f.document.querySelector('.composer-box').contains(f.document.getElementById('send')));
+});
+
+test('all registered palettes keep every reading surface legible',()=>{
+ const luminance=hex=>{const c=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255).map(n=>n<=.04045?n/12.92:((n+.055)/1.055)**2.4);return c[0]*.2126+c[1]*.7152+c[2]*.0722;};
+ const contrast=(a,b)=>{const values=[luminance(a),luminance(b)].sort((x,y)=>x-y);return (values[1]+.05)/(values[0]+.05);};
+ assert.equal(PALETTES.length,17);
+ for(const p of PALETTES)for(const bg of ['background','surface','commentSurface','wash']){
+  assert(contrast(p.text,p[bg])>=7,`${p.id} body/${bg}`);
+  for(const ink of ['textMuted','link'])assert(contrast(p[ink],p[bg])>=4.5,`${p.id} ${ink}/${bg}`);
+ }
+});
+
+test('notes default closed, close on outside click, and explicit expand-all survives outside clicks',async()=>{
+ const f=await fixture({curriculumOverrides:{passages:[{id:'lesson-189:p1',text:'原文。',block:{runs:[{text:'原文'},{type:'annotation-ref',noteId:'n',label:'1'},{text:'。'}]}}],annotations:[{noteId:'n',blocks:[{runs:[{text:'字義。'}]}]}]}});
+ const note=f.document.querySelector('.inline-note'),ref=f.document.querySelector('.annotation-toggle');assert.equal(note.hidden,true);ref.onclick();assert.equal(note.hidden,false);
+ f.document.getElementById('title').dispatchEvent(new f.window.Event('click',{bubbles:true}));assert.equal(note.hidden,true);
+ f.document.getElementById('notes-toggle').onclick();assert.equal(note.hidden,false);f.document.getElementById('title').dispatchEvent(new f.window.Event('click',{bubbles:true}));assert.equal(note.hidden,false);
+ f.document.getElementById('notes-toggle').onclick();assert.equal(note.hidden,true);
+ const menu=f.document.querySelector('.appearance');menu.open=true;f.document.getElementById('title').dispatchEvent(new f.window.Event('click',{bubbles:true}));assert.equal(menu.open,false);
+});
+test('material categories use one direct selection and retain full source text',async()=>{
+ const f=await fixture();f.frontend.renderOriginalMaterials({posts:[{post_number:1,plain_text:'原有資料全文'}],forumImages:[{src:'https://example.test/p.jpg'}]}, {resources:[],media:[],studyGuide:[{prompt:'學案題目',referenceAnswer:'原答案'}]});
+ const tabs=[...f.document.querySelectorAll('.material-tabs button')];assert(tabs.some(b=>b.textContent==='圖片影音'));tabs.find(b=>b.textContent==='圖片影音').onclick();
+ assert.equal(f.document.getElementById('material-media').hidden,false);assert.equal(f.document.getElementById('material-extra').hidden,true);assert.match(f.document.getElementById('original-materials').textContent,/原有資料全文/);
+});
+
+test('exported material keeps paragraphs, quotes, lists and tables without executable HTML',async()=>{
+ const f=await fixture(),content=f.frontend.materialText('', '<h2>閱讀題</h2><p>第一段<br>續行</p><blockquote><p>引文</p></blockquote><ol start="3"><li>問題</li></ol><table><tr><th>人物</th><td>項羽</td></tr></table><script>bad()</script><img src="https://example.test/a.png" onerror="bad()"><a href="javascript:bad()">危險連結</a>');
+ assert.equal(content.querySelectorAll('p').length,2);assert(content.querySelector('br'));assert(content.querySelector('blockquote'));assert.equal(content.querySelector('ol').getAttribute('start'),'3');assert(content.querySelector('.table-scroll table'));
+ assert.equal(content.querySelector('script'),null);assert.equal(content.querySelector('[onerror]'),null);assert.equal(content.querySelector('a').getAttribute('href'),null);
+ const source=JSON.parse(readFileSync(new URL('../site/data/lessons/lesson-1728.json',import.meta.url),'utf8'));
+ f.frontend.renderOriginalMaterials(source,{resources:[]});const extra=f.document.getElementById('material-extra');assert(extra.querySelectorAll('p').length>=102,'Hongmenyan original paragraphs');assert.equal(extra.querySelectorAll('br').length,7,'Hongmenyan original line breaks');assert.equal(extra.querySelectorAll('.inline-note').length,89);assert.equal(extra.querySelectorAll('.annotation-toggle').length,89);assert.equal(extra.querySelector('ol'),null);const note=extra.querySelector('.inline-note'),ref=extra.querySelector('.annotation-toggle');assert.equal(note.hidden,true);ref.onclick();assert.equal(note.hidden,false);assert.equal(ref.nextElementSibling,note);f.document.getElementById('title').dispatchEvent(new f.window.Event('click',{bubbles:true}));assert.equal(note.hidden,true);
+});
+
+test('textbook reader reaches every lesson page with bottom controls, keyboard and swipe',async()=>{
+ const f=await fixture(),box=f.document.createElement('div');f.document.body.append(box);
+ const pages=Array.from({length:5},(_,i)=>({label:`第 ${i+13} 頁`,src:`https://sun.bdfz.net/registered/${i}.webp`}));
+ f.frontend.renderPlates(box,{notes:[],pages});const reader=box.querySelector('.plate-reader'),stage=box.querySelector('.plate-stage'),bar=box.querySelector('.plate-toolbar'),[previous,next]=bar.querySelectorAll('button'),choice=bar.querySelector('select');
+ assert.equal(reader.lastElementChild,bar);assert.equal(choice.children.length,5);assert.equal(previous.disabled,true);
+ for(let i=1;i<5;i++){next.onclick();assert.equal(stage.querySelector('img').getAttribute('src'),pages[i].src);assert.equal(stage.querySelectorAll('img').length,1);}assert.equal(next.disabled,true);
+ reader.onkeydown({key:'Home',target:stage,preventDefault(){}});assert.equal(stage.querySelector('img').alt,pages[0].label);
+ stage.onpointerdown({clientX:150,clientY:100});stage.onpointerup({clientX:50,clientY:105});assert.equal(stage.querySelector('img').alt,pages[1].label);
+ stage.onpointerdown({clientX:150,clientY:100});stage.onpointerup({clientX:140,clientY:220});assert.equal(stage.querySelector('img').alt,pages[1].label,'vertical scroll does not turn page');
+ stage.querySelector('img').onerror();assert.match(stage.textContent,/暫時無法載入/);previous.onclick();assert.equal(stage.querySelector('img').alt,pages[0].label,'failed image does not block navigation');
+ stage.onclick();assert(f.document.querySelector('.plate-fullscreen'));assert.equal(stage.querySelector('img').alt,pages[0].label);stage.onclick();assert.equal(f.document.querySelector('.plate-fullscreen'),null);assert.equal(box.querySelector('.plate-reader'),reader);stage.onclick();reader.onkeydown({key:'Escape',target:stage,preventDefault(){}});assert.equal(f.document.querySelector('.plate-fullscreen'),null);stage.onclick();f.frontend.renderPlates(box,{notes:[],pages:[]});assert.equal(f.document.querySelector('.plate-fullscreen'),null);assert.equal(box.querySelector('.plate-toolbar'),null);
+});
+
+test('image references display together in source order and share one navigable fullscreen reader',async()=>{
+ const f=await fixture(),urls=['https://example.test/one.jpg','https://example.test/two.png?original=1','https://example.test/opaque'];
+ f.frontend.renderOriginalMaterials({posts:[{links:[{href:urls[0],text:'第一張'},{href:urls[1],text:'第二張'},{href:urls[0],text:'重複連結'},{href:'https://example.test/reading.pdf',text:'參考PDF'}]}],forumImages:[{src:urls[2]}]}, {resources:[{href:urls[2],label:'第三張'}]});
+ const panel=f.document.getElementById('material-links'),gallery=panel.querySelector('.reference-gallery'),images=gallery.querySelector('.reference-images');
+ assert.deepEqual([...images.querySelectorAll('img')].map(img=>img.getAttribute('src')),urls);assert.equal(images.dataset.layout,'continuous');assert([...images.querySelectorAll('img')].every(img=>img.loading==='lazy'));assert.match(panel.querySelector('.resource-row').textContent,/參考PDF/);
+ const buttons=gallery.querySelectorAll('.reference-gallery-toolbar button');buttons[1].onclick();assert.equal(images.dataset.layout,'overview');buttons[0].onclick();assert.equal(images.dataset.layout,'continuous');
+ images.querySelectorAll('.reference-image-open')[1].onclick();const dialog=f.document.querySelector('.plate-fullscreen'),stage=dialog.querySelector('.plate-stage');assert.equal(stage.querySelector('img').getAttribute('src'),urls[1]);dialog.querySelector('.plate-reader').onkeydown({key:'ArrowRight',target:stage,preventDefault(){}});assert.equal(stage.querySelector('img').getAttribute('src'),urls[2]);stage.onclick();assert.equal(f.document.querySelector('.plate-fullscreen'),null);assert.equal(f.document.querySelector('.reference-viewer-host'),null);
+ const source=JSON.parse(readFileSync(new URL('../site/data/lessons/lesson-1458.json',import.meta.url),'utf8')),c=JSON.parse(readFileSync(new URL('../site/dialogue-curriculum/lesson-1458.json',import.meta.url),'utf8'));
+ f.frontend.renderOriginalMaterials(source,c);const actual=[...f.document.querySelectorAll('#material-links .reference-images img')].map(img=>img.getAttribute('src'));
+ const expected=[...new Set((source.posts||[]).flatMap(post=>[...(post.links||[]),...(post.attachments||[])]).map(item=>typeof item==='string'?item:item.href||item.url||item.src).filter(url=>/\.(?:png|jpe?g|webp|gif|avif)(?:[?#]|$)/i.test(url)))];assert.equal(expected.length,69);for(const url of expected)assert(actual.includes(url),url);
 });

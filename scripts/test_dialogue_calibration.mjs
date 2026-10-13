@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {calibrationPacket,evaluateCalibrationCase} from './dialogue_calibration.mjs';
+import {POLICY_VERSION} from '../site/dialogue-policy.js';
 const corpus=JSON.parse(fs.readFileSync('scripts/dialogue-calibration-cases.json'));
 const budget=JSON.parse(fs.readFileSync('docs/dialogue/budget-policy.json'));
 const load=id=>JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${id}.json`));
@@ -52,7 +53,8 @@ test('all revised prompts request complete grounded criteria without changing ol
  const original=JSON.parse(fs.readFileSync('scripts/fixtures/dialogue-calibration-stopped-packet.json'));
  assert.equal(original.sourceDigest,'95b8f943e519191aba697a0c01984621ee8ea12549e164379363f5ef54a04f09');
  assert.equal(original.policyVersion,'yw-dialogue-policy-v5');
- assert.equal(packet.policyVersion,'yw-dialogue-policy-v6');
+ assert.equal(packet.policyVersion,POLICY_VERSION);
+ assert.notEqual(packet.policyVersion,original.policyVersion);
  for(const c of packet.cases){
   assert(c.prompt.includes('每個 criterion 至少一筆'));
   assert(c.prompt.includes('缺少任何必要證據時不給 demonstrated'));

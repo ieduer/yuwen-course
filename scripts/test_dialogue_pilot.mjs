@@ -172,7 +172,7 @@ test('inventory retains exact source ids and every formal and active guide requi
  assert.deepEqual(m.lessons.flatMap(l=>l.studyGuide.filter(i=>i.active).map(i=>i.itemKey)).sort(),g.lessons.flatMap(l=>l.items.filter(i=>i.activeForSelfTest).map(i=>i.itemKey)).sort());
 });
 test('all pilot contexts are bounded, versioned, and contain all learning domains',()=>{
- for(const id of ['lesson-1717-p2','lesson-1711-p1','lesson-1498']){const c=JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${id}.json`));for(const domain of ['structure','transfer','shangyou'])assert(c.objectives.some(o=>o.domain===domain));assert(c.objectives.some(o=>['context','firstRead'].includes(o.domain)));assert(contextFor({curriculum:c,state:projectState(c,[]),turns:[],question:null}).length<24000);}
+ for(const id of ['lesson-1717-p2','lesson-1711-p1','lesson-1498']){const c=JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${id}.json`));for(const domain of ['structure','transfer','shangyou'])assert(c.objectives.some(o=>o.domain===domain));assert(c.objectives.some(o=>['context','firstRead'].includes(o.domain)));assert(contextFor({curriculum:c,state:projectState(c,[]),turns:[],question:null}).length<LIMITS.contextChars+POLICY.length+40);}
 });
 function closingFor(c,turns){
  const students=turns.filter(t=>t.role==='student'),before=students[0],after=students.at(-1),p=c.passages[0];

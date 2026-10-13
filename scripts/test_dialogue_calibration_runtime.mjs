@@ -12,6 +12,10 @@ const entry = createAcceptanceWorker(worker);
 const version = '11111111-2222-4333-8444-555555555555';
 const request = (path='/api/dialogue/v1?lessonId=lesson-1717-p2', init={}) => new Request(ACCEPTANCE_ORIGIN+path, init);
 function fixture(t) {
+  // These are consumed, immutable operations. Exercise their recorded time
+  // window offline; wall-clock expiry must not silently disable regressions.
+  // Dedicated expiry cases below still advance the clock past the real pins.
+  t.mock.timers.enable({apis:['Date'],now:Date.parse('2026-10-13T08:30:00Z')});
   const sql = new DatabaseSync(':memory:');
   for (const name of fs.readdirSync('migrations').filter(x=>x.endsWith('.sql')).sort()) sql.exec(fs.readFileSync('migrations/'+name,'utf8'));
   t.after(()=>sql.close());

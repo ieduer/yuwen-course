@@ -25,11 +25,17 @@ test('authorized contract and routable endpoint cannot activate or spend from re
  let calls=0;const r=handleAmendment5Calibration(new Request('https://example.test',{method:'POST',body:JSON.stringify(authority)}),{}, {},()=>calls++,{authority});
  assert.equal(r.status,409);assert.equal((await r.json()).active,false);assert.equal(calls,0);
 });
-test('28-case new packet is deterministic and source pinned; original packet is byte unchanged',()=>{
+test('consumed packet stays byte pinned; changed source produces only a deterministic unapproved preview',()=>{
  // Hash the complete representation so a stale source failure does not dump
  // megabytes of lesson text or prompts into the task history.
  const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
- assert.equal(hash(amendment5Packet(corpus,load)),hash(packet),'new proposal must be refreshed after source writers freeze');
+ assert.equal(hash(packet),'72f83834ed740b136be10b7f467943582b3d5f04ff4dfe896a6a0522560d05fe','consumed packet is immutable');
+ const preview=amendment5Packet(corpus,load);
+ assert.equal(hash(preview),hash(amendment5Packet(corpus,load)));
+ assert.notEqual(preview.sourceDigest,packet.sourceDigest);
+ assert.equal(preview.operation,'unapproved-source-preview');assert.equal(preview.active,false);
+ assert.equal(preview.paidCallsAuthorized,false);assert.equal(preview.authorityDigest,null);
+ assert.equal(plan({packet:preview}).allowed,false,'old authority cannot admit current prompts');
  assert.equal(packet.sourceDigest,contract.packetDigest);assert.equal(packet.active,false);
  assert.equal(crypto.createHash('sha256').update(fs.readFileSync('site/dialogue-calibration-packet.json')).digest('hex'),corpus.caseCorrection.previousPacketFileSha256);
  assert.notEqual(packet.sourceDigest,corpus.caseCorrection.previousPacketDigest);

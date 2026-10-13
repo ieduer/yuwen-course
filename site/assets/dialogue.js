@@ -1,5 +1,6 @@
+import {PALETTES} from './dialogue-palettes.js?v=a846366df3f1c133';
 import {originalRange,dialogueReadingAsset} from '../dialogue-reading-material.js?v=4735efcb1a2af88a';
-import {dialogueOpening} from '../dialogue-opening.js?v=77ec617a9f00ab8a';
+import {dialogueOpening,dialogueIdentity} from '../dialogue-opening.js?v=e7aeb2b0bf74cc7f';
 import {readDialogueEvents} from './dialogue-events.js?v=a7e6a9d3cf526331';
 import {readBrowserHistory} from './dialogue-history.js?v=4e50ee7bee866e26';
 import {openFirstReading} from './dialogue-first-read.js?v=04d04aafd8657321';
@@ -32,7 +33,7 @@ function renderPartial(partial){
  let n=document.getElementById('partial-reply');
  if(!partial){n?.remove();return;}
  if(!n){n=node('div',undefined,'turn teacher');n.id='partial-reply';n.append(node('small'),node('span'));$('turns').append(n);}
- n.dataset.turnId=partial.turnId;n.querySelector('small').textContent=partial.status==='unconfirmed'?'回應中斷 · 已保留文字，尚未計入評閱':'AI 教學模擬 · 正在生成，尚未計入評閱';n.querySelector('span').textContent=partial.content;
+ n.dataset.turnId=partial.turnId;n.querySelector('small').textContent=partial.status==='unconfirmed'?'回應中斷 · 已保留文字，尚未計入評閱':'正在回應…';n.querySelector('span').textContent=partial.content;
  n.querySelector('button')?.remove();
  if(partial.continuation?.allowed&&!snapshot?.pending){
   const button=node('button','續答');button.type='button';
@@ -70,16 +71,153 @@ function renderEvidence(report){
  for(const o of report.student.remaining)box.append(node('p',`${o.status==='pending_calibration'?'待校準（不影響本課完成，可請老師覆核）':o.status==='historical_review'?'原有完成已保留，版本對應待核對':o.status==='review'?'待覆核':'尚待觀察'}：${o.label}`));
 }
 function view(name){document.querySelector('.workspace').dataset.view=name;for(const id of ['text','conversation'])$(id+'-tab').setAttribute('aria-pressed',String(id===name));}
+function authorAvatar(){
+ const identity=dialogueIdentity(curriculum),box=node('span',undefined,'author-avatar');box.setAttribute('aria-hidden','true');box.append(node('b',identity.name.slice(0,1)));
+ if(identity.portraitUrl){const img=node('img');img.src=identity.portraitUrl;img.alt='';img.loading='lazy';img.onerror=()=>img.remove();box.append(img);}return box;
+}
+function mediaFigure(item){
+ const url=item.src||item.sourceUrl||item.finalUrl||item.href;if(!url)return null;
+ let parsed;try{parsed=new URL(url);}catch{return null;}if(!['https:','http:'].includes(parsed.protocol))return null;
+ const figure=node('figure',undefined,'source-media'),image=/\.(?:png|jpe?g|webp|gif|avif)(?:[?#]|$)/i.test(url)||item.mediaType?.startsWith('image/');
+ if(image){const img=node('img');img.src=url;img.alt=item.alt||'';img.loading='lazy';img.decoding='async';figure.append(img);}
+ else if(/\.(?:mp3|wav|m4a|ogg|mp4|webm)(?:[?#]|$)/i.test(url)){const media=node(/\.(?:mp4|webm)(?:[?#]|$)/i.test(url)?'video':'audio');media.src=url;media.controls=true;media.preload='none';figure.append(media);}
+ else return null;
+ if(item.alt)figure.append(node('figcaption',item.alt));appendSourceLink(figure,url,'開啟原件','資料');return figure;
+}
+let materialTextSequence=0;
+// Rebuild exported rich text from a small inert allowlist. Never insert source HTML into the live document.
+function materialText(text,cooked){
+ const content=node('div',undefined,'reading-prose');
+ if(!cooked){for(const paragraph of String(text||'').split(/\n\s*\n/))if(paragraph.trim())content.append(node('p',paragraph));return content;}
+ content.classList.add('rich-source');const template=document.createElement('template');template.innerHTML=cooked;const prefix=`material-text-${++materialTextSequence}-`,rendered=new Map();
+ const allowed=new Set('p br hr h1 h2 h3 h4 h5 h6 strong b em i u s del small sup sub blockquote ul ol li dl dt dd pre code table thead tbody tfoot tr th td caption a img div span figure figcaption details summary ruby rt rp'.split(' '));
+ const safeUrl=value=>{try{const url=new URL(value,'https://forum.rdfzer.com/');return ['https:','http:'].includes(url.protocol)?url.href:null;}catch{return null;}};
+ const copy=(source,parent)=>{
+  if(source.nodeType===3){parent.append(document.createTextNode(source.textContent));return;}
+  if(source.nodeType!==1)return;
+  const tag=source.tagName.toLowerCase();if(['script','style','iframe','object','embed','form','input','button','svg','math'].includes(tag))return;
+  if(!allowed.has(tag)){for(const child of source.childNodes)copy(child,parent);return;}
+  const target=node(/^h[1-6]$/.test(tag)?'h4':tag);rendered.set(source,target);
+  if(source.id)target.id=prefix+source.id;
+  if(tag==='a'){const href=source.getAttribute('href');if(href?.startsWith('#')){const id=prefix+href.slice(1);target.href='#'+id;target.onclick=event=>{event.preventDefault();const destination=document.getElementById(id);if(destination){destination.tabIndex=-1;destination.focus();destination.scrollIntoView({block:'center'});}};}else if(href){const url=safeUrl(href);if(url){target.href=url;target.target='_blank';target.rel='noopener noreferrer';}}}
+  if(tag==='img'){const url=safeUrl(source.getAttribute('src')||'');if(!source.getAttribute('src')||!url)return;target.src=url;target.alt=source.getAttribute('alt')||'';target.loading='lazy';target.decoding='async';}
+  if(tag==='ol'&&/^\d+$/.test(source.getAttribute('start')||''))target.setAttribute('start',source.getAttribute('start'));
+  if(['td','th'].includes(tag))for(const attr of ['colspan','rowspan'])if(/^[1-9]\d?$/.test(source.getAttribute(attr)||''))target.setAttribute(attr,source.getAttribute(attr));
+  for(const child of source.childNodes)copy(child,target);
+  if(tag==='table'){const scroll=node('div',undefined,'table-scroll');scroll.tabIndex=0;scroll.setAttribute('role','region');scroll.setAttribute('aria-label','資料表格');scroll.append(target);parent.append(scroll);}else parent.append(target);
+ };
+ for(const child of template.content.childNodes)copy(child,content);
+ // Associate notes only through the source's explicit footnote links.
+ const moved=new Set();
+ for(const sourceRef of template.content.querySelectorAll('.footnote-ref a[href^="#"]')){
+  const sourceId=sourceRef.getAttribute('href').slice(1),sourceNote=template.content.getElementById(sourceId);
+  const ref=rendered.get(sourceRef),original=rendered.get(sourceNote);
+  if(!sourceNote||!ref||!original)continue;
+  const note=node('span',undefined,'inline-note'),button=node('button',sourceRef.textContent,'annotation-toggle');
+  note.id=prefix+'inline-'+sourceRef.id;note.dataset.sourceFootnote=sourceId;note.hidden=true;
+  const body=sourceNote.cloneNode(true);for(const back of body.querySelectorAll('.footnote-backref'))back.remove();
+  for(const child of body.childNodes)copy(child,note);
+  button.type='button';button.setAttribute('aria-controls',note.id);button.setAttribute('aria-expanded','false');button.setAttribute('aria-label','註釋 '+sourceRef.textContent);
+  button.onclick=()=>{const open=note.hidden;if(!allNotesExpanded)closeIndividualNotes();note.hidden=!open;button.setAttribute('aria-expanded',String(open));};
+  const marker=ref.closest('sup')||ref;marker.replaceWith(button,note);moved.add(original);
+ }
+ for(const note of moved)note.remove();
+ for(const list of template.content.querySelectorAll('.footnotes-list')){
+  const target=rendered.get(list);if(target&&!target.children.length){target.remove();const separator=list.previousElementSibling;if(separator?.matches('hr.footnotes-sep'))rendered.get(separator)?.remove();}
+ }
+ return content;
+}
+function referenceGallery(items){
+ const section=node('section',undefined,'reference-gallery'),images=node('div',undefined,'reference-images'),toolbar=node('nav',undefined,'reference-gallery-toolbar');
+ section.setAttribute('aria-label','參考圖片');images.dataset.layout='continuous';toolbar.setAttribute('aria-label','圖片閱讀方式');
+ section.append(node('h3',`參考圖片 · ${items.length}`),images,toolbar);
+ const open=index=>{const host=node('div',undefined,'reference-viewer-host');document.body.append(host);const viewer=renderPlates(host,{notes:[],pages:items},{initialIndex:index,label:'參考圖片閱讀器',unit:'張',onClose:()=>host.remove()});viewer.expand();};
+ items.forEach((item,index)=>{
+  const figure=node('figure'),button=node('button',undefined,'reference-image-open'),img=node('img'),caption=node('figcaption');
+  button.type='button';button.setAttribute('aria-label',`放大第 ${index+1} 張圖片`);img.src=item.src;img.alt=item.label;img.loading='lazy';img.decoding='async';
+  img.onerror=()=>{if(!figure.querySelector('.image-error'))figure.insertBefore(node('p','圖片暫時無法載入，可開啟原圖。','image-error'),caption);};
+  button.append(img);button.onclick=()=>open(index);caption.append(node('span',`${index+1} / ${items.length}${/^第 \d+ 張圖片$/.test(item.label)?'':' · '+item.label}`));const original=node('a','原圖');original.href=item.src;original.target='_blank';original.rel='noopener noreferrer';caption.append(original);figure.append(button,caption);images.append(figure);
+ });
+ const continuous=node('button','連續閱讀'),overview=node('button','縮圖一覽'),fullscreen=node('button','全屏閱讀');
+ const layout=value=>{images.dataset.layout=value;continuous.setAttribute('aria-pressed',String(value==='continuous'));overview.setAttribute('aria-pressed',String(value==='overview'));};
+ for(const button of [continuous,overview,fullscreen])button.type='button';continuous.onclick=()=>layout('continuous');overview.onclick=()=>layout('overview');fullscreen.onclick=()=>open(0);toolbar.append(continuous,overview,fullscreen);layout('continuous');return section;
+}
+function renderOriginalMaterials(source,c=curriculum){
+ closeExpandedPlate?.();
+ const box=$('original-materials');box.replaceChildren();
+ const nav=node('div',undefined,'material-tabs');nav.setAttribute('role','tablist');nav.setAttribute('aria-label','學習資料類型');box.append(nav);
+ const groups=new Map(),labels={guide:'閱讀提示',extra:'拓展閱讀',media:'圖片影音',study:'學案',links:'參考資料',plates:'教材圖版'};
+ for(const [key,label] of Object.entries(labels)){const panel=node('section',undefined,'material-panel');panel.id='material-'+key;panel.setAttribute('role','tabpanel');panel.setAttribute('aria-label',label);panel.hidden=true;groups.set(key,panel);box.append(panel);}
+ const seen=new Set(),links=new Set(),referenceImages=[];
+ const knownImages=new Set([...(source.forumImages||[]),...(source.posts||[]).flatMap(post=>post.images||[])].map(item=>item.src||item.href||item.sourceUrl).filter(Boolean));
+ const addMedia=item=>{const url=item.src||item.sourceUrl||item.finalUrl||item.href;if(seen.has(url))return;const media=mediaFigure(item);if(media){seen.add(url);groups.get('media').append(media);}};
+ const addLink=(url,label,item={})=>{if(!url||links.has(url))return;links.add(url);const row=node('div',undefined,'resource-row');if(appendSourceLink(row,url,label,'參考資料')){if(/\.(?:png|jpe?g|webp|gif|avif)(?:[?#]|$)/i.test(url)||item.mediaType?.startsWith('image/')||knownImages.has(url)){referenceImages.push({src:url,label:!label||label==='參考資料'||label===url?`第 ${referenceImages.length+1} 張圖片`:label});return;}const kind=/\.pdf(?:[?#]|$)/i.test(url)?'PDF':/youtube|youtu.be|\.(?:mp4|webm|mp3|wav|m4a)(?:[?#]|$)/i.test(url)?'影音':'網頁';row.prepend(node('small',kind));groups.get('links').append(row);}};
+ const addText=(key,title,text,cooked)=>{if(!text&&!cooked)return;const section=node('section',undefined,'material-entry');section.append(node('h3',title),materialText(text,cooked));groups.get(key).append(section);};
+ for(const [key,label,group] of [['frontMatter','篇前','guide'],['guidance','學習提示','guide'],['sourceOnlyBlocks','補充閱讀','extra']])addText(group,label,referenceText(c[key]));
+ for(const item of c.readingMaterials||[])addText(item.role==='commentary'?'guide':'links',item.label||'補充閱讀',item.text||referenceText(item.block));
+ for(const item of c.media||[])addMedia(item);
+ for(const [index,post] of (source.posts||[]).entries()){
+  const text=post.plain_text||'',heading=text.trim().split('\n').find(Boolean)?.slice(0,48)||`補充資料 ${post.post_number||index+1}`;
+  addText('extra',index===0?'原課內容':heading,text,post.cooked);
+  for(const img of post.images||[])addMedia(img);
+  for(const item of [...(post.links||[]),...(post.attachments||[])]){const url=typeof item==='string'?item:item.href||item.url||item.src;addMedia({...item,src:url});addLink(url,item.text||item.title||item.label||'參考資料',item);}
+ }
+ for(const item of source.forumImages||[])addMedia(item);
+ for(const item of c.resources||[]){addMedia({...item,src:item.href||item.sourceUrl});addLink(item.href||item.sourceUrl,item.label,item);}
+ if(referenceImages.length)groups.get('links').prepend(referenceGallery(referenceImages));
+ for(const item of c.studyGuide||[]){const section=node('section',undefined,'material-entry');section.append(materialText(item.prompt));if(item.referenceAnswer||item.explanation){const answer=node('details');answer.append(node('summary',item.answerLabel||'參考解說'),materialText([item.referenceAnswer,item.explanation].filter(Boolean).join('\n\n')));section.append(answer);}groups.get('study').append(section);}
+ for(const task of source.learningTasks||[])addText('study','學習任務',typeof task==='string'?task:task.prompt||task.text||task.title);
+ const pages=groups.get('plates');pages.dataset.lazy='true';
+ const entries=[...groups].filter(([key,panel])=>panel.childNodes.length||key==='plates');
+ const select=key=>{for(const [id,panel] of groups)panel.hidden=id!==key;for(const button of nav.children){const active=button.dataset.material===key;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;}if(key==='plates'&&pages.dataset.lazy==='true'){delete pages.dataset.lazy;void loadPlates(pages);}};
+ for(const [key,panel] of entries){const button=node('button',labels[key]);button.type='button';button.dataset.material=key;button.setAttribute('role','tab');button.setAttribute('aria-controls',panel.id);button.onclick=()=>select(key);button.onkeydown=event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const index=entries.findIndex(([id])=>id===key),next=event.key==='Home'?0:event.key==='End'?entries.length-1:(index+(event.key==='ArrowRight'?1:-1)+entries.length)%entries.length;select(entries[next][0]);nav.children[next].focus();};nav.append(button);}
+ select(entries[0][0]);
+}
+async function loadOriginalMaterials(c,gen){
+ renderOriginalMaterials({},c);
+ try{const response=await fetch(`/data/lessons/${c.lessonId}.json`,{cache:'no-cache'});if(!response.ok)throw Error();const source=await response.json();if(gen===generation&&curriculum?.lessonId===c.lessonId)renderOriginalMaterials(source,c);}
+ catch{if(gen===generation)$('original-materials').append(node('p','補充資料暫時未能載入，可由「資料與紀錄」開啟原課。'));}
+}
+let catalogInitialized=false;
+function setCatalogHidden(hidden){$('catalog').hidden=hidden;document.querySelector('.page-shell').classList.toggle('catalog-hidden',hidden);$('catalog-toggle').setAttribute('aria-expanded',String(!hidden));}
+$('catalog-toggle').onclick=()=>setCatalogHidden(!$('catalog').hidden);
+function renderAccount(){
+ $('account-login').href='https://my.bdfz.net/?returnTo='+encodeURIComponent(location.href);
+ $('account-login').hidden=!!ownerRef;$('account-logout').hidden=!ownerRef;
+}
+$('account-logout').onclick=async()=>{
+ if(!persistComposer()){$('status').textContent='草稿尚未保存，請先複製文字再登出。';return;}
+ $('account-logout').disabled=true;
+ try{
+  const response=await fetch('https://my.bdfz.net/api/logout',{method:'POST',credentials:'include',signal:AbortSignal.timeout(10000)});
+  const result=await response.json();
+  if(!response.ok||result.ok!==true)throw Error('登出尚未確認，請到 My 帳戶頁核對；學習紀錄與草稿保留。');
+  clearPrivateView();ownerRef=null;renderAccount();$('answer').disabled=true;$('send').disabled=true;
+  $('status').textContent='已登出，原有學習紀錄與此帳戶草稿保留。';
+ }catch(error){$('status').textContent=error.message||'登出尚未確認，請稍後核對。';}
+ finally{$('account-logout').disabled=false;}
+};
 function quotePassage(id,quote){const p=curriculum.passages.find(p=>p.id===id);if(!p)return;selected={id,text:quote||p.text.slice(0,600)};$('quote').textContent=selected.text;$('quote').hidden=false;view('conversation');$('answer').focus();}
+let allNotesExpanded=false;
+function closeIndividualNotes(){for(const note of document.querySelectorAll('.inline-note'))note.hidden=true;for(const ref of document.querySelectorAll('.annotation-toggle'))ref.setAttribute('aria-expanded','false');}
+$('notes-toggle').onclick=()=>{allNotesExpanded=!allNotesExpanded;for(const note of document.querySelectorAll('.inline-note'))note.hidden=!allNotesExpanded;for(const ref of document.querySelectorAll('.annotation-toggle'))ref.setAttribute('aria-expanded',String(allNotesExpanded));$('notes-toggle').textContent=allNotesExpanded?'收起全部註釋':'展開全部註釋';$('notes-toggle').setAttribute('aria-pressed',String(allNotesExpanded));};
+document.addEventListener('click',event=>{if(!event.target.closest('.appearance'))document.querySelector('.appearance').open=false;if(!allNotesExpanded&&!event.target.closest('.annotation-toggle,.inline-note'))closeIndividualNotes();});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){document.querySelector('.appearance').open=false;if(!allNotesExpanded)closeIndividualNotes();}});
+function annotationText(value){if(!value)return '';if(Array.isArray(value))return value.map(annotationText).filter(Boolean).join('');if(typeof value.text==='string')return value.text;for(const key of ['runs','blocks','children','items','rows','cells'])if(value[key])return annotationText(value[key]);return '';}
 function renderText(){
  const locked=false;
- $('title').textContent=curriculum.title;$('author').textContent=curriculum.author;$('source').href=curriculum.source;$('legacy').href=`/?view=legacy#${curriculum.lessonId}`;
+ $('conversation-title').textContent=`與${dialogueIdentity(curriculum).name}談`;$('title').textContent=curriculum.title;$('author').textContent=dialogueIdentity(curriculum).name==='作者'?'':dialogueIdentity(curriculum).name;$('source').href=curriculum.source;$('legacy').href=`/?view=legacy#${curriculum.lessonId}`;
  $('source').hidden=locked;$('plates-details').hidden=locked;$('dictionary-details').hidden=locked;
  $('passages').replaceChildren();
  for(const p of locked?[]:curriculum.passages){const paragraph=node('p');paragraph.id=p.id;paragraph.dataset.passage=p.id;
-  if(p.block.runs){for(const run of p.block.runs){if(run.type==='annotation-ref'){if(materialMode==='punctuated')continue;const b=node('button',run.label||'注','passage-anchor');b.setAttribute('aria-label','查看注釋');b.onclick=()=>{const existing=paragraph.querySelector('.note');if(existing){existing.remove();return;}const a=curriculum.annotations.find(a=>a.noteId===run.noteId);paragraph.append(node('span',(a?.blocks||[]).flatMap(b=>(b.runs||[]).map(r=>r.text||'')).join('\n')||'注釋待核查','note'));};paragraph.append(b);}else paragraph.append(document.createTextNode(run.text||''));}}
+  if(p.block.runs){for(const run of p.block.runs){if(run.type==='annotation-ref'){
+   const a=curriculum.annotations.find(a=>a.noteId===run.noteId),number=String(run.label||'').replace(/[^0-9]/g,'')||String(curriculum.annotations.findIndex(a=>a.noteId===run.noteId)+1);
+   const ref=node('button',undefined,'annotation-toggle');ref.type='button';ref.append(node('sup',number,'annotation-number'));ref.setAttribute('aria-label',`註釋 ${number}`);
+   const note=node('span',annotationText(a?.blocks)||'注釋待核查','inline-note');note.id=`note-${p.id}-${paragraph.childNodes.length}`;note.dataset.annotationId=run.noteId;note.setAttribute('role','note');note.setAttribute('aria-label',`注釋 ${number}`);note.hidden=!allNotesExpanded;
+   ref.setAttribute('aria-controls',note.id);ref.setAttribute('aria-expanded',String(allNotesExpanded));ref.onclick=()=>{const open=note.hidden;if(!allNotesExpanded)closeIndividualNotes();note.hidden=!open;ref.setAttribute('aria-expanded',String(open));};paragraph.append(ref,note);
+  }else paragraph.append(document.createTextNode(run.text||''));}}
   else paragraph.append(document.createTextNode(p.text));
-  const discuss=node('button','↗','passage-anchor');discuss.setAttribute('aria-label','討論這一段');discuss.onclick=()=>quotePassage(p.id);paragraph.append(discuss);$('passages').append(paragraph);
+  $('passages').append(paragraph);
  }
  if(!curriculum.passages.length)$('passages').append(node('p','本課正文來源尚待核對。原有資料與已保存紀錄仍可查閱；不以未核實的正文進行新評閱。'));
  if(locked){$('requirements').replaceChildren(node('p','先自行斷句，保存至少三處疑點與猜測，再寫下初讀感知。原要求及原始紀錄保留。'));$('references').replaceChildren(node('p','完成無注疏初讀後，展開正文註釋與參考資料。'));return;}
@@ -135,7 +273,12 @@ function paintReadingMarks(){
  }
 }
 function renderReadingVariant(){
- for(const mode of ['unpunctuated','punctuated','annotated'])$('version-'+mode).setAttribute('aria-pressed',String(mode===materialMode));
+ const classical=curriculum.mode==='classical';
+ $('notes-toggle').hidden=materialMode==='unpunctuated'||!curriculum.annotations.length;
+ $('version-unpunctuated').hidden=!classical;
+ document.querySelector('.reading-versions').hidden=!classical;
+ if(!classical&&materialMode==='unpunctuated')materialMode='annotated';
+ for(const mode of ['unpunctuated','annotated'])$('version-'+mode).setAttribute('aria-pressed',String(mode===materialMode));
  $('first-reading').hidden=materialMode!=='unpunctuated';$('passages').hidden=materialMode==='unpunctuated';
  if(materialMode==='unpunctuated'&&!firstReadView){const gen=generation;firstReadView=openFirstReading({lessonId:curriculum.lessonId,curriculum,root:$('first-reading'),isCurrent:()=>gen===generation,onSelect:(id,text)=>{if(text.length>600)return;selected={id,text};$('quote').textContent=text;$('quote').hidden=false;$('discuss').hidden=false;$('discuss').onclick=()=>{view('conversation');$('answer').focus();$('discuss').hidden=true;};}});}
  if(ownerRef){if(firstReadView&&readingNotes)void firstReadView.setMarks?.(readingNotes);}
@@ -144,19 +287,19 @@ async function refreshReadingMarks(){
  const gen=generation;if(!ownerRef)return;
  try{const state=await api(null,null,false,null,null,false,true);if(gen===generation){if(curriculum.mode!=='classical'){const asset=await dialogueReadingAsset(curriculum);if(gen!==generation||asset.textDigest!==state.textDigest||asset.textVersionId!==state.textVersionId)return;}readingNotes=state;if(firstReadView)await firstReadView.setMarks?.(state);paintReadingMarks();}}catch{/* Saved chat remains authoritative; a missing readback never fabricates marks. */}
 }
-for(const mode of ['unpunctuated','punctuated','annotated'])$('version-'+mode).onclick=()=>{materialMode=mode;renderText();};
+for(const mode of ['unpunctuated','annotated'])$('version-'+mode).onclick=()=>{if(mode==='unpunctuated'&&curriculum?.mode!=='classical')return;materialMode=mode;renderText();};
 function renderTurns(turns,prepend=false){
  const fragment=document.createDocumentFragment(),records=document.createDocumentFragment();
  for(const t of turns){
   if(document.getElementById('turn-'+t.id))continue;
   const sourceReceipt=t.role!=='student'&&t.model==='source-owned';
-  const label=t.role==='student'?'你':curriculum.author+' · AI 教學模擬';
+  const label=t.role==='student'?'你':dialogueIdentity(curriculum).name;
   const stamp=new Date(t.createdAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
   const record=node('details');record.append(node('summary',`${sourceReceipt?'保存紀錄':label} · ${stamp}`));
   const correction=node('button','查看／補充更正');correction.type='button';correction.onclick=()=>void openCorrection(t);
   record.append(node('p',t.content),correction);records.append(record);
   if(sourceReceipt){record.id='turn-'+t.id;continue;}
-  const n=node('div',undefined,'turn '+t.role);n.id='turn-'+t.id;n.append(node('small',`${label} · ${stamp}`),node('span',t.content));
+  const n=node('div',undefined,'turn '+t.role);n.id='turn-'+t.id;if(t.role!=='student')n.append(authorAvatar());n.append(node('small',`${label} · ${stamp}`),node('span',t.content));
   const refs=t.content.match(/\[(lesson-[\w-]+:p\d+)\]/g)||[];
   for(const ref of new Set(refs)){const id=ref.slice(1,-1);if(!curriculum.passages.some(p=>p.id===id))continue;const a=node('a','回到原文');a.href='#'+encodeURIComponent(id);a.onclick=e=>{e.preventDefault();view('text');document.getElementById(id)?.scrollIntoView({block:'center',behavior:'auto'});document.getElementById(id)?.focus();};n.append(a);}
   if(t.status==='needs_review')n.append(node('small','回答已保存，回應待確認。'));
@@ -164,13 +307,13 @@ function renderTurns(turns,prepend=false){
  }
  if(prepend){$('turns').prepend(fragment);$('turn-review-list').prepend(records);}else{$('turns').append(fragment);$('turn-review-list').append(records);}
 }
-function clearPrivateView(){persistComposer();generation++;streamAbort?.abort();streamAbort=null;continuationRequest=null;
+function clearPrivateView(){closeExpandedPlate?.();persistComposer();generation++;streamAbort?.abort();streamAbort=null;continuationRequest=null;
  firstReadView?.dispose();firstReadView=null;
  $('correction').close();correctionTarget=null;correctionMutation=null;$('correction-original').textContent='';$('correction-history').replaceChildren();$('correction-note').value='';$('correction-proposed').value='';$('turns').replaceChildren();$('turn-review-list').replaceChildren();$('answer').value='';$('quote').hidden=true;
  selected=null;pending=null;pendingDraft=null;originalDraft=null;composerDraft=null;snapshot=null;readingNotes=null;paintReadingMarks();clearTimeout(pollTimer);
  $('task-input').replaceChildren();$('task-context').replaceChildren();$('record-receipt').replaceChildren();$('source-results').replaceChildren();
  $('lesson-outcome').textContent='';$('draft-status').textContent='';
- $('next').replaceChildren(node('span','登入後，這裡會接續本帳戶的對話。'));
+ $('next').replaceChildren(node('span',''));
  $('source-draft').replaceChildren();$('source-draft').hidden=true;$('export-status').textContent='';$('evidence-summary').replaceChildren();sharedHistory=null;$('old-history').replaceChildren();$('old-history-load').disabled=true;
 }
 function renderSourceDraft(data){
@@ -260,16 +403,29 @@ function renderCatalog(){
  const lessons=lessonIndex?.lessons.filter(l=>`${l.title} ${l.blockTitle}`.toLocaleLowerCase().includes(query))||[];
  $('catalog-count').textContent=`${lessons.length} / ${lessonIndex?.lessons.length||0} 篇`;
  if(!lessons.length){box.append(node('p','沒有找到篇目，試試篇名中的幾個字。'));return;}
- for(const lesson of lessons){const b=node('button');b.type='button';b.append(node('span',lesson.title),node('small',lesson.blockTitle||'課文'));if(lesson.lessonId===curriculum?.lessonId)b.setAttribute('aria-current','page');b.onclick=()=>{if(switchLesson(lesson.lessonId)){$('catalog').close();$('catalog-open').focus();}};box.append(b);}
+ const groups=new Map();
+ for(const lesson of lessons){const key=lesson.blockId||'other';if(!groups.has(key))groups.set(key,[]);groups.get(key).push(lesson);}
+ for(const [key,bookLessons] of groups){
+  const book=node('details',undefined,'catalog-book');book.dataset.book=key;book.ontoggle=()=>{if(book.open)for(const other of box.querySelectorAll('.catalog-book'))if(other!==book)other.open=false;};book.open=!!query||bookLessons.some(l=>l.lessonId===curriculum?.lessonId);
+  const heading=node('summary');heading.append(node('strong',bookLessons[0].blockTitle||'課文'),node('small',`${bookLessons.length} 篇`));book.append(heading);
+  const list=node('div',undefined,'book-lessons');
+  for(const [index,lesson] of bookLessons.entries()){
+   const b=node('button');b.type='button';b.append(node('small',String(index+1).padStart(2,'0'),'lesson-number'),node('span',lesson.title));
+   if(lesson.lessonId===curriculum?.lessonId)b.setAttribute('aria-current','page');
+   if(lesson.mode==='unit-intro')b.classList.add('unit-entry');
+   b.onclick=()=>{if(switchLesson(lesson.lessonId)){if((window.innerWidth||1024)<900)setCatalogHidden(true);$('title').focus();}};list.append(b);
+  }
+  book.append(list);box.append(book);
+ }
 }
 function renderLearningTurn(data){
  const task=data.learningTurn,controls=$('task-input'),context=$('task-context');controls.replaceChildren();context.replaceChildren();
  if(conversationFlow){
-  $('answer').placeholder='說說你的想法，或引用一句原文來問我…';
+  $('answer').placeholder='想和我談些什麼？';
   $('send').disabled=!!data.pending||['unavailable','exemption'].includes(task?.kind);$('answer').disabled=$('send').disabled;
   const hasTeacher=data.turns?.some(t=>t.role==='teacher'&&t.model!=='source-owned');
   $('next').hidden=hasTeacher;
-  if(!hasTeacher)$('next').replaceChildren(node('small',`${curriculum.author||'閱讀引導'} · AI 教學模擬`),node('p',dialogueOpening(curriculum).content));
+  if(!hasTeacher)$('next').replaceChildren(authorAvatar(),node('small',dialogueIdentity(curriculum).name),node('p',dialogueOpening(curriculum).content));
   return;
  }
 
@@ -330,19 +486,19 @@ function referenceText(value){
 function appendSourceLink(parent,href,label,kind){
  let url;try{url=new URL(href);if(!['https:','http:'].includes(url.protocol))return false;}catch{return false;}
  const text=typeof label==='string'&&label.trim()&&!/^https?:/.test(label)?label.trim():url.hostname;
- const link=node('a',`${kind}：${text} ↗`);link.setAttribute('href',url.href);link.target='_blank';link.rel='noopener noreferrer';const paragraph=node('p');paragraph.append(link);parent.append(paragraph);return true;
+ const link=node('a',`${kind}：${text}`);link.setAttribute('href',url.href);link.target='_blank';link.rel='noopener noreferrer';const paragraph=node('p');paragraph.append(link);parent.append(paragraph);return true;
 }
 function update(data){
  let previousPhase=snapshot?.readingGate?.phase;
  if(ownerRef && data.ownerRef && ownerRef!==data.ownerRef){clearPrivateView();previousPhase=null;}
- ownerRef=data.ownerRef||ownerRef;
+ ownerRef=data.ownerRef||ownerRef;renderAccount();
  $('lesson-outcome').textContent=data.state?.completion==='owner_approved_supplement'?`${data.state.completionLabel||'已通過（補充篇目）'}。這是課程擁有者對補充篇目的決定，不新增分數。`:'';
  if(data.resumeCurriculum && data.resumeCurriculum.curriculumVersion!==curriculum.curriculumVersion){curriculum=data.resumeCurriculum;renderText();}
  if(pending && data.turns?.some(t=>t.role==='student' && t.mutationId===pending.mutationId)){
   if($('answer').value===pendingDraft){$('answer').value='';selected=null;composerDraft=null;$('quote').hidden=true;persistComposer();}
   if(pending.action==='original')originalDraft=null;pending=null;pendingDraft=null;persistComposer();
  }
- snapshot=data;void refreshReadingMarks();$('old-history-load').disabled=false;renderPartial(data.partial);if(data.report)renderEvidence(data.report);if(data.legacy?.completion)$('evidence-summary').append(node('p','原課已完成（原有自報紀錄，非新增成績）；新增對話另存。'));if(data.legacy?.firstRead?.length)$('evidence-summary').append(node('p','原有初讀及未完成的標記仍保留，可由「原有課程」繼續；原文版本不同時不自動套用舊位置。'));renderTurns(data.turns||[]);$('older').hidden=!data.older;$('status').textContent=data.pending?'你的回答已保存，正在等候回應。':data.saved===false?'尚未開始對話；原有學習紀錄保持不變。':data.statusNotice||'已讀取伺服器保存紀錄。';$('answer').disabled=false;$('send').disabled=!!data.pending;const next=data.state?.next;$('next').replaceChildren(node('span',data.state?.legacyCompletion?'原課的完成紀錄已保留。你可以自願繼續細讀，不必重做；新對話不改寫原成績。':next?`接下來：${next.domain==='vocabulary'?next.label+'。回到原句，用自己的話解釋語境與判斷依據；可以先查閱註釋，獨立掌握需另作新題。':next.rule}`:data.state?.completion==='evidence_ready_for_review'?'證據已齊，等待教師覆核。':data.state?.objectives.some(o=>o.status==='review')?'有證據待覆核，請保留原話與來源；不用為此反覆作答。':'原有完成紀錄待核對，無需重做已完成內容。'));
+ snapshot=data;void refreshReadingMarks();$('old-history-load').disabled=false;renderPartial(data.partial);if(data.report)renderEvidence(data.report);if(data.legacy?.completion)$('evidence-summary').append(node('p','原課已完成（原有自報紀錄，非新增成績）；新增對話另存。'));if(data.legacy?.firstRead?.length)$('evidence-summary').append(node('p','原有初讀及未完成的標記仍保留，可由「原有課程」繼續；原文版本不同時不自動套用舊位置。'));renderTurns(data.turns||[]);$('older').hidden=!data.older;$('status').textContent=data.pending?'你的回答已保存，正在等候回應。':data.saved===false?'':data.statusNotice||'已讀取伺服器保存紀錄。';$('answer').disabled=false;$('send').disabled=!!data.pending;const next=data.state?.next;$('next').replaceChildren(node('span',data.state?.legacyCompletion?'原課的完成紀錄已保留。你可以自願繼續細讀，不必重做；新對話不改寫原成績。':next?`接下來：${next.domain==='vocabulary'?next.label+'。回到原句，用自己的話解釋語境與判斷依據；可以先查閱註釋，獨立掌握需另作新題。':next.rule}`:data.state?.completion==='evidence_ready_for_review'?'證據已齊，等待教師覆核。':data.state?.objectives.some(o=>o.status==='review')?'有證據待覆核，請保留原話與來源；不用為此反覆作答。':'原有完成紀錄待核對，無需重做已完成內容。'));
  if(data.draft&&(!data.draft.formal||data.draft.learningRequest)&&!hasComposerDraft()&&!pending){
   const draft=data.draft,request=draft.learningRequest||{content:draft.content,questionId:draft.questionId};
   $('answer').value=request.content;selected=null;$('quote').hidden=true;
@@ -357,9 +513,9 @@ function update(data){
  renderSourceDraft(data);
  performance.mark('dialogue-records-ready');
 }
-async function refresh(gen=generation){try{const data=await api();if(gen!==generation)return;update(data);return data;}catch(e){if(gen!==generation)return;$('status').textContent=e.status===404?'對話試點尚未開放。原文、注釋與原有課程仍可閱讀。':e.message;$('login').hidden=e.status!==401;if(e.status===401||e.status===404){clearPrivateView();ownerRef=null;}$('login').href='https://my.bdfz.net/?returnTo='+encodeURIComponent(location.href);$('answer').disabled=true;$('send').disabled=true;}}
+async function refresh(gen=generation){try{const data=await api();if(gen!==generation)return;update(data);return data;}catch(e){if(gen!==generation)return;$('status').textContent=e.status===404?'對話試點尚未開放。原文、注釋與原有課程仍可閱讀。':e.message;$('login').hidden=e.status!==401;if(e.status===401||e.status===404){clearPrivateView();ownerRef=null;}renderAccount();$('login').href='https://my.bdfz.net/?returnTo='+encodeURIComponent(location.href);$('answer').disabled=true;$('send').disabled=true;}}
 function waitForReply(gen,deadline=Date.now()+25000){clearTimeout(pollTimer);pollTimer=setTimeout(async()=>{if(gen!==generation||document.hidden)return;const data=await refresh(gen);if(data?.pending && Date.now()<deadline)waitForReply(gen,deadline);else if(data?.pending)$('status').textContent='回答已保存；回應仍在處理。稍後回到此頁讀取，不需重送。';},2000);}
-async function loadLesson(){clearPrivateView();ownerRef=null;const gen=generation;clearTimeout(pollTimer);snapshot=null;pending=null;pendingDraft=null;selected=null;$('turns').replaceChildren();$('quote').hidden=true;$('answer').value='';$('answer').disabled=true;$('send').disabled=true;const id=$('lesson').value;location.hash=id;try{window.localStorage.setItem('yw-dialogue-last-lesson',id);}catch{}try{const r=await fetch(`/dialogue-curriculum/${id}.json`,{cache:'no-cache'});if(!r.ok)throw new Error();const data=await r.json();if(gen!==generation)return;curriculum=data;materialMode=curriculum.mode==='classical'?'unpunctuated':'annotated';renderText();view(conversationFlow?'conversation':'text');void refresh(gen).then(data=>{if(data?.pending)waitForReply(gen);});}catch{$('title').textContent='課文暫時無法載入';$('status').textContent='請稍後再試，或回原有課程閱讀。';}}
+async function loadLesson(){clearPrivateView();ownerRef=null;const gen=generation;clearTimeout(pollTimer);snapshot=null;pending=null;pendingDraft=null;selected=null;$('turns').replaceChildren();$('quote').hidden=true;$('answer').value='';$('answer').disabled=true;$('send').disabled=true;const id=$('lesson').value;location.hash=id;try{window.localStorage.setItem('yw-dialogue-last-lesson',id);}catch{}try{const r=await fetch(`/dialogue-curriculum/${id}.json`,{cache:'no-cache'});if(!r.ok)throw new Error();const data=await r.json();if(gen!==generation)return;curriculum=data;allNotesExpanded=false;$('notes-toggle').textContent='展開全部註釋';$('notes-toggle').setAttribute('aria-pressed','false');renderCatalog();$('catalog-panel').open=true;if(!catalogInitialized){setCatalogHidden((window.innerWidth||1024)<900);catalogInitialized=true;}void loadOriginalMaterials(data,gen);materialMode=curriculum.mode==='classical'?'unpunctuated':'annotated';renderText();view(conversationFlow?'conversation':'text');void refresh(gen).then(data=>{if(data?.pending)waitForReply(gen);});}catch{$('title').textContent='課文暫時無法載入';$('status').textContent='請稍後再試，或回原有課程閱讀。';}}
 $('compose').onsubmit=async e=>{
  e.preventDefault();if(!snapshot||snapshot.pending)return;
  const task=snapshot.learningTurn,text=$('answer').value.trim(),input={};
@@ -421,7 +577,7 @@ async function sendTurn(submitted,submittedDraft,gen=generation){
 const hasFirstReadDraft=()=>[...$('first-reading').querySelectorAll('textarea,input')].some(input=>input.value.trim());
 $('answer').oninput=()=>{rememberComposer();persistComposer();};
 $('lesson').onchange=()=>switchLesson($('lesson').value);
-$('catalog-open').onclick=()=>{renderCatalog();$('catalog').showModal();$('lesson-search').focus();};$('catalog-close').onclick=()=>{$('catalog').close();$('catalog-open').focus();};$('lesson-search').oninput=renderCatalog;
+$('lesson-search').oninput=renderCatalog;
 $('text-tab').onclick=()=>view('text');$('conversation-tab').onclick=()=>view('conversation');
 $('materials-open').onclick=()=>{lastFocus=document.activeElement;$('materials').showModal();};$('materials-close').onclick=()=>{$('materials').close();lastFocus?.focus();};
 $('older').onclick=async()=>{if(!snapshot?.older)return;const cursor=snapshot.older;try{const data=await api(null,cursor);renderTurns(data.turns,true);snapshot.older=data.older;$('older').hidden=!data.older;}catch(e){$('status').textContent=e.message;}};
@@ -432,10 +588,19 @@ async function completeRecord(){
  if(expected!==generation||cursor||turns.length>MAX_TRANSCRIPT_RECORDS)throw Error('紀錄尚未完整讀回，請稍後再試。');
  return {...page,opening:dialogueOpening(curriculum),turns,additionalHistory:sharedHistory,exportedAt:new Date().toISOString(),privacy:'僅供本人及獲授權教師核對'};
 }
-$('copy-transcript').onclick=async()=>{try{const record=await completeRecord();const text=[`${curriculum.title} · AI 教學模擬`,record.opening.content,...record.turns.map(t=>`${t.role==='student'?'你':curriculum.author||'閱讀引導'} · ${t.createdAt}\n${t.content}`)].join('\n\n');await navigator.clipboard.writeText(text);$('export-status').textContent='全部對話已複製；原有紀錄仍保留。';}catch(e){$('export-status').textContent='複製未完成：'+e.message+' 可改用匯出。';}};
+$('copy-transcript').onclick=async()=>{try{const record=await completeRecord();const text=[curriculum.title,record.opening.content,...record.turns.map(t=>`${t.role==='student'?'你':dialogueIdentity(curriculum).name} · ${t.createdAt}\n${t.content}`)].join('\n\n');await navigator.clipboard.writeText(text);$('export-status').textContent='全部對話已複製；原有紀錄仍保留。';}catch(e){$('export-status').textContent='複製未完成：'+e.message+' 可改用匯出。';}};
 $('export').onclick=async()=>{try{const record=await completeRecord(),blob=new Blob([JSON.stringify(record,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download=`${curriculum.lessonId}-learning-record.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),0);$('export-status').textContent='已產生本課私人紀錄，請妥善保存。';}catch(e){$('export-status').textContent=e.message;}};
-document.addEventListener('selectionchange',()=>{const selection=getSelection();const p=selection?.anchorNode?.parentElement?.closest('[data-passage]');const valid=p&&selection.toString().trim().length>1&&selection.toString().length<=600&&$('reading').contains(selection.focusNode);$('discuss').hidden=!valid;if(valid)$('discuss').onclick=()=>{quotePassage(p.dataset.passage,selection.toString().trim());selection.removeAllRanges();$('discuss').hidden=true;};});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(pollTimer);else if(curriculum)void refresh().then(d=>{if(d?.pending)waitForReply(generation);});});window.addEventListener('focus',()=>{if(curriculum)void refresh();});window.addEventListener('bdfz:session-invalidated',()=>{clearPrivateView();ownerRef=null;$('answer').disabled=true;$('send').disabled=true;});window.addEventListener('pagehide',()=>{persistComposer();clearTimeout(pollTimer);});window.addEventListener('beforeunload',e=>{if((hasComposerDraft()&&!persistComposer())||pending||originalDraft||hasFirstReadDraft()){e.preventDefault();e.returnValue='';}});
+document.addEventListener('selectionchange',()=>{
+ const selection=getSelection(),p=selection?.anchorNode?.parentElement?.closest('[data-passage]'),end=selection?.focusNode?.parentElement?.closest('[data-passage]');
+ let text='';
+ if(p&&p===end&&selection.rangeCount&&$('reading').contains(p)){
+  const fragment=selection.getRangeAt(0).cloneContents();fragment.querySelectorAll('.inline-note,.annotation-toggle,.annotation-number,.passage-anchor').forEach(n=>n.remove());text=fragment.textContent.trim();
+ }
+ const source=curriculum?.passages.find(item=>item.id===p?.dataset.passage);
+ const valid=text.length>1&&text.length<=600&&source?.text.includes(text);$('discuss').hidden=!valid;
+ if(valid)$('discuss').onclick=()=>{quotePassage(p.dataset.passage,text);selection.removeAllRanges();$('discuss').hidden=true;};
+});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(pollTimer);else if(curriculum)void refresh().then(d=>{if(d?.pending)waitForReply(generation);});});window.addEventListener('focus',()=>{if(curriculum)void refresh();});window.addEventListener('bdfz:session-invalidated',()=>{clearPrivateView();ownerRef=null;renderAccount();$('answer').disabled=true;$('send').disabled=true;});window.addEventListener('pagehide',()=>{persistComposer();clearTimeout(pollTimer);});window.addEventListener('beforeunload',e=>{if((hasComposerDraft()&&!persistComposer())||pending||originalDraft||hasFirstReadDraft()){e.preventDefault();e.returnValue='';}});
 async function loadLessonIndex(){
  try{
   const response=await fetch('/dialogue-curriculum/index.json',{cache:'no-cache'});if(!response.ok)throw Error();
@@ -444,9 +609,10 @@ async function loadLessonIndex(){
   for(const lesson of index.lessons){if(!/^lesson-[a-zA-Z0-9_-]+$/.test(lesson.lessonId)||typeof lesson.title!=='string'||!lesson.title.trim()||ids.has(lesson.lessonId))throw Error();ids.add(lesson.lessonId);}
   lessonIndex=index;const groups=new Map();$('lesson').replaceChildren();
   for(const lesson of index.lessons){const key=lesson.blockId||'',parent=groups.get(key)||node('optgroup');if(!groups.has(key)){parent.label=lesson.blockTitle||'課文';groups.set(key,parent);$('lesson').append(parent);}const option=node('option',lesson.title);option.value=lesson.lessonId;parent.append(option);}
-  const requested=location.hash.slice(1);let recent='';try{recent=window.localStorage.getItem('yw-dialogue-last-lesson')||'';}catch{}$('lesson').value=ids.has(requested)?requested:ids.has(recent)?recent:index.lessons[0].lessonId;$('lesson').disabled=false;await loadLesson();if(!ids.has(requested)&&!ids.has(recent)){renderCatalog();$('catalog').showModal();$('lesson-search').focus();}
+  const requested=location.hash.slice(1);let recent='';try{recent=window.localStorage.getItem('yw-dialogue-last-lesson')||'';}catch{}$('lesson').value=ids.has(requested)?requested:ids.has(recent)?recent:index.lessons[0].lessonId;$('lesson').disabled=false;await loadLesson();renderCatalog();
  }catch{$('title').textContent='篇目目錄暫時無法載入';$('status').textContent='請稍後重新開啟，或由原有課程繼續閱讀；學習紀錄沒有改動。';}
 }
+renderAccount();
 void loadLessonIndex();
 
 let dictionaryModule=null, dictionaryGeneration=0;
@@ -458,7 +624,45 @@ $('dictionary-lookup').onclick=async()=>{
  }catch{if(token===dictionaryGeneration)$('dictionary-result').textContent='詞條或原書頁尚未可靠取得，這項解釋待核查；請使用原站核對。';}
 };
 $('materials').addEventListener('close',()=>{dictionaryGeneration++;$('dictionary-result').replaceChildren();});
-$('plates-details').ontoggle=async()=>{if(!$('plates-details').open||!curriculum)return;const gen=generation;$('plates').textContent='正在讀取教材原圖索引…';try{const [{lessonPlates},response]=await Promise.all([import('./textbook-pages.js'),fetch('/data/textbook-pages.v1.json')]);if(!response.ok)throw new Error();const data=await response.json();if(gen!==generation)return;const plates=lessonPlates(data,curriculum.lessonId);$('plates').replaceChildren();for(const note of plates.notes)$('plates').append(node('p',note));if(!plates.pages.length){$('plates').append(node('p','本課尚無已核實的對應原圖，請到原有課程查閱。'));return;}for(const page of plates.pages){const figure=node('figure'),img=document.createElement('img');img.loading='lazy';img.src=page.src;img.alt=page.label;img.style.width='100%';img.onerror=()=>{img.replaceWith(node('p','圖頁暫時無法載入；可從原有課程核對。'));};figure.append(img,node('figcaption',page.label));$('plates').append(figure);}}catch{$('plates').textContent='教材原圖索引暫時無法讀取；正文仍可閱讀。';}};
+let closeExpandedPlate=null;
+function renderPlates(box,plates,{initialIndex=0,label='本課教材閱讀器',unit='頁',onClose=null}={}){
+ closeExpandedPlate?.();
+ box.replaceChildren();for(const note of plates.notes||[])box.append(node('p',note));
+ if(!plates.pages.length){box.append(node('p','本課尚無已核實的對應原圖，請到原有課程查閱。'));return;}
+ const reader=node('div',undefined,'plate-reader'),stage=node('div',undefined,'plate-stage'),toolbar=node('nav',undefined,'plate-toolbar');
+ reader.setAttribute('role','region');reader.setAttribute('aria-label',label);stage.tabIndex=0;stage.setAttribute('aria-label','圖頁，左右方向鍵翻頁');
+ toolbar.setAttribute('aria-label',unit==='張'?'圖片翻閱':'教材翻頁');
+ const previous=node('button','上一'+unit),next=node('button','下一'+unit),choice=node('select'),status=node('span',undefined,'plate-count'),original=node('a','原圖');
+ previous.type=next.type='button';choice.setAttribute('aria-label',unit==='張'?'本課參考圖片序號':'本課教材頁碼');status.setAttribute('role','status');status.setAttribute('aria-live','polite');original.target='_blank';original.rel='noopener noreferrer';
+ plates.pages.forEach((page,i)=>{const option=node('option',page.label);option.value=String(i);choice.append(option);});
+ const expand=node('button','全屏');expand.type='button';expand.className='plate-expand';expand.setAttribute('aria-expanded','false');
+ toolbar.append(previous,choice,next,expand,status,original);reader.append(stage,toolbar);box.append(reader);
+ let index=0,start=null,suppressClick=false,overlay=null;
+ const toggleExpanded=()=>{
+  if(overlay){closeExpandedPlate?.();return;}
+  const marker=document.createComment('textbook position'),focus=document.activeElement,overflow=document.body.style.overflow,position={top:window.scrollY||0,left:window.scrollX||0,behavior:'instant'};
+  reader.before(marker);overlay=node('dialog',undefined,'plate-fullscreen');overlay.setAttribute('aria-label',label+'全屏');document.body.append(overlay);overlay.append(reader);
+  const close=()=>{if(!overlay)return;const dialog=overlay;overlay=null;marker.replaceWith(reader);dialog.remove();document.body.style.overflow=overflow;expand.textContent='全屏';expand.setAttribute('aria-expanded','false');closeExpandedPlate=null;onClose?.();if(focus?.isConnected)focus.focus({preventScroll:true});window.scrollTo?.(position);};
+  closeExpandedPlate=close;overlay.oncancel=event=>{event.preventDefault();close();};overlay.onclose=close;
+  document.body.style.overflow='hidden';expand.textContent='縮回';expand.setAttribute('aria-expanded','true');overlay.showModal();stage.focus();
+ };
+ expand.onclick=toggleExpanded;
+ stage.onclick=()=>{if(suppressClick){suppressClick=false;return;}toggleExpanded();};
+ stage.setAttribute('aria-label','圖頁，點擊全屏或縮回，左右方向鍵翻頁');
+ const show=value=>{
+  index=Math.max(0,Math.min(plates.pages.length-1,value));const page=plates.pages[index],img=node('img'),message=node('p','圖頁載入中…','plate-message');
+  message.setAttribute('role','status');img.alt=page.label;img.decoding='async';img.draggable=false;
+  img.onload=()=>message.remove();img.onerror=()=>{message.textContent='圖頁暫時無法載入，可切換其他頁或開啟原圖。';};img.src=page.src;
+  stage.replaceChildren(img,message);choice.value=String(index);previous.disabled=index===0;next.disabled=index===plates.pages.length-1;status.textContent=`${index+1} / ${plates.pages.length}`;original.href=page.src;
+ };
+ previous.onclick=()=>show(index-1);next.onclick=()=>show(index+1);choice.onchange=()=>show(Number(choice.value));
+ reader.onkeydown=event=>{if(event.key==='Escape'&&overlay){event.preventDefault();closeExpandedPlate?.();return;}if(event.target===stage&&['Enter',' '].includes(event.key)){event.preventDefault();toggleExpanded();return;}if(event.target===choice||event.altKey||event.ctrlKey||event.metaKey)return;if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();show(event.key==='Home'?0:event.key==='End'?plates.pages.length-1:index+(event.key==='ArrowRight'?1:-1));};
+ stage.onpointerdown=event=>{suppressClick=false;start=event.isPrimary===false?null:{x:event.clientX,y:event.clientY};};
+ stage.onpointercancel=()=>{start=null;};stage.onpointerup=event=>{if(!start)return;const dx=event.clientX-start.x,dy=event.clientY-start.y;start=null;if(Math.abs(dx)>48&&Math.abs(dx)>Math.abs(dy)*1.5){suppressClick=true;show(index+(dx<0?1:-1));}};
+ show(initialIndex);return {expand:toggleExpanded};
+}
+async function loadPlates(box){const gen=generation;box.textContent='正在讀取教材原圖索引…';try{const [{lessonPlates},response]=await Promise.all([import('./textbook-pages.js'),fetch('/data/textbook-pages.v1.json')]);if(!response.ok)throw new Error();const data=await response.json();if(gen!==generation)return;renderPlates(box,lessonPlates(data,curriculum.lessonId));}catch{if(gen===generation)box.textContent='教材原圖索引暫時無法讀取；正文仍可閱讀。';}}
+$('plates-details').ontoggle=()=>{if($('plates-details').open&&curriculum)void loadPlates($('plates'));};
 
 async function openCorrection(turn){
  const gen=generation;correctionTarget=turn.id;correctionMutation=null;
@@ -493,3 +697,8 @@ $('old-history-load').onclick=async()=>{
  }else box.append(node('p',local.status==='not_found'?'此瀏覽器沒有本帳戶的舊紀錄；其他裝置及原服務端紀錄不受影響。':'本機紀錄目前無法讀取；原資料未修改。'));
  }catch(error){if(gen===generation)$('old-history').textContent=error.message;}finally{if(gen===generation)$('old-history-load').disabled=false;}
 };
+
+for(const palette of PALETTES){const option=node('option',palette.name);option.value=palette.id;$('reading-theme').append(option);}
+function applyReadingTheme(id){const palette=PALETTES.find(p=>p.id===id)||PALETTES.find(p=>p.id==='qingque')||PALETTES[0];for(const [token,key] of Object.entries({paper:'background',surface:'surface',wash:'wash',reply:'commentSurface',ink:'text',muted:'textMuted',accent:'link',line:'border',note:'link'}))document.documentElement.style.setProperty('--'+token,palette[key]);$('reading-theme').value=palette.id;try{window.localStorage.setItem('yw-reading-theme',palette.id);}catch{}}
+$('reading-theme').onchange=()=>applyReadingTheme($('reading-theme').value);
+try{applyReadingTheme(window.localStorage.getItem('yw-reading-theme'));}catch{applyReadingTheme(null);}

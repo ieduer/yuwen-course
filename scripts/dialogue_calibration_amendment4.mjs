@@ -44,6 +44,8 @@ export function amendment4Packet(corpus,loadCurriculum){
  // A later release pass must not rewrite embedded source, prompts or their pins.
  const projected=JSON.parse(projectReleaseJson('dialogue-calibration-amendment4-packet.json',JSON.stringify(packet)));
  if(digest(projected)!==digest(packet))throw Error('amendment4_packet_projection_not_fixed');
+ // A new prompt/source is a local preview, never the old paid authority.
+ if(sourceDigest!==contract.packetDigest)Object.assign(packet,{operation:'unapproved-source-preview',status:'unapproved-source-preview',paidCallsAuthorized:false,authorityRef:null,authorityDigest:null});
  return packet;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
@@ -52,14 +54,7 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
  const corpus=JSON.parse(fs.readFileSync('scripts/dialogue-calibration-amendment4-cases.json'));
  const packet=amendment4Packet(corpus,id=>JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${id}.json`)));
  if(action==='refresh-proposal'){
-  if(output!=='site/dialogue-calibration-amendment4-packet.json')throw Error('amendment4_refresh_exact_proposal_only');
-  const old=JSON.parse(fs.readFileSync(output));
-  if(old.operation!==contract.operation||!['proposed','authorized-preparation'].includes(old.status)||old.active!==false||old.sourceDigest!==contract.packetDigest||contract.active)throw Error('amendment4_consumed_or_unpinned_packet');
-  const path='site/dialogue-calibration-amendment4-contract.js',text=fs.readFileSync(path,'utf8');
-  const marker=`packetDigest:'${old.sourceDigest}'`;
-  if(!text.includes(marker))throw Error('amendment4_contract_pin_missing');
-  fs.writeFileSync(output,JSON.stringify(packet,null,2)+'\n',{mode:0o600});
-  fs.writeFileSync(path,text.replace(marker,`packetDigest:'${packet.sourceDigest}'`));
+  throw Error('amendment4_consumed_packet_immutable');
  }else fs.writeFileSync(output,JSON.stringify(packet,null,2)+'\n',{flag:'wx',mode:0o600});
  console.log(JSON.stringify({operation:packet.operation,cases:packet.cases.length,sourceDigest:packet.sourceDigest,active:false,paidCalls:0}));
 }

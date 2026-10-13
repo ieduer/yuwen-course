@@ -1,4 +1,10 @@
-## Current unpublished author-conversation/source-material candidate — 2026-10-13T12:46:22.319718+00:00
+## Current local reading candidate — 2026-10-13T14:48:57.136161+00:00
+
+Serial owner codex-01a1359c. Policy v10 / opening v3; all189 goal remains active. Current review evidence: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/LOCAL-READING-REVIEW.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/LOCAL-READING-REVIEW.md). Textbook reader supports every registered lesson page, horizontal navigation, bottom controls and click-to-full-viewport/click-to-restore with Escape. Exported rich source retains paragraphs, line breaks, lists, tables and safe links. Explicit source footnotes now follow their references as collapsed inline notes (Hongmenyan89); unmatched notes are preserved. Reference image links now form a continuous lazy-loaded gallery, with overview and full-collection fullscreen navigation. These reading details are acceptance requirements for subsequent changes.
+
+Node22/24 focused42/42 passed before the gallery; current gallery frontend39/39 passed with the69-image case. Previous full429 evidence remains historical. No lesson source/curriculum or historical grade data changed. No provider calls, push or production release. Model quality, central→My, native interaction and formal acceptance gates remain open. Preview resources remain active for user review; full task cleanup and all189 completion are not claimed.
+
+## Historical unpublished author-conversation/source-material candidate — 2026-10-13T12:46:22.319718+00:00
 
 All189 replacement remains active. Candidate includes author-led original learning stages, exact source text/annotations with provenance, device drafts and continuation, three reading versions and complete copy/export. Poetry and modern-text doubts, initial impressions and corrections now persist as owner/session-scoped append-only dialogue notes, with same-version source positions and red marks across reading views. Original guesses and all corrections remain; these notes confer no score or original completion receipt. Classical original handlers/rubrics and historical records remain authoritative.
 
