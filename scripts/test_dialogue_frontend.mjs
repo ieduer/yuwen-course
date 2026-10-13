@@ -424,3 +424,15 @@ test('expired account disables submission and shows login without network-trigge
  assert.equal(f.document.getElementById('answer').disabled,true);assert.equal(f.document.getElementById('send').disabled,true);assert.equal(f.document.getElementById('login').hidden,false);assert.equal(f.document.getElementById('answer').value,'');
  const before=f.calls.length;f.window.dispatchEvent(new f.window.Event('online'));await tick();assert.equal(f.calls.length,before);assert.equal(f.posts.length,1);
 });
+
+
+test('readback reconciles interrupted-turn status without duplicating or rewriting original text',async()=>{
+ const turn={id:'status-turn',role:'student',content:'不可改寫的原話',status:'saved',createdAt:'2026-10-13T00:00:00Z'};
+ const f=await fixture({conversation:true,initial:{turns:[turn]}});
+ const element=f.document.getElementById('turn-status-turn');
+ f.frontend.update({...f.data,turns:[{...turn,status:'needs_review'}]});
+ assert.equal(element.querySelectorAll('.turn-status').length,1);assert.match(element.textContent,/回應待確認/);
+ f.frontend.update({...f.data,turns:[{...turn,status:'needs_review'}]});assert.equal(element.querySelectorAll('.turn-status').length,1);
+ f.frontend.update({...f.data,turns:[turn]});
+ assert.equal(f.document.querySelectorAll('#turns .student').length,1);assert.equal(f.document.getElementById('turn-status-turn'),element);assert.equal(element.querySelector('.turn-status'),null);assert.equal(element.querySelector('span').textContent,turn.content);assert.equal(f.posts.length,0);
+});

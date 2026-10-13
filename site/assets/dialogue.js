@@ -299,7 +299,13 @@ for(const mode of ['unpunctuated','annotated'])$('version-'+mode).onclick=()=>{i
 function renderTurns(turns,prepend=false){
  const fragment=document.createDocumentFragment(),records=document.createDocumentFragment();
  for(const t of turns){
-  if(document.getElementById('turn-'+t.id))continue;
+  const existing=document.getElementById('turn-'+t.id);
+  if(existing){
+   const notice=existing.querySelector('.turn-status');
+   if(t.status==='needs_review'&&!notice)existing.append(node('small','回答已保存，回應待確認。','turn-status'));
+   else if(t.status!=='needs_review')notice?.remove();
+   continue;
+  }
   const sourceReceipt=t.role!=='student'&&t.model==='source-owned';
   const label=t.role==='student'?'你':dialogueIdentity(curriculum).name;
   const stamp=new Date(t.createdAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
@@ -310,7 +316,7 @@ function renderTurns(turns,prepend=false){
   const n=node('div',undefined,'turn '+t.role);n.id='turn-'+t.id;if(t.role!=='student')n.append(authorAvatar());n.append(node('small',`${label} · ${stamp}`),node('span',t.content));
   const refs=t.content.match(/\[(lesson-[\w-]+:p\d+)\]/g)||[];
   for(const ref of new Set(refs)){const id=ref.slice(1,-1);if(!curriculum.passages.some(p=>p.id===id))continue;const a=node('a','回到原文');a.href='#'+encodeURIComponent(id);a.onclick=e=>{e.preventDefault();view('text');document.getElementById(id)?.scrollIntoView({block:'center',behavior:'auto'});document.getElementById(id)?.focus();};n.append(a);}
-  if(t.status==='needs_review')n.append(node('small','回答已保存，回應待確認。'));
+  if(t.status==='needs_review')n.append(node('small','回答已保存，回應待確認。','turn-status'));
   fragment.append(n);
  }
  if(prepend){$('turns').prepend(fragment);$('turn-review-list').prepend(records);}else{$('turns').append(fragment);$('turn-review-list').append(records);}
