@@ -62,7 +62,7 @@ test('execution receipt rejects formal host, missing checks, changed cap and inv
 });
 test('trusted120 requires exact root readback receipt; accepted checks alone cannot broaden or mint admission',()=>{
  const absent=config();delete absent.isolatedAdmission;assert.throws(()=>validateExecutionConfig(absent,plan,clock()),/isolated_admission_receipt_not_exact/);
- for(const change of [{authorityDigest:'c'.repeat(64)},{ownerRef:'c'.repeat(64)},{databaseId:'different'},{apisVersion:'different'},{registryReceiptDigest:'missing'},{hardExpiry:'2026-10-14T12:00:00Z'},{maxVisibleCalls:121},{maxProviderAttempts:4},{reserveMicros:1},{lessonIds:[...plan.isolatedAdmission.lessonIds,'lesson-1477']},{lessonIds:120}]){
+ for(const change of [{authorityDigest:'c'.repeat(64)},{ownerRef:'c'.repeat(64)},{databaseId:'different'},{apisVersion:'different'},{registryReceiptDigest:'missing'},{hardExpiry:'2026-10-15T12:00:00Z'},{maxVisibleCalls:121},{maxProviderAttempts:4},{reserveMicros:1},{lessonIds:[...plan.isolatedAdmission.lessonIds,'lesson-1477']},{lessonIds:120}]){
   const cfg=config();Object.assign(cfg.isolatedAdmission,change);assert.throws(()=>validateExecutionConfig(cfg,plan,clock()),/isolated_admission_receipt_not_exact/);
  }
 });

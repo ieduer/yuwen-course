@@ -1,6 +1,8 @@
 // Fixed synthetic operation on the existing owner-only acceptance context.
 // No browser prompt, curriculum override, grades or central evidence writes.
 import {CALIBRATION_CONTRACT as amendment} from './dialogue-calibration-contract.js';
+import {AMENDMENT5_CONTRACT} from './dialogue-calibration-amendment5-contract.js';
+import {handleAmendment5Calibration} from './dialogue-calibration-amendment5-runtime.js';
 import {AMENDMENT4_CONTRACT} from './dialogue-calibration-amendment4-contract.js';
 import {handleAmendment4Calibration} from './dialogue-calibration-amendment4-runtime.js';
 import packet from './dialogue-calibration-packet.json' with {type:'json'};
@@ -32,8 +34,13 @@ export function terminalDisposition(row,digest,readbacks){
 }
 export async function handleCalibration(request,env,student,callModel,options={}){
  const context=acceptanceContext(env),url=new URL(request.url);
- if(!context||Number(student.ucUserId)!==context.userId||Date.now()>=Math.min(context.expires,hardExpiry))return json({code:'not_found'},404);
- if(url.searchParams.get('calibrationOperation')===AMENDMENT4_CONTRACT.operation)return handleAmendment4Calibration(request,env,student,callModel);
+ if(!context||Number(student.ucUserId)!==context.userId||Date.now()>=context.expires)return json({code:'not_found'},404);
+ if(url.searchParams.get('calibrationOperation')===AMENDMENT5_CONTRACT.operation)return handleAmendment5Calibration(request,env,student,callModel);
+ if(url.searchParams.get('calibrationOperation')===AMENDMENT4_CONTRACT.operation){
+  if(request.method==='POST')return json({code:'calibration_operation_retired',operation:AMENDMENT4_CONTRACT.operation,readbackAvailable:true},409);
+  return handleAmendment4Calibration(request,env,student,callModel);
+ }
+ if(Date.now()>=hardExpiry)return json({code:'not_found'},404);
  // Direct owner instruction permanently closes this consumed operation.
  // Readback is retained; no new POST, replacement intent or replay is admitted.
  if(request.method==='POST')return json({code:'calibration_operation_retired',operation:OP,readbackAvailable:true},409);

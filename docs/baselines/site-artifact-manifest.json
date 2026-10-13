@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1454,
-  "totalBytes": 191063058,
-  "aggregateSha256": "e96ea97316ecd6b5a7b5660a68d49a733770873c16fde822a0dffd39a07d9369",
+  "fileCount": 1458,
+  "totalBytes": 196092127,
+  "aggregateSha256": "2f5242b00da90cced4f4023e8452acf46f4da4c3978760fd5b5a4daba53a937b",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "136026b81ea0690887e30dc8759a12682787a161b85d446542201c596ee6c54f"
+      "sha256": "9a322c3da3c094d341ae35dde0131b339ca60400523940d2cdc97a404661e79b"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -6067,8 +6067,8 @@
     },
     {
       "path": "dialogue-acceptance.js",
-      "bytes": 6799,
-      "sha256": "f5632c997fbeff3e40f1c61579866dc69c57742a996cce7d8854a217a4089e1e"
+      "bytes": 6876,
+      "sha256": "02d5933c619a93a1c9559c9bcd2bd575ff134c5e5f06ba2b623b0a2de4425d69"
     },
     {
       "path": "dialogue-budget.js",
@@ -6087,13 +6087,33 @@
     },
     {
       "path": "dialogue-calibration-amendment4-runtime.js",
-      "bytes": 14832,
-      "sha256": "0d66733753babe7f121bc1571c5433b55783ea40cef2cbff82c40065ddf2f79d"
+      "bytes": 14833,
+      "sha256": "c663a14c3b3c44c5d79fcb28874fdf9ca1d13fb1ebe1b4fc13a7c4a37aaf2872"
     },
     {
       "path": "dialogue-calibration-amendment4.js",
       "bytes": 10032,
       "sha256": "b5a8ce818c026f848a0eb75718cfc9c023da65a7f4990cef5f086895478f68a0"
+    },
+    {
+      "path": "dialogue-calibration-amendment5-contract.js",
+      "bytes": 1910,
+      "sha256": "f1f37000b5c05acd3798fbc53c2a9e0ab604ae7e01f4bead1b2dabbb25fad905"
+    },
+    {
+      "path": "dialogue-calibration-amendment5-packet.json",
+      "bytes": 5000654,
+      "sha256": "864d5d3462e6cbf87e0521d87c8b1b055b82ab3918829548f8fa22543c6cd15e"
+    },
+    {
+      "path": "dialogue-calibration-amendment5-runtime.js",
+      "bytes": 15660,
+      "sha256": "8aebb85a2a3790078136a4b06f36587c7d8e160bcf4dac683d824c810e55d8d5"
+    },
+    {
+      "path": "dialogue-calibration-amendment5.js",
+      "bytes": 10124,
+      "sha256": "ef9060e5622f6683db3d90fc0031f5266d83baa5b97cff736929ae5362169e1b"
     },
     {
       "path": "dialogue-calibration-contract.js",
@@ -6107,8 +6127,8 @@
     },
     {
       "path": "dialogue-calibration.js",
-      "bytes": 20777,
-      "sha256": "df1a1d0f4c5d73c84e09f2b02811623dac8d0b290d0d91d0003014b9f9ce7aef"
+      "bytes": 21297,
+      "sha256": "6241ca467ef18c1ae61d48b3eed38fd0f4469d5742b9238584b8dae2f8abfe80"
     },
     {
       "path": "dialogue-completion-exemptions.js",
@@ -7078,7 +7098,7 @@
     {
       "path": "dialogue-e2e-admission.js",
       "bytes": 3986,
-      "sha256": "a131b99a406465814589dbede0f97c10158c32e563ba40015fb15b4f43507f42"
+      "sha256": "cbb53b20fb7331f8d81990377432a7de32590aef2197fffc2f4f4ba39c9a2256"
     },
     {
       "path": "dialogue-formal.js",
@@ -7117,18 +7137,18 @@
     },
     {
       "path": "dialogue-recovery.js",
-      "bytes": 6629,
-      "sha256": "140ddc1eef68ecc8f9062c2de0494a84392e2539fc294318566bb35f792f8823"
+      "bytes": 6697,
+      "sha256": "892566360cc99da26e29e441e64208a3a9059e39fe2aa70d457c4d4847f49f7b"
     },
     {
       "path": "dialogue-source.js",
-      "bytes": 64547,
-      "sha256": "8dd090fe2990138ebcc4e380ed47e8dd21504eba26ad4a743831ec3f6e15e069"
+      "bytes": 64566,
+      "sha256": "1c498259865e5eaf5a7e41d337255f9fb53820d7080b5acc889c4adb8563d264"
     },
     {
       "path": "dialogue-stream.js",
-      "bytes": 6716,
-      "sha256": "fed7e7dd78e2a63d7d61989246b94233c6dc0faae2c3e9a57d5ae67e8498013a"
+      "bytes": 6752,
+      "sha256": "554995a22bc09efaedb5556f417b76316afa2d36b4ad201776131e947f16478e"
     },
     {
       "path": "dialogue.html",

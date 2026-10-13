@@ -100,7 +100,7 @@ test('routed amendment3 is retired: every POST stops without mutation or calls a
  assert.equal(read.receiptDigest,first.receiptDigest);assert.equal(calls,0);assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_calls ORDER BY turn_id').all(),before);
  const proposed=new URL(f.req().url);proposed.searchParams.set('calibrationOperation','yw-dialogue-real-calibration-20261012-v1-amendment-4');
  const planned=await routedCalibration(new Request(proposed,{method:'POST',headers:f.req().headers,body:JSON.stringify({action:'calibration_amendment4',ownerRef:first.ownerRef})}),f.env,f.student,()=>calls++);
- assert.equal(planned.status,409);assert.equal((await planned.json()).code,'amendment4_activation_required');assert.equal(calls,0);
+ assert.equal(planned.status,409);assert.equal((await planned.json()).code,'calibration_operation_retired');assert.equal(calls,0);
 });
 test('historical offline calibration requires acceptance capability and fixed owner/input; no arbitrary prompts or reordering',async t=>{
  const f=await setup(t),model=()=>{throw Error('must not call')};
@@ -282,6 +282,8 @@ test('gateway cooldown is retained but generic503 never proves completion',async
  assert.equal((await(await handleCalibration(f.req(0,{},'POST',2),f.env,f.student,()=>{throw Error('no')},{recoveryReadbacks:[providerProof(first,{retryAfterMs:300000})]})).json()).code,'calibration_cooldown');
 });
 
+// Retired operation engine stays under offline regression; public POST retirement is checked above.
+const historicalAmendment4=(await import('../site/dialogue-calibration-amendment4-runtime.js')).handleAmendment4Calibration;
 const amendment4Packet=(await import('../site/dialogue-calibration-amendment4-packet.json',{with:{type:'json'}})).default;
 const amendment4=(await import('../site/dialogue-calibration-amendment4-contract.js')).AMENDMENT4_CONTRACT;
 const POLICY_VERSION_FOR_FIXTURE='yw-dialogue-policy-v6';
@@ -300,7 +302,7 @@ async function setupAmendment4(t){
  }};
  const ownerRef=createHash('sha256').update(`dialogue-owner:${f.student.id}`).digest('hex');
  const request4=(index=0,attempt=1,extra={},method='POST')=>{const c=amendment4Packet.cases[index];return f.authenticated('/api/dialogue/v1?lessonId='+c.lessonId+'&calibration='+c.id+'&attempt='+attempt+'&calibrationOperation='+amendment4.operation,{method,headers:{origin:ACCEPTANCE_ORIGIN,'content-type':'application/json'},...(method==='POST'?{body:JSON.stringify({action:amendment4.action,ownerRef,...extra})}:{})});};
- const preflight=await(await routedCalibration(request4(0,1,{},'GET'),f.env,f.student,()=>{throw Error('no');})).json();
+ const preflight=await(await historicalAmendment4(request4(0,1,{},'GET'),f.env,f.student,()=>{throw Error('no');})).json();
  f.env.YW_CALIBRATION_AMENDMENT4_JSON=JSON.stringify({enabled:true,operation:amendment4.operation,packetDigest:amendment4.packetDigest,authorityDigest:amendment4.authorityDigest,maxProviderAttempts:1,singleProviderAttemptReceiptDigest:'e'.repeat(64),registryReceiptDigest:'f'.repeat(64),priorReceiptSetDigest:preflight.history.receiptSetDigest,readyAt:amendment4.authorizedAt,hardExpiry:amendment4.hardExpiry,recoveryReadbacks:[]});
  return {...f,request4};
 }
@@ -310,33 +312,33 @@ function response4(index=0){
 }
 test('amendment4 runtime keeps seven historical rows, advances after unknown partial and preserves 6055ms miss',async t=>{
  const f=await setupAmendment4(t),before=f.sql.prepare('SELECT * FROM dialogue_calls ORDER BY turn_id').all();let calls=0;
- const failed=await(await routedCalibration(f.request4(),f.env,f.student,async(e,p,id,reply)=>{calls++;await reply('保留這段未完成回應');throw Error('gateway_stream_unconfirmed');})).json();
+ const failed=await(await historicalAmendment4(f.request4(),f.env,f.student,async(e,p,id,reply)=>{calls++;await reply('保留這段未完成回應');throw Error('gateway_stream_unconfirmed');})).json();
  assert.equal(failed.call.state,'review');assert.equal(failed.call.accounted_micros,null);assert.equal(failed.chunks.length,1);
- const next=await(await routedCalibration(f.request4(27),f.env,f.student,async()=>{calls++;return response4(27);})).json();
+ const next=await(await historicalAmendment4(f.request4(27),f.env,f.student,async()=>{calls++;return response4(27);})).json();
  assert.equal(next.call.state,'finished');assert.equal(next.result.firstTokenTargetMet,false);assert.equal(calls,2);
- const duplicate=await(await routedCalibration(f.request4(),f.env,f.student,()=>calls++)).json();assert.equal(duplicate.receiptDigest,failed.receiptDigest);assert.equal(calls,2);
+ const duplicate=await(await historicalAmendment4(f.request4(),f.env,f.student,()=>calls++)).json();assert.equal(duplicate.receiptDigest,failed.receiptDigest);assert.equal(calls,2);
  assert.equal(f.sql.prepare('SELECT count(*) n FROM dialogue_assessments').get().n,0);
  for(const r of before)assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_calls WHERE turn_id=?').get(r.turn_id),r);
 });
 test('amendment4 partial FETCH_ERROR recovers once with separate receipt/reservation and atomic duplicate protection',async t=>{
- const f=await setupAmendment4(t);let calls=0;const failed=await(await routedCalibration(f.request4(),f.env,f.student,async(e,p,id,reply)=>{calls++;await reply('部分文字');throw Error('gateway_stream_unconfirmed');})).json();
+ const f=await setupAmendment4(t);let calls=0;const failed=await(await historicalAmendment4(f.request4(),f.env,f.student,async(e,p,id,reply)=>{calls++;await reply('部分文字');throw Error('gateway_stream_unconfirmed');})).json();
  const proof={attemptId:failed.attemptId,requestId:failed.attemptId,caseId:failed.caseId,receiptDigest:failed.receiptDigest,kind:'fetch_error',providerStatus:'FETCH_ERROR',providerAttemptCount:1,brokerCompleted:true,noOutput:false,partialOutput:true,model:policy.model,fallback:false,hedge:false,backgroundCalls:0,retryAfterMs:0,evidenceRef:'synthetic-only/fetch.json',evidenceSha256:'e'.repeat(64),invocationHash:'f'.repeat(64)};
  const pin=JSON.parse(f.env.YW_CALIBRATION_AMENDMENT4_JSON);pin.recoveryReadbacks=[proof];f.env.YW_CALIBRATION_AMENDMENT4_JSON=JSON.stringify(pin);
  const at=Date.now();t.mock.method(Date,'now',()=>at+120001);
  const extra={recoveryOf:failed.attemptId,previousReceipt:failed.receiptDigest},model=async()=>{calls++;return response4();};
- const responses=await Promise.all([routedCalibration(f.request4(0,2,extra),f.env,f.student,model),routedCalibration(f.request4(0,2,extra),f.env,f.student,model)]);
+ const responses=await Promise.all([historicalAmendment4(f.request4(0,2,extra),f.env,f.student,model),historicalAmendment4(f.request4(0,2,extra),f.env,f.student,model)]);
  assert(responses.some(r=>r.status===200));assert.equal(calls,2);
- const recovery=await(await routedCalibration(f.request4(0,2,{},'GET'),f.env,f.student,()=>calls++)).json();assert.notEqual(recovery.receiptDigest,failed.receiptDigest);assert.equal(recovery.call.reserved_micros,84000);
- const original=await(await routedCalibration(f.request4(0,1,{},'GET'),f.env,f.student,()=>calls++)).json();assert.equal(original.receiptDigest,failed.receiptDigest);assert.equal(original.call.accounted_micros,null);assert.equal(original.chunks[0].content,'部分文字');
- assert.equal((await routedCalibration(f.request4(0,3,extra),f.env,f.student,model)).status,400);assert.equal(calls,2);
+ const recovery=await(await historicalAmendment4(f.request4(0,2,{},'GET'),f.env,f.student,()=>calls++)).json();assert.notEqual(recovery.receiptDigest,failed.receiptDigest);assert.equal(recovery.call.reserved_micros,84000);
+ const original=await(await historicalAmendment4(f.request4(0,1,{},'GET'),f.env,f.student,()=>calls++)).json();assert.equal(original.receiptDigest,failed.receiptDigest);assert.equal(original.call.accounted_micros,null);assert.equal(original.chunks[0].content,'部分文字');
+ assert.equal((await historicalAmendment4(f.request4(0,3,extra),f.env,f.student,model)).status,400);assert.equal(calls,2);
 });
 test('amendment4 runtime refuses unpinned history/source and cannot take activation from request',async t=>{
  const f=await setupAmendment4(t);let calls=0;const pin=JSON.parse(f.env.YW_CALIBRATION_AMENDMENT4_JSON);
  f.env.YW_CALIBRATION_AMENDMENT4_JSON=JSON.stringify({...pin,priorReceiptSetDigest:'a'.repeat(64)});
- assert.equal((await(await routedCalibration(f.request4(),f.env,f.student,()=>calls++)).json()).code,'amendment4_history_reconciliation_required');
+ assert.equal((await(await historicalAmendment4(f.request4(),f.env,f.student,()=>calls++)).json()).code,'amendment4_history_reconciliation_required');
  f.env.YW_CALIBRATION_AMENDMENT4_JSON=JSON.stringify(pin);f.env.ASSETS={fetch:async()=>Response.json({changed:true})};
- assert.equal((await(await routedCalibration(f.request4(),f.env,f.student,()=>calls++)).json()).code,'calibration_source_mismatch');
- assert.equal((await routedCalibration(f.request4(0,1,{authority:pin}),f.env,f.student,()=>calls++)).status,400);assert.equal(calls,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,7);
+ assert.equal((await(await historicalAmendment4(f.request4(),f.env,f.student,()=>calls++)).json()).code,'calibration_source_mismatch');
+ assert.equal((await historicalAmendment4(f.request4(0,1,{authority:pin}),f.env,f.student,()=>calls++)).status,400);assert.equal(calls,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,7);
 });
 test('amendment4 all28 deployed projections pass source admission while semantic tampering fails before reservation',async t=>{
  const f=await setupAmendment4(t),before=f.sql.prepare('SELECT * FROM dialogue_calls ORDER BY turn_id').all();let calls=0;
@@ -344,16 +346,16 @@ test('amendment4 all28 deployed projections pass source admission while semantic
  f.env.ASSETS={fetch:async request=>{
   const source=await(await assets.fetch(request)).json();source.passages[0].text+=' Tampered semantic source.';return Response.json(source);
  }};
- const rejected=await routedCalibration(f.request4(index),f.env,f.student,()=>calls++);
+ const rejected=await historicalAmendment4(f.request4(index),f.env,f.student,()=>calls++);
  assert.equal(rejected.status,409);assert.equal((await rejected.json()).code,'calibration_source_mismatch');
  assert.equal(calls,0);assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_calls ORDER BY turn_id').all(),before);
  // The pre-projection raw source must also remain rejected for these six cases.
  f.env.ASSETS={fetch:async request=>new Response(fs.readFileSync('site'+new URL(request.url).pathname))};
- assert.equal((await(await routedCalibration(f.request4(index),f.env,f.student,()=>calls++)).json()).code,'calibration_source_mismatch');
+ assert.equal((await(await historicalAmendment4(f.request4(index),f.env,f.student,()=>calls++)).json()).code,'calibration_source_mismatch');
  assert.equal(calls,0);
  f.env.ASSETS=assets;
  for(let i=0;i<amendment4Packet.cases.length;i++){
-  const result=await(await routedCalibration(f.request4(i),f.env,f.student,async()=>{calls++;return response4(i);})).json();
+  const result=await(await historicalAmendment4(f.request4(i),f.env,f.student,async()=>{calls++;return response4(i);})).json();
   // The stub is deliberately not a semantic oracle: misconception/reference
   // cases may require review. Every case must reach exactly one model stub.
   assert(['finished','review'].includes(result.call?.state),amendment4Packet.cases[i].id+':'+(result.code||'missing call'));
@@ -369,19 +371,53 @@ test('amendment4 pending source creates no call or model request and does not bl
  t.after(()=>{for(const {item,prior} of changed)item.sourceVerification=prior;});
  const f=await setupAmendment4(t);let calls=0;
  for(const id of ['grammar-modifier-independent','grammar-modifier-misconception','partial-term-only']){
-  const index=amendment4Packet.cases.findIndex(c=>c.id===id),get=await(await routedCalibration(f.request4(index,1,{},'GET'),f.env,f.student,()=>calls++)).json();
+  const index=amendment4Packet.cases.findIndex(c=>c.id===id),get=await(await historicalAmendment4(f.request4(index,1,{},'GET'),f.env,f.student,()=>calls++)).json();
   assert.equal(get.sourceReadiness.eligible,false);assert.equal(get.call,null);
-  const blocked=await(await routedCalibration(f.request4(index),f.env,f.student,()=>calls++)).json();
+  const blocked=await(await historicalAmendment4(f.request4(index),f.env,f.student,()=>calls++)).json();
   assert.equal(blocked.code,'amendment4_case_source_verification_required');assert.equal(blocked.scope,'case');assert.equal(blocked.caseId,id);
  }
  assert.equal(calls,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,7);
- const next=await(await routedCalibration(f.request4(27),f.env,f.student,async()=>{calls++;return response4(27);})).json();
+ const next=await(await historicalAmendment4(f.request4(27),f.env,f.student,async()=>{calls++;return response4(27);})).json();
  assert.equal(next.call.state,'finished');assert.equal(calls,1);
 });
 test('amendment4 pins one provider attempt even beside the ordinary max3 capability',async t=>{
  const f=await setupAmendment4(t);f.env.YW_DIALOGUE_PROVIDER_ATTEMPTS='3';
  f.env.YW_DIALOGUE_BUDGET_JSON=JSON.stringify({...policy,providerAttemptLimit:3,logicalProviderAttemptLimit:3});
- let calls=0;const result=await(await routedCalibration(f.request4(),f.env,f.student,async(env,prompt,id,reply,budget)=>{
+ let calls=0;const result=await(await historicalAmendment4(f.request4(),f.env,f.student,async(env,prompt,id,reply,budget)=>{
   calls++;assert.equal(budget.providerAttemptLimit,1);assert.equal(budget.logicalProviderAttemptLimit,1);assert.equal(budget.reserveMicros,84000);return response4();
  })).json();assert.equal(result.call.state,'finished');assert.equal(result.call.reserved_micros,84000);assert.equal(calls,1);
+});
+
+const amendment5Packet=(await import('../site/dialogue-calibration-amendment5-packet.json',{with:{type:'json'}})).default;
+const amendment5=(await import('../site/dialogue-calibration-amendment5-contract.js')).AMENDMENT5_CONTRACT;
+async function setupAmendment5(t){
+ const f=await setupAmendment4(t);
+ for(let i=1;i<=6;i++)await historicalAmendment4(f.request4(i),f.env,f.student,async()=>{throw Error('gateway_unavailable');});
+ const ownerRef=createHash('sha256').update('dialogue-owner:'+f.student.id).digest('hex');
+ const request5=(index=0,attempt=1,extra={},method='POST')=>{const c=amendment5Packet.cases[index];return f.authenticated('/api/dialogue/v1?lessonId='+c.lessonId+'&calibration='+c.id+'&attempt='+attempt+'&calibrationOperation='+amendment5.operation,{method,headers:{origin:ACCEPTANCE_ORIGIN,'content-type':'application/json'},...(method==='POST'?{body:JSON.stringify({action:amendment5.action,ownerRef,...extra})}:{})});};
+ f.env.YW_DIALOGUE_BUDGET_JSON=JSON.stringify({...policy,model:'gemini-3.8-flash'});
+ const pre=await(await routedCalibration(request5(0,1,{},'GET'),f.env,f.student,()=>{})).json();
+ assert.equal(pre.history.attempts,13);assert.equal(pre.history.unknownReservedMicros,924000);
+ f.env.YW_CALIBRATION_AMENDMENT5_JSON=JSON.stringify({enabled:true,operation:amendment5.operation,packetDigest:amendment5.packetDigest,authorityDigest:amendment5.authorityDigest,maxProviderAttempts:1,singleProviderAttemptReceiptDigest:'e'.repeat(64),registryReceiptDigest:'f'.repeat(64),priorReceiptSetDigest:pre.history.receiptSetDigest,readyAt:amendment5.authorizedAt,hardExpiry:amendment5.hardExpiry,recoveryReadbacks:[]});
+ return {...f,request5};
+}
+test('model38 all28 cases enter actual isolated route once while13 historical receipts remain byte-identical',async t=>{
+ const f=await setupAmendment5(t),before=f.sql.prepare('SELECT * FROM dialogue_calls ORDER BY turn_id').all();let calls=0;
+ for(let i=0;i<28;i++){
+  const result=await(await routedCalibration(f.request5(i),f.env,f.student,async(_e,_p,_id,_reply,budget)=>{calls++;assert.equal(budget.model,'gemini-3.8-flash');assert.equal(budget.providerAttemptLimit,1);return {...response4(i),model:'gemini-3.8-flash'};})).json();
+  assert(['finished','review'].includes(result.call?.state),amendment5Packet.cases[i].id+':'+(result.code||'missing call'));assert.equal(calls,i+1);
+ }
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,41);
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_assessments').get().n,0);
+ for(const r of before)assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_calls WHERE turn_id=?').get(r.turn_id),r);
+ await routedCalibration(f.request5(0),f.env,f.student,()=>calls++);assert.equal(calls,28);
+ const stopped=await(await routedCalibration(f.request4(27),f.env,f.student,()=>calls++)).json();assert.equal(stopped.code,'calibration_operation_retired');assert.equal(calls,28);
+});
+test('new model batch rejects stale13-row history and cannot reuse model36 price policy',async t=>{
+ const f=await setupAmendment5(t);let calls=0;
+ f.env.YW_DIALOGUE_BUDGET_JSON=JSON.stringify(policy);
+ assert.equal((await(await routedCalibration(f.request5(),f.env,f.student,()=>calls++)).json()).code,'calibration_budget_mismatch');assert.equal(calls,0);
+ f.env.YW_DIALOGUE_BUDGET_JSON=JSON.stringify({...policy,model:'gemini-3.8-flash'});
+ f.sql.prepare("UPDATE dialogue_calls SET accounted_micros=1 WHERE turn_id=?").run(amendment4.operation+':'+amendment4Packet.cases[1].id+':1');
+ assert.equal((await(await routedCalibration(f.request5(),f.env,f.student,()=>calls++)).json()).code,'amendment5_history_reconciliation_required');assert.equal(calls,0);
 });

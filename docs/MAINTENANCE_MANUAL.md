@@ -1,4 +1,12 @@
-## Current execution and unreleased followup — 2026-10-13T06:07:00.854950+00:00
+## Current model38 isolated candidate — 2026-10-13T07:52:38.166675+00:00
+
+User authorized an alternative model and full recalibration after confirmed Gemini3.6Flash503 failures. Gemini3.8Flash is the new explicit isolated target; original13 calibration receipts, known10267micros and unknown924000micros remain immutable. Independent amendment5 contains all28 reviewed cases, one primary and at most one diagnosed recovery each, max56 single-provider attempts. Separate E2E retains the original cumulative120-call namespace and max3 sequential same-model attempts. Trusted activation is v2; all isolated pins expire2026-10-14T12:00Z. No production default/fallback or accepted100% version changes.
+
+This source is unactivated until exact candidate build/tests, registered publication and readback. No model38 provider result exists yet. All189 remain scope. The actual Hetang export now passes file/server equality (74376bytes), while its saved answer remains unconfirmed with no invented assessment. UC37cf3c4 CI passes but controlled production rollout and source/central/My write-readback require owner go/no-go. Real28 semantic calibration,3 complete dialogues,207 supplemental cases, continuation/accounting, second account, nativeIME, accessibility and two baseline touch failures remain open. Native stable pointer unchanged. Evidence and resource ownership: continuation-01a132c3/CHECKPOINT-ALL-LESSONS.md.
+
+Earlier current sections below are retained history where superseded.
+
+## Historical execution and unreleased followup — 2026-10-13T06:07:00.854950+00:00
 
 All189 lessons remain in scope. Isolated Pages9ee0199e-b021-4721-97cc-d4618927390f serves a5748476922a3598672de98af8bdf89525ba5e0b; exact05:28Z control readback is retained. FormalYW and APIS100% are unchanged. Seven amendment4 cases have been touched: one JSON-content-type rejection without a remote row, six terminal gateway failures, no model output or semantic pass. The driver header was repaired and26 checks passed on Node22/24. The owned Hetang read acknowledgment and one real scored-response attempt are preserved; that attempt returned503/unconfirmed, no score or completion was fabricated. Known new model cost remains unestablished; all remote unknown reservations are retained. Shared model circuit and repeated Google503 prevent meaningful further calibration; user direction was requested immediately, no fallback or replay performed.
 

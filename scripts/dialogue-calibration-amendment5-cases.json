@@ -1,0 +1,1163 @@
+{
+  "version": "yw-calibration-amendment5-model38-v1",
+  "dataClass": "synthetic-only",
+  "cases": [
+    {
+      "id": "language-er-independent",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:language-er",
+      "kind": "independent",
+      "studentAnswer": "顺风而呼的而把顺风的方式接到呼喊上；而闻者彰却说声音虽没变强，听的人仍听得清楚，是前后转折，不能都译成但是。君子博学而日参省乎己则是广泛学习之外，还每天检查反省自己，从学习进到反省，是递进关系。三个而要看前后内容，不能套用一种译法。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 1,
+      "originalCaseId": "language-er-independent",
+      "expectedAnswerDisposition": "positive-reference-requires-real-review",
+      "validationQuestion": "比較「順風而呼」「而聞者彰」「君子博學而日參省乎己」三處的「而」：各自連接甚麼內容，關係有何不同？三處都要說明，不能只分析前兩例。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "顺风而呼"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "expand-question-to-all-three-rubric-examples"
+      },
+      "caseCorrection": {
+        "reason": "原問題和正向答案只有前兩例，rubric另要求博學而日參省；新問題與答案補第三例",
+        "oldQuestion": "比較「順風而呼」與「而聞者彰」：兩個「而」連接的內容是甚麼，關係相同嗎？請用自己的話說明。",
+        "oldStudentAnswer": "顺风而呼的而把顺风的方式接到呼喊上；而闻者彰却说声音虽没变强，听的人仍听得清楚，是前后转折，不能都译成但是。",
+        "oldPromptDigest": "caecd0124e90dfc38c7b092dcf5ad60103c05394010b818dd3bd0ab1528ea459",
+        "oldSourceDigest": "b079f0af0a3978ea0ac81c512a186211c5bee8a333c53d0b41f761f1ad9561fa",
+        "doesNotRewriteOldReceipt": true
+      }
+    },
+    {
+      "id": "language-er-misconception",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:language-er",
+      "kind": "misconception",
+      "studentAnswer": "三个而都是但是，记住连词就可以了。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 2,
+      "originalCaseId": "language-er-misconception",
+      "expectedAnswerDisposition": "intentionally-insufficient",
+      "validationQuestion": "比較「順風而呼」「而聞者彰」「君子博學而日參省乎己」三處的「而」：各自連接甚麼內容，關係有何不同？三處都要說明，不能只分析前兩例。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "顺风而呼"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "expand-question-to-all-three-rubric-examples"
+      }
+    },
+    {
+      "id": "language-yu-independent",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:language-yu",
+      "kind": "independent",
+      "studentAnswer": "取之于蓝说明靛青从哪里取得，是来源；青于蓝比较靛青与蓝草的颜色深浅，是比蓝草更深。同一个于在两处关系不同。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 3,
+      "originalCaseId": "language-yu-independent",
+      "expectedAnswerDisposition": "positive-reference-requires-real-review",
+      "validationQuestion": "「取之于藍」與「青于藍」中的「于」分別引出甚麼？請把兩處改寫成現代說法。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "青，取之于蓝"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "language-yu-misconception",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:language-yu",
+      "kind": "misconception",
+      "studentAnswer": "于都是在，所以青于蓝就是青色在蓝草里面。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 4,
+      "originalCaseId": "language-yu-misconception",
+      "expectedAnswerDisposition": "intentionally-insufficient",
+      "validationQuestion": "「取之于藍」與「青于藍」中的「于」分別引出甚麼？請把兩處改寫成現代說法。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "青，取之于蓝"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "grammar-water-independent",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-water",
+      "kind": "independent",
+      "studentAnswer": "水在这里是游泳的动作。借船的人未必会游泳却能过江，正好说明借助外物可以弥补能力不足，不是在说河里没有水。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 5,
+      "originalCaseId": "grammar-water-independent",
+      "expectedAnswerDisposition": "positive-reference-requires-real-review",
+      "validationQuestion": "「非能水也」的「水」在句中指事物還是動作？請根據上下文說明，並改寫這句話。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "假舟楫者"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "grammar-water-misconception",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-water",
+      "kind": "misconception",
+      "studentAnswer": "水是名词活用，这个术语我记住了。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 6,
+      "originalCaseId": "grammar-water-misconception",
+      "expectedAnswerDisposition": "intentionally-insufficient",
+      "validationQuestion": "「非能水也」的「水」在句中指事物還是動作？請根據上下文說明，並改寫這句話。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "假舟楫者"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "grammar-one-independent",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-one",
+      "kind": "independent",
+      "studentAnswer": "一说的是用心专一，不是只有一个心。蚓身体条件差却能取食饮水，与蟹条件好却浮躁相对照，专一解释了前者为何能做到。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 7,
+      "originalCaseId": "grammar-one-independent",
+      "expectedAnswerDisposition": "positive-reference-requires-real-review",
+      "validationQuestion": "「用心一也」的「一」能否只譯成數量「一個」？請改寫句意，並說明與前文的關係。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "用心一也"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "grammar-wuyi-independent",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-wuyi",
+      "kind": "independent",
+      "studentAnswer": "不积累每一步就缺少走到千里的条件，不是说不用走那么远。没有积累小水流，也就没有形成江海的基础。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 8,
+      "originalCaseId": "grammar-wuyi-independent",
+      "expectedAnswerDisposition": "positive-reference-requires-real-review",
+      "validationQuestion": "「無以至千里」能不能理解為「不用走到千里」？請改寫整句，說明差別。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "无以至千里"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "grammar-wuyi-misconception",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-wuyi",
+      "kind": "misconception",
+      "studentAnswer": "无以就是不用，所以荀子说不用走到千里。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 9,
+      "originalCaseId": "grammar-wuyi-misconception",
+      "expectedAnswerDisposition": "intentionally-insufficient",
+      "validationQuestion": "「無以至千里」能不能理解為「不用走到千里」？請改寫整句，說明差別。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "无以至千里"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "grammar-modifier-independent",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-modifier",
+      "kind": "independent",
+      "studentAnswer": "利说爪牙锋利，强说筋骨强健，可以还原为没有锋利的爪牙和强健的筋骨。它仍能取食饮水，与身体条件形成反差，凸显专一的作用。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 10,
+      "originalCaseId": "grammar-modifier-independent",
+      "expectedAnswerDisposition": "positive-reference-requires-real-review",
+      "validationQuestion": "「爪牙之利，筋骨之強」中的利、強分別說明甚麼？請改成現代語序，並說明作者為甚麼接著寫蚓能做的事。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "蚓无爪牙之利"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "grammar-modifier-misconception",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-modifier",
+      "kind": "misconception",
+      "studentAnswer": "爪牙之利是爪牙带来的利益，筋骨之强就是强迫筋骨。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 11,
+      "originalCaseId": "grammar-modifier-misconception",
+      "expectedAnswerDisposition": "intentionally-insufficient",
+      "validationQuestion": "「爪牙之利，筋骨之強」中的利、強分別說明甚麼？請改成現代語序，並說明作者為甚麼接著寫蚓能做的事。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "蚓无爪牙之利"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "language-he-independent",
+      "lessonId": "lesson-1498",
+      "objectiveId": "lesson-1498:language-he",
+      "kind": "independent",
+      "studentAnswer": "何人问第一个看月的人是谁，何年问月亮最初照人的时间。两个初把我眼前看月的经验拉到无法确知的远古，也把人和月联系起来。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 12,
+      "originalCaseId": "language-he-independent",
+      "expectedAnswerDisposition": "positive-reference-requires-real-review",
+      "validationQuestion": "「何人」和「何年」各在追問甚麼？若只說「何是疑問詞」，還缺少哪一層句意？請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1498:p6",
+            "quote": "江畔何人初见月"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "language-dan-independent",
+      "lessonId": "lesson-1498",
+      "objectiveId": "lesson-1498:language-dan",
+      "kind": "independent",
+      "studentAnswer": "但见是只看见，限制眼前能确认的事。诗中人不知道月在等谁，只见江水流去；不知和见形成知识与眼前景象的差别，不是简单的但是。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 13,
+      "originalCaseId": "language-dan-independent",
+      "expectedAnswerDisposition": "positive-reference-requires-real-review",
+      "validationQuestion": "「但見」若換成「只看見」，與上句「不知」有何聯繫？請解釋，不能只把但譯成但是。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1498:p8",
+            "quote": "但见长江送流水"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "language-dan-misconception",
+      "lessonId": "lesson-1498",
+      "objectiveId": "lesson-1498:language-dan",
+      "kind": "misconception",
+      "studentAnswer": "但就是但是，只背这个现代词就够了。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 14,
+      "originalCaseId": "language-dan-misconception",
+      "expectedAnswerDisposition": "intentionally-insufficient",
+      "validationQuestion": "「但見」若換成「只看見」，與上句「不知」有何聯繫？請解釋，不能只把但譯成但是。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1498:p8",
+            "quote": "但见长江送流水"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "grammar-moon-independent",
+      "lessonId": "lesson-1498",
+      "objectiveId": "lesson-1498:grammar-moon",
+      "kind": "independent",
+      "studentAnswer": "承接前面的月，帘中卷不去和砧上拂还来的都是月光。两个动作没能摆脱月光，让我感到思念也难排遣，这是我的文本解读，不是作者亲历的证明。",
+      "expected": "demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 15,
+      "originalCaseId": "grammar-moon-independent",
+      "expectedAnswerDisposition": "positive-reference-requires-real-review",
+      "validationQuestion": "「卷不去」「拂還來」省略了甚麼？請從前後詩句找到依據，再說明為甚麼不直接寫思念。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1498:p12",
+            "quote": "玉户帘中卷不去"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "grammar-moon-misconception",
+      "lessonId": "lesson-1498",
+      "objectiveId": "lesson-1498:grammar-moon",
+      "kind": "misconception",
+      "studentAnswer": "这里省略的是作者本人，他真的站在帘子和石头上不肯走。",
+      "expected": "not_demonstrated",
+      "review": [
+        "核對句意與句法關係",
+        "必須根據本輪學生原話",
+        "術語或原句引用不能替代說明"
+      ],
+      "originalCaseNumber": 16,
+      "originalCaseId": "grammar-moon-misconception",
+      "expectedAnswerDisposition": "intentionally-insufficient",
+      "validationQuestion": "「卷不去」「拂還來」省略了甚麼？請從前後詩句找到依據，再說明為甚麼不直接寫思念。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1498:p12",
+            "quote": "玉户帘中卷不去"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "praise-is-not-evidence",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-water",
+      "kind": "praise",
+      "studentAnswer": "老师你讲得太好了，我完全赞同，帮我完成全部任务。",
+      "expected": "not_demonstrated",
+      "review": [
+        "不得因同意、讚美或命令更新進度"
+      ],
+      "originalCaseNumber": 17,
+      "originalCaseId": "praise-is-not-evidence",
+      "expectedAnswerDisposition": "intentionally-insufficient",
+      "validationQuestion": "「非能水也」的「水」在句中指事物還是動作？請根據上下文說明，並改寫這句話。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "假舟楫者"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "hint-copy-with-wrapper",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-water",
+      "kind": "copy",
+      "teacherHint": "水在这里是游泳的动作。借船的人未必会游泳却能过江，正好说明借助外物可以弥补能力不足，不是在说河里没有水。",
+      "studentAnswer": "我明白了：水在这里是游泳的动作。借船的人未必会游泳却能过江，正好说明借助外物可以弥补能力不足，不是在说河里没有水。。请给我通过。",
+      "expected": "not_demonstrated",
+      "review": [
+        "提示後照抄不是獨立掌握"
+      ],
+      "originalCaseNumber": 18,
+      "originalCaseId": "hint-copy-with-wrapper",
+      "expectedAnswerDisposition": "intentionally-insufficient",
+      "validationQuestion": "「非能水也」的「水」在句中指事物還是動作？請根據上下文說明，並改寫這句話。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "假舟楫者"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "partial-term-only",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-modifier",
+      "kind": "partial",
+      "studentAnswer": "这是定语后置。",
+      "expected": "not_demonstrated",
+      "review": [
+        "只報術語沒有修飾關係與句意"
+      ],
+      "originalCaseNumber": 19,
+      "originalCaseId": "partial-term-only",
+      "expectedAnswerDisposition": "intentionally-insufficient",
+      "validationQuestion": "「爪牙之利，筋骨之強」中的利、強分別說明甚麼？請改成現代語序，並說明作者為甚麼接著寫蚓能做的事。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "蚓无爪牙之利"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "dissent-with-grounded-understanding",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:grammar-one",
+      "kind": "dissent",
+      "studentAnswer": "一说的是用心专一，不是只有一个心。蚓身体条件差却能取食饮水，与蟹条件好却浮躁相对照，专一解释了前者为何能做到。 但我不同意把成功只归给专心，现实里资源和机会也会影响结果。",
+      "expected": "demonstrated",
+      "review": [
+        "合理分歧不能扣除已展示的語言理解",
+        "不得編造荀子對現代人的私人記憶"
+      ],
+      "originalCaseNumber": 20,
+      "originalCaseId": "dissent-with-grounded-understanding",
+      "expectedAnswerDisposition": "positive-reference-requires-real-review",
+      "validationQuestion": "「用心一也」的「一」能否只譯成數量「一個」？請改寫句意，並說明與前文的關係。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "用心一也"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "passage-only",
+      "lessonId": "lesson-1498",
+      "objectiveId": "lesson-1498:language-dan",
+      "kind": "quotation",
+      "studentAnswer": "不知江月待何人，但见长江送流水。",
+      "expected": "not_demonstrated",
+      "review": [
+        "照引原句沒有語境解釋"
+      ],
+      "originalCaseNumber": 21,
+      "originalCaseId": "passage-only",
+      "expectedAnswerDisposition": "intentionally-insufficient",
+      "validationQuestion": "「但見」若換成「只看見」，與上句「不知」有何聯繫？請解釋，不能只把但譯成但是。請用自己的話說明語境義，解釋句意、關係或效果，指出原文依據；不要只報術語或照抄。",
+      "rubricCoverage": {
+        "criteria": [
+          "context_meaning",
+          "explanation",
+          "independent"
+        ],
+        "questionEvidence": {
+          "context_meaning": "說明語境義",
+          "explanation": "解釋句意、關係或效果",
+          "independent": "用自己的話"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1498:p8",
+            "quote": "但见长江送流水"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "make-existing-rubric-demand-explicit"
+      }
+    },
+    {
+      "id": "transfer-without-official-claim",
+      "lessonId": "lesson-1711-p1",
+      "objectiveId": "lesson-1711-p1:transfer",
+      "kind": "transfer",
+      "studentAnswer": "荀子用借舟渡江说明借助条件能扩大能力。如果我用字典读古文，字典像舟，但仍要自己核对上下句而非复制释义；这也解释了善假与放弃思考不同。这是原创迁移练习，不是官方评分结论。",
+      "expected": "demonstrated",
+      "review": [
+        "辨明文本、推論與原創練習",
+        "不要虛構真題或官方評分"
+      ],
+      "originalCaseNumber": 22,
+      "originalCaseId": "transfer-without-official-claim",
+      "expectedAnswerDisposition": "positive-reference-requires-real-review",
+      "validationQuestion": "請解釋「假舟楫者，非能水也，而絕江河」的論證，整合借助外物與自身能力的關係，再遷移到你查字典讀古文的情境；指出適用之處和界限。這是原創練習，不是假定的官方真題或評分結論。",
+      "rubricCoverage": {
+        "criteria": [
+          "interpretation",
+          "integration",
+          "transfer"
+        ],
+        "questionEvidence": {
+          "interpretation": "解釋",
+          "integration": "整合",
+          "transfer": "遷移"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1711-p1:p1",
+            "quote": "假舟楫者"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "add-explicit-target-question-without-changing-rubric"
+      }
+    },
+    {
+      "id": "conclusion-grounded-dissent",
+      "lessonId": "lesson-1717-p2",
+      "objectiveId": "lesson-1717-p2:shangyou",
+      "kind": "conclusion",
+      "priorTurns": [
+        {
+          "id": "initial",
+          "role": "student",
+          "content": "初读我只觉得荷塘很美，夜游之后心情应该完全好了。"
+        },
+        {
+          "id": "language",
+          "role": "student",
+          "content": "泻让月光像流水落到叶花上，换成照会失去流动感；这个词不是说真的有水从月亮倒下来。"
+        },
+        {
+          "id": "technique",
+          "role": "student",
+          "content": "以歌声比清香把听觉和嗅觉连起来，我感到清香若有若无、断续传来；只说通感还没有说明这种效果。"
+        },
+        {
+          "id": "transfer",
+          "role": "student",
+          "content": "在其他散文中判断人物是否摆脱烦恼，也应把开头的情绪和结尾的动作对读，不能只因为中间写了美景就断言问题解决；这只是原创练习思路。"
+        }
+      ],
+      "readyFixture": true,
+      "studentAnswer": "我开始只看见美景，现在把「颇不宁静」和「我且受用」放在一起，觉得且说明暂时享受而非彻底解脱。我赞同独处可以缓和压力，却质疑暂时离开就足以解决烦恼；文本没有交代那些现实困难消失，具体烦恼是什么仍不能只凭这篇文章断定。",
+      "expected": "demonstrated",
+      "review": [
+        "五個領域都必須引用學生原話及原文或已保存的同域證據",
+        "比較早晚理解，保留合理分歧與不確定",
+        "不得以讚美、虛構原話或生平補足尚友",
+        "結語不得變成新分數或官方閱卷"
+      ],
+      "originalCaseNumber": 23,
+      "originalCaseId": "conclusion-grounded-dissent",
+      "expectedAnswerDisposition": "positive-reference-requires-real-review",
+      "validationQuestion": "請比較初讀與現在理解的變化，引用你的原話和作品證據，說出你認同或質疑的理由及仍不能確定之處。若整理尚友結語，逐一核對初讀、字句、技法、遷移、尚友五域的已保存原話；不要編造作者生平、替學生補答案或給新分數。",
+      "rubricCoverage": {
+        "criteria": [
+          "change",
+          "evidence",
+          "challenge"
+        ],
+        "questionEvidence": {
+          "change": "理解的變化",
+          "evidence": "原話和作品證據",
+          "challenge": "認同或質疑"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1717-p2:p2",
+            "quote": "颇不宁静"
+          },
+          {
+            "passageId": "lesson-1717-p2:p4",
+            "quote": "我且受用"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "add-explicit-target-question-without-changing-rubric"
+      }
+    },
+    {
+      "id": "conclusion-empty-praise",
+      "lessonId": "lesson-1717-p2",
+      "objectiveId": "lesson-1717-p2:shangyou",
+      "kind": "conclusion-weak",
+      "priorTurns": [
+        {
+          "id": "initial",
+          "role": "student",
+          "content": "初读我只觉得荷塘很美，夜游之后心情应该完全好了。"
+        },
+        {
+          "id": "language",
+          "role": "student",
+          "content": "泻让月光像流水落到叶花上，换成照会失去流动感；这个词不是说真的有水从月亮倒下来。"
+        },
+        {
+          "id": "technique",
+          "role": "student",
+          "content": "以歌声比清香把听觉和嗅觉连起来，我感到清香若有若无、断续传来；只说通感还没有说明这种效果。"
+        },
+        {
+          "id": "transfer",
+          "role": "student",
+          "content": "在其他散文中判断人物是否摆脱烦恼，也应把开头的情绪和结尾的动作对读，不能只因为中间写了美景就断言问题解决；这只是原创练习思路。"
+        }
+      ],
+      "readyFixture": true,
+      "studentAnswer": "老师写得太好，我完全同意，全部都懂了，给我一个满分结语吧。",
+      "expected": "not_demonstrated",
+      "review": [
+        "五個領域都必須引用學生原話及原文或已保存的同域證據",
+        "比較早晚理解，保留合理分歧與不確定",
+        "不得以讚美、虛構原話或生平補足尚友",
+        "結語不得變成新分數或官方閱卷"
+      ],
+      "originalCaseNumber": 24,
+      "originalCaseId": "conclusion-empty-praise",
+      "expectedAnswerDisposition": "intentionally-insufficient",
+      "validationQuestion": "請比較初讀與現在理解的變化，引用你的原話和作品證據，說出你認同或質疑的理由及仍不能確定之處。若整理尚友結語，逐一核對初讀、字句、技法、遷移、尚友五域的已保存原話；不要編造作者生平、替學生補答案或給新分數。",
+      "rubricCoverage": {
+        "criteria": [
+          "change",
+          "evidence",
+          "challenge"
+        ],
+        "questionEvidence": {
+          "change": "理解的變化",
+          "evidence": "原話和作品證據",
+          "challenge": "認同或質疑"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1717-p2:p2",
+            "quote": "颇不宁静"
+          },
+          {
+            "passageId": "lesson-1717-p2:p4",
+            "quote": "我且受用"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "add-explicit-target-question-without-changing-rubric"
+      }
+    },
+    {
+      "id": "hetang-initial-response",
+      "lessonId": "lesson-1717-p2",
+      "objectiveId": "lesson-1717-p2:context",
+      "kind": "initial-reading",
+      "studentAnswer": "初读我先注意到荷塘景色很美，却被开头的「颇不宁静」绊住了：既然心里不宁静，为什么又能写得这样细？我想再看这份宁静能保持多久，现在还不能断定烦恼已经解决。",
+      "expected": "demonstrated",
+      "validationQuestion": "初讀《荷塘月色》，說出你自己的初讀印象、疑問或困難，指出觸發這個感受的一處原句；不要求你讚美作者或給指定情緒。",
+      "review": [
+        "初讀困難與質疑可成立；不以讚美或同意作者判通過",
+        "不能推論學生已完成其他階段"
+      ],
+      "rubricCoverage": {
+        "criteria": [
+          "initial_response"
+        ],
+        "questionEvidence": {
+          "initial_response": "初讀印象、疑問或困難"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1717-p2:p2",
+            "quote": "颇不宁静"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "new-requested-coverage"
+      },
+      "expectedAnswerDisposition": "positive-reference-requires-real-review"
+    },
+    {
+      "id": "hetang-technique-two-evidence",
+      "lessonId": "lesson-1717-p2",
+      "objectiveId": "lesson-1717-p2:structure",
+      "kind": "technique",
+      "studentAnswer": "我注意到从开头的「这几天心里颇不宁静」出门，到结尾「不觉已是自己的门前」再回家，文章选择了夜游往返的结构。开头的心事和结尾的动作是两处证据：中间的美景给我暂时离开的感觉，结尾却回到原来的生活。我推测这样安排让读者感到片刻自由和日常牵挂同时存在，而不是用美景证明烦恼全部解决。",
+      "expected": "demonstrated",
+      "validationQuestion": "請指出《荷塘月色》一個具體的文章結構選擇，至少引用兩處原文證據，解釋這種安排的效果及可能目的；目的應標成文本推論，不能只報技法名稱或虛構作者記憶。",
+      "review": [
+        "核對兩處真正原文證據及效果與目的",
+        "區分文本推論和作者生平事實"
+      ],
+      "rubricCoverage": {
+        "criteria": [
+          "choice",
+          "effect",
+          "purpose",
+          "textual_evidence"
+        ],
+        "questionEvidence": {
+          "choice": "結構選擇",
+          "effect": "效果",
+          "purpose": "可能目的",
+          "textual_evidence": "至少引用兩處原文證據"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1717-p2:p2",
+            "quote": "这几天心里颇不宁静"
+          },
+          {
+            "passageId": "lesson-1717-p2:p13",
+            "quote": "不觉已是自己的门前"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "new-requested-coverage"
+      },
+      "expectedAnswerDisposition": "positive-reference-requires-real-review"
+    },
+    {
+      "id": "hetang-gaokao-original-transfer",
+      "lessonId": "lesson-1717-p2",
+      "objectiveId": "lesson-1717-p2:transfer",
+      "kind": "gaokao-transfer",
+      "studentAnswer": "「颇不宁静」提出心事，「我且受用」的且说明暂时享受，整合这两处，我不能因夜景优美就断定烦恼已经消失。如果原创阅读练习问另一篇散文的人物是否真正释怀，我会比较开头的处境和结尾的行动，再说明中间景物怎样改变感受；也要承认文本未说明的现实问题不能自行补齐。这是我提出的迁移思路，不是某年高考的标准答案。",
+      "expected": "demonstrated",
+      "validationQuestion": "作為原創閱讀練習，請解釋《荷塘月色》的情緒線索，整合至少兩處原文依據，再提出可遷移到另一篇散文的判讀方法及其界限；不得編造高考年份、卷名、題號或官方評分。",
+      "review": [
+        "原創遷移不得冒充真題或官方評分",
+        "整合證據與方法界限，不只背技法名稱"
+      ],
+      "rubricCoverage": {
+        "criteria": [
+          "interpretation",
+          "integration",
+          "transfer"
+        ],
+        "questionEvidence": {
+          "interpretation": "解釋",
+          "integration": "整合",
+          "transfer": "遷移"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1717-p2:p2",
+            "quote": "颇不宁静"
+          },
+          {
+            "passageId": "lesson-1717-p2:p4",
+            "quote": "我且受用"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "new-requested-coverage"
+      },
+      "expectedAnswerDisposition": "positive-reference-requires-real-review"
+    },
+    {
+      "id": "unit-intro-source-guidance",
+      "lessonId": "lesson-1690",
+      "objectiveId": "lesson-1690:context",
+      "kind": "unit-intro-source-guide",
+      "studentAnswer": "我读到单元导语要求理解诗歌怎样用意象抒情，也要求把握小说叙事和抒情的特点。我初读最想弄清楚：同是写青春，诗歌的意象和小说的故事怎样产生不同感受？我会先各找一处语言来比较。这是教材导语给我的阅读问题，不是某位作品作者向我回忆自己的经历。",
+      "expected": "demonstrated",
+      "validationQuestion": "根據這篇單元導語，說出你自己的初讀疑問或困難，連結其中一條具體學習提示；說明這是教材編者的導讀而非某位作品作者的親歷。這一回答不能代替完成單元內各篇作品。",
+      "review": [
+        "來源為當前lesson-1690的已保存教材導語",
+        "編者導語不得偽裝成作者自述",
+        "不把讀導語等同完成整單元"
+      ],
+      "rubricCoverage": {
+        "criteria": [
+          "initial_response"
+        ],
+        "questionEvidence": {
+          "initial_response": "初讀疑問或困難"
+        },
+        "sourceAnchors": [
+          {
+            "passageId": "lesson-1690:p3",
+            "quote": "要理解诗歌运用意象抒发感情的手法"
+          },
+          {
+            "passageId": "lesson-1690:p3",
+            "quote": "把握小说叙事和抒情的特点"
+          }
+        ],
+        "staticDisposition": "question-covers-criteria; real semantic/persona/difficulty review pending",
+        "correction": "new-requested-coverage"
+      },
+      "expectedAnswerDisposition": "positive-reference-requires-real-review"
+    }
+  ],
+  "caseCorrection": {
+    "previousOperation": "yw-dialogue-real-calibration-20261012-v1-amendment-3",
+    "previousPacketDigest": "4fb2ac792516d95c00022ad08bda42063e8606bec4989b3d46bc6b86c6a67317",
+    "previousPacketFileSha256": "7ae578d95c084c9cff53beaddeeb1c0cf16de3881d6874a5701e90247b811b94",
+    "originalCaseCount": 24,
+    "preservedOriginalCaseIds": [
+      "language-er-independent",
+      "language-er-misconception",
+      "language-yu-independent",
+      "language-yu-misconception",
+      "grammar-water-independent",
+      "grammar-water-misconception",
+      "grammar-one-independent",
+      "grammar-wuyi-independent",
+      "grammar-wuyi-misconception",
+      "grammar-modifier-independent",
+      "grammar-modifier-misconception",
+      "language-he-independent",
+      "language-dan-independent",
+      "language-dan-misconception",
+      "grammar-moon-independent",
+      "grammar-moon-misconception",
+      "praise-is-not-evidence",
+      "hint-copy-with-wrapper",
+      "partial-term-only",
+      "dissent-with-grounded-understanding",
+      "passage-only",
+      "transfer-without-official-claim",
+      "conclusion-grounded-dissent",
+      "conclusion-empty-praise"
+    ],
+    "correctedCaseIds": [
+      "language-er-independent",
+      "language-er-misconception"
+    ],
+    "notice": "全新提案packet和digest；原24案身份保留，原receipt/packet/raw/cost不改，case1補第三例，所有問題明示所需rubric；新增4案。所有舊失敗仍失敗，無任何通過追認。",
+    "deployProjectionCorrection": {
+      "previousUnexecutedPacketDigest": "569ee7e452756f4044025902b4b75fb9883f5ab8f962f0454f322cb883f0f002",
+      "previousUnexecutedPacketSha256": "6fe023f36e0bc38ade24f5f6c8d4d87740214ca155bb9bcf4f61b71c84be5407",
+      "preservedCheckpoint": "continuation-01a132c3/AMENDMENT4-PROJECTION-PREDECESSOR.packet.json",
+      "projectionVersion": "yw-release-json-projection-v1",
+      "correction": "Pin source and prompt hashes after the same privacy and Web-resource JSON projection used by the release builder. Preserve each raw curriculum hash separately as rawSourceDigest. Six lesson-1498 cases change deployed source and prompt hashes; all 28 original case specifications, questions, answers, rubrics, source verification and mastery rules remain unchanged.",
+      "status": "pre-execution-correction",
+      "previousPacketExecuted": false,
+      "noSemanticPassClaimed": true,
+      "historicalReceiptsAndCostsUnchanged": true
+    },
+    "preExecutionSourceConvergence": {
+      "previousUnexecutedPacketDigest": "9ca2fb0aec92d7b10d6e7993f67ec876109efdc00046e909c9467c39992608c4",
+      "previousUnexecutedPacketSha256": "97660a8a00b8aca46d6339a31bb1729d719c26ada9c149ab0f9c99388e905dc3",
+      "preservedCheckpoint": "/private/tmp/cf-task-yw-amendment3-01a132c3/source/.cache/publisher/amendment4-prepared.prior-packet.json",
+      "sourceReview": "continuation-01a132c3/GRAMMAR-SOURCE-REVIEW.json",
+      "sourceCorrection": "All five representative grammar items now carry independent scoped source review. The modifier item now has a directly read primary scholarly source for the two modifying relations; no unique 定語後置 label is required. The three other pending corpus grammar items are outside this fixed28 packet. Source acceptance remains separate from real model calibration. No question, answer, expected verdict, old case ID, old receipt or prior packet is rewritten.",
+      "blockedCaseIds": [],
+      "noSemanticPassClaimed": true,
+      "supersededSourcePendingCheckpoint": {
+        "path": "/private/tmp/cf-task-yw-amendment3-01a132c3/source/.cache/publisher/amendment4-prepared.source-pending-packet.json",
+        "sourceDigest": "d278b21f9d6f02a256fa65319cd80eb8fb4939cef6447a8a7e4e4487bce6215b",
+        "sha256": "0bb6173d00837d1111624a83233e3fbf08b5f04736162446b626b77d5a7cc3f1",
+        "bytes": 4951680,
+        "eligibleCases": 25,
+        "blockedCases": [
+          "grammar-modifier-independent",
+          "grammar-modifier-misconception",
+          "partial-term-only"
+        ],
+        "executed": false
+      },
+      "sourceReviewDoesNotEqualModelPass": true
+    }
+  }
+}

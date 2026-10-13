@@ -1,4 +1,12 @@
-## Current execution — 2026-10-13T06:07:00Z
+## Current model38 isolated candidate — 2026-10-13T07:52:38.166675+00:00
+
+User authorized an alternative model and full recalibration after confirmed Gemini3.6Flash503 failures. Gemini3.8Flash is the new explicit isolated target; original13 calibration receipts, known10267micros and unknown924000micros remain immutable. Independent amendment5 contains all28 reviewed cases, one primary and at most one diagnosed recovery each, max56 single-provider attempts. Separate E2E retains the original cumulative120-call namespace and max3 sequential same-model attempts. Trusted activation is v2; all isolated pins expire2026-10-14T12:00Z. No production default/fallback or accepted100% version changes.
+
+This source is unactivated until exact candidate build/tests, registered publication and readback. No model38 provider result exists yet. All189 remain scope. The actual Hetang export now passes file/server equality (74376bytes), while its saved answer remains unconfirmed with no invented assessment. UC37cf3c4 CI passes but controlled production rollout and source/central/My write-readback require owner go/no-go. Real28 semantic calibration,3 complete dialogues,207 supplemental cases, continuation/accounting, second account, nativeIME, accessibility and two baseline touch failures remain open. Native stable pointer unchanged. Evidence and resource ownership: continuation-01a132c3/CHECKPOINT-ALL-LESSONS.md.
+
+Earlier current sections below are retained history where superseded.
+
+## Historical execution — 2026-10-13T06:07:00Z
 
 All189 remain in scope. Isolated a574847/9ee0199e is live; formal production unchanged. Seven calibration cases touched,0 semantic passes; one real Hetang scored turn saved but unconfirmed. Google503/model cooldown blocks paid acceptance; user direction requested, no replay. Unreleased69-item non-gating, per-lesson limits135/137, status-only save templates and three grammar-source corrections pass335 tests perNode22/24. Full dialogues, central receipt/reload and remaining browser/device acceptance are incomplete.
 

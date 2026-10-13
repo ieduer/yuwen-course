@@ -21,7 +21,7 @@ const safeParse=value=>{try{return JSON.parse(value||'null');}catch{return null;
 async function snapshot(db,student,id){
  const allRows=await all(db.prepare(fullSql+' WHERE substr(c.turn_id,1,?)=? ORDER BY c.turn_id').bind(base.length,base));
  if(allRows.some(r=>r.student_id!==student.id||r.session_owner!==student.id))throw Error('calibration_owner_mismatch');
- const historical=allRows.filter(r=>!r.turn_id.startsWith(prefix)),current=allRows.filter(r=>r.turn_id.startsWith(prefix));
+ const historical=allRows.filter(r=>historyIds.includes(r.turn_id)),current=allRows.filter(r=>r.turn_id.startsWith(prefix));
  const pins=await Promise.all(historical.map(async r=>({attemptId:r.turn_id,receiptDigest:await receipt(r)})));
  const history={attempts:historical.length,reservedMicros:historical.reduce((n,r)=>n+r.reserved_micros,0),knownMicros:historical.reduce((n,r)=>n+(r.accounted_micros??0),0),unknownReservedMicros:historical.reduce((n,r)=>n+(r.accounted_micros===null?r.reserved_micros:0),0),allReceiptsReconciled:historical.length===7&&historyIds.every(x=>historical.some(r=>r.turn_id===x&&['finished','review'].includes(r.state)&&r.finished_at)),receiptSetDigest:await sha(JSON.stringify(pins))};
  const rows=await Promise.all(current.map(async r=>{const meta=safeParse(r.curriculum_json),result=safeParse(r.details_json);return {caseId:meta?.caseId,attemptId:r.turn_id,receiptDigest:await receipt(r),state:r.state,reservedMicros:r.reserved_micros,accountedMicros:r.accounted_micros,createdAt:r.created_at,finishedAt:r.finished_at,chunkCount:r.chunk_count,partialChars:r.partial_chars,finalAssessment:!!(result?.value||result?.received?.value),boundaryStop:result?.boundaryStop===true,model:result?.model||result?.received?.model};}));

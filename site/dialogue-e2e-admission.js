@@ -4,10 +4,10 @@
 import {acceptanceContext,ACCEPTANCE_ORIGIN} from './dialogue-acceptance.js';
 
 export const E2E_OPERATION='yw-e2e-real-dialogue-01a132c3';
-export const E2E_HARD_EXPIRY='2026-10-13T12:00:00Z';
-export const E2E_AUTHORITY_DIGEST='f4bcaf4dc2fd6e0303b71920810184a7f81f54b14bc351b9388517c3972ed2a1';
+export const E2E_HARD_EXPIRY='2026-10-14T12:00:00Z';
+export const E2E_AUTHORITY_DIGEST='97e5ab009b49ad7bd293f0762bcc8d63bc72f2458708a1f931da372a421cf8b4';
 export const E2E_LESSONS=Object.freeze(['lesson-1498','lesson-1711-p1','lesson-1717-p2']);
-const VERSION='yw-isolated-e2e-admission-v1';
+const VERSION='yw-isolated-e2e-admission-v2';
 const DIGEST=/^[a-f0-9]{64}$/;
 const KEYS='apisVersion,authorityDigest,databaseId,enabled,hardExpiry,lessonIds,maxProviderAttempts,maxVisibleCalls,operation,origin,ownerUserId,registryReceiptDigest,reserveMicros,version';
 
@@ -28,7 +28,7 @@ export function isolatedDialogueAdmission(env,student,lessonId,budget,at=Date.no
    ||!Array.isArray(pin.lessonIds)||JSON.stringify([...pin.lessonIds].sort())!==JSON.stringify(E2E_LESSONS)
    ||!E2E_LESSONS.includes(lessonId))throw Error('e2e_activation_invalid');
  if(!Number.isFinite(at)||at>=Math.min(context.expires,Date.parse(E2E_HARD_EXPIRY)))throw Error('e2e_activation_expired');
- if(budget.model!=='gemini-3.6-flash'||budget.logicalProviderAttemptLimit!==3
+ if(budget.model!=='gemini-3.8-flash'||budget.logicalProviderAttemptLimit!==3
    ||budget.perAttemptReserveMicros!==84000||budget.reserveMicros!==252000)throw Error('e2e_budget_mismatch');
  return Object.freeze({version:VERSION,operation:E2E_OPERATION,ownerUserId:context.userId,
   databaseId:context.databaseId,registryReceiptDigest:pin.registryReceiptDigest,

@@ -6,7 +6,7 @@ import {isolatedDialogueAdmission,isolatedCallCount} from './dialogue-e2e-admiss
 // never uses this wrapper. One logical learner turn reserves all three slots.
 export function requestDialogueBudget(env,student,lessonId){
  const policy=dialogueBudget(env),limit=env.YW_DIALOGUE_PROVIDER_ATTEMPTS==='3'?3:1;
- if(limit>1&&policy.model!=='gemini-3.6-flash')throw Error('retry_model_mismatch');
+ if(limit>1&&!['gemini-3.6-flash','gemini-3.8-flash'].includes(policy.model))throw Error('retry_model_mismatch');
  const reserveMicros=policy.reserveMicros*limit;
  if(reserveMicros>Math.min(policy.globalDailyMicros,policy.userDailyMicros,policy.lessonLifetimeMicros))throw Error('retry_reserve_exceeds_budget');
  const budget={...policy,perAttemptReserveMicros:policy.reserveMicros,providerAttemptLimit:limit,logicalProviderAttemptLimit:limit,reserveMicros};
@@ -18,7 +18,7 @@ export function requestDialogueBudget(env,student,lessonId){
 
 export function combinedProviderAccounting(value,budget,prior=[],success=false){
  if(!value)return null;
- const next=validatedProviderAccounting(value,{maxProviderAttempts:budget.providerAttemptLimit||1,success});
+ const next=validatedProviderAccounting(value,{maxProviderAttempts:budget.providerAttemptLimit||1,success,model:budget.model});
  const attempts=[...prior,...next.attempts.map(a=>({...a,ordinal:a.ordinal+prior.length}))];
  const maxProviderAttempts=budget.logicalProviderAttemptLimit||budget.providerAttemptLimit||1;
  if(attempts.length>maxProviderAttempts)throw Error('logical_provider_limit');
@@ -43,7 +43,7 @@ export function continuationDisposition(call,failure,continued=false){
  let policy;try{policy=JSON.parse(call.budget_policy_json);}catch{return deny('provider_budget_unverified');}
  const limit=policy.logicalProviderAttemptLimit||policy.providerAttemptLimit||1;
  if(limit!==3)return deny('continuation_not_reserved');
- let accounting;try{accounting=validatedProviderAccounting(failure?.providerAccounting,{maxProviderAttempts:limit});}catch{return deny('provider_completion_unconfirmed');}
+ let accounting;try{accounting=validatedProviderAccounting(failure?.providerAccounting,{maxProviderAttempts:limit,model:policy.model});}catch{return deny('provider_completion_unconfirmed');}
  if(!accounting.attempts.length||accounting.attempts.some(a=>!a.brokerCompleted))return deny('provider_completion_unconfirmed');
  if(accounting.attempts.at(-1).outputStarted!==true)return deny('partial_provider_mismatch');
  if(accounting.attempts.some(a=>!['FETCH_ERROR','TIMEOUT','UNAVAILABLE','500','502','503','504'].includes(a.outcome)))return deny('provider_failure_not_retryable');

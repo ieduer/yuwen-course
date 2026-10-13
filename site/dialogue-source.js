@@ -494,7 +494,7 @@ export async function callDialogueModel(env,prompt,requestId,onReply,budget=dial
   }
   throw error;
  }
- const result=await consumeGatewayStream(response,onReply,{maxReplyChars:LIMITS.replyChars,maxProviderAttempts:budget.providerAttemptLimit||1,signal});
+ const result=await consumeGatewayStream(response,onReply,{maxReplyChars:LIMITS.replyChars,maxProviderAttempts:budget.providerAttemptLimit||1,model:budget.model,signal});
  if(result.model!==budget.model)throw Error('budget_model_mismatch');
  return result;
 }
