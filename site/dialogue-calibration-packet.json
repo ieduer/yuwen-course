@@ -73,7 +73,25 @@
         "usage_json": null
       }
     ],
-    "recoveryReadbacks": []
+    "recoveryReadbacks": [
+      {
+        "attemptId": "yw-dialogue-real-calibration-20261012-v1-amendment-3:attempt-2",
+        "receiptDigest": "bec7f49defbb54f917cb1063552e6044ce21a2eaaf6c56aff6ee0911f6d8536d",
+        "kind": "provider503",
+        "providerStatus": 503,
+        "providerAttemptCount": 1,
+        "brokerCompleted": true,
+        "noOutput": true,
+        "model": "gemini-3.6-flash",
+        "fallback": false,
+        "hedge": false,
+        "backgroundCalls": 0,
+        "retryAfterMs": 1000,
+        "evidenceRef": "/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/GATEWAY-DIAGNOSIS-2.json",
+        "evidenceSha256": "c4d2a833b6f5340f86843e03dd0a5a7b79b2194c787ac4892146d3e37c64440e",
+        "invocationHash": "59347a97f465e3bc099e86ac989a9fc19a877e113c619afb634aa6c19bd3ae24"
+      }
+    ]
   },
   "policyVersion": "yw-dialogue-policy-v6",
   "ruleVersion": "yw-dialogue-evidence-v3",
