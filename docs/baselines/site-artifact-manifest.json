@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1458,
-  "totalBytes": 196092127,
-  "aggregateSha256": "2f5242b00da90cced4f4023e8452acf46f4da4c3978760fd5b5a4daba53a937b",
+  "totalBytes": 196092911,
+  "aggregateSha256": "dda5325d558d8187080a58d0b1effc3998153c38a9de5acfb0dbd578fef463bb",
   "files": [
     {
       "path": "_headers",
@@ -23,7 +23,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "9a322c3da3c094d341ae35dde0131b339ca60400523940d2cdc97a404661e79b"
+      "sha256": "0d9c28d9f85e09c44ca31c44dc8c07a521390178df358f8b3dfb21b05bf1a1de"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -7142,8 +7142,8 @@
     },
     {
       "path": "dialogue-source.js",
-      "bytes": 64566,
-      "sha256": "1c498259865e5eaf5a7e41d337255f9fb53820d7080b5acc889c4adb8563d264"
+      "bytes": 65238,
+      "sha256": "98edd360bf37b1d388dc0f76738a18367968c156b8991f816cc563c570673165"
     },
     {
       "path": "dialogue-stream.js",
@@ -7152,8 +7152,8 @@
     },
     {
       "path": "dialogue.html",
-      "bytes": 5826,
-      "sha256": "d9820eb8f956353f02ddbf135669a7092e3aadf3408f7af90bdddd07d9093ec3"
+      "bytes": 5938,
+      "sha256": "a516392001cdca4b56c3fa1b727f2a6a0e494da94b770760962d7fb099d261ed"
     },
     {
       "path": "durable-evaluation-jobs.js",
