@@ -1125,6 +1125,17 @@
       "language-er-misconception"
     ],
     "notice": "全新提案packet和digest；原24案身份保留，原receipt/packet/raw/cost不改，case1補第三例，所有問題明示所需rubric；新增4案。所有舊失敗仍失敗，無任何通過追認。",
+    "deployProjectionCorrection": {
+      "previousUnexecutedPacketDigest": "569ee7e452756f4044025902b4b75fb9883f5ab8f962f0454f322cb883f0f002",
+      "previousUnexecutedPacketSha256": "6fe023f36e0bc38ade24f5f6c8d4d87740214ca155bb9bcf4f61b71c84be5407",
+      "preservedCheckpoint": "continuation-01a132c3/AMENDMENT4-PROJECTION-PREDECESSOR.packet.json",
+      "projectionVersion": "yw-release-json-projection-v1",
+      "correction": "Pin source and prompt hashes after the same privacy and Web-resource JSON projection used by the release builder. Preserve each raw curriculum hash separately as rawSourceDigest. Six lesson-1498 cases change deployed source and prompt hashes; all 28 original case specifications, questions, answers, rubrics, source verification and mastery rules remain unchanged.",
+      "status": "pre-execution-correction",
+      "previousPacketExecuted": false,
+      "noSemanticPassClaimed": true,
+      "historicalReceiptsAndCostsUnchanged": true
+    },
     "preExecutionSourceConvergence": {
       "previousUnexecutedPacketDigest": "9ca2fb0aec92d7b10d6e7993f67ec876109efdc00046e909c9467c39992608c4",
       "previousUnexecutedPacketSha256": "97660a8a00b8aca46d6339a31bb1729d719c26ada9c149ab0f9c99388e905dc3",

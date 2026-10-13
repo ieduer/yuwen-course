@@ -2,8 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import os from 'node:os';
+import path from 'node:path';
 import {AMENDMENT4_CONTRACT as contract} from '../site/dialogue-calibration-amendment4-contract.js';
 import {amendment4Packet} from './dialogue_calibration_amendment4.mjs';
+import {buildReleaseSite,projectReleaseJson,RELEASE_JSON_PROJECTION_VERSION} from './build_release_site.mjs';
 import {amendment4Budget,amendment4ConservativeMicros,amendment4TerminalDisposition,amendment4Admission,amendment4CaseSourceReadiness,handleAmendment4Calibration} from '../site/dialogue-calibration-amendment4.js';
 const corpus=JSON.parse(fs.readFileSync('scripts/dialogue-calibration-amendment4-cases.json'));
 const packet=JSON.parse(fs.readFileSync('site/dialogue-calibration-amendment4-packet.json'));
@@ -39,6 +42,36 @@ test('case 1 asks and answers the third example without weakening the rubric or 
  const old=JSON.parse(fs.readFileSync('site/dialogue-calibration-packet.json')).cases[0];
  assert.equal(old.studentAnswer,c.caseCorrection.oldStudentAnswer);assert.equal(old.promptDigest,c.caseCorrection.oldPromptDigest);
  assert(!old.studentAnswer.includes('博学而日参省乎己'));assert(c.caseCorrection.doesNotRewriteOldReceipt);
+});
+test('all28 pins match released curriculum and packet bytes, with separate raw provenance',()=>{
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'yw-amendment4-projection-test-'));
+ try{
+  const sourceRoot=path.join(root,'source'),releaseRoot=path.join(root,'release');
+  fs.mkdirSync(path.join(sourceRoot,'dialogue-curriculum'),{recursive:true});
+  for(const id of new Set(packet.cases.map(c=>c.lessonId)))fs.copyFileSync(`site/dialogue-curriculum/${id}.json`,path.join(sourceRoot,'dialogue-curriculum',id+'.json'));
+  fs.copyFileSync('site/dialogue-calibration-amendment4-packet.json',path.join(sourceRoot,'dialogue-calibration-amendment4-packet.json'));
+  buildReleaseSite({sourceRoot,releaseRoot,releaseKind:'preview-web-only'});
+  const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
+  assert.equal(fs.readFileSync(path.join(releaseRoot,'dialogue-calibration-amendment4-packet.json'),'utf8'),fs.readFileSync('site/dialogue-calibration-amendment4-packet.json','utf8'));
+  let changed=0;
+  for(const c of packet.cases){
+   const released=JSON.parse(fs.readFileSync(path.join(releaseRoot,'dialogue-curriculum',c.lessonId+'.json')));
+   assert.equal(c.sourceDigest,hash(released),c.id);
+   assert.equal(c.rawSourceDigest,hash(load(c.lessonId)),c.id);
+   assert.equal(c.sourceProjectionVersion,RELEASE_JSON_PROJECTION_VERSION);
+   assert.equal(c.promptDigest,hash(c.prompt));
+   assert.equal(c.caseDefinitionDigest,hash(corpus.cases.find(s=>s.id===c.id)));
+   if(c.sourceDigest!==c.rawSourceDigest){changed++;assert.equal(c.lessonId,'lesson-1498');}
+  }
+  assert.equal(changed,6);
+  assert.equal(packet.caseCorrection.deployProjectionCorrection.noSemanticPassClaimed,true);
+ }finally{fs.rmSync(root,{recursive:true,force:true});}
+});
+test('proposal refuses a question that release projection would rewrite',()=>{
+ const unsafe=structuredClone(corpus);
+ unsafe.cases[0].studentAnswer+=' https://bdfz.yuque.com/unsafe';
+ assert.throws(()=>amendment4Packet(unsafe,load),/amendment4_packet_projection_not_fixed/);
+ assert.equal(projectReleaseJson('packet.json',JSON.stringify(packet)),JSON.stringify(packet));
 });
 test('every original and additional question has exact criterion and source coverage; missing coverage fails preparation',()=>{
  for(const c of packet.cases){const o=c.curriculum.objectives.find(o=>o.id===c.objectiveId);assert.deepEqual(c.rubricCoverage.criteria,o.criteria);for(const k of o.criteria)assert(c.validationQuestion.includes(c.rubricCoverage.questionEvidence[k]));assert(c.prompt.includes(c.validationQuestion));}

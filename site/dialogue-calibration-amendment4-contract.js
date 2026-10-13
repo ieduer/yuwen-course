@@ -6,7 +6,7 @@ export const AMENDMENT4_CONTRACT=Object.freeze({
  action:'calibration_amendment4',status:'authorized-preparation',active:false,paidCallsAuthorized:true,
  authorizedAt:'2026-10-13T02:17:10.457557Z',
  authorityRef:'continuation-01a132c3/COST-EXECUTION-AUTHORITY.json',authorityDigest:'f4bcaf4dc2fd6e0303b71920810184a7f81f54b14bc351b9388517c3972ed2a1',
- packetDigest:'569ee7e452756f4044025902b4b75fb9883f5ab8f962f0454f322cb883f0f002',
+ packetDigest:'035b8a62d1a66095352adca4deb44da38011460246a5dee6aaf0ec7690086c80',
  model:'gemini-3.6-flash',reserveMicros:84000,maxProviderAttempts:1,
  maxRecoveriesPerCase:1,retries:0,fallback:false,hedge:false,backgroundCalls:0,
  priorAttempts:7,priorKnownMicros:10267,priorUnknownReservedMicros:420000,

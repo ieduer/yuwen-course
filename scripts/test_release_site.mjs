@@ -15,6 +15,8 @@ import os from "node:os";
 import path from "node:path";
 import {
   buildReleaseSite,
+  projectReleaseJson,
+  RELEASE_JSON_PROJECTION_VERSION,
   verifyReleaseStaging,
 } from "./build_release_site.mjs";
 import { privacyIssueCounts } from "./native_content_url_sanitizer.mjs";
@@ -61,6 +63,31 @@ function writeBytes(file, bytes) {
   mkdirSync(path.dirname(file), { recursive: true });
   writeFileSync(file, bytes);
 }
+
+test("shared JSON projection preserves formatting and matches release bytes", () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), "yw-release-projection-test-"));
+  try {
+    const sourceRoot = path.join(root, "source"), releaseRoot = path.join(root, "release");
+    const relative = "dialogue-curriculum/projection.json";
+    const source = `${JSON.stringify({ resources: [
+      { href: "https://bdfz.yuque.com/lesson", text: "retired" },
+      { href: "https://example.test/lesson?utm_source=tracking", text: "retained" },
+    ], text: "Keep this source text." }, null, 2)}\n`;
+    writeBytes(path.join(sourceRoot, relative), source);
+    const expected = projectReleaseJson(relative, source);
+    assert.equal(RELEASE_JSON_PROJECTION_VERSION, "yw-release-json-projection-v1");
+    assert.notEqual(expected, source);
+    assert.equal(projectReleaseJson(relative, expected), expected);
+    assert.equal(projectReleaseJson(relative, '{"safe":true}\n'), '{"safe":true}\n');
+    buildReleaseSite({ sourceRoot, releaseRoot, releaseKind: "preview-web-only" });
+    assert.equal(readFileSync(path.join(releaseRoot, relative), "utf8"), expected);
+    assert.equal(privacyTotal(expected), 0);
+    assert.doesNotMatch(expected, /bdfz\.yuque\.com/);
+    assert.match(expected, /Keep this source text/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
 
 test("lesson portrait decoration has no perpetual motion", () => {
   const css = readFileSync(

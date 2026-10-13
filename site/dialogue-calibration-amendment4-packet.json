@@ -9,7 +9,7 @@
   "policyVersion": "yw-dialogue-policy-v6",
   "ruleVersion": "yw-dialogue-evidence-v3",
   "model": "gemini-3.6-flash",
-  "sourceDigest": "569ee7e452756f4044025902b4b75fb9883f5ab8f962f0454f322cb883f0f002",
+  "sourceDigest": "035b8a62d1a66095352adca4deb44da38011460246a5dee6aaf0ec7690086c80",
   "caseCorrection": {
     "previousOperation": "yw-dialogue-real-calibration-20261012-v1-amendment-3",
     "previousPacketDigest": "4fb2ac792516d95c00022ad08bda42063e8606bec4989b3d46bc6b86c6a67317",
@@ -46,6 +46,17 @@
       "language-er-misconception"
     ],
     "notice": "全新提案packet和digest；原24案身份保留，原receipt/packet/raw/cost不改，case1補第三例，所有問題明示所需rubric；新增4案。所有舊失敗仍失敗，無任何通過追認。",
+    "deployProjectionCorrection": {
+      "previousUnexecutedPacketDigest": "569ee7e452756f4044025902b4b75fb9883f5ab8f962f0454f322cb883f0f002",
+      "previousUnexecutedPacketSha256": "6fe023f36e0bc38ade24f5f6c8d4d87740214ca155bb9bcf4f61b71c84be5407",
+      "preservedCheckpoint": "continuation-01a132c3/AMENDMENT4-PROJECTION-PREDECESSOR.packet.json",
+      "projectionVersion": "yw-release-json-projection-v1",
+      "correction": "Pin source and prompt hashes after the same privacy and Web-resource JSON projection used by the release builder. Preserve each raw curriculum hash separately as rawSourceDigest. Six lesson-1498 cases change deployed source and prompt hashes; all 28 original case specifications, questions, answers, rubrics, source verification and mastery rules remain unchanged.",
+      "status": "pre-execution-correction",
+      "previousPacketExecuted": false,
+      "noSemanticPassClaimed": true,
+      "historicalReceiptsAndCostsUnchanged": true
+    },
     "preExecutionSourceConvergence": {
       "previousUnexecutedPacketDigest": "9ca2fb0aec92d7b10d6e7993f67ec876109efdc00046e909c9467c39992608c4",
       "previousUnexecutedPacketSha256": "97660a8a00b8aca46d6339a31bb1729d719c26ada9c149ab0f9c99388e905dc3",
@@ -164,6 +175,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "3e3189cd0f4c835cb05a3d6c7c25bb47e4393ea0be2f64147edfd0e84710ae68",
       "sourceReadiness": {
         "eligible": true,
@@ -4173,6 +4186,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "bb9562705c122f17b7c554344e7e984ef1d0da4a4c9ef939dd281d9d8c4bc6fd",
       "sourceReadiness": {
         "eligible": true,
@@ -8182,6 +8197,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "9ae5e85936dedccfd5ce46c8ca08120e64d82cc1217c7528e4403fa68537096b",
       "sourceReadiness": {
         "eligible": true,
@@ -12191,6 +12208,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "500f72c0e185197ffaabee2c61d2ede08ce32295dfa49895902767dee375f3e9",
       "sourceReadiness": {
         "eligible": true,
@@ -16200,6 +16219,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "1e12a742397c75b92cb4760039ef5aa26e5e0312f5ee0cdd4b9bb4a96db4d2f1",
       "sourceReadiness": {
         "eligible": true,
@@ -20269,6 +20290,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "82cb65c952bb88f9020216292aef96bc48f52d0dd5341daf7a6883c2075306c2",
       "sourceReadiness": {
         "eligible": true,
@@ -24338,6 +24361,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "b01c63ddce0182309494d8e833902148e4bc66e2ece6d37642b2a3e45200607f",
       "sourceReadiness": {
         "eligible": true,
@@ -28407,6 +28432,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "6cbc07a7166e04512ec7590c4138dfbc78a173f61ebbae94e146f05cc330255f",
       "sourceReadiness": {
         "eligible": true,
@@ -32476,6 +32503,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "c972f79d6230921205bb83460daca2cdd46a03a3cb107a7bd41466ab407cb83c",
       "sourceReadiness": {
         "eligible": true,
@@ -36545,6 +36574,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "28c994a94dae28c75d6852a65f45fb45c6d527b8789d0fbd433e45e2b9305f52",
       "sourceReadiness": {
         "eligible": true,
@@ -40670,6 +40701,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "ab7d257e77b933bcc64836fe2f2bb0289bcdd1fb64d73ea8e49188ac2c6608cc",
       "sourceReadiness": {
         "eligible": true,
@@ -44794,7 +44827,9 @@
         "correction": "make-existing-rubric-demand-explicit"
       },
       "sourceCurriculumVersion": "yw-dialogue-38d5ca7cdcd81dc39614",
-      "sourceDigest": "965c5a403fc2f7a20b94ebc23aeafe582f0986b74446b237c2ca8ab374eca08d",
+      "sourceDigest": "587ebc234467e1dcb32fc262800ebcb8a75448c1f85af713aa3c6c6b772d7015",
+      "rawSourceDigest": "965c5a403fc2f7a20b94ebc23aeafe582f0986b74446b237c2ca8ab374eca08d",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "6f37fe1a8d6282ee5bfa6bd37e60ef8af4a6e8f4ec94e60cb841c083ff4cb75c",
       "sourceReadiness": {
         "eligible": true,
@@ -45492,15 +45527,6 @@
             "postId": null,
             "postNumber": 1,
             "sourceUrl": "https://sites.google.com/view/pkuschool/cover3/%e4%b8%ad%e5%9b%bd%e5%8f%a4%e5%85%b8%e8%af%97%e6%ad%8c%e7%9a%84%e6%84%8f%e8%b1%a1/%e6%98%a5%e6%b1%9f%e8%8a%b1%e6%9c%88%e5%a4%9c%e5%bc%a0%e8%8b%a5%e8%99%9a"
-          },
-          {
-            "disposition": "system-browser",
-            "href": "https://z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929",
-            "kind": "link",
-            "label": "z-library.sk",
-            "postId": null,
-            "postNumber": 6,
-            "sourceUrl": "https://z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929"
           }
         ],
         "source": "https://forum.rdfzer.com/t/topic/1498",
@@ -47933,7 +47959,9 @@
         "correction": "make-existing-rubric-demand-explicit"
       },
       "sourceCurriculumVersion": "yw-dialogue-38d5ca7cdcd81dc39614",
-      "sourceDigest": "965c5a403fc2f7a20b94ebc23aeafe582f0986b74446b237c2ca8ab374eca08d",
+      "sourceDigest": "587ebc234467e1dcb32fc262800ebcb8a75448c1f85af713aa3c6c6b772d7015",
+      "rawSourceDigest": "965c5a403fc2f7a20b94ebc23aeafe582f0986b74446b237c2ca8ab374eca08d",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "cc34117b87bffe5cf1e89a61081d419d324e5ca238baf8d6e32205f2d23686a7",
       "sourceReadiness": {
         "eligible": true,
@@ -48631,15 +48659,6 @@
             "postId": null,
             "postNumber": 1,
             "sourceUrl": "https://sites.google.com/view/pkuschool/cover3/%e4%b8%ad%e5%9b%bd%e5%8f%a4%e5%85%b8%e8%af%97%e6%ad%8c%e7%9a%84%e6%84%8f%e8%b1%a1/%e6%98%a5%e6%b1%9f%e8%8a%b1%e6%9c%88%e5%a4%9c%e5%bc%a0%e8%8b%a5%e8%99%9a"
-          },
-          {
-            "disposition": "system-browser",
-            "href": "https://z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929",
-            "kind": "link",
-            "label": "z-library.sk",
-            "postId": null,
-            "postNumber": 6,
-            "sourceUrl": "https://z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929"
           }
         ],
         "source": "https://forum.rdfzer.com/t/topic/1498",
@@ -51072,7 +51091,9 @@
         "correction": "make-existing-rubric-demand-explicit"
       },
       "sourceCurriculumVersion": "yw-dialogue-38d5ca7cdcd81dc39614",
-      "sourceDigest": "965c5a403fc2f7a20b94ebc23aeafe582f0986b74446b237c2ca8ab374eca08d",
+      "sourceDigest": "587ebc234467e1dcb32fc262800ebcb8a75448c1f85af713aa3c6c6b772d7015",
+      "rawSourceDigest": "965c5a403fc2f7a20b94ebc23aeafe582f0986b74446b237c2ca8ab374eca08d",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "104f7d77566dbeec2c124c3112d74b61293d19f21cba98529b32c762a2077b40",
       "sourceReadiness": {
         "eligible": true,
@@ -51770,15 +51791,6 @@
             "postId": null,
             "postNumber": 1,
             "sourceUrl": "https://sites.google.com/view/pkuschool/cover3/%e4%b8%ad%e5%9b%bd%e5%8f%a4%e5%85%b8%e8%af%97%e6%ad%8c%e7%9a%84%e6%84%8f%e8%b1%a1/%e6%98%a5%e6%b1%9f%e8%8a%b1%e6%9c%88%e5%a4%9c%e5%bc%a0%e8%8b%a5%e8%99%9a"
-          },
-          {
-            "disposition": "system-browser",
-            "href": "https://z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929",
-            "kind": "link",
-            "label": "z-library.sk",
-            "postId": null,
-            "postNumber": 6,
-            "sourceUrl": "https://z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929"
           }
         ],
         "source": "https://forum.rdfzer.com/t/topic/1498",
@@ -54211,7 +54223,9 @@
         "correction": "make-existing-rubric-demand-explicit"
       },
       "sourceCurriculumVersion": "yw-dialogue-38d5ca7cdcd81dc39614",
-      "sourceDigest": "965c5a403fc2f7a20b94ebc23aeafe582f0986b74446b237c2ca8ab374eca08d",
+      "sourceDigest": "587ebc234467e1dcb32fc262800ebcb8a75448c1f85af713aa3c6c6b772d7015",
+      "rawSourceDigest": "965c5a403fc2f7a20b94ebc23aeafe582f0986b74446b237c2ca8ab374eca08d",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "cd1b97396ec29662adc0eaaae812072f751aff83f3ef2c2e63b3ebfbde95380b",
       "sourceReadiness": {
         "eligible": true,
@@ -54939,15 +54953,6 @@
             "postId": null,
             "postNumber": 1,
             "sourceUrl": "https://sites.google.com/view/pkuschool/cover3/%e4%b8%ad%e5%9b%bd%e5%8f%a4%e5%85%b8%e8%af%97%e6%ad%8c%e7%9a%84%e6%84%8f%e8%b1%a1/%e6%98%a5%e6%b1%9f%e8%8a%b1%e6%9c%88%e5%a4%9c%e5%bc%a0%e8%8b%a5%e8%99%9a"
-          },
-          {
-            "disposition": "system-browser",
-            "href": "https://z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929",
-            "kind": "link",
-            "label": "z-library.sk",
-            "postId": null,
-            "postNumber": 6,
-            "sourceUrl": "https://z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929"
           }
         ],
         "source": "https://forum.rdfzer.com/t/topic/1498",
@@ -57410,7 +57415,9 @@
         "correction": "make-existing-rubric-demand-explicit"
       },
       "sourceCurriculumVersion": "yw-dialogue-38d5ca7cdcd81dc39614",
-      "sourceDigest": "965c5a403fc2f7a20b94ebc23aeafe582f0986b74446b237c2ca8ab374eca08d",
+      "sourceDigest": "587ebc234467e1dcb32fc262800ebcb8a75448c1f85af713aa3c6c6b772d7015",
+      "rawSourceDigest": "965c5a403fc2f7a20b94ebc23aeafe582f0986b74446b237c2ca8ab374eca08d",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "16100d5d23bd830746a5c514167c241ac825896ce02060a095aacbb05cdf5e2a",
       "sourceReadiness": {
         "eligible": true,
@@ -58138,15 +58145,6 @@
             "postId": null,
             "postNumber": 1,
             "sourceUrl": "https://sites.google.com/view/pkuschool/cover3/%e4%b8%ad%e5%9b%bd%e5%8f%a4%e5%85%b8%e8%af%97%e6%ad%8c%e7%9a%84%e6%84%8f%e8%b1%a1/%e6%98%a5%e6%b1%9f%e8%8a%b1%e6%9c%88%e5%a4%9c%e5%bc%a0%e8%8b%a5%e8%99%9a"
-          },
-          {
-            "disposition": "system-browser",
-            "href": "https://z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929",
-            "kind": "link",
-            "label": "z-library.sk",
-            "postId": null,
-            "postNumber": 6,
-            "sourceUrl": "https://z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929"
           }
         ],
         "source": "https://forum.rdfzer.com/t/topic/1498",
@@ -60608,6 +60606,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "30c7c23a1b553a9631019ed7729b27d4cff473cbe4e144ced4e9392e2d0e88e8",
       "sourceReadiness": {
         "eligible": true,
@@ -64676,6 +64676,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "34d03d5723faa6bec2f99d743b5e7176291f0304c3de174e0178a4296208d2f8",
       "sourceReadiness": {
         "eligible": true,
@@ -68748,6 +68750,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "8608364fca61c1c3b2990d813d51b0c31f71d1d083cecea45177bc8605a04503",
       "sourceReadiness": {
         "eligible": true,
@@ -72872,6 +72876,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "698031b13e032c160f71fe68972457c116f4739329554d4821a7708ff795239a",
       "sourceReadiness": {
         "eligible": true,
@@ -76938,7 +76944,9 @@
         "correction": "make-existing-rubric-demand-explicit"
       },
       "sourceCurriculumVersion": "yw-dialogue-38d5ca7cdcd81dc39614",
-      "sourceDigest": "965c5a403fc2f7a20b94ebc23aeafe582f0986b74446b237c2ca8ab374eca08d",
+      "sourceDigest": "587ebc234467e1dcb32fc262800ebcb8a75448c1f85af713aa3c6c6b772d7015",
+      "rawSourceDigest": "965c5a403fc2f7a20b94ebc23aeafe582f0986b74446b237c2ca8ab374eca08d",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "e986c9460320bd7d7b47e78896c7f246a6fb1d48ff05861e8b97678255c91811",
       "sourceReadiness": {
         "eligible": true,
@@ -77636,15 +77644,6 @@
             "postId": null,
             "postNumber": 1,
             "sourceUrl": "https://sites.google.com/view/pkuschool/cover3/%e4%b8%ad%e5%9b%bd%e5%8f%a4%e5%85%b8%e8%af%97%e6%ad%8c%e7%9a%84%e6%84%8f%e8%b1%a1/%e6%98%a5%e6%b1%9f%e8%8a%b1%e6%9c%88%e5%a4%9c%e5%bc%a0%e8%8b%a5%e8%99%9a"
-          },
-          {
-            "disposition": "system-browser",
-            "href": "https://z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929",
-            "kind": "link",
-            "label": "z-library.sk",
-            "postId": null,
-            "postNumber": 6,
-            "sourceUrl": "https://z-library.sk/book/41748134/f80433/%E9%97%BB%E4%B8%80%E5%A4%9A%E5%85%A8%E9%9B%86-6-%E5%94%90%E8%AF%97%E7%BC%96-%E4%B8%8A.html?ts=0929"
           }
         ],
         "source": "https://forum.rdfzer.com/t/topic/1498",
@@ -80077,6 +80076,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
       "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "rawSourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "b356a428f5d5bbecaf9978aabec2ccad53bafba0f777ef679f5ee951381e6484",
       "sourceReadiness": {
         "eligible": true,
@@ -84084,6 +84085,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-317d4d31b2ab0181cd8e",
       "sourceDigest": "7a69b7fe66d5731d67a3fbe39fe79295a44316a48fed1d2ccd8f79085cbfc51a",
+      "rawSourceDigest": "7a69b7fe66d5731d67a3fbe39fe79295a44316a48fed1d2ccd8f79085cbfc51a",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "bf9de69b775f63089c54dd261e336d5b03741adb132b8616947e45511762c00f",
       "sourceReadiness": {
         "eligible": true,
@@ -85882,6 +85885,8 @@
       },
       "sourceCurriculumVersion": "yw-dialogue-317d4d31b2ab0181cd8e",
       "sourceDigest": "7a69b7fe66d5731d67a3fbe39fe79295a44316a48fed1d2ccd8f79085cbfc51a",
+      "rawSourceDigest": "7a69b7fe66d5731d67a3fbe39fe79295a44316a48fed1d2ccd8f79085cbfc51a",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "2288ec76cbc210173db86ac3cd7b93c69c4e18a0e6c467cd456229efb5e103f5",
       "sourceReadiness": {
         "eligible": true,
@@ -87645,6 +87650,8 @@
       "expectedAnswerDisposition": "positive-reference-requires-real-review",
       "sourceCurriculumVersion": "yw-dialogue-317d4d31b2ab0181cd8e",
       "sourceDigest": "7a69b7fe66d5731d67a3fbe39fe79295a44316a48fed1d2ccd8f79085cbfc51a",
+      "rawSourceDigest": "7a69b7fe66d5731d67a3fbe39fe79295a44316a48fed1d2ccd8f79085cbfc51a",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "d7c2ea398cc68687bd2e89e9e52c79a7057732421e2ba7f985178f4ddbd23625",
       "sourceReadiness": {
         "eligible": true,
@@ -89374,6 +89381,8 @@
       "expectedAnswerDisposition": "positive-reference-requires-real-review",
       "sourceCurriculumVersion": "yw-dialogue-317d4d31b2ab0181cd8e",
       "sourceDigest": "7a69b7fe66d5731d67a3fbe39fe79295a44316a48fed1d2ccd8f79085cbfc51a",
+      "rawSourceDigest": "7a69b7fe66d5731d67a3fbe39fe79295a44316a48fed1d2ccd8f79085cbfc51a",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "770d997e1d63a2250e97a42d184a307f5c559dfec655b8f5f8de6315e8cb3cad",
       "sourceReadiness": {
         "eligible": true,
@@ -91101,6 +91110,8 @@
       "expectedAnswerDisposition": "positive-reference-requires-real-review",
       "sourceCurriculumVersion": "yw-dialogue-317d4d31b2ab0181cd8e",
       "sourceDigest": "7a69b7fe66d5731d67a3fbe39fe79295a44316a48fed1d2ccd8f79085cbfc51a",
+      "rawSourceDigest": "7a69b7fe66d5731d67a3fbe39fe79295a44316a48fed1d2ccd8f79085cbfc51a",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "a0cbbb264110b036f70dddce0dbf0c5bb1bb8d22e902a9cc0a9e4ea77282eaa3",
       "sourceReadiness": {
         "eligible": true,
@@ -92825,6 +92836,8 @@
       "expectedAnswerDisposition": "positive-reference-requires-real-review",
       "sourceCurriculumVersion": "yw-dialogue-ed4481a942981c32c991",
       "sourceDigest": "71dc046d03bc685a0ff59ca5428dd500917516ca2875fe768a866826e11c5d7b",
+      "rawSourceDigest": "71dc046d03bc685a0ff59ca5428dd500917516ca2875fe768a866826e11c5d7b",
+      "sourceProjectionVersion": "yw-release-json-projection-v1",
       "caseDefinitionDigest": "68b98676ee34ef10dd63bfada4d385479cff5db651fdccc09f7a4568291c4e20",
       "sourceReadiness": {
         "eligible": true,

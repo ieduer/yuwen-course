@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
+import {projectReleaseJson} from './build_release_site.mjs';
 import worker from '../site/_worker.js';
 import {callDialogueModel} from '../site/dialogue-source.js';
 import {ACCEPTANCE_ORIGIN, acceptanceEnvironment, acceptanceContext, createAcceptanceWorker} from '../site/dialogue-acceptance.js';
@@ -293,7 +294,10 @@ async function setupAmendment4(t){
   f.sql.prepare('INSERT INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,finished_at,reserved_micros,accounted_micros,budget_policy_json) VALUES(?,?,?,?,?,?,?,?,?,?,?)').run(id,sid,f.student.id,at.slice(0,10),2400,'review',at,at,84000,n===1?5589:null,JSON.stringify(policy));
   f.sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(id+':result',sid,id,'synthetic_calibration_unconfirmed','{"syntheticOnly":true,"reason":"preserved"}',at);
  }
- f.env.ASSETS={fetch:async request=>Response.json(JSON.parse(fs.readFileSync('site'+new URL(request.url).pathname)))};
+ f.env.ASSETS={fetch:async request=>{
+  const pathname=new URL(request.url).pathname;
+  return new Response(projectReleaseJson(pathname.slice(1),fs.readFileSync('site'+pathname,'utf8')));
+ }};
  const ownerRef=createHash('sha256').update(`dialogue-owner:${f.student.id}`).digest('hex');
  const request4=(index=0,attempt=1,extra={},method='POST')=>{const c=amendment4Packet.cases[index];return f.authenticated('/api/dialogue/v1?lessonId='+c.lessonId+'&calibration='+c.id+'&attempt='+attempt+'&calibrationOperation='+amendment4.operation,{method,headers:{origin:ACCEPTANCE_ORIGIN,'content-type':'application/json'},...(method==='POST'?{body:JSON.stringify({action:amendment4.action,ownerRef,...extra})}:{})});};
  const preflight=await(await routedCalibration(request4(0,1,{},'GET'),f.env,f.student,()=>{throw Error('no');})).json();
@@ -333,6 +337,31 @@ test('amendment4 runtime refuses unpinned history/source and cannot take activat
  f.env.YW_CALIBRATION_AMENDMENT4_JSON=JSON.stringify(pin);f.env.ASSETS={fetch:async()=>Response.json({changed:true})};
  assert.equal((await(await routedCalibration(f.request4(),f.env,f.student,()=>calls++)).json()).code,'calibration_source_mismatch');
  assert.equal((await routedCalibration(f.request4(0,1,{authority:pin}),f.env,f.student,()=>calls++)).status,400);assert.equal(calls,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,7);
+});
+test('amendment4 all28 deployed projections pass source admission while semantic tampering fails before reservation',async t=>{
+ const f=await setupAmendment4(t),before=f.sql.prepare('SELECT * FROM dialogue_calls ORDER BY turn_id').all();let calls=0;
+ const assets=f.env.ASSETS,index=amendment4Packet.cases.findIndex(c=>c.lessonId==='lesson-1498');
+ f.env.ASSETS={fetch:async request=>{
+  const source=await(await assets.fetch(request)).json();source.passages[0].text+=' Tampered semantic source.';return Response.json(source);
+ }};
+ const rejected=await routedCalibration(f.request4(index),f.env,f.student,()=>calls++);
+ assert.equal(rejected.status,409);assert.equal((await rejected.json()).code,'calibration_source_mismatch');
+ assert.equal(calls,0);assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_calls ORDER BY turn_id').all(),before);
+ // The pre-projection raw source must also remain rejected for these six cases.
+ f.env.ASSETS={fetch:async request=>new Response(fs.readFileSync('site'+new URL(request.url).pathname))};
+ assert.equal((await(await routedCalibration(f.request4(index),f.env,f.student,()=>calls++)).json()).code,'calibration_source_mismatch');
+ assert.equal(calls,0);
+ f.env.ASSETS=assets;
+ for(let i=0;i<amendment4Packet.cases.length;i++){
+  const result=await(await routedCalibration(f.request4(i),f.env,f.student,async()=>{calls++;return response4(i);})).json();
+  // The stub is deliberately not a semantic oracle: misconception/reference
+  // cases may require review. Every case must reach exactly one model stub.
+  assert(['finished','review'].includes(result.call?.state),amendment4Packet.cases[i].id+':'+(result.code||'missing call'));
+  assert.equal(calls,i+1);
+ }
+ assert.equal(calls,28);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,35);
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_assessments').get().n,0);
+ for(const r of before)assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_calls WHERE turn_id=?').get(r.turn_id),r);
 });
 test('amendment4 pending source creates no call or model request and does not block another case',async t=>{
  // Synthetic module fixture only; no source file or real receipt is changed.
