@@ -1,9 +1,9 @@
 {
   "version": "yw-dialogue-calibration-20261012-v1",
-  "operation": "yw-dialogue-real-calibration-20261012-v1-amendment-2",
+  "operation": "yw-dialogue-real-calibration-20261012-v1-amendment-3",
   "amendment": {
-    "operation": "yw-dialogue-real-calibration-20261012-v1-amendment-2",
-    "action": "calibration_amendment2",
+    "operation": "yw-dialogue-real-calibration-20261012-v1-amendment-3",
+    "action": "calibration_amendment3",
     "priorOperation": "yw-dialogue-real-calibration-20261012-v1",
     "priorCase": "language-er-independent",
     "priorState": "review",
@@ -21,11 +21,12 @@
     "priorSourceDigest": "031bbb31c37efa51407a7069c310a7c51bff1ebbae982ab38fdacc69a6bf6f89",
     "priorPacketDigest": "95b8f943e519191aba697a0c01984621ee8ea12549e164379363f5ef54a04f09",
     "packetDigest": "4fb2ac792516d95c00022ad08bda42063e8606bec4989b3d46bc6b86c6a67317",
-    "maxTotalAttempts": 26,
-    "additionalAttempts": 24,
-    "maxCumulativeReservedMicros": 2184000,
-    "windowMs": 1200000,
-    "retries": 1,
+    "maxTotalAttempts": 30,
+    "additionalAttempts": 26,
+    "maxRecoveries": 2,
+    "maxCumulativeReservedMicros": 2520000,
+    "windowMs": 3600000,
+    "retries": 0,
     "hardExpiry": "2026-10-13T12:00:00Z",
     "secondPrior": {
       "operation": "yw-dialogue-real-calibration-20261012-v1-amendment-1",
@@ -39,18 +40,51 @@
       "sourceDigest": "031bbb31c37efa51407a7069c310a7c51bff1ebbae982ab38fdacc69a6bf6f89",
       "promptDigest": "f7701e2ce6677f34cebad1c576bce12336291c9250e8b6a726a9f59b510cb3f1",
       "packetDigest": "887a2537d2069ed0bd0a1fdcc327c71862d5eac74b91feea59b538da4e549f8e"
-    }
+    },
+    "thirdPriors": [
+      {
+        "operation": "yw-dialogue-real-calibration-20261012-v1-amendment-2",
+        "attempt": 1,
+        "caseId": "language-er-independent",
+        "sourceDigest": "b079f0af0a3978ea0ac81c512a186211c5bee8a333c53d0b41f761f1ad9561fa",
+        "promptDigest": "caecd0124e90dfc38c7b092dcf5ad60103c05394010b818dd3bd0ab1528ea459",
+        "packetDigest": "4fb2ac792516d95c00022ad08bda42063e8606bec4989b3d46bc6b86c6a67317",
+        "receiptDigest": "98df8ec9f3af4e92c280d39ef73ae166abf811809529d47f69ccf1c2196c2a39",
+        "accounted_micros": null,
+        "created_at": "2026-10-12T22:01:33.062Z",
+        "finished_at": "2026-10-12T22:01:36.643Z",
+        "reserved_micros": 84000,
+        "state": "review",
+        "usage_json": null
+      },
+      {
+        "operation": "yw-dialogue-real-calibration-20261012-v1-amendment-2",
+        "attempt": 2,
+        "caseId": "language-er-misconception",
+        "sourceDigest": "b079f0af0a3978ea0ac81c512a186211c5bee8a333c53d0b41f761f1ad9561fa",
+        "promptDigest": "d8366012e18b24be22fa981e9d839817cdfcd5be6ec34b03c094962483480ea8",
+        "packetDigest": "4fb2ac792516d95c00022ad08bda42063e8606bec4989b3d46bc6b86c6a67317",
+        "receiptDigest": "7404cde7868c7dfc22ec29da7e1964b8eb5dcce79d86773f52c47d28bb6fe665",
+        "accounted_micros": null,
+        "created_at": "2026-10-12T22:03:50.535Z",
+        "finished_at": "2026-10-12T22:03:52.983Z",
+        "reserved_micros": 84000,
+        "state": "review",
+        "usage_json": null
+      }
+    ],
+    "recoveryReadbacks": []
   },
   "policyVersion": "yw-dialogue-policy-v6",
   "ruleVersion": "yw-dialogue-evidence-v3",
   "model": "gemini-3.6-flash",
   "transport": "authenticated isolated YW acceptance -> APIS /api/yw/dialogue-stream -> Gemini single stream",
   "limits": {
-    "totalAttempts": 24,
-    "attemptsPerCase": 2,
-    "retries": 1,
-    "deadlineMinutes": 20,
-    "reservedMicros": 2016000,
+    "totalAttempts": 26,
+    "attemptsPerCase": 3,
+    "retries": 0,
+    "deadlineMinutes": 60,
+    "reservedMicros": 2184000,
     "requestTimeoutMs": 20000
   },
   "stop": "Reconcile every failed attempt; continue diagnosed cases within cumulative budget and original window. Same-attempt POST only reads back. Recovery uses a new reserved attempt and receipt acknowledgement; unknown provider outcomes cannot be retried. Credential rejection, lockout, budget or expiry stops admission.",

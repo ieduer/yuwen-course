@@ -335,7 +335,14 @@ export async function callDialogueModel(env,prompt,requestId,onReply,budget=dial
  const response=await env.APIS.fetch(new Request('https://apis.internal/api/yw/dialogue-stream',{method:'POST',headers:{'content-type':'application/json',accept:'text/event-stream','x-project-name':'yw.bdfz.net','x-task-type':'chat','x-thinking-level':'low',...(env.APIS_CALLER_TOKEN?{'x-internal-token':env.APIS_CALLER_TOKEN}:{}),'x-request-id':requestId,...acceptanceVersionHeaders(env)},body:JSON.stringify({stream:true,model:budget.model,contents:[{role:'user',parts:[{text:prompt}]}],taskType:'chat',thinkingLevel:'low',generationConfig:{temperature:0.3,maxOutputTokens:LIMITS.outputTokens,responseMimeType:'application/json'}}),signal}));
  if(!response.ok){
   if(acceptanceContext(env)&&[401,403,429].includes(response.status))throw new Error(response.status===429?'gateway_rate_limit':'gateway_credential_rejected');
-  throw new Error('gateway_unavailable');
+  const error=new Error('gateway_unavailable');
+  if(acceptanceContext(env)){
+   // Transport metadata alone never proves provider/broker completion.
+   const raw=response.headers.get('retry-after');
+   const delay=raw===null?0:/^\d+$/.test(raw)?Number(raw)*1000:Date.parse(raw)-Date.now();
+   error.gatewayFailure={requestId,httpStatus:response.status,retryAfterMs:Number.isFinite(delay)&&delay>=0?delay:null};
+  }
+  throw error;
  }
  const result=await consumeGatewayStream(response,onReply,{maxReplyChars:LIMITS.replyChars,signal});
  if(result.model!==budget.model)throw Error('budget_model_mismatch');

@@ -1,4 +1,12 @@
-## Current Web acceptance reassessment — 2026-10-13T00:42:57.951660+00:00
+## Current finite continuation implementation — 2026-10-13T01:04:56.532337+00:00
+
+Suen confirmed amendment3 at2026-10-13T00:54:51Z; authority is `continuation-01a13217/AUTHORIZATION-3.json`. Four immutable old calls remain:4678microUSD known plus252000 unknown reserved. New distinct namespace allows26 new attempts for24 unchanged fixed cases and at most2 recoveries,30 cumulative and2520000microUSD cumulative reservation. First new intent starts60minutes; hard expiry remains2026-10-13T12:00Z. The new clock has not started. Formal publication still needs independent suen go/no-go.
+
+The executor now reconciles all four historical receipts, enforces the cumulative budget atomically, and blocks further paid work on unresolved provider outcomes. Confirmed503 recovery requires same-target receipt-pinned provider/broker/no-output evidence,2minute then4minute/provider cooldown and at most2 recoveries; third consecutive503 stops paid execution. Semantic recovery needs a recorded diagnosis/correction and permits at most one percase. Generic503 never proves broker completion. The existing APIS response does not carry that confirmation, so an operator joins the same-request readback using the bounded diagnostic allowance, pins it in the existing calibration contract, tests and publishes the exact isolated source before recovery. No shared APIS change, new authority schema, fallback, hedge or ledger reset.
+
+Three consumed packets are preserved byte-for-byte. Fixed case/source/prompt digest remains4fb2ac792516d95c00022ad08bda42063e8606bec4989b3d46bc6b86c6a67317 and strict evidence validation is unchanged.156 focused checks pass under Node22.21.1 and24.19.0. Isolated release/build and all24 real semantic judgments are still pending; runtime remainsdf42/Pagesf407ce01. Full twelve-part target and accepted Web/record/restore evidence remain in the predecessor TARGET-STATUS.md. [Current continuation evidence](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/REPORT.md). Earlier conflicting current statements below are history.
+
+## Historical Web acceptance reassessment — 2026-10-13T00:42:57.951660+00:00
 
 Teacher review action only writes an idempotent own-session marker; it does not send notifications. UI save/duplicate/reload passed2026-10-13T00:32:57.908Z with one unchanged event/zero model calls. Android APK installation/physical-phone requirements do not apply automatically to this Web candidate. Mobile Web keyboard-layout and Enter checks passed; physical IME is separately unverified.
 

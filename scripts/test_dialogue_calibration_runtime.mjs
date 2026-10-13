@@ -68,6 +68,14 @@ async function setup(t,{seed=true}={}){
   f.sql.prepare('INSERT INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,finished_at,reserved_micros,accounted_micros,budget_policy_json) VALUES(?,?,?,?,?,?,?,?,?,?,?)').run(pid,sid,id,at.slice(0,10),2400,q.state,at,q.finishedAt,q.reservedMicros,null,JSON.stringify(policy));
   f.sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(pid+':result',sid,pid,'synthetic_calibration_unconfirmed',JSON.stringify({reason:q.reason,received:null,syntheticOnly:true,expectedVerdictMatches:false}),q.finishedAt);
  }
+ if(seed)for(const q of amendment.thirdPriors){
+  const pid=q.operation+':attempt-'+q.attempt,sid=pid+':session',at=q.created_at;
+  const meta=JSON.stringify({syntheticOnly:true,caseId:q.caseId,sourceDigest:q.sourceDigest,promptDigest:q.promptDigest});
+  f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)').run(sid,id,'calibration:lesson-1711-p1',q.operation+':'+q.caseId+':'+q.attempt,meta,'yw-dialogue-policy-v6',at,at);
+  f.sql.prepare('INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,?,?,?,?,?)').run(pid,sid,q.caseId,q.promptDigest,'student','Synthetic old503','synthetic_calibration','yw-dialogue-policy-v6',at);
+  f.sql.prepare('INSERT INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,finished_at,reserved_micros,budget_policy_json) VALUES(?,?,?,?,?,?,?,?,?,?)').run(pid,sid,id,at.slice(0,10),2400,q.state,at,q.finished_at,84000,JSON.stringify(policy));
+  f.sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(pid+':result',sid,pid,'synthetic_calibration_unconfirmed',JSON.stringify({syntheticOnly:true,reason:'gateway_unavailable',boundaryStop:false,received:null,semanticReviewRequired:true,expectedVerdictMatches:false}),q.finished_at);
+ }
  const receiptFor=n=>{
   const row=f.sql.prepare("SELECT c.*,s.curriculum_json,e.details_json FROM dialogue_calls c JOIN dialogue_sessions s ON s.id=c.session_id LEFT JOIN dialogue_events e ON e.id=c.turn_id||':result' WHERE c.turn_id=?").get(amendment.operation+':attempt-'+n);
   return row?createHash('sha256').update(JSON.stringify({id:row.turn_id,state:row.state,reserved:row.reserved_micros,accounted:row.accounted_micros,created:row.created_at,finished:row.finished_at,source:row.curriculum_json,result:row.details_json})).digest('hex'):null;
@@ -88,14 +96,14 @@ test('calibration requires acceptance capability and fixed owner/input; no arbit
  assert.equal((await handleCalibration(f.req(0,{prompt:'injected'}),f.env,f.student,model)).status,400);
  assert.equal((await handleCalibration(f.req(0,{ownerRef:'wrong'}),f.env,f.student,model)).status,400);
  assert.equal((await handleCalibration(f.req(1),f.env,f.student,model)).status,409);
- assert.equal(f.sql.prepare('SELECT count(*) n FROM dialogue_calls').get().n,2);
+ assert.equal(f.sql.prepare('SELECT count(*) n FROM dialogue_calls').get().n,4);
 });
 test('fixed case uses exact prompt and normal reservation, readback, partial persistence without scores; duplicate never retries',async t=>{
  const f=await setup(t);let calls=0;const model=async(env,prompt,id,onReply,budget)=>{calls++;assert.equal(prompt,packet.cases[0].prompt);assert.equal(budget.reserveMicros,84000);assert.equal(f.sql.prepare('SELECT state FROM dialogue_calls WHERE turn_id=?').get(id).state,'reserved');await onReply('你區分了語境關係。');return response();};
  const r=await handleCalibration(f.req(),f.env,f.student,model),v=await r.json();assert.equal(r.status,200);assert.equal(v.call.state,'finished');assert.equal(v.result.expectedVerdictMatches,true);assert.equal(v.result.semanticReviewRequired,true);assert.equal(v.chunks.length,1);
  assert.equal((await handleCalibration(f.req(),f.env,f.student,model)).status,200);assert.equal(calls,1);
  const read=await(await handleCalibration(f.req(0,{},'GET'),f.env,f.student,model)).json();assert.deepEqual(read,v);
- assert.equal(f.sql.prepare('SELECT count(*) n FROM dialogue_assessments').get().n,0);assert.equal(f.sql.prepare("SELECT count(*) n FROM dialogue_sessions WHERE lesson_id LIKE 'calibration:%'").get().n,3);
+ assert.equal(f.sql.prepare('SELECT count(*) n FROM dialogue_assessments').get().n,0);assert.equal(f.sql.prepare("SELECT count(*) n FROM dialogue_sessions WHERE lesson_id LIKE 'calibration:%'").get().n,5);
  assert.equal((await entry.fetch(f.authenticated('/api/dialogue/v1?lessonId=lesson-1711-p1'),f.bindings)).status,200,'normal session selector never adopts fixture');
 });
 for(const failure of ['throw','usage','model','verdict'])test('failure '+failure+' is retained and reconciled before continuation',async t=>{
@@ -104,10 +112,10 @@ for(const failure of ['throw','usage','model','verdict'])test('failure '+failure
  assert.equal((await handleCalibration(f.req(),f.env,f.student,model)).status,409);assert.equal(calls,1);
  assert.equal((await handleCalibration(f.req(1,{previousReceipt:'bad'}),f.env,f.student,model)).status,409);assert.equal(calls,1);
  const next=await handleCalibration(f.req(1),f.env,f.student,async()=>{calls++;return response(1,false);});
- assert.equal(next.status,failure==='model'?409:200);assert.equal(calls,failure==='model'?1:2);
+ assert.equal(next.status,['model','throw','usage'].includes(failure)?409:200);assert.equal(calls,['model','throw','usage'].includes(failure)?1:2);
 });
 test('real source drift stops before reservation; packet does not mark source accepted',async t=>{
- const f=await setup(t);f.env.ASSETS={fetch:async()=>Response.json({wrong:true})};assert.equal((await handleCalibration(f.req(),f.env,f.student,()=>{throw Error('no')})).status,409);assert.equal(f.sql.prepare('SELECT count(*) n FROM dialogue_calls').get().n,2);
+ const f=await setup(t);f.env.ASSETS={fetch:async()=>Response.json({wrong:true})};assert.equal((await handleCalibration(f.req(),f.env,f.student,()=>{throw Error('no')})).status,409);assert.equal(f.sql.prepare('SELECT count(*) n FROM dialogue_calls').get().n,4);
  const original=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1711-p1.json'));assert(original.languagePractice.every(v=>v.calibrationStatus==='pending-real-model'));
 });
 test('operation deadline survives a new request and prevents the next model call',async t=>{
@@ -117,7 +125,7 @@ test('operation deadline survives a new request and prevents the next model call
 
 test('duplicate concurrent POST reserves at most one provider attempt',async t=>{
  const f=await setup(t);let calls=0;const model=async()=>{calls++;return response();};
- await Promise.all([handleCalibration(f.req(),f.env,f.student,model),handleCalibration(f.req(),f.env,f.student,model)]);assert.equal(calls,1);assert.equal(f.sql.prepare('SELECT count(*) n FROM dialogue_calls').get().n,3);
+ await Promise.all([handleCalibration(f.req(),f.env,f.student,model),handleCalibration(f.req(),f.env,f.student,model)]);assert.equal(calls,1);assert.equal(f.sql.prepare('SELECT count(*) n FROM dialogue_calls').get().n,5);
 });
 test('cost reserve and expiry remain enforced',async t=>{
  const f=await setup(t);const blocked=()=>{throw Error('no')};
@@ -147,17 +155,17 @@ test('amendment preserves failed prior rows byte-for-byte and old action cannot 
  const f=await setup(t),snapshot=()=>JSON.stringify({call:f.sql.prepare('SELECT * FROM dialogue_calls WHERE turn_id=?').get(f.priorId),event:f.sql.prepare('SELECT * FROM dialogue_events WHERE id=?').get(f.priorId+':result')});const before=snapshot();
  assert.equal((await handleCalibration(f.req(0,{action:'calibration'}),f.env,f.student,()=>{throw Error('no')})).status,400);
  const r=await handleCalibration(f.req(),f.env,f.student,async()=>response());assert.equal(r.status,200);assert.equal(snapshot(),before);
- const v=await r.json();assert.equal(v.prior.accountedMicros,4678);assert.equal(v.amendment.maxTotalAttempts,26);
- assert.equal(f.sql.prepare('SELECT SUM(reserved_micros) n FROM dialogue_calls').get().n,252000);
+ const v=await r.json();assert.equal(v.prior.accountedMicros,4678);assert.equal(v.amendment.maxTotalAttempts,30);
+ assert.equal(f.sql.prepare('SELECT SUM(reserved_micros) n FROM dialogue_calls').get().n,420000);
 });
 
-test('24 new attempts plus both prior failures exhaust the cumulative allowance',async t=>{
+test('24 fixed cases preserve four prior attempts and leave only two recovery slots',async t=>{
  const f=await setup(t);let calls=0;
  for(let i=0;i<24;i++){
   const r=await handleCalibration(f.req(i),f.env,f.student,async()=>{calls++;return response(i,packet.cases[i].expected==='demonstrated');});assert.equal(r.status,i===22?409:200,'case '+i); // Fixture omits required conclusion: retain rejection and continue.
  }
- const sums=f.sql.prepare('SELECT COUNT(*) n,SUM(reserved_micros) micros FROM dialogue_calls').get();assert.equal(sums.n,26);assert.equal(sums.micros,2184000);assert.equal(calls,24);
- assert.equal((await handleCalibration(f.req(23,{},'POST',25),f.env,f.student,()=>{throw Error('no')})).status,400);
+ const sums=f.sql.prepare('SELECT COUNT(*) n,SUM(reserved_micros) micros FROM dialogue_calls').get();assert.equal(sums.n,28);assert.equal(sums.micros,2352000);assert.equal(calls,24);
+ assert.equal((await handleCalibration(f.req(23,{},'POST',27),f.env,f.student,()=>{throw Error('no')})).status,400);
 });
 
 for(const corruption of ['absent','accounted','usage','finished','owner','source','reason','extra'])test('second prior receipt rejects '+corruption,async t=>{
@@ -178,7 +186,7 @@ for(const corruption of ['absent','accounted','usage','finished','owner','source
 test('diagnosed semantic recovery is a new charged attempt; original never changes',async t=>{
  const f=await setup(t);let calls=0;
  const first=await(await handleCalibration(f.req(),f.env,f.student,async()=>{calls++;const r=response();r.value.assessments[0].evidence.pop();return r;})).json();assert.equal(first.result.reason,'missing_criterion');
- const second=await(await handleCalibration(f.req(0,{},'POST',2),f.env,f.student,async()=>{calls++;return response();})).json();assert.equal(second.call?.state,'finished',JSON.stringify(second));assert.equal(second.totals.attempts,4);assert.equal(calls,2);
+ const second=await(await handleCalibration(f.req(0,{},'POST',2),f.env,f.student,async()=>{calls++;return response();},{recoveryReadbacks:[{attemptId:first.attemptId,receiptDigest:first.receiptDigest,kind:'semantic_correction',correction:'Synthetic missing criterion supplied in recovered model output',evidenceRef:'test:diagnosed'}]})).json();assert.equal(second.call?.state,'finished',JSON.stringify(second));assert.equal(second.totals.attempts,6);assert.equal(calls,2);
  const original=await(await handleCalibration(f.req(0,{},'GET'),f.env,f.student,()=>{throw Error('no')})).json();assert.equal(original.receiptDigest,first.receiptDigest);
  assert.equal((await handleCalibration(f.req(0,{},'POST',3),f.env,f.student,()=>{throw Error('no')})).status,409);
 });
@@ -202,4 +210,58 @@ test('concurrent recovery and next case cannot bind one attempt to two prompts',
   calls++;const stored=f.sql.prepare('SELECT curriculum_json FROM dialogue_sessions WHERE id=?').get(id+':session');assert.equal(JSON.parse(stored.curriculum_json).promptDigest,createHash('sha256').update(JSON.stringify(prompt)).digest('hex'));return response(i,i===0);
  })));
  assert.equal(calls,1);assert.equal(results.filter(r=>r.status===200).length,1);
+});
+
+function providerProof(value,extra={}){
+ return {attemptId:value.attemptId,receiptDigest:value.receiptDigest,kind:'provider503',providerStatus:503,providerAttemptCount:1,brokerCompleted:true,noOutput:true,model:policy.model,fallback:false,hedge:false,backgroundCalls:0,retryAfterMs:0,evidenceRef:'test:joined-provider-and-broker-readback',...extra};
+}
+for(const corruption of ['receipt','broker','status','output','fallback','model','cooldown','chunks'])test('503 recovery refuses untrusted '+corruption,async t=>{
+ const f=await setup(t);let calls=0;
+ const v=await(await handleCalibration(f.req(),f.env,f.student,async(e,p,id,onReply)=>{calls++;if(corruption==='chunks')await onReply('partial');throw Error('gateway_unavailable');})).json();
+ const fact=providerProof(v),changes={receipt:{receiptDigest:'bad'},broker:{brokerCompleted:false},status:{providerStatus:504},output:{noOutput:false},fallback:{fallback:true},model:{model:'other'},cooldown:{retryAfterMs:3600000},chunks:{}};
+ Object.assign(fact,changes[corruption]);const at=Date.now();t.mock.method(Date,'now',()=>at+300000);
+ const r=await handleCalibration(f.req(0,{},'POST',2),f.env,f.student,async()=>{calls++;return response();},{recoveryReadbacks:[fact]});assert.equal(r.status,409);assert.equal(calls,1);
+});
+test('confirmed503 requires cooldown, keeps unknown reservation and never overwrites original',async t=>{
+ const f=await setup(t);let calls=0;
+ const first=await(await handleCalibration(f.req(),f.env,f.student,async()=>{calls++;throw Error('gateway_unavailable');})).json();
+ const options={recoveryReadbacks:[providerProof(first)]};
+ assert.equal((await(await handleCalibration(f.req(0,{},'POST',2),f.env,f.student,()=>{throw Error('no')},options)).json()).code,'calibration_cooldown');
+ const at=Date.now();t.mock.method(Date,'now',()=>at+120001);
+ const recovered=await(await handleCalibration(f.req(0,{},'POST',2),f.env,f.student,async()=>{calls++;return response();},options)).json();
+ assert.equal(recovered.call.state,'finished');assert.equal(recovered.totals.attempts,6);assert.equal(calls,2);
+ const old=await(await handleCalibration(f.req(0,{},'GET'),f.env,f.student,()=>{throw Error('no')})).json();assert.equal(old.receiptDigest,first.receiptDigest);assert.equal(old.call.accounted_micros,null);assert.equal(old.call.reserved_micros,84000);
+});
+test('three consecutive confirmed503 stop every next call after two recoveries',async t=>{
+ const f=await setup(t),readbacks=[];let offset=0,calls=0;const at=Date.now();t.mock.method(Date,'now',()=>at+offset);
+ for(let n=1;n<=3;n++){
+  const v=await(await handleCalibration(f.req(0,{},'POST',n),f.env,f.student,async()=>{calls++;throw Error('gateway_unavailable');},{recoveryReadbacks:readbacks})).json();assert.equal(v.call?.state,'review',JSON.stringify(v));readbacks.push(providerProof(v));offset+=240001;
+ }
+ for(const i of [0,1])assert.equal((await(await handleCalibration(f.req(i,{},'POST',4),f.env,f.student,()=>{throw Error('no')},{recoveryReadbacks:readbacks})).json()).code,'calibration_provider_recovery_required');assert.equal(calls,3);
+});
+test('26 new attempts with two recoveries reaches exactly30 and2520000 with four old calls preserved',async t=>{
+ const f=await setup(t),readbacks=[];let offset=0,calls=0;const at=Date.now();t.mock.method(Date,'now',()=>at+offset);
+ const before=f.sql.prepare('SELECT * FROM dialogue_calls ORDER BY turn_id').all();
+ for(let n=1;n<=2;n++){
+  const v=await(await handleCalibration(f.req(0,{},'POST',n),f.env,f.student,async()=>{calls++;throw Error('gateway_unavailable');},{recoveryReadbacks:readbacks})).json();readbacks.push(providerProof(v));offset+=240001;
+ }
+ for(let i=0;i<24;i++){
+  const r=await handleCalibration(f.req(i,{},'POST',i+3),f.env,f.student,async()=>{calls++;return response(i,packet.cases[i].expected==='demonstrated');},{recoveryReadbacks:readbacks});assert.equal(r.status,i===22?409:200,'fixed case '+i);
+ }
+ assert.equal(calls,26);assert.deepEqual(f.sql.prepare('SELECT COUNT(*) n,SUM(reserved_micros) micros FROM dialogue_calls').get(),Object.assign(Object.create(null),{n:30,micros:2520000}));
+ for(const row of before)assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_calls WHERE turn_id=?').get(row.turn_id),row);
+ assert.equal((await handleCalibration(f.req(23,{},'POST',27),f.env,f.student,()=>{throw Error('no')})).status,400);
+});
+for(const n of [1,2])test('exact amendment2 receipt'+n+' is mandatory',async t=>{
+ const f=await setup(t);f.sql.prepare("UPDATE dialogue_events SET details_json='{}' WHERE turn_id=?").run(amendment.thirdPriors[0].operation+':attempt-'+n);
+ assert.equal((await handleCalibration(f.req(),f.env,f.student,()=>{throw Error('no')})).status,409);
+});
+
+test('gateway cooldown is retained but generic503 never proves completion',async t=>{
+ const f=await setup(t);f.env.APIS.fetch=async()=>new Response(null,{status:503,headers:{'retry-after':'300'}});
+ const first=await(await handleCalibration(f.req(),f.env,f.student,callDialogueModel)).json();
+ assert.deepEqual(first.result.gatewayFailure,{requestId:first.attemptId,httpStatus:503,retryAfterMs:300000});
+ const at=Date.now();t.mock.method(Date,'now',()=>at+240001);
+ assert.equal((await handleCalibration(f.req(0,{},'POST',2),f.env,f.student,()=>{throw Error('no')},{recoveryReadbacks:[providerProof(first)]})).status,409);
+ assert.equal((await(await handleCalibration(f.req(0,{},'POST',2),f.env,f.student,()=>{throw Error('no')},{recoveryReadbacks:[providerProof(first,{retryAfterMs:300000})]})).json()).code,'calibration_cooldown');
 });

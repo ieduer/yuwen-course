@@ -7,7 +7,7 @@ const budget=JSON.parse(fs.readFileSync('docs/dialogue/budget-policy.json'));
 const load=id=>JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${id}.json`));
 const packet=calibrationPacket(corpus,load,budget);
 test('calibration packet is deterministic, pinned, synthetic and cannot mutate accepted curriculum',()=>{
- assert.equal(packet.sourceDigest,calibrationPacket(corpus,load,budget).sourceDigest);assert.equal(packet.cases.length,24);assert.equal(packet.limits.retries,1);assert.equal(packet.limits.reservedMicros,2016000);
+ assert.equal(packet.sourceDigest,calibrationPacket(corpus,load,budget).sourceDigest);assert.equal(packet.cases.length,24);assert.equal(packet.limits.retries,0);assert.equal(packet.limits.reservedMicros,2184000);
  const seen=new Set(packet.cases.map(c=>c.kind));for(const kind of ['independent','misconception','praise','copy','partial','dissent','quotation','transfer','conclusion','conclusion-weak'])assert(seen.has(kind));
  for(const c of packet.cases){assert(c.prompt.includes(c.studentAnswer));assert(c.sourceCurriculumVersion);assert.equal(c.dataClass,undefined);}
  assert(load('lesson-1711-p1').languagePractice.every(v=>v.calibrationStatus==='pending-real-model'));
@@ -57,6 +57,6 @@ test('all revised prompts request complete grounded criteria without changing ol
   assert(c.prompt.includes('每個 criterion 至少一筆'));
   assert(c.prompt.includes('缺少任何必要證據時不給 demonstrated'));
   assert.notEqual(c.sourceDigest,original.cases.find(o=>o.id===c.id).sourceDigest);
-  assert.equal(packet.operation,'yw-dialogue-real-calibration-20261012-v1-amendment-2');assert.equal(packet.amendment.maxTotalAttempts,26);
+  assert.equal(packet.operation,'yw-dialogue-real-calibration-20261012-v1-amendment-3');assert.equal(packet.amendment.maxTotalAttempts,30);
  }
 });
