@@ -1,4 +1,16 @@
-## Current model38 isolated candidate — 2026-10-13T07:52:38.166675+00:00
+## Current isolated acceptance and HTTP failure repair — 2026-10-13T08:55:22.361406+00:00
+
+YW source28a6c064 / Pagesd0a86416 and APIS source22b8823 / version6e3cb4e6 at0% are deployed. Formal YW175f8ae / Pagesb6f5ac67 and accepted APIS53dbb568 at100% remain unchanged. Both trusted isolated windows expire2026-10-14T12:00Z. Actual Gemini3.8 calibration:1/28 attempted,Google503,brokercomplete,nooutput;0semanticpasses,1unconfirmed,27unrun. Actual Hetang second logicalcall timed out after12000ms awaitingheaders,brokercomplete,nooutput. Max3 was correctly bounded by the original21s deadline: insufficient time remained for another full attempt. No deadline, lease, model, credential or retry limit is changed by this patch.
+
+A verified runtime defect lost providerAccounting on HTTP failures before the first stream delta. This patch adds the same bounded accounting to terminal private-stream HTTP errors and validates exact request/model/attempt bounds in YW before retaining it. Unconfirmed leases remain explicitly unconfirmed; successful usage and scores are never synthesized. Existing failure rows are not rewritten. New local regression tests cover full3 failures, unconfirmed completion,12s timeout deadline stop, source persistence, and mismatched receipt rejection. The patch is not deployed. Source tests and actual evidence live in [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/CHECKPOINT-ALL-LESSONS.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/CHECKPOINT-ALL-LESSONS.md).
+
+Paid dispatch paused after these two diagnosed failures; the owner decision was requested immediately. Known new charge unavailable,336000microUSD new reservation retained; remote cumulative conservative1522267microUSD including10267known. E2E retains original2/120 consumption, no reset or replay. Actual export verification passed; basic mobile/desktop UI and keyboard focus passed, but dialog accessible names needed an unpublished fix. Full calibration, complete3E2E,9promotion,69/207rolling calibration, successful/partial retry accounting, second testaccount, nativeIME and two baseline touch failures remain open. UC PR13537cf3c4 passed13CI but production controller/go-no-go and real centralwrite/readback are still required. NativeApp stable pointer remains unchanged/incompatible; formal release is NO-GO.
+
+Validation: Node22.21.1 and24.18.0 each pass APIS272 full workerd checks plus27 focused retry checks, and YW379 dialogue checks. Both runtime bundles compile. Two dialog names are now associated with their headings; this still requires deployed browser verification. Actual provider recovery is not established.
+
+Earlier dated sections below are historical where superseded.
+
+## Historical model38 isolated candidate — 2026-10-13T07:52:38.166675+00:00
 
 User authorized an alternative model and full recalibration after confirmed Gemini3.6Flash503 failures. Gemini3.8Flash is the new explicit isolated target; original13 calibration receipts, known10267micros and unknown924000micros remain immutable. Independent amendment5 contains all28 reviewed cases, one primary and at most one diagnosed recovery each, max56 single-provider attempts. Separate E2E retains the original cumulative120-call namespace and max3 sequential same-model attempts. Trusted activation is v2; all isolated pins expire2026-10-14T12:00Z. No production default/fallback or accepted100% version changes.
 

@@ -4,7 +4,7 @@ import {acceptanceVersionHeaders,acceptanceContext} from './dialogue-acceptance.
 import {dialogueCallAdmission,assertIsolatedCallCurrent} from './dialogue-e2e-admission.js';
 import {recordCorrection} from './dialogue-corrections.js';
 import {hasClassicalAnnotatedReadReceipt} from './classical-first-read-source.js';
-import {consumeGatewayStream,studentStream} from './dialogue-stream.js';
+import {consumeGatewayStream,studentStream,validatedProviderAccounting} from './dialogue-stream.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
 import {requestDialogueBudget,combinedProviderAccounting,operatorCost,continuationDisposition,budgetDenial} from './dialogue-recovery.js';
 import {prepareFormalInput,formalPrompt,originalTask,prepareOriginalInput} from './dialogue-formal.js';
@@ -492,6 +492,16 @@ export async function callDialogueModel(env,prompt,requestId,onReply,budget=dial
    const delay=raw===null?0:/^\d+$/.test(raw)?Number(raw)*1000:Date.parse(raw)-Date.now();
    error.gatewayFailure={requestId,httpStatus:response.status,retryAfterMs:Number.isFinite(delay)&&delay>=0?delay:null};
   }
+  // A pre-delta HTTP error can have a completed provider attempt. Preserve its
+  // verified accounting without turning it into a successful assessment or
+  // inferring broker completion from HTTP status alone.
+  try{
+   const failure=await response.json();
+   if(failure.requestId===requestId&&failure.providerAccounting){
+    const providerAccounting=validatedProviderAccounting(failure.providerAccounting,{maxProviderAttempts:budget.providerAttemptLimit||1,model:budget.model});
+    error.gatewayFailure={...error.gatewayFailure,requestId,httpStatus:response.status,providerAccounting,partialOutput:false,retryable:false};
+   }
+  }catch{}
   throw error;
  }
  const result=await consumeGatewayStream(response,onReply,{maxReplyChars:LIMITS.replyChars,maxProviderAttempts:budget.providerAttemptLimit||1,model:budget.model,signal});
