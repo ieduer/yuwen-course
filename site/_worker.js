@@ -1,3 +1,4 @@
+import { releaseAdmissionResponse } from './release-admission.js';
 import { handleDialogue,loadDialogueCurriculum } from './dialogue-source.js';
 import { sanitizeDialogueCurriculum } from './dialogue-public-curriculum.js';
 import { acceptanceContext, acceptanceAllowsIdentity } from './dialogue-acceptance.js';
@@ -127,6 +128,8 @@ export default {
         cookieHeader: userCenterSessionCookieHeader(request) });
     }
     if(url.pathname===EVALUATION_MACHINE_PATH) {
+      const closed = releaseAdmissionResponse(env);
+      if (closed) return closed;
       const execution=handleEvaluationMachine(request,env,async job=>{
         try {await completeDurableEvaluationJob(env,job);return 'completed';}
         catch(error) {
@@ -147,7 +150,7 @@ export default {
       return handleLessonBlueprint(request, env);
     }
     if (url.pathname === "/api/interaction-check" && request.method === "POST") {
-      const rejected = authenticatedMutationRequestRejection(request);
+      const rejected = authenticatedMutationRequestRejection(request, env);
       if (rejected) return rejected;
       return keepEvaluationAlive(handleInteractionCheck(request, env), ctx);
     }
@@ -155,16 +158,18 @@ export default {
       return handlePendingInteractionsList(request, env, url);
     }
     if (url.pathname === "/api/learning/pending-interactions/resume" && request.method === "POST") {
-      const rejected = authenticatedMutationRequestRejection(request);
+      const rejected = authenticatedMutationRequestRejection(request, env);
       if (rejected) return rejected;
       return keepEvaluationAlive(handlePendingInteractionResume(request, env), ctx);
     }
     if (url.pathname === "/api/learning/interactions" && request.method === "POST") {
-      const rejected = authenticatedMutationRequestRejection(request);
+      const rejected = authenticatedMutationRequestRejection(request, env);
       if (rejected) return rejected;
       return handleLearningInteraction(request, env, ctx);
     }
     if (url.pathname === "/api/learning/health" && request.method === "GET") {
+      const closed = releaseAdmissionResponse(env);
+      if (closed) return closed;
       if (ctx?.waitUntil) ctx.waitUntil(drainEvidenceOutbox(env, 50));
       return handleLearningEvidenceHealth(env);
     }
@@ -173,7 +178,7 @@ export default {
       return handleAiReadiness(request, env);
     }
     if (url.pathname === "/api/learning/ai-readiness" && request.method === "POST") {
-      const rejected = authenticatedMutationRequestRejection(request);
+      const rejected = authenticatedMutationRequestRejection(request, env);
       if (rejected) return rejected;
       return handleAiReadiness(request, env);
     }
@@ -273,11 +278,11 @@ function authenticatedMutationRequestRejection(request, env = {}) {
   }
   const nativeAuthorization = nativeAuthorizationDecision(request.headers.get("authorization"));
   const acceptance = acceptanceContext(env);
-  if (nativeAuthorization.status === "authorized" && !acceptance) return null;
+  if (nativeAuthorization.status === "authorized" && !acceptance) return releaseAdmissionResponse(env);
   if (request.headers.get("origin") !== (acceptance?.origin || YW_WEB_ORIGIN)) {
     return readingError("exact Web origin required", 403, "web_origin_required");
   }
-  return null;
+  return releaseAdmissionResponse(env);
 }
 
 function learningRateLimitResponse(error) {
@@ -3268,7 +3273,7 @@ async function handleReadingHealth(env) {
 async function handleReading(request, env, url) {
   const path = url.pathname.replace(/\/+$/, "");
   if (request.method === "POST") {
-    const rejected = authenticatedMutationRequestRejection(request);
+    const rejected = authenticatedMutationRequestRejection(request, env);
     if (rejected) return rejected;
   }
   if (!env.READING_DB) return readingError("reading store not configured", 503);

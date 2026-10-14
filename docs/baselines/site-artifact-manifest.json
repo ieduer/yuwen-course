@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1464,
-  "totalBytes": 196192003,
-  "aggregateSha256": "5209b77255dc6f993b50ab1f99c30c5cba173fb06a1e33dde22139bc1f93045f",
+  "fileCount": 1465,
+  "totalBytes": 196192942,
+  "aggregateSha256": "a2036ab467c5e0b76d7d278562c370ac71a0a343c86fcb0033f1a368d64148d1",
   "files": [
     {
       "path": "_headers",
@@ -17,13 +17,13 @@
     },
     {
       "path": "_worker.js",
-      "bytes": 151782,
-      "sha256": "9a25bc8ed3b1a36a810cf48b3b832d5e160dd5112a37466a0eb51ed44e75c899"
+      "bytes": 152094,
+      "sha256": "539a14c02e3867be4d22d04a7c22b0ca0494273dc80ee4d70e38bcdf02be39ee"
     },
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "321354643add06e16fdd724b6f55cac08d0a88323c19018e96adced6b52e18f9"
+      "sha256": "88c639b3a22c56fec1637983b8c0c0102087b3b1819995b35fde3608068c128d"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -7314,6 +7314,11 @@
       "path": "reading-identity-source.js",
       "bytes": 7210,
       "sha256": "a042389011fef4a5c58bf3be8f0757c66b180a6d5659db413e46a99b2c1a3802"
+    },
+    {
+      "path": "release-admission.js",
+      "bytes": 627,
+      "sha256": "2b2acc36453d834387765f94d8871a4a598aaf7523ef3c642f7184b840b7aa26"
     },
     {
       "path": "star.html",

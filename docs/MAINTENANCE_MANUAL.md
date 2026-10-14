@@ -1,3 +1,23 @@
+<!-- yw-registry-revision3-01a138b7 -->
+## Current YW textbook registry reconciliation — 2026-10-14T04:48:24.975311+00:00
+
+Approved A completed with4/4GET, zero retries and one locked registry CAS. Accepted textbook source175f8ae42dc5fd58f1b697a76567e79c954d9f7f / Pagesb6f5ac67-8b3b-44cf-9364-67e02d578338; rollback82e372e2-8480-455d-9de0-dcf18dafd3bb. Prior registry, prior_accepted and consumed receipts preserved. This reconciles the existing textbook release; no deployment, upload, traffic, database or model call occurred. Status remains pending without public-write authority.
+
+Dialogue admission candidatef21d9d8 remains unpushed/unreleased. New offline aggregate comparator and11-statement YW batch cover in-flight sessions/calls and post-fence student turns:21negative/positive tests and actual local migration-schema SQL checks pass. Historical nonterminal rows require explicit disposition, never deletion/replay to pass. Source-to-each-UC-accepted-to-ordinary-Myreload, A–F/A+768/692,207calibration/3qualityE2E, real devices, second authorized nonstudent account, shared R2 and real cache evidence remain unpassed. Full189=88+101 scope is unchanged; no completion claim. Paid expiry2026-10-14T12:00Z stays fixed; this task model allowance0.
+
+This paragraph supersedes earlier current-version claims only for this scope; retain all historical evidence. [Single current transaction package](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-3/TRANSACTION-PACKAGE-REVISION-3.md).
+<!-- /yw-registry-revision3-01a138b7 -->
+
+## Offline release admission candidate — 2026-10-14
+
+Unpublished task-scoped source change: `YW_RELEASE_READ_ONLY="true"` rejects valid Web/native submissions before body consumption, identity reconciliation, D1, Queue or model dispatch. It also denies the internal evaluator execution endpoint and the side-effecting learning-health drain. Existing content-type/origin rejection remains first; ordinary reading/history and deterministic lesson-blueprint reads remain available. Absent/false retains prior behavior. No production variable was changed.
+
+For a future approved freeze, deploy this exact source first, then explicitly close admission and set the existing scheduler `YW_BACKGROUND_EVALUATION_ENABLED="false"` through a separately approved configuration transaction; scheduler source and its six accepted pins stay unchanged. The flag does not cancel already admitted work: reconcile in-flight jobs and outbox/Queue before recording T0 and compare the existing source/UC aggregates through every stage. Preserve drafts, mutation IDs, jobs, old scores and all forward data. No auto replay or schema removal. The central receiver is not modified; queue drain remains a separate live gate.
+
+All189 scope, native disposition and real-device gaps,207 cases,3 full-quality E2E and actual source-to-My acceptance remain unchanged. Source integration/clean formal rebuild, actual flag/config readback and bounded business acceptance are still required; this local patch is not publication authority. Evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-2/`.
+
+Earlier dated sections below remain historical within their original scope.
+
 ## Current local artifact baseline — 2026-10-13T23:22:59.438943+00:00
 
 CI38483467298 passed evidence, blueprint, dialogue, Reading API and binding checks, then rejected the stale tracked artifact manifest. Rebuilt the unchanged repaired runtime from published b6f3b1a:1464files/196192003bytes, full artifact SHA2565209b77255dc6f993b50ab1f99c30c5cba173fb06a1e33dde22139bc1f93045f. Staging verification and exact Node22/24 manifest checks passed. Delta from prior baseline:6new dialogue modules,9changed files including release marker,0removed. Updated only the existing generated baseline; no validation bypass or production acceptance.
