@@ -1,4 +1,6 @@
+import {validateFormalScopeExpansion, ORIGINAL_FORMAL_RELEASE, assertNewFormalAnswerTime, formalDefinitionForResource} from './formal-scope-policy.js';
 import { loadEvaluationJob, JOB_POLICY, evaluationCallLimit, evaluationProgress, latestUsableEvaluationReply } from "./durable-evaluation-jobs.js";
+import { DIALOGUE_SOURCE_PREFIX, DIALOGUE_LOCAL_PREFIX, isDialogueSourceMutation } from './dialogue-formal.js';
 import { sourceEventStatement, evaluationEventId, evaluationEventBase,
   latestSourceEvent, replyAssessment, sourceEventJob } from './learning-evaluation-events.js';
 import {
@@ -29,6 +31,11 @@ const registryCache = { value: null, expiresAt: 0 };
 const manifestCache = { value: null, expiresAt: 0 };
 const formativeManifestCache = { value: null, expiresAt: 0 };
 const trustedSubmissionReservations = new WeakSet();
+function dialogueReadbackOnly() {
+  const error = new Error('新版對話評價只可讀回原結果，不可從舊入口重送。');
+  error.code = 'dialogue_readback_only';
+  return error;
+}
 const A_PLUS_COMPATIBILITY_KEYS = Object.freeze([
   "schemaVersion",
   "contractVersion",
@@ -180,14 +187,14 @@ export function validateAPlusCompatibilityContract(registry, manifest = null) {
     || !Array.isArray(excludedQuestionKinds)
     || excludedQuestionKinds.length !== 1
     || excludedQuestionKinds[0] !== "evaluation"
-    || Number(compatibility.excludedItemCount) !== 101
+    || !Number.isInteger(Number(compatibility.excludedItemCount))
+    || Number(compatibility.excludedItemCount) < 101
     || !Number.isInteger(Number(compatibility.eligibleItemCount))
-    || Number(compatibility.eligibleItemCount) < 1
+    || Number(compatibility.eligibleItemCount) !== 768
     || Number(compatibility.eligibleItemCount) > Number(compatibility.itemCount)
     || Number(compatibility.mappingCoveragePercent) !== 100
     || Number(compatibility.thresholdPercent) !== 90
-    || Number(compatibility.thresholdCount)
-      !== Math.ceil(Number(compatibility.eligibleItemCount) * Number(compatibility.thresholdPercent) / 100)
+    || Number(compatibility.thresholdCount) !== 692
     || !hasExactKeys(compatibility.academicYearPolicy, [
       "status",
       "policyVersion",
@@ -227,11 +234,13 @@ export function validateAPlusCompatibilityContract(registry, manifest = null) {
 
   if (manifest) {
     const items = Array.isArray(manifest.items) ? manifest.items : [];
+    const expansion = validateFormalScopeExpansion(manifest);
     const excludedKinds = new Set(excludedQuestionKinds);
-    const eligibleItems = items.filter((item) => !excludedKinds.has(String(item?.questionKind || "")));
+    const eligibleItems = items.filter((item) => item.evidenceRole === compatibility.eligibleScoringRole && !excludedKinds.has(String(item?.questionKind || "")));
     const excludedItems = items.length - eligibleItems.length;
     if (
-      manifest.manifestVersion !== compatibility.sourceVersion
+      (expansion && JSON.stringify(registry.formalScopeExpansion) !== JSON.stringify(expansion))
+      || manifest.manifestVersion !== compatibility.sourceVersion
       || manifest.sourceReleaseId !== compatibility.sourceReleaseId
       || manifest.mappingVersion !== compatibility.mappingVersion
       || manifest.resourceKeyHash !== compatibility.resourceKeyHash
@@ -240,13 +249,13 @@ export function validateAPlusCompatibilityContract(registry, manifest = null) {
       || excludedItems !== Number(compatibility.excludedItemCount)
       || eligibleItems.length !== Number(compatibility.eligibleItemCount)
       || items.some((item) => (
-        item.sourceReleaseId !== compatibility.sourceReleaseId
+        (item.sourceReleaseId !== compatibility.sourceReleaseId && !(expansion && item.sourceReleaseId === ORIGINAL_FORMAL_RELEASE.sourceReleaseId && !item.formalScopePolicyVersion))
         || item.mappingVersion !== compatibility.mappingVersion
         || !/^yw:lesson-[a-z0-9-]+:(?:interaction:[A-Za-z]+|vocabulary:[A-Za-z0-9:-]+)$/.test(String(item.canonicalUnitId || ""))
         || !/^sha256:[a-f0-9]{64}$/.test(String(item.resourceVersion || ""))
         || !["retention", "reading", "inquiry", "reflection"].includes(item.dimensionKey)
         || !["vocabulary", "syntax", "comprehension", "reflection"].includes(item.competencyKey)
-        || !["a_plus_gate", "non_scoring"].includes(item.evidenceRole)
+        || !["a_plus_gate", "formative", "non_scoring"].includes(item.evidenceRole)
         || item.lifecycleStatus !== "active"
         || !Number.isFinite(Date.parse(item.effectiveFrom))
         || item.effectiveTo !== null
@@ -273,14 +282,15 @@ async function loadRegistry(request, env) {
   return registry;
 }
 
-function evidenceVersions(registry, manifest, definition, formativeManifest) {
+function evidenceVersions(registry, manifest, definition, formativeManifest, manifestItem = null) {
   const sourceContract = validateAPlusCompatibilityContract(registry, manifest);
-  if (definition.scoringRole === "a_plus_gate") {
+  if (definition.scoringRole === "a_plus_gate" || manifestItem?.evidenceRole === "formative") {
+    const prior = manifest.priorReleases?.find(release => release.sourceReleaseId === manifestItem?.sourceReleaseId);
     return {
       contractVersion: sourceContract.contractVersion,
       academicYear: sourceContract.academicYearPolicy.academicYear,
-      sourceVersion: sourceContract.sourceVersion,
-      sourceReleaseId: sourceContract.sourceReleaseId,
+      sourceVersion: prior?.manifestVersion || sourceContract.sourceVersion,
+      sourceReleaseId: manifestItem?.sourceReleaseId || sourceContract.sourceReleaseId,
       mappingVersion: sourceContract.mappingVersion,
       registryVersion: sourceContract.registryVersion,
       producerManifestVersion: manifest.manifestVersion,
@@ -423,8 +433,10 @@ async function loadFormativeManifest(request, env, learningManifest) {
             || competency.competencyTag !== "first_read_process"
           ) throw new Error("classical first-read formative item invalid");
         } else if (item.sourceKind === "formal_learning_manifest") {
+          const sourceItem = learningManifest.itemByKey.get(item.resourceKey);
           if (
-            item.scoringRole !== "a_plus_gate"
+            !sourceItem || item.scoringRole !== sourceItem.evidenceRole
+            || !["a_plus_gate", "formative"].includes(item.scoringRole)
             || !["source_answer", "source_assessment"].includes(item.answerAuthority)
             || !item.itemKey.startsWith("formal:")
             || !item.resourceKey.startsWith(`effect:${lesson.lessonId}:`)
@@ -555,6 +567,7 @@ async function resolveInteractionContext(request, env, student, lesson, interact
   let normalizedPayload = { ...payload, interactionKey };
   let formativeItem = null;
   const manifest = await loadManifest(request, env);
+  validateAPlusCompatibilityContract(registry, manifest);
   const formativeManifest = await loadFormativeManifest(request, env, manifest);
   if (registeredDefinition.resourceKind === "formative_item") {
     const itemKey = clean(payload.itemKey, 180);
@@ -592,6 +605,7 @@ async function resolveInteractionContext(request, env, student, lesson, interact
   if (definition.scoringRole === "a_plus_gate" && !manifestItem) {
     throw new LearningResourceNotPublishedError(interactionKey);
   }
+  definition = formalDefinitionForResource(definition, manifestItem, manifest);
   await assertClassicalFirstReadGate({
     request,
     env,
@@ -708,11 +722,13 @@ export async function listPendingLearningSubmissions({ env, student, lessonId = 
           EXISTS(SELECT 1 FROM learning_evaluation_jobs j WHERE j.source_event_id=learning_pending_submissions.source_event_id) durable
          FROM learning_pending_submissions
         WHERE student_id = ? AND lesson_id = ? AND status IN ('captured', 'retryable')
+          AND client_mutation_id NOT LIKE 'yw-dialogue:%'
         ORDER BY updated_at LIMIT 8`
     : `SELECT client_mutation_id, lesson_id, interaction_key, status, updated_at,
           EXISTS(SELECT 1 FROM learning_evaluation_jobs j WHERE j.source_event_id=learning_pending_submissions.source_event_id) durable
          FROM learning_pending_submissions
         WHERE student_id = ? AND status IN ('captured', 'retryable')
+          AND client_mutation_id NOT LIKE 'yw-dialogue:%'
         ORDER BY updated_at LIMIT 8`;
   const statement = env.READING_DB.prepare(query);
   const result = normalizedLessonId
@@ -734,6 +750,7 @@ export async function loadPendingLearningSubmission({ env, student, clientMutati
   }
   const mutationId = clean(clientMutationId, 100);
   if (!mutationId) throw new Error("client mutation id required");
+  if (isDialogueSourceMutation(mutationId)) throw dialogueReadbackOnly();
   const row = await existingPendingSubmission(env.READING_DB, Number(student.id), mutationId);
   if (!row || row.status === "completed") return null;
   let input;
@@ -1229,21 +1246,40 @@ export async function assertLearningSubmissionAllowed({
   payload = {},
   occurredAt = isoNow(),
   expectedStudyGuideCatalogDigest = "",
+  dialogueTurnId = null,
+  expectedResourceKey = '',
+  expectedResourceVersion = '',
 }) {
   if (!env.READING_DB || !student?.id || !lesson?.id) throw new Error("learning evidence source unavailable");
+  const dialogueMutation = isDialogueSourceMutation(payload.clientMutationId);
+  if (dialogueMutation !== !!dialogueTurnId
+    || (dialogueTurnId && payload.clientMutationId !== `${DIALOGUE_SOURCE_PREFIX}${dialogueTurnId}`)) throw dialogueReadbackOnly();
+  if (dialogueTurnId) {
+    const call = await env.READING_DB.prepare(`SELECT c.turn_id FROM dialogue_calls c
+      JOIN dialogue_sessions s ON s.id=c.session_id
+      WHERE c.turn_id=? AND c.student_id=? AND s.lesson_id=? AND s.inflight=c.turn_id AND c.state='reserved'`)
+      .bind(dialogueTurnId, student.id, lesson.id).first();
+    if (!call) throw dialogueReadbackOnly();
+  }
   const context = await resolveInteractionContext(request, env, student, lesson, interactionKey, payload);
+  if (dialogueTurnId && (context.resourceKey !== expectedResourceKey
+    || (context.formativeItem?.semanticRevision||context.manifestItem?.resourceVersion) !== expectedResourceVersion)) {
+    const error = new Error('原題版本與本次對話保存的版本不同，保留作答待覆核。');
+    error.code = 'dialogue_source_version_changed'; throw error;
+  }
   if (expectedStudyGuideCatalogDigest
     && context.formativeManifest.studyGuideCatalogDigest !== expectedStudyGuideCatalogDigest) {
     const error = new Error("study-guide and formative catalogs are not the same release");
     error.code = "study_guide_catalog_drift";
     throw error;
   }
+  assertNewFormalAnswerTime(context.manifestItem, occurredAt);
   const raw = boundedRawPayload(context.definition, context.normalizedPayload);
   const clientMutationId = clean(payload.clientMutationId, 100);
   if (!clientMutationId) throw new Error("client mutation id required before evaluation");
   let originalPayloadJson = null;
   let capturedOriginal = null;
-  if(env.YW_DURABLE_EVALUATION_ENABLED === 'true') {
+  if(env.YW_DURABLE_EVALUATION_ENABLED === 'true' || dialogueTurnId) {
     const original = Object.fromEntries((context.definition.allowedPayloadKeys || [])
       .filter(key => Object.hasOwn(payload,key)).map(key => [key,payload[key]]));
     originalPayloadJson = JSON.stringify(original);
@@ -1272,6 +1308,9 @@ export async function assertLearningSubmissionAllowed({
     };
   }
   const pending = await existingPendingSubmission(env.READING_DB, student.id, clientMutationId);
+  // A reserved dialogue call has exactly one source capture. A crash or an
+  // uncertain write cannot reclaim its legacy lease and spend again.
+  if (dialogueTurnId && pending) throw dialogueReadbackOnly();
   if (pending) {
     assertPendingSubmissionMatches(pending, {
       sourceEventId: pending.source_event_id,
@@ -1318,13 +1357,14 @@ export async function assertLearningSubmissionAllowed({
     interactionKey,
     resourceKey: context.resourceKey,
     rawPayloadJson: raw.serialized,
-    resourceVersion:evidenceVersions(context.registry,context.manifest,context.definition,context.formativeManifest).sourceVersion,
+    resourceVersion:evidenceVersions(context.registry,context.manifest,context.definition,context.formativeManifest,context.manifestItem).sourceVersion,
     leafRelease:env.CF_VERSION_METADATA?.id || null,
   }, occurredAt, pending && !capturedOriginal ? null : originalPayloadJson);
   const submissionReservation = {
     // Historical pending rows lack a pinned original snapshot. Explicit resume
     // keeps their accepted legacy path; never enroll them in automatic grading.
-    durableEvaluationEligible: env.YW_DURABLE_EVALUATION_ENABLED === 'true' && (!pending || Boolean(capturedOriginal)),
+    durableEvaluationEligible: !dialogueTurnId && env.YW_DURABLE_EVALUATION_ENABLED === 'true' && (!pending || Boolean(capturedOriginal)),
+    dialogueTurnId,
     sourceEventId: slot.sourceEventId,
     occurredAt,
     leaseStartedAt: slot.leaseStartedAt,
@@ -1378,6 +1418,7 @@ export async function reserveLearningEvaluatorCall({
     throw new LearningEvaluatorBudgetUnavailableError();
   }
   const db = env.READING_DB;
+  if (submissionReservation.dialogueTurnId || isDialogueSourceMutation(submissionReservation.clientMutationId)) throw dialogueReadbackOnly();
   const studentId = Number(submissionReservation.studentId);
   const sourceEventId = clean(submissionReservation.sourceEventId, 100);
   const resourceKey = clean(submissionReservation.resourceKey, 220);
@@ -1549,6 +1590,7 @@ export async function recordLearningInteraction({
   sourceMutation = null,
   submissionReservation = null,
   contentionRetry = 0,
+  dialogueLocal = null,
 }) {
   if (!env.READING_DB || !student?.id || !lesson?.id) throw new Error("learning evidence source unavailable");
   if (submissionReservation && sourceMutation) {
@@ -1569,6 +1611,7 @@ export async function recordLearningInteraction({
     formativeManifest,
     formativeItem,
   } = reservedContext || await resolveInteractionContext(request, env, student, lesson, interactionKey, payload);
+  assertNewFormalAnswerTime(manifestItem, effectiveOccurredAt);
   const raw = boundedRawPayload(definition, normalizedPayload);
 
   const clientMutationId = clean(payload.clientMutationId, 100);
@@ -1581,6 +1624,13 @@ export async function recordLearningInteraction({
       rawPayloadJson: raw.serialized,
     })
     : null;
+  if (isDialogueSourceMutation(clientMutationId)
+    && (!trustedReservation?.dialogueTurnId || !Array.isArray(trustedReservation.dialogueCommitStatements))
+    && !dialogueLocal) throw dialogueReadbackOnly();
+  if(dialogueLocal && (!['vocabAnswer','evaluation','readAcknowledged'].includes(interactionKey)
+    || clientMutationId!==`${DIALOGUE_LOCAL_PREFIX}${dialogueLocal.turnId}`
+    || resourceKey!==dialogueLocal.resourceKey || (manifestItem?.resourceVersion??null)!==dialogueLocal.resourceVersion
+    || typeof dialogueLocal.commit!=='function'))throw dialogueReadbackOnly();
   const existing = await existingInteraction(env.READING_DB, student.id, clientMutationId);
   if (existing) {
     assertIdempotentReplayMatches(existing, resourceKey, interactionKey, raw.serialized);
@@ -1612,7 +1662,7 @@ export async function recordLearningInteraction({
     eligibilityReason,
   } = normalizedEvaluation;
   const versions = trustedReservation?.capturedVersions
-    || evidenceVersions(registry, manifest, definition, formativeManifest);
+    || evidenceVersions(registry, manifest, definition, formativeManifest, manifestItem);
   const summary = publicSummary(manifestItem, lesson, definition);
   const envelope = {
     schema: ENVELOPE_SCHEMA,
@@ -1662,13 +1712,16 @@ export async function recordLearningInteraction({
       ...(formativeItem?.answerAuthority
         ? [{ key: "answer_authority", value: clean(formativeItem.answerAuthority, 60) }]
         : []),
-      ...(definition.scoringRole === "a_plus_gate"
+      ...((definition.scoringRole === "a_plus_gate" || manifestItem?.evidenceRole === "formative")
         ? [{ key: "producer_manifest", value: clean(versions.producerManifestVersion, 80) }]
         : []),
     ],
   };
 
   const statements = [
+    ...(dialogueLocal ? dialogueLocal.commit({sourceEventId,attemptNo,resourceKey,resourceVersion:manifestItem?.resourceVersion??null,
+      evaluation:{numericScore,normalizedValue,correctness,eligibilityStatus},result:mutation?.result||null}) : []),
+    ...(trustedReservation?.dialogueCommitStatements || []),
     ...(trustedReservation?.evaluationJob ? [env.READING_DB.prepare(
       "INSERT INTO learning_evaluation_commits(source_event_id,lease_epoch,committed_at) VALUES(?,?,?)"
     ).bind(sourceEventId, trustedReservation.evaluationJob.lease_epoch, Date.now())] : []),
@@ -1776,6 +1829,7 @@ export async function recordLearningInteraction({
           sourceMutation,
           submissionReservation,
           contentionRetry: Number(contentionRetry) + 1,
+          dialogueLocal,
         });
       }
     }
@@ -2011,7 +2065,7 @@ export const learningEvidenceContract = Object.freeze({
 export function snapshotEvaluationReservation(reservation) {
   if (!trustedSubmissionReservations.has(reservation)) throw new Error('untrusted reservation snapshot');
   const { registry,manifest,definition,formativeManifest,...context }=reservation.context;
-  return {...reservation, capturedVersions:evidenceVersions(registry,manifest,definition,formativeManifest),
+  return {...reservation, capturedVersions:evidenceVersions(registry,manifest,definition,formativeManifest,context.manifestItem),
     context:{...context,definition,formativeManifest:{manifestVersion:formativeManifest?.manifestVersion}}};
 }
 export async function restoreEvaluationReservation(env,job) {

@@ -333,6 +333,7 @@ function firstReadSubmitController({
   immediateTimeout = false,
   unlockThrows = false,
   submitReceipt = null,
+  useTransport = false,
 }) {
   const asset = artifacts.lessons.find((lesson) => lesson.lessonId === "lesson-1534");
   const marks = asset.paragraphs.slice(0, 3).map((paragraph, index) => ({
@@ -354,6 +355,9 @@ function firstReadSubmitController({
     unlocks: 0,
     unlockFailures: 0,
     bodyAborts: 0,
+    transportReads: 0,
+    transportWrites: 0,
+    localRemovals: 0,
     toasts: [],
   };
   let timeoutCallback = null;
@@ -455,7 +459,7 @@ function firstReadSubmitController({
   vm.runInNewContext(browserContractSource, {
     window,
     performance: { now: () => 1000 },
-    localStorage: { removeItem() {} },
+    localStorage: { removeItem() {calls.localRemovals += 1;} },
     location: { href: `https://yw.bdfz.net/#${asset.lessonId}` },
     crypto: { randomUUID: () => "controller-test-mutation" },
     fetch,
@@ -502,6 +506,10 @@ function firstReadSubmitController({
     openedAt: 0,
     marks,
     pending: null,
+  };
+  if(useTransport)session.transport={
+    readState:async()=>{calls.transportReads++;return (await fetch(`/api/reading/first-read/state/${asset.lessonId}`)).json();},
+    mutate:async(path)=>{assert.equal(path,'/api/reading/first-read/submit');calls.transportWrites++;throw Error('ambiguous source response');},
   };
   window.YwClassicalFirstRead.bindGate(root, session, {
     onUnlock() {
@@ -683,4 +691,11 @@ for (const authorityMismatch of [
   assert.equal(mismatchController.submitButton.disabled, false, `${authorityMismatch.label} mismatch must remain retryable`);
 }
 
+const transportedRecovery=firstReadSubmitController({authoritativeSubmitted:true,useTransport:true});
+await transportedRecovery.submit();
+assert.equal(transportedRecovery.calls.transportWrites,1,'an ambiguous submit is never replayed');
+assert.equal(transportedRecovery.calls.transportReads,1,'recovery stays on the same owner-fenced transport');
+assert.equal(transportedRecovery.calls.unlocks,1);
+assert.equal(transportedRecovery.calls.reconciles,0,'dialogue reads must not start automatic reconciliation writes');
+assert.equal(transportedRecovery.calls.localRemovals,0,'dialogue transport must preserve unadopted legacy local data');
 console.log(`classical first-read tests passed: ${artifacts.lessons.length} lessons, ${paragraphKeys.size} paragraphs, authority-bound ambiguous-submit recovery`);

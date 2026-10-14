@@ -4,13 +4,15 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { Log, LogLevel, Miniflare } from 'miniflare';
 import { sourceEventStatement } from '../site/learning-evaluation-events.js';
+import { bundleWorkerd } from './workerd-test-bundle.mjs';
 const root = resolve(import.meta.dirname, '..');
+const workerBundle = await bundleWorkerd(resolve(root, 'site/_worker.js'));
 
 test('actual Worker authenticates two owners and reads full events without model, grading or outbox writes', async () => {
   let contextReads = 0;
   const mf = new Miniflare({ log: new Log(LogLevel.NONE), workers: [
-    { name: 'yw', modules: true, modulesRoot: root, scriptPath: resolve(root, 'site/_worker.js'),
-      compatibilityDate: '2026-05-12', modulesRules: [{ type: 'ESModule', include: ['**/*.js'] }],
+    { name: 'yw', ...workerBundle,
+      compatibilityDate: '2026-05-12',
       d1Databases: { READING_DB: 'recorder-source-fixture' },
       serviceBindings: { USER_CENTER_EVIDENCE: { name: 'identity', entrypoint: 'Identity' },
         ASSETS: () => new Response('not found', { status: 404 }) },

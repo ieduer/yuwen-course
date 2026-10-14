@@ -1,0 +1,664 @@
+{
+  "version": "yw-dialogue-sources-20261013-v5",
+  "recordedAt": "2026-10-13T03:14:28.588Z",
+  "dictionary": [
+    {
+      "id": "xc-er",
+      "headword": "而",
+      "entryId": "e-p129_R-6",
+      "edition": "1999 年 2 月第 1 版",
+      "url": "https://xc.bdfz.net/#entry/e-p129_R-6",
+      "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p129_R-6",
+      "entryResponseSha256": "a9c4c60d847383a5ae3e78fbac0e6effc5c8fac8c6bf65bee6d9df4e651578b5",
+      "verification": "原書頁已目視核對；只確認下列例句與頁碼，未宣稱整個 OCR 詞條無誤。",
+      "pages": [
+        {
+          "pdfPage": 132,
+          "printedPage": 120,
+          "url": "https://dict.bdfz.net/source/xc/images/p132.png",
+          "example": "順風而呼，聲非加疾也，而聞者彰。"
+        },
+        {
+          "pdfPage": 133,
+          "printedPage": 121,
+          "url": "https://dict.bdfz.net/source/xc/images/p133.png",
+          "example": "君子博學而日參省乎己，則知明而行無過矣。"
+        }
+      ],
+      "verificationStatus": "source-image-verified"
+    },
+    {
+      "id": "xc-yu",
+      "headword": "于",
+      "entryId": "e-p773_L-6",
+      "edition": "1999 年 2 月第 1 版",
+      "url": "https://xc.bdfz.net/#entry/e-p773_L-6",
+      "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p773_L-6",
+      "verification": "本輪直接目視核對既有指定版本頁圖，僅確認下列詞義與頁碼；詩文中的具體運用及修辭效果屬語境分析，不宣稱詞典收錄該課例句或整條 OCR 已校勘。",
+      "verificationStatus": "source-image-verified",
+      "sourcePdfSha256": "a60dcbdca401b2445eeca3e09d6db0fb879d9f5d641781bc2b27c7757249cfaa",
+      "localSource": {
+        "path": "xuci-ocr/work/final/cols/p773_L.txt",
+        "sha256": "3af92b096b6ccbdb2c2e1fb9f083e4232d9adf6e819a381f17e77a7ee3fe4c5c"
+      },
+      "pages": [
+        {
+          "pdfPage": 773,
+          "printedPage": 761,
+          "url": "https://dict.bdfz.net/source/xc/images/p773.png",
+          "imageSha256": "2c6522b957f7a8c2ee9be702541f2364d501e8aa8a1e1d004cde3a0d5696b41b",
+          "verifiedScope": "詞頭與介詞用法起點；印刷761頁。"
+        },
+        {
+          "pdfPage": 774,
+          "printedPage": 762,
+          "url": "https://dict.bdfz.net/source/xc/images/p774.png",
+          "imageSha256": "a28ad6161658070c0bb79e68e11448ae40aa67a0e5f1979f9c2492ca8ba80d7b",
+          "verifiedScope": "介詞一（二）：引進動作的起始處或來源，可譯從、由、自。"
+        },
+        {
+          "pdfPage": 776,
+          "printedPage": 764,
+          "url": "https://dict.bdfz.net/source/xc/images/p776.png",
+          "imageSha256": "cab0709507c8145dc2d47cb04cd3a1777136d91a50040321848622dbf2dfae50",
+          "verifiedScope": "介詞十：引進比較對象、表示程度比較，可譯比。"
+        }
+      ],
+      "verifiedAt": "2026-10-12T10:43:49.102360+00:00"
+    },
+    {
+      "id": "xc-he",
+      "headword": "何",
+      "entryId": "e-p207_L-7",
+      "edition": "1999 年 2 月第 1 版",
+      "url": "https://xc.bdfz.net/#entry/e-p207_L-7",
+      "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p207_L-7",
+      "verification": "本輪直接目視核對既有指定版本頁圖，僅確認下列詞義與頁碼；詩文中的具體運用及修辭效果屬語境分析，不宣稱詞典收錄該課例句或整條 OCR 已校勘。",
+      "verificationStatus": "source-image-verified",
+      "sourcePdfSha256": "a60dcbdca401b2445eeca3e09d6db0fb879d9f5d641781bc2b27c7757249cfaa",
+      "localSource": {
+        "path": "xuci-ocr/work/final/cols/p207_L.txt",
+        "sha256": "bdebdef771c51c89a65477bd68517595b836eae51a9a1520d4a091aea45d0bfa"
+      },
+      "pages": [
+        {
+          "pdfPage": 207,
+          "printedPage": 195,
+          "url": "https://dict.bdfz.net/source/xc/images/p207.png",
+          "imageSha256": "a001a5c1da59694f8aa14ffa8343d071302a16cf71194e147a6715dd6d1b8bdb",
+          "verifiedScope": "詞頭何與疑問代詞總類。"
+        },
+        {
+          "pdfPage": 211,
+          "printedPage": 199,
+          "url": "https://dict.bdfz.net/source/xc/images/p211.png",
+          "imageSha256": "85fc5f5252c532068dd65b2380e3cb2bc083d9becc6186fd643d3cd532f0f141",
+          "verifiedScope": "代詞六：用於名詞前作修飾語，可譯甚麼、甚麼樣；含何人例句。"
+        }
+      ],
+      "verifiedAt": "2026-10-12T10:43:49.102360+00:00"
+    },
+    {
+      "id": "xc-dan",
+      "headword": "但",
+      "entryId": "e-p096_R-8",
+      "edition": "1999 年 2 月第 1 版",
+      "url": "https://xc.bdfz.net/#entry/e-p096_R-8",
+      "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p096_R-8",
+      "verification": "本輪直接目視核對既有指定版本頁圖，僅確認下列詞義與頁碼；詩文中的具體運用及修辭效果屬語境分析，不宣稱詞典收錄該課例句或整條 OCR 已校勘。",
+      "verificationStatus": "source-image-verified",
+      "sourcePdfSha256": "a60dcbdca401b2445eeca3e09d6db0fb879d9f5d641781bc2b27c7757249cfaa",
+      "localSource": {
+        "path": "xuci-ocr/work/final/cols/p096_R.txt",
+        "sha256": "5999416bcd0fbcf6920fe8291794ba9a6955164092c6891e8c34ef457a7c4bf9"
+      },
+      "pages": [
+        {
+          "pdfPage": 96,
+          "printedPage": 84,
+          "url": "https://dict.bdfz.net/source/xc/images/p096.png",
+          "imageSha256": "865417ed6d5248ef52a334b9236fd84071cf6e4d84eed47a0e0df6f6e14ab49a",
+          "verifiedScope": "詞頭但；副詞一：限制動作範圍，可譯只、僅僅。"
+        }
+      ],
+      "verifiedAt": "2026-10-12T10:43:49.102360+00:00"
+    }
+  ],
+  "examExamples": [
+    {
+      "id": "beijing-2024-q19",
+      "year": 2024,
+      "paper": "北京卷·語文",
+      "questionNumber": 19,
+      "work": "談買書",
+      "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+      "skill": "聯繫多處語境解釋關鍵詞",
+      "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+      "publisher": "北京考試報",
+      "issue": 1816,
+      "printedPage": 8,
+      "publishedAt": "2024-12-11",
+      "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+      "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+    },
+    {
+      "id": "beijing-2022-q18",
+      "year": 2022,
+      "paper": "北京卷·語文",
+      "questionNumber": 18,
+      "work": "這城市已融入我的生命",
+      "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+      "skill": "把段落內容、前後關係與全文主旨連起來",
+      "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+      "publisher": "北京考試報",
+      "issue": 1816,
+      "printedPage": 8,
+      "publishedAt": "2024-12-11",
+      "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+      "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+    }
+  ],
+  "languageItems": {
+    "lesson-1711-p1": [
+      {
+        "id": "language-er",
+        "word": "而",
+        "type": "function-word",
+        "sourceSentence": "順風而呼，聲非加疾也，而聞者彰；君子博學而日參省乎己。",
+        "meaning": "把「順風」與「呼」相接，表示修飾；「而聞者彰」與聲音未加強相轉折；「博學而日參省」表示遞進。",
+        "explanation": "比較每個而前後成分的關係；不同語境不套用同一個現代連詞。術語不能替代句意說明。",
+        "dictionaryId": "xc-er",
+        "annotationIds": [],
+        "difficulty": null,
+        "variants": [
+          "比較「順風而呼」與「而聞者彰」：兩個「而」連接的內容是甚麼，關係相同嗎？請用自己的話說明。",
+          "把「君子博學而日參省乎己」與「順風而呼」中的「而」換成適當的現代說法，解釋兩處為甚麼不能都機械譯成「但是」。"
+        ],
+        "proposedDemand": "context-comparison",
+        "calibrationStatus": "pending-real-model",
+        "scoringRole": "none",
+        "passageQuotes": [
+          "顺风而呼",
+          "而闻者彰",
+          "君子博学而日参省乎己"
+        ],
+        "misconceptions": [
+          "只報術語，未解釋語境",
+          "照抄提示，未獨立改述"
+        ]
+      },
+      {
+        "id": "language-yu",
+        "word": "于",
+        "type": "function-word",
+        "sourceSentence": "青，取之于藍，而青于藍。",
+        "meaning": "「取之于藍」的于引出來源；「青于藍」的于引出比較對象。",
+        "explanation": "依教材兩條註釋，分別還原成「從藍草取得」與「比藍草顏色深」；不只報詞性名稱。",
+        "annotationIds": [
+          "footnote-11143-3",
+          "footnote-11143-4"
+        ],
+        "dictionaryStatus": "source-image-verified",
+        "difficulty": null,
+        "variants": [
+          "「取之于藍」與「青于藍」中的「于」分別引出甚麼？請把兩處改寫成現代說法。",
+          "若把「青于藍」解作「從藍草取得」，會混淆哪兩個意思？請用兩處原句說明。"
+        ],
+        "proposedDemand": "context-comparison",
+        "calibrationStatus": "pending-real-model",
+        "scoringRole": "none",
+        "passageQuotes": [
+          "青，取之于蓝，而青于蓝"
+        ],
+        "misconceptions": [
+          "只報術語，未解釋語境",
+          "照抄提示，未獨立改述"
+        ],
+        "dictionaryId": "xc-yu"
+      },
+      {
+        "id": "grammar-water",
+        "word": "水",
+        "type": "grammar",
+        "sourceSentence": "假舟楫者，非能水也，而絕江河。",
+        "meaning": "「水」在此表示游泳這個動作；句意是借助舟船的人未必善於游泳，卻能渡過江河。",
+        "explanation": "教材註「能水：善於游水。水，游泳。」說明句法作用與語境，不能只報「活用」術語。",
+        "annotationIds": [
+          "footnote-11143-23"
+        ],
+        "difficulty": null,
+        "variants": [
+          "「非能水也」的「水」在句中指事物還是動作？請根據上下文說明，並改寫這句話。",
+          "如果把「水」只解釋為江水，為何無法說通「假舟楫者，非能水也」？請解釋它在這句中的作用。"
+        ],
+        "proposedDemand": "context-reformulation",
+        "calibrationStatus": "pending-real-model",
+        "scoringRole": "none",
+        "passageQuotes": [
+          "假舟楫者，非能水也，而绝江河"
+        ],
+        "misconceptions": [
+          "只報術語，未解釋語境",
+          "照抄提示，未獨立改述"
+        ],
+        "sourceVerification": {
+          "status": "source-context-reviewed",
+          "reviewId": "yw-grammar-source-convergence-20261013-v1",
+          "reviewedAt": "2026-10-13T03:05:31.744Z",
+          "analysisStatus": "authored-contextual-interpretation",
+          "authority": "root-authorized-independent-scoped-source-review-01a132c3",
+          "scope": "原注水為游泳，還原借舟渡河者不以自身善泳為前提；不以活用術語替代理解。",
+          "notice": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。",
+          "evidence": {
+            "readerPath": "data/reader-documents/lesson-1711-p1.json",
+            "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+            "passages": [
+              {
+                "id": "lesson-1711-p1:p1",
+                "sha256": "3a3c9c1def022e78b7c7ff6dbd48be5bd140f7dd7ab41bfa5d03af490aa4342c",
+                "quotes": [
+                  "假舟楫者，非能水也，而绝江河"
+                ]
+              }
+            ],
+            "annotations": [
+              {
+                "noteId": "footnote-11143-23",
+                "sha256": "578822ce5541beb5aa75f35a9a4767f45ceb589d64ba27ad80844d2827711c96"
+              }
+            ],
+            "readingMaterials": []
+          },
+          "primaryReferences": [],
+          "analysisSha256": "bb392a3b41d063831d2c26c9b62eb1914f747023a299018ea483c6702659c7a6"
+        }
+      },
+      {
+        "id": "grammar-one",
+        "word": "一",
+        "type": "grammar",
+        "sourceSentence": "用心一也。",
+        "meaning": "「一」說的是專一，不是心的數量。",
+        "explanation": "沿用教材「一：專一」的註釋；把這一判斷與前文寫蚓的行為相連。",
+        "annotationIds": [
+          "footnote-11143-39"
+        ],
+        "difficulty": null,
+        "variants": [
+          "「用心一也」的「一」能否只譯成數量「一個」？請改寫句意，並說明與前文的關係。",
+          "課文用「一」說明蚓能做成事情的原因。它在此描述甚麼狀態？請用自己的話解釋。"
+        ],
+        "proposedDemand": "context-reformulation",
+        "calibrationStatus": "pending-real-model",
+        "scoringRole": "none",
+        "passageQuotes": [
+          "用心一也"
+        ],
+        "misconceptions": [
+          "只報術語，未解釋語境",
+          "照抄提示，未獨立改述"
+        ],
+        "sourceVerification": {
+          "status": "source-context-reviewed",
+          "reviewId": "yw-grammar-source-convergence-20261013-v1",
+          "reviewedAt": "2026-10-13T03:05:31.744Z",
+          "analysisStatus": "authored-contextual-interpretation",
+          "authority": "root-authorized-independent-scoped-source-review-01a132c3",
+          "scope": "原注一為專一；以蚓的行為與用心狀態相連，不解成心的數量。",
+          "notice": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。",
+          "evidence": {
+            "readerPath": "data/reader-documents/lesson-1711-p1.json",
+            "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+            "passages": [
+              {
+                "id": "lesson-1711-p1:p1",
+                "sha256": "3a3c9c1def022e78b7c7ff6dbd48be5bd140f7dd7ab41bfa5d03af490aa4342c",
+                "quotes": [
+                  "用心一也"
+                ]
+              }
+            ],
+            "annotations": [
+              {
+                "noteId": "footnote-11143-39",
+                "sha256": "a60bd016967811c3ce9a0f304e871b42659b02c112f4d339e5546a1b30a75a00"
+              }
+            ],
+            "readingMaterials": []
+          },
+          "primaryReferences": [],
+          "analysisSha256": "91cd9213b3c8263cbeddf9de698f465eb61c586ca7c388534a1f7064308bb0ff"
+        }
+      },
+      {
+        "id": "grammar-wuyi",
+        "word": "无以",
+        "type": "grammar",
+        "sourceSentence": "故不积跬步，无以至千里；不积小流，无以成江海。",
+        "passageQuotes": [
+          "故不积跬步，无以至千里；不积小流，无以成江海。"
+        ],
+        "meaning": "無以是沒有用來達成某事的條件或辦法，不是「不用」。",
+        "explanation": "沿用教材無以註釋，對比條件的缺乏與主動放棄；保留積累與結果的關係。",
+        "annotationIds": [
+          "footnote-11143-31"
+        ],
+        "difficulty": null,
+        "proposedDemand": "context-reformulation",
+        "calibrationStatus": "pending-real-model",
+        "scoringRole": "none",
+        "variants": [
+          "「無以至千里」能不能理解為「不用走到千里」？請改寫整句，說明差別。",
+          "把「不積小流，無以成江海」改寫為自己的話，說明前後兩部分的條件關係。"
+        ],
+        "misconceptions": [
+          "只報術語，未解釋語境",
+          "照抄提示，未獨立改述"
+        ],
+        "sourceVerification": {
+          "status": "source-context-reviewed",
+          "reviewId": "yw-grammar-source-convergence-20261013-v1",
+          "reviewedAt": "2026-10-13T03:05:31.744Z",
+          "analysisStatus": "authored-contextual-interpretation",
+          "authority": "root-authorized-independent-scoped-source-review-01a132c3",
+          "scope": "原注無以為沒有用來……的、無從；保留積累為達成結果條件的關係，不解成不用。",
+          "notice": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。",
+          "evidence": {
+            "readerPath": "data/reader-documents/lesson-1711-p1.json",
+            "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+            "passages": [
+              {
+                "id": "lesson-1711-p1:p1",
+                "sha256": "3a3c9c1def022e78b7c7ff6dbd48be5bd140f7dd7ab41bfa5d03af490aa4342c",
+                "quotes": [
+                  "故不积跬步，无以至千里；不积小流，无以成江海。"
+                ]
+              }
+            ],
+            "annotations": [
+              {
+                "noteId": "footnote-11143-31",
+                "sha256": "7bfae14de1e0d50f87e19d9d331b0bccb626aebcd14cb661adbc084578b30c27"
+              }
+            ],
+            "readingMaterials": []
+          },
+          "primaryReferences": [],
+          "analysisSha256": "6c5762278aafeeb208dadd12cff8ed644ab9cbc15c15e4f243f9c8173ddd2b29"
+        }
+      },
+      {
+        "id": "grammar-modifier",
+        "word": "爪牙之利、筋骨之强",
+        "type": "grammar",
+        "sourceSentence": "蚓无爪牙之利，筋骨之强，上食埃土，下饮黄泉，用心一也。",
+        "passageQuotes": [
+          "蚓无爪牙之利，筋骨之强，上食埃土，下饮黄泉，用心一也。"
+        ],
+        "meaning": "蚯蚓沒有鋒利的爪牙、強健的筋骨，卻能向上吃泥土、向下飲地下水；此處利、強說明爪牙與筋骨的性質。",
+        "explanation": "原注支持埃土、黃泉、一的詞義；呂珍玉〈《詩經》疑難詞語辨析（1）〉第7頁直接以本句說明利、強與爪牙、筋骨的偏正關係。接受能還原修飾關係的說明，不要求唯一「定語後置」術語，也不冒充教材已有的句式註釋。",
+        "annotationIds": [
+          "footnote-11143-37",
+          "footnote-11143-38",
+          "footnote-11143-39"
+        ],
+        "difficulty": null,
+        "proposedDemand": "syntax-and-effect",
+        "calibrationStatus": "pending-real-model",
+        "scoringRole": "none",
+        "variants": [
+          "「爪牙之利，筋骨之強」中的利、強分別說明甚麼？請改成現代語序，並說明作者為甚麼接著寫蚓能做的事。",
+          "如果把「爪牙之利」讀成「爪牙帶來的利益」，與本句前後有何衝突？請還原兩組修飾關係。"
+        ],
+        "misconceptions": [
+          "只報術語，未解釋語境",
+          "照抄提示，未獨立改述"
+        ],
+        "sourceVerification": {
+          "status": "source-context-reviewed",
+          "reviewId": "yw-grammar-source-convergence-20261013-v1",
+          "reviewedAt": "2026-10-13T03:14:28.582Z",
+          "analysisStatus": "authored-contextual-interpretation",
+          "authority": "root-authorized-primary-scholarly-source-review-01a132c3",
+          "scope": "利說明爪牙的鋒利，強說明筋骨的強健；接受還原這兩組修飾關係，不要求唯一後置定語標籤。",
+          "notice": "原文、原注及學者對本句偏正關係的直接分析已核對；只接受所列修飾關係，不推定唯一語法標籤。來源核驗不等於模型校準或學生掌握。",
+          "evidence": {
+            "readerPath": "data/reader-documents/lesson-1711-p1.json",
+            "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+            "passages": [
+              {
+                "id": "lesson-1711-p1:p1",
+                "sha256": "3a3c9c1def022e78b7c7ff6dbd48be5bd140f7dd7ab41bfa5d03af490aa4342c",
+                "quotes": [
+                  "蚓无爪牙之利，筋骨之强，上食埃土，下饮黄泉，用心一也。"
+                ]
+              }
+            ],
+            "annotations": [
+              {
+                "noteId": "footnote-11143-37",
+                "sha256": "a027077c838dc521a086d92882ffea42845d5af76eb68ae0b20919dcc1838616"
+              },
+              {
+                "noteId": "footnote-11143-38",
+                "sha256": "d65041578409aeaed9bef109579d734751fd2522e763d83b5164a88152fa1273"
+              },
+              {
+                "noteId": "footnote-11143-39",
+                "sha256": "a60bd016967811c3ce9a0f304e871b42659b02c112f4d339e5546a1b30a75a00"
+              }
+            ],
+            "readingMaterials": []
+          },
+          "primaryReferences": [
+            {
+              "title": "教育部《重編國語辭典修訂本》爪牙",
+              "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=115459&la=0&powerMode=0",
+              "locator": "義項1，引荀子勸學原句；支持爪牙為動物的尖爪利牙，沒有直接解析之字結構。",
+              "page": null,
+              "supportKind": "primary ministry dictionary; word meaning only, insufficient for the pending syntax claim"
+            },
+            {
+              "title": "呂珍玉〈《詩經》疑難詞語辨析（1）〉",
+              "publisher": "東海大學中文系《東海中文學報》第24期，2012年7月，頁1–50",
+              "url": "https://chinese.thu.edu.tw/upload/newspaper_upload/24/01%E5%91%82%E7%8F%8D%E7%8E%89.pdf#page=7",
+              "page": 7,
+              "pdfPage": 7,
+              "zeroBasedPdfPage": 6,
+              "locator": "二、葛之覃兮，總結段；解析器第182–184行，印刷頁7",
+              "supportKind": "primary scholarly article; author explicitly interprets the cited Xunzi phrase as sharp claws and strong muscles/bones, linked by a modifier-head relation",
+              "scope": "直接支持本題的兩組修飾關係；不聲稱論文要求學生必答定語後置。",
+              "access": "independently read extracted page text through web tool; no local PDF copy or rendering"
+            }
+          ],
+          "analysisSha256": "4a8d9dcb81f97b658948d722a3add70004f4ef1459af434a1a166530e11e6c6c"
+        }
+      }
+    ],
+    "lesson-1498": [
+      {
+        "id": "language-he",
+        "word": "何",
+        "type": "function-word",
+        "sourceSentence": "江畔何人初见月？江月何年初照人？",
+        "passageQuotes": [
+          "江畔何人初见月？江月何年初照人？"
+        ],
+        "meaning": "何人問人，何年問時間；兩問把個人的初見擴展到人與月的久遠關係。",
+        "explanation": "疑問用法與本詩的追問是兩層：先說清問甚麼，再依前後詩句分析；不把修辭效果冒充詞典釋義。",
+        "annotationIds": [],
+        "difficulty": null,
+        "proposedDemand": "context-comparison",
+        "calibrationStatus": "pending-real-model",
+        "scoringRole": "none",
+        "variants": [
+          "「何人」和「何年」各在追問甚麼？若只說「何是疑問詞」，還缺少哪一層句意？",
+          "請把這兩問改為自己的話，再說明「初」和兩個「何」怎樣把問題推向久遠的時間。"
+        ],
+        "misconceptions": [
+          "只報術語，未解釋語境",
+          "照抄提示，未獨立改述"
+        ],
+        "dictionaryId": "xc-he",
+        "dictionaryStatus": "source-image-verified"
+      },
+      {
+        "id": "language-dan",
+        "word": "但",
+        "type": "function-word",
+        "sourceSentence": "不知江月待何人，但见长江送流水。",
+        "passageQuotes": [
+          "不知江月待何人，但见长江送流水。"
+        ],
+        "meaning": "但見是只見，限制眼前能看見的範圍，不宜直接套成現代轉折詞「但是」。",
+        "explanation": "詞義依指定虛詞詞典的副詞用法核對；上下句從不知到但見的認知變化是文本解讀，允許有證據的不同表述。",
+        "annotationIds": [],
+        "difficulty": null,
+        "proposedDemand": "context-comparison",
+        "calibrationStatus": "pending-real-model",
+        "scoringRole": "none",
+        "variants": [
+          "「但見」若換成「只看見」，與上句「不知」有何聯繫？請解釋，不能只把但譯成但是。",
+          "這裡的「但」限制了甚麼？請分別說明詩中人不知道的事與眼前看見的事。"
+        ],
+        "misconceptions": [
+          "只報術語，未解釋語境",
+          "照抄提示，未獨立改述"
+        ],
+        "dictionaryId": "xc-dan",
+        "dictionaryStatus": "source-image-verified"
+      },
+      {
+        "id": "grammar-moon",
+        "word": "卷不去、拂还来",
+        "type": "grammar",
+        "sourceSentence": "玉户帘中卷不去，捣衣砧上拂还来。",
+        "passageQuotes": [
+          "玉户帘中卷不去，捣衣砧上拂还来。"
+        ],
+        "meaning": "卷不去、拂還來的是月光；承接前面的月，動作與不能排遣的相思聯繫起來。",
+        "explanation": "沿用教材對玉戶簾中卷不去的註解。省略內容的還原須有前句依據；不把月光真的有意志當作者生平事實。",
+        "annotationIds": [
+          "footnote-10076-11"
+        ],
+        "difficulty": null,
+        "proposedDemand": "syntax-and-effect",
+        "calibrationStatus": "pending-real-model",
+        "scoringRole": "none",
+        "variants": [
+          "「卷不去」「拂還來」省略了甚麼？請從前後詩句找到依據，再說明為甚麼不直接寫思念。",
+          "請把兩句省略的對象補回，說明兩個動作為甚麼都未奏效；不要只報省略句這個名稱。"
+        ],
+        "misconceptions": [
+          "只報術語，未解釋語境",
+          "照抄提示，未獨立改述"
+        ],
+        "sourceVerification": {
+          "status": "source-context-reviewed",
+          "reviewId": "yw-grammar-source-convergence-20261013-v1",
+          "reviewedAt": "2026-10-13T03:05:31.744Z",
+          "analysisStatus": "authored-contextual-interpretation",
+          "authority": "root-authorized-independent-scoped-source-review-01a132c3",
+          "scope": "原注及相鄰月、月華等句支持卷不去、拂還來的是月光；相思效果是有據的文本解讀，允許不同表述。",
+          "notice": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。",
+          "evidence": {
+            "readerPath": "data/reader-documents/lesson-1498.json",
+            "readerSha256": "e865b8f73d9a4beb512f1f92e4fbedda6f2b5b82717d68142ab4b8e843bbee75",
+            "passages": [
+              {
+                "id": "lesson-1498:p12",
+                "sha256": "60fa29f338d85529a2b616b4e84ab4be13d50691b9a8dfe977442fda9288e2fd",
+                "quotes": [
+                  "玉户帘中卷不去，捣衣砧上拂还来。"
+                ]
+              }
+            ],
+            "annotations": [
+              {
+                "noteId": "footnote-10076-11",
+                "sha256": "5627328859d48ac288845cf0eff09f3618c197ff3269c880f21a58e3a8127394"
+              }
+            ],
+            "readingMaterials": []
+          },
+          "primaryReferences": [],
+          "analysisSha256": "49a086fbe923d591909177b958b199f6cf18ad5c1c1e1add566a2ea8e712b64d"
+        }
+      }
+    ]
+  },
+  "textRoleCuration": {
+    "version": "yw-dialogue-text-roles-20261012-v2",
+    "recordedAt": "2026-10-12T16:07:00Z",
+    "lessons": {
+      "lesson-1498": [
+        {
+          "blockIndex": 18,
+          "blockSha256": "5b0eaf6c4450cacf72f3736695cc346354faee269551bab1eecb43db568a26b8",
+          "role": "commentary",
+          "label": "原課附帶導讀（非詩作正文）",
+          "source": "data/reader-documents/lesson-1498.json#main.blocks",
+          "reason": "附詩後以第三人稱分析本詩並給出誦讀任務、畫作標題；非張若虛詩句。"
+        },
+        {
+          "blockIndex": 19,
+          "blockSha256": "9fba5d21cd385f26da63e41929aab4230430c40d4435c105f1499b5d2cf4b3aa",
+          "role": "reference-metadata",
+          "label": "原課參考資料",
+          "source": "data/reader-documents/lesson-1498.json#main.blocks",
+          "reason": "原帖雲端文獻連結的標籤與預覽文字，並非詩作正文。"
+        },
+        {
+          "blockIndex": 20,
+          "blockSha256": "57f225575962378c931c663ba06e36589250cb67bf603f64ead263e4e02672db",
+          "role": "reference-title",
+          "label": "原課參考資料",
+          "source": "data/reader-documents/lesson-1498.json#main.blocks",
+          "reason": "原帖雲端文獻連結的標籤與預覽文字，並非詩作正文。"
+        },
+        {
+          "blockIndex": 21,
+          "blockSha256": "0c826a2a3e23adf119c7f74aa7b5a2d95f63d790a2a8b35e117f4be675ce53af",
+          "role": "reference-metadata",
+          "label": "原課參考資料",
+          "source": "data/reader-documents/lesson-1498.json#main.blocks",
+          "reason": "原帖雲端文獻連結的標籤與預覽文字，並非詩作正文。"
+        }
+      ],
+      "lesson-1711-p1": [
+        {
+          "blockIndex": 2,
+          "blockSha256": "11797d41fbe386b3796ff9529c2d3d891b2d94a75ca330b09565965834076039",
+          "role": "commentary",
+          "label": "教材學習提示（非荀子原文）",
+          "source": "data/reader-documents/lesson-1711-p1.json#main.blocks",
+          "reason": "分隔線後的教材編者學習提示與背誦任務，提及《師說》、韓愈及當代學習者；保留供閱讀參考，不可充當荀子原文或作者自述。"
+        },
+        {
+          "blockIndex": 3,
+          "blockSha256": "20036e32a6f4476dd08a8e665c50da37b187af5b7aa2bef5050d213a9c4cc39d",
+          "role": "commentary",
+          "label": "教材學習提示（非荀子原文）",
+          "source": "data/reader-documents/lesson-1711-p1.json#main.blocks",
+          "reason": "分隔線後的教材編者學習提示與背誦任務，提及《師說》、韓愈及當代學習者；保留供閱讀參考，不可充當荀子原文或作者自述。"
+        },
+        {
+          "blockIndex": 4,
+          "blockSha256": "b416e2083aa0461b1a962fc6811f322ff8b0eb78dd8c7e78a5655a3d4c75738c",
+          "role": "commentary",
+          "label": "教材學習提示（非荀子原文）",
+          "source": "data/reader-documents/lesson-1711-p1.json#main.blocks",
+          "reason": "分隔線後的教材編者學習提示與背誦任務，提及《師說》、韓愈及當代學習者；保留供閱讀參考，不可充當荀子原文或作者自述。"
+        },
+        {
+          "blockIndex": 5,
+          "blockSha256": "4212cde31911e3a1ba79f274d0544e04522d73360d9e4352dd805bc9bc28c248",
+          "role": "commentary",
+          "label": "教材學習提示（非荀子原文）",
+          "source": "data/reader-documents/lesson-1711-p1.json#main.blocks",
+          "reason": "分隔線後的教材編者學習提示與背誦任務，提及《師說》、韓愈及當代學習者；保留供閱讀參考，不可充當荀子原文或作者自述。"
+        }
+      ]
+    }
+  }
+}

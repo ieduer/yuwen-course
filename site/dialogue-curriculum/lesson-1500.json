@@ -1,0 +1,2412 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1500",
+  "title": "江城子·乙卯正月二十日夜记梦/苏轼",
+  "mode": "poetry",
+  "author": "苏轼",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1500:p1",
+      "text": "十年生死两茫茫。不思量，自难忘。",
+      "block": {
+        "runs": [
+          {
+            "text": "十年生死两茫茫",
+            "type": "text"
+          },
+          {
+            "label": "[1]",
+            "noteId": "footnote-10084-1",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。不思量，自难忘。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1500:p2",
+      "text": "千里孤坟，无处话凄凉。",
+      "block": {
+        "runs": [
+          {
+            "text": "千里孤坟",
+            "type": "text"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-10084-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，无处话凄凉。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1500:p3",
+      "text": "纵使相逢应不识，尘满面，鬓如霜。",
+      "block": {
+        "runs": [
+          {
+            "text": "纵使相逢应不识，尘满面，鬓如霜。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1500:p4",
+      "text": "夜来幽梦忽还乡。小轩窗，正梳妆。",
+      "block": {
+        "runs": [
+          {
+            "text": "夜来幽梦",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-10084-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "忽还乡。小轩窗",
+            "type": "text"
+          },
+          {
+            "label": "[4]",
+            "noteId": "footnote-10084-4",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，正梳妆。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1500:p5",
+      "text": "相顾无言，惟有泪千行。",
+      "block": {
+        "runs": [
+          {
+            "text": "相顾无言，惟有泪千行。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1500:p6",
+      "text": "料得年年肠断处，明月夜，短松冈。",
+      "block": {
+        "runs": [
+          {
+            "text": "料得年年肠断处，明月夜，短松冈",
+            "type": "text"
+          },
+          {
+            "label": "[5]",
+            "noteId": "footnote-10084-5",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "两茫茫：指双方茫然不相知。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10084-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "千里孤坟：王弗葬地在四川眉山，与苏轼任职的山东密州相距遥远，故称亡妻的坟为“千里孤坟”，有感伤自己不能与她同穴相伴之意。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10084-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "幽梦：隐约迷离的梦。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10084-3"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "轩窗：窗户。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10084-4"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "短松冈：长着矮小松树的山冈，指王弗坟茔所在地。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10084-5"
+    }
+  ],
+  "resources": [
+    {
+      "disposition": "system-browser",
+      "href": "https://bdfz.yuque.com/org-wiki-bdfz-oz9uor/yrhg03/aqo192?singleDoc#",
+      "kind": "link",
+      "label": "江城子·乙卯正月二十日夜记梦/苏轼 · BDFZ",
+      "postId": 91130,
+      "postNumber": null,
+      "sourceUrl": "https://bdfz.yuque.com/org-wiki-bdfz-oz9uor/yrhg03/aqo192?singleDoc#"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://files.rdfzer.com/original/2X/6/68a621792df31ad8c6b0474edb2a19ae8f0f89e8.jpeg",
+      "kind": "link",
+      "label": "https://files.rdfzer.com/original/2X/6/68a621792df31ad8c6b0474edb2a19ae8f0f89e8.jpeg",
+      "postId": 11073,
+      "postNumber": null,
+      "sourceUrl": "https://files.rdfzer.com/original/2X/6/68a621792df31ad8c6b0474edb2a19ae8f0f89e8.jpeg"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://files.rdfzer.com/original/2X/8/849efaec10e0295f6c6d27fb9087b92cefb15792.jpeg",
+      "kind": "link",
+      "label": "[A screenshot shows",
+      "postId": 20727,
+      "postNumber": null,
+      "sourceUrl": "https://files.rdfzer.com/original/2X/8/849efaec10e0295f6c6d27fb9087b92cefb15792.jpeg"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://files.rdfzer.com/original/2X/a/ac9d0b11a9630c14aa89f8f9a49102650bd4c4d9.jpeg",
+      "kind": "link",
+      "label": "https://files.rdfzer.com/original/2X/a/ac9d0b11a9630c14aa89f8f9a49102650bd4c4d9.jpeg",
+      "postId": 11073,
+      "postNumber": null,
+      "sourceUrl": "https://files.rdfzer.com/original/2X/a/ac9d0b11a9630c14aa89f8f9a49102650bd4c4d9.jpeg"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/c/general/4",
+      "kind": "link",
+      "label": "卮言",
+      "postId": 20728,
+      "postNumber": null,
+      "sourceUrl": "https://forum.rdfzer.com/c/general/4"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/t/3004/42",
+      "kind": "link",
+      "label": "如何表白?",
+      "postId": 20727,
+      "postNumber": null,
+      "sourceUrl": "https://forum.rdfzer.com/t/3004/42"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/t/topic/3055",
+      "kind": "link",
+      "label": "不生不死不茫茫",
+      "postId": 20728,
+      "postNumber": null,
+      "sourceUrl": "https://forum.rdfzer.com/t/topic/3055"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/u/gggggg",
+      "kind": "link",
+      "label": "@gggggg",
+      "postId": 20728,
+      "postNumber": null,
+      "sourceUrl": "https://forum.rdfzer.com/u/gggggg"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/u/roast",
+      "kind": "link",
+      "label": "@Roast",
+      "postId": null,
+      "postNumber": 5,
+      "sourceUrl": "https://forum.rdfzer.com/u/roast"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/uploads/short-url/ykWTCYPnpF44GHcHsVeN2R8dnH5.pdf",
+      "kind": "link",
+      "label": "Pages from 钦定词谱.40卷.清.陈廷敬.王奕清等奉敕纂修.清康熙54年内府刊朱墨套印本.1715年.pdf",
+      "postId": 92293,
+      "postNumber": null,
+      "sourceUrl": "https://forum.rdfzer.com/uploads/short-url/ykWTCYPnpF44GHcHsVeN2R8dnH5.pdf"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://sites.google.com/view/pkuschool/cover3/%e4%b8%ad%e5%9b%bd%e5%8f%a4%e5%85%b8%e8%af%97%e6%ad%8c%e7%9a%84%e6%84%8f%e8%b1%a1/%e6%b1%9f%e5%9f%8e%e5%ad%90%e4%b9%99%e5%8d%af%e6%ad%a3%e6%9c%88%e4%ba%8c%e5%8d%81%e6%97%a5%e5%a4%9c%e8%ae%b0%e6%a2%a6%e8%8b%8f%e8%bd%bc",
+      "kind": "link",
+      "label": "https://sites.google.com/view/pkuschool/cover3/%e4%b8%ad%e5%9b%bd%e5%8f%a4%e5%85%b8%e8%af%97%e6%ad%8c%e7%9a%84%e6%84%8f%e8%b1%a1/%e6%b1%9f%e5%9f%8e%e5%ad%90%e4%",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://sites.google.com/view/pkuschool/cover3/%e4%b8%ad%e5%9b%bd%e5%8f%a4%e5%85%b8%e8%af%97%e6%ad%8c%e7%9a%84%e6%84%8f%e8%b1%a1/%e6%b1%9f%e5%9f%8e%e5%ad%90%e4%b9%99%e5%8d%af%e6%ad%a3%e6%9c%88%e4%ba%8c%e5%8d%81%e6%97%a5%e5%a4%9c%e8%ae%b0%e6%a2%a6%e8%8b%8f%e8%bd%bc"
+    }
+  ],
+  "source": "https://forum.rdfzer.com/t/topic/1500",
+  "objectives": [
+    {
+      "id": "lesson-1500:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1500:p1",
+        "lesson-1500:p2",
+        "lesson-1500:p3",
+        "lesson-1500:p4",
+        "lesson-1500:p5",
+        "lesson-1500:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1500:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1500:p1",
+        "lesson-1500:p2",
+        "lesson-1500:p3",
+        "lesson-1500:p4",
+        "lesson-1500:p5",
+        "lesson-1500:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1500:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1500:p1",
+        "lesson-1500:p2",
+        "lesson-1500:p3",
+        "lesson-1500:p4",
+        "lesson-1500:p5",
+        "lesson-1500:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1500:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1500:p1",
+        "lesson-1500:p2",
+        "lesson-1500:p3",
+        "lesson-1500:p4",
+        "lesson-1500:p5",
+        "lesson-1500:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1500:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1500:p1",
+        "lesson-1500:p2",
+        "lesson-1500:p3",
+        "lesson-1500:p4",
+        "lesson-1500:p5",
+        "lesson-1500:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1500:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1500:p1",
+        "lesson-1500:p2",
+        "lesson-1500:p3",
+        "lesson-1500:p4",
+        "lesson-1500:p5",
+        "lesson-1500:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1500:wordCreation",
+      "domain": "wordCreation",
+      "label": "字詞創作",
+      "criteria": [
+        "context_meaning",
+        "creation",
+        "fit"
+      ],
+      "rule": "選一個剛疏通的詞，用於三行短詩（詩歌）、三句對白（戲劇）、三句微型敘事（小說）或三句話；核對詞義、語境及搭配。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1500:p1",
+        "lesson-1500:p2",
+        "lesson-1500:p3",
+        "lesson-1500:p4",
+        "lesson-1500:p5",
+        "lesson-1500:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1500:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1500:p1",
+        "lesson-1500:p2",
+        "lesson-1500:p3",
+        "lesson-1500:p4",
+        "lesson-1500:p5",
+        "lesson-1500:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1500:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1500:p1",
+        "lesson-1500:p2",
+        "lesson-1500:p3",
+        "lesson-1500:p4",
+        "lesson-1500:p5",
+        "lesson-1500:p6"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1500:v06",
+      "domain": "vocabulary",
+      "label": "字詞：思量",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：思念。語境義：思念。此处「思量」意为刻意去想、去思念，结合上下文悼亡情境，选B。",
+      "sourcePassages": [
+        "lesson-1500:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1500:v07",
+      "domain": "vocabulary",
+      "label": "字詞：话",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：诉说。語境義：诉说。「话」在此处作动词，意为向人诉说、倾诉，故选C。",
+      "sourcePassages": [
+        "lesson-1500:p2"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1500:v08",
+      "domain": "vocabulary",
+      "label": "字詞：纵使",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：即使。語境義：即使。「纵使」是假设让步连词，意为即使，故选B。",
+      "sourcePassages": [
+        "lesson-1500:p3"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1500:v09",
+      "domain": "vocabulary",
+      "label": "字詞：应",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：大概。語境義：大概、应该。此处「应」表示推测语气，意为大概、料想，故选C。",
+      "sourcePassages": [
+        "lesson-1500:p3"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1500:v10",
+      "domain": "vocabulary",
+      "label": "字詞：顾",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：回头看。語境義：回头看。「相顾」意为互相看着、对视，故选B。",
+      "sourcePassages": [
+        "lesson-1500:p5"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1500:v11",
+      "domain": "vocabulary",
+      "label": "字詞：料得",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：预料。語境義：料想、预料。「料得」意为料想、估计，故选A。",
+      "sourcePassages": [
+        "lesson-1500:p6"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1500:v12",
+      "domain": "vocabulary",
+      "label": "字詞：肠断",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：预料到每年最令作者肝肠寸断的地方。語境義：形容极度悲伤。「肠断」是形容悲伤到了极点，此处指代王弗坟茔所在地，故选B。",
+      "sourcePassages": [
+        "lesson-1500:p6"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "legacy:effect:lesson-1500:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1500:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1500:interaction:contextWords",
+        "resourceVersion": "sha256:8bab036b6a5a5fbc6a4c4a8333bc9f50a5b81da205efbc5918c23118fa076ca4",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1500:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1500:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1500:interaction:revision",
+        "resourceVersion": "sha256:cfd6428783b55a9075decb61f4a6a0a7d150021f9b4166bdaf8d2514657dc838",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1500:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1500:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1500:interaction:structure",
+        "resourceVersion": "sha256:53e82eb6b9890189edaa1ed1370c79a67bfb93403116b5e34ea42edfa15de981",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1500:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1500:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1500:interaction:evaluation",
+        "resourceVersion": "sha256:4176e5df7da9062b97b0b686b78563e503cee87d18cf26004175eaa68c997745",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1500:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1500:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1500:interaction:authorQuestion",
+        "resourceVersion": "sha256:22b0a62ab22603332341b3afb8828a326c628de8222e9e26481e6ebc004186f1",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1500:vocab:lesson-1500:v06",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v06",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v06",
+        "resourceVersion": "sha256:124a2f6faa677a0ee7117f39fa0b4993ec032ce6630126df2984f890de5d3185",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1500:vocab:lesson-1500:v07",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v07",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v07",
+        "resourceVersion": "sha256:8f70059aa341499864c8d7cb3455a00a7bd6aa28ad545aa23a5a5ced89ac0b89",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1500:vocab:lesson-1500:v08",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v08",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v08",
+        "resourceVersion": "sha256:d690b7bfc6a524dfffac01efc4e87d2e4b6c9ed2fb4e32be99c4c1a72f24e252",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1500:vocab:lesson-1500:v09",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v09",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v09",
+        "resourceVersion": "sha256:cc0f242aab6d9e134855a3cbaf063b4eabf1f0e601f1ac0fe0ac822b8d4572bc",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1500:vocab:lesson-1500:v10",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v10",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v10",
+        "resourceVersion": "sha256:3ba3592c83925839de878293314009abb0ee348ecfdba22dce309a2e2e009ede",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1500:vocab:lesson-1500:v11",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v11",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v11",
+        "resourceVersion": "sha256:7bd0ca43091b2f368d451327927a2367d3b8eb64d4a6474eb75a8ef540f48ce0",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1500:vocab:lesson-1500:v12",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v12",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v12",
+        "resourceVersion": "sha256:1498a7a70bd2c9979e2b9c4ee6ea07779f4a13c5ef8c9f0485736ddd1dff3bdb",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1500:interaction:wordCreation",
+      "domain": "legacy",
+      "label": "wordCreation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1500:interaction:wordCreation",
+        "canonicalUnitId": "yw:lesson-1500:interaction:wordCreation",
+        "resourceVersion": "sha256:9f07d27939a0baee9b2d268a7ebd5bfe6919a0ebb80fb393e02dcf09089676c7",
+        "questionKind": "wordCreation",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "lesson-1500:corpus-function-word",
+      "domain": "vocabulary",
+      "label": "語言：不",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "字典所列詞義範圍已核對；本課語境分析為教學解讀，並非原書收錄答案。 否定副詞，否定主動思量。 前句縱不刻意想，後句仍自然難忘；不能從不思量推成沒有情感或徹底遺忘。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "sourcePassages": [
+        "lesson-1500:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "不思量等於已經忘記亡妻"
+      ],
+      "remediation": "說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。",
+      "scoringRole": "none"
+    },
+    {
+      "id": "lesson-1500:corpus-grammar",
+      "domain": "vocabulary",
+      "label": "語言：夢境中的人物與動作",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "本項為具逐項來源支持的語境教學分析，只在所列人物、動作或問答關係範圍內採納；不是唯一句法分類，也不是模型校準、學生掌握或原教材評分結論。 夢中還鄉後所見的是妻子在窗前梳妝；相顧寫夢中的我與妻子相對。 結合幽夢、原注所述亡妻及後文相顧，辨明夢中觀看者與梳妝者。能說清人物和動作的關係即可，不要求使用省略主語或視角轉換一詞，也不延伸判定結尾料得等句的唯一視角。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "sourcePassages": [
+        "lesson-1500:p4",
+        "lesson-1500:p5"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "我還鄉所以正梳妝的一定也是我"
+      ],
+      "remediation": "說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。",
+      "scoringRole": "none"
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "lesson-1500:v06",
+      "word": "思量",
+      "sourceSentence": "不思量,自难忘",
+      "meaning": "思念",
+      "explanation": "此处「思量」意为刻意去想、去思念，结合上下文悼亡情境，选B。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "「不思量，自难忘」中「思量」一词的意思是",
+      "options": [
+        "思考计量",
+        "思念",
+        "商量",
+        "策划"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "思念",
+      "sourceRefs": [],
+      "version": "vocab-set-a11ff7cb2cec4993",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「不思量,自难忘」\n「不思量，自难忘」中「思量」一词的意思是\nA. 思考计量\nB. 思念\nC. 商量\nD. 策划\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「不思量,自难忘」中「思量」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1500:v07",
+      "word": "话",
+      "sourceSentence": "千里孤坟,无处话凄凉",
+      "meaning": "诉说",
+      "explanation": "「话」在此处作动词，意为向人诉说、倾诉，故选C。",
+      "type": "contextual-choice",
+      "difficulty": 2,
+      "question": "「千里孤坟，无处话凄凉」中「话」字的意思是",
+      "options": [
+        "谈话",
+        "言语",
+        "诉说",
+        "对话"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "诉说",
+      "sourceRefs": [],
+      "version": "vocab-set-a11ff7cb2cec4993",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「千里孤坟,无处话凄凉」\n「千里孤坟，无处话凄凉」中「话」字的意思是\nA. 谈话\nB. 言语\nC. 诉说\nD. 对话\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「千里孤坟,无处话凄凉」中「话」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1500:v08",
+      "word": "纵使",
+      "sourceSentence": "纵使相逢应不识",
+      "meaning": "即使",
+      "explanation": "「纵使」是假设让步连词，意为即使，故选B。",
+      "type": "substitution",
+      "difficulty": 1,
+      "question": "下列词语中，填入「纵使相逢应不识」中「纵使」位置，意思最接近的一项是",
+      "options": [
+        "若是",
+        "即使",
+        "因为",
+        "只要"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "即使",
+      "sourceRefs": [],
+      "version": "vocab-set-a11ff7cb2cec4993",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「纵使相逢应不识」\n下列词语中，填入「纵使相逢应不识」中「纵使」位置，意思最接近的一项是\nA. 若是\nB. 即使\nC. 因为\nD. 只要\n請選出答案，並用自己的話說明判斷依據。",
+        "請用恰當的現代說法替換「纵使相逢应不识」中的「纵使」，並解釋這個替換如何保留原句的意思。"
+      ]
+    },
+    {
+      "id": "lesson-1500:v09",
+      "word": "应",
+      "sourceSentence": "纵使相逢应不识",
+      "meaning": "大概、应该",
+      "explanation": "此处「应」表示推测语气，意为大概、料想，故选C。",
+      "type": "contextual-choice",
+      "difficulty": 2,
+      "question": "「纵使相逢应不识」中「应」字的意思是",
+      "options": [
+        "应当",
+        "答应",
+        "大概",
+        "反应"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "大概",
+      "sourceRefs": [],
+      "version": "vocab-set-a11ff7cb2cec4993",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「纵使相逢应不识」\n「纵使相逢应不识」中「应」字的意思是\nA. 应当\nB. 答应\nC. 大概\nD. 反应\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「纵使相逢应不识」中「应」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1500:v10",
+      "word": "顾",
+      "sourceSentence": "相顾无言,惟有泪千行",
+      "meaning": "回头看",
+      "explanation": "「相顾」意为互相看着、对视，故选B。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "「相顾无言，惟有泪千行」中「顾」的意思是",
+      "options": [
+        "照顾",
+        "回头看",
+        "顾虑",
+        "拜访"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "回头看",
+      "sourceRefs": [],
+      "version": "vocab-set-a11ff7cb2cec4993",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「相顾无言,惟有泪千行」\n「相顾无言，惟有泪千行」中「顾」的意思是\nA. 照顾\nB. 回头看\nC. 顾虑\nD. 拜访\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「相顾无言,惟有泪千行」中「顾」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1500:v11",
+      "word": "料得",
+      "sourceSentence": "料得年年肠断处",
+      "meaning": "料想、预料",
+      "explanation": "「料得」意为料想、估计，故选A。",
+      "type": "contextual-choice",
+      "difficulty": 2,
+      "question": "「料得年年肠断处」中「料得」的意思是",
+      "options": [
+        "预料",
+        "准备",
+        "计算",
+        "获得"
+      ],
+      "answerIndex": 0,
+      "sourceAnswer": "预料",
+      "sourceRefs": [],
+      "version": "vocab-set-a11ff7cb2cec4993",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「料得年年肠断处」\n「料得年年肠断处」中「料得」的意思是\nA. 预料\nB. 准备\nC. 计算\nD. 获得\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「料得年年肠断处」中「料得」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1500:v12",
+      "word": "肠断",
+      "sourceSentence": "料得年年肠断处",
+      "meaning": "形容极度悲伤",
+      "explanation": "「肠断」是形容悲伤到了极点，此处指代王弗坟茔所在地，故选B。",
+      "type": "interpretation",
+      "difficulty": 3,
+      "question": "对「料得年年肠断处」一句的理解，最恰当的一项是",
+      "options": [
+        "料想到每年都有肠子断裂的地方",
+        "预料到每年最令作者肝肠寸断的地方",
+        "计算每年在山冈上悲伤的时间",
+        "指每年都要在山冈上进行祭奠"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "预料到每年最令作者肝肠寸断的地方",
+      "sourceRefs": [],
+      "version": "vocab-set-a11ff7cb2cec4993",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「料得年年肠断处」\n对「料得年年肠断处」一句的理解，最恰当的一项是\nA. 料想到每年都有肠子断裂的地方\nB. 预料到每年最令作者肝肠寸断的地方\nC. 计算每年在山冈上悲伤的时间\nD. 指每年都要在山冈上进行祭奠\n請選出答案，並用自己的話說明判斷依據。",
+        "「料得年年肠断处」中的「肠断」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
+      ]
+    }
+  ],
+  "legacy": {
+    "lessonId": "lesson-1500",
+    "title": "江城子·乙卯正月二十日夜记梦/苏轼",
+    "mode": "poetry",
+    "legacyTracks": [
+      "context",
+      "vocabulary",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "初讀評議",
+        "",
+        10
+      ],
+      [
+        "vocabulary",
+        "詞級疏通",
+        "",
+        25
+      ],
+      [
+        "read",
+        "通讀正文",
+        "",
+        10
+      ],
+      [
+        "revision",
+        "字句之改",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "詩脈轉折",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "篇目評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "叩問作者",
+        "",
+        10
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1500:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1500:interaction:contextWords",
+        "resourceVersion": "sha256:8bab036b6a5a5fbc6a4c4a8333bc9f50a5b81da205efbc5918c23118fa076ca4",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1500:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1500:interaction:revision",
+        "resourceVersion": "sha256:cfd6428783b55a9075decb61f4a6a0a7d150021f9b4166bdaf8d2514657dc838",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1500:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1500:interaction:structure",
+        "resourceVersion": "sha256:53e82eb6b9890189edaa1ed1370c79a67bfb93403116b5e34ea42edfa15de981",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1500:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1500:interaction:evaluation",
+        "resourceVersion": "sha256:4176e5df7da9062b97b0b686b78563e503cee87d18cf26004175eaa68c997745",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1500:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1500:interaction:authorQuestion",
+        "resourceVersion": "sha256:22b0a62ab22603332341b3afb8828a326c628de8222e9e26481e6ebc004186f1",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v06",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v06",
+        "resourceVersion": "sha256:124a2f6faa677a0ee7117f39fa0b4993ec032ce6630126df2984f890de5d3185",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v07",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v07",
+        "resourceVersion": "sha256:8f70059aa341499864c8d7cb3455a00a7bd6aa28ad545aa23a5a5ced89ac0b89",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v08",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v08",
+        "resourceVersion": "sha256:d690b7bfc6a524dfffac01efc4e87d2e4b6c9ed2fb4e32be99c4c1a72f24e252",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v09",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v09",
+        "resourceVersion": "sha256:cc0f242aab6d9e134855a3cbaf063b4eabf1f0e601f1ac0fe0ac822b8d4572bc",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v10",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v10",
+        "resourceVersion": "sha256:3ba3592c83925839de878293314009abb0ee348ecfdba22dce309a2e2e009ede",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v11",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v11",
+        "resourceVersion": "sha256:7bd0ca43091b2f368d451327927a2367d3b8eb64d4a6474eb75a8ef540f48ce0",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v12",
+        "canonicalUnitId": "yw:lesson-1500:vocabulary:lesson-1500:v12",
+        "resourceVersion": "sha256:1498a7a70bd2c9979e2b9c4ee6ea07779f4a13c5ef8c9f0485736ddd1dff3bdb",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1500:interaction:wordCreation",
+        "canonicalUnitId": "yw:lesson-1500:interaction:wordCreation",
+        "resourceVersion": "sha256:9f07d27939a0baee9b2d268a7ebd5bfe6919a0ebb80fb393e02dcf09089676c7",
+        "questionKind": "wordCreation",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1500",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1500:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1500:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1500:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1500",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1500:interaction:contextWords",
+        "completionKey": "effect:lesson-1500:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1500:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1500",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1500:interaction:structure",
+        "completionKey": "effect:lesson-1500:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1500:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1500",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1500:interaction:revision",
+        "completionKey": "effect:lesson-1500:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1500:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1500",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1500:interaction:wordCreation",
+        "completionKey": "effect:lesson-1500:interaction:wordCreation#wordCreation",
+        "interactionKey": "wordCreation",
+        "resourceKey": "effect:lesson-1500:interaction:wordCreation",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1500",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1500:vocab:lesson-1500:v06",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v06#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v06",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1500",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1500:vocab:lesson-1500:v07",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v07#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v07",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1500",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1500:vocab:lesson-1500:v08",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v08#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v08",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1500",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1500:vocab:lesson-1500:v09",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v09#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v09",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1500",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1500:vocab:lesson-1500:v10",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v10#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v10",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1500",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1500:vocab:lesson-1500:v11",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v11#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v11",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1500",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1500:vocab:lesson-1500:v12",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v12#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v12",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [
+      "lesson-1500:v06",
+      "lesson-1500:v07",
+      "lesson-1500:v08",
+      "lesson-1500:v09",
+      "lesson-1500:v10",
+      "lesson-1500:v11",
+      "lesson-1500:v12"
+    ],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1500:interaction:contextWords",
+        "sourceVersion": "sha256:8bab036b6a5a5fbc6a4c4a8333bc9f50a5b81da205efbc5918c23118fa076ca4",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1500:interaction:revision",
+        "sourceVersion": "sha256:cfd6428783b55a9075decb61f4a6a0a7d150021f9b4166bdaf8d2514657dc838",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1500:interaction:structure",
+        "sourceVersion": "sha256:53e82eb6b9890189edaa1ed1370c79a67bfb93403116b5e34ea42edfa15de981",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1500:interaction:evaluation",
+        "sourceVersion": "sha256:4176e5df7da9062b97b0b686b78563e503cee87d18cf26004175eaa68c997745",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1500:interaction:authorQuestion",
+        "sourceVersion": "sha256:22b0a62ab22603332341b3afb8828a326c628de8222e9e26481e6ebc004186f1",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1500:vocab:lesson-1500:v06",
+        "sourceVersion": "sha256:124a2f6faa677a0ee7117f39fa0b4993ec032ce6630126df2984f890de5d3185",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1500:vocab:lesson-1500:v07",
+        "sourceVersion": "sha256:8f70059aa341499864c8d7cb3455a00a7bd6aa28ad545aa23a5a5ced89ac0b89",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1500:vocab:lesson-1500:v08",
+        "sourceVersion": "sha256:d690b7bfc6a524dfffac01efc4e87d2e4b6c9ed2fb4e32be99c4c1a72f24e252",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1500:vocab:lesson-1500:v09",
+        "sourceVersion": "sha256:cc0f242aab6d9e134855a3cbaf063b4eabf1f0e601f1ac0fe0ac822b8d4572bc",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1500:vocab:lesson-1500:v10",
+        "sourceVersion": "sha256:3ba3592c83925839de878293314009abb0ee348ecfdba22dce309a2e2e009ede",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1500:vocab:lesson-1500:v11",
+        "sourceVersion": "sha256:7bd0ca43091b2f368d451327927a2367d3b8eb64d4a6474eb75a8ef540f48ce0",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1500:vocab:lesson-1500:v12",
+        "sourceVersion": "sha256:1498a7a70bd2c9979e2b9c4ee6ea07779f4a13c5ef8c9f0485736ddd1dff3bdb",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1500:interaction:wordCreation",
+        "sourceVersion": "sha256:9f07d27939a0baee9b2d268a7ebd5bfe6919a0ebb80fb393e02dcf09089676c7",
+        "source": "formal",
+        "dialogueDomain": "wordCreation",
+        "conversationEquivalent": "選一個剛疏通的詞，用於三行短詩（詩歌）、三句對白（戲劇）、三句微型敘事（小說）或三句話；核對詞義、語境及搭配。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1500:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1500:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1500:interaction:contextWords",
+        "completionKey": "effect:lesson-1500:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1500:interaction:structure",
+        "completionKey": "effect:lesson-1500:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1500:interaction:revision",
+        "completionKey": "effect:lesson-1500:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1500:interaction:wordCreation",
+        "completionKey": "effect:lesson-1500:interaction:wordCreation#wordCreation",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "wordCreation",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1500:vocab:lesson-1500:v06",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v06#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1500:vocab:lesson-1500:v07",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v07#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1500:vocab:lesson-1500:v08",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v08#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1500:vocab:lesson-1500:v09",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v09#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1500:vocab:lesson-1500:v10",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v10#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1500:vocab:lesson-1500:v11",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v11#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1500:vocab:lesson-1500:v12",
+        "completionKey": "effect:lesson-1500:vocab:lesson-1500:v12#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [
+      {
+        "id": "poetry-word-creation",
+        "rule": "選一個剛疏通的詞，用於三行短詩（詩歌）、三句對白（戲劇）、三句微型敘事（小說）或三句話；核對詞義、語境及搭配。",
+        "storage": "original wordCreation record + separate new dialogue evidence",
+        "status": "original-word-creation-rubric-bridged-new-mastery-separate"
+      }
+    ],
+    "sourceLesson": "data/lessons/lesson-1500.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "vocabulary",
+        "dialogueDomain": "vocabulary",
+        "evidenceRule": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "vocabulary",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 13,
+        "formativeCount": 12,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": true,
+        "status": "source-items-present-calibration-pending",
+        "areaSources": {
+          "vocabulary": [
+            "lesson-1500:v06",
+            "lesson-1500:v07",
+            "lesson-1500:v08",
+            "lesson-1500:v09",
+            "lesson-1500:v10",
+            "lesson-1500:v11",
+            "lesson-1500:v12"
+          ],
+          "functionWords": [
+            "lesson-1500:corpus-function-word"
+          ],
+          "grammar": [
+            "lesson-1500:corpus-grammar"
+          ]
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [
+          "xc-corpus-不"
+        ],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [
+    {
+      "id": "lesson-1500:corpus-function-word",
+      "word": "不",
+      "type": "function-word",
+      "sourceSentence": "不思量，自难忘",
+      "passageQuotes": [
+        "不思量，自难忘"
+      ],
+      "meaning": "否定副詞，否定主動思量。",
+      "explanation": "前句縱不刻意想，後句仍自然難忘；不能從不思量推成沒有情感或徹底遺忘。",
+      "annotationIds": [],
+      "proposedDemand": "context-comparison-and-independent-explanation",
+      "difficulty": null,
+      "calibrationStatus": "pending-real-model",
+      "scoringRole": "none",
+      "variants": [
+        "讀「不思量，自难忘」。請用自己的話改寫句意，說明「不」在此句的意思、所連接或修飾的內容，並引用原句作依據。",
+        "有人把「不思量，自难忘」理解為「不思量等於已經忘記亡妻」。請判斷這樣理解是否成立，引用原句或相鄰文句說明，再提出準確的改寫。"
+      ],
+      "misconceptions": [
+        "不思量等於已經忘記亡妻"
+      ],
+      "masteryCriteria": [
+        {
+          "id": "source_reading",
+          "requirement": "準確引用原句並辨認目標詞或句法成分。"
+        },
+        {
+          "id": "context_analysis",
+          "requirement": "否定副詞，否定主動思量。 前句縱不刻意想，後句仍自然難忘；不能從不思量推成沒有情感或徹底遺忘。"
+        },
+        {
+          "id": "independent_transfer",
+          "requirement": "獨立說明另一個提問中的誤讀，保留原句施受、時間、語氣或邏輯關係；只抄提示不足。"
+        }
+      ],
+      "sourceEvidence": {
+        "kind": "new-unscored-contextual-analysis",
+        "readerPath": "data/reader-documents/lesson-1500.json",
+        "readerSha256": "9536261771f27ff453fb8075e7f50347094cb4c33b1e084fb012fe5861fcabd2",
+        "passageId": "lesson-1500:p1",
+        "passageSha256": "14d9a486a7161609ef8dc51a7ea1ee70f11048d6a2715f4d4c42cdea74c75d8b",
+        "quotationPolicy": "exact-original-substring",
+        "analysisAuthority": "authored-learning-support; not-original-consequential-rubric",
+        "supplementVersion": "yw-dialogue-classical-language-20261013-v2"
+      },
+      "dictionaryId": "xc-corpus-不",
+      "dictionaryStatus": "source-image-verified",
+      "sourceVerification": {
+        "status": "xc-page-scope-verified",
+        "xcEntryId": "e-p047_R-7",
+        "printedPages": [
+          35,
+          36
+        ],
+        "pdfPages": [
+          47,
+          48
+        ],
+        "analysisStatus": "authored-contextual-interpretation",
+        "notice": "字典所列詞義範圍已核對；本課語境分析為教學解讀，並非原書收錄答案。"
+      },
+      "sourcePassages": [
+        "lesson-1500:p1"
+      ],
+      "version": "yw-language-e3328f2fab5ec43e1aeb",
+      "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
+    },
+    {
+      "id": "lesson-1500:corpus-grammar",
+      "word": "夢境中的人物與動作",
+      "type": "grammar",
+      "sourceSentence": "小轩窗，正梳妆",
+      "passageQuotes": [
+        "小轩窗，正梳妆",
+        "夜来幽梦忽还乡",
+        "相顾无言"
+      ],
+      "meaning": "夢中還鄉後所見的是妻子在窗前梳妝；相顧寫夢中的我與妻子相對。",
+      "explanation": "結合幽夢、原注所述亡妻及後文相顧，辨明夢中觀看者與梳妝者。能說清人物和動作的關係即可，不要求使用省略主語或視角轉換一詞，也不延伸判定結尾料得等句的唯一視角。",
+      "annotationIds": [],
+      "proposedDemand": "context-comparison-and-independent-explanation",
+      "difficulty": null,
+      "calibrationStatus": "pending-real-model",
+      "scoringRole": "none",
+      "variants": [
+        "讀「夜来幽梦忽还乡。小轩窗，正梳妆」，再聯繫「相顾无言」。誰夢中還鄉？所見誰在梳妝？請依上下文改寫，說明人物與動作的關係。",
+        "有人把「小轩窗，正梳妆」理解為「我還鄉所以正梳妝的一定也是我」。請判斷這樣理解是否成立，引用原句或相鄰文句說明，再提出準確的改寫。"
+      ],
+      "misconceptions": [
+        "我還鄉所以正梳妝的一定也是我"
+      ],
+      "masteryCriteria": [
+        {
+          "id": "source_reading",
+          "requirement": "準確引用與回答相關的原句，辨明人物、動作、對象或疑問焦點；不以術語背誦替代句意理解。"
+        },
+        {
+          "id": "context_analysis",
+          "requirement": "夢中還鄉後所見的是妻子在窗前梳妝；相顧寫夢中的我與妻子相對。 結合幽夢、原注所述亡妻及後文相顧，辨明夢中觀看者與梳妝者。能說清人物和動作的關係即可，不要求使用省略主語或視角轉換一詞，也不延伸判定結尾料得等句的唯一視角。"
+        },
+        {
+          "id": "independent_transfer",
+          "requirement": "獨立說明另一個提問中的誤讀，保留原句施受、時間、語氣或邏輯關係；只抄提示不足。"
+        }
+      ],
+      "sourceEvidence": {
+        "kind": "new-unscored-contextual-analysis",
+        "readerPath": "data/reader-documents/lesson-1500.json",
+        "readerSha256": "9536261771f27ff453fb8075e7f50347094cb4c33b1e084fb012fe5861fcabd2",
+        "passageId": "lesson-1500:p4",
+        "passageSha256": "c552e4f1691a3fd93e88817b6c52365156bb51b1025acdf63197e1826015fe3c",
+        "quotationPolicy": "exact-original-substring",
+        "analysisAuthority": "authored-learning-support; not-original-consequential-rubric",
+        "supplementVersion": "yw-dialogue-classical-language-20261013-v2"
+      },
+      "sourceVerification": {
+        "status": "source-context-reviewed",
+        "reviewId": "yw-three-grammar-source-followup-20261013-v1",
+        "reviewedAt": "2026-10-13T04:42:53Z",
+        "analysisStatus": "authored-contextual-interpretation",
+        "scope": "直接說明夢中重見妻子梳妝及兩人相顧；不採用結尾視角作唯一判準。",
+        "notice": "本項為具逐項來源支持的語境教學分析，只在所列人物、動作或問答關係範圍內採納；不是唯一句法分類，也不是模型校準、學生掌握或原教材評分結論。",
+        "authority": "independent-primary-source-context-review",
+        "evidence": {
+          "readerPath": "data/reader-documents/lesson-1500.json",
+          "readerSha256": "9536261771f27ff453fb8075e7f50347094cb4c33b1e084fb012fe5861fcabd2",
+          "passages": [
+            {
+              "id": "lesson-1500:p4",
+              "sha256": "c552e4f1691a3fd93e88817b6c52365156bb51b1025acdf63197e1826015fe3c",
+              "quotes": [
+                "小轩窗，正梳妆",
+                "夜来幽梦忽还乡"
+              ]
+            },
+            {
+              "id": "lesson-1500:p5",
+              "sha256": "5293542b54313b732f3c5c3ab56db6950fc196a46524261189a432c3aeee3234",
+              "quotes": [
+                "相顾无言"
+              ]
+            }
+          ],
+          "annotations": [
+            {
+              "noteId": "footnote-10084-2",
+              "sha256": "278874bd253c92f44f55c91f5a84a5f52eb3b0f5114f1ef0f3a8c60d50c34e63"
+            },
+            {
+              "noteId": "footnote-10084-3",
+              "sha256": "5a5fc755ea8af08715e1798675b8f714439a4e42b1a99d30ee2a4d318326f63c"
+            },
+            {
+              "noteId": "footnote-10084-4",
+              "sha256": "98aae18a36f70775afb890673df8bc892cd91f1334a5586deca3f905ab8ff58b"
+            }
+          ],
+          "readingMaterials": []
+        },
+        "primaryReferences": [
+          {
+            "sourceId": "edb-pth-lt-26-jiang-cheng-zi",
+            "title": "《江城子》朗讀小提示（編號26）",
+            "publisher": "香港教育局",
+            "url": "https://www.edb.gov.hk/attachment/tc/curriculum-development/kla/chi-edu/resources/pth_lt/26_jiang_cheng_zi.pdf",
+            "page": null,
+            "pdfPage": 1,
+            "zeroBasedPdfPage": 0,
+            "locator": "單頁PDF，朗讀小提示：下片記夢段；工具抽取第16–17行。頁面沒有印刷頁碼。",
+            "supportKind": "primary institutional teaching interpretation",
+            "scope": "直接說明夢中重見妻子梳妝及兩人相顧；不採用結尾視角作唯一判準。",
+            "access": "actual source text read through web tool; no local PDF, page-image or render created",
+            "readStatus": "actual-content-read",
+            "reviewedAt": "2026-10-13T04:42:53Z"
+          }
+        ],
+        "analysisSha256": "17acfeb23e67ff3a215fec9c9971131ae661ed1009f5947b6f5d78274e2f6b57"
+      },
+      "sourcePassages": [
+        "lesson-1500:p4",
+        "lesson-1500:p5"
+      ],
+      "version": "yw-language-9ae89a386dd0731e51cf",
+      "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
+    }
+  ],
+  "dictionary": [
+    {
+      "id": "xc-corpus-不",
+      "headword": "不",
+      "entryId": "e-p047_R-7",
+      "edition": "1999 年 2 月第 1 版",
+      "url": "https://xc.bdfz.net/#entry/e-p047_R-7",
+      "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p047_R-7",
+      "sourcePdfSha256": "a60dcbdca401b2445eeca3e09d6db0fb879d9f5d641781bc2b27c7757249cfaa",
+      "localSources": [
+        {
+          "path": "xuci-ocr/work/final/cols/p047_L.txt",
+          "sha256": "1611dd2aef690cb16f6e12851f3ec835e249dbc5133a3fe38a0d8b461008acfd"
+        },
+        {
+          "path": "xuci-ocr/work/final/cols/p047_R.txt",
+          "sha256": "49ea9f4eaa91ede7f5d21260e9e0295625143c130439995356b2cec44f744160"
+        },
+        {
+          "path": "xuci-ocr/work/final/cols/p048_L.txt",
+          "sha256": "2093e0ad4121e14782babaddbcef82ab3006c86529193fdc414d8c29dc2909da"
+        },
+        {
+          "path": "xuci-ocr/work/final/cols/p048_R.txt",
+          "sha256": "b1b846b8e80539b33655d44478f4cf2dc79a9d748912e6764c2fb769ce12431d"
+        }
+      ],
+      "pages": [
+        {
+          "pdfPage": 47,
+          "printedPage": 35,
+          "url": "https://dict.bdfz.net/source/xc/images/p047.png",
+          "imageSha256": "bf77d48f217c06632821199a0c2d3771f0d7aeddca174e462b31da2a6b71d058",
+          "verifiedScope": "副詞一：否定一般動作行為。"
+        },
+        {
+          "pdfPage": 48,
+          "printedPage": 36,
+          "url": "https://dict.bdfz.net/source/xc/images/p048.png",
+          "imageSha256": "5438ed8b2be183af013920a97f9a1ef8a881f25b266adf046660134b2c254249",
+          "verifiedScope": "副詞二、五：否定狀態、心理活動及性質。"
+        }
+      ],
+      "verificationStatus": "source-image-verified",
+      "verifiedAt": "2026-10-13T01:49:02Z",
+      "verification": "只目視核對所列頁圖中的指定詞義範圍；不宣稱整部 OCR 或整個詞條完成校勘。各課具體句法與效果為另行撰寫的語境分析，不宣稱字典收錄每一課例句。",
+      "entryLocator": {
+        "columnPath": "xuci-ocr/work/final/cols/p047_R.txt",
+        "zeroBasedLine": 7,
+        "columnSha256": "49ea9f4eaa91ede7f5d21260e9e0295625143c130439995356b2cec44f744160",
+        "observedHeading": "不bù",
+        "basis": "XC canonical build entry identity from adjudicated column; image verification limited to listed page scopes"
+      },
+      "sourceRootAlias": "CF/sites/tools"
+    }
+  ],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-4d90bbb92cf082bab25d",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [
+    {
+      "id": "lesson-1500:p7",
+      "text": "生死相隔，深情难忘。这首悼亡词一开篇便抒发作者对妻子诚笃的感情。\n生死，是一种隔；\n妻子葬于千里外的故乡，是一种隔；\n岁月沧桑，即使相逢也认不出，又是一种隔；\n梦中还乡，四目相对，千言万语无从谈起，还是一种隔。\n在对梦境的淡淡追述中，将死别之悲、独处之苦、世路之艰写得极为沉痛。\n诵读这首词，留意细节描写，体会作者是如何把梦境的记述、对亡妻的思念和落拓的身世之感融合在一起的。\n生死相念，茫茫的是岁月时光，横亘的，是无变相思。\n生死，有念；\n千里孤坟，一话或无话，是念；\n相守未终老，阴阳隔断，使尘鬓不识，但，我念。\n梦还乡，目相对，无言是念，泪行是念。\n明月是念，短松是念，肠断不断，我所念，皆是你。\n死生，无论，\n独偶，无计，\n世路利艰，无关。\n诵读这首词，留意细节描写，体会作者是如何把梦境的记述、对亡妻的思念和落拓的身世之感融合在一起的。",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "生死相隔，深情难忘。这首悼亡词一开篇便抒发作者对妻子诚笃的感情。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "生死，是一种隔；",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "妻子葬于千里外的故乡，是一种隔；",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "岁月沧桑，即使相逢也认不出，又是一种隔；",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "梦中还乡，四目相对，千言万语无从谈起，还是一种隔。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "在对梦境的淡淡追述中，将死别之悲、独处之苦、世路之艰写得极为沉痛。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "诵读这首词，留意细节描写，体会作者是如何把梦境的记述、对亡妻的思念和落拓的身世之感融合在一起的。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "生死相念，茫茫的是岁月时光，横亘的，是无变相思。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "生死，有念；",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "千里孤坟，一话或无话，是念；",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "相守未终老，阴阳隔断，使尘鬓不识，但，我念。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "梦还乡，目相对，无言是念，泪行是念。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "明月是念，短松是念，肠断不断，我所念，皆是你。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "死生，无论，",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "独偶，无计，",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "世路利艰，无关。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "诵读这首词，留意细节描写，体会作者是如何把梦境的记述、对亡妻的思念和落拓的身世之感融合在一起的。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      },
+      "blockIndex": 6,
+      "blockSha256": "ff65b17aa314b8b0ebfabfb7d7b1b29d9a9a8825acbf6b585d74c9b377e48691",
+      "role": "commentary",
+      "label": "原課導讀與教學參考（非本篇正文）",
+      "source": "data/reader-documents/lesson-1500.json#main.blocks[6]",
+      "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+    }
+  ],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《东坡乐府笺》卷一（上海古籍出版社2009年版）。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        },
+        {
+          "runs": [
+            {
+              "text": "这首词作于宋神宗熙宁八年（1075），是苏轼在密州（今山东诸城）做知州时悼念妻子王弗的作品。王弗去世于宋英宗治平二年（1065）。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "type": "quote"
+    }
+  ],
+  "guidance": [],
+  "media": [],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1500.json",
+    "lessonSha256": "183d06a2f147401f68010079799ad265d94665f781e655394b02a0cac3bd1fc1",
+    "reader": "data/reader-documents/lesson-1500.json",
+    "readerSha256": "9536261771f27ff453fb8075e7f50347094cb4c33b1e084fb012fe5861fcabd2",
+    "sourcePostId": 10084,
+    "sourcePostNumber": 1,
+    "blockCount": 7,
+    "annotationCount": 5,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "vocabulary",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 13,
+      "formativeCount": 12,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": true,
+      "status": "source-items-present-calibration-pending",
+      "areaSources": {
+        "vocabulary": [
+          "lesson-1500:v06",
+          "lesson-1500:v07",
+          "lesson-1500:v08",
+          "lesson-1500:v09",
+          "lesson-1500:v10",
+          "lesson-1500:v11",
+          "lesson-1500:v12"
+        ],
+        "functionWords": [
+          "lesson-1500:corpus-function-word"
+        ],
+        "grammar": [
+          "lesson-1500:corpus-grammar"
+        ]
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [
+        "xc-corpus-不"
+      ],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

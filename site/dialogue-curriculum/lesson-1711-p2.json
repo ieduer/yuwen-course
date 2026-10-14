@@ -1,0 +1,3502 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1711-p2",
+  "title": "师说",
+  "mode": "classical",
+  "author": "韩愈",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1711-p2:p1",
+      "text": "师 说\n\n韩 愈\n\n古之学者 必有师。师者，所以传道受业解惑也。人非生而知之者，孰能无惑？惑而不从师，其为惑也，终不解矣。生乎吾前，其闻道也固先乎吾，吾从而师之；生乎吾后，其闻道也亦先乎吾，吾从而师之。吾师道也，夫庸知其年之先后生于吾乎？是故无贵无贱，无长无少，道之所存，师之所存也。\n\n嗟乎！师道之不传也久矣！欲人之无惑也难矣！古之圣人，其出人也远矣，犹且从师而问焉；今之众人，其下圣人也亦远矣，而耻学于师。是故圣益圣，愚益愚。圣人之所以为圣，愚人之所以为愚，其皆出于此乎？爱其子，择师而教之；于其身也，则耻师焉，惑矣。彼童子之师，授之书而习其句读者，非吾所谓传其道解其惑者也。句读之不知，惑之不解，或师焉，或不焉，小学而大遗，吾未见其明也。巫医乐师百工之人，不耻相师。士大夫之族，曰师曰弟子云者，则群聚而笑之。问之，则曰：“彼与彼年相若也，道相似也，位卑则足羞，官盛则近谀。”呜呼！师道之不复，可知矣。巫医乐师百工之人，君子不齿，今其智乃反不能及，其可怪也欤！\n\n圣人无常师。孔子师郯子、苌弘、师襄、老聃。郯子之徒，其贤 不及孔子。孔子曰：三人行，则必有我师。是故弟子不必 不如师，师不必贤 于弟子，闻道有先后，术业 有专攻，如是而已。\n\n李氏子蟠，年十七，好古文，六艺经传皆通习之，不拘于时，学于余。余嘉其能行古道，作《师说》以贻之。",
+      "block": {
+        "runs": [
+          {
+            "text": "师 说",
+            "type": "text"
+          },
+          {
+            "label": "[1]",
+            "noteId": "footnote-11144-1",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "\n\n韩 愈\n\n古之学者",
+            "type": "text"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-11144-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": " 必有师。师者，所以传道受业解惑也",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-11144-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。人非生而知之",
+            "type": "text"
+          },
+          {
+            "label": "[4]",
+            "noteId": "footnote-11144-4",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "者，孰能无惑？惑而不从师，其为惑也",
+            "type": "text"
+          },
+          {
+            "label": "[5]",
+            "noteId": "footnote-11144-5",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，终不解矣。生乎吾前，其闻",
+            "type": "text"
+          },
+          {
+            "label": "[6]",
+            "noteId": "footnote-11144-6",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "道也固先乎吾，吾从而师之",
+            "type": "text"
+          },
+          {
+            "label": "[7]",
+            "noteId": "footnote-11144-7",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "；生乎吾后，其闻道也亦先乎吾，吾从而师之。吾师道也",
+            "type": "text"
+          },
+          {
+            "label": "[8]",
+            "noteId": "footnote-11144-8",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，夫庸知其年之先后生于吾乎",
+            "type": "text"
+          },
+          {
+            "label": "[9]",
+            "noteId": "footnote-11144-9",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "？是故无贵无贱",
+            "type": "text"
+          },
+          {
+            "label": "[10]",
+            "noteId": "footnote-11144-10",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，无长无少，道之所存，师之所存也",
+            "type": "text"
+          },
+          {
+            "label": "[11]",
+            "noteId": "footnote-11144-11",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。\n\n嗟乎！师道",
+            "type": "text"
+          },
+          {
+            "label": "[12]",
+            "noteId": "footnote-11144-12",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "之不传也久矣！欲人之无惑也难矣！古之圣人，其出人",
+            "type": "text"
+          },
+          {
+            "label": "[13]",
+            "noteId": "footnote-11144-13",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "也远矣，犹且",
+            "type": "text"
+          },
+          {
+            "label": "[14]",
+            "noteId": "footnote-11144-14",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "从师而问焉；今之众人",
+            "type": "text"
+          },
+          {
+            "label": "[15]",
+            "noteId": "footnote-11144-15",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，其下圣人也亦远矣，而耻学于师。是故圣益圣，愚益愚",
+            "type": "text"
+          },
+          {
+            "label": "[16]",
+            "noteId": "footnote-11144-16",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。圣人之所以为圣，愚人之所以为愚，其皆出于此乎？爱其子，择师而教之；于其身",
+            "type": "text"
+          },
+          {
+            "label": "[17]",
+            "noteId": "footnote-11144-17",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "也，则耻师",
+            "type": "text"
+          },
+          {
+            "label": "[18]",
+            "noteId": "footnote-11144-18",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "焉，惑",
+            "type": "text"
+          },
+          {
+            "label": "[19]",
+            "noteId": "footnote-11144-19",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "矣。彼童子",
+            "type": "text"
+          },
+          {
+            "label": "[20]",
+            "noteId": "footnote-11144-20",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "之师，授之书而习其句读",
+            "type": "text"
+          },
+          {
+            "label": "[21]",
+            "noteId": "footnote-11144-21",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "者，非吾所谓传其道解其惑者也。句读之不知",
+            "type": "text"
+          },
+          {
+            "label": "[22]",
+            "noteId": "footnote-11144-22",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，惑之不解，或师焉，或不焉",
+            "type": "text"
+          },
+          {
+            "label": "[23]",
+            "noteId": "footnote-11144-23",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，小学而大遗",
+            "type": "text"
+          },
+          {
+            "label": "[24]",
+            "noteId": "footnote-11144-24",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，吾未见其明也。巫医",
+            "type": "text"
+          },
+          {
+            "label": "[25]",
+            "noteId": "footnote-11144-25",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "乐师",
+            "type": "text"
+          },
+          {
+            "label": "[26]",
+            "noteId": "footnote-11144-26",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "百工",
+            "type": "text"
+          },
+          {
+            "label": "[27]",
+            "noteId": "footnote-11144-27",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "之人，不耻相师",
+            "type": "text"
+          },
+          {
+            "label": "[28]",
+            "noteId": "footnote-11144-28",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。士大夫之族",
+            "type": "text"
+          },
+          {
+            "label": "[29]",
+            "noteId": "footnote-11144-29",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，曰师曰弟子云者",
+            "type": "text"
+          },
+          {
+            "label": "[30]",
+            "noteId": "footnote-11144-30",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，则群聚而笑之。问之，则曰：“彼与彼年相若",
+            "type": "text"
+          },
+          {
+            "label": "[31]",
+            "noteId": "footnote-11144-31",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "也，道相似也，位卑则足羞，官盛则近谀",
+            "type": "text"
+          },
+          {
+            "label": "[32]",
+            "noteId": "footnote-11144-32",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。”呜呼！师道之不复，可知矣。巫医乐师百工之人，君子不齿",
+            "type": "text"
+          },
+          {
+            "label": "[33]",
+            "noteId": "footnote-11144-33",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，今其智乃",
+            "type": "text"
+          },
+          {
+            "label": "[34]",
+            "noteId": "footnote-11144-34",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "反不能及，其可怪也欤",
+            "type": "text"
+          },
+          {
+            "label": "[35]",
+            "noteId": "footnote-11144-35",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "！\n\n圣人无常师",
+            "type": "text"
+          },
+          {
+            "label": "[36]",
+            "noteId": "footnote-11144-36",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。孔子师郯子",
+            "type": "text"
+          },
+          {
+            "label": "[37]",
+            "noteId": "footnote-11144-37",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "、苌弘",
+            "type": "text"
+          },
+          {
+            "label": "[38]",
+            "noteId": "footnote-11144-38",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "、师襄",
+            "type": "text"
+          },
+          {
+            "label": "[39]",
+            "noteId": "footnote-11144-39",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "、老聃",
+            "type": "text"
+          },
+          {
+            "label": "[40]",
+            "noteId": "footnote-11144-40",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。郯子之徒",
+            "type": "text"
+          },
+          {
+            "label": "[41]",
+            "noteId": "footnote-11144-41",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，其贤",
+            "type": "text"
+          },
+          {
+            "label": "[42]",
+            "noteId": "footnote-11144-42",
+            "type": "annotation-ref"
+          },
+          {
+            "text": " 不及孔子。孔子曰：三人行，则必有我师",
+            "type": "text"
+          },
+          {
+            "label": "[43]",
+            "noteId": "footnote-11144-43",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。是故弟子不必",
+            "type": "text"
+          },
+          {
+            "label": "[44]",
+            "noteId": "footnote-11144-44",
+            "type": "annotation-ref"
+          },
+          {
+            "text": " 不如师，师不必贤",
+            "type": "text"
+          },
+          {
+            "label": "[45]",
+            "noteId": "footnote-11144-45",
+            "type": "annotation-ref"
+          },
+          {
+            "text": " 于弟子，闻道有先后，术业",
+            "type": "text"
+          },
+          {
+            "label": "[46]",
+            "noteId": "footnote-11144-46",
+            "type": "annotation-ref"
+          },
+          {
+            "text": " 有专攻",
+            "type": "text"
+          },
+          {
+            "label": "[47]",
+            "noteId": "footnote-11144-47",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，如是而已。\n\n李氏子蟠",
+            "type": "text"
+          },
+          {
+            "label": "[48]",
+            "noteId": "footnote-11144-48",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，年十七，好古文",
+            "type": "text"
+          },
+          {
+            "label": "[49]",
+            "noteId": "footnote-11144-49",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，六艺经传",
+            "type": "text"
+          },
+          {
+            "label": "[50]",
+            "noteId": "footnote-11144-50",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "皆通",
+            "type": "text"
+          },
+          {
+            "label": "[51]",
+            "noteId": "footnote-11144-51",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "习之，不拘于时",
+            "type": "text"
+          },
+          {
+            "label": "[52]",
+            "noteId": "footnote-11144-52",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，学于余。余嘉",
+            "type": "text"
+          },
+          {
+            "label": "[53]",
+            "noteId": "footnote-11144-53",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "其能行古道",
+            "type": "text"
+          },
+          {
+            "label": "[54]",
+            "noteId": "footnote-11144-54",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，作《师说》以贻",
+            "type": "text"
+          },
+          {
+            "label": "[55]",
+            "noteId": "footnote-11144-55",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "之。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《韩昌黎文集校注》卷一（上海古籍出版社1986 年版）。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "学者：求学的人。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "师者，所以传道受业解惑也：老师，是依靠他来传授道、教授学业、解除疑惑的人。所以，用来……的、凭它（他）来……的。受，同“授”，传授。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-3"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "生而知之：生下来就懂得知识和道理。之，指知识和道理。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-4"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "其为惑也：它们作为疑惑。其，它们，指不跟从老师学习而遗留下的问题。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-5"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "闻：知道，懂得。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-6"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "从而师之：跟随他学习，即以他为老师。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-7"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "吾师道也：我学习的是道。师，学习。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-8"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "夫庸知其年之先后生于吾乎：哪管他是生在我之前还是生在我之后呢？庸，表示反问语气。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-9"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "无贵无贱：意思是就从师问道来说，没有贵和贱的区分。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-10"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "道之所存，师之所存也：道存在的地方，就是老师在的地方。意思是谁懂得道，谁就是自己的老师。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-11"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "师道：尊师学习的风尚。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-12"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "出人：超出一般人。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-13"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "犹且：尚且，还。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-14"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "众人：一般人。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-15"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "圣益圣，愚益愚：圣人更加圣明，愚人更加愚昧。益，更加、越发。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-16"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "身：自己。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-17"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "耻师：以从师学习为耻。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-18"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "惑：糊涂。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-19"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "童子：未成年的男子。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-20"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "授之书而习其句读：教给他书本的文字，（帮助他）学习句读。句读，指断开句子的知识。一句话后面的停顿为句，一句话中间短暂的停顿为读。古书没有标点，所以要学习句读。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-21"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "句读之不知：不明句读。下文“惑之不解”结构同此。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-22"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "或师焉，或不焉：有的向老师学习，有的不向老师学习。前一个“或”指代“句读之不知”，后一个“或”指代“惑之不解”。不，同“否”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-23"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "小学而大遗：小的方面要学习，大的方面却放弃了。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-24"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "巫医：古代巫和医不分，故并举。巫主要以祝祷、占卜等为业，也为人治病。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-25"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "乐师：以演奏音乐为职业的人。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-26"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "百工：泛指各种工匠。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-27"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "不耻相师：不以拜别人为师为耻。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-28"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "族：类。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-29"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "曰师曰弟子云者：说谁是谁的老师、谁是谁的学生之类的话。云者，如此之类。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-30"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "年相若：年龄差不多。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-31"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "位卑则足羞，官盛则近谀：以地位低者为师，就感到十分耻辱；以官职高者为师，就觉得是近乎谄媚。谀，谄媚奉承。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-32"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "不齿：不与同列，意思是看不起。齿，并列、排列。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-33"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "乃：竟。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-34"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "欤（yú）：语气助词，表示感叹。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-35"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "常师：固定的老师。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-36"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "郯（tán）子（生卒年不详）：春秋时郯国（今山东郯城一带）的国君，孔子曾向他请教官职的名称。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-37"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "苌（cháng）弘（生卒年不详）：周敬王时的大夫，孔子曾向他请教过音乐方面的事情。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-38"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "师襄（生卒年不详）：春秋时鲁国的乐官，孔子曾跟他学过琴。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-39"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "老聃（dān）：即老子，孔子曾向他问过礼。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-40"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "郯子之徒：郯子那些人（指上面说的四个人）。徒，同类的人。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-41"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "贤：才德优秀。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-42"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "三人行，则必有我师：语出《论语·述而》。原句是：“三人行，必有我师焉。”",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-43"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "不必：不一定。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-44"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "贤：超过。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-45"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "术业：学术技艺。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-46"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "专攻：专门学习或研究。攻，学习、研究。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-47"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "李氏子蟠：李家的孩子叫蟠的。即李蟠，唐德宗贞元十九年（803）进士。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-48"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "古文：指先秦两汉时期的散文，与骈文相对。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-49"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "六艺经传（zhuàn）：六经的经文和传文。六艺，指《诗》《书》《礼》《乐》《易》《春秋》六种经书，其中《乐》久已失传。传，古代解释经书的著作。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-50"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "通：全面。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-51"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "不拘于时：不受时俗的限制。时，时俗，指当时士大夫中耻于从师的不良风气。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-52"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "嘉：赞许。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-53"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "古道：指古人从师之道。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-54"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "贻（yí）：赠送。。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11144-55"
+    }
+  ],
+  "resources": [],
+  "source": "https://forum.rdfzer.com/t/topic/1711",
+  "objectives": [
+    {
+      "id": "lesson-1711-p2:firstRead",
+      "domain": "firstRead",
+      "label": "無注疏初讀",
+      "criteria": [
+        "initial_response",
+        "uncertainty"
+      ],
+      "rule": "保留原無注疏初讀、疑點標記與解惑紀錄；在對話引用原記錄。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1711-p2:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1711-p2:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1711-p2:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1711-p2:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1711-p2:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1711-p2:v01",
+      "domain": "vocabulary",
+      "label": "字詞：闻",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：懂得、知道。語境義：懂得、知道。此处指通过学习而懂得道理，非单纯的听觉。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p2:v02",
+      "domain": "vocabulary",
+      "label": "字詞：生而知之",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：生下来就懂得知识和道理。語境義：生下来就懂得知识和道理。「生而知之」指天赋，非后天学习。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p2:v03",
+      "domain": "vocabulary",
+      "label": "字詞：师",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：孔子师郯子、苌弘、师襄、老聃。語境義：以……为师。题干中的「师」为意动用法，以……为师。选项B中「师」同样意动用法。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p2:v04",
+      "domain": "vocabulary",
+      "label": "字詞：所以",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：表凭借，用来……的。語境義：用来……的。「所以」在文言文中常固定为「所+以」，即「用来……的」。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p2:v05",
+      "domain": "vocabulary",
+      "label": "字詞：众人",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：普通人、一般人。語境義：一般人。古义指一般人，今义多指许多人。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p2:v06",
+      "domain": "vocabulary",
+      "label": "字詞：句读之不知",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：宾语前置句。語境義：不知道句读。「之」是宾语前置的标志，正常语序为「不知句读」「不解惑」。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p2:v07",
+      "domain": "vocabulary",
+      "label": "字詞：或",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：有的，有的。語境義：有的人。此处「或」作不定代词，指代某人。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p2:v08",
+      "domain": "vocabulary",
+      "label": "字詞：小学而大遗",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：形容词作名词，小的方面，大的方面。語境義：小的方面/大的方面。在此句中，「小」「大」均作名词使用，指代学习内容的范围。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p2:v09",
+      "domain": "vocabulary",
+      "label": "字詞：不齿",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：不屑同列，看不起。語境義：不屑同列。齿，排列。不齿，指不与同列，即看不起。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p2:v10",
+      "domain": "vocabulary",
+      "label": "字詞：不必",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：不一定。語境義：不一定。古义为不一定，今义多为不需要。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p2:v11",
+      "domain": "vocabulary",
+      "label": "字詞：庸",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：怎么、岂。語境義：怎么、岂。「庸」在此为疑问副词，表示反问。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p2:v12",
+      "domain": "vocabulary",
+      "label": "字詞：不拘于时",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：被动句。語境義：不受时俗限制。「于」引出动作的主动者，构成被动句。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1711-p2:v13",
+      "domain": "vocabulary",
+      "label": "字詞：反",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：反而。語境義：反而。此处「反」表示转折，意为反而。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1711-p2:interaction:structure",
+        "resourceVersion": "sha256:3de2125981d33d86096de04f187da6451ce0795867b3df937d1b116e00168804",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1711-p2:interaction:evaluation",
+        "resourceVersion": "sha256:8073467a06521d77c52f5e2875483fbcc2d1b4d5acc241add75151e8f9e811bd",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1711-p2:interaction:authorQuestion",
+        "resourceVersion": "sha256:c5a736244e5efc518365d7515ce94b4f9e58e982d41f9f60cf3481d4ca206f18",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:vocab:lesson-1711-p2:v01",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v01",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v01",
+        "resourceVersion": "sha256:acce1f6c5af96ae0b3783c6560ba6f4a2664036b1c38bd734a8e01f10dcdf9c7",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:vocab:lesson-1711-p2:v02",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v02",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v02",
+        "resourceVersion": "sha256:4052644f9da6123c7b256ab0a6e1f9b1a57820623236c33114047bbc2a502449",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:vocab:lesson-1711-p2:v03",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v03",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v03",
+        "resourceVersion": "sha256:77c63265ffc08c043286b8dd2a84309181cfbb3d8f509848c088c9b2c93bce4c",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:vocab:lesson-1711-p2:v04",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v04",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v04",
+        "resourceVersion": "sha256:b59abff042644c8f80119ddb457da614155511fa443e9680b24a529b1b57dacc",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:vocab:lesson-1711-p2:v05",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v05",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v05",
+        "resourceVersion": "sha256:6b31fb4290bf4e7c008c195f9a9b1df332af82f7a8a97ec5efb6c81847addf5a",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:vocab:lesson-1711-p2:v06",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v06",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v06",
+        "resourceVersion": "sha256:17a2b5d18b9c1c6d1499331a37406b25456ee689815ea8f0f3d0bfcc3caccfa9",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:vocab:lesson-1711-p2:v07",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v07",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v07",
+        "resourceVersion": "sha256:8a12df0092db6e0942d78d563c7931adfe0e3c8f9c092216c627e2bd65f7d7f7",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:vocab:lesson-1711-p2:v08",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v08",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v08",
+        "resourceVersion": "sha256:0c604e67ed5754c43bdbd3d0b19611e064a31e9b184120e78096c5b39763f9bf",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:vocab:lesson-1711-p2:v09",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v09",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v09",
+        "resourceVersion": "sha256:0e5f998fe7ae001a7fc8a1561d986992f638a0c0d6a560204072f33f79089f59",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:vocab:lesson-1711-p2:v10",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v10",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v10",
+        "resourceVersion": "sha256:49df9e588ae137ce032a493c7096fdddf8563fa52808beb88ddf280ce1a63fde",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:vocab:lesson-1711-p2:v11",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v11",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v11",
+        "resourceVersion": "sha256:2f0d124f9578c3161a2ec68d30b3d33337fe18343f29d93cbf6906ffd4faa64b",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:vocab:lesson-1711-p2:v12",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v12",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v12",
+        "resourceVersion": "sha256:fc4628d249ec2077c84501dbc022e7e8697af2420ca240617f7854b8bdfd9567",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1711-p2:vocab:lesson-1711-p2:v13",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v13",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v13",
+        "resourceVersion": "sha256:776c39023153477f39c19bfb10be25a4951d6aec800c26514b746eec52382084",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "lesson-1711-p2:corpus-function-word",
+      "domain": "vocabulary",
+      "label": "語言：而",
+      "criteria": [
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "字典所列詞義範圍已核對；本課語境分析為教學解讀，並非原書收錄答案。 連詞，表示轉折，可譯卻。 有疑惑通常需要從師，後項卻否定從師；對照「惑」與「不從師」的預期落差。 本項只記新對話證據，不改原有分數；來源或模型校準未完成時必須覆核。",
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "而只是時間上的然後"
+      ],
+      "remediation": "說明、語境比較、學生改述後再作新等值題；最多三次後保留原話供覆核。",
+      "scoringRole": "none"
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "lesson-1711-p2:v01",
+      "word": "闻",
+      "sourceSentence": "其闻 道也固先乎吾",
+      "meaning": "懂得、知道",
+      "explanation": "此处指通过学习而懂得道理，非单纯的听觉。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "「其闻道也固先乎吾」中「闻」的意思是",
+      "options": [
+        "听见",
+        "听说",
+        "懂得、知道",
+        "名声"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "懂得、知道",
+      "sourceRefs": [
+        "王力《古汉语常用字字典》"
+      ],
+      "version": "vocab-set-c54628c74a58d5d1",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「其闻 道也固先乎吾」\n「其闻道也固先乎吾」中「闻」的意思是\nA. 听见\nB. 听说\nC. 懂得、知道\nD. 名声\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「其闻 道也固先乎吾」中「闻」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p2:v02",
+      "word": "生而知之",
+      "sourceSentence": "人非生而知之 者",
+      "meaning": "生下来就懂得知识和道理",
+      "explanation": "「生而知之」指天赋，非后天学习。",
+      "type": "gu-jin",
+      "difficulty": 2,
+      "question": "「人非生而知之者」中「生而知之」的含义与下列哪项最接近？",
+      "options": [
+        "天生就具备某种技能",
+        "生下来就懂得知识和道理",
+        "通过后天学习而获得知识",
+        "出生后才开始认知世界"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "生下来就懂得知识和道理",
+      "sourceRefs": [
+        "《汉语大词典》"
+      ],
+      "version": "vocab-set-c54628c74a58d5d1",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「人非生而知之 者」\n「人非生而知之者」中「生而知之」的含义与下列哪项最接近？\nA. 天生就具备某种技能\nB. 生下来就懂得知识和道理\nC. 通过后天学习而获得知识\nD. 出生后才开始认知世界\n請選出答案，並用自己的話說明判斷依據。",
+        "回到「人非生而知之 者」：「生而知之」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p2:v03",
+      "word": "师",
+      "sourceSentence": "吾从而师之",
+      "meaning": "以……为师",
+      "explanation": "题干中的「师」为意动用法，以……为师。选项B中「师」同样意动用法。",
+      "type": "substitution",
+      "difficulty": 2,
+      "question": "「吾从而师之」中「师」的用法与下列哪项相同？",
+      "options": [
+        "师者，所以传道受业解惑也",
+        "孔子师郯子、苌弘、师襄、老聃",
+        "圣人无常师",
+        "古之学者必有师"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "孔子师郯子、苌弘、师襄、老聃",
+      "sourceRefs": [
+        "王力《古汉语常用字字典》"
+      ],
+      "version": "vocab-set-c54628c74a58d5d1",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「吾从而师之」\n「吾从而师之」中「师」的用法与下列哪项相同？\nA. 师者，所以传道受业解惑也\nB. 孔子师郯子、苌弘、师襄、老聃\nC. 圣人无常师\nD. 古之学者必有师\n請選出答案，並用自己的話說明判斷依據。",
+        "請用恰當的現代說法替換「吾从而师之」中的「师」，並解釋這個替換如何保留原句的意思。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p2:v04",
+      "word": "所以",
+      "sourceSentence": "师者，所以传道受业解惑也",
+      "meaning": "用来……的",
+      "explanation": "「所以」在文言文中常固定为「所+以」，即「用来……的」。",
+      "type": "usage",
+      "difficulty": 1,
+      "question": "「师者，所以传道受业解惑也」中「所以」的用法是",
+      "options": [
+        "表原因的连词",
+        "表结果的连词",
+        "表凭借，用来……的",
+        "表动作的对象"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "表凭借，用来……的",
+      "sourceRefs": [
+        "王力《古汉语常用字字典》"
+      ],
+      "version": "vocab-set-c54628c74a58d5d1",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「师者，所以传道受业解惑也」\n「师者，所以传道受业解惑也」中「所以」的用法是\nA. 表原因的连词\nB. 表结果的连词\nC. 表凭借，用来……的\nD. 表动作的对象\n請選出答案，並用自己的話說明判斷依據。",
+        "請改寫「师者，所以传道受业解惑也」的句意，解釋「所以」在句中的用法及語境依據；只報詞性名稱不足以說明。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p2:v05",
+      "word": "众人",
+      "sourceSentence": "今之众人 ，其下圣人也亦远矣",
+      "meaning": "一般人",
+      "explanation": "古义指一般人，今义多指许多人。",
+      "type": "gu-jin",
+      "difficulty": 1,
+      "question": "「今之众人」中「众人」的古义是",
+      "options": [
+        "大家、许多人",
+        "普通人、一般人",
+        "大众、百姓",
+        "一群人"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "普通人、一般人",
+      "sourceRefs": [
+        "《汉语大词典》"
+      ],
+      "version": "vocab-set-c54628c74a58d5d1",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「今之众人 ，其下圣人也亦远矣」\n「今之众人」中「众人」的古义是\nA. 大家、许多人\nB. 普通人、一般人\nC. 大众、百姓\nD. 一群人\n請選出答案，並用自己的話說明判斷依據。",
+        "回到「今之众人 ，其下圣人也亦远矣」：「众人」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p2:v06",
+      "word": "句读之不知",
+      "sourceSentence": "句读之不知 ，惑之不解",
+      "meaning": "不知道句读",
+      "explanation": "「之」是宾语前置的标志，正常语序为「不知句读」「不解惑」。",
+      "type": "interpretation",
+      "difficulty": 2,
+      "question": "对「句读之不知，惑之不解」句式理解正确的是",
+      "options": [
+        "主谓倒装句",
+        "定语后置句",
+        "宾语前置句",
+        "状语后置句"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "宾语前置句",
+      "sourceRefs": [
+        "王力《古汉语语法纲要》"
+      ],
+      "version": "vocab-set-c54628c74a58d5d1",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「句读之不知 ，惑之不解」\n对「句读之不知，惑之不解」句式理解正确的是\nA. 主谓倒装句\nB. 定语后置句\nC. 宾语前置句\nD. 状语后置句\n請選出答案，並用自己的話說明判斷依據。",
+        "「句读之不知 ，惑之不解」中的「句读之不知」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p2:v07",
+      "word": "或",
+      "sourceSentence": "或师焉，或不焉",
+      "meaning": "有的人",
+      "explanation": "此处「或」作不定代词，指代某人。",
+      "type": "contextual-choice",
+      "difficulty": 2,
+      "question": "「或师焉，或不焉」中两个「或」的意思分别是",
+      "options": [
+        "有的，有的",
+        "或许，或许",
+        "有人，有人",
+        "有的，或者"
+      ],
+      "answerIndex": 0,
+      "sourceAnswer": "有的，有的",
+      "sourceRefs": [
+        "王力《古汉语常用字字典》"
+      ],
+      "version": "vocab-set-c54628c74a58d5d1",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「或师焉，或不焉」\n「或师焉，或不焉」中两个「或」的意思分别是\nA. 有的，有的\nB. 或许，或许\nC. 有人，有人\nD. 有的，或者\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「或师焉，或不焉」中「或」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p2:v08",
+      "word": "小学而大遗",
+      "sourceSentence": "小学而大遗",
+      "meaning": "小的方面/大的方面",
+      "explanation": "在此句中，「小」「大」均作名词使用，指代学习内容的范围。",
+      "type": "contextual-choice",
+      "difficulty": 2,
+      "question": "「小学而大遗」中「小」和「大」的词性及意义是",
+      "options": [
+        "形容词，小的事情，大的事情",
+        "名词，小的知识，大的道理",
+        "形容词作名词，小的方面，大的方面",
+        "副词，稍微，大大地"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "形容词作名词，小的方面，大的方面",
+      "sourceRefs": [
+        "王力《古汉语常用字字典》"
+      ],
+      "version": "vocab-set-c54628c74a58d5d1",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「小学而大遗」\n「小学而大遗」中「小」和「大」的词性及意义是\nA. 形容词，小的事情，大的事情\nB. 名词，小的知识，大的道理\nC. 形容词作名词，小的方面，大的方面\nD. 副词，稍微，大大地\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「小学而大遗」中「小学而大遗」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p2:v09",
+      "word": "不齿",
+      "sourceSentence": "君子不齿",
+      "meaning": "不屑同列",
+      "explanation": "齿，排列。不齿，指不与同列，即看不起。",
+      "type": "interpretation",
+      "difficulty": 1,
+      "question": "「君子不齿」中「不齿」的准确含义是",
+      "options": [
+        "不开口说话",
+        "牙齿不整齐",
+        "不屑同列，看不起",
+        "不与人交往"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "不屑同列，看不起",
+      "sourceRefs": [
+        "《汉语大词典》"
+      ],
+      "version": "vocab-set-c54628c74a58d5d1",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「君子不齿」\n「君子不齿」中「不齿」的准确含义是\nA. 不开口说话\nB. 牙齿不整齐\nC. 不屑同列，看不起\nD. 不与人交往\n請選出答案，並用自己的話說明判斷依據。",
+        "「君子不齿」中的「不齿」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p2:v10",
+      "word": "不必",
+      "sourceSentence": "弟子不必 不如师",
+      "meaning": "不一定",
+      "explanation": "古义为不一定，今义多为不需要。",
+      "type": "gu-jin",
+      "difficulty": 1,
+      "question": "「弟子不必不如师」中「不必」的古义是",
+      "options": [
+        "不需要",
+        "不一定",
+        "不是必须",
+        "未必要"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "不一定",
+      "sourceRefs": [
+        "《汉语大词典》"
+      ],
+      "version": "vocab-set-c54628c74a58d5d1",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「弟子不必 不如师」\n「弟子不必不如师」中「不必」的古义是\nA. 不需要\nB. 不一定\nC. 不是必须\nD. 未必要\n請選出答案，並用自己的話說明判斷依據。",
+        "回到「弟子不必 不如师」：「不必」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p2:v11",
+      "word": "庸",
+      "sourceSentence": "夫庸知其年之先后生于吾乎",
+      "meaning": "怎么、岂",
+      "explanation": "「庸」在此为疑问副词，表示反问。",
+      "type": "interpretation",
+      "difficulty": 2,
+      "question": "「夫庸知其年之先后生于吾乎」中「庸」的意思是",
+      "options": [
+        "平庸",
+        "怎么、岂",
+        "愿意",
+        "需要"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "怎么、岂",
+      "sourceRefs": [
+        "王力《古汉语常用字字典》"
+      ],
+      "version": "vocab-set-c54628c74a58d5d1",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「夫庸知其年之先后生于吾乎」\n「夫庸知其年之先后生于吾乎」中「庸」的意思是\nA. 平庸\nB. 怎么、岂\nC. 愿意\nD. 需要\n請選出答案，並用自己的話說明判斷依據。",
+        "「夫庸知其年之先后生于吾乎」中的「庸」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p2:v12",
+      "word": "不拘于时",
+      "sourceSentence": "不拘于时",
+      "meaning": "不受时俗限制",
+      "explanation": "「于」引出动作的主动者，构成被动句。",
+      "type": "usage",
+      "difficulty": 2,
+      "question": "「不拘于时」的句式特点是",
+      "options": [
+        "判断句",
+        "被动句",
+        "倒装句",
+        "省略句"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "被动句",
+      "sourceRefs": [
+        "王力《古汉语语法纲要》"
+      ],
+      "version": "vocab-set-c54628c74a58d5d1",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「不拘于时」\n「不拘于时」的句式特点是\nA. 判断句\nB. 被动句\nC. 倒装句\nD. 省略句\n請選出答案，並用自己的話說明判斷依據。",
+        "請改寫「不拘于时」的句意，解釋「不拘于时」在句中的用法及語境依據；只報詞性名稱不足以說明。"
+      ]
+    },
+    {
+      "id": "lesson-1711-p2:v13",
+      "word": "反",
+      "sourceSentence": "今其智乃 反不能及",
+      "meaning": "反而",
+      "explanation": "此处「反」表示转折，意为反而。",
+      "type": "interpretation",
+      "difficulty": 1,
+      "question": "「今其智乃反不能及」中「反」的意思是",
+      "options": [
+        "相反",
+        "反而",
+        "返回",
+        "背叛"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "反而",
+      "sourceRefs": [
+        "《汉语大词典》"
+      ],
+      "version": "vocab-set-c54628c74a58d5d1",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「今其智乃 反不能及」\n「今其智乃反不能及」中「反」的意思是\nA. 相反\nB. 反而\nC. 返回\nD. 背叛\n請選出答案，並用自己的話說明判斷依據。",
+        "「今其智乃 反不能及」中的「反」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
+      ]
+    }
+  ],
+  "legacy": {
+    "lessonId": "lesson-1711-p2",
+    "title": "师说",
+    "mode": "classical",
+    "legacyTracks": [
+      "firstRead",
+      "vocabulary",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "firstRead",
+        "無注疏初讀",
+        "",
+        25
+      ],
+      [
+        "vocabulary",
+        "詞級疏通",
+        "",
+        30
+      ],
+      [
+        "structure",
+        "考辨與章法",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "本篇有意思",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "遷移與追問",
+        "",
+        15
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1711-p2:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1711-p2:interaction:structure",
+        "resourceVersion": "sha256:3de2125981d33d86096de04f187da6451ce0795867b3df937d1b116e00168804",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1711-p2:interaction:evaluation",
+        "resourceVersion": "sha256:8073467a06521d77c52f5e2875483fbcc2d1b4d5acc241add75151e8f9e811bd",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1711-p2:interaction:authorQuestion",
+        "resourceVersion": "sha256:c5a736244e5efc518365d7515ce94b4f9e58e982d41f9f60cf3481d4ca206f18",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v01",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v01",
+        "resourceVersion": "sha256:acce1f6c5af96ae0b3783c6560ba6f4a2664036b1c38bd734a8e01f10dcdf9c7",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v02",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v02",
+        "resourceVersion": "sha256:4052644f9da6123c7b256ab0a6e1f9b1a57820623236c33114047bbc2a502449",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v03",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v03",
+        "resourceVersion": "sha256:77c63265ffc08c043286b8dd2a84309181cfbb3d8f509848c088c9b2c93bce4c",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v04",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v04",
+        "resourceVersion": "sha256:b59abff042644c8f80119ddb457da614155511fa443e9680b24a529b1b57dacc",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v05",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v05",
+        "resourceVersion": "sha256:6b31fb4290bf4e7c008c195f9a9b1df332af82f7a8a97ec5efb6c81847addf5a",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v06",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v06",
+        "resourceVersion": "sha256:17a2b5d18b9c1c6d1499331a37406b25456ee689815ea8f0f3d0bfcc3caccfa9",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v07",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v07",
+        "resourceVersion": "sha256:8a12df0092db6e0942d78d563c7931adfe0e3c8f9c092216c627e2bd65f7d7f7",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v08",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v08",
+        "resourceVersion": "sha256:0c604e67ed5754c43bdbd3d0b19611e064a31e9b184120e78096c5b39763f9bf",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v09",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v09",
+        "resourceVersion": "sha256:0e5f998fe7ae001a7fc8a1561d986992f638a0c0d6a560204072f33f79089f59",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v10",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v10",
+        "resourceVersion": "sha256:49df9e588ae137ce032a493c7096fdddf8563fa52808beb88ddf280ce1a63fde",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v11",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v11",
+        "resourceVersion": "sha256:2f0d124f9578c3161a2ec68d30b3d33337fe18343f29d93cbf6906ffd4faa64b",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v12",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v12",
+        "resourceVersion": "sha256:fc4628d249ec2077c84501dbc022e7e8697af2420ca240617f7854b8bdfd9567",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v13",
+        "canonicalUnitId": "yw:lesson-1711-p2:vocabulary:lesson-1711-p2:v13",
+        "resourceVersion": "sha256:776c39023153477f39c19bfb10be25a4951d6aec800c26514b746eec52382084",
+        "questionKind": "vocabulary",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1711-p2:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1711-p2:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1711-p2:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1711-p2:interaction:structure",
+        "completionKey": "effect:lesson-1711-p2:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1711-p2:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "first_read_process",
+        "itemKey": "first-read:resolved",
+        "completionKey": "lesson:lesson-1711-p2#initialReadingResolved",
+        "interactionKey": "initialReadingResolved",
+        "resourceKey": "lesson:lesson-1711-p2",
+        "sourceKind": "classical_first_read",
+        "answerAuthority": "process_evidence",
+        "scoringRole": "none",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "first_read_process",
+        "itemKey": "first-read:submitted",
+        "completionKey": "lesson:lesson-1711-p2#initialReadingSubmitted",
+        "interactionKey": "initialReadingSubmitted",
+        "resourceKey": "lesson:lesson-1711-p2",
+        "sourceKind": "classical_first_read",
+        "answerAuthority": "process_evidence",
+        "scoringRole": "none",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v01",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v01#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v01",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v02",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v02#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v02",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v03",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v03#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v03",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v04",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v04#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v04",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v05",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v05#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v05",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v06",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v06#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v06",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v07",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v07#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v07",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v08",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v08#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v08",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v09",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v09#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v09",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v10",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v10#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v10",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v11",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v11#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v11",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v12",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v12#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v12",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1711-p2",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v13",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v13#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v13",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [
+      "lesson-1711-p2:v01",
+      "lesson-1711-p2:v02",
+      "lesson-1711-p2:v03",
+      "lesson-1711-p2:v04",
+      "lesson-1711-p2:v05",
+      "lesson-1711-p2:v06",
+      "lesson-1711-p2:v07",
+      "lesson-1711-p2:v08",
+      "lesson-1711-p2:v09",
+      "lesson-1711-p2:v10",
+      "lesson-1711-p2:v11",
+      "lesson-1711-p2:v12",
+      "lesson-1711-p2:v13"
+    ],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1711-p2:interaction:structure",
+        "sourceVersion": "sha256:3de2125981d33d86096de04f187da6451ce0795867b3df937d1b116e00168804",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:interaction:evaluation",
+        "sourceVersion": "sha256:8073467a06521d77c52f5e2875483fbcc2d1b4d5acc241add75151e8f9e811bd",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:interaction:authorQuestion",
+        "sourceVersion": "sha256:c5a736244e5efc518365d7515ce94b4f9e58e982d41f9f60cf3481d4ca206f18",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v01",
+        "sourceVersion": "sha256:acce1f6c5af96ae0b3783c6560ba6f4a2664036b1c38bd734a8e01f10dcdf9c7",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v02",
+        "sourceVersion": "sha256:4052644f9da6123c7b256ab0a6e1f9b1a57820623236c33114047bbc2a502449",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v03",
+        "sourceVersion": "sha256:77c63265ffc08c043286b8dd2a84309181cfbb3d8f509848c088c9b2c93bce4c",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v04",
+        "sourceVersion": "sha256:b59abff042644c8f80119ddb457da614155511fa443e9680b24a529b1b57dacc",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v05",
+        "sourceVersion": "sha256:6b31fb4290bf4e7c008c195f9a9b1df332af82f7a8a97ec5efb6c81847addf5a",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v06",
+        "sourceVersion": "sha256:17a2b5d18b9c1c6d1499331a37406b25456ee689815ea8f0f3d0bfcc3caccfa9",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v07",
+        "sourceVersion": "sha256:8a12df0092db6e0942d78d563c7931adfe0e3c8f9c092216c627e2bd65f7d7f7",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v08",
+        "sourceVersion": "sha256:0c604e67ed5754c43bdbd3d0b19611e064a31e9b184120e78096c5b39763f9bf",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v09",
+        "sourceVersion": "sha256:0e5f998fe7ae001a7fc8a1561d986992f638a0c0d6a560204072f33f79089f59",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v10",
+        "sourceVersion": "sha256:49df9e588ae137ce032a493c7096fdddf8563fa52808beb88ddf280ce1a63fde",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v11",
+        "sourceVersion": "sha256:2f0d124f9578c3161a2ec68d30b3d33337fe18343f29d93cbf6906ffd4faa64b",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v12",
+        "sourceVersion": "sha256:fc4628d249ec2077c84501dbc022e7e8697af2420ca240617f7854b8bdfd9567",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v13",
+        "sourceVersion": "sha256:776c39023153477f39c19bfb10be25a4951d6aec800c26514b746eec52382084",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1711-p2:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:interaction:structure",
+        "completionKey": "effect:lesson-1711-p2:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "first-read:resolved",
+        "completionKey": "lesson:lesson-1711-p2#initialReadingResolved",
+        "source": "classical_first_read",
+        "dialogueDomain": "first_read_process",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-first-read-process-bridged-no-new-score"
+      },
+      {
+        "requirementId": "first-read:submitted",
+        "completionKey": "lesson:lesson-1711-p2#initialReadingSubmitted",
+        "source": "classical_first_read",
+        "dialogueDomain": "first_read_process",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-first-read-process-bridged-no-new-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v01",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v01#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v02",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v02#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v03",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v03#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v04",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v04#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v05",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v05#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v06",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v06#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v07",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v07#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v08",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v08#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v09",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v09#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v10",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v10#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v11",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v11#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v12",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v12#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1711-p2:vocab:lesson-1711-p2:v13",
+        "completionKey": "effect:lesson-1711-p2:vocab:lesson-1711-p2:v13#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [
+      {
+        "id": "unannotated-first-read",
+        "rule": "原初讀提交、依既有初讀門檻標記疑點且全部解惑；vocabulary/syntax 學案完成才計詞級；comprehension 學案完成才計章法。",
+        "storage": "classical_first_read_sessions/classical_first_read_marks and source study-guide records",
+        "status": "source-first-read-gate-and-original-study-guide-bridged"
+      }
+    ],
+    "sourceLesson": "data/lessons/lesson-1711-p2.json",
+    "mapping": [
+      {
+        "legacy": "firstRead",
+        "dialogueDomain": "firstRead",
+        "evidenceRule": "保留原無注疏初讀、疑點標記與解惑紀錄；在對話引用原記錄。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "vocabulary",
+        "dialogueDomain": "vocabulary",
+        "evidenceRule": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "firstRead",
+          "vocabulary",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 16,
+        "formativeCount": 17,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": true,
+        "status": "source-items-present-calibration-pending",
+        "areaSources": {
+          "vocabulary": [
+            "lesson-1711-p2:v01",
+            "lesson-1711-p2:v02",
+            "lesson-1711-p2:v03",
+            "lesson-1711-p2:v04",
+            "lesson-1711-p2:v05",
+            "lesson-1711-p2:v06",
+            "lesson-1711-p2:v07",
+            "lesson-1711-p2:v08",
+            "lesson-1711-p2:v09",
+            "lesson-1711-p2:v10",
+            "lesson-1711-p2:v11",
+            "lesson-1711-p2:v12",
+            "lesson-1711-p2:v13"
+          ],
+          "functionWords": [
+            "lesson-1711-p2:corpus-function-word"
+          ],
+          "grammar": [
+            "lesson-1711-p2:v04",
+            "lesson-1711-p2:v12"
+          ]
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [
+          "xc-corpus-而"
+        ],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "original-source-process",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [
+    {
+      "id": "lesson-1711-p2:corpus-function-word",
+      "word": "而",
+      "type": "function-word",
+      "sourceSentence": "惑而不从师",
+      "passageQuotes": [
+        "惑而不从师"
+      ],
+      "meaning": "連詞，表示轉折，可譯卻。",
+      "explanation": "有疑惑通常需要從師，後項卻否定從師；對照「惑」與「不從師」的預期落差。",
+      "annotationIds": [],
+      "proposedDemand": "context-comparison-and-independent-explanation",
+      "difficulty": null,
+      "calibrationStatus": "pending-real-model",
+      "scoringRole": "none",
+      "variants": [
+        "讀「惑而不从师」。請用自己的話改寫句意，說明「而」在此句的意思、所連接或修飾的內容，並引用原句作依據。",
+        "有人把「惑而不从师」理解為「而只是時間上的然後」。請判斷這樣理解是否成立，引用原句或相鄰文句說明，再提出準確的改寫。"
+      ],
+      "misconceptions": [
+        "而只是時間上的然後"
+      ],
+      "masteryCriteria": [
+        {
+          "id": "source_reading",
+          "requirement": "準確引用原句並辨認目標詞或句法成分。"
+        },
+        {
+          "id": "context_analysis",
+          "requirement": "連詞，表示轉折，可譯卻。 有疑惑通常需要從師，後項卻否定從師；對照「惑」與「不從師」的預期落差。"
+        },
+        {
+          "id": "independent_transfer",
+          "requirement": "獨立說明另一個提問中的誤讀，保留原句施受、時間、語氣或邏輯關係；只抄提示不足。"
+        }
+      ],
+      "sourceEvidence": {
+        "kind": "new-unscored-contextual-analysis",
+        "readerPath": "data/reader-documents/lesson-1711-p2.json",
+        "readerSha256": "dae64b745339db742970183b57c7ff3f721c0efbf4385e9014c783bd5300b3e0",
+        "passageId": "lesson-1711-p2:p1",
+        "passageSha256": "f30edfc6df10b60df80d5dec64d47c823f8397cf6f76831ce85c41276fa21cca",
+        "quotationPolicy": "exact-original-substring",
+        "analysisAuthority": "authored-learning-support; not-original-consequential-rubric",
+        "supplementVersion": "yw-dialogue-classical-language-20261013-v2"
+      },
+      "dictionaryId": "xc-corpus-而",
+      "dictionaryStatus": "source-image-verified",
+      "sourceVerification": {
+        "status": "xc-page-scope-verified",
+        "xcEntryId": "e-p129_R-6",
+        "printedPages": [
+          119,
+          120
+        ],
+        "pdfPages": [
+          131,
+          132
+        ],
+        "analysisStatus": "authored-contextual-interpretation",
+        "notice": "字典所列詞義範圍已核對；本課語境分析為教學解讀，並非原書收錄答案。"
+      },
+      "sourcePassages": [
+        "lesson-1711-p2:p1"
+      ],
+      "version": "yw-language-b62c32324f8b24ef4e9a",
+      "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
+    }
+  ],
+  "dictionary": [
+    {
+      "id": "xc-corpus-而",
+      "headword": "而",
+      "entryId": "e-p129_R-6",
+      "edition": "1999 年 2 月第 1 版",
+      "url": "https://xc.bdfz.net/#entry/e-p129_R-6",
+      "sharedEndpoint": "https://dict.bdfz.net/api/v1/read?source=xc&id=e-p129_R-6",
+      "sourcePdfSha256": "a60dcbdca401b2445eeca3e09d6db0fb879d9f5d641781bc2b27c7757249cfaa",
+      "localSources": [
+        {
+          "path": "xuci-ocr/work/final/cols/p131_L.txt",
+          "sha256": "3bb2481dfa9d1b3129efa0e6d9ea0e5df4d9439ec968e4a936915eea98246c8e"
+        },
+        {
+          "path": "xuci-ocr/work/final/cols/p131_R.txt",
+          "sha256": "9f8f974ebd96bbf98aff39c9b946eff71f7c55a33e26c8b60e3c72e4b1239954"
+        },
+        {
+          "path": "xuci-ocr/work/final/cols/p132_L.txt",
+          "sha256": "8751aac736f7e44103283dcb04432b27844f0b44de7411015fa1d9b1a75fac47"
+        },
+        {
+          "path": "xuci-ocr/work/final/cols/p132_R.txt",
+          "sha256": "f87c41eabf79a7bf4e8ec670c63b4b0cbc46dc1a4234908492c242194e3fdab9"
+        }
+      ],
+      "pages": [
+        {
+          "pdfPage": 131,
+          "printedPage": 119,
+          "url": "https://dict.bdfz.net/source/xc/images/p131.png",
+          "imageSha256": "0249012841b7904240edf6ea29b0aed2a9a9cf4f3cb64e751b7bd8d9e73dbc53",
+          "verifiedScope": "連詞二：前後順承。"
+        },
+        {
+          "pdfPage": 132,
+          "printedPage": 120,
+          "url": "https://dict.bdfz.net/source/xc/images/p132.png",
+          "imageSha256": "f20ce89ea610e84c0595f44647e92a7701cfda3196fcc9286eba563ff18d6b99",
+          "verifiedScope": "連詞三：狀語與謂語；五及六起點：轉折。"
+        }
+      ],
+      "verificationStatus": "source-image-verified",
+      "verifiedAt": "2026-10-13T01:49:02Z",
+      "verification": "只目視核對所列頁圖中的指定詞義範圍；不宣稱整部 OCR 或整個詞條完成校勘。各課具體句法與效果為另行撰寫的語境分析，不宣稱字典收錄每一課例句。",
+      "entryLocator": {
+        "columnPath": "xuci-ocr/work/final/cols/p129_R.txt",
+        "zeroBasedLine": 6,
+        "columnSha256": "c382d8847e1193a2b514cf88790e6b025a8724e7b76e1d90643d252f3e74127a",
+        "observedHeading": "而ér",
+        "basis": "XC canonical build entry identity from adjudicated column; image verification limited to listed page scopes"
+      },
+      "sourceRootAlias": "CF/sites/tools"
+    }
+  ],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-55eb2bd7bcafb1956888",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [],
+  "guidance": [],
+  "media": [],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1711-p2.json",
+    "lessonSha256": "5105a2449d41f29a6c78e0957dbfd50b8c105906998c3c710bce42f336039c0c",
+    "reader": "data/reader-documents/lesson-1711-p2.json",
+    "readerSha256": "dae64b745339db742970183b57c7ff3f721c0efbf4385e9014c783bd5300b3e0",
+    "sourcePostId": "11144-2",
+    "sourcePostNumber": 1,
+    "blockCount": 1,
+    "annotationCount": 55,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "firstRead",
+        "vocabulary",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 16,
+      "formativeCount": 17,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": true,
+      "status": "source-items-present-calibration-pending",
+      "areaSources": {
+        "vocabulary": [
+          "lesson-1711-p2:v01",
+          "lesson-1711-p2:v02",
+          "lesson-1711-p2:v03",
+          "lesson-1711-p2:v04",
+          "lesson-1711-p2:v05",
+          "lesson-1711-p2:v06",
+          "lesson-1711-p2:v07",
+          "lesson-1711-p2:v08",
+          "lesson-1711-p2:v09",
+          "lesson-1711-p2:v10",
+          "lesson-1711-p2:v11",
+          "lesson-1711-p2:v12",
+          "lesson-1711-p2:v13"
+        ],
+        "functionWords": [
+          "lesson-1711-p2:corpus-function-word"
+        ],
+        "grammar": [
+          "lesson-1711-p2:v04",
+          "lesson-1711-p2:v12"
+        ]
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [
+        "xc-corpus-而"
+      ],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "original-source-process",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

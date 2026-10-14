@@ -2,9 +2,9 @@
   "schemaVersion": "yw-native-content-audit-receipt-v1",
   "siteKey": "yw",
   "reviewDisposition": "approved",
-  "reviewAuthority": "suen-user-authorized-yw-jitter-expanded-audit-2026-09-01",
-  "reviewedAt": "2026-09-01T09:26:56Z",
-  "semanticDigest": "sha256:2d6d3d7b4a5cf14e61ee15b9819e7b5b76fe5a60be5a1c851fbeba266b9f8293",
+  "reviewAuthority": "suen-user-authorized-yw-future-formal-score-only-expansion-20261013",
+  "reviewedAt": "2026-10-13T03:27:01.864Z",
+  "semanticDigest": "sha256:70e2721272b223f5f8c95ebd8f64279c04e1ecf48e9761140832b32dd841d8ff",
   "counts": {
     "annotations": 2932,
     "approvedDecks": 5,
@@ -36,5 +36,6 @@
     "vocabQuestions": 723,
     "vocabularyLessons": 77,
     "vocabularyQuestions": 723
-  }
+  },
+  "reviewEvidence": "/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/NATIVE-AUDIT-INDEPENDENT-REVIEW.json"
 }

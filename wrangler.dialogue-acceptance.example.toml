@@ -1,0 +1,30 @@
+# Preparation template, deliberately unusable. Only for a NEW separately
+# registered Direct Upload project, never yuwen-course or its previews.
+name = "yuwen-course-dialogue-acceptance"
+compatibility_date = "2026-05-12"
+pages_build_output_dir = ".acceptance/site"
+
+[[d1_databases]]
+binding = "ACCEPTANCE_DB"
+database_name = "yw-dialogue-acceptance-20261012"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+[[services]]
+binding = "USER_CENTER_EVIDENCE"
+service = "bdfz-user-center"
+entrypoint = "YuwenEvidenceIdentity"
+
+[[services]]
+binding = "APIS_ACCEPTANCE"
+service = "apis"
+entrypoint = "YwDialogueAcceptance20261012"
+
+[vars]
+YW_ACCEPTANCE_USER_ID = "0"
+YW_ACCEPTANCE_EXPIRES_AT = "2000-01-01T00:00:00Z"
+YW_ACCEPTANCE_DATABASE_ID = "00000000-0000-0000-0000-000000000000"
+YW_ACCEPTANCE_APIS_VERSION = "00000000-0000-0000-0000-000000000000"
+# Exact reviewed budget policy and private APIS entrypoint are configured only
+# after source/host/account/artifact approval. No production D1, Queue, scheduler,
+# test-slug, inherited production variables, or additional service bindings.

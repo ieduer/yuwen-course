@@ -1,0 +1,4137 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1485",
+  "title": "7 * 兼爱/《墨子》",
+  "mode": "classical",
+  "author": "墨子",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1485:p1",
+      "text": "圣人以治天下为事者也，必知乱之所自起，焉能治之；不知乱之所自起，则不能治。譬之如医之攻人之疾者然，必知疾之所自起，焉能攻之；不知疾之所自起，则弗能攻。治乱者何独不然？必知乱之所自起，焉能治之；不知乱之所自起，则弗能治。",
+      "block": {
+        "runs": [
+          {
+            "text": "圣人以治天下为事",
+            "type": "text"
+          },
+          {
+            "label": "[1]",
+            "noteId": "footnote-10008-1",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "者也，必知乱之所自起，",
+            "type": "text"
+          },
+          {
+            "disposition": "system-browser",
+            "href": "https://www.zdic.net/hans/%E7%84%89",
+            "sourceUrl": "https://www.zdic.net/hans/%E7%84%89",
+            "text": "焉",
+            "type": "link"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-10008-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "能治之；不知乱之所自起，则不能治。譬之如医之攻",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-10008-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "人之疾者然，必知疾之所自起，焉能攻之；不知疾之所自起，则弗能攻。治乱者何独不然？必知乱之所自起，焉能治之；不知乱之所自起，则弗能治。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1485:p2",
+      "text": "圣人以治天下为事者也，不可不察乱之所自起。当察乱何自起？起不相爱。臣子之不孝君父，所谓乱也。子自爱，不爱父，故亏父而自利；弟自爱，不爱兄，故亏兄而自利；臣自爱，不爱君，故亏君而自利。此所谓乱也。虽父之不慈子，兄之不慈弟，君之不慈臣，此亦天下之所谓乱也。父自爱也，不爱子，故亏子而自利；兄自爱也，不爱弟，故亏弟而自利；君自爱也，不爱臣，故亏臣而自利。是何也？皆起不相爱。虽至天下之为盗贼者，亦然。盗爱其室，不爱异室，故窃异室以利其室；贼爱其身，不爱人，故贼人以利其身。此何也？皆起不相爱。虽至大夫之相乱家、诸侯之相攻国者，亦然。大夫各爱其家，不爱异家，故乱异家以利其家；诸侯各爱其国，不爱异国，故攻异国以利其国。天下之乱物，具此而已矣。",
+      "block": {
+        "runs": [
+          {
+            "text": "圣人以治天下为事者也，不可不察乱之所自起。当",
+            "type": "text"
+          },
+          {
+            "label": "[4]",
+            "noteId": "footnote-10008-4",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "察乱何自起？起不相爱。臣子之不孝君父，所谓乱也。子自爱，不爱父，故亏",
+            "type": "text"
+          },
+          {
+            "label": "[5]",
+            "noteId": "footnote-10008-5",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "父而自利；弟自爱，不爱兄，故亏兄而自利；臣自爱，不爱君，故亏君而自利。此所谓乱也。虽",
+            "type": "text"
+          },
+          {
+            "label": "[6]",
+            "noteId": "footnote-10008-6",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "父之不慈",
+            "type": "text"
+          },
+          {
+            "label": "[7]",
+            "noteId": "footnote-10008-7",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "子，兄之不慈弟，君之不慈臣，此亦天下之所谓乱也。父自爱也，不爱子，故亏子而自利；兄自爱也，不爱弟，故亏弟而自利；君自爱也，不爱臣，故亏臣而自利。是何也？皆起不相爱。虽至天下之为盗贼",
+            "type": "text"
+          },
+          {
+            "label": "[8]",
+            "noteId": "footnote-10008-8",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "者，亦然。盗爱其室",
+            "type": "text"
+          },
+          {
+            "label": "[9]",
+            "noteId": "footnote-10008-9",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，不爱异室，故窃异室以利其室；贼爱其身，不爱人，故贼人以利其身。此何也？皆起不相爱。虽至大夫之相乱家",
+            "type": "text"
+          },
+          {
+            "label": "[10]",
+            "noteId": "footnote-10008-10",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "、诸侯之相攻国者，亦然。大夫各爱其家，不爱异家，故乱异家以利其家；诸侯各爱其国，不爱异国，故攻异国以利其国。天下之乱物",
+            "type": "text"
+          },
+          {
+            "label": "[11]",
+            "noteId": "footnote-10008-11",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，具此",
+            "type": "text"
+          },
+          {
+            "label": "[12]",
+            "noteId": "footnote-10008-12",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "而已矣。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1485:p3",
+      "text": "察此何自起？皆起不相爱。若使天下兼相爱，爱人若爱其身，犹有不孝者乎？视父兄与君若其身，恶施不孝？犹有不慈者乎？视弟子与臣若其身，恶施不慈？故不孝不慈亡。犹有盗贼乎？视人之室若其室，谁窃？视人身若其身，谁贼？故盗贼有亡。犹有大夫之相乱家、诸侯之相攻国者乎？视人家若其家，谁乱？视人国若其国，谁攻？故大夫之相乱家、诸侯之相攻国者有亡。若使天下兼相爱，国与国不相攻，家与家不相乱，盗贼无有，君臣父子皆能孝慈，若此则天下治。",
+      "block": {
+        "runs": [
+          {
+            "text": "察此何自起？皆起不相爱。若使天下",
+            "type": "text"
+          },
+          {
+            "disposition": "system-browser",
+            "href": "https://www.zdic.net/hans/%E5%85%BC",
+            "sourceUrl": "https://www.zdic.net/hans/%E5%85%BC",
+            "text": "兼",
+            "type": "link"
+          },
+          {
+            "text": "相爱，爱人若爱其身，犹有不孝者乎？视父兄与君若其身，恶施",
+            "type": "text"
+          },
+          {
+            "label": "[13]",
+            "noteId": "footnote-10008-13",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "不孝？犹有不慈者乎？视弟子与臣若其身，恶施不慈？故不孝不慈亡",
+            "type": "text"
+          },
+          {
+            "label": "[14]",
+            "noteId": "footnote-10008-14",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。犹有盗贼乎？视人之室若其室，谁窃？视人身若其身，谁贼？故盗贼有",
+            "type": "text"
+          },
+          {
+            "label": "[15]",
+            "noteId": "footnote-10008-15",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "亡。犹有大夫之相乱家、诸侯之相攻国者乎？视人家若其家，谁乱？视人国若其国，谁攻？故大夫之相乱家、诸侯之相攻国者有亡。若使天下兼相爱，国与国不相攻，家与家不相乱，盗贼无有，君臣父子皆能孝慈，若此则天下治。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1485:p4",
+      "text": "故圣人以治天下为事者，恶得不禁恶而劝爱？故天下兼相爱则治，交相恶则乱。故子墨子曰不可以不劝爱人者，此也。",
+      "block": {
+        "runs": [
+          {
+            "text": "故圣人以治天下为事者，恶得不禁恶而劝",
+            "type": "text"
+          },
+          {
+            "label": "[16]",
+            "noteId": "footnote-10008-16",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "爱？故天下兼相爱则治，交相",
+            "type": "text"
+          },
+          {
+            "label": "[17]",
+            "noteId": "footnote-10008-17",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "恶则乱。故子墨子",
+            "type": "text"
+          },
+          {
+            "label": "[18]",
+            "noteId": "footnote-10008-18",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "曰不可以不劝爱人者，此也。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "以治天下为事：把治理天下作为（自己的）事务。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "焉：于是。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "攻：治疗。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-3"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "当：同“尝”，尝试。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-4"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "亏：使受损失。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-5"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "虽：即使。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-6"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "慈：慈爱。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-7"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "盗贼：偷窃和劫夺财物的人。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-8"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "室：家。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-9"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "家：卿大夫的封地。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-10"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "乱物：纷乱之事。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-11"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "具此：全都在这里。具，完备、齐全。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-12"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "恶（wū）施：怎么实行。恶，相当于“何”“怎么”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-13"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "亡：同“无”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-14"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "有：同“又”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-15"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "劝：鼓励。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-16"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "交相：互相。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-17"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "子墨子：墨子的弟子对墨子的尊称。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10008-18"
+    }
+  ],
+  "resources": [
+    {
+      "disposition": "system-browser",
+      "href": "https://blog.bdfzer.com/2024/09/blog-post_29.html",
+      "kind": "link",
+      "label": "blog.bdfzer.com",
+      "postId": 16126,
+      "postNumber": null,
+      "sourceUrl": "https://blog.bdfzer.com/2024/09/blog-post_29.html"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/t/2451/9",
+      "kind": "link",
+      "label": "墨子吗",
+      "postId": null,
+      "postNumber": 10,
+      "sourceUrl": "https://forum.rdfzer.com/t/2451/9"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/t/topic/2475/9",
+      "kind": "link",
+      "label": "关于非攻",
+      "postId": null,
+      "postNumber": 14,
+      "sourceUrl": "https://forum.rdfzer.com/t/topic/2475/9"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/t/topic/2495/4",
+      "kind": "link",
+      "label": "墨家武力值",
+      "postId": null,
+      "postNumber": 15,
+      "sourceUrl": "https://forum.rdfzer.com/t/topic/2495/4"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/t/topic/2499/14",
+      "kind": "link",
+      "label": "少女,但將軍",
+      "postId": null,
+      "postNumber": 12,
+      "sourceUrl": "https://forum.rdfzer.com/t/topic/2499/14"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/t/topic/2500/9",
+      "kind": "link",
+      "label": "兼爱非攻的抽象反驳",
+      "postId": null,
+      "postNumber": 13,
+      "sourceUrl": "https://forum.rdfzer.com/t/topic/2500/9"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://pkuschool.yuque.com/attachments/yuque/0/2023/pdf/398767/1695893475735-88eb07eb-7dcf-49f6-9ba1-99d00bba41dc.pdf",
+      "kind": "document",
+      "label": "-265.pdf",
+      "postId": null,
+      "postNumber": 7,
+      "sourceUrl": "https://pkuschool.yuque.com/attachments/yuque/0/2023/pdf/398767/1695893475735-88eb07eb-7dcf-49f6-9ba1-99d00bba41dc.pdf"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://sites.google.com/view/pkuschool/cover3/xbs09/7-%e5%85%bc%e7%88%b1%e5%a2%a8%e5%ad%90",
+      "kind": "link",
+      "label": "https://sites.google.com/view/pkuschool/cover3/xbs09/7-%e5%85%bc%e7%88%b1%e5%a2%a8%e5%ad%90",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://sites.google.com/view/pkuschool/cover3/xbs09/7-%e5%85%bc%e7%88%b1%e5%a2%a8%e5%ad%90"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://www.zdic.net/hans/%E5%85%BC",
+      "kind": "link",
+      "label": "兼",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://www.zdic.net/hans/%E5%85%BC"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://www.zdic.net/hans/%E7%84%89",
+      "kind": "link",
+      "label": "焉",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://www.zdic.net/hans/%E7%84%89"
+    }
+  ],
+  "source": "https://forum.rdfzer.com/t/topic/1485",
+  "objectives": [
+    {
+      "id": "lesson-1485:firstRead",
+      "domain": "firstRead",
+      "label": "無注疏初讀",
+      "criteria": [
+        "initial_response",
+        "uncertainty"
+      ],
+      "rule": "保留原無注疏初讀、疑點標記與解惑紀錄；在對話引用原記錄。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1485:p1",
+        "lesson-1485:p2",
+        "lesson-1485:p3",
+        "lesson-1485:p4"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1485:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1485:p1",
+        "lesson-1485:p2",
+        "lesson-1485:p3",
+        "lesson-1485:p4"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1485:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1485:p1",
+        "lesson-1485:p2",
+        "lesson-1485:p3",
+        "lesson-1485:p4"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1485:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1485:p1",
+        "lesson-1485:p2",
+        "lesson-1485:p3",
+        "lesson-1485:p4"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1485:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1485:p1",
+        "lesson-1485:p2",
+        "lesson-1485:p3",
+        "lesson-1485:p4"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1485:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1485:p1",
+        "lesson-1485:p2",
+        "lesson-1485:p3",
+        "lesson-1485:p4"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1485:v01",
+      "domain": "vocabulary",
+      "label": "字詞：治",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：若此则天下治。語境義：治理。選項C「天下治」中的治為形容詞，意為「安定、太平」，其他三項均為動詞「治理」。",
+      "sourcePassages": [
+        "lesson-1485:p1",
+        "lesson-1485:p2",
+        "lesson-1485:p3",
+        "lesson-1485:p4"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1485:v02",
+      "domain": "vocabulary",
+      "label": "字詞：焉",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：焉能治之（疑問副詞，怎麼）。語境義：於是，怎麼。文中「焉能治之」意為「怎麼能治理它呢」，屬於疑問副詞用法。",
+      "sourcePassages": [
+        "lesson-1485:p1"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1485:v03",
+      "domain": "vocabulary",
+      "label": "字詞：攻",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：虽父之不慈子（古：慈愛；今：慈祥）。語境義：治療。「慈」在古今漢語中基本含義一致，均為「慈愛」，不屬於古今異義。",
+      "sourcePassages": [
+        "lesson-1485:p1",
+        "lesson-1485:p2",
+        "lesson-1485:p3"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1485:v04",
+      "domain": "vocabulary",
+      "label": "字詞：当",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：当察乱何自起。語境義：嘗試。文中的「当」通「尝」，意為嘗試。選項B為原文，其他選項皆為現代義「應當」或「面對」。",
+      "sourcePassages": [
+        "lesson-1485:p2"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1485:v05",
+      "domain": "vocabulary",
+      "label": "字詞：亏",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：所以（子）損害父親的利益來讓自己獲利。語境義：使受損失。「亏」在此為使動用法，即「使……受損」，主語為「子」。",
+      "sourcePassages": [
+        "lesson-1485:p2"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1485:v06",
+      "domain": "vocabulary",
+      "label": "字詞：室",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：家宅。語境義：家。結合上下文論證「大夫愛其家」、「諸侯愛其國」，此處「室」指代「家」。",
+      "sourcePassages": [
+        "lesson-1485:p2",
+        "lesson-1485:p3"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1485:v07",
+      "domain": "vocabulary",
+      "label": "字詞：具",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：皆。語境義：全，都。「具」在此處通「俱」，意為全、都。",
+      "sourcePassages": [
+        "lesson-1485:p2"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1485:v08",
+      "domain": "vocabulary",
+      "label": "字詞：恶",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：君子恶居下流。語境義：怎麼。「恶」作疑問代詞，解作「怎麼」。選項C為「厭惡」之意。",
+      "sourcePassages": [
+        "lesson-1485:p3",
+        "lesson-1485:p4"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1485:v09",
+      "domain": "vocabulary",
+      "label": "字詞：亡",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：所以不孝不慈的事情就沒有了。語境義：同「无」，沒有。「亡」通「无」，意為沒有，指不孝不慈的現象消失。",
+      "sourcePassages": [
+        "lesson-1485:p3"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1485:v10",
+      "domain": "vocabulary",
+      "label": "字詞：劝",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：鼓勵。語境義：鼓勵。「劝」在此處意為鼓勵、推行。",
+      "sourcePassages": [
+        "lesson-1485:p4"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1485:v14",
+      "domain": "vocabulary",
+      "label": "字詞：是",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：臣子之不孝君父。語境義：這，此。根據文意，「此」代指前文提到的「臣子之不孝君父」。",
+      "sourcePassages": [
+        "lesson-1485:p2"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "legacy:effect:lesson-1485:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1485:interaction:structure",
+        "resourceVersion": "sha256:80e19f55a7cec98008c4dd73d85cac40addc65a33bf97e7deee41e5b9cb63961",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1485:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1485:interaction:evaluation",
+        "resourceVersion": "sha256:9cf9327b33b67a3e69343fa5810d1401ed264f23bcbc08c788de9b66dae32b5a",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1485:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1485:interaction:authorQuestion",
+        "resourceVersion": "sha256:6441f2077a85e6da0b86d87e634f090c8f2a75884fbde3d2c9f650b745c1cda9",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1485:vocab:lesson-1485:v01",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v01",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v01",
+        "resourceVersion": "sha256:04885dacbcbcb978d03206035190c7ae4a14591275a91b901ed595148af9366d",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1485:vocab:lesson-1485:v02",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v02",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v02",
+        "resourceVersion": "sha256:89812c68ece3e54f1b2da0d4e0f1626c5c2ba90ed39fd036d86d5b6b7c098e91",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1485:vocab:lesson-1485:v03",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v03",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v03",
+        "resourceVersion": "sha256:ec96d6b03803abae6df8578392fefd8be3085519fb5a633bc3d36af7eebee3db",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1485:vocab:lesson-1485:v04",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v04",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v04",
+        "resourceVersion": "sha256:b084f195fcd5dde15ec8f92be39597f09ffb5b60f96599d4e053512183a9cc1b",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1485:vocab:lesson-1485:v05",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v05",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v05",
+        "resourceVersion": "sha256:155b9773ff67c697dccc9534d10df43c3df64d4b6eac9a471ac6e622c30df87d",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1485:vocab:lesson-1485:v06",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v06",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v06",
+        "resourceVersion": "sha256:3ed8452aa86ff73e5c5e3d1811083d28d386a6e57cb8f42ad8cc8da525191162",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1485:vocab:lesson-1485:v07",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v07",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v07",
+        "resourceVersion": "sha256:691ed0c6c9a8aa8da0532fc5f4b6bcd2c7fb057b85f179137debb78c45f17322",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1485:vocab:lesson-1485:v08",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v08",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v08",
+        "resourceVersion": "sha256:28ee7e57f371ffcd0cdbbf6fb9f408fdbfdfe16c187e308577fcbea37f66788c",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1485:vocab:lesson-1485:v09",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v09",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v09",
+        "resourceVersion": "sha256:e3ac57f51dfa88ad9dbdc7c0380d0d990064a97f975099446c8e319c12ff7507",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1485:vocab:lesson-1485:v10",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v10",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v10",
+        "resourceVersion": "sha256:634b06a474cc720d6f9fd2415fca4c389f29c208c7b493eefa32f91d5b51c9a2",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1485:vocab:lesson-1485:v14",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v14",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v14",
+        "resourceVersion": "sha256:90644225bbc39acef04fdad05d133eb1ec45147a2a7b02f9cc81234abf0fd604",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "study:lesson-1485-p50-ancient-modern-01",
+      "domain": "studyGuide",
+      "label": "解释“视弟子与臣若其身”中“弟子”的古义。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p50-ancient-modern-01"
+    },
+    {
+      "id": "study:lesson-1485-p50-ancient-modern-02",
+      "domain": "studyGuide",
+      "label": "解释“故子墨子曰不可以不劝爱人者”中“爱人”的古义。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p50-ancient-modern-02"
+    },
+    {
+      "id": "study:lesson-1485-p50-function-word-01",
+      "domain": "studyGuide",
+      "label": "说明“故窃异室以利其室”中“以”的意义和用法。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p50-function-word-01"
+    },
+    {
+      "id": "study:lesson-1485-p50-function-word-02",
+      "domain": "studyGuide",
+      "label": "说明“圣人以治天下为事者也”中“以”的意义和用法。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p50-function-word-02"
+    },
+    {
+      "id": "study:lesson-1485-p50-phonetic-loan-01",
+      "domain": "studyGuide",
+      "label": "指出“当察乱何自起”中的通假字并解释。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p50-phonetic-loan-01"
+    },
+    {
+      "id": "study:lesson-1485-p50-phonetic-loan-02",
+      "domain": "studyGuide",
+      "label": "指出“故不孝不慈亡有”中的通假字并解释。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p50-phonetic-loan-02"
+    },
+    {
+      "id": "study:lesson-1485-p50-phonetic-loan-03",
+      "domain": "studyGuide",
+      "label": "指出“故盗贼有亡”中的通假字并解释。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p50-phonetic-loan-03"
+    },
+    {
+      "id": "study:lesson-1485-p50-polysemy-01",
+      "domain": "studyGuide",
+      "label": "解释“圣人以治天下为事者也”中“治”的含义。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p50-polysemy-01"
+    },
+    {
+      "id": "study:lesson-1485-p50-polysemy-02",
+      "domain": "studyGuide",
+      "label": "解释“故天下兼相爱则治”中“治”的含义。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p50-polysemy-02"
+    },
+    {
+      "id": "study:lesson-1485-p50-polysemy-03",
+      "domain": "studyGuide",
+      "label": "解释“恶施不孝”中“恶”的读音和含义。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p50-polysemy-03"
+    },
+    {
+      "id": "study:lesson-1485-p50-polysemy-04",
+      "domain": "studyGuide",
+      "label": "解释“交相恶则乱”中“恶”的含义。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p50-polysemy-04"
+    },
+    {
+      "id": "study:lesson-1485-p51-sentence-pattern-01",
+      "domain": "studyGuide",
+      "label": "指出“子自爱”的特殊句式，写出常规语序并解释。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p51-sentence-pattern-01"
+    },
+    {
+      "id": "study:lesson-1485-p51-sentence-pattern-02",
+      "domain": "studyGuide",
+      "label": "指出“故亏父而自利”的特殊句式，写出常规语序并解释。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p51-sentence-pattern-02"
+    },
+    {
+      "id": "study:lesson-1485-p51-sentence-pattern-03",
+      "domain": "studyGuide",
+      "label": "指出“当察乱何自起”的特殊句式，写出常规语序并解释。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p51-sentence-pattern-03"
+    },
+    {
+      "id": "study:lesson-1485-p51-word-class-01",
+      "domain": "studyGuide",
+      "label": "说明“虽父之不慈子”中“慈”的词类活用。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p51-word-class-01"
+    },
+    {
+      "id": "study:lesson-1485-p51-word-class-02",
+      "domain": "studyGuide",
+      "label": "说明“视人身若其身，谁贼”中“贼”的词类活用。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p51-word-class-02"
+    },
+    {
+      "id": "study:lesson-1485-p51-word-class-03",
+      "domain": "studyGuide",
+      "label": "说明“故亏父而自利”中“亏”“利”的词类活用。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p51-word-class-03"
+    },
+    {
+      "id": "study:lesson-1485-p56-evidence-identification-01",
+      "domain": "studyGuide",
+      "label": "从六句中选出全都表现“行为不义”的一组：①入人园圃，窃其桃李；②扡其衣裘，取戈剑者；③天下之君子皆知而非之；④今至大为不义攻国，则弗知非，从而誉之；⑤书其言以遗后世；⑥此人为不知白黑之辩矣。\nA. ①②④　B. ③⑤⑥　C. ①②③　D. ④⑤⑥",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p56-evidence-identification-01"
+    },
+    {
+      "id": "study:lesson-1485-p56-multiple-choice-01",
+      "domain": "studyGuide",
+      "label": "选择对加点字解释不正确的一项：A. 攘：偷窃；B. 兹：这、这个；C. 誉：赞美；D. 情：确实、的确。",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "保留原學案題意及評價準據；未接既有服務端評價前保留待核對。",
+      "sourceItemKey": "lesson-1485-p56-multiple-choice-01"
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "lesson-1485:v01",
+      "word": "治",
+      "sourceSentence": "圣人以治天下为事者也",
+      "meaning": "治理",
+      "explanation": "選項C「天下治」中的治為形容詞，意為「安定、太平」，其他三項均為動詞「治理」。",
+      "type": "contextual-choice",
+      "difficulty": 2,
+      "question": "下列句中「治」字的意思與其他三項不同的一項是",
+      "options": [
+        "圣人以治天下为事者也",
+        "必知乱之所自起，焉能治之",
+        "若此则天下治",
+        "治乱者何独不然"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "若此则天下治",
+      "sourceRefs": [
+        "王力《古漢語常用字字典》"
+      ],
+      "version": "vocab-set-dcc9c0e97f22f066",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「圣人以治天下为事者也」\n下列句中「治」字的意思與其他三項不同的一項是\nA. 圣人以治天下为事者也\nB. 必知乱之所自起，焉能治之\nC. 若此则天下治\nD. 治乱者何独不然\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「圣人以治天下为事者也」中「治」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1485:v02",
+      "word": "焉",
+      "sourceSentence": "必知乱之所自起,焉能治之",
+      "meaning": "於是，怎麼",
+      "explanation": "文中「焉能治之」意為「怎麼能治理它呢」，屬於疑問副詞用法。",
+      "type": "usage",
+      "difficulty": 2,
+      "question": "對下列句中「焉」字的用法與含義判斷正確的一項是",
+      "options": [
+        "焉能治之（疑問副詞，怎麼）",
+        "积土成山，风雨兴焉（兼詞，於之）",
+        "寒暑易节，始一反焉（句末語氣詞）",
+        "且焉置土石（疑問代詞，哪裡）"
+      ],
+      "answerIndex": 0,
+      "sourceAnswer": "焉能治之（疑問副詞，怎麼）",
+      "sourceRefs": [
+        "王力《古漢語常用字字典》"
+      ],
+      "version": "vocab-set-dcc9c0e97f22f066",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「必知乱之所自起,焉能治之」\n對下列句中「焉」字的用法與含義判斷正確的一項是\nA. 焉能治之（疑問副詞，怎麼）\nB. 积土成山，风雨兴焉（兼詞，於之）\nC. 寒暑易节，始一反焉（句末語氣詞）\nD. 且焉置土石（疑問代詞，哪裡）\n請選出答案，並用自己的話說明判斷依據。",
+        "請改寫「必知乱之所自起,焉能治之」的句意，解釋「焉」在句中的用法及語境依據；只報詞性名稱不足以說明。"
+      ]
+    },
+    {
+      "id": "lesson-1485:v03",
+      "word": "攻",
+      "sourceSentence": "譬之如医之攻人之疾者然",
+      "meaning": "治療",
+      "explanation": "「慈」在古今漢語中基本含義一致，均為「慈愛」，不屬於古今異義。",
+      "type": "gu-jin",
+      "difficulty": 1,
+      "question": "下列句中加點詞的古今義解釋不正確的一項是",
+      "options": [
+        "医之攻人之疾者然（古：治療；今：進攻）",
+        "虽父之不慈子（古：慈愛；今：慈祥）",
+        "亏父而自利（古：使受損失；今：虧損）",
+        "劝爱人（古：鼓勵；今：勸告）"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "虽父之不慈子（古：慈愛；今：慈祥）",
+      "sourceRefs": [
+        "《漢語大詞典》"
+      ],
+      "version": "vocab-set-dcc9c0e97f22f066",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「譬之如医之攻人之疾者然」\n下列句中加點詞的古今義解釋不正確的一項是\nA. 医之攻人之疾者然（古：治療；今：進攻）\nB. 虽父之不慈子（古：慈愛；今：慈祥）\nC. 亏父而自利（古：使受損失；今：虧損）\nD. 劝爱人（古：鼓勵；今：勸告）\n請選出答案，並用自己的話說明判斷依據。",
+        "回到「譬之如医之攻人之疾者然」：「攻」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
+      ]
+    },
+    {
+      "id": "lesson-1485:v04",
+      "word": "当",
+      "sourceSentence": "当察乱何自起",
+      "meaning": "嘗試",
+      "explanation": "文中的「当」通「尝」，意為嘗試。選項B為原文，其他選項皆為現代義「應當」或「面對」。",
+      "type": "substitution",
+      "difficulty": 2,
+      "question": "文中「当察乱何自起」的「当」字，與下列哪一項的用法相同？",
+      "options": [
+        "当立者乃公子扶苏",
+        "当察乱何自起",
+        "今当远离",
+        "当之无愧"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "当察乱何自起",
+      "sourceRefs": [
+        "王力《古漢語常用字字典》"
+      ],
+      "version": "vocab-set-dcc9c0e97f22f066",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「当察乱何自起」\n文中「当察乱何自起」的「当」字，與下列哪一項的用法相同？\nA. 当立者乃公子扶苏\nB. 当察乱何自起\nC. 今当远离\nD. 当之无愧\n請選出答案，並用自己的話說明判斷依據。",
+        "請用恰當的現代說法替換「当察乱何自起」中的「当」，並解釋這個替換如何保留原句的意思。"
+      ]
+    },
+    {
+      "id": "lesson-1485:v05",
+      "word": "亏",
+      "sourceSentence": "故亏父而自利",
+      "meaning": "使受損失",
+      "explanation": "「亏」在此為使動用法，即「使……受損」，主語為「子」。",
+      "type": "interpretation",
+      "difficulty": 2,
+      "question": "對「故亏父而自利」一句理解正確的是",
+      "options": [
+        "所以父親虧待兒子來讓自己獲利",
+        "所以（子）損害父親的利益來讓自己獲利",
+        "所以父親虧損了財產而自己獲利",
+        "所以（子）在父親身上虧損了而自己獲利"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "所以（子）損害父親的利益來讓自己獲利",
+      "sourceRefs": [
+        "王力《古漢語常用字字典》"
+      ],
+      "version": "vocab-set-dcc9c0e97f22f066",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「故亏父而自利」\n對「故亏父而自利」一句理解正確的是\nA. 所以父親虧待兒子來讓自己獲利\nB. 所以（子）損害父親的利益來讓自己獲利\nC. 所以父親虧損了財產而自己獲利\nD. 所以（子）在父親身上虧損了而自己獲利\n請選出答案，並用自己的話說明判斷依據。",
+        "「故亏父而自利」中的「亏」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
+      ]
+    },
+    {
+      "id": "lesson-1485:v06",
+      "word": "室",
+      "sourceSentence": "盗爱其室,不爱异室",
+      "meaning": "家",
+      "explanation": "結合上下文論證「大夫愛其家」、「諸侯愛其國」，此處「室」指代「家」。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "「盗爱其室，不爱异室」中「室」的意思是",
+      "options": [
+        "房間",
+        "家宅",
+        "宮殿",
+        "內室"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "家宅",
+      "sourceRefs": [
+        "《漢語大詞典》"
+      ],
+      "version": "vocab-set-dcc9c0e97f22f066",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「盗爱其室,不爱异室」\n「盗爱其室，不爱异室」中「室」的意思是\nA. 房間\nB. 家宅\nC. 宮殿\nD. 內室\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「盗爱其室,不爱异室」中「室」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1485:v07",
+      "word": "具",
+      "sourceSentence": "天下之乱物,具此而已矣",
+      "meaning": "全，都",
+      "explanation": "「具」在此處通「俱」，意為全、都。",
+      "type": "substitution",
+      "difficulty": 2,
+      "question": "「天下之乱物，具此而已矣」中「具」字的含義，與下列哪項最接近？",
+      "options": [
+        "具體",
+        "具備",
+        "皆",
+        "工具"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "皆",
+      "sourceRefs": [
+        "王力《古漢語常用字字典》"
+      ],
+      "version": "vocab-set-dcc9c0e97f22f066",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「天下之乱物,具此而已矣」\n「天下之乱物，具此而已矣」中「具」字的含義，與下列哪項最接近？\nA. 具體\nB. 具備\nC. 皆\nD. 工具\n請選出答案，並用自己的話說明判斷依據。",
+        "請用恰當的現代說法替換「天下之乱物,具此而已矣」中的「具」，並解釋這個替換如何保留原句的意思。"
+      ]
+    },
+    {
+      "id": "lesson-1485:v08",
+      "word": "恶",
+      "sourceSentence": "恶施不孝",
+      "meaning": "怎麼",
+      "explanation": "「恶」作疑問代詞，解作「怎麼」。選項C為「厭惡」之意。",
+      "type": "usage",
+      "difficulty": 3,
+      "question": "下列句子中「恶」字的用法與「恶施不孝」相同的一項是",
+      "options": [
+        "恶在其无礼也",
+        "恶有不善",
+        "君子恶居下流",
+        "恶能无纪"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "君子恶居下流",
+      "sourceRefs": [
+        "王力《古漢語常用字字典》"
+      ],
+      "version": "vocab-set-dcc9c0e97f22f066",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「恶施不孝」\n下列句子中「恶」字的用法與「恶施不孝」相同的一項是\nA. 恶在其无礼也\nB. 恶有不善\nC. 君子恶居下流\nD. 恶能无纪\n請選出答案，並用自己的話說明判斷依據。",
+        "請改寫「恶施不孝」的句意，解釋「恶」在句中的用法及語境依據；只報詞性名稱不足以說明。"
+      ]
+    },
+    {
+      "id": "lesson-1485:v09",
+      "word": "亡",
+      "sourceSentence": "故不孝不慈亡",
+      "meaning": "同「无」，沒有",
+      "explanation": "「亡」通「无」，意為沒有，指不孝不慈的現象消失。",
+      "type": "substitution",
+      "difficulty": 2,
+      "question": "對「故不孝不慈亡」一句的翻譯，正確的是",
+      "options": [
+        "所以不孝不慈的人滅亡了",
+        "所以不孝不慈的事情就沒有了",
+        "所以不孝不慈的行為逃亡了",
+        "所以不孝不慈的現象依然存在"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "所以不孝不慈的事情就沒有了",
+      "sourceRefs": [
+        "王力《古漢語常用字字典》"
+      ],
+      "version": "vocab-set-dcc9c0e97f22f066",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「故不孝不慈亡」\n對「故不孝不慈亡」一句的翻譯，正確的是\nA. 所以不孝不慈的人滅亡了\nB. 所以不孝不慈的事情就沒有了\nC. 所以不孝不慈的行為逃亡了\nD. 所以不孝不慈的現象依然存在\n請選出答案，並用自己的話說明判斷依據。",
+        "請用恰當的現代說法替換「故不孝不慈亡」中的「亡」，並解釋這個替換如何保留原句的意思。"
+      ]
+    },
+    {
+      "id": "lesson-1485:v10",
+      "word": "劝",
+      "sourceSentence": "恶得不禁恶而劝爱",
+      "meaning": "鼓勵",
+      "explanation": "「劝」在此處意為鼓勵、推行。",
+      "type": "gu-jin",
+      "difficulty": 1,
+      "question": "「恶得不禁恶而劝爱」中「劝」的意思是",
+      "options": [
+        "勸告",
+        "勸阻",
+        "鼓勵",
+        "建議"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "鼓勵",
+      "sourceRefs": [
+        "《漢語大詞典》"
+      ],
+      "version": "vocab-set-dcc9c0e97f22f066",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「恶得不禁恶而劝爱」\n「恶得不禁恶而劝爱」中「劝」的意思是\nA. 勸告\nB. 勸阻\nC. 鼓勵\nD. 建議\n請選出答案，並用自己的話說明判斷依據。",
+        "回到「恶得不禁恶而劝爱」：「劝」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
+      ]
+    },
+    {
+      "id": "lesson-1485:v14",
+      "word": "是",
+      "sourceSentence": "此所谓乱也",
+      "meaning": "這，此",
+      "explanation": "根據文意，「此」代指前文提到的「臣子之不孝君父」。",
+      "type": "interpretation",
+      "difficulty": 2,
+      "question": "「此所谓乱也」中「此」指代的是",
+      "options": [
+        "聖人治天下",
+        "臣子之不孝君父",
+        "醫治疾病",
+        "天下之物"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "臣子之不孝君父",
+      "sourceRefs": [
+        "《漢語大詞典》"
+      ],
+      "version": "vocab-set-dcc9c0e97f22f066",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「此所谓乱也」\n「此所谓乱也」中「此」指代的是\nA. 聖人治天下\nB. 臣子之不孝君父\nC. 醫治疾病\nD. 天下之物\n請選出答案，並用自己的話說明判斷依據。",
+        "「此所谓乱也」中的「是」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
+      ]
+    }
+  ],
+  "legacy": {
+    "lessonId": "lesson-1485",
+    "title": "7 * 兼爱/《墨子》",
+    "mode": "classical",
+    "legacyTracks": [
+      "firstRead",
+      "vocabulary",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "firstRead",
+        "無注疏初讀",
+        "",
+        25
+      ],
+      [
+        "vocabulary",
+        "詞級疏通",
+        "",
+        30
+      ],
+      [
+        "structure",
+        "考辨與章法",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "本篇有意思",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "遷移與追問",
+        "",
+        15
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1485:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1485:interaction:structure",
+        "resourceVersion": "sha256:80e19f55a7cec98008c4dd73d85cac40addc65a33bf97e7deee41e5b9cb63961",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1485:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1485:interaction:evaluation",
+        "resourceVersion": "sha256:9cf9327b33b67a3e69343fa5810d1401ed264f23bcbc08c788de9b66dae32b5a",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1485:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1485:interaction:authorQuestion",
+        "resourceVersion": "sha256:6441f2077a85e6da0b86d87e634f090c8f2a75884fbde3d2c9f650b745c1cda9",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v01",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v01",
+        "resourceVersion": "sha256:04885dacbcbcb978d03206035190c7ae4a14591275a91b901ed595148af9366d",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v02",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v02",
+        "resourceVersion": "sha256:89812c68ece3e54f1b2da0d4e0f1626c5c2ba90ed39fd036d86d5b6b7c098e91",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v03",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v03",
+        "resourceVersion": "sha256:ec96d6b03803abae6df8578392fefd8be3085519fb5a633bc3d36af7eebee3db",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v04",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v04",
+        "resourceVersion": "sha256:b084f195fcd5dde15ec8f92be39597f09ffb5b60f96599d4e053512183a9cc1b",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v05",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v05",
+        "resourceVersion": "sha256:155b9773ff67c697dccc9534d10df43c3df64d4b6eac9a471ac6e622c30df87d",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v06",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v06",
+        "resourceVersion": "sha256:3ed8452aa86ff73e5c5e3d1811083d28d386a6e57cb8f42ad8cc8da525191162",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v07",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v07",
+        "resourceVersion": "sha256:691ed0c6c9a8aa8da0532fc5f4b6bcd2c7fb057b85f179137debb78c45f17322",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v08",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v08",
+        "resourceVersion": "sha256:28ee7e57f371ffcd0cdbbf6fb9f408fdbfdfe16c187e308577fcbea37f66788c",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v09",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v09",
+        "resourceVersion": "sha256:e3ac57f51dfa88ad9dbdc7c0380d0d990064a97f975099446c8e319c12ff7507",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v10",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v10",
+        "resourceVersion": "sha256:634b06a474cc720d6f9fd2415fca4c389f29c208c7b493eefa32f91d5b51c9a2",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v14",
+        "canonicalUnitId": "yw:lesson-1485:vocabulary:lesson-1485:v14",
+        "resourceVersion": "sha256:90644225bbc39acef04fdad05d133eb1ec45147a2a7b02f9cc81234abf0fd604",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1485:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1485:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1485:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1485:interaction:structure",
+        "completionKey": "effect:lesson-1485:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1485:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "comprehension",
+        "itemKey": "lesson-1485-p56-evidence-identification-01",
+        "semanticRevision": "f614676554f54956",
+        "completionKey": "formative:lesson-1485:comprehension:f614676554f54956#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:comprehension:f614676554f54956",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "first_read_process",
+        "itemKey": "first-read:resolved",
+        "completionKey": "lesson:lesson-1485#initialReadingResolved",
+        "interactionKey": "initialReadingResolved",
+        "resourceKey": "lesson:lesson-1485",
+        "sourceKind": "classical_first_read",
+        "answerAuthority": "process_evidence",
+        "scoringRole": "none",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "first_read_process",
+        "itemKey": "first-read:submitted",
+        "completionKey": "lesson:lesson-1485#initialReadingSubmitted",
+        "interactionKey": "initialReadingSubmitted",
+        "resourceKey": "lesson:lesson-1485",
+        "sourceKind": "classical_first_read",
+        "answerAuthority": "process_evidence",
+        "scoringRole": "none",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "syntax",
+        "itemKey": "lesson-1485-p51-sentence-pattern-03",
+        "semanticRevision": "0b26b091539752c1",
+        "completionKey": "formative:lesson-1485:syntax:0b26b091539752c1#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:syntax:0b26b091539752c1",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "syntax",
+        "itemKey": "lesson-1485-p51-sentence-pattern-02",
+        "semanticRevision": "6b98378c243998ec",
+        "completionKey": "formative:lesson-1485:syntax:6b98378c243998ec#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:syntax:6b98378c243998ec",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "syntax",
+        "itemKey": "lesson-1485-p51-sentence-pattern-01",
+        "semanticRevision": "ce0c1a19ca40b827",
+        "completionKey": "formative:lesson-1485:syntax:ce0c1a19ca40b827#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:syntax:ce0c1a19ca40b827",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1485:vocab:lesson-1485:v01",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v01#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v01",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1485:vocab:lesson-1485:v02",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v02#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v02",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1485:vocab:lesson-1485:v03",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v03#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v03",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1485:vocab:lesson-1485:v04",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v04#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v04",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1485:vocab:lesson-1485:v05",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v05#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v05",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1485:vocab:lesson-1485:v06",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v06#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v06",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1485:vocab:lesson-1485:v07",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v07#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v07",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1485:vocab:lesson-1485:v08",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v08#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v08",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1485:vocab:lesson-1485:v09",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v09#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v09",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1485:vocab:lesson-1485:v10",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v10#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v10",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1485:vocab:lesson-1485:v14",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v14#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1485:vocab:lesson-1485:v14",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p50-polysemy-02",
+        "semanticRevision": "1e2cf67aaf7fd245",
+        "completionKey": "formative:lesson-1485:vocabulary:1e2cf67aaf7fd245#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:1e2cf67aaf7fd245",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p51-word-class-02",
+        "semanticRevision": "25f231bde4f92fa6",
+        "completionKey": "formative:lesson-1485:vocabulary:25f231bde4f92fa6#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:25f231bde4f92fa6",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p50-polysemy-03",
+        "semanticRevision": "2bc52a8d8f547ae7",
+        "completionKey": "formative:lesson-1485:vocabulary:2bc52a8d8f547ae7#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:2bc52a8d8f547ae7",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p50-phonetic-loan-02",
+        "semanticRevision": "2f2fccde55baf2ca",
+        "completionKey": "formative:lesson-1485:vocabulary:2f2fccde55baf2ca#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:2f2fccde55baf2ca",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p50-ancient-modern-02",
+        "semanticRevision": "4a3550ac0a75fcc6",
+        "completionKey": "formative:lesson-1485:vocabulary:4a3550ac0a75fcc6#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:4a3550ac0a75fcc6",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p51-word-class-03",
+        "semanticRevision": "96b64fd503dec59f",
+        "completionKey": "formative:lesson-1485:vocabulary:96b64fd503dec59f#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:96b64fd503dec59f",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p50-polysemy-04",
+        "semanticRevision": "9bb5c27d852ae50b",
+        "completionKey": "formative:lesson-1485:vocabulary:9bb5c27d852ae50b#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:9bb5c27d852ae50b",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p51-word-class-01",
+        "semanticRevision": "9fa3639e0c7e5d8a",
+        "completionKey": "formative:lesson-1485:vocabulary:9fa3639e0c7e5d8a#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:9fa3639e0c7e5d8a",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p50-function-word-01",
+        "semanticRevision": "a1b4c8b4b09e11f5",
+        "completionKey": "formative:lesson-1485:vocabulary:a1b4c8b4b09e11f5#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:a1b4c8b4b09e11f5",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p56-multiple-choice-01",
+        "semanticRevision": "b7f41ae1f4245332",
+        "completionKey": "formative:lesson-1485:vocabulary:b7f41ae1f4245332#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:b7f41ae1f4245332",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p50-polysemy-01",
+        "semanticRevision": "c79cebbe0db72a0c",
+        "completionKey": "formative:lesson-1485:vocabulary:c79cebbe0db72a0c#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:c79cebbe0db72a0c",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p50-ancient-modern-01",
+        "semanticRevision": "d0a565c7ff9039e3",
+        "completionKey": "formative:lesson-1485:vocabulary:d0a565c7ff9039e3#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:d0a565c7ff9039e3",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p50-phonetic-loan-01",
+        "semanticRevision": "dc4e133d1526106c",
+        "completionKey": "formative:lesson-1485:vocabulary:dc4e133d1526106c#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:dc4e133d1526106c",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "source_answer",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p50-function-word-02",
+        "semanticRevision": "e47ce95a49933adf",
+        "completionKey": "formative:lesson-1485:vocabulary:e47ce95a49933adf#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:e47ce95a49933adf",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1485",
+        "competencyTag": "vocabulary",
+        "itemKey": "lesson-1485-p50-phonetic-loan-03",
+        "semanticRevision": "e64f2c38782b7f03",
+        "completionKey": "formative:lesson-1485:vocabulary:e64f2c38782b7f03#studyGuideItemCompleted",
+        "interactionKey": "studyGuideItemCompleted",
+        "resourceKey": "formative:lesson-1485:vocabulary:e64f2c38782b7f03",
+        "resourceAliases": [],
+        "completionAliases": [],
+        "sourceKind": "study_guide",
+        "answerAuthority": "codex_reference",
+        "scoringRole": "formative",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [
+      "lesson-1485:v01",
+      "lesson-1485:v02",
+      "lesson-1485:v03",
+      "lesson-1485:v04",
+      "lesson-1485:v05",
+      "lesson-1485:v06",
+      "lesson-1485:v07",
+      "lesson-1485:v08",
+      "lesson-1485:v09",
+      "lesson-1485:v10",
+      "lesson-1485:v14"
+    ],
+    "studyGuide": [
+      {
+        "itemKey": "lesson-1485-p50-ancient-modern-01",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "d0a565c7ff9039e3",
+        "pdfPage": 50,
+        "printedPage": 47,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p50-ancient-modern-02",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "4a3550ac0a75fcc6",
+        "pdfPage": 50,
+        "printedPage": 47,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p50-function-word-01",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "a1b4c8b4b09e11f5",
+        "pdfPage": 50,
+        "printedPage": 47,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p50-function-word-02",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "e47ce95a49933adf",
+        "pdfPage": 50,
+        "printedPage": 47,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p50-phonetic-loan-01",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "dc4e133d1526106c",
+        "pdfPage": 50,
+        "printedPage": 47,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p50-phonetic-loan-02",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "2f2fccde55baf2ca",
+        "pdfPage": 50,
+        "printedPage": 47,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p50-phonetic-loan-03",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "e64f2c38782b7f03",
+        "pdfPage": 50,
+        "printedPage": 47,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p50-polysemy-01",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "c79cebbe0db72a0c",
+        "pdfPage": 50,
+        "printedPage": 47,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p50-polysemy-02",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "1e2cf67aaf7fd245",
+        "pdfPage": 50,
+        "printedPage": 47,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p50-polysemy-03",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "2bc52a8d8f547ae7",
+        "pdfPage": 50,
+        "printedPage": 47,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p50-polysemy-04",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "9bb5c27d852ae50b",
+        "pdfPage": 50,
+        "printedPage": 47,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p51-sentence-pattern-01",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "ce0c1a19ca40b827",
+        "pdfPage": 51,
+        "printedPage": 48,
+        "competencyTag": "syntax"
+      },
+      {
+        "itemKey": "lesson-1485-p51-sentence-pattern-02",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "6b98378c243998ec",
+        "pdfPage": 51,
+        "printedPage": 48,
+        "competencyTag": "syntax"
+      },
+      {
+        "itemKey": "lesson-1485-p51-sentence-pattern-03",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "0b26b091539752c1",
+        "pdfPage": 51,
+        "printedPage": 48,
+        "competencyTag": "syntax"
+      },
+      {
+        "itemKey": "lesson-1485-p51-word-class-01",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "9fa3639e0c7e5d8a",
+        "pdfPage": 51,
+        "printedPage": 48,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p51-word-class-02",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "25f231bde4f92fa6",
+        "pdfPage": 51,
+        "printedPage": 48,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p51-word-class-03",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "96b64fd503dec59f",
+        "pdfPage": 51,
+        "printedPage": 48,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p56-argumentation-01",
+        "active": false,
+        "reviewRequired": true,
+        "semanticRevision": "66313e5b03765b10",
+        "pdfPage": 56,
+        "printedPage": 53,
+        "competencyTag": "comprehension"
+      },
+      {
+        "itemKey": "lesson-1485-p56-evidence-identification-01",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "f614676554f54956",
+        "pdfPage": 56,
+        "printedPage": 53,
+        "competencyTag": "comprehension"
+      },
+      {
+        "itemKey": "lesson-1485-p56-multiple-choice-01",
+        "active": true,
+        "reviewRequired": false,
+        "semanticRevision": "b7f41ae1f4245332",
+        "pdfPage": 56,
+        "printedPage": 53,
+        "competencyTag": "vocabulary"
+      },
+      {
+        "itemKey": "lesson-1485-p56-translation-01",
+        "active": false,
+        "reviewRequired": true,
+        "semanticRevision": "1b31511a62a6b465",
+        "pdfPage": 56,
+        "printedPage": 53,
+        "competencyTag": "comprehension"
+      }
+    ],
+    "sourceGaps": [
+      {
+        "pdfPages": [
+          52,
+          54
+        ],
+        "printedPages": [
+          49,
+          51
+        ],
+        "reason": "原页以影像呈现；结构化 JSON 与 Markdown 仅保留“【课堂任务】”或空白页内容，未抽取题目正文。",
+        "disposition": "不据空白抽取结果造题；待完成原页影像转录与人工校对后再入库。"
+      }
+    ],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1485:interaction:structure",
+        "sourceVersion": "sha256:80e19f55a7cec98008c4dd73d85cac40addc65a33bf97e7deee41e5b9cb63961",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1485:interaction:evaluation",
+        "sourceVersion": "sha256:9cf9327b33b67a3e69343fa5810d1401ed264f23bcbc08c788de9b66dae32b5a",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1485:interaction:authorQuestion",
+        "sourceVersion": "sha256:6441f2077a85e6da0b86d87e634f090c8f2a75884fbde3d2c9f650b745c1cda9",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1485:vocab:lesson-1485:v01",
+        "sourceVersion": "sha256:04885dacbcbcb978d03206035190c7ae4a14591275a91b901ed595148af9366d",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1485:vocab:lesson-1485:v02",
+        "sourceVersion": "sha256:89812c68ece3e54f1b2da0d4e0f1626c5c2ba90ed39fd036d86d5b6b7c098e91",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1485:vocab:lesson-1485:v03",
+        "sourceVersion": "sha256:ec96d6b03803abae6df8578392fefd8be3085519fb5a633bc3d36af7eebee3db",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1485:vocab:lesson-1485:v04",
+        "sourceVersion": "sha256:b084f195fcd5dde15ec8f92be39597f09ffb5b60f96599d4e053512183a9cc1b",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1485:vocab:lesson-1485:v05",
+        "sourceVersion": "sha256:155b9773ff67c697dccc9534d10df43c3df64d4b6eac9a471ac6e622c30df87d",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1485:vocab:lesson-1485:v06",
+        "sourceVersion": "sha256:3ed8452aa86ff73e5c5e3d1811083d28d386a6e57cb8f42ad8cc8da525191162",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1485:vocab:lesson-1485:v07",
+        "sourceVersion": "sha256:691ed0c6c9a8aa8da0532fc5f4b6bcd2c7fb057b85f179137debb78c45f17322",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1485:vocab:lesson-1485:v08",
+        "sourceVersion": "sha256:28ee7e57f371ffcd0cdbbf6fb9f408fdbfdfe16c187e308577fcbea37f66788c",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1485:vocab:lesson-1485:v09",
+        "sourceVersion": "sha256:e3ac57f51dfa88ad9dbdc7c0380d0d990064a97f975099446c8e319c12ff7507",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1485:vocab:lesson-1485:v10",
+        "sourceVersion": "sha256:634b06a474cc720d6f9fd2415fca4c389f29c208c7b493eefa32f91d5b51c9a2",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1485:vocab:lesson-1485:v14",
+        "sourceVersion": "sha256:90644225bbc39acef04fdad05d133eb1ec45147a2a7b02f9cc81234abf0fd604",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1485:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1485:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1485:interaction:structure",
+        "completionKey": "effect:lesson-1485:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "lesson-1485-p56-evidence-identification-01",
+        "completionKey": "formative:lesson-1485:comprehension:f614676554f54956#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "comprehension",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "first-read:resolved",
+        "completionKey": "lesson:lesson-1485#initialReadingResolved",
+        "source": "classical_first_read",
+        "dialogueDomain": "first_read_process",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-first-read-process-bridged-no-new-score"
+      },
+      {
+        "requirementId": "first-read:submitted",
+        "completionKey": "lesson:lesson-1485#initialReadingSubmitted",
+        "source": "classical_first_read",
+        "dialogueDomain": "first_read_process",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-first-read-process-bridged-no-new-score"
+      },
+      {
+        "requirementId": "lesson-1485-p51-sentence-pattern-03",
+        "completionKey": "formative:lesson-1485:syntax:0b26b091539752c1#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "syntax",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p51-sentence-pattern-02",
+        "completionKey": "formative:lesson-1485:syntax:6b98378c243998ec#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "syntax",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p51-sentence-pattern-01",
+        "completionKey": "formative:lesson-1485:syntax:ce0c1a19ca40b827#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "syntax",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1485:vocab:lesson-1485:v01",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v01#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1485:vocab:lesson-1485:v02",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v02#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1485:vocab:lesson-1485:v03",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v03#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1485:vocab:lesson-1485:v04",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v04#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1485:vocab:lesson-1485:v05",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v05#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1485:vocab:lesson-1485:v06",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v06#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1485:vocab:lesson-1485:v07",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v07#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1485:vocab:lesson-1485:v08",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v08#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1485:vocab:lesson-1485:v09",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v09#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1485:vocab:lesson-1485:v10",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v10#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1485:vocab:lesson-1485:v14",
+        "completionKey": "effect:lesson-1485:vocab:lesson-1485:v14#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "lesson-1485-p50-polysemy-02",
+        "completionKey": "formative:lesson-1485:vocabulary:1e2cf67aaf7fd245#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p51-word-class-02",
+        "completionKey": "formative:lesson-1485:vocabulary:25f231bde4f92fa6#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-polysemy-03",
+        "completionKey": "formative:lesson-1485:vocabulary:2bc52a8d8f547ae7#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-phonetic-loan-02",
+        "completionKey": "formative:lesson-1485:vocabulary:2f2fccde55baf2ca#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-ancient-modern-02",
+        "completionKey": "formative:lesson-1485:vocabulary:4a3550ac0a75fcc6#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p51-word-class-03",
+        "completionKey": "formative:lesson-1485:vocabulary:96b64fd503dec59f#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-polysemy-04",
+        "completionKey": "formative:lesson-1485:vocabulary:9bb5c27d852ae50b#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p51-word-class-01",
+        "completionKey": "formative:lesson-1485:vocabulary:9fa3639e0c7e5d8a#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-function-word-01",
+        "completionKey": "formative:lesson-1485:vocabulary:a1b4c8b4b09e11f5#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p56-multiple-choice-01",
+        "completionKey": "formative:lesson-1485:vocabulary:b7f41ae1f4245332#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-polysemy-01",
+        "completionKey": "formative:lesson-1485:vocabulary:c79cebbe0db72a0c#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-ancient-modern-01",
+        "completionKey": "formative:lesson-1485:vocabulary:d0a565c7ff9039e3#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-phonetic-loan-01",
+        "completionKey": "formative:lesson-1485:vocabulary:dc4e133d1526106c#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-function-word-02",
+        "completionKey": "formative:lesson-1485:vocabulary:e47ce95a49933adf#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-phonetic-loan-03",
+        "completionKey": "formative:lesson-1485:vocabulary:e64f2c38782b7f03#studyGuideItemCompleted",
+        "source": "study_guide",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "以原學案題幹及原準據提問，保留獨立回答與回饋。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-ancient-modern-01",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "d0a565c7ff9039e3",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "解释“视弟子与臣若其身”中“弟子”的古义。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 50,
+          "printed": 47
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-ancient-modern-02",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "4a3550ac0a75fcc6",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "解释“故子墨子曰不可以不劝爱人者”中“爱人”的古义。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 50,
+          "printed": 47
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-function-word-01",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "a1b4c8b4b09e11f5",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "说明“故窃异室以利其室”中“以”的意义和用法。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 50,
+          "printed": 47
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-function-word-02",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "e47ce95a49933adf",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "说明“圣人以治天下为事者也”中“以”的意义和用法。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 50,
+          "printed": 47
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-phonetic-loan-01",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "dc4e133d1526106c",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "指出“当察乱何自起”中的通假字并解释。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 50,
+          "printed": 47
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-phonetic-loan-02",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "2f2fccde55baf2ca",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "指出“故不孝不慈亡有”中的通假字并解释。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 50,
+          "printed": 47
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-phonetic-loan-03",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "e64f2c38782b7f03",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "指出“故盗贼有亡”中的通假字并解释。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 50,
+          "printed": 47
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-polysemy-01",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "c79cebbe0db72a0c",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "解释“圣人以治天下为事者也”中“治”的含义。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 50,
+          "printed": 47
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-polysemy-02",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "1e2cf67aaf7fd245",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "解释“故天下兼相爱则治”中“治”的含义。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 50,
+          "printed": 47
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-polysemy-03",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "2bc52a8d8f547ae7",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "解释“恶施不孝”中“恶”的读音和含义。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 50,
+          "printed": 47
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p50-polysemy-04",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "9bb5c27d852ae50b",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "解释“交相恶则乱”中“恶”的含义。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 50,
+          "printed": 47
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p51-sentence-pattern-01",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "ce0c1a19ca40b827",
+        "dialogueDomain": "syntax",
+        "conversationEquivalent": "指出“子自爱”的特殊句式，写出常规语序并解释。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 51,
+          "printed": 48
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p51-sentence-pattern-02",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "6b98378c243998ec",
+        "dialogueDomain": "syntax",
+        "conversationEquivalent": "指出“故亏父而自利”的特殊句式，写出常规语序并解释。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 51,
+          "printed": 48
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p51-sentence-pattern-03",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "0b26b091539752c1",
+        "dialogueDomain": "syntax",
+        "conversationEquivalent": "指出“当察乱何自起”的特殊句式，写出常规语序并解释。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 51,
+          "printed": 48
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p51-word-class-01",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "9fa3639e0c7e5d8a",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "说明“虽父之不慈子”中“慈”的词类活用。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 51,
+          "printed": 48
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p51-word-class-02",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "25f231bde4f92fa6",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "说明“视人身若其身，谁贼”中“贼”的词类活用。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 51,
+          "printed": 48
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p51-word-class-03",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "96b64fd503dec59f",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "说明“故亏父而自利”中“亏”“利”的词类活用。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 51,
+          "printed": 48
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p56-argumentation-01",
+        "source": "study-guide",
+        "active": false,
+        "sourceVersion": "66313e5b03765b10",
+        "dialogueDomain": "comprehension",
+        "conversationEquivalent": "本文运用了什么论述方法完成论证？请结合文本内容分析。",
+        "evidenceRule": [
+          "准确指出类比推理与递进论证两个核心方法。",
+          "结合偷盗、杀人、攻国的层级举例。",
+          "说明黑白、甘苦类比或小非与大非对比的作用。",
+          "能联系中心观点；允许其他有文本依据的合理表述。"
+        ],
+        "sourcePage": {
+          "pdf": 56,
+          "printed": 53
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "inactive-preserved-not-reactivated"
+      },
+      {
+        "requirementId": "lesson-1485-p56-evidence-identification-01",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "f614676554f54956",
+        "dialogueDomain": "comprehension",
+        "conversationEquivalent": "从六句中选出全都表现“行为不义”的一组：①入人园圃，窃其桃李；②扡其衣裘，取戈剑者；③天下之君子皆知而非之；④今至大为不义攻国，则弗知非，从而誉之；⑤书其言以遗后世；⑥此人为不知白黑之辩矣。\nA. ①②④　B. ③⑤⑥　C. ①②③　D. ④⑤⑥",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 56,
+          "printed": 53
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p56-multiple-choice-01",
+        "source": "study-guide",
+        "active": true,
+        "sourceVersion": "b7f41ae1f4245332",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "选择对加点字解释不正确的一项：A. 攘：偷窃；B. 兹：这、这个；C. 誉：赞美；D. 情：确实、的确。",
+        "evidenceRule": "沿用既有來源參考答案及評價規則；reviewRequired 項仍須覆核。",
+        "sourcePage": {
+          "pdf": 56,
+          "printed": 53
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "original-study-guide-evaluator-bridged"
+      },
+      {
+        "requirementId": "lesson-1485-p56-translation-01",
+        "source": "study-guide",
+        "active": false,
+        "sourceVersion": "1b31511a62a6b465",
+        "dialogueDomain": "comprehension",
+        "conversationEquivalent": "翻译：（1）若知其不义也，夫奚说书其不义以遗后世哉？（2）是以知天下之君子也，辩义与不义之乱也。",
+        "evidenceRule": [
+          "第一句准确译出假设关系和“奚……哉”的反问语气。",
+          "第二句准确译出“是以、辩、乱”。",
+          "语意完整、符合现代汉语表达；允许同义改写。"
+        ],
+        "sourcePage": {
+          "pdf": 56,
+          "printed": 53
+        },
+        "storage": "existing study-guide assessment unchanged; dialogue evidence separate",
+        "status": "inactive-preserved-not-reactivated"
+      }
+    ],
+    "compoundRequirements": [
+      {
+        "id": "unannotated-first-read",
+        "rule": "原初讀提交、依既有初讀門檻標記疑點且全部解惑；vocabulary/syntax 學案完成才計詞級；comprehension 學案完成才計章法。",
+        "storage": "classical_first_read_sessions/classical_first_read_marks and source study-guide records",
+        "status": "source-first-read-gate-and-original-study-guide-bridged"
+      }
+    ],
+    "sourceLesson": "data/lessons/lesson-1485.json",
+    "mapping": [
+      {
+        "legacy": "firstRead",
+        "dialogueDomain": "firstRead",
+        "evidenceRule": "保留原無注疏初讀、疑點標記與解惑紀錄；在對話引用原記錄。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "vocabulary",
+        "dialogueDomain": "vocabulary",
+        "evidenceRule": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "firstRead",
+          "vocabulary",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 14,
+        "formativeCount": 34,
+        "activeStudyGuideCount": 19,
+        "inactiveStudyGuideCount": 2,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": true,
+        "status": "source-items-present-calibration-pending",
+        "areaSources": {
+          "vocabulary": [
+            "lesson-1485:v01",
+            "lesson-1485:v02",
+            "lesson-1485:v03",
+            "lesson-1485:v04",
+            "lesson-1485:v05",
+            "lesson-1485:v06",
+            "lesson-1485:v07",
+            "lesson-1485:v08",
+            "lesson-1485:v09",
+            "lesson-1485:v10",
+            "lesson-1485:v14",
+            "lesson-1485-p50-ancient-modern-01",
+            "lesson-1485-p50-ancient-modern-02",
+            "lesson-1485-p50-function-word-01",
+            "lesson-1485-p50-function-word-02",
+            "lesson-1485-p50-phonetic-loan-01",
+            "lesson-1485-p50-phonetic-loan-02",
+            "lesson-1485-p50-phonetic-loan-03",
+            "lesson-1485-p50-polysemy-01",
+            "lesson-1485-p50-polysemy-02",
+            "lesson-1485-p50-polysemy-03",
+            "lesson-1485-p50-polysemy-04",
+            "lesson-1485-p51-word-class-01",
+            "lesson-1485-p51-word-class-02",
+            "lesson-1485-p51-word-class-03",
+            "lesson-1485-p56-multiple-choice-01"
+          ],
+          "functionWords": [
+            "lesson-1485-p50-function-word-01",
+            "lesson-1485-p50-function-word-02"
+          ],
+          "grammar": [
+            "lesson-1485:v02",
+            "lesson-1485:v08",
+            "lesson-1485-p51-sentence-pattern-01",
+            "lesson-1485-p51-sentence-pattern-02",
+            "lesson-1485-p51-sentence-pattern-03"
+          ]
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "original-source-process",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [
+        {
+          "pdfPages": [
+            52,
+            54
+          ],
+          "printedPages": [
+            49,
+            51
+          ],
+          "reason": "原页以影像呈现；结构化 JSON 与 Markdown 仅保留“【课堂任务】”或空白页内容，未抽取题目正文。",
+          "disposition": "不据空白抽取结果造题；待完成原页影像转录与人工校对后再入库。"
+        }
+      ],
+      "reviewRequiredGuideIds": [
+        "lesson-1485-p56-argumentation-01",
+        "lesson-1485-p56-translation-01"
+      ]
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-7fa194f8f5aa3dd7f904",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《墨子校注》（中华书局2006 年版）。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        },
+        {
+          "runs": [
+            {
+              "text": "墨子（约前468—前376），名翟（dí），春秋战国之际思想家，墨家学派创始人。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        },
+        {
+          "runs": [
+            {
+              "text": "《墨子》一书是墨子本人、墨子弟子以及后期墨家著述的汇编。《兼爱》有上、中、下三篇，这里选的是上篇。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "type": "quote"
+    }
+  ],
+  "guidance": [],
+  "media": [],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p50-ancient-modern-01",
+      "pdfPage": 50,
+      "printedPage": 47,
+      "competencyTag": "vocabulary",
+      "detailTag": "ancient_modern",
+      "prompt": "解释“视弟子与臣若其身”中“弟子”的古义。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "弟弟和儿子。",
+      "explanation": "这里是两个亲属称谓的合称，不是现代“学生、徒弟”。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "d0a565c7ff9039e3",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p50-ancient-modern-02",
+      "pdfPage": 50,
+      "printedPage": 47,
+      "competencyTag": "vocabulary",
+      "detailTag": "ancient_modern",
+      "prompt": "解释“故子墨子曰不可以不劝爱人者”中“爱人”的古义。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "爱别人、关爱他人。",
+      "explanation": "这里不是现代汉语中“丈夫或妻子”的称谓。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "4a3550ac0a75fcc6",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p50-function-word-01",
+      "pdfPage": 50,
+      "printedPage": 47,
+      "competencyTag": "vocabulary",
+      "detailTag": "function_word",
+      "prompt": "说明“故窃异室以利其室”中“以”的意义和用法。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "连词，表目的，可译为“来、以便”。",
+      "explanation": "偷窃别人的家室是为了使自己的家室获利。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "a1b4c8b4b09e11f5",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p50-function-word-02",
+      "pdfPage": 50,
+      "printedPage": 47,
+      "competencyTag": "vocabulary",
+      "detailTag": "function_word",
+      "prompt": "说明“圣人以治天下为事者也”中“以”的意义和用法。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "介词，把。",
+      "explanation": "句意为圣人是把治理天下当作事业的人。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "e47ce95a49933adf",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p50-phonetic-loan-01",
+      "pdfPage": 50,
+      "printedPage": 47,
+      "competencyTag": "vocabulary",
+      "detailTag": "phonetic_loan",
+      "prompt": "指出“当察乱何自起”中的通假字并解释。",
+      "answerAuthority": "source_answer",
+      "answerLabel": "學案來源答案",
+      "referenceAnswer": "“当”同“尝”，尝试。",
+      "explanation": "句意为尝试考察混乱从哪里产生。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "dc4e133d1526106c",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p50-phonetic-loan-02",
+      "pdfPage": 50,
+      "printedPage": 47,
+      "competencyTag": "vocabulary",
+      "detailTag": "phonetic_loan",
+      "prompt": "指出“故不孝不慈亡有”中的通假字并解释。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "“亡”同“无”，没有。",
+      "explanation": "“亡有”即“无有”。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "2f2fccde55baf2ca",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p50-phonetic-loan-03",
+      "pdfPage": 50,
+      "printedPage": 47,
+      "competencyTag": "vocabulary",
+      "detailTag": "phonetic_loan",
+      "prompt": "指出“故盗贼有亡”中的通假字并解释。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "“有”同“又”，表示再次或并列承接。",
+      "explanation": "“有亡”即“又无”，与前文列举的乱象相承。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "e64f2c38782b7f03",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p50-polysemy-01",
+      "pdfPage": 50,
+      "printedPage": 47,
+      "competencyTag": "vocabulary",
+      "detailTag": "polysemy",
+      "prompt": "解释“圣人以治天下为事者也”中“治”的含义。",
+      "answerAuthority": "source_answer",
+      "answerLabel": "學案來源答案",
+      "referenceAnswer": "动词，治理。",
+      "explanation": "“治天下”即治理天下。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "c79cebbe0db72a0c",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p50-polysemy-02",
+      "pdfPage": 50,
+      "printedPage": 47,
+      "competencyTag": "vocabulary",
+      "detailTag": "polysemy",
+      "prompt": "解释“故天下兼相爱则治”中“治”的含义。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "安定、治理得好。",
+      "explanation": "此处“治”表示天下处于有秩序的安定状态。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "1e2cf67aaf7fd245",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p50-polysemy-03",
+      "pdfPage": 50,
+      "printedPage": 47,
+      "competencyTag": "vocabulary",
+      "detailTag": "polysemy",
+      "prompt": "解释“恶施不孝”中“恶”的读音和含义。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "读 wū，疑问代词，怎么、哪里。",
+      "explanation": "句意为“怎么会实行不孝的行为呢”。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "2bc52a8d8f547ae7",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p50-polysemy-04",
+      "pdfPage": 50,
+      "printedPage": 47,
+      "competencyTag": "vocabulary",
+      "detailTag": "polysemy",
+      "prompt": "解释“交相恶则乱”中“恶”的含义。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "憎恨、厌恶。",
+      "explanation": "“交相恶”指人们彼此憎恶，与“兼相爱”相反。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "9bb5c27d852ae50b",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p51-sentence-pattern-01",
+      "pdfPage": 51,
+      "printedPage": 48,
+      "competencyTag": "syntax",
+      "detailTag": "sentence_pattern",
+      "prompt": "指出“子自爱”的特殊句式，写出常规语序并解释。",
+      "answerAuthority": "source_answer",
+      "answerLabel": "學案來源答案",
+      "referenceAnswer": "宾语前置；常规语序为“子爱自”；意为儿子爱自己。",
+      "explanation": "代词“自”作宾语，置于动词“爱”之前。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "ce0c1a19ca40b827",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p51-sentence-pattern-02",
+      "pdfPage": 51,
+      "printedPage": 48,
+      "competencyTag": "syntax",
+      "detailTag": "sentence_pattern",
+      "prompt": "指出“故亏父而自利”的特殊句式，写出常规语序并解释。",
+      "answerAuthority": "source_answer",
+      "answerLabel": "學案來源答案",
+      "referenceAnswer": "宾语前置；“自利”可还原为“利自”；意为所以使父亲受损而使自己获利。",
+      "explanation": "代词“自”作“利”的宾语时前置。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "6b98378c243998ec",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p51-sentence-pattern-03",
+      "pdfPage": 51,
+      "printedPage": 48,
+      "competencyTag": "syntax",
+      "detailTag": "sentence_pattern",
+      "prompt": "指出“当察乱何自起”的特殊句式，写出常规语序并解释。",
+      "answerAuthority": "source_answer",
+      "answerLabel": "學案來源答案",
+      "referenceAnswer": "宾语前置；常规语序为“当察乱自何起”；意为尝试考察混乱从哪里产生。",
+      "explanation": "疑问代词“何”作介词“自”的宾语而前置。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "0b26b091539752c1",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p51-word-class-01",
+      "pdfPage": 51,
+      "printedPage": 48,
+      "competencyTag": "vocabulary",
+      "detailTag": "word_class_conversion",
+      "prompt": "说明“虽父之不慈子”中“慈”的词类活用。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "形容词用作动词，慈爱、爱护。",
+      "explanation": "“慈子”即慈爱儿子。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "9fa3639e0c7e5d8a",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p51-word-class-02",
+      "pdfPage": 51,
+      "printedPage": 48,
+      "competencyTag": "vocabulary",
+      "detailTag": "word_class_conversion",
+      "prompt": "说明“视人身若其身，谁贼”中“贼”的词类活用。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "名词用作动词，伤害。",
+      "explanation": "句意为若把别人的身体看作自己的身体，谁还会伤害别人。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "25f231bde4f92fa6",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p51-word-class-03",
+      "pdfPage": 51,
+      "printedPage": 48,
+      "competencyTag": "vocabulary",
+      "detailTag": "word_class_conversion",
+      "prompt": "说明“故亏父而自利”中“亏”“利”的词类活用。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "都是使动用法：“亏”是使……受损，“利”是使……获利。",
+      "explanation": "句意为使父亲受损而使自己获利。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "96b64fd503dec59f",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p56-argumentation-01",
+      "pdfPage": 56,
+      "printedPage": 53,
+      "competencyTag": "comprehension",
+      "detailTag": "argumentation",
+      "prompt": "本文运用了什么论述方法完成论证？请结合文本内容分析。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "示例：文章以类比推理和层层递进展开论证。先从偷桃李、盗犬豕鸡豚、取马牛、杀人夺物逐级增加“亏人”的程度，推出罪也应愈重；再把这些公认的不义与规模更大的攻国相比较，指出人们却反而称赞攻国的矛盾。末段又以少见黑为黑、多见黑反称白，少尝苦为苦、多尝苦反称甘作类比，并用反问强化结论，揭示世人辨义不义的混乱。",
+      "explanation": "可概括为类比、递进、对比和反问；应说明各方法如何共同揭露“以攻国为义”的价值矛盾。",
+      "rubric": [
+        "准确指出类比推理与递进论证两个核心方法。",
+        "结合偷盗、杀人、攻国的层级举例。",
+        "说明黑白、甘苦类比或小非与大非对比的作用。",
+        "能联系中心观点；允许其他有文本依据的合理表述。"
+      ],
+      "reviewRequired": true,
+      "qualityNotes": [
+        "开放题无唯一答案，示例仅供参考。"
+      ],
+      "activeForSelfTest": false,
+      "semanticRevision": "66313e5b03765b10",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p56-evidence-identification-01",
+      "pdfPage": 56,
+      "printedPage": 53,
+      "competencyTag": "comprehension",
+      "detailTag": "evidence_identification",
+      "prompt": "从六句中选出全都表现“行为不义”的一组：①入人园圃，窃其桃李；②扡其衣裘，取戈剑者；③天下之君子皆知而非之；④今至大为不义攻国，则弗知非，从而誉之；⑤书其言以遗后世；⑥此人为不知白黑之辩矣。\nA. ①②④　B. ③⑤⑥　C. ①②③　D. ④⑤⑥",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "A：①②④。",
+      "explanation": "①偷窃桃李、②杀人夺衣取兵器、④攻打别国都是文中所批判的不义行为；③⑤⑥是评价、记述或类比判断。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "f614676554f54956",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p56-multiple-choice-01",
+      "pdfPage": 56,
+      "printedPage": 53,
+      "competencyTag": "vocabulary",
+      "detailTag": "multiple_choice",
+      "prompt": "选择对加点字解释不正确的一项：A. 攘：偷窃；B. 兹：这、这个；C. 誉：赞美；D. 情：确实、的确。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": "B。",
+      "explanation": "“其不仁兹甚”中的“兹”意为更加、愈加，不是“这、这个”。",
+      "rubric": [],
+      "reviewRequired": false,
+      "qualityNotes": [],
+      "activeForSelfTest": true,
+      "semanticRevision": "b7f41ae1f4245332",
+      "semanticAliases": []
+    },
+    {
+      "lessonId": "lesson-1485",
+      "itemKey": "lesson-1485-p56-translation-01",
+      "pdfPage": 56,
+      "printedPage": 53,
+      "competencyTag": "comprehension",
+      "detailTag": "translation",
+      "prompt": "翻译：（1）若知其不义也，夫奚说书其不义以遗后世哉？（2）是以知天下之君子也，辩义与不义之乱也。",
+      "answerAuthority": "codex_reference",
+      "answerLabel": "Codex 參考答案",
+      "referenceAnswer": [
+        "如果知道攻国是不义的，那么又有什么理由把这种不义写下来留给后世呢？",
+        "因此可以知道，天下的君子辨别义与不义是混乱的。"
+      ],
+      "explanation": "翻译应落实“若、奚、说、书、遗、是以、辩、乱”等词语和第一句反问语气；“说”可译作说法、理由。",
+      "rubric": [
+        "第一句准确译出假设关系和“奚……哉”的反问语气。",
+        "第二句准确译出“是以、辩、乱”。",
+        "语意完整、符合现代汉语表达；允许同义改写。"
+      ],
+      "reviewRequired": true,
+      "qualityNotes": [
+        "主观翻译题，参考译文不是唯一表述。"
+      ],
+      "activeForSelfTest": false,
+      "semanticRevision": "1b31511a62a6b465",
+      "semanticAliases": []
+    }
+  ],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1485.json",
+    "lessonSha256": "13d1467b6c11929cce06163384ecc57b8e90a717b862c45301e492b6baa5a739",
+    "reader": "data/reader-documents/lesson-1485.json",
+    "readerSha256": "0b05e627fadaa5840b7d3a83fd806e1693f1b3cb9076a89f247918df32119b4a",
+    "sourcePostId": 10008,
+    "sourcePostNumber": 1,
+    "blockCount": 4,
+    "annotationCount": 18,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "firstRead",
+        "vocabulary",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 14,
+      "formativeCount": 34,
+      "activeStudyGuideCount": 19,
+      "inactiveStudyGuideCount": 2,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": true,
+      "status": "source-items-present-calibration-pending",
+      "areaSources": {
+        "vocabulary": [
+          "lesson-1485:v01",
+          "lesson-1485:v02",
+          "lesson-1485:v03",
+          "lesson-1485:v04",
+          "lesson-1485:v05",
+          "lesson-1485:v06",
+          "lesson-1485:v07",
+          "lesson-1485:v08",
+          "lesson-1485:v09",
+          "lesson-1485:v10",
+          "lesson-1485:v14",
+          "lesson-1485-p50-ancient-modern-01",
+          "lesson-1485-p50-ancient-modern-02",
+          "lesson-1485-p50-function-word-01",
+          "lesson-1485-p50-function-word-02",
+          "lesson-1485-p50-phonetic-loan-01",
+          "lesson-1485-p50-phonetic-loan-02",
+          "lesson-1485-p50-phonetic-loan-03",
+          "lesson-1485-p50-polysemy-01",
+          "lesson-1485-p50-polysemy-02",
+          "lesson-1485-p50-polysemy-03",
+          "lesson-1485-p50-polysemy-04",
+          "lesson-1485-p51-word-class-01",
+          "lesson-1485-p51-word-class-02",
+          "lesson-1485-p51-word-class-03",
+          "lesson-1485-p56-multiple-choice-01"
+        ],
+        "functionWords": [
+          "lesson-1485-p50-function-word-01",
+          "lesson-1485-p50-function-word-02"
+        ],
+        "grammar": [
+          "lesson-1485:v02",
+          "lesson-1485:v08",
+          "lesson-1485-p51-sentence-pattern-01",
+          "lesson-1485-p51-sentence-pattern-02",
+          "lesson-1485-p51-sentence-pattern-03"
+        ]
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "original-source-process",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [
+      {
+        "pdfPages": [
+          52,
+          54
+        ],
+        "printedPages": [
+          49,
+          51
+        ],
+        "reason": "原页以影像呈现；结构化 JSON 与 Markdown 仅保留“【课堂任务】”或空白页内容，未抽取题目正文。",
+        "disposition": "不据空白抽取结果造题；待完成原页影像转录与人工校对后再入库。"
+      }
+    ],
+    "reviewRequiredGuideIds": [
+      "lesson-1485-p56-argumentation-01",
+      "lesson-1485-p56-translation-01"
+    ]
+  },
+  "sourceReviewRequired": true
+}

@@ -295,6 +295,17 @@ function projectJson(relative, text, sanitizer, immutable = false) {
   return `${JSON.stringify(projectedValue, null, indentation)}${trailingNewline}`;
 }
 
+export const RELEASE_JSON_PROJECTION_VERSION = "yw-release-json-projection-v1";
+
+// Shared with source-pinned offline packets: hash the JSON the release serves.
+// Preserve the existing projection order, formatting and sanitizer accounting.
+export function projectReleaseJson(relative, text, sanitizer = createUrlSanitizer()) {
+  const privacyProjected = projectJson(relative, text, sanitizer);
+  const projected = projectWebJson(relative, privacyProjected);
+  assertNoForbiddenWebHost(relative, projected);
+  return projected;
+}
+
 function assertTextSafe(relative, text) {
   if (privacyTotal(privacyIssueCounts(text)) > 0) {
     fail(`forbidden URL material in non-JSON release input ${relative}; fix the source explicitly`);
@@ -600,8 +611,7 @@ function projectSource(sourceRoot, releaseKind) {
     if (TEXT_EXTENSIONS.has(path.extname(relative).toLowerCase())) {
       const text = source.toString("utf8");
       if (path.extname(relative).toLowerCase() === ".json") {
-        const privacyProjected = projectJson(relative, text, sanitizer);
-        output = Buffer.from(projectWebJson(relative, privacyProjected));
+        output = Buffer.from(projectReleaseJson(relative, text, sanitizer));
       } else {
         assertTextSafe(relative, text);
         output = Buffer.from(stripForbiddenWebHostFromText(text));

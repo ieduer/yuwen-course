@@ -1,0 +1,4211 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1567",
+  "title": "6 大堰河——我的保姆/ 艾青",
+  "mode": "poetry",
+  "author": "艾青",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1567:p1",
+      "text": "大堰河，是我的保姆。",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，是我的保姆。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p2",
+      "text": "她的名字就是生她的村庄的名字，",
+      "block": {
+        "runs": [
+          {
+            "text": "她的名字就是生她的村庄的名字，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p3",
+      "text": "她是童养媳，",
+      "block": {
+        "runs": [
+          {
+            "text": "她是童养媳，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p4",
+      "text": "大堰河，是我的保姆。",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，是我的保姆。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p5",
+      "text": "我是地主的儿子，",
+      "block": {
+        "runs": [
+          {
+            "text": "我是地主的儿子，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p6",
+      "text": "也是吃了大堰河的奶而长大了的",
+      "block": {
+        "runs": [
+          {
+            "text": "也是吃了大堰河的奶而长大了的",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p7",
+      "text": "大堰河的儿子。",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河的儿子。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p8",
+      "text": "大堰河以养育我而养育她的家，",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河以养育我而养育她的家，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p9",
+      "text": "而我，是吃了你的奶而被养育了的，",
+      "block": {
+        "runs": [
+          {
+            "text": "而我，是吃了你的奶而被养育了的，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p10",
+      "text": "大堰河啊，我的保姆。",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河啊，我的保姆。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p11",
+      "text": "大堰河，今天我看到雪使我想起了你：",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，今天我看到雪使我想起了你：",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p12",
+      "text": "你的被雪压着的草盖的坟墓，",
+      "block": {
+        "runs": [
+          {
+            "text": "你的被雪压着的草盖的坟墓，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p13",
+      "text": "你的关闭了的故居檐头的枯死的瓦菲，",
+      "block": {
+        "runs": [
+          {
+            "text": "你的关闭了的故居檐头的枯死的瓦菲，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p14",
+      "text": "你的被典押了的一丈平方的园地，",
+      "block": {
+        "runs": [
+          {
+            "text": "你的被典押了的一丈平方的园地，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p15",
+      "text": "你的门前的长了青苔的石椅，",
+      "block": {
+        "runs": [
+          {
+            "text": "你的门前的长了青苔的石椅，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p16",
+      "text": "大堰河，今天我看到雪使我想起了你。",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，今天我看到雪使我想起了你。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p17",
+      "text": "你用你厚大的手掌把我抱在怀里，抚摸我；",
+      "block": {
+        "runs": [
+          {
+            "text": "你用你厚大的手掌把我抱在怀里，抚摸我；",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p18",
+      "text": "在你搭好了灶火之后，",
+      "block": {
+        "runs": [
+          {
+            "text": "在你搭好了灶火之后，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p19",
+      "text": "在你拍去了围裙上的炭灰之后，",
+      "block": {
+        "runs": [
+          {
+            "text": "在你拍去了围裙上的炭灰之后，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p20",
+      "text": "在你尝到饭已煮熟了之后，",
+      "block": {
+        "runs": [
+          {
+            "text": "在你尝到饭已煮熟了之后，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p21",
+      "text": "在你把乌黑的酱碗放到乌黑的桌子上之后，",
+      "block": {
+        "runs": [
+          {
+            "text": "在你把乌黑的酱碗放到乌黑的桌子上之后，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p22",
+      "text": "在你补好了儿子们的为山腰的荆棘扯破的衣服之后，",
+      "block": {
+        "runs": [
+          {
+            "text": "在你补好了儿子们的为山腰的荆棘扯破的衣服之后，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p23",
+      "text": "在你把小儿被柴刀砍伤了的手包好之后，",
+      "block": {
+        "runs": [
+          {
+            "text": "在你把小儿被柴刀砍伤了的手包好之后，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p24",
+      "text": "在你把夫儿们的衬衣上的虱子一颗颗地掐死之后，",
+      "block": {
+        "runs": [
+          {
+            "text": "在你把夫儿们的衬衣上的虱子一颗颗地掐死之后，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p25",
+      "text": "在你拿起了今天的第一颗鸡蛋之后，",
+      "block": {
+        "runs": [
+          {
+            "text": "在你拿起了今天的第一颗鸡蛋之后，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p26",
+      "text": "你用你厚大的手掌把我抱在怀里，抚摸我。",
+      "block": {
+        "runs": [
+          {
+            "text": "你用你厚大的手掌把我抱在怀里，抚摸我。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p27",
+      "text": "我是地主的儿子，",
+      "block": {
+        "runs": [
+          {
+            "text": "我是地主的儿子，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p28",
+      "text": "在我吃光了你大堰河的奶之后，",
+      "block": {
+        "runs": [
+          {
+            "text": "在我吃光了你大堰河的奶之后，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p29",
+      "text": "我被生我的父母领回到自己的家里。",
+      "block": {
+        "runs": [
+          {
+            "text": "我被生我的父母领回到自己的家里。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p30",
+      "text": "啊，大堰河，你为什么要哭？",
+      "block": {
+        "runs": [
+          {
+            "text": "啊，大堰河，你为什么要哭？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p31",
+      "text": "我做了生我的父母家里的新客了!",
+      "block": {
+        "runs": [
+          {
+            "text": "我做了生我的父母家里的新客了!",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p32",
+      "text": "我摸着红漆雕花的家具，",
+      "block": {
+        "runs": [
+          {
+            "text": "我摸着红漆雕花的家具，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p33",
+      "text": "我摸着父母的睡床上金色的花纹，",
+      "block": {
+        "runs": [
+          {
+            "text": "我摸着父母的睡床上金色的花纹，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p34",
+      "text": "我呆呆地看着檐头的我不认得的“天伦叙乐”的匾，",
+      "block": {
+        "runs": [
+          {
+            "text": "我呆呆地看着檐头的我不认得的“天伦叙乐”的匾，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p35",
+      "text": "我摸着新换上的衣服的丝的和贝壳的纽扣，",
+      "block": {
+        "runs": [
+          {
+            "text": "我摸着新换上的衣服的丝的和贝壳的纽扣，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p36",
+      "text": "我看着母亲怀里的不熟识的妹妹，",
+      "block": {
+        "runs": [
+          {
+            "text": "我看着母亲怀里的不熟识的妹妹，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p37",
+      "text": "我坐着油漆过的安了火钵的炕凳，",
+      "block": {
+        "runs": [
+          {
+            "text": "我坐着油漆过的安了火钵的炕凳，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p38",
+      "text": "我吃着碾了三番的白米的饭，",
+      "block": {
+        "runs": [
+          {
+            "text": "我吃着碾了三番的白米的饭，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p39",
+      "text": "但，我是这般忸怩不安！因为我",
+      "block": {
+        "runs": [
+          {
+            "text": "但，我是这般忸怩不安！因为我",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p40",
+      "text": "我做了生我的父母家里的新客了。",
+      "block": {
+        "runs": [
+          {
+            "text": "我做了生我的父母家里的新客了。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p41",
+      "text": "大堰河，为了生活，",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，为了生活，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p42",
+      "text": "在她流尽了她的乳液之后，",
+      "block": {
+        "runs": [
+          {
+            "text": "在她流尽了她的乳液之后，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p43",
+      "text": "她就开始用抱过我的两臂劳动了；",
+      "block": {
+        "runs": [
+          {
+            "text": "她就开始用抱过我的两臂劳动了；",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p44",
+      "text": "她含着笑，洗着我们的衣服，",
+      "block": {
+        "runs": [
+          {
+            "text": "她含着笑，洗着我们的衣服，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p45",
+      "text": "她含着笑，提着菜篮到村边的结冰的池塘去，",
+      "block": {
+        "runs": [
+          {
+            "text": "她含着笑，提着菜篮到村边的结冰的池塘去，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p46",
+      "text": "她含着笑，切着冰屑悉索的萝卜，",
+      "block": {
+        "runs": [
+          {
+            "text": "她含着笑，切着冰屑悉索的萝卜，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p47",
+      "text": "她含着笑，用手掏着猪吃的麦糟，",
+      "block": {
+        "runs": [
+          {
+            "text": "她含着笑，用手掏着猪吃的麦糟，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p48",
+      "text": "她含着笑，扇着炖肉的炉子的火，",
+      "block": {
+        "runs": [
+          {
+            "text": "她含着笑，扇着炖肉的炉子的火，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p49",
+      "text": "她含着笑，背了团箕到广场上去",
+      "block": {
+        "runs": [
+          {
+            "text": "她含着笑，背了团箕到广场上去",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p50",
+      "text": "晒好那些大豆和小麦，",
+      "block": {
+        "runs": [
+          {
+            "text": "晒好那些大豆和小麦，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p51",
+      "text": "大堰河，为了生活，",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，为了生活，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p52",
+      "text": "在她流尽了她的乳液之后，",
+      "block": {
+        "runs": [
+          {
+            "text": "在她流尽了她的乳液之后，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p53",
+      "text": "她就用抱过我的两臂，劳动了。",
+      "block": {
+        "runs": [
+          {
+            "text": "她就用抱过我的两臂，劳动了。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p54",
+      "text": "大堰河，深爱着她的乳儿；",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，深爱着她的乳儿；",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p55",
+      "text": "在年节里，为了他，忙着切那冬米的糖，",
+      "block": {
+        "runs": [
+          {
+            "text": "在年节里，为了他，忙着切那冬米的糖，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p56",
+      "text": "为了他，常悄悄地走到村边的她的家里去，",
+      "block": {
+        "runs": [
+          {
+            "text": "为了他，常悄悄地走到村边的她的家里去，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p57",
+      "text": "为了他，走到她的身边叫一声“妈”，",
+      "block": {
+        "runs": [
+          {
+            "text": "为了他，走到她的身边叫一声“妈”，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p58",
+      "text": "大堰河，把他画的大红大绿的关云长",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，把他画的大红大绿的关云长",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p59",
+      "text": "贴在灶边的墙上，",
+      "block": {
+        "runs": [
+          {
+            "text": "贴在灶边的墙上，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p60",
+      "text": "大堰河，会对她的邻居夸口赞美她的乳儿；",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，会对她的邻居夸口赞美她的乳儿；",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p61",
+      "text": "大堰河曾做了一个不能对人说的梦：",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河曾做了一个不能对人说的梦：",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p62",
+      "text": "在梦里，她吃着她的乳儿的婚酒，",
+      "block": {
+        "runs": [
+          {
+            "text": "在梦里，她吃着她的乳儿的婚酒，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p63",
+      "text": "坐在辉煌的结彩的堂上，",
+      "block": {
+        "runs": [
+          {
+            "text": "坐在辉煌的结彩的堂上，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p64",
+      "text": "而她的娇美的媳妇亲切地叫她“婆婆”",
+      "block": {
+        "runs": [
+          {
+            "text": "而她的娇美的媳妇亲切地叫她“婆婆”",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p65",
+      "text": "……",
+      "block": {
+        "runs": [
+          {
+            "text": "……",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p66",
+      "text": "大堰河，深爱她的乳儿!",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，深爱她的乳儿!",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p67",
+      "text": "大堰河，在她的梦没有做醒的时候已死了。",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，在她的梦没有做醒的时候已死了。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p68",
+      "text": "她死时，乳儿不在她的旁侧，",
+      "block": {
+        "runs": [
+          {
+            "text": "她死时，乳儿不在她的旁侧，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p69",
+      "text": "她死时，平时打骂她的丈夫也为她流泪，",
+      "block": {
+        "runs": [
+          {
+            "text": "她死时，平时打骂她的丈夫也为她流泪，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p70",
+      "text": "五个儿子，个个哭得很悲，",
+      "block": {
+        "runs": [
+          {
+            "text": "五个儿子，个个哭得很悲，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p71",
+      "text": "她死时，轻轻地呼着她的乳儿的名字，",
+      "block": {
+        "runs": [
+          {
+            "text": "她死时，轻轻地呼着她的乳儿的名字，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p72",
+      "text": "大堰河，已死了，",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，已死了，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p73",
+      "text": "她死时，乳儿不在她的旁侧。",
+      "block": {
+        "runs": [
+          {
+            "text": "她死时，乳儿不在她的旁侧。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p74",
+      "text": "大堰河，含泪地去了!",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，含泪地去了!",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p75",
+      "text": "同着四十几年的人世生活的凌侮，",
+      "block": {
+        "runs": [
+          {
+            "text": "同着四十几年的人世生活的凌侮，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p76",
+      "text": "同着数不尽的奴隶的凄苦，",
+      "block": {
+        "runs": [
+          {
+            "text": "同着数不尽的奴隶的凄苦，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p77",
+      "text": "同着四块钱的棺材和几束稻草，",
+      "block": {
+        "runs": [
+          {
+            "text": "同着四块钱的棺材和几束稻草，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p78",
+      "text": "同着几尺长方的埋棺材的土地，",
+      "block": {
+        "runs": [
+          {
+            "text": "同着几尺长方的埋棺材的土地，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p79",
+      "text": "同着一手把的纸钱的灰，",
+      "block": {
+        "runs": [
+          {
+            "text": "同着一手把的纸钱的灰，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p80",
+      "text": "大堰河，她含泪地去了。",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，她含泪地去了。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p81",
+      "text": "这是大堰河所不知道的：",
+      "block": {
+        "runs": [
+          {
+            "text": "这是大堰河所不知道的：",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p82",
+      "text": "她的醉酒的丈夫已死去，",
+      "block": {
+        "runs": [
+          {
+            "text": "她的醉酒的丈夫已死去，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p83",
+      "text": "大儿做了土匪，",
+      "block": {
+        "runs": [
+          {
+            "text": "大儿做了土匪，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p84",
+      "text": "第二个死在炮火的烟里，",
+      "block": {
+        "runs": [
+          {
+            "text": "第二个死在炮火的烟里，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p85",
+      "text": "第三，第四，第五",
+      "block": {
+        "runs": [
+          {
+            "text": "第三，第四，第五",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p86",
+      "text": "在师傅和地主的叱骂声里过着日子。",
+      "block": {
+        "runs": [
+          {
+            "text": "在师傅和地主的叱骂声里过着日子。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p87",
+      "text": "而我，我是在写着给予这不公道的世界的咒语。",
+      "block": {
+        "runs": [
+          {
+            "text": "而我，我是在写着给予这不公道的世界的咒语。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p88",
+      "text": "当我经了长长的漂泊回到故土时，",
+      "block": {
+        "runs": [
+          {
+            "text": "当我经了长长的漂泊回到故土时，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p89",
+      "text": "在山腰里，田野上，",
+      "block": {
+        "runs": [
+          {
+            "text": "在山腰里，田野上，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p90",
+      "text": "兄弟们碰见时，是比六七年前更要亲密!",
+      "block": {
+        "runs": [
+          {
+            "text": "兄弟们碰见时，是比六七年前更要亲密!",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p91",
+      "text": "这，这是为你，静静地睡着的大堰河",
+      "block": {
+        "runs": [
+          {
+            "text": "这，这是为你，静静地睡着的大堰河",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p92",
+      "text": "所不知道的啊!",
+      "block": {
+        "runs": [
+          {
+            "text": "所不知道的啊!",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p93",
+      "text": "大堰河，今天，你的乳儿是在狱里，",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，今天，你的乳儿是在狱里，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p94",
+      "text": "写着一首呈给你的赞美诗，",
+      "block": {
+        "runs": [
+          {
+            "text": "写着一首呈给你的赞美诗，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p95",
+      "text": "呈给你黄土下紫色的灵魂，",
+      "block": {
+        "runs": [
+          {
+            "text": "呈给你黄土下紫色的灵魂，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p96",
+      "text": "呈给你拥抱过我的直伸着的手，",
+      "block": {
+        "runs": [
+          {
+            "text": "呈给你拥抱过我的直伸着的手，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p97",
+      "text": "呈给你吻过我的唇，",
+      "block": {
+        "runs": [
+          {
+            "text": "呈给你吻过我的唇，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p98",
+      "text": "呈给你泥黑的温柔的脸颜，",
+      "block": {
+        "runs": [
+          {
+            "text": "呈给你泥黑的温柔的脸颜，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p99",
+      "text": "呈给你养育了我的乳房，",
+      "block": {
+        "runs": [
+          {
+            "text": "呈给你养育了我的乳房，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p100",
+      "text": "呈给你的儿子们，我的兄弟们，",
+      "block": {
+        "runs": [
+          {
+            "text": "呈给你的儿子们，我的兄弟们，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p101",
+      "text": "呈给大地上一切的，",
+      "block": {
+        "runs": [
+          {
+            "text": "呈给大地上一切的，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p102",
+      "text": "我的大堰河般的保姆和她们的儿子，",
+      "block": {
+        "runs": [
+          {
+            "text": "我的大堰河般的保姆和她们的儿子，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p103",
+      "text": "呈给爱我如爱她自己的儿子般的大堰河。",
+      "block": {
+        "runs": [
+          {
+            "text": "呈给爱我如爱她自己的儿子般的大堰河。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p104",
+      "text": "大堰河，",
+      "block": {
+        "runs": [
+          {
+            "text": "大堰河，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p105",
+      "text": "我是吃了你的奶而长大了的",
+      "block": {
+        "runs": [
+          {
+            "text": "我是吃了你的奶而长大了的",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p106",
+      "text": "你的儿子，",
+      "block": {
+        "runs": [
+          {
+            "text": "你的儿子，",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p107",
+      "text": "我敬你",
+      "block": {
+        "runs": [
+          {
+            "text": "我敬你",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p108",
+      "text": "爱你!",
+      "block": {
+        "runs": [
+          {
+            "text": "爱你!",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1567:p109",
+      "text": "1933 年1 月14 日，雪",
+      "block": {
+        "runs": [
+          {
+            "text": "1933 年1 月14 日，雪",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [],
+  "resources": [
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/uploads/short-url/5vqSBisM1psXAUrJ6KIVf8gRtGu.pdf",
+      "kind": "link",
+      "label": "32补-艾青诗选-艾青着,人民文学出版社1997年版.pdf",
+      "postId": 49853,
+      "postNumber": null,
+      "sourceUrl": "https://forum.rdfzer.com/uploads/short-url/5vqSBisM1psXAUrJ6KIVf8gRtGu.pdf"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/uploads/short-url/bFBdv63qjqg5Lpj2NrXS5nC2Q1p.pdf",
+      "kind": "link",
+      "label": "NCL-003907032.pdf",
+      "postId": 50421,
+      "postNumber": null,
+      "sourceUrl": "https://forum.rdfzer.com/uploads/short-url/bFBdv63qjqg5Lpj2NrXS5nC2Q1p.pdf"
+    },
+    {
+      "disposition": "internal",
+      "href": "https://forum.rdfzer.com/uploads/short-url/eG3plc4FdYkagPtkaarrYaV5H7I.pdf",
+      "kind": "link",
+      "label": "NCL-004100974.pdf",
+      "postId": 50421,
+      "postNumber": null,
+      "sourceUrl": "https://forum.rdfzer.com/uploads/short-url/eG3plc4FdYkagPtkaarrYaV5H7I.pdf"
+    },
+    {
+      "disposition": "system-browser",
+      "href": "https://sites.google.com/view/pkuschool/%e9%81%b8%e5%bf%85%e4%b8%8b/%e7%ac%ac%e4%ba%8c%e5%8d%95%e5%85%83/6-%e5%a4%a7%e5%a0%b0%e6%b2%b3-%e6%88%91%e7%9a%84%e4%bf%9d%e5%a7%86-%e8%89%be%e9%9d%92",
+      "kind": "link",
+      "label": "https://sites.google.com/view/pkuschool/%e9%81%b8%e5%bf%85%e4%b8%8b/%e7%ac%ac%e4%ba%8c%e5%8d%95%e5%85%83/6-%e5%a4%a7%e5%a0%b0%e6%b2%b3-%e6%88%91%e7%9a%84%e4%bf%",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://sites.google.com/view/pkuschool/%e9%81%b8%e5%bf%85%e4%b8%8b/%e7%ac%ac%e4%ba%8c%e5%8d%95%e5%85%83/6-%e5%a4%a7%e5%a0%b0%e6%b2%b3-%e6%88%91%e7%9a%84%e4%bf%9d%e5%a7%86-%e8%89%be%e9%9d%92"
+    }
+  ],
+  "source": "https://forum.rdfzer.com/t/topic/1567",
+  "objectives": [
+    {
+      "id": "lesson-1567:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1567:p1",
+        "lesson-1567:p2",
+        "lesson-1567:p3",
+        "lesson-1567:p4",
+        "lesson-1567:p5",
+        "lesson-1567:p6",
+        "lesson-1567:p7",
+        "lesson-1567:p8",
+        "lesson-1567:p9",
+        "lesson-1567:p10",
+        "lesson-1567:p11",
+        "lesson-1567:p12",
+        "lesson-1567:p13",
+        "lesson-1567:p14",
+        "lesson-1567:p15",
+        "lesson-1567:p16",
+        "lesson-1567:p17",
+        "lesson-1567:p18",
+        "lesson-1567:p19",
+        "lesson-1567:p20",
+        "lesson-1567:p21",
+        "lesson-1567:p22",
+        "lesson-1567:p23",
+        "lesson-1567:p24",
+        "lesson-1567:p25",
+        "lesson-1567:p26",
+        "lesson-1567:p27",
+        "lesson-1567:p28",
+        "lesson-1567:p29",
+        "lesson-1567:p30",
+        "lesson-1567:p31",
+        "lesson-1567:p32",
+        "lesson-1567:p33",
+        "lesson-1567:p34",
+        "lesson-1567:p35",
+        "lesson-1567:p36",
+        "lesson-1567:p37",
+        "lesson-1567:p38",
+        "lesson-1567:p39",
+        "lesson-1567:p40",
+        "lesson-1567:p41",
+        "lesson-1567:p42",
+        "lesson-1567:p43",
+        "lesson-1567:p44",
+        "lesson-1567:p45",
+        "lesson-1567:p46",
+        "lesson-1567:p47",
+        "lesson-1567:p48",
+        "lesson-1567:p49",
+        "lesson-1567:p50",
+        "lesson-1567:p51",
+        "lesson-1567:p52",
+        "lesson-1567:p53",
+        "lesson-1567:p54",
+        "lesson-1567:p55",
+        "lesson-1567:p56",
+        "lesson-1567:p57",
+        "lesson-1567:p58",
+        "lesson-1567:p59",
+        "lesson-1567:p60",
+        "lesson-1567:p61",
+        "lesson-1567:p62",
+        "lesson-1567:p63",
+        "lesson-1567:p64",
+        "lesson-1567:p65",
+        "lesson-1567:p66",
+        "lesson-1567:p67",
+        "lesson-1567:p68",
+        "lesson-1567:p69",
+        "lesson-1567:p70",
+        "lesson-1567:p71",
+        "lesson-1567:p72",
+        "lesson-1567:p73",
+        "lesson-1567:p74",
+        "lesson-1567:p75",
+        "lesson-1567:p76",
+        "lesson-1567:p77",
+        "lesson-1567:p78",
+        "lesson-1567:p79",
+        "lesson-1567:p80",
+        "lesson-1567:p81",
+        "lesson-1567:p82",
+        "lesson-1567:p83",
+        "lesson-1567:p84",
+        "lesson-1567:p85",
+        "lesson-1567:p86",
+        "lesson-1567:p87",
+        "lesson-1567:p88",
+        "lesson-1567:p89",
+        "lesson-1567:p90",
+        "lesson-1567:p91",
+        "lesson-1567:p92",
+        "lesson-1567:p93",
+        "lesson-1567:p94",
+        "lesson-1567:p95",
+        "lesson-1567:p96",
+        "lesson-1567:p97",
+        "lesson-1567:p98",
+        "lesson-1567:p99",
+        "lesson-1567:p100",
+        "lesson-1567:p101",
+        "lesson-1567:p102",
+        "lesson-1567:p103",
+        "lesson-1567:p104",
+        "lesson-1567:p105",
+        "lesson-1567:p106",
+        "lesson-1567:p107",
+        "lesson-1567:p108",
+        "lesson-1567:p109"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1567:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1567:p1",
+        "lesson-1567:p2",
+        "lesson-1567:p3",
+        "lesson-1567:p4",
+        "lesson-1567:p5",
+        "lesson-1567:p6",
+        "lesson-1567:p7",
+        "lesson-1567:p8",
+        "lesson-1567:p9",
+        "lesson-1567:p10",
+        "lesson-1567:p11",
+        "lesson-1567:p12",
+        "lesson-1567:p13",
+        "lesson-1567:p14",
+        "lesson-1567:p15",
+        "lesson-1567:p16",
+        "lesson-1567:p17",
+        "lesson-1567:p18",
+        "lesson-1567:p19",
+        "lesson-1567:p20",
+        "lesson-1567:p21",
+        "lesson-1567:p22",
+        "lesson-1567:p23",
+        "lesson-1567:p24",
+        "lesson-1567:p25",
+        "lesson-1567:p26",
+        "lesson-1567:p27",
+        "lesson-1567:p28",
+        "lesson-1567:p29",
+        "lesson-1567:p30",
+        "lesson-1567:p31",
+        "lesson-1567:p32",
+        "lesson-1567:p33",
+        "lesson-1567:p34",
+        "lesson-1567:p35",
+        "lesson-1567:p36",
+        "lesson-1567:p37",
+        "lesson-1567:p38",
+        "lesson-1567:p39",
+        "lesson-1567:p40",
+        "lesson-1567:p41",
+        "lesson-1567:p42",
+        "lesson-1567:p43",
+        "lesson-1567:p44",
+        "lesson-1567:p45",
+        "lesson-1567:p46",
+        "lesson-1567:p47",
+        "lesson-1567:p48",
+        "lesson-1567:p49",
+        "lesson-1567:p50",
+        "lesson-1567:p51",
+        "lesson-1567:p52",
+        "lesson-1567:p53",
+        "lesson-1567:p54",
+        "lesson-1567:p55",
+        "lesson-1567:p56",
+        "lesson-1567:p57",
+        "lesson-1567:p58",
+        "lesson-1567:p59",
+        "lesson-1567:p60",
+        "lesson-1567:p61",
+        "lesson-1567:p62",
+        "lesson-1567:p63",
+        "lesson-1567:p64",
+        "lesson-1567:p65",
+        "lesson-1567:p66",
+        "lesson-1567:p67",
+        "lesson-1567:p68",
+        "lesson-1567:p69",
+        "lesson-1567:p70",
+        "lesson-1567:p71",
+        "lesson-1567:p72",
+        "lesson-1567:p73",
+        "lesson-1567:p74",
+        "lesson-1567:p75",
+        "lesson-1567:p76",
+        "lesson-1567:p77",
+        "lesson-1567:p78",
+        "lesson-1567:p79",
+        "lesson-1567:p80",
+        "lesson-1567:p81",
+        "lesson-1567:p82",
+        "lesson-1567:p83",
+        "lesson-1567:p84",
+        "lesson-1567:p85",
+        "lesson-1567:p86",
+        "lesson-1567:p87",
+        "lesson-1567:p88",
+        "lesson-1567:p89",
+        "lesson-1567:p90",
+        "lesson-1567:p91",
+        "lesson-1567:p92",
+        "lesson-1567:p93",
+        "lesson-1567:p94",
+        "lesson-1567:p95",
+        "lesson-1567:p96",
+        "lesson-1567:p97",
+        "lesson-1567:p98",
+        "lesson-1567:p99",
+        "lesson-1567:p100",
+        "lesson-1567:p101",
+        "lesson-1567:p102",
+        "lesson-1567:p103",
+        "lesson-1567:p104",
+        "lesson-1567:p105",
+        "lesson-1567:p106",
+        "lesson-1567:p107",
+        "lesson-1567:p108",
+        "lesson-1567:p109"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1567:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1567:p1",
+        "lesson-1567:p2",
+        "lesson-1567:p3",
+        "lesson-1567:p4",
+        "lesson-1567:p5",
+        "lesson-1567:p6",
+        "lesson-1567:p7",
+        "lesson-1567:p8",
+        "lesson-1567:p9",
+        "lesson-1567:p10",
+        "lesson-1567:p11",
+        "lesson-1567:p12",
+        "lesson-1567:p13",
+        "lesson-1567:p14",
+        "lesson-1567:p15",
+        "lesson-1567:p16",
+        "lesson-1567:p17",
+        "lesson-1567:p18",
+        "lesson-1567:p19",
+        "lesson-1567:p20",
+        "lesson-1567:p21",
+        "lesson-1567:p22",
+        "lesson-1567:p23",
+        "lesson-1567:p24",
+        "lesson-1567:p25",
+        "lesson-1567:p26",
+        "lesson-1567:p27",
+        "lesson-1567:p28",
+        "lesson-1567:p29",
+        "lesson-1567:p30",
+        "lesson-1567:p31",
+        "lesson-1567:p32",
+        "lesson-1567:p33",
+        "lesson-1567:p34",
+        "lesson-1567:p35",
+        "lesson-1567:p36",
+        "lesson-1567:p37",
+        "lesson-1567:p38",
+        "lesson-1567:p39",
+        "lesson-1567:p40",
+        "lesson-1567:p41",
+        "lesson-1567:p42",
+        "lesson-1567:p43",
+        "lesson-1567:p44",
+        "lesson-1567:p45",
+        "lesson-1567:p46",
+        "lesson-1567:p47",
+        "lesson-1567:p48",
+        "lesson-1567:p49",
+        "lesson-1567:p50",
+        "lesson-1567:p51",
+        "lesson-1567:p52",
+        "lesson-1567:p53",
+        "lesson-1567:p54",
+        "lesson-1567:p55",
+        "lesson-1567:p56",
+        "lesson-1567:p57",
+        "lesson-1567:p58",
+        "lesson-1567:p59",
+        "lesson-1567:p60",
+        "lesson-1567:p61",
+        "lesson-1567:p62",
+        "lesson-1567:p63",
+        "lesson-1567:p64",
+        "lesson-1567:p65",
+        "lesson-1567:p66",
+        "lesson-1567:p67",
+        "lesson-1567:p68",
+        "lesson-1567:p69",
+        "lesson-1567:p70",
+        "lesson-1567:p71",
+        "lesson-1567:p72",
+        "lesson-1567:p73",
+        "lesson-1567:p74",
+        "lesson-1567:p75",
+        "lesson-1567:p76",
+        "lesson-1567:p77",
+        "lesson-1567:p78",
+        "lesson-1567:p79",
+        "lesson-1567:p80",
+        "lesson-1567:p81",
+        "lesson-1567:p82",
+        "lesson-1567:p83",
+        "lesson-1567:p84",
+        "lesson-1567:p85",
+        "lesson-1567:p86",
+        "lesson-1567:p87",
+        "lesson-1567:p88",
+        "lesson-1567:p89",
+        "lesson-1567:p90",
+        "lesson-1567:p91",
+        "lesson-1567:p92",
+        "lesson-1567:p93",
+        "lesson-1567:p94",
+        "lesson-1567:p95",
+        "lesson-1567:p96",
+        "lesson-1567:p97",
+        "lesson-1567:p98",
+        "lesson-1567:p99",
+        "lesson-1567:p100",
+        "lesson-1567:p101",
+        "lesson-1567:p102",
+        "lesson-1567:p103",
+        "lesson-1567:p104",
+        "lesson-1567:p105",
+        "lesson-1567:p106",
+        "lesson-1567:p107",
+        "lesson-1567:p108",
+        "lesson-1567:p109"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1567:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1567:p1",
+        "lesson-1567:p2",
+        "lesson-1567:p3",
+        "lesson-1567:p4",
+        "lesson-1567:p5",
+        "lesson-1567:p6",
+        "lesson-1567:p7",
+        "lesson-1567:p8",
+        "lesson-1567:p9",
+        "lesson-1567:p10",
+        "lesson-1567:p11",
+        "lesson-1567:p12",
+        "lesson-1567:p13",
+        "lesson-1567:p14",
+        "lesson-1567:p15",
+        "lesson-1567:p16",
+        "lesson-1567:p17",
+        "lesson-1567:p18",
+        "lesson-1567:p19",
+        "lesson-1567:p20",
+        "lesson-1567:p21",
+        "lesson-1567:p22",
+        "lesson-1567:p23",
+        "lesson-1567:p24",
+        "lesson-1567:p25",
+        "lesson-1567:p26",
+        "lesson-1567:p27",
+        "lesson-1567:p28",
+        "lesson-1567:p29",
+        "lesson-1567:p30",
+        "lesson-1567:p31",
+        "lesson-1567:p32",
+        "lesson-1567:p33",
+        "lesson-1567:p34",
+        "lesson-1567:p35",
+        "lesson-1567:p36",
+        "lesson-1567:p37",
+        "lesson-1567:p38",
+        "lesson-1567:p39",
+        "lesson-1567:p40",
+        "lesson-1567:p41",
+        "lesson-1567:p42",
+        "lesson-1567:p43",
+        "lesson-1567:p44",
+        "lesson-1567:p45",
+        "lesson-1567:p46",
+        "lesson-1567:p47",
+        "lesson-1567:p48",
+        "lesson-1567:p49",
+        "lesson-1567:p50",
+        "lesson-1567:p51",
+        "lesson-1567:p52",
+        "lesson-1567:p53",
+        "lesson-1567:p54",
+        "lesson-1567:p55",
+        "lesson-1567:p56",
+        "lesson-1567:p57",
+        "lesson-1567:p58",
+        "lesson-1567:p59",
+        "lesson-1567:p60",
+        "lesson-1567:p61",
+        "lesson-1567:p62",
+        "lesson-1567:p63",
+        "lesson-1567:p64",
+        "lesson-1567:p65",
+        "lesson-1567:p66",
+        "lesson-1567:p67",
+        "lesson-1567:p68",
+        "lesson-1567:p69",
+        "lesson-1567:p70",
+        "lesson-1567:p71",
+        "lesson-1567:p72",
+        "lesson-1567:p73",
+        "lesson-1567:p74",
+        "lesson-1567:p75",
+        "lesson-1567:p76",
+        "lesson-1567:p77",
+        "lesson-1567:p78",
+        "lesson-1567:p79",
+        "lesson-1567:p80",
+        "lesson-1567:p81",
+        "lesson-1567:p82",
+        "lesson-1567:p83",
+        "lesson-1567:p84",
+        "lesson-1567:p85",
+        "lesson-1567:p86",
+        "lesson-1567:p87",
+        "lesson-1567:p88",
+        "lesson-1567:p89",
+        "lesson-1567:p90",
+        "lesson-1567:p91",
+        "lesson-1567:p92",
+        "lesson-1567:p93",
+        "lesson-1567:p94",
+        "lesson-1567:p95",
+        "lesson-1567:p96",
+        "lesson-1567:p97",
+        "lesson-1567:p98",
+        "lesson-1567:p99",
+        "lesson-1567:p100",
+        "lesson-1567:p101",
+        "lesson-1567:p102",
+        "lesson-1567:p103",
+        "lesson-1567:p104",
+        "lesson-1567:p105",
+        "lesson-1567:p106",
+        "lesson-1567:p107",
+        "lesson-1567:p108",
+        "lesson-1567:p109"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1567:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1567:p1",
+        "lesson-1567:p2",
+        "lesson-1567:p3",
+        "lesson-1567:p4",
+        "lesson-1567:p5",
+        "lesson-1567:p6",
+        "lesson-1567:p7",
+        "lesson-1567:p8",
+        "lesson-1567:p9",
+        "lesson-1567:p10",
+        "lesson-1567:p11",
+        "lesson-1567:p12",
+        "lesson-1567:p13",
+        "lesson-1567:p14",
+        "lesson-1567:p15",
+        "lesson-1567:p16",
+        "lesson-1567:p17",
+        "lesson-1567:p18",
+        "lesson-1567:p19",
+        "lesson-1567:p20",
+        "lesson-1567:p21",
+        "lesson-1567:p22",
+        "lesson-1567:p23",
+        "lesson-1567:p24",
+        "lesson-1567:p25",
+        "lesson-1567:p26",
+        "lesson-1567:p27",
+        "lesson-1567:p28",
+        "lesson-1567:p29",
+        "lesson-1567:p30",
+        "lesson-1567:p31",
+        "lesson-1567:p32",
+        "lesson-1567:p33",
+        "lesson-1567:p34",
+        "lesson-1567:p35",
+        "lesson-1567:p36",
+        "lesson-1567:p37",
+        "lesson-1567:p38",
+        "lesson-1567:p39",
+        "lesson-1567:p40",
+        "lesson-1567:p41",
+        "lesson-1567:p42",
+        "lesson-1567:p43",
+        "lesson-1567:p44",
+        "lesson-1567:p45",
+        "lesson-1567:p46",
+        "lesson-1567:p47",
+        "lesson-1567:p48",
+        "lesson-1567:p49",
+        "lesson-1567:p50",
+        "lesson-1567:p51",
+        "lesson-1567:p52",
+        "lesson-1567:p53",
+        "lesson-1567:p54",
+        "lesson-1567:p55",
+        "lesson-1567:p56",
+        "lesson-1567:p57",
+        "lesson-1567:p58",
+        "lesson-1567:p59",
+        "lesson-1567:p60",
+        "lesson-1567:p61",
+        "lesson-1567:p62",
+        "lesson-1567:p63",
+        "lesson-1567:p64",
+        "lesson-1567:p65",
+        "lesson-1567:p66",
+        "lesson-1567:p67",
+        "lesson-1567:p68",
+        "lesson-1567:p69",
+        "lesson-1567:p70",
+        "lesson-1567:p71",
+        "lesson-1567:p72",
+        "lesson-1567:p73",
+        "lesson-1567:p74",
+        "lesson-1567:p75",
+        "lesson-1567:p76",
+        "lesson-1567:p77",
+        "lesson-1567:p78",
+        "lesson-1567:p79",
+        "lesson-1567:p80",
+        "lesson-1567:p81",
+        "lesson-1567:p82",
+        "lesson-1567:p83",
+        "lesson-1567:p84",
+        "lesson-1567:p85",
+        "lesson-1567:p86",
+        "lesson-1567:p87",
+        "lesson-1567:p88",
+        "lesson-1567:p89",
+        "lesson-1567:p90",
+        "lesson-1567:p91",
+        "lesson-1567:p92",
+        "lesson-1567:p93",
+        "lesson-1567:p94",
+        "lesson-1567:p95",
+        "lesson-1567:p96",
+        "lesson-1567:p97",
+        "lesson-1567:p98",
+        "lesson-1567:p99",
+        "lesson-1567:p100",
+        "lesson-1567:p101",
+        "lesson-1567:p102",
+        "lesson-1567:p103",
+        "lesson-1567:p104",
+        "lesson-1567:p105",
+        "lesson-1567:p106",
+        "lesson-1567:p107",
+        "lesson-1567:p108",
+        "lesson-1567:p109"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1567:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1567:p1",
+        "lesson-1567:p2",
+        "lesson-1567:p3",
+        "lesson-1567:p4",
+        "lesson-1567:p5",
+        "lesson-1567:p6",
+        "lesson-1567:p7",
+        "lesson-1567:p8",
+        "lesson-1567:p9",
+        "lesson-1567:p10",
+        "lesson-1567:p11",
+        "lesson-1567:p12",
+        "lesson-1567:p13",
+        "lesson-1567:p14",
+        "lesson-1567:p15",
+        "lesson-1567:p16",
+        "lesson-1567:p17",
+        "lesson-1567:p18",
+        "lesson-1567:p19",
+        "lesson-1567:p20",
+        "lesson-1567:p21",
+        "lesson-1567:p22",
+        "lesson-1567:p23",
+        "lesson-1567:p24",
+        "lesson-1567:p25",
+        "lesson-1567:p26",
+        "lesson-1567:p27",
+        "lesson-1567:p28",
+        "lesson-1567:p29",
+        "lesson-1567:p30",
+        "lesson-1567:p31",
+        "lesson-1567:p32",
+        "lesson-1567:p33",
+        "lesson-1567:p34",
+        "lesson-1567:p35",
+        "lesson-1567:p36",
+        "lesson-1567:p37",
+        "lesson-1567:p38",
+        "lesson-1567:p39",
+        "lesson-1567:p40",
+        "lesson-1567:p41",
+        "lesson-1567:p42",
+        "lesson-1567:p43",
+        "lesson-1567:p44",
+        "lesson-1567:p45",
+        "lesson-1567:p46",
+        "lesson-1567:p47",
+        "lesson-1567:p48",
+        "lesson-1567:p49",
+        "lesson-1567:p50",
+        "lesson-1567:p51",
+        "lesson-1567:p52",
+        "lesson-1567:p53",
+        "lesson-1567:p54",
+        "lesson-1567:p55",
+        "lesson-1567:p56",
+        "lesson-1567:p57",
+        "lesson-1567:p58",
+        "lesson-1567:p59",
+        "lesson-1567:p60",
+        "lesson-1567:p61",
+        "lesson-1567:p62",
+        "lesson-1567:p63",
+        "lesson-1567:p64",
+        "lesson-1567:p65",
+        "lesson-1567:p66",
+        "lesson-1567:p67",
+        "lesson-1567:p68",
+        "lesson-1567:p69",
+        "lesson-1567:p70",
+        "lesson-1567:p71",
+        "lesson-1567:p72",
+        "lesson-1567:p73",
+        "lesson-1567:p74",
+        "lesson-1567:p75",
+        "lesson-1567:p76",
+        "lesson-1567:p77",
+        "lesson-1567:p78",
+        "lesson-1567:p79",
+        "lesson-1567:p80",
+        "lesson-1567:p81",
+        "lesson-1567:p82",
+        "lesson-1567:p83",
+        "lesson-1567:p84",
+        "lesson-1567:p85",
+        "lesson-1567:p86",
+        "lesson-1567:p87",
+        "lesson-1567:p88",
+        "lesson-1567:p89",
+        "lesson-1567:p90",
+        "lesson-1567:p91",
+        "lesson-1567:p92",
+        "lesson-1567:p93",
+        "lesson-1567:p94",
+        "lesson-1567:p95",
+        "lesson-1567:p96",
+        "lesson-1567:p97",
+        "lesson-1567:p98",
+        "lesson-1567:p99",
+        "lesson-1567:p100",
+        "lesson-1567:p101",
+        "lesson-1567:p102",
+        "lesson-1567:p103",
+        "lesson-1567:p104",
+        "lesson-1567:p105",
+        "lesson-1567:p106",
+        "lesson-1567:p107",
+        "lesson-1567:p108",
+        "lesson-1567:p109"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1567:wordCreation",
+      "domain": "wordCreation",
+      "label": "字詞創作",
+      "criteria": [
+        "context_meaning",
+        "creation",
+        "fit"
+      ],
+      "rule": "選一個剛疏通的詞，用於三行短詩（詩歌）、三句對白（戲劇）、三句微型敘事（小說）或三句話；核對詞義、語境及搭配。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1567:p1",
+        "lesson-1567:p2",
+        "lesson-1567:p3",
+        "lesson-1567:p4",
+        "lesson-1567:p5",
+        "lesson-1567:p6",
+        "lesson-1567:p7",
+        "lesson-1567:p8",
+        "lesson-1567:p9",
+        "lesson-1567:p10",
+        "lesson-1567:p11",
+        "lesson-1567:p12",
+        "lesson-1567:p13",
+        "lesson-1567:p14",
+        "lesson-1567:p15",
+        "lesson-1567:p16",
+        "lesson-1567:p17",
+        "lesson-1567:p18",
+        "lesson-1567:p19",
+        "lesson-1567:p20",
+        "lesson-1567:p21",
+        "lesson-1567:p22",
+        "lesson-1567:p23",
+        "lesson-1567:p24",
+        "lesson-1567:p25",
+        "lesson-1567:p26",
+        "lesson-1567:p27",
+        "lesson-1567:p28",
+        "lesson-1567:p29",
+        "lesson-1567:p30",
+        "lesson-1567:p31",
+        "lesson-1567:p32",
+        "lesson-1567:p33",
+        "lesson-1567:p34",
+        "lesson-1567:p35",
+        "lesson-1567:p36",
+        "lesson-1567:p37",
+        "lesson-1567:p38",
+        "lesson-1567:p39",
+        "lesson-1567:p40",
+        "lesson-1567:p41",
+        "lesson-1567:p42",
+        "lesson-1567:p43",
+        "lesson-1567:p44",
+        "lesson-1567:p45",
+        "lesson-1567:p46",
+        "lesson-1567:p47",
+        "lesson-1567:p48",
+        "lesson-1567:p49",
+        "lesson-1567:p50",
+        "lesson-1567:p51",
+        "lesson-1567:p52",
+        "lesson-1567:p53",
+        "lesson-1567:p54",
+        "lesson-1567:p55",
+        "lesson-1567:p56",
+        "lesson-1567:p57",
+        "lesson-1567:p58",
+        "lesson-1567:p59",
+        "lesson-1567:p60",
+        "lesson-1567:p61",
+        "lesson-1567:p62",
+        "lesson-1567:p63",
+        "lesson-1567:p64",
+        "lesson-1567:p65",
+        "lesson-1567:p66",
+        "lesson-1567:p67",
+        "lesson-1567:p68",
+        "lesson-1567:p69",
+        "lesson-1567:p70",
+        "lesson-1567:p71",
+        "lesson-1567:p72",
+        "lesson-1567:p73",
+        "lesson-1567:p74",
+        "lesson-1567:p75",
+        "lesson-1567:p76",
+        "lesson-1567:p77",
+        "lesson-1567:p78",
+        "lesson-1567:p79",
+        "lesson-1567:p80",
+        "lesson-1567:p81",
+        "lesson-1567:p82",
+        "lesson-1567:p83",
+        "lesson-1567:p84",
+        "lesson-1567:p85",
+        "lesson-1567:p86",
+        "lesson-1567:p87",
+        "lesson-1567:p88",
+        "lesson-1567:p89",
+        "lesson-1567:p90",
+        "lesson-1567:p91",
+        "lesson-1567:p92",
+        "lesson-1567:p93",
+        "lesson-1567:p94",
+        "lesson-1567:p95",
+        "lesson-1567:p96",
+        "lesson-1567:p97",
+        "lesson-1567:p98",
+        "lesson-1567:p99",
+        "lesson-1567:p100",
+        "lesson-1567:p101",
+        "lesson-1567:p102",
+        "lesson-1567:p103",
+        "lesson-1567:p104",
+        "lesson-1567:p105",
+        "lesson-1567:p106",
+        "lesson-1567:p107",
+        "lesson-1567:p108",
+        "lesson-1567:p109"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1567:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1567:p1",
+        "lesson-1567:p2",
+        "lesson-1567:p3",
+        "lesson-1567:p4",
+        "lesson-1567:p5",
+        "lesson-1567:p6",
+        "lesson-1567:p7",
+        "lesson-1567:p8",
+        "lesson-1567:p9",
+        "lesson-1567:p10",
+        "lesson-1567:p11",
+        "lesson-1567:p12",
+        "lesson-1567:p13",
+        "lesson-1567:p14",
+        "lesson-1567:p15",
+        "lesson-1567:p16",
+        "lesson-1567:p17",
+        "lesson-1567:p18",
+        "lesson-1567:p19",
+        "lesson-1567:p20",
+        "lesson-1567:p21",
+        "lesson-1567:p22",
+        "lesson-1567:p23",
+        "lesson-1567:p24",
+        "lesson-1567:p25",
+        "lesson-1567:p26",
+        "lesson-1567:p27",
+        "lesson-1567:p28",
+        "lesson-1567:p29",
+        "lesson-1567:p30",
+        "lesson-1567:p31",
+        "lesson-1567:p32",
+        "lesson-1567:p33",
+        "lesson-1567:p34",
+        "lesson-1567:p35",
+        "lesson-1567:p36",
+        "lesson-1567:p37",
+        "lesson-1567:p38",
+        "lesson-1567:p39",
+        "lesson-1567:p40",
+        "lesson-1567:p41",
+        "lesson-1567:p42",
+        "lesson-1567:p43",
+        "lesson-1567:p44",
+        "lesson-1567:p45",
+        "lesson-1567:p46",
+        "lesson-1567:p47",
+        "lesson-1567:p48",
+        "lesson-1567:p49",
+        "lesson-1567:p50",
+        "lesson-1567:p51",
+        "lesson-1567:p52",
+        "lesson-1567:p53",
+        "lesson-1567:p54",
+        "lesson-1567:p55",
+        "lesson-1567:p56",
+        "lesson-1567:p57",
+        "lesson-1567:p58",
+        "lesson-1567:p59",
+        "lesson-1567:p60",
+        "lesson-1567:p61",
+        "lesson-1567:p62",
+        "lesson-1567:p63",
+        "lesson-1567:p64",
+        "lesson-1567:p65",
+        "lesson-1567:p66",
+        "lesson-1567:p67",
+        "lesson-1567:p68",
+        "lesson-1567:p69",
+        "lesson-1567:p70",
+        "lesson-1567:p71",
+        "lesson-1567:p72",
+        "lesson-1567:p73",
+        "lesson-1567:p74",
+        "lesson-1567:p75",
+        "lesson-1567:p76",
+        "lesson-1567:p77",
+        "lesson-1567:p78",
+        "lesson-1567:p79",
+        "lesson-1567:p80",
+        "lesson-1567:p81",
+        "lesson-1567:p82",
+        "lesson-1567:p83",
+        "lesson-1567:p84",
+        "lesson-1567:p85",
+        "lesson-1567:p86",
+        "lesson-1567:p87",
+        "lesson-1567:p88",
+        "lesson-1567:p89",
+        "lesson-1567:p90",
+        "lesson-1567:p91",
+        "lesson-1567:p92",
+        "lesson-1567:p93",
+        "lesson-1567:p94",
+        "lesson-1567:p95",
+        "lesson-1567:p96",
+        "lesson-1567:p97",
+        "lesson-1567:p98",
+        "lesson-1567:p99",
+        "lesson-1567:p100",
+        "lesson-1567:p101",
+        "lesson-1567:p102",
+        "lesson-1567:p103",
+        "lesson-1567:p104",
+        "lesson-1567:p105",
+        "lesson-1567:p106",
+        "lesson-1567:p107",
+        "lesson-1567:p108",
+        "lesson-1567:p109"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1567:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1567:p1",
+        "lesson-1567:p2",
+        "lesson-1567:p3",
+        "lesson-1567:p4",
+        "lesson-1567:p5",
+        "lesson-1567:p6",
+        "lesson-1567:p7",
+        "lesson-1567:p8",
+        "lesson-1567:p9",
+        "lesson-1567:p10",
+        "lesson-1567:p11",
+        "lesson-1567:p12",
+        "lesson-1567:p13",
+        "lesson-1567:p14",
+        "lesson-1567:p15",
+        "lesson-1567:p16",
+        "lesson-1567:p17",
+        "lesson-1567:p18",
+        "lesson-1567:p19",
+        "lesson-1567:p20",
+        "lesson-1567:p21",
+        "lesson-1567:p22",
+        "lesson-1567:p23",
+        "lesson-1567:p24",
+        "lesson-1567:p25",
+        "lesson-1567:p26",
+        "lesson-1567:p27",
+        "lesson-1567:p28",
+        "lesson-1567:p29",
+        "lesson-1567:p30",
+        "lesson-1567:p31",
+        "lesson-1567:p32",
+        "lesson-1567:p33",
+        "lesson-1567:p34",
+        "lesson-1567:p35",
+        "lesson-1567:p36",
+        "lesson-1567:p37",
+        "lesson-1567:p38",
+        "lesson-1567:p39",
+        "lesson-1567:p40",
+        "lesson-1567:p41",
+        "lesson-1567:p42",
+        "lesson-1567:p43",
+        "lesson-1567:p44",
+        "lesson-1567:p45",
+        "lesson-1567:p46",
+        "lesson-1567:p47",
+        "lesson-1567:p48",
+        "lesson-1567:p49",
+        "lesson-1567:p50",
+        "lesson-1567:p51",
+        "lesson-1567:p52",
+        "lesson-1567:p53",
+        "lesson-1567:p54",
+        "lesson-1567:p55",
+        "lesson-1567:p56",
+        "lesson-1567:p57",
+        "lesson-1567:p58",
+        "lesson-1567:p59",
+        "lesson-1567:p60",
+        "lesson-1567:p61",
+        "lesson-1567:p62",
+        "lesson-1567:p63",
+        "lesson-1567:p64",
+        "lesson-1567:p65",
+        "lesson-1567:p66",
+        "lesson-1567:p67",
+        "lesson-1567:p68",
+        "lesson-1567:p69",
+        "lesson-1567:p70",
+        "lesson-1567:p71",
+        "lesson-1567:p72",
+        "lesson-1567:p73",
+        "lesson-1567:p74",
+        "lesson-1567:p75",
+        "lesson-1567:p76",
+        "lesson-1567:p77",
+        "lesson-1567:p78",
+        "lesson-1567:p79",
+        "lesson-1567:p80",
+        "lesson-1567:p81",
+        "lesson-1567:p82",
+        "lesson-1567:p83",
+        "lesson-1567:p84",
+        "lesson-1567:p85",
+        "lesson-1567:p86",
+        "lesson-1567:p87",
+        "lesson-1567:p88",
+        "lesson-1567:p89",
+        "lesson-1567:p90",
+        "lesson-1567:p91",
+        "lesson-1567:p92",
+        "lesson-1567:p93",
+        "lesson-1567:p94",
+        "lesson-1567:p95",
+        "lesson-1567:p96",
+        "lesson-1567:p97",
+        "lesson-1567:p98",
+        "lesson-1567:p99",
+        "lesson-1567:p100",
+        "lesson-1567:p101",
+        "lesson-1567:p102",
+        "lesson-1567:p103",
+        "lesson-1567:p104",
+        "lesson-1567:p105",
+        "lesson-1567:p106",
+        "lesson-1567:p107",
+        "lesson-1567:p108",
+        "lesson-1567:p109"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1567:v01",
+      "domain": "vocabulary",
+      "label": "字詞：典押",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：典当抵押。語境義：典当、抵押。典押即把财产作价抵给别人换钱。连一丈平方的园地都被典押，写尽大堰河一家的赤贫。",
+      "sourcePassages": [
+        "lesson-1567:p14"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1567:v02",
+      "domain": "vocabulary",
+      "label": "字詞：忸怩",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：niǔ ní，羞惭不自在的样子。語境義：形容羞惭、不自然、不自在的样子。忸怩读 niǔ ní，指羞惭、局促不自在。「我」回到亲生父母家反而拘束如新客，与在大堰河怀里的自然温暖形成对照。 讀音題必須核對拼音，不能僅以詞義代替。",
+      "sourcePassages": [
+        "lesson-1567:p39"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1567:v03",
+      "domain": "vocabulary",
+      "label": "字詞：天伦叙乐",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：反讽：亲生父母家高悬团圆之乐，「我」却感到隔膜与陌生。語境義：家人团聚的欢乐；诗中「我不认得」暗示我在生身父母家感受不到这种欢乐。「天伦叙乐」指家人团聚之乐；「不认得」既是字面的不识，更是情感上的不识——真正给过「我」母爱的是大堰河，不是这块匾下的家。",
+      "sourcePassages": [
+        "lesson-1567:p34"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1567:v04",
+      "domain": "vocabulary",
+      "label": "字詞：凌侮",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：欺凌侮辱。語境義：欺凌侮辱。凌侮即欺凌侮辱。大堰河带着四十几年被欺凌的一生入土，只有四块钱的棺材与几束稻草，是对旧世界最沉痛的控诉。",
+      "sourcePassages": [
+        "lesson-1567:p75"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1567:v05",
+      "domain": "vocabulary",
+      "label": "字詞：咒语",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：诗人对不公道世界的愤怒控诉与诅咒般的诗句。語境義：这里指诗人对不公道世界发出的愤怒诅咒与控诉的诗句。「咒语」在此是比喻：把控诉旧世界的诗当作诅咒它的语言。与结尾「赞美诗」相对——诅咒不公道的世界，赞美大堰河般的人。",
+      "sourcePassages": [
+        "lesson-1567:p87"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1567:v06",
+      "domain": "vocabulary",
+      "label": "字詞：叱骂",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：呵斥责骂。語境義：大声斥责辱骂。叱骂即大声呵斥责骂，直接、粗暴；不同于含讥带讽的「冷嘲热讽」，更不是好意的「劝诫」。一词写出学徒与雇工的屈辱日常。",
+      "sourcePassages": [
+        "lesson-1567:p86"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1567:v07",
+      "domain": "vocabulary",
+      "label": "字詞：瓦菲",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：生长在瓦缝中的野草。語境義：生长在瓦缝中的野草。教材注：瓦菲指生长在瓦缝中的野草。连瓦菲都枯死了，故居的死寂荒凉便有了具体的着落。",
+      "sourcePassages": [
+        "lesson-1567:p13"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "lesson-1567:v08",
+      "domain": "vocabulary",
+      "label": "字詞：火钵",
+      "criteria": [
+        "source_answer",
+        "context_meaning",
+        "explanation",
+        "independent"
+      ],
+      "rule": "沿用原題準據：bō，盛火取暖的瓦盆。語境義：用来盛火取暖的瓦盆。钵读 bō，陶制器具，形状像盆而小；火钵即盛炭火取暖的瓦盆。教材文末有注。 讀音題必須核對拼音，不能僅以詞義代替。",
+      "sourcePassages": [
+        "lesson-1567:p37"
+      ],
+      "prerequisites": [],
+      "misconceptions": [
+        "照抄提示不算獨立掌握"
+      ],
+      "remediation": "解釋、語境比較、學生改述，然後新的等值提問；三次未掌握转教師覆核。"
+    },
+    {
+      "id": "legacy:effect:lesson-1567:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1567:interaction:contextWords",
+        "resourceVersion": "sha256:7ae76754738b8c77c902788f731c4ca08686a6ec27ed2c26a353690e84e0a5c0",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1567:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1567:interaction:revision",
+        "resourceVersion": "sha256:3ea187c2b2023d688f22634dc2824aef70ca4f4213d67f947e5d8992fdb0d18b",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1567:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1567:interaction:structure",
+        "resourceVersion": "sha256:2376134ad9f8259fb47c9a3ace85f2086f2971a63d365ce699f261ef1139d587",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1567:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1567:interaction:evaluation",
+        "resourceVersion": "sha256:7bcc362614910af373a8ff7083476b56ce1ddb274ebc91e90c44f87b8cf4d0bc",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1567:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1567:interaction:authorQuestion",
+        "resourceVersion": "sha256:336a4f78f741a1f0dcf554dcfd629d1d3891444a072ff249a6dc5415d97513d9",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1567:vocab:lesson-1567:v01",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v01",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v01",
+        "resourceVersion": "sha256:b5891f7abd5827f5e78c592f363b239f0d2dc274d640f807b92f76fe27b30a9c",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1567:vocab:lesson-1567:v02",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v02",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v02",
+        "resourceVersion": "sha256:ae6a5fc5f1ff01476eb466b884b016e1b2d5ca81784e9d6651cca4248db7732a",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1567:vocab:lesson-1567:v03",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v03",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v03",
+        "resourceVersion": "sha256:c574979f74250ecc957c5be9c9f4da51f4640aa6a601eba2b9fc2174d976f26b",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1567:vocab:lesson-1567:v04",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v04",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v04",
+        "resourceVersion": "sha256:f951f69be835e0e2968474e7b912944caf3508b18b6034f99bda55ab43f1ad5e",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1567:vocab:lesson-1567:v05",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v05",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v05",
+        "resourceVersion": "sha256:52a25196162b7274b794558f4d611b539666067bf64de0178aec767eb7ca8c20",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1567:vocab:lesson-1567:v06",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v06",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v06",
+        "resourceVersion": "sha256:2633f2d40c817da302392474b70e0f4d46f7e2793a862cc4fe33d5027d29acef",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1567:vocab:lesson-1567:v07",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v07",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v07",
+        "resourceVersion": "sha256:37ad2384bf75bd1f2ee95bb7c0a2cfcf1dcdf351e6500d92de0842c077be53a5",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1567:vocab:lesson-1567:v08",
+      "domain": "legacy",
+      "label": "vocabulary",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v08",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v08",
+        "resourceVersion": "sha256:466570aa783855f28de4c60ceba7bcf5438c434a457a4f73434bde1ad3227d4b",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1567:interaction:wordCreation",
+      "domain": "legacy",
+      "label": "wordCreation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1567:interaction:wordCreation",
+        "canonicalUnitId": "yw:lesson-1567:interaction:wordCreation",
+        "resourceVersion": "sha256:35073685b92edc0179aaf8263b9427e51a34c2e2d5685b4b298a0bdfcadb6f01",
+        "questionKind": "wordCreation",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "lesson-1567:v01",
+      "word": "典押",
+      "sourceSentence": "你的被典押了的一丈平方的园地",
+      "meaning": "典当、抵押",
+      "explanation": "典押即把财产作价抵给别人换钱。连一丈平方的园地都被典押，写尽大堰河一家的赤贫。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "「你的被典押了的一丈平方的园地」中「典押」的意思是",
+      "options": [
+        "典藏保存",
+        "典当抵押",
+        "登记造册",
+        "出租收息"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "典当抵押",
+      "sourceRefs": [
+        "《现代汉语词典》"
+      ],
+      "version": "vocab-set-b7f52c9d34fb738e",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「你的被典押了的一丈平方的园地」\n「你的被典押了的一丈平方的园地」中「典押」的意思是\nA. 典藏保存\nB. 典当抵押\nC. 登记造册\nD. 出租收息\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「你的被典押了的一丈平方的园地」中「典押」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1567:v02",
+      "word": "忸怩",
+      "sourceSentence": "我是这般忸怩不安",
+      "meaning": "形容羞惭、不自然、不自在的样子",
+      "explanation": "忸怩读 niǔ ní，指羞惭、局促不自在。「我」回到亲生父母家反而拘束如新客，与在大堰河怀里的自然温暖形成对照。",
+      "type": "pronunciation",
+      "difficulty": 2,
+      "question": "「我是这般忸怩不安」中「忸怩」的读音与含义正确的一项是",
+      "options": [
+        "niǔ ní，羞惭不自在的样子",
+        "chǒu ní，扭动身体的样子",
+        "niǔ ěr，固执不听劝的样子",
+        "yōu ní，忧愁不安的样子"
+      ],
+      "answerIndex": 0,
+      "sourceAnswer": "niǔ ní，羞惭不自在的样子",
+      "sourceRefs": [
+        "《现代汉语词典》"
+      ],
+      "version": "vocab-set-b7f52c9d34fb738e",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「我是这般忸怩不安」\n「我是这般忸怩不安」中「忸怩」的读音与含义正确的一项是\nA. niǔ ní，羞惭不自在的样子\nB. chǒu ní，扭动身体的样子\nC. niǔ ěr，固执不听劝的样子\nD. yōu ní，忧愁不安的样子\n請選出答案，並用自己的話說明判斷依據。",
+        "「我是这般忸怩不安」中的「忸怩」應如何讀（請寫拼音）？它在此處是甚麼意思？請說明依據。"
+      ]
+    },
+    {
+      "id": "lesson-1567:v03",
+      "word": "天伦叙乐",
+      "sourceSentence": "我呆呆地看着檐头的我不认得的“天伦叙乐”的匾",
+      "meaning": "家人团聚的欢乐；诗中「我不认得」暗示我在生身父母家感受不到这种欢乐",
+      "explanation": "「天伦叙乐」指家人团聚之乐；「不认得」既是字面的不识，更是情感上的不识——真正给过「我」母爱的是大堰河，不是这块匾下的家。",
+      "type": "interpretation",
+      "difficulty": 3,
+      "question": "诗人写「我不认得的“天伦叙乐”的匾」，用意是",
+      "options": [
+        "说明「我」年幼失学，不认识匾上的字",
+        "以家宅的陈设炫耀地主家庭的富有",
+        "反讽：亲生父母家高悬团圆之乐，「我」却感到隔膜与陌生",
+        "点明匾额年久失修，字迹模糊难辨"
+      ],
+      "answerIndex": 2,
+      "sourceAnswer": "反讽：亲生父母家高悬团圆之乐，「我」却感到隔膜与陌生",
+      "sourceRefs": [
+        "《汉语大词典》"
+      ],
+      "version": "vocab-set-b7f52c9d34fb738e",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「我呆呆地看着檐头的我不认得的“天伦叙乐”的匾」\n诗人写「我不认得的“天伦叙乐”的匾」，用意是\nA. 说明「我」年幼失学，不认识匾上的字\nB. 以家宅的陈设炫耀地主家庭的富有\nC. 反讽：亲生父母家高悬团圆之乐，「我」却感到隔膜与陌生\nD. 点明匾额年久失修，字迹模糊难辨\n請選出答案，並用自己的話說明判斷依據。",
+        "「我呆呆地看着檐头的我不认得的“天伦叙乐”的匾」中的「天伦叙乐」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
+      ]
+    },
+    {
+      "id": "lesson-1567:v04",
+      "word": "凌侮",
+      "sourceSentence": "同着四十几年的人世生活的凌侮",
+      "meaning": "欺凌侮辱",
+      "explanation": "凌侮即欺凌侮辱。大堰河带着四十几年被欺凌的一生入土，只有四块钱的棺材与几束稻草，是对旧世界最沉痛的控诉。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "「同着四十几年的人世生活的凌侮」中「凌侮」的意思是",
+      "options": [
+        "严寒侵袭",
+        "欺凌侮辱",
+        "凌乱窘迫",
+        "轻慢怠惰"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "欺凌侮辱",
+      "sourceRefs": [
+        "《汉语大词典》"
+      ],
+      "version": "vocab-set-b7f52c9d34fb738e",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「同着四十几年的人世生活的凌侮」\n「同着四十几年的人世生活的凌侮」中「凌侮」的意思是\nA. 严寒侵袭\nB. 欺凌侮辱\nC. 凌乱窘迫\nD. 轻慢怠惰\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「同着四十几年的人世生活的凌侮」中「凌侮」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1567:v05",
+      "word": "咒语",
+      "sourceSentence": "我是在写着给予这不公道的世界的咒语",
+      "meaning": "这里指诗人对不公道世界发出的愤怒诅咒与控诉的诗句",
+      "explanation": "「咒语」在此是比喻：把控诉旧世界的诗当作诅咒它的语言。与结尾「赞美诗」相对——诅咒不公道的世界，赞美大堰河般的人。",
+      "type": "interpretation",
+      "difficulty": 2,
+      "question": "「我是在写着给予这不公道的世界的咒语」中「咒语」是指",
+      "options": [
+        "民间驱邪避灾的迷信口诀",
+        "诗人对不公道世界的愤怒控诉与诅咒般的诗句",
+        "狱中难友之间互通消息的暗语",
+        "对故乡亲人的思念之辞"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "诗人对不公道世界的愤怒控诉与诅咒般的诗句",
+      "sourceRefs": [
+        "《现代汉语词典》"
+      ],
+      "version": "vocab-set-b7f52c9d34fb738e",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「我是在写着给予这不公道的世界的咒语」\n「我是在写着给予这不公道的世界的咒语」中「咒语」是指\nA. 民间驱邪避灾的迷信口诀\nB. 诗人对不公道世界的愤怒控诉与诅咒般的诗句\nC. 狱中难友之间互通消息的暗语\nD. 对故乡亲人的思念之辞\n請選出答案，並用自己的話說明判斷依據。",
+        "「我是在写着给予这不公道的世界的咒语」中的「咒语」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
+      ]
+    },
+    {
+      "id": "lesson-1567:v06",
+      "word": "叱骂",
+      "sourceSentence": "在师傅和地主的叱骂声里过着日子",
+      "meaning": "大声斥责辱骂",
+      "explanation": "叱骂即大声呵斥责骂，直接、粗暴；不同于含讥带讽的「冷嘲热讽」，更不是好意的「劝诫」。一词写出学徒与雇工的屈辱日常。",
+      "type": "discrimination",
+      "difficulty": 2,
+      "question": "「在师傅和地主的叱骂声里过着日子」中「叱骂」与下列词语意义最接近的是",
+      "options": [
+        "呵斥责骂",
+        "窃窃私语",
+        "冷嘲热讽",
+        "劝诫告诫"
+      ],
+      "answerIndex": 0,
+      "sourceAnswer": "呵斥责骂",
+      "sourceRefs": [
+        "《现代汉语词典》"
+      ],
+      "version": "vocab-set-b7f52c9d34fb738e",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「在师傅和地主的叱骂声里过着日子」\n「在师傅和地主的叱骂声里过着日子」中「叱骂」与下列词语意义最接近的是\nA. 呵斥责骂\nB. 窃窃私语\nC. 冷嘲热讽\nD. 劝诫告诫\n請選出答案，並用自己的話說明判斷依據。",
+        "請比較以下各項在原句中的意思：\nA. 呵斥责骂\nB. 窃窃私语\nC. 冷嘲热讽\nD. 劝诫告诫\n「在师傅和地主的叱骂声里过着日子」中「叱骂」与下列词语意义最接近的是。選出一項後逐一說明比較依據，不能只報字母。"
+      ]
+    },
+    {
+      "id": "lesson-1567:v07",
+      "word": "瓦菲",
+      "sourceSentence": "你的关闭了的故居檐头的枯死的瓦菲",
+      "meaning": "生长在瓦缝中的野草",
+      "explanation": "教材注：瓦菲指生长在瓦缝中的野草。连瓦菲都枯死了，故居的死寂荒凉便有了具体的着落。",
+      "type": "contextual-choice",
+      "difficulty": 1,
+      "question": "「故居檐头的枯死的瓦菲」中「瓦菲」是指",
+      "options": [
+        "屋瓦上的青苔",
+        "生长在瓦缝中的野草",
+        "屋檐下悬挂的干菜",
+        "破碎散落的瓦片"
+      ],
+      "answerIndex": 1,
+      "sourceAnswer": "生长在瓦缝中的野草",
+      "sourceRefs": [
+        "统编教材选择性必修下册注释"
+      ],
+      "version": "vocab-set-b7f52c9d34fb738e",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「你的关闭了的故居檐头的枯死的瓦菲」\n「故居檐头的枯死的瓦菲」中「瓦菲」是指\nA. 屋瓦上的青苔\nB. 生长在瓦缝中的野草\nC. 屋檐下悬挂的干菜\nD. 破碎散落的瓦片\n請選出答案，並用自己的話說明判斷依據。",
+        "請解釋「你的关闭了的故居檐头的枯死的瓦菲」中「瓦菲」的意思，再用自己的話改寫這句話，說明語境依據。"
+      ]
+    },
+    {
+      "id": "lesson-1567:v08",
+      "word": "火钵",
+      "sourceSentence": "我坐着油漆过的安了火钵的炕凳",
+      "meaning": "用来盛火取暖的瓦盆",
+      "explanation": "钵读 bō，陶制器具，形状像盆而小；火钵即盛炭火取暖的瓦盆。教材文末有注。",
+      "type": "pronunciation",
+      "difficulty": 1,
+      "question": "「安了火钵的炕凳」中「钵」的读音与「火钵」的含义正确的一项是",
+      "options": [
+        "bō，盛火取暖的瓦盆",
+        "běn，堆放柴火的木盆",
+        "bō，煮饭用的铁锅",
+        "bèi，取暖用的被褥"
+      ],
+      "answerIndex": 0,
+      "sourceAnswer": "bō，盛火取暖的瓦盆",
+      "sourceRefs": [
+        "统编教材选择性必修下册注释",
+        "《现代汉语词典》"
+      ],
+      "version": "vocab-set-b7f52c9d34fb738e",
+      "dictionaryStatus": "verify-context-against-source-image",
+      "variants": [
+        "語境：「我坐着油漆过的安了火钵的炕凳」\n「安了火钵的炕凳」中「钵」的读音与「火钵」的含义正确的一项是\nA. bō，盛火取暖的瓦盆\nB. běn，堆放柴火的木盆\nC. bō，煮饭用的铁锅\nD. bèi，取暖用的被褥\n請選出答案，並用自己的話說明判斷依據。",
+        "「我坐着油漆过的安了火钵的炕凳」中的「火钵」應如何讀（請寫拼音）？它在此處是甚麼意思？請說明依據。"
+      ]
+    }
+  ],
+  "legacy": {
+    "lessonId": "lesson-1567",
+    "title": "6 大堰河——我的保姆/ 艾青",
+    "mode": "poetry",
+    "legacyTracks": [
+      "context",
+      "vocabulary",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "初讀評議",
+        "",
+        10
+      ],
+      [
+        "vocabulary",
+        "詞級疏通",
+        "",
+        25
+      ],
+      [
+        "read",
+        "通讀正文",
+        "",
+        10
+      ],
+      [
+        "revision",
+        "字句之改",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "詩脈轉折",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "篇目評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "叩問作者",
+        "",
+        10
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1567:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1567:interaction:contextWords",
+        "resourceVersion": "sha256:7ae76754738b8c77c902788f731c4ca08686a6ec27ed2c26a353690e84e0a5c0",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1567:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1567:interaction:revision",
+        "resourceVersion": "sha256:3ea187c2b2023d688f22634dc2824aef70ca4f4213d67f947e5d8992fdb0d18b",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1567:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1567:interaction:structure",
+        "resourceVersion": "sha256:2376134ad9f8259fb47c9a3ace85f2086f2971a63d365ce699f261ef1139d587",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1567:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1567:interaction:evaluation",
+        "resourceVersion": "sha256:7bcc362614910af373a8ff7083476b56ce1ddb274ebc91e90c44f87b8cf4d0bc",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1567:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1567:interaction:authorQuestion",
+        "resourceVersion": "sha256:336a4f78f741a1f0dcf554dcfd629d1d3891444a072ff249a6dc5415d97513d9",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v01",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v01",
+        "resourceVersion": "sha256:b5891f7abd5827f5e78c592f363b239f0d2dc274d640f807b92f76fe27b30a9c",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v02",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v02",
+        "resourceVersion": "sha256:ae6a5fc5f1ff01476eb466b884b016e1b2d5ca81784e9d6651cca4248db7732a",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v03",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v03",
+        "resourceVersion": "sha256:c574979f74250ecc957c5be9c9f4da51f4640aa6a601eba2b9fc2174d976f26b",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v04",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v04",
+        "resourceVersion": "sha256:f951f69be835e0e2968474e7b912944caf3508b18b6034f99bda55ab43f1ad5e",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v05",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v05",
+        "resourceVersion": "sha256:52a25196162b7274b794558f4d611b539666067bf64de0178aec767eb7ca8c20",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v06",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v06",
+        "resourceVersion": "sha256:2633f2d40c817da302392474b70e0f4d46f7e2793a862cc4fe33d5027d29acef",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v07",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v07",
+        "resourceVersion": "sha256:37ad2384bf75bd1f2ee95bb7c0a2cfcf1dcdf351e6500d92de0842c077be53a5",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v08",
+        "canonicalUnitId": "yw:lesson-1567:vocabulary:lesson-1567:v08",
+        "resourceVersion": "sha256:466570aa783855f28de4c60ceba7bcf5438c434a457a4f73434bde1ad3227d4b",
+        "questionKind": "vocabulary",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1567:interaction:wordCreation",
+        "canonicalUnitId": "yw:lesson-1567:interaction:wordCreation",
+        "resourceVersion": "sha256:35073685b92edc0179aaf8263b9427e51a34c2e2d5685b4b298a0bdfcadb6f01",
+        "questionKind": "wordCreation",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1567",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1567:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1567:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1567:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1567",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1567:interaction:contextWords",
+        "completionKey": "effect:lesson-1567:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1567:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1567",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1567:interaction:structure",
+        "completionKey": "effect:lesson-1567:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1567:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1567",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1567:interaction:revision",
+        "completionKey": "effect:lesson-1567:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1567:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1567",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1567:interaction:wordCreation",
+        "completionKey": "effect:lesson-1567:interaction:wordCreation#wordCreation",
+        "interactionKey": "wordCreation",
+        "resourceKey": "effect:lesson-1567:interaction:wordCreation",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1567",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1567:vocab:lesson-1567:v01",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v01#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v01",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1567",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1567:vocab:lesson-1567:v02",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v02#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v02",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1567",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1567:vocab:lesson-1567:v03",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v03#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v03",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1567",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1567:vocab:lesson-1567:v04",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v04#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v04",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1567",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1567:vocab:lesson-1567:v05",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v05#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v05",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1567",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1567:vocab:lesson-1567:v06",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v06#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v06",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1567",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1567:vocab:lesson-1567:v07",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v07#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v07",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1567",
+        "competencyTag": "vocabulary",
+        "itemKey": "formal:effect:lesson-1567:vocab:lesson-1567:v08",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v08#vocabAnswer",
+        "interactionKey": "vocabAnswer",
+        "resourceKey": "effect:lesson-1567:vocab:lesson-1567:v08",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_answer",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [
+      "lesson-1567:v01",
+      "lesson-1567:v02",
+      "lesson-1567:v03",
+      "lesson-1567:v04",
+      "lesson-1567:v05",
+      "lesson-1567:v06",
+      "lesson-1567:v07",
+      "lesson-1567:v08"
+    ],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1567:interaction:contextWords",
+        "sourceVersion": "sha256:7ae76754738b8c77c902788f731c4ca08686a6ec27ed2c26a353690e84e0a5c0",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1567:interaction:revision",
+        "sourceVersion": "sha256:3ea187c2b2023d688f22634dc2824aef70ca4f4213d67f947e5d8992fdb0d18b",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1567:interaction:structure",
+        "sourceVersion": "sha256:2376134ad9f8259fb47c9a3ace85f2086f2971a63d365ce699f261ef1139d587",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1567:interaction:evaluation",
+        "sourceVersion": "sha256:7bcc362614910af373a8ff7083476b56ce1ddb274ebc91e90c44f87b8cf4d0bc",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1567:interaction:authorQuestion",
+        "sourceVersion": "sha256:336a4f78f741a1f0dcf554dcfd629d1d3891444a072ff249a6dc5415d97513d9",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1567:vocab:lesson-1567:v01",
+        "sourceVersion": "sha256:b5891f7abd5827f5e78c592f363b239f0d2dc274d640f807b92f76fe27b30a9c",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1567:vocab:lesson-1567:v02",
+        "sourceVersion": "sha256:ae6a5fc5f1ff01476eb466b884b016e1b2d5ca81784e9d6651cca4248db7732a",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1567:vocab:lesson-1567:v03",
+        "sourceVersion": "sha256:c574979f74250ecc957c5be9c9f4da51f4640aa6a601eba2b9fc2174d976f26b",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1567:vocab:lesson-1567:v04",
+        "sourceVersion": "sha256:f951f69be835e0e2968474e7b912944caf3508b18b6034f99bda55ab43f1ad5e",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1567:vocab:lesson-1567:v05",
+        "sourceVersion": "sha256:52a25196162b7274b794558f4d611b539666067bf64de0178aec767eb7ca8c20",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1567:vocab:lesson-1567:v06",
+        "sourceVersion": "sha256:2633f2d40c817da302392474b70e0f4d46f7e2793a862cc4fe33d5027d29acef",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1567:vocab:lesson-1567:v07",
+        "sourceVersion": "sha256:37ad2384bf75bd1f2ee95bb7c0a2cfcf1dcdf351e6500d92de0842c077be53a5",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1567:vocab:lesson-1567:v08",
+        "sourceVersion": "sha256:466570aa783855f28de4c60ceba7bcf5438c434a457a4f73434bde1ad3227d4b",
+        "source": "formal",
+        "dialogueDomain": "vocabulary",
+        "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-selectedIndex-answer-key-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1567:interaction:wordCreation",
+        "sourceVersion": "sha256:35073685b92edc0179aaf8263b9427e51a34c2e2d5685b4b298a0bdfcadb6f01",
+        "source": "formal",
+        "dialogueDomain": "wordCreation",
+        "conversationEquivalent": "選一個剛疏通的詞，用於三行短詩（詩歌）、三句對白（戲劇）、三句微型敘事（小說）或三句話；核對詞義、語境及搭配。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1567:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1567:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1567:interaction:contextWords",
+        "completionKey": "effect:lesson-1567:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1567:interaction:structure",
+        "completionKey": "effect:lesson-1567:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1567:interaction:revision",
+        "completionKey": "effect:lesson-1567:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1567:interaction:wordCreation",
+        "completionKey": "effect:lesson-1567:interaction:wordCreation#wordCreation",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "wordCreation",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1567:vocab:lesson-1567:v01",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v01#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1567:vocab:lesson-1567:v02",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v02#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1567:vocab:lesson-1567:v03",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v03#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1567:vocab:lesson-1567:v04",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v04#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1567:vocab:lesson-1567:v05",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v05#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1567:vocab:lesson-1567:v06",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v06#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1567:vocab:lesson-1567:v07",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v07#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1567:vocab:lesson-1567:v08",
+        "completionKey": "effect:lesson-1567:vocab:lesson-1567:v08#vocabAnswer",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "review",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [
+      {
+        "id": "poetry-word-creation",
+        "rule": "選一個剛疏通的詞，用於三行短詩（詩歌）、三句對白（戲劇）、三句微型敘事（小說）或三句話；核對詞義、語境及搭配。",
+        "storage": "original wordCreation record + separate new dialogue evidence",
+        "status": "original-word-creation-rubric-bridged-new-mastery-separate"
+      }
+    ],
+    "sourceLesson": "data/lessons/lesson-1567.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "vocabulary",
+        "dialogueDomain": "vocabulary",
+        "evidenceRule": "回到原句，自述語境義及依據；每個必考詞分別核對。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "vocabulary",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 14,
+        "formativeCount": 13,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [
+            "lesson-1567:v01",
+            "lesson-1567:v02",
+            "lesson-1567:v03",
+            "lesson-1567:v04",
+            "lesson-1567:v05",
+            "lesson-1567:v06",
+            "lesson-1567:v07",
+            "lesson-1567:v08"
+          ],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-226ca7a50b6a50650767",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [
+    {
+      "id": "lesson-1567:p110",
+      "text": "〔瓦菲〕这里指生长在瓦缝中的野草。\n〔火钵（bō）〕用来盛火取暖的瓦盆。钵，陶制的器具，形状像盆而小。\n〔团箕〕一种用竹篾或柳条编成的圆形器具，用来盛晒粮食等。\n〔冬米〕即糯米，也叫“江米”。",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "〔瓦菲〕这里指生长在瓦缝中的野草。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "〔火钵（bō）〕用来盛火取暖的瓦盆。钵，陶制的器具，形状像盆而小。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "〔团箕〕一种用竹篾或柳条编成的圆形器具，用来盛晒粮食等。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "〔冬米〕即糯米，也叫“江米”。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      },
+      "blockIndex": 109,
+      "blockSha256": "5019faa304503035f44ed96d27667bc75f4e4c8a244ae4421754ff474d36b95b",
+      "role": "annotation",
+      "label": "原課注釋",
+      "source": "data/reader-documents/lesson-1567.json#main.blocks[109]",
+      "reason": "獨立原注釋段以〔詞目〕標示；正文與注釋分開，完整保留。"
+    }
+  ],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《艾青诗选》（人民文学出版社1997 年版）。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        },
+        {
+          "runs": [
+            {
+              "text": "大堰河，即浙江金华方言中“大叶荷”的谐音。艾青的奶妈是大叶荷村人，她是童养媳，没有自己的名字，当地人因此就叫她“大叶荷”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "type": "quote"
+    }
+  ],
+  "guidance": [],
+  "media": [],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1567.json",
+    "lessonSha256": "fe5293ed1607b37ce26b400533b1843e55b46a8fb50816b57b180f445c1ee562",
+    "reader": "data/reader-documents/lesson-1567.json",
+    "readerSha256": "92ccc3185c8b0643e3a29147592e7001b2f289a33fdeac59afacd76ab3190a0a",
+    "sourcePostId": 10468,
+    "sourcePostNumber": 1,
+    "blockCount": 110,
+    "annotationCount": 0,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "vocabulary",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 14,
+      "formativeCount": 13,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [
+          "lesson-1567:v01",
+          "lesson-1567:v02",
+          "lesson-1567:v03",
+          "lesson-1567:v04",
+          "lesson-1567:v05",
+          "lesson-1567:v06",
+          "lesson-1567:v07",
+          "lesson-1567:v08"
+        ],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

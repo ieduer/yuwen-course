@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import {FORMAL_SCOPE_POLICY, ORIGINAL_FORMAL_RELEASE} from "../site/formal-scope-policy.js";
 import {
   hashEligibilitySourceItem,
   isVocabItemEligible,
@@ -19,7 +20,9 @@ const EFFECTIVE_FROM = "2026-08-12T00:00:00+08:00";
 const MAPPING_VERSION = "yw-canonical-learning-mapping-v1";
 
 export const SITE_KEY = "yw";
-export const BOOK_IDS = Object.freeze(["xuanbi-shang", "xuanbi-zhong", "xuanbi-xia"]);
+export const ORIGINAL_BOOK_IDS = Object.freeze(["xuanbi-shang", "xuanbi-zhong", "xuanbi-xia"]);
+export const BOOK_IDS = Object.freeze(["bixiu-shang", "bixiu-xia", ...ORIGINAL_BOOK_IDS]);
+export {FORMAL_SCOPE_POLICY} from '../site/formal-scope-policy.js';
 export const EXCLUDED_LESSONS = Object.freeze({
   "lesson-11637": "retired_google_sites_mirror",
   "lesson-11705": "teacher_course_progress_record",
@@ -212,6 +215,11 @@ export function buildLearningManifest() {
     }
   }
 
+  const addedLessonIds = new Set(lessons.filter(lesson => FORMAL_SCOPE_POLICY.addedBooks.includes(lesson.blockId)).map(lesson => lesson.id));
+  for (const item of items) if (addedLessonIds.has(item.sourceId)) {
+    item.effectiveFrom = FORMAL_SCOPE_POLICY.effectiveFrom;
+    item.evidenceRole = item.questionKind === "evaluation" ? "non_scoring" : FORMAL_SCOPE_POLICY.performanceScoringRole;
+  }
   const keys = items.map((item) => item.resourceKey);
   const uniqueKeys = [...new Set(keys)];
   if (uniqueKeys.length !== keys.length) throw new Error("duplicate learning resource keys");
@@ -220,7 +228,7 @@ export function buildLearningManifest() {
   }
 
   const keyHash = sha256([...keys].sort().join("\n"));
-  const releaseHash = sha256(stableJson(items.map((item) => ({
+  const releaseIdForItems = values => `${SITE_KEY}-release-${sha256(stableJson(values.map((item) => ({
     resourceKey: item.resourceKey,
     canonicalUnitId: item.canonicalUnitId,
     resourceVersion: item.resourceVersion,
@@ -231,8 +239,8 @@ export function buildLearningManifest() {
     lifecycleStatus: item.lifecycleStatus,
     effectiveFrom: item.effectiveFrom,
     effectiveTo: item.effectiveTo,
-  }))));
-  const sourceReleaseId = `${SITE_KEY}-release-${releaseHash.slice(0, 16)}`;
+  })))).slice(0,16)}`;
+  const sourceReleaseId = releaseIdForItems(items);
   const sources = BOOK_IDS.map((blockId) => {
     const block = manifest.blocks.find((entry) => entry.id === blockId);
     const lessonIds = new Set(lessons.filter((lesson) => lesson.blockId === blockId).map((lesson) => lesson.id));
@@ -246,10 +254,20 @@ export function buildLearningManifest() {
     };
   });
 
+  const originalItems = items.filter(item => lessons.some(lesson => lesson.id === item.sourceId && ORIGINAL_BOOK_IDS.includes(lesson.blockId)));
+  const originalKeyHash = sha256(originalItems.map(item => item.resourceKey).sort().join("\n"));
+  // The accepted elective release is immutable. New task-pool entries cannot
+  // rewrite its resource identity, effective date or evidence-time admission.
+  if (releaseIdForItems(originalItems) !== ORIGINAL_FORMAL_RELEASE.sourceReleaseId || originalItems.length !== 869 || originalKeyHash !== "e310d45b1d81e9adf6182bd50ea02842daf69a8981aa29ff03b2da30b0846aca") throw Error("original elective inventory changed");
+  const priorRelease = ORIGINAL_FORMAL_RELEASE;
+  const originalKeys = new Set(originalItems.map(item => item.resourceKey));
+  const versionedItems = items.map(item => originalKeys.has(item.resourceKey)
+    ? {...item, sourceReleaseId:priorRelease.sourceReleaseId}
+    : {...item, effectiveFrom:FORMAL_SCOPE_POLICY.effectiveFrom, formalScopePolicyVersion:FORMAL_SCOPE_POLICY.policyVersion, sourceReleaseId});
   return {
     schemaVersion: 1,
     siteKey: SITE_KEY,
-    title: "語文課 · 選擇性必修見效題目",
+    title: "語文課 · 必修與選擇性必修見效題目",
     manifestVersion: `${SITE_KEY}-${keyHash.slice(0, 16)}`,
     sourceReleaseId,
     mappingVersion: MAPPING_VERSION,
@@ -258,6 +276,8 @@ export function buildLearningManifest() {
     itemCount: items.length,
     completionKind: "answer_submitted",
     thresholdPercent: 90,
+    formalScopeExpansion: FORMAL_SCOPE_POLICY,
+    priorReleases: [priorRelease],
     lessonCount: lessons.length,
     vocabEligibility: {
       policyVersion: eligibility.policyVersion,
@@ -266,7 +286,7 @@ export function buildLearningManifest() {
     },
     sources,
     exclusions: Object.entries(EXCLUDED_LESSONS).map(([lessonId, reason]) => ({ lessonId, reason })),
-    items: items.map((item) => ({ ...item, sourceReleaseId })),
+    items: versionedItems,
   };
 }
 
@@ -285,6 +305,11 @@ if (isMain) {
   } else {
     writeFileSync(OUTPUT_PATH, rendered, "utf8");
     const manifest = JSON.parse(rendered);
+    const registryPath=resolve(ROOT,"site/data/interaction-definitions.json");
+    const registry=JSON.parse(readFileSync(registryPath,"utf8")),compatibility=registry.compatibilityContracts.aPlusGate;
+    Object.assign(compatibility,{sourceVersion:manifest.manifestVersion,sourceReleaseId:manifest.sourceReleaseId,itemCount:manifest.itemCount,resourceKeyHash:manifest.resourceKeyHash,excludedItemCount:manifest.items.filter(i=>i.evidenceRole!=="a_plus_gate").length,eligibleItemCount:manifest.items.filter(i=>i.evidenceRole==="a_plus_gate").length});
+    registry.formalScopeExpansion=manifest.formalScopeExpansion;
+    writeFileSync(registryPath,`${JSON.stringify(registry,null,2)}\n`,"utf8");
     process.stdout.write(`generated ${manifest.itemCount} resources as ${manifest.manifestVersion}\n`);
   }
 }

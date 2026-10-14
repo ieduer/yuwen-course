@@ -3,8 +3,10 @@ import test from "node:test";
 import { resolve } from "node:path";
 
 import { Log, LogLevel, Miniflare } from "miniflare";
+import { bundleWorkerd } from "./workerd-test-bundle.mjs";
 
 const ROOT = resolve(import.meta.dirname, "..");
+const workerBundle = await bundleWorkerd(resolve(ROOT, "site/_worker.js"));
 const HTML_TARGET = "https://preview.example.com/lesson.html";
 const JS_TARGET = "https://preview.example.com/payload.js";
 const SVG_TARGET = "https://preview.example.com/payload.svg";
@@ -69,10 +71,7 @@ test("workerd executes HTMLRewriter and rejects executable preview MIME types", 
   const outboundUrls = [];
   const mf = new Miniflare({
     compatibilityDate: "2026-05-12",
-    modules: true,
-    modulesRules: [{ type: "ESModule", include: ["**/*.js"] }],
-    modulesRoot: resolve(ROOT, "site"),
-    scriptPath: resolve(ROOT, "site/_worker.js"),
+    ...workerBundle,
     log: new Log(LogLevel.NONE),
     serviceBindings: {
       ASSETS(request) {
@@ -132,11 +131,7 @@ test("workerd cancels stalled HTMLRewriter and PDF bodies with a source-injected
   for (const mime of ["text/html", "application/pdf"]) {
     const mf = new Miniflare({
       compatibilityDate: "2026-05-12",
-      modules: true,
-      modulesRules: [{ type: "ESModule", include: ["**/*.js"] }],
-      modulesRoot: resolve(ROOT, "site"),
-      scriptPath: resolve(ROOT, "site/preview-deadline-fixture.js"),
-      script: `
+      ...await bundleWorkerd(resolve(ROOT, "site/preview-deadline-fixture.js"), `
         import { handlePreview } from "./_worker.js";
         export default {
           async fetch(request, env) {
@@ -149,7 +144,7 @@ test("workerd cancels stalled HTMLRewriter and PDF bodies with a source-injected
             }
           }
         };
-      `,
+      `),
       log: new Log(LogLevel.NONE),
       serviceBindings: {
         ASSETS() { return Response.json(registry); },

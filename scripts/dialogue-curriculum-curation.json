@@ -1,0 +1,1606 @@
+{
+  "version": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "basis": "Current source reader blocks reviewed by lesson; explicit author/editor/reference distinctions. Original source files and historic calibration fixtures unchanged.",
+  "lessons": {
+    "lesson-1691": [
+      {
+        "blockIndex": 4,
+        "blockSha256": "4963d2ea96def8383d35f8c4bff11f4c9f7010a45b089341248563771d74d00b",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1691.json#main.blocks[4]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1694": [
+      {
+        "blockIndex": 103,
+        "blockSha256": "40dd60a8bf96728b3feced6c73747c46488913d240f6479d575b3f390a62bf11",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1694.json#main.blocks[103]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1699": [
+      {
+        "blockIndex": 79,
+        "blockSha256": "0af7a185eecbf4fd420ae1a21b9c5f92c44a0bebba5a782e33f1540e6ee91325",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1699.json#main.blocks[79]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1700": [
+      {
+        "blockIndex": 6,
+        "blockSha256": "e8fa18d36b8e573ddb4dc28ce855e045caccdded79749fef3e3f586103011c6a",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1700.json#main.blocks[6]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1712": [
+      {
+        "blockIndex": 13,
+        "blockSha256": "38bc1f1c6e6a362e69c9e5abbf8db75ba8f0945c3dd50e414ea03364bec424fb",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1712.json#main.blocks[13]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1713": [
+      {
+        "blockIndex": 13,
+        "blockSha256": "7cf000aae489eff38ab878c4bcaf035b1ed37ff8f26e0a6909b8b7e73ccb8b77",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1713.json#main.blocks[13]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1718": [
+      {
+        "blockIndex": 22,
+        "blockSha256": "30acac91fffd95cc64542edc561363fc2005389e87b068374add1e804c69a8be",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1718.json#main.blocks[22]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1719-p2": [
+      {
+        "blockIndex": 6,
+        "blockSha256": "dfd3be5bf1547bfd2edb9d42ca8b96f26d6a55008e24e297c71d44a9df69bf27",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1719-p2.json#main.blocks[6]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      }
+    ],
+    "lesson-1722-p1": [
+      {
+        "blockIndex": 4,
+        "blockSha256": "a34728b79e43436b7863c490e9faf9c21d0ce1e54d2ec7bf4c3dc4b21ab4a99e",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1722-p1.json#main.blocks[4]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1722-p2": [
+      {
+        "blockIndex": 4,
+        "blockSha256": "a7a4adbf8249226054b77274f675116f3868ef8d663af4e150efba6a7b6d6c35",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1722-p2.json#main.blocks[4]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1722-p3": [
+      {
+        "blockIndex": 4,
+        "blockSha256": "5d1c2d90482fb3907b6c8c1c66aead8e00fae15a1da49d8697da0db2b9a5bc1b",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1722-p3.json#main.blocks[4]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1722-p4": [
+      {
+        "blockIndex": 4,
+        "blockSha256": "708515deab1aa669e92f8606d7e4a96554d2702b4314a1ddc22337bd51c98ca1",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1722-p4.json#main.blocks[4]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1726-p1": [
+      {
+        "blockIndex": 1,
+        "blockSha256": "38ceadbb0df7b19e25b200fd3c641cedfb5d6c9d882ab9087487e4f9e87af9c4",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1726-p1.json#main.blocks[1]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      }
+    ],
+    "lesson-1727": [
+      {
+        "blockIndex": 3,
+        "blockSha256": "dd926dde8da1720625b7134844eeb52be176ea4746e57b4d43bb5ef459146a51",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1727.json#main.blocks[3]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1728": [
+      {
+        "blockIndex": 9,
+        "blockSha256": "33db7e87e8e2e19c7b2a285ba82463c00d5edfe11a563ac253bdc207ce277ad0",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1728.json#main.blocks[9]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1731": [
+      {
+        "blockIndex": 3,
+        "blockSha256": "e1dd8f454fe031f80158a590669a037869152cf8eb7b57a59d80793fd3f99811",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1731.json#main.blocks[3]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1732": [
+      {
+        "blockIndex": 17,
+        "blockSha256": "f23cf64d9bbb033ecfad7df73ebff09cca7a125cae5f6c2d351803c112022120",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1732.json#main.blocks[17]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1733": [
+      {
+        "blockIndex": 53,
+        "blockSha256": "d8d0e6cb0d5e03a5e13c671b674373fbd0583502c2b803568257c27d8d6605e8",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1733.json#main.blocks[53]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1736": [
+      {
+        "blockIndex": 0,
+        "blockSha256": "e79e389a38efb0559007d28580a6a9d9068f076bd237c941b93f1ae24ef81a9e",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1736.json#main.blocks[0]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      }
+    ],
+    "lesson-1737": [
+      {
+        "blockIndex": 19,
+        "blockSha256": "252bb2b67b7c786030cff80c8d08cef87fa183f75c94552f64e3e45a75eba8af",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1737.json#main.blocks[19]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1738": [
+      {
+        "blockIndex": 7,
+        "blockSha256": "9ee071344bb7876fa144a002844857741640d13a922d402059f2970a58aa39b8",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1738.json#main.blocks[7]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 8,
+        "blockSha256": "7c45c2bbb9092c2ee3f94a4484561e257df6b6bc471ba35cc9e02aaed0dacee1",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1738.json#main.blocks[8]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1742": [
+      {
+        "blockIndex": 10,
+        "blockSha256": "6c2fe72027433cd25b29efc210df6f9fac81329bb7bb293a97bf85208a239183",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1742.json#main.blocks[10]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      },
+      {
+        "blockIndex": 15,
+        "blockSha256": "e58d57870473cdd88f7e998d87b9e662b52ce1f7458b069a22f7eadc5f777c90",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1742.json#main.blocks[15]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1743-p2": [
+      {
+        "blockIndex": 3,
+        "blockSha256": "1aada8a425921d667d007dc094da901845c1bf0eb63e33ed5bbd90ef6f2c8f55",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1743-p2.json#main.blocks[3]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1746": [
+      {
+        "blockIndex": 11,
+        "blockSha256": "a3d995a9fd30bd8134c083437b9ef658c693d970904cc99dc0db54a4b4dea903",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1746.json#main.blocks[11]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1747": [
+      {
+        "blockIndex": 2,
+        "blockSha256": "fb88b5eb663d19147817f0d114dd53d29ee099376159a28918321360010a736e",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1747.json#main.blocks[2]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      }
+    ],
+    "lesson-1748": [
+      {
+        "blockIndex": 4,
+        "blockSha256": "f5800ad22590b9c2858ec89637709ffcac8332d2910318d0ef13a964a5c5ad64",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1748.json#main.blocks[4]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      }
+    ],
+    "lesson-1752": [
+      {
+        "blockIndex": 2,
+        "blockSha256": "896ee4b958de26b20b72971a098ac8ab8ef5222b9f4a4013e65b8667c520f738",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1752.json#main.blocks[2]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      }
+    ],
+    "lesson-1753-p2": [
+      {
+        "blockIndex": 1,
+        "blockSha256": "282c169ae01878d72c0b65df5016cf6470fc3fee7c3426e955c28839d7c94bc8",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1753-p2.json#main.blocks[1]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1755-p1": [
+      {
+        "blockIndex": 3,
+        "blockSha256": "96e5268c736e08f78d0b34f3b10eefb4aa9aeb26cc22eabc89dc180a8848ab28",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1755-p1.json#main.blocks[3]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1755-p2": [
+      {
+        "blockIndex": 4,
+        "blockSha256": "a84e1b7bd14b8fc5c917e9e82e879afec2d87ee07c2ae49a05c6047dd4eb8675",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1755-p2.json#main.blocks[4]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1755-p3": [
+      {
+        "blockIndex": 4,
+        "blockSha256": "3fe612ba98d225851436978fe6d628ad37b5df2e3a4fafa6788e2edf281df968",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1755-p3.json#main.blocks[4]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1755-p4": [
+      {
+        "blockIndex": 3,
+        "blockSha256": "9a7e9c102960de4156fe2b7356dff49f2321302d1cadf28ced8e5242d0d59f3d",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1755-p4.json#main.blocks[3]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1458": [
+      {
+        "blockIndex": 16,
+        "blockSha256": "35fbab6f243d44bab9d6f295f0290631c690200fdd1f2db018de6fe4f27017ca",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1458.json#main.blocks[16]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 17,
+        "blockSha256": "5c5bb6b96b5f74c5988aa43b1a3dee09ba63b3df2e54a3c81f91cefc7a174e03",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1458.json#main.blocks[17]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      },
+      {
+        "blockIndex": 18,
+        "blockSha256": "6e1ef5f3ef7bc70eafe17198927176218e1ee939bc4234cde691083be6b216d6",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1458.json#main.blocks[18]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      }
+    ],
+    "lesson-1461": [
+      {
+        "blockIndex": 45,
+        "blockSha256": "c3cc18a9f109836dc6f298d9c615c53ea93b7b5463f32dd9145d8f298e5681e0",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1461.json#main.blocks[45]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 46,
+        "blockSha256": "6da2520a7f80787a4db670284e6347c5e248db7fc3c81d30f035907b2e9c324d",
+        "role": "commentary",
+        "label": "原課補充阅读提示",
+        "source": "data/reader-documents/lesson-1461.json#main.blocks[46]",
+        "reason": "保留原課補充閱讀材料及其來源，不作本篇作者正文。"
+      }
+    ],
+    "lesson-1462": [
+      {
+        "blockIndex": 26,
+        "blockSha256": "0613e0e43b0ba37a426736ae2d947080305f2a076f56baf74440a3b4cbfb1af0",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1462.json#main.blocks[26]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 27,
+        "blockSha256": "7e1e6cb5d4f9dbb9d69b1bbc9ae76b296aa49555129207a3508413977601ce1a",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1462.json#main.blocks[27]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      }
+    ],
+    "lesson-1466": [
+      {
+        "blockIndex": 13,
+        "blockSha256": "a2aa61d05c75bcfbd7bfad1dfa863dab119be3f6ad045eac4efb00ae9cff10a7",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1466.json#main.blocks[13]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 14,
+        "blockSha256": "9fba5d21cd385f26da63e41929aab4230430c40d4435c105f1499b5d2cf4b3aa",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1466.json#main.blocks[14]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      },
+      {
+        "blockIndex": 15,
+        "blockSha256": "7dfa459d7d56c9b473ddcb0c36c04c6f2bb7dc5266b410422e64b48e80394cd7",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1466.json#main.blocks[15]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      },
+      {
+        "blockIndex": 16,
+        "blockSha256": "0c826a2a3e23adf119c7f74aa7b5a2d95f63d790a2a8b35e117f4be675ce53af",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1466.json#main.blocks[16]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      },
+      {
+        "blockIndex": 17,
+        "blockSha256": "0b827c32485988aa809b03f17eaa717fe000ed08cda89a65b7553649da6ceb77",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1466.json#main.blocks[17]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 18,
+        "blockSha256": "46add69bf0968c860ac6e8aa48e88aabcd65d88a8d50d07ae486580d0f85fdce",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1466.json#main.blocks[18]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      }
+    ],
+    "lesson-1471": [
+      {
+        "blockIndex": 132,
+        "blockSha256": "d57bc1ca582878ae268d9113c408e969eb2f9b83dac8bbab04cb10d85c11507a",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1471.json#main.blocks[132]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 133,
+        "blockSha256": "06f912473ef11a86f71ab6d047cc9242a98ca26b63754e9af7297b2513d1f359",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1471.json#main.blocks[133]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 134,
+        "blockSha256": "38ba4884de78c2fd9d8dbbf7fdefe4f79324b8f8603408ba6b7b29212d057dbc",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1471.json#main.blocks[134]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 135,
+        "blockSha256": "90f13bc4f97fbc441b853c9bc96ae4021f3fea3d15d40bbee5eab780303c7ceb",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1471.json#main.blocks[135]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1468": [
+      {
+        "blockIndex": 98,
+        "blockSha256": "35077832c97176381606ca6ce40771b7a27bdd5c0273e506ee8b3db03dabd12e",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1468.json#main.blocks[98]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1474": [
+      {
+        "blockIndex": 0,
+        "blockSha256": "50d1aa1b90b20044975f22e9e97e99845a327ff60c7aff1fa0031c09110d698b",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1474.json#main.blocks[0]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 1,
+        "blockSha256": "eb6c7c0fb879d2ce082cf632e94dec34146b06a55a1fbc96a82c3afdecd4d2ed",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1474.json#main.blocks[1]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 2,
+        "blockSha256": "91cda535e232f92448090f3fbff7a1797969b5bad8fbaacadf916ffbe49dc891",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1474.json#main.blocks[2]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 5,
+        "blockSha256": "3f32eaff96931ca2a3248c4638da01b76c8e0faf8b365036900b68d2ed25cada",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1474.json#main.blocks[5]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 17,
+        "blockSha256": "886b23fddf1617a64c60cd1f811090e6472e7b484a8ef8c319d9c6823c3a838d",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1474.json#main.blocks[17]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 18,
+        "blockSha256": "12d65fc080c0d6c148ae6c2dfec6f4ddb8d089faad4a73d59305d7c8a57f6d52",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1474.json#main.blocks[18]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 19,
+        "blockSha256": "702223e8ea9e84a9f6dd6199616e0faccb638f2bbdd76ab9d2a4cacca04ba8d9",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1474.json#main.blocks[19]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1476": [
+      {
+        "blockIndex": 2,
+        "blockSha256": "c9462fe03a437081a121aeca9b941b1b8dd81b015a4d8b71e8c622ce0b3dc60a",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1476.json#main.blocks[2]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 3,
+        "blockSha256": "eed367022fcb3b68a7f5e4c4ea4f1cefc3063af25c2197e32b52930d074e31d6",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1476.json#main.blocks[3]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 4,
+        "blockSha256": "2d03120d6d68d2a6f9e6a5ade63acc84bb0fecc464816551fa82b7015b939567",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1476.json#main.blocks[4]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 5,
+        "blockSha256": "5411e5da8dda16dba07ea925feb75beb2d3dba71953fbb8f173361e1ae033036",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1476.json#main.blocks[5]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1477": [
+      {
+        "blockIndex": 7,
+        "blockSha256": "f48ba20d68afcf3dccfd78aa73e6efb5d17a14b5a1df768cef094f0bc179cd34",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1477.json#main.blocks[7]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 8,
+        "blockSha256": "30761ecf6147172e8180c8e20ac15439eab7612a1ee4a5e503d781b011e09934",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1477.json#main.blocks[8]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 9,
+        "blockSha256": "8224e6165f10feeb4e90015325f4140e066f611b365423bc2976aa01801705ac",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1477.json#main.blocks[9]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1483": [
+      {
+        "blockIndex": 0,
+        "blockSha256": "5ed8bb2ff9aa557096d9c29fe1bf46c20258720f8ed03f1deb6820b39e4e1669",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1483.json#main.blocks[0]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 1,
+        "blockSha256": "c89bf298ca9f110e6b4eff4541b856322705afa9aacfe95edebedef7d2661c83",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1483.json#main.blocks[1]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 2,
+        "blockSha256": "22d71c50c0c39ae901eec2fdc2c91eb4e7e2fc3f9869983d40dea6c5c1552a24",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1483.json#main.blocks[2]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 7,
+        "blockSha256": "a070377473676b5b81ea34220afa3211bc60c0251bff42ec418525e3bf3bc280",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1483.json#main.blocks[7]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1484": [
+      {
+        "blockIndex": 1,
+        "blockSha256": "9a2243194afe06bcc85788bdc27688bbf37ab7ab20bba41c699f4733036e4661",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1484.json#main.blocks[1]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1488": [
+      {
+        "blockIndex": 61,
+        "blockSha256": "7a782138757b2057c837b902bfd44843b904e737f4d83b215a6c3907ef0274a5",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1488.json#main.blocks[61]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1490": [
+      {
+        "blockIndex": 79,
+        "blockSha256": "6382cad1334eb0abcf32554049680d2537c7ac9181e5971050a9767f6367661e",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1490.json#main.blocks[79]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1493": [
+      {
+        "blockIndex": 100,
+        "blockSha256": "1d358d4e9fe7aab7b70a149345ef0558c3aac1e8e9736679bd5436602ac70e18",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1493.json#main.blocks[100]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1494": [
+      {
+        "blockIndex": 15,
+        "blockSha256": "068a6656cd1c8ada665696054a9038fbfd19895d633500d42d4b34ef57786c1b",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1494.json#main.blocks[15]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 16,
+        "blockSha256": "a89d00d1cfc02b48abdbaa30bddd41d3fc06a76cd7b700aa08b6adee99b3628c",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1494.json#main.blocks[16]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 17,
+        "blockSha256": "0a142bffd35bda4ac6e47cea542ea99cdf3e084eb72363c078f835654cf088cc",
+        "role": "commentary",
+        "label": "原課人物關係表",
+        "source": "data/reader-documents/lesson-1494.json#main.blocks[17]",
+        "reason": "保留原課補充閱讀材料及其來源，不作本篇作者正文。"
+      }
+    ],
+    "lesson-1496": [
+      {
+        "blockIndex": 21,
+        "blockSha256": "d76856b6253f54c194be04a916523c7a722b71c27cf4d10f134c1c16a7f86196",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1496.json#main.blocks[21]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      }
+    ],
+    "lesson-1497": [
+      {
+        "blockIndex": 6,
+        "blockSha256": "d8f0f50dad8efa1b58dd12ec38f2d557b6023fb7aa06991d169ad2bd3cc9063d",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1497.json#main.blocks[6]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1499": [
+      {
+        "blockIndex": 12,
+        "blockSha256": "2d5dcfb26c63ab1c20347cd9da6854081282a8c15b371a60692f42604864c980",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1499.json#main.blocks[12]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1500": [
+      {
+        "blockIndex": 6,
+        "blockSha256": "ff65b17aa314b8b0ebfabfb7d7b1b29d9a9a8825acbf6b585d74c9b377e48691",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1500.json#main.blocks[6]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1517": [
+      {
+        "blockIndex": 15,
+        "blockSha256": "7faf2e14b3fd809f2fa4985d8e9783dc66161c87c4cc6b00cf5305428c5d0ee9",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1517.json#main.blocks[15]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1519": [
+      {
+        "blockIndex": 1,
+        "blockSha256": "f635ce802c4bda734bcf2666972b6ec731154b8b6ac048e16915c00a3b82c52e",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1519.json#main.blocks[1]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1520": [
+      {
+        "blockIndex": 25,
+        "blockSha256": "60133b7cda649b2e82040a88b139956721a09e6dd5a1b8b0e9d8109f64e918f3",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1520.json#main.blocks[25]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1521": [
+      {
+        "blockIndex": 12,
+        "blockSha256": "a450d951fec3c78086a25c7f96737f81b18485f1deac790716f661489843e347",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1521.json#main.blocks[12]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      }
+    ],
+    "lesson-1522": [
+      {
+        "blockIndex": 6,
+        "blockSha256": "2217bc1468cf6fa300d4fc08e562c533ce27a90ab8a28681dcfbf4a1797208f9",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1522.json#main.blocks[6]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1523": [
+      {
+        "blockIndex": 50,
+        "blockSha256": "9c3838ac45ad4456d12516b92274209ed949fc7a0140e4def95ef66246558530",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1523.json#main.blocks[50]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1526": [
+      {
+        "blockIndex": 32,
+        "blockSha256": "b8ca186c63e9d7faf8c9b8e0c9fd61651b468e348e06524e3e9066dec73f9bd5",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1526.json#main.blocks[32]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1527": [
+      {
+        "blockIndex": 51,
+        "blockSha256": "802ffb978f079351a5a83d9489d8c4899d49212e7677f8e34543cf2533c66b85",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1527.json#main.blocks[51]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1528": [
+      {
+        "blockIndex": 48,
+        "blockSha256": "407b4558457d08217351819a56e257634fed47208bf42f2870a875fee172c28c",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1528.json#main.blocks[48]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1531": [
+      {
+        "blockIndex": 66,
+        "blockSha256": "cbb8f8710f604d41b8cc0296c24fb17af48adfd421b40aba81c7f5f9c512484a",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1531.json#main.blocks[66]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1534": [
+      {
+        "blockIndex": 14,
+        "blockSha256": "52ea24c59eec6ea869854cff054a3f587e4197a4d5874624cede0ca07695f450",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1534.json#main.blocks[14]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1535": [
+      {
+        "blockIndex": 0,
+        "blockSha256": "f49a9ef8eb34e9c47835710eb23789b232137bfbf542ee888c9f7a2c2e3aa3c7",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1535.json#main.blocks[0]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      },
+      {
+        "blockIndex": 1,
+        "blockSha256": "403b820d221cb68c00036da85cfcfa85104060208489c20d69295b011f3b7954",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1535.json#main.blocks[1]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 32,
+        "blockSha256": "403b820d221cb68c00036da85cfcfa85104060208489c20d69295b011f3b7954",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1535.json#main.blocks[32]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 39,
+        "blockSha256": "ebc7b38b789519d9041d33bbb383f4742f913dbd17fe6772d633eb534b70b5b2",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1535.json#main.blocks[39]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 40,
+        "blockSha256": "123196dc9d3557da3b73b7c8f4d3e2e7a55c8ee9c226a2dd90561cbc52008517",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1535.json#main.blocks[40]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 41,
+        "blockSha256": "8aca248178734f418ea49ab84a8df87590e11aa6523bc27fb9e5c408c2022fdb",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1535.json#main.blocks[41]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 42,
+        "blockSha256": "8b481742966b4a4baa9beb7503d77bc84585c92b52523195a5c4c07799ce0856",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1535.json#main.blocks[42]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 43,
+        "blockSha256": "5f846758eb8661073533b6accdc4a0dcd89631fd59dc91ec5fbe08e6586a08a1",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1535.json#main.blocks[43]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1536": [
+      {
+        "blockIndex": 0,
+        "blockSha256": "b3c3b80ab5f033bd8eae95423d527ffe2ed61f50501025ca3de73375db7e9935",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1536.json#main.blocks[0]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 1,
+        "blockSha256": "b4189c70714991bbb93fd8a142d8b00c939bf7a5a9bbe7db37b72f240f926ea8",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1536.json#main.blocks[1]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      }
+    ],
+    "lesson-1537": [
+      {
+        "blockIndex": 1,
+        "blockSha256": "ea6d3c55ba176df456009fb9f1d67fdf4a66570a966db1271e5a08a6a10957a4",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1537.json#main.blocks[1]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1540": [
+      {
+        "blockIndex": 268,
+        "blockSha256": "da6e0b82b9c498ad5b7ab4e6fc6318e9579a4ebf323401ae7cd39866159e56f2",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1540.json#main.blocks[268]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1541": [
+      {
+        "blockIndex": 22,
+        "blockSha256": "04aec4409035ecbeb15970aef0d4ac804144c1ec8a4b52f09534e55b504d6e80",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1541.json#main.blocks[22]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      }
+    ],
+    "lesson-1544": [
+      {
+        "blockIndex": 8,
+        "blockSha256": "7e1f80fc48032b78d9f3a9263479493ac03606f11f6ac1a55b6af3789d2f8162",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1544.json#main.blocks[8]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1547": [
+      {
+        "blockIndex": 2,
+        "blockSha256": "deec4820140da2a52d27a184f5ba2e21871acc7159ca1822b728c97a16e1399f",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1547.json#main.blocks[2]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1548": [
+      {
+        "blockIndex": 1,
+        "blockSha256": "eeff64510bc364dc6707ea7778f294e2f8bc662f0d4499fb1cfa89eb1daf49ac",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1548.json#main.blocks[1]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1550": [
+      {
+        "blockIndex": 1,
+        "blockSha256": "dda91600970dc0fed21f40741ca6cae885187031064b995b142e00eb9ee5a65b",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1550.json#main.blocks[1]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1549": [
+      {
+        "blockIndex": 2,
+        "blockSha256": "70a142e1363811f58b94874e0edd31da53f4cd1dbcbdd783bf2306668814d2e2",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1549.json#main.blocks[2]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1556": [
+      {
+        "blockIndex": 8,
+        "blockSha256": "678eca94a79feb7e6b2cca0693f68443267b0a25eb4d19fa12177dbc1e8270b9",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1556.json#main.blocks[8]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 10,
+        "blockSha256": "a7652265643741d0a7ac647c28aa74698d9b915d260f008fe38a217b2563519d",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1556.json#main.blocks[10]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      },
+      {
+        "blockIndex": 11,
+        "blockSha256": "e28676ff796957fd767bfd8111e87b771a2aacfca57ccaa6d09fd1d5a9c52fbd",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1556.json#main.blocks[11]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      }
+    ],
+    "lesson-1557": [
+      {
+        "blockIndex": 1,
+        "blockSha256": "a25b0c8ca3b784889e190ef563861ed75ee9d797301a84e58b43295e2cf207fb",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1557.json#main.blocks[1]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      },
+      {
+        "blockIndex": 2,
+        "blockSha256": "cee510b6650cfe760110d3063aa6697b9007e7f0ba7425ebe4a923f79883d545",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1557.json#main.blocks[2]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 3,
+        "blockSha256": "3fc4eac03ce382580c81188e2096136cc8704ba7dc22ece5f6c4b550a5100c69",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1557.json#main.blocks[3]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 13,
+        "blockSha256": "7f6789e9f182d97bbeaa5da3c1c4066d16ad494b2d61ad8a4fda05ec602f3a43",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1557.json#main.blocks[13]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 14,
+        "blockSha256": "bd11f962f3b6eb31a377048dd67bdcdcdbf2edea09752839af1a6dd141eac780",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1557.json#main.blocks[14]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 15,
+        "blockSha256": "825cc16ebedddb26fe1a53c73099dca54bee1b6ebc7c8c3ccf2581aa67c1a08e",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1557.json#main.blocks[15]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 16,
+        "blockSha256": "8f0ec7bc14bdbd90b0ce02c70467151ed70497455493f173c9651f0137a805d7",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1557.json#main.blocks[16]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 17,
+        "blockSha256": "4db68acdc64aa84f0928357ef0ca12030b8073753e3bc4a72fb679ac7fb29399",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1557.json#main.blocks[17]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 18,
+        "blockSha256": "d4e344a8a9fbc4526087a2383565c99d0c9a71cedd1c6cb15126c421ef785a91",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1557.json#main.blocks[18]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      }
+    ],
+    "lesson-1558": [
+      {
+        "blockIndex": 0,
+        "blockSha256": "c296ea84d202775188e0b62c4c0e90a108cc6e31730a6d3a12c767a11641c876",
+        "role": "reference-metadata",
+        "label": "原課影片連結",
+        "source": "data/reader-documents/lesson-1558.json#main.blocks[0]",
+        "reason": "保留原課補充閱讀材料及其來源，不作本篇作者正文。"
+      },
+      {
+        "blockIndex": 7,
+        "blockSha256": "23cf199d9cec75d058d532740262e611e9e62a60d13618ff871e9ea0fcb80366",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1558.json#main.blocks[7]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1559": [
+      {
+        "blockIndex": 4,
+        "blockSha256": "ce93d00cb48a59a65af43689151eb13966d1ae84e9a4f43a6659030749abf45c",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1559.json#main.blocks[4]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      }
+    ],
+    "lesson-1560": [
+      {
+        "blockIndex": 4,
+        "blockSha256": "5a4b6bdc0899d674cddcf4222a9d717ed65263a32043ac6d6a824f152e71f0f0",
+        "role": "annotation",
+        "label": "原課注釋",
+        "source": "data/reader-documents/lesson-1560.json#main.blocks[4]",
+        "reason": "獨立原注釋段以〔詞目〕標示；正文與注釋分開，完整保留。"
+      },
+      {
+        "blockIndex": 6,
+        "blockSha256": "1537ecf59ffef9cea5d3734c5cd1728a326be6d6c63ed1a13b18f1768f45fea6",
+        "role": "reference-metadata",
+        "label": "原課參考連結",
+        "source": "data/reader-documents/lesson-1560.json#main.blocks[6]",
+        "reason": "保留原課補充閱讀材料及其來源，不作本篇作者正文。"
+      },
+      {
+        "blockIndex": 7,
+        "blockSha256": "8a72f229f93160d8259929814c4f139b9776c1d10a7f56f8ac90d70d852c2000",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1560.json#main.blocks[7]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      },
+      {
+        "blockIndex": 8,
+        "blockSha256": "5e282581446327a8defe46953f592fdad53021e7894b09cb39ce645bcb384948",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1560.json#main.blocks[8]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1561": [
+      {
+        "blockIndex": 0,
+        "blockSha256": "188c58400a7c486e5bc2b6ffccc8ebc9a2cd0b410ca8118aa7391189e120f653",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1561.json#main.blocks[0]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      },
+      {
+        "blockIndex": 3,
+        "blockSha256": "e23e63a7f2317bf4a3887532a0a8a12f40c335169c2c6f524c3a9293ac4b8cc3",
+        "role": "annotation",
+        "label": "原課注釋",
+        "source": "data/reader-documents/lesson-1561.json#main.blocks[3]",
+        "reason": "獨立原注釋段以〔詞目〕標示；正文與注釋分開，完整保留。"
+      },
+      {
+        "blockIndex": 4,
+        "blockSha256": "263c83984c1d1949f4f0b850116a8de6035cecb909c2662ce750d7f8092865c2",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1561.json#main.blocks[4]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      }
+    ],
+    "lesson-1562": [
+      {
+        "blockIndex": 0,
+        "blockSha256": "2750f4cc77a0beb9b3aef26203440b2427f470232ebf5bf4e7a0f2ec14a59371",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1562.json#main.blocks[0]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      },
+      {
+        "blockIndex": 4,
+        "blockSha256": "638a0e922a455d4dd85d6274167c515cd97c61f2a4c4a766a0c115bc8361550e",
+        "role": "annotation",
+        "label": "原課注釋",
+        "source": "data/reader-documents/lesson-1562.json#main.blocks[4]",
+        "reason": "獨立原注釋段以〔詞目〕標示；正文與注釋分開，完整保留。"
+      },
+      {
+        "blockIndex": 5,
+        "blockSha256": "c31383995f9b7b3c4b86a89b523f99014540a5eca716339eb63e377e0fcf2826",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1562.json#main.blocks[5]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 6,
+        "blockSha256": "e41a5ebaac097ffc525d8a00ed46288c8a398c43ca58d31908d7c367e8e78408",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1562.json#main.blocks[6]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      }
+    ],
+    "lesson-1566": [
+      {
+        "blockIndex": 99,
+        "blockSha256": "4852ab61bf66d687cbb6d690982220fe985b357c2ceb50c7c31efe740a1c4bb7",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1566.json#main.blocks[99]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1567": [
+      {
+        "blockIndex": 109,
+        "blockSha256": "5019faa304503035f44ed96d27667bc75f4e4c8a244ae4421754ff474d36b95b",
+        "role": "annotation",
+        "label": "原課注釋",
+        "source": "data/reader-documents/lesson-1567.json#main.blocks[109]",
+        "reason": "獨立原注釋段以〔詞目〕標示；正文與注釋分開，完整保留。"
+      }
+    ],
+    "lesson-1568": [
+      {
+        "blockIndex": 29,
+        "blockSha256": "65959d29dfe0644dc55ea668ed172a3a05d0ae8728502b57737a00baa5042e9e",
+        "role": "annotation",
+        "label": "原課注釋",
+        "source": "data/reader-documents/lesson-1568.json#main.blocks[29]",
+        "reason": "獨立原注釋段以〔詞目〕標示；正文與注釋分開，完整保留。"
+      },
+      {
+        "blockIndex": 30,
+        "blockSha256": "19cfdd3e6d985ef1ecdec32ba2f80549817617719749008bf4a2616d376ff0a3",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1568.json#main.blocks[30]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1571": [
+      {
+        "blockIndex": 11,
+        "blockSha256": "0aa1291bdc0117c192cd06ecb451728b6777682082022cf6fc71bc709e80f0cd",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1571.json#main.blocks[11]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1572": [
+      {
+        "blockIndex": 0,
+        "blockSha256": "dee6fe253251592efb056ff0e8ccc6f0b7ae9dce13f9afcc15349f50da33f939",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1572.json#main.blocks[0]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      }
+    ],
+    "lesson-1573": [
+      {
+        "blockIndex": 237,
+        "blockSha256": "c99b9079971eed5a061d32b983be3056fdd9af5101f36b7ca7e759d92f2a22ba",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1573.json#main.blocks[237]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 238,
+        "blockSha256": "9d72b342435b908981dfa0f5aab24ae913335f46883c048eb50293a8ba201e8a",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1573.json#main.blocks[238]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1577": [
+      {
+        "blockIndex": 0,
+        "blockSha256": "6f74f2ad4b2e712ba72fa8a5f3309313f6bee3522762b6f5316353a1c9cd7418",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1577.json#main.blocks[0]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 1,
+        "blockSha256": "3fcd129e8206b17ee816440d5931d43ee5dbbf2c1b0f0012f797a41a23238777",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1577.json#main.blocks[1]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 10,
+        "blockSha256": "107c0ded768c23f3f53d5a04317a61d2a5a8a7f4c74a46ee7e990c47d26c7e7a",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1577.json#main.blocks[10]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 12,
+        "blockSha256": "07bfc738f0685ba9075fe8394aa2bb364b167a85c6d2e0d3246bd325a5e8f02c",
+        "role": "reference-metadata",
+        "label": "原課參考附件",
+        "source": "data/reader-documents/lesson-1577.json#main.blocks[12]",
+        "reason": "原始連結或文件標籤，不是已核對的附件正文；不據此編造文本。"
+      }
+    ],
+    "lesson-1579": [
+      {
+        "blockIndex": 5,
+        "blockSha256": "942396f3c70a1f8862bf446ef276f975b5d2e9855d7852c67e3b9f321ac048cc",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1579.json#main.blocks[5]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      },
+      {
+        "blockIndex": 6,
+        "blockSha256": "73f9b6fbbdf83b30357eef6fab7a8d8791f8876e0e6dfe2d94e8ab1ffb6f43a3",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1579.json#main.blocks[6]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1580": [
+      {
+        "blockIndex": 5,
+        "blockSha256": "ee592102f31bd7c25e8ed5171ac2acda47f3cd9c9e98e627c81ffd4b83586dd1",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1580.json#main.blocks[5]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1581": [
+      {
+        "blockIndex": 0,
+        "blockSha256": "1c2c566d8d58cadaf0bd6926863ff096971076ff760610c0efc434df17051ed9",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1581.json#main.blocks[0]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      },
+      {
+        "blockIndex": 2,
+        "blockSha256": "a3ddbe93cdd0de7c50848e797eb8efe1f3f9d0581ca546f5f629479e35bc5157",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1581.json#main.blocks[2]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1585": [
+      {
+        "blockIndex": 11,
+        "blockSha256": "2dc3297fb8feacf0d9fa148fcf6b887ecf53251236cc78411c6dd25688111385",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1585.json#main.blocks[11]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      },
+      {
+        "blockIndex": 14,
+        "blockSha256": "e272c6920cd8498d616faedb4ec5486550f2768f70b577f7bef7852d6d52fb99",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1585.json#main.blocks[14]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      },
+      {
+        "blockIndex": 22,
+        "blockSha256": "4bc6372049f8a973e7d549f3ce5e5097d0f9057c398d31c3a28b508832e5a77d",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1585.json#main.blocks[22]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1586": [
+      {
+        "blockIndex": 14,
+        "blockSha256": "02fc44a8e9852cb12c1a4ebc91b6fb88d3ae623091edde3c4fcdf0614b31139a",
+        "role": "image-caption",
+        "label": "原課插圖說明",
+        "source": "data/reader-documents/lesson-1586.json#main.blocks[14]",
+        "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+      },
+      {
+        "blockIndex": 31,
+        "blockSha256": "ec40310de0aff70d99a7ddf66ca87143bee97422b3551765ad3d351ce5eb313e",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1586.json#main.blocks[31]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1588": [
+      {
+        "blockIndex": 1,
+        "blockSha256": "2a80437f51d60d7bdbcf6930dc0c0fec1c3d6219fa87c1de9c96007b164c762e",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1588.json#main.blocks[1]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      }
+    ],
+    "lesson-1589": [
+      {
+        "blockIndex": 4,
+        "blockSha256": "2b101e1e43861e8ecb9ee2f0f8b98e34c5639c658523e513fde8fce598f71f3d",
+        "role": "annotation",
+        "label": "原課注釋",
+        "source": "data/reader-documents/lesson-1589.json#main.blocks[4]",
+        "reason": "獨立原注釋段以〔詞目〕標示；正文與注釋分開，完整保留。"
+      },
+      {
+        "blockIndex": 5,
+        "blockSha256": "683958282b1cb16640dbc00c32dfe8f5a9b11ebebf2a3f7791d465fb1f32f398",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1589.json#main.blocks[5]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 7,
+        "blockSha256": "59b82f40ce52f59cd01ad4bb2b0f2cd090c224c14e64d911ea06dd6594c8741a",
+        "role": "reference-metadata",
+        "label": "原課參考連結",
+        "source": "data/reader-documents/lesson-1589.json#main.blocks[7]",
+        "reason": "保留原課補充閱讀材料及其來源，不作本篇作者正文。"
+      }
+    ],
+    "lesson-1590": [
+      {
+        "blockIndex": 4,
+        "blockSha256": "bada7f0bcbf3241d883f2393e1a4ce8848caa93d92d9e808b6d5187f7df227f7",
+        "role": "annotation",
+        "label": "原課注釋",
+        "source": "data/reader-documents/lesson-1590.json#main.blocks[4]",
+        "reason": "獨立原注釋段以〔詞目〕標示；正文與注釋分開，完整保留。"
+      },
+      {
+        "blockIndex": 5,
+        "blockSha256": "8f25b5663c2ed7fca35ce04429f5f150db54fa8526a0764cade8e6431ce5fbf0",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1590.json#main.blocks[5]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 8,
+        "blockSha256": "abb89adcf5b1cb039f5e0ef4983205f9c88db243f2452fb883f4c66134554ed5",
+        "role": "reference-metadata",
+        "label": "原課參考連結",
+        "source": "data/reader-documents/lesson-1590.json#main.blocks[8]",
+        "reason": "保留原課補充閱讀材料及其來源，不作本篇作者正文。"
+      }
+    ],
+    "lesson-1591": [
+      {
+        "blockIndex": 6,
+        "blockSha256": "702791147ea894e8c3322a86c1b72f91ef88f6d1dd09d9b1cee0638b6a86e3f2",
+        "role": "annotation",
+        "label": "原課注釋",
+        "source": "data/reader-documents/lesson-1591.json#main.blocks[6]",
+        "reason": "獨立原注釋段以〔詞目〕標示；正文與注釋分開，完整保留。"
+      },
+      {
+        "blockIndex": 7,
+        "blockSha256": "4df57b4fb1b764cecf94c4fbc4ac9ef218b731256a6a5986eb351f35abb7513a",
+        "role": "annotation",
+        "label": "原課注釋",
+        "source": "data/reader-documents/lesson-1591.json#main.blocks[7]",
+        "reason": "獨立原注釋段以〔詞目〕標示；正文與注釋分開，完整保留。"
+      },
+      {
+        "blockIndex": 8,
+        "blockSha256": "c25fb16cc111640ce8addb51055caab23474e3ebf5e22a328df4cf1b8583bc41",
+        "role": "commentary",
+        "label": "原課導讀與教學參考（非本篇正文）",
+        "source": "data/reader-documents/lesson-1591.json#main.blocks[8]",
+        "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+      },
+      {
+        "blockIndex": 9,
+        "blockSha256": "3e9093f51921cc3e7f3a463e0f0eb9c5fa4ca53a53df25f78e97602b03e76a44",
+        "role": "reference-metadata",
+        "label": "原課參考連結",
+        "source": "data/reader-documents/lesson-1591.json#main.blocks[9]",
+        "reason": "保留原課補充閱讀材料及其來源，不作本篇作者正文。"
+      }
+    ]
+  },
+  "personas": {
+    "lesson-1520": {
+      "kind": "source-guide",
+      "author": "《光明日报》特约评论员",
+      "source": "data/literary-taxonomy.json#lesson-1520.title",
+      "reason": "原題名署名《光明日报》特约评论员；taxonomy heading抽取的哥白尼和馬克思是被引述人物，不視為本文作者。"
+    },
+    "lesson-1742": {
+      "kind": "source-guide",
+      "author": "馬克思、恩格斯（分篇署名）",
+      "source": "data/reader-documents/lesson-1742.json#main.blocks[0,5]",
+      "reason": "同一原課包含馬克思在《人民報》創刊紀念會上的演說及恩格斯在馬克思墓前的講話；分辨兩篇署名，不混為單一作者自述。"
+    }
+  },
+  "passageAttributions": {
+    "lesson-1742": [
+      {
+        "blockIndices": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "author": "馬克思",
+        "work": "在《人民报》创刊纪念会上的演说",
+        "headingBlockIndex": 0,
+        "headingBlockSha256": "ed0c5d81167138b8d4df1076fb09a0cc83ad3237dbfabbddf045cd41ce039488"
+      },
+      {
+        "blockIndices": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          11,
+          12,
+          13,
+          14
+        ],
+        "author": "恩格斯",
+        "work": "在马克思墓前的讲话",
+        "headingBlockIndex": 5,
+        "headingBlockSha256": "fc95533d884f46701702918ae0c8591cb253655098f39fcbbad08930aeb61380"
+      }
+    ]
+  },
+  "completionExemptions": {
+    "lesson-1572": {
+      "kind": "owner-approved-supplement",
+      "reason": "使用者補充篇目，經課程所有者明確核准直接通過",
+      "lessonId": "lesson-1572",
+      "approvedAt": "2026-10-13T01:41:15Z",
+      "authority": "direct-suen-instruction-01a132c3",
+      "scoringRole": "none"
+    }
+  }
+}

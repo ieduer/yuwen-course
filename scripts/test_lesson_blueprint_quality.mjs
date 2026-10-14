@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 
 import { INFOGRAPHIC_FOCUS as NOTEBOOKLM_INFOGRAPHIC_FOCUS } from "./notebooklm_config.mjs";
 import worker from "../site/_worker.js";
+import { formalRubric } from "../site/dialogue-formal.js";
 import {
   BLUEPRINT_MODE_TECHNIQUES,
   INFOGRAPHIC_FOCUS,
@@ -243,7 +244,10 @@ test("unknown or taxonomy-missing blueprint lessons fail before APIS or runtime 
 });
 
 test("structure assessment rubric requires two located passages and no rearrangement shortcut", () => {
-  const workerSource = fs.readFileSync(path.join(root, "site/_worker.js"), "utf8");
-  assert.match(workerSource, /正文定位至少兩處證據/u);
-  assert.doesNotMatch(workerSource, /核查學生選出的章法機關是否能在正文定位，並能說清若抽掉或換序會損失什麼/u);
+  for (const mode of Object.keys(BLUEPRINT_MODE_TECHNIQUES)) {
+    const rubric = formalRubric('structure',mode);
+    assert.match(rubric, /正文定位至少兩處證據/u);
+    assert(rubric.includes(BLUEPRINT_MODE_TECHNIQUES[mode]));
+    assert.doesNotMatch(rubric, /核查學生選出的章法機關是否能在正文定位，並能說清若抽掉或換序會損失什麼/u);
+  }
 });

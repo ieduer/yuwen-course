@@ -1,4 +1,264 @@
+## Current local artifact baseline — 2026-10-13T23:22:59.438943+00:00
+
+CI38483467298 passed evidence, blueprint, dialogue, Reading API and binding checks, then rejected the stale tracked artifact manifest. Rebuilt the unchanged repaired runtime from published b6f3b1a:1464files/196192003bytes, full artifact SHA2565209b77255dc6f993b50ab1f99c30c5cba173fb06a1e33dde22139bc1f93045f. Staging verification and exact Node22/24 manifest checks passed. Delta from prior baseline:6new dialogue modules,9changed files including release marker,0removed. Updated only the existing generated baseline; no validation bypass or production acceptance.
+
+## Current local entry-routing repair — 2026-10-13T23:18:35.235671+00:00
+
+Exact-head PR CI38483277443 exposed an early feature-flag read before hostile legacy Web mutation rejection. The homepage branch now checks root path and GET/HEAD before reading YW_DIALOGUE_ENABLED; original authentication/origin/content-type rejection remains unchanged. Node22.21.1 and24.18.0 each pass107 evidence/entrypoint checks. No thresholds or assertions weakened. New exact-head CI and artifact verification pending; no deployment. Previous local preload and full189 evidence remains valid within its stated limits.
+
+## Current local module preloading candidate — 2026-10-13T19:42:14.998115+00:00
+
+Six existing immutable dialogue dependencies are now modulepreloaded to remove serial discovery delay. No lesson/source/score or API contract change. Node22 frontend/cache51/51 pass. Same local weak-network profile150ms/200000bytes per second, disabled cache, three first-readable-text samples2823.4/2859.3/2828.6ms, all below3000ms; actual CSS391x846, no overflow. This is one-lesson local browser acceptance, not all189/production/real-device acceptance. Historical failing3006ms sample retained. Evidence: /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/preload-performance-01a135d5.json. All model/central/native/formal-release gates remain open. Earlier current section below is superseded by this entry, its evidence preserved.
+
+## Current local recovery, accessibility and stream candidate — 2026-10-13T15:38:41.089369+00:00
+
+Serial owner codex-01a135d5. Offline drafts remain editable; reconnect reads saved state once without resubmission. Expired-account response restores the login entry and keeps Send disabled. Node22 focused frontend/cache50/50 and real synthetic-browser offline/reconnect pass; real-account, model, central/My, native and production gates remain open. Reading/media behavior from the preceding candidate is preserved. Exact evidence and limitations: [OFFLINE-RECOVERY-01a135d5.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/OFFLINE-RECOVERY-01a135d5.md). No paid call, push or deploy; all189 goal and14T12:00Z expiry unchanged.
+
+Actual keyboard checks now cover dialog focus restoration, annotation controls, material tabs and fullscreen page/return. A195px header overflow was repaired;391px header remains compact. Screen-reader speech, actual200percent zoom and physicalIME remain unverified. Partial audit: [ACCESSIBILITY-01a135d5.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/ACCESSIBILITY-01a135d5.md).
+
+Synthetic browser partial→explicit continuation accepted with2 fixture callbacks/0 providers,one student turn and retained new draft. Reconciled stale pending-status labels; frontend/cache51/51 passed. Real provider accounting is still unverified. Evidence: [STREAM-CONTINUATION-01a135d5.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/STREAM-CONTINUATION-01a135d5.md).
+
+## Historical local reading candidate — 2026-10-13T14:56:38.600580+00:00
+
+Serial owner codex-01a1359c. Policy v10 / opening v3; all189 goal remains active. Current review evidence: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/LOCAL-READING-REVIEW.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/LOCAL-READING-REVIEW.md). Textbook reader supports every registered lesson page, horizontal navigation, bottom controls and click-to-full-viewport/click-to-restore with Escape. Exported rich source retains paragraphs, line breaks, lists, tables and safe links. Explicit source footnotes now follow their references as collapsed inline notes (Hongmenyan89); unmatched notes are preserved. Media has one exclusive category: 圖片影音 holds a continuous lazy-loaded gallery and audio/video; 參考資料 holds non-media destinations. All189 lessons retain661 media objects with0 cross-category duplicates (403 duplicates across113 lessons removed). Overview and fullscreen navigation are preserved. These reading details are acceptance requirements for subsequent changes.
+
+Node22/24 focused42/42 passed before the gallery; current media-dedup frontend40/40 passed across all189 lessons. Previous full429 evidence remains historical. No lesson source/curriculum or historical grade data changed. No provider calls, push or production release. Model quality, central→My, native interaction and formal acceptance gates remain open. Preview resources remain active for user review; full task cleanup and all189 completion are not claimed.
+
+## Historical unpublished author-conversation/source-material candidate — 2026-10-13T12:46:22.319718+00:00
+
+All189 replacement remains active. Candidate includes author-led original learning stages, exact source text/annotations with provenance, device drafts and continuation, three reading versions and complete copy/export. Poetry and modern-text doubts, initial impressions and corrections now persist as owner/session-scoped append-only dialogue notes, with same-version source positions and red marks across reading views. Original guesses and all corrections remain; these notes confer no score or original completion receipt. Classical original handlers/rubrics and historical records remain authoritative.
+
+226 focused tests pass on each Node22.21.1 and24.18.0, including source contexts, all-genres notes, idempotency, account isolation, original grading and immutable asset imports. Worker smoke compilation passes in memory; no new model/provider call or production mutation. Earlier full-suite snapshot408/349pass/59fail remains an unresolved frozen-v6 calibration compatibility gate. Quality calibration/207cases/full3E2E stay deferred until APIS update, without new paid calls or deadline extension. Real browser all-genres red marks, nativeIME/touch/weak-network/performance, UC central→My acceptance and formal release remain unpassed.
+
+Latest user requirement: optimize AI integration using fixed shared instructions and per-lesson parameters to improve prompt-cache reuse, while retaining actual original text/annotation access. This new phase is handed off, not implemented or measured here. Second-compaction gate requires serial continuation after this atomic step; the exact committed source, restoration instructions, remaining gates and evidence are in /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a134ff/HANDOFF.md. Owned browsers/server/build/download are closed or removed; task worktree is being committed and removed with its branch preserved. No push or deployment.
+
+Earlier connectivity and release sections below are historical baselines and do not validate this candidate.
+
+## Historical dialogue connectivity accepted; quality deferred — 2026-10-13T11:04:37.969319+00:00
+
+Owner explicitly requests only successful AI dialogue while APIS models are being updated. One real Hetang turn passed on isolated YW88bc290/Pages132032f6 and private APIS8498919/versionb93868fb at0%; formalYW175f8ae/Pagesb6f5ac67 and APIS53dbb568100% remain unchanged. At11:00:54Z requestf83b76ae returned a154character reply in five persisted deltas; source revision8, one call row and browser reload equality verified. Actual providerCount1,brokerCompleted,true,no fallback/hedge/background. Serverfirsttoken886ms,browserfirstdelta2788ms,complete3959ms. Usage1780input+254output=2034;1169microUSD conservative tariff-equivalent,notinvoice. Original3 failedE2E rows retained, cumulative4/120.
+
+Transport/persistence/accounting acceptance only: model teaching quality,28calibration,full3lessons and69/207language calibration deferred, not passed. Model-generated score55 is retained as an isolated raw output and has not been quality validated; no central or historical rescoring. Old3.8 calibration15unconfirmed/13unrun closedwithoutreplay. Newcalibration activation disabled. All189 scope preserved. UC production controller and source→central→My write/readback remain owner-gated; no formal release.
+
+Evidence and recovery authority: /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/DIALOGUE-SMOKE-RESULT.json and CHECKPOINT-ALL-LESSONS.md. Consumed90s deployment timed out/noID and was readback-absent; independent180s same-artifact1POST returned handle and exact4GET reconciliation confirmed deployment. No old publisher replay. Unique source/proposals and receipts retained; task-owned build/dependencies/checkouts being removed after source/handle checks. NativeApp pointer unchanged; partial-stream continuation, fullaccessibility/nativeIME/twolegacy touchchecks remain unpassed.
+
+## Historical single-dialogue smoke scope — 2026-10-13T10:36:51.163846+00:00
+
+Owner defers model quality verification during the planned APIS model update; only a real AI reply, source save and browser reload are requested now. All189 scope and historical work remain. Current isolated sourcee695dbb/Pages6d270ed2 and APISb8dd01e/32bf54d3 at0% verified; formalYW175f8ae and APIS53dbb568100% remain unchanged. Gemini3.8 stopped:15 primary cases unconfirmed/nooutput,13 unrun;3E2E calls remain counted. Quality28/full3E2E and language promotion deferred, not passed.
+
+This candidate permits gemini-3.5-flash-lite only under exact server policy yw-dialogue-smoke-model35lite-20261013-v1 inside the existing private owner553 capability,120-call namespace and14T12 expiry. One new logical turn,max3sequential same-model attempts,stop on success or terminal failure. No rubric weakening or invented score. Full calibration activation is disabled for the smoke deployment. APIS paired new private0% candidate required. Source write/readback is isolated; UC production and formal go/no-go remain gated. Runtime pending publication and real test; current evidence /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/CHECKPOINT-ALL-LESSONS.md.
+
+## Historical isolated acceptance and HTTP failure repair — 2026-10-13T08:55:22.361406+00:00
+
+YW source28a6c064 / Pagesd0a86416 and APIS source22b8823 / version6e3cb4e6 at0% are deployed. Formal YW175f8ae / Pagesb6f5ac67 and accepted APIS53dbb568 at100% remain unchanged. Both trusted isolated windows expire2026-10-14T12:00Z. Actual Gemini3.8 calibration:1/28 attempted,Google503,brokercomplete,nooutput;0semanticpasses,1unconfirmed,27unrun. Actual Hetang second logicalcall timed out after12000ms awaitingheaders,brokercomplete,nooutput. Max3 was correctly bounded by the original21s deadline: insufficient time remained for another full attempt. No deadline, lease, model, credential or retry limit is changed by this patch.
+
+A verified runtime defect lost providerAccounting on HTTP failures before the first stream delta. This patch adds the same bounded accounting to terminal private-stream HTTP errors and validates exact request/model/attempt bounds in YW before retaining it. Unconfirmed leases remain explicitly unconfirmed; successful usage and scores are never synthesized. Existing failure rows are not rewritten. New local regression tests cover full3 failures, unconfirmed completion,12s timeout deadline stop, source persistence, and mismatched receipt rejection. The patch is not deployed. Source tests and actual evidence live in [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/CHECKPOINT-ALL-LESSONS.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/CHECKPOINT-ALL-LESSONS.md).
+
+Paid dispatch paused after these two diagnosed failures; the owner decision was requested immediately. Known new charge unavailable,336000microUSD new reservation retained; remote cumulative conservative1522267microUSD including10267known. E2E retains original2/120 consumption, no reset or replay. Actual export verification passed; basic mobile/desktop UI and keyboard focus passed, but dialog accessible names needed an unpublished fix. Full calibration, complete3E2E,9promotion,69/207rolling calibration, successful/partial retry accounting, second testaccount, nativeIME and two baseline touch failures remain open. UC PR13537cf3c4 passed13CI but production controller/go-no-go and real centralwrite/readback are still required. NativeApp stable pointer remains unchanged/incompatible; formal release is NO-GO.
+
+Validation: Node22.21.1 and24.18.0 each pass APIS272 full workerd checks plus27 focused retry checks, and YW379 dialogue checks. Both runtime bundles compile. Two dialog names are now associated with their headings; this still requires deployed browser verification. Actual provider recovery is not established.
+
+Earlier dated sections below are historical where superseded.
+
+## Historical model38 isolated candidate — 2026-10-13T07:52:38.166675+00:00
+
+User authorized an alternative model and full recalibration after confirmed Gemini3.6Flash503 failures. Gemini3.8Flash is the new explicit isolated target; original13 calibration receipts, known10267micros and unknown924000micros remain immutable. Independent amendment5 contains all28 reviewed cases, one primary and at most one diagnosed recovery each, max56 single-provider attempts. Separate E2E retains the original cumulative120-call namespace and max3 sequential same-model attempts. Trusted activation is v2; all isolated pins expire2026-10-14T12:00Z. No production default/fallback or accepted100% version changes.
+
+This source is unactivated until exact candidate build/tests, registered publication and readback. No model38 provider result exists yet. All189 remain scope. The actual Hetang export now passes file/server equality (74376bytes), while its saved answer remains unconfirmed with no invented assessment. UC37cf3c4 CI passes but controlled production rollout and source/central/My write-readback require owner go/no-go. Real28 semantic calibration,3 complete dialogues,207 supplemental cases, continuation/accounting, second account, nativeIME, accessibility and two baseline touch failures remain open. Native stable pointer unchanged. Evidence and resource ownership: continuation-01a132c3/CHECKPOINT-ALL-LESSONS.md.
+
+Earlier current sections below are retained history where superseded.
+
+## Historical execution and unreleased followup — 2026-10-13T06:07:00.854950+00:00
+
+All189 lessons remain in scope. Isolated Pages9ee0199e-b021-4721-97cc-d4618927390f serves a5748476922a3598672de98af8bdf89525ba5e0b; exact05:28Z control readback is retained. FormalYW and APIS100% are unchanged. Seven amendment4 cases have been touched: one JSON-content-type rejection without a remote row, six terminal gateway failures, no model output or semantic pass. The driver header was repaired and26 checks passed on Node22/24. The owned Hetang read acknowledgment and one real scored-response attempt are preserved; that attempt returned503/unconfirmed, no score or completion was fabricated. Known new model cost remains unestablished; all remote unknown reservations are retained. Shared model circuit and repeated Google503 prevent meaningful further calibration; user direction was requested immediately, no fallback or replay performed.
+
+Unreleased followup now excludes the69 pending supplements across52 lessons from completion while preserving their待校準 status and existing teacher-review path. Nine representative requirements still require actual calibration. Lesson limits derive from complete planned remediation times1.5, minimum120;1477=135 and1534=137. Source-owned save templates are status events, not new teacher turns; historical turns are preserved. Three grammar items now have the reviewed narrow-context primary sources, without mandatory grammar labels; regenerated curriculum still totals189 and no model acceptance was inferred.335 dialogue checks passed on each pinned Node22.21.1/24.18.0; source Worker smoke bundle compiled, not a release artifact or deployment.
+
+The owner extended paid authority to2026-10-14T12:00Z. Deployed activation remains2026-10-13T12:00Z until the next necessary isolated publication updates all pins; no expiry-only publication. Representative full dialogue,28 semantic cases, rolling207 supplemental cases, central write/readback, retry accounting, second account, real download, native IME, accessibility and two baseline touch failures remain open. Mac is locked; web export reports generated but no new downloaded file is confirmed. Native stable pointer is unchanged/incompatible. Used.release/.acceptance derivatives were removed,382351936bytes; unique evidence retained.
+
+Current checkpoint: /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/CHECKPOINT-ALL-LESSONS.md. All dated sections below are history where they conflict.
+
+## Historical all-lesson candidate and authority — 2026-10-13T04:13:40.301264+00:00
+
+Projection correction — 2026-10-13T04:10Z: the unexecuted amendment4 packet now pins the same privacy and Web-resource JSON projection served by the release builder, with each raw curriculum digest retained separately. All28 case specifications, questions, answers, rubrics and source reviews are unchanged; six lesson1498 source pins changed; all prompt pins are unchanged. The shared helper and packet fixed-point check prevent release-time hash drift.99 focused checks pass on Node22.21.1 and24.18.0, including all28 source admissions through the actual handler with synthetic model responses and pre-reservation semantic-tamper rejection. This establishes offline projection compatibility only; no model calibration, runtime acceptance or publication is claimed. The previous unexecuted packet is retained byte-for-byte in `continuation-01a132c3/AMENDMENT4-PROJECTION-PREDECESSOR.packet.json`; correction and verification are in `continuation-01a132c3/AMENDMENT4-PROJECTION-REVIEW.json`. The seven historical calls and their costs remain unchanged.
+
+All189 lessons are the delivery scope; three representative lessons remain validation samples. Full189 generated curriculum now maps1633 source items and1697 formative units, with193 active study-guide items. Original869formal/1021formative objects, historical grades/completion/drafts and annual A+768baseline/692threshold remain preserved. New88compulsory lessons add676 formally scored/displayed units plus88 non-scoring selfreports; every new unit is excluded from the existing A+gate. Effective policy yw-formal-scope-20261013-v2 begins2026-10-13T02:03:44.252Z for newanswers only. Exact descriptors are in FORMAL-SCOPE-CANDIDATE.json, not this prose. UC compatible consumer and authenticated central acceptance remain candidate work.
+
+Lesson1572 is ownerapproved supplemental pass with zero fabricated score; source missing正文 remains recorded. All67classical/traditionalpoetry lessons have source-linked vocabulary/functionword/grammar area presence, not an exhaustivelexicalinventory or semanticpass. Of69new supplements,52 carryXCentryIDs/pages and17 authoredgrammar analyses now contain14 source-context-reviewed and3 pendingverification items; separate five representative grammar items are source-context-reviewed. All22 remain authored teaching analysis, never dictionary authority; all nine representative real-model language calibrations are pending. Modelcalibration remains separate from source verification.
+
+Conversation now hides source-owned bookkeeping in the materialdrawer; grades and correction controls remain on demand. Original source records are retained. Node22/24 curriculum16 and E2Edriver17 checks pass; source scope164 perversion passed independently. Frontend32 and partial-retry backend83 checks passed. Final dialogue328, native23 and release-site7 checks pass on Node22.21.1/24.18.0. Broader integration completed with two mobile touch-scroll failures reproduced on635299 baseline; not passed. The predecessor ee2cc4e exact CI38343620947 passed both pinned Nodeversions. Its source-projection correction passes99 focused checks perversion; the corrected source requires a new artifact/CI and real acceptance. Historical-local-answer edit defect was found in independent review and repaired with actual input-event→Send/reload tests29 perNodeversion. Local synthetic desktop/390x844 checks and actual exported-file readback passed, separately from real model evidence.
+
+Amendment3 expired2026-10-13T02:13:38.293Z and is closed withoutreplay. Three newattempts involved2uniquecases,0passed,22unrun; cumulative7attempts,known10267+unknownreserved420000microUSD,588000reserved. Realfirsttoken6055ms missed5000target. User subsequently authorized alltaskcosts and directcontinuouswork, superseding pendingcostapproval and serialhandoff instructions only. Newamendment4 and separate120call fullE2E remain finite/sourcepinned, may execute aftercandidatechecks; nooldledgerreset. Exactauthority COST-EXECUTION-AUTHORITY.json and closedwindow CALIBRATION-WINDOW-3-CLOSEOUT.json.
+
+Currentisolatedlive source635299bd8f4d1a85bffe583ba5e34f8180307e8e / Pages7ca300f6-7744-4ed6-90de-4615af0825f4. FormalYW175f8ae/Pagesb6f5ac67 remains unchanged. APIS exact02569 candidate fcf90a5e-6e2e-4e7f-be3d-b59670e6d488 is attached at0%, accepted53dbb568 remains100%; deployment06e12644-749d-4470-bcb3-802848c15fde passed source/bundle/config readback at2026-10-13T04:02:35.318Z. Actual provider retry/accounting remains unverified. Newall189/score-only/streamretry source is not yet deployed. Formalproduction remains subject to actualgo/no-go evidence; do not infer acceptance from tests orcostauthority.
+
+Requiredremainingacceptance: fullreal semantic/persona/difficultycases; complete3dialogues with尚友; same-model sequentialmax3retry andpartialcontinuation/accounting; actualUCsource→consumer→reload; secondrealaccountisolation; real-dialogue export (local synthetic actual file already verified); nativephoneIME; paid120vsdocumentedlongremediationpaths; accessibility; all78 supplemental language items across54 lessons real calibration (28initialcases cover9representativeitems,69remaining need individual acceptance); reversibleexactrelease andpublicStatus afteracceptance. Rootownsresourcecloseout; allchildren FINAL-only and exactdispositions recorded.
+
+Native compatibility remains independently blocked: canonical importer rejects current first-read wire format and189reader graph; reviewed development-only importer/runtime patches are being prepared. Stable191 pointer remains unchanged, no App activation or APK release is claimed. This does not stop isolated Web acceptance. Normal authenticated browser dialogue route is usable; no session credential file was created.
+
+Canonical current evidence: /Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/REPORT.md. All conflicting dated sections below are historical.
+
+## Historical all-lesson implementation — 2026-10-13T01:44Z
+
+Suen explicitly requires all189 lessons; three former pilot lessons are representative validation samples only. Preserve the complete original internal structure, source requirements, validation, records and scoring; the normal learner flow completes these through conversation with minimal extra confirmation. Four GPT-6 Astra children own curriculum, frontend, source assessment and independent acceptance review, with exact per-child convergence and runtime-artifact closeout. The source candidate remains unpublished to formal YW.
+
+All189 curricula and original869formal/1021formative/193active-guide mappings are generated. The source-owned learning-turn planner collects immutable student turns and invokes original scoring evaluators; server-side task/version/idempotency checks remain authoritative. Public and resumed curriculum projections redact answer keys. Existing grades/completion and source rubric versions remain unchanged; new unscored mastery remains separate. Supplemental classical-source coverage and real semantic acceptance are still being completed; generated files are not proof of teaching acceptance.
+
+Exact lesson1572《聽聽那冷雨》 is now an owner-approved supplemental pass, per direct instruction「這篇直接視為通過，因為是我補充的」. Its missing正文 source remains honestly unverified; no PDF download, fabricated response/numericgrade or historical rewrite is permitted. The source-controlled exemption is exactlesson-only and non-scoring. UI shows「已通過（補充篇目）」. Authority: continuation-01a132c3/OWNER-EXEMPTION-1572.json.
+
+Private acceptance live635299/Pages7ca300f6 uses the separate syntheticDB and original APIS0%candidate. Amendment3 recovery attempt3 returned partialstream then confirmedFETCH_ERROR/brokercompletion without usage/finalassessment; same-receipt readback passed. Seven cumulative calls,10267known+420000unknownreserved microUSD; paidcalls stopped, no automatic replay. Original deadline02:13:38.293Z and final suen formal-publication gate remain. This does not block independent local implementation. Exact evidence and current gaps: [continuation report](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/REPORT.md). Older sections below are retained history where superseded.
+
+## Historical finite continuation implementation — 2026-10-13T01:04:56.532337+00:00
+
+Suen confirmed amendment3 at2026-10-13T00:54:51Z; authority is `continuation-01a13217/AUTHORIZATION-3.json`. Four immutable old calls remain:4678microUSD known plus252000 unknown reserved. New distinct namespace allows26 new attempts for24 unchanged fixed cases and at most2 recoveries,30 cumulative and2520000microUSD cumulative reservation. First new intent starts60minutes; hard expiry remains2026-10-13T12:00Z. The clock started2026-10-13T01:13:38.293Z and expires02:13:38.293Z; it never resets. Formal publication still needs independent suen go/no-go.
+
+The executor now reconciles all four historical receipts, enforces the cumulative budget atomically, and blocks further paid work on unresolved provider outcomes. Confirmed503 recovery requires same-target receipt-pinned provider/broker/no-output evidence,2minute then4minute/provider cooldown and at most2 recoveries; third consecutive503 stops paid execution. Semantic recovery needs a recorded diagnosis/correction and permits at most one percase. Generic503 never proves broker completion. The existing APIS response does not carry that confirmation, so an operator joins the same-request readback using the bounded diagnostic allowance, pins it in the existing calibration contract, tests and publishes the exact isolated source before recovery. No shared APIS change, new authority schema, fallback, hedge or ledger reset.
+
+Three consumed packets are preserved byte-for-byte. Fixed case/source/prompt digest remains4fb2ac792516d95c00022ad08bda42063e8606bec4989b3d46bc6b86c6a67317 and strict evidence validation is unchanged.156 focused checks pass under Node22.21.1 and24.19.0. Isolated0af3328/Pages72bd02fe is deployed. First fixed case returned real stream/5589microUSD but exposed a question/rubric mismatch; second returned confirmed provider503 with broker completion/no output and retained84000 reservation. Same-owner readback matched; exact receipt-pinned recovery is prepared, not yet executed. All old rows remain, cumulative6 attempts,10267known+336000unknownmicroUSD. Full twelve-part target and accepted Web/record/restore evidence remain in the predecessor TARGET-STATUS.md. [Current continuation evidence](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/REPORT.md). Earlier conflicting current statements below are history.
+
+## Historical Web acceptance reassessment — 2026-10-13T00:42:57.951660+00:00
+
+Teacher review action only writes an idempotent own-session marker; it does not send notifications. UI save/duplicate/reload passed2026-10-13T00:32:57.908Z with one unchanged event/zero model calls. Android APK installation/physical-phone requirements do not apply automatically to this Web candidate. Mobile Web keyboard-layout and Enter checks passed; physical IME is separately unverified.
+
+Runtime remains df42b7e/Pagesf407ce01 on the isolated host; formal175f8ae and the full twelve-part objective are unchanged. The expired calibration window does not stop independent Web work. No new paid call or production approval is inferred.
+
+Current requirement-by-requirement disposition, root causes and evidence: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13217/TARGET-STATUS.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13217/TARGET-STATUS.md). Earlier conflicting entries below are history.
+
+## Historical isolated acceptance — 2026-10-12T22:13Z
+
+Amendment2 source df42b7e874af454641cceb1a6a4097b82c452f10 deployed to isolated Pages f407ce01-c5b4-4d5a-a716-84c86f06f49b at 2026-10-12T22:00:46.394705Z. Restricted artifact ebaade2dbcf6e0052d29b9cbf59e243b58c5138bb2ae3f22976dd0e57099736c.142 focused checks on Node22/24 and exact CI38313823541 passed. Formal YW baseline175f8ae/Pagesb6f5ac67 and APIS53dbb568@100/66cfaab9@0 remain unchanged.
+
+Two new distinct fixed cases each reached exactly one gemini-3.6-flash call and returned confirmed503; broker completion confirmed, no fallback/hedge/background calls. Same-case receipt readbacks matched. Cumulative4/26 attempts;4,678microUSD known plus252,000 unknown reservation, conservative256,678microUSD.22 attempts remain but the immutable first-intent deadline is2026-10-12T22:21:24.094399Z, not a fresh allowance. Three bounded telemetry queries completed; no recovery proof. Do not replay uncertain calls, replace failed rows, reset the window or weaken semantic evidence rules.
+
+390x844 browser acceptance preserved draft/selection across text/conversation with no horizontal overflow; draft cleared. Three authorized weak-network reads passed (median1162ms), anonymous read401. Original XC mobile 而 entry and PDF132/printed120 image1634x2400 loaded; isolated embedding remains deliberately blocked by same-origin CSP. These are browser checks, not physical keyboard acceptance or embedded dictionary acceptance.
+
+The original twelve-part goal remains incomplete: full semantic/persona/difficulty calibration, physical mobile keyboard, authorized foreign-account and teacher-review acceptance, stream interruption/accounting, independent suen go/no-go, formal rollout/readback and public Status remain open. Previous source-role/mapping defects are fixed and deployed; accepted backup/restore and sourcefanout evidence are inherited. No formal production publication is authorized by this amendment. This documentation update is not another runtime deployment.
+
+Current evidence, immutable receipts, source/rollback pins and full acceptance disposition: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13217/REPORT.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13217/REPORT.md). Earlier headings are historical where superseded.
+
+## Historical text-role repair, not deployed — 2026-10-12T16:12:14.285549+00:00
+
+Four textbook editor guidance blocks in 劝学 are preserved verbatim as labelled teaching references, excluded from author passages/assessment citations. Original resources, learning guidance (including memorization instruction), scoring rules and stored curricula remain preserved. This is source-role correction, not a new recitation score or waived requirement. The two pilot classical-first-read mapping rows now describe the implemented original process bridge. Same-owner real first-read submit/acknowledge/three corrections now survive reload with original guesses intact; see the linked report. Physical mobile remains unverified.
+
+127focused checks pass on Node22.21.1/24.19.0; formal1256-file artifactea601097f38c1b5eb93b75b82f7df11c8144bb2ffd93402e8107c6f9d3005c3d builds/checks. Two consumed calibration packets remain byte-identical; regression tests reconstruct their exact source by digest rather than silently rebind them to revised curricula. Actual current-source drift blocks the old executor before reservation. Newly prepared24-case digest4fb2ac792516d95c00022ad08bda42063e8606bec4989b3d46bc6b86c6a67317 is unapproved-source-preview, with no amendment authority. Original2attempts/4678known+84000unknownmicroUSD remain unchanged. The reviewed proposal is26cumulative attempts/US$2.184,20minutes,zero retry,firstfailure stop,unchanged expiry; it is not permission. No deployment/provider call in this repair. Isolated runtime remains5045fb9/eb519808; formal YW and APIS allocations remain unchanged.
+
+Current report, exact verification, remaining12-part acceptance, proposed continuation and cleanup: [text-role repair](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a130b1-text-role/REPORT.md). Earlier current statements below are history where superseded.
+
+## Historical stopped calibration — 2026-10-12T15:52:39.443855+00:00
+
+Approved amendment source5045fb9f22b5b26b45b5005c2a94d0fe255113c1 deployed once to isolated Pages eb519808-5804-4dd6-a8bb-76a9f4d0953e; restricted artifact194b3d959b0f64fa4a4ef55960e30d8efec78be54d127c6108a3fbcbac15407a. Exact CI38272132831 passes on Node22.21.1/24.18.0;126 local focused checks each on22.21.1/24.19.0 and bundle binding check pass. Formal YW remains175f8ae/Pagesb6f5ac67, APIS53dbb568@100/66cfaab9@0 unchanged.
+
+First revised case at15:44:56.122Z returned gateway_unavailable; same-case GET readback matches. One bounded telemetry query returned14/14 events at ABR1, one candidate invocation in15:44:50–15:45:05Z. Identity verified and admission allowed; exactly one gemini-3.6-flash provider attempt returned503 UNAVAILABLE at1053ms; broker completion confirmed; fallback/hedge/background calls0. No model text or usage arrived. This is upstream availability failure, not a semantic calibration result. Old semantic failure remains immutable at4678microUSD; new unknown cost retains84000microUSD reservation. Cumulative provider attempts2, known-plus-unknown conservative accounting88678microUSD.23 revised cases were not executed. Neither failed row may be replayed, replaced, refunded, or reset automatically.
+
+Operation is terminal under the approved first-failure stop rule; the original20minute deadline16:04:46.609188Z and host expiry2026-10-13T12:00Z remain. No automatic retry or new allowance is authorized. Completing24 corrected cases would require a separately approved cumulative26-attempt/US$2.184 amendment, preserving both prior receipts and the unknown reservation; proposal is review-only. Teacher-review denial, real physical mobile/keyboard, weak-network/stream/accounting and full semantic acceptance remain open. Physical device inventory was empty.170 fanout source inventory intents do not mean170 runtime regression passes. Final production go/no-go and publication/Status remain separate.
+
+Current evidence, stopped ledger, diagnosis, restoration pins and cleanup receipt: [calibration report](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a130b1-calibration/REPORT.md). Earlier entries below are history.
+
+## Historical approved calibration amendment — 2026-10-12T15:41:47.024876+00:00
+
+Suen explicitly approved cumulative25attempts (old failure1 plus corrected24), cumulative conservative reservationUS$2.100,20minutes from the first corrected attempt,zero retries,first mismatch stop; original host expiry2026-10-13T12:00Z unchanged. The amended server admission requires the exact same-owner original failed receipt, preserves all old rows, counts old+new attempts and reservations, and exposes prior evidence in readback. Old POST action cannot trigger a corrected attempt. Neither policy evidence requirements nor validator is weakened. Original packet is preserved byte-for-byte in scripts/fixtures/dialogue-calibration-stopped-packet.json; corrected packet887a2537… uses policyv6/evidencev3 and a distinct amendment namespace.
+
+126focused checks pass on Node22.21.1 and24.19.0, plus actual isolated bundle binding check. Formal1256file artifact5dd9118f… and restricted artifact194b3d95… built. No new provider request or deployment yet at this checkpoint. Existing sourcec2fcf53/Pagesc4fa78f4 remains live until a fresh transaction is consumed. Existing source/backup/fanout evidence retained;170 inventory intents are not170 runtime regression passes. Production gate remains independent suen go/no-go. Physical mobile inventory found the already-running ADB service but no attached device; no pairing or device change was attempted.
+
+Current evidence and authorization: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a130b1-calibration/AUTHORIZATION.json](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a130b1-calibration/AUTHORIZATION.json). The linked dated REPORT.md owns subsequent deployment and per-case results. Earlier sections below are history where superseded.
+
+## Historical prompt repair — 2026-10-12T15:25:26.047996+00:00
+
+Policyv6 makes the existing complete-criterion evidence contract explicit; evidencev3 and validator are unchanged. The real first failed response remains rejected and its original execution packet/ledger are immutable.105 focused checks pass on pinned Node22.21.1 and24.19.0; formal artifact1255files/d2f285b5cbe5b3ff220666cac16d8fed98471f96aa2808a0f0f1468e527bd730. This is local verification, not real semantic acceptance or deployment.
+
+Original paid operation remains STOPPED1/24,4678microUSD; no new call. Completing24 corrected cases needs25 total attempts and an explicit bounded continuation amendment, proposed maximumUS$2.100,20minutes,zero retries,original expiry retained. No implicit reset or production approval. Current runtime remains c2fcf53/Pagesc4fa78f4; APIS and production are unchanged. Exact source, regression, proposed packet and remaining gates: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a130b1-prompt-repair/REPORT.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a130b1-prompt-repair/REPORT.md).
+
+## Historical real acceptance — 2026-10-12T15:08:09.731392+00:00
+
+The actual owner553 My browser session saved and reloaded one synthetic first-read mark in the isolated D1: same ownerRef,markId,text and guess; HTTP200. No login replay or teacher-review request. The fixed24-case executor is now deployed only at yw-acceptance.bdfz.net: source `c2fcf53cde109b28f487ac3ebc70aee594146c2c`, Pages `c4fa78f4-5740-4086-8393-6a514164bb53`, artifact8758aa8d91246ac76518c283c8b054bee05d94809d6c37e960ec343305edc40d. Original packet95b8f943... remains exact; Node22/24 each26checks and actual bundle check pass.
+
+Private APIS routing and real Gemini stream/usage are verified by the first fixed case. At2026-10-12T15:03:35.502Z, gemini-3.6-flash returned228 output tokens,5097 input,total5325; first token2817ms,total3179ms; actual-equivalent4678microUSD. The model claimed demonstrated but returned onlycontext_meaning evidence, omittingexplanation andindependent; validateProposal rejected missing_criterion. Raw response,three partial chunks and exact same-case readback are preserved. No grade/assessment was accepted.
+
+The original operation is STOPPED at1/24 under its first-failure rule;23cases remain unexecuted,no retry/reset. This is a failed model acceptance, not a production release. Any corrected prompt/packet and disposition for further calls need explicit handling of that stopped operation; do not silently start a replacement batch or weaken the validator. Formal YW unchanged; APIS baseline100/candidate0 unchanged; hard expiry2026-10-13T12:00Z. Evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-live-acceptance/REPORT.md`. Earlier current sections are history where superseded.
+
+## Historical authenticated acceptance and fixed-case repair — 2026-10-12T14:57Z
+
+Real owner553 reused an existing My browser session. One synthetic first-read mark was saved through the normal UI and verified after reload: same ownerRef,markId,selected text and guess,HTTP200. No login replay, teacher-review request, model call or production write occurred. Evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-live-acceptance/OWNER-SAVE-RELOAD.json`.
+
+The fixed24-case packet reproduces digest95b8f943e519191aba697a0c01984621ee8ea12549e164379363f5ef54a04f09, but the deployed normal dialogue endpoint cannot execute its hypothetical fixture states. The new candidate adds a capability-gated fixed-case branch inside the same isolated API. It accepts only case IDs and ownerRef, uses server-pinned prompts and source hashes, reserves through existing dialogue_calls with original shared count/cost limits, persists partial/result/usage evidence and forbids replay, reorder,source drift or continuation after a failed/unknown case. Fixture sessions use a separate lesson namespace and never write assessments or central evidence. Existing curriculum remains pending; no real grade is awarded. No schema migration,APIS change,new caller or credential is required.
+
+This runtime repair is locally tested and built but NOT deployed. Its exact source/artifact needs a fresh consumed release transaction for the existing isolated project; the earlier publisher window has ended. Original model operation remains0/24,USD2.016,20 minutes from first actual attempt,20 seconds per request,no retries. Each result still needs semantic review before the next case. Private cloud APIS routing remains unverified until the first admitted exact case produces real provenance/usage. Current candidate review: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-live-acceptance/CALIBRATION-REVIEW.md`. Earlier current headings are history where superseded.
+
+## Historical isolated deployment — 2026-10-12T14:36:21.588121+00:00
+
+The isolated host https://yw-acceptance.bdfz.net/dialogue now passes six real public asset/auth/origin/host boundary probes. Runtime `4b5e345de8daad1057e5ff68824bdf057ba4243b`, deployment `ff26a501-1d2d-401a-9bac-16c42791aa5f`, artifact `0e7eb06b470b6f6e9bba9e781769c38bcc48013bc65e622a73b7ffbfa3f70226`. The narrow Pages extensionless-routing repair is live; Node22/24 isolation tests12 each and actual upload-bundle check pass. All1245 unique assets are indexed; the uploader now separates successful upload from hash-index confirmation and retains bounded transfer metrics. Prior missing-index observations did not prove missing physical content.
+
+Formal YW and APIS100/0 allocation remain unchanged; new synthetic D1 and original hard expiry2026-10-13T12:00Z remain. Model calls0. Same-owner authenticated save/reload, foreign-owner denial, actual private APIS version routing,24-case calibration and final production acceptance are still open. No public production release or Status success is claimed. Current evidence and exact resource/rollback/cleanup mapping: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-upload-repair/REPORT.md`. Earlier current entries are historical where superseded.
+
+## Historical isolated routing repair — 2026-10-12T14:34Z
+
+The separate acceptance project is deployed at `yw-acceptance.bdfz.net` from c1c050f, but its first public readback found a self-redirect: the wrapper rewrote `/dialogue` to `.html`, and Pages redirected it back. This scoped repair preserves the incoming asset path and lets Pages handle extensionless HTML; the fixture now models the real Pages redirect. Twelve isolation tests pass on Node22 and24. The user's instruction authorizes fixing blockers to this same isolated deployment; exact new source/artifact will be bound to a separate consumed release receipt before upload. Production YW, APIS100/0 allocation, credentials, synthetic database and expiry remain unchanged; no model calls. Live repair acceptance is pending and is recorded in the linked report when complete.
+
+The large-file upload has recovered: all1,245 unique assets are indexed. Upload ACK and asset-index absence were previously conflated; successful upload followed by upsert-hashes resolves that mismatch without retransmitting acknowledged content. Exact current evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f-upload-repair/REPORT.md`. Earlier current-state headings below are historical where superseded.
+
+## Historical isolated acceptance checkpoint — 2026-10-12T13:49:01.231865+00:00
+
+APIS candidate66cfaab9 is attached at0% with accepted53dbb568 at100% (allocationb8f8ce5f, exact readback passed). New isolated D1c45988a6 has13 accepted migrations and Pages yuwen-course-dialogue-acceptance has verified private bindings. Asset continuation stopped: first2 assets acknowledged; next22MB payload unacknowledged at120s, no replay. No Pages deployment/domain or paid calls; student-usable capacity unchanged.33/34 control-plane reads used; original model budget unstarted. Runtime source remains YWc1c050f/APISc757068, not this documentation commit. Exact receipts, rollback and remaining work: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f/REPORT.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a1300f/REPORT.md). Earlier preparation/secret-blocker statements are historical. Never replay consumed publishers or increase candidate traffic.
+
+## Historical private APIS acceptance preparation — 2026-10-12T13:05Z
+
+The isolated artifact now reuses APIS through a named private service binding and existing My session; the production Pages caller secret no longer needs to be recovered. Production YW and its credential remain unchanged. Twelve local YW isolation tests and the real workerd APIS transport scenario pass; live deployment/calibration have not begun. Revised exact sources and binding require release review; original expiry/budgets and final suen go/no-go remain. See [dialogue/ISOLATED-ACCEPTANCE.md](dialogue/ISOLATED-ACCEPTANCE.md). Earlier secret-recovery requirements are historical.
+
+## Historical restricted acceptance preparation — 2026-10-12T12:07Z
+
+Suen approved preparation of a separate, expiring, owner-restricted My acceptance entry. The source now checks the designated numeric identity before D1 access, uses only a new synthetic DB, exposes only dialogue APIs/assets, omits central Queue/history, and pins APIS only in the separate acceptance context. Ordinary previews, production configuration, historical data and App content remain unchanged. Owner confirmed the designated account is non-student; successful one-attempt login and exact identity mapping are recorded privately in task evidence. No deployment, remote migration, provider call or learner-capacity change occurred.
+
+117 focused checks pass per pinned Node22/24, including actual upload binding metadata; original Reading API74 passes. See [implementation and first-deployment boundary](dialogue/ISOLATED-ACCEPTANCE.md). First deployment still requires suen's exact source/host/account/artifact review; real calibration remains0/24 and final production go/no-go is separate. The accepted backup/restore and terminal source inventory must not be replayed. Earlier checkpoints below are historical where superseded by this entry.
+
+## Historical source-inventory checkpoint — 2026-10-12T11:42Z
+
+The complete conservative APIS source-reference inventory is now reconciled:116 Workers,42 Pages dispositions,108 aliases/source roots (not108 products), and2,868 unchanged local reference hashes. The existing shared-hub receipt validates. APIS live module SHA81cd964 matches accepted111fa29/version53dbb568 at100%; YW remains the newer textbook release175f8ae/Pagesb6f5ac67. No runtime, data, flag, model call or deployment changed. Exact evidence and finite request ledgers: [/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12fd6/FANOUT.md](/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12fd6/FANOUT.md).
+
+Real acceptance remains open. Ordinary YW previews intentionally lack production identity/evidence bindings, and Web mutations require the exact YW Origin. APIS exports Durable Objects, so ordinary Version URLs are unavailable; an explicit0% version override would require the existing governed deployment transaction. A narrow owner decision is pending before preparing any new authenticated preview exception. Do not forge Origin, enable ordinary-preview identity, reset provider quotas or infer release acceptance. The24-case budget remains0used; the accepted backup/restore must not be repeated. Prior checks and runtime artifacts remain unchanged.
+
+Earlier checkpoint sections below are historical where superseded by this entry.
+
+## Historical dialogue candidate — 2026-10-12T11:07:15.466196+00:00
+
+Nine separately recorded language questions now use the same bounded instance/review path while original grades and immutable old curricula remain preserved.99 focused checks per Node22/24 and Reading API74 pass. Production runtime capacity remains unchanged; the approved private backup is retained and disposable restore resources were removed. The only current teaching/calibration state is [PILOT.md](dialogue/PILOT.md), with exact24-case budget and remaining gates in [CALIBRATION.md](dialogue/CALIBRATION.md). Earlier candidate sections are history. Source review now accepts six existing XC images for 于/何/但; semantic calibration remains pending. Explicitly approved encrypted backup and native isolated D1 restore now pass; full28-table/39,540-row typed/schema/sequence comparison and local additive migration preservation pass. See [data preservation](dialogue/DATA-PRESERVATION.md).
+
+## Historical dialogue candidate — 2026-10-12T08:47:07Z
+
+Five original AI formal interactions now share the dialogue budget and commit source assessment, visible reply and usage atomically. Original results and unknown-attempt readback fences are preserved. Feature remains disabled; no new production capacity, migration or paid call. Exact checks, remaining frontend/teaching/restore/release work and the active goal are in [the current candidate contract](dialogue/PILOT.md). Earlier candidate entries below are historical.
+
+## Historical dialogue candidate — 2026-10-12T07:56:32Z
+
+Serial owner codex-01a12ee3. Candidate historical bridging now accepts the original evaluator's passed outcome, preserves non-scoring self-reports and original course completion, retains versioned first-read marks/tombstones, and reads owner-scoped browser/shared history on demand. Append-only correction notes preserve original turns and assessments, with owner isolation, idempotency and export. New dialogue is optional for an already-completed original course. No grade changes or cross-student grants.
+
+58 focused checks pass on Node22 and24; original Reading API74 passes. Synthetic browser saved and reloaded original plus correction. Real shared HTTP/account, model calibration, source-evaluator bridge, backup/restore and release acceptance remain open. Production unchanged; feature disabled and accepted self-study capacity has not increased. Evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12ee3/REPORT.md`. Prior candidate sections are historical; this section supersedes their history/correction/source-reference status.
+
+
+Source vocabulary type, options, answer and difficulty are retained in dialogue variants, including the pronunciation of 暴. Two dictionary original pages are visually verified; two Beijing examination newspaper question references are text-verified and explicitly distinguished from original papers/official marking. Four textbook/dictionary-grounded language examples are teaching references only, awaiting calibration and not new mastery gates. Source-reference rendering passed a synthetic browser check with no console errors. The dialogue UI now reuses the original first-read source/controller: unpunctuated text,3 marks,12-character summary, exact version/offset checks, annotated-read acknowledgement and original-guess-preserving correction. Owner-fenced transport does not delete local legacy records or automatically reconcile. Ambiguous submit recovers through one same-owner source read. Unresolved original marks block final readiness; vocabulary precedes later discussion. Original controller checks pass30 lessons/102 paragraphs; browser confirms save/unlock/reload/correction/acknowledgement with synthetic data. Full formal/guide evaluator bridge remains unimplemented.
+
+## Historical dialogue candidate — 2026-10-12T06:47:49+00:00
+
+Owner codex-01a12ea0; change `20261012-apis-yw-stream`. Local true-stream/persistence/budget and owner-only My admission are implemented; permanent retention is user-approved. Full-history evidence references and session-stable randomized vocabulary order now pass focused checks and a200-turn synthetic browser readback. Feature remains disabled. Production still serves source `175f8ae42dc5fd58f1b697a76567e79c954d9f7f`; no migration or paid provider request occurred. Accepted self-study capacity has not increased.
+
+See [the current candidate contract](dialogue/PILOT.md) for exact behavior, validation and remaining historical/teaching/live acceptance gates; source evidence is in `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a12ea0/`. Earlier candidate statements below are historical and superseded by that linked current section.
+
+
 ## 2026-10-11 — Textbook plates from the current-edition PDF (candidate, not deployed)
+
+## 2026-10-12T04:16:33+00:00 — Conversation pilot candidate; production unchanged
+
+The conversation-led three-lesson redesign is a disabled, unaccepted candidate on
+`codex/yw-dialogue-pilot-20261012`, based on `175f8ae42dc5fd58f1b697a76567e79c954d9f7f`.
+No production migration, student write, paid AI call or deployment occurred. Existing
+accepted self-study capacity did not increase. 56 focused local checks pass; live
+backup/restore, historical completion equivalence, teacher/privacy policy, real AI
+quality/streaming/cost and hard-interruption recovery remain unresolved.
+
+Candidate design/inventory: [dialogue pilot](dialogue/PILOT.md).
+Review and exact blockers: [go/no-go](dialogue/GO-NO-GO.md).
+Central evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/REPORT.md`.
+This entry supersedes earlier dialogue design notes for the current candidate only;
+it does not supersede the accepted release authority or historical evidence below.
+
 
 The "原圖" dialog no longer uses the lesson file's legacy page-image addresses. `site/data/textbook-pages.v1.json` maps each lesson to pages of the current edition's PDF, and `site/assets/textbook-pages.js` builds the only plate address, `https://sun.bdfz.net/files/page/<edition>/<sha12>/<pdf page>.webp?w=240|960|1440` (immutable; it names the edition and the PDF hash).
 
@@ -1803,7 +2063,7 @@ following server-authority boundaries in one deterministic artifact.
   `48b94d286f50a33f9cb9095e05655f6eba2d4ae712c1adb99f033ac6162339e4`.
   Do not reuse either predecessor PR's artifact receipt.
 
-### Current production boundary
+### Historical production boundary
 
 - `yw.bdfz.net` currently resolves to Pages deployment
   `18213286-37d1-4b71-80b6-78e8b986ed3d`, source
@@ -2133,7 +2393,7 @@ This is retained as the 2026-08-11 operational receipt. The 2026-08-15 current
 production boundary at the top supersedes its former current-production claim.
 Older paired Web/App and 2026-08-09 candidate sections remain historical.
 
-### Current student flow
+### Historical student flow
 
 - Students can use 189 lesson units. The source manifest retains 191 records,
   including two hidden system records. All 189 student-visible pages use one

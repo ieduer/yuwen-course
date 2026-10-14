@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {ORIGINAL_FORMAL_RELEASE, FORMAL_SCOPE_POLICY} from '../site/formal-scope-policy.js';
 import { signedEvaluationRequest, executeEvaluationRemotely, EVALUATION_MACHINE_PATH } from '../site/evaluation-machine.js';
 import { sourceEventStatement, evaluationEventId, eventDigest, canonicalEventJson } from '../site/learning-evaluation-events.js';
 import { normalizeLearningOperation } from './fixtures/uc-learning-operation-journal-65be121.js';
@@ -415,9 +416,9 @@ function assertSynchronizedIneligibleAttempt(result, queued, writes) {
   assert.equal(queued[0].envelope.schema, "bdfz-learning-evidence-event-v2");
   assert.equal(queued[0].envelope.schemaVersion, 2);
   assert.equal(Object.hasOwn(queued[0].envelope, "sourceContractVersion"), false);
-  assert.equal(queued[0].envelope.sourceVersion, registry.compatibilityContracts.aPlusGate.sourceVersion);
+  assert.equal(queued[0].envelope.sourceVersion, ORIGINAL_FORMAL_RELEASE.manifestVersion);
   assert.equal(queued[0].envelope.contractVersion, registry.compatibilityContracts.aPlusGate.contractVersion);
-  assert.equal(queued[0].envelope.sourceReleaseId, registry.compatibilityContracts.aPlusGate.sourceReleaseId);
+  assert.equal(queued[0].envelope.sourceReleaseId, ORIGINAL_FORMAL_RELEASE.sourceReleaseId);
   assert.equal(queued[0].envelope.mappingVersion, registry.compatibilityContracts.aPlusGate.mappingVersion);
   assert.equal(queued[0].envelope.sourceAttemptId, queued[0].envelope.sourceEventId);
   assert.match(queued[0].envelope.canonicalUnitId, /^yw:lesson-/);
@@ -469,7 +470,7 @@ test("current formal resources publish one exact e310/v2 source contract with co
   );
   assert.equal(compatibility.academicYearPolicy.requiredDistinctCreditUnits, 692);
   assert.ok(manifest.items.every((item) => (
-    item.sourceReleaseId === compatibility.sourceReleaseId
+    [compatibility.sourceReleaseId, ORIGINAL_FORMAL_RELEASE.sourceReleaseId].includes(item.sourceReleaseId)
     && item.mappingVersion === compatibility.mappingVersion
     && item.canonicalUnitId
     && /^sha256:[a-f0-9]{64}$/.test(item.resourceVersion)
@@ -552,7 +553,7 @@ test("YW exposes compound health and the exact existing A+ source activation rec
         assessmentKind: "performance",
         scoringRole: "a_plus_gate",
         excludedQuestionKinds: ["evaluation"],
-        excludedItemCount: 101,
+        excludedItemCount: 865,
         eligibleItemCount: 768,
         thresholdPolicy: {
           percent: 90,
@@ -1160,21 +1161,21 @@ test("interaction scoring derives prompt authority from server taxonomy and stor
   });
 });
 
-test("unpublished required-volume interactions keep the auth gate and fail before APIS or evidence writes", async () => {
-  const requiredLessonId = "lesson-1727";
+test("new compulsory interactions retain authentication and use the same formal evaluator", async () => {
+  const requiredLessonId = "lesson-1717-p2";
   const interactions = [
     ["structure", { reason: "我先定位兩處原文，再說明敘事轉折如何共同推進燭之武的說辭。" }],
     ["authorQuestion", { answer: "若把秦晉利益關係說得更直白，這場勸說還會有同樣的力量嗎？" }],
   ];
   const formalKeys = new Set(manifest.items.map((item) => item.resourceKey));
-  assert.equal(formalKeys.has(`effect:${requiredLessonId}:interaction:structure`), false);
-  assert.equal(formalKeys.has(`effect:${requiredLessonId}:interaction:authorQuestion`), false);
+  assert.equal(formalKeys.has(`effect:${requiredLessonId}:interaction:structure`), true);
+  assert.equal(formalKeys.has(`effect:${requiredLessonId}:interaction:authorQuestion`), true);
 
   const originalFetch = globalThis.fetch;
   let apisCalls = 0;
   globalThis.fetch = async () => {
     apisCalls += 1;
-    throw new Error("an unpublished interaction must not call APIS");
+    return Response.json({answer:JSON.stringify({score:82,verdict:"達標",strength:"證據完整",gap:"可補充",nextQuestion:"這兩處怎樣呼應？"})});
   };
   try {
     const anonymousSource = sourceEnvironment();
@@ -1205,22 +1206,27 @@ test("unpublished required-volume interactions keep the auth gate and fail befor
           interaction,
           input,
           clientMutationId: `required-volume-${interaction}`,
+          scoringRole: "a_plus_gate",
         }),
       }), authenticatedSource.env, {});
       const body = await response.json();
-      assert.equal(response.status, 422);
-      assert.equal(body.ok, false);
-      assert.equal(body.code, "learning_resource_not_published");
-      assert.equal(body.localPracticeAvailable, true);
-      assert.equal(authenticatedSource.writes.some((write) => (
-        /learning_interactions|learning_evaluations|evidence_outbox|learning_submission_slots/.test(write.sql)
-      )), false);
-      assert.equal(authenticatedSource.queued.length, 0);
+      assert.equal(response.status, 200, JSON.stringify(body));
+      assert.equal(body.assessment.score,82);
+      assert.equal(authenticatedSource.queued.length,1);
+      const envelope=authenticatedSource.queued[0].envelope;
+      assert.equal(envelope.sourceVersion,manifest.manifestVersion);
+      assert.equal(envelope.sourceReleaseId,manifest.sourceReleaseId);
+      assert.equal(envelope.scoringRole,'formative');
+      assert.equal(envelope.rawValue,82);
+      assert.equal(envelope.assessmentKind,'performance');
+      assert.equal(body.evidence.status,'enqueued');
+      assert(authenticatedSource.writes.some(write=>write.sql.includes('INSERT INTO learning_interactions')&&write.values.includes('formative')));
+      assert(Date.parse(envelope.occurredAt)>=Date.parse(FORMAL_SCOPE_POLICY.effectiveFrom));
     }
   } finally {
     globalThis.fetch = originalFetch;
   }
-  assert.equal(apisCalls, 0);
+  assert.equal(apisCalls, 2);
 });
 
 test("a published selected-volume interaction still reaches APIS and the formal evidence ledger", async () => {
@@ -2664,7 +2670,7 @@ test("reading submission score resolves only from the same student's matching co
   assert.match(capturedSql, /i\.student_id = \?/);
   assert.match(capturedSql, /i\.lesson_id = \?/);
   assert.match(capturedSql, /i\.interaction_key = 'contextWords'/);
-  assert.match(capturedSql, /i\.scoring_role = 'a_plus_gate'/);
+  assert.match(capturedSql, /i\.scoring_role IN \('a_plus_gate', 'formative'\)/);
   assert.match(capturedSql, /e\.verification_method = 'source_ai_assessment'/);
   assert.deepEqual(capturedValues, ["trusted-source-event", 7, "lesson-1484"]);
 });
@@ -4890,4 +4896,40 @@ test('immediate evaluation remains protected through reply persistence after bro
     assert.equal(f.db.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,1);
     await runDurableEvaluationScheduler(f.source.env);assert.equal(f.calls.length,1);
   } finally {release?.();f.db.close();}
+});
+
+test('new compulsory admission rejects pre-activation source work before reservations or writes', async () => {
+  const requiredLesson={id:'lesson-1717-p2',blockId:'bixiu-shang',title:'荷塘月色'};
+  const source=sourceEnvironment();
+  const args={request:new Request('https://yw.bdfz.net/api/learning/interactions'),env:source.env,student:{id:7,ucUserId:42},lesson:requiredLesson,interactionKey:'structure',payload:{reason:'原先地方練習的回答不能回填成新的正式評閱。',clientMutationId:'pre-scope-reject'},occurredAt:'2026-10-13T01:51:15.632Z'};
+  await assert.rejects(assertLearningSubmissionAllowed(args),error=>error.code==='formal_scope_not_active_for_answer');
+  await assert.rejects(recordLearningInteraction({...args,evaluation:{score:82,verdict:'通過'}}),error=>error.code==='formal_scope_not_active_for_answer');
+  assert.equal(source.writes.length,0);assert.equal(source.queued.length,0);
+});
+
+test('formal expansion keeps current task counts distinct from the immutable annual requirement',()=>{
+  const changed=structuredClone(registry);changed.compatibilityContracts.aPlusGate.thresholdCount=Math.ceil(1444*.9);
+  assert.throws(()=>validateAPlusCompatibilityContract(changed,manifest),/compatibility contract invalid/);
+  const backdated=structuredClone(manifest);backdated.items.find(i=>i.formalScopePolicyVersion).effectiveFrom='2026-08-12T00:00:00+08:00';
+  assert.throws(()=>validateAPlusCompatibilityContract(registry,backdated),/formal scope inventory invalid/);
+  const forged=structuredClone(manifest);forged.formalScopeExpansion.authority='client';
+  assert.throws(()=>validateAPlusCompatibilityContract(registry,forged),/formal scope admission policy invalid/);
+});
+
+test('a new compulsory formal grade is displayed from the owned source ledger while excluded from A-plus',async()=>{
+ const db=new DatabaseSync(':memory:');
+ try{
+  initializeLearningContractDb(db);const source=sourceEnvironment();source.env.READING_DB=sqliteD1(db);
+  const lesson={id:'lesson-1717-p2',title:'荷塘月色',blockId:'bixiu-shang'},payload={words:'寂靜、自由、惆悵',clientMutationId:'compulsory-formal-grade-not-aplus'};
+  const result=await recordLearningInteraction({request:new Request('https://yw.bdfz.net/api/learning/interactions'),env:source.env,student:{id:7,ucUserId:42},lesson,interactionKey:'contextWords',payload,evaluation:{score:83,correctness:'passed',verdict:'有文本依據'},occurredAt:FORMAL_SCOPE_POLICY.effectiveFrom});
+  const row=db.prepare('SELECT i.scoring_role,i.resource_version,e.raw_value FROM learning_interactions i JOIN learning_evaluations e USING(source_event_id)').get();
+  assert.equal(row.scoring_role,'formative');assert.equal(row.raw_value,83);assert.equal(row.resource_version,manifest.manifestVersion);
+  const displayed=await authoritativeReadingAssessmentForSubmission(source.env.READING_DB,7,lesson.id,result.sourceEventId,['寂静','自由','惆悵']);
+  assert.equal(displayed.score,83);assert.equal(displayed.verdict,'有文本依據');
+  assert.equal(await authoritativeReadingAssessmentForSubmission(source.env.READING_DB,8,lesson.id,result.sourceEventId,['寂静','自由','惆悵']),null);
+  assert.equal(db.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE scoring_role='a_plus_gate'").get().n,0);
+  const before=db.prepare('SELECT * FROM learning_evaluations').all();
+  await recordLearningInteraction({request:new Request('https://yw.bdfz.net/api/learning/interactions'),env:source.env,student:{id:7,ucUserId:42},lesson,interactionKey:'contextWords',payload,evaluation:{score:99,correctness:'passed',verdict:'不可覆寫'},occurredAt:FORMAL_SCOPE_POLICY.effectiveFrom});
+  assert.deepEqual(db.prepare('SELECT * FROM learning_evaluations').all(),before);
+ }finally{db.close();}
 });

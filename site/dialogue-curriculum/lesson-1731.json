@@ -1,0 +1,2096 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1731",
+  "title": "4 窦娥冤(节选)",
+  "mode": "drama",
+  "author": "关汉卿",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1731:p1",
+      "text": "窦娥冤（节选）\n\n关汉卿",
+      "block": {
+        "runs": [
+          {
+            "text": "窦娥冤",
+            "type": "text"
+          },
+          {
+            "label": "[1]",
+            "noteId": "footnote-11178-1",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "（节选）\n\n关汉卿",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1731:p2",
+      "text": "第三折\n\n（外扮监斩官上，云）下官监斩官是也。今日处决犯人，着做公的把住巷口，休放往来人闲走。（净扮公人，鼓三通、锣三下科。刽子磨旗、提刀，押正旦带枷上。刽子云）行动些，行动些，监斩官去法场上多时了。（正旦唱）",
+      "block": {
+        "runs": [
+          {
+            "text": "第三折\n\n（外",
+            "type": "text"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-11178-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "扮监斩官上，云）下官监斩官是也。今日处决犯人，着",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-11178-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "做公的",
+            "type": "text"
+          },
+          {
+            "label": "[4]",
+            "noteId": "footnote-11178-4",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "把住巷口，休放往来人闲走。（净",
+            "type": "text"
+          },
+          {
+            "label": "[5]",
+            "noteId": "footnote-11178-5",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "扮公人，鼓三通、锣三下科",
+            "type": "text"
+          },
+          {
+            "label": "[6]",
+            "noteId": "footnote-11178-6",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。刽子磨旗",
+            "type": "text"
+          },
+          {
+            "label": "[7]",
+            "noteId": "footnote-11178-7",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "、提刀，押正旦",
+            "type": "text"
+          },
+          {
+            "label": "[8]",
+            "noteId": "footnote-11178-8",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "带枷上。刽子云）行动些",
+            "type": "text"
+          },
+          {
+            "label": "[9]",
+            "noteId": "footnote-11178-9",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，行动些，监斩官去法场上多时了。（正旦唱）",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1731:p3",
+      "text": "【正宫】【端正好】没来由犯王法，不提防遭刑宪，叫声屈动地惊天。顷刻间游魂先赴森罗殿，怎不将天地也生埋怨。\n\n【滚绣球】有日月朝暮悬，有鬼神掌着生死权。天地也！只合把清浊分辨，可怎生糊突了盗跖、颜渊？为善的受贫穷更命短，造恶的享富贵又寿延。天地也！做得个怕硬欺软，却原来也这般顺水推船！地也，你不分好歹何为地？天也，你错勘贤愚枉做天！哎，只落得两泪涟涟。\n\n（刽子云）快行动些，误了时辰也。（正旦唱）\n\n【倘秀才】则被这枷纽的我左侧右偏，人拥的我前合后偃。我窦娥向哥哥行有句言。（刽子云）你有甚么话说？（正旦唱）前街里去心怀恨，后街里去死无冤，休推辞路远。\n\n（刽子云）你如今到法场上面，有甚么亲眷要见的，可教他过来，见你一面也好。（正旦唱）\n\n【叨叨令】可怜我孤身只影无亲眷，则落的吞声忍气空嗟怨。（刽子云）难道你爷娘家也没的？（正旦云）止有个爹爹，十三年前上朝取应去了，至今杳无音信。（唱）早已是十年多不睹爹爹面。（刽子云）你适才要我往后街里去，是甚么主意？（正旦唱）怕则怕前街里被我婆婆见。\n\n（刽子云）你的性命也顾不得，怕他见怎的？（正旦云）俺婆婆若见我披枷带锁赴法场餐刀去呵，（唱）枉将他气杀也么哥，枉将他气杀也么哥。告哥哥，临危好与人行方便。\n\n（卜儿哭上科，云）天那，兀的不是我媳妇儿！（刽子云）婆子靠后。（正旦云）既是俺婆婆来了，叫他来，待我嘱咐他几句话咱。（刽子云）那婆子近前来，你媳妇要嘱咐你话哩。（卜儿云）孩儿，痛杀我也！\n\n（正旦云）婆婆，那张驴儿把毒药放在羊肚儿汤里，实指望药死了你，要霸占我为妻。不想婆婆让与他老子吃，倒把他老子药死了。我怕连累婆婆，屈招了药死公公，今日赴法场典刑。婆婆，此后遇着冬时年节，月一十五，有瀽不了的浆水饭， 瀽半碗儿与我吃；烧不了的纸钱，与窦娥烧一陌儿。\n\n则是看你死的孩儿面上！（唱）\n\n【快活三】念窦娥葫芦提当罪愆，念窦娥身首不完全，念窦娥从前已往干家缘；婆婆也，你只看窦娥少爷无娘面。\n\n【鲍老儿】念窦娥伏侍婆婆这几年，遇时节将碗凉浆奠；你去那受刑法尸骸上烈些纸钱，只当把你亡化的孩儿荐。（卜儿哭科，云）\n\n孩儿放心，这个老身都记得。天那，兀的不痛杀我也！（正旦唱）婆婆也，再也不要啼啼哭哭，烦烦恼恼，怨气冲天。这都是我做窦娥的没时没运，不明不暗，负屈衔冤。\n\n（刽子做喝科，云）兀那婆子靠后，时辰到了也。（正旦跪科）（刽子开枷科）（正旦云）窦娥告监斩大人，有一事肯依窦娥，便死而无怨。（监斩官云）你有甚么事？你说。（正旦云）要一领净席，等我窦娥站立；又要丈二白练，挂在旗枪上。若是我窦娥委实冤枉，刀过处头落，一腔热血休半点儿沾在地下，都飞在白练上者。（监斩官云）这个就依你，打甚么不紧。（刽子做取席站科，又取白练挂旗上科）（正旦唱）\n\n【耍孩儿】不是我窦娥罚下这等无头愿，委实的冤情不浅；若没些儿灵圣与世人传，也不见得湛湛青天。我不要半星热血红尘洒，都只在八尺旗枪素练悬。等他四下里皆瞧见，这就是咱苌弘化碧，望帝啼鹃。\n\n（刽子云）你还有甚的说话，此时不对监斩大人说，几时说那？（正旦再跪科，云）大人，如今是三伏天道，若窦娥委实冤枉，身死之后，天降三尺瑞雪，遮掩了窦娥尸首。（监斩官云）这等三伏天道，你便有冲天的怨气，也召不得一片雪来，可不胡说！（正旦唱）\n\n【二煞】你道是暑气暄，不是那下雪天；岂不闻飞霜六月因邹衍？若果有一腔怨气喷如火，定要感的六出冰花滚似绵，免着我尸骸现；要甚么素车白马，断送出古陌荒阡？\n\n（正旦再跪科，云）大人，我窦娥死的委实冤枉，从今以后，着这楚州亢旱三年！（监斩官云）打嘴！那有这等说话！（正旦唱）\n\n【一煞】你道是天公不可期，人心不可怜，不知皇天也肯从人愿。做甚么三年不见甘霖降？也只为东海曾经孝妇冤。如今轮到你山阳县。这都是官吏每无心正法，使百姓有口难言。\n\n（刽子做磨旗科，云）怎么这一会儿天色阴了也？（内做风科，刽子云）好冷风也！（正旦唱）\n\n【煞尾】浮云为我阴，悲风为我旋，三桩儿誓愿明题遍。（做哭科，云）婆婆也，直等待雪飞六月，亢旱三年呵，（唱）那其间才把你个屈死的冤魂这窦娥显。\n\n（刽子做开刀，正旦倒科）（监斩官惊云）呀，真个下雪了，有这等异事！（刽子云）我也道平日杀人，满地都是鲜血，这个窦娥的血都飞在那丈二白练上，并无半点落地，委实奇怪。（监斩官云）这死罪必有冤枉。早两桩儿应验了，不知亢旱三年的说话准也不准，且看后来如何。左右，也不必等待雪晴，便与我抬他尸首，还了那蔡婆婆去罢。（众应科，抬尸下）",
+      "block": {
+        "runs": [
+          {
+            "text": "【正宫",
+            "type": "text"
+          },
+          {
+            "label": "[10]",
+            "noteId": "footnote-11178-10",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "】【端正好",
+            "type": "text"
+          },
+          {
+            "label": "[11]",
+            "noteId": "footnote-11178-11",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "】没来由犯王法，不提防遭刑宪",
+            "type": "text"
+          },
+          {
+            "label": "[12]",
+            "noteId": "footnote-11178-12",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，叫声屈动地惊天。顷刻间游魂先赴森罗殿，怎不将天地也生埋怨",
+            "type": "text"
+          },
+          {
+            "label": "[13]",
+            "noteId": "footnote-11178-13",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。\n\n【滚绣球】有日月朝暮悬，有鬼神掌着生死权。天地也！只合把清浊分辨，可怎生糊突了盗跖、颜渊",
+            "type": "text"
+          },
+          {
+            "label": "[14]",
+            "noteId": "footnote-11178-14",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "？为善的受贫穷更命短，造恶的享富贵又寿延。天地也！做得个怕硬欺软，却原来也这般顺水推船！地也，你不分好歹何为地？天也，你错勘",
+            "type": "text"
+          },
+          {
+            "label": "[15]",
+            "noteId": "footnote-11178-15",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "贤愚枉做天！哎，只落得两泪涟涟。\n\n（刽子云）快行动些，误了时辰也。（正旦唱）\n\n【倘秀才】则被这枷纽",
+            "type": "text"
+          },
+          {
+            "label": "[16]",
+            "noteId": "footnote-11178-16",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的我左侧右偏，人拥的我前合后偃",
+            "type": "text"
+          },
+          {
+            "label": "[17]",
+            "noteId": "footnote-11178-17",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。我窦娥向哥哥行",
+            "type": "text"
+          },
+          {
+            "label": "[18]",
+            "noteId": "footnote-11178-18",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "有句言。（刽子云）你有甚么话说？（正旦唱）前街里去心怀恨，后街里去死无冤，休推辞路远。\n\n（刽子云）你如今到法场上面，有甚么亲眷要见的，可教他过来，见你一面也好。（正旦唱）\n\n【叨叨令】可怜我孤身只影无亲眷，则落的吞声忍气空嗟怨。（刽子云）难道你爷娘家也没的？（正旦云）止有个爹爹，十三年前上朝取应",
+            "type": "text"
+          },
+          {
+            "label": "[19]",
+            "noteId": "footnote-11178-19",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "去了，至今杳无音信。（唱）早已是十年多不睹爹爹面。（刽子云）你适才要我往后街里去，是甚么主意？（正旦唱）怕则怕前街里被我婆婆见。\n\n（刽子云）你的性命也顾不得，怕他见怎的？（正旦云）俺婆婆若见我披枷带锁赴法场餐刀",
+            "type": "text"
+          },
+          {
+            "label": "[20]",
+            "noteId": "footnote-11178-20",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "去呵，（唱）枉将他气杀也么哥",
+            "type": "text"
+          },
+          {
+            "label": "[21]",
+            "noteId": "footnote-11178-21",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，枉将他气杀也么哥。告哥哥，临危好与人行方便。\n\n（卜儿",
+            "type": "text"
+          },
+          {
+            "label": "[22]",
+            "noteId": "footnote-11178-22",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "哭上科，云）天那，兀的",
+            "type": "text"
+          },
+          {
+            "label": "[23]",
+            "noteId": "footnote-11178-23",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "不是我媳妇儿！（刽子云）婆子靠后。（正旦云）既是俺婆婆来了，叫他来，待我嘱咐他几句话咱",
+            "type": "text"
+          },
+          {
+            "label": "[24]",
+            "noteId": "footnote-11178-24",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。（刽子云）那婆子近前来，你媳妇要嘱咐你话哩。（卜儿云）孩儿，痛杀我也！\n\n（正旦云）婆婆，那张驴儿把毒药放在羊肚儿汤里，实指望药死了你，要霸占我为妻。不想婆婆让与他老子吃，倒把他老子药死了。我怕连累婆婆，屈招了药死公公，今日赴法场典刑。婆婆，此后遇着冬时年节，月一十五",
+            "type": "text"
+          },
+          {
+            "label": "[25]",
+            "noteId": "footnote-11178-25",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，有瀽",
+            "type": "text"
+          },
+          {
+            "label": "[26]",
+            "noteId": "footnote-11178-26",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "不了的浆水饭， 瀽半碗儿与我吃；烧不了的纸钱，与窦娥烧一陌",
+            "type": "text"
+          },
+          {
+            "label": "[27]",
+            "noteId": "footnote-11178-27",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "儿。\n\n则是",
+            "type": "text"
+          },
+          {
+            "label": "[28]",
+            "noteId": "footnote-11178-28",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "看你死的孩儿面上！（唱）\n\n【快活三】念窦娥葫芦提当罪愆",
+            "type": "text"
+          },
+          {
+            "label": "[29]",
+            "noteId": "footnote-11178-29",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，念窦娥身首不完全，念窦娥从前已往干家缘",
+            "type": "text"
+          },
+          {
+            "label": "[30]",
+            "noteId": "footnote-11178-30",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "；婆婆也，你只看窦娥少爷无娘面。\n\n【鲍老儿】念窦娥伏侍婆婆这几年，遇时节将碗凉浆奠；你去那受刑法尸骸上烈",
+            "type": "text"
+          },
+          {
+            "label": "[31]",
+            "noteId": "footnote-11178-31",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "些纸钱，只当把你亡化的孩儿荐",
+            "type": "text"
+          },
+          {
+            "label": "[32]",
+            "noteId": "footnote-11178-32",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。（卜儿哭科，云）\n\n孩儿放心，这个老身都记得。天那，兀的不痛杀我也！（正旦唱）婆婆也，再也不要啼啼哭哭，烦烦恼恼，怨气冲天。这都是我做窦娥的没时没运，不明不暗",
+            "type": "text"
+          },
+          {
+            "label": "[33]",
+            "noteId": "footnote-11178-33",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，负屈衔冤。\n\n（刽子做喝科，云）兀那婆子靠后，时辰到了也。（正旦跪科）（刽子开枷科）（正旦云）窦娥告监斩大人，有一事肯依窦娥，便死而无怨。（监斩官云）你有甚么事？你说。（正旦云）要一领净席，等我窦娥站立；又要丈二白练",
+            "type": "text"
+          },
+          {
+            "label": "[34]",
+            "noteId": "footnote-11178-34",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，挂在旗枪",
+            "type": "text"
+          },
+          {
+            "label": "[35]",
+            "noteId": "footnote-11178-35",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "上。若是我窦娥委实冤枉，刀过处头落，一腔热血休半点儿沾在地下，都飞在白练上者",
+            "type": "text"
+          },
+          {
+            "label": "[36]",
+            "noteId": "footnote-11178-36",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。（监斩官云）这个就依你，打甚么不紧",
+            "type": "text"
+          },
+          {
+            "label": "[37]",
+            "noteId": "footnote-11178-37",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。（刽子做取席站",
+            "type": "text"
+          },
+          {
+            "label": "[38]",
+            "noteId": "footnote-11178-38",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "科，又取白练挂旗上科）（正旦唱）\n\n【耍孩儿】不是我窦娥罚",
+            "type": "text"
+          },
+          {
+            "label": "[39]",
+            "noteId": "footnote-11178-39",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "下这等无头愿，委实的冤情不浅；若没些儿灵圣与世人传，也不见得湛湛青天",
+            "type": "text"
+          },
+          {
+            "label": "[40]",
+            "noteId": "footnote-11178-40",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。我不要半星热血红尘洒",
+            "type": "text"
+          },
+          {
+            "label": "[41]",
+            "noteId": "footnote-11178-41",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，都只在八尺旗枪素练悬。等他四下里皆瞧见，这就是咱苌弘化碧",
+            "type": "text"
+          },
+          {
+            "label": "[42]",
+            "noteId": "footnote-11178-42",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，望帝啼鹃",
+            "type": "text"
+          },
+          {
+            "label": "[43]",
+            "noteId": "footnote-11178-43",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。\n\n（刽子云）你还有甚的说话，此时不对监斩大人说，几时说那？（正旦再跪科，云）大人，如今是三伏天道",
+            "type": "text"
+          },
+          {
+            "label": "[44]",
+            "noteId": "footnote-11178-44",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，若窦娥委实冤枉，身死之后，天降三尺瑞雪，遮掩了窦娥尸首。（监斩官云）这等三伏天道，你便有冲天的怨气，也召不得一片雪来，可不胡说！（正旦唱）\n\n【二煞】你道是暑气暄",
+            "type": "text"
+          },
+          {
+            "label": "[45]",
+            "noteId": "footnote-11178-45",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，不是那下雪天；岂不闻飞霜六月因邹衍",
+            "type": "text"
+          },
+          {
+            "label": "[46]",
+            "noteId": "footnote-11178-46",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "？若果有一腔怨气喷如火，定要感的六出冰花",
+            "type": "text"
+          },
+          {
+            "label": "[47]",
+            "noteId": "footnote-11178-47",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "滚似绵，免着我尸骸现；要甚么素车白马",
+            "type": "text"
+          },
+          {
+            "label": "[48]",
+            "noteId": "footnote-11178-48",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，断送出",
+            "type": "text"
+          },
+          {
+            "label": "[49]",
+            "noteId": "footnote-11178-49",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "古陌荒阡？\n\n（正旦再跪科，云）大人，我窦娥死的委实冤枉，从今以后，着这楚州",
+            "type": "text"
+          },
+          {
+            "label": "[50]",
+            "noteId": "footnote-11178-50",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "亢旱",
+            "type": "text"
+          },
+          {
+            "label": "[51]",
+            "noteId": "footnote-11178-51",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "三年！（监斩官云）打嘴！那有这等说话！（正旦唱）\n\n【一煞】你道是天公不可期，人心不可怜，不知皇天也肯从人愿。做甚么三年不见甘霖降？也只为东海曾经孝妇冤",
+            "type": "text"
+          },
+          {
+            "label": "[52]",
+            "noteId": "footnote-11178-52",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。如今轮到你山阳县。这都是官吏每",
+            "type": "text"
+          },
+          {
+            "label": "[53]",
+            "noteId": "footnote-11178-53",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "无心正法，使百姓有口难言。\n\n（刽子做磨旗科，云）怎么这一会儿天色阴了也？（内",
+            "type": "text"
+          },
+          {
+            "label": "[54]",
+            "noteId": "footnote-11178-54",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "做风科，刽子云）好冷风也！（正旦唱）\n\n【煞尾】浮云为我阴，悲风为我旋，三桩儿誓愿明题",
+            "type": "text"
+          },
+          {
+            "label": "[55]",
+            "noteId": "footnote-11178-55",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "遍。（做哭科，云）婆婆也，直等待雪飞六月，亢旱三年呵，（唱）那其间才把你个屈死的冤魂这窦娥显。\n\n（刽子做开刀，正旦倒科）（监斩官惊云）呀，真个下雪了，有这等异事！（刽子云）我也道平日杀人，满地都是鲜血，这个窦娥的血都飞在那丈二白练上，并无半点落地，委实奇怪。（监斩官云）这死罪必有冤枉。早两桩儿应验了，不知亢旱三年的说话准也不准，且看后来如何。左右，也不必等待雪晴，便与我抬他尸首，还了那蔡婆婆去罢。（众应科，抬尸下）",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《关汉卿戏剧集》（人民文学出版社1976 年版）。关汉卿（约1230—约1300），号已斋叟，大都（今北京）人，元代戏曲作家。代表作有杂剧《窦娥冤》《救风尘》《望江亭》《鲁斋郎》《拜月亭》《调风月》《单刀会》等。《窦娥冤》是元杂剧的代表性作品，共四折，这里选的是第三折。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "外：“外末”的简称，传统戏曲中男性角色名。意思是正角之外的次要角色。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "着（zhuó）：命令。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-3"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "做公的：公人，官府里的公差。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-4"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "净：角色名，俗称“花脸”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-5"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "科：古代戏曲剧本中指示角色动作、表情的用语。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-6"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "磨旗：摇旗。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-7"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "正旦：传统戏曲中的女主角。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-8"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "行动些：走快些。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-9"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "正宫：宫调之一。宫调，我国古代音乐以宫、商、角（jué）、变徵（zhǐ）、徵、羽、变宫为七声，以其中任何一声为主，均可构成一种调式，凡以宫声为主的调式称“宫”，以其他各声为主的称“调”，合称“宫调”。杂剧的每一折，由同一宫调的若干曲牌联成一套曲子。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-10"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "端正好：和下文的“滚绣球”“倘秀才”等都是曲牌名。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-11"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "不提防遭刑宪：没防备触犯刑律。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-12"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "怎不将天地也生埋怨：怎么不把天地呀深深地埋怨。生，甚、深。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-13"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "可怎生糊突了盗跖（zhí）、颜渊：可是怎么混淆了坏人和好人？糊突，同“糊涂”，这里是“混淆”的意思。跖，传说是春秋末年奴隶起义的首领，过去被诬称为“盗跖”。颜渊，孔子弟子，被推崇为“复圣”。盗跖、颜渊，这里泛指坏人和好人。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-14"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "错勘：错误地判断。勘，审问。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-15"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "纽：同“扭”。这里是“拘束”的意思。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-16"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "前合后偃（yǎn）：意思是前倾后仰，站不稳。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-17"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "哥哥行（háng）：哥哥那边。哥哥，对一般男子的客气称呼。行，表示处所。宋代和元代口语里自称或者称呼别人的词的后边，有时加“行”字，意思大致相当于“这边”“那边”或者“这里”“那里”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-18"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "上朝取应：进京考试。取应，参加科举考试。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-19"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "餐刀：吃刀，挨刀。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-20"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "也么哥：元明戏曲中常用的衬词，无义。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-21"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "卜儿：元杂剧中的老年妇女角色。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-22"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "兀的：这，这个。与“不”连用，表示反问，如同说“这岂不”“怎的不”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-23"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "咱（zá）：语气助词，表示祈使。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-24"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "冬时年节，月一十五：冬至和过年，初一和十五。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-25"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "瀽（jiǎn）：泼，倒。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-26"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "陌：量词，用于祭奠时所烧的纸钱，相当于“叠”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-27"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "则是：只当是。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-28"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "念窦娥葫芦提当罪愆（qiān）：可怜我窦娥被官府糊里糊涂地判了死罪。葫芦提，当时的口语，“糊里糊涂”的意思。愆，罪过。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-29"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "干家缘：操劳家务。家缘，家务。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-30"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "烈：烧。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-31"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "荐：祭奠。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-32"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "不明不暗：糊里糊涂。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-33"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "白练：白色熟绢。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-34"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "旗枪：旗杆头。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-35"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "者：语气助词，用于句末，表示祈使。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-36"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "打甚么不紧：有什么要紧。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-37"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "站：这里指让窦娥站着。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-38"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "罚：这里是“发”的意思。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-39"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "也不见得湛湛青天：也显不出天理昭彰。湛湛，清明澄澈。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-40"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "红尘洒：洒在土地上。红尘，土地。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-41"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "苌弘化碧：苌弘是周朝的贤臣。相传他无罪被杀，他的血被蜀人藏起来，三年后变成了碧玉。碧，青绿色的美玉。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-42"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "望帝啼鹃：望帝是古代传说中蜀王杜宇的称号。相传他因水灾让位给他的臣子，自己隐居山中，死后化为杜鹃，日夜悲啼，直到吐血。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-43"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "天道：天气。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-44"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "暄：炎热。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-45"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "飞霜六月因邹衍：邹衍是战国时燕国的臣子。相传他遭谗言被囚禁，入狱时仰天大哭，当时正当夏天，竟然下起霜来。后来常用“六月飞霜”来表示冤狱。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-46"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "六出冰花：指雪花。雪的结晶体一般有六瓣，所以说“六出”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-47"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "素车白马：指送葬的车马。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-48"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "断送出：发送往。断送，发送，指殡葬。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-49"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "楚州：州名，治所在山阳（今江苏淮安）。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-50"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "亢旱：大旱。亢，极。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-51"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "东海曾经孝妇冤：此事见于《说苑·贵德》《汉书·于定国传》等，记东海孝妇蒙冤被杀，郡中大旱三年。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-52"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "每：表示复数，相当于“们”。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-53"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "内：指后台。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-54"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "题：提。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11178-55"
+    }
+  ],
+  "resources": [],
+  "source": "https://forum.rdfzer.com/t/topic/1731",
+  "objectives": [
+    {
+      "id": "lesson-1731:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1731:p1",
+        "lesson-1731:p2",
+        "lesson-1731:p3"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1731:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1731:p1",
+        "lesson-1731:p2",
+        "lesson-1731:p3"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1731:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1731:p1",
+        "lesson-1731:p2",
+        "lesson-1731:p3"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1731:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1731:p1",
+        "lesson-1731:p2",
+        "lesson-1731:p3"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1731:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1731:p1",
+        "lesson-1731:p2",
+        "lesson-1731:p3"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1731:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1731:p1",
+        "lesson-1731:p2",
+        "lesson-1731:p3"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1731:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1731:p1",
+        "lesson-1731:p2",
+        "lesson-1731:p3"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1731:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1731:p1",
+        "lesson-1731:p2",
+        "lesson-1731:p3"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "legacy:effect:lesson-1731:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1731:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1731:interaction:contextWords",
+        "resourceVersion": "sha256:7829fecc83905c10e0ef57bf51ad4350d33c5e4701bab14b423390a820ad884d",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1731:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1731:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1731:interaction:revision",
+        "resourceVersion": "sha256:b42a588c7fb293fcee3fd53f1447c9116bb182c420783bbffe9b253fab8d74ee",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1731:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1731:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1731:interaction:structure",
+        "resourceVersion": "sha256:01bccd99a4fc049ef31bf097940eaec736f1ebe891bfcbc83ddf7f766b22b8c9",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1731:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1731:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1731:interaction:evaluation",
+        "resourceVersion": "sha256:3044f9fedd5be275f961e3267983d64801eb18b80eba3c8f6a273532c6ea75f8",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1731:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1731:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1731:interaction:authorQuestion",
+        "resourceVersion": "sha256:d7ced69c2c055afd7ea5f7a3faef783f44978a03591715d56b4ed4bafb6fb468",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    }
+  ],
+  "vocabulary": [],
+  "legacy": {
+    "lessonId": "lesson-1731",
+    "title": "4 窦娥冤(节选)",
+    "mode": "drama",
+    "legacyTracks": [
+      "context",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "初讀評議",
+        "",
+        10
+      ],
+      [
+        "read",
+        "通讀正文",
+        "",
+        10
+      ],
+      [
+        "revision",
+        "字句之改",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "場面調度",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "篇目評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "叩問作者",
+        "",
+        10
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1731:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1731:interaction:contextWords",
+        "resourceVersion": "sha256:7829fecc83905c10e0ef57bf51ad4350d33c5e4701bab14b423390a820ad884d",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1731:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1731:interaction:revision",
+        "resourceVersion": "sha256:b42a588c7fb293fcee3fd53f1447c9116bb182c420783bbffe9b253fab8d74ee",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1731:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1731:interaction:structure",
+        "resourceVersion": "sha256:01bccd99a4fc049ef31bf097940eaec736f1ebe891bfcbc83ddf7f766b22b8c9",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1731:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1731:interaction:evaluation",
+        "resourceVersion": "sha256:3044f9fedd5be275f961e3267983d64801eb18b80eba3c8f6a273532c6ea75f8",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1731:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1731:interaction:authorQuestion",
+        "resourceVersion": "sha256:d7ced69c2c055afd7ea5f7a3faef783f44978a03591715d56b4ed4bafb6fb468",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1731",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1731:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1731:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1731:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1731",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1731:interaction:contextWords",
+        "completionKey": "effect:lesson-1731:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1731:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1731",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1731:interaction:structure",
+        "completionKey": "effect:lesson-1731:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1731:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1731",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1731:interaction:revision",
+        "completionKey": "effect:lesson-1731:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1731:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1731:interaction:contextWords",
+        "sourceVersion": "sha256:7829fecc83905c10e0ef57bf51ad4350d33c5e4701bab14b423390a820ad884d",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1731:interaction:revision",
+        "sourceVersion": "sha256:b42a588c7fb293fcee3fd53f1447c9116bb182c420783bbffe9b253fab8d74ee",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1731:interaction:structure",
+        "sourceVersion": "sha256:01bccd99a4fc049ef31bf097940eaec736f1ebe891bfcbc83ddf7f766b22b8c9",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1731:interaction:evaluation",
+        "sourceVersion": "sha256:3044f9fedd5be275f961e3267983d64801eb18b80eba3c8f6a273532c6ea75f8",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1731:interaction:authorQuestion",
+        "sourceVersion": "sha256:d7ced69c2c055afd7ea5f7a3faef783f44978a03591715d56b4ed4bafb6fb468",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1731:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1731:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1731:interaction:contextWords",
+        "completionKey": "effect:lesson-1731:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1731:interaction:structure",
+        "completionKey": "effect:lesson-1731:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1731:interaction:revision",
+        "completionKey": "effect:lesson-1731:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [],
+    "sourceLesson": "data/lessons/lesson-1731.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 5,
+        "formativeCount": 4,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-248f6de6bb832c39c44d",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [
+    {
+      "id": "lesson-1731:p4",
+      "text": "王国维曾说，《窦娥冤》“即列之于世界大悲剧中，亦无愧色”（《宋元戏曲史》）。窦娥悲惨的命运令人同情，造成她悲剧的原因引人深思。 阅读本文时要注意体会剧作家在窦娥这个人物身上寄托的思想感情，思考她指斥天地、痛发誓愿的反抗有什么样的意义和价值。\n《窦娥冤》属于元杂剧中的“本色派”作品，说白凝练而又生动流畅，唱词优美而又节奏鲜明，深刻地展示了人物的内心世界。要反复诵读，欣赏作品极富表现力的语言。",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "王国维曾说，《窦娥冤》“即列之于世界大悲剧中，亦无愧色”（《宋元戏曲史》）。窦娥悲惨的命运令人同情，造成她悲剧的原因引人深思。 阅读本文时要注意体会剧作家在窦娥这个人物身上寄托的思想感情，思考她指斥天地、痛发誓愿的反抗有什么样的意义和价值。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "《窦娥冤》属于元杂剧中的“本色派”作品，说白凝练而又生动流畅，唱词优美而又节奏鲜明，深刻地展示了人物的内心世界。要反复诵读，欣赏作品极富表现力的语言。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      },
+      "blockIndex": 3,
+      "blockSha256": "e1dd8f454fe031f80158a590669a037869152cf8eb7b57a59d80793fd3f99811",
+      "role": "commentary",
+      "label": "原課導讀與教學參考（非本篇正文）",
+      "source": "data/reader-documents/lesson-1731.json#main.blocks[3]",
+      "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+    }
+  ],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [],
+  "guidance": [],
+  "media": [],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1731.json",
+    "lessonSha256": "852e074eb9f5e4b320f2231f70f1028ed88504eed04382b3c11bce84c2e72fc1",
+    "reader": "data/reader-documents/lesson-1731.json",
+    "readerSha256": "2c219a8bd4f1592bb40ae64d9f82d0dc7af4816f792e5d74dc94bae41673cb19",
+    "sourcePostId": 11178,
+    "sourcePostNumber": 1,
+    "blockCount": 4,
+    "annotationCount": 55,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 5,
+      "formativeCount": 4,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

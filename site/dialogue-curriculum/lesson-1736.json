@@ -1,0 +1,1507 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1736",
+  "title": "7 青蒿素:人类征服疾病的一小步",
+  "mode": "science",
+  "author": "屠呦呦",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1736:p2",
+      "text": "非常荣幸在这里接受今年的拉斯克临床医学研究奖——这一生物医学领域最负盛名的奖项，衷心感谢评委会对我在发现青蒿素及其治疗疟疾的功效等方面贡献的肯定。",
+      "block": {
+        "runs": [
+          {
+            "text": "非常荣幸在这里接受今年的拉斯克临床医学研究奖——这一生物医学领域最负盛名的奖项，衷心感谢评委会对我在发现青蒿素及其治疗疟疾的功效等方面贡献的肯定。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p3",
+      "text": "我在童年的时候，曾目睹民间中草药治病救人的事例。那时候，我完全没有想到，我的生命会和这些神奇的中草药紧密地联系在一起；我也从没梦想过有今天这样的隆重时刻，我的研究被国际科学界称颂。",
+      "block": {
+        "runs": [
+          {
+            "text": "我在童年的时候，曾目睹民间中草药治病救人的事例。那时候，我完全没有想到，我的生命会和这些神奇的中草药紧密地联系在一起；我也从没梦想过有今天这样的隆重时刻，我的研究被国际科学界称颂。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p4",
+      "text": "1955年，我从北京医学院药学系毕业，在卫生部中医研究院中药研究所开始了富有意义的工作，特别是在全脱产学习中国传统医学的那两年半中，我对中草药从好奇转化为热衷。那两年半的训练，使我发现了中医药学的丰富宝藏，领悟了中国传统哲学有关人体和宇宙的精妙思想。在中医药学和现代医药科学紧密结合的原则下，我的团队运用现代科学和技术，继承了中医药学的精髓，成功地从青蒿中发现并提取出青蒿素。",
+      "block": {
+        "runs": [
+          {
+            "text": "1955年，我从北京医学院药学系毕业，在卫生部中医研究院中药研究所开始了富有意义的工作，特别是在全脱产学习中国传统医学的那两年半中，我对中草药从好奇转化为热衷。那两年半的训练，使我发现了中医药学的丰富宝藏，领悟了中国传统哲学有关人体和宇宙的精妙思想。在中医药学和现代医药科学紧密结合的原则下，我的团队运用现代科学和技术，继承了中医药学的精髓，成功地从青蒿",
+            "type": "text"
+          },
+          {
+            "label": "[1]",
+            "noteId": "footnote-11183-1",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "中发现并提取出青蒿素。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p5",
+      "text": "奎宁的发现，很大程度上得益于秘鲁历史上对金鸡纳树的利用；青蒿素的发现，则是中医药学赠予人类的瑰宝。在研究最困难、最关键的时刻，我从传统中医文献中获得新的灵感和启示。青蒿素的发现是人类征服疾病进程中的一小步，基于青蒿素的联合疗法（ACT）已成为世界卫生组织推荐的一线抗疟方案，对此我深感鼓舞和欣慰。为此，我也衷心感谢为青蒿素发现和应用作出诸多贡献的中国同事们和国际友人们。长久以来，中医药服务于中国和亚洲人民，毫无疑问，对传统医药的继续探索，会给这个世界带来更多的良药。我呼吁大力加强国际合作，推动对中医以及其他传统医学的研究，使之最大程度地造福人类。",
+      "block": {
+        "runs": [
+          {
+            "text": "奎宁",
+            "type": "text"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-11183-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的发现，很大程度上得益于秘鲁历史上对金鸡纳树",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-11183-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的利用；青蒿素的发现，则是中医药学赠予人类的瑰宝。在研究最困难、最关键的时刻，我从传统中医文献中获得新的灵感和启示。青蒿素的发现是人类征服疾病进程中的一小步，基于青蒿素的联合疗法（ACT）已成为世界卫生组织推荐的一线抗疟方案，对此我深感鼓舞和欣慰。为此，我也衷心感谢为青蒿素发现和应用作出诸多贡献的中国同事们和国际友人们。长久以来，中医药服务于中国和亚洲人民，毫无疑问，对传统医药的继续探索，会给这个世界带来更多的良药。我呼吁大力加强国际合作，推动对中医以及其他传统医学的研究，使之最大程度地造福人类。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p6",
+      "text": "发现青蒿素的抗疟疗效\n\n疟疾威胁人类健康长达数千年。20世纪50年代，由于疟原虫抗药性的出现，疟疾重新开始肆虐，消灭疟疾的国际努力遭受重挫。1967年，中国政府启动“523”项目来抗击疟疾。1969年，中医研究院任命我领导抗疟药研究工作。我带领由植物化学和药理学专业研究者组成的团队，开始从中草药中寻找并提取可能具有抗疟疗效的成分。",
+      "block": {
+        "runs": [
+          {
+            "text": "发现青蒿素的抗疟疗效\n\n疟疾威胁人类健康长达数千年。20世纪50年代，由于疟原虫抗药性的出现，疟疾重新开始肆虐，消灭疟疾的国际努力遭受重挫。1967年，中国政府启动“523”项目来抗击疟疾。1969年，中医研究院任命我领导抗疟药研究工作。我带领由植物化学和药理学专业研究者组成的团队，开始从中草药中寻找并提取可能具有抗疟疗效的成分。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p7",
+      "text": "在第一阶段，我收集了2000 个方药，挑选出可能具有抗疟作用的640 个，从其中的200 个方药中提取了380 余种提取物，在小白鼠身上测试抗疟效果，然而进展甚微。",
+      "block": {
+        "runs": [
+          {
+            "text": "在第一阶段，我收集了2000 个方药，挑选出可能具有抗疟作用的640 个，从其中的200 个方药中提取了380 余种提取物，在小白鼠身上测试抗疟效果，然而进展甚微。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p8",
+      "text": "研究的转折点出现在青蒿上，其提取物显示有一定的抗疟效果，然而，实验结果很难重复，而且似乎与文献记录相悖。",
+      "block": {
+        "runs": [
+          {
+            "text": "研究的转折点出现在青蒿上，其提取物显示有一定的抗疟效果，然而，实验结果很难重复，而且似乎与文献记录相悖。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p9",
+      "text": "为了寻求答案，我们查阅了大量的文献。最早提到青蒿治疗疟疾的记录，出现在东晋葛洪所著的《肘后备急方》中，书中有这样的话：",
+      "block": {
+        "runs": [
+          {
+            "text": "为了寻求答案，我们查阅了大量的文献。最早提到青蒿治疗疟疾的记录，出现在东晋葛洪所著的《肘后备急方》中，书中有这样的话：",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p10",
+      "text": "又方，青蒿一握，以水二升渍，绞取汁，尽服之。",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "又方，青蒿一握，以水二升渍，绞取汁，尽服之。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      }
+    },
+    {
+      "id": "lesson-1736:p11",
+      "text": "这句话让我深受启发：我们使用通常的加热提取方式，也许恰恰破坏了青蒿的活性成分。因此考虑改为低温提取，以保存其抗疟有效成分。改变提取方式后，抗疟效果果然大幅度提升！",
+      "block": {
+        "runs": [
+          {
+            "text": "这句话让我深受启发：我们使用通常的加热提取方式，也许恰恰破坏了青蒿的活性成分。因此考虑改为低温提取，以保存其抗疟有效成分。改变提取方式后，抗疟效果果然大幅度提升！",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p12",
+      "text": "我们随后将青蒿提取物分为酸性和中性两大部分。在1971 年10 月4 日，我们成功得到了安全性高的中性提取物，并获得对感染疟疾的小白鼠和猴子百分之百的抗疟药效！我们终于找到了发现青蒿素抗疟疗效的突破口！",
+      "block": {
+        "runs": [
+          {
+            "text": "我们随后将青蒿提取物分为酸性和中性两大部分。在1971 年10 月4 日，我们成功得到了安全性高的中性提取物，并获得对感染疟疾的小白鼠和猴子百分之百的抗疟药效！我们终于找到了发现青蒿素抗疟疗效的突破口！",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p13",
+      "text": "从分子到药物\n\n在20 世纪70 年代的历史环境下，新药的临床试验很难开展。为了战胜疟疾，我和我的同事勇敢地做志愿者，第一批尝试青蒿提取物，以确认其对人体的安全性。随后，我们赴海南对疟疾病人进行临床治疗，结果振奋人心：病人症状迅速消失！",
+      "block": {
+        "runs": [
+          {
+            "text": "从分子到药物\n\n在20 世纪70 年代的历史环境下，新药的临床试验很难开展。为了战胜疟疾，我和我的同事勇敢地做志愿者，第一批尝试青蒿提取物，以确认其对人体的安全性。随后，我们赴海南对疟疾病人进行临床治疗，结果振奋人心：病人症状迅速消失！",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p14",
+      "text": "受临床疗效的鼓舞，我们转向分离提纯，得到了抗疟的有效成分，于1972 年11 月8 日，终于找到了这个熔点在156~157 ℃的无色晶体——C15H22O5。后来我们将其命名为“青蒿素”。",
+      "block": {
+        "runs": [
+          {
+            "text": "受临床疗效的鼓舞，我们转向分离提纯，得到了抗疟的有效成分，于1972 年11 月8 日，终于找到了这个熔点在156~157 ℃的无色晶体——C15H22O5。后来我们将其命名为“青蒿素”。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p15",
+      "text": "青蒿素的发现，是我们研究进展的第一步。我们随即转向第二步：将这个天然分子变为药物。",
+      "block": {
+        "runs": [
+          {
+            "text": "青蒿素的发现，是我们研究进展的第一步。我们随即转向第二步：将这个天然分子变为药物。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p16",
+      "text": "在这个过程中，我们发现生长在北方的青蒿的青蒿素含量比较低，药物生产需要青蒿素含量高的青蒿，“523”项目的大团队成员在四川找到了含量高的青蒿。",
+      "block": {
+        "runs": [
+          {
+            "text": "在这个过程中，我们发现生长在北方的青蒿的青蒿素含量比较低，药物生产需要青蒿素含量高的青蒿，“523”项目的大团队成员在四川找到了含量高的青蒿。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p17",
+      "text": "1973 年秋，我们在海南疟疾疫区试用青蒿素胶囊，取得了明确的疗效。这样，我们终于打开了开发新抗疟药物的大门。",
+      "block": {
+        "runs": [
+          {
+            "text": "1973 年秋，我们在海南疟疾疫区试用青蒿素胶囊，取得了明确的疗效。这样，我们终于打开了开发新抗疟药物的大门。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p18",
+      "text": "影响世界\n\n在中国科学院生物物理研究所等单位的协作下，我们确定了青蒿素分子的立体结构，1977年在《科学通报》发表，并迅速被《化学文摘》收录。1979年，国家科学技术委员会授予我们“国家发明奖”，表彰青蒿素的发现。",
+      "block": {
+        "runs": [
+          {
+            "text": "影响世界\n\n在中国科学院生物物理研究所等单位的协作下，我们确定了青蒿素分子的立体结构，1977年在《科学通报》发表，并迅速被《化学文摘》收录。1979年，国家科学技术委员会授予我们“国家发明奖”，表彰青蒿素的发现。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p19",
+      "text": "1981 年，联合国开发计划署、世界银行以及世界卫生组织赞助的疟疾化疗科学工作组第四次会议在北京召开。在这个会议上，我国关于青蒿素及其抗疟性的几个报告引起热烈反响。作为这个会议的第一个发言人，我作了题为《青蒿素的化学研究》的报告，随后这一报告在1982 年公开发表。青蒿素的发现及其疗效开始引起世界关注。1986 年，青蒿素成为我国新药审批办法实施以来的第一个一类新药。",
+      "block": {
+        "runs": [
+          {
+            "text": "1981 年，联合国开发计划署、世界银行以及世界卫生组织赞助的疟疾化疗科学工作组第四次会议在北京召开。在这个会议上，我国关于青蒿素及其抗疟性的几个报告引起热烈反响。作为这个会议的第一个发言人，我作了题为《青蒿素的化学研究》的报告，随后这一报告在1982 年公开发表。青蒿素的发现及其疗效开始引起世界关注。1986 年，青蒿素成为我国新药审批办法实施以来的第一个一类新药。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p20",
+      "text": "发展与超越\n\n青蒿素与以往的抗疟药物相比，在化学结构和作用特点上有明显的差异。我们在研究评价的时候发现，比之青蒿素，双氢青蒿素的疗效提高近十倍。更重要的是，用双氢青蒿素治疗的病人复发率很低。在分子中引入羟基，也给发展新的青蒿素衍生物创造了更多的机会。",
+      "block": {
+        "runs": [
+          {
+            "text": "发展与超越\n\n青蒿素与以往的抗疟药物相比，在化学结构和作用特点上有明显的差异。我们在研究评价的时候发现，比之青蒿素，双氢青蒿素",
+            "type": "text"
+          },
+          {
+            "label": "[4]",
+            "noteId": "footnote-11183-4",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的疗效提高近十倍。更重要的是，用双氢青蒿素治疗的病人复发率很低。在分子中引入羟基，也给发展新的青蒿素衍生物创造了更多的机会。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p21",
+      "text": "我们团队后来将双氢青蒿素发展成新的药物。在过去十年，我们也尝试用青蒿素和双氢青蒿素治疗其他的疾病。《青蒿及青蒿素类药物》一书于2009 年出版，这本书记录了青蒿素发现的历史及我们在研究程中所学到的知识。\n\n2002 年，世界卫生组织推荐采用青蒿素作为一线药物治疗疟疾。如今，青蒿素联合疗法在全世界广泛应用，这一疗法极大地减轻了疟疾的症状，拯救了许多人的生命，特别是非洲孩子们的生命。",
+      "block": {
+        "runs": [
+          {
+            "text": "我们团队后来将双氢青蒿素发展成新的药物。在过去十年，我们也尝试用青蒿素和双氢青蒿素治疗其他的疾病。《青蒿及青蒿素类药物》一书于2009 年出版，这本书记录了青蒿素发现的历史及我们在研究程中所学到的知识。\n\n2002 年，世界卫生组织推荐采用青蒿素作为一线药物治疗疟疾。如今，青蒿素联合疗法在全世界广泛应用，这一疗法极大地减轻了疟疾的症状，拯救了许多人的生命，特别是非洲孩子们的生命。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p22",
+      "text": "中医药学的贡献",
+      "block": {
+        "level": 3,
+        "runs": [
+          {
+            "text": "中医药学的贡献",
+            "type": "text"
+          }
+        ],
+        "type": "heading"
+      }
+    },
+    {
+      "id": "lesson-1736:p23",
+      "text": "青蒿素是中医药学给予人类的一份珍贵礼物。和植物化学的其他发现在药物开发中的应用相比，从青蒿提取物到青蒿素的研发历程相当快速，然而，这绝不是中医药智慧的唯一果实。中国的基础和临床研究还发现，具有悠久应用历史的中药砒霜，用于治疗白血病颇具疗效，已经成为治疗白血病的重要选择。对治疗失忆有效的石杉碱甲，也是从中草药“千层塔”中提取的，是我国用于治疗老年性精神障碍的一种临床用药。",
+      "block": {
+        "runs": [
+          {
+            "text": "青蒿素是中医药学给予人类的一份珍贵礼物。和植物化学的其他发现在药物开发中的应用相比，从青蒿提取物到青蒿素的研发历程相当快速，然而，这绝不是中医药智慧的唯一果实。中国的基础和临床研究还发现，具有悠久应用历史的中药砒霜",
+            "type": "text"
+          },
+          {
+            "label": "[5]",
+            "noteId": "footnote-11183-5",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，用于治疗白血病颇具疗效，已经成为治疗白血病的重要选择。对治疗失忆有效的石杉碱甲",
+            "type": "text"
+          },
+          {
+            "label": "[6]",
+            "noteId": "footnote-11183-6",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，也是从中草药“千层塔”中提取的，是我国用于治疗老年性精神障碍的一种临床用药。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p24",
+      "text": "然而，单一药物治疗某一特定疾病的现象在中医实践中非常少见，复方用药才是中医几千年来的主要用药形式。通常，中医师按中医理论和方法诊断病人症候，对症开出由多种中药按君臣佐使组成的处方，并随着病情的发展和症候的变化，随时调整处方的药味和剂量，以达到良好的疗效。这样的辨证施治疗法和有效方药的积累对中华民族的繁衍昌盛作出了积极贡献。我们从中药青蒿研发出抗疟药物青蒿素，仅是发掘中医药宝库的努力之一。",
+      "block": {
+        "runs": [
+          {
+            "text": "然而，单一药物治疗某一特定疾病的现象在中医实践中非常少见，复方用药才是中医几千年来的主要用药形式。通常，中医师按中医理论和方法诊断病人症候，对症开出由多种中药按君臣佐使",
+            "type": "text"
+          },
+          {
+            "label": "[7]",
+            "noteId": "footnote-11183-7",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "组成的处方，并随着病情的发展和症候的变化，随时调整处方的药味和剂量，以达到良好的疗效。这样的辨证施治疗法和有效方药的积累对中华民族的繁衍昌盛作出了积极贡献。我们从中药青蒿研发出抗疟药物青蒿素，仅是发掘中医药宝库的努力之一。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p25",
+      "text": "心血管疾病的治疗也受益于中医药学。中医的一个治则是活血化瘀，这一治则也适用于冠心病的术后维护。中药提取的芍药苷等被用于防止经皮冠状动脉介入治疗后的血管再狭窄，临床显示再狭窄率大幅降低。还有许多其他证据支持中医活血化瘀的临床疗效。",
+      "block": {
+        "runs": [
+          {
+            "text": "心血管疾病的治疗也受益于中医药学。中医的一个治则是活血化瘀，这一治则也适用于冠心病的术后维护。中药提取的芍药苷",
+            "type": "text"
+          },
+          {
+            "label": "[8]",
+            "noteId": "footnote-11183-8",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "等被用于防止经皮冠状动脉介入治疗后的血管再狭窄，临床显示再狭窄率大幅降低。还有许多其他证据支持中医活血化瘀的临床疗效。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p26",
+      "text": "和心脑血管疾病相关的一个新领域也正在发展，即所谓的生物力药理学，旨在将中药的药效和血流的生物力学影响相结合，用于防病治病。实验研究表明，保健运动可提高血流剪应力，再联合使用某些活血中药，可以减少动脉粥样硬化的形成。",
+      "block": {
+        "runs": [
+          {
+            "text": "和心脑血管疾病相关的一个新领域也正在发展，即所谓的生物力药理学，旨在将中药的药效和血流的生物力学影响相结合，用于防病治病。实验研究表明，保健运动可提高血流剪应力，再联合使用某些活血中药，可以减少动脉粥样硬化的形成。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1736:p27",
+      "text": "这里所举中医药对人类健康的贡献，不过沧海一粟。我的梦想是：在同威胁人类健康与生命的疾病的斗争中，中医药学进一步发挥威力，为维护世界人民的健康与福祉作出新贡献！",
+      "block": {
+        "runs": [
+          {
+            "text": "这里所举中医药对人类健康的贡献，不过沧海一粟。我的梦想是：在同威胁人类健康与生命的疾病的斗争中，中医药学进一步发挥威力，为维护世界人民的健康与福祉作出新贡献！",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "[青蒿] 菊科植物黄花蒿，茎、叶可入药。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11183-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "[奎宁] 俗称“金鸡纳霜”，一种生物碱， 可做抗疟疾药物。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11183-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "[金鸡纳树] 常绿灌木或小乔木，原产南美洲，树皮和根皮是提取奎宁的重要原料。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11183-3"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "[双氢青蒿素] 青蒿素的一种衍生物，是在青蒿素结构中引进羟（qiǎng）基的产物，比青蒿素多两个氢原子。它本身具有强于青蒿素的抗疟活性，是合成青蒿素类药物的基础。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11183-4"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "[砒霜] 即三氧化二砷，常为白色粉末，有剧毒。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11183-5"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "[石杉碱甲] 一种生物碱，从蕨类植物蛇足石杉（又名“千层塔”）中提取。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11183-6"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "[君臣佐使] 中药方剂组成配伍的比拟词。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11183-7"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "[芍药苷] 一种糖苷类化合物，从芍药科植物芍药、牡丹等的根中提取，具有扩张血管、抑制血栓形成、镇痛镇静等药理作用。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11183-8"
+    }
+  ],
+  "resources": [],
+  "source": "https://forum.rdfzer.com/t/topic/1736",
+  "objectives": [
+    {
+      "id": "lesson-1736:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1736:p2",
+        "lesson-1736:p3",
+        "lesson-1736:p4",
+        "lesson-1736:p5",
+        "lesson-1736:p6",
+        "lesson-1736:p7",
+        "lesson-1736:p8",
+        "lesson-1736:p9",
+        "lesson-1736:p10",
+        "lesson-1736:p11",
+        "lesson-1736:p12",
+        "lesson-1736:p13",
+        "lesson-1736:p14",
+        "lesson-1736:p15",
+        "lesson-1736:p16",
+        "lesson-1736:p17",
+        "lesson-1736:p18",
+        "lesson-1736:p19",
+        "lesson-1736:p20",
+        "lesson-1736:p21",
+        "lesson-1736:p22",
+        "lesson-1736:p23",
+        "lesson-1736:p24",
+        "lesson-1736:p25",
+        "lesson-1736:p26",
+        "lesson-1736:p27"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1736:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1736:p2",
+        "lesson-1736:p3",
+        "lesson-1736:p4",
+        "lesson-1736:p5",
+        "lesson-1736:p6",
+        "lesson-1736:p7",
+        "lesson-1736:p8",
+        "lesson-1736:p9",
+        "lesson-1736:p10",
+        "lesson-1736:p11",
+        "lesson-1736:p12",
+        "lesson-1736:p13",
+        "lesson-1736:p14",
+        "lesson-1736:p15",
+        "lesson-1736:p16",
+        "lesson-1736:p17",
+        "lesson-1736:p18",
+        "lesson-1736:p19",
+        "lesson-1736:p20",
+        "lesson-1736:p21",
+        "lesson-1736:p22",
+        "lesson-1736:p23",
+        "lesson-1736:p24",
+        "lesson-1736:p25",
+        "lesson-1736:p26",
+        "lesson-1736:p27"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1736:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1736:p2",
+        "lesson-1736:p3",
+        "lesson-1736:p4",
+        "lesson-1736:p5",
+        "lesson-1736:p6",
+        "lesson-1736:p7",
+        "lesson-1736:p8",
+        "lesson-1736:p9",
+        "lesson-1736:p10",
+        "lesson-1736:p11",
+        "lesson-1736:p12",
+        "lesson-1736:p13",
+        "lesson-1736:p14",
+        "lesson-1736:p15",
+        "lesson-1736:p16",
+        "lesson-1736:p17",
+        "lesson-1736:p18",
+        "lesson-1736:p19",
+        "lesson-1736:p20",
+        "lesson-1736:p21",
+        "lesson-1736:p22",
+        "lesson-1736:p23",
+        "lesson-1736:p24",
+        "lesson-1736:p25",
+        "lesson-1736:p26",
+        "lesson-1736:p27"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1736:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1736:p2",
+        "lesson-1736:p3",
+        "lesson-1736:p4",
+        "lesson-1736:p5",
+        "lesson-1736:p6",
+        "lesson-1736:p7",
+        "lesson-1736:p8",
+        "lesson-1736:p9",
+        "lesson-1736:p10",
+        "lesson-1736:p11",
+        "lesson-1736:p12",
+        "lesson-1736:p13",
+        "lesson-1736:p14",
+        "lesson-1736:p15",
+        "lesson-1736:p16",
+        "lesson-1736:p17",
+        "lesson-1736:p18",
+        "lesson-1736:p19",
+        "lesson-1736:p20",
+        "lesson-1736:p21",
+        "lesson-1736:p22",
+        "lesson-1736:p23",
+        "lesson-1736:p24",
+        "lesson-1736:p25",
+        "lesson-1736:p26",
+        "lesson-1736:p27"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1736:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1736:p2",
+        "lesson-1736:p3",
+        "lesson-1736:p4",
+        "lesson-1736:p5",
+        "lesson-1736:p6",
+        "lesson-1736:p7",
+        "lesson-1736:p8",
+        "lesson-1736:p9",
+        "lesson-1736:p10",
+        "lesson-1736:p11",
+        "lesson-1736:p12",
+        "lesson-1736:p13",
+        "lesson-1736:p14",
+        "lesson-1736:p15",
+        "lesson-1736:p16",
+        "lesson-1736:p17",
+        "lesson-1736:p18",
+        "lesson-1736:p19",
+        "lesson-1736:p20",
+        "lesson-1736:p21",
+        "lesson-1736:p22",
+        "lesson-1736:p23",
+        "lesson-1736:p24",
+        "lesson-1736:p25",
+        "lesson-1736:p26",
+        "lesson-1736:p27"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1736:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1736:p2",
+        "lesson-1736:p3",
+        "lesson-1736:p4",
+        "lesson-1736:p5",
+        "lesson-1736:p6",
+        "lesson-1736:p7",
+        "lesson-1736:p8",
+        "lesson-1736:p9",
+        "lesson-1736:p10",
+        "lesson-1736:p11",
+        "lesson-1736:p12",
+        "lesson-1736:p13",
+        "lesson-1736:p14",
+        "lesson-1736:p15",
+        "lesson-1736:p16",
+        "lesson-1736:p17",
+        "lesson-1736:p18",
+        "lesson-1736:p19",
+        "lesson-1736:p20",
+        "lesson-1736:p21",
+        "lesson-1736:p22",
+        "lesson-1736:p23",
+        "lesson-1736:p24",
+        "lesson-1736:p25",
+        "lesson-1736:p26",
+        "lesson-1736:p27"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1736:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1736:p2",
+        "lesson-1736:p3",
+        "lesson-1736:p4",
+        "lesson-1736:p5",
+        "lesson-1736:p6",
+        "lesson-1736:p7",
+        "lesson-1736:p8",
+        "lesson-1736:p9",
+        "lesson-1736:p10",
+        "lesson-1736:p11",
+        "lesson-1736:p12",
+        "lesson-1736:p13",
+        "lesson-1736:p14",
+        "lesson-1736:p15",
+        "lesson-1736:p16",
+        "lesson-1736:p17",
+        "lesson-1736:p18",
+        "lesson-1736:p19",
+        "lesson-1736:p20",
+        "lesson-1736:p21",
+        "lesson-1736:p22",
+        "lesson-1736:p23",
+        "lesson-1736:p24",
+        "lesson-1736:p25",
+        "lesson-1736:p26",
+        "lesson-1736:p27"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1736:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1736:p2",
+        "lesson-1736:p3",
+        "lesson-1736:p4",
+        "lesson-1736:p5",
+        "lesson-1736:p6",
+        "lesson-1736:p7",
+        "lesson-1736:p8",
+        "lesson-1736:p9",
+        "lesson-1736:p10",
+        "lesson-1736:p11",
+        "lesson-1736:p12",
+        "lesson-1736:p13",
+        "lesson-1736:p14",
+        "lesson-1736:p15",
+        "lesson-1736:p16",
+        "lesson-1736:p17",
+        "lesson-1736:p18",
+        "lesson-1736:p19",
+        "lesson-1736:p20",
+        "lesson-1736:p21",
+        "lesson-1736:p22",
+        "lesson-1736:p23",
+        "lesson-1736:p24",
+        "lesson-1736:p25",
+        "lesson-1736:p26",
+        "lesson-1736:p27"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "legacy:effect:lesson-1736:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1736:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1736:interaction:contextWords",
+        "resourceVersion": "sha256:f9e194e4e0edbde76db10bc66093a7c5b0a1558870d863cf8b1f5ea8690eedd1",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1736:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1736:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1736:interaction:revision",
+        "resourceVersion": "sha256:b18f31c61a8bced1986e6c63b50799c5f389f1b4ab922cd4903bbaccfe66e7c1",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1736:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1736:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1736:interaction:structure",
+        "resourceVersion": "sha256:e467110c595d8a578fc02e2c2d77c23dda5ed85392daaeca51db9a551a3815b2",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1736:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1736:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1736:interaction:evaluation",
+        "resourceVersion": "sha256:32300c01e940050de9d4f95d168469b70ce02a2025f84e0e9410bacc9c432e79",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1736:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1736:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1736:interaction:authorQuestion",
+        "resourceVersion": "sha256:b61a14dade6c0888375b3c80f9a468e139c4e1be8b458eb621ebe51eb7c248d8",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    }
+  ],
+  "vocabulary": [],
+  "legacy": {
+    "lessonId": "lesson-1736",
+    "title": "7 青蒿素:人类征服疾病的一小步",
+    "mode": "science",
+    "legacyTracks": [
+      "context",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "初讀評議",
+        "",
+        10
+      ],
+      [
+        "read",
+        "通讀正文",
+        "",
+        10
+      ],
+      [
+        "revision",
+        "字句之改",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "說明次序",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "文本評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "叩問作者",
+        "",
+        10
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1736:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1736:interaction:contextWords",
+        "resourceVersion": "sha256:f9e194e4e0edbde76db10bc66093a7c5b0a1558870d863cf8b1f5ea8690eedd1",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1736:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1736:interaction:revision",
+        "resourceVersion": "sha256:b18f31c61a8bced1986e6c63b50799c5f389f1b4ab922cd4903bbaccfe66e7c1",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1736:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1736:interaction:structure",
+        "resourceVersion": "sha256:e467110c595d8a578fc02e2c2d77c23dda5ed85392daaeca51db9a551a3815b2",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1736:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1736:interaction:evaluation",
+        "resourceVersion": "sha256:32300c01e940050de9d4f95d168469b70ce02a2025f84e0e9410bacc9c432e79",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1736:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1736:interaction:authorQuestion",
+        "resourceVersion": "sha256:b61a14dade6c0888375b3c80f9a468e139c4e1be8b458eb621ebe51eb7c248d8",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1736",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1736:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1736:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1736:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1736",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1736:interaction:contextWords",
+        "completionKey": "effect:lesson-1736:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1736:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1736",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1736:interaction:structure",
+        "completionKey": "effect:lesson-1736:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1736:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1736",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1736:interaction:revision",
+        "completionKey": "effect:lesson-1736:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1736:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1736:interaction:contextWords",
+        "sourceVersion": "sha256:f9e194e4e0edbde76db10bc66093a7c5b0a1558870d863cf8b1f5ea8690eedd1",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1736:interaction:revision",
+        "sourceVersion": "sha256:b18f31c61a8bced1986e6c63b50799c5f389f1b4ab922cd4903bbaccfe66e7c1",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1736:interaction:structure",
+        "sourceVersion": "sha256:e467110c595d8a578fc02e2c2d77c23dda5ed85392daaeca51db9a551a3815b2",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1736:interaction:evaluation",
+        "sourceVersion": "sha256:32300c01e940050de9d4f95d168469b70ce02a2025f84e0e9410bacc9c432e79",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1736:interaction:authorQuestion",
+        "sourceVersion": "sha256:b61a14dade6c0888375b3c80f9a468e139c4e1be8b458eb621ebe51eb7c248d8",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1736:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1736:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1736:interaction:contextWords",
+        "completionKey": "effect:lesson-1736:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1736:interaction:structure",
+        "completionKey": "effect:lesson-1736:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1736:interaction:revision",
+        "completionKey": "effect:lesson-1736:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [],
+    "sourceLesson": "data/lessons/lesson-1736.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 5,
+        "formativeCount": 4,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-9afd7687d9819a187ffb",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [
+    {
+      "id": "lesson-1736:p1",
+      "text": "屠呦呦 李贺 摄",
+      "block": {
+        "runs": [
+          {
+            "text": "屠呦呦 李贺 摄",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "blockIndex": 0,
+      "blockSha256": "e79e389a38efb0559007d28580a6a9d9068f076bd237c941b93f1ae24ef81a9e",
+      "role": "image-caption",
+      "label": "原課插圖說明",
+      "source": "data/reader-documents/lesson-1736.json#main.blocks[0]",
+      "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+    }
+  ],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [],
+  "guidance": [],
+  "media": [
+    {
+      "alt": "",
+      "bytes": 92434,
+      "finalUrl": "https://files.rdfzer.com/original/2X/f/fba3ff1ae299e50181f4e6582cd9ac0141c8755b.jpeg",
+      "height": 403,
+      "id": "media-5569d4bc360f332ba43b",
+      "mediaType": "image/jpeg",
+      "nativeDisposition": "verified-in-app",
+      "receiptCollectedAt": "2026-07-30T01:10:43.464Z",
+      "receiptRequired": true,
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29",
+      "sha256": "98a2c4f4eee4014f84ecfdca96e302a6346918d1c6ba918069bfdcb30a87bf06",
+      "sourceUrl": "https://files.rdfzer.com/original/2X/f/fba3ff1ae299e50181f4e6582cd9ac0141c8755b.jpeg",
+      "webDisposition": "source-url",
+      "width": 600
+    }
+  ],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1736.json",
+    "lessonSha256": "0d6b559504c84aad1122136396538b622861e30d4d6cff6f44da4a69272a6398",
+    "reader": "data/reader-documents/lesson-1736.json",
+    "readerSha256": "93da49b606ce793ed56998cd6f20509d7b6c6eaf38889563e9320488a7b694f7",
+    "sourcePostId": 11183,
+    "sourcePostNumber": 1,
+    "blockCount": 27,
+    "annotationCount": 8,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 5,
+      "formativeCount": 4,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

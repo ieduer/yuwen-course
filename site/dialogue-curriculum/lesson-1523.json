@@ -1,0 +1,1928 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1523",
+  "title": "5 * 人应当坚持正义/ 柏拉图",
+  "mode": "argument",
+  "author": "柏拉图",
+  "persona": {
+    "kind": "author-simulation",
+    "notice": "AI 教學模擬，依據作品；並非作者本人。",
+    "narratorIsAuthor": false,
+    "rule": "以作者第一人稱討論文本選擇；不得把抒情主人公、角色、引文說話者或敘述者的經歷當作作者生平。譯作須區分原作者、譯者與編者。",
+    "source": "data/literary-taxonomy.json",
+    "attribution": "保留原目錄署名；無獨立署名或多人作品採閱讀引導。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1523:p1",
+      "text": "亲爱的格黎东啊，你对我的关怀如果合乎正道，那是非常可贵的；如果不合，那就越关心越难从命了。我们首先必须考虑是不是应当照你说的那样做。因为我不但现在奉行，而且一贯遵守的原则是听从道理，凡是经过研究见到无可非议的道理我就拳拳服膺。我不能由于遇到灾难就把自己所讲过的道理抛开，我认为那些道理还跟过去一样真实，我仍旧跟过去一样重视它们，尊重它们。如果我们在现在的情况下不能说出更强的道理来，我是肯定不会对你让步的，哪怕众人对我施加更大的恫吓，如同以妖怪吓儿童那样，声称要监禁、处死、没收财产等等。现在我们能够怎样研究最恰当呢？首先可以提起你对意见所说的那些话，看看我们是不是有理由说有些意见我们应该注意，也有些意见我们应该不考虑。是不是在我被判死刑前这话说得对，到现在就显然成了空谈，无非是戏言和废话而已？我希望和你一道弄明白，在我现在的情况下，格黎东啊，我们说的那个道理究竟是变了，还是仍然有效，究竟是应当放弃，还是必须遵从。那些思想严谨的人，曾经多次断言在人们的意见中间有些必须高度重视，有些不必理会，像我刚才说的那样。格黎东啊，神灵在上，你不觉得他们说得对吗？从人情上说，你并没有明天就要死掉的危险，你的判断不应该为那种局面所左右。请你考虑一下，你认为我们该不该说，我们不必尊重人们的一切意见，有些意见要重视，有些就没有必要，也不必听从所有的人的意见，有些人的要听，有些人的不必听？你以为如何？这话说得不对吗？",
+      "block": {
+        "runs": [
+          {
+            "text": "亲爱的格黎东啊，你对我的关怀如果合乎正道，那是非常可贵的；如果不合，那就越关心越难从命了。我们首先必须考虑是不是应当照你说的那样做",
+            "type": "text"
+          },
+          {
+            "label": "[1]",
+            "noteId": "footnote-10203-1",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。因为我不但现在奉行，而且一贯遵守的原则是听从道理，凡是经过研究见到无可非议的道理我就拳拳服膺",
+            "type": "text"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-10203-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。我不能由于遇到灾难就把自己所讲过的道理抛开，我认为那些道理还跟过去一样真实，我仍旧跟过去一样重视它们，尊重它们。如果我们在现在的情况下不能说出更强的道理来，我是肯定不会对你让步的，哪怕众人对我施加更大的恫吓",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-10203-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，如同以妖怪吓儿童那样，声称要监禁、处死、没收财产等等。现在我们能够怎样研究最恰当呢？首先可以提起你对意见所说的那些话，看看我们是不是有理由说有些意见我们应该注意，也有些意见我们应该不考虑。是不是在我被判死刑前这话说得对，到现在就显然成了空谈，无非是戏言和废话而已？我希望和你一道弄明白，在我现在的情况下，格黎东啊，我们说的那个道理究竟是变了，还是仍然有效，究竟是应当放弃，还是必须遵从。那些思想严谨的人，曾经多次断言在人们的意见中间有些必须高度重视，有些不必理会，像我刚才说的那样。格黎东啊，神灵在上，你不觉得他们说得对吗？从人情上说，你并没有明天就要死掉的危险，你的判断不应该为那种局面所左右。请你考虑一下，你认为我们该不该说，我们不必尊重人们的一切意见，有些意见要重视，有些就没有必要，也不必听从所有的人的意见，有些人的要听，有些人的不必听？你以为如何？这话说得不对吗？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p2",
+      "text": "格 黎 东 说得很对。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 说得很对。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p3",
+      "text": "苏格拉底 那就该重视好的意见，不管那些坏的意见吗？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 那就该重视好的意见，不管那些坏的意见吗？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p4",
+      "text": "格 黎 东 是的。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 是的。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p5",
+      "text": "苏格拉底 好的意见不就是明白人的意见，坏的意见不就是糊涂人的意见吗？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 好的意见不就是明白人的意见，坏的意见不就是糊涂人的意见吗？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p6",
+      "text": "格 黎 东 当然是。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 当然是。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p7",
+      "text": "苏格拉底 在这方面，我们该怎么说呢？一个从事体育锻炼并且以此为业的人，是重视一般人的赞美、责备和看法，还是只听从一个人，即医生或教练的褒贬意见？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 在这方面，我们该怎么说呢？一个从事体育锻炼并且以此为业的人，是重视一般人的赞美、责备和看法，还是只听从一个人，即医生或教练的褒贬意见？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p8",
+      "text": "格 黎 东 只听从一个人的。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 只听从一个人的。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p9",
+      "text": "苏格拉底 那他就该畏惧那一个人的责备，喜爱那一个人的赞美，而不理会众人之见啰？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 那他就该畏惧那一个人的责备，喜爱那一个人的赞美，而不理会众人之见啰？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p10",
+      "text": "格 黎 东 很明显。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 很明显。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p11",
+      "text": "苏格拉底 那他就该照着那一位主管和内行的意思行动、锻炼、喝水、吃东西，不用理会别人的想法啰？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 那他就该照着那一位主管和内行的意思行动、锻炼、喝水、吃东西，不用理会别人的想法啰？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p12",
+      "text": "格 黎 东 就是。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 就是。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p13",
+      "text": "苏格拉底 很好。他如果不服从那一位内行，不理睬他的意见和赞许，而听信另外一些外行的话，不是要遭到损害吗？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 很好。他如果不服从那一位内行，不理睬他的意见和赞许，而听信另外一些外行的话，不是要遭到损害吗？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p14",
+      "text": "格 黎 东 怎么不是呢？",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 怎么不是呢？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p15",
+      "text": "苏格拉底 什么损害呀？哪方面的损害？损害那个不服从者的什么部分？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 什么损害呀？哪方面的损害？损害那个不服从者的什么部分？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p16",
+      "text": "格 黎 东 显然是他的身体，因为遭殃的是这个部分。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 显然是他的身体，因为遭殃的是这个部分。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p17",
+      "text": "苏格拉底 你说得对。别的事情岂不也是这样吗，格黎东？我们用不着一一枚举，可以总起来看。例如正义和不正义，丑和美，好和坏，这都是我们现在所考虑的事情。在这些事情上我们是应当听从众人的意见，对众人的意见诚惶诚恐，还是应当只听那一个内行的，对他毕恭毕敬胜于他人？我们如果不听他的，就会损伤我们那个为道义所改善、为不义所毁灭的部分。难道不是这样吗？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 你说得对。别的事情岂不也是这样吗，格黎东？我们用不着一一枚举，可以总起来看。例如正义和不正义，丑和美，好和坏，这都是我们现在所考虑的事情。在这些事情上我们是应当听从众人的意见，对众人的意见诚惶诚恐，还是应当只听那一个内行的，对他毕恭毕敬胜于他人？我们如果不听他的，就会损伤我们那个为道义所改善、为不义所毁灭的部分。难道不是这样吗？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p18",
+      "text": "格 黎 东 我想是这样，苏格拉底。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 我想是这样，苏格拉底。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p19",
+      "text": "苏格拉底 很好。如果我们由于听从外行的意见而毁掉了我们那个为健康所改善、为疾病所破坏的部分，在这个部分毁掉之后我们还能活吗？这个部分就是身体，对吗？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 很好。如果我们由于听从外行的意见而毁掉了我们那个为健康所改善、为疾病所破坏的部分，在这个部分毁掉之后我们还能活吗？这个部分就是身体，对吗？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p20",
+      "text": "格 黎 东 对的。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 对的。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p21",
+      "text": "苏格拉底 身体坏了、毁了，我们还能活吗？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 身体坏了、毁了，我们还能活吗？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p22",
+      "text": "格 黎 东 不能。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 不能。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p23",
+      "text": "苏格拉底 如果那个为道义所改善、为不义所毁灭的部分毁了，我们还能活吗？那一个部分，不管叫什么，是我们的那个与道义和不义有关的部分，我们认为它比身体差吗？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 如果那个为道义所改善、为不义所毁灭的部分毁了，我们还能活吗？那一个部分，不管叫什么，是我们的那个与道义和不义有关的部分，我们认为它比身体差吗？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p24",
+      "text": "格 黎 东 不。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 不。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p25",
+      "text": "苏格拉底 比身体贵重吗？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 比身体贵重吗？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p26",
+      "text": "格 黎 东 贵重得多。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 贵重得多。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p27",
+      "text": "苏格拉底 我最好的朋友啊，那我们就不能听从众人对我们的说法，只能听从那一个深知道义和不义的人的说法，听从真理本身了。所以，你一起头的提法是不对的，你说我们应当考虑关于正义、美、好及其反面的意见。也许可以说，众人是有权置我们于死地的。",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 我最好的朋友啊，那我们就不能听从众人对我们的说法，只能听从那一个深知道义和不义的人的说法，听从真理本身了。所以，你一起头的提法是不对的，你说我们应当考虑关于正义、美、好及其反面的意见。也许可以说，众人是有权置我们于死地的。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p28",
+      "text": "格 黎 东 这很显然，苏格拉底，你说得对。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 这很显然，苏格拉底，你说得对。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p29",
+      "text": "苏格拉底 可是，我了不起的朋友啊，我觉得我们刚才说过的话现在还照样有效。请看一看，我们是不是还主张：我们应当认为最重要的并不是活着，而是活得好。",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 可是，我了不起的朋友啊，我觉得我们刚才说过的话现在还照样有效。请看一看，我们是不是还主张：我们应当认为最重要的并不是活着，而是活得好。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p30",
+      "text": "格 黎 东 我还是这样主张。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 我还是这样主张。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p31",
+      "text": "苏格拉底与人交谈（浮雕）",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底与人交谈（浮雕）",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p32",
+      "text": "苏格拉底 你是不是也承认活得好就是活得体面、正派？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 你是不是也承认活得好就是活得体面、正派？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p33",
+      "text": "格 黎 东 是的。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 是的。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p34",
+      "text": "苏格拉底 根据我们所同意的看法，我们首先应该研究一下，我试图未得雅典人同意释放便离开此地是不是正当。如果正当，就该试它一下；如果不正当，就该打消此念。因为你向我提到的那些考虑，如花钱、名誉和养家等，格黎东啊，实际上都是众人的考虑。他们可以轻易地置人于死地，也可以随随便便地使人复活，只要办得到就干，并不根据道理。而我们则相反，我们是深受道理约束的，一定要像刚才说的那样，慎重考虑我们行事是否正当，如向那些愿意把我放跑的人花钱和致谢，以及自己把自己放跑和接受别人释放之类，要想想自己做这些事实际上是否不正当。如果看出自己这样做只能是不正当的，就不应当考虑自己如果留在这里静坐不动是否必定要死，是否必定要受其他的罪，只该考虑自己这样做不正当的问题。",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 根据我们所同意的看法，我们首先应该研究一下，我试图未得雅典人同意释放便离开此地是不是正当。如果正当，就该试它一下；如果不正当，就该打消此念。因为你向我提到的那些考虑，如花钱、名誉和养家等，格黎东啊，实际上都是众人的考虑。他们可以轻易地置人于死地，也可以随随便便地使人复活，只要办得到就干，并不根据道理。而我们则相反，我们是深受道理约束的，一定要像刚才说的那样，慎重考虑我们行事是否正当，如向那些愿意把我放跑的人花钱和致谢，以及自己把自己放跑和接受别人释放之类，要想想自己做这些事实际上是否不正当。如果看出自己这样做只能是不正当的，就不应当考虑自己如果留在这里静坐不动是否必定要死，是否必定要受其他的罪，只该考虑自己这样做不正当的问题。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p35",
+      "text": "格 黎 东 我想你说得对，苏格拉底。你看我们该怎么办。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 我想你说得对，苏格拉底。你看我们该怎么办。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p36",
+      "text": "苏格拉底 我的好朋友啊，我们一块儿研究吧。要是你对我所说的话有异议，请提出反驳吧，我会听的。要不，你就别再向我重复那句话，要我违背雅典人的意愿跑掉。我虽然很愿意你把我说服，使我照你的意思办，却只能说服，不能勉强。现在请你看看我开始这一考察的方式是否令你满意，请你尽可能诚恳地回答我的问题。",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 我的好朋友啊，我们一块儿研究吧。要是你对我所说的话有异议，请提出反驳吧，我会听的。要不，你就别再向我重复那句话，要我违背雅典人的意愿跑掉。我虽然很愿意你把我说服，使我照你的意思办，却只能说服，不能勉强。现在请你看看我开始这一考察的方式是否令你满意，请你尽可能诚恳地回答我的问题。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p37",
+      "text": "格 黎 东 我试试看。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 我试试看。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p38",
+      "text": "苏格拉底 请告诉我：是不是我们在任何情况下都不能容许故意做不正当的事？是不是在某某情况下可做，在别的情况下不许做？是不是像我们以前曾经多次同意，而且现在刚刚说过的那样，在任何情况下做不正当的事都是既不好又不美的？是不是我们以前的那些主张在这几天里都已经全部推翻了？格黎东啊，我们这些上年纪的人是不是没有觉察到，我们的那些严肃的交谈并不比儿童高明？是不是我们说过的全都确定不移，不管人们是否同意？是不是我们必须承受一些比死刑更加重或者比较轻的刑罚？是不是做不正当的事在任何情况下对于做此事的人都不可避免地是邪恶的、可耻的？我们要不要这样说？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 请告诉我：是不是我们在任何情况下都不能容许故意做不正当的事？是不是在某某情况下可做，在别的情况下不许做？是不是像我们以前曾经多次同意，而且现在刚刚说过的那样，在任何情况下做不正当的事都是既不好又不美的？是不是我们以前的那些主张在这几天里都已经全部推翻了？格黎东啊，我们这些上年纪的人是不是没有觉察到，我们的那些严肃的交谈并不比儿童高明？是不是我们说过的全都确定不移，不管人们是否同意？是不是我们必须承受一些比死刑更加重或者比较轻的刑罚？是不是做不正当的事在任何情况下对于做此事的人都不可避免地是邪恶的、可耻的？我们要不要这样说？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p39",
+      "text": "格 黎 东 要。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 要。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p40",
+      "text": "苏格拉底 那就无论如何不能做不正当的事了。",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 那就无论如何不能做不正当的事了。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p41",
+      "text": "格 黎 东 当然不能。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 当然不能。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p42",
+      "text": "苏格拉底 既然根本不能做不正当的事，那就连那个人们所相信的以不正当报不正当也不行吗？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 既然根本不能做不正当的事，那就连那个人们所相信的以不正当报不正当也不行吗？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p43",
+      "text": "格 黎 东 看来不行。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 看来不行。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p44",
+      "text": "苏格拉底 怎么啦，对人做坏事行不行？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 怎么啦，对人做坏事行不行？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p45",
+      "text": "格 黎 东 当然不行，苏格拉底。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 当然不行，苏格拉底。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p46",
+      "text": "苏格拉底 怎么啦？以坏报坏，像人们所说的那样，是正当的，还是不正当的？",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 怎么啦？以坏报坏，像人们所说的那样，是正当的，还是不正当的？",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p47",
+      "text": "格 黎 东 当然不正当。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 当然不正当。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p48",
+      "text": "苏格拉底 因为对人做坏事跟做不正当的事是一样的。",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 因为对人做坏事跟做不正当的事是一样的。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p49",
+      "text": "格 黎 东 你说得对。",
+      "block": {
+        "runs": [
+          {
+            "text": "格 黎 东 你说得对。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    },
+    {
+      "id": "lesson-1523:p50",
+      "text": "苏格拉底 那就既不能以坏报坏，也不能对人做不正当的事，不管人家对我们做的什么事。",
+      "block": {
+        "runs": [
+          {
+            "text": "苏格拉底 那就既不能以坏报坏，也不能对人做不正当的事，不管人家对我们做的什么事。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "照你说的那样做：格黎东一早就来到囚禁苏格拉底的狱所，苦劝苏格拉底逃走，并提出三个理由：第一，作为苏格拉底的朋友，他们不用花多少钱就能救其出狱，在这种情况下，即使苏格拉底是自己甘愿服从法律，但在不知情的外人来看，大多数人都会认为是他的朋友未尽心尽力解救他；第二，即使离开雅典，还有很多地方、很多朋友会欢迎苏格拉底的到来；第三，甘愿服刑的做法不仅伤害了朋友，满足了仇人，还遗弃了子女，未能尽到为人父母的责任。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10203-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "拳拳服膺（yīng）：诚恳地信奉。拳拳，诚恳的样子。服膺，牢牢记在心里、信服。膺，胸。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10203-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "恫吓（dònghè）：威吓，吓唬。恫，恐吓。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-10203-3"
+    }
+  ],
+  "resources": [
+    {
+      "disposition": "system-browser",
+      "href": "https://sites.google.com/view/pkuschool/xbz000/xbz001/xbz008",
+      "kind": "link",
+      "label": "https://sites.google.com/view/pkuschool/xbz000/xbz001/xbz008",
+      "postId": null,
+      "postNumber": 1,
+      "sourceUrl": "https://sites.google.com/view/pkuschool/xbz000/xbz001/xbz008"
+    }
+  ],
+  "source": "https://forum.rdfzer.com/t/topic/1523",
+  "objectives": [
+    {
+      "id": "lesson-1523:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1523:p1",
+        "lesson-1523:p2",
+        "lesson-1523:p3",
+        "lesson-1523:p4",
+        "lesson-1523:p5",
+        "lesson-1523:p6",
+        "lesson-1523:p7",
+        "lesson-1523:p8",
+        "lesson-1523:p9",
+        "lesson-1523:p10",
+        "lesson-1523:p11",
+        "lesson-1523:p12",
+        "lesson-1523:p13",
+        "lesson-1523:p14",
+        "lesson-1523:p15",
+        "lesson-1523:p16",
+        "lesson-1523:p17",
+        "lesson-1523:p18",
+        "lesson-1523:p19",
+        "lesson-1523:p20",
+        "lesson-1523:p21",
+        "lesson-1523:p22",
+        "lesson-1523:p23",
+        "lesson-1523:p24",
+        "lesson-1523:p25",
+        "lesson-1523:p26",
+        "lesson-1523:p27",
+        "lesson-1523:p28",
+        "lesson-1523:p29",
+        "lesson-1523:p30",
+        "lesson-1523:p31",
+        "lesson-1523:p32",
+        "lesson-1523:p33",
+        "lesson-1523:p34",
+        "lesson-1523:p35",
+        "lesson-1523:p36",
+        "lesson-1523:p37",
+        "lesson-1523:p38",
+        "lesson-1523:p39",
+        "lesson-1523:p40",
+        "lesson-1523:p41",
+        "lesson-1523:p42",
+        "lesson-1523:p43",
+        "lesson-1523:p44",
+        "lesson-1523:p45",
+        "lesson-1523:p46",
+        "lesson-1523:p47",
+        "lesson-1523:p48",
+        "lesson-1523:p49",
+        "lesson-1523:p50"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1523:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1523:p1",
+        "lesson-1523:p2",
+        "lesson-1523:p3",
+        "lesson-1523:p4",
+        "lesson-1523:p5",
+        "lesson-1523:p6",
+        "lesson-1523:p7",
+        "lesson-1523:p8",
+        "lesson-1523:p9",
+        "lesson-1523:p10",
+        "lesson-1523:p11",
+        "lesson-1523:p12",
+        "lesson-1523:p13",
+        "lesson-1523:p14",
+        "lesson-1523:p15",
+        "lesson-1523:p16",
+        "lesson-1523:p17",
+        "lesson-1523:p18",
+        "lesson-1523:p19",
+        "lesson-1523:p20",
+        "lesson-1523:p21",
+        "lesson-1523:p22",
+        "lesson-1523:p23",
+        "lesson-1523:p24",
+        "lesson-1523:p25",
+        "lesson-1523:p26",
+        "lesson-1523:p27",
+        "lesson-1523:p28",
+        "lesson-1523:p29",
+        "lesson-1523:p30",
+        "lesson-1523:p31",
+        "lesson-1523:p32",
+        "lesson-1523:p33",
+        "lesson-1523:p34",
+        "lesson-1523:p35",
+        "lesson-1523:p36",
+        "lesson-1523:p37",
+        "lesson-1523:p38",
+        "lesson-1523:p39",
+        "lesson-1523:p40",
+        "lesson-1523:p41",
+        "lesson-1523:p42",
+        "lesson-1523:p43",
+        "lesson-1523:p44",
+        "lesson-1523:p45",
+        "lesson-1523:p46",
+        "lesson-1523:p47",
+        "lesson-1523:p48",
+        "lesson-1523:p49",
+        "lesson-1523:p50"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1523:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1523:p1",
+        "lesson-1523:p2",
+        "lesson-1523:p3",
+        "lesson-1523:p4",
+        "lesson-1523:p5",
+        "lesson-1523:p6",
+        "lesson-1523:p7",
+        "lesson-1523:p8",
+        "lesson-1523:p9",
+        "lesson-1523:p10",
+        "lesson-1523:p11",
+        "lesson-1523:p12",
+        "lesson-1523:p13",
+        "lesson-1523:p14",
+        "lesson-1523:p15",
+        "lesson-1523:p16",
+        "lesson-1523:p17",
+        "lesson-1523:p18",
+        "lesson-1523:p19",
+        "lesson-1523:p20",
+        "lesson-1523:p21",
+        "lesson-1523:p22",
+        "lesson-1523:p23",
+        "lesson-1523:p24",
+        "lesson-1523:p25",
+        "lesson-1523:p26",
+        "lesson-1523:p27",
+        "lesson-1523:p28",
+        "lesson-1523:p29",
+        "lesson-1523:p30",
+        "lesson-1523:p31",
+        "lesson-1523:p32",
+        "lesson-1523:p33",
+        "lesson-1523:p34",
+        "lesson-1523:p35",
+        "lesson-1523:p36",
+        "lesson-1523:p37",
+        "lesson-1523:p38",
+        "lesson-1523:p39",
+        "lesson-1523:p40",
+        "lesson-1523:p41",
+        "lesson-1523:p42",
+        "lesson-1523:p43",
+        "lesson-1523:p44",
+        "lesson-1523:p45",
+        "lesson-1523:p46",
+        "lesson-1523:p47",
+        "lesson-1523:p48",
+        "lesson-1523:p49",
+        "lesson-1523:p50"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1523:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1523:p1",
+        "lesson-1523:p2",
+        "lesson-1523:p3",
+        "lesson-1523:p4",
+        "lesson-1523:p5",
+        "lesson-1523:p6",
+        "lesson-1523:p7",
+        "lesson-1523:p8",
+        "lesson-1523:p9",
+        "lesson-1523:p10",
+        "lesson-1523:p11",
+        "lesson-1523:p12",
+        "lesson-1523:p13",
+        "lesson-1523:p14",
+        "lesson-1523:p15",
+        "lesson-1523:p16",
+        "lesson-1523:p17",
+        "lesson-1523:p18",
+        "lesson-1523:p19",
+        "lesson-1523:p20",
+        "lesson-1523:p21",
+        "lesson-1523:p22",
+        "lesson-1523:p23",
+        "lesson-1523:p24",
+        "lesson-1523:p25",
+        "lesson-1523:p26",
+        "lesson-1523:p27",
+        "lesson-1523:p28",
+        "lesson-1523:p29",
+        "lesson-1523:p30",
+        "lesson-1523:p31",
+        "lesson-1523:p32",
+        "lesson-1523:p33",
+        "lesson-1523:p34",
+        "lesson-1523:p35",
+        "lesson-1523:p36",
+        "lesson-1523:p37",
+        "lesson-1523:p38",
+        "lesson-1523:p39",
+        "lesson-1523:p40",
+        "lesson-1523:p41",
+        "lesson-1523:p42",
+        "lesson-1523:p43",
+        "lesson-1523:p44",
+        "lesson-1523:p45",
+        "lesson-1523:p46",
+        "lesson-1523:p47",
+        "lesson-1523:p48",
+        "lesson-1523:p49",
+        "lesson-1523:p50"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1523:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1523:p1",
+        "lesson-1523:p2",
+        "lesson-1523:p3",
+        "lesson-1523:p4",
+        "lesson-1523:p5",
+        "lesson-1523:p6",
+        "lesson-1523:p7",
+        "lesson-1523:p8",
+        "lesson-1523:p9",
+        "lesson-1523:p10",
+        "lesson-1523:p11",
+        "lesson-1523:p12",
+        "lesson-1523:p13",
+        "lesson-1523:p14",
+        "lesson-1523:p15",
+        "lesson-1523:p16",
+        "lesson-1523:p17",
+        "lesson-1523:p18",
+        "lesson-1523:p19",
+        "lesson-1523:p20",
+        "lesson-1523:p21",
+        "lesson-1523:p22",
+        "lesson-1523:p23",
+        "lesson-1523:p24",
+        "lesson-1523:p25",
+        "lesson-1523:p26",
+        "lesson-1523:p27",
+        "lesson-1523:p28",
+        "lesson-1523:p29",
+        "lesson-1523:p30",
+        "lesson-1523:p31",
+        "lesson-1523:p32",
+        "lesson-1523:p33",
+        "lesson-1523:p34",
+        "lesson-1523:p35",
+        "lesson-1523:p36",
+        "lesson-1523:p37",
+        "lesson-1523:p38",
+        "lesson-1523:p39",
+        "lesson-1523:p40",
+        "lesson-1523:p41",
+        "lesson-1523:p42",
+        "lesson-1523:p43",
+        "lesson-1523:p44",
+        "lesson-1523:p45",
+        "lesson-1523:p46",
+        "lesson-1523:p47",
+        "lesson-1523:p48",
+        "lesson-1523:p49",
+        "lesson-1523:p50"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1523:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1523:p1",
+        "lesson-1523:p2",
+        "lesson-1523:p3",
+        "lesson-1523:p4",
+        "lesson-1523:p5",
+        "lesson-1523:p6",
+        "lesson-1523:p7",
+        "lesson-1523:p8",
+        "lesson-1523:p9",
+        "lesson-1523:p10",
+        "lesson-1523:p11",
+        "lesson-1523:p12",
+        "lesson-1523:p13",
+        "lesson-1523:p14",
+        "lesson-1523:p15",
+        "lesson-1523:p16",
+        "lesson-1523:p17",
+        "lesson-1523:p18",
+        "lesson-1523:p19",
+        "lesson-1523:p20",
+        "lesson-1523:p21",
+        "lesson-1523:p22",
+        "lesson-1523:p23",
+        "lesson-1523:p24",
+        "lesson-1523:p25",
+        "lesson-1523:p26",
+        "lesson-1523:p27",
+        "lesson-1523:p28",
+        "lesson-1523:p29",
+        "lesson-1523:p30",
+        "lesson-1523:p31",
+        "lesson-1523:p32",
+        "lesson-1523:p33",
+        "lesson-1523:p34",
+        "lesson-1523:p35",
+        "lesson-1523:p36",
+        "lesson-1523:p37",
+        "lesson-1523:p38",
+        "lesson-1523:p39",
+        "lesson-1523:p40",
+        "lesson-1523:p41",
+        "lesson-1523:p42",
+        "lesson-1523:p43",
+        "lesson-1523:p44",
+        "lesson-1523:p45",
+        "lesson-1523:p46",
+        "lesson-1523:p47",
+        "lesson-1523:p48",
+        "lesson-1523:p49",
+        "lesson-1523:p50"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1523:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1523:p1",
+        "lesson-1523:p2",
+        "lesson-1523:p3",
+        "lesson-1523:p4",
+        "lesson-1523:p5",
+        "lesson-1523:p6",
+        "lesson-1523:p7",
+        "lesson-1523:p8",
+        "lesson-1523:p9",
+        "lesson-1523:p10",
+        "lesson-1523:p11",
+        "lesson-1523:p12",
+        "lesson-1523:p13",
+        "lesson-1523:p14",
+        "lesson-1523:p15",
+        "lesson-1523:p16",
+        "lesson-1523:p17",
+        "lesson-1523:p18",
+        "lesson-1523:p19",
+        "lesson-1523:p20",
+        "lesson-1523:p21",
+        "lesson-1523:p22",
+        "lesson-1523:p23",
+        "lesson-1523:p24",
+        "lesson-1523:p25",
+        "lesson-1523:p26",
+        "lesson-1523:p27",
+        "lesson-1523:p28",
+        "lesson-1523:p29",
+        "lesson-1523:p30",
+        "lesson-1523:p31",
+        "lesson-1523:p32",
+        "lesson-1523:p33",
+        "lesson-1523:p34",
+        "lesson-1523:p35",
+        "lesson-1523:p36",
+        "lesson-1523:p37",
+        "lesson-1523:p38",
+        "lesson-1523:p39",
+        "lesson-1523:p40",
+        "lesson-1523:p41",
+        "lesson-1523:p42",
+        "lesson-1523:p43",
+        "lesson-1523:p44",
+        "lesson-1523:p45",
+        "lesson-1523:p46",
+        "lesson-1523:p47",
+        "lesson-1523:p48",
+        "lesson-1523:p49",
+        "lesson-1523:p50"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1523:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1523:p1",
+        "lesson-1523:p2",
+        "lesson-1523:p3",
+        "lesson-1523:p4",
+        "lesson-1523:p5",
+        "lesson-1523:p6",
+        "lesson-1523:p7",
+        "lesson-1523:p8",
+        "lesson-1523:p9",
+        "lesson-1523:p10",
+        "lesson-1523:p11",
+        "lesson-1523:p12",
+        "lesson-1523:p13",
+        "lesson-1523:p14",
+        "lesson-1523:p15",
+        "lesson-1523:p16",
+        "lesson-1523:p17",
+        "lesson-1523:p18",
+        "lesson-1523:p19",
+        "lesson-1523:p20",
+        "lesson-1523:p21",
+        "lesson-1523:p22",
+        "lesson-1523:p23",
+        "lesson-1523:p24",
+        "lesson-1523:p25",
+        "lesson-1523:p26",
+        "lesson-1523:p27",
+        "lesson-1523:p28",
+        "lesson-1523:p29",
+        "lesson-1523:p30",
+        "lesson-1523:p31",
+        "lesson-1523:p32",
+        "lesson-1523:p33",
+        "lesson-1523:p34",
+        "lesson-1523:p35",
+        "lesson-1523:p36",
+        "lesson-1523:p37",
+        "lesson-1523:p38",
+        "lesson-1523:p39",
+        "lesson-1523:p40",
+        "lesson-1523:p41",
+        "lesson-1523:p42",
+        "lesson-1523:p43",
+        "lesson-1523:p44",
+        "lesson-1523:p45",
+        "lesson-1523:p46",
+        "lesson-1523:p47",
+        "lesson-1523:p48",
+        "lesson-1523:p49",
+        "lesson-1523:p50"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "legacy:effect:lesson-1523:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1523:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1523:interaction:contextWords",
+        "resourceVersion": "sha256:27448de733dae6bc388782fe88b037f1685d1e0ddccd59d4bca37021e74efa8f",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1523:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1523:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1523:interaction:revision",
+        "resourceVersion": "sha256:67283781978364243539b013217598184adbe634a63f9add132934b9c544c370",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1523:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1523:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1523:interaction:structure",
+        "resourceVersion": "sha256:b9cc0bf0e758819305226457b2183a2029c35ee0c318dcde9c18fcb324b139a3",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1523:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1523:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1523:interaction:evaluation",
+        "resourceVersion": "sha256:0ca578115ce373500aa3117312f4e2521bda53cc967af3e331add546125e039a",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1523:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1523:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1523:interaction:authorQuestion",
+        "resourceVersion": "sha256:06a9a64fa10401a389aefd54a82a6ada476964421143caea3eb85f1d81883122",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    }
+  ],
+  "vocabulary": [],
+  "legacy": {
+    "lessonId": "lesson-1523",
+    "title": "5 * 人应当坚持正义/ 柏拉图",
+    "mode": "argument",
+    "legacyTracks": [
+      "context",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "初讀評議",
+        "",
+        10
+      ],
+      [
+        "read",
+        "通讀正文",
+        "",
+        10
+      ],
+      [
+        "revision",
+        "字句之改",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "論證骨架",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "觀點評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "叩問作者",
+        "",
+        10
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1523:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1523:interaction:contextWords",
+        "resourceVersion": "sha256:27448de733dae6bc388782fe88b037f1685d1e0ddccd59d4bca37021e74efa8f",
+        "questionKind": "contextWords",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1523:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1523:interaction:revision",
+        "resourceVersion": "sha256:67283781978364243539b013217598184adbe634a63f9add132934b9c544c370",
+        "questionKind": "revision",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1523:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1523:interaction:structure",
+        "resourceVersion": "sha256:b9cc0bf0e758819305226457b2183a2029c35ee0c318dcde9c18fcb324b139a3",
+        "questionKind": "structure",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1523:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1523:interaction:evaluation",
+        "resourceVersion": "sha256:0ca578115ce373500aa3117312f4e2521bda53cc967af3e331add546125e039a",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      },
+      {
+        "resourceKey": "effect:lesson-1523:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1523:interaction:authorQuestion",
+        "resourceVersion": "sha256:06a9a64fa10401a389aefd54a82a6ada476964421143caea3eb85f1d81883122",
+        "questionKind": "authorQuestion",
+        "scoringRole": "a_plus_gate",
+        "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
+        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1523",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1523:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1523:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1523:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1523",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1523:interaction:contextWords",
+        "completionKey": "effect:lesson-1523:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1523:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1523",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1523:interaction:structure",
+        "completionKey": "effect:lesson-1523:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1523:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1523",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1523:interaction:revision",
+        "completionKey": "effect:lesson-1523:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1523:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "a_plus_gate",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1523:interaction:contextWords",
+        "sourceVersion": "sha256:27448de733dae6bc388782fe88b037f1685d1e0ddccd59d4bca37021e74efa8f",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1523:interaction:revision",
+        "sourceVersion": "sha256:67283781978364243539b013217598184adbe634a63f9add132934b9c544c370",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1523:interaction:structure",
+        "sourceVersion": "sha256:b9cc0bf0e758819305226457b2183a2029c35ee0c318dcde9c18fcb324b139a3",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1523:interaction:evaluation",
+        "sourceVersion": "sha256:0ca578115ce373500aa3117312f4e2521bda53cc967af3e331add546125e039a",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1523:interaction:authorQuestion",
+        "sourceVersion": "sha256:06a9a64fa10401a389aefd54a82a6ada476964421143caea3eb85f1d81883122",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1523:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1523:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1523:interaction:contextWords",
+        "completionKey": "effect:lesson-1523:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1523:interaction:structure",
+        "completionKey": "effect:lesson-1523:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1523:interaction:revision",
+        "completionKey": "effect:lesson-1523:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [],
+    "sourceLesson": "data/lessons/lesson-1523.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "author-simulation",
+        "attributionStatus": "source-toc-attributed"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 5,
+        "formativeCount": 4,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-aee75217504ce0dfd61c",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [
+    {
+      "id": "lesson-1523:p51",
+      "text": "公元前399 年，雅典法庭以“不敬神明”的罪名判处哲学家苏格拉底死刑。判决执行前夕，苏格拉底的朋友格黎东潜入监狱，试图劝说他越狱逃跑。苏格拉底不赞同逃跑，他针对格黎东的建议，抛出了“正道”“道义”“道理”“正当”等一系列他所坚守的“正义”理念，层层铺垫，步步设问，深入浅出地阐述了自己唯正义是从的道德信念，说服格黎东放弃劝说自己越狱的努力。学习本文，要把握上述理念的内涵，理解苏格拉底据此提出的观点，探讨他是如何一步一步使格黎东的思路进入自己的逻辑轨道的，从而学习一种既以理服人又生动活泼的劝说艺术。\n苏格拉底将“正当”“道义”视为绝对的原则，舍生取义，令人感动。但是，永恒的“正义”真的存在吗？它有没有时代性？是不是一定社会历史条件的产物？不妨像苏格拉底一样追问这些问题，与先贤展开思想的对话，丰富自己的精神世界。\n这里仅节选了苏格拉底长篇论述的序幕和铺垫部分，更多精彩的论辩还在后面，建议课外阅读全篇内容，更完整地把握苏格拉底的论辩逻辑。",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "公元前399 年，雅典法庭以“不敬神明”的罪名判处哲学家苏格拉底死刑。判决执行前夕，苏格拉底的朋友格黎东潜入监狱，试图劝说他越狱逃跑。苏格拉底不赞同逃跑，他针对格黎东的建议，抛出了“正道”“道义”“道理”“正当”等一系列他所坚守的“正义”理念，层层铺垫，步步设问，深入浅出地阐述了自己唯正义是从的道德信念，说服格黎东放弃劝说自己越狱的努力。学习本文，要把握上述理念的内涵，理解苏格拉底据此提出的观点，探讨他是如何一步一步使格黎东的思路进入自己的逻辑轨道的，从而学习一种既以理服人又生动活泼的劝说艺术。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "苏格拉底将“正当”“道义”视为绝对的原则，舍生取义，令人感动。但是，永恒的“正义”真的存在吗？它有没有时代性？是不是一定社会历史条件的产物？不妨像苏格拉底一样追问这些问题，与先贤展开思想的对话，丰富自己的精神世界。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "这里仅节选了苏格拉底长篇论述的序幕和铺垫部分，更多精彩的论辩还在后面，建议课外阅读全篇内容，更完整地把握苏格拉底的论辩逻辑。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      },
+      "blockIndex": 50,
+      "blockSha256": "9c3838ac45ad4456d12516b92274209ed949fc7a0140e4def95ef66246558530",
+      "role": "commentary",
+      "label": "原課導讀與教學參考（非本篇正文）",
+      "source": "data/reader-documents/lesson-1523.json#main.blocks[50]",
+      "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+    }
+  ],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "节选自《柏拉图对话集·格黎东篇》（商务印书馆2004 年版）。\n\n王太庆译。略有改动。题目是编者加的。\n\n柏拉图（前427—前347），古希腊哲学家，与他的老师苏格拉底、学生亚里士多德并称为古希腊“三哲”。《柏拉图对话集》是他的主要著作，其中记载了一部分苏格拉底的思想，大部分则是柏拉图本人的见解。\n\n苏格拉底",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "type": "quote"
+    }
+  ],
+  "guidance": [],
+  "media": [
+    {
+      "alt": "",
+      "bytes": 59787,
+      "finalUrl": "https://files.rdfzer.com/original/2X/e/e7a1448504b113aad85032e099f71658e621f603.jpeg",
+      "height": 339,
+      "id": "media-b04bf2a12f8baf0b02f3",
+      "mediaType": "image/jpeg",
+      "nativeDisposition": "verified-in-app",
+      "receiptCollectedAt": "2026-07-30T01:10:43.464Z",
+      "receiptRequired": true,
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29",
+      "sha256": "0dc955c0b047399985fb58c0c1b01329d2d709e98962c760ff56abdebfd3de19",
+      "sourceUrl": "https://files.rdfzer.com/original/2X/e/e7a1448504b113aad85032e099f71658e621f603.jpeg",
+      "webDisposition": "source-url",
+      "width": 624
+    }
+  ],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1523.json",
+    "lessonSha256": "dd3f6e78d09d4531fd2d08a473bee1f45307155dcf12813ee92c63ea27c134d2",
+    "reader": "data/reader-documents/lesson-1523.json",
+    "readerSha256": "c48e6aa76e1b52dcaf2a4daaf5d293575ee7ea98456fb69bcb3c1a4044dbf8b3",
+    "sourcePostId": 10203,
+    "sourcePostNumber": 1,
+    "blockCount": 51,
+    "annotationCount": 3,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "author-simulation",
+      "attributionStatus": "source-toc-attributed"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 5,
+      "formativeCount": 4,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

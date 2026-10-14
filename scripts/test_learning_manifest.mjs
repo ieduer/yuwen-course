@@ -27,23 +27,23 @@ test("manifest is deterministic and byte-current", () => {
   assert.equal(readFileSync(OUTPUT, "utf8"), first);
 });
 
-test("manifest contains only the three exact textbook books", () => {
+test("manifest contains all five exact textbook books with a fixed annual threshold", () => {
   const manifest = buildLearningManifest();
   assert.equal(manifest.schemaVersion, 1);
   assert.equal(manifest.siteKey, "yw");
   assert.equal(manifest.completionKind, "answer_submitted");
   assert.equal(manifest.thresholdPercent, 90);
-  assert.equal(manifest.lessonCount, 101);
-  assert.equal(manifest.itemCount, 869);
-  assert.equal(manifest.manifestVersion, "yw-e310d45b1d81e9ad");
-  assert.equal(manifest.resourceKeyHash, "sha256:e310d45b1d81e9adf6182bd50ea02842daf69a8981aa29ff03b2da30b0846aca");
+  assert.equal(manifest.lessonCount, 189);
+  assert.equal(manifest.itemCount, 1633);
+  assert.equal(manifest.manifestVersion, "yw-e8a6b72248be1cd8");
+  assert.equal(manifest.resourceKeyHash, "sha256:e8a6b72248be1cd8af86d37ec66bd4381d1546e8306b36023b145decbf044866");
   assert.deepEqual(manifest.vocabEligibility, {
     policyVersion: "yw-vocab-eligibility-20260730-v1",
     defaultEligibleModes: ["classical", "poetry"],
     exceptionCount: 0,
   });
   assert.deepEqual(manifest.sources.map((source) => source.blockId), BOOK_IDS);
-  assert.deepEqual(manifest.sources.map((source) => source.lessonCount), [28, 36, 37]);
+  assert.deepEqual(manifest.sources.map((source) => source.lessonCount), [49, 39, 28, 36, 37]);
   assert.deepEqual(manifest.exclusions.map((entry) => entry.lessonId).sort(), Object.keys(EXCLUDED_LESSONS).sort());
   assert.equal(manifest.items.some((item) => EXCLUDED_LESSONS[item.sourceId]), false);
 });
@@ -54,8 +54,8 @@ test("vocabulary stays classical-or-poetry and word creation stays poetry-only",
   const modeByLesson = new Map(taxonomy.lessons.map((lesson) => [lesson.id, lesson.mode]));
   const vocabulary = manifest.items.filter((item) => item.questionKind === "vocabulary");
   const wordCreation = manifest.items.filter((item) => item.questionKind === "wordCreation");
-  assert.equal(vocabulary.length, 382);
-  assert.equal(wordCreation.length, 25);
+  assert.equal(vocabulary.length, 723);
+  assert.equal(wordCreation.length, 47);
   assert.equal(
     vocabulary.every((item) => ["classical", "poetry"].includes(modeByLesson.get(item.sourceId))),
     true,

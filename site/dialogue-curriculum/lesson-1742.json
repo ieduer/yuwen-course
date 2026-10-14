@@ -1,0 +1,1573 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "lesson-1742",
+  "title": "10 在《人民报》创刊纪念会上的演说",
+  "mode": "speech-letter",
+  "author": "馬克思、恩格斯（分篇署名）",
+  "persona": {
+    "kind": "source-guide",
+    "notice": "AI 閱讀引導，依據原教材與已署名來源；不冒充作者。",
+    "narratorIsAuthor": false,
+    "rule": "以閱讀引導者身份討論來源，逐一區分作者、引文說話者、人物、譯者與教材編者；不得把代表人物或被引述者冒充作者。",
+    "source": "data/reader-documents/lesson-1742.json#main.blocks[0,5]",
+    "attribution": "同一原課包含馬克思在《人民報》創刊紀念會上的演說及恩格斯在馬克思墓前的講話；分辨兩篇署名，不混為單一作者自述。"
+  },
+  "passages": [
+    {
+      "id": "lesson-1742:p1",
+      "text": "在《人民报》创刊纪念会上的演说\n\n1856年4月14日在伦敦\n\n马克思",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "在《人民报》创刊纪念会上的演说",
+                "type": "text"
+              },
+              {
+                "label": "[1]",
+                "noteId": "footnote-11190-1",
+                "type": "annotation-ref"
+              },
+              {
+                "text": "\n\n1856年4月14日在伦敦\n\n马克思",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      },
+      "attribution": {
+        "author": "馬克思",
+        "work": "在《人民报》创刊纪念会上的演说",
+        "sourceHeading": "lesson-1742:p1"
+      }
+    },
+    {
+      "id": "lesson-1742:p2",
+      "text": "所谓的1848年革命，只不过是一些微不足道的事件，是欧洲社会干硬外壳上的一些细小的裂口和缝隙。但是它们却暴露出了外壳下面的一个无底深渊。在看来似乎坚硬的外表下面，现出了一片汪洋大海，只要它动荡起来，就能把由坚硬岩石构成的大陆撞得粉碎。那些革命吵吵嚷嚷、模模糊糊地宣布了无产阶级解放这个19 世纪的秘密，本世纪革命的秘密。",
+      "block": {
+        "runs": [
+          {
+            "text": "所谓的1848年革命",
+            "type": "text"
+          },
+          {
+            "label": "[2]",
+            "noteId": "footnote-11190-2",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，只不过是一些微不足道的事件，是欧洲社会干硬外壳上的一些细小的裂口和缝隙。但是它们却暴露出了外壳下面的一个无底深渊。在看来似乎坚硬的外表下面，现出了一片汪洋大海，只要它动荡起来，就能把由坚硬岩石构成的大陆撞得粉碎。那些革命吵吵嚷嚷、模模糊糊地宣布了无产阶级解放这个19 世纪的秘密，本世纪革命的秘密。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "attribution": {
+        "author": "馬克思",
+        "work": "在《人民报》创刊纪念会上的演说",
+        "sourceHeading": "lesson-1742:p1"
+      }
+    },
+    {
+      "id": "lesson-1742:p3",
+      "text": "的确，这个社会革命并不是1848 年发明出来的新东西。蒸汽、电力和自动走锭纺纱机甚至是比巴尔贝斯、拉斯拜尔和布朗基诸位公民更危险万分的革命家。但是，尽管我们生活在其中的大气把两万磅重的压力加在每一个人身上，你们可感觉得到吗？同样，欧洲社会在1848年以前也没有感觉到从四面八方包围着它、压抑着它的革命气氛。",
+      "block": {
+        "runs": [
+          {
+            "text": "的确，这个社会革命并不是1848 年发明出来的新东西。蒸汽、电力和自动走锭纺纱机甚至是比巴尔贝斯、拉斯拜尔和布朗基",
+            "type": "text"
+          },
+          {
+            "label": "[3]",
+            "noteId": "footnote-11190-3",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "诸位公民更危险万分的革命家。但是，尽管我们生活在其中的大气把两万磅重的压力加在每一个人身上，你们可感觉得到吗？同样，欧洲社会在1848年以前也没有感觉到从四面八方包围着它、压抑着它的革命气氛。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "attribution": {
+        "author": "馬克思",
+        "work": "在《人民报》创刊纪念会上的演说",
+        "sourceHeading": "lesson-1742:p1"
+      }
+    },
+    {
+      "id": "lesson-1742:p4",
+      "text": "这里有一件可以作为我们19 世纪特征的伟大事实，一件任何政党都不敢否认的事实。一方面产生了以往人类历史上任何一个时代都不能想象的工业和科学的力量；而另一方面却显露出衰颓的征兆，这种衰颓远远超过罗马帝国末期那一切载诸史册的可怕情景。",
+      "block": {
+        "runs": [
+          {
+            "text": "这里有一件可以作为我们19 世纪特征的伟大事实，一件任何政党都不敢否认的事实。一方面产生了以往人类历史上任何一个时代都不能想象的工业和科学的力量；而另一方面却显露出衰颓的征兆，这种衰颓远远超过罗马帝国末期那一切载诸史册的可怕情景。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "attribution": {
+        "author": "馬克思",
+        "work": "在《人民报》创刊纪念会上的演说",
+        "sourceHeading": "lesson-1742:p1"
+      }
+    },
+    {
+      "id": "lesson-1742:p5",
+      "text": "在我们这个时代，每一种事物好像都包含有自己的反面。我们看到，机器具有减少人类劳动和使劳动更有成效的神奇力量，然而却引起了饥饿和过度的疲劳。财富的新源泉，由于某种奇怪的、不可思议的魔力而变成贫困的源泉。技术的胜利，似乎是以道德的败坏为代价换来的。随着人类愈益控制自然，个人却似乎愈益成为别人的奴隶或自身的卑劣行为的奴隶。甚至科学的纯洁光辉仿佛也只能在愚昧无知的黑暗背景上闪耀。我们的一切发明和进步，似乎结果是使物质力量成为有智慧的生命，而人的生命则化为愚钝的物质力量。现代工业和科学为一方与现代贫困和衰颓为另一方的这种对抗，我们时代的生产力与社会关系之间的这种对抗，是显而易见的、不可避免的和毋庸争辩的事实。有些党派可能为此痛哭流涕；另一些党派可能为了要摆脱现代冲突而希望抛开现代技术；还有一些党派可能以为工业上如此巨大的进步要以政治上同样巨大的倒退来补充。可是我们不会认错那个经常在这一切矛盾中出现的狡狯的精灵。我们知道，要使社会的新生力量很好地发挥作用，就只能由新生的人来掌握它们，而这些新生的人就是工人。工人也同机器本身一样，是现代的产物。在那些使资产阶级、贵族和可怜的倒退预言家惊慌失措的现象当中，我们认出了我们的勇敢的朋友好人儿罗宾，这个会迅速刨土的老田鼠、光荣的工兵——革命。英国工人是现代工业的头一个产儿。他们在支援这种工业所引起的社会革命方面肯定是不会落在最后的，这种革命意味着他们的本阶级在全世界的解放，这种革命同资本的统治和雇佣奴隶制具有同样的普遍性质。我知道英国工人阶级从上世纪中叶以来进行了多么英勇的斗争，这些斗争只是因为资产阶级历史学家把它们掩盖起来和隐瞒不说才不为世人所熟悉。为了报复统治阶级的罪行，在中世纪的德国曾有过一种叫作“菲默法庭”的秘密法庭。如果某一所房子画上了一个红十字，大家就知道，这所房子的主人受到了“菲默法庭”的判决。现在，欧洲所有的房子都画上了神秘的红十字。历史本身就是审判官，而无产阶级就是执刑者。",
+      "block": {
+        "runs": [
+          {
+            "text": "在我们这个时代，每一种事物好像都包含有自己的反面。我们看到，机器具有减少人类劳动和使劳动更有成效的神奇力量，然而却引起了饥饿和过度的疲劳。财富的新源泉，由于某种奇怪的、不可思议的魔力而变成贫困的源泉。技术的胜利，似乎是以道德的败坏为代价换来的。随着人类愈益控制自然，个人却似乎愈益成为别人的奴隶或自身的卑劣行为的奴隶。甚至科学的纯洁光辉仿佛也只能在愚昧无知的黑暗背景上闪耀。我们的一切发明和进步，似乎结果是使物质力量成为有智慧的生命，而人的生命则化为愚钝的物质力量。现代工业和科学为一方与现代贫困和衰颓为另一方的这种对抗，我们时代的生产力与社会关系之间的这种对抗，是显而易见的、不可避免的和毋庸争辩的事实。有些党派可能为此痛哭流涕；另一些党派可能为了要摆脱现代冲突而希望抛开现代技术；还有一些党派可能以为工业上如此巨大的进步要以政治上同样巨大的倒退来补充。可是我们不会认错那个经常在这一切矛盾中出现的狡狯的精灵",
+            "type": "text"
+          },
+          {
+            "label": "[4]",
+            "noteId": "footnote-11190-4",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "。我们知道，要使社会的新生力量很好地发挥作用，就只能由新生的人来掌握它们，而这些新生的人就是工人。工人也同机器本身一样，是现代的产物。在那些使资产阶级、贵族和可怜的倒退预言家惊慌失措的现象当中，我们认出了我们的勇敢的朋友好人儿罗宾，这个会迅速刨土的老田鼠、光荣的工兵",
+            "type": "text"
+          },
+          {
+            "label": "[5]",
+            "noteId": "footnote-11190-5",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "——革命。英国工人是现代工业的头一个产儿。他们在支援这种工业所引起的社会革命方面肯定是不会落在最后的，这种革命意味着他们的本阶级在全世界的解放，这种革命同资本的统治和雇佣奴隶制具有同样的普遍性质。我知道英国工人阶级从上世纪中叶以来进行了多么英勇的斗争，这些斗争只是因为资产阶级历史学家把它们掩盖起来和隐瞒不说才不为世人所熟悉。为了报复统治阶级的罪行，在中世纪的德国曾有过一种叫作“菲默法庭",
+            "type": "text"
+          },
+          {
+            "label": "[6]",
+            "noteId": "footnote-11190-6",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "”的秘密法庭。如果某一所房子画上了一个红十字，大家就知道，这所房子的主人受到了“菲默法庭”的判决。现在，欧洲所有的房子都画上了神秘的红十字。历史本身就是审判官，而无产阶级就是执刑者。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "attribution": {
+        "author": "馬克思",
+        "work": "在《人民报》创刊纪念会上的演说",
+        "sourceHeading": "lesson-1742:p1"
+      }
+    },
+    {
+      "id": "lesson-1742:p6",
+      "text": "在马克思墓前的讲话\n\n恩格斯",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "在马克思墓前的讲话",
+                "type": "text"
+              },
+              {
+                "label": "[7]",
+                "noteId": "footnote-11190-7",
+                "type": "annotation-ref"
+              },
+              {
+                "text": "\n\n恩格斯",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      },
+      "attribution": {
+        "author": "恩格斯",
+        "work": "在马克思墓前的讲话",
+        "sourceHeading": "lesson-1742:p6"
+      }
+    },
+    {
+      "id": "lesson-1742:p7",
+      "text": "3 月14 日下午两点三刻，当代最伟大的思想家停止思想了。让他一个人留在房里还不到两分钟，当我们进去的时候，便发现他在安乐椅上安静地睡着了——但已经永远地睡着了。\n\n这个人的逝世，对于欧美战斗的无产阶级，对于历史科学，都是不可估量的损失。这位巨人逝世以后所形成的空白，不久就会使人感觉到。",
+      "block": {
+        "runs": [
+          {
+            "text": "3 月14 日下午两点三刻，当代最伟大的思想家停止思想了。让他一个人留在房里还不到两分钟，当我们进去的时候，便发现他在安乐椅上安静地睡着了——但已经永远地睡着了。\n\n这个人的逝世，对于欧美战斗的无产阶级，对于历史科学，都是不可估量的损失。这位巨人逝世以后所形成的空白，不久就会使人感觉到。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "attribution": {
+        "author": "恩格斯",
+        "work": "在马克思墓前的讲话",
+        "sourceHeading": "lesson-1742:p6"
+      }
+    },
+    {
+      "id": "lesson-1742:p8",
+      "text": "正像达尔文发现有机界的发展规律一样，马克思发现了人类历史的发展规律，即历来为繁芜丛杂的意识形态所掩盖着的一个简单事实：人们首先必须吃、喝、住、穿，然后才能从事政治、科学、艺术、宗教等等；所以，直接的物质的生活资料的生产，从而一个民族或一个时代的一定的经济发展阶段，便构成基础，人们的国家设施、法的观点、艺术以至宗教观念，就是从这个基础上发展起来的，因而，也必须由这个基础来解释，而不是像过去那样做得相反。",
+      "block": {
+        "runs": [
+          {
+            "text": "正像达尔文",
+            "type": "text"
+          },
+          {
+            "label": "[8]",
+            "noteId": "footnote-11190-8",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "发现有机界的发展规律一样，马克思发现了人类历史的发展规律，即历来为繁芜丛杂的意识形态所掩盖着的一个简单事实：人们首先必须吃、喝、住、穿，然后才能从事政治、科学、艺术、宗教等等；所以，直接的物质的生活资料的生产，从而一个民族或一个时代的一定的经济发展阶段，便构成基础，人们的国家设施、法的观点、艺术以至宗教观念，就是从这个基础上发展起来的，因而，也必须由这个基础来解释，而不是像过去那样做得相反。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "attribution": {
+        "author": "恩格斯",
+        "work": "在马克思墓前的讲话",
+        "sourceHeading": "lesson-1742:p6"
+      }
+    },
+    {
+      "id": "lesson-1742:p9",
+      "text": "不仅如此。马克思还发现了现代资本主义生产方式和它所产生的资产阶级社会的特殊的运动规律。由于剩余价值的发现，这里就豁然开朗了，而先前无论资产阶级经济学家或者社会主义批评家所做的一切研究都只是在黑暗中摸索。",
+      "block": {
+        "runs": [
+          {
+            "text": "不仅如此。马克思还发现了现代资本主义生产方式和它所产生的资产阶级社会的特殊的运动规律。由于剩余价值",
+            "type": "text"
+          },
+          {
+            "label": "[9]",
+            "noteId": "footnote-11190-9",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的发现，这里就豁然开朗了，而先前无论资产阶级经济学家或者社会主义批评家所做的一切研究都只是在黑暗中摸索。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "attribution": {
+        "author": "恩格斯",
+        "work": "在马克思墓前的讲话",
+        "sourceHeading": "lesson-1742:p6"
+      }
+    },
+    {
+      "id": "lesson-1742:p10",
+      "text": "一生中能有这样两个发现，该是很够了。即使只能作出一个这样的发现，也已经是幸福的了。但是马克思在他所研究的每一个领域，甚至在数学领域，都有独到的发现，这样的领域是很多的，而且其中任何一个领域他都不是浅尝辄止。",
+      "block": {
+        "runs": [
+          {
+            "text": "一生中能有这样两个发现，该是很够了。即使只能作出一个这样的发现，也已经是幸福的了。但是马克思在他所研究的每一个领域，甚至在数学领域，都有独到的发现，这样的领域是很多的，而且其中任何一个领域他都不是浅尝辄止。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "attribution": {
+        "author": "恩格斯",
+        "work": "在马克思墓前的讲话",
+        "sourceHeading": "lesson-1742:p6"
+      }
+    },
+    {
+      "id": "lesson-1742:p12",
+      "text": "他作为科学家就是这样。但是这在他身上远不是主要的。在马克思看来，科学是一种在历史上起推动作用的、革命的力量。任何一门理论科学中的每一个新发现——它的实际应用也许还根本无法预见——都使马克思感到衷心喜悦，而当他看到那种对工业、对一般历史发展立即产生革命性影响的发现的时候，他的喜悦就非同寻常了。例如，他曾经密切注视电学方面各种发现的进展情况，不久以前，他还密切注视马塞尔·德普勒的发现。",
+      "block": {
+        "runs": [
+          {
+            "text": "他作为科学家就是这样。但是这在他身上远不是主要的。在马克思看来，科学是一种在历史上起推动作用的、革命的力量。任何一门理论科学中的每一个新发现——它的实际应用也许还根本无法预见——都使马克思感到衷心喜悦，而当他看到那种对工业、对一般历史发展立即产生革命性影响的发现的时候，他的喜悦就非同寻常了。例如，他曾经密切注视电学方面各种发现的进展情况，不久以前，他还密切注视马塞尔·德普勒",
+            "type": "text"
+          },
+          {
+            "label": "[10]",
+            "noteId": "footnote-11190-10",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "的发现。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "attribution": {
+        "author": "恩格斯",
+        "work": "在马克思墓前的讲话",
+        "sourceHeading": "lesson-1742:p6"
+      }
+    },
+    {
+      "id": "lesson-1742:p13",
+      "text": "因为马克思首先是一个革命家。他毕生的真正使命，就是以这种或那种方式参加推翻资本主义社会及其所建立的国家设施的事业，参加现代无产阶级的解放事业，正是他第一次使现代无产阶级意识到自身的地位和需要，意识到自身解放的条件。斗争是他的生命要素。很少有人像他那样满腔热情、坚韧不拔和卓有成效地进行斗争。最早的《莱茵报》（1842年），巴黎的《前进报》（1844年），《德意志-布鲁塞尔报》（1847年），《新莱茵报》（1848—1849年），《纽约每日论坛报》（1852—1861年），以及许多富有战斗性的小册子，在巴黎、布鲁塞尔和伦敦各组织中的工作，最后，作为全部活动的顶峰，创立伟大的国际工人协会，——老实说，协会的这位创始人即使没有别的什么建树，单凭这一成果也可以自豪。",
+      "block": {
+        "runs": [
+          {
+            "text": "因为马克思首先是一个革命家。他毕生的真正使命，就是以这种或那种方式参加推翻资本主义社会及其所建立的国家设施的事业，参加现代无产阶级的解放事业，正是他第一次使现代无产阶级意识到自身的地位和需要，意识到自身解放的条件。斗争是他的生命要素。很少有人像他那样满腔热情、坚韧不拔和卓有成效地进行斗争。最早的《莱茵报》",
+            "type": "text"
+          },
+          {
+            "label": "[11]",
+            "noteId": "footnote-11190-11",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "（1842年），巴黎的《前进报》",
+            "type": "text"
+          },
+          {
+            "label": "[12]",
+            "noteId": "footnote-11190-12",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "（1844年），《德意志-布鲁塞尔报》",
+            "type": "text"
+          },
+          {
+            "label": "[13]",
+            "noteId": "footnote-11190-13",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "（1847年），《新莱茵报》",
+            "type": "text"
+          },
+          {
+            "label": "[14]",
+            "noteId": "footnote-11190-14",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "（1848—1849年），《纽约每日论坛报》",
+            "type": "text"
+          },
+          {
+            "label": "[15]",
+            "noteId": "footnote-11190-15",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "（1852—1861年），以及许多富有战斗性的小册子，在巴黎、布鲁塞尔和伦敦各组织中的工作，最后，作为全部活动的顶峰，创立伟大的国际工人协会",
+            "type": "text"
+          },
+          {
+            "label": "[16]",
+            "noteId": "footnote-11190-16",
+            "type": "annotation-ref"
+          },
+          {
+            "text": "，——老实说，协会的这位创始人即使没有别的什么建树，单凭这一成果也可以自豪。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "attribution": {
+        "author": "恩格斯",
+        "work": "在马克思墓前的讲话",
+        "sourceHeading": "lesson-1742:p6"
+      }
+    },
+    {
+      "id": "lesson-1742:p14",
+      "text": "在他逝世了，在整个欧洲和美洲，从西伯利亚矿井到加利福尼亚，千百万革命战友无不对他表示尊敬、爱戴和悼念，而我可以大胆地说：他可能有过许多敌人，但未必有一个私敌。",
+      "block": {
+        "runs": [
+          {
+            "text": "在他逝世了，在整个欧洲和美洲，从西伯利亚矿井到加利福尼亚，千百万革命战友无不对他表示尊敬、爱戴和悼念，而我可以大胆地说：他可能有过许多敌人，但未必有一个私敌。",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "attribution": {
+        "author": "恩格斯",
+        "work": "在马克思墓前的讲话",
+        "sourceHeading": "lesson-1742:p6"
+      }
+    },
+    {
+      "id": "lesson-1742:p15",
+      "text": "他的英名和事业将永垂不朽！",
+      "block": {
+        "runs": [
+          {
+            "text": "他的英名和事业将永垂不朽！",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "attribution": {
+        "author": "恩格斯",
+        "work": "在马克思墓前的讲话",
+        "sourceHeading": "lesson-1742:p6"
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《马克思恩格斯选集》第一卷（人民出版社2012 年版）。中共中央马克思恩格斯列宁斯大林著作编译局编译。原文载于1856 年4 月19 日《人民报》第207 期。《人民报》，英国宪章派的周报，1852 年5 月由宪章运动的领袖之一、马克思和恩格斯的朋友厄·琼斯在伦敦创办。1852 年10 月至1856 年12 月，马克思和恩格斯曾为该报撰稿，并对该报的编辑工作给予帮助。1856 年4 月14 日，马克思作为流亡伦敦的外国革命人士代表参加《人民报》创刊四周年宴会并发表了这篇演说。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-1"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔1848 年革命〕指1848 至1849 年在欧洲许多国家发生的资产阶级革命。1848 年革命打击了欧洲各国的封建专制制度，锻炼了无产阶级和革命群众，对马克思主义和后来欧洲工人运动及社会主义运动的发展有着深远的影响。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-2"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔巴尔贝斯、拉斯拜尔和布朗基〕均为法国革命家，1848 年革命的参加者。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-3"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔狡狯（kuài）的精灵〕和下文的“好人儿罗宾”，都出自莎士比亚喜剧《仲夏夜之梦》：“要是我没有把你认错，你大概便是名叫罗宾好人儿的狡狯的、淘气的精灵了。”指剧作中的重要人物小精灵迫克，他喜欢恶作剧，是剧中矛盾冲突的制造者。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-4"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔这个会迅速刨土的老田鼠、光荣的工兵〕出自莎士比亚悲剧《哈姆莱特》。老国王的鬼魂一连几夜出现，哈姆莱特得知后，与密友霍拉旭和卫兵夜半到城台守候。鬼魂出现，将哈姆莱特引到一边，告知他自己的死因，要他为自己报仇。哈姆莱特要求霍拉旭和卫兵宣誓决不泄露此事。他们手按宝剑，刚说了“宣誓！”，鬼魂便在底下应声说：“宣誓！”一连换了三个地方宣誓都是如此。哈姆莱特于是称赞他是在地下钻得飞快的“老田鼠”和“开路的工兵”。马克思在这里借用“老田鼠”和“工兵”的形象来比喻革命。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-5"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔菲默法庭〕主要在13 至15 世纪间盛行于德国西部威斯特伐利亚等地的一种秘密法庭。“菲默”在中世纪德语方言里是“惩罚”的意思。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-6"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "选自《马克思恩格斯选集》第三卷（人民出版社2012 年版）。马克思于1883 年3 月14 日逝世，3 月17 日安葬于英国伦敦海格特公墓。本文是恩格斯在葬礼上发表的讲话。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-7"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔达尔文（1809—1882）〕英国生物学家，进化论的奠基人。他在《物种起源》一书中提出以自然选择为基础的进化学说。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-8"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔剩余价值〕雇佣工人所创造的被资本家无偿占有的超过劳动力价值的价值。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-9"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔马塞尔·德普勒（1843—1918）〕法国物理学家。他在1882年慕尼黑的电气展览会上，展出了他在米斯巴赫至慕尼黑之间架设的第一条实验性输电线路。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-10"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔《莱茵报》〕1842 年1 月1 日至1843 年3 月31 日在德国科隆出版的日报。1842 年4 月，马克思开始为该报撰稿，同年10 月成为该报编辑。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-11"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔《前进报》〕1844 年1 月至12 月在巴黎出版的德文报纸，每周出两次。1844 年夏天起，在马克思的影响下成为当时最优秀的革命报纸之一，批判普鲁士的反动政策，刊登马克思和恩格斯等人的文章。1844 年12 月因一些工作人员被政府驱逐出法国而停刊。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-12"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔《德意志—布鲁塞尔报》〕侨居布鲁塞尔的德国流亡者创办的报纸。1847 年1 月创刊，1848 年2 月停刊。1847 年9 月起，马克思和恩格斯常为该报撰稿，并实际领导编辑部的工作。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-13"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔《新莱茵报》〕德国无产阶级第一家独立的日报，1848 年6 月1 日至1849 年5 月19 日在科隆出版，主编是马克思。参加编辑部工作的还有恩格斯。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-14"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔《纽约每日论坛报》〕美国的一家日报，1841 年4 月10 日至1924 年在纽约出版。在19 世纪40 至50 年代，该报站在进步的立场上反对奴隶制。马克思为该报供稿，持续了10 年以上，其中很大一部分稿件是他约请恩格斯写的。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-15"
+    },
+    {
+      "blocks": [
+        {
+          "runs": [
+            {
+              "text": "〔国际工人协会〕即第一国际。1864 年创立，1876 年正式宣布解散。马克思和恩格斯所主持的第一国际，领导了各国工人的经济斗争和政治斗争，并同形形色色的反马克思主义流派进行了坚决斗争，促进了各国工人的国际团结。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "noteId": "footnote-11190-16"
+    }
+  ],
+  "resources": [],
+  "source": "https://forum.rdfzer.com/t/topic/1742",
+  "objectives": [
+    {
+      "id": "lesson-1742:context",
+      "domain": "context",
+      "label": "初讀感受／粗讀感悟",
+      "criteria": [
+        "initial_response"
+      ],
+      "rule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1742:p1",
+        "lesson-1742:p2",
+        "lesson-1742:p3",
+        "lesson-1742:p4",
+        "lesson-1742:p5",
+        "lesson-1742:p6",
+        "lesson-1742:p7",
+        "lesson-1742:p8",
+        "lesson-1742:p9",
+        "lesson-1742:p10",
+        "lesson-1742:p12",
+        "lesson-1742:p13",
+        "lesson-1742:p14",
+        "lesson-1742:p15"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1742:read",
+      "domain": "read",
+      "label": "通讀正文",
+      "criteria": [
+        "reading_confirmation"
+      ],
+      "rule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1742:p1",
+        "lesson-1742:p2",
+        "lesson-1742:p3",
+        "lesson-1742:p4",
+        "lesson-1742:p5",
+        "lesson-1742:p6",
+        "lesson-1742:p7",
+        "lesson-1742:p8",
+        "lesson-1742:p9",
+        "lesson-1742:p10",
+        "lesson-1742:p12",
+        "lesson-1742:p13",
+        "lesson-1742:p14",
+        "lesson-1742:p15"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1742:revision",
+      "domain": "revision",
+      "label": "字句之改",
+      "criteria": [
+        "original",
+        "revision",
+        "effect"
+      ],
+      "rule": "原句、增刪調後的句子及效果比較。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1742:p1",
+        "lesson-1742:p2",
+        "lesson-1742:p3",
+        "lesson-1742:p4",
+        "lesson-1742:p5",
+        "lesson-1742:p6",
+        "lesson-1742:p7",
+        "lesson-1742:p8",
+        "lesson-1742:p9",
+        "lesson-1742:p10",
+        "lesson-1742:p12",
+        "lesson-1742:p13",
+        "lesson-1742:p14",
+        "lesson-1742:p15"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1742:structure",
+      "domain": "structure",
+      "label": "文章技法／章法",
+      "criteria": [
+        "choice",
+        "effect",
+        "purpose",
+        "textual_evidence"
+      ],
+      "rule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1742:p1",
+        "lesson-1742:p2",
+        "lesson-1742:p3",
+        "lesson-1742:p4",
+        "lesson-1742:p5",
+        "lesson-1742:p6",
+        "lesson-1742:p7",
+        "lesson-1742:p8",
+        "lesson-1742:p9",
+        "lesson-1742:p10",
+        "lesson-1742:p12",
+        "lesson-1742:p13",
+        "lesson-1742:p14",
+        "lesson-1742:p15"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1742:evaluation",
+      "domain": "evaluation",
+      "label": "篇目評價",
+      "criteria": [
+        "personal_evaluation"
+      ],
+      "rule": "保留自評；不要求正面感受，不加分。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1742:p1",
+        "lesson-1742:p2",
+        "lesson-1742:p3",
+        "lesson-1742:p4",
+        "lesson-1742:p5",
+        "lesson-1742:p6",
+        "lesson-1742:p7",
+        "lesson-1742:p8",
+        "lesson-1742:p9",
+        "lesson-1742:p10",
+        "lesson-1742:p12",
+        "lesson-1742:p13",
+        "lesson-1742:p14",
+        "lesson-1742:p15"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1742:authorQuestion",
+      "domain": "authorQuestion",
+      "label": "叩問作者／遷移追問",
+      "criteria": [
+        "position",
+        "evidence",
+        "transfer"
+      ],
+      "rule": "回應或質疑作品立場，並用文本及當代情境說明。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1742:p1",
+        "lesson-1742:p2",
+        "lesson-1742:p3",
+        "lesson-1742:p4",
+        "lesson-1742:p5",
+        "lesson-1742:p6",
+        "lesson-1742:p7",
+        "lesson-1742:p8",
+        "lesson-1742:p9",
+        "lesson-1742:p10",
+        "lesson-1742:p12",
+        "lesson-1742:p13",
+        "lesson-1742:p14",
+        "lesson-1742:p15"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1742:transfer",
+      "domain": "transfer",
+      "label": "高考關聯",
+      "criteria": [
+        "interpretation",
+        "integration",
+        "transfer"
+      ],
+      "rule": "以原創練習檢驗解釋、整合、分析與遷移；真題須有已核實年份、卷名、題號、原頁。",
+      "prerequisites": [],
+      "sourcePassages": [
+        "lesson-1742:p1",
+        "lesson-1742:p2",
+        "lesson-1742:p3",
+        "lesson-1742:p4",
+        "lesson-1742:p5",
+        "lesson-1742:p6",
+        "lesson-1742:p7",
+        "lesson-1742:p8",
+        "lesson-1742:p9",
+        "lesson-1742:p10",
+        "lesson-1742:p12",
+        "lesson-1742:p13",
+        "lesson-1742:p14",
+        "lesson-1742:p15"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "lesson-1742:shangyou",
+      "domain": "shangyou",
+      "label": "尚友",
+      "criteria": [
+        "change",
+        "evidence",
+        "challenge"
+      ],
+      "rule": "初讀與現在理解的變化、支持證據、認同或質疑；不以同意作者為完成條件。",
+      "prerequisites": [
+        "other_objectives"
+      ],
+      "sourcePassages": [
+        "lesson-1742:p1",
+        "lesson-1742:p2",
+        "lesson-1742:p3",
+        "lesson-1742:p4",
+        "lesson-1742:p5",
+        "lesson-1742:p6",
+        "lesson-1742:p7",
+        "lesson-1742:p8",
+        "lesson-1742:p9",
+        "lesson-1742:p10",
+        "lesson-1742:p12",
+        "lesson-1742:p13",
+        "lesson-1742:p14",
+        "lesson-1742:p15"
+      ],
+      "misconceptions": [
+        "迎合作者不等於理解",
+        "引用不能替代解釋"
+      ],
+      "remediation": "回到一處原句，比較兩種讀法，再請學生獨立改述。"
+    },
+    {
+      "id": "legacy:effect:lesson-1742:interaction:contextWords",
+      "domain": "legacy",
+      "label": "contextWords",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1742:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1742:interaction:contextWords",
+        "resourceVersion": "sha256:a76160af0b08e85119fe56b1d4d96436585a775b5d8240410106d93fdf3d3b3d",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1742:interaction:revision",
+      "domain": "legacy",
+      "label": "revision",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1742:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1742:interaction:revision",
+        "resourceVersion": "sha256:66c9da7467a1f97fedac977cf55a51f853e22b22fc36b9c189305f2471f956d4",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1742:interaction:structure",
+      "domain": "legacy",
+      "label": "structure",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1742:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1742:interaction:structure",
+        "resourceVersion": "sha256:dfce9503f566924245534b31519da8f60568cac1a4ad98d51d70e2b079ed36e8",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1742:interaction:evaluation",
+      "domain": "legacy",
+      "label": "evaluation",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1742:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1742:interaction:evaluation",
+        "resourceVersion": "sha256:c5266413c40126eaa589fd7298b55f2d6ec1840697d6cd4167c91a969fbff9f4",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    },
+    {
+      "id": "legacy:effect:lesson-1742:interaction:authorQuestion",
+      "domain": "legacy",
+      "label": "authorQuestion",
+      "criteria": [
+        "existing_source_assessment"
+      ],
+      "rule": "由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。",
+      "legacy": {
+        "resourceKey": "effect:lesson-1742:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1742:interaction:authorQuestion",
+        "resourceVersion": "sha256:5d4f11325af2483d9a73b045669c2ca097b22285e478c32fc2d21ce0a1cc05d7",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    }
+  ],
+  "vocabulary": [],
+  "legacy": {
+    "lessonId": "lesson-1742",
+    "title": "10 在《人民报》创刊纪念会上的演说",
+    "mode": "speech-letter",
+    "legacyTracks": [
+      "context",
+      "read",
+      "revision",
+      "structure",
+      "evaluation",
+      "authorQuestion"
+    ],
+    "legacyTrackDefinitions": [
+      [
+        "context",
+        "初讀評議",
+        "",
+        10
+      ],
+      [
+        "read",
+        "通讀正文",
+        "",
+        10
+      ],
+      [
+        "revision",
+        "字句之改",
+        "",
+        15
+      ],
+      [
+        "structure",
+        "論證骨架",
+        "",
+        20
+      ],
+      [
+        "evaluation",
+        "觀點評價",
+        "",
+        10
+      ],
+      [
+        "authorQuestion",
+        "叩問作者",
+        "",
+        10
+      ]
+    ],
+    "formal": [
+      {
+        "resourceKey": "effect:lesson-1742:interaction:contextWords",
+        "canonicalUnitId": "yw:lesson-1742:interaction:contextWords",
+        "resourceVersion": "sha256:a76160af0b08e85119fe56b1d4d96436585a775b5d8240410106d93fdf3d3b3d",
+        "questionKind": "contextWords",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1742:interaction:revision",
+        "canonicalUnitId": "yw:lesson-1742:interaction:revision",
+        "resourceVersion": "sha256:66c9da7467a1f97fedac977cf55a51f853e22b22fc36b9c189305f2471f956d4",
+        "questionKind": "revision",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1742:interaction:structure",
+        "canonicalUnitId": "yw:lesson-1742:interaction:structure",
+        "resourceVersion": "sha256:dfce9503f566924245534b31519da8f60568cac1a4ad98d51d70e2b079ed36e8",
+        "questionKind": "structure",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1742:interaction:evaluation",
+        "canonicalUnitId": "yw:lesson-1742:interaction:evaluation",
+        "resourceVersion": "sha256:c5266413c40126eaa589fd7298b55f2d6ec1840697d6cd4167c91a969fbff9f4",
+        "questionKind": "evaluation",
+        "scoringRole": "non_scoring",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      },
+      {
+        "resourceKey": "effect:lesson-1742:interaction:authorQuestion",
+        "canonicalUnitId": "yw:lesson-1742:interaction:authorQuestion",
+        "resourceVersion": "sha256:5d4f11325af2483d9a73b045669c2ca097b22285e478c32fc2d21ce0a1cc05d7",
+        "questionKind": "authorQuestion",
+        "scoringRole": "formative",
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "effectiveFrom": "2026-10-13T02:03:44.252Z",
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+      }
+    ],
+    "formative": [
+      {
+        "lessonId": "lesson-1742",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1742:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1742:interaction:authorQuestion#authorQuestion",
+        "interactionKey": "authorQuestion",
+        "resourceKey": "effect:lesson-1742:interaction:authorQuestion",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1742",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1742:interaction:contextWords",
+        "completionKey": "effect:lesson-1742:interaction:contextWords#contextWords",
+        "interactionKey": "contextWords",
+        "resourceKey": "effect:lesson-1742:interaction:contextWords",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1742",
+        "competencyTag": "comprehension",
+        "itemKey": "formal:effect:lesson-1742:interaction:structure",
+        "completionKey": "effect:lesson-1742:interaction:structure#structure",
+        "interactionKey": "structure",
+        "resourceKey": "effect:lesson-1742:interaction:structure",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      },
+      {
+        "lessonId": "lesson-1742",
+        "competencyTag": "syntax",
+        "itemKey": "formal:effect:lesson-1742:interaction:revision",
+        "completionKey": "effect:lesson-1742:interaction:revision#revision",
+        "interactionKey": "revision",
+        "resourceKey": "effect:lesson-1742:interaction:revision",
+        "sourceKind": "formal_learning_manifest",
+        "answerAuthority": "source_assessment",
+        "scoringRole": "formative",
+        "active": true
+      }
+    ],
+    "vocabularyIds": [],
+    "studyGuide": [],
+    "sourceGaps": [],
+    "sourceTasks": [],
+    "requirementMappings": [
+      {
+        "requirementId": "effect:lesson-1742:interaction:contextWords",
+        "sourceVersion": "sha256:a76160af0b08e85119fe56b1d4d96436585a775b5d8240410106d93fdf3d3b3d",
+        "source": "formal",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1742:interaction:revision",
+        "sourceVersion": "sha256:66c9da7467a1f97fedac977cf55a51f853e22b22fc36b9c189305f2471f956d4",
+        "source": "formal",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "原句、增刪調後的句子及效果比較。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1742:interaction:structure",
+        "sourceVersion": "sha256:dfce9503f566924245534b31519da8f60568cac1a4ad98d51d70e2b079ed36e8",
+        "source": "formal",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1742:interaction:evaluation",
+        "sourceVersion": "sha256:c5266413c40126eaa589fd7298b55f2d6ec1840697d6cd4167c91a969fbff9f4",
+        "source": "formal",
+        "dialogueDomain": "evaluation",
+        "conversationEquivalent": "保留自評；不要求正面感受，不加分。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "original-non-scoring-self-report-bridged"
+      },
+      {
+        "requirementId": "effect:lesson-1742:interaction:authorQuestion",
+        "sourceVersion": "sha256:5d4f11325af2483d9a73b045669c2ca097b22285e478c32fc2d21ce0a1cc05d7",
+        "source": "formal",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "evidenceRule": "保留既有題意、輸入格式與服務端 rubric；新回合的引文、判準與原文必須可核對。舊達標證據不重考、不重評。",
+        "storage": "original source submissions/evaluations/outbox + dialogue turns/events; historical grades unchanged; new mastery separate",
+        "status": "student-quote-confirmation-original-rubric-bridged"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1742:interaction:authorQuestion",
+        "completionKey": "effect:lesson-1742:interaction:authorQuestion#authorQuestion",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "authorQuestion",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1742:interaction:contextWords",
+        "completionKey": "effect:lesson-1742:interaction:contextWords#contextWords",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "context",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1742:interaction:structure",
+        "completionKey": "effect:lesson-1742:interaction:structure#structure",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "structure",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      },
+      {
+        "requirementId": "formal:effect:lesson-1742:interaction:revision",
+        "completionKey": "effect:lesson-1742:interaction:revision#revision",
+        "source": "formal_learning_manifest",
+        "dialogueDomain": "revision",
+        "conversationEquivalent": "引用同一 formal resource 的對話證據，不重複計分。",
+        "evidenceRule": "沿用 completionKey、answerAuthority、semanticRevision；不以次數或 AI 讚美判定。",
+        "storage": "existing formative/source records unchanged; dialogue_assessments references",
+        "status": "same-original-formal-receipt-no-duplicate-score"
+      }
+    ],
+    "compoundRequirements": [],
+    "sourceLesson": "data/lessons/lesson-1742.json",
+    "mapping": [
+      {
+        "legacy": "context",
+        "dialogueDomain": "context",
+        "evidenceRule": "說出初讀印象、問題或困難；可質疑，不要求指定情感。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "read",
+        "dialogueDomain": "read",
+        "evidenceRule": "學生確認通讀，只作參與紀錄，不推論掌握。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "revision",
+        "dialogueDomain": "revision",
+        "evidenceRule": "原句、增刪調後的句子及效果比較。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "structure",
+        "dialogueDomain": "structure",
+        "evidenceRule": "指出具體文本選擇、至少兩處證據、效果及目的；技法名稱不足。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "evaluation",
+        "dialogueDomain": "evaluation",
+        "evidenceRule": "保留自評；不要求正面感受，不加分。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      },
+      {
+        "legacy": "authorQuestion",
+        "dialogueDomain": "authorQuestion",
+        "evidenceRule": "回應或質疑作品立場，並用文本及當代情境說明。",
+        "storage": "dialogue_assessments + dialogue_turns; legacy tables unchanged"
+      }
+    ],
+    "coverage": {
+      "source": {
+        "status": "source-ready",
+        "reason": null
+      },
+      "persona": {
+        "kind": "source-guide",
+        "attributionStatus": "source-guide-no-impersonation"
+      },
+      "originalObjectives": {
+        "tracks": [
+          "context",
+          "read",
+          "revision",
+          "structure",
+          "evaluation",
+          "authorQuestion"
+        ],
+        "formalCount": 5,
+        "formativeCount": 4,
+        "activeStudyGuideCount": 0,
+        "inactiveStudyGuideCount": 0,
+        "policy": "original-identities-rubrics-grades-and-history-preserved"
+      },
+      "classicalEssentials": {
+        "applicable": false,
+        "status": "not-applicable",
+        "areaSources": {
+          "vocabulary": [],
+          "functionWords": [],
+          "grammar": []
+        },
+        "missingAreas": [],
+        "verifiedDictionaryIds": [],
+        "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+        "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+        "calibrationStatus": "not-established-by-curriculum-generation"
+      },
+      "assessmentBridge": {
+        "status": "implementation-candidate",
+        "formal": "original-source-evaluator-and-answer-keys",
+        "studyGuide": "original-source-evaluator",
+        "firstRead": "not-applicable",
+        "reading": "original-non-scoring-acknowledgement"
+      },
+      "sourceGaps": [],
+      "reviewRequiredGuideIds": []
+    }
+  },
+  "referenceVersion": "yw-dialogue-sources-20261013-v5",
+  "languageCorpusVersion": "yw-dialogue-classical-language-20261013-v2",
+  "languagePractice": [],
+  "dictionary": [],
+  "exam": {
+    "status": "original-practice-with-publisher-cited-examples",
+    "reason": "練習仍為原創；下列僅是北京考試報引用真題的題意與能力關聯，不提供原試卷或官方評分細則。",
+    "examples": [
+      {
+        "id": "beijing-2024-q19",
+        "year": 2024,
+        "paper": "北京卷·語文",
+        "questionNumber": 19,
+        "work": "談買書",
+        "questionParaphrase": "結合全篇，解釋文末「魔法」在作品中的意思。",
+        "skill": "聯繫多處語境解釋關鍵詞",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      },
+      {
+        "id": "beijing-2022-q18",
+        "year": 2022,
+        "paper": "北京卷·語文",
+        "questionNumber": 18,
+        "work": "這城市已融入我的生命",
+        "questionParaphrase": "分析第六段所寫的家鄉生活，如何服務於整篇文章。",
+        "skill": "把段落內容、前後關係與全文主旨連起來",
+        "sourceKind": "考試院主辦報紙的真題引用，非原試卷或官方評分細則",
+        "publisher": "北京考試報",
+        "issue": 1816,
+        "printedPage": 8,
+        "publishedAt": "2024-12-11",
+        "url": "https://www.bjeea.cn/uploads/soft/241219/1816%E6%9C%9F8%E7%89%88PDF.pdf",
+        "verification": "已核對發行者 PDF 的文字與題號；題幹為概述。原頁影像下載未通過 TLS 驗證，不宣稱目視核對。"
+      }
+    ]
+  },
+  "curriculumVersion": "yw-dialogue-d87e29369d5d2ba43959",
+  "formalScopeExpansion": {
+    "policyVersion": "yw-formal-scope-20261013-v2",
+    "authority": "direct-suen-instruction-01a132c3",
+    "authorizedAt": "2026-10-13T02:03:44.252Z",
+    "effectiveFrom": "2026-10-13T02:03:44.252Z",
+    "newAnswersOnly": true,
+    "performanceScoringRole": "formative",
+    "includeInExistingAPlusGate": false,
+    "historicalWork": "preserve_no_backfill_or_regrade",
+    "addedBooks": [
+      "bixiu-shang",
+      "bixiu-xia"
+    ],
+    "annualPolicyVersion": "yw-aplus-2026-2027-v1",
+    "requiredDistinctCreditUnits": 692
+  },
+  "readingMaterials": [
+    {
+      "id": "lesson-1742:p11",
+      "text": "位于英国伦敦海格特公墓的马克思墓 曾毅 摄",
+      "block": {
+        "runs": [
+          {
+            "text": "位于英国伦敦海格特公墓的马克思墓 曾毅 摄",
+            "type": "text"
+          }
+        ],
+        "type": "paragraph"
+      },
+      "blockIndex": 10,
+      "blockSha256": "6c2fe72027433cd25b29efc210df6f9fac81329bb7bb293a97bf85208a239183",
+      "role": "image-caption",
+      "label": "原課插圖說明",
+      "source": "data/reader-documents/lesson-1742.json#main.blocks[10]",
+      "reason": "原文明确标示配图作品名、作者或摄影署名，非本篇作者正文。"
+    },
+    {
+      "id": "lesson-1742:p16",
+      "text": "党的二十大报告指出：“实践告诉我们，中国共产党为什么能，中国特色社会主义为什么好，归根到底是马克思主义行，是中国化时代化的马克思主义行。”\n出自马克思主义创立者之手的这两篇演讲词，体现了马克思主义的许多重要思想，也为我们诠释了时代使命与个人抱负的要义。\n《在〈人民报〉创刊纪念会上的演说》是马克思面对志同道合的革命友人发表的即席演说，以历史唯物主义的观点阐发了蕴含在资本主义社会“干硬外壳”下的深层矛盾，富于前瞻性地向世界宣告无产阶级的历史使命——担当资本主义灭亡的“执刑者”。文章善用比喻和典故，将睿智的思想和深刻的理论表达得鲜活生动，极具鼓动性和感召力。\n《在马克思墓前的讲话》是恩格斯为他的亲密战友马克思写的悼词，深切缅怀了马克思的伟大人格和崇高精神，赞颂了马克思的历史功绩和光辉思想。文章逐层深入，全面总结了马克思作为思想家、革命家的伟大成就。“永远地睡着了”“当作蛛丝一样轻轻拂去”等饱含情感的文字，展现出两位革命导师之间的深厚情谊。我们可以从中获得人生启迪，汲取精神力量。\n学习演讲词，要从演讲的目的、场合和对象等方面把握其针对性。还可以设想作者演讲时的现场氛围，揣摩演讲者的语气、语调，想象其表情和肢体语言，做简要批注，并尝试自己做一次演讲，学会在公共场合表达意见。",
+      "block": {
+        "blocks": [
+          {
+            "runs": [
+              {
+                "text": "党的二十大报告指出：“实践告诉我们，中国共产党为什么能，中国特色社会主义为什么好，归根到底是马克思主义行，是中国化时代化的马克思主义行。”",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "出自马克思主义创立者之手的这两篇演讲词，体现了马克思主义的许多重要思想，也为我们诠释了时代使命与个人抱负的要义。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "《在〈人民报〉创刊纪念会上的演说》是马克思面对志同道合的革命友人发表的即席演说，以历史唯物主义的观点阐发了蕴含在资本主义社会“干硬外壳”下的深层矛盾，富于前瞻性地向世界宣告无产阶级的历史使命——担当资本主义灭亡的“执刑者”。文章善用比喻和典故，将睿智的思想和深刻的理论表达得鲜活生动，极具鼓动性和感召力。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "《在马克思墓前的讲话》是恩格斯为他的亲密战友马克思写的悼词，深切缅怀了马克思的伟大人格和崇高精神，赞颂了马克思的历史功绩和光辉思想。文章逐层深入，全面总结了马克思作为思想家、革命家的伟大成就。“永远地睡着了”“当作蛛丝一样轻轻拂去”等饱含情感的文字，展现出两位革命导师之间的深厚情谊。我们可以从中获得人生启迪，汲取精神力量。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          },
+          {
+            "runs": [
+              {
+                "text": "学习演讲词，要从演讲的目的、场合和对象等方面把握其针对性。还可以设想作者演讲时的现场氛围，揣摩演讲者的语气、语调，想象其表情和肢体语言，做简要批注，并尝试自己做一次演讲，学会在公共场合表达意见。",
+                "type": "text"
+              }
+            ],
+            "type": "paragraph"
+          }
+        ],
+        "type": "quote"
+      },
+      "blockIndex": 15,
+      "blockSha256": "e58d57870473cdd88f7e998d87b9e662b52ce1f7458b069a22f7eadc5f777c90",
+      "role": "commentary",
+      "label": "原課導讀與教學參考（非本篇正文）",
+      "source": "data/reader-documents/lesson-1742.json#main.blocks[15]",
+      "reason": "逐課核對原段落：此處為教材編者導讀、教學任務、補充引文或來源說明；保留原字，不作本篇作者原文。"
+    }
+  ],
+  "structuralBlocks": [],
+  "textRoleVersion": "yw-dialogue-full-corpus-roles-20261013-v1",
+  "frontMatter": [],
+  "guidance": [],
+  "media": [
+    {
+      "alt": "",
+      "bytes": 257610,
+      "finalUrl": "https://files.rdfzer.com/original/2X/5/594ceca9001383b4da614148a0cdb7e47348d91c.jpeg",
+      "height": 595,
+      "id": "media-6685dbe97e83cad7f376",
+      "mediaType": "image/jpeg",
+      "nativeDisposition": "verified-in-app",
+      "receiptCollectedAt": "2026-07-30T01:10:43.464Z",
+      "receiptRequired": true,
+      "rightsBasis": "user-authorized-course-source-use-2026-07-29",
+      "sha256": "3a8b1b93ca96505e0ca35002beaac33ba3912d206a1c8d080b5acff431df1695",
+      "sourceUrl": "https://files.rdfzer.com/original/2X/5/594ceca9001383b4da614148a0cdb7e47348d91c.jpeg",
+      "webDisposition": "source-url",
+      "width": 835
+    }
+  ],
+  "sourceOnlyBlocks": [],
+  "studyGuide": [],
+  "sourceInventory": {
+    "lesson": "data/lessons/lesson-1742.json",
+    "lessonSha256": "77e6c9f665c652c847f5b25b8f9fc355dc90d6635ca280cbed4c75a0a63df753",
+    "reader": "data/reader-documents/lesson-1742.json",
+    "readerSha256": "974449f8a8c536a5872b6110fe54112194f406b75480488514c2c4d995e90290",
+    "sourcePostId": 11190,
+    "sourcePostNumber": 1,
+    "blockCount": 16,
+    "annotationCount": 16,
+    "curationVersion": "2026-07-30.2",
+    "roleAuditVersion": "2026-07-30.2"
+  },
+  "sourceStatus": "source-ready",
+  "coverage": {
+    "source": {
+      "status": "source-ready",
+      "reason": null
+    },
+    "persona": {
+      "kind": "source-guide",
+      "attributionStatus": "source-guide-no-impersonation"
+    },
+    "originalObjectives": {
+      "tracks": [
+        "context",
+        "read",
+        "revision",
+        "structure",
+        "evaluation",
+        "authorQuestion"
+      ],
+      "formalCount": 5,
+      "formativeCount": 4,
+      "activeStudyGuideCount": 0,
+      "inactiveStudyGuideCount": 0,
+      "policy": "original-identities-rubrics-grades-and-history-preserved"
+    },
+    "classicalEssentials": {
+      "applicable": false,
+      "status": "not-applicable",
+      "areaSources": {
+        "vocabulary": [],
+        "functionWords": [],
+        "grammar": []
+      },
+      "missingAreas": [],
+      "verifiedDictionaryIds": [],
+      "dictionaryReview": "existing-references-preserved; supplemental-XC-page-scopes-visually-verified-in-dictionary-metadata",
+      "coverageScope": "per-lesson-area-presence-not-exhaustive-lexical-inventory",
+      "calibrationStatus": "not-established-by-curriculum-generation"
+    },
+    "assessmentBridge": {
+      "status": "implementation-candidate",
+      "formal": "original-source-evaluator-and-answer-keys",
+      "studyGuide": "original-source-evaluator",
+      "firstRead": "not-applicable",
+      "reading": "original-non-scoring-acknowledgement"
+    },
+    "sourceGaps": [],
+    "reviewRequiredGuideIds": []
+  },
+  "sourceReviewRequired": false
+}

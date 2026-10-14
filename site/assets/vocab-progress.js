@@ -14,8 +14,13 @@
     const wrongCount = Math.max(0, Number(result.wrongCount) || 0);
     const correctCount = Math.max(0, Number(result.correctCount) || 0);
     const mastered = result.status === "mastered";
+    const historicalPractice = [...(previous?.historicalPractice || [])];
+    if (previous?.formalEvidence === false && Number(previous.attempts) > 0) {
+      historicalPractice.push(Object.fromEntries(Object.entries(previous).filter(([key]) => key !== "historicalPractice" && key !== "pendingAttempt")));
+    }
     return {
       ...(previous || {}),
+      ...(historicalPractice.length ? {historicalPractice} : {}),
       attempts: Math.max(1, Number(result.attemptNo) || 1),
       correct: mastered,
       mastered: mastered && wrongCount === 0,

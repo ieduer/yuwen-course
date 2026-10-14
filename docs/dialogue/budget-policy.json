@@ -1,0 +1,16 @@
+{
+  "version": "yw-gemini-daily50usd-20261012-v1",
+  "currency": "USD",
+  "model": "gemini-3.6-flash",
+  "globalDailyMicros": 50000000,
+  "userDailyMicros": 50000000,
+  "lessonLifetimeMicros": 50000000,
+  "reserveMicros": 84000,
+  "inputMicrosPerMillion": 750000,
+  "outputMicrosPerMillion": 3750000,
+  "validUntil": "2027-01-01T00:00:00Z",
+  "priceSource": "https://ai.google.dev/gemini-api/docs/pricing.md",
+  "accountingBasis": "Conservative paid-tier equivalent including thinking, not a billing invoice. Free-pool usage is reserved and accounted at these rates. USD50 per UTC day across this dialogue feature; no cumulative site lifetime cap. Unknown or interrupted outcomes retain their reservation.",
+  "authority": "Suen answered the site daily-limit question with USD50 and confirmed Gemini pool on 2026-10-12 UTC. All authenticated My accounts may use their own records only; transcripts retained permanently. No smaller user or lesson dollar limit was specified; existing request count and concurrency bounds remain. Activation requires release acceptance.",
+  "dayBoundary": "UTC"
+}
