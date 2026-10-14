@@ -1,3 +1,13 @@
+## Offline release admission candidate — 2026-10-14
+
+Unpublished task-scoped source change: `YW_RELEASE_READ_ONLY="true"` rejects valid Web/native submissions before body consumption, identity reconciliation, D1, Queue or model dispatch. It also denies the internal evaluator execution endpoint and the side-effecting learning-health drain. Existing content-type/origin rejection remains first; ordinary reading/history and deterministic lesson-blueprint reads remain available. Absent/false retains prior behavior. No production variable was changed.
+
+For a future approved freeze, deploy this exact source first, then explicitly close admission and set the existing scheduler `YW_BACKGROUND_EVALUATION_ENABLED="false"` through a separately approved configuration transaction; scheduler source and its six accepted pins stay unchanged. The flag does not cancel already admitted work: reconcile in-flight jobs and outbox/Queue before recording T0 and compare the existing source/UC aggregates through every stage. Preserve drafts, mutation IDs, jobs, old scores and all forward data. No auto replay or schema removal. The central receiver is not modified; queue drain remains a separate live gate.
+
+All189 scope, native disposition and real-device gaps,207 cases,3 full-quality E2E and actual source-to-My acceptance remain unchanged. Source integration/clean formal rebuild, actual flag/config readback and bounded business acceptance are still required; this local patch is not publication authority. Evidence: `/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-2/`.
+
+Earlier dated sections below remain historical within their original scope.
+
 ## Current local artifact baseline — 2026-10-13T23:22:59.438943+00:00
 
 CI38483467298 passed evidence, blueprint, dialogue, Reading API and binding checks, then rejected the stale tracked artifact manifest. Rebuilt the unchanged repaired runtime from published b6f3b1a:1464files/196192003bytes, full artifact SHA2565209b77255dc6f993b50ab1f99c30c5cba173fb06a1e33dde22139bc1f93045f. Staging verification and exact Node22/24 manifest checks passed. Delta from prior baseline:6new dialogue modules,9changed files including release marker,0removed. Updated only the existing generated baseline; no validation bypass or production acceptance.
