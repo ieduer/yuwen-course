@@ -1,3 +1,25 @@
+<!-- yw-native-projection-01a13a52 -->
+## 2026-10-14T12:20:05.904475+00:00 — Native learning projections repaired locally; compatibility remains open
+
+Read-only tracing confirmed the 189-lesson native generator omitted the existing
+241-item study-guide catalog (193 active, five source PDFs) and 1,697-item
+formative manifest (189 lessons, 48 tombstones). Both Web source documents remain
+intact. The generator now verifies them against the existing curated builders,
+preserves every field, binds exact source hashes and emits both immutable objects,
+core entries and aggregate counts. It rejects stale/cleared source projections
+instead of treating missing data as zero. It does not change scoring or history.
+
+Node24.18.0 passed all28 native-content/study-guide tests, including two byte-identical
+builds, full source equality, source-loss rejection and URL/privacy checks. The first
+iteration passed27/28; one additional object-count assertion needed the two added
+objects. Second iteration passed28/28, within the declared two-iteration limit.
+No native test was removed or weakened. No stable pointer, bundled App asset,
+signed APK, device, external service or production state changed. The old exact
+blocked189 native lock remains unchanged, so this local source repair does not
+accept a new native graph. Full189 release/model/central receipt/Status gates remain
+open. Source, verification and rollback: [task report](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/C3/projection-repair-01a13a52/REPORT.md).
+<!-- /yw-native-projection-01a13a52 -->
+
 <!-- yw-registry-revision3-01a138b7 -->
 ## Current YW textbook registry reconciliation — 2026-10-14T04:48:24.975311+00:00
 

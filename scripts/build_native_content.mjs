@@ -16,6 +16,10 @@ import {
 } from "./native_content_release_contract.mjs";
 import { createUrlSanitizer } from "./native_content_url_sanitizer.mjs";
 import { validateVocabEligibility } from "./vocab_eligibility.mjs";
+import {
+  buildLessonCompetencyManifest,
+  buildStudyGuideCatalog,
+} from "./build_study_guide_catalog.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const SITE = path.join(ROOT, "site");
@@ -204,6 +208,27 @@ assert(
 const nativeSourceLessons = sourceManifest.lessons.filter((lesson) => !excludedLessonIds.has(lesson.id));
 const nativeIds = new Set(nativeSourceLessons.map((lesson) => lesson.id));
 assert(nativeIds.size > 0, "native lesson projection is empty");
+// Preserve the source-owned assessment graph, including inactive items and
+// tombstones. A zero/default count must never hide an omitted projection.
+const studyGuideCatalogFile = path.join(DATA, "study-guide-catalog.json");
+const lessonCompetencyManifestFile = path.join(DATA, "lesson-competency-manifest.json");
+const studyGuideCatalogBytes = readFileSync(studyGuideCatalogFile);
+const lessonCompetencyManifestBytes = readFileSync(lessonCompetencyManifestFile);
+const studyGuideCatalog = canonicalize(JSON.parse(studyGuideCatalogBytes.toString("utf8")));
+const lessonCompetencyManifest = canonicalize(JSON.parse(lessonCompetencyManifestBytes.toString("utf8")));
+assert(serialize(studyGuideCatalog) === serialize(buildStudyGuideCatalog()),
+  "study-guide catalog differs from its curated source");
+assert(serialize(lessonCompetencyManifest) === serialize(buildLessonCompetencyManifest(studyGuideCatalog)),
+  "lesson competency manifest differs from its source contracts");
+for (const [label, projection] of [
+  ["study-guide catalog", studyGuideCatalog],
+  ["lesson competency manifest", lessonCompetencyManifest],
+]) {
+  assert(serialize(projection) === serialize(sanitizeValue(projection)),
+    `${label}: unsafe source content needs a reviewed source correction`);
+  assert(projection.lessons.every((lesson) => nativeIds.has(lesson.lessonId)),
+    `${label}: source lesson is missing from the native catalog`);
+}
 assert(activeIds.size === sourceManifest.lessons.length, "source manifest has duplicate active lesson IDs");
 const blockLessonIds = sourceManifest.blocks.flatMap((block) => block.lessons.map((lesson) => lesson.id));
 assert(
@@ -708,6 +733,16 @@ const counts = canonicalize({
   vocabularyQuestions: vocabQuestions,
   classicalFirstReadLessons: classicalFirstReadLessons.length,
   classicalFirstReadParagraphs,
+  studyGuideSources: studyGuideCatalog.sources.length,
+  studyGuideLessons: studyGuideCatalog.lessons.length,
+  studyGuideItems: studyGuideCatalog.itemCount,
+  activeStudyGuideItems: studyGuideCatalog.activeItemCount,
+  formativeLessons: lessonCompetencyManifest.lessons.length,
+  formativeCompetencies: lessonCompetencyManifest.lessons.reduce(
+    (sum, lesson) => sum + lesson.competencies.length, 0,
+  ),
+  formativeItems: lessonCompetencyManifest.itemCount,
+  formativeTombstones: lessonCompetencyManifest.tombstones.length,
   mediaCatalogLessons: mediaLessons.length,
   approvedDecks,
   approvedSlideDecks: approvedDecks,
@@ -751,6 +786,8 @@ const semanticCoreBase = canonicalize({
   media: normalizedMediaBase,
   tombstones: normalizedTombstones,
   learningManifest,
+  studyGuideCatalog,
+  lessonCompetencyManifest,
   interactionDefinitions,
 });
 
@@ -830,6 +867,8 @@ addObject("catalog", "catalog", "catalog.json", versionedCatalog);
 addObject("media", "media", "media.json", versionedMedia);
 addObject("tombstones", "tombstones", "tombstones.json", normalizedTombstones);
 addObject("learning-manifest", "learning-manifest", "learning-manifest.json", learningManifest);
+addObject("study-guide-catalog", "study-guide-catalog", "study-guide-catalog.json", studyGuideCatalog);
+addObject("lesson-competency-manifest", "lesson-competency-manifest", "lesson-competency-manifest.json", lessonCompetencyManifest);
 addObject("interaction-definitions", "interaction-definitions", "interaction-definitions.json", interactionDefinitions);
 addObject("vocab-eligibility", "vocab-eligibility", "vocab-eligibility.json", vocabEligibility);
 for (const lesson of versionedLessons) {
@@ -914,6 +953,18 @@ const manifest = canonicalize({
     learningManifest: {
       path: "site/data/learning-manifest.json",
       sha256: sha256(readFileSync(path.join(DATA, "learning-manifest.json"))),
+    },
+    studyGuideCatalog: {
+      path: "site/data/study-guide-catalog.json",
+      sha256: sha256(studyGuideCatalogBytes),
+      catalogVersion: studyGuideCatalog.catalogVersion,
+      catalogDigest: studyGuideCatalog.catalogDigest,
+    },
+    lessonCompetencyManifest: {
+      path: "site/data/lesson-competency-manifest.json",
+      sha256: sha256(lessonCompetencyManifestBytes),
+      manifestVersion: lessonCompetencyManifest.manifestVersion,
+      manifestDigest: lessonCompetencyManifest.manifestDigest,
     },
     vocabEligibility: {
       path: "site/data/vocab-eligibility.json",

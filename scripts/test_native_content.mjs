@@ -250,6 +250,8 @@ function deriveSourceCounts() {
   ));
   const media = json(path.join(SITE_ROOT, "data", "lesson-media.json"));
   const nativeMedia = media.lessons.filter((lesson) => !excludedIds.has(lesson.lessonId));
+  const study = json(path.join(SITE_ROOT, "data", "study-guide-catalog.json"));
+  const formative = json(path.join(SITE_ROOT, "data", "lesson-competency-manifest.json"));
   const approvedDecks = nativeMedia.filter((lesson) => (
     lesson.reviewStatus?.slideDeck === "approved"
   )).length;
@@ -272,6 +274,16 @@ function deriveSourceCounts() {
       (sum, lesson) => sum + lesson.paragraphCount,
       0,
     ),
+    studyGuideSources: study.sources.length,
+    studyGuideLessons: study.lessons.length,
+    studyGuideItems: study.lessons.reduce((sum, lesson) => sum + lesson.items.length, 0),
+    activeStudyGuideItems: study.lessons.flatMap((lesson) => lesson.items)
+      .filter((item) => item.activeForSelfTest).length,
+    formativeLessons: formative.lessons.length,
+    formativeCompetencies: formative.lessons.reduce((sum, lesson) => sum + lesson.competencies.length, 0),
+    formativeItems: formative.lessons.flatMap((lesson) => lesson.competencies)
+      .reduce((sum, competency) => sum + competency.items.length, 0),
+    formativeTombstones: formative.tombstones.length,
     compositeTombstones: lessonInventory.filter((lessonId) => !activeIds.has(lessonId)).length,
     forumImages: lessonTotals.forumImages,
     learningTasks: lessonTotals.learningTasks,
@@ -454,7 +466,7 @@ test("manifest object receipts match every immutable object", () => {
     core.lessons.length
       + core.vocab.lessons.length
       + core.classicalFirstRead.lessons.length
-      + 9,
+      + 11,
   );
   assert.deepEqual(firstBuild.immutableWrites, {
     unchanged: 0,
@@ -959,6 +971,54 @@ test("classical first-read projection is exact and receipt-bound", () => {
   );
 });
 
+test("study-guide and formative projections preserve every source field and receipt", () => {
+  for (const [kind, key, file] of [
+    ["study-guide-catalog", "studyGuideCatalog", "study-guide-catalog.json"],
+    ["lesson-competency-manifest", "lessonCompetencyManifest", "lesson-competency-manifest.json"],
+  ]) {
+    const sourceBytes = readFileSync(path.join(SITE_ROOT, "data", file));
+    const source = JSON.parse(sourceBytes);
+    const receipts = manifest.objects.filter((receipt) => receipt.kind === kind);
+    assert.equal(receipts.length, 1, `${kind}: exactly one required projection`);
+    const projectedBytes = readFileSync(path.join(releaseRoot, receipts[0].path));
+    assert.deepEqual(core[key], source, `${kind}: no source fields may disappear`);
+    assert.equal(projectedBytes.toString(), serialize(source));
+    assert.equal(receipts[0].sha256, sha256(projectedBytes));
+    assert.equal(receipts[0].bytes, projectedBytes.length);
+    assert.equal(manifest.sourceProvenance[key].sha256, sha256(sourceBytes));
+    const lessonIds = new Set(core.catalog.lessons.map((lesson) => lesson.id));
+    assert.ok(source.lessons.every((lesson) => lessonIds.has(lesson.lessonId)));
+  }
+  assert.equal(core.studyGuideCatalog.itemCount, 241);
+  assert.equal(core.studyGuideCatalog.activeItemCount, 193);
+  assert.equal(core.lessonCompetencyManifest.itemCount, 1697);
+  assert.equal(core.lessonCompetencyManifest.tombstones.length, 48);
+  assert.equal(core.lessonCompetencyManifest.scoringPolicy,
+    "formative_projection_does_not_modify_a_to_f_or_a_plus");
+  assert.equal(core.lessonCompetencyManifest.studyGuideCatalogDigest, core.studyGuideCatalog.catalogDigest);
+  assert.equal(core.lessonCompetencyManifest.formalLearningManifestDigest, core.learningManifest.resourceKeyHash);
+});
+
+test("omitted or changed study/formative source cannot become a zero-count native graph", () => {
+  for (const [file, message] of [
+    ["study-guide-catalog.json", /study-guide catalog differs from its curated source/],
+    ["lesson-competency-manifest.json", /lesson competency manifest differs from its source contracts/],
+  ]) {
+    const sourceFile = path.join(SITE_ROOT, "data", file);
+    const original = readFileSync(sourceFile);
+    try {
+      const damaged = JSON.parse(original);
+      damaged.lessons = [];
+      damaged.lessonCount = 0;
+      damaged.itemCount = 0;
+      writeFileSync(sourceFile, JSON.stringify(damaged));
+      assert.throws(() => runBuild(), (error) => message.test(String(error.stderr)));
+    } finally {
+      writeFileSync(sourceFile, original);
+    }
+  }
+});
+
 test("vocab, tombstones and media fail closed", () => {
   assert.equal(core.vocab.index.lessonCount, sourceCounts.vocabLessonFiles);
   assert.equal(core.vocab.index.sourceBankCount, Object.keys(
@@ -1026,7 +1086,7 @@ test("all derived immutable objects have safe URLs", () => {
     core.lessons.length
       + core.vocab.lessons.length
       + core.classicalFirstRead.lessons.length
-      + 9,
+      + 11,
   );
   const publicDocuments = [
     { name: "latest-stable.json", value: pointer },
