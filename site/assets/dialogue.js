@@ -212,9 +212,16 @@ $('notes-toggle').onclick=()=>{allNotesExpanded=!allNotesExpanded;for(const note
 document.addEventListener('click',event=>{if(!event.target.closest('.appearance'))document.querySelector('.appearance').open=false;if(!allNotesExpanded&&!event.target.closest('.annotation-toggle,.inline-note'))closeIndividualNotes();});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){document.querySelector('.appearance').open=false;if(!allNotesExpanded)closeIndividualNotes();}});
 function annotationText(value){if(!value)return '';if(Array.isArray(value))return value.map(annotationText).filter(Boolean).join('');if(typeof value.text==='string')return value.text;for(const key of ['runs','blocks','children','items','rows','cells'])if(value[key])return annotationText(value[key]);return '';}
+function displayWorkTitle(value){
+ const title=String(value.title||''),author=String(value.author||'');
+ const separator=Math.max(title.lastIndexOf('/'),title.lastIndexOf('／'));
+ if(separator<1||!author.trim())return title;
+ const sameAuthor=title.slice(separator+1).replace(/\s/g,'')===author.replace(/\s/g,'');
+ return sameAuthor?title.slice(0,separator).trimEnd():title;
+}
 function renderText(){
  const locked=false;
- $('conversation-title').textContent=`與${dialogueIdentity(curriculum).name}談`;$('title').textContent=curriculum.title;$('author').textContent=dialogueIdentity(curriculum).name==='作者'?'':dialogueIdentity(curriculum).name;$('source').href=curriculum.source;$('legacy').href=`/?view=legacy#${curriculum.lessonId}`;
+ $('conversation-title').textContent=`與${dialogueIdentity(curriculum).name}談`;$('title').textContent=displayWorkTitle(curriculum);$('author').textContent=dialogueIdentity(curriculum).name==='作者'?'':dialogueIdentity(curriculum).name;$('source').href=curriculum.source;$('legacy').href=`/?view=legacy#${curriculum.lessonId}`;
  $('source').hidden=locked;$('plates-details').hidden=locked;$('dictionary-details').hidden=locked;
  $('passages').replaceChildren();
  for(const p of locked?[]:curriculum.passages){const paragraph=node('p');paragraph.id=p.id;paragraph.dataset.passage=p.id;

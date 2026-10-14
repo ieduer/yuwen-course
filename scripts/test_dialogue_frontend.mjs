@@ -43,7 +43,7 @@ async function fixture({inputKind='text',hash='#lesson-189',post,get,logout,init
  };
  const context=vm.createContext({PALETTES,originalRange,dialogueReadingAsset,window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},history:{state:null,replaceState(_state,_title,url){context.location.hash=url;}},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,dialogueIdentity,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:firstReading||(()=>({dispose(){}})),localStorage:{},getSelection:()=>null});
  vm.runInContext(document.getElementById('dialogue-initial-load').textContent,context);
- vm.runInContext(script+'\nglobalThis.frontend={renderPlates,materialText,update,refresh,refreshReadingMarks,clearPrivateView,view,renderSourceResults,renderOriginalMaterials,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
+ vm.runInContext(script+'\nglobalThis.frontend={displayWorkTitle,renderPlates,materialText,update,refresh,refreshReadingMarks,clearPrivateView,view,renderSourceResults,renderOriginalMaterials,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
  beforeReady?.(document,window);
  for(let i=0;i<8&&!calls.some(c=>c.url.startsWith('/api/'));i++)await tick();await tick();
  return {document,window,calls,timers,downloads,frontend:context.frontend,context,setData:value=>{data=value;},get data(){return data;},get posts(){return calls.filter(c=>c.options.method==='POST').map(c=>JSON.parse(c.options.body));},answer(value){document.getElementById('answer').value=value;document.getElementById('answer').oninput();},send:()=>document.getElementById('compose').onsubmit({preventDefault(){}})};
@@ -509,4 +509,17 @@ test('an explicit text view chosen during initial loading survives completion an
 
 test('conversation entry keeps its default when the learner has not chosen another pane',async()=>{
  const f=await fixture({conversation:true});assert.equal(f.document.querySelector('.workspace').dataset.view,'conversation');
+});
+
+
+test('heading renders exact author attribution once without changing source identity',async()=>{
+ for(const [title,author,expected] of [['9 屈原列传/ 司马迁','司马迁','9 屈原列传'],['将进酒/李 白','李白','将进酒'],['* 宇宙的边疆/ 卡尔· 萨根','卡尔·萨根','* 宇宙的边疆']]){
+  const source={title,author};const f=await fixture({curriculumOverrides:source});
+  assert.equal(f.document.getElementById('title').textContent,expected);assert.equal(f.document.getElementById('author').textContent,author);assert.equal(source.title,title);assert.equal(source.author,author);
+ }
+});
+
+test('heading preserves book attribution, non-author suffixes and unslashed work titles',async()=>{
+ const f=await fixture();
+ for(const [title,author] of [['兼爱/《墨子》','墨子'],['无衣/《诗经·秦风》','原作未署個人作者'],['作品/补充资料','作者'],['《论语》十二章','孔子'],['题名中的/斜线','甲'],['/作者','作者']])assert.equal(f.frontend.displayWorkTitle({title,author}),title);
 });
