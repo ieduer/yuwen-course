@@ -42,6 +42,7 @@ async function fixture({inputKind='text',hash='#lesson-189',post,get,logout,init
   const result=get?get(url,data):data;return result instanceof Response?result:Response.json(result);
  };
  const context=vm.createContext({PALETTES,originalRange,dialogueReadingAsset,window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,dialogueIdentity,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:()=>({dispose(){}}),localStorage:{},getSelection:()=>null});
+ vm.runInContext(document.getElementById('dialogue-initial-load').textContent,context);
  vm.runInContext(script+'\nglobalThis.frontend={renderPlates,materialText,update,refresh,refreshReadingMarks,clearPrivateView,view,renderSourceResults,renderOriginalMaterials,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
  for(let i=0;i<8&&!calls.some(c=>c.url.startsWith('/api/'));i++)await tick();await tick();
  return {document,window,calls,timers,downloads,frontend:context.frontend,context,setData:value=>{data=value;},get data(){return data;},get posts(){return calls.filter(c=>c.options.method==='POST').map(c=>JSON.parse(c.options.body));},answer(value){document.getElementById('answer').value=value;document.getElementById('answer').oninput();},send:()=>document.getElementById('compose').onsubmit({preventDefault(){}})};
@@ -435,4 +436,28 @@ test('readback reconciles interrupted-turn status without duplicating or rewriti
  f.frontend.update({...f.data,turns:[{...turn,status:'needs_review'}]});assert.equal(element.querySelectorAll('.turn-status').length,1);
  f.frontend.update({...f.data,turns:[turn]});
  assert.equal(f.document.querySelectorAll('#turns .student').length,1);assert.equal(f.document.getElementById('turn-status-turn'),element);assert.equal(element.querySelector('.turn-status'),null);assert.equal(element.querySelector('span').textContent,turn.content);assert.equal(f.posts.length,0);
+});
+
+
+test('early public lesson load is reused even without an HTTP cache, before catalogue load',async()=>{
+ const f=await fixture();
+ assert.equal(f.calls[0].url,'/dialogue-curriculum/lesson-189.json');
+ assert.equal(f.calls.filter(c=>c.url==='/dialogue-curriculum/lesson-189.json').length,1);
+ assert.equal(f.document.getElementById('title').textContent,'篇目 189');
+ assert.equal(f.window.ywDialogueInitialLoad,undefined);
+});
+
+test('unknown early lesson never overrides the validated catalogue selection',async()=>{
+ const f=await fixture({hash:'#lesson-unknown',storage:new Map([['yw-dialogue-last-lesson','lesson-188']])});
+ assert.equal(f.document.getElementById('lesson').value,'lesson-188');
+ assert.equal(f.calls.filter(c=>c.url==='/dialogue-curriculum/lesson-188.json').length,1);
+ assert.equal(f.posts.length,0);
+});
+
+test('malformed deep links cannot turn early loading into an arbitrary request',async()=>{
+ for(const hash of ['#../../api/private','#https://outside.example/','#lesson-a?x=1','#lesson-a%2fb']){
+  const f=await fixture({hash,storage:new Map()});
+  assert.equal(f.calls[0].url,'/dialogue-curriculum/index.json');
+  assert.equal(f.document.getElementById('lesson').value,'lesson-1');
+ }
 });
