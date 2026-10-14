@@ -1,3 +1,13 @@
+<!-- yw-registry-revision3-01a138b7 -->
+## Current YW textbook registry reconciliation — 2026-10-14T04:48:24.975311+00:00
+
+Approved A completed with4/4GET, zero retries and one locked registry CAS. Accepted textbook source175f8ae42dc5fd58f1b697a76567e79c954d9f7f / Pagesb6f5ac67-8b3b-44cf-9364-67e02d578338; rollback82e372e2-8480-455d-9de0-dcf18dafd3bb. Prior registry, prior_accepted and consumed receipts preserved. This reconciles the existing textbook release; no deployment, upload, traffic, database or model call occurred. Status remains pending without public-write authority.
+
+Dialogue admission candidatef21d9d8 remains unpushed/unreleased. New offline aggregate comparator and11-statement YW batch cover in-flight sessions/calls and post-fence student turns:21negative/positive tests and actual local migration-schema SQL checks pass. Historical nonterminal rows require explicit disposition, never deletion/replay to pass. Source-to-each-UC-accepted-to-ordinary-Myreload, A–F/A+768/692,207calibration/3qualityE2E, real devices, second authorized nonstudent account, shared R2 and real cache evidence remain unpassed. Full189=88+101 scope is unchanged; no completion claim. Paid expiry2026-10-14T12:00Z stays fixed; this task model allowance0.
+
+This paragraph supersedes earlier current-version claims only for this scope; retain all historical evidence. [Single current transaction package](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-3/TRANSACTION-PACKAGE-REVISION-3.md).
+<!-- /yw-registry-revision3-01a138b7 -->
+
 ## Offline release admission candidate — 2026-10-14
 
 Unpublished task-scoped source change: `YW_RELEASE_READ_ONLY="true"` rejects valid Web/native submissions before body consumption, identity reconciliation, D1, Queue or model dispatch. It also denies the internal evaluator execution endpoint and the side-effecting learning-health drain. Existing content-type/origin rejection remains first; ordinary reading/history and deterministic lesson-blueprint reads remain available. Absent/false retains prior behavior. No production variable was changed.
