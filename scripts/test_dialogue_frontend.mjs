@@ -16,7 +16,7 @@ const tick=()=>new Promise(resolve=>setImmediate(resolve));
 function task(inputKind='text',id='task-one'){
  return {taskId:id,objectiveId:'source-objective',kind:inputKind==='choice'?'vocabulary':inputKind==='rating'?'evaluation':'formal',inputKind,prompt:'說說這一句如何照應前文。',...(inputKind==='choice'?{options:['第一個選項','第二個選項']}: {})};
 }
-async function fixture({inputKind='text',hash='#lesson-189',post,get,logout,initial={},curriculumOverrides={},storage=new Map(),conversation=false}={}){
+async function fixture({inputKind='text',hash='#lesson-189',post,get,logout,initial={},curriculumOverrides={},storage=new Map(),conversation=false,firstReading}={}){
  const {window,document}=parseHTML(html),calls=[],timers=new Map(),downloads=[];let timer=0;
  document.body.dataset.dialogueFlow=conversation?'conversation':'structured';
  window.Element.prototype.scrollIntoView=()=>{};
@@ -41,7 +41,7 @@ async function fixture({inputKind='text',hash='#lesson-189',post,get,logout,init
   }
   const result=get?get(url,data):data;return result instanceof Response?result:Response.json(result);
  };
- const context=vm.createContext({PALETTES,originalRange,dialogueReadingAsset,window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},history:{state:null,replaceState(_state,_title,url){context.location.hash=url;}},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,dialogueIdentity,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:()=>({dispose(){}}),localStorage:{},getSelection:()=>null});
+ const context=vm.createContext({PALETTES,originalRange,dialogueReadingAsset,window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},history:{state:null,replaceState(_state,_title,url){context.location.hash=url;}},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,dialogueIdentity,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:firstReading||(()=>({dispose(){}})),localStorage:{},getSelection:()=>null});
  vm.runInContext(document.getElementById('dialogue-initial-load').textContent,context);
  vm.runInContext(script+'\nglobalThis.frontend={renderPlates,materialText,update,refresh,refreshReadingMarks,clearPrivateView,view,renderSourceResults,renderOriginalMaterials,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
  for(let i=0;i<8&&!calls.some(c=>c.url.startsWith('/api/'));i++)await tick();await tick();
@@ -484,4 +484,15 @@ test('same-lesson and non-lesson anchors do not request or clear reading state',
  const f=await fixture();const before=f.calls.length;
  for(const hash of ['#lesson-189','#reading','#lesson-unknown']){f.context.location.hash=hash;f.window.dispatchEvent(new f.window.Event('hashchange'));await tick();}
  assert.equal(f.calls.length,before);assert.equal(f.document.getElementById('lesson').value,'lesson-189');
+});
+
+
+test('expired authentication clears private state while rebuilding public classical reading',async()=>{
+ let created=0,disposed=0;
+ const f=await fixture({curriculumOverrides:{mode:'classical'},get:()=>Response.json({error:'unauthorized'},{status:401}),firstReading:({root})=>{created++;root.textContent='仍可閱讀的公開正文';return {dispose(){disposed++;root.replaceChildren();}};}});
+ assert.equal(created,2);assert.equal(disposed,1);
+ assert.equal(f.document.getElementById('first-reading').textContent,'仍可閱讀的公開正文');
+ assert.equal(f.document.getElementById('answer').disabled,true);assert.equal(f.document.getElementById('turns').textContent,'');assert.equal(f.document.getElementById('quote').hidden,true);
+ f.window.dispatchEvent(new f.window.Event('bdfz:session-invalidated'));
+ assert.equal(created,3);assert.equal(disposed,2);assert.equal(f.document.getElementById('first-reading').textContent,'仍可閱讀的公開正文');
 });

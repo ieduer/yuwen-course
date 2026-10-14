@@ -26,8 +26,8 @@ const api=async(body,cursor,records=false,onEvent,correctionsFor,shared=false,fi
  current();
  if(response.ok&&response.headers.get('content-type')?.includes('text/event-stream')){const result=await readDialogueEvents(response,(event,data)=>{current();onEvent?.(event,data);});current();return result;}
  const value=await response.json().catch(()=>{throw Error('伺服器回應未完整讀取；請保留文字，讀回紀錄再繼續。');});current();
- if(expectedOwner&&value.ownerRef&&expectedOwner!==value.ownerRef){clearPrivateView();ownerRef=null;queueMicrotask(()=>void refresh());throw Object.assign(new Error('帳戶已切換，已清除舊紀錄；請重新查看或匯出。'),{code:'account_changed'});}
- if(!response.ok&&value.code==='account_changed'){clearPrivateView();ownerRef=null;queueMicrotask(()=>void refresh());}
+ if(expectedOwner&&value.ownerRef&&expectedOwner!==value.ownerRef){clearPrivateView({preserveReading:true});ownerRef=null;queueMicrotask(()=>void refresh());throw Object.assign(new Error('帳戶已切換，已清除舊紀錄；請重新查看或匯出。'),{code:'account_changed'});}
+ if(!response.ok&&value.code==='account_changed'){clearPrivateView({preserveReading:true});ownerRef=null;queueMicrotask(()=>void refresh());}
  if(!response.ok)throw Object.assign(new Error(value.message||value.error||'暫時無法連線，文字仍保留在本頁。'),{status:response.status,code:value.code,draftSaved:value.draftSaved});return value;
 };
 function renderPartial(partial){
@@ -200,7 +200,7 @@ $('account-logout').onclick=async()=>{
   const response=await fetch('https://my.bdfz.net/api/logout',{method:'POST',credentials:'include',signal:AbortSignal.timeout(10000)});
   const result=await response.json();
   if(!response.ok||result.ok!==true)throw Error('登出尚未確認，請到 My 帳戶頁核對；學習紀錄與草稿保留。');
-  clearPrivateView();ownerRef=null;renderAccount();$('answer').disabled=true;$('send').disabled=true;
+  clearPrivateView({preserveReading:true});ownerRef=null;renderAccount();$('answer').disabled=true;$('send').disabled=true;
   $('status').textContent='已登出，原有學習紀錄與此帳戶草稿保留。';
  }catch(error){$('status').textContent=error.message||'登出尚未確認，請稍後核對。';}
  finally{$('account-logout').disabled=false;}
@@ -321,7 +321,7 @@ function renderTurns(turns,prepend=false){
  }
  if(prepend){$('turns').prepend(fragment);$('turn-review-list').prepend(records);}else{$('turns').append(fragment);$('turn-review-list').append(records);}
 }
-function clearPrivateView(){reconnectNeeded=false;closeExpandedPlate?.();persistComposer();generation++;streamAbort?.abort();streamAbort=null;continuationRequest=null;
+function clearPrivateView({preserveReading=false}={}){reconnectNeeded=false;closeExpandedPlate?.();persistComposer();generation++;streamAbort?.abort();streamAbort=null;continuationRequest=null;
  firstReadView?.dispose();firstReadView=null;
  $('correction').close();correctionTarget=null;correctionMutation=null;$('correction-original').textContent='';$('correction-history').replaceChildren();$('correction-note').value='';$('correction-proposed').value='';$('turns').replaceChildren();$('turn-review-list').replaceChildren();$('answer').value='';$('quote').hidden=true;
  selected=null;pending=null;pendingDraft=null;originalDraft=null;composerDraft=null;snapshot=null;readingNotes=null;paintReadingMarks();clearTimeout(pollTimer);
@@ -329,6 +329,7 @@ function clearPrivateView(){reconnectNeeded=false;closeExpandedPlate?.();persist
  $('lesson-outcome').textContent='';$('draft-status').textContent='';
  $('next').replaceChildren(node('span',''));
  $('source-draft').replaceChildren();$('source-draft').hidden=true;$('export-status').textContent='';$('evidence-summary').replaceChildren();sharedHistory=null;$('old-history').replaceChildren();$('old-history-load').disabled=true;
+ if(preserveReading&&curriculum)renderReadingVariant();
 }
 function renderSourceDraft(data){
  const box=$('source-draft');box.replaceChildren();box.hidden=true;
@@ -539,7 +540,7 @@ async function refresh(gen=generation){
   if(gen!==generation)return;
   const terminal=e.status===401||e.status===404;
   $('status').textContent=e.status===404?'對話試點尚未開放。原文、注釋與原有課程仍可閱讀。':e.message;$('login').hidden=e.status!==401;
-  if(terminal){clearPrivateView();ownerRef=null;}else reconnectNeeded=true;
+  if(terminal){clearPrivateView({preserveReading:true});ownerRef=null;}else reconnectNeeded=true;
   renderAccount();$('login').href='https://my.bdfz.net/?returnTo='+encodeURIComponent(location.href);
   $('answer').disabled=true;$('send').disabled=true;
   // A transport failure does not invalidate the last confirmed account or its draft.
@@ -607,7 +608,7 @@ async function sendTurn(submitted,submittedDraft,gen=generation){
   if(error.code==='stale_revision'||error.code==='turn_in_progress'||error.code==='learning_task_changed'||error.status===400){
    pending=null;pendingDraft=null;persistComposer();await refresh(gen);$('status').textContent=error.message;
   }else if(error.draftSaved){$('status').textContent=error.message;}
-  else if(error.code==='account_changed'||error.status===401||error.status===404){clearPrivateView();ownerRef=null;await refresh();}
+  else if(error.code==='account_changed'||error.status===401||error.status===404){clearPrivateView({preserveReading:true});ownerRef=null;await refresh();}
   else{await refresh(gen);if(gen!==generation)return;$('status').textContent=error.code?error.message:pending?'尚未確認保存；文字保留在本頁。重送會使用同一回執。':'連線中斷，已讀回保存紀錄；AI 不會自動重跑。';if(snapshot?.pending)waitForReply(gen);}
   $('send').disabled=!ownerRef||!snapshot||!!snapshot.pending||(conversationFlow?['unavailable','exemption'].includes(snapshot?.learningTurn?.kind):snapshot?.learningTurn?.inputKind==='none'||!!(composerDraft&&snapshot?.learningTurn&&composerDraft.taskId!==snapshot.learningTurn.taskId));
  }
@@ -638,7 +639,7 @@ document.addEventListener('selectionchange',()=>{
  const valid=text.length>1&&text.length<=600&&source?.text.includes(text);$('discuss').hidden=!valid;
  if(valid)$('discuss').onclick=()=>{quotePassage(p.dataset.passage,text);selection.removeAllRanges();$('discuss').hidden=true;};
 });
-document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(pollTimer);else if(curriculum)void refresh().then(d=>{if(d?.pending)waitForReply(generation);});});window.addEventListener('focus',()=>{if(curriculum)void refresh();});window.addEventListener('bdfz:session-invalidated',()=>{clearPrivateView();ownerRef=null;renderAccount();$('answer').disabled=true;$('send').disabled=true;});window.addEventListener('pagehide',()=>{persistComposer();clearTimeout(pollTimer);});window.addEventListener('beforeunload',e=>{if((hasComposerDraft()&&!persistComposer())||pending||originalDraft||hasFirstReadDraft()){e.preventDefault();e.returnValue='';}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(pollTimer);else if(curriculum)void refresh().then(d=>{if(d?.pending)waitForReply(generation);});});window.addEventListener('focus',()=>{if(curriculum)void refresh();});window.addEventListener('bdfz:session-invalidated',()=>{clearPrivateView({preserveReading:true});ownerRef=null;renderAccount();$('answer').disabled=true;$('send').disabled=true;});window.addEventListener('pagehide',()=>{persistComposer();clearTimeout(pollTimer);});window.addEventListener('beforeunload',e=>{if((hasComposerDraft()&&!persistComposer())||pending||originalDraft||hasFirstReadDraft()){e.preventDefault();e.returnValue='';}});
 async function loadLessonIndex(){
  try{
   const response=await fetch('/dialogue-curriculum/index.json',{cache:'no-cache'});if(!response.ok)throw Error();
