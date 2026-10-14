@@ -2,10 +2,11 @@
   "schemaVersion": "yw-native-content-audit-receipt-v1",
   "siteKey": "yw",
   "reviewDisposition": "approved",
-  "reviewAuthority": "suen-user-authorized-yw-future-formal-score-only-expansion-20261013",
-  "reviewedAt": "2026-10-13T03:27:01.864Z",
-  "semanticDigest": "sha256:70e2721272b223f5f8c95ebd8f64279c04e1ecf48e9761140832b32dd841d8ff",
+  "reviewAuthority": "suen-direct-approval-native-local-validation-20261014-01a13a52",
+  "reviewedAt": "2026-10-14T12:30:14.960953Z",
+  "semanticDigest": "sha256:ea8bf09718c6708420cd0957403391f86311eaf83d74d6a6ae49d8e6797a1a56",
   "counts": {
+    "activeStudyGuideItems": 193,
     "annotations": 2932,
     "approvedDecks": 5,
     "approvedSlideDecks": 5,
@@ -16,6 +17,10 @@
     "classicalFirstReadLessons": 30,
     "classicalFirstReadParagraphs": 102,
     "compositeTombstones": 13,
+    "formativeCompetencies": 449,
+    "formativeItems": 1697,
+    "formativeLessons": 189,
+    "formativeTombstones": 48,
     "forumImages": 473,
     "learningTasks": 0,
     "lessons": 189,
@@ -25,6 +30,9 @@
     "postLinks": 8063,
     "posts": 1149,
     "resources": 539,
+    "studyGuideItems": 241,
+    "studyGuideLessons": 16,
+    "studyGuideSources": 5,
     "textbookContextPageRefs": 7420,
     "textbookPageRefs": 671,
     "uniqueTextbookContextPageAssets": 693,
@@ -37,5 +45,5 @@
     "vocabularyLessons": 77,
     "vocabularyQuestions": 723
   },
-  "reviewEvidence": "/Users/ylsuen/CF/reports/operations/yw-dialogue-20261012/continuation-01a132c3/NATIVE-AUDIT-INDEPENDENT-REVIEW.json"
+  "reviewEvidence": "/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/C3/native-complete-contract-01a13a52/USER-APPROVAL.json"
 }
