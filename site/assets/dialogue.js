@@ -412,6 +412,12 @@ function switchLesson(id){
  if(pending||originalDraft||hasFirstReadDraft()||(hasComposerDraft()&&!persistComposer())){$('lesson').value=curriculum.lessonId;$('status').textContent='請先完成保存中的作答，或複製尚未保存的文字，再切換篇目。';return false;}
  $('lesson').value=id;void loadLesson();return true;
 }
+// Fragment navigation (including Back/Forward) uses the same draft guard as the catalogue.
+window.addEventListener('hashchange',()=>{
+ const id=location.hash.slice(1);
+ if(!lessonIndex?.lessons.some(lesson=>lesson.lessonId===id)||id===$('lesson').value)return;
+ if(!switchLesson(id))history.replaceState(history.state,'','#'+$('lesson').value);
+});
 function renderCatalog(){
  const query=$('lesson-search').value.trim().toLocaleLowerCase(),box=$('catalog-results');box.replaceChildren();
  const lessons=lessonIndex?.lessons.filter(l=>`${l.title} ${l.blockTitle}`.toLocaleLowerCase().includes(query))||[];

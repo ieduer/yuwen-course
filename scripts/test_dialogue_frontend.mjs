@@ -41,7 +41,7 @@ async function fixture({inputKind='text',hash='#lesson-189',post,get,logout,init
   }
   const result=get?get(url,data):data;return result instanceof Response?result:Response.json(result);
  };
- const context=vm.createContext({PALETTES,originalRange,dialogueReadingAsset,window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,dialogueIdentity,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:()=>({dispose(){}}),localStorage:{},getSelection:()=>null});
+ const context=vm.createContext({PALETTES,originalRange,dialogueReadingAsset,window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},history:{state:null,replaceState(_state,_title,url){context.location.hash=url;}},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,dialogueIdentity,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:()=>({dispose(){}}),localStorage:{},getSelection:()=>null});
  vm.runInContext(document.getElementById('dialogue-initial-load').textContent,context);
  vm.runInContext(script+'\nglobalThis.frontend={renderPlates,materialText,update,refresh,refreshReadingMarks,clearPrivateView,view,renderSourceResults,renderOriginalMaterials,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
  for(let i=0;i<8&&!calls.some(c=>c.url.startsWith('/api/'));i++)await tick();await tick();
@@ -460,4 +460,28 @@ test('malformed deep links cannot turn early loading into an arbitrary request',
   assert.equal(f.calls[0].url,'/dialogue-curriculum/index.json');
   assert.equal(f.document.getElementById('lesson').value,'lesson-1');
  }
+});
+
+
+test('fragment navigation switches lessons once and follows browser Back/Forward destinations',async()=>{
+ const f=await fixture();
+ for(const id of ['lesson-188','lesson-187','lesson-188','lesson-187']){
+  const before=f.calls.length;f.context.location.hash='#'+id;f.window.dispatchEvent(new f.window.Event('hashchange'));
+  for(let i=0;i<8;i++)await tick();
+  assert.equal(f.document.getElementById('lesson').value,id);
+  assert.equal(f.calls.slice(before).filter(c=>c.url==='/dialogue-curriculum/'+id+'.json').length,1);
+ }
+});
+
+test('fragment navigation preserves an unsaved draft when local storage fails',async()=>{
+ const f=await fixture();f.window.localStorage.setItem=()=>{throw Error('storage unavailable');};f.answer('不能遺失的未保存作答');
+ const before=f.calls.length;f.context.location.hash='#lesson-188';f.window.dispatchEvent(new f.window.Event('hashchange'));await tick();
+ assert.equal(f.context.location.hash,'#lesson-189');assert.equal(f.document.getElementById('lesson').value,'lesson-189');
+ assert.equal(f.document.getElementById('answer').value,'不能遺失的未保存作答');assert.equal(f.calls.length,before);
+});
+
+test('same-lesson and non-lesson anchors do not request or clear reading state',async()=>{
+ const f=await fixture();const before=f.calls.length;
+ for(const hash of ['#lesson-189','#reading','#lesson-unknown']){f.context.location.hash=hash;f.window.dispatchEvent(new f.window.Event('hashchange'));await tick();}
+ assert.equal(f.calls.length,before);assert.equal(f.document.getElementById('lesson').value,'lesson-189');
 });
