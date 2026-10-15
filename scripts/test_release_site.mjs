@@ -552,3 +552,53 @@ test("Web preview staging excludes the complete app-content tree", () => {
     rmSync(fixture.root, { recursive: true, force: true });
   }
 });
+
+import { buildNativeTransactionArtifact, nativeArtifactInventory } from './build_release_site.mjs';
+function nativeFixture(run) {
+  const f = createFixture();
+  try {
+    const baselineRoot = path.join(f.root, 'accepted');
+    buildReleaseSite({sourceRoot:f.sourceRoot, releaseRoot:baselineRoot});
+    const candidate = writeImmutableRelease(f.appContentRoot, {
+      contentVersion:'yw-'+'d'.repeat(24), corePayload:{lesson:'new189'}, sourceRevision:'3'.repeat(40),
+    });
+    const candidatePointerPath = `candidates/${candidate.pointer.contentVersion}/${candidate.pointer.releaseReceiptId}.json`;
+    writeBytes(path.join(f.appContentRoot,candidatePointerPath),serialize(candidate.pointer));
+    const options = {operation:'stage',baselineRoot,baselineFiles:nativeArtifactInventory(baselineRoot),
+      expectedStableSha256:sha256(readFileSync(path.join(baselineRoot,'app-content/latest-stable.json'))),
+      candidateRoot:f.appContentRoot,candidatePointerPath,releaseRoot:path.join(f.root,'stage')};
+    run({f,candidate,options});
+  } finally { rmSync(f.root,{recursive:true,force:true}); }
+}
+test('native staging preserves every accepted payload and stable bytes',()=>nativeFixture(({options})=>{
+  const result=buildNativeTransactionArtifact(options);
+  for(const before of options.baselineFiles.filter(x=>x.path!=='.bdfz-release-artifact.json')) {
+    assert.equal(result.inventory.find(x=>x.path===before.path)?.sha256,before.sha256);
+  }
+  assert.equal(result.marker.releaseKind,'native-stage');
+  assert(!result.inventory.some(x=>x.path.startsWith('app-content/candidates/')));
+  assert.throws(()=>verifyReleaseStaging({releaseRoot:options.releaseRoot}),/kind/);
+}));
+test('native activation retains old immutable URLs with reviewed new Web bytes',()=>nativeFixture(({f,candidate,options})=>{
+  writeBytes(path.join(f.appContentRoot,'latest-stable.json'),serialize(candidate.pointer));
+  const webArtifactRoot=path.join(f.root,'newweb');
+  buildReleaseSite({sourceRoot:f.sourceRoot,releaseRoot:webArtifactRoot});
+  const result=buildNativeTransactionArtifact({...options,operation:'activate',webArtifactRoot});
+  assert.equal(result.inventory.find(x=>x.path==='app-content/latest-stable.json').sha256,sha256(Buffer.from(serialize(candidate.pointer))));
+  for(const old of options.baselineFiles.filter(x=>x.path.startsWith('app-content/releases/'))) {
+    assert.equal(result.inventory.find(x=>x.path===old.path)?.sha256,old.sha256);
+  }
+}));
+for(const [name,mutate,error] of [
+  ['changed baseline',x=>{x.options.baselineFiles[0].sha256='0'.repeat(64)},/baseline artifact/],
+  ['stable drift',x=>{x.options.expectedStableSha256='0'.repeat(64)},/stable pointer changed/],
+  ['blocked candidate',x=>{x.candidate.pointer.appDisposition='blocked';writeBytes(path.join(x.f.appContentRoot,x.options.candidatePointerPath),serialize(x.candidate.pointer))},/blocked/],
+  ['missing UUID',x=>{x.candidate.pointer.deploymentId=null;writeBytes(path.join(x.f.appContentRoot,x.options.candidatePointerPath),serialize(x.candidate.pointer))},/incomplete/],
+  ['missing object',x=>{rmSync(path.join(x.f.appContentRoot,x.candidate.pointer.coreBundle.path))},/missing/],
+  ['unapproved operation',x=>{x.options.operation='force'},/unknown native/],
+  ['existing output',x=>{mkdirSync(x.options.releaseRoot)},/must be absent/],
+]) test('native artifact rejects '+name,()=>nativeFixture(x=>{mutate(x);assert.throws(()=>buildNativeTransactionArtifact(x.options),error)}));
+test('native activation rejects different Web pointer',()=>nativeFixture(({f,options})=>{
+  const webArtifactRoot=path.join(f.root,'wrongweb');buildReleaseSite({sourceRoot:f.sourceRoot,releaseRoot:webArtifactRoot});
+  assert.throws(()=>buildNativeTransactionArtifact({...options,operation:'activate',webArtifactRoot}),/Web\/native pointer/);
+}));

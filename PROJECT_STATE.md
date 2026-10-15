@@ -1,3 +1,7 @@
+## Native artifact capability candidate — local only
+
+The existing release builder exports buildNativeTransactionArtifact for explicit native-stage/native-activate artifacts. Staging preserves the exact accepted payload and stable pointer; activation retains prior immutable URLs while using the new formal Web projection. These outputs remain rejected by ordinary formal-stable validation. Only a separately registered native operation may publish them. No source stable pointer, App asset, production resource or model was changed. Matching publisher source and finite approval are required before use; the older1200HTTP proposal must be resized if complete Web readback exceeds it.
+
 ## 2026-10-14 PDT — candidate sync preparation
 
 Added explicit local-only candidate sync verification for the full189 graph. Source/content authority, all object receipts and Android validation remain required; stable191 and formal publication are unchanged. Model calls remain disabled. This preparation does not mark full189 complete.

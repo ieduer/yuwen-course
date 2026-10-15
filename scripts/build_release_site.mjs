@@ -389,9 +389,8 @@ function previewNativePolicy(sourceRoot) {
   };
 }
 
-function resolveStableNativeContent(appContentRoot) {
+export function resolveStableNativeContent(appContentRoot, pointerPath = "latest-stable.json") {
   const sanitizer = createUrlSanitizer();
-  const pointerPath = "latest-stable.json";
   const { bytes: pointerBytes, value: pointer } = readImmutableJson(
     appContentRoot,
     pointerPath,
@@ -885,4 +884,98 @@ if (isMain) {
       ? path.relative(ROOT, result.releaseRoot)
       : undefined,
   }, null, 2)}\n`);
+}
+
+
+// These artifacts remain subject to the registered publisher. Neither function
+// writes a source pointer, contacts a provider, or accepts a blocked receipt.
+export function nativeArtifactInventory(root) {
+  return collectFiles(root).map((relative) => ({
+    path: relative,
+    sha256: sha256(readFileSync(resolveUnder(root, relative, "artifact"))),
+  }));
+}
+
+export function buildNativeTransactionArtifact({
+  operation, baselineRoot, baselineFiles, expectedStableSha256,
+  candidateRoot, candidatePointerPath, releaseRoot, webArtifactRoot,
+}) {
+  if (!["stage", "activate"].includes(operation)) fail("unknown native operation");
+  if (!/^[a-f0-9]{64}$/.test(expectedStableSha256 || "")) fail("expected stable hash required");
+  if (!Array.isArray(baselineFiles) || baselineFiles.length === 0
+      || JSON.stringify(nativeArtifactInventory(baselineRoot)) !== JSON.stringify(baselineFiles)) {
+    fail("accepted baseline artifact differs from exact inventory");
+  }
+  const pointerPath = "app-content/latest-stable.json";
+  const oldPointer = readFileSync(resolveUnder(baselineRoot, pointerPath, "baseline pointer"));
+  if (sha256(oldPointer) !== expectedStableSha256) fail("baseline stable pointer changed");
+  // Full original stable graph must remain valid even during a new activation.
+  resolveStableNativeContent(path.join(baselineRoot, "app-content"));
+  const candidate = resolveStableNativeContent(candidateRoot, candidatePointerPath);
+  const candidatePointer = candidate.files.find((file) => file.path === pointerPath);
+  const newPointer = JSON.parse(candidatePointer.bytes);
+  const oldValue = JSON.parse(oldPointer);
+  if (newPointer.releaseReceiptId === oldValue.releaseReceiptId) fail("candidate equals stable");
+  const payload = new Map();
+  const add = (file, preserve = false) => {
+    const existing = payload.get(file.path);
+    if (existing && existing.sha256 !== file.sha256) fail("immutable collision: " + file.path);
+    if (!preserve || !existing) payload.set(file.path, file);
+  };
+  const filesAt = (root) => nativeArtifactInventory(root).map((file) => ({
+    ...file, bytes: readFileSync(path.join(root, file.path)),
+  }));
+  let base;
+  if (operation === "stage") base = filesAt(baselineRoot);
+  else {
+    verifyReleaseStaging({ releaseRoot: webArtifactRoot, releaseKind: RELEASE_KINDS.formal });
+    base = filesAt(webArtifactRoot);
+    const webPointer = base.find((file) => file.path === pointerPath);
+    if (webPointer?.sha256 !== candidatePointer.sha256) fail("Web/native pointer differs");
+  }
+  for (const file of base) if (file.path !== MARKER_PATH) add(file);
+  // Preserve every previously public immutable path, including prior versions.
+  for (const file of filesAt(baselineRoot)) {
+    if (file.path.startsWith("app-content/releases/")) add(file, true);
+  }
+  for (const file of candidate.files) if (file.path !== pointerPath) add(file);
+  if (operation === "stage" && payload.get(pointerPath)?.sha256 !== expectedStableSha256) {
+    fail("staging may not change stable");
+  }
+  if ([...payload.keys()].some((key) => key.startsWith("app-content/candidates/"))) {
+    fail("candidate pointer must not be publicly staged");
+  }
+  const projected = [...payload.values()].sort((a, b) => a.path.localeCompare(b.path, "en"));
+  if (projected.length + 1 >= MAX_FILES || projected.some((file) => file.bytes.length >= MAX_FILE_BYTES)) {
+    fail("native artifact exceeds Pages limits");
+  }
+  // Existing privacy and source URL rules apply to retained and added bytes.
+  const sanitizer = createUrlSanitizer();
+  for (const file of projected) {
+    if (path.extname(file.path) === ".json") projectJson(file.path, file.bytes.toString("utf8"), sanitizer, true);
+    else if (TEXT_EXTENSIONS.has(path.extname(file.path))) assertTextSafe(file.path, file.bytes.toString("utf8"));
+  }
+  const nativeContent = {
+    policy: "retained-stable-plus-reviewed-candidate", operation,
+    expectedStableSha256, candidatePointerSha256: candidatePointer.sha256,
+    candidatePointer: newPointer, baselineFiles,
+    immutableFiles: projected.filter((f) => f.path.startsWith("app-content/releases/"))
+      .map(({path, sha256, bytes}) => ({path, sha256, bytes: bytes.length})),
+  };
+  const marker = markerFor(projected, 0, "native-" + operation, nativeContent);
+  // Never replace an existing output or accept overlapping source/output trees.
+  for (const input of [baselineRoot, candidateRoot, webArtifactRoot].filter(Boolean)) {
+    const a = path.resolve(input), out = path.resolve(releaseRoot);
+    if (out === a || out.startsWith(a + path.sep) || a.startsWith(out + path.sep)) fail("overlapping artifact roots");
+  }
+  if (existsSync(releaseRoot)) fail("native output must be absent");
+  mkdirSync(releaseRoot, {recursive: false});
+  for (const file of projected) {
+    const output = path.join(releaseRoot, file.path);
+    mkdirSync(path.dirname(output), {recursive: true});
+    writeFileSync(output, file.bytes, {flag: "wx"});
+  }
+  writeFileSync(path.join(releaseRoot, MARKER_PATH), JSON.stringify(marker, null, 2) + "\n", {flag: "wx"});
+  const inventory = nativeArtifactInventory(releaseRoot);
+  return { operation, releaseRoot, marker, inventory, candidatePointerSha256: candidatePointer.sha256 };
 }

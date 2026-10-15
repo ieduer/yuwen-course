@@ -1,3 +1,7 @@
+## Native artifact capability candidate — local only
+
+The existing release builder exports buildNativeTransactionArtifact for explicit native-stage/native-activate artifacts. Staging preserves the exact accepted payload and stable pointer; activation retains prior immutable URLs while using the new formal Web projection. These outputs remain rejected by ordinary formal-stable validation. Only a separately registered native operation may publish them. No source stable pointer, App asset, production resource or model was changed. Matching publisher source and finite approval are required before use; the older1200HTTP proposal must be resized if complete Web readback exceeds it.
+
 ## 2026-10-14 PDT — local native candidate synchronization
 
 `npm run check:native-content:candidate -- /absolute/output/candidates/version/receipt.json` verifies a clean current Web carrier against the reviewed immutable native candidate without moving `latest-stable`. Set `YW_NATIVE_CONTENT_DEPLOY_ROOT` to that candidate output root. It rebuilds the current graph, requires approved audit and matching semantic identity/counts, verifies every manifest/object byte and the release receipt, and requires the candidate receipt source to be an ancestor. The Android importer must independently validate the same pointer, audit and source-tree lock.
