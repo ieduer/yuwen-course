@@ -92,7 +92,8 @@
     "check:dialogue-curriculum": "node scripts/build_dialogue_curriculum.mjs --check",
     "serve:dialogue-synthetic": "node scripts/serve_dialogue_pilot.mjs",
     "build:dialogue-acceptance": "node scripts/build_dialogue_acceptance.mjs",
-    "test:dialogue-acceptance-bundle": "node --test scripts/test_dialogue_acceptance_bundle.mjs"
+    "test:dialogue-acceptance-bundle": "node --test scripts/test_dialogue_acceptance_bundle.mjs",
+    "check:native-content:candidate": "node scripts/check_native_content_deploy_sync.mjs --candidate"
   },
   "devDependencies": {
     "linkedom": "0.18.13",

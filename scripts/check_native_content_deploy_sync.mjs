@@ -75,13 +75,22 @@ function collectFiles(root, prefix = "") {
 
 function parseArguments(args) {
   if (args.length === 0) return { mode: "compatible-and-synced", receiptFile: "" };
+  if (args.length === 2 && args[0] === "--candidate") {
+    const pointerFile = path.resolve(args[1]);
+    if (!path.isAbsolute(args[1]) || pointerFile !== args[1] ||
+        !pointerFile.startsWith(`${OUTPUT_ROOT}${path.sep}candidates${path.sep}`) ||
+        !existsSync(pointerFile) || lstatSync(pointerFile).isSymbolicLink()) {
+      fail("candidate must be an exact immutable candidate pointer under the output root");
+    }
+    return { mode: "candidate-local-only", pointerFile };
+  }
   if (
     args.length !== 4
     || args[0] !== "--mode"
     || args[1] !== WEB_ONLY_MODE
     || args[2] !== "--receipt"
   ) {
-    fail(`usage: check_native_content_deploy_sync.mjs [--mode ${WEB_ONLY_MODE} --receipt <ABSOLUTE_PATH>]`);
+    fail(`usage: check_native_content_deploy_sync.mjs [--candidate <ABSOLUTE_POINTER> | --mode ${WEB_ONLY_MODE} --receipt <ABSOLUTE_PATH>]`);
   }
   const receiptFile = path.resolve(args[3]);
   if (!path.isAbsolute(args[3]) || receiptFile !== args[3]) fail("receipt path must be exact and absolute");
@@ -90,6 +99,22 @@ function parseArguments(args) {
     fail("receipt must be a regular non-symlink file");
   }
   return { mode: WEB_ONLY_MODE, receiptFile };
+}
+
+export function validateCandidateIdentity(pointer, currentBuild) {
+  if (pointer.schemaVersion !== "yw-native-content-pointer-v1" || pointer.siteKey !== "yw") {
+    fail("candidate pointer schema or site is invalid");
+  }
+  if (pointer.appDisposition !== "blocked" || pointer.deploymentId !== null || pointer.publishedAt !== null) {
+    fail("local candidate must not claim publication or compatible activation");
+  }
+  if (pointer.sourceClean !== true || !/^[a-f0-9]{40}$/.test(pointer.sourceRevision || "")) {
+    fail("candidate source receipt must be clean and exact");
+  }
+  if (pointer.semanticDigest !== currentBuild.semanticDigest || pointer.contentVersion !== currentBuild.contentVersion ||
+      serialize(pointer.counts) !== serialize(currentBuild.counts)) {
+    fail("candidate differs from the current canonical source graph");
+  }
 }
 
 function treeReceipt(root) {
@@ -130,11 +155,13 @@ export function validateWebOnlyReceipt(receipt, context) {
 
 function main() {
   const options = parseArguments(process.argv.slice(2));
-  if (!existsSync(STABLE_POINTER_FILE)) {
+  const candidateMode = options.mode === "candidate-local-only";
+  const pointerFile = candidateMode ? options.pointerFile : STABLE_POINTER_FILE;
+  if (!existsSync(pointerFile)) {
     fail("site/app-content/latest-stable.json is missing");
   }
 
-  const pointerBytesBefore = readFileSync(STABLE_POINTER_FILE);
+  const pointerBytesBefore = readFileSync(pointerFile);
   const pointerSha256Before = sha256(pointerBytesBefore);
   const appTreeBefore = treeReceipt(OUTPUT_ROOT);
   const temporaryOutput = mkdtempSync(path.join(os.tmpdir(), "yw-native-deploy-sync-"));
@@ -155,9 +182,16 @@ function main() {
     }
 
     const pointer = JSON.parse(pointerBytesBefore);
+    if (candidateMode) {
+      if (git("status", "--porcelain") !== "") fail("candidate carrier source must be clean");
+      validateCandidateIdentity(pointer, currentBuild);
+      // A newer UI carrier may reuse the same immutable graph, but not a graph
+      // from unrelated history. Publication fields remain untouched.
+      git("merge-base", "--is-ancestor", pointer.sourceRevision, "HEAD");
+    }
     if (pointer.schemaVersion !== "yw-native-content-pointer-v1") fail("stable pointer schema is invalid");
     if (pointer.sourceClean !== true) fail("stable pointer sourceClean is not true");
-    if (pointer.appDisposition !== "compatible-and-synced") {
+    if (!candidateMode && pointer.appDisposition !== "compatible-and-synced") {
       fail("stable pointer appDisposition is not compatible-and-synced");
     }
     if (options.mode === "compatible-and-synced") {
@@ -277,6 +311,10 @@ function main() {
         status: "web-only-deploy-compatible",
       };
     } else {
+      if (candidateMode && (sha256(readFileSync(pointerFile)) !== pointerSha256Before ||
+          treeReceipt(OUTPUT_ROOT).aggregateSha256 !== appTreeBefore.aggregateSha256)) {
+        fail("native candidate tree changed during validation");
+      }
       output = {
         contentVersion: pointer.contentVersion,
         semanticDigest: pointer.semanticDigest,
@@ -284,7 +322,9 @@ function main() {
         objects: manifest.objects.length,
         sourceClean: pointer.sourceClean,
         appDisposition: pointer.appDisposition,
-        status: "deploy-synced",
+        status: candidateMode ? "candidate-synced-local-only" : "deploy-synced",
+        ...(candidateMode ? { publicationAllowed: false, stablePromoted: false,
+          carrierSourceRevision: git("rev-parse", "HEAD"), receiptSourceRevision: pointer.sourceRevision } : {}),
       };
     }
     process.stdout.write(`${JSON.stringify(output, null, 2)}\n`);
@@ -293,4 +333,4 @@ function main() {
   }
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

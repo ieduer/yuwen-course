@@ -1,3 +1,7 @@
+## 2026-10-14 PDT — candidate sync preparation
+
+Added explicit local-only candidate sync verification for the full189 graph. Source/content authority, all object receipts and Android validation remain required; stable191 and formal publication are unchanged. Model calls remain disabled. This preparation does not mark full189 complete.
+
 <!-- yw-native-projection-01a13a52 -->
 ## 2026-10-14T12:20:05.904475+00:00 — Native learning projections repaired locally; compatibility remains open
 

@@ -1,3 +1,9 @@
+## 2026-10-14 PDT — local native candidate synchronization
+
+`npm run check:native-content:candidate -- /absolute/output/candidates/version/receipt.json` verifies a clean current Web carrier against the reviewed immutable native candidate without moving `latest-stable`. Set `YW_NATIVE_CONTENT_DEPLOY_ROOT` to that candidate output root. It rebuilds the current graph, requires approved audit and matching semantic identity/counts, verifies every manifest/object byte and the release receipt, and requires the candidate receipt source to be an ancestor. The Android importer must independently validate the same pointer, audit and source-tree lock.
+
+Success is `candidate-synced-local-only`, with `publicationAllowed=false`. A blocked candidate retains null deployment/time fields. Default `check:native-content:deploy-sync`, formal staging, immutable public readback, device acceptance and stable activation are unchanged release gates. A UI-only carrier advance reuses the existing immutable graph rather than inventing a new publication receipt.
+
 <!-- yw-native-projection-01a13a52 -->
 ## 2026-10-14T12:20:05.904475+00:00 — Native learning projections repaired locally; compatibility remains open
 
