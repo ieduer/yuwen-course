@@ -1,4 +1,61 @@
-## Current — 2026-10-15 04:25 PDT: exact image-note text, local only
+## Current — 2026-10-15 04:47 PDT: original study-guide context and reference repair, local only
+
+Full189 remains ACTIVE and incomplete. On exact Web64b4477,55 of193 active
+study-guide items were absent from author context when the student quoted that
+item's actual question. The long-context reducer retained only the first original
+requirement. Separately,74 structured references (24 arrays and50 objects) were
+rejected despite the teacher displaying the complete reference, because the
+validator implicitly coerced structured source values to plain strings.
+
+Original requirements now include exact study-guide prompt, typed reference,
+ordered readable referenceText, explanation, rubric, item/semantic revision,
+PDF/printed page and answer authority. These are curated source items, not a claim
+that whole PDF pages were supplied. Long contexts retain all original formal
+rubrics plus relevant complete guide packets, prioritizing the current task,
+explicit item/goal identity and quoted source question; other guide selection
+uses bounded text overlap. Pinned required material is never silently truncated.
+Omitted requirement counts remain explicit. A dense annotated paragraph uses the
+existing exact excerpt+required-note selector to fit the unchanged22000-character
+budget without discarding the selected source or current rubric.
+
+Arrays and objects render all source members in source order, preserving the
+existing reader's list/key-value structure. Reference validation accepts complete
+readable text or complete serialized source JSON; complete legacy scalar-array
+references remain usable. Partial/object-coercion placeholders or a reference
+displayed after the student answer are refused. Evidence cites the actual teacher
+substring, while the original typed answer remains unchanged for its source
+assessment. Existing accepted records and incomplete work are not rewritten.
+
+Context layout v2 places the supplied original requirements with stable lesson
+material before private turn fields; v1 is historical. The common teaching policy
+and scoring authority are unchanged. The existing source_context_prepared event
+records every actually provided requirement's source descriptor and material hash
+alongside prompt SHA, passage/note evidence and the explicit coverage counts.
+This is additive source provenance, not a new release/authorization schema.
+
+117 focused tests pass, including all193 active selections/references,1128
+passage packets, full189 context limits, source immutability, real local SQLite
+prompt receipts, private-student prefix isolation, replay/history/scoring,
+reading-evidence and original study-guide answer-key regressions. Initial83/84
+showed a dense lesson1558 window over budget; exact source-window selection fixed
+it without raising limits. Longest full guide reference is756 characters within
+the existing1800 reply limit. Real model quality, cache metrics and natural
+reference rendering remain unverified; no model/provider/account/device call.
+
+No curriculum/data/App graph, original formal evaluator, answer key, migration,
+accepted grades or A+/A–F policy changed. OPS985af3dd remains uninstalled; this
+Web change is local/unpushed/unpublished. Preview/staging, exact local Worker
+responses, independent bundle recovery and artifact disposal are in the report.
+A separate source gap remains: after a whole-lesson legacy completion,
+originalRequirements is empty, so voluntary review of a study-guide item does
+not yet receive its reference material. The193-item tests cover pending-learning
+states; they do not close that preserved-completion review requirement.
+Full189 still needs model207/three quality E2E/cache, every central accepted receipt
+to ordinary My reload, native device/screen-reader, suen formal go/no-go and Status.
+Model allowance0/expired deadline and all release boundaries remain unchanged.
+[Exact source, diagnosis, tests, artifact and cleanup](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/study-guide-source-01a13f17/REPORT.md).
+
+## History — 2026-10-15 04:25 PDT: exact image-note text, local only
 
 Full189 remains ACTIVE and incomplete. User explicitly authorized one source-image
 read, then exactly one additional attempt after sandbox DNS failure. The second

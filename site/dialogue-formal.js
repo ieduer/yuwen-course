@@ -46,6 +46,13 @@ export const FORMAL_FIELDS = Object.freeze({
 });
 export const FORMAL_LABELS = Object.freeze({contextWords:'初讀三詞',authorQuestion:'向作者發問',revision:'字句之改',structure:'篇章技法',wordCreation:'字詞創作'});
 export const FIELD_LABELS = Object.freeze({words:'三個詞',answer:'問題或回應',original:'原文',action:'調整方式',revised:'改文',reason:'文本依據與理由',word:'使用的字詞',creation:'創作'});
+// Preserve every source member and its order, like the existing ol/dl reader.
+// Never coerce a structured answer to "[object Object]" or lose its labels.
+export function studyGuideReferenceText(value){
+  if(Array.isArray(value))return value.map((entry,index)=>`${index+1}. ${studyGuideReferenceText(entry).replace(/\n/g,'\n   ')}`).join('\n');
+  if(value&&typeof value==='object')return Object.entries(value).map(([key,entry])=>`${key}：${studyGuideReferenceText(entry)}`).join('\n');
+  return value==null?'':String(value);
+}
 export function prepareFormalInput(curriculum, formal) {
   const objective = curriculum.objectives.find(o => o.id === formal?.objectiveId && o.domain === 'legacy');
   const interaction = objective?.legacy?.questionKind, fields = FORMAL_FIELDS[interaction];
@@ -69,9 +76,13 @@ export function validateFormalDraft(curriculum, turns, proposed) {
   if(study){
     const item=curriculum.studyGuide?.find(i=>i.itemKey===study.sourceItemKey),source=curriculum.legacy.formative.find(i=>i.itemKey===study.sourceItemKey),ref=proposed.fields?.response,turn=turns.find(t=>t.id===ref?.turnId&&t.role==='student');
     if(!item?.activeForSelfTest||item.reviewRequired||!source||!turn||typeof ref.quote!=='string'||!ref.quote.trim()||ref.quote.length>1800||!turn.content.includes(ref.quote))throw Error('study_guide_draft_not_verified');
-    const revealed=turns.find(t=>t.role==='teacher'&&item.referenceAnswer&&t.content.includes(item.referenceAnswer)&&Number.isFinite(Date.parse(t.createdAt))&&Date.parse(t.createdAt)<=Date.parse(turn.createdAt));
+    const referenceText=studyGuideReferenceText(item.referenceAnswer),forms=[referenceText];
+    if(item.referenceAnswer&&typeof item.referenceAnswer==='object')forms.push(JSON.stringify(item.referenceAnswer));
+    // Preserve complete scalar-array references in already saved conversations.
+    if(Array.isArray(item.referenceAnswer)&&item.referenceAnswer.every(v=>typeof v==='string'||typeof v==='number'))forms.push(item.referenceAnswer.join(','));
+    const revealed=turns.find(t=>t.role==='teacher'&&forms.some(text=>text&&t.content.includes(text))&&Number.isFinite(Date.parse(t.createdAt))&&Date.parse(t.createdAt)<=Date.parse(turn.createdAt));
     if(!revealed)throw Error('study_guide_reference_not_revealed');
-    return {formal:{objectiveId:study.id,interaction:'studyGuideItemCompleted',input:{itemKey:item.itemKey,response:ref.quote,referenceRevealedAt:revealed.createdAt},content:ref.quote,resourceKey:source.resourceKey,resourceVersion:source.semanticRevision,reference:item.referenceAnswer},label:item.answerLabel||'學習提示',references:[{key:'response',turnId:turn.id,quote:ref.quote},{key:'reference',turnId:revealed.id,quote:item.referenceAnswer}]};
+    return {formal:{objectiveId:study.id,interaction:'studyGuideItemCompleted',input:{itemKey:item.itemKey,response:ref.quote,referenceRevealedAt:revealed.createdAt},content:ref.quote,resourceKey:source.resourceKey,resourceVersion:source.semanticRevision,reference:item.referenceAnswer},label:item.answerLabel||'學習提示',references:[{key:'response',turnId:turn.id,quote:ref.quote},{key:'reference',turnId:revealed.id,quote:forms.find(text=>text&&revealed.content.includes(text))}]};
   }
   const objective=curriculum.objectives.find(o=>o.id===proposed.objectiveId&&o.domain==='legacy');
   const kind=objective?.legacy?.questionKind,keys=FORMAL_FIELDS[kind];
@@ -89,8 +100,18 @@ export function validateFormalDraft(curriculum, turns, proposed) {
 export function originalRequirements(curriculum, state) {
   const formal=curriculum.objectives.filter(o=>o.domain==='legacy'&&FORMAL_FIELDS[o.legacy?.questionKind]
     && !['preserved','historical_review'].includes(state.objectives.find(x=>x.id===o.id)?.status))
-    .map(o=>({objectiveId:o.id,label:FORMAL_LABELS[o.legacy.questionKind],fields:FORMAL_FIELDS[o.legacy.questionKind].map(key=>({key,label:FIELD_LABELS[key]})),rule:formalRubric(o.legacy.questionKind,curriculum.mode),...(o.legacy.formalScopePolicyVersion?{newAnswersOnly:true,answerNotBefore:o.legacy.effectiveFrom}:{} )}));
-  return [...formal,...curriculum.objectives.filter(o=>o.domain==='studyGuide'&&!['preserved','historical_review'].includes(state.objectives.find(x=>x.id===o.id)?.status)).flatMap(o=>{const item=curriculum.studyGuide?.find(i=>i.itemKey===o.sourceItemKey);return item?.activeForSelfTest&&!item.reviewRequired?[{objectiveId:o.id,label:item.answerLabel||'學習提示',fields:[{key:'response',label:'原話'}],rule:item.prompt,reference:item.referenceAnswer,instruction:'先聽學生理解，再在對話中逐字展示這份參考，待學生對照並自己補充或修正後引用其原話作為response；未展示參考不能提交。'}]:[];})];
+    .map(o=>({objectiveId:o.id,label:FORMAL_LABELS[o.legacy.questionKind],fields:FORMAL_FIELDS[o.legacy.questionKind].map(key=>({key,label:FIELD_LABELS[key]})),rule:formalRubric(o.legacy.questionKind,curriculum.mode),source:{kind:'original-formal-rubric',resourceKey:o.legacy.resourceKey,resourceVersion:o.legacy.resourceVersion},...(o.legacy.formalScopePolicyVersion?{newAnswersOnly:true,answerNotBefore:o.legacy.effectiveFrom}:{} )}));
+  return [...formal,...curriculum.objectives.filter(o=>o.domain==='studyGuide'&&!['preserved','historical_review'].includes(state.objectives.find(x=>x.id===o.id)?.status)).flatMap(o=>{const item=curriculum.studyGuide?.find(i=>i.itemKey===o.sourceItemKey);return item?.activeForSelfTest&&!item.reviewRequired?[{objectiveId:o.id,label:item.answerLabel||'學習提示',fields:[{key:'response',label:'原話'}],rule:item.prompt,reference:item.referenceAnswer,referenceText:studyGuideReferenceText(item.referenceAnswer),explanation:item.explanation,rubric:item.rubric,source:{kind:'curated-study-guide-item',catalog:'data/study-guide-catalog.json',lessonId:curriculum.lessonId,itemKey:item.itemKey,semanticRevision:item.semanticRevision,pdfPage:item.pdfPage,printedPage:item.printedPage,answerAuthority:item.answerAuthority,notice:'這是原課已整理的學案條目與原判準；不代表已提供完整PDF原頁。'},instruction:'先聽學生理解，再在對話中完整逐字展示referenceText（保留每個標籤及清單項），待學生對照並自己補充或修正後引用其原話作為response；未展示完整參考不能提交。reference是原結構，explanation與rubric仍沿用來源，不新增判準。'}]:[];})];
+}
+export function selectOriginalRequirements(requirements,cue='',objectiveIds=[]){
+  const guides=requirements.filter(r=>r.source?.kind==='curated-study-guide-item'),formal=requirements.filter(r=>r.source?.kind!=='curated-study-guide-item');
+  const exact=(text,id)=>id&&new RegExp(`(?:^|[^\\w:-])${id.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}(?=$|[^\\w:-])`).test(text);
+  const pinned=r=>objectiveIds.includes(r.objectiveId)||exact(cue,r.objectiveId)||exact(cue,r.source.itemKey)||(r.rule&&cue.includes(r.rule));
+  const grams=new Set(Array.from(cue).slice(0,600).flatMap((c,i,a)=>i?[a[i-1]+c]:[]));
+  const selected=new Set(guides.filter(pinned).map(r=>r.objectiveId));
+  const ranked=guides.map((r,index)=>({r,index,score:[...grams].reduce((sum,g)=>sum+(r.rule.includes(g)?1:0),0)})).sort((a,b)=>b.score-a.score||a.index-b.index);
+  for(const {r} of ranked){if(selected.size>=2)break;selected.add(r.objectiveId);}
+  return [...formal,...guides.filter(r=>selected.has(r.objectiveId))];
 }
 export function formalPrompt(prompt,curriculum=null,formal=null) {
   if (typeof prompt !== 'string' || prompt.length > 21000) throw Error('source_context_budget_exceeded');
