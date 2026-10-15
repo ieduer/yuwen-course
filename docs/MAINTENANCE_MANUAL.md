@@ -1,4 +1,43 @@
-## 2026-10-15 PDT — local response/config contract correction
+## Current — 2026-10-15 04:01 PDT: original annotation completeness repair, local only
+
+Full189 goal remains ACTIVE and incomplete. Exact prior candidatefc8a53f showed
+56 broken formal-source packets across26 lessons in1128 bounded first/last
+selection cases (188 lessons with text, three character budgets, two positions).
+The lesson1572 approved source-missing exception is unchanged. A formal excerpt
+now enters with every referenced original annotation; surrounding text shrinks
+with exact offsets until the complete source packet fits. A pinned passage that
+cannot fit, or depends on unavailable annotation content, refuses before model
+invocation. Optional cue notes cannot crowd out required notes. Full coverage
+includes the actual serialized coverage field in its character budget.
+
+One additional source gap is explicit: lesson1462, footnote-9899-2 is an original
+image-only note (media-4bc0b5d3090892e77319), not readable text. General dialogue
+sourceCoverage marks it unprovided, with annotationsExact=false; its original
+media ID is retained. A formal request explicitly requiring that full passage
+refuses source_annotation_unavailable. No image was downloaded/OCRed, no source
+transcription was invented and no model image-reading acceptance is claimed.
+Other fully supported passages from the lesson remain selectable.
+
+74 affected tests pass on Node24.18.0, including1128 corpus packet cases with
+zero dangling selected annotation references, original rubric/prompt prefix,
+source immutability, scope/scoring preservation, local SQLite idempotency and
+stream/recovery regressions. Preview build and staging check pass. These are
+local checks; no model/provider request or live grading occurred. The two initial
+failures exposed the image-only source gap and preservation of a full quoted
+passage; their evidence is retained. Real model207/three E2E/cache, central
+per-event accepted receipt to ordinary My reload, device and formal release/
+Status acceptance remain open. Model allowance0/deadline unchanged.
+
+Only two server prompt-preparation modules, one focused test and these manuals
+change;189 curriculum files, source annotations/images, historical grades,
+88-new-answer scope, A+ exclusion and A–F rules remain unchanged. OPS985af3dd
+stays local/uninstalled; this Web candidate is unpushed/unreleased. New artifact
+and source need exact rebinding before any future release; older artifact hashes
+or provider budgets are not silently reused. No native content pointer moved.
+[Exact source, local artifact, evidence, gaps and cleanup](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/material-completeness-01a13f17/REPORT.md).
+
+## History — prior local response/config contract correction
+
 
 Current scope: local-only candidate; no push, installation, registry change,
 provider call, device/model operation or stable change. This summary supersedes

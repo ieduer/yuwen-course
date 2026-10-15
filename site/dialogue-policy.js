@@ -187,7 +187,8 @@ export function contextFor({curriculum,state,turns,question,remediation=null,ass
   data.trajectory.domains=data.trajectory.domains.map(d=>active.has(d.objectiveId)?d:{...d,anchors:d.anchors.slice(-1)});
  }
  while(JSON.stringify(data).length>LIMITS.contextChars-256&&data.passages.length>1){const index=data.passages.findLastIndex(p=>!pinnedPassages.has(p.id));if(index<0)break;data.passages.splice(index,1);data.annotations=annotationWindow(sourceAnnotations(curriculum),data.passages,latestSourceCue);}
- data.sourceCoverage={totalPassages:curriculum.passages.length,includedPassages:data.passages.length,totalAnnotations:(curriculum.annotations||[]).length,includedAnnotations:data.annotations.length,annotationsExact:true};
+ const unprovidedAnnotationIds=data.annotations.filter(a=>!a.text?.trim()||a.unprovidedMediaIds?.length).map(a=>a.noteId);
+ data.sourceCoverage={totalPassages:curriculum.passages.length,includedPassages:data.passages.length,totalAnnotations:(curriculum.annotations||[]).length,includedAnnotations:data.annotations.length,annotationsExact:unprovidedAnnotationIds.length===0,...(unprovidedAnnotationIds.length?{unprovidedAnnotationIds}:{})};
  // Source selection is unchanged: long lessons still prioritize the student's
  // actual question. Identical selected material now precedes private turn data.
  const serialized=serializeContext(data);
