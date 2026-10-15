@@ -1,3 +1,34 @@
+## 2026-10-15 PDT — local response/config contract correction
+
+Current scope: local-only candidate; no push, installation, registry change,
+provider call, device/model operation or stable change. This summary supersedes
+older local-candidate claims only; their evidence remains historical. The installed
+5954144f publisher and disabled native channel are unchanged. The full 189-lesson
+goal remains incomplete and paused; every future serial handoff must include its
+full original text, evidence, gaps, budgets and authorization boundaries.
+
+Actual saved preview config is recognized but remains NO-GO because fail_open is
+true. Require explicit false, typed known metadata, an explicit environment/binding
+inventory, no secrets/services/queues/unknown bindings and no production D1 IDs.
+This is a local validator, not permission to alter live configuration.
+
+The existing schema-v1 receipt now binds public_response_manifest to its exact
+source and upload digest. A source-owned offline runner executes the exact staged
+Worker with only local ASSETS; network, D1 and deferred work are denied. It computes
+every public path, including all 189 load/sanitize/JSON.stringify responses and
+both root entrypoint flag settings. The publisher independently recomputes before
+provider reads and again before consumption/upload; missing/duplicate/substituted
+responses and inadequate request/byte budgets fail closed. Provider-only controls
+remain pending runtime acceptance. No curriculum or Worker runtime was changed.
+
+Phase and shared http_budget.max_response_bytes bound decoded public readback;
+actual bytes persist in the same non-resetting journal alongside request/API counts.
+An oversized received chunk is recorded and terminates the phase. These are body
+bytes, not total wire traffic: provider API bodies, multipart/compression and TLS
+framing are not claimed as measured. API reserve remains40 per phase/160 shared;
+no budget increase is granted. Full artifact/readback inventory and restoration:
+[unique local report](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/native-contract-01a13eca/REPORT.md).
+
 ## Native artifact capability candidate — local only
 
 The existing release builder exports buildNativeTransactionArtifact for explicit native-stage/native-activate artifacts. Staging preserves the exact accepted payload and stable pointer; activation retains prior immutable URLs while using the new formal Web projection. These outputs remain rejected by ordinary formal-stable validation. Only a separately registered native operation may publish them. No source stable pointer, App asset, production resource or model was changed. Matching publisher source and finite approval are required before use; the older1200HTTP proposal must be resized if complete Web readback exceeds it.
