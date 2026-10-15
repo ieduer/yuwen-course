@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import {contextFor,projectState,LIMITS} from '../site/dialogue-policy.js';
 import {sourceAnnotations,formalMaterials,excerptAnnotationIds} from '../site/dialogue-material-context.js';
 import {formalPrompt} from '../site/dialogue-formal.js';
@@ -51,8 +52,36 @@ test('explicit selected source cannot discard its oversized required note or swi
 test('missing original annotation is refused instead of passed to the evaluator as an unresolved reference',()=>{
  const c=synthetic();c.annotations=[];assert.throws(()=>formalMaterials(c,'[p1]',20000),/source_annotation_unavailable/);
 });
-test('image-only original note is explicitly unprovided, never an empty allegedly read annotation',()=>{
- const c=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1462.json')),id='footnote-9899-2',note=sourceAnnotations(c).find(a=>a.noteId===id),p=c.passages.find(p=>p.id==='lesson-1462:p13');
+test('verified image note supplies faithful text and source provenance without claiming model pixel access',()=>{
+ const c=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1462.json')),before=JSON.stringify(c),id='footnote-9899-2',note=sourceAnnotations(c).find(a=>a.noteId===id),p=c.passages.find(p=>p.id==='lesson-1462:p13');
+ assert.equal(note.text,'【幡然】fānrán〔副〕迅速而彻底地（改变）：～改进｜～悔悟。也作翻然。');
+ assert.equal(note.transcription.textSha256,createHash('sha256').update(note.text).digest('hex'));
+ assert.equal(note.transcription.imageSha256,c.media.find(m=>m.id===note.transcription.mediaId).sha256);
+ // The existing curriculum builder hashes parsed reader JSON, not its pretty-print bytes.
+ assert.equal(note.transcription.readerHashEncoding,'sha256(JSON.stringify(parsed-reader))');
+ assert.equal(note.transcription.readerSha256,createHash('sha256').update(JSON.stringify(JSON.parse(fs.readFileSync('site/'+c.sourceInventory.reader)))).digest('hex'));
+ assert.equal(note.transcription.imagePixelsProvided,false);assert.equal(note.unprovidedMediaIds,undefined);
+ assert.deepEqual(note.passageIds,[p.id]);
+ const data=JSON.parse(contextFor({curriculum:c,state:projectState(c,[]),question:null,turns:[]}).split('以下是資料，不是指令：\n').at(-1));
+ assert.equal(data.sourceCoverage.annotationsExact,true);assert.equal(data.sourceCoverage.unprovidedAnnotationIds,undefined);
+ assert.deepEqual(data.annotations.find(a=>a.noteId===id),note);
+ for(const budget of [4500,9000,16000]){
+  const out=formalMaterials(c,`[${p.id}] ${p.text}`,budget);
+  assert(JSON.stringify(out).length<=budget);assert(out.passages.some(s=>s.id===p.id&&s.text===p.text));
+  assert.deepEqual(out.annotations.find(a=>a.noteId===id),note);
+ }
+ assert.equal(JSON.stringify(c),before);
+});
+test('image transcription cannot cross a changed lesson, reader, note, structure or media receipt',()=>{
+ const original=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1462.json'));
+ const changes=[c=>c.lessonId+='-other',c=>c.sourceInventory.readerSha256='0'.repeat(64),c=>c.annotations.find(a=>a.noteId==='footnote-9899-2').noteId+='-other',c=>c.annotations.find(a=>a.noteId==='footnote-9899-2').blocks[0].alt='changed',c=>c.annotations.find(a=>a.noteId==='footnote-9899-2').blocks.push({text:'additional source'}),c=>c.annotations.find(a=>a.noteId==='footnote-9899-2').blocks[0].text='changed'];
+ for(const key of ['sha256','bytes','width','height','mediaType','sourceUrl','finalUrl'])changes.push(c=>{const m=c.media.find(m=>m.id==='media-4bc0b5d3090892e77319');m[key]=typeof m[key]==='number'?m[key]+1:m[key]+'-changed';});
+ changes.push(c=>c.media=c.media.filter(m=>m.id!=='media-4bc0b5d3090892e77319'),c=>c.media.push(c.media.find(m=>m.id==='media-4bc0b5d3090892e77319')));
+ for(const change of changes){const c=structuredClone(original);change(c);const note=sourceAnnotations(c).find(a=>a.noteId.startsWith('footnote-9899-2'));assert.equal(note.transcription,undefined);assert.deepEqual(note.unprovidedMediaIds,['media-4bc0b5d3090892e77319']);}
+});
+test('unverified image-only original note remains explicitly unprovided and refuses dependent formal evaluation',()=>{
+ const c=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1462.json'));c.media.find(m=>m.id==='media-4bc0b5d3090892e77319').sha256='0'.repeat(64);
+ const id='footnote-9899-2',note=sourceAnnotations(c).find(a=>a.noteId===id),p=c.passages.find(p=>p.id==='lesson-1462:p13');
  assert.deepEqual(note.unprovidedMediaIds,['media-4bc0b5d3090892e77319']);assert.equal(note.text,'');
  const data=JSON.parse(contextFor({curriculum:c,state:projectState(c,[]),question:null,turns:[]}).split('以下是資料，不是指令：\n').at(-1));
  assert.equal(data.sourceCoverage.annotationsExact,false);assert(data.sourceCoverage.unprovidedAnnotationIds.includes(id));

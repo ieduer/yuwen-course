@@ -9,7 +9,7 @@ const prefix=p=>p.slice(0,p.indexOf(',"conversationGuide":'));
 const prompt=(c,who)=>contextFor({curriculum:c,state:projectState(c,[]),question:null,turns:[{id:who,role:'student',content:who}],conversationGuide:{taskId:who,prompt:who},firstReading:{marks:[{guess:who}],summaries:[who]}});
 
 test('shared policy and exact lesson materials precede all private turn fields',()=>{
- for(const id of ['lesson-1498','lesson-1717-p2','lesson-1711-p1']){
+ for(const id of ['lesson-1498','lesson-1717-p2','lesson-1711-p1','lesson-1462']){
   const c=load(id),a=prompt(c,'private-student-A'),b=prompt(c,'private-student-B');
   assert(a.startsWith(POLICY+'\n'+marker));
   assert(a.includes(',"conversationGuide":'));assert.equal(prefix(a),prefix(b));

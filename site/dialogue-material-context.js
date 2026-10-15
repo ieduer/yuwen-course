@@ -1,5 +1,27 @@
 // Exact source text projections, with stable note/passages and source hashes.
 // A linked PDF/image is inventory only; its URL is never treated as read content.
+// One source-owned visual transcription. It is usable only with the exact
+// reader, note structure and immutable media receipt that were inspected.
+const IMAGE_NOTE = Object.freeze({
+ version:'yw-annotation-image-2026-10-15.1',lessonId:'lesson-1462',noteId:'footnote-9899-2',mediaId:'media-4bc0b5d3090892e77319',
+ readerSha256:'ce4cde2322ed571dfb1efea9b1f56ac01b8230ed0e9fe9e0388f710546e505e9',
+ readerHashEncoding:'sha256(JSON.stringify(parsed-reader))',
+ sourceUrl:'https://files.rdfzer.com/original/2X/c/c79bd0eab5fad7c41ab0220ed8476eeeb559a54a.png',
+ imageSha256:'146a53fecde8bf22aefcbd798a16494049c2fcc4b546b992ec5f8949c9e7f6bc',imageBytes:11049,width:533,height:150,
+ text:'【幡然】fānrán〔副〕迅速而彻底地（改变）：～改进｜～悔悟。也作翻然。',
+ textSha256:'4095de77603b510daa661a801987a93ac67cd38b53d03abb93f538836e19e739',
+ method:'visual-transcription',imagePixelsProvided:false,
+ normalization:'合併版面換行與空白；詞性方框以〔副〕表示，括號及例句分隔線用全形；保留原圖簡體字、拼音、詞目代替符號與異形詞。',
+ notice:'此原註是經核對原圖的逐字文字轉錄；本輪提供文字，不代表模型已讀取原圖像素。',
+});
+function imageNote(curriculum,annotation){
+ const n=IMAGE_NOTE,blocks=annotation.blocks;
+ if(curriculum.lessonId!==n.lessonId||annotation.noteId!==n.noteId||curriculum.sourceInventory?.readerSha256!==n.readerSha256)return null;
+ if(!Array.isArray(blocks)||blocks.length!==1||Object.keys(blocks[0]).sort().join(',')!=='alt,mediaId,type'||blocks[0].type!=='image'||blocks[0].mediaId!==n.mediaId||blocks[0].alt!=='')return null;
+ const matches=(curriculum.media||[]).filter(m=>m.id===n.mediaId),m=matches[0];
+ if(matches.length!==1||m.sha256!==n.imageSha256||m.bytes!==n.imageBytes||m.width!==n.width||m.height!==n.height||m.mediaType!=='image/png'||m.sourceUrl!==n.sourceUrl||m.finalUrl!==n.sourceUrl)return null;
+ return n;
+}
 function textOf(value){
  if(!value)return '';
  if(typeof value==='string')return value;
@@ -27,13 +49,17 @@ export function excerptAnnotationIds(curriculum,id,start,end){
 }
 export function sourceAnnotations(curriculum){
  const mediaIds=(value,out=new Set())=>{if(value&&typeof value==='object'){if(value.mediaId)out.add(value.mediaId);for(const child of Object.values(value))if(child&&typeof child==='object')mediaIds(child,out);}return [...out];};
- return (curriculum.annotations||[]).map(a=>{const unavailable=mediaIds(a.blocks);return {noteId:a.noteId,text:textOf(a.blocks),passageIds:curriculum.passages.filter(p=>noteIds(p.block).has(a.noteId)).map(p=>p.id),...(unavailable.length?{unprovidedMediaIds:unavailable,notice:'此原註釋含未提供給模型的圖像／媒體；文字提取不代表已讀原圖，不能依缺失內容評閱。'}:{})};});
+ return (curriculum.annotations||[]).map(a=>{
+  const verified=imageNote(curriculum,a),unavailable=mediaIds(a.blocks).filter(id=>id!==verified?.mediaId);
+  const {text,...transcription}=verified||{};
+  return {noteId:a.noteId,text:verified?text:textOf(a.blocks),passageIds:curriculum.passages.filter(p=>noteIds(p.block).has(a.noteId)).map(p=>p.id),...(verified?{transcription}:{}),...(unavailable.length?{unprovidedMediaIds:unavailable,notice:'此原註釋含未提供給模型的圖像／媒體；文字提取不代表已讀原圖，不能依缺失內容評閱。'}:{})};
+ });
 }
 export function annotationWindow(annotations,passages,cue=''){
  const ids=new Set(passages.flatMap(p=>p.annotationIds||[]));
  return annotations.filter(a=>ids.has(a.noteId)||cue.includes(a.noteId)||(a.text.length>=3&&cue.includes(a.text.split(/[：:，,。]/u)[0])));
 }
-export function sourceProvenance(curriculum){return {curriculumVersion:curriculum.curriculumVersion,sourceUrl:curriculum.source,...curriculum.sourceInventory,notice:'正文及註釋均由已核對的原課資料直接抽取；段落和註釋ID可回查。未提供的附件原頁不能當作已讀。'};}
+export function sourceProvenance(curriculum){return {curriculumVersion:curriculum.curriculumVersion,sourceUrl:curriculum.source,...curriculum.sourceInventory,notice:'正文及文字原註由已核對的原課資料直接抽取；附transcription的原註為核對原圖後的文字轉錄，不代表模型讀過像素。段落和註釋ID可回查；未提供的附件內容不能當作已讀。'};}
 
 export function formalMaterials(curriculum,cue,budget){
  if(!Number.isSafeInteger(budget)||budget<=0)throw Error('source_material_budget_exceeded');

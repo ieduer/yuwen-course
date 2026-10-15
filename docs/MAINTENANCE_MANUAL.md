@@ -1,4 +1,45 @@
-## Current — 2026-10-15 04:01 PDT: original annotation completeness repair, local only
+## Current — 2026-10-15 04:25 PDT: exact image-note text, local only
+
+Full189 remains ACTIVE and incomplete. User explicitly authorized one source-image
+read, then exactly one additional attempt after sandbox DNS failure. The second
+attempt returned the existing lesson1462 footnote-9899-2 PNG:11,049 bytes,533×150,
+SHA-256146a53fecde8bf22aefcbd798a16494049c2fcc4b546b992ec5f8949c9e7f6bc.
+The prior unavailable note is now faithfully transcribed from those verified
+pixels, preserving 幡然/fānrán, the definition, both examples and 也作翻然.
+Layout whitespace is joined; the boxed part of speech and typographic separators
+have explicit plain-text normalization. The original image/reader/curriculum and
+native content remain unchanged; one exact original is retained as source evidence.
+
+The transcription is enabled only for its exact lesson/note/reader digest,
+original single-image block and unique media receipt (URL, SHA, bytes, MIME and
+size). Changed or absent identities/receipts remain unprovided and cannot silently
+inherit this text. The existing readerSha256 convention is SHA-256 of
+JSON.stringify(parsed reader), distinct from raw file bytes; both are documented
+in the source evidence. Text SHA, image SHA, normalized representation and
+imagePixelsProvided=false travel with the actual supplied note. The model receives
+verified text, not image pixels. Existing source_context_prepared events save the
+included transcription metadata plus prompt SHA, source offsets and note IDs.
+No new scoring contract, authorization schema, database migration or grading rule.
+
+78 focused tests pass on Node24.18.0: general/formal prompt preparation, real local
+SQLite source-event persistence, replay idempotency, unchanged formal score/input,
+15 source mismatch variants, stable student-separated prefixes,1128 bounded corpus
+source packets, stream recovery and A+/A–F scope preservation. Model responses are
+local fixtures only. The initial test failure and correction of raw-byte versus
+existing parsed-JSON reader digest are retained. Preview build, exact local Worker
+responses, final source identity/recovery and artifact cleanup are recorded in the
+linked report. No source push/install, provider account call, device, registry,
+publication or model call; OPS985af3dd remains unchanged/uninstalled.
+
+Real model207/three E2E/cache metrics, central per-event accepted receipts through
+ordinary My reload, native physical-device/screen-reader acceptance and formal
+suen go/no-go/Status remain outstanding. Model allowance0 and the expired deadline
+stay unchanged; C2 remains withdrawn with incomplete telemetry. New source and
+artifact hashes require prospective exact binding, not reuse of older manifests
+or request/body proposals. This source repair does not establish live recovery.
+[Exact source, acquired image, tests, artifact and cleanup](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/image-note-01a13f17/REPORT.md).
+
+## History — 2026-10-15 04:01 PDT: original annotation completeness repair, local only
 
 Full189 goal remains ACTIVE and incomplete. Exact prior candidatefc8a53f showed
 56 broken formal-source packets across26 lessons in1128 bounded first/last
