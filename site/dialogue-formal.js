@@ -97,11 +97,27 @@ export function validateFormalDraft(curriculum, turns, proposed) {
   const formal=prepareFormalInput(curriculum,{objectiveId:objective.id,input});
   return {formal,label:FORMAL_LABELS[kind],rule:formalRubric(kind,curriculum.mode),references};
 }
-export function originalRequirements(curriculum, state) {
-  const formal=curriculum.objectives.filter(o=>o.domain==='legacy'&&FORMAL_FIELDS[o.legacy?.questionKind]
-    && !['preserved','historical_review'].includes(state.objectives.find(x=>x.id===o.id)?.status))
+function originalMaterials(curriculum) {
+  const formal=curriculum.objectives.filter(o=>o.domain==='legacy'&&FORMAL_FIELDS[o.legacy?.questionKind])
     .map(o=>({objectiveId:o.id,label:FORMAL_LABELS[o.legacy.questionKind],fields:FORMAL_FIELDS[o.legacy.questionKind].map(key=>({key,label:FIELD_LABELS[key]})),rule:formalRubric(o.legacy.questionKind,curriculum.mode),source:{kind:'original-formal-rubric',resourceKey:o.legacy.resourceKey,resourceVersion:o.legacy.resourceVersion},...(o.legacy.formalScopePolicyVersion?{newAnswersOnly:true,answerNotBefore:o.legacy.effectiveFrom}:{} )}));
-  return [...formal,...curriculum.objectives.filter(o=>o.domain==='studyGuide'&&!['preserved','historical_review'].includes(state.objectives.find(x=>x.id===o.id)?.status)).flatMap(o=>{const item=curriculum.studyGuide?.find(i=>i.itemKey===o.sourceItemKey);return item?.activeForSelfTest&&!item.reviewRequired?[{objectiveId:o.id,label:item.answerLabel||'學習提示',fields:[{key:'response',label:'原話'}],rule:item.prompt,reference:item.referenceAnswer,referenceText:studyGuideReferenceText(item.referenceAnswer),explanation:item.explanation,rubric:item.rubric,source:{kind:'curated-study-guide-item',catalog:'data/study-guide-catalog.json',lessonId:curriculum.lessonId,itemKey:item.itemKey,semanticRevision:item.semanticRevision,pdfPage:item.pdfPage,printedPage:item.printedPage,answerAuthority:item.answerAuthority,notice:'這是原課已整理的學案條目與原判準；不代表已提供完整PDF原頁。'},instruction:'先聽學生理解，再在對話中完整逐字展示referenceText（保留每個標籤及清單項），待學生對照並自己補充或修正後引用其原話作為response；未展示完整參考不能提交。reference是原結構，explanation與rubric仍沿用來源，不新增判準。'}]:[];})];
+  return [...formal,...(curriculum.studyGuide||[]).flatMap(item=>{const objective=curriculum.objectives.find(o=>o.domain==='studyGuide'&&o.sourceItemKey===item.itemKey);return item?[{objectiveId:objective?.id||`study:${item.itemKey}`,label:item.answerLabel||'學習提示',fields:[{key:'response',label:'原話'}],rule:item.prompt,reference:item.referenceAnswer,referenceText:studyGuideReferenceText(item.referenceAnswer),explanation:item.explanation,rubric:item.rubric,source:{kind:'curated-study-guide-item',catalog:'data/study-guide-catalog.json',lessonId:curriculum.lessonId,itemKey:item.itemKey,semanticRevision:item.semanticRevision,pdfPage:item.pdfPage,printedPage:item.printedPage,answerAuthority:item.answerAuthority,notice:'這是原課已整理的學案條目與原判準；不代表已提供完整PDF原頁。'},instruction:'先聽學生理解，再在對話中完整逐字展示referenceText（保留每個標籤及清單項），待學生對照並自己補充或修正後引用其原話作為response；未展示完整參考不能提交。reference是原結構，explanation與rubric仍沿用來源，不新增判準。'}]:[];})];
+}
+// Source access does not confer completion or submission eligibility.
+export function originalRequirements(curriculum,state){
+  if(state?.legacyCompletion)return [];
+  return originalMaterials(curriculum).filter(r=>{
+    if(!curriculum.objectives.some(o=>o.id===r.objectiveId)||['preserved','historical_review'].includes(state?.objectives.find(o=>o.id===r.objectiveId)?.status))return false;
+    if(r.source.kind!=='curated-study-guide-item')return true;
+    const item=curriculum.studyGuide.find(i=>i.itemKey===r.source.itemKey);
+    return item.activeForSelfTest&&!item.reviewRequired;
+  });
+}
+export function reviewSourceMaterials(curriculum,state){
+  const eligible=new Set(originalRequirements(curriculum,state).map(r=>r.objectiveId));
+  return originalMaterials(curriculum).filter(r=>!eligible.has(r.objectiveId)).map(({fields,instruction,...r})=>{
+    const item=curriculum.studyGuide?.find(i=>i.itemKey===r.source.itemKey);
+    return {...r,sourceOnly:true,submissionEligible:false,...(item?{sourceStatus:{activeForSelfTest:!!item.activeForSelfTest,reviewRequired:!!item.reviewRequired}}:{}),instruction:'僅供學生自願複習或討論，不是待完成要求，不得生成sourceDraft、重開目標或重新計分；來源待核對時明說待核對，不當作已核實答案。'};
+  });
 }
 export function selectOriginalRequirements(requirements,cue='',objectiveIds=[]){
   const guides=requirements.filter(r=>r.source?.kind==='curated-study-guide-item'),formal=requirements.filter(r=>r.source?.kind!=='curated-study-guide-item');

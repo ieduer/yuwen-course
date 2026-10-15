@@ -46,3 +46,15 @@ test('every author voice and source context is automatic without a selected quot
   if(['海明威','莎士比亚','加西亚·马尔克斯','列夫·托尔斯泰','易卜生','柏拉图'].includes(c.author))assert.equal(data.authorVoice.bilingual,true,file);
  }
 });
+
+test('completed review source prefixes remain stable across students and all189 completed contexts stay bounded',()=>{
+ const c=load('lesson-1476'),g=c.studyGuide.find(g=>g.activeForSelfTest&&!g.reviewRequired);
+ const make=who=>contextFor({curriculum:c,state:projectState(c,[],[],{status:'preserved',sourceRef:{sourceEventIds:[who]}}),question:null,turns:[{id:who,role:'student',content:g.prompt}],conversationGuide:{taskId:who}});
+ const a=make('student-A'),b=make('student-B');assert.equal(prefix(a),prefix(b));assert(!prefix(a).includes('student-A'));assert(!b.includes('student-A'));assert(parse(a).reviewSources.some(r=>r.source.itemKey===g.itemKey));
+ for(const {lessonId} of JSON.parse(fs.readFileSync('site/dialogue-curriculum/index.json')).lessons){
+  const lesson=load(lessonId),state=projectState(lesson,[],lesson.objectives.map(o=>({objectiveId:o.id,verified:true})),{status:'preserved'});
+  const data=parse(contextFor({curriculum:lesson,state,question:null,turns:[{id:'s',role:'student',content:'我想自願複習這一課。'}]}));
+  assert.equal(data.originalRequirements.length,0);if(lesson.passages.length)assert(data.passages.length,lessonId);else assert.equal(data.passages.length,0,lessonId);
+  assert.equal(data.state.filter(o=>o.status==='preserved').length,state.objectives.length,lessonId);
+ }
+});

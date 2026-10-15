@@ -1,4 +1,43 @@
-## Current — 2026-10-15 04:47 PDT: original study-guide context and reference repair, local only
+## Current — 2026-10-15 05:15 PDT: completed-review sources, local only
+
+Full189 remains ACTIVE and incomplete. This supersedes the pending completed-review
+source gap in the following historical entry. Original source materials are now
+selected independently of submission eligibility: `originalRequirements` contains
+only eligible work, while `reviewSources` contains completed, historical-review,
+and held materials with `sourceOnly=true` and `submissionEligible=false`.
+The193 active guides pass all579 whole-lesson/preserved/historical-review cases;
+all48 held catalog entries retain their original warning and source without adding
+an objective. Exact prompt/reference/explanation/rubric and source identities remain
+available. No curriculum, original evaluator, answer key, historical row, score,
+A+/A–F rule, migration or native graph changes.
+
+The context reducer retains preserved/historical-review state entries, including
+when extra sources trigger long-context selection. Context layout v3 replaces v2;
+common teaching policy v10 and evidence rules remain unchanged. Source-only material
+hashes, source descriptors, flags and actual coverage are appended to existing
+source_context_prepared events. This is source provenance, not a new release schema.
+Model draft validation fails closed unless server state includes that item in
+originalRequirements. Existing source submission and preservation guards remain.
+
+214 unique focused tests pass (213 integrated plus one added full189/prefix case;
+the five prefix tests were rerun after that addition). Coverage includes579 review
+cases,48 held items,193 pending cases,1128 source packets,full189 completed contexts,
+student-isolated stable prefixes,real local SQLite exact prompt/material hashes,
+ordinary reload/idempotent replay,history and scoring preservation. A first213-test
+run caught a missing preserved state in the reduced context; fixed and213/213 pass.
+The added corpus assertion initially assumed lesson1572 had source text; corrected
+to preserve its existing explicit source-deferred exemption, without fabricating text.
+All model responses are fixtures; true model calls0. No external requests or release.
+
+This remains a local/unpushed/unpublished candidate. Source and preview/staging
+verification plus exact recovery and cleanup are recorded in the linked report.
+Full189 still requires207 model cases/three quality E2E/cache,central accepted
+receipts→ordinary My reload,native device/screen-reader,publisher capabilities,
+suen formal go/no-go,formal publication and public Status readback. Model allowance0
+and expired2026-10-14T12:00Z deadline remain. OPS985af3dd is unchanged/uninstalled.
+[Exact evidence and closeout](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/review-source-01a13f75/REPORT.md).
+
+## History — 2026-10-15 04:47 PDT: original study-guide context and reference repair, local only
 
 Full189 remains ACTIVE and incomplete. On exact Web64b4477,55 of193 active
 study-guide items were absent from author context when the student quoted that

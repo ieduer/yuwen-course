@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {contextFor,projectState,LIMITS} from '../site/dialogue-policy.js';
+import {contextFor,projectState,LIMITS,validateProposal} from '../site/dialogue-policy.js';
 import {originalRequirements,selectOriginalRequirements,studyGuideReferenceText,validateFormalDraft} from '../site/dialogue-formal.js';
 const lessons=JSON.parse(fs.readFileSync('site/dialogue-curriculum/index.json')).lessons.map(({lessonId})=>JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${lessonId}.json`)));
 const active=c=>c.studyGuide.filter(g=>g.activeForSelfTest&&!g.reviewRequired);
@@ -61,4 +61,44 @@ test('dense original annotation windows shrink around the selected text while ev
  const excerpt=data.passages.find(s=>s.id===p.id);assert(excerpt.text.includes(p.text.slice(0,80)));assert.equal(excerpt.text,p.text.slice(...excerpt.sourceOffsets));
  for(const id of excerpt.annotationIds)assert(data.annotations.some(a=>a.noteId===id));
  assert.equal(data.sourceWindow.kind,'exact-excerpts');assert.equal(data.sourceCoverage.originalRequirementsExact,true);
+});
+
+test('all193 completed-lesson and preserved-item reviews keep source separate from eligibility',()=>{
+ let cases=0;
+ for(const c of lessons)for(const g of active(c))for(const mode of ['lesson','preserved','historical_review']){
+  const before=JSON.stringify(c),id=`study:${g.itemKey}`;
+  const prior=mode==='lesson'?[]:[{objectiveId:id,verified:mode==='preserved',previousCompletion:true}];
+  const state=projectState(c,[],prior,mode==='lesson'?{status:'preserved',kind:'self_report',scoringRole:'none'}:null),saved=JSON.stringify(state);
+  const prompt=contextFor({curriculum:c,state,question:null,turns:[{id:'student',role:'student',content:g.prompt}]}),data=parse(prompt);
+  const row=data.reviewSources.find(r=>r.objectiveId===id);assert(row,`${c.lessonId}:${id}:${mode}`);
+  assert.deepEqual(row.reference,g.referenceAnswer);assert.deepEqual(row.rubric,g.rubric);assert.equal(row.rule,g.prompt);assert.equal(row.explanation,g.explanation);assert.equal(row.source.semanticRevision,g.semanticRevision);
+  assert.equal(row.sourceOnly,true);assert.equal(row.submissionEligible,false);assert(!data.originalRequirements.some(r=>r.objectiveId===id));
+  if(mode==='lesson'){assert.equal(data.originalRequirements.length,0);assert.equal(state.next,null);}
+  assert(JSON.stringify(data).length<=LIMITS.contextChars);assert.equal(JSON.stringify(state),saved);assert.equal(JSON.stringify(c),before);cases++;
+ }
+ assert.equal(cases,579);
+});
+
+test('held sources are readable with their source warning but cannot become completion requirements',()=>{
+ const c=structuredClone(lessons.find(c=>active(c).length)),g=active(c)[0];g.reviewRequired=true;
+ const data=parse(contextFor({curriculum:c,state:projectState(c,[]),question:null,turns:[{id:'s',role:'student',content:g.prompt}]}));
+ const row=data.reviewSources.find(r=>r.objectiveId===`study:${g.itemKey}`);assert(row);assert.equal(row.sourceStatus.reviewRequired,true);assert.equal(row.submissionEligible,false);
+ assert(!data.originalRequirements.some(r=>r.objectiveId===row.objectiveId));assert.deepEqual(row.reference,g.referenceAnswer);
+});
+
+
+test('all48 held catalog items retain source-only access without creating an objective',()=>{
+ let count=0;for(const c of lessons)for(const g of c.studyGuide.filter(g=>!g.activeForSelfTest||g.reviewRequired)){
+  const before=JSON.stringify(c),state=projectState(c,[]),data=parse(contextFor({curriculum:c,state,question:null,turns:[{id:'s',role:'student',content:g.prompt}]}));
+  const row=data.reviewSources.find(r=>r.source.itemKey===g.itemKey);assert(row,g.itemKey);assert.deepEqual(row.reference,g.referenceAnswer);assert.equal(row.submissionEligible,false);assert.equal(row.sourceStatus.reviewRequired,!!g.reviewRequired);
+  assert(!data.originalRequirements.some(r=>r.source.itemKey===g.itemKey));assert.equal(JSON.stringify(c),before);count++;
+ }assert.equal(count,48);
+});
+test('source-only proposals fail server eligibility even with exact references and valid student words',()=>{
+ const c=lessons.find(c=>c.lessonId==='lesson-1476'),g=active(c)[0],id=`study:${g.itemKey}`,t=turns(studyGuideReferenceText(g.referenceAnswer));
+ const raw={reply:'我們繼續討論。',assessments:[],sourceDraft:proposal(g)};
+ assert.doesNotThrow(()=>validateProposal(raw,{curriculum:c,turns:t,state:projectState(c,[])}));
+ for(const state of [null,projectState(c,[],[],{status:'preserved'}),projectState(c,[],[{objectiveId:id,verified:true}]),projectState(c,[],[{objectiveId:id,previousCompletion:true}])])assert.throws(()=>validateProposal(raw,{curriculum:c,turns:t,state}),/source_draft_not_eligible/);
+ const held=structuredClone(c);held.studyGuide.find(i=>i.itemKey===g.itemKey).reviewRequired=true;
+ assert.throws(()=>validateProposal(raw,{curriculum:held,turns:t,state:projectState(held,[])}),/source_draft_not_eligible/);
 });
