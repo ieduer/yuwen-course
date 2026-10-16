@@ -889,17 +889,16 @@ if (isMain) {
 
 // These artifacts remain subject to the registered publisher. Neither function
 // writes a source pointer, contacts a provider, or accepts a blocked receipt.
+// Match the publisher's sorted-directory, depth-first inventory traversal.
+function publisherOrder(left, right) {
+  const a = left.split("/"), b = right.split("/");
+  for (let i = 0; i < Math.min(a.length, b.length); i += 1) {
+    if (a[i] !== b[i]) return a[i] < b[i] ? -1 : 1;
+  }
+  return a.length - b.length;
+}
+
 export function nativeArtifactInventory(root) {
-  // The registered publisher walks sorted directory entries depth first.
-  // Locale sorting entire paths changes the accepted inventory digest (for
-  // example .bdfz vs _worker and a/child vs a.json) without changing any bytes.
-  const publisherOrder = (left, right) => {
-    const a = left.split("/"), b = right.split("/");
-    for (let i = 0; i < Math.min(a.length, b.length); i += 1) {
-      if (a[i] !== b[i]) return a[i] < b[i] ? -1 : 1;
-    }
-    return a.length - b.length;
-  };
   return collectFiles(root).sort(publisherOrder).map((relative) => ({
     path: relative,
     sha256: sha256(readFileSync(resolveUnder(root, relative, "artifact"))),
@@ -970,6 +969,7 @@ export function buildNativeTransactionArtifact({
     expectedStableSha256, candidatePointerSha256: candidatePointer.sha256,
     candidatePointer: newPointer, baselineFiles,
     immutableFiles: projected.filter((f) => f.path.startsWith("app-content/releases/"))
+      .sort((a, b) => publisherOrder(a.path, b.path))
       .map(({path, sha256, bytes}) => ({path, sha256, bytes: bytes.length})),
   };
   const marker = markerFor(projected, 0, "native-" + operation, nativeContent);
