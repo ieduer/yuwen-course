@@ -1,3 +1,4 @@
+import {fetchAssessmentAsset} from './assessment-assets.js';
 import {validateFormalScopeExpansion, ORIGINAL_FORMAL_RELEASE, assertNewFormalAnswerTime, formalDefinitionForResource} from './formal-scope-policy.js';
 import { loadEvaluationJob, JOB_POLICY, evaluationCallLimit, evaluationProgress, latestUsableEvaluationReply } from "./durable-evaluation-jobs.js";
 import { DIALOGUE_SOURCE_PREFIX, DIALOGUE_LOCAL_PREFIX, isDialogueSourceMutation } from './dialogue-formal.js';
@@ -154,7 +155,7 @@ function clamp01(value) {
 
 async function loadAssetJson(request, env, pathname) {
   const url = new URL(pathname, request.url);
-  const response = await env.ASSETS.fetch(new Request(url.toString(), { method: "GET" }));
+  const response = await fetchAssessmentAsset(env, new Request(url.toString(), { method: "GET" }));
   if (!response.ok) throw new Error(`authoritative asset unavailable: ${pathname}`);
   return response.json();
 }

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {answerFreeProjection, auditAnswerFreeFiles} from './answer_free_artifact.mjs';
 import { createHash } from "node:crypto";
 import {
   existsSync,
@@ -637,6 +638,8 @@ function projectSource(sourceRoot, releaseKind) {
   } else {
     nativeContent = previewNativePolicy(sourceRoot);
   }
+  const answerFree = answerFreeProjection(projected);
+  projected.splice(0, projected.length, ...answerFree.files);
   projected.sort((left, right) => left.path.localeCompare(right.path, "en"));
   if (new Set(projected.map((file) => file.path)).size !== projected.length) {
     fail("release projection contains duplicate paths");
@@ -789,6 +792,7 @@ export function verifyReleaseStaging({
   if (aggregateSha256 !== marker.projectedAggregateSha256) {
     fail("release artifact aggregate receipt differs from its marker");
   }
+  auditAnswerFreeFiles(files.map(relative=>({path:relative,bytes:readFileSync(path.join(releaseRoot,relative))})));
   verifyMarkerNativePolicy(marker, releaseRoot, releaseKind);
   return {
     mode: "check-staging",

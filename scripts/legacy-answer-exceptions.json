@@ -1,0 +1,318 @@
+{
+  "authority": "suen 2026-10-16: new candidate zero answers; exact old immutable native assets excepted for compatibility",
+  "acceptedSource": "175f8ae42dc5fd58f1b697a76567e79c954d9f7f",
+  "files": [
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/core-bundle.json",
+      "sha256": "6cc5e1205de54012141a779a848939f54bd4be1370f2d81f1c7397ec90cfb823"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1755-p2.json",
+      "sha256": "e99625935beb294641544c5598015dedc361d57c10a2c07655ea377b9e8c055f"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1589.json",
+      "sha256": "85064734fa954529b0d030614d2f9a7c954884fcf0ad13ac49e60b4ab8b3eef4"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1722-p1.json",
+      "sha256": "451e0b90fcf903b5857c524f2fe45b4bf43a4efc6e7580902d88b906b84a5d88"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1474.json",
+      "sha256": "88aa4ff3950b2ae1062d296761677eb8aee7c3fe5a0ffebe699692f3ed07de66"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1726-p3.json",
+      "sha256": "ce3146fa00e2c1f74bccbd22a31d45d86df6d74336e430e1e88e4a5c689a7697"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1550.json",
+      "sha256": "d7a4c973dc3b268038daf5998a41067dfb53bf0aa37e38a337c756bf86188c87"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1704-p1.json",
+      "sha256": "3a0ce5aaa10c22cae5f0cf2d282cf03c3291a9ef28f68220cb2bd1ffc7fb3dd9"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1497.json",
+      "sha256": "55be1b924c350ace3f13fada94a3d9fa35a1718d968826a0434c14e46d4e7b91"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1701-p2.json",
+      "sha256": "23df7858c8dbb642af3f4eba767bb337f3f66bd36e08ce95a7728633005aa38c"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1711-p2.json",
+      "sha256": "3ef384bc136b3b375e1fa4f6b7abc966edd028b3370c22d007550796f66ac6df"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1705-p1.json",
+      "sha256": "f9dfbf9e4fb22fdf75cf2dbc289beee0607b9fe543948521ef1ee047c82550cb"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1547.json",
+      "sha256": "b3e506b36fa75acd5729632165118a4a4c657286824a79868d906095b7265c42"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1726-p2.json",
+      "sha256": "2600c53e1455eb47eab5d0c79c2e6a4e35df9e84f3ec7316408b6c55d67c4361"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1567.json",
+      "sha256": "ccfaa0a3400c4c0b3471d128883ed856936833372e92d171752cb20b6d8c5005"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1588.json",
+      "sha256": "a853da9ed06f06bb9b5fe049a3a93064cf4f115d7ebe4c205c496b33310529b4"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1755-p3.json",
+      "sha256": "90a7ff6217302b2ffecedacdeec20e704e97f95f1bdb84f6ce47bcabc2540a0d"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1719-p2.json",
+      "sha256": "1b00fec0125d08542b4495cd779329216c7ad8ce1154cfa099b94a3ccd264f29"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1727.json",
+      "sha256": "ce6174cf5f472a93b999cfb00f2f7c17cd2a250cfb1a9fe9e3af11356258f809"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1556.json",
+      "sha256": "23ee5d535b27279044ab483912abae2a5fb25dc296feff5f099c2562d2be90e7"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1560.json",
+      "sha256": "b15860e592fc3cb248021980b70c6ab923ec7f351de2974051d9a1643af0db66"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1743-p1.json",
+      "sha256": "abd42f2a3e5071cab6c956f1bb690926d411452f0ba86355df89c2bef2c19358"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1753-p1.json",
+      "sha256": "b1d651eca7b058c89750845664e260ae7630f9c04e1d46a8041d1f22763c6aaa"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1537.json",
+      "sha256": "a23f6da12e0b2dea99d5b4fa1c1f6fbbe5081432163fe8b1374268abf025d140"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1692-p1.json",
+      "sha256": "4d0872f15fc67a8ff39a434040b8cc18e24992adab9f0f221a5fab44ef493033"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1576.json",
+      "sha256": "8a6ffbadd90f98a3193568ac81dd899a5e0305f1b2706b382e7b0fbb67aba4a9"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1577.json",
+      "sha256": "112c26776f3285c379cca17b4324216d4e561a2b4ada901df24e8cd3812f80bc"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1536.json",
+      "sha256": "3dee61f25b63f766d93af79e0bd22bd8dcb6ecff63d77cb7dc1c24aedca08970"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1561.json",
+      "sha256": "ddeb9f775ead96160c2479f7808e3a5a79c39f2b8b7f44adcd1668d33a38c76c"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1706-p1.json",
+      "sha256": "1d9a329540bf44a275bcba25309e2b417edcaecff10ee7096ee35222ace07562"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1541.json",
+      "sha256": "c192e2cf6a31c7e0d2c13cf356a15726e059da7ee3797570d44f6ca361705a7a"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1557.json",
+      "sha256": "981ed1295e7ceb6f95d1c92b2f1af22580aa7d12b77c898793c60fdc8bd65604"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1691.json",
+      "sha256": "a9e97b9b2e361640645414cedd4eedb6fdd1980f4b71515582b8ca9c9e0ebe00"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1500.json",
+      "sha256": "7581a4d90523b4391b4d7efb0c2d468eab9532c8ecf183b8b4d0bde0d7821460"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1578.json",
+      "sha256": "404354342c06df00123e86c7a464e85a47f0eaaa78201054c00f6bef2604d64d"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1485.json",
+      "sha256": "7311109a4f96d4a2e8a05c5d635709f7f60083586fd70edee16edba63193f417"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1706-p2.json",
+      "sha256": "fc351f574949f58a3ad71824ad71d4c3efd799b3d22f260dffb376b573d855aa"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1581.json",
+      "sha256": "c3ed11090bf6603f99504fd7c97868dcbe30365e25aeceda12c61766c537b219"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1542.json",
+      "sha256": "24b84a8163fb4797fe550c7a7ecf92a8acf000e0aa308f1e8fc6f5ea2840274b"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1535.json",
+      "sha256": "63bb65f3bd4ce2507b77b85bfb537836760dbb0d6cc8c2e73ef9f3fccb764756"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1692-p3.json",
+      "sha256": "15c821f3c1742933adf32656883c7d2d0b3f7dd2ca706acb29f970b5034daa04"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1562.json",
+      "sha256": "7eeaaceb2e47135ea84817b91c6e6d09550fa8ddd2b36e726401799b036520cb"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1558.json",
+      "sha256": "25e344c9e896cdd21eea96da744cff2d2bfed2d2f469fb74fcc8185af6cda0c7"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1559.json",
+      "sha256": "1f9867e1b53e69e547286d3034e369149bbaf8f78a810b72e4607c00f74cdfe5"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1722-p4.json",
+      "sha256": "a31b5b66b809f6e2f0fd8f409f5b7530076bc51310fbccd52d58b983af1048b7"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1753-p2.json",
+      "sha256": "63311af2f2d4b588b7a4620533fd5d8f08f60e5a3e51c6853a786e4841c596a6"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1743-p2.json",
+      "sha256": "8bd221065803324840ed6f081cf649b7ab64b8911ec409db6af9618e9b94f9f8"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1534.json",
+      "sha256": "de3d27a71f4ebf71a005e1baec23a825769c4b532102a28018cdcbb8951182ca"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1692-p2.json",
+      "sha256": "3446e69a5ce96ab9e6c0997b6654c429ac231f7581786b8a71e0fe64e9aa95d4"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1543.json",
+      "sha256": "4fdb12bc3e05355ab7bbf152667ec3b13891b80b74cbbe1dc783a37dacae3ba3"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1580.json",
+      "sha256": "8adc2930ed7e6b2b9f6371bd433c3ea2708fd32a5568ad8e0e71339e742d6e9c"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1706-p3.json",
+      "sha256": "b35a17b3019eb05b8ea8d4af0fddc9a314010d83eb8028e40814f435b60f8c3e"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1484.json",
+      "sha256": "65072236089d780f37b7d6e9a10ed3f6cfc60f613f76f9c0f7d37891fc782625"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1579.json",
+      "sha256": "240150d9c6d46cfe32f2b61a23e119ef608f4d8d1809e4c7d1b7efe81ced7363"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1726-p1.json",
+      "sha256": "066309fc929e4302ac992be1679a65e9a73d25b6b5f9efe96a42209c52e4a886"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1476.json",
+      "sha256": "221096a3dbab71f6541360ad7122404bfc021c7ee9b978530645b8ec2aa5ec32"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1499.json",
+      "sha256": "6b543fac8a8d0b4b282cf1e176cf55573460b53da3d6a03c8259635379aece3b"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1722-p3.json",
+      "sha256": "828d36b66e8bb9443f9577004ec312e497131e5658e082168bbf7f6cccddf95d"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1719-p1.json",
+      "sha256": "76b2112675ca2ae06f65a32b923873bf9a376eb980b64a8cbcd8909b729cc774"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1548.json",
+      "sha256": "99486aa2178130e901762c439c78f7fcb7cccc9faae57506d1d97ecc91a163bc"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1591.json",
+      "sha256": "33d2eef364f9a12d2b329c483cbff44ccf5e974b5244c3b912a00447df4c5719"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1483.json",
+      "sha256": "6a592fb15a8b8aab60c6c8d8f7ddb06473608155365302d8a667bd7a792737ac"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1705-p2.json",
+      "sha256": "9e860f5bfb422dbd83fc79ea4cfd665ed5993fc393e9fcdb7f17ab1f3c8fd903"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1568.json",
+      "sha256": "5d827e470fc8d45013904730b4e4153a8b59f8137b9dc42562e39d1c6490f424"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1544.json",
+      "sha256": "c93eb963933f1708bded75a18c68874f1e33f416169c8f525ee24b873efcd026"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1728.json",
+      "sha256": "39834223c01cecaca8f3c4ef36ef2b77906aa5f8acc435ca054e7951d13cee87"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1704-p2.json",
+      "sha256": "1c167718a1f2b1a49f9685a3ca69a6d07cb033a5a3c952fcaaee6d7977262861"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1752.json",
+      "sha256": "2a49c9a17f6725c08bf7af8dff709df01ab2d03a7a79961da548b7c9ad10c912"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1705-p3.json",
+      "sha256": "1ac3c32eaa955d7893370828566177660d19411f2ec89e2f9e3ea74b82ec59a1"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1590.json",
+      "sha256": "bcf211a8b4f29fe62a3f7a67d473ae1fc9162e06a198d3c8db05807849e6653a"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1711-p1.json",
+      "sha256": "0027cc051cc9228829220a257b3f4bae69b81124f954501adbb21902f1af0389"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1701-p1.json",
+      "sha256": "9f26776c889df817449ddf9ebc29b72f5706343d9178a2c3eb05cf0a935995cb"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1549.json",
+      "sha256": "3cc9dccc1498d1698d2e33ce9e7d9e36c58766f0fafe2c9e93b39415d151f3f2"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1755-p1.json",
+      "sha256": "f2e5a5684be99f9cdc7034966184b684fcab6e68c94577c3faa2b94ee2736868"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1722-p2.json",
+      "sha256": "91001ca01d2eb1284583e4eede9e752ff6760fae9b2b653c2ade53f0257093c1"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1477.json",
+      "sha256": "2f385debb6b70d74437a2477fb83d5351ecc3cde08b4d5e647a2687407d7de88"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1498.json",
+      "sha256": "bd323ac6c3993024647e387c85b4ceb39db6ebd358f9da472af9ea96f509b714"
+    },
+    {
+      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1692-p4.json",
+      "sha256": "a8e938494ab2f5e5267a9342721832413282b830b16a81ef7ccf28874e5c0a6e"
+    }
+  ]
+}

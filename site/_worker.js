@@ -1,3 +1,4 @@
+import {fetchAssessmentAsset} from './assessment-assets.js';
 import { releaseAdmissionResponse } from './release-admission.js';
 import { handleDialogue,loadDialogueCurriculum } from './dialogue-source.js';
 import { sanitizeDialogueCurriculum } from './dialogue-public-curriculum.js';
@@ -98,6 +99,15 @@ export default {
     // retain their hash; explicit materials/history access keeps the old workspace.
     if(['/', '/index.html'].includes(decodedPath) && ['GET','HEAD'].includes(request.method) && url.searchParams.get('view')!=='legacy' && env.YW_DIALOGUE_ENABLED==='true'){
       const target=new URL('/dialogue.html',url);return env.ASSETS.fetch(new Request(target,request));
+    }
+    const material=/^\/api\/reading\/materials\/(study-guide-catalog|vocab\/lesson-[\w-]{1,60})\.json$/.exec(decodedPath);
+    if(material){
+      if(request.method!=='GET')return new Response('Method not allowed',{status:405});
+      const student=await authenticatedReadingStudent(request,env);
+      if(student?.error)return student.error;
+      if(!student)return authenticatedEvaluationRequiredResponse();
+      const response=await fetchAssessmentAsset(env,new Request(new URL('/data/'+material[1]+'.json',url)));
+      return new Response(response.body,{status:response.status,headers:{'content-type':'application/json','cache-control':'private, no-store','x-content-type-options':'nosniff'}});
     }
     const dialogueAsset=/^\/dialogue-curriculum\/(lesson-[\w-]{1,60})\.json$/.exec(decodedPath);
     if(dialogueAsset){
@@ -2169,7 +2179,7 @@ export function currentVocabMastery(rows, vocabIndex) {
 
 async function loadVocabBank(request, env, lessonId) {
   const url = new URL(`/data/vocab/${encodeURIComponent(lessonId)}.json`, request.url);
-  const response = await env.ASSETS.fetch(new Request(url.toString(), { method: "GET" }));
+  const response = await fetchAssessmentAsset(env, new Request(url.toString(), { method: "GET" }));
   if (!response.ok) throw new Error("authoritative vocabulary bank unavailable");
   const bank = await response.json();
   if (bank?.lessonId !== lessonId || !Array.isArray(bank?.inventory)) {
@@ -2644,7 +2654,7 @@ async function loadStudyGuideCatalog(request, env) {
   if (studyGuideCatalogCache.value && studyGuideCatalogCache.expiresAt > Date.now()) {
     return studyGuideCatalogCache.value;
   }
-  const response = await env.ASSETS.fetch(new Request(new URL("/data/study-guide-catalog.json", request.url)));
+  const response = await fetchAssessmentAsset(env, new Request(new URL("/data/study-guide-catalog.json", request.url)));
   if (!response.ok) throw new Error("study-guide catalog unavailable");
   const catalog = await response.json();
   if (catalog?.schemaVersion !== "yw-study-guide-catalog-v1"

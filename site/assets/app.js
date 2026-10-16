@@ -1174,7 +1174,7 @@ async function fetchStudyGuideCatalog() {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), STUDY_GUIDE_CATALOG_TIMEOUT_MS);
   try {
-    const response = await fetch("data/study-guide-catalog.json", {
+    const response = await fetch("/api/reading/materials/study-guide-catalog.json", {
       headers: { accept: "application/json" },
       cache: "no-cache",
       signal: controller.signal,
@@ -2797,7 +2797,7 @@ async function ensureVocabBank(lesson) {
   }
   state.vocabBankLoading.add(id);
   try {
-    const response = await fetch(`data/vocab/${encodeURIComponent(id)}.json`);
+    const response = await fetch(`/api/reading/materials/vocab/${encodeURIComponent(id)}.json`, {credentials:"same-origin",cache:"no-store"});
     if (!response.ok) throw new Error(String(response.status));
     const bank = await response.json();
     const questions = (bank.inventory || []).filter((item) => item.decision === "question");

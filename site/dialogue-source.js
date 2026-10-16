@@ -1,3 +1,4 @@
+import {fetchAssessmentAsset} from './assessment-assets.js';
 import {validateReadingEvidence,validateOriginalEvidence,READING_CONVERSATION_POLICY,CONVERSATION_POLICY_VERSION} from './dialogue-reading-evidence.js';
 import {loadClassicalFirstRead,getClassicalFirstReadState} from './classical-first-read-source.js';
 import {dialogueReadingAsset,unpunctuated} from './dialogue-reading-material.js';
@@ -39,7 +40,7 @@ export async function loadDialogueCurriculum(env,lessonId){
   const index=await env.ASSETS.fetch(new Request('https://yw.bdfz.net/dialogue-curriculum/index.json'));
   if(!index.ok||!(await index.json()).lessons?.some(row=>row.lessonId===lessonId))throw Error('lesson_not_available');
  }
- const response=await env.ASSETS.fetch(new Request(`https://yw.bdfz.net/dialogue-curriculum/${lessonId}.json`));
+ const response=await fetchAssessmentAsset(env,new Request(`https://yw.bdfz.net/dialogue-curriculum/${lessonId}.json`));
  if(!response.ok)throw new Error('curriculum_unavailable');
  const value=await response.json();
  if(value.lessonId!==lessonId || value.schemaVersion!==1 || !value.curriculumVersion)throw new Error('curriculum_invalid');

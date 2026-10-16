@@ -1,3 +1,13 @@
+## Current — 2026-10-16T13:00:13.224066+00:00: answer-free candidate, local only
+
+P0 exact accepted artifact175f8ae restored independently; candidate parent230cf6a preserved. Per suen's explicit P1 scope decision, new public assets strip answer fields at build time;78 exact old immutable native files remain declared SHA-bound compatibility exceptions. Their1446answerIndex fields are historical exceptions, not zero-answer evidence. New/renamed/changed answer-bearing objects fail the build.
+
+Worker dependency graph and full assessment data are packaged under provider-reserved `_worker.js/`; all189full curriculum objects and original scoring keys remain server-side. Public curriculum/static fallback is stripped. Legacy vocabulary/study-guide reads use an authenticated private/no-store endpoint, denying anonymous users and non-GET; source-mode tests retain the existing ASSETS fixture path. Shared browser modules and original native bytes remain. Actual static plus Worker response audit covers1416public files, with78legacy exceptions and0new answer fields;preview1138public files.103focused checks passed, then11affected audit/auth tests passed after response-audit enhancement.
+
+Provider semantics: project production/preview fail_open must both be false on GET; a deployment omitting fail_open is N/A, not UNKNOWN. This is the acceptance rule for the later authorized provider window; no GET, project creation, Paid fault experiment or provider claim occurred here. Raw private modules34778187bytes, aggregate gzip estimate5563313bytes; this is not a provider compilation/upload size measurement. Registered publisher/module-package and actual provider acceptance remain pending. No model, source outbox, central write, push or production release. P2 is hard-blocked by the explicit formal-write prohibition: real source/Queue/central receipts require a bounded authorized write window; see /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/P2-01a144be/REPORT.md. P3 is unstarted. Full189 remains incomplete, new student-available lessons0. Evidence: [/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/P1-01a144be/REPORT.md](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/P1-01a144be/REPORT.md).
+
+Earlier current entries below are history for this build boundary; their scoped evidence and unrelated policies remain.
+
 ## Current — 2026-10-15 05:15 PDT: completed-review sources, local only
 
 Full189 remains ACTIVE and incomplete. This supersedes the pending completed-review

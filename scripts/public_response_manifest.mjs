@@ -1,3 +1,4 @@
+import {auditAnswerFreeFiles} from './answer_free_artifact.mjs';
 // Deterministic local execution of the exact uploaded Worker. No provider runtime
 // acceptance is implied; Pages controls are separately listed, never skipped.
 import fs from 'node:fs';
@@ -35,7 +36,7 @@ export async function buildPublicResponseManifest({artifactRoot,sourceCommit,dia
   const source=fs.readFileSync(path.join(artifactRoot,name),'utf8');
   const mod=name.endsWith('.json')?new vm.SyntheticModule(['default'],function(){this.setExport('default',JSON.parse(source))},{context:sandbox,identifier:name}):new vm.SourceTextModule(source,{context:sandbox,identifier:name});modules.set(name,mod);return mod;
  }
- const worker=load('_worker.js');
+ const worker=load(byPath.has('_worker.js/index.js')?'_worker.js/index.js':'_worker.js');
  await worker.link((specifier,parent)=>{need(specifier.startsWith('./')||specifier.startsWith('../'),'External module forbidden');const name=path.posix.normalize(path.posix.join(path.posix.dirname(parent.identifier),specifier));need(!name.startsWith('../')&&!path.isAbsolute(name),'Module escaped artifact');return load(name)});
  await worker.evaluate({timeout:5000});
  const contentType=p=>p.endsWith('.json')?'application/json':p.endsWith('.pdf')?'application/pdf':p.endsWith('.html')?'text/html':'application/octet-stream';
@@ -46,16 +47,17 @@ export async function buildPublicResponseManifest({artifactRoot,sourceCommit,dia
   return new Response(fs.readFileSync(path.join(artifactRoot,name)),{headers:{'content-type':contentType(name)}});
  }};
  const env=new Proxy({ASSETS,YW_DIALOGUE_ENABLED:String(dialogueEnabled)},{get:(target,key)=>key in target?target[key]:deny()});
- const responses=[];
+ const responses=[]; const answerAudits=[];
  for(const f of files.filter(f=>!providerOnly(f.path))){
   const response=await worker.namespace.default.fetch(new Request('https://yw.bdfz.net'+publicPath(f.path)),env,{waitUntil:deny});
   need(response.status===200&&!response.redirected,'Non-200 local response: '+f.path);
   const bytes=Buffer.from(await response.arrayBuffer());need(bytes.length<25*1024*1024,'Response size limit');
+  answerAudits.push(...auditAnswerFreeFiles([{path:f.path,bytes}]).files);
   responses.push({path:f.path,request_path:publicPath(f.path),upload_sha256:f.sha256,upload_bytes:f.bytes,sha256:hash(bytes),bytes:bytes.length,...(f.path.startsWith('dialogue-curriculum/lesson-')?{content_type:'application/json',cache_control:'no-store'}:{})});
  }
  need(forbidden===0,'Forbidden capability attempted');
  need(JSON.stringify(inventory(artifactRoot))===JSON.stringify(files),'Artifact changed during response computation');
- return {source_commit:sourceCommit,artifact_digest:hash(JSON.stringify(files.map(({path,sha256})=>({path,sha256})))),dialogue_enabled:dialogueEnabled,files:responses,provider_only_files:files.filter(f=>providerOnly(f.path)),upload_bytes:files.reduce((n,f)=>n+f.bytes,0),response_bytes:responses.reduce((n,f)=>n+f.bytes,0)};
+ return {public_answer_audit:answerAudits,source_commit:sourceCommit,artifact_digest:hash(JSON.stringify(files.map(({path,sha256})=>({path,sha256})))),dialogue_enabled:dialogueEnabled,files:responses,provider_only_files:files.filter(f=>providerOnly(f.path)),upload_bytes:files.reduce((n,f)=>n+f.bytes,0),response_bytes:responses.reduce((n,f)=>n+f.bytes,0)};
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
  const [artifactRoot,sourceCommit,flag]=process.argv.slice(2);need(['true','false'].includes(flag),'Explicit flag required');
