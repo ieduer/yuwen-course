@@ -7,10 +7,11 @@ const file=(name,value)=>({path:name,bytes:Buffer.from(typeof value==='string'?v
 test('nested alternate public paths cannot retain answer fields',()=>{
  const data={prompt:'Keep prompt',nested:[{answerIndex:2,sourceAnswer:'key',meaning:'key meaning',explanation:'key explanation',options:['a','b','c']}],referenceAnswer:{choice:'c'}};
  assert.deepEqual(stripAnswerFields({definitions:{vocabAnswer:{scoringRole:'formal'}}}),{definitions:{vocabAnswer:{scoringRole:'formal'}}});
+ assert.throws(()=>auditAnswerFreeFiles([file('embedded.html','<script>const hidden={answerIndex:2}</script>')]),/Public answer fields/);
  const clean=stripAnswerFields(data);
  assert.deepEqual(clean,{prompt:'Keep prompt',nested:[{options:['a','b','c']}]});
  assert.equal(data.nested[0].answerIndex,2);
- for(const name of ['data/bank.json','aliases/copy.json','encoded%2fpath.json'])assert.throws(()=>auditAnswerFreeFiles([file(name,data)]),/Public answer fields/);
+ for(const name of ['data/bank.json','aliases/copy.json','encoded%2fpath.json','aliases/copy.txt','assets/disguised.js'])assert.throws(()=>auditAnswerFreeFiles([file(name,data)]),/Public answer fields/);
 });
 test('Worker data stays private while static fail-open fallback is answer-free',async()=>{
  const source=[file('_worker.js',"import data from './assessment-private-data.js'; export default data;"),file('assessment-private-data.js','export default null;'),file('data/bank.json',{answerIndex:1,prompt:'q'})];

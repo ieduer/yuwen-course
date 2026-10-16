@@ -85,12 +85,22 @@ export function auditAnswerFreeFiles(files){
  for(const f of files){
   if(f.path.startsWith('_worker.js/')||['_worker.js','_headers','_redirects','_routes.json'].includes(f.path))continue;
   const record={path:f.path,sha256:hash(f.bytes),bytes:f.bytes.length,answerFields:0,legacyException:false};
-  if(f.path.endsWith('.json')){
-   const hits=fields(JSON.parse(f.bytes.toString()));record.answerFields=hits.length;
-   if(hits.length){
-    if(legacy.get(f.path)!==record.sha256)throw Error('Public answer fields: '+f.path+' '+hits[0]);
-    record.legacyException=true;
-   }
+  const text=f.bytes.toString('utf8');let hits=[];
+  // Inspect parseable JSON regardless of extension, then scan textual containers
+  // (HTML, scripts, text aliases) for embedded answer-field assignments.
+  let parsed=false;
+  if(f.path.endsWith('.json')||/^[\s]*[\[{]/.test(text)){
+   try{hits=fields(JSON.parse(text));parsed=true;}catch(error){if(f.path.endsWith('.json'))throw error;}
+  }
+  if(!parsed&&!text.includes('\0')){
+   const decoded=text.replace(/\\u([0-9a-f]{4})/gi,(_,hex)=>String.fromCharCode(parseInt(hex,16))).replace(/\\(["'])/g,'$1');
+   const pattern=new RegExp('(?:["\']|\\b)('+[...answerFields].join('|')+')(?:["\'])?\\s*:', 'g');
+   hits=[...decoded.matchAll(pattern)].map(m=>m[1]);
+  }
+  record.answerFields=hits.length;record.inspection=parsed?'structured-json':'embedded-field-scan';
+  if(hits.length){
+   if(legacy.get(f.path)!==record.sha256)throw Error('Public answer fields: '+f.path+' '+hits[0]);
+   record.legacyException=true;
   }
   records.push(record);
  }
