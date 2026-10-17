@@ -91,15 +91,85 @@ export async function inspectCalibrationBatch(readbacks,execution,load=loadCurri
  return {status:'mechanical-pass-semantic-review-required',sourceCommit:execution.sourceCommit,artifactSha256:execution.artifactSha256,apisVersion:execution.apisVersion,packetDigest:sourceDigest,executionDigest:await digest(execution),model:FULL_MODEL,modelVersion:cases[0].modelVersion,cases,accountedMicros:cases.reduce((n,c)=>n+c.accountedMicros,0),changes,preserved,sourceChanges,sourceFiles:packet.sourceFiles,reviewRequiredCaseIds:cases.map(c=>c.caseId),overlayApplied:false,paidCallsAuthorized:false,releaseAuthorized:false,notice:'Local hashes and structural checks do not authenticate provider evidence or certify author fidelity and teaching quality. Review original readbacks and every case before applying this exact diff through the existing source/release workflow. Never regenerate consumed packets.'};
 }
 
+// A source-data projection, not a semantic approval or execution capability.
+// The same inspection report is reviewed through the ordinary Git/release flow.
+export async function materializeCalibrationOverlay(curricula,inspection){
+ assert(inspection?.status==='mechanical-pass-semantic-review-required'&&inspection.overlayApplied===false&&inspection.releaseAuthorized===false&&inspection.paidCallsAuthorized===false,'inspection report required');
+ same(inspection.packetDigest,packet.sourceDigest,'overlay packet mismatch');
+ same(inspection.sourceFiles,packet.sourceFiles,'overlay source set mismatch');
+ same(inspection.reviewRequiredCaseIds,packet.cases.map(c=>c.id),'all235 review references required');
+ assert(Array.isArray(inspection.cases)&&inspection.cases.length===235&&new Set(inspection.cases.map(c=>c.caseId)).size===235,'all235 inspected cases required');
+ same(inspection.model,FULL_MODEL,'overlay model mismatch');assert(hex(inspection.sourceCommit,40)&&hex(inspection.artifactSha256,64)&&hex(inspection.executionDigest,64)&&uuid(inspection.apisVersion),'overlay execution pins missing');
+ for(const c of packet.cases){
+  const checked=inspection.cases.find(x=>x.caseId===c.id);assert(checked,'inspected case missing');
+  same(checked.lessonId,c.lessonId,'inspected lesson mismatch');same(checked.objectiveId,c.objectiveId,'inspected objective mismatch');same(checked.sourceDigest,c.sourceDigest,'inspected source mismatch');same(checked.promptDigest,c.promptDigest,'inspected prompt mismatch');same(checked.attemptId,`${FULL_OPERATION}:${c.id}:1`,'inspected attempt mismatch');
+  assert(hex(checked.receiptDigest,64)&&hex(checked.readbackDigest,64)&&checked.semanticReviewRequired===true,'inspected receipt references missing');
+  assert(Number.isSafeInteger(checked.accountedMicros)&&checked.accountedMicros>=0&&checked.accountedMicros<=84000,'inspected cost invalid');
+  assert(typeof inspection.modelVersion==='string'&&inspection.modelVersion.trim(),'inspected model version missing');same(checked.modelVersion,inspection.modelVersion,'inspected model drift');
+ }
+ same(inspection.accountedMicros,inspection.cases.reduce((n,c)=>n+c.accountedMicros,0),'inspected aggregate cost mismatch');
+ assert(Array.isArray(inspection.changes)&&Array.isArray(inspection.preserved)&&inspection.changes.length+inspection.preserved.length===78,'all78 item dispositions required');
+ assert(Array.isArray(inspection.sourceChanges)&&new Set(inspection.sourceChanges.map(c=>c.lessonId)).size===inspection.sourceChanges.length,'unique source changes required');
+ const byId=new Map(curricula.map(c=>[c.lessonId,c]));assert(curricula.length===189&&byId.size===189,'all189 curricula required');
+ const items=new Map(),output=[];const sourceChanges=new Map(inspection.sourceChanges.map(c=>[c.lessonId,c]));
+ for(const pin of packet.sourceFiles){
+  const raw=byId.get(pin.lessonId);assert(raw,'overlay lesson missing');same(await digest(raw),pin.rawSourceDigest,'overlay base source drift');
+  for(const item of raw.languagePractice)items.set(item.id,{lessonId:pin.lessonId,item});
+ }
+ const inspected=new Map(inspection.cases.map(c=>[c.caseId,c])),seen=new Set();
+ for(const change of [...inspection.changes,...inspection.preserved]){
+  const found=items.get(change.objectiveId);assert(found&&found.lessonId===change.lessonId&&!seen.has(change.objectiveId),'unknown or duplicate item disposition');seen.add(change.objectiveId);
+  same(change.itemVersion,found.item.version,'overlay item version drift');same(change.itemDigest,await digest(found.item),'overlay item content drift');
+  const expected=packet.cases.filter(c=>c.lessonId===change.lessonId&&c.objectiveId===change.objectiveId).map(c=>c.id);same(change.caseIds,expected,'overlay case coverage mismatch');
+  same(change.receiptDigests,expected.map(id=>{const c=inspected.get(id);assert(c&&hex(c.receiptDigest,64),'inspected receipt missing');return c.receiptDigest;}),'overlay receipt binding mismatch');
+  if(inspection.changes.includes(change)){same(change.from,found.item.calibrationStatus,'overlay before status drift');same(change.from,'pending-real-model','overlay cannot downgrade accepted item');same(change.to,'accepted','overlay unexpected status');}
+  else same(found.item.calibrationStatus,'accepted','preserved item was not accepted');
+ }
+ for(const raw of curricula){
+  const next=structuredClone(raw),changes=inspection.changes.filter(c=>c.lessonId===raw.lessonId),expected=sourceChanges.get(raw.lessonId);
+  if(changes.length){
+   assert(expected,'missing proposed source digest');
+   for(const change of changes)next.languagePractice.find(i=>i.id===change.objectiveId).calibrationStatus='accepted';
+   next.curriculumVersion='';next.curriculumVersion='yw-dialogue-'+(await digest(next)).slice(0,20);
+   same(expected.beforeRawDigest,await digest(raw),'proposed before source drift');same(expected.beforeProjectedDigest,packet.sourceFiles.find(p=>p.lessonId===raw.lessonId).sourceDigest,'proposed before private source drift');same(expected.beforeVersion,raw.curriculumVersion,'proposed before version drift');
+   same(expected.proposedRawDigest,await digest(next),'proposed source digest drift');same(expected.proposedVersion,next.curriculumVersion,'proposed version drift');
+   same(expected.proposedProjectedDigest,await digest(JSON.parse(projectReleaseJson(`dialogue-curriculum/${raw.lessonId}.json`,JSON.stringify(next)))),'proposed private source drift');
+   same(expected.changedItemIds,changes.map(c=>c.objectiveId),'proposed item set drift');same(expected.allowedFields,['languagePractice[].calibrationStatus','curriculumVersion'],'overlay changes unsupported fields');same(expected.applied,false,'applied report cannot be replayed as a proposal');
+   sourceChanges.delete(raw.lessonId);
+  }else assert(!expected,'unexpected source change');
+  output.push(next);
+ }
+ assert(sourceChanges.size===0,'unmatched source changes');return output;
+}
+
+export async function stageCalibrationOverlay(inspection,output,{load=loadCurriculum,index=JSON.parse(fs.readFileSync(new URL('../site/dialogue-curriculum/index.json',import.meta.url)))}={}){
+ assert(path.isAbsolute(output)&&!fs.existsSync(output),'new absolute stage directory required');
+ const repository=path.resolve(import.meta.dirname,'..'),parent=fs.realpathSync(path.dirname(output));
+ assert(parent!==repository&&!parent.startsWith(repository+path.sep),'stage must be outside the source repository');
+ const curricula=await materializeCalibrationOverlay(packet.sourceFiles.map(p=>load(p.lessonId)),inspection),byId=new Map(curricula.map(c=>[c.lessonId,c]));
+ assert(index.lessons?.length===189&&new Set(index.lessons.map(l=>l.lessonId)).size===189,'all189 index entries required');
+ same(index.curriculumVersion,'yw-dialogue-catalog-'+(await digest(index.lessons)).slice(0,20),'index catalog digest drift');
+ const nextIndex=structuredClone(index);
+ for(const entry of nextIndex.lessons){const raw=load(entry.lessonId),next=byId.get(entry.lessonId);assert(next,'index lesson mismatch');same(entry.curriculumVersion,raw.curriculumVersion,'index base version drift');entry.curriculumVersion=next.curriculumVersion;}
+ nextIndex.curriculumVersion='yw-dialogue-catalog-'+(await digest(nextIndex.lessons)).slice(0,20);
+ const files=[{path:'scripts/dialogue-calibration-overlay.json',bytes:JSON.stringify(inspection,null,2)+'\n'},{path:'site/dialogue-curriculum/index.json',bytes:JSON.stringify(nextIndex,null,2)+'\n'},...inspection.sourceChanges.map(change=>({path:`site/dialogue-curriculum/${change.lessonId}.json`,bytes:JSON.stringify(byId.get(change.lessonId),null,2)+'\n'}))];
+ // Validate everything before creating the exact owned output. Failed writes
+ // leave a non-executable partial stage for the owner to inspect and clean.
+ fs.mkdirSync(output,{mode:0o700});
+ for(const file of files){const target=path.join(output,file.path);fs.mkdirSync(path.dirname(target),{recursive:true,mode:0o700});fs.writeFileSync(target,file.bytes,{flag:'wx',mode:0o600});}
+ return {status:'staged-for-semantic-and-source-review',output,files:files.map(f=>({path:f.path,bytes:Buffer.byteLength(f.bytes),sha256:sha(f.bytes)})),packetDigest:packet.sourceDigest,overlayApplied:false,releaseAuthorized:false};
+}
+
 if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
  try {
  const [action,input,pins,output,...extra]=process.argv.slice(2);
- assert(action==='inspect'&&input&&pins&&output&&!extra.length,'Usage: inspect READBACKS_JSON EXECUTION_PINS_JSON EXACT_NEW_REPORT_JSON');
+ assert(['inspect','stage'].includes(action)&&input&&pins&&output&&!extra.length,'Usage: inspect|stage READBACKS_JSON EXECUTION_PINS_JSON EXACT_NEW_OUTPUT');
  assert(path.isAbsolute(output)&&!fs.existsSync(output),'new absolute output required');
  const inputBytes=fs.readFileSync(input),pinsBytes=fs.readFileSync(pins);
  const report=await inspectCalibrationBatch(JSON.parse(inputBytes),JSON.parse(pinsBytes));
  report.inputFileSha256=sha(inputBytes);report.executionPinsFileSha256=sha(pinsBytes);
- fs.writeFileSync(output,JSON.stringify(report,null,2)+'\n',{flag:'wx',mode:0o600});
+ if(action==='stage'){const staged=await stageCalibrationOverlay(report,output);console.log(JSON.stringify({status:staged.status,files:staged.files.length,overlayApplied:false,releaseAuthorized:false}));}
+ else fs.writeFileSync(output,JSON.stringify(report,null,2)+'\n',{flag:'wx',mode:0o600});
  console.log(JSON.stringify({status:report.status,cases:report.cases.length,proposedChanges:report.changes.length,overlayApplied:false,paidCallsAuthorized:false}));
  } catch {
   // Parsing/assertion errors can contain private input. Keep raw evidence in its

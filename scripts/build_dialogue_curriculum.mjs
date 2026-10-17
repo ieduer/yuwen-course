@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 import {validateGrammarSourceReview} from './dialogue_grammar_source_review.mjs';
+import {materializeCalibrationOverlay} from './dialogue_calibration_import.mjs';
 const read = path => JSON.parse(fs.readFileSync(`site/data/${path}`));
 const hash = value => crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const taxonomy = read('literary-taxonomy.json');
@@ -149,6 +150,13 @@ for(const {id} of taxonomy.lessons){
  data.sourceReviewRequired=!completionExemption&&(!passages.length||row.sourceGaps.length>0||data.coverage.reviewRequiredGuideIds.length>0||missingAreas.length>0);
  data.curriculumVersion='yw-dialogue-'+hash(data).slice(0,20);
  curricula.push(data);
+}
+// Optional source-controlled calibration data is reviewed with its exact
+// source diff; compiling it never supplies semantic or publication authority.
+const overlayPath='scripts/dialogue-calibration-overlay.json';
+if(fs.existsSync(overlayPath)){
+ const overlaid=await materializeCalibrationOverlay(curricula,JSON.parse(fs.readFileSync(overlayPath,'utf8')));
+ curricula.splice(0,curricula.length,...overlaid);
 }
 // Validate the complete corpus before writing any generated curriculum.
 for(const data of curricula)write(`site/dialogue-curriculum/${data.lessonId}.json`,data);

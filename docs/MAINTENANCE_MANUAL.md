@@ -1,6 +1,6 @@
 <!-- yw-p2r5-01a14507 -->
 
-當前 2026-10-17T11:59:33.207350+00:00：完整189篇goal仍active／未完成；01a149ae完成本機校準回執檢查與來源變更預覽。新增離線工具核對235案raw receipt、同來源／產物／帳戶／APIS／實際modelVersion、原期限、歷史摘要、完整用量與cost，重新按原判準驗證expected verdict；全189來源不漂移才產生78項calibrationStatus的待覆核差異及課程版本／前後摘要。工具不寫curriculum、不接受語義品質、不生成付費或發布授權；原packet及所有歷史保留。40項本機檢查通過，含真SQLite runtime回執整合與CLI私有輸入不外洩。未呼叫模型／provider、未改APIS、未推送／發布。既有227及其他接受豁免按原精確範圍保留。下一步仍須實作審閱後overlay與index／build接線、新E2E driver、註冊隔離publisher候選，再提交統一具體批准件；舊driver／publisher不得重啟。Claude獨佔APIS，受依賴操作前才刷新accepted B；舊2026-10-14T12:00Z付費期限保持terminal。唯一現況 /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/calibration-import-01a149ae/REPORT.md，精確來源SOURCE-IDENTITY.json，收束CLOSEOUT.json。正式替換、235真模型與三篇品質E2E、source→中央逐筆accepted→My、native、正式發布與Status均未完成。
+當前 2026-10-17T12:11:41.770636+00:00：完整189篇goal仍active／未完成。01a149ae已接通校準後來源stage、目錄及課程建置。沿上輪既有檢查報告，不新增授權schema；235案回執核對後可在來源外新目錄產生56份待覆核檔案（54篇、78項、完整index及私有來源報告）。課程產生器可選讀同一來源報告，依原格式只套用calibrationStatus／課程版本並重建index，無報告時189篇保持原樣。40項相關測試通過，含完整235合成回執→stage→實際課程check→release build、私有資料不公開、編譯後235包仍完整相同、越權欄位／缺案例／來源漂移拒收；測試合成檔案與build已還原清理，當前所有實際來源仍pending-real-model。真語義覆核、執行原始證據及正式來源批准不能由stage／build取代。未呼叫模型／provider、未改APIS、未推送／發布。下一步新E2E driver及註冊隔離publisher候選，再提交統一精確批准件；舊driver／publisher不得重啟。Claude獨佔APIS，受依賴操作前才刷新accepted B；舊2026-10-14T12:00Z付費期限保持terminal。唯一現況 /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/overlay-stage-01a149ae/REPORT.md，來源SOURCE-IDENTITY.json、清理CLOSEOUT.json。235真模型與三篇品質E2E、source→中央逐筆accepted→My、native、正式發布與Status均未完成；歷史接受／豁免按原精確範圍保留。
 
 <!-- /yw-p2r5-01a14507 -->
 
@@ -3623,6 +3623,25 @@ never overwrites an existing file, and does not change source data or grant perm
 
 Every case still needs the original author-fidelity and teaching-quality review by suen or an
 explicitly designated reviewer. Apply only the subsequently reviewed exact source diff through
-the existing workflow. Current automatic overlay/index/build integration is not implemented.
+the existing workflow. The `stage` action with the same input arguments creates a new directory outside the
+source repository: private `scripts/dialogue-calibration-overlay.json`, changed curriculum
+files, and the complete version-adjusted index. The report remains a review input and does
+not certify semantic acceptance. No current real report or accepted data is supplied by
+this implementation. Never copy synthetic test output into a release source.
+
+After real case review and exact-source approval, copy the reviewed staged set together in
+the ordinary source workflow. `build_dialogue_curriculum.mjs` reads that optional private
+report and reproduces only the pinned status/version changes plus the catalog version.
+Absence preserves the ordinary189 output; drift, missing cases, changed receipts, unsupported
+fields or mismatched source digests fail before generated data is written. The report is
+excluded from public release output. It is source data, not an authorization or activation
+schema. Original scoring, source material and item versions are unchanged.
+
+Run the focused tests serially with `YW_OVERLAY_TEST_ROOT` pointing to an existing empty
+owned scratch directory registered in the task manifest. The staged-build test temporarily
+applies synthetic data only in the owned candidate, checks generation and the real release
+build, then restores every file and removes its exact stage/build in `finally`. Do not run
+other source writers or readers concurrently with this test. The test confirms that the
+compiled private235-case packet is identical to the frozen source packet.
 Keep consumed packets and their prompt/source pins immutable; final overlay source and artifact
 must be bound separately. Do not regenerate a consumed packet to match new accepted statuses.

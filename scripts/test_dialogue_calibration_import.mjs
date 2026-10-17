@@ -2,14 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
-import {spawnSync} from 'node:child_process';
+import {spawnSync,execFileSync} from 'node:child_process';
 import path from 'node:path';
 import packet from '../site/dialogue-full-language-packet.json' with {type:'json'};
 import {FULL_OPERATION,fullMaterialize,fullReceipt,digest} from '../site/dialogue-full-language.js';
 import {reconciledCost} from '../site/dialogue-budget.js';
-import {projectReleaseJson} from './build_release_site.mjs';
+import {projectReleaseJson,buildReleaseSite} from './build_release_site.mjs';
 import {loadCurriculum} from './dialogue_full_language.mjs';
-import {inspectCalibrationReadback,inspectCalibrationBatch} from './dialogue_calibration_import.mjs';
+import {inspectCalibrationReadback,inspectCalibrationBatch,materializeCalibrationOverlay,stageCalibrationOverlay} from './dialogue_calibration_import.mjs';
 const sha=s=>createHash('sha256').update(s).digest('hex');
 const execution={sourceCommit:'a'.repeat(40),artifactSha256:'b'.repeat(64),activationDigest:'c'.repeat(64),apisVersion:'11111111-2222-4333-8444-555555555555',ownerRef:sha('dialogue-owner:1'),priorReceiptSetDigest:'d'.repeat(64),readyAt:'2026-10-17T12:00:00Z',hardExpiry:'2026-10-17T18:00:00Z',budget:{version:'synthetic-unit-only',validUntil:'2026-10-17T18:00:00Z',currency:'USD',model:packet.model,globalDailyMicros:50000000,userDailyMicros:50000000,lessonLifetimeMicros:50000000,reserveMicros:84000,inputMicrosPerMillion:750000,outputMicrosPerMillion:3750000,providerAttemptLimit:1,logicalProviderAttemptLimit:1,maxInputTokens:100000,maxOutputTokens:2400}};
 // Explicitly synthetic in-memory records. Never persisted or used as real acceptance.
@@ -65,6 +65,39 @@ test('complete synthetic batch gives only a deterministic review diff, never acc
  const a=await inspectCalibrationBatch(rows,execution),b=await inspectCalibrationBatch([...rows].reverse(),execution);
  assert.deepEqual(a,b);assert.equal(a.cases.length,235);assert.equal(a.changes.length,78);assert.equal(a.sourceFiles.length,189);assert.equal(a.sourceChanges.flatMap(c=>c.changedItemIds).length,78);for(const c of a.sourceChanges){assert.notEqual(c.beforeRawDigest,c.proposedRawDigest);assert.notEqual(c.beforeVersion,c.proposedVersion);assert.equal(c.applied,false);assert.deepEqual(c.allowedFields,['languagePractice[].calibrationStatus','curriculumVersion']);}assert.equal(a.reviewRequiredCaseIds.length,235);assert.equal(a.status,'mechanical-pass-semantic-review-required');assert.equal(a.overlayApplied,false);assert.equal(a.paidCallsAuthorized,false);assert.equal(a.releaseAuthorized,false);
  assert.deepEqual(fs.readFileSync('site/dialogue-full-language-packet.json'),before);for(const [i,p] of packet.sourceFiles.entries())assert.deepEqual(fs.readFileSync(`site/dialogue-curriculum/${p.lessonId}.json`),sources[i]);
+ const bases=packet.sourceFiles.map(p=>loadCurriculum(p.lessonId)),overlaid=await materializeCalibrationOverlay(bases,a);
+ for(const [i,next] of overlaid.entries()){
+  const before=bases[i],masked=structuredClone(next);masked.curriculumVersion=before.curriculumVersion;
+  for(const item of masked.languagePractice)item.calibrationStatus=before.languagePractice.find(x=>x.id===item.id).calibrationStatus;
+  assert.deepEqual(masked,before,'only status and curriculum version may differ');
+ }
+ for(const edit of [x=>x.changes.pop(),x=>x.changes[0].itemDigest='e'.repeat(64),x=>x.changes[0].to='rejected',x=>x.sourceChanges[0].proposedRawDigest='e'.repeat(64),x=>x.sourceChanges[0].allowedFields.push('scores'),x=>x.cases.pop(),x=>x.cases[0].promptDigest='e'.repeat(64),x=>x.cases[0].caseId='unrelated',x=>x.accountedMicros++]){
+  const changed=structuredClone(a);edit(changed);await assert.rejects(materializeCalibrationOverlay(bases,changed));
+ }
+ // Caller registers the exact scratch root in its task artifact manifest.
+ const scratch=process.env.YW_OVERLAY_TEST_ROOT;assert(scratch&&path.isAbsolute(scratch)&&fs.statSync(scratch).isDirectory(),'set YW_OVERLAY_TEST_ROOT to an owned existing scratch directory');
+ const stage=path.join(scratch,'overlay-stage'),release=path.join(scratch,'overlay-release');
+ assert(!fs.existsSync(stage)&&!fs.existsSync(release));
+ const original=new Map();let staged;
+ try{
+  staged=await stageCalibrationOverlay(a,stage);assert.equal(staged.releaseAuthorized,false);assert.equal(staged.files.length,a.sourceChanges.length+2);
+  await assert.rejects(stageCalibrationOverlay(a,stage),/new absolute/);
+  for(const f of staged.files){const file=path.resolve(f.path);original.set(file,fs.existsSync(file)?fs.readFileSync(file):null);fs.writeFileSync(file,fs.readFileSync(path.join(stage,f.path)));}
+  execFileSync(process.execPath,['scripts/build_dialogue_curriculum.mjs','--check'],{encoding:'utf8',stdio:'pipe'});
+  const built=buildReleaseSite({sourceRoot:path.resolve('site'),releaseRoot:release});assert(built);console.log(JSON.stringify({evidence:'synthetic-overlay-build-only',stagedFiles:staged.files.length,changedLessons:a.sourceChanges.length,languageItems:a.changes.length,artifactFiles:built.artifactFiles,releaseAuthorized:false}));
+  assert(!fs.existsSync(path.join(release,'scripts/dialogue-calibration-overlay.json')),'private review evidence cannot publish');
+  const module=fs.readFileSync(path.join(release,'_worker.js/dialogue-full-language-packet.json.js'));
+  const frozen=(await import('data:text/javascript;base64,'+module.toString('base64'))).default;
+  assert.deepEqual(frozen,packet,'consumed packet is immutable after overlay build');
+  const builtIndex=JSON.parse(fs.readFileSync(path.join(release,'dialogue-curriculum/index.json')));
+  for(const change of a.sourceChanges)assert.equal(builtIndex.lessons.find(l=>l.lessonId===change.lessonId).curriculumVersion,change.proposedVersion);
+ }finally{
+  for(const [file,bytes] of original)if(bytes===null)fs.rmSync(file);else fs.writeFileSync(file,bytes);
+  fs.rmSync(stage,{recursive:true,force:true});fs.rmSync(release,{recursive:true,force:true});fs.rmSync(release+'.pending-'+process.pid,{recursive:true,force:true});
+ }
+ assert(!fs.existsSync(stage)&&!fs.existsSync(release));
+ for(const [i,p] of packet.sourceFiles.entries())assert.deepEqual(fs.readFileSync(`site/dialogue-curriculum/${p.lessonId}.json`),sources[i]);
+ assert.deepEqual(fs.readFileSync('site/dialogue-full-language-packet.json'),before);
  rows[0].rawRow.details_json=JSON.stringify({...rows[0].result,modelVersion:'another-version'});await resign(rows[0]);await assert.rejects(inspectCalibrationBatch(rows,execution),/model version drift/);
 });
 
