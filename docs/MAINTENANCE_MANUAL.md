@@ -17,6 +17,14 @@ linked evidence; the earlier eight preparation failures were already resolved by
 the active-exchange repair and were not rerun here. This closes the two local test
 contract gaps only, not the expired model207/3E2E or provider-size/quality gaps.
 
+A separate previously-unverified check now confirms the real macOS clipboard:
+one headed-browser click reads all24 pages/720 synthetic turns; native NSPasteboard
+readback equals all82,520 UTF-8 bytes. The original clipboard items and all formats
+were restored and verified in memory. 39 local HTTP requests,26 synthetic API GETs,
+zero POST/external/model calls,4.718seconds. The exact browser and server closed.
+This is actual OS clipboard delivery with synthetic data, not authenticated
+production export or real-model acceptance. CLIPBOARD-RESULT.json preserves evidence.
+
 Evidence: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/packet-contract-01a148fd/REPORT.md.
 Full189 goal, evidence and waivers remain. No network/APIS/model, batch restart,
 student-data write, push or production release. Prior entries below are history
