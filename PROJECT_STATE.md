@@ -1,3 +1,13 @@
+## 2026-10-17 PDT — Local active-exchange repair
+
+Long-source context now preserves the latest author question with the student's
+answer (context layout v4). 26 targeted checks pass; the 10 historical failed cases
+were rerun unchanged: 8 pass, 2 public-packet equality gaps remain. Frozen packets,
+old authority and student data are unchanged; no batch restarted or model called.
+Packaging-only parent091e25a retains its exact55module provider binding; this new
+policy module is local-only and needs later provider/model acceptance. Size remains
+unverified and all other full189 gates/waivers remain.
+
 ## 2026-10-17 PDT — local ESM build candidate
 
 Normal release build now emits the same 55 Worker module bytes as the accepted isolated

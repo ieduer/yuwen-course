@@ -6,7 +6,7 @@ import {validateConclusion} from './dialogue-conclusion.js';
 import {approvedSupplement} from './dialogue-completion-exemptions.js';
 export const POLICY_VERSION = 'yw-dialogue-policy-v10';
 export const RULE_VERSION = 'yw-dialogue-evidence-v3';
-export const CONTEXT_LAYOUT_VERSION = 'yw-dialogue-context-static-first-v3';
+export const CONTEXT_LAYOUT_VERSION = 'yw-dialogue-context-static-first-v4';
 // Keep the single-line data contract used by source_context_prepared. Object
 // insertion order is not source identity; array order (text, notes, turns) is.
 const stableValue=value=>Array.isArray(value)?value.map(stableValue):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,stableValue(value[key])])):value;
@@ -155,9 +155,12 @@ export function contextFor({curriculum,state,turns,question,remediation=null,ass
   if(JSON.stringify(data).length<=LIMITS.contextChars-256)break;
   data.trajectory.domains=data.trajectory.domains.map(d=>({...d,anchors:d.anchors.map(a=>({...a,quote:a.quote.slice(0,cap),passageQuote:a.passageQuote.slice(0,cap)}))}));
  }
- // Preserve the latest answer and all domain anchors; discard only older
- // recent-turn duplicates when added language coverage fills the budget.
- while(JSON.stringify(data).length>LIMITS.contextChars-256 && data.recent.length>1)data.recent.shift();
+ // Preserve the active exchange, not only its final answer: source reduction
+ // below must not orphan a student's response from the author's latest question.
+ // Older exchanges remain in stored history and the domain trajectory.
+ const activeTeacher=data.recent.findLastIndex(turn=>turn.role==='teacher');
+ const activeTurnCount=activeTeacher<0?1:data.recent.length-activeTeacher;
+ while(JSON.stringify(data).length>LIMITS.contextChars-256 && data.recent.length>activeTurnCount)data.recent.shift();
  const latestSourceCue=[question?.source,turns.filter(t=>t.role==='student').at(-1)?.content].filter(Boolean).join('\n');
  const pinnedPassages=new Set(curriculum.passages.filter(p=>new RegExp(`(?:^|[^\\w:-])${p.id}(?=$|[^\\w:-])`).test(latestSourceCue)||(question?.source&&p.text.includes(question.source))).map(p=>p.id));
  if(JSON.stringify(data).length>LIMITS.contextChars-256){

@@ -1,3 +1,28 @@
+## 2026-10-17 PDT — Active question preservation (local candidate)
+
+Context layout `yw-dialogue-context-static-first-v4` retains the latest author
+question and subsequent student turns when reducing older recent-turn duplicates.
+Previously, source-heavy contexts could discard the question before later source
+window reduction freed space, leaving an answer without the question it answered.
+Stored history, source annotations, scoring/rubric rules and packet authority are
+unchanged. The normal context bound still fails closed rather than silently dropping
+the active exchange. Existing recent-history input limits remain unchanged.
+
+Two targeted regressions reproduce the defect and pass after the repair. The focused
+context/prefix/material/study-guide checks pass 26/26. Only the 10 previously failing
+amendment4/5 cases were rerun, with original assertions: 8 now pass; 2 historical
+public-packet equality assertions remain failed because the answer-free projection
+intentionally strips private fields. Frozen packet bytes, contracts, old ledgers,
+expiry and paid authority were not changed, and no new packet was saved or activated.
+These remaining assertions require a precise historical/private-artifact evidence
+contract; they are not silently removed or weakened.
+
+The earlier 091e25a packaging-only candidate has 55 module hashes identical to the
+successful provider diagnostic. This later context change alters dialogue-policy.js;
+its provider compile and model quality remain untested. Do not transfer exact-cloud
+acceptance to a changed module. Reading assets and native content are unchanged.
+No APIS/model/provider calls, new batch, push or formal release occurred.
+
 ## 2026-10-17 PDT — Worker JSON ESM build integration (local candidate)
 
 The normal answer-free release projection now converts only JSON modules inside the
