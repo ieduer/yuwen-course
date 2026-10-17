@@ -1,3 +1,12 @@
+## 2026-10-17 — Local source quote and return-focus repair
+
+Real Chromium found collapsed quote line breaks and unfocusable source paragraphs.
+The candidate preserves quote whitespace and makes source paragraphs programmatically
+focusable with tabindex=-1. No data, backend, scores or source content changes.
+Focused acceptance, original failures and final source identity: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/quote-01a14941/REPORT.md.
+Full189 remains incomplete; all model/provider/formal/native gates and waivers persist.
+No push or deployment. Earlier entries retain their evidence scopes.
+
 ## 2026-10-17 PDT — Remaining browser accessibility and source-format acceptance
 
 Local candidate fixes two observed interface defects: Escape now returns focus from

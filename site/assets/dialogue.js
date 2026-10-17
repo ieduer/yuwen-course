@@ -224,7 +224,7 @@ function renderText(){
  $('conversation-title').textContent=`與${dialogueIdentity(curriculum).name}談`;$('title').textContent=displayWorkTitle(curriculum);$('author').textContent=dialogueIdentity(curriculum).name==='作者'?'':dialogueIdentity(curriculum).name;$('source').href=curriculum.source;$('legacy').href=`/?view=legacy#${curriculum.lessonId}`;
  $('source').hidden=locked;$('plates-details').hidden=locked;$('dictionary-details').hidden=locked;
  $('passages').replaceChildren();
- for(const p of locked?[]:curriculum.passages){const paragraph=node('p');paragraph.id=p.id;paragraph.dataset.passage=p.id;
+ for(const p of locked?[]:curriculum.passages){const paragraph=node('p');paragraph.id=p.id;paragraph.dataset.passage=p.id;paragraph.tabIndex=-1;
   if(p.block.runs){for(const run of p.block.runs){if(run.type==='annotation-ref'){
    const a=curriculum.annotations.find(a=>a.noteId===run.noteId),number=String(run.label||'').replace(/[^0-9]/g,'')||String(curriculum.annotations.findIndex(a=>a.noteId===run.noteId)+1);
    const ref=node('button',undefined,'annotation-toggle');ref.type='button';ref.append(node('sup',number,'annotation-number'));ref.setAttribute('aria-label',`註釋 ${number}`);
