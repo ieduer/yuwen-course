@@ -3,6 +3,7 @@ import {acceptanceContext} from './dialogue-acceptance.js';
 import {createQuestion,projectState,contextFor} from './dialogue-policy.js';
 // New finite operation; no existing or expired allowance is resumed.
 export const FULL_OPERATION='yw-dialogue-full-calibration-20261017-v1';
+export const FULL_E2E_OPERATION='yw-e2e-real-dialogue-20261017-v1';
 export const FULL_CASE_COUNT=235;
 export const FULL_MODEL='gemini-3.8-flash';
 export const FULL_MAX_WINDOW_MS=6*60*60*1000;
@@ -45,10 +46,10 @@ export function fullAdmission({authority,packet,caseId,rows=[],history,capacity,
  if(!authority)return stop('full_activation_required','operation');
  if(!Number.isFinite(now)||!Number.isFinite(Date.parse(authority.readyAt))||!Number.isFinite(Date.parse(authority.hardExpiry))||now<Date.parse(authority.readyAt)||now>=Date.parse(authority.hardExpiry))return stop('full_expired','operation');
  if(!history?.reconciled||history.receiptSetDigest!==authority.priorReceiptSetDigest)return stop('full_history_unreconciled','operation');
- if(rows.some(r=>r.sourceValid!==true||!['reserved','finishing','finished','review'].includes(r.state)||r.state==='finished'&&(!r.finishedAt||r.accountedMicros===null)||!packet.cases.some(c=>c.id===r.caseId)||r.attemptId!==FULL_OPERATION+':'+r.caseId+':1'||r.reservedMicros!==84000||r.accountedMicros!==null&&(!int(r.accountedMicros)||r.accountedMicros>84000))||new Set(rows.map(r=>r.attemptId)).size!==rows.length)return stop('full_ledger_invalid','operation');
+ if(rows.some(r=>r.sourceValid!==true||!['reserved','finishing','finished','review'].includes(r.state)||r.state==='finished'&&(!r.finishedAt||r.accountedMicros===null||!r.finalAssessment||typeof r.modelVersion!=='string'||!r.modelVersion||r.model!==FULL_MODEL)||!packet.cases.some(c=>c.id===r.caseId)||r.attemptId!==FULL_OPERATION+':'+r.caseId+':1'||r.reservedMicros!==84000||r.accountedMicros!==null&&(!int(r.accountedMicros)||r.accountedMicros>84000))||new Set(rows.map(r=>r.attemptId)).size!==rows.length)return stop('full_ledger_invalid','operation');
  // A failed or unknown case ends this batch. Neither a new day nor another case
  // can refund its reservation or restart it; only same-attempt readback remains.
- if(rows.some(r=>r.boundaryStop||r.state==='review'||r.model&&r.model!==FULL_MODEL))return stop('full_boundary_stop','operation');
+ if(new Set(rows.map(r=>r.modelVersion).filter(Boolean)).size>1||rows.some(r=>r.boundaryStop||r.state==='review'||r.model&&r.model!==FULL_MODEL))return stop('full_boundary_stop','operation');
  if(rows.length>=FULL_CASE_COUNT||rows.reduce((n,r)=>n+r.reservedMicros,0)+84000>FULL_CASE_COUNT*84000)return stop('full_operation_exhausted','operation');
  if(!capacity||!['globalDayCalls','reservedConcurrentCalls','operationConcurrentCalls','globalDayConservativeMicros','userDayConservativeMicros'].every(k=>int(capacity[k])))return stop('full_capacity_unknown','operation');
  if(capacity.globalDayCalls>=400||capacity.globalDayConservativeMicros+84000>50000000||capacity.userDayConservativeMicros+84000>50000000)return stop('full_shared_capacity_exhausted','operation');

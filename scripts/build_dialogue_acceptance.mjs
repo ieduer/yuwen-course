@@ -1,6 +1,6 @@
 // Prepare a separate restricted entrypoint from the verified formal artifact.
 // No upload, configuration mutation, identity fixture, or deployment authority.
-import {cpSync, existsSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync} from 'node:fs';
+import {cpSync, existsSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync, statSync, writeFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {verifyReleaseStaging} from './build_release_site.mjs';
@@ -9,10 +9,17 @@ const root=path.resolve(import.meta.dirname,'..');
 const source=path.join(root,'.release/site'), target=path.join(root,'.acceptance/site');
 verifyReleaseStaging({releaseRoot:source,releaseKind:'formal-stable'});
 if(existsSync(target))throw Error('Acceptance artifact already exists; reconcile ownership before rebuilding');
+const sourceWorker=path.join(source,'_worker.js');
+if(!statSync(sourceWorker).isDirectory()||!existsSync(path.join(sourceWorker,'index.js')))throw Error('Acceptance requires the verified private Worker module directory');
+if(existsSync(path.join(sourceWorker,'dialogue-production-entry.js')))throw Error('Acceptance wrapper name collides with a source module');
 mkdirSync(path.dirname(target),{recursive:true});
 cpSync(source,target,{recursive:true});
-renameSync(path.join(target,'_worker.js'),path.join(target,'dialogue-production-worker.js'));
-writeFileSync(path.join(target,'_worker.js'),"import worker from './dialogue-production-worker.js';\nimport {createAcceptanceWorker} from './dialogue-acceptance.js';\nexport default createAcceptanceWorker(worker);\n");
+// Keep the production implementation and all assessment modules inside the
+// provider-reserved Worker directory. Moving it to a public filename would
+// expose private fixtures and leave an invalid directory import.
+const worker=path.join(target,'_worker.js');
+renameSync(path.join(worker,'index.js'),path.join(worker,'dialogue-production-entry.js'));
+writeFileSync(path.join(worker,'index.js'),"import worker from './dialogue-production-entry.js';\nimport {createAcceptanceWorker} from './dialogue-acceptance.js';\nexport default createAcceptanceWorker(worker);\n");
 // Never label the changed entrypoint as a formal production artifact.
 rmSync(path.join(target,'.bdfz-release-artifact.json'));
 const files=[];

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,readFileSync,writeFileSync,rmSync} from 'node:fs';
+import {existsSync,mkdtempSync,readFileSync,writeFileSync,rmSync,statSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import path from 'node:path';
 import os from 'node:os';
@@ -9,6 +9,12 @@ test('actual acceptance upload bundle has only the synthetic DB and reviewed ide
   const root=path.resolve(import.meta.dirname,'..');
   const temp=mkdtempSync(path.join(os.tmpdir(),'yw-acceptance-bundle-'));
   try{
+    const artifact=path.join(root,'.acceptance/site');
+    assert(statSync(path.join(artifact,'_worker.js')).isDirectory());
+    assert(existsSync(path.join(artifact,'_worker.js/dialogue-production-entry.js')));
+    assert(!existsSync(path.join(artifact,'dialogue-production-worker.js')),'private modules cannot move into public assets');
+    assert(!existsSync(path.join(artifact,'dialogue-full-language-packet.json')));
+    assert(!existsSync(path.join(artifact,'.bdfz-release-artifact.json')),'restricted entrypoint is never labeled formal');
     const config=readFileSync(path.join(root,'wrangler.dialogue-acceptance.example.toml'),'utf8')
       .replace('pages_build_output_dir = ".acceptance/site"',`pages_build_output_dir = "${path.join(root,'.acceptance/site')}"`)
       .replace('migrations_dir = "migrations"',`migrations_dir = "${path.join(root,'migrations')}"`);
@@ -29,11 +35,12 @@ test('actual acceptance upload bundle has only the synthetic DB and reviewed ide
     assert.equal(byName('USER_CENTER_EVIDENCE').entrypoint,'YuwenEvidenceIdentity');
     assert.equal(byName('APIS_ACCEPTANCE').service,'apis');
     assert.equal(byName('APIS_ACCEPTANCE').entrypoint,'YwDialogueAcceptance20261012');
-    for(const name of ['APIS_CALLER_TOKEN','APIS','READING_DB','READING_TEST_SLUG','LEARNING_EVIDENCE_QUEUE','YW_DURABLE_EVALUATION_ENABLED'])assert.equal(byName(name),undefined);
+    for(const name of ['APIS_CALLER_TOKEN','APIS','READING_DB','READING_TEST_SLUG','LEARNING_EVIDENCE_QUEUE','YW_DURABLE_EVALUATION_ENABLED','YW_CALIBRATION_FULL_LANGUAGE_JSON','YW_E2E_AUTHORITY_JSON'])assert.equal(byName(name),undefined);
     assert.equal(byName('YW_ACCEPTANCE_USER_ID').text,'0','template must remain unconfigured');
     assert.doesNotMatch(bytes.toString(),/"id":"99c541e7-e70b-4584-b939-7e88a6dd68c5"/);
     const entry=await form.get(metadata.main_module).text();
-    assert.match(entry,/createAcceptanceWorker\(/);assert.match(entry,/acceptance_host_required/);
-    assert.match(entry,/acceptance_configuration_invalid/);
+    assert.match(entry,/createAcceptanceWorker\(/);assert.match(entry,/from [\"']\.\/dialogue-acceptance\.js/);
+    const guards=await form.get('dialogue-acceptance.js').text();
+    assert.match(guards,/acceptance_host_required/);assert.match(guards,/acceptance_configuration_invalid/);
   }finally{rmSync(temp,{recursive:true,force:true});}
 });

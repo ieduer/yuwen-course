@@ -77,6 +77,15 @@ test('concurrent SQLite requests allow exactly one operation reservation',async 
  const first=f.post(negative[0],async(...args)=>{started();await barrier;return f.model(...args);});await entered;
  assert.equal((await f.post(negative[1])).code,'full_concurrency_busy');release();assert.equal((await first).call.state,'finished');assert.equal(f.calls(),1);
 });
+test('calibration and renewed E2E share the same one-at-a-time boundary',async t=>{
+ const f=await fixture(t);f.external('e2e-inflight');f.sql.prepare("UPDATE dialogue_calls SET state='reserved',budget_policy_json=?,created_at=? WHERE turn_id='e2e-inflight'").run(JSON.stringify({isolatedAdmission:{operation:'yw-e2e-real-dialogue-20261017-v1'}}),new Date(at).toISOString());
+ assert.equal((await f.post()).code,'full_concurrency_busy');assert.equal(f.calls(),0);
+});
+test('a provider model-version change preserves the result and ends calibration',async t=>{
+ const f=await fixture(t);assert.equal((await f.post()).call.state,'finished');
+ const changed=await f.post(negative[1],async()=>({...success,modelVersion:'other-provider-version'}));assert.equal(changed.call.state,'review');assert.equal(changed.result.received.modelVersion,'other-provider-version');assert.equal(changed.result.reason,'calibration_model_version_mismatch');
+ assert.equal((await f.post(negative[2])).code,'full_boundary_stop');
+});
 test('a current-operation receipt from another packet blocks continuation',async t=>{
  const f=await fixture(t),r=await f.post();
  f.sql.prepare("UPDATE dialogue_sessions SET curriculum_json=json_set(curriculum_json,'$.packetDigest',?) WHERE id=?").run(H,r.rawRow.session_id);
@@ -89,7 +98,7 @@ test('SQLite operation count stops at235 regardless of dates and known low cost'
   f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,1,?,?,?,?,?,?)').run(sid,'calibration:'+c.lessonId,OP+':'+c.id+':1',JSON.stringify({caseId:c.id,sourceDigest:c.sourceDigest,promptDigest:c.promptDigest,packetDigest:packet.sourceDigest}),packet.policyVersion,created,created);
   f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,'student','synthetic','synthetic_calibration',?,?)").run(id,sid,id,H,packet.policyVersion,created);
   f.sql.prepare("INSERT INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,reserved_micros,accounted_micros,finished_at,budget_policy_json) VALUES(?,?,1,'2026-10-17',2400,'finished',?,84000,1,?,'{}')").run(id,sid,created,created);
-  f.sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(id+':result',sid,id,'synthetic_calibration_result',JSON.stringify({model:packet.model,value:{}}),created);
+  f.sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(id+':result',sid,id,'synthetic_calibration_result',JSON.stringify({model:packet.model,modelVersion:'synthetic-unit-only',value:{}}),created);
  }
  const r=await f.post(target);assert.equal(r.rows.length,235);assert.equal(r.call.state,'finished');assert.equal(f.calls(),1);
  assert.equal(r.rows.reduce((sum,r)=>sum+r.reservedMicros,0),19740000);
@@ -103,7 +112,7 @@ test('atomic admission at399 charges at most once and global money includes othe
 test('authority expires at the boundary; no reset via a new day or recovery',async t=>{
  const f=await fixture(t);mock.timers.setTime(Date.parse(expiry));assert.equal((await handle(req(),f.env,student,f.model)).status,404);assert.equal(fullActivation(f.env,packet),null);
  const authority={priorReceiptSetDigest:H,readyAt:'2026-10-17T11:00:00Z',hardExpiry:expiry},history={reconciled:true,receiptSetDigest:H},capacity={globalDayCalls:0,reservedConcurrentCalls:0,operationConcurrentCalls:0,globalDayConservativeMicros:0,userDayConservativeMicros:0};
- const rows=packet.cases.map(c=>({sourceValid:true,caseId:c.id,attemptId:OP+':'+c.id+':1',reservedMicros:84000,accountedMicros:1,state:'finished',finishedAt:'2026-10-17T11:30:00Z',model:packet.model}));
+ const rows=packet.cases.map(c=>({sourceValid:true,caseId:c.id,attemptId:OP+':'+c.id+':1',reservedMicros:84000,accountedMicros:1,state:'finished',finishedAt:'2026-10-17T11:30:00Z',model:packet.model,modelVersion:'synthetic-unit-only',finalAssessment:true}));
  const plan=extra=>fullAdmission({authority,packet,history,capacity,caseId:negative[0].id,now:at,...extra});
  assert.equal(plan({rows}).code,'full_operation_exhausted');assert.equal(plan({recoveryOf:'old'}).code,'full_recovery_not_authorized');assert.equal(plan({now:at+86400000}).code,'full_expired');assert.equal(FULL_CASE_COUNT,235);
  for(const patch of [{state:'unknown'},{accountedMicros:84001},{finishedAt:null},{attemptId:'old-operation'}])assert.equal(plan({rows:[{...rows[0],...patch}]}).code,'full_ledger_invalid');
