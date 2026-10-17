@@ -1,6 +1,6 @@
 <!-- yw-p2r5-01a14507 -->
 
-當前 2026-10-17T12:11:41.770636+00:00：完整189篇goal仍active／未完成。01a149ae已接通校準後來源stage、目錄及課程建置。沿上輪既有檢查報告，不新增授權schema；235案回執核對後可在來源外新目錄產生56份待覆核檔案（54篇、78項、完整index及私有來源報告）。課程產生器可選讀同一來源報告，依原格式只套用calibrationStatus／課程版本並重建index，無報告時189篇保持原樣。40項相關測試通過，含完整235合成回執→stage→實際課程check→release build、私有資料不公開、編譯後235包仍完整相同、越權欄位／缺案例／來源漂移拒收；測試合成檔案與build已還原清理，當前所有實際來源仍pending-real-model。真語義覆核、執行原始證據及正式來源批准不能由stage／build取代。未呼叫模型／provider、未改APIS、未推送／發布。下一步新E2E driver及註冊隔離publisher候選，再提交統一精確批准件；舊driver／publisher不得重啟。Claude獨佔APIS，受依賴操作前才刷新accepted B；舊2026-10-14T12:00Z付費期限保持terminal。唯一現況 /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/overlay-stage-01a149ae/REPORT.md，來源SOURCE-IDENTITY.json、清理CLOSEOUT.json。235真模型與三篇品質E2E、source→中央逐筆accepted→My、native、正式發布與Status均未完成；歷史接受／豁免按原精確範圍保留。
+當前 2026-10-17T12:39:29.818305+00:00：完整189篇goal仍active／未完成。01a149ae已完成校準匯入的235案逐案語義覆核必要條件、新E2E driver及既有managed_manual/schema-v1隔離publisher本機候選。缺覆核／收據對應／來源／owner／modelVersion／known usage-cost不通過，不能生成accepted課程；沒有提供真接受資料。新E2E保留120邏輯／360provider總上限、同一六小時窗口、235案真回讀，舊operation execute封閉且舊journal唯讀；本機89項去重相關覆蓋分輪通過。隔離publisher限既有Pages／隔離D1、owner553，保留正式YW與APIS code/config/cron，註冊及啟動均未執行。production gate原樣，既有閱讀／UX／匿名修復及裁定未重開。唯一現況 /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/e2e-driver-01a149ae/REPORT.md；精確source／artifact見SOURCE-IDENTITY.json，單一待批准上線包見TRANSACTION.md，清理CLOSEOUT.json。APIS registry當前accepted為021b857／bb36a61e、ledger shadow；a58bd563僅歷史，Claude獨佔遠端；依賴操作前仍須刷新當時accepted/ownership及維護cron。全部真模型、三篇品質E2E、真登入／歷史保全、source→中央逐筆accepted→My、適用native接受、平台編譯執行、正式發布與Status未完成。595 attempts／US$49.98模型reserve／US$60全包／最長六小時仍未批准，舊期限terminal；本輪外部呼叫／發布0。
 
 <!-- /yw-p2r5-01a14507 -->
 
@@ -3623,10 +3623,9 @@ never overwrites an existing file, and does not change source data or grant perm
 
 Every case still needs the original author-fidelity and teaching-quality review by suen or an
 explicitly designated reviewer. Apply only the subsequently reviewed exact source diff through
-the existing workflow. The `stage` action with the same input arguments creates a new directory outside the
+the existing workflow. The `stage` action requires an additional SEMANTIC_REVIEWS_JSON input and creates a new directory outside the
 source repository: private `scripts/dialogue-calibration-overlay.json`, changed curriculum
-files, and the complete version-adjusted index. The report remains a review input and does
-not certify semantic acceptance. No current real report or accepted data is supplied by
+files, and the complete version-adjusted index. The report remains source evidence; stage and build now require235 individually accepted review notes, bound to each exact receipt and readback. Missing, duplicate, pending, rejected or mismatched reviews stop before accepted curriculum is materialized. Each review records source grounding, independent learner evidence, author fidelity and teaching quality. The reviewer is suen or an explicitly designated reviewer with the actual human designation reference. A filled field cannot authenticate that provenance; the existing exact-source approval must verify it. No current real report or accepted data is supplied by
 this implementation. Never copy synthetic test output into a release source.
 
 After real case review and exact-source approval, copy the reviewed staged set together in
@@ -3645,3 +3644,53 @@ other source writers or readers concurrently with this test. The test confirms t
 compiled private235-case packet is identical to the frozen source packet.
 Keep consumed packets and their prompt/source pins immutable; final overlay source and artifact
 must be bound separately. Do not regenerate a consumed packet to match new accepted statuses.
+
+## Renewed E2E and registered isolated publisher candidate (2026-10-17)
+
+Local source only; no registration, activation, provider call or production release is implied.
+Use `scripts/dialogue_e2e_renewal.mjs plan REVIEWED_REPORT` after the reviewed overlay is
+in the exact source. It reconstitutes and checks all189 immutable bases, accepts only the
+reviewed status/version changes and binds the three original authored fixtures to those
+versions without changing their answers. `execute REVIEWED_REPORT EXACT_CONFIG ARTIFACT_MANIFEST`
+requires the real existing activation readback, original calibration pins and final
+source/artifact/deployment evidence. It rereads all235 receipts before the ordinary route.
+The fixed new operation permits120 logical calls /360 provider attempts total; the original
+six-hour window and cost reservation persist. HTTP ceiling6500 includes all driver traffic,
+with durable intent records before sends. No uncertain mutation is automatically retried.
+Existing journal, source history or earlier operation consumption cannot be reset. The old
+`dialogue_e2e.mjs execute` always stops; its historical journal is read-only.
+
+`publish_dialogue_isolated.mjs --execute-once EXACT_RECEIPT` is the local implementation
+candidate for the existing managed_manual staged channel, schema_version1. It requires a
+new exact reviewed receipt and its registered publisher digest; current consumed/expired
+channels remain terminal. The canonical registry is not changed during preparation.
+Only existing yuwen-course-dialogue-acceptance / yw-acceptance.bdfz.net / isolated D1
+c45988a6-9094-4306-bcce-98704b3989e3 and owner553 are supported. No resource creation,
+production D1, queue or APIS write is possible through its transport allowlist.
+
+The receipt follows existing fields source_commit/source_ref, target, base_deployment,
+base_config_digest, artifact_root/artifact_files, tests and preview evidence. Its isolated
+payload binds exact configuration, packed_worker_path/sha256, APIS accepted source/version,
+settings/deployments/cron digests and ownership evidence, formal baseline, and the exact
+reviewed calibration_overlay path/hash when final source differs from calibration source.
+No new authorization schema or identity was introduced. Source/remote/artifact/config
+checks and the existing registry lock surround consumption and the only deployment POST.
+Bounded API requests are160, input400MiB, response32MiB, fifteen minutes and zero retries;
+these are proposed maximums requiring inclusion in the unified approval. Registry receipt
+lease is at most one hour. Exact pending handles get at most three status reads; a failed
+or uncertain write ends the invocation. The result remains isolated acceptance pending,
+never formal accepted. Production uses its unchanged registered publisher and real gates.
+
+Artifact helpers `inventory` and `packWorker` prepare exact immutable bytes locally.
+Every Worker module stays under the reserved directory and outside the asset upload map;
+packing includes exact activation metadata, headers, redirects and routes. Configuration,
+source, APIS accepted baseline and cron are reread before deployment and afterward. Any
+new APIS accepted maintenance source supersedes older baselines; remote APIS work remains
+Claude-owned. Do not remove its cron, ledger classes, migration or forward records.
+
+Synthetic test receipts/review notes and packing configurations are never release evidence.
+True case review, same-account history, source-to-central-to-My, applicable native disposition,
+exact final platform compile/execute and public Status readback remain release gates. The
+accepted compile/execute substitution replaces unavailable compressed bytes; no reupload
+just to obtain compressed-size telemetry. The full transaction is in the current linked
+TRANSACTION.md; it is not approved by this source commit.

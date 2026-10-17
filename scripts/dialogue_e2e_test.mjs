@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {spawnSync} from 'node:child_process';
 import {loadFixtures,loadCurriculum,preparePlan,countPaths,selectAnswer,validateFixture,validateExecutionConfig,E2ERunner,assertComplete,hash,ORIGIN,OPERATION,CAPS,ROOT} from './dialogue_e2e.mjs';
 const fixtures=loadFixtures(),plan=preparePlan(),clock=()=>Date.parse('2026-10-13T03:00:00Z');
 const owner='a'.repeat(64),id='lesson-1717-p2',c=loadCurriculum(id),s=fixtures.lessons[id];
@@ -99,3 +100,5 @@ test('same-owner mismatch never permits accepting readback from another account'
  const runner=new E2ERunner({config:config(),plan,clock,cookie:'bdfz_uc_session=synthetic-offline-only',record:()=>{},fetchImpl:async()=>new Response(JSON.stringify({ownerRef:'b'.repeat(64),turns:[]}))});
  await assert.rejects(runner.snapshot(id),/same_owner_readback_failed/);
 });
+
+test('historical executable entrypoint is terminal even with missing config and journal',()=>{const r=spawnSync(process.execPath,['scripts/dialogue_e2e.mjs','execute','DO-NOT-READ','DO-NOT-CREATE','DO-NOT-READ'],{encoding:'utf8'});assert.notEqual(r.status,0);assert.match(r.stderr,/historical_operation_terminal/);assert(!fs.existsSync('DO-NOT-CREATE'));});

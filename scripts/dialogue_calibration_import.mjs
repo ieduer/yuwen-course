@@ -93,7 +93,24 @@ export async function inspectCalibrationBatch(readbacks,execution,load=loadCurri
 
 // A source-data projection, not a semantic approval or execution capability.
 // The same inspection report is reviewed through the ordinary Git/release flow.
+// Per-case review notes are source evidence, not an authorization or signature.
+// Their provenance and a cited human designation (for a reviewer other than
+// suen) belong to the existing source/release review. This does not authenticate
+// the reviewer or manufacture designation; no review is inferred from a score.
+export function validateSemanticReviews(inspection){
+ const reviews=inspection?.semanticReviews;
+ assert(Array.isArray(reviews)&&reviews.length===235&&new Set(reviews.map(r=>r.caseId)).size===235,'all235 semantic reviews required');
+ for(const c of inspection.cases){
+  const r=reviews.find(r=>r.caseId===c.caseId);
+  assert(r&&typeof r.reviewer==='string'&&r.reviewer.trim()&&(r.reviewer==='suen'||typeof r.designationReference==='string'&&r.designationReference.trim().length>=12)&&Number.isFinite(Date.parse(r.reviewedAt))&&r.verdict==='accepted','case semantic review not accepted');
+  same(r.receiptDigest,c.receiptDigest,'semantic review receipt drift');same(r.readbackDigest,c.readbackDigest,'semantic review readback drift');
+  for(const key of ['sourceGrounding','independentEvidence','authorFidelity','teachingQuality'])assert(typeof r[key]==='string'&&r[key].trim().length>=12,'substantive case review notes required');
+ }
+ return true;
+}
+
 export async function materializeCalibrationOverlay(curricula,inspection){
+ validateSemanticReviews(inspection);
  assert(inspection?.status==='mechanical-pass-semantic-review-required'&&inspection.overlayApplied===false&&inspection.releaseAuthorized===false&&inspection.paidCallsAuthorized===false,'inspection report required');
  same(inspection.packetDigest,packet.sourceDigest,'overlay packet mismatch');
  same(inspection.sourceFiles,packet.sourceFiles,'overlay source set mismatch');
@@ -157,18 +174,18 @@ export async function stageCalibrationOverlay(inspection,output,{load=loadCurric
  // leave a non-executable partial stage for the owner to inspect and clean.
  fs.mkdirSync(output,{mode:0o700});
  for(const file of files){const target=path.join(output,file.path);fs.mkdirSync(path.dirname(target),{recursive:true,mode:0o700});fs.writeFileSync(target,file.bytes,{flag:'wx',mode:0o600});}
- return {status:'staged-for-semantic-and-source-review',output,files:files.map(f=>({path:f.path,bytes:Buffer.byteLength(f.bytes),sha256:sha(f.bytes)})),packetDigest:packet.sourceDigest,overlayApplied:false,releaseAuthorized:false};
+ return {status:'reviewed-case-notes-bound-source-approval-still-required',output,files:files.map(f=>({path:f.path,bytes:Buffer.byteLength(f.bytes),sha256:sha(f.bytes)})),packetDigest:packet.sourceDigest,overlayApplied:false,releaseAuthorized:false};
 }
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
  try {
- const [action,input,pins,output,...extra]=process.argv.slice(2);
- assert(['inspect','stage'].includes(action)&&input&&pins&&output&&!extra.length,'Usage: inspect|stage READBACKS_JSON EXECUTION_PINS_JSON EXACT_NEW_OUTPUT');
+ const [action,input,pins,output,reviews,...extra]=process.argv.slice(2);
+ assert(['inspect','stage'].includes(action)&&input&&pins&&output&&!extra.length&&(action==='stage'?Boolean(reviews):!reviews),'Usage: inspect READBACKS_JSON EXECUTION_PINS_JSON EXACT_NEW_OUTPUT | stage READBACKS_JSON EXECUTION_PINS_JSON EXACT_NEW_OUTPUT SEMANTIC_REVIEWS_JSON');
  assert(path.isAbsolute(output)&&!fs.existsSync(output),'new absolute output required');
  const inputBytes=fs.readFileSync(input),pinsBytes=fs.readFileSync(pins);
  const report=await inspectCalibrationBatch(JSON.parse(inputBytes),JSON.parse(pinsBytes));
  report.inputFileSha256=sha(inputBytes);report.executionPinsFileSha256=sha(pinsBytes);
- if(action==='stage'){const staged=await stageCalibrationOverlay(report,output);console.log(JSON.stringify({status:staged.status,files:staged.files.length,overlayApplied:false,releaseAuthorized:false}));}
+ if(action==='stage'){report.semanticReviews=JSON.parse(fs.readFileSync(reviews,'utf8'));const staged=await stageCalibrationOverlay(report,output);console.log(JSON.stringify({status:staged.status,files:staged.files.length,overlayApplied:false,releaseAuthorized:false}));}
  else fs.writeFileSync(output,JSON.stringify(report,null,2)+'\n',{flag:'wx',mode:0o600});
  console.log(JSON.stringify({status:report.status,cases:report.cases.length,proposedChanges:report.changes.length,overlayApplied:false,paidCallsAuthorized:false}));
  } catch {

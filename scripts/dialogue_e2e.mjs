@@ -132,14 +132,14 @@ export function validateExecutionConfig(config,plan,now=Date.now()){
 }
 
 export class E2ERunner{
- constructor({config,plan,fixtures=loadFixtures(),loader=loadCurriculum,fetchImpl=fetch,cookie,record,events=[],clock=Date.now,delay=ms=>new Promise(r=>setTimeout(r,ms))}){
-  validateExecutionConfig(config,plan,clock());Object.assign(this,{config,plan,fixtures,loader,fetchImpl,cookie,record,events,clock,delay});this.streamEvents=[];
+ constructor({config,plan,fixtures=loadFixtures(),loader=loadCurriculum,fetchImpl=fetch,cookie,record,events=[],clock=Date.now,validateConfig=validateExecutionConfig,delay=ms=>new Promise(r=>setTimeout(r,ms))}){
+  validateConfig(config,plan,clock());Object.assign(this,{config,plan,fixtures,loader,fetchImpl,cookie,record,events,clock,delay,validateConfig});this.streamEvents=[];
   if(!/^bdfz_uc_session=[^\s;\r\n]{1,2048}$/.test(cookie||''))fail('authorized_session_cookie_required');
   if(typeof record!=='function')fail('durable_recorder_required');
  }
- async emit(type,data){const e={operation:OPERATION,at:new Date(this.clock()).toISOString(),type,...data};await this.record(e);this.events.push(e);return e;}
+ async emit(type,data){const e={operation:this.config.operation,at:new Date(this.clock()).toISOString(),type,...data};await this.record(e);this.events.push(e);return e;}
  async request(id,body,query={}){
-  if(this.clock()>=Date.parse(this.config.expiresAt))fail('execution_expired');
+  this.validateConfig(this.config,this.plan,this.clock());
   const q=new URLSearchParams({lessonId:id,...query}),headers={'cookie':this.cookie,'cache-control':'no-store'};
   if(body)Object.assign(headers,{'content-type':'application/json','origin':ORIGIN,'accept':'text/event-stream'});
   const response=await this.fetchImpl(`${ORIGIN}/api/dialogue/v1?${q}`,{method:body?'POST':'GET',headers,body:body?JSON.stringify({...body,ownerRef:this.config.ownerRef}):undefined,redirect:'error',signal:AbortSignal.timeout(body?90000:15000)});
@@ -209,13 +209,13 @@ export class E2ERunner{
    }
    if(!results.some(r=>r.lessonId===id))fail('student_turn_ceiling_exhausted');
   }
-  const result={operation:OPERATION,status:'real_route_results_saved_human_review_required',results,humanAcceptance:false};await this.emit('run_result',result);return result;
+  const result={operation:this.config.operation,status:'real_route_results_saved_human_review_required',results,humanAcceptance:false};await this.emit('run_result',result);return result;
  }
 }
 
-function openJournal(file,manifestPath){
- const absolute=path.resolve(file),manifest=read(manifestPath);
- if(absolute!==JOURNAL_PATH)fail('one_operation_one_cumulative_journal_path');
+export function openJournal(file,manifestPath,expectedPath=JOURNAL_PATH){
+ const absolute=path.resolve(file);if(absolute===JOURNAL_PATH)fail('historical_journal_read_only');const manifest=read(manifestPath);
+ if(absolute!==expectedPath)fail('one_operation_one_cumulative_journal_path');
  if(!manifest.artifacts?.some(a=>path.resolve(a.path)===absolute&&a.created_by_task&&a.cleanup_owner))fail('exact_journal_artifact_not_registered');
  if(fs.existsSync(absolute))fail('existing_journal_readback_only_no_automatic_resume');
  const fd=fs.openSync(absolute,'wx',0o600);let previous='0'.repeat(64);
@@ -225,10 +225,6 @@ if(typeof process!=='undefined'&&process.argv[1]&&import.meta.url===pathToFileUR
  const [command,...args]=process.argv.slice(2);const plan=preparePlan();
  if(command==='plan'&&!args.length)process.stdout.write(JSON.stringify(plan,null,2)+'\n');
  else if(command==='execute'&&args.length===3){
-  const [configPath,journalPath,manifestPath]=args,config=read(configPath);validateExecutionConfig(config,plan);
-  const journal=openJournal(journalPath,manifestPath);
-  try{const runner=new E2ERunner({config,plan,cookie:process.env.YW_E2E_SESSION_COOKIE,record:journal.record});const result=await runner.run();process.stdout.write(JSON.stringify(result)+'\n');}
-  catch(error){journal.record({operation:OPERATION,at:new Date().toISOString(),type:'stopped',code:error.code||error.message,details:error.details||null,automaticRetry:false});process.stderr.write(JSON.stringify({status:'stopped',code:error.code||error.message,journal:journalPath})+'\n');process.exitCode=1;}
-  finally{journal.close();}
+  fail('historical_operation_terminal_use_reviewed_renewal_driver');
  }else fail('usage: node scripts/dialogue_e2e.mjs plan | execute EXACT_CONFIG EXACT_NEW_REGISTERED_JOURNAL ARTIFACT_MANIFEST');
 }
