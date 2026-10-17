@@ -1,3 +1,9 @@
+<!-- yw-p2r5-01a14507 -->
+
+當前 2026-10-17T10:41:41.967162+00:00：依suen明示A裁定完成匿名材料相容性本機修復（基底785b9a9）。401明確登入提示且不自動重試；身份確認後重取材料，登出/換帳戶清除並拒收舊回應；缺答案停止判題及保存、提示重新載入。修復舊介面啟動所需共享規則模組的可見依賴，模組與正式175f8ae逐bytes相同且不含新增答案欄位。10項材料回歸＋1項封裝回歸通過；13項實際Chromium斷言通過，3既有背景POST被攔截，整頁總執行器false保留，不冒稱整頁或正式帳戶E2E通過。1474檔本機產物；55Worker模組及所有既有公開JSON未改。模型/APIS/外部請求/正式寫入0。完整189仍未完成；線上登入/邊緣快取、其他既有門檻保留。報告：/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/anonfix-01a14941/REPORT.md。
+
+<!-- /yw-p2r5-01a14507 -->
+
 ## 2026-10-17 — Local source quote and return-focus repair
 
 Real Chromium found collapsed quote line breaks and unfocusable source paragraphs.

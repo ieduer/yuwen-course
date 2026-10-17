@@ -22,10 +22,6 @@ const SHARED_STATE_MODULE_URL = new URL(
   `yw-shared-state.js?v=${SHARED_STATE_ASSET_VERSION}`,
   APP_SCRIPT_URL,
 ).href;
-const LESSON_BLUEPRINT_RULES_URL = new URL(
-  "../lesson-blueprint-rules.js?v=8498ddbb5a69645b",
-  APP_SCRIPT_URL,
-).href;
 const TEXTBOOK_PAGES_MODULE_URL = new URL("textbook-pages.js?v=91556289be7d3930", APP_SCRIPT_URL).href;
 
 let sharedStateClient = null;
@@ -39,6 +35,7 @@ let sharedStateRetryAttempt = 0;
 let studyGuideCatalogRefreshPromise = null;
 let studyGuideCatalogRetryTimer = null;
 let studyGuideCatalogRetryAttempt = 0;
+let materialGeneration = 0;
 let sharedStateRefreshRequested = false;
 let lessonBlueprintRules = null;
 let sharedStateGeneration = 0;
@@ -174,6 +171,7 @@ const state = {
   blueprintLoading: new Set(),
   vocabBanks: new Map(),
   vocabBankLoading: new Set(),
+  vocabBankStatus: new Map(),
   vocabEligibility: null,
   vocabIndex: { activeItemIds: {} },
   formalVocabResourceKeys: new Set(),
@@ -432,6 +430,7 @@ function setProgressOwnerScope(scope) {
   state.pendingReplayController?.suspend(); state.evaluationStatusPoller?.suspend();
   state.recorderBridge?.suspend();
   progressOwnerScope = nextScope;
+  resetAssessmentMaterials();
   state.progress = loadStoredProgress(nextScope);
   invalidateFirstReadSessions();
   refreshLocalProgressViews();
@@ -456,6 +455,7 @@ function setInteractionIdentityResolved(resolved, { preserveSessions = false } =
   if (interactionIdentityResolved === next) return;
   if (!next) { state.pendingReplayController?.suspend(); state.evaluationStatusPoller?.suspend(); state.recorderBridge?.suspend(); }
   interactionIdentityResolved = next;
+  if (next) refreshAssessmentMaterials();
   if (!preserveSessions) {
     invalidateFirstReadSessions();
     refreshLocalProgressViews();
@@ -1170,16 +1170,68 @@ async function fetchJson(url, { cache = "default" } = {}) {
   return response.json();
 }
 
+function vocabularyAnswerAvailable(item) {
+  return Array.isArray(item?.options) && Number.isInteger(item.answerIndex)
+    && item.answerIndex >= 0 && item.answerIndex < item.options.length;
+}
+
+function studyGuideAnswerAvailable(item) {
+  const answer = item?.referenceAnswer;
+  if (typeof answer === "string") return answer.trim().length > 0;
+  return Boolean(answer && typeof answer === "object" && Object.keys(answer).length);
+}
+
+function materialFailureStatus(error) {
+  if (error?.status === 401) return "login_required";
+  if (error?.status === 403) return "forbidden";
+  return error?.code === "material_update_required" ? "update_required" : "unavailable";
+}
+
+function materialAccessNotice(status) {
+  if (status === "login_required") return `<p class="study-guide-sync pending" role="status">登入後即可取得核對材料；登入完成後會自動重新載入。 <a href="${esc(userCenterLoginUrl())}" target="_blank" rel="noopener noreferrer">登入 My</a></p>`;
+  if (status === "update_required") return '<p class="study-guide-sync pending" role="status">材料已更新，請重新載入後再作答；目前不會判題或計分。 <button type="button" data-material-reload>重新載入頁面</button></p>';
+  if (status === "forbidden") return '<p class="study-guide-sync pending" role="status">目前帳戶無法取得核對材料；請確認帳戶權限，目前不會判題或計分。</p>';
+  return '<p class="study-guide-sync pending" role="status">核對材料暫時無法載入，目前不會判題或計分。 <button type="button" data-material-retry>重試載入材料</button></p>';
+}
+
+function resetAssessmentMaterials() {
+  materialGeneration += 1;
+  clearStudyGuideCatalogRetry();
+  studyGuideCatalogRefreshPromise = null;
+  state.studyGuideLessons.clear();
+  state.studyGuideCatalogStatus = "loading";
+  state.vocabBanks.clear();
+  state.vocabBankLoading.clear();
+  state.vocabBankStatus.clear();
+}
+
+function refreshAssessmentMaterials({ retry = false } = {}) {
+  if (!interactionIdentityResolved || !progressOwnerScope) return;
+  if (progressOwnerScope === ANONYMOUS_UI_SCOPE) {
+    state.studyGuideCatalogStatus = "login_required";
+    if (state.current && lessonHasVocabulary(state.current)) state.vocabBankStatus.set(state.current.id, "login_required");
+    return;
+  }
+  if (state.studyGuideCatalogStatus === "loading" || state.studyGuideCatalogStatus === "login_required"
+    || (retry && state.studyGuideCatalogStatus === "unavailable")) void refreshStudyGuideCatalog();
+  if (state.current) {
+    const status = state.vocabBankStatus.get(state.current.id);
+    if (status === "login_required" || (retry && status === "unavailable")) state.vocabBankStatus.delete(state.current.id);
+    void ensureVocabBank(state.current);
+  }
+}
+
 async function fetchStudyGuideCatalog() {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), STUDY_GUIDE_CATALOG_TIMEOUT_MS);
   try {
     const response = await fetch("/api/reading/materials/study-guide-catalog.json", {
       headers: { accept: "application/json" },
-      cache: "no-cache",
+      credentials: "same-origin",
+      cache: "no-store",
       signal: controller.signal,
     });
-    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+    if (!response.ok) throw Object.assign(new Error(`${response.status} ${response.statusText}`), { status: response.status });
     return await response.json();
   } finally {
     clearTimeout(timeout);
@@ -1195,6 +1247,8 @@ function installStudyGuideCatalog(catalog) {
     && Number(catalog.lessonCount) === catalog.lessons.length
   );
   if (!valid) return false;
+  if (catalog.lessons.some(lesson => !Array.isArray(lesson.items)
+    || lesson.items.some(item => item.activeForSelfTest && !studyGuideAnswerAvailable(item)))) return false;
   state.studyGuideLessons = new Map(catalog.lessons.map((lesson) => [lesson.lessonId, lesson]));
   state.studyGuideCatalogStatus = "available";
   clearStudyGuideCatalogRetry();
@@ -1227,26 +1281,36 @@ function scheduleStudyGuideCatalogRetry() {
 
 function refreshStudyGuideCatalog({ scheduleRetry = true } = {}) {
   if (studyGuideCatalogRefreshPromise) return studyGuideCatalogRefreshPromise;
-  studyGuideCatalogRefreshPromise = (async () => {
+  if (!interactionIdentityResolved || !progressOwnerScope || progressOwnerScope === ANONYMOUS_UI_SCOPE) {
+    state.studyGuideCatalogStatus = "login_required";
+    return Promise.resolve(false);
+  }
+  const generation = materialGeneration;
+  const attempt = (async () => {
     try {
       const catalog = await fetchStudyGuideCatalog();
-      if (!installStudyGuideCatalog(catalog)) throw new Error("學案知能清算資料版本不一致");
+      if (generation !== materialGeneration) return false;
+      if (!installStudyGuideCatalog(catalog)) throw Object.assign(new Error("學案知能清算資料版本不一致"), { code: "material_update_required" });
       if (state.current) {
         renderCheckStage(state.current);
         renderMatrix(state.current);
         renderMastery();
       }
       return true;
-    } catch {
-      state.studyGuideCatalogStatus = "unavailable";
+    } catch (error) {
+      if (generation !== materialGeneration) return false;
+      state.studyGuideLessons.clear();
+      state.studyGuideCatalogStatus = materialFailureStatus(error);
+      clearStudyGuideCatalogRetry({ resetAttempt: false });
       if (state.current) renderCheckStage(state.current);
-      if (scheduleRetry) scheduleStudyGuideCatalogRetry();
+      if (scheduleRetry && state.studyGuideCatalogStatus === "unavailable") scheduleStudyGuideCatalogRetry();
       return false;
     }
   })().finally(() => {
-    studyGuideCatalogRefreshPromise = null;
+    if (studyGuideCatalogRefreshPromise === attempt) studyGuideCatalogRefreshPromise = null;
   });
-  return studyGuideCatalogRefreshPromise;
+  studyGuideCatalogRefreshPromise = attempt;
+  return attempt;
 }
 
 function hexDigest(buffer) {
@@ -2790,23 +2854,35 @@ function authorDialogue(lesson, body, result = "", action = "", { coach = false,
 // ---------- 字詞題庫（結構化詞級疏通；無題庫課文回退註詞逐查） ----------
 async function ensureVocabBank(lesson) {
   const id = lesson?.id;
-  if (!id || state.vocabBanks.has(id) || state.vocabBankLoading.has(id)) return;
+  if (!id || state.vocabBanks.has(id) || state.vocabBankLoading.has(id) || state.vocabBankStatus.has(id)) return;
   if (!lessonHasVocabulary(lesson)) {
     state.vocabBanks.set(id, null);
     return;
   }
+  if (!interactionIdentityResolved || !progressOwnerScope) return;
+  if (progressOwnerScope === ANONYMOUS_UI_SCOPE) {
+    state.vocabBankStatus.set(id, "login_required");
+    return;
+  }
+  const generation = materialGeneration;
   state.vocabBankLoading.add(id);
   try {
     const response = await fetch(`/api/reading/materials/vocab/${encodeURIComponent(id)}.json`, {credentials:"same-origin",cache:"no-store"});
-    if (!response.ok) throw new Error(String(response.status));
+    if (!response.ok) throw Object.assign(new Error(String(response.status)), { status: response.status });
     const bank = await response.json();
+    if (generation !== materialGeneration) return;
+    if (bank?.lessonId !== id || !Array.isArray(bank.inventory)) throw Object.assign(new Error("題庫已更新"), { code: "material_update_required" });
     const questions = (bank.inventory || []).filter((item) => item.decision === "question");
+    if (questions.some(item => !vocabularyAnswerAvailable(item))) throw Object.assign(new Error("題庫缺少核對資料"), { code: "material_update_required" });
     state.vocabBanks.set(id, questions.length ? { ...bank, questions } : null);
-  } catch {
-    state.vocabBanks.set(id, null);
+  } catch (error) {
+    if (generation !== materialGeneration) return;
+    state.vocabBankStatus.set(id, materialFailureStatus(error));
   } finally {
-    state.vocabBankLoading.delete(id);
-    if (state.current?.id === id) renderCheckStage(state.current);
+    if (generation === materialGeneration) {
+      state.vocabBankLoading.delete(id);
+      if (state.current?.id === id) renderCheckStage(state.current);
+    }
   }
 }
 
@@ -2838,6 +2914,7 @@ const QUIZ_TYPE_LABEL = {
 };
 
 function renderVocabularyQuiz(lesson, progress, bank) {
+  if (bank.questions.some(item => !vocabularyAnswerAvailable(item))) return materialAccessNotice("update_required");
   const quiz = quizRecord(progress);
   const questions = bank.questions;
   const solved = quizSolvedCount(quiz, questions);
@@ -3020,7 +3097,7 @@ function renderReferenceAnswer(value) {
   if (value && typeof value === "object") {
     return `<dl>${Object.entries(value).map(([key, entry]) => `<dt>${esc(key)}</dt><dd>${renderReferenceAnswer(entry)}</dd>`).join("")}</dl>`;
   }
-  return `<p>${esc(value || "本題須先人工複核，暫不提供唯一答案。")}</p>`;
+  return `<p>${esc(value || "材料已更新，請重新載入後再作答。")}</p>`;
 }
 
 function studyGuideFailureMessage(record) {
@@ -3069,6 +3146,7 @@ function renderStudyGuideAssessment(record) {
 }
 
 function renderStudyGuideCards(lesson, competencyTags) {
+  if (["login_required", "update_required", "forbidden"].includes(state.studyGuideCatalogStatus)) return materialAccessNotice(state.studyGuideCatalogStatus);
   if (state.studyGuideCatalogStatus === "loading") {
     return `<section class="study-guide-deck" aria-label="學案知能清算"><p class="study-guide-sync pending" role="status">正在載入學案知能清算；教材正文與其他功能可先使用。</p></section>`;
   }
@@ -3076,6 +3154,7 @@ function renderStudyGuideCards(lesson, competencyTags) {
     return `<section class="study-guide-deck" aria-label="學案知能清算"><p class="study-guide-sync pending" role="status">學案知能清算資料暫時無法載入；重新載入成功後，本頁會自動核對完成度並解鎖後續互動。</p><button type="button" data-study-guide-catalog-retry>重新載入學案知能清算</button></section>`;
   }
   const items = studyGuideItemsFor(lesson, competencyTags);
+  if (items.some(item => item.activeForSelfTest && !studyGuideAnswerAvailable(item))) return materialAccessNotice("update_required");
   if (!items.length) return "";
   const active = items.filter((item) => item.activeForSelfTest);
   const held = items.filter((item) => !item.activeForSelfTest);
@@ -3228,6 +3307,9 @@ function renderInteractionBody(key, lesson, progress, blueprint) {
     return authorDialogue(lesson, body, interactionResult(progress, "context", lesson));
   }
   if (key === "vocabulary") {
+    if (lessonHasVocabulary(lesson) && learningIdentityNoticeMode() === "anonymous") return materialAccessNotice("login_required");
+    const materialStatus = state.vocabBankStatus.get(lesson.id);
+    if (materialStatus) return materialAccessNotice(materialStatus);
     const bank = state.vocabBanks.get(lesson.id);
     if (bank) return appendFirstReadCorrections(renderVocabularyQuiz(lesson, progress, bank), lesson);
     if (bank === undefined && state.vocabBankLoading.has(lesson.id)) {
@@ -4658,6 +4740,8 @@ async function submitStudyGuideAttempt({ lessonId, itemKey, response, referenceR
 
 function bindCheckStage() {
   const listen = (node, type, callback) => node.addEventListener(type, callback, { signal: checkStageBindings.signal });
+  $$('[data-material-reload]', els.checkStage).forEach((button) => listen(button, "click", () => location.reload()));
+  $$('[data-material-retry]', els.checkStage).forEach((button) => listen(button, "click", () => refreshAssessmentMaterials({ retry: true })));
   $$('[data-study-guide-catalog-retry]', els.checkStage).forEach((button) => listen(button, "click", async () => {
     button.disabled = true;
     button.textContent = "正在重新載入…";
@@ -4710,7 +4794,7 @@ function bindCheckStage() {
     const lessonId = state.current?.id;
     const itemKey = form.dataset.studyResponse;
     const item = state.studyGuideLessons.get(lessonId)?.items?.find((entry) => entry.itemKey === itemKey);
-    if (!lessonId || !item?.activeForSelfTest) {
+    if (!lessonId || !item?.activeForSelfTest || !studyGuideAnswerAvailable(item)) {
       toast("本題已更新，請重新載入後再答");
       return;
     }
@@ -4970,6 +5054,12 @@ function bindCheckStage() {
     if (itemHost.dataset.submitting === "1") return;
     const item = bank.questions.find((entry) => entry.id === itemHost.dataset.quizItem);
     if (!item) return;
+    if (!vocabularyAnswerAvailable(item)) {
+      state.vocabBankStatus.set(lessonId, "update_required");
+      renderCheckStage(state.current);
+      toast("材料已更新，請重新載入後再作答；本次未判題。");
+      return;
+    }
     const progress = lessonProgress(lessonId);
     const quiz = quizRecord(progress);
     let previous = quiz.answers[item.id] || { attempts: 0, correct: false, mastered: false };
@@ -5764,9 +5854,7 @@ async function init() {
   if (compactAtlasMedia.matches) closeAtlas(); else openAtlas();
   // Textbook plates are a recoverable enhancement and never gate the lesson.
   void loadTextbookPlates();
-  // The catalog is a recoverable learning enhancement. Start it in parallel,
-  // but never put the core textbook first paint behind its network/body wait.
-  const studyGuideCatalogPromise = fetchStudyGuideCatalog().catch(() => null);
+  // Protected materials load after confirmed identity; textbook reading does not wait for them.
   try {
     const [
       manifest,
@@ -5792,7 +5880,8 @@ async function init() {
       fetchJson("data/preview-screenshots.json", { cache: "no-cache" }),
       fetchJson("data/preview-targets.json", { cache: "no-cache" }),
       fetchJson("data/classical-learning-tips.json", { cache: "no-cache" }),
-      import(LESSON_BLUEPRINT_RULES_URL),
+      // A literal import keeps this shared browser/Worker dependency in the public build.
+      import("../lesson-blueprint-rules.js?v=8498ddbb5a69645b"),
       fetchJson("app-content/latest-stable.json", { cache: "no-cache" }).catch(() => null),
     ]);
     if (
@@ -5849,21 +5938,7 @@ async function init() {
       || defaultBlock?.lessons.find((lesson) => !isUnitHeading(lesson) && !isRetiredMirror(lesson) && (lesson.excerpt || "").length > 100)
       || studentLessons[0];
     if (initial) await showLesson(initial.id, { push: true, syncSharedState: false });
-    void studyGuideCatalogPromise.then((studyGuideCatalog) => {
-      if (state.studyGuideCatalogStatus !== "loading") return;
-      if (installStudyGuideCatalog(studyGuideCatalog)) {
-        if (state.current) {
-          renderCheckStage(state.current);
-          renderMatrix(state.current);
-          renderMastery();
-        }
-        return;
-      }
-      state.studyGuideLessons = new Map();
-      state.studyGuideCatalogStatus = "unavailable";
-      if (state.current) renderCheckStage(state.current);
-      scheduleStudyGuideCatalogRetry();
-    });
+    refreshAssessmentMaterials();
     void flushSharedState();
   } catch (error) {
     els.atlasStatus.textContent = "教材資料載入失敗";
