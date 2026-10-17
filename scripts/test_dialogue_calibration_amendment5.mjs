@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import os from 'node:os';
 import path from 'node:path';
+import {pathToFileURL} from 'node:url';
 import {AMENDMENT5_CONTRACT as contract} from '../site/dialogue-calibration-amendment5-contract.js';
 import {amendment5Packet} from './dialogue_calibration_amendment5.mjs';
 import {buildReleaseSite,projectReleaseJson,RELEASE_JSON_PROJECTION_VERSION} from './build_release_site.mjs';
@@ -49,19 +50,32 @@ test('case 1 asks and answers the third example without weakening the rubric or 
  assert.equal(old.studentAnswer,c.caseCorrection.oldStudentAnswer);assert.equal(old.promptDigest,c.caseCorrection.oldPromptDigest);
  assert(!old.studentAnswer.includes('博学而日参省乎己'));assert(c.caseCorrection.doesNotRewriteOldReceipt);
 });
-test('all28 pins match released curriculum and packet bytes, with separate raw provenance',()=>{
+test('all28 pins match private released curriculum and frozen packet, with separate raw provenance',async()=>{
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'yw-amendment5-projection-test-'));
  try{
   const sourceRoot=path.join(root,'source'),releaseRoot=path.join(root,'release');
   fs.mkdirSync(path.join(sourceRoot,'dialogue-curriculum'),{recursive:true});
   for(const id of new Set(packet.cases.map(c=>c.lessonId)))fs.copyFileSync(`site/dialogue-curriculum/${id}.json`,path.join(sourceRoot,'dialogue-curriculum',id+'.json'));
-  fs.copyFileSync('site/dialogue-calibration-amendment5-packet.json',path.join(sourceRoot,'dialogue-calibration-amendment5-packet.json'));
+  const packetName='dialogue-calibration-amendment5-packet.json';
+  const packetBytes=fs.readFileSync('site/'+packetName,'utf8');
+  fs.writeFileSync(path.join(sourceRoot,packetName),packetBytes);
+  // Exercise the real private-module boundary. A fixture without a Worker
+  // describes public data and must never expect the complete private packet.
+  fs.writeFileSync(path.join(sourceRoot,'_worker.js'),`import packet from './${packetName}' with {type:'json'}; import privateData from './assessment-private-data.js'; export default {packet,privateData};`);
+  fs.writeFileSync(path.join(sourceRoot,'assessment-private-data.js'),'export default {};');
   buildReleaseSite({sourceRoot,releaseRoot,releaseKind:'preview-web-only'});
   const hash=x=>crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex');
-  assert.equal(fs.readFileSync(path.join(releaseRoot,'dialogue-calibration-amendment5-packet.json'),'utf8'),fs.readFileSync('site/dialogue-calibration-amendment5-packet.json','utf8'));
+  assert.equal(projectReleaseJson(packetName,packetBytes),packetBytes,'frozen JSON bytes survive the existing privacy projection exactly');
+  assert.equal(fs.readFileSync('site/'+packetName,'utf8'),packetBytes,'build must not rewrite frozen source');
+  assert.equal(fs.existsSync(path.join(releaseRoot,packetName)),false,'private packet has no public URL');
+  const releasedWorker=(await import(pathToFileURL(path.join(releaseRoot,'_worker.js/index.js')).href)).default;
+  assert.equal(hash(releasedWorker.packet),hash(packet),'ESM preserves every frozen packet value, prompt and pin');
+  assert.equal(Object.keys(releasedWorker.privateData).length,new Set(packet.cases.map(c=>c.lessonId)).size);
   let changed=0;
   for(const c of packet.cases){
-   const released=JSON.parse(fs.readFileSync(path.join(releaseRoot,'dialogue-curriculum',c.lessonId+'.json')));
+   const privateText=releasedWorker.privateData['/dialogue-curriculum/'+c.lessonId+'.json'];
+   assert.equal(privateText,projectReleaseJson('dialogue-curriculum/'+c.lessonId+'.json',fs.readFileSync('site/dialogue-curriculum/'+c.lessonId+'.json','utf8')),c.id+' exact private response bytes');
+   const released=JSON.parse(privateText);
    assert.equal(c.sourceDigest,hash(released),c.id);
    assert.equal(c.rawSourceDigest,hash(load(c.lessonId)),c.id);
    assert.equal(c.sourceProjectionVersion,RELEASE_JSON_PROJECTION_VERSION);

@@ -1,3 +1,27 @@
+## 2026-10-17 PDT — Historical packet tests aligned with private artifacts
+
+The two remaining amendment4/5 provenance tests now build a Worker fixture and read
+its private ESM packet and lossless private curriculum responses. Public packet URLs
+must be absent. The original 28 per-case source, raw-source, projection, prompt and
+case-definition digest assertions remain unchanged for each packet, including the
+six lesson-1498 projection differences and no-semantic-pass assertion. Both pass.
+All 56 raw/projected source pins also match their actual historical Git sources
+36ee2c4 (amendment4) and 28a6c06 (amendment5); there was no source drift to waive.
+
+The complete frozen packet representation is preserved through ESM; its original
+JSON bytes must survive privacy projection unchanged and the build must not rewrite
+source. Frozen packets, contracts, case definitions, expiry, rubrics and all site
+runtime/data/migrations remain byte-identical to parent136e576. No assertion was
+skipped, weakened or replaced with a new expected digest. Original failures remain
+linked evidence; the earlier eight preparation failures were already resolved by
+the active-exchange repair and were not rerun here. This closes the two local test
+contract gaps only, not the expired model207/3E2E or provider-size/quality gaps.
+
+Evidence: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/packet-contract-01a148fd/REPORT.md.
+Full189 goal, evidence and waivers remain. No network/APIS/model, batch restart,
+student-data write, push or production release. Prior entries below are history
+for the remaining-test count; unrelated requirements retain their original scope.
+
 ## 2026-10-17 PDT — Local active-exchange repair
 
 Long-source context now preserves the latest author question with the student's
