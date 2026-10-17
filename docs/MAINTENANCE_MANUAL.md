@@ -1,6 +1,6 @@
 <!-- yw-p2r5-01a14507 -->
 
-當前 2026-10-17T11:41:17.794544+00:00：完整189篇替換仍未完成。本機以49eb為基底完成未啟用的三篇品質E2E續期整合，沿用既有E2E及full-language activation結構，未生成批准或活動pin；235案同來源、同實際模型版本且逐案完成／已知用量才可進入E2E，120次邏輯請求／最多360次provider attempts跨日及回執輪換不重置，與校準共用並行1、六小時及全域400次／US$50日額；異常保全原結果並停止新請求。226項相關測試與1項實際本機Wrangler編譯檢查通過；隔離包改為完整私有Worker目錄，公開檔案相對49eb不變，235私有來源及prompt逐案一致。平台編譯／執行及真模型仍未驗證。舊2026-10-14T12:00Z付費硬到期與消耗紀錄不變。舊隔離publisher通道已使用／到期，通用Pages publisher只支援production；須依法準備新註冊能力，不得繞過或重啟舊通道。Claude獨佔APIS來源與發布；11:12:26Z保存的owner回執實際為verified並記registry accepted（先前摘要所稱待接受不準確），本任務無獨立live核實，任何依賴操作前刷新屆時accepted B及所有權，保留其ledger classes／migration／bindings。此原子步驟模型0、外部wire請求0、APIS修改0、推送／發布0；兩次套件更新查詢在離線攔截器中於發送前阻止。完整報告與精確來源見 /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/e2e-renewal-01a1497b/REPORT.md 和 SOURCE-IDENTITY.json。尚欠註冊publisher接線、校準後overlay／來源綁定、統一批准件、真模型235案及三篇品質E2E、中央逐筆accepted→My重載、帳戶／native適用處置、最終平台驗收、正式發布與Status；既有189來源／720剪貼簿／語音／閱讀接受及豁免保留。第二次compaction後狀態fresh_task_required：僅完成此原子步驟、清理與串行交接，下一執行者依HANDOFF.md；不得並行或縮小目標。
+當前 2026-10-17T11:59:33.207350+00:00：完整189篇goal仍active／未完成；01a149ae完成本機校準回執檢查與來源變更預覽。新增離線工具核對235案raw receipt、同來源／產物／帳戶／APIS／實際modelVersion、原期限、歷史摘要、完整用量與cost，重新按原判準驗證expected verdict；全189來源不漂移才產生78項calibrationStatus的待覆核差異及課程版本／前後摘要。工具不寫curriculum、不接受語義品質、不生成付費或發布授權；原packet及所有歷史保留。40項本機檢查通過，含真SQLite runtime回執整合與CLI私有輸入不外洩。未呼叫模型／provider、未改APIS、未推送／發布。既有227及其他接受豁免按原精確範圍保留。下一步仍須實作審閱後overlay與index／build接線、新E2E driver、註冊隔離publisher候選，再提交統一具體批准件；舊driver／publisher不得重啟。Claude獨佔APIS，受依賴操作前才刷新accepted B；舊2026-10-14T12:00Z付費期限保持terminal。唯一現況 /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/calibration-import-01a149ae/REPORT.md，精確來源SOURCE-IDENTITY.json，收束CLOSEOUT.json。正式替換、235真模型與三篇品質E2E、source→中央逐筆accepted→My、native、正式發布與Status均未完成。
 
 <!-- /yw-p2r5-01a14507 -->
 
@@ -3604,3 +3604,25 @@ release evidence and rollback: workspace
 
 The existing Web polish fixture now includes the canonical text version and digest,
 so the current source-authority check can validate its synthetic submitted state.
+
+## Offline full-language calibration inspection (2026-10-17 local candidate)
+
+`scripts/dialogue_calibration_import.mjs inspect READBACKS_JSON EXECUTION_PINS_JSON EXACT_NEW_REPORT_JSON`
+reads the existing isolated runtime readbacks and an exact copy of the reviewed execution pins.
+Execution pins use the existing sourceCommit, artifactSha256, activationDigest, apisVersion,
+ownerRef, priorReceiptSetDigest, readyAt, hardExpiry and stored budget fields; they are comparison
+inputs, not a new authorization mechanism. Obtain them from the real approved publisher and
+execution evidence. Local hashes cannot establish the authenticity of that evidence.
+
+The command requires all235 distinct cases, verifies raw receipt hashes and source/prompt pins,
+reconciles stored usage/cost against the fixed budget, reruns the original verdict checks, and
+checks all189 sources. Output includes a deterministic proposed diff for all78 language items
+and their resulting curriculum versions/digests. Raw replies are never printed to shell logs;
+the original private readbacks remain required for semantic review. Output is created once,
+never overwrites an existing file, and does not change source data or grant permission.
+
+Every case still needs the original author-fidelity and teaching-quality review by suen or an
+explicitly designated reviewer. Apply only the subsequently reviewed exact source diff through
+the existing workflow. Current automatic overlay/index/build integration is not implemented.
+Keep consumed packets and their prompt/source pins immutable; final overlay source and artifact
+must be bound separately. Do not regenerate a consumed packet to match new accepted statuses.

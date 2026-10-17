@@ -117,3 +117,12 @@ test('authority expires at the boundary; no reset via a new day or recovery',asy
  assert.equal(plan({rows}).code,'full_operation_exhausted');assert.equal(plan({recoveryOf:'old'}).code,'full_recovery_not_authorized');assert.equal(plan({now:at+86400000}).code,'full_expired');assert.equal(FULL_CASE_COUNT,235);
  for(const patch of [{state:'unknown'},{accountedMicros:84001},{finishedAt:null},{attemptId:'old-operation'}])assert.equal(plan({rows:[{...rows[0],...patch}]}).code,'full_ledger_invalid');
 });
+
+test('offline importer verifies the real SQLite runtime readback without promoting source',async t=>{
+ const {inspectCalibrationReadback}=await import('./dialogue_calibration_import.mjs');
+ const f=await fixture(t),result=await f.post();
+ const execution={sourceCommit:f.authority.sourceCommit,artifactSha256:f.authority.artifactSha256,activationDigest:f.authority.registryReceiptDigest,apisVersion:version,ownerRef:result.ownerRef,priorReceiptSetDigest:f.authority.priorReceiptSetDigest,readyAt:f.authority.readyAt,hardExpiry:f.authority.hardExpiry,budget:JSON.parse(result.rawRow.budget_policy_json)};
+ const inspected=await inspectCalibrationReadback(result,execution);
+ assert.equal(inspected.receiptDigest,result.receiptDigest);assert.equal(inspected.accountedMicros,result.call.accounted_micros);assert.equal(inspected.semanticReviewRequired,true);assert.equal(f.calls(),1);
+ assert(loadCurriculum(negative[0].lessonId).languagePractice.every(i=>i.calibrationStatus==='pending-real-model'));
+});
