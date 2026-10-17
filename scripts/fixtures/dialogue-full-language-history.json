@@ -1,0 +1,72 @@
+[
+  {
+    "turn_id": "yw-dialogue-real-calibration-20261012-v1-amendment-1:language-er-independent",
+    "state": "review",
+    "reserved_micros": 84000,
+    "accounted_micros": null,
+    "created_at": "2026-10-12T15:44:56.122Z",
+    "finished_at": "2026-10-12T15:44:58.642Z",
+    "curriculum_json": "{\"syntheticOnly\":true,\"caseId\":\"language-er-independent\",\"sourceDigest\":\"031bbb31c37efa51407a7069c310a7c51bff1ebbae982ab38fdacc69a6bf6f89\",\"promptDigest\":\"f7701e2ce6677f34cebad1c576bce12336291c9250e8b6a726a9f59b510cb3f1\"}",
+    "details_json": "{\"syntheticOnly\":true,\"reason\":\"gateway_unavailable\",\"received\":null,\"semanticReviewRequired\":true,\"expectedVerdictMatches\":false}"
+  },
+  {
+    "turn_id": "yw-dialogue-real-calibration-20261012-v1-amendment-2:attempt-1",
+    "state": "review",
+    "reserved_micros": 84000,
+    "accounted_micros": null,
+    "created_at": "2026-10-12T22:01:33.062Z",
+    "finished_at": "2026-10-12T22:01:36.643Z",
+    "curriculum_json": "{\"syntheticOnly\":true,\"caseId\":\"language-er-independent\",\"sourceDigest\":\"b079f0af0a3978ea0ac81c512a186211c5bee8a333c53d0b41f761f1ad9561fa\",\"promptDigest\":\"caecd0124e90dfc38c7b092dcf5ad60103c05394010b818dd3bd0ab1528ea459\"}",
+    "details_json": "{\"syntheticOnly\":true,\"reason\":\"gateway_unavailable\",\"boundaryStop\":false,\"received\":null,\"semanticReviewRequired\":true,\"expectedVerdictMatches\":false}"
+  },
+  {
+    "turn_id": "yw-dialogue-real-calibration-20261012-v1-amendment-2:attempt-2",
+    "state": "review",
+    "reserved_micros": 84000,
+    "accounted_micros": null,
+    "created_at": "2026-10-12T22:03:50.535Z",
+    "finished_at": "2026-10-12T22:03:52.983Z",
+    "curriculum_json": "{\"syntheticOnly\":true,\"caseId\":\"language-er-misconception\",\"sourceDigest\":\"b079f0af0a3978ea0ac81c512a186211c5bee8a333c53d0b41f761f1ad9561fa\",\"promptDigest\":\"d8366012e18b24be22fa981e9d839817cdfcd5be6ec34b03c094962483480ea8\"}",
+    "details_json": "{\"syntheticOnly\":true,\"reason\":\"gateway_unavailable\",\"boundaryStop\":false,\"received\":null,\"semanticReviewRequired\":true,\"expectedVerdictMatches\":false}"
+  },
+  {
+    "turn_id": "yw-dialogue-real-calibration-20261012-v1-amendment-3:attempt-1",
+    "state": "review",
+    "reserved_micros": 84000,
+    "accounted_micros": 5589,
+    "created_at": "2026-10-13T01:13:38.293Z",
+    "finished_at": "2026-10-13T01:13:45.749Z",
+    "curriculum_json": "{\"syntheticOnly\":true,\"caseId\":\"language-er-independent\",\"sourceDigest\":\"b079f0af0a3978ea0ac81c512a186211c5bee8a333c53d0b41f761f1ad9561fa\",\"promptDigest\":\"caecd0124e90dfc38c7b092dcf5ad60103c05394010b818dd3bd0ab1528ea459\"}",
+    "details_json": "{\"value\":{\"reply\":\"你準確指出了「順風而呼」是修飾關係，「而聞者彰」是轉折關係。那麼請你再看看「君子博學而日參省乎己」中的「而」，它連結了什麼內容，前後又是什麼關係？\",\"assessments\":[{\"objectiveId\":\"lesson-1711-p1:language-er\",\"outcome\":\"needs_practice\",\"rationale\":\"學生已說明「順風而呼」（修飾）與「而聞者彰」（轉折）的句意與關係，但題目要求的「君子博學而日參省乎己」（遞進）尚未分析完整，尚需補全該句的比較。\",\"evidence\":[{\"criterion\":\"context_meaning\",\"turnId\":\"calibration-answer:language-er-independent\",\"quote\":\"顺风而呼的而把顺风的方式接到呼喊上；而闻者彰却说声音虽没变强，听的人仍听得清楚，是前后转折\",\"passageId\":\"lesson-1711-p1:p1\",\"passageQuote\":\"顺风而呼，声非加疾也，而闻者彰\"},{\"criterion\":\"explanation\",\"turnId\":\"calibration-answer:language-er-independent\",\"quote\":\"不能都译成但是。\",\"passageId\":\"lesson-1711-p1:p1\",\"passageQuote\":\"顺风而呼，声非加疾也，而闻者彰\"}]}]},\"model\":\"gemini-3.6-flash\",\"modelVersion\":\"gemini-3.6-flash\",\"usage\":{\"promptTokenCount\":5467,\"candidatesTokenCount\":397,\"totalTokenCount\":5864},\"firstTokenMs\":6055,\"totalDurationMs\":6272,\"expectedVerdictMatches\":false,\"verdict\":\"needs_practice\",\"semanticReviewRequired\":true,\"review\":[\"核對句意與句法關係\",\"必須根據本輪學生原話\",\"術語或原句引用不能替代說明\"],\"syntheticOnly\":true}"
+  },
+  {
+    "turn_id": "yw-dialogue-real-calibration-20261012-v1-amendment-3:attempt-2",
+    "state": "review",
+    "reserved_micros": 84000,
+    "accounted_micros": null,
+    "created_at": "2026-10-13T01:16:04.748Z",
+    "finished_at": "2026-10-13T01:16:10.223Z",
+    "curriculum_json": "{\"syntheticOnly\":true,\"caseId\":\"language-er-misconception\",\"sourceDigest\":\"b079f0af0a3978ea0ac81c512a186211c5bee8a333c53d0b41f761f1ad9561fa\",\"promptDigest\":\"d8366012e18b24be22fa981e9d839817cdfcd5be6ec34b03c094962483480ea8\"}",
+    "details_json": "{\"syntheticOnly\":true,\"reason\":\"gateway_unavailable\",\"boundaryStop\":false,\"received\":null,\"semanticReviewRequired\":true,\"expectedVerdictMatches\":false,\"gatewayFailure\":{\"requestId\":\"yw-dialogue-real-calibration-20261012-v1-amendment-3:attempt-2\",\"httpStatus\":503,\"retryAfterMs\":1000}}"
+  },
+  {
+    "turn_id": "yw-dialogue-real-calibration-20261012-v1-amendment-3:attempt-3",
+    "state": "review",
+    "reserved_micros": 84000,
+    "accounted_micros": null,
+    "created_at": "2026-10-13T01:32:10.506Z",
+    "finished_at": "2026-10-13T01:32:15.142Z",
+    "curriculum_json": "{\"syntheticOnly\":true,\"caseId\":\"language-er-misconception\",\"sourceDigest\":\"b079f0af0a3978ea0ac81c512a186211c5bee8a333c53d0b41f761f1ad9561fa\",\"promptDigest\":\"d8366012e18b24be22fa981e9d839817cdfcd5be6ec34b03c094962483480ea8\"}",
+    "details_json": "{\"syntheticOnly\":true,\"reason\":\"gateway_stream_unconfirmed\",\"boundaryStop\":false,\"received\":null,\"semanticReviewRequired\":true,\"expectedVerdictMatches\":false}"
+  },
+  {
+    "turn_id": "yw-dialogue-real-calibration-20261012-v1:language-er-independent",
+    "state": "review",
+    "reserved_micros": 84000,
+    "accounted_micros": 4678,
+    "created_at": "2026-10-12T15:03:35.502Z",
+    "finished_at": "2026-10-12T15:03:39.337Z",
+    "curriculum_json": "{\"syntheticOnly\":true,\"caseId\":\"language-er-independent\",\"sourceDigest\":\"031bbb31c37efa51407a7069c310a7c51bff1ebbae982ab38fdacc69a6bf6f89\",\"promptDigest\":\"6d8f6bc2e43b52bf1c91d1977c7a9d06e1d620029f6ddb99e91ee04955f60736\"}",
+    "details_json": "{\"syntheticOnly\":true,\"reason\":\"missing_criterion\",\"received\":{\"value\":{\"reply\":\"你說得很好，能清楚區分「修飾」與「轉折」兩種不同關係。那麼，再看「君子博學而日參省乎己」，這裡的「而」又是連接什麼內容，前後是什麼關係呢？\",\"assessments\":[{\"objectiveId\":\"lesson-1711-p1:language-er\",\"outcome\":\"demonstrated\",\"rationale\":\"學生準確分析了「順風而呼」（方式修飾）與「而聞者彰」（轉折）中「而」字前後的關係與語境義，獨立完成了比對。\",\"evidence\":[{\"criterion\":\"context_meaning\",\"turnId\":\"calibration-answer:language-er-independent\",\"quote\":\"顺风而呼的而把顺风的方式接到呼喊上；而闻者彰却说声音虽没变强，听的人仍听得清楚，是前后转折\",\"passageId\":\"lesson-1711-p1:p1\",\"passageQuote\":\"顺风而呼，声非加疾也，而闻者彰\"}]}]},\"model\":\"gemini-3.6-flash\",\"modelVersion\":\"gemini-3.6-flash\",\"usage\":{\"promptTokenCount\":5097,\"candidatesTokenCount\":228,\"totalTokenCount\":5325},\"firstTokenMs\":2817,\"totalDurationMs\":3179},\"semanticReviewRequired\":true,\"expectedVerdictMatches\":false}"
+  }
+]

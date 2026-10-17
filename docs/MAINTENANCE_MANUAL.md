@@ -1,6 +1,6 @@
 <!-- yw-p2r5-01a14507 -->
 
-當前 2026-10-17T10:41:41.967162+00:00：依suen明示A裁定完成匿名材料相容性本機修復（基底785b9a9）。401明確登入提示且不自動重試；身份確認後重取材料，登出/換帳戶清除並拒收舊回應；缺答案停止判題及保存、提示重新載入。修復舊介面啟動所需共享規則模組的可見依賴，模組與正式175f8ae逐bytes相同且不含新增答案欄位。10項材料回歸＋1項封裝回歸通過；13項實際Chromium斷言通過，3既有背景POST被攔截，整頁總執行器false保留，不冒稱整頁或正式帳戶E2E通過。1474檔本機產物；55Worker模組及所有既有公開JSON未改。模型/APIS/外部請求/正式寫入0。完整189仍未完成；線上登入/邊緣快取、其他既有門檻保留。報告：/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/anonfix-01a14941/REPORT.md。
+當前 2026-10-17T11:17:00.445219+00:00：基於凍結22d9，本機整合未啟用的235案驗證入口（28代表＋207其餘，覆蓋78語用項目），沿用既有隔離activation結構，未生成批准或活動pin。每案一次、全批235／US$19.74預留、並行1、六小時窗口；首個品質失敗／未知用量／模型偏離停止全批，舊七筆及後續歷史回執須逐筆對帳。17項新增SQLite／來源／扣款界線與190項相關回歸通過；1477檔本機產物全部公開檔案相對22d9逐bytes不變，235私有prompt與來源讀回一致，平台編譯未驗證。舊合約／已消耗packet／三篇E2E硬期限不變；本輪模型、外部請求、APIS修改、推送、發布0。Claude持有APIS；本輪讀到其Phase B收據in_progress、a9c334a來源／a58bd563@100，但registry接受仍待owner；這是本機owner回執，非本任務獨立live核實。任何YW APIS操作須先刷新屆時已接受B及所有權，串行保留B的ledger classes／migration／bindings。完整189仍未完成，統一批准件仍欠新E2E執行相容、B接受與註冊發布器接線、模型真驗與最後校準overlay／中央／native／正式發布。匿名A、720剪貼簿、語音等既有接受與豁免不重跑。唯一新結果：/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/full-language-01a1497b/REPORT.md；上一現況及證據在前像中保留。
 
 <!-- /yw-p2r5-01a14507 -->
 

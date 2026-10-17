@@ -1,3 +1,5 @@
+import {FULL_OPERATION} from './dialogue-full-language.js';
+import {handleFullLanguageCalibration} from './dialogue-full-language-runtime.js';
 // Fixed synthetic operation on the existing owner-only acceptance context.
 // No browser prompt, curriculum override, grades or central evidence writes.
 import {CALIBRATION_CONTRACT as amendment} from './dialogue-calibration-contract.js';
@@ -35,6 +37,7 @@ export function terminalDisposition(row,digest,readbacks){
 export async function handleCalibration(request,env,student,callModel,options={}){
  const context=acceptanceContext(env),url=new URL(request.url);
  if(!context||Number(student.ucUserId)!==context.userId||Date.now()>=context.expires)return json({code:'not_found'},404);
+ if(url.searchParams.get('calibrationOperation')===FULL_OPERATION)return handleFullLanguageCalibration(request,env,student,callModel);
  if(url.searchParams.get('calibrationOperation')===AMENDMENT5_CONTRACT.operation)return handleAmendment5Calibration(request,env,student,callModel);
  if(url.searchParams.get('calibrationOperation')===AMENDMENT4_CONTRACT.operation){
   if(request.method==='POST')return json({code:'calibration_operation_retired',operation:AMENDMENT4_CONTRACT.operation,readbackAvailable:true},409);
