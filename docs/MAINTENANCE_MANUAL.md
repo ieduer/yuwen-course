@@ -1,3 +1,13 @@
+## 2026-10-16 PDT — Offline private assessment packaging reduction
+
+Starting from exact candidate `6d0947d2f7709d1dcb89cdda04b29c83112e5fb0`, the build now interns repeated private assessment text lines inside the reserved `_worker.js/` directory. It reconstructs the same 324 response strings byte for byte, including whitespace used in curriculum and prompt digests. No source runtime, model, binding, authorization, calibration packet, public lesson or immutable App-content object changes.
+
+The uncompressed Worker modules shrink from 34,778,187 to 24,732,816 bytes (55 modules), below 25 MiB by 1,481,584 bytes. Both artifact creation and staging verification reject an aggregate at or above 25 MiB. This is a local byte count, not provider compilation or compressed-size acceptance.
+
+Offline checks: build, exact public/control-file and private-response comparison, answer-free audit, authenticated material route, identity, assessment, release and calibration runtime regressions. The focused run passes 178/188 tests; the 10 amendment-4/5 historical packet/source assertions also fail identically at the original 6d0947d baseline (70-test comparison: 60 pass, 10 fail on each). They remain existing gaps; no packet, expected digest, authority or assertion was weakened.
+
+Run `node scripts/build_release_site.mjs`, `node scripts/build_release_site.mjs --check-staging`, and `npm run test:answer-free-artifact` after packaging changes. No install or network is needed for these checks. Production, models and consumed batches remain unchanged; new candidate upload requires its own exact-source/destination allowance.
+
 ## Current — 2026-10-16T13:00:13.224066+00:00: answer-free candidate, local only
 
 P0 exact accepted artifact175f8ae restored independently; candidate parent230cf6a preserved. Per suen's explicit P1 scope decision, new public assets strip answer fields at build time;78 exact old immutable native files remain declared SHA-bound compatibility exceptions. Their1446answerIndex fields are historical exceptions, not zero-answer evidence. New/renamed/changed answer-bearing objects fail the build.

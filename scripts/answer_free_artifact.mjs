@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {sanitizeDialogueCurriculum} from '../site/dialogue-public-curriculum.js';
+import {privateAssessmentModules,assertWorkerSize} from './private_assessment_modules.mjs';
 
 const hash=b=>createHash('sha256').update(b).digest('hex');
 const exceptions=JSON.parse(fs.readFileSync(new URL('./legacy-answer-exceptions.json',import.meta.url)));
@@ -61,23 +62,17 @@ export function answerFreeProjection(input){
   }else if(!worker.has(f.path)||browser.has(f.path))output.push(f);
  }
  if(worker.size){
-  const chunks=[];let chunk={},size=0;
-  for(const [key,value] of Object.entries(privateData)){
-   const n=Buffer.byteLength(JSON.stringify(value));
-   if(size+n>2*1024*1024&&size){chunks.push(chunk);chunk={};size=0;}
-   chunk[key]=value;size+=n;
-  }
-  if(size)chunks.push(chunk);
-  chunks.forEach((value,i)=>{const bytes=Buffer.from('export default '+JSON.stringify(value)+';\n');output.push({path:`_worker.js/_assessment-data/${i}.js`,bytes,sha256:hash(bytes)});});
-  const privateModule=chunks.map((_,i)=>`import data${i} from './_assessment-data/${i}.js';`).join('\n')+'\nexport default {'+chunks.map((_,i)=>`...data${i}`).join(',')+'};\n';
+  const packed=privateAssessmentModules(privateData);
+  for(const {path:name,bytes} of packed.modules)output.push({path:'_worker.js/'+name,bytes,sha256:hash(bytes)});
   for(const name of worker){
    const f=byPath.get(name);
    // Preserve all server modules and imported fixtures exactly; private data lives
    // under the provider-reserved directory, never a normal public JSON URL.
-   const bytes=name==='assessment-private-data.js'?Buffer.from(privateModule):f.bytes;
+   const bytes=name==='assessment-private-data.js'?packed.entry:f.bytes;
    output.push({path:'_worker.js/'+(name==='_worker.js'?'index.js':name),bytes,sha256:hash(bytes)});
   }
  }
+ assertWorkerSize(output);
  return {files:output,audit:auditAnswerFreeFiles(output),privateAssetCount:Object.keys(privateData).length};
 }
 export function auditAnswerFreeFiles(files){

@@ -3,7 +3,15 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {answerFreeProjection,auditAnswerFreeFiles,stripAnswerFields} from './answer_free_artifact.mjs';
+import {projectReleaseJson} from './build_release_site.mjs';
 const file=(name,value)=>({path:name,bytes:Buffer.from(typeof value==='string'?value:JSON.stringify(value))});
+test('Worker aggregate remains below the 25 MiB uncompressed provider limit',()=>{
+ const root=path.resolve(import.meta.dirname,'../.release/site/_worker.js');
+ let bytes=0;
+ function walk(dir){for(const name of fs.readdirSync(dir)){const p=path.join(dir,name);if(fs.statSync(p).isDirectory())walk(p);else bytes+=fs.statSync(p).size;}}
+ walk(root);
+ assert.ok(bytes<25*1024*1024,`Worker modules total ${bytes} bytes`);
+});
 test('nested alternate public paths cannot retain answer fields',()=>{
  const data={prompt:'Keep prompt',nested:[{answerIndex:2,sourceAnswer:'key',meaning:'key meaning',explanation:'key explanation',options:['a','b','c']}],referenceAnswer:{choice:'c'}};
  assert.deepEqual(stripAnswerFields({definitions:{vocabAnswer:{scoringRole:'formal'}}}),{definitions:{vocabAnswer:{scoringRole:'formal'}}});
@@ -49,7 +57,9 @@ test('full artifact every public file audited and private corpus preserves sourc
  const privateData=(await import('../.release/site/_worker.js/assessment-private-data.js')).default;
  let lessons=0;
  for(const [name,text] of Object.entries(privateData)){
-  const original=JSON.parse(fs.readFileSync(path.resolve(import.meta.dirname,'../site'+name)));
+  const source=fs.readFileSync(path.resolve(import.meta.dirname,'../site'+name),'utf8');
+  const original=JSON.parse(source);
+  assert.equal(text,projectReleaseJson(name.slice(1),source),`exact private response bytes: ${name}`);
   // Existing privacy URL projection may change retired links, not scoring keys.
   const raw=JSON.parse(text);const pairs=[];
   function keys(v,loc=''){if(Array.isArray(v))v.forEach((x,i)=>keys(x,loc+'/'+i));else if(v&&typeof v==='object')for(const [k,x]of Object.entries(v)){if(['answerIndex','referenceAnswer','sourceAnswer'].includes(k))pairs.push([loc+'/'+k,x]);keys(x,loc+'/'+k);}}
@@ -57,6 +67,20 @@ test('full artifact every public file audited and private corpus preserves sourc
   if(name.startsWith('/dialogue-curriculum/lesson-'))lessons++;
  }
  assert.equal(lessons,189);
+});
+
+test('packed Worker keeps private material authenticated and never falls back to public answers',async()=>{
+ const worker=(await import('../.release/site/_worker.js/index.js')).default;
+ const data=(await import('../.release/site/_worker.js/assessment-private-data.js')).default;
+ const body=data['/data/vocab/lesson-1474.json'];assert.equal(typeof body,'string');
+ const env={ASSETS:{fetch:()=>{throw Error('Private material reached public assets');}}};
+ const url='https://yw.test/api/reading/materials/vocab/lesson-1474.json';
+ assert.equal((await worker.fetch(new Request(url),env,{})).status,401);
+ assert.equal((await worker.fetch(new Request(url,{method:'POST'}),env,{})).status,405);
+ const db={prepare:()=>({bind:()=>({run:async()=>({}),first:async()=>({id:1,uc_slug:'local-fixture'})})})};
+ const response=await worker.fetch(new Request(url),{...env,READING_TEST_SLUG:'local-fixture',READING_DB:db},{});
+ assert.equal(response.status,200);assert.equal(response.headers.get('cache-control'),'private, no-store');
+ assert.equal(await response.text(),body);
 });
 
 test('private material route denies anonymous/method misuse; authenticated fixture retains original scoring data',async()=>{

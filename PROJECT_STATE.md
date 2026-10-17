@@ -1,3 +1,7 @@
+## 2026-10-16 PDT — Offline private assessment packaging reduction
+
+Offline package reduction implemented; 24,732,816 uncompressed Worker bytes, 324 exact private responses, no runtime/model/config changes. Provider acceptance and compressed size remain unverified; 10 historical calibration assertions reproduce unchanged on the original baseline. Current evidence: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/P3-size-offline-01a147a3/REPORT.md.
+
 ## Current — 2026-10-16T13:00:13.224066+00:00: answer-free candidate, local only
 
 P0 exact accepted artifact175f8ae restored independently; candidate parent230cf6a preserved. Per suen's explicit P1 scope decision, new public assets strip answer fields at build time;78 exact old immutable native files remain declared SHA-bound compatibility exceptions. Their1446answerIndex fields are historical exceptions, not zero-answer evidence. New/renamed/changed answer-bearing objects fail the build.

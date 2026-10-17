@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import {answerFreeProjection, auditAnswerFreeFiles} from './answer_free_artifact.mjs';
+import {assertWorkerSize} from './private_assessment_modules.mjs';
 import { createHash } from "node:crypto";
 import {
   existsSync,
@@ -792,7 +793,9 @@ export function verifyReleaseStaging({
   if (aggregateSha256 !== marker.projectedAggregateSha256) {
     fail("release artifact aggregate receipt differs from its marker");
   }
-  auditAnswerFreeFiles(files.map(relative=>({path:relative,bytes:readFileSync(path.join(releaseRoot,relative))})));
+  const artifactFiles = files.map(relative=>({path:relative,bytes:readFileSync(path.join(releaseRoot,relative))}));
+  assertWorkerSize(artifactFiles);
+  auditAnswerFreeFiles(artifactFiles);
   verifyMarkerNativePolicy(marker, releaseRoot, releaseKind);
   return {
     mode: "check-staging",
