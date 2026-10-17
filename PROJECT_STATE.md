@@ -1,3 +1,14 @@
+## 2026-10-17 PDT — local ESM build candidate
+
+Normal release build now emits the same 55 Worker module bytes as the accepted isolated
+JSON→ESM compile diagnostic, with all 1,417 public/control files unchanged. Build,
+staging verification and 15 focused tests pass. Source is preserved in the
+esm-build-integration-01a148fd evidence bundle; no push or production release.
+Provider compressed bytes remain UNVERIFIED. Full189, model207/3E2E, source-central/My,
+native/device/accessibility, formal approval/Status and all existing waivers remain.
+No APIS or model operation; no expired batch reopened. Earlier entries below are
+historical for this packaging boundary.
+
 ## 2026-10-16 PDT — Offline private assessment packaging reduction
 
 Offline package reduction implemented; 24,732,816 uncompressed Worker bytes, 324 exact private responses, no runtime/model/config changes. Provider acceptance and compressed size remain unverified; 10 historical calibration assertions reproduce unchanged on the original baseline. Current evidence: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/P3-size-offline-01a147a3/REPORT.md.

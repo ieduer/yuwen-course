@@ -94,12 +94,13 @@
     "build:dialogue-acceptance": "node scripts/build_dialogue_acceptance.mjs",
     "test:dialogue-acceptance-bundle": "node --test scripts/test_dialogue_acceptance_bundle.mjs",
     "check:native-content:candidate": "node scripts/check_native_content_deploy_sync.mjs --candidate",
-    "test:answer-free-artifact": "node --test scripts/test_private_assessment_modules.mjs scripts/test_answer_free_artifact.mjs"
+    "test:answer-free-artifact": "node --test scripts/test_private_assessment_modules.mjs scripts/test_answer_free_artifact.mjs scripts/test_worker_json_modules.mjs"
   },
   "devDependencies": {
     "linkedom": "0.18.13",
     "miniflare": "4.20260611.0",
     "playwright": "^1.60.0",
-    "wrangler": "^4.100.0"
+    "wrangler": "^4.100.0",
+    "esbuild": "0.27.3"
   }
 }

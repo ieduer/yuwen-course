@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {sanitizeDialogueCurriculum} from '../site/dialogue-public-curriculum.js';
+import {workerJsonModules} from './worker_json_modules.mjs';
 import {privateAssessmentModules,assertWorkerSize} from './private_assessment_modules.mjs';
 
 const hash=b=>createHash('sha256').update(b).digest('hex');
@@ -72,8 +73,9 @@ export function answerFreeProjection(input){
    output.push({path:'_worker.js/'+(name==='_worker.js'?'index.js':name),bytes,sha256:hash(bytes)});
   }
  }
- assertWorkerSize(output);
- return {files:output,audit:auditAnswerFreeFiles(output),privateAssetCount:Object.keys(privateData).length};
+ const files=workerJsonModules(output);
+ assertWorkerSize(files);
+ return {files,audit:auditAnswerFreeFiles(files),privateAssetCount:Object.keys(privateData).length};
 }
 export function auditAnswerFreeFiles(files){
  const records=[];

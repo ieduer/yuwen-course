@@ -1,3 +1,36 @@
+## 2026-10-17 PDT — Worker JSON ESM build integration (local candidate)
+
+The normal answer-free release projection now converts only JSON modules inside the
+provider-reserved `_worker.js/` directory to ordinary ESM, and redirects their JSON
+imports. Source calibration packets, public/browser JSON, native immutable objects
+and student data are unchanged. Output collisions and unsupported remaining JSON
+imports fail the build. `esbuild` 0.27.3 is now an explicit build dependency using the
+already locked version and artifacts; no package version was upgraded.
+
+The rebuilt 55 Worker modules (24,347,719 bytes) exactly match every module hash from
+the separately approved JSON-to-ESM diagnostic deployment
+`78c907f6-6bce-48e4-aae8-41ea4c2bf74d`. Its diagnostic packager used esbuild 0.28.1;
+the existing locked compiler produces identical bytes for all actual modules.
+All other 1,417 public/control files are byte-identical to candidate d017195.
+The generated release marker changes to bind the corrected private-module bytes.
+
+Focused checks: normal build and staging validation, 15 private-data/answer-free/JSON
+module tests, including two regressions reproduced before the integration and new
+fail-closed collision/import cases. Existing 189 reading, scoring and model results
+retain their original evidence scope; no unrelated passed suite was rerun.
+
+This is local candidate source integration, not a new cloud deployment. The inherited
+exact-module compile result is preserved; provider-compressed bytes and the 8 MB gate
+remain UNVERIFIED after bounded official-interface discovery. APIS/model calls,
+production writes, new source-central events and expired batches remain untouched.
+Do not promote or rebuild an old consumed diagnostic transaction. Use the normal
+`node scripts/build_release_site.mjs`, `--check-staging`, and
+`npm run test:answer-free-artifact` for changes to this packaging boundary.
+Evidence: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/esm-build-integration-01a148fd/REPORT.md.
+
+The following packaging entries are retained history; this entry supersedes their
+JSON-import packaging and module-byte figures only, not their remaining gates.
+
 ## 2026-10-16 PDT — Offline private assessment packaging reduction
 
 Starting from exact candidate `6d0947d2f7709d1dcb89cdda04b29c83112e5fb0`, the build now interns repeated private assessment text lines inside the reserved `_worker.js/` directory. It reconstructs the same 324 response strings byte for byte, including whitespace used in curriculum and prompt digests. No source runtime, model, binding, authorization, calibration packet, public lesson or immutable App-content object changes.

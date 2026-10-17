@@ -47,7 +47,7 @@ test('browser-shared module stays public; server-only module and imported packet
  ]);
  assert.ok(result.files.some(f=>f.path==='shared.js'));
  assert.ok(!result.files.some(f=>['server.js','packet.json'].includes(f.path)));
- assert.ok(result.files.some(f=>f.path==='_worker.js/packet.json'));
+ assert.ok(result.files.some(f=>f.path==='_worker.js/packet.json.js'));
 });
 test('full artifact every public file audited and private corpus preserves source authority',async()=>{
  const root=path.resolve(import.meta.dirname,'../.release/site');
