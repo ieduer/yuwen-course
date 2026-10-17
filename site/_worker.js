@@ -1,5 +1,5 @@
 import {fetchAssessmentAsset} from './assessment-assets.js';
-import { releaseAdmissionResponse } from './release-admission.js';
+import { releaseAdmissionResponse, dialogueAcceptanceScope, dialogueAdmissionAllowed, dialogueAcceptanceRejection } from './release-admission.js';
 import { handleDialogue,loadDialogueCurriculum } from './dialogue-source.js';
 import { sanitizeDialogueCurriculum } from './dialogue-public-curriculum.js';
 import { acceptanceContext, acceptanceAllowsIdentity } from './dialogue-acceptance.js';
@@ -98,7 +98,19 @@ export default {
     // The existing feature flag also owns the student entrypoint. Legacy deep links
     // retain their hash; explicit materials/history access keeps the old workspace.
     if(['/', '/index.html'].includes(decodedPath) && ['GET','HEAD'].includes(request.method) && url.searchParams.get('view')!=='legacy' && env.YW_DIALOGUE_ENABLED==='true'){
-      const target=new URL('/dialogue.html',url);return env.ASSETS.fetch(new Request(target,request));
+      const scope=dialogueAcceptanceScope(env);
+      let showDialogue=scope===null;
+      if(scope?.valid){
+        try{const user=await resolveReadingUser(request,env,true);showDialogue=dialogueAdmissionAllowed(env,user?.userId);}
+        catch{showDialogue=false;}
+      }
+      const target=new URL(showDialogue?'/dialogue.html':url.pathname,url);
+      const response=await env.ASSETS.fetch(new Request(target,request));
+      if(scope===null)return response;
+      // Account-dependent HTML must never enter a shared/browser cache.
+      const headers=new Headers(response.headers);headers.set('cache-control','private, no-store');
+      headers.set('vary',[headers.get('vary'),'Cookie','Authorization'].filter(Boolean).join(', '));
+      return new Response(response.body,{status:response.status,statusText:response.statusText,headers});
     }
     const material=/^\/api\/reading\/materials\/(study-guide-catalog|vocab\/lesson-[\w-]{1,60})\.json$/.exec(decodedPath);
     if(material){
@@ -121,7 +133,9 @@ export default {
         const rejected = authenticatedMutationRequestRejection(request, env);
         if (rejected) return rejected;
       }
-      const student = await authenticatedReadingStudent(request, env);
+      const scope=dialogueAcceptanceScope(env);
+      if(scope && (!scope.valid || env.READING_TEST_SLUG))return dialogueAcceptanceRejection({YW_DIALOGUE_ACCEPTANCE_USER_ID:''});
+      const student = await authenticatedReadingStudent(request, env, {dialogue: true});
       if (student?.error) return student.error;
       return handleDialogue(request, env, student, ctx, {
         readSharedHistory:acceptanceContext(env) ? null : ()=>readSharedHistory(userCenterSessionCookieHeader(request)),
@@ -1621,9 +1635,9 @@ export async function handleDialogueOriginal(request,env,student,formal,turnId,c
   return readingError('unsupported original task',400);
 }
 
-async function authenticatedReadingStudent(request, env) {
+async function authenticatedReadingStudent(request, env, options = {}) {
   try {
-    return await getReadingStudent(request, env);
+    return await getReadingStudent(request, env, options);
   } catch (error) {
     if (error?.code === "reading_identity_unavailable") return { error: readingError(error.message, 503) };
     throw error;
@@ -1962,13 +1976,13 @@ function readingIdentityUnavailable() {
   return error;
 }
 
-async function resolveWebReadingUser(cookieHeader, env) {
+async function resolveWebReadingUser(cookieHeader, env, fresh = false) {
   if (!cookieHeader) return null;
   if (typeof env.USER_CENTER_EVIDENCE?.resolveSession !== "function") {
     throw readingIdentityUnavailable();
   }
   const token = cookieHeader.slice(UC_SESSION_COOKIE.length + 1);
-  const cached = acceptanceContext(env) ? null : identityCache.get(token);
+  const cached = fresh || acceptanceContext(env) ? null : identityCache.get(token);
   let user = cached && cached.exp > Date.now() ? cached.user : null;
   if (!user) {
     let resolved;
@@ -1991,7 +2005,7 @@ async function resolveWebReadingUser(cookieHeader, env) {
       slug: String(resolved.slug).slice(0, 80),
       displayName: String(resolved.displayName || "").slice(0, 80),
     };
-    if (!acceptanceContext(env)) {
+    if (!fresh && !acceptanceContext(env)) {
       if (identityCache.size > 500) identityCache.clear();
       identityCache.set(token, { user, exp: Date.now() + 5 * 60 * 1000 });
     }
@@ -1999,7 +2013,7 @@ async function resolveWebReadingUser(cookieHeader, env) {
   return user;
 }
 
-async function getReadingStudent(request, env) {
+async function getReadingStudent(request, env, {dialogue = false} = {}) {
   // 測試縫（僅本地 wrangler pages dev 可設 READING_TEST_SLUG；生產項目嚴禁配置此變量）：
   // 合成數據與真實數據走完全相同的寫入/聚合/讀取路徑，僅身分核驗來源不同。
   if (env.READING_TEST_SLUG) {
@@ -2009,6 +2023,16 @@ async function getReadingStudent(request, env) {
     const row = await db.prepare("SELECT id, uc_user_id, uc_slug, display_name, class_name FROM students WHERE uc_slug = ?").bind(slug).first();
     return { id: row.id, ucUserId: row.uc_user_id || null, slug: row.uc_slug, displayName: row.display_name, className: row.class_name || "" };
   }
+  const restricted=dialogue && dialogueAcceptanceScope(env)!==null;
+  const user=await resolveReadingUser(request,env,restricted);
+  if(!user)return null;
+  if(restricted){const error=dialogueAcceptanceRejection(env,user.userId);if(error)return {error};}
+  return reconcileReadingStudent(env.READING_DB,user);
+}
+
+// Resolve existing UC/native credentials without creating or refreshing a local
+// student row. Restricted dialogue uses fresh identity before any D1 access.
+async function resolveReadingUser(request, env, fresh = false) {
   const cookieHeader = userCenterSessionCookieHeader(request);
   const nativeAuthorization = nativeAuthorizationDecision(request.headers.get("authorization"));
   if (nativeAuthorization.status === "unauthorized") return null;
@@ -2027,11 +2051,11 @@ async function getReadingStudent(request, env) {
     if (projection.status === "unauthorized") return null;
     nativeUser = projection.user;
   }
-  const webUser = await resolveWebReadingUser(cookieHeader, env);
+  const webUser = await resolveWebReadingUser(cookieHeader, env, fresh);
   const decision = readingCredentialDecision(nativeUser, webUser);
   if (decision.status !== "authenticated") return null;
   if (!acceptanceAllowsIdentity(env, decision.user)) return null;
-  return reconcileReadingStudent(env.READING_DB, decision.user);
+  return decision.user;
 }
 
 const DIRECT_LEARNING_INTERACTIONS = new Set([

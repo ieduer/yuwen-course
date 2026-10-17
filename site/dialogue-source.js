@@ -1,3 +1,4 @@
+import {dialogueAdmissionAllowed} from './release-admission.js';
 import {fetchAssessmentAsset} from './assessment-assets.js';
 import {validateReadingEvidence,validateOriginalEvidence,READING_CONVERSATION_POLICY,CONVERSATION_POLICY_VERSION} from './dialogue-reading-evidence.js';
 import {loadClassicalFirstRead,getClassicalFirstReadState} from './classical-first-read-source.js';
@@ -25,7 +26,7 @@ const uuid=()=>crypto.randomUUID();
 const json=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'private, no-store','x-content-type-options':'nosniff'}});
 const all=async stmt=>(await stmt.all()).results||[];
 const sha=async s=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)))).map(x=>x.toString(16).padStart(2,'0')).join('');
-const admitted=(env,student)=>env.YW_DIALOGUE_ENABLED==='true' && !!student.id && !!student.ucUserId;
+const admitted=(env,student)=>dialogueAdmissionAllowed(env,student.ucUserId) && !!student.id && !!student.ucUserId;
 async function readingGate(db,studentId,curriculum,legacy){
  if(curriculum.mode!=='classical')return null;
  if(legacy.completion)return {phase:'close_reading',preservedCompletion:true};
