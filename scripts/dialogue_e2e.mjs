@@ -4,7 +4,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {FORMAL_FIELDS} from '../site/dialogue-formal.js';
-import {LIMITS, POLICY_VERSION, RULE_VERSION} from '../site/dialogue-policy.js';
+import {LIMITS, POLICY_VERSION, RULE_VERSION, pendingSupplement} from '../site/dialogue-policy.js';
 import {sanitizeDialogueCurriculum} from '../site/dialogue-public-curriculum.js';
 import {readDialogueEvents} from '../site/assets/dialogue-events.js';
 import {deterministicStudyGuideAssessment} from '../site/study-guide-assessment.js';
@@ -41,7 +41,7 @@ export function validateFixture(c,s){
 
 export function countPaths(c){
  const formal=c.objectives.filter(o=>o.domain==='legacy'), fields=formal.filter(o=>FORMAL_FIELDS[o.legacy.questionKind]);
- const guides=(c.studyGuide||[]).filter(g=>g.activeForSelfTest), q=c.vocabulary.length+(c.languagePractice||[]).length;
+ const guides=(c.studyGuide||[]).filter(g=>g.activeForSelfTest), q=c.vocabulary.length+(c.languagePractice||[]).filter(v=>!pendingSupplement(v)).length;
  const mapped=new Set(formal.map(o=>domains[o.legacy.questionKind]).filter(Boolean));
  const direct=c.objectives.filter(o=>!['legacy','studyGuide','vocabulary','read','firstRead'].includes(o.domain)&&!mapped.has(o.domain));
  const fieldTurns=fields.reduce((n,o)=>n+FORMAL_FIELDS[o.legacy.questionKind].length,0);
@@ -54,14 +54,14 @@ export function countPaths(c){
  // 3 independent attempts + 2 student reformulations; original choice may be
  // wrong once then correct twice. These are different loops and budgets.
  const boundedRemediationStudentTurns=q*5+fieldTurns+originalChoices*3+ratings+reads+guides.length+direct.length;
- return {lessonId:c.lessonId,originalVocabulary:c.vocabulary.length,supplementalLanguage:(c.languagePractice||[]).length,formalItems:formal.length,formalProviderAssessments:fields.length,formalTypedFieldTurns:fieldTurns,activeGuides:guides.length,exactReferenceDeterministicGuides:deterministic,directDialogueObjectives:direct.map(o=>o.id),firstPassStudentTurns,firstPassCallRows,firstPassProviderCallsRange:[firstPassCallRows-deterministic,firstPassCallRows],boundedRemediationStudentTurns,boundedRemediationCallRows,boundedRemediationProviderCallsRange:[boundedRemediationCallRows-deterministic,boundedRemediationCallRows],classicalSourceMutationsOutsideDialogueTurns:c.mode==='classical'?8:0,prior128Or132Core:c.vocabulary.length*8+formal.filter(o=>o.legacy.questionKind!=='vocabulary').length+guides.length,notes:'Bound assumes each formal/guide accepted once; additional semantic corrections are not silently free. Deterministic guide rows use no provider but currently consume dialogue_calls count quotas.'};
+ return {lessonId:c.lessonId,originalVocabulary:c.vocabulary.length,supplementalLanguage:(c.languagePractice||[]).filter(v=>!pendingSupplement(v)).length,formalItems:formal.length,formalProviderAssessments:fields.length,formalTypedFieldTurns:fieldTurns,activeGuides:guides.length,exactReferenceDeterministicGuides:deterministic,directDialogueObjectives:direct.map(o=>o.id),firstPassStudentTurns,firstPassCallRows,firstPassProviderCallsRange:[firstPassCallRows-deterministic,firstPassCallRows],boundedRemediationStudentTurns,boundedRemediationCallRows,boundedRemediationProviderCallsRange:[boundedRemediationCallRows-deterministic,boundedRemediationCallRows],classicalSourceMutationsOutsideDialogueTurns:c.mode==='classical'?8:0,prior128Or132Core:c.vocabulary.length*8+formal.filter(o=>o.legacy.questionKind!=='vocabulary').length+guides.length,notes:'Bound assumes each formal/guide accepted once; additional semantic corrections are not silently free. Deterministic guide rows use no provider but currently consume dialogue_calls count quotas.'};
 }
 
 export function preparePlan(fixtures=loadFixtures(),loader=loadCurriculum){
  const lessons=Object.entries(fixtures.lessons).map(([id,s])=>{
   const c=loader(id);validateFixture(c,s);
-  const calibration=c.languagePractice.filter(v=>v.calibrationStatus!=='accepted'||v.sourceVerification?.status==='pending-verification'||v.dictionaryId&&c.dictionary.find(d=>d.id===v.dictionaryId)?.verificationStatus!=='source-image-verified').map(v=>({objectiveId:v.id,itemVersion:v.version,calibrationStatus:v.calibrationStatus,sourceVerification:v.sourceVerification?.status||null,dictionaryId:v.dictionaryId||null,required:'individually accepted calibration + verified exact source, then deployed server curriculum; never fixture override'}));
-  const sourceBlockers=c.languagePractice.filter(v=>v.sourceVerification?.status==='pending-verification'||v.dictionaryId&&c.dictionary.find(d=>d.id===v.dictionaryId)?.verificationStatus!=='source-image-verified').map(v=>({objectiveId:v.id,itemVersion:v.version,sourceVerification:v.sourceVerification?.status||null,required:'independent exact-source acceptance; a model verdict cannot clear this gap'}));
+  const calibration=c.languagePractice.filter(v=>!pendingSupplement(v)).filter(v=>v.calibrationStatus!=='accepted'||v.sourceVerification?.status==='pending-verification'||v.dictionaryId&&c.dictionary.find(d=>d.id===v.dictionaryId)?.verificationStatus!=='source-image-verified').map(v=>({objectiveId:v.id,itemVersion:v.version,calibrationStatus:v.calibrationStatus,sourceVerification:v.sourceVerification?.status||null,dictionaryId:v.dictionaryId||null,required:'individually accepted calibration + verified exact source, then deployed server curriculum; never fixture override'}));
+  const sourceBlockers=c.languagePractice.filter(v=>!pendingSupplement(v)).filter(v=>v.sourceVerification?.status==='pending-verification'||v.dictionaryId&&c.dictionary.find(d=>d.id===v.dictionaryId)?.verificationStatus!=='source-image-verified').map(v=>({objectiveId:v.id,itemVersion:v.version,sourceVerification:v.sourceVerification?.status||null,required:'independent exact-source acceptance; a model verdict cannot clear this gap'}));
   return {lessonId:id,title:c.title,curriculumVersion:c.curriculumVersion,sourceDigest:hash(c),publicDigest:hash(sanitizeDialogueCurriculum(c)),objectiveIds:c.objectives.map(o=>o.id),counts:countPaths(c),sourceBlockers,calibrationBlockers:calibration};
  });
  const firstPass=lessons.reduce((n,l)=>n+l.counts.firstPassCallRows,0),worst=lessons.reduce((n,l)=>n+l.counts.boundedRemediationCallRows,0);
@@ -100,7 +100,7 @@ export function selectAnswer(snapshot,c,s){
 export function assertOwner(data,owner){if(data?.ownerRef!==owner)fail('same_owner_readback_failed');}
 export function assertComplete(data,c){
  if(data.state?.completion!=='evidence_ready_for_review'||!data.state.hasConclusion)fail('not_complete',{remaining:data.report?.student?.remaining});
- if(JSON.stringify(data.state.objectives.map(o=>o.id))!==JSON.stringify(c.objectives.map(o=>o.id))||data.state.objectives.some(o=>!success.has(o.status)))fail('objective_confirmation_incomplete');
+ if(JSON.stringify(data.state.objectives.map(o=>o.id))!==JSON.stringify(c.objectives.map(o=>o.id))||data.state.objectives.some(o=>{const deferred=pendingSupplement(c.languagePractice.find(v=>v.id===o.id));return deferred?o.requiredForCompletion!==false||o.status!=='pending_calibration':!success.has(o.status);}))fail('objective_confirmation_incomplete');
  for(const o of c.objectives.filter(o=>o.domain==='legacy'))if(!data.sourceSubmissions?.some(s=>s.objectiveId===o.id&&s.status==='confirmed'&&s.sourceEventId))fail('original_source_receipt_missing',{objectiveId:o.id});
  const byId=new Map(data.turns.filter(t=>t.role==='student').map(t=>[t.id,t]));
  const check=(ref,needsPassage=true)=>{if(!ref?.quote||!byId.get(ref.turnId)?.content.includes(ref.quote))fail('final_student_quote_unverifiable');if(needsPassage&&(!ref.passageQuote||!c.passages.some(p=>p.id===ref.passageId&&p.text.includes(ref.passageQuote))))fail('final_source_quote_unverifiable');};

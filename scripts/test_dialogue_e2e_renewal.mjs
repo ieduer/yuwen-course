@@ -18,12 +18,12 @@ const body=(revision=0,id='renewal-synthetic-000001')=>({content:'我注意到�
 const usage={promptTokenCount:100,totalTokenCount:200,cachedContentTokenCount:50};
 const success=()=>({value:{reply:'請再指出一處原文，說明對照。',assessments:[]},model:policy.model,modelVersion,usage,firstTokenMs:100,totalDurationMs:200,providerAccounting:{version:1,policy:'yw-same-model-sequential-v1',mode:'sequential-distinct-key',fallback:false,hedge:false,backgroundCalls:0,maxProviderAttempts:3,providerAttemptCount:1,attempts:[{ordinal:1,model:policy.model,outcome:'OK',brokerCompleted:true,outputStarted:true,usage}]}});
 beforeEach(()=>mock.timers.enable({apis:['Date'],now:at}));afterEach(()=>mock.timers.reset());
-async function fixture(t,{calibrations=235,ordinary=false}={}){
+async function fixture(t,{calibrations=28,ordinary=false}={}){
  const sql=new DatabaseSync(':memory:');for(const f of fs.readdirSync('migrations').filter(f=>f.endsWith('.sql')).sort())sql.exec(fs.readFileSync('migrations/'+f,'utf8'));t.after(()=>sql.close());sql.exec("INSERT INTO students(id,uc_slug,display_name) VALUES(1,'synthetic-owner','Unit owner')");
  const wrap=(text,args=[])=>({bind:(...v)=>wrap(text,v),first:async()=>sql.prepare(text).get(...args)||null,all:async()=>({results:sql.prepare(text).all(...args)}),run:async()=>({meta:{changes:Number(sql.prepare(text).run(...args).changes)}}),runSync:()=>({meta:{changes:Number(sql.prepare(text).run(...args).changes)}})});
  const db={prepare:text=>wrap(text),batch:async rows=>{sql.exec('BEGIN');try{const r=rows.map(s=>s.runSync());sql.exec('COMMIT');return r;}catch(e){sql.exec('ROLLBACK');throw e;}}};
  const priorReceipts=[...ORIGINAL_RECEIPTS].sort((a,b)=>a.attemptId<b.attemptId?-1:1);
- const full={version:'yw-full-language-activation-v1',enabled:true,operation:FULL_OPERATION,authorityDigest:H,packetDigest:packet.sourceDigest,sourceCommit:'b'.repeat(40),artifactSha256:H,origin,ownerUserId:553,databaseId:database,apisVersion:version,registryReceiptDigest:H,singleProviderSourceProofDigest:H,priorReceiptSetDigest:await digest(priorReceipts),priorReceipts,readyAt:'2026-10-17T11:00:00Z',hardExpiry:expiry,maxAttempts:235,maxReservedMicros:19740000,maxProviderAttempts:1,reserveMicros:84000,maxConcurrency:1,recoveryReadbacks:[]};
+ const full={version:'yw-full-language-activation-v1',enabled:true,operation:FULL_OPERATION,authorityDigest:H,packetDigest:packet.sourceDigest,sourceCommit:'b'.repeat(40),artifactSha256:H,origin,ownerUserId:553,databaseId:database,apisVersion:version,registryReceiptDigest:H,singleProviderSourceProofDigest:H,priorReceiptSetDigest:await digest(priorReceipts),priorReceipts,readyAt:'2026-10-17T11:00:00Z',hardExpiry:expiry,maxAttempts:28,maxReservedMicros:2352000,maxProviderAttempts:1,reserveMicros:84000,maxConcurrency:1,recoveryReadbacks:[]};
  const pin={version:'yw-isolated-e2e-admission-v2',enabled:true,operation:OP,authorityDigest:H,origin,ownerUserId:553,databaseId:database,apisVersion:version,registryReceiptDigest:H,hardExpiry:expiry,maxVisibleCalls:120,maxProviderAttempts:3,reserveMicros:252000,lessonIds:[...E2E_LESSONS]};
  const bindings={ASSETS:{fetch:async r=>new Response(fs.readFileSync('site'+new URL(r.url).pathname))},ACCEPTANCE_DB:db,USER_CENTER_EVIDENCE:{resolveSession:async()=>({userId:553})},APIS_ACCEPTANCE:{fetch:()=>{throw Error('network_forbidden');}},YW_ACCEPTANCE_USER_ID:'553',YW_ACCEPTANCE_APIS_VERSION:version,YW_ACCEPTANCE_DATABASE_ID:database,YW_ACCEPTANCE_ACTIVATION_SHA256:H,YW_ACCEPTANCE_EXPIRES_AT:expiry,YW_DIALOGUE_BUDGET_JSON:JSON.stringify(policy),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3',YW_E2E_AUTHORITY_JSON:JSON.stringify(pin),YW_CALIBRATION_FULL_LANGUAGE_JSON:JSON.stringify(full),YW_FULL_LANGUAGE_ACTIVATION_SHA256:H};
  const env=ordinary?{...bindings,READING_DB:db,YW_DIALOGUE_ENABLED:'true'}:acceptanceEnvironment(req(),bindings);
@@ -39,14 +39,14 @@ async function fixture(t,{calibrations=235,ordinary=false}={}){
  const send=(input=body(),fn=model)=>handleDialogue(req(input),env,student,null,{callModel:fn});
  return {sql,db,env,bindings,pin,full,send,seed,model,calls:()=>calls};
 }
-test('renewed E2E uses current fixed235 prerequisites and reserves one three-attempt logical call',async t=>{
+test('renewed E2E uses current fixed28 prerequisites and reserves one three-attempt logical call',async t=>{
  const f=await fixture(t),before=f.sql.prepare('SELECT * FROM dialogue_calls ORDER BY turn_id').all();
  const response=await f.send();assert.equal(response.status,200);assert.equal(f.calls(),1);
  const row=f.sql.prepare("SELECT * FROM dialogue_calls WHERE json_extract(budget_policy_json,'$.isolatedAdmission.operation')=?").get(OP);assert.equal(row.reserved_micros,252000);assert.equal(row.state,'finished');assert.equal(JSON.parse(row.usage_json).cachedContentTokenCount,50);
  assert.equal((await f.send()).status,200);assert.equal(f.calls(),1);assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_calls WHERE turn_id LIKE ? ORDER BY turn_id').all(FULL_OPERATION+':%'),before);
 });
 test('incomplete or failed calibration denies E2E before a provider call',async t=>{
- for(const count of [234,235]){const f=await fixture(t,{calibrations:count});if(count===235)f.sql.prepare("UPDATE dialogue_calls SET state='review' WHERE turn_id=?").run(FULL_OPERATION+':'+packet.cases[0].id+':1');const r=await f.send();assert.equal(r.status,429);assert.equal((await r.json()).code,'e2e_calibration_not_complete');assert.equal(f.calls(),0);}
+ for(const count of [27,28]){const f=await fixture(t,{calibrations:count});if(count===28)f.sql.prepare("UPDATE dialogue_calls SET state='review' WHERE turn_id=?").run(FULL_OPERATION+':'+packet.cases[0].id+':1');const r=await f.send();assert.equal(r.status,429);assert.equal((await r.json()).code,'e2e_calibration_not_complete');assert.equal(f.calls(),0);}
 });
 test('the old E2E operation and hard expiry remain retired without rewriting old constants',async t=>{
  const f=await fixture(t);f.env.YW_E2E_AUTHORITY_JSON=JSON.stringify({...f.pin,operation:E2E_OPERATION,authorityDigest:E2E_AUTHORITY_DIGEST,hardExpiry:E2E_HARD_EXPIRY});assert.throws(()=>requestDialogueBudget(f.env,student,lesson),/expired/);assert.equal(E2E_HARD_EXPIRY,'2026-10-14T12:00:00Z');assert.equal(f.calls(),0);
@@ -67,7 +67,7 @@ test('two submissions cannot both consume the last operation slot',async t=>{
 test('separate lessons share one in-flight slot; a review state blocks a fresh logical call',async t=>{
  for(const state of ['reserved','review']){const f=await fixture(t);f.seed('other-lesson-'+state,{state,accounted:null});const r=await f.send();assert.equal(r.status,429);assert.equal((await r.json()).code,state==='reserved'?'e2e_operation_concurrency_busy':'e2e_operation_review_required');assert.equal(f.calls(),0);}
 });
-test('all235 prior results must retain the exact source, owner, packet and one model version',async t=>{
+test('all28 prior results must retain the exact source, owner, packet and one model version',async t=>{
  const target=FULL_OPERATION+':'+packet.cases[0].id+':1';
  for(const sql of ["UPDATE dialogue_sessions SET curriculum_json=json_set(curriculum_json,'$.packetDigest','wrong') WHERE id=?", "UPDATE dialogue_events SET details_json=json_set(details_json,'$.modelVersion','other-version') WHERE id=?", "UPDATE dialogue_events SET details_json=json_set(details_json,'$.expectedVerdictMatches',0) WHERE id=?", "UPDATE dialogue_calls SET accounted_micros=NULL WHERE turn_id=?"]){
   const f=await fixture(t);f.sql.prepare(sql).run(target+(sql.startsWith('UPDATE dialogue_sessions')?':session':sql.startsWith('UPDATE dialogue_events')?':result':''));const r=await f.send();assert.equal(r.status,429);assert.equal((await r.json()).code,'e2e_calibration_not_complete');assert.equal(f.calls(),0);
@@ -79,7 +79,7 @@ for(const [name,edit] of Object.entries({full_missing:f=>delete f.env.YW_CALIBRA
  changed_authority:f=>f.pin.authorityDigest='b'.repeat(64),attempt_count:f=>f.pin.maxProviderAttempts=4,
  model:f=>f.env.YW_DIALOGUE_BUDGET_JSON=JSON.stringify({...policy,model:'gemini-3.5-flash-lite'}),
  }))test('renewal rejects '+name+' without a provider reservation',async t=>{
- const f=await fixture(t);edit(f);f.env.YW_E2E_AUTHORITY_JSON=JSON.stringify(f.pin);const r=await f.send();assert.equal(r.status,503);assert.equal(f.calls(),0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,235);
+ const f=await fixture(t);edit(f);f.env.YW_E2E_AUTHORITY_JSON=JSON.stringify(f.pin);const r=await f.send();assert.equal(r.status,503);assert.equal(f.calls(),0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,28);
 });
 test('ordinary deployment still enforces40/day despite copied approval variables',async t=>{
  const f=await fixture(t,{ordinary:true,calibrations:0});for(let i=0;i<40;i++)f.seed('ordinary-'+i,{operation:'ordinary'});
@@ -87,7 +87,7 @@ test('ordinary deployment still enforces40/day despite copied approval variables
  const r=await f.send();assert.equal(r.status,429);assert.equal((await r.json()).code,'daily_call_budget_exhausted');assert.equal(f.calls(),0);
 });
 test('existing global request and money ceilings still subtract unrelated calls',async t=>{
- for(const mode of ['requests','money']){const f=await fixture(t);if(mode==='requests')for(let i=0;i<165;i++)f.seed('outside-'+i,{operation:'outside'});else f.seed('outside-money',{operation:'outside',accounted:50000000});
+ for(const mode of ['requests','money']){const f=await fixture(t);if(mode==='requests')for(let i=0;i<372;i++)f.seed('outside-'+i,{operation:'outside'});else f.seed('outside-money',{operation:'outside',accounted:50000000});
   const r=await f.send();assert.equal(r.status,429);assert.equal((await r.json()).code,mode==='requests'?'daily_call_budget_exhausted':'daily_money_budget_exhausted');assert.equal(f.calls(),0);
  }
 });

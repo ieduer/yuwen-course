@@ -2,7 +2,7 @@ import {fetchAssessmentAsset} from './assessment-assets.js';
 // Owner-only synthetic execution. No paid authority or deployment activation is
 // supplied by this module. Request JSON cannot supply either capability.
 import packet from './dialogue-full-language-packet.json' with {type:'json'};
-import {FULL_OPERATION as OP,HISTORICAL_BASE as base,FULL_CASE_COUNT,FULL_MODEL,FULL_E2E_OPERATION,fullActivation,fullAdmission,fullSourceGate,fullMaterialize,fullReceipt as receipt,digest} from './dialogue-full-language.js';
+import {FULL_OPERATION as OP,HISTORICAL_BASE as base,FULL_CASE_COUNT,RELEASE_CASE_COUNT,FULL_MODEL,FULL_E2E_OPERATION,fullActivation,fullAdmission,fullSourceGate,fullMaterialize,fullReceipt as receipt,digest} from './dialogue-full-language.js';
 import {acceptanceContext} from './dialogue-acceptance.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
 import {POLICY_VERSION,LIMITS,validateProposal} from './dialogue-policy.js';
@@ -71,8 +71,8 @@ export async function handleFullLanguageCalibration(request,env,student,callMode
  const reserved=await db.batch([
   db.prepare(`UPDATE dialogue_sessions SET revision=1,inflight=?,updated_at=? WHERE id=? AND student_id=? AND revision=0
    AND (SELECT COUNT(*) FROM dialogue_calls WHERE substr(turn_id,1,?)=?)=?
-   AND (SELECT COUNT(*) FROM dialogue_calls WHERE substr(turn_id,1,?)=?)<235
-   AND (SELECT COALESCE(SUM(reserved_micros),0) FROM dialogue_calls WHERE substr(turn_id,1,?)=?)+84000<=19740000
+   AND (SELECT COUNT(*) FROM dialogue_calls WHERE substr(turn_id,1,?)=?)<${RELEASE_CASE_COUNT}
+   AND (SELECT COALESCE(SUM(reserved_micros),0) FROM dialogue_calls WHERE substr(turn_id,1,?)=?)+84000<=${RELEASE_CASE_COUNT*84000}
    AND (SELECT COUNT(*) FROM dialogue_calls WHERE (substr(turn_id,1,?)=? OR json_extract(CASE WHEN json_valid(budget_policy_json) THEN budget_policy_json ELSE '{}' END,'$.isolatedAdmission.operation')=?) AND state IN ('reserved','finishing'))<1
    AND (SELECT COUNT(*) FROM dialogue_calls WHERE substr(turn_id,1,?)=?)=?
    AND (SELECT COUNT(*) FROM dialogue_calls WHERE day=?)<400

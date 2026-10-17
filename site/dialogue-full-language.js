@@ -4,7 +4,9 @@ import {createQuestion,projectState,contextFor} from './dialogue-policy.js';
 // New finite operation; no existing or expired allowance is resumed.
 export const FULL_OPERATION='yw-dialogue-full-calibration-20261017-v1';
 export const FULL_E2E_OPERATION='yw-e2e-real-dialogue-20261017-v1';
-export const FULL_CASE_COUNT=235;
+export const FULL_CASE_COUNT=235; // Immutable packet, including deferred cases.
+export const RELEASE_CASE_COUNT=28;
+export const releaseCases=packet=>packet.cases.filter(c=>c.group==='representative-28');
 export const FULL_MODEL='gemini-3.8-flash';
 export const FULL_MAX_WINDOW_MS=6*60*60*1000;
 export const HISTORICAL_BASE='yw-dialogue-real-calibration-20261012-v1';
@@ -18,7 +20,7 @@ const stop=(code,scope='case',extra={})=>({allowed:false,code,scope,...extra});
 export function fullActivation(env,packet,now=Date.now()){
  const context=acceptanceContext(env);let a;try{a=JSON.parse(env.YW_CALIBRATION_FULL_LANGUAGE_JSON);}catch{return null;}
  const keys=['version','enabled','operation','authorityDigest','packetDigest','sourceCommit','artifactSha256','origin','ownerUserId','databaseId','apisVersion','registryReceiptDigest','singleProviderSourceProofDigest','priorReceiptSetDigest','priorReceipts','readyAt','hardExpiry','maxAttempts','maxReservedMicros','maxProviderAttempts','reserveMicros','maxConcurrency','recoveryReadbacks'];
- if(!context||!a||Object.keys(a).sort().join()!==keys.sort().join()||a.version!=='yw-full-language-activation-v1'||a.enabled!==true||a.operation!==FULL_OPERATION||!hex(a.authorityDigest)||a.packetDigest!==packet.sourceDigest||!hex(a.packetDigest)||!hex(a.artifactSha256)||!/^[a-f0-9]{40}$/.test(a.sourceCommit||'')||a.origin!==context.origin||a.origin!=='https://yw-acceptance.bdfz.net'||a.ownerUserId!==context.userId||a.ownerUserId!==553||a.databaseId!==context.databaseId||a.databaseId!=='c45988a6-9094-4306-bcce-98704b3989e3'||a.apisVersion!==context.version||['66cfaab9-e1a4-4a31-a8c4-98e656db7e04','53dbb568-9c83-4685-ac82-04a64e2211e1'].includes(a.apisVersion)||!hex(a.registryReceiptDigest)||a.registryReceiptDigest!==env.YW_FULL_LANGUAGE_ACTIVATION_SHA256||a.registryReceiptDigest!==context.activationDigest||!hex(a.singleProviderSourceProofDigest)||!hex(a.priorReceiptSetDigest)||!Number.isFinite(Date.parse(a.readyAt))||!Number.isFinite(Date.parse(a.hardExpiry))||Date.parse(a.hardExpiry)>Date.parse(a.readyAt)+FULL_MAX_WINDOW_MS||Date.parse(a.hardExpiry)>context.expires||!(Date.parse(a.readyAt)<=now&&now<Date.parse(a.hardExpiry)&&now<context.expires)||a.maxAttempts!==FULL_CASE_COUNT||a.maxReservedMicros!==FULL_CASE_COUNT*84000||a.maxProviderAttempts!==1||a.reserveMicros!==84000||a.maxConcurrency!==1||!Array.isArray(a.recoveryReadbacks)||a.recoveryReadbacks.length!==0||!Array.isArray(a.priorReceipts)||a.priorReceipts.length<7||a.priorReceipts.length>1000)return null;
+ if(!context||!a||Object.keys(a).sort().join()!==keys.sort().join()||a.version!=='yw-full-language-activation-v1'||a.enabled!==true||a.operation!==FULL_OPERATION||!hex(a.authorityDigest)||a.packetDigest!==packet.sourceDigest||!hex(a.packetDigest)||!hex(a.artifactSha256)||!/^[a-f0-9]{40}$/.test(a.sourceCommit||'')||a.origin!==context.origin||a.origin!=='https://yw-acceptance.bdfz.net'||a.ownerUserId!==context.userId||a.ownerUserId!==553||a.databaseId!==context.databaseId||a.databaseId!=='c45988a6-9094-4306-bcce-98704b3989e3'||a.apisVersion!==context.version||['66cfaab9-e1a4-4a31-a8c4-98e656db7e04','53dbb568-9c83-4685-ac82-04a64e2211e1'].includes(a.apisVersion)||!hex(a.registryReceiptDigest)||a.registryReceiptDigest!==env.YW_FULL_LANGUAGE_ACTIVATION_SHA256||a.registryReceiptDigest!==context.activationDigest||!hex(a.singleProviderSourceProofDigest)||!hex(a.priorReceiptSetDigest)||!Number.isFinite(Date.parse(a.readyAt))||!Number.isFinite(Date.parse(a.hardExpiry))||Date.parse(a.hardExpiry)>Date.parse(a.readyAt)+FULL_MAX_WINDOW_MS||Date.parse(a.hardExpiry)>context.expires||!(Date.parse(a.readyAt)<=now&&now<Date.parse(a.hardExpiry)&&now<context.expires)||a.maxAttempts!==RELEASE_CASE_COUNT||a.maxReservedMicros!==RELEASE_CASE_COUNT*84000||a.maxProviderAttempts!==1||a.reserveMicros!==84000||a.maxConcurrency!==1||!Array.isArray(a.recoveryReadbacks)||a.recoveryReadbacks.length!==0||!Array.isArray(a.priorReceipts)||a.priorReceipts.length<7||a.priorReceipts.length>1000)return null;
  if(!ORIGINAL_RECEIPTS.every(p=>a.priorReceipts.some(x=>x.attemptId===p.attemptId&&x.receiptDigest===p.receiptDigest)))return null;
  if(new Set(a.priorReceipts.map(x=>x.attemptId)).size!==a.priorReceipts.length||!ORIGINAL_IDS.every(id=>a.priorReceipts.some(x=>x.attemptId===id))||a.priorReceipts.some(x=>!hex(x.receiptDigest)||(!ORIGINAL_IDS.includes(x.attemptId)&&!new RegExp('^'+HISTORICAL_BASE+'-amendment-[45]:[a-z0-9-]+:[12]$').test(x.attemptId))))return null;
  return Object.freeze({...a});
@@ -50,11 +52,12 @@ export function fullAdmission({authority,packet,caseId,rows=[],history,capacity,
  // A failed or unknown case ends this batch. Neither a new day nor another case
  // can refund its reservation or restart it; only same-attempt readback remains.
  if(new Set(rows.map(r=>r.modelVersion).filter(Boolean)).size>1||rows.some(r=>r.boundaryStop||r.state==='review'||r.model&&r.model!==FULL_MODEL))return stop('full_boundary_stop','operation');
- if(rows.length>=FULL_CASE_COUNT||rows.reduce((n,r)=>n+r.reservedMicros,0)+84000>FULL_CASE_COUNT*84000)return stop('full_operation_exhausted','operation');
+ if(rows.length>=RELEASE_CASE_COUNT||rows.reduce((n,r)=>n+r.reservedMicros,0)+84000>RELEASE_CASE_COUNT*84000)return stop('full_operation_exhausted','operation');
  if(!capacity||!['globalDayCalls','reservedConcurrentCalls','operationConcurrentCalls','globalDayConservativeMicros','userDayConservativeMicros'].every(k=>int(capacity[k])))return stop('full_capacity_unknown','operation');
  if(capacity.globalDayCalls>=400||capacity.globalDayConservativeMicros+84000>50000000||capacity.userDayConservativeMicros+84000>50000000)return stop('full_shared_capacity_exhausted','operation');
  if(capacity.reservedConcurrentCalls>=4||capacity.operationConcurrentCalls>=1)return stop('full_concurrency_busy','case');
- const c=packet.cases.find(x=>x.id===caseId);if(!c||!c.sourceGate.eligible)return stop('full_case_source_blocked');
+ const c=packet.cases.find(x=>x.id===caseId);if(c&&c.group!=='representative-28')return stop('full_case_deferred');
+ if(!c||!c.sourceGate.eligible)return stop('full_case_source_blocked');
  if(rows.some(r=>r.caseId===caseId))return stop('full_case_already_attempted');
  return recoveryOf===null?{allowed:true,attempt:1}:stop('full_recovery_not_authorized');
 }

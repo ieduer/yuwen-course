@@ -1,14 +1,14 @@
 // Inactive continuation of the existing E2E schema. The publisher must supply
 // both approved pins; no request or default value can mint this capability.
 import packet from './dialogue-full-language-packet.json' with {type:'json'};
-import {FULL_OPERATION,FULL_E2E_OPERATION,FULL_MODEL,FULL_CASE_COUNT,fullActivation} from './dialogue-full-language.js';
+import {FULL_OPERATION,FULL_E2E_OPERATION,FULL_MODEL,RELEASE_CASE_COUNT,releaseCases,fullActivation} from './dialogue-full-language.js';
 import {acceptanceContext,ACCEPTANCE_ORIGIN} from './dialogue-acceptance.js';
 import {reconciledCost} from './dialogue-budget.js';
 export const RENEWED_E2E_OPERATION=FULL_E2E_OPERATION;
 const lessons=['lesson-1498','lesson-1711-p1','lesson-1717-p2'];
 const keys='apisVersion,authorityDigest,databaseId,enabled,hardExpiry,lessonIds,maxProviderAttempts,maxVisibleCalls,operation,origin,ownerUserId,registryReceiptDigest,reserveMicros,version';
 const prefix=FULL_OPERATION+':';
-const expectedCases=JSON.stringify(packet.cases.map(c=>({id:c.id,sourceDigest:c.sourceDigest,promptDigest:c.promptDigest})));
+const expectedCases=JSON.stringify(releaseCases(packet).map(c=>({id:c.id,sourceDigest:c.sourceDigest,promptDigest:c.promptDigest})));
 const extract=(column,key)=>`json_extract(CASE WHEN json_valid(${column}) THEN ${column} ELSE '{}' END,'$.${key}')`;
 const op=extract('c.budget_policy_json','isolatedAdmission.operation');
 export function renewedDialogueAdmission(env,student,lessonId,budget,pin,at){
@@ -39,7 +39,7 @@ export function calibrationReadyCondition(studentId){
    OR ${extract('e.details_json','model')} IS NOT ? OR ${extract('e.details_json','expectedVerdictMatches')} IS NOT 1
    OR typeof(${extract('e.details_json','modelVersion')})<>'text' OR length(${extract('e.details_json','modelVersion')})=0)
  AND (SELECT COUNT(DISTINCT ${extract('e.details_json','modelVersion')}) FROM dialogue_calls c JOIN dialogue_events e ON e.id=c.turn_id||':result' WHERE substr(c.turn_id,1,?)=?)=1`,
- args:[prefix.length,prefix,FULL_CASE_COUNT,expectedCases,prefix,studentId,studentId,packet.sourceDigest,FULL_MODEL,prefix.length,prefix]};
+ args:[prefix.length,prefix,RELEASE_CASE_COUNT,expectedCases,prefix,studentId,studentId,packet.sourceDigest,FULL_MODEL,prefix.length,prefix]};
 }
 export function renewedConcurrencyCondition(){
  return {sql:`(SELECT COUNT(*) FROM dialogue_calls c WHERE (substr(c.turn_id,1,?)=? OR ${op}=?) AND c.state IN ('reserved','finishing'))<1`,args:[prefix.length,prefix,FULL_E2E_OPERATION]};

@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {isDeepStrictEqual} from 'node:util';
 import packet from '../site/dialogue-full-language-packet.json' with {type:'json'};
-import {FULL_OPERATION,FULL_MODEL,FULL_CASE_COUNT,fullReceipt,fullMaterialize,digest} from '../site/dialogue-full-language.js';
+import {FULL_OPERATION,FULL_MODEL,RELEASE_CASE_COUNT,releaseCases,fullReceipt,fullMaterialize,digest} from '../site/dialogue-full-language.js';
 import {validateProposal} from '../site/dialogue-policy.js';
 import {reconciledCost} from '../site/dialogue-budget.js';
 import {projectReleaseJson} from './build_release_site.mjs';
@@ -32,7 +32,7 @@ function validateExecution(e){
 
 export async function inspectCalibrationReadback(readback,execution,load=loadCurriculum){
  validateExecution(execution);
- const c=packet.cases.find(c=>c.id===readback?.caseId);assert(c,'unknown case');
+ const c=releaseCases(packet).find(c=>c.id===readback?.caseId);assert(c,'unknown or deferred case');
  const attemptId=`${FULL_OPERATION}:${c.id}:1`;
  same(readback.operation,FULL_OPERATION,'operation mismatch');same(readback.attempt,1,'attempt mismatch');same(readback.attemptId,attemptId,'attempt identity mismatch');
  for(const key of ['sourceCommit','artifactSha256','apisVersion','ownerRef','activationDigest','hardExpiry'])same(readback[key],execution[key],`execution ${key} mismatch`);
@@ -63,11 +63,11 @@ export async function inspectCalibrationReadback(readback,execution,load=loadCur
 
 export async function inspectCalibrationBatch(readbacks,execution,load=loadCurriculum){
  const {sourceDigest,...unsigned}=packet;same(await digest(unsigned),sourceDigest,'frozen packet integrity');
- assert(Array.isArray(readbacks)&&readbacks.length===FULL_CASE_COUNT,'all235 readbacks required');
- assert(new Set(readbacks.map(r=>r.caseId)).size===FULL_CASE_COUNT,'duplicate case');
+ assert(Array.isArray(readbacks)&&readbacks.length===RELEASE_CASE_COUNT,'all28 readbacks required');
+ assert(new Set(readbacks.map(r=>r.caseId)).size===RELEASE_CASE_COUNT,'duplicate case');
  // Ordering is packet-defined. No network, recovery, or replacement case exists.
  const byId=new Map(readbacks.map(r=>[r.caseId,r]));const cases=[];
- for(const c of packet.cases)cases.push(await inspectCalibrationReadback(byId.get(c.id),execution,load));
+ for(const c of releaseCases(packet))cases.push(await inspectCalibrationReadback(byId.get(c.id),execution,load));
  assert(new Set(cases.map(c=>c.modelVersion)).size===1,'model version drift');
  const changes=[],preserved=[],sourceChanges=[];
  assert(packet.sourceFiles.length===189,'all189 source pins required');
@@ -76,7 +76,8 @@ export async function inspectCalibrationBatch(readbacks,execution,load=loadCurri
   const source=JSON.parse(projectReleaseJson(`dialogue-curriculum/${pin.lessonId}.json`,JSON.stringify(raw)));same(await digest(source),pin.sourceDigest,'full189 projected source drift');
   const proposed=structuredClone(raw),changedIds=[];
   for(const item of raw.languagePractice){
-   const refs=cases.filter(c=>c.lessonId===pin.lessonId&&c.objectiveId===item.id);assert(refs.length,'uncovered language item');
+   const refs=cases.filter(c=>c.lessonId===pin.lessonId&&c.objectiveId===item.id);
+   if(!refs.length){assert(item.sourceEvidence&&item.calibrationStatus==='pending-real-model','uncovered required language item');continue;}
    const entry={lessonId:pin.lessonId,objectiveId:item.id,itemVersion:item.version,itemDigest:await digest(item),caseIds:refs.map(c=>c.caseId),receiptDigests:refs.map(c=>c.receiptDigest)};
    if(item.calibrationStatus==='accepted')preserved.push(entry);
    else {same(item.calibrationStatus,'pending-real-model','unknown calibration disposition');changes.push({...entry,from:item.calibrationStatus,to:'accepted'});proposed.languagePractice.find(i=>i.id===item.id).calibrationStatus='accepted';changedIds.push(item.id);}
@@ -87,7 +88,7 @@ export async function inspectCalibrationBatch(readbacks,execution,load=loadCurri
    sourceChanges.push({lessonId:pin.lessonId,beforeRawDigest:pin.rawSourceDigest,beforeProjectedDigest:pin.sourceDigest,beforeVersion:raw.curriculumVersion,proposedRawDigest:await digest(proposed),proposedProjectedDigest:await digest(projected),proposedVersion:proposed.curriculumVersion,changedItemIds:changedIds,allowedFields:['languagePractice[].calibrationStatus','curriculumVersion'],applied:false});
   }
  }
- assert(changes.length+preserved.length===78,'all78 language items required');
+ assert(changes.length+preserved.length===9,'all9 representative language items required');
  return {status:'mechanical-pass-semantic-review-required',sourceCommit:execution.sourceCommit,artifactSha256:execution.artifactSha256,apisVersion:execution.apisVersion,packetDigest:sourceDigest,executionDigest:await digest(execution),model:FULL_MODEL,modelVersion:cases[0].modelVersion,cases,accountedMicros:cases.reduce((n,c)=>n+c.accountedMicros,0),changes,preserved,sourceChanges,sourceFiles:packet.sourceFiles,reviewRequiredCaseIds:cases.map(c=>c.caseId),overlayApplied:false,paidCallsAuthorized:false,releaseAuthorized:false,notice:'Local hashes and structural checks do not authenticate provider evidence or certify author fidelity and teaching quality. Review original readbacks and every case before applying this exact diff through the existing source/release workflow. Never regenerate consumed packets.'};
 }
 
@@ -99,7 +100,7 @@ export async function inspectCalibrationBatch(readbacks,execution,load=loadCurri
 // the reviewer or manufacture designation; no review is inferred from a score.
 export function validateSemanticReviews(inspection){
  const reviews=inspection?.semanticReviews;
- assert(Array.isArray(reviews)&&reviews.length===235&&new Set(reviews.map(r=>r.caseId)).size===235,'all235 semantic reviews required');
+ assert(Array.isArray(reviews)&&reviews.length===RELEASE_CASE_COUNT&&new Set(reviews.map(r=>r.caseId)).size===RELEASE_CASE_COUNT,'all28 semantic reviews required');
  for(const c of inspection.cases){
   const r=reviews.find(r=>r.caseId===c.caseId);
   assert(r&&typeof r.reviewer==='string'&&r.reviewer.trim()&&(r.reviewer==='suen'||typeof r.designationReference==='string'&&r.designationReference.trim().length>=12)&&Number.isFinite(Date.parse(r.reviewedAt))&&r.verdict==='accepted','case semantic review not accepted');
@@ -114,10 +115,10 @@ export async function materializeCalibrationOverlay(curricula,inspection){
  assert(inspection?.status==='mechanical-pass-semantic-review-required'&&inspection.overlayApplied===false&&inspection.releaseAuthorized===false&&inspection.paidCallsAuthorized===false,'inspection report required');
  same(inspection.packetDigest,packet.sourceDigest,'overlay packet mismatch');
  same(inspection.sourceFiles,packet.sourceFiles,'overlay source set mismatch');
- same(inspection.reviewRequiredCaseIds,packet.cases.map(c=>c.id),'all235 review references required');
- assert(Array.isArray(inspection.cases)&&inspection.cases.length===235&&new Set(inspection.cases.map(c=>c.caseId)).size===235,'all235 inspected cases required');
+ same(inspection.reviewRequiredCaseIds,releaseCases(packet).map(c=>c.id),'all28 review references required');
+ assert(Array.isArray(inspection.cases)&&inspection.cases.length===RELEASE_CASE_COUNT&&new Set(inspection.cases.map(c=>c.caseId)).size===RELEASE_CASE_COUNT,'all28 inspected cases required');
  same(inspection.model,FULL_MODEL,'overlay model mismatch');assert(hex(inspection.sourceCommit,40)&&hex(inspection.artifactSha256,64)&&hex(inspection.executionDigest,64)&&uuid(inspection.apisVersion),'overlay execution pins missing');
- for(const c of packet.cases){
+ for(const c of releaseCases(packet)){
   const checked=inspection.cases.find(x=>x.caseId===c.id);assert(checked,'inspected case missing');
   same(checked.lessonId,c.lessonId,'inspected lesson mismatch');same(checked.objectiveId,c.objectiveId,'inspected objective mismatch');same(checked.sourceDigest,c.sourceDigest,'inspected source mismatch');same(checked.promptDigest,c.promptDigest,'inspected prompt mismatch');same(checked.attemptId,`${FULL_OPERATION}:${c.id}:1`,'inspected attempt mismatch');
   assert(hex(checked.receiptDigest,64)&&hex(checked.readbackDigest,64)&&checked.semanticReviewRequired===true,'inspected receipt references missing');
@@ -125,7 +126,7 @@ export async function materializeCalibrationOverlay(curricula,inspection){
   assert(typeof inspection.modelVersion==='string'&&inspection.modelVersion.trim(),'inspected model version missing');same(checked.modelVersion,inspection.modelVersion,'inspected model drift');
  }
  same(inspection.accountedMicros,inspection.cases.reduce((n,c)=>n+c.accountedMicros,0),'inspected aggregate cost mismatch');
- assert(Array.isArray(inspection.changes)&&Array.isArray(inspection.preserved)&&inspection.changes.length+inspection.preserved.length===78,'all78 item dispositions required');
+ assert(Array.isArray(inspection.changes)&&Array.isArray(inspection.preserved)&&inspection.changes.length+inspection.preserved.length===9,'all9 representative item dispositions required');
  assert(Array.isArray(inspection.sourceChanges)&&new Set(inspection.sourceChanges.map(c=>c.lessonId)).size===inspection.sourceChanges.length,'unique source changes required');
  const byId=new Map(curricula.map(c=>[c.lessonId,c]));assert(curricula.length===189&&byId.size===189,'all189 curricula required');
  const items=new Map(),output=[];const sourceChanges=new Map(inspection.sourceChanges.map(c=>[c.lessonId,c]));
@@ -137,7 +138,7 @@ export async function materializeCalibrationOverlay(curricula,inspection){
  for(const change of [...inspection.changes,...inspection.preserved]){
   const found=items.get(change.objectiveId);assert(found&&found.lessonId===change.lessonId&&!seen.has(change.objectiveId),'unknown or duplicate item disposition');seen.add(change.objectiveId);
   same(change.itemVersion,found.item.version,'overlay item version drift');same(change.itemDigest,await digest(found.item),'overlay item content drift');
-  const expected=packet.cases.filter(c=>c.lessonId===change.lessonId&&c.objectiveId===change.objectiveId).map(c=>c.id);same(change.caseIds,expected,'overlay case coverage mismatch');
+  const expected=releaseCases(packet).filter(c=>c.lessonId===change.lessonId&&c.objectiveId===change.objectiveId).map(c=>c.id);assert(expected.length,'deferred item cannot be certified by representative cases');same(change.caseIds,expected,'overlay case coverage mismatch');
   same(change.receiptDigests,expected.map(id=>{const c=inspected.get(id);assert(c&&hex(c.receiptDigest,64),'inspected receipt missing');return c.receiptDigest;}),'overlay receipt binding mismatch');
   if(inspection.changes.includes(change)){same(change.from,found.item.calibrationStatus,'overlay before status drift');same(change.from,'pending-real-model','overlay cannot downgrade accepted item');same(change.to,'accepted','overlay unexpected status');}
   else same(found.item.calibrationStatus,'accepted','preserved item was not accepted');

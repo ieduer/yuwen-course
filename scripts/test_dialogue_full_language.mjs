@@ -24,7 +24,7 @@ async function fixture(t){
  const db={prepare:text=>wrap(text),batch:async rows=>{sql.exec('BEGIN');try{const r=rows.map(s=>s.runSync());sql.exec('COMMIT');return r;}catch(e){sql.exec('ROLLBACK');throw e;}}};
  for(const r of old){const sid=r.turn_id+':session';sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)').run(sid,1,'calibration:history',r.turn_id,r.curriculum_json,packet.policyVersion,r.created_at,r.finished_at);sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?, 'student','synthetic historical fixture','synthetic_calibration',?,?)").run(r.turn_id,sid,r.turn_id,H,packet.policyVersion,r.created_at);sql.prepare("INSERT INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,reserved_micros,accounted_micros,finished_at,budget_policy_json) VALUES(?,?,1,?,2400,?,?,?,?,?,?)").run(r.turn_id,sid,r.created_at.slice(0,10),r.state,r.created_at,r.reserved_micros,r.accounted_micros,r.finished_at,JSON.stringify(policy));sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(r.turn_id+':result',sid,r.turn_id,'synthetic_calibration_result',r.details_json,r.finished_at);}
  const priorReceipts=[...ORIGINAL_RECEIPTS].sort((a,b)=>a.attemptId<b.attemptId?-1:1);
- const authority={version:'yw-full-language-activation-v1',enabled:true,operation:OP,authorityDigest:H,packetDigest:packet.sourceDigest,sourceCommit:'b'.repeat(40),artifactSha256:H,origin,ownerUserId:553,databaseId:database,apisVersion:version,registryReceiptDigest:H,singleProviderSourceProofDigest:H,priorReceiptSetDigest:await digest(priorReceipts),priorReceipts,readyAt:'2026-10-17T11:00:00Z',hardExpiry:expiry,maxAttempts:235,maxReservedMicros:19740000,maxProviderAttempts:1,reserveMicros:84000,maxConcurrency:1,recoveryReadbacks:[]};
+ const authority={version:'yw-full-language-activation-v1',enabled:true,operation:OP,authorityDigest:H,packetDigest:packet.sourceDigest,sourceCommit:'b'.repeat(40),artifactSha256:H,origin,ownerUserId:553,databaseId:database,apisVersion:version,registryReceiptDigest:H,singleProviderSourceProofDigest:H,priorReceiptSetDigest:await digest(priorReceipts),priorReceipts,readyAt:'2026-10-17T11:00:00Z',hardExpiry:expiry,maxAttempts:28,maxReservedMicros:2352000,maxProviderAttempts:1,reserveMicros:84000,maxConcurrency:1,recoveryReadbacks:[]};
  const bindings={YW_ACCEPTANCE_EXPIRES_AT:expiry,YW_ACCEPTANCE_USER_ID:'553',YW_ACCEPTANCE_APIS_VERSION:version,YW_ACCEPTANCE_DATABASE_ID:database,YW_ACCEPTANCE_ACTIVATION_SHA256:H,ACCEPTANCE_DB:db,ASSETS:{fetch:async r=>new Response(projectReleaseJson(new URL(r.url).pathname.slice(1),fs.readFileSync('site'+new URL(r.url).pathname,'utf8')))},USER_CENTER_EVIDENCE:{resolveSession:async()=>({userId:553})},APIS_ACCEPTANCE:{fetch:()=>{throw Error('real_network_forbidden');}},YW_DIALOGUE_BUDGET_JSON:JSON.stringify(policy),YW_CALIBRATION_FULL_LANGUAGE_JSON:JSON.stringify(authority),YW_FULL_LANGUAGE_ACTIVATION_SHA256:H};
  const env=acceptanceEnvironment(req(),bindings);
  let calls=0;const model=async(e,p,id,onReply,budget)=>{calls++;assert.equal(budget.providerAttemptLimit,1);assert.equal(budget.logicalProviderAttemptLimit,1);await onReply('原句');return structuredClone(success);};
@@ -91,17 +91,17 @@ test('a current-operation receipt from another packet blocks continuation',async
  f.sql.prepare("UPDATE dialogue_sessions SET curriculum_json=json_set(curriculum_json,'$.packetDigest',?) WHERE id=?").run(H,r.rawRow.session_id);
  assert.equal((await f.post(negative[1])).code,'full_ledger_invalid');assert.equal(f.calls(),1);
 });
-test('SQLite operation count stops at235 regardless of dates and known low cost',async t=>{
+test('SQLite operation count stops at28 regardless of dates and known low cost',async t=>{
  const f=await fixture(t),target=negative[0];
- for(const c of packet.cases.filter(c=>c.id!==target.id)){
+ for(const c of packet.cases.filter(c=>c.group==='representative-28'&&c.id!==target.id)){
   const id=OP+':'+c.id+':1',sid=id+':session',created='2026-10-17T11:30:00Z';
   f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,1,?,?,?,?,?,?)').run(sid,'calibration:'+c.lessonId,OP+':'+c.id+':1',JSON.stringify({caseId:c.id,sourceDigest:c.sourceDigest,promptDigest:c.promptDigest,packetDigest:packet.sourceDigest}),packet.policyVersion,created,created);
   f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,'student','synthetic','synthetic_calibration',?,?)").run(id,sid,id,H,packet.policyVersion,created);
   f.sql.prepare("INSERT INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,reserved_micros,accounted_micros,finished_at,budget_policy_json) VALUES(?,?,1,'2026-10-17',2400,'finished',?,84000,1,?,'{}')").run(id,sid,created,created);
   f.sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(id+':result',sid,id,'synthetic_calibration_result',JSON.stringify({model:packet.model,modelVersion:'synthetic-unit-only',value:{}}),created);
  }
- const r=await f.post(target);assert.equal(r.rows.length,235);assert.equal(r.call.state,'finished');assert.equal(f.calls(),1);
- assert.equal(r.rows.reduce((sum,r)=>sum+r.reservedMicros,0),19740000);
+ const r=await f.post(target);assert.equal(r.rows.length,28);assert.equal(r.call.state,'finished');assert.equal(f.calls(),1);
+ assert.equal(r.rows.reduce((sum,r)=>sum+r.reservedMicros,0),2352000);
  const admission=fullAdmission({authority:f.authority,packet,caseId:target.id,rows:r.rows,history:r.history,capacity:r.capacity,now:at});assert.equal(admission.code,'full_operation_exhausted');
 });
 test('atomic admission at399 charges at most once and global money includes other namespaces',async t=>{
@@ -112,7 +112,7 @@ test('atomic admission at399 charges at most once and global money includes othe
 test('authority expires at the boundary; no reset via a new day or recovery',async t=>{
  const f=await fixture(t);mock.timers.setTime(Date.parse(expiry));assert.equal((await handle(req(),f.env,student,f.model)).status,404);assert.equal(fullActivation(f.env,packet),null);
  const authority={priorReceiptSetDigest:H,readyAt:'2026-10-17T11:00:00Z',hardExpiry:expiry},history={reconciled:true,receiptSetDigest:H},capacity={globalDayCalls:0,reservedConcurrentCalls:0,operationConcurrentCalls:0,globalDayConservativeMicros:0,userDayConservativeMicros:0};
- const rows=packet.cases.map(c=>({sourceValid:true,caseId:c.id,attemptId:OP+':'+c.id+':1',reservedMicros:84000,accountedMicros:1,state:'finished',finishedAt:'2026-10-17T11:30:00Z',model:packet.model,modelVersion:'synthetic-unit-only',finalAssessment:true}));
+ const rows=packet.cases.filter(c=>c.group==='representative-28').map(c=>({sourceValid:true,caseId:c.id,attemptId:OP+':'+c.id+':1',reservedMicros:84000,accountedMicros:1,state:'finished',finishedAt:'2026-10-17T11:30:00Z',model:packet.model,modelVersion:'synthetic-unit-only',finalAssessment:true}));
  const plan=extra=>fullAdmission({authority,packet,history,capacity,caseId:negative[0].id,now:at,...extra});
  assert.equal(plan({rows}).code,'full_operation_exhausted');assert.equal(plan({recoveryOf:'old'}).code,'full_recovery_not_authorized');assert.equal(plan({now:at+86400000}).code,'full_expired');assert.equal(FULL_CASE_COUNT,235);
  for(const patch of [{state:'unknown'},{accountedMicros:84001},{finishedAt:null},{attemptId:'old-operation'}])assert.equal(plan({rows:[{...rows[0],...patch}]}).code,'full_ledger_invalid');
@@ -126,3 +126,10 @@ test('offline importer verifies the real SQLite runtime readback without promoti
  assert.equal(inspected.receiptDigest,result.receiptDigest);assert.equal(inspected.accountedMicros,result.call.accounted_micros);assert.equal(inspected.semanticReviewRequired,true);assert.equal(f.calls(),1);
  assert(loadCurriculum(negative[0].lessonId).languagePractice.every(i=>i.calibrationStatus==='pending-real-model'));
 });
+
+ test('deferred207 cannot consume the release allowance or be revived by a235 activation',async t=>{
+ const f=await fixture(t),c=packet.cases.find(c=>c.group==='remaining-207');
+ const r=await f.post(c);assert.equal(r.code,'full_case_deferred');assert.equal(f.calls(),0);
+ const env={...f.env,YW_CALIBRATION_FULL_LANGUAGE_JSON:JSON.stringify({...f.authority,maxAttempts:235,maxReservedMicros:19740000})};
+ assert.equal(fullActivation(env,packet),null);
+ });
