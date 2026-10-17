@@ -1,3 +1,41 @@
+## 2026-10-17 PDT — Remaining browser accessibility and source-format acceptance
+
+Local candidate fixes two observed interface defects: Escape now returns focus from
+an open palette selector to its visible summary without stealing outside focus;
+the composer boundary and final catalogue-search rule now use the existing muted
+colour, preserving the earlier high-contrast intent that a later rule overrode.
+Only dialogue.js, dialogue.css and their HTML cache hashes change at runtime.
+
+Actual Chromium: 221 component-text measurements across17 palettes pass; rendered
+paragraph contrast17/17 and existing composer focus indicator17/17 pass. The34
+previously failing input-boundary measurements now pass, minimum5.153:1 against
+both adjacent surfaces. Nine new tablist/modal keyboard checks and seven focused
+palette/footnote/table checks pass. Existing zoom/clipboard/model/packet checks
+were not replayed. Raw failed setup, low-contrast and hidden-focus evidence remain.
+
+All189 lessons now have actual-browser rich-source semantic checks for paragraphs,
+headings, tables/cells, lists, quotations and explicit source-footnote preservation.
+The first representative passed separately; remaining188 covered1138 source posts.
+Only32 lesson files differ under the established public privacy projection; those
+were additionally checked against the final staged artifact (495 posts). The other
+157 are byte-equal. Footnotes deliberately moved inline retain exact text, source ID
+and disclosure relation; ordinary list structure is not waived. No source content,
+exclusion rule, score, packet, backend, native object or model authority changed.
+
+suen explicitly confirmed “語音驗收通過，我聽到了” in this chat. Speech is accepted
+as user-observed, not DOM simulation; the earlier native-tool timeout remains history.
+This does not activate native content or waive unrelated device/production gates.
+
+Normal build and staging pass1473 files. Relative to136e576, only the three public
+interface files and generated marker differ; all55 Worker modules are unchanged.
+Full189 remains incomplete: model207/3qualityE2E/cache, provider compressed bytes,
+changed-policy provider compile, candidate live source-central-My/auth compatibility,
+remote image delivery, native/device activation and formal release/Status remain.
+No external/APIS/model requests, expired batch, push, production write or installation.
+Evidence: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/accessibility-01a148fd/REPORT.md.
+Earlier entries retain history and original evidence scopes; this entry supersedes
+only the newly closed keyboard/contrast/format and user-observed speech gaps.
+
 ## 2026-10-17 PDT — Historical packet tests aligned with private artifacts
 
 The two remaining amendment4/5 provenance tests now build a Worker fixture and read
