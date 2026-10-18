@@ -551,6 +551,21 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   stream?.send('unconfirmed',{turnId,saved:true,retry:'readback_only',continuation:continuationDisposition(call,failure,!!resume)});
  }finally{stream?.close();}
 }
+function http400Diagnostic(failure){
+ // Explicit source-verified enums only. Never retain or parse raw provider text.
+ const diagnostic={},googleError={};
+ const httpStatuses=[400,401,403,404,408,409,413,429,500,502,503,504];
+ const googleStatuses=['CANCELLED','UNKNOWN','INVALID_ARGUMENT','DEADLINE_EXCEEDED','NOT_FOUND','ALREADY_EXISTS','PERMISSION_DENIED','RESOURCE_EXHAUSTED','FAILED_PRECONDITION','ABORTED','OUT_OF_RANGE','UNIMPLEMENTED','INTERNAL','UNAVAILABLE','DATA_LOSS','UNAUTHENTICATED'];
+ if(failure.error_code==='CLIENT_REQUEST_INVALID')diagnostic.errorCode=failure.error_code;
+ if(httpStatuses.includes(failure.status_code))diagnostic.statusCode=failure.status_code;
+ const provider=failure.google_error?.error;
+ if(provider&&typeof provider==='object'&&!Array.isArray(provider)){
+  if(httpStatuses.includes(provider.code))googleError.code=provider.code;
+  if(googleStatuses.includes(provider.status))googleError.status=provider.status;
+ }
+ if(Object.keys(googleError).length)diagnostic.googleError=googleError;
+ return Object.keys(diagnostic).length?diagnostic:null;
+}
 export async function callDialogueModel(env,prompt,requestId,onReply,budget=dialogueBudget(env),{responseJsonSchema=null}={}){
  assertIsolatedCallCurrent(env,budget);
  if(!env.APIS?.fetch||!env.APIS_CALLER_TOKEN)throw new Error('approved_gateway_unavailable');
@@ -573,6 +588,10 @@ export async function callDialogueModel(env,prompt,requestId,onReply,budget=dial
    if(failure.requestId===requestId&&failure.providerAccounting){
     const providerAccounting=validatedProviderAccounting(failure.providerAccounting,{maxProviderAttempts:budget.providerAttemptLimit||1,model:budget.model});
     error.gatewayFailure={...error.gatewayFailure,requestId,httpStatus:response.status,providerAccounting,partialOutput:false,retryable:false};
+    if(acceptanceContext(env)&&response.status===400){
+     const diagnostic=http400Diagnostic(failure);
+     if(diagnostic)error.gatewayFailure.diagnostic=diagnostic;
+    }
    }
   }catch{}
   throw error;

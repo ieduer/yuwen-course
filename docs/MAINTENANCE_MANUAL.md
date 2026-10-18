@@ -1,4 +1,62 @@
-## 2026-10-18 14:58 UTC — directly approved16UTC amendment, local only
+## 2026-10-18T21:48:53.673259+00:00 — inert diagnostic publisher prepared locally, not registered
+
+Sole owner01a150ee continues the approved local-only preparation. The publisher
+now supports a separately registered inert_candidate proof: the exact consumed
+predecessor, byte-equivalent configuration with every original model window still
+expired, and exactly one changed runtime module (dialogue-source.js). No config
+PATCH, static upload/upsert, model request or admission renewal is possible in
+this mode. A missing static asset stops before deployment. It preserves formal
+and APIS deployment/settings/schedules before, immediately before deployment and
+afterwards. One deployment and at most3status reads fit22transaction requests,
+including2shared project reads and20publisher calls. Its separate maintenance
+lease never changes the old16UTC model expiry. Existing active/deploy-only modes
+retain their gates. This source change does not register or enable the channel.
+
+Focused publisher regressions32/32 pass after3expected red tests; the prior
+HTTP40010/10 result is reused unchanged. Build/source/receipt/rollback preparation
+is recorded in the linked current report; only explicitly bound offline outputs
+count. Original deadlines, schema, admission,30logical/provider,22accepted8failed,
+unknown336000micros, shared70 and publisher480 remain unchanged. No push, API,
+model, registry write or deployment is authorized. Full189 remains incomplete.
+
+Current preparation authority/evidence: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/case23-recovery/schema/inert-guard-01a150ee/REPORT.md.
+The prior diagnostic-only summary below is history; its red/green evidence remains.
+
+## Historical 2026-10-18 21:35 UTC — HTTP400 diagnostic retention verified locally, unreleased
+
+Sole local owner: 01a150ee-47ec-70c1-85d4-dfc79c80e3d6. On the borrowed
+f7e5e241 checkout, callDialogueModel now adds a diagnostic object only for an
+isolated acceptance HTTP400 with matching requestId and validated provider
+accounting. It copies only CLIENT_REQUEST_INVALID, enumerated numeric HTTP
+statuses and the exact Google error status allowlist. Raw body, message, details,
+key names, arbitrary strings and serialized raw provider JSON are omitted.
+Unknown fields are absent; outer400 does not imply any provider classification.
+Ordinary requests and other failure statuses retain their existing contract.
+Correlation, accounting, model schema, validator, cost, receipt and retry rules
+are unchanged. The existing private full-language failure save carries this
+object without a persistence-schema change; no live database write was tested.
+
+Focused Node24.18.0 regression: 10/10 pass (five existing, five new), after a
+valid red run with three missing-diagnostic failures. An initial synthetic
+accounting fixture used numeric400 instead of the required string and was
+corrected before that red run; both logs remain. Diff whitespace check passes.
+No80/175 rerun, build, commit, push, provider call or deployment in this task.
+
+Case23 attempt3 remains terminal, with root cause UNKNOWN and no retry allowed.
+The original07:14:55.135Z start and16:00UTC expiry are unchanged and expired.
+Logical/provider30, accepted22, failed8, unknown336000micros, shared70/73 (three
+A1-only), publisher480/1669 all remain unchanged. This patch cannot reconstruct
+lost past provider data. Full189, external acceptance, formal release and Status
+publication remain unfinished. Any future execution requires separate renewed
+authority and fresh exact source/artifact/live reconciliation; this local work
+does not activate it. The14:58 entry below is superseded history; its source was
+subsequently deployed only to isolation and failed case23 acceptance, as recorded
+in the existing deadline16 report.
+
+Evidence and minimal continuation package: [/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/case23-recovery/schema/diagnostic-patch-01a150ee/REPORT.md](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/case23-recovery/schema/diagnostic-patch-01a150ee/REPORT.md).
+Earlier entries are history and do not extend the expired execution window.
+
+## Historical 2026-10-18 14:58 UTC — directly approved16UTC amendment, local only
 
 Human reply「批准」at2026-10-18T14:55:02Z (Sentinel_e7566398c5008191b7a728c69592aad1)
 approved the same execution window through16:00UTC. fullWindowValid now permits

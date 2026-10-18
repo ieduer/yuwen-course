@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {callDialogueModel} from '../site/dialogue-source.js';
 import {consumeGatewayStream} from '../site/dialogue-stream.js';
 import {dialogueBudget,reconciledCost} from '../site/dialogue-budget.js';
+import {acceptanceEnvironment} from '../site/dialogue-acceptance.js';
 
 const model='gemini-3.8-flash';
 const usage={promptTokenCount:1000,totalTokenCount:1100,cachedContentTokenCount:700};
@@ -33,6 +34,75 @@ test('formal credential and rate refusals stop without automatic replay',async()
   let calls=0;const env={APIS_CALLER_TOKEN:'synthetic-caller-only',APIS:{fetch:async()=>{calls++;return new Response(null,{status});}}};
   await assert.rejects(callDialogueModel(env,'p','id',()=>{},{model}),status===429?/gateway_rate_limit/:/gateway_credential_rejected/);assert.equal(calls,1);
  }
+});
+
+const failedAccounting={...accounting,attempts:[{ordinal:1,model,outcome:'400',brokerCompleted:true,outputStarted:false,usage:null}]};
+const safeFailure={requestId:'synthetic-request',providerAccounting:failedAccounting,error_code:'CLIENT_REQUEST_INVALID',status_code:400,google_error:{error:{code:400,status:'INVALID_ARGUMENT'}}};
+function failureEnvironment(fetch,isolated){
+ const bindings={APIS_CALLER_TOKEN:'synthetic-caller-only',APIS:{fetch}};
+ if(!isolated)return bindings;
+ const noIO=()=>{throw Error('unexpected_io');};
+ return acceptanceEnvironment(new Request('https://yw-acceptance.bdfz.net'),{
+  ...bindings,ASSETS:{fetch:noIO},ACCEPTANCE_DB:{prepare:noIO},USER_CENTER_EVIDENCE:{resolveSession:noIO},
+  YW_ACCEPTANCE_USER_ID:'553',YW_FORMAL_APIS_VERSION:'11111111-1111-4111-8111-111111111111',
+  YW_ACCEPTANCE_DATABASE_ID:'22222222-2222-4222-8222-222222222222',YW_ACCEPTANCE_ACTIVATION_SHA256:'a'.repeat(64),
+  YW_ACCEPTANCE_EXPIRES_AT:new Date(Date.now()+60000).toISOString(),
+ });
+}
+async function rejectedFailure(body=safeFailure,{isolated=true,status=400}={}){
+ let calls=0;
+ const env=failureEnvironment(async req=>{
+  calls++;assert.equal(req.headers.get('x-request-id'),'synthetic-request');
+  assert.equal((await req.json()).providerAttemptLimit,1);
+  return new Response(JSON.stringify(body),{status,headers:{'content-type':'application/json','retry-after':'2'}});
+ },isolated);
+ let failure;
+ await assert.rejects(callDialogueModel(env,'synthetic prompt','synthetic-request',()=>{throw Error('unexpected_reply');},{model,providerAttemptLimit:1}),error=>{failure=error;return error.message===(status===429?'gateway_rate_limit':[401,403].includes(status)?'gateway_credential_rejected':'gateway_unavailable');});
+ assert.equal(calls,1);return failure;
+}
+test('isolated HTTP400 retains only classified diagnostics after correlated accounting validation',async()=>{
+ const failure=await rejectedFailure();
+ assert.deepEqual(failure.gatewayFailure,{
+  requestId:'synthetic-request',httpStatus:400,retryAfterMs:2000,providerAccounting:failedAccounting,partialOutput:false,retryable:false,
+  diagnostic:{errorCode:'CLIENT_REQUEST_INVALID',statusCode:400,googleError:{code:400,status:'INVALID_ARGUMENT'}},
+ });
+ const saved=JSON.parse(JSON.stringify({gatewayFailure:failure.gatewayFailure}));
+ assert.deepEqual(saved.gatewayFailure.diagnostic,failure.gatewayFailure.diagnostic);
+});
+test('isolated HTTP400 strips messages, details, keys, unknown strings and malformed types',async()=>{
+ const sensitive='synthetic-private-prompt-path-credential';
+ const enriched={...safeFailure,message:sensitive,body:sensitive,source_api_tried:sensitive,google_error:{error:{...safeFailure.google_error.error,message:sensitive,details:[{value:sensitive}],nested:{status:sensitive}}}};
+ const retained=(await rejectedFailure(enriched)).gatewayFailure;
+ assert.deepEqual(retained.diagnostic,{errorCode:'CLIENT_REQUEST_INVALID',statusCode:400,googleError:{code:400,status:'INVALID_ARGUMENT'}});
+ assert(!JSON.stringify(retained).includes(sensitive));
+ for(const value of [sensitive,'400',399,600,400.5,null,true,[],{},['INVALID_ARGUMENT']]){
+  const error=await rejectedFailure({...safeFailure,error_code:value,status_code:value,google_error:{error:{code:value,status:value,message:sensitive}}});
+  assert.equal(error.gatewayFailure.diagnostic,undefined);
+  assert(!JSON.stringify(error.gatewayFailure).includes(sensitive));
+ }
+ for(const google_error of [sensitive,JSON.stringify(safeFailure.google_error),[],null,{status:'INVALID_ARGUMENT',code:400},{error:['INVALID_ARGUMENT'] }]){
+  const error=await rejectedFailure({requestId:safeFailure.requestId,providerAccounting:failedAccounting,google_error});
+  assert.equal(error.gatewayFailure.diagnostic,undefined);
+ }
+});
+test('isolated HTTP400 never infers provider classification from the outer status',async()=>{
+ const error=await rejectedFailure({requestId:safeFailure.requestId,providerAccounting:failedAccounting});
+ assert.equal(error.gatewayFailure.diagnostic,undefined);assert.equal(error.gatewayFailure.httpStatus,400);
+ const partial=await rejectedFailure({...safeFailure,error_code:'UNKNOWN_GATEWAY_CODE',status_code:'400',google_error:{error:{status:'FAILED_PRECONDITION',code:'400'}}});
+ assert.deepEqual(partial.gatewayFailure.diagnostic,{googleError:{status:'FAILED_PRECONDITION'}});
+});
+test('isolated HTTP400 rejects diagnostics on mismatched correlation or invalid accounting',async()=>{
+ for(const patch of [{requestId:'other-request'},{providerAccounting:null},{providerAccounting:{...failedAccounting,providerAttemptCount:2}},{providerAccounting:{...failedAccounting,attempts:[{...failedAccounting.attempts[0],model:'other-model'}]}}]){
+  const error=await rejectedFailure({...safeFailure,...patch});
+  assert.deepEqual(error.gatewayFailure,{requestId:'synthetic-request',httpStatus:400,retryAfterMs:2000});
+ }
+});
+test('ordinary HTTP400 and other isolated failures keep their existing contract and dispatch count',async()=>{
+ const error=await rejectedFailure(safeFailure,{isolated:false});
+ assert.deepEqual(error.gatewayFailure,{requestId:'synthetic-request',httpStatus:400,providerAccounting:failedAccounting,partialOutput:false,retryable:false});
+ const unavailable=await rejectedFailure(safeFailure,{status:503});
+ assert.equal(unavailable.gatewayFailure.diagnostic,undefined);
+ for(const status of [401,403,429])assert.equal((await rejectedFailure(safeFailure,{status})).gatewayFailure,undefined);
 });
 
 test('broken, wrong-model, wrong-usage and partial-error streams cannot become accepted',async()=>{
