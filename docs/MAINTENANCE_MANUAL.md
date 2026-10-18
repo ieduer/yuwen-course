@@ -1,4 +1,10 @@
-## 2026-10-18T23:19:54.743443+00:00 — separate synthetic cause diagnostic locally built, unapproved
+## 2026-10-18T23:40:32Z — single cause diagnostic terminal503; restored; mode-focused sample acceptance
+
+Current 2026-10-18T23:40:32Z: approved one-shot cause diagnostic at source27d699d/artifactde89c610 deployed only to isolated host and returned HTTP503 UNAVAILABLE, one completed provider attempt, no output/usage. POST/GET terminal receiptf40da9c9 agrees. Controlled rollback restored62e990f3/sourcef7e5e241 and original config; diagnostic setting removed, formal YW/APIS preserved. Both receipts consumed. shared84/87(A1three retained), publisher548/550, cumulative32provider, unknown504000micros,paid0; historical22accepted8failed unchanged. Originalcase23 cause UNKNOWN. Owned runtime1482files230400619bytes removed, closeout passed. Detailed user goal retained; newer user amendment requires a few representative lessons to run the complete mode, not fixed28/all189 exhaustive acceptance. All189 implementation and data/scoring preservation remain; formal publication still needs concrete go/no-go. Evidence: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/case23-recovery/schema/synthetic-cause-live-01a15131/REPORT.md. Goal: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/case23-recovery/schema/synthetic-cause-live-01a15131/GOAL-CURRENT.md plus newer GOAL-AMENDMENT.md. No remaining model authority; continue independent local mode preparation.
+
+Prior local candidate/unapproved sections below are historical. They retain source/test evidence, not live authorization.
+
+## Historical 2026-10-18T23:19:54.743443+00:00 — separate synthetic cause diagnostic locally built, unapproved
 
 Source b1a4bf71994eee4dacc4c1e75824a9dd995e104c adds bounded error categories and
 four allowlisted parameter roots only inside the fixed synthetic endpoint.
