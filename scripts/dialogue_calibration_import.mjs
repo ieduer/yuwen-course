@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {isDeepStrictEqual} from 'node:util';
 import packet from '../site/dialogue-full-language-packet.json' with {type:'json'};
-import {FULL_OPERATION,FULL_MODEL,RELEASE_CASE_COUNT,releaseCases,fullReceipt,fullMaterialize,digest} from '../site/dialogue-full-language.js';
+import {FULL_OPERATION,FULL_MODEL,RELEASE_CASE_COUNT,releaseCases,fullReceipt,fullMaterialize,digest,QUOTE_RECOVERY,recoveryPrompt,quotationRecovery,recoveryFailureMatches} from '../site/dialogue-full-language.js';
 import {validateProposal} from '../site/dialogue-policy.js';
 import {reconciledCost} from '../site/dialogue-budget.js';
 import {projectReleaseJson} from './build_release_site.mjs';
@@ -33,14 +33,20 @@ function validateExecution(e){
 export async function inspectCalibrationReadback(readback,execution,load=loadCurriculum){
  validateExecution(execution);
  const c=releaseCases(packet).find(c=>c.id===readback?.caseId);assert(c,'unknown or deferred case');
- const attemptId=`${FULL_OPERATION}:${c.id}:1`;
- same(readback.operation,FULL_OPERATION,'operation mismatch');same(readback.attempt,1,'attempt mismatch');same(readback.attemptId,attemptId,'attempt identity mismatch');
+ const recovery=quotationRecovery(execution),attempt=recovery&&c.id===recovery.caseId?2:1,promptDigest=attempt===2?recovery.promptDigest:c.promptDigest,recoveryOf=attempt===2?recovery.receiptDigest:null;
+ const attemptId=`${FULL_OPERATION}:${c.id}:${attempt}`;
+ if(recovery){
+  const failed=readback.recoveryFailure;assert(failed,'immutable failed receipt required');same(await fullReceipt(failed),recovery.receiptDigest,'failed receipt changed');
+  assert(recoveryFailureMatches(readback.rows?.find(r=>r.attemptId===recovery.attemptId)),'failed accounting changed');
+  same(failed.student_id,readback.rawRow?.student_id,'recovery owner mismatch');
+ }
+ same(readback.operation,FULL_OPERATION,'operation mismatch');same(readback.attempt,attempt,'attempt mismatch');same(readback.attemptId,attemptId,'attempt identity mismatch');
  for(const key of ['sourceCommit','artifactSha256','apisVersion','ownerRef','activationDigest','hardExpiry'])same(readback[key],execution[key],`execution ${key} mismatch`);
- same(readback.packetDigest,packet.sourceDigest,'packet mismatch');same(readback.sourceDigest,c.sourceDigest,'source pin mismatch');same(readback.promptDigest,c.promptDigest,'prompt pin mismatch');same(readback.rawSourceDigest,c.rawSourceDigest,'raw source pin mismatch');same(readback.projectionVersion,packet.projectionVersion,'projection mismatch');
+ same(readback.packetDigest,packet.sourceDigest,'packet mismatch');same(readback.sourceDigest,c.sourceDigest,'source pin mismatch');same(readback.promptDigest,promptDigest,'prompt pin mismatch');same(readback.rawSourceDigest,c.rawSourceDigest,'raw source pin mismatch');same(readback.projectionVersion,packet.projectionVersion,'projection mismatch');
  assert(readback.history?.reconciled===true,'history unreconciled');same(readback.history.receiptSetDigest,execution.priorReceiptSetDigest,'history digest mismatch');
  const raw=load(c.lessonId),source=JSON.parse(projectReleaseJson(`dialogue-curriculum/${c.lessonId}.json`,JSON.stringify(raw)));
  same(await digest(raw),c.rawSourceDigest,'current raw curriculum changed');same(await digest(source),c.sourceDigest,'current projected curriculum changed');
- const fixture=fullMaterialize(c,source);same(await digest(fixture.prompt),c.promptDigest,'reconstructed prompt changed');
+ const fixture=fullMaterialize(c,source);same(await digest(fixture.prompt),c.promptDigest,'reconstructed prompt changed');if(recoveryOf)fixture.prompt=recoveryPrompt(fixture.prompt);same(await digest(fixture.prompt),promptDigest,'recovery prompt changed');
  const row=readback.rawRow;assert(row,'raw row missing');same(row.turn_id,attemptId,'raw attempt mismatch');same(row.session_id,attemptId+':session','raw session mismatch');
  assert(Number.isSafeInteger(row.student_id)&&row.student_id>0&&row.student_id===row.session_owner,'raw owner mismatch');same(sha('dialogue-owner:'+row.student_id),execution.ownerRef,'owner identity mismatch');
  same(row.state,'finished','unfinished or failed case');same(row.reserved_micros,84000,'reservation changed');
@@ -48,7 +54,7 @@ export async function inspectCalibrationReadback(readback,execution,load=loadCur
  const started=Date.parse(row.created_at),ended=Date.parse(row.finished_at);assert(Number.isFinite(started)&&Number.isFinite(ended)&&started>=Date.parse(execution.readyAt)&&started<Date.parse(execution.budget.validUntil)&&ended>=started&&ended<Date.parse(execution.hardExpiry),'receipt outside execution window');
  same(await fullReceipt(row),readback.receiptDigest,'raw receipt digest mismatch');
  const meta=parse(row.curriculum_json,'source metadata missing');
- same(meta,{syntheticOnly:true,caseId:c.id,sourceDigest:c.sourceDigest,rawSourceDigest:c.rawSourceDigest,projectionVersion:packet.projectionVersion,promptDigest:c.promptDigest,packetDigest:packet.sourceDigest,recoveryOf:null},'raw source metadata mismatch');
+ same(meta,{syntheticOnly:true,caseId:c.id,sourceDigest:c.sourceDigest,rawSourceDigest:c.rawSourceDigest,projectionVersion:packet.projectionVersion,promptDigest,packetDigest:packet.sourceDigest,recoveryOf},'raw source metadata mismatch');
  const result=parse(row.details_json,'raw result missing');same(result,readback.result,'readback result differs from raw');
  assert(result.syntheticOnly===true&&result.expectedVerdictMatches===true&&result.semanticReviewRequired===true&&!result.boundaryStop&&!result.received,'result not mechanically finished');
  same(result.model,FULL_MODEL,'model mismatch');assert(typeof result.modelVersion==='string'&&result.modelVersion.trim(),'actual model version missing');
@@ -58,7 +64,7 @@ export async function inspectCalibrationReadback(readback,execution,load=loadCur
  const proposal=validateProposal(result.value,{...fixture,hints:fixture.turns.filter(t=>t.role==='teacher').map(t=>t.content)});
  const verdict=proposal.assessments.find(a=>a.objectiveId===c.objectiveId)?.outcome||'no_assessment';same(result.verdict,verdict,'stored verdict differs');
  assert((c.expected==='demonstrated'?verdict==='demonstrated':verdict!=='demonstrated')&&!proposal.assessments.some(a=>a.outcome==='demonstrated'&&a.objectiveId!==c.objectiveId),'expected verdict failed');
- return {caseId:c.id,lessonId:c.lessonId,objectiveId:c.objectiveId,attemptId,receiptDigest:readback.receiptDigest,readbackDigest:await digest(readback),sourceDigest:c.sourceDigest,promptDigest:c.promptDigest,modelVersion:result.modelVersion,accountedMicros:cost,usage:result.usage,firstTokenMs:result.firstTokenMs??null,totalDurationMs:result.totalDurationMs??null,semanticReviewRequired:true};
+ return {caseId:c.id,lessonId:c.lessonId,objectiveId:c.objectiveId,attemptId,receiptDigest:readback.receiptDigest,readbackDigest:await digest(readback),sourceDigest:c.sourceDigest,promptDigest,recoveryOf,modelVersion:result.modelVersion,accountedMicros:cost,usage:result.usage,firstTokenMs:result.firstTokenMs??null,totalDurationMs:result.totalDurationMs??null,semanticReviewRequired:true};
 }
 
 export async function inspectCalibrationBatch(readbacks,execution,load=loadCurriculum){
@@ -89,7 +95,7 @@ export async function inspectCalibrationBatch(readbacks,execution,load=loadCurri
   }
  }
  assert(changes.length+preserved.length===9,'all9 representative language items required');
- return {status:'mechanical-pass-semantic-review-required',sourceCommit:execution.sourceCommit,artifactSha256:execution.artifactSha256,apisVersion:execution.apisVersion,packetDigest:sourceDigest,executionDigest:await digest(execution),model:FULL_MODEL,modelVersion:cases[0].modelVersion,cases,accountedMicros:cases.reduce((n,c)=>n+c.accountedMicros,0),changes,preserved,sourceChanges,sourceFiles:packet.sourceFiles,reviewRequiredCaseIds:cases.map(c=>c.caseId),overlayApplied:false,paidCallsAuthorized:false,releaseAuthorized:false,notice:'Local hashes and structural checks do not authenticate provider evidence or certify author fidelity and teaching quality. Review original readbacks and every case before applying this exact diff through the existing source/release workflow. Never regenerate consumed packets.'};
+ return {status:'mechanical-pass-semantic-review-required',recoveryReadbacks:execution.recoveryReadbacks||[],retainedFailedAttempts:quotationRecovery(execution)?[{attemptId:QUOTE_RECOVERY.attemptId,receiptDigest:QUOTE_RECOVERY.receiptDigest,accountedMicros:0,reservedMicros:84000,providerAttempts:1}]:[],sourceCommit:execution.sourceCommit,artifactSha256:execution.artifactSha256,apisVersion:execution.apisVersion,packetDigest:sourceDigest,executionDigest:await digest(execution),model:FULL_MODEL,modelVersion:cases[0].modelVersion,cases,accountedMicros:cases.reduce((n,c)=>n+c.accountedMicros,0),changes,preserved,sourceChanges,sourceFiles:packet.sourceFiles,reviewRequiredCaseIds:cases.map(c=>c.caseId),overlayApplied:false,paidCallsAuthorized:false,releaseAuthorized:false,notice:'Local hashes and structural checks do not authenticate provider evidence or certify author fidelity and teaching quality. Review original readbacks and every case before applying this exact diff through the existing source/release workflow. Never regenerate consumed packets.'};
 }
 
 // A source-data projection, not a semantic approval or execution capability.
@@ -120,7 +126,7 @@ export async function materializeCalibrationOverlay(curricula,inspection){
  same(inspection.model,FULL_MODEL,'overlay model mismatch');assert(hex(inspection.sourceCommit,40)&&hex(inspection.artifactSha256,64)&&hex(inspection.executionDigest,64)&&uuid(inspection.apisVersion),'overlay execution pins missing');
  for(const c of releaseCases(packet)){
   const checked=inspection.cases.find(x=>x.caseId===c.id);assert(checked,'inspected case missing');
-  same(checked.lessonId,c.lessonId,'inspected lesson mismatch');same(checked.objectiveId,c.objectiveId,'inspected objective mismatch');same(checked.sourceDigest,c.sourceDigest,'inspected source mismatch');same(checked.promptDigest,c.promptDigest,'inspected prompt mismatch');same(checked.attemptId,`${FULL_OPERATION}:${c.id}:1`,'inspected attempt mismatch');
+  same(checked.lessonId,c.lessonId,'inspected lesson mismatch');same(checked.objectiveId,c.objectiveId,'inspected objective mismatch');same(checked.sourceDigest,c.sourceDigest,'inspected source mismatch');const recovered=quotationRecovery(inspection)&&c.id===QUOTE_RECOVERY.caseId;same(checked.promptDigest,recovered?QUOTE_RECOVERY.promptDigest:c.promptDigest,'inspected prompt mismatch');same(checked.attemptId,`${FULL_OPERATION}:${c.id}:${recovered?2:1}`,'inspected attempt mismatch');same(checked.recoveryOf,recovered?QUOTE_RECOVERY.receiptDigest:null,'inspected recovery link mismatch');
   assert(hex(checked.receiptDigest,64)&&hex(checked.readbackDigest,64)&&checked.semanticReviewRequired===true,'inspected receipt references missing');
   assert(Number.isSafeInteger(checked.accountedMicros)&&checked.accountedMicros>=0&&checked.accountedMicros<=84000,'inspected cost invalid');
   assert(typeof inspection.modelVersion==='string'&&inspection.modelVersion.trim(),'inspected model version missing');same(checked.modelVersion,inspection.modelVersion,'inspected model drift');

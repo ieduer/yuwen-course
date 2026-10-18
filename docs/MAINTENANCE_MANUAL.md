@@ -1,3 +1,22 @@
+## 2026-10-18 — single contiguous-quotation recovery (local candidate)
+
+The owner authorized one new attempt for `language-er-independent`, bound to the
+retained failed attempt-1 receipt `77c5dccbb48ed924abfe6fa7082dd7d73cd00fdacb4010e84a3b0e69433e9252`.
+The existing activation's `recoveryReadbacks` accepts only that exact case, receipt,
+reason and derived prompt. Attempt 2 appends a format-only instruction requiring
+separate continuous original quotations; the original packet and other 27 prompts
+remain unchanged. The original quotation validator remains unchanged.
+
+Both attempts remain charged and independently readable. Admission verifies the
+failed receipt before each call, atomically compares its persisted source/result,
+and caps calibration at 29 charges only when this exact recovery is enabled.
+Other cases require the recovery to finish successfully. Another failure, unknown
+result, mismatch or the original 13:14:55.135 UTC deadline stops execution. No
+additional retry, secret installation, APIS change or window renewal is granted.
+The existing schema-v1 publisher must bind the exact new source/artifact/config;
+any additional management or aggregate model allowance still requires approval.
+Local delta evidence is distinct from a deployed or accepted recovery.
+
 ## 2026-10-18 — Controlled isolated deployment-only recovery
 
 The existing schema-v1 publisher can consume a fresh receipt after a complete,
