@@ -238,3 +238,11 @@ cfTest('deadline: narrower acceptance expiry still blocks amended authority',asy
  f.env.YW_CALIBRATION_FULL_LANGUAGE_JSON=JSON.stringify(f.authority);
  assert.equal(fullActivation(f.env,packet,at),null);assert.equal(f.calls(),0);
 });
+
+const finiteAccepted=process.env.YW_CASE2_ACCEPTED_READBACK?JSON.parse(fs.readFileSync(process.env.YW_CASE2_ACCEPTED_READBACK)).response.result.value.body:null;
+test('import deadline: real unchanged receipt passes exact amended window and rejects broader scope',{skip:!finiteAccepted&&'Exact saved receipt required'},async()=>{
+ const r=finiteAccepted,e=JSON.parse(fs.readFileSync(process.env.YW_CASE2_EXECUTION_PINS));
+ const checked=await inspectCalibrationReadback(r,e);assert.equal(checked.receiptDigest,r.receiptDigest);
+ for(const delta of [{readyAt:'2026-10-18T07:15:00.000Z'},{hardExpiry:'2026-10-18T14:30:00.001Z'},{recoveryReadbacks:[Q,T,C,CQ]}])await assert.rejects(inspectCalibrationReadback(r,{...e,...delta}),/window/);
+ const altered=structuredClone(r);altered.recoveryFailures[4].accounted_micros=0;await assert.rejects(inspectCalibrationReadback(altered,e),/failed receipt/);
+});

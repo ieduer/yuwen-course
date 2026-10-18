@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {isDeepStrictEqual} from 'node:util';
 import packet from '../site/dialogue-full-language-packet.json' with {type:'json'};
-import {FULL_OPERATION,FULL_MODEL,RELEASE_CASE_COUNT,releaseCases,fullReceipt,fullMaterialize,digest,QUOTE_RECOVERY,needsQuotationInstruction,recoveryPrompt,caseRecovery,recoveryChain,recoveryFailureMatches} from '../site/dialogue-full-language.js';
+import {FULL_OPERATION,fullWindowValid,FULL_MODEL,RELEASE_CASE_COUNT,releaseCases,fullReceipt,fullMaterialize,digest,QUOTE_RECOVERY,needsQuotationInstruction,recoveryPrompt,caseRecovery,recoveryChain,recoveryFailureMatches} from '../site/dialogue-full-language.js';
 import {validateProposal} from '../site/dialogue-policy.js';
 import {reconciledCost} from '../site/dialogue-budget.js';
 import {projectReleaseJson} from './build_release_site.mjs';
@@ -21,7 +21,7 @@ const same=(a,b,label)=>assert(isDeepStrictEqual(a,b),label);
 function validateExecution(e){
  assert(hex(e?.sourceCommit,40)&&hex(e.artifactSha256,64)&&hex(e.activationDigest,64)&&hex(e.ownerRef,64)&&hex(e.priorReceiptSetDigest,64),'execution pins required');
  assert(uuid(e.apisVersion),'APIS version required');
- assert(Number.isFinite(Date.parse(e.readyAt))&&Number.isFinite(Date.parse(e.hardExpiry))&&Date.parse(e.hardExpiry)>Date.parse(e.readyAt)&&Date.parse(e.hardExpiry)-Date.parse(e.readyAt)<=21600000,'execution window invalid');
+ assert(Number.isFinite(Date.parse(e.readyAt))&&Number.isFinite(Date.parse(e.hardExpiry))&&Date.parse(e.hardExpiry)>Date.parse(e.readyAt)&&fullWindowValid({...e,operation:FULL_OPERATION}),'execution window invalid');
  assert(e.budget?.model===FULL_MODEL&&e.budget.reserveMicros===84000&&e.budget.providerAttemptLimit===1&&e.budget.logicalProviderAttemptLimit===1,'exact recorded budget required');
  const b=e.budget;
  assert(b.currency==='USD'&&b.maxInputTokens===100000&&b.maxOutputTokens===2400&&Number.isFinite(Date.parse(b.validUntil))&&Date.parse(b.validUntil)>Date.parse(e.readyAt),'recorded token and price bounds required');

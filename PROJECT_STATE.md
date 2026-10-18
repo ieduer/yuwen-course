@@ -1,3 +1,19 @@
+## 2026-10-18 — exact case2 recovery accepted; remaining full goal open
+
+Isolated source2bd8823/deployment7e38db78 completed case2 attempt4 exactly once.
+Receipt5331ec67 has POST/GET agreement, one provider OK, known zero for this call,
+and correct needs_practice with contiguous original quotations. All five failures,
+case1 accepted result and unknown252000micros remain. Formal189 is not released.
+The offline importer now uses the same receipt-bound absolute-window predicate as
+the isolated runtime. The unmodified real receipt passes; changed starts, later
+expiry, missing pins and altered failed accounting are rejected. This fixes only
+approved deadline consistency and does not weaken source/semantic/quotation checks.
+The initial local importer rejection is retained as superseded local evidence.
+The original start remains07:14:55.135Z; explicitly amended cutoff14:30UTC applies.
+Current evidence: case2-finite-disposition/deadline/SEMANTIC-REVIEW.json. Continue
+26 unchanged representative cases then existing E2E/My/publication gates; any new
+failed model case stops, no automatic recovery. Earlier sections are history.
+
 ## 2026-10-18 — bounded deadline candidate, inactive pending authorization evidence
 
 The exact fifth failure pin can support only the original start
