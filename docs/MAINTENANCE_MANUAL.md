@@ -1,3 +1,20 @@
+## 2026-10-18 — inactive finite post-failure candidate
+
+A proposed additional case2 attempt4 is pinned only to retained terminal receipt
+c73e73d3ba5cb71871752c746d2b0428f3d52acb6ba0366dbf2c5ef9b8de1ba6.
+Existing four-pin activation still rejects it. No additional model attempt or
+production/configuration write is authorized by this local source. The new pin
+preserves the exact repaired prompt, all five failures and three unknown usage
+reservations, and the accepted case1 result. Dispatch retains atomic reservation
+and idempotency; any new failed/unknown/invalid result stops the operation, and
+attempt5 is not admitted. Model, LOW, JSON, timer, curriculum and evidence
+validator remain unchanged. The original13:14:55.135UTC cutoff is not extended.
+
+APIS source review and original receipts show intermittent outcomes, not a proven
+runtime repair or recovery after the latest failure. Only explicit human approval
+of the exact extra finite risk disposition can activate this candidate. Current
+runtime remains f58ac141/eace9a43; all189 release remains incomplete.
+
 ## 2026-10-18 — local diagnostic correlation repair
 
 The reviewed saved Cloudflare metadata places the request identifier under

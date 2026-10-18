@@ -40,7 +40,7 @@ export async function handleFullLanguageCalibration(request,env,student,callMode
  const {sourceDigest,...unsignedPacket}=packet;
  if(packet.operation!==OP||await digest(unsignedPacket)!==sourceDigest||packet.cases.length!==FULL_CASE_COUNT)return json({code:'calibration_packet_invalid'},503);
  const c=packet.cases.find(c=>c.id===url.searchParams.get('calibration')),attempt=Number(url.searchParams.get('attempt')||1);
- if(!c||c.lessonId!==url.searchParams.get('lessonId')||![1,2,3].includes(attempt))return json({code:'calibration_case_invalid'},400);
+ if(!c||c.lessonId!==url.searchParams.get('lessonId')||![1,2,3,4].includes(attempt))return json({code:'calibration_case_invalid'},400);
  const id=prefix+c.id+':'+attempt,sessionId=id+':session',db=env.READING_DB,ownerRef=await sha(`dialogue-owner:${student.id}`);
  const authority=fullActivation(env,packet),recovery=quotationRecovery(authority),attemptRecovery=recoveryChain(authority).find(p=>p.caseId===c.id&&p.attempt===attempt),recoveryOf=attemptRecovery?attemptRecovery.receiptDigest:null,promptDigest=attemptRecovery?attemptRecovery.promptDigest:c.promptDigest;
  if(attempt>1&&!attemptRecovery)return json({code:'calibration_case_invalid'},400);

@@ -187,3 +187,33 @@ cqTest('case2 quote: stale pins, refunded unknowns and altered failure cannot au
  const f=await case2QuoteFixture(t);for(const pins of [[Q,T,CQ],[Q,T,C,{...CQ,promptDigest:C.promptDigest}],[Q,T,C,CQ,CQ]])assert.deepEqual(recoveryChain({recoveryReadbacks:pins}),[]);
  f.sql.prepare("UPDATE dialogue_events SET details_json=details_json||' ' WHERE id=?").run(CQ.attemptId+':result');assert.equal((await f.request(f.c,3)).code,'full_recovery_receipt_mismatch');
 });
+
+import {CASE2_FINITE_RECOVERY as CF} from '../site/dialogue-full-language.js';
+const case2FiniteRaw=process.env.YW_CASE2_FINITE_READBACK?JSON.parse(fs.readFileSync(process.env.YW_CASE2_FINITE_READBACK)).response.result.value.body:null;
+const cfTest=(name,fn)=>test(name,{skip:(!retained||!timed||!case2Raw||!case2QuoteRaw||!case2FiniteRaw)&&'Five retained failures required'},fn);
+async function finiteFixture(t){
+ const f=await case2QuoteFixture(t),r=case2FiniteRaw.rawRow;
+ f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,1,?,?,?,?,?,?)').run(r.session_id,'calibration:'+f.c.lessonId,r.turn_id,r.curriculum_json,packet.policyVersion,r.created_at,r.finished_at);
+ f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,'student','synthetic','synthetic_calibration',?,?)").run(r.turn_id,r.session_id,f.c.id,CF.promptDigest,packet.policyVersion,r.created_at);
+ f.sql.prepare("INSERT INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,reserved_micros,accounted_micros,finished_at,budget_policy_json,usage_json) VALUES(?,?,1,?,2400,'review',?,84000,NULL,?,?,NULL)").run(r.turn_id,r.session_id,r.day,r.created_at,r.finished_at,r.budget_policy_json);
+ f.sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(r.turn_id+':result',r.session_id,r.turn_id,'synthetic_calibration_unconfirmed',r.details_json,r.finished_at);
+ return f;
+}
+function activateFinite(f){Object.assign(f.authority,{maxAttempts:33,maxReservedMicros:33*84000,recoveryReadbacks:[Q,T,C,CQ,CF]});f.env.YW_CALIBRATION_FULL_LANGUAGE_JSON=JSON.stringify(f.authority);}
+cfTest('finite: current four-pin activation cannot admit attempt4; altered new pin fails closed',async t=>{
+ const f=await finiteFixture(t);assert.equal((await f.request(f.c,4)).code,'calibration_case_invalid');
+ for(const pins of [[Q,T,C,CQ,{...CF,receiptDigest:H}],[Q,T,C,CQ,{...CF,promptDigest:C.promptDigest}],[Q,T,C,CQ,CF,CF]])assert.deepEqual(recoveryChain({recoveryReadbacks:pins}),[]);
+});
+cfTest('finite: one exact attempt4 preserves five failures and case1; same id never dispatches twice',async t=>{
+ const f=await finiteFixture(t);activateFinite(f);let sends=0;
+ const provider=async(e,p,id,onReply,b)=>{sends++;assert.equal(await digest(p),CQ.promptDigest);assert.equal(b.providerAttemptLimit,1);const stored=f.sql.prepare('SELECT state,reserved_micros FROM dialogue_calls WHERE turn_id=?').get(id);assert.equal(stored.state,'reserved');assert.equal(stored.reserved_micros,84000);const v=structuredClone(case2QuoteRaw.result.received),q=v.value.assessments[0].evidence[0];v.value.assessments[0].evidence=[{...q,passageQuote:'顺风而呼，声非加疾也，而闻者彰。'},{...q,passageQuote:'君子博学而日参省乎己'}];return v;};
+ const r=await f.request(f.c,4,provider);assert.equal(r.call.state,'finished');assert.equal(sends,1);assert.deepEqual(await Promise.all(r.recoveryFailures.map(fullReceipt)),[Q,T,C,CQ,CF].map(x=>x.receiptDigest));assert.equal(r.rows.filter(r=>r.accountedMicros===null).length,3);
+ const execution={...f.authority,activationDigest:f.authority.registryReceiptDigest,ownerRef:r.ownerRef,budget:JSON.parse(r.rawRow.budget_policy_json)};assert.equal((await inspectCalibrationReadback(r,execution)).attemptId,OP+':'+CF.caseId+':4');
+ const again=await f.request(f.c,4,provider);assert.equal(again.receiptDigest,r.receiptDigest);const first=await(await handle(req(target,null,3),f.env,student,provider)).json();assert.equal(first.call.state,'finished');assert.equal(sends,1);
+});
+cfTest('finite: new timeout stays unknown, stops all later cases and denies attempt5',async t=>{
+ const f=await finiteFixture(t);activateFinite(f);let sends=0;const provider=async()=>{sends++;const e=Error('gateway_unavailable');e.gatewayFailure=case2FiniteRaw.result.gatewayFailure;throw e;};const r=await f.request(f.c,4,provider);assert.equal(r.call.state,'review');assert.equal(r.call.accounted_micros,null);await f.request(f.c,4,provider);assert.equal(sends,1);assert.equal((await f.request(f.c,5,provider)).code,'calibration_case_invalid');assert.equal(fullAdmission({authority:f.authority,packet,caseId:packet.cases[2].id,rows:r.rows,history:r.history,capacity:r.capacity,now:at}).code,'full_boundary_stop');
+});
+cfTest('finite: altered unknown liability and original expiry prevent dispatch',async t=>{
+ const f=await finiteFixture(t);activateFinite(f);f.sql.prepare('UPDATE dialogue_calls SET accounted_micros=0 WHERE turn_id=?').run(CF.attemptId);assert.equal((await f.request(f.c,4)).code,'full_recovery_receipt_mismatch');assert.equal(fullActivation(f.env,packet,Date.parse(expiry)),null);
+});

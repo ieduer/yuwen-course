@@ -1,3 +1,5 @@
+> Current local candidate: exact case2 attempt4 pin is INACTIVE and UNAPPROVED; no new send/deploy. Existing activation cannot admit it. Original deadline, all receipts/unknown252000 and case1 success preserved. Full189 still blocked.
+
 > Current 2026-10-18: local diagnostic reader correlation repair only; 11 focused checks pass. Runtime remains f58ac141/eace9a43, case2 attempt3 terminal TIMEOUT; no new model/deploy, unknown252000micros and original13:14:55.135UTC cutoff. All189 goal remains incomplete; current canonical evidence: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/case2-quotation-repair/REPORT.md. Earlier entries are history.
 
 <!-- yw-p2r5-01a14507 -->
