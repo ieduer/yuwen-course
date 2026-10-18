@@ -94,6 +94,7 @@ export function validateDeployOnlyProof(receipt,registry,now=Date.now(),load=rea
  assert(receipt.http_budget?.max_requests===17&&receipt.http_budget.shared_configuration_max===0&&d.deploy_timeout_ms===300000,'bounded deployment-only policy required');
  return prior;
 }
+export function requestCeiling(receipt){const cap=receipt.http_budget?.max_requests;assert(Number.isInteger(cap)&&cap>0&&cap<=160,'finite receipt request ceiling required');return Math.min(receipt.isolated.deploy_only?17:160,cap);}
 export function requestTimeout(receipt,state,id,method,now=Date.now()){
  const boundedDeploy=receipt.isolated.deploy_only||receipt.http_budget?.deploy_timeout_ms===300000;const base=method==='GET'?15000:boundedDeploy&&id==='deploy'?300000:120000;
  if(!boundedDeploy)return base;const full=JSON.parse(receipt.isolated.config.env_vars.YW_CALIBRATION_FULL_LANGUAGE_JSON.value),remaining=Math.min(Date.parse(receipt.expires_at),Date.parse(state.startedAt)+900000,Date.parse(full.hardExpiry))-now;assert(remaining>0,'deadline expired');return Math.min(base,remaining);
@@ -170,7 +171,7 @@ export async function execute(receiptPath){
   assert(fs.readFileSync(FIXED.registry).equals(before)&&fs.readFileSync(receiptPath).equals(bytes),'authority changed');
   approval.consumed=true;approval.attempted_at=timestamp();project.staged_manual_channel.status='consumed_attempting';write(FIXED.registry,registry);
   const call=async(id,method,url,body,uploadToken)=>{
-   assert(!state.terminal&&!state.requests.some(r=>r.id===id)&&Date.now()<Date.parse(receipt.expires_at)&&Date.now()-Date.parse(state.startedAt)<900000&&state.requests.length<(receipt.isolated.deploy_only?17:160),'terminal, duplicate, deadline or request ceiling');
+   assert(!state.terminal&&!state.requests.some(r=>r.id===id)&&Date.now()<Date.parse(receipt.expires_at)&&Date.now()-Date.parse(state.startedAt)<900000&&state.requests.length<requestCeiling(receipt),'terminal, duplicate, deadline or request ceiling');
    assert(method==='GET'&&(url===PROJECT||url===FORMAL||url===PROJECT+'/domains'||url===PROJECT+'/upload-token'||url===BASE+'/workers/scripts/apis/deployments'||url===BASE+'/workers/scripts/apis/settings'||url===BASE+'/workers/scripts/apis/schedules'||new RegExp('^'+PROJECT+'/deployments/[a-f0-9-]{36}$').test(url))||!receipt.isolated.deploy_only&&method==='PATCH'&&id==='config'&&url===PROJECT||method==='POST'&&(url===PROJECT+'/deployments'&&id==='deploy'||(receipt.isolated.deploy_only?['/pages/assets/check-missing']:['/pages/assets/check-missing','/pages/assets/upload','/pages/assets/upsert-hashes']).includes(url)),'request outside isolated allowlist');
    const headers={Authorization:'Bearer '+(uploadToken||token),...(receipt.isolated.deploy_only?{'accept-encoding':'identity'}:{})};let data;if(body instanceof FormData){const encoded=new Response(body);headers['content-type']=encoded.headers.get('content-type');data=Buffer.from(await encoded.arrayBuffer());}else if(body!==undefined){headers['content-type']='application/json';data=Buffer.from(JSON.stringify(body));}
    state.requestBytes+=data?.length||0;assert(state.requestBytes<=400*1024*1024,'request byte ceiling');state.requests.push({id,method,url,at:timestamp(),requestBytes:data?.length||0,complete:false});write(journalPath,state);
