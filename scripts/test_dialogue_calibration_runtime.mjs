@@ -25,7 +25,7 @@ function fixture(t) {
   const user={sourceSiteKey:'yw',authenticated:true,userId:700001,slug:'synthetic-acceptance',displayName:'Synthetic'};
   const bindings={
     YW_ACCEPTANCE_EXPIRES_AT:new Date(Date.now()+3600000).toISOString(), YW_ACCEPTANCE_USER_ID:'700001',
-    YW_ACCEPTANCE_APIS_VERSION:version, YW_ACCEPTANCE_DATABASE_ID:'aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee',
+    YW_FORMAL_APIS_VERSION:version, YW_ACCEPTANCE_DATABASE_ID:'aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee',
     ACCEPTANCE_DB:{prepare:text=>{calls.db++;return wrap(text);}, batch:async statements=>Promise.all(statements.map(s=>s.run()))},
     ASSETS:{fetch:async req=>{calls.assets++;const pathname=new URL(req.url).pathname;
       if(pathname==='/dialogue.html')return new Response(null,{status:308,headers:{location:'/dialogue'}});
@@ -33,7 +33,7 @@ function fixture(t) {
     USER_CENTER_EVIDENCE:{resolveSession:async()=>{calls.identity++;return user;},resolveNativeSession:async()=>({
       ...user,schemaVersion:'bdfz-native-auth/1',status:200,clientId:'yuwen-native-android',capability:'data',
     })},
-    APIS_ACCEPTANCE:{fetch:async()=>{calls.model++;return new Response(null,{status:503});}},
+    APIS_CALLER_TOKEN:'synthetic-caller-only',APIS:{fetch:async()=>{calls.model++;return new Response(null,{status:503});}},
   };
   const authenticated = (path,init={}) => request(path,{...init,headers:{cookie:'bdfz_uc_session=synthetic-'+crypto.randomUUID(),...init.headers}});
   return {sql,calls,bindings,user,authenticated};

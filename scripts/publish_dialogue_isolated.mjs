@@ -33,19 +33,19 @@ export function inventory(root){
 export function validateConfiguration(config,now=Date.now()){
  same(Object.keys(config).sort(),['compatibility_date','compatibility_flags','d1_databases','env_vars','fail_open','services'],'unexpected configuration capabilities');
  same(config.d1_databases,{ACCEPTANCE_DB:{id:FIXED.database}},'isolated D1 only');assert.equal(config.fail_open,false);assert(/^\d{4}-\d{2}-\d{2}$/.test(config.compatibility_date));same(config.compatibility_flags,[]);
- same(config.services,{USER_CENTER_EVIDENCE:{service:'bdfz-user-center',environment:'production',entrypoint:'YuwenEvidenceIdentity'},APIS_ACCEPTANCE:{service:'apis',environment:'production',entrypoint:'YwDialogueAcceptance20261012'}},'existing identity/APIS service only');
- const allowed=['YW_ACCEPTANCE_USER_ID','YW_ACCEPTANCE_EXPIRES_AT','YW_ACCEPTANCE_DATABASE_ID','YW_ACCEPTANCE_APIS_VERSION','YW_ACCEPTANCE_ACTIVATION_SHA256','YW_DIALOGUE_BUDGET_JSON','YW_DIALOGUE_PROVIDER_ATTEMPTS','YW_CALIBRATION_FULL_LANGUAGE_JSON','YW_FULL_LANGUAGE_ACTIVATION_SHA256','YW_E2E_AUTHORITY_JSON'];same(Object.keys(config.env_vars).sort(),allowed.sort(),'activation variables differ');
- const vars={};for(const [k,v]of Object.entries(config.env_vars)){same(Object.keys(v).sort(),['type','value']);assert(v.type==='plain_text'&&typeof v.value==='string');vars[k]=v.value;}
- const noIO=()=>{throw Error('configuration_check_has_no_io');};const env=acceptanceEnvironment(new Request(FIXED.origin),{...vars,ASSETS:{fetch:noIO},ACCEPTANCE_DB:{prepare:noIO},APIS_ACCEPTANCE:{fetch:noIO},USER_CENTER_EVIDENCE:{resolveSession:noIO}},now),full=fullActivation(env,packet,now);assert(full,'approved current full activation required');
+ same(config.services,{USER_CENTER_EVIDENCE:{service:'bdfz-user-center',environment:'production',entrypoint:'YuwenEvidenceIdentity'},APIS:{service:'apis',environment:'production'}},'existing identity/APIS service only');
+ const allowed=['APIS_CALLER_TOKEN','YW_ACCEPTANCE_USER_ID','YW_ACCEPTANCE_EXPIRES_AT','YW_ACCEPTANCE_DATABASE_ID','YW_FORMAL_APIS_VERSION','YW_ACCEPTANCE_ACTIVATION_SHA256','YW_DIALOGUE_BUDGET_JSON','YW_DIALOGUE_PROVIDER_ATTEMPTS','YW_CALIBRATION_FULL_LANGUAGE_JSON','YW_FULL_LANGUAGE_ACTIVATION_SHA256','YW_E2E_AUTHORITY_JSON'];same(Object.keys(config.env_vars).sort(),allowed.sort(),'activation variables differ');
+ const vars={};for(const [k,v]of Object.entries(config.env_vars)){if(k==='APIS_CALLER_TOKEN'){same(v,{type:'secret_text'},'caller must be an inherited secret, never a receipt value');vars[k]='offline-validation-only';continue;}same(Object.keys(v).sort(),['type','value']);assert(v.type==='plain_text'&&typeof v.value==='string');vars[k]=v.value;}
+ const noIO=()=>{throw Error('configuration_check_has_no_io');};const env=acceptanceEnvironment(new Request(FIXED.origin),{...vars,ASSETS:{fetch:noIO},ACCEPTANCE_DB:{prepare:noIO},APIS:{fetch:noIO},USER_CENTER_EVIDENCE:{resolveSession:noIO}},now),full=fullActivation(env,packet,now);assert(full,'approved current full activation required');
  const budget=JSON.parse(vars.YW_DIALOGUE_BUDGET_JSON);assert(budget.model==='gemini-3.8-flash'&&budget.reserveMicros===84000&&budget.globalDailyMicros<=50000000&&budget.userDailyMicros<=50000000&&vars.YW_DIALOGUE_PROVIDER_ATTEMPTS==='3','fixed model/budget required');
  assert(budget.currency==='USD'&&/^[-\w.]{1,80}$/.test(budget.version||'')&&Date.parse(budget.validUntil)>=Date.parse(full.hardExpiry),'price policy must cover approved window');
- for(const key of ['globalDailyMicros','userDailyMicros','lessonLifetimeMicros','inputMicrosPerMillion','outputMicrosPerMillion'])assert(Number.isSafeInteger(budget[key])&&budget[key]>0&&budget[key]<=1000000000000,'invalid budget value');
+ for(const key of ['globalDailyMicros','userDailyMicros','lessonLifetimeMicros','inputMicrosPerMillion','outputMicrosPerMillion'])assert(Number.isSafeInteger(budget[key])&&budget[key]>=(key.endsWith('MicrosPerMillion')?0:1)&&budget[key]<=1000000000000,'invalid budget value');
  const reserve=Number((100000n*BigInt(budget.inputMicrosPerMillion)+2400n*BigInt(budget.outputMicrosPerMillion)+999999n)/1000000n);assert(reserve<=84000&&Math.min(budget.globalDailyMicros,budget.userDailyMicros,budget.lessonLifetimeMicros)>=252000,'price or capacity exceeds bound');
  for(const id of E2E_LESSONS)isolatedDialogueAdmission(env,{ucUserId:553},id,{...budget,logicalProviderAttemptLimit:3,perAttemptReserveMicros:84000,reserveMicros:252000},now);
  return full;
 }
 export function packWorker(root,inv,config){
- const metadata={main_module:'index.js',compatibility_date:config.compatibility_date,compatibility_flags:config.compatibility_flags,bindings:[{type:'d1',name:'ACCEPTANCE_DB',id:FIXED.database},...Object.entries(config.services).map(([name,v])=>({type:'service',name,...v})),...Object.entries(config.env_vars).map(([name,v])=>({type:v.type,name,text:v.value}))]};
+ const metadata={main_module:'index.js',compatibility_date:config.compatibility_date,compatibility_flags:config.compatibility_flags,bindings:[{type:'d1',name:'ACCEPTANCE_DB',id:FIXED.database},...Object.entries(config.services).map(([name,v])=>({type:'service',name,...v})),...Object.entries(config.env_vars).map(([name,v])=>v.type==='secret_text'?{type:'inherit',name}:{type:v.type,name,text:v.value})]};
  const boundary='yw-'+digest({files:inv.files,metadata}).slice(0,48),chunks=[];
  function part(name,type,b,file=false){chunks.push(Buffer.from(`--${boundary}\r\nContent-Disposition: form-data; name="${name}"${file?`; filename="${name}"`:''}\r\nContent-Type: ${type}\r\n\r\n`),b,Buffer.from('\r\n'));}
  part('metadata','application/json',Buffer.from(JSON.stringify(metadata)));
@@ -75,7 +75,9 @@ export function validateRegistration(registry,receipt,{receiptHash,publisherHash
 }
 function projection(p){return {name:p.name,production_branch:p.production_branch,deployment_configs:p.deployment_configs,domains:[...(p.domains||[])].sort()};}
 function assertProviderConfiguration(actual,expected){
- for(const [key,value]of Object.entries(expected))same(actual?.[key],value,'isolated configuration readback failed');
+ const projected=structuredClone(actual);if(projected?.env_vars?.APIS_CALLER_TOKEN?.type==='secret_text')projected.env_vars.APIS_CALLER_TOKEN={type:'secret_text'};
+ for(const map of ['services','env_vars'])for(const key of Object.keys(projected?.[map]||{}))if(projected[map][key]===null)delete projected[map][key];
+ for(const [key,value]of Object.entries(expected))same(projected?.[key],value,'isolated configuration readback failed');
  const metadata=new Set(['always_use_latest_compatibility_date','usage_model','placement','build_image_major_version','limits']);
  for(const [key,value]of Object.entries(actual||{}))if(!(key in expected)&&!metadata.has(key))assert(value==null||value===false||typeof value==='object'&&Object.keys(value).length===0,'unexpected isolated binding: '+key);
 }
@@ -90,7 +92,12 @@ export async function transact(receipt,{call,artifact,packed,readAsset,save,befo
   same(digest(await call('apis-cron'+suffix,'GET',BASE+'/workers/scripts/apis/schedules')),i.apis.cron_digest,'APIS cron changed');
  };
  await preserve('-before');
- const configured=await call('config','PATCH',PROJECT,{deployment_configs:{production:i.config,preview:i.config}});
+ // Caller credential is pre-provisioned through its existing secret authority.
+ // PATCH merges env_vars (as pinned Wrangler pages secret does); never copy a redacted secret back.
+ for(const scope of ['production','preview'])assert(p.deployment_configs?.[scope]?.env_vars?.APIS_CALLER_TOKEN?.type==='secret_text','formal caller secret not provisioned; no configuration write');
+ const patch=structuredClone(i.config);delete patch.env_vars.APIS_CALLER_TOKEN;
+ patch.services.APIS_ACCEPTANCE=null;patch.env_vars.YW_ACCEPTANCE_APIS_VERSION=null;
+ const configured=await call('config','PATCH',PROJECT,{deployment_configs:{production:patch,preview:patch}});
  for(const scope of ['production','preview'])assertProviderConfiguration(configured.deployment_configs?.[scope],i.config);
  const {jwt}=await call('upload-token','GET',PROJECT+'/upload-token');assert(typeof jwt==='string'&&jwt.length>20,'upload credential unavailable');
  const assets=new Map(artifact.assets.map(f=>[f.key,f])),keys=[...assets.keys()];

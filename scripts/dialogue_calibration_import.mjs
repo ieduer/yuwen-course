@@ -25,7 +25,7 @@ function validateExecution(e){
  assert(e.budget?.model===FULL_MODEL&&e.budget.reserveMicros===84000&&e.budget.providerAttemptLimit===1&&e.budget.logicalProviderAttemptLimit===1,'exact recorded budget required');
  const b=e.budget;
  assert(b.currency==='USD'&&b.maxInputTokens===100000&&b.maxOutputTokens===2400&&Number.isFinite(Date.parse(b.validUntil))&&Date.parse(b.validUntil)>Date.parse(e.readyAt),'recorded token and price bounds required');
- for(const key of ['globalDailyMicros','userDailyMicros','lessonLifetimeMicros','inputMicrosPerMillion','outputMicrosPerMillion'])assert(Number.isSafeInteger(b[key])&&b[key]>0&&b[key]<=1000000000000,'invalid recorded budget value');
+ for(const key of ['globalDailyMicros','userDailyMicros','lessonLifetimeMicros','inputMicrosPerMillion','outputMicrosPerMillion'])assert(Number.isSafeInteger(b[key])&&b[key]>=(key.endsWith('MicrosPerMillion')?0:1)&&b[key]<=1000000000000,'invalid recorded budget value');
  assert(b.globalDailyMicros<=50000000&&b.userDailyMicros<=50000000&&b.reserveMicros<=Math.min(b.globalDailyMicros,b.userDailyMicros,b.lessonLifetimeMicros),'recorded budget ceiling mismatch');
  const minimum=Number((100000n*BigInt(b.inputMicrosPerMillion)+2400n*BigInt(b.outputMicrosPerMillion)+999999n)/1000000n);assert(b.reserveMicros>=minimum,'recorded reserve insufficient');
 }

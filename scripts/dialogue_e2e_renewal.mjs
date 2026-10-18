@@ -52,7 +52,7 @@ export function validateRenewedExecution(config,plan,now=Date.now()){
  same([config.providerAttemptLimit,config.reserveMicrosPerCall,config.maxVisibleCalls,config.maxReserveMicros],[3,252000,120,30240000],'operation budget changed');
  const b=config.activationBindings;
  assert(b&&Object.keys(b).every(k=>k.startsWith('YW_')&&typeof b[k]==='string'),'non-secret activation readback required');
- const env=acceptanceEnvironment(new Request(ORIGIN),{...b,ASSETS:{fetch:dead},ACCEPTANCE_DB:{prepare:dead},USER_CENTER_EVIDENCE:{resolveSession:dead},APIS_ACCEPTANCE:{fetch:dead}},now),full=fullActivation(env,packet,now);
+ const env=acceptanceEnvironment(new Request(ORIGIN),{...b,ASSETS:{fetch:dead},ACCEPTANCE_DB:{prepare:dead},USER_CENTER_EVIDENCE:{resolveSession:dead},APIS_CALLER_TOKEN:'synthetic-caller-only',APIS:{fetch:dead}},now),full=fullActivation(env,packet,now);
  assert(full,'current server activation required');
  same([config.apisVersion,config.isolatedDatabaseId,config.expiresAt],[full.apisVersion,full.databaseId,full.hardExpiry],'execution pins differ');
  same([full.sourceCommit,full.artifactSha256,full.apisVersion],[plan.calibration.sourceCommit,plan.calibration.artifactSha256,plan.calibration.apisVersion],'calibration activation changed');

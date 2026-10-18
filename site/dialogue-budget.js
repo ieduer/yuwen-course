@@ -4,7 +4,7 @@ export function dialogueBudget(env){
  if(!p||!/^[-\w.]{1,80}$/.test(p.version)||!/^gemini-[-\w.]+$/.test(p.model)||p.currency!=='USD')throw Error('invalid_budget_policy');
  if(!Number.isFinite(Date.parse(p.validUntil))||Date.now()>=Date.parse(p.validUntil))throw Error('budget_price_expired');
  for(const key of ['globalDailyMicros','userDailyMicros','lessonLifetimeMicros','reserveMicros','inputMicrosPerMillion','outputMicrosPerMillion']){
-  if(!Number.isSafeInteger(p[key])||p[key]<1||p[key]>1000000000000)throw Error('invalid_budget_policy');
+  if(!Number.isSafeInteger(p[key])||p[key]<(key.endsWith('MicrosPerMillion')?0:1)||p[key]>1000000000000)throw Error('invalid_budget_policy');
  }
  // UTF-8 bytes plus envelope reserve bound input tokens. Output includes
  // visible output and thinking; unknown observed usage retains the reservation.

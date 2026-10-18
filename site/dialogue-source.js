@@ -6,7 +6,7 @@ import {dialogueReadingAsset,unpunctuated} from './dialogue-reading-material.js'
 import {readDialogueNotes} from './dialogue-reading-notes.js';
 import {handleCalibration} from './dialogue-calibration.js';
 import {historicalEvidence} from './dialogue-legacy.js';
-import {acceptanceVersionHeaders,acceptanceContext} from './dialogue-acceptance.js';
+import {acceptanceContext} from './dialogue-acceptance.js';
 import {dialogueCallAdmission,assertIsolatedCallCurrent} from './dialogue-e2e-admission.js';
 import {RENEWED_E2E_OPERATION,renewedOperationCondition,validateRenewedResult} from './dialogue-e2e-renewal.js';
 import {recordCorrection} from './dialogue-corrections.js';
@@ -548,11 +548,11 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
 }
 export async function callDialogueModel(env,prompt,requestId,onReply,budget=dialogueBudget(env)){
  assertIsolatedCallCurrent(env,budget);
- if(!env.APIS?.fetch||(!env.APIS_CALLER_TOKEN&&!acceptanceContext(env)))throw new Error('approved_gateway_unavailable');
+ if(!env.APIS?.fetch||!env.APIS_CALLER_TOKEN)throw new Error('approved_gateway_unavailable');
  const signal=AbortSignal.timeout(LIMITS.timeoutMs);
- const response=await env.APIS.fetch(new Request('https://apis.internal/api/yw/dialogue-stream',{method:'POST',headers:{'content-type':'application/json',accept:'text/event-stream','x-project-name':'yw.bdfz.net','x-task-type':'chat','x-thinking-level':'low',...(env.APIS_CALLER_TOKEN?{'x-internal-token':env.APIS_CALLER_TOKEN}:{}),'x-request-id':requestId,...acceptanceVersionHeaders(env)},body:JSON.stringify({stream:true,providerAttemptLimit:budget.providerAttemptLimit||1,model:budget.model,contents:[{role:'user',parts:[{text:prompt}]}],taskType:'chat',thinkingLevel:'low',generationConfig:{temperature:0.3,maxOutputTokens:LIMITS.outputTokens,responseMimeType:'application/json'}}),signal}));
+ const response=await env.APIS.fetch(new Request('https://apis.internal/api/yw/dialogue-stream',{method:'POST',headers:{'content-type':'application/json',accept:'text/event-stream','x-project-name':'yw.bdfz.net','x-task-type':'chat','x-thinking-level':'low',...(env.APIS_CALLER_TOKEN?{'x-internal-token':env.APIS_CALLER_TOKEN}:{}),'x-request-id':requestId},body:JSON.stringify({stream:true,providerAttemptLimit:budget.providerAttemptLimit||1,model:budget.model,contents:[{role:'user',parts:[{text:prompt}]}],taskType:'chat',thinkingLevel:'low',generationConfig:{temperature:0.3,maxOutputTokens:LIMITS.outputTokens,responseMimeType:'application/json'}}),signal}));
  if(!response.ok){
-  if(acceptanceContext(env)&&[401,403,429].includes(response.status))throw new Error(response.status===429?'gateway_rate_limit':'gateway_credential_rejected');
+  if([401,403,429].includes(response.status))throw new Error(response.status===429?'gateway_rate_limit':'gateway_credential_rejected');
   const error=new Error('gateway_unavailable');
   if(acceptanceContext(env)){
    // Transport metadata alone never proves provider/broker completion.

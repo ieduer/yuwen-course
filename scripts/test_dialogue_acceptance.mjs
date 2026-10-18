@@ -19,7 +19,7 @@ function fixture(t) {
   const user={sourceSiteKey:'yw',authenticated:true,userId:700001,slug:'synthetic-acceptance',displayName:'Synthetic'};
   const bindings={
     YW_ACCEPTANCE_EXPIRES_AT:new Date(Date.now()+3600000).toISOString(), YW_ACCEPTANCE_USER_ID:'700001',
-    YW_ACCEPTANCE_APIS_VERSION:version, YW_ACCEPTANCE_DATABASE_ID:'aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee',
+    YW_FORMAL_APIS_VERSION:version, YW_ACCEPTANCE_DATABASE_ID:'aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee',
     ACCEPTANCE_DB:{prepare:text=>{calls.db++;return wrap(text);}, batch:async statements=>Promise.all(statements.map(s=>s.run()))},
     ASSETS:{fetch:async req=>{calls.assets++;const pathname=new URL(req.url).pathname;
       if(pathname==='/dialogue.html')return new Response(null,{status:308,headers:{location:'/dialogue'}});
@@ -28,7 +28,7 @@ function fixture(t) {
     USER_CENTER_EVIDENCE:{resolveSession:async()=>{calls.identity++;return user;},resolveNativeSession:async()=>({
       ...user,schemaVersion:'bdfz-native-auth/1',status:200,clientId:'yuwen-native-android',capability:'data',
     })},
-    APIS_ACCEPTANCE:{fetch:async()=>{calls.model++;return new Response(null,{status:503});}},
+    APIS_CALLER_TOKEN:'synthetic-caller-only',APIS:{fetch:async()=>{calls.model++;return new Response(null,{status:503});}},
   };
   const authenticated = (path,init={}) => request(path,{...init,headers:{cookie:'bdfz_uc_session=synthetic-'+crypto.randomUUID(),...init.headers}});
   return {sql,calls,bindings,user,authenticated};
@@ -39,11 +39,11 @@ test('unavailable, malformed and unsafe isolation configurations fail before all
   for (const change of [
     {YW_ACCEPTANCE_EXPIRES_AT:'invalid'}, {YW_ACCEPTANCE_EXPIRES_AT:'2020-01-01'},
     {YW_ACCEPTANCE_USER_ID:'0'}, {YW_ACCEPTANCE_USER_ID:'700001.0'}, {YW_ACCEPTANCE_USER_ID:'9007199254740993'},
-    {YW_ACCEPTANCE_APIS_VERSION:'bad'}, {YW_ACCEPTANCE_DATABASE_ID:'99c541e7-e70b-4584-b939-7e88a6dd68c5'},
-    {YW_ACCEPTANCE_APIS_VERSION:'00000000-0000-0000-0000-000000000000'},
+    {YW_FORMAL_APIS_VERSION:'bad'}, {YW_ACCEPTANCE_DATABASE_ID:'99c541e7-e70b-4584-b939-7e88a6dd68c5'},
+    {YW_FORMAL_APIS_VERSION:'00000000-0000-0000-0000-000000000000'},
     {YW_ACCEPTANCE_DATABASE_ID:'39ed36d9-b3f3-40fd-933a-9a68a4066302'},
     {READING_DB:{}}, {READING_TEST_SLUG:'synthetic'}, {LEARNING_EVIDENCE_QUEUE:{}},
-    {ACCEPTANCE_DB:null}, {USER_CENTER_EVIDENCE:null}, {APIS_ACCEPTANCE:null},
+    {ACCEPTANCE_DB:null}, {USER_CENTER_EVIDENCE:null}, {APIS:null},
   ]) assert.equal((await entry.fetch(f.authenticated(),{...f.bindings,...change})).status,503);
   for (const origin of ['https://yw.bdfz.net','https://preview.pages.dev','http://yw-acceptance.bdfz.net','https://yw-acceptance.bdfz.net:8443']) {
     assert.equal((await entry.fetch(new Request(origin+'/api/dialogue/v1'),f.bindings)).status,503);
@@ -122,15 +122,18 @@ test('shared learner history remains unavailable and capabilities are narrowly p
   assert.equal(value.sharedHistory.status,'unavailable');assert.equal(f.calls.model,0);
 });
 
-test('only the acceptance context supplies the exact APIS version; normal env and client spoof cannot',async t=>{
+test('formal caller authentication replaces private cookie and version routing',async t=>{
   const f=fixture(t), observed=[];
-  f.bindings.APIS_ACCEPTANCE.fetch=async req=>{observed.push(req.headers.get('Cloudflare-Workers-Version-Overrides'));assert.equal(req.headers.get('x-internal-token'),null);assert.equal(req.headers.get('cookie'),'bdfz_uc_session=synthetic');return new Response(null,{status:503});};
+  f.bindings.APIS.fetch=async req=>{observed.push(req);assert.equal(req.headers.get('Cloudflare-Workers-Version-Overrides'),null);assert.equal(req.headers.get('x-internal-token'),'synthetic-caller-only');assert.equal(req.headers.get('cookie'),null);assert.equal(req.headers.get('authorization'),null);assert.equal(req.headers.get('x-project-name'),'yw.bdfz.net');return new Response(null,{status:503});};
   const env=acceptanceEnvironment(request(undefined,{headers:{cookie:'bdfz_uc_session=synthetic; unrelated=private','Cloudflare-Workers-Version-Overrides':'apis="spoof"'}}),f.bindings);
-  const budget={model:'synthetic'};
-  await assert.rejects(callDialogueModel(env,'synthetic','synthetic-request',()=>{},budget),/gateway_unavailable/);
-  await assert.rejects(callDialogueModel(f.bindings,'synthetic','synthetic-request',()=>{},budget),/approved_gateway_unavailable/);
-  assert.deepEqual(observed,[`apis="${version}"`]);assert.equal(acceptanceContext(f.bindings),null);
+  await assert.rejects(callDialogueModel(env,'synthetic','synthetic-request',()=>{},{model:'gemini-3.8-flash'}),/gateway_unavailable/);
+  assert.equal(observed.length,1);assert.equal(acceptanceContext(f.bindings),null);
+  await assert.rejects(env.APIS.fetch(new Request('https://other.invalid/',{method:'POST'})),/formal_gateway_route_required/);
+  const legacy={...f.bindings,APIS:undefined,APIS_ACCEPTANCE:f.bindings.APIS};
+  assert.throws(()=>acceptanceEnvironment(request(),legacy),/configuration_invalid/);
+  for(const value of [undefined,'','too-short','x'.repeat(300),'not a header secret'])assert.throws(()=>acceptanceEnvironment(request(),{...f.bindings,APIS_CALLER_TOKEN:value}),/configuration_invalid/);
 });
+
 
 test('restricted static page uses original UI with no external script or central network capability',async t=>{
   const f=fixture(t), r=await entry.fetch(request('/dialogue'),f.bindings);
@@ -162,9 +165,9 @@ test('ordinary entrypoint is not enabled by acceptance variables',async t=>{
   assert.deepEqual(f.calls,{db:0,identity:0,assets:0,model:0});
 });
 
-test('private acceptance never forwards duplicate cookies or a browser supplied caller secret',async t=>{
- const f=fixture(t);let calls=0;f.bindings.APIS_ACCEPTANCE.fetch=async()=>{calls++;return new Response(null,{status:503});};
+test('browser cookies and supplied caller headers cannot replace the formal caller credential',async t=>{
+ const f=fixture(t);let calls=0;f.bindings.APIS.fetch=async req=>{calls++;assert.equal(req.headers.get('cookie'),null);assert.equal(req.headers.get('x-internal-token'),'synthetic-caller-only');return new Response(null,{status:503});};
  const env=acceptanceEnvironment(request(undefined,{headers:{cookie:'bdfz_uc_session=a; bdfz_uc_session=b','x-internal-token':'spoof'}}),f.bindings);
- await assert.rejects(callDialogueModel(env,'synthetic','synthetic-request',()=>{},{model:'synthetic'}),/acceptance_session_required/);
- assert.equal(calls,0);assert.equal(env.APIS_CALLER_TOKEN,undefined);
+ await assert.rejects(callDialogueModel(env,'synthetic','synthetic-request',()=>{},{model:'synthetic'}),/gateway_unavailable/);
+ assert.equal(calls,1);assert.equal(env.APIS_CALLER_TOKEN,'synthetic-caller-only');
 });

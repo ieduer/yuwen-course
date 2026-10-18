@@ -20,7 +20,8 @@ export function acceptanceContext(env) { return contexts.get(env) || null; }
 export function acceptanceEnvironment(request, bindings, now = Date.now()) {
   const expires = Date.parse(bindings.YW_ACCEPTANCE_EXPIRES_AT);
   const userId = String(bindings.YW_ACCEPTANCE_USER_ID || '');
-  const version = bindings.YW_ACCEPTANCE_APIS_VERSION;
+  // Provenance checked against the accepted formal deployment, never a routing override.
+  const version = bindings.YW_FORMAL_APIS_VERSION;
   const databaseId = bindings.YW_ACCEPTANCE_DATABASE_ID;
   if (new URL(request.url).origin !== ACCEPTANCE_ORIGIN) throw Error('acceptance_host_required');
   if (!Number.isFinite(expires) || now >= expires) throw Error('acceptance_expired');
@@ -29,23 +30,23 @@ export function acceptanceEnvironment(request, bindings, now = Date.now()) {
     || bindings.READING_DB || bindings.READING_TEST_SLUG || bindings.LEARNING_EVIDENCE_QUEUE
     || typeof bindings.ACCEPTANCE_DB?.prepare !== 'function'
     || typeof bindings.USER_CENTER_EVIDENCE?.resolveSession !== 'function'
-    || typeof bindings.APIS_ACCEPTANCE?.fetch !== 'function'
+    || typeof bindings.APIS?.fetch !== 'function'
+    || typeof bindings.APIS_CALLER_TOKEN !== 'string' || !/^[^\s\x00-\x1f\x7f]{16,256}$/.test(bindings.APIS_CALLER_TOKEN)
     || typeof bindings.ASSETS?.fetch !== 'function') throw Error('acceptance_configuration_invalid');
   // Capability allowlist: do not pass Queue, scheduler, legacy flags or any
   // additional service/data binding through to the real dialogue handlers.
   const identity = bindings.USER_CENTER_EVIDENCE;
-  const cookies = (request.headers.get('cookie') || '').split(';').map(x=>x.trim())
-    .filter(x=>x.startsWith('bdfz_uc_session='));
-  const cookie = cookies.length===1 && /^bdfz_uc_session=[^\s;\r\n]{1,2048}$/.test(cookies[0]) ? cookies[0] : '';
   const env = {
     ASSETS: bindings.ASSETS, READING_DB: bindings.ACCEPTANCE_DB,
+    APIS_CALLER_TOKEN: bindings.APIS_CALLER_TOKEN,
     APIS: {fetch: async outgoing => {
-      if(Date.now()>=expires || !cookie) throw Error('acceptance_session_required');
+      if(Date.now()>=expires) throw Error('acceptance_expired');
+      if(outgoing.method!=='POST' || outgoing.url!=='https://apis.internal/api/yw/dialogue-stream') throw Error('formal_gateway_route_required');
       const headers=new Headers(outgoing.headers);
-      headers.delete('x-internal-token');
-      headers.set('cookie',cookie);
-      headers.set('Cloudflare-Workers-Version-Overrides',`apis="${version}"`);
-      return bindings.APIS_ACCEPTANCE.fetch(new Request(outgoing,{headers}));
+      for(const name of ['cookie','authorization','Cloudflare-Workers-Version-Overrides']) headers.delete(name);
+      headers.set('x-internal-token',bindings.APIS_CALLER_TOKEN);
+      headers.set('x-project-name','yw.bdfz.net');
+      return bindings.APIS.fetch(new Request(outgoing,{headers}));
     }},
     YW_DIALOGUE_ENABLED: 'true', YW_DIALOGUE_BUDGET_JSON: bindings.YW_DIALOGUE_BUDGET_JSON,
     YW_CALIBRATION_FULL_LANGUAGE_JSON: bindings.YW_CALIBRATION_FULL_LANGUAGE_JSON,
@@ -67,13 +68,6 @@ export function acceptanceEnvironment(request, bindings, now = Date.now()) {
 export function acceptanceAllowsIdentity(env, user) {
   const context = acceptanceContext(env);
   return !context || (Date.now() < context.expires && Number(user?.userId) === context.userId);
-}
-
-export function acceptanceVersionHeaders(env) {
-  const context = acceptanceContext(env);
-  if (!context) return {};
-  if (Date.now() >= context.expires) throw Error('acceptance_expired');
-  return {'Cloudflare-Workers-Version-Overrides': `apis="${context.version}"`};
 }
 
 export function createAcceptanceWorker(worker) {
