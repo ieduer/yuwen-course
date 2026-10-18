@@ -1,4 +1,4 @@
-## 2026-10-18 14:00 UTC — case23 candidate, inactive
+## 2026-10-18 13:54 UTC — case23 candidate, inactive
 
 Exact failed receipt0e1ba065 remains immutable and rejected. A sixth explicit
 recovery pin enables only conclusion-grounded-dissent attempt2 with a derived
@@ -16,7 +16,7 @@ execution. The original07:14:55.135 start persists. Direct human approval at13:5
 (Sentinel_23a94bcf0ac48191a3142e7db6c9bc20) extends only this transaction
 to15:00UTC; the exception additionally requires all six exact recovery pins.
 This expiry approval does not authorize the new case23 provider attempt.
-37 focused checks pass, plus offline revalidation of the22 unchanged accepted
+39 focused and bundle checks pass, plus offline revalidation of the22 unchanged accepted
 receipts; remaining ordinary27 prompts match the frozen packet. Case20 retains
 its5662ms performance gap. Full189 release, five remaining cases, E2E/My/native/
 Status remain open. Evidence: execution-01a14cdd/case23-recovery. Earlier sections
