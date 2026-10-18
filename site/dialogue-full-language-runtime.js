@@ -62,7 +62,7 @@ export async function handleFullLanguageCalibration(request,env,student,callMode
  if(!fullSourceGate(curriculum,c).eligible)return json({code:'full_case_source_blocked',scope:'case'},409);
  const fixture=fullMaterialize(c,curriculum);
  if(await digest(fixture.prompt)!==c.promptDigest)return json({code:'full_prompt_mismatch',scope:'operation'},409);
- if(needsQuotationInstruction(attemptRecovery))fixture.prompt=recoveryPrompt(fixture.prompt);
+ if(needsQuotationInstruction(attemptRecovery))fixture.prompt=recoveryPrompt(fixture.prompt,attemptRecovery,fixture);
  if(await digest(fixture.prompt)!==promptDigest)return json({code:'full_recovery_prompt_mismatch',scope:'operation'},409);
  let budget;try{budget=dialogueBudget(env);}catch{return json({code:'budget_policy_required'},503);}
  if(budget.model!==contract.model||budget.reserveMicros!==84000||budget.globalDailyMicros>50000000||budget.userDailyMicros>50000000)return json({code:'calibration_budget_mismatch'},503);

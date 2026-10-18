@@ -21,12 +21,19 @@ export const TIMEOUT_RECOVERY=Object.freeze({...QUOTE_RECOVERY,attemptId:FULL_OP
 export const CASE2_RECOVERY=Object.freeze({caseId:'language-er-misconception',attemptId:FULL_OPERATION+':language-er-misconception:1',receiptDigest:'b0e1633c7fa1d5e4a85b2fc6bf5dbcb9c789765f0af69b39468b298a434ae901',attempt:2,reason:'gateway_unavailable',promptDigest:'ef5621bd06bc7e44a848449d40bfd589400cb3bfeb526ec36c8eddaf8cf47c6a'});
 export const CASE2_QUOTE_RECOVERY=Object.freeze({...CASE2_RECOVERY,attemptId:FULL_OPERATION+':language-er-misconception:2',receiptDigest:'314599a28c92a3e84466f14ea3862b3479d3dc4d7988f4ee6503b7b61bf064c4',attempt:3,reason:'unverifiable_evidence',promptDigest:'a70280936a83592d6dcd732bc0c6d003b891bb50cbb7a3b754fd7aa92bcdee48'});
 export const CASE2_FINITE_RECOVERY=Object.freeze({...CASE2_QUOTE_RECOVERY,attemptId:FULL_OPERATION+':language-er-misconception:3',receiptDigest:'c73e73d3ba5cb71871752c746d2b0428f3d52acb6ba0366dbf2c5ef9b8de1ba6',attempt:4,reason:'gateway_unavailable'});
-export const needsQuotationInstruction=pin=>[QUOTE_RECOVERY,TIMEOUT_RECOVERY,CASE2_QUOTE_RECOVERY,CASE2_FINITE_RECOVERY].includes(pin);
+// Inactive unless the exact sixth failure pin is explicitly activated.
+export const CASE23_RECOVERY=Object.freeze({caseId:'conclusion-grounded-dissent',attemptId:FULL_OPERATION+':conclusion-grounded-dissent:1',receiptDigest:'0e1ba065426406eb30948cb4764dc56961a0774560baba130f63358875943036',attempt:2,reason:'unverifiable_conclusion_turn',promptDigest:'a4a6bc1b2265d99b6835cde96ed7c92c1ce0a8ed8f373f0a711129288dbc2f8d'});
+export function conclusionRecoveryPrompt(prompt,fixture){
+ const domains={interpretation:['context','firstRead','read','authorQuestion'],vocabulary:['vocabulary'],technique:['structure','revision','wordCreation'],transfer:['transfer'],uncertainty:['shangyou']};
+ const allowed=Object.fromEntries(Object.entries(domains).map(([domain,types])=>[domain,fixture.state.objectives.filter(o=>o.status==='preserved'&&types.includes(o.domain)).map(o=>o.id).sort()]));
+ return prompt+'\n\n結語輸出前逐欄檢查：change.before、change.after、stance、domains[].evidence[] 的 quote 及 passageQuote，只選原回合或原段落中的一段連續短句，建議10至40字，硬上限60個UTF-16碼元（標點與空格也計數，補充平面字計2）；過長時另選能支持判斷的較短連續片段，不得改寫、拼接或加省略號。不得因縮短引用而改變判斷或漏掉必要證據。preservedObjectives只能從下列該domain的清單選取；空清單必須填[]，改以該domain的真實學生原話及原文證據支持，不得借用其他domain的目標，也不得虛構目標。這是由本次已提供state逐項篩選的可引用歷史目標，不是預定評分或模型答案：'+JSON.stringify(allowed);
+}
+export const needsQuotationInstruction=pin=>[QUOTE_RECOVERY,TIMEOUT_RECOVERY,CASE2_QUOTE_RECOVERY,CASE2_FINITE_RECOVERY,CASE23_RECOVERY].includes(pin);
 const exactRecovery=(a,b)=>!!a&&Object.keys(a).length===Object.keys(b).length&&Object.entries(b).every(([k,v])=>a[k]===v);
 export function recoveryChain(authority){
  const pins=authority?.recoveryReadbacks;
- const allowed=[QUOTE_RECOVERY,TIMEOUT_RECOVERY,CASE2_RECOVERY,CASE2_QUOTE_RECOVERY,CASE2_FINITE_RECOVERY];
- if(!Array.isArray(pins)||pins.length<1||pins.length>5||pins.some((p,i)=>!exactRecovery(p,allowed[i])))return [];
+ const allowed=[QUOTE_RECOVERY,TIMEOUT_RECOVERY,CASE2_RECOVERY,CASE2_QUOTE_RECOVERY,CASE2_FINITE_RECOVERY,CASE23_RECOVERY];
+ if(!Array.isArray(pins)||pins.length<1||pins.length>allowed.length||pins.some((p,i)=>!exactRecovery(p,allowed[i])))return [];
  return allowed.slice(0,pins.length);
 }
 export const caseRecovery=(authority,caseId)=>recoveryChain(authority).filter(p=>p.caseId===caseId).at(-1)||null;
@@ -34,10 +41,10 @@ export const caseRecovery=(authority,caseId)=>recoveryChain(authority).filter(p=
 // admission/receipt/cost check remain in force; this cannot create a new window.
 export const fullWindowValid=a=>Date.parse(a.hardExpiry)<=Date.parse(a.readyAt)+FULL_MAX_WINDOW_MS||(
  a.operation===FULL_OPERATION&&a.readyAt==='2026-10-18T07:14:55.135Z'&&
- a.hardExpiry==='2026-10-18T14:30:00.000Z'&&recoveryChain(a).length===5);
+ a.hardExpiry==='2026-10-18T14:30:00.000Z'&&recoveryChain(a).length>=5);
 export const quotationRecovery=authority=>caseRecovery(authority,QUOTE_RECOVERY.caseId);
-export const recoveryPrompt=prompt=>prompt+'\n\n'+QUOTE_RECOVERY_INSTRUCTION;
-export const recoveryFailureMatches=(r,pin=QUOTE_RECOVERY)=>r?.caseId===pin.caseId&&r.attemptId===pin.attemptId&&r.receiptDigest===pin.receiptDigest&&r.state==='review'&&r.reservedMicros===84000&&!!r.finishedAt&&!r.boundaryStop&&(pin.reason==='unverifiable_evidence'?r.accountedMicros===0&&r.finalAssessment&&r.model===FULL_MODEL&&r.modelVersion===FULL_MODEL:r.accountedMicros===null&&!r.finalAssessment&&!r.model&&!r.modelVersion&&r.chunkCount===0&&r.partialChars===0);
+export const recoveryPrompt=(prompt,pin=null,fixture=null)=>pin===CASE23_RECOVERY?conclusionRecoveryPrompt(prompt,fixture):prompt+'\n\n'+QUOTE_RECOVERY_INSTRUCTION;
+export const recoveryFailureMatches=(r,pin=QUOTE_RECOVERY)=>r?.caseId===pin.caseId&&r.attemptId===pin.attemptId&&r.receiptDigest===pin.receiptDigest&&r.state==='review'&&r.reservedMicros===84000&&!!r.finishedAt&&!r.boundaryStop&&(['unverifiable_evidence','unverifiable_conclusion_turn'].includes(pin.reason)?r.accountedMicros===0&&r.finalAssessment&&r.model===FULL_MODEL&&r.modelVersion===FULL_MODEL:r.accountedMicros===null&&!r.finalAssessment&&!r.model&&!r.modelVersion&&r.chunkCount===0&&r.partialChars===0);
 // All receipt-bearing fields are compared again in the atomic reservation, after
 // their complete hashes have been checked. Unknown cost is never changed to zero.
 export function failedReceiptCondition(rows){

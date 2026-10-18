@@ -9,7 +9,7 @@ import {FULL_OPERATION,ORIGINAL_RECEIPTS,fullMaterialize,fullReceipt,digest} fro
 import {reconciledCost} from '../site/dialogue-budget.js';
 import {projectReleaseJson,buildReleaseSite} from './build_release_site.mjs';
 import {loadCurriculum} from './dialogue_full_language.mjs';
-import {inspectCalibrationReadback,inspectCalibrationBatch,materializeCalibrationOverlay,stageCalibrationOverlay} from './dialogue_calibration_import.mjs';
+import {inspectCalibrationReadback,inspectPinnedCalibrationReadback,inspectCalibrationBatch,materializeCalibrationOverlay,stageCalibrationOverlay} from './dialogue_calibration_import.mjs';
 import {prepareRenewedPlan,validateRenewedExecution,RenewedE2ERunner,OPERATION} from './dialogue_e2e_renewal.mjs';
 import {sanitizeDialogueCurriculum} from '../site/dialogue-public-curriculum.js';
 import {E2E_LESSONS} from '../site/dialogue-e2e-admission.js';
@@ -144,4 +144,15 @@ test('missing token limits or impossible price/reserve policies cannot certify c
  for(const edit of [b=>delete b.maxInputTokens,b=>b.maxOutputTokens=9999,b=>b.inputMicrosPerMillion=0,b=>b.outputMicrosPerMillion=99999999,b=>b.userDailyMicros=60000000]){
   const e=structuredClone(execution);edit(e.budget);await assert.rejects(inspectCalibrationReadback(r,e),/bounds|budget|reserve/);
  }
+});
+
+
+test('per-case execution pins retain historical budget and reject cross-execution substitution',async()=>{
+ const r=await fixture(),e=structuredClone(execution),pin={caseId:r.caseId,receiptDigest:r.receiptDigest,readbackDigest:await digest(r),executionDigest:await digest(e),execution:e,readback:r};
+ const current={...execution,apisVersion:'22222222-2222-4333-8444-555555555555',sourceCommit:'f'.repeat(40),artifactSha256:'e'.repeat(64),caseExecutions:packet.cases.filter(c=>c.group==='representative-28').map(c=>({...pin,caseId:c.id}))};
+ const good=await inspectPinnedCalibrationReadback(r,current);assert.equal(good.receiptDigest,r.receiptDigest);assert.equal(good.executionDigest,await digest(e));
+ const live={...r,apisVersion:current.apisVersion,sourceCommit:current.sourceCommit,artifactSha256:current.artifactSha256};assert.deepEqual(await inspectPinnedCalibrationReadback(live,current),good);
+ for(const edit of [c=>c.caseExecutions.pop(),c=>c.caseExecutions.find(p=>p.caseId===r.caseId).execution.budget.validUntil='2027-01-01T00:00:00Z',c=>c.caseExecutions.find(p=>p.caseId===r.caseId).readback.rawRow.state='review',c=>c.ownerRef='e'.repeat(64)]){const bad=structuredClone(current);edit(bad);await assert.rejects(inspectPinnedCalibrationReadback(r,bad));}
+ const changed=structuredClone(live);changed.rawRow.budget_policy_json='{}';await assert.rejects(inspectPinnedCalibrationReadback(changed,current),/stored evidence/);
+ const wrong=structuredClone(current),p=wrong.caseExecutions.find(p=>p.caseId===r.caseId);p.execution.budget.validUntil='2026-10-17T12:00:01Z';p.executionDigest=await digest(p.execution);await assert.rejects(inspectPinnedCalibrationReadback(r,wrong),/outside execution/);
 });

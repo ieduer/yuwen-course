@@ -246,3 +246,68 @@ test('import deadline: real unchanged receipt passes exact amended window and re
  for(const delta of [{readyAt:'2026-10-18T07:15:00.000Z'},{hardExpiry:'2026-10-18T14:30:00.001Z'},{recoveryReadbacks:[Q,T,C,CQ]}])await assert.rejects(inspectCalibrationReadback(r,{...e,...delta}),/window/);
  const altered=structuredClone(r);altered.recoveryFailures[4].accounted_micros=0;await assert.rejects(inspectCalibrationReadback(altered,e),/failed receipt/);
 });
+
+
+import {CASE23_RECOVERY as C23,conclusionRecoveryPrompt,needsQuotationInstruction,releaseCases} from '../site/dialogue-full-language.js';
+import {validateConclusion} from '../site/dialogue-conclusion.js';
+const c23Raw=process.env.YW_CASE23_READBACK?JSON.parse(fs.readFileSync(process.env.YW_CASE23_READBACK)).response.result.value.body:null;
+const c23Test=(name,fn)=>test(name,{skip:!c23Raw&&'Exact retained case23 required'},fn);
+c23Test('conclusion recovery: original invalid receipt remains rejected; exact prompt only changes case23 attempt2',async()=>{
+ const c=packet.cases.find(c=>c.id===C23.caseId),source=JSON.parse(projectReleaseJson('dialogue-curriculum/'+c.lessonId+'.json',JSON.stringify(loadCurriculum(c.lessonId)))),f=fullMaterialize(c,source),before=JSON.stringify(c23Raw);
+ assert.equal(await fullReceipt(c23Raw.rawRow),C23.receiptDigest);
+ assert.throws(()=>validateConclusion(c23Raw.result.received.value.conclusion,f),/unverifiable_conclusion_turn/);
+ const prompt=conclusionRecoveryPrompt(f.prompt,f);assert.equal(await digest(prompt),C23.promptDigest);
+ const list=JSON.parse(prompt.slice(prompt.lastIndexOf('：')+1));
+ assert.deepEqual(list.vocabulary,[]);assert(list.technique.includes('lesson-1717-p2:revision'));
+ assert.equal(JSON.stringify(c23Raw),before);
+ for(const spec of releaseCases(packet).filter(c=>c.id!==C23.caseId)){
+  const material=fullMaterialize(spec,JSON.parse(projectReleaseJson('dialogue-curriculum/'+spec.lessonId+'.json',JSON.stringify(loadCurriculum(spec.lessonId)))));
+  assert.equal(await digest(material.prompt),spec.promptDigest);
+ }
+ assert.equal(needsQuotationInstruction(null),false);
+});
+c23Test('conclusion recovery: sixth exact pin admits only case23 once, preserves failures and cutoff',async()=>{
+ const e=JSON.parse(fs.readFileSync(process.env.YW_CASE2_EXECUTION_PINS)),authority={...e,recoveryReadbacks:[Q,T,C,CQ,CF,C23]},args={authority,packet,rows:c23Raw.rows,history:c23Raw.history,capacity:c23Raw.capacity,caseId:C23.caseId,recoveryOf:C23.receiptDigest,now:Date.parse('2026-10-18T13:50:00Z')};
+ assert.deepEqual(fullAdmission(args),{allowed:true,attempt:2});
+ assert.equal(fullAdmission({...args,authority:e}).code,'full_boundary_stop');
+ assert.equal(fullAdmission({...args,caseId:releaseCases(packet)[23].id,recoveryOf:null}).code,'full_recovery_required');
+ assert.equal(fullAdmission({...args,now:Date.parse(e.hardExpiry)}).code,'full_expired');
+ for(const change of [p=>p.receiptDigest=H,p=>p.attempt=3,p=>p.promptDigest=H,p=>p.reason='gateway_unavailable']){const pins=structuredClone(authority.recoveryReadbacks);change(pins[5]);assert.deepEqual(recoveryChain({recoveryReadbacks:pins}),[]);}
+ const failed={...c23Raw.rows.find(r=>r.attemptId===C23.attemptId),attemptId:OP+':'+C23.caseId+':2'};
+ assert.equal(fullAdmission({...args,rows:[...args.rows,failed]}).code,'full_boundary_stop');
+ const mutated=structuredClone(args.rows);mutated.find(r=>r.attemptId===C23.attemptId).accountedMicros=null;
+ assert.equal(fullAdmission({...args,rows:mutated}).code,'full_recovery_receipt_mismatch');
+});
+c23Test('conclusion recovery: strict 60-unit and domain history validator remains unchanged',()=>{
+ const c=packet.cases.find(c=>c.id===C23.caseId),source=JSON.parse(projectReleaseJson('dialogue-curriculum/'+c.lessonId+'.json',JSON.stringify(loadCurriculum(c.lessonId)))),f=fullMaterialize(c,source);
+ // Artificial unit evidence only, never emitted as a receipt or semantic result.
+ const students=f.turns.filter(t=>t.role==='student'),p=source.passages[0],ref=t=>({turnId:t.id,quote:t.content.slice(0,40)}),r={...ref(students.at(-1)),passageId:p.id,passageQuote:p.text.slice(0,40)};
+ const local={studentSummary:'unit fixture',change:{before:ref(students[0]),after:ref(students.at(-1))},stance:r,domains:['interpretation','vocabulary','technique','transfer','uncertainty'].map(domain=>({domain,finding:'unit fixture',evidence:[r],preservedObjectives:[]}))};
+ assert(validateConclusion(local,f));
+ const over=structuredClone(local);over.stance.quote=students.at(-1).content.slice(0,61);assert.throws(()=>validateConclusion(over,f),/unverifiable_conclusion_turn/);
+ const wrong=structuredClone(local);wrong.domains[1].preservedObjectives=['lesson-1717-p2:revision'];assert.throws(()=>validateConclusion(wrong,f),/unverified_conclusion_history/);
+});
+async function c23Fixture(t){
+ const f=await finiteFixture(t);
+ for(const readback of [finiteAccepted,c23Raw]){const r=readback.rawRow,c=packet.cases.find(c=>c.id===readback.caseId);
+  f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,1,?,?,?,?,?,?)').run(r.session_id,'calibration:'+c.lessonId,r.turn_id,r.curriculum_json,packet.policyVersion,r.created_at,r.finished_at);
+  f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,'student','synthetic','synthetic_calibration',?,?)").run(r.turn_id,r.session_id,c.id,readback.promptDigest,packet.policyVersion,r.created_at);
+  f.sql.prepare('INSERT INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,reserved_micros,accounted_micros,finished_at,budget_policy_json,usage_json) VALUES(?,?,1,?,2400,?, ?,84000,?,?,?,?)').run(r.turn_id,r.session_id,r.day,r.state,r.created_at,r.accounted_micros,r.finished_at,r.budget_policy_json,r.usage_json);
+  f.sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(r.turn_id+':result',r.session_id,r.turn_id,'synthetic_calibration_result',r.details_json,r.finished_at);
+ }
+ Object.assign(f.authority,{maxAttempts:34,maxReservedMicros:34*84000,recoveryReadbacks:[Q,T,C,CQ,CF,C23]});f.env.YW_CALIBRATION_FULL_LANGUAGE_JSON=JSON.stringify(f.authority);
+ return f;
+}
+const c23RuntimeTest=(name,fn)=>test(name,{skip:!c23Raw||!finiteAccepted||!retained||!timed||!case2Raw||!case2QuoteRaw||!case2FiniteRaw},fn);
+c23RuntimeTest('conclusion runtime: one dispatch with exact prompt, rejected model answer stays terminal and replay never calls',async t=>{
+ const f=await c23Fixture(t),c=packet.cases.find(c=>c.id===C23.caseId);let calls=0;
+ const provider=async(e,p,id,onReply,b)=>{calls++;assert.equal(await digest(p),C23.promptDigest);assert.equal(b.providerAttemptLimit,1);return structuredClone(c23Raw.result.received);};
+ const r=await f.request(c,2,provider);assert.equal(calls,1);assert.equal(r.call.state,'review');assert.equal(r.result.reason,'unverifiable_conclusion_turn');assert.equal(await fullReceipt(r.recoveryFailures.at(-1)),C23.receiptDigest);
+ assert.equal((await f.request(c,2,provider)).receiptDigest,r.receiptDigest);assert.equal(calls,1);
+ assert.equal((await f.request(c,3,provider)).code,'calibration_case_invalid');assert.equal(calls,1);
+});
+c23RuntimeTest('conclusion runtime: changed failure between read and reservation stops dispatch',async t=>{
+ const f=await c23Fixture(t),c=packet.cases.find(c=>c.id===C23.caseId),batch=f.env.READING_DB.batch;let calls=0;
+ f.env.READING_DB.batch=async rows=>{f.sql.prepare("UPDATE dialogue_events SET details_json=details_json||' ' WHERE id=?").run(C23.attemptId+':result');return batch(rows);};
+ const r=await f.request(c,2,async()=>{calls++;throw Error('must not dispatch');});assert.equal(r.code,'full_atomic_admission_stopped');assert.equal(calls,0);
+});

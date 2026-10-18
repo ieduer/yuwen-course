@@ -46,7 +46,7 @@ export async function inspectCalibrationReadback(readback,execution,load=loadCur
  assert(readback.history?.reconciled===true,'history unreconciled');same(readback.history.receiptSetDigest,execution.priorReceiptSetDigest,'history digest mismatch');
  const raw=load(c.lessonId),source=JSON.parse(projectReleaseJson(`dialogue-curriculum/${c.lessonId}.json`,JSON.stringify(raw)));
  same(await digest(raw),c.rawSourceDigest,'current raw curriculum changed');same(await digest(source),c.sourceDigest,'current projected curriculum changed');
- const fixture=fullMaterialize(c,source);same(await digest(fixture.prompt),c.promptDigest,'reconstructed prompt changed');if(needsQuotationInstruction(recovery))fixture.prompt=recoveryPrompt(fixture.prompt);same(await digest(fixture.prompt),promptDigest,'recovery prompt changed');
+ const fixture=fullMaterialize(c,source);same(await digest(fixture.prompt),c.promptDigest,'reconstructed prompt changed');if(needsQuotationInstruction(recovery))fixture.prompt=recoveryPrompt(fixture.prompt,recovery,fixture);same(await digest(fixture.prompt),promptDigest,'recovery prompt changed');
  const row=readback.rawRow;assert(row,'raw row missing');same(row.turn_id,attemptId,'raw attempt mismatch');same(row.session_id,attemptId+':session','raw session mismatch');
  assert(Number.isSafeInteger(row.student_id)&&row.student_id>0&&row.student_id===row.session_owner,'raw owner mismatch');same(sha('dialogue-owner:'+row.student_id),execution.ownerRef,'owner identity mismatch');
  same(row.state,'finished','unfinished or failed case');same(row.reserved_micros,84000,'reservation changed');
@@ -67,13 +67,46 @@ export async function inspectCalibrationReadback(readback,execution,load=loadCur
  return {caseId:c.id,lessonId:c.lessonId,objectiveId:c.objectiveId,attemptId,receiptDigest:readback.receiptDigest,readbackDigest:await digest(readback),sourceDigest:c.sourceDigest,promptDigest,recoveryOf,modelVersion:result.modelVersion,accountedMicros:cost,usage:result.usage,firstTokenMs:result.firstTokenMs??null,totalDurationMs:result.totalDurationMs??null,semanticReviewRequired:true};
 }
 
+// Each historical acceptance retains its own immutable execution and complete
+// readback. A later GET may report a newer activation, but must return exactly
+// the same stored evidence. Never rewrite old budgets or waive their expiry.
+export async function inspectPinnedCalibrationReadback(readback,execution,load=loadCurriculum){
+ if(!Object.hasOwn(execution,'caseExecutions'))return inspectCalibrationReadback(readback,execution,load);
+ validateExecution(execution);
+ const pins=execution.caseExecutions;
+ assert(Array.isArray(pins)&&pins.length===RELEASE_CASE_COUNT&&new Set(pins.map(p=>p.caseId)).size===RELEASE_CASE_COUNT,'all28 immutable execution pins required');
+ assert(pins.every(p=>releaseCases(packet).some(c=>c.id===p.caseId)),'unknown execution case');
+ const pin=pins.find(p=>p.caseId===readback?.caseId);assert(pin,'case execution missing');
+ assert(!Object.hasOwn(pin.execution||{},'caseExecutions'),'nested execution pins forbidden');
+ same(await digest(pin.execution),pin.executionDigest,'immutable execution digest mismatch');
+ same(await digest(pin.readback),pin.readbackDigest,'immutable readback digest mismatch');
+ same(pin.readback.caseId,pin.caseId,'pinned case mismatch');
+ same(pin.readback.receiptDigest,pin.receiptDigest,'pinned receipt mismatch');
+ for(const key of ['ownerRef','priorReceiptSetDigest','readyAt'])same(pin.execution[key],execution[key],'historical execution identity mismatch');
+ assert(Date.parse(pin.execution.hardExpiry)<=Date.parse(execution.hardExpiry),'historical expiry exceeds current window');
+ const expected=caseRecovery(execution,pin.caseId);
+ same(pin.readback.attempt,expected?.attempt||1,'superseded accepted attempt');
+ same(readback.receiptDigest,pin.receiptDigest,'current receipt changed');
+ if(await digest(readback)!==pin.readbackDigest){
+  for(const key of ['operation','caseId','attempt','attemptId','packetDigest','sourceDigest','promptDigest','recoveryOf','rawSourceDigest','projectionVersion','rawRow','result','call','chunks'])same(readback[key],pin.readback[key],'stored evidence changed: '+key);
+  for(const key of ['sourceCommit','artifactSha256','apisVersion','ownerRef','activationDigest','hardExpiry'])same(readback[key],execution[key],'current activation mismatch: '+key);
+  same(readback.history?.receiptSetDigest,execution.priorReceiptSetDigest,'current history mismatch');assert(readback.history?.reconciled===true,'current history unreconciled');
+  for(const failure of recoveryChain(execution)){
+   const raw=readback.recoveryFailures?.find(r=>r?.turn_id===failure.attemptId);assert(raw,'current failed receipt missing');same(await fullReceipt(raw),failure.receiptDigest,'current failed receipt changed');
+   assert(recoveryFailureMatches(readback.rows?.find(r=>r.attemptId===failure.attemptId),failure),'current failed accounting changed');
+  }
+ }
+ const checked=await inspectCalibrationReadback(pin.readback,pin.execution,load);
+ return {...checked,executionDigest:pin.executionDigest};
+}
+
 export async function inspectCalibrationBatch(readbacks,execution,load=loadCurriculum){
  const {sourceDigest,...unsigned}=packet;same(await digest(unsigned),sourceDigest,'frozen packet integrity');
  assert(Array.isArray(readbacks)&&readbacks.length===RELEASE_CASE_COUNT,'all28 readbacks required');
  assert(new Set(readbacks.map(r=>r.caseId)).size===RELEASE_CASE_COUNT,'duplicate case');
  // Ordering is packet-defined. No network, recovery, or replacement case exists.
  const byId=new Map(readbacks.map(r=>[r.caseId,r]));const cases=[];
- for(const c of releaseCases(packet))cases.push(await inspectCalibrationReadback(byId.get(c.id),execution,load));
+ for(const c of releaseCases(packet))cases.push(await inspectPinnedCalibrationReadback(byId.get(c.id),execution,load));
  assert(new Set(cases.map(c=>c.modelVersion)).size===1,'model version drift');
  const changes=[],preserved=[],sourceChanges=[];
  assert(packet.sourceFiles.length===189,'all189 source pins required');
@@ -95,7 +128,7 @@ export async function inspectCalibrationBatch(readbacks,execution,load=loadCurri
   }
  }
  assert(changes.length+preserved.length===9,'all9 representative language items required');
- return {status:'mechanical-pass-semantic-review-required',recoveryReadbacks:execution.recoveryReadbacks||[],retainedFailedAttempts:recoveryChain(execution).map(p=>({attemptId:p.attemptId,receiptDigest:p.receiptDigest,accountedMicros:p.reason==='unverifiable_evidence'?0:null,reservedMicros:84000,providerAttempts:1})),sourceCommit:execution.sourceCommit,artifactSha256:execution.artifactSha256,apisVersion:execution.apisVersion,packetDigest:sourceDigest,executionDigest:await digest(execution),model:FULL_MODEL,modelVersion:cases[0].modelVersion,cases,accountedMicros:cases.reduce((n,c)=>n+c.accountedMicros,0),changes,preserved,sourceChanges,sourceFiles:packet.sourceFiles,reviewRequiredCaseIds:cases.map(c=>c.caseId),overlayApplied:false,paidCallsAuthorized:false,releaseAuthorized:false,notice:'Local hashes and structural checks do not authenticate provider evidence or certify author fidelity and teaching quality. Review original readbacks and every case before applying this exact diff through the existing source/release workflow. Never regenerate consumed packets.'};
+ return {status:'mechanical-pass-semantic-review-required',recoveryReadbacks:execution.recoveryReadbacks||[],retainedFailedAttempts:recoveryChain(execution).map(p=>({attemptId:p.attemptId,receiptDigest:p.receiptDigest,accountedMicros:['unverifiable_evidence','unverifiable_conclusion_turn'].includes(p.reason)?0:null,reservedMicros:84000,providerAttempts:1})),sourceCommit:execution.sourceCommit,artifactSha256:execution.artifactSha256,apisVersion:execution.apisVersion,packetDigest:sourceDigest,executionDigest:await digest(execution),model:FULL_MODEL,modelVersion:cases[0].modelVersion,cases,accountedMicros:cases.reduce((n,c)=>n+c.accountedMicros,0),changes,preserved,sourceChanges,sourceFiles:packet.sourceFiles,reviewRequiredCaseIds:cases.map(c=>c.caseId),overlayApplied:false,paidCallsAuthorized:false,releaseAuthorized:false,notice:'Local hashes and structural checks do not authenticate provider evidence or certify author fidelity and teaching quality. Review original readbacks and every case before applying this exact diff through the existing source/release workflow. Never regenerate consumed packets.'};
 }
 
 // A source-data projection, not a semantic approval or execution capability.

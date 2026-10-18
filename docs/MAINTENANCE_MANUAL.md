@@ -1,3 +1,24 @@
+## 2026-10-18 13:55 UTC — case23 candidate, inactive
+
+Exact failed receipt0e1ba065 remains immutable and rejected. A sixth explicit
+recovery pin enables only conclusion-grounded-dissent attempt2 with a derived
+prompt: short continuous quotations and an exact per-domain preserved-objective
+list from the supplied state. No validator, packet, expected verdict, ordinary
+lesson prompt, APIS or timer changes. Five earlier failures and22 accepted cases
+retain their evidence; any new failure stops. Activation needs a fresh exact
+approved transaction; no provider attempt or deployment is authorized here.
+
+Batch inspection can bind each original readback to its own immutable execution
+and budget. Later GETs must preserve stored raw evidence and match the current
+activation. Historical APIS deployments remain individually pinned; the batch
+still requires one actual model version. Expiry is checked against each original
+execution. The absolute14:30UTC cutoff and original07:14:55.135 start persist.
+37 focused checks pass, plus offline revalidation of the22 unchanged accepted
+receipts; remaining ordinary27 prompts match the frozen packet. Case20 retains
+its5662ms performance gap. Full189 release, five remaining cases, E2E/My/native/
+Status remain open. Evidence: execution-01a14cdd/case23-recovery. Earlier sections
+are retained history, not fresh activation authority.
+
 ## 2026-10-18 — exact case2 recovery accepted; remaining full goal open
 
 Isolated source2bd8823/deployment7e38db78 completed case2 attempt4 exactly once.
