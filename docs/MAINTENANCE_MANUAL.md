@@ -1,4 +1,46 @@
-## 2026-10-18T22:17:00.018667+00:00 — single synthetic diagnostic and controlled rollback prepared locally
+## 2026-10-18T22:36:44.548174+00:00 — authorized single synthetic attempt terminal; original isolated deployment restored
+
+Current YW owner01a150ee. The explicit new human approval, forwarded by current
+APIS owner01a15106, authorized one isolated diagnostic transaction,40minutes with
+last20reserved for rollback, shared80/publisher516, provider1/business3, zero paid
+allowance and unknown reserve+84000micros. Exact execution evidence:
+/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/case23-recovery/schema/single-diagnostic-live-01a150ee/REPORT.md.
+
+Source6c0d1c56cb3579310bf3460b30d4b5a178706806 was pushed to the existing dedicated
+branch. Artifact7b118184 was deployed as0f987a4d-6986-4fb0-bb10-bd0b12caa6fe with
+full formal/APIS preservation reads. Window22:29:43–23:09:43UTC began only after
+source/build/session/live baseline checks. Original owner553 preflight matched
+the pinned operation/digest. Exactly one entirely synthetic provider attempt
+returned HTTP400, CLIENT_REQUEST_INVALID, Google INVALID_ARGUMENT; accounting
+confirmed one completed attempt, no fallback/hedge/background calls, no usage.
+POST and same-operation GET agreed on terminal receipt a3fe909c5e920ccd82a4742473e5268d66df4c1b28d0bbce3984608ee858ef0c.
+This is not the historical case23 response and does not establish its root cause.
+No retry/replacement batch was made, and no paid model was enabled.
+
+The separately registered one-use rollback completed13requests. Original
+62e990f3-2cd2-44ec-96d4-0b0f40e84b8e/sourcef7e5e241 was restored; both configuration
+scopes matched the original expired settings and the diagnostic variable was
+removed while inheriting the existing secret. Formal/APIS deployment/settings/
+schedules stayed pinned. Both receipts are consumed and terminal; the new
+window is closed for further diagnostic work. No extra post-rollback business
+request was made beyond the approved3; rollback confirmation is the exact
+provider deployment/configuration readback and preservation checks.
+
+Final accounting: shared77/80 with all3A1calls protected; publisher514/516 for
+this phase (globalcap1669), two bounded reconciliation calls unused. New provider
+and logical attempts1 each; cumulative31 each. Historical22accepted/8failed is
+unchanged; the synthetic failure is separate. Unknown reserve is now420000micros
+(original336000+new84000), not a claimed invoice; paid allowance remains0.
+The original batch/case23 stays terminal, original expiry16UTC is not renewed,
+and Full189 remains incomplete. Status has an explicit pending scope/source
+record because this isolated diagnostic was not an accepted public YW release;
+no public accepted history or formal-site change is invented.
+
+The previous local-only preparation entry below is historical. Its test and
+artifact evidence remains valid for the exact released source; this new section
+records the later real execution and rollback, not a new application change.
+
+## Historical 2026-10-18T22:17:00.018667+00:00 — single synthetic diagnostic and controlled rollback prepared locally
 
 Current owner: 01a150ee. This is local preparation only; no push, registration,
 provider request, configuration write or deployment has occurred. Report and
