@@ -66,12 +66,36 @@ export function validateRegistration(registry,receipt,{receiptHash,publisherHash
  assert(receipt.tests?.source_commit===head&&receipt.tests.evidence_path&&receipt.tests.evidence_sha256===sha(fs.readFileSync(receipt.tests.evidence_path)),'exact test evidence required');
  assert(receipt.preview.source_commit===head&&receipt.preview.evidence_path&&receipt.preview.evidence_sha256===sha(fs.readFileSync(receipt.preview.evidence_path)),'local artifact evidence required');
  const full=validateConfiguration(receipt.isolated.config,now);assert(full.apisVersion===receipt.isolated.apis.version,'APIS activation differs');
- if(full.sourceCommit===receipt.source_commit)same(full.artifactSha256,artifact.sha256,'calibration artifact not bound');
+ if(receipt.isolated.deploy_only)validateDeployOnlyProof(receipt,registry,now);
+ else if(full.sourceCommit===receipt.source_commit)same(full.artifactSha256,artifact.sha256,'calibration artifact not bound');
  else{const report=read(receipt.isolated.calibration_overlay?.path);assert(receipt.isolated.calibration_overlay.sha256===sha(fs.readFileSync(receipt.isolated.calibration_overlay.path)),'overlay evidence changed');same([report.sourceCommit,report.artifactSha256],[full.sourceCommit,full.artifactSha256],'consumed calibration source changed');}
  assert(receipt.isolated.apis.ownership_reference&&receipt.isolated.apis.source_commit&&receipt.isolated.apis.settings_digest&&receipt.isolated.apis.deployments_digest&&receipt.isolated.apis.cron_digest,'current APIS owner/source/readback required');
  for(const id of ['ai-bdfz-net','apis-bdfz-net']){const a=registry.projects.find(p=>p.project_id===id);assert(a?.state==='accepted','APIS not accepted');same([a.accepted.version_id,a.accepted.source_commit],[receipt.isolated.apis.version,receipt.isolated.apis.source_commit],'APIS accepted source changed');}
  assert(receipt.isolated.apis.ownership_evidence_path&&receipt.isolated.apis.ownership_evidence_sha256===sha(fs.readFileSync(receipt.isolated.apis.ownership_evidence_path)),'APIS ownership evidence missing');
  return {project:p,approval:a};
+}
+export function validateDeployOnlyProof(receipt,registry,now=Date.now(),load=read){
+ const d=receipt.isolated.deploy_only;assert(d?.version==='yw-isolated-deploy-only-v1','exact deployment-only mode required');
+ const bound=pin=>{assert(pin?.path&&pin.sha256===sha(fs.readFileSync(pin.path)),'deployment-only evidence changed');return load(pin.path);};
+ const prior=bound(d.prior_receipt),journal=bound(d.prior_journal),absent=bound(d.absence),reconciled=bound(d.configuration_readback);
+ const consumed=registry.approved_releases.find(x=>x.change_id===prior.change_id);
+ assert(consumed?.consumed===true&&consumed.receipt_sha256===d.prior_receipt.sha256&&prior.change_id!==receipt.change_id,'consumed predecessor must remain terminal');
+ assert(journal.source===prior.source_commit&&journal.terminal===true&&journal.receiptSha256===d.prior_receipt.sha256,'exact terminal predecessor required');
+ const last=journal.requests.at(-1);assert(last?.id==='deploy'&&last.method==='POST'&&last.complete===false,'only unknown single deploy can be reconciled');
+ assert(journal.requests.filter(x=>x.id==='deploy').length===1&&journal.requests.some(x=>x.id==='missing-after'&&x.complete&&x.status===200),'stored asset proof required');
+ same(prior.target,receipt.target);same(prior.isolated.config,receipt.isolated.config,'configuration must remain byte-equivalent');
+ same(prior.artifact_files,receipt.artifact_files);same(prior.preview.artifact_digest,receipt.preview.artifact_digest);same(prior.isolated.packed_worker_sha256,receipt.isolated.packed_worker_sha256,'packed artifact changed');
+ const full=JSON.parse(receipt.isolated.config.env_vars.YW_CALIBRATION_FULL_LANGUAGE_JSON.value);same(full.sourceCommit,prior.source_commit,'runtime source pin changed');
+ assert(absent.status===200&&absent.body?.success===true&&absent.body.result_info?.total_pages===1&&absent.body.result_info.total_count===absent.body.result.length,'complete absence inventory required');
+ assert(Date.parse(absent.at)>Date.parse(last.at)&&now>=Date.parse(absent.at)&&now-Date.parse(absent.at)<=1800000,'absence proof expired');
+ assert(absent.body.result.every(x=>x.deployment_trigger?.metadata?.commit_hash!==prior.source_commit&&Date.parse(x.created_on)<Date.parse(last.at)),'unknown deployment exists; read back instead of deploying');
+ assert(reconciled.project?.name===FIXED.project&&reconciled.status===200&&reconciled.differences?.length===0&&reconciled.deployment===receipt.base_deployment,'exact prior configuration readback required');
+ assert(receipt.http_budget?.max_requests===17&&receipt.http_budget.shared_configuration_max===0&&d.deploy_timeout_ms===300000,'bounded deployment-only policy required');
+ return prior;
+}
+export function requestTimeout(receipt,state,id,method,now=Date.now()){
+ const base=method==='GET'?15000:receipt.isolated.deploy_only&&id==='deploy'?300000:120000;
+ if(!receipt.isolated.deploy_only)return base;const full=JSON.parse(receipt.isolated.config.env_vars.YW_CALIBRATION_FULL_LANGUAGE_JSON.value),remaining=Math.min(Date.parse(receipt.expires_at),Date.parse(state.startedAt)+900000,Date.parse(full.hardExpiry))-now;assert(remaining>0,'deadline expired');return Math.min(base,remaining);
 }
 export function configurationPatch(config){
  const patch=structuredClone(config);delete patch.env_vars.APIS_CALLER_TOKEN;
@@ -90,7 +114,7 @@ function assertProviderConfiguration(actual,expected){
 }
 function checkBaseline(receipt,p){assert(p.name===FIXED.project&&p.production_branch==='acceptance','wrong Pages target/branch');same(p.canonical_deployment?.id,receipt.base_deployment,'live deployment drift');same(digest(projection(p)),receipt.base_config_digest,'live configuration drift');assert(p.domains.includes('yw-acceptance.bdfz.net'),'domain not attached');}
 export async function transact(receipt,{call,artifact,packed,readAsset,save,beforeDeploy=()=>{},delay=ms=>new Promise(r=>setTimeout(r,ms))}){
- const i=receipt.isolated,p=await call('baseline','GET',PROJECT);checkBaseline(receipt,p);
+ const i=receipt.isolated,deployOnly=!!i.deploy_only,p=await call('baseline','GET',PROJECT);checkBaseline(receipt,p);
  const domains=await call('domains','GET',PROJECT+'/domains');assert(domains.some(d=>d.name==='yw-acceptance.bdfz.net'&&d.status==='active'),'isolated domain not active');
  const preserve=async suffix=>{
   const formal=await call('formal'+suffix,'GET',FORMAL);same({deployment:formal.canonical_deployment?.id,source:formal.canonical_deployment?.deployment_trigger?.metadata?.commit_hash,config_digest:digest(projection(formal))},i.formal,'formal site changed');
@@ -102,20 +126,19 @@ export async function transact(receipt,{call,artifact,packed,readAsset,save,befo
  // Caller credential is pre-provisioned through its existing secret authority.
  // PATCH merges env_vars (as pinned Wrangler pages secret does); never copy a redacted secret back.
  for(const scope of ['production','preview'])assert(p.deployment_configs?.[scope]?.env_vars?.APIS_CALLER_TOKEN?.type==='secret_text','formal caller secret not provisioned; no configuration write');
- const patch=configurationPatch(i.config);
- const configured=await call('config','PATCH',PROJECT,{deployment_configs:{production:patch,preview:patch}});
+ const configured=deployOnly?p:await call('config','PATCH',PROJECT,{deployment_configs:{production:configurationPatch(i.config),preview:configurationPatch(i.config)}});
  for(const scope of ['production','preview'])assertProviderConfiguration(configured.deployment_configs?.[scope],i.config);
  const {jwt}=await call('upload-token','GET',PROJECT+'/upload-token');assert(typeof jwt==='string'&&jwt.length>20,'upload credential unavailable');
  const assets=new Map(artifact.assets.map(f=>[f.key,f])),keys=[...assets.keys()];
  const missing=await call('missing','POST','/pages/assets/check-missing',{hashes:keys},jwt);assert(Array.isArray(missing)&&new Set(missing).size===missing.length&&missing.every(k=>assets.has(k)),'unknown missing asset');
+ if(deployOnly)same(missing,[],'deployment-only requires all assets already stored; no upload retry');
  let batch=[],size=0,n=0;
  async function flush(){if(!batch.length)return;await call('upload-'+n++,'POST','/pages/assets/upload',batch,jwt);batch=[];size=0;}
  for(const key of missing){const f=assets.get(key),b=readAsset(f.path);same(sha(b),f.sha256,'asset changed');const row={key,value:b.toString('base64'),metadata:{contentType:f.contentType},base64:true};const bytes=Buffer.byteLength(JSON.stringify(row));if(size+bytes>10*1024*1024)await flush();batch.push(row);size+=bytes;}await flush();
  if(missing.length)await call('upsert','POST','/pages/assets/upsert-hashes',{hashes:missing},jwt);
- same(await call('missing-after','POST','/pages/assets/check-missing',{hashes:keys},jwt),[],'assets not stored');
+ if(!deployOnly)same(await call('missing-after','POST','/pages/assets/check-missing',{hashes:keys},jwt),[],'assets not stored');
  // Repeat source-preserving dependencies immediately before the sole deploy.
- await preserve('-predeploy');
- const current=await call('target-predeploy','GET',PROJECT);same(current.canonical_deployment?.id,receipt.base_deployment,'isolated live changed during upload');same(projection(current),projection(configured),'isolated config drift during upload');await beforeDeploy();
+ if(!deployOnly){await preserve('-predeploy');const current=await call('target-predeploy','GET',PROJECT);same(current.canonical_deployment?.id,receipt.base_deployment,'isolated live changed during upload');same(projection(current),projection(configured),'isolated config drift during upload');}await beforeDeploy();
  const form=new FormData();form.set('manifest',JSON.stringify(Object.fromEntries(artifact.assets.map(f=>['/'+f.path,f.key]))));form.set('branch','acceptance');form.set('commit_hash',receipt.source_commit);form.set('commit_dirty','false');form.set('_worker.bundle',new Blob([packed]),'_worker.bundle');
  for(const name of ['_headers','_redirects','_routes.json'])if(artifact.files.some(f=>f.path===name))form.set(name,new Blob([readAsset(name)]),name);
  const d=await call('deploy','POST',PROJECT+'/deployments',form);assert(/^[a-f0-9-]{36}$/.test(d.id),'uncertain deployment handle');save('deployment-handle.json',{id:d.id,source:receipt.source_commit});
@@ -133,7 +156,8 @@ export async function execute(receiptPath){
  const git=(...args)=>execFileSync('git',args,{cwd:root,encoding:'utf8',stdio:['ignore','pipe','pipe'],timeout:15000}).trim();
  const artifact=inventory(receipt.artifact_root),packed=fs.readFileSync(receipt.isolated.packed_worker_path);same(sha(packed),receipt.isolated.packed_worker_sha256);same(packed,packWorker(receipt.artifact_root,artifact,receipt.isolated.config),'packed source/config drift');
  const activation=JSON.parse(receipt.isolated.config.env_vars.YW_CALIBRATION_FULL_LANGUAGE_JSON.value);
- if(activation.sourceCommit!==receipt.source_commit){same(path.resolve(receipt.isolated.calibration_overlay.path),path.join(root,'scripts/dialogue-calibration-overlay.json'),'reviewed source overlay required');await prepareRenewedPlan(read(receipt.isolated.calibration_overlay.path));}
+ if(receipt.isolated.deploy_only){const prior=read(receipt.isolated.deploy_only.prior_receipt.path);git('merge-base','--is-ancestor',prior.source_commit,receipt.source_commit);const delta=git('diff','--name-only',prior.source_commit,receipt.source_commit).split('\n');assert(delta.length>0&&delta.every(p=>['scripts/publish_dialogue_isolated.mjs','scripts/test_isolated_deploy_only.mjs','docs/MAINTENANCE_MANUAL.md'].includes(p)),'deployment-only tool patch must not change runtime');}
+ else if(activation.sourceCommit!==receipt.source_commit){same(path.resolve(receipt.isolated.calibration_overlay.path),path.join(root,'scripts/dialogue-calibration-overlay.json'),'reviewed source overlay required');await prepareRenewedPlan(read(receipt.isolated.calibration_overlay.path));}
  const remote=git('ls-remote',FIXED.repository+'.git',receipt.source_ref);same(remote,receipt.source_commit+'\t'+receipt.source_ref);
  const {withPublisherLock}=await import('/Users/ylsuen/CF/scripts/pages-native-recovery.mjs');
  return withPublisherLock(FIXED.registry,receipt.change_id,async before=>{
@@ -145,11 +169,11 @@ export async function execute(receiptPath){
   assert(fs.readFileSync(FIXED.registry).equals(before)&&fs.readFileSync(receiptPath).equals(bytes),'authority changed');
   approval.consumed=true;approval.attempted_at=timestamp();project.staged_manual_channel.status='consumed_attempting';write(FIXED.registry,registry);
   const call=async(id,method,url,body,uploadToken)=>{
-   assert(!state.terminal&&!state.requests.some(r=>r.id===id)&&Date.now()<Date.parse(receipt.expires_at)&&Date.now()-Date.parse(state.startedAt)<900000&&state.requests.length<160,'terminal, duplicate, deadline or request ceiling');
-   assert(method==='GET'&&(url===PROJECT||url===FORMAL||url===PROJECT+'/domains'||url===PROJECT+'/upload-token'||url===BASE+'/workers/scripts/apis/deployments'||url===BASE+'/workers/scripts/apis/settings'||url===BASE+'/workers/scripts/apis/schedules'||new RegExp('^'+PROJECT+'/deployments/[a-f0-9-]{36}$').test(url))||method==='PATCH'&&id==='config'&&url===PROJECT||method==='POST'&&(url===PROJECT+'/deployments'&&id==='deploy'||['/pages/assets/check-missing','/pages/assets/upload','/pages/assets/upsert-hashes'].includes(url)),'request outside isolated allowlist');
-   const headers={Authorization:'Bearer '+(uploadToken||token)};let data;if(body instanceof FormData){const encoded=new Response(body);headers['content-type']=encoded.headers.get('content-type');data=Buffer.from(await encoded.arrayBuffer());}else if(body!==undefined){headers['content-type']='application/json';data=Buffer.from(JSON.stringify(body));}
+   assert(!state.terminal&&!state.requests.some(r=>r.id===id)&&Date.now()<Date.parse(receipt.expires_at)&&Date.now()-Date.parse(state.startedAt)<900000&&state.requests.length<(receipt.isolated.deploy_only?17:160),'terminal, duplicate, deadline or request ceiling');
+   assert(method==='GET'&&(url===PROJECT||url===FORMAL||url===PROJECT+'/domains'||url===PROJECT+'/upload-token'||url===BASE+'/workers/scripts/apis/deployments'||url===BASE+'/workers/scripts/apis/settings'||url===BASE+'/workers/scripts/apis/schedules'||new RegExp('^'+PROJECT+'/deployments/[a-f0-9-]{36}$').test(url))||!receipt.isolated.deploy_only&&method==='PATCH'&&id==='config'&&url===PROJECT||method==='POST'&&(url===PROJECT+'/deployments'&&id==='deploy'||(receipt.isolated.deploy_only?['/pages/assets/check-missing']:['/pages/assets/check-missing','/pages/assets/upload','/pages/assets/upsert-hashes']).includes(url)),'request outside isolated allowlist');
+   const headers={Authorization:'Bearer '+(uploadToken||token),...(receipt.isolated.deploy_only?{'accept-encoding':'identity'}:{})};let data;if(body instanceof FormData){const encoded=new Response(body);headers['content-type']=encoded.headers.get('content-type');data=Buffer.from(await encoded.arrayBuffer());}else if(body!==undefined){headers['content-type']='application/json';data=Buffer.from(JSON.stringify(body));}
    state.requestBytes+=data?.length||0;assert(state.requestBytes<=400*1024*1024,'request byte ceiling');state.requests.push({id,method,url,at:timestamp(),requestBytes:data?.length||0,complete:false});write(journalPath,state);
-   const response=await fetch('https://api.cloudflare.com/client/v4'+url,{method,headers,body:data,redirect:'error',signal:AbortSignal.timeout(method==='GET'?15000:120000)});const chunks=[];let total=0;for await(const chunk of response.body){total+=chunk.length;state.responseBytes+=chunk.length;assert(total<=8*1024*1024&&state.responseBytes<=32*1024*1024,'response byte ceiling');chunks.push(chunk);}const result=JSON.parse(Buffer.concat(chunks));Object.assign(state.requests.at(-1),{status:response.status,responseBytes:total,complete:true});write(journalPath,state);assert(response.ok&&result.success,'provider request failed or uncertain; no replay');return result.result;
+   let response;try{response=await fetch('https://api.cloudflare.com/client/v4'+url,{method,headers,body:data,redirect:'error',signal:AbortSignal.timeout(requestTimeout(receipt,state,id,method))});}catch(error){Object.assign(state.requests.at(-1),{errorName:error.name,failedAt:timestamp(),outcome:'unknown_no_replay'});write(journalPath,state);throw error;}const chunks=[];let total=0;for await(const chunk of response.body){total+=chunk.length;state.responseBytes+=chunk.length;assert(total<=8*1024*1024&&state.responseBytes<=32*1024*1024,'response byte ceiling');chunks.push(chunk);}const result=JSON.parse(Buffer.concat(chunks));Object.assign(state.requests.at(-1),{status:response.status,responseBytes:total,complete:true});write(journalPath,state);assert(response.ok&&result.success,'provider request failed or uncertain; no replay');return result.result;
   };
   try{const result=await transact(receipt,{call,artifact,packed,beforeDeploy:()=>{same(git('rev-parse','HEAD'),receipt.source_commit);same(git('status','--porcelain'),'');same(git('ls-remote',FIXED.repository+'.git',receipt.source_ref),remote);same(inventory(receipt.artifact_root).files,artifact.files);assert(fs.readFileSync(receiptPath).equals(bytes),'receipt changed');},readAsset:p=>fs.readFileSync(path.join(receipt.artifact_root,p)),save:(n,v)=>write(path.join(path.dirname(receiptPath),n),v,true)});write(receiptPath+'.result.json',result,true);Object.assign(project.staged_manual_channel,{status:'consumed_deployed_acceptance_pending',observed_source:result.source,observed_deployment:result.deployment});write(FIXED.registry,registry);return result;}
   finally{state.terminal=true;write(journalPath,state);}

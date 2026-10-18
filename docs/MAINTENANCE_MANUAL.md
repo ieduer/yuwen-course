@@ -1,3 +1,17 @@
+## 2026-10-18 — Controlled isolated deployment-only recovery
+
+The existing schema-v1 publisher can consume a fresh receipt after a complete,
+timestamped deployment inventory proves the prior unknown single POST absent.
+The consumed receipt, journal, stored-asset result, exact configuration and packed
+artifact remain hash-bound. Only the publisher/test/manual source delta is allowed;
+the activation retains its original runtime source and six-hour deadline. This
+mode cannot PATCH configuration, install secrets or upload missing assets. It
+checks the current isolated baseline, formal/APIS preservation, stored assets and
+final deployment/configuration. At most17 publisher control-plane requests and one
+POST are allowed. The25.76MB deployment request gets at most300seconds within the
+unchanged15minute transaction, receipt and original window; no automatic retry.
+A successful upload is still pending real28/3E2E acceptance, not a formal release.
+
 <!-- yw-p2r5-01a14507 -->
 
 當前 2026-10-18T02:43Z：44c0b5d正式APIS消費端及189篇內容保持；本機僅修正public_response_manifest對兩個未設定驗收限制欄位的讀取。此前完整公開首頁會在dialogueAcceptanceScope被誤當作禁止binding而失敗；新回歸直接執行當前首頁分支，修前5/6、修後6/6通過，外連/D1仍禁止。沒有學生端產物、評分或資料改動，沒有新增schema或publisher。native既有manifest只描述無owner限制的公開面；stage/activate應在新對話關閉且配置不變時完成，受控owner部署及最終開放分別使用普通精確配置交易。不得用此manifest證明owner驗收。隔離兩環境缺既有caller secret；本機指定store未找到對應項；Cloudflare訂閱讀取403後停止，當期額度未知。模型、provider寫入與窗口均0。唯一當前準備包仍 /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/TRANSACTION.md。正式189替換未完成。
