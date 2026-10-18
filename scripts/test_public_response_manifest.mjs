@@ -18,6 +18,19 @@ test('manifest separates upload and actual response and binds root flag',()=>fix
  assert.equal(off.provider_only_files.length,2);assert.equal(off.files.length,2);
  assert.deepEqual(await buildPublicResponseManifest(opts(root)),off);
 }));
+test('current homepage admission allows absent optional scope in the public manifest',()=>fixture(async root=>{
+ const worker=fs.readFileSync(new URL('../site/_worker.js',import.meta.url),'utf8');
+ const admission=fs.readFileSync(new URL('../site/release-admission.js',import.meta.url),'utf8').replaceAll('export function','function');
+ const start=worker.indexOf('    const url = new URL(request.url);',worker.indexOf('export default'));
+ const end=worker.indexOf('    const material=',start);
+ assert(start>=0&&end>start);
+ // Execute the current production homepage branch, not a duplicate flag model.
+ fs.writeFileSync(path.join(root,'_worker.js'),`${admission}\nexport default {async fetch(request,env,ctx){${worker.slice(start,end)}return env.ASSETS.fetch(request)}}`);
+ const off=await buildPublicResponseManifest(opts(root));
+ const on=await buildPublicResponseManifest({...opts(root),dialogueEnabled:true});
+ assert.equal(off.files.find(f=>f.path==='index.html').sha256,off.files.find(f=>f.path==='index.html').upload_sha256);
+ assert.equal(on.files.find(f=>f.path==='index.html').sha256,on.files.find(f=>f.path==='dialogue.html').sha256);
+}));
 for(const [name,code]of[['network',`fetch('https://example.invalid')`],['D1',`env.READING_DB.prepare('SELECT 1')`],['caught network',`(()=>{try{fetch('https://example.invalid')}catch{};return env.ASSETS.fetch(req)})()`]])test('offline runner rejects '+name,()=>fixture(async root=>{
  fs.writeFileSync(path.join(root,'_worker.js'),`export default {fetch(req,env){return ${code}}}`);
  await assert.rejects(()=>buildPublicResponseManifest(opts(root)),/forbidden|Forbidden/);

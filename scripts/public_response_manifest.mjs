@@ -46,7 +46,10 @@ export async function buildPublicResponseManifest({artifactRoot,sourceCommit,dia
   need(byPath.has(name)&&!providerOnly(name),'Missing local asset: '+url.pathname);
   return new Response(fs.readFileSync(path.join(artifactRoot,name)),{headers:{'content-type':contentType(name)}});
  }};
- const env=new Proxy({ASSETS,YW_DIALOGUE_ENABLED:String(dialogueEnabled)},{get:(target,key)=>key in target?target[key]:deny()});
+ // This existing manifest describes the unrestricted anonymous public surface.
+ // Optional admission settings are absent, not forbidden service capabilities.
+ // Owner-restricted deployments still need their separate authenticated checks.
+ const env=new Proxy({ASSETS,YW_DIALOGUE_ENABLED:String(dialogueEnabled),YW_DIALOGUE_ACCEPTANCE_USER_ID:undefined,YW_DIALOGUE_ACCEPTANCE_EXPIRES_AT:undefined},{get:(target,key)=>key in target?target[key]:deny()});
  const responses=[]; const answerAudits=[];
  for(const f of files.filter(f=>!providerOnly(f.path))){
   const response=await worker.namespace.default.fetch(new Request('https://yw.bdfz.net'+publicPath(f.path)),env,{waitUntil:deny});
