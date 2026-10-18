@@ -1,3 +1,5 @@
+Current2026-10-18T14:31Z: local generic conclusion-schema candidate, not deployed. Original validator and fixtures unchanged; exact case23 attempt2 failure retained.188 source-bearing lessons supported, approved1572 exception unchanged. New single-attempt pin inactive; APIS rebaseline and execution approval still required. See docs/MAINTENANCE_MANUAL.md current section. Earlier entries are history.
+
 ## 2026-10-18 — exact case2 recovery accepted; remaining full goal open
 
 Isolated source2bd8823/deployment7e38db78 completed case2 attempt4 exactly once.

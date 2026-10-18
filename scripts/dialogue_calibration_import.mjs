@@ -1,3 +1,4 @@
+import {dialogueConclusionSchema} from '../site/dialogue-conclusion-schema.js';
 // Offline inspection of existing runtime readbacks. This never authorizes a model
 // call, accepts semantic quality, writes curriculum, or changes a consumed packet.
 import assert from 'node:assert/strict';
@@ -56,6 +57,7 @@ export async function inspectCalibrationReadback(readback,execution,load=loadCur
  const meta=parse(row.curriculum_json,'source metadata missing');
  same(meta,{syntheticOnly:true,caseId:c.id,sourceDigest:c.sourceDigest,rawSourceDigest:c.rawSourceDigest,projectionVersion:packet.projectionVersion,promptDigest,packetDigest:packet.sourceDigest,recoveryOf},'raw source metadata mismatch');
  const result=parse(row.details_json,'raw result missing');same(result,readback.result,'readback result differs from raw');
+ if(recovery?.responseSchemaDigest||result.responseSchemaDigest){const schema=dialogueConclusionSchema(fixture);assert(schema,'response schema missing');same(await digest(schema),result.responseSchemaDigest,'response schema changed');if(recovery?.responseSchemaDigest)same(result.responseSchemaDigest,recovery.responseSchemaDigest,'response schema pin mismatch');}
  assert(result.syntheticOnly===true&&result.expectedVerdictMatches===true&&result.semanticReviewRequired===true&&!result.boundaryStop&&!result.received,'result not mechanically finished');
  same(result.model,FULL_MODEL,'model mismatch');assert(typeof result.modelVersion==='string'&&result.modelVersion.trim(),'actual model version missing');
  const budget=parse(row.budget_policy_json,'raw budget missing');same(budget,execution.budget,'recorded price or budget mismatch');

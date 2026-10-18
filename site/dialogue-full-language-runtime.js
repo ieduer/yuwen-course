@@ -1,3 +1,4 @@
+import {dialogueConclusionSchema} from './dialogue-conclusion-schema.js';
 import {fetchAssessmentAsset} from './assessment-assets.js';
 // Owner-only synthetic execution. No paid authority or deployment activation is
 // supplied by this module. Request JSON cannot supply either capability.
@@ -64,6 +65,8 @@ export async function handleFullLanguageCalibration(request,env,student,callMode
  if(await digest(fixture.prompt)!==c.promptDigest)return json({code:'full_prompt_mismatch',scope:'operation'},409);
  if(needsQuotationInstruction(attemptRecovery))fixture.prompt=recoveryPrompt(fixture.prompt,attemptRecovery,fixture);
  if(await digest(fixture.prompt)!==promptDigest)return json({code:'full_recovery_prompt_mismatch',scope:'operation'},409);
+ const responseJsonSchema=dialogueConclusionSchema(fixture),responseSchemaDigest=responseJsonSchema?await digest(responseJsonSchema):null;
+ if(attemptRecovery?.responseSchemaDigest&&attemptRecovery.responseSchemaDigest!==responseSchemaDigest)return json({code:'full_response_schema_mismatch',scope:'operation'},409);
  let budget;try{budget=dialogueBudget(env);}catch{return json({code:'budget_policy_required'},503);}
  if(budget.model!==contract.model||budget.reserveMicros!==84000||budget.globalDailyMicros>50000000||budget.userDailyMicros>50000000)return json({code:'calibration_budget_mismatch'},503);
  // The ordinary acceptance route may permit three attempts; calibration never
@@ -97,11 +100,11 @@ export async function handleFullLanguageCalibration(request,env,student,callMode
    if(typeof text!=='string'||!text.startsWith(visible)||text.length>LIMITS.replyChars)throw Error('invalid_visible_stream');
    if(text===visible)return;const delta=text.slice(visible.length);visible=text;
    await db.prepare('INSERT INTO dialogue_stream_chunks(turn_id,sequence,content,created_at) VALUES(?,?,?,?)').bind(id,++sequence,delta,new Date().toISOString()).run();
-  },budget);
+  },budget,{responseJsonSchema});
   const cost=reconciledCost(budget,result.usage);if(result.providerAttemptCount!==1)throw Error('calibration_provider_attempt_mismatch');if(!result.modelVersion||typeof result.modelVersion!=='string')throw Error('calibration_model_version_missing');if(result.model!==contract.model)throw Error('calibration_model_mismatch');if(state.rows.some(r=>r.modelVersion&&r.modelVersion!==result.modelVersion))throw Error('calibration_model_version_mismatch');if(cost===null)throw Error('calibration_usage_missing');if(cost>budget.reserveMicros)throw Error('calibration_budget_exceeded');
   const proposal=validateProposal(result.value,{...fixture,hints:fixture.turns.filter(t=>t.role==='teacher').map(t=>t.content)});
   const verdict=proposal.assessments.find(a=>a.objectiveId===c.objectiveId)?.outcome||'no_assessment',expected=(c.expected==='demonstrated'?verdict==='demonstrated':verdict!=='demonstrated')&&!proposal.assessments.some(a=>a.outcome==='demonstrated'&&a.objectiveId!==c.objectiveId);
-  const details={value:result.value,providerAccounting:result.providerAccounting||null,model:result.model,modelVersion:result.modelVersion||null,usage:result.usage,firstTokenMs:result.firstTokenMs,totalDurationMs:result.totalDurationMs,firstTokenTargetMet:Number.isFinite(result.firstTokenMs)?result.firstTokenMs<=contract.firstTokenTargetMs:null,verdict,expectedVerdictMatches:expected,semanticReviewRequired:true,review:c.review,syntheticOnly:true};
+  const details={...(responseSchemaDigest?{responseSchemaDigest}:{}),value:result.value,providerAccounting:result.providerAccounting||null,model:result.model,modelVersion:result.modelVersion||null,usage:result.usage,firstTokenMs:result.firstTokenMs,totalDurationMs:result.totalDurationMs,firstTokenTargetMet:Number.isFinite(result.firstTokenMs)?result.firstTokenMs<=contract.firstTokenTargetMs:null,verdict,expectedVerdictMatches:expected,semanticReviewRequired:true,review:c.review,syntheticOnly:true};
   const ended=new Date().toISOString();await db.batch([
    db.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').bind(id+':result',sessionId,id,'synthetic_calibration_result',JSON.stringify(details),ended),
    db.prepare("UPDATE dialogue_calls SET state=?,accounted_micros=?,usage_json=?,first_token_ms=?,completed_ms=?,finished_at=? WHERE turn_id=? AND state='reserved'").bind(expected?'finished':'review',cost,JSON.stringify(result.usage),result.firstTokenMs??null,result.totalDurationMs??null,ended,id),
@@ -109,7 +112,7 @@ export async function handleFullLanguageCalibration(request,env,student,callMode
   ]);return json(await readback(),expected?200:409);
  }catch(error){
   const ended=new Date().toISOString(),knownCost=received?reconciledCost(budget,received.usage):null,reason=/^[a-z_]{1,80}$/.test(error.message||'')?error.message:'calibration_unconfirmed';
-  const details={syntheticOnly:true,reason,boundaryStop:/expired|credential|unauth|forbidden|locked|rate_limit|model.*mismatch|budget.*exceeded/.test(reason),received,semanticReviewRequired:true,expectedVerdictMatches:false,...(error.gatewayFailure?{gatewayFailure:error.gatewayFailure}:{})};
+  const details={...(responseSchemaDigest?{responseSchemaDigest}:{}),syntheticOnly:true,reason,boundaryStop:/expired|credential|unauth|forbidden|locked|rate_limit|model.*mismatch|budget.*exceeded/.test(reason),received,semanticReviewRequired:true,expectedVerdictMatches:false,...(error.gatewayFailure?{gatewayFailure:error.gatewayFailure}:{})};
   await db.batch([
    db.prepare('INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').bind(id+':result',sessionId,id,'synthetic_calibration_unconfirmed',JSON.stringify(details),ended),
    db.prepare("UPDATE dialogue_calls SET state='review',accounted_micros=?,usage_json=?,finished_at=? WHERE turn_id=? AND state='reserved'").bind(knownCost,received?.usage?JSON.stringify(received.usage):null,ended,id),

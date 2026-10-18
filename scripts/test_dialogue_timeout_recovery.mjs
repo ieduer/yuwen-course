@@ -320,3 +320,30 @@ c23Test('conclusion deadline: 15:00 requires original start and exact six pins, 
  for(const delta of [{readyAt:'2026-10-18T07:15:00.000Z'},{hardExpiry:'2026-10-18T15:00:00.001Z'},{recoveryReadbacks:[Q,T,C,CQ,CF]}]){env.YW_CALIBRATION_FULL_LANGUAGE_JSON=JSON.stringify({...f.authority,...delta});assert.equal(fullActivation(env,packet,Date.parse('2026-10-18T14:31:00Z')),null);}
  assert.equal(f.calls(),0);
 });
+
+import {CASE23_SCHEMA_RECOVERY as C23S} from '../site/dialogue-full-language.js';
+import {dialogueConclusionSchema} from '../site/dialogue-conclusion-schema.js';
+const c23Second=process.env.YW_CASE23_SECOND_READBACK?JSON.parse(fs.readFileSync(process.env.YW_CASE23_SECOND_READBACK)).response.result.value.body:null;
+const schemaTest=(name,fn)=>test(name,{skip:!c23Second||!c23Raw||!finiteAccepted||!retained||!timed||!case2Raw||!case2QuoteRaw||!case2FiniteRaw},fn);
+schemaTest('schema recovery: exact new failed receipt admits only attempt3; old six pins and altered schema never authorize it',async()=>{
+ const e=JSON.parse(fs.readFileSync(process.env.YW_CASE2_EXECUTION_PINS)),authority={...e,hardExpiry:'2026-10-18T15:00:00.000Z',maxAttempts:35,maxReservedMicros:35*84000,recoveryReadbacks:[Q,T,C,CQ,CF,C23,C23S]},args={authority,packet,rows:c23Second.rows,history:c23Second.history,capacity:c23Second.capacity,caseId:C23S.caseId,recoveryOf:C23S.receiptDigest,now:Date.parse('2026-10-18T14:20:00Z')};
+ assert.equal(await fullReceipt(c23Second.rawRow),C23S.receiptDigest);assert.deepEqual(fullAdmission(args),{allowed:true,attempt:3});
+ assert.equal(fullAdmission({...args,authority:{...authority,recoveryReadbacks:[Q,T,C,CQ,CF,C23]}}).code,'full_boundary_stop');
+ const pins=structuredClone(authority.recoveryReadbacks);pins[6].responseSchemaDigest=H;assert.deepEqual(recoveryChain({recoveryReadbacks:pins}),[]);
+ assert.equal(fullAdmission({...args,caseId:releaseCases(packet)[23].id}).code,'full_recovery_required');
+ assert.equal(fullAdmission({...args,now:Date.parse(authority.hardExpiry)}).code,'full_expired');
+ const c=packet.cases.find(c=>c.id===C23S.caseId),source=JSON.parse(projectReleaseJson('dialogue-curriculum/'+c.lessonId+'.json',JSON.stringify(loadCurriculum(c.lessonId)))),f=fullMaterialize(c,source);f.prompt=conclusionRecoveryPrompt(f.prompt,f);
+ assert.equal(await digest(dialogueConclusionSchema(f)),C23S.responseSchemaDigest);assert.throws(()=>validateConclusion(c23Second.result.received.value.conclusion,f),/unverifiable_conclusion_turn/);
+});
+schemaTest('schema runtime: seventh pin dispatches exact provider schema once, persists its digest, and never repairs the failed raw output',async t=>{
+ const f=await c23Fixture(t),r=c23Second.rawRow,c=packet.cases.find(c=>c.id===C23S.caseId);
+ f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,1,?,?,?,?,?,?)').run(r.session_id,'calibration:'+c.lessonId,r.turn_id,r.curriculum_json,packet.policyVersion,r.created_at,r.finished_at);
+ f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,'student','synthetic','synthetic_calibration',?,?)").run(r.turn_id,r.session_id,c.id,c23Second.promptDigest,packet.policyVersion,r.created_at);
+ f.sql.prepare('INSERT INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,reserved_micros,accounted_micros,finished_at,budget_policy_json,usage_json) VALUES(?,?,1,?,2400,?, ?,84000,?,?,?,?)').run(r.turn_id,r.session_id,r.day,r.state,r.created_at,r.accounted_micros,r.finished_at,r.budget_policy_json,r.usage_json);
+ f.sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(r.turn_id+':result',r.session_id,r.turn_id,'synthetic_calibration_result',r.details_json,r.finished_at);
+ Object.assign(f.authority,{maxAttempts:35,maxReservedMicros:35*84000,recoveryReadbacks:[Q,T,C,CQ,CF,C23,C23S]});f.env.YW_CALIBRATION_FULL_LANGUAGE_JSON=JSON.stringify(f.authority);let sends=0;
+ const provider=async(e,p,id,onReply,b,options)=>{sends++;assert.equal(await digest(p),C23S.promptDigest);assert.equal(await digest(options.responseJsonSchema),C23S.responseSchemaDigest);assert.equal(b.providerAttemptLimit,1);return structuredClone(c23Second.result.received);};
+ const result=await f.request(c,3,provider);assert.equal(sends,1);assert.equal(result.call.state,'review');assert.equal(result.result.reason,'unverifiable_conclusion_turn');assert.equal(result.result.responseSchemaDigest,C23S.responseSchemaDigest);assert.deepEqual(result.result.received,c23Second.result.received);
+ assert.deepEqual(await Promise.all(result.recoveryFailures.map(fullReceipt)),[Q,T,C,CQ,CF,C23,C23S].map(x=>x.receiptDigest));
+ assert.equal((await f.request(c,3,provider)).receiptDigest,result.receiptDigest);assert.equal((await f.request(c,4,provider)).code,'calibration_case_invalid');assert.equal(sends,1);
+});

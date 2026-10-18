@@ -1,3 +1,29 @@
+## 2026-10-18 14:31 UTC — source-derived conclusion schema candidate, inactive
+
+Case23 attempt2 failed again at the unchanged60 UTF16 quote limit (61/63);
+receipt f24a0654 remains terminal. The revised candidate derives short exact
+clauses/sentences from the actual provided source window and student trajectory,
+without case IDs, answer keys, expected verdicts, clipping model output or changing
+validators. Formal ready-for-Shangyou dialogue and isolated conclusion cases use
+the same responseJsonSchema. Ordinary dialogue, active vocabulary/remediation and
+the exact owner-approved lesson1572 source-unavailable exception keep their prior
+request shape.188 source-bearing lessons pass bounded catalog construction.
+
+Provider generationConfig carries the schema; full prompt remains unchanged.
+Schema refusal does not fall back or dispatch again. Formal source-context evidence
+records the schema version/hash; calibration stores the hash with its raw result.
+Google documents enum/anyOf/ref structured output; actual provider acceptance and
+semantic quality are unverified, and no maxLength guarantee is assumed.
+
+A seventh exact failure pin can admit only one proposed case23 attempt3, binding
+the unchanged repaired prompt plus schema digest2f92b73663e79208c6e5d206924f6df80785d7fa50d99fccf18102a53f8c5f77.
+No new activation, model or release is authorized by this local source. All22
+accepted cases, seven failures and unknown252000micros remain unchanged. Shared
+APIS fixed window was released; a future execution must bind its then-current
+accepted source/version/config. Original start and15:00UTC cutoff remain; any
+extension or budget reallocation requires explicit disposition. Full189 release,
+threeE2E, central/My/native and Status gates remain open.
+
 ## 2026-10-18 13:54 UTC — case23 candidate, inactive
 
 Exact failed receipt0e1ba065 remains immutable and rejected. A sixth explicit
