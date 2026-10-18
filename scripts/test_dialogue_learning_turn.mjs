@@ -8,8 +8,43 @@ import worker,{handleDialogueFormal,handleDialogueOriginal,handleDialogueFirstRe
 import {projectState,contextFor,LIMITS} from '../site/dialogue-policy.js';
 import {sanitizeDialogueCurriculum} from '../site/dialogue-public-curriculum.js';
 import {learningTurn} from '../site/dialogue-learning-turn.js';
+import {MODE_SAMPLE_IDS,prepareModeSample,prepareModeTurn,checkModeLesson} from './dialogue_mode_sample.mjs';
 const student={id:1,ucUserId:700001},ownerRef=createHash('sha256').update('dialogue-owner:1').digest('hex');
 const budget=JSON.stringify({version:'synthetic',validUntil:'2099-01-01T00:00:00Z',currency:'USD',model:'gemini-test',globalDailyMicros:1000000,userDailyMicros:100000,lessonLifetimeMicros:500000,reserveMicros:1100,inputMicrosPerMillion:10000,outputMicrosPerMillion:10000});
+test('mode sample selects three genres without granting execution or replacing backend completion',()=>{
+ const plan=prepareModeSample();assert.deepEqual(plan.lessons.map(l=>l.mode),['poetry','classical','modern-prose']);
+ assert.equal(plan.productScope,189);assert.equal(plan.executionAuthorized,false);assert.equal(plan.realProviderVerified,false);
+ assert.equal(prepareModeSample(['lesson-1498']).lessons.length,1);
+ assert.throws(()=>prepareModeSample(['lesson-1498','lesson-1498']),/distinct/);
+ assert.throws(()=>prepareModeSample(['lesson-1498'],()=>({lessonId:'lesson-1498'})),/original material/);
+ assert.throws(()=>checkModeLesson({state:{},turns:[{role:'teacher',content:'你已全部完成了！'}]},{}),/not_complete/);
+});
+test('mode turn matches conversational composer and refuses unresolved state, drift and invented quotations',()=>{
+ const c={curriculumVersion:'v1',passages:[{id:'p1',text:'原文中的完整句子'}]},s={revision:3,learningTurn:{kind:'formal',field:'reason',taskId:'current-task'}};
+ const turn=prepareModeTurn(s,c,'  我想先討論這一句，再回到結構。  ',{selected:{id:'p1',text:'完整句子'},mutationId:'synthetic-mode-turn-0001'});
+ assert.equal(turn.conversation,true);assert.equal(turn.taskId,'current-task');assert.equal(turn.content,'[p1] 完整句子\n\n我想先討論這一句，再回到結構。');
+ for(const forbidden of ['field','formal','selectedIndex','rating','action'])assert.equal(Object.hasOwn(turn,forbidden),false);
+ assert.equal(prepareModeTurn({revision:0},c,'你好').taskId,'v1:0:reading-conversation');
+ for(const key of ['pending','partial','draft'])assert.throws(()=>prepareModeTurn({...s,[key]:true},c,'新的問題'),/reconciliation/);
+ assert.throws(()=>prepareModeTurn({...s,curriculumVersion:'old'},c,'新的問題'),/version drift/);
+ assert.throws(()=>prepareModeTurn(s,c,'問題',{selected:{id:'p1',text:'不存在的引文'}}),/current original/);
+ assert.throws(()=>prepareModeTurn(s,c,'字'.repeat(3001)),/length/);
+});
+for(const lessonId of MODE_SAMPLE_IDS)test(`continuous mode uses actual backend with source evidence and no per-field scoring: ${lessonId}`,async t=>{
+ const f=fixture(t,lessonId);let count=0,prompt='';
+ f.options.callModel=async(_env,value)=>{count++;prompt=value;return {value:{reply:'我們先從你選的語句談起，再回到你仍想追問的地方。',assessments:[]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ const before=await f.read(),body=prepareModeTurn(before,f.curriculum,'我想先慢慢讀原文，從一處讓我困惑的語句談起；請先回應我的問題，不必依次叫我填每一欄。');
+ const r=await f.send(before,body.content,body);assert.equal(r.response.status,200,JSON.stringify(r.data));assert.equal(count,1);
+ const context=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_context_prepared'").get().details_json);
+ assert.equal(context.sourceProvenance.readerSha256,f.curriculum.sourceInventory.readerSha256);assert(context.passages.length>0);assert(context.annotationIds.length>0);
+ assert.equal(context.promptSha256,createHash('sha256').update(prompt).digest('hex'));
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='source_field_saved'").get().n,0);
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
+ assert.equal(f.sql.prepare("SELECT content FROM dialogue_turns WHERE role='student'").get().content,body.content);
+ assert.notEqual(r.data.state.completion,'evidence_ready_for_review');
+ assert.equal((await handleDialogue(f.req(body),f.env,student,null,f.options)).status,200);assert.equal(count,1);
+ const conflict=await handleDialogue(f.req({...body,content:'同一回執不同內容'}),f.env,student,null,f.options);assert.equal(conflict.status,409);assert.equal(count,1);
+});
 function fixture(t,lessonId='lesson-1498',filter=()=>true){
  const curriculum=JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${lessonId}.json`));curriculum.objectives=curriculum.objectives.filter(filter);
  const sql=new DatabaseSync(':memory:');sql.exec('PRAGMA foreign_keys=ON');
