@@ -2,7 +2,7 @@ import fixture from './dialogue-synthetic-diagnostic-fixture.json' with {type:'j
 import {consumeGatewayStream,validatedProviderAccounting} from './dialogue-stream.js';
 import {http400Diagnostic} from './dialogue-source.js';
 import {reconciledCost} from './dialogue-budget.js';
-export const SINGLE_DIAGNOSTIC_OPERATION='yw-synthetic-schema-diagnostic-v1';
+export const SINGLE_DIAGNOSTIC_OPERATION='yw-synthetic-schema-cause-v1';
 export const SINGLE_DIAGNOSTIC_PATH='/api/dialogue/diagnostic/v1';
 const OP=SINGLE_DIAGNOSTIC_OPERATION,ORIGIN='https://yw-acceptance.bdfz.net',DATABASE='c45988a6-9094-4306-bcce-98704b3989e3',MODEL='gemini-3.8-flash',RESERVE=84000;
 const FIELDS='version enabled operation ownerUserId origin databaseId sourceCommit artifactSha256 receiptDigest priorLedgerDigest apisVersion apisSourceCommit fixtureSourceDigest payloadDigest schemaDigest schemaStructureDigest model maxLogicalCalls maxProviderAttempts reserveMicros paidMicros notBefore expiresAt readbackUntil'.split(' ').sort();
@@ -36,12 +36,41 @@ async function boundedFailure(response){
  const reader=response.body?.getReader();if(!reader)return null;const chunks=[];let bytes=0;
  try{while(true){const r=await reader.read();if(r.done)break;bytes+=r.value.length;if(bytes>65536)throw Error('bounded_failure');chunks.push(r.value);}const buffer=new Uint8Array(bytes);let at=0;for(const c of chunks){buffer.set(c,at);at+=c.length;}return JSON.parse(new TextDecoder().decode(buffer));}finally{await reader.cancel().catch(()=>{});}
 }
+// Only the fixed synthetic fixture reaches this projection. Ordinary dialogue
+// keeps http400Diagnostic's no-text-parsing contract. Never persist provider
+// text, descriptions, arbitrary field names, keys, or hashes of that content.
+// Labels describe the provider's wording, not a verified historical root cause.
+function syntheticArgumentDetails(raw,accounting){
+ const error=raw.google_error?.error;
+ if(raw.error_code!=='CLIENT_REQUEST_INVALID'||raw.status_code!==400||error?.code!==400||error.status!=='INVALID_ARGUMENT')return null;
+ const attempt=accounting.attempts[0];
+ if(attempt.outcome!=='400'||attempt.brokerCompleted!==true||attempt.outputStarted!==false)return null;
+ const result={},message=error.message;
+ if(typeof message==='string'&&message.length<=2048){
+  const categories=[];
+  if(/\bschema(?: constraints)?\s+(?:is|are)\s+too\s+(?:complex|large)\b/i.test(message)
+   ||(/\bschema\b/i.test(message)&&/\btoo many states\b/i.test(message)))categories.push('schema_complexity');
+  if(/\b(?:maxOutputTokens|max_output_tokens|maximum output tokens)\b.{0,80}\b(?:exceeds?|too (?:large|high)|out of range)\b/i.test(message))categories.push('output_token_limit');
+  if(categories.length===1)result.messageCategory=categories[0];
+ }
+ const roots={responseJsonSchema:['generation_config.response_json_schema','generationConfig.responseJsonSchema'],responseSchema:['generation_config.response_schema','generationConfig.responseSchema'],maxOutputTokens:['generation_config.max_output_tokens','generationConfig.maxOutputTokens'],thinkingConfig:['generation_config.thinking_config','generationConfig.thinkingConfig']};
+ const fields=new Set();
+ if(Array.isArray(error.details)&&error.details.length<=8)for(const detail of error.details){
+  if(detail?.['@type']!=='type.googleapis.com/google.rpc.BadRequest'||!Array.isArray(detail.fieldViolations)||detail.fieldViolations.length>16)continue;
+  for(const violation of detail.fieldViolations){
+   const field=violation?.field;if(typeof field!=='string'||field.length>256)continue;
+   for(const [name,aliases]of Object.entries(roots))if(aliases.some(root=>field===root||field.startsWith(root+'.')||field.startsWith(root+'[')))fields.add(name);
+  }
+ }
+ if(fields.size)result.fieldPaths=[...fields].sort();
+ return Object.keys(result).length?result:null;
+}
 async function gateway(bindings){
  const signal=AbortSignal.timeout(60000);
  const response=await bindings.APIS.fetch(new Request('https://apis.internal/api/yw/dialogue-stream',{method:'POST',headers:{'content-type':'application/json',accept:'text/event-stream','x-project-name':'yw.bdfz.net','x-task-type':'chat','x-thinking-level':'low','x-internal-token':bindings.APIS_CALLER_TOKEN,'x-request-id':OP},body:JSON.stringify(fixture.payload),signal}));
  if(!response.ok){
   let evidence={outcome:[401,403].includes(response.status)?'credential_refusal':response.status===429?'rate_refusal':'provider_error',httpStatus:response.status,accountedMicros:null,providerAttempts:null};
-  try{const raw=await boundedFailure(response);if(raw?.requestId===OP){const providerAccounting=safeAccounting(raw.providerAccounting);evidence={...evidence,providerAccounting,providerAttempts:1};if(response.status===400){const diagnostic=http400Diagnostic(raw);if(diagnostic)evidence.diagnostic=diagnostic;}}}catch{}
+  try{const raw=await boundedFailure(response);if(raw?.requestId===OP){const providerAccounting=safeAccounting(raw.providerAccounting);evidence={...evidence,providerAccounting,providerAttempts:1};if(response.status===400){const diagnostic=http400Diagnostic(raw);if(diagnostic){const details=syntheticArgumentDetails(raw,providerAccounting);if(details)diagnostic.syntheticDetails=details;evidence.diagnostic=diagnostic;}}}}catch{}
   return evidence;
  }
  const result=await consumeGatewayStream(response,()=>{},{model:MODEL,maxProviderAttempts:1,maxReplyChars:1800,signal});

@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {DatabaseSync} from 'node:sqlite';
 import fixture from '../site/dialogue-synthetic-diagnostic-fixture.json' with {type:'json'};
 const module=await import('../site/dialogue-single-diagnostic.js').catch(()=>null);
-const OP='yw-synthetic-schema-diagnostic-v1',origin='https://yw-acceptance.bdfz.net',path='/api/dialogue/diagnostic/v1',H='a'.repeat(64),version='11111111-1111-4111-8111-111111111111';
+const OP='yw-synthetic-schema-cause-v1',origin='https://yw-acceptance.bdfz.net',path='/api/dialogue/diagnostic/v1',H='a'.repeat(64),version='11111111-1111-4111-8111-111111111111';
 const accounting={version:1,policy:'yw-same-model-sequential-v1',mode:'sequential-distinct-key',fallback:false,hedge:false,backgroundCalls:0,maxProviderAttempts:1,providerAttemptCount:1,attempts:[{ordinal:1,model:'gemini-3.8-flash',outcome:'OK',brokerCompleted:true,outputStarted:true,usage:{promptTokenCount:100,totalTokenCount:110}}]};
 function setup(t,{gateway,owner=553,enabled=true}={}){
  const sql=new DatabaseSync(':memory:');sql.exec('CREATE TABLE students(id INTEGER PRIMARY KEY,uc_user_id INTEGER);INSERT INTO students VALUES(7,553);');for(const f of ['0010_dialogue_pilot.sql','0011_dialogue_stream.sql','0012_dialogue_budget.sql'])sql.exec(fs.readFileSync(new URL('../migrations/'+f,import.meta.url),'utf8'));t.after(()=>sql.close());
@@ -23,6 +23,12 @@ function setup(t,{gateway,owner=553,enabled=true}={}){
 test('single synthetic capability defaults OFF and wrong identity never reserves or dispatches',async t=>{
  const f=setup(t,{enabled:false});assert.equal((await f.handle(f.request())).status,404);assert.equal(f.identities,0);assert.equal(f.calls,0);
  const wrong=setup(t,{owner:554});assert.equal((await wrong.handle(wrong.request())).status,403);assert.equal(wrong.sql.prepare('SELECT count(*) n FROM dialogue_calls').get().n,0);
+});
+test('cause diagnostic is a separate inactive operation and cannot reuse the consumed original activation',async t=>{
+ const f=setup(t);assert.equal(module.SINGLE_DIAGNOSTIC_OPERATION,'yw-synthetic-schema-cause-v1');
+ f.env.YW_SINGLE_DIAGNOSTIC_JSON=JSON.stringify({...f.activation,operation:'yw-synthetic-schema-diagnostic-v1'});
+ assert.equal((await f.handle(f.request())).status,404);assert.equal(f.calls,0);assert.equal(f.identities,0);
+ assert.equal(f.sql.prepare('SELECT count(*) n FROM dialogue_calls').get().n,0);
 });
 test('one server fixture dispatch has immutable terminal receipt; duplicate POST cannot replay',async t=>{
  const f=setup(t),first=await(await f.start()).json();assert.equal(first.terminal,true);assert.equal(first.receipt.outcome,'provider_responded');assert.equal(first.receipt.unknownReservedMicros,0);assert.equal(f.calls,1);
@@ -62,4 +68,58 @@ test('diagnostic creates separate rows and byte-preserves original terminal case
 });
 test('fixture is deterministic and synthetic schema preserves original structure with disjoint enum values',async()=>{
  const {makeSyntheticFixture}=await import('./build_synthetic_diagnostic_fixture.mjs');assert.deepEqual(makeSyntheticFixture(),fixture);assert.equal(fixture.provenance.originalSchemaDigest,'2f92b73663e79208c6e5d206924f6df80785d7fa50d99fccf18102a53f8c5f77');
+});
+
+const failedAccounting={...accounting,attempts:[{...accounting.attempts[0],outcome:'400',outputStarted:false,usage:null}]};
+function argumentFailure(message,details=[],extra={}){
+ return {requestId:OP,providerAccounting:failedAccounting,error_code:'CLIENT_REQUEST_INVALID',status_code:400,
+  google_error:{error:{code:400,status:'INVALID_ARGUMENT',message,details}},...extra};
+}
+test('fixed synthetic failure distinguishes bounded schema and output-limit messages without persisting text',async t=>{
+ for(const [message,messageCategory,field,fieldPath] of [
+  ['Synthetic schema is too complex. PRIVATE_SENTINEL','schema_complexity','generation_config.response_json_schema.properties.PRIVATE_SENTINEL','responseJsonSchema'],
+  ['Synthetic maxOutputTokens exceeds the limit. PRIVATE_SENTINEL','output_token_limit','generationConfig.maxOutputTokens','maxOutputTokens'],
+ ]){
+  const raw=argumentFailure(message,[{'@type':'type.googleapis.com/google.rpc.BadRequest',fieldViolations:[{field,description:'PRIVATE_SENTINEL'},{field:'PRIVATE_SENTINEL'}]}],{source_api_tried:'PRIVATE_SENTINEL'});
+  const f=setup(t,{gateway:async()=>Response.json(raw,{status:400})});const result=await(await f.start()).json();
+  assert.deepEqual(result.receipt.diagnostic.syntheticDetails,{messageCategory,fieldPaths:[fieldPath]});
+  assert.equal(result.receipt.unknownReservedMicros,84000);assert.equal(result.receipt.accountedMicros,null);assert.equal(result.receipt.lessonAcceptance,false);
+  assert(!JSON.stringify(result).includes('PRIVATE_SENTINEL'));assert.deepEqual(await(await f.start()).json(),result);assert.equal(f.calls,1);
+ }
+});
+test('synthetic error field names are finite and independent of provider message wording',async t=>{
+ const raw=argumentFailure('unrecognized PRIVATE_SENTINEL',[{'@type':'type.googleapis.com/google.rpc.BadRequest',fieldViolations:[
+  {field:'generation_config.thinking_config.thinking_level'},{field:'generationConfig.responseJsonSchema'},
+  {field:'generation_config.response_json_schema[0]'},{field:'generationConfig.responseSchema'},
+  {field:'generationConfig.responseJsonSchemaPRIVATE_SENTINEL'},{field:'contents[0].parts[0].text'},
+ ]}]);
+ const f=setup(t,{gateway:async()=>Response.json(raw,{status:400})}),result=await(await f.start()).json();
+ assert.deepEqual(result.receipt.diagnostic.syntheticDetails,{fieldPaths:['responseJsonSchema','responseSchema','thinkingConfig']});
+ assert(!JSON.stringify(result).includes('PRIVATE_SENTINEL'));assert.equal(f.calls,1);
+});
+test('unknown, ambiguous, oversized or malformed synthetic error detail is omitted',async t=>{
+ const invalid=[argumentFailure('unknown PRIVATE_SENTINEL'),argumentFailure('schema is too complex; maxOutputTokens exceeds the limit'),
+  argumentFailure('schema is too complex'+'x'.repeat(2048)),argumentFailure('schema is too complex',[],{google_error:{error:{code:403,status:'PERMISSION_DENIED',message:'schema is too complex'}}}),
+  argumentFailure(null,[{'@type':'wrong-type',fieldViolations:[{field:'generationConfig.responseJsonSchema'}]}]),
+  argumentFailure(null,Array(9).fill({'@type':'type.googleapis.com/google.rpc.BadRequest',fieldViolations:[{field:'generationConfig.responseJsonSchema'}]})),
+  argumentFailure(null,[{'@type':'type.googleapis.com/google.rpc.BadRequest',fieldViolations:Array(17).fill({field:'generationConfig.responseJsonSchema'})}]),
+ ];
+ for(const raw of invalid){const f=setup(t,{gateway:async()=>Response.json(raw,{status:400})}),result=await(await f.start()).json();assert.equal(result.receipt.diagnostic?.syntheticDetails,undefined);assert.equal(f.calls,1);}
+});
+test('synthetic error detail requires request correlation and valid failed accounting',async t=>{
+ for(const extra of [{requestId:'wrong'},{providerAccounting:{...failedAccounting,providerAttemptCount:2}},{providerAccounting:{...failedAccounting,fallback:true}}]){
+  const f=setup(t,{gateway:async()=>Response.json(argumentFailure('schema is too complex',[],extra),{status:400})});
+  const result=await(await f.start()).json();assert.equal(result.receipt.diagnostic,undefined);assert.equal(result.receipt.unknownReservedMicros,84000);await f.start();assert.equal(f.calls,1);
+ }
+});
+test('ordinary HTTP400 projection continues to ignore free text and synthetic-only detail',async()=>{
+ const {http400Diagnostic}=await import('../site/dialogue-source.js');
+ const raw=argumentFailure('schema is too complex',[{'@type':'type.googleapis.com/google.rpc.BadRequest',fieldViolations:[{field:'generationConfig.responseJsonSchema'}]}]);
+ assert.deepEqual(http400Diagnostic(raw),{errorCode:'CLIENT_REQUEST_INVALID',statusCode:400,googleError:{code:400,status:'INVALID_ARGUMENT'}});
+});
+test('synthetic detail cannot label a response with successful or incomplete provider accounting',async t=>{
+ for(const providerAccounting of [accounting,{...failedAccounting,attempts:[{...failedAccounting.attempts[0],brokerCompleted:false}]}]){
+  const f=setup(t,{gateway:async()=>Response.json(argumentFailure('schema is too complex',[],{providerAccounting}),{status:400})}),result=await(await f.start()).json();
+  assert.equal(result.receipt.diagnostic?.syntheticDetails,undefined);assert.equal(result.receipt.unknownReservedMicros,84000);assert.equal(f.calls,1);
+ }
 });
