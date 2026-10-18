@@ -1,14 +1,14 @@
 // Inactive continuation of the existing E2E schema. The publisher must supply
 // both approved pins; no request or default value can mint this capability.
 import packet from './dialogue-full-language-packet.json' with {type:'json'};
-import {FULL_OPERATION,FULL_E2E_OPERATION,FULL_MODEL,RELEASE_CASE_COUNT,releaseCases,fullActivation,recoveryChain,quotationRecovery,fullReceipt,failedReceiptCondition} from './dialogue-full-language.js';
+import {FULL_OPERATION,FULL_E2E_OPERATION,FULL_MODEL,RELEASE_CASE_COUNT,releaseCases,fullActivation,recoveryChain,caseRecovery,fullReceipt,failedReceiptCondition} from './dialogue-full-language.js';
 import {acceptanceContext,ACCEPTANCE_ORIGIN} from './dialogue-acceptance.js';
 import {reconciledCost} from './dialogue-budget.js';
 export const RENEWED_E2E_OPERATION=FULL_E2E_OPERATION;
 const lessons=['lesson-1498','lesson-1711-p1','lesson-1717-p2'];
 const keys='apisVersion,authorityDigest,databaseId,enabled,hardExpiry,lessonIds,maxProviderAttempts,maxVisibleCalls,operation,origin,ownerUserId,registryReceiptDigest,reserveMicros,version';
 const prefix=FULL_OPERATION+':';
-const expectedCases=authority=>{const recovery=quotationRecovery(authority);return JSON.stringify(releaseCases(packet).map(c=>{const r=recovery&&c.id===recovery.caseId?recovery:null;return {id:c.id,attempt:r?.attempt||1,sourceDigest:c.sourceDigest,promptDigest:r?.promptDigest||c.promptDigest,recoveryOf:r?.receiptDigest||null};}));};
+const expectedCases=authority=>{return JSON.stringify(releaseCases(packet).map(c=>{const r=caseRecovery(authority,c.id);return {id:c.id,attempt:r?.attempt||1,sourceDigest:c.sourceDigest,promptDigest:r?.promptDigest||c.promptDigest,recoveryOf:r?.receiptDigest||null};}));};
 const retainedByBudget=new WeakMap();
 const extract=(column,key)=>`json_extract(CASE WHEN json_valid(${column}) THEN ${column} ELSE '{}' END,'$.${key}')`;
 const op=extract('c.budget_policy_json','isolatedAdmission.operation');

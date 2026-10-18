@@ -115,3 +115,40 @@ recoveryTest('timeout: thirty charges include both failures; no capacity or cost
  assert.equal(rows.length,30);assert.equal(rows.reduce((n,x)=>n+x.reservedMicros,0),2520000);
  assert.equal(fullAdmission({authority:f.authority,packet,caseId:nextCase.id,rows,history:r.history,capacity:r.capacity,now:at}).code,'full_operation_exhausted');
 });
+
+import {CASE2_RECOVERY as C,caseRecovery,recoveryChain} from '../site/dialogue-full-language.js';
+const case2Raw=process.env.YW_CASE2_READBACK?JSON.parse(fs.readFileSync(process.env.YW_CASE2_READBACK)).response.result.value.body:null;
+const case2Test=(name,fn)=>test(name,{skip:(!retained||!timed||!case2Raw)&&'Three retained readbacks required'},fn);
+async function case2Fixture(t){
+ const f=await recoverFixture(t);await f.request();
+ const r=case2Raw.rawRow;
+ f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,1,?,?,?,?,?,?)').run(r.session_id,'calibration:lesson-1498',C.attemptId,r.curriculum_json,packet.policyVersion,r.created_at,r.finished_at);
+ f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,'student','synthetic','synthetic_calibration',?,?)").run(r.turn_id,r.session_id,C.caseId,C.promptDigest,packet.policyVersion,r.created_at);
+ f.sql.prepare("INSERT INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,reserved_micros,accounted_micros,finished_at,budget_policy_json,usage_json) VALUES(?,?,1,?,2400,'review',?,84000,NULL,?,?,NULL)").run(r.turn_id,r.session_id,r.day,r.created_at,r.finished_at,r.budget_policy_json);
+ f.sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(r.turn_id+':result',r.session_id,r.turn_id,'synthetic_calibration_unconfirmed',r.details_json,r.finished_at);
+ Object.assign(f.authority,{maxAttempts:31,maxReservedMicros:31*84000,recoveryReadbacks:[Q,T,C]});f.env.YW_CALIBRATION_FULL_LANGUAGE_JSON=JSON.stringify(f.authority);
+ return f;
+}
+case2Test('case2: one unchanged-prompt recovery preserves case1 success and three exact failures',async t=>{
+ const f=await case2Fixture(t),c=packet.cases.find(x=>x.id===C.caseId);let sends=0;
+ assert(fullActivation(f.env,packet));assert.equal(caseRecovery(f.authority,Q.caseId),T);assert.equal(caseRecovery(f.authority,C.caseId),C);
+ const result=await f.request(c,2,async(e,p,id,onReply,b)=>{sends++;assert.equal(await digest(p),C.promptDigest);assert.equal(b.providerAttemptLimit,1);return {...success,modelVersion:packet.model};});
+ assert.equal(result.call.state,'finished');assert.equal(sends,1);assert.deepEqual(await Promise.all(result.recoveryFailures.map(fullReceipt)),[Q.receiptDigest,T.receiptDigest,C.receiptDigest]);
+ const execution={...f.authority,activationDigest:f.authority.registryReceiptDigest,ownerRef:result.ownerRef,budget:JSON.parse(result.rawRow.budget_policy_json)};
+ assert.equal((await inspectCalibrationReadback(result,execution)).attemptId,OP+':'+C.caseId+':2');
+ assert.equal(result.rows.find(r=>r.attemptId===OP+':'+Q.caseId+':3').state,'finished');
+ assert.equal(result.rows.filter(r=>r.accountedMicros===null).length,2);
+ const r1=await(await handle(req(target,null,3),f.env,student,f.provider)).json();assert.equal((await inspectCalibrationReadback(r1,execution)).attemptId,OP+':'+Q.caseId+':3');
+ const other=packet.cases.find(x=>x.group==='representative-28'&&![Q.caseId,C.caseId].includes(x.id));assert.deepEqual(fullAdmission({authority:f.authority,packet,caseId:other.id,rows:result.rows,history:result.history,capacity:result.capacity,now:at}),{allowed:true,attempt:1});
+});
+case2Test('case2: another timeout stops the operation and a third attempt is not admitted',async t=>{
+ const f=await case2Fixture(t),c=packet.cases.find(x=>x.id===C.caseId);let sends=0;
+ const provider=async()=>{sends++;const e=Error('gateway_unavailable');e.gatewayFailure=case2Raw.result.gatewayFailure;throw e;};
+ const r=await f.request(c,2,provider);assert.equal(r.call.state,'review');assert.equal((await f.request(c,2,provider)).receiptDigest,r.receiptDigest);assert.equal(sends,1);
+ assert.equal((await f.request(c,3,provider)).code,'calibration_case_invalid');
+ assert.equal(fullAdmission({authority:f.authority,packet,caseId:nextCase.id,rows:r.rows,history:r.history,capacity:r.capacity,now:at}).code,'full_boundary_stop');
+});
+case2Test('case2: altered failure and unapproved pin sequence fail closed',async t=>{
+ const f=await case2Fixture(t);for(const pins of [[Q,C],[Q,T,{...C,promptDigest:H}],[Q,T,C,C]])assert.deepEqual(recoveryChain({recoveryReadbacks:pins}),[]);
+ f.sql.prepare('UPDATE dialogue_calls SET accounted_micros=0 WHERE turn_id=?').run(C.attemptId);assert.equal((await f.request(packet.cases.find(x=>x.id===C.caseId),2)).code,'full_recovery_receipt_mismatch');
+});

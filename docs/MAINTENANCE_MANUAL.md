@@ -1,3 +1,14 @@
+## 2026-10-18 — approved case 2 single recovery (local preparation)
+
+The owner explicitly accepted unchanged upstream timeout risk and authorized one
+new attempt 2 for `language-er-misconception`, pinned to failed receipt
+`b0e1633c7fa1d5e4a85b2fc6bf5dbcb9c789765f0af69b39468b298a434ae901`.
+This is admission, not a latency repair. Preserve the original prompt, validator,
+LOW/model, one-provider limit, unknown liabilities and 13:14:55.135 UTC cutoff.
+Case 1 retains its successful attempt 3; per-case replacement selection applies
+to runtime, importer and E2E. Any new failure remains terminal. A fresh exact
+source/artifact/config receipt is required before activation.
+
 ## 2026-10-18 — terminal TIMEOUT recovery delta (local, inactive)
 
 Supersedes the one-shot quotation recovery section below only when a new approved

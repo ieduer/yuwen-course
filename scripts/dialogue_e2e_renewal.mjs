@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import packet from '../site/dialogue-full-language-packet.json' with {type:'json'};
-import {FULL_OPERATION,FULL_E2E_OPERATION,releaseCases,fullActivation,quotationRecovery} from '../site/dialogue-full-language.js';
+import {FULL_OPERATION,FULL_E2E_OPERATION,releaseCases,fullActivation,caseRecovery} from '../site/dialogue-full-language.js';
 import {acceptanceEnvironment} from '../site/dialogue-acceptance.js';
 import {isolatedDialogueAdmission,E2E_LESSONS} from '../site/dialogue-e2e-admission.js';
 import {materializeCalibrationOverlay,inspectCalibrationBatch} from './dialogue_calibration_import.mjs';
@@ -80,8 +80,7 @@ export class RenewedE2ERunner extends E2ERunner{
   // silent local-ledger reset. Every real receipt must still match its review.
   if(this.events.length)throw Error('existing_operation_readback_only_no_automatic_resume');
   const rows=[];
-  const recovery=quotationRecovery(this.config.calibrationPins);
-  for(const c of releaseCases(packet))rows.push(await this.request(c.lessonId,null,{calibration:c.id,attempt:String(recovery&&c.id===recovery.caseId?recovery.attempt:1)}));
+  for(const c of releaseCases(packet))rows.push(await this.request(c.lessonId,null,{calibration:c.id,attempt:String(caseRecovery(this.config.calibrationPins,c.id)?.attempt||1)}));
   const checked=await inspectCalibrationBatch(rows,this.config.calibrationPins,this.baseLoader);
   same(checked.cases,this.inspection.cases,'current receipts differ from semantic review');
   await super.preflight();

@@ -40,9 +40,9 @@ export async function handleFullLanguageCalibration(request,env,student,callMode
  const {sourceDigest,...unsignedPacket}=packet;
  if(packet.operation!==OP||await digest(unsignedPacket)!==sourceDigest||packet.cases.length!==FULL_CASE_COUNT)return json({code:'calibration_packet_invalid'},503);
  const c=packet.cases.find(c=>c.id===url.searchParams.get('calibration')),attempt=Number(url.searchParams.get('attempt')||1);
- if(!c||c.lessonId!==url.searchParams.get('lessonId')||!(attempt===1||[2,3].includes(attempt)&&c.id===QUOTE_RECOVERY.caseId))return json({code:'calibration_case_invalid'},400);
+ if(!c||c.lessonId!==url.searchParams.get('lessonId')||![1,2,3].includes(attempt))return json({code:'calibration_case_invalid'},400);
  const id=prefix+c.id+':'+attempt,sessionId=id+':session',db=env.READING_DB,ownerRef=await sha(`dialogue-owner:${student.id}`);
- const authority=fullActivation(env,packet),recovery=quotationRecovery(authority),attemptRecovery=recoveryChain(authority).find(p=>p.attempt===attempt),recoveryOf=attemptRecovery?attemptRecovery.receiptDigest:null,promptDigest=attemptRecovery?attemptRecovery.promptDigest:c.promptDigest;
+ const authority=fullActivation(env,packet),recovery=quotationRecovery(authority),attemptRecovery=recoveryChain(authority).find(p=>p.caseId===c.id&&p.attempt===attempt),recoveryOf=attemptRecovery?attemptRecovery.receiptDigest:null,promptDigest=attemptRecovery?attemptRecovery.promptDigest:c.promptDigest;
  if(attempt>1&&!attemptRecovery)return json({code:'calibration_case_invalid'},400);
  let state;try{state=await snapshot(db,student,id,authority);}catch{return json({code:'calibration_owner_mismatch'},409);}
  const readback=async()=>({operation:OP,caseId:c.id,attempt,attemptId:id,ownerRef,packetDigest:contract.packetDigest,sourceDigest:c.sourceDigest,promptDigest,recoveryOf,hardExpiry:authority?.hardExpiry||null,sourceReadiness:c.sourceGate,rawSourceDigest:c.rawSourceDigest,projectionVersion:packet.projectionVersion,activationDigest:authority?.registryReceiptDigest||null,sourceCommit:authority?.sourceCommit||null,artifactSha256:authority?.artifactSha256||null,apisVersion:context.version,...await snapshot(db,student,id,authority),syntheticOnly:true});
@@ -62,7 +62,7 @@ export async function handleFullLanguageCalibration(request,env,student,callMode
  if(!fullSourceGate(curriculum,c).eligible)return json({code:'full_case_source_blocked',scope:'case'},409);
  const fixture=fullMaterialize(c,curriculum);
  if(await digest(fixture.prompt)!==c.promptDigest)return json({code:'full_prompt_mismatch',scope:'operation'},409);
- if(recoveryOf)fixture.prompt=recoveryPrompt(fixture.prompt);
+ if(recoveryOf&&c.id===QUOTE_RECOVERY.caseId)fixture.prompt=recoveryPrompt(fixture.prompt);
  if(await digest(fixture.prompt)!==promptDigest)return json({code:'full_recovery_prompt_mismatch',scope:'operation'},409);
  let budget;try{budget=dialogueBudget(env);}catch{return json({code:'budget_policy_required'},503);}
  if(budget.model!==contract.model||budget.reserveMicros!==84000||budget.globalDailyMicros>50000000||budget.userDailyMicros>50000000)return json({code:'calibration_budget_mismatch'},503);

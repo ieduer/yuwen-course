@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {isDeepStrictEqual} from 'node:util';
 import packet from '../site/dialogue-full-language-packet.json' with {type:'json'};
-import {FULL_OPERATION,FULL_MODEL,RELEASE_CASE_COUNT,releaseCases,fullReceipt,fullMaterialize,digest,QUOTE_RECOVERY,recoveryPrompt,quotationRecovery,recoveryChain,recoveryFailureMatches} from '../site/dialogue-full-language.js';
+import {FULL_OPERATION,FULL_MODEL,RELEASE_CASE_COUNT,releaseCases,fullReceipt,fullMaterialize,digest,QUOTE_RECOVERY,recoveryPrompt,caseRecovery,recoveryChain,recoveryFailureMatches} from '../site/dialogue-full-language.js';
 import {validateProposal} from '../site/dialogue-policy.js';
 import {reconciledCost} from '../site/dialogue-budget.js';
 import {projectReleaseJson} from './build_release_site.mjs';
@@ -33,7 +33,7 @@ function validateExecution(e){
 export async function inspectCalibrationReadback(readback,execution,load=loadCurriculum){
  validateExecution(execution);
  const c=releaseCases(packet).find(c=>c.id===readback?.caseId);assert(c,'unknown or deferred case');
- const recovery=quotationRecovery(execution),attempt=recovery&&c.id===recovery.caseId?recovery.attempt:1,promptDigest=attempt>1?recovery.promptDigest:c.promptDigest,recoveryOf=attempt>1?recovery.receiptDigest:null;
+ const recovery=caseRecovery(execution,c.id),attempt=recovery&&c.id===recovery.caseId?recovery.attempt:1,promptDigest=attempt>1?recovery.promptDigest:c.promptDigest,recoveryOf=attempt>1?recovery.receiptDigest:null;
  const attemptId=`${FULL_OPERATION}:${c.id}:${attempt}`;
  for(const pin of recoveryChain(execution)){
   const failed=(readback.recoveryFailures||[readback.recoveryFailure]).find(r=>r?.turn_id===pin.attemptId);assert(failed,'immutable failed receipt required');same(await fullReceipt(failed),pin.receiptDigest,'failed receipt changed');
@@ -46,7 +46,7 @@ export async function inspectCalibrationReadback(readback,execution,load=loadCur
  assert(readback.history?.reconciled===true,'history unreconciled');same(readback.history.receiptSetDigest,execution.priorReceiptSetDigest,'history digest mismatch');
  const raw=load(c.lessonId),source=JSON.parse(projectReleaseJson(`dialogue-curriculum/${c.lessonId}.json`,JSON.stringify(raw)));
  same(await digest(raw),c.rawSourceDigest,'current raw curriculum changed');same(await digest(source),c.sourceDigest,'current projected curriculum changed');
- const fixture=fullMaterialize(c,source);same(await digest(fixture.prompt),c.promptDigest,'reconstructed prompt changed');if(recoveryOf)fixture.prompt=recoveryPrompt(fixture.prompt);same(await digest(fixture.prompt),promptDigest,'recovery prompt changed');
+ const fixture=fullMaterialize(c,source);same(await digest(fixture.prompt),c.promptDigest,'reconstructed prompt changed');if(recoveryOf&&c.id===QUOTE_RECOVERY.caseId)fixture.prompt=recoveryPrompt(fixture.prompt);same(await digest(fixture.prompt),promptDigest,'recovery prompt changed');
  const row=readback.rawRow;assert(row,'raw row missing');same(row.turn_id,attemptId,'raw attempt mismatch');same(row.session_id,attemptId+':session','raw session mismatch');
  assert(Number.isSafeInteger(row.student_id)&&row.student_id>0&&row.student_id===row.session_owner,'raw owner mismatch');same(sha('dialogue-owner:'+row.student_id),execution.ownerRef,'owner identity mismatch');
  same(row.state,'finished','unfinished or failed case');same(row.reserved_micros,84000,'reservation changed');
@@ -95,7 +95,7 @@ export async function inspectCalibrationBatch(readbacks,execution,load=loadCurri
   }
  }
  assert(changes.length+preserved.length===9,'all9 representative language items required');
- return {status:'mechanical-pass-semantic-review-required',recoveryReadbacks:execution.recoveryReadbacks||[],retainedFailedAttempts:recoveryChain(execution).map(p=>({attemptId:p.attemptId,receiptDigest:p.receiptDigest,accountedMicros:p.attempt===2?0:null,reservedMicros:84000,providerAttempts:1})),sourceCommit:execution.sourceCommit,artifactSha256:execution.artifactSha256,apisVersion:execution.apisVersion,packetDigest:sourceDigest,executionDigest:await digest(execution),model:FULL_MODEL,modelVersion:cases[0].modelVersion,cases,accountedMicros:cases.reduce((n,c)=>n+c.accountedMicros,0),changes,preserved,sourceChanges,sourceFiles:packet.sourceFiles,reviewRequiredCaseIds:cases.map(c=>c.caseId),overlayApplied:false,paidCallsAuthorized:false,releaseAuthorized:false,notice:'Local hashes and structural checks do not authenticate provider evidence or certify author fidelity and teaching quality. Review original readbacks and every case before applying this exact diff through the existing source/release workflow. Never regenerate consumed packets.'};
+ return {status:'mechanical-pass-semantic-review-required',recoveryReadbacks:execution.recoveryReadbacks||[],retainedFailedAttempts:recoveryChain(execution).map(p=>({attemptId:p.attemptId,receiptDigest:p.receiptDigest,accountedMicros:p===QUOTE_RECOVERY?0:null,reservedMicros:84000,providerAttempts:1})),sourceCommit:execution.sourceCommit,artifactSha256:execution.artifactSha256,apisVersion:execution.apisVersion,packetDigest:sourceDigest,executionDigest:await digest(execution),model:FULL_MODEL,modelVersion:cases[0].modelVersion,cases,accountedMicros:cases.reduce((n,c)=>n+c.accountedMicros,0),changes,preserved,sourceChanges,sourceFiles:packet.sourceFiles,reviewRequiredCaseIds:cases.map(c=>c.caseId),overlayApplied:false,paidCallsAuthorized:false,releaseAuthorized:false,notice:'Local hashes and structural checks do not authenticate provider evidence or certify author fidelity and teaching quality. Review original readbacks and every case before applying this exact diff through the existing source/release workflow. Never regenerate consumed packets.'};
 }
 
 // A source-data projection, not a semantic approval or execution capability.
@@ -126,7 +126,7 @@ export async function materializeCalibrationOverlay(curricula,inspection){
  same(inspection.model,FULL_MODEL,'overlay model mismatch');assert(hex(inspection.sourceCommit,40)&&hex(inspection.artifactSha256,64)&&hex(inspection.executionDigest,64)&&uuid(inspection.apisVersion),'overlay execution pins missing');
  for(const c of releaseCases(packet)){
   const checked=inspection.cases.find(x=>x.caseId===c.id);assert(checked,'inspected case missing');
-  same(checked.lessonId,c.lessonId,'inspected lesson mismatch');same(checked.objectiveId,c.objectiveId,'inspected objective mismatch');same(checked.sourceDigest,c.sourceDigest,'inspected source mismatch');const recovery=quotationRecovery(inspection),recovered=recovery&&c.id===recovery.caseId;same(checked.promptDigest,recovered?recovery.promptDigest:c.promptDigest,'inspected prompt mismatch');same(checked.attemptId,`${FULL_OPERATION}:${c.id}:${recovered?recovery.attempt:1}`,'inspected attempt mismatch');same(checked.recoveryOf,recovered?recovery.receiptDigest:null,'inspected recovery link mismatch');
+  same(checked.lessonId,c.lessonId,'inspected lesson mismatch');same(checked.objectiveId,c.objectiveId,'inspected objective mismatch');same(checked.sourceDigest,c.sourceDigest,'inspected source mismatch');const recovery=caseRecovery(inspection,c.id),recovered=recovery&&c.id===recovery.caseId;same(checked.promptDigest,recovered?recovery.promptDigest:c.promptDigest,'inspected prompt mismatch');same(checked.attemptId,`${FULL_OPERATION}:${c.id}:${recovered?recovery.attempt:1}`,'inspected attempt mismatch');same(checked.recoveryOf,recovered?recovery.receiptDigest:null,'inspected recovery link mismatch');
   assert(hex(checked.receiptDigest,64)&&hex(checked.readbackDigest,64)&&checked.semanticReviewRequired===true,'inspected receipt references missing');
   assert(Number.isSafeInteger(checked.accountedMicros)&&checked.accountedMicros>=0&&checked.accountedMicros<=84000,'inspected cost invalid');
   assert(typeof inspection.modelVersion==='string'&&inspection.modelVersion.trim(),'inspected model version missing');same(checked.modelVersion,inspection.modelVersion,'inspected model drift');

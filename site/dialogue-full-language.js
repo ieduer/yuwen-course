@@ -18,13 +18,16 @@ export const fullReceipt=row=>digest({id:row.turn_id,state:row.state,reserved:ro
 export const QUOTE_RECOVERY=Object.freeze({caseId:'language-er-independent',attemptId:FULL_OPERATION+':language-er-independent:1',receiptDigest:'77c5dccbb48ed924abfe6fa7082dd7d73cd00fdacb4010e84a3b0e69433e9252',attempt:2,reason:'unverifiable_evidence',promptDigest:'df0780d77e833d0fe64ae691edbda0689f635220c565646833d4f1b8a757dffd'});
 export const QUOTE_RECOVERY_INSTRUCTION='補充引文格式要求：每一筆 evidence 的 quote 和 passageQuote 都必須是各自指定學生回合或原文段落中的一段連續原文，逐字保留字形、標點與次序。若需要引用兩處不相鄰的原文，請分成兩筆 evidence，分別填寫各自的 passageId 與 passageQuote；不得把不同位置的片段拼接、倒置、刪去中間文字或以省略號連成同一引文。這項要求只規範引文格式，不改變原有判準或預定任何評定結果。';
 export const TIMEOUT_RECOVERY=Object.freeze({...QUOTE_RECOVERY,attemptId:FULL_OPERATION+':language-er-independent:2',receiptDigest:'b41d1c970dce288895d60f23cd4959289d76e1869485f7179ae78c66a144b4f3',attempt:3,reason:'gateway_unavailable'});
+export const CASE2_RECOVERY=Object.freeze({caseId:'language-er-misconception',attemptId:FULL_OPERATION+':language-er-misconception:1',receiptDigest:'b0e1633c7fa1d5e4a85b2fc6bf5dbcb9c789765f0af69b39468b298a434ae901',attempt:2,reason:'gateway_unavailable',promptDigest:'ef5621bd06bc7e44a848449d40bfd589400cb3bfeb526ec36c8eddaf8cf47c6a'});
 const exactRecovery=(a,b)=>!!a&&Object.keys(a).length===Object.keys(b).length&&Object.entries(b).every(([k,v])=>a[k]===v);
 export function recoveryChain(authority){
  const pins=authority?.recoveryReadbacks;
- if(!Array.isArray(pins)||pins.length<1||pins.length>2||!exactRecovery(pins[0],QUOTE_RECOVERY)||pins.length===2&&!exactRecovery(pins[1],TIMEOUT_RECOVERY))return [];
- return pins.length===2?[QUOTE_RECOVERY,TIMEOUT_RECOVERY]:[QUOTE_RECOVERY];
+ const allowed=[QUOTE_RECOVERY,TIMEOUT_RECOVERY,CASE2_RECOVERY];
+ if(!Array.isArray(pins)||pins.length<1||pins.length>3||pins.some((p,i)=>!exactRecovery(p,allowed[i])))return [];
+ return allowed.slice(0,pins.length);
 }
-export const quotationRecovery=authority=>recoveryChain(authority).at(-1)||null;
+export const caseRecovery=(authority,caseId)=>recoveryChain(authority).filter(p=>p.caseId===caseId).at(-1)||null;
+export const quotationRecovery=authority=>caseRecovery(authority,QUOTE_RECOVERY.caseId);
 export const recoveryPrompt=prompt=>prompt+'\n\n'+QUOTE_RECOVERY_INSTRUCTION;
 export const recoveryFailureMatches=(r,pin=QUOTE_RECOVERY)=>r?.caseId===pin.caseId&&r.attemptId===pin.attemptId&&r.receiptDigest===pin.receiptDigest&&r.state==='review'&&r.reservedMicros===84000&&!!r.finishedAt&&!r.boundaryStop&&(pin===QUOTE_RECOVERY?r.accountedMicros===0&&r.finalAssessment&&r.model===FULL_MODEL&&r.modelVersion===FULL_MODEL:r.accountedMicros===null&&!r.finalAssessment&&!r.model&&!r.modelVersion&&r.chunkCount===0&&r.partialChars===0);
 // All receipt-bearing fields are compared again in the atomic reservation, after
@@ -68,6 +71,8 @@ export function fullAdmission({authority,packet,caseId,rows=[],history,capacity,
  if(!Number.isFinite(now)||!Number.isFinite(Date.parse(authority.readyAt))||!Number.isFinite(Date.parse(authority.hardExpiry))||now<Date.parse(authority.readyAt)||now>=Date.parse(authority.hardExpiry))return stop('full_expired','operation');
  if(!history?.reconciled||history.receiptSetDigest!==authority.priorReceiptSetDigest)return stop('full_history_unreconciled','operation');
  const chain=recoveryChain(authority),recovery=chain.at(-1),failed=chain.map(pin=>rows.find(r=>r.attemptId===pin.attemptId)),replacement=recovery&&rows.find(r=>r.attemptId===FULL_OPERATION+':'+recovery.caseId+':'+recovery.attempt);
+ const previousCases=[...new Set(chain.slice(0,-1).map(p=>p.caseId))].filter(id=>id!==recovery?.caseId);
+ if(previousCases.some(id=>{const p=caseRecovery(authority,id);return !rows.some(r=>r.attemptId===FULL_OPERATION+':'+id+':'+p.attempt&&r.state==='finished');}))return stop('full_recovery_required','operation');
  if(chain.some((pin,i)=>!recoveryFailureMatches(failed[i],pin)||!failed[i].sourceValid))return stop('full_recovery_receipt_mismatch','operation');
  if(rows.some(r=>r.sourceValid!==true||!['reserved','finishing','finished','review'].includes(r.state)||r.state==='finished'&&(!r.finishedAt||r.accountedMicros===null||!r.finalAssessment||typeof r.modelVersion!=='string'||!r.modelVersion||r.model!==FULL_MODEL)||!packet.cases.some(c=>c.id===r.caseId)||(r.attemptId!==FULL_OPERATION+':'+r.caseId+':1'&&!(chain.some(p=>r.caseId===p.caseId&&r.attemptId===FULL_OPERATION+':'+r.caseId+':'+p.attempt)))||r.reservedMicros!==84000||r.accountedMicros!==null&&(!int(r.accountedMicros)||r.accountedMicros>84000))||new Set(rows.map(r=>r.attemptId)).size!==rows.length)return stop('full_ledger_invalid','operation');
  // A failed or unknown case ends this batch. Neither a new day nor another case

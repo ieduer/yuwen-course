@@ -7,7 +7,7 @@ import {acceptanceEnvironment,ACCEPTANCE_ORIGIN as origin} from '../site/dialogu
 import {handleDialogue,callDialogueModel} from '../site/dialogue-source.js';
 import {requestDialogueBudget} from '../site/dialogue-recovery.js';
 import {E2E_OPERATION,E2E_HARD_EXPIRY,E2E_AUTHORITY_DIGEST,E2E_LESSONS} from '../site/dialogue-e2e-admission.js';
-import {FULL_OPERATION,ORIGINAL_RECEIPTS,digest,QUOTE_RECOVERY as Q,TIMEOUT_RECOVERY as T,fullReceipt} from '../site/dialogue-full-language.js';
+import {FULL_OPERATION,ORIGINAL_RECEIPTS,digest,QUOTE_RECOVERY as Q,TIMEOUT_RECOVERY as T,CASE2_RECOVERY as C,fullReceipt} from '../site/dialogue-full-language.js';
 import packet from '../site/dialogue-full-language-packet.json' with {type:'json'};
 const OP='yw-e2e-real-dialogue-20261017-v1',H='a'.repeat(64),at=Date.parse('2026-10-17T12:00:00Z'),expiry='2026-10-17T17:00:00Z',modelVersion='synthetic-pinned-version';
 const student={id:1,ucUserId:553},lesson='lesson-1717-p2',version='11111111-2222-4333-8444-555555555555',database='c45988a6-9094-4306-bcce-98704b3989e3';
@@ -41,20 +41,21 @@ async function fixture(t,{calibrations=28,ordinary=false}={}){
 }
 
 const load=p=>p?JSON.parse(fs.readFileSync(p,'utf8')).response.result.value.body:null;
-const failed=[load(process.env.YW_RECOVERY_READBACK),load(process.env.YW_TIMEOUT_READBACK)];
-const recoveryTest=(name,fn)=>test(name,{skip:failed.some(x=>!x)&&'Both retained readbacks required'},fn);
+const failed=[load(process.env.YW_RECOVERY_READBACK),load(process.env.YW_TIMEOUT_READBACK),load(process.env.YW_CASE2_READBACK)];
+const recoveryTest=(name,fn)=>test(name,{skip:failed.slice(0,2).some(x=>!x)&&'Both retained readbacks required'},fn);
 async function recoveryFixture(t,count=2){
- const f=await fixture(t),c=packet.cases.find(c=>c.id===Q.caseId),pins=[Q,T].slice(0,count),id=Q.attemptId;
- f.sql.prepare('DELETE FROM dialogue_events WHERE turn_id=?').run(id);f.sql.prepare('DELETE FROM dialogue_calls WHERE turn_id=?').run(id);f.sql.prepare('DELETE FROM dialogue_turns WHERE id=?').run(id);f.sql.prepare('DELETE FROM dialogue_sessions WHERE id=?').run(id+':session');
+ const f=await fixture(t),c=packet.cases.find(c=>c.id===Q.caseId),pins=[Q,T,C].slice(0,count),id=Q.attemptId;
+ for(const id of [...new Set(pins.map(p=>p.caseId))].map(c=>FULL_OPERATION+':'+c+':1')){f.sql.prepare('DELETE FROM dialogue_events WHERE turn_id=?').run(id);f.sql.prepare('DELETE FROM dialogue_calls WHERE turn_id=?').run(id);f.sql.prepare('DELETE FROM dialogue_turns WHERE id=?').run(id);f.sql.prepare('DELETE FROM dialogue_sessions WHERE id=?').run(id+':session');}
  for(const rb of failed.slice(0,count)){const r=rb.rawRow;
   f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,1,?,?,?,?,?,?)').run(r.session_id,'calibration:'+c.lessonId,r.turn_id,r.curriculum_json,packet.policyVersion,r.created_at,r.finished_at);
   f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,'student','synthetic','synthetic_calibration',?,?)").run(r.turn_id,r.session_id,c.id,H,packet.policyVersion,r.created_at);
   f.sql.prepare("INSERT INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,reserved_micros,accounted_micros,finished_at,budget_policy_json,usage_json) VALUES(?,?,1,?,2400,'review',?,84000,?,?,?,?)").run(r.turn_id,r.session_id,r.day,r.created_at,r.accounted_micros,r.finished_at,r.budget_policy_json,r.usage_json);
   f.sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(r.turn_id+':result',r.session_id,r.turn_id,'synthetic_calibration_unconfirmed',r.details_json,r.finished_at);
  }
- const last=pins.at(-1),accepted=FULL_OPERATION+':'+c.id+':'+last.attempt;
- f.seed(accepted,{caseSpec:c,version:policy.model});
- f.sql.prepare("UPDATE dialogue_sessions SET curriculum_json=json_set(curriculum_json,'$.promptDigest',?,'$.recoveryOf',?) WHERE id=?").run(last.promptDigest,last.receiptDigest,accepted+':session');
+ const accepted=FULL_OPERATION+':'+Q.caseId+':'+(count===1?2:3);
+ for(const caseId of [...new Set(pins.map(p=>p.caseId))]){const last=pins.filter(p=>p.caseId===caseId).at(-1),c=packet.cases.find(c=>c.id===caseId),rid=FULL_OPERATION+':'+caseId+':'+last.attempt;
+ f.seed(rid,{caseSpec:c,version:policy.model});
+ f.sql.prepare("UPDATE dialogue_sessions SET curriculum_json=json_set(curriculum_json,'$.promptDigest',?,'$.recoveryOf',?) WHERE id=?").run(last.promptDigest,last.receiptDigest,rid+':session');}
  f.sql.prepare("UPDATE dialogue_events SET details_json=json_set(details_json,'$.modelVersion',?) WHERE event_type='synthetic_calibration_result'").run(policy.model);
  Object.assign(f.full,{recoveryReadbacks:pins,maxAttempts:28+count,maxReservedMicros:(28+count)*84000});f.env.YW_CALIBRATION_FULL_LANGUAGE_JSON=JSON.stringify(f.full);
  const getRaw=id=>f.sql.prepare("SELECT c.*,s.student_id session_owner,s.curriculum_json,e.details_json,(SELECT COUNT(*) FROM dialogue_stream_chunks k WHERE k.turn_id=c.turn_id) chunk_count,(SELECT COALESCE(SUM(LENGTH(content)),0) FROM dialogue_stream_chunks k WHERE k.turn_id=c.turn_id) partial_chars FROM dialogue_calls c JOIN dialogue_sessions s ON s.id=c.session_id JOIN dialogue_events e ON e.id=c.turn_id||':result' WHERE c.turn_id=?").get(id);
@@ -94,3 +95,5 @@ recoveryTest('E2E recovery: a partial continuation rechecks pinned failures and 
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_calls WHERE json_extract(budget_policy_json,'$.isolatedAdmission.operation')=?").get(OP).n,1);
  assert.equal(await fullReceipt(f.getRaw(T.attemptId)),T.receiptDigest);
 });
+
+test('E2E case2: both per-case replacements required and all three failures retained',{skip:failed.some(x=>!x)},async t=>{const f=await recoveryFixture(t,3);assert.equal((await f.send()).status,200);assert.deepEqual(await Promise.all(f.pins.map(p=>fullReceipt(f.getRaw(p.attemptId)))),[Q.receiptDigest,T.receiptDigest,C.receiptDigest]);const g=await recoveryFixture(t,3);g.sql.prepare("UPDATE dialogue_calls SET state='review' WHERE turn_id=?").run(g.accepted);assert.equal((await g.send()).status,429);assert.equal(g.actualCalls(),0);});
