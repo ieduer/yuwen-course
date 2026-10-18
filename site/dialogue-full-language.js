@@ -19,17 +19,19 @@ export const QUOTE_RECOVERY=Object.freeze({caseId:'language-er-independent',atte
 export const QUOTE_RECOVERY_INSTRUCTION='補充引文格式要求：每一筆 evidence 的 quote 和 passageQuote 都必須是各自指定學生回合或原文段落中的一段連續原文，逐字保留字形、標點與次序。若需要引用兩處不相鄰的原文，請分成兩筆 evidence，分別填寫各自的 passageId 與 passageQuote；不得把不同位置的片段拼接、倒置、刪去中間文字或以省略號連成同一引文。這項要求只規範引文格式，不改變原有判準或預定任何評定結果。';
 export const TIMEOUT_RECOVERY=Object.freeze({...QUOTE_RECOVERY,attemptId:FULL_OPERATION+':language-er-independent:2',receiptDigest:'b41d1c970dce288895d60f23cd4959289d76e1869485f7179ae78c66a144b4f3',attempt:3,reason:'gateway_unavailable'});
 export const CASE2_RECOVERY=Object.freeze({caseId:'language-er-misconception',attemptId:FULL_OPERATION+':language-er-misconception:1',receiptDigest:'b0e1633c7fa1d5e4a85b2fc6bf5dbcb9c789765f0af69b39468b298a434ae901',attempt:2,reason:'gateway_unavailable',promptDigest:'ef5621bd06bc7e44a848449d40bfd589400cb3bfeb526ec36c8eddaf8cf47c6a'});
+export const CASE2_QUOTE_RECOVERY=Object.freeze({...CASE2_RECOVERY,attemptId:FULL_OPERATION+':language-er-misconception:2',receiptDigest:'314599a28c92a3e84466f14ea3862b3479d3dc4d7988f4ee6503b7b61bf064c4',attempt:3,reason:'unverifiable_evidence',promptDigest:'a70280936a83592d6dcd732bc0c6d003b891bb50cbb7a3b754fd7aa92bcdee48'});
+export const needsQuotationInstruction=pin=>[QUOTE_RECOVERY,TIMEOUT_RECOVERY,CASE2_QUOTE_RECOVERY].includes(pin);
 const exactRecovery=(a,b)=>!!a&&Object.keys(a).length===Object.keys(b).length&&Object.entries(b).every(([k,v])=>a[k]===v);
 export function recoveryChain(authority){
  const pins=authority?.recoveryReadbacks;
- const allowed=[QUOTE_RECOVERY,TIMEOUT_RECOVERY,CASE2_RECOVERY];
- if(!Array.isArray(pins)||pins.length<1||pins.length>3||pins.some((p,i)=>!exactRecovery(p,allowed[i])))return [];
+ const allowed=[QUOTE_RECOVERY,TIMEOUT_RECOVERY,CASE2_RECOVERY,CASE2_QUOTE_RECOVERY];
+ if(!Array.isArray(pins)||pins.length<1||pins.length>4||pins.some((p,i)=>!exactRecovery(p,allowed[i])))return [];
  return allowed.slice(0,pins.length);
 }
 export const caseRecovery=(authority,caseId)=>recoveryChain(authority).filter(p=>p.caseId===caseId).at(-1)||null;
 export const quotationRecovery=authority=>caseRecovery(authority,QUOTE_RECOVERY.caseId);
 export const recoveryPrompt=prompt=>prompt+'\n\n'+QUOTE_RECOVERY_INSTRUCTION;
-export const recoveryFailureMatches=(r,pin=QUOTE_RECOVERY)=>r?.caseId===pin.caseId&&r.attemptId===pin.attemptId&&r.receiptDigest===pin.receiptDigest&&r.state==='review'&&r.reservedMicros===84000&&!!r.finishedAt&&!r.boundaryStop&&(pin===QUOTE_RECOVERY?r.accountedMicros===0&&r.finalAssessment&&r.model===FULL_MODEL&&r.modelVersion===FULL_MODEL:r.accountedMicros===null&&!r.finalAssessment&&!r.model&&!r.modelVersion&&r.chunkCount===0&&r.partialChars===0);
+export const recoveryFailureMatches=(r,pin=QUOTE_RECOVERY)=>r?.caseId===pin.caseId&&r.attemptId===pin.attemptId&&r.receiptDigest===pin.receiptDigest&&r.state==='review'&&r.reservedMicros===84000&&!!r.finishedAt&&!r.boundaryStop&&(pin.reason==='unverifiable_evidence'?r.accountedMicros===0&&r.finalAssessment&&r.model===FULL_MODEL&&r.modelVersion===FULL_MODEL:r.accountedMicros===null&&!r.finalAssessment&&!r.model&&!r.modelVersion&&r.chunkCount===0&&r.partialChars===0);
 // All receipt-bearing fields are compared again in the atomic reservation, after
 // their complete hashes have been checked. Unknown cost is never changed to zero.
 export function failedReceiptCondition(rows){

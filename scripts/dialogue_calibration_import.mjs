@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {isDeepStrictEqual} from 'node:util';
 import packet from '../site/dialogue-full-language-packet.json' with {type:'json'};
-import {FULL_OPERATION,FULL_MODEL,RELEASE_CASE_COUNT,releaseCases,fullReceipt,fullMaterialize,digest,QUOTE_RECOVERY,recoveryPrompt,caseRecovery,recoveryChain,recoveryFailureMatches} from '../site/dialogue-full-language.js';
+import {FULL_OPERATION,FULL_MODEL,RELEASE_CASE_COUNT,releaseCases,fullReceipt,fullMaterialize,digest,QUOTE_RECOVERY,needsQuotationInstruction,recoveryPrompt,caseRecovery,recoveryChain,recoveryFailureMatches} from '../site/dialogue-full-language.js';
 import {validateProposal} from '../site/dialogue-policy.js';
 import {reconciledCost} from '../site/dialogue-budget.js';
 import {projectReleaseJson} from './build_release_site.mjs';
@@ -46,7 +46,7 @@ export async function inspectCalibrationReadback(readback,execution,load=loadCur
  assert(readback.history?.reconciled===true,'history unreconciled');same(readback.history.receiptSetDigest,execution.priorReceiptSetDigest,'history digest mismatch');
  const raw=load(c.lessonId),source=JSON.parse(projectReleaseJson(`dialogue-curriculum/${c.lessonId}.json`,JSON.stringify(raw)));
  same(await digest(raw),c.rawSourceDigest,'current raw curriculum changed');same(await digest(source),c.sourceDigest,'current projected curriculum changed');
- const fixture=fullMaterialize(c,source);same(await digest(fixture.prompt),c.promptDigest,'reconstructed prompt changed');if(recoveryOf&&c.id===QUOTE_RECOVERY.caseId)fixture.prompt=recoveryPrompt(fixture.prompt);same(await digest(fixture.prompt),promptDigest,'recovery prompt changed');
+ const fixture=fullMaterialize(c,source);same(await digest(fixture.prompt),c.promptDigest,'reconstructed prompt changed');if(needsQuotationInstruction(recovery))fixture.prompt=recoveryPrompt(fixture.prompt);same(await digest(fixture.prompt),promptDigest,'recovery prompt changed');
  const row=readback.rawRow;assert(row,'raw row missing');same(row.turn_id,attemptId,'raw attempt mismatch');same(row.session_id,attemptId+':session','raw session mismatch');
  assert(Number.isSafeInteger(row.student_id)&&row.student_id>0&&row.student_id===row.session_owner,'raw owner mismatch');same(sha('dialogue-owner:'+row.student_id),execution.ownerRef,'owner identity mismatch');
  same(row.state,'finished','unfinished or failed case');same(row.reserved_micros,84000,'reservation changed');
@@ -95,7 +95,7 @@ export async function inspectCalibrationBatch(readbacks,execution,load=loadCurri
   }
  }
  assert(changes.length+preserved.length===9,'all9 representative language items required');
- return {status:'mechanical-pass-semantic-review-required',recoveryReadbacks:execution.recoveryReadbacks||[],retainedFailedAttempts:recoveryChain(execution).map(p=>({attemptId:p.attemptId,receiptDigest:p.receiptDigest,accountedMicros:p===QUOTE_RECOVERY?0:null,reservedMicros:84000,providerAttempts:1})),sourceCommit:execution.sourceCommit,artifactSha256:execution.artifactSha256,apisVersion:execution.apisVersion,packetDigest:sourceDigest,executionDigest:await digest(execution),model:FULL_MODEL,modelVersion:cases[0].modelVersion,cases,accountedMicros:cases.reduce((n,c)=>n+c.accountedMicros,0),changes,preserved,sourceChanges,sourceFiles:packet.sourceFiles,reviewRequiredCaseIds:cases.map(c=>c.caseId),overlayApplied:false,paidCallsAuthorized:false,releaseAuthorized:false,notice:'Local hashes and structural checks do not authenticate provider evidence or certify author fidelity and teaching quality. Review original readbacks and every case before applying this exact diff through the existing source/release workflow. Never regenerate consumed packets.'};
+ return {status:'mechanical-pass-semantic-review-required',recoveryReadbacks:execution.recoveryReadbacks||[],retainedFailedAttempts:recoveryChain(execution).map(p=>({attemptId:p.attemptId,receiptDigest:p.receiptDigest,accountedMicros:p.reason==='unverifiable_evidence'?0:null,reservedMicros:84000,providerAttempts:1})),sourceCommit:execution.sourceCommit,artifactSha256:execution.artifactSha256,apisVersion:execution.apisVersion,packetDigest:sourceDigest,executionDigest:await digest(execution),model:FULL_MODEL,modelVersion:cases[0].modelVersion,cases,accountedMicros:cases.reduce((n,c)=>n+c.accountedMicros,0),changes,preserved,sourceChanges,sourceFiles:packet.sourceFiles,reviewRequiredCaseIds:cases.map(c=>c.caseId),overlayApplied:false,paidCallsAuthorized:false,releaseAuthorized:false,notice:'Local hashes and structural checks do not authenticate provider evidence or certify author fidelity and teaching quality. Review original readbacks and every case before applying this exact diff through the existing source/release workflow. Never regenerate consumed packets.'};
 }
 
 // A source-data projection, not a semantic approval or execution capability.

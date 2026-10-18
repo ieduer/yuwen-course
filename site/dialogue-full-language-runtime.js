@@ -2,7 +2,7 @@ import {fetchAssessmentAsset} from './assessment-assets.js';
 // Owner-only synthetic execution. No paid authority or deployment activation is
 // supplied by this module. Request JSON cannot supply either capability.
 import packet from './dialogue-full-language-packet.json' with {type:'json'};
-import {FULL_OPERATION as OP,HISTORICAL_BASE as base,FULL_CASE_COUNT,RELEASE_CASE_COUNT,FULL_MODEL,FULL_E2E_OPERATION,QUOTE_RECOVERY,recoveryChain,failedReceiptCondition,quotationRecovery,recoveryPrompt,fullActivation,fullAdmission,fullSourceGate,fullMaterialize,fullReceipt as receipt,digest} from './dialogue-full-language.js';
+import {FULL_OPERATION as OP,HISTORICAL_BASE as base,FULL_CASE_COUNT,RELEASE_CASE_COUNT,FULL_MODEL,FULL_E2E_OPERATION,QUOTE_RECOVERY,needsQuotationInstruction,recoveryChain,failedReceiptCondition,quotationRecovery,recoveryPrompt,fullActivation,fullAdmission,fullSourceGate,fullMaterialize,fullReceipt as receipt,digest} from './dialogue-full-language.js';
 import {acceptanceContext} from './dialogue-acceptance.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
 import {POLICY_VERSION,LIMITS,validateProposal} from './dialogue-policy.js';
@@ -62,7 +62,7 @@ export async function handleFullLanguageCalibration(request,env,student,callMode
  if(!fullSourceGate(curriculum,c).eligible)return json({code:'full_case_source_blocked',scope:'case'},409);
  const fixture=fullMaterialize(c,curriculum);
  if(await digest(fixture.prompt)!==c.promptDigest)return json({code:'full_prompt_mismatch',scope:'operation'},409);
- if(recoveryOf&&c.id===QUOTE_RECOVERY.caseId)fixture.prompt=recoveryPrompt(fixture.prompt);
+ if(needsQuotationInstruction(attemptRecovery))fixture.prompt=recoveryPrompt(fixture.prompt);
  if(await digest(fixture.prompt)!==promptDigest)return json({code:'full_recovery_prompt_mismatch',scope:'operation'},409);
  let budget;try{budget=dialogueBudget(env);}catch{return json({code:'budget_policy_required'},503);}
  if(budget.model!==contract.model||budget.reserveMicros!==84000||budget.globalDailyMicros>50000000||budget.userDailyMicros>50000000)return json({code:'calibration_budget_mismatch'},503);

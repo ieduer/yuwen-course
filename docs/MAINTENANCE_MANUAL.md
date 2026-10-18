@@ -1,3 +1,21 @@
+## 2026-10-18 — case 2 quotation repair (local only, execution unapproved)
+
+Current isolated deployment6423ca06/source6de270e completed the approved case2
+attempt2; it failed the unchanged validator for a concatenated quotation.
+Receipt314599a2…bf064c4 has known zero cost; both TIMEOUT liabilities remain
+unknown168000micros. Case1 attempt3 remains accepted and must not be rerun.
+
+The local candidate adds the already reviewed contiguous-quotation instruction
+only to a proposed case2 attempt3, with exact derived prompt digest. The frozen
+packet, base prompt, source, validator, model, LOW, single-provider limit and
+original13:14:55.135UTC cutoff are unchanged. Runtime/importer retain all four
+failed receipts and select each case's exact replacement. Any next failure is
+terminal. Local approval authorizes repair and a precise amendment package;
+no additional model request, receipt replay or deployment is authorized yet.
+
+The earlier sections below are historical local preparation, not current runtime
+or renewed execution authority.
+
 ## 2026-10-18 — approved case 2 single recovery (local preparation)
 
 The owner explicitly accepted unchanged upstream timeout risk and authorized one

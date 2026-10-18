@@ -152,3 +152,38 @@ case2Test('case2: altered failure and unapproved pin sequence fail closed',async
  const f=await case2Fixture(t);for(const pins of [[Q,C],[Q,T,{...C,promptDigest:H}],[Q,T,C,C]])assert.deepEqual(recoveryChain({recoveryReadbacks:pins}),[]);
  f.sql.prepare('UPDATE dialogue_calls SET accounted_micros=0 WHERE turn_id=?').run(C.attemptId);assert.equal((await f.request(packet.cases.find(x=>x.id===C.caseId),2)).code,'full_recovery_receipt_mismatch');
 });
+
+import {CASE2_QUOTE_RECOVERY as CQ} from '../site/dialogue-full-language.js';
+const case2QuoteRaw=process.env.YW_CASE2_QUOTE_READBACK?JSON.parse(fs.readFileSync(process.env.YW_CASE2_QUOTE_READBACK)).response.result.value.body:null;
+const cqTest=(name,fn)=>test(name,{skip:(!retained||!timed||!case2Raw||!case2QuoteRaw)&&'Four retained failures required'},fn);
+async function case2QuoteFixture(t){
+ const f=await case2Fixture(t),r=case2QuoteRaw.rawRow,c=packet.cases.find(c=>c.id===CQ.caseId);
+ f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,1,?,?,?,?,?,?)').run(r.session_id,'calibration:'+c.lessonId,r.turn_id,r.curriculum_json,packet.policyVersion,r.created_at,r.finished_at);
+ f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,'student','synthetic','synthetic_calibration',?,?)").run(r.turn_id,r.session_id,c.id,c.promptDigest,packet.policyVersion,r.created_at);
+ f.sql.prepare("INSERT INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,reserved_micros,accounted_micros,finished_at,budget_policy_json,usage_json) VALUES(?,?,1,?,2400,'review',?,84000,0,?,?,?)").run(r.turn_id,r.session_id,r.day,r.created_at,r.finished_at,r.budget_policy_json,r.usage_json);
+ f.sql.prepare('INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').run(r.turn_id+':result',r.session_id,r.turn_id,'synthetic_calibration_unconfirmed',r.details_json,r.finished_at);
+ Object.assign(f.authority,{maxAttempts:32,maxReservedMicros:32*84000,recoveryReadbacks:[Q,T,C,CQ]});f.env.YW_CALIBRATION_FULL_LANGUAGE_JSON=JSON.stringify(f.authority);
+ return {...f,c};
+}
+cqTest('case2 quote: original bad evidence still rejected; only split continuous quotes validate',async()=>{
+ const c=packet.cases.find(c=>c.id===CQ.caseId),source=JSON.parse(projectReleaseJson('dialogue-curriculum/'+c.lessonId+'.json',JSON.stringify(loadCurriculum(c.lessonId)))),material=fullMaterialize(c,source),raw=case2QuoteRaw.result.received.value;
+ assert.throws(()=>validateProposal(raw,material),/unverifiable_evidence/);
+ const v=structuredClone(raw),e=v.assessments[0].evidence[0];v.assessments[0].evidence=[{...e,passageQuote:'顺风而呼，声非加疾也，而闻者彰。'},{...e,passageQuote:'君子博学而日参省乎己'}];validateProposal(v,material);
+ assert.equal(await digest(material.prompt),C.promptDigest);assert.equal(await digest(recoveryPrompt(material.prompt)),CQ.promptDigest);
+});
+cqTest('case2 quote: exact single attempt3 preserves four failures and case1 success; importer agrees',async t=>{
+ const f=await case2QuoteFixture(t);let calls=0;
+ const fn=async(e,p,id,onReply,b)=>{calls++;assert.equal(await digest(p),CQ.promptDigest);assert.equal(b.providerAttemptLimit,1);const x=structuredClone(case2QuoteRaw.result.received),q=x.value.assessments[0].evidence[0];x.value.assessments[0].evidence=[{...q,passageQuote:'顺风而呼，声非加疾也，而闻者彰。'},{...q,passageQuote:'君子博学而日参省乎己'}];return x;};
+ const r=await f.request(f.c,3,fn);assert.equal(r.call.state,'finished');assert.equal(calls,1);assert.deepEqual(await Promise.all(r.recoveryFailures.map(fullReceipt)),[Q.receiptDigest,T.receiptDigest,C.receiptDigest,CQ.receiptDigest]);
+ const execution={...f.authority,activationDigest:f.authority.registryReceiptDigest,ownerRef:r.ownerRef,budget:JSON.parse(r.rawRow.budget_policy_json)};assert.equal((await inspectCalibrationReadback(r,execution)).attemptId,OP+':'+CQ.caseId+':3');
+ const first=await(await handle(req(target,null,3),f.env,student,fn)).json();assert.equal((await inspectCalibrationReadback(first,execution)).attemptId,OP+':'+Q.caseId+':3');assert.equal(calls,1);assert.equal(r.rows.filter(r=>r.accountedMicros===null).length,2);
+ await f.request(f.c,3,fn);assert.equal(calls,1);assert.equal((await f.request(f.c,4,fn)).code,'calibration_case_invalid');
+});
+cqTest('case2 quote: unchanged bad model output remains terminal and cannot admit another case',async t=>{
+ const f=await case2QuoteFixture(t);const r=await f.request(f.c,3,async()=>structuredClone(case2QuoteRaw.result.received));assert.equal(r.call.state,'review');assert.equal(r.result.reason,'unverifiable_evidence');assert.equal((await f.request(target,1)).call.state,'review');
+ assert.equal(fullAdmission({authority:f.authority,packet,caseId:packet.cases[2].id,rows:r.rows,history:r.history,capacity:r.capacity,now:at}).code,'full_boundary_stop');
+});
+cqTest('case2 quote: stale pins, refunded unknowns and altered failure cannot authorize dispatch',async t=>{
+ const f=await case2QuoteFixture(t);for(const pins of [[Q,T,CQ],[Q,T,C,{...CQ,promptDigest:C.promptDigest}],[Q,T,C,CQ,CQ]])assert.deepEqual(recoveryChain({recoveryReadbacks:pins}),[]);
+ f.sql.prepare("UPDATE dialogue_events SET details_json=details_json||' ' WHERE id=?").run(CQ.attemptId+':result');assert.equal((await f.request(f.c,3)).code,'full_recovery_receipt_mismatch');
+});

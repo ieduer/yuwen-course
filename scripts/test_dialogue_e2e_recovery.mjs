@@ -7,7 +7,7 @@ import {acceptanceEnvironment,ACCEPTANCE_ORIGIN as origin} from '../site/dialogu
 import {handleDialogue,callDialogueModel} from '../site/dialogue-source.js';
 import {requestDialogueBudget} from '../site/dialogue-recovery.js';
 import {E2E_OPERATION,E2E_HARD_EXPIRY,E2E_AUTHORITY_DIGEST,E2E_LESSONS} from '../site/dialogue-e2e-admission.js';
-import {FULL_OPERATION,ORIGINAL_RECEIPTS,digest,QUOTE_RECOVERY as Q,TIMEOUT_RECOVERY as T,CASE2_RECOVERY as C,fullReceipt} from '../site/dialogue-full-language.js';
+import {FULL_OPERATION,ORIGINAL_RECEIPTS,digest,QUOTE_RECOVERY as Q,TIMEOUT_RECOVERY as T,CASE2_RECOVERY as C,CASE2_QUOTE_RECOVERY as CQ,fullReceipt} from '../site/dialogue-full-language.js';
 import packet from '../site/dialogue-full-language-packet.json' with {type:'json'};
 const OP='yw-e2e-real-dialogue-20261017-v1',H='a'.repeat(64),at=Date.parse('2026-10-17T12:00:00Z'),expiry='2026-10-17T17:00:00Z',modelVersion='synthetic-pinned-version';
 const student={id:1,ucUserId:553},lesson='lesson-1717-p2',version='11111111-2222-4333-8444-555555555555',database='c45988a6-9094-4306-bcce-98704b3989e3';
@@ -41,10 +41,10 @@ async function fixture(t,{calibrations=28,ordinary=false}={}){
 }
 
 const load=p=>p?JSON.parse(fs.readFileSync(p,'utf8')).response.result.value.body:null;
-const failed=[load(process.env.YW_RECOVERY_READBACK),load(process.env.YW_TIMEOUT_READBACK),load(process.env.YW_CASE2_READBACK)];
+const failed=[load(process.env.YW_RECOVERY_READBACK),load(process.env.YW_TIMEOUT_READBACK),load(process.env.YW_CASE2_READBACK),load(process.env.YW_CASE2_QUOTE_READBACK)];
 const recoveryTest=(name,fn)=>test(name,{skip:failed.slice(0,2).some(x=>!x)&&'Both retained readbacks required'},fn);
 async function recoveryFixture(t,count=2){
- const f=await fixture(t),c=packet.cases.find(c=>c.id===Q.caseId),pins=[Q,T,C].slice(0,count),id=Q.attemptId;
+ const f=await fixture(t),c=packet.cases.find(c=>c.id===Q.caseId),pins=[Q,T,C,CQ].slice(0,count),id=Q.attemptId;
  for(const id of [...new Set(pins.map(p=>p.caseId))].map(c=>FULL_OPERATION+':'+c+':1')){f.sql.prepare('DELETE FROM dialogue_events WHERE turn_id=?').run(id);f.sql.prepare('DELETE FROM dialogue_calls WHERE turn_id=?').run(id);f.sql.prepare('DELETE FROM dialogue_turns WHERE id=?').run(id);f.sql.prepare('DELETE FROM dialogue_sessions WHERE id=?').run(id+':session');}
  for(const rb of failed.slice(0,count)){const r=rb.rawRow;
   f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,1,?,?,?,?,?,?)').run(r.session_id,'calibration:'+c.lessonId,r.turn_id,r.curriculum_json,packet.policyVersion,r.created_at,r.finished_at);
@@ -96,4 +96,6 @@ recoveryTest('E2E recovery: a partial continuation rechecks pinned failures and 
  assert.equal(await fullReceipt(f.getRaw(T.attemptId)),T.receiptDigest);
 });
 
-test('E2E case2: both per-case replacements required and all three failures retained',{skip:failed.some(x=>!x)},async t=>{const f=await recoveryFixture(t,3);assert.equal((await f.send()).status,200);assert.deepEqual(await Promise.all(f.pins.map(p=>fullReceipt(f.getRaw(p.attemptId)))),[Q.receiptDigest,T.receiptDigest,C.receiptDigest]);const g=await recoveryFixture(t,3);g.sql.prepare("UPDATE dialogue_calls SET state='review' WHERE turn_id=?").run(g.accepted);assert.equal((await g.send()).status,429);assert.equal(g.actualCalls(),0);});
+test('E2E case2: both per-case replacements required and all three failures retained',{skip:failed.slice(0,3).some(x=>!x)},async t=>{const f=await recoveryFixture(t,3);assert.equal((await f.send()).status,200);assert.deepEqual(await Promise.all(f.pins.map(p=>fullReceipt(f.getRaw(p.attemptId)))),[Q.receiptDigest,T.receiptDigest,C.receiptDigest]);const g=await recoveryFixture(t,3);g.sql.prepare("UPDATE dialogue_calls SET state='review' WHERE turn_id=?").run(g.accepted);assert.equal((await g.send()).status,429);assert.equal(g.actualCalls(),0);});
+
+test('E2E case2 quotation: separate case1 and case2 attempt3 required with all four failure hashes',{skip:failed.some(x=>!x)},async t=>{const f=await recoveryFixture(t,4);assert.equal((await f.send()).status,200);assert.deepEqual(await Promise.all(f.pins.map(p=>fullReceipt(f.getRaw(p.attemptId)))),[Q.receiptDigest,T.receiptDigest,C.receiptDigest,CQ.receiptDigest]);const g=await recoveryFixture(t,4);g.sql.prepare("UPDATE dialogue_calls SET state='review' WHERE turn_id=?").run(FULL_OPERATION+':'+CQ.caseId+':3');assert.equal((await g.send()).status,429);assert.equal(g.actualCalls(),0);});
