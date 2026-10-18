@@ -79,6 +79,26 @@ test('ordinary sends collect exact original fields, evaluate once and retain ide
  assert.equal(f.sql.prepare('SELECT raw_value FROM learning_evaluations').get().raw_value,83);assert.equal(data.sourceSubmissions[0].status,'confirmed');assert.equal(data.sourceSubmissions[0].score,83);
  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluation_jobs').get().n,0);
 });
+test('continuous source grading responds to the new question while grading only the prior exact answer once',async t=>{
+ const f=fixture(t,'lesson-1498',o=>o.domain==='legacy'&&o.legacy.questionKind==='revision');
+ const input={original:'江畔何人初見月',action:'刪去初字',revised:'江畔何人見月',reason:'初字追問人與月相遇的起點，刪去後失去時間追問。'};
+ const followup='我想慢一點。你說的時間追問，和下一句的江月何年初照人有什麼關係？';let calls=0,formalPromptSeen='';
+ f.options.callModel=async(_env,prompt)=>{
+  calls++;if(calls===1){const studentTurn=f.sql.prepare("SELECT id FROM dialogue_turns WHERE role='student' ORDER BY sequence DESC LIMIT 1").get();return {value:{reply:'你已說清這個改動的差別，我們接著談。',assessments:[],sourceDraft:{objectiveId:f.curriculum.objectives[0].id,fields:Object.fromEntries(Object.entries(input).map(([key,quote])=>[key,{turnId:studentTurn.id,quote}]))}},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};}
+  formalPromptSeen=prompt;return {value:{reply:prompt.includes(followup)?'我們慢慢看：前一句問誰最早見月，後一句把提問轉向江月初次照人。':'你前面的字句修改有依據。',score:83,verdict:'有文本依據',strength:'能比較',gap:'可再精確',nextQuestion:'何處呼應？'},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
+ };
+ const first=await f.send(await f.read(),Object.values(input).join('；'),{conversation:true});assert.equal(first.response.status,200);assert(first.data.sourceDraft);
+ const second=await f.send(first.data,followup,{conversation:true});assert.equal(second.response.status,200,JSON.stringify(second.data));
+ assert(formalPromptSeen.includes(followup),'the actual source grader must receive the new student question');
+ assert.match(second.data.turns.findLast(t=>t.role==='teacher').content,/我們慢慢看/);
+ const context=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_context_prepared' AND json_extract(details_json,'$.conversationTurn') IS NOT NULL").get().details_json);
+ assert.equal(context.conversationTurn.contentSha256,createHash('sha256').update(followup).digest('hex'));assert.equal(context.conversationTurn.chars,followup.length);
+ assert.equal(context.conversationTurn.turnId,f.sql.prepare('SELECT id FROM dialogue_turns WHERE mutation_id=?').get(second.body.mutationId).id);
+ assert.deepEqual(JSON.parse(f.sql.prepare('SELECT submitted_payload_json FROM learning_submission_records').get().submitted_payload_json),input);
+ assert.equal(f.sql.prepare('SELECT raw_value FROM learning_evaluations').get().raw_value,83);assert.equal(calls,2);
+ assert.equal((await handleDialogue(f.req(second.body),f.env,student,null,f.options)).status,200);assert.equal(calls,2);
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,1);
+});
 test('GET never issues a question, reconciles a call or spends; a stale task cannot grade',async t=>{
  const f=fixture(t,'lesson-1498',o=>o.domain==='legacy'&&o.legacy.questionKind==='structure');const data=await f.read();
  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_sessions').get().n,0);

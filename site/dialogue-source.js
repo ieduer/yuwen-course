@@ -431,6 +431,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const reviewSourceMaterials=await Promise.all((materials.reviewSources||[]).map(async r=>({objectiveId:r.objectiveId,source:r.source,sourceOnly:true,submissionEligible:false,sourceStatus:r.sourceStatus,materialSha256:await sha(JSON.stringify(r))})));
   const details={policyVersion:POLICY_VERSION,contextLayout:formal?'original-evaluator':CONTEXT_LAYOUT_VERSION,promptSha256:await sha(prompt),promptChars:prompt.length,sourceProvenance:materials.sourceProvenance,passages:(materials.passages||[]).map(p=>({id:p.id,sourceOffsets:p.sourceOffsets||null,excerpted:!!p.excerpted,annotationIds:p.annotationIds||[]})),annotationIds:(materials.annotations||[]).map(a=>a.noteId),...(annotationTranscriptions.length?{annotationTranscriptions}:{}),coverage:materials.sourceCoverage||materials.coverage,continued:!!resume};
   if(responseJsonSchema)Object.assign(details,{responseSchemaVersion:CONCLUSION_SCHEMA_VERSION,responseSchemaSha256:await sha(JSON.stringify(responseJsonSchema))});
+  if(formal&&body.conversation===true)details.conversationTurn={turnId,contentSha256:await sha(body.content),chars:body.content.length};
   if(originalRequirementSources.length)details.originalRequirementSources=originalRequirementSources;
   if(reviewSourceMaterials.length)details.reviewSourceMaterials=reviewSourceMaterials;
   await db.prepare("INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,'source_context_prepared',?,?)").bind(`${turnId}:context:${resume?'continued':'initial'}`,session.id,turnId,JSON.stringify(details),now()).run();
@@ -472,7 +473,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
    let result=null,teacherId=null,attempted=false;
    const response=await formalAction({...formal,lessonId:curriculum.lessonId},turnId,async sourcePrompt=>{
     if(attempted)throw Error('duplicate_source_evaluation');attempted=true;
-    const prompt=formalPrompt(sourcePrompt,curriculum,formal);await recordPrompt(prompt);
+    const prompt=formalPrompt(sourcePrompt,curriculum,formal,body.conversation===true?{turnId,content:body.content}:null);await recordPrompt(prompt);
     result=await observe(await callModel(env,prompt,turnId,persistReply,budget));
     if(typeof result.value?.reply!=='string'||!result.value.reply.trim()||result.value.reply.length>LIMITS.replyChars||!result.value.reply.startsWith(persisted))throw Error('invalid_source_reply');
     return JSON.stringify(result.value);
