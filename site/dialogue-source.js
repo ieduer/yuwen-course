@@ -8,7 +8,7 @@ import {handleCalibration} from './dialogue-calibration.js';
 import {historicalEvidence} from './dialogue-legacy.js';
 import {acceptanceContext} from './dialogue-acceptance.js';
 import {dialogueCallAdmission,assertIsolatedCallCurrent} from './dialogue-e2e-admission.js';
-import {RENEWED_E2E_OPERATION,renewedOperationCondition,validateRenewedResult} from './dialogue-e2e-renewal.js';
+import {RENEWED_E2E_OPERATION,renewedOperationCondition,prepareRenewedRetainedFailures,validateRenewedResult} from './dialogue-e2e-renewal.js';
 import {recordCorrection} from './dialogue-corrections.js';
 import {hasClassicalAnnotatedReadReceipt} from './classical-first-read-source.js';
 import {consumeGatewayStream,studentStream,validatedProviderAccounting} from './dialogue-stream.js';
@@ -329,6 +329,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   return json({code:'budget_policy_required',draftSaved:true,message:'支出政策尚未配置；草稿已保存，本輪未呼叫 AI。'},503);
  }
  const at=now(),day=at.slice(0,10),turnId=uuid();
+ await prepareRenewedRetainedFailures(db,budget,student.id);
  const callAdmission=dialogueCallAdmission(budget,student,LIMITS,day);
  // Atomic D1 batch: CAS + reservation + student persistence precede the only AI call.
  const changes=await db.batch([
@@ -389,6 +390,7 @@ async function continueDialogue({request,env,db,student,session,curriculum,body,
  const priorAttempts=JSON.parse(failed.details_json).providerAccounting.attempts;
  const chunks=await all(db.prepare('SELECT sequence,content FROM dialogue_stream_chunks WHERE turn_id=? ORDER BY sequence').bind(turn.id));
  const at=now();
+ await prepareRenewedRetainedFailures(db,budget,student.id);
  const renewedCondition=renewedOperationCondition(budget,student.id,{continuingTurn:turn.id});
  const updates=await db.batch([
   db.prepare(`UPDATE dialogue_sessions SET revision=revision+1,inflight=?,updated_at=? WHERE id=? AND student_id=? AND revision=? AND inflight IS NULL AND EXISTS(SELECT 1 FROM dialogue_calls WHERE turn_id=? AND state='review') AND NOT EXISTS(SELECT 1 FROM dialogue_events WHERE id=?) AND (SELECT COUNT(*) FROM dialogue_calls WHERE state IN ('reserved','finishing'))<? AND ${renewedCondition.sql}`).bind(turn.id,at,session.id,student.id,body.revision,turn.id,`${turn.id}:continued`,LIMITS.concurrency,...renewedCondition.args),

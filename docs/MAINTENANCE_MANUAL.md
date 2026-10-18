@@ -1,3 +1,29 @@
+## 2026-10-18 — terminal TIMEOUT recovery delta (local, inactive)
+
+Supersedes the one-shot quotation recovery section below only when a new approved
+receipt activates both exact failed receipt pins. Attempt 1 remains review with
+known zero cost; attempt 2 (`b41d1c97…4b4f3`) remains review with unknown usage and
+84,000 micro-USD reserved. No existing attempt is replayed, overwritten or refunded.
+One additional attempt 3 uses the same contiguous-quotation prompt and unchanged
+validator, model, single-provider limit and original 13:14:55.135 UTC deadline.
+Any further failure, unknown result, mismatch or extra attempt is terminal.
+
+The accepted APIS source sets a 12-second provider deadline; YW received its
+terminal 503 after about 13 seconds, before YW's 20-second timeout. This change
+does not increase either timeout or alter APIS. A local metadata-only reader now
+recognizes the accepted `apis-log-v2` format; it must leave missing/ambiguous
+platform correlation unresolved and cannot infer a provider phase from HTTP 503.
+
+Calibration and the three-lesson E2E prerequisite select the exact successful
+replacement, retain both pinned failures, and compare their complete stored
+receipt fields again within the atomic reservation. E2E still requires all 28
+accepted cases and one model version, with 120 logical / 3 provider-attempt limits.
+The offline importer and current driver preserve the same receipt chain.
+
+Local tests and build are not a deployment or renewed model authority. A fresh
+schema-v1 receipt and precise additional budget/disposition must precede another
+send. No credential, APIS, student history or public curriculum is changed here.
+
 ## 2026-10-18 — single contiguous-quotation recovery (local candidate)
 
 The owner authorized one new attempt for `language-er-independent`, bound to the
