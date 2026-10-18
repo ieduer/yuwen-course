@@ -1,3 +1,6 @@
+Current 2026-10-18T23:19:54.743443+00:00: b1a4bf7 default-OFF separate synthetic cause diagnostic implemented;24focused tests and full artifact de89c610 pass locally, unpushed/unregistered. Ordinary schema/validators/requests unchanged. Originalcase23 cause UNKNOWN; Full189 incomplete. New1provider/3business and guarded release proposal pending (shared87 withA1three,publisher550,unknown+84000micros). No model/business/CF/push/deploy this turn. Evidence: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/case23-recovery/schema/synthetic-detail-fix-01a15131/REPORT.md
+
+Historical prior summaries:
 Current 2026-10-18T22:53:32.892398+00:00: approved2public Google document reads attempted once in2021ms; tool result truncated before schema-contract sections and second document. Contract verification incomplete; originalcase23 cause UNKNOWN. Additional same-document reads proposed, unapproved. Model/business/CF0; runtime/counters/receipts unchanged; Full189 incomplete. Evidence: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/case23-recovery/schema/official-contract-01a15131/REPORT.md
 
 Historical local-analysis summary; findings retained:

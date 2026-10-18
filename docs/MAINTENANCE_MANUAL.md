@@ -1,3 +1,23 @@
+## 2026-10-18T23:19:54.743443+00:00 — separate synthetic cause diagnostic locally built, unapproved
+
+Source b1a4bf71994eee4dacc4c1e75824a9dd995e104c adds bounded error categories and
+four allowlisted parameter roots only inside the fixed synthetic endpoint.
+Ordinary HTTP400 projection, lesson schema, payload, validators and budgets stay
+unchanged. New operation yw-synthetic-schema-cause-v1 is OFF without fresh exact
+activation; consumed original operation cannot activate it. No authorization or
+receipt schema version changed. Categories report wording, not proven cause.
+Runtime16 plus publisher8 tests pass; full offline artifact de89c61007057608415c3ba13864c756f67e65c4b2b6c7c2dd9bac1970f91ce1
+changes only dialogue-single-diagnostic.js versus6c0d1c5. Source unpushed, registry
+untouched, no model/business/CF/deploy. Originalcase23 cause UNKNOWN.
+Proposal pending: separate1provider/3business, unknown+84000micros,40min with
+last20rollback, shared87(A1three preserved), publisher550, fresh exact guarded
+source/approval/artifact/baseline/lease/rollback. All original terminal evidence,
+22accepted8failed,31calls,unknown420000micros preserved; Full189 incomplete.
+Report: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/case23-recovery/schema/synthetic-detail-fix-01a15131/REPORT.md
+
+Prior official-document truncation gap is superseded by this turn's targeted
+reads; the earlier evidence and local transport findings remain historical.
+
 ## 2026-10-18T22:53:32.892398+00:00 — approved public documentation reads returned truncated evidence
 
 Human approved at most2public Google documentation reads within60seconds. Both
