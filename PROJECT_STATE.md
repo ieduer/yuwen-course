@@ -1,3 +1,13 @@
+## Current local preparation — 2026-10-17 PDT
+
+suen approved the single minimal caller-pair unlock and full189 continuation.
+APIS remains Claude-owned. This separate maintenance branch preserves formal
+175f8ae and adds only inert admission/temporary owner identity checking plus
+focused tests and documentation. No credentials or live config changed. The
+full189 source remains a separate candidate; do not substitute this branch for it.
+Window not started; provider/Cloudflare writes0. Source, checks and exact cleanup:
+`/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/REPORT.md`.
+
 ## Textbook plates candidate — 2026-10-11
 
 Branch `claude/pdf-page-images-20261011` on accepted source `7bfe60c`: the "原圖" dialog reads current-edition PDF pages from sun.bdfz.net through `site/data/textbook-pages.v1.json` (catalog release `20261011T015939Z-24b58ca8`; 198 lesson files, 742 legacy page references: exact page-map rows first, then 41 lesson-level overrides proven from the PDF text layer, which replace inherited wrong page ranges and never drop a page without naming the lesson that owns it; 3 lessons absent from the current edition show no page; 2 lessons keep exact rows pending a human check). Leaf-only: scoring inputs, manifests, Worker, D1 schema and App content are byte-identical to `7bfe60c`. Local candidate only; not pushed, previewed or deployed. Production acceptance, the owner's signed-in write/readback and public Status remain pending the registered release transaction. See the 2026-10-11 section of the maintenance manual.
