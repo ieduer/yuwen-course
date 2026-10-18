@@ -19,3 +19,20 @@ test('accepted logger source produces the schema and outcome consumed by this ad
  logger('WARN','Google provider attempt completed','PRIVATE',{model:'gemini-3.8-flash',outcome:'TIMEOUT',timeoutMs:12000,allocated_provider_ms:12000,configured_provider_ms:12000,providerStage:'awaiting_headers',providerAttemptNumber:1,providerAttemptLimit:1});
  const x=event();x.source={message:logged};const r=projectTimeoutWindow(response([x,terminal()]),{version,from,to});assert.equal(r.stage,'awaiting_headers');assert.equal(r.rows[0].details.outcome,'TIMEOUT');assert.equal(r.rows[0].details.timeoutMs,12000);assert(!JSON.stringify(r).includes('PRIVATE'));
 });
+
+const metadataOnly=x=>{delete x.$workers.requestId;x.$metadata.requestId='platform-request:CaseSensitive';return x;};
+test('metadata-only platform identity is hashed with explicit provenance',()=>{
+ const rows=[metadataOnly(event()),metadataOnly(terminal())],r=projectTimeoutWindow(response(rows),{version,from,to});
+ assert.equal(r.stage,'awaiting_headers');assert.equal(r.rows[0].invocationProvenance,'$metadata.requestId');assert.equal(r.rows[0].invocationDigest,r.rows[1].invocationDigest);assert(!JSON.stringify(r).includes('platform-request:CaseSensitive'));
+});
+test('conflicting platform fields fail closed instead of selecting a convenient ID',()=>{
+ const x=event();x.$metadata.requestId='different';const r=timeoutMetadata(x,version);assert.equal(r.invocationDigest,null);assert(r.gaps.includes('platform_invocation_conflict'));
+ const same=event();same.$metadata.requestId=id;assert.equal(timeoutMetadata(same,version).invocationProvenance,'$workers.requestId+$metadata.requestId');
+});
+test('absent or invalid platform identity does not use caller trace or event identity',()=>{
+ for(const value of [undefined,'',{},'x'.repeat(257),'bad\nvalue']){const x=metadataOnly(event());x.$metadata.requestId=value;x.$metadata.traceId=id;x.$metadata.id=id;x.source.requestId=id;assert.equal(timeoutMetadata(x,version).invocationDigest,null);}
+});
+test('distinct requests sharing trace do not join provider completion to HTTP503',()=>{
+ const a=metadataOnly(event()),b=metadataOnly(terminal());a.$metadata.traceId=b.$metadata.traceId='shared-trace';b.$metadata.requestId='different-platform-request';
+ const r=projectTimeoutWindow(response([a,b]),{version,from,to});assert.notEqual(r.rows[0].invocationDigest,r.rows[1].invocationDigest);assert.equal(r.stage,null);
+});

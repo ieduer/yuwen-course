@@ -1,3 +1,24 @@
+## 2026-10-18 — local diagnostic correlation repair
+
+The reviewed saved Cloudflare metadata places the request identifier under
+`$metadata.requestId`, while the previous offline reader checked only
+`$workers.requestId`. The reader now hashes bounded server request IDs from
+either envelope, records their provenance, and rejects conflicting or invalid
+values. Trace IDs, event IDs and caller/source request IDs never substitute for
+request identity. Eleven focused tests pass, including the exact accepted APIS
+logger source; no network query, build or deployment is required by this change.
+
+The saved attempt3 metadata establishes one platform chain ending in TIMEOUT
+while awaiting response headers. It does not independently map that chain to a
+YW application attempt or identify the cancellation trigger/upstream cause.
+`deadline_origin` describes timeout allocation, not the abort initiator.
+No timer, retry, validation, curriculum, receipt or runtime file changes here.
+Isolated runtime remains f58ac141/eace9a43; all failures and unknown252000micros,
+full_boundary_stop and original2026-10-18T13:14:55.135Z cutoff remain. Formal189
+release is incomplete. Current evidence authority is the case2-quotation-repair
+REPORT.md under execution-01a14cdd; the earlier local preparation sections are
+history and confer no fresh execution allowance.
+
 ## 2026-10-18 — case 2 quotation repair (local only, execution unapproved)
 
 Current isolated deployment6423ca06/source6de270e completed the approved case2
