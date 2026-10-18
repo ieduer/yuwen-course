@@ -1,4 +1,55 @@
-## 2026-10-18T21:48:53.673259+00:00 — inert diagnostic publisher prepared locally, not registered
+## 2026-10-18T22:17:00.018667+00:00 — single synthetic diagnostic and controlled rollback prepared locally
+
+Current owner: 01a150ee. This is local preparation only; no push, registration,
+provider request, configuration write or deployment has occurred. Report and
+exact artifact/receipt bindings: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/case23-recovery/schema/single-diagnostic-01a150ee/REPORT.md.
+
+The separate acceptance-only `/api/dialogue/diagnostic/v1` is OFF when its one
+setting is absent or disabled. It uses the existing User Center resolver for
+owner 553 and the existing isolated D1 tables; no migration or new identity is
+introduced. A fixed global operation key atomically reserves one server ledger
+row and one 84000-micro unknown reserve. The caller submits only the operation
+and reservation digest. Payload, model, schema, source, artifact, approval and
+APIS pins are immutable. One service-binding provider call has no retries. GET
+returns the same terminal receipt; success, refusal, failure and unknown are
+terminal, and late completion cannot replace a readback-sealed unknown result.
+No model text, provider message, cookie, key name or private student input is
+persisted. Only bounded accounting and safe correlated HTTP400 fields survive.
+The synthetic schema keeps original keywords/nesting/refs/required fields and
+390 enum positions, while replacing enum values. String lengths and payload
+size differ: its result cannot prove the original case23 root cause or count as
+lesson acceptance. Original expired admission and terminal rows remain intact.
+
+A distinct one-use forward receipt permits only that one configuration setting
+and four reviewed private runtime modules to differ from the consumed original.
+It requires clean pushed source, hashed approval/ledger/evidence and a fresh
+registered publisher; the local copies used for tests grant no authority.
+At most 23 forward requests include one configuration PATCH, one deployment and
+three bounded status reads; missing static assets stop with no upload. An
+uncertain configuration write gets one same-target readback and stops. The
+callable `scripts/publish_dialogue_rollback.mjs --execute-once <absolute receipt>`
+requires its own fresh hashed registration and consumed terminal forward
+receipt. It uses the exact old deployment/source and preservation pins: 12
+requests for inert rollback, 13 with diagnostic config removal, or at most 13
+for config-only recovery after a PATCH with no deployment. Secret values are
+inherited; the restore PATCH deletes only the diagnostic setting plus already
+retired keys. Uncertain rollback POST stops after readback with no further write;
+uncertain restore PATCH can finish only on matching readback, never a retry.
+
+Local checks: diagnostic 9/9; new publisher/rollback 8/8. Prior HTTP400 10/10 and
+inert publisher 32/32 evidence is retained and not rerun. Existing budgets remain
+30 logical/provider, 22 accepted/8 failed, unknown 336000 micros, shared 70 and
+publisher 480. Proposed external transaction is unapproved: 40 minutes with the
+last 20 reserved for rollback, one synthetic provider call, three business HTTP
+calls, unknown reserve +84000. Exact 43 infrastructure calls are 7 shared and
+36 publisher; shared cap 80 (not 78) is needed to preserve the existing three A1
+calls. No live source or baseline is inferred from this preparation. If a worker
+crashes and no authorized readback occurs before readbackUntil, its reservation
+stays conservative; there is no automatic replacement operation or replay.
+
+The prior inert preparation section below is historical; its evidence remains.
+
+## Historical 2026-10-18T21:48:53.673259+00:00 — inert diagnostic publisher prepared locally, not registered
 
 Sole owner01a150ee continues the approved local-only preparation. The publisher
 now supports a separately registered inert_candidate proof: the exact consumed

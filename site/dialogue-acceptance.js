@@ -72,6 +72,10 @@ export function acceptanceAllowsIdentity(env, user) {
 
 export function createAcceptanceWorker(worker) {
   return {async fetch(request, bindings, ctx) {
+    if(new URL(request.url).pathname==='/api/dialogue/diagnostic/v1'){
+      const {handleSingleDiagnostic}=await import('./dialogue-single-diagnostic.js');
+      return handleSingleDiagnostic(request,bindings);
+    }
     let env;
     try { env = acceptanceEnvironment(request, bindings); }
     catch (error) { return rejection(error.message, 503); }

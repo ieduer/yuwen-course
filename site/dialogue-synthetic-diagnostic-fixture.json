@@ -1,0 +1,932 @@
+{
+  "version": "yw-single-diagnostic-fixture-v1",
+  "syntheticOnly": true,
+  "payload": {
+    "stream": true,
+    "providerAttemptLimit": 1,
+    "model": "gemini-3.8-flash",
+    "contents": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Synthetic compatibility diagnostic only. There is no student, lesson assessment, or historical answer in this request. Return JSON with reply \"Synthetic diagnostic only\" and assessments []. Optional fields may be omitted. Do not invent an assessment."
+          }
+        ]
+      }
+    ],
+    "taskType": "chat",
+    "thinkingLevel": "low",
+    "generationConfig": {
+      "temperature": 0.3,
+      "maxOutputTokens": 2400,
+      "responseMimeType": "application/json",
+      "responseJsonSchema": {
+        "type": "object",
+        "properties": {
+          "reply": {
+            "type": "string"
+          },
+          "assessments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "objectiveId": {
+                  "type": "string",
+                  "enum": [
+                    "SYNTHETIC_VALUE_1",
+                    "SYNTHETIC_VALUE_2",
+                    "SYNTHETIC_VALUE_3",
+                    "SYNTHETIC_VALUE_4",
+                    "SYNTHETIC_VALUE_5",
+                    "SYNTHETIC_VALUE_6",
+                    "SYNTHETIC_VALUE_7",
+                    "SYNTHETIC_VALUE_8"
+                  ]
+                },
+                "outcome": {
+                  "type": "string",
+                  "enum": [
+                    "SYNTHETIC_VALUE_9",
+                    "SYNTHETIC_VALUE_10",
+                    "SYNTHETIC_VALUE_11",
+                    "SYNTHETIC_VALUE_12"
+                  ]
+                },
+                "rationale": {
+                  "type": "string"
+                },
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "criterion": {
+                        "type": "string",
+                        "enum": [
+                          "SYNTHETIC_VALUE_13",
+                          "SYNTHETIC_VALUE_14",
+                          "SYNTHETIC_VALUE_15",
+                          "SYNTHETIC_VALUE_16",
+                          "SYNTHETIC_VALUE_17",
+                          "SYNTHETIC_VALUE_18",
+                          "SYNTHETIC_VALUE_19",
+                          "SYNTHETIC_VALUE_20",
+                          "SYNTHETIC_VALUE_21",
+                          "SYNTHETIC_VALUE_22",
+                          "SYNTHETIC_VALUE_23",
+                          "SYNTHETIC_VALUE_24",
+                          "SYNTHETIC_VALUE_25",
+                          "SYNTHETIC_VALUE_26",
+                          "SYNTHETIC_VALUE_27",
+                          "SYNTHETIC_VALUE_28",
+                          "SYNTHETIC_VALUE_29"
+                        ]
+                      },
+                      "turnId": {
+                        "type": "string"
+                      },
+                      "quote": {
+                        "type": "string"
+                      },
+                      "passageId": {
+                        "type": "string"
+                      },
+                      "passageQuote": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "criterion",
+                      "turnId",
+                      "quote",
+                      "passageId",
+                      "passageQuote"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "maxItems": 20
+                }
+              },
+              "required": [
+                "objectiveId",
+                "outcome",
+                "rationale",
+                "evidence"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 8
+          },
+          "sourceDraft": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": true
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "conclusion": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "studentSummary": {
+                    "type": "string"
+                  },
+                  "change": {
+                    "type": "object",
+                    "properties": {
+                      "before": {
+                        "type": "object",
+                        "properties": {
+                          "turnId": {
+                            "type": "string",
+                            "enum": [
+                              "SYNTHETIC_VALUE_30",
+                              "SYNTHETIC_VALUE_31",
+                              "SYNTHETIC_VALUE_32",
+                              "SYNTHETIC_VALUE_33",
+                              "SYNTHETIC_VALUE_34"
+                            ]
+                          },
+                          "quote": {
+                            "$ref": "#/$defs/studentQuote"
+                          }
+                        },
+                        "required": [
+                          "turnId",
+                          "quote"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "after": {
+                        "type": "object",
+                        "properties": {
+                          "turnId": {
+                            "type": "string",
+                            "enum": [
+                              "SYNTHETIC_VALUE_35",
+                              "SYNTHETIC_VALUE_36",
+                              "SYNTHETIC_VALUE_37",
+                              "SYNTHETIC_VALUE_38",
+                              "SYNTHETIC_VALUE_39"
+                            ]
+                          },
+                          "quote": {
+                            "$ref": "#/$defs/studentQuote"
+                          }
+                        },
+                        "required": [
+                          "turnId",
+                          "quote"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "before",
+                      "after"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "stance": {
+                    "type": "object",
+                    "properties": {
+                      "turnId": {
+                        "type": "string",
+                        "enum": [
+                          "SYNTHETIC_VALUE_40",
+                          "SYNTHETIC_VALUE_41",
+                          "SYNTHETIC_VALUE_42",
+                          "SYNTHETIC_VALUE_43",
+                          "SYNTHETIC_VALUE_44"
+                        ]
+                      },
+                      "quote": {
+                        "$ref": "#/$defs/studentQuote"
+                      },
+                      "passageId": {
+                        "type": "string",
+                        "enum": [
+                          "SYNTHETIC_VALUE_45",
+                          "SYNTHETIC_VALUE_46",
+                          "SYNTHETIC_VALUE_47",
+                          "SYNTHETIC_VALUE_48",
+                          "SYNTHETIC_VALUE_49",
+                          "SYNTHETIC_VALUE_50",
+                          "SYNTHETIC_VALUE_51",
+                          "SYNTHETIC_VALUE_52",
+                          "SYNTHETIC_VALUE_53",
+                          "SYNTHETIC_VALUE_54",
+                          "SYNTHETIC_VALUE_55",
+                          "SYNTHETIC_VALUE_56",
+                          "SYNTHETIC_VALUE_57",
+                          "SYNTHETIC_VALUE_58"
+                        ]
+                      },
+                      "passageQuote": {
+                        "$ref": "#/$defs/passageQuote"
+                      }
+                    },
+                    "required": [
+                      "turnId",
+                      "quote",
+                      "passageId",
+                      "passageQuote"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "domains": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "domain": {
+                              "type": "string",
+                              "enum": [
+                                "SYNTHETIC_VALUE_59"
+                              ]
+                            },
+                            "finding": {
+                              "type": "string"
+                            },
+                            "evidence": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "turnId": {
+                                    "type": "string",
+                                    "enum": [
+                                      "SYNTHETIC_VALUE_60",
+                                      "SYNTHETIC_VALUE_61",
+                                      "SYNTHETIC_VALUE_62",
+                                      "SYNTHETIC_VALUE_63",
+                                      "SYNTHETIC_VALUE_64"
+                                    ]
+                                  },
+                                  "quote": {
+                                    "$ref": "#/$defs/studentQuote"
+                                  },
+                                  "passageId": {
+                                    "type": "string",
+                                    "enum": [
+                                      "SYNTHETIC_VALUE_65",
+                                      "SYNTHETIC_VALUE_66",
+                                      "SYNTHETIC_VALUE_67",
+                                      "SYNTHETIC_VALUE_68",
+                                      "SYNTHETIC_VALUE_69",
+                                      "SYNTHETIC_VALUE_70",
+                                      "SYNTHETIC_VALUE_71",
+                                      "SYNTHETIC_VALUE_72",
+                                      "SYNTHETIC_VALUE_73",
+                                      "SYNTHETIC_VALUE_74",
+                                      "SYNTHETIC_VALUE_75",
+                                      "SYNTHETIC_VALUE_76",
+                                      "SYNTHETIC_VALUE_77",
+                                      "SYNTHETIC_VALUE_78"
+                                    ]
+                                  },
+                                  "passageQuote": {
+                                    "$ref": "#/$defs/passageQuote"
+                                  }
+                                },
+                                "required": [
+                                  "turnId",
+                                  "quote",
+                                  "passageId",
+                                  "passageQuote"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "maxItems": 1
+                            },
+                            "preservedObjectives": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "SYNTHETIC_VALUE_79",
+                                  "SYNTHETIC_VALUE_80",
+                                  "SYNTHETIC_VALUE_81"
+                                ]
+                              },
+                              "maxItems": 2
+                            }
+                          },
+                          "required": [
+                            "domain",
+                            "finding",
+                            "evidence",
+                            "preservedObjectives"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "domain": {
+                              "type": "string",
+                              "enum": [
+                                "SYNTHETIC_VALUE_82"
+                              ]
+                            },
+                            "finding": {
+                              "type": "string"
+                            },
+                            "evidence": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "turnId": {
+                                    "type": "string",
+                                    "enum": [
+                                      "SYNTHETIC_VALUE_83",
+                                      "SYNTHETIC_VALUE_84",
+                                      "SYNTHETIC_VALUE_85",
+                                      "SYNTHETIC_VALUE_86",
+                                      "SYNTHETIC_VALUE_87"
+                                    ]
+                                  },
+                                  "quote": {
+                                    "$ref": "#/$defs/studentQuote"
+                                  },
+                                  "passageId": {
+                                    "type": "string",
+                                    "enum": [
+                                      "SYNTHETIC_VALUE_88",
+                                      "SYNTHETIC_VALUE_89",
+                                      "SYNTHETIC_VALUE_90",
+                                      "SYNTHETIC_VALUE_91",
+                                      "SYNTHETIC_VALUE_92",
+                                      "SYNTHETIC_VALUE_93",
+                                      "SYNTHETIC_VALUE_94",
+                                      "SYNTHETIC_VALUE_95",
+                                      "SYNTHETIC_VALUE_96",
+                                      "SYNTHETIC_VALUE_97",
+                                      "SYNTHETIC_VALUE_98",
+                                      "SYNTHETIC_VALUE_99",
+                                      "SYNTHETIC_VALUE_100",
+                                      "SYNTHETIC_VALUE_101"
+                                    ]
+                                  },
+                                  "passageQuote": {
+                                    "$ref": "#/$defs/passageQuote"
+                                  }
+                                },
+                                "required": [
+                                  "turnId",
+                                  "quote",
+                                  "passageId",
+                                  "passageQuote"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "maxItems": 1
+                            },
+                            "preservedObjectives": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "maxItems": 0
+                            }
+                          },
+                          "required": [
+                            "domain",
+                            "finding",
+                            "evidence",
+                            "preservedObjectives"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "domain": {
+                              "type": "string",
+                              "enum": [
+                                "SYNTHETIC_VALUE_102"
+                              ]
+                            },
+                            "finding": {
+                              "type": "string"
+                            },
+                            "evidence": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "turnId": {
+                                    "type": "string",
+                                    "enum": [
+                                      "SYNTHETIC_VALUE_103",
+                                      "SYNTHETIC_VALUE_104",
+                                      "SYNTHETIC_VALUE_105",
+                                      "SYNTHETIC_VALUE_106",
+                                      "SYNTHETIC_VALUE_107"
+                                    ]
+                                  },
+                                  "quote": {
+                                    "$ref": "#/$defs/studentQuote"
+                                  },
+                                  "passageId": {
+                                    "type": "string",
+                                    "enum": [
+                                      "SYNTHETIC_VALUE_108",
+                                      "SYNTHETIC_VALUE_109",
+                                      "SYNTHETIC_VALUE_110",
+                                      "SYNTHETIC_VALUE_111",
+                                      "SYNTHETIC_VALUE_112",
+                                      "SYNTHETIC_VALUE_113",
+                                      "SYNTHETIC_VALUE_114",
+                                      "SYNTHETIC_VALUE_115",
+                                      "SYNTHETIC_VALUE_116",
+                                      "SYNTHETIC_VALUE_117",
+                                      "SYNTHETIC_VALUE_118",
+                                      "SYNTHETIC_VALUE_119",
+                                      "SYNTHETIC_VALUE_120",
+                                      "SYNTHETIC_VALUE_121"
+                                    ]
+                                  },
+                                  "passageQuote": {
+                                    "$ref": "#/$defs/passageQuote"
+                                  }
+                                },
+                                "required": [
+                                  "turnId",
+                                  "quote",
+                                  "passageId",
+                                  "passageQuote"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "maxItems": 1
+                            },
+                            "preservedObjectives": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "SYNTHETIC_VALUE_122",
+                                  "SYNTHETIC_VALUE_123"
+                                ]
+                              },
+                              "maxItems": 2
+                            }
+                          },
+                          "required": [
+                            "domain",
+                            "finding",
+                            "evidence",
+                            "preservedObjectives"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "domain": {
+                              "type": "string",
+                              "enum": [
+                                "SYNTHETIC_VALUE_124"
+                              ]
+                            },
+                            "finding": {
+                              "type": "string"
+                            },
+                            "evidence": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "turnId": {
+                                    "type": "string",
+                                    "enum": [
+                                      "SYNTHETIC_VALUE_125",
+                                      "SYNTHETIC_VALUE_126",
+                                      "SYNTHETIC_VALUE_127",
+                                      "SYNTHETIC_VALUE_128",
+                                      "SYNTHETIC_VALUE_129"
+                                    ]
+                                  },
+                                  "quote": {
+                                    "$ref": "#/$defs/studentQuote"
+                                  },
+                                  "passageId": {
+                                    "type": "string",
+                                    "enum": [
+                                      "SYNTHETIC_VALUE_130",
+                                      "SYNTHETIC_VALUE_131",
+                                      "SYNTHETIC_VALUE_132",
+                                      "SYNTHETIC_VALUE_133",
+                                      "SYNTHETIC_VALUE_134",
+                                      "SYNTHETIC_VALUE_135",
+                                      "SYNTHETIC_VALUE_136",
+                                      "SYNTHETIC_VALUE_137",
+                                      "SYNTHETIC_VALUE_138",
+                                      "SYNTHETIC_VALUE_139",
+                                      "SYNTHETIC_VALUE_140",
+                                      "SYNTHETIC_VALUE_141",
+                                      "SYNTHETIC_VALUE_142",
+                                      "SYNTHETIC_VALUE_143"
+                                    ]
+                                  },
+                                  "passageQuote": {
+                                    "$ref": "#/$defs/passageQuote"
+                                  }
+                                },
+                                "required": [
+                                  "turnId",
+                                  "quote",
+                                  "passageId",
+                                  "passageQuote"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "maxItems": 1
+                            },
+                            "preservedObjectives": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "SYNTHETIC_VALUE_144"
+                                ]
+                              },
+                              "maxItems": 2
+                            }
+                          },
+                          "required": [
+                            "domain",
+                            "finding",
+                            "evidence",
+                            "preservedObjectives"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "domain": {
+                              "type": "string",
+                              "enum": [
+                                "SYNTHETIC_VALUE_145"
+                              ]
+                            },
+                            "finding": {
+                              "type": "string"
+                            },
+                            "evidence": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "turnId": {
+                                    "type": "string",
+                                    "enum": [
+                                      "SYNTHETIC_VALUE_146",
+                                      "SYNTHETIC_VALUE_147",
+                                      "SYNTHETIC_VALUE_148",
+                                      "SYNTHETIC_VALUE_149",
+                                      "SYNTHETIC_VALUE_150"
+                                    ]
+                                  },
+                                  "quote": {
+                                    "$ref": "#/$defs/studentQuote"
+                                  },
+                                  "passageId": {
+                                    "type": "string",
+                                    "enum": [
+                                      "SYNTHETIC_VALUE_151",
+                                      "SYNTHETIC_VALUE_152",
+                                      "SYNTHETIC_VALUE_153",
+                                      "SYNTHETIC_VALUE_154",
+                                      "SYNTHETIC_VALUE_155",
+                                      "SYNTHETIC_VALUE_156",
+                                      "SYNTHETIC_VALUE_157",
+                                      "SYNTHETIC_VALUE_158",
+                                      "SYNTHETIC_VALUE_159",
+                                      "SYNTHETIC_VALUE_160",
+                                      "SYNTHETIC_VALUE_161",
+                                      "SYNTHETIC_VALUE_162",
+                                      "SYNTHETIC_VALUE_163",
+                                      "SYNTHETIC_VALUE_164"
+                                    ]
+                                  },
+                                  "passageQuote": {
+                                    "$ref": "#/$defs/passageQuote"
+                                  }
+                                },
+                                "required": [
+                                  "turnId",
+                                  "quote",
+                                  "passageId",
+                                  "passageQuote"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "maxItems": 1
+                            },
+                            "preservedObjectives": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "maxItems": 0
+                            }
+                          },
+                          "required": [
+                            "domain",
+                            "finding",
+                            "evidence",
+                            "preservedObjectives"
+                          ],
+                          "additionalProperties": false
+                        }
+                      ]
+                    },
+                    "maxItems": 5,
+                    "minItems": 5
+                  }
+                },
+                "required": [
+                  "studentSummary",
+                  "change",
+                  "stance",
+                  "domains"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "reply",
+          "assessments"
+        ],
+        "additionalProperties": false,
+        "$defs": {
+          "studentQuote": {
+            "type": "string",
+            "enum": [
+              "SYNTHETIC_VALUE_165",
+              "SYNTHETIC_VALUE_166",
+              "SYNTHETIC_VALUE_167",
+              "SYNTHETIC_VALUE_168",
+              "SYNTHETIC_VALUE_169",
+              "SYNTHETIC_VALUE_170",
+              "SYNTHETIC_VALUE_171",
+              "SYNTHETIC_VALUE_172",
+              "SYNTHETIC_VALUE_173",
+              "SYNTHETIC_VALUE_174",
+              "SYNTHETIC_VALUE_175",
+              "SYNTHETIC_VALUE_176",
+              "SYNTHETIC_VALUE_177",
+              "SYNTHETIC_VALUE_178",
+              "SYNTHETIC_VALUE_179",
+              "SYNTHETIC_VALUE_180",
+              "SYNTHETIC_VALUE_181",
+              "SYNTHETIC_VALUE_182",
+              "SYNTHETIC_VALUE_183",
+              "SYNTHETIC_VALUE_184",
+              "SYNTHETIC_VALUE_185",
+              "SYNTHETIC_VALUE_186",
+              "SYNTHETIC_VALUE_187",
+              "SYNTHETIC_VALUE_188"
+            ]
+          },
+          "passageQuote": {
+            "type": "string",
+            "enum": [
+              "SYNTHETIC_VALUE_189",
+              "SYNTHETIC_VALUE_190",
+              "SYNTHETIC_VALUE_191",
+              "SYNTHETIC_VALUE_192",
+              "SYNTHETIC_VALUE_193",
+              "SYNTHETIC_VALUE_194",
+              "SYNTHETIC_VALUE_195",
+              "SYNTHETIC_VALUE_196",
+              "SYNTHETIC_VALUE_197",
+              "SYNTHETIC_VALUE_198",
+              "SYNTHETIC_VALUE_199",
+              "SYNTHETIC_VALUE_200",
+              "SYNTHETIC_VALUE_201",
+              "SYNTHETIC_VALUE_202",
+              "SYNTHETIC_VALUE_203",
+              "SYNTHETIC_VALUE_204",
+              "SYNTHETIC_VALUE_205",
+              "SYNTHETIC_VALUE_206",
+              "SYNTHETIC_VALUE_207",
+              "SYNTHETIC_VALUE_208",
+              "SYNTHETIC_VALUE_209",
+              "SYNTHETIC_VALUE_210",
+              "SYNTHETIC_VALUE_211",
+              "SYNTHETIC_VALUE_212",
+              "SYNTHETIC_VALUE_213",
+              "SYNTHETIC_VALUE_214",
+              "SYNTHETIC_VALUE_215",
+              "SYNTHETIC_VALUE_216",
+              "SYNTHETIC_VALUE_217",
+              "SYNTHETIC_VALUE_218",
+              "SYNTHETIC_VALUE_219",
+              "SYNTHETIC_VALUE_220",
+              "SYNTHETIC_VALUE_221",
+              "SYNTHETIC_VALUE_222",
+              "SYNTHETIC_VALUE_223",
+              "SYNTHETIC_VALUE_224",
+              "SYNTHETIC_VALUE_225",
+              "SYNTHETIC_VALUE_226",
+              "SYNTHETIC_VALUE_227",
+              "SYNTHETIC_VALUE_228",
+              "SYNTHETIC_VALUE_229",
+              "SYNTHETIC_VALUE_230",
+              "SYNTHETIC_VALUE_231",
+              "SYNTHETIC_VALUE_232",
+              "SYNTHETIC_VALUE_233",
+              "SYNTHETIC_VALUE_234",
+              "SYNTHETIC_VALUE_235",
+              "SYNTHETIC_VALUE_236",
+              "SYNTHETIC_VALUE_237",
+              "SYNTHETIC_VALUE_238",
+              "SYNTHETIC_VALUE_239",
+              "SYNTHETIC_VALUE_240",
+              "SYNTHETIC_VALUE_241",
+              "SYNTHETIC_VALUE_242",
+              "SYNTHETIC_VALUE_243",
+              "SYNTHETIC_VALUE_244",
+              "SYNTHETIC_VALUE_245",
+              "SYNTHETIC_VALUE_246",
+              "SYNTHETIC_VALUE_247",
+              "SYNTHETIC_VALUE_248",
+              "SYNTHETIC_VALUE_249",
+              "SYNTHETIC_VALUE_250",
+              "SYNTHETIC_VALUE_251",
+              "SYNTHETIC_VALUE_252",
+              "SYNTHETIC_VALUE_253",
+              "SYNTHETIC_VALUE_254",
+              "SYNTHETIC_VALUE_255",
+              "SYNTHETIC_VALUE_256",
+              "SYNTHETIC_VALUE_257",
+              "SYNTHETIC_VALUE_258",
+              "SYNTHETIC_VALUE_259",
+              "SYNTHETIC_VALUE_260",
+              "SYNTHETIC_VALUE_261",
+              "SYNTHETIC_VALUE_262",
+              "SYNTHETIC_VALUE_263",
+              "SYNTHETIC_VALUE_264",
+              "SYNTHETIC_VALUE_265",
+              "SYNTHETIC_VALUE_266",
+              "SYNTHETIC_VALUE_267",
+              "SYNTHETIC_VALUE_268",
+              "SYNTHETIC_VALUE_269",
+              "SYNTHETIC_VALUE_270",
+              "SYNTHETIC_VALUE_271",
+              "SYNTHETIC_VALUE_272",
+              "SYNTHETIC_VALUE_273",
+              "SYNTHETIC_VALUE_274",
+              "SYNTHETIC_VALUE_275",
+              "SYNTHETIC_VALUE_276",
+              "SYNTHETIC_VALUE_277",
+              "SYNTHETIC_VALUE_278",
+              "SYNTHETIC_VALUE_279",
+              "SYNTHETIC_VALUE_280",
+              "SYNTHETIC_VALUE_281",
+              "SYNTHETIC_VALUE_282",
+              "SYNTHETIC_VALUE_283",
+              "SYNTHETIC_VALUE_284",
+              "SYNTHETIC_VALUE_285",
+              "SYNTHETIC_VALUE_286",
+              "SYNTHETIC_VALUE_287",
+              "SYNTHETIC_VALUE_288",
+              "SYNTHETIC_VALUE_289",
+              "SYNTHETIC_VALUE_290",
+              "SYNTHETIC_VALUE_291",
+              "SYNTHETIC_VALUE_292",
+              "SYNTHETIC_VALUE_293",
+              "SYNTHETIC_VALUE_294",
+              "SYNTHETIC_VALUE_295",
+              "SYNTHETIC_VALUE_296",
+              "SYNTHETIC_VALUE_297",
+              "SYNTHETIC_VALUE_298",
+              "SYNTHETIC_VALUE_299",
+              "SYNTHETIC_VALUE_300",
+              "SYNTHETIC_VALUE_301",
+              "SYNTHETIC_VALUE_302",
+              "SYNTHETIC_VALUE_303",
+              "SYNTHETIC_VALUE_304",
+              "SYNTHETIC_VALUE_305",
+              "SYNTHETIC_VALUE_306",
+              "SYNTHETIC_VALUE_307",
+              "SYNTHETIC_VALUE_308",
+              "SYNTHETIC_VALUE_309",
+              "SYNTHETIC_VALUE_310",
+              "SYNTHETIC_VALUE_311",
+              "SYNTHETIC_VALUE_312",
+              "SYNTHETIC_VALUE_313",
+              "SYNTHETIC_VALUE_314",
+              "SYNTHETIC_VALUE_315",
+              "SYNTHETIC_VALUE_316",
+              "SYNTHETIC_VALUE_317",
+              "SYNTHETIC_VALUE_318",
+              "SYNTHETIC_VALUE_319",
+              "SYNTHETIC_VALUE_320",
+              "SYNTHETIC_VALUE_321",
+              "SYNTHETIC_VALUE_322",
+              "SYNTHETIC_VALUE_323",
+              "SYNTHETIC_VALUE_324",
+              "SYNTHETIC_VALUE_325",
+              "SYNTHETIC_VALUE_326",
+              "SYNTHETIC_VALUE_327",
+              "SYNTHETIC_VALUE_328",
+              "SYNTHETIC_VALUE_329",
+              "SYNTHETIC_VALUE_330",
+              "SYNTHETIC_VALUE_331",
+              "SYNTHETIC_VALUE_332",
+              "SYNTHETIC_VALUE_333",
+              "SYNTHETIC_VALUE_334",
+              "SYNTHETIC_VALUE_335",
+              "SYNTHETIC_VALUE_336",
+              "SYNTHETIC_VALUE_337",
+              "SYNTHETIC_VALUE_338",
+              "SYNTHETIC_VALUE_339",
+              "SYNTHETIC_VALUE_340",
+              "SYNTHETIC_VALUE_341",
+              "SYNTHETIC_VALUE_342",
+              "SYNTHETIC_VALUE_343",
+              "SYNTHETIC_VALUE_344",
+              "SYNTHETIC_VALUE_345",
+              "SYNTHETIC_VALUE_346",
+              "SYNTHETIC_VALUE_347",
+              "SYNTHETIC_VALUE_348",
+              "SYNTHETIC_VALUE_349",
+              "SYNTHETIC_VALUE_350",
+              "SYNTHETIC_VALUE_351",
+              "SYNTHETIC_VALUE_352",
+              "SYNTHETIC_VALUE_353",
+              "SYNTHETIC_VALUE_354",
+              "SYNTHETIC_VALUE_355",
+              "SYNTHETIC_VALUE_356",
+              "SYNTHETIC_VALUE_357",
+              "SYNTHETIC_VALUE_358",
+              "SYNTHETIC_VALUE_359",
+              "SYNTHETIC_VALUE_360",
+              "SYNTHETIC_VALUE_361",
+              "SYNTHETIC_VALUE_362",
+              "SYNTHETIC_VALUE_363",
+              "SYNTHETIC_VALUE_364",
+              "SYNTHETIC_VALUE_365",
+              "SYNTHETIC_VALUE_366",
+              "SYNTHETIC_VALUE_367",
+              "SYNTHETIC_VALUE_368",
+              "SYNTHETIC_VALUE_369",
+              "SYNTHETIC_VALUE_370",
+              "SYNTHETIC_VALUE_371",
+              "SYNTHETIC_VALUE_372",
+              "SYNTHETIC_VALUE_373",
+              "SYNTHETIC_VALUE_374",
+              "SYNTHETIC_VALUE_375",
+              "SYNTHETIC_VALUE_376",
+              "SYNTHETIC_VALUE_377",
+              "SYNTHETIC_VALUE_378",
+              "SYNTHETIC_VALUE_379",
+              "SYNTHETIC_VALUE_380",
+              "SYNTHETIC_VALUE_381",
+              "SYNTHETIC_VALUE_382",
+              "SYNTHETIC_VALUE_383",
+              "SYNTHETIC_VALUE_384",
+              "SYNTHETIC_VALUE_385",
+              "SYNTHETIC_VALUE_386",
+              "SYNTHETIC_VALUE_387",
+              "SYNTHETIC_VALUE_388",
+              "SYNTHETIC_VALUE_389",
+              "SYNTHETIC_VALUE_390"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "provenance": {
+    "version": "yw-entirely-synthetic-schema-v1",
+    "originalSchemaDigest": "2f92b73663e79208c6e5d206924f6df80785d7fa50d99fccf18102a53f8c5f77",
+    "schemaStructureDigest": "ecfcfa135a4208bc692dd25a2afb09296f2dfd8a97f6f744c94e7e1b55bbf373",
+    "syntheticSchemaDigest": "2bd23a50d60b0d4a2b1313ad2f27af58767ff933e3f2b8433838861bd857ff7c",
+    "payloadDigest": "6af0e47358ad211294cc5d09451d9e1e747714a29195376cdbc5bd85bd816172",
+    "enumValuesReplaced": 390,
+    "source": "Repository public curriculum and synthetic packet; never student/history data",
+    "comparisonLimit": "Schema keywords, nesting, required fields, refs and enum cardinality/types match; enum values/string lengths and payload size intentionally differ. A new response cannot establish the original root cause."
+  },
+  "fixtureSourceDigest": "67f80c4690c9cfcd97eff2e1adc6b828a4ffb06cd1515c132e6f65f650db99f1"
+}

@@ -551,7 +551,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   stream?.send('unconfirmed',{turnId,saved:true,retry:'readback_only',continuation:continuationDisposition(call,failure,!!resume)});
  }finally{stream?.close();}
 }
-function http400Diagnostic(failure){
+export function http400Diagnostic(failure){
  // Explicit source-verified enums only. Never retain or parse raw provider text.
  const diagnostic={},googleError={};
  const httpStatuses=[400,401,403,404,408,409,413,429,500,502,503,504];
