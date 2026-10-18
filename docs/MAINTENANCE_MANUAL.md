@@ -1,4 +1,22 @@
-## 2026-10-18 14:52 UTC — exact E2E contingency reallocation, local only
+## 2026-10-18 14:58 UTC — directly approved16UTC amendment, local only
+
+Human reply「批准」at2026-10-18T14:55:02Z (Sentinel_e7566398c5008191b7a728c69592aad1)
+approved the same execution window through16:00UTC. fullWindowValid now permits
+only the exact original07:14:55.135Z start and existing seven-pin recovery chain
+at that absolute expiry; other starts/chains/extensions stay denied. Two focused
+boundary tests pass, including the exact final millisecond and deadline. The
+previous80/175 passed checks remain applicable and were not rerun. All counts,
+failed/unknown evidence,119E2E allocation,154logical/394provider and monetary caps
+remain unchanged. No new operation or model dispatch is created by this edit.
+
+New source/artifact/config/receipt bindings are required before execution. Existing
+15UTC drafts are historical and cannot be replayed. Plan to stop new work15:40
+and retain20minutes for closeout/rollback;16:00 is the absolute boundary. Source
+is still local and provider schema/semantic acceptance and full189 remain open.
+Evidence: schema/reallocation119-01a14f72/deadline16 under execution-01a14cdd.
+Earlier entries are history.
+
+## Historical 2026-10-18 14:52 UTC — exact E2E contingency reallocation, local only
 
 The exact seven-pin case23 schema recovery now reserves one formerly unused E2E
 slot: calibration35 + E2E119 =154 logical calls. E2E provider attempts remain3

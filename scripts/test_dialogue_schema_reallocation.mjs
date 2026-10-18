@@ -4,12 +4,12 @@ import {DatabaseSync} from 'node:sqlite';
 import {E2ERunner} from './dialogue_e2e.mjs';
 import {acceptanceEnvironment} from '../site/dialogue-acceptance.js';
 import {isolatedDialogueAdmission,dialogueCallAdmission} from '../site/dialogue-e2e-admission.js';
-import {FULL_OPERATION,FULL_E2E_OPERATION,ORIGINAL_RECEIPTS,QUOTE_RECOVERY,TIMEOUT_RECOVERY,CASE2_RECOVERY,CASE2_QUOTE_RECOVERY,CASE2_FINITE_RECOVERY,CASE23_RECOVERY,CASE23_SCHEMA_RECOVERY} from '../site/dialogue-full-language.js';
+import {FULL_OPERATION,FULL_E2E_OPERATION,ORIGINAL_RECEIPTS,QUOTE_RECOVERY,TIMEOUT_RECOVERY,CASE2_RECOVERY,CASE2_QUOTE_RECOVERY,CASE2_FINITE_RECOVERY,CASE23_RECOVERY,CASE23_SCHEMA_RECOVERY,fullWindowValid,fullActivation} from '../site/dialogue-full-language.js';
 import packet from '../site/dialogue-full-language-packet.json' with {type:'json'};
 const H='a'.repeat(64),version='9f0d3759-d74e-4dc4-8879-f7be61ae79e6',origin='https://yw-acceptance.bdfz.net',database='c45988a6-9094-4306-bcce-98704b3989e3',at=Date.parse('2026-10-18T14:50:00Z');
 const chain=[QUOTE_RECOVERY,TIMEOUT_RECOVERY,CASE2_RECOVERY,CASE2_QUOTE_RECOVERY,CASE2_FINITE_RECOVERY,CASE23_RECOVERY,CASE23_SCHEMA_RECOVERY];
-function fixture(count=7,cap=count===7?119:120){
- const full={version:'yw-full-language-activation-v1',enabled:true,operation:FULL_OPERATION,authorityDigest:H,packetDigest:packet.sourceDigest,sourceCommit:'b'.repeat(40),artifactSha256:H,origin,ownerUserId:553,databaseId:database,apisVersion:version,registryReceiptDigest:H,singleProviderSourceProofDigest:H,priorReceiptSetDigest:H,priorReceipts:ORIGINAL_RECEIPTS,readyAt:'2026-10-18T07:14:55.135Z',hardExpiry:'2026-10-18T15:00:00.000Z',maxAttempts:28+count,maxReservedMicros:(28+count)*84000,maxProviderAttempts:1,reserveMicros:84000,maxConcurrency:1,recoveryReadbacks:chain.slice(0,count)};
+function fixture(count=7,cap=count===7?119:120,deadline='2026-10-18T15:00:00.000Z'){
+ const full={version:'yw-full-language-activation-v1',enabled:true,operation:FULL_OPERATION,authorityDigest:H,packetDigest:packet.sourceDigest,sourceCommit:'b'.repeat(40),artifactSha256:H,origin,ownerUserId:553,databaseId:database,apisVersion:version,registryReceiptDigest:H,singleProviderSourceProofDigest:H,priorReceiptSetDigest:H,priorReceipts:ORIGINAL_RECEIPTS,readyAt:'2026-10-18T07:14:55.135Z',hardExpiry:deadline,maxAttempts:28+count,maxReservedMicros:(28+count)*84000,maxProviderAttempts:1,reserveMicros:84000,maxConcurrency:1,recoveryReadbacks:chain.slice(0,count)};
  const pin={version:'yw-isolated-e2e-admission-v2',enabled:true,operation:FULL_E2E_OPERATION,authorityDigest:H,origin,ownerUserId:553,databaseId:database,apisVersion:version,registryReceiptDigest:H,hardExpiry:full.hardExpiry,maxVisibleCalls:cap,maxProviderAttempts:3,reserveMicros:252000,lessonIds:['lesson-1498','lesson-1711-p1','lesson-1717-p2']};
  const noIO=()=>{throw Error('no_io');};
  const env=acceptanceEnvironment(new Request(origin),{ASSETS:{fetch:noIO},ACCEPTANCE_DB:{prepare:noIO},APIS:{fetch:noIO},APIS_CALLER_TOKEN:'synthetic-caller-only',USER_CENTER_EVIDENCE:{resolveSession:noIO},YW_ACCEPTANCE_USER_ID:'553',YW_FORMAL_APIS_VERSION:version,YW_ACCEPTANCE_DATABASE_ID:database,YW_ACCEPTANCE_ACTIVATION_SHA256:H,YW_ACCEPTANCE_EXPIRES_AT:full.hardExpiry,YW_CALIBRATION_FULL_LANGUAGE_JSON:JSON.stringify(full),YW_FULL_LANGUAGE_ACTIVATION_SHA256:H,YW_E2E_AUTHORITY_JSON:JSON.stringify(pin)},at);
@@ -46,4 +46,14 @@ test('driver refuses a120th model intent before recording or transport; legacy12
  await assert.rejects(()=>E2ERunner.prototype.mutate.call(state,'lesson-1498',{}, {possibleProvider:true}),/e2e_call_ceiling_exhausted/);assert.equal(recorded,0);
  state.config.maxVisibleCalls=120;
  await assert.rejects(()=>E2ERunner.prototype.mutate.call(state,'lesson-1498',{}, {possibleProvider:true}),/intent_reached/);assert.equal(recorded,1);
+});
+test('16UTC amendment binds original start and exact seventh recovery; all other extensions remain denied',()=>{
+ const f=fixture(7,119,'2026-10-18T16:00:00.000Z');assert(fullWindowValid(f.full));
+ assert(fullWindowValid(fixture(6).full));assert(fullWindowValid(fixture(7).full));
+ for(const patch of [{readyAt:'2026-10-18T07:14:56.135Z'},{hardExpiry:'2026-10-18T16:00:00.001Z'},{hardExpiry:'2026-10-18T17:00:00.000Z'},{recoveryReadbacks:chain.slice(0,6)},{operation:FULL_OPERATION+'-new'}])assert.equal(fullWindowValid({...f.full,...patch}),false);
+ assert.equal(f.admit().maxVisibleCalls,119);assert.equal(f.full.maxAttempts,35);
+});
+test('16UTC final millisecond admits but exact deadline refuses without resetting history or limits',()=>{
+ const f=fixture(7,119,'2026-10-18T16:00:00.000Z'),end=Date.parse(f.full.hardExpiry),before=JSON.stringify(f.full);
+ assert(fullActivation(f.env,packet,end-1));assert.equal(fullActivation(f.env,packet,end),null);assert.equal(fullActivation(f.env,packet,end+1),null);assert.equal(JSON.stringify(f.full),before);
 });
