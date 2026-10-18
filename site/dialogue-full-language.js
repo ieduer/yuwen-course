@@ -41,7 +41,7 @@ export const caseRecovery=(authority,caseId)=>recoveryChain(authority).filter(p=
 // admission/receipt/cost check remain in force; this cannot create a new window.
 export const fullWindowValid=a=>Date.parse(a.hardExpiry)<=Date.parse(a.readyAt)+FULL_MAX_WINDOW_MS||(
  a.operation===FULL_OPERATION&&a.readyAt==='2026-10-18T07:14:55.135Z'&&
- a.hardExpiry==='2026-10-18T14:30:00.000Z'&&recoveryChain(a).length>=5);
+ (a.hardExpiry==='2026-10-18T14:30:00.000Z'&&recoveryChain(a).length>=5||a.hardExpiry==='2026-10-18T15:00:00.000Z'&&recoveryChain(a).length===6));
 export const quotationRecovery=authority=>caseRecovery(authority,QUOTE_RECOVERY.caseId);
 export const recoveryPrompt=(prompt,pin=null,fixture=null)=>pin===CASE23_RECOVERY?conclusionRecoveryPrompt(prompt,fixture):prompt+'\n\n'+QUOTE_RECOVERY_INSTRUCTION;
 export const recoveryFailureMatches=(r,pin=QUOTE_RECOVERY)=>r?.caseId===pin.caseId&&r.attemptId===pin.attemptId&&r.receiptDigest===pin.receiptDigest&&r.state==='review'&&r.reservedMicros===84000&&!!r.finishedAt&&!r.boundaryStop&&(['unverifiable_evidence','unverifiable_conclusion_turn'].includes(pin.reason)?r.accountedMicros===0&&r.finalAssessment&&r.model===FULL_MODEL&&r.modelVersion===FULL_MODEL:r.accountedMicros===null&&!r.finalAssessment&&!r.model&&!r.modelVersion&&r.chunkCount===0&&r.partialChars===0);

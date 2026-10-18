@@ -1,4 +1,4 @@
-## 2026-10-18 13:55 UTC — case23 candidate, inactive
+## 2026-10-18 14:00 UTC — case23 candidate, inactive
 
 Exact failed receipt0e1ba065 remains immutable and rejected. A sixth explicit
 recovery pin enables only conclusion-grounded-dissent attempt2 with a derived
@@ -12,7 +12,10 @@ Batch inspection can bind each original readback to its own immutable execution
 and budget. Later GETs must preserve stored raw evidence and match the current
 activation. Historical APIS deployments remain individually pinned; the batch
 still requires one actual model version. Expiry is checked against each original
-execution. The absolute14:30UTC cutoff and original07:14:55.135 start persist.
+execution. The original07:14:55.135 start persists. Direct human approval at13:51:38UTC
+(Sentinel_23a94bcf0ac48191a3142e7db6c9bc20) extends only this transaction
+to15:00UTC; the exception additionally requires all six exact recovery pins.
+This expiry approval does not authorize the new case23 provider attempt.
 37 focused checks pass, plus offline revalidation of the22 unchanged accepted
 receipts; remaining ordinary27 prompts match the frozen packet. Case20 retains
 its5662ms performance gap. Full189 release, five remaining cases, E2E/My/native/

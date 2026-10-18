@@ -311,3 +311,12 @@ c23RuntimeTest('conclusion runtime: changed failure between read and reservation
  f.env.READING_DB.batch=async rows=>{f.sql.prepare("UPDATE dialogue_events SET details_json=details_json||' ' WHERE id=?").run(C23.attemptId+':result');return batch(rows);};
  const r=await f.request(c,2,async()=>{calls++;throw Error('must not dispatch');});assert.equal(r.code,'full_atomic_admission_stopped');assert.equal(calls,0);
 });
+
+
+c23Test('conclusion deadline: 15:00 requires original start and exact six pins, no broader window',async t=>{
+ const f=await fixture(t);Object.assign(f.authority,{hardExpiry:'2026-10-18T15:00:00.000Z',maxAttempts:34,maxReservedMicros:34*84000,recoveryReadbacks:[Q,T,C,CQ,CF,C23]});
+ f.bindings.YW_CALIBRATION_FULL_LANGUAGE_JSON=JSON.stringify(f.authority);f.bindings.YW_ACCEPTANCE_EXPIRES_AT=f.authority.hardExpiry;
+ const env=acceptanceEnvironment(req(),f.bindings);assert(fullActivation(env,packet,Date.parse('2026-10-18T14:59:59.999Z')));assert.equal(fullActivation(env,packet,Date.parse(f.authority.hardExpiry)),null);
+ for(const delta of [{readyAt:'2026-10-18T07:15:00.000Z'},{hardExpiry:'2026-10-18T15:00:00.001Z'},{recoveryReadbacks:[Q,T,C,CQ,CF]}]){env.YW_CALIBRATION_FULL_LANGUAGE_JSON=JSON.stringify({...f.authority,...delta});assert.equal(fullActivation(env,packet,Date.parse('2026-10-18T14:31:00Z')),null);}
+ assert.equal(f.calls(),0);
+});
