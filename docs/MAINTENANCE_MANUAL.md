@@ -1,4 +1,28 @@
-## 2026-10-18 14:31 UTC — source-derived conclusion schema candidate, inactive
+## 2026-10-18 14:52 UTC — exact E2E contingency reallocation, local only
+
+The exact seven-pin case23 schema recovery now reserves one formerly unused E2E
+slot: calibration35 + E2E119 =154 logical calls. E2E provider attempts remain3
+per call; this path permits392 total, within the unchanged394 ceiling. Prior
+chains retain120; operation identity, original start, failed/unknown charges,
+all28 calibration prerequisites and retained-failure verification remain unchanged.
+Admission validation, immutable server budget, atomic SQL count and local driver
+all enforce the same119 bound. No validator, response schema or answer changes.
+
+The actual YW request uses /api/yw/dialogue-stream, stream:true and Gemini3.8 LOW.
+APIS excludes streaming from Claude T1; Claude JSON unsupported-schema results
+are not the YW route. An offline cross-module check preserved the exact schema
+through actual YW/APIS code to one synthetic Gemini boundary, with one lease and
+completion and no network calls. New APIS accepted source48cdd90/version9f0d3759
+is configuration acceptance only; provider schema/semantic acceptance is pending.
+
+Current cutoff remains2026-10-18T15:00:00Z. A proposed16:00 window is not enabled
+or approved here. New source/artifact/config and a new release receipt must be
+bound before any external execution; old receipts cannot be replayed. Source
+is local only and full189/E2E/central/My/native/publication/Status remain unfinished.
+Evidence: case23-recovery/schema/{continuation-01a14f72,reallocation119-01a14f72}
+under the existing execution-01a14cdd transaction. Earlier entries are history.
+
+## Historical 2026-10-18 14:31 UTC — source-derived conclusion schema candidate, inactive
 
 Case23 attempt2 failed again at the unchanged60 UTF16 quote limit (61/63);
 receipt f24a0654 remains terminal. The revised candidate derives short exact

@@ -1,10 +1,13 @@
 // Inactive continuation of the existing E2E schema. The publisher must supply
 // both approved pins; no request or default value can mint this capability.
 import packet from './dialogue-full-language-packet.json' with {type:'json'};
-import {FULL_OPERATION,FULL_E2E_OPERATION,FULL_MODEL,RELEASE_CASE_COUNT,releaseCases,fullActivation,recoveryChain,caseRecovery,fullReceipt,failedReceiptCondition} from './dialogue-full-language.js';
+import {FULL_OPERATION,FULL_E2E_OPERATION,FULL_MODEL,RELEASE_CASE_COUNT,CASE23_SCHEMA_RECOVERY,releaseCases,fullActivation,recoveryChain,caseRecovery,fullReceipt,failedReceiptCondition} from './dialogue-full-language.js';
 import {acceptanceContext,ACCEPTANCE_ORIGIN} from './dialogue-acceptance.js';
 import {reconciledCost} from './dialogue-budget.js';
 export const RENEWED_E2E_OPERATION=FULL_E2E_OPERATION;
+// The exact seventh recovery consumes one existing E2E contingency slot.
+// Earlier accepted recovery chains retain their original120-call allowance.
+export const renewedE2ECallLimit=authority=>recoveryChain(authority).includes(CASE23_SCHEMA_RECOVERY)?119:120;
 const lessons=['lesson-1498','lesson-1711-p1','lesson-1717-p2'];
 const keys='apisVersion,authorityDigest,databaseId,enabled,hardExpiry,lessonIds,maxProviderAttempts,maxVisibleCalls,operation,origin,ownerUserId,registryReceiptDigest,reserveMicros,version';
 const prefix=FULL_OPERATION+':';
@@ -18,11 +21,11 @@ export function renewedDialogueAdmission(env,student,lessonId,budget,pin,at){
   ||pin.operation!==FULL_E2E_OPERATION||pin.authorityDigest!==full.authorityDigest||pin.hardExpiry!==full.hardExpiry
   ||pin.origin!==ACCEPTANCE_ORIGIN||pin.origin!==context.origin||pin.ownerUserId!==553||pin.ownerUserId!==context.userId||Number(student?.ucUserId)!==553
   ||pin.databaseId!==context.databaseId||pin.apisVersion!==context.version||pin.registryReceiptDigest!==context.activationDigest
-  ||pin.maxVisibleCalls!==120||pin.maxProviderAttempts!==3||pin.reserveMicros!==252000
+  ||pin.maxVisibleCalls!==renewedE2ECallLimit(full)||pin.maxProviderAttempts!==3||pin.reserveMicros!==252000
   ||!Array.isArray(pin.lessonIds)||JSON.stringify([...pin.lessonIds].sort())!==JSON.stringify(lessons)||!lessons.includes(lessonId))throw Error('e2e_renewal_activation_invalid');
  if(budget.model!==FULL_MODEL||budget.logicalProviderAttemptLimit!==3||budget.perAttemptReserveMicros!==84000||budget.reserveMicros!==252000)throw Error('e2e_budget_mismatch');
  return Object.freeze({version:pin.version,operation:FULL_E2E_OPERATION,ownerUserId:context.userId,databaseId:context.databaseId,
-  registryReceiptDigest:pin.registryReceiptDigest,hardExpiry:pin.hardExpiry,maxVisibleCalls:120,lessonId,
+  registryReceiptDigest:pin.registryReceiptDigest,hardExpiry:pin.hardExpiry,maxVisibleCalls:renewedE2ECallLimit(full),lessonId,
   recoveryReadbacks:recoveryChain(full),calibrationPacketDigest:packet.sourceDigest,sourceCommit:full.sourceCommit,artifactSha256:full.artifactSha256,authorityDigest:full.authorityDigest});
 }
 export function calibrationReadyCondition(studentId,authority={}){

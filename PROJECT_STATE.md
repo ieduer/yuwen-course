@@ -1,4 +1,6 @@
-Current2026-10-18T14:31Z: local generic conclusion-schema candidate, not deployed. Original validator and fixtures unchanged; exact case23 attempt2 failure retained.188 source-bearing lessons supported, approved1572 exception unchanged. New single-attempt pin inactive; APIS rebaseline and execution approval still required. See docs/MAINTENANCE_MANUAL.md current section. Earlier entries are history.
+Current2026-10-18T14:52Z: local exact seven-pin schema recovery reduces E2E contingency120to119 in admission/SQL/driver, keeping154 logical and394 provider caps; prior chains120 retained. New APIS48cdd90/9f0d3759 pins received; actual YW SSE route excludesClaude. Provider semantic/schema acceptance and new receipt pending. Cutoff15:00 unchanged; no new model or deployment; full189 remains unfinished. See current maintenance section and schema/reallocation119-01a14f72 evidence.
+
+Historical2026-10-18T14:31Z: local generic conclusion-schema candidate, not deployed. Original validator and fixtures unchanged; exact case23 attempt2 failure retained.188 source-bearing lessons supported, approved1572 exception unchanged. New single-attempt pin inactive; APIS rebaseline and execution approval still required. See docs/MAINTENANCE_MANUAL.md current section. Earlier entries are history.
 
 ## 2026-10-18 — exact case2 recovery accepted; remaining full goal open
 

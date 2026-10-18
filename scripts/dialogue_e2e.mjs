@@ -155,7 +155,7 @@ export class E2ERunner{
  async mutate(id,body,{possibleProvider=false,objectiveId=null}={}){
   if(this.events.some(e=>e.type==='intent'&&!this.events.some(r=>r.type==='settled'&&r.mutationId===e.mutationId)))fail('outcome_unknown_readback_only');
   const count=this.events.filter(e=>e.type==='intent'&&e.possibleProvider).length;
-  if(possibleProvider&&count>=CAPS.visibleCalls)fail('e2e_call_ceiling_exhausted');
+  if(possibleProvider&&count>=Math.min(CAPS.visibleCalls,this.config.maxVisibleCalls))fail('e2e_call_ceiling_exhausted');
   const mutationId=body.mutationId||'e2e_'+crypto.randomUUID().replaceAll('-','');this.streamEvents=[];
   body={...body,...(body.action==='first_read'?{payload:{...body.payload,clientMutationId:mutationId}}:{mutationId})};
   await this.emit('intent',{lessonId:id,mutationId,possibleProvider,reservedMicros:possibleProvider?CAPS.reserveMicrosPerCall:0,objectiveId,body,requestHash:hash(body)});

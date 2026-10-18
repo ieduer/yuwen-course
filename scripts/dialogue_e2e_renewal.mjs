@@ -8,6 +8,7 @@ import packet from '../site/dialogue-full-language-packet.json' with {type:'json
 import {FULL_OPERATION,FULL_E2E_OPERATION,releaseCases,fullActivation,caseRecovery} from '../site/dialogue-full-language.js';
 import {acceptanceEnvironment} from '../site/dialogue-acceptance.js';
 import {isolatedDialogueAdmission,E2E_LESSONS} from '../site/dialogue-e2e-admission.js';
+import {renewedE2ECallLimit} from '../site/dialogue-e2e-renewal.js';
 import {materializeCalibrationOverlay,inspectCalibrationBatch} from './dialogue_calibration_import.mjs';
 import {preparePlan,loadFixtures,loadCurriculum,hash,E2ERunner,openJournal,ORIGIN,CAPS,validateFixture} from './dialogue_e2e.mjs';
 export const OPERATION=FULL_E2E_OPERATION;
@@ -49,11 +50,12 @@ export function validateRenewedExecution(config,plan,now=Date.now()){
  for(const key of ['staticChecks','ci','isolatedSourceReadback','sameOwnerAuthentication','providerAttemptContract','isolated120AdmissionReadback'])same(config.checks?.[key],'accepted','candidate check missing');
  same(config.lessonIds,[...E2E_LESSONS],'complete three-lesson scope required');
  same(config.maxHttpRequests,HTTP_CAP,'HTTP allowance differs');
- same([config.providerAttemptLimit,config.reserveMicrosPerCall,config.maxVisibleCalls,config.maxReserveMicros],[3,252000,120,30240000],'operation budget changed');
  const b=config.activationBindings;
  assert(b&&Object.keys(b).every(k=>k.startsWith('YW_')&&typeof b[k]==='string'),'non-secret activation readback required');
  const env=acceptanceEnvironment(new Request(ORIGIN),{...b,ASSETS:{fetch:dead},ACCEPTANCE_DB:{prepare:dead},USER_CENTER_EVIDENCE:{resolveSession:dead},APIS_CALLER_TOKEN:'synthetic-caller-only',APIS:{fetch:dead}},now),full=fullActivation(env,packet,now);
  assert(full,'current server activation required');
+ const callLimit=renewedE2ECallLimit(full);
+ same([config.providerAttemptLimit,config.reserveMicrosPerCall,config.maxVisibleCalls,config.maxReserveMicros],[3,252000,callLimit,callLimit*252000],'operation budget changed');
  same([config.apisVersion,config.isolatedDatabaseId,config.expiresAt],[full.apisVersion,full.databaseId,full.hardExpiry],'execution pins differ');
  same([full.sourceCommit,full.artifactSha256,full.apisVersion],[plan.calibration.sourceCommit,plan.calibration.artifactSha256,plan.calibration.apisVersion],'calibration activation changed');
  same(hash(config.calibrationPins),plan.calibration.executionDigest,'original calibration pins changed');

@@ -2,7 +2,7 @@
 // Deployment pins are installed by the registered publisher after readback;
 // copying these variables to ordinary Pages never grants this allowance.
 import {acceptanceContext,ACCEPTANCE_ORIGIN} from './dialogue-acceptance.js';
-import {RENEWED_E2E_OPERATION,renewedDialogueAdmission,renewedOperationCondition} from './dialogue-e2e-renewal.js';
+import {RENEWED_E2E_OPERATION,renewedDialogueAdmission,renewedOperationCondition,renewedE2ECallLimit} from './dialogue-e2e-renewal.js';
 
 export const E2E_OPERATION='yw-e2e-real-dialogue-01a132c3';
 export const E2E_HARD_EXPIRY='2026-10-14T12:00:00Z';
@@ -45,7 +45,7 @@ export function dialogueCallAdmission(budget,student,limits,day){
  const daily='(SELECT COUNT(*) FROM dialogue_calls WHERE day=?)<?';
  if(budget.isolatedAdmission?.operation===RENEWED_E2E_OPERATION){
   const condition=renewedOperationCondition(budget,student.id);
-  return {sql:`${daily} AND ${OPERATION_COUNT}<? AND ${condition.sql}`,args:[day,limits.globalPerDay,RENEWED_E2E_OPERATION,120,...condition.args]};
+  return {sql:`${daily} AND ${OPERATION_COUNT}<? AND ${condition.sql}`,args:[day,limits.globalPerDay,RENEWED_E2E_OPERATION,renewedE2ECallLimit(budget.isolatedAdmission),...condition.args]};
  }
  if(budget.isolatedAdmission?.operation===E2E_OPERATION)return {
   sql:`${daily} AND ${OPERATION_COUNT}<?`,args:[day,limits.globalPerDay,E2E_OPERATION,120],
