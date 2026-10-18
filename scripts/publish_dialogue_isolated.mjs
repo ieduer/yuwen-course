@@ -65,6 +65,7 @@ export function validateRegistration(registry,receipt,{receiptHash,publisherHash
  same(artifact.files,receipt.artifact_files,'artifact changed');same(artifact.sha256,receipt.preview.artifact_digest,'artifact digest differs');
  assert(receipt.tests?.source_commit===head&&receipt.tests.evidence_path&&receipt.tests.evidence_sha256===sha(fs.readFileSync(receipt.tests.evidence_path)),'exact test evidence required');
  assert(receipt.preview.source_commit===head&&receipt.preview.evidence_path&&receipt.preview.evidence_sha256===sha(fs.readFileSync(receipt.preview.evidence_path)),'local artifact evidence required');
+ if(receipt.http_budget?.deploy_timeout_ms!==undefined)assert(receipt.http_budget.deploy_timeout_ms===300000,'bounded deployment transport override required');
  const full=validateConfiguration(receipt.isolated.config,now);assert(full.apisVersion===receipt.isolated.apis.version,'APIS activation differs');
  if(receipt.isolated.deploy_only)validateDeployOnlyProof(receipt,registry,now);
  else if(full.sourceCommit===receipt.source_commit)same(full.artifactSha256,artifact.sha256,'calibration artifact not bound');
@@ -94,8 +95,8 @@ export function validateDeployOnlyProof(receipt,registry,now=Date.now(),load=rea
  return prior;
 }
 export function requestTimeout(receipt,state,id,method,now=Date.now()){
- const base=method==='GET'?15000:receipt.isolated.deploy_only&&id==='deploy'?300000:120000;
- if(!receipt.isolated.deploy_only)return base;const full=JSON.parse(receipt.isolated.config.env_vars.YW_CALIBRATION_FULL_LANGUAGE_JSON.value),remaining=Math.min(Date.parse(receipt.expires_at),Date.parse(state.startedAt)+900000,Date.parse(full.hardExpiry))-now;assert(remaining>0,'deadline expired');return Math.min(base,remaining);
+ const boundedDeploy=receipt.isolated.deploy_only||receipt.http_budget?.deploy_timeout_ms===300000;const base=method==='GET'?15000:boundedDeploy&&id==='deploy'?300000:120000;
+ if(!boundedDeploy)return base;const full=JSON.parse(receipt.isolated.config.env_vars.YW_CALIBRATION_FULL_LANGUAGE_JSON.value),remaining=Math.min(Date.parse(receipt.expires_at),Date.parse(state.startedAt)+900000,Date.parse(full.hardExpiry))-now;assert(remaining>0,'deadline expired');return Math.min(base,remaining);
 }
 export function configurationPatch(config){
  const patch=structuredClone(config);delete patch.env_vars.APIS_CALLER_TOKEN;
