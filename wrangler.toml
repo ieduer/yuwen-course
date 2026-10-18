@@ -2,6 +2,9 @@ name = "yuwen-course"
 compatibility_date = "2026-05-12"
 pages_build_output_dir = "site"
 
+[vars]
+YW_RELEASE_READ_ONLY = "true"
+
 [[d1_databases]]
 binding = "READING_DB"
 database_name = "yuwen-reading-db-preview"
@@ -33,6 +36,7 @@ service = "yw-preview-logs"
 
 # Pages bundles runtime vars from this file, not project API metadata.
 [env.production.vars]
+YW_RELEASE_READ_ONLY = "true"
 YW_DURABLE_EVALUATION_ENABLED = "true"
 # One reviewed lost response: one additional call in the original job.
 YW_EVALUATION_ONE_SHOT_MODE = "lost_reply"
