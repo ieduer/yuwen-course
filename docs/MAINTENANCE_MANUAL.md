@@ -1,3 +1,17 @@
+## 2026-10-18 — bounded deadline candidate, inactive pending authorization evidence
+
+The exact fifth failure pin can support only the original start
+2026-10-18T07:14:55.135Z and absolute expiry 2026-10-18T14:30:00.000Z.
+This narrow exception does not renew six hours, reset history or alter any
+provider timeout, model, material, validation or retry rule. Other start times,
+missing/altered pins, later expiry and a narrower acceptance expiry fail closed.
+Two focused boundary tests pass; the prior 47 checks remain relevant. Coordinating
+chat has conveyed a delegated decision, but its original human authorization is
+not yet available through the read interface. No external activation is implied
+by this source. Runtime and all receipts remain unchanged. Current exact package:
+case2-finite-disposition/REPORT.md under execution-01a14cdd. Sections below are
+historical preparation, not fresh execution authority.
+
 ## 2026-10-18 — inactive finite post-failure candidate
 
 A proposed additional case2 attempt4 is pinned only to retained terminal receipt

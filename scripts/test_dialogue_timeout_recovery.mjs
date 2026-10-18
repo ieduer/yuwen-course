@@ -217,3 +217,24 @@ cfTest('finite: new timeout stays unknown, stops all later cases and denies atte
 cfTest('finite: altered unknown liability and original expiry prevent dispatch',async t=>{
  const f=await finiteFixture(t);activateFinite(f);f.sql.prepare('UPDATE dialogue_calls SET accounted_micros=0 WHERE turn_id=?').run(CF.attemptId);assert.equal((await f.request(f.c,4)).code,'full_recovery_receipt_mismatch');assert.equal(fullActivation(f.env,packet,Date.parse(expiry)),null);
 });
+
+cfTest('deadline: exact finite amendment preserves original start and stops at absolute cutoff',async t=>{
+ const f=await finiteFixture(t);activateFinite(f);
+ const amended='2026-10-18T14:30:00.000Z';
+ f.authority.hardExpiry=amended;f.bindings.YW_ACCEPTANCE_EXPIRES_AT=amended;
+ f.bindings.YW_CALIBRATION_FULL_LANGUAGE_JSON=JSON.stringify(f.authority);
+ const env=acceptanceEnvironment(req(),f.bindings);
+ assert(fullActivation(env,packet,Date.parse(expiry)));
+ assert(fullActivation(env,packet,Date.parse(amended)-1));
+ assert.equal(fullActivation(env,packet,Date.parse(amended)),null);
+ for(const delta of [{readyAt:'2026-10-18T07:15:00.000Z'},{hardExpiry:'2026-10-18T14:30:00.001Z'},{recoveryReadbacks:[Q,T,C,CQ]}]){
+  const changed={...f.authority,...delta};env.YW_CALIBRATION_FULL_LANGUAGE_JSON=JSON.stringify(changed);
+  assert.equal(fullActivation(env,packet,Date.parse(expiry)),null);
+ }
+ assert.equal(f.calls(),0);
+});
+cfTest('deadline: narrower acceptance expiry still blocks amended authority',async t=>{
+ const f=await finiteFixture(t);activateFinite(f);f.authority.hardExpiry='2026-10-18T14:30:00.000Z';
+ f.env.YW_CALIBRATION_FULL_LANGUAGE_JSON=JSON.stringify(f.authority);
+ assert.equal(fullActivation(f.env,packet,at),null);assert.equal(f.calls(),0);
+});

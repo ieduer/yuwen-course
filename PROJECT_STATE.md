@@ -1,3 +1,17 @@
+## 2026-10-18 — bounded deadline candidate, inactive pending authorization evidence
+
+The exact fifth failure pin can support only the original start
+2026-10-18T07:14:55.135Z and absolute expiry 2026-10-18T14:30:00.000Z.
+This narrow exception does not renew six hours, reset history or alter any
+provider timeout, model, material, validation or retry rule. Other start times,
+missing/altered pins, later expiry and a narrower acceptance expiry fail closed.
+Two focused boundary tests pass; the prior 47 checks remain relevant. Coordinating
+chat has conveyed a delegated decision, but its original human authorization is
+not yet available through the read interface. No external activation is implied
+by this source. Runtime and all receipts remain unchanged. Current exact package:
+case2-finite-disposition/REPORT.md under execution-01a14cdd. Sections below are
+historical preparation, not fresh execution authority.
+
 > Current local candidate: exact case2 attempt4 pin is INACTIVE and UNAPPROVED; no new send/deploy. Existing activation cannot admit it. Original deadline, all receipts/unknown252000 and case1 success preserved. Full189 still blocked.
 
 > Current 2026-10-18: local diagnostic reader correlation repair only; 11 focused checks pass. Runtime remains f58ac141/eace9a43, case2 attempt3 terminal TIMEOUT; no new model/deploy, unknown252000micros and original13:14:55.135UTC cutoff. All189 goal remains incomplete; current canonical evidence: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/case2-quotation-repair/REPORT.md. Earlier entries are history.
