@@ -73,6 +73,13 @@ export function validateRegistration(registry,receipt,{receiptHash,publisherHash
  assert(receipt.isolated.apis.ownership_evidence_path&&receipt.isolated.apis.ownership_evidence_sha256===sha(fs.readFileSync(receipt.isolated.apis.ownership_evidence_path)),'APIS ownership evidence missing');
  return {project:p,approval:a};
 }
+export function configurationPatch(config){
+ const patch=structuredClone(config);delete patch.env_vars.APIS_CALLER_TOKEN;
+ // Pages merges env_vars. Remove only the retired activation keys explicitly;
+ // omitting a key preserves its previous value even when it is disabled.
+ patch.services.APIS_ACCEPTANCE=null;patch.env_vars.YW_ACCEPTANCE_APIS_VERSION=null;
+ patch.env_vars.YW_CALIBRATION_AMENDMENT5_JSON=null;return patch;
+}
 function projection(p){return {name:p.name,production_branch:p.production_branch,deployment_configs:p.deployment_configs,domains:[...(p.domains||[])].sort()};}
 function assertProviderConfiguration(actual,expected){
  const projected=structuredClone(actual);if(projected?.env_vars?.APIS_CALLER_TOKEN?.type==='secret_text')projected.env_vars.APIS_CALLER_TOKEN={type:'secret_text'};
@@ -95,8 +102,7 @@ export async function transact(receipt,{call,artifact,packed,readAsset,save,befo
  // Caller credential is pre-provisioned through its existing secret authority.
  // PATCH merges env_vars (as pinned Wrangler pages secret does); never copy a redacted secret back.
  for(const scope of ['production','preview'])assert(p.deployment_configs?.[scope]?.env_vars?.APIS_CALLER_TOKEN?.type==='secret_text','formal caller secret not provisioned; no configuration write');
- const patch=structuredClone(i.config);delete patch.env_vars.APIS_CALLER_TOKEN;
- patch.services.APIS_ACCEPTANCE=null;patch.env_vars.YW_ACCEPTANCE_APIS_VERSION=null;
+ const patch=configurationPatch(i.config);
  const configured=await call('config','PATCH',PROJECT,{deployment_configs:{production:patch,preview:patch}});
  for(const scope of ['production','preview'])assertProviderConfiguration(configured.deployment_configs?.[scope],i.config);
  const {jwt}=await call('upload-token','GET',PROJECT+'/upload-token');assert(typeof jwt==='string'&&jwt.length>20,'upload credential unavailable');
