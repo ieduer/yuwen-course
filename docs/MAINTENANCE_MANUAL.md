@@ -1,3 +1,18 @@
+## 2026-10-18T22:53:32.892398+00:00 — approved public documentation reads returned truncated evidence
+
+Human approved at most2public Google documentation reads within60seconds. Both
+URLs were submitted once; tool returned in2021ms but exposed only the first
+document through partial line377, with no required schema restrictions or second
+document result. This is an output truncation gap, not provider incompatibility
+proof. Reads2/2 consumed conservatively, retries0, model/business/Cloudflare0.
+Originalcase23 cause UNKNOWN; prior runtime, counters and rollback unchanged.
+Supplemental bounded reads of the same documents require fresh authorization;
+no model, source push, deployment or diagnostic replay is authorized.
+Evidence: /Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/case23-recovery/schema/official-contract-01a15131/REPORT.md
+
+Prior local-analysis findings remain valid; its proposed first2reads have now
+been approved and attempted, but contract verification remains incomplete.
+
 ## 2026-10-18T22:50:48.487218+00:00 — local schema/APIS analysis; external authority not renewed
 
 Local-only follow-up verified unchanged schema transport through APIS48cdd90 and
