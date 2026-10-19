@@ -57,7 +57,9 @@ export async function prepareCalibratedModeSample(ids=MODE_SAMPLE_IDS,loader=loa
   lesson.baseSourceDigest=lesson.sourceDigest;lesson.sourceDigest=hash(effective);
   lesson.calibrationManifestDigest=effective.calibrationEvidence?.manifestDigest||null;
  }
- return {...plan,version:'yw-continuous-mode-sample-v4',calibrationProjection:'source-owned-exact-version'};
+ return {...plan,version:'yw-continuous-mode-sample-v4',calibrationProjection:'source-owned-exact-version',
+  sessionCompatibilityVerified:false,
+  requires:[...plan.requires,'before activation compare existing frozen session, completion and unfinished state with these published pins using dialogue_session_compatibility; a source-only plan does not prove the effective learner contract']};
 }
 
 export function prepareModeTurn(snapshot,curriculum,utterance,{selected=null,mutationId=crypto.randomUUID()}={}){
