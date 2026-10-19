@@ -1,20 +1,39 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {validateReadingEvidence as reading,validateOriginalEvidence as original} from '../site/dialogue-reading-evidence.js';
+import {validateReadingEvidence as reading,validateOriginalEvidence as original,conversationOriginalTasks} from '../site/dialogue-reading-evidence.js';
 import {validateFormalDraft} from '../site/dialogue-formal.js';
 const asset={textVersionId:'v1',textDigest:'source',paragraphs:[{key:'p1',text:'學而時習之不亦說乎有朋自遠方來不亦樂乎'}]};
 const context=(content,state={})=>({turns:[{id:'s1',role:'student',content}],asset,state,lessonId:'lesson',turnId:'s1'});
 const evidence=quote=>({turnId:'s1',quote});
 const readTask={kind:'read',objectiveId:'read'};
+test('independent reading eligibility preserves historical completion and classical prerequisites',()=>{
+ const curriculum={objectives:[{id:'read',domain:'read'},{id:'grade',domain:'legacy'}]};
+ const state={objectives:[{id:'read',status:'not_yet_observed'}]},guide={kind:'dialogue',objectiveId:'vocabulary'};
+ assert.deepEqual(conversationOriginalTasks(curriculum,state,guide),[readTask]);
+ for(const patch of [{legacyCompletion:{preserved:true}},{readingGate:{phase:'initial_reading'}},{readingGate:{phase:'annotated_reading'}},{objectives:[{id:'read',status:'preserved'}]},{objectives:[{id:'read',status:'historical_review'}]},{objectives:[]}]){
+  assert.deepEqual(conversationOriginalTasks(curriculum,{...state,...patch},guide),[]);
+  assert.deepEqual(conversationOriginalTasks(curriculum,{...state,...patch},readTask),[]);
+ }
+ const c=context('我已經通讀全詩了。');
+ assert.throws(()=>original({objectiveId:'grade',evidence:evidence(c.turns[0].content)},{...c,curriculum,task:guide,tasks:[readTask]}),/wrong_task/);
+ assert.throws(()=>original({objectiveId:'read',evidence:evidence(c.turns[0].content)},{...c,curriculum,task:readTask,tasks:[]}),/wrong_task/);
+});
 for(const content of ['我還沒有已讀完','如果我已讀完','我已讀完嗎？','你要我說已讀完','我不選A','不是85分'])test('cannot turn a fragment into an affirmative source receipt: '+content,()=>{
  const c=context(content,{submitted:true});
  assert.throws(()=>reading({operation:'acknowledge',evidence:evidence('已讀完')},c));
  assert.throws(()=>original({objectiveId:'read',evidence:evidence('已讀完')},{...c,task:readTask}));
 });
-for(const content of ['已讀完','我已经把整篇课文读完了。','我讀完了！','這篇文章看完了'])test('accepts a complete explicit reading statement: '+content,()=>{
+for(const content of ['已讀完','我已经把整篇课文读完了。','我讀完了！','這篇文章看完了','我已經通讀全詩了。','我已经通读全文了。','我讀完這篇文章了。','我把整首詩讀完了。'])test('accepts a complete explicit reading statement: '+content,()=>{
  const c=context(content,{submitted:true}),p={operation:'acknowledge',evidence:evidence(content)};
  assert.equal(reading(p,c).operation,'acknowledge');
  assert.equal(original({objectiveId:'read',evidence:p.evidence},{...c,task:readTask}).input.acknowledgement,'已讀完');
+});
+for(const content of ['我還沒通讀全詩。','如果我已經通讀全詩了。','我已經通讀全詩了嗎？','請通讀全詩。','我打算通讀全詩。','他說我已經通讀全詩了。','我只讀完第一段。','我通讀了幾行。','讀完這篇文章。','通讀全詩。','整首詩讀完。'])test('natural reading wording cannot imply completion: '+content,()=>{
+ const c=context(content,{submitted:true});
+ for(const quote of [content,'我已經通讀全詩了','通讀全詩','讀完']){
+  assert.throws(()=>reading({operation:'acknowledge',evidence:evidence(quote)},c));
+  assert.throws(()=>original({objectiveId:'read',evidence:evidence(quote)},{...c,task:readTask}));
+ }
 });
 test('prior initial guess and correction cannot be overwritten through conversation',()=>{
  const marks=[{markId:'m1',paragraphKey:'p1',startOffset:0,endOffset:5,guess:'原猜測',resolutionStatus:'resolved',correction:'原訂正'}];

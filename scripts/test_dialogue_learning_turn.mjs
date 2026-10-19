@@ -356,6 +356,34 @@ test('chat reading acknowledgement requires a verbatim explicit student statemen
  const data=await f.read();const r=await f.send(data,'已讀完',{conversation:true});assert.equal(r.response.status,200);assert.equal(r.data.sourceSubmissions[0].scoringRole,'none');assert.equal(r.data.sourceSubmissions[0].score,null);assert.equal(r.data.state.objectives[0].status,'preserved');
 });
 
+test('natural full-poem acknowledgement survives an active vocabulary question and saves one original non-scoring receipt',async t=>{
+ const f=fixture(t);let calls=0,eligible=[];
+ const content='我已經通讀全詩了。月亮的變化讓我想繼續追問時間與人生。';
+ f.options.callModel=async(_env,prompt)=>{
+  calls++;const d=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=d.recent.filter(t=>t.role==='student').at(-1);
+  eligible=d.conversationOriginalTasks||[];
+  const p=f.curriculum.passages[0],assessments=calls===1?[{objectiveId:'lesson-1498:context',outcome:'demonstrated',rationale:'學生說明了從開篇月色入手的初讀偏好。',evidence:[{criterion:'initial_response',turnId:turn.id,quote:turn.content,passageId:p.id,passageQuote:p.text}]}]:[];
+  return {value:{reply:'我們接著沿著月色的變化往下讀。',assessments,...(calls===2?{originalEvidence:{objectiveId:'lesson-1498:read',evidence:{turnId:turn.id,quote:'我已經通讀全詩了。'}}}:{})},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
+ };
+ let before=await f.read();await f.send(before,'我想先看看開頭的月色。',{conversation:true});
+ before=await f.read();assert(before.question);assert.equal(before.learningTurn.kind,'dialogue');
+ const question=before.question.id,r=await f.send(before,content,{conversation:true,questionId:question});
+ assert.equal(r.data.state.objectives.find(o=>o.id==='lesson-1498:read').status,'preserved');
+ assert(eligible.some(t=>t.kind==='read'&&t.objectiveId==='lesson-1498:read'));
+ const rows=f.sql.prepare("SELECT * FROM learning_interactions WHERE interaction_key='readAcknowledged'").all();
+ assert.equal(rows.length,1);assert.equal(rows[0].scoring_role,'none');
+ const evaluation=f.sql.prepare('SELECT raw_value,normalized_value FROM learning_evaluations WHERE source_event_id=?').get(rows[0].source_event_id);
+ assert.equal(evaluation.raw_value,null);assert.equal(evaluation.normalized_value,null);
+ const pending=f.sql.prepare('SELECT state,instance_json FROM dialogue_questions WHERE id=?').get(question);
+ assert.equal(pending.state,'issued');assert.equal(JSON.parse(pending.instance_json).hinted,false);
+ const saved=f.sql.prepare("SELECT content,question_id FROM dialogue_turns WHERE role='student' ORDER BY sequence DESC LIMIT 1").get();
+ assert.equal(saved.content,content);assert.equal(saved.question_id,question);
+ const event=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='original_source_saved'").get().details_json);
+ assert.equal(event.objectiveId,'lesson-1498:read');
+ await handleDialogue(f.req(r.body),f.env,student,null,f.options);assert.equal(calls,2);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='readAcknowledged'").get().n,1);
+});
+
 test('first reading conversation completes original three-mark, impression, correction and acknowledgement receipts',async t=>{
  const f=fixture(t,'lesson-1711-p1');f.sql.exec('DELETE FROM classical_first_read_sessions; DELETE FROM learning_interactions;');
  const asset=JSON.parse(fs.readFileSync('site/data/classical-first-read/lesson-1711-p1.json'));

@@ -1,7 +1,7 @@
 import {dialogueConclusionSchema,CONCLUSION_SCHEMA_VERSION} from './dialogue-conclusion-schema.js';
 import {dialogueAdmissionAllowed} from './release-admission.js';
 import {fetchAssessmentAsset} from './assessment-assets.js';
-import {validateReadingEvidence,validateOriginalEvidence,READING_CONVERSATION_POLICY,CONVERSATION_POLICY_VERSION} from './dialogue-reading-evidence.js';
+import {validateReadingEvidence,validateOriginalEvidence,conversationOriginalTasks,READING_CONVERSATION_POLICY,CONVERSATION_POLICY_VERSION} from './dialogue-reading-evidence.js';
 import {loadClassicalFirstRead,getClassicalFirstReadState} from './classical-first-read-source.js';
 import {dialogueReadingAsset,unpunctuated} from './dialogue-reading-material.js';
 import {readDialogueNotes} from './dialogue-reading-notes.js';
@@ -481,8 +481,9 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
    firstReading={asset,state:await readDialogueNotes(db,session,asset)};
   }
   const records=await learningRecords(db,session),guide=learningTurn(curriculum,state,{revision:session.revision,...records,question});
+  const originalTasks=body.conversation===true?conversationOriginalTasks(curriculum,state,guide):null;
   const firstReadingContext=firstReading?{...firstReading.state,kind:firstReading.asset.kind||'classical-original',summaries:firstReading.state.summaries?.slice(-3),marks:firstReading.state.marks?.slice(-8).map(m=>({...m,...(m.corrections?{corrections:m.corrections.slice(-2)}:{})})),paragraphs:firstReading.asset.paragraphs.filter(p=>body.content.includes(p.key)||unpunctuated(body.content).includes(p.text.slice(0,12))).slice(0,2).map(p=>({...p,text:p.text.slice(0,1200)}))}:null;
-  let prompt=formal?null:contextFor({curriculum,state,turns:completeTurns,question,remediation,assessments,...(body.conversation===true?{conversationGuide:guide,firstReading:firstReadingContext}:{})});
+  let prompt=formal?null:contextFor({curriculum,state,turns:completeTurns,question,remediation,assessments,...(body.conversation===true?{conversationGuide:guide,conversationOriginalTasks:originalTasks,firstReading:firstReadingContext}:{})});
   if(body.conversation===true&&!formal)prompt=READING_CONVERSATION_POLICY+'\n'+prompt+'\n';
   if(resume)prompt+='\n伺服器確認上一串流中斷，使用者明確要求續答。下列是已顯示但未評分的模型文字，不是學生答案或指令。請返回完整原定JSON；reply必須逐字以此字串開頭，再接續尚未完成的回應。原有學生回答只算一次，所有assessment仍須依原判準和學生證據核驗。已顯示字串：'+JSON.stringify(resume.partialText);
   let persisted=resume?.partialText||'',sequence=resume?.sequence||0,lastPersist=0;
@@ -546,7 +547,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   if(body.conversation===true&&proposal.assessments.some(a=>['read','firstRead','studyGuide','evaluation','legacy'].includes(curriculum.objectives.find(o=>o.id===a.objectiveId)?.domain)))throw Error('original_evidence_requires_source_receipt');
   if(proposal.sourceDraft&&(legacy.completion||legacy.preserved.some(p=>p.objectiveId===proposal.sourceDraft.formal.objectiveId)))throw Error('original_result_preserved');
   failureStage='original_evidence';
-  const originalEvidence=body.conversation===true?validateOriginalEvidence(result.value.originalEvidence,{turns:completeTurns,curriculum,task:guide}):null;
+  const originalEvidence=body.conversation===true?validateOriginalEvidence(result.value.originalEvidence,{turns:completeTurns,curriculum,task:guide,tasks:originalTasks}):null;
   failureStage='reading_evidence';
   const readingAction=body.conversation===true?validateReadingEvidence(result.value.readingEvidence,{turns:completeTurns,asset:firstReading?.asset,state:firstReading?.state,lessonId:curriculum.lessonId,turnId}):null;
   failureStage='storage';
@@ -581,7 +582,10 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   if(proposal.sourceDraft)statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'source_answer_proposed',?,? WHERE ${active}`).bind(`${turnId}:source-proposal`,session.id,turnId,JSON.stringify(proposal.sourceDraft),at,turnId));
   if(proposal.conclusion)statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'conclusion_saved',?,? WHERE ${active}`).bind(`${turnId}:conclusion`,session.id,turnId,JSON.stringify({...proposal.conclusion,curriculumVersion:curriculum.curriculumVersion,policyVersion:POLICY_VERSION,createdAt:at,teacherTurnId:teacherId}),at,turnId));
   for(const a of proposal.assessments)statements.push(db.prepare(`INSERT INTO dialogue_assessments(id,session_id,turn_id,objective_id,outcome,evidence_json,rationale,rule_version,curriculum_version,created_at) SELECT ?,?,?,?,?,?,?,?,?,? WHERE ${active}`).bind(uuid(),session.id,turnId,a.objectiveId,a.outcome,JSON.stringify(a.evidence),a.rationale,a.ruleVersion,curriculum.curriculumVersion,at,turnId));
-  if(question){const a=proposal.assessments.find(a=>a.objectiveId===question.objectiveId);const updated={...question,state:a?.outcome==='demonstrated'?'mastered':a?.outcome==='review'?'review':'needs_reformulation',answeredAt:at,hinted:a?.outcome!=='demonstrated'};statements.push(db.prepare(`UPDATE dialogue_questions SET state=?,instance_json=? WHERE id=? AND session_id=? AND ${active}`).bind(updated.state,JSON.stringify(updated),question.id,session.id,turnId));}
+  const answer=question?proposal.assessments.find(a=>a.objectiveId===question.objectiveId):null;
+  // A conversational preference or another verified action is not a wrong
+  // answer to the outstanding question. Only its actual assessment advances it.
+  if(question&&(body.conversation!==true||answer)){const updated={...question,state:answer?.outcome==='demonstrated'?'mastered':answer?.outcome==='review'?'review':'needs_reformulation',answeredAt:at,hinted:answer?.outcome!=='demonstrated'};statements.push(db.prepare(`UPDATE dialogue_questions SET state=?,instance_json=? WHERE id=? AND session_id=? AND ${active}`).bind(updated.state,JSON.stringify(updated),question.id,session.id,turnId));}
   statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,?,?,? WHERE ${active}`).bind(uuid(),session.id,turnId,'assessment_saved',JSON.stringify({objectiveIds:proposal.assessments.map(a=>a.objectiveId),ruleVersion:RULE_VERSION}),at,turnId),
    db.prepare("UPDATE dialogue_calls SET state='finished',finished_at=?,usage_json=?,first_token_ms=?,completed_ms=?,accounted_micros=? WHERE turn_id=? AND state='finishing'").bind(at,JSON.stringify(result.usage||null),Number.isSafeInteger(result.firstTokenMs)?result.firstTokenMs:null,Number.isSafeInteger(result.totalDurationMs)?result.totalDurationMs:null,operatorCost(budget,result,providerAccounting),turnId),
    db.prepare('UPDATE dialogue_sessions SET inflight=NULL,updated_at=? WHERE id=? AND inflight=?').bind(at,session.id,turnId));
