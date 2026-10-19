@@ -71,6 +71,30 @@ test('historical receipt race is checked again in the same D1 reservation',async
  assert.equal((await f.send()).status,429);assert.equal(f.calls(),0);
 });
 
+test('sampled failures retain bounded validation evidence without granting acceptance or replay',async t=>{
+ for(const sample of [
+  {stage:'proposal',code:'invalid_model_reply',value:{reply:'',assessments:[]}},
+  {stage:'proposal',code:'invalid_assessment',value:{reply:'回到原文繼續看。',assessments:[{objectiveId:'invented'}]}},
+  {stage:'original_evidence',code:'original_evidence_wrong_task',value:{reply:'回到原文繼續看。',assessments:[],originalEvidence:{objectiveId:'invented'}}},
+  {stage:'provider_result',code:'mode_provider_result_unconfirmed',usage:null},
+  {stage:'provider_request',code:'unclassified',error:'private token=synthetic-secret and learner-private-quote'},
+ ]){
+  const f=await fixture(t),prior=f.priorRows();let calls=0;
+  f.options.callModel=async()=>{calls++;if(sample.error)throw Error(sample.error);return {...result(),...(sample.value?{value:sample.value}:{}),...(Object.hasOwn(sample,'usage')?{usage:sample.usage}:{})};};
+  const b=await f.body();await f.send(b);
+  const event=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='response_unconfirmed'").get().details_json);
+  assert.deepEqual(event.modeFailure,{version:'yw-mode-failure-v1',stage:sample.stage,code:sample.code});
+  assert.equal(Object.hasOwn(event,'received'),false);assert(!JSON.stringify(event).includes('synthetic-secret'));
+  assert(!JSON.stringify(event).includes('learner-private-quote'));assert(!JSON.stringify(event).includes('invented'));
+  const row=f.sql.prepare("SELECT state,accounted_micros FROM dialogue_calls WHERE turn_id<>'prior'").get();
+  assert.equal(row.state,'review');assert.equal(row.accounted_micros,null);
+  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_turns WHERE role='teacher'").get().n,0);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
+  await f.send(b);assert.equal(calls,1);assert.equal((await f.send()).status,429);assert.equal(calls,1);
+  assert.deepEqual(f.priorRows(),prior);
+ }
+});
+
 test('unfinished provider and missing usage stop the operation without a new logical request or reset',async t=>{
  for(const outcome of ['failure','usage']){
   const f=await fixture(t);let calls=0;f.options.callModel=async()=>{calls++;if(outcome==='failure')throw Error('gateway_unavailable');return {...result(),usage:null};};
