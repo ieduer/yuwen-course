@@ -16,6 +16,7 @@ export function prepareModeSample(ids=MODE_SAMPLE_IDS,loader=loadCurriculum){
  return {version:'yw-continuous-mode-sample-v1',status:'offline_prepared_not_accepted',productScope:189,lessons,route:'/api/dialogue/v1',conversation:true,
   scope:'same student conversation path; no per-field answer automation',
   requires:['fresh exact source and authorized finite execution','actual current original text, annotations, guides and rubrics in prompt evidence','natural adaptive learner utterances, including preference or question changes','backend original evidence, coverage and prerequisite checks','save, reload and continuation; preserved historical scores','actual source outbox to central accepted receipt to ordinary My reload','browser/mobile and human review'],
+  budgetDisposition:{logicalModelCallsPerConversationalSend:1,deterministicGuideFeedback:'reserve the conversational reply; do not subtract it as a zero-call grading shortcut',providerAttemptLimit:'must bind the fresh approved policy; logical calls are not provider attempt counts',allowanceGranted:false},
   realProviderVerified:false,centralAcceptanceVerified:false,humanAcceptance:false,executionAuthorized:false};
 }
 

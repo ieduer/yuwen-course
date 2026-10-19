@@ -164,6 +164,47 @@ test('original study-guide concise answer uses unchanged deterministic key witho
  assert.equal(f.sql.prepare('SELECT accounted_micros FROM dialogue_calls').get().accounted_micros,0);
  const replay=await handleDialogue(f.req(r.body),f.env,student,null,f.options);assert.equal(replay.status,200);assert.equal(f.calls(),0);
 });
+async function preparedGuideConversation(t,{failReply=false}={}){
+ const key='lesson-1476-p29-ancient-modern-01',f=fixture(t,'lesson-1476',o=>o.domain==='studyGuide'&&o.sourceItemKey===key),item=f.curriculum.studyGuide.find(i=>i.itemKey===key);let calls=0,replyPrompt='';
+ f.options.callModel=async(_env,prompt)=>{
+  calls++;if(calls===1)return {value:{reply:item.referenceAnswer,assessments:[]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
+  if(calls===2){const turn=f.sql.prepare("SELECT id FROM dialogue_turns WHERE role='student' ORDER BY sequence DESC LIMIT 1").get();return {value:{reply:'這個答案已清楚表達，我們接著談。',assessments:[],sourceDraft:{objectiveId:f.curriculum.objectives[0].id,fields:{response:{turnId:turn.id,quote:'大人之學'}}}},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};}
+  replyPrompt=prompt;if(failReply)throw Error('synthetic_followup_unavailable');
+  return {value:{reply:'你問得很具體。我們把這裡的「大人」和下文修身連起來讀。',score:0,passed:false,sourceDraft:{objectiveId:'forged'},assessments:[{outcome:'demonstrated'}]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
+ };
+ let r=await f.send(await f.read(),'請先讓我對照這題的原參考答案。',{conversation:true});assert.equal(r.response.status,200);
+ r=await f.send(r.data,'大人之學',{conversation:true});assert.equal(r.response.status,200);assert(r.data.sourceDraft);
+ return {...f,data:r.data,item,calls:()=>calls,replyPrompt:()=>replyPrompt};
+}
+test('deterministic guide result keeps answer-key score while replying to the current conversational question once',async t=>{
+ const f=await preparedGuideConversation(t),question='大人是指年紀較大的人嗎？能連著下文慢慢說嗎？';
+ const r=await f.send(f.data,question,{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
+ assert.equal(f.calls(),3,'the third conversational turn must receive one reply, not only the static key verdict');
+ assert(f.replyPrompt().includes(question));assert(f.replyPrompt().includes(f.item.referenceAnswer));assert(f.replyPrompt().includes(f.item.prompt));
+ assert.match(r.data.turns.findLast(t=>t.role==='teacher').content,/下文修身/);assert.equal(r.data.sourceSubmissions[0].score,100);
+ const input=JSON.parse(f.sql.prepare('SELECT submitted_payload_json FROM learning_submission_records').get().submitted_payload_json);assert.equal(input.response,'大人之學');
+ const receipt=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_assessment_saved'").get().details_json);
+ assert.equal(receipt.assessment.provider,'study-guide-answer-key');assert.equal(receipt.assessment.score,100);assert.deepEqual(Object.keys(receipt.modelReply),['reply']);
+ const context=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_context_prepared' AND json_extract(details_json,'$.sourceOwnedGuide') IS NOT NULL").get().details_json);
+ assert.equal(context.sourceOwnedGuide.replyOnly,true);assert.equal(context.sourceOwnedGuide.source.itemKey,f.item.itemKey);assert.equal(context.sourceOwnedGuide.scoringAuthority,'original-answer-key');
+ const material={prompt:f.item.prompt,referenceAnswer:f.item.referenceAnswer,explanation:f.item.explanation??null,rubric:f.item.rubric??null};assert.equal(context.sourceOwnedGuide.materialSha256,createHash('sha256').update(JSON.stringify(material)).digest('hex'));assert.equal(context.conversationTurn.contentSha256,createHash('sha256').update(question).digest('hex'));
+ assert.equal((await handleDialogue(f.req(r.body),f.env,student,null,f.options)).status,200);assert.equal(f.calls(),3);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,1);
+});
+test('failed guide conversation preserves the saved question without a fabricated source result or automatic replay',async t=>{
+ const f=await preparedGuideConversation(t,{failReply:true}),question='請再解釋大人與修身的關係。';
+ const r=await f.send(f.data,question,{conversation:true});assert.equal(f.calls(),3);
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='studyGuideItemCompleted'").get().n,0);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='source_assessment_saved'").get().n,0);
+ assert.equal(f.sql.prepare('SELECT content FROM dialogue_turns WHERE mutation_id=?').get(r.body.mutationId).content,question);
+ assert.equal((await handleDialogue(f.req(r.body),f.env,student,null,f.options)).status,200);assert.equal(f.calls(),3);
+});
+test('source-owned guide conversation cannot dispatch feedback without the existing budget admission',async t=>{
+ const f=await preparedGuideConversation(t);delete f.env.YW_DIALOGUE_BUDGET_JSON;
+ const question='請回應這個新問題，再談原答案。',r=await f.send(f.data,question,{conversation:true});
+ assert.equal(r.response.status,503);assert.equal(f.calls(),2);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
+ const snapshot=await f.read();assert.equal(snapshot.draft.content,question);assert.equal(snapshot.draft.learningRequest.conversation,true);
+});
 test('all lesson contexts are bounded and full objectives survive projection; public curriculum has no private answer keys',async()=>{
  const index=JSON.parse(fs.readFileSync('site/dialogue-curriculum/index.json'));assert.equal(index.lessons.length,189);
  for(const row of index.lessons){const c=JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${row.lessonId}.json`)),before=JSON.stringify(c),state=projectState(c,[]);
