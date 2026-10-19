@@ -86,16 +86,26 @@ async function transcript(db,session){
 }
 async function assessmentRows(db,id){return (await all(db.prepare('SELECT * FROM dialogue_assessments WHERE session_id=? ORDER BY created_at,id').bind(id))).map(a=>({objectiveId:a.objective_id,outcome:a.outcome,evidence:JSON.parse(a.evidence_json),rationale:a.rationale,ruleVersion:a.rule_version,createdAt:a.created_at}));}
 async function savedConclusion(db,id){const row=await db.prepare("SELECT details_json FROM dialogue_events WHERE session_id=? AND event_type='conclusion_saved' ORDER BY created_at DESC,id DESC LIMIT 1").bind(id).first();return row?JSON.parse(row.details_json):null;}
-async function proposedSourceDraft(db,session,legacy){
+async function proposedSourceDraft(db,session,legacy,submissions){
  if(legacy.completion)return null;
- const rows=await all(db.prepare("SELECT e.details_json FROM dialogue_events e JOIN dialogue_turns t ON t.id=e.turn_id WHERE e.session_id=? AND e.event_type='source_answer_proposed' ORDER BY t.sequence DESC,e.id DESC").bind(session.id));
+ const rows=await all(db.prepare("SELECT e.details_json,t.sequence FROM dialogue_events e JOIN dialogue_turns t ON t.id=e.turn_id WHERE e.session_id=? AND e.event_type='source_answer_proposed' ORDER BY t.sequence DESC,e.id DESC").bind(session.id));
  for(const row of rows){
   const draft=JSON.parse(row.details_json);
   if(legacy.preserved.some(p=>p.objectiveId===draft.formal.objectiveId))continue;
-  // A submitted objective, including an uncertain result, cannot be replayed
-  // through a different older proposal. Other unsent objectives remain usable.
-  const sent=await db.prepare("SELECT id FROM dialogue_turns WHERE session_id=? AND json_valid(source_request_json) AND json_extract(source_request_json,'$.objectiveId')=? LIMIT 1").bind(session.id,draft.formal.objectiveId).first();
-  if(!sent)return draft;
+  const sent=submissions.filter(s=>s.objectiveId===draft.formal.objectiveId),latest=sent.at(-1);
+  // Uncertain results cannot be retried through another proposal. Once an
+  // unsuccessful result is confirmed, a later revised answer may be assessed
+  // separately, but neither an older proposal nor repackaged old words may run.
+  if(sent.some(s=>s.status!=='confirmed'))continue;
+  if(latest){
+   if(row.sequence<=latest.sequence||sent.some(s=>JSON.stringify(s.input)===JSON.stringify(draft.formal.input)))continue;
+   let revised=false;
+   for(const ref of draft.references||[]){
+    if(await db.prepare("SELECT id FROM dialogue_turns WHERE session_id=? AND id=? AND role='student' AND sequence>? LIMIT 1").bind(session.id,ref.turnId,latest.sequence).first()){revised=true;break;}
+   }
+   if(!revised)continue;
+  }
+  return draft;
  }
  return null;
 }
@@ -134,7 +144,7 @@ async function snapshot(db,session,curriculum,before){
   const continued=await db.prepare("SELECT id FROM dialogue_events WHERE id=? AND session_id=?").bind(`${partial.turnId}:continued`,session.id).first();
   partial.continuation=continuationDisposition(call,failed?JSON.parse(failed.details_json):null,!!continued);
  }
- const records=await learningRecords(db,session),sourceDraft=await proposedSourceDraft(db,session,legacy);
+ const records=await learningRecords(db,session),sourceDraft=await proposedSourceDraft(db,session,legacy,records.submissions);
  const statusEvent=await db.prepare("SELECT details_json FROM dialogue_events WHERE session_id=? AND event_type='source_status' AND turn_id=(SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence DESC LIMIT 1) ORDER BY created_at DESC LIMIT 1").bind(session.id,session.id).first();
  const statusNotice=statusEvent?JSON.parse(statusEvent.details_json).message:null;
  return {statusNotice,learningTurn:learningTurn(curriculum,state,{revision:session.revision,...records,sourceDraft,question:publicQuestion,mastery:legacy.mastery}),sourceSubmissions:records.submissions,originalTask:originalTask(curriculum,state,legacy.mastery),sourceDraft,partial,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending,curriculumVersion:session.curriculum_version,...page,state,assessments,report:evidenceReport(curriculum,state,assessments,completeTurns,conclusion),question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at,formal:draft.source_request_json?JSON.parse(draft.source_request_json):null,learningRequest:draft.source_request_json?JSON.parse(draft.source_request_json).learningRequest||null:null}:null,legacy,readingGate:state.readingGate};

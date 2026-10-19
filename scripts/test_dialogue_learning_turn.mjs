@@ -422,6 +422,104 @@ test('continuous original-answer proposals survive vocabulary focus and all earl
  assert.equal(calls,3);
 });
 
+test('continuous remediation returns to every saved original answer through real grading and reload',async t=>{
+ const raw=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1498.json')),v=raw.vocabulary[0];
+ const f=fixture(t,'lesson-1498',o=>o.id===v.id||o.domain==='context'||['contextWords','structure'].includes(o.legacy?.questionKind));
+ const wordsId=f.curriculum.objectives.find(o=>o.legacy?.questionKind==='contextWords').id;
+ const structureId=f.curriculum.objectives.find(o=>o.legacy?.questionKind==='structure').id;
+ const words='開闊、清澈、惆悵：江海相連，月色澄明，而遊子思婦各在遠方。';
+ const structure='開頭「海上明月共潮生」與末尾「落月摇情满江树」呼應，月亮升落串起時間，景色從開闊轉到離情。';
+ let mode='context',calls=0;
+ f.options.callModel=async(_env,prompt)=>{
+  calls++;
+  if(mode==='grade')return {value:{reply:'月色的升落也可以再與離人的遠近對照。你還想追問哪一句？',score:83,verdict:'有文本依據',strength:'能比較',gap:'可再精確',nextQuestion:'何處呼應？'},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
+  const d=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=d.recent.filter(t=>t.role==='student').at(-1),p=f.curriculum.passages[0];
+  const outcome={context:'demonstrated',wrong:'needs_practice',rephrase:'reformulated',independent:'demonstrated'}[mode];
+  const objective=f.curriculum.objectives.find(o=>mode==='context'?o.domain==='context':o.id===v.id);
+  const assessments=outcome?[{objectiveId:objective.id,outcome,rationale:'合成本機逐字證據，非模型品質驗收。',evidence:objective.criteria.filter(c=>outcome!=='reformulated'||c!=='independent').map(criterion=>({criterion,turnId:turn.id,quote:turn.content,passageId:p.id,passageQuote:p.text}))}]:[];
+  const draft=mode==='words'?{objectiveId:wordsId,fields:{words:{turnId:turn.id,quote:turn.content}}}:mode==='structure'?{objectiveId:structureId,fields:{reason:{turnId:turn.id,quote:turn.content}}}:null;
+  return {value:{reply:'我們回到這一句，接著說說你的理解。',assessments,...(draft?{sourceDraft:draft}:{})},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
+ };
+ async function chat(next,content){mode=next;const before=await f.read(),r=await f.send(before,content,{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));assert.equal(r.data.pending,false);assert.equal(r.data.turns.at(-1).role,'teacher',JSON.stringify(r.data.turns.at(-1)));return r;}
+ await chat('context','江海與月色連成開闊的畫面，讓我感到清澈又有一點惆悵。');
+ const q1=(await f.read()).question;assert(q1);
+ await chat('words',words);await chat('structure',structure);
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
+ await chat('wrong','我還不確定這個字的語境義，先把它理解成單純的景色。');
+ assert.equal(f.sql.prepare('SELECT state FROM dialogue_questions WHERE id=?').get(q1.id).state,'needs_reformulation');
+ assert.equal((await f.read()).question,null);
+ await chat('rephrase','我改述剛才的判斷：這個詞要與前後語句連起來，不能只照字面猜景色。');
+ const q2=(await f.read()).question;assert(q2);assert.notEqual(q2.id,q1.id);assert.equal(q2.attempt,2);
+ await chat('independent','這次我獨立比較上下句，詞義使景物的動態與人物的感受相連，理由在兩句的呼應。');
+ let d=await f.read();assert.equal(d.question,null);assert.equal(d.sourceDraft.formal.objectiveId,structureId);
+ const first=await chat('grade','我想再談月亮升起與落下的呼應，請接著說。');
+ d=await f.read();assert.equal(d.sourceSubmissions.length,1);assert.equal(d.sourceSubmissions[0].status,'confirmed');assert.equal(d.sourceSubmissions[0].score,83);
+ assert.equal(d.sourceDraft.formal.objectiveId,wordsId);assert.equal(d.sourceDraft.references[0].quote,words);
+ const second=await chat('grade','先保留我的三個詞，再看看惆悵從何而來。');
+ d=await f.read();assert.equal(d.sourceDraft,null);assert.equal(d.sourceSubmissions.length,2);assert(d.sourceSubmissions.every(s=>s.status==='confirmed'&&s.score===83));
+ const records=f.sql.prepare('SELECT * FROM learning_submission_records ORDER BY source_event_id').all();assert.equal(records.length,2);
+ const evaluations=f.sql.prepare('SELECT * FROM learning_evaluations ORDER BY source_event_id').all();assert.equal(evaluations.length,2);
+ const beforeReplay=calls;
+ for(const r of [first,second])assert.equal((await handleDialogue(f.req(r.body),f.env,student,null,f.options)).status,200);
+ assert.equal(calls,beforeReplay);
+ await chat('followup','現在我想重新讀最後兩句，保留剛才的疑問。');
+ assert.deepEqual(f.sql.prepare('SELECT * FROM learning_submission_records ORDER BY source_event_id').all(),records);
+ assert.deepEqual(f.sql.prepare('SELECT * FROM learning_evaluations ORDER BY source_event_id').all(),evaluations);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='source_answer_proposed'").get().n,2);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_calls WHERE state!='finished'").get().n,0);
+});
+
+test('confirmed unsuccessful original assessment accepts a later revised answer without replaying the old proposal',async t=>{
+ const f=fixture(t,'lesson-1498',o=>o.legacy?.questionKind==='structure');
+ const id=f.curriculum.objectives[0].id,initial='開頭和結尾都有月亮，所以形成呼應。';
+ const revised='開頭「海上明月共潮生」與結尾「落月摇情满江树」以升落串起時間，景色從開闊江海轉向離人的牽掛。';
+ let grading=false,score=40,calls=0,reference=null;
+ f.options.callModel=async(_env,prompt)=>{
+  calls++;
+  if(grading)return {value:{reply:'再比較月升月落各自帶出的景色與感受。',score,verdict:'核對原判準',strength:'留意呼應',gap:'比較效果',nextQuestion:'升落有何不同？'},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
+  const data=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=data.recent.filter(t=>t.role==='student').at(-1);
+  return {value:{reply:'保留你的原話，再與兩處原文對照。',assessments:[],sourceDraft:{objectiveId:id,fields:{reason:reference||{turnId:turn.id,quote:turn.content}}}},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
+ };
+ let r=await f.send(await f.read(),initial,{conversation:true});assert(r.data.sourceDraft);
+ grading=true;r=await f.send(await f.read(),'請回應我對前後呼應的理解。',{conversation:true});
+ assert.equal(r.data.sourceSubmissions[0].status,'confirmed');assert.equal(r.data.sourceSubmissions[0].score,40);assert.equal(r.data.sourceDraft,null);
+ const old=f.sql.prepare('SELECT * FROM learning_submission_records').get(),oldEvaluation=f.sql.prepare('SELECT * FROM learning_evaluations').get();
+ const oldTurn=f.sql.prepare("SELECT id,content FROM dialogue_turns WHERE role='student' ORDER BY sequence LIMIT 1").get();
+ grading=false;reference={turnId:oldTurn.id,quote:oldTurn.content};
+ r=await f.send(await f.read(),'我想知道舊答案哪裡不夠清楚。',{conversation:true});assert.equal(r.data.sourceDraft,null,'a new proposal event cannot make the old answer a new submission');
+ reference={turnId:oldTurn.id,quote:'開頭和結尾都有月亮'};
+ r=await f.send(await f.read(),'先不要重評，讓我再看看先前寫的話。',{conversation:true});assert.equal(r.data.sourceDraft,null,'a shortened old quotation is not a post-assessment revision');
+ reference=null;
+ grading=false;r=await f.send(await f.read(),revised,{conversation:true});
+ assert(r.data.sourceDraft,'a new exact student answer after a confirmed non-passing result must remain available for original grading');
+ assert.equal(r.data.sourceDraft.references[0].quote,revised);
+ grading=true;score=83;r=await f.send(await f.read(),'這次我比較了升落與感受，還想知道這個解釋能否成立。',{conversation:true});
+ assert.equal(r.data.sourceSubmissions.length,2);assert.deepEqual(r.data.sourceSubmissions.map(s=>s.score),[40,83]);assert.equal(r.data.sourceDraft,null);
+ assert.deepEqual(f.sql.prepare('SELECT * FROM learning_submission_records WHERE source_event_id=?').get(old.source_event_id),old);
+ assert.deepEqual(f.sql.prepare('SELECT * FROM learning_evaluations WHERE source_event_id=?').get(oldEvaluation.source_event_id),oldEvaluation);
+ assert.equal((await handleDialogue(f.req(r.body),f.env,student,null,f.options)).status,200);assert.equal(calls,6);
+});
+
+test('uncertain original result blocks even a newly revised proposal while retaining the new student words',async t=>{
+ const f=fixture(t,'lesson-1498',o=>o.legacy?.questionKind==='structure'),id=f.curriculum.objectives[0].id;
+ let fail=false,calls=0;
+ f.options.callModel=async(_env,prompt)=>{
+  calls++;if(fail)throw Error('synthetic_source_result_uncertain');
+  const data=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=data.recent.filter(t=>t.role==='student').at(-1);
+  return {value:{reply:'先保留文字，已有評閱仍待確認。',assessments:[],sourceDraft:{objectiveId:id,fields:{reason:{turnId:turn.id,quote:turn.content}}}},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
+ };
+ await f.send(await f.read(),'月升與月落形成前後呼應，景物和人物情感一起變化。',{conversation:true});
+ fail=true;await f.send(await f.read(),'請核對剛才的前後比較。',{conversation:true});
+ let d=await f.read();assert.equal(d.sourceSubmissions[0].status,'unconfirmed');assert.equal(d.sourceDraft,null);
+ fail=false;const revision='我又發現開頭江海連闊，結尾收束到離人，兩處的空間與情感遠近有所不同。';
+ const r=await f.send(d,revision,{conversation:true});assert.equal(r.response.status,200);d=await f.read();
+ assert.equal(d.sourceDraft,null);assert.equal(d.sourceSubmissions.length,1);assert.equal(d.sourceSubmissions[0].status,'unconfirmed');
+ assert(d.turns.some(t=>t.role==='student'&&t.content===revision));
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='source_answer_proposed'").get().n,2);
+ assert.equal(calls,3);
+});
+
 test('first reading conversation completes original three-mark, impression, correction and acknowledgement receipts',async t=>{
  const f=fixture(t,'lesson-1711-p1');f.sql.exec('DELETE FROM classical_first_read_sessions; DELETE FROM learning_interactions;');
  const asset=JSON.parse(fs.readFileSync('site/data/classical-first-read/lesson-1711-p1.json'));

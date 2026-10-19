@@ -1,4 +1,12 @@
-## Current 2026-10-19T00:37:45.515897+00:00 — full189 product, representative complete-mode acceptance
+## Current 2026-10-19T03:06:44.669034+00:00 — local continuous flow repaired; formal NO-GO
+
+Confirmed unsuccessful original assessments now permit a later revised answer backed by new student words. Old proposals, identical input, repackaged old quotations and any uncertain same-objective result remain blocked from resubmission. Passing/historical results remain preserved. Source grading, thresholds, score projection, central contracts and student ownership are unchanged. The actual local backend now verifies vocabulary wrong-answer → reformulation → independent replacement question → two saved original answers → original grading → reload and continued dialogue, with immutable history and idempotency. All model replies in this verification are synthetic; no live quality acceptance is inferred.
+
+Full189 (88+101) remains the goal; the newer few-sample complete-mode amendment overrides old fixed quotas. No network, real provider, authentication, push or deployment occurred. Latest isolated transaction remains terminal, second-turn cause UNKNOWN, paired rollback evidence unchanged. Counters management101/cap104 with A1three reserved, publisher613/phase615/overall1669,35logical/34provider,unknown588000micros,paidallowance0 and expiry2026-10-14T12:00Z remain unchanged. Real complete mode, cache, candidate central/My, compatibility, formal go/no-go and Status remain open.
+
+The earlier matrix remains a scoped historical inventory, not a current deployment or budget claim. Affected requirement dispositions: [mode-continuation-01a15214/REQUIREMENTS-DELTA.json](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/mode-continuation-01a15214/REQUIREMENTS-DELTA.json). Exact local source is in SOURCE.json; no current release artifact has been built by this step. The next authorized step is local exact-candidate preparation and a concrete new finite isolated plan for direct approval; no old receipt can be replayed. Formal publication needs its separate go/no-go.
+
+## Historical 2026-10-19T00:37:45.515897+00:00 — full189 product, representative complete-mode acceptance
 
 **NO-GO for formal publication.** The direct user amendment「不需要驗證全部，抽樣幾篇通過即可」「核心是模式跑通」controls acceptance: use a few representative complete learning dialogues. Fixed24/28/207/full189 model-execution quotas in historical sections are superseded; the product remains all189 (88 required +101 elective). No new model budget, paid allowance, probe, monitoring or formal release authority is implied. Paid hard expiry2026-10-14T12:00Z and consumed attempts remain unchanged.
 
