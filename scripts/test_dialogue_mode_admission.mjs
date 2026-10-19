@@ -60,6 +60,37 @@ test('new sampled capability is absent on ordinary Pages and cannot grant retrie
  f.env.YW_DIALOGUE_PROVIDER_ATTEMPTS='3';assert.throws(()=>requestDialogueBudget(f.env,student,lesson));assert.equal(f.calls(),0);
 });
 
+test('explicit renewed capability freezes a failed earlier mode transaction without replay or history reset',async t=>{
+ const f=await fixture(t);let attempts=0;
+ f.options.callModel=async()=>{attempts++;throw Error('synthetic_terminal_failure');};
+ await f.send();assert.equal(attempts,1);
+ const next=await f.body(),blocked=await f.send(next);assert.equal(blocked.status,429);assert.equal(attempts,1);
+ const frozen=()=>f.sql.prepare("SELECT c.*,s.student_id session_owner,s.curriculum_json,e.details_json FROM dialogue_calls c JOIN dialogue_sessions s ON s.id=c.session_id LEFT JOIN dialogue_events e ON e.id=c.turn_id||':result' ORDER BY c.turn_id").all();
+ const prior=frozen();assert.equal(prior.length,2);assert(prior.some(r=>r.accounted_micros===null));
+ f.pin.version='yw-isolated-mode-admission-v2';f.pin.priorCallCount=prior.length;f.pin.priorLedgerDigest=await modeLedgerDigest(prior);f.refresh();
+ assert.equal((await f.send(next)).status,429,'changing version alone cannot reset the existing approval');assert.equal(attempts,1);
+ f.pin.authorityDigest='d'.repeat(64);f.pin.priorCallCount=1;f.refresh();
+ assert.equal((await f.send(next)).status,429,'the earlier failed mode call must be included in the frozen ledger');assert.equal(attempts,1);
+ f.pin.priorCallCount=prior.length;f.refresh();
+ f.options.callModel=async()=>{attempts++;return result();};
+ const resumed=await f.send(next);assert.equal(resumed.status,200,JSON.stringify(resumed.data));assert.equal(attempts,2);
+ assert.deepEqual(frozen().filter(r=>prior.some(p=>p.turn_id===r.turn_id)),prior);
+ assert.equal((await f.send()).status,200);assert.equal(attempts,3);
+ assert.equal((await f.send()).status,429);assert.equal(attempts,3,'the new approved cap remains finite');
+ assert.deepEqual(frozen().filter(r=>prior.some(p=>p.turn_id===r.turn_id)),prior);
+});
+
+test('renewed mode still stops on its first uncertain result and detects frozen-ledger races',async t=>{
+ for(const race of [false,true]){
+  const f=await fixture(t);f.pin.version='yw-isolated-mode-admission-v2';f.refresh();let attempts=0;
+  f.options.callModel=async()=>{attempts++;throw Error('synthetic_v2_terminal_failure');};
+  if(race){const batch=f.db.batch;f.db.batch=async rows=>{f.sql.exec("UPDATE dialogue_calls SET reserved_micros=1 WHERE turn_id='prior'");return batch(rows);};}
+  const first=await f.send();
+  if(race){assert.equal(first.status,429);assert.equal(attempts,0);}
+  else{assert.equal(attempts,1);assert.equal((await f.send()).status,429);assert.equal(attempts,1);}
+ }
+});
+
 test('source and frozen historical ledger changes stop before dispatch',async t=>{
  for(const change of [f=>{f.pin.lessonPins.find(p=>p.lessonId===lesson).sourceDigest='c'.repeat(64);f.refresh();},f=>f.sql.exec("UPDATE dialogue_calls SET accounted_micros=0 WHERE turn_id='prior'"),f=>f.sql.exec("UPDATE dialogue_events SET details_json='{}' WHERE id='prior:result'"),f=>f.sql.exec("UPDATE dialogue_calls SET state='reserved' WHERE turn_id='prior'")]){
   const f=await fixture(t);change(f);assert.equal((await f.send()).status,429);assert.equal(f.calls(),0);
@@ -117,8 +148,9 @@ test('mode rejects per-field and direct original shortcuts before any original s
  assert.equal((await f.send({...b,conversation:true,action:'original'})).status,400);assert.equal(f.calls(),0);
 });
 
-test('publisher mode configuration is independent, exact and keeps central writes unavailable',async t=>{
- const f=await fixture(t),vars=Object.fromEntries(Object.entries(f.bindings).filter(([k,v])=>typeof v==='string').map(([k,value])=>[k,k==='APIS_CALLER_TOKEN'?{type:'secret_text'}:{type:'plain_text',value}]));
+for(const admissionVersion of ['yw-isolated-mode-admission-v1','yw-isolated-mode-admission-v2'])test('publisher mode configuration is independent, exact and keeps central writes unavailable: '+admissionVersion,async t=>{
+ const f=await fixture(t);f.pin.version=admissionVersion;f.bindings.YW_E2E_AUTHORITY_JSON=JSON.stringify(f.pin);f.refresh();
+ const vars=Object.fromEntries(Object.entries(f.bindings).filter(([k,v])=>typeof v==='string').map(([k,value])=>[k,k==='APIS_CALLER_TOKEN'?{type:'secret_text'}:{type:'plain_text',value}]));
  const config={compatibility_date:'2026-05-12',compatibility_flags:[],fail_open:false,d1_databases:{ACCEPTANCE_DB:{id:FIXED.database}},services:{USER_CENTER_EVIDENCE:{service:'bdfz-user-center',environment:'production',entrypoint:'YuwenEvidenceIdentity'},APIS:{service:'apis',environment:'production'}},env_vars:vars};
  assert.deepEqual(validateModeConfiguration(config,at),f.pin);assert.throws(()=>validateConfiguration(config,at));
  assert.equal(f.env.LEARNING_EVIDENCE_QUEUE,undefined);assert.equal(f.env.USER_CENTER_EVIDENCE.submitEvidence,undefined);
