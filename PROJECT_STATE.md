@@ -3214,3 +3214,14 @@ Baseline Pages6a3d5d0c/sourcee79fdd5; preserve all forward data.
 
 The existing Web polish fixture now includes the canonical text version and digest,
 so the current source-authority check can validate its synthetic submitted state.
+
+<!-- merged from accepted formal 1f345fbd (paired maintenance); candidate text above remains current -->
+## Current local preparation — 2026-10-17 PDT
+
+suen approved the single minimal caller-pair unlock and full189 continuation.
+APIS remains Claude-owned. This separate maintenance branch preserves formal
+175f8ae and adds only inert admission/temporary owner identity checking plus
+focused tests and documentation. No credentials or live config changed. The
+full189 source remains a separate candidate; do not substitute this branch for it.
+Window not started; provider/Cloudflare writes0. Source, checks and exact cleanup:
+`/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/REPORT.md`.

@@ -4275,3 +4275,41 @@ exact final platform compile/execute and public Status readback remain release g
 accepted compile/execute substitution replaces unavailable compressed bytes; no reupload
 just to obtain compressed-size telemetry. The full transaction is in the current linked
 TRANSACTION.md; it is not approved by this source commit.
+
+<!-- merged from accepted formal 1f345fbd (paired maintenance); candidate text above remains current -->
+## 2026-10-17 PDT — Approved YW caller-pair maintenance candidate (not deployed)
+
+Owner approved the minimal paired-unlock transaction; APIS remains Claude-owned.
+This source starts from the accepted textbook baseline175f8ae, not the189-dialogue
+candidate. `YW_RELEASE_READ_ONLY=true` rejects new unsafe methods and the
+side-effect GET routes `/api/learning/health` and `/api/preview` before dependency
+access. Ordinary reading remains available; already admitted requests are not
+cancelled. Keep the flag absent/false outside the approved maintenance window.
+
+Before enabling it, prepare the exact release and rollback, disable the existing
+scheduler's `YW_BACKGROUND_EVALUATION_ENABLED` through its registered control,
+and establish the bounded quiescence evidence from the approved transaction.
+The machine execution route is blocked before nonce consumption or a provider
+call. Do not mistake a zero pending backlog for proof that every in-flight
+foreground request has finished, or invoke the outbox-draining health route to
+obtain quiescence evidence. If that proof is unavailable, do not switch secrets.
+
+The temporary `GET /api/internal/caller-identity` check requires maintenance,
+`YW_DIALOGUE_ACCEPTANCE_USER_ID=553`, a valid expiry no more than10minutes ahead,
+`X-YW-Caller-Check:1`, the normal same-origin session, and fresh User Center RPC
+identity553. It does not use the ordinary identity cache, reconcile a student,
+read/write YW D1, or call a model. It sends exactly one identity request through
+APIS Service Binding using the server-only caller. The response is bounded to
+2048bytes/5seconds, sanitized and private/no-store; any mismatch is terminal,
+with no automatic retry. The check is unavailable outside that window.
+
+Claude owns the single new digest candidate and APIS promotion. Codex installs
+the same approved securely-held value in formalproduction and isolatedprod/preview
+only after both sides are READY. Never roll APIS back to the old digest after
+formalYW receives the new secret. For an application rollback, rebind the new
+accepted secret to the latest pre-switch accepted artifact/config and verify;
+preserve forward D1/Queue/central/history. Do not assume Pages rollback preserves
+the correct secret. Restore the scheduler only after pairing and admission are
+verified. No config flags, secret, scheduler or live resource changed in this
+local candidate. Exact transaction/evidence:
+`/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/TRANSACTION.md`.

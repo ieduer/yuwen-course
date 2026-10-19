@@ -1,3 +1,4 @@
+import { CALLER_IDENTITY_PATH, pairedMaintenanceRejection, checkPairedCallerIdentity } from './paired-maintenance.js';
 import {fetchAssessmentAsset} from './assessment-assets.js';
 import { releaseAdmissionResponse, dialogueAcceptanceScope, dialogueAdmissionAllowed, dialogueAcceptanceRejection } from './release-admission.js';
 import { handleDialogue,loadDialogueCurriculum } from './dialogue-source.js';
@@ -94,6 +95,9 @@ const YW_PRE_ACTIVATION_TRANSPORT_CANARY = Object.freeze({
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (url.pathname === CALLER_IDENTITY_PATH) return checkPairedCallerIdentity(request, env, userCenterSessionCookieHeader(request));
+    const maintenance = pairedMaintenanceRejection(request, env);
+    if (maintenance) return maintenance;
     let decodedPath;try{decodedPath=decodeURIComponent(url.pathname).replace(/\/{2,}/g,'/');}catch{return new Response('Invalid path',{status:400});}
     // The existing feature flag also owns the student entrypoint. Legacy deep links
     // retain their hash; explicit materials/history access keeps the old workspace.
