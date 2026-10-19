@@ -11,6 +11,8 @@ import {pathToFileURL} from 'node:url';
 import {acceptanceEnvironment} from '../site/dialogue-acceptance.js';
 import {fullActivation} from '../site/dialogue-full-language.js';
 import {isolatedDialogueAdmission,E2E_LESSONS} from '../site/dialogue-e2e-admission.js';
+import {MODE_OPERATION,MODE_LESSONS,modeDialogueAdmission,modeLedgerProjection} from '../site/dialogue-mode-admission.js';
+import {dialogueBudget} from '../site/dialogue-budget.js';
 import syntheticFixture from '../site/dialogue-synthetic-diagnostic-fixture.json' with {type:'json'};
 import packet from '../site/dialogue-full-language-packet.json' with {type:'json'};
 import {prepareRenewedPlan} from './dialogue_e2e_renewal.mjs';
@@ -45,6 +47,42 @@ export function validateConfiguration(config,now=Date.now()){
  for(const id of E2E_LESSONS)isolatedDialogueAdmission(env,{ucUserId:553},id,{...budget,logicalProviderAttemptLimit:3,perAttemptReserveMicros:84000,reserveMicros:252000},now);
  return full;
 }
+// Separate opt-in branch; the legacy configuration validator above stays exact.
+export function validateModeConfiguration(config,now=Date.now()){
+ same(Object.keys(config).sort(),['compatibility_date','compatibility_flags','d1_databases','env_vars','fail_open','services'],'unexpected mode capabilities');
+ same(config.d1_databases,{ACCEPTANCE_DB:{id:FIXED.database}});assert.equal(config.fail_open,false);assert(/^\d{4}-\d{2}-\d{2}$/.test(config.compatibility_date));same(config.compatibility_flags,[]);
+ same(config.services,{USER_CENTER_EVIDENCE:{service:'bdfz-user-center',environment:'production',entrypoint:'YuwenEvidenceIdentity'},APIS:{service:'apis',environment:'production'}});
+ const allowed=['APIS_CALLER_TOKEN','YW_ACCEPTANCE_USER_ID','YW_ACCEPTANCE_EXPIRES_AT','YW_ACCEPTANCE_DATABASE_ID','YW_FORMAL_APIS_VERSION','YW_ACCEPTANCE_ACTIVATION_SHA256','YW_DIALOGUE_BUDGET_JSON','YW_DIALOGUE_PROVIDER_ATTEMPTS','YW_E2E_AUTHORITY_JSON'];
+ same(Object.keys(config.env_vars).sort(),allowed.sort(),'mode activation variables differ');
+ const vars={};for(const [k,v]of Object.entries(config.env_vars)){if(k==='APIS_CALLER_TOKEN'){same(v,{type:'secret_text'});vars[k]='offline-validation-only';continue;}same(Object.keys(v).sort(),['type','value']);assert(v.type==='plain_text'&&typeof v.value==='string');vars[k]=v.value;}
+ assert.equal(vars.YW_DIALOGUE_PROVIDER_ATTEMPTS,'1');const noIO=()=>{throw Error('configuration_check_has_no_io');};
+ const env=acceptanceEnvironment(new Request(FIXED.origin),{...vars,ASSETS:{fetch:noIO},ACCEPTANCE_DB:{prepare:noIO},APIS:{fetch:noIO},USER_CENTER_EVIDENCE:{resolveSession:noIO}},now);
+ const policy=JSON.parse(vars.YW_DIALOGUE_BUDGET_JSON),pin=JSON.parse(vars.YW_E2E_AUTHORITY_JSON);
+ const checked=dialogueBudget(env,now);assert(Date.parse(policy.validUntil)>=Date.parse(pin.hardExpiry),'mode price window mismatch');
+ const budget={...checked,validUntil:policy.validUntil,perAttemptReserveMicros:checked.reserveMicros,logicalProviderAttemptLimit:1,providerAttemptLimit:1};
+ for(const id of MODE_LESSONS)modeDialogueAdmission(env,{ucUserId:553},id,budget,pin,now);
+ return pin;
+}
+export function validateModeProof(receipt,artifact,now=Date.now()){
+ const mode=receipt.isolated.sample_mode;assert(mode?.version==='yw-sampled-mode-publication-v1','explicit sampled-mode receipt required');
+ assert(!receipt.isolated.inert_candidate&&!receipt.isolated.single_diagnostic&&!receipt.isolated.deploy_only&&!receipt.isolated.calibration_overlay,'mode cannot reuse another operation');
+ const pin=validateModeConfiguration(receipt.isolated.config,now),bound=ref=>{assert(ref?.path&&ref.sha256===sha(fs.readFileSync(ref.path)),'mode approval evidence changed');return read(ref.path);};
+ const authority=bound(mode.authorization),ledger=bound(mode.prior_ledger),prior=bound(mode.prior_receipt),providerProof=bound(mode.single_provider_source_proof);
+ same(mode.single_provider_source_proof.sha256,pin.singleProviderSourceProofDigest,'mode provider proof digest differs');
+ assert(providerProof.version==='yw-mode-single-provider-source-v1'&&providerProof.apisVersion===pin.apisVersion&&providerProof.apisSourceCommit===receipt.isolated.apis.source_commit&&providerProof.providerAttemptLimit===1&&providerProof.automaticRetry===false,'mode single-provider source proof differs');
+ assert(Array.isArray(providerProof.evidence)&&providerProof.evidence.length>0,'mode source proof evidence required');for(const ref of providerProof.evidence)assert(ref?.path&&ref.sha256===sha(fs.readFileSync(ref.path)),'mode source proof evidence changed');
+ same(prior.target,receipt.target,'mode restore target differs');assert(/^[a-f0-9]{40}$/.test(prior.source_commit||'')&&/^[a-f0-9]{64}$/.test(prior.preview?.artifact_digest||''),'mode restore source/artifact required');
+ const priorEnv=prior.isolated?.config?.env_vars,priorActivation=JSON.parse(priorEnv?.YW_E2E_AUTHORITY_JSON?.value||'null');
+ assert(priorActivation&&priorActivation.operation!==MODE_OPERATION&&Date.parse(priorEnv.YW_ACCEPTANCE_EXPIRES_AT.value)<=Date.parse(pin.notBefore)&&!priorEnv.YW_SINGLE_DIAGNOSTIC_JSON,'mode restore must keep the prior inactive baseline');
+ assert(authority.status==='approved'&&authority.operation===MODE_OPERATION&&authority.version==='yw-mode-human-authorization-v1','fresh explicit mode authority required');
+ const {authorityDigest,...approvedPin}=pin;
+ same(authority.pin,approvedPin,'mode authority does not cover exact policy/source/window');same(authorityDigest,mode.authorization.sha256,'mode authority digest differs');
+ same([pin.sourceCommit,pin.artifactSha256],[receipt.source_commit,artifact.sha256],'mode exact source/artifact required');
+ assert(Date.parse(receipt.expires_at)<=Date.parse(pin.hardExpiry),'mode release exceeds dispatch window');
+ assert(Array.isArray(ledger.rows)&&ledger.rows.length===pin.priorCallCount&&new Set(ledger.rows.map(r=>r.turn_id)).size===ledger.rows.length,'complete unique prior ledger required');
+ same(digest(modeLedgerProjection(ledger.rows)),pin.priorLedgerDigest,'prior mode ledger differs');
+ return pin;
+}
 export function packWorker(root,inv,config){
  const metadata={main_module:'index.js',compatibility_date:config.compatibility_date,compatibility_flags:config.compatibility_flags,bindings:[{type:'d1',name:'ACCEPTANCE_DB',id:FIXED.database},...Object.entries(config.services).map(([name,v])=>({type:'service',name,...v})),...Object.entries(config.env_vars).map(([name,v])=>v.type==='secret_text'?{type:'inherit',name}:{type:v.type,name,text:v.value})]};
  const boundary='yw-'+digest({files:inv.files,metadata}).slice(0,48),chunks=[];
@@ -67,10 +105,16 @@ export function validateRegistration(registry,receipt,{receiptHash,publisherHash
  assert(receipt.tests?.source_commit===head&&receipt.tests.evidence_path&&receipt.tests.evidence_sha256===sha(fs.readFileSync(receipt.tests.evidence_path)),'exact test evidence required');
  assert(receipt.preview.source_commit===head&&receipt.preview.evidence_path&&receipt.preview.evidence_sha256===sha(fs.readFileSync(receipt.preview.evidence_path)),'local artifact evidence required');
  if(receipt.http_budget?.deploy_timeout_ms!==undefined)assert(receipt.http_budget.deploy_timeout_ms===300000,'bounded deployment transport override required');
- const inert=!!receipt.isolated.inert_candidate,single=!!receipt.isolated.single_diagnostic;
- const full=single?validateSingleDiagnosticConfiguration(receipt,now):inert?validateInertConfiguration(receipt,now):validateConfiguration(receipt.isolated.config,now);
+ const inert=!!receipt.isolated.inert_candidate,single=!!receipt.isolated.single_diagnostic,mode=!!receipt.isolated.sample_mode;
+ assert([inert,single,mode,!!receipt.isolated.deploy_only].filter(Boolean).length<=1,'conflicting isolated modes');
+ const full=mode?validateModeProof(receipt,artifact,now):single?validateSingleDiagnosticConfiguration(receipt,now):inert?validateInertConfiguration(receipt,now):validateConfiguration(receipt.isolated.config,now);
  if(!inert&&!single)assert(full.apisVersion===receipt.isolated.apis.version,'APIS activation differs');
- if(single)validateSingleDiagnosticProof(receipt,registry,artifact,now);
+ if(mode){
+  same(full.sourceCommit,receipt.source_commit,'mode source cannot use a calibration overlay');
+  const ref=receipt.isolated.sample_mode.prior_receipt,prior=read(ref.path),old=registry.approved_releases.find(x=>x.change_id===prior.change_id);
+  assert(old?.consumed===true&&old.receipt_sha256===ref.sha256&&prior.change_id!==receipt.change_id,'mode restore authority must remain consumed');
+ }
+ else if(single)validateSingleDiagnosticProof(receipt,registry,artifact,now);
  else if(inert)validateInertCandidateProof(receipt,registry,artifact,now);
  else if(receipt.isolated.deploy_only)validateDeployOnlyProof(receipt,registry,now);
  else if(full.sourceCommit===receipt.source_commit)same(full.artifactSha256,artifact.sha256,'calibration artifact not bound');
@@ -159,17 +203,21 @@ export function validateDeployOnlyProof(receipt,registry,now=Date.now(),load=rea
  assert(receipt.http_budget?.max_requests===17&&receipt.http_budget.shared_configuration_max===0&&d.deploy_timeout_ms===300000,'bounded deployment-only policy required');
  return prior;
 }
-export function requestCeiling(receipt){const cap=receipt.http_budget?.max_requests;assert(Number.isInteger(cap)&&cap>0&&cap<=160,'finite receipt request ceiling required');return Math.min(receipt.isolated.deploy_only?17:receipt.isolated.inert_candidate?22:receipt.isolated.single_diagnostic?23:160,cap);}
+export function requestCeiling(receipt){const cap=receipt.http_budget?.max_requests;assert(Number.isInteger(cap)&&cap>0&&cap<=160,'finite receipt request ceiling required');return Math.min(receipt.isolated.deploy_only?17:receipt.isolated.inert_candidate?22:receipt.isolated.single_diagnostic||receipt.isolated.sample_mode?23:160,cap);}
 export function requestTimeout(receipt,state,id,method,now=Date.now()){
  const boundedDeploy=receipt.isolated.deploy_only||receipt.http_budget?.deploy_timeout_ms===300000;const base=method==='GET'?15000:boundedDeploy&&id==='deploy'?300000:120000;
- if(!boundedDeploy)return base;const full=JSON.parse(receipt.isolated.config.env_vars.YW_CALIBRATION_FULL_LANGUAGE_JSON.value);if(receipt.isolated.inert_candidate)validateInertConfiguration(receipt,now);const remaining=Math.min(Date.parse(receipt.expires_at),Date.parse(state.startedAt)+900000,receipt.isolated.inert_candidate||receipt.isolated.single_diagnostic?Infinity:Date.parse(full.hardExpiry))-now;assert(remaining>0,'deadline expired');return Math.min(base,remaining);
+ if(!boundedDeploy)return base;const full=JSON.parse(receipt.isolated.config.env_vars[receipt.isolated.sample_mode?'YW_E2E_AUTHORITY_JSON':'YW_CALIBRATION_FULL_LANGUAGE_JSON'].value);if(receipt.isolated.inert_candidate)validateInertConfiguration(receipt,now);const remaining=Math.min(Date.parse(receipt.expires_at),Date.parse(state.startedAt)+900000,receipt.isolated.inert_candidate||receipt.isolated.single_diagnostic?Infinity:Date.parse(full.hardExpiry))-now;assert(remaining>0,'deadline expired');return Math.min(base,remaining);
 }
 export function configurationPatch(config){
  const patch=structuredClone(config);delete patch.env_vars.APIS_CALLER_TOKEN;
  // Pages merges env_vars. Remove only the retired activation keys explicitly;
  // omitting a key preserves its previous value even when it is disabled.
  patch.services.APIS_ACCEPTANCE=null;patch.env_vars.YW_ACCEPTANCE_APIS_VERSION=null;
- patch.env_vars.YW_CALIBRATION_AMENDMENT5_JSON=null;return patch;
+ patch.env_vars.YW_CALIBRATION_AMENDMENT5_JSON=null;
+ if(JSON.parse(config.env_vars.YW_E2E_AUTHORITY_JSON.value).operation===MODE_OPERATION){
+  patch.env_vars.YW_CALIBRATION_FULL_LANGUAGE_JSON=null;patch.env_vars.YW_FULL_LANGUAGE_ACTIVATION_SHA256=null;
+ }
+ return patch;
 }
 function projection(p){return {name:p.name,production_branch:p.production_branch,deployment_configs:p.deployment_configs,domains:[...(p.domains||[])].sort()};}
 function assertProviderConfiguration(actual,expected){
@@ -181,9 +229,10 @@ function assertProviderConfiguration(actual,expected){
 }
 function checkBaseline(receipt,p){assert(p.name===FIXED.project&&p.production_branch==='acceptance','wrong Pages target/branch');same(p.canonical_deployment?.id,receipt.base_deployment,'live deployment drift');same(digest(projection(p)),receipt.base_config_digest,'live configuration drift');assert(p.domains.includes('yw-acceptance.bdfz.net'),'domain not attached');}
 export async function transact(receipt,{call,artifact,packed,readAsset,save,beforeDeploy=()=>{},delay=ms=>new Promise(r=>setTimeout(r,ms))}){
- const i=receipt.isolated,deployOnly=!!i.deploy_only,inert=!!i.inert_candidate,single=!!i.single_diagnostic;
+ const i=receipt.isolated,deployOnly=!!i.deploy_only,inert=!!i.inert_candidate,single=!!i.single_diagnostic,mode=!!i.sample_mode;
  if(inert)validateInertConfiguration(receipt);
  if(single)validateSingleDiagnosticConfiguration(receipt);
+ if(mode)validateModeProof(receipt,artifact);
  const p=await call('baseline','GET',PROJECT);checkBaseline(receipt,p);
  const domains=await call('domains','GET',PROJECT+'/domains');assert(domains.some(d=>d.name==='yw-acceptance.bdfz.net'&&d.status==='active'),'isolated domain not active');
  const preserve=async suffix=>{
@@ -198,18 +247,18 @@ export async function transact(receipt,{call,artifact,packed,readAsset,save,befo
  for(const scope of ['production','preview'])assert(p.deployment_configs?.[scope]?.env_vars?.APIS_CALLER_TOKEN?.type==='secret_text','formal caller secret not provisioned; no configuration write');
  let configured=p;
  if(!deployOnly&&!inert){try{configured=await call('config','PATCH',PROJECT,{deployment_configs:{production:configurationPatch(i.config),preview:configurationPatch(i.config)}});}catch(error){
-  if(single){const reconciled=await call('config-uncertain-readback','GET',PROJECT);save('config-uncertain-readback.json',{deployment:reconciled.canonical_deployment?.id,configDigest:digest(projection(reconciled))});throw Error('configuration write uncertain: terminal readback only, no deploy/replay');}throw error;
+  if(single||mode){const reconciled=await call('config-uncertain-readback','GET',PROJECT);save('config-uncertain-readback.json',{deployment:reconciled.canonical_deployment?.id,configDigest:digest(projection(reconciled))});throw Error('configuration write uncertain: terminal readback only, no deploy/replay');}throw error;
  }}
  for(const scope of ['production','preview'])assertProviderConfiguration(configured.deployment_configs?.[scope],i.config);
  const {jwt}=await call('upload-token','GET',PROJECT+'/upload-token');assert(typeof jwt==='string'&&jwt.length>20,'upload credential unavailable');
  const assets=new Map(artifact.assets.map(f=>[f.key,f])),keys=[...assets.keys()];
  const missing=await call('missing','POST','/pages/assets/check-missing',{hashes:keys},jwt);assert(Array.isArray(missing)&&new Set(missing).size===missing.length&&missing.every(k=>assets.has(k)),'unknown missing asset');
- if(deployOnly||inert||single)same(missing,[],'deployment-only requires all assets already stored; no upload retry');
+ if(deployOnly||inert||single||mode)same(missing,[],'deployment-only requires all assets already stored; no upload retry');
  let batch=[],size=0,n=0;
  async function flush(){if(!batch.length)return;await call('upload-'+n++,'POST','/pages/assets/upload',batch,jwt);batch=[];size=0;}
  for(const key of missing){const f=assets.get(key),b=readAsset(f.path);same(sha(b),f.sha256,'asset changed');const row={key,value:b.toString('base64'),metadata:{contentType:f.contentType},base64:true};const bytes=Buffer.byteLength(JSON.stringify(row));if(size+bytes>10*1024*1024)await flush();batch.push(row);size+=bytes;}await flush();
  if(missing.length)await call('upsert','POST','/pages/assets/upsert-hashes',{hashes:missing},jwt);
- if(!deployOnly&&!inert&&!single)same(await call('missing-after','POST','/pages/assets/check-missing',{hashes:keys},jwt),[],'assets not stored');
+ if(!deployOnly&&!inert&&!single&&!mode)same(await call('missing-after','POST','/pages/assets/check-missing',{hashes:keys},jwt),[],'assets not stored');
  // Repeat source-preserving dependencies immediately before the sole deploy.
  if(!deployOnly){await preserve('-predeploy');const current=await call('target-predeploy','GET',PROJECT);same(current.canonical_deployment?.id,receipt.base_deployment,'isolated live changed during upload');same(projection(current),projection(configured),'isolated config drift during upload');}await beforeDeploy();
  const form=new FormData();form.set('manifest',JSON.stringify(Object.fromEntries(artifact.assets.map(f=>['/'+f.path,f.key]))));form.set('branch','acceptance');form.set('commit_hash',receipt.source_commit);form.set('commit_dirty','false');form.set('_worker.bundle',new Blob([packed]),'_worker.bundle');
@@ -228,8 +277,9 @@ export async function execute(receiptPath){
  for(const k of ['NODE_OPTIONS','CLOUDFLARE_API_BASE_URL','CF_API_BASE_URL','HTTPS_PROXY','HTTP_PROXY','ALL_PROXY','https_proxy','http_proxy','all_proxy'])assert(!process.env[k],'unsupported publisher environment');
  const git=(...args)=>execFileSync('git',args,{cwd:root,encoding:'utf8',stdio:['ignore','pipe','pipe'],timeout:15000}).trim();
  const artifact=inventory(receipt.artifact_root),packed=fs.readFileSync(receipt.isolated.packed_worker_path);same(sha(packed),receipt.isolated.packed_worker_sha256);same(packed,packWorker(receipt.artifact_root,artifact,receipt.isolated.config),'packed source/config drift');
- const activation=JSON.parse(receipt.isolated.config.env_vars.YW_CALIBRATION_FULL_LANGUAGE_JSON.value);
- if(receipt.isolated.single_diagnostic){const prior=read(receipt.isolated.single_diagnostic.prior_receipt.path);git('merge-base','--is-ancestor',prior.source_commit,receipt.source_commit);const delta=git('diff','--name-only',prior.source_commit,receipt.source_commit).split('\n');assert(delta.every(p=>['site/dialogue-source.js','site/dialogue-acceptance.js','site/dialogue-single-diagnostic.js','site/dialogue-synthetic-diagnostic-fixture.json','scripts/build_synthetic_diagnostic_fixture.mjs','scripts/test_single_synthetic_diagnostic.mjs','scripts/test_single_diagnostic_publishers.mjs','scripts/publish_dialogue_rollback.mjs','scripts/test_dialogue_formal_gateway.mjs','scripts/publish_dialogue_isolated.mjs','scripts/test_publish_dialogue_isolated.mjs','docs/MAINTENANCE_MANUAL.md','PROJECT_STATE.md'].includes(p)),'single diagnostic source scope changed');}
+ const activation=JSON.parse(receipt.isolated.config.env_vars[receipt.isolated.sample_mode?'YW_E2E_AUTHORITY_JSON':'YW_CALIBRATION_FULL_LANGUAGE_JSON'].value);
+ if(receipt.isolated.sample_mode){validateModeProof(receipt,artifact);same(activation.sourceCommit,receipt.source_commit,'mode source must be exact');}
+ else if(receipt.isolated.single_diagnostic){const prior=read(receipt.isolated.single_diagnostic.prior_receipt.path);git('merge-base','--is-ancestor',prior.source_commit,receipt.source_commit);const delta=git('diff','--name-only',prior.source_commit,receipt.source_commit).split('\n');assert(delta.every(p=>['site/dialogue-source.js','site/dialogue-acceptance.js','site/dialogue-single-diagnostic.js','site/dialogue-synthetic-diagnostic-fixture.json','scripts/build_synthetic_diagnostic_fixture.mjs','scripts/test_single_synthetic_diagnostic.mjs','scripts/test_single_diagnostic_publishers.mjs','scripts/publish_dialogue_rollback.mjs','scripts/test_dialogue_formal_gateway.mjs','scripts/publish_dialogue_isolated.mjs','scripts/test_publish_dialogue_isolated.mjs','docs/MAINTENANCE_MANUAL.md','PROJECT_STATE.md'].includes(p)),'single diagnostic source scope changed');}
  else if(receipt.isolated.inert_candidate){const prior=read(receipt.isolated.inert_candidate.prior_receipt.path);git('merge-base','--is-ancestor',prior.source_commit,receipt.source_commit);const delta=git('diff','--name-only',prior.source_commit,receipt.source_commit).split('\n');assert(delta.includes('site/dialogue-source.js')&&delta.every(p=>['site/dialogue-source.js','scripts/test_dialogue_formal_gateway.mjs','scripts/publish_dialogue_isolated.mjs','scripts/test_publish_dialogue_isolated.mjs','docs/MAINTENANCE_MANUAL.md','PROJECT_STATE.md'].includes(p)),'inert candidate source scope changed');}
  else if(receipt.isolated.deploy_only){const prior=read(receipt.isolated.deploy_only.prior_receipt.path);git('merge-base','--is-ancestor',prior.source_commit,receipt.source_commit);const delta=git('diff','--name-only',prior.source_commit,receipt.source_commit).split('\n');assert(delta.length>0&&delta.every(p=>['scripts/publish_dialogue_isolated.mjs','scripts/test_isolated_deploy_only.mjs','docs/MAINTENANCE_MANUAL.md'].includes(p)),'deployment-only tool patch must not change runtime');}
  else if(activation.sourceCommit!==receipt.source_commit){same(path.resolve(receipt.isolated.calibration_overlay.path),path.join(root,'scripts/dialogue-calibration-overlay.json'),'reviewed source overlay required');await prepareRenewedPlan(read(receipt.isolated.calibration_overlay.path));}
@@ -245,7 +295,7 @@ export async function execute(receiptPath){
   approval.consumed=true;approval.attempted_at=timestamp();project.staged_manual_channel.status='consumed_attempting';write(FIXED.registry,registry);
   const call=async(id,method,url,body,uploadToken)=>{
    assert(!state.terminal&&!state.requests.some(r=>r.id===id)&&Date.now()<Date.parse(receipt.expires_at)&&Date.now()-Date.parse(state.startedAt)<900000&&state.requests.length<requestCeiling(receipt),'terminal, duplicate, deadline or request ceiling');
-   assert(method==='GET'&&(url===PROJECT||url===FORMAL||url===PROJECT+'/domains'||url===PROJECT+'/upload-token'||url===BASE+'/workers/scripts/apis/deployments'||url===BASE+'/workers/scripts/apis/settings'||url===BASE+'/workers/scripts/apis/schedules'||new RegExp('^'+PROJECT+'/deployments/[a-f0-9-]{36}$').test(url))||!receipt.isolated.deploy_only&&!receipt.isolated.inert_candidate&&method==='PATCH'&&id==='config'&&url===PROJECT||method==='POST'&&(url===PROJECT+'/deployments'&&id==='deploy'||(receipt.isolated.deploy_only||receipt.isolated.inert_candidate||receipt.isolated.single_diagnostic?['/pages/assets/check-missing']:['/pages/assets/check-missing','/pages/assets/upload','/pages/assets/upsert-hashes']).includes(url)),'request outside isolated allowlist');
+   assert(method==='GET'&&(url===PROJECT||url===FORMAL||url===PROJECT+'/domains'||url===PROJECT+'/upload-token'||url===BASE+'/workers/scripts/apis/deployments'||url===BASE+'/workers/scripts/apis/settings'||url===BASE+'/workers/scripts/apis/schedules'||new RegExp('^'+PROJECT+'/deployments/[a-f0-9-]{36}$').test(url))||!receipt.isolated.deploy_only&&!receipt.isolated.inert_candidate&&method==='PATCH'&&id==='config'&&url===PROJECT||method==='POST'&&(url===PROJECT+'/deployments'&&id==='deploy'||(receipt.isolated.deploy_only||receipt.isolated.inert_candidate||receipt.isolated.single_diagnostic||receipt.isolated.sample_mode?['/pages/assets/check-missing']:['/pages/assets/check-missing','/pages/assets/upload','/pages/assets/upsert-hashes']).includes(url)),'request outside isolated allowlist');
    const headers={Authorization:'Bearer '+(uploadToken||token),...(receipt.isolated.deploy_only?{'accept-encoding':'identity'}:{})};let data;if(body instanceof FormData){const encoded=new Response(body);headers['content-type']=encoded.headers.get('content-type');data=Buffer.from(await encoded.arrayBuffer());}else if(body!==undefined){headers['content-type']='application/json';data=Buffer.from(JSON.stringify(body));}
    state.requestBytes+=data?.length||0;assert(state.requestBytes<=400*1024*1024,'request byte ceiling');state.requests.push({id,method,url,at:timestamp(),requestBytes:data?.length||0,complete:false});write(journalPath,state);
    let response;try{response=await fetch('https://api.cloudflare.com/client/v4'+url,{method,headers,body:data,redirect:'error',signal:AbortSignal.timeout(requestTimeout(receipt,state,id,method))});}catch(error){Object.assign(state.requests.at(-1),{errorName:error.name,failedAt:timestamp(),outcome:'unknown_no_replay'});write(journalPath,state);throw error;}const chunks=[];let total=0;for await(const chunk of response.body){total+=chunk.length;state.responseBytes+=chunk.length;assert(total<=8*1024*1024&&state.responseBytes<=32*1024*1024,'response byte ceiling');chunks.push(chunk);}const result=JSON.parse(Buffer.concat(chunks));Object.assign(state.requests.at(-1),{status:response.status,responseBytes:total,complete:true});write(journalPath,state);assert(response.ok&&result.success,'provider request failed or uncertain; no replay');return result.result;

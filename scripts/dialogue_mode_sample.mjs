@@ -4,10 +4,11 @@ import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {loadCurriculum,hash,assertComplete} from './dialogue_e2e.mjs';
+import {MODE_LESSONS} from '../site/dialogue-mode-admission.js';
 
 // Three genres, including active source-owned study-guide assessment. The
 // historical Quanxue selection had no active guide and missed that branch.
-export const MODE_SAMPLE_IDS=Object.freeze(['lesson-1498','lesson-1578','lesson-1717-p2']);
+export const MODE_SAMPLE_IDS=MODE_LESSONS;
 
 export function modeCoverage(curricula){
  const covers={poetry:[],classical:[],modernProse:[],originalModelGrading:[],studyGuide:[]};

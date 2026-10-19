@@ -1,8 +1,8 @@
 // Values are deployment policy, never model/browser proposals. No paid default.
-export function dialogueBudget(env){
+export function dialogueBudget(env,at=Date.now()){
  let p;try{p=JSON.parse(env.YW_DIALOGUE_BUDGET_JSON);}catch{throw Error('budget_policy_required');}
  if(!p||!/^[-\w.]{1,80}$/.test(p.version)||!/^gemini-[-\w.]+$/.test(p.model)||p.currency!=='USD')throw Error('invalid_budget_policy');
- if(!Number.isFinite(Date.parse(p.validUntil))||Date.now()>=Date.parse(p.validUntil))throw Error('budget_price_expired');
+ if(!Number.isFinite(at)||!Number.isFinite(Date.parse(p.validUntil))||at>=Date.parse(p.validUntil))throw Error('budget_price_expired');
  for(const key of ['globalDailyMicros','userDailyMicros','lessonLifetimeMicros','reserveMicros','inputMicrosPerMillion','outputMicrosPerMillion']){
   if(!Number.isSafeInteger(p[key])||p[key]<(key.endsWith('MicrosPerMillion')?0:1)||p[key]>1000000000000)throw Error('invalid_budget_policy');
  }

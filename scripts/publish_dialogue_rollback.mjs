@@ -1,5 +1,5 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';import {execFileSync} from 'node:child_process';import {parseEnv} from 'node:util';import {pathToFileURL} from 'node:url';
-import {FIXED,configurationPatch} from './publish_dialogue_isolated.mjs';
+import {FIXED,configurationPatch,validateModeProof} from './publish_dialogue_isolated.mjs';
 const sha=x=>createHash('sha256').update(typeof x==='string'||Buffer.isBuffer(x)?x:JSON.stringify(x)).digest('hex'),same=(a,b,m)=>assert.deepEqual(a,b,m),read=p=>JSON.parse(fs.readFileSync(p));
 const BASE=`/accounts/${FIXED.account}`,PROJECT=BASE+'/pages/projects/'+FIXED.project,FORMAL=BASE+'/pages/projects/yuwen-course';
 const projection=p=>({name:p.name,production_branch:p.production_branch,deployment_configs:p.deployment_configs,domains:[...(p.domains||[])].sort()});
@@ -11,7 +11,7 @@ export function validateRollbackRegistration(registry,r,c,{load=pinRead}={}){
  assert(registry.schema_version===1&&registry.default_policy==='deny'&&registry.catalog_sha256===c.catalogHash,'registry/catalog drift');
  const project=registry.projects.find(p=>p.project_id===FIXED.projectId),channel=project?.staged_manual_channel,approval=registry.approved_releases.find(a=>a.change_id===r.change_id);
  assert(project?.state==='isolated_unaccepted'&&project.mode==='managed_manual'&&project.repository===FIXED.repository,'isolated target required');same(r.target,project.target);same(r.target,{account:FIXED.account,resource:FIXED.project,environment:'isolated-acceptance',domains:['yw-acceptance.bdfz.net']});
- assert(r.schema_version===1&&r.phase==='preview_verified'&&r.project_id===FIXED.projectId&&r.intent==='rollback_isolated_diagnostic'&&r.authorized_task&&r.rollback?.version==='yw-controlled-isolated-rollback-v1','exact rollback receipt required');
+ assert(r.schema_version===1&&r.phase==='preview_verified'&&r.project_id===FIXED.projectId&&['rollback_isolated_diagnostic','rollback_isolated_sample_mode'].includes(r.intent)&&r.authorized_task&&r.rollback?.version==='yw-controlled-isolated-rollback-v1','exact rollback receipt required');
  assert(approval?.consumed===false&&approval.receipt_sha256===c.receiptHash&&approval.project_id===FIXED.projectId&&channel?.identity===r.change_id&&channel.status==='prepared_unconsumed'&&channel.publisher===import.meta.filename&&channel.publisher_sha256===c.publisherHash&&channel.receipt_path===r.receipt_path&&channel.source_commit===r.source_commit&&channel.baseline_deployment===r.base_deployment,'fresh registered rollback channel required');
  assert(c.head===r.source_commit&&c.remoteHead===c.head&&!c.dirty&&c.repository===FIXED.repository&&/^[a-f0-9]{40}$/.test(c.head),'clean exact pushed guard source required');
  assert(channel.expires_at===r.expires_at&&Date.parse(r.expires_at)>c.now&&Date.parse(r.expires_at)-c.now<=3600000,'expired rollback lease');
@@ -19,16 +19,19 @@ export function validateRollbackRegistration(registry,r,c,{load=pinRead}={}){
  const forward=load(r.rollback.forward_receipt),journal=load(r.rollback.forward_journal),prior=load(r.rollback.restore_receipt);
  const consumed=registry.approved_releases.find(a=>a.change_id===forward.change_id);assert(consumed?.consumed===true&&consumed.receipt_sha256===r.rollback.forward_receipt.sha256&&r.change_id!==forward.change_id&&journal.terminal===true&&journal.receiptSha256===consumed.receipt_sha256&&journal.source===forward.source_commit,'forward receipt must stay consumed/terminal');
  same(prior.target,r.target);same(forward.target,r.target);assert(prior.source_commit===r.rollback.restore_source&&forward.base_deployment===r.rollback.restore_deployment,'exact restore anchor required');same(prior.preview.artifact_digest,r.rollback.restore_artifact);same(prior.isolated.packed_worker_sha256,r.rollback.restore_pack);same(prior.isolated.config,r.rollback.restore_config);
- assert(!!forward.isolated.single_diagnostic!==!!forward.isolated.inert_candidate,'only reviewed diagnostic/inert forward can roll back');
- const priorPin=(forward.isolated.single_diagnostic||forward.isolated.inert_candidate).prior_receipt;same(priorPin,r.rollback.restore_receipt,'restore must be the forward predecessor');
+ const mode=!!forward.isolated.sample_mode;
+ assert([!!forward.isolated.single_diagnostic,!!forward.isolated.inert_candidate,mode].filter(Boolean).length===1,'only one reviewed isolated forward may roll back');
+ assert(r.intent===(mode?'rollback_isolated_sample_mode':'rollback_isolated_diagnostic'),'rollback intent differs');
+ const priorPin=(forward.isolated.single_diagnostic||forward.isolated.inert_candidate||forward.isolated.sample_mode).prior_receipt;same(priorPin,r.rollback.restore_receipt,'restore must be the forward predecessor');
  const historical=registry.approved_releases.find(x=>x.change_id===prior.change_id);assert(historical?.consumed===true&&historical.receipt_sha256===r.rollback.restore_receipt.sha256,'restore authority changed');
  const diagnostic=!!forward.isolated.single_diagnostic,configOnly=r.rollback.configuration_only===true;
- if(diagnostic){const base=structuredClone(forward.isolated.config);delete base.env_vars.YW_SINGLE_DIAGNOSTIC_JSON;same(base,prior.isolated.config,'only one diagnostic setting may differ');}
+ if(mode){const pin=JSON.parse(forward.isolated.config.env_vars.YW_E2E_AUTHORITY_JSON.value);validateModeProof(forward,{sha256:forward.preview.artifact_digest},Date.parse(pin.notBefore));}
+ else if(diagnostic){const base=structuredClone(forward.isolated.config);delete base.env_vars.YW_SINGLE_DIAGNOSTIC_JSON;same(base,prior.isolated.config,'only one diagnostic setting may differ');}
  else same(forward.isolated.config,prior.isolated.config,'inert rollback config changed');
  const deploys=journal.requests.filter(x=>x.id==='deploy');
- if(configOnly){assert(diagnostic&&deploys.length===0&&journal.requests.some(x=>x.id==='config'&&x.method==='PATCH'),'configuration-only restore requires a config attempt and no deploy');assert(r.base_deployment===r.rollback.restore_deployment,'configuration-only live anchor differs');}
+ if(configOnly){assert((diagnostic||mode)&&deploys.length===0&&journal.requests.some(x=>x.id==='config'&&x.method==='PATCH'),'configuration-only restore requires a config attempt and no deploy');assert(r.base_deployment===r.rollback.restore_deployment,'configuration-only live anchor differs');}
  else{const handle=load(r.rollback.deployment_handle);assert(deploys.length===1&&handle.source===forward.source_commit&&handle.id===r.base_deployment&&/^[a-f0-9-]{36}$/.test(handle.id),'exact forward deployment handle required');}
- assert(r.rollback.restore_configuration===diagnostic&&r.http_budget?.max_requests===(diagnostic?13:12)&&r.http_budget.shared_configuration_max===(diagnostic?3:2),'exact rollback request/class cap required');
+ assert(r.rollback.restore_configuration===(diagnostic||mode)&&r.http_budget?.max_requests===((diagnostic||mode)?13:12)&&r.http_budget.shared_configuration_max===((diagnostic||mode)?3:2),'exact rollback request/class cap required');
  same(r.preservation,forward.isolated.formal?{formal:forward.isolated.formal,apis:forward.isolated.apis}:null,'preservation pins differ');
  for(const id of ['ai-bdfz-net','apis-bdfz-net']){const p=registry.projects.find(p=>p.project_id===id);assert(p?.state==='accepted');same([p.accepted.version_id,p.accepted.source_commit],[r.preservation.apis.version,r.preservation.apis.source_commit],'APIS source changed');}
  return {project,approval,forward,prior};

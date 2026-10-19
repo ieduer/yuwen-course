@@ -2,6 +2,7 @@ import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
 import {validatedProviderAccounting} from './dialogue-stream.js';
 import {isolatedDialogueAdmission,isolatedCallCount} from './dialogue-e2e-admission.js';
 import {renewedBudgetDenial} from './dialogue-e2e-renewal.js';
+import {MODE_OPERATION,modeOperationCondition} from './dialogue-mode-admission.js';
 
 // Activation is explicit. Calibration passes its own one-attempt budget and
 // never uses this wrapper. One logical learner turn reserves all three slots.
@@ -59,6 +60,10 @@ export async function budgetDenial(db,session,student,budget,limits,day){
  if(await q('SELECT COUNT(*) n FROM dialogue_calls WHERE session_id=?',session.id)>=limits.paidLessonLifetime)return response('paid_lesson_lifetime_exhausted','lifetime',false);
  if(await q("SELECT COUNT(*) n FROM dialogue_turns WHERE session_id=? AND role='student'",session.id)>=limits.lessonLifetime)return response('lesson_turn_lifetime_exhausted','lifetime',false);
  if(await q('SELECT COUNT(*) n FROM dialogue_calls WHERE budget_policy_json IS NULL'))return response('budget_accounting_review','review',false);
+ if(budget.isolatedAdmission?.operation===MODE_OPERATION){
+  const condition=modeOperationCondition(budget,student.id);
+  if(!await q('SELECT ('+condition.sql+') n',...condition.args))return response('mode_operation_review_required','operation',false);
+ }
  if(budget.isolatedAdmission&&await isolatedCallCount(db,budget.isolatedAdmission.operation)>=120)return {...response('e2e_operation_call_budget_exhausted','operation',false),operation:budget.isolatedAdmission.operation,message:'本次驗收已達累計 120 輪上限；不會按日期重置。文字與支出紀錄保留，可讀回及匯出。'};
  const renewedDenial=await renewedBudgetDenial(db,budget,student.id);
  if(renewedDenial)return response(renewedDenial,renewedDenial==='e2e_operation_concurrency_busy'?'concurrency':'operation',false);
