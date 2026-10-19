@@ -12,10 +12,18 @@ for(const [client,origin,headers] of [['web','https://yw.bdfz.net',{'origin':'ht
    assert.deepEqual(await response.json(),{ok:false,code:'release_read_only',error:'網站維護中，這次內容尚未送出。請保留草稿，稍後手動重送。',retryable:false,admitted:false});
  });
 }
-test('existing content-type and cross-origin rejection precede maintenance policy',async()=>{
+test('existing content-type and cross-origin rejection apply whenever maintenance is not closed',async()=>{
  for(const [headers,status] of [[{},415],[{'content-type':'application/json','origin':'https://untrusted.invalid'},403]]){
-  const env={get YW_RELEASE_READ_ONLY(){throw Error('must reject hostile request first');}};
-  const response=await worker.fetch(new Request('https://yw.bdfz.net/api/reading/submission',{method:'POST',headers,body:'{}'}),env,{});assert.equal(response.status,status);
+  for(const env of [{},{YW_RELEASE_READ_ONLY:'false'}]){
+   const response=await worker.fetch(new Request('https://yw.bdfz.net/api/reading/submission',{method:'POST',headers,body:'{}'}),env,{});assert.equal(response.status,status);
+  }
+ }
+});
+test('accepted maintenance gate (formal 1f345fbd) answers hostile writes with the same closed response without consuming the body',async()=>{
+ for(const headers of [{},{'content-type':'application/json','origin':'https://untrusted.invalid'}]){
+  const request=new Request('https://yw.bdfz.net/api/reading/submission',{method:'POST',headers,body:'{}'});
+  const response=await worker.fetch(request,{YW_RELEASE_READ_ONLY:'true',get READING_DB(){throw Error('must not reach database');}},{});
+  assert.equal(response.status,503);assert.equal(request.bodyUsed,false);assert.equal((await response.json()).code,'release_read_only');
  }
 });
 test('machine dispatch and side-effecting health never start while closed',async()=>{
