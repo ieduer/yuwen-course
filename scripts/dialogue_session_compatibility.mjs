@@ -11,6 +11,16 @@ const hash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const pin=c=>({lessonId:c.lessonId,curriculumVersion:c.curriculumVersion,sourceDigest:hash(c)});
 
+export async function projectModeSessionCurriculum(published,frozen,{completed,pending}){
+ assert(typeof completed==='boolean'&&typeof pending==='boolean','explicit server state required');
+ let effective=frozen;
+ if(published.formalScopeExpansion&&!effective.formalScopeExpansion)effective=withProspectiveFormalScope(effective,published,{completed,pending});
+ effective=await withSessionSourceMaterials(effective,published,{completed,pending,historicalCurriculum:frozen});
+ const exemption=approvedSupplement(published);
+ if(exemption)effective={...effective,completionExemption:exemption};
+ return withCalibratedLanguage(effective);
+}
+
 // State must come from the existing server-owned session, not a guessed default.
 // Unknown completion/pending state is reported as all four possible branches.
 // This mirrors the runtime projection order without introducing migration policy.
@@ -20,12 +30,7 @@ export async function inspectSessionCompatibility(published,frozen,{completed,pe
  for(const value of [completed,pending])assert(value===undefined||typeof value==='boolean','explicit server state required');
  const current=await withCalibratedLanguage(published),branches=[];
  for(const done of completed===undefined?[false,true]:[completed])for(const unfinished of pending===undefined?[false,true]:[pending]){
-  let effective=frozen;
-  if(published.formalScopeExpansion&&!effective.formalScopeExpansion)effective=withProspectiveFormalScope(effective,published,{completed:done,pending:unfinished});
-  effective=await withSessionSourceMaterials(effective,published,{completed:done,pending:unfinished,historicalCurriculum:frozen});
-  const exemption=approvedSupplement(published);
-  if(exemption)effective={...effective,completionExemption:exemption};
-  effective=await withCalibratedLanguage(effective);
+  const effective=await projectModeSessionCurriculum(published,frozen,{completed:done,pending:unfinished});
   const keys=[...new Set([...Object.keys(effective),...Object.keys(current)])].sort();
   const changedKeys=keys.filter(key=>!same(effective[key],current[key]));
   const missingObjectives=current.objectives.filter(o=>!effective.objectives.some(old=>same(old,o))).map(o=>o.id);
