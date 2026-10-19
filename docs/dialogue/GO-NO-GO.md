@@ -1,4 +1,8 @@
-## Current 2026-10-19T03:30:03.934735+00:00 — historical prerequisite verified locally; formal NO-GO
+## Current 2026-10-19T03:39:44.464135+00:00 — calibrated future evidence with frozen history; local only
+
+Exact-source supplementary calibration now reaches new and existing sessions without rewriting curriculum snapshots, old questions, drafts, results or scores.105 focused tests pass. New sampled plan v4 pins the effective runtime projection. Full189 remains incomplete; real model/complete-mode/cache/central/My/compatibility and formal publication remain NO-GO. No live calls or changed budgets. [Current manual](/private/tmp/cf-task-yw-full-release-01a14cdd/source/docs/MAINTENANCE_MANUAL.md); [source/build/continuation evidence](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/calibration-projection-01a15214/REPORT.md).
+
+## Historical 2026-10-19T03:30:03.934735+00:00 — historical prerequisite verified locally; formal NO-GO
 
 Six prior real cases for three poetry1498 language items pass exact-source offline verification and17 focused tests. The result is an unapplied proposal: current-prompt provider quality, version-safe session propagation, complete-mode/central/My/cache/compatibility/formal acceptance remain open. No live calls or publication; counters and terminal rollback remain unchanged. Full189 and representative-sampling amendment persist. [Current operations summary](/private/tmp/cf-task-yw-full-release-01a14cdd/source/docs/MAINTENANCE_MANUAL.md) and [exact evidence/next step](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/historical-calibration-01a15214/REPORT.md).
 

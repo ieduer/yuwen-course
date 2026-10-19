@@ -1,0 +1,73 @@
+{
+  "version": "yw-language-calibration-projection-v1",
+  "lessons": [
+    {
+      "lessonId": "lesson-1498",
+      "curriculumVersion": "yw-dialogue-38d5ca7cdcd81dc39614",
+      "sourceDigest": "587ebc234467e1dcb32fc262800ebcb8a75448c1f85af713aa3c6c6b772d7015",
+      "inspectionDigest": "c78475c72166d94a7406cea0abf40b3fca3096c7cf7e4cd8fe5de9da4c652f47",
+      "items": [
+        {
+          "objectiveId": "lesson-1498:grammar-moon",
+          "itemVersion": "yw-language-494b4393766eeae528f9",
+          "itemDigest": "439c78287f24a2fd1ecc4c865401bc78a84028848472dd6df2940df514bb4884",
+          "evidenceDigest": "245e8557fef30d02b818229abe03f3d17d8b4f53f014304273572336b94468f7",
+          "cases": [
+            {
+              "caseId": "grammar-moon-independent",
+              "receiptDigest": "12ac6371dc8be6835888bdacf1a95bae73b11bfc8b90b05585b4ef2bf688e1f2",
+              "readbackDigest": "23d983ec52d746ff71c75633dddc182f34ee857755bedf6fb693bd0540632d08",
+              "semanticReviewDigest": "7da4bf4e8ffe42f158c13e0129dbbee4617171cac140541c543d40062bf10101"
+            },
+            {
+              "caseId": "grammar-moon-misconception",
+              "receiptDigest": "0342d8dcb49017a03b88c052ab37d40e4661a048933a89c89e8491a4056285c8",
+              "readbackDigest": "d0c763b30b072e3632ebdc430ed332c131e95550ad05c9d64c1e9879e65642f9",
+              "semanticReviewDigest": "a7952a3f59fb7b91b904c071e91cdc51f89efa78886d548351006960dee480a1"
+            }
+          ]
+        },
+        {
+          "objectiveId": "lesson-1498:language-dan",
+          "itemVersion": "yw-language-35b872a75c1e71d07ec4",
+          "itemDigest": "e66a7cbeca41e09b26fc3884600f56065e64cf207dbe1b4bcc70ccfb9a80688d",
+          "evidenceDigest": "5065e6a20da65d32700599b12e86b3ea1936802069d30cdd2e9fb41e4032a17f",
+          "cases": [
+            {
+              "caseId": "language-dan-independent",
+              "receiptDigest": "e35d2664264294176075e46fcf8a2e9050baa2d24485108a45181b78fbbfa287",
+              "readbackDigest": "2ae95f36a21360ff6f17846b81e16f02efb3c2ea5990feb73871311d7cc237b0",
+              "semanticReviewDigest": "e89b0bb9ad05192b3b91d98c0b33aa107176c2f1e09ec0d64a8297892f249617"
+            },
+            {
+              "caseId": "language-dan-misconception",
+              "receiptDigest": "bbdc797230c30808d5dad08f44100af9f8b0b6c1d1a7e99e00f80d8c5a7c651c",
+              "readbackDigest": "60babbae5f71f0ad563ad9cc371d98649fb4288a4eb3c3de0c91e581ce51488c",
+              "semanticReviewDigest": "2822abba20ec9edbad65f71033f66d238969f0a472385364972343d27c60f842"
+            },
+            {
+              "caseId": "passage-only",
+              "receiptDigest": "6009cbaf7dbfe2669f95ab301bffc62a9e9645a83248a3c85c744367e8369499",
+              "readbackDigest": "af3293c5397a50a5b049aad9bf88a3e80d490b5037d203561c3aa816493d7c7d",
+              "semanticReviewDigest": "fc26104f60c8be8b209722b181f71d4dd8059e5bb529c4f786c1290c92aea398"
+            }
+          ]
+        },
+        {
+          "objectiveId": "lesson-1498:language-he",
+          "itemVersion": "yw-language-627dc6f4d0b4aed28638",
+          "itemDigest": "f863a37d9f627572936ee16f684938196b5cace974b8dd504d5b42a60aa1deef",
+          "evidenceDigest": "320d63544bf4421802397c80c372bb74b1d2731d075800fab81067c55c0d0b62",
+          "cases": [
+            {
+              "caseId": "language-he-independent",
+              "receiptDigest": "a59e91c16ea88f9542aca7ce256fb3e691977f27f9d21487db5524042e897bf2",
+              "readbackDigest": "4c22458d5cd3324d6f343d2a8e8f854d1f89be63c3372cbdd5ab9b1504bb71a0",
+              "semanticReviewDigest": "3f6e275d60b3f45d3ad7c9a584eceb4394ad610416cf68b2d46940bfcd2ea735"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

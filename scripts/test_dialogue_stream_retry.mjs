@@ -6,6 +6,7 @@ import {DatabaseSync} from 'node:sqlite';
 import {handleDialogue,callDialogueModel} from '../site/dialogue-source.js';
 import {consumeGatewayStream,validatedProviderAccounting} from '../site/dialogue-stream.js';
 import {requestDialogueBudget,operatorCost,continuationDisposition} from '../site/dialogue-recovery.js';
+import {loadModeCurriculum} from './dialogue_mode_sample.mjs';
 const student={id:1,ucUserId:700001},lesson='lesson-1717-p2';
 const policy={version:'synthetic-retry-v1',validUntil:'2099-01-01T00:00:00Z',currency:'USD',model:'gemini-3.6-flash',globalDailyMicros:50000000,userDailyMicros:50000000,lessonLifetimeMicros:50000000,reserveMicros:84000,inputMicrosPerMillion:750000,outputMicrosPerMillion:3750000};
 const usage={promptTokenCount:100,candidatesTokenCount:20,thoughtsTokenCount:80,totalTokenCount:200};
@@ -24,6 +25,25 @@ const modelSuccess=(reply=partial+'，請接著指出一處原文。',a=accounti
 const failModel=(prior=[])=>async(_e,_p,_id,onReply)=>{await onReply(partial);const error=Error('gateway_stream_unconfirmed');error.gatewayFailure={providerAccounting:accounting([...prior,attempt(prior.length+1,'FETCH_ERROR',{outputStarted:true})])};throw error;};
 async function firstFailure(f,fn=failModel()){return await(await handleDialogue(req(body()),f.env,student,null,{callModel:fn})).json();}
 const continuation=data=>({action:'continue',turnId:data.partial.turnId,partialDigest:data.partial.digest,revision:data.revision,mutationId:'stream-retry-continue-0001'});
+for(const disposition of ['same','historical-unprojected','changed'])test('partial continuation preserves calibration disposition: '+disposition,async()=>{
+ const f=fixture();try{
+  const source=loadModeCurriculum('lesson-1498'),fetch=f.env.ASSETS.fetch;
+  f.env.ASSETS.fetch=async r=>new URL(r.url).pathname==='/dialogue-curriculum/lesson-1498.json'?Response.json(source):fetch(r);
+  const request=b=>new Request('https://yw.bdfz.net/api/dialogue/v1?lessonId=lesson-1498',{method:'POST',body:JSON.stringify({ownerRef:createHash('sha256').update('dialogue-owner:1').digest('hex'),...b})});
+  const first=await(await handleDialogue(request(body()),f.env,student,null,{callModel:failModel()})).json();assert(first.partial);
+  const row=f.sql.prepare("SELECT id,details_json FROM dialogue_events WHERE event_type='source_context_prepared'").get(),context=JSON.parse(row.details_json);assert(context.calibrationEvidence);
+  // The old-runtime fixture had no calibration supplement. This represents its
+  // immutable recorded disposition, not a migration of any real learner data.
+  if(disposition==='historical-unprojected')delete context.calibrationEvidence;
+  if(disposition==='changed')context.calibrationEvidence.manifestDigest='f'.repeat(64);
+  if(disposition!=='same')f.sql.prepare('UPDATE dialogue_events SET details_json=? WHERE id=?').run(JSON.stringify(context),row.id);
+  const before=f.sql.prepare('SELECT * FROM dialogue_calls').all();let calls=0;
+  const response=await handleDialogue(request(continuation(first)),f.env,student,null,{callModel:async(_env,prompt)=>{calls++;assert.equal(prompt.includes('calibrationEvidence'),disposition==='same');return modelSuccess();}});
+  if(disposition==='changed'){assert.equal(response.status,503);assert.equal(calls,0);assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_calls').all(),before);}
+  else {assert.equal(response.status,200);assert.equal(calls,1);const after=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_context_prepared' AND id LIKE '%:continued'").get().details_json);assert.equal(!!after.calibrationEvidence,disposition==='same');}
+  assert.equal(f.sql.prepare('SELECT curriculum_json FROM dialogue_sessions').get().curriculum_json,JSON.stringify(source));
+ }finally{f.close();}
+});
 function stream(a,answer=JSON.stringify({reply:'可見回應',assessments:[]})){
  const data=`id: 1\nevent: delta\ndata: ${JSON.stringify({text:answer})}\n\nid: 2\nevent: done\ndata: ${JSON.stringify({answer,model:policy.model,usage,providerAttemptCount:a.providerAttemptCount,providerAccounting:a})}\n\n`;
  return new Response(data,{headers:{'content-type':'text/event-stream'}});

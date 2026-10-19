@@ -6,6 +6,7 @@ import {pathToFileURL} from 'node:url';
 import {loadCurriculum,hash,assertComplete} from './dialogue_e2e.mjs';
 import {MODE_LESSONS} from '../site/dialogue-mode-admission.js';
 import {projectReleaseJson,RELEASE_JSON_PROJECTION_VERSION} from './build_release_site.mjs';
+import {withCalibratedLanguage} from '../site/dialogue-calibration-status.js';
 
 // Three genres, including active source-owned study-guide assessment. The
 // historical Quanxue selection had no active guide and missed that branch.
@@ -47,6 +48,18 @@ export function prepareModeSample(ids=MODE_SAMPLE_IDS,loader=loadCurriculum){
   realProviderVerified:false,centralAcceptanceVerified:false,humanAcceptance:false,executionAuthorized:false};
 }
 
+// New exact-source plans must pin the effective runtime projection as well as
+// the unchanged source contract. Existing consumed plans are never rewritten.
+export async function prepareCalibratedModeSample(ids=MODE_SAMPLE_IDS,loader=loadCurriculum){
+ const plan=prepareModeSample(ids,loader);
+ for(const lesson of plan.lessons){
+  const original=loadModeCurriculum(lesson.lessonId,loader),effective=await withCalibratedLanguage(original);
+  lesson.baseSourceDigest=lesson.sourceDigest;lesson.sourceDigest=hash(effective);
+  lesson.calibrationManifestDigest=effective.calibrationEvidence?.manifestDigest||null;
+ }
+ return {...plan,version:'yw-continuous-mode-sample-v4',calibrationProjection:'source-owned-exact-version'};
+}
+
 export function prepareModeTurn(snapshot,curriculum,utterance,{selected=null,mutationId=crypto.randomUUID()}={}){
  assert(snapshot&&Number.isSafeInteger(snapshot.revision)&&snapshot.revision>=0,'current snapshot required');
  assert(!snapshot.pending&&!snapshot.partial&&!snapshot.draft,'existing unfinished turn requires reconciliation, not another send');
@@ -70,5 +83,5 @@ export function checkModeLesson(snapshot,curriculum){
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
  assert(process.argv[2]==='plan'&&process.argv.length===3,'local plan only; live execution requires a separate approved transaction');
- console.log(JSON.stringify(prepareModeSample(),null,2));
+ console.log(JSON.stringify(await prepareCalibratedModeSample(),null,2));
 }

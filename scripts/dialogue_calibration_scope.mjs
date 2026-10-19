@@ -11,6 +11,7 @@ import {fullMaterialize,releaseCases,digest} from '../site/dialogue-full-languag
 import {POLICY,RULE_VERSION,validateProposal} from '../site/dialogue-policy.js';
 import {projectReleaseJson} from './build_release_site.mjs';
 import {loadCurriculum} from './dialogue_full_language.mjs';
+import {CALIBRATION_STATUS_VERSION} from '../site/dialogue-calibration-status.js';
 
 const root=path.resolve(import.meta.dirname,'..'),sha=x=>createHash('sha256').update(x).digest('hex');
 const snapshots=new Map();
@@ -101,4 +102,20 @@ export async function inspectScopedCalibration(records,objectiveIds,load=loadCur
   return {lessonId:spec.lessonId,objectiveId:id,itemVersion:item.version,from:item.calibrationStatus,to:'accepted',caseIds:cases.filter(c=>c.objectiveId===id).map(c=>c.caseId),applied:false};
  });
  return {version:'yw-scoped-historical-calibration-v1',status:'verified-historical-evidence-local-proposal',packetDigest:packet.sourceDigest,objectiveIds:scope,cases,changes,currentPromptProviderVerified:false,completeModeAccepted:false,sourceApplied:false,releaseAuthorized:false,paidCallsAuthorized:false};
+}
+
+// Build a private runtime projection only after independently rechecking the
+// raw historical evidence. Its publication still needs the normal release gate.
+export async function scopedCalibrationManifest(records,objectiveIds,load=loadCurriculum){
+ const inspection=await inspectScopedCalibration(records,objectiveIds,load),inspectionDigest=await digest(inspection),lessons=[];
+ for(const lessonId of [...new Set(inspection.changes.map(c=>c.lessonId))].sort()){
+  const raw=load(lessonId),source=JSON.parse(projectReleaseJson(`dialogue-curriculum/${lessonId}.json`,JSON.stringify(raw))),items=[];
+  for(const change of inspection.changes.filter(c=>c.lessonId===lessonId)){
+   assert.equal(change.from,'pending-real-model','only unapplied calibration may be projected');
+   const cases=inspection.cases.filter(c=>c.objectiveId===change.objectiveId);
+   items.push({objectiveId:change.objectiveId,itemVersion:change.itemVersion,itemDigest:await digest(source.languagePractice.find(i=>i.id===change.objectiveId)),evidenceDigest:await digest(cases),cases:cases.map(c=>({caseId:c.caseId,receiptDigest:c.receiptDigest,readbackDigest:c.readbackDigest,semanticReviewDigest:c.semanticReviewDigest}))});
+  }
+  lessons.push({lessonId,curriculumVersion:source.curriculumVersion,sourceDigest:await digest(source),inspectionDigest,items});
+ }
+ return {inspection,manifest:{version:CALIBRATION_STATUS_VERSION,lessons}};
 }

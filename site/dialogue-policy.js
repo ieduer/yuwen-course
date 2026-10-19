@@ -4,13 +4,14 @@ import {sourcePassages,sourceAnnotations,annotationWindow,sourceProvenance,excer
 import {validateFormalDraft,originalRequirements,reviewSourceMaterials,selectOriginalRequirements} from './dialogue-formal.js';
 import {validateConclusion} from './dialogue-conclusion.js';
 import {approvedSupplement} from './dialogue-completion-exemptions.js';
+import {calibratedQuestion} from './dialogue-calibration-status.js';
 export const POLICY_VERSION = 'yw-dialogue-policy-v11';
 export const RULE_VERSION = 'yw-dialogue-evidence-v3';
 export const CONTEXT_LAYOUT_VERSION = 'yw-dialogue-context-static-first-v4';
 // Keep the single-line data contract used by source_context_prepared. Object
 // insertion order is not source identity; array order (text, notes, turns) is.
 const stableValue=value=>Array.isArray(value)?value.map(stableValue):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,stableValue(value[key])])):value;
-const SOURCE_FIELDS=['curriculumVersion','persona','conversationIdentity','authorVoice','author','title','sourceProvenance','examReferences','passages','annotations','teachingReferences','languagePractice','sourceWindow','sourceCoverage','originalRequirements','reviewSources'];
+const SOURCE_FIELDS=['curriculumVersion','persona','conversationIdentity','authorVoice','author','title','sourceProvenance','examReferences','passages','annotations','teachingReferences','languagePractice','calibrationEvidence','sourceWindow','sourceCoverage','originalRequirements','reviewSources'];
 export function serializeContext(data){
  const ordered={};
  for(const key of SOURCE_FIELDS)if(data[key]!==undefined)ordered[key]=stableValue(data[key]);
@@ -137,6 +138,7 @@ export function evidenceReport(curriculum,state,assessments,turns=[],conclusion=
   teacher:{items,turnIndex:turns.map(t=>({turnId:t.id,role:t.role,status:t.status,createdAt:t.createdAt})),reviewRequired:items.filter(o=>['review','historical_review'].includes(o.status)).map(o=>o.objectiveId),notice:'完整回合索引與各次判定供核對；教師端未獲跨帳戶授權，不代表已通知或覆核。'}};
 }
 export function contextFor({curriculum,state,turns,question,remediation=null,assessments=[],conversationGuide=null,conversationOriginalTasks=null,firstReading=null}){
+ question=calibratedQuestion(question,curriculum);remediation=calibratedQuestion(remediation,curriculum);
  const allRequirements=originalRequirements(curriculum,state),allReviewSources=reviewSourceMaterials(curriculum,state);
  let used=0;const recent=[];for(const t of turns.slice(-10).reverse()){if(used+t.content.length>6500)break;used+=t.content.length;const {id,role,content,questionId}=t;recent.unshift({id,role,content,questionId});}
  const data={...(conversationGuide||firstReading?{conversationGuide,firstReading}:{}),...(conversationOriginalTasks?{conversationOriginalTasks}:{}),curriculumVersion:curriculum.curriculumVersion,persona:curriculum.persona,conversationIdentity:dialogueIdentity(curriculum),authorVoice:authorVoice(curriculum),author:curriculum.author,title:curriculum.title,
@@ -144,7 +146,7 @@ export function contextFor({curriculum,state,turns,question,remediation=null,ass
   state:state.objectives.map(o=>({id:o.id,status:o.status})),legacyCompletion:state.legacyCompletion,readingGate:state.readingGate,readyForShangyou:state.readyForShangyou,hasConclusion:state.hasConclusion,
   originalRequirements:allRequirements,reviewSources:allReviewSources,
   teachingReferences:(curriculum.readingMaterials||[]).filter(m=>m.role==='commentary').map(({id,label,text,source})=>({id,label,text,source})),
-  question,remediation,sourceProvenance:sourceProvenance(curriculum),passages:sourcePassages(curriculum),annotations:sourceAnnotations(curriculum),recent,
+  question,remediation,...(curriculum.calibrationEvidence?{calibrationEvidence:curriculum.calibrationEvidence}:{}),sourceProvenance:sourceProvenance(curriculum),passages:sourcePassages(curriculum),annotations:sourceAnnotations(curriculum),recent,
   languagePractice:(curriculum.languagePractice||[]).map(({id,annotationIds,dictionaryId,assessmentStatus,calibrationStatus,sourceVerification})=>({id,annotationIds,dictionaryId,assessmentStatus,calibrationStatus,sourceVerification})),
   examReferences:(curriculum.exam?.examples||[]).map(({id,year,paper,questionNumber,work,questionParaphrase,skill,sourceKind,url})=>({id,year,paper,questionNumber,work,questionParaphrase,skill,sourceKind,url}))};
  const trajectory=learningTrajectory(curriculum,turns,assessments);

@@ -22,6 +22,7 @@ import {lessonCallLimit} from './dialogue-lesson-limits.js';
 import {sanitizeDialogueCurriculum} from './dialogue-public-curriculum.js';
 import {approvedSupplement} from './dialogue-completion-exemptions.js';
 import {withProspectiveFormalScope} from './formal-scope-policy.js';
+import {withCalibratedLanguage,calibrationReopensReview} from './dialogue-calibration-status.js';
 import {POLICY_VERSION,RULE_VERSION,CONTEXT_LAYOUT_VERSION,LIMITS,PILOTS,validateProposal,projectState,contextFor,createQuestion,vocabularyOrder,evidenceReport,questionItems} from './dialogue-policy.js';
 const now=()=>new Date().toISOString();
 const uuid=()=>crypto.randomUUID();
@@ -119,8 +120,8 @@ async function plannedQuestion(db,session,curriculum,state){
  const objective=state.next;
  if(objective?.domain!=='vocabulary'||!questionItems(curriculum).some(v=>v.id===objective.id))return null;
  const row=await db.prepare('SELECT instance_json FROM dialogue_questions WHERE session_id=? AND objective_id=? ORDER BY attempt DESC LIMIT 1').bind(session.id,objective.id).first(),prior=row?JSON.parse(row.instance_json):null;
- if(prior&&['mastered','review'].includes(prior.state))return null;
- if(prior&&!(await db.prepare("SELECT id FROM dialogue_assessments WHERE session_id=? AND objective_id=? AND outcome='reformulated' AND created_at>? LIMIT 1").bind(session.id,objective.id,prior.answeredAt||prior.createdAt).first()))return null;
+ if(prior&&['mastered','review'].includes(prior.state)&&!calibrationReopensReview(prior,curriculum))return null;
+ if(prior&&!calibrationReopensReview(prior,curriculum)&&!(await db.prepare("SELECT id FROM dialogue_assessments WHERE session_id=? AND objective_id=? AND outcome='reformulated' AND created_at>? LIMIT 1").bind(session.id,objective.id,prior.answeredAt||prior.createdAt).first()))return null;
  const attempt=(prior?.attempt||0)+1,digest=await sha(`${session.student_id}:${curriculum.curriculumVersion}:${objective.id}:${attempt}`);
  try{const q=createQuestion(curriculum,{objectiveId:objective.id,attempt,previousVariant:prior?.variant??null,random:parseInt(digest.slice(0,8),16)});return {...q,id:`guided-${digest.slice(0,32)}`,createdAt:session.created_at};}catch{return null;}
 }
@@ -175,6 +176,8 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
  // when its previous source contract stays frozen in a historical session.
  const exemption=approvedSupplement(publishedCurriculum);
  if(exemption&&curriculum.lessonId===exemption.lessonId)curriculum={...curriculum,completionExemption:exemption};
+ const curriculumBeforeCalibration=curriculum;
+ try{curriculum=await withCalibratedLanguage(curriculum);}catch{return json({code:'calibration_evidence_requires_review'},503);}
  if(request.method==='GET'){
   if(url.searchParams.get('firstReadingState')==='1'){
    if(curriculum.mode!=='classical')return json({...await readDialogueNotes(db,session,await dialogueReadingAsset(curriculum)),ownerRef:await sha(`dialogue-owner:${student.id}`)});
@@ -193,11 +196,11 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
    const rows=await all(db.prepare("SELECT id,details_json,created_at FROM dialogue_events WHERE session_id=? AND turn_id=? AND event_type='owner_correction_recorded' ORDER BY created_at,id LIMIT 8").bind(session.id,turnId));
    return json({ownerRef:await sha(`dialogue-owner:${student.id}`),corrections:rows.map(r=>({id:r.id,createdAt:r.created_at,...JSON.parse(r.details_json)}))});
   }
-  if(!session){const legacy=await historicalEvidence(db,student.id,curriculum),state=projectState(curriculum,[],legacy.preserved,legacy.completion,await readingGate(db,student.id,curriculum,legacy)),planned=await plannedQuestion(db,{id:'not-created',student_id:student.id,created_at:null},curriculum,state),question=planned?{id:planned.id,objectiveId:planned.objectiveId,attempt:planned.attempt,question:planned.question,source:planned.source,createdAt:null}:null;return json({learningTurn:learningTurn(curriculum,state,{question}),sourceSubmissions:[],ownerRef:await sha(`dialogue-owner:${student.id}`),revision:0,turns:[],question,state,legacy,readingGate:state.readingGate,report:evidenceReport(curriculum,state,[]),saved:false});}
+  if(!session){const legacy=await historicalEvidence(db,student.id,curriculum),state=projectState(curriculum,[],legacy.preserved,legacy.completion,await readingGate(db,student.id,curriculum,legacy)),planned=await plannedQuestion(db,{id:'not-created',student_id:student.id,created_at:null},curriculum,state),question=planned?{id:planned.id,objectiveId:planned.objectiveId,attempt:planned.attempt,question:planned.question,source:planned.source,createdAt:null}:null;return json({learningTurn:learningTurn(curriculum,state,{question}),sourceSubmissions:[],ownerRef:await sha(`dialogue-owner:${student.id}`),revision:0,turns:[],question,state,legacy,readingGate:state.readingGate,report:evidenceReport(curriculum,state,[]),...(curriculum.calibrationEvidence?{resumeCurriculum:sanitizeDialogueCurriculum(curriculum)}:{}),saved:false});}
   const before=url.searchParams.has('beforeSeq')?{sequence:Number(url.searchParams.get('beforeSeq'))}:null;
   if(before && (!Number.isSafeInteger(before.sequence)||before.sequence<1))return json({code:'invalid_cursor'},400);
   const result=await snapshot(db,session,curriculum,before);
-  if(curriculum.curriculumVersion!==publishedCurriculum.curriculumVersion)result.resumeCurriculum=sanitizeDialogueCurriculum(curriculum);
+  if(curriculum.calibrationEvidence||curriculum.curriculumVersion!==publishedCurriculum.curriculumVersion)result.resumeCurriculum=sanitizeDialogueCurriculum(curriculum);
   if(url.searchParams.get('records')==='1'){
    const [questions,events,drafts,chunks,calls]=await Promise.all([
     all(db.prepare('SELECT instance_json FROM dialogue_questions WHERE session_id=? ORDER BY created_at,id').bind(session.id)),
@@ -223,10 +226,17 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   const value=await response.json();return json({...value,ownerRef:await sha(`dialogue-owner:${student.id}`)},response.status);
  }
  if(!session){
-  const at=now();await db.prepare('INSERT OR IGNORE INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?)').bind(uuid(),student.id,lessonId,curriculum.curriculumVersion,JSON.stringify(curriculum),POLICY_VERSION,at,at).run();
+  const at=now();await db.prepare('INSERT OR IGNORE INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?)').bind(uuid(),student.id,lessonId,curriculum.curriculumVersion,JSON.stringify(curriculumBeforeCalibration),POLICY_VERSION,at,at).run();
   session=await db.prepare('SELECT * FROM dialogue_sessions WHERE student_id=? AND lesson_id=? AND curriculum_version=?').bind(student.id,lessonId,curriculum.curriculumVersion).first();
  }
- if(body.action==='continue')return continueDialogue({request,env,db,student,session,curriculum,body,ctx,callModel,firstReadAction,originalAction});
+ if(body.action==='continue'){
+  // An interrupted provider request retains the exact calibration disposition
+  // recorded before its first dispatch. A newer supplement cannot alter it.
+  const priorContext=await db.prepare("SELECT details_json FROM dialogue_events WHERE session_id=? AND turn_id=? AND event_type='source_context_prepared' ORDER BY created_at,id LIMIT 1").bind(session.id,typeof body.turnId==='string'?body.turnId:'').first();
+  const evidence=priorContext?JSON.parse(priorContext.details_json).calibrationEvidence:null;
+  if(evidence&&JSON.stringify(evidence)!==JSON.stringify(curriculum.calibrationEvidence))return json({code:'calibration_continuation_requires_review'},503);
+  return continueDialogue({request,env,db,student,session,curriculum:evidence?curriculum:curriculumBeforeCalibration,body,ctx,callModel,firstReadAction,originalAction});
+ }
  if(body.action==='correction'){
   const result=await recordCorrection(db,session,body,now());return json(result.value,result.status);
  }
@@ -472,6 +482,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const originalRequirementSources=await Promise.all((materials.originalRequirements||[]).map(async r=>({objectiveId:r.objectiveId,source:r.source,materialSha256:await sha(JSON.stringify(r))})));
   const reviewSourceMaterials=await Promise.all((materials.reviewSources||[]).map(async r=>({objectiveId:r.objectiveId,source:r.source,sourceOnly:true,submissionEligible:false,sourceStatus:r.sourceStatus,materialSha256:await sha(JSON.stringify(r))})));
   const details={policyVersion:POLICY_VERSION,contextLayout:formal?'original-evaluator':CONTEXT_LAYOUT_VERSION,promptSha256:await sha(prompt),promptChars:prompt.length,sourceProvenance:materials.sourceProvenance,passages:(materials.passages||[]).map(p=>({id:p.id,sourceOffsets:p.sourceOffsets||null,excerpted:!!p.excerpted,annotationIds:p.annotationIds||[]})),annotationIds:(materials.annotations||[]).map(a=>a.noteId),...(annotationTranscriptions.length?{annotationTranscriptions}:{}),coverage:materials.sourceCoverage||materials.coverage,continued:!!resume};
+  if(curriculum.calibrationEvidence)details.calibrationEvidence=curriculum.calibrationEvidence;
   if(responseJsonSchema)Object.assign(details,{responseSchemaVersion:CONCLUSION_SCHEMA_VERSION,responseSchemaSha256:await sha(JSON.stringify(responseJsonSchema))});
   if(formal&&body.conversation===true)details.conversationTurn={turnId,contentSha256:await sha(body.content),chars:body.content.length};
   if(sourceOwnedGuide)details.sourceOwnedGuide={version:'yw-source-owned-guide-reply-v1',source:sourceOwnedGuide.source,materialSha256:await sha(JSON.stringify(sourceOwnedGuide.material)),assessmentSha256:await sha(JSON.stringify(sourceOwnedGuide.assessment)),scoringAuthority:'original-answer-key',replyOnly:true};
