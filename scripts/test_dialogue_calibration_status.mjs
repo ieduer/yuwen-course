@@ -27,6 +27,12 @@ test('invalid or ambiguous source-owned calibration fails closed',async()=>{
   const {source,manifest}=await fixture();edit(manifest);await assert.rejects(withCalibratedLanguage(source,manifest),/calibration_/);
  }
 });
+test('independent lesson additions do not change an already used calibration disposition',async()=>{
+ const {source,manifest}=await fixture(),before=await withCalibratedLanguage(source,manifest);
+ manifest.lessons.push({...structuredClone(manifest.lessons[0]),lessonId:'unrelated',inspectionDigest:'f'.repeat(64)});
+ assert.deepEqual(await withCalibratedLanguage(source,manifest),before);
+ manifest.lessons.reverse();assert.deepEqual(await withCalibratedLanguage(source,manifest),before);
+});
 test('saved question and review history remain frozen; only future prompts and new attempts use calibration',async()=>{
  const {source,manifest}=await fixture(),next=await withCalibratedLanguage(source,manifest),q={id:'old',objectiveId:'one',state:'review',criteria:{calibrationStatus:'pending-real-model',meaning:'original'}};
  const bytes=JSON.stringify(q),promptQuestion=calibratedQuestion(q,next);

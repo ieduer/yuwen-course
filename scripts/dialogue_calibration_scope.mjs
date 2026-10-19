@@ -15,7 +15,7 @@ import {CALIBRATION_STATUS_VERSION} from '../site/dialogue-calibration-status.js
 
 const root=path.resolve(import.meta.dirname,'..'),sha=x=>createHash('sha256').update(x).digest('hex');
 const snapshots=new Map();
-const reviewedSource='2bd882345cdaab319157905a7de160f374c3e1f0';
+const reviewedSources=['2bd882345cdaab319157905a7de160f374c3e1f0','84065f31c2fd9882b06618a51155f6dc7fa0d164'];
 // This later offline checker added the already-approved deadline exception;
 // the provider's original source and prompt are still reconstructed separately.
 const reviewedVerifier='de20dcd4f963cf82d42d39bf0b965006c973a81f';
@@ -26,11 +26,11 @@ const policyBridge={before:'b30b2257fec87625920f648797d8b89b6b9495c9e258599b54bf
 
 export async function historicalCalibrationSource(commit){
  assert(/^[a-f0-9]{40}$/.test(commit||''),'exact historical commit required');
- assert([reviewedSource,reviewedVerifier].includes(commit),'historical verifier source not reviewed');
+ assert([...reviewedSources,reviewedVerifier].includes(commit),'historical verifier source not reviewed');
  if(!snapshots.has(commit))snapshots.set(commit,(async()=>{
   execFileSync('git',['merge-base','--is-ancestor',commit,'HEAD'],{cwd:root,stdio:'pipe'});
   const inputs=[];
-  const bundle=await esbuild.build({stdin:{contents:"export {inspectCalibrationReadback} from './scripts/dialogue_calibration_import.mjs'; export {fullMaterialize} from './site/dialogue-full-language.js'; export {POLICY,RULE_VERSION,validateProposal} from './site/dialogue-policy.js';",resolveDir:root,sourcefile:'historical-calibration-entry.js'},bundle:true,write:false,platform:'node',format:'esm',logLevel:'silent',define:{'import.meta.dirname':JSON.stringify(path.join(root,'scripts'))},plugins:[{name:'immutable-git-calibration',setup(build){
+  const bundle=await esbuild.build({stdin:{contents:"export {inspectCalibrationReadback} from './scripts/dialogue_calibration_import.mjs'; export {fullMaterialize} from './site/dialogue-full-language.js'; export * as fullLanguage from './site/dialogue-full-language.js'; export {POLICY,RULE_VERSION,validateProposal} from './site/dialogue-policy.js';",resolveDir:root,sourcefile:'historical-calibration-entry.js'},bundle:true,write:false,platform:'node',format:'esm',logLevel:'silent',define:{'import.meta.dirname':JSON.stringify(path.join(root,'scripts'))},plugins:[{name:'immutable-git-calibration',setup(build){
    build.onResolve({filter:/.*/},args=>{
     if(args.path.startsWith('node:'))return {path:args.path,external:true};
     if(args.path==='esbuild')return {path:pathToFileURL(require.resolve('esbuild')).href,external:true};
@@ -57,7 +57,7 @@ export async function historicalCalibrationSource(commit){
 
 export async function inspectHistoricalCalibration(record,load=loadCurriculum){
  const {readback,execution,semanticReview:review}=record;
- assert.equal(execution?.sourceCommit,reviewedSource,'historical execution source not reviewed');
+ assert(reviewedSources.includes(execution?.sourceCommit),'historical execution source not reviewed');
  const historical=await historicalCalibrationSource(execution?.sourceCommit),old=historical.module;
  const verifier=await historicalCalibrationSource(reviewedVerifier);
  // The deadline-corrected verifier reconstructs the original prompt and checks its raw
@@ -66,8 +66,15 @@ export async function inspectHistoricalCalibration(record,load=loadCurriculum){
  const c=releaseCases(packet).find(c=>c.id===checked.caseId);assert(c,'current case absent');
  const raw=load(c.lessonId),source=JSON.parse(projectReleaseJson(`dialogue-curriculum/${c.lessonId}.json`,JSON.stringify(raw)));
  assert.equal(await digest(raw),c.rawSourceDigest,'current raw source drift');assert.equal(await digest(source),c.sourceDigest,'current source projection drift');
- assert.equal(checked.promptDigest,c.promptDigest,'historical/current case prompt pin differs');
  const before=old.fullMaterialize(c,source),current=fullMaterialize(c,source);
+ assert.equal(await digest(before.prompt),c.promptDigest,'original base prompt differs');
+ if(checked.recoveryOf){
+  const recovery=verifier.module.fullLanguage.caseRecovery(execution,c.id);
+  assert(recovery&&recovery.receiptDigest===checked.recoveryOf,'exact historical recovery required');
+  before.prompt=old.fullLanguage.recoveryPrompt(before.prompt,recovery,before);
+  const currentLanguage=await import('../site/dialogue-full-language.js');
+  current.prompt=currentLanguage.recoveryPrompt(current.prompt,recovery,current);
+ }
  assert.equal(await digest(before.prompt),checked.promptDigest,'original provider prompt differs');
  assert.equal(old.RULE_VERSION,RULE_VERSION,'evidence rule changed');
  if(old.POLICY!==POLICY){assert.equal(sha(old.POLICY),policyBridge.before,'unreviewed historical policy');assert.equal(sha(POLICY),policyBridge.after,'unreviewed current policy');}

@@ -68,6 +68,152 @@
           ]
         }
       ]
+    },
+    {
+      "lessonId": "lesson-1711-p1",
+      "curriculumVersion": "yw-dialogue-681398dc1bb21b23567a",
+      "sourceDigest": "97d919d81bc539c8b9dbd20bde770abdf52587cc93dd8d18e55c7880ad3f9abd",
+      "inspectionDigest": "39ab020a27e9b2cd81270280dc37c3e0918180196d244b1de73d454d28459621",
+      "items": [
+        {
+          "objectiveId": "lesson-1711-p1:grammar-modifier",
+          "itemVersion": "yw-language-001756db9acbca59b674",
+          "itemDigest": "ebdcfba945c2d29db0c45b45ed953e763dd5f821980af27d680b62042b2a8ccb",
+          "evidenceDigest": "7a4f7da3f073c8f9c45f1738b88b2ebbcc2689bbd8059a0be69587f25449fe39",
+          "cases": [
+            {
+              "caseId": "grammar-modifier-independent",
+              "receiptDigest": "929a5ed01fdfb058891bfaaf145926be6bd11c787c03311838336bee56204e56",
+              "readbackDigest": "6439df05a6d6a9e19bd93dfaf535815599c04a16a5987ac30bb441f00d6a1323",
+              "semanticReviewDigest": "cf789810a0b15c7cdec3a63bcae163c99e3fada8b041ecdc5970531ebbd8c4be"
+            },
+            {
+              "caseId": "grammar-modifier-misconception",
+              "receiptDigest": "af1f62686c4615f17d1819aac079894d6ab0cb51c3d28078ba5cb56c3f219036",
+              "readbackDigest": "921da8207e4c85f2cc2377b6d9ae5f1d55064ccb2eedd08fd73c081f3d374673",
+              "semanticReviewDigest": "ce5ac040eeff571803413f0593a679de35d8ca13fec4482476d20fe184ea7a9a"
+            },
+            {
+              "caseId": "partial-term-only",
+              "receiptDigest": "43f73ab8c01585393e4d4a03c31ae473e6652876f1dd6b7d2c567347be1f9094",
+              "readbackDigest": "63a6ac74c874485a37c481a24cf8fa4c3d7162f9682bd1d3f91abed512e996f5",
+              "semanticReviewDigest": "3cf102ad80ef0d61b7112f6ada692401489362be08cdce8a1d0bb045adc7b8e9"
+            }
+          ]
+        },
+        {
+          "objectiveId": "lesson-1711-p1:grammar-one",
+          "itemVersion": "yw-language-264ecdc8e336d1cd76f2",
+          "itemDigest": "3cb074da48ee267939c14f50c7f1f568181d217c495c25f97600a7ad733cae64",
+          "evidenceDigest": "cc040caf2bb1dc27af75a0afd1e5d77223481ea9a784b5cabd2eec4ff28b02ea",
+          "cases": [
+            {
+              "caseId": "grammar-one-independent",
+              "receiptDigest": "2906c51ed5f5025ec39e45ea382bd7109f632a7163cb1cd5b152935633d382cc",
+              "readbackDigest": "4a322aa9ca38f710c3dceefe83dd6441ba8d178ba2cc0100fa2a3dc02f4c2fb3",
+              "semanticReviewDigest": "d1714fb56c6c18b1c3dc6f9ab0f1ffc9fa6b3b8d606d3bd9e86b50a24bd983a7"
+            },
+            {
+              "caseId": "dissent-with-grounded-understanding",
+              "receiptDigest": "5ae7a32f621ec662fe63223d64b2daf45737b7bfb3d0115504096f14a3b5d8cb",
+              "readbackDigest": "d2014da2c319a09259d9cf352075386e30421a9586864306653c6d1b4518092f",
+              "semanticReviewDigest": "b06d836990c697c130eb4b984b0a39013831bd651c4c7a5097372a58270d9a02"
+            }
+          ]
+        },
+        {
+          "objectiveId": "lesson-1711-p1:grammar-water",
+          "itemVersion": "yw-language-091667b2a67ffd030406",
+          "itemDigest": "2e76f51814918bb85ba532d736f338581bffd334c9776a753e3b41974787f2d6",
+          "evidenceDigest": "f7ffb742b9f141d7365c38f80b2358ccf3f5bd9ab8966d26d2fbea52b5048b26",
+          "cases": [
+            {
+              "caseId": "grammar-water-independent",
+              "receiptDigest": "6e59db471b845798720828b34dc460fdd4db343f8688caf8b4a11224fe46aaca",
+              "readbackDigest": "b2b52fcae139e22bd15af75919b64090b019b5cc37017fa1d7e7ae6aa33149c6",
+              "semanticReviewDigest": "464c630068d3af9f1a1cdda91623e49bab26556e652f793c6fab21631cd8a89e"
+            },
+            {
+              "caseId": "grammar-water-misconception",
+              "receiptDigest": "9ff5c3e89d48f0ae81bf537440de64aca9c0edd164b13aedbbda3f8f3ab2a3af",
+              "readbackDigest": "26a6b6ce6630f9294d7c1eb3e488d95b5c8e8584bd42b336c4f6f74b4106fc1f",
+              "semanticReviewDigest": "8a01da6f4fe1604c98841b7514ae7ca854658c43255395c7b27529b249f7eee7"
+            },
+            {
+              "caseId": "praise-is-not-evidence",
+              "receiptDigest": "8a683da2b9df2f4a2eabd9ce43d9275728c74fdcaf832275d8c6833af78c7086",
+              "readbackDigest": "ab919e9e632dde399fc47e84c324e977ee37c00173b535fc1cb1cdd4ca2a6ba9",
+              "semanticReviewDigest": "1d575cbe3f04924a0e20d5408a02ef261a3be718a78642eab3696ce8c4c18e7f"
+            },
+            {
+              "caseId": "hint-copy-with-wrapper",
+              "receiptDigest": "5c684cec59a0cdf01f7314e924d9b53da14ec38de540fc6883d7f64a0d9f2ed0",
+              "readbackDigest": "10f6190d655755e8903d9de20d8f0908bc9a8daeab13964c193322567b744b80",
+              "semanticReviewDigest": "b70e22d58618ee395b1cb5c7a395c698417cf4244c5a4951948af7333c58879e"
+            }
+          ]
+        },
+        {
+          "objectiveId": "lesson-1711-p1:grammar-wuyi",
+          "itemVersion": "yw-language-84f1a722e9a48f41ba3b",
+          "itemDigest": "cdc3b72fef48e5b9f52f7ab49f23cc13a3248ca97b2b0bdbc2df8809233d0a4a",
+          "evidenceDigest": "4e62da2b5222a95a36dd52a83b6c1977344504373a1cd48b0b1aeef514a41cf9",
+          "cases": [
+            {
+              "caseId": "grammar-wuyi-independent",
+              "receiptDigest": "11e747835ae15feac5c1c93dc565acf6ed34076f1b381d21747bfa6782cc9491",
+              "readbackDigest": "61b11835273b5069f53f2ded26e6df4f26853c871686013e67785e1299aae361",
+              "semanticReviewDigest": "1a138b2fc88418239a746e8d7f0063ab545ace154b529229d88dac48dee059fc"
+            },
+            {
+              "caseId": "grammar-wuyi-misconception",
+              "receiptDigest": "dd782faf1ec4f6acc424fce7c6d72c4743bb529ae57a96718da1205ea0c60589",
+              "readbackDigest": "428051f56047b8d611b55de234080e8c9c45b3ff67579dfa18b97b6fa0e841ee",
+              "semanticReviewDigest": "b4a53ee77b8d17e0dd9fcc98071f404384d8e79b2f2da50218b65ed4be9931a0"
+            }
+          ]
+        },
+        {
+          "objectiveId": "lesson-1711-p1:language-er",
+          "itemVersion": "yw-language-122753d3067f12088b3e",
+          "itemDigest": "9d410df1aeb651af95116f6235c37611d60c3918afd2c375f03bfeff3195c624",
+          "evidenceDigest": "f7a8a5716402f9186369ae204f48b641b638a589e2d463d20812559f0470cd01",
+          "cases": [
+            {
+              "caseId": "language-er-independent",
+              "receiptDigest": "28a87fe27d09f3edade7d2708312d1b6c77dcbf183d292495984612e4972cf64",
+              "readbackDigest": "0192e7e8f4a78f4c76deef0d5f31aa029093ebb133a446c48f5fe7be5cf752e9",
+              "semanticReviewDigest": "431e8b399b54044f9726f8b3b6e5bdf24e7e7d014a0902aa1e5dfc634e4be9eb"
+            },
+            {
+              "caseId": "language-er-misconception",
+              "receiptDigest": "5331ec6709960a053c3b8eb3b3fb3018e355c16f85e2ae352257d2eaef58d62a",
+              "readbackDigest": "fed95e64694b39abb6bea72a93158a3fd9f46763486d8c1400b4a933ee7c378f",
+              "semanticReviewDigest": "68263e53fb0552508f7588ebfe753fb814f36392739caa5ed54a7547ae204289"
+            }
+          ]
+        },
+        {
+          "objectiveId": "lesson-1711-p1:language-yu",
+          "itemVersion": "yw-language-1188333bfbdca4576eb2",
+          "itemDigest": "79407fdb16515c186dc84980dc0047c442d88801cef6b1d8d2baa29ed3a3a114",
+          "evidenceDigest": "ad723bc160df1dafaa8709ff50b92e50a023987e8b5f40da7277a2bf86fea5ee",
+          "cases": [
+            {
+              "caseId": "language-yu-independent",
+              "receiptDigest": "0dd0b6861472b0a39727d2643698746dab35ac44c7425b9843e501edb81e6f51",
+              "readbackDigest": "afd6db878730e9b05d03b441baa4e3044bb3b391f9d45c2f22e4979e131b5a15",
+              "semanticReviewDigest": "ee1aa1dba5a5cd3b0c57c16e102225fd8ea2209301e008eb28631469c05869fa"
+            },
+            {
+              "caseId": "language-yu-misconception",
+              "receiptDigest": "96e6148cb8615972f2b8e7b020f6f047c3fbd908caf1184c9e00b5f91d50932b",
+              "readbackDigest": "323bc1279f4f66e8a661bfdbc02bd29db7d5d8f50c6516f5d13c46e4357a3b1c",
+              "semanticReviewDigest": "525039402cd66e3ce00dc2ad6af3ecaf36da0e468c113b2d6cd9fc1cc46e288d"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

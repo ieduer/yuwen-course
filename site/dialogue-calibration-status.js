@@ -19,7 +19,9 @@ export async function withCalibratedLanguage(curriculum,manifest=accepted){
   const item=(curriculum.languagePractice||[]).find(i=>i.id===proof.objectiveId);
   if(!item||item.version!==proof.itemVersion||item.calibrationStatus!=='pending-real-model'||await calibrationDigest(item)!==proof.itemDigest||!hex(proof.evidenceDigest)||!Array.isArray(proof.cases)||!proof.cases.length||new Set(proof.cases.map(c=>c.caseId)).size!==proof.cases.length||proof.cases.some(c=>!c.caseId||!hex(c.receiptDigest)||!hex(c.readbackDigest)||!hex(c.semanticReviewDigest)))throw Error('calibration_item_mismatch');
  }
- const evidence={version:CALIBRATION_STATUS_VERSION,manifestDigest:await calibrationDigest(manifest),sourceDigest,inspectionDigest:pin.inspectionDigest,items:pin.items.map(i=>({objectiveId:i.objectiveId,itemVersion:i.itemVersion,evidenceDigest:i.evidenceDigest}))};
+ // Scope the provenance to the matching lesson. Appending an independent
+ // lesson cannot invalidate a preserved partial request in this one.
+ const evidence={version:CALIBRATION_STATUS_VERSION,manifestDigest:await calibrationDigest({version:manifest.version,lessons:[pin]}),sourceDigest,inspectionDigest:pin.inspectionDigest,items:pin.items.map(i=>({objectiveId:i.objectiveId,itemVersion:i.itemVersion,evidenceDigest:i.evidenceDigest}))};
  return {...curriculum,languagePractice:curriculum.languagePractice.map(item=>pin.items.some(i=>i.objectiveId===item.id)?{...item,calibrationStatus:'accepted'}:item),calibrationEvidence:evidence};
 }
 

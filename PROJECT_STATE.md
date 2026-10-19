@@ -1,4 +1,8 @@
-## Current 2026-10-19T03:39:44.464135+00:00 — calibrated future evidence with frozen history; local only
+## Current 2026-10-19T03:49:55.140405+00:00 — required language prerequisites locally covered; formal NO-GO
+
+All189 checked:9 required language calibrations are projected from21 prior accepted cases;69 supplemental source-evidence items retain their deferred disposition.107 focused tests and16 recovered-receipt tampering checks pass. Historical learner data and selected mode pins remain unchanged. No live calls or release; full189 real complete-mode/cache/central/My/compatibility/formal/Status remain incomplete. [Current manual](/private/tmp/cf-task-yw-full-release-01a14cdd/source/docs/MAINTENANCE_MANUAL.md); [exact source, build and next step](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/remaining-calibration-01a15214/REPORT.md).
+
+## Historical 2026-10-19T03:39:44.464135+00:00 — calibrated future evidence with frozen history; local only
 
 Exact-source supplementary calibration now reaches new and existing sessions without rewriting curriculum snapshots, old questions, drafts, results or scores.105 focused tests pass. New sampled plan v4 pins the effective runtime projection. Full189 remains incomplete; real model/complete-mode/cache/central/My/compatibility and formal publication remain NO-GO. No live calls or changed budgets. [Current manual](/private/tmp/cf-task-yw-full-release-01a14cdd/source/docs/MAINTENANCE_MANUAL.md); [source/build/continuation evidence](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/calibration-projection-01a15214/REPORT.md).
 

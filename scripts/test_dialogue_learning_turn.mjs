@@ -93,13 +93,13 @@ function fixture(t,lessonId='lesson-1498',filter=()=>true){
  }
  return {curriculum,sql,env,req,options,read,send,calls:()=>calls};
 }
-test('verified calibration reaches frozen sessions without replacing history, questions, scores or drafts',async t=>{
- const f=fixture(t),projected=JSON.parse(projectReleaseJson('dialogue-curriculum/lesson-1498.json',JSON.stringify(f.curriculum)));
+for(const [lessonId,objectiveId,itemCount] of [['lesson-1498','lesson-1498:language-he',3],['lesson-1711-p1','lesson-1711-p1:language-er',6]])test('verified calibration reaches frozen sessions without replacing history, questions, scores or drafts: '+lessonId,async t=>{
+ const f=fixture(t,lessonId),projected=JSON.parse(projectReleaseJson(`dialogue-curriculum/${lessonId}.json`,JSON.stringify(f.curriculum)));
  Object.assign(f.curriculum,projected);
  const frozen=JSON.stringify(projected),at='2026-10-17T12:00:00Z';
  f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)').run('frozen',1,projected.lessonId,projected.curriculumVersion,frozen,'historical-policy',at,at);
  f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES('old-turn','frozen','old-mutation','old-hash','student','保留我的舊解釋','completed','historical-policy',?)").run(at);
- const q={id:'old-question',objectiveId:'lesson-1498:language-he',attempt:1,state:'review',criteria:{calibrationStatus:'pending-real-model',meaning:'old source'},createdAt:at};
+ const q={id:'old-question',objectiveId,attempt:1,state:'review',criteria:{calibrationStatus:'pending-real-model',meaning:'old source'},createdAt:at};
  f.sql.prepare("INSERT INTO dialogue_questions(id,session_id,objective_id,attempt,instance_json,state,created_at) VALUES(?,?,?,?,?,'review',?)").run(q.id,'frozen',q.objectiveId,1,JSON.stringify(q),at);
  f.sql.prepare("INSERT INTO dialogue_drafts(id,session_id,mutation_id,request_hash,revision,content,created_at) VALUES('saved-draft','frozen','saved-mutation','saved-hash',0,'這段尚未送出，不可替我改寫',?)").run(at);
  const original={sessions:f.sql.prepare('SELECT * FROM dialogue_sessions').all(),turns:f.sql.prepare('SELECT * FROM dialogue_turns').all(),questions:f.sql.prepare('SELECT * FROM dialogue_questions').all(),drafts:f.sql.prepare('SELECT * FROM dialogue_drafts').all(),scores:f.sql.prepare('SELECT * FROM learning_evaluations').all()};
@@ -109,8 +109,9 @@ test('verified calibration reaches frozen sessions without replacing history, qu
  let calls=0;f.options.callModel=async(_env,prompt)=>{calls++;assert(prompt.includes('calibrationEvidence'));return {value:{reply:'我們接著讀你提到的這一句。',assessments:[]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};};
  const body=prepareModeTurn({...data,draft:null},f.curriculum,'我想繼續討論原文。');const r=await f.send(data,body.content,body);assert.equal(r.response.status,200,JSON.stringify(r.data));assert.equal(calls,1);
  assert.equal(f.sql.prepare("SELECT curriculum_json FROM dialogue_sessions WHERE id='frozen'").get().curriculum_json,frozen);
- const context=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_context_prepared'").get().details_json);assert.equal(context.calibrationEvidence.items.length,3);
- for(const [key,table] of [['questions','dialogue_questions'],['drafts','dialogue_drafts'],['scores','learning_evaluations']])assert.deepEqual(f.sql.prepare(`SELECT * FROM ${table}`).all(),original[key]);
+ const context=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_context_prepared'").get().details_json);assert.equal(context.calibrationEvidence.items.length,itemCount);
+ for(const old of original.questions)assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_questions WHERE id=?').get(old.id),old);
+ for(const [key,table] of [['drafts','dialogue_drafts'],['scores','learning_evaluations']])assert.deepEqual(f.sql.prepare(`SELECT * FROM ${table}`).all(),original[key]);
  data=await f.read();assert.equal(data.resumeCurriculum.calibrationEvidence.manifestDigest,context.calibrationEvidence.manifestDigest);assert.equal(data.turns[0].content,'保留我的舊解釋');
 });
 test('ordinary sends collect exact original fields, evaluate once and retain idempotency and source scores',async t=>{
