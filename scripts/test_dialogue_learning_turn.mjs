@@ -9,6 +9,20 @@ import {projectState,contextFor,LIMITS} from '../site/dialogue-policy.js';
 import {sanitizeDialogueCurriculum} from '../site/dialogue-public-curriculum.js';
 import {learningTurn} from '../site/dialogue-learning-turn.js';
 import {MODE_SAMPLE_IDS,modeCoverage,prepareModeSample,prepareModeTurn,checkModeLesson} from './dialogue_mode_sample.mjs';
+import {projectReleaseJson} from './build_release_site.mjs';
+test('mode sample pins the release-projected curriculum including retired resource removal',()=>{
+ const plan=prepareModeSample();
+ for(const lesson of plan.lessons){
+  const relative='dialogue-curriculum/'+lesson.lessonId+'.json';
+  const raw=fs.readFileSync('site/'+relative,'utf8');
+  const projected=JSON.parse(projectReleaseJson(relative,raw));
+  const digest=createHash('sha256').update(JSON.stringify(projected)).digest('hex');
+  assert.equal(lesson.sourceDigest,digest,lesson.lessonId+' must match the private release module');
+  const original=JSON.parse(raw);
+  for(const key of ['passages','annotations','studyGuide','objectives','sourceInventory'])
+   assert.deepEqual(projected[key],original[key],key+' authority must remain intact');
+ }
+});
 const student={id:1,ucUserId:700001},ownerRef=createHash('sha256').update('dialogue-owner:1').digest('hex');
 const budget=JSON.stringify({version:'synthetic',validUntil:'2099-01-01T00:00:00Z',currency:'USD',model:'gemini-test',globalDailyMicros:1000000,userDailyMicros:100000,lessonLifetimeMicros:500000,reserveMicros:1100,inputMicrosPerMillion:10000,outputMicrosPerMillion:10000});
 test('mode sample selects three genres without granting execution or replacing backend completion',()=>{

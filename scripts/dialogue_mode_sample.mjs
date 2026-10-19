@@ -5,10 +5,19 @@ import crypto from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {loadCurriculum,hash,assertComplete} from './dialogue_e2e.mjs';
 import {MODE_LESSONS} from '../site/dialogue-mode-admission.js';
+import {projectReleaseJson,RELEASE_JSON_PROJECTION_VERSION} from './build_release_site.mjs';
 
 // Three genres, including active source-owned study-guide assessment. The
 // historical Quanxue selection had no active guide and missed that branch.
 export const MODE_SAMPLE_IDS=MODE_LESSONS;
+
+// The Worker reads the private release module. Its established URL/resource
+// projection can differ from the source JSON; admission must bind those exact
+// served materials without weakening the runtime digest check.
+export function loadModeCurriculum(id,loader=loadCurriculum){
+ assert(/^lesson-[\w-]{1,60}$/.test(id),'exact lesson id required');
+ return JSON.parse(projectReleaseJson('dialogue-curriculum/'+id+'.json',JSON.stringify(loader(id))));
+}
 
 export function modeCoverage(curricula){
  const covers={poetry:[],classical:[],modernProse:[],originalModelGrading:[],studyGuide:[]};
@@ -26,12 +35,12 @@ export function prepareModeSample(ids=MODE_SAMPLE_IDS,loader=loadCurriculum){
  assert(Array.isArray(ids)&&ids.length>=1&&ids.length<=3&&new Set(ids).size===ids.length,'one to three distinct representative lessons required');
  const curricula=[];
  const lessons=ids.map(id=>{
-  const c=loader(id);assert(c?.lessonId===id&&c.curriculumVersion&&c.sourceInventory?.readerSha256&&c.passages?.length,'exact curriculum and original material required');
+  const c=loadModeCurriculum(id,loader);assert(c?.lessonId===id&&c.curriculumVersion&&c.sourceInventory?.readerSha256&&c.passages?.length,'exact curriculum and original material required');
   curricula.push(c);
   const activeGuides=(c.studyGuide||[]).filter(g=>g.activeForSelfTest===true&&!g.reviewRequired&&c.objectives.some(o=>o.domain==='studyGuide'&&o.sourceItemKey===g.itemKey));
   return {lessonId:id,title:c.title,mode:c.mode,curriculumVersion:c.curriculumVersion,sourceDigest:hash(c),readerSha256:c.sourceInventory.readerSha256,objectiveIds:c.objectives.map(o=>o.id),studyGuideItemKeys:activeGuides.map(g=>g.itemKey)};
  });
- return {version:'yw-continuous-mode-sample-v2',status:'offline_prepared_not_accepted',productScope:189,lessons,coverage:modeCoverage(curricula),route:'/api/dialogue/v1',conversation:true,
+ return {version:'yw-continuous-mode-sample-v3',sourceProjection:RELEASE_JSON_PROJECTION_VERSION,status:'offline_prepared_not_accepted',productScope:189,lessons,coverage:modeCoverage(curricula),route:'/api/dialogue/v1',conversation:true,
   scope:'same student conversation path; no per-field answer automation',
   requires:['fresh exact source and authorized finite execution','actual current original text, annotations, guides and rubrics in prompt evidence','natural adaptive learner utterances, including preference or question changes','backend original evidence, coverage and prerequisite checks','save, reload and continuation; preserved historical scores','actual source outbox to central accepted receipt to ordinary My reload','browser/mobile and human review'],
   budgetDisposition:{logicalModelCallsPerConversationalSend:1,deterministicGuideFeedback:'reserve the conversational reply; do not subtract it as a zero-call grading shortcut',providerAttemptLimit:'must bind the fresh approved policy; logical calls are not provider attempt counts',allowanceGranted:false},
