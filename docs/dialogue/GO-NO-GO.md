@@ -1,4 +1,8 @@
-## Current 2026-10-19T03:13:33.890798+00:00 — local new-transaction boundary; candidate preparation only
+## Current 2026-10-19T03:30:03.934735+00:00 — historical prerequisite verified locally; formal NO-GO
+
+Six prior real cases for three poetry1498 language items pass exact-source offline verification and17 focused tests. The result is an unapplied proposal: current-prompt provider quality, version-safe session propagation, complete-mode/central/My/cache/compatibility/formal acceptance remain open. No live calls or publication; counters and terminal rollback remain unchanged. Full189 and representative-sampling amendment persist. [Current operations summary](/private/tmp/cf-task-yw-full-release-01a14cdd/source/docs/MAINTENANCE_MANUAL.md) and [exact evidence/next step](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/historical-calibration-01a15214/REPORT.md).
+
+## Historical 2026-10-19T03:13:33.890798+00:00 — local new-transaction boundary; candidate preparation only
 
 Local-only isolated admission v2 can bind a separately approved transaction to its exact authority digest and freeze the complete older call ledger, including earlier sampled-mode failures and unknown reservations. v1 keeps its original terminal operation boundary. Changing only the version, omitting prior calls, altering the frozen ledger, exceeding the new cap or encountering an uncertain current result stops before another provider dispatch. No history is reset, refunded or replayed. The registered publisher still requires exact approved source/artifact/config/window and an unconsumed receipt. No live capability has been granted or registered.
 
