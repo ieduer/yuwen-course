@@ -5,15 +5,32 @@ import crypto from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {loadCurriculum,hash,assertComplete} from './dialogue_e2e.mjs';
 
-export const MODE_SAMPLE_IDS=Object.freeze(['lesson-1498','lesson-1711-p1','lesson-1717-p2']);
+// Three genres, including active source-owned study-guide assessment. The
+// historical Quanxue selection had no active guide and missed that branch.
+export const MODE_SAMPLE_IDS=Object.freeze(['lesson-1498','lesson-1578','lesson-1717-p2']);
+
+export function modeCoverage(curricula){
+ const covers={poetry:[],classical:[],modernProse:[],originalModelGrading:[],studyGuide:[]};
+ for(const c of curricula){
+  const genre={poetry:'poetry',classical:'classical','modern-prose':'modernProse'}[c.mode];
+  if(genre)covers[genre].push(c.lessonId);
+  if(c.objectives.some(o=>o.domain==='legacy'&&['contextWords','authorQuestion','revision','structure','wordCreation'].includes(o.legacy?.questionKind)))covers.originalModelGrading.push(c.lessonId);
+  if(c.objectives.some(o=>o.domain==='studyGuide'&&c.studyGuide?.some(g=>g.itemKey===o.sourceItemKey&&g.activeForSelfTest===true&&!g.reviewRequired)))covers.studyGuide.push(c.lessonId);
+ }
+ const missing=Object.keys(covers).filter(key=>!covers[key].length);
+ return {covers,missing,complete:missing.length===0,evidence:'source_inventory_only_not_mode_acceptance'};
+}
 
 export function prepareModeSample(ids=MODE_SAMPLE_IDS,loader=loadCurriculum){
  assert(Array.isArray(ids)&&ids.length>=1&&ids.length<=3&&new Set(ids).size===ids.length,'one to three distinct representative lessons required');
+ const curricula=[];
  const lessons=ids.map(id=>{
   const c=loader(id);assert(c?.lessonId===id&&c.curriculumVersion&&c.sourceInventory?.readerSha256&&c.passages?.length,'exact curriculum and original material required');
-  return {lessonId:id,title:c.title,mode:c.mode,curriculumVersion:c.curriculumVersion,sourceDigest:hash(c),readerSha256:c.sourceInventory.readerSha256,objectiveIds:c.objectives.map(o=>o.id)};
+  curricula.push(c);
+  const activeGuides=(c.studyGuide||[]).filter(g=>g.activeForSelfTest===true&&!g.reviewRequired&&c.objectives.some(o=>o.domain==='studyGuide'&&o.sourceItemKey===g.itemKey));
+  return {lessonId:id,title:c.title,mode:c.mode,curriculumVersion:c.curriculumVersion,sourceDigest:hash(c),readerSha256:c.sourceInventory.readerSha256,objectiveIds:c.objectives.map(o=>o.id),studyGuideItemKeys:activeGuides.map(g=>g.itemKey)};
  });
- return {version:'yw-continuous-mode-sample-v1',status:'offline_prepared_not_accepted',productScope:189,lessons,route:'/api/dialogue/v1',conversation:true,
+ return {version:'yw-continuous-mode-sample-v2',status:'offline_prepared_not_accepted',productScope:189,lessons,coverage:modeCoverage(curricula),route:'/api/dialogue/v1',conversation:true,
   scope:'same student conversation path; no per-field answer automation',
   requires:['fresh exact source and authorized finite execution','actual current original text, annotations, guides and rubrics in prompt evidence','natural adaptive learner utterances, including preference or question changes','backend original evidence, coverage and prerequisite checks','save, reload and continuation; preserved historical scores','actual source outbox to central accepted receipt to ordinary My reload','browser/mobile and human review'],
   budgetDisposition:{logicalModelCallsPerConversationalSend:1,deterministicGuideFeedback:'reserve the conversational reply; do not subtract it as a zero-call grading shortcut',providerAttemptLimit:'must bind the fresh approved policy; logical calls are not provider attempt counts',allowanceGranted:false},

@@ -8,16 +8,30 @@ import worker,{handleDialogueFormal,handleDialogueOriginal,handleDialogueFirstRe
 import {projectState,contextFor,LIMITS} from '../site/dialogue-policy.js';
 import {sanitizeDialogueCurriculum} from '../site/dialogue-public-curriculum.js';
 import {learningTurn} from '../site/dialogue-learning-turn.js';
-import {MODE_SAMPLE_IDS,prepareModeSample,prepareModeTurn,checkModeLesson} from './dialogue_mode_sample.mjs';
+import {MODE_SAMPLE_IDS,modeCoverage,prepareModeSample,prepareModeTurn,checkModeLesson} from './dialogue_mode_sample.mjs';
 const student={id:1,ucUserId:700001},ownerRef=createHash('sha256').update('dialogue-owner:1').digest('hex');
 const budget=JSON.stringify({version:'synthetic',validUntil:'2099-01-01T00:00:00Z',currency:'USD',model:'gemini-test',globalDailyMicros:1000000,userDailyMicros:100000,lessonLifetimeMicros:500000,reserveMicros:1100,inputMicrosPerMillion:10000,outputMicrosPerMillion:10000});
 test('mode sample selects three genres without granting execution or replacing backend completion',()=>{
  const plan=prepareModeSample();assert.deepEqual(plan.lessons.map(l=>l.mode),['poetry','classical','modern-prose']);
  assert.equal(plan.productScope,189);assert.equal(plan.executionAuthorized,false);assert.equal(plan.realProviderVerified,false);
+ assert.equal(plan.coverage.complete,true);assert.deepEqual(plan.coverage.covers.studyGuide,['lesson-1578']);
+ assert.equal(plan.lessons.find(l=>l.lessonId==='lesson-1578').studyGuideItemKeys.length,8);
  assert.equal(prepareModeSample(['lesson-1498']).lessons.length,1);
  assert.throws(()=>prepareModeSample(['lesson-1498','lesson-1498']),/distinct/);
  assert.throws(()=>prepareModeSample(['lesson-1498'],()=>({lessonId:'lesson-1498'})),/original material/);
  assert.throws(()=>checkModeLesson({state:{},turns:[{role:'teacher',content:'你已全部完成了！'}]},{}),/not_complete/);
+});
+test('sample coverage cannot mistake three genres or inactive guide materials for study-guide acceptance coverage',()=>{
+ const prior=prepareModeSample(['lesson-1498','lesson-1711-p1','lesson-1717-p2']);
+ assert.equal(prior.coverage.complete,false);assert.deepEqual(prior.coverage.missing,['studyGuide']);
+ const c=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1578.json'));
+ for(const g of c.studyGuide)g.reviewRequired=true;
+ assert.equal(modeCoverage([c]).covers.studyGuide.length,0);
+ for(const g of c.studyGuide){g.reviewRequired=false;g.activeForSelfTest=false;}
+ assert.equal(modeCoverage([c]).covers.studyGuide.length,0);
+ for(const g of c.studyGuide)g.activeForSelfTest=true;
+ c.objectives=c.objectives.filter(o=>o.domain!=='studyGuide');
+ assert.equal(modeCoverage([c]).covers.studyGuide.length,0);
 });
 test('mode turn matches conversational composer and refuses unresolved state, drift and invented quotations',()=>{
  const c={curriculumVersion:'v1',passages:[{id:'p1',text:'原文中的完整句子'}]},s={revision:3,learningTurn:{kind:'formal',field:'reason',taskId:'current-task'}};
