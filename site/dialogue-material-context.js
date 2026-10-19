@@ -59,7 +59,7 @@ export function annotationWindow(annotations,passages,cue=''){
  const ids=new Set(passages.flatMap(p=>p.annotationIds||[]));
  return annotations.filter(a=>ids.has(a.noteId)||cue.includes(a.noteId)||(a.text.length>=3&&cue.includes(a.text.split(/[：:，,。]/u)[0])));
 }
-export function sourceProvenance(curriculum){return {curriculumVersion:curriculum.curriculumVersion,sourceUrl:curriculum.source,...curriculum.sourceInventory,notice:'正文及文字原註由已核對的原課資料直接抽取；附transcription的原註為核對原圖後的文字轉錄，不代表模型讀過像素。段落和註釋ID可回查；未提供的附件內容不能當作已讀。'};}
+export function sourceProvenance(curriculum){return {curriculumVersion:curriculum.curriculumVersion,sourceUrl:curriculum.source,...curriculum.sourceInventory,...(curriculum.sessionSourceProjection?{sessionSourceProjection:curriculum.sessionSourceProjection}:{}),notice:'正文及文字原註由已核對的原課資料直接抽取；附transcription的原註為核對原圖後的文字轉錄，不代表模型讀過像素。段落和註釋ID可回查；未提供的附件內容不能當作已讀。'};}
 
 export function formalMaterials(curriculum,cue,budget){
  if(!Number.isSafeInteger(budget)||budget<=0)throw Error('source_material_budget_exceeded');

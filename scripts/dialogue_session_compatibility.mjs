@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {withProspectiveFormalScope} from '../site/formal-scope-policy.js';
 import {approvedSupplement} from '../site/dialogue-completion-exemptions.js';
 import {withCalibratedLanguage} from '../site/dialogue-calibration-status.js';
+import {withSessionSourceMaterials} from '../site/dialogue-session-source.js';
 import {sanitizeDialogueCurriculum} from '../site/dialogue-public-curriculum.js';
 
 const hash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -21,6 +22,7 @@ export async function inspectSessionCompatibility(published,frozen,{completed,pe
  for(const done of completed===undefined?[false,true]:[completed])for(const unfinished of pending===undefined?[false,true]:[pending]){
   let effective=frozen;
   if(published.formalScopeExpansion&&!effective.formalScopeExpansion)effective=withProspectiveFormalScope(effective,published,{completed:done,pending:unfinished});
+  effective=await withSessionSourceMaterials(effective,published,{completed:done,pending:unfinished,historicalCurriculum:frozen});
   const exemption=approvedSupplement(published);
   if(exemption)effective={...effective,completionExemption:exemption};
   effective=await withCalibratedLanguage(effective);
@@ -29,6 +31,7 @@ export async function inspectSessionCompatibility(published,frozen,{completed,pe
   const missingObjectives=current.objectives.filter(o=>!effective.objectives.some(old=>same(old,o))).map(o=>o.id);
   const historicalOnlyObjectives=effective.objectives.filter(o=>!current.objectives.some(next=>next.id===o.id)).map(o=>o.id);
   branches.push({completed:done,pending:unfinished,effectivePin:pin(effective),matchesPublishedPin:same(pin(effective),pin(current)),changedKeys,missingObjectives,historicalOnlyObjectives,
+   sourceMetadataProjected:!!effective.sessionSourceProjection,sourceInventoryMatchesPublished:same(effective.sourceInventory,current.sourceInventory),
    appendedObjectiveIds:effective.objectives.filter(o=>!frozen.objectives.some(old=>old.id===o.id)).map(o=>o.id),
    currentSourceEquivalent:changedKeys.length===0});
  }

@@ -93,6 +93,57 @@ function fixture(t,lessonId='lesson-1498',filter=()=>true){
  }
  return {curriculum,sql,env,req,options,read,send,calls:()=>calls};
 }
+test('historical modern continuation provides verified current source metadata without replacing its contract',async t=>{
+ const f=fixture(t,'lesson-1717-p2'),old=JSON.parse(fs.readFileSync('scripts/fixtures/dialogue-historical-modern-curriculum.json'));
+ assert.equal(createHash('sha256').update(JSON.stringify(old)).digest('hex'),'d60227f2c5a5ece1d83c48673103c316cfece5074df29f0e1028374c512e7cf0');
+ const frozen=JSON.stringify(old),at='2026-10-13T00:00:00Z';
+ f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)').run('historical-modern',1,old.lessonId,old.curriculumVersion,frozen,'historical-policy',at,at);
+ f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES('historical-answer','historical-modern','historical-mutation','historical-hash','student','原有理解必須逐字保留','completed','historical-policy',?)").run(at);
+ const before=f.sql.prepare('SELECT * FROM dialogue_sessions').all(),turns=f.sql.prepare('SELECT * FROM dialogue_turns').all();
+ const data=await f.read();
+ assert.equal(data.resumeCurriculum.sourceInventory?.readerSha256,f.curriculum.sourceInventory.readerSha256);
+ assert.equal(data.curriculumVersion,old.curriculumVersion);
+ assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_sessions').all(),before);assert.deepEqual(f.sql.prepare('SELECT * FROM dialogue_turns').all(),turns);
+ assert.deepEqual(data.resumeCurriculum.objectives.filter(o=>old.objectives.some(prior=>prior.id===o.id)).map(o=>o.id),old.objectives.map(o=>o.id));
+ assert.equal(f.calls(),0);
+ let prompt='',modelCalls=0;f.options.callModel=async(_env,value)=>{modelCalls++;prompt=value;return {value:{reply:'我們接著看原文。',assessments:[]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ const body=prepareModeTurn(data,data.resumeCurriculum,'我想接著討論原文的意象。'),sent=await f.send(data,body.content,body);assert.equal(sent.response.status,200,JSON.stringify(sent.data));
+ const context=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_context_prepared'").get().details_json);
+ assert.equal(context.sourceProvenance.readerSha256,f.curriculum.sourceInventory.readerSha256);assert(context.sourceProvenance.sessionSourceProjection);assert(prompt.includes('sessionSourceProjection'));
+ assert.equal(f.sql.prepare("SELECT curriculum_json FROM dialogue_sessions WHERE id='historical-modern'").get().curriculum_json,frozen);
+ assert.deepEqual(f.sql.prepare("SELECT * FROM dialogue_turns WHERE id='historical-answer'").get(),turns[0]);
+ assert.equal(f.sql.prepare('SELECT count(*) n FROM learning_evaluations').get().n,0);
+ assert.equal((await handleDialogue(f.req(body),f.env,student,null,f.options)).status,200);assert.equal(modelCalls,1);
+});
+for(const kind of ['draft','issued-question','partial','completed'])test('historical modern source projection preserves '+kind+' without writes or model calls',async t=>{
+ const f=fixture(t,'lesson-1717-p2'),old=JSON.parse(fs.readFileSync('scripts/fixtures/dialogue-historical-modern-curriculum.json')),at='2026-10-13T00:00:00Z';
+ f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)').run('historical-modern',1,old.lessonId,old.curriculumVersion,JSON.stringify(old),'historical-policy',at,at);
+ if(kind==='draft')f.sql.prepare("INSERT INTO dialogue_drafts(id,session_id,mutation_id,request_hash,revision,content,created_at) VALUES('old-draft','historical-modern','old-mutation','old-hash',0,'未送出的原話',?)").run(at);
+ if(kind==='issued-question'){
+  const q={id:'old-question',objectiveId:old.lessonId+':vocabulary',attempt:1,state:'issued',question:'保持舊題與原判準',criteria:{original:'unchanged'},createdAt:at};
+  f.sql.prepare("INSERT INTO dialogue_questions(id,session_id,objective_id,attempt,instance_json,state,created_at) VALUES(?,?,?,?,?,'issued',?)").run(q.id,'historical-modern',q.objectiveId,1,JSON.stringify(q),at);
+ }
+ if(kind==='partial'){
+  f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at,sequence) VALUES('partial-turn','historical-modern','old-mutation','old-hash','student','原問題','needs_review','historical-policy',?,1)").run(at);
+  f.sql.prepare("INSERT INTO dialogue_stream_chunks(turn_id,sequence,content,created_at) VALUES('partial-turn',1,'尚未確認的原回應',?)").run(at);
+ }
+ if(kind==='completed'){
+  f.sql.prepare("INSERT INTO learning_interactions(source_event_id,student_id,academic_year,lesson_id,interaction_key,event_type,assessment_kind,scoring_role,resource_key,resource_version,registry_version,occurred_at) VALUES('old-completion',1,'2026-2027',?,'lessonCompleted','synthetic','self_report','none','old-lesson','old-v1','old-registry',?)").run(old.lessonId,at);
+  f.sql.prepare("INSERT INTO learning_evaluations(source_event_id,verification_method,eligibility_status,correctness,evaluated_at) VALUES('old-completion','source-fixture','non_scoring','not_verified',?)").run(at);
+ }
+ const tables=['dialogue_sessions','dialogue_turns','dialogue_questions','dialogue_drafts','dialogue_stream_chunks','dialogue_calls','dialogue_events','dialogue_assessments','learning_interactions','learning_evaluations'];
+ const before=Object.fromEntries(tables.map(table=>[table,f.sql.prepare('SELECT * FROM '+table).all()]));
+ for(let i=0;i<2;i++){
+  const data=await f.read();assert.equal(data.resumeCurriculum.sessionSourceProjection,undefined);assert.equal(data.resumeCurriculum.sourceInventory,undefined);
+  assert.equal(data.curriculumVersion,old.curriculumVersion);assert.equal(data.resumeCurriculum.objectives.length,old.objectives.length);
+  if(kind==='draft')assert.equal(data.draft.content,'未送出的原話');
+  if(kind==='issued-question')assert.equal(data.question.question,'保持舊題與原判準');
+  if(kind==='partial')assert.equal(data.partial.content,'尚未確認的原回應');
+  if(kind==='completed')assert(data.legacy.completion);
+ }
+ for(const table of tables)assert.deepEqual(f.sql.prepare('SELECT * FROM '+table).all(),before[table],table);
+ assert.equal(f.calls(),0);
+});
 for(const [lessonId,objectiveId,itemCount] of [['lesson-1498','lesson-1498:language-he',3],['lesson-1711-p1','lesson-1711-p1:language-er',6]])test('verified calibration reaches frozen sessions without replacing history, questions, scores or drafts: '+lessonId,async t=>{
  const f=fixture(t,lessonId),projected=JSON.parse(projectReleaseJson(`dialogue-curriculum/${lessonId}.json`,JSON.stringify(f.curriculum)));
  Object.assign(f.curriculum,projected);

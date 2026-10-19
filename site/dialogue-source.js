@@ -22,6 +22,7 @@ import {lessonCallLimit} from './dialogue-lesson-limits.js';
 import {sanitizeDialogueCurriculum} from './dialogue-public-curriculum.js';
 import {approvedSupplement} from './dialogue-completion-exemptions.js';
 import {withProspectiveFormalScope} from './formal-scope-policy.js';
+import {withSessionSourceMaterials} from './dialogue-session-source.js';
 import {withCalibratedLanguage,calibrationReopensReview} from './dialogue-calibration-status.js';
 import {POLICY_VERSION,RULE_VERSION,CONTEXT_LAYOUT_VERSION,LIMITS,PILOTS,validateProposal,projectState,contextFor,createQuestion,vocabularyOrder,evidenceReport,questionItems} from './dialogue-policy.js';
 const now=()=>new Date().toISOString();
@@ -166,11 +167,22 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
  // Append only the newly authorized future-answer tasks in the read projection.
  // Completed lessons and an unfinished saved request retain their exact contract.
  // Stored curriculum, prior answers, drafts and scores are never rewritten.
- if(session&&publishedCurriculum.formalScopeExpansion&&!curriculum.formalScopeExpansion){
+ const historicalCurriculum=curriculum;
+ const needsSourceMetadata=!!session&&!Object.hasOwn(curriculum,'sourceInventory')&&!!publishedCurriculum.sourceInventory;
+ if(session&&(publishedCurriculum.formalScopeExpansion&&!curriculum.formalScopeExpansion||needsSourceMetadata)){
   const legacy=await historicalEvidence(db,student.id,curriculum),assessments=await assessmentRows(db,session.id),conclusion=await savedConclusion(db,session.id);
   const prior=projectState(curriculum,assessments,legacy.preserved,legacy.completion,await readingGate(db,student.id,curriculum,legacy),conclusion);
   const draft=await db.prepare('SELECT mutation_id FROM dialogue_drafts WHERE session_id=? AND submitted_turn_id IS NULL LIMIT 1').bind(session.id).first();
-  curriculum=withProspectiveFormalScope(curriculum,publishedCurriculum,{completed:!!legacy.completion||prior.completion==='evidence_ready_for_review',pending:!!session.inflight||!!draft});
+  const completed=!!legacy.completion||prior.completion==='evidence_ready_for_review';
+  let pending=!!session.inflight||!!draft;
+  if(needsSourceMetadata&&!completed&&!pending){
+   const [issued,partial]=await Promise.all([
+    db.prepare("SELECT id FROM dialogue_questions WHERE session_id=? AND state='issued' LIMIT 1").bind(session.id).first(),
+    db.prepare("SELECT t.id FROM dialogue_turns t WHERE t.session_id=? AND t.id=(SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence DESC LIMIT 1) AND EXISTS(SELECT 1 FROM dialogue_stream_chunks c WHERE c.turn_id=t.id) AND NOT EXISTS(SELECT 1 FROM dialogue_turns r WHERE r.reply_to=t.id AND r.role='teacher') LIMIT 1").bind(session.id,session.id).first()]);
+   pending=!!issued||!!partial;
+  }
+  curriculum=withProspectiveFormalScope(curriculum,publishedCurriculum,{completed,pending});
+  if(needsSourceMetadata)curriculum=await withSessionSourceMaterials(curriculum,publishedCurriculum,{completed,pending,historicalCurriculum});
  }
  // Current owner dispositions apply to the exact supplementary lesson even
  // when its previous source contract stays frozen in a historical session.
@@ -200,7 +212,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   const before=url.searchParams.has('beforeSeq')?{sequence:Number(url.searchParams.get('beforeSeq'))}:null;
   if(before && (!Number.isSafeInteger(before.sequence)||before.sequence<1))return json({code:'invalid_cursor'},400);
   const result=await snapshot(db,session,curriculum,before);
-  if(curriculum.calibrationEvidence||curriculum.curriculumVersion!==publishedCurriculum.curriculumVersion)result.resumeCurriculum=sanitizeDialogueCurriculum(curriculum);
+  if(curriculum.calibrationEvidence||curriculum.sessionSourceProjection||curriculum.curriculumVersion!==publishedCurriculum.curriculumVersion)result.resumeCurriculum=sanitizeDialogueCurriculum(curriculum);
   if(url.searchParams.get('records')==='1'){
    const [questions,events,drafts,chunks,calls]=await Promise.all([
     all(db.prepare('SELECT instance_json FROM dialogue_questions WHERE session_id=? ORDER BY created_at,id').bind(session.id)),
