@@ -1,4 +1,29 @@
-## Current Web acceptance reassessment — 2026-10-13T00:42:57.951660+00:00
+## Current 2026-10-19T00:37:45.515897+00:00 — full189 product, representative complete-mode acceptance
+
+**NO-GO for formal publication.** The direct user amendment「不需要驗證全部，抽樣幾篇通過即可」「核心是模式跑通」controls acceptance: use a few representative complete learning dialogues. Fixed24/28/207/full189 model-execution quotas in historical sections are superseded; the product remains all189 (88 required +101 elective). No new model budget, paid allowance, probe, monitoring or formal release authority is implied. Paid hard expiry2026-10-14T12:00Z and consumed attempts remain unchanged.
+
+The current source/evidence matrix is [acceptance-map-01a1517a/REQUIREMENTS.json](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/acceptance-map-01a1517a/REQUIREMENTS.json); exact UI/curriculum continuity is recorded in [SOURCE-BRIDGE.json](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/acceptance-map-01a1517a/SOURCE-BRIDGE.json). Runtime candidate4c826d1 has local checks and full offline artifact6f1c96bf; later source checkpoints only update docs. No current-candidate real model or central acceptance is claimed.
+
+| Requirement | Evidence and remaining condition |
+| --- | --- |
+| Full product scope | Current index/files confirm189=88+101.188 have text; lesson1572 retains its explicit owner-approved source-unavailable, non-scoring exemption. No fabricated replacement source. |
+| Natural author dialogue and original learning paths | Ordinary entry uses conversation mode; local greeting/preferences, source assessment and guide replies are tested. Three representative real complete dialogues and reviewer assessment remain unverified. |
+| Original text, annotations, guide, rubric and provenance | Current context/source-event code carries actual material, identity and scope. Long-context/held/completed source evidence is retained. Real request/readback proof remains required. |
+| Backend completion and scoring authority | Original rubrics, quoted student/text evidence, prerequisites and idempotency remain server controlled; focused current runtime checks pass with local stubs. Model self-claims do not pass. |
+| Reading, search, quotation, mobile controls | Current UI/curriculum are byte-identical to the scoped accepted local browser source785b9a9. Existing189 source-format, catalogue, narrow-screen and selection evidence remain valid within their original limits; no unnecessary full rerun. |
+| Draft, resume, expiry, export and accessibility | Existing local browser/component/clipboard and user-confirmed speech evidence retained. Candidate authenticated/real-model recovery remains separate; preserve existing Web device waivers. |
+| Cache and cost | Stable prefix/parameter/source-isolation checks exist; raw provider usage and latency are retained. True cached tokens, delay and cost remain UNVERIFIED without real reports; no cross-provider inference. |
+| Historical records and88 prospective scores | Source policy retains newAnswersOnly, excludes the added scope from existing A+ gate, preserves A–F and historical results. Prior backup/restore proves its named snapshot only; fresh release coverage and actual candidate score readback are still required. |
+| Source→central→My | Isolated host has no Queue/central writer. Need genuine source outbox, per-item central accepted receipt and ordinary same-account My reload; no direct D1 or fake receipt. |
+| Images and native compatibility | Existing canonical media keys and source formats retained. Real external-image delivery remains separate. Record applicable Web/App compatibility disposition; no new native release/device campaign is implied by this Web goal. |
+| Artifact and rollback | Offline artifact1482files, raw Worker25666689bytes; current provider acceptance remains pending. Prior isolated rollback confirmed62e990f3/f7e5e241; new paired publisher locally verified. Formal rollback must preserve forward data. |
+| Formal release and Status | Exact source/artifact/target/current baseline/rollback, resolved acceptance evidence and suen go/no-go are required before registered formal publication. After acceptance, verify Status stored record, public page and RSS. |
+
+Latest real YW diagnostic returned503; the original400 cause remains unknown. Shared management84/87 (A1reserve3), publisher548/550 for the closed phase, historical32 attempts and unknown504000micros remain unchanged. [The isolated finite proposal](/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/execution-01a14cdd/mode-execution-proposal-01a1517a/README.md) is UNAPPROVED/UNBOUND and cannot establish full formal acceptance. No additional calls are made to obtain availability evidence.
+
+Earlier entries below are historical snapshots; their original evidence and scope remain preserved. They cannot reactivate expired budgets or fixed acceptance counts.
+
+## Historical Web acceptance reassessment — 2026-10-13T00:42:57.951660+00:00
 
 Recommendation remains NO-GO for formal publication until real24-case semantic/persona/synthesis and stream/accounting acceptance pass. Remove the unrelated Android APK physical-phone requirement and the mistaken external-notification blocker from this Web checklist; real Web input and own-marker persistence evidence now exist. Independent reviewer remains suen. Do not request final publication sign-off before remaining teaching acceptance is reviewable.
 
