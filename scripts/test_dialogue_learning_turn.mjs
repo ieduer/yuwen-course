@@ -384,6 +384,44 @@ test('natural full-poem acknowledgement survives an active vocabulary question a
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='readAcknowledged'").get().n,1);
 });
 
+test('continuous original-answer proposals survive vocabulary focus and all earlier unsent evidence remains available',async t=>{
+ const f=fixture(t);let calls=0,proposal=null;
+ const firstText='開頭江海連成一片，讓我覺得月色開闊清澈。';
+ const words='開闊、清澈、惆悵：江海相連，月色澄明，而遊子思婦各在遠方。';
+ const structure='開頭「海上明月共潮生」與末尾「落月摇情满江树」呼應，月亮升落串起時間，景色從開闊轉到離情。';
+ const wordId=f.curriculum.objectives.find(o=>o.legacy?.questionKind==='contextWords').id;
+ const structureId=f.curriculum.objectives.find(o=>o.legacy?.questionKind==='structure').id;
+ f.options.callModel=async(_env,prompt)=>{
+  calls++;const d=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=d.recent.filter(t=>t.role==='student').at(-1),p=f.curriculum.passages[0];
+  const assessments=calls===1?[{objectiveId:'lesson-1498:context',outcome:'demonstrated',rationale:'初讀感受有原文依據。',evidence:[{criterion:'initial_response',turnId:turn.id,quote:turn.content,passageId:p.id,passageQuote:p.text}]}]:[];
+  return {value:{reply:'你的理解已保留，我們繼續核對原句。',assessments,...(proposal?{sourceDraft:{objectiveId:proposal.id,fields:{[proposal.field]:{turnId:turn.id,quote:turn.content}}}}:{})},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
+ };
+ await f.send(await f.read(),firstText,{conversation:true});
+ let before=await f.read();assert(before.question);const question=before.question.id;
+ proposal={id:wordId,field:'words'};let r=await f.send(before,words,{conversation:true});
+ assert(r.data.sourceDraft);assert.equal(r.data.sourceDraft.formal.objectiveId,wordId);
+ assert.equal(r.data.sourceDraft.references[0].quote,words);
+ proposal={id:structureId,field:'reason'};r=await f.send(await f.read(),structure,{conversation:true});
+ assert.equal(r.data.sourceDraft.formal.objectiveId,structureId);assert.equal(calls,3);
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,0);
+ assert.equal(f.sql.prepare('SELECT state FROM dialogue_questions WHERE id=?').get(question).state,'issued');
+ // Fixture-only existing-source submission for the newer proposal. Snapshot
+ // must still retrieve the older immutable proposal, without resubmitting it.
+ const latest=f.sql.prepare("SELECT id FROM dialogue_turns WHERE role='student' ORDER BY sequence DESC LIMIT 1").get();
+ f.sql.prepare('UPDATE dialogue_turns SET source_request_json=? WHERE id=?').run(JSON.stringify(r.data.sourceDraft.formal),latest.id);
+ const reloaded=await f.read();assert.equal(reloaded.sourceDraft.formal.objectiveId,wordId);assert.equal(reloaded.sourceDraft.references[0].quote,words);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='source_answer_proposed'").get().n,2);
+ // An uncertain submission for that objective with different input must not
+ // expose its older proposal as an automatic retry. Keep both evidence rows.
+ const older=f.sql.prepare("SELECT id FROM dialogue_turns WHERE role='student' ORDER BY sequence LIMIT 1").get();
+ f.sql.prepare('UPDATE dialogue_turns SET source_request_json=? WHERE id=?').run(JSON.stringify({...reloaded.sourceDraft.formal,input:{words:'另一份已送出但尚未確認的答案'}}),older.id);
+ assert.equal((await f.read()).sourceDraft,null);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='source_answer_proposed'").get().n,2);
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
+ assert.equal(calls,3);
+});
+
 test('first reading conversation completes original three-mark, impression, correction and acknowledgement receipts',async t=>{
  const f=fixture(t,'lesson-1711-p1');f.sql.exec('DELETE FROM classical_first_read_sessions; DELETE FROM learning_interactions;');
  const asset=JSON.parse(fs.readFileSync('site/data/classical-first-read/lesson-1711-p1.json'));

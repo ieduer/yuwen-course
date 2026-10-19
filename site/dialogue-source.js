@@ -88,12 +88,16 @@ async function assessmentRows(db,id){return (await all(db.prepare('SELECT * FROM
 async function savedConclusion(db,id){const row=await db.prepare("SELECT details_json FROM dialogue_events WHERE session_id=? AND event_type='conclusion_saved' ORDER BY created_at DESC,id DESC LIMIT 1").bind(id).first();return row?JSON.parse(row.details_json):null;}
 async function proposedSourceDraft(db,session,legacy){
  if(legacy.completion)return null;
- const row=await db.prepare("SELECT details_json FROM dialogue_events WHERE session_id=? AND event_type='source_answer_proposed' ORDER BY created_at DESC,id DESC LIMIT 1").bind(session.id).first();
- if(!row)return null;
- const draft=JSON.parse(row.details_json);
- if(legacy.preserved.some(p=>p.objectiveId===draft.formal.objectiveId))return null;
- const sent=await db.prepare("SELECT id FROM dialogue_turns WHERE session_id=? AND json_valid(source_request_json) AND json_extract(source_request_json,'$.objectiveId')=? AND json_extract(source_request_json,'$.input')=? LIMIT 1").bind(session.id,draft.formal.objectiveId,JSON.stringify(draft.formal.input)).first();
- return sent?null:draft;
+ const rows=await all(db.prepare("SELECT e.details_json FROM dialogue_events e JOIN dialogue_turns t ON t.id=e.turn_id WHERE e.session_id=? AND e.event_type='source_answer_proposed' ORDER BY t.sequence DESC,e.id DESC").bind(session.id));
+ for(const row of rows){
+  const draft=JSON.parse(row.details_json);
+  if(legacy.preserved.some(p=>p.objectiveId===draft.formal.objectiveId))continue;
+  // A submitted objective, including an uncertain result, cannot be replayed
+  // through a different older proposal. Other unsent objectives remain usable.
+  const sent=await db.prepare("SELECT id FROM dialogue_turns WHERE session_id=? AND json_valid(source_request_json) AND json_extract(source_request_json,'$.objectiveId')=? LIMIT 1").bind(session.id,draft.formal.objectiveId).first();
+  if(!sent)return draft;
+ }
+ return null;
 }
 async function learningRecords(db,session){
  const fields=(await all(db.prepare("SELECT e.details_json,t.content,t.sequence,t.id AS turnId FROM dialogue_events e JOIN dialogue_turns t ON t.id=e.turn_id WHERE e.session_id=? AND e.event_type='source_field_saved' ORDER BY t.sequence").bind(session.id))).map(({details_json,...row})=>({...row,...JSON.parse(details_json)}));
@@ -229,7 +233,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   if(task.kind==='unavailable')return json({code:'source_unavailable'},409);
   const records=await learningRecords(db,session);
   if(body.conversation===true){
-   if(data.sourceDraft&&!data.question)learningFormal={...data.sourceDraft.formal,references:data.sourceDraft.references};
+   if(data.sourceDraft&&!data.question&&data.state.next?.domain!=='vocabulary')learningFormal={...data.sourceDraft.formal,references:data.sourceDraft.references};
    if(task.questionId){body.questionId=task.questionId;learningQuestion=await plannedQuestion(db,session,curriculum,data.state);}
   }else if(task.kind==='formal'){
    if(!body.content.trim()||body.content.length>1800)return json({code:'invalid_source_input'},400);
@@ -543,7 +547,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const result=await observe(await callModel(env,prompt,resume?`${turnId}:continue`:turnId,persistReply,budget,{responseJsonSchema}));
   if(resume&&!result.value?.reply?.startsWith(resume.partialText))throw Error('continuation_prefix_mismatch');
   failureStage='proposal';
-  const proposal=validateProposal(result.value,{curriculum,state,turns:completeTurns,question,remediation,assessments,hints:completeTurns.filter(t=>t.role==='teacher').map(t=>t.content)});
+  const proposal=validateProposal(result.value,{curriculum,state,turns:completeTurns,question,remediation,assessments,hints:completeTurns.filter(t=>t.role==='teacher').map(t=>t.content),conversation:body.conversation===true});
   if(body.conversation===true&&proposal.assessments.some(a=>['read','firstRead','studyGuide','evaluation','legacy'].includes(curriculum.objectives.find(o=>o.id===a.objectiveId)?.domain)))throw Error('original_evidence_requires_source_receipt');
   if(proposal.sourceDraft&&(legacy.completion||legacy.preserved.some(p=>p.objectiveId===proposal.sourceDraft.formal.objectiveId)))throw Error('original_result_preserved');
   failureStage='original_evidence';

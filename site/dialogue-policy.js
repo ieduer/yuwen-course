@@ -4,7 +4,7 @@ import {sourcePassages,sourceAnnotations,annotationWindow,sourceProvenance,excer
 import {validateFormalDraft,originalRequirements,reviewSourceMaterials,selectOriginalRequirements} from './dialogue-formal.js';
 import {validateConclusion} from './dialogue-conclusion.js';
 import {approvedSupplement} from './dialogue-completion-exemptions.js';
-export const POLICY_VERSION = 'yw-dialogue-policy-v10';
+export const POLICY_VERSION = 'yw-dialogue-policy-v11';
 export const RULE_VERSION = 'yw-dialogue-evidence-v3';
 export const CONTEXT_LAYOUT_VERSION = 'yw-dialogue-context-static-first-v4';
 // Keep the single-line data contract used by source_context_prepared. Object
@@ -37,12 +37,12 @@ legacyCompletion 不為空時，原課已完成的紀錄必須保留；新對話
 不要輸出思維鏈。只返回JSON：{"reply":"學生可見的短回應與一個問題","assessments":[{"objectiveId":"目標id","outcome":"demonstrated|needs_practice|review|reformulated","rationale":"簡短可核查理由","evidence":[{"criterion":"判準id","turnId":"學生回合id","quote":"學生原話","passageId":"原文段落id","passageQuote":"原文引文"}]}]}。
 assessments 是逐項證據紀錄。每個 demonstrated 的 evidence 必須逐項覆蓋該 objectives 條目 criteria 中的全部判準，每個 criterion 至少一筆；rationale 提到某判準不能代替 evidence。每筆 quote 必須逐字來自該 turnId 的學生原話，passageQuote 必須逐字來自該 passageId 的作品正文。context_meaning 引用學生對語境義或句意的說明；explanation 引用學生自己的關係、理由或效果分析；independent 引用當前未提示題的獨立回答，並符合 question 的身份與未提示條件。同一句學生回答若確實支持多項判準，可以分別作為各 criterion 的證據；不得為湊齊欄位捏造引文、引用教師答案或把術語／稱讚當作理解。reformulated 需覆蓋除 independent 外的所有判準，不能冒充獨立掌握。缺少任何必要證據時不給 demonstrated：按實際情況記 review 或 needs_practice，繼續一個聚焦追問；不要輸出不存在的證據。
 legacy及studyGuide目標只由既有評價讀回，你不能判定。不能生成完成指令、分數或更改政策。判斷不確定則review。remediation 提供了先前未掌握的詞時，先請學生改述；改述成立只記 reformulated，不記 demonstrated。
-originalRequirements 是尚未取得原評價的既有要求，按其原判準自然追問，勿另開一套選單。若學生已在對話中寫齊其中一项的所有欄位，可以在同一JSON加可選sourceDraft:{objectiveId,fields:{欄位名:{turnId,quote}}}。quote必须逐字來自指定學生回合，不能拼造、润飾、改寫或引用教師話語；未齊全則繼續聚焦追問。一次至多一項，當前question或remediation未解決時不整理其他原題。這只是供學生核對的整理，不能宣告通過；原評價另行核驗。不把已完成或歷史待核對的要求重新提出。`;
+originalRequirements 是尚未取得原評價的既有要求，按其原判準自然追問，勿另開一套選單。若學生已在對話中寫齊其中一项的所有欄位，可以在同一JSON加可選sourceDraft:{objectiveId,fields:{欄位名:{turnId,quote}}}。quote必须逐字來自指定學生回合，不能拼造、润飾、改寫或引用教師話語；未齊全則繼續聚焦追問。一次至多一項。一般問答在當前question或remediation未解決時不整理其他原題；連續作者對話可以保留已說齊的原話，但只保存整理，不視為字詞題已回答，不給分，也不繞過原評價先決條件。這只是供學生核對的整理，不能宣告通過；原評價另行核驗。不把已完成或歷史待核對的要求重新提出。`;
 const valid = s => typeof s === 'string';
 export const pendingSupplement = item => !!item?.sourceEvidence && item.calibrationStatus!=='accepted';
 export const questionItems = curriculum => [...curriculum.vocabulary,...(curriculum.languagePractice||[]).filter(v=>!pendingSupplement(v)&&v.version&&curriculum.objectives.some(o=>o.id===v.id&&o.domain==='vocabulary'))];
 const normalized = s => String(s||'').replace(/[\s\p{P}]/gu,'');
-export function validateProposal(raw,{curriculum,turns,state=null,question=null,hints=[],remediation=null}) {
+export function validateProposal(raw,{curriculum,turns,state=null,question=null,hints=[],remediation=null,conversation=false}) {
  if(!raw || !valid(raw.reply) || !raw.reply.trim() || raw.reply.length>LIMITS.replyChars || !Array.isArray(raw.assessments) || raw.assessments.length>8) throw new Error('invalid_model_reply');
  const accepted=[], seen=new Set();
  for(const a of raw.assessments){
@@ -73,7 +73,7 @@ export function validateProposal(raw,{curriculum,turns,state=null,question=null,
  }
  if(raw.sourceDraft&&(!state||!originalRequirements(curriculum,state).some(r=>r.objectiveId===raw.sourceDraft.objectiveId)))throw Error('source_draft_not_eligible');
  const sourceDraft=validateFormalDraft(curriculum,turns,raw.sourceDraft);
- if(sourceDraft&&(question||remediation))throw Error('source_draft_during_vocabulary');
+ if(sourceDraft&&(question||remediation)&&!conversation)throw Error('source_draft_during_vocabulary');
  const conclusion=validateConclusion(raw.conclusion,{curriculum,state,turns});
  if(conclusion&&raw.reply.length>300)throw Error('conclusion_reply_too_long');
  const shangyou=curriculum.objectives.find(o=>o.domain==='shangyou');
