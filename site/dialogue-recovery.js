@@ -20,7 +20,7 @@ export function requestDialogueBudget(env,student,lessonId){
 
 export function combinedProviderAccounting(value,budget,prior=[],success=false){
  if(!value)return null;
- const next=validatedProviderAccounting(value,{maxProviderAttempts:budget.providerAttemptLimit||1,success,model:budget.model});
+ const next=validatedProviderAccounting(value,{maxProviderAttempts:budget.providerAttemptLimit||1,success,model:budget.model,primaryModel:budget.primaryModel||null});
  const attempts=[...prior,...next.attempts.map(a=>({...a,ordinal:a.ordinal+prior.length}))];
  const maxProviderAttempts=budget.logicalProviderAttemptLimit||budget.providerAttemptLimit||1;
  if(attempts.length>maxProviderAttempts)throw Error('logical_provider_limit');
@@ -28,10 +28,10 @@ export function combinedProviderAccounting(value,budget,prior=[],success=false){
 }
 
 export function operatorCost(budget,result,accounting){
- if(!accounting)return (budget.logicalProviderAttemptLimit||1)===1?reconciledCost(budget,result?.usage):null;
+ if(!accounting)return (budget.logicalProviderAttemptLimit||1)===1?reconciledCost(budget,result?.usage,result?.model||null):null;
  let cost=0;
  for(const a of accounting.attempts){
-  const known=reconciledCost(budget,a.usage);
+  const known=reconciledCost(budget,a.usage,a.model);
   cost+=known===null?(budget.perAttemptReserveMicros||budget.reserveMicros):known;
  }
  return Number.isSafeInteger(cost)&&cost<=budget.reserveMicros?cost:null;
@@ -50,12 +50,15 @@ export function continuationDisposition(call,failure,continued=false,{noOutput=f
  const lastOutcome=failure?.providerAccounting?.attempts?.at?.(-1)?.outcome;
  const rejectedAfterSuccess=['proposal','original_evidence','reading_evidence'].includes(failure?.stage)&&lastOutcome==='OK';
  if(lastOutcome==='OK'&&!rejectedAfterSuccess)return deny('provider_failure_not_retryable');
- let accounting;try{accounting=validatedProviderAccounting(failure?.providerAccounting,{maxProviderAttempts:limit,model:policy.model,success:rejectedAfterSuccess});}catch{return deny('provider_completion_unconfirmed');}
+ let accounting;try{accounting=validatedProviderAccounting(failure?.providerAccounting,{maxProviderAttempts:limit,model:policy.model,primaryModel:policy.primaryModel||null,success:rejectedAfterSuccess});}catch{return deny('provider_completion_unconfirmed');}
+ // A failed primary (Claude) attempt that reached the provider counts like a retryable free-pool failure for recovery purposes.
+ const retryable=a=>['FETCH_ERROR','TIMEOUT','UNAVAILABLE','500','502','503','504'].includes(a.outcome)||(!!policy.primaryModel&&a.model===policy.primaryModel&&/^(CANCELLED|CLAUDE_(TIMEOUT|NETWORK_ERROR|STREAM_INCOMPLETE|HTTP_(408|429|5[0-9][0-9])))$/.test(a.outcome));
  if(!accounting.attempts.length||accounting.attempts.some(a=>!a.brokerCompleted))return deny('provider_completion_unconfirmed');
  // noOutput: every attempt ended before any output (gateway timeout/unavailable); one explicit learner-initiated retry re-dispatches the same saved turn.
  if(noOutput){if(accounting.attempts.some(a=>a.outputStarted))return deny('partial_output_present');}
  else if(accounting.attempts.at(-1).outputStarted!==true)return deny('partial_provider_mismatch');
- if(!rejectedAfterSuccess&&accounting.attempts.some(a=>!['FETCH_ERROR','TIMEOUT','UNAVAILABLE','500','502','503','504'].includes(a.outcome)))return deny('provider_failure_not_retryable');
+ if(!rejectedAfterSuccess&&accounting.attempts.some(a=>!retryable(a)))return deny('provider_failure_not_retryable');
+ if(rejectedAfterSuccess&&accounting.attempts.slice(0,-1).some(a=>!retryable(a)))return deny('provider_failure_not_retryable');
  const remaining=limit-accounting.providerAttemptCount;
  if(remaining<1)return deny('provider_attempt_limit');
  return {allowed:true,code:noOutput?'explicit_retry_available':rejectedAfterSuccess?'explicit_regeneration_available':'explicit_continuation_available',requiresUserAction:true,remainingProviderAttempts:remaining,providerAttemptsUsed:accounting.providerAttemptCount};

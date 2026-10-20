@@ -2,20 +2,34 @@
 export function dialogueBudget(env,at=Date.now()){
  let p;try{p=JSON.parse(env.YW_DIALOGUE_BUDGET_JSON);}catch{throw Error('budget_policy_required');}
  if(!p||!/^[-\w.]{1,80}$/.test(p.version)||!/^gemini-[-\w.]+$/.test(p.model)||p.currency!=='USD')throw Error('invalid_budget_policy');
+ // Policy: the same-model sequential policy (default, model = the free Gemini pool) or Claude first with that Gemini model as
+ // the fallback (owner direction 2026-10-20). The primary model carries its own prices; every cap below is money in micro-USD.
+ const policyName=p.policy===undefined?'yw-same-model-sequential-v1':p.policy;
+ if(!['yw-same-model-sequential-v1','yw-claude-primary-gemini-fallback-v1'].includes(policyName))throw Error('invalid_budget_policy');
+ const primaryModel=policyName==='yw-claude-primary-gemini-fallback-v1'?p.primaryModel:null;
+ if(primaryModel!==null){if(!/^claude-[-\w.]+$/.test(primaryModel||''))throw Error('invalid_budget_policy');for(const key of ['primaryInputMicrosPerMillion','primaryOutputMicrosPerMillion'])if(!Number.isSafeInteger(p[key])||p[key]<0||p[key]>1000000000000)throw Error('invalid_budget_policy');}
+ else if(p.primaryModel!==undefined||p.primaryInputMicrosPerMillion!==undefined||p.primaryOutputMicrosPerMillion!==undefined)throw Error('invalid_budget_policy');
  if(!Number.isFinite(at)||!Number.isFinite(Date.parse(p.validUntil))||at>=Date.parse(p.validUntil))throw Error('budget_price_expired');
  for(const key of ['globalDailyMicros','userDailyMicros','lessonLifetimeMicros','reserveMicros','inputMicrosPerMillion','outputMicrosPerMillion']){
   if(!Number.isSafeInteger(p[key])||p[key]<(key.endsWith('MicrosPerMillion')?0:1)||p[key]>1000000000000)throw Error('invalid_budget_policy');
  }
  // UTF-8 bytes plus envelope reserve bound input tokens. Output includes
  // visible output and thinking; unknown observed usage retains the reservation.
- const maxInputTokens=100000,maxOutputTokens=2400;
+ // The prompt is bounded by the gateway stream admission (32,000 characters of contents) so a policy may declare a tighter
+ // input bound than the default 100k tokens; the reserve must cover the priciest model at that bound.
+ const maxInputTokens=p.maxInputTokens===undefined?100000:p.maxInputTokens,maxOutputTokens=2400;
+ if(!Number.isSafeInteger(maxInputTokens)||maxInputTokens<8000||maxInputTokens>100000)throw Error('invalid_budget_policy');
  if(p.globalDailyMicros>50000000)throw Error('global_fifty_dollar_cap');
- const minimum=Number((BigInt(maxInputTokens)*BigInt(p.inputMicrosPerMillion)+BigInt(maxOutputTokens)*BigInt(p.outputMicrosPerMillion)+999999n)/1000000n);
+ const bound=(inputPrice,outputPrice)=>Number((BigInt(maxInputTokens)*BigInt(inputPrice)+BigInt(maxOutputTokens)*BigInt(outputPrice)+999999n)/1000000n);
+ const minimum=Math.max(bound(p.inputMicrosPerMillion,p.outputMicrosPerMillion),primaryModel?bound(p.primaryInputMicrosPerMillion,p.primaryOutputMicrosPerMillion):0);
  if(p.reserveMicros<minimum||p.reserveMicros>Math.min(p.globalDailyMicros,p.userDailyMicros,p.lessonLifetimeMicros))throw Error('invalid_budget_reserve');
- return {...p,maxInputTokens,maxOutputTokens};
+ return {...p,policy:policyName,primaryModel,maxInputTokens,maxOutputTokens};
 }
-export function reconciledCost(policy,usage){
+export function reconciledCost(policy,usage,model=null){
  const input=usage?.promptTokenCount,total=usage?.totalTokenCount;
  if(!Number.isSafeInteger(input)||!Number.isSafeInteger(total)||input<0||total<input||input>policy.maxInputTokens||total-input>policy.maxOutputTokens)return null;
- return Number((BigInt(input)*BigInt(policy.inputMicrosPerMillion)+BigInt(total-input)*BigInt(policy.outputMicrosPerMillion)+999999n)/1000000n);
+ // Prices follow the model that produced the usage: the primary (Claude) attempt or the fallback (free Gemini) attempt.
+ const primary=!!policy.primaryModel&&model===policy.primaryModel;
+ const inputPrice=primary?policy.primaryInputMicrosPerMillion:policy.inputMicrosPerMillion,outputPrice=primary?policy.primaryOutputMicrosPerMillion:policy.outputMicrosPerMillion;
+ return Number((BigInt(input)*BigInt(inputPrice)+BigInt(total-input)*BigInt(outputPrice)+999999n)/1000000n);
 }
