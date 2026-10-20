@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1487,
-  "totalBytes": 204846772,
-  "aggregateSha256": "1418565bb19d1f2a434c86d72babb021ae6327999a437f301451848a6264f412",
+  "totalBytes": 204846965,
+  "aggregateSha256": "d3e8777817ca3c59295efbef6db4475eb032d345c529e4362679bcc0f62e827d",
   "files": [
     {
       "path": "_headers",
@@ -213,7 +213,7 @@
     {
       "path": "_worker.js/dialogue-policy.js",
       "bytes": 30530,
-      "sha256": "0a9ba3d715ee2dc8abbb02b95281a3173ed2d98ce6befa6fcdb0ecba668ea3bb"
+      "sha256": "85e9faa5b373cc8424dfaf9576915b2a6f0b5d023bc55037d381eb92513978d4"
     },
     {
       "path": "_worker.js/dialogue-public-curriculum.js",
@@ -252,8 +252,8 @@
     },
     {
       "path": "_worker.js/dialogue-source.js",
-      "bytes": 101364,
-      "sha256": "0a970b215d2d87442013ab02a1c6b6b1bb663d0d48ac0f1cba6088c45a052bf8"
+      "bytes": 101466,
+      "sha256": "21708b47471e8e813b71dc8d417478d821526a0305972b7d4c084acb5bef04c0"
     },
     {
       "path": "_worker.js/dialogue-stream.js",
@@ -287,8 +287,8 @@
     },
     {
       "path": "_worker.js/index.js",
-      "bytes": 154846,
-      "sha256": "d0fdcfc225ea6f58b14723007f78aa16a572c6a0f0758ba7c2e76523dbe8e505"
+      "bytes": 154937,
+      "sha256": "43b8eedf646a80880c99549520348c709278f99966a23d94cd9a7378f2a20177"
     },
     {
       "path": "_worker.js/learning-evaluation-events.js",
@@ -353,7 +353,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "b8ca382bfc8310fcbc5918062c1fa2ff283c78576011d6a88d3c44e67b0d6c24"
+      "sha256": "763b1e812c3ec4d024c9de75561f1b8b4042b74f1e84ef3f9e7e5ec1d4873cc8"
     },
     {
       "path": "app-content/latest-stable.json",
