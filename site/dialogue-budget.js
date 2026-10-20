@@ -23,7 +23,10 @@ export function dialogueBudget(env,at=Date.now()){
  const bound=(inputPrice,outputPrice)=>Number((BigInt(maxInputTokens)*BigInt(inputPrice)+BigInt(maxOutputTokens)*BigInt(outputPrice)+999999n)/1000000n);
  const minimum=Math.max(bound(p.inputMicrosPerMillion,p.outputMicrosPerMillion),primaryModel?bound(p.primaryInputMicrosPerMillion,p.primaryOutputMicrosPerMillion):0);
  if(p.reserveMicros<minimum||p.reserveMicros>Math.min(p.globalDailyMicros,p.userDailyMicros,p.lessonLifetimeMicros))throw Error('invalid_budget_reserve');
- return {...p,policy:policyName,primaryModel,maxInputTokens,maxOutputTokens};
+ // Per-attempt reserves: the declared reserve covers the priciest (primary) attempt; a fallback attempt reserves its own price bound
+ // (0 for the free Gemini pool), so a call's reservation is what its attempts can actually cost.
+ const fallbackReserveMicros=primaryModel?bound(p.inputMicrosPerMillion,p.outputMicrosPerMillion):p.reserveMicros;
+ return {...p,policy:policyName,primaryModel,maxInputTokens,maxOutputTokens,fallbackReserveMicros};
 }
 export function reconciledCost(policy,usage,model=null){
  const input=usage?.promptTokenCount,total=usage?.totalTokenCount;

@@ -8,9 +8,10 @@ import {MODE_OPERATION,modeOperationCondition} from './dialogue-mode-admission.j
 // never uses this wrapper. One logical learner turn reserves all three slots.
 export function requestDialogueBudget(env,student,lessonId){
  const policy=dialogueBudget(env),limit=env.YW_DIALOGUE_PROVIDER_ATTEMPTS==='3'?3:1;
- const reserveMicros=policy.reserveMicros*limit;
+ // One primary attempt at the declared reserve plus (limit-1) fallback attempts at the fallback reserve (0 for the free pool).
+ const reserveMicros=policy.reserveMicros+(policy.fallbackReserveMicros??policy.reserveMicros)*(limit-1);
  if(reserveMicros>Math.min(policy.globalDailyMicros,policy.userDailyMicros,policy.lessonLifetimeMicros))throw Error('retry_reserve_exceeds_budget');
- const budget={...policy,perAttemptReserveMicros:policy.reserveMicros,providerAttemptLimit:limit,logicalProviderAttemptLimit:limit,reserveMicros};
+ const budget={...policy,perAttemptReserveMicros:policy.reserveMicros,fallbackReserveMicros:policy.fallbackReserveMicros??policy.reserveMicros,providerAttemptLimit:limit,logicalProviderAttemptLimit:limit,reserveMicros};
  // The price policy cannot mint operation admission, even in server config.
  delete budget.isolatedAdmission;
  const admission=isolatedDialogueAdmission(env,student,lessonId,budget);
@@ -32,7 +33,9 @@ export function operatorCost(budget,result,accounting){
  let cost=0;
  for(const a of accounting.attempts){
   const known=reconciledCost(budget,a.usage,a.model);
-  cost+=known===null?(budget.perAttemptReserveMicros||budget.reserveMicros):known;
+  // Unknown usage retains the attempt's own reserve: the primary (or single-model) reserve, or the fallback reserve for a fallback attempt.
+  const retained=budget.primaryModel&&a.model!==budget.primaryModel?(budget.fallbackReserveMicros??budget.perAttemptReserveMicros):(budget.perAttemptReserveMicros||budget.reserveMicros);
+  cost+=known===null?retained:known;
  }
  return Number.isSafeInteger(cost)&&cost<=budget.reserveMicros?cost:null;
 }

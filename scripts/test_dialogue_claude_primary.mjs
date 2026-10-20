@@ -33,10 +33,15 @@ test('cost follows the model that produced the usage: Claude priced, free Gemini
  const env={YW_DIALOGUE_BUDGET_JSON:JSON.stringify(policy),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'};
  const budget=requestDialogueBudget(env,{id:1},'lesson-1717-p2');
  assert.equal(budget.primaryModel,CLAUDE);assert.equal(budget.providerAttemptLimit,3);
+ // The call reserves one Claude attempt plus two free fallback attempts: 88,000 + 0 + 0.
+ assert.equal(budget.reserveMicros,88000);assert.equal(budget.fallbackReserveMicros,0);
+ const legacyBudget=requestDialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify(legacy),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},{id:1},'lesson-1717-p2');assert.equal(legacyBudget.reserveMicros,252000);
  assert.equal(operatorCost(budget,{model:CLAUDE,usage:claudeUsage},accounting([attempt(1,CLAUDE,'OK')])),31000);
  // A failed Claude attempt without authoritative usage keeps its per-attempt reservation (conservative, as for any unknown usage); the free Gemini answer adds 0.
  assert.equal(operatorCost(budget,{model:GEMINI,usage:geminiUsage},accounting([attempt(1,CLAUDE,'CLAUDE_HTTP_529'),attempt(2,GEMINI,'OK')])),budget.perAttemptReserveMicros);
  assert.equal(budget.perAttemptReserveMicros,88000);
+ // A failed free fallback attempt retains its own (zero) reserve; the Claude answer is priced from its usage.
+ assert.equal(operatorCost(budget,{model:GEMINI,usage:geminiUsage},accounting([attempt(1,CLAUDE,'CLAUDE_TIMEOUT'),attempt(2,GEMINI,'TIMEOUT',{outputStarted:false}),attempt(3,GEMINI,'OK')])),88000);
  assert.equal(operatorCost(budget,{model:GEMINI,usage:geminiUsage},accounting([attempt(1,CLAUDE,'CLAUDE_TRUNCATED',{usage:claudeUsage}),attempt(2,GEMINI,'OK')])),31000);
 });
 
