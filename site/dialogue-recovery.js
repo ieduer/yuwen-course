@@ -37,7 +37,7 @@ export function operatorCost(budget,result,accounting){
  return Number.isSafeInteger(cost)&&cost<=budget.reserveMicros?cost:null;
 }
 
-export function continuationDisposition(call,failure,continued=false){
+export function continuationDisposition(call,failure,continued=false,{noOutput=false}={}){
  const deny=code=>({allowed:false,code,requiresUserAction:true});
  if(!call||call.state!=='review')return deny('response_not_terminal');
  if(call.source_request_json)return deny('original_source_readback_required');
@@ -52,11 +52,13 @@ export function continuationDisposition(call,failure,continued=false){
  if(lastOutcome==='OK'&&!rejectedAfterSuccess)return deny('provider_failure_not_retryable');
  let accounting;try{accounting=validatedProviderAccounting(failure?.providerAccounting,{maxProviderAttempts:limit,model:policy.model,success:rejectedAfterSuccess});}catch{return deny('provider_completion_unconfirmed');}
  if(!accounting.attempts.length||accounting.attempts.some(a=>!a.brokerCompleted))return deny('provider_completion_unconfirmed');
- if(accounting.attempts.at(-1).outputStarted!==true)return deny('partial_provider_mismatch');
+ // noOutput: every attempt ended before any output (gateway timeout/unavailable); one explicit learner-initiated retry re-dispatches the same saved turn.
+ if(noOutput){if(accounting.attempts.some(a=>a.outputStarted))return deny('partial_output_present');}
+ else if(accounting.attempts.at(-1).outputStarted!==true)return deny('partial_provider_mismatch');
  if(!rejectedAfterSuccess&&accounting.attempts.some(a=>!['FETCH_ERROR','TIMEOUT','UNAVAILABLE','500','502','503','504'].includes(a.outcome)))return deny('provider_failure_not_retryable');
  const remaining=limit-accounting.providerAttemptCount;
  if(remaining<1)return deny('provider_attempt_limit');
- return {allowed:true,code:rejectedAfterSuccess?'explicit_regeneration_available':'explicit_continuation_available',requiresUserAction:true,remainingProviderAttempts:remaining,providerAttemptsUsed:accounting.providerAttemptCount};
+ return {allowed:true,code:noOutput?'explicit_retry_available':rejectedAfterSuccess?'explicit_regeneration_available':'explicit_continuation_available',requiresUserAction:true,remainingProviderAttempts:remaining,providerAttemptsUsed:accounting.providerAttemptCount};
 }
 
 export async function budgetDenial(db,session,student,budget,limits,day){

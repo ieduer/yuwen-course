@@ -79,3 +79,7 @@
 #progress b{font-weight:500;color:var(--ink)}#progress small{font-size:11px}
 #sessions-list{padding-left:1.2em;margin:8px 0 0}#sessions-list li{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin:8px 0}#sessions-list small{color:var(--muted)}#sessions-list button{min-height:32px;padding:4px 10px}
 @media(max-width:899px){#compose{position:static;padding:0}.composer-box{padding:4px 6px}}
+
+.reply-retry{margin:.4rem 0 .8rem;display:flex;flex-direction:column;gap:.4rem;align-items:flex-start}
+.reply-retry small{color:var(--muted,#555)}
+.reply-retry button{position:static;padding:.4rem .8rem}

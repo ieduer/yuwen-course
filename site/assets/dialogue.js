@@ -47,6 +47,21 @@ function renderPartial(partial){
   n.append(button);
  }
 }
+// A saved turn whose provider attempts all ended before any output: one explicit learner action re-dispatches it (no new student turn, no silent retry).
+function renderReplyRetry(data){
+ document.getElementById('reply-retry')?.remove();
+ const retry=data?.replyRetry;if(!retry||!retry.allowed||data.partial||data.pending)return;
+ const box=node('div',undefined,'reply-retry');box.id='reply-retry';
+ box.append(node('small','上一次未取得回應（AI 服務逾時）；你的回答已保存。可再試一次取得回應，不會重複保存或重複評閱。'));
+ const button=node('button','再試一次取得回應');button.type='button';
+ button.onclick=async()=>{
+  if(snapshot?.pending||snapshot?.replyRetry?.turnId!==retry.turnId||!snapshot.replyRetry.allowed)return;
+  button.disabled=true;
+  if(!continuationRequest||continuationRequest.turnId!==retry.turnId||continuationRequest.partialDigest!=='')continuationRequest={action:'continue',mutationId:crypto.randomUUID(),turnId:retry.turnId,partialDigest:'',revision:snapshot.revision};
+  await sendTurn(continuationRequest,null);
+ };
+ box.append(button);$('turns').append(box);
+}
 async function revealTurn(turnId){
  for(let i=0;i<=MAX_HISTORY_PAGES;i++){
   const target=document.getElementById('turn-'+turnId);if(target){if(target.closest('#turn-review-list')){$('materials').showModal();$('turn-review-list').closest('details').open=true;target.open=true;}else{$('materials').close();view('conversation');}target.scrollIntoView({block:'center'});return;}
@@ -555,7 +570,7 @@ function update(data){
   if($('answer').value===pendingDraft){$('answer').value='';selected=null;composerDraft=null;$('quote').hidden=true;persistComposer();}
   if(pending.action==='original')originalDraft=null;pending=null;pendingDraft=null;persistComposer();
  }
- snapshot=data;void refreshReadingMarks();$('old-history-load').disabled=false;renderPartial(data.partial);if(data.report)renderEvidence(data.report);if(data.legacy?.completion)$('evidence-summary').append(node('p','原課已完成（原有自報紀錄，非新增成績）；新增對話另存。'));if(data.legacy?.firstRead?.length)$('evidence-summary').append(node('p','原有初讀及未完成的標記仍保留，可由「原有課程」繼續；原文版本不同時不自動套用舊位置。'));renderTurns(data.turns||[]);$('older').hidden=!data.older;$('status').textContent=data.pending?'你的回答已保存，正在等候回應。':data.saved===false?'':data.statusNotice||'已讀取伺服器保存紀錄。';$('answer').disabled=false;$('send').disabled=!!data.pending;const next=data.state?.next;$('next').replaceChildren(node('span',data.state?.legacyCompletion?'原課的完成紀錄已保留。你可以自願繼續細讀，不必重做；新對話不改寫原成績。':next?`接下來：${next.domain==='vocabulary'?next.label+'。回到原句，用自己的話解釋語境與判斷依據；可以先查閱註釋，獨立掌握需另作新題。':next.rule}`:data.state?.completion==='evidence_ready_for_review'?'證據已齊，等待教師覆核。':data.state?.objectives.some(o=>o.status==='review')?'有證據待覆核，請保留原話與來源；不用為此反覆作答。':'原有完成紀錄待核對，無需重做已完成內容。'));
+ snapshot=data;void refreshReadingMarks();$('old-history-load').disabled=false;renderPartial(data.partial);renderReplyRetry(data);if(data.report)renderEvidence(data.report);if(data.legacy?.completion)$('evidence-summary').append(node('p','原課已完成（原有自報紀錄，非新增成績）；新增對話另存。'));if(data.legacy?.firstRead?.length)$('evidence-summary').append(node('p','原有初讀及未完成的標記仍保留，可由「原有課程」繼續；原文版本不同時不自動套用舊位置。'));renderTurns(data.turns||[]);$('older').hidden=!data.older;$('status').textContent=data.pending?'你的回答已保存，正在等候回應。':data.saved===false?'':data.statusNotice||'已讀取伺服器保存紀錄。';$('answer').disabled=false;$('send').disabled=!!data.pending;const next=data.state?.next;$('next').replaceChildren(node('span',data.state?.legacyCompletion?'原課的完成紀錄已保留。你可以自願繼續細讀，不必重做；新對話不改寫原成績。':next?`接下來：${next.domain==='vocabulary'?next.label+'。回到原句，用自己的話解釋語境與判斷依據；可以先查閱註釋，獨立掌握需另作新題。':next.rule}`:data.state?.completion==='evidence_ready_for_review'?'證據已齊，等待教師覆核。':data.state?.objectives.some(o=>o.status==='review')?'有證據待覆核，請保留原話與來源；不用為此反覆作答。':'原有完成紀錄待核對，無需重做已完成內容。'));
  if(data.draft&&(!data.draft.formal||data.draft.learningRequest)&&!hasComposerDraft()&&!pending){
   const draft=data.draft,request=draft.learningRequest||{content:draft.content,questionId:draft.questionId};
   $('answer').value=request.content;selected=null;$('quote').hidden=true;

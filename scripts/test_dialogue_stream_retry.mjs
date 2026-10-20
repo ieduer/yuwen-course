@@ -140,3 +140,35 @@ test('a finish-rejected reply is retained as received-not-validated and an expli
   const usageAccounting=call.usage_json?JSON.parse(call.usage_json):null;if(usageAccounting?.providerAccounting)assert.deepEqual(usageAccounting.providerAccounting.attempts.map(a=>a.outcome),['OK_REJECTED','OK']);
  }finally{f.close();}
 });
+
+test('a saved turn whose provider attempts ended before any output offers one explicit retry that re-dispatches it without a new turn',async()=>{
+ const f=fixture();try{
+  const noOutput=(prior=[])=>async()=>{const error=Error('gateway_unavailable');error.gatewayFailure={providerAccounting:accounting([...prior,attempt(prior.length+1,'TIMEOUT'),attempt(prior.length+2,'TIMEOUT')])};throw error;};
+  const first=await firstFailure(f,noOutput());
+  assert.equal(first.partial,null);assert.equal(first.turns.length,1);assert.equal(first.turns[0].status,'needs_review');
+  assert.equal(first.replyRetry?.allowed,true);assert.equal(first.replyRetry.code,'explicit_retry_available');assert.equal(first.replyRetry.remainingProviderAttempts,1);assert.equal(first.replyRetry.stage,'provider_request');
+  const policy={state:'review',source_request_json:null,budget_policy_json:JSON.stringify({...f.env.YW_DIALOGUE_BUDGET_JSON?JSON.parse(f.env.YW_DIALOGUE_BUDGET_JSON):{},logicalProviderAttemptLimit:3})};
+  assert.equal(continuationDisposition(policy,{stage:'provider_request',providerAccounting:accounting([attempt(1,'TIMEOUT',{outputStarted:true})])},false,{noOutput:true}).code,'partial_output_present');
+  let prompt=null,limit=null;const fresh='先說說你在意的那一句吧。';
+  const retryModel=async(_e,p,_id,_reply,budget)=>{prompt=p;limit=budget.providerAttemptLimit;return modelSuccess(fresh,{...accounting([attempt(1,'OK',{outputStarted:true,usage})]),maxProviderAttempts:1});};
+  const bad=await(await handleDialogue(req({action:'continue',turnId:first.turns[0].id,partialDigest:'0'.repeat(64),revision:first.revision,mutationId:'stream-retry-noout-0000'}),f.env,student,null,{callModel:retryModel})).json();
+  assert.equal(bad.code,'continuation_readback_required');assert.equal(prompt,null);
+  const after=await(await handleDialogue(req({action:'continue',turnId:first.turns[0].id,partialDigest:'',revision:first.revision,mutationId:'stream-retry-noout-0001'}),f.env,student,null,{callModel:retryModel})).json();
+  assert.equal(limit,1);assert.doesNotMatch(prompt,/續答|重新生成/);
+  assert.deepEqual(after.turns.map(t=>t.role),['student','teacher']);assert.equal(after.turns[1].content,fresh);assert.equal(after.replyRetry,null);assert.equal(after.partial,null);
+  const started=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='continuation_started'").get().details_json);assert.equal(started.retry,true);assert.equal(started.regeneration,false);
+  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_turns WHERE role='student'").get().n,1);
+  const again=await(await handleDialogue(req({action:'continue',turnId:first.turns[0].id,partialDigest:'',revision:after.revision,mutationId:'stream-retry-noout-0002'}),f.env,student,null,{callModel:retryModel})).json();
+  assert.notEqual(again.code,undefined);assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_turns WHERE role='teacher'").get().n,1);
+ }finally{f.close();}
+});
+
+test('a no-output failure on the last reserved attempt offers no retry',async()=>{
+ const f=fixture();try{
+  const exhausted=async()=>{const error=Error('gateway_unavailable');error.gatewayFailure={providerAccounting:accounting([attempt(1,'TIMEOUT'),attempt(2,'TIMEOUT'),attempt(3,'TIMEOUT')])};throw error;};
+  const first=await firstFailure(f,exhausted);
+  assert.equal(first.replyRetry?.allowed,false);assert.equal(first.replyRetry.code,'provider_attempt_limit');
+  const r=await(await handleDialogue(req({action:'continue',turnId:first.turns[0].id,partialDigest:'',revision:first.revision,mutationId:'stream-retry-noout-0003'}),f.env,student,null,{callModel:()=>{throw Error('must not call');}})).json();
+  assert.equal(r.code,'provider_attempt_limit');
+ }finally{f.close();}
+});
