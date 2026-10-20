@@ -91,6 +91,51 @@ function sessionCursor(url,maxLimit){
  if(!Number.isSafeInteger(limit)||limit<1||limit>maxLimit)return null;
  return {before:updatedAt===null?null:{updatedAt,id},limit};
 }
+// Homework execution contract (2026-10-20): an execution id names one attempt of a lesson under the currently published
+// curriculum version. The binding is an append-only `execution_started` event on the bound session; valid results from
+// earlier sessions of the same student and lesson carry forward by projection only (no rows are copied or rewritten).
+const EXECUTION_ID=/^[A-Za-z0-9][A-Za-z0-9:_.-]{7,119}$/;
+const CARRIED_STATUSES=['preserved','demonstrated','historical_review'];
+const missingObjectives=state=>state.objectives.filter(o=>!CARRIED_STATUSES.includes(o.status)&&o.requiredForCompletion!==false).map(o=>o.id);
+const objectiveSignature=o=>JSON.stringify({id:o.id,domain:o.domain,criteria:o.criteria||[],rule:o.rule||'',legacy:o.legacy||null});
+// Demonstrated dialogue objectives of earlier sessions carry forward only when the objective definition is identical in the
+// new curriculum. Formal (legacy) items and reading confirmations already carry through historicalEvidence (source records).
+async function computeCarryForward(db,studentId,lessonId,curriculum,excludeSessionId=null){
+ const prior=await all(db.prepare('SELECT id,curriculum_version,curriculum_json FROM dialogue_sessions WHERE student_id=? AND lesson_id=? AND id<>? ORDER BY created_at,id').bind(studentId,lessonId,excludeSessionId??''));
+ if(!prior.length)return {carriedForward:[],priorSessions:[]};
+ const wanted=new Map(curriculum.objectives.filter(o=>o.domain!=='legacy').map(o=>[o.id,objectiveSignature(o)]));
+ const carried=new Map();
+ for(const p of prior){
+  let old;try{old=JSON.parse(p.curriculum_json);}catch{continue;}
+  const same=new Set((old.objectives||[]).filter(o=>wanted.get(o.id)===objectiveSignature(o)).map(o=>o.id));
+  if(!same.size)continue;
+  const rows=await all(db.prepare("SELECT objective_id,created_at FROM dialogue_assessments WHERE session_id=? AND outcome='demonstrated' ORDER BY created_at,id").bind(p.id));
+  for(const a of rows)if(same.has(a.objective_id))carried.set(a.objective_id,{objectiveId:a.objective_id,fromSession:p.id,fromCurriculumVersion:p.curriculum_version,assessedAt:a.created_at});
+ }
+ return {carriedForward:[...carried.values()],priorSessions:prior.map(p=>({sessionId:p.id,curriculumVersion:p.curriculum_version}))};
+}
+async function executionState(db,session){
+ const row=await db.prepare("SELECT details_json,created_at FROM dialogue_events WHERE session_id=? AND event_type='execution_started' ORDER BY created_at DESC,id DESC LIMIT 1").bind(session.id).first();
+ return row?{...JSON.parse(row.details_json),startedAt:row.created_at}:null;
+}
+async function ensureExecution(db,session,published,executionId){
+ const existing=await db.prepare("SELECT details_json FROM dialogue_events WHERE session_id=? AND event_type='execution_started' AND json_extract(details_json,'$.executionId')=? LIMIT 1").bind(session.id,executionId).first();
+ if(existing)return JSON.parse(existing.details_json);
+ const details={executionId,requiredCurriculumVersion:published.curriculumVersion,sessionCurriculumVersion:session.curriculum_version,...await computeCarryForward(db,session.student_id,session.lesson_id,published,session.id)};
+ await db.prepare("INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,NULL,'execution_started',?,?)").bind(`execution:${session.id}:${executionId}`,session.id,JSON.stringify(details),now()).run();
+ return details;
+}
+async function executionPreview(db,studentId,published,executionId,state){
+ const plan=await computeCarryForward(db,studentId,published.lessonId,published,null);
+ const carriedIds=new Set(plan.carriedForward.map(c=>c.objectiveId));
+ return {executionId,requiredCurriculumVersion:published.curriculumVersion,satisfied:false,created:false,...plan,missing:state.objectives.filter(o=>!CARRIED_STATUSES.includes(o.status)&&!carriedIds.has(o.id)&&o.requiredForCompletion!==false).map(o=>o.id)};
+}
+async function carriedAssessments(db,session,execution){
+ const wanted=new Map((execution.carriedForward||[]).map(c=>[c.objectiveId,c]));
+ if(!wanted.size)return [];
+ const rows=await all(db.prepare("SELECT a.*,s.curriculum_version AS from_version FROM dialogue_assessments a JOIN dialogue_sessions s ON s.id=a.session_id WHERE s.student_id=? AND s.lesson_id=? AND a.session_id<>? AND a.outcome='demonstrated' ORDER BY a.created_at,a.id").bind(session.student_id,session.lesson_id,session.id));
+ return rows.filter(a=>wanted.get(a.objective_id)?.fromSession===a.session_id).map(a=>({objectiveId:a.objective_id,outcome:a.outcome,evidence:JSON.parse(a.evidence_json),rationale:a.rationale,ruleVersion:a.rule_version,createdAt:a.created_at,carriedFrom:{sessionId:a.session_id,curriculumVersion:a.from_version,turnId:a.turn_id}}));
+}
 async function exportSession(db,s){
  // Every turn is exported: the transcript is read in bounded chunks until exhausted (never cut). A session beyond the
  // policy bound (lessonLifetime x 2 rows) is still complete and is flagged for review instead of being truncated.
@@ -104,10 +149,11 @@ async function exportSession(db,s){
   return {id:t.id,sequence:t.sequence,role:t.role,speaker:t.role==='student'?'student':'author-simulation',content:t.content,status:t.status,confirmed,createdAt:t.created_at,model:t.model,modelVersion:t.model_version,policyVersion:t.policy_version,questionId:t.question_id,replyTo:t.reply_to,formal:t.source_request_json?JSON.parse(t.source_request_json):null,...(streamed!==null?{partialReply:{content:streamed,label:'incomplete_unconfirmed_stream'}}:{})};});
  const {submissions}=await learningRecords(db,s),assessments=await assessmentRows(db,s.id);
  const drafts=await all(db.prepare('SELECT mutation_id,revision,content,question_id,created_at FROM dialogue_drafts WHERE session_id=? AND submitted_turn_id IS NULL ORDER BY created_at,id').bind(s.id));
+ const executions=(await all(db.prepare("SELECT details_json,created_at FROM dialogue_events WHERE session_id=? AND event_type='execution_started' ORDER BY created_at,id").bind(s.id))).map(e=>({...JSON.parse(e.details_json),startedAt:e.created_at}));
  return {sessionId:s.id,lessonId:s.lesson_id,curriculumVersion:s.curriculum_version,policyVersion:s.policy_version,revision:s.revision,createdAt:s.created_at,updatedAt:s.updated_at,inflight:!!s.inflight,turnCount:rows.length,complete:true,...(overBound?{reviewRequired:'transcript_over_policy_bound'}:{}),
   turns,submissions:submissions.map(x=>({turnId:x.turnId,sequence:x.sequence,objectiveId:x.objectiveId,interaction:x.interaction,label:x.label,input:x.input,status:x.status,assessment:x.assessment??null})),
   assessments:assessments.map(a=>({objectiveId:a.objectiveId,outcome:a.outcome,ruleVersion:a.ruleVersion,createdAt:a.createdAt})),
-  unsentDrafts:drafts.map(d=>({mutationId:d.mutation_id,revision:d.revision,content:d.content,questionId:d.question_id,createdAt:d.created_at,label:'unsent_draft'}))};
+  unsentDrafts:drafts.map(d=>({mutationId:d.mutation_id,revision:d.revision,content:d.content,questionId:d.question_id,createdAt:d.created_at,label:'unsent_draft'})),executions};
 }
 async function transcript(db,session){
  const rows=await all(db.prepare('SELECT id,sequence,role,content,question_id AS questionId,status,created_at AS createdAt FROM dialogue_turns WHERE session_id=? ORDER BY sequence LIMIT ?').bind(session.id,LIMITS.lessonLifetime*2+1));
@@ -157,11 +203,12 @@ async function plannedQuestion(db,session,curriculum,state){
 async function snapshot(db,session,curriculum,before){
  const [page,assessments,q,draft]=await Promise.all([history(db,session,before),assessmentRows(db,session.id),db.prepare("SELECT instance_json FROM dialogue_questions WHERE session_id=? AND state='issued'").bind(session.id).first(),db.prepare('SELECT mutation_id,revision,content,question_id,created_at,source_request_json FROM dialogue_drafts WHERE session_id=? AND submitted_turn_id IS NULL ORDER BY created_at DESC LIMIT 1').bind(session.id).first()]);
  const legacy=await historicalEvidence(db,session.student_id,curriculum),preserved=legacy.preserved;
+ const execution=await executionState(db,session),carried=execution?await carriedAssessments(db,session,execution):[],merged=carried.length?[...carried,...assessments]:assessments;
  let question=q?JSON.parse(q.instance_json):null;
  // Answer criteria are server-only and never included in the student question.
  let publicQuestion=question?{id:question.id,objectiveId:question.objectiveId,attempt:question.attempt,question:question.question,source:question.source,createdAt:question.createdAt}:null;
  const conclusion=await savedConclusion(db,session.id);
- const state=projectState(curriculum,assessments,preserved,legacy.completion,await readingGate(db,session.student_id,curriculum,legacy),conclusion),completeTurns=await transcript(db,session);
+ const state=projectState(curriculum,merged,preserved,legacy.completion,await readingGate(db,session.student_id,curriculum,legacy),conclusion),completeTurns=await transcript(db,session);
  if(!question){question=await plannedQuestion(db,session,curriculum,state);if(question)publicQuestion={id:question.id,objectiveId:question.objectiveId,attempt:question.attempt,question:question.question,source:question.source,createdAt:question.createdAt};}
  const partialRows=await all(db.prepare(`SELECT c.content,c.sequence,c.created_at,t.id AS turn_id,t.status FROM dialogue_stream_chunks c JOIN dialogue_turns t ON t.id=c.turn_id WHERE t.session_id=? AND c.turn_id=(SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence DESC LIMIT 1) AND NOT EXISTS(SELECT 1 FROM dialogue_turns r WHERE r.reply_to=t.id AND r.role='teacher') ORDER BY c.sequence LIMIT 128`).bind(session.id,session.id));
  const inflight=session.inflight?await db.prepare('SELECT state,COALESCE(finished_at,created_at) AS updated_at FROM dialogue_calls WHERE turn_id=?').bind(session.inflight).first():null;
@@ -191,7 +238,7 @@ async function snapshot(db,session,curriculum,before){
  const records=await learningRecords(db,session),sourceDraft=await proposedSourceDraft(db,session,legacy,records.submissions);
  const statusEvent=await db.prepare("SELECT details_json FROM dialogue_events WHERE session_id=? AND event_type='source_status' AND turn_id=(SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence DESC LIMIT 1) ORDER BY created_at DESC LIMIT 1").bind(session.id,session.id).first();
  const statusNotice=statusEvent?JSON.parse(statusEvent.details_json).message:null;
- return {statusNotice,learningTurn:learningTurn(curriculum,state,{revision:session.revision,...records,sourceDraft,question:publicQuestion,mastery:legacy.mastery}),sourceSubmissions:records.submissions,originalTask:originalTask(curriculum,state,legacy.mastery),sourceDraft,partial,replyRetry,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending,curriculumVersion:session.curriculum_version,...page,state,assessments,report:evidenceReport(curriculum,state,assessments,completeTurns,conclusion),question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at,formal:draft.source_request_json?JSON.parse(draft.source_request_json):null,learningRequest:draft.source_request_json?JSON.parse(draft.source_request_json).learningRequest||null:null}:null,legacy,readingGate:state.readingGate};
+ return {statusNotice,learningTurn:learningTurn(curriculum,state,{revision:session.revision,...records,sourceDraft,question:publicQuestion,mastery:legacy.mastery}),sourceSubmissions:records.submissions,originalTask:originalTask(curriculum,state,legacy.mastery),sourceDraft,partial,replyRetry,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending,curriculumVersion:session.curriculum_version,...page,state,assessments:merged,report:evidenceReport(curriculum,state,merged,completeTurns,conclusion),execution:execution?{...execution,satisfied:session.curriculum_version===execution.requiredCurriculumVersion,missing:missingObjectives(state)}:null,question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at,formal:draft.source_request_json?JSON.parse(draft.source_request_json):null,learningRequest:draft.source_request_json?JSON.parse(draft.source_request_json).learningRequest||null:null}:null,legacy,readingGate:state.readingGate};
 }
 export async function handleDialogue(request,env,student,ctx,{callModel=callDialogueModel,readSharedHistory=null,firstReadAction=null,formalAction=null,originalAction=null}={}){
  if(!student)return json({error:'請先登入 My。',code:'authentication_required'},401);
@@ -203,6 +250,12 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
  if(request.method==='POST')await reconcileAbandonedCalls(db);
  const publishedCurriculum=curriculum;
  let session=await db.prepare('SELECT * FROM dialogue_sessions WHERE student_id=? AND lesson_id=? ORDER BY created_at DESC,id DESC LIMIT 1').bind(student.id,lessonId).first();
+ // Explicit new-curriculum attempt selection (homework execution contract): `execution=<id>` binds the request to the
+ // session under the currently published curriculum version. An older saved session is never modified; its valid results
+ // carry forward by projection (ensureExecution). Without `execution` the latest session resumes exactly as before.
+ const executionId=url.searchParams.get('execution');
+ if(executionId!==null&&!EXECUTION_ID.test(executionId))return json({code:'invalid_execution'},400);
+ if(executionId!==null)session=await db.prepare('SELECT * FROM dialogue_sessions WHERE student_id=? AND lesson_id=? AND curriculum_version=?').bind(student.id,lessonId,publishedCurriculum.curriculumVersion).first();
  // A new source version never resets an existing learner's objectives or history.
  // The exact per-session contract remains interpretable even after static assets change.
  if(session){try{curriculum=JSON.parse(session.curriculum_json);if(curriculum.lessonId!==lessonId||curriculum.curriculumVersion!==session.curriculum_version)throw Error();}catch{return json({code:'stored_curriculum_requires_review'},503);}}
@@ -268,9 +321,10 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
    const rows=await all(db.prepare("SELECT id,details_json,created_at FROM dialogue_events WHERE session_id=? AND turn_id=? AND event_type='owner_correction_recorded' ORDER BY created_at,id LIMIT 8").bind(session.id,turnId));
    return json({ownerRef:await sha(`dialogue-owner:${student.id}`),corrections:rows.map(r=>({id:r.id,createdAt:r.created_at,...JSON.parse(r.details_json)}))});
   }
-  if(!session){const legacy=await historicalEvidence(db,student.id,curriculum),state=projectState(curriculum,[],legacy.preserved,legacy.completion,await readingGate(db,student.id,curriculum,legacy)),planned=await plannedQuestion(db,{id:'not-created',student_id:student.id,created_at:null},curriculum,state),question=planned?{id:planned.id,objectiveId:planned.objectiveId,attempt:planned.attempt,question:planned.question,source:planned.source,createdAt:null}:null;return json({learningTurn:learningTurn(curriculum,state,{question}),sourceSubmissions:[],ownerRef:await sha(`dialogue-owner:${student.id}`),revision:0,turns:[],question,state,legacy,readingGate:state.readingGate,report:evidenceReport(curriculum,state,[]),...(curriculum.calibrationEvidence?{resumeCurriculum:sanitizeDialogueCurriculum(curriculum)}:{}),saved:false});}
+  if(!session){const legacy=await historicalEvidence(db,student.id,curriculum),state=projectState(curriculum,[],legacy.preserved,legacy.completion,await readingGate(db,student.id,curriculum,legacy)),planned=await plannedQuestion(db,{id:'not-created',student_id:student.id,created_at:null},curriculum,state),question=planned?{id:planned.id,objectiveId:planned.objectiveId,attempt:planned.attempt,question:planned.question,source:planned.source,createdAt:null}:null;return json({learningTurn:learningTurn(curriculum,state,{question}),sourceSubmissions:[],ownerRef:await sha(`dialogue-owner:${student.id}`),revision:0,turns:[],question,state,legacy,readingGate:state.readingGate,report:evidenceReport(curriculum,state,[]),...(curriculum.calibrationEvidence?{resumeCurriculum:sanitizeDialogueCurriculum(curriculum)}:{}),saved:false,...(executionId!==null?{execution:await executionPreview(db,student.id,curriculum,executionId,state)}:{})});}
   const before=url.searchParams.has('beforeSeq')?{sequence:Number(url.searchParams.get('beforeSeq'))}:null;
   if(before && (!Number.isSafeInteger(before.sequence)||before.sequence<1))return json({code:'invalid_cursor'},400);
+  if(executionId!==null)await ensureExecution(db,session,publishedCurriculum,executionId);
   const result=await snapshot(db,session,curriculum,before);
   if(curriculum.calibrationEvidence||curriculum.sessionSourceProjection||curriculum.curriculumVersion!==publishedCurriculum.curriculumVersion)result.resumeCurriculum=sanitizeDialogueCurriculum(curriculum);
   if(url.searchParams.get('records')==='1'){
@@ -301,6 +355,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   const at=now();await db.prepare('INSERT OR IGNORE INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?)').bind(uuid(),student.id,lessonId,curriculum.curriculumVersion,JSON.stringify(curriculumBeforeCalibration),POLICY_VERSION,at,at).run();
   session=await db.prepare('SELECT * FROM dialogue_sessions WHERE student_id=? AND lesson_id=? AND curriculum_version=?').bind(student.id,lessonId,curriculum.curriculumVersion).first();
  }
+ if(executionId!==null)await ensureExecution(db,session,publishedCurriculum,executionId);
  if(body.action==='continue'){
   // An interrupted provider request retains the exact calibration disposition
   // recorded before its first dispatch. A newer supplement cannot alter it.

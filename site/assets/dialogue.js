@@ -6,6 +6,8 @@ import {readBrowserHistory} from './dialogue-history.js?v=4e50ee7bee866e26';
 import {openFirstReading} from './dialogue-first-read.js?v=04d04aafd8657321';
 import {mergeExportPages,exportFilename} from './dialogue-export.js?v=b297862a33e0679d';
 const $=id=>document.getElementById(id);
+// Homework execution contract: a deep link ?execution=<id> binds this page to that execution (server selects the session under the published curriculum).
+const EXECUTION=(()=>{try{const v=new URLSearchParams(location.search).get('execution')||'';return /^[A-Za-z0-9][A-Za-z0-9:_.-]{7,119}$/.test(v)?v:'';}catch{return '';}})();
 // Server permits 360 learner turns with one reply each; history pages contain 30 records.
 const MAX_TRANSCRIPT_RECORDS=720,MAX_HISTORY_PAGES=24,MAX_SESSION_PAGES=40,MAX_EXPORT_PAGES=400;
 let streamAbort=null;
@@ -20,7 +22,7 @@ const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefi
 const api=async(body,cursor,records=false,onEvent,correctionsFor,shared=false,firstReading=false,sessions=false,extra=null)=>{
  const gen=generation,expectedOwner=ownerRef;
  const current=()=>{if(gen!==generation)throw Object.assign(new Error('帳戶或篇目已切換，已忽略舊回應。'),{code:'stale_context'});};
- const q=new URLSearchParams({lessonId:curriculum.lessonId,...(cursor?{beforeSeq:cursor.sequence}:{}),...(records?{records:'1'}:{}),...(correctionsFor?{correctionsFor}:{}),...(shared?{sharedHistory:'1'}:{}),...(firstReading?{firstReadingState:'1'}:{}),...(sessions?{sessions:'1'}:{}),...(extra||{})});
+ const q=new URLSearchParams({lessonId:curriculum.lessonId,...(cursor?{beforeSeq:cursor.sequence}:{}),...(records?{records:'1'}:{}),...(correctionsFor?{correctionsFor}:{}),...(shared?{sharedHistory:'1'}:{}),...(firstReading?{firstReadingState:'1'}:{}),...(sessions?{sessions:'1'}:{}),...(EXECUTION?{execution:EXECUTION}:{}),...(extra||{})});
  const streamed=body&&(typeof body.content==='string'||body.action==='continue');
  if(streamed)streamAbort=new AbortController();
  const response=await fetch(`/api/dialogue/v1?${q}`,{credentials:'same-origin',cache:'no-store',...(streamed?{signal:streamAbort.signal}:body?.action==='first_read'?{signal:AbortSignal.timeout(12000)}:{}),...(body?{method:'POST',headers:{'content-type':'application/json',...(streamed?{accept:'text/event-stream'}:{})},body:JSON.stringify({...body,ownerRef})}:{})});
