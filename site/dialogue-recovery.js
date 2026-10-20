@@ -55,10 +55,14 @@ export function continuationDisposition(call,failure,continued=false,{noOutput=f
  if(lastOutcome==='OK'&&!rejectedAfterSuccess)return deny('provider_failure_not_retryable');
  let accounting;try{accounting=validatedProviderAccounting(failure?.providerAccounting,{maxProviderAttempts:limit,model:policy.model,primaryModel:policy.primaryModel||null,success:rejectedAfterSuccess});}catch{return deny('provider_completion_unconfirmed');}
  // A failed primary (Claude) attempt that reached the provider counts like a retryable free-pool failure for recovery purposes.
- const retryable=a=>['FETCH_ERROR','TIMEOUT','UNAVAILABLE','500','502','503','504'].includes(a.outcome)||(!!policy.primaryModel&&a.model===policy.primaryModel&&/^(CANCELLED|CLAUDE_(TIMEOUT|NETWORK_ERROR|STREAM_INCOMPLETE|HTTP_(408|429|5[0-9][0-9])))$/.test(a.outcome));
+ // CLAUDE_TRUNCATED: the broker completed the attempt but the structured reply hit the output-token bound; the gateway never
+ // relays a truncated answer, so the learner saw nothing and may ask once for a new reply (the paid attempt stays accounted).
+ const failedPrimary=a=>!!policy.primaryModel&&a.model===policy.primaryModel&&a.outcome!=='OK';
+ const retryable=a=>['FETCH_ERROR','TIMEOUT','UNAVAILABLE','500','502','503','504'].includes(a.outcome)||(failedPrimary(a)&&/^(CANCELLED|CLAUDE_(TIMEOUT|NETWORK_ERROR|STREAM_INCOMPLETE|TRUNCATED|HTTP_(408|429|5[0-9][0-9])))$/.test(a.outcome));
  if(!accounting.attempts.length||accounting.attempts.some(a=>!a.brokerCompleted))return deny('provider_completion_unconfirmed');
- // noOutput: every attempt ended before any output (gateway timeout/unavailable); one explicit learner-initiated retry re-dispatches the same saved turn.
- if(noOutput){if(accounting.attempts.some(a=>a.outputStarted))return deny('partial_output_present');}
+ // noOutput: every attempt ended before any learner-visible output (gateway timeout/unavailable, or a failed primary attempt whose
+ // buffered output the gateway never relayed); one explicit learner-initiated retry re-dispatches the same saved turn.
+ if(noOutput){if(accounting.attempts.some(a=>a.outputStarted&&!failedPrimary(a)))return deny('partial_output_present');}
  else if(accounting.attempts.at(-1).outputStarted!==true)return deny('partial_provider_mismatch');
  if(!rejectedAfterSuccess&&accounting.attempts.some(a=>!retryable(a)))return deny('provider_failure_not_retryable');
  if(rejectedAfterSuccess&&accounting.attempts.slice(0,-1).some(a=>!retryable(a)))return deny('provider_failure_not_retryable');

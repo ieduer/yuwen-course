@@ -1,4 +1,7 @@
 // Values are deployment policy, never model/browser proposals. No paid default.
+// Output-token bounds: the historical per-call bound (the default and the only value for the same-model policy) and the
+// gateway's Claude cap (APIS_T1_MAX_TOKENS in production, forwarded to Claude as max_tokens).
+export const DEFAULT_MAX_OUTPUT_TOKENS=2400,GATEWAY_CLAUDE_MAX_OUTPUT_TOKENS=8192;
 export function dialogueBudget(env,at=Date.now()){
  let p;try{p=JSON.parse(env.YW_DIALOGUE_BUDGET_JSON);}catch{throw Error('budget_policy_required');}
  if(!p||!/^[-\w.]{1,80}$/.test(p.version)||!/^gemini-[-\w.]+$/.test(p.model)||p.currency!=='USD')throw Error('invalid_budget_policy');
@@ -17,8 +20,14 @@ export function dialogueBudget(env,at=Date.now()){
  // visible output and thinking; unknown observed usage retains the reservation.
  // The prompt is bounded by the gateway stream admission (32,000 characters of contents) so a policy may declare a tighter
  // input bound than the default 100k tokens; the reserve must cover the priciest model at that bound.
- const maxInputTokens=p.maxInputTokens===undefined?100000:p.maxInputTokens,maxOutputTokens=2400;
+ // The Claude-primary policy may declare a larger `maxOutputTokens` for the structured JSON reply (reply up to 1,800 characters
+ // plus assessments, sourceDraft and conclusion); a truncated answer is a failed, paid attempt that the gateway never relays.
+ // Never above the gateway's Claude cap, never below the historical bound, and the reserve must cover the primary model at it.
+ const maxInputTokens=p.maxInputTokens===undefined?100000:p.maxInputTokens;
  if(!Number.isSafeInteger(maxInputTokens)||maxInputTokens<8000||maxInputTokens>100000)throw Error('invalid_budget_policy');
+ if(primaryModel===null&&p.maxOutputTokens!==undefined)throw Error('invalid_budget_policy');
+ const maxOutputTokens=p.maxOutputTokens===undefined?DEFAULT_MAX_OUTPUT_TOKENS:p.maxOutputTokens;
+ if(!Number.isSafeInteger(maxOutputTokens)||maxOutputTokens<DEFAULT_MAX_OUTPUT_TOKENS||maxOutputTokens>GATEWAY_CLAUDE_MAX_OUTPUT_TOKENS)throw Error('invalid_budget_policy');
  if(p.globalDailyMicros>50000000)throw Error('global_fifty_dollar_cap');
  const bound=(inputPrice,outputPrice)=>Number((BigInt(maxInputTokens)*BigInt(inputPrice)+BigInt(maxOutputTokens)*BigInt(outputPrice)+999999n)/1000000n);
  const minimum=Math.max(bound(p.inputMicrosPerMillion,p.outputMicrosPerMillion),primaryModel?bound(p.primaryInputMicrosPerMillion,p.primaryOutputMicrosPerMillion):0);

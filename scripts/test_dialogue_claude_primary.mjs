@@ -84,3 +84,89 @@ test('gateway stream consumer accepts a Claude-served done event and the worker 
  await callDialogueModel(legacyEnv,'提示',crypto.randomUUID(),async()=>{},requestDialogueBudget(legacyEnv,{id:1},'lesson-1717-p2'));
  assert.equal(sent.tier,undefined);
 });
+
+// 2026-10-20 acceptance finding (account 553, structure flow): the fixed 2,400-token output bound truncated the structured reply
+// (CLAUDE_TRUNCATED, paid) and the learner was left with replyRetry code provider_completion_unconfirmed / unclassified.
+const v2={...policy,version:'yw-claude-primary-20261020-v2',maxOutputTokens:8192,reserveMicros:145920};
+const truncatedUsage={promptTokenCount:15600,candidatesTokenCount:8192,totalTokenCount:23792};
+
+test('policy v2 may declare the structured-reply output bound up to the gateway Claude cap; the reserve must cover it; legacy stays at 2,400',()=>{
+ const b=dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify(v2)},at);
+ assert.equal(b.maxOutputTokens,8192);assert.equal(b.reserveMicros,145920);assert.equal(b.fallbackReserveMicros,0);
+ // Cap derivation: ceil((32,000 input × US$2 + 8,192 output × US$10) per million) = 64,000 + 81,920 micro-dollars per primary attempt.
+ assert.throws(()=>dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...v2,reserveMicros:145919})},at),/invalid_budget_reserve/);
+ // The production reserve (88,000) covers only the 2,400 bound: raising the bound without the reserve is refused.
+ assert.throws(()=>dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...policy,maxOutputTokens:8192})},at),/invalid_budget_reserve/);
+ assert.equal(dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...policy,maxOutputTokens:4096,reserveMicros:104960})},at).maxOutputTokens,4096);
+ for(const bad of [8193,2399,0,-1,'8192',4096.5,null])assert.throws(()=>dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...v2,maxOutputTokens:bad})},at),/invalid_budget_policy/,String(bad));
+ // The same-model (free pool) policy keeps the historical bound and may not declare another.
+ assert.throws(()=>dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...legacy,maxOutputTokens:8192})},at),/invalid_budget_policy/);
+ assert.throws(()=>dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...legacy,maxOutputTokens:2400})},at),/invalid_budget_policy/);
+ assert.equal(dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify(legacy)},at).maxOutputTokens,2400);
+ assert.equal(dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify(policy)},at).maxOutputTokens,2400);
+});
+
+test('v2 reservation bound: one primary attempt at the output bound plus two free fallback attempts stays under the US$2/user/day and US$4/lesson caps; usage up to the bound is priced',()=>{
+ const env={YW_DIALOGUE_BUDGET_JSON:JSON.stringify(v2),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'};
+ const budget=requestDialogueBudget(env,{id:1},'lesson-1717-p2');
+ // reserve = primary + fallback × (limit − 1) = 145,920 + 0 × 2
+ assert.equal(budget.reserveMicros,145920);assert.equal(budget.perAttemptReserveMicros,145920);assert.equal(budget.fallbackReserveMicros,0);assert.equal(budget.providerAttemptLimit,3);assert.equal(budget.maxOutputTokens,8192);
+ assert.equal(budget.userDailyMicros,2000000);assert.equal(budget.lessonLifetimeMicros,4000000);assert.ok(budget.reserveMicros<=Math.min(budget.globalDailyMicros,budget.userDailyMicros,budget.lessonLifetimeMicros));
+ // The reservation may equal a cap but never exceed it.
+ assert.equal(requestDialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...v2,userDailyMicros:145920,lessonLifetimeMicros:145920}),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},{id:1},'lesson-1717-p2').reserveMicros,145920);
+ assert.throws(()=>requestDialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...v2,userDailyMicros:145919}),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},{id:1},'lesson-1717-p2'),/invalid_budget_reserve/);
+ // The current production policy object keeps its arithmetic: 88,000 + 0 + 0.
+ assert.equal(requestDialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify(policy),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},{id:1},'lesson-1717-p2').reserveMicros,88000);
+ // A reply that used the whole bound is priced from its usage; one token more is unknown usage (reservation retained).
+ assert.equal(reconciledCost(budget,truncatedUsage,CLAUDE),15600*2+8192*10);
+ assert.equal(reconciledCost(budget,{promptTokenCount:15600,candidatesTokenCount:8193,totalTokenCount:23793},CLAUDE),null);
+ assert.equal(reconciledCost(dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify(policy)},at),{promptTokenCount:15600,candidatesTokenCount:2401,totalTokenCount:18001},CLAUDE),null);
+ // A truncated Claude attempt with authoritative usage is settled from it (never free); the free fallback adds 0.
+ assert.equal(operatorCost(budget,{model:GEMINI,usage:geminiUsage},accounting([attempt(1,CLAUDE,'CLAUDE_TRUNCATED',{outputStarted:true,usage:truncatedUsage}),attempt(2,GEMINI,'OK')])),15600*2+8192*10);
+});
+
+test('the worker forwards the policy output bound to the gateway (max_tokens) and keeps 2,400 for policies without one',async()=>{
+ const answer='{"reply":"先說說你在意的那一句。","assessments":[]}';
+ const frames=[['delta',{text:answer,requestId:'r1'}],['done',{requestId:'r1',answer,model:CLAUDE,modelVersion:null,usage:claudeUsage,providerAttemptCount:1,providerAccounting:accounting([attempt(1,CLAUDE,'OK')]),firstTokenMs:900,totalDurationMs:950}]];
+ const body=frames.map(([e,d],i)=>`id: ${i+1}\nevent: ${e}\ndata: ${JSON.stringify(d)}\n\n`).join('');
+ let sent=null;const env={YW_DIALOGUE_BUDGET_JSON:JSON.stringify(v2),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3',APIS_CALLER_TOKEN:'synthetic',APIS:{fetch:async req=>{sent=JSON.parse(await req.text());return new Response(body,{headers:{'content-type':'text/event-stream'}});}}};
+ await callDialogueModel(env,'提示',crypto.randomUUID(),async()=>{},requestDialogueBudget(env,{id:1},'lesson-1717-p2'));
+ assert.equal(sent.generationConfig.maxOutputTokens,8192);assert.equal(sent.tier,'claude-primary');
+ const current={...env,YW_DIALOGUE_BUDGET_JSON:JSON.stringify(policy)};sent=null;
+ await callDialogueModel(current,'提示',crypto.randomUUID(),async()=>{},requestDialogueBudget(current,{id:1},'lesson-1717-p2'));
+ assert.equal(sent.generationConfig.maxOutputTokens,2400);
+});
+
+test('recovery disposition: a truncated Claude attempt has no learner-visible output and allows one explicit retry within the attempt limit',()=>{
+ const call={state:'review',source_request_json:null,budget_policy_json:JSON.stringify({...v2,logicalProviderAttemptLimit:3})};
+ const truncated=attempt(1,CLAUDE,'CLAUDE_TRUNCATED',{outputStarted:true,usage:{promptTokenCount:15600,candidatesTokenCount:2400,totalTokenCount:18000}});
+ const failure=attempts=>({stage:'provider_request',code:'gateway_stream_unconfirmed',providerAccounting:accounting(attempts)});
+ const retry=continuationDisposition(call,failure([truncated,attempt(2,GEMINI,'TIMEOUT')]),false,{noOutput:true});
+ assert.deepEqual(retry,{allowed:true,code:'explicit_retry_available',requiresUserAction:true,remainingProviderAttempts:1,providerAttemptsUsed:2});
+ assert.equal(continuationDisposition(call,failure([truncated]),false,{noOutput:true}).code,'explicit_retry_available');
+ assert.equal(continuationDisposition(call,failure([truncated,attempt(2,GEMINI,'TIMEOUT'),attempt(3,GEMINI,'503')]),false,{noOutput:true}).code,'provider_attempt_limit');
+ // A fallback attempt the broker has not completed (still in flight when the gateway reported) stays unconfirmed.
+ assert.equal(continuationDisposition(call,failure([truncated,attempt(2,GEMINI,'TIMEOUT',{brokerCompleted:false})]),false,{noOutput:true}).code,'provider_completion_unconfirmed');
+ // Learner-visible free-pool output still blocks the no-output retry; a refused Claude answer is never retried.
+ assert.equal(continuationDisposition(call,failure([truncated,attempt(2,GEMINI,'FETCH_ERROR',{outputStarted:true})]),false,{noOutput:true}).code,'partial_output_present');
+ assert.equal(continuationDisposition(call,failure([attempt(1,CLAUDE,'CLAUDE_REFUSED',{outputStarted:true}),attempt(2,GEMINI,'TIMEOUT')]),false,{noOutput:true}).code,'provider_failure_not_retryable');
+ assert.equal(continuationDisposition(call,failure([attempt(1,CLAUDE,'CLAUDE_JSON_INVALID',{outputStarted:true})]),false,{noOutput:true}).code,'provider_failure_not_retryable');
+ // Without any accounting (the gateway's terminal frame never reached the worker) nothing can be bounded: unchanged.
+ assert.equal(continuationDisposition(call,{stage:'provider_request',code:'unclassified',providerAccounting:null},false,{noOutput:true}).code,'provider_completion_unconfirmed');
+ // A legacy same-model attempt that produced output is still partial output.
+ const legacyCall={...call,budget_policy_json:JSON.stringify({...legacy,logicalProviderAttemptLimit:3})};
+ assert.equal(continuationDisposition(legacyCall,{stage:'provider_request',providerAccounting:accounting([attempt(1,GEMINI,'TIMEOUT',{outputStarted:true})],'yw-same-model-sequential-v1')},false,{noOutput:true}).code,'partial_output_present');
+});
+
+test('the production policy var (wrangler.toml) is the v2 policy: 8,192 output bound with the exact covering reserve and unchanged caps',async()=>{
+ const {readFileSync}=await import('node:fs');
+ const toml=readFileSync(new URL('../wrangler.toml',import.meta.url),'utf8');
+ const line=/^YW_DIALOGUE_BUDGET_JSON = '(\{.*\})'$/m.exec(toml.slice(toml.indexOf('[env.production.vars]')));assert.ok(line,'production budget policy var');
+ const production=JSON.parse(line[1]);
+ assert.deepEqual({...production,validUntil:undefined},{...policy,version:'yw-claude-primary-20261020-v2',maxOutputTokens:8192,reserveMicros:145920,validUntil:undefined});
+ const budget=requestDialogueBudget({YW_DIALOGUE_BUDGET_JSON:line[1],YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},{id:1},'lesson-1717-p2');
+ assert.equal(budget.maxOutputTokens,8192);assert.equal(budget.reserveMicros,145920);assert.equal(budget.fallbackReserveMicros,0);
+ // The declared reserve is exactly the bound for the primary model (no slack, no shortfall).
+ assert.throws(()=>dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...production,reserveMicros:production.reserveMicros-1})},at),/invalid_budget_reserve/);
+ assert.deepEqual([budget.globalDailyMicros,budget.userDailyMicros,budget.lessonLifetimeMicros,budget.validUntil],[20000000,2000000,4000000,'2026-11-09T22:00:00Z']);
+});
