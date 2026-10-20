@@ -582,3 +582,19 @@ test('catalogue toggle is explicit, keeps aria state and the conversation headin
  toggle.onclick();assert.equal(catalog.hidden,false);assert.equal(toggle.getAttribute('aria-expanded'),'true');assert.ok(!shell.classList.contains('catalog-hidden'));
  assert.equal(f.posts.length,0);assert.equal(f.document.getElementById('conversation-title'),null);assert.equal(f.document.querySelectorAll('.conversation h2').length,0);
 });
+
+test('the personal history can be copied as one list, with a visible fallback when the clipboard is unavailable',async()=>{
+ const sessions=[{lessonId:'lesson-189',turnCount:4,lastTurnAt:'2026-10-19T10:00:00Z'},{lessonId:'lesson-5',turnCount:2,lastTurnAt:null}];
+ const f=await fixture({get:(url,data)=>url.includes('sessions=1')?Response.json({ownerRef:'owner-a',scope:'own-sessions-only',sessions}):data});
+ assert.equal(f.document.getElementById('sessions-copy').hidden,true);
+ await f.document.getElementById('sessions-load').onclick();
+ assert.equal(f.document.getElementById('sessions-copy').hidden,false);
+ let copied=null;f.context.navigator={clipboard:{writeText:async text=>{copied=text;}}};
+ await f.document.getElementById('sessions-copy').onclick();
+ assert.deepEqual(copied.split('\n').map(l=>l.split('｜').slice(0,3)),[['篇目 189','4 則','2026-10-19T10:00:00Z'],['篇目 5','2 則','—']]);
+ assert.match(copied,/\/dialogue#lesson-5$/m);assert.match(f.document.getElementById('sessions-status').textContent,/已複製/);
+ f.context.navigator={};
+ await f.document.getElementById('sessions-copy').onclick();
+ assert.equal(f.document.getElementById('sessions-copy-text').textContent,copied);assert.match(f.document.getElementById('sessions-status').textContent,/手動/);
+ assert.equal(f.posts.length,0);
+});

@@ -669,15 +669,25 @@ $('sessions-load').onclick=async()=>{
  try{
   const data=await api(null,null,false,null,null,false,false,true);
   if(!data.sessions?.length){list.append(node('li','本帳戶尚無對話。'));return;}
+  const lines=[];
   for(const s of data.sessions){
    const title=lessonIndex?.lessons.find(l=>l.lessonId===s.lessonId)?.title||s.lessonId;
+   lines.push(`${title}｜${s.turnCount} 則｜${s.lastTurnAt||'—'}｜${location.origin||''}/dialogue#${s.lessonId}`);
    const li=node('li'),open=node('button',s.lessonId===curriculum?.lessonId?'目前篇目':'開啟');open.type='button';open.disabled=s.lessonId===curriculum?.lessonId;
    open.onclick=()=>{if(switchLesson(s.lessonId)){$('materials').close();lastFocus?.focus();}};
    const when=s.lastTurnAt?new Date(s.lastTurnAt).toLocaleString([],{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
    li.append(node('span',title),node('small',`${s.turnCount} 則${when?' · '+when:''}`),open);list.append(li);
   }
+  sessionsCopyText=lines.join('\n');$('sessions-copy').hidden=false;$('sessions-status').textContent='';
  }catch(e){list.append(node('li',e.message));}
  finally{$('sessions-load').disabled=false;}
+};
+let sessionsCopyText='';
+$('sessions-copy').onclick=async()=>{
+ if(!sessionsCopyText)return;
+ try{await navigator.clipboard.writeText(sessionsCopyText);$('sessions-status').textContent='已複製全部對話清單（每行：篇目｜則數｜最後時間｜連結）。';return;}catch{}
+ let box=document.getElementById('sessions-copy-text');if(!box){box=node('pre');box.id='sessions-copy-text';$('sessions-list').after(box);}
+ box.textContent=sessionsCopyText;$('sessions-status').textContent='此瀏覽器無法自動複製；清單已列出，可手動選取複製。';
 };
 $('review').onclick=async()=>{try{const r=await api({action:'review'});$('export-status').textContent=r.message;}catch(e){$('export-status').textContent=e.message;}};
 async function completeRecord(){
