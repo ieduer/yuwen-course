@@ -212,7 +212,7 @@ async function snapshot(db,session,curriculum,before){
  if(!question){question=await plannedQuestion(db,session,curriculum,state);if(question)publicQuestion={id:question.id,objectiveId:question.objectiveId,attempt:question.attempt,question:question.question,source:question.source,createdAt:question.createdAt};}
  const partialRows=await all(db.prepare(`SELECT c.content,c.sequence,c.created_at,t.id AS turn_id,t.status FROM dialogue_stream_chunks c JOIN dialogue_turns t ON t.id=c.turn_id WHERE t.session_id=? AND c.turn_id=(SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence DESC LIMIT 1) AND NOT EXISTS(SELECT 1 FROM dialogue_turns r WHERE r.reply_to=t.id AND r.role='teacher') ORDER BY c.sequence LIMIT 128`).bind(session.id,session.id));
  const inflight=session.inflight?await db.prepare('SELECT state,COALESCE(finished_at,created_at) AS updated_at FROM dialogue_calls WHERE turn_id=?').bind(session.inflight).first():null;
- const pending=!!session.inflight&&!!inflight&&['reserved','finishing'].includes(inflight.state)&&Date.now()-Date.parse(inflight.updated_at)<60000;
+ const pending=!!session.inflight&&!!inflight&&['reserved','finishing'].includes(inflight.state)&&Date.now()-Date.parse(inflight.updated_at)<90000;
  const partial=partialRows.length?{turnId:partialRows[0].turn_id,content:partialRows.map(c=>c.content).join(''),status:partialRows[0].status==='needs_review'||!pending?'unconfirmed':'streaming'}:null;
  if(partial){
   partial.digest=await sha(partial.content);
@@ -596,7 +596,7 @@ async function continueDialogue({request,env,db,student,session,curriculum,body,
 }
 
 export async function reconcileAbandonedCalls(db,at=now()){
- const cutoff=new Date(Date.parse(at)-60000).toISOString();
+ const cutoff=new Date(Date.parse(at)-90000).toISOString(); // > LIMITS.timeoutMs (65 s): a call still inside its gateway window is never reconciled as abandoned
  const stale="SELECT turn_id FROM dialogue_calls WHERE state IN ('reserved','finishing') AND COALESCE(finished_at,created_at)<?";
  await db.batch([
   db.prepare(`INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT turn_id||':crash',session_id,turn_id,'response_unconfirmed','{"retry":"readback_only","reason":"worker_interrupted"}',? FROM dialogue_calls WHERE turn_id IN (${stale})`).bind(at,cutoff),

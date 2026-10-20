@@ -141,7 +141,7 @@ test('crash reconciliation releases stale capacity, preserves work and rejects a
  const f=fixture(),background=[];let complete;const done=new Promise(resolve=>{complete=resolve;});
  try{
   await handleDialogue(req(body()),f.env,student,{waitUntil:p=>background.push(p)},{callModel:async()=>{await done;return good();}});
-  const call=f.sql.prepare('SELECT * FROM dialogue_calls').get();await reconcileAbandonedCalls(f.db,new Date(Date.parse(call.created_at)+61000).toISOString());
+  const call=f.sql.prepare('SELECT * FROM dialogue_calls').get();await reconcileAbandonedCalls(f.db,new Date(Date.parse(call.created_at)+91000).toISOString());
   assert.equal(f.sql.prepare('SELECT state FROM dialogue_calls').get().state,'review');assert.equal(f.sql.prepare('SELECT inflight FROM dialogue_sessions').get().inflight,null);
   assert.equal(f.sql.prepare('SELECT status FROM dialogue_turns').get().status,'needs_review');complete();await Promise.all(background);
   assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_turns WHERE role='teacher'").get().n,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_calls').get().n,1);

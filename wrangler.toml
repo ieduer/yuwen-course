@@ -37,7 +37,7 @@ service = "yw-preview-logs"
 # Pages bundles runtime vars from this file, not project API metadata.
 [env.production.vars]
 YW_DIALOGUE_ENABLED = "true"
-YW_DIALOGUE_BUDGET_JSON = '{"version":"yw-claude-primary-20261020-v2","policy":"yw-claude-primary-gemini-fallback-v1","currency":"USD","model":"gemini-3.8-flash","primaryModel":"claude-sonnet-5-5","primaryInputMicrosPerMillion":2000000,"primaryOutputMicrosPerMillion":10000000,"inputMicrosPerMillion":0,"outputMicrosPerMillion":0,"maxInputTokens":32000,"maxOutputTokens":8192,"reserveMicros":145920,"globalDailyMicros":20000000,"userDailyMicros":2000000,"lessonLifetimeMicros":4000000,"validUntil":"2026-11-09T22:00:00Z"}'
+YW_DIALOGUE_BUDGET_JSON = '{"version":"yw-claude-primary-20261020-v3","policy":"yw-claude-primary-gemini-fallback-v1","currency":"USD","model":"gemini-3.8-flash","primaryModel":"claude-sonnet-5-5","primaryInputMicrosPerMillion":2000000,"primaryOutputMicrosPerMillion":10000000,"inputMicrosPerMillion":0,"outputMicrosPerMillion":0,"maxInputTokens":32000,"maxOutputTokens":4096,"reserveMicros":104960,"globalDailyMicros":20000000,"userDailyMicros":2000000,"lessonLifetimeMicros":4000000,"validUntil":"2026-11-09T22:00:00Z"}'
 YW_DIALOGUE_PROVIDER_ATTEMPTS = "3"
 YW_RELEASE_READ_ONLY = "false"
 YW_DURABLE_EVALUATION_ENABLED = "true"

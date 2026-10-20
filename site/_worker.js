@@ -108,7 +108,7 @@ export default {
         try{const user=await resolveReadingUser(request,env,true);showDialogue=dialogueAdmissionAllowed(env,user?.userId);}
         catch{showDialogue=false;}
       }
-      const target=new URL(showDialogue?'/dialogue.html':url.pathname,url);
+      const target=new URL(showDialogue?'/dialogue':url.pathname,url); // the clean asset path: Pages answers '/dialogue.html' with a 308 that would reach the browser
       const response=await env.ASSETS.fetch(new Request(target,request));
       if(scope===null)return response;
       // Account-dependent HTML must never enter a shared/browser cache.

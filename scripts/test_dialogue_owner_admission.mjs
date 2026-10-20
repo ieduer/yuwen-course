@@ -30,7 +30,7 @@ test('selected owner reaches existing source loading; others never gain access t
 });
 test('restricted homepage selects owner dialogue and ordinary legacy without database writes or shared caching',async t=>{
  const f=fixture(t);let user=identity(553);f.env.USER_CENTER_EVIDENCE.resolveSession=async()=>user;
- for(const [u,target] of [[identity(553),'/dialogue.html'],[identity(554),'/'],[{authenticated:false},'/']]){
+ for(const [u,target] of [[identity(553),'/dialogue'],[identity(554),'/'],[{authenticated:false},'/']]){
   user=u;const response=await worker.fetch(f.request('/'),f.env,{});assert.equal(await response.text(),target);assert.equal(response.headers.get('cache-control'),'private, no-store');assert(response.headers.get('vary').includes('Cookie'));assert(response.headers.get('vary').includes('Authorization'));
  }
  assert.equal(f.stats().reads,0);assert.equal(f.stats().writes,0);
