@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1486,
-  "totalBytes": 204820131,
-  "aggregateSha256": "6da2f3288510727e5f5129e80f475b0039736bbcd8eded7b2b615a76d46a372a",
+  "totalBytes": 204823862,
+  "aggregateSha256": "a35cd4f3caab4fb5d4b13960665d67966b8f484ac7f8919cc1272081b4732905",
   "files": [
     {
       "path": "_headers",
@@ -237,8 +237,8 @@
     },
     {
       "path": "_worker.js/dialogue-recovery.js",
-      "bytes": 8099,
-      "sha256": "05b0cb48abb87a70d2845417f9cc78bc4a2c82b277012d777114492b36f4252a"
+      "bytes": 8417,
+      "sha256": "c95fe40020013ddd00b8923fb92595456c5ee53e1b0649f81fcd09cc29b7a1aa"
     },
     {
       "path": "_worker.js/dialogue-session-source.js",
@@ -252,8 +252,8 @@
     },
     {
       "path": "_worker.js/dialogue-source.js",
-      "bytes": 87188,
-      "sha256": "76c6faeea9f7bced5a8e2ef276f5061c23559ae20d649549c28bcc841e4390ce"
+      "bytes": 89231,
+      "sha256": "74dfbf055808fde6e4c4c773ffefae1c97f7e2f4ba0b13116fff68331fa5fa22"
     },
     {
       "path": "_worker.js/dialogue-stream.js",
@@ -353,7 +353,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "b9a643b91e152ccd27e7112a2630e36f742fcb25aa6e41c1d1738c6c0ca6031d"
+      "sha256": "c58d937ade1366f1cd5a26b891c575ae572409d91c9853b3d5bf7765a7066b64"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1792,13 +1792,13 @@
     },
     {
       "path": "assets/dialogue.css",
-      "bytes": 28976,
-      "sha256": "90e16d62491f89aa5523c80f6b0004179347e83da8d927af08a302720e2889d0"
+      "bytes": 29181,
+      "sha256": "7dfe5cfcd5b11790b1eefbc17a70610aa688e6110174dff598b143cb8509b2ec"
     },
     {
       "path": "assets/dialogue.js",
-      "bytes": 88067,
-      "sha256": "92991a57bb7776fd05274e02bf41f4c0b1d3eb28166bb1a9302d5a785112de6b"
+      "bytes": 89232,
+      "sha256": "6f9d40ed0950430fb598d8ab7d6bd408d8bbe2be7a17cee88dce658bd4f8d9f9"
     },
     {
       "path": "assets/learning-evidence.js",
@@ -7358,7 +7358,7 @@
     {
       "path": "dialogue.html",
       "bytes": 8781,
-      "sha256": "ef14d0f94bf3ace7a13c49413412f83218f1e1879877d8fabfc73cc2250f5777"
+      "sha256": "ada8b5ebea4a7f57fa55dc30729e71ec391f34ba2ffd7dec4c9663927f3e8a79"
     },
     {
       "path": "evaluation-scheduler.js",
