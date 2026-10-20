@@ -81,6 +81,32 @@ async function history(db,session,before=null){
  const more=rows.length>LIMITS.historyPage;rows.splice(LIMITS.historyPage);
  return {turns:rows.reverse().map(t=>({id:t.id,sequence:t.sequence,mutationId:t.role==='student'?t.mutation_id:null,role:t.role,content:t.content,status:t.status,questionId:t.question_id,createdAt:t.created_at,model:t.model,modelVersion:t.model_version,formal:t.source_request_json?JSON.parse(t.source_request_json):null})),older:more?{sequence:rows[0].sequence}:null};
 }
+const SESSION_PAGE=100,EXPORT_SESSIONS_PER_PAGE=5;
+// Keyset cursor over (updated_at DESC, id DESC); both cursor parts or neither; the page size is bounded by the caller's maximum.
+function sessionCursor(url,maxLimit){
+ const updatedAt=url.searchParams.get('before'),id=url.searchParams.get('beforeId'),rawLimit=url.searchParams.get('limit');
+ if((updatedAt===null)!==(id===null))return null;
+ if(updatedAt!==null&&(!/^\d{4}-\d{2}-\d{2}T[0-9:.]+Z$/.test(updatedAt)||!/^[A-Za-z0-9_-]{1,80}$/.test(id)))return null;
+ const limit=rawLimit===null?maxLimit:Number(rawLimit);
+ if(!Number.isSafeInteger(limit)||limit<1||limit>maxLimit)return null;
+ return {before:updatedAt===null?null:{updatedAt,id},limit};
+}
+async function exportSession(db,s){
+ const limit=LIMITS.lessonLifetime*2;
+ const rows=await all(db.prepare('SELECT id,sequence,role,content,status,question_id,reply_to,model,model_version,policy_version,created_at,source_request_json FROM dialogue_turns WHERE session_id=? ORDER BY sequence LIMIT ?').bind(s.id,limit+1));
+ const truncated=rows.length>limit;rows.splice(limit);
+ const replied=new Set(rows.filter(t=>t.role==='teacher'&&t.reply_to).map(t=>t.reply_to));
+ const chunks=await all(db.prepare('SELECT c.turn_id,c.content FROM dialogue_stream_chunks c JOIN dialogue_turns t ON t.id=c.turn_id WHERE t.session_id=? ORDER BY t.sequence,c.sequence').bind(s.id));
+ const partial=new Map();for(const c of chunks)partial.set(c.turn_id,(partial.get(c.turn_id)||'')+c.content);
+ const turns=rows.map(t=>{const confirmed=t.status==='saved';const streamed=t.role==='student'&&!replied.has(t.id)&&partial.has(t.id)?partial.get(t.id):null;
+  return {id:t.id,sequence:t.sequence,role:t.role,speaker:t.role==='student'?'student':'author-simulation',content:t.content,status:t.status,confirmed,createdAt:t.created_at,model:t.model,modelVersion:t.model_version,policyVersion:t.policy_version,questionId:t.question_id,replyTo:t.reply_to,formal:t.source_request_json?JSON.parse(t.source_request_json):null,...(streamed!==null?{partialReply:{content:streamed,label:'incomplete_unconfirmed_stream'}}:{})};});
+ const {submissions}=await learningRecords(db,s),assessments=await assessmentRows(db,s.id);
+ const drafts=await all(db.prepare('SELECT mutation_id,revision,content,question_id,created_at FROM dialogue_drafts WHERE session_id=? AND submitted_turn_id IS NULL ORDER BY created_at,id').bind(s.id));
+ return {sessionId:s.id,lessonId:s.lesson_id,curriculumVersion:s.curriculum_version,policyVersion:s.policy_version,revision:s.revision,createdAt:s.created_at,updatedAt:s.updated_at,inflight:!!s.inflight,turnCount:rows.length,complete:!truncated,...(truncated?{incomplete:'transcript_requires_review'}:{}),
+  turns,submissions:submissions.map(x=>({turnId:x.turnId,sequence:x.sequence,objectiveId:x.objectiveId,interaction:x.interaction,label:x.label,input:x.input,status:x.status,assessment:x.assessment??null})),
+  assessments:assessments.map(a=>({objectiveId:a.objectiveId,outcome:a.outcome,ruleVersion:a.ruleVersion,createdAt:a.createdAt})),
+  unsentDrafts:drafts.map(d=>({mutationId:d.mutation_id,revision:d.revision,content:d.content,questionId:d.question_id,createdAt:d.created_at,label:'unsent_draft'}))};
+}
 async function transcript(db,session){
  const rows=await all(db.prepare('SELECT id,sequence,role,content,question_id AS questionId,status,created_at AS createdAt FROM dialogue_turns WHERE session_id=? ORDER BY sequence LIMIT ?').bind(session.id,LIMITS.lessonLifetime*2+1));
  if(rows.length>LIMITS.lessonLifetime*2)throw Error('transcript_requires_review');
@@ -216,8 +242,22 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
    return json({ownerRef:await sha(`dialogue-owner:${student.id}`),sharedHistory:shared});
   }
   if(url.searchParams.get('sessions')==='1'){
-   const rows=await all(db.prepare('SELECT s.lesson_id,s.curriculum_version,s.revision,s.created_at,s.updated_at,(SELECT COUNT(*) FROM dialogue_turns t WHERE t.session_id=s.id) AS turn_count,(SELECT MAX(t.created_at) FROM dialogue_turns t WHERE t.session_id=s.id) AS last_turn_at FROM dialogue_sessions s WHERE s.student_id=? ORDER BY s.updated_at DESC LIMIT 400').bind(student.id));
-   return json({ownerRef:await sha(`dialogue-owner:${student.id}`),scope:'own-sessions-only',sessions:rows.map(r=>({lessonId:r.lesson_id,curriculumVersion:r.curriculum_version,revision:r.revision,createdAt:r.created_at,updatedAt:r.updated_at,turnCount:Number(r.turn_count||0),lastTurnAt:r.last_turn_at||null}))});
+   const page=sessionCursor(url,SESSION_PAGE);if(!page)return json({code:'invalid_cursor'},400);
+   const rows=await all(db.prepare('SELECT s.id,s.lesson_id,s.curriculum_version,s.revision,s.created_at,s.updated_at,(SELECT COUNT(*) FROM dialogue_turns t WHERE t.session_id=s.id) AS turn_count,(SELECT MAX(t.created_at) FROM dialogue_turns t WHERE t.session_id=s.id) AS last_turn_at FROM dialogue_sessions s WHERE s.student_id=? AND (? IS NULL OR s.updated_at<? OR (s.updated_at=? AND s.id<?)) ORDER BY s.updated_at DESC,s.id DESC LIMIT ?').bind(student.id,page.before?.updatedAt??null,page.before?.updatedAt??null,page.before?.updatedAt??null,page.before?.id??null,page.limit+1));
+   const more=rows.length>page.limit;rows.splice(page.limit);
+   const total=Number((await db.prepare('SELECT COUNT(*) AS n FROM dialogue_sessions WHERE student_id=?').bind(student.id).first())?.n??0);
+   return json({ownerRef:await sha(`dialogue-owner:${student.id}`),scope:'own-sessions-only',total,pageSize:page.limit,sessions:rows.map(r=>({lessonId:r.lesson_id,curriculumVersion:r.curriculum_version,revision:r.revision,createdAt:r.created_at,updatedAt:r.updated_at,turnCount:Number(r.turn_count||0),lastTurnAt:r.last_turn_at||null})),older:more?{updatedAt:rows.at(-1).updated_at,id:rows.at(-1).id}:null});
+  }
+  if(url.searchParams.get('exportAll')==='1'){
+   // Full-account transcript export: every session of the signed-in account, in bounded pages ordered newest first;
+   // each session carries its exact lesson/source versions, speakers, timestamps, saved replies, submissions and
+   // assessments, and labels unconfirmed turns, partial streamed replies, unsent drafts and over-long transcripts.
+   const page=sessionCursor(url,EXPORT_SESSIONS_PER_PAGE);if(!page)return json({code:'invalid_cursor'},400);
+   const sessions=await all(db.prepare('SELECT * FROM dialogue_sessions WHERE student_id=? AND (? IS NULL OR updated_at<? OR (updated_at=? AND id<?)) ORDER BY updated_at DESC,id DESC LIMIT ?').bind(student.id,page.before?.updatedAt??null,page.before?.updatedAt??null,page.before?.updatedAt??null,page.before?.id??null,page.limit+1));
+   const more=sessions.length>page.limit;sessions.splice(page.limit);
+   const records=[];for(const s of sessions)records.push(await exportSession(db,s));
+   const total=Number((await db.prepare('SELECT COUNT(*) AS n FROM dialogue_sessions WHERE student_id=?').bind(student.id).first())?.n??0);
+   return json({ownerRef:await sha(`dialogue-owner:${student.id}`),scope:'own-sessions-only',exportedAt:now(),total,pageSize:page.limit,sessions:records,older:more?{updatedAt:sessions.at(-1).updated_at,id:sessions.at(-1).id}:null});
   }
   if(url.searchParams.has('correctionsFor')){
    const turnId=url.searchParams.get('correctionsFor');

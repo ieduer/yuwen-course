@@ -4325,3 +4325,7 @@ the correct secret. Restore the scheduler only after pairing and admission are
 verified. No config flags, secret, scheduler or live resource changed in this
 local candidate. Exact transaction/evidence:
 `/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/owner-gate-01a149ff/TRANSACTION.md`.
+
+## 2026-10-20 — 本帳戶全部對話紀錄匯出（候選，未發布）
+
+`GET /api/dialogue/v1?lessonId=…&sessions=1` 現在分頁：每頁最多 100 篇（`limit` 可小於 100），回傳 `total`、`pageSize` 與 `older:{updatedAt,id}` 鍵集游標（`before`、`beforeId` 須成對），不再截斷在 400 篇。`GET …&exportAll=1`（每頁最多 5 篇，同一游標）逐篇回傳：session 與課程／來源版本（`curriculumVersion`、`policyVersion`、`revision`）、每一回合的角色（`speaker`：student／author-simulation）、時間、模型、狀態與 `confirmed`、正式作答原件（`formal`）、原判準評閱（`submissions`、`assessments`），並標記未確認回合、串流中斷的部分回覆（`partialReply`，label `incomplete_unconfirmed_stream`）、未送出草稿（`unsentDrafts`）與超過 `lessonLifetime×2` 回合的 `incomplete:'transcript_requires_review'`。兩個端點只回傳登入帳戶自己的 session（`scope:'own-sessions-only'`，`ownerRef` 供前端核對帳戶切換）。前端「資料與紀錄 → 我的全部對話」新增「匯出本帳戶全部對話紀錄」，逐頁讀回後由 `site/assets/dialogue-export.js` 合併成 `yw-dialogue-account-export-v1` JSON 下載，`incompleteSessions` 列出含未確認內容的篇目；清單讀取改為跟隨游標。測試：`scripts/test_dialogue_account_export.mjs`、`scripts/test_dialogue_export_merge.mjs`，並通過 `test_static_asset_cache_authority`、`test_dialogue_frontend`、`test_dialogue_pilot`。發布須另行登記 Pages 交易（來源分支 `claude/yw-account-export-20261020`）。

@@ -4,9 +4,10 @@ import {dialogueOpening,dialogueIdentity} from '../dialogue-opening.js?v=e7aeb2b
 import {readDialogueEvents} from './dialogue-events.js?v=a7e6a9d3cf526331';
 import {readBrowserHistory} from './dialogue-history.js?v=4e50ee7bee866e26';
 import {openFirstReading} from './dialogue-first-read.js?v=04d04aafd8657321';
+import {mergeExportPages,exportFilename} from './dialogue-export.js?v=b297862a33e0679d';
 const $=id=>document.getElementById(id);
 // Server permits 360 learner turns with one reply each; history pages contain 30 records.
-const MAX_TRANSCRIPT_RECORDS=720,MAX_HISTORY_PAGES=24;
+const MAX_TRANSCRIPT_RECORDS=720,MAX_HISTORY_PAGES=24,MAX_SESSION_PAGES=40,MAX_EXPORT_PAGES=400;
 let streamAbort=null;
 let reconnectNeeded=false;
 let continuationRequest=null;
@@ -16,10 +17,10 @@ let composerDraft=null,lessonIndex=null,materialMode='annotated',readingNotes=nu
 const conversationFlow=document.body.dataset.dialogueFlow==='conversation';
 let curriculum, snapshot, generation=0, selected=null, pending=null, pendingDraft=null, pollTimer=null, lastFocus=null, ownerRef=null;
 const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
-const api=async(body,cursor,records=false,onEvent,correctionsFor,shared=false,firstReading=false,sessions=false)=>{
+const api=async(body,cursor,records=false,onEvent,correctionsFor,shared=false,firstReading=false,sessions=false,extra=null)=>{
  const gen=generation,expectedOwner=ownerRef;
  const current=()=>{if(gen!==generation)throw Object.assign(new Error('帳戶或篇目已切換，已忽略舊回應。'),{code:'stale_context'});};
- const q=new URLSearchParams({lessonId:curriculum.lessonId,...(cursor?{beforeSeq:cursor.sequence}:{}),...(records?{records:'1'}:{}),...(correctionsFor?{correctionsFor}:{}),...(shared?{sharedHistory:'1'}:{}),...(firstReading?{firstReadingState:'1'}:{}),...(sessions?{sessions:'1'}:{})});
+ const q=new URLSearchParams({lessonId:curriculum.lessonId,...(cursor?{beforeSeq:cursor.sequence}:{}),...(records?{records:'1'}:{}),...(correctionsFor?{correctionsFor}:{}),...(shared?{sharedHistory:'1'}:{}),...(firstReading?{firstReadingState:'1'}:{}),...(sessions?{sessions:'1'}:{}),...(extra||{})});
  const streamed=body&&(typeof body.content==='string'||body.action==='continue');
  if(streamed)streamAbort=new AbortController();
  const response=await fetch(`/api/dialogue/v1?${q}`,{credentials:'same-origin',cache:'no-store',...(streamed?{signal:streamAbort.signal}:body?.action==='first_read'?{signal:AbortSignal.timeout(12000)}:{}),...(body?{method:'POST',headers:{'content-type':'application/json',...(streamed?{accept:'text/event-stream'}:{})},body:JSON.stringify({...body,ownerRef})}:{})});
@@ -682,10 +683,12 @@ $('older').onclick=async()=>{if(!snapshot?.older)return;const cursor=snapshot.ol
 $('sessions-load').onclick=async()=>{
  const list=$('sessions-list');list.replaceChildren();$('sessions-load').disabled=true;
  try{
-  const data=await api(null,null,false,null,null,false,false,true);
-  if(!data.sessions?.length){list.append(node('li','本帳戶尚無對話。'));return;}
+  const data=await api(null,null,false,null,null,false,false,true);const sessions=[...(data.sessions||[])];let older=data.older||null;
+  for(let n=0;older&&n<MAX_SESSION_PAGES;n++){const more=await api(null,null,false,null,null,false,false,true,{before:older.updatedAt,beforeId:older.id});sessions.push(...(more.sessions||[]));older=more.older||null;}
+  if(!sessions.length){list.append(node('li','本帳戶尚無對話。'));return;}
+  if(older)$('sessions-status').textContent='清單超過可讀取頁數，請用「匯出本帳戶全部對話紀錄」取得完整紀錄。';
   const lines=[];
-  for(const s of data.sessions){
+  for(const s of sessions){
    const title=lessonIndex?.lessons.find(l=>l.lessonId===s.lessonId)?.title||s.lessonId;
    lines.push(`${title}｜${s.turnCount} 則｜${s.lastTurnAt||'—'}｜${location.origin||''}/dialogue#${s.lessonId}`);
    const li=node('li'),open=node('button',s.lessonId===curriculum?.lessonId?'目前篇目':'開啟');open.type='button';open.disabled=s.lessonId===curriculum?.lessonId;
@@ -693,7 +696,7 @@ $('sessions-load').onclick=async()=>{
    const when=s.lastTurnAt?new Date(s.lastTurnAt).toLocaleString([],{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
    li.append(node('span',title),node('small',`${s.turnCount} 則${when?' · '+when:''}`),open);list.append(li);
   }
-  sessionsCopyText=lines.join('\n');$('sessions-copy').hidden=false;$('sessions-status').textContent='';
+  sessionsCopyText=lines.join('\n');$('sessions-copy').hidden=false;if(!older)$('sessions-status').textContent=Number.isSafeInteger(data.total)?`共 ${data.total} 篇對話。`:'';
  }catch(e){list.append(node('li',e.message));}
  finally{$('sessions-load').disabled=false;}
 };
@@ -703,6 +706,18 @@ $('sessions-copy').onclick=async()=>{
  try{await navigator.clipboard.writeText(sessionsCopyText);$('sessions-status').textContent='已複製全部對話清單（每行：篇目｜則數｜最後時間｜連結）。';return;}catch{}
  let box=document.getElementById('sessions-copy-text');if(!box){box=node('pre');box.id='sessions-copy-text';$('sessions-list').after(box);}
  box.textContent=sessionsCopyText;$('sessions-status').textContent='此瀏覽器無法自動複製；清單已列出，可手動選取複製。';
+};
+$('export-all').onclick=async()=>{
+ const button=$('export-all');button.disabled=true;$('sessions-status').textContent='正在讀取本帳戶全部對話…';
+ try{
+  const pages=[];let cursor=null;
+  for(let n=0;n<MAX_EXPORT_PAGES;n++){const page=await api(null,null,false,null,null,false,false,false,{exportAll:'1',...(cursor?{before:cursor.updatedAt,beforeId:cursor.id}:{})});pages.push(page);$('sessions-status').textContent=`已讀取 ${pages.reduce((n,p)=>n+(p.sessions?.length||0),0)} / ${page.total??'?'} 篇…`;cursor=page.older||null;if(!cursor)break;}
+  if(cursor)throw Error('紀錄超過可讀取頁數，匯出未完成；請稍後再試或聯絡教師。');
+  const record=mergeExportPages(pages,{exportedAt:new Date().toISOString(),ownerRef});
+  const blob=new Blob([JSON.stringify(record,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download=exportFilename(record.exportedAt);a.click();setTimeout(()=>URL.revokeObjectURL(url),0);
+  $('sessions-status').textContent=`已匯出本帳戶 ${record.sessionCount} 篇對話${record.incompleteSessions.length?`，其中 ${record.incompleteSessions.length} 篇含未確認或未送出內容（已在檔案中標記）`:''}。原有紀錄仍保留。`;
+ }catch(e){$('sessions-status').textContent=e.message;}
+ finally{button.disabled=false;}
 };
 $('review').onclick=async()=>{try{const r=await api({action:'review'});$('export-status').textContent=r.message;}catch(e){$('export-status').textContent=e.message;}};
 async function completeRecord(){
