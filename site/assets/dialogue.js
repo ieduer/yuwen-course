@@ -373,7 +373,12 @@ function clearPrivateView({preserveReading=false}={}){reconnectNeeded=false;clos
 }
 function renderSourceDraft(data){
  const box=$('source-draft');box.replaceChildren();box.hidden=true;
- if(conversationFlow)return;
+ if(conversationFlow){
+  // The conversation keeps vocabulary and reading originals inside the dialogue; only the non-scoring self-rating (篇目評價)
+  // has no conversational path, so it keeps its own form and the existing original-action submission.
+  if(data.originalTask?.kind==='evaluation'&&!data.pending&&!data.question&&!['unavailable','exemption'].includes(data.learningTurn?.kind))renderOriginalTask(data,box);
+  return;
+ }
  const deferred=data.draft?.formal?data.draft:null;
  if(data.draft?.learningRequest)return;
  if(data.learningTurn&&!deferred)return;

@@ -613,3 +613,30 @@ test('a saved turn without any reply shows one explicit retry that re-dispatches
  assert.equal(f.document.querySelectorAll('#turns .student').length,1);assert.match(f.document.getElementById('turns').textContent,/先說說你在意的那一句吧。/);
  assert.equal(f.document.getElementById('reply-retry'),null);
 });
+
+// 2026-10-20 acceptance finding: the server's originalTask of kind 'evaluation' never received a form in the conversation flow.
+test('conversation flow renders only the non-scoring self-rating original task and submits it through the original action',async()=>{
+ const evaluation={objectiveId:'legacy:lesson-189:evaluation',kind:'evaluation'};
+ const f=await fixture({conversation:true,initial:{originalTask:evaluation},post:(body,{data,setData})=>{
+  const next={...data,revision:data.revision+1,originalTask:null,statusNotice:'你的篇目自評已保存；高低都不計入成績。',turns:[...data.turns,{id:'evaluation-turn',role:'student',content:'本篇有意思程度：80%（自評，不計分）\n理由：結尾的轉折出乎意料。',mutationId:body.mutationId,createdAt:'2026-10-20T00:00:00Z'}]};
+  setData(next);return Response.json(next);
+ }});
+ const box=f.document.getElementById('source-draft');assert.equal(box.hidden,false);assert.match(box.textContent,/你覺得這篇有意思嗎/);assert.match(box.textContent,/不計入成績/);
+ // The conversation composer is untouched: no rating field or choice, same placeholder, send enabled.
+ assert.equal(f.document.querySelectorAll('#task-input input').length,0);assert.equal(f.document.getElementById('answer').placeholder,'想和我談些什麼？');assert.equal(f.document.getElementById('send').disabled,false);
+ const form=box.querySelector('form'),rating=form.querySelector('input[type=number]'),reason=form.querySelector('textarea');
+ rating.value='80';rating.oninput();reason.value='結尾的轉折出乎意料。';reason.oninput();
+ await form.onsubmit({preventDefault(){}});
+ assert.equal(f.posts.length,1);assert.equal(f.posts[0].action,'original');assert.equal(f.posts[0].objectiveId,evaluation.objectiveId);assert.deepEqual(f.posts[0].input,{rating:80,reason:'結尾的轉折出乎意料。'});assert.equal(f.posts[0].revision,0);assert.equal(f.posts[0].ownerRef,'owner-a');assert.match(f.posts[0].mutationId,/^[a-f0-9-]{36}$/);
+ for(const key of ['content','conversation','taskId','formal','score','scoringRole'])assert.equal(key in f.posts[0],false,key);
+ assert.equal(f.document.getElementById('source-draft').hidden,true);assert.equal(f.frontend.pending,null);assert.match(f.document.getElementById('status').textContent,/自評已保存/);
+ // Everything else stays inside the conversation: a vocabulary original, a pending turn, an open question or an unavailable source renders no form.
+ for(const initial of [
+  {originalTask:{objectiveId:'legacy:lesson-189:vocab',kind:'vocabulary',itemId:'v1',question:'原題',source:'原句',options:['甲','乙'],originalMastery:null}},
+  {originalTask:evaluation,pending:true},
+  {originalTask:evaluation,question:{id:'q1',objectiveId:'v1',question:'這個詞在原句裡是什麼意思？'}},
+  {originalTask:evaluation,learningTurn:{taskId:'v1:0:source:unavailable',objectiveId:'source',kind:'unavailable',inputKind:'none',prompt:'本課正文來源尚待核對。'}},
+ ]){const g=await fixture({conversation:true,initial});assert.equal(g.document.getElementById('source-draft').hidden,true,JSON.stringify(initial));assert.equal(g.document.querySelectorAll('#source-draft form').length,0);assert.equal(g.posts.length,0);}
+ // The structured flow is unchanged: the evaluation original still renders only when no learning turn is open.
+ const structured=await fixture({initial:{originalTask:evaluation,learningTurn:null}});assert.equal(structured.document.getElementById('source-draft').hidden,false);assert.equal(structured.document.querySelectorAll('#source-draft form').length,1);
+});
