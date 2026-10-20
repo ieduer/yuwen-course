@@ -45,13 +45,18 @@ export function continuationDisposition(call,failure,continued=false){
  let policy;try{policy=JSON.parse(call.budget_policy_json);}catch{return deny('provider_budget_unverified');}
  const limit=policy.logicalProviderAttemptLimit||policy.providerAttemptLimit||1;
  if(limit!==3)return deny('continuation_not_reserved');
- let accounting;try{accounting=validatedProviderAccounting(failure?.providerAccounting,{maxProviderAttempts:limit,model:policy.model});}catch{return deny('provider_completion_unconfirmed');}
+ // A provider result that completed but was rejected by the finish validation (proposal, original or reading evidence)
+ // may be regenerated once by an explicit learner action; it is never retried silently and the OK attempt stays accounted.
+ const lastOutcome=failure?.providerAccounting?.attempts?.at?.(-1)?.outcome;
+ const rejectedAfterSuccess=['proposal','original_evidence','reading_evidence'].includes(failure?.stage)&&lastOutcome==='OK';
+ if(lastOutcome==='OK'&&!rejectedAfterSuccess)return deny('provider_failure_not_retryable');
+ let accounting;try{accounting=validatedProviderAccounting(failure?.providerAccounting,{maxProviderAttempts:limit,model:policy.model,success:rejectedAfterSuccess});}catch{return deny('provider_completion_unconfirmed');}
  if(!accounting.attempts.length||accounting.attempts.some(a=>!a.brokerCompleted))return deny('provider_completion_unconfirmed');
  if(accounting.attempts.at(-1).outputStarted!==true)return deny('partial_provider_mismatch');
- if(accounting.attempts.some(a=>!['FETCH_ERROR','TIMEOUT','UNAVAILABLE','500','502','503','504'].includes(a.outcome)))return deny('provider_failure_not_retryable');
+ if(!rejectedAfterSuccess&&accounting.attempts.some(a=>!['FETCH_ERROR','TIMEOUT','UNAVAILABLE','500','502','503','504'].includes(a.outcome)))return deny('provider_failure_not_retryable');
  const remaining=limit-accounting.providerAttemptCount;
  if(remaining<1)return deny('provider_attempt_limit');
- return {allowed:true,code:'explicit_continuation_available',requiresUserAction:true,remainingProviderAttempts:remaining,providerAttemptsUsed:accounting.providerAttemptCount};
+ return {allowed:true,code:rejectedAfterSuccess?'explicit_regeneration_available':'explicit_continuation_available',requiresUserAction:true,remainingProviderAttempts:remaining,providerAttemptsUsed:accounting.providerAttemptCount};
 }
 
 export async function budgetDenial(db,session,student,budget,limits,day){

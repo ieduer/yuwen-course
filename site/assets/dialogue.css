@@ -67,3 +67,15 @@
 #material-media{columns:auto}#material-media>.source-media{margin:24px 0;padding-top:20px;border-top:1px solid var(--line)}
 
 @media(max-width:280px){.bar{height:auto;grid-template-columns:36px minmax(0,1fr) 28px auto}.bar .appearance{grid-column:3}.bar .account-actions{grid-column:4}.bar #materials-open{grid-column:2 / -1;grid-row:2;justify-self:end}}
+
+/* 2026-10-20: conversation area integrated composer, progress line, own-sessions list, responsive catalogue */
+.conversation-head{display:none}
+#compose{position:static;border-top:0;padding:0;margin-top:12px;background:transparent}
+.composer-box{display:flex;align-items:flex-end;gap:8px;padding:6px 8px;border-radius:12px;overflow:visible}
+#answer{flex:1 1 auto;width:auto;min-height:44px;max-height:220px;padding:10px 6px;line-height:1.6;resize:none;overflow-y:auto}
+#send,#stop{position:static;right:auto;bottom:auto;flex:none;min-height:40px;padding:8px 14px;border-radius:10px}
+#stop{background:transparent;border:1px solid var(--line);color:var(--muted)}
+#progress{display:flex;gap:10px;flex-wrap:wrap;align-items:baseline;margin:8px 0 0;font-size:12px;color:var(--muted);line-height:1.6}
+#progress b{font-weight:500;color:var(--ink)}#progress small{font-size:11px}
+#sessions-list{padding-left:1.2em;margin:8px 0 0}#sessions-list li{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin:8px 0}#sessions-list small{color:var(--muted)}#sessions-list button{min-height:32px;padding:4px 10px}
+@media(max-width:899px){#compose{position:static;padding:0}.composer-box{padding:4px 6px}}

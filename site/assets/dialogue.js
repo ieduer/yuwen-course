@@ -16,10 +16,10 @@ let composerDraft=null,lessonIndex=null,materialMode='annotated',readingNotes=nu
 const conversationFlow=document.body.dataset.dialogueFlow==='conversation';
 let curriculum, snapshot, generation=0, selected=null, pending=null, pendingDraft=null, pollTimer=null, lastFocus=null, ownerRef=null;
 const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
-const api=async(body,cursor,records=false,onEvent,correctionsFor,shared=false,firstReading=false)=>{
+const api=async(body,cursor,records=false,onEvent,correctionsFor,shared=false,firstReading=false,sessions=false)=>{
  const gen=generation,expectedOwner=ownerRef;
  const current=()=>{if(gen!==generation)throw Object.assign(new Error('帳戶或篇目已切換，已忽略舊回應。'),{code:'stale_context'});};
- const q=new URLSearchParams({lessonId:curriculum.lessonId,...(cursor?{beforeSeq:cursor.sequence}:{}),...(records?{records:'1'}:{}),...(correctionsFor?{correctionsFor}:{}),...(shared?{sharedHistory:'1'}:{}),...(firstReading?{firstReadingState:'1'}:{})});
+ const q=new URLSearchParams({lessonId:curriculum.lessonId,...(cursor?{beforeSeq:cursor.sequence}:{}),...(records?{records:'1'}:{}),...(correctionsFor?{correctionsFor}:{}),...(shared?{sharedHistory:'1'}:{}),...(firstReading?{firstReadingState:'1'}:{}),...(sessions?{sessions:'1'}:{})});
  const streamed=body&&(typeof body.content==='string'||body.action==='continue');
  if(streamed)streamAbort=new AbortController();
  const response=await fetch(`/api/dialogue/v1?${q}`,{credentials:'same-origin',cache:'no-store',...(streamed?{signal:streamAbort.signal}:body?.action==='first_read'?{signal:AbortSignal.timeout(12000)}:{}),...(body?{method:'POST',headers:{'content-type':'application/json',...(streamed?{accept:'text/event-stream'}:{})},body:JSON.stringify({...body,ownerRef})}:{})});
@@ -34,10 +34,10 @@ function renderPartial(partial){
  let n=document.getElementById('partial-reply');
  if(!partial){n?.remove();return;}
  if(!n){n=node('div',undefined,'turn teacher');n.id='partial-reply';n.append(node('small'),node('span'));$('turns').append(n);}
- n.dataset.turnId=partial.turnId;n.querySelector('small').textContent=partial.status==='unconfirmed'?'回應中斷 · 已保留文字，尚未計入評閱':'正在回應…';n.querySelector('span').textContent=partial.content;
+ n.dataset.turnId=partial.turnId;n.querySelector('small').textContent=partial.status==='unconfirmed'?(partial.disposition?.received?'回應已收到但未通過核驗 · 已保留文字，尚未計入評閱':'回應中斷 · 已保留文字，尚未計入評閱'):'正在回應…';n.querySelector('span').textContent=partial.content;
  n.querySelector('button')?.remove();
  if(partial.continuation?.allowed&&!snapshot?.pending){
-  const button=node('button','續答');button.type='button';
+  const button=node('button',partial.continuation.code==='explicit_regeneration_available'?'重新生成回應':'續答');button.type='button';
   button.onclick=async()=>{
    if(snapshot?.pending||snapshot?.partial?.digest!==partial.digest||!snapshot.partial.continuation?.allowed)return;
    button.disabled=true;
@@ -186,9 +186,26 @@ async function loadOriginalMaterials(c,gen){
  try{const response=await fetch(`/data/lessons/${c.lessonId}.json`,{cache:'no-cache'});if(!response.ok)throw Error();const source=await response.json();if(gen===generation&&curriculum?.lessonId===c.lessonId)renderOriginalMaterials(source,c);}
  catch{if(gen===generation)$('original-materials').append(node('p','補充資料暫時未能載入，可由「資料與紀錄」開啟原課。'));}
 }
-let catalogInitialized=false;
-function setCatalogHidden(hidden){$('catalog').hidden=hidden;document.querySelector('.page-shell').classList.toggle('catalog-hidden',hidden);$('catalog-toggle').setAttribute('aria-expanded',String(!hidden));}
-$('catalog-toggle').onclick=()=>setCatalogHidden(!$('catalog').hidden);
+let catalogInitialized=false,catalogManual=null;
+const catalogMedia=typeof window.matchMedia==='function'?window.matchMedia('(min-width: 1100px)'):null;
+// The first passage still visible on screen is kept at the same offset when the layout columns change.
+function readingAnchor(){try{for(const el of document.querySelectorAll('#reading [data-passage]')){const r=el.getBoundingClientRect();if(r.bottom>0)return {el,top:r.top};}}catch{}return null;}
+function restoreReadingAnchor(anchor){if(!anchor)return;try{const delta=anchor.el.getBoundingClientRect().top-anchor.top;if(Math.abs(delta)>1)window.scrollBy(0,delta);}catch{}}
+function setCatalogHidden(hidden,{manual=false}={}){
+ if(manual){catalogManual=hidden;try{window.sessionStorage.setItem('yw-dialogue-catalog',hidden?'hidden':'shown');}catch{}}
+ if($('catalog').hidden===hidden)return;
+ const anchor=readingAnchor();
+ $('catalog').hidden=hidden;document.querySelector('.page-shell').classList.toggle('catalog-hidden',hidden);$('catalog-toggle').setAttribute('aria-expanded',String(!hidden));
+ restoreReadingAnchor(anchor);
+}
+function autoCatalog(){if(catalogManual!==null||!catalogMedia)return;setCatalogHidden(!catalogMedia.matches);}
+$('catalog-toggle').onclick=()=>{const hidden=!$('catalog').hidden;setCatalogHidden(hidden,{manual:true});if(!hidden&&(window.innerWidth||1024)<900){try{$('catalog').scrollIntoView({block:'start'});$('lesson-search').focus({preventScroll:true});}catch{}}};
+if(catalogMedia){
+ try{const saved=window.sessionStorage.getItem('yw-dialogue-catalog');if(saved==='hidden'||saved==='shown')catalogManual=saved==='hidden';}catch{}
+ let frame=0;const schedule=()=>{if(typeof window.cancelAnimationFrame==='function')window.cancelAnimationFrame(frame);frame=(typeof window.requestAnimationFrame==='function'?window.requestAnimationFrame:fn=>setTimeout(fn,16))(autoCatalog);};
+ if(typeof catalogMedia.addEventListener==='function')catalogMedia.addEventListener('change',schedule);else catalogMedia.addListener?.(schedule);
+ window.addEventListener('orientationchange',schedule);autoCatalog();
+}
 function renderAccount(){
  $('account-login').href='https://my.bdfz.net/?returnTo='+encodeURIComponent(location.href);
  $('account-login').hidden=!!ownerRef;$('account-logout').hidden=!ownerRef;
@@ -221,7 +238,7 @@ function displayWorkTitle(value){
 }
 function renderText(){
  const locked=false;
- $('conversation-title').textContent=`與${dialogueIdentity(curriculum).name}談`;$('title').textContent=displayWorkTitle(curriculum);$('author').textContent=dialogueIdentity(curriculum).name==='作者'?'':dialogueIdentity(curriculum).name;$('source').href=curriculum.source;$('legacy').href=`/?view=legacy#${curriculum.lessonId}`;
+ $('title').textContent=displayWorkTitle(curriculum);$('author').textContent=dialogueIdentity(curriculum).name==='作者'?'':dialogueIdentity(curriculum).name;$('source').href=curriculum.source;$('legacy').href=`/?view=legacy#${curriculum.lessonId}`;
  $('source').hidden=locked;$('plates-details').hidden=locked;$('dictionary-details').hidden=locked;
  $('passages').replaceChildren();
  for(const p of locked?[]:curriculum.passages){const paragraph=node('p');paragraph.id=p.id;paragraph.dataset.passage=p.id;paragraph.tabIndex=-1;
@@ -516,6 +533,18 @@ function appendSourceLink(parent,href,label,kind){
  const text=typeof label==='string'&&label.trim()&&!/^https?:/.test(label)?label.trim():url.hostname;
  const link=node('a',`${kind}：${text}`);link.setAttribute('href',url.href);link.target='_blank';link.rel='noopener noreferrer';const paragraph=node('p');paragraph.append(link);parent.append(paragraph);return true;
 }
+let progressTimer=null,progressStartedAt=0,progressStage='';
+const PROGRESS_STAGES={saving:'正在保存你的回應',generating:'回應生成中',streaming:'回應顯示中',saved:'這一輪已保存',unconfirmed:'回應未能確認，文字已保留'};
+function renderProgressLine(){
+ const box=$('progress');if(!box)return;box.replaceChildren();
+ if(progressStage&&PROGRESS_STAGES[progressStage]){const seconds=Math.max(0,Math.round((Date.now()-progressStartedAt)/1000));const stage=node('b',PROGRESS_STAGES[progressStage]);box.append(stage,node('span',['saving','generating','streaming'].includes(progressStage)?`已 ${seconds} 秒`:''));box.hidden=false;return;}
+ const objectives=(snapshot?.state?.objectives||[]).filter(o=>o.requiredForCompletion!==false&&o.domain!=='shangyou');
+ if(!objectives.length){box.hidden=true;return;}
+ const done=objectives.filter(o=>['demonstrated','preserved'].includes(o.status)).length;
+ box.append(node('span',`本課目標：${done}／${objectives.length} 項已有伺服器評估`),node('small','依已保存的對話判定；對話長短本身不代表掌握'));box.hidden=false;
+}
+function progressTick(){renderProgressLine();if(['saving','generating','streaming'].includes(progressStage))progressTimer=setTimeout(progressTick,1000);}
+function progress(stage){progressStage=stage;clearTimeout(progressTimer);progressTimer=null;if(['saving','generating','streaming'].includes(stage)){if(!progressStartedAt)progressStartedAt=Date.now();progressTimer=setTimeout(progressTick,1000);}else{progressStartedAt=0;if(stage==='saved'||stage==='unconfirmed')setTimeout(()=>{if(progressStage===stage){progressStage='';renderProgressLine();}},4000);}renderProgressLine();}
 function update(data){
  let previousPhase=snapshot?.readingGate?.phase;
  if(ownerRef && data.ownerRef && ownerRef!==data.ownerRef){clearPrivateView();previousPhase=null;}
@@ -538,7 +567,8 @@ function update(data){
  else if(!data.learningTurn&&next && [...curriculum.vocabulary,...(curriculum.languagePractice||[])].some(v=>v.id===next.id)){const b=node('button','開始這項語言練習');b.onclick=async()=>{try{update(await api({action:'question',objectiveId:next.id}));}catch(e){$('status').textContent=e.message;}};$('next').append(b);}
  restoreComposer();renderLearningTurn(data);renderSourceResults(data);$('login').hidden=true;
  if(data.report?.conclusion){const b=node('button','查看這次尚友小結');b.onclick=()=>{$('evidence-summary').closest('details').open=true;$('materials').showModal();$('evidence-summary').scrollIntoView({block:'start'});};$('next').append(b);}
- renderSourceDraft(data);
+  renderSourceDraft(data);
+ if(!progressStage)renderProgressLine();
  performance.mark('dialogue-records-ready');
 }
 async function refresh(gen=generation){
@@ -589,7 +619,7 @@ $('compose').onsubmit=async e=>{
 };
 async function sendTurn(submitted,submittedDraft,gen=generation){
  persistComposer();
- $('send').disabled=true;$('status').textContent='正在保存你的回應…';
+ $('send').disabled=true;$('status').textContent='正在保存你的回應…';progress('saving');$('stop').hidden=false;
  for(const input of $('task-input').querySelectorAll('input'))input.disabled=true;
  try{
   let visibleReply=submitted.action==='continue'?snapshot?.partial?.content||'':'';
@@ -600,18 +630,22 @@ async function sendTurn(submitted,submittedDraft,gen=generation){
     if(submittedDraft!==null&&$('answer').value===submittedDraft){$('answer').value='';selected=null;composerDraft=null;$('quote').hidden=true;persistComposer();}
     snapshot={...snapshot,revision:data.revision,pending:true};
     if(!data.continuation)renderTurns([{id:data.turnId,role:'student',content:submitted.content,status:'saved',createdAt:data.createdAt}]);
-    $('status').textContent=data.continuation?'正在接續回應…':'你的回答已保存，正在生成回應…';
+    $('status').textContent=data.continuation?'正在接續回應…':'你的回答已保存，正在生成回應…';progress('generating');
    }else if(event==='delta'){
-    visibleReply+=data.text;renderPartial({turnId:data.turnId,content:visibleReply,status:'streaming'});
+    visibleReply+=data.text;renderPartial({turnId:data.turnId,content:visibleReply,status:'streaming'});if(progressStage!=='streaming')progress('streaming');
    }else if(event==='unconfirmed'){
-    renderPartial({turnId:data.turnId,content:visibleReply,status:'unconfirmed'});
-   }
+    renderPartial({turnId:data.turnId,content:visibleReply,status:'unconfirmed'});progress('unconfirmed');
+   }else if(event==='done'){progress('saved');}
   });if(gen!==generation)return;
   if(pending===submitted){pending=null;pendingDraft=null;if(submitted.action==='original')originalDraft=null;}
   if(submittedDraft!==null&&$('answer').value===submittedDraft){$('answer').value='';selected=null;composerDraft=null;$('quote').hidden=true;persistComposer();}
+  $('stop').hidden=true;if(progressStage&&progressStage!=='saved'&&progressStage!=='unconfirmed')progress(result.pending?'generating':'saved');
   await refresh(gen);if(result.pending)waitForReply(gen);
  }catch(error){
+  $('stop').hidden=true;
   if(gen!==generation)return;
+  if(error?.name==='AbortError'){progress('');await refresh(gen);if(gen!==generation)return;$('status').textContent='已停止顯示；伺服器仍會保存這一輪的回應，稍後自動讀回，不會重送。';if(snapshot?.pending)waitForReply(gen);return;}
+  progress('');
   if(error.code==='stale_revision'||error.code==='turn_in_progress'||error.code==='learning_task_changed'||error.status===400){
    pending=null;pendingDraft=null;persistComposer();await refresh(gen);$('status').textContent=error.message;
   }else if(error.draftSaved){$('status').textContent=error.message;}
@@ -621,12 +655,30 @@ async function sendTurn(submitted,submittedDraft,gen=generation){
  }
 }
 const hasFirstReadDraft=()=>[...$('first-reading').querySelectorAll('textarea,input')].some(input=>input.value.trim());
-$('answer').oninput=()=>{rememberComposer();persistComposer();};
+function autoGrowComposer(){const a=$('answer');try{a.style.height='auto';a.style.height=Math.min(Math.max(a.scrollHeight,44),220)+'px';}catch{}}
+$('answer').oninput=()=>{rememberComposer();persistComposer();autoGrowComposer();};
+$('answer').onkeydown=event=>{if(event.key==='Enter'&&(event.metaKey||event.ctrlKey)&&!$('send').disabled){event.preventDefault();const handler=$('compose').onsubmit;if(handler)void handler({preventDefault(){}});}};
+$('stop').onclick=()=>{if(!streamAbort)return;streamAbort.abort();$('stop').hidden=true;$('status').textContent='已停止顯示；伺服器仍會保存這一輪的回應，稍後自動讀回，不會重送。';};
 $('lesson').onchange=()=>switchLesson($('lesson').value);
 $('lesson-search').oninput=renderCatalog;
 $('text-tab').onclick=()=>view('text');$('conversation-tab').onclick=()=>view('conversation');
 $('materials-open').onclick=()=>{lastFocus=document.activeElement;$('materials').showModal();};$('materials-close').onclick=()=>{$('materials').close();lastFocus?.focus();};
 $('older').onclick=async()=>{if(!snapshot?.older)return;const cursor=snapshot.older;try{const data=await api(null,cursor);renderTurns(data.turns,true);snapshot.older=data.older;$('older').hidden=!data.older;}catch(e){$('status').textContent=e.message;}};
+$('sessions-load').onclick=async()=>{
+ const list=$('sessions-list');list.replaceChildren();$('sessions-load').disabled=true;
+ try{
+  const data=await api(null,null,false,null,null,false,false,true);
+  if(!data.sessions?.length){list.append(node('li','本帳戶尚無對話。'));return;}
+  for(const s of data.sessions){
+   const title=lessonIndex?.lessons.find(l=>l.lessonId===s.lessonId)?.title||s.lessonId;
+   const li=node('li'),open=node('button',s.lessonId===curriculum?.lessonId?'目前篇目':'開啟');open.type='button';open.disabled=s.lessonId===curriculum?.lessonId;
+   open.onclick=()=>{if(switchLesson(s.lessonId)){$('materials').close();lastFocus?.focus();}};
+   const when=s.lastTurnAt?new Date(s.lastTurnAt).toLocaleString([],{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
+   li.append(node('span',title),node('small',`${s.turnCount} 則${when?' · '+when:''}`),open);list.append(li);
+  }
+ }catch(e){list.append(node('li',e.message));}
+ finally{$('sessions-load').disabled=false;}
+};
 $('review').onclick=async()=>{try{const r=await api({action:'review'});$('export-status').textContent=r.message;}catch(e){$('export-status').textContent=e.message;}};
 async function completeRecord(){
  const expected=generation;let page=await api(null,null,true),turns=[...page.turns],cursor=page.older;

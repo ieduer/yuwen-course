@@ -910,3 +910,17 @@ test('immutable older curricula keep their reference-only language items outside
  const order=await vocabularyOrder(older,'old-saved-session');assert.deepEqual([...order].sort(),older.vocabulary.map(v=>v.id).sort());
  assert.throws(()=>createQuestion(older,{objectiveId:older.languagePractice[0].id}),/teacher_review_required/);
 });
+
+test('sessions=1 lists only the caller\'s own dialogue sessions across lessons, newest first, and needs a signed-in account',async()=>{
+ const f=fixture();try{
+  const H='a'.repeat(64);
+  const seed=(sid,studentId,lessonId,updated)=>f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)').run(sid,studentId,lessonId,'v1','{}','synthetic','2026-10-19T00:00:00Z',updated);
+  seed('s-old',1,'lesson-1498','2026-10-19T01:00:00Z');seed('s-new',1,'lesson-1578','2026-10-19T02:00:00Z');seed('s-other',2,'lesson-1717-p2','2026-10-19T03:00:00Z');
+  for(const [id,sid,at] of [['t1','s-old','2026-10-19T00:30:00Z'],['t2','s-old','2026-10-19T00:40:00Z'],['t3','s-other','2026-10-19T02:30:00Z']])f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,'student','synthetic','saved','synthetic',?)").run(id,sid,id,H,at);
+  const request=new Request(req().url+'&sessions=1');
+  assert.equal((await handleDialogue(request,f.env,null)).status,401);
+  const value=await(await handleDialogue(request,f.env,student)).json();
+  assert.equal(value.scope,'own-sessions-only');assert.equal(value.ownerRef,createHash('sha256').update('dialogue-owner:1').digest('hex'));
+  assert.deepEqual(value.sessions.map(s=>[s.lessonId,s.turnCount,s.lastTurnAt]),[['lesson-1578',0,null],['lesson-1498',2,'2026-10-19T00:40:00Z']]);
+ }finally{f.close();}
+});

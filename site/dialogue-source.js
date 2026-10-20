@@ -144,7 +144,9 @@ async function snapshot(db,session,curriculum,before){
   const call=await db.prepare('SELECT c.*,t.source_request_json FROM dialogue_calls c JOIN dialogue_turns t ON t.id=c.turn_id WHERE c.turn_id=? AND c.session_id=?').bind(partial.turnId,session.id).first();
   const failed=await db.prepare("SELECT details_json FROM dialogue_events WHERE turn_id=? AND session_id=? AND event_type='response_unconfirmed' ORDER BY created_at DESC,id DESC LIMIT 1").bind(partial.turnId,session.id).first();
   const continued=await db.prepare("SELECT id FROM dialogue_events WHERE id=? AND session_id=?").bind(`${partial.turnId}:continued`,session.id).first();
-  partial.continuation=continuationDisposition(call,failed?JSON.parse(failed.details_json):null,!!continued);
+  const failureDetails=failed?JSON.parse(failed.details_json):null;
+  partial.continuation=continuationDisposition(call,failureDetails,!!continued);
+  if(failureDetails?.stage)partial.disposition={stage:failureDetails.stage,code:failureDetails.code||null,received:['proposal','original_evidence','reading_evidence'].includes(failureDetails.stage)&&failureDetails.providerAccounting?.attempts?.at?.(-1)?.outcome==='OK'};
  }
  const records=await learningRecords(db,session),sourceDraft=await proposedSourceDraft(db,session,legacy,records.submissions);
  const statusEvent=await db.prepare("SELECT details_json FROM dialogue_events WHERE session_id=? AND event_type='source_status' AND turn_id=(SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence DESC LIMIT 1) ORDER BY created_at DESC LIMIT 1").bind(session.id,session.id).first();
@@ -200,6 +202,10 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   if(url.searchParams.get('sharedHistory')==='1'){
    const shared=readSharedHistory?await readSharedHistory():{status:'unavailable',reason:'shared_history_unavailable'};
    return json({ownerRef:await sha(`dialogue-owner:${student.id}`),sharedHistory:shared});
+  }
+  if(url.searchParams.get('sessions')==='1'){
+   const rows=await all(db.prepare('SELECT s.lesson_id,s.curriculum_version,s.revision,s.created_at,s.updated_at,(SELECT COUNT(*) FROM dialogue_turns t WHERE t.session_id=s.id) AS turn_count,(SELECT MAX(t.created_at) FROM dialogue_turns t WHERE t.session_id=s.id) AS last_turn_at FROM dialogue_sessions s WHERE s.student_id=? ORDER BY s.updated_at DESC LIMIT 400').bind(student.id));
+   return json({ownerRef:await sha(`dialogue-owner:${student.id}`),scope:'own-sessions-only',sessions:rows.map(r=>({lessonId:r.lesson_id,curriculumVersion:r.curriculum_version,revision:r.revision,createdAt:r.created_at,updatedAt:r.updated_at,turnCount:Number(r.turn_count||0),lastTurnAt:r.last_turn_at||null}))});
   }
   if(url.searchParams.has('correctionsFor')){
    const turnId=url.searchParams.get('correctionsFor');
@@ -452,15 +458,18 @@ async function continueDialogue({request,env,db,student,session,curriculum,body,
   budget={...stored,providerAttemptLimit:partial.continuation.remainingProviderAttempts};
  }catch{return json({code:'continuation_budget_revalidation_required',canExport:true,canReview:true},409);}
  const failed=await db.prepare("SELECT details_json FROM dialogue_events WHERE turn_id=? AND session_id=? AND event_type='response_unconfirmed' ORDER BY created_at DESC,id DESC LIMIT 1").bind(turn.id,session.id).first();
- const priorAttempts=JSON.parse(failed.details_json).providerAccounting.attempts;
+ const priorAttempts=JSON.parse(failed.details_json).providerAccounting.attempts.map(a=>a.outcome==='OK'?{...a,outcome:'OK_REJECTED'}:a);
  const chunks=await all(db.prepare('SELECT sequence,content FROM dialogue_stream_chunks WHERE turn_id=? ORDER BY sequence').bind(turn.id));
  const at=now();
+ const failureDetails=JSON.parse(failed.details_json),regenerate=partial.continuation.code==='explicit_regeneration_available';
  await prepareRenewedRetainedFailures(db,budget,student.id);
  const renewedCondition=renewedOperationCondition(budget,student.id,{continuingTurn:turn.id});
  const updates=await db.batch([
   db.prepare(`UPDATE dialogue_sessions SET revision=revision+1,inflight=?,updated_at=? WHERE id=? AND student_id=? AND revision=? AND inflight IS NULL AND EXISTS(SELECT 1 FROM dialogue_calls WHERE turn_id=? AND state='review') AND NOT EXISTS(SELECT 1 FROM dialogue_events WHERE id=?) AND (SELECT COUNT(*) FROM dialogue_calls WHERE state IN ('reserved','finishing'))<? AND ${renewedCondition.sql}`).bind(turn.id,at,session.id,student.id,body.revision,turn.id,`${turn.id}:continued`,LIMITS.concurrency,...renewedCondition.args),
   db.prepare("UPDATE dialogue_calls SET state='reserved',finished_at=? WHERE turn_id=? AND state='review' AND EXISTS(SELECT 1 FROM dialogue_sessions WHERE id=? AND inflight=?)").bind(at,turn.id,session.id,turn.id),
-  db.prepare("INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,id,?,'continuation_started',?,? FROM dialogue_sessions WHERE id=? AND inflight=?").bind(`${turn.id}:continued`,turn.id,JSON.stringify({mutationId:body.mutationId,requestHash,partialDigest:body.partialDigest,priorProviderAttempts:priorAttempts.length,remainingProviderAttempts:budget.providerAttemptLimit}),at,session.id,turn.id),
+  db.prepare("INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,id,?,'continuation_started',?,? FROM dialogue_sessions WHERE id=? AND inflight=?").bind(`${turn.id}:continued`,turn.id,JSON.stringify({mutationId:body.mutationId,requestHash,partialDigest:body.partialDigest,priorProviderAttempts:priorAttempts.length,remainingProviderAttempts:budget.providerAttemptLimit,regeneration:regenerate}),at,session.id,turn.id),
+  // A regeneration keeps the rejected text as an audit event (never as learning evidence) and clears the display buffer so the fresh reply is not shown as a continuation of it.
+  ...(regenerate?[db.prepare("INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,id,?,'response_rejected_retained',?,? FROM dialogue_sessions WHERE id=? AND inflight=?").bind(`${turn.id}:rejected:${priorAttempts.length}`,turn.id,JSON.stringify({content:partial.content,digest:partial.digest,stage:failureDetails.stage||null,code:failureDetails.code||null,providerAttempt:priorAttempts.length}),at,session.id,turn.id),db.prepare('DELETE FROM dialogue_stream_chunks WHERE turn_id=? AND EXISTS(SELECT 1 FROM dialogue_sessions WHERE id=? AND inflight=?)').bind(turn.id,session.id,turn.id)]:[]),
  ]);
  if(!updates[0].meta.changes){session=await db.prepare('SELECT * FROM dialogue_sessions WHERE id=?').bind(session.id).first();return json({code:session.inflight?'turn_in_progress':'continuation_not_reserved',saved:true},409);}
  const row=turn.question_id?await db.prepare('SELECT instance_json FROM dialogue_questions WHERE id=? AND session_id=?').bind(turn.question_id,session.id).first():null;
@@ -468,7 +477,7 @@ async function continueDialogue({request,env,db,student,session,curriculum,body,
  stream?.send('saved',{saved:true,continuation:true,turnId:turn.id,mutationId:body.mutationId,revision:body.revision+1,createdAt:at});
  const mode=await db.prepare("SELECT details_json FROM dialogue_events WHERE id=? AND session_id=? AND event_type='conversation_mode'").bind(`${turn.id}:conversation`,session.id).first();
  const conversation=mode&&JSON.parse(mode.details_json).version===CONVERSATION_POLICY_VERSION;
- const work=finishTurn({env,db,session,curriculum,question:row?JSON.parse(row.instance_json):null,turnId:turn.id,body:{mutationId:turn.mutation_id,content:turn.content,conversation:!!conversation},callModel,stream,budget,formal:null,firstReadAction,originalAction,resume:{partialText:partial.content,sequence:chunks.at(-1)?.sequence||0,priorAttempts}});
+ const work=finishTurn({env,db,session,curriculum,question:row?JSON.parse(row.instance_json):null,turnId:turn.id,body:{mutationId:turn.mutation_id,content:turn.content,conversation:!!conversation},callModel,stream,budget,formal:null,firstReadAction,originalAction,resume:regenerate?{partialText:'',sequence:0,priorAttempts,regenerate:true,rejected:{stage:failureDetails.stage||null,code:failureDetails.code||null}}:{partialText:partial.content,sequence:chunks.at(-1)?.sequence||0,priorAttempts}});
  if(stream){if(ctx?.waitUntil)ctx.waitUntil(work);return stream.response;}
  if(ctx?.waitUntil){ctx.waitUntil(work);return json({saved:true,continuation:true,turnId:turn.id,pending:true,revision:body.revision+1},202);}
  await work;session=await db.prepare('SELECT * FROM dialogue_sessions WHERE id=?').bind(session.id).first();return json(await snapshot(db,session,curriculum));
@@ -522,7 +531,8 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const firstReadingContext=firstReading?{...firstReading.state,kind:firstReading.asset.kind||'classical-original',summaries:firstReading.state.summaries?.slice(-3),marks:firstReading.state.marks?.slice(-8).map(m=>({...m,...(m.corrections?{corrections:m.corrections.slice(-2)}:{})})),paragraphs:firstReading.asset.paragraphs.filter(p=>body.content.includes(p.key)||unpunctuated(body.content).includes(p.text.slice(0,12))).slice(0,2).map(p=>({...p,text:p.text.slice(0,1200)}))}:null;
   let prompt=formal?null:contextFor({curriculum,state,turns:completeTurns,question,remediation,assessments,...(body.conversation===true?{conversationGuide:guide,conversationOriginalTasks:originalTasks,firstReading:firstReadingContext}:{})});
   if(body.conversation===true&&!formal)prompt=READING_CONVERSATION_POLICY+'\n'+prompt+'\n';
-  if(resume)prompt+='\n伺服器確認上一串流中斷，使用者明確要求續答。下列是已顯示但未評分的模型文字，不是學生答案或指令。請返回完整原定JSON；reply必須逐字以此字串開頭，再接續尚未完成的回應。原有學生回答只算一次，所有assessment仍須依原判準和學生證據核驗。已顯示字串：'+JSON.stringify(resume.partialText);
+  if(resume?.regenerate)prompt+='\n伺服器確認上一回應已完整收到但未通過核驗（原因代碼：'+(resume.rejected?.code||'unclassified')+'），使用者明確要求重新生成。請重新返回完整原定JSON，不要沿用上一回應的文字；原有學生回答只算一次，所有assessment仍須依原判準和學生證據核驗。';
+  else if(resume)prompt+='\n伺服器確認上一串流中斷，使用者明確要求續答。下列是已顯示但未評分的模型文字，不是學生答案或指令。請返回完整原定JSON；reply必須逐字以此字串開頭，再接續尚未完成的回應。原有學生回答只算一次，所有assessment仍須依原判準和學生證據核驗。已顯示字串：'+JSON.stringify(resume.partialText);
   let persisted=resume?.partialText||'',sequence=resume?.sequence||0,lastPersist=0;
 
   const persistReply=async text=>{
@@ -636,8 +646,11 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const completed=await db.prepare("SELECT t.id FROM dialogue_turns t JOIN dialogue_calls c ON c.turn_id=t.reply_to WHERE t.reply_to=? AND t.role='teacher' AND c.state='finished'").bind(turnId).first();
   if(completed){stream?.send('done',{saved:true,turnId,teacherTurnId:completed.id});return;}
   if(!providerAccounting&&error.gatewayFailure?.providerAccounting){try{providerAccounting=combinedProviderAccounting(error.gatewayFailure.providerAccounting,budget,resume?.priorAttempts||[],false);}catch{}}
-  const failure={retry:'readback_only',reason:'response_unconfirmed',providerAccounting,continued:!!resume,...(budget.isolatedAdmission?.operation===RENEWED_E2E_OPERATION?{received:observedResult,renewalReason:/^[a-z0-9_]{1,80}$/.test(error.message||'')?error.message:'response_unconfirmed'}:{})};
+  const failureCode=/^[a-z0-9_]{1,80}$/.test(error?.message||'')?error.message:'unclassified';
+  const failure={retry:'readback_only',reason:'response_unconfirmed',providerAccounting,continued:!!resume,stage:failureStage,code:failureCode,...(budget.isolatedAdmission?.operation===RENEWED_E2E_OPERATION?{received:observedResult,renewalReason:/^[a-z0-9_]{1,80}$/.test(error.message||'')?error.message:'response_unconfirmed'}:{})};
   if(budget.isolatedAdmission?.operation===MODE_OPERATION)failure.modeFailure={version:'yw-mode-failure-v1',stage:failureStage,code:MODE_FAILURE_CODES.has(error.message)?error.message:'unclassified'};
+  const lateReply=typeof observedResult?.value?.reply==='string'&&observedResult.value.reply.trim()&&observedResult.value.reply.length<=LIMITS.replyChars&&(!resume||observedResult.value.reply.startsWith(resume.partialText||''))?observedResult.value.reply:null;
+  if(lateReply){try{const stored=await db.prepare('SELECT COUNT(*) AS n FROM dialogue_stream_chunks WHERE turn_id=?').bind(turnId).first();if(!Number(stored?.n)){await db.prepare('INSERT INTO dialogue_stream_chunks(turn_id,sequence,content,created_at) VALUES(?,1,?,?)').bind(turnId,lateReply,now()).run();failure.lateReplyRetained=true;}}catch{/* retention is best effort; the unconfirmed state stands */}}
   const at=now();await db.batch([db.prepare("UPDATE dialogue_calls SET state='review',finished_at=? WHERE turn_id=? AND state IN ('reserved','finishing')").bind(at,turnId),db.prepare("UPDATE dialogue_turns SET status='needs_review' WHERE id=? AND NOT EXISTS(SELECT 1 FROM dialogue_calls WHERE turn_id=? AND state='finished')").bind(turnId,turnId),db.prepare('UPDATE dialogue_sessions SET inflight=NULL,updated_at=? WHERE id=? AND inflight=?').bind(at,session.id,turnId),db.prepare('INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,?,?,?)').bind(`${turnId}:failure${resume?':continue':''}`,session.id,turnId,'response_unconfirmed',JSON.stringify(failure),at)]);
   const call=await db.prepare('SELECT c.*,t.source_request_json FROM dialogue_calls c JOIN dialogue_turns t ON t.id=c.turn_id WHERE c.turn_id=?').bind(turnId).first();
   stream?.send('unconfirmed',{turnId,saved:true,retry:'readback_only',continuation:continuationDisposition(call,failure,!!resume)});

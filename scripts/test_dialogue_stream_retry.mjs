@@ -104,3 +104,39 @@ test('author conversation mode survives partial continuation and reads the origi
   await handleDialogue(req(continuation(first)),f.env,student,null,options);assert.equal(calls,1);assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='original_source_saved'").get().n,1);
  }finally{f.close();}
 });
+
+test('a completed provider reply rejected at finish validation allows one explicit regeneration and never a silent retry',()=>{
+ const call={state:'review',source_request_json:null,budget_policy_json:JSON.stringify({...policy,logicalProviderAttemptLimit:3})};
+ const ok=accounting([attempt(1,'OK',{outputStarted:true,usage})]);
+ const allowed=continuationDisposition(call,{stage:'proposal',code:'invalid_assessment',providerAccounting:ok});
+ assert.equal(allowed.allowed,true);assert.equal(allowed.code,'explicit_regeneration_available');assert.equal(allowed.requiresUserAction,true);assert.equal(allowed.remainingProviderAttempts,2);
+ assert.equal(continuationDisposition(call,{stage:'reading_evidence',code:'reading_evidence_invalid',providerAccounting:ok}).code,'explicit_regeneration_available');
+ assert.equal(continuationDisposition(call,{stage:'storage',code:'db_write_failed',providerAccounting:ok}).code,'provider_failure_not_retryable');
+ assert.equal(continuationDisposition(call,{providerAccounting:ok}).code,'provider_failure_not_retryable');
+ assert.equal(continuationDisposition(call,{stage:'proposal',providerAccounting:ok},true).code,'continuation_already_used');
+ assert.equal(continuationDisposition({...call,budget_policy_json:JSON.stringify(policy)},{stage:'proposal',providerAccounting:ok}).code,'continuation_not_reserved');
+ assert.equal(continuationDisposition(call,{stage:'proposal',providerAccounting:accounting([attempt(1,'400'),attempt(2,'OK',{outputStarted:true,usage})])}).code,'provider_completion_unconfirmed');
+ assert.equal(continuationDisposition(call,{stage:'provider_request',providerAccounting:accounting([attempt(1,'TIMEOUT',{outputStarted:true})])}).code,'explicit_continuation_available');
+});
+
+test('a finish-rejected reply is retained as received-not-validated and an explicit regeneration starts a fresh reply',async()=>{
+ const f=fixture();try{
+  const rejected='這一句的對照我也留意到了。你覺得它讓情感往哪裡轉？',fresh='你提到的對照很關鍵。請找出原文裡一處聲音描寫，說說它如何打破寧靜。';
+  const rejecting=async()=>{const r=modelSuccess(rejected,accounting([attempt(1,'OK',{outputStarted:true,usage})]));r.value.assessments=[{objectiveId:'not-in-lesson',outcome:'demonstrated',rationale:'synthetic',evidence:[]}];return r;};
+  const first=await firstFailure(f,rejecting);
+  const failure=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='response_unconfirmed'").get().details_json);
+  assert.equal(failure.stage,'proposal');assert.equal(failure.code,'invalid_assessment');assert.equal(failure.lateReplyRetained,true);
+  assert.equal(first.partial.content,rejected);assert.equal(first.partial.status,'unconfirmed');assert.deepEqual(first.partial.disposition,{stage:'proposal',code:'invalid_assessment',received:true});
+  assert.equal(first.partial.continuation.allowed,true);assert.equal(first.partial.continuation.code,'explicit_regeneration_available');
+  assert.equal(first.turns.filter(t=>t.role==='teacher').length,0);assert.equal(first.turns.filter(t=>t.role==='student').length,1);
+  let prompt=null;const regen=async(_e,p,_id,_reply,budget)=>{prompt=p;assert.equal(budget.providerAttemptLimit,2);return modelSuccess(fresh,{...accounting([attempt(1,'OK',{outputStarted:true,usage})]),maxProviderAttempts:2});};
+  const after=await(await handleDialogue(req(continuation(first)),f.env,student,null,{callModel:regen})).json();
+  assert.match(prompt,/重新生成/);assert.doesNotMatch(prompt,/逐字以此字串開頭/);assert.doesNotMatch(prompt,new RegExp(rejected));
+  assert.equal(after.partial,null);assert.deepEqual(after.turns.filter(t=>t.role==='teacher').map(t=>t.content),[fresh]);assert.equal(after.turns.filter(t=>t.role==='student').length,1);
+  const archived=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='response_rejected_retained'").get().details_json);
+  assert.equal(archived.content,rejected);assert.equal(archived.stage,'proposal');assert.equal(archived.code,'invalid_assessment');
+  const started=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='continuation_started'").get().details_json);assert.equal(started.regeneration,true);
+  const call=f.sql.prepare('SELECT state,usage_json FROM dialogue_calls').get();assert.equal(call.state,'finished');
+  const usageAccounting=call.usage_json?JSON.parse(call.usage_json):null;if(usageAccounting?.providerAccounting)assert.deepEqual(usageAccounting.providerAccounting.attempts.map(a=>a.outcome),['OK_REJECTED','OK']);
+ }finally{f.close();}
+});

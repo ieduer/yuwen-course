@@ -265,7 +265,7 @@ test('poem red marks retain source punctuation, survive view switches and clear 
 
  test('author introduces themselves before input without changing saved turns',async()=>{
  const f=await fixture({conversation:true,curriculumOverrides:{author:'朱自清',title:'荷塘月色',persona:{kind:'author-simulation'}}});
- assert.equal(f.document.getElementById('conversation-title').textContent,'與朱自清談');
+ assert.equal(f.document.getElementById('conversation-title'),null);assert.equal(f.document.getElementById('author').textContent,'朱自清');
  assert.match(f.document.getElementById('next').textContent,/我是朱自清/);
  assert.equal(f.posts.length,0);assert.equal(f.data.turns.length,0);
  assert.doesNotMatch(f.document.querySelector('.conversation').textContent,/尚未開始對話|選取原文，即可帶入對話|AI 教學模擬|回應會保存，評閱沿用原有判準/);
@@ -313,7 +313,7 @@ test('all original lesson text, images and supplements remain available in the r
 test('traditional Analects voices leave source authorship unchanged and remove UI AI labels',async()=>{
  const c={title:'《论语》十二章',author:'原作未署個人作者',persona:{kind:'source-guide'}};
  const f=await fixture({conversation:true,curriculumOverrides:c});
- assert.equal(f.document.getElementById('conversation-title').textContent,'與孔子及孔門弟子談');
+ assert.equal(f.document.getElementById('conversation-title'),null);assert.equal(f.document.getElementById('author').textContent,'孔子及孔門弟子');
  assert.match(f.document.getElementById('next').textContent,/孔子：吾名丘/);
  assert.doesNotMatch(f.document.querySelector('.conversation').textContent,/AI 模擬|原作未署個人作者/);
  assert.equal(c.author,'原作未署個人作者');assert.match(f.document.querySelector('.author-avatar img').getAttribute('src'),/kongzi\.webp/);
@@ -522,4 +522,63 @@ test('heading renders exact author attribution once without changing source iden
 test('heading preserves book attribution, non-author suffixes and unslashed work titles',async()=>{
  const f=await fixture();
  for(const [title,author] of [['兼爱/《墨子》','墨子'],['无衣/《诗经·秦风》','原作未署個人作者'],['作品/补充资料','作者'],['《论语》十二章','孔子'],['题名中的/斜线','甲'],['/作者','作者']])assert.equal(f.frontend.displayWorkTitle({title,author}),title);
+});
+
+test('progress line reports the stage with elapsed seconds and server-based coverage, never an invented percentage',async()=>{
+ const objectives=[{id:'o1',label:'一',domain:'read',status:'demonstrated'},{id:'o2',label:'二',domain:'read',status:'not_yet_observed'},{id:'o3',label:'三',domain:'shangyou',status:'demonstrated'},{id:'o4',label:'四',domain:'read',status:'demonstrated',requiredForCompletion:false}];
+ let release=null;
+ const f=await fixture({initial:{state:{next:null,objectives,completion:'in_progress'}},post:(body,{data,setData})=>{
+  setData({...data,revision:data.revision+1,turns:[...data.turns,{id:'t1',role:'student',content:body.content,createdAt:'2026-10-19T00:00:00Z'},{id:'t2',role:'teacher',content:'請再指出一處原文。',createdAt:'2026-10-19T00:00:01Z'}]});
+  const frame=(event,value)=>`event: ${event}\ndata: ${JSON.stringify(value)}\n\n`;
+  return new Promise(resolve=>{release=()=>resolve(new Response(frame('saved',{saved:true,turnId:'t1',mutationId:body.mutationId,revision:data.revision+1,createdAt:'2026-10-19T00:00:00Z'})+frame('delta',{turnId:'t1',text:'請再指出一處原文。'})+frame('done',{turnId:'t1'}),{headers:{'content-type':'text/event-stream'}}));});
+ }});
+ const progress=f.document.getElementById('progress'),stop=f.document.getElementById('stop');
+ assert.equal(progress.hidden,false);assert.match(progress.textContent,/本課目標：1／2 項已有伺服器評估/);assert.doesNotMatch(progress.textContent,/%|預計/);
+ f.answer('我注意到原句的對照。');const sent=f.send();
+ for(let i=0;i<4&&!release;i++)await tick();
+ assert.equal(stop.hidden,false);assert.match(progress.textContent,/正在保存你的回應/);assert.match(progress.textContent,/已 0 秒/);
+ release();await sent;
+ assert.equal(stop.hidden,true);assert.match(progress.textContent,/這一輪已保存/);assert.equal(f.posts.length,1);
+ const settle=[...f.timers.values()].filter(t=>t.delay===4000);assert.equal(settle.length,1);settle[0].cb();
+ assert.match(progress.textContent,/本課目標：1／2 項已有伺服器評估/);assert.doesNotMatch(progress.textContent,/%|預計/);
+});
+
+test('stop ends only the display: one POST, an explicit status, and the readback continues without a resend',async()=>{
+ let controller=null;const encoder=new TextEncoder();
+ const f=await fixture({post:(body,{data,setData})=>{
+  setData({...data,revision:data.revision+1,pending:true,turns:[...data.turns,{id:'t1',role:'student',content:body.content,createdAt:'2026-10-19T00:00:00Z'}]});
+  const frame=(event,value)=>`event: ${event}\ndata: ${JSON.stringify(value)}\n\n`;
+  return new Response(new ReadableStream({start(c){controller=c;c.enqueue(encoder.encode(frame('saved',{saved:true,turnId:'t1',mutationId:body.mutationId,revision:data.revision+1,createdAt:'2026-10-19T00:00:00Z'})));}}),{headers:{'content-type':'text/event-stream'}});
+ }});
+ f.answer('我注意到原句的對照。');const sent=f.send();
+ for(let i=0;i<6&&!controller;i++)await tick();
+ const signal=f.calls.find(c=>c.options.method==='POST').options.signal;assert.ok(signal&&!signal.aborted);
+ signal.addEventListener('abort',()=>controller.error(new DOMException('The operation was aborted.','AbortError')));
+ for(let i=0;i<4&&!/回應生成中/.test(f.document.getElementById('progress').textContent);i++)await tick();
+ assert.equal(f.document.getElementById('stop').hidden,false);assert.match(f.document.getElementById('progress').textContent,/回應生成中/);
+ const before=f.calls.length;
+ f.document.getElementById('stop').onclick();await sent;
+ assert.equal(f.posts.length,1);assert.equal(f.document.getElementById('stop').hidden,true);
+ assert.match(f.document.getElementById('status').textContent,/已停止顯示/);assert.match(f.document.getElementById('status').textContent,/不會重送/);
+ assert.ok(f.calls.slice(before).some(c=>!c.options.method&&c.url.startsWith('/api/dialogue')));
+ assert.equal(f.frontend.pending,null);assert.equal(f.frontend.snapshot.pending,true);
+});
+
+test('personal history lists every lesson of the account from the server and opens one without posting',async()=>{
+ const f=await fixture({get:(url,data)=>url.includes('sessions=1')?Response.json({ownerRef:'owner-a',scope:'own-sessions-only',sessions:[{lessonId:'lesson-189',curriculumVersion:'v1',revision:4,turnCount:4,lastTurnAt:'2026-10-19T10:00:00Z'},{lessonId:'lesson-5',curriculumVersion:'v1',revision:2,turnCount:2,lastTurnAt:null}]}):data});
+ await f.document.getElementById('sessions-load').onclick();
+ const items=[...f.document.querySelectorAll('#sessions-list li')];assert.equal(items.length,2);
+ assert.match(items[0].textContent,/篇目 189/);assert.match(items[0].textContent,/4 則/);assert.equal(items[0].querySelector('button').disabled,true);
+ assert.match(items[1].textContent,/篇目 5/);assert.equal(items[1].querySelector('button').textContent,'開啟');
+ const listCall=f.calls.find(c=>c.url.includes('sessions=1'));assert.ok(listCall);assert.equal(listCall.options.method,undefined);assert.equal(f.posts.length,0);
+ items[1].querySelector('button').onclick();await tick();await tick();
+ assert.ok(f.calls.some(c=>c.url==='/dialogue-curriculum/lesson-5.json'));assert.equal(f.context.location.hash,'lesson-5');assert.equal(f.posts.length,0);
+});
+
+test('catalogue toggle is explicit, keeps aria state and the conversation heading stays removed',async()=>{
+ const f=await fixture();const toggle=f.document.getElementById('catalog-toggle'),catalog=f.document.getElementById('catalog'),shell=f.document.querySelector('.page-shell');
+ assert.equal(catalog.hidden,false);
+ toggle.onclick();assert.equal(catalog.hidden,true);assert.equal(toggle.getAttribute('aria-expanded'),'false');assert.ok(shell.classList.contains('catalog-hidden'));
+ toggle.onclick();assert.equal(catalog.hidden,false);assert.equal(toggle.getAttribute('aria-expanded'),'true');assert.ok(!shell.classList.contains('catalog-hidden'));
+ assert.equal(f.posts.length,0);assert.equal(f.document.getElementById('conversation-title'),null);assert.equal(f.document.querySelectorAll('.conversation h2').length,0);
 });
