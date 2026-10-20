@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1486,
-  "totalBytes": 204828371,
-  "aggregateSha256": "70d2c82c9a8adcc324219e71e1c59b3fe4ec636c3577e76620572a2fbfc25d0c",
+  "fileCount": 1487,
+  "totalBytes": 204837698,
+  "aggregateSha256": "1c3184ea4d0fc792887e08b8718ddac4e4b44a0e40682d36d70bc53f0ea23f51",
   "files": [
     {
       "path": "_headers",
@@ -252,8 +252,8 @@
     },
     {
       "path": "_worker.js/dialogue-source.js",
-      "bytes": 89423,
-      "sha256": "baaf6b090ff34fd6eaa21e7958c457207d5c43e8081130f2137e375e3a23450c"
+      "bytes": 94596,
+      "sha256": "bfec596af86b3e3256fa0543ebd32682011d20e185e5488d0c8ea60913d156e5"
     },
     {
       "path": "_worker.js/dialogue-stream.js",
@@ -353,7 +353,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "f88cb19c213933fab115cfbc9b3f294881da43cdac4f11d6cfc93878c841f654"
+      "sha256": "dc899e28e3b70a06ad893a63fb3fcf9d7726a4374c762ec1eb81446584f0f957"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1776,6 +1776,11 @@
       "sha256": "a7e6a9d3cf5263319806f85b340278825f590af622acae388db65696b0968cc5"
     },
     {
+      "path": "assets/dialogue-export.js",
+      "bytes": 1893,
+      "sha256": "b297862a33e0679de3929fbe52982aa2812c0edcb01748b4dfe5e2660a56333e"
+    },
+    {
       "path": "assets/dialogue-first-read.js",
       "bytes": 2941,
       "sha256": "04d04aafd865732136f96a4dac73724ea3ba3162f68f6661d891fd5ceb6937cb"
@@ -1797,8 +1802,8 @@
     },
     {
       "path": "assets/dialogue.js",
-      "bytes": 89232,
-      "sha256": "6f9d40ed0950430fb598d8ab7d6bd408d8bbe2be7a17cee88dce658bd4f8d9f9"
+      "bytes": 91232,
+      "sha256": "9945ed6b79fd6c4e5e6bf6d732cbdfd4e57adf9bc4bcbf94fb6b080a0e1c7505"
     },
     {
       "path": "assets/learning-evidence.js",
@@ -7357,8 +7362,8 @@
     },
     {
       "path": "dialogue.html",
-      "bytes": 8781,
-      "sha256": "ada8b5ebea4a7f57fa55dc30729e71ec391f34ba2ffd7dec4c9663927f3e8a79"
+      "bytes": 9042,
+      "sha256": "f36e7cc645653e20a63fa60c12464c48b3754aca3a8b2ffa225e684394c98dfe"
     },
     {
       "path": "evaluation-scheduler.js",
