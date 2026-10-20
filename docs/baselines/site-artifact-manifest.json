@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1486,
-  "totalBytes": 204823862,
-  "aggregateSha256": "a35cd4f3caab4fb5d4b13960665d67966b8f484ac7f8919cc1272081b4732905",
+  "totalBytes": 204827462,
+  "aggregateSha256": "00901d799e568f8be47daaa0bdd730f19e0a6c29fa56a2b464083f7949b321e7",
   "files": [
     {
       "path": "_headers",
@@ -57,8 +57,8 @@
     },
     {
       "path": "_worker.js/dialogue-budget.js",
-      "bytes": 1857,
-      "sha256": "a319c3415e367bd101f4cad675a0a1826361ef7dac6923a8de42addf7b8968df"
+      "bytes": 3811,
+      "sha256": "6d42bebbddfd2f8b62938d39ba9e75d51dbb4a652642a13b89cc51072b35f7c5"
     },
     {
       "path": "_worker.js/dialogue-calibration-amendment4-contract.js",
@@ -237,8 +237,8 @@
     },
     {
       "path": "_worker.js/dialogue-recovery.js",
-      "bytes": 8417,
-      "sha256": "c95fe40020013ddd00b8923fb92595456c5ee53e1b0649f81fcd09cc29b7a1aa"
+      "bytes": 8979,
+      "sha256": "b3ccbf1fbb217e2d58be746e800a923ac4f1309b3a03a55ce1873e7304f4703b"
     },
     {
       "path": "_worker.js/dialogue-session-source.js",
@@ -252,13 +252,13 @@
     },
     {
       "path": "_worker.js/dialogue-source.js",
-      "bytes": 89231,
-      "sha256": "74dfbf055808fde6e4c4c773ffefae1c97f7e2f4ba0b13116fff68331fa5fa22"
+      "bytes": 89423,
+      "sha256": "baaf6b090ff34fd6eaa21e7958c457207d5c43e8081130f2137e375e3a23450c"
     },
     {
       "path": "_worker.js/dialogue-stream.js",
-      "bytes": 6752,
-      "sha256": "554995a22bc09efaedb5556f417b76316afa2d36b4ad201776131e947f16478e"
+      "bytes": 7644,
+      "sha256": "888b747f1404c565b7e360803399fb9f9e4e2513d78c526b831928372917863d"
     },
     {
       "path": "_worker.js/dialogue-synthetic-diagnostic-fixture.json.js",
@@ -353,7 +353,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "c58d937ade1366f1cd5a26b891c575ae572409d91c9853b3d5bf7765a7066b64"
+      "sha256": "52c5c0967506e6010bfd6d80f5a8abf940fc7b0457b0f274e9dbcc80e44f6cf4"
     },
     {
       "path": "app-content/latest-stable.json",
