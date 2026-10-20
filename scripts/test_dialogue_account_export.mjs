@@ -39,6 +39,15 @@ test('sessions=1 pages the account list newest first with a keyset cursor and a 
   const whole=await(await handleDialogue(new Request(url('&sessions=1')),f.env,student)).json();assert.equal(whole.sessions.length,4);assert.equal(whole.pageSize,100);
  }finally{f.close();}
 });
+test('exportAll=1 exports every turn of a long transcript in chunks and only flags a session over the policy bound',async()=>{
+ const f=fixture();try{seed(f);
+  const ins=f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,?,?,?,?,?)");
+  for(let i=1;i<=1203;i++)ins.run('L'+i,'s2','L'+i,H,i%2?'student':'teacher','t'+i,'saved','synthetic-policy','2026-10-19T01:'+String(i%60).padStart(2,'0')+':00Z');
+  const page=await(await handleDialogue(new Request(url('&exportAll=1&limit=5')),f.env,student)).json();
+  const s2=page.sessions.find(s=>s.sessionId==='s2');assert.equal(s2.turnCount,1203);assert.equal(s2.turns.length,1203);assert.equal(s2.complete,true);assert.equal(s2.reviewRequired,'transcript_over_policy_bound');assert.ok(s2.turns.every((t,i)=>i===0||t.sequence>s2.turns[i-1].sequence),'sequences strictly increasing');assert.equal(s2.turns.at(-1).id,'L1203');assert.equal(s2.turns[0].id,'L1');
+  const s1=page.sessions.find(s=>s.sessionId==='s1');assert.equal(s1.reviewRequired,undefined);
+ }finally{f.close();}
+});
 test('exportAll=1 returns every own session in bounded pages with versions, speakers, timestamps, saved replies and labelled incomplete content, never another account',async()=>{
  const f=fixture();try{seed(f);
   assert.equal((await handleDialogue(new Request(url('&exportAll=1')),f.env,null)).status,401);
@@ -53,5 +62,6 @@ test('exportAll=1 returns every own session in bounded pages with versions, spea
   assert.equal(s1.turns[1].replyTo,'t1');assert.deepEqual(s1.turns[2].partialReply,{content:'partial reply',label:'incomplete_unconfirmed_stream'});assert.equal(s1.turns[0].partialReply,undefined);
   assert.deepEqual(s1.unsentDrafts.map(d=>[d.content,d.label]),[['未送出的文字','unsent_draft']]);
   assert.deepEqual(sessions.find(s=>s.sessionId==='s4').turns,[]);
+  assert.ok(sessions.every(s=>s.complete===true&&s.reviewRequired===undefined));
  }finally{f.close();}
 });

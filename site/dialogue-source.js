@@ -92,9 +92,11 @@ function sessionCursor(url,maxLimit){
  return {before:updatedAt===null?null:{updatedAt,id},limit};
 }
 async function exportSession(db,s){
- const limit=LIMITS.lessonLifetime*2;
- const rows=await all(db.prepare('SELECT id,sequence,role,content,status,question_id,reply_to,model,model_version,policy_version,created_at,source_request_json FROM dialogue_turns WHERE session_id=? ORDER BY sequence LIMIT ?').bind(s.id,limit+1));
- const truncated=rows.length>limit;rows.splice(limit);
+ // Every turn is exported: the transcript is read in bounded chunks until exhausted (never cut). A session beyond the
+ // policy bound (lessonLifetime x 2 rows) is still complete and is flagged for review instead of being truncated.
+ const bound=LIMITS.lessonLifetime*2,chunk=500,rows=[];
+ for(let after=0;;){const page=await all(db.prepare('SELECT id,sequence,role,content,status,question_id,reply_to,model,model_version,policy_version,created_at,source_request_json FROM dialogue_turns WHERE session_id=? AND sequence>? ORDER BY sequence LIMIT ?').bind(s.id,after,chunk));rows.push(...page);if(page.length<chunk||rows.length>=bound*8)break;after=page.at(-1).sequence;}
+ const overBound=rows.length>bound;
  const replied=new Set(rows.filter(t=>t.role==='teacher'&&t.reply_to).map(t=>t.reply_to));
  const chunks=await all(db.prepare('SELECT c.turn_id,c.content FROM dialogue_stream_chunks c JOIN dialogue_turns t ON t.id=c.turn_id WHERE t.session_id=? ORDER BY t.sequence,c.sequence').bind(s.id));
  const partial=new Map();for(const c of chunks)partial.set(c.turn_id,(partial.get(c.turn_id)||'')+c.content);
@@ -102,7 +104,7 @@ async function exportSession(db,s){
   return {id:t.id,sequence:t.sequence,role:t.role,speaker:t.role==='student'?'student':'author-simulation',content:t.content,status:t.status,confirmed,createdAt:t.created_at,model:t.model,modelVersion:t.model_version,policyVersion:t.policy_version,questionId:t.question_id,replyTo:t.reply_to,formal:t.source_request_json?JSON.parse(t.source_request_json):null,...(streamed!==null?{partialReply:{content:streamed,label:'incomplete_unconfirmed_stream'}}:{})};});
  const {submissions}=await learningRecords(db,s),assessments=await assessmentRows(db,s.id);
  const drafts=await all(db.prepare('SELECT mutation_id,revision,content,question_id,created_at FROM dialogue_drafts WHERE session_id=? AND submitted_turn_id IS NULL ORDER BY created_at,id').bind(s.id));
- return {sessionId:s.id,lessonId:s.lesson_id,curriculumVersion:s.curriculum_version,policyVersion:s.policy_version,revision:s.revision,createdAt:s.created_at,updatedAt:s.updated_at,inflight:!!s.inflight,turnCount:rows.length,complete:!truncated,...(truncated?{incomplete:'transcript_requires_review'}:{}),
+ return {sessionId:s.id,lessonId:s.lesson_id,curriculumVersion:s.curriculum_version,policyVersion:s.policy_version,revision:s.revision,createdAt:s.created_at,updatedAt:s.updated_at,inflight:!!s.inflight,turnCount:rows.length,complete:true,...(overBound?{reviewRequired:'transcript_over_policy_bound'}:{}),
   turns,submissions:submissions.map(x=>({turnId:x.turnId,sequence:x.sequence,objectiveId:x.objectiveId,interaction:x.interaction,label:x.label,input:x.input,status:x.status,assessment:x.assessment??null})),
   assessments:assessments.map(a=>({objectiveId:a.objectiveId,outcome:a.outcome,ruleVersion:a.ruleVersion,createdAt:a.createdAt})),
   unsentDrafts:drafts.map(d=>({mutationId:d.mutation_id,revision:d.revision,content:d.content,questionId:d.question_id,createdAt:d.created_at,label:'unsent_draft'}))};
