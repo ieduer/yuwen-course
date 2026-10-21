@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1488,
-  "totalBytes": 204889706,
-  "aggregateSha256": "82126aa32b8d034b8776d0ba01b2ef43dd6ff25cb14a4ed088a81115c5d842de",
+  "totalBytes": 204893845,
+  "aggregateSha256": "9077966f06a528f194150c1f89c6ccba7950382c4c4327115147206d657a51b2",
   "files": [
     {
       "path": "_headers",
@@ -217,8 +217,8 @@
     },
     {
       "path": "_worker.js/dialogue-policy.js",
-      "bytes": 44640,
-      "sha256": "19169b9a272ae325937bcff3c57486015cce5cc2cbe501aa4250e63cba8b6fa2"
+      "bytes": 44943,
+      "sha256": "f2f53af2e7eb5c73d3becc04861f17b469ff61ad63db98a61c88a3c05a4c7a36"
     },
     {
       "path": "_worker.js/dialogue-public-curriculum.js",
@@ -257,8 +257,8 @@
     },
     {
       "path": "_worker.js/dialogue-source.js",
-      "bytes": 109500,
-      "sha256": "0c924da064614fcb2fac68646a82d6584465b5b33fb3549c9e70611e4cf18d9d"
+      "bytes": 111197,
+      "sha256": "8f1b8defd8a9a003f50cead47923b8da01482f7d4b1e5cb4188fa797f09fff2a"
     },
     {
       "path": "_worker.js/dialogue-stream.js",
@@ -358,7 +358,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "0a7c6279e7a569bc8a004b6d553dcda92e991636df731eb99b166d64b6effe2e"
+      "sha256": "e062caab44e22e60116df40b9bdb5d716411950e803edbd645e508f480bcb732"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1807,8 +1807,8 @@
     },
     {
       "path": "assets/dialogue.js",
-      "bytes": 102685,
-      "sha256": "4d1dbed956d2ebe13e60939b31d2a777aaee926e2cc01110cd2265fb0ca5a435"
+      "bytes": 104824,
+      "sha256": "153ea40b4a77ef06fe37ef2bba3c6831b94b3c153badd7145f6097e389f85111"
     },
     {
       "path": "assets/learning-evidence.js",
@@ -7368,7 +7368,7 @@
     {
       "path": "dialogue.html",
       "bytes": 9857,
-      "sha256": "26bcde8ba522c839016139727ccb6e5336b78b90e38d4aa59c56d442daa35ca2"
+      "sha256": "b29de42ae144e58530b179a2f848c69aea2d0ca8092d8a5c80adf5aca967a97f"
     },
     {
       "path": "evaluation-scheduler.js",
