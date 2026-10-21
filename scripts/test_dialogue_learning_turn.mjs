@@ -821,3 +821,31 @@ test('a rejected part keeps the validator code even when the message is a learne
  const src=(await import('node:fs')).readFileSync(new URL('../site/dialogue-source.js',import.meta.url),'utf8');
  assert.match(src,/const partCode=rejectionCode;/);assert.match(src,/const failureCode=rejectionCode\(error\);/);
 });
+test('a declared study-guide answer after the shown reference is drafted by the server when the reply omits sourceDraft, then scored once by the unchanged key',async t=>{
+ const key='lesson-1476-p29-ancient-modern-01',f=fixture(t,'lesson-1476',o=>o.domain==='studyGuide'&&o.sourceItemKey===key),item=f.curriculum.studyGuide.find(i=>i.itemKey===key);let calls=0;
+ f.options.callModel=async()=>{calls++;
+  if(calls===1||calls===4)return {value:{reply:item.referenceAnswer,assessments:[]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
+  return {value:{reply:'對，就是這個意思。我們接著讀下文。',assessments:[]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ const proposals=()=>f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_answer_proposed'").all().map(r=>JSON.parse(r.details_json));
+ let r=await f.send(await f.read(),'請先讓我對照這題的原參考答案。',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));assert.equal(proposals().length,0);
+ r=await f.send(r.data,'我的答案是大人之學',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
+ assert.equal(proposals().length,1);assert.equal(proposals()[0].origin,'server-reveal-followup-v1');assert.equal(proposals()[0].formal.input.response,'大人之學');
+ assert(r.data.sourceDraft);assert.equal(r.data.learningTurn.kind,'sourceEvidence');
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,0,'a draft is not a submission');
+ r=await f.send(r.data,'大人是指年紀大的人嗎？',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
+ const input=JSON.parse(f.sql.prepare('SELECT submitted_payload_json FROM learning_submission_records').get().submitted_payload_json);assert.equal(input.response,'大人之學');
+ const receipt=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_assessment_saved'").get().details_json);
+ assert.equal(receipt.assessment.provider,'study-guide-answer-key');assert.equal(receipt.assessment.score,100);
+ assert.equal((await handleDialogue(f.req(r.body),f.env,student,null,f.options)).status,200);assert.equal(calls,3,'a replayed mutation makes no new call');
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,1);
+ r=await f.send(r.data,'請再給我看一次參考。',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
+ r=await f.send(r.data,'我的答案是大人之學',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
+ assert.equal(proposals().length,1,'an item that already has a result is not drafted again');assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,1);
+});
+test('a question after the shown reference is not drafted as an answer',async t=>{
+ const key='lesson-1476-p29-ancient-modern-01',f=fixture(t,'lesson-1476',o=>o.domain==='studyGuide'&&o.sourceItemKey===key),item=f.curriculum.studyGuide.find(i=>i.itemKey===key);let calls=0;
+ f.options.callModel=async()=>{calls++;return {value:{reply:calls===1?item.referenceAnswer:'你問得好。',assessments:[]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ let r=await f.send(await f.read(),'請先讓我對照這題的原參考答案。',{conversation:true});assert.equal(r.response.status,200);
+ r=await f.send(r.data,'我的答案是大人之學，對嗎？',{conversation:true});assert.equal(r.response.status,200);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='source_answer_proposed'").get().n,0);assert.equal(r.data.sourceDraft??null,null);
+});

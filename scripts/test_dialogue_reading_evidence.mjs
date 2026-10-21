@@ -130,3 +130,36 @@ test('a study-guide reference shown in traditional script counts as revealed; an
  assert.equal(referenceShown('我們來談談〈蘭亭集序〉的結構與情感變化。',reference),false);
  assert.equal(referenceShown(live,''),false);
 });
+// yw-study-reveal-followup-v1: the 2026-10-21 lesson-1578 「所以」 turns (B1 reveal, B2 answer), verbatim.
+const followupReveal='對，你把兩個「所以」分開了。「所以興懷，其致一也」是說古今人感慨的「原因」，「所以遊目騁懷」是說仰觀俯察這種「憑藉的方式」。這說明你不是只認一個詞義，而是看出兩句各自在說甚麼。\n\n下面是學案的參考，請你對照：\n所以興懷，其致一也：表原因，……的原因。\n所以遊目騁懷：表憑藉，所用來……的事物或方式。\n\n兩句放在一起，也呼應你先前問我為何不願用「齊死生」自慰：前面寫的是快樂之所憑，後面寫的是悲感之所由。你對照之後，想補一句你憑哪些上下文來分辨「原因」和「憑藉」嗎？也可以修正自己原來的說法。';
+const followupAnswer='我分辨的依據是上下文：「所以興懷」後面接「其致一也」，說古今人興感的緣由是一樣的，所以是「……的原因」；「所以遊目騁懷」前面是「仰觀宇宙之大，俯察品類之盛」，這是拿來放開心懷的懑藉，所以是「用來……的」。我的答案就是這兩個。';
+const followupTurns=(answer,reveal=followupReveal)=>[
+ {id:'b1',role:'student',content:'我想答學案裡「所以」這一題。',createdAt:'2026-10-21T14:09:35.137Z'},
+ {id:'r1',role:'teacher',content:reveal,createdAt:'2026-10-21T14:09:47.963Z'},
+ {id:'b2',role:'student',content:answer,createdAt:'2026-10-21T14:10:46.339Z'}];
+test('a declared answer right after the shown study-guide reference becomes that item\'s draft in the student\'s own words',async()=>{
+ const {revealFollowupDraft}=await import('../site/dialogue-formal.js');
+ const c=JSON.parse((await import('node:fs')).readFileSync('site/dialogue-curriculum/lesson-1578.json','utf8'));
+ const d=revealFollowupDraft(c,null,followupTurns(followupAnswer),'b2');
+ assert.equal(d.formal.objectiveId,'study:lesson-1578-p77-function-word-02');assert.equal(d.formal.interaction,'studyGuideItemCompleted');
+ assert.equal(d.formal.input.response,followupAnswer);assert.equal(d.formal.input.referenceRevealedAt,'2026-10-21T14:09:47.963Z');
+ assert.equal(d.references[0].turnId,'b2');assert.equal(d.origin,'server-reveal-followup-v1');
+ const lead=revealFollowupDraft(c,null,followupTurns('我的答案是：表原因；表憑藉。'),'b2');assert.equal(lead.formal.input.response,'表原因；表憑藉。','a leading declaration is left out; the rest is verbatim');
+});
+test('no study-guide draft is derived from a question, an undeclared remark, a partial reveal, an intervening turn or an ambiguous reveal',async()=>{
+ const {revealFollowupDraft}=await import('../site/dialogue-formal.js');
+ const c=JSON.parse((await import('node:fs')).readFileSync('site/dialogue-curriculum/lesson-1578.json','utf8'));
+ assert.equal(revealFollowupDraft(c,null,followupTurns('我的答案是表原因和表憑藉，對嗎？'),'b2'),null,'a question');
+ assert.equal(revealFollowupDraft(c,null,followupTurns('我覺得第一個是原因，第二個是憑藉。'),'b2'),null,'no declared answer');
+ assert.equal(revealFollowupDraft(c,null,followupTurns('我的答案和參考不一樣。'),'b2'),null,'a remark about the answer is not a declaration');
+ assert.equal(revealFollowupDraft(c,null,followupTurns(followupAnswer,'下面是學案的參考：所以興懷，其致一也：表原因，……的原因。'),'b2'),null,'half a reference is not a reveal');
+ const between=followupTurns(followupAnswer);between.splice(2,0,{id:'x',role:'student',content:'等一下',createdAt:'2026-10-21T14:10:00Z'});
+ assert.equal(revealFollowupDraft(c,null,between,'b2'),null,'the answer must follow the reveal directly');
+ const two=followupReveal+'\n会于会稽山阴之兰亭：结构助词，的。\n不知老之将至：结构助词，用于主谓之间，取消句子独立性。\n及其所之既倦：动词，往、到达。\n犹不能不以之兴怀：代词，指先前所欣之事或其成为陈迹这件事。\n丝竹管弦之盛：定语后置的标志。\n宇宙之大、品类之盛：定语后置的标志。';
+ assert.equal(revealFollowupDraft(c,null,followupTurns(followupAnswer,two),'b2'),null,'two items revealed at once');
+ const inactive=structuredClone(c);inactive.studyGuide.find(i=>i.itemKey==='lesson-1578-p77-function-word-02').reviewRequired=true;
+ assert.equal(revealFollowupDraft(inactive,null,followupTurns(followupAnswer),'b2'),null,'an item pending review is never drafted');
+ const done={objectives:[{id:'study:lesson-1578-p77-function-word-02',status:'preserved'}]};
+ assert.equal(revealFollowupDraft(c,done,followupTurns(followupAnswer),'b2'),null,'a preserved result is not reopened');
+ assert.equal(revealFollowupDraft(c,{legacyCompletion:{},objectives:[]},followupTurns(followupAnswer),'b2'),null,'a completed lesson is not reopened');
+});

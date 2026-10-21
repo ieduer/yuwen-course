@@ -117,6 +117,28 @@ export function validateFormalDraft(curriculum, turns, proposed) {
   const formal=prepareFormalInput(curriculum,{objectiveId:objective.id,input});
   return {formal,label:FORMAL_LABELS[kind],rule:formalRubric(kind,curriculum.mode),references};
 }
+// yw-study-reveal-followup-v1. The author's turn showed the complete reference of exactly one eligible study-guide item
+// and the student's next turn declares its answer, but the reply carried no sourceDraft: the student's own words are
+// proposed as that item's draft by the same validator a model proposal goes through. Nothing is scored here; the draft is
+// shown to the student and submitted by their next turn, where the original answer key or rubric decides. A leading
+// declaration (「我的答案是」) is left out of the quote, which stays a verbatim part of the student's turn.
+const ANSWER_DECLARED=/(?:我的(?:答案|回答|作答)|答案)就?(?:是|為|为|：|:)|(?:這|这|以上|上面)就?是我的(?:答案|回答|作答)/u;
+const LEADING_DECLARATION=/^(?:我的(?:答案|回答|作答)|答案)就?(?:(?:是|為|为)[：:，,]?|[：:])\s*/u;
+export function revealFollowupDraft(curriculum,state,turns,turnId){
+  const at=turns.findIndex(t=>t.id===turnId&&t.role==='student'),reveal=turns[at-1];
+  if(at<1||reveal?.role!=='teacher'||typeof turns[at].content!=='string')return null;
+  const content=turns[at].content.trim();
+  if(!ANSWER_DECLARED.test(content)||/[？?]$/u.test(content))return null;
+  const shown=originalRequirements(curriculum,state).filter(r=>{
+    if(r.source?.kind!=='curated-study-guide-item')return false;
+    const text=studyGuideReferenceText(curriculum.studyGuide?.find(i=>i.itemKey===r.source.itemKey)?.referenceAnswer);
+    return !!text&&(reveal.content.includes(text)||referenceShown(reveal.content,text));
+  });
+  if(shown.length!==1)return null;
+  const quote=content.replace(LEADING_DECLARATION,'').trim()||content;
+  try{return {...validateFormalDraft(curriculum,turns,{objectiveId:shown[0].objectiveId,fields:{response:{turnId,quote}}}),origin:'server-reveal-followup-v1'};}
+  catch{return null;}
+}
 function originalMaterials(curriculum) {
   const formal=curriculum.objectives.filter(o=>o.domain==='legacy'&&FORMAL_FIELDS[o.legacy?.questionKind])
     .map(o=>({objectiveId:o.id,label:FORMAL_LABELS[o.legacy.questionKind],fields:FORMAL_FIELDS[o.legacy.questionKind].map(key=>({key,label:FIELD_LABELS[key]})),rule:formalRubric(o.legacy.questionKind,curriculum.mode),source:{kind:'original-formal-rubric',resourceKey:o.legacy.resourceKey,resourceVersion:o.legacy.resourceVersion},...(o.legacy.formalScopePolicyVersion?{newAnswersOnly:true,answerNotBefore:o.legacy.effectiveFrom}:{} )}));

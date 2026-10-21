@@ -18,7 +18,7 @@ import {hasClassicalAnnotatedReadReceipt} from './classical-first-read-source.js
 import {consumeGatewayStream,studentStream,validatedProviderAccounting} from './dialogue-stream.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
 import {requestDialogueBudget,combinedProviderAccounting,operatorCost,continuationDisposition,budgetDenial} from './dialogue-recovery.js';
-import {prepareFormalInput,formalPrompt,studyGuideConversationReply,originalTask,originalVocabularyTasks,prepareOriginalInput} from './dialogue-formal.js';
+import {prepareFormalInput,formalPrompt,studyGuideConversationReply,originalTask,originalVocabularyTasks,prepareOriginalInput,revealFollowupDraft} from './dialogue-formal.js';
 import {learningTurn,collectedFormal} from './dialogue-learning-turn.js';
 import {lessonCallLimit} from './dialogue-lesson-limits.js';
 import {sanitizeDialogueCurriculum} from './dialogue-public-curriculum.js';
@@ -774,6 +774,15 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
    if(needsReceipt.length){if(!lenient)throw Error('original_evidence_requires_source_receipt');proposal={...proposal,assessments:proposal.assessments.filter(a=>!needsReceipt.includes(a))};rejectedParts.push({part:'assessments',code:'original_evidence_requires_source_receipt',objectiveIds:needsReceipt.map(a=>a.objectiveId)});}
   }
   if(proposal.sourceDraft&&(legacy.completion||legacy.preserved.some(p=>p.objectiveId===proposal.sourceDraft.formal.objectiveId))){if(!lenient)throw Error('original_result_preserved');proposal={...proposal,sourceDraft:null};rejectedParts.push({part:'sourceDraft',code:'original_result_preserved'});}
+  // The reply left out the draft of a study-guide answer the student just declared after the reference was shown:
+  // derive it from the student's own words (revealFollowupDraft). Only for an item with no earlier proposal or result.
+  if(lenient&&!proposal.sourceDraft&&!legacy.completion){
+   const derived=revealFollowupDraft(curriculum,state,completeTurns,turnId);
+   if(derived&&!legacy.preserved.some(p=>p.objectiveId===derived.formal.objectiveId)){
+    const prior=await all(db.prepare("SELECT details_json FROM dialogue_events WHERE session_id=? AND event_type IN ('source_answer_proposed','source_assessment_saved')").bind(session.id));
+    if(!prior.some(r=>{const d=JSON.parse(r.details_json);return (d.formal?.objectiveId??d.objectiveId)===derived.formal.objectiveId;}))proposal={...proposal,sourceDraft:derived};
+   }
+  }
   failureStage='original_evidence';
   let originalEvidence=null;
   if(body.conversation===true){try{originalEvidence=validateOriginalEvidence(result.value.originalEvidence,{turns:completeTurns,curriculum,task:guide,tasks:originalTasks});}catch(error){if(!lenient)throw error;rejectedParts.push({part:'originalEvidence',code:partCode(error)});}}
