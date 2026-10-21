@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1488,
-  "totalBytes": 204894411,
-  "aggregateSha256": "71735213c9afc8607cca39b3a4a28802752d320900f75e237d43284e271c74e7",
+  "fileCount": 1489,
+  "totalBytes": 204904669,
+  "aggregateSha256": "e0ad9cc2de872d2ff8bb08f470a55a1a1cdca25b2a51d2b58cf4409e79d0d9b6",
   "files": [
     {
       "path": "_headers",
@@ -62,8 +62,8 @@
     },
     {
       "path": "_worker.js/dialogue-budget.js",
-      "bytes": 5207,
-      "sha256": "81c5cce8d6284fef602ec45e5f68a3d30d527dc28b22218768bad7c299856bf7"
+      "bytes": 5652,
+      "sha256": "bed99d1dd5655ba27dc1f66691f258d656e7225ac72e9eab5da3aed27391c868"
     },
     {
       "path": "_worker.js/dialogue-calibration-amendment4-contract.js",
@@ -152,8 +152,8 @@
     },
     {
       "path": "_worker.js/dialogue-e2e-admission.js",
-      "bytes": 5256,
-      "sha256": "4d23ce81e192ef8838417c4124a545f51bf6bec9636312e49c0a05df1459a020"
+      "bytes": 5648,
+      "sha256": "e9fe831245fb83e163f84f879bfaa7a728a5b3fe223dc65ac137b628ff97c9e1"
     },
     {
       "path": "_worker.js/dialogue-e2e-renewal.js",
@@ -216,6 +216,11 @@
       "sha256": "e7aeb2b0bf74cc7fec16b63221a11e064e466d427cd0977e5a06c4b5c530676f"
     },
     {
+      "path": "_worker.js/dialogue-pacing.js",
+      "bytes": 4842,
+      "sha256": "2ada131c9b04b41c80ebbadf7526a0a81c0d38041a14c5402e6f546b01fe2c9a"
+    },
+    {
       "path": "_worker.js/dialogue-policy.js",
       "bytes": 44943,
       "sha256": "f2f53af2e7eb5c73d3becc04861f17b469ff61ad63db98a61c88a3c05a4c7a36"
@@ -242,8 +247,8 @@
     },
     {
       "path": "_worker.js/dialogue-recovery.js",
-      "bytes": 9958,
-      "sha256": "1e30d6752be7aa02bec8c3c86ea3e538410e36316c52ce7e1fa51ff06243f2c1"
+      "bytes": 12246,
+      "sha256": "bf6601bdcbb7b9eddba92931b2e51be7d9c5b8198184e06d42112c22027bb3ba"
     },
     {
       "path": "_worker.js/dialogue-session-source.js",
@@ -257,8 +262,8 @@
     },
     {
       "path": "_worker.js/dialogue-source.js",
-      "bytes": 111197,
-      "sha256": "8f1b8defd8a9a003f50cead47923b8da01482f7d4b1e5cb4188fa797f09fff2a"
+      "bytes": 112532,
+      "sha256": "e1b38ed9b4cb90d1697c4f39a123e0b5b9e840d7f777a666bb9eb10f4b6eb50c"
     },
     {
       "path": "_worker.js/dialogue-stream.js",
@@ -358,7 +363,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "09e4d45b814744aa237665b0e817d4ba5d1c09e15ee1cb2bc31fde3042175113"
+      "sha256": "99a2419c447b7b8874221e5d44690e5ac2d602d8804fb78dc948a76c98e2dfc4"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1807,8 +1812,8 @@
     },
     {
       "path": "assets/dialogue.js",
-      "bytes": 105390,
-      "sha256": "8215f9e60a86fd0f932d7965c76ca8a6795c36ac0f6f9243dca163f610508fdc"
+      "bytes": 106346,
+      "sha256": "201088252169e00c46cba5eef33b0ae8e76cded32650b6887d5b8e09af7a7915"
     },
     {
       "path": "assets/learning-evidence.js",
@@ -7368,7 +7373,7 @@
     {
       "path": "dialogue.html",
       "bytes": 9857,
-      "sha256": "80b29fd2f5e618d4ce7e06f86bfd0268ee12c64bc2f3db831f80bcc0c295e1c9"
+      "sha256": "646a17a2092dd172f8d03d91389a81a58477986148f7cd8c03d9e4a0e6c7525b"
     },
     {
       "path": "evaluation-scheduler.js",
