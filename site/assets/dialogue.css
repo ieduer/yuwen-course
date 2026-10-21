@@ -102,5 +102,5 @@
 #stop{min-height:34px;padding:6px 10px;font-size:12px;border-radius:9px;background:transparent;border:1px solid var(--line);color:var(--muted)}
 #progress{margin:4px 0 0}
 body[data-dialogue-flow=conversation] #task-context,body[data-dialogue-flow=conversation] #task-input{display:none}
-@media(max-width:720px){.conversation{position:static;height:calc(100dvh - 124px);max-height:none;border:0;padding:0}.workspace[data-view=conversation]{display:flex;flex-direction:column}.workspace[data-view=conversation] .conversation{display:flex}#compose{position:static;padding:0 0 max(6px,env(safe-area-inset-bottom))}.latest-jump{bottom:150px}}
+@media(max-width:720px){.conversation{position:static;height:calc(100dvh - 8px - var(--panel-offset,0px));max-height:none;border:0;padding:0}.workspace[data-view=conversation]{display:flex;flex-direction:column}.workspace[data-view=conversation] .conversation{display:flex}#compose{position:static;padding:0 0 max(6px,env(safe-area-inset-bottom))}.latest-jump{bottom:150px}}
 

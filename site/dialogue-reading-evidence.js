@@ -74,17 +74,48 @@ export function validateOriginalEvidence(proposed,{turns,curriculum,task,tasks=n
   return {task,input:{acknowledgement:'已讀完'},evidence:ref};
  }
  if(task.kind==='evaluation'){
-  const statement=t.content.trim(),match=/^(?:我(?:給|给|覺得|觉得|的評價是|的评价是|會給|会给)?\s*)?(\d{1,3}(?:\.\d+)?)\s*(?:分|%|％)?(?:[。！!]|[，,](?:因為|因为|理由是|理由是：).*)?$/u.exec(statement);
-  if(!match||!(ref.quote.trim()===statement||ref.quote.trim()===match[1]||ref.quote.trim()===match[1]+'分'))throw Error('rating_not_explicit');
-  const rating=Number(match[1]);if(rating<0||rating>100)throw Error('rating_out_of_range');
+  const statement=t.content.trim(),rating=explicitRating(statement,ref.quote);
+  if(rating===null)throw Error('rating_not_explicit');
+  if(rating<0||rating>100)throw Error('rating_out_of_range');
   return {task,input:{rating,reason:statement.slice(0,300)},evidence:ref};
  }
- // Only an exact option quotation or explicit option label can choose an answer.
- const text=ref.quote.trim(),index=task.options.findIndex(o=>o===text);
- const statement=t.content.trim(),labelled=/^(?:我選|我选|我認為是|我认为是|選|选)?\s*([A-Da-d])(?:[。.!！]|[，,](?:因為|因为|理由是).*)?$/u.exec(statement);
- if(index>=0&&!explicitStatement(t,ref.quote))throw Error('choice_not_explicit');
- if(index<0&&(!labelled||!(text===statement||text===labelled[1])))throw Error('choice_not_explicit');
- const selectedIndex=index>=0?index:labelled?labelled[1].toUpperCase().charCodeAt(0)-65:-1;
+ // A choice is explicit when the quoted part of the student's own words names exactly one option, as an option
+ // text or an option letter in a choosing clause (我選 C / 答案是 C / C 停止); hedging between options is not a choice.
+ const selectedIndex=explicitChoice(task.options,t.content,ref.quote);
  if(selectedIndex<0||!task.options[selectedIndex])throw Error('choice_not_explicit');
  return {task,input:{selectedIndex},evidence:ref};
+}
+const CLAUSE=/[，,。！？!?；;：:\n]+/u;
+const clausesOf=text=>text.split(CLAUSE).map(c=>c.trim()).filter(Boolean);
+const unquote=c=>c.replace(/^[「『"'“‘《]+|[」』"'”’》]+$/gu,'').trim();
+// A negated, hypothetical or questioning clause never states a choice or a rating.
+const HEDGED=/(不|沒|没|未|非|別|别|如果|假如|要是|若是|倘若|萬一|万一|可能|也許|也许|或許|或许|或者|還是|还是|猶豫|犹豫|嗎|吗|呢)/u;
+const CHOOSING=/^(?:原題|原题|這題|这题|這一題|这一题|那題|那题|題目|题目)?\s*(?:的)?(?:答案)?\s*(?:我|我的|我會|我会)?\s*(?:選|选|答|選擇|选择|認為是|认为是|覺得是|觉得是|答案是|是|選了|选了)?\s*([A-Da-d])(?:\s*[．.、]?\s*(.+))?$/u;
+export function explicitChoice(options,content,quote){
+ const text=String(quote||'').trim().replace(/[。！!]+$/u,'');if(!text)return -1;
+ const own=clausesOf(content),parts=clausesOf(text);
+ if(!parts.length||!parts.every(q=>own.some(c=>c===q||c.includes(q))))return -1;
+ const found=new Set();
+ for(const q of parts){
+  if(own.some(c=>(c===q||c.includes(q))&&HEDGED.test(c)))return -1;
+  const oi=options.findIndex(o=>unquote(q)===o);if(oi>=0){found.add(oi);continue;}
+  const m=CHOOSING.exec(q);if(!m)continue;
+  const li=m[1].toUpperCase().charCodeAt(0)-65,tail=m[2]?unquote(m[2]):'';
+  if(!options[li])continue;
+  found.add(li);
+ }
+ // Every option mentioned anywhere in the quoted words must be the chosen one.
+ for(const q of parts)for(const [i,o] of options.entries())if(q.includes(o))found.add(i);
+ return found.size===1?[...found][0]:-1;
+}
+const RATING=/(?:^|[^\d.])(\d{1,3}(?:\.\d+)?)\s*(?:分|%|％)(?![\d])/u;
+export function explicitRating(content,quote){
+ const text=String(quote||'').trim().replace(/[。！!]+$/u,'');if(!text)return null;
+ const own=clausesOf(content),parts=clausesOf(text);
+ if(!parts.length||!parts.every(q=>own.some(c=>c===q||c.includes(q))))return null;
+ const rated=own.filter(c=>RATING.test(c));if(rated.length!==1||HEDGED.test(rated[0]))return null;
+ const value=Number(RATING.exec(rated[0])[1]);
+ const bare=/^(?:我(?:給|给|覺得|觉得|的評價是|的评价是|會給|会给|打)?\s*)?(\d{1,3}(?:\.\d+)?)\s*(?:分|%|％)?$/u.exec(text);
+ if(bare)return Number(bare[1])===value?value:null;
+ return parts.some(q=>q===rated[0]||rated[0].includes(q)&&RATING.test(q))?value:null;
 }

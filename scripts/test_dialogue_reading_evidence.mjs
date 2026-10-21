@@ -74,3 +74,23 @@ test('the original answer-key item of a demonstrated word is reachable from the 
  assert.deepEqual(conversationOriginalTasks(curriculum,state,guide,original),[original]);
  assert.deepEqual(conversationOriginalTasks(curriculum,{...state,legacyCompletion:true},guide,original),[]);
 });
+
+test('a clause-level choice or rating in the student\'s own words is explicit; hedging and unrelated letters are not',()=>{
+ const options=['已经','太、甚','停止','罢了'];
+ const turn=content=>({id:'t1',role:'student',content});
+ const task={objectiveId:'legacy:effect:lesson-x:vocab:lesson-x:v01',kind:'vocabulary',options};
+ const choose=(content,quote)=>original({objectiveId:task.objectiveId,evidence:{turnId:'t1',quote}},{turns:[turn(content)],curriculum:{},task});
+ assert.equal(choose('原題「人生代代无穷已」的「已」，我選 C，停止。','我選 C，停止').input.selectedIndex,2);
+ assert.equal(choose('原題「人生代代无穷已」的「已」，我選 C，停止。','C').input.selectedIndex,2);
+ assert.equal(choose('這題答案是C。','答案是C').input.selectedIndex,2);
+ assert.equal(choose('停止。','停止').input.selectedIndex,2);
+ assert.throws(()=>choose('我在 B 和 C 之間猶豫。','我在 B 和 C 之間猶豫'),/choice_not_explicit/);
+ assert.throws(()=>choose('不是 C，我覺得是 A。','不是 C'),/choice_not_explicit/);
+ assert.throws(()=>choose('我選 C，就是已经的意思。','我選 C，就是已经的意思'),/choice_not_explicit/,'the letter contradicts the option text');
+ assert.throws(()=>choose('我選 C。','我選 D'),/not_student_quote|choice_not_explicit/,'the quote must be the student\'s own words');
+ const rate=(content,quote)=>original({objectiveId:'legacy:effect:lesson-x:interaction:evaluation',evidence:{turnId:'t1',quote}},{turns:[turn(content)],curriculum:{},task:{objectiveId:'legacy:effect:lesson-x:interaction:evaluation',kind:'evaluation'}});
+ assert.equal(rate('這篇我覺得有 85 分，因為結尾很安靜。','這篇我覺得有 85 分').input.rating,85);
+ assert.equal(rate('80分','80分').input.rating,80);
+ assert.throws(()=>rate('第 3 段我給 80 分，第 5 段給 60 分。','我給 80 分'),/rating_not_explicit/);
+ assert.throws(()=>rate('大概 120 分吧。','大概 120 分吧'),/rating_out_of_range/);
+});

@@ -54,8 +54,9 @@ thread()?.addEventListener?.('scroll',()=>{if(programmaticScroll){programmaticSc
 // The panel is as tall as the viewport minus the space above it, so the composer is on screen without scrolling the page;
 // once the page is scrolled past that space the sticky panel grows to the full viewport height.
 function fitConversationPanel(){
- try{const ws=document.querySelector('.workspace');if(!ws||(window.innerWidth||1024)<=720){document.documentElement.style.removeProperty('--panel-offset');return;}
-  const natural=(Number(ws.getBoundingClientRect?.().top)||0)+(Number(window.scrollY)||0),offset=Math.max(0,natural-12-(Number(window.scrollY)||0));
+ try{const ws=document.querySelector('.workspace');if(!ws)return;
+  const mobile=(window.innerWidth||1024)<=720,gap=mobile?4:12;
+  const natural=(Number(ws.getBoundingClientRect?.().top)||0)+(Number(window.scrollY)||0),offset=Math.max(0,natural-gap-(Number(window.scrollY)||0));
   document.documentElement.style.setProperty('--panel-offset',Math.round(offset)+'px');}catch{}
 }
 window.addEventListener?.('scroll',fitConversationPanel,{passive:true});window.addEventListener?.('resize',fitConversationPanel);
