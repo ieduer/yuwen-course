@@ -735,7 +735,7 @@ test('a budget-denied send leaves nothing in flight: the text stays with its rec
 });
 
 test('an old device record that still carries an in-flight object restores as a plain draft: no lock after reload',async()=>{
- const storage=new Map([['yw-dialogue-draft:owner-a:lesson-189',JSON.stringify({version:1,curriculumVersion:'v1',content:'昨天留下的文字',composerDraft:null,selected:null,pending:{mutationId:'m-old',content:'昨天留下的文字'},pendingDraft:'昨天留下的文字'})]]);
+ const storage=new Map([['yw-dialogue-draft:owner-a:lesson-189',JSON.stringify({version:1,curriculumVersion:'v1',content:'昨天留下的文字',composerDraft:null,selected:null,pending:{mutationId:'m-old',revision:0,content:'昨天留下的文字'},pendingDraft:'昨天留下的文字'})]]);
  const f=await fixture({conversation:true,storage,curriculumOverrides:{curriculumVersion:'v1'}});for(let i=0;i<4;i++)await tick();
  assert.equal(f.document.getElementById('answer').value,'昨天留下的文字');assert.equal(vm.runInContext('pending',f.context),null);assert.equal(vm.runInContext('inflight',f.context),null);
  assert.equal(vm.runInContext('draftMutationId',f.context),'m-old','the receipt id survives');
@@ -788,4 +788,19 @@ test('an expired shared period is stated once without a retry suggestion, and na
  f.answer('到期後寫的話');await f.send();await tick();
  const status=f.document.getElementById('status').textContent;assert.match(status,/已到期/);assert.doesNotMatch(status,/每日額度/);assert.doesNotMatch(status,/稍後再送/);
  assert.equal(vm.runInContext('switchLesson("lesson-190")',f.context),true);
+});
+
+test('a kept receipt belongs to its revision: after a later turn the text is restored with a new receipt, never the stale one',async()=>{
+ const storage=new Map([['yw-dialogue-draft:owner-a:lesson-189',JSON.stringify({version:1,curriculumVersion:'v1',content:'上一輪被擋下的文字',composerDraft:null,selected:null,mutationId:'m-stale',revision:3})]]);
+ const f=await fixture({conversation:true,storage,curriculumOverrides:{curriculumVersion:'v1'},initial:{revision:4}});for(let i=0;i<4;i++)await tick();
+ assert.equal(f.document.getElementById('answer').value,'上一輪被擋下的文字','the text is kept');assert.equal(vm.runInContext('draftMutationId',f.context),null,'the stale receipt is dropped');
+ await f.send();await tick();assert.notEqual(f.posts.at(-1).mutationId,'m-stale');assert.equal(f.posts.at(-1).revision,4);
+});
+
+test('when the server refuses a reused receipt as a draft conflict, the text stays and the next send uses a new receipt',async()=>{
+ let n=0;const f=await fixture({conversation:true,initial:{draft:{mutationId:'m-server',revision:0,content:'伺服器保存的文字'}},post:()=>++n===1?Response.json({code:'draft_conflict',message:'這份草稿已有保存的原题欄位；請讀回核對，不能改成另一種提交。'},{status:409}):Response.json({pending:false})});for(let i=0;i<4;i++)await tick();
+ assert.equal(vm.runInContext('draftMutationId',f.context),'m-server');
+ await f.send();await tick();assert.equal(f.posts[0].mutationId,'m-server');
+ assert.match(f.document.getElementById('status').textContent,/舊回執已失效/);assert.equal(f.document.getElementById('answer').value,'伺服器保存的文字');
+ assert.equal(vm.runInContext('draftMutationId',f.context),null);assert.equal(vm.runInContext('inflight',f.context),null);assert.equal(vm.runInContext('switchLesson("lesson-190")',f.context),true);
 });

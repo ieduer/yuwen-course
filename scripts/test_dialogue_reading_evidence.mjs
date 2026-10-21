@@ -94,3 +94,13 @@ test('a clause-level choice or rating in the student\'s own words is explicit; h
  assert.throws(()=>rate('第 3 段我給 80 分，第 5 段給 60 分。','我給 80 分'),/rating_not_explicit/);
  assert.throws(()=>rate('大概 120 分吧。','大概 120 分吧'),/rating_out_of_range/);
 });
+
+test('a clause that only reproduces an option is not a hedge, even when the option itself contains 別/不/未 (摇: 「…离人无限的别愁」)',async()=>{
+ const {explicitChoice}=await import('../site/dialogue-reading-evidence.js');
+ const o=['落月把情思摇动，洒满了江边的树木。','落月摇晃着，把深情全部倾注在江边的树木上。','月光在树影间摇曳，使人产生离别的愁绪。','落月的光辉与江树交织，引起了离人无限的别愁。'];
+ const c='回到「落月摇情满江樹」那一道原題：我選 D，落月的光辉与江树交织，引起了离人无限的别愁。';
+ assert.equal(explicitChoice(o,c,'我選 D，落月的光辉与江树交织，引起了离人无限的别愁'),3);assert.equal(explicitChoice(o,c,'我選 D'),3);
+ assert.equal(explicitChoice(o,'我不選 D','我不選 D'),-1,'a negated choice is still refused');assert.equal(explicitChoice(o,'可能是 D','可能是 D'),-1,'a hedged choice is still refused');
+ assert.equal(explicitChoice(o,'我選 D，不過也可能是 C','我選 D，不過也可能是 C'),-1,'a hedge in the student own words still refuses');
+ const v=['勝任','不能承受','美好','超過'];assert.equal(explicitChoice(v,'我選 B，不能承受。','我選 B，不能承受'),1,'an option containing 不 is not a negation');
+});

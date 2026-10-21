@@ -95,9 +95,11 @@ export function explicitChoice(options,content,quote){
  const text=String(quote||'').trim().replace(/[。！!]+$/u,'');if(!text)return -1;
  const own=clausesOf(content),parts=clausesOf(text);
  if(!parts.length||!parts.every(q=>own.some(c=>c===q||c.includes(q))))return -1;
- const found=new Set();
+ const found=new Set(),plain=x=>String(x).replace(/[\s\p{P}]/gu,'');
+ // A clause that only reproduces an option's own words (e.g. 「…离人无限的别愁」) is not a hedge, whatever characters it contains.
+ const optionWords=c=>{const p=plain(unquote(c));return p.length>=2&&options.some(o=>plain(o).includes(p));};
  for(const q of parts){
-  if(own.some(c=>(c===q||c.includes(q))&&HEDGED.test(c)))return -1;
+  if(own.some(c=>(c===q||c.includes(q))&&!optionWords(c)&&HEDGED.test(c)))return -1;
   const oi=options.findIndex(o=>unquote(q)===o);if(oi>=0){found.add(oi);continue;}
   const m=CHOOSING.exec(q);if(!m)continue;
   const li=m[1].toUpperCase().charCodeAt(0)-65,tail=m[2]?unquote(m[2]):'';

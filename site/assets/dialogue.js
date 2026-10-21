@@ -21,7 +21,7 @@ let curriculum, snapshot, generation=0, selected=null, pending=null, pendingDraf
 // inflight: the submission currently awaiting the server (never persisted). draftMutationId: the receipt id an unsent
 // draft keeps so that a later send of the same text reuses it. navigationOverride: the lesson the student may switch to
 // after a failed device save, by choosing the same lesson a second time.
-let inflight=null, draftMutationId=null, draftMutationContent=null, navigationOverride=null;
+let inflight=null, draftMutationId=null, draftMutationContent=null, draftMutationRevision=null, navigationOverride=null;
 // The receipt id belongs to one exact text: edited text is a new submission (the server refuses a reused id with other content).
 function receiptFor(content){return draftMutationId&&content===draftMutationContent?draftMutationId:crypto.randomUUID();}
 function restrictionText(error){
@@ -503,7 +503,7 @@ function persistComposer(){
  const key=draftKey();if(!key)return false;
  try{
   if(!hasComposerDraft()){window.localStorage.removeItem(key);window.sessionStorage.removeItem(key);$('draft-status').textContent='';return true;}
-  window.localStorage.setItem(key,JSON.stringify({version:1,curriculumVersion:curriculum.curriculumVersion,content:$('answer').value,composerDraft,selected,mutationId:pending?.mutationId||(draftMutationId&&$('answer').value===draftMutationContent?draftMutationId:null)||null}));
+  window.localStorage.setItem(key,JSON.stringify({version:1,curriculumVersion:curriculum.curriculumVersion,content:$('answer').value,composerDraft,selected,mutationId:pending?.mutationId||(draftMutationId&&$('answer').value===draftMutationContent?draftMutationId:null)||null,revision:pending?.revision??(draftMutationId?draftMutationRevision:null)}));
   $('draft-status').textContent='草稿已保存在此裝置；離開後可繼續。';return true;
  }catch{$('draft-status').textContent='此瀏覽器無法保存草稿；離開前請先複製文字。';return false;}
 }
@@ -512,10 +512,12 @@ function restoreComposer(){
  try{
   const draft=JSON.parse(window.localStorage.getItem(key)||window.sessionStorage.getItem(key)||'null');
   if(!draft||draft.version!==1||typeof draft.content!=='string'||draft.content.length>3000)return;
-  const receipt=draft.mutationId||draft.pending?.mutationId||null;
+  // A receipt belongs to the revision it was issued for: after a later turn it can never be sent again, so the text is
+  // kept and the next send gets a new receipt.
+  const issuedAt=draft.revision??draft.pending?.revision,receipt=(draft.mutationId||draft.pending?.mutationId||null)&&issuedAt===snapshot?.revision?(draft.mutationId||draft.pending.mutationId):null;
   // A draft whose text the server already holds as a turn is not a draft any more; a restored page never has a request in flight.
   if(receipt&&snapshot?.turns?.some(t=>t.role==='student'&&t.mutationId===receipt)){window.localStorage.removeItem(key);window.sessionStorage.removeItem(key);return;}
-  $('answer').value=draft.content;composerDraft=draft.composerDraft||null;draftMutationId=receipt;draftMutationContent=receipt?draft.content:null;
+  $('answer').value=draft.content;composerDraft=draft.composerDraft||null;draftMutationId=receipt;draftMutationContent=receipt?draft.content:null;draftMutationRevision=receipt?issuedAt:null;
   if(draft.curriculumVersion===curriculum.curriculumVersion){selected=draft.selected||null;}
   else if(composerDraft)composerDraft={...composerDraft,taskId:'restored-older-curriculum'};
   if(selected){$('quote').textContent=selected.text;$('quote').hidden=false;}
@@ -700,7 +702,7 @@ function update(data){
   const draft=data.draft,request=draft.learningRequest||{content:draft.content,questionId:draft.questionId};
   $('answer').value=request.content;selected=null;$('quote').hidden=true;
   // A draft the server kept is unsent text, not a request in flight: it keeps its receipt id for the next send and never blocks navigation.
-  draftMutationId=draft.mutationId||null;draftMutationContent=draftMutationId?request.content:null;
+  draftMutationId=draft.mutationId||null;draftMutationContent=draftMutationId?request.content:null;draftMutationRevision=draftMutationId?draft.revision:null;
   composerDraft=request.taskId?{taskId:request.taskId,...(request.selectedIndex!==undefined?{selectedIndex:request.selectedIndex}:{}),...(request.rating!==undefined?{rating:request.rating}:{})}:null;
   setStatus('已恢復伺服器保存的待送草稿；尚未呼叫 AI。');
  }
@@ -792,12 +794,16 @@ async function sendTurn(submitted,submittedDraft,gen=generation){
   if(gen!==generation)return;
   if(error?.name==='AbortError'){progress('');await refresh(gen);if(gen!==generation)return;setStatus('已取消顯示；這一輪的回應仍會保存並稍後讀回，不會重送。');if(snapshot?.pending)waitForReply(gen);return;}
   progress('');
-  if(error.code==='stale_revision'||error.code==='turn_in_progress'||error.code==='learning_task_changed'||error.status===400){
+  if(error.code==='draft_conflict'&&submitted.mutationId===draftMutationId){
+   // The kept receipt no longer matches what the server holds for it: keep the text, issue a new receipt on the next send.
+   if(pending===submitted){pending=null;pendingDraft=null;}draftMutationId=null;draftMutationContent=null;draftMutationRevision=null;persistComposer();
+   await refresh(gen);if(gen!==generation)return;setStatus('這段文字的舊回執已失效；文字仍在輸入框，再送一次會以新的回執送出。',{error:true});
+  }else if(error.code==='stale_revision'||error.code==='turn_in_progress'||error.code==='learning_task_changed'||error.status===400){
    pending=null;pendingDraft=null;persistComposer();await refresh(gen);setStatus(error.message,{error:true});
   }else if(error.draftSaved!==undefined){
    // No turn and no AI call: the text is an unsent draft that keeps its receipt id (on the server, or only on this device when
    // an earlier unsent text already holds the server's draft slot); nothing is in flight.
-   if(pending===submitted){pending=null;pendingDraft=null;}draftMutationId=submitted.mutationId;draftMutationContent=submitted.content;persistComposer();
+   if(pending===submitted){pending=null;pendingDraft=null;}draftMutationId=submitted.mutationId;draftMutationContent=submitted.content;draftMutationRevision=submitted.revision;persistComposer();
    await refresh(gen);if(gen!==generation)return;setStatus(restrictionText(error),{error:true});
   }
   else if(error.code==='account_changed'||error.status===401||error.status===404){clearPrivateView({preserveReading:true});ownerRef=null;await refresh();}
