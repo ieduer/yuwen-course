@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1488,
-  "totalBytes": 204873359,
-  "aggregateSha256": "df1981695eb7b15b60255c53f540609acb60888183abad82949d4b6bf24d9eda",
+  "totalBytes": 204875158,
+  "aggregateSha256": "cae18ecf4339c21b1893239c01c202af916c3781f3f5c60f2163770f29a27b85",
   "files": [
     {
       "path": "_headers",
@@ -227,8 +227,8 @@
     },
     {
       "path": "_worker.js/dialogue-reading-evidence.js",
-      "bytes": 10057,
-      "sha256": "b037c85c8b63be257f3b7cca1a049546bade5d6a164d7a5a6c01ed5b10e156e2"
+      "bytes": 11866,
+      "sha256": "1d854981e1b02e5320db735aaa938243ca06552f64176a7f09bc5243856216f9"
     },
     {
       "path": "_worker.js/dialogue-reading-material.js",
@@ -358,7 +358,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "f131ea2bdd714073eb9a8e124b39f4f737e3e81c34bfcb3e97c6924f854263e2"
+      "sha256": "c6b22160b97d395647571e8f5fe156e5983ba92c3546f71f9ad42b06531404dc"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1802,13 +1802,13 @@
     },
     {
       "path": "assets/dialogue.css",
-      "bytes": 32587,
-      "sha256": "0f827766718411e16980d204f804a3550702ab0e19748dc5aac462c6e4853e53"
+      "bytes": 32611,
+      "sha256": "75d9516f501d82284376bc0339712e4d149765d0b64b9e03c680ff498075f4c1"
     },
     {
       "path": "assets/dialogue.js",
-      "bytes": 101790,
-      "sha256": "90b4960dcf5e82f49a655a7ad77059ecb28697079b3f7ec125fe3e46d3bb1d88"
+      "bytes": 101756,
+      "sha256": "388577d091fed20eb2746eae6e366f1a9ba989d189c3c79871f19b8df03394c8"
     },
     {
       "path": "assets/learning-evidence.js",
@@ -7368,7 +7368,7 @@
     {
       "path": "dialogue.html",
       "bytes": 9830,
-      "sha256": "8493e9268310e001d3b1095ea0350874b5a39c40deddb8d230415427ac4861dc"
+      "sha256": "c0a47ee0cb27b3083ebeff80a27759bf1c8c4fa738590348bd1e2726f8b1a395"
     },
     {
       "path": "evaluation-scheduler.js",
