@@ -809,3 +809,15 @@ test('the author assesses an original formal item in its own reply: recorded thr
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='contextWords'").get().n,1,'a repeated proposal for a preserved item is not credited twice');
  assert.match(JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='proposal_parts_rejected' ORDER BY created_at DESC LIMIT 1").get().details_json).parts[0].code,/formal_assessment_not_eligible|original_result_preserved/);
 });
+test('a rejected part keeps the validator code even when the message is a learner-facing sentence',async()=>{
+ const {rejectionCode}=await import('../site/dialogue-source.js');
+ const {assertNewFormalAnswerTime,FORMAL_SCOPE_POLICY}=await import('../site/formal-scope-policy.js');
+ let thrown;try{assertNewFormalAnswerTime({formalScopePolicyVersion:FORMAL_SCOPE_POLICY.policyVersion,effectiveFrom:FORMAL_SCOPE_POLICY.effectiveFrom},'2000-01-01T00:00:00Z');}catch(e){thrown=e;}
+ assert(thrown,'a pre-policy answer is refused');assert.doesNotMatch(thrown.message,/^[a-z0-9_]+$/,'the message is a sentence, not a code');
+ assert.equal(rejectionCode(thrown),'formal_scope_not_active_for_answer');
+ assert.equal(rejectionCode(Error('study_guide_reference_not_revealed')),'study_guide_reference_not_revealed');
+ assert.equal(rejectionCode(new TypeError('Cannot read properties of undefined')),'unclassified');
+ assert.equal(rejectionCode(null),'unclassified');
+ const src=(await import('node:fs')).readFileSync(new URL('../site/dialogue-source.js',import.meta.url),'utf8');
+ assert.match(src,/const partCode=rejectionCode;/);assert.match(src,/const failureCode=rejectionCode\(error\);/);
+});

@@ -71,6 +71,9 @@ export function unverifiedStudentQuotes(reply,turns){
  return out;
 }
 const misquoteNotice=quotes=>`作者引用的「${quotes.join('」「')}」不是你訊息裡的原話，以你自己寫的為準。`;
+// Stable rejection code of a validation error. Some validators keep the code in error.code and a learner-facing sentence in
+// error.message (assertNewFormalAnswerTime); reading only the message recorded those as 'unclassified'.
+export function rejectionCode(error){return [error?.code,error?.message].find(v=>typeof v==='string'&&/^[a-z0-9_]{1,80}$/.test(v))||'unclassified';}
 // Exact provider cost of a call whose every attempt reported usage; null when any attempt's usage is unknown.
 function knownProviderCost(budget,result,accounting){
  const attempts=accounting?.attempts;
@@ -750,7 +753,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   // conclusion, an original-evidence or reading-evidence reference) failed verification: the failing part is dropped,
   // nothing is credited for it, and the rejection is recorded as an event. A reply without a usable reply text still fails.
   const rejectedParts=[],validateWith=value=>validateProposal(value,{curriculum,state,turns:completeTurns,question,remediation,assessments,hints:completeTurns.filter(t=>t.role==='teacher').map(t=>t.content),conversation:body.conversation===true});
-  const partCode=error=>/^[a-z0-9_]{1,80}$/.test(error?.message||'')?error.message:'unclassified';
+  const partCode=rejectionCode;
   // Only the student's conversation path keeps the reply; structured turns and isolated acceptance / diagnostic
   // admissions keep failing closed so their evidence and failure records are unchanged.
   const lenient=body.conversation===true&&!budget.isolatedAdmission;
@@ -858,7 +861,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const completed=await db.prepare("SELECT t.id FROM dialogue_turns t JOIN dialogue_calls c ON c.turn_id=t.reply_to WHERE t.reply_to=? AND t.role='teacher' AND c.state='finished'").bind(turnId).first();
   if(completed){stream?.send('done',{saved:true,turnId,teacherTurnId:completed.id});return;}
   if(!providerAccounting&&error.gatewayFailure?.providerAccounting){try{providerAccounting=combinedProviderAccounting(error.gatewayFailure.providerAccounting,budget,resume?.priorAttempts||[],false);}catch{}}
-  const failureCode=/^[a-z0-9_]{1,80}$/.test(error?.message||'')?error.message:'unclassified';
+  const failureCode=rejectionCode(error);
   const failure={retry:'readback_only',reason:'response_unconfirmed',providerAccounting,continued:!!resume,stage:failureStage,code:failureCode,...(budget.isolatedAdmission?.operation===RENEWED_E2E_OPERATION?{received:observedResult,renewalReason:/^[a-z0-9_]{1,80}$/.test(error.message||'')?error.message:'response_unconfirmed'}:{})};
   if(budget.isolatedAdmission?.operation===MODE_OPERATION)failure.modeFailure={version:'yw-mode-failure-v1',stage:failureStage,code:MODE_FAILURE_CODES.has(error.message)?error.message:'unclassified'};
   const lateReply=typeof observedResult?.value?.reply==='string'&&observedResult.value.reply.trim()&&observedResult.value.reply.length<=LIMITS.replyChars&&(!resume||observedResult.value.reply.startsWith(resume.partialText||''))?observedResult.value.reply:null;
