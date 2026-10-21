@@ -731,6 +731,7 @@ test('a budget-denied send leaves nothing in flight: the text stays with its rec
  assert.equal(vm.runInContext('switchLesson("lesson-189")',f.context),true);for(let i=0;i<6;i++)await tick();
  assert.equal(f.document.getElementById('answer').value,'額度已滿時寫的話','the draft comes back with its lesson');assert.equal(vm.runInContext('draftMutationId',f.context),mutationId);
  await f.send();await tick();assert.equal(f.posts.at(-1).mutationId,mutationId,'a later send of the same draft reuses the receipt id');
+ f.answer('改過的另一段話');await f.send();await tick();assert.notEqual(f.posts.at(-1).mutationId,mutationId,'edited text is a new submission with a new receipt id');
 });
 
 test('an old device record that still carries an in-flight object restores as a plain draft: no lock after reload',async()=>{

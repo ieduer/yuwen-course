@@ -21,7 +21,9 @@ let curriculum, snapshot, generation=0, selected=null, pending=null, pendingDraf
 // inflight: the submission currently awaiting the server (never persisted). draftMutationId: the receipt id an unsent
 // draft keeps so that a later send of the same text reuses it. navigationOverride: the lesson the student may switch to
 // after a failed device save, by choosing the same lesson a second time.
-let inflight=null, draftMutationId=null, navigationOverride=null;
+let inflight=null, draftMutationId=null, draftMutationContent=null, navigationOverride=null;
+// The receipt id belongs to one exact text: edited text is a new submission (the server refuses a reused id with other content).
+function receiptFor(content){return draftMutationId&&content===draftMutationContent?draftMutationId:crypto.randomUUID();}
 function restrictionText(error){
  const when=error?.resetsAt&&Number.isFinite(Date.parse(error.resetsAt))?new Intl.DateTimeFormat('zh-Hant-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false,timeZoneName:'short'}).format(new Date(error.resetsAt)):'';
  return `${error?.message||'本輪未呼叫 AI。'}${when?`（${when} 後恢復）`:''}${error?.retryable===false?'':' 文字留在輸入框，可切換篇目或稍後再送。'}`;
@@ -501,7 +503,7 @@ function persistComposer(){
  const key=draftKey();if(!key)return false;
  try{
   if(!hasComposerDraft()){window.localStorage.removeItem(key);window.sessionStorage.removeItem(key);$('draft-status').textContent='';return true;}
-  window.localStorage.setItem(key,JSON.stringify({version:1,curriculumVersion:curriculum.curriculumVersion,content:$('answer').value,composerDraft,selected,mutationId:pending?.mutationId||draftMutationId||null}));
+  window.localStorage.setItem(key,JSON.stringify({version:1,curriculumVersion:curriculum.curriculumVersion,content:$('answer').value,composerDraft,selected,mutationId:pending?.mutationId||(draftMutationId&&$('answer').value===draftMutationContent?draftMutationId:null)||null}));
   $('draft-status').textContent='草稿已保存在此裝置；離開後可繼續。';return true;
  }catch{$('draft-status').textContent='此瀏覽器無法保存草稿；離開前請先複製文字。';return false;}
 }
@@ -513,7 +515,7 @@ function restoreComposer(){
   const receipt=draft.mutationId||draft.pending?.mutationId||null;
   // A draft whose text the server already holds as a turn is not a draft any more; a restored page never has a request in flight.
   if(receipt&&snapshot?.turns?.some(t=>t.role==='student'&&t.mutationId===receipt)){window.localStorage.removeItem(key);window.sessionStorage.removeItem(key);return;}
-  $('answer').value=draft.content;composerDraft=draft.composerDraft||null;draftMutationId=receipt;
+  $('answer').value=draft.content;composerDraft=draft.composerDraft||null;draftMutationId=receipt;draftMutationContent=receipt?draft.content:null;
   if(draft.curriculumVersion===curriculum.curriculumVersion){selected=draft.selected||null;}
   else if(composerDraft)composerDraft={...composerDraft,taskId:'restored-older-curriculum'};
   if(selected){$('quote').textContent=selected.text;$('quote').hidden=false;}
@@ -680,7 +682,7 @@ function update(data){
  ownerRef=data.ownerRef||ownerRef;renderAccount();
  $('lesson-outcome').textContent=data.state?.completion==='owner_approved_supplement'?`${data.state.completionLabel||'已通過（補充篇目）'}。這是課程擁有者對補充篇目的決定，不新增分數。`:'';
  if(data.resumeCurriculum && data.resumeCurriculum.curriculumVersion!==curriculum.curriculumVersion){curriculum=data.resumeCurriculum;renderText();}
- if(!pending&&draftMutationId&&data.turns?.some(t=>t.role==='student'&&t.mutationId===draftMutationId)){draftMutationId=null;if($('answer').value.trim()){$('answer').value='';selected=null;composerDraft=null;$('quote').hidden=true;}persistComposer();}
+ if(!pending&&draftMutationId&&data.turns?.some(t=>t.role==='student'&&t.mutationId===draftMutationId)){draftMutationId=null;draftMutationContent=null;if($('answer').value.trim()){$('answer').value='';selected=null;composerDraft=null;$('quote').hidden=true;}persistComposer();}
  if(pending && data.turns?.some(t=>t.role==='student' && t.mutationId===pending.mutationId)){
   if($('answer').value===pendingDraft){$('answer').value='';selected=null;composerDraft=null;$('quote').hidden=true;persistComposer();}
   if(pending.action==='original')originalDraft=null;pending=null;pendingDraft=null;persistComposer();
@@ -691,7 +693,7 @@ function update(data){
   const draft=data.draft,request=draft.learningRequest||{content:draft.content,questionId:draft.questionId};
   $('answer').value=request.content;selected=null;$('quote').hidden=true;
   // A draft the server kept is unsent text, not a request in flight: it keeps its receipt id for the next send and never blocks navigation.
-  draftMutationId=draft.mutationId||null;
+  draftMutationId=draft.mutationId||null;draftMutationContent=draftMutationId?request.content:null;
   composerDraft=request.taskId?{taskId:request.taskId,...(request.selectedIndex!==undefined?{selectedIndex:request.selectedIndex}:{}),...(request.rating!==undefined?{rating:request.rating}:{})}:null;
   setStatus('已恢復伺服器保存的待送草稿；尚未呼叫 AI。');
  }
@@ -750,7 +752,7 @@ async function composeSubmit(){
   setStatus('正在核對上一輪是否送達；本頁新文字保留。');
   await refresh(gen);if(pending)return;
  }
- pending||={mutationId:draftMutationId||crypto.randomUUID(),revision:snapshot.revision,content,questionId:snapshot.question?.id||null,...(conversationFlow?{conversation:true,taskId}:task?{taskId:task.taskId,...input}:{})};
+ pending||={mutationId:receiptFor(content),revision:snapshot.revision,content,questionId:snapshot.question?.id||null,...(conversationFlow?{conversation:true,taskId}:task?{taskId:task.taskId,...input}:{})};
  pendingDraft=$('answer').value;
  await sendTurn(pending,pendingDraft,gen);
 }
@@ -763,7 +765,7 @@ async function sendTurn(submitted,submittedDraft,gen=generation){
   const result=await api(submitted,null,false,(event,data)=>{
    if(gen!==generation)return;
    if(event==='saved'){
-    if(pending===submitted){pending=null;pendingDraft=null;}draftMutationId=null;
+    if(pending===submitted){pending=null;pendingDraft=null;}draftMutationId=null;draftMutationContent=null;
     if(submittedDraft!==null&&$('answer').value===submittedDraft){$('answer').value='';selected=null;composerDraft=null;$('quote').hidden=true;persistComposer();}
     snapshot={...snapshot,revision:data.revision,pending:true};
     if(!data.continuation){renderTurns([{id:data.turnId,role:'student',content:submitted.content,status:'saved',createdAt:data.createdAt}]);autoFollow=true;scrollToLatest(true);}
@@ -787,7 +789,7 @@ async function sendTurn(submitted,submittedDraft,gen=generation){
    pending=null;pendingDraft=null;persistComposer();await refresh(gen);setStatus(error.message,{error:true});
   }else if(error.draftSaved){
    // The server kept nothing (no turn, no AI call): the text is an unsent draft that keeps its receipt id; nothing is in flight.
-   if(pending===submitted){pending=null;pendingDraft=null;}draftMutationId=submitted.mutationId;persistComposer();
+   if(pending===submitted){pending=null;pendingDraft=null;}draftMutationId=submitted.mutationId;draftMutationContent=submitted.content;persistComposer();
    await refresh(gen);if(gen!==generation)return;setStatus(restrictionText(error),{error:true});
   }
   else if(error.code==='account_changed'||error.status===401||error.status===404){clearPrivateView({preserveReading:true});ownerRef=null;await refresh();}
