@@ -59,6 +59,7 @@ const MODE_FAILURE_CODES=new Set([
 ]);
 // Verification failures of optional proposal parts: the part is dropped and recorded; the reply stays. Everything else
 // (no reply, provider, storage, budget, continuation) keeps failing closed.
+const originalRejectedNotice=code=>['original_evidence_wrong_task','original_result_preserved'].includes(code)?'作者提到的原題答案：該題先前已有紀錄，不重複計分。':code==='choice_not_explicit'?'作者提到的原題選擇本輪未能記錄：請在同一句裡清楚寫出「我選 某選項」。':'作者提到的原題答案本輪未能記錄（未通過核驗）；學習紀錄以下方實際保存的為準。';
 const formalRejectedNotice=code=>['formal_assessment_not_eligible','original_result_preserved'].includes(code)?'作者提到的評閱：該項先前已有紀錄，不重複計分。':`作者提到的評閱本輪未能記錄（${code==='one_formal_assessment_per_turn'?'一輪只記一項':'未通過核驗'}）；下一輪可引用你先前的話補記。`;
 // The author may only put the student's own words in quotation marks. Any 「…」 the reply attributes to the student
 // (你說「…」, 你前面才說「…」 …) that is not a verbatim part of a saved student message is recorded and shown to the student.
@@ -822,8 +823,11 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const formalRejected=rejectedParts.find(p=>p.part==='formalAssessments');
   const misquotes=body.conversation===true?unverifiedStudentQuotes(proposal.reply,completeTurns):[];
   if(misquotes.length)statements.push(db.prepare(`INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'reply_attribution_unverified',?,? WHERE ${active}`).bind(`${turnId}:attribution`,session.id,turnId,JSON.stringify({policyVersion:POLICY_VERSION,quotes:misquotes,credited:false}),at,turnId));
-  const notices=[...(formalRejected?[formalRejectedNotice(formalRejected.code)]:[]),...(misquotes.length?[misquoteNotice(misquotes)]:[])];
-  if(notices.length)statements.push(db.prepare(`INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'source_status',?,? WHERE ${active}`).bind(`${turnId}:status`,session.id,turnId,JSON.stringify({message:notices.join(' '),code:formalRejected?.code||'reply_attribution_unverified'}),at,turnId));
+  // The author's reply may have recognised an original answer or a rubric item the server could not record: say so at once,
+  // so what the student is told and what is recorded always agree.
+  const originalRejected=rejectedParts.find(p=>p.part==='originalEvidence');
+  const notices=[...(formalRejected?[formalRejectedNotice(formalRejected.code)]:[]),...(originalRejected?[originalRejectedNotice(originalRejected.code)]:[]),...(misquotes.length?[misquoteNotice(misquotes)]:[])];
+  if(notices.length)statements.push(db.prepare(`INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'source_status',?,? WHERE ${active}`).bind(`${turnId}:status`,session.id,turnId,JSON.stringify({message:notices.join(' '),code:formalRejected?.code||originalRejected?.code||'reply_attribution_unverified'}),at,turnId));
   if(proposal.conclusion)statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'conclusion_saved',?,? WHERE ${active}`).bind(`${turnId}:conclusion`,session.id,turnId,JSON.stringify({...proposal.conclusion,curriculumVersion:curriculum.curriculumVersion,policyVersion:POLICY_VERSION,createdAt:at,teacherTurnId:teacherId}),at,turnId));
   for(const a of proposal.assessments)statements.push(db.prepare(`INSERT INTO dialogue_assessments(id,session_id,turn_id,objective_id,outcome,evidence_json,rationale,rule_version,curriculum_version,created_at) SELECT ?,?,?,?,?,?,?,?,?,? WHERE ${active}`).bind(uuid(),session.id,turnId,a.objectiveId,a.outcome,JSON.stringify(a.evidence),a.rationale,a.ruleVersion,curriculum.curriculumVersion,at,turnId));
   const answer=question?proposal.assessments.find(a=>a.objectiveId===question.objectiveId):null;

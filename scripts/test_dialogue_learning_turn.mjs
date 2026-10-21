@@ -686,6 +686,14 @@ test('end to end: a correct original choice quoted with option words containing 
  assert.equal(r.data.state.objectives.find(o=>o.id===legacyId).status,'preserved');assert.equal(r.data.state.targets.find(x=>x.id===v.id).status,'confirmed');
  const again=await f.send(r.data,message,{conversation:true});assert.equal(again.response.status,200);assert.equal(rows(),1,'no duplicate credit on a repeat');
  assert.match(JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get()?.details_json||'{"parts":[{"code":"none"}]}').parts[0].code,/original_evidence_wrong_task|original_result_preserved/);
+ assert.match(again.data.statusNotice||'',/先前已有紀錄，不重複計分/,'what the student is told matches the record');
+});
+
+test('an original answer the author recognised but the server could not record is reported to the student at once',async t=>{
+ const f=fixture(t,'lesson-1498');let data=await f.read();
+ f.options.callModel=async(_env,prompt)=>{const d=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=d.recent.filter(x=>x.role==='student').at(-1);return {value:{reply:'答對了。',assessments:[],originalEvidence:{objectiveId:'legacy:not-offered',evidence:{turnId:turn.id,quote:'我選 B'}}},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ const r=await f.send(data,'我選 B',{conversation:true});assert.equal(r.response.status,200);
+ assert.match(r.data.statusNotice||'',/原題答案/);assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='original_source_saved'").get().n,0);
 });
 
 test('every open original item of a demonstrated word is offered to the author, so a correct answer to any of them can be recognised',async t=>{
