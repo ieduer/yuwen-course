@@ -804,3 +804,8 @@ test('when the server refuses a reused receipt as a draft conflict, the text sta
  assert.match(f.document.getElementById('status').textContent,/舊回執已失效/);assert.equal(f.document.getElementById('answer').value,'伺服器保存的文字');
  assert.equal(vm.runInContext('draftMutationId',f.context),null);assert.equal(vm.runInContext('inflight',f.context),null);assert.equal(vm.runInContext('switchLesson("lesson-190")',f.context),true);
 });
+
+test('a reply produced by the fallback model carries a visible label; a primary-model reply does not',async()=>{
+ const f=await fixture({conversation:true,initial:{turns:[{id:'s1',role:'student',content:'問題',createdAt:'2026-10-21T00:00:00Z'},{id:'a1',role:'teacher',content:'主要模型的回應',model:'claude-sonnet-5-5',createdAt:'2026-10-21T00:00:01Z'},{id:'a2',role:'teacher',content:'備用模型的回應',model:'gemini-3.8-flash',createdAt:'2026-10-21T00:00:02Z'}]}});for(let i=0;i<4;i++)await tick();
+ assert.equal(f.document.querySelector('#turn-a1 .turn-fallback'),null);assert.match(f.document.querySelector('#turn-a2 .turn-fallback')?.textContent||'',/備用模型/);
+});

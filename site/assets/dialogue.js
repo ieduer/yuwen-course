@@ -425,6 +425,8 @@ function renderTurns(turns,prepend=false,{preserveScroll=false}={}){
   const refs=t.content.match(/\[(lesson-[\w-]+:p\d+)\]/g)||[];
   for(const ref of new Set(refs)){const id=ref.slice(1,-1);if(!curriculum.passages.some(p=>p.id===id))continue;const a=node('a','回到原文');a.href='#'+encodeURIComponent(id);a.onclick=e=>{e.preventDefault();view('text');document.getElementById(id)?.scrollIntoView({block:'center',behavior:'auto'});document.getElementById(id)?.focus();};n.append(a);}
   if(t.status==='needs_review')n.append(node('small','回答已保存，回應待確認。','turn-status'));
+  // A reply produced by the fallback model is never shown as if it came from the primary model.
+  if(t.role!=='student'&&typeof t.model==='string'&&/^gemini/i.test(t.model))n.append(node('small','本輪由備用模型回應（主要模型暫時無法使用）。','turn-status turn-fallback'));
   fragment.append(n);
  }
  const added=prepend?[]:[...fragment.childNodes],firstReply=added.find(n=>n.classList?.contains('teacher'));
