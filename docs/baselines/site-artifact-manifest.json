@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1488,
-  "totalBytes": 204893845,
-  "aggregateSha256": "9077966f06a528f194150c1f89c6ccba7950382c4c4327115147206d657a51b2",
+  "totalBytes": 204893887,
+  "aggregateSha256": "27820f11fdeac0db830fe0d3817f941306e3bb7f2231c8986019acb4d4fe9ce4",
   "files": [
     {
       "path": "_headers",
@@ -358,7 +358,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "e062caab44e22e60116df40b9bdb5d716411950e803edbd645e508f480bcb732"
+      "sha256": "0a26a6211aa92e77080126a3aa9c0d2ed609d79b8ea37d53ee261c88ff7b7b2c"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -1807,8 +1807,8 @@
     },
     {
       "path": "assets/dialogue.js",
-      "bytes": 104824,
-      "sha256": "153ea40b4a77ef06fe37ef2bba3c6831b94b3c153badd7145f6097e389f85111"
+      "bytes": 104866,
+      "sha256": "a5c2d905deeaa7e2c330fa5f2793b3c4e0794d88a8a264a56d9f432ea7bfbdb2"
     },
     {
       "path": "assets/learning-evidence.js",
@@ -7368,7 +7368,7 @@
     {
       "path": "dialogue.html",
       "bytes": 9857,
-      "sha256": "b29de42ae144e58530b179a2f848c69aea2d0ca8092d8a5c80adf5aca967a97f"
+      "sha256": "6d6e441e6637071f351d7cf9d93bad87fe767aaa9b787cbf3e91c0bdcfd3539c"
     },
     {
       "path": "evaluation-scheduler.js",
