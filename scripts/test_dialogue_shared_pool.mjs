@@ -100,3 +100,13 @@ test('after a refused turn, edited text is refused for the same reason with the 
  const read=await(await handleDialogue(req(),f.env,student)).json();assert.equal(read.draft.content,'第一段未送出的文字。');
  const same=await send(f,body(1,'synthetic-d-0001','另一段內容。'));assert.equal(same.status,409,'the same receipt id with different content is still a real conflict');
 }finally{f.close();}});
+
+test('an unsent draft of an older revision is kept in the record but never offered again once a later turn exists',async()=>{const f=fixture(policy({},{ceilingMicros:2000,burstMicros:2000}));try{
+ assert.equal((await send(f,body(0,'synthetic-g-0000'))).status,200);
+ const denied=await send(f,body(1,'synthetic-g-0001','被擋下的那段話。'));assert.equal(denied.status,429);assert.equal(denied.value.draftSaved,true);
+ assert.equal((await(await handleDialogue(req(),f.env,student)).json()).draft.content,'被擋下的那段話。','offered while it is the current revision');
+ f.env.YW_DIALOGUE_BUDGET_JSON=policy({},{ceilingMicros:1000000,burstMicros:1000000});
+ assert.equal((await send(f,body(1,'synthetic-g-0002','後來送出的另一段話。'))).status,200);
+ const read=await(await handleDialogue(req(),f.env,student)).json();assert.equal(read.draft,null,'the older draft is not put back into the composer');assert.equal(read.revision,2);
+ assert.deepEqual(f.sql.prepare('SELECT mutation_id,revision,submitted_turn_id FROM dialogue_drafts').all().map(r=>[r.mutation_id,r.revision,r.submitted_turn_id]),[['synthetic-g-0001',1,null]],'the draft row is preserved, not deleted or marked submitted');
+}finally{f.close();}});

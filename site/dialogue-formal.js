@@ -9,16 +9,26 @@ export const isDialogueSourceMutation = value => [DIALOGUE_SOURCE_PREFIX,DIALOGU
 
 // These original tasks use the answer key or the student's own interest rating,
 // never a model score. The full frozen item is checked again by the source route.
+// Every open original answer-key item of a word already demonstrated in the dialogue (bounded), so the author can recognise
+// whichever of them the student answers; the server still checks the chosen option against the answer key.
+export function originalVocabularyTasks(curriculum,state,mastery=[],limit=6){
+  if(state.legacyCompletion)return [];
+  const out=[];
+  for(const o of curriculum.objectives.filter(o=>o.domain==='legacy'&&o.legacy.questionKind==='vocabulary')){
+    const v=curriculum.vocabulary.find(v=>o.legacy.resourceKey===`effect:${curriculum.lessonId}:vocab:${v.id}`);
+    const status=state.objectives.find(x=>x.id===o.id)?.status,current=mastery.find(m=>m.item_id===v?.id);
+    if(status==='historical_review'||status==='preserved'&&current?.status!=='learning')continue;
+    if(v&&state.objectives.find(x=>x.id===v.id)?.status==='demonstrated')out.push({objectiveId:o.id,kind:'vocabulary',itemId:v.id,question:v.question,source:v.sourceSentence,options:v.options,sourceAnswer:v.sourceAnswer,originalMastery:current?{status:current.status,correctCount:current.correct_count,wrongCount:current.wrong_count}:null});
+    if(out.length>=limit)break;
+  }
+  return out;
+}
 export function originalTask(curriculum,state,mastery=[]){
   if(state.legacyCompletion)return null;
   const originals=curriculum.objectives.filter(o=>o.domain==='legacy');
   const pending=originals.filter(o=>!['preserved','historical_review'].includes(state.objectives.find(x=>x.id===o.id)?.status));
-  for(const o of originals.filter(o=>o.legacy.questionKind==='vocabulary')){
-    const v=curriculum.vocabulary.find(v=>o.legacy.resourceKey===`effect:${curriculum.lessonId}:vocab:${v.id}`);
-    const status=state.objectives.find(x=>x.id===o.id)?.status,current=mastery.find(m=>m.item_id===v?.id);
-    if(status==='historical_review'||status==='preserved'&&current?.status!=='learning')continue;
-    if(v&&state.objectives.find(x=>x.id===v.id)?.status==='demonstrated')return {objectiveId:o.id,kind:'vocabulary',itemId:v.id,question:v.question,source:v.sourceSentence,options:v.options,sourceAnswer:v.sourceAnswer,originalMastery:current?{status:current.status,correctCount:current.correct_count,wrongCount:current.wrong_count}:null};
-  }
+  const [vocabulary]=originalVocabularyTasks(curriculum,state,mastery,1);
+  if(vocabulary)return vocabulary;
   const evaluation=pending.find(o=>o.legacy.questionKind==='evaluation');
   if(evaluation&&(state.next?.domain==='evaluation'||state.objectives.find(o=>o.domain==='evaluation')?.status==='demonstrated'))return {objectiveId:evaluation.id,kind:'evaluation'};
   return null;

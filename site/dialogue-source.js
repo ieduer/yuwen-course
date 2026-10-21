@@ -18,7 +18,7 @@ import {hasClassicalAnnotatedReadReceipt} from './classical-first-read-source.js
 import {consumeGatewayStream,studentStream,validatedProviderAccounting} from './dialogue-stream.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
 import {requestDialogueBudget,combinedProviderAccounting,operatorCost,continuationDisposition,budgetDenial} from './dialogue-recovery.js';
-import {prepareFormalInput,formalPrompt,studyGuideConversationReply,originalTask,prepareOriginalInput} from './dialogue-formal.js';
+import {prepareFormalInput,formalPrompt,studyGuideConversationReply,originalTask,originalVocabularyTasks,prepareOriginalInput} from './dialogue-formal.js';
 import {learningTurn,collectedFormal} from './dialogue-learning-turn.js';
 import {lessonCallLimit} from './dialogue-lesson-limits.js';
 import {sanitizeDialogueCurriculum} from './dialogue-public-curriculum.js';
@@ -217,7 +217,7 @@ async function plannedQuestion(db,session,curriculum,state){
  try{const q=createQuestion(curriculum,{objectiveId:objective.id,attempt,previousVariant:prior?.variant??null,random:parseInt(digest.slice(0,8),16)});return {...q,id:`guided-${digest.slice(0,32)}`,createdAt:session.created_at};}catch{return null;}
 }
 async function snapshot(db,session,curriculum,before){
- const [page,assessments,q,draft]=await Promise.all([history(db,session,before),assessmentRows(db,session.id),db.prepare("SELECT instance_json FROM dialogue_questions WHERE session_id=? AND state='issued'").bind(session.id).first(),db.prepare('SELECT mutation_id,revision,content,question_id,created_at,source_request_json FROM dialogue_drafts WHERE session_id=? AND submitted_turn_id IS NULL ORDER BY created_at DESC LIMIT 1').bind(session.id).first()]);
+ const [page,assessments,q,draft]=await Promise.all([history(db,session,before),assessmentRows(db,session.id),db.prepare("SELECT instance_json FROM dialogue_questions WHERE session_id=? AND state='issued'").bind(session.id).first(),db.prepare('SELECT mutation_id,revision,content,question_id,created_at,source_request_json FROM dialogue_drafts WHERE session_id=? AND submitted_turn_id IS NULL AND revision=? ORDER BY created_at DESC LIMIT 1').bind(session.id,session.revision).first()]);
  const legacy=await historicalEvidence(db,session.student_id,curriculum),preserved=legacy.preserved;
  const execution=await executionState(db,session),carried=execution?await carriedAssessments(db,session,execution):[],merged=carried.length?[...carried,...assessments]:assessments;
  let question=q?JSON.parse(q.instance_json):null;
@@ -284,7 +284,8 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
  if(session&&(publishedCurriculum.formalScopeExpansion&&!curriculum.formalScopeExpansion||needsSourceMetadata)){
   const legacy=await historicalEvidence(db,student.id,curriculum),assessments=await assessmentRows(db,session.id),conclusion=await savedConclusion(db,session.id);
   const prior=projectState(curriculum,assessments,legacy.preserved,legacy.completion,await readingGate(db,student.id,curriculum,legacy),conclusion);
-  const draft=await db.prepare('SELECT mutation_id FROM dialogue_drafts WHERE session_id=? AND submitted_turn_id IS NULL LIMIT 1').bind(session.id).first();
+  // Only a draft of the current revision can still be sent; older unsent drafts stay in the record and the export.
+  const draft=await db.prepare('SELECT mutation_id FROM dialogue_drafts WHERE session_id=? AND submitted_turn_id IS NULL AND revision=? LIMIT 1').bind(session.id,session.revision).first();
   const completed=!!legacy.completion||prior.completion==='evidence_ready_for_review';
   let pending=!!session.inflight||!!draft;
   if(needsSourceMetadata&&!completed&&!pending){
@@ -672,7 +673,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const records=await learningRecords(db,session),guide=learningTurn(curriculum,state,{revision:session.revision,...records,question});
   state.score=lessonScore(curriculum,state,{submissions:records.submissions});
   const pendingEvaluation=(()=>{const o=curriculum.objectives.find(o=>o.domain==='legacy'&&o.legacy?.questionKind==='evaluation');if(!o||state.legacyCompletion)return null;const st=state.objectives.find(x=>x.id===o.id)?.status;return ['preserved','historical_review'].includes(st)?null:{objectiveId:o.id,kind:'evaluation'};})();
-  const originalTasks=body.conversation===true?conversationOriginalTasks(curriculum,state,guide,[originalTask(curriculum,state,legacy.mastery),pendingEvaluation]):null;
+  const originalTasks=body.conversation===true?conversationOriginalTasks(curriculum,state,guide,[...originalVocabularyTasks(curriculum,state,legacy.mastery),originalTask(curriculum,state,legacy.mastery),pendingEvaluation]):null;
   const firstReadingContext=firstReading?{...firstReading.state,kind:firstReading.asset.kind||'classical-original',summaries:firstReading.state.summaries?.slice(-3),marks:firstReading.state.marks?.slice(-8).map(m=>({...m,...(m.corrections?{corrections:m.corrections.slice(-2)}:{})})),paragraphs:firstReading.asset.paragraphs.filter(p=>body.content.includes(p.key)||unpunctuated(body.content).includes(p.text.slice(0,12))).slice(0,2).map(p=>({...p,text:p.text.slice(0,1200)}))}:null;
   let prompt=formal?null:contextFor({curriculum,state,turns:completeTurns,question,remediation,assessments,...(body.conversation===true?{conversationGuide:guide,conversationOriginalTasks:originalTasks,firstReading:firstReadingContext}:{})});
   if(body.conversation===true&&!formal)prompt=READING_CONVERSATION_POLICY+'\n'+prompt+'\n';

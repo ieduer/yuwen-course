@@ -665,6 +665,22 @@ test('conversation keeps the author reply when an optional proposal part fails v
  assert.equal(rejected.credited,false);assert.deepEqual(rejected.parts,[{part:'originalEvidence',code:'reading_acknowledgement_not_verified'}]);
 });
 
+test('every open original item of a demonstrated word is offered to the author, so a correct answer to any of them can be recognised',async t=>{
+ const {originalVocabularyTasks,originalTask}=await import('../site/dialogue-formal.js');
+ const {conversationOriginalTasks}=await import('../site/dialogue-reading-evidence.js');
+ const {projectState}=await import('../site/dialogue-policy.js');
+ const c=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1498.json'));
+ const words=c.objectives.filter(o=>o.domain==='legacy'&&o.legacy.questionKind==='vocabulary').map(o=>c.vocabulary.find(v=>o.legacy.resourceKey===`effect:${c.lessonId}:vocab:${v.id}`)).filter(Boolean).slice(0,3);
+ assert.equal(words.length,3);
+ const state=projectState(c,words.map(v=>({objectiveId:v.id,outcome:'demonstrated',evidence:[],rationale:'x',ruleVersion:'v'})),[]);
+ const tasks=originalVocabularyTasks(c,state,[]);assert.deepEqual(tasks.map(t=>t.itemId),words.map(v=>v.id),'all three, not only the first');
+ for(const task of tasks){assert.ok(Array.isArray(task.options)&&task.options.length>=2);assert.ok(task.sourceAnswer!==undefined);}
+ assert.equal(originalTask(c,state,[]).itemId,words[0].id,'the single-task helper is unchanged for its other callers');
+ const offered=conversationOriginalTasks(c,{...state,readingGate:null},null,[...tasks,originalTask(c,state,[])]);
+ assert.deepEqual(offered.filter(x=>x.kind==='vocabulary').map(x=>x.itemId),words.map(v=>v.id),'no duplicates, all offered');
+ assert.equal(originalVocabularyTasks(c,state,[],2).length,2,'bounded');
+});
+
 test('a quotation the reply attributes to the student that is not in any saved student message is recorded and shown; a verbatim one passes',async t=>{
  const {unverifiedStudentQuotes}=await import('../site/dialogue-source.js');
  assert.deepEqual(unverifiedStudentQuotes('你前面才說「縫不是補救」，這裡又說是補虧欠。',[{role:'student',content:'我覺得縫的是虧欠。'}]),['縫不是補救']);
