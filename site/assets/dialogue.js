@@ -690,7 +690,8 @@ function update(data){
  if(data.draft&&(!data.draft.formal||data.draft.learningRequest)&&!hasComposerDraft()&&!pending){
   const draft=data.draft,request=draft.learningRequest||{content:draft.content,questionId:draft.questionId};
   $('answer').value=request.content;selected=null;$('quote').hidden=true;
-  if(draft.revision===data.revision){pending={mutationId:draft.mutationId,revision:draft.revision,...request};pendingDraft=request.content;}
+  // A draft the server kept is unsent text, not a request in flight: it keeps its receipt id for the next send and never blocks navigation.
+  draftMutationId=draft.mutationId||null;
   composerDraft=request.taskId?{taskId:request.taskId,...(request.selectedIndex!==undefined?{selectedIndex:request.selectedIndex}:{}),...(request.rating!==undefined?{rating:request.rating}:{})}:null;
   setStatus('已恢復伺服器保存的待送草稿；尚未呼叫 AI。');
  }

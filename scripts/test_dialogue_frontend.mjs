@@ -750,3 +750,10 @@ test('a genuine device-storage failure is not a dead end: the first switch expla
  assert.equal(vm.runInContext('switchLesson("lesson-191")',f.context),false,'a different lesson asks again');
  assert.equal(vm.runInContext('switchLesson("lesson-191")',f.context),true,'the same lesson chosen twice proceeds');
 });
+
+test('a draft the server kept (budget-denied turn) restores as unsent text with its receipt id and never blocks navigation',async()=>{
+ const f=await fixture({conversation:true,initial:{draft:{mutationId:'m-server',revision:0,content:'伺服器留下的待送文字'}}});for(let i=0;i<4;i++)await tick();
+ assert.equal(f.document.getElementById('answer').value,'伺服器留下的待送文字');assert.match(f.document.getElementById('status').textContent,/尚未呼叫 AI/);
+ assert.equal(vm.runInContext('pending',f.context),null);assert.equal(vm.runInContext('inflight',f.context),null);assert.equal(vm.runInContext('draftMutationId',f.context),'m-server');
+ assert.equal(vm.runInContext('switchLesson("lesson-190")',f.context),true,'navigation stays available');
+});
