@@ -43,7 +43,7 @@ export function isolatedDialogueAdmission(env,student,lessonId,budget,at=Date.no
 // Keep the count in the same D1 CAS/batch that reserves the logical call.
 // No day, lesson, owner, deployment or status partition can reset this namespace.
 const OPERATION_COUNT="(SELECT COUNT(*) FROM dialogue_calls WHERE json_extract(CASE WHEN json_valid(budget_policy_json) THEN budget_policy_json ELSE '{}' END,'$.isolatedAdmission.operation')=?)";
-export function dialogueCallAdmission(budget,student,limits,day){
+export function dialogueCallAdmission(budget,student,limits,day,at=new Date().toISOString()){
  const daily='(SELECT COUNT(*) FROM dialogue_calls WHERE day=?)<?';
  if(budget.isolatedAdmission?.operation===MODE_OPERATION){
   const condition=modeOperationCondition(budget,student.id);
@@ -56,6 +56,8 @@ export function dialogueCallAdmission(budget,student,limits,day){
  if(budget.isolatedAdmission?.operation===E2E_OPERATION)return {
   sql:`${daily} AND ${OPERATION_COUNT}<?`,args:[day,limits.globalPerDay,E2E_OPERATION,120],
  };
+ // Shared pool: no daily call caps for ordinary learning; only short-term rate protection against runaway automation.
+ if(budget.sharedPool)return {sql:'(SELECT COUNT(*) FROM dialogue_calls WHERE student_id=? AND created_at>=?)<?',args:[student.id,new Date(Date.parse(at)-budget.sharedPool.rateWindowSeconds*1000).toISOString(),budget.sharedPool.ratePerWindow]};
  return {sql:`${daily} AND (SELECT COUNT(*) FROM dialogue_calls WHERE student_id=? AND day=?)<?`,
   args:[day,limits.globalPerDay,student.id,day,limits.turnsPerDay]};
 }

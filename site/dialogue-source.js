@@ -10,6 +10,7 @@ import {handleCalibration} from './dialogue-calibration.js';
 import {historicalEvidence} from './dialogue-legacy.js';
 import {acceptanceContext} from './dialogue-acceptance.js';
 import {dialogueCallAdmission,assertIsolatedCallCurrent} from './dialogue-e2e-admission.js';
+import {sharedPoolAdmission,SHARED_POOL_MESSAGES} from './dialogue-pacing.js';
 import {RENEWED_E2E_OPERATION,renewedOperationCondition,prepareRenewedRetainedFailures,validateRenewedResult} from './dialogue-e2e-renewal.js';
 import {MODE_OPERATION,modeConfigured,prepareModeLedger,validateModeResult} from './dialogue-mode-admission.js';
 import {recordCorrection} from './dialogue-corrections.js';
@@ -516,17 +517,34 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
  if(formal && question)return json({code:'question_in_progress',message:'先保留並處理目前的字詞作答，再核對原題。'},409);
  if(gate?.phase==='initial_reading'&&body.conversation!==true)return json({code:'first_read_required',message:'請先在無注疏正文保存疑點、猜測與初讀感知，再展開細讀對話。'},409);
  let budget;
- try{budget=requestDialogueBudget(env,student,lessonId);}catch{
-  await db.prepare('INSERT OR IGNORE INTO dialogue_drafts(id,session_id,mutation_id,request_hash,revision,content,question_id,created_at,source_request_json) VALUES(?,?,?,?,?,?,?,?,?)').bind(uuid(),session.id,body.mutationId,requestHash,body.revision,body.content,body.questionId||null,now(),draftRequest?JSON.stringify(draftRequest):null).run();
+ // Keep the unsent text: 'server' (stored as this revision's draft), 'device' (an earlier unsent text already holds this
+ // revision's draft slot — it stays untouched; the newer text stays on the student's device) or 'conflict' (same receipt id
+ // with different content).
+ const keepDraft=async(at)=>{
+  await db.prepare('INSERT OR IGNORE INTO dialogue_drafts(id,session_id,mutation_id,request_hash,revision,content,question_id,created_at,source_request_json) VALUES(?,?,?,?,?,?,?,?,?)').bind(uuid(),session.id,body.mutationId,requestHash,body.revision,body.content,body.questionId||null,at,draftRequest?JSON.stringify(draftRequest):null).run();
   const saved=await db.prepare('SELECT request_hash FROM dialogue_drafts WHERE session_id=? AND mutation_id=?').bind(session.id,body.mutationId).first();
-  if(saved?.request_hash!==requestHash)return json({code:'draft_conflict',message:'伺服器已有另一份待送草稿；目前文字仍保留在本頁，請先核對匯出紀錄。'},409);
-  return json({code:'budget_policy_required',draftSaved:true,message:'支出政策尚未配置；草稿已保存，本輪未呼叫 AI。'},503);
+  if(saved)return saved.request_hash===requestHash?'server':'conflict';
+  return await db.prepare('SELECT 1 n FROM dialogue_drafts WHERE session_id=? AND revision=? AND submitted_turn_id IS NULL').bind(session.id,body.revision).first()?'device':'conflict';
+ };
+ const draftConflict=()=>json({code:'draft_conflict',message:'伺服器已有另一份待送草稿；目前文字仍保留在本頁，請先核對匯出紀錄。'},409);
+ const deviceOnly=message=>String(message||'').replace('文字已保存','這段文字保存在此裝置（伺服器另存你先前未送出的文字）');
+ try{budget=requestDialogueBudget(env,student,lessonId);}catch(error){
+  const kept=await keepDraft(now());if(kept==='conflict')return draftConflict();
+  // A shared-pool policy past its period is an expired credit period, not a missing policy.
+  if(error?.message==='budget_price_expired'&&/"sharedPool"/.test(env.YW_DIALOGUE_BUDGET_JSON||'')){const message=SHARED_POOL_MESSAGES.ended;return json({code:'shared_budget_period_ended',scope:'exhausted',retryable:false,canSave:true,canExport:true,canReview:true,draftSaved:kept==='server',...(kept==='device'?{deviceOnly:true}:{}),message:kept==='device'?deviceOnly(message):message},429);}
+  const message='支出政策尚未配置；文字已保存，本輪未呼叫 AI。';
+  return json({code:'budget_policy_required',draftSaved:kept==='server',...(kept==='device'?{deviceOnly:true}:{}),message:kept==='device'?deviceOnly(message):message},503);
  }
  const at=now(),day=at.slice(0,10),turnId=uuid();
  if(budget.isolatedAdmission?.operation===MODE_OPERATION&&body.conversation!==true)return json({code:'mode_conversation_required'},400);
  await prepareModeLedger(db,budget,student.id,curriculum);
  await prepareRenewedRetainedFailures(db,budget,student.id);
- const callAdmission=dialogueCallAdmission(budget,student,LIMITS,day);
+ const callAdmission=dialogueCallAdmission(budget,student,LIMITS,day,at);
+ // Money: the shared pool (one atomic condition over the pool window) or, for a legacy policy, the fixed daily/lesson caps.
+ const money=budget.sharedPool?sharedPoolAdmission(budget.sharedPool,budget.reserveMicros,at,{burst:!budget.isolatedAdmission}):{sql:`(SELECT COALESCE(SUM(COALESCE(accounted_micros,reserved_micros)),0) FROM dialogue_calls WHERE day=?)+?<=?
+   AND (SELECT COALESCE(SUM(COALESCE(accounted_micros,reserved_micros)),0) FROM dialogue_calls WHERE student_id=? AND day=?)+?<=?
+   AND (SELECT COALESCE(SUM(COALESCE(c.accounted_micros,c.reserved_micros)),0) FROM dialogue_calls c JOIN dialogue_sessions s ON s.id=c.session_id WHERE c.student_id=? AND s.lesson_id=?)+?<=?`,args:[day,budget.reserveMicros,budget.globalDailyMicros,student.id,day,budget.reserveMicros,budget.userDailyMicros,student.id,lessonId,budget.reserveMicros,budget.lessonLifetimeMicros]};
+ const concurrency=budget.sharedPool?.concurrency??LIMITS.concurrency;
  // Atomic D1 batch: CAS + reservation + student persistence precede the only AI call.
  const changes=await db.batch([
   db.prepare(`UPDATE dialogue_sessions SET revision=revision+1,inflight=?,updated_at=? WHERE id=? AND revision=? AND inflight IS NULL
@@ -535,9 +553,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
    AND (SELECT COUNT(*) FROM dialogue_calls WHERE session_id=?)<?
    AND (SELECT COUNT(*) FROM dialogue_calls WHERE state IN ('reserved','finishing'))<?
    AND NOT EXISTS(SELECT 1 FROM dialogue_calls WHERE budget_policy_json IS NULL)
-   AND (SELECT COALESCE(SUM(COALESCE(accounted_micros,reserved_micros)),0) FROM dialogue_calls WHERE day=?)+?<=?
-   AND (SELECT COALESCE(SUM(COALESCE(accounted_micros,reserved_micros)),0) FROM dialogue_calls WHERE student_id=? AND day=?)+?<=?
-   AND (SELECT COALESCE(SUM(COALESCE(c.accounted_micros,c.reserved_micros)),0) FROM dialogue_calls c JOIN dialogue_sessions s ON s.id=c.session_id WHERE c.student_id=? AND s.lesson_id=?)+?<=?`).bind(turnId,at,session.id,body.revision,...callAdmission.args,session.id,LIMITS.lessonLifetime,session.id,lessonCallLimit(curriculum,LIMITS.paidLessonLifetime),LIMITS.concurrency,day,budget.reserveMicros,budget.globalDailyMicros,student.id,day,budget.reserveMicros,budget.userDailyMicros,student.id,lessonId,budget.reserveMicros,budget.lessonLifetimeMicros),
+   AND ${money.sql}`).bind(turnId,at,session.id,body.revision,...callAdmission.args,session.id,LIMITS.lessonLifetime,session.id,lessonCallLimit(curriculum,LIMITS.paidLessonLifetime),concurrency,...money.args),
   ...(learningQuestion?[db.prepare("INSERT OR IGNORE INTO dialogue_questions(id,session_id,objective_id,attempt,instance_json,state,created_at) SELECT ?,id,?,?,?,'issued',? FROM dialogue_sessions WHERE id=? AND inflight=?").bind(learningQuestion.id,learningQuestion.objectiveId,learningQuestion.attempt,JSON.stringify(learningQuestion),learningQuestion.createdAt,session.id,turnId)]:[]),
   db.prepare(`INSERT OR IGNORE INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,question_id,status,policy_version,created_at,source_request_json) SELECT ?,id,?,?, 'student',?,?, 'saved',?,?,? FROM dialogue_sessions WHERE id=? AND inflight=?`).bind(turnId,body.mutationId,requestHash,body.content,body.questionId||null,POLICY_VERSION,at,formal?JSON.stringify(formal):null,session.id,turnId),
   db.prepare(`INSERT OR IGNORE INTO dialogue_calls(turn_id,session_id,student_id,day,reserved_tokens,state,created_at,reserved_micros,budget_policy_json) SELECT ?,id,?,?,?,'reserved',?,?,? FROM dialogue_sessions WHERE id=? AND inflight=?`).bind(turnId,student.id,day,budget.maxOutputTokens??LIMITS.outputTokens,at,budget.reserveMicros,JSON.stringify(budget),session.id,turnId),
@@ -549,10 +565,9 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
  if(!changes[0].meta.changes){
   const current=await db.prepare('SELECT * FROM dialogue_sessions WHERE id=?').bind(session.id).first();
   if(current.revision!==body.revision || current.inflight)return json({code:current.revision!==body.revision?'stale_revision':'turn_in_progress',message:'此輪尚未送出。請保留文字、讀取已保存紀錄後再繼續。'},409);
-  await db.prepare('INSERT OR IGNORE INTO dialogue_drafts(id,session_id,mutation_id,request_hash,revision,content,question_id,created_at,source_request_json) VALUES(?,?,?,?,?,?,?,?,?)').bind(uuid(),session.id,body.mutationId,requestHash,body.revision,body.content,body.questionId||null,at,draftRequest?JSON.stringify(draftRequest):null).run();
-  const saved=await db.prepare('SELECT request_hash FROM dialogue_drafts WHERE session_id=? AND mutation_id=?').bind(session.id,body.mutationId).first();
-  if(saved?.request_hash!==requestHash)return json({code:'draft_conflict',message:'伺服器已有另一份待送草稿；目前文字仍保留在本頁，請先核對匯出紀錄。'},409);
-  return json({...await budgetDenial(db,session,student,budget,{...LIMITS,paidLessonLifetime:lessonCallLimit(curriculum,LIMITS.paidLessonLifetime)},day),draftSaved:true},429);
+  const kept=await keepDraft(at);if(kept==='conflict')return draftConflict();
+  const denial=await budgetDenial(db,session,student,budget,{...LIMITS,paidLessonLifetime:lessonCallLimit(curriculum,LIMITS.paidLessonLifetime)},day,at);
+  return json({...denial,draftSaved:kept==='server',...(kept==='device'?{deviceOnly:true,message:deviceOnly(denial.message)}:{})},429);
  }
  const stream=request.headers.get('accept')?.includes('text/event-stream')?studentStream():null;
  stream?.send('saved',{saved:true,turnId,mutationId:body.mutationId,revision:body.revision+1,createdAt:at});

@@ -3,6 +3,7 @@ import {validatedProviderAccounting} from './dialogue-stream.js';
 import {isolatedDialogueAdmission,isolatedCallCount} from './dialogue-e2e-admission.js';
 import {renewedBudgetDenial} from './dialogue-e2e-renewal.js';
 import {MODE_OPERATION,modeOperationCondition} from './dialogue-mode-admission.js';
+import {poolPhase,pacedAllowance,allowanceReachedAt,SHARED_POOL_MESSAGES} from './dialogue-pacing.js';
 
 // Activation is explicit. Calibration passes its own one-attempt budget and
 // never uses this wrapper. One logical learner turn reserves all three slots.
@@ -10,7 +11,7 @@ export function requestDialogueBudget(env,student,lessonId){
  const policy=dialogueBudget(env),limit=env.YW_DIALOGUE_PROVIDER_ATTEMPTS==='3'?3:1;
  // One primary attempt at the declared reserve plus (limit-1) fallback attempts at the fallback reserve (0 for the free pool).
  const reserveMicros=policy.reserveMicros+(policy.fallbackReserveMicros??policy.reserveMicros)*(limit-1);
- if(reserveMicros>Math.min(policy.globalDailyMicros,policy.userDailyMicros,policy.lessonLifetimeMicros))throw Error('retry_reserve_exceeds_budget');
+ if(reserveMicros>(policy.sharedPool?policy.sharedPool.ceilingMicros:Math.min(policy.globalDailyMicros,policy.userDailyMicros,policy.lessonLifetimeMicros)))throw Error('retry_reserve_exceeds_budget');
  const budget={...policy,perAttemptReserveMicros:policy.reserveMicros,fallbackReserveMicros:policy.fallbackReserveMicros??policy.reserveMicros,providerAttemptLimit:limit,logicalProviderAttemptLimit:limit,reserveMicros};
  // The price policy cannot mint operation admission, even in server config.
  delete budget.isolatedAdmission;
@@ -71,7 +72,7 @@ export function continuationDisposition(call,failure,continued=false,{noOutput=f
  return {allowed:true,code:noOutput?'explicit_retry_available':rejectedAfterSuccess?'explicit_regeneration_available':'explicit_continuation_available',requiresUserAction:true,remainingProviderAttempts:remaining,providerAttemptsUsed:accounting.providerAttemptCount};
 }
 
-export async function budgetDenial(db,session,student,budget,limits,day){
+export async function budgetDenial(db,session,student,budget,limits,day,at=new Date().toISOString()){
  const q=async(text,...args)=>(await db.prepare(text).bind(...args).first()).n;
  const response=(code,scope,retryable)=>({code,scope,retryable,canSave:true,canExport:true,canReview:true,...(scope==='daily'?{resetsAt:new Date(Date.parse(day+'T00:00:00Z')+86400000).toISOString()}:{}),message:scope==='lifetime'?'本課已達累計 AI 額度；明日不會自動重置。文字已保存，仍可閱讀、匯出及交由教師覆核。':scope==='daily'?'本輪尚未呼叫 AI；文字已保存，可於每日額度恢復後繼續，歷史紀錄不受影響。':scope==='concurrency'?'目前仍有回應正在處理；文字已保存，請稍後讀回。':'本輪尚未呼叫 AI；文字已保存，支出紀錄需要先核對。'});
  if(await q('SELECT COUNT(*) n FROM dialogue_calls WHERE session_id=?',session.id)>=limits.paidLessonLifetime)return response('paid_lesson_lifetime_exhausted','lifetime',false);
@@ -84,6 +85,23 @@ export async function budgetDenial(db,session,student,budget,limits,day){
  if(budget.isolatedAdmission&&await isolatedCallCount(db,budget.isolatedAdmission.operation)>=120)return {...response('e2e_operation_call_budget_exhausted','operation',false),operation:budget.isolatedAdmission.operation,message:'本次驗收已達累計 120 輪上限；不會按日期重置。文字與支出紀錄保留，可讀回及匯出。'};
  const renewedDenial=await renewedBudgetDenial(db,budget,student.id);
  if(renewedDenial)return response(renewedDenial,renewedDenial==='e2e_operation_concurrency_busy'?'concurrency':'operation',false);
+ if(budget.sharedPool){
+  // Shared pool: the reason the atomic admission refused, in the same order and with the same arithmetic.
+  const pool=budget.sharedPool,shared=(code,scope,retryable,retryAt,messageKey=scope)=>({code,scope,retryable,canSave:true,canExport:true,canReview:true,poolId:pool.poolId,...(retryAt?{retryAt,resetsAt:retryAt}:{}),message:SHARED_POOL_MESSAGES[messageKey]});
+  const since=new Date(Date.parse(at)-pool.rateWindowSeconds*1000).toISOString();
+  if(!budget.isolatedAdmission&&await q('SELECT COUNT(*) n FROM dialogue_calls WHERE student_id=? AND created_at>=?',student.id,since)>=pool.ratePerWindow){
+   const oldest=(await db.prepare('SELECT MIN(created_at) n FROM (SELECT created_at FROM dialogue_calls WHERE student_id=? AND created_at>=? ORDER BY created_at DESC LIMIT ?)').bind(student.id,since,pool.ratePerWindow).first())?.n;
+   return shared('dialogue_rate_limited','rate',true,new Date(Date.parse(oldest||at)+pool.rateWindowSeconds*1000+1000).toISOString());
+  }
+  const phase=poolPhase(pool,at);
+  if(phase!=='active')return shared(phase==='ended'?'shared_budget_period_ended':'shared_budget_not_started','exhausted',phase==='before',phase==='before'?pool.startsAt:null,phase);
+  const used=await q('SELECT COALESCE(SUM(COALESCE(accounted_micros,reserved_micros)),0) n FROM dialogue_calls WHERE created_at>=? AND created_at<?',pool.startsAt,pool.endsAt);
+  if(used+budget.reserveMicros>pool.ceilingMicros)return shared('shared_budget_exhausted','exhausted',false,null);
+  const burst=!budget.isolatedAdmission;
+  if(used+budget.reserveMicros>pacedAllowance(pool,at,{burst})){const retryAt=allowanceReachedAt(pool,used+budget.reserveMicros,at,{burst});return retryAt?shared('shared_budget_paced','paced',true,retryAt):shared('shared_budget_exhausted','exhausted',false,null);}
+  if(await q("SELECT COUNT(*) n FROM dialogue_calls WHERE state IN ('reserved','finishing')")>=pool.concurrency)return shared('dialogue_concurrency_busy','concurrency',true,new Date(Date.parse(at)+30000).toISOString());
+  return response('budget_reservation_unconfirmed','review',false);
+ }
  if(await q('SELECT COUNT(*) n FROM dialogue_calls WHERE day=?',day)>=limits.globalPerDay||(!budget.isolatedAdmission&&await q('SELECT COUNT(*) n FROM dialogue_calls WHERE student_id=? AND day=?',student.id,day)>=limits.turnsPerDay))return response('daily_call_budget_exhausted','daily',true);
  if(await q('SELECT COALESCE(SUM(COALESCE(accounted_micros,reserved_micros)),0) n FROM dialogue_calls WHERE day=?',day)+budget.reserveMicros>budget.globalDailyMicros||await q('SELECT COALESCE(SUM(COALESCE(accounted_micros,reserved_micros)),0) n FROM dialogue_calls WHERE student_id=? AND day=?',student.id,day)+budget.reserveMicros>budget.userDailyMicros)return response('daily_money_budget_exhausted','daily',true);
  if(await q('SELECT COALESCE(SUM(COALESCE(c.accounted_micros,c.reserved_micros)),0) n FROM dialogue_calls c JOIN dialogue_sessions s ON s.id=c.session_id WHERE c.student_id=? AND s.lesson_id=?',student.id,session.lesson_id)+budget.reserveMicros>budget.lessonLifetimeMicros)return response('lesson_money_lifetime_exhausted','lifetime',false);

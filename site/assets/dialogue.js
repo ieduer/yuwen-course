@@ -82,7 +82,7 @@ const api=async(body,cursor,records=false,onEvent,correctionsFor,shared=false,fi
  const value=await response.json().catch(()=>{throw Error('伺服器回應未完整讀取；請保留文字，讀回紀錄再繼續。');});current();
  if(expectedOwner&&value.ownerRef&&expectedOwner!==value.ownerRef){clearPrivateView({preserveReading:true});ownerRef=null;queueMicrotask(()=>void refresh());throw Object.assign(new Error('帳戶已切換，已清除舊紀錄；請重新查看或匯出。'),{code:'account_changed'});}
  if(!response.ok&&value.code==='account_changed'){clearPrivateView({preserveReading:true});ownerRef=null;queueMicrotask(()=>void refresh());}
- if(!response.ok)throw Object.assign(new Error(value.message||value.error||'暫時無法連線，文字仍保留在本頁。'),{status:response.status,code:value.code,draftSaved:value.draftSaved,scope:value.scope,retryable:value.retryable,resetsAt:value.resetsAt});return value;
+ if(!response.ok)throw Object.assign(new Error(value.message||value.error||'暫時無法連線，文字仍保留在本頁。'),{status:response.status,code:value.code,draftSaved:value.draftSaved,deviceOnly:value.deviceOnly===true,scope:value.scope,retryable:value.retryable,resetsAt:value.resetsAt||value.retryAt});return value;
 };
 function renderPartial(partial){
  let n=document.getElementById('partial-reply');
@@ -523,8 +523,11 @@ function restoreComposer(){
  }catch{$('draft-status').textContent='草稿暫時無法讀取，已保存的學習紀錄不受影響。';}
 }
 function switchLesson(id){
- if(id===curriculum?.lessonId)return true;
- const stay=()=>{$('lesson').value=curriculum.lessonId;return false;};
+ // Compare with the lesson requested (possibly still loading), not only the one on screen: switching away and straight back
+ // must load the lesson asked for last, and the superseded load is dropped by its generation.
+ const requested=$('lesson').value;
+ if(id===requested&&id===curriculum?.lessonId)return true;
+ const stay=()=>{$('lesson').value=requested;return false;};
  if(inflight){setStatus('這一輪正在送出；送出完成後即可切換篇目。');return stay();}
  if(originalDraft||hasFirstReadDraft()){setStatus('請先完成保存中的作答，或複製尚未保存的文字，再切換篇目。');return stay();}
  if(hasComposerDraft()&&!persistComposer()){
@@ -689,6 +692,10 @@ function update(data){
  }
  const acknowledgement=acknowledgeObjectives(data);
  snapshot=data;void refreshReadingMarks();$('old-history-load').disabled=false;const replacedStream=!!document.getElementById('partial-reply')&&!data.partial;renderPartial(data.partial);renderReplyRetry(data);if(data.report)renderEvidence(data.report);if(data.legacy?.completion)$('evidence-summary').append(node('p','原課已完成（原有自報紀錄，非新增成績）；新增對話另存。'));if(data.legacy?.firstRead?.length)$('evidence-summary').append(node('p','原有初讀及未完成的標記仍保留，可由「原有課程」繼續；原文版本不同時不自動套用舊位置。'));renderTurns(data.turns||[],false,{preserveScroll:replacedStream});$('older').hidden=!data.older;setStatus(data.pending?'你的回答已保存，正在等候回應。':data.saved===false?'':data.statusNotice||'');$('answer').disabled=false;$('send').disabled=!!data.pending;const next=data.state?.next;renderTargets(data.state);if(!conversationFlow)$('next').replaceChildren(node('span',data.state?.legacyCompletion?'原課的完成紀錄已保留。你可以自願繼續細讀，不必重做；新對話不改寫原成績。':next?`接下來：${next.domain==='vocabulary'?next.label+'。回到原句，用自己的話解釋語境與判斷依據；可以先查閱註釋，獨立掌握需另作新題。':next.rule}`:data.state?.completion==='evidence_ready_for_review'?'證據已齊，等待教師覆核。':data.state?.objectives.some(o=>o.status==='review')?'有證據待覆核，請保留原話與來源；不用為此反覆作答。':'原有完成紀錄待核對，無需重做已完成內容。'));
+ // The device draft is the student's latest text for this lesson on this device: it is restored before an older server draft.
+ const deviceRestored=!hasComposerDraft()&&!pending&&!inflight&&(restoreComposer(),hasComposerDraft());
+ const serverDraftText=data.draft?(data.draft.learningRequest?.content??data.draft.content):null;
+ if(deviceRestored&&serverDraftText&&serverDraftText!==$('answer').value)setStatus('輸入框是你在此裝置最後寫的文字；伺服器另存你先前未送出的一段文字，可在匯出紀錄查看。');
  if(data.draft&&(!data.draft.formal||data.draft.learningRequest)&&!hasComposerDraft()&&!pending){
   const draft=data.draft,request=draft.learningRequest||{content:draft.content,questionId:draft.questionId};
   $('answer').value=request.content;selected=null;$('quote').hidden=true;
@@ -787,8 +794,9 @@ async function sendTurn(submitted,submittedDraft,gen=generation){
   progress('');
   if(error.code==='stale_revision'||error.code==='turn_in_progress'||error.code==='learning_task_changed'||error.status===400){
    pending=null;pendingDraft=null;persistComposer();await refresh(gen);setStatus(error.message,{error:true});
-  }else if(error.draftSaved){
-   // The server kept nothing (no turn, no AI call): the text is an unsent draft that keeps its receipt id; nothing is in flight.
+  }else if(error.draftSaved!==undefined){
+   // No turn and no AI call: the text is an unsent draft that keeps its receipt id (on the server, or only on this device when
+   // an earlier unsent text already holds the server's draft slot); nothing is in flight.
    if(pending===submitted){pending=null;pendingDraft=null;}draftMutationId=submitted.mutationId;draftMutationContent=submitted.content;persistComposer();
    await refresh(gen);if(gen!==generation)return;setStatus(restrictionText(error),{error:true});
   }

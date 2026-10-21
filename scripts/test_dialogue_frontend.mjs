@@ -758,3 +758,34 @@ test('a draft the server kept (budget-denied turn) restores as unsent text with 
  assert.equal(vm.runInContext('pending',f.context),null);assert.equal(vm.runInContext('inflight',f.context),null);assert.equal(vm.runInContext('draftMutationId',f.context),'m-server');
  assert.equal(vm.runInContext('switchLesson("lesson-190")',f.context),true,'navigation stays available');
 });
+
+test('switching away and straight back loads the lesson asked for last; the superseded load never renders',async()=>{
+ const f=await fixture({conversation:true});for(let i=0;i<4;i++)await tick();
+ assert.equal(vm.runInContext('curriculum.lessonId',f.context),'lesson-189');
+ assert.equal(vm.runInContext('switchLesson("lesson-190")',f.context),true);
+ assert.equal(vm.runInContext('switchLesson("lesson-189")',f.context),true,'not an early no-op while lesson-190 is loading');
+ for(let i=0;i<8;i++)await tick();
+ assert.equal(vm.runInContext('curriculum.lessonId',f.context),'lesson-189');assert.equal(f.document.getElementById('lesson').value,'lesson-189');
+});
+
+test('the device draft wins over an older server draft on load, and the student is told the server keeps the earlier text',async()=>{
+ const storage=new Map([['yw-dialogue-draft:owner-a:lesson-189',JSON.stringify({version:1,curriculumVersion:'v1',content:'此裝置上最後寫的話',composerDraft:null,selected:null,mutationId:null})]]);
+ const f=await fixture({conversation:true,storage,curriculumOverrides:{curriculumVersion:'v1'},initial:{draft:{mutationId:'m-server',revision:0,content:'伺服器上較早的話'}}});for(let i=0;i<4;i++)await tick();
+ assert.equal(f.document.getElementById('answer').value,'此裝置上最後寫的話');assert.match(f.document.getElementById('status').textContent,/伺服器另存你先前未送出/);
+ assert.equal(vm.runInContext('switchLesson("lesson-190")',f.context),true);
+});
+
+test('a refusal that keeps the text only on this device releases everything and says where the text is',async()=>{
+ const f=await fixture({conversation:true,post:()=>Response.json({code:'shared_budget_paced',scope:'paced',retryable:true,retryAt:'2026-10-22T03:00:00Z',draftSaved:false,deviceOnly:true,message:'共用 AI 額度此刻較緊，本輪尚未呼叫 AI；這段文字保存在此裝置（伺服器另存你先前未送出的文字），稍後即可再送。'},{status:429})});
+ f.answer('改過的文字');await f.send();await tick();
+ const status=f.document.getElementById('status').textContent;assert.match(status,/共用 AI 額度此刻較緊/);assert.match(status,/保存在此裝置/);assert.match(status,/後恢復/);
+ assert.equal(f.document.getElementById('answer').value,'改過的文字');assert.equal(vm.runInContext('pending',f.context),null);assert.equal(vm.runInContext('inflight',f.context),null);
+ assert.equal(f.document.getElementById('send').disabled,false);assert.equal(vm.runInContext('switchLesson("lesson-190")',f.context),true);
+});
+
+test('an expired shared period is stated once without a retry suggestion, and navigation stays open',async()=>{
+ const f=await fixture({conversation:true,post:()=>Response.json({code:'shared_budget_period_ended',scope:'exhausted',retryable:false,draftSaved:true,message:'本期共用 AI 額度已到期，本輪尚未呼叫 AI；文字已保存，閱讀、紀錄、分數與切換篇目不受影響。'},{status:429})});
+ f.answer('到期後寫的話');await f.send();await tick();
+ const status=f.document.getElementById('status').textContent;assert.match(status,/已到期/);assert.doesNotMatch(status,/每日額度/);assert.doesNotMatch(status,/稍後再送/);
+ assert.equal(vm.runInContext('switchLesson("lesson-190")',f.context),true);
+});
