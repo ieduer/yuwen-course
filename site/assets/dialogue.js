@@ -4,7 +4,7 @@ import {dialogueOpening,dialogueIdentity,authorVoice} from '../dialogue-opening.
 import {readDialogueEvents} from './dialogue-events.js?v=a7e6a9d3cf526331';
 import {readBrowserHistory} from './dialogue-history.js?v=4e50ee7bee866e26';
 import {openFirstReading} from './dialogue-first-read.js?v=04d04aafd8657321';
-import {mergeExportPages,exportFilename} from './dialogue-export.js?v=b297862a33e0679d';
+import {mergeExportPages,exportFilename} from './dialogue-export.js?v=dcd8acf6fe077848';
 const $=id=>document.getElementById(id);
 // Homework execution contract: a deep link ?execution=<id> binds this page to that execution (server selects the session under the published curriculum).
 const EXECUTION=(()=>{try{const v=new URLSearchParams(location.search).get('execution')||'';return /^[A-Za-z0-9][A-Za-z0-9:_.-]{7,119}$/.test(v)?v:'';}catch{return '';}})();

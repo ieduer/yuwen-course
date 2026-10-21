@@ -74,3 +74,23 @@ test('dialogue material imports are immutable and do not load the old form', () 
 });
 
 test('first reading helper pins its shared source identity module',()=>{const source=readFileSync(resolve(ROOT,'site/assets/dialogue-first-read.js'),'utf8');assert(source.includes('../dialogue-reading-material.js?v='+contentVersion('dialogue-reading-material.js')));});
+
+// The conversation page (dialogue.html) and its entry module are served immutable too: every
+// local `?v=` reference must be the current content hash of the file it points to, so a changed
+// file can never be shadowed by a client's cached copy (r7 shipped dialogue.js with a stale version).
+const DIALOGUE_HTML = resolve(ROOT, "site/dialogue.html");
+function versionedRefs(text, pattern) {
+  return [...text.matchAll(pattern)].map((m) => ({ path: m[1], version: m[2] }));
+}
+test("dialogue page assets use their current immutable content hash", () => {
+  const html = readFileSync(DIALOGUE_HTML, "utf8");
+  const refs = versionedRefs(html, /(?:href|src)="\/?((?:assets\/)?[\w.-]+\.(?:js|css))\?v=([a-f0-9]{16})"/g);
+  assert.ok(refs.some((r) => r.path === "assets/dialogue.js") && refs.some((r) => r.path === "assets/dialogue.css"), "dialogue.html must version its script and stylesheet");
+  for (const { path, version } of refs) assert.equal(version, contentVersion(path), `${path} cache authority must change with its bytes`);
+});
+test("dialogue entry module imports use their current immutable content hash", () => {
+  const source = readFileSync(resolve(ROOT, "site/assets/dialogue.js"), "utf8");
+  const refs = [...source.matchAll(/from '(\.\.\/|\.\/)([\w.-]+\.js)\?v=([a-f0-9]{16})'/g)].map((m) => ({ path: (m[1] === "./" ? "assets/" : "") + m[2], version: m[3] }));
+  assert.ok(refs.length >= 5, "dialogue.js imports its versioned modules");
+  for (const { path, version } of refs) assert.equal(version, contentVersion(path), `${path} import version must change with its bytes`);
+});
