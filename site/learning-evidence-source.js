@@ -283,9 +283,23 @@ async function loadRegistry(request, env) {
   return registry;
 }
 
+// A formal learning-manifest item names the release that published its
+// canonicalUnitId and resourceVersion. Every event about such an item — the A+
+// gate items, the added formal scope and the non-scoring 篇目評價 self-report of
+// the same lessons — carries that release as sourceVersion / sourceReleaseId /
+// mappingVersion. The User Center verifies the four lineage fields together for
+// every item of its current formal manifest, so a self-report stamped with the
+// formative competency release (the branch below) was quarantined as
+// event_contract_invalid on 2026-10-20 and 2026-10-21. Process interactions
+// without a formal item (read acknowledgement, lesson opened, …) keep the
+// formative lineage.
+function isFormalManifestItem(manifestItem) {
+  return Boolean(manifestItem?.sourceReleaseId && manifestItem?.canonicalUnitId && manifestItem?.resourceVersion);
+}
+
 function evidenceVersions(registry, manifest, definition, formativeManifest, manifestItem = null) {
   const sourceContract = validateAPlusCompatibilityContract(registry, manifest);
-  if (definition.scoringRole === "a_plus_gate" || manifestItem?.evidenceRole === "formative") {
+  if (definition.scoringRole === "a_plus_gate" || manifestItem?.evidenceRole === "formative" || isFormalManifestItem(manifestItem)) {
     const prior = manifest.priorReleases?.find(release => release.sourceReleaseId === manifestItem?.sourceReleaseId);
     return {
       contractVersion: sourceContract.contractVersion,

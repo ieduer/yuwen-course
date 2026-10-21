@@ -2587,12 +2587,86 @@ test("YW evaluation self-report remains a v2 non-scoring event", async () => {
   assert.equal(envelope.normalizedValue, null);
 
   assert.equal(envelope.registryVersion, "yw-interactions-2026-08-09-v2");
-  assert.equal(envelope.sourceVersion, formativeManifest.manifestVersion);
   assert.equal(envelope.interactionKey, "evaluation");
+  // lesson-1458 belongs to the original formal release (e310): the self-report
+  // names that release and its manifest item, never the formative competency
+  // manifest (the User Center verifies the lineage of every current formal item).
+  const evaluationItem = manifest.items.find((item) => item.resourceKey === "effect:lesson-1458:interaction:evaluation");
+  const priorRelease = manifest.priorReleases.find((release) => release.sourceReleaseId === evaluationItem.sourceReleaseId);
+  assert.ok(evaluationItem && priorRelease && !evaluationItem.formalScopePolicyVersion, "fixture: lesson-1458 evaluation is an original formal item");
+  assert.equal(envelope.sourceReleaseId, evaluationItem.sourceReleaseId);
+  assert.equal(envelope.sourceVersion, priorRelease.manifestVersion);
+  assert.equal(envelope.mappingVersion, evaluationItem.mappingVersion);
+  assert.equal(envelope.canonicalUnitId, evaluationItem.canonicalUnitId);
+  assert.equal(envelope.resourceVersion, evaluationItem.resourceVersion);
+  assert.notEqual(envelope.sourceVersion, formativeManifest.manifestVersion);
 
   const enqueueReceipt = writes.find((write) => write.sql.startsWith("UPDATE evidence_outbox SET"));
   assert.match(enqueueReceipt?.sql || "", /delivery_status = 'enqueued'/);
   assert.doesNotMatch(enqueueReceipt?.sql || "", /delivery_status = 'delivered'/);
+});
+
+test("a self-rating on an added-formal-scope lesson carries the formal manifest lineage the User Center verifies", async () => {
+  // Regression for the two quarantines of 2026-10-20 13:54Z and 2026-10-21
+  // 08:25Z (event_contract_invalid = "resource lineage identity mismatch"):
+  // the User Center checks sourceVersion, sourceReleaseId, canonicalUnitId,
+  // resourceVersion and mappingVersion together for every item of its current
+  // formal manifest (added formal scope yw-formal-scope-20261013-v2), while
+  // the producer stamped the self-report with the formative competency release.
+  const addedScopeLesson = { id: "lesson-1693", title: "3. 百合花", blockId: "bixiu-shang", blockTitle: "必修上" };
+  const evaluationItem = manifest.items.find((item) => item.resourceKey === "effect:lesson-1693:interaction:evaluation");
+  assert.ok(evaluationItem?.formalScopePolicyVersion, "fixture: lesson-1693 evaluation is an added-formal-scope item");
+  assert.equal(evaluationItem.sourceReleaseId, manifest.sourceReleaseId);
+  const { env, queued } = sourceEnvironment();
+  const result = await recordLearningInteraction({
+    request: new Request("https://yw.bdfz.net/api/learning/interactions"),
+    env,
+    student: { id: 7, ucUserId: 42 },
+    lesson: addedScopeLesson,
+    interactionKey: "evaluation",
+    payload: { rating: 85, reason: "撕破的衣肩" },
+    occurredAt: "2026-10-21T08:25:17.490Z",
+  });
+  assert.equal(result.delivery, "enqueued");
+  const envelope = queued[0].envelope;
+  assert.equal(envelope.sourceVersion, manifest.manifestVersion);
+  assert.equal(envelope.sourceReleaseId, evaluationItem.sourceReleaseId);
+  assert.equal(envelope.canonicalUnitId, evaluationItem.canonicalUnitId);
+  assert.equal(envelope.resourceVersion, evaluationItem.resourceVersion);
+  assert.equal(envelope.mappingVersion, evaluationItem.mappingVersion);
+  assert.equal(envelope.mappingVersion, "yw-canonical-learning-mapping-v1");
+  assert.notEqual(envelope.sourceVersion, formativeManifest.manifestVersion);
+  assert.doesNotMatch(envelope.sourceReleaseId, /^yw-formative-release-/);
+  // The self-rating stays a non-scoring self-report with no score fields.
+  assert.equal(envelope.eventType, "lesson_value_rated");
+  assert.equal(envelope.assessmentKind, "self_report");
+  assert.equal(envelope.scoringRole, "none");
+  assert.equal(envelope.eligibilityStatus, "non_scoring");
+  assert.equal(envelope.dimensionKey, "reflection");
+  assert.equal(envelope.verificationMethod, "source_form_submission");
+  assert.equal(envelope.rawValue, null);
+  assert.equal(envelope.maxValue, null);
+  assert.equal(envelope.normalizedValue, null);
+  assert.equal(envelope.sourceAttemptId, envelope.sourceEventId);
+});
+
+test("process interactions without a formal manifest item keep the formative lineage", async () => {
+  const { env, queued } = sourceEnvironment();
+  await recordLearningInteraction({
+    request: new Request("https://yw.bdfz.net/api/learning/interactions"),
+    env,
+    student: { id: 7, ucUserId: 42 },
+    lesson: { id: "lesson-1693", title: "3. 百合花", blockId: "bixiu-shang", blockTitle: "必修上" },
+    interactionKey: "readAcknowledged",
+    payload: { threshold: 1 },
+    occurredAt: "2026-10-21T08:13:12.298Z",
+  });
+  const envelope = queued[0].envelope;
+  assert.equal(envelope.eventType, "text_read_acknowledged");
+  assert.equal(envelope.sourceVersion, formativeManifest.manifestVersion);
+  assert.equal(envelope.sourceReleaseId, `yw-formative-release-${formativeManifest.manifestVersion.replace("yw-formative-", "")}`);
+  assert.equal(envelope.mappingVersion, "yw-formative-learning-mapping-v1");
+  assert.equal(envelope.canonicalUnitId, "yw:lesson:lesson-1693");
 });
 
 test("evidence academic year follows the validated active policy during August", async () => {
