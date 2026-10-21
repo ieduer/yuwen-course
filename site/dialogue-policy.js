@@ -155,7 +155,9 @@ export function lessonScore(curriculum,state,{submissions=[]}={}){
   if(items.length){done=allPreserved(items);if(key==='structure'&&classical&&guideOf('comprehension').length)done=done&&allPreserved(guideOf('comprehension'));}
   if(key==='vocabulary'&&classical&&done&&state.readingGate?.unresolvedMarks)done=false;
   const twin=['context','revision','structure','authorQuestion','wordCreation','evaluation'].includes(key)?dialogue(key):null,twinStatus=twin?status(twin.id):null;
-  const st=done?'done':pendingSub(items)?'pending_evaluation':items.some(o=>status(o.id)==='historical_review')?'historical_review':(twinStatus&&['demonstrated','preserved'].includes(twinStatus))||items.some(o=>['review','needs_practice','reformulated'].includes(status(o.id)))?'partial':'not_started';
+  const twins=items.map(o=>o.domain==='legacy'?legacyCounterpart(curriculum,o):null).filter(Boolean);
+  const started=(twinStatus&&['demonstrated','preserved'].includes(twinStatus))||twins.some(t=>['demonstrated','preserved'].includes(status(t.id)))||items.some(o=>['preserved','demonstrated','review','needs_practice','reformulated'].includes(status(o.id)));
+  const st=done?'done':pendingSub(items)?'pending_evaluation':items.some(o=>status(o.id)==='historical_review')?'historical_review':started?'partial':'not_started';
   return {key,label,weight,points:done?weight:0,status:st,participationOnly:PARTICIPATION_TRACKS.includes(key),next:done?'':TRACK_ACTIONS[key]||''};
  });
  const earned=tracks.reduce((s,t)=>s+t.points,0),max=tracks.reduce((s,t)=>s+t.weight,0);
