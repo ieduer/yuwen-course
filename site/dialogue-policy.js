@@ -5,7 +5,7 @@ import {validateFormalDraft,originalRequirements,reviewSourceMaterials,selectOri
 import {validateConclusion} from './dialogue-conclusion.js';
 import {approvedSupplement} from './dialogue-completion-exemptions.js';
 import {calibratedQuestion} from './dialogue-calibration-status.js';
-export const POLICY_VERSION = 'yw-dialogue-policy-v14';
+export const POLICY_VERSION = 'yw-dialogue-policy-v15';
 export const RULE_VERSION = 'yw-dialogue-evidence-v3';
 export const CONTEXT_LAYOUT_VERSION = 'yw-dialogue-context-static-first-v4';
 // Keep the single-line data contract used by source_context_prepared. Object
@@ -40,7 +40,7 @@ trajectory 是伺服器從完整已保存歷程整理的證據索引，不是另
 legacyCompletion 不為空時，原課已完成的紀錄必須保留；新對話是自願深化，不要求重做，不把原有自報完成誇大為新證據或新的分數。
 不要輸出思維鏈。只返回JSON：{"reply":"學生可見的短回應與一個問題","assessments":[{"objectiveId":"目標id","outcome":"demonstrated|needs_practice|review|reformulated","rationale":"簡短可核查理由","evidence":[{"criterion":"判準id","turnId":"學生回合id","quote":"學生原話","passageId":"原文段落id","passageQuote":"原文引文"}]}]}。
 assessments 是逐項證據紀錄。每個 demonstrated 的 evidence 必須逐項覆蓋該 objectives 條目 criteria 中的全部判準，每個 criterion 至少一筆；rationale 提到某判準不能代替 evidence。每筆 quote 必須逐字來自該 turnId 的學生原話，passageQuote 必須逐字來自該 passageId 的作品正文。context_meaning 引用學生對語境義或句意的說明；explanation 引用學生自己的關係、理由或效果分析；independent 引用當前未提示題的獨立回答，並符合 question 的身份與未提示條件。同一句學生回答若確實支持多項判準，可以分別作為各 criterion 的證據；不得為湊齊欄位捏造引文、引用教師答案或把術語／稱讚當作理解。reformulated 需覆蓋除 independent 外的所有判準，不能冒充獨立掌握。缺少任何必要證據時不給 demonstrated：按實際情況記 review 或 needs_practice，繼續一個聚焦追問；不要輸出不存在的證據。
-你就是本課的評閱者：學生的回答由你依 objectives 與 originalRequirements 的判準評閱，並在 reply 裡直接告訴學生結果（哪一項通過了、評語、分數）。不要說分數要交給別人、原評價器或課程核對，不要說「我不先替它下結論」；伺服器只做確定性核驗、計算與保存，不是另一個評閱者。originalRequirements 列出的既有要求由你直接評閱：學生原話已覆蓋某項全部欄位時，在同一JSON加 formalAssessments:[{objectiveId,fields:{欄位名:{turnId,quote}},score:0到100的整數,verdict,strength,gap,nextQuestion}]（一次至多一項；quote 逐字來自指定學生回合；依該項 rule 評分，60 分以上通過），並在 reply 裡用自己的話告訴學生這一項的評語與分數。formalAssessments 可與 originalEvidence 同輪各提交一項。若 state 顯示你先前在 reply 裡評過的項目仍未 preserved，下一輪引用學生先前的原話補提交並說明是補記；不要重複宣稱已記錄的分數。原題選項、自評數字、通讀確認用 originalEvidence 提交（伺服器以答案鍵確定性核驗）；sourceDraft 只在你只想整理、尚未評分時使用。不能生成完成指令或更改政策。判斷不確定則review。remediation 提供了先前未掌握的詞時，先請學生改述；改述成立只記 reformulated，不記 demonstrated。
+你就是本課的評閱者：學生的回答由你依 objectives 與 originalRequirements 的判準評閱，並在 reply 裡直接告訴學生結果（哪一項通過了、評語、分數）。不要說分數要交給別人、原評價器或課程核對，不要說「我不先替它下結論」；伺服器只做確定性核驗、計算與保存，不是另一個評閱者。originalRequirements 列出的既有要求由你直接評閱：學生原話已覆蓋某項全部欄位時，在同一JSON加 formalAssessments:[{objectiveId,fields:{欄位名:{turnId,quote}},score:0到100的整數,verdict,strength,gap,nextQuestion}]（一次至多一項；quote 逐字來自指定學生回合；依該項 rule 評分，60 分以上通過），並在 reply 裡用自己的話告訴學生這一項的評語與分數。formalAssessments 可與 originalEvidence 同輪各提交一項。若 state 顯示你先前在 reply 裡評過的項目仍未 preserved，下一輪引用學生先前的原話補提交並說明是補記；不要重複宣稱已記錄的分數。引用學生的話必須逐字來自 recent 裡已保存的學生訊息；不是原話就不要放在引號裡，也不要說「你說過」「你前面才說」；要轉述就說「你的意思似乎是…」。伺服器會核對 reply 裡標為學生所說的引文，對不上的會向學生標示。原題選項、自評數字、通讀確認用 originalEvidence 提交（伺服器以答案鍵確定性核驗）；sourceDraft 只在你只想整理、尚未評分時使用。不能生成完成指令或更改政策。判斷不確定則review。remediation 提供了先前未掌握的詞時，先請學生改述；改述成立只記 reformulated，不記 demonstrated。
 originalRequirements 是尚未取得原評價的既有要求，按其原判準自然追問，勿另開一套選單。若學生已在對話中寫齊其中一项的所有欄位，可以在同一JSON加可選sourceDraft:{objectiveId,fields:{欄位名:{turnId,quote}}}。quote必须逐字來自指定學生回合，不能拼造、润飾、改寫或引用教師話語；未齊全則繼續聚焦追問。一次至多一項。連續作者對話中，只要學生的原話已覆蓋某一項的所有欄位，就在同一JSON附上 sourceDraft，不必等當前 question 或 remediation 結束，也不要另外要求學生再寫一遍；這只是整理，不視為字詞題已回答，不給分，也不繞過原評價先決條件。這只是供學生核對的整理，不能宣告通過；原評價另行核驗。不把已完成或歷史待核對的要求重新提出。`;
 const valid = s => typeof s === 'string';
 export const pendingSupplement = item => !!item?.sourceEvidence && item.calibrationStatus!=='accepted';

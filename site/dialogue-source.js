@@ -59,6 +59,16 @@ const MODE_FAILURE_CODES=new Set([
 // Verification failures of optional proposal parts: the part is dropped and recorded; the reply stays. Everything else
 // (no reply, provider, storage, budget, continuation) keeps failing closed.
 const formalRejectedNotice=code=>['formal_assessment_not_eligible','original_result_preserved'].includes(code)?'作者提到的評閱：該項先前已有紀錄，不重複計分。':`作者提到的評閱本輪未能記錄（${code==='one_formal_assessment_per_turn'?'一輪只記一項':'未通過核驗'}）；下一輪可引用你先前的話補記。`;
+// The author may only put the student's own words in quotation marks. Any 「…」 the reply attributes to the student
+// (你說「…」, 你前面才說「…」 …) that is not a verbatim part of a saved student message is recorded and shown to the student.
+const STUDENT_QUOTE=/你(?:前面|剛才|剛剛|上一輪|先前|之前|一開始|後來|開頭|又|也|才|曾|還|只)*(?:說過|說到|說的是|說的|說|提到|提過|寫道|寫的是|寫過|講過|講)[，,：:]?\s*[「『"]([^」』"\n]{2,80})[」』"]/gu;
+const foldText=value=>String(value||'').replace(/[\s\p{P}\p{S}]/gu,'');
+export function unverifiedStudentQuotes(reply,turns){
+ const said=foldText((turns||[]).filter(t=>t.role==='student').map(t=>t.content).join('\n')),out=[];
+ for(const m of String(reply||'').matchAll(STUDENT_QUOTE)){const quote=m[1].trim(),folded=foldText(quote);if(folded.length>=2&&!said.includes(folded)&&!out.includes(quote))out.push(quote);}
+ return out;
+}
+const misquoteNotice=quotes=>`作者引用的「${quotes.join('」「')}」不是你訊息裡的原話，以你自己寫的為準。`;
 const LENIENT_PROPOSAL_CODES=new Set(['invalid_assessment','unverifiable_evidence','missing_criterion','reformulation_not_verified','language_calibration_required','independence_not_verified','copied_hint','quotation_without_explanation','source_draft_not_eligible','source_draft_during_vocabulary','source_draft_not_student_quote','invalid_source_draft','invalid_source_submission','invalid_source_input','source_input_too_large','study_guide_draft_not_verified','study_guide_reference_not_revealed','conclusion_not_ready','unverifiable_conclusion_turn','unverifiable_conclusion_passage','conclusion_change_requires_earlier_turn','invalid_conclusion_domain','unverified_conclusion_history','conclusion_domain_without_evidence','conclusion_reply_too_long','shangyou_conclusion_required','shangyou_evidence_required']);
 async function readingGate(db,studentId,curriculum,legacy){
  if(curriculum.mode!=='classical')return null;
@@ -794,7 +804,10 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   if(rejectedParts.length)statements.push(db.prepare(`INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'proposal_parts_rejected',?,? WHERE ${active}`).bind(`${turnId}:rejected`,session.id,turnId,JSON.stringify({policyVersion:POLICY_VERSION,parts:rejectedParts,credited:false}),at,turnId));
   // The author's reply may have announced a score that the server could not record: the student must see that at once, not discover it later.
   const formalRejected=rejectedParts.find(p=>p.part==='formalAssessments');
-  if(formalRejected)statements.push(db.prepare(`INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'source_status',?,? WHERE ${active}`).bind(`${turnId}:status`,session.id,turnId,JSON.stringify({message:formalRejectedNotice(formalRejected.code),code:formalRejected.code}),at,turnId));
+  const misquotes=body.conversation===true?unverifiedStudentQuotes(proposal.reply,completeTurns):[];
+  if(misquotes.length)statements.push(db.prepare(`INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'reply_attribution_unverified',?,? WHERE ${active}`).bind(`${turnId}:attribution`,session.id,turnId,JSON.stringify({policyVersion:POLICY_VERSION,quotes:misquotes,credited:false}),at,turnId));
+  const notices=[...(formalRejected?[formalRejectedNotice(formalRejected.code)]:[]),...(misquotes.length?[misquoteNotice(misquotes)]:[])];
+  if(notices.length)statements.push(db.prepare(`INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'source_status',?,? WHERE ${active}`).bind(`${turnId}:status`,session.id,turnId,JSON.stringify({message:notices.join(' '),code:formalRejected?.code||'reply_attribution_unverified'}),at,turnId));
   if(proposal.conclusion)statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'conclusion_saved',?,? WHERE ${active}`).bind(`${turnId}:conclusion`,session.id,turnId,JSON.stringify({...proposal.conclusion,curriculumVersion:curriculum.curriculumVersion,policyVersion:POLICY_VERSION,createdAt:at,teacherTurnId:teacherId}),at,turnId));
   for(const a of proposal.assessments)statements.push(db.prepare(`INSERT INTO dialogue_assessments(id,session_id,turn_id,objective_id,outcome,evidence_json,rationale,rule_version,curriculum_version,created_at) SELECT ?,?,?,?,?,?,?,?,?,? WHERE ${active}`).bind(uuid(),session.id,turnId,a.objectiveId,a.outcome,JSON.stringify(a.evidence),a.rationale,a.ruleVersion,curriculum.curriculumVersion,at,turnId));
   const answer=question?proposal.assessments.find(a=>a.objectiveId===question.objectiveId):null;

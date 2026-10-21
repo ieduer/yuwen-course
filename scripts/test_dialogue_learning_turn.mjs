@@ -665,6 +665,22 @@ test('conversation keeps the author reply when an optional proposal part fails v
  assert.equal(rejected.credited,false);assert.deepEqual(rejected.parts,[{part:'originalEvidence',code:'reading_acknowledgement_not_verified'}]);
 });
 
+test('a quotation the reply attributes to the student that is not in any saved student message is recorded and shown; a verbatim one passes',async t=>{
+ const {unverifiedStudentQuotes}=await import('../site/dialogue-source.js');
+ assert.deepEqual(unverifiedStudentQuotes('你前面才說「縫不是補救」，這裡又說是補虧欠。',[{role:'student',content:'我覺得縫的是虧欠。'}]),['縫不是補救']);
+ assert.deepEqual(unverifiedStudentQuotes('你說「我整篇讀完了」，這句我記下。你剛才提到「鼻子發酸」。',[{role:'student',content:'我整篇讀完了。讀到最後鼻子發酸。'}]),[]);
+ assert.deepEqual(unverifiedStudentQuotes('我寫「一片布还挂在那里」，不是你說的。',[{role:'student',content:'x'}]),[],'the author quoting the text is not an attribution to the student');
+ const f=fixture(t,'lesson-1717-p2');
+ let fabricate=true;
+ f.options.callModel=async()=>({value:{reply:fabricate?'你前面才說「縫不是補救」，這句話和你現在的說法有拉扯。':'你說「我想談談結尾」，好，我們從結尾談。',assessments:[]},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}});
+ const r=await f.send(await f.read(),'我想談談結尾。',{conversation:true});assert.equal(r.response.status,200);
+ const ev=f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='reply_attribution_unverified'").get();assert.ok(ev,'event recorded');
+ assert.deepEqual(JSON.parse(ev.details_json).quotes,['縫不是補救']);assert.match(r.data.statusNotice||'',/「縫不是補救」不是你訊息裡的原話/);
+ fabricate=false;
+ const r2=await f.send(r.data,'我想談談結尾。',{conversation:true});assert.equal(r2.response.status,200);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='reply_attribution_unverified'").get().n,1,'a verbatim quotation adds nothing');assert.equal(r2.data.statusNotice,null);
+});
+
 test('a read acknowledgement and an author assessment in the same turn are both recorded as their own source events; a rejected assessment leaves a visible notice',async t=>{
  const f=fixture(t,'lesson-1717-p2');
  const words='初讀三詞：清、淡、空。清是文字清朗，淡是情感不濃烈卻綿長，空是結尾留下的空落。',message=`我整篇讀完了。${words}`;
@@ -701,7 +717,7 @@ test('the author assesses an original formal item in its own reply: recorded thr
  assert.equal(r.response.status,200);assert.equal(prompts.length,1,'the author scored inside its own reply; no second evaluator call');
  const sub=r.data.sourceSubmissions.find(s=>s.objectiveId.endsWith(':interaction:contextWords'));assert.equal(sub?.status,'confirmed');assert.equal(sub.score,78);
  const ev=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_assessment_saved'").get().details_json);
- assert.equal(ev.scoringProvenance.by,'conversation-author');assert.equal(ev.scoringProvenance.policyVersion,'yw-dialogue-policy-v14');assert.equal(ev.assessment.score,78);assert.match(ev.scoringProvenance.promptSha256,/^[a-f0-9]{64}$/);
+ assert.equal(ev.scoringProvenance.by,'conversation-author');assert.equal(ev.scoringProvenance.policyVersion,'yw-dialogue-policy-v15');assert.equal(ev.assessment.score,78);assert.match(ev.scoringProvenance.promptSha256,/^[a-f0-9]{64}$/);
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='contextWords'").get().n,1);
  const led=f.sql.prepare('SELECT raw_value,correctness,eligibility_status FROM learning_evaluations').get();assert.equal(led.raw_value,78);assert.equal(led.correctness,'passed');assert.equal(led.eligibility_status,'eligible');
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().n,0);
