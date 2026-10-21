@@ -80,6 +80,16 @@ export function prepareFormalInput(curriculum, formal) {
   return {objectiveId: objective.id, interaction, input, content,
     resourceKey: objective.legacy.resourceKey, resourceVersion: objective.legacy.resourceVersion};
 }
+// The author writes traditional script while study-guide references are stored in simplified, so an exact substring test
+// never sees a reference the student was in fact shown (live 2026-10-21, lesson-1578). A reference counts as shown when every
+// line of it appears in the author's turn at the same length with at most a third of its characters differing (script
+// variants such as 興/兴, 憑藉/凭借). Only the timing of the reveal depends on this; the answer is still checked against the key.
+export function referenceShown(content,reference){
+  const strip=v=>String(v||'').replace(/[\p{P}\s]/gu,''),text=strip(content);
+  const lines=String(reference||'').split('\n').map(strip).filter(l=>l.length>=2);
+  if(!lines.length)return false;
+  return lines.every(line=>{const limit=Math.floor(line.length/3);for(let i=0;i+line.length<=text.length;i++){let diff=0;for(let k=0;k<line.length&&diff<=limit;k++)if(text[i+k]!==line[k])diff++;if(diff<=limit)return true;}return false;});
+}
 export function validateFormalDraft(curriculum, turns, proposed) {
   if (!proposed) return null;
   const study=curriculum.objectives.find(o=>o.id===proposed.objectiveId&&o.domain==='studyGuide');
@@ -90,7 +100,7 @@ export function validateFormalDraft(curriculum, turns, proposed) {
     if(item.referenceAnswer&&typeof item.referenceAnswer==='object')forms.push(JSON.stringify(item.referenceAnswer));
     // Preserve complete scalar-array references in already saved conversations.
     if(Array.isArray(item.referenceAnswer)&&item.referenceAnswer.every(v=>typeof v==='string'||typeof v==='number'))forms.push(item.referenceAnswer.join(','));
-    const revealed=turns.find(t=>t.role==='teacher'&&forms.some(text=>text&&t.content.includes(text))&&Number.isFinite(Date.parse(t.createdAt))&&Date.parse(t.createdAt)<=Date.parse(turn.createdAt));
+    const revealed=turns.find(t=>t.role==='teacher'&&forms.some(text=>text&&(t.content.includes(text)||referenceShown(t.content,text)))&&Number.isFinite(Date.parse(t.createdAt))&&Date.parse(t.createdAt)<=Date.parse(turn.createdAt));
     if(!revealed)throw Error('study_guide_reference_not_revealed');
     return {formal:{objectiveId:study.id,interaction:'studyGuideItemCompleted',input:{itemKey:item.itemKey,response:ref.quote,referenceRevealedAt:revealed.createdAt},content:ref.quote,resourceKey:source.resourceKey,resourceVersion:source.semanticRevision,reference:item.referenceAnswer},label:item.answerLabel||'學習提示',references:[{key:'response',turnId:turn.id,quote:ref.quote},{key:'reference',turnId:revealed.id,quote:forms.find(text=>text&&revealed.content.includes(text))}]};
   }

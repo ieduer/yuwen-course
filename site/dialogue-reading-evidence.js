@@ -28,6 +28,23 @@ export function conversationOriginalTasks(curriculum,state,guide,originals=null)
  for(const original of Array.isArray(originals)?originals:originals?[originals]:[])if(original&&['vocabulary','evaluation'].includes(original.kind)&&!tasks.some(t=>t.objectiveId===original.objectiveId))tasks.push(original);
  return tasks;
 }
+// The author may transcribe a selection in another script than the source (卻/却, 內/内) because it writes traditional text.
+// A mark must stay the student's own words and the exact source text, so a transcription that is not in the student's
+// message is replaced by the one same-length span of that message which occurs exactly once in the paragraph and differs
+// from the transcription in at most a third of its characters; anything else is refused as before. No conversion table.
+export function studentSpanFor(content,transcribed,paragraph){
+ const want=unpunctuated(String(transcribed||'')),own=unpunctuated(String(content||''));
+ if(want.length<2||!paragraph)return null;
+ const limit=Math.floor(want.length/3),found=new Set();
+ for(let i=0;i+want.length<=own.length;i++){
+  const span=own.slice(i,i+want.length);let diff=0;
+  for(let k=0;k<span.length&&diff<=limit;k++)if(span[k]!==want[k])diff++;
+  if(diff>limit)continue;
+  const at=paragraph.indexOf(span);if(at<0||paragraph.indexOf(span,at+1)>=0)continue;
+  found.add(span);
+ }
+ return found.size===1?[...found][0]:null;
+}
 export function validateReadingEvidence(proposed,{turns,asset,state,lessonId,turnId}){
  if(!proposed)return null;
  const ref=proposed.evidence,student=turns.find(t=>t.id===ref?.turnId&&t.role==='student');
@@ -36,8 +53,10 @@ export function validateReadingEvidence(proposed,{turns,asset,state,lessonId,tur
  const notes=asset?.kind==='conversation-reading';
  if(proposed.operation==='mark'){
   if(!asset||(!notes&&state?.submitted)||ref.quote.length>600)throw Error('reading_mark_not_available');
-  const p=asset.paragraphs.find(p=>p.key===proposed.paragraphKey),quoted=proposed.selectedText;
-  if(!p||typeof quoted!=='string'||!quoted.trim()||quoted.length>120||!student.content.includes(quoted))throw Error('reading_selection_not_verified');
+  const p=asset.paragraphs.find(p=>p.key===proposed.paragraphKey);
+  let quoted=proposed.selectedText;
+  if(!p||typeof quoted!=='string'||!quoted.trim()||quoted.length>120)throw Error('reading_selection_not_verified');
+  if(!student.content.includes(quoted)){quoted=studentSpanFor(student.content,quoted,p.text);if(!quoted)throw Error('reading_selection_not_verified');}
   const text=unpunctuated(quoted);if(!text)throw Error('reading_selection_not_verified');
   const start=p.text.indexOf(text);if(start<0||p.text.indexOf(text,start+1)>=0)throw Error('reading_selection_ambiguous');
   if(state?.marks?.some(m=>m.paragraphKey===p.key&&start<m.endOffset&&start+text.length>m.startOffset))throw Error('reading_original_mark_preserved');

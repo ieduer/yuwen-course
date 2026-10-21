@@ -104,3 +104,29 @@ test('a clause that only reproduces an option is not a hedge, even when the opti
  assert.equal(explicitChoice(o,'我選 D，不過也可能是 C','我選 D，不過也可能是 C'),-1,'a hedge in the student own words still refuses');
  const v=['勝任','不能承受','美好','超過'];assert.equal(explicitChoice(v,'我選 B，不能承受。','我選 B，不能承受'),1,'an option containing 不 is not a negation');
 });
+test('a selection transcribed in another script is taken from the student\'s own words when it is unique in the paragraph',async()=>{
+ const {studentSpanFor}=await import('../site/dialogue-reading-evidence.js');
+ const para={key:'p1',text:'此四君者皆以客之功由此观之客何负于秦哉向使四君却客而不内疏士而不用是使国无富利之实'};
+ const a={...asset,paragraphs:[para]};
+ const content='有兩處讀不通：「功施到今」的「施」；「向使四君却客而不内」這句不知道「向使」和「内」怎麼解。';
+ const c={turns:[{id:'s1',role:'student',content}],asset:a,state:{},lessonId:'lesson',turnId:'s1'};
+ // the live 2026-10-21 case: the author wrote 卻 and 內
+ const r=reading({operation:'mark',paragraphKey:'p1',selectedText:'向使四君卻客而不內',evidence:evidence('「向使四君却客而不内」這句不知道「向使」和「内」怎麼解')},c);
+ assert.equal(r.payload.selectedText,'向使四君却客而不内');assert.equal(r.payload.startOffset,para.text.indexOf('向使四君却客而不内'));
+ // exact selections keep the old path
+ assert.equal(reading({operation:'mark',paragraphKey:'p1',selectedText:'向使四君却客而不内',evidence:evidence('「向使四君却客而不内」這句不知道「向使」和「内」怎麼解')},c).payload.selectedText,'向使四君却客而不内');
+ // a transcription that is not close to the student's words is still refused
+ assert.throws(()=>reading({operation:'mark',paragraphKey:'p1',selectedText:'疏士而不用',evidence:evidence('「向使四君却客而不内」這句不知道「向使」和「内」怎麼解')},c),/selection_not_verified/);
+ assert.equal(studentSpanFor(content,'客何負於秦哉',para.text),null,'not in the student message');
+ assert.equal(studentSpanFor('客客客客','客客',para.text),null,'too short or ambiguous spans are refused');
+ assert.equal(studentSpanFor('甲乙丙丁戊己','甲乙丙丁戊己','甲乙丙丁戊己甲乙丙丁戊己'),null,'a span that occurs twice in the paragraph is refused');
+});
+test('a study-guide reference shown in traditional script counts as revealed; an unrelated text does not',async()=>{
+ const {referenceShown}=await import('../site/dialogue-formal.js');
+ const reference='所以兴怀，其致一也：表原因，……的原因。\n所以游目骋怀：表凭借，所用来……的事物或方式。';
+ const live='下面是學案的參考，請你對照：\n所以興懷，其致一也：表原因，……的原因。\n所以遊目騁懷：表憑藉，所用來……的事物或方式。';
+ assert.equal(referenceShown(live,reference),true,'the 2026-10-21 lesson-1578 reply');
+ assert.equal(referenceShown('下面是學案的參考：所以興懷，其致一也：表原因。',reference),false,'half a reference is not a reveal');
+ assert.equal(referenceShown('我們來談談〈蘭亭集序〉的結構與情感變化。',reference),false);
+ assert.equal(referenceShown(live,''),false);
+});
