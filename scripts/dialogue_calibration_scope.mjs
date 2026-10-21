@@ -21,11 +21,12 @@ const reviewedSources=['2bd882345cdaab319157905a7de160f374c3e1f0','84065f31c2fd9
 const reviewedVerifier='de20dcd4f963cf82d42d39bf0b965006c973a81f';
 const require=createRequire(import.meta.url);
 // Reviewed deltas: (v11) allow retaining original-answer quotations during continuous vocabulary conversation;
-// (v12, 2026-10-21, suen's correction directive) first-person persona without repeated disclaimers, discussion-first
+// (v13, 2026-10-21, suen's second directive) the author is the evaluator: in-turn formalAssessments for original
+// items, direct lesson-score answers from lessonScore, no deferral wording; (v12, 2026-10-21, suen's correction directive) first-person persona without repeated disclaimers, discussion-first
 // replies, explicit recognition of a correct answer, merged learningTargets guidance, sourceDraft during an active
 // question. Neither delta changes a language criterion, an evidence rule or a verdict (lines 30-33 and the JSON /
 // evidence paragraphs are byte-identical to v11).
-const policyBridge={before:'b30b2257fec87625920f648797d8b89b6b9495c9e258599b54bfe800d041917c',after:'154228771fab98e54a9660dd9e88d28e02f195009db964c974e59d81377c1fb9'};
+const policyBridge={before:'b30b2257fec87625920f648797d8b89b6b9495c9e258599b54bfe800d041917c',after:'b332d612130459e434d71dec9882505739cd93322f503e1697a41c1a83df5189'};
 
 export async function historicalCalibrationSource(commit){
  assert(/^[a-f0-9]{40}$/.test(commit||''),'exact historical commit required');

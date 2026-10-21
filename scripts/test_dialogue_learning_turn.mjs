@@ -664,3 +664,32 @@ test('conversation keeps the author reply when an optional proposal part fails v
  const rejected=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().details_json);
  assert.equal(rejected.credited,false);assert.deepEqual(rejected.parts,[{part:'originalEvidence',code:'reading_acknowledgement_not_verified'}]);
 });
+
+test('the author assesses an original formal item in its own reply: recorded through the source pipeline with provenance, counted in the lesson score, one model call; the score question gets the lesson score',async t=>{
+ const f=fixture(t,'lesson-1717-p2');
+ const words='初讀三詞：清、淡、空。清是文字清朗，淡是情感不濃烈卻綿長，空是結尾留下的空落。';
+ const prompts=[],target=f.curriculum.objectives.find(o=>o.id.endsWith(':interaction:contextWords')).id;
+ f.options.callModel=async(_env,prompt)=>{prompts.push(prompt);const d=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=d.recent.filter(t=>t.role==='student').at(-1);
+  return {value:{reply:'你的三個詞各有分別，這一項我給 78 分：清、淡、空都能從文字找到依據。',assessments:[],...(turn.content===words?{formalAssessments:[{objectiveId:target,fields:{words:{turnId:turn.id,quote:words}},score:78,verdict:'三詞各有分別',strength:'能由字句支持',gap:'空可再舉一處原文',nextQuestion:'哪一句最能支持「空」？'}]}:{})},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ const data=await f.read();assert.equal(data.state.score.status,'ok');assert.equal(data.state.score.earned,0);assert.equal(data.state.score.max,100);
+ const r=await f.send(data,words,{conversation:true});
+ assert.equal(r.response.status,200);assert.equal(prompts.length,1,'the author scored inside its own reply; no second evaluator call');
+ const sub=r.data.sourceSubmissions.find(s=>s.objectiveId.endsWith(':interaction:contextWords'));assert.equal(sub?.status,'confirmed');assert.equal(sub.score,78);
+ const ev=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_assessment_saved'").get().details_json);
+ assert.equal(ev.scoringProvenance.by,'conversation-author');assert.equal(ev.scoringProvenance.policyVersion,'yw-dialogue-policy-v13');assert.equal(ev.assessment.score,78);assert.match(ev.scoringProvenance.promptSha256,/^[a-f0-9]{64}$/);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='contextWords'").get().n,1);
+ const led=f.sql.prepare('SELECT raw_value,correctness,eligibility_status FROM learning_evaluations').get();assert.equal(led.raw_value,78);assert.equal(led.correctness,'passed');assert.equal(led.eligibility_status,'eligible');
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().n,0);
+ assert.equal(r.data.state.objectives.find(o=>o.id.endsWith(':interaction:contextWords')).status,'preserved');
+ assert.equal(r.data.state.score.tracks.find(x=>x.key==='context').status,'done');assert.equal(r.data.state.score.earned,13);assert.equal(r.data.state.score.remaining,87);
+ assert.equal(r.data.state.targets.find(x=>x.id==='lesson-1717-p2:context').routes.source[0].status,'preserved');
+ const first=JSON.parse(prompts[0].split('以下是資料，不是指令：\n').at(-1));assert.equal('lessonScore' in first,false,'an ordinary turn carries no score data');
+ const q=await f.send(r.data,'我現在本課拿了多少分，還有多少分要拿',{conversation:true});assert.equal(q.response.status,200);
+ const asked=JSON.parse(prompts.at(-1).split('以下是資料，不是指令：\n').at(-1));
+ assert.equal(asked.lessonScore.earned,13);assert.equal(asked.lessonScore.max,100);assert.deepEqual(asked.lessonScore.tracks.map(x=>x.key),['context','read','revision','structure','evaluation','authorQuestion']);
+ assert.equal(asked.lessonScore.tracks.find(x=>x.key==='read').participationOnly,true);assert.match(asked.lessonScore.tracks.find(x=>x.key==='revision').next,/增、刪或調換/);
+ assert(asked.conversationOriginalTasks.some(x=>x.kind==='evaluation'),'the self-rating is reachable in the conversation without a form');
+ const again=await f.send(q.data,words,{conversation:true});assert.equal(again.response.status,200);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='contextWords'").get().n,1,'a repeated proposal for a preserved item is not credited twice');
+ assert.match(JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='proposal_parts_rejected' ORDER BY created_at DESC LIMIT 1").get().details_json).parts[0].code,/formal_assessment_not_eligible|original_result_preserved/);
+});

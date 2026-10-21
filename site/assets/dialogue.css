@@ -103,4 +103,4 @@
 #progress{margin:4px 0 0}
 body[data-dialogue-flow=conversation] #task-context,body[data-dialogue-flow=conversation] #task-input{display:none}
 @media(max-width:720px){.conversation{position:static;height:calc(100dvh - 8px - var(--panel-offset,0px));max-height:none;border:0;padding:0}.workspace[data-view=conversation]{display:flex;flex-direction:column}.workspace[data-view=conversation] .conversation{display:flex}#compose{position:static;padding:0 0 max(6px,env(safe-area-inset-bottom))}.latest-jump{bottom:150px}}
-
+.lesson-details ul{margin:6px 0 4px;padding-left:1.3em}.lesson-details li[data-track][data-status=done]{color:var(--ink)}

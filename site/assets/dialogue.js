@@ -435,12 +435,7 @@ function clearPrivateView({preserveReading=false}={}){reconnectNeeded=false;clos
 }
 function renderSourceDraft(data){
  const box=$('source-draft');box.replaceChildren();box.hidden=true;
- if(conversationFlow){
-  // The conversation keeps vocabulary and reading originals inside the dialogue; only the non-scoring self-rating (篇目評價)
-  // has no conversational path, so it keeps its own form and the existing original-action submission.
-  if(data.originalTask?.kind==='evaluation'&&!data.pending&&!data.question&&!['unavailable','exemption'].includes(data.learningTurn?.kind))renderOriginalTask(data,box);
-  return;
- }
+ if(conversationFlow)return; // every original task, the self-rating included, is completed inside the conversation
  const deferred=data.draft?.formal?data.draft:null;
  if(data.draft?.learningRequest)return;
  if(data.learningTurn&&!deferred)return;
@@ -634,8 +629,11 @@ function acknowledgeObjectives(data){
  const targets=(data.state?.targets||[]).filter(t=>t.requiredForCompletion!==false),next=new Map(targets.map(t=>[t.id,t.status]));
  if(knownObjectiveStatus&&knownObjectiveOwner===(data.ownerRef||ownerRef)){
   const gained=targets.filter(t=>t.status==='confirmed'&&knownObjectiveStatus.get(t.id)!=='confirmed');
-  if(gained.length)message=`已確認：${gained.map(t=>t.label).join('、')}`;
+  const score=data.state?.score,earnedBefore=knownObjectiveStatus.get('__earned'),gainedPoints=score?.status==='ok'&&Number.isFinite(earnedBefore)?score.earned-earnedBefore:0;
+  if(gained.length)message=`已確認：${gained.map(t=>t.label).join('、')}${gainedPoints>0?`，+${gainedPoints} 分（本課 ${score.earned}／${score.max}）`:''}`;
+  else if(gainedPoints>0)message=`已記錄 +${gainedPoints} 分（本課 ${score.earned}／${score.max}）`;
  }
+ if(data.state?.score?.status==='ok')next.set('__earned',data.state.score.earned);
  knownObjectiveStatus=next;knownObjectiveOwner=data.ownerRef||ownerRef;
  return message;
 }
@@ -647,12 +645,15 @@ function renderProgressLine(){
 // Lesson details: the merged learning targets (one per real aim; legacy rubric items are routes of the same target),
 // collapsed and outside the message flow. Status comes from the server projection only.
 const TARGET_STATUS={confirmed:'已確認',in_progress:'進行中',review:'待覆核',historical_review:'原有紀錄待核對',pending_calibration:'待校準',not_yet:'尚未談到'};
+const TRACK_STATUS={done:'已完成',partial:'部分完成',pending_evaluation:'評閱中',historical_review:'原有紀錄待核對',not_started:'尚未開始'};
 function renderTargets(state){
- const box=$('lesson-details'),list=$('lesson-targets');if(!box||!list)return;list.replaceChildren();
+ const box=$('lesson-details'),list=$('lesson-targets'),scoreList=$('lesson-score');if(!box||!list)return;list.replaceChildren();scoreList?.replaceChildren();
  const targets=(state?.targets||[]).filter(t=>t.requiredForCompletion!==false||t.status==='confirmed');
  if(!targets.length){box.hidden=true;return;}
  const progress=state.progress||{confirmed:targets.filter(t=>t.status==='confirmed').length,total:targets.length};
- $('lesson-details-summary').textContent=`學習目標與進度 ${progress.confirmed}／${progress.total}`;
+ const score=state.score?.status==='ok'?state.score:null;
+ $('lesson-details-summary').textContent=score?`本課 ${score.earned}／${score.max} 分 · 目標 ${progress.confirmed}／${progress.total}`:`學習目標與進度 ${progress.confirmed}／${progress.total}`;
+ if(score&&scoreList){for(const t of score.tracks){const li=node('li');li.dataset.track=t.key;li.dataset.status=t.status;li.append(node('span',`${t.status==='done'?'✓ ':''}${t.label} ${t.points}／${t.weight} 分`),node('small',t.status==='done'?(t.participationOnly?'已完成（參與紀錄，不評分）':'已完成'):`${TRACK_STATUS[t.status]||t.status}${t.next?' · '+t.next:''}`));scoreList.append(li);}}
  for(const t of targets){const li=node('li');li.dataset.status=t.status;li.dataset.targetId=t.id;const partial=t.status==='in_progress'&&t.routes?.total>1&&t.routes.confirmed>0;const detail=t.status==='confirmed'?'已確認':partial?(CONFIRMED_STATUSES.includes(t.routes.dialogue?.status)?'對話證據已確認；原判準評閱待完成（在對話中自然完成）':'原判準評閱已完成；對話證據待補'):`${TARGET_STATUS[t.status]||t.status}${t.aim?' · '+t.aim:''}`;li.append(node('span',`${t.status==='confirmed'?'✓ ':''}${t.label}`),node('small',detail));list.append(li);}
  box.hidden=false;
 }

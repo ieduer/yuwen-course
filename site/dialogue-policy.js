@@ -5,7 +5,7 @@ import {validateFormalDraft,originalRequirements,reviewSourceMaterials,selectOri
 import {validateConclusion} from './dialogue-conclusion.js';
 import {approvedSupplement} from './dialogue-completion-exemptions.js';
 import {calibratedQuestion} from './dialogue-calibration-status.js';
-export const POLICY_VERSION = 'yw-dialogue-policy-v12';
+export const POLICY_VERSION = 'yw-dialogue-policy-v13';
 export const RULE_VERSION = 'yw-dialogue-evidence-v3';
 export const CONTEXT_LAYOUT_VERSION = 'yw-dialogue-context-static-first-v4';
 // Keep the single-line data contract used by source_context_prepared. Object
@@ -28,6 +28,7 @@ authorVoice 提供作者時代及寫作語言。依本篇原文形成各自文�
 以作者全部傳世著作的思想、語言與風格為對話背景，盡可能徵引本人的其他作品，註明篇名並區分原句與轉述。若提供了 authorPassages（已核實的本人作品段落），逐字引用只限其中原句並以（《篇名》）簡短標註，其餘只能轉述並說明未核實；不要在回應裡列出來源清單。可靠且能核實的原文才用引號；不能憑印象拼造句子或把後人觀點歸給作者。未提供或未核實的作品不得聲稱已讀取全文；有疑義時說明待核實。課內評閱仍只依本課既定證據與判準。conversationIdentity 為 traditional-voices 或 author-voices 時，依其傳世人物或署名作者規則對談，優先於通用 source-guide 身分規則；保留原始署名及編錄關係。
 先回應學生實際說的話：發展他的解讀，核對文本證據，接納不同意見，連到相關的句子、意象或作者其他作品，像在談一篇作品，而不是在走評量流程。不要逐條審問、泛泛稱讚、反覆解釋答案或一題一判準地提問；每輪至多一個真正的追問，而且要從學生剛才的話長出來。不先把學生還沒想到的答案說出來，但學生說對了就明說對了。不要求認同作者或指定情感。
 學生選對原題選項或說出正確的語境義時（對照 question.criteria.sourceAnswer、conversationOriginalTasks 的題目或 objectives 的判準），第一句就明確肯定並說明這個回答證明了甚麼，再自然展開剩下的理由；肯定答對不等於宣告整個目標已掌握，仍按證據規則記錄。不要把你剛解釋過的理由再要學生複述一遍當作獨立證據。品質基準（方向而非台詞）：「對，這裡的『思量』就是思念。『不思量』卻『自難忘』，有趣的正是這個矛盾：不去想，為什麼反而忘不掉？你覺得這個『不』更像刻意克制，還是思念已經不需要刻意喚起？」不把某種情感解讀當作唯一可接受的答案。
+學生問本課拿了多少分、還差多少、哪些任務未完成時，先依 lessonScore（伺服器依本課既定權重計算，不是你估的）逐項直接回答：已確認得分、本課滿分與尚可取得的分數、每項任務的狀態（done 已完成／partial 部分完成／pending_evaluation 評閱中／not_started 尚未開始），以及每項接下來實際要做甚麼（tracks[].next）。不把目標數量當分數，不把整門課成績當本課分數；通讀與自評是不評分的完成分，照實說明；評閱中不是零分。lessonScore 缺席或 status 不是 ok 時，說明暫時讀不到本課分數並請學生稍後再問，不要編造總分，也不要說你永遠無法知道。回答完整後再自然建議下一步，不要用別的問題迴避。
 objectives、state 與 originalRequirements 合起來就是本課全部學習目標；同一個目標的舊版要求（originalRequirements）與對話目標只算一次，不是兩件事。用自然的方式帶學生完成全部目標：順序跟著學生的話走，不按清單逐項推進；開場或學生問起時用一兩句話說明本課要談甚麼；有實質進展時簡短肯定；未完成的目標在對話裡自然引出，不把判準、清單或內部鍵名倒給學生。
 詞義須用語境解釋；技法須分析選擇、效果與目的；合理不同解讀可成立。不能以篇幅或稱讚作證据。
 古典詞彙必須涵蓋全部必考項；失敗先解釋和對比，請學生改述，再出等值新題獨立回答。提示後照抄不算掌握。
@@ -39,7 +40,7 @@ trajectory 是伺服器從完整已保存歷程整理的證據索引，不是另
 legacyCompletion 不為空時，原課已完成的紀錄必須保留；新對話是自願深化，不要求重做，不把原有自報完成誇大為新證據或新的分數。
 不要輸出思維鏈。只返回JSON：{"reply":"學生可見的短回應與一個問題","assessments":[{"objectiveId":"目標id","outcome":"demonstrated|needs_practice|review|reformulated","rationale":"簡短可核查理由","evidence":[{"criterion":"判準id","turnId":"學生回合id","quote":"學生原話","passageId":"原文段落id","passageQuote":"原文引文"}]}]}。
 assessments 是逐項證據紀錄。每個 demonstrated 的 evidence 必須逐項覆蓋該 objectives 條目 criteria 中的全部判準，每個 criterion 至少一筆；rationale 提到某判準不能代替 evidence。每筆 quote 必須逐字來自該 turnId 的學生原話，passageQuote 必須逐字來自該 passageId 的作品正文。context_meaning 引用學生對語境義或句意的說明；explanation 引用學生自己的關係、理由或效果分析；independent 引用當前未提示題的獨立回答，並符合 question 的身份與未提示條件。同一句學生回答若確實支持多項判準，可以分別作為各 criterion 的證據；不得為湊齊欄位捏造引文、引用教師答案或把術語／稱讚當作理解。reformulated 需覆蓋除 independent 外的所有判準，不能冒充獨立掌握。缺少任何必要證據時不給 demonstrated：按實際情況記 review 或 needs_practice，繼續一個聚焦追問；不要輸出不存在的證據。
-legacy 及 studyGuide 目標的分數由原評價器或原答案鍵核對，你不自行判定分數；但這些目標要在對話裡完成：學生原話齊全時用 sourceDraft 整理，原題選擇、自評數字、通讀確認用 originalEvidence 提交。不能生成完成指令、分數或更改政策。判斷不確定則review。remediation 提供了先前未掌握的詞時，先請學生改述；改述成立只記 reformulated，不記 demonstrated。
+你就是本課的評閱者：學生的回答由你依 objectives 與 originalRequirements 的判準評閱，並在 reply 裡直接告訴學生結果（哪一項通過了、評語、分數）。不要說分數要交給別人、原評價器或課程核對，不要說「我不先替它下結論」；伺服器只做確定性核驗、計算與保存，不是另一個評閱者。originalRequirements 列出的既有要求由你直接評閱：學生原話已覆蓋某項全部欄位時，在同一JSON加 formalAssessments:[{objectiveId,fields:{欄位名:{turnId,quote}},score:0到100的整數,verdict,strength,gap,nextQuestion}]（一次至多一項；quote 逐字來自指定學生回合；依該項 rule 評分，60 分以上通過），並在 reply 裡用自己的話告訴學生這一項的評語與分數。原題選項、自評數字、通讀確認用 originalEvidence 提交（伺服器以答案鍵確定性核驗）；sourceDraft 只在你只想整理、尚未評分時使用。不能生成完成指令或更改政策。判斷不確定則review。remediation 提供了先前未掌握的詞時，先請學生改述；改述成立只記 reformulated，不記 demonstrated。
 originalRequirements 是尚未取得原評價的既有要求，按其原判準自然追問，勿另開一套選單。若學生已在對話中寫齊其中一项的所有欄位，可以在同一JSON加可選sourceDraft:{objectiveId,fields:{欄位名:{turnId,quote}}}。quote必须逐字來自指定學生回合，不能拼造、润飾、改寫或引用教師話語；未齊全則繼續聚焦追問。一次至多一項。連續作者對話中，只要學生的原話已覆蓋某一項的所有欄位，就在同一JSON附上 sourceDraft，不必等當前 question 或 remediation 結束，也不要另外要求學生再寫一遍；這只是整理，不視為字詞題已回答，不給分，也不繞過原評價先決條件。這只是供學生核對的整理，不能宣告通過；原評價另行核驗。不把已完成或歷史待核對的要求重新提出。`;
 const valid = s => typeof s === 'string';
 export const pendingSupplement = item => !!item?.sourceEvidence && item.calibrationStatus!=='accepted';
@@ -123,6 +124,61 @@ export function targetProgress(targets){
  const counted=targets.filter(t=>t.requiredForCompletion!==false&&t.domain!=='shangyou');
  return {confirmed:counted.filter(t=>t.status==='confirmed').length,total:counted.length};
 }
+
+// Deterministic lesson score: the legacy course's track weights (normalized to 100 exactly as site/assets/app.js does)
+// applied to the server's own confirmed records. Points come only from confirmed original receipts; nothing is inferred
+// from conversation length. read / evaluation / firstRead are completion points of non-scoring participation tasks.
+const TRACK_ACTIONS={context:'用自己的話說出三個有區分的詞和你的初讀印象',read:'讀完整篇後告訴作者一聲（例如「讀完了」）',revision:'挑一句原文，說明怎樣增、刪或調換，寫出改句並比較效果',structure:'指出至少兩處彼此呼應的文字，說明它們的效果與目的',evaluation:'說說這篇對你有多大意思（0 到 100）；自評不評分',authorQuestion:'向作者提出一個有文本依據的問題或回應',vocabulary:'逐個必考詞：先在對話中說明語境義與依據，再回答原題選項',wordCreation:'用一個新學字詞寫一段短創作',firstRead:'先完成無注疏初讀並保存疑點'};
+const PARTICIPATION_TRACKS=['read','evaluation','firstRead'];
+export function normalizeTrackWeights(track){
+ const total=track.reduce((s,i)=>s+Number(i[3]||0),0);
+ if(total===100||total<=0)return track.map(i=>[i[0],i[1],i[2],Number(i[3]||0)]);
+ let assigned=0;return track.map((i,index)=>{const w=index===track.length-1?100-assigned:Math.round(Number(i[3]||0)/total*100);assigned+=w;return [i[0],i[1],i[2],w];});
+}
+export function lessonScore(curriculum,state,{submissions=[]}={}){
+ const defs=curriculum.legacy?.legacyTrackDefinitions;
+ if(!Array.isArray(defs)||!defs.length)return {status:'unavailable',reason:'no_track_definitions',earned:0,max:0,remaining:0,tracks:[]};
+ const status=id=>state.objectives.find(o=>o.id===id)?.status||'not_yet_observed';
+ const legacyOf=kind=>curriculum.objectives.filter(o=>o.domain==='legacy'&&o.legacy?.questionKind===kind);
+ const guideOf=tag=>curriculum.objectives.filter(o=>o.domain==='studyGuide'&&(curriculum.legacy?.formative||[]).some(i=>i.itemKey===o.sourceItemKey&&i.competencyTag===tag));
+ const allPreserved=list=>list.length>0&&list.every(o=>status(o.id)==='preserved');
+ const dialogue=domain=>curriculum.objectives.find(o=>o.domain===domain);
+ const pendingSub=list=>submissions.some(s=>list.some(o=>o.id===s.objectiveId)&&['pending','unconfirmed'].includes(s.status));
+ const classical=curriculum.mode==='classical';
+ const tracks=normalizeTrackWeights(defs).map(([key,label,,weight])=>{
+  let done=false,items=[];
+  if(key==='context')items=legacyOf('contextWords');
+  else if(['revision','structure','authorQuestion','evaluation','wordCreation'].includes(key))items=legacyOf(key);
+  else if(key==='read'){const o=dialogue('read');done=!!o&&['preserved','demonstrated'].includes(status(o.id));}
+  else if(key==='vocabulary'){items=[...legacyOf('vocabulary'),...(curriculum.mode==='poetry'?legacyOf('wordCreation'):[]),...(classical?[...guideOf('vocabulary'),...guideOf('syntax')]:[])];}
+  else if(key==='firstRead'){done=!!state.readingGate&&state.readingGate.phase!=='initial_reading';}
+  if(items.length){done=allPreserved(items);if(key==='structure'&&classical&&guideOf('comprehension').length)done=done&&allPreserved(guideOf('comprehension'));}
+  if(key==='vocabulary'&&classical&&done&&state.readingGate?.unresolvedMarks)done=false;
+  const twin=['context','revision','structure','authorQuestion','wordCreation','evaluation'].includes(key)?dialogue(key):null,twinStatus=twin?status(twin.id):null;
+  const st=done?'done':pendingSub(items)?'pending_evaluation':items.some(o=>status(o.id)==='historical_review')?'historical_review':(twinStatus&&['demonstrated','preserved'].includes(twinStatus))||items.some(o=>['review','needs_practice','reformulated'].includes(status(o.id)))?'partial':'not_started';
+  return {key,label,weight,points:done?weight:0,status:st,participationOnly:PARTICIPATION_TRACKS.includes(key),next:done?'':TRACK_ACTIONS[key]||''};
+ });
+ const earned=tracks.reduce((s,t)=>s+t.points,0),max=tracks.reduce((s,t)=>s+t.weight,0);
+ return {status:'ok',rule:'legacy-track-weights-v1',earned,max,remaining:max-earned,tracks};
+}
+// The score/progress data joins the model context only when the latest student turn asks about it, so every other
+// prompt (including historical calibration reconstructions) keeps its exact shape.
+const SCORE_QUESTION=/幾分|几分|多少分|拿了|得分|分數|分数|還差|还差|還要|还要|進度|进度|完成了|哪些任務|哪些任务|還有什麼要做|還有甚麼要做|还有什么要做|未完成|剩下/u;
+export function scoreAsked(turns){const last=[...turns].reverse().find(t=>t.role==='student');return !!last&&SCORE_QUESTION.test(last.content||'');}
+// The author's own assessment of an original formal item: the student's words cover every field of the item, the
+// score and feedback follow the item's rubric; the server records it through the same source pipeline.
+export function validateFormalAssessment(proposed,{curriculum,state,turns,legacy=null}){
+ if(!proposed||typeof proposed!=='object'||Array.isArray(proposed))throw Error('invalid_formal_assessment');
+ if(legacy?.completion)throw Error('original_result_preserved');
+ if(!originalRequirements(curriculum,state).some(r=>r.objectiveId===proposed.objectiveId&&r.source?.kind==='original-formal-rubric'))throw Error('formal_assessment_not_eligible');
+ if(legacy?.preserved?.some(p=>p.objectiveId===proposed.objectiveId))throw Error('original_result_preserved');
+ const draft=validateFormalDraft(curriculum,turns,{objectiveId:proposed.objectiveId,fields:proposed.fields});
+ const score=proposed.score;if(!Number.isInteger(score)||score<0||score>100)throw Error('invalid_formal_score');
+ const text=k=>typeof proposed[k]==='string'&&proposed[k].trim()?proposed[k].trim().slice(0,500):null;
+ const assessment={score,verdict:text('verdict'),strength:text('strength'),gap:text('gap'),nextQuestion:text('nextQuestion')};
+ if(!assessment.verdict||!assessment.strength||!assessment.gap||!assessment.nextQuestion)throw Error('invalid_formal_feedback');
+ return {...draft,assessment};
+}
 export function projectState(curriculum,assessments,legacy=[],legacyCompletion=null,readingGate=null,conclusion=null) {
  const objectives=curriculum.objectives.map(o=>{
   const prior=legacy.find(l=>l.objectiveId===o.id && (l.verified===true||l.previousCompletion===true));
@@ -184,7 +240,7 @@ export function contextFor({curriculum,state,turns,question,remediation=null,ass
  let used=0;const recent=[];for(const t of turns.slice(-10).reverse()){if(used+t.content.length>6500)break;used+=t.content.length;const {id,role,content,questionId}=t;recent.unshift({id,role,content,questionId});}
  const data={...(conversationGuide||firstReading?{conversationGuide,firstReading}:{}),...(conversationOriginalTasks?{conversationOriginalTasks}:{}),curriculumVersion:curriculum.curriculumVersion,persona:curriculum.persona,conversationIdentity:dialogueIdentity(curriculum),authorVoice:authorVoice(curriculum),author:curriculum.author,title:curriculum.title,
   objectives:curriculum.objectives.filter(o=>!['legacy','studyGuide'].includes(o.domain)).map(o=>({id:o.id,criteria:o.criteria,rule:questionItems(curriculum).some(v=>v.id===o.id)&&![question?.objectiveId,remediation?.objectiveId].includes(o.id)?'服務端依保存的題目逐項核對；不是當前題或改述項時不得推定獨立掌握。':o.rule})),
-  state:state.objectives.map(o=>({id:o.id,status:o.status})),legacyCompletion:state.legacyCompletion,readingGate:state.readingGate,readyForShangyou:state.readyForShangyou,hasConclusion:state.hasConclusion,
+  state:state.objectives.map(o=>({id:o.id,status:o.status})),...(scoreAsked(turns)&&state.score?{lessonScore:state.score}:{}),legacyCompletion:state.legacyCompletion,readingGate:state.readingGate,readyForShangyou:state.readyForShangyou,hasConclusion:state.hasConclusion,
   originalRequirements:allRequirements,reviewSources:allReviewSources,
   teachingReferences:(curriculum.readingMaterials||[]).filter(m=>m.role==='commentary').map(({id,label,text,source})=>({id,label,text,source})),
   question,remediation,...(curriculum.calibrationEvidence?{calibrationEvidence:curriculum.calibrationEvidence}:{}),sourceProvenance:sourceProvenance(curriculum),passages:sourcePassages(curriculum),annotations:sourceAnnotations(curriculum),recent,

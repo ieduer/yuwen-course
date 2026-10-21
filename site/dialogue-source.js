@@ -25,7 +25,7 @@ import {approvedSupplement} from './dialogue-completion-exemptions.js';
 import {withProspectiveFormalScope} from './formal-scope-policy.js';
 import {withSessionSourceMaterials} from './dialogue-session-source.js';
 import {withCalibratedLanguage,calibrationReopensReview} from './dialogue-calibration-status.js';
-import {POLICY_VERSION,RULE_VERSION,CONTEXT_LAYOUT_VERSION,LIMITS,PILOTS,validateProposal,projectState,contextFor,createQuestion,vocabularyOrder,evidenceReport,questionItems} from './dialogue-policy.js';
+import {POLICY_VERSION,RULE_VERSION,CONTEXT_LAYOUT_VERSION,LIMITS,PILOTS,validateProposal,projectState,contextFor,createQuestion,vocabularyOrder,evidenceReport,questionItems,lessonScore,validateFormalAssessment} from './dialogue-policy.js';
 const now=()=>new Date().toISOString();
 const uuid=()=>crypto.randomUUID();
 const json=(value,status=200)=>new Response(JSON.stringify(value),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'private, no-store','x-content-type-options':'nosniff'}});
@@ -240,6 +240,7 @@ async function snapshot(db,session,curriculum,before){
   }
  }
  const records=await learningRecords(db,session),sourceDraft=await proposedSourceDraft(db,session,legacy,records.submissions);
+ state.score=lessonScore(curriculum,state,{submissions:records.submissions});
  const statusEvent=await db.prepare("SELECT details_json FROM dialogue_events WHERE session_id=? AND event_type='source_status' AND turn_id=(SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence DESC LIMIT 1) ORDER BY created_at DESC LIMIT 1").bind(session.id,session.id).first();
  const statusNotice=statusEvent?JSON.parse(statusEvent.details_json).message:null;
  return {statusNotice,learningTurn:learningTurn(curriculum,state,{revision:session.revision,...records,sourceDraft,question:publicQuestion,mastery:legacy.mastery}),sourceSubmissions:records.submissions,originalTask:originalTask(curriculum,state,legacy.mastery),sourceDraft,partial,replyRetry,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending,curriculumVersion:session.curriculum_version,...page,state,assessments:merged,report:evidenceReport(curriculum,state,merged,completeTurns,conclusion),execution:execution?{...execution,satisfied:session.curriculum_version===execution.requiredCurriculumVersion,missing:missingObjectives(state)}:null,question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at,formal:draft.source_request_json?JSON.parse(draft.source_request_json):null,learningRequest:draft.source_request_json?JSON.parse(draft.source_request_json).learningRequest||null:null}:null,legacy,readingGate:state.readingGate};
@@ -325,7 +326,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
    const rows=await all(db.prepare("SELECT id,details_json,created_at FROM dialogue_events WHERE session_id=? AND turn_id=? AND event_type='owner_correction_recorded' ORDER BY created_at,id LIMIT 8").bind(session.id,turnId));
    return json({ownerRef:await sha(`dialogue-owner:${student.id}`),corrections:rows.map(r=>({id:r.id,createdAt:r.created_at,...JSON.parse(r.details_json)}))});
   }
-  if(!session){const legacy=await historicalEvidence(db,student.id,curriculum),state=projectState(curriculum,[],legacy.preserved,legacy.completion,await readingGate(db,student.id,curriculum,legacy)),planned=await plannedQuestion(db,{id:'not-created',student_id:student.id,created_at:null},curriculum,state),question=planned?{id:planned.id,objectiveId:planned.objectiveId,attempt:planned.attempt,question:planned.question,source:planned.source,createdAt:null}:null;return json({learningTurn:learningTurn(curriculum,state,{question}),sourceSubmissions:[],ownerRef:await sha(`dialogue-owner:${student.id}`),revision:0,turns:[],question,state,legacy,readingGate:state.readingGate,report:evidenceReport(curriculum,state,[]),...(curriculum.calibrationEvidence?{resumeCurriculum:sanitizeDialogueCurriculum(curriculum)}:{}),saved:false,...(executionId!==null?{execution:await executionPreview(db,student.id,curriculum,executionId,state)}:{})});}
+  if(!session){const legacy=await historicalEvidence(db,student.id,curriculum),state=projectState(curriculum,[],legacy.preserved,legacy.completion,await readingGate(db,student.id,curriculum,legacy)),planned=await plannedQuestion(db,{id:'not-created',student_id:student.id,created_at:null},curriculum,state),question=planned?{id:planned.id,objectiveId:planned.objectiveId,attempt:planned.attempt,question:planned.question,source:planned.source,createdAt:null}:null;state.score=lessonScore(curriculum,state,{submissions:[]});return json({learningTurn:learningTurn(curriculum,state,{question}),sourceSubmissions:[],ownerRef:await sha(`dialogue-owner:${student.id}`),revision:0,turns:[],question,state,legacy,readingGate:state.readingGate,report:evidenceReport(curriculum,state,[]),...(curriculum.calibrationEvidence?{resumeCurriculum:sanitizeDialogueCurriculum(curriculum)}:{}),saved:false,...(executionId!==null?{execution:await executionPreview(db,student.id,curriculum,executionId,state)}:{})});}
   const before=url.searchParams.has('beforeSeq')?{sequence:Number(url.searchParams.get('beforeSeq'))}:null;
   if(before && (!Number.isSafeInteger(before.sequence)||before.sequence<1))return json({code:'invalid_cursor'},400);
   if(executionId!==null)await ensureExecution(db,session,publishedCurriculum,executionId);
@@ -643,7 +644,9 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
    firstReading={asset,state:await readDialogueNotes(db,session,asset)};
   }
   const records=await learningRecords(db,session),guide=learningTurn(curriculum,state,{revision:session.revision,...records,question});
-  const originalTasks=body.conversation===true?conversationOriginalTasks(curriculum,state,guide,originalTask(curriculum,state,legacy.mastery)):null;
+  state.score=lessonScore(curriculum,state,{submissions:records.submissions});
+  const pendingEvaluation=(()=>{const o=curriculum.objectives.find(o=>o.domain==='legacy'&&o.legacy?.questionKind==='evaluation');if(!o||state.legacyCompletion)return null;const st=state.objectives.find(x=>x.id===o.id)?.status;return ['preserved','historical_review'].includes(st)?null:{objectiveId:o.id,kind:'evaluation'};})();
+  const originalTasks=body.conversation===true?conversationOriginalTasks(curriculum,state,guide,[originalTask(curriculum,state,legacy.mastery),pendingEvaluation]):null;
   const firstReadingContext=firstReading?{...firstReading.state,kind:firstReading.asset.kind||'classical-original',summaries:firstReading.state.summaries?.slice(-3),marks:firstReading.state.marks?.slice(-8).map(m=>({...m,...(m.corrections?{corrections:m.corrections.slice(-2)}:{})})),paragraphs:firstReading.asset.paragraphs.filter(p=>body.content.includes(p.key)||unpunctuated(body.content).includes(p.text.slice(0,12))).slice(0,2).map(p=>({...p,text:p.text.slice(0,1200)}))}:null;
   let prompt=formal?null:contextFor({curriculum,state,turns:completeTurns,question,remediation,assessments,...(body.conversation===true?{conversationGuide:guide,conversationOriginalTasks:originalTasks,firstReading:firstReadingContext}:{})});
   if(body.conversation===true&&!formal)prompt=READING_CONVERSATION_POLICY+'\n'+prompt+'\n';
@@ -735,6 +738,28 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   failureStage='reading_evidence';
   let readingAction=null;
   if(body.conversation===true){try{readingAction=validateReadingEvidence(result.value.readingEvidence,{turns:completeTurns,asset:firstReading?.asset,state:firstReading?.state,lessonId:curriculum.lessonId,turnId});}catch(error){if(!lenient)throw error;rejectedParts.push({part:'readingEvidence',code:partCode(error)});}}
+  // The author's in-turn assessment of an original formal item goes through the same source pipeline (guard,
+  // dedupe, ledger, outbox) while this call is still reserved; the pipeline's own batch commits the receipt.
+  failureStage='formal_assessment';
+  let formalInline=null;
+  if(body.conversation===true&&lenient&&Array.isArray(result.value.formalAssessments)&&result.value.formalAssessments.length){
+   if(originalEvidence)rejectedParts.push({part:'formalAssessments',code:'one_source_submission_per_turn'});
+   else{if(result.value.formalAssessments.length>1)rejectedParts.push({part:'formalAssessments',code:'one_formal_assessment_per_turn'});
+    try{formalInline=validateFormalAssessment(result.value.formalAssessments[0],{curriculum,state,turns:completeTurns,legacy});}
+    catch(error){rejectedParts.push({part:'formalAssessments',code:partCode(error)});}}
+  }
+  if(formalInline){
+   failureStage='original_source';
+   try{
+    if(!formalAction)throw Error('original_source_unavailable');
+    const promptSha256=await sha(prompt),sourceAt=now();
+    const response=await formalAction({...formalInline.formal,lessonId:curriculum.lessonId},turnId,async()=>JSON.stringify({reply:proposal.reply,...formalInline.assessment}),async(reservation,assessment)=>[
+     db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,(SELECT s.id FROM dialogue_sessions s JOIN dialogue_calls c ON c.session_id=s.id WHERE c.turn_id=? AND c.state='reserved' AND s.inflight=c.turn_id AND s.student_id=?),?,'source_assessment_saved',?,?)`).bind(`${turnId}:source`,turnId,session.student_id,turnId,JSON.stringify({objectiveId:formalInline.formal.objectiveId,sourceEventId:reservation.sourceEventId,resourceKey:formalInline.formal.resourceKey,resourceVersion:formalInline.formal.resourceVersion,assessment,modelReply:{reply:proposal.reply},scoringProvenance:{by:'conversation-author',policyVersion:POLICY_VERSION,contextLayout:CONTEXT_LAYOUT_VERSION,promptSha256,turnId}}),sourceAt),
+     db.prepare('UPDATE dialogue_turns SET source_request_json=? WHERE id=? AND session_id=?').bind(JSON.stringify({...formalInline.formal,references:formalInline.references}),turnId,session.id),
+    ]);
+    if(!response.ok){const value=await response.json().catch(()=>({}));rejectedParts.push({part:'formalAssessments',code:/^[a-z0-9_]{1,80}$/.test(value.code||'')?value.code:'original_source_unconfirmed'});formalInline=null;}
+   }catch(error){rejectedParts.push({part:'formalAssessments',code:partCode(error)});formalInline=null;}
+  }
   failureStage='storage';
   const at=now(),teacherId=uuid();
   const claimed=await db.prepare("UPDATE dialogue_calls SET state='finishing',finished_at=? WHERE turn_id=? AND state='reserved'").bind(at,turnId).run();

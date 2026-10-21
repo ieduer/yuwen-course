@@ -17,7 +17,7 @@ export function originalTask(curriculum,state,mastery=[]){
     const v=curriculum.vocabulary.find(v=>o.legacy.resourceKey===`effect:${curriculum.lessonId}:vocab:${v.id}`);
     const status=state.objectives.find(x=>x.id===o.id)?.status,current=mastery.find(m=>m.item_id===v?.id);
     if(status==='historical_review'||status==='preserved'&&current?.status!=='learning')continue;
-    if(v&&state.objectives.find(x=>x.id===v.id)?.status==='demonstrated')return {objectiveId:o.id,kind:'vocabulary',itemId:v.id,question:v.question,source:v.sourceSentence,options:v.options,originalMastery:current?{status:current.status,correctCount:current.correct_count,wrongCount:current.wrong_count}:null};
+    if(v&&state.objectives.find(x=>x.id===v.id)?.status==='demonstrated')return {objectiveId:o.id,kind:'vocabulary',itemId:v.id,question:v.question,source:v.sourceSentence,options:v.options,sourceAnswer:v.sourceAnswer,originalMastery:current?{status:current.status,correctCount:current.correct_count,wrongCount:current.wrong_count}:null};
   }
   const evaluation=pending.find(o=>o.legacy.questionKind==='evaluation');
   if(evaluation&&(state.next?.domain==='evaluation'||state.objectives.find(o=>o.domain==='evaluation')?.status==='demonstrated'))return {objectiveId:evaluation.id,kind:'evaluation'};

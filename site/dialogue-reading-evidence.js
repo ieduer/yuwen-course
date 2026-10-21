@@ -18,14 +18,14 @@ function acknowledged(turn,quote){return explicitStatement(turn,quote)&&[finishe
 // Teaching focus is not a lock on other already demonstrated participation.
 // Only the existing source-owned, non-scoring read receipt is independent of
 // the current question. Original graded tasks keep their existing eligibility.
-export function conversationOriginalTasks(curriculum,state,guide,original=null){
+export function conversationOriginalTasks(curriculum,state,guide,originals=null){
  if(state.legacyCompletion||state.readingGate&&state.readingGate.phase!=='close_reading')return [];
  const read=curriculum.objectives.find(o=>o.domain==='read'&&state.objectives.some(s=>s.id===o.id&&!['preserved','historical_review'].includes(s.status)));
  const tasks=guide&&(['evaluation','vocabulary'].includes(guide.kind)||guide.kind==='read'&&guide.objectiveId===read?.id)?[guide]:[];
  if(read&&!tasks.some(t=>t.objectiveId===read.id))tasks.push({kind:'read',objectiveId:read.id});
  // The original answer-key item of an already demonstrated word is reachable from the conversation at any point
  // (out-of-order progress), not only after every other dialogue question has been issued and answered.
- if(original&&['vocabulary','evaluation'].includes(original.kind)&&!tasks.some(t=>t.objectiveId===original.objectiveId))tasks.push(original);
+ for(const original of Array.isArray(originals)?originals:originals?[originals]:[])if(original&&['vocabulary','evaluation'].includes(original.kind)&&!tasks.some(t=>t.objectiveId===original.objectiveId))tasks.push(original);
  return tasks;
 }
 export function validateReadingEvidence(proposed,{turns,asset,state,lessonId,turnId}){
@@ -61,7 +61,7 @@ export function validateReadingEvidence(proposed,{turns,asset,state,lessonId,tur
 export const READING_CONVERSATION_POLICY=`學生眼中只有與作者的連續談話，沒有關卡、提交表單或機械逐欄問卷。先回應對方的問題或學習偏好，再自然帶回尚未有證據的要求。開場可邀請學生選擇先讀、先問或分享感受；不要要求固定學習順序，除非後端必要條件尚未滿足。不能把學生聊天內容自動當作正在填某個欄位。已說清楚的證據直接引用，不要要求再抄一次。不得聲稱完成或保存了尚未獲後端確認的動作。
 firstReading若存在，提供了同版本無標點正文和原有疑點紀錄。讀者可自由切換無標點、標點、註釋材料，看到註釋不等於獨立掌握。用作者口吻請學生引用一處疑點並說第一直覺；kind為classical-original時，涵蓋原要求至少三處互不重疊疑點及至少12字初讀感知；kind為conversation-reading時，詩詞、現代文等的疑點、猜測、初讀感知與每次訂正都另存，不硬套文言文的數量門檻，也不代替原有計分及通讀確認。任何文體都可以對照註釋並在對話中修正原猜測。不要顯示數字關卡或用三個孤立表單替代對話。
 每輪至多附一個readingEvidence:{operation:"mark|submit|resolve|acknowledge",evidence:{turnId,quote},paragraphKey?,selectedText?,markId?}。所有evidence.quote逐字來自學生，不能替學生編寫或改寫猜測。mark的selectedText必須逐字來自學生回答，去除標點後能在指定無標點段落唯一定位；submit引用學生完整初讀感知；resolve引用學生自己修正的解釋及已存在markId。acknowledge僅用於classical-original，其他文體的通讀確認用originalEvidence；只引用學生明確的已讀完陳述，不把問句、否定或含糊語句判成閱讀完成。原紀錄與評價不覆寫，不更改門檻。後端決定是否接受，失敗就保留原話待核查。
-conversationGuide是後端尚待核验的既有要求，只作教學參考，不照搬為選單或命令。conversationOriginalTasks列出本輪可核驗的原有動作；通讀確認不必等待當前字詞提問結束。僅從此清單選取read、evaluation、vocabulary，附originalEvidence:{objectiveId,evidence:{turnId,quote}}；只抽取學生明確表示已讀完整篇、明確0–100自評數字、明確選項原文或A/B/C/D，不推測選擇。通讀引用完整肯定陳述，不把否定、假設、問句或局部閱讀截成完成；不要求固定口令，不符合可驗證形式時自然澄清。評分仍由原評價器核對，模型不得給原題分數。`;
+conversationGuide是後端尚待核验的既有要求，只作教學參考，不照搬為選單或命令。conversationOriginalTasks列出本輪可核驗的原有動作；通讀確認不必等待當前字詞提問結束。僅從此清單選取read、evaluation、vocabulary，附originalEvidence:{objectiveId,evidence:{turnId,quote}}；只抽取學生明確表示已讀完整篇、明確0–100自評數字、明確選項原文或A/B/C/D，不推測選擇。通讀引用完整肯定陳述，不把否定、假設、問句或局部閱讀截成完成；不要求固定口令，不符合可驗證形式時自然澄清。原題選項與自評由伺服器答案鍵確定性核驗並記錄；你在 reply 裡直接肯定或指出，不要說要交給別人核對。`;
 
 export function validateOriginalEvidence(proposed,{turns,curriculum,task,tasks=null}){
  if(!proposed)return null;

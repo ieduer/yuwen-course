@@ -619,35 +619,13 @@ test('a saved turn without any reply shows one explicit retry that re-dispatches
 });
 
 // 2026-10-20 acceptance finding: the server's originalTask of kind 'evaluation' never received a form in the conversation flow.
-test('conversation flow renders only the non-scoring self-rating original task and submits it through the original action',async()=>{
+test('conversation flow renders no self-rating form: the rating is given in the conversation and the composer stays plain',async()=>{
  const evaluation={objectiveId:'legacy:lesson-189:evaluation',kind:'evaluation'};
- const f=await fixture({conversation:true,initial:{originalTask:evaluation},post:(body,{data,setData})=>{
-  const next={...data,revision:data.revision+1,originalTask:null,statusNotice:'你的篇目自評已保存；高低都不計入成績。',turns:[...data.turns,{id:'evaluation-turn',role:'student',content:'本篇有意思程度：80%（自評，不計分）\n理由：結尾的轉折出乎意料。',mutationId:body.mutationId,createdAt:'2026-10-20T00:00:00Z'}]};
-  setData(next);return Response.json(next);
- }});
- const box=f.document.getElementById('source-draft');assert.equal(box.hidden,false);assert.match(box.textContent,/你覺得這篇有意思嗎/);assert.match(box.textContent,/不計入成績/);
- // The conversation composer is untouched: no rating field or choice, same placeholder, send enabled.
+ const f=await fixture({conversation:true,initial:{originalTask:evaluation}});
+ assert.equal(f.document.getElementById('source-draft').hidden,true);assert.equal(f.document.querySelectorAll('#source-draft form').length,0);
  assert.equal(f.document.querySelectorAll('#task-input input').length,0);assert.equal(f.document.getElementById('answer').placeholder,'訊息');assert.equal(f.document.getElementById('send').disabled,false);
- const form=box.querySelector('form'),rating=form.querySelector('input[type=number]'),reason=form.querySelector('textarea');
- rating.value='80';rating.oninput();reason.value='結尾的轉折出乎意料。';reason.oninput();
- await form.onsubmit({preventDefault(){}});
- assert.equal(f.posts.length,1);assert.equal(f.posts[0].action,'original');assert.equal(f.posts[0].objectiveId,evaluation.objectiveId);assert.deepEqual(f.posts[0].input,{rating:80,reason:'結尾的轉折出乎意料。'});assert.equal(f.posts[0].revision,0);assert.equal(f.posts[0].ownerRef,'owner-a');assert.match(f.posts[0].mutationId,/^[a-f0-9-]{36}$/);
- for(const key of ['content','conversation','taskId','formal','score','scoringRole'])assert.equal(key in f.posts[0],false,key);
- assert.equal(f.document.getElementById('source-draft').hidden,true);assert.equal(f.frontend.pending,null);assert.match(f.document.getElementById('status').textContent,/自評已保存/);
- // Everything else stays inside the conversation: a vocabulary original, a pending turn, an open question or an unavailable source renders no form.
- for(const initial of [
-  {originalTask:{objectiveId:'legacy:lesson-189:vocab',kind:'vocabulary',itemId:'v1',question:'原題',source:'原句',options:['甲','乙'],originalMastery:null}},
-  {originalTask:evaluation,pending:true},
-  {originalTask:evaluation,question:{id:'q1',objectiveId:'v1',question:'這個詞在原句裡是什麼意思？'}},
-  {originalTask:evaluation,learningTurn:{taskId:'v1:0:source:unavailable',objectiveId:'source',kind:'unavailable',inputKind:'none',prompt:'本課正文來源尚待核對。'}},
- ]){const g=await fixture({conversation:true,initial});assert.equal(g.document.getElementById('source-draft').hidden,true,JSON.stringify(initial));assert.equal(g.document.querySelectorAll('#source-draft form').length,0);assert.equal(g.posts.length,0);}
- // The structured flow is unchanged: the evaluation original still renders only when no learning turn is open.
- const structured=await fixture({initial:{originalTask:evaluation,learningTurn:null}});assert.equal(structured.document.getElementById('source-draft').hidden,false);assert.equal(structured.document.querySelectorAll('#source-draft form').length,1);
 });
-
-// ---- 2026-10-21 conversation candidate (B1–B5) ----
 const keyEvent=(overrides={})=>({key:'Enter',shiftKey:false,altKey:false,metaKey:false,ctrlKey:false,isComposing:false,keyCode:13,prevented:false,preventDefault(){this.prevented=true;},...overrides});
-
 test('B3: Enter sends once; Shift+Enter keeps a newline; an IME composition and an empty composer never send; a second Enter while in flight is ignored',async()=>{
  let release=null;
  const f=await fixture({post:(body,{data,setData})=>new Promise(resolve=>{release=()=>{setData({...data,revision:data.revision+1,turns:[...data.turns,{id:'t1',role:'student',content:body.content,mutationId:body.mutationId,createdAt:'2026-10-21T00:00:00Z'}]});resolve(Response.json(data));};})});
@@ -723,4 +701,16 @@ test('conversation panel shows no evaluation machinery: no rule text, raw object
  assert.equal(f.document.getElementById('stop').getAttribute('aria-label'),'停止生成');
  assert.ok(f.document.getElementById('lesson-details').closest('.conversation'));assert.equal(f.document.getElementById('lesson-details').hasAttribute('open'),false);
  assert.ok(f.document.getElementById('turns').closest('#thread'),'messages live in the independently scrolling thread');
+});
+
+test('lesson details show the deterministic lesson score and per-task status; a gained track is acknowledged with its points',async()=>{
+ const score=earned=>({status:'ok',rule:'legacy-track-weights-v1',earned,max:100,remaining:100-earned,tracks:[{key:'context',label:'初讀評議',weight:13,points:13,status:'done',participationOnly:false,next:''},{key:'read',label:'通讀正文',weight:13,points:earned>13?13:0,status:earned>13?'done':'not_started',participationOnly:true,next:'讀完整篇後告訴作者一聲'},{key:'revision',label:'字句之改',weight:20,points:0,status:'pending_evaluation',participationOnly:false,next:'挑一句原文'}]});
+ const targets=[{id:'c',label:'初讀感受',domain:'context',status:'confirmed'},{id:'r',label:'通讀正文',domain:'read',status:'not_yet'}];
+ const f=await fixture({initial:{state:{next:null,objectives:[],targets,progress:{confirmed:1,total:2},score:score(13),completion:'in_progress'}}});
+ assert.equal(f.document.getElementById('lesson-details-summary').textContent,'本課 13／100 分 · 目標 1／2');
+ const items=[...f.document.querySelectorAll('#lesson-score li')];assert.equal(items.length,3);assert.match(items[0].textContent,/✓ 初讀評議 13／13 分/);assert.match(items[1].textContent,/通讀正文 0／13 分.*尚未開始 · 讀完整篇後告訴作者一聲/);assert.match(items[2].textContent,/評閱中/);
+ assert.doesNotMatch(f.document.querySelector('.conversation .thread').textContent,/分 ·|評閱中/,'points stay out of the message pane');
+ f.frontend.update({...f.data,state:{...f.data.state,score:score(26),targets:targets.map(t=>t.id==='r'?{...t,status:'confirmed'}:t),progress:{confirmed:2,total:2}}});
+ assert.equal(f.document.getElementById('status').textContent,'已確認：通讀正文，+13 分（本課 26／100）');
+ assert.equal(f.document.getElementById('lesson-details-summary').textContent,'本課 26／100 分 · 目標 2／2');
 });
