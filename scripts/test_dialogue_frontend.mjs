@@ -526,21 +526,25 @@ test('heading preserves book attribution, non-author suffixes and unslashed work
 
 test('progress line reports the stage with elapsed seconds and server-based coverage, never an invented percentage',async()=>{
  const objectives=[{id:'o1',label:'一',domain:'read',status:'demonstrated'},{id:'o2',label:'二',domain:'read',status:'not_yet_observed'},{id:'o3',label:'三',domain:'shangyou',status:'demonstrated'},{id:'o4',label:'四',domain:'read',status:'demonstrated',requiredForCompletion:false}];
+ const targets=[{id:'o1',label:'一',domain:'read',status:'confirmed'},{id:'o2',label:'二',domain:'read',status:'not_yet',aim:'讀完整篇正文並告訴作者；只作參與紀錄。'},{id:'o3',label:'三',domain:'shangyou',status:'confirmed'},{id:'o4',label:'四',domain:'read',status:'confirmed',requiredForCompletion:false}];
  let release=null;
- const f=await fixture({initial:{state:{next:null,objectives,completion:'in_progress'}},post:(body,{data,setData})=>{
+ const f=await fixture({initial:{state:{next:null,objectives,targets,progress:{confirmed:1,total:2},completion:'in_progress'}},post:(body,{data,setData})=>{
   setData({...data,revision:data.revision+1,turns:[...data.turns,{id:'t1',role:'student',content:body.content,createdAt:'2026-10-19T00:00:00Z'},{id:'t2',role:'teacher',content:'請再指出一處原文。',createdAt:'2026-10-19T00:00:01Z'}]});
   const frame=(event,value)=>`event: ${event}\ndata: ${JSON.stringify(value)}\n\n`;
   return new Promise(resolve=>{release=()=>resolve(new Response(frame('saved',{saved:true,turnId:'t1',mutationId:body.mutationId,revision:data.revision+1,createdAt:'2026-10-19T00:00:00Z'})+frame('delta',{turnId:'t1',text:'請再指出一處原文。'})+frame('done',{turnId:'t1'}),{headers:{'content-type':'text/event-stream'}}));});
  }});
  const progress=f.document.getElementById('progress'),stop=f.document.getElementById('stop');
- assert.equal(progress.hidden,false);assert.match(progress.textContent,/本課目標：1／2 項已由伺服器評估確認/);assert.doesNotMatch(progress.textContent,/%|預計/);
+ assert.equal(progress.hidden,true,'no objective counters in the conversation dock');
+ const details=f.document.getElementById('lesson-details');assert.equal(details.hidden,false);assert.equal(details.hasAttribute('open'),false,'lesson details stay collapsed');
+ assert.equal(f.document.getElementById('lesson-details-summary').textContent,'學習目標與進度 1／2');
+ const items=[...f.document.querySelectorAll('#lesson-targets li')];assert.deepEqual(items.map(li=>li.dataset.status),['confirmed','not_yet','confirmed','confirmed']);assert.match(items[1].textContent,/二/);assert.match(items[1].textContent,/尚未談到/);
  f.answer('我注意到原句的對照。');const sent=f.send();
  for(let i=0;i<4&&!release;i++)await tick();
  assert.equal(stop.hidden,false);assert.match(progress.textContent,/正在保存你的回應/);assert.match(progress.textContent,/已 0 秒/);
  release();await sent;
  assert.equal(stop.hidden,true);assert.match(progress.textContent,/這一輪已保存/);assert.equal(f.posts.length,1);
  const settle=[...f.timers.values()].filter(t=>t.delay===4000);assert.equal(settle.length,1);settle[0].cb();
- assert.match(progress.textContent,/本課目標：1／2 項已由伺服器評估確認/);assert.doesNotMatch(progress.textContent,/%|預計/);
+ assert.equal(progress.hidden,true);assert.doesNotMatch(f.document.querySelector('.conversation').textContent,/本課目標：|項已由伺服器評估確認|對話長短本身不代表掌握/);
 });
 
 test('stop ends only the display: one POST, an explicit status, and the readback continues without a resend',async()=>{
@@ -559,7 +563,7 @@ test('stop ends only the display: one POST, an explicit status, and the readback
  const before=f.calls.length;
  f.document.getElementById('stop').onclick();await sent;
  assert.equal(f.posts.length,1);assert.equal(f.document.getElementById('stop').hidden,true);
- assert.match(f.document.getElementById('status').textContent,/已停止顯示/);assert.match(f.document.getElementById('status').textContent,/不會重送/);
+ assert.match(f.document.getElementById('status').textContent,/已取消顯示/);assert.match(f.document.getElementById('status').textContent,/不會重送/);assert.equal(f.document.getElementById('stop').textContent,'取消');
  assert.ok(f.calls.slice(before).some(c=>!c.options.method&&c.url.startsWith('/api/dialogue')));
  assert.equal(f.frontend.pending,null);assert.equal(f.frontend.snapshot.pending,true);
 });
@@ -623,7 +627,7 @@ test('conversation flow renders only the non-scoring self-rating original task a
  }});
  const box=f.document.getElementById('source-draft');assert.equal(box.hidden,false);assert.match(box.textContent,/你覺得這篇有意思嗎/);assert.match(box.textContent,/不計入成績/);
  // The conversation composer is untouched: no rating field or choice, same placeholder, send enabled.
- assert.equal(f.document.querySelectorAll('#task-input input').length,0);assert.equal(f.document.getElementById('answer').placeholder,'想和我談些什麼？');assert.equal(f.document.getElementById('send').disabled,false);
+ assert.equal(f.document.querySelectorAll('#task-input input').length,0);assert.equal(f.document.getElementById('answer').placeholder,'訊息');assert.equal(f.document.getElementById('send').disabled,false);
  const form=box.querySelector('form'),rating=form.querySelector('input[type=number]'),reason=form.querySelector('textarea');
  rating.value='80';rating.oninput();reason.value='結尾的轉折出乎意料。';reason.oninput();
  await form.onsubmit({preventDefault(){}});
@@ -673,25 +677,29 @@ test('B1: status messages share one compact dock; real errors keep an alert role
 test('B2: a streamed reply is followed while the reader is at the latest position; after scrolling away a single return control appears',async()=>{
  const f=await fixture();
  f.frontend.renderPartial({turnId:'t9',content:'回應的第一段',status:'streaming'});
- assert.equal(f.document.getElementById('latest-jump'),null);
+ const jump=f.document.getElementById('latest-jump');assert.ok(jump);assert.equal(jump.hidden,true,'no indicator while the reader is at the latest position');
+ assert.ok(f.document.getElementById('partial-reply').closest('#thread'),'replies render inside the scrolling thread');
  f.frontend.setAutoFollow(false);
  f.frontend.renderPartial({turnId:'t9',content:'回應的第一段，第二段',status:'streaming'});
- const jump=f.document.getElementById('latest-jump');assert.ok(jump);assert.equal(jump.hidden,false);assert.match(jump.textContent,/回到最新/);
+ assert.equal(jump.hidden,false);assert.match(jump.textContent,/有新回應/);
  jump.onclick();assert.equal(jump.hidden,true);assert.equal(f.frontend.isFollowing(),true);
  assert.equal(f.document.getElementById('partial-reply').textContent.includes('第二段'),true);
 });
 
 test('B5: objectives render in friendly groups from server statuses and a newly confirmed objective is acknowledged once; nothing is confirmed client-side',async()=>{
  const objectives=[{id:'r1',label:'讀完全文',domain:'read',status:'demonstrated'},{id:'v1',label:'「慍」',domain:'vocabulary',status:'needs_practice'},{id:'l1',label:'三詞',domain:'legacy',status:'not_yet_observed'},{id:'s1',label:'尚友',domain:'shangyou',status:'not_yet_observed'}];
- const f=await fixture({initial:{state:{next:null,objectives,completion:'in_progress'}}});
- const progress=f.document.getElementById('progress');
- assert.match(progress.textContent,/本課目標：1／3 項已由伺服器評估確認/);assert.match(progress.textContent,/先讀完全文 1／1/);assert.match(progress.textContent,/字詞 0／1（待：「慍」）/);assert.match(progress.textContent,/本課要求 0／1/);assert.doesNotMatch(progress.textContent,/尚友/);
+ const targets=st=>[{id:'r1',label:'讀完全文',domain:'read',status:'confirmed'},{id:'v1',label:'「慍」',domain:'vocabulary',status:st,aim:'結合原句說明詞義、語境與判斷依據。'},{id:'c1',label:'初讀感受',domain:'context',status:'not_yet',aim:'說出初讀印象、問題或困難。'},{id:'s1',label:'尚友',domain:'shangyou',status:'not_yet'}];
+ const f=await fixture({initial:{state:{next:null,objectives,targets:targets('in_progress'),progress:{confirmed:1,total:3},completion:'in_progress'}}});
+ const summary=f.document.getElementById('lesson-details-summary');
+ assert.equal(summary.textContent,'學習目標與進度 1／3');
+ const list=f.document.getElementById('lesson-targets').textContent;assert.match(list,/✓ 讀完全文/);assert.match(list,/「慍」/);assert.match(list,/進行中/);assert.doesNotMatch(list,/legacy:|vocabulary|existing_source_assessment/);
+ assert.equal(f.document.getElementById('progress').hidden,true);
  const status=f.document.getElementById('status');const before=status.textContent;
- f.frontend.update({...f.data,state:{...f.data.state,objectives:objectives.map(o=>o.id==='v1'?{...o,status:'reformulated'}:o)}});
+ f.frontend.update({...f.data,state:{...f.data.state,targets:targets('review')}});
  assert.equal(status.textContent,before,'a non-confirmed status change is not celebrated');
- f.frontend.update({...f.data,state:{...f.data.state,objectives:objectives.map(o=>o.id==='v1'?{...o,status:'demonstrated'}:o)}});
- assert.match(status.textContent,/太好了——「「慍」」已由伺服器評估確認。還有 1 項/);
- assert.match(progress.textContent,/本課目標：2／3 項已由伺服器評估確認/);
+ f.frontend.update({...f.data,state:{...f.data.state,targets:targets('confirmed'),progress:{confirmed:2,total:3}}});
+ assert.equal(status.textContent,'已確認：「慍」');
+ assert.equal(summary.textContent,'學習目標與進度 2／3');
 });
 
 test('opening carries a source-grounded author introduction built from curriculum data',async()=>{
@@ -703,4 +711,16 @@ test('opening carries a source-grounded author introduction built from curriculu
  const guide=await fixture({conversation:true,curriculumOverrides:{author:'教材學習引導',title:'單元導讀',persona:{kind:'curriculum-guide'}}});
  assert.equal(guide.document.querySelectorAll('#next .author-intro').length,0);
  assert.equal(guide.document.getElementById('persona-label').hidden,true);
+});
+
+test('conversation panel shows no evaluation machinery: no rule text, raw objective keys, counters or rubric block',async()=>{
+ const next={id:'legacy:effect:lesson-189:interaction:revision',domain:'legacy',label:'revision',rule:'由既有來源評價讀回；對話模型不得替代、重算或直接寫舊成績。'};
+ const objectives=[next,{id:'lesson-189:revision',domain:'revision',label:'字句之改',status:'not_yet_observed'}];
+ const f=await fixture({conversation:true,initial:{state:{next,objectives,targets:[{id:'lesson-189:revision',label:'字句之改',domain:'revision',status:'not_yet',aim:'原句、增刪調後的句子及效果比較。'}],progress:{confirmed:0,total:1},completion:'in_progress'}}});
+ const panel=f.document.querySelector('.conversation').textContent;
+ for(const banned of ['由既有來源評價讀回','接下來：','legacy:effect','existing_source_assessment','本課目標：','想和我談些什麼','停止顯示','本課要求與判準'])assert.equal(panel.includes(banned),false,banned);
+ assert.equal(f.document.getElementById('answer').placeholder,'訊息');
+ assert.equal(f.document.getElementById('stop').getAttribute('aria-label'),'停止生成');
+ assert.ok(f.document.getElementById('lesson-details').closest('.conversation'));assert.equal(f.document.getElementById('lesson-details').hasAttribute('open'),false);
+ assert.ok(f.document.getElementById('turns').closest('#thread'),'messages live in the independently scrolling thread');
 });

@@ -23,19 +23,28 @@ const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefi
 function setStatus(text,{error=false}={}){const s=$('status');if(!s)return;s.textContent=text||'';s.classList.toggle('status-error',!!error&&!!text);s.setAttribute('role',error&&text?'alert':'status');}
 // B2: the author's reply is shown as it streams and the page follows it; once the reader scrolls away the page stops
 // following and offers one control to return to the latest reply. Nothing here changes what is saved.
-let autoFollow=true,latestJump=null;
-const scrollRoot=()=>document.scrollingElement||document.documentElement;
-function nearLatest(){const root=scrollRoot();const height=Number(root?.scrollHeight)||0;if(!height)return true;const seen=(Number(window.innerHeight)||0)+(Number(window.scrollY)||Number(root.scrollTop)||0);return seen>=height-160;}
-function showLatestJump(show){
- if(show&&!latestJump){latestJump=node('button','有新回應 · 回到最新','latest-jump');latestJump.type='button';latestJump.id='latest-jump';latestJump.onclick=()=>{autoFollow=true;scrollToLatest(true);};document.body.append(latestJump);}
- if(latestJump)latestJump.hidden=!show;
-}
+// The thread (#thread) is the only scroll container of the conversation: the reading column never moves because of it.
+let autoFollow=true;
+const thread=()=>$('thread');
+function nearLatest(){const t=thread();if(!t)return true;const height=Number(t.scrollHeight)||0;if(!height)return true;return (Number(t.scrollTop)||0)+(Number(t.clientHeight)||0)>=height-160;}
+function showLatestJump(show){const j=$('latest-jump');if(j)j.hidden=!show;}
 function scrollToLatest(force=false){
  if(!force&&!autoFollow){showLatestJump(true);return;}
- const root=scrollRoot();try{if(typeof window.scrollTo==='function')window.scrollTo({top:Number(root?.scrollHeight)||0});else if(root)root.scrollTop=root.scrollHeight;}catch{}
+ const t=thread();try{if(t)t.scrollTop=Number(t.scrollHeight)||0;}catch{}
  showLatestJump(false);
 }
-window.addEventListener?.('scroll',()=>{autoFollow=nearLatest();if(autoFollow)showLatestJump(false);},{passive:true});
+// A new author reply is brought into view from its first line (not its last) so a long reply reads top-down; while the
+// reader has deliberately scrolled into older messages the view stays put and the indicator appears instead.
+let lastRevealed=null;
+function revealReply(el,force=false){
+ if(!el)return;if(lastRevealed===el&&!force)return;
+ if(!force&&!autoFollow){showLatestJump(true);return;}
+ const t=thread();if(!t)return;lastRevealed=el;
+ try{const top=Math.max(0,(Number(el.offsetTop)||0)-(Number(t.offsetTop)||0)-12);t.scrollTop=top;}catch{}
+ showLatestJump(false);
+}
+$('latest-jump').onclick=()=>{autoFollow=true;scrollToLatest(true);};
+thread()?.addEventListener?.('scroll',()=>{autoFollow=nearLatest();if(autoFollow)showLatestJump(false);},{passive:true});
 const api=async(body,cursor,records=false,onEvent,correctionsFor,shared=false,firstReading=false,sessions=false,extra=null)=>{
  const gen=generation,expectedOwner=ownerRef;
  const current=()=>{if(gen!==generation)throw Object.assign(new Error('帳戶或篇目已切換，已忽略舊回應。'),{code:'stale_context'});};
@@ -56,7 +65,7 @@ function renderPartial(partial){
  if(!n){n=node('div',undefined,'turn teacher');n.id='partial-reply';n.append(node('small'),node('span'));$('turns').append(n);}
  n.dataset.turnId=partial.turnId;n.querySelector('small').textContent=partial.status==='unconfirmed'?(partial.disposition?.received?'回應已收到但未通過核驗 · 已保留文字，尚未計入評閱':'回應中斷 · 已保留文字，尚未計入評閱'):'正在回應…';n.querySelector('span').textContent=partial.content;
  n.querySelector('button')?.remove();
- scrollToLatest();
+ revealReply(n);if(!autoFollow)showLatestJump(true);
  if(partial.continuation?.allowed&&!snapshot?.pending){
   const button=node('button',partial.continuation.code==='explicit_regeneration_available'?'重新生成回應':'續答');button.type='button';
   button.onclick=async()=>{
@@ -104,8 +113,10 @@ function renderEvidence(report){
  }
  const first=report.student.trajectory?.first;if(first){const b=node('button',`初讀摘錄：「${first.quote}」${first.truncated?'…':''}`);b.onclick=()=>void revealTurn(first.turnId).catch(e=>{$('export-status').textContent=e.message;});box.append(b);}
  for(const item of report.student.summary||[]){box.append(node('p',item.text));for(const ref of item.references){const b=node('button',`查看原話：「${ref.quote}」`);b.onclick=()=>void revealTurn(ref.turnId).catch(e=>{$('export-status').textContent=e.message;});box.append(b);}}
- for(const o of report.student.observed)box.append(node('p',`已有證據：${o.label}`));
- for(const o of report.student.remaining)box.append(node('p',`${o.status==='pending_calibration'?'待校準（不影響本課完成，可請老師覆核）':o.status==='historical_review'?'原有完成已保留，版本對應待核對':o.status==='review'?'待覆核':'尚待觀察'}：${o.label}`));
+ const targets=snapshot?.state?.targets||[];
+ if(targets.length){for(const t of targets.filter(t=>t.status==='confirmed'))box.append(node('p',`已有證據：${t.label}`));for(const t of targets.filter(t=>t.status!=='confirmed'&&t.requiredForCompletion!==false))box.append(node('p',`${TARGET_STATUS[t.status]||'尚未談到'}：${t.label}`));}
+ else{for(const o of report.student.observed)box.append(node('p',`已有證據：${o.label}`));
+ for(const o of report.student.remaining)box.append(node('p',`${o.status==='pending_calibration'?'待校準（不影響本課完成，可請老師覆核）':o.status==='historical_review'?'原有完成已保留，版本對應待核對':o.status==='review'?'待覆核':'尚待觀察'}：${o.label}`));}
 }
 function view(name){document.querySelector('.workspace').dataset.view=name;for(const id of ['text','conversation'])$(id+'-tab').setAttribute('aria-pressed',String(id===name));}
 // Source-grounded introduction shown with the opening: identity, era (literary taxonomy), the textbook's own source line
@@ -299,7 +310,9 @@ function renderText(){
  }
  if(!curriculum.passages.length)$('passages').append(node('p','本課正文來源尚待核對。原有資料與已保存紀錄仍可查閱；不以未核實的正文進行新評閱。'));
  if(locked){$('requirements').replaceChildren(node('p','先自行斷句，保存至少三處疑點與猜測，再寫下初讀感知。原要求及原始紀錄保留。'));$('references').replaceChildren(node('p','完成無注疏初讀後，展開正文註釋與參考資料。'));return;}
- $('requirements').replaceChildren(...curriculum.objectives.map(o=>{const n=node('div',undefined,'requirement');n.append(node('strong',o.label),node('span',o.domain==='vocabulary'?'結合原句說明詞義、語境與判斷依據；看過提示的回答與獨立新題分別保存。':o.rule));return n;}));
+ const formalKinds={contextWords:'初讀三詞',authorQuestion:'向作者發問',revision:'字句之改',structure:'篇章技法',wordCreation:'字詞創作',evaluation:'篇目自評',vocabulary:'字詞原題'};
+ const formal=[...new Set(curriculum.objectives.filter(o=>o.domain==='legacy').map(o=>formalKinds[o.legacy?.questionKind]||o.legacy?.questionKind).filter(Boolean))];
+ $('requirements').replaceChildren(...curriculum.objectives.filter(o=>o.domain!=='legacy').map(o=>{const n=node('div',undefined,'requirement');n.append(node('strong',o.label),node('span',o.domain==='vocabulary'?'結合原句說明詞義、語境與判斷依據；看過提示的回答與獨立新題分別保存。':o.rule));return n;}),...(formal.length?[(()=>{const n=node('div',undefined,'requirement');n.append(node('strong','原判準評閱項目'),node('span',`${formal.join('、')}：在對話中自然完成，由原評價器按既有判準核對，不另開表單。`));return n;})()]:[]));
  $('references').replaceChildren(node('p','原課導讀與參考連結列在下方；其他補充資料、學案與教材原圖仍可由上方原有課程入口查看。'),...curriculum.annotations.map(a=>node('p',(a.blocks||[]).flatMap(b=>(b.runs||[]).map(r=>r.text||'')).join('\n'))));
  if(lessonIndex?.lessons.find(lesson=>lesson.lessonId===curriculum.lessonId)?.sourceReviewRequired)$('references').prepend(node('p','本課有來源項目待核對；未核實的內容不會當作已通過的學習證據。'));
  for(const [key,label] of [['frontMatter','篇目前言'],['guidance','原課閱讀提示'],['sourceOnlyBlocks','原課補充資料']]){const text=referenceText(curriculum[key]);if(text){const details=node('details');details.append(node('summary',label),node('p',text));$('references').append(details);}}
@@ -366,8 +379,8 @@ async function refreshReadingMarks(){
  try{const state=await api(null,null,false,null,null,false,true);if(gen===generation){if(curriculum.mode!=='classical'){const asset=await dialogueReadingAsset(curriculum);if(gen!==generation||asset.textDigest!==state.textDigest||asset.textVersionId!==state.textVersionId)return;}readingNotes=state;if(firstReadView)await firstReadView.setMarks?.(state);paintReadingMarks();}}catch{/* Saved chat remains authoritative; a missing readback never fabricates marks. */}
 }
 for(const mode of ['unpunctuated','annotated'])$('version-'+mode).onclick=()=>{if(mode==='unpunctuated'&&curriculum?.mode!=='classical')return;materialMode=mode;renderText();};
-function renderTurns(turns,prepend=false){
- const fragment=document.createDocumentFragment(),records=document.createDocumentFragment();
+function renderTurns(turns,prepend=false,{preserveScroll=false}={}){
+ const fragment=document.createDocumentFragment(),records=document.createDocumentFragment();const initial=!$('turns').childElementCount;const keep=Number(thread()?.scrollTop)||0;
  for(const t of turns){
   const existing=document.getElementById('turn-'+t.id);
   if(existing){
@@ -389,15 +402,17 @@ function renderTurns(turns,prepend=false){
   if(t.status==='needs_review')n.append(node('small','回答已保存，回應待確認。','turn-status'));
   fragment.append(n);
  }
- const appended=prepend?0:fragment.childNodes.length;
+ const added=prepend?[]:[...fragment.childNodes],firstReply=added.find(n=>n.classList?.contains('teacher'));
  if(prepend){$('turns').prepend(fragment);$('turn-review-list').prepend(records);}else{$('turns').append(fragment);$('turn-review-list').append(records);}
- if(appended)scrollToLatest();
+ if(!added.length)return;
+ if(preserveScroll){try{const t=thread();if(t)t.scrollTop=keep;}catch{}return;}
+ if(initial)scrollToLatest(true);else if(firstReply)revealReply(firstReply);else scrollToLatest();
 }
 function clearPrivateView({preserveReading=false}={}){reconnectNeeded=false;closeExpandedPlate?.();persistComposer();generation++;streamAbort?.abort();streamAbort=null;continuationRequest=null;
  firstReadView?.dispose();firstReadView=null;
  $('correction').close();correctionTarget=null;correctionMutation=null;$('correction-original').textContent='';$('correction-history').replaceChildren();$('correction-note').value='';$('correction-proposed').value='';$('turns').replaceChildren();$('turn-review-list').replaceChildren();$('answer').value='';$('quote').hidden=true;
  knownObjectiveStatus=null;knownObjectiveOwner=null;autoFollow=true;showLatestJump(false); selected=null;pending=null;pendingDraft=null;originalDraft=null;composerDraft=null;snapshot=null;readingNotes=null;paintReadingMarks();clearTimeout(pollTimer);
- $('task-input').replaceChildren();$('task-context').replaceChildren();$('record-receipt').replaceChildren();$('source-results').replaceChildren();
+ $('task-input').replaceChildren();$('task-context').replaceChildren();$('record-receipt').replaceChildren();$('source-results').replaceChildren();$('lesson-targets').replaceChildren();$('lesson-details').hidden=true;lastRevealed=null;
  $('lesson-outcome').textContent='';$('draft-status').textContent='';
  $('next').replaceChildren(node('span',''));
  $('source-draft').replaceChildren();$('source-draft').hidden=true;$('export-status').textContent='';$('evidence-summary').replaceChildren();sharedHistory=null;$('old-history').replaceChildren();$('old-history-load').disabled=true;
@@ -519,7 +534,7 @@ function renderCatalog(){
 function renderLearningTurn(data){
  const task=data.learningTurn,controls=$('task-input'),context=$('task-context');controls.replaceChildren();context.replaceChildren();
  if(conversationFlow){
-  $('answer').placeholder='想和我談些什麼？';
+  $('answer').placeholder='訊息';
   $('send').disabled=!!data.pending||['unavailable','exemption'].includes(task?.kind);$('answer').disabled=$('send').disabled;
   const hasTeacher=data.turns?.some(t=>t.role==='teacher'&&t.model!=='source-owned');
   $('next').hidden=hasTeacher;
@@ -601,10 +616,10 @@ function objectiveGroups(objectives){
 let knownObjectiveStatus=null,knownObjectiveOwner=null;
 function acknowledgeObjectives(data){
  let message=null;
- const objectives=requiredObjectives(data.state),next=new Map(objectives.map(o=>[o.id,o.status]));
+ const targets=(data.state?.targets||[]).filter(t=>t.requiredForCompletion!==false),next=new Map(targets.map(t=>[t.id,t.status]));
  if(knownObjectiveStatus&&knownObjectiveOwner===(data.ownerRef||ownerRef)){
-  const gained=objectives.filter(o=>CONFIRMED_STATUSES.includes(o.status)&&!CONFIRMED_STATUSES.includes(knownObjectiveStatus.get(o.id)));
-  if(gained.length){const remaining=objectives.filter(o=>!CONFIRMED_STATUSES.includes(o.status)).length;message=`太好了——「${gained.map(o=>o.label||o.id).join('」「')}」已由伺服器評估確認。${remaining?`還有 ${remaining} 項，我們接著來。`:'本課目標都已確認。'}`;}
+  const gained=targets.filter(t=>t.status==='confirmed'&&knownObjectiveStatus.get(t.id)!=='confirmed');
+  if(gained.length)message=`已確認：${gained.map(t=>t.label).join('、')}`;
  }
  knownObjectiveStatus=next;knownObjectiveOwner=data.ownerRef||ownerRef;
  return message;
@@ -612,12 +627,19 @@ function acknowledgeObjectives(data){
 function renderProgressLine(){
  const box=$('progress');if(!box)return;box.replaceChildren();
  if(progressStage&&PROGRESS_STAGES[progressStage]){const seconds=Math.max(0,Math.round((Date.now()-progressStartedAt)/1000));const stage=node('b',PROGRESS_STAGES[progressStage]);box.append(stage,node('span',['saving','generating','streaming'].includes(progressStage)?`已 ${seconds} 秒`:''));box.hidden=false;return;}
- const objectives=requiredObjectives(snapshot?.state);
- if(!objectives.length){box.hidden=true;return;}
- const done=objectives.filter(o=>CONFIRMED_STATUSES.includes(o.status)).length;
- box.append(node('span',`本課目標：${done}／${objectives.length} 項已由伺服器評估確認`));
- for(const g of objectiveGroups(objectives)){const chip=node('small',`${g.label} ${g.done}／${g.total}`+(g.remaining.length?`（待：${g.remaining.slice(0,2).join('、')}${g.remaining.length>2?'…':''}）`:''),'objective-group');chip.dataset.done=String(g.done===g.total);box.append(chip);}
- box.append(node('small','依已保存的對話由伺服器判定；對話長短本身不代表掌握'));box.hidden=false;
+ box.hidden=true;
+}
+// Lesson details: the merged learning targets (one per real aim; legacy rubric items are routes of the same target),
+// collapsed and outside the message flow. Status comes from the server projection only.
+const TARGET_STATUS={confirmed:'已確認',in_progress:'進行中',review:'待覆核',historical_review:'原有紀錄待核對',pending_calibration:'待校準',not_yet:'尚未談到'};
+function renderTargets(state){
+ const box=$('lesson-details'),list=$('lesson-targets');if(!box||!list)return;list.replaceChildren();
+ const targets=(state?.targets||[]).filter(t=>t.requiredForCompletion!==false||t.status==='confirmed');
+ if(!targets.length){box.hidden=true;return;}
+ const progress=state.progress||{confirmed:targets.filter(t=>t.status==='confirmed').length,total:targets.length};
+ $('lesson-details-summary').textContent=`學習目標與進度 ${progress.confirmed}／${progress.total}`;
+ for(const t of targets){const li=node('li');li.dataset.status=t.status;li.dataset.targetId=t.id;li.append(node('span',`${t.status==='confirmed'?'✓ ':''}${t.label}`),node('small',t.status==='confirmed'?'已確認':`${TARGET_STATUS[t.status]||t.status}${t.aim?' · '+t.aim:''}`));list.append(li);}
+ box.hidden=false;
 }
 function progressTick(){renderProgressLine();if(['saving','generating','streaming'].includes(progressStage))progressTimer=setTimeout(progressTick,1000);}
 function progress(stage){progressStage=stage;clearTimeout(progressTimer);progressTimer=null;if(['saving','generating','streaming'].includes(stage)){if(!progressStartedAt)progressStartedAt=Date.now();progressTimer=setTimeout(progressTick,1000);}else{progressStartedAt=0;if(stage==='saved'||stage==='unconfirmed')setTimeout(()=>{if(progressStage===stage){progressStage='';renderProgressLine();}},4000);}renderProgressLine();}
@@ -632,7 +654,7 @@ function update(data){
   if(pending.action==='original')originalDraft=null;pending=null;pendingDraft=null;persistComposer();
  }
  const acknowledgement=acknowledgeObjectives(data);
- snapshot=data;void refreshReadingMarks();$('old-history-load').disabled=false;renderPartial(data.partial);renderReplyRetry(data);if(data.report)renderEvidence(data.report);if(data.legacy?.completion)$('evidence-summary').append(node('p','原課已完成（原有自報紀錄，非新增成績）；新增對話另存。'));if(data.legacy?.firstRead?.length)$('evidence-summary').append(node('p','原有初讀及未完成的標記仍保留，可由「原有課程」繼續；原文版本不同時不自動套用舊位置。'));renderTurns(data.turns||[]);$('older').hidden=!data.older;setStatus(data.pending?'你的回答已保存，正在等候回應。':data.saved===false?'':data.statusNotice||'已讀取伺服器保存紀錄。');$('answer').disabled=false;$('send').disabled=!!data.pending;const next=data.state?.next;$('next').replaceChildren(node('span',data.state?.legacyCompletion?'原課的完成紀錄已保留。你可以自願繼續細讀，不必重做；新對話不改寫原成績。':next?`接下來：${next.domain==='vocabulary'?next.label+'。回到原句，用自己的話解釋語境與判斷依據；可以先查閱註釋，獨立掌握需另作新題。':next.rule}`:data.state?.completion==='evidence_ready_for_review'?'證據已齊，等待教師覆核。':data.state?.objectives.some(o=>o.status==='review')?'有證據待覆核，請保留原話與來源；不用為此反覆作答。':'原有完成紀錄待核對，無需重做已完成內容。'));
+ snapshot=data;void refreshReadingMarks();$('old-history-load').disabled=false;const replacedStream=!!document.getElementById('partial-reply')&&!data.partial;renderPartial(data.partial);renderReplyRetry(data);if(data.report)renderEvidence(data.report);if(data.legacy?.completion)$('evidence-summary').append(node('p','原課已完成（原有自報紀錄，非新增成績）；新增對話另存。'));if(data.legacy?.firstRead?.length)$('evidence-summary').append(node('p','原有初讀及未完成的標記仍保留，可由「原有課程」繼續；原文版本不同時不自動套用舊位置。'));renderTurns(data.turns||[],false,{preserveScroll:replacedStream});$('older').hidden=!data.older;setStatus(data.pending?'你的回答已保存，正在等候回應。':data.saved===false?'':data.statusNotice||'');$('answer').disabled=false;$('send').disabled=!!data.pending;const next=data.state?.next;renderTargets(data.state);if(!conversationFlow)$('next').replaceChildren(node('span',data.state?.legacyCompletion?'原課的完成紀錄已保留。你可以自願繼續細讀，不必重做；新對話不改寫原成績。':next?`接下來：${next.domain==='vocabulary'?next.label+'。回到原句，用自己的話解釋語境與判斷依據；可以先查閱註釋，獨立掌握需另作新題。':next.rule}`:data.state?.completion==='evidence_ready_for_review'?'證據已齊，等待教師覆核。':data.state?.objectives.some(o=>o.status==='review')?'有證據待覆核，請保留原話與來源；不用為此反覆作答。':'原有完成紀錄待核對，無需重做已完成內容。'));
  if(data.draft&&(!data.draft.formal||data.draft.learningRequest)&&!hasComposerDraft()&&!pending){
   const draft=data.draft,request=draft.learningRequest||{content:draft.content,questionId:draft.questionId};
   $('answer').value=request.content;selected=null;$('quote').hidden=true;
@@ -640,8 +662,8 @@ function update(data){
   composerDraft=request.taskId?{taskId:request.taskId,...(request.selectedIndex!==undefined?{selectedIndex:request.selectedIndex}:{}),...(request.rating!==undefined?{rating:request.rating}:{})}:null;
   setStatus('已恢復伺服器保存的待送草稿；尚未呼叫 AI。');
  }
- if(data.question){$('next').replaceChildren(node('span',data.question.question));}
- else if(!data.learningTurn&&next && [...curriculum.vocabulary,...(curriculum.languagePractice||[])].some(v=>v.id===next.id)){const b=node('button','開始這項語言練習');b.onclick=async()=>{try{update(await api({action:'question',objectiveId:next.id}));}catch(e){setStatus(e.message,{error:true});}};$('next').append(b);}
+ if(data.question&&!conversationFlow){$('next').replaceChildren(node('span',data.question.question));}
+ else if(!conversationFlow&&!data.learningTurn&&next && [...curriculum.vocabulary,...(curriculum.languagePractice||[])].some(v=>v.id===next.id)){const b=node('button','開始這項語言練習');b.onclick=async()=>{try{update(await api({action:'question',objectiveId:next.id}));}catch(e){setStatus(e.message,{error:true});}};$('next').append(b);}
  restoreComposer();renderLearningTurn(data);renderSourceResults(data);$('login').hidden=true;
  if(data.report?.conclusion){const b=node('button','查看這次尚友小結');b.onclick=()=>{$('evidence-summary').closest('details').open=true;$('materials').showModal();$('evidence-summary').scrollIntoView({block:'start'});};$('next').append(b);}
   renderSourceDraft(data);
@@ -726,7 +748,7 @@ async function sendTurn(submitted,submittedDraft,gen=generation){
  }catch(error){
   $('stop').hidden=true;
   if(gen!==generation)return;
-  if(error?.name==='AbortError'){progress('');await refresh(gen);if(gen!==generation)return;setStatus('已停止顯示；伺服器仍會保存這一輪的回應，稍後自動讀回，不會重送。');if(snapshot?.pending)waitForReply(gen);return;}
+  if(error?.name==='AbortError'){progress('');await refresh(gen);if(gen!==generation)return;setStatus('已取消顯示；這一輪的回應仍會保存並稍後讀回，不會重送。');if(snapshot?.pending)waitForReply(gen);return;}
   progress('');
   if(error.code==='stale_revision'||error.code==='turn_in_progress'||error.code==='learning_task_changed'||error.status===400){
    pending=null;pendingDraft=null;persistComposer();await refresh(gen);setStatus(error.message,{error:true});
@@ -749,7 +771,7 @@ $('answer').onkeydown=event=>{
  if($('send').disabled||!$('answer').value.trim())return;
  const handler=$('compose').onsubmit;if(handler)void handler({preventDefault(){}});
 };
-$('stop').onclick=()=>{if(!streamAbort)return;streamAbort.abort();$('stop').hidden=true;setStatus('已停止顯示；伺服器仍會保存這一輪的回應，稍後自動讀回，不會重送。');};
+$('stop').onclick=()=>{if(!streamAbort)return;streamAbort.abort();$('stop').hidden=true;setStatus('已取消顯示；這一輪的回應仍會保存並稍後讀回，不會重送。');};
 $('lesson').onchange=()=>switchLesson($('lesson').value);
 $('lesson-search').oninput=renderCatalog;
 $('text-tab').onclick=()=>view('text');$('conversation-tab').onclick=()=>view('conversation');

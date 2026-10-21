@@ -20,7 +20,7 @@ export function learningTurn(curriculum,state,{revision=0,fields=[],question=nul
  const pending=o=>!completed.has(state.objectives.find(x=>x.id===o.id)?.status);
  const reviewIds=new Set(submissions.filter(s=>s.status==='unconfirmed').map(s=>s.objectiveId));
  const read=curriculum.objectives.find(o=>o.domain==='read'&&pending(o));
- if(read)return task('read',read.id,'讀完正文後，回覆「已讀完」，也可以補充你最先注意到的字句。');
+ if(read)return task('read',read.id,'讀完整篇後告訴我一聲（例如「讀完了」），也說說你最先注意到的字句；通讀只是參與紀錄，不是評分。');
  if(state.next?.domain==='vocabulary'&&['needs_practice','reformulated'].includes(state.next.status))return task('dialogue',state.next.id,'用自己的話重新說說這個詞在原句中的意思，以及你判斷的依據。');
  if(sourceDraft&&!reviewIds.has(sourceDraft.formal.objectiveId))return task('sourceEvidence',sourceDraft.formal.objectiveId,'你先前的原話已涵蓋這一項要求。繼續寫下你的補充或下一個問題，原有評價會直接核對已保存的原話。',{references:sourceDraft.references});
  const originals=curriculum.objectives.filter(o=>o.domain==='legacy'&&pending(o)&&!reviewIds.has(o.id));
