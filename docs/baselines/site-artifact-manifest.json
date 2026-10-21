@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1488,
-  "totalBytes": 204888775,
-  "aggregateSha256": "e766a9cda1e15a2f1be091cba4a0d080e2e923962866ac0e7a0448bcaa5a2684",
+  "totalBytes": 204889706,
+  "aggregateSha256": "82126aa32b8d034b8776d0ba01b2ef43dd6ff25cb14a4ed088a81115c5d842de",
   "files": [
     {
       "path": "_headers",
@@ -302,8 +302,8 @@
     },
     {
       "path": "_worker.js/learning-evidence-source.js",
-      "bytes": 98359,
-      "sha256": "3a818356877d36388e811b45734da9b2aae2cb7e0cc1495159e914b62cc5cd8b"
+      "bytes": 99290,
+      "sha256": "c6d7deec954dbc1be272ad6f4e33d04ba763724e572e078b94734e14ad465343"
     },
     {
       "path": "_worker.js/learning-recorder-source.js",
@@ -358,7 +358,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "1aa3ded11ae47b3fc4e4c8f5b4c0938abaa3e041984ee2ce5071c839ee8cc56b"
+      "sha256": "0a7c6279e7a569bc8a004b6d553dcda92e991636df731eb99b166d64b6effe2e"
     },
     {
       "path": "app-content/latest-stable.json",
