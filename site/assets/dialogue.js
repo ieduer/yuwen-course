@@ -44,6 +44,14 @@ function revealReply(el,force=false){
  showLatestJump(false);
 }
 $('latest-jump').onclick=()=>{autoFollow=true;scrollToLatest(true);};
+// The panel is as tall as the viewport minus the space above it, so the composer is on screen without scrolling the page;
+// once the page is scrolled past that space the sticky panel grows to the full viewport height.
+function fitConversationPanel(){
+ try{const ws=document.querySelector('.workspace');if(!ws||(window.innerWidth||1024)<=720){document.documentElement.style.removeProperty('--panel-offset');return;}
+  const natural=(Number(ws.getBoundingClientRect?.().top)||0)+(Number(window.scrollY)||0),offset=Math.max(0,natural-12-(Number(window.scrollY)||0));
+  document.documentElement.style.setProperty('--panel-offset',Math.round(offset)+'px');}catch{}
+}
+window.addEventListener?.('scroll',fitConversationPanel,{passive:true});window.addEventListener?.('resize',fitConversationPanel);
 thread()?.addEventListener?.('scroll',()=>{autoFollow=nearLatest();if(autoFollow)showLatestJump(false);},{passive:true});
 const api=async(body,cursor,records=false,onEvent,correctionsFor,shared=false,firstReading=false,sessions=false,extra=null)=>{
  const gen=generation,expectedOwner=ownerRef;
@@ -340,7 +348,7 @@ function renderText(){
   for(const example of curriculum.exam.examples){const link=node('a',`${example.year} ${example.paper}第 ${example.questionNumber} 題：《${example.work}》`);link.href=example.url;link.target='_blank';link.rel='noopener noreferrer';section.append(link,node('p',`${example.questionParaphrase} 對應練習：${example.skill}。來源：${example.publisher}第 ${example.issue} 期第 ${example.printedPage} 版。`));}
   $('references').append(section);
  }
- paintReadingMarks();renderReadingVariant();performance.mark('dialogue-readable-text');
+ paintReadingMarks();renderReadingVariant();fitConversationPanel();performance.mark('dialogue-readable-text');
 }
 function paintReadingMarks(){
  if(!curriculum)return;

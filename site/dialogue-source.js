@@ -56,6 +56,9 @@ const MODE_FAILURE_CODES=new Set([
  'reading_source_unavailable','reading_source_unconfirmed','original_source_unavailable',
  'original_source_unconfirmed','call_already_reconciled','call_no_longer_active',
 ]);
+// Verification failures of optional proposal parts: the part is dropped and recorded; the reply stays. Everything else
+// (no reply, provider, storage, budget, continuation) keeps failing closed.
+const LENIENT_PROPOSAL_CODES=new Set(['invalid_assessment','unverifiable_evidence','missing_criterion','reformulation_not_verified','language_calibration_required','independence_not_verified','copied_hint','quotation_without_explanation','source_draft_not_eligible','source_draft_during_vocabulary','source_draft_not_student_quote','invalid_source_draft','invalid_source_submission','invalid_source_input','source_input_too_large','study_guide_draft_not_verified','study_guide_reference_not_revealed','conclusion_not_ready','unverifiable_conclusion_turn','unverifiable_conclusion_passage','conclusion_change_requires_earlier_turn','invalid_conclusion_domain','unverified_conclusion_history','conclusion_domain_without_evidence','conclusion_reply_too_long','shangyou_conclusion_required','shangyou_evidence_required']);
 async function readingGate(db,studentId,curriculum,legacy){
  if(curriculum.mode!=='classical')return null;
  if(legacy.completion)return {phase:'close_reading',preservedCompletion:true};
@@ -705,13 +708,33 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const result=await observe(await callModel(env,prompt,resume?`${turnId}:continue`:turnId,persistReply,budget,{responseJsonSchema}));
   if(resume&&!result.value?.reply?.startsWith(resume.partialText))throw Error('continuation_prefix_mismatch');
   failureStage='proposal';
-  const proposal=validateProposal(result.value,{curriculum,state,turns:completeTurns,question,remediation,assessments,hints:completeTurns.filter(t=>t.role==='teacher').map(t=>t.content),conversation:body.conversation===true});
-  if(body.conversation===true&&proposal.assessments.some(a=>['read','firstRead','studyGuide','evaluation','legacy'].includes(curriculum.objectives.find(o=>o.id===a.objectiveId)?.domain)))throw Error('original_evidence_requires_source_receipt');
-  if(proposal.sourceDraft&&(legacy.completion||legacy.preserved.some(p=>p.objectiveId===proposal.sourceDraft.formal.objectiveId)))throw Error('original_result_preserved');
+  // A reply the student can read is never discarded because an optional proposal (an assessment, a source draft, a
+  // conclusion, an original-evidence or reading-evidence reference) failed verification: the failing part is dropped,
+  // nothing is credited for it, and the rejection is recorded as an event. A reply without a usable reply text still fails.
+  const rejectedParts=[],validateWith=value=>validateProposal(value,{curriculum,state,turns:completeTurns,question,remediation,assessments,hints:completeTurns.filter(t=>t.role==='teacher').map(t=>t.content),conversation:body.conversation===true});
+  const partCode=error=>/^[a-z0-9_]{1,80}$/.test(error?.message||'')?error.message:'unclassified';
+  // Only the student's conversation path keeps the reply; structured turns and isolated acceptance / diagnostic
+  // admissions keep failing closed so their evidence and failure records are unchanged.
+  const lenient=body.conversation===true&&!budget.isolatedAdmission;
+  let proposal;
+  try{proposal=validateWith(result.value);}
+  catch(error){
+   if(!lenient||!LENIENT_PROPOSAL_CODES.has(error?.message))throw error;
+   const first=partCode(error);
+   try{proposal=validateWith({reply:result.value.reply,assessments:Array.isArray(result.value.assessments)?result.value.assessments:[]});rejectedParts.push({part:'sourceDraft_or_conclusion',code:first});}
+   catch(second){if(!LENIENT_PROPOSAL_CODES.has(second?.message))throw second;proposal=validateWith({reply:result.value.reply,assessments:[]});rejectedParts.push({part:'assessments',code:first===partCode(second)?first:`${first};${partCode(second)}`});}
+  }
+  if(body.conversation===true){
+   const needsReceipt=proposal.assessments.filter(a=>['read','firstRead','studyGuide','evaluation','legacy'].includes(curriculum.objectives.find(o=>o.id===a.objectiveId)?.domain));
+   if(needsReceipt.length){if(!lenient)throw Error('original_evidence_requires_source_receipt');proposal={...proposal,assessments:proposal.assessments.filter(a=>!needsReceipt.includes(a))};rejectedParts.push({part:'assessments',code:'original_evidence_requires_source_receipt',objectiveIds:needsReceipt.map(a=>a.objectiveId)});}
+  }
+  if(proposal.sourceDraft&&(legacy.completion||legacy.preserved.some(p=>p.objectiveId===proposal.sourceDraft.formal.objectiveId))){if(!lenient)throw Error('original_result_preserved');proposal={...proposal,sourceDraft:null};rejectedParts.push({part:'sourceDraft',code:'original_result_preserved'});}
   failureStage='original_evidence';
-  const originalEvidence=body.conversation===true?validateOriginalEvidence(result.value.originalEvidence,{turns:completeTurns,curriculum,task:guide,tasks:originalTasks}):null;
+  let originalEvidence=null;
+  if(body.conversation===true){try{originalEvidence=validateOriginalEvidence(result.value.originalEvidence,{turns:completeTurns,curriculum,task:guide,tasks:originalTasks});}catch(error){if(!lenient)throw error;rejectedParts.push({part:'originalEvidence',code:partCode(error)});}}
   failureStage='reading_evidence';
-  const readingAction=body.conversation===true?validateReadingEvidence(result.value.readingEvidence,{turns:completeTurns,asset:firstReading?.asset,state:firstReading?.state,lessonId:curriculum.lessonId,turnId}):null;
+  let readingAction=null;
+  if(body.conversation===true){try{readingAction=validateReadingEvidence(result.value.readingEvidence,{turns:completeTurns,asset:firstReading?.asset,state:firstReading?.state,lessonId:curriculum.lessonId,turnId});}catch(error){if(!lenient)throw error;rejectedParts.push({part:'readingEvidence',code:partCode(error)});}}
   failureStage='storage';
   const at=now(),teacherId=uuid();
   const claimed=await db.prepare("UPDATE dialogue_calls SET state='finishing',finished_at=? WHERE turn_id=? AND state='reserved'").bind(at,turnId).run();
@@ -742,6 +765,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const statements=[db.prepare(`INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,reply_to,status,model,model_version,policy_version,created_at) SELECT ?,?,?,?,'teacher',?,?,'saved',?,?,?,? WHERE ${active}`).bind(teacherId,session.id,body.mutationId,'server-response',proposal.reply,turnId,result.model||null,result.modelVersion||null,POLICY_VERSION,at,turnId)];
   if(readingAction)statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'reading_evidence_saved',?,? WHERE ${active}`).bind(`${turnId}:reading`,session.id,turnId,JSON.stringify({action:readingAction,receipt:readingReceipt}),at,turnId));
   if(proposal.sourceDraft)statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'source_answer_proposed',?,? WHERE ${active}`).bind(`${turnId}:source-proposal`,session.id,turnId,JSON.stringify(proposal.sourceDraft),at,turnId));
+  if(rejectedParts.length)statements.push(db.prepare(`INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'proposal_parts_rejected',?,? WHERE ${active}`).bind(`${turnId}:rejected`,session.id,turnId,JSON.stringify({policyVersion:POLICY_VERSION,parts:rejectedParts,credited:false}),at,turnId));
   if(proposal.conclusion)statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'conclusion_saved',?,? WHERE ${active}`).bind(`${turnId}:conclusion`,session.id,turnId,JSON.stringify({...proposal.conclusion,curriculumVersion:curriculum.curriculumVersion,policyVersion:POLICY_VERSION,createdAt:at,teacherTurnId:teacherId}),at,turnId));
   for(const a of proposal.assessments)statements.push(db.prepare(`INSERT INTO dialogue_assessments(id,session_id,turn_id,objective_id,outcome,evidence_json,rationale,rule_version,curriculum_version,created_at) SELECT ?,?,?,?,?,?,?,?,?,? WHERE ${active}`).bind(uuid(),session.id,turnId,a.objectiveId,a.outcome,JSON.stringify(a.evidence),a.rationale,a.ruleVersion,curriculum.curriculumVersion,at,turnId));
   const answer=question?proposal.assessments.find(a=>a.objectiveId===question.objectiveId):null;

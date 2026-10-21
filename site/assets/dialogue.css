@@ -92,7 +92,7 @@
 .author-intro{display:block;margin-top:8px;font-size:12px;color:var(--muted);line-height:1.55}
 /* 2026-10-21 correction: a real conversation panel. The thread scrolls on its own inside a fixed-height column, so streaming,
    status changes and new messages never resize the panel or move the reading column; the composer stays put. */
-.conversation{position:sticky;top:12px;height:calc(100dvh - 24px);max-height:none;display:flex;flex-direction:column;min-width:0;border-left:1px solid var(--line);padding-left:30px}
+.conversation{position:sticky;top:12px;height:calc(100dvh - 24px - var(--panel-offset,0px));max-height:none;display:flex;flex-direction:column;min-width:0;border-left:1px solid var(--line);padding-left:30px}
 .thread{position:relative;flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;padding:4px 6px 12px 0;scrollbar-width:thin}
 #turns{overflow:visible;max-height:none;min-height:0}
 .turn{margin:12px 0 18px}.turn.teacher>span:not(.author-avatar){white-space:pre-wrap}

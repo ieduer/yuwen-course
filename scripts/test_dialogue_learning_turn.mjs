@@ -650,3 +650,17 @@ test('completed-lesson review persists exact source receipts, preserves every or
  const replay=await handleDialogue(f.req(r.body),f.env,student,null,f.options);assert.equal(replay.status,200);assert.equal(calls,1);assert.deepEqual(snapshot(),before);
  const reloaded=await f.read();assert(reloaded.state.legacyCompletion);assert.equal(reloaded.state.next,null);assert.equal(reloaded.sourceDraft,null);assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='source_answer_proposed'").get().n,0);
 });
+
+test('conversation keeps the author reply when an optional proposal part fails verification: nothing is credited and the rejection is recorded',async t=>{
+ const f=fixture(t,'lesson-1717-p2',o=>o.domain==='read');
+ const reply='你讀到想哭，這就是很實在的初讀印象。我們從結尾那條被子說起。';
+ f.options.callModel=async(_env,prompt)=>{const d=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=d.recent.filter(t=>t.role==='student').at(-1);return {value:{reply,assessments:[],originalEvidence:{objectiveId:d.conversationGuide.objectiveId,evidence:{turnId:turn.id,quote:'我讀到最後'}}},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ const data=await f.read();const r=await f.send(data,'我讀到最後，小媳婦把被子蓋上去，忽然很想哭。',{conversation:true});
+ assert.equal(r.response.status,200);
+ assert.deepEqual(r.data.turns.filter(x=>x.role==='teacher').map(x=>x.content),[reply],'the reply is saved for the student');
+ assert.equal(r.data.partial,null);assert.equal(r.data.state.objectives.find(o=>o.domain==='read').status,'not_yet_observed','a non-verified acknowledgement is not credited');
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='readAcknowledged'").get().n,0);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='response_unconfirmed'").get().n,0);
+ const rejected=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().details_json);
+ assert.equal(rejected.credited,false);assert.deepEqual(rejected.parts,[{part:'originalEvidence',code:'reading_acknowledgement_not_verified'}]);
+});
