@@ -582,13 +582,15 @@ test('formal late replies cannot write a grade after same-attempt reconciliation
   assert.equal(f.sql.prepare('SELECT state FROM dialogue_calls').get().state,'review');
  }finally{f.close();}
 });
-test('a source-ledger write failure rolls back final dialogue, cost reconciliation and grade together',async()=>{
+test('a source-ledger write failure rolls back final dialogue and grade together while the known provider cost stays settled',async()=>{
  const f=fixture();try{
   f.sql.exec("CREATE TRIGGER synthetic_fail BEFORE INSERT ON evidence_outbox BEGIN SELECT RAISE(ABORT,'synthetic write failure'); END;");
   await handleDialogue(req(formalBody(),poem.lessonId),f.env,student,null,formalOptions(f,async()=>formalResult()));
   assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_turns').get().n,1);
   assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,1);
-  assert.equal(f.sql.prepare('SELECT state FROM dialogue_calls').get().state,'review');assert.equal(f.sql.prepare('SELECT accounted_micros FROM dialogue_calls').get().accounted_micros,null);
+  // The provider answered with reported usage, so its cost is known and settled even though nothing was graded or recorded.
+  const call=f.sql.prepare('SELECT state,accounted_micros,usage_json FROM dialogue_calls').get();assert.equal(call.state,'review');assert.equal(call.accounted_micros,5);assert(call.usage_json);
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_interactions').get().n,0);
  }finally{f.close();}
 });
 test('budget-blocked formal draft retains exact original fields and cannot become an ordinary dialogue by losing its metadata',async()=>{

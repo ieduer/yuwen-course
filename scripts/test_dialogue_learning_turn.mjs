@@ -665,6 +665,22 @@ test('conversation keeps the author reply when an optional proposal part fails v
  assert.equal(rejected.credited,false);assert.deepEqual(rejected.parts,[{part:'originalEvidence',code:'reading_acknowledgement_not_verified'}]);
 });
 
+test('a reply that fails validation still settles the provider cost that is known, with no learning credit; unknown usage keeps the reserve',async t=>{
+ const f=fixture(t,'lesson-1498');const data=await f.read();
+ f.options.callModel=async()=>({value:{reply:'x'.repeat(5000),assessments:[]},model:'gemini-test',usage:{promptTokenCount:100,totalTokenCount:500}});
+ const r=await f.send(data,'我讀到「江畔何人初見月」。',{conversation:true});assert.equal(r.response.status,200);
+ const call=f.sql.prepare('SELECT state,accounted_micros,reserved_micros,usage_json FROM dialogue_calls').get();
+ assert.equal(call.state,'review','the reply stays unconfirmed');assert.equal(call.accounted_micros,5,'100 input + 400 output tokens at the synthetic prices (10,000 µ$/M) = 5 µ$, not the reservation');
+ assert.ok(call.accounted_micros<call.reserved_micros);assert.deepEqual(JSON.parse(call.usage_json),{promptTokenCount:100,totalTokenCount:500});
+ assert.equal(JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='response_unconfirmed'").get().details_json).accountedMicros,5);
+ for(const table of ['dialogue_assessments','learning_interactions'])assert.equal(f.sql.prepare(`SELECT COUNT(*) n FROM ${table}`).get().n,0,'no learning credit on a failed reply');
+ const g=fixture(t,'lesson-1498');const d2=await g.read();
+ g.options.callModel=async()=>({value:{reply:'',assessments:[]},model:'gemini-test'});
+ assert.equal((await g.send(d2,'第二個學生的話。',{conversation:true})).response.status,200);
+ const c2=g.sql.prepare('SELECT state,accounted_micros,reserved_micros FROM dialogue_calls').get();
+ assert.equal(c2.state,'review');assert.equal(c2.accounted_micros,null,'no usage observed: the cost stays unknown and the reservation keeps counting (COALESCE)');
+});
+
 test('a readable reply with a missing or malformed assessments field is kept; the field is dropped and recorded, nothing is credited',async t=>{
  for(const assessments of [undefined,{objectiveId:'x'},'none',Array.from({length:9},()=>({objectiveId:'x'}))]){
   const f=fixture(t,'lesson-1498');const data=await f.read();
