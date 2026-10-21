@@ -43,7 +43,7 @@ async function fixture({inputKind='text',hash='#lesson-189',post,get,logout,init
  };
  const context=vm.createContext({PALETTES,originalRange,dialogueReadingAsset,window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},history:{state:null,replaceState(_state,_title,url){context.location.hash=url;}},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,dialogueIdentity,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:firstReading||(()=>({dispose(){}})),localStorage:{},getSelection:()=>null});
  vm.runInContext(document.getElementById('dialogue-initial-load').textContent,context);
- vm.runInContext(script+'\nglobalThis.frontend={displayWorkTitle,renderPlates,materialText,update,refresh,refreshReadingMarks,clearPrivateView,view,renderSourceResults,renderOriginalMaterials,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
+ vm.runInContext(script+'\nglobalThis.frontend={setAutoFollow(v){autoFollow=v;},isFollowing(){return autoFollow;},renderPartial,acknowledgeObjectives,setStatus,displayWorkTitle,renderPlates,materialText,update,refresh,refreshReadingMarks,clearPrivateView,view,renderSourceResults,renderOriginalMaterials,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
  beforeReady?.(document,window);
  for(let i=0;i<8&&!calls.some(c=>c.url.startsWith('/api/'));i++)await tick();await tick();
  return {document,window,calls,timers,downloads,frontend:context.frontend,context,setData:value=>{data=value;},get data(){return data;},get posts(){return calls.filter(c=>c.options.method==='POST').map(c=>JSON.parse(c.options.body));},answer(value){document.getElementById('answer').value=value;document.getElementById('answer').oninput();},send:()=>document.getElementById('compose').onsubmit({preventDefault(){}})};
@@ -533,14 +533,14 @@ test('progress line reports the stage with elapsed seconds and server-based cove
   return new Promise(resolve=>{release=()=>resolve(new Response(frame('saved',{saved:true,turnId:'t1',mutationId:body.mutationId,revision:data.revision+1,createdAt:'2026-10-19T00:00:00Z'})+frame('delta',{turnId:'t1',text:'請再指出一處原文。'})+frame('done',{turnId:'t1'}),{headers:{'content-type':'text/event-stream'}}));});
  }});
  const progress=f.document.getElementById('progress'),stop=f.document.getElementById('stop');
- assert.equal(progress.hidden,false);assert.match(progress.textContent,/本課目標：1／2 項已有伺服器評估/);assert.doesNotMatch(progress.textContent,/%|預計/);
+ assert.equal(progress.hidden,false);assert.match(progress.textContent,/本課目標：1／2 項已由伺服器評估確認/);assert.doesNotMatch(progress.textContent,/%|預計/);
  f.answer('我注意到原句的對照。');const sent=f.send();
  for(let i=0;i<4&&!release;i++)await tick();
  assert.equal(stop.hidden,false);assert.match(progress.textContent,/正在保存你的回應/);assert.match(progress.textContent,/已 0 秒/);
  release();await sent;
  assert.equal(stop.hidden,true);assert.match(progress.textContent,/這一輪已保存/);assert.equal(f.posts.length,1);
  const settle=[...f.timers.values()].filter(t=>t.delay===4000);assert.equal(settle.length,1);settle[0].cb();
- assert.match(progress.textContent,/本課目標：1／2 項已有伺服器評估/);assert.doesNotMatch(progress.textContent,/%|預計/);
+ assert.match(progress.textContent,/本課目標：1／2 項已由伺服器評估確認/);assert.doesNotMatch(progress.textContent,/%|預計/);
 });
 
 test('stop ends only the display: one POST, an explicit status, and the readback continues without a resend',async()=>{
@@ -639,4 +639,57 @@ test('conversation flow renders only the non-scoring self-rating original task a
  ]){const g=await fixture({conversation:true,initial});assert.equal(g.document.getElementById('source-draft').hidden,true,JSON.stringify(initial));assert.equal(g.document.querySelectorAll('#source-draft form').length,0);assert.equal(g.posts.length,0);}
  // The structured flow is unchanged: the evaluation original still renders only when no learning turn is open.
  const structured=await fixture({initial:{originalTask:evaluation,learningTurn:null}});assert.equal(structured.document.getElementById('source-draft').hidden,false);assert.equal(structured.document.querySelectorAll('#source-draft form').length,1);
+});
+
+// ---- 2026-10-21 conversation candidate (B1–B5) ----
+const keyEvent=(overrides={})=>({key:'Enter',shiftKey:false,altKey:false,metaKey:false,ctrlKey:false,isComposing:false,keyCode:13,prevented:false,preventDefault(){this.prevented=true;},...overrides});
+
+test('B3: Enter sends once; Shift+Enter keeps a newline; an IME composition and an empty composer never send; a second Enter while in flight is ignored',async()=>{
+ let release=null;
+ const f=await fixture({post:(body,{data,setData})=>new Promise(resolve=>{release=()=>{setData({...data,revision:data.revision+1,turns:[...data.turns,{id:'t1',role:'student',content:body.content,mutationId:body.mutationId,createdAt:'2026-10-21T00:00:00Z'}]});resolve(Response.json(data));};})});
+ const answer=f.document.getElementById('answer');
+ const shift=keyEvent({shiftKey:true});answer.onkeydown(shift);assert.equal(shift.prevented,false);assert.equal(f.posts.length,0);
+ const empty=keyEvent();answer.onkeydown(empty);await tick();assert.equal(empty.prevented,true);assert.equal(f.posts.length,0);
+ f.answer('第一句理解');
+ const composing=keyEvent({isComposing:true});answer.onkeydown(composing);await tick();assert.equal(composing.prevented,false);assert.equal(f.posts.length,0);
+ const ime229=keyEvent({keyCode:229});answer.onkeydown(ime229);await tick();assert.equal(f.posts.length,0);
+ answer.onkeydown(keyEvent());for(let i=0;i<6&&!release;i++)await tick();
+ assert.equal(f.posts.length,1);
+ answer.onkeydown(keyEvent());answer.onkeydown(keyEvent({metaKey:true}));await tick();await tick();
+ assert.equal(f.posts.length,1,'duplicate Enter while in flight must not send again');
+ release();await tick();await tick();await tick();
+ assert.equal(f.document.getElementById('send').getAttribute('aria-label'),'送出（Enter）');
+});
+
+test('B1: status messages share one compact dock; real errors keep an alert role until the next message',async()=>{
+ const f=await fixture();const status=f.document.getElementById('status');
+ assert.ok(status.closest('.status-dock'));assert.ok(f.document.getElementById('progress').closest('.status-dock'));
+ f.frontend.setStatus('連線中斷，已讀回保存紀錄；AI 不會自動重跑。',{error:true});
+ assert.equal(status.getAttribute('role'),'alert');assert.ok(status.classList.contains('status-error'));
+ f.frontend.setStatus('已恢復伺服器保存的待送草稿；尚未呼叫 AI。');
+ assert.equal(status.getAttribute('role'),'status');assert.equal(status.classList.contains('status-error'),false);
+});
+
+test('B2: a streamed reply is followed while the reader is at the latest position; after scrolling away a single return control appears',async()=>{
+ const f=await fixture();
+ f.frontend.renderPartial({turnId:'t9',content:'回應的第一段',status:'streaming'});
+ assert.equal(f.document.getElementById('latest-jump'),null);
+ f.frontend.setAutoFollow(false);
+ f.frontend.renderPartial({turnId:'t9',content:'回應的第一段，第二段',status:'streaming'});
+ const jump=f.document.getElementById('latest-jump');assert.ok(jump);assert.equal(jump.hidden,false);assert.match(jump.textContent,/回到最新/);
+ jump.onclick();assert.equal(jump.hidden,true);assert.equal(f.frontend.isFollowing(),true);
+ assert.equal(f.document.getElementById('partial-reply').textContent.includes('第二段'),true);
+});
+
+test('B5: objectives render in friendly groups from server statuses and a newly confirmed objective is acknowledged once; nothing is confirmed client-side',async()=>{
+ const objectives=[{id:'r1',label:'讀完全文',domain:'read',status:'demonstrated'},{id:'v1',label:'「慍」',domain:'vocabulary',status:'needs_practice'},{id:'l1',label:'三詞',domain:'legacy',status:'not_yet_observed'},{id:'s1',label:'尚友',domain:'shangyou',status:'not_yet_observed'}];
+ const f=await fixture({initial:{state:{next:null,objectives,completion:'in_progress'}}});
+ const progress=f.document.getElementById('progress');
+ assert.match(progress.textContent,/本課目標：1／3 項已由伺服器評估確認/);assert.match(progress.textContent,/先讀完全文 1／1/);assert.match(progress.textContent,/字詞 0／1（待：「慍」）/);assert.match(progress.textContent,/本課要求 0／1/);assert.doesNotMatch(progress.textContent,/尚友/);
+ const status=f.document.getElementById('status');const before=status.textContent;
+ f.frontend.update({...f.data,state:{...f.data.state,objectives:objectives.map(o=>o.id==='v1'?{...o,status:'reformulated'}:o)}});
+ assert.equal(status.textContent,before,'a non-confirmed status change is not celebrated');
+ f.frontend.update({...f.data,state:{...f.data.state,objectives:objectives.map(o=>o.id==='v1'?{...o,status:'demonstrated'}:o)}});
+ assert.match(status.textContent,/太好了——「「慍」」已由伺服器評估確認。還有 1 項/);
+ assert.match(progress.textContent,/本課目標：2／3 項已由伺服器評估確認/);
 });

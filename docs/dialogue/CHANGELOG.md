@@ -71,3 +71,9 @@ Preserve four classical textbook guidance blocks as labelled references while ex
 
 - Fixed the existing Reading API fixture to copy both newly imported Worker modules. Its isolated local D1 run passes all 74 assertions; the first CI failure was a missing fixture module, not a student-data migration.
 - Regenerated the existing formal artifact baseline with the standard local build/check scripts after adding the pilot files. This is build evidence, not release authority.
+
+## 2026-10-21 — conversation candidate (branch claude/yw-conversation-b1b5-20261021, on accepted 165e2aa)
+
+- Frontend (`site/assets/dialogue.js`, `dialogue.html`, `dialogue.css`): one compact status dock above the composer (`setStatus`; errors keep `role=alert`); the author's reply is followed while it streams and a single 「有新回應 · 回到最新」 control appears once the reader scrolls away; Enter sends, Shift/Alt+Enter inserts a newline, IME composition never sends, empty and in-flight sends are blocked, the send button is labelled; objectives are shown in friendly groups from server statuses only and a newly confirmed objective (demonstrated/preserved by a saved server evaluation) is acknowledged once. One interface label states that the author voice is an educational reconstruction.
+- Server: optional retrieval of verified passages from the author's other works (`site/dialogue-author-corpus.js`) added to the conversation prompt only when an `AUTHOR_CORPUS` D1 binding exists (not configured; separate access decision).
+- Policy (separate commit, needs a reviewed policy bridge before release): `POLICY` v12 — first-person author persona without repeated AI disclaimers, honest when asked; `SOURCE_AUTHOR_REPLY_POLICY` aligned.
