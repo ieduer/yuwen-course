@@ -18,6 +18,14 @@ let correctionTarget=null,correctionMutation=null,sharedHistory=null,originalDra
 let composerDraft=null,lessonIndex=null,materialMode='annotated',readingNotes=null;
 const conversationFlow=document.body.dataset.dialogueFlow==='conversation';
 let curriculum, snapshot, generation=0, selected=null, pending=null, pendingDraft=null, pollTimer=null, lastFocus=null, ownerRef=null;
+// inflight: the submission currently awaiting the server (never persisted). draftMutationId: the receipt id an unsent
+// draft keeps so that a later send of the same text reuses it. navigationOverride: the lesson the student may switch to
+// after a failed device save, by choosing the same lesson a second time.
+let inflight=null, draftMutationId=null, navigationOverride=null;
+function restrictionText(error){
+ const when=error?.resetsAt&&Number.isFinite(Date.parse(error.resetsAt))?new Intl.DateTimeFormat('zh-Hant-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hour12:false,timeZoneName:'short'}).format(new Date(error.resetsAt)):'';
+ return `${error?.message||'本輪未呼叫 AI。'}${when?`（${when} 後恢復）`:''}${error?.retryable===false?'':' 文字留在輸入框，可切換篇目或稍後再送。'}`;
+}
 const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 // B1: one compact status dock above the composer. Plain messages are polite status; real errors keep an alert role and stay until the next action.
 function setStatus(text,{error=false}={}){const s=$('status');if(!s)return;s.textContent=text||'';s.classList.toggle('status-error',!!error&&!!text);s.setAttribute('role',error&&text?'alert':'status');}
@@ -72,7 +80,7 @@ const api=async(body,cursor,records=false,onEvent,correctionsFor,shared=false,fi
  const value=await response.json().catch(()=>{throw Error('伺服器回應未完整讀取；請保留文字，讀回紀錄再繼續。');});current();
  if(expectedOwner&&value.ownerRef&&expectedOwner!==value.ownerRef){clearPrivateView({preserveReading:true});ownerRef=null;queueMicrotask(()=>void refresh());throw Object.assign(new Error('帳戶已切換，已清除舊紀錄；請重新查看或匯出。'),{code:'account_changed'});}
  if(!response.ok&&value.code==='account_changed'){clearPrivateView({preserveReading:true});ownerRef=null;queueMicrotask(()=>void refresh());}
- if(!response.ok)throw Object.assign(new Error(value.message||value.error||'暫時無法連線，文字仍保留在本頁。'),{status:response.status,code:value.code,draftSaved:value.draftSaved});return value;
+ if(!response.ok)throw Object.assign(new Error(value.message||value.error||'暫時無法連線，文字仍保留在本頁。'),{status:response.status,code:value.code,draftSaved:value.draftSaved,scope:value.scope,retryable:value.retryable,resetsAt:value.resetsAt});return value;
 };
 function renderPartial(partial){
  let n=document.getElementById('partial-reply');
@@ -492,19 +500,21 @@ function draftKey(){return ownerRef&&curriculum?`yw-dialogue-draft:${ownerRef}:$
 function persistComposer(){
  const key=draftKey();if(!key)return false;
  try{
-  if(!hasComposerDraft()&&!pending){window.localStorage.removeItem(key);window.sessionStorage.removeItem(key);$('draft-status').textContent='';return true;}
-  window.localStorage.setItem(key,JSON.stringify({version:1,curriculumVersion:curriculum.curriculumVersion,content:$('answer').value,composerDraft,selected,pending,pendingDraft}));
+  if(!hasComposerDraft()){window.localStorage.removeItem(key);window.sessionStorage.removeItem(key);$('draft-status').textContent='';return true;}
+  window.localStorage.setItem(key,JSON.stringify({version:1,curriculumVersion:curriculum.curriculumVersion,content:$('answer').value,composerDraft,selected,mutationId:pending?.mutationId||draftMutationId||null}));
   $('draft-status').textContent='草稿已保存在此裝置；離開後可繼續。';return true;
  }catch{$('draft-status').textContent='此瀏覽器無法保存草稿；離開前請先複製文字。';return false;}
 }
 function restoreComposer(){
- const key=draftKey();if(!key||hasComposerDraft()||pending)return;
+ const key=draftKey();if(!key||hasComposerDraft()||inflight)return;
  try{
   const draft=JSON.parse(window.localStorage.getItem(key)||window.sessionStorage.getItem(key)||'null');
   if(!draft||draft.version!==1||typeof draft.content!=='string'||draft.content.length>3000)return;
-  if(draft.pending&&snapshot?.turns?.some(t=>t.role==='student'&&t.mutationId===draft.pending.mutationId)){window.localStorage.removeItem(key);window.sessionStorage.removeItem(key);return;}
-  $('answer').value=draft.content;composerDraft=draft.composerDraft||null;
-  if(draft.curriculumVersion===curriculum.curriculumVersion){selected=draft.selected||null;pending=draft.pending||null;pendingDraft=draft.pendingDraft??null;}
+  const receipt=draft.mutationId||draft.pending?.mutationId||null;
+  // A draft whose text the server already holds as a turn is not a draft any more; a restored page never has a request in flight.
+  if(receipt&&snapshot?.turns?.some(t=>t.role==='student'&&t.mutationId===receipt)){window.localStorage.removeItem(key);window.sessionStorage.removeItem(key);return;}
+  $('answer').value=draft.content;composerDraft=draft.composerDraft||null;draftMutationId=receipt;
+  if(draft.curriculumVersion===curriculum.curriculumVersion){selected=draft.selected||null;}
   else if(composerDraft)composerDraft={...composerDraft,taskId:'restored-older-curriculum'};
   if(selected){$('quote').textContent=selected.text;$('quote').hidden=false;}
   $('draft-status').textContent='已恢復此帳戶在此裝置的草稿；尚未送出。';
@@ -512,8 +522,13 @@ function restoreComposer(){
 }
 function switchLesson(id){
  if(id===curriculum?.lessonId)return true;
- if(pending||originalDraft||hasFirstReadDraft()||(hasComposerDraft()&&!persistComposer())){$('lesson').value=curriculum.lessonId;setStatus('請先完成保存中的作答，或複製尚未保存的文字，再切換篇目。');return false;}
- $('lesson').value=id;void loadLesson();return true;
+ const stay=()=>{$('lesson').value=curriculum.lessonId;return false;};
+ if(inflight){setStatus('這一輪正在送出；送出完成後即可切換篇目。');return stay();}
+ if(originalDraft||hasFirstReadDraft()){setStatus('請先完成保存中的作答，或複製尚未保存的文字，再切換篇目。');return stay();}
+ if(hasComposerDraft()&&!persistComposer()){
+  if(navigationOverride!==id){navigationOverride=id;setStatus('此瀏覽器無法保存草稿：請先複製輸入框的文字；再選一次同一篇即放棄這段草稿並切換。',{error:true});return stay();}
+ }
+ navigationOverride=null;$('lesson').value=id;void loadLesson();return true;
 }
 // Fragment navigation (including Back/Forward) uses the same draft guard as the catalogue.
 window.addEventListener('hashchange',()=>{
@@ -665,6 +680,7 @@ function update(data){
  ownerRef=data.ownerRef||ownerRef;renderAccount();
  $('lesson-outcome').textContent=data.state?.completion==='owner_approved_supplement'?`${data.state.completionLabel||'已通過（補充篇目）'}。這是課程擁有者對補充篇目的決定，不新增分數。`:'';
  if(data.resumeCurriculum && data.resumeCurriculum.curriculumVersion!==curriculum.curriculumVersion){curriculum=data.resumeCurriculum;renderText();}
+ if(!pending&&draftMutationId&&data.turns?.some(t=>t.role==='student'&&t.mutationId===draftMutationId)){draftMutationId=null;if($('answer').value.trim()){$('answer').value='';selected=null;composerDraft=null;$('quote').hidden=true;}persistComposer();}
  if(pending && data.turns?.some(t=>t.role==='student' && t.mutationId===pending.mutationId)){
   if($('answer').value===pendingDraft){$('answer').value='';selected=null;composerDraft=null;$('quote').hidden=true;persistComposer();}
   if(pending.action==='original')originalDraft=null;pending=null;pendingDraft=null;persistComposer();
@@ -733,20 +749,20 @@ async function composeSubmit(){
   setStatus('正在核對上一輪是否送達；本頁新文字保留。');
   await refresh(gen);if(pending)return;
  }
- pending||={mutationId:crypto.randomUUID(),revision:snapshot.revision,content,questionId:snapshot.question?.id||null,...(conversationFlow?{conversation:true,taskId}:task?{taskId:task.taskId,...input}:{})};
+ pending||={mutationId:draftMutationId||crypto.randomUUID(),revision:snapshot.revision,content,questionId:snapshot.question?.id||null,...(conversationFlow?{conversation:true,taskId}:task?{taskId:task.taskId,...input}:{})};
  pendingDraft=$('answer').value;
  await sendTurn(pending,pendingDraft,gen);
 }
 async function sendTurn(submitted,submittedDraft,gen=generation){
- persistComposer();
- $('send').disabled=true;setStatus('正在保存你的回應…');progress('saving');$('stop').hidden=false;
+ inflight=submitted;persistComposer();
+ $('send').disabled=true;$('record-receipt').textContent='';setStatus('正在保存你的回應…');progress('saving');$('stop').hidden=false;
  for(const input of $('task-input').querySelectorAll('input'))input.disabled=true;
  try{
   let visibleReply=submitted.action==='continue'?snapshot?.partial?.content||'':'';
   const result=await api(submitted,null,false,(event,data)=>{
    if(gen!==generation)return;
    if(event==='saved'){
-    if(pending===submitted){pending=null;pendingDraft=null;}
+    if(pending===submitted){pending=null;pendingDraft=null;}draftMutationId=null;
     if(submittedDraft!==null&&$('answer').value===submittedDraft){$('answer').value='';selected=null;composerDraft=null;$('quote').hidden=true;persistComposer();}
     snapshot={...snapshot,revision:data.revision,pending:true};
     if(!data.continuation){renderTurns([{id:data.turnId,role:'student',content:submitted.content,status:'saved',createdAt:data.createdAt}]);autoFollow=true;scrollToLatest(true);}
@@ -768,11 +784,15 @@ async function sendTurn(submitted,submittedDraft,gen=generation){
   progress('');
   if(error.code==='stale_revision'||error.code==='turn_in_progress'||error.code==='learning_task_changed'||error.status===400){
    pending=null;pendingDraft=null;persistComposer();await refresh(gen);setStatus(error.message,{error:true});
-  }else if(error.draftSaved){setStatus(error.message,{error:true});}
+  }else if(error.draftSaved){
+   // The server kept nothing (no turn, no AI call): the text is an unsent draft that keeps its receipt id; nothing is in flight.
+   if(pending===submitted){pending=null;pendingDraft=null;}draftMutationId=submitted.mutationId;persistComposer();
+   await refresh(gen);if(gen!==generation)return;setStatus(restrictionText(error),{error:true});
+  }
   else if(error.code==='account_changed'||error.status===401||error.status===404){clearPrivateView({preserveReading:true});ownerRef=null;await refresh();}
   else{await refresh(gen);if(gen!==generation)return;setStatus(error.code?error.message:pending?'尚未確認保存；文字保留在本頁。重送會使用同一回執。':'連線中斷，已讀回保存紀錄；AI 不會自動重跑。',{error:true});if(snapshot?.pending)waitForReply(gen);}
   $('send').disabled=!ownerRef||!snapshot||!!snapshot.pending||(conversationFlow?['unavailable','exemption'].includes(snapshot?.learningTurn?.kind):snapshot?.learningTurn?.inputKind==='none'||!!(composerDraft&&snapshot?.learningTurn&&composerDraft.taskId!==snapshot.learningTurn.taskId));
- }
+ }finally{if(inflight===submitted)inflight=null;}
 }
 const hasFirstReadDraft=()=>[...$('first-reading').querySelectorAll('textarea,input')].some(input=>input.value.trim());
 function autoGrowComposer(){const a=$('answer');try{a.style.height='auto';a.style.height=Math.min(Math.max(a.scrollHeight,44),220)+'px';}catch{}}

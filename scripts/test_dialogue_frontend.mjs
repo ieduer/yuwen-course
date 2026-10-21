@@ -714,3 +714,39 @@ test('lesson details show the deterministic lesson score and per-task status; a 
  assert.equal(f.document.getElementById('status').textContent,'已確認：通讀正文，+13 分（本課 26／100）');
  assert.equal(f.document.getElementById('lesson-details-summary').textContent,'本課 26／100 分 · 目標 2／2');
 });
+
+test('a budget-denied send leaves nothing in flight: the text stays with its receipt id, navigation works both ways, the restriction names the reset time once',async()=>{
+ const storage=new Map();
+ const f=await fixture({conversation:true,storage,post:()=>Response.json({code:'daily_call_budget_exhausted',scope:'daily',retryable:true,canSave:true,canExport:true,draftSaved:true,resetsAt:'2026-10-22T00:00:00Z',message:'本輪尚未呼叫 AI；文字已保存，可於每日額度恢復後繼續，歷史紀錄不受影響。'},{status:429})});
+ f.answer('額度已滿時寫的話');await f.send();await tick();
+ const status=f.document.getElementById('status').textContent;
+ assert.match(status,/本輪尚未呼叫 AI/);assert.match(status,/後恢復/);assert.match(status,/切換篇目/);
+ assert.equal(f.document.getElementById('answer').value,'額度已滿時寫的話','the text stays in the composer');
+ assert.equal(vm.runInContext('pending',f.context),null);assert.equal(vm.runInContext('inflight',f.context),null);
+ const mutationId=f.posts[0].mutationId;assert.equal(vm.runInContext('draftMutationId',f.context),mutationId);
+ const record=JSON.parse(storage.get('yw-dialogue-draft:owner-a:lesson-189'));assert.equal(record.mutationId,mutationId);assert.equal('pending' in record,false,'no in-flight object is persisted');
+ assert.equal(f.document.getElementById('progress').hidden,true);assert.equal(f.document.getElementById('record-receipt').textContent,'');assert.equal(f.document.getElementById('send').disabled,false);
+ assert.equal(vm.runInContext('switchLesson("lesson-190")',f.context),true,'navigation is not trapped');
+ for(let i=0;i<6;i++)await tick();assert.equal(vm.runInContext('curriculum.lessonId',f.context),'lesson-190');
+ assert.equal(vm.runInContext('switchLesson("lesson-189")',f.context),true);for(let i=0;i<6;i++)await tick();
+ assert.equal(f.document.getElementById('answer').value,'額度已滿時寫的話','the draft comes back with its lesson');assert.equal(vm.runInContext('draftMutationId',f.context),mutationId);
+ await f.send();await tick();assert.equal(f.posts.at(-1).mutationId,mutationId,'a later send of the same draft reuses the receipt id');
+});
+
+test('an old device record that still carries an in-flight object restores as a plain draft: no lock after reload',async()=>{
+ const storage=new Map([['yw-dialogue-draft:owner-a:lesson-189',JSON.stringify({version:1,curriculumVersion:'v1',content:'昨天留下的文字',composerDraft:null,selected:null,pending:{mutationId:'m-old',content:'昨天留下的文字'},pendingDraft:'昨天留下的文字'})]]);
+ const f=await fixture({conversation:true,storage,curriculumOverrides:{curriculumVersion:'v1'}});for(let i=0;i<4;i++)await tick();
+ assert.equal(f.document.getElementById('answer').value,'昨天留下的文字');assert.equal(vm.runInContext('pending',f.context),null);assert.equal(vm.runInContext('inflight',f.context),null);
+ assert.equal(vm.runInContext('draftMutationId',f.context),'m-old','the receipt id survives');
+ assert.equal(vm.runInContext('switchLesson("lesson-190")',f.context),true);
+});
+
+test('a genuine device-storage failure is not a dead end: the first switch explains, the second switch of the same lesson proceeds',async()=>{
+ const broken={get:()=>null,set:()=>{throw new Error('QuotaExceededError');},delete:()=>{}};
+ const f=await fixture({conversation:true,storage:broken});
+ f.answer('無法保存的文字');
+ assert.match(f.document.getElementById('draft-status').textContent,/無法保存草稿/);
+ assert.equal(vm.runInContext('switchLesson("lesson-190")',f.context),false);assert.match(f.document.getElementById('status').textContent,/再選一次同一篇/);
+ assert.equal(vm.runInContext('switchLesson("lesson-191")',f.context),false,'a different lesson asks again');
+ assert.equal(vm.runInContext('switchLesson("lesson-191")',f.context),true,'the same lesson chosen twice proceeds');
+});
