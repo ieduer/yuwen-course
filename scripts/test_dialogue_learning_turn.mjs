@@ -665,6 +665,31 @@ test('conversation keeps the author reply when an optional proposal part fails v
  assert.equal(rejected.credited,false);assert.deepEqual(rejected.parts,[{part:'originalEvidence',code:'reading_acknowledgement_not_verified'}]);
 });
 
+test('a read acknowledgement and an author assessment in the same turn are both recorded as their own source events; a rejected assessment leaves a visible notice',async t=>{
+ const f=fixture(t,'lesson-1717-p2');
+ const words='初讀三詞：清、淡、空。清是文字清朗，淡是情感不濃烈卻綿長，空是結尾留下的空落。',message=`我整篇讀完了。${words}`;
+ const target=f.curriculum.objectives.find(o=>o.id.endsWith(':interaction:contextWords')).id;
+ let badScore=false;
+ const model=async(_env,prompt)=>{const d=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=d.recent.filter(t=>t.role==='student').at(-1);
+  return {value:{reply:'讀完了這句我記下。三個詞各有分別，這一項我給 78 分。',assessments:[],originalEvidence:{objectiveId:'lesson-1717-p2:read',evidence:{turnId:turn.id,quote:'我整篇讀完了'}},formalAssessments:[{objectiveId:target,fields:{words:{turnId:turn.id,quote:words}},score:badScore?120:78,verdict:'三詞各有分別',strength:'能由字句支持',gap:'空可再具體',nextQuestion:'哪一句最空？'}]},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ f.options.callModel=model;
+ const r=await f.send(await f.read(),message,{conversation:true});assert.equal(r.response.status,200);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().n,0,'nothing rejected');
+ assert.deepEqual(f.sql.prepare("SELECT interaction_key FROM learning_interactions ORDER BY interaction_key").all().map(x=>x.interaction_key),['contextWords','readAcknowledged'],'two source events from one turn');
+ assert.deepEqual(f.sql.prepare("SELECT event_type FROM dialogue_events WHERE event_type IN ('original_source_saved','source_assessment_saved') ORDER BY event_type").all().map(x=>x.event_type),['original_source_saved','source_assessment_saved']);
+ assert.deepEqual(r.data.sourceSubmissions.filter(s=>s.status==='confirmed').map(s=>s.objectiveId).sort(),[target,'lesson-1717-p2:read'].sort(),'both submissions readable with their own request');
+ assert.equal(r.data.sourceSubmissions.find(s=>s.objectiveId===target).score,78);
+ assert.equal(r.data.state.objectives.find(o=>o.id===target).status,'preserved');assert.equal(r.data.state.objectives.find(o=>o.id==='lesson-1717-p2:read').status,'preserved');
+ assert.equal(r.data.state.score.earned,26,'context 13 + read 13');assert.equal(r.data.statusNotice,null);
+ badScore=true;
+ const g=fixture(t,'lesson-1717-p2');g.options.callModel=model;
+ const r2=await g.send(await g.read(),message,{conversation:true});assert.equal(r2.response.status,200);
+ assert.equal(g.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='contextWords'").get().n,0,'an invalid score records nothing');
+ assert.equal(g.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='readAcknowledged'").get().n,1,'the read acknowledgement still records');
+ assert.match(JSON.parse(g.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().details_json).parts[0].code,/invalid_formal_score/);
+ assert.match(r2.data.statusNotice||'',/未能記錄/,'the student sees that the announced assessment was not recorded');
+});
+
 test('the author assesses an original formal item in its own reply: recorded through the source pipeline with provenance, counted in the lesson score, one model call; the score question gets the lesson score',async t=>{
  const f=fixture(t,'lesson-1717-p2');
  const words='初讀三詞：清、淡、空。清是文字清朗，淡是情感不濃烈卻綿長，空是結尾留下的空落。';
@@ -676,7 +701,7 @@ test('the author assesses an original formal item in its own reply: recorded thr
  assert.equal(r.response.status,200);assert.equal(prompts.length,1,'the author scored inside its own reply; no second evaluator call');
  const sub=r.data.sourceSubmissions.find(s=>s.objectiveId.endsWith(':interaction:contextWords'));assert.equal(sub?.status,'confirmed');assert.equal(sub.score,78);
  const ev=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_assessment_saved'").get().details_json);
- assert.equal(ev.scoringProvenance.by,'conversation-author');assert.equal(ev.scoringProvenance.policyVersion,'yw-dialogue-policy-v13');assert.equal(ev.assessment.score,78);assert.match(ev.scoringProvenance.promptSha256,/^[a-f0-9]{64}$/);
+ assert.equal(ev.scoringProvenance.by,'conversation-author');assert.equal(ev.scoringProvenance.policyVersion,'yw-dialogue-policy-v14');assert.equal(ev.assessment.score,78);assert.match(ev.scoringProvenance.promptSha256,/^[a-f0-9]{64}$/);
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='contextWords'").get().n,1);
  const led=f.sql.prepare('SELECT raw_value,correctness,eligibility_status FROM learning_evaluations').get();assert.equal(led.raw_value,78);assert.equal(led.correctness,'passed');assert.equal(led.eligibility_status,'eligible');
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().n,0);
