@@ -7,7 +7,7 @@ import vm from 'node:vm';
 import {parseHTML} from 'linkedom';
 import {LIMITS,projectState} from '../site/dialogue-policy.js';
 import {learningTurn} from '../site/dialogue-learning-turn.js';
-import {dialogueOpening,dialogueIdentity} from '../site/dialogue-opening.js';
+import {dialogueOpening,dialogueIdentity,authorVoice} from '../site/dialogue-opening.js';
 import {readDialogueEvents} from '../site/assets/dialogue-events.js';
 
 const html=readFileSync(new URL('../site/dialogue.html',import.meta.url),'utf8');
@@ -41,7 +41,7 @@ async function fixture({inputKind='text',hash='#lesson-189',post,get,logout,init
   }
   const result=get?get(url,data):data;return result instanceof Response?result:Response.json(result);
  };
- const context=vm.createContext({PALETTES,originalRange,dialogueReadingAsset,window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},history:{state:null,replaceState(_state,_title,url){context.location.hash=url;}},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,dialogueIdentity,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:firstReading||(()=>({dispose(){}})),localStorage:{},getSelection:()=>null});
+ const context=vm.createContext({PALETTES,originalRange,dialogueReadingAsset,window,document,fetch,URLSearchParams,URL:FixtureURL,Response,AbortController,AbortSignal,Blob,crypto,location:{hash},authorVoice,history:{state:null,replaceState(_state,_title,url){context.location.hash=url;}},performance:{mark(){}},queueMicrotask,setTimeout:(cb,delay)=>{timers.set(++timer,{cb,delay});return timer;},clearTimeout:id=>timers.delete(id),dialogueOpening,dialogueIdentity,readDialogueEvents,readBrowserHistory:()=>({status:'not_found'}),openFirstReading:firstReading||(()=>({dispose(){}})),localStorage:{},getSelection:()=>null});
  vm.runInContext(document.getElementById('dialogue-initial-load').textContent,context);
  vm.runInContext(script+'\nglobalThis.frontend={setAutoFollow(v){autoFollow=v;},isFollowing(){return autoFollow;},renderPartial,acknowledgeObjectives,setStatus,displayWorkTitle,renderPlates,materialText,update,refresh,refreshReadingMarks,clearPrivateView,view,renderSourceResults,renderOriginalMaterials,quotePassage,revealTurn,renderCurriculum(value){curriculum=value;snapshot={...snapshot,readingGate:{phase:"close_reading"}};renderText();},get pending(){return pending;},get composerDraft(){return composerDraft;},get snapshot(){return snapshot;}};',context);
  beforeReady?.(document,window);
@@ -692,4 +692,15 @@ test('B5: objectives render in friendly groups from server statuses and a newly 
  f.frontend.update({...f.data,state:{...f.data.state,objectives:objectives.map(o=>o.id==='v1'?{...o,status:'demonstrated'}:o)}});
  assert.match(status.textContent,/太好了——「「慍」」已由伺服器評估確認。還有 1 項/);
  assert.match(progress.textContent,/本課目標：2／3 項已由伺服器評估確認/);
+});
+
+test('opening carries a source-grounded author introduction built from curriculum data',async()=>{
+ const frontMatter=[{type:'quote',blocks:[{type:'paragraph',runs:[{type:'text',text:'（一九二七年七月）朱自清\n\n选自《朱自清全集》第一卷（江苏教育出版社1988年版）。'}]}]}];
+ const f=await fixture({conversation:true,curriculumOverrides:{author:'朱自清',title:'荷塘月色',persona:{kind:'author-simulation'},frontMatter}});
+ const next=f.document.getElementById('next').textContent;
+ assert.match(next,/我是朱自清/);assert.match(next,/是教學對話，不是作者本人/);assert.match(next,/教材出處：选自《朱自清全集》第一卷/);
+ assert.equal(f.document.querySelectorAll('#next .author-intro').length,1);
+ const guide=await fixture({conversation:true,curriculumOverrides:{author:'教材學習引導',title:'單元導讀',persona:{kind:'curriculum-guide'}}});
+ assert.equal(guide.document.querySelectorAll('#next .author-intro').length,0);
+ assert.equal(guide.document.getElementById('persona-label').hidden,true);
 });

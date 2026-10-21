@@ -1,6 +1,6 @@
 import {PALETTES} from './dialogue-palettes.js?v=a846366df3f1c133';
 import {originalRange,dialogueReadingAsset} from '../dialogue-reading-material.js?v=4735efcb1a2af88a';
-import {dialogueOpening,dialogueIdentity} from '../dialogue-opening.js?v=e7aeb2b0bf74cc7f';
+import {dialogueOpening,dialogueIdentity,authorVoice} from '../dialogue-opening.js?v=e7aeb2b0bf74cc7f';
 import {readDialogueEvents} from './dialogue-events.js?v=a7e6a9d3cf526331';
 import {readBrowserHistory} from './dialogue-history.js?v=4e50ee7bee866e26';
 import {openFirstReading} from './dialogue-first-read.js?v=04d04aafd8657321';
@@ -108,6 +108,16 @@ function renderEvidence(report){
  for(const o of report.student.remaining)box.append(node('p',`${o.status==='pending_calibration'?'待校準（不影響本課完成，可請老師覆核）':o.status==='historical_review'?'原有完成已保留，版本對應待核對':o.status==='review'?'待覆核':'尚待觀察'}：${o.label}`));
 }
 function view(name){document.querySelector('.workspace').dataset.view=name;for(const id of ['text','conversation'])$(id+'-tab').setAttribute('aria-pressed',String(id===name));}
+// Source-grounded introduction shown with the opening: identity, era (literary taxonomy), the textbook's own source line
+// (front matter 选自/選自…) and the honest persona notice. Built from curriculum data only; nothing is generated.
+function frontMatterText(b){return Array.isArray(b)?b.map(frontMatterText).join('\n'):b?.runs?b.runs.map(r=>r.text||'').join(''):b?.blocks?frontMatterText(b.blocks):'';}
+function authorIntroduction(curriculum){
+ const identity=dialogueIdentity(curriculum);if(identity.kind==='source-guide')return '';
+ const voice=authorVoice(curriculum),era=voice?.era?`（${voice.era}）`:'';
+ const sentence=frontMatterText(curriculum.frontMatter||[]).split(/[。\n]/).map(x=>x.trim()).find(x=>/[选選]自|[节節][选選]自|出自/.test(x))||'';
+ const source=sentence?`教材出處：${sentence.replace(/^[（(].*?[）)]\s*/,'').slice(0,90)}。`:'';
+ return `${identity.name}${era}的回應依其作品、教材注釋與可靠來源重構，是教學對話，不是作者本人；引文以原注為準，未核實處會說明待核實。${source}`;
+}
 function authorAvatar(){
  const identity=dialogueIdentity(curriculum),box=node('span',undefined,'author-avatar');box.setAttribute('aria-hidden','true');box.append(node('b',identity.name.slice(0,1)));
  if(identity.portraitUrl){const img=node('img');img.src=identity.portraitUrl;img.alt='';img.loading='lazy';img.onerror=()=>img.remove();box.append(img);}return box;
@@ -513,7 +523,7 @@ function renderLearningTurn(data){
   $('send').disabled=!!data.pending||['unavailable','exemption'].includes(task?.kind);$('answer').disabled=$('send').disabled;
   const hasTeacher=data.turns?.some(t=>t.role==='teacher'&&t.model!=='source-owned');
   $('next').hidden=hasTeacher;
-  if(!hasTeacher)$('next').replaceChildren(authorAvatar(),node('small',dialogueIdentity(curriculum).name),node('p',dialogueOpening(curriculum).content));
+  if(!hasTeacher){$('next').replaceChildren(authorAvatar(),node('small',dialogueIdentity(curriculum).name),node('p',dialogueOpening(curriculum).content));const intro=authorIntroduction(curriculum);if(intro)$('next').append(node('small',intro,'author-intro'));}
   return;
  }
 
