@@ -35,15 +35,22 @@ function scrollToLatest(force=false){
 }
 // A new author reply is brought into view from its first line (not its last) so a long reply reads top-down; while the
 // reader has deliberately scrolled into older messages the view stays put and the indicator appears instead.
-let lastRevealed=null;
+let lastRevealed=null,programmaticScroll=false;
+// Anchor the start of the reply at the top of the thread view. While the reply streams and the thread grows, the view
+// moves down only until the first line of the reply sits at the top; it never jumps to the last line.
+function anchorReply(el){
+ const t=thread();if(!t||!el)return;
+ try{const max=Math.max(0,(Number(t.scrollHeight)||0)-(Number(t.clientHeight)||0)),desired=Math.min(Math.max(0,(Number(el.offsetTop)||0)-12),max);
+  if(desired>(Number(t.scrollTop)||0)+1){programmaticScroll=true;t.scrollTop=desired;}}catch{}
+}
+function startVisible(el){const t=thread();if(!t||!el)return false;const top=Number(el.offsetTop)||0,seen=Number(t.scrollTop)||0;return top>=seen-4&&top<seen+(Number(t.clientHeight)||0);}
 function revealReply(el,force=false){
- if(!el)return;if(lastRevealed===el&&!force)return;
+ if(!el)return;
  if(!force&&!autoFollow){showLatestJump(true);return;}
- const t=thread();if(!t)return;lastRevealed=el;
- try{const top=Math.max(0,(Number(el.offsetTop)||0)-(Number(t.offsetTop)||0)-12);t.scrollTop=top;}catch{}
- showLatestJump(false);
+ lastRevealed=el;anchorReply(el);showLatestJump(false);
 }
 $('latest-jump').onclick=()=>{autoFollow=true;scrollToLatest(true);};
+thread()?.addEventListener?.('scroll',()=>{if(programmaticScroll){programmaticScroll=false;return;}autoFollow=nearLatest()||startVisible(lastRevealed);if(autoFollow)showLatestJump(false);},{passive:true});
 // The panel is as tall as the viewport minus the space above it, so the composer is on screen without scrolling the page;
 // once the page is scrolled past that space the sticky panel grows to the full viewport height.
 function fitConversationPanel(){
@@ -52,7 +59,6 @@ function fitConversationPanel(){
   document.documentElement.style.setProperty('--panel-offset',Math.round(offset)+'px');}catch{}
 }
 window.addEventListener?.('scroll',fitConversationPanel,{passive:true});window.addEventListener?.('resize',fitConversationPanel);
-thread()?.addEventListener?.('scroll',()=>{autoFollow=nearLatest();if(autoFollow)showLatestJump(false);},{passive:true});
 const api=async(body,cursor,records=false,onEvent,correctionsFor,shared=false,firstReading=false,sessions=false,extra=null)=>{
  const gen=generation,expectedOwner=ownerRef;
  const current=()=>{if(gen!==generation)throw Object.assign(new Error('帳戶或篇目已切換，已忽略舊回應。'),{code:'stale_context'});};
@@ -73,7 +79,7 @@ function renderPartial(partial){
  if(!n){n=node('div',undefined,'turn teacher');n.id='partial-reply';n.append(node('small'),node('span'));$('turns').append(n);}
  n.dataset.turnId=partial.turnId;n.querySelector('small').textContent=partial.status==='unconfirmed'?(partial.disposition?.received?'回應已收到但未通過核驗 · 已保留文字，尚未計入評閱':'回應中斷 · 已保留文字，尚未計入評閱'):'正在回應…';n.querySelector('span').textContent=partial.content;
  n.querySelector('button')?.remove();
- revealReply(n);if(!autoFollow)showLatestJump(true);
+ if(lastRevealed===n){if(autoFollow)anchorReply(n);else showLatestJump(true);}else revealReply(n);
  if(partial.continuation?.allowed&&!snapshot?.pending){
   const button=node('button',partial.continuation.code==='explicit_regeneration_available'?'重新生成回應':'續答');button.type='button';
   button.onclick=async()=>{
@@ -413,7 +419,7 @@ function renderTurns(turns,prepend=false,{preserveScroll=false}={}){
  const added=prepend?[]:[...fragment.childNodes],firstReply=added.find(n=>n.classList?.contains('teacher'));
  if(prepend){$('turns').prepend(fragment);$('turn-review-list').prepend(records);}else{$('turns').append(fragment);$('turn-review-list').append(records);}
  if(!added.length)return;
- if(preserveScroll){try{const t=thread();if(t)t.scrollTop=keep;}catch{}return;}
+ if(preserveScroll){try{const t=thread();if(t)t.scrollTop=keep;}catch{} if(firstReply&&autoFollow){lastRevealed=firstReply;anchorReply(firstReply);}return;}
  if(initial)scrollToLatest(true);else if(firstReply)revealReply(firstReply);else scrollToLatest();
 }
 function clearPrivateView({preserveReading=false}={}){reconnectNeeded=false;closeExpandedPlate?.();persistComposer();generation++;streamAbort?.abort();streamAbort=null;continuationRequest=null;
@@ -646,7 +652,7 @@ function renderTargets(state){
  if(!targets.length){box.hidden=true;return;}
  const progress=state.progress||{confirmed:targets.filter(t=>t.status==='confirmed').length,total:targets.length};
  $('lesson-details-summary').textContent=`學習目標與進度 ${progress.confirmed}／${progress.total}`;
- for(const t of targets){const li=node('li');li.dataset.status=t.status;li.dataset.targetId=t.id;li.append(node('span',`${t.status==='confirmed'?'✓ ':''}${t.label}`),node('small',t.status==='confirmed'?'已確認':`${TARGET_STATUS[t.status]||t.status}${t.aim?' · '+t.aim:''}`));list.append(li);}
+ for(const t of targets){const li=node('li');li.dataset.status=t.status;li.dataset.targetId=t.id;const partial=t.status==='in_progress'&&t.routes?.total>1&&t.routes.confirmed>0;const detail=t.status==='confirmed'?'已確認':partial?(CONFIRMED_STATUSES.includes(t.routes.dialogue?.status)?'對話證據已確認；原判準評閱待完成（在對話中自然完成）':'原判準評閱已完成；對話證據待補'):`${TARGET_STATUS[t.status]||t.status}${t.aim?' · '+t.aim:''}`;li.append(node('span',`${t.status==='confirmed'?'✓ ':''}${t.label}`),node('small',detail));list.append(li);}
  box.hidden=false;
 }
 function progressTick(){renderProgressLine();if(['saving','generating','streaming'].includes(progressStage))progressTimer=setTimeout(progressTick,1000);}

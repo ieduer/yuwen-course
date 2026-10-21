@@ -18,11 +18,14 @@ function acknowledged(turn,quote){return explicitStatement(turn,quote)&&[finishe
 // Teaching focus is not a lock on other already demonstrated participation.
 // Only the existing source-owned, non-scoring read receipt is independent of
 // the current question. Original graded tasks keep their existing eligibility.
-export function conversationOriginalTasks(curriculum,state,guide){
+export function conversationOriginalTasks(curriculum,state,guide,original=null){
  if(state.legacyCompletion||state.readingGate&&state.readingGate.phase!=='close_reading')return [];
  const read=curriculum.objectives.find(o=>o.domain==='read'&&state.objectives.some(s=>s.id===o.id&&!['preserved','historical_review'].includes(s.status)));
  const tasks=guide&&(['evaluation','vocabulary'].includes(guide.kind)||guide.kind==='read'&&guide.objectiveId===read?.id)?[guide]:[];
  if(read&&!tasks.some(t=>t.objectiveId===read.id))tasks.push({kind:'read',objectiveId:read.id});
+ // The original answer-key item of an already demonstrated word is reachable from the conversation at any point
+ // (out-of-order progress), not only after every other dialogue question has been issued and answered.
+ if(original&&['vocabulary','evaluation'].includes(original.kind)&&!tasks.some(t=>t.objectiveId===original.objectiveId))tasks.push(original);
  return tasks;
 }
 export function validateReadingEvidence(proposed,{turns,asset,state,lessonId,turnId}){

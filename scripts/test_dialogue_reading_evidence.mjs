@@ -64,3 +64,13 @@ test('ordinary conversational ratings and choices preserve the reason without in
  assert.equal(r.input.rating,85);assert.equal(r.input.reason,rating);
  const choice='我選A，因為這個解釋更符合前後文。';assert.equal(original({objectiveId:'v',evidence:evidence('A')},{...context(choice),task:{kind:'vocabulary',objectiveId:'v',options:['第一','第二']}}).input.selectedIndex,0);
 });
+
+test('the original answer-key item of a demonstrated word is reachable from the conversation while another question is issued',()=>{
+ const curriculum={objectives:[{id:'lesson-x:read',domain:'read'},{id:'lesson-x:v01',domain:'vocabulary'},{id:'legacy:effect:lesson-x:vocab:lesson-x:v01',domain:'legacy'}]};
+ const state={objectives:[{id:'lesson-x:read',status:'preserved'},{id:'lesson-x:v01',status:'demonstrated'},{id:'legacy:effect:lesson-x:vocab:lesson-x:v01',status:'not_yet_observed'}],readingGate:null};
+ const guide={kind:'dialogue',objectiveId:'lesson-x:v02',questionId:'q-2'};
+ const original={objectiveId:'legacy:effect:lesson-x:vocab:lesson-x:v01',kind:'vocabulary',itemId:'lesson-x:v01',question:'「已」的意思是',options:['已经','停止'],source:'人生代代无穷已'};
+ assert.deepEqual(conversationOriginalTasks(curriculum,state,guide),[]);
+ assert.deepEqual(conversationOriginalTasks(curriculum,state,guide,original),[original]);
+ assert.deepEqual(conversationOriginalTasks(curriculum,{...state,legacyCompletion:true},guide,original),[]);
+});

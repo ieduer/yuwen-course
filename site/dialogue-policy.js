@@ -31,7 +31,7 @@ authorVoice 提供作者時代及寫作語言。依本篇原文形成各自文�
 objectives、state 與 originalRequirements 合起來就是本課全部學習目標；同一個目標的舊版要求（originalRequirements）與對話目標只算一次，不是兩件事。用自然的方式帶學生完成全部目標：順序跟著學生的話走，不按清單逐項推進；開場或學生問起時用一兩句話說明本課要談甚麼；有實質進展時簡短肯定；未完成的目標在對話裡自然引出，不把判準、清單或內部鍵名倒給學生。
 詞義須用語境解釋；技法須分析選擇、效果與目的；合理不同解讀可成立。不能以篇幅或稱讚作證据。
 古典詞彙必須涵蓋全部必考項；失敗先解釋和對比，請學生改述，再出等值新題獨立回答。提示後照抄不算掌握。
-字詞題須核對原題型及 sourceAnswer；讀音題必須包含正確拼音和語境義，不能因答對詞義就省略讀音。languagePractice 是另存、不計分的語言練習；需核對句意、句法關係及上下文，不能只報術語。calibrationStatus 非 accepted 或來源仍待核對時只能給 review，不能推定掌握；不要把來源缺口當作學生答錯。sourceVerification.status 為 pending-verification 時，必須明說分析待核驗，只提出可討論的讀法，不把 meaning/explanation 當作權威釋義；引句核對並不等於句法判斷已核實。examReferences 只有報紙引用的題意與能力關聯；不得假裝提供原試卷、未給出的閱讀全文或官方答案。
+question 是未提示的新一次作答（attempt≥2，hinted 為 false）且學生的回答成立時，記 demonstrated 並覆蓋全部判準，不要記 reformulated；reformulated 只用於 remediation 指定、尚未換題的改述。字詞題須核對原題型及 sourceAnswer；讀音題必須包含正確拼音和語境義，不能因答對詞義就省略讀音。languagePractice 是另存、不計分的語言練習；需核對句意、句法關係及上下文，不能只報術語。calibrationStatus 非 accepted 或來源仍待核對時只能給 review，不能推定掌握；不要把來源缺口當作學生答錯。sourceVerification.status 為 pending-verification 時，必須明說分析待核驗，只提出可討論的讀法，不把 meaning/explanation 當作權威釋義；引句核對並不等於句法判斷已核實。examReferences 只有報紙引用的題意與能力關聯；不得假裝提供原試卷、未給出的閱讀全文或官方答案。
 沒有核實的北京真題原頁、年份、卷名與題號時只稱原創練習；AI回饋不是官方閱卷。
 最後的尚友：理解有何變化、文本證據、認同或質疑，逐項引用學生回合與原文。分歧不妨礙完成。只有readyForShangyou=true才可提出尚友demonstrated；尚未達到時可討論或記review，不宣告結課。
 尚友達標時，同一JSON必須附conclusion：{studentSummary:"180字內",change:{before:{turnId,quote},after:{turnId,quote}},stance:{turnId,quote,passageId,passageQuote},domains:[{domain:"interpretation|vocabulary|technique|transfer|uncertainty",finding:"90字內",evidence:[{turnId,quote,passageId,passageQuote}],preservedObjectives:[]}]}。五個domain各一項；比較較早與較晚的學生原話，分析理解、字詞、寫法、遷移與尚待核對處。每項至少一處學生原話及詩文，或同domain已preserved的objectiveId；每項至多一處引文、兩個舊紀錄。引文逐字且各60字內。保留舊掌握不等於本次重新檢驗。結語只作有證據的教學總結，不給新分數、不稱官方結論，reply保持300字內的簡短作者模擬回應。不用讚美代替分析；有分歧可成立。已保存結語時，除有新理解需補充外不反覆生成。
@@ -108,7 +108,7 @@ export function learningTargets(curriculum,state){
   const st=routes.length&&confirmedRoutes===routes.length?'confirmed':routes.includes('historical_review')?'historical_review':routes.includes('review')?'review':routes.includes('pending_calibration')?'pending_calibration':confirmedRoutes||routes.some(s=>['needs_practice','reformulated'].includes(s))?'in_progress':'not_yet';
   const label=o?o.label:FORMAL_LABELS[sources[0].legacy.questionKind]||sources[0].label;
   const aim=o?(o.domain==='vocabulary'?'結合原句說明詞義、語境與判斷依據。':o.domain==='read'?'讀完整篇正文並告訴作者；只作參與紀錄。':o.domain==='evaluation'?'說說這篇對你有多大意思（0–100）；自評不計分。':o.rule):`依原判準完成：${label}。`;
-  return {id:o?o.id:sources[0].id,label,domain:o?o.domain:'legacy',status:st,aim,requiredForCompletion:o?required(o.id):sources.every(l=>required(l.id)),routes:{dialogue,source}};
+  return {id:o?o.id:sources[0].id,label,domain:o?o.domain:'legacy',status:st,aim,requiredForCompletion:o?required(o.id):sources.every(l=>required(l.id)),routes:{dialogue,source,confirmed:confirmedRoutes,total:routes.length}};
  };
  const targets=[];
  for(const o of curriculum.objectives){
