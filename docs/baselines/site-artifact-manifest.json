@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1489,
-  "totalBytes": 204912407,
-  "aggregateSha256": "28faadd5d7dfd4d9f5f30ba81f4dba32169f03a6ff9d860310c571dcb40bd680",
+  "totalBytes": 204915122,
+  "aggregateSha256": "98f0b4d5c395d510fb49929f97cf465a84e0fe3805283365403ee572771ba5bf",
   "files": [
     {
       "path": "_headers",
@@ -162,8 +162,8 @@
     },
     {
       "path": "_worker.js/dialogue-formal.js",
-      "bytes": 20241,
-      "sha256": "69374ee2b328bea1c4e7b514bc21318e834ba148f6409fa90c68ea6b700bdf8e"
+      "bytes": 22100,
+      "sha256": "7a9395c4c5bbdad550e7d629316ece9330b693efd6d8297c96b2c57002313caa"
     },
     {
       "path": "_worker.js/dialogue-full-language-packet.json.js",
@@ -262,8 +262,8 @@
     },
     {
       "path": "_worker.js/dialogue-source.js",
-      "bytes": 115779,
-      "sha256": "c80c889db456cf08bc11ee8d28473b2dae69422ad0cc95dedf894e503ac635be"
+      "bytes": 116635,
+      "sha256": "e43141d9bc7cf3a493c75387df2453612e3fa9a4c18289022a6078b38f097095"
     },
     {
       "path": "_worker.js/dialogue-stream.js",
@@ -363,7 +363,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "0f9b9befc629850caef1fa95a14435fbc6581f60b7fe1c9644146ea0d93e5e22"
+      "sha256": "62bbd3b058cdeb1e47c6998897d3d6d2b5740c200fef646b594473e1a6606acd"
     },
     {
       "path": "app-content/latest-stable.json",
