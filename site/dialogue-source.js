@@ -747,8 +747,12 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   // Only the student's conversation path keeps the reply; structured turns and isolated acceptance / diagnostic
   // admissions keep failing closed so their evidence and failure records are unchanged.
   const lenient=body.conversation===true&&!budget.isolatedAdmission;
+  // A readable reply whose structured assessments field is missing or malformed keeps the reply: the field is dropped,
+  // nothing is credited for it, and the rejection is recorded (conversation path only; isolated admissions fail closed).
+  let candidate=result.value;
+  if(lenient&&candidate&&typeof candidate.reply==='string'&&candidate.reply.trim()&&candidate.reply.length<=LIMITS.replyChars&&(!Array.isArray(candidate.assessments)||candidate.assessments.length>8)){rejectedParts.push({part:'assessments',code:'invalid_assessments_shape'});candidate={...candidate,assessments:[]};}
   let proposal;
-  try{proposal=validateWith(result.value);}
+  try{proposal=validateWith(candidate);}
   catch(error){
    if(!lenient||!LENIENT_PROPOSAL_CODES.has(error?.message))throw error;
    const first=partCode(error);

@@ -665,6 +665,18 @@ test('conversation keeps the author reply when an optional proposal part fails v
  assert.equal(rejected.credited,false);assert.deepEqual(rejected.parts,[{part:'originalEvidence',code:'reading_acknowledgement_not_verified'}]);
 });
 
+test('a readable reply with a missing or malformed assessments field is kept; the field is dropped and recorded, nothing is credited',async t=>{
+ for(const assessments of [undefined,{objectiveId:'x'},'none',Array.from({length:9},()=>({objectiveId:'x'}))]){
+  const f=fixture(t,'lesson-1498');const data=await f.read();
+  f.options.callModel=async()=>({value:{reply:'這句寫得好，我們接著看下一句。',...(assessments===undefined?{}:{assessments})},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}});
+  const r=await f.send(data,'我讀到「江畔何人初見月」。',{conversation:true});assert.equal(r.response.status,200);
+  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='response_unconfirmed'").get().n,0,'the reply is not discarded');
+  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_turns WHERE role='teacher' AND content='這句寫得好，我們接著看下一句。'").get().n,1);
+  assert.equal(JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().details_json).parts[0].code,'invalid_assessments_shape');
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_assessments').get().n,0,'nothing credited');
+ }
+});
+
 test('end to end: a correct original choice quoted with option words containing 别 is recorded once through the original pipeline; a repeat adds nothing',async t=>{
  const f=fixture(t,'lesson-1498');let data=await f.read();
  f.options.callModel=async()=>({value:{reply:'我們先讀這一句。',assessments:[]},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}});
