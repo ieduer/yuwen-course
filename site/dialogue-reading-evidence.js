@@ -55,9 +55,11 @@ export function validateReadingEvidence(proposed,{turns,asset,state,lessonId,tur
   if(!asset||(!notes&&state?.submitted)||ref.quote.length>600)throw Error('reading_mark_not_available');
   const p=asset.paragraphs.find(p=>p.key===proposed.paragraphKey);
   let quoted=proposed.selectedText;
-  if(!p||typeof quoted!=='string'||!quoted.trim()||quoted.length>120)throw Error('reading_selection_not_verified');
-  if(!student.content.includes(quoted)){quoted=studentSpanFor(student.content,quoted,p.text);if(!quoted)throw Error('reading_selection_not_verified');}
-  const text=unpunctuated(quoted);if(!text)throw Error('reading_selection_not_verified');
+  const detail={operation:'mark',paragraphKey:String(proposed.paragraphKey??'').slice(0,80),paragraphKnown:!!p,selectedText:typeof quoted==='string'?quoted.slice(0,120):null,selectedInStudent:typeof quoted==='string'&&student.content.includes(quoted)};
+  const refuse=code=>Object.assign(Error(code),{detail});
+  if(!p||typeof quoted!=='string'||!quoted.trim()||quoted.length>120)throw refuse('reading_selection_not_verified');
+  if(!student.content.includes(quoted)){quoted=studentSpanFor(student.content,quoted,p.text);if(!quoted)throw refuse('reading_selection_not_verified');}
+  const text=unpunctuated(quoted);if(!text)throw refuse('reading_selection_not_verified');
   const start=p.text.indexOf(text);if(start<0||p.text.indexOf(text,start+1)>=0)throw Error('reading_selection_ambiguous');
   if(state?.marks?.some(m=>m.paragraphKey===p.key&&start<m.endOffset&&start+text.length>m.startOffset))throw Error('reading_original_mark_preserved');
   return {operation:'mark',payload:{...common,paragraphKey:p.key,startOffset:start,endOffset:start+text.length,selectedText:text,guess:ref.quote},evidence:ref};

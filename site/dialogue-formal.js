@@ -117,6 +117,15 @@ export function validateFormalDraft(curriculum, turns, proposed) {
   const formal=prepareFormalInput(curriculum,{objectiveId:objective.id,input});
   return {formal,label:FORMAL_LABELS[kind],rule:formalRubric(kind,curriculum.mode),references};
 }
+// The original source refuses every result of a classical lesson before its unpunctuated first read, and a vocabulary or
+// syntax study-guide result before the annotated reading as well (assertClassicalFirstReadGate). A pending draft waits for
+// them instead of being sent to a certain refusal; it stays the student's saved answer.
+export function sourceDraftReady(curriculum,readingGate,draft){
+  if(curriculum?.mode!=='classical'||!readingGate||readingGate.preservedCompletion)return true;
+  if(readingGate.phase==='initial_reading')return false;
+  if(readingGate.phase!=='annotated_reading'||draft?.formal?.interaction!=='studyGuideItemCompleted')return true;
+  return !['vocabulary','syntax'].includes(curriculum.studyGuide?.find(i=>i.itemKey===draft.formal.input?.itemKey)?.competencyTag);
+}
 // yw-study-reveal-followup-v1. The author's turn showed the complete reference of exactly one eligible study-guide item
 // and the student's next turn declares its answer, but the reply carried no sourceDraft: the student's own words are
 // proposed as that item's draft by the same validator a model proposal goes through. Nothing is scored here; the draft is

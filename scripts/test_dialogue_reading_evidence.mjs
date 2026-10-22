@@ -163,3 +163,26 @@ test('no study-guide draft is derived from a question, an undeclared remark, a p
  assert.equal(revealFollowupDraft(c,done,followupTurns(followupAnswer),'b2'),null,'a preserved result is not reopened');
  assert.equal(revealFollowupDraft(c,{legacyCompletion:{},objectives:[]},followupTurns(followupAnswer),'b2'),null,'a completed lesson is not reopened');
 });
+test('a source draft waits for the classical first read, and a vocabulary or syntax study item also for the annotated reading',async()=>{
+ const {sourceDraftReady}=await import('../site/dialogue-formal.js');
+ const c={mode:'classical',studyGuide:[{itemKey:'v',competencyTag:'vocabulary'},{itemKey:'s',competencyTag:'syntax'},{itemKey:'r',competencyTag:'comprehension'}]};
+ const study=itemKey=>({formal:{interaction:'studyGuideItemCompleted',input:{itemKey}}}),legacy={formal:{interaction:'authorQuestion',input:{}}};
+ assert.equal(sourceDraftReady({mode:'modern'},{phase:'initial_reading'},study('v')),true,'modern lessons have no first-read gate');
+ assert.equal(sourceDraftReady(c,null,study('v')),true);
+ for(const d of [study('v'),study('r'),legacy])assert.equal(sourceDraftReady(c,{phase:'initial_reading'},d),false);
+ assert.equal(sourceDraftReady(c,{phase:'annotated_reading'},study('v')),false);assert.equal(sourceDraftReady(c,{phase:'annotated_reading'},study('s')),false);
+ assert.equal(sourceDraftReady(c,{phase:'annotated_reading'},study('r')),true);assert.equal(sourceDraftReady(c,{phase:'annotated_reading'},legacy),true);
+ for(const d of [study('v'),study('r'),legacy])assert.equal(sourceDraftReady(c,{phase:'close_reading'},d),true);
+ assert.equal(sourceDraftReady(c,{phase:'close_reading',preservedCompletion:true},study('v')),true);
+});
+test('a rejected reading mark records which selection failed, so the cause is provable without the raw proposal',()=>{
+ const s={id:'s1',role:'student',content:'「遂散六国之从」，這裡的「从」是什麼意思？'};
+ const assetC={textVersionId:'v',textDigest:'d',paragraphs:[{key:'p1',text:'遂散六国之从使之西面事秦'}]};
+ const err=(p)=>{try{reading(p,{turns:[s],asset:assetC,state:{},lessonId:'l',turnId:'s1'});}catch(e){return e;}assert.fail('expected a refusal');};
+ const one=err({operation:'mark',paragraphKey:'p1',selectedText:'從',evidence:{turnId:'s1',quote:'這裡的「从」是什麼意思？'}});
+ assert.equal(one.message,'reading_selection_not_verified');assert.deepEqual(one.detail,{operation:'mark',paragraphKey:'p1',paragraphKnown:true,selectedText:'從',selectedInStudent:false});
+ const key=err({operation:'mark',paragraphKey:'p9',selectedText:'遂散六国之从',evidence:{turnId:'s1',quote:'這裡的「从」是什麼意思？'}});
+ assert.equal(key.detail.paragraphKnown,false);assert.equal(key.detail.selectedInStudent,true);
+ const ok=reading({operation:'mark',paragraphKey:'p1',selectedText:'遂散六國之從',evidence:{turnId:'s1',quote:'這裡的「从」是什麼意思？'}},{turns:[s],asset:assetC,state:{},lessonId:'l',turnId:'s1'});
+ assert.equal(ok.payload.selectedText,'遂散六国之从','a five-of-six-character transcription is taken from the student\'s own words');
+});
