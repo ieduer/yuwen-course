@@ -45,6 +45,20 @@ export function studentSpanFor(content,transcribed,paragraph){
  }
  return found.size===1?[...found][0]:null;
 }
+// A proposal may name a key that is not this asset's paragraph key (for example a curriculum passage id). The selection
+// then decides alone: the student's own words (or their one same-length span, as in studentSpanFor) must occur, without
+// punctuation, exactly once in exactly one paragraph of this asset; anything else is refused as before.
+export function locateSelection(paragraphs,content,transcribed){
+ const own=String(content||''),hits=[];
+ for(const p of Array.isArray(paragraphs)?paragraphs:[]){
+  const quoted=own.includes(transcribed)?transcribed:studentSpanFor(own,transcribed,p.text);
+  if(!quoted)continue;
+  const text=unpunctuated(quoted);if(!text)continue;
+  const at=p.text.indexOf(text);if(at<0||p.text.indexOf(text,at+1)>=0)continue;
+  hits.push({paragraph:p,quoted});
+ }
+ return hits.length===1?hits[0]:null;
+}
 export function validateReadingEvidence(proposed,{turns,asset,state,lessonId,turnId}){
  if(!proposed)return null;
  const ref=proposed.evidence,student=turns.find(t=>t.id===ref?.turnId&&t.role==='student');
@@ -53,11 +67,12 @@ export function validateReadingEvidence(proposed,{turns,asset,state,lessonId,tur
  const notes=asset?.kind==='conversation-reading';
  if(proposed.operation==='mark'){
   if(!asset||(!notes&&state?.submitted)||ref.quote.length>600)throw Error('reading_mark_not_available');
-  const p=asset.paragraphs.find(p=>p.key===proposed.paragraphKey);
+  let p=asset.paragraphs.find(p=>p.key===proposed.paragraphKey);
   let quoted=proposed.selectedText;
   const detail={operation:'mark',paragraphKey:String(proposed.paragraphKey??'').slice(0,80),paragraphKnown:!!p,selectedText:typeof quoted==='string'?quoted.slice(0,120):null,selectedInStudent:typeof quoted==='string'&&student.content.includes(quoted)};
   const refuse=code=>Object.assign(Error(code),{detail});
-  if(!p||typeof quoted!=='string'||!quoted.trim()||quoted.length>120)throw refuse('reading_selection_not_verified');
+  if(typeof quoted!=='string'||!quoted.trim()||quoted.length>120)throw refuse('reading_selection_not_verified');
+  if(!p){const located=locateSelection(asset.paragraphs,student.content,quoted);if(!located)throw refuse('reading_selection_not_verified');p=located.paragraph;quoted=located.quoted;}
   if(!student.content.includes(quoted)){quoted=studentSpanFor(student.content,quoted,p.text);if(!quoted)throw refuse('reading_selection_not_verified');}
   const text=unpunctuated(quoted);if(!text)throw refuse('reading_selection_not_verified');
   const start=p.text.indexOf(text);if(start<0||p.text.indexOf(text,start+1)>=0)throw Error('reading_selection_ambiguous');

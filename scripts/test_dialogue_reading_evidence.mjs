@@ -181,8 +181,31 @@ test('a rejected reading mark records which selection failed, so the cause is pr
  const err=(p)=>{try{reading(p,{turns:[s],asset:assetC,state:{},lessonId:'l',turnId:'s1'});}catch(e){return e;}assert.fail('expected a refusal');};
  const one=err({operation:'mark',paragraphKey:'p1',selectedText:'從',evidence:{turnId:'s1',quote:'這裡的「从」是什麼意思？'}});
  assert.equal(one.message,'reading_selection_not_verified');assert.deepEqual(one.detail,{operation:'mark',paragraphKey:'p1',paragraphKnown:true,selectedText:'從',selectedInStudent:false});
- const key=err({operation:'mark',paragraphKey:'p9',selectedText:'遂散六国之从',evidence:{turnId:'s1',quote:'這裡的「从」是什麼意思？'}});
- assert.equal(key.detail.paragraphKnown,false);assert.equal(key.detail.selectedInStudent,true);
+ const key=err({operation:'mark',paragraphKey:'p9',selectedText:'散秦',evidence:{turnId:'s1',quote:'這裡的「从」是什麼意思？'}});
+ assert.equal(key.message,'reading_selection_not_verified');assert.equal(key.detail.paragraphKnown,false);assert.equal(key.detail.selectedInStudent,false);
  const ok=reading({operation:'mark',paragraphKey:'p1',selectedText:'遂散六國之從',evidence:{turnId:'s1',quote:'這裡的「从」是什麼意思？'}},{turns:[s],asset:assetC,state:{},lessonId:'l',turnId:'s1'});
  assert.equal(ok.payload.selectedText,'遂散六国之从','a five-of-six-character transcription is taken from the student\'s own words');
+});
+
+test('r28: an unknown paragraph key is resolved by the student\'s own selection only when it is unique across the asset',()=>{
+ // The C1 case: the model named the curriculum passage id instead of the first-read asset's paragraph key.
+ const assetC={textVersionId:'v',textDigest:'d',paragraphs:[{key:'cfrp:lesson-1743-p1:ed058676f092ce5b:01',text:'臣闻吏议逐客窃以为过矣'},{key:'cfrp:lesson-1743-p1:ed058676f092ce5b:02',text:'遂散六国之从使之西面事秦功施到今'}]};
+ const s={id:'s1',role:'student',content:'「遂散六国之从」，這裡的「从」是什麼意思？'};
+ const ctx={turns:[s],asset:assetC,state:{},lessonId:'lesson-1743-p1',turnId:'s1'};
+ const ok=reading({operation:'mark',paragraphKey:'lesson-1743-p1:p2',selectedText:'遂散六国之从',evidence:{turnId:'s1',quote:'這裡的「从」是什麼意思？'}},ctx);
+ assert.equal(ok.payload.paragraphKey,'cfrp:lesson-1743-p1:ed058676f092ce5b:02');assert.equal(ok.payload.selectedText,'遂散六国之从');assert.equal(ok.payload.startOffset,0);
+ // A transcription in another script still comes from the student's own words.
+ assert.equal(reading({operation:'mark',paragraphKey:'p2',selectedText:'遂散六國之從',evidence:{turnId:'s1',quote:'這裡的「从」是什麼意思？'}},ctx).payload.selectedText,'遂散六国之从');
+ const refuse=(p,c=ctx)=>{try{reading(p,c);}catch(e){return e;}assert.fail('expected a refusal');};
+ // Present in two paragraphs: no unique location, refused with the diagnostic detail.
+ const twice={...assetC,paragraphs:[...assetC.paragraphs,{key:'x3',text:'遂散六国之从而已'}]};
+ const two=refuse({operation:'mark',paragraphKey:'p2',selectedText:'遂散六国之从',evidence:{turnId:'s1',quote:'這裡的「从」是什麼意思？'}},{...ctx,asset:twice});
+ assert.equal(two.message,'reading_selection_not_verified');assert.equal(two.detail.paragraphKnown,false);
+ // Not the student's words and no same-length span of them in any paragraph.
+ assert.equal(refuse({operation:'mark',paragraphKey:'p2',selectedText:'功施到今',evidence:{turnId:'s1',quote:'這裡的「从」是什麼意思？'}}).message,'reading_selection_not_verified');
+ // Twice inside one paragraph is not unique either.
+ const inner={...assetC,paragraphs:[{key:'k1',text:'不亦说乎不亦乐乎'}]},s2={id:'s1',role:'student',content:'「不亦」是什麼意思？'};
+ assert.equal(refuse({operation:'mark',paragraphKey:'zz',selectedText:'不亦',evidence:{turnId:'s1',quote:'「不亦」是什麼意思？'}},{...ctx,turns:[s2],asset:inner}).message,'reading_selection_not_verified');
+ // A known key keeps the existing rules (ambiguity inside the named paragraph stays reading_selection_ambiguous).
+ assert.throws(()=>reading({operation:'mark',paragraphKey:'k1',selectedText:'不亦',evidence:{turnId:'s1',quote:'「不亦」是什麼意思？'}},{...ctx,turns:[s2],asset:inner}),/ambiguous/);
 });
