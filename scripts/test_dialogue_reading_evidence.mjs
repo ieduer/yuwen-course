@@ -28,6 +28,20 @@ for(const content of ['已讀完','我已经把整篇课文读完了。','我讀
  assert.equal(reading(p,c).operation,'acknowledge');
  assert.equal(original({objectiveId:'read',evidence:p.evidence},{...c,task:readTask}).input.acknowledgement,'已讀完');
 });
+// 2026-10-22 lesson-1499: a student opened with 「你好，我已经读完了。」 and every acknowledgement was refused,
+// because the greeting shared the sentence. Only a leading greeting or vocative clause is set aside.
+for(const [content,quote] of [['你好，我已经读完了。读完全文，我感受到了豁达。','我已经读完了'],['你好，我已经读完了。读完全文，我感受到了豁达。','你好，我已经读完了'],
+ ['老师，我讀完了！','我讀完了'],['您好，我已經把整篇課文讀完了。','我已經把整篇課文讀完了']])test('a leading greeting does not hide an explicit reading statement: '+quote,()=>{
+ const c=context(content,{submitted:true}),p={operation:'acknowledge',evidence:evidence(quote)};
+ assert.equal(reading(p,c).operation,'acknowledge');
+ assert.equal(original({objectiveId:'read',evidence:p.evidence},{...c,task:readTask}).input.acknowledgement,'已讀完');
+});
+for(const [content,quote] of [['你好，如果我已经读完了。','我已经读完了'],['你好，我还没读完。','我还没读完'],['你好，我已经读完了吗？','我已经读完了'],
+ ['老师，他说我已经读完了。','我已经读完了'],['你好，读完全文，我感受到了豁达。','读完'],['好的，我已经读完了。','我已经读完了']])test('a greeting never turns a hedged or other statement into a receipt: '+content,()=>{
+ const c=context(content,{submitted:true});
+ assert.throws(()=>reading({operation:'acknowledge',evidence:evidence(quote)},c));
+ assert.throws(()=>original({objectiveId:'read',evidence:evidence(quote)},{...c,task:readTask}));
+});
 for(const content of ['我還沒通讀全詩。','如果我已經通讀全詩了。','我已經通讀全詩了嗎？','請通讀全詩。','我打算通讀全詩。','他說我已經通讀全詩了。','我只讀完第一段。','我通讀了幾行。','讀完這篇文章。','通讀全詩。','整首詩讀完。'])test('natural reading wording cannot imply completion: '+content,()=>{
  const c=context(content,{submitted:true});
  for(const quote of [content,'我已經通讀全詩了','通讀全詩','讀完']){

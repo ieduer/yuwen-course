@@ -1,9 +1,13 @@
 // Model proposals are references to the learner's immutable words, never authority.
 import {unpunctuated} from './dialogue-reading-material.js';
 export const CONVERSATION_POLICY_VERSION='yw-author-conversation-v2';
+// A leading greeting or vocative clause (「你好，我已经读完了」) is not part of the statement.
+const GREETING=/^(?:(?:你好|您好|老師好|老师好|老師|老师|嗨|哈囉|哈喽|hi|hello)[，,、\s]*)+/iu;
+const withoutGreeting=text=>text.replace(GREETING,'');
 function explicitStatement(turn,quote){
  // A model must not cut an affirmative word out of a negation or hypothetical.
- return (turn.content.match(/[^\n。！？!?]+[。！？!?]?/gu)||[]).filter(s=>!/[？?]$/.test(s)).map(s=>s.trim().replace(/[。！!]+$/u,'')).includes(quote.trim().replace(/[。！!]+$/u,''));
+ const q=withoutGreeting(quote.trim().replace(/[。！!]+$/u,''));
+ return (turn.content.match(/[^\n。！？!?]+[。！？!?]?/gu)||[]).filter(s=>!/[？?]$/.test(s)).map(s=>withoutGreeting(s.trim().replace(/[。！!]+$/u,''))).includes(q);
 }
 const finishedReading=/^(?:我)?(?:已經|已经|已)?(?:把)?(?:這篇|这篇|整篇|這一篇|这一篇)?(?:課文|课文|文章|正文)?(?:讀完|读完|看完|閱讀完|阅读完)(?:了)?[。！!\s]*$/u;
 const wholeWork='(?:全詩|全诗|全文|全篇|整首詩|整首诗|(?:這|这|整)篇(?:課文|课文|文章|作品))';
@@ -14,7 +18,7 @@ const naturalFinishedReading=[
  // 通讀 alone may be a request or intention: require 已 or a completed 了.
  new RegExp('^(?:我)?(?:(?:已經|已经|已)(?:通讀|通读)'+wholeWork+'(?:了)?|(?:通讀|通读)'+wholeWork+'了)[。！!\\s]*$','u'),
 ];
-function acknowledged(turn,quote){return explicitStatement(turn,quote)&&[finishedReading,...naturalFinishedReading].some(pattern=>pattern.test(quote.trim()));}
+function acknowledged(turn,quote){return explicitStatement(turn,quote)&&[finishedReading,...naturalFinishedReading].some(pattern=>pattern.test(withoutGreeting(quote.trim())));}
 // Teaching focus is not a lock on other already demonstrated participation.
 // Only the existing source-owned, non-scoring read receipt is independent of
 // the current question. Original graded tasks keep their existing eligibility.
