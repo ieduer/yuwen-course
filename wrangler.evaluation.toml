@@ -28,6 +28,12 @@ binding = "PULSE_ALERTS"
 service = "pulse"
 entrypoint = "PlatformErrorAlerts"
 
+# Minute heartbeat (aggregate only) so Pulse never waits on a probe-time read.
+[[services]]
+binding = "PULSE_HEARTBEAT"
+service = "pulse"
+entrypoint = "EvaluationHeartbeat"
+
 # Same source-scoped, read-only receipt contract already used by Pages.
 [[services]]
 binding = "USER_CENTER_EVIDENCE"
