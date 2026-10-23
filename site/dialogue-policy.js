@@ -5,7 +5,7 @@ import {validateFormalDraft,originalRequirements,reviewSourceMaterials,selectOri
 import {validateConclusion} from './dialogue-conclusion.js';
 import {approvedSupplement} from './dialogue-completion-exemptions.js';
 import {calibratedQuestion} from './dialogue-calibration-status.js';
-export const POLICY_VERSION = 'yw-dialogue-policy-v15';
+export const POLICY_VERSION = 'yw-dialogue-policy-v16';
 export const RULE_VERSION = 'yw-dialogue-evidence-v3';
 export const CONTEXT_LAYOUT_VERSION = 'yw-dialogue-context-static-first-v4';
 // Keep the single-line data contract used by source_context_prepared. Object
@@ -32,6 +32,8 @@ authorVoice 提供作者時代及寫作語言。依本篇原文形成各自文�
 objectives、state 與 originalRequirements 合起來就是本課全部學習目標；同一個目標的舊版要求（originalRequirements）與對話目標只算一次，不是兩件事。用自然的方式帶學生完成全部目標：順序跟著學生的話走，不按清單逐項推進；開場或學生問起時用一兩句話說明本課要談甚麼；有實質進展時簡短肯定；未完成的目標在對話裡自然引出，不把判準、清單或內部鍵名倒給學生。
 詞義須用語境解釋；技法須分析選擇、效果與目的；合理不同解讀可成立。不能以篇幅或稱讚作證据。
 古典詞彙必須涵蓋全部必考項；失敗先解釋和對比，請學生改述，再出等值新題獨立回答。提示後照抄不算掌握。
+文言篇目有 readingGate：phase 為 initial_reading 時，學生還沒有完成無注疏初讀，伺服器在此之前不記錄任何評閱、原題答案或字詞掌握；這時不提交 formalAssessments、originalEvidence 或字詞 demonstrated，reply 也不給分數或宣告通過。用作者口吻說明先不看注釋自己讀一遍的用處，請學生指出讀不通或拿不準之處、說出第一直覺，再寫下初讀感受；可以順著他的疑問談，但不先講破字義。phase 為 annotated_reading 時，請他讀完帶註釋的正文後告訴你一聲。
+paragraphGuide 存在時是文言細讀：以 paragraphGuide.focus 這一段為本輪範圍，一段一段往下讀。先請學生用自己的話說出本段關鍵句的意思，再聚焦 focus.next 這個字（就是當前 question）：不先給詞義，讓他從上下文推斷並說出依據。他讀懂了，第一句就明確確認他讀懂了哪個字、憑甚麼讀懂，並照證據規則記錄（伺服器核驗後會立即向學生顯示這個字的成就與得分）；接著用作者自己的眼光點出這個字在本段的分量——它撐起哪一層意思、與本人其他語句或思想如何呼應——再轉到本段下一個字，本段都確認了再往下一段。說錯時不公布答案：指出上下文的線索，或拿另一處用法對比，請他再推一次。語言用作者的文風，簡練、有見地、有趣味，像與一位聰明的後學論學；不降低難度，不說教，不泛泛稱讚，不把詞義表或判準倒給學生。學生主動問別段或別的字時先回應他；paragraphGuide 只是順序，不是關卡。
 question 是未提示的新一次作答（attempt≥2，hinted 為 false）且學生的回答成立時，記 demonstrated 並覆蓋全部判準，不要記 reformulated；reformulated 只用於 remediation 指定、尚未換題的改述。字詞題須核對原題型及 sourceAnswer；讀音題必須包含正確拼音和語境義，不能因答對詞義就省略讀音。languagePractice 是另存、不計分的語言練習；需核對句意、句法關係及上下文，不能只報術語。calibrationStatus 非 accepted 或來源仍待核對時只能給 review，不能推定掌握；不要把來源缺口當作學生答錯。sourceVerification.status 為 pending-verification 時，必須明說分析待核驗，只提出可討論的讀法，不把 meaning/explanation 當作權威釋義；引句核對並不等於句法判斷已核實。examReferences 只有報紙引用的題意與能力關聯；不得假裝提供原試卷、未給出的閱讀全文或官方答案。
 沒有核實的北京真題原頁、年份、卷名與題號時只稱原創練習；AI回饋不是官方閱卷。
 最後的尚友：理解有何變化、文本證據、認同或質疑，逐項引用學生回合與原文。分歧不妨礙完成。只有readyForShangyou=true才可提出尚友demonstrated；尚未達到時可討論或記review，不宣告結課。
@@ -126,9 +128,13 @@ export function targetProgress(targets){
 }
 
 // Deterministic lesson score: the legacy course's track weights (normalized to 100 exactly as site/assets/app.js does)
-// applied to the server's own confirmed records. Points come only from confirmed original receipts; nothing is inferred
+// applied to the server's own confirmed records. Points come only from server-verified records; nothing is inferred
 // from conversation length. read / evaluation / firstRead are completion points of non-scoring participation tasks.
-const TRACK_ACTIONS={context:'用自己的話說出三個有區分的詞和你的初讀印象',read:'讀完整篇後告訴作者一聲（例如「讀完了」）',revision:'挑一句原文，說明怎樣增、刪或調換，寫出改句並比較效果',structure:'指出至少兩處彼此呼應的文字，說明它們的效果與目的',evaluation:'說說這篇對你有多大意思（0 到 100）；自評不評分',authorQuestion:'向作者提出一個有文本依據的問題或回應',vocabulary:'逐個必考詞：先在對話中說明語境義與依據，再回答原題選項',wordCreation:'用一個新學字詞寫一段短創作',firstRead:'先完成無注疏初讀並保存疑點'};
+// Vocabulary is many separate words: each word (or study-guide item) the server has already verified earns its share at
+// once (a preserved original answer, or a demonstrated dialogue assessment of the same word), so a student who has
+// confirmed most words is never left at zero. The full weight still needs every original answer, every study-guide item
+// and, for classical texts, no unresolved first-read mark.
+const TRACK_ACTIONS={context:'用自己的話說出三個有區分的詞和你的初讀印象',read:'讀完整篇後告訴作者一聲（例如「讀完了」）',revision:'挑一句原文，說明怎樣增、刪或調換，寫出改句並比較效果',structure:'指出至少兩處彼此呼應的文字，說明它們的效果與目的',evaluation:'說說這篇對你有多大意思（0 到 100）；自評不評分',authorQuestion:'向作者提出一個有文本依據的問題或回應',vocabulary:'跟作者逐段讀懂必考字詞：說出字在句中的意思和依據，每讀懂一個就先記一份分；原題選項全部答完得滿分',wordCreation:'用一個新學字詞寫一段短創作',firstRead:'先完成無注疏初讀並保存疑點'};
 const PARTICIPATION_TRACKS=['read','evaluation','firstRead'];
 export function normalizeTrackWeights(track){
  const total=track.reduce((s,i)=>s+Number(i[3]||0),0);
@@ -157,11 +163,14 @@ export function lessonScore(curriculum,state,{submissions=[]}={}){
   const twin=['context','revision','structure','authorQuestion','wordCreation','evaluation'].includes(key)?dialogue(key):null,twinStatus=twin?status(twin.id):null;
   const twins=items.map(o=>o.domain==='legacy'?legacyCounterpart(curriculum,o):null).filter(Boolean);
   const started=(twinStatus&&['demonstrated','preserved'].includes(twinStatus))||twins.some(t=>['demonstrated','preserved'].includes(status(t.id)))||items.some(o=>['preserved','demonstrated','review','needs_practice','reformulated'].includes(status(o.id)));
-  const st=done?'done':pendingSub(items)?'pending_evaluation':items.some(o=>status(o.id)==='historical_review')?'historical_review':started?'partial':'not_started';
-  return {key,label,weight,points:done?weight:0,status:st,participationOnly:PARTICIPATION_TRACKS.includes(key),next:done?'':TRACK_ACTIONS[key]||''};
+  const confirmedItem=o=>status(o.id)==='preserved'||(o.domain==='legacy'&&CONFIRMED_ROUTE.includes(status(legacyCounterpart(curriculum,o)?.id)));
+  const confirmed=key==='vocabulary'?items.filter(confirmedItem).length:0;
+  const points=done?weight:key==='vocabulary'&&items.length?Math.min(weight-1,Math.floor(weight*confirmed/items.length)):0;
+  const st=done?'done':pendingSub(items)?'pending_evaluation':items.some(o=>status(o.id)==='historical_review')?'historical_review':started||points>0?'partial':'not_started';
+  return {key,label,weight,points,status:st,participationOnly:PARTICIPATION_TRACKS.includes(key),next:done?'':TRACK_ACTIONS[key]||'',...(key==='vocabulary'&&items.length?{progress:{confirmed,total:items.length}}:{})};
  });
  const earned=tracks.reduce((s,t)=>s+t.points,0),max=tracks.reduce((s,t)=>s+t.weight,0);
- return {status:'ok',rule:'legacy-track-weights-v1',earned,max,remaining:max-earned,tracks};
+ return {status:'ok',rule:'legacy-track-weights-v2',earned,max,remaining:max-earned,tracks};
 }
 // The score/progress data joins the model context only when the latest student turn asks about it, so every other
 // prompt (including historical calibration reconstructions) keeps its exact shape.
@@ -236,11 +245,11 @@ export function evidenceReport(curriculum,state,assessments,turns=[],conclusion=
   student:{trajectory,summary:trajectory.domains.filter(d=>Object.values(d.outcomes).some(Boolean)).map(d=>({objectiveId:d.objectiveId,text:`${d.label}：${d.outcomes.needs_practice} 次待練習、${d.outcomes.reformulated} 次改述、${d.outcomes.demonstrated} 次有證據支持、${d.outcomes.review} 次待覆核。`,references:d.anchors})),observed:demonstrated.map(o=>({objectiveId:o.objectiveId,label:o.label,status:o.status})),remaining:items.filter(o=>!['preserved','demonstrated'].includes(o.status)).map(o=>({objectiveId:o.objectiveId,label:o.label,status:o.status})),next:state.next,completion:state.completion,notice:'摘要涵蓋本課已保存歷程；次數不是分數，未觀察不等於不會，原始對話及舊成績永久保留。'},
   teacher:{items,turnIndex:turns.map(t=>({turnId:t.id,role:t.role,status:t.status,createdAt:t.createdAt})),reviewRequired:items.filter(o=>['review','historical_review'].includes(o.status)).map(o=>o.objectiveId),notice:'完整回合索引與各次判定供核對；教師端未獲跨帳戶授權，不代表已通知或覆核。'}};
 }
-export function contextFor({curriculum,state,turns,question,remediation=null,assessments=[],conversationGuide=null,conversationOriginalTasks=null,firstReading=null}){
+export function contextFor({curriculum,state,turns,question,remediation=null,assessments=[],conversationGuide=null,conversationOriginalTasks=null,firstReading=null,paragraphGuide=null}){
  question=calibratedQuestion(question,curriculum);remediation=calibratedQuestion(remediation,curriculum);
  const allRequirements=originalRequirements(curriculum,state),allReviewSources=reviewSourceMaterials(curriculum,state);
  let used=0;const recent=[];for(const t of turns.slice(-10).reverse()){if(used+t.content.length>6500)break;used+=t.content.length;const {id,role,content,questionId}=t;recent.unshift({id,role,content,questionId});}
- const data={...(conversationGuide||firstReading?{conversationGuide,firstReading}:{}),...(conversationOriginalTasks?{conversationOriginalTasks}:{}),curriculumVersion:curriculum.curriculumVersion,persona:curriculum.persona,conversationIdentity:dialogueIdentity(curriculum),authorVoice:authorVoice(curriculum),author:curriculum.author,title:curriculum.title,
+ const data={...(conversationGuide||firstReading?{conversationGuide,firstReading}:{}),...(conversationOriginalTasks?{conversationOriginalTasks}:{}),...(paragraphGuide?{paragraphGuide}:{}),curriculumVersion:curriculum.curriculumVersion,persona:curriculum.persona,conversationIdentity:dialogueIdentity(curriculum),authorVoice:authorVoice(curriculum),author:curriculum.author,title:curriculum.title,
   objectives:curriculum.objectives.filter(o=>!['legacy','studyGuide'].includes(o.domain)).map(o=>({id:o.id,criteria:o.criteria,rule:questionItems(curriculum).some(v=>v.id===o.id)&&![question?.objectiveId,remediation?.objectiveId].includes(o.id)?'服務端依保存的題目逐項核對；不是當前題或改述項時不得推定獨立掌握。':o.rule})),
   state:state.objectives.map(o=>({id:o.id,status:o.status})),...(scoreAsked(turns)&&state.score?{lessonScore:state.score}:{}),legacyCompletion:state.legacyCompletion,readingGate:state.readingGate,readyForShangyou:state.readyForShangyou,hasConclusion:state.hasConclusion,
   originalRequirements:allRequirements,reviewSources:allReviewSources,

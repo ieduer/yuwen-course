@@ -15,6 +15,7 @@ import {RENEWED_E2E_OPERATION,renewedOperationCondition,prepareRenewedRetainedFa
 import {MODE_OPERATION,modeConfigured,prepareModeLedger,validateModeResult} from './dialogue-mode-admission.js';
 import {recordCorrection} from './dialogue-corrections.js';
 import {hasClassicalAnnotatedReadReceipt} from './classical-first-read-source.js';
+import {paragraphGuide,paragraphGuideContext} from './dialogue-paragraph-guide.js';
 import {consumeGatewayStream,studentStream,validatedProviderAccounting} from './dialogue-stream.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
 import {requestDialogueBudget,combinedProviderAccounting,operatorCost,continuationDisposition,budgetDenial} from './dialogue-recovery.js';
@@ -59,8 +60,11 @@ const MODE_FAILURE_CODES=new Set([
 ]);
 // Verification failures of optional proposal parts: the part is dropped and recorded; the reply stays. Everything else
 // (no reply, provider, storage, budget, continuation) keeps failing closed.
-const originalRejectedNotice=code=>['original_evidence_wrong_task','original_result_preserved'].includes(code)?'作者提到的原題答案：該題先前已有紀錄，不重複計分。':code==='choice_not_explicit'?'作者提到的原題選擇本輪未能記錄：請在同一句裡清楚寫出「我選 某選項」。':'作者提到的原題答案本輪未能記錄（未通過核驗）；學習紀錄以下方實際保存的為準。';
-const formalRejectedNotice=code=>['formal_assessment_not_eligible','original_result_preserved'].includes(code)?'作者提到的評閱：該項先前已有紀錄，不重複計分。':`作者提到的評閱本輪未能記錄（${code==='one_formal_assessment_per_turn'?'一輪只記一項':'未通過核驗'}）；下一輪可引用你先前的話補記。`;
+// A classical text records nothing before its first read: say exactly what unlocks the record instead of inviting the
+// student to resubmit words that would be refused again.
+export const READING_GATE_NOTICE={classical_first_read_required:'這是文言文：作者剛才的評閱要等你完成「無注疏初讀」才能記分——先不看注釋自己讀一遍，告訴作者至少三處讀不通或拿不準的地方和你的猜測，再寫幾句初讀感受。剛才的對話都已保存，不必重寫。',classical_annotated_reading_required:'這是文言文：作者剛才的評閱要等你讀完帶註釋的正文、並告訴作者一聲，才能記分。剛才的對話都已保存，不必重寫。'};
+const originalRejectedNotice=code=>READING_GATE_NOTICE[code]||(['original_evidence_wrong_task','original_result_preserved'].includes(code)?'作者提到的原題答案：該題先前已有紀錄，不重複計分。':code==='choice_not_explicit'?'作者提到的原題選擇本輪未能記錄：請在同一句裡清楚寫出「我選 某選項」。':'作者提到的原題答案本輪未能記錄（未通過核驗）；學習紀錄以下方實際保存的為準。');
+const formalRejectedNotice=code=>READING_GATE_NOTICE[code]||(['formal_assessment_not_eligible','original_result_preserved'].includes(code)?'作者提到的評閱：該項先前已有紀錄，不重複計分。':`作者提到的評閱本輪未能記錄（${code==='one_formal_assessment_per_turn'?'一輪只記一項':'未通過核驗'}）；下一輪可引用你先前的話補記。`);
 // The author may only put the student's own words in quotation marks. Any 「…」 the reply attributes to the student
 // (你說「…」, 你前面才說「…」 …) that is not a verbatim part of a saved student message is recorded and shown to the student.
 const STUDENT_QUOTE=/你(?:前面|剛才|剛剛|上一輪|先前|之前|一開始|後來|開頭|又|也|才|曾|還|只)*(?:說過|說到|說的是|說的|說|提到|提過|寫道|寫的是|寫過|講過|講)[，,：:]?\s*[「『"]([^」』"\n]{2,80})[」』"]/gu;
@@ -222,7 +226,9 @@ async function learningRecords(db,session){
  return {fields,submissions};
 }
 async function plannedQuestion(db,session,curriculum,state){
- const objective=state.next;
+ // Classical close reading follows the text: the planned word is the paragraph guide's next open word.
+ const guided=state.next?.domain==='vocabulary'?paragraphGuide(curriculum,state,questionItems(curriculum))?.focus?.next:null;
+ const objective=guided?state.objectives.find(o=>o.id===guided.objectiveId)||state.next:state.next;
  if(objective?.domain!=='vocabulary'||!questionItems(curriculum).some(v=>v.id===objective.id))return null;
  const row=await db.prepare('SELECT instance_json FROM dialogue_questions WHERE session_id=? AND objective_id=? ORDER BY attempt DESC LIMIT 1').bind(session.id,objective.id).first(),prior=row?JSON.parse(row.instance_json):null;
  if(prior&&['mastered','review'].includes(prior.state)&&!calibrationReopensReview(prior,curriculum))return null;
@@ -269,7 +275,7 @@ async function snapshot(db,session,curriculum,before){
  state.score=lessonScore(curriculum,state,{submissions:records.submissions});
  const statusEvent=await db.prepare("SELECT details_json FROM dialogue_events WHERE session_id=? AND event_type='source_status' AND turn_id=(SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence DESC LIMIT 1) ORDER BY created_at DESC LIMIT 1").bind(session.id,session.id).first();
  const statusNotice=statusEvent?JSON.parse(statusEvent.details_json).message:null;
- return {statusNotice,learningTurn:learningTurn(curriculum,state,{revision:session.revision,...records,sourceDraft,question:publicQuestion,mastery:legacy.mastery}),sourceSubmissions:records.submissions,originalTask:originalTask(curriculum,state,legacy.mastery),sourceDraft,partial,replyRetry,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending,curriculumVersion:session.curriculum_version,...page,state,assessments:merged,report:evidenceReport(curriculum,state,merged,completeTurns,conclusion),execution:execution?{...execution,satisfied:session.curriculum_version===execution.requiredCurriculumVersion,missing:missingObjectives(state)}:null,question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at,formal:draft.source_request_json?JSON.parse(draft.source_request_json):null,learningRequest:draft.source_request_json?JSON.parse(draft.source_request_json).learningRequest||null:null}:null,legacy,readingGate:state.readingGate};
+ return {statusNotice,paragraphGuide:paragraphGuide(curriculum,state,questionItems(curriculum)),learningTurn:learningTurn(curriculum,state,{revision:session.revision,...records,sourceDraft,question:publicQuestion,mastery:legacy.mastery}),sourceSubmissions:records.submissions,originalTask:originalTask(curriculum,state,legacy.mastery),sourceDraft,partial,replyRetry,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending,curriculumVersion:session.curriculum_version,...page,state,assessments:merged,report:evidenceReport(curriculum,state,merged,completeTurns,conclusion),execution:execution?{...execution,satisfied:session.curriculum_version===execution.requiredCurriculumVersion,missing:missingObjectives(state)}:null,question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at,formal:draft.source_request_json?JSON.parse(draft.source_request_json):null,learningRequest:draft.source_request_json?JSON.parse(draft.source_request_json).learningRequest||null:null}:null,legacy,readingGate:state.readingGate};
 }
 export async function handleDialogue(request,env,student,ctx,{callModel=callDialogueModel,readSharedHistory=null,firstReadAction=null,formalAction=null,originalAction=null}={}){
  if(!student)return json({error:'請先登入 My。',code:'authentication_required'},401);
@@ -353,7 +359,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
    const rows=await all(db.prepare("SELECT id,details_json,created_at FROM dialogue_events WHERE session_id=? AND turn_id=? AND event_type='owner_correction_recorded' ORDER BY created_at,id LIMIT 8").bind(session.id,turnId));
    return json({ownerRef:await sha(`dialogue-owner:${student.id}`),corrections:rows.map(r=>({id:r.id,createdAt:r.created_at,...JSON.parse(r.details_json)}))});
   }
-  if(!session){const legacy=await historicalEvidence(db,student.id,curriculum),state=projectState(curriculum,[],legacy.preserved,legacy.completion,await readingGate(db,student.id,curriculum,legacy)),planned=await plannedQuestion(db,{id:'not-created',student_id:student.id,created_at:null},curriculum,state),question=planned?{id:planned.id,objectiveId:planned.objectiveId,attempt:planned.attempt,question:planned.question,source:planned.source,createdAt:null}:null;state.score=lessonScore(curriculum,state,{submissions:[]});return json({learningTurn:learningTurn(curriculum,state,{question}),sourceSubmissions:[],ownerRef:await sha(`dialogue-owner:${student.id}`),revision:0,turns:[],question,state,legacy,readingGate:state.readingGate,report:evidenceReport(curriculum,state,[]),...(curriculum.calibrationEvidence?{resumeCurriculum:sanitizeDialogueCurriculum(curriculum)}:{}),saved:false,...(executionId!==null?{execution:await executionPreview(db,student.id,curriculum,executionId,state)}:{})});}
+  if(!session){const legacy=await historicalEvidence(db,student.id,curriculum),state=projectState(curriculum,[],legacy.preserved,legacy.completion,await readingGate(db,student.id,curriculum,legacy)),planned=await plannedQuestion(db,{id:'not-created',student_id:student.id,created_at:null},curriculum,state),question=planned?{id:planned.id,objectiveId:planned.objectiveId,attempt:planned.attempt,question:planned.question,source:planned.source,createdAt:null}:null;state.score=lessonScore(curriculum,state,{submissions:[]});return json({paragraphGuide:paragraphGuide(curriculum,state,questionItems(curriculum)),learningTurn:learningTurn(curriculum,state,{question}),sourceSubmissions:[],ownerRef:await sha(`dialogue-owner:${student.id}`),revision:0,turns:[],question,state,legacy,readingGate:state.readingGate,report:evidenceReport(curriculum,state,[]),...(curriculum.calibrationEvidence?{resumeCurriculum:sanitizeDialogueCurriculum(curriculum)}:{}),saved:false,...(executionId!==null?{execution:await executionPreview(db,student.id,curriculum,executionId,state)}:{})});}
   const before=url.searchParams.has('beforeSeq')?{sequence:Number(url.searchParams.get('beforeSeq'))}:null;
   if(before && (!Number.isSafeInteger(before.sequence)||before.sequence<1))return json({code:'invalid_cursor'},400);
   if(executionId!==null)await ensureExecution(db,session,publishedCurriculum,executionId);
@@ -483,7 +489,8 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   if(gate && gate.phase!=='close_reading')return json({code:'reading_required',message:gate.phase==='initial_reading'?'請先保存無注疏初讀。':'請先確認讀完帶註釋正文，再進入字詞練習。'},409);
   const outstanding=await db.prepare("SELECT id FROM dialogue_questions WHERE session_id=? AND state='issued'").bind(session.id).first();
   if(outstanding)return json(await snapshot(db,session,curriculum));
-  const order=await vocabularyOrder(curriculum,session.id);
+  const textOrder=curriculum.mode==='classical'?paragraphGuide(curriculum,{objectives:[],readingGate:gate},questionItems(curriculum))?.order:null;
+  const order=textOrder?.length?textOrder:await vocabularyOrder(curriculum,session.id);
   const priorRows=await all(db.prepare('SELECT instance_json FROM dialogue_questions WHERE session_id=? ORDER BY attempt,id').bind(session.id));
   const priorById=new Map(priorRows.map(r=>{const q=JSON.parse(r.instance_json);return [q.objectiveId,q];}));
   const remaining=order.filter(id=>!legacy.preserved.some(p=>p.objectiveId===id)&&!['mastered','review'].includes(priorById.get(id)?.state));
@@ -497,7 +504,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
     if(!reformulated)return json({code:'reformulation_required',message:'請先用自己的話改述剛才的詞義與語境依據，確認後再換一題獨立作答。'},409);
   }
   let q;try{q=createQuestion(curriculum,{objectiveId,attempt:(prior?.attempt||0)+1,previousVariant:prior?.variant??null});}catch{return json({code:'teacher_review_required',message:'請保留答案與提示，交由教師覆核；其他閱讀可繼續。'},409);}
-  q.selection={...q.selection,orderAlgorithm:'sha256-session-v1',coverageOrder:order,coverageIndex:order.indexOf(objectiveId)};
+  q.selection={...q.selection,orderAlgorithm:textOrder?.length?'paragraph-order-v1':'sha256-session-v1',coverageOrder:order,coverageIndex:order.indexOf(objectiveId)};
   await db.prepare('INSERT OR IGNORE INTO dialogue_questions(id,session_id,objective_id,attempt,instance_json,state,created_at) VALUES(?,?,?,?,?,?,?)').bind(q.id,session.id,q.objectiveId,q.attempt,JSON.stringify(q),q.state,q.createdAt).run();
   return json(await snapshot(db,session,curriculum));
  }
@@ -692,7 +699,8 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const pendingEvaluation=(()=>{const o=curriculum.objectives.find(o=>o.domain==='legacy'&&o.legacy?.questionKind==='evaluation');if(!o||state.legacyCompletion)return null;const st=state.objectives.find(x=>x.id===o.id)?.status;return ['preserved','historical_review'].includes(st)?null:{objectiveId:o.id,kind:'evaluation'};})();
   const originalTasks=body.conversation===true?conversationOriginalTasks(curriculum,state,guide,[...originalVocabularyTasks(curriculum,state,legacy.mastery),originalTask(curriculum,state,legacy.mastery),pendingEvaluation]):null;
   const firstReadingContext=firstReading?{...firstReading.state,kind:firstReading.asset.kind||'classical-original',summaries:firstReading.state.summaries?.slice(-3),marks:firstReading.state.marks?.slice(-8).map(m=>({...m,...(m.corrections?{corrections:m.corrections.slice(-2)}:{})})),paragraphs:firstReading.asset.paragraphs.filter(p=>body.content.includes(p.key)||unpunctuated(body.content).includes(p.text.slice(0,12))).slice(0,2).map(p=>({...p,text:p.text.slice(0,1200)}))}:null;
-  let prompt=formal?null:contextFor({curriculum,state,turns:completeTurns,question,remediation,assessments,...(body.conversation===true?{conversationGuide:guide,conversationOriginalTasks:originalTasks,firstReading:firstReadingContext}:{})});
+  const paragraphFocus=paragraphGuideContext(paragraphGuide(curriculum,state,questionItems(curriculum)));
+  let prompt=formal?null:contextFor({curriculum,state,turns:completeTurns,question,remediation,assessments,paragraphGuide:paragraphFocus,...(body.conversation===true?{conversationGuide:guide,conversationOriginalTasks:originalTasks,firstReading:firstReadingContext}:{})});
   if(body.conversation===true&&!formal)prompt=READING_CONVERSATION_POLICY+'\n'+prompt+'\n';
   if(prompt&&body.conversation===true&&!formal&&typeof body.content==='string'){const passages=await authorPassages(env,curriculum,body.content);const extra=authorPassagesContext(passages);if(extra&&prompt.length+extra.length<=LIMITS.contextChars-800)prompt+=extra;}
   if(resume?.retry){/* re-dispatch of a saved turn that received no output: the same prompt, no continuation text */}
