@@ -23,6 +23,20 @@ export function originalVocabularyTasks(curriculum,state,mastery=[],limit=6){
   }
   return out;
 }
+// The word the current question asks about may be answered with its original choice in the same turn: a planned
+// vocabulary question is that very answer-key item, so a student who explicitly chooses an option in answering it is not
+// asked the same item a second time after the dialogue confirms the word. The server still checks the chosen option
+// against the answer key; a hedge or a missing choice records nothing.
+export function questionVocabularyTask(curriculum,state,question,mastery=[]){
+  if(state.legacyCompletion||!question?.objectiveId)return null;
+  const v=curriculum.vocabulary.find(v=>v.id===question.objectiveId);
+  if(!v||!Array.isArray(v.options)||!v.options.length)return null;
+  const o=curriculum.objectives.find(o=>o.domain==='legacy'&&o.legacy?.questionKind==='vocabulary'&&o.legacy.resourceKey===`effect:${curriculum.lessonId}:vocab:${v.id}`);
+  if(!o)return null;
+  const status=state.objectives.find(x=>x.id===o.id)?.status,current=mastery.find(m=>m.item_id===v.id);
+  if(status==='historical_review'||status==='preserved'&&current?.status!=='learning')return null;
+  return {objectiveId:o.id,kind:'vocabulary',itemId:v.id,question:v.question,source:v.sourceSentence,options:v.options,sourceAnswer:v.sourceAnswer,originalMastery:current?{status:current.status,correctCount:current.correct_count,wrongCount:current.wrong_count}:null};
+}
 export function originalTask(curriculum,state,mastery=[]){
   if(state.legacyCompletion)return null;
   const originals=curriculum.objectives.filter(o=>o.domain==='legacy');

@@ -4,6 +4,8 @@ import fs from 'node:fs';
 import {projectState,lessonScore,questionItems,contextFor,POLICY,POLICY_VERSION} from '../site/dialogue-policy.js';
 import {paragraphGuide,paragraphGuideContext,PARAGRAPH_GUIDE_VERSION} from '../site/dialogue-paragraph-guide.js';
 import {READING_GATE_NOTICE} from '../site/dialogue-source.js';
+import {questionVocabularyTask,originalVocabularyTasks} from '../site/dialogue-formal.js';
+import {conversationOriginalTasks} from '../site/dialogue-reading-evidence.js';
 
 const load=id=>JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${id}.json`,'utf8'));
 const CLOSE={phase:'close_reading',unresolvedMarks:0};
@@ -91,4 +93,18 @@ test('the author is told what the classical reading gate means and how to read p
   assert.match(READING_GATE_NOTICE[code],/文言文/);
   assert.doesNotMatch(READING_GATE_NOTICE[code],/引用你先前的話補記/,'the notice must not invite a resubmission that would be refused again');
  }
+});
+
+test('the word the current question asks about can take its original choice in the same turn, once',()=>{
+ const c=load('lesson-1578'),state=projectState(c,[],[],null,CLOSE),word=guideFor(c,state).focus.next.objectiveId;
+ assert.deepEqual(originalVocabularyTasks(c,state),[],'nothing demonstrated yet, so no original item is offered by the old rule');
+ const task=questionVocabularyTask(c,state,{objectiveId:word});
+ assert.equal(task.kind,'vocabulary');assert.equal(task.objectiveId,legacyVocab(c,word));assert.ok(task.options.length>=2);
+ const tasks=conversationOriginalTasks(c,state,null,[...originalVocabularyTasks(c,state),task]);
+ assert.equal(tasks.filter(t=>t.objectiveId===task.objectiveId).length,1);
+ const answered=projectState(c,[],[{objectiveId:legacyVocab(c,word),verified:true,sourceEventId:'e'}],null,CLOSE);
+ assert.equal(questionVocabularyTask(c,answered,{objectiveId:word}),null,'a preserved original answer is never offered again');
+ assert.equal(questionVocabularyTask(c,state,null),null);
+ assert.equal(questionVocabularyTask(c,state,{objectiveId:'lesson-1578:not-a-word'}),null);
+ assert.match(POLICY,/不要請他把同一題再答一次/);
 });

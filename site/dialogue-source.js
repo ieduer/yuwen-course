@@ -19,7 +19,7 @@ import {paragraphGuide,paragraphGuideContext} from './dialogue-paragraph-guide.j
 import {consumeGatewayStream,studentStream,validatedProviderAccounting} from './dialogue-stream.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
 import {requestDialogueBudget,combinedProviderAccounting,operatorCost,continuationDisposition,budgetDenial} from './dialogue-recovery.js';
-import {prepareFormalInput,formalPrompt,studyGuideConversationReply,originalTask,originalVocabularyTasks,prepareOriginalInput,revealFollowupDraft,sourceDraftReady} from './dialogue-formal.js';
+import {prepareFormalInput,formalPrompt,studyGuideConversationReply,originalTask,originalVocabularyTasks,questionVocabularyTask,prepareOriginalInput,revealFollowupDraft,sourceDraftReady} from './dialogue-formal.js';
 import {learningTurn,collectedFormal} from './dialogue-learning-turn.js';
 import {lessonCallLimit} from './dialogue-lesson-limits.js';
 import {sanitizeDialogueCurriculum} from './dialogue-public-curriculum.js';
@@ -697,7 +697,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const records=await learningRecords(db,session),guide=learningTurn(curriculum,state,{revision:session.revision,...records,question});
   state.score=lessonScore(curriculum,state,{submissions:records.submissions});
   const pendingEvaluation=(()=>{const o=curriculum.objectives.find(o=>o.domain==='legacy'&&o.legacy?.questionKind==='evaluation');if(!o||state.legacyCompletion)return null;const st=state.objectives.find(x=>x.id===o.id)?.status;return ['preserved','historical_review'].includes(st)?null:{objectiveId:o.id,kind:'evaluation'};})();
-  const originalTasks=body.conversation===true?conversationOriginalTasks(curriculum,state,guide,[...originalVocabularyTasks(curriculum,state,legacy.mastery),originalTask(curriculum,state,legacy.mastery),pendingEvaluation]):null;
+  const originalTasks=body.conversation===true?conversationOriginalTasks(curriculum,state,guide,[...originalVocabularyTasks(curriculum,state,legacy.mastery),questionVocabularyTask(curriculum,state,question,legacy.mastery),originalTask(curriculum,state,legacy.mastery),pendingEvaluation]):null;
   const firstReadingContext=firstReading?{...firstReading.state,kind:firstReading.asset.kind||'classical-original',summaries:firstReading.state.summaries?.slice(-3),marks:firstReading.state.marks?.slice(-8).map(m=>({...m,...(m.corrections?{corrections:m.corrections.slice(-2)}:{})})),paragraphs:firstReading.asset.paragraphs.filter(p=>body.content.includes(p.key)||unpunctuated(body.content).includes(p.text.slice(0,12))).slice(0,2).map(p=>({...p,text:p.text.slice(0,1200)}))}:null;
   const paragraphFocus=paragraphGuideContext(paragraphGuide(curriculum,state,questionItems(curriculum)));
   let prompt=formal?null:contextFor({curriculum,state,turns:completeTurns,question,remediation,assessments,paragraphGuide:paragraphFocus,...(body.conversation===true?{conversationGuide:guide,conversationOriginalTasks:originalTasks,firstReading:firstReadingContext}:{})});
