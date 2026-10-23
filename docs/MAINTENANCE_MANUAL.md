@@ -1,4 +1,18 @@
-## Current 2026-10-23 — r31: wiser dialogue that does not fail (candidate)
+## Current 2026-10-23 — r32: quotes that differ only in punctuation; paragraphs named by their opening words (candidate)
+
+**Found in the r31 acceptance** (16:13Z, test account): a correct assessment of 次 was refused as `unverifiable_evidence`. One passage quote read 「引以为流觞曲水,列坐其次」 with an ASCII comma, copied from the item's source sentence; the passage has 「，」. 291 of the 801 vocabulary source sentences differ from their passage only in punctuation or spacing, and `unverifiable_evidence` was refused 11 times from 10-22 to the find.
+
+**Changes**
+- **`site/dialogue-quote.js`** (`yw-quote-span-v1`): `verbatimSpan(text, quote)` returns the quote unchanged when it occurs as written. Otherwise it locates the quote with whitespace, punctuation and symbols folded away (at least two characters) and returns the exact span of the text.
+- **Assessments** (`validateProposal`) and **conclusions** (`validateConclusion`) store that span for both the student quote and the passage quote. Every stored quote is still verbatim from the student or the passage; different words are still refused.
+- **Paragraph names.** Each guide paragraph carries `opening` (its first clause, at most 8 characters, e.g. 「是日也」). POLICY v18 tells the author to name paragraphs that way, not by number or passage id: lesson-1578 has a picture caption as `p1`, so the page's 2/4 and the author's "third paragraph" disagreed. The page shows 「是日也」一段 · 進度 2／4.
+- **Unchanged:** reading-evidence, original-answer and study-guide student-quote checks. None of their quote codes was refused in the data, so they still need an exact match.
+
+**Rollback.** r31 `d829c588`. No configuration change.
+
+## Current 2026-10-23 — r31: wiser dialogue that does not fail (accepted)
+
+**Accepted:** source `7d18a38`, Pages deployment `d829c588`, effective 2026-10-23T16:08:31Z, accepted 16:16:39Z (two labelled turns on test account 553: turn B read 12,193 cached tokens at −39% cost, ledger exact). Status `20261023-yw-wiser-steadier-dialogue`.
 
 **Owner direction:** avoid failed or stalled turns; never lose data; correct from saved data after fixes; author voice as teacher and friend with the odd joke; output up to about 6,144 tokens; quality first, resources used where they work.
 
