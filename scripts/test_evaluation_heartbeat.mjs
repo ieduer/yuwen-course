@@ -32,3 +32,28 @@ test('the scheduler sends the heartbeat after the tick even when the tick fails,
   assert.match(toml,/binding = "PULSE_HEARTBEAT"\nservice = "pulse"\nentrypoint = "EvaluationHeartbeat"/);
   assert.match(toml,/crons = \["\* \* \* \* \*"\]/);
 });
+
+// Evaluation clock (2026-10-23): alarm-driven ticks, cron watchdog, kill switch. The module imports cloudflare:workers,
+// so the clock is exercised through its source contract plus a small harness with the same logic boundaries.
+test('the clock ticks heartbeat-first, always re-arms for the next minute, and the cron is only its watchdog',()=>{
+  const src=readFileSync(new URL('../site/evaluation-scheduler.js',import.meta.url),'utf8');
+  assert.match(src,/export class EvaluationClock extends DurableObject/);
+  assert.match(src,/export async function evaluationTick\(env\)\{\n  await sendEvaluationHeartbeat\(env,evaluationBacklog\);\n  await runScheduledEvaluations\(env\);\n\}/,'heartbeat before the work');
+  assert.match(src,/finally \{\n      await this\.ctx\.storage\.put\('lastTickAt',started\);\n      await this\.ctx\.storage\.setAlarm\(nextClockAt\(Date\.now\(\)\)\);/,'the next alarm is set whatever the tick did');
+  assert.match(src,/if\(this\.env\.YW_EVALUATION_CLOCK!=='on'\) return;/,'kill switch stops the alarm');
+  assert.match(src,/if\(clockOn\(env\)\) \{ ctx\.waitUntil\(watchdogTick\(env\)\); return; \}/);
+  assert.match(src,/if\(state&&!state\.overdue\) return \{ran:false,state\};/,'a healthy clock means the cron does not tick');
+  assert.match(src,/try \{ await runScheduledEvaluations\(env\); \} finally \{ await sendEvaluationHeartbeat\(env,evaluationBacklog\); \}/,'clock off: the old cron path is unchanged');
+  const toml=readFileSync(new URL('../wrangler.evaluation.toml',import.meta.url),'utf8');
+  assert.match(toml,/\[\[durable_objects\.bindings\]\]\nname = "EVALUATION_CLOCK"\nclass_name = "EvaluationClock"/);
+  assert.match(toml,/\[\[migrations\]\]\ntag = "v1-evaluation-clock"\nnew_sqlite_classes = \["EvaluationClock"\]/);
+  assert.match(toml,/crons = \["\* \* \* \* \*"\]/);
+});
+test('next clock time is one second past the next minute boundary, and the main module exports only handlers, classes and functions',()=>{
+  const exported=[...readFileSync(new URL('../site/evaluation-scheduler.js',import.meta.url),'utf8').matchAll(/^export (const|let|var) (\w+)/gm)].map(m=>m[2]);
+  assert.deepEqual(exported,[],'workerd refuses non-function named exports of the main module');
+  const src=readFileSync(new URL('../site/evaluation-scheduler.js',import.meta.url),'utf8');
+  const fn=new Function('CLOCK_PERIOD_MS',`return ${src.match(/const nextClockAt=(\(now\)=>[^;]+);/)[1]};`)(60000);
+  assert.equal(fn(Date.parse('2026-10-23T16:00:00.000Z')),Date.parse('2026-10-23T16:01:01.000Z'));
+  assert.equal(fn(Date.parse('2026-10-23T16:00:59.999Z')),Date.parse('2026-10-23T16:01:01.000Z'));
+});

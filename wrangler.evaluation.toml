@@ -40,6 +40,16 @@ binding = "USER_CENTER_EVIDENCE"
 service = "bdfz-user-center"
 entrypoint = "YuwenEvidenceIdentity"
 
+# Evaluation clock (2026-10-23): the Durable Object alarm is the primary minute clock, the cron its watchdog.
+# YW_EVALUATION_CLOCK = "on" enables it (set on the live version at release); anything else keeps the cron-only path.
+[[durable_objects.bindings]]
+name = "EVALUATION_CLOCK"
+class_name = "EvaluationClock"
+
+[[migrations]]
+tag = "v1-evaluation-clock"
+new_sqlite_classes = ["EvaluationClock"]
+
 [observability]
 enabled = true
 head_sampling_rate = 1
