@@ -23,6 +23,22 @@
 
 **Unchanged:** evidence rules, answer keys, the original A+ gate records sent to the User Center, schema, bindings, caps and budgets.
 
+**Also in r30** (from the 2026-10-23 audit):
+- **Original word item offered in the same turn.** `questionVocabularyTask` offers the word being asked as its original answer-key item.
+  - Since 10-20, `vocabAnswer` (an A+ gate item) fell from about 30 a day to 0–3.
+  - The item was offered only after the dialogue had confirmed the word, but the planned question is that same item.
+- **Short evidence quotes.** Each quote is the shortest decisive span (usually within 60 characters), and the JSON stays compact.
+  - On 2026-10-22/23, Claude's first attempt failed on about 3% of turns: 4 were cut at the 4,096-token output cap and 8 were invalid JSON.
+  - The free fallback answered once in about 15 tries, so those students got no reply.
+
+**Open (not in r30):**
+- Study-guide items: none completed in dialogue since 10-19.
+- Free-pool health.
+- Claude JSON robustness at APIS (structured output) and the 4,096-token output cap (budget policy).
+- The roughly 3% of turns with no reply.
+
+Details: `_meta/reports/operations/yw-classical-paragraphs-20261023/AUDIT-20261023.md`.
+
 **Effect on the saved sessions** (local reconstruction with the r30 code; no writes): 24/lesson-1477 40 → 51, 25/lesson-1474 25 → 36, 8/lesson-1499 75 → 97, 75/lesson-1498 25 → 46. Sessions still before the first read stay at 0 until it is done.
 
 **Tests:** `scripts/test_dialogue_paragraph_guide.mjs` (6).
