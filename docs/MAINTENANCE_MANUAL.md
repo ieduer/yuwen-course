@@ -1,4 +1,12 @@
-## Current 2026-10-23 — r30: classical close reading paragraph by paragraph, with an immediate word achievement (candidate)
+## Current 2026-10-23 — r30: classical close reading paragraph by paragraph, with an immediate word achievement
+
+**Accepted:**
+- Source `b3c2b3e`, Pages deployment `0913aa58-1e6f-43e1-b9ba-97cfb983751a`, effective 2026-10-23T15:06:16Z; rollback is accepted r29 `3249541b` (artifact digest `915ff448`).
+- Labelled acceptance on test account 553:
+  - lesson-1578: 修 demonstrated, the original answer recorded in the same turn, achievement card +1 (26/100), stable on reload, no duplicate.
+  - lesson-1743-p1: the author guided the first read and gave no grade.
+  - 2 Claude attempts, 111,282 µ$.
+- Public record: Status `20261023-yw-classical-paragraph-reading`.
 
 **Problem (production data 2026-10-23, 37 sessions, read only):** long conversations earned little or nothing, worst in classical lessons.
 - **First read:** 6 of 11 classical sessions never passed it, but the author kept grading. Each grade was refused (`classical_first_read_required`), and the notice told the student to cite their words again next turn. One session had three such refusals in 33 minutes.
