@@ -51,3 +51,13 @@ test('the author speaks in the author style, as teacher and friend, and wisely; 
  assert.match(POLICY,/也不為省字而省掉關鍵的解釋/);assert.match(POLICY,/回覆長短依教學需要/);assert.doesNotMatch(POLICY,/約三五百字/);
  assert.equal(LIMITS.timeoutMs,90000,'above the gateway yw stream deadline of 78 s');
 });
+
+test('only the Claude-first path splits the prompt for the gateway cache; a Gemini-only request keeps one part',async()=>{
+ const {callDialogueModel}=await import('../site/dialogue-source.js');
+ const c=load('lesson-1578'),p=prompt(c,[turn('t1','這一句怎麼理解？')]);let body;
+ const env={APIS_CALLER_TOKEN:'synthetic',APIS:{fetch:async r=>{body=await r.json();return new Response(null,{status:400});}}};
+ await assert.rejects(()=>callDialogueModel(env,p,'r31-split',()=>{},{model:'gemini-3.8-flash',primaryModel:'claude-sonnet-5-5',providerAttemptLimit:3,maxOutputTokens:6144}),/gateway_unavailable/);
+ assert.equal(body.contents[0].parts.length,3);assert.equal(body.contents[0].parts.map(x=>x.text).join(''),p);assert.deepEqual(body.cacheBreakpoints,[0,1]);assert.equal(body.generationConfig.maxOutputTokens,6144);
+ await assert.rejects(()=>callDialogueModel(env,p,'r31-plain',()=>{},{model:'gemini-3.8-flash',providerAttemptLimit:1}),/gateway_unavailable/);
+ assert.equal(body.contents[0].parts.length,1);assert.equal(body.contents[0].parts[0].text,p);assert.equal(body.cacheBreakpoints,undefined);
+});

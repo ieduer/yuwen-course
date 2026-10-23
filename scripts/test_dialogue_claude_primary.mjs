@@ -158,15 +158,17 @@ test('recovery disposition: a truncated Claude attempt has no learner-visible ou
  assert.equal(continuationDisposition(legacyCall,{stage:'provider_request',providerAccounting:accounting([attempt(1,GEMINI,'TIMEOUT',{outputStarted:true})],'yw-same-model-sequential-v1')},false,{noOutput:true}).code,'partial_output_present');
 });
 
-test('the production policy var (wrangler.toml) is the v3 policy: 4,096 output bound with the exact covering reserve and unchanged caps',async()=>{
+test('the production policy var (wrangler.toml) is the v6 shared-pool policy: 6,144 output bound, a reserve covering a fully cache-written prompt, unchanged pool and caps (r31)',async()=>{
  const {readFileSync}=await import('node:fs');
  const toml=readFileSync(new URL('../wrangler.toml',import.meta.url),'utf8');
  const line=/^YW_DIALOGUE_BUDGET_JSON = '(\{.*\})'$/m.exec(toml.slice(toml.indexOf('[env.production.vars]')));assert.ok(line,'production budget policy var');
  const production=JSON.parse(line[1]);
- assert.deepEqual({...production,validUntil:undefined},{...policy,version:'yw-claude-primary-20261020-v3',maxOutputTokens:4096,reserveMicros:104960,validUntil:undefined});
- const budget=requestDialogueBudget({YW_DIALOGUE_BUDGET_JSON:line[1],YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},{id:1},'lesson-1717-p2');
- assert.equal(budget.maxOutputTokens,4096);assert.equal(budget.reserveMicros,104960);assert.equal(budget.fallbackReserveMicros,0);
- // The declared reserve is exactly the bound for the primary model (no slack, no shortfall).
- assert.throws(()=>dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...production,reserveMicros:production.reserveMicros-1})},at),/invalid_budget_reserve/);
- assert.deepEqual([budget.globalDailyMicros,budget.userDailyMicros,budget.lessonLifetimeMicros,budget.validUntil],[20000000,2000000,4000000,'2026-11-09T22:00:00Z']);
+ assert.equal(production.version,'yw-claude-primary-shared-pool-20261023-v6');assert.equal(production.policy,'yw-claude-primary-gemini-fallback-v1');
+ assert.deepEqual([production.primaryModel,production.model,production.maxInputTokens,production.maxOutputTokens],['claude-sonnet-5-5','gemini-3.8-flash',32000,6144]);
+ // 32,000 prompt tokens all cache-written (2.5 µ$ each, the 5-minute write price) plus 6,144 output tokens (10 µ$ each).
+ assert.equal(production.reserveMicros,32000*2.5+6144*10);
+ assert.deepEqual([production.sharedPool.poolId,production.sharedPool.ceilingMicros,production.sharedPool.burstMicros,production.sharedPool.endsAt],['claude-promo-yw-20261021',105000000,25000000,'2026-11-22T23:00:00Z']);
+ const budget=dialogueBudget({YW_DIALOGUE_BUDGET_JSON:line[1],YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},at);
+ assert.equal(budget.maxOutputTokens,6144);assert.equal(budget.reserveMicros,141440);assert.equal(budget.fallbackReserveMicros,0);
+ assert.throws(()=>dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...production,maxOutputTokens:8193})},at),/invalid_budget_policy/);
 });
