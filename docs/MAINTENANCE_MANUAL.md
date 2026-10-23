@@ -1,3 +1,23 @@
+## Current 2026-10-23 — r31: wiser dialogue that does not fail (candidate)
+
+**Owner direction:** avoid failed or stalled turns; never lose data; correct from saved data after fixes; author voice as teacher and friend with the odd joke; output up to about 6,144 tokens; quality first, resources used where they work.
+
+**Changes**
+- **POLICY v17**
+  - The author speaks in the voice of their own works, as teacher and friend, with well-judged humour.
+  - Wise: real insight, no lowered level, no explanation cut to save words.
+  - The r30 reply-length cap is removed. Evidence quotes stay short.
+- **Prompt cache.** On the Claude-first path `promptParts` sends the same prompt as three byte-identical parts (policies / lesson source / turn data) with `cacheBreakpoints [0,1]`. APIS `c210da8` caches them: reads cost about 0.05× input and 5-minute writes 1.25×.
+- **Cost.** `reconciledCost` uses the gateway-priced `costMicros` when it lies within the attempt's bound.
+- **Budget policy v6:** `maxOutputTokens` 6144, reserve 141,440 µ$. The pool is unchanged (`claude-promo-yw-20261021`, US$105).
+- **Timing:** `LIMITS.timeoutMs` 90 s (APIS yw stream deadline 78 s with a 60 s Claude window); in-flight and abandoned windows 120 s.
+- **Automatic retry.** A turn with no reply at all is re-dispatched once automatically. The server still allows exactly one re-dispatch.
+- **Retention.** `proposal_parts_rejected` keeps the exact rejected parts (`retained`, ≤ 24,000 characters, `yw-rejected-retained-v1`). They are re-checked only by an owner-approved correction; nothing is credited automatically.
+
+**Rollback.** r30 `0913aa58`. The project-level production variable `YW_DIALOGUE_BUDGET_JSON` must be restored to v5 by PATCH: a deployment rollback does not revert project configuration (r5 precedent).
+
+**Evidence:** `_meta/reports/operations/yw-resilience-20261023/`.
+
 ## Current 2026-10-23 — r30: classical close reading paragraph by paragraph, with an immediate word achievement
 
 **Accepted:**
