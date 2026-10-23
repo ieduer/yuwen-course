@@ -1,4 +1,12 @@
-## Current 2026-10-23 — r33: a word confirmed by its original choice settles its open question (candidate)
+## Current 2026-10-23 — r33: a word confirmed by its original choice settles its open question (accepted)
+
+**Accepted:** source `3a96eb0`, Pages deployment `a6f8589f`, effective 2026-10-23T17:02:46Z. Status `20261023-yw-evidence-quotes-and-word-flow` (covers r32 and r33).
+
+**Acceptance on test account 553** (2 turns, 87,719 µ$):
+- The stale 次 question settled (`settledBy: original_answer`).
+- The next answer was bound to the new 所以 question and assessed.
+
+**Open owner decision.** The author labels an incomplete vocabulary answer `review`, for example one that has not yet chosen the original option. That parks the word for teacher review instead of letting the student finish it: since 10-20, three of the five real-student vocabulary `review` outcomes were of this kind. The policy currently allows `review` or `needs_practice` here, so changing it changes what goes to teacher review.
 
 **Found in the r32 acceptance** (test account, lesson-1578): at 16:13Z the correct original choice of 次 was recorded, but the same turn's dialogue assessment was refused (the punctuation case fixed in r32). The 次 question stayed `issued`. The paragraph guide had already passed 次, so the next answers, about 所以, were all bound to the 次 question; no dialogue credit was possible for them, and the author declined to grade. The same happens whenever a correct original choice (r30's same-turn item) comes with a refused or absent dialogue assessment. Production at 16:5xZ: only the test account's session was affected.
 
