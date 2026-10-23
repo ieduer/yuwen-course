@@ -896,3 +896,50 @@ test('a submission refused before any provider call settles at zero and does not
  assert.equal(receipt.assessment.provider,'study-guide-answer-key');assert.equal(receipt.assessment.score,100);
  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,1);
 });
+
+// r33 (2026-10-23): on the test account a correct original choice of 次 was recorded while the same turn's dialogue
+// assessment was refused, so the 次 question stayed issued and every later answer stayed bound to it.
+test('a word confirmed by its correct original choice settles its open question, so the next word gets its own',async t=>{
+ const f=fixture(t,'lesson-1578');let data=await f.read();
+ assert.equal(data.question?.objectiveId,'lesson-1578:v01','the guide plans the first word');
+ const legacyId=f.curriculum.objectives.find(o=>o.domain==='legacy'&&o.legacy?.resourceKey==='effect:lesson-1578:vocab:lesson-1578:v01').id;
+ f.options.callModel=async(_env,prompt)=>{const d=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=d.recent.filter(x=>x.role==='student').at(-1);
+  return {value:{reply:'選 D 對了。',assessments:[],originalEvidence:{objectiveId:legacyId,evidence:{turnId:turn.id,quote:'我选D，邹忌修八尺有余'}}},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ const r=await f.send(data,'我选D，邹忌修八尺有余的“修”是长，和茂林修竹的修一样。',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='original_source_saved'").get().n,1);
+ const q=f.sql.prepare("SELECT state,instance_json FROM dialogue_questions WHERE objective_id='lesson-1578:v01'").get();
+ assert.equal(q.state,'mastered');assert.equal(JSON.parse(q.instance_json).settledBy,'original_answer');
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_assessments').get().n,0,'no dialogue credit is invented');
+ assert.equal(r.data.question?.objectiveId,'lesson-1578:v02','the next word gets its own question');
+});
+
+test('an issued question whose word is already preserved is settled by the next turn, without credit',async t=>{
+ const f=fixture(t,'lesson-1578');let data=await f.read();
+ const legacyId=f.curriculum.objectives.find(o=>o.domain==='legacy'&&o.legacy?.resourceKey==='effect:lesson-1578:vocab:lesson-1578:v01').id;
+ f.options.callModel=async(_env,prompt)=>{const d=JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)),turn=d.recent.filter(x=>x.role==='student').at(-1);
+  return {value:{reply:'選 D 對了。',assessments:[],originalEvidence:{objectiveId:legacyId,evidence:{turnId:turn.id,quote:'我选D'}}},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ let r=await f.send(data,'我选D。',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
+ // Reproduce the stale state of 2026-10-23: the original is preserved but the question was left issued.
+ const row=f.sql.prepare("SELECT id,instance_json FROM dialogue_questions WHERE objective_id='lesson-1578:v01'").get(),stale={...JSON.parse(row.instance_json),state:'issued'};delete stale.settledBy;delete stale.answeredAt;
+ f.sql.prepare("UPDATE dialogue_questions SET state='issued',instance_json=? WHERE id=?").run(JSON.stringify(stale),row.id);
+ data=await f.read();assert.equal(data.question?.objectiveId,'lesson-1578:v01','stale: the confirmed word still holds the question');
+ assert.equal(data.state.objectives.find(o=>o.id===legacyId).status,'preserved');
+ f.options.callModel=async()=>({value:{reply:'我們讀下一個字。',assessments:[]},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}});
+ r=await f.send(data,'好，往下读吧。',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
+ assert.equal(f.sql.prepare("SELECT state FROM dialogue_questions WHERE id=?").get(row.id).state,'mastered');
+ assert.equal(r.data.question?.objectiveId,'lesson-1578:v02');
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_assessments').get().n,0);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='original_source_saved'").get().n,1,'no second original record');
+});
+
+test('an issued question is not settled by an original answer that is wrong or belongs to another word',async()=>{
+ const {originalSettles}=await import('../site/dialogue-source.js');
+ const c=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1578.json')),id=o=>c.objectives.find(x=>x.domain==='legacy'&&x.legacy?.resourceKey===`effect:lesson-1578:vocab:lesson-1578:${o}`).id;
+ const empty={objectives:[]};
+ assert.equal(originalSettles(c,empty,'lesson-1578:v01',{objectiveId:id('v01'),correctness:'correct'}),true);
+ assert.equal(originalSettles(c,empty,'lesson-1578:v01',{objectiveId:id('v01'),correctness:'incorrect'}),false);
+ assert.equal(originalSettles(c,empty,'lesson-1578:v01',{objectiveId:id('v02'),correctness:'correct'}),false);
+ assert.equal(originalSettles(c,{objectives:[{id:id('v01'),status:'preserved'}]},'lesson-1578:v01',null),true);
+ assert.equal(originalSettles(c,{objectives:[{id:id('v01'),status:'not_yet_observed'}]},'lesson-1578:v01',null),false);
+ assert.equal(originalSettles(c,empty,'lesson-1578:not-a-word',null),false);
+});

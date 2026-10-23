@@ -70,6 +70,15 @@ const formalRejectedNotice=code=>READING_GATE_NOTICE[code]||(['formal_assessment
 // (你說「…」, 你前面才說「…」 …) that is not a verbatim part of a saved student message is recorded and shown to the student.
 const STUDENT_QUOTE=/你(?:前面|剛才|剛剛|上一輪|先前|之前|一開始|後來|開頭|又|也|才|曾|還|只)*(?:說過|說到|說的是|說的|說|提到|提過|寫道|寫的是|寫過|講過|講)[，,：:]?\s*[「『"]([^」』"\n]{2,80})[」』"]/gu;
 const foldText=value=>String(value||'').replace(/[\s\p{P}\p{S}]/gu,'');
+// Whether a dialogue vocabulary question is settled by the word's original item: the item was answered correctly in this
+// turn, or the state already holds the preserved original answer.
+export function originalSettles(curriculum,state,objectiveId,originalResult){
+ const key=`effect:${curriculum?.lessonId}:vocab:${objectiveId}`;
+ const legacy=(curriculum?.objectives||[]).find(o=>o.domain==='legacy'&&o.legacy?.questionKind==='vocabulary'&&o.legacy.resourceKey===key);
+ if(!legacy)return false;
+ if(originalResult?.objectiveId===legacy.id&&originalResult.correctness==='correct')return true;
+ return (state?.objectives||[]).some(o=>o.id===legacy.id&&o.status==='preserved');
+}
 export function unverifiedStudentQuotes(reply,turns){
  const said=foldText((turns||[]).filter(t=>t.role==='student').map(t=>t.content).join('\n')),out=[];
  for(const m of String(reply||'').matchAll(STUDENT_QUOTE)){const quote=m[1].trim(),folded=foldText(quote);if(folded.length>=2&&!said.includes(folded)&&!out.includes(quote))out.push(quote);}
@@ -855,14 +864,15 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
    }
   }
 
+  let originalResult=null;
   if(originalEvidence){
    failureStage='original_source';
    if(!originalAction)throw Error('original_source_unavailable');
    const original=prepareOriginalInput(curriculum,originalEvidence.task,originalEvidence.input);
-   const response=await originalAction({...original,lessonId:curriculum.lessonId},turnId,result=>[
+   const response=await originalAction({...original,lessonId:curriculum.lessonId},turnId,result=>(originalResult={objectiveId:original.objectiveId,correctness:result?.evaluation?.correctness},[
     db.prepare('UPDATE dialogue_turns SET source_request_json=? WHERE id=? AND session_id=?').bind(JSON.stringify({...original,references:[originalEvidence.evidence]}),turnId,session.id),
     db.prepare("INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,'original_source_saved',?,?)").bind(`${turnId}:source`,session.id,turnId,JSON.stringify({objectiveId:original.objectiveId,...result}),at),
-   ]);
+   ]));
    if(!response.ok)throw Error('original_source_unconfirmed');
   }
   failureStage='storage';
@@ -885,6 +895,10 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   // A conversational preference or another verified action is not a wrong
   // answer to the outstanding question. Only its actual assessment advances it.
   if(question&&(body.conversation!==true||answer)){const updated={...question,state:answer?.outcome==='demonstrated'?'mastered':answer?.outcome==='review'?'review':'needs_reformulation',answeredAt:at,hinted:answer?.outcome!=='demonstrated'};statements.push(db.prepare(`UPDATE dialogue_questions SET state=?,instance_json=? WHERE id=? AND session_id=? AND ${active}`).bind(updated.state,JSON.stringify(updated),question.id,session.id,turnId));}
+  // A word confirmed by its original choice (correct in this turn, or already preserved) settles its open question even
+  // when no dialogue assessment of it was recorded; otherwise every later answer stays bound to a word the paragraph
+  // guide has already passed, and the next word can never be credited (2026-10-23). Credit itself is unchanged.
+  else if(question&&body.conversation===true&&originalSettles(curriculum,state,question.objectiveId,originalResult)){const updated={...question,state:'mastered',answeredAt:at,settledBy:'original_answer'};statements.push(db.prepare(`UPDATE dialogue_questions SET state=?,instance_json=? WHERE id=? AND session_id=? AND state='issued' AND ${active}`).bind(updated.state,JSON.stringify(updated),question.id,session.id,turnId));}
   statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,?,?,? WHERE ${active}`).bind(uuid(),session.id,turnId,'assessment_saved',JSON.stringify({objectiveIds:proposal.assessments.map(a=>a.objectiveId),ruleVersion:RULE_VERSION}),at,turnId),
    db.prepare("UPDATE dialogue_calls SET state='finished',finished_at=?,usage_json=?,first_token_ms=?,completed_ms=?,accounted_micros=? WHERE turn_id=? AND state='finishing'").bind(at,JSON.stringify(result.usage||null),Number.isSafeInteger(result.firstTokenMs)?result.firstTokenMs:null,Number.isSafeInteger(result.totalDurationMs)?result.totalDurationMs:null,operatorCost(budget,result,providerAccounting),turnId),
    db.prepare('UPDATE dialogue_sessions SET inflight=NULL,updated_at=? WHERE id=? AND inflight=?').bind(at,session.id,turnId));
