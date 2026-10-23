@@ -1,4 +1,5 @@
 // A grounded model synthesis for human review, never an official grade.
+import {verbatimSpan} from './dialogue-quote.js';
 export const CONCLUSION_VERSION='yw-dialogue-conclusion-v1';
 const domains={interpretation:['context','firstRead','read','authorQuestion'],vocabulary:['vocabulary'],technique:['structure','revision','wordCreation'],transfer:['transfer'],uncertainty:['shangyou']};
 const text=(value,max)=>typeof value==='string'&&value.trim()&&value.length<=max;
@@ -7,9 +8,10 @@ export function validateConclusion(raw,{curriculum,state,turns}){
  if(!state?.readyForShangyou||!text(raw.studentSummary,180)||!Array.isArray(raw.domains)||raw.domains.length!==5)throw Error('conclusion_not_ready');
  const reference=(ref,passageRequired=false)=>{
   const turn=turns.find(t=>t.id===ref?.turnId&&t.role==='student');
-  if(!turn||!text(ref.quote,60)||!turn.content.includes(ref.quote))throw Error('unverifiable_conclusion_turn');
-  const result={turnId:turn.id,quote:ref.quote};
-  if(passageRequired){const p=curriculum.passages.find(p=>p.id===ref.passageId);if(!p||!text(ref.passageQuote,60)||!p.text.includes(ref.passageQuote))throw Error('unverifiable_conclusion_passage');Object.assign(result,{passageId:p.id,passageQuote:ref.passageQuote});}
+  const quote=turn&&text(ref.quote,60)?verbatimSpan(turn.content,ref.quote):null;
+  if(!quote)throw Error('unverifiable_conclusion_turn');
+  const result={turnId:turn.id,quote};
+  if(passageRequired){const p=curriculum.passages.find(p=>p.id===ref.passageId),passageQuote=p&&text(ref.passageQuote,60)?verbatimSpan(p.text,ref.passageQuote):null;if(!passageQuote)throw Error('unverifiable_conclusion_passage');Object.assign(result,{passageId:p.id,passageQuote});}
   return result;
  };
  const before=reference(raw.change?.before),after=reference(raw.change?.after);

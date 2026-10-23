@@ -7,6 +7,9 @@ export const PARAGRAPH_GUIDE_VERSION='yw-paragraph-guide-v1';
 const CONFIRMED=['demonstrated','preserved'];
 const WAITING=['review','historical_review','pending_calibration'];
 const fold=value=>String(value||'').replace(/[\s\p{P}\p{S}]/gu,'');
+// A paragraph is named by its opening words (e.g. 「是日也」): passage ids and guide ordinals can differ from the
+// paragraph numbers a student sees in the textbook, because a lesson may carry captions or skip paragraphs without words.
+const opening=text=>{const head=String(text||'').trim().split(/[，。；：！？、,.;:!?\s]/u).find(x=>x.length>=2)||String(text||'').trim();return [...head].slice(0,8).join('');};
 
 function originalStatus(curriculum,state,objectiveId){
  const key=`effect:${curriculum.lessonId}:vocab:${objectiveId}`;
@@ -32,7 +35,7 @@ export function paragraphGuide(curriculum,state,items){
  const paragraphs=[];
  for(const w of words){
   let p=paragraphs.at(-1);
-  if(!p||p.passageId!==w.passageId){p={passageId:w.passageId,ordinal:paragraphs.length+1,words:[]};paragraphs.push(p);}
+  if(!p||p.passageId!==w.passageId){p={passageId:w.passageId,ordinal:paragraphs.length+1,opening:w.passageId?opening(passages[index.get(w.passageId)].text):null,words:[]};paragraphs.push(p);}
   p.words.push(w);
  }
  for(const p of paragraphs){p.confirmed=p.words.filter(w=>w.status==='confirmed').length;p.total=p.words.length;}
@@ -42,8 +45,8 @@ export function paragraphGuide(curriculum,state,items){
  return {
   version:PARAGRAPH_GUIDE_VERSION,phase:state.readingGate.phase,
   order:words.map(w=>w.objectiveId),
-  paragraphs:paragraphs.map(p=>({passageId:p.passageId,ordinal:p.ordinal,confirmed:p.confirmed,total:p.total,words:p.words.map(clean)})),
-  focus:focusParagraph?{passageId:focusParagraph.passageId,ordinal:focusParagraph.ordinal,of:paragraphs.length,confirmed:focusParagraph.confirmed,total:focusParagraph.total,words:focusParagraph.words.map(clean),next:clean(next)}:null,
+  paragraphs:paragraphs.map(p=>({passageId:p.passageId,ordinal:p.ordinal,opening:p.opening,confirmed:p.confirmed,total:p.total,words:p.words.map(clean)})),
+  focus:focusParagraph?{passageId:focusParagraph.passageId,ordinal:focusParagraph.ordinal,of:paragraphs.length,opening:focusParagraph.opening,confirmed:focusParagraph.confirmed,total:focusParagraph.total,words:focusParagraph.words.map(clean),next:clean(next)}:null,
   confirmedWords:words.filter(w=>w.status==='confirmed').length,totalWords:words.length,
   waitingWords:words.filter(w=>w.status==='waiting').length,complete:!focusParagraph,
  };

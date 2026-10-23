@@ -674,13 +674,15 @@ function renderProgressLine(){
 // Classical close reading: the paragraph the conversation is on, the words read so far, and an achievement the moment the
 // server confirms a word. Everything comes from the server's paragraph guide; nothing is inferred on the page.
 let knownWords=null,knownWordsOwner=null;
+// Paragraphs are named by their opening words, as the author is told to name them; ordinals are only progress counts.
+const paragraphName=p=>p?.opening?`「${p.opening}」一段`:`第 ${p?.ordinal} 段`;
 function renderParagraphProgress(guide){
  const box=$('paragraph-progress');if(!box)return;box.replaceChildren();
  if(guide?.phase==='initial_reading')box.append(node('b','文言細讀 · 先做無注疏初讀'),node('span','：不看注釋讀一遍，告訴作者三處讀不通或拿不準的地方和你的猜測，再寫幾句初讀感受。之後一段一段讀字詞，讀懂一個記一個。'));
  else if(guide?.phase==='annotated_reading')box.append(node('b','文言細讀'),node('span','：讀完帶註釋的正文後告訴作者一聲，就可以一段一段讀字詞。'));
  else if(guide?.totalWords&&guide.complete)box.append(node('b',`全篇字詞已讀通 ${guide.confirmedWords}／${guide.totalWords}`),node('span',guide.waitingWords?` · ${guide.waitingWords} 個待教師覆核`:''));
  else if(guide?.focus){
-  box.append(node('b',`逐段細讀 · 第 ${guide.focus.ordinal}／${guide.focus.of} 段`),node('span',` · 本段字詞 ${guide.focus.confirmed}／${guide.focus.total} · 全篇 ${guide.confirmedWords}／${guide.totalWords}`));
+  box.append(node('b',`逐段細讀 · ${paragraphName(guide.focus)} · 進度 ${guide.focus.ordinal}／${guide.focus.of}`),node('span',` · 本段字詞 ${guide.focus.confirmed}／${guide.focus.total} · 全篇 ${guide.confirmedWords}／${guide.totalWords}`));
   const words=node('span',undefined,'words');
   for(const w of guide.focus.words){const chip=node('span',`${w.status==='confirmed'?'✓ ':''}${w.word}`,'word');chip.dataset.status=w.status;if(guide.focus.next?.objectiveId===w.objectiveId)chip.dataset.next='';words.append(chip);}
   box.append(words);
@@ -696,7 +698,7 @@ function acknowledgeWords(data){
 function renderAchievement(gained,data,gainedPoints){
  const box=$('achievement');if(!box||!gained.length)return;box.replaceChildren();
  const guide=data.paragraphGuide,last=gained.at(-1),score=data.state?.score;
- box.append(node('strong',`讀懂了「${gained.map(w=>w.word).join('」「')}」`),node('small',`第 ${last.paragraph.ordinal} 段 ${last.paragraph.confirmed}／${last.paragraph.total} · 全篇字詞 ${guide.confirmedWords}／${guide.totalWords}${gainedPoints>0&&score?.status==='ok'?` · +${gainedPoints} 分（本課 ${score.earned}／${score.max}）`:''}`));
+ box.append(node('strong',`讀懂了「${gained.map(w=>w.word).join('」「')}」`),node('small',`${paragraphName(last.paragraph)} ${last.paragraph.confirmed}／${last.paragraph.total} · 全篇字詞 ${guide.confirmedWords}／${guide.totalWords}${gainedPoints>0&&score?.status==='ok'?` · +${gainedPoints} 分（本課 ${score.earned}／${score.max}）`:''}`));
  box.hidden=false;
 }
 // Lesson details: the merged learning targets (one per real aim; legacy rubric items are routes of the same target),
