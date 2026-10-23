@@ -1,3 +1,33 @@
+## Current 2026-10-23 — r30: classical close reading paragraph by paragraph, with an immediate word achievement (candidate)
+
+**Problem (production data 2026-10-23, 37 sessions, read only):** long conversations earned little or nothing, worst in classical lessons.
+- **First read:** 6 of 11 classical sessions never passed it, but the author kept grading. Each grade was refused (`classical_first_read_required`), and the notice told the student to cite their words again next turn. One session had three such refusals in 33 minutes.
+- **Vocabulary track:** students who had confirmed all 12–13 words still showed 0/30, because the track paid nothing until every study-guide item was also done.
+- **Question order:** vocabulary questions came in a random order (`sha256-session-v1`), detached from the text.
+
+**Change (POLICY v16, score rule `legacy-track-weights-v2`, guide `yw-paragraph-guide-v1`):**
+- **Paragraph guide** (`site/dialogue-paragraph-guide.js`): each required word sits in the first of its source paragraphs that contains its source sentence. The focus is the first paragraph with an open word.
+  - A word is confirmed only by server-verified evidence: a demonstrated dialogue assessment or a preserved original answer.
+  - Review or pending-calibration words wait; they never block the next word.
+- **Question order:** classical planned questions and the `question` action follow text order (`paragraph-order-v1`).
+- **Author context:** live turns pass the focus as `paragraphGuide`. Historical reconstructions and calibrations do not, so their prompt shape is unchanged.
+- **Author rules:**
+  - Before the first read, no formal grade, original evidence or word credit; the author guides the first read in their own voice.
+  - In close reading, one paragraph at a time: the student infers the word from context, the author confirms at once and draws out the word's weight in the paragraph in their own style. No lowering of the level, no glossary dump.
+- **Reading-gate notice:** says what unlocks the record and that nothing has to be rewritten.
+- **Vocabulary track:** each confirmed word or study-guide item earns its share at once, `floor(weight × confirmed / total)`. The full weight still needs every original answer, every guide item and, for classical texts, no unresolved first-read mark; until then the track stays at most one point short.
+- **Page:**
+  - paragraph progress line (paragraph n/N · words in this paragraph · whole text);
+  - an achievement card when the server confirms a word, with the points it added;
+  - item progress on the vocabulary track.
+
+**Unchanged:** evidence rules, answer keys, the original A+ gate records sent to the User Center, schema, bindings, caps and budgets.
+
+**Effect on the saved sessions** (local reconstruction with the r30 code; no writes): 24/lesson-1477 40 → 51, 25/lesson-1474 25 → 36, 8/lesson-1499 75 → 97, 75/lesson-1498 25 → 46. Sessions still before the first read stay at 0 until it is done.
+
+**Tests:** `scripts/test_dialogue_paragraph_guide.mjs` (6).
+**Evidence:** `_meta/reports/operations/yw-classical-paragraphs-20261023/`.
+
 ## Current 2026-10-21 — r16: self-rating evidence carries the formal manifest lineage (User Center quarantine fixed at the producer)
 
 Defect (found in the r15 end-to-end proof, test account 553): both 篇目評價 self-ratings on added-formal-scope lessons (lesson-1717-p2 2026-10-20T13:54Z, lesson-1693 2026-10-21T08:25Z) were quarantined by the User Center as `event_contract_invalid`; reproduced locally against UC `origin/main` `c7993ab` as `resource lineage identity mismatch`. Since UC `1c82415` (live from the UC release of 2026-10-20T00:55Z) the hub verifies `sourceVersion` / `sourceReleaseId` / `canonicalUnitId` / `resourceVersion` / `mappingVersion` together for every item of its current formal manifest (`yw-e8a6b72248be1cd8`, added scope `yw-formal-scope-20261013-v2`: 764 items, 88 of them `evaluation`). `evidenceVersions` in `site/learning-evidence-source.js` stamped the evaluation item with the formative competency release (`yw-formative-f82a87ce55c0063c`, `yw-formative-learning-mapping-v1`) while `canonicalUnitId` / `resourceVersion` came from the formal item — a mixed lineage. The 242 self-ratings accepted up to 2026-10-19 were on the 101 original (e310) evaluation items, which have no `formalScopePolicyVersion` and pass the looser check.
