@@ -809,3 +809,21 @@ test('a reply produced by the fallback model carries a visible label; a primary-
  const f=await fixture({conversation:true,initial:{turns:[{id:'s1',role:'student',content:'問題',createdAt:'2026-10-21T00:00:00Z'},{id:'a1',role:'teacher',content:'主要模型的回應',model:'claude-sonnet-5-5',createdAt:'2026-10-21T00:00:01Z'},{id:'a2',role:'teacher',content:'備用模型的回應',model:'gemini-3.8-flash',createdAt:'2026-10-21T00:00:02Z'}]}});for(let i=0;i<4;i++)await tick();
  assert.equal(f.document.querySelector('#turn-a1 .turn-fallback'),null);assert.match(f.document.querySelector('#turn-a2 .turn-fallback')?.textContent||'',/備用模型/);
 });
+
+test('classical close reading shows paragraph progress and an achievement the moment the server confirms a word (r30)',async()=>{
+ const words=(a,b)=>[{objectiveId:'v1',word:'修',sentence:'茂林修竹',status:a},{objectiveId:'v2',word:'次',sentence:'列坐其次',status:b}];
+ const guide=(a,b,confirmed)=>({version:'yw-paragraph-guide-v1',phase:'close_reading',order:['v1','v2','v3'],paragraphs:[{passageId:'p1',ordinal:1,confirmed:confirmed>1?2:confirmed,total:2,words:words(a,b)},{passageId:'p2',ordinal:2,confirmed:0,total:1,words:[{objectiveId:'v3',word:'契',sentence:'若合一契',status:'open'}]}],focus:{passageId:'p1',ordinal:1,of:2,confirmed,total:2,words:words(a,b),next:words(a,b).find(w=>w.status==='open')},confirmedWords:confirmed,totalWords:3,waitingWords:0,complete:false});
+ const score=earned=>({status:'ok',rule:'legacy-track-weights-v2',earned,max:100,remaining:100-earned,tracks:[{key:'vocabulary',label:'詞級疏通',weight:30,points:earned-25,status:earned>25?'partial':'not_started',progress:{confirmed:earned-25,total:17},next:'x'}]});
+ const base={ownerRef:'owner-a',revision:1,turns:[],sourceSubmissions:[],readingGate:{phase:'close_reading',unresolvedMarks:0}};
+ const f=await fixture({initial:{...base,paragraphGuide:guide('open','open',0),state:{next:null,objectives:[],targets:[],completion:'in_progress',score:score(25)}}});
+ f.frontend.update({...base,paragraphGuide:guide('open','open',0),state:{next:null,objectives:[],targets:[],completion:'in_progress',score:score(25)}});
+ const line=f.document.getElementById('paragraph-progress');
+ assert.equal(line.hidden,false);assert.match(line.textContent,/逐段細讀 · 第 1／2 段/);assert.match(line.textContent,/本段字詞 0／2 · 全篇 0／3/);
+ assert.equal(f.document.getElementById('achievement').hidden,true,'no achievement before anything is confirmed');
+ f.frontend.update({...base,revision:2,paragraphGuide:guide('confirmed','open',1),state:{next:null,objectives:[],targets:[{id:'v1',label:'字詞：修',status:'in_progress',requiredForCompletion:true,routes:{confirmed:1,total:2,dialogue:{id:'v1',status:'demonstrated'},source:[]}}],completion:'in_progress',score:score(26)}});
+ const card=f.document.getElementById('achievement');
+ assert.equal(card.hidden,false);assert.match(card.textContent,/讀懂了「修」/);assert.match(card.textContent,/第 1 段 1／2 · 全篇字詞 1／3 · \+1 分（本課 26／100）/);
+ assert.match(line.textContent,/✓ 修/);assert.match(f.document.getElementById('lesson-score').textContent,/已完成 1／17 項/);
+ f.frontend.update({...base,revision:3,paragraphGuide:{...guide('open','open',0),phase:'initial_reading'},state:{next:null,objectives:[],targets:[],completion:'in_progress',score:score(25)}});
+ assert.match(line.textContent,/先做無注疏初讀/);
+});
