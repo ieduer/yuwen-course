@@ -89,6 +89,7 @@ test('the author is told what the classical reading gate means and how to read p
  assert.match(POLICY,/不提交 formalAssessments、originalEvidence 或字詞 demonstrated/);
  assert.match(POLICY,/paragraphGuide 存在時是文言細讀/);
  assert.match(POLICY,/不降低難度/);
+ assert.match(POLICY,/只摘能支持該判準的最短一段/,'long answers must not be copied whole into every evidence quote (the 4096-token truncations of 2026-10-22/23)');
  for(const code of ['classical_first_read_required','classical_annotated_reading_required']){
   assert.match(READING_GATE_NOTICE[code],/文言文/);
   assert.doesNotMatch(READING_GATE_NOTICE[code],/引用你先前的話補記/,'the notice must not invite a resubmission that would be refused again');
