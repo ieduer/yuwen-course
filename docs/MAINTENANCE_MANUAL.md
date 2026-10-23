@@ -1,4 +1,19 @@
-## Current 2026-10-23 — r32: quotes that differ only in punctuation; paragraphs named by their opening words (candidate)
+## Current 2026-10-23 — r33: a word confirmed by its original choice settles its open question (candidate)
+
+**Found in the r32 acceptance** (test account, lesson-1578): at 16:13Z the correct original choice of 次 was recorded, but the same turn's dialogue assessment was refused (the punctuation case fixed in r32). The 次 question stayed `issued`. The paragraph guide had already passed 次, so the next answers, about 所以, were all bound to the 次 question; no dialogue credit was possible for them, and the author declined to grade. The same happens whenever a correct original choice (r30's same-turn item) comes with a refused or absent dialogue assessment. Production at 16:5xZ: only the test account's session was affected.
+
+**Change** (`finishTurn`, `originalSettles`): in a conversation turn without a dialogue answer to the open question, the question is settled (`state: mastered`, `settledBy: original_answer`, guarded by `state='issued'`) when its word's original item was answered correctly in this turn or is already `preserved`. The next planned question is then the guide's next open word.
+
+**Unchanged:** dialogue credit, original records, evidence rules and the answer key.
+
+**Rollback.** r32 `643f4fff`.
+
+## Current 2026-10-23 — r32: quotes that differ only in punctuation; paragraphs named by their opening words (accepted)
+
+**Accepted:** source `5087b7a`, Pages deployment `643f4fff`, effective 16:43:34Z. Acceptance on test account 553:
+- the page label reads 「是日也」一段 · 進度 2／4;
+- one v18 turn (61,658 µ$) used no paragraph numbers;
+- the retained 16:13Z rejection re-checks as demonstrated under r32 (r31 refused it); nothing was written.
 
 **Found in the r31 acceptance** (16:13Z, test account): a correct assessment of 次 was refused as `unverifiable_evidence`. One passage quote read 「引以为流觞曲水,列坐其次」 with an ASCII comma, copied from the item's source sentence; the passage has 「，」. 291 of the 801 vocabulary source sentences differ from their passage only in punctuation or spacing, and `unverifiable_evidence` was refused 11 times from 10-22 to the find.
 
