@@ -16,6 +16,7 @@ import {MODE_OPERATION,modeConfigured,prepareModeLedger,validateModeResult} from
 import {recordCorrection} from './dialogue-corrections.js';
 import {hasClassicalAnnotatedReadReceipt} from './classical-first-read-source.js';
 import {paragraphGuide,paragraphGuideContext} from './dialogue-paragraph-guide.js';
+import {promptParts} from './dialogue-policy.js';
 import {consumeGatewayStream,studentStream,validatedProviderAccounting} from './dialogue-stream.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
 import {requestDialogueBudget,combinedProviderAccounting,operatorCost,continuationDisposition,budgetDenial} from './dialogue-recovery.js';
@@ -77,6 +78,19 @@ export function unverifiedStudentQuotes(reply,turns){
 const misquoteNotice=quotes=>`作者引用的「${quotes.join('」「')}」不是你訊息裡的原話，以你自己寫的為準。`;
 // Stable rejection code of a validation error. Some validators keep the code in error.code and a learner-facing sentence in
 // error.message (assertNewFormalAnswerTime); reading only the message recorded those as 'unclassified'.
+// A rejected proposal part is kept, privately and bounded, with its reason (2026-10-23): after a validator fix the saved
+// student words and this retained part can be re-checked and, with the owner's approval, recorded as a correction. Never
+// credited here, never sent to the User Center.
+const RETAINED_KEYS={assessments:['assessments'],formalAssessments:['formalAssessments'],originalEvidence:['originalEvidence'],readingEvidence:['readingEvidence'],sourceDraft:['sourceDraft'],sourceDraft_or_conclusion:['sourceDraft','conclusion']};
+export const RETAINED_MAX_CHARS=24000;
+export function retainedRejected(value,parts){
+ if(!value||typeof value!=='object'||!Array.isArray(parts)||!parts.length)return {};
+ const kept={};
+ for(const p of parts)for(const key of RETAINED_KEYS[p.part]||[])if(value[key]!==undefined)kept[key]=value[key];
+ if(!Object.keys(kept).length)return {};
+ const text=JSON.stringify(kept);
+ return text.length<=RETAINED_MAX_CHARS?{retained:kept,retainedVersion:'yw-rejected-retained-v1'}:{retainedTruncated:true,retainedChars:text.length,retainedVersion:'yw-rejected-retained-v1'};
+}
 export function rejectionCode(error){return [error?.code,error?.message].find(v=>typeof v==='string'&&/^[a-z0-9_]{1,80}$/.test(v))||'unclassified';}
 // Exact provider cost of a call whose every attempt reported usage; null when any attempt's usage is unknown.
 function knownProviderCost(budget,result,accounting){
@@ -222,7 +236,7 @@ async function learningRecords(db,session){
  // not an uncertain result, so it neither blocks the saved draft nor counts as an attempt.
  const refused=new Set((await all(db.prepare("SELECT turn_id FROM dialogue_events WHERE session_id=? AND event_type='response_unconfirmed' AND json_extract(details_json,'$.stage')='original_source' AND json_extract(details_json,'$.code') IN ('classical_first_read_required','classical_annotated_reading_required')").bind(session.id))).map(r=>r.turn_id));
  const rows=await all(db.prepare("SELECT t.id AS turnId,t.sequence,t.source_request_json,t.status,c.state AS call_state,COALESCE(c.finished_at,c.created_at) AS call_updated_at,e.details_json FROM dialogue_turns t LEFT JOIN dialogue_calls c ON c.turn_id=t.id LEFT JOIN dialogue_events e ON e.turn_id=t.id AND e.event_type IN ('source_assessment_saved','original_source_saved') WHERE t.session_id=? AND t.role='student' AND t.source_request_json IS NOT NULL ORDER BY t.sequence").bind(session.id));
- const submissions=rows.map(row=>{const result=row.details_json?JSON.parse(row.details_json):null,formal=result?.request||JSON.parse(row.source_request_json),assessment=result?.assessment||result?.evaluation;return {turnId:row.turnId,sequence:row.sequence,objectiveId:formal.objectiveId,input:formal.input,interaction:formal.interaction,label:formal.interaction==='studyGuideItemCompleted'?'學習提示':formal.interaction==='readAcknowledged'?'閱讀確認':null,references:formal.references||null,status:result?'confirmed':refused.has(row.turnId)?'refused':['reserved','finishing'].includes(row.call_state)&&Date.now()-Date.parse(row.call_updated_at)<60000?'pending':'unconfirmed',score:result&&Number.isFinite(assessment?.score??assessment?.numericScore)?assessment.score??assessment.numericScore:null,correctness:assessment?.correctness||null,scoringRole:['evaluation','readAcknowledged'].includes(formal.interaction)?'none':null,sourceEventId:result?.sourceEventId||null,assessment,reference:formal.reference||null};});
+ const submissions=rows.map(row=>{const result=row.details_json?JSON.parse(row.details_json):null,formal=result?.request||JSON.parse(row.source_request_json),assessment=result?.assessment||result?.evaluation;return {turnId:row.turnId,sequence:row.sequence,objectiveId:formal.objectiveId,input:formal.input,interaction:formal.interaction,label:formal.interaction==='studyGuideItemCompleted'?'學習提示':formal.interaction==='readAcknowledged'?'閱讀確認':null,references:formal.references||null,status:result?'confirmed':refused.has(row.turnId)?'refused':['reserved','finishing'].includes(row.call_state)&&Date.now()-Date.parse(row.call_updated_at)<120000?'pending':'unconfirmed',score:result&&Number.isFinite(assessment?.score??assessment?.numericScore)?assessment.score??assessment.numericScore:null,correctness:assessment?.correctness||null,scoringRole:['evaluation','readAcknowledged'].includes(formal.interaction)?'none':null,sourceEventId:result?.sourceEventId||null,assessment,reference:formal.reference||null};});
  return {fields,submissions};
 }
 async function plannedQuestion(db,session,curriculum,state){
@@ -248,7 +262,7 @@ async function snapshot(db,session,curriculum,before){
  if(!question){question=await plannedQuestion(db,session,curriculum,state);if(question)publicQuestion={id:question.id,objectiveId:question.objectiveId,attempt:question.attempt,question:question.question,source:question.source,createdAt:question.createdAt};}
  const partialRows=await all(db.prepare(`SELECT c.content,c.sequence,c.created_at,t.id AS turn_id,t.status FROM dialogue_stream_chunks c JOIN dialogue_turns t ON t.id=c.turn_id WHERE t.session_id=? AND c.turn_id=(SELECT id FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence DESC LIMIT 1) AND NOT EXISTS(SELECT 1 FROM dialogue_turns r WHERE r.reply_to=t.id AND r.role='teacher') ORDER BY c.sequence LIMIT 128`).bind(session.id,session.id));
  const inflight=session.inflight?await db.prepare('SELECT state,COALESCE(finished_at,created_at) AS updated_at FROM dialogue_calls WHERE turn_id=?').bind(session.inflight).first():null;
- const pending=!!session.inflight&&!!inflight&&['reserved','finishing'].includes(inflight.state)&&Date.now()-Date.parse(inflight.updated_at)<90000;
+ const pending=!!session.inflight&&!!inflight&&['reserved','finishing'].includes(inflight.state)&&Date.now()-Date.parse(inflight.updated_at)<120000;
  const partial=partialRows.length?{turnId:partialRows[0].turn_id,content:partialRows.map(c=>c.content).join(''),status:partialRows[0].status==='needs_review'||!pending?'unconfirmed':'streaming'}:null;
  if(partial){
   partial.digest=await sha(partial.content);
@@ -651,7 +665,7 @@ async function continueDialogue({request,env,db,student,session,curriculum,body,
 }
 
 export async function reconcileAbandonedCalls(db,at=now()){
- const cutoff=new Date(Date.parse(at)-90000).toISOString(); // > LIMITS.timeoutMs (65 s): a call still inside its gateway window is never reconciled as abandoned
+ const cutoff=new Date(Date.parse(at)-120000).toISOString(); // > LIMITS.timeoutMs (90 s): a call still inside its gateway window is never reconciled as abandoned
  const stale="SELECT turn_id FROM dialogue_calls WHERE state IN ('reserved','finishing') AND COALESCE(finished_at,created_at)<?";
  await db.batch([
   db.prepare(`INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT turn_id||':crash',session_id,turn_id,'response_unconfirmed','{"retry":"readback_only","reason":"worker_interrupted"}',? FROM dialogue_calls WHERE turn_id IN (${stale})`).bind(at,cutoff),
@@ -855,7 +869,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const statements=[db.prepare(`INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,reply_to,status,model,model_version,policy_version,created_at) SELECT ?,?,?,?,'teacher',?,?,'saved',?,?,?,? WHERE ${active}`).bind(teacherId,session.id,body.mutationId,'server-response',proposal.reply,turnId,result.model||null,result.modelVersion||null,POLICY_VERSION,at,turnId)];
   if(readingAction)statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'reading_evidence_saved',?,? WHERE ${active}`).bind(`${turnId}:reading`,session.id,turnId,JSON.stringify({action:readingAction,receipt:readingReceipt}),at,turnId));
   if(proposal.sourceDraft)statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'source_answer_proposed',?,? WHERE ${active}`).bind(`${turnId}:source-proposal`,session.id,turnId,JSON.stringify(proposal.sourceDraft),at,turnId));
-  if(rejectedParts.length)statements.push(db.prepare(`INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'proposal_parts_rejected',?,? WHERE ${active}`).bind(`${turnId}:rejected`,session.id,turnId,JSON.stringify({policyVersion:POLICY_VERSION,parts:rejectedParts,credited:false}),at,turnId));
+  if(rejectedParts.length)statements.push(db.prepare(`INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'proposal_parts_rejected',?,? WHERE ${active}`).bind(`${turnId}:rejected`,session.id,turnId,JSON.stringify({policyVersion:POLICY_VERSION,parts:rejectedParts,credited:false,...retainedRejected(result?.value,rejectedParts)}),at,turnId));
   // The author's reply may have announced a score that the server could not record: the student must see that at once, not discover it later.
   const formalRejected=rejectedParts.find(p=>p.part==='formalAssessments');
   const misquotes=body.conversation===true?unverifiedStudentQuotes(proposal.reply,completeTurns):[];
@@ -918,7 +932,7 @@ export async function callDialogueModel(env,prompt,requestId,onReply,budget=dial
  assertIsolatedCallCurrent(env,budget);
  if(!env.APIS?.fetch||!env.APIS_CALLER_TOKEN)throw new Error('approved_gateway_unavailable');
  const signal=AbortSignal.timeout(LIMITS.timeoutMs);
- const response=await env.APIS.fetch(new Request('https://apis.internal/api/yw/dialogue-stream',{method:'POST',headers:{'content-type':'application/json',accept:'text/event-stream','x-project-name':'yw.bdfz.net','x-task-type':'chat','x-thinking-level':'low',...(env.APIS_CALLER_TOKEN?{'x-internal-token':env.APIS_CALLER_TOKEN}:{}),'x-request-id':requestId},body:JSON.stringify({stream:true,providerAttemptLimit:budget.providerAttemptLimit||1,model:budget.model,...(budget.primaryModel?{tier:'claude-primary'}:{}),contents:[{role:'user',parts:[{text:prompt}]}],taskType:'chat',thinkingLevel:'low',generationConfig:{temperature:0.3,maxOutputTokens:budget.maxOutputTokens??LIMITS.outputTokens,responseMimeType:'application/json',...(responseJsonSchema?{responseJsonSchema}:{})}}),signal}));
+ const response=await env.APIS.fetch(new Request('https://apis.internal/api/yw/dialogue-stream',{method:'POST',headers:{'content-type':'application/json',accept:'text/event-stream','x-project-name':'yw.bdfz.net','x-task-type':'chat','x-thinking-level':'low',...(env.APIS_CALLER_TOKEN?{'x-internal-token':env.APIS_CALLER_TOKEN}:{}),'x-request-id':requestId},body:JSON.stringify({stream:true,providerAttemptLimit:budget.providerAttemptLimit||1,model:budget.model,...(budget.primaryModel?{tier:'claude-primary'}:{}),...(()=>{const parts=promptParts(prompt);return {contents:[{role:'user',parts:parts.map(text=>({text}))}],...(budget.primaryModel&&parts.length===3?{cacheBreakpoints:[0,1]}:{})};})(),taskType:'chat',thinkingLevel:'low',generationConfig:{temperature:0.3,maxOutputTokens:budget.maxOutputTokens??LIMITS.outputTokens,responseMimeType:'application/json',...(responseJsonSchema?{responseJsonSchema}:{})}}),signal}));
  if(!response.ok){
   if([401,403,429].includes(response.status))throw new Error(response.status===429?'gateway_rate_limit':'gateway_credential_rejected');
   const error=new Error('gateway_unavailable');

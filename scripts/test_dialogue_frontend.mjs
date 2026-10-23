@@ -603,16 +603,17 @@ test('the personal history can be copied as one list, with a visible fallback wh
  assert.equal(f.posts.length,0);
 });
 
-test('a saved turn without any reply shows one explicit retry that re-dispatches it without a new student turn or silent retry',async()=>{
+test('a saved turn without any reply is re-dispatched once automatically (r31), without a new student turn, with the button kept',async()=>{
  const student={id:'student-one',role:'student',content:'我的原答案',status:'needs_review',createdAt:'2026-10-20T03:28:42Z'};
  const f=await fixture({conversation:true,initial:{revision:1,turns:[student],partial:null,replyRetry:{turnId:'student-one',allowed:true,code:'explicit_retry_available',requiresUserAction:true,remainingProviderAttempts:1,providerAttemptsUsed:2,stage:'provider_request'}},post:(body,{data,setData})=>{
   setData({...data,revision:2,replyRetry:null,turns:[student,{id:'teacher-one',role:'teacher',content:'先說說你在意的那一句吧。',createdAt:'2026-10-20T03:40:00Z'}]});
   const frame=(event,value)=>`event: ${event}\ndata: ${JSON.stringify(value)}\n\n`;
   return new Response(frame('saved',{saved:true,continuation:true,turnId:'student-one',mutationId:body.mutationId,revision:2})+frame('delta',{turnId:'student-one',text:'先說說你在意的那一句吧。'})+frame('done',{turnId:'student-one'}),{headers:{'content-type':'text/event-stream'}});
  }});
- const box=f.document.getElementById('reply-retry');assert.ok(box);assert.match(box.textContent,/再試一次取得回應/);assert.match(box.textContent,/不會重複保存/);
- assert.equal(f.posts.length,0);
- await box.querySelector('button').onclick();
+ const box=f.document.getElementById('reply-retry');assert.ok(box);assert.match(box.textContent,/作者正在重新組織回答/);assert.match(box.textContent,/你的回答已保存/);assert.match(box.textContent,/再試一次取得回應/);
+ assert.equal(f.posts.length,0,'nothing is sent before the short delay');
+ const auto=[...f.timers.values()].filter(t=>t.delay===1200);assert.equal(auto.length,1,'one automatic retry is scheduled');
+ await auto[0].cb();for(let i=0;i<6;i++)await tick();
  assert.equal(f.posts.length,1);assert.deepEqual([f.posts[0].action,f.posts[0].turnId,f.posts[0].partialDigest,f.posts[0].revision],['continue','student-one','',1]);
  assert.equal(f.document.querySelectorAll('#turns .student').length,1);assert.match(f.document.getElementById('turns').textContent,/先說說你在意的那一句吧。/);
  assert.equal(f.document.getElementById('reply-retry'),null);

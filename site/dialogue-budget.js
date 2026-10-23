@@ -44,6 +44,12 @@ export function dialogueBudget(env,at=Date.now()){
 export function reconciledCost(policy,usage,model=null){
  const input=usage?.promptTokenCount,total=usage?.totalTokenCount;
  if(!Number.isSafeInteger(input)||!Number.isSafeInteger(total)||input<0||total<input||input>policy.maxInputTokens||total-input>policy.maxOutputTokens)return null;
+ // The gateway prices a Claude attempt itself (cache writes and reads at their own prices, 2026-10-23): that cost is
+ // authoritative when present and within this attempt's own price bound.
+ if(policy.primaryModel&&model===policy.primaryModel&&usage.costMicros!==undefined){
+  const bound=Number((BigInt(input)*BigInt(Math.ceil(policy.primaryInputMicrosPerMillion*1.25))+BigInt(total-input)*BigInt(policy.primaryOutputMicrosPerMillion)+999999n)/1000000n);
+  return Number.isSafeInteger(usage.costMicros)&&usage.costMicros>=0&&usage.costMicros<=bound?usage.costMicros:null;
+ }
  // Prices follow the model that produced the usage: the primary (Claude) attempt or the fallback (free Gemini) attempt.
  const primary=!!policy.primaryModel&&model===policy.primaryModel;
  const inputPrice=primary?policy.primaryInputMicrosPerMillion:policy.inputMicrosPerMillion,outputPrice=primary?policy.primaryOutputMicrosPerMillion:policy.outputMicrosPerMillion;

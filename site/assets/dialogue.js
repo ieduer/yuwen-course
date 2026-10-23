@@ -102,12 +102,16 @@ function renderPartial(partial){
   n.append(button);
  }
 }
-// A saved turn whose provider attempts all ended before any output: one explicit learner action re-dispatches it (no new student turn, no silent retry).
+// A saved turn whose provider attempts all ended before any output is re-dispatched once (2026-10-23, owner: avoid failed
+// turns): automatically the first time this page sees it, with the button kept for the learner. The server still allows
+// exactly one re-dispatch; nothing is saved twice and the student's words are already saved.
+const autoRetried=new Set();
 function renderReplyRetry(data){
  document.getElementById('reply-retry')?.remove();
  const retry=data?.replyRetry;if(!retry||!retry.allowed||data.partial||data.pending)return;
  const box=node('div',undefined,'reply-retry');box.id='reply-retry';
- box.append(node('small','上一次未取得回應（AI 服務逾時）；你的回答已保存。可再試一次取得回應，不會重複保存或重複評閱。'));
+ const auto=!autoRetried.has(retry.turnId);
+ box.append(node('small',auto?'上一次沒有取得回應；你的回答已保存，作者正在重新組織回答……':'上一次未取得回應（AI 服務逾時）；你的回答已保存。可再試一次取得回應，不會重複保存或重複評閱。'));
  const button=node('button','再試一次取得回應');button.type='button';
  button.onclick=async()=>{
   if(snapshot?.pending||snapshot?.replyRetry?.turnId!==retry.turnId||!snapshot.replyRetry.allowed)return;
@@ -116,6 +120,7 @@ function renderReplyRetry(data){
   await sendTurn(continuationRequest,null);
  };
  box.append(button);$('turns').append(box);
+ if(auto){autoRetried.add(retry.turnId);setTimeout(()=>{if(document.getElementById('reply-retry')===box&&!button.disabled)button.onclick();},1200);}
 }
 async function revealTurn(turnId){
  for(let i=0;i<=MAX_HISTORY_PAGES;i++){
