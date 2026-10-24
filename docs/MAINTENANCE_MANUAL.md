@@ -17,6 +17,7 @@
   - **Reopened items** (`reopenedFromReview`) are brought back and credited normally when completed.
 - **`reviewReopenable` / `projectState`.** A `review` that the evidence rules could still turn into `demonstrated` projects as `needs_practice` with `reopenedFromReview`. "Could still" means there is no pending calibration on the language item or vocabulary item, and no pending source check. Calibration holds, `demonstrated`, `preserved` and historical review are unchanged, and nothing stored is rewritten.
 - **`plannedQuestion`.** A word question held in such a review gets a fresh, unhinted attempt, bounded by `LIMITS.maxAttempts` (3).
+- **Paragraph focus.** While a question is open, its word stays the paragraph focus. A reopened earlier word waits until the open question ends, so the author and the server never point at different words.
 - **First-read progress.** `readingGate` (initial_reading) carries `marks`, `marksRequired` and `summaryWritten`. The page shows 已記下疑點 N／3 · 初讀感受已寫／未寫.
 - **Recovery.** `CLAUDE_JSON_INVALID` is retryable on the same terms as `CLAUDE_TRUNCATED`.
 - **No-reply note.** When no retry is left, the page says the words are saved and the student can simply continue.
