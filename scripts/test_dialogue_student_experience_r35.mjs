@@ -59,3 +59,14 @@ test('the output shape records the visible reply against the whole structured re
  assert.ok(shape.totalChars>shape.replyChars);assert.deepEqual(Object.keys(shape.fields),['reply','assessments']);
  assert.deepEqual(outputShape(null),{version:'yw-output-shape-v1',replyChars:0,totalChars:4,fields:{}});
 });
+
+test('while a question is open its word stays the focus, even when an earlier word has been reopened',()=>{
+ const c=load('lesson-1578'),items=questionItems(c),state=projectState(c,[],[],null,{phase:'close_reading',unresolvedMarks:0});
+ const plain=paragraphGuide(c,state,items);
+ const later=plain.order[3];
+ const held=paragraphGuide(c,state,items,later);
+ assert.equal(held.focus.next.objectiveId,later,'the open question keeps the focus');
+ assert.equal(plain.focus.next.objectiveId,plain.order[0],'without an open question the first open word leads');
+ const confirmed=projectState(c,[{objectiveId:later,outcome:'demonstrated',evidence:[],rationale:'t',ruleVersion:'t'}],[],null,{phase:'close_reading',unresolvedMarks:0});
+ assert.equal(paragraphGuide(c,confirmed,items,later).focus.next.objectiveId,plain.order[0],'a finished word no longer holds the focus');
+});

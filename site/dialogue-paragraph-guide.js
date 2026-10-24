@@ -18,7 +18,9 @@ function originalStatus(curriculum,state,objectiveId){
 }
 
 // items: the lesson's question items (questionItems(curriculum)), passed in to keep this module free of policy imports.
-export function paragraphGuide(curriculum,state,items){
+// current: the objective of the question already open, if any. While its word is still open the focus stays on it, so the
+// author and the server never point at different words (r35: reopened earlier words wait until the open question ends).
+export function paragraphGuide(curriculum,state,items,current=null){
  if(curriculum?.mode!=='classical'||!state?.readingGate||!Array.isArray(curriculum.passages))return null;
  const passages=curriculum.passages,index=new Map(passages.map((p,i)=>[p.id,i]));
  const status=id=>state.objectives.find(o=>o.id===id)?.status||'not_yet_observed';
@@ -39,8 +41,9 @@ export function paragraphGuide(curriculum,state,items){
   p.words.push(w);
  }
  for(const p of paragraphs){p.confirmed=p.words.filter(w=>w.status==='confirmed').length;p.total=p.words.length;}
- const focusParagraph=paragraphs.find(p=>p.words.some(w=>w.status==='open'))||null;
- const next=focusParagraph?.words.find(w=>w.status==='open')||null;
+ const held=current?paragraphs.find(p=>p.words.some(w=>w.objectiveId===current&&w.status==='open')):null;
+ const focusParagraph=held||paragraphs.find(p=>p.words.some(w=>w.status==='open'))||null;
+ const next=(held&&held.words.find(w=>w.objectiveId===current))||focusParagraph?.words.find(w=>w.status==='open')||null;
  const clean=w=>({objectiveId:w.objectiveId,word:w.word,sentence:w.sentence,status:w.status});
  return {
   version:PARAGRAPH_GUIDE_VERSION,phase:state.readingGate.phase,
