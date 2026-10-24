@@ -1,3 +1,22 @@
+## Current 2026-10-24 — r34: a correct but incomplete answer is needs_practice, and its follow-up can finish the word (candidate)
+
+**Owner decision (suen, 2026-10-24):** "tell the author that an answer that is right so far but incomplete (no option chosen yet, or missing its explanation) is needs_practice with a follow-up question, and review is only for uncertain or calibration cases."
+
+**Changes**
+- **POLICY v19.** These are `needs_practice` with one focused follow-up asking for the missing step:
+  - a correct but incomplete answer;
+  - an answer that is right only after a hint.
+  `review` is only for the following:
+  - the author truly cannot tell what the student means;
+  - `calibrationStatus` is not accepted;
+  - the source is still being checked.
+- **Original item kept on offer** (`finishTurn`). `needs_practice` moves the word's question to `needs_reformulation`. Before r34 the word's original item was offered only while a question was issued, so the follow-up answer giving the option could not be recorded. Now the word under remediation keeps its original item on offer, and a correct choice preserves the original. The paragraph guide then confirms the word and plans the next one.
+- **Dropped remediation.** A remediation whose word is already preserved is dropped.
+
+**Unchanged:** dialogue credit, original records, evidence rules and the answer key.
+
+**Rollback.** r33 `a6f8589f`.
+
 ## Current 2026-10-23 — r33: a word confirmed by its original choice settles its open question (accepted)
 
 **Accepted:** source `3a96eb0`, Pages deployment `a6f8589f`, effective 2026-10-23T17:02:46Z. Status `20261023-yw-evidence-quotes-and-word-flow` (covers r32 and r33).
