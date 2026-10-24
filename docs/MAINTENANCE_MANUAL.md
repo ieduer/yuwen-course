@@ -1,4 +1,10 @@
-## Current 2026-10-24 — r37: the Claude-written 尚友 conclusion (candidate)
+## Current 2026-10-24 — r37: the Claude-written 尚友 conclusion (accepted)
+
+**Accepted:** source `22972af`, Pages deployment `81522fe8`. On test account 553, lesson-1693 (百合花):
+- the first 尚友 conclusion ever saved on YW, written by Claude with one attempt (98,359 µ$) and nothing refused;
+- the lesson is complete.
+
+Status `20261024-yw-claude-first-self-study` (r36 and r37).
 
 **Finding.** r36's first Claude-written conclusion (test account, lesson-1693) was refused with `unverified_conclusion_history`. It named an earlier record that was not a preserved objective of its domain; the free-pool schema used to restrict those ids.
 
