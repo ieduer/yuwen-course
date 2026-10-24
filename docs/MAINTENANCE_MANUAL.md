@@ -1,4 +1,11 @@
-## Current 2026-10-24 — r35: the dialogue from the student's side (candidate)
+## Current 2026-10-24 — r35: the dialogue from the student's side (accepted)
+
+**Accepted:** source `29fd0b6`, Pages deployment `d94fdbf8`, effective 2026-10-24T02:14:37Z. Status `20261024-yw-student-side-dialogue`.
+
+**Acceptance on test account 553** (3 turns, 156,836 µ$):
+- **Reopened word.** 所以 had been held in review under the old rule. It reopened, came back as attempt 2 after 极 was finished, and was credited.
+- **Chinese reply.** On lesson-1494, García Márquez replied in Chinese with no bookkeeping words.
+- **`output_shape`.** It shows the visible reply is about 20–28% of each turn's output.
 
 **Owner direction (suen, 2026-10-24):** "從學生視角思考如何提升對話學習體驗，核驗也要確保效度。需要做的調整都批准你執行，寫好更新記錄即可。"
 
