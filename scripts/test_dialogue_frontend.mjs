@@ -828,3 +828,24 @@ test('classical close reading shows paragraph progress and an achievement the mo
  f.frontend.update({...base,revision:3,paragraphGuide:{...guide('open','open',0),phase:'initial_reading'},state:{next:null,objectives:[],targets:[],completion:'in_progress',score:score(25)}});
  assert.match(line.textContent,/先做無注疏初讀/);
 });
+
+test('a turn left without a reply and without a retry tells the student the words are saved and to simply go on (r35)',async()=>{
+ const student={id:'student-one',role:'student',content:'我的原答案',status:'needs_review',createdAt:'2026-10-20T03:28:42Z'};
+ const f=await fixture({conversation:true,initial:{revision:1,turns:[student],partial:null,replyRetry:{turnId:'student-one',allowed:false,code:'provider_attempt_limit',requiresUserAction:true}}});
+ const box=f.document.getElementById('reply-retry');assert.ok(box);
+ assert.match(box.textContent,/你的話已經保存/);assert.match(box.textContent,/直接接著說一句/);assert.doesNotMatch(box.textContent,/再試一次取得回應/);
+ assert.equal([...f.timers.values()].filter(t=>t.delay===1200).length,0,'nothing is re-dispatched');
+ f.frontend.update({revision:2,turns:[student],partial:null,replyRetry:{turnId:'student-one',allowed:false,code:'original_source_readback_required',requiresUserAction:true}});
+ assert.equal(f.document.getElementById('reply-retry'),null,'other readback cases keep their own flow');
+});
+
+test('the first read shows how many marks are saved and whether the summary is written (r35)',async()=>{
+ const guide=firstRead=>({version:'yw-paragraph-guide-v1',phase:'initial_reading',firstRead,order:[],paragraphs:[],focus:null,confirmedWords:0,totalWords:3,waitingWords:0,complete:false});
+ const base={ownerRef:'owner-a',revision:1,turns:[],sourceSubmissions:[],readingGate:{phase:'initial_reading'},state:{next:null,objectives:[],targets:[],completion:'in_progress'}};
+ const f=await fixture({initial:{...base,paragraphGuide:guide({marks:1,required:3,summaryWritten:false})}});
+ f.frontend.update({...base,paragraphGuide:guide({marks:1,required:3,summaryWritten:false})});
+ const line=f.document.getElementById('paragraph-progress');
+ assert.match(line.textContent,/先做無注疏初讀/);assert.match(line.textContent,/已記下疑點 1／3 · 初讀感受未寫/);
+ f.frontend.update({...base,revision:2,paragraphGuide:guide({marks:4,required:3,summaryWritten:true})});
+ assert.match(line.textContent,/已記下疑點 3／3（共 4 處） · 初讀感受已寫/);
+});

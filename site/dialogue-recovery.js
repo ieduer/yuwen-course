@@ -58,8 +58,9 @@ export function continuationDisposition(call,failure,continued=false,{noOutput=f
  // A failed primary (Claude) attempt that reached the provider counts like a retryable free-pool failure for recovery purposes.
  // CLAUDE_TRUNCATED: the broker completed the attempt but the structured reply hit the output-token bound; the gateway never
  // relays a truncated answer, so the learner saw nothing and may ask once for a new reply (the paid attempt stays accounted).
+ // CLAUDE_JSON_INVALID (r35): likewise never relayed, so it is retryable on the same terms.
  const failedPrimary=a=>!!policy.primaryModel&&a.model===policy.primaryModel&&a.outcome!=='OK';
- const retryable=a=>['FETCH_ERROR','TIMEOUT','UNAVAILABLE','500','502','503','504'].includes(a.outcome)||(failedPrimary(a)&&/^(CANCELLED|CLAUDE_(TIMEOUT|NETWORK_ERROR|STREAM_INCOMPLETE|TRUNCATED|HTTP_(408|429|5[0-9][0-9])))$/.test(a.outcome));
+ const retryable=a=>['FETCH_ERROR','TIMEOUT','UNAVAILABLE','500','502','503','504'].includes(a.outcome)||(failedPrimary(a)&&/^(CANCELLED|CLAUDE_(TIMEOUT|NETWORK_ERROR|STREAM_INCOMPLETE|TRUNCATED|JSON_INVALID|HTTP_(408|429|5[0-9][0-9])))$/.test(a.outcome));
  if(!accounting.attempts.length||accounting.attempts.some(a=>!a.brokerCompleted))return deny('provider_completion_unconfirmed');
  // noOutput: every attempt ended before any learner-visible output (gateway timeout/unavailable, or a failed primary attempt whose
  // buffered output the gateway never relayed); one explicit learner-initiated retry re-dispatches the same saved turn.

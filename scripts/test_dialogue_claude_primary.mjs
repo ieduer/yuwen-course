@@ -150,7 +150,9 @@ test('recovery disposition: a truncated Claude attempt has no learner-visible ou
  // Learner-visible free-pool output still blocks the no-output retry; a refused Claude answer is never retried.
  assert.equal(continuationDisposition(call,failure([truncated,attempt(2,GEMINI,'FETCH_ERROR',{outputStarted:true})]),false,{noOutput:true}).code,'partial_output_present');
  assert.equal(continuationDisposition(call,failure([attempt(1,CLAUDE,'CLAUDE_REFUSED',{outputStarted:true}),attempt(2,GEMINI,'TIMEOUT')]),false,{noOutput:true}).code,'provider_failure_not_retryable');
- assert.equal(continuationDisposition(call,failure([attempt(1,CLAUDE,'CLAUDE_JSON_INVALID',{outputStarted:true})]),false,{noOutput:true}).code,'provider_failure_not_retryable');
+ // r35 (owner-approved student experience): invalid JSON is never relayed either, so it is retryable on the same terms as truncation.
+ assert.equal(continuationDisposition(call,failure([attempt(1,CLAUDE,'CLAUDE_JSON_INVALID',{outputStarted:true})]),false,{noOutput:true}).code,'explicit_retry_available');
+ assert.equal(continuationDisposition(call,failure([attempt(1,CLAUDE,'CLAUDE_JSON_INVALID',{outputStarted:true}),attempt(2,GEMINI,'TIMEOUT'),attempt(3,GEMINI,'TIMEOUT')]),false,{noOutput:true}).code,'provider_attempt_limit');
  // Without any accounting (the gateway's terminal frame never reached the worker) nothing can be bounded: unchanged.
  assert.equal(continuationDisposition(call,{stage:'provider_request',code:'unclassified',providerAccounting:null},false,{noOutput:true}).code,'provider_completion_unconfirmed');
  // A legacy same-model attempt that produced output is still partial output.

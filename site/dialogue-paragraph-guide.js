@@ -44,6 +44,7 @@ export function paragraphGuide(curriculum,state,items){
  const clean=w=>({objectiveId:w.objectiveId,word:w.word,sentence:w.sentence,status:w.status});
  return {
   version:PARAGRAPH_GUIDE_VERSION,phase:state.readingGate.phase,
+  ...(state.readingGate.phase==='initial_reading'?{firstRead:{marks:state.readingGate.marks||0,required:state.readingGate.marksRequired||3,summaryWritten:!!state.readingGate.summaryWritten}}:{}),
   order:words.map(w=>w.objectiveId),
   paragraphs:paragraphs.map(p=>({passageId:p.passageId,ordinal:p.ordinal,opening:p.opening,confirmed:p.confirmed,total:p.total,words:p.words.map(clean)})),
   focus:focusParagraph?{passageId:focusParagraph.passageId,ordinal:focusParagraph.ordinal,of:paragraphs.length,opening:focusParagraph.opening,confirmed:focusParagraph.confirmed,total:focusParagraph.total,words:focusParagraph.words.map(clean),next:clean(next)}:null,

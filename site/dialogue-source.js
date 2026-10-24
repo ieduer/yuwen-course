@@ -16,7 +16,7 @@ import {MODE_OPERATION,modeConfigured,prepareModeLedger,validateModeResult} from
 import {recordCorrection} from './dialogue-corrections.js';
 import {hasClassicalAnnotatedReadReceipt} from './classical-first-read-source.js';
 import {paragraphGuide,paragraphGuideContext} from './dialogue-paragraph-guide.js';
-import {promptParts} from './dialogue-policy.js';
+import {promptParts,reviewReopenable} from './dialogue-policy.js';
 import {consumeGatewayStream,studentStream,validatedProviderAccounting} from './dialogue-stream.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
 import {requestDialogueBudget,combinedProviderAccounting,operatorCost,continuationDisposition,budgetDenial} from './dialogue-recovery.js';
@@ -70,6 +70,12 @@ const formalRejectedNotice=code=>READING_GATE_NOTICE[code]||(['formal_assessment
 // (你說「…」, 你前面才說「…」 …) that is not a verbatim part of a saved student message is recorded and shown to the student.
 const STUDENT_QUOTE=/你(?:前面|剛才|剛剛|上一輪|先前|之前|一開始|後來|開頭|又|也|才|曾|還|只)*(?:說過|說到|說的是|說的|說|提到|提過|寫道|寫的是|寫過|講過|講)[，,：:]?\s*[「『"]([^」』"\n]{2,80})[」』"]/gu;
 const foldText=value=>String(value||'').replace(/[\s\p{P}\p{S}]/gu,'');
+// How much of a model reply is the text the student reads, and how much is structured record (r35, for cost decisions).
+export function outputShape(value){
+ const size=v=>v===undefined?0:JSON.stringify(v)?.length||0;
+ const fields=value&&typeof value==='object'?Object.fromEntries(Object.keys(value).map(k=>[k,size(value[k])])):{};
+ return {version:'yw-output-shape-v1',replyChars:typeof value?.reply==='string'?value.reply.length:0,totalChars:size(value),fields};
+}
 // Whether a dialogue vocabulary question is settled by the word's original item: the item was answered correctly in this
 // turn, or the state already holds the preserved original answer.
 export function originalSettles(curriculum,state,objectiveId,originalResult){
@@ -113,7 +119,8 @@ async function readingGate(db,studentId,curriculum,legacy){
  if(curriculum.mode!=='classical')return null;
  if(legacy.completion)return {phase:'close_reading',preservedCompletion:true};
  const submitted=legacy.firstRead.find(row=>row.submitted_at);
- if(!submitted)return {phase:'initial_reading'};
+ // The page and the author both see how far the first read has got (r35): marks needed before it can be saved.
+ if(!submitted){const row=legacy.firstRead[0]||null,marks=row?legacy.firstReadMarks.filter(m=>m.text_version_id===row.text_version_id&&!m.deleted_at).length:0;return {phase:'initial_reading',marks,marksRequired:3,summaryWritten:[...String(row?.summary_text||'').trim()].length>=12};}
  const annotated=await hasClassicalAnnotatedReadReceipt(db,studentId,curriculum.lessonId,submitted.text_version_id);
  const unresolvedMarks=legacy.firstReadMarks.filter(mark=>mark.text_version_id===submitted.text_version_id&&!mark.deleted_at&&mark.resolution_status!=='resolved').length;
  return {phase:annotated?'close_reading':'annotated_reading',unresolvedMarks,textVersionId:submitted.text_version_id,textDigest:submitted.text_digest};
@@ -254,8 +261,10 @@ async function plannedQuestion(db,session,curriculum,state){
  const objective=guided?state.objectives.find(o=>o.id===guided.objectiveId)||state.next:state.next;
  if(objective?.domain!=='vocabulary'||!questionItems(curriculum).some(v=>v.id===objective.id))return null;
  const row=await db.prepare('SELECT instance_json FROM dialogue_questions WHERE session_id=? AND objective_id=? ORDER BY attempt DESC LIMIT 1').bind(session.id,objective.id).first(),prior=row?JSON.parse(row.instance_json):null;
- if(prior&&['mastered','review'].includes(prior.state)&&!calibrationReopensReview(prior,curriculum))return null;
- if(prior&&!calibrationReopensReview(prior,curriculum)&&!(await db.prepare("SELECT id FROM dialogue_assessments WHERE session_id=? AND objective_id=? AND outcome='reformulated' AND created_at>? LIMIT 1").bind(session.id,objective.id,prior.answeredAt||prior.createdAt).first()))return null;
+ // A word held in review without a pending calibration or source check gets a fresh, unhinted attempt (r35, bounded by LIMITS.maxAttempts).
+ const reopened=prior?.state==='review'&&reviewReopenable(curriculum,objective.id);
+ if(prior&&(prior.state==='mastered'||prior.state==='review'&&!reopened)&&!calibrationReopensReview(prior,curriculum))return null;
+ if(prior&&!reopened&&!calibrationReopensReview(prior,curriculum)&&!(await db.prepare("SELECT id FROM dialogue_assessments WHERE session_id=? AND objective_id=? AND outcome='reformulated' AND created_at>? LIMIT 1").bind(session.id,objective.id,prior.answeredAt||prior.createdAt).first()))return null;
  const attempt=(prior?.attempt||0)+1,digest=await sha(`${session.student_id}:${curriculum.curriculumVersion}:${objective.id}:${attempt}`);
  try{const q=createQuestion(curriculum,{objectiveId:objective.id,attempt,previousVariant:prior?.variant??null,random:parseInt(digest.slice(0,8),16)});return {...q,id:`guided-${digest.slice(0,32)}`,createdAt:session.created_at};}catch{return null;}
 }
@@ -901,6 +910,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   // when no dialogue assessment of it was recorded; otherwise every later answer stays bound to a word the paragraph
   // guide has already passed, and the next word can never be credited (2026-10-23). Credit itself is unchanged.
   else if(question&&body.conversation===true&&originalSettles(curriculum,state,question.objectiveId,originalResult)){const updated={...question,state:'mastered',answeredAt:at,settledBy:'original_answer'};statements.push(db.prepare(`UPDATE dialogue_questions SET state=?,instance_json=? WHERE id=? AND session_id=? AND state='issued' AND ${active}`).bind(updated.state,JSON.stringify(updated),question.id,session.id,turnId));}
+  statements.push(db.prepare(`INSERT OR IGNORE INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,'output_shape',?,? WHERE ${active}`).bind(`${turnId}:shape`,session.id,turnId,JSON.stringify(outputShape(result?.value)),at,turnId));
   statements.push(db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) SELECT ?,?,?,?,?,? WHERE ${active}`).bind(uuid(),session.id,turnId,'assessment_saved',JSON.stringify({objectiveIds:proposal.assessments.map(a=>a.objectiveId),ruleVersion:RULE_VERSION}),at,turnId),
    db.prepare("UPDATE dialogue_calls SET state='finished',finished_at=?,usage_json=?,first_token_ms=?,completed_ms=?,accounted_micros=? WHERE turn_id=? AND state='finishing'").bind(at,JSON.stringify(result.usage||null),Number.isSafeInteger(result.firstTokenMs)?result.firstTokenMs:null,Number.isSafeInteger(result.totalDurationMs)?result.totalDurationMs:null,operatorCost(budget,result,providerAccounting),turnId),
    db.prepare('UPDATE dialogue_sessions SET inflight=NULL,updated_at=? WHERE id=? AND inflight=?').bind(at,session.id,turnId));

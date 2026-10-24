@@ -105,10 +105,12 @@ function renderPartial(partial){
 // A saved turn whose provider attempts all ended before any output is re-dispatched once (2026-10-23, owner: avoid failed
 // turns): automatically the first time this page sees it, with the button kept for the learner. The server still allows
 // exactly one re-dispatch; nothing is saved twice and the student's words are already saved.
-const autoRetried=new Set();
+const autoRetried=new Set(),NO_REPLY_CODES=['provider_attempt_limit','provider_failure_not_retryable','continuation_already_used'];
 function renderReplyRetry(data){
  document.getElementById('reply-retry')?.remove();
- const retry=data?.replyRetry;if(!retry||!retry.allowed||data.partial||data.pending)return;
+ const retry=data?.replyRetry;if(!retry||data.partial||data.pending)return;
+ // No retry left (r35): say plainly that the words are saved and the conversation simply goes on.
+ if(!retry.allowed){if(!NO_REPLY_CODES.includes(retry.code))return;const note=node('div',undefined,'reply-retry');note.id='reply-retry';note.append(node('small','這一輪作者沒有回應（AI 服務暫時出錯）。你的話已經保存；直接接著說一句（例如「請接著說」），作者會連同上一句一起回應。'));$('turns').append(note);return;}
  const box=node('div',undefined,'reply-retry');box.id='reply-retry';
  const auto=!autoRetried.has(retry.turnId);
  box.append(node('small',auto?'上一次沒有取得回應；你的回答已保存，作者正在重新組織回答……':'上一次未取得回應（AI 服務逾時）；你的回答已保存。可再試一次取得回應，不會重複保存或重複評閱。'));
@@ -678,7 +680,7 @@ let knownWords=null,knownWordsOwner=null;
 const paragraphName=p=>p?.opening?`「${p.opening}」一段`:`第 ${p?.ordinal} 段`;
 function renderParagraphProgress(guide){
  const box=$('paragraph-progress');if(!box)return;box.replaceChildren();
- if(guide?.phase==='initial_reading')box.append(node('b','文言細讀 · 先做無注疏初讀'),node('span','：不看注釋讀一遍，告訴作者三處讀不通或拿不準的地方和你的猜測，再寫幾句初讀感受。之後一段一段讀字詞，讀懂一個記一個。'));
+ if(guide?.phase==='initial_reading'){box.append(node('b','文言細讀 · 先做無注疏初讀'),node('span','：不看注釋讀一遍，告訴作者三處讀不通或拿不準的地方和你的猜測，再寫幾句初讀感受。之後一段一段讀字詞，讀懂一個記一個。'));const f=guide.firstRead;if(f)box.append(node('span',` · 已記下疑點 ${Math.min(f.marks,f.required)}／${f.required}${f.marks>f.required?`（共 ${f.marks} 處）`:''} · 初讀感受${f.summaryWritten?'已寫':'未寫'}`,'first-read-count'));}
  else if(guide?.phase==='annotated_reading')box.append(node('b','文言細讀'),node('span','：讀完帶註釋的正文後告訴作者一聲，就可以一段一段讀字詞。'));
  else if(guide?.totalWords&&guide.complete)box.append(node('b',`全篇字詞已讀通 ${guide.confirmedWords}／${guide.totalWords}`),node('span',guide.waitingWords?` · ${guide.waitingWords} 個待教師覆核`:''));
  else if(guide?.focus){
