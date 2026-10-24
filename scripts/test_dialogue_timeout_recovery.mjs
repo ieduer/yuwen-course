@@ -278,14 +278,18 @@ c23Test('conclusion recovery: sixth exact pin admits only case23 once, preserves
  const mutated=structuredClone(args.rows);mutated.find(r=>r.attemptId===C23.attemptId).accountedMicros=null;
  assert.equal(fullAdmission({...args,rows:mutated}).code,'full_recovery_receipt_mismatch');
 });
-c23Test('conclusion recovery: strict 60-unit and domain history validator remains unchanged',()=>{
+c23Test('conclusion recovery: strict 60-unit quotes; an unverifiable earlier-record id is dropped, a domain without evidence still refuses (r37)',()=>{
  const c=packet.cases.find(c=>c.id===C23.caseId),source=JSON.parse(projectReleaseJson('dialogue-curriculum/'+c.lessonId+'.json',JSON.stringify(loadCurriculum(c.lessonId)))),f=fullMaterialize(c,source);
  // Artificial unit evidence only, never emitted as a receipt or semantic result.
  const students=f.turns.filter(t=>t.role==='student'),p=source.passages[0],ref=t=>({turnId:t.id,quote:t.content.slice(0,40)}),r={...ref(students.at(-1)),passageId:p.id,passageQuote:p.text.slice(0,40)};
  const local={studentSummary:'unit fixture',change:{before:ref(students[0]),after:ref(students.at(-1))},stance:r,domains:['interpretation','vocabulary','technique','transfer','uncertainty'].map(domain=>({domain,finding:'unit fixture',evidence:[r],preservedObjectives:[]}))};
  assert(validateConclusion(local,f));
  const over=structuredClone(local);over.stance.quote=students.at(-1).content.slice(0,61);assert.throws(()=>validateConclusion(over,f),/unverifiable_conclusion_turn/);
- const wrong=structuredClone(local);wrong.domains[1].preservedObjectives=['lesson-1717-p2:revision'];assert.throws(()=>validateConclusion(wrong,f),/unverified_conclusion_history/);
+ // r37 (owner 2026-10-24: give the 尚友 conclusion): quotes stay strict (above); an earlier-record id that is not a preserved
+ // objective of its domain is dropped, never trusted, and a domain left without verified evidence still refuses the conclusion.
+ const wrong=structuredClone(local);wrong.domains[1].preservedObjectives=['lesson-1717-p2:revision'];
+ assert.deepEqual(validateConclusion(wrong,f).domains[1].preservedObjectives,[],'the unverifiable id is dropped');
+ const bare=structuredClone(wrong);bare.domains[1].evidence=[];assert.throws(()=>validateConclusion(bare,f),/conclusion_domain_without_evidence/);
 });
 async function c23Fixture(t){
  const f=await finiteFixture(t);
