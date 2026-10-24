@@ -16,7 +16,7 @@ test('all 69 pending supplemental items remain visible without blocking the 52 l
   const state=projectState(c,[],prior,null,{phase:'close_reading',unresolvedMarks:0});
   assert.equal(state.readyForShangyou,true,c.lessonId);
   assert(!questionItems(c).some(i=>ids.has(i.id)),c.lessonId);
-  for(const id of ids){const row=state.objectives.find(o=>o.id===id);assert.equal(row.status,'pending_calibration');assert.equal(row.requiredForCompletion,false);assert.equal(row.reviewPath,'teacher-review');}
+  for(const id of ids){const row=state.objectives.find(o=>o.id===id);assert.equal(row.status,'pending_calibration');assert.equal(row.requiredForCompletion,false);assert.equal(row.reviewPath,'optional-practice');}
  }
  assert.equal(count,69);assert.equal(lessons,52);
 });
