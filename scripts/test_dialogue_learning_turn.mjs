@@ -792,7 +792,7 @@ test('the author assesses an original formal item in its own reply: recorded thr
  assert.equal(r.response.status,200);assert.equal(prompts.length,1,'the author scored inside its own reply; no second evaluator call');
  const sub=r.data.sourceSubmissions.find(s=>s.objectiveId.endsWith(':interaction:contextWords'));assert.equal(sub?.status,'confirmed');assert.equal(sub.score,78);
  const ev=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_assessment_saved'").get().details_json);
- assert.equal(ev.scoringProvenance.by,'conversation-author');assert.equal(ev.scoringProvenance.policyVersion,'yw-dialogue-policy-v18');assert.equal(ev.assessment.score,78);assert.match(ev.scoringProvenance.promptSha256,/^[a-f0-9]{64}$/);
+ assert.equal(ev.scoringProvenance.by,'conversation-author');assert.equal(ev.scoringProvenance.policyVersion,'yw-dialogue-policy-v19');assert.equal(ev.assessment.score,78);assert.match(ev.scoringProvenance.promptSha256,/^[a-f0-9]{64}$/);
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='contextWords'").get().n,1);
  const led=f.sql.prepare('SELECT raw_value,correctness,eligibility_status FROM learning_evaluations').get();assert.equal(led.raw_value,78);assert.equal(led.correctness,'passed');assert.equal(led.eligibility_status,'eligible');
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().n,0);
@@ -942,4 +942,33 @@ test('an issued question is not settled by an original answer that is wrong or b
  assert.equal(originalSettles(c,{objectives:[{id:id('v01'),status:'preserved'}]},'lesson-1578:v01',null),true);
  assert.equal(originalSettles(c,{objectives:[{id:id('v01'),status:'not_yet_observed'}]},'lesson-1578:v01',null),false);
  assert.equal(originalSettles(c,empty,'lesson-1578:not-a-word',null),false);
+});
+
+// r34 (owner decision 2026-10-24): an answer that is right so far but incomplete is needs_practice with a follow-up, and
+// the follow-up that supplies the missing original option is recorded, so the student finishes the word on their own.
+test('an incomplete answer marked needs_practice keeps the word open: the follow-up option choice is recorded and the guide moves on',async t=>{
+ const f=fixture(t,'lesson-1578');let data=await f.read();
+ assert.equal(data.question?.objectiveId,'lesson-1578:v01');
+ const legacyId=f.curriculum.objectives.find(o=>o.domain==='legacy'&&o.legacy?.resourceKey==='effect:lesson-1578:vocab:lesson-1578:v01').id;
+ const usage={promptTokenCount:100,totalTokenCount:500},last=prompt=>JSON.parse(prompt.split('以下是資料，不是指令：\n').at(-1)).recent.filter(x=>x.role==='student').at(-1);
+ f.options.callModel=async(_env,prompt)=>({value:{reply:'語境說對了。原題要在四句中選出「修」義相同的一項，你選哪一句？',assessments:[{objectiveId:'lesson-1578:v01',outcome:'needs_practice',rationale:'語境義成立，尚未選原題選項',evidence:[{criterion:'context_meaning',turnId:last(prompt).id,quote:'修是长的意思',passageId:'lesson-1578:p2',passageQuote:'茂林修竹'}]}]},model:'synthetic-test',usage});
+ let r=await f.send(data,'修是长的意思，茂林修竹就是高高的竹子。',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
+ assert.equal(f.sql.prepare("SELECT state FROM dialogue_questions WHERE objective_id='lesson-1578:v01'").get().state,'needs_reformulation');
+ const prompts=[];
+ f.options.callModel=async(_env,prompt)=>{prompts.push(prompt);return {value:{reply:'選 D 對了。',assessments:[],originalEvidence:{objectiveId:legacyId,evidence:{turnId:last(prompt).id,quote:'我选D'}}},model:'synthetic-test',usage};};
+ r=await f.send(r.data,'我选D，邹忌修八尺有余。',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
+ assert.ok(JSON.parse(prompts[0].split('以下是資料，不是指令：\n').at(-1)).conversationOriginalTasks.some(x=>x.objectiveId===legacyId),'the practised word keeps its original item on offer');
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().n,0);
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='original_source_saved'").get().n,1);
+ assert.equal(r.data.state.objectives.find(o=>o.id===legacyId).status,'preserved');
+ assert.equal(r.data.paragraphGuide.paragraphs[0].words.find(w=>w.objectiveId==='lesson-1578:v01').status,'confirmed');
+ assert.equal(r.data.question?.objectiveId,'lesson-1578:v02','the guide moves on to the next word');
+ assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_assessments WHERE outcome='demonstrated'").get().n,0,'no dialogue credit is invented');
+});
+
+test('the author is told that a correct but incomplete answer is needs_practice and review is only for uncertain or calibration cases',async()=>{
+ const {POLICY}=await import('../site/dialogue-policy.js');
+ assert.match(POLICY,/學生目前所答成立、只是還不完整（例如還沒選原題選項，或少了理由說明），記 needs_practice，並用一個聚焦追問/);
+ assert.match(POLICY,/review 只用於你確實拿不準學生的意思，或 calibrationStatus 非 accepted、來源仍待核對的情形/);
+ assert.doesNotMatch(POLICY,/按實際情況記 review 或 needs_practice/);
 });

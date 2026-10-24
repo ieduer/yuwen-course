@@ -706,8 +706,9 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const completeTurns=await transcript(db,session),assessments=await assessmentRows(db,session.id);
   const legacy=await historicalEvidence(db,session.student_id,curriculum);
   const remediationRows=await all(db.prepare("SELECT q.instance_json FROM dialogue_questions q WHERE q.session_id=? AND q.state='needs_reformulation' AND NOT EXISTS(SELECT 1 FROM dialogue_questions newer WHERE newer.session_id=q.session_id AND newer.objective_id=q.objective_id AND newer.attempt>q.attempt) ORDER BY q.created_at DESC").bind(session.id));
-  const remediation=remediationRows.map(r=>JSON.parse(r.instance_json)).find(q=>!legacy.preserved.some(p=>p.objectiveId===q.objectiveId))||null;
   const state=projectState(curriculum,assessments,legacy.preserved,legacy.completion,await readingGate(db,session.student_id,curriculum,legacy),await savedConclusion(db,session.id));
+  // A word whose original choice is already preserved needs no reformulation (r34).
+  const remediation=remediationRows.map(r=>JSON.parse(r.instance_json)).find(q=>!legacy.preserved.some(p=>p.objectiveId===q.objectiveId)&&!originalSettles(curriculum,state,q.objectiveId,null))||null;
   let firstReading=null;
   if(body.conversation===true&&curriculum.mode==='classical'){
    const request=new Request(`https://yw.bdfz.net/api/dialogue/v1?lessonId=${curriculum.lessonId}`);
@@ -720,7 +721,8 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
   const records=await learningRecords(db,session),guide=learningTurn(curriculum,state,{revision:session.revision,...records,question});
   state.score=lessonScore(curriculum,state,{submissions:records.submissions});
   const pendingEvaluation=(()=>{const o=curriculum.objectives.find(o=>o.domain==='legacy'&&o.legacy?.questionKind==='evaluation');if(!o||state.legacyCompletion)return null;const st=state.objectives.find(x=>x.id===o.id)?.status;return ['preserved','historical_review'].includes(st)?null:{objectiveId:o.id,kind:'evaluation'};})();
-  const originalTasks=body.conversation===true?conversationOriginalTasks(curriculum,state,guide,[...originalVocabularyTasks(curriculum,state,legacy.mastery),questionVocabularyTask(curriculum,state,question,legacy.mastery),originalTask(curriculum,state,legacy.mastery),pendingEvaluation]):null;
+  // The word being practised keeps its original item on offer, so the follow-up that asks for the missing option can be recorded (r34).
+  const originalTasks=body.conversation===true?conversationOriginalTasks(curriculum,state,guide,[...originalVocabularyTasks(curriculum,state,legacy.mastery),questionVocabularyTask(curriculum,state,question||remediation,legacy.mastery),originalTask(curriculum,state,legacy.mastery),pendingEvaluation]):null;
   const firstReadingContext=firstReading?{...firstReading.state,kind:firstReading.asset.kind||'classical-original',summaries:firstReading.state.summaries?.slice(-3),marks:firstReading.state.marks?.slice(-8).map(m=>({...m,...(m.corrections?{corrections:m.corrections.slice(-2)}:{})})),paragraphs:firstReading.asset.paragraphs.filter(p=>body.content.includes(p.key)||unpunctuated(body.content).includes(p.text.slice(0,12))).slice(0,2).map(p=>({...p,text:p.text.slice(0,1200)}))}:null;
   const paragraphFocus=paragraphGuideContext(paragraphGuide(curriculum,state,questionItems(curriculum)));
   let prompt=formal?null:contextFor({curriculum,state,turns:completeTurns,question,remediation,assessments,paragraphGuide:paragraphFocus,...(body.conversation===true?{conversationGuide:guide,conversationOriginalTasks:originalTasks,firstReading:firstReadingContext}:{})});

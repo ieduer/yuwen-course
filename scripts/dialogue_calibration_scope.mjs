@@ -26,7 +26,7 @@ const require=createRequire(import.meta.url);
 // replies, explicit recognition of a correct answer, merged learningTargets guidance, sourceDraft during an active
 // question. Neither delta changes a language criterion, an evidence rule or a verdict (lines 30-33 and the JSON /
 // evidence paragraphs are byte-identical to v11).
-const policyBridge={before:'b30b2257fec87625920f648797d8b89b6b9495c9e258599b54bfe800d041917c',after:'3ebd5a6484636c87e7c152b77c62ebdedfd715e00722341c11a337ea927ebb28'};
+const policyBridge={before:'b30b2257fec87625920f648797d8b89b6b9495c9e258599b54bfe800d041917c',after:'1d6ca874f066527c16e7646cc645b1b5c449a30d6c0de6332daf74274f38f8ad'};
 
 export async function historicalCalibrationSource(commit){
  assert(/^[a-f0-9]{40}$/.test(commit||''),'exact historical commit required');
