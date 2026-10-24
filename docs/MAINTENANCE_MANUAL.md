@@ -1,4 +1,12 @@
-## Current 2026-10-24 — r34: a correct but incomplete answer is needs_practice, and its follow-up can finish the word (candidate)
+## Current 2026-10-24 — r34: a correct but incomplete answer is needs_practice, and its follow-up can finish the word (accepted)
+
+**Accepted:** source `09f3665`, Pages deployment `7fd7e5c9`, effective 2026-10-24T01:02:47Z. Status `20261024-yw-incomplete-answers-keep-going`.
+
+**Acceptance on test account 553** (2 turns, 87,279 µ$):
+- **Turn 1.** The answer was the meaning of 信 only. It was recorded as `needs_practice`, not `review`. Its original choice was recorded as correct (+2 points), and the author asked for the missing rewrite and basis.
+- **Turn 2.** The follow-up was accepted with no rejected part, and the next word, 极, followed.
+
+On that account 所以 stays in teacher review from the r33 turn, which was recorded under the old rule.
 
 **Owner decision (suen, 2026-10-24):** "tell the author that an answer that is right so far but incomplete (no option chosen yet, or missing its explanation) is needs_practice with a follow-up question, and review is only for uncertain or calibration cases."
 
