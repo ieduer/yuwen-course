@@ -196,9 +196,14 @@ export function validateFormalAssessment(proposed,{curriculum,state,turns,legacy
  if(!assessment.verdict||!assessment.strength||!assessment.gap||!assessment.nextQuestion)throw Error('invalid_formal_feedback');
  return {...draft,assessment};
 }
-// A review the evidence rules could still turn into demonstrated (no pending calibration or source check) is unfinished
-// work the student can complete, not a teacher-review hold: since r35 it projects as needs_practice (reopenedFromReview),
-// so the lesson leads back to it. Credit still needs a verified demonstrated; nothing stored is rewritten.
+// Before policy v19 (r34) the author also used review for answers that were merely incomplete, and nothing ever resolved
+// them (the teacher view has no cross-account access). Such an old review that the evidence rules could still turn into
+// demonstrated (no pending calibration or source check) projects as needs_practice with reopenedFromReview (r35), so the
+// lesson leads back to it. Reviews under v19+ keep their meaning (an uncertain reading or a source/calibration hold).
+// Credit still needs a verified demonstrated; nothing stored is rewritten.
+export const REVIEW_REOPEN_BEFORE_POLICY=19;
+const policyNumber=v=>Number(/^yw-dialogue-policy-v(\d+)$/.exec(v||'')?.[1]||NaN);
+export const oldRuleReview=row=>row?.outcome==='review'&&policyNumber(row.policyVersion)<REVIEW_REOPEN_BEFORE_POLICY;
 export function reviewReopenable(curriculum,objectiveId){
  const language=(curriculum.languagePractice||[]).find(v=>v.id===objectiveId);
  if(language&&(language.calibrationStatus!=='accepted'||language.sourceVerification?.status==='pending-verification'||language.dictionaryId&&(curriculum.dictionary||[]).find(d=>d.id===language.dictionaryId)?.verificationStatus!=='source-image-verified'))return false;
@@ -212,7 +217,7 @@ export function projectState(curriculum,assessments,legacy=[],legacyCompletion=n
   const rows=assessments.filter(a=>a.objectiveId===o.id);
   const best=rows.find(a=>a.outcome==='demonstrated');
   const deferred=pendingSupplement((curriculum.languagePractice||[]).find(item=>item.id===o.id));
-  const last=rows.at(-1)?.outcome,reopened=!prior?.verified&&!best&&!prior?.previousCompletion&&!deferred&&last==='review'&&reviewReopenable(curriculum,o.id);
+  const last=rows.at(-1)?.outcome,reopened=!prior?.verified&&!best&&!prior?.previousCompletion&&!deferred&&oldRuleReview(rows.at(-1))&&reviewReopenable(curriculum,o.id);
   return {id:o.id,label:o.label,domain:o.domain,status:prior?.verified?'preserved':best?'demonstrated':prior?.previousCompletion?'historical_review':deferred?'pending_calibration':reopened?'needs_practice':last||'not_yet_observed',...(reopened?{reopenedFromReview:true}:{}),evidence:prior?.sourceRef||prior?.sourceEventId||best?.evidence||[],rule:o.rule,...(deferred?{requiredForCompletion:false,reviewPath:'teacher-review'}:{})};
  });
  // No replacement grade, mastery threshold or historical downgrade is inferred.

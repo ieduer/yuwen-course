@@ -16,7 +16,7 @@ import {MODE_OPERATION,modeConfigured,prepareModeLedger,validateModeResult} from
 import {recordCorrection} from './dialogue-corrections.js';
 import {hasClassicalAnnotatedReadReceipt} from './classical-first-read-source.js';
 import {paragraphGuide,paragraphGuideContext} from './dialogue-paragraph-guide.js';
-import {promptParts,reviewReopenable} from './dialogue-policy.js';
+import {promptParts} from './dialogue-policy.js';
 import {consumeGatewayStream,studentStream,validatedProviderAccounting} from './dialogue-stream.js';
 import {dialogueBudget,reconciledCost} from './dialogue-budget.js';
 import {requestDialogueBudget,combinedProviderAccounting,operatorCost,continuationDisposition,budgetDenial} from './dialogue-recovery.js';
@@ -221,7 +221,7 @@ async function transcript(db,session){
  if(rows.length>LIMITS.lessonLifetime*2)throw Error('transcript_requires_review');
  return rows;
 }
-async function assessmentRows(db,id){return (await all(db.prepare('SELECT * FROM dialogue_assessments WHERE session_id=? ORDER BY created_at,id').bind(id))).map(a=>({objectiveId:a.objective_id,outcome:a.outcome,evidence:JSON.parse(a.evidence_json),rationale:a.rationale,ruleVersion:a.rule_version,createdAt:a.created_at}));}
+async function assessmentRows(db,id){return (await all(db.prepare('SELECT a.*,t.policy_version AS turn_policy_version FROM dialogue_assessments a LEFT JOIN dialogue_turns t ON t.id=a.turn_id WHERE a.session_id=? ORDER BY a.created_at,a.id').bind(id))).map(a=>({objectiveId:a.objective_id,outcome:a.outcome,evidence:JSON.parse(a.evidence_json),rationale:a.rationale,ruleVersion:a.rule_version,createdAt:a.created_at,policyVersion:a.turn_policy_version||null}));}
 async function savedConclusion(db,id){const row=await db.prepare("SELECT details_json FROM dialogue_events WHERE session_id=? AND event_type='conclusion_saved' ORDER BY created_at DESC,id DESC LIMIT 1").bind(id).first();return row?JSON.parse(row.details_json):null;}
 async function proposedSourceDraft(db,session,legacy,submissions){
  if(legacy.completion)return null;
@@ -262,7 +262,7 @@ async function plannedQuestion(db,session,curriculum,state){
  if(objective?.domain!=='vocabulary'||!questionItems(curriculum).some(v=>v.id===objective.id))return null;
  const row=await db.prepare('SELECT instance_json FROM dialogue_questions WHERE session_id=? AND objective_id=? ORDER BY attempt DESC LIMIT 1').bind(session.id,objective.id).first(),prior=row?JSON.parse(row.instance_json):null;
  // A word held in review without a pending calibration or source check gets a fresh, unhinted attempt (r35, bounded by LIMITS.maxAttempts).
- const reopened=prior?.state==='review'&&reviewReopenable(curriculum,objective.id);
+ const reopened=prior?.state==='review'&&objective.reopenedFromReview===true;
  if(prior&&(prior.state==='mastered'||prior.state==='review'&&!reopened)&&!calibrationReopensReview(prior,curriculum))return null;
  if(prior&&!reopened&&!calibrationReopensReview(prior,curriculum)&&!(await db.prepare("SELECT id FROM dialogue_assessments WHERE session_id=? AND objective_id=? AND outcome='reformulated' AND created_at>? LIMIT 1").bind(session.id,objective.id,prior.answeredAt||prior.createdAt).first()))return null;
  const attempt=(prior?.attempt||0)+1,digest=await sha(`${session.student_id}:${curriculum.curriculumVersion}:${objective.id}:${attempt}`);

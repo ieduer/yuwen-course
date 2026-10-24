@@ -9,7 +9,7 @@ import {paragraphGuide} from '../site/dialogue-paragraph-guide.js';
 import {questionItems} from '../site/dialogue-policy.js';
 
 const load=id=>JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${id}.json`,'utf8'));
-const row=(objectiveId,outcome)=>({objectiveId,outcome,evidence:[],rationale:'test',ruleVersion:'test'});
+const row=(objectiveId,outcome,policyVersion='yw-dialogue-policy-v15')=>({objectiveId,outcome,evidence:[],rationale:'test',ruleVersion:'test',policyVersion});
 
 test('policy v20: foreign authors speak Chinese, the reply never narrates bookkeeping, first-read marks are tracked',()=>{
  assert.equal(POLICY_VERSION,'yw-dialogue-policy-v20');
@@ -24,7 +24,7 @@ test('policy v20: foreign authors speak Chinese, the reply never narrates bookke
  assert.match(POLICY,/calibrationStatus 非 accepted 或來源仍待核對時只能給 review/);
 });
 
-test('a review without a pending calibration reopens as unfinished work; a calibration hold stays in review; credit is unchanged',()=>{
+test('a pre-v19 review without a pending calibration reopens as unfinished work; v19+ reviews and calibration holds stay; credit is unchanged',()=>{
  const c=load('lesson-1499');
  const plain=c.objectives.find(o=>o.domain==='wordCreation')||c.objectives.find(o=>o.domain==='transfer');
  const state=projectState(c,[row(plain.id,'review')],[]);
@@ -33,6 +33,8 @@ test('a review without a pending calibration reopens as unfinished work; a calib
  assert.equal(state.targets.find(t=>t.id===plain.id).status,'in_progress','the page shows it as work in progress, not a teacher hold');
  assert.equal(projectState(c,[row(plain.id,'review'),row(plain.id,'demonstrated')],[]).objectives.find(x=>x.id===plain.id).status,'demonstrated','a verified demonstrated still wins');
  assert.equal(projectState(c,[row(plain.id,'needs_practice')],[]).objectives.find(x=>x.id===plain.id).reopenedFromReview,undefined);
+ // From policy v19 (r34) review means an uncertain reading or a source/calibration hold: it keeps its meaning.
+ for(const v of ['yw-dialogue-policy-v19','yw-dialogue-policy-v20',null])assert.equal(projectState(c,[row(plain.id,'review',v)],[]).objectives.find(x=>x.id===plain.id).status,'review',String(v));
  const held=load('lesson-1497'),item=held.languagePractice.find(v=>v.calibrationStatus!=='accepted');
  assert.ok(item,'lesson-1497 has a language item still pending calibration');
  assert.equal(reviewReopenable(held,item.id),false);

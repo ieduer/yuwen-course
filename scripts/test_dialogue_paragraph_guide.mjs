@@ -30,7 +30,7 @@ test('classical words follow the text paragraph by paragraph',()=>{
  assert.equal(guide.focus.next.objectiveId,guide.paragraphs[0].words[0].objectiveId);
 });
 
-test('a word is confirmed by a verified dialogue assessment or a preserved original answer; a review without a calibration hold reopens (r35)',()=>{
+test('a word is confirmed by a verified dialogue assessment or a preserved original answer; review words wait',()=>{
  const c=load('lesson-1476'),order=guideFor(c,projectState(c,[],[],null,CLOSE)).order;
  const [first,second,third]=order;
  const preserved=[{objectiveId:legacyVocab(c,second),verified:true,sourceEventId:'e1'}];
@@ -38,11 +38,10 @@ test('a word is confirmed by a verified dialogue assessment or a preserved origi
  const guide=guideFor(c,state),words=new Map(guide.paragraphs.flatMap(p=>p.words).map(w=>[w.objectiveId,w.status]));
  assert.equal(words.get(first),'confirmed');
  assert.equal(words.get(second),'confirmed');
- // r35 (owner direction 2026-10-24): a review the evidence rules could still turn into demonstrated is unfinished work.
- assert.equal(words.get(third),'open');
+ assert.equal(words.get(third),'waiting');
  assert.equal(guide.confirmedWords,2);
- assert.equal(guide.waitingWords,0);
- assert.equal(guide.focus.next.objectiveId,third,'the focus skips confirmed words and comes back to the reopened one');
+ assert.equal(guide.waitingWords,1);
+ assert.equal(guide.focus.next.objectiveId,order[3],'the focus skips confirmed and waiting words');
 });
 
 test('the guide stays out of non-classical lessons and out of the prompt before close reading',()=>{
