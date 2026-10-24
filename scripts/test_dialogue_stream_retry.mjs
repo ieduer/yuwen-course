@@ -175,7 +175,8 @@ test('a no-output failure on the last reserved attempt offers no retry',async()=
 
 // Claude first, free Gemini fallback (2026-10-20 finding): a structured reply truncated at the output bound is a paid, failed
 // Claude attempt the gateway never relays; the saved turn must offer the explicit retry instead of an unclassified denial.
-test('Claude-primary: a truncated Claude attempt plus a free-pool failure reserves the policy output bound and offers one explicit retry',async()=>{
+// r36 (owner, 2026-10-24): each dispatch is one Claude attempt; the free pool only serves when the gateway skips Claude.
+test('Claude-primary: a truncated Claude attempt reserves the policy output bound and offers one explicit retry to Claude',async()=>{
  const f=fixture();try{
   const CLAUDE='claude-sonnet-5-5',GEMINI='gemini-3.8-flash';
   const v2={version:'yw-claude-primary-20261020-v2',policy:'yw-claude-primary-gemini-fallback-v1',currency:'USD',model:GEMINI,primaryModel:CLAUDE,primaryInputMicrosPerMillion:2000000,primaryOutputMicrosPerMillion:10000000,inputMicrosPerMillion:0,outputMicrosPerMillion:0,maxInputTokens:32000,maxOutputTokens:8192,reserveMicros:145920,globalDailyMicros:20000000,userDailyMicros:2000000,lessonLifetimeMicros:4000000,validUntil:'2099-01-01T00:00:00Z'};
@@ -183,14 +184,16 @@ test('Claude-primary: a truncated Claude attempt plus a free-pool failure reserv
   const v2accounting=(attempts,max=3)=>({version:1,policy:'yw-claude-primary-gemini-fallback-v1',mode:'sequential-distinct-key',fallback:false,hedge:false,backgroundCalls:0,maxProviderAttempts:max,providerAttemptCount:attempts.length,attempts});
   const truncatedUsage={promptTokenCount:15600,candidatesTokenCount:8192,totalTokenCount:23792};
   let sentBudget=null;
-  const truncated=async(_e,_p,_id,_reply,budget)=>{sentBudget=budget;const error=Error('gateway_stream_unconfirmed');error.gatewayFailure={providerAccounting:v2accounting([{ordinal:1,model:CLAUDE,outcome:'CLAUDE_TRUNCATED',brokerCompleted:true,outputStarted:true,usage:truncatedUsage},{ordinal:2,model:GEMINI,outcome:'TIMEOUT',brokerCompleted:true,outputStarted:false,usage:null}])};throw error;};
+  const truncated=async(_e,_p,_id,_reply,budget)=>{sentBudget=budget;const error=Error('gateway_stream_unconfirmed');error.gatewayFailure={providerAccounting:v2accounting([{ordinal:1,model:CLAUDE,outcome:'CLAUDE_TRUNCATED',brokerCompleted:true,outputStarted:true,usage:truncatedUsage}],1)};throw error;};
   const first=await firstFailure(f,truncated);
-  assert.equal(sentBudget.maxOutputTokens,8192);assert.equal(sentBudget.providerAttemptLimit,3);assert.equal(sentBudget.reserveMicros,145920);
-  const call=f.sql.prepare('SELECT * FROM dialogue_calls').get();assert.equal(call.state,'review');assert.equal(call.reserved_tokens,8192);assert.equal(call.reserved_micros,145920);assert.equal(call.accounted_micros,null);
+  assert.equal(sentBudget.maxOutputTokens,8192);assert.equal(sentBudget.providerAttemptLimit,1);assert.equal(sentBudget.logicalProviderAttemptLimit,3);assert.equal(sentBudget.reserveMicros,145920);
+  const call=f.sql.prepare('SELECT * FROM dialogue_calls').get();assert.equal(call.state,'review');assert.equal(call.reserved_tokens,8192);assert.equal(call.reserved_micros,145920);
+  // r36: the only attempt is the paid truncated one with known usage, so its cost is settled exactly: 15,600×2 + 8,192×10.
+  assert.equal(call.accounted_micros,15600*2+8192*10);
   assert.equal(first.partial,null);assert.equal(first.turns.length,1);assert.equal(first.turns[0].status,'needs_review');
-  assert.equal(first.replyRetry?.allowed,true);assert.equal(first.replyRetry.code,'explicit_retry_available');assert.equal(first.replyRetry.remainingProviderAttempts,1);assert.equal(first.replyRetry.providerAttemptsUsed,2);assert.equal(first.replyRetry.stage,'provider_request');assert.equal(first.replyRetry.code_detail,'gateway_stream_unconfirmed');
+  assert.equal(first.replyRetry?.allowed,true);assert.equal(first.replyRetry.code,'explicit_retry_available');assert.equal(first.replyRetry.remainingProviderAttempts,2);assert.equal(first.replyRetry.providerAttemptsUsed,1);assert.equal(first.replyRetry.stage,'provider_request');assert.equal(first.replyRetry.code_detail,'gateway_stream_unconfirmed');
   const failure=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='response_unconfirmed'").get().details_json);
-  assert.deepEqual(failure.providerAccounting.attempts.map(a=>a.outcome),['CLAUDE_TRUNCATED','TIMEOUT']);assert.deepEqual(failure.providerAccounting.attempts[0].usage,truncatedUsage);
+  assert.deepEqual(failure.providerAccounting.attempts.map(a=>a.outcome),['CLAUDE_TRUNCATED']);assert.deepEqual(failure.providerAccounting.attempts[0].usage,truncatedUsage);
   // The explicit retry re-dispatches the saved turn with the one remaining slot (Claude first again); no new student turn, no silent retry.
   const fresh='先說說你在意的那一句吧。',okUsage={promptTokenCount:15600,candidatesTokenCount:1200,totalTokenCount:16800};let limit=null,prompt=null;
   const retryModel=async(_e,p,_id,_reply,budget)=>{prompt=p;limit=budget.providerAttemptLimit;return {value:{reply:fresh,assessments:[]},model:CLAUDE,usage:okUsage,providerAccounting:v2accounting([{ordinal:1,model:CLAUDE,outcome:'OK',brokerCompleted:true,outputStarted:true,usage:okUsage}],1)};};
@@ -200,8 +203,8 @@ test('Claude-primary: a truncated Claude attempt plus a free-pool failure reserv
   assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_turns WHERE role='student'").get().n,1);
   const settled=f.sql.prepare('SELECT * FROM dialogue_calls').get();assert.equal(settled.state,'finished');
   const evidence=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='provider_accounting_saved'").get().details_json);
-  assert.deepEqual(evidence.providerAccounting.attempts.map(a=>[a.model,a.outcome]),[[CLAUDE,'CLAUDE_TRUNCATED'],[GEMINI,'TIMEOUT'],[CLAUDE,'OK']]);assert.equal(evidence.providerAccounting.continuedAfter,2);
-  // Known cost: 15,600×2 + 8,192×10 (truncated, paid) + 0 (free pool) + 15,600×2 + 1,200×10 (served) = 174,320 > the one-primary
+  assert.deepEqual(evidence.providerAccounting.attempts.map(a=>[a.model,a.outcome]),[[CLAUDE,'CLAUDE_TRUNCATED'],[CLAUDE,'OK']]);assert.equal(evidence.providerAccounting.continuedAfter,1);
+  // Known cost: 15,600×2 + 8,192×10 (truncated, paid) + 15,600×2 + 1,200×10 (served) = 156,320 > the one-primary
   // reservation of 145,920, so the operator cost is unknown and the budget keeps counting the call at its reservation.
   assert.equal(evidence.operatorAccountedMicros,null);assert.equal(settled.accounted_micros,null);assert.equal(settled.reserved_micros,145920);
   const again=await(await handleDialogue(req({action:'continue',turnId:first.turns[0].id,partialDigest:'',revision:after.revision,mutationId:'stream-retry-trunc-0002'}),f.env,student,null,{callModel:()=>{throw Error('must not call');}})).json();

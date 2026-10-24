@@ -11,7 +11,7 @@ const legacy={version:'yw-formal-free-pool-20261019-v1',currency:'USD',model:GEM
 const at=Date.parse('2026-10-20T06:00:00Z');
 const claudeUsage={promptTokenCount:12000,candidatesTokenCount:700,totalTokenCount:12700},geminiUsage={promptTokenCount:12000,candidatesTokenCount:600,totalTokenCount:12600};
 const attempt=(ordinal,model,outcome,extra={})=>({ordinal,model,outcome,brokerCompleted:true,outputStarted:outcome==='OK',usage:outcome==='OK'?(model===CLAUDE?claudeUsage:geminiUsage):null,...extra});
-const accounting=(attempts,policyName='yw-claude-primary-gemini-fallback-v1')=>({version:1,policy:policyName,mode:'sequential-distinct-key',fallback:false,hedge:false,backgroundCalls:0,maxProviderAttempts:3,providerAttemptCount:attempts.length,attempts});
+const accounting=(attempts,policyName='yw-claude-primary-gemini-fallback-v1',max=3)=>({version:1,policy:policyName,mode:'sequential-distinct-key',fallback:false,hedge:false,backgroundCalls:0,maxProviderAttempts:max,providerAttemptCount:attempts.length,attempts});
 
 test('policy v2 parses the Claude primary with its own prices and a reserve that covers the priciest model; legacy policies are unchanged',()=>{
  const b=dialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify(policy)},at);
@@ -32,7 +32,8 @@ test('cost follows the model that produced the usage: Claude priced, free Gemini
  assert.equal(reconciledCost(b,geminiUsage,null),0);
  const env={YW_DIALOGUE_BUDGET_JSON:JSON.stringify(policy),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'};
  const budget=requestDialogueBudget(env,{id:1},'lesson-1717-p2');
- assert.equal(budget.primaryModel,CLAUDE);assert.equal(budget.providerAttemptLimit,3);
+ // r36: one Claude attempt per dispatch (the free pool only when the gateway skips Claude); the logical turn keeps three.
+ assert.equal(budget.primaryModel,CLAUDE);assert.equal(budget.providerAttemptLimit,1);assert.equal(budget.logicalProviderAttemptLimit,3);
  // The call reserves one Claude attempt plus two free fallback attempts: 88,000 + 0 + 0.
  assert.equal(budget.reserveMicros,88000);assert.equal(budget.fallbackReserveMicros,0);
  const legacyBudget=requestDialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify(legacy),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},{id:1},'lesson-1717-p2');assert.equal(legacyBudget.reserveMicros,252000);
@@ -68,7 +69,7 @@ test('continuation policy treats a failed Claude attempt followed by Gemini time
 
 test('gateway stream consumer accepts a Claude-served done event and the worker sends the claude-primary opt-in',async()=>{
  const answer='{"reply":"先說說你在意的那一句。","assessments":[]}';
- const frames=[['delta',{text:answer,requestId:'r1'}],['done',{requestId:'r1',answer,model:CLAUDE,modelVersion:null,usage:claudeUsage,providerAttemptCount:1,providerAccounting:accounting([attempt(1,CLAUDE,'OK')]),firstTokenMs:900,totalDurationMs:950}]];
+ const frames=[['delta',{text:answer,requestId:'r1'}],['done',{requestId:'r1',answer,model:CLAUDE,modelVersion:null,usage:claudeUsage,providerAttemptCount:1,providerAccounting:accounting([attempt(1,CLAUDE,'OK')],undefined,1),firstTokenMs:900,totalDurationMs:950}]];
  const body=frames.map(([e,d],i)=>`id: ${i+1}\nevent: ${e}\ndata: ${JSON.stringify(d)}\n\n`).join('');
  const response=()=>new Response(body,{headers:{'content-type':'text/event-stream'}});
  const replies=[];const result=await consumeGatewayStream(response(),async r=>{replies.push(r);},{maxReplyChars:1800,maxProviderAttempts:3,model:GEMINI,primaryModel:CLAUDE});
@@ -77,9 +78,9 @@ test('gateway stream consumer accepts a Claude-served done event and the worker 
  let sent=null;const env={YW_DIALOGUE_BUDGET_JSON:JSON.stringify(policy),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3',APIS_CALLER_TOKEN:'synthetic',APIS:{fetch:async req=>{sent=JSON.parse(await req.text());return response();}}};
  const budget=requestDialogueBudget(env,{id:1},'lesson-1717-p2');
  const out=await callDialogueModel(env,'提示',crypto.randomUUID(),async()=>{},budget);
- assert.equal(sent.tier,'claude-primary');assert.equal(sent.model,GEMINI);assert.equal(sent.providerAttemptLimit,3);assert.equal(out.model,CLAUDE);
+ assert.equal(sent.tier,'claude-primary');assert.equal(sent.model,GEMINI);assert.equal(sent.providerAttemptLimit,1);assert.equal(out.model,CLAUDE);
  const legacyEnv={...env,YW_DIALOGUE_BUDGET_JSON:JSON.stringify(legacy)};sent=null;
- const geminiBody=[['delta',{text:answer,requestId:'r2'}],['done',{requestId:'r2',answer,model:GEMINI,modelVersion:null,usage:geminiUsage,providerAttemptCount:1,providerAccounting:accounting([attempt(1,GEMINI,'OK')],'yw-same-model-sequential-v1'),firstTokenMs:900,totalDurationMs:950}]].map(([e,d],i)=>`id: ${i+1}\nevent: ${e}\ndata: ${JSON.stringify(d)}\n\n`).join('');
+ const geminiBody=[['delta',{text:answer,requestId:'r2'}],['done',{requestId:'r2',answer,model:GEMINI,modelVersion:null,usage:geminiUsage,providerAttemptCount:1,providerAccounting:accounting([attempt(1,GEMINI,'OK')],'yw-same-model-sequential-v1',1),firstTokenMs:900,totalDurationMs:950}]].map(([e,d],i)=>`id: ${i+1}\nevent: ${e}\ndata: ${JSON.stringify(d)}\n\n`).join('');
  legacyEnv.APIS={fetch:async req=>{sent=JSON.parse(await req.text());return new Response(geminiBody,{headers:{'content-type':'text/event-stream'}});}};
  await callDialogueModel(legacyEnv,'提示',crypto.randomUUID(),async()=>{},requestDialogueBudget(legacyEnv,{id:1},'lesson-1717-p2'));
  assert.equal(sent.tier,undefined);
@@ -110,7 +111,7 @@ test('v2 reservation bound: one primary attempt at the output bound plus two fre
  const env={YW_DIALOGUE_BUDGET_JSON:JSON.stringify(v2),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'};
  const budget=requestDialogueBudget(env,{id:1},'lesson-1717-p2');
  // reserve = primary + fallback × (limit − 1) = 145,920 + 0 × 2
- assert.equal(budget.reserveMicros,145920);assert.equal(budget.perAttemptReserveMicros,145920);assert.equal(budget.fallbackReserveMicros,0);assert.equal(budget.providerAttemptLimit,3);assert.equal(budget.maxOutputTokens,8192);
+ assert.equal(budget.reserveMicros,145920);assert.equal(budget.perAttemptReserveMicros,145920);assert.equal(budget.fallbackReserveMicros,0);assert.equal(budget.providerAttemptLimit,1);assert.equal(budget.logicalProviderAttemptLimit,3);assert.equal(budget.maxOutputTokens,8192);
  assert.equal(budget.userDailyMicros,2000000);assert.equal(budget.lessonLifetimeMicros,4000000);assert.ok(budget.reserveMicros<=Math.min(budget.globalDailyMicros,budget.userDailyMicros,budget.lessonLifetimeMicros));
  // The reservation may equal a cap but never exceed it.
  assert.equal(requestDialogueBudget({YW_DIALOGUE_BUDGET_JSON:JSON.stringify({...v2,userDailyMicros:145920,lessonLifetimeMicros:145920}),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3'},{id:1},'lesson-1717-p2').reserveMicros,145920);
@@ -127,7 +128,7 @@ test('v2 reservation bound: one primary attempt at the output bound plus two fre
 
 test('the worker forwards the policy output bound to the gateway (max_tokens) and keeps 2,400 for policies without one',async()=>{
  const answer='{"reply":"先說說你在意的那一句。","assessments":[]}';
- const frames=[['delta',{text:answer,requestId:'r1'}],['done',{requestId:'r1',answer,model:CLAUDE,modelVersion:null,usage:claudeUsage,providerAttemptCount:1,providerAccounting:accounting([attempt(1,CLAUDE,'OK')]),firstTokenMs:900,totalDurationMs:950}]];
+ const frames=[['delta',{text:answer,requestId:'r1'}],['done',{requestId:'r1',answer,model:CLAUDE,modelVersion:null,usage:claudeUsage,providerAttemptCount:1,providerAccounting:accounting([attempt(1,CLAUDE,'OK')],undefined,1),firstTokenMs:900,totalDurationMs:950}]];
  const body=frames.map(([e,d],i)=>`id: ${i+1}\nevent: ${e}\ndata: ${JSON.stringify(d)}\n\n`).join('');
  let sent=null;const env={YW_DIALOGUE_BUDGET_JSON:JSON.stringify(v2),YW_DIALOGUE_PROVIDER_ATTEMPTS:'3',APIS_CALLER_TOKEN:'synthetic',APIS:{fetch:async req=>{sent=JSON.parse(await req.text());return new Response(body,{headers:{'content-type':'text/event-stream'}});}}};
  await callDialogueModel(env,'提示',crypto.randomUUID(),async()=>{},requestDialogueBudget(env,{id:1},'lesson-1717-p2'));

@@ -135,7 +135,7 @@ async function revealTurn(turnId){
 function renderEvidence(report){
  const box=$('evidence-summary');box.replaceChildren(node('p',report.student.notice));
  if(report.conclusion){
-  const c=report.conclusion;box.append(node('h3','這次尚友的理解與回望'),node('p',c.studentSummary),node('p','這是依據本課紀錄形成的教學總結，仍可請教師覆核；不替代原對話或成績。'));
+  const c=report.conclusion;box.append(node('h3','這次尚友的理解與回望'),node('p',c.studentSummary),node('p','這是依據本課紀錄形成的學習總結；不替代原對話或成績。'));
   const jump=(label,ref)=>{const b=node('button',`${label}：「${ref.quote}」`);b.onclick=()=>void revealTurn(ref.turnId).catch(e=>{$('export-status').textContent=e.message;});return b;};
   box.append(jump('較早的理解',c.change.before),jump('現在的理解',c.change.after),jump('你的認同或質疑',c.stance));
   const detail=node('details');detail.append(node('summary','查看逐項分析與依據'));
@@ -148,7 +148,7 @@ function renderEvidence(report){
  const targets=snapshot?.state?.targets||[];
  if(targets.length){for(const t of targets.filter(t=>t.status==='confirmed'))box.append(node('p',`已有證據：${t.label}`));for(const t of targets.filter(t=>t.status!=='confirmed'&&t.requiredForCompletion!==false))box.append(node('p',`${TARGET_STATUS[t.status]||'尚未談到'}：${t.label}`));}
  else{for(const o of report.student.observed)box.append(node('p',`已有證據：${o.label}`));
- for(const o of report.student.remaining)box.append(node('p',`${o.status==='pending_calibration'?'待校準（不影響本課完成，可請老師覆核）':o.status==='historical_review'?'原有完成已保留，版本對應待核對':o.status==='review'?'待覆核':'尚待觀察'}：${o.label}`));}
+ for(const o of report.student.remaining)box.append(node('p',`${o.status==='pending_calibration'?'練習項（校準中，不影響本課完成）':o.status==='historical_review'?'原有完成已保留':o.status==='review'?'練習項（不影響本課完成）':'尚待觀察'}：${o.label}`));}
 }
 function view(name){document.querySelector('.workspace').dataset.view=name;for(const id of ['text','conversation'])$(id+'-tab').setAttribute('aria-pressed',String(id===name));}
 // Source-grounded introduction shown with the opening: identity, era (literary taxonomy), the textbook's own source line
@@ -682,7 +682,7 @@ function renderParagraphProgress(guide){
  const box=$('paragraph-progress');if(!box)return;box.replaceChildren();
  if(guide?.phase==='initial_reading'){box.append(node('b','文言細讀 · 先做無注疏初讀'),node('span','：不看注釋讀一遍，告訴作者三處讀不通或拿不準的地方和你的猜測，再寫幾句初讀感受。之後一段一段讀字詞，讀懂一個記一個。'));const f=guide.firstRead;if(f)box.append(node('span',` · 已記下疑點 ${Math.min(f.marks,f.required)}／${f.required}${f.marks>f.required?`（共 ${f.marks} 處）`:''} · 初讀感受${f.summaryWritten?'已寫':'未寫'}`,'first-read-count'));}
  else if(guide?.phase==='annotated_reading')box.append(node('b','文言細讀'),node('span','：讀完帶註釋的正文後告訴作者一聲，就可以一段一段讀字詞。'));
- else if(guide?.totalWords&&guide.complete)box.append(node('b',`全篇字詞已讀通 ${guide.confirmedWords}／${guide.totalWords}`),node('span',guide.waitingWords?` · ${guide.waitingWords} 個待教師覆核`:''));
+ else if(guide?.totalWords&&guide.complete)box.append(node('b',`全篇字詞已讀通 ${guide.confirmedWords}／${guide.totalWords}`),node('span',guide.waitingWords?` · ${guide.waitingWords} 個練習項不影響完成`:''));
  else if(guide?.focus){
   box.append(node('b',`逐段細讀 · ${paragraphName(guide.focus)} · 進度 ${guide.focus.ordinal}／${guide.focus.of}`),node('span',` · 本段字詞 ${guide.focus.confirmed}／${guide.focus.total} · 全篇 ${guide.confirmedWords}／${guide.totalWords}`));
   const words=node('span',undefined,'words');
@@ -705,8 +705,8 @@ function renderAchievement(gained,data,gainedPoints){
 }
 // Lesson details: the merged learning targets (one per real aim; legacy rubric items are routes of the same target),
 // collapsed and outside the message flow. Status comes from the server projection only.
-const TARGET_STATUS={confirmed:'已確認',in_progress:'進行中',review:'待覆核',historical_review:'原有紀錄待核對',pending_calibration:'待校準',not_yet:'尚未談到'};
-const TRACK_STATUS={done:'已完成',partial:'部分完成',pending_evaluation:'評閱中',historical_review:'原有紀錄待核對',not_started:'尚未開始'};
+const TARGET_STATUS={confirmed:'已確認',in_progress:'進行中',review:'練習項',historical_review:'原有完成已保留',pending_calibration:'練習項',not_yet:'尚未談到'};
+const TRACK_STATUS={done:'已完成',partial:'部分完成',pending_evaluation:'評閱中',historical_review:'原有完成已保留',not_started:'尚未開始'};
 function renderTargets(state){
  const box=$('lesson-details'),list=$('lesson-targets'),scoreList=$('lesson-score');if(!box||!list)return;list.replaceChildren();scoreList?.replaceChildren();
  const targets=(state?.targets||[]).filter(t=>t.requiredForCompletion!==false||t.status==='confirmed');
@@ -732,7 +732,7 @@ function update(data){
   if(pending.action==='original')originalDraft=null;pending=null;pendingDraft=null;persistComposer();
  }
  const acknowledgement=acknowledgeObjectives(data),gainedWords=acknowledgeWords(data);
- snapshot=data;void refreshReadingMarks();$('old-history-load').disabled=false;const replacedStream=!!document.getElementById('partial-reply')&&!data.partial;renderPartial(data.partial);renderReplyRetry(data);if(data.report)renderEvidence(data.report);if(data.legacy?.completion)$('evidence-summary').append(node('p','原課已完成（原有自報紀錄，非新增成績）；新增對話另存。'));if(data.legacy?.firstRead?.length)$('evidence-summary').append(node('p','原有初讀及未完成的標記仍保留，可由「原有課程」繼續；原文版本不同時不自動套用舊位置。'));renderTurns(data.turns||[],false,{preserveScroll:replacedStream});$('older').hidden=!data.older;setStatus(data.pending?'你的回答已保存，正在等候回應。':data.saved===false?'':data.statusNotice||'');$('answer').disabled=false;$('send').disabled=!!data.pending;const next=data.state?.next;renderTargets(data.state);renderParagraphProgress(data.paragraphGuide);renderAchievement(gainedWords,data,lastGainedPoints);if(!conversationFlow)$('next').replaceChildren(node('span',data.state?.legacyCompletion?'原課的完成紀錄已保留。你可以自願繼續細讀，不必重做；新對話不改寫原成績。':next?`接下來：${next.domain==='vocabulary'?next.label+'。回到原句，用自己的話解釋語境與判斷依據；可以先查閱註釋，獨立掌握需另作新題。':next.rule}`:data.state?.completion==='evidence_ready_for_review'?'證據已齊，等待教師覆核。':data.state?.objectives.some(o=>o.status==='review')?'有證據待覆核，請保留原話與來源；不用為此反覆作答。':'原有完成紀錄待核對，無需重做已完成內容。'));
+ snapshot=data;void refreshReadingMarks();$('old-history-load').disabled=false;const replacedStream=!!document.getElementById('partial-reply')&&!data.partial;renderPartial(data.partial);renderReplyRetry(data);if(data.report)renderEvidence(data.report);if(data.legacy?.completion)$('evidence-summary').append(node('p','原課已完成（原有自報紀錄，非新增成績）；新增對話另存。'));if(data.legacy?.firstRead?.length)$('evidence-summary').append(node('p','原有初讀及未完成的標記仍保留，可由「原有課程」繼續；原文版本不同時不自動套用舊位置。'));renderTurns(data.turns||[],false,{preserveScroll:replacedStream});$('older').hidden=!data.older;setStatus(data.pending?'你的回答已保存，正在等候回應。':data.saved===false?'':data.statusNotice||'');$('answer').disabled=false;$('send').disabled=!!data.pending;const next=data.state?.next;renderTargets(data.state);renderParagraphProgress(data.paragraphGuide);renderAchievement(gainedWords,data,lastGainedPoints);if(!conversationFlow)$('next').replaceChildren(node('span',data.state?.legacyCompletion?'原課的完成紀錄已保留。你可以自願繼續細讀，不必重做；新對話不改寫原成績。':next?`接下來：${next.domain==='vocabulary'?next.label+'。回到原句，用自己的話解釋語境與判斷依據；可以先查閱註釋，獨立掌握需另作新題。':next.rule}`:data.state?.completion==='evidence_ready_for_review'?'本課已完成：學習證據齊全，結語已保存。':'原有完成紀錄已保留，無需重做已完成的內容。'));
  // The device draft is the student's latest text for this lesson on this device: it is restored before an older server draft.
  const deviceRestored=!hasComposerDraft()&&!pending&&!inflight&&(restoreComposer(),hasComposerDraft());
  const serverDraftText=data.draft?(data.draft.learningRequest?.content??data.draft.content):null;
@@ -901,19 +901,19 @@ $('export-all').onclick=async()=>{
  try{
   const pages=[];let cursor=null;
   for(let n=0;n<MAX_EXPORT_PAGES;n++){const page=await api(null,null,false,null,null,false,false,false,{exportAll:'1',...(cursor?{before:cursor.updatedAt,beforeId:cursor.id}:{})});pages.push(page);$('sessions-status').textContent=`已讀取 ${pages.reduce((n,p)=>n+(p.sessions?.length||0),0)} / ${page.total??'?'} 篇…`;cursor=page.older||null;if(!cursor)break;}
-  if(cursor)throw Error('紀錄超過可讀取頁數，匯出未完成；請稍後再試或聯絡教師。');
+  if(cursor)throw Error('紀錄超過可讀取頁數，匯出未完成；請稍後再試。');
   const record=mergeExportPages(pages,{exportedAt:new Date().toISOString(),ownerRef});
   const blob=new Blob([JSON.stringify(record,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download=exportFilename(record.exportedAt);a.click();setTimeout(()=>URL.revokeObjectURL(url),0);
   $('sessions-status').textContent=`已匯出本帳戶 ${record.sessionCount} 篇對話${record.incompleteSessions.length?`，其中 ${record.incompleteSessions.length} 篇含未確認或未送出內容（已在檔案中標記）`:''}。原有紀錄仍保留。`;
  }catch(e){$('sessions-status').textContent=e.message;}
  finally{button.disabled=false;}
 };
-$('review').onclick=async()=>{try{const r=await api({action:'review'});$('export-status').textContent=r.message;}catch(e){$('export-status').textContent=e.message;}};
+if($('review'))$('review').onclick=async()=>{try{const r=await api({action:'review'});$('export-status').textContent=r.message;}catch(e){$('export-status').textContent=e.message;}};
 async function completeRecord(){
  const expected=generation;let page=await api(null,null,true),turns=[...page.turns],cursor=page.older;
  for(let n=0;cursor&&n<MAX_HISTORY_PAGES;n++){const older=await api(null,cursor);turns.unshift(...older.turns);cursor=older.older;}
  if(expected!==generation||cursor||turns.length>MAX_TRANSCRIPT_RECORDS)throw Error('紀錄尚未完整讀回，請稍後再試。');
- return {...page,opening:dialogueOpening(curriculum),turns,additionalHistory:sharedHistory,exportedAt:new Date().toISOString(),privacy:'僅供本人及獲授權教師核對'};
+ return {...page,opening:dialogueOpening(curriculum),turns,additionalHistory:sharedHistory,exportedAt:new Date().toISOString(),privacy:'僅供本人查閱'};
 }
 $('copy-transcript').onclick=async()=>{try{const record=await completeRecord();const text=[curriculum.title,record.opening.content,...record.turns.map(t=>`${t.role==='student'?'你':dialogueIdentity(curriculum).name} · ${t.createdAt}\n${t.content}`)].join('\n\n');await navigator.clipboard.writeText(text);$('export-status').textContent='全部對話已複製；原有紀錄仍保留。';}catch(e){$('export-status').textContent='複製未完成：'+e.message+' 可改用匯出。';}};
 $('export').onclick=async()=>{try{const record=await completeRecord(),blob=new Blob([JSON.stringify(record,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download=`${curriculum.lessonId}-learning-record.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),0);$('export-status').textContent='已產生本課私人紀錄，請妥善保存。';}catch(e){$('export-status').textContent=e.message;}};
@@ -1007,7 +1007,7 @@ $('correction-form').onsubmit=async e=>{
  const hash=JSON.stringify(body);if(!correctionMutation||correctionMutation.hash!==hash)correctionMutation={hash,id:crypto.randomUUID()};
  $('correction-save').disabled=true;
  try{const result=await api({...body,mutationId:correctionMutation.id});if(gen!==generation)return;
- $('correction-status').textContent=result.saved?'更正已保存，原件與原評價保留；尚未由教師覆核。':'尚未確認保存。';
+ $('correction-status').textContent=result.saved?'更正已保存，原件與原評價保留。':'尚未確認保存。';
  }catch(error){if(gen===generation)$('correction-status').textContent=error.message;}finally{if(gen===generation)$('correction-save').disabled=false;}
 };
 

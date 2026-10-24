@@ -11,8 +11,8 @@ import {questionItems} from '../site/dialogue-policy.js';
 const load=id=>JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${id}.json`,'utf8'));
 const row=(objectiveId,outcome,policyVersion='yw-dialogue-policy-v15')=>({objectiveId,outcome,evidence:[],rationale:'test',ruleVersion:'test',policyVersion});
 
-test('policy v20: foreign authors speak Chinese, the reply never narrates bookkeeping, first-read marks are tracked',()=>{
- assert.equal(POLICY_VERSION,'yw-dialogue-policy-v20');
+test('policy v20+: foreign authors speak Chinese, the reply never narrates bookkeeping, first-read marks are tracked',()=>{
+ assert.match(POLICY_VERSION,/^yw-dialogue-policy-v2[0-9]$/);
  assert.match(POLICY,/外國作者一律用中文說話/);
  assert.doesNotMatch(POLICY,/先用其寫作語言，再附忠實、完整的中文對照/,'the full bilingual reply (40 Russian, English or Spanish replies to Chinese students, 10-21..23) is gone');
  assert.match(POLICY,/reply 只談作品和學生的想法，不談後台/);
@@ -21,7 +21,7 @@ test('policy v20: foreign authors speak Chinese, the reply never narrates bookke
  assert.match(POLICY,/reopenedFromReview 為 true 的項目/);
  // Evidence rules are untouched.
  assert.match(POLICY,/每個 demonstrated 的 evidence 必須逐項覆蓋該 objectives 條目 criteria 中的全部判準/);
- assert.match(POLICY,/calibrationStatus 非 accepted 或來源仍待核對時只能給 review/);
+ assert.match(POLICY,/calibrationStatus 非 accepted 或來源仍待核對時不記 demonstrated/,'r36: holds are discussed, never sent to a teacher');
 });
 
 test('a pre-v19 review without a pending calibration reopens as unfinished work; v19+ reviews and calibration holds stay; credit is unchanged',()=>{

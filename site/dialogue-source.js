@@ -446,7 +446,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   if(session.inflight||session.revision!==body.revision)return json({code:'stale_revision'},409);
   const data=await snapshot(db,session,curriculum),task=data.learningTurn||{kind:'dialogue'};
   if((!task.taskId||task.taskId!==body.taskId)&&!(body.conversation===true&&!task.taskId&&body.taskId===`${curriculum.curriculumVersion}:${session.revision}:reading-conversation`))return json({code:'learning_task_changed',message:'本輪問題已更新；你的文字保留，請讀回後繼續。'},409);
-  if(task.kind==='exemption')return json({code:'owner_approved_supplement',message:'此補充篇目已由教師確認通過，無須作答或新增評分。'},409);
+  if(task.kind==='exemption')return json({code:'owner_approved_supplement',message:'此補充篇目已確認通過，無須作答或新增評分。'},409);
   if(task.kind==='unavailable')return json({code:'source_unavailable'},409);
   const records=await learningRecords(db,session);
   if(body.conversation===true){
@@ -488,7 +488,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   if(duplicate)return duplicate.request_hash===requestHash?json(await snapshot(db,session,curriculum)):json({code:'idempotency_conflict'},409);
   if(session.inflight||session.revision!==body.revision)return json({code:'stale_revision'},409);
   const count=await db.prepare("SELECT COUNT(*) n FROM dialogue_turns WHERE session_id=? AND role='student'").bind(session.id).first();
-  if(count.n>=LIMITS.lessonLifetime)return json({code:'lesson_review_required',message:'本課已達會話上限；已保存紀錄保留，請匯出交由教師覆核。這次選擇尚未保存。'},409);
+  if(count.n>=LIMITS.lessonLifetime)return json({code:'lesson_review_required',message:'本課已達對話上限；已保存的紀錄都保留，可以匯出回看。這次選擇尚未保存。'},409);
   const data=await snapshot(db,session,curriculum),task=learningOriginal||data.originalTask;
   if(data.question||!task||task.objectiveId!==body.objectiveId)return json({code:'original_task_not_ready',message:'請先完成目前的語境說明；已完成的原有結果不重做。'},409);
   let formal;try{formal=prepareOriginalInput(curriculum,task,body.input);}catch{return json({code:'invalid_original_input'},400);}
@@ -528,14 +528,14 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   const remaining=order.filter(id=>!legacy.preserved.some(p=>p.objectiveId===id)&&!['mastered','review'].includes(priorById.get(id)?.state));
   // A new browser-supplied objective cannot bypass an unanswered remediation.
   const objectiveId=remaining.find(id=>priorById.get(id)?.state==='needs_reformulation')||remaining[0];
-  if(!objectiveId)return json([...priorById.values()].some(q=>q.state==='review')?{code:'vocabulary_review_required',message:'語言練習中有待覆核的證據，無須重複作答；請保留紀錄供教師核對，其他閱讀可繼續。'}:{code:'vocabulary_covered',message:'原有與本次字詞證據已保留，可繼續其他閱讀。'},409);
+  if(!objectiveId)return json([...priorById.values()].some(q=>q.state==='review')?{code:'vocabulary_review_required',message:'這個語言練習還在校準，不影響本課完成；其他閱讀可以繼續。'}:{code:'vocabulary_covered',message:'原有與本次字詞證據已保留，可繼續其他閱讀。'},409);
   const prior=priorById.get(objectiveId)||null;
   if(prior?.state==='mastered')return json({code:'already_demonstrated'},409);
   if(prior){
     const reformulated=await db.prepare("SELECT id FROM dialogue_assessments WHERE session_id=? AND objective_id=? AND outcome='reformulated' AND created_at>? LIMIT 1").bind(session.id,prior.objectiveId,prior.answeredAt||prior.createdAt).first();
     if(!reformulated)return json({code:'reformulation_required',message:'請先用自己的話改述剛才的詞義與語境依據，確認後再換一題獨立作答。'},409);
   }
-  let q;try{q=createQuestion(curriculum,{objectiveId,attempt:(prior?.attempt||0)+1,previousVariant:prior?.variant??null});}catch{return json({code:'teacher_review_required',message:'請保留答案與提示，交由教師覆核；其他閱讀可繼續。'},409);}
+  let q;try{q=createQuestion(curriculum,{objectiveId,attempt:(prior?.attempt||0)+1,previousVariant:prior?.variant??null});}catch{return json({code:'teacher_review_required',message:'這個字的新題已經用完；可以直接作答原題，其他閱讀繼續。'},409);}
   q.selection={...q.selection,orderAlgorithm:textOrder?.length?'paragraph-order-v1':'sha256-session-v1',coverageOrder:order,coverageIndex:order.indexOf(objectiveId)};
   await db.prepare('INSERT OR IGNORE INTO dialogue_questions(id,session_id,objective_id,attempt,instance_json,state,created_at) VALUES(?,?,?,?,?,?,?)').bind(q.id,session.id,q.objectiveId,q.attempt,JSON.stringify(q),q.state,q.createdAt).run();
   return json(await snapshot(db,session,curriculum));
@@ -543,7 +543,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
  if(body.action==='review'){
   const id=`${session.id}:review-request`;
   await db.prepare('INSERT OR IGNORE INTO dialogue_events(id,session_id,event_type,details_json,created_at) VALUES(?,?,?,?,?)').bind(id,session.id,'teacher_review_requested','{"scoringChange":false}',now()).run();
-  return json({saved:true,review:'requested',delivery:'student-export-required',message:'覆核請求已保存。請匯出本課紀錄交給任課教師；尚未發送通知。'});
+  return json({saved:true,review:'requested',delivery:'student-export-required',message:'已保存。可以匯出本課紀錄自己保存或回看。'});
  }
  if(typeof body.content!=='string'||!body.content.trim()||body.content.length>LIMITS.inputChars||!/^[a-zA-Z0-9_-]{16,80}$/.test(body.mutationId||'')||!Number.isSafeInteger(body.revision))return json({code:'invalid_input'},400);
  let formal=learningFormal;
@@ -654,7 +654,7 @@ async function continueDialogue({request,env,db,student,session,curriculum,body,
   if(JSON.stringify(stored.isolatedAdmission)!==JSON.stringify(current.isolatedAdmission))throw Error('operation_changed');
   for(const key of ['version','model','inputMicrosPerMillion','outputMicrosPerMillion','reserveMicros','providerAttemptLimit'])if(stored[key]!==current[key])throw Error('policy_changed');
   if(call.day!==now().slice(0,10))throw Error('day_changed');
-  budget={...stored,providerAttemptLimit:disposition.remainingProviderAttempts};
+  budget={...stored,providerAttemptLimit:stored.primaryModel?1:disposition.remainingProviderAttempts};
  }catch{return json({code:'continuation_budget_revalidation_required',canExport:true,canReview:true},409);}
  const failed=await db.prepare("SELECT details_json FROM dialogue_events WHERE turn_id=? AND session_id=? AND event_type='response_unconfirmed' ORDER BY created_at DESC,id DESC LIMIT 1").bind(turn.id,session.id).first();
  const priorAttempts=JSON.parse(failed.details_json).providerAccounting.attempts.map(a=>a.outcome==='OK'?{...a,outcome:'OK_REJECTED'}:a);
@@ -791,7 +791,9 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
    if(!response.ok||!teacherId)throw Error('source_result_unconfirmed');
    stream?.send('done',{saved:true,turnId,teacherTurnId:teacherId});return;
   }
-  const responseJsonSchema=dialogueConclusionSchema({curriculum,state,turns:completeTurns,question,remediation,prompt});
+  // The source-option schema was built for the free pool and the Claude adapter cannot take it, so with Claude first the 尚友
+  // conclusion goes as ordinary JSON and validateConclusion (verbatim quotes, five domains) decides, as for every reply (r36).
+  const responseJsonSchema=budget.primaryModel?null:dialogueConclusionSchema({curriculum,state,turns:completeTurns,question,remediation,prompt});
   await recordPrompt(prompt,responseJsonSchema);
   failureStage='provider_request';
   const result=await observe(await callModel(env,prompt,resume?`${turnId}:continue`:turnId,persistReply,budget,{responseJsonSchema}));

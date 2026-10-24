@@ -792,7 +792,7 @@ test('the author assesses an original formal item in its own reply: recorded thr
  assert.equal(r.response.status,200);assert.equal(prompts.length,1,'the author scored inside its own reply; no second evaluator call');
  const sub=r.data.sourceSubmissions.find(s=>s.objectiveId.endsWith(':interaction:contextWords'));assert.equal(sub?.status,'confirmed');assert.equal(sub.score,78);
  const ev=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_assessment_saved'").get().details_json);
- assert.equal(ev.scoringProvenance.by,'conversation-author');assert.equal(ev.scoringProvenance.policyVersion,'yw-dialogue-policy-v20');assert.equal(ev.assessment.score,78);assert.match(ev.scoringProvenance.promptSha256,/^[a-f0-9]{64}$/);
+ assert.equal(ev.scoringProvenance.by,'conversation-author');assert.equal(ev.scoringProvenance.policyVersion,'yw-dialogue-policy-v21');assert.equal(ev.assessment.score,78);assert.match(ev.scoringProvenance.promptSha256,/^[a-f0-9]{64}$/);
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='contextWords'").get().n,1);
  const led=f.sql.prepare('SELECT raw_value,correctness,eligibility_status FROM learning_evaluations').get();assert.equal(led.raw_value,78);assert.equal(led.correctness,'passed');assert.equal(led.eligibility_status,'eligible');
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().n,0);
@@ -969,7 +969,8 @@ test('an incomplete answer marked needs_practice keeps the word open: the follow
 test('the author is told that a correct but incomplete answer is needs_practice and review is only for uncertain or calibration cases',async()=>{
  const {POLICY}=await import('../site/dialogue-policy.js');
  assert.match(POLICY,/學生目前所答成立、只是還不完整（例如還沒選原題選項，或少了理由說明），記 needs_practice，並用一個聚焦追問/);
- assert.match(POLICY,/review 只用於你確實拿不準學生的意思，或 calibrationStatus 非 accepted、來源仍待核對的情形/);
+ // r36 (owner, 2026-10-24): no teacher review on this self-study platform, so the author never records review.
+ assert.match(POLICY,/本平台是學生自主學習，沒有教師覆核環節：不要記 review/);
  assert.doesNotMatch(POLICY,/按實際情況記 review 或 needs_practice/);
 });
 

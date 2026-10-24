@@ -12,7 +12,11 @@ export function requestDialogueBudget(env,student,lessonId){
  // One primary attempt at the declared reserve plus (limit-1) fallback attempts at the fallback reserve (0 for the free pool).
  const reserveMicros=policy.reserveMicros+(policy.fallbackReserveMicros??policy.reserveMicros)*(limit-1);
  if(reserveMicros>(policy.sharedPool?policy.sharedPool.ceilingMicros:Math.min(policy.globalDailyMicros,policy.userDailyMicros,policy.lessonLifetimeMicros)))throw Error('retry_reserve_exceeds_budget');
- const budget={...policy,perAttemptReserveMicros:policy.reserveMicros,fallbackReserveMicros:policy.fallbackReserveMicros??policy.reserveMicros,providerAttemptLimit:limit,logicalProviderAttemptLimit:limit,reserveMicros};
+ // Claude first (owner, 2026-10-24): each dispatch asks the gateway for one attempt, so a failed Claude attempt is not followed
+ // by the free pool in the same call; the learner-visible retry re-dispatches to Claude. The gateway skips Claude only when its
+ // credit is exhausted or unavailable, and then that one attempt goes to the free pool. The logical turn keeps `limit` attempts.
+ const dispatch=policy.primaryModel?1:limit;
+ const budget={...policy,perAttemptReserveMicros:policy.reserveMicros,fallbackReserveMicros:policy.fallbackReserveMicros??policy.reserveMicros,providerAttemptLimit:dispatch,logicalProviderAttemptLimit:limit,reserveMicros};
  // The price policy cannot mint operation admission, even in server config.
  delete budget.isolatedAdmission;
  const admission=isolatedDialogueAdmission(env,student,lessonId,budget);
@@ -75,7 +79,7 @@ export function continuationDisposition(call,failure,continued=false,{noOutput=f
 
 export async function budgetDenial(db,session,student,budget,limits,day,at=new Date().toISOString()){
  const q=async(text,...args)=>(await db.prepare(text).bind(...args).first()).n;
- const response=(code,scope,retryable)=>({code,scope,retryable,canSave:true,canExport:true,canReview:true,...(scope==='daily'?{resetsAt:new Date(Date.parse(day+'T00:00:00Z')+86400000).toISOString()}:{}),message:scope==='lifetime'?'本課已達累計 AI 額度；明日不會自動重置。文字已保存，仍可閱讀、匯出及交由教師覆核。':scope==='daily'?'本輪尚未呼叫 AI；文字已保存，可於每日額度恢復後繼續，歷史紀錄不受影響。':scope==='concurrency'?'目前仍有回應正在處理；文字已保存，請稍後讀回。':'本輪尚未呼叫 AI；文字已保存，支出紀錄需要先核對。'});
+ const response=(code,scope,retryable)=>({code,scope,retryable,canSave:true,canExport:true,canReview:true,...(scope==='daily'?{resetsAt:new Date(Date.parse(day+'T00:00:00Z')+86400000).toISOString()}:{}),message:scope==='lifetime'?'本課已達累計 AI 額度；明日不會自動重置。文字已保存，仍可閱讀與匯出。':scope==='daily'?'本輪尚未呼叫 AI；文字已保存，可於每日額度恢復後繼續，歷史紀錄不受影響。':scope==='concurrency'?'目前仍有回應正在處理；文字已保存，請稍後讀回。':'本輪尚未呼叫 AI；文字已保存，支出紀錄需要先核對。'});
  if(await q('SELECT COUNT(*) n FROM dialogue_calls WHERE session_id=?',session.id)>=limits.paidLessonLifetime)return response('paid_lesson_lifetime_exhausted','lifetime',false);
  if(await q("SELECT COUNT(*) n FROM dialogue_turns WHERE session_id=? AND role='student'",session.id)>=limits.lessonLifetime)return response('lesson_turn_lifetime_exhausted','lifetime',false);
  if(await q('SELECT COUNT(*) n FROM dialogue_calls WHERE budget_policy_json IS NULL'))return response('budget_accounting_review','review',false);
