@@ -1,3 +1,33 @@
+## Current 2026-10-24 — r35: the dialogue from the student's side (candidate)
+
+**Owner direction (suen, 2026-10-24):** "從學生視角思考如何提升對話學習體驗，核驗也要確保效度。需要做的調整都批准你執行，寫好更新記錄即可。"
+
+**Findings** (real students, 10-21 to 10-24, read-only; full numbers in the report):
+- **Wrong language:** 40 replies to Chinese students came in Russian, English or Spanish first.
+- **Bookkeeping talk:** 115 of 375 replies narrated scoring or records.
+- **Parked reviews:** `review` items never resolve. The next-step logic skips them, and the teacher view has no cross-account access.
+- **Classical first read:** 6 of 9 classical sessions stayed at 0/100 in the first read.
+- **No reply:** 12 of 387 turns got no reply, and the page said nothing when no retry was left.
+
+**Changes**
+- **POLICY v20**
+  - **Language.** Foreign authors speak Chinese in the voice of the textbook translation. At most one short original phrase, with a Chinese explanation.
+  - **No bookkeeping in the reply.** The reply does not mention records, submissions, backends or whether something scores. A result, or a formal score, may still be said in one natural sentence.
+  - **First read.** Marks and the summary are recorded one per turn, from the student's own words.
+  - **Reopened items** (`reopenedFromReview`) are brought back and credited normally when completed.
+- **`reviewReopenable` / `projectState`.** A `review` that the evidence rules could still turn into `demonstrated` projects as `needs_practice` with `reopenedFromReview`. "Could still" means there is no pending calibration on the language item or vocabulary item, and no pending source check. Calibration holds, `demonstrated`, `preserved` and historical review are unchanged, and nothing stored is rewritten.
+- **`plannedQuestion`.** A word question held in such a review gets a fresh, unhinted attempt, bounded by `LIMITS.maxAttempts` (3).
+- **First-read progress.** `readingGate` (initial_reading) carries `marks`, `marksRequired` and `summaryWritten`. The page shows 已記下疑點 N／3 · 初讀感受已寫／未寫.
+- **Recovery.** `CLAUDE_JSON_INVALID` is retryable on the same terms as `CLAUDE_TRUNCATED`.
+- **No-reply note.** When no retry is left, the page says the words are saved and the student can simply continue.
+- **`output_shape` event per turn:** `replyChars` against `totalChars` and the size of each field.
+
+**Not changed, follow-ups:**
+- **尚友 conclusion.** It still uses the free-pool-only schema, so the owner's scheduled gate windows stay valid.
+- **Per-turn attempt split.** The two dead free-pool attempts still use up the retry; fixing that needs an APIS or budget-policy change.
+
+**Rollback.** r34 `7fd7e5c9`. No configuration change.
+
 ## Current 2026-10-24 — r34: a correct but incomplete answer is needs_practice, and its follow-up can finish the word (accepted)
 
 **Accepted:** source `09f3665`, Pages deployment `7fd7e5c9`, effective 2026-10-24T01:02:47Z. Status `20261024-yw-incomplete-answers-keep-going`.
