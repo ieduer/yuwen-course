@@ -1,4 +1,24 @@
-## Current 2026-10-24 — r36: Claude first, 尚友 through Claude, no teacher review (candidate)
+## Current 2026-10-24 — r37: the Claude-written 尚友 conclusion (candidate)
+
+**Finding.** r36's first Claude-written conclusion (test account, lesson-1693) was refused with `unverified_conclusion_history`. It named an earlier record that was not a preserved objective of its domain; the free-pool schema used to restrict those ids.
+
+**Change** (`validateConclusion`):
+- **Tolerated:** unverifiable earlier-record ids are dropped, a domain keeps its first verifiable evidence, and over-long `studentSummary` or `finding` is clipped.
+- **Still strict:**
+  - quotes are verbatim and within 60 units;
+  - the change and stance references must verify;
+  - all five domains must appear, once each;
+  - a domain with nothing verified refuses the conclusion;
+  - `readyForShangyou` is required.
+
+**Rollback.** r36 `83772795`.
+
+## Current 2026-10-24 — r36: Claude first, 尚友 through Claude, no teacher review (accepted)
+
+**Accepted:** source `8b18d87`, Pages deployment `83772795`. On test account 553:
+- one Claude attempt per dispatch;
+- no teacher wording;
+- the first Claude-written 尚友 conclusion, which r37 then makes acceptable.
 
 **Owner direction (suen, 2026-10-24):** "調整為免費池只做Claude完全耗盡後的備用，該結語就給，確保用戶體驗。真出現耗光我會補充付費的Gemini apikey進入項目。不要設置任何教師審閱等環節，這些線上項目就是學生自主學習的平台。"
 
