@@ -1,3 +1,25 @@
+## Current 2026-10-24 — r36: Claude first, 尚友 through Claude, no teacher review (candidate)
+
+**Owner direction (suen, 2026-10-24):** "調整為免費池只做Claude完全耗盡後的備用，該結語就給，確保用戶體驗。真出現耗光我會補充付費的Gemini apikey進入項目。不要設置任何教師審閱等環節，這些線上項目就是學生自主學習的平台。"
+
+**Changes**
+- **Free pool only after Claude is exhausted** (`requestDialogueBudget`).
+  - A Claude-primary budget sends `providerAttemptLimit` 1 per dispatch. The logical turn keeps 3, and the reserve is unchanged.
+  - APIS counts its Claude attempt against that limit, so a failed Claude attempt is not followed by free-pool attempts in the same call.
+  - The one-time learner retry (automatic) goes back to Claude.
+  - The gateway skips Claude only when its credit is exhausted or unavailable; then the one attempt goes to the free pool.
+  - APIS is unchanged.
+- **尚友 conclusion.** On the Claude-first path no source-option schema is sent: the Claude adapter cannot take `$defs`/`anyOf`, so the conclusion used to go only to the free pool. `validateConclusion` decides, as before.
+- **No teacher review**
+  - POLICY v21 drops the review outcome from the author's choices.
+  - `projectState`:
+    - An old-rule review, or any 尚友 review, reopens.
+    - Calibration or source holds, and later unsettled reviews, become optional practice (`requiredForCompletion: false`, `reviewPath: optional-practice`).
+    - `historical_review` counts as done for 尚友 readiness.
+  - **Page:** no teacher wording, and the request-review button is removed. The endpoint stays for old exports.
+
+**Rollback.** r35 `d94fdbf8`. No configuration change.
+
 ## Current 2026-10-24 — r35: the dialogue from the student's side (accepted)
 
 **Accepted:** source `29fd0b6`, Pages deployment `d94fdbf8`, effective 2026-10-24T02:14:37Z. Status `20261024-yw-student-side-dialogue`.
