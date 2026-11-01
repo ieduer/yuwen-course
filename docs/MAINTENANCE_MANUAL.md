@@ -1,3 +1,13 @@
+## Current 2026-11-01 — r39: student 8's forced self-rating corrected (accepted)
+
+**Accepted:** source `b379402`, Pages deployment `05965908`, effective 2026-11-01T05:00:49Z; rollback to r38 `c4f6ed41` (artifact in the kept r38 release worktree, digest `f566858c` = registered). Status `20261101-yw-self-rating-correction`.
+
+**Why.** suen, 2026-11-01: 「學生 8改正」. On lesson-1458 student 8 typed 「算了，我改成100分」 after r37 refused 「我給 76／100」「…調到 82／100」「我給 83／100」 eleven times; the stored self-rating 100 (`89cf9163…`) was not their rating.
+
+**Change.** One `kind:'correction'` entry in `site/dialogue-retained-replay.js` (release `r39`). When student 8 next opens lesson-1458, the retained 「我給 83／100」 is re-checked and recorded as a new evaluation attempt through the ordinary original-task path (`retained_correction_saved`, mutation `yw-dialogue-local:<turn>-r39c`), only while the preserved record is exactly `89cf9163…` and still holds 100. The earlier record stays and is named as superseded; the score is unchanged (self-rating value never counts). The five r38 replays keep their ids (`…:r38-replay`).
+
+**Tests.** Full suite 108 files with no new failure; `test_dialogue_scoring_r38` 14/14 (two correction tests). Offline end-to-end on a read-only mirror: evaluation#1=100 kept, evaluation#2=83 added, 100/100 unchanged.
+
 ## Current 2026-11-01 — r38: plainly given self-ratings and reading statements count; first-read replies always arrive (accepted)
 
 **Accepted:** source `0d937fb`, Pages deployment `c4f6ed41`, effective 2026-11-01T04:31:33Z; rollback to r37 `81522fe8` (artifact rebuilt from `22972af`, digest equal to the registered one). On test account 553, lesson-1458 (three Claude attempts, 88,890 µ$): 「我已经通读完了你可以提问了」 recorded the reading item, 「…我给这篇 76／100。…」 recorded the self-rating, and 「我怎么拿到这个分」 got the lesson score (26/100) item by item; no refusal or misquotation notice. Status `20261101-yw-self-rating-and-reading-records`. The five replays run when each student next opens the lesson; verified offline end-to-end on a read-only mirror (one record each, idempotent: 9/1462 33→46, 37/1461 67→80, 41, 61, 63 on 1458 87→100).
