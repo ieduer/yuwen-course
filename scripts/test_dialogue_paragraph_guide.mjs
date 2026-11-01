@@ -41,7 +41,9 @@ test('a word is confirmed by a verified dialogue assessment or a preserved origi
  assert.equal(words.get(third),'waiting');
  assert.equal(guide.confirmedWords,2);
  assert.equal(guide.waitingWords,1);
- assert.equal(guide.focus.next.objectiveId,order[3],'the focus skips confirmed and waiting words');
+ // v2 (r40): a study-guide item may come between words; among the words the next open one is still the fourth.
+ assert.equal(guide.paragraphs.flatMap(p=>p.words).find(w=>w.status==='open').objectiveId,order[3],'the focus skips confirmed and waiting words');
+ assert.ok(guide.focus.next,'the guide still points somewhere');
 });
 
 test('the guide stays out of non-classical lessons and out of the prompt before close reading',()=>{
@@ -51,7 +53,7 @@ test('the guide stays out of non-classical lessons and out of the prompt before 
  assert.equal(initial.phase,'initial_reading');
  assert.equal(paragraphGuideContext(initial),null);
  const close=paragraphGuideContext(guideFor(c,projectState(c,[],[],null,CLOSE)));
- assert.deepEqual(Object.keys(close).sort(),['complete','confirmedWords','focus','totalWords','version']);
+ assert.deepEqual(Object.keys(close).sort(),['complete','confirmedItems','confirmedWords','focus','totalItems','totalWords','version']);
 });
 
 test('the author context carries the paragraph guide only when the live turn passes it',()=>{
@@ -84,7 +86,7 @@ test('vocabulary points arrive word by word; the full weight still needs every o
 });
 
 test('the author is told what the classical reading gate means and how to read paragraph by paragraph',()=>{
- assert.equal(POLICY_VERSION,'yw-dialogue-policy-v22');
+ assert.equal(POLICY_VERSION,'yw-dialogue-policy-v23');
  assert.match(POLICY,/initial_reading 時，學生還沒有完成無注疏初讀/);
  assert.match(POLICY,/不提交 formalAssessments、originalEvidence 或字詞 demonstrated/);
  assert.match(POLICY,/paragraphGuide 存在時是文言細讀/);

@@ -677,22 +677,25 @@ function renderProgressLine(){
 // server confirms a word. Everything comes from the server's paragraph guide; nothing is inferred on the page.
 let knownWords=null,knownWordsOwner=null;
 // Paragraphs are named by their opening words, as the author is told to name them; ordinals are only progress counts.
-const paragraphName=p=>p?.opening?`「${p.opening}」一段`:`第 ${p?.ordinal} 段`;
+const paragraphName=p=>p?.wholeText?'通篇':p?.opening?`「${p.opening}」一段`:`第 ${p?.ordinal} 段`;
+// r40: study-guide items (古今異義、虛詞、通假、句式…) are read in the same pass; counts appear only where a lesson has them.
+const itemCount=(confirmed,total,label='學案')=>total?` · ${label} ${confirmed}／${total}`:'';
 function renderParagraphProgress(guide){
  const box=$('paragraph-progress');if(!box)return;box.replaceChildren();
  if(guide?.phase==='initial_reading'){box.append(node('b','文言細讀 · 先做無注疏初讀'),node('span','：不看注釋讀一遍，告訴作者三處讀不通或拿不準的地方和你的猜測，再寫幾句初讀感受。之後一段一段讀字詞，讀懂一個記一個。'));const f=guide.firstRead;if(f)box.append(node('span',` · 已記下疑點 ${Math.min(f.marks,f.required)}／${f.required}${f.marks>f.required?`（共 ${f.marks} 處）`:''} · 初讀感受${f.summaryWritten?'已寫':'未寫'}`,'first-read-count'));}
  else if(guide?.phase==='annotated_reading')box.append(node('b','文言細讀'),node('span','：讀完帶註釋的正文後告訴作者一聲，就可以一段一段讀字詞。'));
- else if(guide?.totalWords&&guide.complete)box.append(node('b',`全篇字詞已讀通 ${guide.confirmedWords}／${guide.totalWords}`),node('span',guide.waitingWords?` · ${guide.waitingWords} 個練習項不影響完成`:''));
+ else if(guide?.totalWords&&guide.complete)box.append(node('b',`全篇字詞已讀通 ${guide.confirmedWords}／${guide.totalWords}${itemCount(guide.confirmedItems,guide.totalItems)}`),node('span',guide.waitingWords||guide.waitingItems?` · ${(guide.waitingWords||0)+(guide.waitingItems||0)} 個練習項不影響往下讀`:''));
  else if(guide?.focus){
-  box.append(node('b',`逐段細讀 · ${paragraphName(guide.focus)} · 進度 ${guide.focus.ordinal}／${guide.focus.of}`),node('span',` · 本段字詞 ${guide.focus.confirmed}／${guide.focus.total} · 全篇 ${guide.confirmedWords}／${guide.totalWords}`));
+  box.append(node('b',`逐段細讀 · ${paragraphName(guide.focus)} · 進度 ${guide.focus.ordinal}／${guide.focus.of}`),node('span',`${guide.focus.total||!guide.focus.itemsTotal?` · 本段字詞 ${guide.focus.confirmed}／${guide.focus.total}`:''}${itemCount(guide.focus.itemsConfirmed,guide.focus.itemsTotal,'本段學案')} · 全篇 ${guide.confirmedWords}／${guide.totalWords}${itemCount(guide.confirmedItems,guide.totalItems)}`));
   const words=node('span',undefined,'words');
   for(const w of guide.focus.words){const chip=node('span',`${w.status==='confirmed'?'✓ ':''}${w.word}`,'word');chip.dataset.status=w.status;if(guide.focus.next?.objectiveId===w.objectiveId)chip.dataset.next='';words.append(chip);}
+  for(const i of guide.focus.items||[]){const chip=node('span',`${i.status==='confirmed'?'✓ ':''}${i.type}`,'word item');chip.dataset.status=i.status;chip.title=i.prompt||'';if(guide.focus.next?.objectiveId===i.objectiveId)chip.dataset.next='';words.append(chip);}
   box.append(words);
  }
  box.hidden=!box.childNodes.length;
 }
 function acknowledgeWords(data){
- const owner=data.ownerRef||ownerRef,words=new Map((data.paragraphGuide?.paragraphs||[]).flatMap(p=>p.words.map(w=>[w.objectiveId,{...w,paragraph:p}])));
+ const owner=data.ownerRef||ownerRef,words=new Map((data.paragraphGuide?.paragraphs||[]).flatMap(p=>[...p.words,...(p.items||[])].map(w=>[w.objectiveId,{...w,paragraph:p}])));
  const gained=knownWords&&knownWordsOwner===owner?[...words.values()].filter(w=>w.status==='confirmed'&&knownWords.get(w.objectiveId)!=='confirmed'):[];
  knownWords=new Map([...words].map(([id,w])=>[id,w.status]));knownWordsOwner=owner;
  return gained;
@@ -700,7 +703,11 @@ function acknowledgeWords(data){
 function renderAchievement(gained,data,gainedPoints){
  const box=$('achievement');if(!box||!gained.length)return;box.replaceChildren();
  const guide=data.paragraphGuide,last=gained.at(-1),score=data.state?.score;
- box.append(node('strong',`讀懂了「${gained.map(w=>w.word).join('」「')}」`),node('small',`${paragraphName(last.paragraph)} ${last.paragraph.confirmed}／${last.paragraph.total} · 全篇字詞 ${guide.confirmedWords}／${guide.totalWords}${gainedPoints>0&&score?.status==='ok'?` · +${gainedPoints} 分（本課 ${score.earned}／${score.max}）`:''}`));
+ const words=gained.filter(g=>g.word),items=gained.filter(g=>!g.word),p=last.paragraph;
+ const title=[words.length?`讀懂了「${words.map(w=>w.word).join('」「')}」`:'',items.length?`學案題讀通了：${items.map(i=>i.type).join('、')}`:''].filter(Boolean).join(' · ');
+ box.append(node('strong',title),node('small',`${paragraphName(p)} ${p.total||!p.itemsTotal?`${p.confirmed}／${p.total}`:''}${p.itemsTotal?`${p.total?' · ':''}學案 ${p.itemsConfirmed}／${p.itemsTotal}`:''} · 全篇字詞 ${guide.confirmedWords}／${guide.totalWords}${itemCount(guide.confirmedItems,guide.totalItems)}${gainedPoints>0&&score?.status==='ok'?` · +${gainedPoints} 分（本課 ${score.earned}／${score.max}）`:''}`));
+ // 先答後看: the item's reference and explanation appear only now, after the server recorded the pass.
+ for(const i of items)if(i.reference){const d=node('details');d.open=true;d.append(node('summary',`參考答案 · ${i.type}`));if(i.prompt)d.append(node('p',i.prompt));d.append(node('p',i.reference));if(i.explanation)d.append(node('p',i.explanation));box.append(d);}
  box.hidden=false;
 }
 // Lesson details: the merged learning targets (one per real aim; legacy rubric items are routes of the same target),

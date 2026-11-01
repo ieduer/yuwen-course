@@ -6,7 +6,7 @@ import {validateConclusion} from './dialogue-conclusion.js';
 import {verbatimSpan} from './dialogue-quote.js';
 import {approvedSupplement} from './dialogue-completion-exemptions.js';
 import {calibratedQuestion} from './dialogue-calibration-status.js';
-export const POLICY_VERSION = 'yw-dialogue-policy-v22';
+export const POLICY_VERSION = 'yw-dialogue-policy-v23';
 export const RULE_VERSION = 'yw-dialogue-evidence-v3';
 export const CONTEXT_LAYOUT_VERSION = 'yw-dialogue-context-static-first-v4';
 // Keep the single-line data contract used by source_context_prepared. Object
@@ -37,6 +37,9 @@ objectives、state 與 originalRequirements 合起來就是本課全部學習目
 古典詞彙必須涵蓋全部必考項；失敗先解釋和對比，請學生改述，再出等值新題獨立回答。提示後照抄不算掌握。
 文言篇目有 readingGate：phase 為 initial_reading 時，學生還沒有完成無注疏初讀，伺服器在此之前不記錄任何評閱、原題答案或字詞掌握；這時不提交 formalAssessments、originalEvidence 或字詞 demonstrated，reply 也不給分數或宣告通過。用作者口吻說明先不看注釋自己讀一遍的用處，請學生指出讀不通或拿不準之處、說出第一直覺，再寫下初讀感受；可以順著他的疑問談，但不先講破字義。readingGate.marks 是已記下的疑點數（需 marksRequired 處），summaryWritten 表示初讀感受是否已寫：疑點與初讀感受都用 readingEvidence 提交，每輪一項；學生一則訊息裡說了幾處，就在接下來幾輪逐一引他原話記下，不要請他重說，reply 自然接著談下一處或請他寫初讀感受。phase 為 annotated_reading 時，請他讀完帶註釋的正文後告訴你一聲。
 paragraphGuide 存在時是文言細讀：以 paragraphGuide.focus 這一段為本輪範圍，一段一段往下讀。先請學生用自己的話說出本段關鍵句的意思，再聚焦 focus.next 這個字（就是當前 question）：不先給詞義，讓他從上下文推斷並說出依據。他讀懂了，第一句就明確確認他讀懂了哪個字、憑甚麼讀懂，並照證據規則記錄（伺服器核驗後會立即向學生顯示這個字的成就與得分）；當前字詞的原題在 conversationOriginalTasks 裡，學生回答時已明確選了選項，就照規則附 originalEvidence（伺服器以答案鍵核對），不要請他把同一題再答一次；接著用作者自己的眼光點出這個字在本段的分量——它撐起哪一層意思、與本人其他語句或思想如何呼應——再轉到本段下一個字，本段都確認了再往下一段。說錯時不公布答案：指出上下文的線索，或拿另一處用法對比，請他再推一次。語言用作者的文風，簡練、有見地、有趣味，像與一位聰明的後學論學；回覆長短依教學需要：講解要講透，追問要短，一次只推進一兩個字；不降低難度，不說教，不泛泛稱讚，不把詞義表或判準倒給學生。提到段落時用段首幾字稱呼（focus.opening，例如「是日也」這一段），不要說第幾段，也不要用 passageId 的編號：課本、頁面與資料的段號可能不同。學生主動問別段或別的字時先回應他；paragraphGuide 只是順序，不是關卡。
+paragraphGuide.focus.next 的 kind 為 studyGuide 時，這是本段的一處學案題（type 是類別：古今異義、虛詞、通假、句式、詞類活用、斷句、理解等；prompt 是原題），和字詞一樣是本段要讀懂的地方。學生讀通這一句之後，用你自己的話把它問出來，例如「那『乡党』的『党』，孟子說的是甚麼人？」；題目要的術語可以說，但不說「學案題」「第幾題」，不列清單，一次只問一處。先答後看：paragraphGuide.studyGuide 的 referenceAnswer 與 explanation 只供你判斷，學生答對之前不說出、不暗示答案，也不先講破這一句的關鍵字義；答錯或不完整時，指出上下文線索或另舉一處用法對比，請他再想一次（attemptsLeft 是還能記錄的次數）。學生答對了，第一句就明說對，再自然說出參考答案的意思與解說，用你的眼光點出它在本段的分量。學生先前的話若在答案出現之前就已說出這一題要的內容，直接以那一輪記錄，不要再問一次。學生說不知道或想往下讀時，可以先給線索；真要講明答案也可以，講明之後這一題本次對話不再記錄，照樣往下讀。focus.opening 為「通篇」時談的是整篇性的學案題：題組（列了幾個句子或詞）可以先逐個談，但都不先給答案，最後請學生把整組的理解寫在同一則訊息裡。
+記錄學案題：學生某一輪已回答了一處學案題時，在同一 JSON 加 studyGuideAnswers:[{objectiveId,turnId,score,verdict,strength,gap,nextQuestion}]（一輪一項）。turnId 是學生作答的那一輪，伺服器取那一輪的全文作答，不必摘錄；依 paragraphGuide.studyGuide.gradingRule 與參考答案給 0 到 100 的整數分，60 分以上算通過，verdict 一句、strength、gap、nextQuestion 各一句。只記錄學生在答案出現之前寫的話；答案鍵能判定的題，以伺服器的答案鍵為準。學案題不用 assessments 記錄；studyGuideAnswers 與 formalAssessments 同一輪只記一項，兩者都有時先記學案題，原課評價下一輪再記。
+formalStillOpen 列出對話裡已經讀懂、但原課評價（originalRequirements 中同一目標，例如初讀三詞）還沒有記錄的項目，這幾項的分數還沒拿到。在對話自然處用一句話請學生補上那一項還缺的內容（例如初讀三詞：三個彼此有區分的詞，再加一句初讀印象），不說補記或計分；學生寫齊後照常附 formalAssessments。
 question 是未提示的新一次作答（attempt≥2，hinted 為 false）且學生的回答成立時，記 demonstrated 並覆蓋全部判準，不要記 reformulated；reformulated 只用於 remediation 指定、尚未換題的改述。字詞題須核對原題型及 sourceAnswer；讀音題必須包含正確拼音和語境義，不能因答對詞義就省略讀音。languagePractice 是另存、不計分的語言練習；需核對句意、句法關係及上下文，不能只報術語。calibrationStatus 非 accepted 或來源仍待核對時不記 demonstrated、不推定掌握，也不交給任何人覆核：說明這一處的讀法還在核對，和學生談可成立的讀法後往下走，這類項目不影響完成本課；不要把來源缺口當作學生答錯。sourceVerification.status 為 pending-verification 時，必須明說分析待核驗，只提出可討論的讀法，不把 meaning/explanation 當作權威釋義；引句核對並不等於句法判斷已核實。examReferences 只有報紙引用的題意與能力關聯；不得假裝提供原試卷、未給出的閱讀全文或官方答案。
 沒有核實的北京真題原頁、年份、卷名與題號時只稱原創練習；AI回饋不是官方閱卷。
 最後的尚友：理解有何變化、文本證據、認同或質疑，逐項引用學生回合與原文。分歧不妨礙完成。只有readyForShangyou=true才可提出尚友demonstrated；尚未達到時可以討論，不宣告結課。
@@ -105,6 +108,13 @@ export function legacyCounterpart(curriculum,legacyObjective){
  if(kind==='vocabulary'){const vid=legacyObjective.legacy.resourceKey.replace(`effect:${curriculum.lessonId}:vocab:`,'');return curriculum.objectives.find(x=>x.id===vid&&x.domain==='vocabulary')||null;}
  const domain=LEGACY_TARGET_DOMAIN[kind];
  return domain?curriculum.objectives.find(x=>x.domain===domain)||null:null;
+}
+// r40: a dialogue objective already demonstrated whose original rubric item (its twin, e.g. 初讀三詞 for context) is still
+// unrecorded: its track points are still open (four real sessions 10-24..11-01 had context demonstrated and 0 points).
+export function formalStillOpen(curriculum,state){
+ if(state?.legacyCompletion)return [];
+ const eligible=new Set(originalRequirements(curriculum,state).filter(r=>r.source?.kind==='original-formal-rubric').map(r=>r.objectiveId));
+ return curriculum.objectives.filter(o=>o.domain==='legacy'&&eligible.has(o.id)).flatMap(o=>{const twin=legacyCounterpart(curriculum,o),st=twin&&state.objectives.find(x=>x.id===twin.id)?.status;return twin&&CONFIRMED_ROUTE.includes(st)?[{objectiveId:o.id,label:FORMAL_LABELS[o.legacy.questionKind]||o.label,twin:twin.id}]:[];});
 }
 export function learningTargets(curriculum,state){
  const status=id=>state.objectives.find(o=>o.id===id)?.status||'not_yet_observed';
@@ -290,11 +300,14 @@ export function promptParts(prompt){
  const parts=[prompt.slice(0,dataStart),prompt.slice(dataStart,lessonEnd),prompt.slice(lessonEnd)];
  return parts.every(p=>p.length>0)&&parts.join('')===prompt?parts:[prompt];
 }
-export function contextFor({curriculum,state,turns,question,remediation=null,assessments=[],conversationGuide=null,conversationOriginalTasks=null,firstReading=null,paragraphGuide=null}){
+export function contextFor({curriculum,state,turns,question,remediation=null,assessments=[],conversationGuide=null,conversationOriginalTasks=null,firstReading=null,paragraphGuide=null,formalStillOpen=null}){
  question=calibratedQuestion(question,curriculum);remediation=calibratedQuestion(remediation,curriculum);
- const allRequirements=originalRequirements(curriculum,state),allReviewSources=reviewSourceMaterials(curriculum,state);
+ // r40: a live classical conversation raises study-guide items through the paragraph guide (先答後看), so they leave
+ // originalRequirements there; historical reconstructions and calibrations pass neither guide and keep their prompt shape.
+ const guided=curriculum.mode==='classical'&&!!(paragraphGuide||conversationGuide||conversationOriginalTasks);
+ const allRequirements=originalRequirements(curriculum,state).filter(r=>!guided||r.source?.kind!=='curated-study-guide-item'),allReviewSources=reviewSourceMaterials(curriculum,state);
  let used=0;const recent=[];for(const t of turns.slice(-10).reverse()){if(used+t.content.length>6500)break;used+=t.content.length;const {id,role,content,questionId}=t;recent.unshift({id,role,content,questionId});}
- const data={...(conversationGuide||firstReading?{conversationGuide,firstReading}:{}),...(conversationOriginalTasks?{conversationOriginalTasks}:{}),...(paragraphGuide?{paragraphGuide}:{}),curriculumVersion:curriculum.curriculumVersion,persona:curriculum.persona,conversationIdentity:dialogueIdentity(curriculum),authorVoice:authorVoice(curriculum),author:curriculum.author,title:curriculum.title,
+ const data={...(conversationGuide||firstReading?{conversationGuide,firstReading}:{}),...(conversationOriginalTasks?{conversationOriginalTasks}:{}),...(paragraphGuide?{paragraphGuide}:{}),...(formalStillOpen?.length?{formalStillOpen}:{}),curriculumVersion:curriculum.curriculumVersion,persona:curriculum.persona,conversationIdentity:dialogueIdentity(curriculum),authorVoice:authorVoice(curriculum),author:curriculum.author,title:curriculum.title,
   objectives:curriculum.objectives.filter(o=>!['legacy','studyGuide'].includes(o.domain)).map(o=>({id:o.id,criteria:o.criteria,rule:questionItems(curriculum).some(v=>v.id===o.id)&&![question?.objectiveId,remediation?.objectiveId].includes(o.id)?'服務端依保存的題目逐項核對；不是當前題或改述項時不得推定獨立掌握。':o.rule})),
   state:state.objectives.map(o=>({id:o.id,status:o.status})),...(scoreAsked(turns)&&state.score?{lessonScore:state.score}:{}),legacyCompletion:state.legacyCompletion,readingGate:state.readingGate,readyForShangyou:state.readyForShangyou,hasConclusion:state.hasConclusion,
   originalRequirements:allRequirements,reviewSources:allReviewSources,

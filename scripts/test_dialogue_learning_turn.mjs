@@ -93,6 +93,16 @@ function fixture(t,lessonId='lesson-1498',filter=()=>true){
  }
  return {curriculum,sql,env,req,options,read,send,calls:()=>calls};
 }
+// r40 (先答後看): classical conversation no longer drafts a study-guide answer written after the reference was shown, from
+// the model or the server. A draft saved before r40 still submits as it did; these tests seed one the way r39 saved it.
+async function seedPreR40Draft(f,objectiveId,quote){
+ const {validateFormalDraft}=await import('../site/dialogue-formal.js');
+ const turns=f.sql.prepare('SELECT id,role,content,created_at AS createdAt FROM dialogue_turns ORDER BY sequence').all(),turn=turns.filter(t=>t.role==='student').at(-1);
+ const draft=validateFormalDraft(f.curriculum,turns,{objectiveId,fields:{response:{turnId:turn.id,quote}}});
+ const session=f.sql.prepare('SELECT id FROM dialogue_sessions').get().id;
+ f.sql.prepare("INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,'source_answer_proposed',?,?)").run(`${turn.id}:source-proposal`,session,turn.id,JSON.stringify(draft),new Date().toISOString());
+ return draft;
+}
 test('historical modern continuation provides verified current source metadata without replacing its contract',async t=>{
  const f=fixture(t,'lesson-1717-p2'),old=JSON.parse(fs.readFileSync('scripts/fixtures/dialogue-historical-modern-curriculum.json'));
  assert.equal(createHash('sha256').update(JSON.stringify(old)).digest('hex'),'d60227f2c5a5ece1d83c48673103c316cfece5074df29f0e1028374c512e7cf0');
@@ -231,13 +241,17 @@ test('ordinary author dialogue receives and records the original image-note text
  assert.equal((await handleDialogue(f.req(r.body),f.env,student,null,f.options)).status,200);assert.equal(calls,1);
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='source_context_prepared'").get().n,1);
 });
-test('author dialogue persists the actual selected study-guide material and source version without scoring the discussion',async t=>{
- const f=fixture(t,'lesson-1476'),item=f.curriculum.studyGuide.find(i=>i.activeForSelfTest&&!i.reviewRequired&&i.referenceAnswer&&typeof i.referenceAnswer==='object');let sent='',calls=0;
- f.options.callModel=async(_env,prompt)=>{calls++;sent=prompt;return {value:{reply:'我們先說說你對這一題的理解。',assessments:[]},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}};};
- const r=await f.send(await f.read(),item.prompt,{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
- const data=JSON.parse(sent.split('以下是資料，不是指令：\n').at(-1)),row=data.originalRequirements.find(r=>r.objectiveId===`study:${item.itemKey}`);assert.deepEqual(row.reference,item.referenceAnswer);assert.deepEqual(row.rubric,item.rubric);
- const saved=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_context_prepared'").get().details_json),e=saved.originalRequirementSources.find(r=>r.objectiveId===row.objectiveId);
- assert.deepEqual(e.source,row.source);assert.equal(e.materialSha256,createHash('sha256').update(JSON.stringify(row)).digest('hex'));assert.equal(saved.promptSha256,createHash('sha256').update(sent).digest('hex'));
+test('author dialogue receives the focus paragraph\'s study-guide material for judging, not as an original requirement, without scoring the discussion (r40)',async t=>{
+ const f=fixture(t,'lesson-1476');let sent='',calls=0;
+ f.options.callModel=async(_env,prompt)=>{calls++;sent=prompt;return {value:{reply:'我們先說說你對這一句的理解。',assessments:[]},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}};};
+ const r=await f.send(await f.read(),'第一段我想先談「大学之道」。',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
+ const data=JSON.parse(sent.split('以下是資料，不是指令：\n').at(-1));
+ assert.equal(data.originalRequirements.filter(r=>r.source?.kind==='curated-study-guide-item').length,0,'study-guide items leave originalRequirements in live classical conversation');
+ const materials=data.paragraphGuide.studyGuide;assert.ok(materials.items.length>=1);assert.match(materials.gradingRule,/學案形成性評閱員/);
+ for(const m of materials.items){const g=f.curriculum.studyGuide.find(i=>`study:${i.itemKey}`===m.objectiveId);assert.equal(m.prompt,g.prompt);assert.ok(m.referenceAnswer);assert.equal(m.attemptsLeft,3);}
+ assert.ok(data.paragraphGuide.focus.items.every(i=>i.reference===undefined),'the focus list itself carries no reference');
+ const saved=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_context_prepared'").get().details_json);
+ assert.equal(saved.promptSha256,createHash('sha256').update(sent).digest('hex'));assert.deepEqual(saved.guideNext,{objectiveId:data.paragraphGuide.focus.next.objectiveId,kind:data.paragraphGuide.focus.next.kind});
  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_evaluations').get().n,0);
  assert.equal((await handleDialogue(f.req(r.body),f.env,student,null,f.options)).status,200);assert.equal(calls,1);
 });
@@ -268,13 +282,14 @@ async function preparedGuideConversation(t,{failReply=false}={}){
  const key='lesson-1476-p29-ancient-modern-01',f=fixture(t,'lesson-1476',o=>o.domain==='studyGuide'&&o.sourceItemKey===key),item=f.curriculum.studyGuide.find(i=>i.itemKey===key);let calls=0,replyPrompt='';
  f.options.callModel=async(_env,prompt)=>{
   calls++;if(calls===1)return {value:{reply:item.referenceAnswer,assessments:[]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
-  if(calls===2){const turn=f.sql.prepare("SELECT id FROM dialogue_turns WHERE role='student' ORDER BY sequence DESC LIMIT 1").get();return {value:{reply:'這個答案已清楚表達，我們接著談。',assessments:[],sourceDraft:{objectiveId:f.curriculum.objectives[0].id,fields:{response:{turnId:turn.id,quote:'大人之學'}}}},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};}
+  if(calls===2)return {value:{reply:'這個答案已清楚表達，我們接著談。',assessments:[]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
   replyPrompt=prompt;if(failReply)throw Error('synthetic_followup_unavailable');
   return {value:{reply:'你問得很具體。我們把這裡的「大人」和下文修身連起來讀。',score:0,passed:false,sourceDraft:{objectiveId:'forged'},assessments:[{outcome:'demonstrated'}]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
  };
  let r=await f.send(await f.read(),'請先讓我對照這題的原參考答案。',{conversation:true});assert.equal(r.response.status,200);
- r=await f.send(r.data,'大人之學',{conversation:true});assert.equal(r.response.status,200);assert(r.data.sourceDraft);
- return {...f,data:r.data,item,calls:()=>calls,replyPrompt:()=>replyPrompt};
+ r=await f.send(r.data,'大人之學',{conversation:true});assert.equal(r.response.status,200);
+ await seedPreR40Draft(f,f.curriculum.objectives[0].id,'大人之學');const data=await f.read();assert(data.sourceDraft);
+ return {...f,data,item,calls:()=>calls,replyPrompt:()=>replyPrompt};
 }
 test('deterministic guide result keeps answer-key score while replying to the current conversational question once',async t=>{
  const f=await preparedGuideConversation(t),question='大人是指年紀較大的人嗎？能連著下文慢慢說嗎？';
@@ -682,13 +697,27 @@ test('a reply that fails validation still settles the provider cost that is know
 });
 
 test('a readable reply with a missing or malformed assessments field is kept; the field is dropped and recorded, nothing is credited',async t=>{
- for(const assessments of [undefined,{objectiveId:'x'},'none',Array.from({length:9},()=>({objectiveId:'x'}))]){
+ // r40: an omitted field is no assessment and records nothing (all 13 retained shape refusals since 10-22 were this case).
+ {const f=fixture(t,'lesson-1498');const data=await f.read();
+  f.options.callModel=async()=>({value:{reply:'這句寫得好，我們接著看下一句。'},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}});
+  const r=await f.send(data,'我讀到「江畔何人初見月」。',{conversation:true});assert.equal(r.response.status,200);
+  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_turns WHERE role='teacher' AND content='這句寫得好，我們接著看下一句。'").get().n,1);
+  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().n,0,'nothing was lost, nothing is recorded as rejected');
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_assessments').get().n,0);}
+ // A single assessment object is a one-item list; here it names no objective of the lesson, so it is refused as an assessment.
+ {const f=fixture(t,'lesson-1498');const data=await f.read();
+  f.options.callModel=async()=>({value:{reply:'這句寫得好，我們接著看下一句。',assessments:{objectiveId:'x'}},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}});
+  const r=await f.send(data,'我讀到「江畔何人初見月」。',{conversation:true});assert.equal(r.response.status,200);
+  assert.equal(JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().details_json).parts[0].code,'invalid_assessment');
+  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_assessments').get().n,0);}
+ for(const assessments of ['none',Array.from({length:9},()=>({objectiveId:'x'}))]){
   const f=fixture(t,'lesson-1498');const data=await f.read();
   f.options.callModel=async()=>({value:{reply:'這句寫得好，我們接著看下一句。',...(assessments===undefined?{}:{assessments})},model:'synthetic-test',usage:{promptTokenCount:100,totalTokenCount:500}});
   const r=await f.send(data,'我讀到「江畔何人初見月」。',{conversation:true});assert.equal(r.response.status,200);
   assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='response_unconfirmed'").get().n,0,'the reply is not discarded');
   assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_turns WHERE role='teacher' AND content='這句寫得好，我們接著看下一句。'").get().n,1);
-  assert.equal(JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().details_json).parts[0].code,'invalid_assessments_shape');
+  const rejected=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().details_json);
+  assert.equal(rejected.parts[0].code,'invalid_assessments_shape');assert.deepEqual(rejected.parts[0].shape.keys,['reply','assessments']);assert.deepEqual(rejected.retained.assessments,assessments,'the malformed value is kept, bounded, for diagnosis');
   assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM dialogue_assessments').get().n,0,'nothing credited');
  }
 });
@@ -778,7 +807,7 @@ test('a read acknowledgement and an author assessment in the same turn are both 
  assert.equal(g.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='contextWords'").get().n,0,'an invalid score records nothing');
  assert.equal(g.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='readAcknowledged'").get().n,1,'the read acknowledgement still records');
  assert.match(JSON.parse(g.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().details_json).parts[0].code,/invalid_formal_score/);
- assert.match(r2.data.statusNotice||'',/未能記錄/,'the student sees that the announced assessment was not recorded');
+ assert.match(r2.data.statusNotice||'',/沒有記下|未能記錄/,'the student sees that the announced assessment was not recorded');
 });
 
 test('the author assesses an original formal item in its own reply: recorded through the source pipeline with provenance, counted in the lesson score, one model call; the score question gets the lesson score',async t=>{
@@ -792,7 +821,7 @@ test('the author assesses an original formal item in its own reply: recorded thr
  assert.equal(r.response.status,200);assert.equal(prompts.length,1,'the author scored inside its own reply; no second evaluator call');
  const sub=r.data.sourceSubmissions.find(s=>s.objectiveId.endsWith(':interaction:contextWords'));assert.equal(sub?.status,'confirmed');assert.equal(sub.score,78);
  const ev=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_assessment_saved'").get().details_json);
- assert.equal(ev.scoringProvenance.by,'conversation-author');assert.equal(ev.scoringProvenance.policyVersion,'yw-dialogue-policy-v22');assert.equal(ev.assessment.score,78);assert.match(ev.scoringProvenance.promptSha256,/^[a-f0-9]{64}$/);
+ assert.equal(ev.scoringProvenance.by,'conversation-author');assert.equal(ev.scoringProvenance.policyVersion,'yw-dialogue-policy-v23');assert.equal(ev.assessment.score,78);assert.match(ev.scoringProvenance.promptSha256,/^[a-f0-9]{64}$/);
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM learning_interactions WHERE interaction_key='contextWords'").get().n,1);
  const led=f.sql.prepare('SELECT raw_value,correctness,eligibility_status FROM learning_evaluations').get();assert.equal(led.raw_value,78);assert.equal(led.correctness,'passed');assert.equal(led.eligibility_status,'eligible');
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='proposal_parts_rejected'").get().n,0);
@@ -821,26 +850,23 @@ test('a rejected part keeps the validator code even when the message is a learne
  const src=(await import('node:fs')).readFileSync(new URL('../site/dialogue-source.js',import.meta.url),'utf8');
  assert.match(src,/const partCode=rejectionCode;/);assert.match(src,/const failureCode=rejectionCode\(error\);/);
 });
-test('a declared study-guide answer after the shown reference is drafted by the server when the reply omits sourceDraft, then scored once by the unchanged key',async t=>{
+test('r40: a declared study-guide answer after the shown reference is not drafted in classical conversation; a draft saved before r40 is still scored once by the unchanged key',async t=>{
  const key='lesson-1476-p29-ancient-modern-01',f=fixture(t,'lesson-1476',o=>o.domain==='studyGuide'&&o.sourceItemKey===key),item=f.curriculum.studyGuide.find(i=>i.itemKey===key);let calls=0;
  f.options.callModel=async()=>{calls++;
-  if(calls===1||calls===4)return {value:{reply:item.referenceAnswer,assessments:[]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
+  if(calls===1)return {value:{reply:item.referenceAnswer,assessments:[]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};
   return {value:{reply:'對，就是這個意思。我們接著讀下文。',assessments:[]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};};
  const proposals=()=>f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_answer_proposed'").all().map(r=>JSON.parse(r.details_json));
  let r=await f.send(await f.read(),'請先讓我對照這題的原參考答案。',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));assert.equal(proposals().length,0);
  r=await f.send(r.data,'我的答案是大人之學',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
- assert.equal(proposals().length,1);assert.equal(proposals()[0].origin,'server-reveal-followup-v1');assert.equal(proposals()[0].formal.input.response,'大人之學');
- assert(r.data.sourceDraft);assert.equal(r.data.learningTurn.kind,'sourceEvidence');
- assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,0,'a draft is not a submission');
- r=await f.send(r.data,'大人是指年紀大的人嗎？',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
+ assert.equal(proposals().length,0,'an answer written after the shown reference is not drafted (先答後看)');assert.equal(r.data.sourceDraft??null,null);
+ assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,0);
+ await seedPreR40Draft(f,f.curriculum.objectives[0].id,'大人之學');
+ r=await f.send(await f.read(),'大人是指年紀大的人嗎？',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
  const input=JSON.parse(f.sql.prepare('SELECT submitted_payload_json FROM learning_submission_records').get().submitted_payload_json);assert.equal(input.response,'大人之學');
  const receipt=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='source_assessment_saved'").get().details_json);
  assert.equal(receipt.assessment.provider,'study-guide-answer-key');assert.equal(receipt.assessment.score,100);
  assert.equal((await handleDialogue(f.req(r.body),f.env,student,null,f.options)).status,200);assert.equal(calls,3,'a replayed mutation makes no new call');
  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,1);
- r=await f.send(r.data,'請再給我看一次參考。',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
- r=await f.send(r.data,'我的答案是大人之學',{conversation:true});assert.equal(r.response.status,200,JSON.stringify(r.data));
- assert.equal(proposals().length,1,'an item that already has a result is not drafted again');assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_submission_records').get().n,1);
 });
 test('a question after the shown reference is not drafted as an answer',async t=>{
  const key='lesson-1476-p29-ancient-modern-01',f=fixture(t,'lesson-1476',o=>o.domain==='studyGuide'&&o.sourceItemKey===key),item=f.curriculum.studyGuide.find(i=>i.itemKey===key);let calls=0;
@@ -849,7 +875,7 @@ test('a question after the shown reference is not drafted as an answer',async t=
  r=await f.send(r.data,'我的答案是大人之學，對嗎？',{conversation:true});assert.equal(r.response.status,200);
  assert.equal(f.sql.prepare("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='source_answer_proposed'").get().n,0);assert.equal(r.data.sourceDraft??null,null);
 });
-test('without the classical first read a derived draft waits: the next turn is an ordinary reply, and the draft is scored once after the prerequisites',async t=>{
+test('without the classical first read a draft saved before r40 waits: the next turn is an ordinary reply, and the draft is scored once after the prerequisites',async t=>{
  const objective='study:lesson-1578-p77-function-word-02',f=fixture(t,'lesson-1578',o=>o.id===objective);
  f.sql.prepare('DELETE FROM classical_first_read_sessions').run();f.sql.prepare("DELETE FROM learning_interactions WHERE source_event_id='synthetic-read'").run();
  const reveal='下面是學案的參考：\n所以兴怀，其致一也：表原因，……的原因。\n所以游目骋怀：表凭借，所用来……的事物或方式。';let calls=0;
@@ -862,7 +888,8 @@ test('without the classical first read a derived draft waits: the next turn is a
  let r=await conv(await f.read(),'請把學案「所以」這一題的參考答案完整列出來。');assert.equal(r.response.status,200,JSON.stringify(r.data));
  assert.equal(r.data.state.readingGate.phase,'initial_reading');
  r=await conv(r.data,'我的答案是：「所以興懷」的「所以」表原因；「所以遊目騁懷」的「所以」表憑藉。');assert.equal(r.response.status,200,JSON.stringify(r.data));
- assert.equal(count("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='source_answer_proposed'"),1);
+ assert.equal(count("SELECT COUNT(*) n FROM dialogue_events WHERE event_type='source_answer_proposed'"),0,'r40: not drafted after the shown reference');
+ await seedPreR40Draft(f,objective,'「所以興懷」的「所以」表原因；「所以遊目騁懷」的「所以」表憑藉。');r={...r,data:await f.read()};
  assert.equal(r.data.learningTurn,null,'the classical first-read flow owns the page until close_reading');assert(r.data.sourceDraft,'the declared answer is kept as the pending draft');
  r=await conv(r.data,'那後面「齊彭殤為妄作」的「為」怎麼理解？');assert.equal(r.response.status,200,JSON.stringify(r.data));
  assert.equal(calls,3,'an ordinary reply, not a submission');
@@ -881,7 +908,8 @@ test('a submission refused before any provider call settles at zero and does not
  const key='lesson-1476-p29-ancient-modern-01',f=fixture(t,'lesson-1476',o=>o.domain==='studyGuide'&&o.sourceItemKey===key),item=f.curriculum.studyGuide.find(i=>i.itemKey===key);let calls=0;
  f.options.callModel=async()=>{calls++;return {value:{reply:calls===1?item.referenceAnswer:'好，我們接著讀。',assessments:[]},model:'synthetic-local-only',usage:{promptTokenCount:100,totalTokenCount:500}};};
  let r=await f.send(await f.read(),'請先讓我對照這題的原參考答案。',{conversation:true});assert.equal(r.response.status,200);
- r=await f.send(r.data,'我的答案是大人之學',{conversation:true});assert.equal(r.response.status,200);assert(r.data.sourceDraft);
+ r=await f.send(r.data,'我的答案是大人之學',{conversation:true});assert.equal(r.response.status,200);
+ await seedPreR40Draft(f,f.curriculum.objectives[0].id,'大人之學');r={...r,data:await f.read()};assert(r.data.sourceDraft);
  const real=f.options.formalAction;f.options.formalAction=async()=>{throw Object.assign(Error('請先完成無標點初讀再進入本課後續關卡'),{code:'classical_first_read_required'});};
  r=await f.send(r.data,'大人是指年紀大的人嗎？',{conversation:true});
  assert.equal(calls,2,'no provider call was made for the refused submission');

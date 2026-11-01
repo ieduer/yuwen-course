@@ -294,14 +294,21 @@ export function authoritativeStudyGuideAssessment(attemptedAssessment, recorded)
   };
 }
 
+// The rubric lines of the original study-guide evaluator. r40 shares them with the dialogue author, who grades an item
+// raised in close reading under the same lines (all but the output-format line, index 4); the prompt text is unchanged.
+export const STUDY_GUIDE_GRADING_LINES = Object.freeze([
+  "你是高中語文學案形成性評閱員。只評學生這一次作答，不代寫，不改變其價值立場。",
+  "先核對題目要求，再核對參考答案與量規中的必要證據。開放考辨題的參考答案不是唯一答案；立場不同但證據充分仍可通過。",
+  "按題目要求評閱，不得因篇幅或術語給高分。詞義、古今義、字音等簡答題，只要準確回答所問即可；簡繁體、同義表述及省略非必要解析不扣分，也不另要求引用原句。",
+  "要求分析、論證或文本證據的題目，沒有回應核心要求或缺少必要文本依據，最高59分。",
+  "只輸出 JSON：score(0-100整數)、verdict(一句)、strength(已做到的一點)、gap(最關鍵缺口)、nextQuestion(一個促使重答的問題)。不要 Markdown。",
+  "正確且完整的簡答可以得100分。沒有缺口時，gap寫『本題要求已完成。』，nextQuestion可提供鞏固練習，不要捏造錯誤或要求重答。",
+]);
+export const STUDY_GUIDE_DIALOGUE_GRADING_RULE = STUDY_GUIDE_GRADING_LINES.filter((_, index) => index !== 4).join("\n");
+
 export function studyGuideAssessmentPrompt(item, response) {
   return [
-    "你是高中語文學案形成性評閱員。只評學生這一次作答，不代寫，不改變其價值立場。",
-    "先核對題目要求，再核對參考答案與量規中的必要證據。開放考辨題的參考答案不是唯一答案；立場不同但證據充分仍可通過。",
-    "按題目要求評閱，不得因篇幅或術語給高分。詞義、古今義、字音等簡答題，只要準確回答所問即可；簡繁體、同義表述及省略非必要解析不扣分，也不另要求引用原句。",
-    "要求分析、論證或文本證據的題目，沒有回應核心要求或缺少必要文本依據，最高59分。",
-    "只輸出 JSON：score(0-100整數)、verdict(一句)、strength(已做到的一點)、gap(最關鍵缺口)、nextQuestion(一個促使重答的問題)。不要 Markdown。",
-    "正確且完整的簡答可以得100分。沒有缺口時，gap寫『本題要求已完成。』，nextQuestion可提供鞏固練習，不要捏造錯誤或要求重答。",
+    ...STUDY_GUIDE_GRADING_LINES,
     `題目：${clean(item?.prompt)}`,
     `答案權威：${clean(item?.answerLabel || item?.answerAuthority, 80)}`,
     `參考答案：${JSON.stringify(item?.referenceAnswer ?? null)}`,

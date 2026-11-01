@@ -1,6 +1,8 @@
 import {formalMaterials} from './dialogue-material-context.js';
 import { BLUEPRINT_MODE_TECHNIQUES, normalizeBlueprintMode } from './lesson-blueprint-rules.js';
 import {assertNewFormalAnswerTime} from './formal-scope-policy.js';
+import {foldScript} from './dialogue-script-fold.js';
+import {STUDY_GUIDE_MAX_ATTEMPTS} from './dialogue-paragraph-guide.js';
 // Original-source submissions have a reserved, server-generated mutation namespace.
 // Legacy routes may read these receipts, but must never re-evaluate them.
 export const DIALOGUE_SOURCE_PREFIX = 'yw-dialogue:';
@@ -176,6 +178,54 @@ export function originalRequirements(curriculum,state){
     const item=curriculum.studyGuide.find(i=>i.itemKey===r.source.itemKey);
     return item.activeForSelfTest&&!item.reviewRequired;
   });
+}
+// r40: a study-guide item raised in classical close reading is answered first and shown after (先答後看), as on the
+// original reading page, whose source refuses a receipt with 「請先提交自己的答案並對照參考答案」. The author names the
+// student's turn; the server takes that turn's whole text (no excerpt, so no correct half can be lifted out of a hedged or
+// listed answer) and admits it only when no author turn before it showed the item's answer and it is not a copy of the
+// author's words. The original study-guide source then decides as always: its answer key first, otherwise the author's
+// grade under the original rubric (studyGuideGradingRule). Nothing here scores.
+export const STUDY_GUIDE_ANSWER_VERSION='yw-study-guide-answer-v1';
+const foldAll=value=>foldScript(String(value||'')).replace(/[\s\p{P}\p{S}]/gu,'');
+const choiceLetters=reference=>{
+  if(Array.isArray(reference)&&reference.length&&reference.every(v=>/^[A-D]$/i.test(String(v).trim())))return reference.map(v=>String(v).trim().toUpperCase());
+  if(reference&&typeof reference==='object'&&!Array.isArray(reference)){const v=Object.values(reference).map(x=>String(x?.option||'').trim().toUpperCase());if(v.length&&v.every(x=>/^[A-D]$/.test(x)))return v;}
+  const first=typeof reference==='string'&&reference.match(/^\s*([A-D])(?:\b|[：:。、，,])/i);return first?[first[1].toUpperCase()]:[];
+};
+const NAMED_CHOICE=/(?:選|选|答案(?:是|為|为|：|:)?|應(?:該)?選|应(?:该)?选|正確的是|正确的是)\s*[「“『]?\s*([A-D](?:\s*[、,，和與与及]?\s*[A-D])*)/gu;
+// Whether an author turn shows the item's answer: the whole reference (script and punctuation folded), the existing
+// line-by-line test for longer references, or the answer letters of a choice item named as the answer.
+export function studyGuideReferenceShown(content,item){
+  const text=String(content||''),reference=studyGuideReferenceText(item?.referenceAnswer),folded=foldAll(reference);
+  if(folded.length>=2&&foldAll(text).includes(folded))return true;
+  if(folded.length>=8&&referenceShown(text,reference))return true;
+  const letters=choiceLetters(item?.referenceAnswer);
+  if(letters.length)for(const m of text.matchAll(NAMED_CHOICE)){const named=[...new Set(m[1].toUpperCase().match(/[A-D]/g))].sort();if(named.join('')===[...new Set(letters)].sort().join(''))return true;}
+  return false;
+}
+const feedback=(value,max)=>typeof value==='string'&&value.trim()?value.trim().slice(0,max):'';
+export function validateStudyGuideAnswer(proposed,{curriculum,state,turns,submissions=[]}){
+  if(!proposed||typeof proposed!=='object'||Array.isArray(proposed)||typeof proposed.objectiveId!=='string'||typeof proposed.turnId!=='string')throw Error('invalid_study_guide_answer');
+  if(!originalRequirements(curriculum,state).some(r=>r.objectiveId===proposed.objectiveId&&r.source?.kind==='curated-study-guide-item'))throw Error('study_guide_not_eligible');
+  const objective=curriculum.objectives.find(o=>o.id===proposed.objectiveId&&o.domain==='studyGuide');
+  const item=curriculum.studyGuide?.find(i=>i.itemKey===objective?.sourceItemKey),source=curriculum.legacy?.formative?.find(i=>i.itemKey===item?.itemKey);
+  if(!item||!source)throw Error('study_guide_not_eligible');
+  const at=turns.findIndex(t=>t.id===proposed.turnId&&t.role==='student'),turn=turns[at];
+  if(at<0||typeof turn.content!=='string'||!turn.content.trim())throw Error('study_guide_response_not_student_turn');
+  const before=turns.slice(0,at).filter(t=>t.role==='teacher');
+  if(before.some(t=>studyGuideReferenceShown(t.content,item)))throw Error('study_guide_reference_shown_first');
+  const own=foldAll(turn.content);
+  if(own.length>=2&&before.some(t=>foldAll(t.content).includes(own)))throw Error('copied_hint');
+  const earlier=submissions.filter(s=>s.objectiveId===objective.id&&s.interaction==='studyGuideItemCompleted'&&s.status!=='refused');
+  if(earlier.some(s=>s.status!=='confirmed'))throw Error('study_guide_result_pending');
+  if(earlier.length>=STUDY_GUIDE_MAX_ATTEMPTS)throw Error('study_guide_attempts_exhausted');
+  if(earlier.some(s=>s.input?.response===turn.content))throw Error('study_guide_same_response');
+  const score=proposed.score,verdict=feedback(proposed.verdict,120);
+  if(!Number.isInteger(score)||score<0||score>100||!verdict)throw Error('invalid_study_guide_grade');
+  // Feedback the author left out takes the rubric's own wording (studyGuideAssessmentPrompt), never a different judgment.
+  const assessment={score,verdict,strength:feedback(proposed.strength,500)||verdict,gap:feedback(proposed.gap,500)||(score>=60?'本題要求已完成。':verdict),nextQuestion:feedback(proposed.nextQuestion,500)||'把答案代回原句，再讀一遍。'};
+  return {formal:{objectiveId:objective.id,interaction:'studyGuideItemCompleted',input:{itemKey:item.itemKey,response:turn.content},content:turn.content,resourceKey:source.resourceKey,resourceVersion:source.semanticRevision,reference:item.referenceAnswer},
+    label:item.answerLabel||'學習提示',references:[{key:'response',turnId:turn.id,quote:turn.content}],assessment,version:STUDY_GUIDE_ANSWER_VERSION};
 }
 export function reviewSourceMaterials(curriculum,state){
   const eligible=new Set(originalRequirements(curriculum,state).map(r=>r.objectiveId));

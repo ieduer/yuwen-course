@@ -62,7 +62,7 @@ test('the score questions students asked (10-21..27) reach the score; 十分, �
  for(const q of ['我十分喜欢这一段','为什么作者十分喜欢月亮','这一部分写得好','我想分析一下第二段','我给这篇打85分','我觉得可以分成三层','为什么要分开写'])assert.equal(asked(q),false,q);
 });
 test('policy v22 tells students the reading and self-rating points as they are',()=>{
- assert.equal(POLICY_VERSION,'yw-dialogue-policy-v22');
+ assert.equal(POLICY_VERSION,'yw-dialogue-policy-v23'); // r40 keeps the v22 wording below
  assert.match(POLICY,/通讀與自評是完成就得的分數/);assert.doesNotMatch(POLICY,/通讀與自評是不評分的完成分/);
 });
 test('an author quotation in the other script is the student\'s own words; a real misquotation is still shown',()=>{

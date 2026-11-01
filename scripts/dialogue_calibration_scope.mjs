@@ -28,7 +28,10 @@ const require=createRequire(import.meta.url);
 // evidence paragraphs are byte-identical to v11).
 // (v22, r38, 2026-11-01) the lesson-score answer states the reading and self-rating points instead of calling them 不計分;
 // no language criterion, evidence rule or verdict changes.
-const policyBridge={before:'b30b2257fec87625920f648797d8b89b6b9495c9e258599b54bfe800d041917c',after:'9da95944efd13921f0d0ab4794a2fe4fcb77b2ed584b515d06001b7ec2dd3ec7'};
+// (v23, r40, 2026-11-01, owner 「做，其他我沒想到但可以優化的一併部署」) three added paragraphs after the paragraph-guide one:
+// study-guide items raised in close reading answer-first (studyGuideAnswers, graded by the original rubric lines), and
+// formalStillOpen; every earlier paragraph, language criterion, evidence rule and verdict is byte-identical to v22.
+const policyBridge={before:'b30b2257fec87625920f648797d8b89b6b9495c9e258599b54bfe800d041917c',after:'f5dbe9f00294fca2b6508592bac161646b035c56ed9fd1e5d8c29df40d182cb1'};
 
 export async function historicalCalibrationSource(commit){
  assert(/^[a-f0-9]{40}$/.test(commit||''),'exact historical commit required');
