@@ -4,17 +4,27 @@ export const CONVERSATION_POLICY_VERSION='yw-author-conversation-v2';
 // A leading greeting or vocative clause (「你好，我已经读完了」) is not part of the statement.
 const GREETING=/^(?:(?:你好|您好|老師好|老师好|老師|老师|嗨|哈囉|哈喽|hi|hello)[，,、\s]*)+/iu;
 const withoutGreeting=text=>text.replace(GREETING,'');
+// r38: a statement may share its sentence with a separate clause (「看完了，开始吧」) or, typed without punctuation, run
+// straight into an invitation to go on (「我已经通读完了你可以提问了」); a sentence that negates reading, is hypothetical
+// or asks a question never counts, and the statement must still be a whole clause or the start of one.
+const GO_ON=/^(?:你|您|老師|老师|可以|請|请|開始|开始|接下來|接下来|然後|然后|咱們|咱们|我們|我们|下面|那就|現在|现在)/u;
+const NOT_READ=/(?:沒|没|未|不)(?:有)?(?:通|全)?(?:讀|读|看|閱讀|阅读)|如果|假如|要是|等我|等到/u;
 function explicitStatement(turn,quote){
  // A model must not cut an affirmative word out of a negation or hypothetical.
  const q=withoutGreeting(quote.trim().replace(/[。！!]+$/u,''));
- return (turn.content.match(/[^\n。！？!?]+[。！？!?]?/gu)||[]).filter(s=>!/[？?]$/.test(s)).map(s=>withoutGreeting(s.trim().replace(/[。！!]+$/u,''))).includes(q);
+ return (turn.content.match(/[^\n。！？!?]+[。！？!?]?/gu)||[]).filter(s=>!/[？?]$/.test(s)).map(s=>withoutGreeting(s.trim().replace(/[。！!]+$/u,''))).some(sentence=>{
+  if(sentence===q)return true;
+  if(NOT_READ.test(sentence)||/(?:嗎|吗|呢|麼|么)$/u.test(sentence))return false;
+  return sentence.split(/[，,；;、]/u).map(c=>withoutGreeting(c.trim())).some(c=>c===q||c.startsWith(q)&&GO_ON.test(c.slice(q.length)));
+ });
 }
-const finishedReading=/^(?:我)?(?:已經|已经|已)?(?:把)?(?:這篇|这篇|整篇|這一篇|这一篇)?(?:課文|课文|文章|正文)?(?:讀完|读完|看完|閱讀完|阅读完)(?:了)?[。！!\s]*$/u;
+const FINISH='(?:通讀完|通读完|讀完|读完|看完|閱讀完|阅读完)';
+const finishedReading=new RegExp('^(?:我)?(?:已經|已经|已)?(?:把)?(?:這篇|这篇|整篇|這一篇|这一篇)?(?:課文|课文|文章|正文)?'+FINISH+'(?:了)?[。！!\\s]*$','u');
 const wholeWork='(?:全詩|全诗|全文|全篇|整首詩|整首诗|(?:這|这|整)篇(?:課文|课文|文章|作品))';
-const explicitCompletion='(?=我|已經|已经|已|.*了[。！!\\s]*$|(?:讀完|读完|看完|閱讀完|阅读完)了)';
+const explicitCompletion='(?=我|已經|已经|已|.*了[。！!\\s]*$|'+FINISH+'了)';
 const naturalFinishedReading=[
- new RegExp('^'+explicitCompletion+'(?:我)?(?:已經|已经|已)?(?:把)?'+wholeWork+'(?:讀完|读完|看完|閱讀完|阅读完)(?:了)?[。！!\\s]*$','u'),
- new RegExp('^'+explicitCompletion+'(?:我)?(?:已經|已经|已)?(?:讀完|读完|看完|閱讀完|阅读完)(?:了)?'+wholeWork+'(?:了)?[。！!\\s]*$','u'),
+ new RegExp('^'+explicitCompletion+'(?:我)?(?:已經|已经|已)?(?:把)?'+wholeWork+FINISH+'(?:了)?[。！!\\s]*$','u'),
+ new RegExp('^'+explicitCompletion+'(?:我)?(?:已經|已经|已)?'+FINISH+'(?:了)?'+wholeWork+'(?:了)?[。！!\\s]*$','u'),
  // 通讀 alone may be a request or intention: require 已 or a completed 了.
  new RegExp('^(?:我)?(?:(?:已經|已经|已)(?:通讀|通读)'+wholeWork+'(?:了)?|(?:通讀|通读)'+wholeWork+'了)[。！!\\s]*$','u'),
 ];
@@ -85,6 +95,9 @@ export function validateReadingEvidence(proposed,{turns,asset,state,lessonId,tur
  }
  if(proposed.operation==='submit'){
   if(!asset||(!notes&&(state?.submitted||[...ref.quote].length<12))||ref.quote.length>2000)throw Error('reading_summary_not_verified');
+  // r38: the source accepts the original first-read impression only after three marked doubts with a guess. Refusing it
+  // here drops only this part; before, the source refused it after the reply was written and the whole turn was lost.
+  if(!notes&&(state?.marks||[]).filter(m=>String(m?.guess??'').trim()).length<3)throw Error('reading_summary_marks_required');
   return {operation:'submit',payload:{...common,summary:ref.quote},evidence:ref};
  }
  if(proposed.operation==='resolve'){
@@ -150,14 +163,26 @@ export function explicitChoice(options,content,quote){
  for(const q of parts)for(const [i,o] of options.entries())if(q.includes(o))found.add(i);
  return found.size===1?[...found][0]:-1;
 }
-const RATING=/(?:^|[^\d.])(\d{1,3}(?:\.\d+)?)\s*(?:分|%|％)(?![\d])/u;
+// A self-rating is one number from 0 to 100 that the student plainly gives (r38; 10-24..26 these were all refused:
+// 「我給 76／100」「60吧」「评分：85分。…扣掉的15分」「我给 78 分。…值得 78 分」). Accepted forms: N分, N%, N／100, a clause
+// that is only the number (「85分」 after 「评分：」), or a whole reply that is only the number (「60吧」). The quoted words must
+// hold exactly one rating in a clause that gives it and does not hedge or negate; every rating the student gives in the
+// message must agree unless the quoted clause states the change (「從 76 調到 82／100」). Numbers in reasons are not ratings.
+const RATING=/(?:^|[^\d.])(\d{1,3}(?:\.\d+)?)\s*(?:分(?![钟鐘])|%|％|[／/]\s*100(?![\d.]))/gu;
+const GIVES=/給|给|打|評|评|分數|分数|值得|算|調到|调到|改成|改為|改为|調整為|调整为|定為|定为/u;
+const CHANGES=/調到|调到|改成|改為|改为|調整為|调整为|提到|降到/u;
+const BARE=/^(?:我(?:給|给|打|評|评|會給|会给|就給|就给)?\s*)?(\d{1,3}(?:\.\d+)?)\s*(?:分|%|％|[／/]\s*100)?\s*(?:吧|啦|了|呀|哦|喔)?$/u;
+const ratingsIn=text=>[...text.matchAll(RATING)].map(m=>Number(m[1]));
+const givenIn=c=>HEDGED.test(c)?[]:BARE.test(c)?[Number(BARE.exec(c)[1])]:GIVES.test(c)?ratingsIn(c):[];
 export function explicitRating(content,quote){
  const text=String(quote||'').trim().replace(/[。！!]+$/u,'');if(!text)return null;
  const own=clausesOf(content),parts=clausesOf(text);
  if(!parts.length||!parts.every(q=>own.some(c=>c===q||c.includes(q))))return null;
- const rated=own.filter(c=>RATING.test(c));if(rated.length!==1||HEDGED.test(rated[0]))return null;
- const value=Number(RATING.exec(rated[0])[1]);
- const bare=/^(?:我(?:給|给|覺得|觉得|的評價是|的评价是|會給|会给|打)?\s*)?(\d{1,3}(?:\.\d+)?)\s*(?:分|%|％)?$/u.exec(text);
- if(bare)return Number(bare[1])===value?value:null;
- return parts.some(q=>q===rated[0]||rated[0].includes(q)&&RATING.test(q))?value:null;
+ const whole=/^[^，,。！？!?；;：:\n]*$/u.test(content.trim().replace(/[。！!～~]+$/u,''))?BARE.exec(content.trim().replace(/[。！!～~]+$/u,'')):null;
+ if(whole&&parts.length===1&&text.includes(whole[1]))return Number(whole[1]);
+ const quoted=[...new Set(parts.flatMap(q=>{const c=own.find(c=>c===q)||own.find(c=>c.includes(q));return c&&!HEDGED.test(c)&&(BARE.test(q)||GIVES.test(c))?(BARE.test(q)?[Number(BARE.exec(q)[1])]:ratingsIn(q)):[];}))];
+ if(quoted.length!==1)return null;
+ const value=quoted[0];
+ if(parts.some(q=>CHANGES.test(own.find(c=>c.includes(q))||'')))return value;
+ return own.flatMap(givenIn).every(v=>v===value)?value:null;
 }

@@ -6,7 +6,7 @@ import {validateConclusion} from './dialogue-conclusion.js';
 import {verbatimSpan} from './dialogue-quote.js';
 import {approvedSupplement} from './dialogue-completion-exemptions.js';
 import {calibratedQuestion} from './dialogue-calibration-status.js';
-export const POLICY_VERSION = 'yw-dialogue-policy-v21';
+export const POLICY_VERSION = 'yw-dialogue-policy-v22';
 export const RULE_VERSION = 'yw-dialogue-evidence-v3';
 export const CONTEXT_LAYOUT_VERSION = 'yw-dialogue-context-static-first-v4';
 // Keep the single-line data contract used by source_context_prepared. Object
@@ -31,7 +31,7 @@ authorVoice 提供作者時代及寫作語言。依本篇原文形成各自文�
 先回應學生實際說的話：發展他的解讀，核對文本證據，接納不同意見，連到相關的句子、意象或作者其他作品，像在談一篇作品，而不是在走評量流程。不要逐條審問、泛泛稱讚、反覆解釋答案或一題一判準地提問；每輪至多一個真正的追問，而且要從學生剛才的話長出來。不先把學生還沒想到的答案說出來，但學生說對了就明說對了。不要求認同作者或指定情感。
 reply 只談作品和學生的想法，不談後台：不說記錄、提交、補記、核驗、後端、入帳、參與紀錄、計分規則、待核對、系統確認或「先不替你報分」這類話；伺服器核驗後，頁面會即時向學生顯示成就與分數。學生讀對了就像老師那樣直說對、說出好在哪；學生說讀完了或給了自評，用一句自然的話接住就往下談，不解釋它計不計分。評閱結果（通過了、評語，以及 formalAssessments 的分數）可以用一句自然的話說；學生主動問分數或進度時，依 lessonScore 如實回答。
 學生選對原題選項或說出正確的語境義時（對照 question.criteria.sourceAnswer、conversationOriginalTasks 的題目或 objectives 的判準），第一句就明確肯定並說明這個回答證明了甚麼，再自然展開剩下的理由；肯定答對不等於宣告整個目標已掌握，仍按證據規則記錄。不要把你剛解釋過的理由再要學生複述一遍當作獨立證據。品質基準（方向而非台詞）：「對，這裡的『思量』就是思念。『不思量』卻『自難忘』，有趣的正是這個矛盾：不去想，為什麼反而忘不掉？你覺得這個『不』更像刻意克制，還是思念已經不需要刻意喚起？」不把某種情感解讀當作唯一可接受的答案。
-學生問本課拿了多少分、還差多少、哪些任務未完成時，先依 lessonScore（伺服器依本課既定權重計算，不是你估的）逐項直接回答：已確認得分、本課滿分與尚可取得的分數、每項任務的狀態（done 已完成／partial 部分完成／pending_evaluation 評閱中／not_started 尚未開始），以及每項接下來實際要做甚麼（tracks[].next）。不把目標數量當分數，不把整門課成績當本課分數；通讀與自評是不評分的完成分，照實說明；評閱中不是零分。lessonScore 缺席或 status 不是 ok 時，說明暫時讀不到本課分數並請學生稍後再問，不要編造總分，也不要說你永遠無法知道。回答完整後再自然建議下一步，不要用別的問題迴避。
+學生問本課拿了多少分、還差多少、哪些任務未完成時，先依 lessonScore（伺服器依本課既定權重計算，不是你估的）逐項直接回答：已確認得分、本課滿分與尚可取得的分數、每項任務的狀態（done 已完成／partial 部分完成／pending_evaluation 評閱中／not_started 尚未開始），以及每項接下來實際要做甚麼（tracks[].next）。不把目標數量當分數，不把整門課成績當本課分數；通讀與自評是完成就得的分數：不看讀得快慢、不看自評高低，依 tracks 照實說出它們各值多少分，不要說成不計分；評閱中不是零分。lessonScore 缺席或 status 不是 ok 時，說明暫時讀不到本課分數並請學生稍後再問，不要編造總分，也不要說你永遠無法知道。回答完整後再自然建議下一步，不要用別的問題迴避。
 objectives、state 與 originalRequirements 合起來就是本課全部學習目標；同一個目標的舊版要求（originalRequirements）與對話目標只算一次，不是兩件事。用自然的方式帶學生完成全部目標：順序跟著學生的話走，不按清單逐項推進；開場或學生問起時用一兩句話說明本課要談甚麼；有實質進展時簡短肯定；未完成的目標在對話裡自然引出，不把判準、清單或內部鍵名倒給學生。
 詞義須用語境解釋；技法須分析選擇、效果與目的；合理不同解讀可成立。不能以篇幅或稱讚作證据。
 古典詞彙必須涵蓋全部必考項；失敗先解釋和對比，請學生改述，再出等值新題獨立回答。提示後照抄不算掌握。
@@ -181,7 +181,12 @@ export function lessonScore(curriculum,state,{submissions=[]}={}){
 // The score/progress data joins the model context only when the latest student turn asks about it, so every other
 // prompt (including historical calibration reconstructions) keeps its exact shape.
 const SCORE_QUESTION=/幾分|几分|多少分|拿了|得分|分數|分数|還差|还差|還要|还要|進度|进度|完成了|哪些任務|哪些任务|還有什麼要做|還有甚麼要做|还有什么要做|未完成|剩下/u;
-export function scoreAsked(turns){const last=[...turns].reverse().find(t=>t.role==='student');return !!last&&SCORE_QUESTION.test(last.content||'');}
+// r38: 13 of 16 real score questions (10-21..27) were missed — 「我怎么拿到这个分」「为什么不给我加分呢」「我怎麼滿分」「我的观点评价
+// 为什么没有分」 — and the author answered that it could not read the score. In a short message (80 characters; every real one
+// was 21 or less, while long answers that discuss 分量 or 分攤 are not questions) a question word or 滿分/加分/給分 near 分
+// counts; 十分, 部分, 分析, 分成 and the like do not.
+const SCORE_REQUEST=/滿分|满分|加分|給分|给分|(?:怎麼|怎么|如何|為什麼|为什么|為何|为何|何時|何时|啥時候|啥时候|什麼時候|什么时候|能不能|可不可以|可以|會不會|会不会|有沒有|有没有|沒有|没有|不管|本課|本课|我的|最後|最后)[^。！？!?\n]{0,12}(?<![十部充過过區区身緣缘萬万春秋公處处])分(?![析別别開开明享寸量鐘钟辨裂工配子類类佈布散離离手解段批成為为組组頭头章])|(?<![十部充過过區区身緣缘萬万春秋公處处])分(?:呢|嗎|吗)/u;
+export function scoreAsked(turns){const last=[...turns].reverse().find(t=>t.role==='student');return !!last&&(SCORE_QUESTION.test(last.content||'')||String(last.content||'').trim().length<=80&&SCORE_REQUEST.test(last.content||''));}
 // The author's own assessment of an original formal item: the student's words cover every field of the item, the
 // score and feedback follow the item's rubric; the server records it through the same source pipeline.
 export function validateFormalAssessment(proposed,{curriculum,state,turns,legacy=null}){

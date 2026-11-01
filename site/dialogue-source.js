@@ -25,6 +25,8 @@ import {learningTurn,collectedFormal} from './dialogue-learning-turn.js';
 import {lessonCallLimit} from './dialogue-lesson-limits.js';
 import {sanitizeDialogueCurriculum} from './dialogue-public-curriculum.js';
 import {approvedSupplement} from './dialogue-completion-exemptions.js';
+import {foldScript} from './dialogue-script-fold.js';
+import {replayApprovedRetained} from './dialogue-retained-replay.js';
 import {withProspectiveFormalScope} from './formal-scope-policy.js';
 import {withSessionSourceMaterials} from './dialogue-session-source.js';
 import {withCalibratedLanguage,calibrationReopensReview} from './dialogue-calibration-status.js';
@@ -44,7 +46,7 @@ const MODE_FAILURE_CODES=new Set([
  'quotation_without_explanation','original_evidence_requires_source_receipt',
  'original_result_preserved','original_evidence_wrong_task','original_evidence_not_student_quote',
  'reading_evidence_not_student_quote','reading_mark_not_available','reading_selection_not_verified',
- 'reading_selection_ambiguous','reading_original_mark_preserved','reading_summary_not_verified',
+ 'reading_selection_ambiguous','reading_original_mark_preserved','reading_summary_not_verified','reading_summary_marks_required',
  'reading_correction_not_verified','reading_acknowledgement_not_verified','reading_operation_not_allowed',
  'rating_not_explicit','rating_out_of_range','choice_not_explicit',
  'source_draft_not_eligible','source_draft_during_vocabulary','source_draft_not_student_quote',
@@ -64,7 +66,9 @@ const MODE_FAILURE_CODES=new Set([
 // A classical text records nothing before its first read: say exactly what unlocks the record instead of inviting the
 // student to resubmit words that would be refused again.
 export const READING_GATE_NOTICE={classical_first_read_required:'這是文言文：作者剛才的評閱要等你完成「無注疏初讀」才能記分——先不看注釋自己讀一遍，告訴作者至少三處讀不通或拿不準的地方和你的猜測，再寫幾句初讀感受。剛才的對話都已保存，不必重寫。',classical_annotated_reading_required:'這是文言文：作者剛才的評閱要等你讀完帶註釋的正文、並告訴作者一聲，才能記分。剛才的對話都已保存，不必重寫。'};
-const originalRejectedNotice=code=>READING_GATE_NOTICE[code]||(['original_evidence_wrong_task','original_result_preserved'].includes(code)?'作者提到的原題答案：該題先前已有紀錄，不重複計分。':code==='choice_not_explicit'?'作者提到的原題選擇本輪未能記錄：請在同一句裡清楚寫出「我選 某選項」。':'作者提到的原題答案本輪未能記錄（未通過核驗）；學習紀錄以下方實際保存的為準。');
+// r38: a refused self-rating or reading statement says what form is recorded, as choice_not_explicit already did.
+const ORIGINAL_FORM_NOTICE={rating_not_explicit:'這一輪的自評還沒有記下：直接寫一個 0 到 100 的數字就可以，例如「我給 80 分」或「80／100」。',reading_acknowledgement_not_verified:'通讀確認還沒有記下：讀完整篇後直接說一句「我讀完了」就可以。'};
+const originalRejectedNotice=code=>READING_GATE_NOTICE[code]||ORIGINAL_FORM_NOTICE[code]||(['original_evidence_wrong_task','original_result_preserved'].includes(code)?'作者提到的原題答案：該題先前已有紀錄，不重複計分。':code==='choice_not_explicit'?'作者提到的原題選擇本輪未能記錄：請在同一句裡清楚寫出「我選 某選項」。':'作者提到的原題答案本輪未能記錄（未通過核驗）；學習紀錄以下方實際保存的為準。');
 const formalRejectedNotice=code=>READING_GATE_NOTICE[code]||(['formal_assessment_not_eligible','original_result_preserved'].includes(code)?'作者提到的評閱：該項先前已有紀錄，不重複計分。':`作者提到的評閱本輪未能記錄（${code==='one_formal_assessment_per_turn'?'一輪只記一項':'未通過核驗'}）；下一輪可引用你先前的話補記。`);
 // The author may only put the student's own words in quotation marks. Any 「…」 the reply attributes to the student
 // (你說「…」, 你前面才說「…」 …) that is not a verbatim part of a saved student message is recorded and shown to the student.
@@ -85,9 +89,10 @@ export function originalSettles(curriculum,state,objectiveId,originalResult){
  if(originalResult?.objectiveId===legacy.id&&originalResult.correctness==='correct')return true;
  return (state?.objectives||[]).some(o=>o.id===legacy.id&&o.status==='preserved');
 }
+// The comparison folds traditional and simplified script (r38): 「或許江月也不知」 quotes a student who typed 「或许江月也不知」.
 export function unverifiedStudentQuotes(reply,turns){
- const said=foldText((turns||[]).filter(t=>t.role==='student').map(t=>t.content).join('\n')),out=[];
- for(const m of String(reply||'').matchAll(STUDENT_QUOTE)){const quote=m[1].trim(),folded=foldText(quote);if(folded.length>=2&&!said.includes(folded)&&!out.includes(quote))out.push(quote);}
+ const said=foldScript(foldText((turns||[]).filter(t=>t.role==='student').map(t=>t.content).join('\n'))),out=[];
+ for(const m of String(reply||'').matchAll(STUDENT_QUOTE)){const quote=m[1].trim(),folded=foldScript(foldText(quote));if(folded.length>=2&&!said.includes(folded)&&!out.includes(quote))out.push(quote);}
  return out;
 }
 const misquoteNotice=quotes=>`作者引用的「${quotes.join('」「')}」不是你訊息裡的原話，以你自己寫的為準。`;
@@ -395,6 +400,8 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   const before=url.searchParams.has('beforeSeq')?{sequence:Number(url.searchParams.get('beforeSeq'))}:null;
   if(before && (!Number.isSafeInteger(before.sequence)||before.sequence<1))return json({code:'invalid_cursor'},400);
   if(executionId!==null)await ensureExecution(db,session,publishedCurriculum,executionId);
+  // r38 owner-approved replay of retained self-rating / reading statements (dialogue-retained-replay.js); never blocks the read.
+  if(!before&&originalAction)await replayApprovedRetained({db,session,curriculum,student,originalAction}).catch(()=>[]);
   const result=await snapshot(db,session,curriculum,before);
   if(curriculum.calibrationEvidence||curriculum.sessionSourceProjection||curriculum.curriculumVersion!==publishedCurriculum.curriculumVersion)result.resumeCurriculum=sanitizeDialogueCurriculum(curriculum);
   if(url.searchParams.get('records')==='1'){
@@ -872,8 +879,10 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
    if(firstReading.asset.kind==='conversation-reading')readingReceipt={kind:'local-dialogue-note',scoringRole:'none',sourceVersion:firstReading.asset.textVersionId};
    else{
     if(!firstReadAction)throw Error('reading_source_unavailable');
-    const response=await firstReadAction(readingAction.operation,readingAction.payload);readingReceipt=await response.json();
-    if(!response.ok||readingReceipt.ok!==true)throw Error('reading_source_unconfirmed');
+    const response=await firstReadAction(readingAction.operation,readingAction.payload);readingReceipt=await response.json().catch(()=>null);
+    // r38: a first-read action the source refuses drops only that part, like any other refused part; the reply still
+    // reaches the student (10-26/27: eight paid replies were discarded and the student kept asking 「请回复消息」).
+    if(!response.ok||readingReceipt?.ok!==true){rejectedParts.push({part:'readingEvidence',code:'reading_source_unconfirmed'});readingAction=null;readingReceipt=null;}
    }
   }
 
