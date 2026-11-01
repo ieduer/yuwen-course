@@ -1,3 +1,27 @@
+## Current 2026-11-01 — r38: plainly given self-ratings and reading statements count; first-read replies always arrive (accepted)
+
+**Accepted:** source `0d937fb`, Pages deployment `c4f6ed41`, effective 2026-11-01T04:31:33Z; rollback to r37 `81522fe8` (artifact rebuilt from `22972af`, digest equal to the registered one). On test account 553, lesson-1458 (three Claude attempts, 88,890 µ$): 「我已经通读完了你可以提问了」 recorded the reading item, 「…我给这篇 76／100。…」 recorded the self-rating, and 「我怎么拿到这个分」 got the lesson score (26/100) item by item; no refusal or misquotation notice. Status `20261101-yw-self-rating-and-reading-records`. The five replays run when each student next opens the lesson; verified offline end-to-end on a read-only mirror (one record each, idempotent: 9/1462 33→46, 37/1461 67→80, 41, 61, 63 on 1458 87→100).
+
+**Why.** Real dialogues 10-24 to 11-01 (`_meta/reports/operations/yw-dialogue-scoring-20261031/ANALYSIS.md`, read-only): 9 students, 13 lesson sessions, 143 turns; 7 of the 9 lost credit or replies to server-side checks, not to their answers.
+- `rating_not_explicit` refused 37 self-ratings such as 「我給 76／100」「60吧」「评分：85分。…扣掉的15分」; the author's reply had already acknowledged them. One student changed the rating to 100 to get past it.
+- `reading_acknowledgement_not_verified` refused 「我已经通读完了你可以提问了」 five times.
+- A classical first-read impression written before the third marked doubt made the source refuse `submit`, which discarded the whole turn (`reading_source_unconfirmed`): eight paid replies never reached the student.
+- 13 of 16 score questions (「我怎么拿到这个分」「为什么不给我加分」) missed `SCORE_QUESTION`; the author said it could not read the score, and called the reading and self-rating points 不計分.
+- About 25 of 31 「作者引用的…不是你訊息裡的原話」 notices were the student's own words in the other script.
+
+**Change.**
+- `explicitRating`: N分, N%, N／100, a bare-number clause (「85分」 after 「评分：」) or a whole reply that is only the number (「60吧」). The quoted words must hold one rating in a clause that gives it; every rating the student gives must agree unless the quoted clause states the change (「從 76 調到 82／100」); numbers in reasons do not count. Hedged, negated and conflicting ratings stay refused (「还是 78」 is still refused).
+- `acknowledged`: 「通讀完」 added; a statement may share its sentence with a separate clause (「看完了，开始吧」) or run into an invitation to go on; negation, hypothesis and questions stay refused.
+- Classical first read: `submit` with fewer than three marked doubts is refused as a part (`reading_summary_marks_required`), and any first-read action the source refuses drops only that part; the reply is always saved.
+- `scoreAsked`: `SCORE_REQUEST` for short messages (≤ 80 characters): 滿分/加分/給分, or a question word near 分 (十分, 部分, 分析, 分成 excluded). POLICY v22 states the reading and self-rating points (registered as a reviewed delta in `scripts/dialogue_calibration_scope.mjs`).
+- `unverifiedStudentQuotes` folds traditional/simplified script with `site/dialogue-script-fold.js` (2,886 ICU Hant-Hans pairs). Evidence quotes and displayed text are never converted.
+- Student-facing notices for a refused self-rating / reading statement say which form is recorded.
+- Owner-approved replay (`site/dialogue-retained-replay.js`; suen 2026-11-01 「連補記一起做」): five exact retained parts (63, 61, 41 on lesson-1458; 37 on lesson-1461; 9 on lesson-1462), pinned by session, student, objective and the quote's SHA-256. When that student next opens the lesson, the part is re-checked with the current validators and recorded once through the ordinary original-task path (`retained_replay_saved`, client mutation `yw-dialogue-local:<turn>-r38`). Student 8's stored self-rating (100) is unchanged: not decided by the owner.
+
+**Unchanged.** Evidence rules, answer keys, weights, schema, bindings, budget and every stored record.
+
+**Tests.** `scripts/test_dialogue_scoring_r38.mjs` (12). Offline replay on a read-only mirror: of the retained refusals, every plainly given rating and reading statement passes under r38; the 10 「还是 78」-type refusals still fail. Script folding leaves 7 of 31 attribution notices, all genuine paraphrases.
+
 ## Current 2026-10-24 — r37: the Claude-written 尚友 conclusion (accepted)
 
 **Accepted:** source `22972af`, Pages deployment `81522fe8`. On test account 553, lesson-1693 (百合花):
