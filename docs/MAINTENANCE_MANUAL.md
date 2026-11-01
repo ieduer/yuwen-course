@@ -1,3 +1,24 @@
+## Current 2026-11-01 — r40: classical study-guide items in the paragraph reading, answered before they are shown (accepted)
+
+**Accepted:** source `6b8c235`, Pages deployment `307566bf`, effective 2026-11-01T05:44:27Z, accepted 06:31:23Z; rollback to r39 `05965908` (artifact `/private/tmp/cf-task-yw-r38-20261031/yw-r39/.release/site`, digest `69359ed3…` = registered). On test account 553, lesson-1578 (10 Claude turns, 437,484 µ$): three words confirmed through their original choices; the guide then raised the 「之」 set item (虛詞) without its answer; an incomplete answer was recorded as attempt 1 (55, needs_revision, ineligible) with no reference or key feedback on the page; the complete answer as attempt 2 (96, passed, eligible); the item preserved, vocabulary track 9/17, lesson 55/100, and the achievement card showed the reference only then. Two option choices named by their text were not recorded (`choice_not_explicit`, the r22 rule). Status `20261101-yw-study-guide-dialogue`.
+
+**Owner:** suen 2026-11-01 「做，其他我沒想到但可以優化的一併部署」 on `_meta/reports/operations/yw-study-guide-dialogue-20261031/DESIGN.md` (D1–D5 as recommended). Report: same folder, `REPORT.md`.
+
+**Why.** No study-guide item (古今異義、虛詞、通假、句式、理解) had ever been raised in dialogue: the paragraph guide ordered words only, a study-guide draft was submitted only after every word, and the dialogue rule wanted the author to show the answer first. Dialogue-only ceilings were 61–92 per classical lesson (81 for the three without comprehension items; 12 lessons also lost the 20-point structure track).
+
+**Change.**
+- **Paragraph guide v2** (`yw-paragraph-guide-v2`): each item sits in the paragraph of the last sentence it quotes (script and punctuation folded), else in a closing 「通篇」 stage (193 items: 129 in paragraphs, 64 in 通篇; golden map `scripts/fixtures/study-guide-paragraph-map-r40.json`). Words and items are read in text order. An item is confirmed only by its preserved original record. An item whose answer an author turn showed, or tried three times, waits; one offered for three turns without an attempt moves to 通篇, where the least-offered item comes first. While a word question is open the focus stays on its word (r35).
+- **先答後看** (`validateStudyGuideAnswer`, `yw-study-guide-answer-v1`): the author raises the item without its answer and records the student's whole turn with `studyGuideAnswers`. Admitted only when no earlier author turn showed the answer (whole reference folded, the existing line test for long references, a choice item's letters named as the answer) and the turn is not a copy of the author's words; three attempts; the same words are never graded twice. The unchanged original study-guide source then decides: answer key first, otherwise the author's grade under the original evaluator's rubric lines (`STUDY_GUIDE_GRADING_LINES`, prompt byte-identical). One source submission per turn, the study-guide answer first. The show-first draft is no longer taken in classical conversation; drafts saved before r40 still submit.
+- **Page:** item chips and counts in the paragraph line; on a pass the achievement card shows the reference and explanation; a miss shows neither the reference nor the key's gap; a key that overrides the author is announced.
+- **`formalStillOpen`:** live turns name demonstrated objectives whose rubric item (e.g. 初讀三詞) is still unrecorded, and POLICY asks the author to request the missing part (four real sessions had context demonstrated at 0 points; no backfill).
+- **Shape:** an omitted `assessments` field is no assessment (all 13 retained `invalid_assessments_shape` turns since 10-22 had none); a single object is a one-item list; anything else is dropped with its shape and a bounded copy kept.
+- **Notices:** a refused rubric item says what it still needs (「「初讀三詞」還沒有記下：…」) instead of 「下一輪可引用你先前的話補記」.
+- POLICY v23: three added paragraphs; registered in `scripts/dialogue_calibration_scope.mjs` (`policyBridge.after` `f5dbe9f0…`).
+
+**Unchanged.** Evidence rules of the original sources, answer keys, the study-guide evaluator prompt, weights and `lessonScore`, schema, bindings, budget, every stored record.
+
+**Tests.** `scripts/test_dialogue_study_guide_r40.mjs` (14). Full suite on 2a7ea75: 109 files, 95 pass; the 14 failures are all in the r39 baseline set. Read-only mirror (production D1, 29 SELECT): all 53 sessions keep their score, tracks and objective statuses.
+
 ## Current 2026-11-01 — r39: student 8's forced self-rating corrected (accepted)
 
 **Accepted:** source `b379402`, Pages deployment `05965908`, effective 2026-11-01T05:00:49Z; rollback to r38 `c4f6ed41` (artifact in the kept r38 release worktree, digest `f566858c` = registered). Status `20261101-yw-self-rating-correction`.
