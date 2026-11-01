@@ -11,6 +11,7 @@ import {handleDialogueFormal,handleDialogueOriginal,handleDialogueFirstRead} fro
 import {validateOriginalEvidence as original,validateReadingEvidence as reading,explicitRating} from '../site/dialogue-reading-evidence.js';
 import {scoreAsked,POLICY,POLICY_VERSION} from '../site/dialogue-policy.js';
 import {APPROVED_RETAINED_REPLAYS,replayApprovedRetained} from '../site/dialogue-retained-replay.js';
+import {prepareOriginalInput} from '../site/dialogue-formal.js';
 import {foldScript,SCRIPT_FOLD_PAIRS} from '../site/dialogue-script-fold.js';
 
 let student={id:1,ucUserId:700001},ownerRef=createHash('sha256').update('dialogue-owner:1').digest('hex');
@@ -121,7 +122,7 @@ test('a first-read impression before the third doubt keeps the reply and records
 });
 
 // The production entry for student 9 / lesson-1462, rebuilt in a local database with the exact retained part.
-const ENTRY=APPROVED_RETAINED_REPLAYS.find(e=>e.studentId===9);
+const ENTRY=APPROVED_RETAINED_REPLAYS.find(e=>e.studentId===9&&!e.kind);
 function replayFixture(t){
  const f=fixture(t,'lesson-1462');student={id:9,ucUserId:700009};
  t.after(()=>{student={id:1,ucUserId:700001};});
@@ -135,8 +136,11 @@ function replayFixture(t){
  f.options.originalAction=(formal,id,commit)=>handleDialogueOriginal(f.req(),f.env,student,formal,id,commit);
  return f;
 }
-test('the approved list is exactly the five owner-approved student-lessons, one entry each',()=>{
- assert.deepEqual(APPROVED_RETAINED_REPLAYS.map(e=>`${e.studentId}/${e.lessonId}`).sort(),['37/lesson-1461','41/lesson-1458','61/lesson-1458','63/lesson-1458','9/lesson-1462']);
+test('the approved list is exactly the five owner-approved replays and the one owner-approved correction',()=>{
+ assert.deepEqual(APPROVED_RETAINED_REPLAYS.filter(e=>!e.kind).map(e=>`${e.studentId}/${e.lessonId}`).sort(),['37/lesson-1461','41/lesson-1458','61/lesson-1458','63/lesson-1458','9/lesson-1462']);
+ const fix=APPROVED_RETAINED_REPLAYS.filter(e=>e.kind==='correction');
+ assert.deepEqual(fix.map(e=>`${e.studentId}/${e.lessonId}/${e.release}/${e.supersededRating}`),['8/lesson-1458/r39/100']);
+ assert.equal(fix[0].quoteSha256,createHash('sha256').update('我給 83／100').digest('hex'));
  for(const e of APPROVED_RETAINED_REPLAYS)assert.match(e.quoteSha256,/^[0-9a-f]{64}$/);
  assert.equal(ENTRY.quoteSha256,createHash('sha256').update('我已经通读完了').digest('hex'));
 });
@@ -165,4 +169,43 @@ test('the replay touches nothing for another student, a changed quote, or an ite
  f.sql.exec("DELETE FROM dialogue_events WHERE event_type='retained_replay_saved'");
  assert.equal((await replayApprovedRetained({db:f.env.READING_DB,session:{id:ENTRY.sessionId,student_id:9},curriculum:f.curriculum,student,originalAction:f.options.originalAction}))[0].status,'already_complete');
  assert.equal(f.sql.prepare('SELECT COUNT(*) n FROM learning_interactions WHERE student_id=9').get().n,1);
+});
+
+// r39 (suen 2026-11-01 「學生 8改正」): a correction records the student's last plainly given rating as a new attempt and
+// keeps the earlier record, only while that record is the exact one named and still holds the named value.
+function correctionFixture(t){
+ const f=fixture(t,'lesson-1458');student={id:8,ucUserId:700008};
+ t.after(()=>{student={id:1,ucUserId:700001};});
+ f.sql.exec("INSERT INTO students(id,uc_slug,display_name) VALUES(8,'synthetic-eight','Synthetic')");
+ const at='2026-10-24T11:00:00.000Z',sid='correction-session',objectiveId='legacy:effect:lesson-1458:interaction:evaluation';
+ f.sql.prepare('INSERT INTO dialogue_sessions(id,student_id,lesson_id,curriculum_version,curriculum_json,policy_version,revision,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?)').run(sid,8,'lesson-1458',f.curriculum.curriculumVersion,JSON.stringify(f.curriculum),'yw-dialogue-policy-v21',4,at,at);
+ const turn=(id,content)=>f.sql.prepare("INSERT INTO dialogue_turns(id,session_id,mutation_id,request_hash,role,content,status,policy_version,created_at) VALUES(?,?,?,?,'student',?,'saved','yw-dialogue-policy-v21',?)").run(id,sid,id,'h',content,at);
+ turn('t-83','我給 83／100。\n\n比先前的 82 略高一點。');turn('t-100','算了，我改成100分');
+ f.sql.prepare("INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,'proposal_parts_rejected',?,?)").run('t-83:rejected',sid,'t-83',JSON.stringify({parts:[{part:'originalEvidence',code:'rating_not_explicit'}],credited:false,retained:{originalEvidence:{objectiveId,evidence:{turnId:'t-83',quote:'我給 83／100'}}},retainedVersion:'yw-rejected-retained-v1'}),at);
+ const original=(formal,id,commit)=>handleDialogueOriginal(f.req(),f.env,student,formal,id,commit);
+ return {f,sid,objectiveId,original};
+}
+const ratings=f=>f.sql.prepare("SELECT attempt_no,json_extract(raw_payload_json,'$.rating') rating FROM learning_interactions WHERE student_id=8 AND interaction_key='evaluation' ORDER BY id").all().map(r=>`${r.attempt_no}:${r.rating}`);
+test('a correction records the last plainly given rating as a new attempt and keeps the forced one',async t=>{
+ const {f,sid,objectiveId,original}=correctionFixture(t);
+ const forced=prepareOriginalInput(f.curriculum,{kind:'evaluation',objectiveId},{rating:100,reason:'算了，我改成100分'});
+ assert.equal((await original({...forced,lessonId:'lesson-1458'},'t-100',()=>[])).status,200);
+ const target=f.sql.prepare("SELECT source_event_id FROM learning_interactions WHERE student_id=8 AND interaction_key='evaluation'").get().source_event_id;
+ const entry={kind:'correction',release:'r39',sessionId:sid,studentId:8,lessonId:'lesson-1458',eventId:'t-83:rejected',objectiveId,quoteSha256:createHash('sha256').update('我給 83／100').digest('hex'),supersedesSourceEventId:target,supersededRating:100};
+ const run=(approved)=>replayApprovedRetained({db:f.env.READING_DB,session:{id:sid,student_id:8},curriculum:f.curriculum,student,originalAction:original,approved});
+ assert.equal((await run([{...entry,supersededRating:99}]))[0].status,'correction_target_mismatch','only the value it was named for');
+ assert.equal((await run([{...entry,supersedesSourceEventId:'another'}]))[0].status,'correction_target_mismatch','only the record it was named for');
+ assert.deepEqual(ratings(f),['1:100']);
+ assert.equal((await run([entry]))[0].status,'recorded');
+ assert.deepEqual(ratings(f),['1:100','2:83'],'the forced record stays; the corrected rating is a new attempt');
+ const saved=JSON.parse(f.sql.prepare("SELECT details_json FROM dialogue_events WHERE event_type='retained_correction_saved'").get().details_json);
+ assert.equal(saved.release,'r39');assert.deepEqual(saved.supersedes,{sourceEventId:target,rating:100});assert.equal(saved.input.rating,83);
+ assert.equal((await run([entry]))[0].status,'already_replayed');assert.deepEqual(ratings(f),['1:100','2:83']);
+ assert.equal(f.sql.prepare("SELECT client_mutation_id FROM learning_interactions WHERE student_id=8 ORDER BY id DESC").get().client_mutation_id,'yw-dialogue-local:t-83-r39c');
+});
+test('a correction never runs when the item was never completed (that is a replay, not a correction)',async t=>{
+ const {f,sid,objectiveId,original}=correctionFixture(t);
+ const entry={kind:'correction',release:'r39',sessionId:sid,studentId:8,lessonId:'lesson-1458',eventId:'t-83:rejected',objectiveId,quoteSha256:createHash('sha256').update('我給 83／100').digest('hex'),supersedesSourceEventId:'none',supersededRating:100};
+ assert.equal((await replayApprovedRetained({db:f.env.READING_DB,session:{id:sid,student_id:8},curriculum:f.curriculum,student,originalAction:original,approved:[entry]}))[0].status,'correction_target_mismatch');
+ assert.deepEqual(ratings(f),[]);
 });
