@@ -25,7 +25,7 @@ test('the 尚友 conclusion is not sent with the free-pool-only schema on the Cl
 });
 
 test('no teacher review: the author never records review, holds and unsettled reviews never block, an earlier completion counts',()=>{
- assert.equal(POLICY_VERSION,'yw-dialogue-policy-v22');
+ assert.equal(POLICY_VERSION,'yw-dialogue-policy-v23');
  assert.match(POLICY,/本平台是學生自主學習，沒有教師覆核環節：不要記 review/);
  assert.doesNotMatch(POLICY,/判斷不確定則review/);assert.doesNotMatch(POLICY,/只能給 review/);assert.doesNotMatch(POLICY,/尚未達到時可討論或記review/);
  const c=load('lesson-1499'),plain=c.objectives.find(o=>o.domain==='wordCreation')||c.objectives.find(o=>o.domain==='transfer');

@@ -48,8 +48,9 @@ test('a conclusion stores the exact student and passage spans',()=>{
 
 test('paragraphs carry their opening words and the author is told to name them that way',()=>{
  const c=load('lesson-1578'),g=paragraphGuide(c,projectState(c,[],[],null,CLOSE),questionItems(c));
- assert.deepEqual(g.paragraphs.map(p=>p.opening),['永和九年','是日也','夫人之相与','每览昔人兴感之由']);
+ // r40: whole-text study-guide items close the reading in a 通篇 stage, which has no passage.
+ assert.deepEqual(g.paragraphs.map(p=>p.opening),['永和九年','是日也','夫人之相与','每览昔人兴感之由','通篇']);
  assert.equal(g.focus.opening,'永和九年');
- for(const p of g.paragraphs)assert.ok(c.passages.find(x=>x.id===p.passageId).text.startsWith(p.opening));
+ for(const p of g.paragraphs.filter(p=>!p.wholeText))assert.ok(c.passages.find(x=>x.id===p.passageId).text.startsWith(p.opening));
  assert.match(POLICY,/提到段落時用段首幾字稱呼（focus\.opening/);
 });

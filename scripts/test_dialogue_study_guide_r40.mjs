@@ -49,6 +49,10 @@ test('guide v2 reads words and items in text order, never confirms an item itsel
  const deferred=paragraphGuide(c,state,questionItems(c),null,{attempts:{},shown:{},offered:{[first]:3,[second]:2}});
  assert.ok(!deferred.paragraphs[0].items.some(i=>i.objectiveId===first));const end=deferred.paragraphs.at(-1);assert.equal(end.opening,'通篇');assert.ok(end.items.some(i=>i.objectiveId===first&&i.deferred&&i.status==='open'));
  assert.equal(deferred.focus.next.objectiveId,second);
+ // In 通篇 an item that keeps being skipped goes behind the others.
+ const whole=c=>paragraphGuide(c.c,c.s,questionItems(c.c),null,c.p).paragraphs.at(-1).items.map(i=>i.objectiveId);
+ const l=load('lesson-1536'),ls=projectState(l,[],[],null,CLOSE),order=whole({c:l,s:ls,p:null});assert.ok(order.length>=2);
+ assert.equal(whole({c:l,s:ls,p:{attempts:{},shown:{},offered:{[order[0]]:4}}}).at(-1),order[0]);
  // An open word question keeps the focus on its word (r35), items or not.
  const word=guide.paragraphs.find(p=>p.passageId==='lesson-1477:p2').words[0].objectiveId;
  assert.equal(paragraphGuide(c,state,questionItems(c),word).focus.next.objectiveId,word);

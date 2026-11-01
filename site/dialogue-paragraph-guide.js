@@ -78,8 +78,8 @@ export function paragraphGuide(curriculum,state,items,current=null,progress=null
   const deferred=st==='open'&&!tried&&(offered[id]||0)>=STUDY_GUIDE_DEFER_TURNS;
   const passageId=deferred?null:place.passageId;
   // Within a paragraph an item follows the words of its sentence: words rank by where their sentence starts, items by where
-  // their last quoted sentence ends.
-  return {entry:'studyGuide',objectiveId:id,kind:g.kind,prompt:g.item.prompt,sentence:place.sentence,placement:deferred?'deferred':place.placement,passageId,rank:passageId?[index.get(passageId),place.rank[1],1]:[passages.length,n,1],status:st,attempts:tried,...(closed?{closed}:{})};
+  // their last quoted sentence ends. In 通篇 the item offered fewest times comes first, so a skipped one never holds the stage.
+  return {entry:'studyGuide',objectiveId:id,kind:g.kind,prompt:g.item.prompt,sentence:place.sentence,placement:deferred?'deferred':place.placement,passageId,rank:passageId?[index.get(passageId),place.rank[1],1]:[passages.length,(offered[id]||0)*1000+n,1],status:st,attempts:tried,...(closed?{closed}:{})};
  });
  const entries=[...words,...guides].sort((a,b)=>a.rank[0]-b.rank[0]||a.rank[1]-b.rank[1]||a.rank[2]-b.rank[2]||a.objectiveId.localeCompare(b.objectiveId));
  const paragraphs=[];

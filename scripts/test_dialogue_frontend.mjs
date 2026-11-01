@@ -829,6 +829,23 @@ test('classical close reading shows paragraph progress and an achievement the mo
  assert.match(line.textContent,/先做無注疏初讀/);
 });
 
+test('study-guide items show in the paragraph line, and their answer appears only on the achievement card after a pass (r40)',async()=>{
+ const item=(status,extra={})=>({objectiveId:'s1',type:'古今異義',prompt:'解释“要誉于乡党朋友”中“党”的古义。',sentence:'要誉于乡党朋友',status,attempts:status==='confirmed'?1:0,...extra});
+ const words=[{objectiveId:'v1',word:'要',sentence:'非所以要誉于乡党朋友也',status:'confirmed'}];
+ const guide=(s,extra)=>({version:'yw-paragraph-guide-v2',phase:'close_reading',order:['v1'],itemOrder:['s1'],paragraphs:[{passageId:'p2',ordinal:1,opening:'所以谓人皆有不忍',confirmed:1,total:1,itemsConfirmed:s==='confirmed'?1:0,itemsTotal:1,words,items:[item(s,extra)]},{passageId:null,ordinal:2,opening:'通篇',wholeText:true,confirmed:0,total:0,itemsConfirmed:0,itemsTotal:1,words:[],items:[{objectiveId:'s2',type:'理解',prompt:'概括全文',status:'open',attempts:0}]}],focus:{passageId:'p2',ordinal:1,of:2,opening:'所以谓人皆有不忍',confirmed:1,total:1,itemsConfirmed:s==='confirmed'?1:0,itemsTotal:1,words,items:[item(s,extra)],next:s==='confirmed'?null:{kind:'studyGuide',...item(s)}},confirmedWords:1,totalWords:1,waitingWords:0,confirmedItems:s==='confirmed'?1:0,totalItems:2,waitingItems:0,wordsComplete:true,complete:false});
+ const score=earned=>({status:'ok',rule:'legacy-track-weights-v2',earned,max:100,remaining:100-earned,tracks:[{key:'vocabulary',label:'詞級疏通',weight:30,points:earned-80,status:'partial',progress:{confirmed:1,total:3},next:'x'}]});
+ const base={ownerRef:'owner-a',revision:1,turns:[],sourceSubmissions:[],readingGate:{phase:'close_reading',unresolvedMarks:0}};
+ const f=await fixture({initial:{...base,paragraphGuide:guide('open'),state:{next:null,objectives:[],targets:[],completion:'in_progress',score:score(90)}}});
+ f.frontend.update({...base,paragraphGuide:guide('open'),state:{next:null,objectives:[],targets:[],completion:'in_progress',score:score(90)}});
+ const line=f.document.getElementById('paragraph-progress');
+ assert.match(line.textContent,/本段字詞 1／1 · 本段學案 0／1 · 全篇 1／1 · 學案 0／2/);assert.match(line.textContent,/古今異義/);
+ assert.doesNotMatch(f.document.body.textContent,/乡党、乡里/,'no answer before a pass');
+ f.frontend.update({...base,revision:2,paragraphGuide:guide('confirmed',{reference:'乡党、乡里。',explanation:'这里指同乡邻里，不是现代政治组织。'}),state:{next:null,objectives:[],targets:[],completion:'in_progress',score:score(91)}});
+ const card=f.document.getElementById('achievement');
+ assert.equal(card.hidden,false);assert.match(card.textContent,/學案題讀通了：古今異義/);assert.match(card.textContent,/乡党、乡里。/);assert.match(card.textContent,/同乡邻里/);
+ assert.match(card.textContent,/學案 1／1 · 全篇字詞 1／1 · 學案 1／2 · \+1 分（本課 91／100）/);assert.match(line.textContent,/✓ 古今異義/);
+});
+
 test('a turn left without a reply and without a retry tells the student the words are saved and to simply go on (r35)',async()=>{
  const student={id:'student-one',role:'student',content:'我的原答案',status:'needs_review',createdAt:'2026-10-20T03:28:42Z'};
  const f=await fixture({conversation:true,initial:{revision:1,turns:[student],partial:null,replyRetry:{turnId:'student-one',allowed:false,code:'provider_attempt_limit',requiresUserAction:true}}});
