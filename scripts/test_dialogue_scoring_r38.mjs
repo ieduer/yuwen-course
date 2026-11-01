@@ -29,7 +29,7 @@ test('a plainly given self-rating is recorded in the forms students actually use
   ['评分：90/100。\n\n理由：亲历者的回忆。扣分点在于节奏略平。','评分：90/100。',90],
   ['60吧','60吧',60],['78','78',78],['我给85分','我给85分',85],['这篇我打100分','这篇我打100分',100],
   ['經過這一輪細讀，我會把分數從先前的 76 調到 82／100。','我會把分數從先前的 76 調到 82／100',82],
-  ['读了10分钟，我给 70 分','我给 70 分',70],
+  ['读了10分钟，我给 70 分','我给 70 分',70],['這篇我覺得有 85 分，因為結尾很安靜。','這篇我覺得有 85 分',85],
  ])assert.equal(rate(content,quote),value,content);
 });
 test('hedged, negated, conflicting or reason-only numbers are still not a self-rating',()=>{
@@ -41,9 +41,9 @@ test('hedged, negated, conflicting or reason-only numbers are still not a self-r
  assert.equal(explicitRating('我给 78 分。','我给'),null);
 });
 test('「通讀完了」 and a statement followed by an invitation to go on are reading statements; negation, question and hypothesis are not',()=>{
- for(const [content,quote] of [['我已经通读完了你可以提问了','我已经通读完了'],['我已经通读完了','我已经通读完了'],['看完了，开始吧','看完了'],['老师，我读完了','我读完了'],['好的，我读完了','我读完了'],['读完了','读完了']])
+ for(const [content,quote] of [['我已经通读完了你可以提问了','我已经通读完了'],['我已经通读完了','我已经通读完了'],['看完了，开始吧','看完了'],['老师，我读完了','我读完了'],['读完了','读完了']])
   assert.equal(readOk(content,quote),'已讀完',content);
- for(const [content,quote] of [['我还没读完','读完'],['我读完了吗','我读完了'],['等我读完了再说','我读完了'],['如果我读完了，你再提问','我读完了'],['我没有通读完','通读完'],['读完了？','读完了'],['读完了但没看懂','读完了'],['我已经通读完了吗你可以提问了','我已经通读完了']])
+ for(const [content,quote] of [['我还没读完','读完'],['我读完了吗','我读完了'],['等我读完了再说','我读完了'],['如果我读完了，你再提问','我读完了'],['我没有通读完','通读完'],['读完了？','读完了'],['读完了但没看懂','读完了'],['我已经通读完了吗你可以提问了','我已经通读完了'],['好的，我读完了','我读完了'],['第一段，我已经读完了','我已经读完了'],['读完了，不过只读了第一段','读完了']])
   assert.throws(()=>readOk(content,quote),/reading_acknowledgement_not_verified|original_evidence_not_student_quote/,content);
 });
 test('an original first-read impression before three marked doubts is refused as a part, before the source is asked',()=>{

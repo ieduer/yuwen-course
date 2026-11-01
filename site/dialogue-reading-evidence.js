@@ -4,18 +4,20 @@ export const CONVERSATION_POLICY_VERSION='yw-author-conversation-v2';
 // A leading greeting or vocative clause (「你好，我已经读完了」) is not part of the statement.
 const GREETING=/^(?:(?:你好|您好|老師好|老师好|老師|老师|嗨|哈囉|哈喽|hi|hello)[，,、\s]*)+/iu;
 const withoutGreeting=text=>text.replace(GREETING,'');
-// r38: a statement may share its sentence with a separate clause (「看完了，开始吧」) or, typed without punctuation, run
-// straight into an invitation to go on (「我已经通读完了你可以提问了」); a sentence that negates reading, is hypothetical
-// or asks a question never counts, and the statement must still be a whole clause or the start of one.
+// r38: the statement may open its sentence and be followed by a separate clause (「看完了，开始吧」) or, typed without
+// punctuation, run straight into an invitation to go on (「我已经通读完了你可以提问了」). It must still open the sentence
+// (「好的，…」「第一段，…」 stay refused), and a sentence that negates reading, is hypothetical, asks a question or limits
+// the reading to a part never counts.
 const GO_ON=/^(?:你|您|老師|老师|可以|請|请|開始|开始|接下來|接下来|然後|然后|咱們|咱们|我們|我们|下面|那就|現在|现在)/u;
-const NOT_READ=/(?:沒|没|未|不)(?:有)?(?:通|全)?(?:讀|读|看|閱讀|阅读)|如果|假如|要是|等我|等到/u;
+const NOT_READ=/(?:沒|没|未|不)(?:有)?(?:通|全)?(?:讀|读|看|閱讀|阅读)|如果|假如|要是|等我|等到|只(?:讀|读|看)|(?:第|前|後|后)[一二三四五六七八九十\d]+(?:段|節|节|章|句|行)|一部分|一半/u;
 function explicitStatement(turn,quote){
  // A model must not cut an affirmative word out of a negation or hypothetical.
  const q=withoutGreeting(quote.trim().replace(/[。！!]+$/u,''));
  return (turn.content.match(/[^\n。！？!?]+[。！？!?]?/gu)||[]).filter(s=>!/[？?]$/.test(s)).map(s=>withoutGreeting(s.trim().replace(/[。！!]+$/u,''))).some(sentence=>{
   if(sentence===q)return true;
   if(NOT_READ.test(sentence)||/(?:嗎|吗|呢|麼|么)$/u.test(sentence))return false;
-  return sentence.split(/[，,；;、]/u).map(c=>withoutGreeting(c.trim())).some(c=>c===q||c.startsWith(q)&&GO_ON.test(c.slice(q.length)));
+  const first=withoutGreeting(sentence.split(/[，,；;、]/u)[0].trim());
+  return first===q||first.startsWith(q)&&GO_ON.test(first.slice(q.length));
  });
 }
 const FINISH='(?:通讀完|通读完|讀完|读完|看完|閱讀完|阅读完)';
@@ -167,9 +169,11 @@ export function explicitChoice(options,content,quote){
 // 「我給 76／100」「60吧」「评分：85分。…扣掉的15分」「我给 78 分。…值得 78 分」). Accepted forms: N分, N%, N／100, a clause
 // that is only the number (「85分」 after 「评分：」), or a whole reply that is only the number (「60吧」). The quoted words must
 // hold exactly one rating in a clause that gives it and does not hedge or negate; every rating the student gives in the
-// message must agree unless the quoted clause states the change (「從 76 調到 82／100」). Numbers in reasons are not ratings.
+// message must agree unless the quoted clause states the change (「從 76 調到 82／100」). Numbers in reasons (扣、因為) are not
+// ratings; a plain 「大概 120 分吧」 still reads as a rating (and is then out of range).
 const RATING=/(?:^|[^\d.])(\d{1,3}(?:\.\d+)?)\s*(?:分(?![钟鐘])|%|％|[／/]\s*100(?![\d.]))/gu;
-const GIVES=/給|给|打|評|评|分數|分数|值得|算|調到|调到|改成|改為|改为|調整為|调整为|定為|定为/u;
+const GIVES=/給|给|打|評|评|分數|分数|值得|算|覺得|觉得|認為|认为|調到|调到|改成|改為|改为|調整為|调整为|定為|定为/u;
+const DEDUCTS=/扣|減|减|丟|丢|少了|差了|因為|因为|原因|理由/u;
 const CHANGES=/調到|调到|改成|改為|改为|調整為|调整为|提到|降到/u;
 const BARE=/^(?:我(?:給|给|打|評|评|會給|会给|就給|就给)?\s*)?(\d{1,3}(?:\.\d+)?)\s*(?:分|%|％|[／/]\s*100)?\s*(?:吧|啦|了|呀|哦|喔)?$/u;
 const ratingsIn=text=>[...text.matchAll(RATING)].map(m=>Number(m[1]));
@@ -180,7 +184,7 @@ export function explicitRating(content,quote){
  if(!parts.length||!parts.every(q=>own.some(c=>c===q||c.includes(q))))return null;
  const whole=/^[^，,。！？!?；;：:\n]*$/u.test(content.trim().replace(/[。！!～~]+$/u,''))?BARE.exec(content.trim().replace(/[。！!～~]+$/u,'')):null;
  if(whole&&parts.length===1&&text.includes(whole[1]))return Number(whole[1]);
- const quoted=[...new Set(parts.flatMap(q=>{const c=own.find(c=>c===q)||own.find(c=>c.includes(q));return c&&!HEDGED.test(c)&&(BARE.test(q)||GIVES.test(c))?(BARE.test(q)?[Number(BARE.exec(q)[1])]:ratingsIn(q)):[];}))];
+ const quoted=[...new Set(parts.flatMap(q=>{const c=own.find(c=>c===q)||own.find(c=>c.includes(q));if(!c||HEDGED.test(c))return [];if(BARE.test(q))return [Number(BARE.exec(q)[1])];return GIVES.test(c)||!DEDUCTS.test(c)?ratingsIn(q):[];}))];
  if(quoted.length!==1)return null;
  const value=quoted[0];
  if(parts.some(q=>CHANGES.test(own.find(c=>c.includes(q))||'')))return value;
