@@ -26,7 +26,9 @@ const require=createRequire(import.meta.url);
 // replies, explicit recognition of a correct answer, merged learningTargets guidance, sourceDraft during an active
 // question. Neither delta changes a language criterion, an evidence rule or a verdict (lines 30-33 and the JSON /
 // evidence paragraphs are byte-identical to v11).
-const policyBridge={before:'b30b2257fec87625920f648797d8b89b6b9495c9e258599b54bfe800d041917c',after:'23a8990af440315e5d95f9bf5b5d563eb4f287e44ceabdf90b6023287b3f448b'};
+// (v22, r38, 2026-11-01) the lesson-score answer states the reading and self-rating points instead of calling them 不計分;
+// no language criterion, evidence rule or verdict changes.
+const policyBridge={before:'b30b2257fec87625920f648797d8b89b6b9495c9e258599b54bfe800d041917c',after:'9da95944efd13921f0d0ab4794a2fe4fcb77b2ed584b515d06001b7ec2dd3ec7'};
 
 export async function historicalCalibrationSource(commit){
  assert(/^[a-f0-9]{40}$/.test(commit||''),'exact historical commit required');
