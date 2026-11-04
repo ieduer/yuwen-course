@@ -1,3 +1,15 @@
+## Current 2026-11-04 — r42: lesson-1722-p2:v05 redesign as formal revision batch v2 (accepted)
+
+**Accepted:** source `c3eab77`, Pages deployment `73ebf3f0`, effective 2026-11-04T05:34:55Z; rollback to r41 `972b6381` (artifact `/private/tmp/cf-task-yw-bankfix-20261104/yw-r41/.release/site`, rebuilt from `a2d5179`, digest `a1da6a0e` = registered). The User Center went first (Worker `f6847c65` / deployment `9c33e38b`, source `f729f66`, 05:27:07Z).
+
+**What changed.** The old item compared 「以」 across four sentences, where C 「木欣欣以向荣」 and D 「余与四人拥火以入」 share the same use, and its explanation said 因果 against the textbook note (连词，表示结果). The new item asks for the use of 「以」 in 「同心而离居，忧伤以终老」; the answer stays C. An APIS 403 `STREAM_NOT_ADMITTED` is now `gateway_stream_not_admitted` (sent once, never replayed); APIS raised its contents cap to 96000 (APIS `7e2793b`).
+
+**Mechanism: several revision batches.** `REVISION_BATCHES` in `build_learning_manifest.mjs` lists `scripts/formal-revisions/*-v1.json` and `*-v2.json` in release order. Undoing them newest first must reproduce `6ceed2f6` (revision 1), `5bcdbb` and `e310` exactly. Batch-v1 items keep release `6ceed2f6` (now in `priorReleases`), batch-v2 items carry the current release. The manifest has `formalRevisions` (each policy with its release) and no longer `formalRevision`. An item may still be revised only once (one level of `revisionOf`); a second revision of the same item fails the build.
+
+**Acceptance (553, 1 Claude call, 45,405 µ$).** Before r42, the r41 producer's prior identity (5bcdbb) was accepted by the new User Center; after r42, the redesigned question was served and answered C under 83caa75b, accepted; the dialogue shows v05 preserved under the new rule. No dialogue session of lesson-1722-p2 existed before r42, so no frozen session needed the old question (covered by `test_dialogue_pilot`). 0 quarantine.
+
+**Known.** Native receipt re-signed to `8b73c933…` (「准，重簽 r42」). The App content pointer is still 2026-07-30: installed code-3 Apps require 191 reader documents and would reject the 189-lesson graph; the App grades locally and sends no evidence. The forum bold `**` left in 8 lessons' reading text is not fixed (owner undecided; fixing it re-pins all reader documents and the calibration evidence).
+
 ## Current 2026-11-04 — r41: 180 vocabulary corrections as an append-only formal revision release (accepted)
 
 **Accepted:** source `a2d5179`, Pages deployment `972b6381`, effective 2026-11-04T04:08:35Z; rollback to r40 `307566bf` (artifact `/private/tmp/cf-task-yw-r40-20261101/yw-r40/.release/site`, digest `703cb08c` = registered). The User Center went first (Worker `c47d1088` / deployment `4339bd2f`, source `5a1189c`, 03:07:33Z; rollback `5db645a3`). Status `20261104-yw-vocab-corrections` (yw) and `20261104-my-yw-question-revision` (my).
