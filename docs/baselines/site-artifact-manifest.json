@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
   "fileCount": 1493,
-  "totalBytes": 205156346,
-  "aggregateSha256": "d2789d819532e102ff8c758e538d27538f0b5dfe92ceba449765b4b319958832",
+  "totalBytes": 205156537,
+  "aggregateSha256": "bc356ecf1e3448e054d7a6bdc3520fbe2980cf1f94d00d9b3fc815f5b00789bd",
   "files": [
     {
       "path": "_headers",
@@ -18,17 +18,17 @@
     {
       "path": "_worker.js/_assessment-data/0.js",
       "bytes": 2094792,
-      "sha256": "38dba140c9e70f163c78ec2eb69dbc33dde71bb4d64c998ef257616ead8d9d3e"
+      "sha256": "f9a7c005dacb552d887cced254f39c35c3233cd4f79c01095fea25a3ddbd9965"
     },
     {
       "path": "_worker.js/_assessment-data/1.js",
       "bytes": 563015,
-      "sha256": "83c6646987a86e0830b8178e370a4cb00c974e98d329ed46ec1e7d58736682b6"
+      "sha256": "06a1f9a74c4c638d4b2017fe6d68411dab61484be9967d990d875ad9ecfbb983"
     },
     {
       "path": "_worker.js/_assessment-data/lines.js",
-      "bytes": 8443090,
-      "sha256": "36a472255420d58bbd19ad733daa6270bb039b3a5c72013fdd4725b9a83ae5a6"
+      "bytes": 8442989,
+      "sha256": "7e351be2938d333c96e27a1f0980fef8ef8a8476ce251eff7ac889ec534027eb"
     },
     {
       "path": "_worker.js/assessment-assets.js",
@@ -123,7 +123,7 @@
     {
       "path": "_worker.js/dialogue-calibration-status.json.js",
       "bytes": 9011,
-      "sha256": "30c33f8d2bf006f038d8e847802d4e21bb1e3553362a228b3f71cb4058f6fc2a"
+      "sha256": "399a87d91973b3e79be1d110f1af6db1975970da3294e0295d913061fcfcf550"
     },
     {
       "path": "_worker.js/dialogue-calibration.js",
@@ -202,8 +202,8 @@
     },
     {
       "path": "_worker.js/dialogue-material-context.js",
-      "bytes": 8492,
-      "sha256": "23f7f03c7070c1d4868182dd67b4165aa04cbfa8f079133c8389fb081ff1c753"
+      "bytes": 8888,
+      "sha256": "67ec60be39d5e13429336fdbc64bc42f2c777db356974139061daa7fd275a10f"
     },
     {
       "path": "_worker.js/dialogue-mode-admission.js",
@@ -383,7 +383,7 @@
     {
       "path": ".bdfz-release-artifact.json",
       "bytes": 44632,
-      "sha256": "f1e575522b89a21486b4850bcbd6ce4c19ca188612234519424f06ceb8ba9c34"
+      "sha256": "c01d3d20d313913c1e599cdd73d1d65f85b5ab7c5f3e3c3f6458d59bf21dfb6e"
     },
     {
       "path": "app-content/latest-stable.json",
@@ -4753,972 +4753,972 @@
     {
       "path": "data/reader-documents/index.json",
       "bytes": 47551,
-      "sha256": "38cebeba005d9eb4502336b14764deafa8993a3ae936d2f86a8bff3674b7821a"
+      "sha256": "988d6ca7b2a64e647feda672d58f0e39ab40b70a12b71192c50c61beeae97f69"
     },
     {
       "path": "data/reader-documents/lesson-11637.json",
       "bytes": 4658,
-      "sha256": "f7ab01ab879070c18ddcaae02ac72fa130ffb0030c68b063f22d546760d7f2c3"
+      "sha256": "f1440adde97806f6ebdca5ffb9c89f869c46c562cc54ce800995c0363c320246"
     },
     {
       "path": "data/reader-documents/lesson-11705.json",
       "bytes": 3073,
-      "sha256": "edfbca34889e4942b70739bf74acfd8ed353c2b82bef6576a54fec76a34b2d1d"
+      "sha256": "47a6bffcb5efbb0c64f1a5877da3d9bb7b7bb985b995ecc29374737bfc5f925c"
     },
     {
       "path": "data/reader-documents/lesson-1458.json",
       "bytes": 121769,
-      "sha256": "98fa0e9cb6805f7aa43b767bbee78bb70dd5932d21996b7bba956cc10da34a16"
+      "sha256": "854c1f8be4d0d07c4c6a6216802652ba3f021ec4f158ec92325f0d4d219a271e"
     },
     {
       "path": "data/reader-documents/lesson-1460.json",
       "bytes": 5671,
-      "sha256": "058eb969a766f4af5e90deb76904575d70245c0fe0b761c820e1558d0bdd4ea0"
+      "sha256": "55670915c97642ac51e959a4c7f56166dd20c1ea6eb6fdcdb85086c72ed881a5"
     },
     {
       "path": "data/reader-documents/lesson-1461.json",
       "bytes": 51679,
-      "sha256": "2c9f57455a2251749f1de1edeb6f0377a4b892ccc935b4899cf51ef5c382631c"
+      "sha256": "97aa88aec3611b0338a2ecb038e30db8d88f424edcb397f5a5fcdcb447e8cb44"
     },
     {
       "path": "data/reader-documents/lesson-1462.json",
       "bytes": 30041,
-      "sha256": "c3a42d4966edc095f0df0a8bbf5102d2f80f336a44287f9dcb95b62c24e27d62"
+      "sha256": "430c69bb075bf96b5b6bbf7fdcd735671053b3e96c4ccac83ac782ed31a31f0f"
     },
     {
       "path": "data/reader-documents/lesson-1466.json",
       "bytes": 20431,
-      "sha256": "6ab26023dee5f179f67fc92549fe24da4d14c286bb7c811025db8f5078fde0c9"
+      "sha256": "ea71361463330882c4fa18dd84403e6b777058cb13a01de37ea325c49612ee28"
     },
     {
       "path": "data/reader-documents/lesson-1468.json",
       "bytes": 111168,
-      "sha256": "896053c93f555357fe1c83e8cc5fb88b108c70fdd4eabd57f884403c9d0b69a5"
+      "sha256": "f473f27e344d51c0f78e3c303ae0ce61d4746dc139d1dd7caa2a92f8b832197c"
     },
     {
       "path": "data/reader-documents/lesson-1471.json",
       "bytes": 113233,
-      "sha256": "aeeb470561e6685260ee06d26c6a6d93d2307681fb22ea11b9869f3ed6eaafa2"
+      "sha256": "f6aea2e1b4d3484b12a13ae28a26c586ae70067c7931b61c5ffe2ad00d3aaeb7"
     },
     {
       "path": "data/reader-documents/lesson-1472.json",
       "bytes": 8889,
-      "sha256": "73f51b99a6b2679cb500193fcad4861adecc2df1cfe63ad4214cd78a4e0e1d2a"
+      "sha256": "5d8990c923bc17e0b5c40805ab31f349affb5e5e63bd1887dfed8e7ccb0e3cbd"
     },
     {
       "path": "data/reader-documents/lesson-1473.json",
       "bytes": 7965,
-      "sha256": "63aafc57f399f7a6de90154f4c214527382731f7f88709a42f63061989c5c915"
+      "sha256": "877c14a70953d19b6613ec6a19b8ffb619c86618bed5060626a2d2aa73e23ad7"
     },
     {
       "path": "data/reader-documents/lesson-1474.json",
       "bytes": 90904,
-      "sha256": "13de425c4c8a93318b3898c61a21313e145dfb486492196c6af8afce3f5da24b"
+      "sha256": "ef01a15cacd832d9b5b13d87d4a0403ef5df798f2bd85456c1bf5ab9559cc4bc"
     },
     {
       "path": "data/reader-documents/lesson-1476.json",
       "bytes": 50288,
-      "sha256": "d760fb616898532dbe9c6162f59cf1f0ca5fe89ff0ef71187a21d48ec03808f8"
+      "sha256": "c321a1ac824482bf9ada3ee7be6ba8e56d7cae19ade10b5efc0fe846f3023592"
     },
     {
       "path": "data/reader-documents/lesson-1477.json",
       "bytes": 51478,
-      "sha256": "b30ae72dde77b6e7d08a15116a2478b2a2c8533f5a1ca86115647de2fc578124"
+      "sha256": "7091dacf4cb0102c0c32ebabfe277d6a9b77d950f0e918ffaa91e3742517471b"
     },
     {
       "path": "data/reader-documents/lesson-1483.json",
       "bytes": 68255,
-      "sha256": "a48efe5d58de4af1e00b5864927801435355defbbd404a62a657e6aa79de146b"
+      "sha256": "9fd0af53e5265db99d4f51be1cfa7c1bbfb7f70b82471efc5bb1d792938dd01f"
     },
     {
       "path": "data/reader-documents/lesson-1484.json",
       "bytes": 20447,
-      "sha256": "db009290da8059e365fa8e51037bb51fa9a45035e0e1143b6310eeb95d8d0406"
+      "sha256": "4f8b2b0fa1723e8be38861f3d7cf4a19ac86692241ae004c49320522a678b03c"
     },
     {
       "path": "data/reader-documents/lesson-1485.json",
       "bytes": 51037,
-      "sha256": "5e26b9c311ad965405efcd06aa66092304035041c830f9ec8d2ea7e55ceb7fb7"
+      "sha256": "e12c7ff0b1fb481eb2c104cfb3970e19fb616a0b86c74f06800b37732a637983"
     },
     {
       "path": "data/reader-documents/lesson-1486.json",
       "bytes": 10944,
-      "sha256": "f18db0b5e39afbbbfc18b9238d97c479cb7e1502975cf46df46a0858e622ee39"
+      "sha256": "ddd870944723bc99f847c89e022ec9049007307fb84c9ff5303598124a3a2131"
     },
     {
       "path": "data/reader-documents/lesson-1487.json",
       "bytes": 62716,
-      "sha256": "8dcd5b88a4b5f2e638d4f5875aa38a6cb1ab92cd0f220ad2caec74d8e2976db4"
+      "sha256": "c960d50c445060cfd92f7768edddacc09c5aaaf01d3042538d830efe58f2f937"
     },
     {
       "path": "data/reader-documents/lesson-1488.json",
       "bytes": 60529,
-      "sha256": "ccdfb8e503b608c03633e87e2ee89d7ce95b5db2fc4624e25c1e2546f1b454e3"
+      "sha256": "f7a743b4f00d7f218251bf5beb27d554aa1a9508fed8a69e41c6eb61932d8080"
     },
     {
       "path": "data/reader-documents/lesson-1490.json",
       "bytes": 59483,
-      "sha256": "43995aa05ce06b07b2f730362231e24df0bc6397e4150e550bb2fa63a4469413"
+      "sha256": "7b007dae3bb93b92ef28361fb59dd84d971614156d9bf9553d9c61d536aa6b8f"
     },
     {
       "path": "data/reader-documents/lesson-1493.json",
       "bytes": 48320,
-      "sha256": "0a955c7549e70331abad3ce5dad30c9da240a5141a79f47b9e8e5f742f6811ce"
+      "sha256": "0f6ee1970ab92aa01ad1933f3b5848404fd29923f38a37fbb9a2aa9257f6bd98"
     },
     {
       "path": "data/reader-documents/lesson-1494.json",
       "bytes": 43480,
-      "sha256": "c6c7fbec2fb7d9fbd373da2c062758f2f4a888d4b133ef151ab3e16bb2f023f1"
+      "sha256": "f0cea881c217bf461556299b2663f4baa4677c75fafa050a5eda09b57bc8e54c"
     },
     {
       "path": "data/reader-documents/lesson-1495.json",
       "bytes": 9238,
-      "sha256": "4e787f21b7477ad6fa5cf714b0ec43a6f29ed778c4cfb46efa0e4442e8622181"
+      "sha256": "1872dc5683634325da0681b5a265cbb405dac9f99be076e483bd0f74b029a2be"
     },
     {
       "path": "data/reader-documents/lesson-1496.json",
       "bytes": 50047,
-      "sha256": "d5d40959edb6b290c4cc39c3021b3753fe2e4f3480c1fae53a40616d400b1a0a"
+      "sha256": "47779ed9ab799811fd535fe51b16bb9d2d9709e019d0ada05b20ce04b3b0c883"
     },
     {
       "path": "data/reader-documents/lesson-1497.json",
       "bytes": 10704,
-      "sha256": "bcedbf36c4296bdbffb0c4fcb72eb8020a35f85260396797f86f979fdd80dd39"
+      "sha256": "b8f035fded359e044eadfad64f888641e05ad7584c22c02a583cb0b35359ff10"
     },
     {
       "path": "data/reader-documents/lesson-1498.json",
       "bytes": 40896,
-      "sha256": "4552fb390c387748cd055690c60bfeefb1d94257bd8927c10c96fc1bc5b2d06c"
+      "sha256": "dc768ab6d7d5f917feb7ea346ebe934024ae8170c1b935d257d4044b5052edaa"
     },
     {
       "path": "data/reader-documents/lesson-1499.json",
       "bytes": 36908,
-      "sha256": "a23e05a676495ecb596ccfbc339fe1fe5ebec5b406260e48b69ed7de94f98309"
+      "sha256": "396263164ab2cb9ef332e674e73d04768249ce00b24927d39ce2c6bbf992182a"
     },
     {
       "path": "data/reader-documents/lesson-1500.json",
       "bytes": 29357,
-      "sha256": "5f7336cf7638b8084a733d48a5c7f80bbf1271a8831bed2f4ff0cde1c0e026f4"
+      "sha256": "d8eb79effaff80ad635c67c38cc91e74753d368f37771959927f9ce8cd502ec3"
     },
     {
       "path": "data/reader-documents/lesson-1501.json",
       "bytes": 5387,
-      "sha256": "cdf65b2735371c17e145111e5f6c5742fe3292d8a9802d2bf7e78423e62326a4"
+      "sha256": "41974d79d3b22d12b5c2ac0ae6771c3f65ebde6038a0b9b4c56dc8482237314c"
     },
     {
       "path": "data/reader-documents/lesson-1502.json",
       "bytes": 6014,
-      "sha256": "04128f842b59911358b792edf0c21fb6ffaf7d8caea8688877cc53a635fa79c4"
+      "sha256": "3d3462b37f5d5d3e8f1cb1f9e7571eb286b8df4846b8b61064d2a6b4ddd9d37d"
     },
     {
       "path": "data/reader-documents/lesson-1517.json",
       "bytes": 30687,
-      "sha256": "1491815b3fea81ee68654f84db03c32ce9bc0a8bc9490fcb78580a34ae75dfbb"
+      "sha256": "0e9c7e1a0838fd68a0833cca1371730129ab07c6d4ab68bff8cc84444c8c5b8f"
     },
     {
       "path": "data/reader-documents/lesson-1518.json",
       "bytes": 27841,
-      "sha256": "bd6fcc50f4bb5af5acfd36dc248b8afebbc65429bfea0e124f916b7323690950"
+      "sha256": "b9dacbb454e4d09df135333b5b17276ddd2362e75432e093b3eb6d07525d25de"
     },
     {
       "path": "data/reader-documents/lesson-1519.json",
       "bytes": 8000,
-      "sha256": "f345a70e710a7a2dd4ae985307012a4592acc6213671923913d810afef6c2921"
+      "sha256": "aaa7cc5c8b149dd0256f27aef2566cda73ec3df7219d992e3de9f756374f2ec8"
     },
     {
       "path": "data/reader-documents/lesson-1520.json",
       "bytes": 37461,
-      "sha256": "d98f8cfd2c50f65e17671517df3848d638d5c86fe1665caccca7d5bd810dab9b"
+      "sha256": "3eef66a05296faae5914a5b1df27f8b01bdde6cbad7fcebc1ab9a6a23f948491"
     },
     {
       "path": "data/reader-documents/lesson-1521.json",
       "bytes": 11977,
-      "sha256": "21d1a83bb578791c16435c7f5b62e4d0d9d8c2e633c0c336cd60cec93cef420a"
+      "sha256": "a9c5b44b338d45f1cfc35058318c907ee65504b3f98158351030d58abb55516b"
     },
     {
       "path": "data/reader-documents/lesson-1522.json",
       "bytes": 25634,
-      "sha256": "189254fec24d507f849c2d1af27661a89d57f2b698a794658beda7446669f0da"
+      "sha256": "4cec7e5944298a4f7af97a1e4e4eff2dbcc917e098d1c417030338686467fe4e"
     },
     {
       "path": "data/reader-documents/lesson-1523.json",
       "bytes": 19612,
-      "sha256": "2f514732ba76fb57020640735def0724f6194bd4dba2e7e85473038293d88041"
+      "sha256": "cd114419bb4ee9e08d0e84cde38a6efb60e9f98ed30a235d8c3ef729d6c3af9f"
     },
     {
       "path": "data/reader-documents/lesson-1524.json",
       "bytes": 9111,
-      "sha256": "69b1e096ff796ee8daf8331bf53031edb7a064e369b68de713b682c2df6f71ab"
+      "sha256": "14f47cdb92ac75834727a6c65c922f16f757f67d542831c807c3c67c25d5bea6"
     },
     {
       "path": "data/reader-documents/lesson-1525.json",
       "bytes": 5543,
-      "sha256": "cd80338cb71d73893b77f9b5cb88e3c3c90fc6cb2bf25f78c8e63d46d83c8014"
+      "sha256": "53c082d4b0cd878c2494b36690f415775135120ecce1116fd65ad88e421d15e4"
     },
     {
       "path": "data/reader-documents/lesson-1526.json",
       "bytes": 65638,
-      "sha256": "5b3c50899d86c67c6f3b27e06f9082fc63a6c369fb27e1e7cd70aa41e5d6bed2"
+      "sha256": "2398e2ba530c47ee72aba7f7b62cdf569b282594e00b4407869026b9242fdbc1"
     },
     {
       "path": "data/reader-documents/lesson-1527.json",
       "bytes": 62350,
-      "sha256": "f0c0a76ce7e6d4b89fad6033b164dc959e71135c11c756ce5c72edf70329b7f5"
+      "sha256": "12b99b48de62b14a5a0b2cdc75728551a1a0950575b02044fe2defd70748d6d3"
     },
     {
       "path": "data/reader-documents/lesson-1528.json",
       "bytes": 74199,
-      "sha256": "31bda8319d813d0d7e5e45f0185999a6b03d7b6531ea80324f9b2fbc10c8bb83"
+      "sha256": "860dc39538b78313da2f1310997c323b68740ae7d1ade3879274f6a59361b767"
     },
     {
       "path": "data/reader-documents/lesson-1529.json",
       "bytes": 34242,
-      "sha256": "cd940e6a23d8f7d885bd6bdc325dd7405ecd742b66b3d815b982c62550cabedd"
+      "sha256": "18bd49f8585a75117c09ed763b86ff221b7f87088147c6394f17ed415f42531a"
     },
     {
       "path": "data/reader-documents/lesson-1530.json",
       "bytes": 24429,
-      "sha256": "7ffcbdb7d559a3634831cb1e8266dfbb3aac14720b412258c73f047dd996be9e"
+      "sha256": "c28d195d920dabbf466d986efe781dbbb4420c94227ecfc1b577bea2fe73f331"
     },
     {
       "path": "data/reader-documents/lesson-1531.json",
       "bytes": 31732,
-      "sha256": "5c26539d9717b9e97d8278ec91016ace4f4a6672f196a4457466897d4df17b22"
+      "sha256": "a8c56ed9eea1e87ddb6c7f6c03a50091020376e5bdafcf460af71b8b0e137891"
     },
     {
       "path": "data/reader-documents/lesson-1532.json",
       "bytes": 6740,
-      "sha256": "882ca0402327578d7de852fcddc9d8f5f03ff9f53a7e81785626e0ec99665451"
+      "sha256": "04a59956d8c1aee7c9106a6ff7e1a2fffe94713126c1a39fe760446e654c0007"
     },
     {
       "path": "data/reader-documents/lesson-1533.json",
       "bytes": 5598,
-      "sha256": "bd56c73b3dbaf30a4a4e067fb7effdcfb4feac549f8f461cdbfd33964eade63c"
+      "sha256": "5c10622cb9f77ef4ed5fc9ea0bd16987cf5cccbfbe7755da8b2f56fce5e4bbdd"
     },
     {
       "path": "data/reader-documents/lesson-1534.json",
       "bytes": 157944,
-      "sha256": "b9d1f005c66c280a5aa288ca0459a2ed4553352bb6f23a98425b0fc95e820004"
+      "sha256": "452fb83276c49c03d7bf7120043e93392f4908838e670322ea14c89509ab5157"
     },
     {
       "path": "data/reader-documents/lesson-1535.json",
       "bytes": 142888,
-      "sha256": "105e358c29b0d094ce75f5f720a0691ce398eb0ddabcc404c4ef99f6b3e2f7d0"
+      "sha256": "678432390cd8c9d2d75d494a99817e1bf29574e44780d948444bb4334085480a"
     },
     {
       "path": "data/reader-documents/lesson-1536.json",
       "bytes": 70269,
-      "sha256": "4f2e2b520cef4847ede187245ee8ccb48fd489e83f660db1ad6ae8bd286b14ef"
+      "sha256": "c9f560ee199027800c24755267d5627f727b56953c3a200353779ae175dc2368"
     },
     {
       "path": "data/reader-documents/lesson-1537.json",
       "bytes": 29733,
-      "sha256": "5c502f6430dde3bcb7918610973c9814f207a13f07fa17e7695289e23efb42b4"
+      "sha256": "f47280a12de6419409f745098f4b77f183ee282aaec6a1e2dc2e98499d73ac5b"
     },
     {
       "path": "data/reader-documents/lesson-1538.json",
       "bytes": 7776,
-      "sha256": "05dd20117a47e42924482ce0cd1810f0ca5e1a53bc822d2e7807366c5d8829ea"
+      "sha256": "1cac254fd1ecf8f18d5ff2b859e4797842f10ed277f2a96544f156a0ea39ceae"
     },
     {
       "path": "data/reader-documents/lesson-1539.json",
       "bytes": 6118,
-      "sha256": "8ce75199c02e4943647fd8c63e05e1e52c4a07f674a7cb1b2a420d17ad455e58"
+      "sha256": "73601c3b8e1644cabff069f0f165f672a21abb09b0f7beb9368673478227e51b"
     },
     {
       "path": "data/reader-documents/lesson-1540.json",
       "bytes": 71264,
-      "sha256": "28d771a667cc449dc09b6a6bb532abbe1df0f53bf2bba5c0469369fbf97e7480"
+      "sha256": "bf14a73cfcd2882b0ae0f683558a76a3ebb6adfdbac58153d218f44f7af4923c"
     },
     {
       "path": "data/reader-documents/lesson-1541.json",
       "bytes": 11503,
-      "sha256": "0c1f00d4c486046010a5ca9dab8800b0ceb7a2ab5d2a3dcf7766ec74fc18f9f8"
+      "sha256": "77209dbbb095f2370d27883e2d0da1ba795bc7e46715b5a3749a0a7188003c97"
     },
     {
       "path": "data/reader-documents/lesson-1542.json",
       "bytes": 14050,
-      "sha256": "f6636d28dcda11f59b4d48bf8998b55ec5dfc8fc30f00b3a724d0caa1012d107"
+      "sha256": "92e4189aa5724badb95a6531f2af1a22c635df7c76fd26bae5a2c00fceb4af0c"
     },
     {
       "path": "data/reader-documents/lesson-1543.json",
       "bytes": 13061,
-      "sha256": "11bb151cc721cdc412c4d738860267525bb2a97f3fc344956dc29bc08a170b7d"
+      "sha256": "78ba017e9a927b801392d76b7375b35038e36e0044d531a33e250fd8d12901c9"
     },
     {
       "path": "data/reader-documents/lesson-1544.json",
       "bytes": 7020,
-      "sha256": "0f39ab36db3cb65c890b90a0cd6d0f0759f1fcde18f7db7b6860e4367e7ce2f9"
+      "sha256": "eac063fef3c846ae2438ec2efd39d5d0934256ec00b3a42ac28dd4e18069b3d3"
     },
     {
       "path": "data/reader-documents/lesson-1545.json",
       "bytes": 24316,
-      "sha256": "0c14cbb3c9aeabf691233b385959db54991ff3bcf081cacb6ffc44ca6fd2db16"
+      "sha256": "9c4196e5c381b3c79dd99cfdff8bf800e8e4685d0f90c73a57fd92fbbf8541a0"
     },
     {
       "path": "data/reader-documents/lesson-1546.json",
       "bytes": 6445,
-      "sha256": "b67a7e8697bbb69c95275d267cbcd9cf516c4310cee0d8421a8605786c797da2"
+      "sha256": "b1422432a7e4d8268754def5c77e513949894c914611e703222f38e25cceb78f"
     },
     {
       "path": "data/reader-documents/lesson-1547.json",
       "bytes": 58671,
-      "sha256": "9014e0d34099c11c96b140ace480720a8023b9d124f0a5dd3eeb96411d3b3641"
+      "sha256": "f08218a0ce0033592076177cc52469b3a0a311e782ce96f2aeeacaebcd31fdb7"
     },
     {
       "path": "data/reader-documents/lesson-1548.json",
       "bytes": 22676,
-      "sha256": "c9de8648723ebd9d752a8b0c6116513956a11d5038361e95db3b7f976aa09784"
+      "sha256": "b32721a94e16aef8856b4771e5c7fedf8c2b9f75c5ac20d02090aa9331f86eb9"
     },
     {
       "path": "data/reader-documents/lesson-1549.json",
       "bytes": 12017,
-      "sha256": "0343b206f577867723c44b7a782c0503ed264904aac1ea72baa699a9468ec691"
+      "sha256": "9cd8a16ee045b26c5e3243f7c77f216dd92673c88ceee0ab18169d907f2a68fc"
     },
     {
       "path": "data/reader-documents/lesson-1550.json",
       "bytes": 17516,
-      "sha256": "35e9660d7efd20aaac37c56a3ed65d9d42a9c536caad4bffa82baa86b2bc2a70"
+      "sha256": "7fa39be47caaf90ade7ec49e032a81903dbc54fb7813a16045073be4a381372c"
     },
     {
       "path": "data/reader-documents/lesson-1551.json",
       "bytes": 11944,
-      "sha256": "d92629688968fcfe0feff522ab11a1d3401a679008c68fa635bb42dd622f81db"
+      "sha256": "f8b71191ebb99416b7d435c764ff335aeb14b4191340652c1ab7e9e482bb11a6"
     },
     {
       "path": "data/reader-documents/lesson-1554.json",
       "bytes": 6077,
-      "sha256": "ff9d3fe7211fea121f4c178627ad0cf52d04791d5da6a0a96ee46aab558ae6c2"
+      "sha256": "779072b948d11ae6796060290738b56e695cb34c12a82f4ffef74cfe563e5657"
     },
     {
       "path": "data/reader-documents/lesson-1556.json",
       "bytes": 81675,
-      "sha256": "f760702361f7b7e2322021108d5316861e3292c35ef4b8712c13db6e93c174c1"
+      "sha256": "a872c5ee7341953ada47a70f6109c214c02849b1358185c5b4862f27fc2508ad"
     },
     {
       "path": "data/reader-documents/lesson-1557.json",
-      "bytes": 126299,
-      "sha256": "f42c7f7251ff663280357672906f7f4334b71f8593f0aae3bf302fc07a74947b"
+      "bytes": 126297,
+      "sha256": "c13d2e87c347b5dd76dd47f9823bc30376254a852f1672fdd2f4a669f1f5a16e"
     },
     {
       "path": "data/reader-documents/lesson-1558.json",
-      "bytes": 131754,
-      "sha256": "a4ae68db118963c7b59dc69cbec153c7f86b41971618ba8309450d75175f2ec0"
+      "bytes": 131752,
+      "sha256": "459280d5b7a8cb25b3b4bf6bd1c6af3b61ffbbe63ffedbf468d851346c8367a2"
     },
     {
       "path": "data/reader-documents/lesson-1559.json",
       "bytes": 43261,
-      "sha256": "7b3b652e4758a10ef6fc8216da1146707086564a24092c476e9d50a59cf800f3"
+      "sha256": "b56dac404c54cb2ec3389804a997551c349a2222bfe99bb5c4ea014e21944887"
     },
     {
       "path": "data/reader-documents/lesson-1560.json",
       "bytes": 17815,
-      "sha256": "23d0091d9864d8f256bf6516ecb9765631e84f411c26ded5be87ba91bfc24643"
+      "sha256": "a116bac8a7779a936dabfca5b3e011e7b5c2015749719dfbf9df5286d5815736"
     },
     {
       "path": "data/reader-documents/lesson-1561.json",
       "bytes": 18155,
-      "sha256": "50e8b2c2c78419481256f2d908df01cabe84acdfc3099ee7a156d7acbbf0237c"
+      "sha256": "ee36c346fa0bfb37bf56cc43c045b99cfc006d18bb2ff5d76d2dbceb30f5aa36"
     },
     {
       "path": "data/reader-documents/lesson-1562.json",
       "bytes": 16351,
-      "sha256": "93dbe3e9493b057c598bfd91d77a6fd75dabdac00ddb253b79c40c7c3dae58bb"
+      "sha256": "98977953fa9b98698ce9189aa301e25d4b6db02b804dfdf141f8703431823dac"
     },
     {
       "path": "data/reader-documents/lesson-1563.json",
       "bytes": 13651,
-      "sha256": "e49af8246f4beed182094ee8176252377c03d7f026f2d50d2f3848af851053ed"
+      "sha256": "f5b0d001bb80cc19225cde2192ea4740ae90bbb9ecab4e5ea73eaabe680e5aa9"
     },
     {
       "path": "data/reader-documents/lesson-1564.json",
       "bytes": 5784,
-      "sha256": "1691ed3f62b3073c872983c1dc25ac1adf814746a622ea6e5d70a52773153aec"
+      "sha256": "b132818fbf6efb3daedbf6a984b03eb7a3262f251f9ca13624e7dcb768622546"
     },
     {
       "path": "data/reader-documents/lesson-1565.json",
       "bytes": 55759,
-      "sha256": "0a44568d981de032a013fecb012226677efb25dcf14c2dc0faa1ad3e8b68d410"
+      "sha256": "848f128ddef582504d756eab3d3c0f558dc408942bbc497c5a8365ced8a2be1b"
     },
     {
       "path": "data/reader-documents/lesson-1566.json",
       "bytes": 54451,
-      "sha256": "70773608eec86727d805e00d1ee8ff4eb1aa745490ebb74d82097c39ba2b453b"
+      "sha256": "60020bc3c4c02432ebbf819181cca1d55f4e6674fcab762d954f28f5be3a87d8"
     },
     {
       "path": "data/reader-documents/lesson-1567.json",
       "bytes": 17828,
-      "sha256": "6b983ea72e10d040abeecbeaaa08c25992cfdc02c5b4b3dc1d2f7782a70aa22d"
+      "sha256": "a577c680f6a672a7397c097526eb6d7b0726106891d9d636b3092d055fe696dc"
     },
     {
       "path": "data/reader-documents/lesson-1568.json",
       "bytes": 11513,
-      "sha256": "f87d1d2b6246c68306221dde4ea08464e171958caf7dbe8893e0f69ccbc2b923"
+      "sha256": "5673b8a3c37f4086ad9052b77e185244342c74cbcb67dd6b327045db6b9028c4"
     },
     {
       "path": "data/reader-documents/lesson-1569.json",
       "bytes": 13115,
-      "sha256": "728c977559f196e5e952ad96e3d16c159f21d6e779eb5309a35db5d9c908ad9d"
+      "sha256": "ef346348a885e8ffc406c101cbeae77a744f1f4e5b65c2be1932d1162345a2d3"
     },
     {
       "path": "data/reader-documents/lesson-1570.json",
       "bytes": 21252,
-      "sha256": "878d4dac54c5f2f688eb2c0b8f1dd8c2a271a0feb619639ae88b735df696e34f"
+      "sha256": "d1765e12d09f28f78ef097fc68f4abd0fc5baa54d834713136c394e80e1c2355"
     },
     {
       "path": "data/reader-documents/lesson-1571.json",
       "bytes": 21636,
-      "sha256": "56978deeb3577248ff743fb7fa3041f5b59e81e24d8109dab12428fa51760692"
+      "sha256": "90a0f6bcb14a8295c97e5a8543277000701fefcf1d9d23004dc5f26c45e4de2a"
     },
     {
       "path": "data/reader-documents/lesson-1572.json",
       "bytes": 4448,
-      "sha256": "266c993a2fde4baca80eab018d193616882363f00736d03c4dd52b26c7466f6a"
+      "sha256": "c1a3f5183f2f001b39efb9afc66b74e95c476b0b1995805910c55aa493cf7f85"
     },
     {
       "path": "data/reader-documents/lesson-1573.json",
       "bytes": 68422,
-      "sha256": "5071b851970a7c993b497e4faafc63733789b93af0afef8e1c7b486aea1ee4cf"
+      "sha256": "e4d60eb9ee677ab4518378a2e437e760e11da352f66a8c4d2a05fd0d659f7bf0"
     },
     {
       "path": "data/reader-documents/lesson-1574.json",
       "bytes": 17063,
-      "sha256": "a3e4d8e2c84716593265bf22767c64b1eb55cf3a853040d58a594236cdf94f9c"
+      "sha256": "d9704da4dcee5fd0282d16f920354eed6bbb2dc14b8c0f0626cb669a2d6afe40"
     },
     {
       "path": "data/reader-documents/lesson-1575.json",
       "bytes": 11082,
-      "sha256": "7d652bef928f99f9a0b826f6c5b275dfc91d91e2f33e07bab37b8b24f2214ece"
+      "sha256": "a0994af6cec31e377761f04ec588c66fd14e5bae193a8e032c6b64e3e97af433"
     },
     {
       "path": "data/reader-documents/lesson-1576.json",
       "bytes": 68025,
-      "sha256": "59afb4c4bff72724775ae509dfc28a8d77614e821a26b51d534408b34fd37012"
+      "sha256": "05e8e1d79f85352f095b97183db810b74e331c3e172c38fb3e971b433d154b1e"
     },
     {
       "path": "data/reader-documents/lesson-1577.json",
-      "bytes": 90813,
-      "sha256": "b383a9683d200fdb3b1653d9bbff482096e96437783a71001f5b73417d21750e"
+      "bytes": 90809,
+      "sha256": "3321ead74e4d6ab7255482599179db23c25133301c20a0634594df76151911a6"
     },
     {
       "path": "data/reader-documents/lesson-1578.json",
       "bytes": 75250,
-      "sha256": "df4c686dcf295fc0cf291a0a43f01f66ac8793670d3b3eb83578e8825c555cd2"
+      "sha256": "713bc86287cf4e98ae6f2e51f41602b20911a8dbd8cf83b8bcfdead3dc4e3ff6"
     },
     {
       "path": "data/reader-documents/lesson-1579.json",
       "bytes": 189563,
-      "sha256": "f1a1c5249d375f5f7ef5a45ba40576c9dd9a764f180f1abf56e35b6c6f0bf90e"
+      "sha256": "f3e309508e98c2d823166a1d072c9ea1a64d55ce5b3802c4b1dd061790fceeeb"
     },
     {
       "path": "data/reader-documents/lesson-1580.json",
-      "bytes": 51921,
-      "sha256": "68af021dfac7f32cd6da2451a9d34ea04ecb3aabf2d59727c64aea7aafb14d01"
+      "bytes": 51917,
+      "sha256": "f4dc13b69b3876360c4ef4545a5e3b5f1d9cb86becc084a628a2b00c39a8b556"
     },
     {
       "path": "data/reader-documents/lesson-1581.json",
       "bytes": 59520,
-      "sha256": "a0419e8730753f55d1363a171302bafa657c290dacc77264baf8ff6d3dd1445e"
+      "sha256": "31135b2d4413d4f0f30efa0d9b2af8968ae89b505f1a3b5e23dd96941e043bc7"
     },
     {
       "path": "data/reader-documents/lesson-1582.json",
       "bytes": 13891,
-      "sha256": "e78fafe6307243130071c58b1febc5cb7d63479729de150af546730b93221c3b"
+      "sha256": "4ea2855d774e11ed0ea4412df61eaa75936e7c97b586736be0febb0e4f48b743"
     },
     {
       "path": "data/reader-documents/lesson-1583.json",
       "bytes": 6695,
-      "sha256": "a7a9e50b73f6f5228e9f16dbcb8b696b81ae57dddcca5fee925540190edc2b91"
+      "sha256": "6d78f9f8933163f66b334eee5e4a937fc43d500d9bb98bf19f5d358c0386d966"
     },
     {
       "path": "data/reader-documents/lesson-1584.json",
       "bytes": 28190,
-      "sha256": "bdf9c97767bd86c5449e1f5f230719cc3214d17c3cee0404ffbdd6fbec2bc188"
+      "sha256": "53935919cc3d714dcd08d6a4a896379573e2dc5567025f2d36e17f0604f2d151"
     },
     {
       "path": "data/reader-documents/lesson-1585.json",
       "bytes": 32161,
-      "sha256": "0c79fb4c25761c609ffa07edf532049514cbbfcaf2446e5bb5da187c5d16e325"
+      "sha256": "7a27d6d2e099cd335edb5c5ed567cec3fa5114ff487667b358b873da9edd4492"
     },
     {
       "path": "data/reader-documents/lesson-1586.json",
       "bytes": 92849,
-      "sha256": "22721416a8ec35c74725af7f52ea43a352df2fd0c8081af2f0890927b431a072"
+      "sha256": "1c110cca0642ee6905babe7dcd10f1aa4e935322bd34676a9582e215746fbf05"
     },
     {
       "path": "data/reader-documents/lesson-1587.json",
       "bytes": 10980,
-      "sha256": "884ba887e49e12d98c7402bbf75db5de84f9f63cde67d9ab373bdf292398bc60"
+      "sha256": "c54bcb05f5e32a89b17ec6a7a3382243376f13ff6ce6341e39aaed144dfa0a94"
     },
     {
       "path": "data/reader-documents/lesson-1588.json",
-      "bytes": 13472,
-      "sha256": "61bd5ed7891816ca9ac29e7b39f15c182febc963b42957edeeb08651766b8674"
+      "bytes": 13460,
+      "sha256": "81428e2b46de49bcd4b1bf748801d387bc2dab3081d9ef84d967fabe43d9b41d"
     },
     {
       "path": "data/reader-documents/lesson-1589.json",
       "bytes": 13424,
-      "sha256": "7484a9638215ec2973948484bb51d7b0a8bb8b184464df814fc455730034d0a8"
+      "sha256": "ac6167209d56657d785325182df76b5e8fbcd6090d6d061945decc5eac85d592"
     },
     {
       "path": "data/reader-documents/lesson-1590.json",
       "bytes": 27245,
-      "sha256": "6c27bb3d5a9ab5c7e2b26fb942384f753e43640a1f978f1b1c4ef80d943860fe"
+      "sha256": "df410984315f420c8c7c46f531ddda25bdc7d3b6b8eb7d982acab289865abfdb"
     },
     {
       "path": "data/reader-documents/lesson-1591.json",
       "bytes": 23926,
-      "sha256": "19eed9d18b8285bb4c4b8194df54a87e0325498dd94565d7a6a9af0d1a3aa6f9"
+      "sha256": "f240a740b18ede21336673cc003d99c958d8684c9130e1060c173af7cea67505"
     },
     {
       "path": "data/reader-documents/lesson-1690.json",
       "bytes": 3732,
-      "sha256": "e7c163050f22129aea64efcdd6b89ef3070fd4501c0f5bfeb6131eeb68b1ee66"
+      "sha256": "c0c79d7c4a5a0c259c79575b788890201abbe8133a57e1dcfac3243aca019954"
     },
     {
       "path": "data/reader-documents/lesson-1691.json",
       "bytes": 16890,
-      "sha256": "a9cbaee34053354a69c7a0e197ba5ec42f50d7d0caef2a1ee085468f1735e5c9"
+      "sha256": "14d14ee9ab0945cbc335f25eb3fb42fbc11f29472409fdcc9c711c5cc8640aa4"
     },
     {
       "path": "data/reader-documents/lesson-1692-p1.json",
       "bytes": 6221,
-      "sha256": "ea66439677436094fe5c681e490ee03fe58598ab92ab720b1e350c90a6b25393"
+      "sha256": "beff659f75dbe6130740b1d4137da55e9b1a0aa335719aacd5536150817eafda"
     },
     {
       "path": "data/reader-documents/lesson-1692-p2.json",
       "bytes": 6997,
-      "sha256": "7e2bab700f6db64b942d81b882549db22f68663a83b1a9f64d04a52f1e90b0cc"
+      "sha256": "4cf7702c3d9b7f99f1db1a3cb5d8f41ece0dc280704826b4333cafcc2672870f"
     },
     {
       "path": "data/reader-documents/lesson-1692-p3.json",
       "bytes": 6721,
-      "sha256": "863100fa2da2e5f92a458f758e0cf46bb39b0dba5b6fe79c50a9c0cb278d96f7"
+      "sha256": "7156df669af958b149f47bddf44396cfb5cc3b0eb38d7eb014cb1514d4dd472f"
     },
     {
       "path": "data/reader-documents/lesson-1692-p4.json",
       "bytes": 9985,
-      "sha256": "9961c2800ddb622378dd05f415e15ec00f35ae64065de2bee1db9ae46d0578f4"
+      "sha256": "73bde7301855201b1d06414fc833d5ca9303a06ac5ab3ce0626dadacd5342548"
     },
     {
       "path": "data/reader-documents/lesson-1693.json",
       "bytes": 26546,
-      "sha256": "74514257c380183d9aba82094bfbcec66dddfd916741117a488b50b76b39e906"
+      "sha256": "bff7ffc833e4de97c1b62396125d38af24adf85f50dea16ed3be1c11ddad724f"
     },
     {
       "path": "data/reader-documents/lesson-1694.json",
       "bytes": 35645,
-      "sha256": "f3598faa3f9bf2d80c50f03a0422da4a5b41aee387d8bed544f7fdfc22ab6274"
+      "sha256": "6416b52c99ca2b69f1d408ff4278efb5f44d035b957a4ea266a940e2378c0a4c"
     },
     {
       "path": "data/reader-documents/lesson-1695.json",
       "bytes": 6809,
-      "sha256": "8c678a3cd0f436c9a0f2bf98b90358a417daba0046043cc4fb92bd321cd357e6"
+      "sha256": "2ff0d0e27056ba805438780ac594fed80cdddb12698b1dcff3b689c69c2e3d0b"
     },
     {
       "path": "data/reader-documents/lesson-1696.json",
       "bytes": 4436,
-      "sha256": "13e272c56ff546fdd13c953b209ee38fbd9a2fc0f3c08272554b27a4b4556e21"
+      "sha256": "784ed5350f600a4509c0db136a4ea66322f442000a4deb75a92eb8adc960887e"
     },
     {
       "path": "data/reader-documents/lesson-1697.json",
       "bytes": 25735,
-      "sha256": "fbb37d221892c4e6da034cfd25c56a9080478d26f0163e91768bb94ace57a3ad"
+      "sha256": "2b347a1418d9b11a8fff9c90cb5ef9fcabb607a764cb577de0d898c99aa078f7"
     },
     {
       "path": "data/reader-documents/lesson-1698.json",
       "bytes": 15728,
-      "sha256": "ecaf6f7f50a3ab86197fc5d5b2666c4471e5077996bbaaf50d3d166103c72313"
+      "sha256": "7900741d814d0d41174a1866235dd90dd26df7ca3bc76b6694a7fc33b75edf4e"
     },
     {
       "path": "data/reader-documents/lesson-1699.json",
       "bytes": 24459,
-      "sha256": "ea1604d75155ea070fb00fa5c5c1eaec6c2328d8ff9fd1264279a3481add6772"
+      "sha256": "3e3589df372c95084528d7823026059c5fbd121e53d972f966dd85cde05e6a56"
     },
     {
       "path": "data/reader-documents/lesson-1700.json",
       "bytes": 7265,
-      "sha256": "3a7fe46a466de3bd7b555f365986df959ac3f184af7042a997479160802f2123"
+      "sha256": "b28940a19b42250bbb669f3446d4f344481bf5735e0d0b372b5244e46164ca04"
     },
     {
       "path": "data/reader-documents/lesson-1701-p1.json",
       "bytes": 8950,
-      "sha256": "04298f5aa608aad22bbc2d66b9a51b39f4e6645dffcd8d897d82c5f5e1b8118c"
+      "sha256": "029eafa9b6dc3d4ee49b374fead6d48ba0007463580bd54586a45ccae1a3b78e"
     },
     {
       "path": "data/reader-documents/lesson-1701-p2.json",
       "bytes": 8727,
-      "sha256": "048083dd8885e90f4e32b2819ff7f38515711b63391fb20f812d46dcebe82d37"
+      "sha256": "448313cab607d5d3546a376415dc8d357034121bfcaf73b7f66b294b4533223a"
     },
     {
       "path": "data/reader-documents/lesson-1702.json",
       "bytes": 8750,
-      "sha256": "37506419bf3c18497a6e49d7dced65e52af89a6d81a1fe33a62a75d41f80c63d"
+      "sha256": "98bb16a860400e32868d08cbf160484fcf90166f988797c1effb1d0005ef26f6"
     },
     {
       "path": "data/reader-documents/lesson-1703.json",
       "bytes": 4893,
-      "sha256": "909d97b738daadda7b8a42222bed6fc929f1a07dc4a385ef66f0e517790c25bf"
+      "sha256": "21e7f2d12535dcd5a3ffcea3d17aa24aa5fe7fdb7e89f32c445d5353262da151"
     },
     {
       "path": "data/reader-documents/lesson-1704-p1.json",
       "bytes": 21073,
-      "sha256": "d6270a4608541cda10a5b090d0fb077c56adc5e2fd282d704c6eda99ed6fea2e"
+      "sha256": "184e455f44a39bc9392ff9706add3654644a70428f57e5e50308fa01d3d8c13c"
     },
     {
       "path": "data/reader-documents/lesson-1704-p2.json",
       "bytes": 20663,
-      "sha256": "9a69239abef03b8edc4be2509e7fd02630c55ae697032545d0624a0902c5a9e8"
+      "sha256": "71e0669e14a1fc13a81d3b8ae4783ded326ede2fb2ba2a2b28ea03e0943e51d6"
     },
     {
       "path": "data/reader-documents/lesson-1705-p1.json",
       "bytes": 64326,
-      "sha256": "a0732b5a84a87295ff78230c8e5f9172aeb36fd5eaa11508625e73d8a2ee3fb1"
+      "sha256": "4bceb7188aad9fa8c5997262d01d23cca419b446559631f67614c27b981e749d"
     },
     {
       "path": "data/reader-documents/lesson-1705-p2.json",
       "bytes": 56074,
-      "sha256": "07483610db209d5aff025a7fa91b82a3a6d44e5f3e1e96d794fe3c98102e7464"
+      "sha256": "45dbf53852eb3a23a99a5b00b89241524a7dd4b364d5f3b903378dceb91b6391"
     },
     {
       "path": "data/reader-documents/lesson-1705-p3.json",
       "bytes": 75653,
-      "sha256": "2711315171662f4e3361d9adfc4e03ccf5abfac5ef3071b1f8bf40ce3a9ddc26"
+      "sha256": "8757fb123eee09bb8eabb1ec39a9256a2d52edff8d01f7b284c8ed785a00ece6"
     },
     {
       "path": "data/reader-documents/lesson-1706-p1.json",
       "bytes": 19571,
-      "sha256": "56b472221d6482786d32f246894bb2b0014e4c2fb121543eabec1f80eaf7260f"
+      "sha256": "a059eb8805fa8e00d3c7a89e3171e8afa38b26f11d7301dc38b2a354d46c6e97"
     },
     {
       "path": "data/reader-documents/lesson-1706-p2.json",
       "bytes": 20787,
-      "sha256": "7d2fde7c9db84e4bb30672d24566756d1cc6b7ddcc99fa569d7556a18730f967"
+      "sha256": "364eb5c0d7bf73b92637c097e6ef475eb18a6b45abeb2c8bd5c98057ccc8d721"
     },
     {
       "path": "data/reader-documents/lesson-1706-p3.json",
       "bytes": 19094,
-      "sha256": "5d594ba4e388b0d32df08bdc4d02b55ce89d799f56ed2a849f02c6187cee3dc3"
+      "sha256": "9a4ce55ad94092752b0b2a856c36d8aeb0c749ddf12fd54f3ccdef75ad51264c"
     },
     {
       "path": "data/reader-documents/lesson-1707.json",
       "bytes": 6217,
-      "sha256": "08db8e1fd7e5e5df00f7d6f3969afda56c8e96ec44f60e1a0e2dbb6413ed3406"
+      "sha256": "bac92d3b2af782ec27e32d07e8e27bcef04825bceb8a7a18661df01036a6fc19"
     },
     {
       "path": "data/reader-documents/lesson-1708.json",
       "bytes": 33309,
-      "sha256": "f4b320a80b2f7caee73aba622e2a903cac00d036aa0c20b4eadef676ead383e2"
+      "sha256": "3a7206fd790abcb94eb70ac26f4c86d6f310627e78df167e74c7b50c21bc5b56"
     },
     {
       "path": "data/reader-documents/lesson-1709.json",
       "bytes": 16055,
-      "sha256": "675678d985877d52e85b179c50b3287e0d06d538082cf3bf9bf6f1537b6c5564"
+      "sha256": "a4c80723225e32b73628934b5df45ddde550aa2f8282cd18b00de5e56274b244"
     },
     {
       "path": "data/reader-documents/lesson-1710.json",
       "bytes": 4303,
-      "sha256": "1d8229ecaa7797d709add32489f2a07a2fac2fb038047af235e14e2e83839548"
+      "sha256": "c9bb8dd51ab88dda21b90b74d081b1ea8cac977a137c2b2977e20b739669d41d"
     },
     {
       "path": "data/reader-documents/lesson-1711-p1.json",
       "bytes": 32667,
-      "sha256": "6f8ad690ac8b10d728b46c0418bfe040138fe0f1f903ca8b12665d95ce85873e"
+      "sha256": "212fb91cee1a559372b04dbef1283035692c97d24d4426f25507b6a296c8da71"
     },
     {
       "path": "data/reader-documents/lesson-1711-p2.json",
       "bytes": 41993,
-      "sha256": "6731d9ce763cdbd21c18fc92c0b849182652d5371a351ec1eb308204672f8b3a"
+      "sha256": "722409098dde7c1d120e363f4b879f41dbf0b0ecc85e1bbd5d7d49e790966923"
     },
     {
       "path": "data/reader-documents/lesson-1712.json",
       "bytes": 24604,
-      "sha256": "61388a01342b2ef7785d12a9fdfb6f10a4ac47069cd797be127edc31ea7ccaae"
+      "sha256": "61327cdf4634eb6cae2c4eb5b67008ad61f7063db26515485eff028b46babb16"
     },
     {
       "path": "data/reader-documents/lesson-1713.json",
       "bytes": 22031,
-      "sha256": "a0b252c520b45fd2796e769960094018401e4a24abfdf4adaa696c0586b68d2e"
+      "sha256": "071ade7b99b7e5e088d400b8b8aac4c380ca0ab940af0feae0820be62a66961f"
     },
     {
       "path": "data/reader-documents/lesson-1714.json",
       "bytes": 21210,
-      "sha256": "73c82114a473c10e7cea3072d308cef3904074fdb1935052de8ea832045d8640"
+      "sha256": "6cdd557c31a5e72d8c25e45a82cd52a06a4bb47fcf39d4d38fc9e0600c1094e7"
     },
     {
       "path": "data/reader-documents/lesson-1715.json",
       "bytes": 6612,
-      "sha256": "71365d615ae95a625136267a26828849326f630067750587827872290c6a5385"
+      "sha256": "7f8d5712ca5e0a509634d6b6f511b73fd46e950647ea6fc926b639f146602dbe"
     },
     {
       "path": "data/reader-documents/lesson-1716.json",
       "bytes": 4477,
-      "sha256": "4bda38b83f7aca7d3e0016e7938df4121f6d057cae4186d73521c82e8cd8c0a9"
+      "sha256": "591a7c6cc425e81b92907ad4205fca652c074b84f3e5e7c365a3bcc6c4cf7cee"
     },
     {
       "path": "data/reader-documents/lesson-1717-p1.json",
       "bytes": 21600,
-      "sha256": "4c8e51eeefee51b0a8c88e872379cb8295189badbb68c31bae3633cc3351eac3"
+      "sha256": "0237c8357b03f869696ee6f1da7e7ea6dcd44cd59c220a73163530b822e70a4a"
     },
     {
       "path": "data/reader-documents/lesson-1717-p2.json",
       "bytes": 21667,
-      "sha256": "bf6a5a1d0e4023e0b34552e1469c22a43ddf4819b4bfdabe368cf1d468128b5a"
+      "sha256": "73f90181508c15f7ceb9642b474f4f06433c9ba20d93cbfa553ff38267f06b99"
     },
     {
       "path": "data/reader-documents/lesson-1718.json",
       "bytes": 20424,
-      "sha256": "7a040491cbeff7f83ead7c6ed1b55830eb4b84c4f76929d81259079640362ade"
+      "sha256": "6b954e639c10d157956a937d91c785a3edf7e834bb899977c071cebd5e1af385"
     },
     {
       "path": "data/reader-documents/lesson-1719-p1.json",
       "bytes": 43285,
-      "sha256": "1e84251876472b9f963acdb8ae06b4b456315944721a998cef434cc5780acd98"
+      "sha256": "57f99f63b9800f7e4ac8680aacbf09ce8c46ed0aae64af1d02e67f8c564ff90f"
     },
     {
       "path": "data/reader-documents/lesson-1719-p2.json",
       "bytes": 35492,
-      "sha256": "f15cbc7f436f6e73deb8e6532d3f5926821b6104cbf7732c8f4a77e74abebb16"
+      "sha256": "f8eaf7aa979d3aeac46194584cf1e19aa4c512c68cf9219d5526dbee63af99ca"
     },
     {
       "path": "data/reader-documents/lesson-1720.json",
-      "bytes": 8397,
-      "sha256": "880156d858583fe641f11ddeb5239ca3d0f92891499cbd4c89ea20546169cc6b"
+      "bytes": 8393,
+      "sha256": "a7d39d7e5fee311e9e6f69c20a6e08898ae58fc9ce86c2b526e8de317ba302b2"
     },
     {
       "path": "data/reader-documents/lesson-1721.json",
       "bytes": 56545,
-      "sha256": "fc939c5b25c04846a23f48e5cd3eee27f4612319431947478d65c18710b02cbe"
+      "sha256": "f79da632f4a4d506a868c26caf6b9954ad67b4c3f708b5c4aff1f2932d28078b"
     },
     {
       "path": "data/reader-documents/lesson-1722-p1.json",
       "bytes": 10726,
-      "sha256": "71f107a9f6530a49ad38f1ef7f23fcadd35925d40c3836af1fac8e46114f79b5"
+      "sha256": "609885229bfce33a0e1ac56b8c2c5973a3608d6bcc0c5c10b98adc97ae9e3b49"
     },
     {
       "path": "data/reader-documents/lesson-1722-p2.json",
       "bytes": 4964,
-      "sha256": "d11350d9adcbf9eb0cdd879ebc4fe848a4fdaf2fe43194ef12caa5fdbf29f9cd"
+      "sha256": "1a69f430092d878a9c140131cd3025cfe81c57f99ab40a7f97f6984adaae771b"
     },
     {
       "path": "data/reader-documents/lesson-1722-p3.json",
       "bytes": 6436,
-      "sha256": "54d87b282c68e65f3a509cfcb93e5ede2841770c6329caaefb6f8bc1a253a9e9"
+      "sha256": "0b028c2cd1c7810ba82a320dee26d9f77b00b6840cf8c8c73e6fc084995b9c38"
     },
     {
       "path": "data/reader-documents/lesson-1722-p4.json",
       "bytes": 7984,
-      "sha256": "15bfd34961b9586e7de5806b03f764cf3dca1b26b4fefc343cf65caa70332625"
+      "sha256": "51484dd53da73a6a3cd85ffb6ff8a25f0289db951e19c46fe8a0f502f9437a6d"
     },
     {
       "path": "data/reader-documents/lesson-1723.json",
       "bytes": 3278,
-      "sha256": "e7c7df27ae1cb183e0957918fa515627ab8fe67d20593d6f5c3f4a977da90a7e"
+      "sha256": "4a0929c601cb4abc1a700e3930482deb4f0018a09b7454f7801b33025c8d9550"
     },
     {
       "path": "data/reader-documents/lesson-1725.json",
       "bytes": 3895,
-      "sha256": "19bc122773fb23a87f8f854051184bba71a2de3ca8d0f19ebfab41ee14e43d4b"
+      "sha256": "5ced683b1f0a1708fb80d4a3cda9e6ffa3d0e313814a457c9fc056f0be060689"
     },
     {
       "path": "data/reader-documents/lesson-1726-p1.json",
       "bytes": 35896,
-      "sha256": "687bb914f0d2165c3ec3ce3b3a5dd6ff56214c83f67eca102dd5eff5ae10fa4a"
+      "sha256": "7ad2911f43b853a02d7cc73265768b5cb936b9de004c0547236c29d3db06d029"
     },
     {
       "path": "data/reader-documents/lesson-1726-p2.json",
       "bytes": 76162,
-      "sha256": "e3f3759a38593b73b35b4ea3935313cc94beb9cfd302f525482fc86dd1618447"
+      "sha256": "49b74581f0a3296b6dd6bd7ed34f3c382dbd63a309fb110c4ab3882cd55acb00"
     },
     {
       "path": "data/reader-documents/lesson-1726-p3.json",
       "bytes": 30994,
-      "sha256": "716baa7ed2c8a4ee35c9644fa2579da39f4a6bda18cf9dcd6354668868c8f0a0"
+      "sha256": "4218b9abded441fd3585418b034f48cb1968b5038fab8587960c2f3fd0cecf32"
     },
     {
       "path": "data/reader-documents/lesson-1727.json",
       "bytes": 32710,
-      "sha256": "7c0b0355bbff861aeb62a9c9ab8abb5d9f24f2f4ca59f01562a4393c44463435"
+      "sha256": "b6404bfe43b85aeeedbf7c3c2019424bf1f6593f071dd3fa8a1eaaf803448404"
     },
     {
       "path": "data/reader-documents/lesson-1728.json",
       "bytes": 72432,
-      "sha256": "62629ef68848f3ecc76713f5002e6bdf1a6aafd25106ed54cda96867f6d56a1a"
+      "sha256": "b945489c550a5a6f0384c713484b1d5d842e4fdeebaadb568020a6063a713551"
     },
     {
       "path": "data/reader-documents/lesson-1729.json",
       "bytes": 8692,
-      "sha256": "2283c002598a449d5cbe4c7dad000523e963c7dd44784c715a340e67f7ef68c5"
+      "sha256": "ebc0d095481243a62a104ad72c6190c2d4086bd07e0f1a945b0ea2d5e618eb91"
     },
     {
       "path": "data/reader-documents/lesson-1730.json",
       "bytes": 3682,
-      "sha256": "ebccb904265e1c1a1c47ef233ad44f662815ef61103bba3e879c6872783a1639"
+      "sha256": "08cdbae0341fa5ef75430cec4533c35af544cfba12de5e5026705079b25b942c"
     },
     {
       "path": "data/reader-documents/lesson-1731.json",
       "bytes": 47048,
-      "sha256": "d6c281928b0b1a1fad2fd02e96c4860b7fccdbd4be4f44527d52a41c9d809d61"
+      "sha256": "90c9d5aa77c69364327dfdee596b953b7defd9459babd3107ea3523f43e13fa7"
     },
     {
       "path": "data/reader-documents/lesson-1732.json",
-      "bytes": 29685,
-      "sha256": "43c1c431d984ed0307768696d8fb7393abb04420ac68b6d2dc77fddae82ef7f0"
+      "bytes": 29681,
+      "sha256": "0f071a6a28aa11afe0f9d3b208a7ae09e3b143d608a71c8075ea50741ec45679"
     },
     {
       "path": "data/reader-documents/lesson-1733.json",
-      "bytes": 22787,
-      "sha256": "e08ace19b6b0b7c3d66b4e43056e77bf898d4b755ce2fdbf2c50bb765de23b89"
+      "bytes": 22783,
+      "sha256": "bd996f0468608572f32dda6e82a5dcaf86bcc1511b93bd66537fb3c1abea790e"
     },
     {
       "path": "data/reader-documents/lesson-1734.json",
       "bytes": 7107,
-      "sha256": "5963d0a6358aa00759bf0fdd0a244a0eef8fe40df9da789250927bceb56a3665"
+      "sha256": "f73014e7ff6c63d69546d98252cdf3d65149bf05ae8cde103b40d61c6ecfa36d"
     },
     {
       "path": "data/reader-documents/lesson-1735.json",
       "bytes": 3877,
-      "sha256": "3f71622158a9ef8a7e1875f92939ce715892375ab8ad9a47db362b4ff819fa21"
+      "sha256": "eca1c45a133b8c58567799269f15e028b4a573e0b677fe4af7ba2b1172429214"
     },
     {
       "path": "data/reader-documents/lesson-1736.json",
       "bytes": 42388,
-      "sha256": "f3555651fbcf7c5a9bcb08d1ca401eb830e41fd1cd29949a6892c67b57a3dbf4"
+      "sha256": "f084ea2b678e4a281de2163000560b7b067497e3ba79cb361afc95969be0d1d2"
     },
     {
       "path": "data/reader-documents/lesson-1737.json",
       "bytes": 43838,
-      "sha256": "c6cf39f3602974e05c6e60a101ad631164c04db1434df7b023e0ff1c6d39719d"
+      "sha256": "1e7e2e85d54edea904fde17a323b468c6a6e1ef66982db362bbe8fc9a956575c"
     },
     {
       "path": "data/reader-documents/lesson-1738.json",
       "bytes": 26109,
-      "sha256": "99f43531366d9485211c5efbb480db668e919c6fddb6d22df1ad07fdb8a39ef8"
+      "sha256": "ff610c6b445fbefd8cd5699e7afbbf8687745866b0959933de7820b098080e62"
     },
     {
       "path": "data/reader-documents/lesson-1739.json",
       "bytes": 8909,
-      "sha256": "09e09e3d605ef3e6a819b4a52441032cd16e15d2ce2faacc884f48c9dac5eff7"
+      "sha256": "93431225c71dbd0bdfa05a18ffbcb524ac8e7a5572b7e007be03b35dd6d14b63"
     },
     {
       "path": "data/reader-documents/lesson-1740.json",
       "bytes": 38182,
-      "sha256": "cbeda6e3cf6354fa24262420f8e81c69dc9707c36a731d1c51046d36ee412b07"
+      "sha256": "89ac8fb719fa08833008f30ecbe82cf969593e3228b71cec98341d58b5caf976"
     },
     {
       "path": "data/reader-documents/lesson-1741.json",
       "bytes": 3755,
-      "sha256": "05f119229f8da816b55f7f39ee646c38e4d9c10e395f4ce1637651353e79499e"
+      "sha256": "cf7ce76e85470b2c2778dd86d6f4eef6081cbb94c0a2fedf6454db40ba5e2804"
     },
     {
       "path": "data/reader-documents/lesson-1742.json",
       "bytes": 27437,
-      "sha256": "d45041b7c005f8afe7cf099e2569f64a899b59af5a217261c989da804384c900"
+      "sha256": "7ddcdc7f907ed3cd3e64d81ea0b91e1e788aefa67685ad64d7617ede496f1fe0"
     },
     {
       "path": "data/reader-documents/lesson-1743-p1.json",
       "bytes": 47592,
-      "sha256": "e6d1819a9f23d2ed50ce66bb97cb924ae7379a3de2a713ef33a62ef3cb23afcf"
+      "sha256": "cfe5d54f47877448f98ba56ec425fccec2e8fdfe280a63bf5de4f923a0bfb4c3"
     },
     {
       "path": "data/reader-documents/lesson-1743-p2.json",
       "bytes": 27068,
-      "sha256": "5607f7998673e83e94d83149a24037a2b49a0d249c39410402b7977fcfd543ff"
+      "sha256": "c337795065601d6cdad9dcda8a853580c05c058ca7594c0d1e800a1021dd4c93"
     },
     {
       "path": "data/reader-documents/lesson-1744.json",
       "bytes": 7869,
-      "sha256": "f9820b58c631857db5975b2920e76f45765f79050cb80220e2ade10087b62d03"
+      "sha256": "50570aee5f002518e311b758d905ea72d57501a02e898bc48e8ef8dd1f7bdc9c"
     },
     {
       "path": "data/reader-documents/lesson-1745.json",
       "bytes": 4044,
-      "sha256": "ffc1fc47c0505127c684749ed40fefa0918e1d9500913b3dca842cd53418d9ac"
+      "sha256": "37b77f790344abab7d9a01b71ebab7ccd91ee8618fdf028d4eeb58bf01048273"
     },
     {
       "path": "data/reader-documents/lesson-1746.json",
       "bytes": 78616,
-      "sha256": "ef1b9094c6fa77497966f544e1e891af1fe288bce710fcd6128a6f30e81b4787"
+      "sha256": "f474f54383f950968cbeab17a1cdea03b0333369c3aca630d542482a0e0bb891"
     },
     {
       "path": "data/reader-documents/lesson-1747.json",
       "bytes": 90818,
-      "sha256": "eebfde427b8d36c9a0ec7e073948ec38f259634ba522e6d16fa5c8cc777d7647"
+      "sha256": "ad7a25c188bda5ffddbb238a2ddc59fcdfbe1c5a56a09474763eb44727cb0c0b"
     },
     {
       "path": "data/reader-documents/lesson-1748.json",
       "bytes": 119825,
-      "sha256": "09288003b9f03b2586af61d9d92d2172e78b8c7b5c0f36ef776a341106b6a77f"
+      "sha256": "96f4d511e34d7ee8285f4e365688ad2d694d2290c144087b5feb2013ddf19fba"
     },
     {
       "path": "data/reader-documents/lesson-1749.json",
       "bytes": 7312,
-      "sha256": "879258fde05f8d8452fc1190b9a67b9df5f402efff04382c7175f1dd6a944625"
+      "sha256": "86d6d1a4cbdbae8e69cdb205a81840aecff6f08bbec63d642619d0f6c2c9ec87"
     },
     {
       "path": "data/reader-documents/lesson-1750.json",
       "bytes": 20780,
-      "sha256": "b9f19e2a7a448fbb7fc74695bd820f093e3f8e963cd59eca2c22f5816875d34f"
+      "sha256": "18f07e2ea79ce63b34e1d50cfcac97e245675474f1f8a5f55b1ef19a5a04200c"
     },
     {
       "path": "data/reader-documents/lesson-1751.json",
       "bytes": 3793,
-      "sha256": "ff1d3de654160bfcb0bd049baa4c27e9d664b103d271e21e5a3d3de017b125f1"
+      "sha256": "a1a075c73a258a3cf91ce67e4b901f267b1c6ec3744272cc3c97a40c7c0f0580"
     },
     {
       "path": "data/reader-documents/lesson-1752.json",
       "bytes": 60620,
-      "sha256": "a44847a2bc4dc5e06c89811bf4511aeaeb3728e9f1fc6db83462c7fc05dc3087"
+      "sha256": "07aefe32061231a160ed27dc6120c08d53f107b29bf4bb4da521faf80125280c"
     },
     {
       "path": "data/reader-documents/lesson-1753-p1.json",
       "bytes": 37000,
-      "sha256": "7cee124d7b92f03cda98d46a3bd6703a622c83c6ff0eb4a552ba9ec0db8de182"
+      "sha256": "143d94c98fdfb48f4b253f28bbbf96c06bf307fd05fad45a3882e5128b109004"
     },
     {
       "path": "data/reader-documents/lesson-1753-p2.json",
       "bytes": 23893,
-      "sha256": "9f31695ab8547e5fd55480038f20ec646ed478e23f875aee60a2ecdee7e6ca55"
+      "sha256": "ae9c14ff13c98246005e6d79a6602bf3845c4fb2e68038acc5f821e2e5b1f5b9"
     },
     {
       "path": "data/reader-documents/lesson-1754.json",
       "bytes": 11842,
-      "sha256": "ab6ee134916b97b10b5881d9f2f5fe0a55485a795a14ab97b56e6edf5d24bea1"
+      "sha256": "3dc54e4dea1b9ab6d822259269d30b20c86a715239e8df1a6b7594f5473a6ea5"
     },
     {
       "path": "data/reader-documents/lesson-1755-p1.json",
       "bytes": 5776,
-      "sha256": "f45496574da25a1b45d4f76caf0c3fdcb20fec425819decad3117110e92e0cad"
+      "sha256": "058049360142df07c5cddf4d475f298a9a0b62ce2df8bf57251b2a9629250f08"
     },
     {
       "path": "data/reader-documents/lesson-1755-p2.json",
       "bytes": 11128,
-      "sha256": "e75a7c9fe2316571eca45ed4b871b03c5a9f4e2cfab103e68643f628055a9844"
+      "sha256": "617c68b19968eb1cdb3c5abe2f376e56230bd95a5d7a683393353be0e75693ed"
     },
     {
       "path": "data/reader-documents/lesson-1755-p3.json",
       "bytes": 10958,
-      "sha256": "46998a20ab6a60aeb15b0a5ba15b6b20f2f3bd1581c3f6df081328c4ed8ccbec"
+      "sha256": "7acf57721a6904e990c049cffaf1c6dc202d9368239b5319ba72b69399eba3cb"
     },
     {
       "path": "data/reader-documents/lesson-1755-p4.json",
       "bytes": 5951,
-      "sha256": "ba6bd1b09a54156ef12751187add8571629a0f7486c1523988435aa36c821f17"
+      "sha256": "0771c5a292837d03fc60ef2879d425f97741dbf7ed4b9291c0a1c639f12f4afc"
     },
     {
       "path": "data/reader-documents/lesson-1756.json",
       "bytes": 4363,
-      "sha256": "293ad0ae9742ae4b0450ae71e5052446f15993a8ac20ae6ca979b881d43ce006"
+      "sha256": "226e2ce4765123765b709aca8061299bd4818f5f4b41e7de0e222e1fed54c5bb"
     },
     {
       "path": "data/reader-media-receipt-anomalies.v1.json",
       "bytes": 299,
-      "sha256": "ee90731321466fd13467a4ae2b4c1e348cd21508a9026399b9f067ae383517e6"
+      "sha256": "e0ef62da0b40b9f526d186c501bcff12dfbbd8d2e694f8a13742fdf02063352b"
     },
     {
       "path": "data/reader-media-receipts.v1.json",
       "bytes": 112353,
-      "sha256": "0319bd9f7623eb57ee396cafc0343cb6c4dc51dce258109a19edbdddd91be71c"
+      "sha256": "2470a0e501be08434c7be38851592a8c41061460fa401d43d15b40c73dea8d68"
     },
     {
       "path": "data/resource_redirects.json",
@@ -6433,952 +6433,952 @@
     {
       "path": "dialogue-curriculum/index.json",
       "bytes": 66915,
-      "sha256": "732778c771a9fd3b0d512b96eab0aa59c6aca40ff2ee69231fda33fd208a0c62"
+      "sha256": "29ddf6f9820eb164ce8737fccbfbf4aab0132a872861da554fa2a4a57c8f47c8"
     },
     {
       "path": "dialogue-curriculum/lesson-1458.json",
       "bytes": 61173,
-      "sha256": "4ca77346836ebc9c9af48cd565b733d01cdcf1e91f0c330e10e38d1f4e0a187d"
+      "sha256": "a9d2c5aa3160f665865e0451c492c9ffc5df6566da73d2b9daf60fbe343ca2de"
     },
     {
       "path": "dialogue-curriculum/lesson-1460.json",
       "bytes": 29123,
-      "sha256": "182cfd7721300306dc71656eb39c972783d7fea8bedf06b7267d90af657c1c04"
+      "sha256": "5425150adc6fae9d172679fcf851bba282858ff79f16b8930e4a9177df8377b7"
     },
     {
       "path": "dialogue-curriculum/lesson-1461.json",
       "bytes": 78580,
-      "sha256": "ff6d464271de56de5ce6c579307eb256e84ea222c950cb85256c8b540a53ba5c"
+      "sha256": "71bd9a3dff294a6e4262c9eb2d3179c05dd2e2cab9a91684462803caef041842"
     },
     {
       "path": "dialogue-curriculum/lesson-1462.json",
       "bytes": 67659,
-      "sha256": "ed8f5cb6e0d8305647305eb50b2dbfb4059ab86fbbd4b8b6bbc6fbda2a805878"
+      "sha256": "8c4aa2b35489da68e76aedf4f82adb2baad7827117fa2270e8727583fba7236b"
     },
     {
       "path": "dialogue-curriculum/lesson-1466.json",
       "bytes": 58507,
-      "sha256": "ed28e56db0a781ebc7cfc23e90707d82ac6ec7c010a46f336e18b076ce617cd7"
+      "sha256": "2dfc86af006a539361a3e413c65ff20f44598cedb581be2507c0c340eaa6a088"
     },
     {
       "path": "dialogue-curriculum/lesson-1468.json",
       "bytes": 147004,
-      "sha256": "e4b596d02d592a33060940f7e5d3023d36e42207d7f478499bda296063a79c52"
+      "sha256": "687169e9bd0c2c0e0a7963ad7ddf76f69fe94cfe72cecdbac613fc85e2e35ccc"
     },
     {
       "path": "dialogue-curriculum/lesson-1471.json",
       "bytes": 182840,
-      "sha256": "dd85f677eaa25c81cfd97fb49bed3c817c2a71570c90d36a36f3a36eee546947"
+      "sha256": "cbeb9a8709472835cfa6f095d8e113f89be40d7de65f3b23baebb1162e1f42d5"
     },
     {
       "path": "dialogue-curriculum/lesson-1472.json",
       "bytes": 42265,
-      "sha256": "01b2adaadc6b408a43d6c714e733e547cbcd797c9bad720c2629289d8ff3a63e"
+      "sha256": "9147889dc2df9b67ef7d8d8e3840f913b9e2d12b7e6f1df58c208815996c5296"
     },
     {
       "path": "dialogue-curriculum/lesson-1473.json",
       "bytes": 29234,
-      "sha256": "66f7bc5fc8163eb1ce1e20ea98cb7933bf39190f6898deed945833aedf2d1eb6"
+      "sha256": "83368ca6c5e80c94a72fa84126dd08046ea8e42bda8f96c302270e1bde50c95e"
     },
     {
       "path": "dialogue-curriculum/lesson-1474.json",
       "bytes": 156151,
-      "sha256": "7e095bae38369fedaf85cdceabab556e6c8cb3fa0e1d15989b5f85e09ba06171"
+      "sha256": "a8b9c19debc64149a755b9dec582b0b49ab30d783772c7e79545d9fefc0434db"
     },
     {
       "path": "dialogue-curriculum/lesson-1476.json",
       "bytes": 120053,
-      "sha256": "2efa5bce4fb41844479b6d8899f3c0f2cc5ba647f0a1f243af273827c84a0b55"
+      "sha256": "5bdd7730d46c84a04b4c547e9247bbd5052a82a2a89a31764dbe2e515392718a"
     },
     {
       "path": "dialogue-curriculum/lesson-1477.json",
       "bytes": 141267,
-      "sha256": "f466472b9bf3fa4660b8fe58522ccd5869f665699c25471772b2969457e619f0"
+      "sha256": "c3fe7bb7719de1d916623d2e89cd4eceb6d9e5fef6d5248456a13784d305418f"
     },
     {
       "path": "dialogue-curriculum/lesson-1483.json",
       "bytes": 109642,
-      "sha256": "9476b58c1050efcd1a70fbd85638574a0d5b287f4afe9c04acb0f922a4aa50c0"
+      "sha256": "1bf7fcd4b15edb85f38f93b4b767f4205911b16d71fd3eca45d454a7e26dc1e4"
     },
     {
       "path": "dialogue-curriculum/lesson-1484.json",
       "bytes": 129968,
-      "sha256": "ee39dd49ec545127a8ee1099eac7dcf2312a534165fc04730a4af6a7766af7a1"
+      "sha256": "7f8bc450050cbbe515798781c43f62e4df18947ad32af1541a785c490b4317ff"
     },
     {
       "path": "dialogue-curriculum/lesson-1485.json",
       "bytes": 125313,
-      "sha256": "4f1bf2966092f8f3d3cdf551fbcad17c0ea4dd0e47d4e51f04613e41fa774514"
+      "sha256": "d1ef383c3055d920c0f75bf78c3043ed46330e63ffc5a9b6068187b18c0f0411"
     },
     {
       "path": "dialogue-curriculum/lesson-1486.json",
       "bytes": 47467,
-      "sha256": "8243775d263ad918b84bac01808ccff68bd9ec396a383adb6a6c97c44dcffc70"
+      "sha256": "536064d5f19ee741080b91420038c986768b21c8ae76fae25e580f4c7fd4c49c"
     },
     {
       "path": "dialogue-curriculum/lesson-1487.json",
       "bytes": 30351,
-      "sha256": "4b6fe3b0a6db72c5680b240104b4674fbbdb967324cfa88e10c542ef8efe87f3"
+      "sha256": "38d615c171960bc6e76007ed7ae34111db5c88821ee24992fdd28be2a7f2064a"
     },
     {
       "path": "dialogue-curriculum/lesson-1488.json",
       "bytes": 120734,
-      "sha256": "6944f90adf3962594edb73b62f0ed719fb3961e8752d44172a5ca636bd525782"
+      "sha256": "5dc8f0a8f00c1c5804bf8baad33cacd619381ad83880e2d3ef69b77de62a9bbd"
     },
     {
       "path": "dialogue-curriculum/lesson-1490.json",
       "bytes": 92063,
-      "sha256": "829c60acd896bd90ec822c39472cf7ebd522abc81e98bd800c2ed774bfd64589"
+      "sha256": "33c20bbfe027206b9072e4a8aed21e714d2a74e7ec1818dee4aacea68ed2a486"
     },
     {
       "path": "dialogue-curriculum/lesson-1493.json",
       "bytes": 132104,
-      "sha256": "0d1e552f4d8f2a9b235770c69687ce39508ca903a1c62fefad9360bb7eb1c83c"
+      "sha256": "2b92c03ebcce5a4ccbf184fff1ea3a96268cbf59d5d731cc9a336b67eb674053"
     },
     {
       "path": "dialogue-curriculum/lesson-1494.json",
       "bytes": 86169,
-      "sha256": "dae6337f46527b1bda847d354dd1905a9f5de6981912d00b4855ee840860fa82"
+      "sha256": "a3be8fdd786d1ab88e5ff2fff4630e4be4d9b3d1c271a5e5960a00bafea6fe05"
     },
     {
       "path": "dialogue-curriculum/lesson-1495.json",
       "bytes": 45752,
-      "sha256": "9388e39958402b1f836ffa060eb4b287e7e69cfede85cb98e05d450c8f18f075"
+      "sha256": "a61f8dd943e00a83f1e251490ee465a103e9b5b07f18f02de626167c88d37fe2"
     },
     {
       "path": "dialogue-curriculum/lesson-1496.json",
       "bytes": 115011,
-      "sha256": "edf32cbcc12607ea39a15e628589a5dfe076d514173cab6bc31b539fcaab792b"
+      "sha256": "9794878efbf05162b42e59b3847c10887c0b94a8d4f9ae3d146b074afb5d63ee"
     },
     {
       "path": "dialogue-curriculum/lesson-1497.json",
       "bytes": 61755,
-      "sha256": "2d2f1f3a316e11c808f574a81c0ba70b90bdd81ae0c73f4616f5a25ed7799b9f"
+      "sha256": "e511e9e87dde4f0b52f1542d0c1bae2201e594d68b9a48efae7f8dc70de8c735"
     },
     {
       "path": "dialogue-curriculum/lesson-1498.json",
       "bytes": 72667,
-      "sha256": "91b3dffbde53df6ac07f6429c745ad4192043ccaf3acbff7fd28f36129f42d3c"
+      "sha256": "9f01b0da116f00344f66ba4f7969ac81d3f0cda97cd83bb94d1774b2ff2a3830"
     },
     {
       "path": "dialogue-curriculum/lesson-1499.json",
       "bytes": 71918,
-      "sha256": "d135bca0c77f5d97510365f796ccb36d4159786b18eb87c55488e15d87f3df26"
+      "sha256": "e433dae1dcae636a3fff06d98c74bd24116d222b8d90961f3f861acf0093d7bc"
     },
     {
       "path": "dialogue-curriculum/lesson-1500.json",
       "bytes": 69629,
-      "sha256": "1dd2c195dda527b7c4e0d61b053aa563127e4f83189a8e046e46feab33e01fca"
+      "sha256": "b6f26a42893b259960359e54e7727929230e26e129fbe35d389626d9c0117dbc"
     },
     {
       "path": "dialogue-curriculum/lesson-1501.json",
       "bytes": 36113,
-      "sha256": "3a0e7d99c11c8d925a39f88bd047f13628340b50e14ac1fd7c60336f9c047b37"
+      "sha256": "06d49e565c499f2d393a6101660790988a322149f5d8f1e250f5e5fae18e7092"
     },
     {
       "path": "dialogue-curriculum/lesson-1502.json",
       "bytes": 29159,
-      "sha256": "a343facea8bbd67bb93c1e787489c33c0a3de37a1d1de49ed1bb7045c376486e"
+      "sha256": "2cfb5b52982ac56702d5f86e9249b7b7224cedd390e9265592c65d7e836d0d7e"
     },
     {
       "path": "dialogue-curriculum/lesson-1517.json",
       "bytes": 64098,
-      "sha256": "0c00637e3f80aaf4cc1609de30a0e6983326a5161ae3670f371b6648f1926cff"
+      "sha256": "f02906e216885ef425a50e888a159fdd903bad9d7023a96997c7b9671ea80c0b"
     },
     {
       "path": "dialogue-curriculum/lesson-1518.json",
       "bytes": 75885,
-      "sha256": "728d6741e8e25c1e271ba79c5817edb5722efe961cfb61a45d5a010aa3e9395e"
+      "sha256": "ae2c7b5caa334f4b9845f175f365c8f8345463696f3ab9bc5e560f2229bb0556"
     },
     {
       "path": "dialogue-curriculum/lesson-1519.json",
       "bytes": 40824,
-      "sha256": "b025d4c866d807aa92caf559d225371b667fe80b5f2400acea1117ad14252f1f"
+      "sha256": "ea79126dbe6c7ddb2ebf47ff32041655d5bcbc60c9f15adb19ed8e3788a824df"
     },
     {
       "path": "dialogue-curriculum/lesson-1520.json",
       "bytes": 83485,
-      "sha256": "701b8e0258bd3ddc30e0d8beb3374e72d35e843e230d9a37637816b09cb8d826"
+      "sha256": "56335057c5a193e02c10c08234f79b59df51bda1cb3cd4977a19b17a0f0e89df"
     },
     {
       "path": "dialogue-curriculum/lesson-1521.json",
       "bytes": 46721,
-      "sha256": "954d5aa76597af2a0cec8abd75622c7e3c7a5641b02bb03ff29e9b0b6695c66f"
+      "sha256": "9f8d6be5b2f81f899f3bf0c0053e8f431ff40349343928733f87544e3e1a0f6b"
     },
     {
       "path": "dialogue-curriculum/lesson-1522.json",
       "bytes": 63987,
-      "sha256": "adfbcd5982d28ebf136403e2bf7638d271800e9a19b3943126785b349e195db5"
+      "sha256": "e7e855a4bd631998fc92835af89358e0259346fa8055b019f61b987a74c7c2d6"
     },
     {
       "path": "dialogue-curriculum/lesson-1523.json",
       "bytes": 73811,
-      "sha256": "51caad1d92614934776d2f4e7d3ec8d4f79b32eecd684b68bf2e8a7bb043e7d7"
+      "sha256": "ee3eccdfacd9cb7935a5bb29d7ff19b999b09399d46a14facf634814316abd46"
     },
     {
       "path": "dialogue-curriculum/lesson-1524.json",
       "bytes": 45343,
-      "sha256": "c066757b49b8b72f2e721a8ef500df5ccd7955d6307ad1ed24aa446e1f949380"
+      "sha256": "d8c6ac65d054659497a56a5956821017d7786719d0202da392ec343384610d1e"
     },
     {
       "path": "dialogue-curriculum/lesson-1525.json",
       "bytes": 29004,
-      "sha256": "cdaeed97c724bb8ffa7b1dda7a10682a7ac7eef07bf022fd63f4a55357e7f862"
+      "sha256": "29fdd2e3cab130267b9957d9c81fd5d87f820cee45361594bc882166be7bfa14"
     },
     {
       "path": "dialogue-curriculum/lesson-1526.json",
       "bytes": 89837,
-      "sha256": "58cfe1092b2bc9f1aa5562b546ce6256009e7e47cc2ddfc42af67a43abde5cba"
+      "sha256": "3c6e12d53ba53fa86ec374de44b74c0dd136286cac092a97ae2eaf74e87c2ab8"
     },
     {
       "path": "dialogue-curriculum/lesson-1527.json",
       "bytes": 115447,
-      "sha256": "3cb2d8c9c1ede1e43853446a551683c9c2f9936cd26c54488b4d369be47d2c6f"
+      "sha256": "869d60cd7ed6496e49456ad76fbfdd4006413595639987cb9845732e7864a47c"
     },
     {
       "path": "dialogue-curriculum/lesson-1528.json",
       "bytes": 112204,
-      "sha256": "fea9b21bb460ce70087b780d1066f9f0cb563d6e610854ca7baf7fe115809e7b"
+      "sha256": "9f852f38a2a8ca573c37e4546f8dcf38267718093792076a777db592043fca43"
     },
     {
       "path": "dialogue-curriculum/lesson-1529.json",
       "bytes": 95278,
-      "sha256": "005b002ec88b2c2c2f8ae2a65892cc051b9d393d56a165239cd5948295599aa4"
+      "sha256": "e66fa30ddbc77c4d344a0f3f591513f89c844bd73dd3aba0a0e2323cad0c7c4d"
     },
     {
       "path": "dialogue-curriculum/lesson-1530.json",
       "bytes": 68947,
-      "sha256": "4e1f8ba0b9b93d7866179e4d980d96fdc0b9f058047cebba31e6ae919e244bbc"
+      "sha256": "183ff48f1cb0f9a0552c71a85db7be1fa591203e7b99fbfcd321df29b765793b"
     },
     {
       "path": "dialogue-curriculum/lesson-1531.json",
       "bytes": 103093,
-      "sha256": "795892c7271ab87eda380524cd32b392dc7fb8456ccb076c9c7fbcf15adb728a"
+      "sha256": "1665e029dcf429128aa2ef2abc49527b12df638df215e6d27528ab76bfcd9098"
     },
     {
       "path": "dialogue-curriculum/lesson-1532.json",
       "bytes": 36519,
-      "sha256": "8b93f3035e923ec7c39699595af7bcdc0f4f1b73fcb59708eb9630025508de7f"
+      "sha256": "7845f5f6a4708e153eb89c0e4f4a0e6e855ba4317c32e75c4b0cfe8481971cfa"
     },
     {
       "path": "dialogue-curriculum/lesson-1533.json",
       "bytes": 29117,
-      "sha256": "76d9bfde1912f7f620761b61282d2878ec76349dd096a05a52740c4c03ff4e0d"
+      "sha256": "178f029c5b11a5919a3eaa52951fd2edab7ce3f479410be0db1e3d85c43fb896"
     },
     {
       "path": "dialogue-curriculum/lesson-1534.json",
       "bytes": 168563,
-      "sha256": "43a313f0d52d8a71884d9531ac3205bab7894021becd921beefc12d103f68d81"
+      "sha256": "634d34fe335e69aa18989f1bed70407d25f197962028fd48cd5e28e4464e5359"
     },
     {
       "path": "dialogue-curriculum/lesson-1535.json",
       "bytes": 209243,
-      "sha256": "74962441cc79d18167fdb7fa2ffb5410cf6ff9cf03efb8c722a51121ff771d42"
+      "sha256": "82c184470fe9b25fcaef835b67aa9d5d5897a2fd0202f1dc11c9f9fef3d1413a"
     },
     {
       "path": "dialogue-curriculum/lesson-1536.json",
       "bytes": 137308,
-      "sha256": "ca745bd251434e74a6b1bc35eb961c081c9dcf8237b907bcedc285ef193e0baf"
+      "sha256": "affe27d555ddda2dbd413215efb7670136ded5cf21d69d0a001e1ef2b2eb6228"
     },
     {
       "path": "dialogue-curriculum/lesson-1537.json",
       "bytes": 96437,
-      "sha256": "70a55d3fc2d8381187a587e9c33f58233d4a511a6552e98b225d061b59d49bff"
+      "sha256": "d79c5223283e355a7a6e252c68b07ea6262cbbb1248cca8c568288def2baecd2"
     },
     {
       "path": "dialogue-curriculum/lesson-1538.json",
       "bytes": 43748,
-      "sha256": "a4081cfb2fc412c2a08368b22a573566a4efcb92936584116a91b549b1baf3ce"
+      "sha256": "d20dea59ce4a0656b627df9b07bbb8480d76ec7b25a33e7ba6bb7836b8943052"
     },
     {
       "path": "dialogue-curriculum/lesson-1539.json",
       "bytes": 29282,
-      "sha256": "e2679753653c80dc9c351ca85a9fd762863120beecb204072ee7fff3dd2639ff"
+      "sha256": "656152d85c1cddc6f891a3dedbdbaca322a3da37910a8586d539f5ae9111a5f9"
     },
     {
       "path": "dialogue-curriculum/lesson-1540.json",
       "bytes": 212623,
-      "sha256": "51cf579fdfd31eebe63b7e0dd7b8fa6f2bd4cc1d6af8cc64de339a5f6e47275c"
+      "sha256": "919abca1cafa96505048cf7f165bcbcebdb1e24a874b9522df0a37f3fc2017c7"
     },
     {
       "path": "dialogue-curriculum/lesson-1541.json",
       "bytes": 57021,
-      "sha256": "8417f0b954cb72c2df55e278a899830a3d53ab20327ef5bd6af26ed91a23426c"
+      "sha256": "3c1a5e59f2d57aedecb737dda4a0f5f1136f41b08b9f5dd8dee4b4eea61a1ea3"
     },
     {
       "path": "dialogue-curriculum/lesson-1542.json",
       "bytes": 72091,
-      "sha256": "5e36961bac4300d752ebf347e29aed9af77b1818ea8ebbffecd56317afee4348"
+      "sha256": "ba9c6e1a7578a93d44e70d2f465f7de38d11853a5af285f0c3aa7a1fc0815954"
     },
     {
       "path": "dialogue-curriculum/lesson-1543.json",
       "bytes": 65195,
-      "sha256": "b152d83bbef9b3de32dbd3db62adb0c1cd909e36f90ca8e39f876635891a4f49"
+      "sha256": "547282d1dddbcf905698a6bd08a11d0190b5a6178a24f2e3a1b00dc58c89fe49"
     },
     {
       "path": "dialogue-curriculum/lesson-1544.json",
       "bytes": 63117,
-      "sha256": "18ef80236032f2d15dc301e66cc01a9b69263b162b8351918a0726ceb9c989b3"
+      "sha256": "cf4ad412753db2cd1ff2211594649f740220676dfeb3e0a8c4f8d65e33a15bbc"
     },
     {
       "path": "dialogue-curriculum/lesson-1545.json",
       "bytes": 67106,
-      "sha256": "05f6d7d52f4819baf027450e17c9f4dcda30ede88c06138732d15836026e45f7"
+      "sha256": "6553233c8d82be5a87874021efdbb2099a1b0572831086cb79a8b27726af4d15"
     },
     {
       "path": "dialogue-curriculum/lesson-1546.json",
       "bytes": 30601,
-      "sha256": "e714b48956e57a59b48accaf9dc05fe7e2062ac871c746562d47ed334dfab1fc"
+      "sha256": "c55f4b965027618c6a7cce490cf3caa0b01c7c6bf8bf0938cf2c1a73dd5baaed"
     },
     {
       "path": "dialogue-curriculum/lesson-1547.json",
       "bytes": 73440,
-      "sha256": "848ea3efd800d6aa1ed7506ed56a600bf52f8c912403e5e7a6651d0085ca2c54"
+      "sha256": "aeb984eeee5de2ed2fe528405464a37988fef05ce1ed1acb8ac4414604ca5f41"
     },
     {
       "path": "dialogue-curriculum/lesson-1548.json",
       "bytes": 78811,
-      "sha256": "043388445a4ad29acc98a27a604d26c71c757f2bf76fc7441144a335cfcbc1cc"
+      "sha256": "f1abdca6b2c5bb144356f616977a89d033301ea5349d3d519e11af1446c1ffca"
     },
     {
       "path": "dialogue-curriculum/lesson-1549.json",
       "bytes": 64257,
-      "sha256": "01005b86f0383ecc01f542ff18647cb9a94e3a7295927c954841fd6a65a3a1d3"
+      "sha256": "bd83574bb7dc47e1e58cb02ace2d04b526c0d73ddec414631277e0e9714ec78f"
     },
     {
       "path": "dialogue-curriculum/lesson-1550.json",
       "bytes": 60313,
-      "sha256": "271a36949765065a7443605627da8cc02649636c828bf764cc7bb58fcd1ea5a7"
+      "sha256": "29d4611f856c593141f32724b8d55a790c93da2f7cdcf57728dafb283844b899"
     },
     {
       "path": "dialogue-curriculum/lesson-1551.json",
       "bytes": 38822,
-      "sha256": "bd02b7566196bebde4911eaf45eed034fd5c4ec17db70db2bca4b5699f12b8d8"
+      "sha256": "fc19fc7db5b8dd6099a7f60fa5800c3278c097eae78299ec37f989380a968b22"
     },
     {
       "path": "dialogue-curriculum/lesson-1554.json",
       "bytes": 29330,
-      "sha256": "427f12e443fe793eb556cccb3ea20eee75a01d44dd62b41573d4346ba4e98f6a"
+      "sha256": "6609a1f325927192ff25b58369d31fa6f92edb11e894edc724ad81c04f4c139f"
     },
     {
       "path": "dialogue-curriculum/lesson-1556.json",
       "bytes": 94408,
-      "sha256": "c5aa328b0970574c5fbaf2b5a2377840640e5a47c6844c4307b4d0588773b226"
+      "sha256": "804041bffdc2f680f54683d64691c8a66548715d0950075c72c9fe22bfa02251"
     },
     {
       "path": "dialogue-curriculum/lesson-1557.json",
-      "bytes": 101892,
-      "sha256": "1df0d8473ed67e5a4702557edc48e9d2f12512a3fee2e8179e02e73f9f6a5f43"
+      "bytes": 101888,
+      "sha256": "db32f330170554c0d2a3c7589a040f781585bead41ad09ba86d13118e13b080f"
     },
     {
       "path": "dialogue-curriculum/lesson-1558.json",
-      "bytes": 134282,
-      "sha256": "b5c9fcacc276d9b7d1e45b07a20f0f7076cad02289c5ed89b274c8b92336c4a7"
+      "bytes": 134278,
+      "sha256": "f73bfeb85ec15021c075a5fd6b0786f23bc65f54596e12ebcd6cd9812716eb47"
     },
     {
       "path": "dialogue-curriculum/lesson-1559.json",
       "bytes": 75844,
-      "sha256": "a53b88856b4a7ed4e5d33fbabbf53c51099b96600af4c25d2b08aed30d4b067d"
+      "sha256": "b475161efc1793f8ade424cd8d55d01b56f66640914e27fc39126604d8a4d72c"
     },
     {
       "path": "dialogue-curriculum/lesson-1560.json",
       "bytes": 74261,
-      "sha256": "042f815f72b9e0662e20f7f6d52b512ebaaaec9b72ba49b58a73e6f005733783"
+      "sha256": "2fa62782fc95721d958200fc68142c56efc50726d5a855bc3732a70200eeaaa4"
     },
     {
       "path": "dialogue-curriculum/lesson-1561.json",
       "bytes": 68749,
-      "sha256": "bfad1ce61bef1fdde25f72aaf83983cc80bedebb55f5b277a96419fa3cfab031"
+      "sha256": "78bc2149de67824c1bcc7bd4b52890788ff41d6aea0b42371930300e9d05e3ed"
     },
     {
       "path": "dialogue-curriculum/lesson-1562.json",
       "bytes": 66486,
-      "sha256": "f9762da97b0b0faf76b420676deea2cee9d4b28e2c618299da728aceaf2755eb"
+      "sha256": "a94792778e90cfd1a294b730770a6f47ac02200e69073b82a955c50f178231f1"
     },
     {
       "path": "dialogue-curriculum/lesson-1563.json",
       "bytes": 42859,
-      "sha256": "a1d8cc897ffb1a0ece3b48ce9ddd62a85e63c508324d7d0abf08314eb2ea9909"
+      "sha256": "d0b96d2c9c283f9feca8994bd3a3e1d8431eff3ebd08de691415773c10bf193f"
     },
     {
       "path": "dialogue-curriculum/lesson-1564.json",
       "bytes": 29174,
-      "sha256": "04a17e38e8cb4758a2e13ba5a3ff5130a23f8c4bf039b257e99179970e4da17f"
+      "sha256": "58910e050eb1bc861453c9f25618ac25297466f9f7da6a3cc6b50f37760051c1"
     },
     {
       "path": "dialogue-curriculum/lesson-1565.json",
       "bytes": 109696,
-      "sha256": "72cf38bd727e0bccb0bdb04c048d9a58d3b43f3a63b5571e85c57af011af4e81"
+      "sha256": "061aa06308660ac8f383f542337c512afe3f42d96b0f074396015d73b1edaeba"
     },
     {
       "path": "dialogue-curriculum/lesson-1566.json",
       "bytes": 141173,
-      "sha256": "801e7737fef4c401e736deb5e390887d4ccc98c5aac05568611880d4404687f3"
+      "sha256": "1e2c5e74b7192c4de518d81afc22b2051d267df383ce9664749cd5b8cd317bb7"
     },
     {
       "path": "dialogue-curriculum/lesson-1567.json",
       "bytes": 95754,
-      "sha256": "f3d95b22e903ce18c364c4f7ba5067e9829a16ff1662e08504cec08e749e8b85"
+      "sha256": "342d7f557a24669b3fdb99de750dd690b249a5d9718548784df1d0489c8c97b0"
     },
     {
       "path": "dialogue-curriculum/lesson-1568.json",
       "bytes": 63186,
-      "sha256": "35c0d47bf4faf20c881dc29c427d148cc9cdf037698b2110ed21414e0a2b18dd"
+      "sha256": "01164f18825462deaf8ba50a90d129d3dc72d08acbbe48a5a0deff7e809ece6c"
     },
     {
       "path": "dialogue-curriculum/lesson-1569.json",
       "bytes": 50558,
-      "sha256": "5976b373c1057ca45d46c9b9572c6c87dc8893962da2cf1a1e2f0fa5b839bfa9"
+      "sha256": "cb174f47188c24b00a1f33adf583ec7d0f71b1d027a06c8beeb870635f7db65d"
     },
     {
       "path": "dialogue-curriculum/lesson-1570.json",
       "bytes": 58340,
-      "sha256": "2336245cbab43b6baa16d11aebcd54476a4875c4319aae5231690a949ccae4cb"
+      "sha256": "6f38ad156cbfe41ab8e83e81a3762c7fa43507cf690b77679bb912cbf94bcabb"
     },
     {
       "path": "dialogue-curriculum/lesson-1571.json",
       "bytes": 66683,
-      "sha256": "22d71e336de8359d03d1a775e844004e4cb8080208d97131770f504e3d5acac7"
+      "sha256": "834d9aa880e90ba979b40c4bee66769d9088b6f0a39f4e4384c4c1fc1c900536"
     },
     {
       "path": "dialogue-curriculum/lesson-1572.json",
       "bytes": 31101,
-      "sha256": "4638f52d7a419687739483c87195c70dca50157078b3c470d139a07e4178f59f"
+      "sha256": "ad3698a932b5754c98b3e7309313d541fc370b89d543dcc2f3c022ddaf507709"
     },
     {
       "path": "dialogue-curriculum/lesson-1573.json",
       "bytes": 180386,
-      "sha256": "f88cb801909a401e4bca1dfc9c914610ae0a6d15a49d71a26d6d3307fc733431"
+      "sha256": "5ece896d3adde74944390fa25a738cdcbac535848474dffdb79f52e2632faab8"
     },
     {
       "path": "dialogue-curriculum/lesson-1574.json",
       "bytes": 46724,
-      "sha256": "401d7d2fa5669400b09ddc2e7fb2f41cd4f1d7ec02d486a8da0ea5934085fb86"
+      "sha256": "044f95f326191b0f08fd806897b574eeca4425941e72dcb44552d4271ea90e33"
     },
     {
       "path": "dialogue-curriculum/lesson-1575.json",
       "bytes": 29735,
-      "sha256": "450feeb3a11524e51c0616488bbc6de71094091cd0236cc8128ed66781e73239"
+      "sha256": "4206fd92bdf5c6d6a40e8bc16c3641ac28152e94e237d227e921d0e2ebb2cc64"
     },
     {
       "path": "dialogue-curriculum/lesson-1576.json",
       "bytes": 119451,
-      "sha256": "7fa31b5bce80401215484718a8350d14a1bb690e6c64ea1568debc43db5fbbf0"
+      "sha256": "de54c7625a2f9d5d1195f9d8545f648d712be69f453d5513c2587cc17b7bce5c"
     },
     {
       "path": "dialogue-curriculum/lesson-1577.json",
-      "bytes": 125456,
-      "sha256": "e1b6cacf6a01a33f640c0593a8850d474c0e91af2d54eab993d70cbf29b86ffc"
+      "bytes": 125448,
+      "sha256": "4d3f0edad244a590e6af5c39e8741cca7e338b063933930c7471f9b0b6bb8b73"
     },
     {
       "path": "dialogue-curriculum/lesson-1578.json",
       "bytes": 104974,
-      "sha256": "0aca0cc67e5e63f3c0227261b229988e0080bccfe5cf900a649c10ff47b6a74c"
+      "sha256": "9720df9624bc47bf3452c5b80eb581d5b5e66949436217d0b2aaa891f9898a02"
     },
     {
       "path": "dialogue-curriculum/lesson-1579.json",
       "bytes": 138249,
-      "sha256": "ada02bbfef16f1feb05adc63e9ce54a8a32e9631759edff00849e588fda4bcaf"
+      "sha256": "5c2ef155f5430a9a52e15da2fb79d18ba458ee8af99fc828fab15c19f7028993"
     },
     {
       "path": "dialogue-curriculum/lesson-1580.json",
-      "bytes": 114433,
-      "sha256": "65c2da5a78770d5e9f059d6fdfb3c12f38bbd721d997bdea9559c3c7c89e351e"
+      "bytes": 114425,
+      "sha256": "9860cbf929b60af82277814bdba81a10afbab692febcf94d44782a88a10e9753"
     },
     {
       "path": "dialogue-curriculum/lesson-1581.json",
       "bytes": 105023,
-      "sha256": "8472ac390e03c658d3d826b975cf0bb3719840c7c184a20663b6ce31eada0771"
+      "sha256": "64c4602293b65b045d5deec10f08b82653aaec87c3b03d0895d4c16658cc7ea3"
     },
     {
       "path": "dialogue-curriculum/lesson-1582.json",
       "bytes": 47896,
-      "sha256": "6a130b2393600643d2c0b0974bdc42e6bc5b116bcaacac999fc9bdb1e570e7ea"
+      "sha256": "f1506cf2e15761c33070664d292d0be764635a28cf88c50b61dab1cf091026a7"
     },
     {
       "path": "dialogue-curriculum/lesson-1583.json",
       "bytes": 29329,
-      "sha256": "5d917c6ad79ab0ab4d24bee3936081619b638559762bf9ff04509b3f3b0a6ecc"
+      "sha256": "af581adbdfef4d13747daeb12ff9be49035bc4de9e980230627d946907ed8059"
     },
     {
       "path": "dialogue-curriculum/lesson-1584.json",
       "bytes": 71988,
-      "sha256": "94fff52da3327911aebd9057ee4a77f3064a15e62fe37e4851bd74752bbb519c"
+      "sha256": "1d155b7962fa0b6c5ac8989a8d36505854e1b2a79aa52473eeca9dd776949525"
     },
     {
       "path": "dialogue-curriculum/lesson-1585.json",
       "bytes": 75380,
-      "sha256": "01704c4a31639a3d21ab1ef17edf8e68a905623273dee6dbbd02b821628ad736"
+      "sha256": "7b3237f6eb3851f5baea050ef86abce6ec962cecc421d291cda25b78190d0fb5"
     },
     {
       "path": "dialogue-curriculum/lesson-1586.json",
       "bytes": 100761,
-      "sha256": "9c7587116ae57ef22b2333322aaa3058e54d48943fe311abf16185da1ee1c250"
+      "sha256": "4f6b1501fa6c45d052dcc34337a357909924e002fa0b1ec9be3bbd398c6f1168"
     },
     {
       "path": "dialogue-curriculum/lesson-1587.json",
       "bytes": 44669,
-      "sha256": "cc7a5e0ff155c2c781440ab5b3968815f671b95b01f067511807206ea3d2311b"
+      "sha256": "99125275031a843befa3e841c94eb7af86a2cb3d2fab43d04dad643d34a9ccfc"
     },
     {
       "path": "dialogue-curriculum/lesson-1588.json",
-      "bytes": 65715,
-      "sha256": "ac02b3a541a4be904dd0c4c18b96550fa1cf63bd6bf054cd7f82262a3c40fdfa"
+      "bytes": 65691,
+      "sha256": "8809527fe08ea1183c582bec6f4630d867b18e08cb70d8d3c07510b44bf86b89"
     },
     {
       "path": "dialogue-curriculum/lesson-1589.json",
       "bytes": 63208,
-      "sha256": "30853658119c0704151014032dc517f52efdfb6288162b364071a8171b979f81"
+      "sha256": "ee490cff852ee4a2e0ebbd6fc27d62b4d7b1c439b5aa2fece2663ca7e12e1de5"
     },
     {
       "path": "dialogue-curriculum/lesson-1590.json",
       "bytes": 62708,
-      "sha256": "88ab0b487eadac5416bbd1398cb17b55910bdc2f85eab519a015d327a4685e9b"
+      "sha256": "ee084854473d6923d90da235066be1f378bd1990b39e2e18fd2019150e0ea335"
     },
     {
       "path": "dialogue-curriculum/lesson-1591.json",
       "bytes": 67980,
-      "sha256": "d937c0e219aceb79e79e6a668d40bdc5051f935442141a7ac92d15629a95f6a4"
+      "sha256": "2d8c72442166fa91b4e677f593477ce1aaf6c782ba1aea92f0ed249ba2c8f946"
     },
     {
       "path": "dialogue-curriculum/lesson-1690.json",
       "bytes": 28862,
-      "sha256": "d8b6ffeb4eaa3e0b0a60ca46a4e4a2199cd750a5de404b1e32c03518a3b0c689"
+      "sha256": "b8076acccb5c390b2f54eacadae36c6b66a546eb2e0753dd574c81e07d74f9fa"
     },
     {
       "path": "dialogue-curriculum/lesson-1691.json",
       "bytes": 75923,
-      "sha256": "a93d5a8285ae4ab9a43a612023fbd0729fb35bfd208799ac63d3e1ce8b811eb7"
+      "sha256": "5fa1ecf84b5edb571357542fa41ed87919048f6603ddb13c63e7aecd0b381bd1"
     },
     {
       "path": "dialogue-curriculum/lesson-1692-p1.json",
       "bytes": 52434,
-      "sha256": "b7a457a21f18474514ec5da6eab48f57e570ab58db370248c721bcc98722cfef"
+      "sha256": "862a8fc5741886db48447f29a6bae235b8ef9370d428ef2058092de5320f6e65"
     },
     {
       "path": "dialogue-curriculum/lesson-1692-p2.json",
       "bytes": 55754,
-      "sha256": "e2700211bfdc562c352eac03e14b795d64e9010f5452523a2588e7f1bbc519f0"
+      "sha256": "9f311060eea2dc270a98909369336b87a4032218ff1211bb6565df70476d0714"
     },
     {
       "path": "dialogue-curriculum/lesson-1692-p3.json",
       "bytes": 54576,
-      "sha256": "c62a43db550925b5867e424ebf1b491d6c2e1d106416aa76c0e160edfdcdb293"
+      "sha256": "387a49d8e16204cbb734a355ae867b3d357f21df080536abfdf96295151985a1"
     },
     {
       "path": "dialogue-curriculum/lesson-1692-p4.json",
       "bytes": 71863,
-      "sha256": "650bd5ded7c8bb95d01c53c61b4e956df3aa86fa1aeca11233e1b299ed3d528e"
+      "sha256": "db6b4abc7bbff0d12465dffb50e39b9f616319f93dd21074d92d08e120fa34f5"
     },
     {
       "path": "dialogue-curriculum/lesson-1693.json",
       "bytes": 89631,
-      "sha256": "9947e414d8713d6b78f74961d5c6b0486f373a609dd1324a5553d2d69e611323"
+      "sha256": "8f65da76b37a2d55a93a23160d072f55399892954ce37a2ebd8348960475dcb4"
     },
     {
       "path": "dialogue-curriculum/lesson-1694.json",
       "bytes": 128638,
-      "sha256": "129ba110975cc2a596a26b4f8c87949a1dec6fd6cd60ee13d62108419fc1f724"
+      "sha256": "2e9413c3624da38b3c05334201aa537eaa81fc9be1dd7aaa15c2d06f4047ad73"
     },
     {
       "path": "dialogue-curriculum/lesson-1695.json",
       "bytes": 48718,
-      "sha256": "a6b2e33165a10344c57e7bdea2a483910d3a6b9cb9dc0cf35d959ea4354dbda7"
+      "sha256": "d577d4cd73a1239fc25afbefc68fd5d48635bbed2bbcaa16e6d88e3804549700"
     },
     {
       "path": "dialogue-curriculum/lesson-1696.json",
       "bytes": 33772,
-      "sha256": "ac31e12756b9e962ae72b5d5bd09a45d11538149b04cf841084c216fe6c0953c"
+      "sha256": "8002b4ac144485ecbd3be4e80a0a8e596d4fe6f65b94ca8e8e15029103fc48f8"
     },
     {
       "path": "dialogue-curriculum/lesson-1697.json",
       "bytes": 81083,
-      "sha256": "ed301ea6aca0bc347189d9d7c32eecb8f1b6eeea8203e6f6c57100e899577537"
+      "sha256": "744102996c57e9b72ce86b7b1c32ec26dc21ae030f621b6c8f3803ca6f9f378f"
     },
     {
       "path": "dialogue-curriculum/lesson-1698.json",
       "bytes": 62234,
-      "sha256": "9561b9a80cbab2aa1fa6df323e8a8a056275e29fad79621ac3e70668e2ebe795"
+      "sha256": "075a854cf36380683250c06621e8fb5531b02773618de881eb86f06997c88211"
     },
     {
       "path": "dialogue-curriculum/lesson-1699.json",
       "bytes": 99780,
-      "sha256": "bf066b4aa33ec621876b64a93377a44f311d1406026962756f105e722d5201e8"
+      "sha256": "33180c2b637a59c24b63355942c22d21bc703cbebbf06eb1dab0958480a6a2e6"
     },
     {
       "path": "dialogue-curriculum/lesson-1700.json",
       "bytes": 42374,
-      "sha256": "bfa8c292b3eed85b6325cca122d9d8b036c79538677d296fa3d1b6e87a2f8d21"
+      "sha256": "cc8a796c2eb091c99c7a8264025b0d229ff5e1950b41d9c8aaa66bdfa6be5e97"
     },
     {
       "path": "dialogue-curriculum/lesson-1701-p1.json",
       "bytes": 65264,
-      "sha256": "2843362e80fd005e5a7059b38f83180c95237186123fd49a8121e5291ac936cb"
+      "sha256": "7f36094ea343a5c6b41c3e6b4ba40ff6393d07e6176fa763b36b427f7e781060"
     },
     {
       "path": "dialogue-curriculum/lesson-1701-p2.json",
       "bytes": 67695,
-      "sha256": "33dda321031e50dc29af397166be3e0ce5d79011a833f9a9b87035af22dc3213"
+      "sha256": "2edaea2eaa5014d2a40642229c1d15d3d04e76fea8ca960251e5b01198a1accf"
     },
     {
       "path": "dialogue-curriculum/lesson-1702.json",
       "bytes": 45515,
-      "sha256": "f76d269e7f8e812129c14999af69369f94fcb778ae1a95c31f6919e558df0729"
+      "sha256": "495ba63fd5b5e0dc8ee6172eaedd3444a64cef1afd5f05d6dc8af0c1322b5fe4"
     },
     {
       "path": "dialogue-curriculum/lesson-1703.json",
       "bytes": 35577,
-      "sha256": "0b4fe7cb32b7ee14817d01d6ae266da1389922f8d8ea79a96c15d01778899635"
+      "sha256": "cc8552fa4ccfbf779df7cb570138c163ec5ed6d97b55d40ac7efc074e0866e13"
     },
     {
       "path": "dialogue-curriculum/lesson-1704-p1.json",
       "bytes": 77615,
-      "sha256": "b65c2cd240c0cb350916a6de5c9da2b812e7e80a0e5dc2fddb238682ced1d784"
+      "sha256": "e1d7fd291aa3fa33d9ec54e75f5cc52bc503e0757156950007a6ebad6605ff8a"
     },
     {
       "path": "dialogue-curriculum/lesson-1704-p2.json",
       "bytes": 76408,
-      "sha256": "085509319745ddd54c4328689b5c7b54ef55d2345c806c7d50c4ff81be30c997"
+      "sha256": "61f9203ad3b23affe87fe7c32f293bab1f8dd6dc3f42ddb99a9cfabff99a8c50"
     },
     {
       "path": "dialogue-curriculum/lesson-1705-p1.json",
       "bytes": 73539,
-      "sha256": "c41e715235a1a2051344a527d67a1792612302af3cd806947e5bd6f9a8cd05f8"
+      "sha256": "4e62f6f4e2877f3a3733c93ff9ea7c27e4729bb7973a2a25df47a64edb9224b0"
     },
     {
       "path": "dialogue-curriculum/lesson-1705-p2.json",
       "bytes": 65008,
-      "sha256": "59387e2b31af08be54b82eba0f41c00c09f3f2f76d993091aba08fa89c5373ee"
+      "sha256": "7cbce6292f5709939a07ed9636d3a7986cce0d1c75dc8a3f2824f61973d0c499"
     },
     {
       "path": "dialogue-curriculum/lesson-1705-p3.json",
       "bytes": 86793,
-      "sha256": "57ce743408bb99e198bba799467c91683f0870bbc69ab2838b55d116e7b1a8bb"
+      "sha256": "bb789dc655aadd40d7e1fc09ae978606417491fc567f7c4340820ea56a3dd219"
     },
     {
       "path": "dialogue-curriculum/lesson-1706-p1.json",
       "bytes": 64858,
-      "sha256": "3ee84e6ed2ef487ec06ada83b516e17e036a2db3b443ab2e47a8418c9af618ad"
+      "sha256": "ffdbf5d203f1550bd0851905509409a313aa951902510bcd1d23571585bf05a5"
     },
     {
       "path": "dialogue-curriculum/lesson-1706-p2.json",
       "bytes": 59219,
-      "sha256": "7a253a3ccd5babb057e6601e4ed2e11b85fc76629836b466d0f5598d9d0f7c16"
+      "sha256": "b1fa25d68c7d1dc09b9abee84bf2af624e07e6e6952346fe3d5e0e5a951b5b70"
     },
     {
       "path": "dialogue-curriculum/lesson-1706-p3.json",
       "bytes": 68346,
-      "sha256": "59cca77fa886a3fda5dda838196d3e435434f2e46dc04bffa8ee4ef20da8da79"
+      "sha256": "1ba75d352614c4ae5df38d4e8ca301c9b5a0e1f4ccb9f58a6f35d935e70d9ada"
     },
     {
       "path": "dialogue-curriculum/lesson-1707.json",
       "bytes": 45919,
-      "sha256": "381bf9d0cca2e3a8dcd6a52c1e9dbd4d8461d1aece0b42342992547cbdea753e"
+      "sha256": "bbf847b8580e9640f8f97a853c6f5175d1e4add2a7486fb2ec1e73011d27084d"
     },
     {
       "path": "dialogue-curriculum/lesson-1708.json",
       "bytes": 98676,
-      "sha256": "898769f7082ecf9f587ffb912c12eeb77456750657a97d75eda31880b2809561"
+      "sha256": "657e6c9e8fdc87438b448569ea88129f99dd488e372d312e171f9c5e77465c1f"
     },
     {
       "path": "dialogue-curriculum/lesson-1709.json",
       "bytes": 61618,
-      "sha256": "14bfd1e98f5933f7ecd28152881749ec66f751b424505c265af090f12207b76b"
+      "sha256": "da8b26b626874978923361a2a6a33085b2955f35249d136267c3380aca281213"
     },
     {
       "path": "dialogue-curriculum/lesson-1710.json",
       "bytes": 32917,
-      "sha256": "66df9477a10e8df147b127509f5cd4cb64290b7173d90881035c22e8e11a0d05"
+      "sha256": "6b28e0d8c59751122daa755882378b167f33d7f662991e28679056d363a6a1af"
     },
     {
       "path": "dialogue-curriculum/lesson-1711-p1.json",
       "bytes": 97102,
-      "sha256": "4c7b44ef0d798712dfaf5a8f9f2277210cf8d58ca5dea2074897985812c41cef"
+      "sha256": "bdc9cd92add0d862d5a3a5b8ae73d7316460d8819a18e761296d8c5ee56ca0a6"
     },
     {
       "path": "dialogue-curriculum/lesson-1711-p2.json",
       "bytes": 90062,
-      "sha256": "3734f28b57a371e1cfe7cdc857e6b8324c1b7b029e2941c331578dce256562c3"
+      "sha256": "e53c036911a98f31d20841d7f73b21eac10e521613e36e8bd2967c995884a945"
     },
     {
       "path": "dialogue-curriculum/lesson-1712.json",
       "bytes": 72193,
-      "sha256": "024a66354419c5e6fd909f637d158545c2a05b5e0a44f698f6d8defefc832e58"
+      "sha256": "98803ce232ef2fc4ac4cad53a9ce8d9c1d011841b60dfc3404ce579618408700"
     },
     {
       "path": "dialogue-curriculum/lesson-1713.json",
       "bytes": 56538,
-      "sha256": "7ca87e1e2a707708e835e6ef03262ff1e9afd2e4b2a9180ab4b98c52e6fadf67"
+      "sha256": "bb50cee4006a2b508375adb906e2ae15cc8316e344427561634de4941dc40feb"
     },
     {
       "path": "dialogue-curriculum/lesson-1714.json",
       "bytes": 52987,
-      "sha256": "b8c2c07b7374d2a9db9e3dd60ebf12f105266cb3b114aa3b37759123250ca4ef"
+      "sha256": "712f23ffe5413ca91037c5ab7f1066e34149df23e50a3027ec19d0522bccc4cc"
     },
     {
       "path": "dialogue-curriculum/lesson-1715.json",
       "bytes": 44421,
-      "sha256": "f90830e30305f24561614f69f294c9bb48ac7cd4c98e624b5f6b0603edca5dde"
+      "sha256": "e7b2a77855be5dc44367d7cbd3ae7014968dd0d5161b632f1fae189d58208752"
     },
     {
       "path": "dialogue-curriculum/lesson-1716.json",
       "bytes": 33561,
-      "sha256": "4d0c87e7b6fc74c09d21fc3ecc14c04a29c46ed87be2bb38556b97b676cc5e35"
+      "sha256": "ff0e6fa374fa28107b23569597aa63f9b44bcde5b5d030e65b825cbdd0014eae"
     },
     {
       "path": "dialogue-curriculum/lesson-1717-p1.json",
       "bytes": 57383,
-      "sha256": "a844594e1e3625aa7ad3ab8a988cb9d20e654197ff52c74ab4fa2ab254836683"
+      "sha256": "5a65e7b15e1e52b41bcdf31209f3864302aad8a9dd3293331b2aff8dc8c55d4e"
     },
     {
       "path": "dialogue-curriculum/lesson-1717-p2.json",
       "bytes": 55631,
-      "sha256": "c78dadeb92cb8c70f67397fd5f459d969f9a997de79eedf4e51f5683b3a93d48"
+      "sha256": "63a20779e57d47c70db9723e48bd342313b383fb99fc4800c2998af9f8aea987"
     },
     {
       "path": "dialogue-curriculum/lesson-1718.json",
       "bytes": 70879,
-      "sha256": "3663a7dbbe974ce05c8277dc5f841ff210df94cf7bb056d712af875595f5993c"
+      "sha256": "4cc2d01db5af6fca3d73ce11e06647928c064f1c438caebd3078b54f41dfeaf7"
     },
     {
       "path": "dialogue-curriculum/lesson-1719-p1.json",
       "bytes": 99224,
-      "sha256": "eebbc83a5594c4e941e89c12282710b17c7604097ca3920ceb5d18b7391a0ca3"
+      "sha256": "0d6488f680a61c9f2467411cdc21d8e666078d530b9b481f280a37235d7fdaac"
     },
     {
       "path": "dialogue-curriculum/lesson-1719-p2.json",
       "bytes": 95630,
-      "sha256": "a404a413ebbb7af3c73741ff0f695eafa4d3c56e97e51fbb0108b2874704b898"
+      "sha256": "9fb19a10b680ca9090fbd27e64a9f81169039cd66578532aac3aeb2e088f97c9"
     },
     {
       "path": "dialogue-curriculum/lesson-1720.json",
-      "bytes": 47915,
-      "sha256": "f6ef7537bd13e938e2bdde77b7296c970282167f8859cfb47f5748fbd4351822"
+      "bytes": 47907,
+      "sha256": "82ec87ea49b56148b0a7f13b7061b4e057f6138d663e972737462ab2c62e1af4"
     },
     {
       "path": "dialogue-curriculum/lesson-1721.json",
       "bytes": 69413,
-      "sha256": "82dc6bb132dc1771a6bad9fa2c4a12dc0dd742d4c0245884df0316cdf5150811"
+      "sha256": "a2f53837a80477a1d7aa5f7aa5fa909457153d4053d7204b2855b30d6c88e04b"
     },
     {
       "path": "dialogue-curriculum/lesson-1722-p1.json",
       "bytes": 70975,
-      "sha256": "250018e1fe83b70f7c66245436b98f16dcd52e3ed40c766b86d0ddb1646e2bd8"
+      "sha256": "2c1a540e603c916c819b2b4039eb3c1cfe77eda1492d1a443bda9c3edc3c58f7"
     },
     {
       "path": "dialogue-curriculum/lesson-1722-p2.json",
       "bytes": 58220,
-      "sha256": "641ebdc36d742fc83c15ad9b4cf142af81008a12c02ef87dfad69599391e996b"
+      "sha256": "731dd9925a0e315ed63f258de81b2681206fd1ccb2256c2d17820cbf7cc7d729"
     },
     {
       "path": "dialogue-curriculum/lesson-1722-p3.json",
       "bytes": 61105,
-      "sha256": "4d442dae453078cd88dd871643b3f65a0c365b7b2d387a24f6e003b432597521"
+      "sha256": "bcec422a3b4567d3ae00fe104544302040976b7c13b653d350e3b18f7ead6fbb"
     },
     {
       "path": "dialogue-curriculum/lesson-1722-p4.json",
       "bytes": 65649,
-      "sha256": "b771065de1352a6e8b8058afcc9bb35dc9438f0192e9a17841be38e8f2473c82"
+      "sha256": "19375db5cf901c7beb16be6f57e4ca30c6435806e3f3329144acbcfbcc01d214"
     },
     {
       "path": "dialogue-curriculum/lesson-1723.json",
       "bytes": 36805,
-      "sha256": "ac28373c4277df690ecba2dc4f40a486d0c1a74d386bdef0e2f3673b640fb3dc"
+      "sha256": "02d4db5b6b7ff6409491a0f0e627e49bab407f50a4a3c1f221180c3dbfe8a60f"
     },
     {
       "path": "dialogue-curriculum/lesson-1725.json",
       "bytes": 29182,
-      "sha256": "cd083e8391341e3d5c22cc7d798018a6e1b2aafd4d0842d4e72966b3123da2e2"
+      "sha256": "b9327e494cda34e2a8f9055cdbbc3cd61db1f788a925c06fa6cf78b8b0b9b27d"
     },
     {
       "path": "dialogue-curriculum/lesson-1726-p1.json",
       "bytes": 92107,
-      "sha256": "a55a4618d1aeae5030ab9b7f010be05dfd6ad8e742ac9c946ce249340e7c6be1"
+      "sha256": "af5b7edfc4d54dbbefaec8560b65b1156b0093f3d15c586fdc147dda3ec2e9ef"
     },
     {
       "path": "dialogue-curriculum/lesson-1726-p2.json",
       "bytes": 101653,
-      "sha256": "d4ea3dccc626935cfd9c504eef852821bfafce4df1618e18a6b46644f4e91e68"
+      "sha256": "4904ed5dbb627fe0319f6f5266002c8946f62b03c6183c9de5fbe7a351a194ba"
     },
     {
       "path": "dialogue-curriculum/lesson-1726-p3.json",
       "bytes": 85586,
-      "sha256": "9504d3e0293c912161013cdfb4bdf0427c886f442ed360e611d48c7311baad82"
+      "sha256": "8c3b4699706ef7081c6aceadc1d0196e9d68c556106d5850c66715fc03b130d0"
     },
     {
       "path": "dialogue-curriculum/lesson-1727.json",
       "bytes": 88009,
-      "sha256": "29a74c6df9d2ec03732fa0eccf3322ac5bd5abc9f76fbeb0c9195acbcb8ad5b8"
+      "sha256": "e8dfe56891e05021b00dade62534bf04692f8f67b23c2be02b2cfda22a31e949"
     },
     {
       "path": "dialogue-curriculum/lesson-1728.json",
       "bytes": 106242,
-      "sha256": "01407c292256d2699112b3cc87e7bb98d9fc1a6087f969d27ea0bc8eb5785c06"
+      "sha256": "9001552bb2b9848227165a191029dbc688017ce0ca79dddb503adac1d4ede949"
     },
     {
       "path": "dialogue-curriculum/lesson-1729.json",
       "bytes": 45839,
-      "sha256": "bcfaec4b3520e5b950d63b23c5a71039cbc2b1542b6b2f2397c1a8542aeaf241"
+      "sha256": "c968db8b6f7d934b4b5d35115938e61534e4127406349100872e78d95aa370f4"
     },
     {
       "path": "dialogue-curriculum/lesson-1730.json",
       "bytes": 28468,
-      "sha256": "3d6aa42d893bd8049aa6457eff24d10ed38da8246edb22153327258228e18bf6"
+      "sha256": "7c6b68379fa753a99c61ab2f3aefb1c951deecd399f2ac76d93c04ab5bc75541"
     },
     {
       "path": "dialogue-curriculum/lesson-1731.json",
       "bytes": 73595,
-      "sha256": "c35c15ee51a7021f9b39c599e33718cfad05595c47775ad22bda4e8b45a99a3a"
+      "sha256": "23fd85cfef5337a5a43e949bfd9b1e56f74f690257fb2a3d0760677fd3815cd9"
     },
     {
       "path": "dialogue-curriculum/lesson-1732.json",
-      "bytes": 83825,
-      "sha256": "e8de406ffa014caadaf8a6f12633c3ab6d17fa2c931f15bd03c511d533227edc"
+      "bytes": 83817,
+      "sha256": "9f4b3ccc7bc35cb5a34ce158356f35f6c18c6207b5e8ebba4cdddab341e7ec1a"
     },
     {
       "path": "dialogue-curriculum/lesson-1733.json",
-      "bytes": 79949,
-      "sha256": "ea56673cedc42ab09fb71a598b1e6cc752491164898656eaef04f06e6b54fadc"
+      "bytes": 79945,
+      "sha256": "a04ab0f8c6ff7dc25ac2452cd623d90c4d737ae2e76d2cc6079c43a7899c24e7"
     },
     {
       "path": "dialogue-curriculum/lesson-1734.json",
       "bytes": 43626,
-      "sha256": "2428a3cf5d43596f29614627aded578a71f8d4c4af8ef8ab11dd226ee03abe83"
+      "sha256": "c25f52d0d0a03b57392e750a6e5a96a044e93c53cf371fd1526e8819e2918fab"
     },
     {
       "path": "dialogue-curriculum/lesson-1735.json",
       "bytes": 29146,
-      "sha256": "7dd24ce1914f07ba42502629d14b5d4acf8228d47b504b9cd56de477e20ef51f"
+      "sha256": "019169c7dc3f9ef7578d07634ffeb128ce78c4681ef0f55c0884a7954a11951a"
     },
     {
       "path": "dialogue-curriculum/lesson-1736.json",
       "bytes": 63264,
-      "sha256": "7892fdd5a8fc5de09c7e24958277e15f4aeb9982eb39bda61c3e1f4a913c5f5a"
+      "sha256": "da4c4f6007a515a6df4ccfe7c1a7517e5ab5a6061bed6ce021ff1b3455954419"
     },
     {
       "path": "dialogue-curriculum/lesson-1737.json",
       "bytes": 83812,
-      "sha256": "eba2fb7960e85bb2867010bdbecafe1efb48977ccd9689dc44715072e5b17611"
+      "sha256": "b31b05ecf4d60c744dec994abbd470bf64fc768330239b04c7ba0ca150755663"
     },
     {
       "path": "dialogue-curriculum/lesson-1738.json",
       "bytes": 67743,
-      "sha256": "416efb42f88f9f08ce0015ec31fbcd392f0944eda84999ab4b337e2e8bd910f9"
+      "sha256": "e6969a5b1d5923a6a73c43cee107dbf1a1bcbcefbbbdcab9c155ba34f875590b"
     },
     {
       "path": "dialogue-curriculum/lesson-1739.json",
       "bytes": 48555,
-      "sha256": "aeaf934cce95726c3fedfea377ae6509000055da04b6813d9d98299cbcb3981d"
+      "sha256": "1697afbc94af3c3d67b3e156a4b993a9d91127f114b183dc656bb9a61491f7fe"
     },
     {
       "path": "dialogue-curriculum/lesson-1740.json",
       "bytes": 117531,
-      "sha256": "b66916d63c161c5d67d1853c454ee6e0aa9234be78df023517f1f8b9b73cf701"
+      "sha256": "8d45c444463ff826c32d5a26432501272434f9b97f6d1e01dd2d3b9625b33075"
     },
     {
       "path": "dialogue-curriculum/lesson-1741.json",
       "bytes": 28902,
-      "sha256": "7049a91057f93e46a01f406a0642fdff94cbce460ca94300d735ee20a1c57bb8"
+      "sha256": "5cb8e2d3a8337cc5ae57caa9c2e1bdf9c3378bffb80354092a33fc369337fe66"
     },
     {
       "path": "dialogue-curriculum/lesson-1742.json",
       "bytes": 70432,
-      "sha256": "fac611e1b93500dad7ea68e4913df7fbc8272b6bbb1d081aa3cd934216f9afe4"
+      "sha256": "31b75a777fe5f869352c5ed05fe13d919a99b75eb22de0a637626eeaa84abc8f"
     },
     {
       "path": "dialogue-curriculum/lesson-1743-p1.json",
       "bytes": 98409,
-      "sha256": "6f0fdab35567183a8c2a068ddbbb389d82d6cf53cf25deecc1094e92deac4cf1"
+      "sha256": "8f90a08f11c747b8a34588852a024cffb11c1bc09aae00ac23615953f92fab3b"
     },
     {
       "path": "dialogue-curriculum/lesson-1743-p2.json",
       "bytes": 85280,
-      "sha256": "b8c4ef917d15cf6adb87d542e192917b9890306af5ee3c3784de688c0a2a1a94"
+      "sha256": "f44383e62613406e0ea1c90b09f4ff3a60512e7312925720cff5d72ca5e5c06b"
     },
     {
       "path": "dialogue-curriculum/lesson-1744.json",
       "bytes": 44801,
-      "sha256": "4571c9bd91a7d8c4a1525e7804852b29156b23b319ce7ebe4e9f0e9a80b00d09"
+      "sha256": "e2ea4a545dd6b65fafb1062550bd5d9ad69c253792db08680caa1852fc224179"
     },
     {
       "path": "dialogue-curriculum/lesson-1745.json",
       "bytes": 29058,
-      "sha256": "ecd47d23eee6f19a9a04ba8d84430324c92bf94e1ff2ceb91eb1b0376999f81c"
+      "sha256": "14f26867d02c9c1d6317f9bbabe01f964e7c1c18f6a07b1b87d4b0e531112811"
     },
     {
       "path": "dialogue-curriculum/lesson-1746.json",
       "bytes": 128652,
-      "sha256": "6dc76d86e1f62604a3da1e5604941ca9954aa70860de3737e0abeba9c4edd246"
+      "sha256": "dae424d70ed24c6bc60746365b4e427acf4c580a2110a388934fe2fa959425ff"
     },
     {
       "path": "dialogue-curriculum/lesson-1747.json",
       "bytes": 98101,
-      "sha256": "a6b03aa0dfe98292637b6ca8334c2101e5181e36178b86b4114c59e88932b27d"
+      "sha256": "c4bcc9e2467ed9a31520cd6178b37aa835c9468397d5e62e28cd2b24ed758bc8"
     },
     {
       "path": "dialogue-curriculum/lesson-1748.json",
       "bytes": 95922,
-      "sha256": "e42b1ef79ec876867c6a51631c295e28f7a8eefd0a65b72c7f00a5205f59c86d"
+      "sha256": "db8d23d300600ea04203fdbba3f8d93b30c422ca6bd5f89f6d15e5ded23b0ff9"
     },
     {
       "path": "dialogue-curriculum/lesson-1749.json",
       "bytes": 43834,
-      "sha256": "041dd0aa09aef94be7c10675c14601d545570eb663846f63fe45ff8122ccaf46"
+      "sha256": "6c368575cf911f5a936128013b4514690912adbf111bb4629bc464a462af7c2f"
     },
     {
       "path": "dialogue-curriculum/lesson-1750.json",
       "bytes": 69699,
-      "sha256": "fba08fd73a4648f21f810bd6e72ebfea85cf43b2a064ff6211cb41417b5dbf03"
+      "sha256": "931bfa72ae164f7817277122c81c916f7202ece4594e66b987ce40ee2e5e0459"
     },
     {
       "path": "dialogue-curriculum/lesson-1751.json",
       "bytes": 28978,
-      "sha256": "92174eab26f734e492473055b64005b7f2b4c3fc1233a47db57980cf2629ac81"
+      "sha256": "4225e603cf39b2379533317923b13f6e85f0c48d785cabedfa6ad23fdeb0b5fe"
     },
     {
       "path": "dialogue-curriculum/lesson-1752.json",
       "bytes": 78235,
-      "sha256": "0a654555f70af5a38f82939dbf1763cd288dca4ebc0079daf0e91bfe66055271"
+      "sha256": "56eaa46e7c83eb6a6a8c09a96a4883a3d0671d7318223ff5904a524f136fd33a"
     },
     {
       "path": "dialogue-curriculum/lesson-1753-p1.json",
       "bytes": 79166,
-      "sha256": "6ea60665d1770b46c66dbf2a8e9dea9880cb24f71aea4d2f5cba5a8d059b4bd1"
+      "sha256": "2cf34d2137883e9a685c8e4bab0199d58090d7374a4036e0e0ee86cd13ae7b86"
     },
     {
       "path": "dialogue-curriculum/lesson-1753-p2.json",
       "bytes": 79088,
-      "sha256": "1f1bdff1f93ca9f5ef4f6e87956814e12ed21157f00a6d03d980ddfb6da44794"
+      "sha256": "3dc2a4c6f99b7b506559caf49748de7840dffa0899e6f362eecb5f60d2dfb9d0"
     },
     {
       "path": "dialogue-curriculum/lesson-1754.json",
       "bytes": 52410,
-      "sha256": "5ced375e3474b8d84fb58dbe4fa42de3b2509706b369dee9142aa004505db016"
+      "sha256": "b7413ff3cc0f6e0b43a3584cfec88009c68a8c4d7681ad8ed74ef1194bc02b33"
     },
     {
       "path": "dialogue-curriculum/lesson-1755-p1.json",
       "bytes": 63836,
-      "sha256": "0b906c498405ff1d33a8265625859b5329ece97abb578b51e2de22962da79de9"
+      "sha256": "ca3362b5f654b5691e44ff418ef69b7b3e72daf91fc46ebc1c6ae91444668429"
     },
     {
       "path": "dialogue-curriculum/lesson-1755-p2.json",
       "bytes": 70890,
-      "sha256": "da3046f976214ff4821fd7c19f62d192b26fc9527dd0901418609c9b8d261db8"
+      "sha256": "73f880e89e28268b2f58baac1aeb6afde201f7dff298d74fa378c45f0ec96ff2"
     },
     {
       "path": "dialogue-curriculum/lesson-1755-p3.json",
       "bytes": 67869,
-      "sha256": "490ef66501f65bbe48e3dedac80aa889b3df4137e9b4d42f6d03ede8177dc6d3"
+      "sha256": "ac1b48a8db3d6165beafde6fb4a2950ca9acd5e3bb44927d1dfc1b75aab9a2d0"
     },
     {
       "path": "dialogue-curriculum/lesson-1755-p4.json",
       "bytes": 36106,
-      "sha256": "704999d41aa080ea39b099d056276625130c6c5730e61ff96f23f5ea796a8573"
+      "sha256": "0414b701a2c0284532c0a30167187da1e6d3a960e32da06917b83aef7a92255c"
     },
     {
       "path": "dialogue-curriculum/lesson-1756.json",
       "bytes": 35807,
-      "sha256": "73082ca6a0ca25cc44bef52147b2bdaa0acab3a9297c0053e9045060df3c2ead"
+      "sha256": "129bb4c2dee12f1a918fae82b76fa8507c32d0171dc7900dace68e7943ce6765"
     },
     {
       "path": "dialogue-opening.js",
