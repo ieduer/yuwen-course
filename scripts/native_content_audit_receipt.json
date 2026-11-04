@@ -2,9 +2,9 @@
   "schemaVersion": "yw-native-content-audit-receipt-v1",
   "siteKey": "yw",
   "reviewDisposition": "approved",
-  "reviewAuthority": "suen-20261104-direct「准，重簽」-relayed-local_3f2657f3 (re-sign for the bank-fix-yw-20261104 corrected vocabulary content; decision 「A：發新正式版本」)",
-  "reviewedAt": "2026-11-04T03:45:58.725001Z",
-  "semanticDigest": "sha256:adaa1a9374bb3710d95150f8073d5c97192e037abd86687a4775d968c949a5b4",
+  "reviewAuthority": "suen-20261104-direct「准，重簽 r42」-relayed-local_3f2657f3 (re-sign for bank-fix-yw-20261104 r42: lesson-1722-p2:v05 redesign, revision batch v2 release yw-release-83caa75b6f61afb7; prior approval 「准，重簽」 for adaa1a93)",
+  "reviewedAt": "2026-11-04T05:23:28.765219Z",
+  "semanticDigest": "sha256:8b73c9332ce49f9e693000cb385deef0257fbc1a38e1eb26876eb31dee698404",
   "counts": {
     "activeStudyGuideItems": 193,
     "annotations": 2932,
