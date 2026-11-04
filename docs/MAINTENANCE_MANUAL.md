@@ -1,3 +1,19 @@
+## Current 2026-11-04 — r41: 180 vocabulary corrections as an append-only formal revision release (accepted)
+
+**Accepted:** source `a2d5179`, Pages deployment `972b6381`, effective 2026-11-04T04:08:35Z; rollback to r40 `307566bf` (artifact `/private/tmp/cf-task-yw-r40-20261101/yw-r40/.release/site`, digest `703cb08c` = registered). The User Center went first (Worker `c47d1088` / deployment `4339bd2f`, source `5a1189c`, 03:07:33Z; rollback `5db645a3`). Status `20261104-yw-vocab-corrections` (yw) and `20261104-my-yw-question-revision` (my).
+
+**Mechanism (use it for any later content correction of formal items).**
+- `scripts/formal-revisions/<policy>.json` lists every revised resourceKey with prior and new resourceVersion. `build_learning_manifest.mjs` reconstructs the prior versions and must reproduce e310 and 5bcdbb exactly; revised items move to the current release with `formalRevisionPolicyVersion` and `revisionOf`; everything else keeps its home release. `site/formal-scope-policy.js` holds `EXPANSION_FORMAL_RELEASE` and `FORMAL_REVISION_POLICY`.
+- Do not change a vocabulary `type`: it is the manifest `questionType` and breaks the e310 reconstruction.
+- The User Center must register the revision first (`yw-source-authority.js` formalRevisionPolicy and priorFormalReleases, `ywFormalItemIdentities`). Only one revision level is supported.
+- Dialogue: `dialogue-source.js` passes the session's own stored vocabulary item (`frozenVocab`, memory only) to `handleDialogueOriginal`; `handleReadingVocabAttempt` grades a frozen session against it and `recordLearningInteraction` records the exact `revisionOf` identity. `build_dialogue_curriculum.mjs` adds `priorResourceVersions` to revised legacy formal items and `dialogue-legacy.js` treats them as the same unit.
+- Language calibrations bound to a changed curriculum (lesson-1498, lesson-1711-p1) are re-bound with item-by-item proof (one-time script and evidence in the report folder); consumed calibration packets stay frozen and their regressions read `scripts/fixtures/dialogue-curriculum-calibration-frozen/`.
+- Any content change moves the native graph digest: `scripts/native_content_audit_receipt.json` needs the owner's approval (re-signed 2026-11-04 「准，重簽」 to `adaa1a93…`).
+
+**Acceptance (553, 13 Claude calls, 506,857 µ$).** New session lesson-1705-p2: corrected v04 「作客」 answered D, graded correct, evidence under `6ceed2f6`, UC accepted. Frozen session lesson-1499: revised v03 graded against its shown options, evidence under the prior e310 identity, UC accepted. 12/12 yw deliveries accepted after the hub release, 0 quarantine.
+
+**Known.** lesson-1556 (氓) hits the APIS stream admission limit (contents JSON > 32000) by its third turn; YW logs it as `gateway_credential_rejected` (pre-existing). App content pointer unchanged since 2026-07-30.
+
 ## Current 2026-11-01 — r40: classical study-guide items in the paragraph reading, answered before they are shown (accepted)
 
 **Accepted:** source `6b8c235`, Pages deployment `307566bf`, effective 2026-11-01T05:44:27Z, accepted 06:31:23Z; rollback to r39 `05965908` (artifact `/private/tmp/cf-task-yw-r38-20261031/yw-r39/.release/site`, digest `69359ed3…` = registered). On test account 553, lesson-1578 (10 Claude turns, 437,484 µ$): three words confirmed through their original choices; the guide then raised the 「之」 set item (虛詞) without its answer; an incomplete answer was recorded as attempt 1 (55, needs_revision, ineligible) with no reference or key feedback on the page; the complete answer as attempt 2 (96, passed, eligible); the item preserved, vocabulary track 9/17, lesson 55/100, and the achievement card showed the reference only then. Two option choices named by their text were not recorded (`choice_not_explicit`, the r22 rule). Status `20261101-yw-study-guide-dialogue`.
