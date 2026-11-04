@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {frozenCurriculumPath} from './frozen_calibration_curriculum.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -11,7 +12,7 @@ import {buildReleaseSite,projectReleaseJson,RELEASE_JSON_PROJECTION_VERSION} fro
 import {amendment5Budget,amendment5ConservativeMicros,amendment5TerminalDisposition,amendment5Admission,amendment5CaseSourceReadiness,handleAmendment5Calibration} from '../site/dialogue-calibration-amendment5.js';
 const corpus=JSON.parse(fs.readFileSync('scripts/dialogue-calibration-amendment5-cases.json'));
 const packet=JSON.parse(fs.readFileSync('site/dialogue-calibration-amendment5-packet.json'));
-const load=id=>JSON.parse(fs.readFileSync(`site/dialogue-curriculum/${id}.json`));
+const load=id=>JSON.parse(fs.readFileSync(frozenCurriculumPath(id)));
 const hex='a'.repeat(64),now=Date.parse('2026-10-13T08:10:00Z');
 const authority={...contract,status:'approved',active:true,paidCallsAuthorized:true,approvalDigest:contract.authorityDigest,registryReceiptDigest:hex,priorReceiptSetDigest:hex,readyAt:'2026-10-13T08:00:00Z',approvedNewAttempts:56,approvedNewReservedMicros:4704000};
 const history={attempts:13,reservedMicros:1092000,knownMicros:10267,unknownReservedMicros:924000,allReceiptsReconciled:true,receiptSetDigest:hex};
@@ -55,7 +56,7 @@ test('all28 pins match private released curriculum and frozen packet, with separ
  try{
   const sourceRoot=path.join(root,'source'),releaseRoot=path.join(root,'release');
   fs.mkdirSync(path.join(sourceRoot,'dialogue-curriculum'),{recursive:true});
-  for(const id of new Set(packet.cases.map(c=>c.lessonId)))fs.copyFileSync(`site/dialogue-curriculum/${id}.json`,path.join(sourceRoot,'dialogue-curriculum',id+'.json'));
+  for(const id of new Set(packet.cases.map(c=>c.lessonId)))fs.copyFileSync(frozenCurriculumPath(id),path.join(sourceRoot,'dialogue-curriculum',id+'.json'));
   const packetName='dialogue-calibration-amendment5-packet.json';
   const packetBytes=fs.readFileSync('site/'+packetName,'utf8');
   fs.writeFileSync(path.join(sourceRoot,packetName),packetBytes);
@@ -74,7 +75,7 @@ test('all28 pins match private released curriculum and frozen packet, with separ
   let changed=0;
   for(const c of packet.cases){
    const privateText=releasedWorker.privateData['/dialogue-curriculum/'+c.lessonId+'.json'];
-   assert.equal(privateText,projectReleaseJson('dialogue-curriculum/'+c.lessonId+'.json',fs.readFileSync('site/dialogue-curriculum/'+c.lessonId+'.json','utf8')),c.id+' exact private response bytes');
+   assert.equal(privateText,projectReleaseJson('dialogue-curriculum/'+c.lessonId+'.json',fs.readFileSync(frozenCurriculumPath(c.lessonId),'utf8')),c.id+' exact private response bytes');
    const released=JSON.parse(privateText);
    assert.equal(c.sourceDigest,hash(released),c.id);
    assert.equal(c.rawSourceDigest,hash(load(c.lessonId)),c.id);

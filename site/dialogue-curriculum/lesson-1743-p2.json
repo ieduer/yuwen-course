@@ -1102,7 +1102,7 @@
         "resourceVersion": "sha256:c8bee2750d0bace819e39a37fe6c8807b2c2258111e56d102a4fa1bd0b8cd0da",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1121,7 +1121,7 @@
         "resourceVersion": "sha256:6b9da156bb855cd8d66a59c09e7eebe125c6df75e3860c8264e5240ed4ab7ca6",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1159,7 +1159,7 @@
         "resourceVersion": "sha256:c672763bf17d54e39c23cbe293e020fc2642f07155d8a1b30967eaf8685e4678",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1254,7 +1254,7 @@
         "resourceVersion": "sha256:64d9e180616421214e641e52c7d9f169d0cf847ee1277ffc05e2a05004d3197d",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1292,7 +1292,7 @@
         "resourceVersion": "sha256:9ad72b4fb0041a3c5e0c5383dfd4d92ec3f96695975af3e10f99f76557d8c1e2",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1697,7 +1697,7 @@
         "resourceVersion": "sha256:c8bee2750d0bace819e39a37fe6c8807b2c2258111e56d102a4fa1bd0b8cd0da",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1707,7 +1707,7 @@
         "resourceVersion": "sha256:6b9da156bb855cd8d66a59c09e7eebe125c6df75e3860c8264e5240ed4ab7ca6",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1727,7 +1727,7 @@
         "resourceVersion": "sha256:c672763bf17d54e39c23cbe293e020fc2642f07155d8a1b30967eaf8685e4678",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1777,7 +1777,7 @@
         "resourceVersion": "sha256:64d9e180616421214e641e52c7d9f169d0cf847ee1277ffc05e2a05004d3197d",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1797,7 +1797,7 @@
         "resourceVersion": "sha256:9ad72b4fb0041a3c5e0c5383dfd4d92ec3f96695975af3e10f99f76557d8c1e2",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2599,7 +2599,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-8ac0b3c174cb4ed39bd4",
+  "curriculumVersion": "yw-dialogue-6013b82d24bd9037e7ed",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

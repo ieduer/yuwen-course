@@ -1798,7 +1798,7 @@
         "resourceVersion": "sha256:b336bbf79714db18ff0b2892c266fafe5c0009d903505b166ca231ed8da4eac8",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1874,7 +1874,7 @@
         "resourceVersion": "sha256:a72106568baf82d86abbfeb045f637f7fe0c4128a1d013becd861584bdb80db0",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -2496,7 +2496,7 @@
         "resourceVersion": "sha256:b336bbf79714db18ff0b2892c266fafe5c0009d903505b166ca231ed8da4eac8",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2536,7 +2536,7 @@
         "resourceVersion": "sha256:a72106568baf82d86abbfeb045f637f7fe0c4128a1d013becd861584bdb80db0",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -3450,7 +3450,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-42d0166d61ee95eecca3",
+  "curriculumVersion": "yw-dialogue-7794badeddad09f7e314",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

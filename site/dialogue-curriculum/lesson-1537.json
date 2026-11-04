@@ -1165,10 +1165,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1537:vocab:lesson-1537:v04",
         "canonicalUnitId": "yw:lesson-1537:vocabulary:lesson-1537:v04",
-        "resourceVersion": "sha256:791449f3b826d287650fbfdc09ef1b70df12c272b4ba6939ebf7332dda199061",
+        "resourceVersion": "sha256:e03892bf3b911fc3739b0eabb744af902d2fe35fbd1718724bea87430f27bfc5",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1240,7 +1240,7 @@
         "resourceVersion": "sha256:ed8730ea0fbea71f8d541c268a1d9b92822ba6cf591428a39cd7ec4b9208c2a0",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1465,7 +1465,7 @@
       "sourceSentence": "负而前驱",
       "meaning": "背",
       "explanation": "「负而前驱」的「负」意为背、背负，指背着装有三支箭的锦囊走在前面，故选A。现代汉语「负重」中的「负」也保留此义。",
-      "type": "contextual-choice",
+      "type": "gu-jin",
       "difficulty": 1,
       "question": "「负而前驱」中「负」的意思是",
       "options": [
@@ -1483,7 +1483,7 @@
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
         "語境：「负而前驱」\n「负而前驱」中「负」的意思是\nA. 背负\nB. 辜负\nC. 失败\nD. 亏欠\n請選出答案，並用自己的話說明判斷依據。",
-        "請解釋「负而前驱」中「负」的意思，再用自己的話改寫這句話，說明語境依據。"
+        "回到「负而前驱」：「负」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
     {
@@ -1804,10 +1804,10 @@
       {
         "resourceKey": "effect:lesson-1537:vocab:lesson-1537:v04",
         "canonicalUnitId": "yw:lesson-1537:vocabulary:lesson-1537:v04",
-        "resourceVersion": "sha256:791449f3b826d287650fbfdc09ef1b70df12c272b4ba6939ebf7332dda199061",
+        "resourceVersion": "sha256:e03892bf3b911fc3739b0eabb744af902d2fe35fbd1718724bea87430f27bfc5",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1843,7 +1843,7 @@
         "resourceVersion": "sha256:ed8730ea0fbea71f8d541c268a1d9b92822ba6cf591428a39cd7ec4b9208c2a0",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2285,7 +2285,7 @@
       },
       {
         "requirementId": "effect:lesson-1537:vocab:lesson-1537:v04",
-        "sourceVersion": "sha256:791449f3b826d287650fbfdc09ef1b70df12c272b4ba6939ebf7332dda199061",
+        "sourceVersion": "sha256:e03892bf3b911fc3739b0eabb744af902d2fe35fbd1718724bea87430f27bfc5",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2954,7 +2954,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-91d6dc8197f142b92822",
+  "curriculumVersion": "yw-dialogue-eab963b3c65d5a16dbff",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

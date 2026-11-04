@@ -628,10 +628,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1560:vocab:lesson-1560:v04",
         "canonicalUnitId": "yw:lesson-1560:vocabulary:lesson-1560:v04",
-        "resourceVersion": "sha256:99bd0c29980afeba47ad6a897122645f84df45cfc48819e7963e23f502ee8a44",
+        "resourceVersion": "sha256:db2812cd16862f0b8be2df9243e852ef266b404ad2b3e2ec49f8f2ba6581d66e",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -854,7 +854,7 @@
       "sourceSentence": "三顾频烦天下计",
       "meaning": "频繁",
       "explanation": "「频烦」犹「频繁」，意为多次。「三顾频烦天下计」指刘备为天下大计三顾茅庐，向诸葛亮求教。",
-      "type": "contextual-choice",
+      "type": "gu-jin",
       "difficulty": 2,
       "question": "下列选项中，对「频烦」在诗中意思的解释正确的一项是",
       "options": [
@@ -872,7 +872,7 @@
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
         "語境：「三顾频烦天下计」\n下列选项中，对「频烦」在诗中意思的解释正确的一项是\nA. 烦琐\nB. 多次，频繁\nC. 总是\nD. 请求\n請選出答案，並用自己的話說明判斷依據。",
-        "請解釋「三顾频烦天下计」中「频烦」的意思，再用自己的話改寫這句話，說明語境依據。"
+        "回到「三顾频烦天下计」：「频烦」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
     {
@@ -1117,10 +1117,10 @@
       {
         "resourceKey": "effect:lesson-1560:vocab:lesson-1560:v04",
         "canonicalUnitId": "yw:lesson-1560:vocabulary:lesson-1560:v04",
-        "resourceVersion": "sha256:99bd0c29980afeba47ad6a897122645f84df45cfc48819e7963e23f502ee8a44",
+        "resourceVersion": "sha256:db2812cd16862f0b8be2df9243e852ef266b404ad2b3e2ec49f8f2ba6581d66e",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1423,7 +1423,7 @@
       },
       {
         "requirementId": "effect:lesson-1560:vocab:lesson-1560:v04",
-        "sourceVersion": "sha256:99bd0c29980afeba47ad6a897122645f84df45cfc48819e7963e23f502ee8a44",
+        "sourceVersion": "sha256:db2812cd16862f0b8be2df9243e852ef266b404ad2b3e2ec49f8f2ba6581d66e",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1981,7 +1981,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-246aaf3ff8bede2a1fa1",
+  "curriculumVersion": "yw-dialogue-8597d53bc6699ca2c6ae",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

@@ -528,7 +528,7 @@
         "resourceVersion": "sha256:ef1f5c092579f21e633eee21a827a7e0c16be47be4e3a931d7d9a5e5ed7f388f",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -969,7 +969,7 @@
         "resourceVersion": "sha256:ef1f5c092579f21e633eee21a827a7e0c16be47be4e3a931d7d9a5e5ed7f388f",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1712,7 +1712,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-b0f1372c8ffc0d03e580",
+  "curriculumVersion": "yw-dialogue-bf3b34e2d8492806363b",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

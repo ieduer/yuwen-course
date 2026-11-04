@@ -5,7 +5,7 @@ import packet from '../site/dialogue-full-language-packet.json' with {type:'json
 import {FULL_OPERATION,releaseCases,fullReceipt,digest} from '../site/dialogue-full-language.js';
 import {reconciledCost} from '../site/dialogue-budget.js';
 import {projectReleaseJson} from './build_release_site.mjs';
-import {loadCurriculum} from './dialogue_full_language.mjs';
+import {loadFrozenCurriculum as loadCurriculum} from './frozen_calibration_curriculum.mjs';
 import {historicalCalibrationSource,inspectHistoricalCalibration,inspectScopedCalibration} from './dialogue_calibration_scope.mjs';
 
 const sha=x=>createHash('sha256').update(x).digest('hex');
@@ -30,7 +30,7 @@ async function fixture(c=specs[0]){
 
 test('scoped historical evidence keeps old prompts and produces only an unapplied proposal',async()=>{
  const records=await Promise.all(specs.map(fixture)),before=JSON.stringify(records),curriculum=JSON.stringify(loadCurriculum('lesson-1498'));
- const a=await inspectScopedCalibration(records,objectives),b=await inspectScopedCalibration([...records].reverse(),[...objectives].reverse());
+ const a=await inspectScopedCalibration(records,objectives,loadCurriculum),b=await inspectScopedCalibration([...records].reverse(),[...objectives].reverse(),loadCurriculum);
  assert.deepEqual(a,b);assert.equal(a.cases.length,6);assert.equal(a.changes.length,3);
  assert(a.cases.every(c=>c.promptDigest!==c.currentPromptDigest&&c.currentValidatorCompatible&&!c.currentPromptProviderVerified));
  for(const k of ['sourceApplied','releaseAuthorized','paidCallsAuthorized','completeModeAccepted','currentPromptProviderVerified'])assert.equal(a[k],false);
@@ -38,9 +38,9 @@ test('scoped historical evidence keeps old prompts and produces only an unapplie
 });
 test('scoping cannot omit a negative case, duplicate a result or add a different objective',async()=>{
  const records=await Promise.all(specs.map(fixture));
- for(const rows of [records.slice(1),[...records.slice(1),records[1]],[...records,{...records[0],readback:{...records[0].readback,caseId:'foreign'}}]])await assert.rejects(inspectScopedCalibration(rows,objectives),/coverage/);
- await assert.rejects(inspectScopedCalibration(records,[...objectives,objectives[0]]),/distinct/);
- await assert.rejects(inspectScopedCalibration(records,['lesson-1498:unknown']),/no original cases/);
+ for(const rows of [records.slice(1),[...records.slice(1),records[1]],[...records,{...records[0],readback:{...records[0].readback,caseId:'foreign'}}]])await assert.rejects(inspectScopedCalibration(rows,objectives,loadCurriculum),/coverage/);
+ await assert.rejects(inspectScopedCalibration(records,[...objectives,objectives[0]],loadCurriculum),/distinct/);
+ await assert.rejects(inspectScopedCalibration(records,['lesson-1498:unknown'],loadCurriculum),/no original cases/);
 });
 for(const [label,edit,pattern] of [
  ['execution substitution',r=>r.execution.sourceCommit='a'.repeat(40),/not reviewed/],
@@ -56,14 +56,18 @@ for(const [label,edit,pattern] of [
  ['empty reasoning',r=>r.semanticReview.sourceGrounding='ok',/substantive/],
  ['undesignated review',r=>delete r.semanticReview.designationReference,/provenance/],
  ['premature review',r=>r.semanticReview.reviewedAt=execution.readyAt,/predates/],
-])test(label+' fails closed',async()=>{const r=await fixture();edit(r);await assert.rejects(inspectHistoricalCalibration(r),pattern);});
+])test(label+' fails closed',async()=>{const r=await fixture();edit(r);await assert.rejects(inspectHistoricalCalibration(r,loadCurriculum),pattern);});
 test('current curriculum drift and unreviewed code cannot reuse old calibration',async()=>{
  await assert.rejects(inspectHistoricalCalibration(await fixture(),id=>({...loadCurriculum(id),author:'changed'})),/curriculum changed/);
  await assert.rejects(historicalCalibrationSource('a'.repeat(40)),/not reviewed/);
 });
+test('2026-11-04: the corrected live curriculum of lesson-1498 cannot reuse the consumed historical calibration',async()=>{
+ const live=(await import('./dialogue_full_language.mjs')).loadCurriculum;
+ await assert.rejects(inspectHistoricalCalibration(await fixture(),live),/curriculum changed/);
+});
 test('rehashed raw records cannot hide usage, cost or source metadata tampering',async()=>{
  for(const [edit,pattern] of [[r=>r.rawRow.usage_json='{}',/usage/],[r=>r.rawRow.accounted_micros=1,/cost/],[r=>r.rawRow.curriculum_json='{}',/source metadata/]]){
   const r=await fixture();edit(r.readback);r.readback.receiptDigest=await fullReceipt(r.readback.rawRow);
-  await assert.rejects(inspectHistoricalCalibration(r),pattern);
+  await assert.rejects(inspectHistoricalCalibration(r,loadCurriculum),pattern);
  }
 });

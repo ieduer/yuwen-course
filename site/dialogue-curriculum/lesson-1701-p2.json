@@ -692,7 +692,7 @@
         "resourceVersion": "sha256:d12ca897f9b90df3cbaf34e9df3664c5e1b5e39c90704387de161e8d12badadc",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -727,10 +727,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1701-p2:vocab:lesson-1701-p2:v09",
         "canonicalUnitId": "yw:lesson-1701-p2:vocabulary:lesson-1701-p2:v09",
-        "resourceVersion": "sha256:cf7d529336df89c65b44146df6dc5e7622620b0c250786177e7e2b7b26720bb3",
+        "resourceVersion": "sha256:5b84e3d638901e23d385e695ddadfe3937322abdd5805cd9fb875838e4241ce9",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -973,7 +973,7 @@
       "sourceSentence": "田夫抛秧田妇接",
       "meaning": "投擲",
       "explanation": "「拋」「接」寫出農夫拋送秧苗、農婦接取秧苗的連貫動作，表現二人配合默契、勞作熟練。",
-      "type": "interpretation",
+      "type": "substitution",
       "difficulty": 3,
       "question": "「田夫拋秧田婦接」中，「拋」「接」兩個動詞有何表達效果？",
       "options": [
@@ -989,7 +989,7 @@
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
         "語境：「田夫抛秧田妇接」\n「田夫拋秧田婦接」中，「拋」「接」兩個動詞有何表達效果？\nA. 突出田園景色的秀美\nB. 突出秧苗生長的旺盛\nC. 表現農夫與農婦配合默契、動作熟練\nD. 表現農夫與農婦動作遲緩、配合生疏\n請選出答案，並用自己的話說明判斷依據。",
-        "「田夫抛秧田妇接」中的「抛」如何幫助你理解這句話？請解釋它的語境義，並說明你的理由。"
+        "請用恰當的現代說法替換「田夫抛秧田妇接」中的「抛」，並解釋這個替換如何保留原句的意思。"
       ]
     },
     {
@@ -1172,7 +1172,7 @@
         "resourceVersion": "sha256:d12ca897f9b90df3cbaf34e9df3664c5e1b5e39c90704387de161e8d12badadc",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1189,10 +1189,10 @@
       {
         "resourceKey": "effect:lesson-1701-p2:vocab:lesson-1701-p2:v09",
         "canonicalUnitId": "yw:lesson-1701-p2:vocabulary:lesson-1701-p2:v09",
-        "resourceVersion": "sha256:cf7d529336df89c65b44146df6dc5e7622620b0c250786177e7e2b7b26720bb3",
+        "resourceVersion": "sha256:5b84e3d638901e23d385e695ddadfe3937322abdd5805cd9fb875838e4241ce9",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1501,7 +1501,7 @@
       },
       {
         "requirementId": "effect:lesson-1701-p2:vocab:lesson-1701-p2:v09",
-        "sourceVersion": "sha256:cf7d529336df89c65b44146df6dc5e7622620b0c250786177e7e2b7b26720bb3",
+        "sourceVersion": "sha256:5b84e3d638901e23d385e695ddadfe3937322abdd5805cd9fb875838e4241ce9",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2038,7 +2038,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-cfa084192a627fb5842f",
+  "curriculumVersion": "yw-dialogue-06cee89acec367bf748c",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

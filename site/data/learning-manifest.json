@@ -3,7 +3,7 @@
   "siteKey": "yw",
   "title": "語文課 · 必修與選擇性必修見效題目",
   "manifestVersion": "yw-e8a6b72248be1cd8",
-  "sourceReleaseId": "yw-release-d3801a553a0391d0",
+  "sourceReleaseId": "yw-release-6ceed2f673344492",
   "mappingVersion": "yw-canonical-learning-mapping-v1",
   "lineagePolicy": "append_only_canonical_unit_resource_versions_v1",
   "resourceKeyHash": "sha256:e8a6b72248be1cd8af86d37ec66bd4381d1546e8306b36023b145decbf044866",
@@ -355,7 +355,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -456,7 +456,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -1013,7 +1013,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -1666,7 +1666,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -2733,7 +2733,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -2762,7 +2762,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -3163,7 +3163,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -3204,10 +3204,10 @@
       "sourcePath": "data/vocab/lesson-1701-p2.json",
       "questionKind": "vocabulary",
       "questionId": "lesson-1701-p2:v09",
-      "questionType": "interpretation",
+      "questionType": "substitution",
       "questionIndex": 7,
       "canonicalUnitId": "yw:lesson-1701-p2:vocabulary:lesson-1701-p2:v09",
-      "resourceVersion": "sha256:cf7d529336df89c65b44146df6dc5e7622620b0c250786177e7e2b7b26720bb3",
+      "resourceVersion": "sha256:5b84e3d638901e23d385e695ddadfe3937322abdd5805cd9fb875838e4241ce9",
       "mappingVersion": "yw-canonical-learning-mapping-v1",
       "dimensionKey": "retention",
       "competencyKey": "vocabulary",
@@ -3216,7 +3216,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -3599,7 +3599,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -3616,10 +3616,10 @@
       "sourcePath": "data/vocab/lesson-1704-p1.json",
       "questionKind": "vocabulary",
       "questionId": "lesson-1704-p1:v02",
-      "questionType": "contextual-choice",
+      "questionType": "gu-jin",
       "questionIndex": 2,
       "canonicalUnitId": "yw:lesson-1704-p1:vocabulary:lesson-1704-p1:v02",
-      "resourceVersion": "sha256:f8b2249da3fdb5edf16a2897f164cabef642a7263ee4d2a200d5475684833567",
+      "resourceVersion": "sha256:7e649f95c2b3055f665f4d07588ffb3a51fdd7aee65c1d036a626554bda56a30",
       "mappingVersion": "yw-canonical-learning-mapping-v1",
       "dimensionKey": "retention",
       "competencyKey": "vocabulary",
@@ -3628,7 +3628,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -3681,7 +3681,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -4010,7 +4010,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -4387,7 +4387,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -4440,7 +4440,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -4781,10 +4781,10 @@
       "sourcePath": "data/vocab/lesson-1705-p2.json",
       "questionKind": "vocabulary",
       "questionId": "lesson-1705-p2:v04",
-      "questionType": "contextual-choice",
+      "questionType": "gu-jin",
       "questionIndex": 4,
       "canonicalUnitId": "yw:lesson-1705-p2:vocabulary:lesson-1705-p2:v04",
-      "resourceVersion": "sha256:2a173f6e5070c95cc1a706458a7c501f9878b61e03a65c134033318c47acd27a",
+      "resourceVersion": "sha256:fc89f4047ab8a1666d32849ec8c3dc4cc0e2c22be8896faf2bec7f0e12ad3bf6",
       "mappingVersion": "yw-canonical-learning-mapping-v1",
       "dimensionKey": "retention",
       "competencyKey": "vocabulary",
@@ -4793,7 +4793,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -4846,7 +4846,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -5079,7 +5079,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -5108,7 +5108,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -5137,7 +5137,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -5214,7 +5214,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -5495,7 +5495,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -5704,7 +5704,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -5733,7 +5733,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -5810,7 +5810,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -6813,7 +6813,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -6914,7 +6914,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -6991,7 +6991,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -7182,7 +7182,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -7355,7 +7355,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -8356,7 +8356,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -8385,7 +8385,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -8438,7 +8438,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -8587,7 +8587,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -8970,7 +8970,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -9071,7 +9071,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -9490,10 +9490,10 @@
       "sourcePath": "data/vocab/lesson-1722-p1.json",
       "questionKind": "vocabulary",
       "questionId": "lesson-1722-p1:v03",
-      "questionType": "contextual-choice",
+      "questionType": "gu-jin",
       "questionIndex": 3,
       "canonicalUnitId": "yw:lesson-1722-p1:vocabulary:lesson-1722-p1:v03",
-      "resourceVersion": "sha256:9a896a5d254c6e0edcda5e09a1657db0cb24bfcb1ca8ac1a384c1307d2827d5a",
+      "resourceVersion": "sha256:65d23208ff4720d91575dc44c17242336ff5ffac9ab4674f71f1971a3c5ebbca",
       "mappingVersion": "yw-canonical-learning-mapping-v1",
       "dimensionKey": "retention",
       "competencyKey": "vocabulary",
@@ -9502,7 +9502,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -9831,7 +9831,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -9932,7 +9932,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -10093,7 +10093,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -10122,7 +10122,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -10379,7 +10379,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -10480,7 +10480,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -10915,7 +10915,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -11184,7 +11184,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -11279,7 +11279,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -11356,7 +11356,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -11385,7 +11385,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -11438,7 +11438,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -11467,7 +11467,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -11634,7 +11634,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -11759,7 +11759,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -11860,7 +11860,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -11889,7 +11889,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -11918,7 +11918,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -12049,10 +12049,10 @@
       "sourcePath": "data/vocab/lesson-1727.json",
       "questionKind": "vocabulary",
       "questionId": "lesson-1727:v03",
-      "questionType": "contextual-choice",
+      "questionType": "gu-jin",
       "questionIndex": 3,
       "canonicalUnitId": "yw:lesson-1727:vocabulary:lesson-1727:v03",
-      "resourceVersion": "sha256:dbe0ac812f77070637131802fe6d82e9bf36219fe53742f2a02554fc9d38710c",
+      "resourceVersion": "sha256:2a2ad2081942593c4863a7841dea182ff97dd3ad0a8f9865e25455be49f0e8f9",
       "mappingVersion": "yw-canonical-learning-mapping-v1",
       "dimensionKey": "retention",
       "competencyKey": "vocabulary",
@@ -12061,7 +12061,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -12396,7 +12396,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -12449,7 +12449,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -12646,7 +12646,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -14239,7 +14239,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -14646,7 +14646,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -14675,7 +14675,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -14728,7 +14728,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -14853,7 +14853,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -14906,7 +14906,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -15837,7 +15837,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -15890,7 +15890,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -15919,7 +15919,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -15948,7 +15948,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -15977,7 +15977,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -16006,7 +16006,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -16035,7 +16035,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -16064,7 +16064,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -16093,7 +16093,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -16380,7 +16380,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -16409,7 +16409,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -16504,7 +16504,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -16605,7 +16605,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -16634,7 +16634,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -16711,7 +16711,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -17056,7 +17056,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -17289,7 +17289,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -17318,7 +17318,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -17623,7 +17623,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -17700,7 +17700,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -17729,7 +17729,7 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
@@ -19151,7 +19151,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -19179,7 +19179,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -19385,7 +19385,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -19482,7 +19482,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -19499,10 +19499,10 @@
       "sourcePath": "data/vocab/lesson-1476.json",
       "questionKind": "vocabulary",
       "questionId": "lesson-1476:v07",
-      "questionType": "contextual-choice",
+      "questionType": "gu-jin",
       "questionIndex": 7,
       "canonicalUnitId": "yw:lesson-1476:vocabulary:lesson-1476:v07",
-      "resourceVersion": "sha256:6ea309a68ea2366c13de1f90dc3ebe853e1f0593659d1174cce00f1629d3f33e",
+      "resourceVersion": "sha256:8c020441516a0837d31a43ec15805e46ced0aeaae0614be907e0308f5f01e854",
       "mappingVersion": "yw-canonical-learning-mapping-v1",
       "dimensionKey": "retention",
       "competencyKey": "vocabulary",
@@ -19510,7 +19510,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -19561,7 +19561,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -19790,7 +19790,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -19887,7 +19887,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -20070,7 +20070,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -20144,7 +20144,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -20218,7 +20218,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -20292,7 +20292,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -20429,7 +20429,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -20480,7 +20480,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -20531,7 +20531,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -20559,7 +20559,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -20656,7 +20656,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -20793,7 +20793,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -20821,7 +20821,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -20849,7 +20849,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -20946,7 +20946,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -21967,7 +21967,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -21995,7 +21995,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -22069,7 +22069,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -22384,7 +22384,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -22584,7 +22584,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -22635,7 +22635,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -22663,7 +22663,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -22714,7 +22714,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -22937,7 +22937,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -22965,7 +22965,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -25101,7 +25101,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -25267,7 +25267,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -25450,7 +25450,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -25524,7 +25524,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -25575,7 +25575,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -25804,7 +25804,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -25832,7 +25832,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -25975,7 +25975,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -26216,10 +26216,10 @@
       "sourcePath": "data/vocab/lesson-1537.json",
       "questionKind": "vocabulary",
       "questionId": "lesson-1537:v04",
-      "questionType": "contextual-choice",
+      "questionType": "gu-jin",
       "questionIndex": 4,
       "canonicalUnitId": "yw:lesson-1537:vocabulary:lesson-1537:v04",
-      "resourceVersion": "sha256:791449f3b826d287650fbfdc09ef1b70df12c272b4ba6939ebf7332dda199061",
+      "resourceVersion": "sha256:e03892bf3b911fc3739b0eabb744af902d2fe35fbd1718724bea87430f27bfc5",
       "mappingVersion": "yw-canonical-learning-mapping-v1",
       "dimensionKey": "retention",
       "competencyKey": "vocabulary",
@@ -26227,7 +26227,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -26324,7 +26324,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -26843,7 +26843,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -27135,7 +27135,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -27255,7 +27255,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -27478,7 +27478,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -27770,7 +27770,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -27867,7 +27867,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -28392,7 +28392,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -28592,7 +28592,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -28620,7 +28620,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -28671,7 +28671,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -28986,7 +28986,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -29060,7 +29060,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -29329,7 +29329,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -29718,7 +29718,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -29746,7 +29746,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -29797,7 +29797,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -29825,7 +29825,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -29876,7 +29876,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -29927,7 +29927,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -30150,7 +30150,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -30224,7 +30224,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -30298,7 +30298,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -30544,7 +30544,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -30572,7 +30572,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -30623,7 +30623,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -30674,7 +30674,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -30725,7 +30725,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -31040,7 +31040,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -31252,10 +31252,10 @@
       "sourcePath": "data/vocab/lesson-1560.json",
       "questionKind": "vocabulary",
       "questionId": "lesson-1560:v04",
-      "questionType": "contextual-choice",
+      "questionType": "gu-jin",
       "questionIndex": 4,
       "canonicalUnitId": "yw:lesson-1560:vocabulary:lesson-1560:v04",
-      "resourceVersion": "sha256:99bd0c29980afeba47ad6a897122645f84df45cfc48819e7963e23f502ee8a44",
+      "resourceVersion": "sha256:db2812cd16862f0b8be2df9243e852ef266b404ad2b3e2ec49f8f2ba6581d66e",
       "mappingVersion": "yw-canonical-learning-mapping-v1",
       "dimensionKey": "retention",
       "competencyKey": "vocabulary",
@@ -31263,7 +31263,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -31647,7 +31647,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -31870,7 +31870,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -31898,7 +31898,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -32876,7 +32876,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -33771,7 +33771,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -33891,7 +33891,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -33965,7 +33965,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -34148,7 +34148,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -34291,7 +34291,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -34319,7 +34319,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -34479,7 +34479,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -34507,7 +34507,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -34535,7 +34535,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -34586,7 +34586,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -34614,7 +34614,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -34843,7 +34843,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -34871,7 +34871,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -35238,7 +35238,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -35427,7 +35427,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -35518,7 +35518,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -35661,7 +35661,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -36518,7 +36518,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -36787,7 +36787,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -37194,7 +37194,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",
@@ -37486,7 +37486,7 @@
       "lifecycleStatus": "active",
       "effectiveFrom": "2026-08-12T00:00:00+08:00",
       "effectiveTo": null,
-      "sourceReleaseId": "yw-release-d3801a553a0391d0",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v1",
       "revisionOf": {
         "sourceReleaseId": "yw-release-f78c3cae78ac3ac3",

@@ -661,7 +661,7 @@
         "resourceVersion": "sha256:25bb9d1732bdb360980171948d3fff747b782b2fa99c0a4b74abb50008ede573",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -680,7 +680,7 @@
         "resourceVersion": "sha256:2e5b7072f6e377da3e411664f1c92b2a886dbf200ac9ed54eab613de002c7f1c",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1155,7 +1155,7 @@
         "resourceVersion": "sha256:25bb9d1732bdb360980171948d3fff747b782b2fa99c0a4b74abb50008ede573",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1165,7 +1165,7 @@
         "resourceVersion": "sha256:2e5b7072f6e377da3e411664f1c92b2a886dbf200ac9ed54eab613de002c7f1c",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2001,7 +2001,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-3156fbb75460ee58ef31",
+  "curriculumVersion": "yw-dialogue-8cadf2a4d3fb11acdb94",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

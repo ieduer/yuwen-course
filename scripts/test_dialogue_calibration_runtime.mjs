@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {frozenCurriculumPath} from './frozen_calibration_curriculum.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -133,7 +134,7 @@ for(const failure of ['throw','usage','model','verdict'])test('failure '+failure
 });
 test('real source drift stops before reservation; packet does not mark source accepted',async t=>{
  const f=await setup(t);f.env.ASSETS={fetch:async()=>Response.json({wrong:true})};assert.equal((await handleCalibration(f.req(),f.env,f.student,()=>{throw Error('no')})).status,409);assert.equal(f.sql.prepare('SELECT count(*) n FROM dialogue_calls').get().n,4);
- const original=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1711-p1.json'));assert(original.languagePractice.every(v=>v.calibrationStatus==='pending-real-model'));
+ const original=JSON.parse(fs.readFileSync(frozenCurriculumPath('lesson-1711-p1')));assert(original.languagePractice.every(v=>v.calibrationStatus==='pending-real-model'));
 });
 test('operation deadline survives a new request and prevents the next model call',async t=>{
  const f=await setup(t);assert.equal((await handleCalibration(f.req(),f.env,f.student,async()=>response())).status,200);
@@ -154,7 +155,7 @@ test('all consumed packets remain byte pinned; current source cannot inherit the
  const {calibrationPacket}=await import('./dialogue_calibration.mjs');
  assert.equal(createHash('sha256').update(fs.readFileSync('scripts/fixtures/dialogue-calibration-stopped-packet.json')).digest('hex'),'3abb6baa1af51b56d8a17013568f7b8a40fd1d61fdfb71c28bfca2f7e72f2ff7');
  assert.equal(createHash('sha256').update(fs.readFileSync('scripts/fixtures/dialogue-calibration-amendment1-packet.json')).digest('hex'),'2f106a61cbc381f40bde2824037c22207b98333cb28b5dbfec258d24ea190274');
- const generated=JSON.parse(JSON.stringify(calibrationPacket(JSON.parse(fs.readFileSync('scripts/dialogue-calibration-cases.json')),id=>JSON.parse(fs.readFileSync('site/dialogue-curriculum/'+id+'.json')),policy)));
+ const generated=JSON.parse(JSON.stringify(calibrationPacket(JSON.parse(fs.readFileSync('scripts/dialogue-calibration-cases.json')),id=>JSON.parse(fs.readFileSync(frozenCurriculumPath(id))),policy)));
  assert.equal(createHash('sha256').update(fs.readFileSync('site/dialogue-calibration-packet.json')).digest('hex'),'7ae578d95c084c9cff53beaddeeb1c0cf16de3881d6874a5701e90247b811b94');
  assert.equal(packet.sourceDigest,'4fb2ac792516d95c00022ad08bda42063e8606bec4989b3d46bc6b86c6a67317');
  assert.notEqual(packet.sourceDigest,generated.sourceDigest);assert.equal(generated.operation,'unapproved-source-preview');assert.equal(generated.amendment,null);
@@ -302,7 +303,7 @@ async function setupAmendment4(t){
  }
  f.env.ASSETS={fetch:async request=>{
   const pathname=new URL(request.url).pathname;
-  return new Response(projectReleaseJson(pathname.slice(1),fs.readFileSync('site'+pathname,'utf8')));
+  return new Response(projectReleaseJson(pathname.slice(1),fs.readFileSync(pathname.startsWith('/dialogue-curriculum/')?frozenCurriculumPath(pathname.slice('/dialogue-curriculum/'.length,-'.json'.length)):'site'+pathname,'utf8')));
  }};
  const ownerRef=createHash('sha256').update(`dialogue-owner:${f.student.id}`).digest('hex');
  const request4=(index=0,attempt=1,extra={},method='POST')=>{const c=amendment4Packet.cases[index];return f.authenticated('/api/dialogue/v1?lessonId='+c.lessonId+'&calibration='+c.id+'&attempt='+attempt+'&calibrationOperation='+amendment4.operation,{method,headers:{origin:ACCEPTANCE_ORIGIN,'content-type':'application/json'},...(method==='POST'?{body:JSON.stringify({action:amendment4.action,ownerRef,...extra})}:{})});};

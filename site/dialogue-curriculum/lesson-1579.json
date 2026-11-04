@@ -2497,7 +2497,7 @@
         "resourceVersion": "sha256:b11d4b712a4adc3f10257f29bfdb8bba41dd6118a496df66c5ed4b1bcad6124d",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -2515,7 +2515,7 @@
         "resourceVersion": "sha256:9c96f66491cd0bf2fa683f2c5a50d72875fb1325553f1244053ae76a923ab539",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -3220,7 +3220,7 @@
         "resourceVersion": "sha256:b11d4b712a4adc3f10257f29bfdb8bba41dd6118a496df66c5ed4b1bcad6124d",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -3229,7 +3229,7 @@
         "resourceVersion": "sha256:9c96f66491cd0bf2fa683f2c5a50d72875fb1325553f1244053ae76a923ab539",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -4584,7 +4584,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-c6d7586eb0e8541414d6",
+  "curriculumVersion": "yw-dialogue-241d593f4fc6dbbe92b8",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

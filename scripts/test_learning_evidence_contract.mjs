@@ -470,7 +470,7 @@ test("current formal resources publish one exact e310/v2 source contract with co
   );
   assert.equal(compatibility.academicYearPolicy.requiredDistinctCreditUnits, 692);
   assert.ok(manifest.items.every((item) => (
-    [compatibility.sourceReleaseId, ORIGINAL_FORMAL_RELEASE.sourceReleaseId].includes(item.sourceReleaseId)
+    [compatibility.sourceReleaseId, ...manifest.priorReleases.map((release) => release.sourceReleaseId)].includes(item.sourceReleaseId)
     && item.mappingVersion === compatibility.mappingVersion
     && item.canonicalUnitId
     && /^sha256:[a-f0-9]{64}$/.test(item.resourceVersion)
@@ -1215,7 +1215,9 @@ test("new compulsory interactions retain authentication and use the same formal 
       assert.equal(authenticatedSource.queued.length,1);
       const envelope=authenticatedSource.queued[0].envelope;
       assert.equal(envelope.sourceVersion,manifest.manifestVersion);
-      assert.equal(envelope.sourceReleaseId,manifest.sourceReleaseId);
+      // 2026-11-04: an unrevised expansion interaction keeps the expansion release 5bcdbb.
+      assert.equal(envelope.sourceReleaseId,manifest.items.find(item=>item.resourceKey===envelope.resourceKey).sourceReleaseId);
+      assert.equal(envelope.sourceReleaseId,'yw-release-5bcdbb23da04c33d');
       assert.equal(envelope.scoringRole,'formative');
       assert.equal(envelope.rawValue,82);
       assert.equal(envelope.assessmentKind,'performance');
@@ -2616,7 +2618,8 @@ test("a self-rating on an added-formal-scope lesson carries the formal manifest 
   const addedScopeLesson = { id: "lesson-1693", title: "3. 百合花", blockId: "bixiu-shang", blockTitle: "必修上" };
   const evaluationItem = manifest.items.find((item) => item.resourceKey === "effect:lesson-1693:interaction:evaluation");
   assert.ok(evaluationItem?.formalScopePolicyVersion, "fixture: lesson-1693 evaluation is an added-formal-scope item");
-  assert.equal(evaluationItem.sourceReleaseId, manifest.sourceReleaseId);
+  // 2026-11-04: unrevised expansion items keep the expansion release after the revision release d3801a55/6ceed2f6.
+  assert.equal(evaluationItem.sourceReleaseId, evaluationItem.formalRevisionPolicyVersion ? manifest.sourceReleaseId : 'yw-release-5bcdbb23da04c33d');
   const { env, queued } = sourceEnvironment();
   const result = await recordLearningInteraction({
     request: new Request("https://yw.bdfz.net/api/learning/interactions"),

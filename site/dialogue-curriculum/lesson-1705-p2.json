@@ -739,10 +739,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1705-p2:vocab:lesson-1705-p2:v04",
         "canonicalUnitId": "yw:lesson-1705-p2:vocabulary:lesson-1705-p2:v04",
-        "resourceVersion": "sha256:2a173f6e5070c95cc1a706458a7c501f9878b61e03a65c134033318c47acd27a",
+        "resourceVersion": "sha256:fc89f4047ab8a1666d32849ec8c3dc4cc0e2c22be8896faf2bec7f0e12ad3bf6",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -780,7 +780,7 @@
         "resourceVersion": "sha256:94452be0fa17f92d67d8b81b115f4bebe0d3988efb222c52c6638272a61084ba",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -951,7 +951,7 @@
       "sourceSentence": "万里 悲秋常作客",
       "meaning": "寄居他乡，客居",
       "explanation": "诗句中的「作客」指客居他乡，此义在现代汉语中仍然沿用。D项「常年在外作客」同样指寄居外地；A、B、C项的「做客」则指访问别人，自己当客人。因此选D。",
-      "type": "contextual-choice",
+      "type": "gu-jin",
       "difficulty": 2,
       "question": "下列句中加引号的词语，与「万里悲秋常作客」中的「作客」意思相同的一项是",
       "options": [
@@ -969,7 +969,7 @@
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
         "語境：「万里 悲秋常作客」\n下列句中加引号的词语，与「万里悲秋常作客」中的「作客」意思相同的一项是\nA. 今天应邀到同学家「做客」\nB. 到朋友家「做客」，带了点礼物\nC. 他应邀来我家「做客」，受到了热情接待\nD. 由于工作原因，他常年在外「作客」\n請選出答案，並用自己的話說明判斷依據。",
-        "請解釋「万里 悲秋常作客」中「作客」的意思，再用自己的話改寫這句話，說明語境依據。"
+        "回到「万里 悲秋常作客」：「作客」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
     {
@@ -1222,10 +1222,10 @@
       {
         "resourceKey": "effect:lesson-1705-p2:vocab:lesson-1705-p2:v04",
         "canonicalUnitId": "yw:lesson-1705-p2:vocabulary:lesson-1705-p2:v04",
-        "resourceVersion": "sha256:2a173f6e5070c95cc1a706458a7c501f9878b61e03a65c134033318c47acd27a",
+        "resourceVersion": "sha256:fc89f4047ab8a1666d32849ec8c3dc4cc0e2c22be8896faf2bec7f0e12ad3bf6",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1245,7 +1245,7 @@
         "resourceVersion": "sha256:94452be0fa17f92d67d8b81b115f4bebe0d3988efb222c52c6638272a61084ba",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -1534,7 +1534,7 @@
       },
       {
         "requirementId": "effect:lesson-1705-p2:vocab:lesson-1705-p2:v04",
-        "sourceVersion": "sha256:2a173f6e5070c95cc1a706458a7c501f9878b61e03a65c134033318c47acd27a",
+        "sourceVersion": "sha256:fc89f4047ab8a1666d32849ec8c3dc4cc0e2c22be8896faf2bec7f0e12ad3bf6",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -2007,7 +2007,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-6ef45791caef7feaaeb1",
+  "curriculumVersion": "yw-dialogue-2fe0ea87de1dc6e47dac",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

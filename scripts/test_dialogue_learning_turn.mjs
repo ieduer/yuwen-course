@@ -395,7 +395,8 @@ test('new compulsory source tasks attach to an unfinished frozen session without
  assert.equal(response.data.sourceSubmissions[0].score,83);assert.equal(f.calls(),1);
  const envelope=JSON.parse(f.sql.prepare('SELECT envelope_json FROM evidence_outbox').get().envelope_json);
  const source=JSON.parse(fs.readFileSync('site/data/learning-manifest.json'));
- assert.equal(envelope.sourceVersion,source.manifestVersion);assert.equal(envelope.sourceReleaseId,source.sourceReleaseId);
+ // 2026-11-04: an unrevised expansion item keeps its own release (5bcdbb) after the revision release d3801a55.
+ const item=source.items.find(i=>i.resourceKey===envelope.resourceKey);assert.equal(envelope.sourceVersion,source.manifestVersion);assert.equal(envelope.sourceReleaseId,item.sourceReleaseId);assert.equal(item.sourceReleaseId,'yw-release-5bcdbb23da04c33d');
  assert.equal(f.sql.prepare('SELECT curriculum_json FROM dialogue_sessions').get().curriculum_json,stored);
 });
 

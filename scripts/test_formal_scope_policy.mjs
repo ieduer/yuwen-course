@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
-import {FORMAL_SCOPE_POLICY,ORIGINAL_FORMAL_RELEASE,validateFormalScopeExpansion,formalDefinitionForResource,assertNewFormalAnswerTime,withProspectiveFormalScope} from '../site/formal-scope-policy.js';
+import {FORMAL_SCOPE_POLICY,ORIGINAL_FORMAL_RELEASE,EXPANSION_FORMAL_RELEASE,FORMAL_REVISION_POLICY,validateFormalScopeExpansion,formalDefinitionForResource,assertNewFormalAnswerTime,withProspectiveFormalScope} from '../site/formal-scope-policy.js';
 import {validateAPlusCompatibilityContract} from '../site/learning-evidence-source.js';
 import {validateFormalDraft} from '../site/dialogue-formal.js';
 const read=path=>JSON.parse(fs.readFileSync(new URL('../'+path,import.meta.url)));
@@ -19,12 +19,19 @@ const fixture=()=>{
 test('all 764 new compulsory resources stay outside A-plus while 869 old identities remain exact',()=>{
  assert.equal(manifest.lessonCount,189);assert.equal(additions.length,764);assert.equal(new Set(additions.map(i=>i.sourceId)).size,88);
  assert.equal(original.length,869);
- assert.equal(digest(original.slice().sort((a,b)=>a.resourceKey.localeCompare(b.resourceKey))),'42888a94de1460c12c66554eb93d21444857c30d8914823a6a4a3459e28310f4');
+ // 2026-11-04 revision release: reconstructing each revised item's exact prior identity reproduces the immutable e310 inventory.
+ const prior=item=>{if(!item.formalRevisionPolicyVersion)return item;const {formalRevisionPolicyVersion,revisionOf,...rest}=item;return {...rest,sourceReleaseId:revisionOf.sourceReleaseId,resourceVersion:revisionOf.resourceVersion};};
+ assert.equal(digest(original.map(prior).sort((a,b)=>a.resourceKey.localeCompare(b.resourceKey))),'42888a94de1460c12c66554eb93d21444857c30d8914823a6a4a3459e28310f4');
  assert.equal(original.filter(i=>i.evidenceRole==='a_plus_gate').length,768);
  assert.equal(additions.filter(i=>i.evidenceRole==='formative').length,676);
  assert.equal(additions.filter(i=>i.evidenceRole==='non_scoring').length,88);
  assert(additions.every(i=>i.evidenceRole!=='a_plus_gate'&&i.sourceId!=='lesson-1572'));
- assert(original.every(i=>i.sourceReleaseId===ORIGINAL_FORMAL_RELEASE.sourceReleaseId));
+ assert(original.every(i=>i.sourceReleaseId===(i.formalRevisionPolicyVersion?manifest.sourceReleaseId:ORIGINAL_FORMAL_RELEASE.sourceReleaseId)));
+ assert(additions.every(i=>i.sourceReleaseId===(i.formalRevisionPolicyVersion?manifest.sourceReleaseId:EXPANSION_FORMAL_RELEASE.sourceReleaseId)));
+ const revised=manifest.items.filter(i=>i.formalRevisionPolicyVersion);
+ assert.equal(revised.length,FORMAL_REVISION_POLICY.revisedItemCount);assert.equal(revised.filter(i=>!i.formalScopePolicyVersion).length,95);
+ assert(revised.every(i=>i.questionKind==='vocabulary'&&i.revisionOf.resourceVersion!==i.resourceVersion));
+ assert.deepEqual(manifest.priorReleases,[ORIGINAL_FORMAL_RELEASE,EXPANSION_FORMAL_RELEASE]);
  validateFormalScopeExpansion(manifest);validateAPlusCompatibilityContract(registry,manifest);
  const compatibility=registry.compatibilityContracts.aPlusGate;
  assert.equal(compatibility.eligibleItemCount,768);assert.equal(compatibility.excludedItemCount,865);

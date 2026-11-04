@@ -855,7 +855,7 @@
         "resourceVersion": "sha256:d206e5f588355cf19b9c3adf210d9e4afc136266997dedb04ba7750256b7d05b",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -927,7 +927,7 @@
         "resourceVersion": "sha256:f43d442c9743c7745ebacc9b1bd109b4b9a2b72f9db5831e54c0c7086bc69996",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -942,10 +942,10 @@
       "legacy": {
         "resourceKey": "effect:lesson-1476:vocab:lesson-1476:v07",
         "canonicalUnitId": "yw:lesson-1476:vocabulary:lesson-1476:v07",
-        "resourceVersion": "sha256:6ea309a68ea2366c13de1f90dc3ebe853e1f0593659d1174cce00f1629d3f33e",
+        "resourceVersion": "sha256:8c020441516a0837d31a43ec15805e46ced0aeaae0614be907e0308f5f01e854",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -981,7 +981,7 @@
         "resourceVersion": "sha256:8b728024f4e72dc5c2d290e7fa85196de53fb1d743aa205f2802b74dcf7fb52c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       }
     },
@@ -1333,7 +1333,7 @@
       "sourceSentence": "壹是皆以修身为本",
       "meaning": "一律、全部",
       "explanation": "「壹是」意为「一律、全部」，全句意为「一律把修养自身作为根本」。",
-      "type": "contextual-choice",
+      "type": "gu-jin",
       "difficulty": 3,
       "question": "「壹是皆以修身为本」中「壹是」的意思是",
       "options": [
@@ -1351,7 +1351,7 @@
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
         "語境：「壹是皆以修身为本」\n「壹是皆以修身为本」中「壹是」的意思是\nA. 一件事\nB. 一律、全部\nC. 统一\nD. 唯一\n請選出答案，並用自己的話說明判斷依據。",
-        "請解釋「壹是皆以修身为本」中「壹是」的意思，再用自己的話改寫這句話，說明語境依據。"
+        "回到「壹是皆以修身为本」：「壹是」在這裡是甚麼意思？比較它與你熟悉的現代用法，說明照搬現代義會出現甚麼問題。"
       ]
     },
     {
@@ -1522,7 +1522,7 @@
         "resourceVersion": "sha256:d206e5f588355cf19b9c3adf210d9e4afc136266997dedb04ba7750256b7d05b",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1558,16 +1558,16 @@
         "resourceVersion": "sha256:f43d442c9743c7745ebacc9b1bd109b4b9a2b72f9db5831e54c0c7086bc69996",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
         "resourceKey": "effect:lesson-1476:vocab:lesson-1476:v07",
         "canonicalUnitId": "yw:lesson-1476:vocabulary:lesson-1476:v07",
-        "resourceVersion": "sha256:6ea309a68ea2366c13de1f90dc3ebe853e1f0593659d1174cce00f1629d3f33e",
+        "resourceVersion": "sha256:8c020441516a0837d31a43ec15805e46ced0aeaae0614be907e0308f5f01e854",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -1585,7 +1585,7 @@
         "resourceVersion": "sha256:8b728024f4e72dc5c2d290e7fa85196de53fb1d743aa205f2802b74dcf7fb52c",
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-08-12T00:00:00+08:00"
       },
       {
@@ -2283,7 +2283,7 @@
       },
       {
         "requirementId": "effect:lesson-1476:vocab:lesson-1476:v07",
-        "sourceVersion": "sha256:6ea309a68ea2366c13de1f90dc3ebe853e1f0593659d1174cce00f1629d3f33e",
+        "sourceVersion": "sha256:8c020441516a0837d31a43ec15805e46ced0aeaae0614be907e0308f5f01e854",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -3058,7 +3058,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-97c0511733de6d350e06",
+  "curriculumVersion": "yw-dialogue-51b5ef4f03d18c79124d",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

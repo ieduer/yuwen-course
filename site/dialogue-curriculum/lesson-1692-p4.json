@@ -1080,7 +1080,7 @@
         "resourceVersion": "sha256:c02f49f8c052bdf6f6653ef45ef397c46155295fdd874907bfb1ea81dd1ade4f",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       }
@@ -1511,7 +1511,7 @@
         "resourceVersion": "sha256:c02f49f8c052bdf6f6653ef45ef397c46155295fdd874907bfb1ea81dd1ade4f",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-d3801a553a0391d0",
+        "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
         "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
       },
@@ -2143,7 +2143,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-ebc9f7a5459793c304a3",
+  "curriculumVersion": "yw-dialogue-9aea2206ad01e1a9c1a2",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",
