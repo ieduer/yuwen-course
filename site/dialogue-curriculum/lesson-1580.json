@@ -1868,7 +1868,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:4a623f65e0ad16f6c500591526f556d4ffd146c5c7dbcf9cc77e10f7ee10a2f9"
+        ]
       }
     },
     {
@@ -2012,7 +2015,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:e2aa1b495a096ccb7512cdcd8d59b8863a04fa9c8313c363a6ff74a7fa1e2c05"
+        ]
       }
     },
     {
@@ -2517,7 +2523,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:4a623f65e0ad16f6c500591526f556d4ffd146c5c7dbcf9cc77e10f7ee10a2f9"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1580:vocab:lesson-1580:v05",
@@ -2589,7 +2598,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:e2aa1b495a096ccb7512cdcd8d59b8863a04fa9c8313c363a6ff74a7fa1e2c05"
+        ]
       }
     ],
     "formative": [
@@ -3669,7 +3681,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-1087e057c7d3a3a933dc",
+  "curriculumVersion": "yw-dialogue-6faec7cec021b66f12d1",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

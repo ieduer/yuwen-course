@@ -1626,7 +1626,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:a900ffc6576d32929d2e3dca99a7957b5502351e342c1bd649f7388c66c831a2"
+        ]
       }
     },
     {
@@ -1645,7 +1648,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:d5a518e61bd45838ac1a5c6bec68a3f4496b16253b1e2d524764f81c416f58f0"
+        ]
       }
     },
     {
@@ -2103,7 +2109,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:a900ffc6576d32929d2e3dca99a7957b5502351e342c1bd649f7388c66c831a2"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1753-p1:vocab:lesson-1753-p1:v10",
@@ -2113,7 +2122,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:d5a518e61bd45838ac1a5c6bec68a3f4496b16253b1e2d524764f81c416f58f0"
+        ]
       }
     ],
     "formative": [
@@ -2846,7 +2858,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-d62f380127236991916f",
+  "curriculumVersion": "yw-dialogue-cf5fb65921d6354f4c80",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

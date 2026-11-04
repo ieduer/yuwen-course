@@ -635,7 +635,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:f0821b4b806b11821fd9ab2523b423df0f6772509a7899fdc34d04bed576d8d4"
+        ]
       }
     },
     {
@@ -996,7 +999,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:f0821b4b806b11821fd9ab2523b423df0f6772509a7899fdc34d04bed576d8d4"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1590:interaction:wordCreation",
@@ -1650,7 +1656,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-4ceaa38fe24ae8dc1d45",
+  "curriculumVersion": "yw-dialogue-0620f188c3565bb068b8",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

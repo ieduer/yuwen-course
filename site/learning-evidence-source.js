@@ -1622,10 +1622,18 @@ export async function recordLearningInteraction({
     normalizedPayload,
     manifest,
     resourceKey,
-    manifestItem,
+    manifestItem: resolvedManifestItem,
     formativeManifest,
     formativeItem,
   } = reservedContext || await resolveInteractionContext(request, env, student, lesson, interactionKey, payload);
+  // 2026-11-04 formal revision: a dialogue session frozen before the revision still shows the prior question.
+  // Its answer is graded against that prior question (handleReadingVocabAttempt) and carries the exact prior
+  // identity, which the User Center keeps admitting; any other version mismatch stays refused below.
+  const manifestItem = dialogueLocal && resolvedManifestItem?.formalRevisionPolicyVersion
+    && resolvedManifestItem.revisionOf?.resourceVersion === dialogueLocal.resourceVersion
+    && resolvedManifestItem.resourceVersion !== dialogueLocal.resourceVersion
+    ? { ...resolvedManifestItem, sourceReleaseId: resolvedManifestItem.revisionOf.sourceReleaseId, resourceVersion: resolvedManifestItem.revisionOf.resourceVersion, servedRevisionPrior: true }
+    : resolvedManifestItem;
   assertNewFormalAnswerTime(manifestItem, effectiveOccurredAt);
   const raw = boundedRawPayload(definition, normalizedPayload);
 

@@ -360,6 +360,8 @@ async function snapshot(db,session,curriculum,before){
  const statusNotice=statusEvent?JSON.parse(statusEvent.details_json).message:null;
  return {statusNotice,paragraphGuide:revealedGuide(curriculum,paragraphGuide(curriculum,state,questionItems(curriculum),publicQuestion?.objectiveId||null,guideProgress)),learningTurn:learningTurn(curriculum,state,{revision:session.revision,...records,sourceDraft,question:publicQuestion,mastery:legacy.mastery}),sourceSubmissions:withheldReferences(state,records.submissions),originalTask:originalTask(curriculum,state,legacy.mastery),sourceDraft,partial,replyRetry,ownerRef:await sha(`dialogue-owner:${session.student_id}`),sessionId:session.id,revision:session.revision,pending,curriculumVersion:session.curriculum_version,...page,state,assessments:merged,report:evidenceReport(curriculum,state,merged,completeTurns,conclusion),execution:execution?{...execution,satisfied:session.curriculum_version===execution.requiredCurriculumVersion,missing:missingObjectives(state)}:null,question:publicQuestion,draft:draft?{mutationId:draft.mutation_id,revision:draft.revision,content:draft.content,questionId:draft.question_id,createdAt:draft.created_at,formal:draft.source_request_json?JSON.parse(draft.source_request_json):null,learningRequest:draft.source_request_json?JSON.parse(draft.source_request_json).learningRequest||null:null}:null,legacy,readingGate:state.readingGate};
 }
+// 2026-11-04: the vocabulary question a (possibly frozen) session showed, passed to the original source in memory only.
+const frozenVocab=(curriculum,formal)=>formal?.interaction==='vocabAnswer'?((curriculum.vocabulary||[]).find(v=>v?.id===formal.input?.itemId)||null):null;
 export async function handleDialogue(request,env,student,ctx,{callModel=callDialogueModel,readSharedHistory=null,firstReadAction=null,formalAction=null,originalAction=null}={}){
  if(!student)return json({error:'請先登入 My。',code:'authentication_required'},401);
  if(!admitted(env,student))return json({error:'試點尚未開放。',code:'pilot_unavailable'},404);
@@ -547,7 +549,7 @@ export async function handleDialogue(request,env,student,ctx,{callModel=callDial
   let formal;try{formal=prepareOriginalInput(curriculum,task,body.input);}catch{return json({code:'invalid_original_input'},400);}
   const turnId=uuid(),at=now();
   try{
-   const response=await originalAction({...formal,lessonId},turnId,result=>{
+   const response=await originalAction({...formal,lessonId,frozenVocab:frozenVocab(curriculum,formal)},turnId,result=>{
     const reply=formal.interaction==='readAcknowledged'?'已保存你的閱讀確認。繼續說說你對這篇作品的初步理解。':formal.interaction==='evaluation'?'你的篇目自評已保存；高低都不計入成績。':result.evaluation.correctness==='correct'?'這個選項符合原題準據，原有作答紀錄已保存。請保留剛才對語境的解釋，繼續細讀。':'這次選擇與原題準據不同，第一次及後續作答會分開保留。回到原句核對語境，再說說你改變的判斷。';
     return [
      db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,(SELECT id FROM dialogue_sessions WHERE id=? AND student_id=? AND revision=? AND inflight IS NULL AND (SELECT COUNT(*) FROM dialogue_turns WHERE session_id=? AND role='student')<?),?,'original_source_saved',?,?)`).bind(`${turnId}:source`,session.id,student.id,body.revision,session.id,LIMITS.lessonLifetime,turnId,JSON.stringify({objectiveId:formal.objectiveId,...result}),at),
@@ -981,7 +983,7 @@ async function finishTurn({env,db,session,curriculum,question,turnId,body,callMo
    failureStage='original_source';
    if(!originalAction)throw Error('original_source_unavailable');
    const original=prepareOriginalInput(curriculum,originalEvidence.task,originalEvidence.input);
-   const response=await originalAction({...original,lessonId:curriculum.lessonId},turnId,result=>(originalResult={objectiveId:original.objectiveId,correctness:result?.evaluation?.correctness},[
+   const response=await originalAction({...original,lessonId:curriculum.lessonId,frozenVocab:frozenVocab(curriculum,original)},turnId,result=>(originalResult={objectiveId:original.objectiveId,correctness:result?.evaluation?.correctness},[
     db.prepare('UPDATE dialogue_turns SET source_request_json=? WHERE id=? AND session_id=?').bind(JSON.stringify({...original,references:[originalEvidence.evidence]}),turnId,session.id),
     db.prepare("INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,'original_source_saved',?,?)").bind(`${turnId}:source`,session.id,turnId,JSON.stringify({objectiveId:original.objectiveId,...result}),at),
    ]));

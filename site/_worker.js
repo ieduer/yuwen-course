@@ -1632,6 +1632,9 @@ export async function handleDialogueFormal(request, env, student, formal, turnId
 
 export async function handleDialogueOriginal(request,env,student,formal,turnId,commit){
   const dialogueLocal={turnId,resourceKey:formal.resourceKey,resourceVersion:formal.resourceVersion,commit};
+  // The session's own stored curriculum (server-owned, never the client) holds the question this student was shown.
+  const frozen=formal.frozenVocab;
+  if(formal.interaction==='vocabAnswer'&&frozen?.id===formal.input?.itemId&&Array.isArray(frozen.options)&&Number.isInteger(frozen.answerIndex))dialogueLocal.frozenItem={id:frozen.id,options:frozen.options,answerIndex:frozen.answerIndex};
   const payload={lessonId:formal.lessonId,clientMutationId:`${DIALOGUE_LOCAL_PREFIX}${turnId}`,lessonPhase:'dialogue'};
   const make=data=>new Request(request.url,{method:'POST',headers:request.headers,body:JSON.stringify(data)});
   if(formal.interaction==='vocabAnswer')return handleReadingVocabAttempt(make({...payload,...formal.input}),env,student,dialogueLocal);
@@ -2550,7 +2553,14 @@ async function handleReadingVocabAttempt(request, env, student, dialogueLocal = 
     return readingError("selectedIndex required");
   }
   const bank = await loadVocabBank(request, env, lessonId);
-  const authoritativeItem = bank.inventory.find((item) => item?.id === itemId && item?.decision === "question");
+  const currentItem = bank.inventory.find((item) => item?.id === itemId && item?.decision === "question");
+  // A dialogue session frozen before the 2026-11-04 revision is graded against the question it showed; the
+  // evidence then carries the prior identity (recordLearningInteraction admits only the exact revisionOf version).
+  const frozen = dialogueLocal?.frozenItem?.id === itemId ? dialogueLocal.frozenItem : null;
+  const authoritativeItem = currentItem && frozen
+    && (frozen.answerIndex !== currentItem.answerIndex || JSON.stringify(frozen.options) !== JSON.stringify(currentItem.options))
+    ? { ...currentItem, options: frozen.options, answerIndex: frozen.answerIndex }
+    : currentItem;
   if (!authoritativeItem || !Array.isArray(authoritativeItem.options) || selectedIndex >= authoritativeItem.options.length) {
     return readingError("vocabulary item absent from authoritative bank");
   }

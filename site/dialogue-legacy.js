@@ -27,7 +27,9 @@ export async function historicalEvidence(db,studentId,curriculum){
   // The source ledger stores the manifest release in resource_version; the
   // same-event outbox pins the individual resource. Never guess from a title
   // or accept an envelope whose event/resource/source version does not match.
-  const event=events.find(r=>accepted(r)&&(r.resource_version===o.legacy.resourceVersion||r.item_resource_version===o.legacy.resourceVersion));
+  // 2026-11-04 formal revision: the exact prior version of a revised item is the same canonical unit (append-only lineage).
+  const versions=[o.legacy.resourceVersion,...(Array.isArray(o.legacy.priorResourceVersions)?o.legacy.priorResourceVersions:[])];
+  const event=events.find(r=>accepted(r)&&(versions.includes(r.resource_version)||versions.includes(r.item_resource_version)));
   if(event)preserved.push({objectiveId:o.id,verified:true,sourceEventId:event.source_event_id});
   else{const older=events.filter(accepted);if(older.length)preserved.push({objectiveId:o.id,verified:false,previousCompletion:true,sourceRef:sourceRef(older,'historical-completion-preserved-current-version-mapping-requires-review')});}
  }

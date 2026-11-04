@@ -70,7 +70,7 @@ const inventory = taxonomy.lessons.map(meta => {
  const competencies=formative.lessons.find(x=>x.lessonId===meta.id)?.competencies||[];
  const guide=guides.lessons.find(x=>x.lessonId===meta.id);
  return {lessonId:meta.id,title:meta.title,mode:meta.mode,legacyTracks:track,legacyTrackDefinitions:definitions,
-  formal:items.map(x=>({resourceKey:x.resourceKey,canonicalUnitId:x.canonicalUnitId,resourceVersion:x.resourceVersion,questionKind:x.questionKind,scoringRole:x.evidenceRole,sourceReleaseId:x.sourceReleaseId,...(x.effectiveFrom?{effectiveFrom:x.effectiveFrom}:{}),...(x.formalScopePolicyVersion?{formalScopePolicyVersion:x.formalScopePolicyVersion}:{})})),
+  formal:items.map(x=>({resourceKey:x.resourceKey,canonicalUnitId:x.canonicalUnitId,resourceVersion:x.resourceVersion,questionKind:x.questionKind,scoringRole:x.evidenceRole,sourceReleaseId:x.sourceReleaseId,...(x.effectiveFrom?{effectiveFrom:x.effectiveFrom}:{}),...(x.formalScopePolicyVersion?{formalScopePolicyVersion:x.formalScopePolicyVersion}:{}),...(x.revisionOf?{priorResourceVersions:[x.revisionOf.resourceVersion]}:{})})),
   formative:competencies.flatMap(c=>c.items.map(i=>({...i,competencyTag:c.competencyTag}))),
   vocabularyIds:vocabIndex.activeItemIds[meta.id]||[],
   studyGuide: (guide?.items||[]).map(i=>({itemKey:i.itemKey,active:i.activeForSelfTest,reviewRequired:i.reviewRequired,semanticRevision:i.semanticRevision,pdfPage:i.pdfPage,printedPage:i.printedPage,competencyTag:i.competencyTag})),

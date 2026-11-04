@@ -1296,7 +1296,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:c48f657c37befcc41d07f986d2f9487bd2efd93a699184d7bb54b1910a2304d2"
+        ]
       }
     },
     {
@@ -1350,7 +1353,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:cc67e5f54d009587e59534c1a02bf71c14526f1b9cdec09ea70981807d48aca5"
+        ]
       }
     },
     {
@@ -1404,7 +1410,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:2854add460334ffae9f7a1f0d6bf5ed7f999e5930024268d1e6aab88e2fcb63c"
+        ]
       }
     },
     {
@@ -1458,7 +1467,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:93ac9b1e84ebf630e6358ca7ccdc10a7f7ee83db0d78cf66d2dedf743eb3c2bc"
+        ]
       }
     },
     {
@@ -1948,7 +1960,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:c48f657c37befcc41d07f986d2f9487bd2efd93a699184d7bb54b1910a2304d2"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1483:vocab:lesson-1483:v04",
@@ -1975,7 +1990,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:cc67e5f54d009587e59534c1a02bf71c14526f1b9cdec09ea70981807d48aca5"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1483:vocab:lesson-1483:v07",
@@ -2002,7 +2020,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:2854add460334ffae9f7a1f0d6bf5ed7f999e5930024268d1e6aab88e2fcb63c"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1483:vocab:lesson-1483:v10",
@@ -2029,7 +2050,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:93ac9b1e84ebf630e6358ca7ccdc10a7f7ee83db0d78cf66d2dedf743eb3c2bc"
+        ]
       }
     ],
     "formative": [
@@ -3250,7 +3274,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-b2807de7be4ee6d9003b",
+  "curriculumVersion": "yw-dialogue-b4f59eb553088f51043e",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

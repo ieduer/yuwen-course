@@ -965,3 +965,46 @@ test('a formal assessment must quote the student, name an eligible original item
  assert.throws(()=>validateFormalAssessment({...good,objectiveId:'lesson-1717-p2:context'},{curriculum:c,state,turns}),/formal_assessment_not_eligible/);
  assert.throws(()=>validateFormalAssessment(good,{curriculum:c,state,turns,legacy:{preserved:[{objectiveId:id,verified:true}]}}),/original_result_preserved/);
 });
+
+// 2026-11-04 formal revision (bank-fix-yw-20261104): lesson-1499:v08 「空」 changed its answer key from C (index 2) to D (3).
+test('a dialogue session frozen before the revision grades its shown question and records the exact prior identity',async()=>{
+ const f=fixture();try{
+  const old=JSON.parse(fs.readFileSync('scripts/fixtures/dialogue-curriculum-pre-revision/lesson-1499.json'));
+  const published=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1499.json'));
+  const manifest=JSON.parse(fs.readFileSync('site/data/learning-manifest.json')),item=manifest.items.find(i=>i.resourceKey==='effect:lesson-1499:vocab:lesson-1499:v08');
+  assert.equal(item.formalRevisionPolicyVersion,'yw-formal-revision-20261104-v1');
+  const objectiveId='legacy:effect:lesson-1499:vocab:lesson-1499:v08';
+  const oldLegacy=old.objectives.find(o=>o.id===objectiveId).legacy;
+  assert.equal(oldLegacy.resourceVersion,item.revisionOf.resourceVersion);assert.notEqual(item.resourceVersion,oldLegacy.resourceVersion);
+  let served=old;f.env.ASSETS={fetch:async request=>{const p=new URL(request.url).pathname;return new Response(p==='/dialogue-curriculum/lesson-1499.json'?JSON.stringify(served):fs.readFileSync('site'+p));}};
+  await handleDialogue(req(body(),'lesson-1499'),f.env,student,null,{callModel:good});
+  served=published; // the corrected curriculum is published; the session stays frozen on the old one
+  const session=f.sql.prepare('SELECT * FROM dialogue_sessions').get();assert.equal(session.curriculum_version,old.curriculumVersion);
+  f.sql.prepare("INSERT INTO dialogue_assessments(id,session_id,turn_id,objective_id,outcome,evidence_json,rationale,rule_version,curriculum_version,created_at) VALUES(?,?,(SELECT id FROM dialogue_turns WHERE role='student' LIMIT 1),'lesson-1499:v08','demonstrated','[]','synthetic setup','synthetic',?,'2026-10-12')").run(crypto.randomUUID(),session.id,old.curriculumVersion);
+  const data=await(await handleDialogue(req(null,'lesson-1499'),f.env,student)).json();
+  assert.equal(data.originalTask.objectiveId,objectiveId);assert.deepEqual(data.originalTask.options,old.vocabulary.find(v=>v.id==='lesson-1499:v08').options);
+  const b={action:'original',objectiveId,input:{selectedIndex:2},mutationId:'synthetic-frozen-0001',revision:data.revision};
+  const response=await handleDialogue(req(b,'lesson-1499'),f.env,student,null,{callModel:()=>{throw Error('no provider');},originalAction:(formal,turnId,commit)=>handleDialogueOriginal(req(null,'lesson-1499'),f.env,student,formal,turnId,commit)});
+  assert.equal(response.status,200,await response.clone().text());
+  assert.equal(f.sql.prepare('SELECT correct FROM vocab_attempts').get().correct,1,'graded against the question this frozen session showed');
+  const env=JSON.parse(f.sql.prepare('SELECT envelope_json FROM evidence_outbox ORDER BY rowid DESC LIMIT 1').get().envelope_json);
+  assert.equal(env.resourceVersion,item.revisionOf.resourceVersion);assert.equal(env.sourceReleaseId,item.revisionOf.sourceReleaseId);
+  assert.equal(env.canonicalUnitId,item.canonicalUnitId);
+  assert.equal(env.sourceVersion,manifest.priorReleases.find(r=>r.sourceReleaseId===item.revisionOf.sourceReleaseId).manifestVersion);
+ }finally{f.close();}
+});
+test('a new session admits prior-version evidence of a revised item as verified and grades the corrected key',async()=>{
+ const f=fixture();try{
+  const {historicalEvidence}=await import('../site/dialogue-legacy.js');
+  const published=JSON.parse(fs.readFileSync('site/dialogue-curriculum/lesson-1499.json'));
+  const o=published.objectives.find(x=>x.id==='legacy:effect:lesson-1499:vocab:lesson-1499:v08');
+  const prior=o.legacy.priorResourceVersions[0];
+  f.sql.prepare("INSERT INTO learning_interactions(source_event_id,student_id,academic_year,lesson_id,interaction_key,event_type,assessment_kind,scoring_role,resource_key,resource_version,registry_version,client_mutation_id,lesson_phase,occurred_at) VALUES('prior-pass',1,'2026-2027','lesson-1499','vocabAnswer','vocab_answer_submitted','performance','a_plus_gate',?,'yw-e310d45b1d81e9ad','yw-interactions-2026-08-09-v2','prior-pass','','2026-10-20T00:00:00Z')").run(o.legacy.resourceKey);
+  f.sql.prepare("INSERT INTO learning_evaluations(source_event_id,student_id,eligibility_status,correctness) VALUES('prior-pass',1,'eligible','correct')").run();
+  f.sql.prepare('INSERT INTO evidence_outbox(source_event_id,envelope_json,delivery_status) VALUES(?,?,?)').run('prior-pass',JSON.stringify({sourceEventId:'prior-pass',resourceKey:o.legacy.resourceKey,sourceVersion:'yw-e310d45b1d81e9ad',sourceSiteKey:'yw',sourceSystem:'yuwen-course',resourceVersion:prior}),'accepted');
+  const preserved=await historicalEvidence(f.db,1,published);
+  assert(preserved.some(p=>p.objectiveId===o.id&&p.verified===true),'the exact prior version is the same canonical unit');
+  const without=await historicalEvidence(f.db,1,{...published,objectives:published.objectives.map(x=>x.id===o.id?{...x,legacy:{...x.legacy,priorResourceVersions:[]}}:x)});
+  assert(!without.some(p=>p.objectiveId===o.id&&p.verified===true),'without the revision link the old pass would need review');
+ }finally{f.close();}
+});

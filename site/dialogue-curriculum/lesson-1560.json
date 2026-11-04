@@ -632,7 +632,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:7e42a55283732e99b4b8875d2282aa787a9238279453f5a1996ce49eea0b7353"
+        ]
       }
     },
     {
@@ -1121,7 +1124,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:7e42a55283732e99b4b8875d2282aa787a9238279453f5a1996ce49eea0b7353"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1560:vocab:lesson-1560:v05",
@@ -1981,7 +1987,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-8597d53bc6699ca2c6ae",
+  "curriculumVersion": "yw-dialogue-20ea0d74e3a0c2d9fafd",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

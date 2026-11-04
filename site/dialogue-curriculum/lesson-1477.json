@@ -1161,7 +1161,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:4e3c221448045bb58ab0c137201c059cfa7de20507e1a6777b4b8ba3da13a1e4"
+        ]
       }
     },
     {
@@ -1233,7 +1236,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:f650082047b7441e3d9c1d0e2ef1b18e24ba7a76e5ab0d0d297878a0674b825e"
+        ]
       }
     },
     {
@@ -1977,7 +1983,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:4e3c221448045bb58ab0c137201c059cfa7de20507e1a6777b4b8ba3da13a1e4"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1477:vocab:lesson-1477:v07",
@@ -2013,7 +2022,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:f650082047b7441e3d9c1d0e2ef1b18e24ba7a76e5ab0d0d297878a0674b825e"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1477:vocab:lesson-1477:v11",
@@ -3863,7 +3875,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-3e4b6b5f87de5b59febb",
+  "curriculumVersion": "yw-dialogue-36ed3f9f2d381429b73d",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

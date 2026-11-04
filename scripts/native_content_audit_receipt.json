@@ -2,9 +2,9 @@
   "schemaVersion": "yw-native-content-audit-receipt-v1",
   "siteKey": "yw",
   "reviewDisposition": "approved",
-  "reviewAuthority": "suen-direct-approval-native-local-validation-20261014-01a13a52",
-  "reviewedAt": "2026-10-14T12:30:14.960953Z",
-  "semanticDigest": "sha256:ea8bf09718c6708420cd0957403391f86311eaf83d74d6a6ae49d8e6797a1a56",
+  "reviewAuthority": "suen-20261104-direct「准，重簽」-relayed-local_3f2657f3 (re-sign for the bank-fix-yw-20261104 corrected vocabulary content; decision 「A：發新正式版本」)",
+  "reviewedAt": "2026-11-04T03:45:58.725001Z",
+  "semanticDigest": "sha256:adaa1a9374bb3710d95150f8073d5c97192e037abd86687a4775d968c949a5b4",
   "counts": {
     "activeStudyGuideItems": 193,
     "annotations": 2932,
@@ -45,5 +45,5 @@
     "vocabularyLessons": 77,
     "vocabularyQuestions": 723
   },
-  "reviewEvidence": "/Users/ylsuen/CF/_meta/reports/operations/yw-dialogue-20261012/continuation-01a13550/central-release/revision-6/C3/native-complete-contract-01a13a52/USER-APPROVAL.json"
+  "reviewEvidence": "/Users/ylsuen/CF/_meta/reports/operations/bank-fix-yw-20261104/OWNER-DECISION-20261104.json"
 }

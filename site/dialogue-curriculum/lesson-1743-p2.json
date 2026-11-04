@@ -1104,7 +1104,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:0d3cb102f4ce3afacecd7625648fb4b4c89f2f356b5bec8814d67e827309b9d8"
+        ]
       }
     },
     {
@@ -1123,7 +1126,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:a5afe8801f0877c75ba97c0b998fe315d75e787071aecbac8e7d4287fdf7a5f3"
+        ]
       }
     },
     {
@@ -1161,7 +1167,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:ed6cf85860dec228f8acb0982af44b66d4a6a0ad983908771807c3e9e23b788e"
+        ]
       }
     },
     {
@@ -1256,7 +1265,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:ddff6f7282191a88bc0b24a5ba7d7516edf534d1c493e88274ed522bb72adadd"
+        ]
       }
     },
     {
@@ -1294,7 +1306,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:423926ac1282b85c8dcb9a85fa5743df5aa53bf046de56ea75271c29e22cf249"
+        ]
       }
     },
     {
@@ -1699,7 +1714,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:0d3cb102f4ce3afacecd7625648fb4b4c89f2f356b5bec8814d67e827309b9d8"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v04",
@@ -1709,7 +1727,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:a5afe8801f0877c75ba97c0b998fe315d75e787071aecbac8e7d4287fdf7a5f3"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v05",
@@ -1729,7 +1750,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:ed6cf85860dec228f8acb0982af44b66d4a6a0ad983908771807c3e9e23b788e"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v07",
@@ -1779,7 +1803,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:ddff6f7282191a88bc0b24a5ba7d7516edf534d1c493e88274ed522bb72adadd"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1743-p2:vocab:lesson-1743-p2:v12",
@@ -1799,7 +1826,10 @@
         "scoringRole": "formative",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:423926ac1282b85c8dcb9a85fa5743df5aa53bf046de56ea75271c29e22cf249"
+        ]
       }
     ],
     "formative": [
@@ -2599,7 +2629,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-6013b82d24bd9037e7ed",
+  "curriculumVersion": "yw-dialogue-11ac5496e1637b80a637",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

@@ -833,7 +833,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:cc0f242aab6d9e134855a3cbaf063b4eabf1f0e601f1ac0fe0ac822b8d4572bc"
+        ]
       }
     },
     {
@@ -851,7 +854,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:3ba3592c83925839de878293314009abb0ee348ecfdba22dce309a2e2e009ede"
+        ]
       }
     },
     {
@@ -1264,7 +1270,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:cc0f242aab6d9e134855a3cbaf063b4eabf1f0e601f1ac0fe0ac822b8d4572bc"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v10",
@@ -1273,7 +1282,10 @@
         "questionKind": "vocabulary",
         "scoringRole": "a_plus_gate",
         "sourceReleaseId": "yw-release-6ceed2f673344492",
-        "effectiveFrom": "2026-08-12T00:00:00+08:00"
+        "effectiveFrom": "2026-08-12T00:00:00+08:00",
+        "priorResourceVersions": [
+          "sha256:3ba3592c83925839de878293314009abb0ee348ecfdba22dce309a2e2e009ede"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1500:vocab:lesson-1500:v11",
@@ -2114,7 +2126,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-5e5fa7a6de9be03126bf",
+  "curriculumVersion": "yw-dialogue-200445f2398c99d02502",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",

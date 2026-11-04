@@ -56,7 +56,7 @@ export async function replayApprovedRetained({db,session,curriculum,student,orig
   const turns=await (async()=>((await db.prepare("SELECT id,role,content FROM dialogue_turns WHERE session_id=? AND role='student' ORDER BY sequence").bind(session.id).all()).results||[]))();
   let checked;try{checked=validateOriginalEvidence(retained,{turns,curriculum,task});}catch(error){results.push({eventId:e.eventId,status:'still_refused',code:String(error?.message||'').slice(0,80)});continue;}
   const formal=prepareOriginalInput(curriculum,checked.task,checked.input);
-  const response=await originalAction({...formal,lessonId:curriculum.lessonId},`${row.turn_id}-${release}${correction?'c':''}`,result=>[
+  const response=await originalAction({...formal,lessonId:curriculum.lessonId,frozenVocab:formal.interaction==='vocabAnswer'?((curriculum.vocabulary||[]).find(v=>v?.id===formal.input?.itemId)||null):null},`${row.turn_id}-${release}${correction?'c':''}`,result=>[
    db.prepare(`INSERT INTO dialogue_events(id,session_id,turn_id,event_type,details_json,created_at) VALUES(?,?,?,'${correction?'retained_correction_saved':'retained_replay_saved'}',?,?)`).bind(replayId,session.id,row.turn_id,JSON.stringify({release,authority:correction?CORRECTION_AUTHORITY:REPLAY_AUTHORITY,retainedEventId:e.eventId,objectiveId:e.objectiveId,evidence:retained.evidence,input:checked.input,...(correction?{supersedes:{sourceEventId:e.supersedesSourceEventId,rating:e.supersededRating}}:{}),...result}),at),
   ]);
   results.push({eventId:e.eventId,status:response?.ok?'recorded':'source_refused',httpStatus:response?.status??null});
