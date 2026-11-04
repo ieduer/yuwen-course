@@ -3050,7 +3050,7 @@
         "notice": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。",
         "evidence": {
           "readerPath": "data/reader-documents/lesson-1711-p1.json",
-          "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+          "readerSha256": "7597ed2ac1935638958d3cdee01749e6fcd2d50ffea0f1c575060873b2895b62",
           "passages": [
             {
               "id": "lesson-1711-p1:p1",
@@ -3074,7 +3074,7 @@
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
-      "version": "yw-language-091667b2a67ffd030406",
+      "version": "yw-language-acb5f58bf16241e3b329",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     },
     {
@@ -3112,7 +3112,7 @@
         "notice": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。",
         "evidence": {
           "readerPath": "data/reader-documents/lesson-1711-p1.json",
-          "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+          "readerSha256": "7597ed2ac1935638958d3cdee01749e6fcd2d50ffea0f1c575060873b2895b62",
           "passages": [
             {
               "id": "lesson-1711-p1:p1",
@@ -3136,7 +3136,7 @@
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
-      "version": "yw-language-264ecdc8e336d1cd76f2",
+      "version": "yw-language-6017ab1977f118b073e9",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     },
     {
@@ -3174,7 +3174,7 @@
         "notice": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。",
         "evidence": {
           "readerPath": "data/reader-documents/lesson-1711-p1.json",
-          "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+          "readerSha256": "7597ed2ac1935638958d3cdee01749e6fcd2d50ffea0f1c575060873b2895b62",
           "passages": [
             {
               "id": "lesson-1711-p1:p1",
@@ -3198,7 +3198,7 @@
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
-      "version": "yw-language-84f1a722e9a48f41ba3b",
+      "version": "yw-language-edbd8f1dfc84708da501",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     },
     {
@@ -3238,7 +3238,7 @@
         "notice": "原文、原注及學者對本句偏正關係的直接分析已核對；只接受所列修飾關係，不推定唯一語法標籤。來源核驗不等於模型校準或學生掌握。",
         "evidence": {
           "readerPath": "data/reader-documents/lesson-1711-p1.json",
-          "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+          "readerSha256": "7597ed2ac1935638958d3cdee01749e6fcd2d50ffea0f1c575060873b2895b62",
           "passages": [
             {
               "id": "lesson-1711-p1:p1",
@@ -3290,7 +3290,7 @@
       "sourcePassages": [
         "lesson-1711-p1:p1"
       ],
-      "version": "yw-language-001756db9acbca59b674",
+      "version": "yw-language-a939658de670c4532ef1",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     }
   ],
@@ -3398,7 +3398,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-0013f01b365782c41837",
+  "curriculumVersion": "yw-dialogue-45a65b86d49d295e0830",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",
@@ -3512,7 +3512,7 @@
     "lesson": "data/lessons/lesson-1711-p1.json",
     "lessonSha256": "53946bd879c814933e777947e090b91275f1c3e53f169e6e966211601dbd0b89",
     "reader": "data/reader-documents/lesson-1711-p1.json",
-    "readerSha256": "15321171ac516648eeb27e646e826abf9e80f2ac1d18abd2e088b3e0e4f62744",
+    "readerSha256": "7597ed2ac1935638958d3cdee01749e6fcd2d50ffea0f1c575060873b2895b62",
     "sourcePostId": "11143-1",
     "sourcePostNumber": 1,
     "blockCount": 6,

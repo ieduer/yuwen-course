@@ -2341,7 +2341,7 @@
         "notice": "原句與列明原注已逐項核對；關係及表達效果仍屬有範圍的教學解讀，不冒充原注已有的完整語法答案。來源核驗不等於模型校準或學生掌握。",
         "evidence": {
           "readerPath": "data/reader-documents/lesson-1498.json",
-          "readerSha256": "e865b8f73d9a4beb512f1f92e4fbedda6f2b5b82717d68142ab4b8e843bbee75",
+          "readerSha256": "139cd1b91bc964ebe0fe04a648b5ba2badcf9f9ae2ece694669ec7c26aef2e93",
           "passages": [
             {
               "id": "lesson-1498:p12",
@@ -2365,7 +2365,7 @@
       "sourcePassages": [
         "lesson-1498:p12"
       ],
-      "version": "yw-language-494b4393766eeae528f9",
+      "version": "yw-language-36a1726101c8a817dce2",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     }
   ],
@@ -2466,7 +2466,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-69c4af43735ff9884e79",
+  "curriculumVersion": "yw-dialogue-06d29749043ef4e1d501",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",
@@ -2710,7 +2710,7 @@
     "lesson": "data/lessons/lesson-1498.json",
     "lessonSha256": "485373d68e7e501ddef2e2a2ea2525039bb4f74748464e2bcc549c1f165acdb8",
     "reader": "data/reader-documents/lesson-1498.json",
-    "readerSha256": "e865b8f73d9a4beb512f1f92e4fbedda6f2b5b82717d68142ab4b8e843bbee75",
+    "readerSha256": "139cd1b91bc964ebe0fe04a648b5ba2badcf9f9ae2ece694669ec7c26aef2e93",
     "sourcePostId": 10076,
     "sourcePostNumber": 1,
     "blockCount": 22,

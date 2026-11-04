@@ -1898,7 +1898,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-b2d502d05fc584792bc0",
+  "curriculumVersion": "yw-dialogue-7e2a4a9f420058b97bf5",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",
@@ -1967,7 +1967,7 @@
         {
           "runs": [
             {
-              "text": "《哈姆莱特》是他最有代表意义的作品，共五幕二十场，这里选的是第三幕第一场。**《哈姆莱特》**讲述丹麦王子哈姆莱特对谋杀他的父亲、骗娶他的母亲并篡夺了王位的叔父进行复仇的故事。父亲的死让哈姆莱特悲恸，母亲的不忠使他绝望，哈姆莱特万念俱灰，意欲自尽，父亲的鬼魂却来对他揭发了叔父克劳狄斯杀兄娶嫂和篡夺王位的罪恶，并要他复仇。",
+              "text": "《哈姆莱特》是他最有代表意义的作品，共五幕二十场，这里选的是第三幕第一场。《哈姆莱特》讲述丹麦王子哈姆莱特对谋杀他的父亲、骗娶他的母亲并篡夺了王位的叔父进行复仇的故事。父亲的死让哈姆莱特悲恸，母亲的不忠使他绝望，哈姆莱特万念俱灰，意欲自尽，父亲的鬼魂却来对他揭发了叔父克劳狄斯杀兄娶嫂和篡夺王位的罪恶，并要他复仇。",
               "type": "text"
             }
           ],
@@ -2020,7 +2020,7 @@
     "lesson": "data/lessons/lesson-1733.json",
     "lessonSha256": "d34a798b16e2cfbadea84245786344148db8f67ea09d6f7ba16b4335f9b450cc",
     "reader": "data/reader-documents/lesson-1733.json",
-    "readerSha256": "706e12d95cb2ec98ce347d15fba439bc809271f2ef199b492447bd58578f1e65",
+    "readerSha256": "ff382342d06b00cfdad7dbcc18f4e53f3ff9603cd694270ad7fe7038445fe297",
     "sourcePostId": 11180,
     "sourcePostNumber": 1,
     "blockCount": 54,

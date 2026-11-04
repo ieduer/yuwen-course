@@ -180,7 +180,7 @@
     },
     {
       "id": "lesson-1557:p12",
-      "text": "长太息以掩涕兮，哀民生之多艰。余虽好修姱以𩉜羁兮，謇朝谇而夕替。既替余以蕙𬙋兮，又申之以揽茝。亦余心之所善兮，虽九死其犹未悔。怨灵修之浩荡兮，终不察夫民心。众女嫉余之蛾眉兮，谣诼谓余以善淫。固时俗之工巧兮，偭规矩而改错。背绳墨以追曲兮，竞周容以为度。忳郁邑余侘傺兮，吾独穷困乎此时也。宁溘死以流亡兮，余不忍为此态也！鸷鸟之不群兮，自前世而固然。何方圜之能周兮，夫孰异道而相安？屈心而抑志兮，忍尤而攘诟。伏清白以死直兮，固前圣之所厚。悔相道之不察兮，延伫乎吾将反。回朕车以复路兮，及行迷之未远。步余马于兰皋兮，驰椒丘且焉止息。进不入以离尤兮，退将复修吾初服。制芰荷以为衣兮，集芙蓉以为裳。不吾知其亦已兮，苟余情其信芳。高余冠之岌岌兮，长余佩之陆离。芳与泽其杂糅兮，唯昭质其犹未亏。忽反顾以游目兮，将往观乎四荒。佩缤纷其繁饰兮，芳菲菲其弥章。民生各有所乐兮，余独好修以为常。虽体解吾犹未变兮，岂余心之可惩？**",
+      "text": "长太息以掩涕兮，哀民生之多艰。余虽好修姱以𩉜羁兮，謇朝谇而夕替。既替余以蕙𬙋兮，又申之以揽茝。亦余心之所善兮，虽九死其犹未悔。怨灵修之浩荡兮，终不察夫民心。众女嫉余之蛾眉兮，谣诼谓余以善淫。固时俗之工巧兮，偭规矩而改错。背绳墨以追曲兮，竞周容以为度。忳郁邑余侘傺兮，吾独穷困乎此时也。宁溘死以流亡兮，余不忍为此态也！鸷鸟之不群兮，自前世而固然。何方圜之能周兮，夫孰异道而相安？屈心而抑志兮，忍尤而攘诟。伏清白以死直兮，固前圣之所厚。悔相道之不察兮，延伫乎吾将反。回朕车以复路兮，及行迷之未远。步余马于兰皋兮，驰椒丘且焉止息。进不入以离尤兮，退将复修吾初服。制芰荷以为衣兮，集芙蓉以为裳。不吾知其亦已兮，苟余情其信芳。高余冠之岌岌兮，长余佩之陆离。芳与泽其杂糅兮，唯昭质其犹未亏。忽反顾以游目兮，将往观乎四荒。佩缤纷其繁饰兮，芳菲菲其弥章。民生各有所乐兮，余独好修以为常。虽体解吾犹未变兮，岂余心之可惩？",
       "block": {
         "runs": [
           {
@@ -463,7 +463,7 @@
             "type": "annotation-ref"
           },
           {
-            "text": "？**",
+            "text": "？",
             "type": "text"
           }
         ],
@@ -2984,7 +2984,7 @@
       "sourceEvidence": {
         "kind": "new-unscored-contextual-analysis",
         "readerPath": "data/reader-documents/lesson-1557.json",
-        "readerSha256": "dbebf0a7e5aa9a5748c4e702f76ffe929f1c2c3383a0aa4e8cdc5d5d53ddc946",
+        "readerSha256": "4bf67cc028499d86bdb569b714d102bda1e12ea529823699baa0b365a133ed0f",
         "passageId": "lesson-1557:p10",
         "passageSha256": "9596fb6dde2c255a952b8dd0240579ecb0f1ea2acd8ce213cb5d68b604e41b4a",
         "quotationPolicy": "exact-original-substring",
@@ -3010,7 +3010,7 @@
       "sourcePassages": [
         "lesson-1557:p10"
       ],
-      "version": "yw-language-fe4687e99d17c92aafe5",
+      "version": "yw-language-872625532b408f4584b9",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     }
   ],
@@ -3108,7 +3108,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-aaa80778dea4cbf11169",
+  "curriculumVersion": "yw-dialogue-2d8520c486ecc9510c78",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",
@@ -3769,7 +3769,7 @@
     "lesson": "data/lessons/lesson-1557.json",
     "lessonSha256": "c640a56bbcf7923bbb2563253ab3e9d9b6a17be7e5ff5e0c41ae053d4c1a55cc",
     "reader": "data/reader-documents/lesson-1557.json",
-    "readerSha256": "dbebf0a7e5aa9a5748c4e702f76ffe929f1c2c3383a0aa4e8cdc5d5d53ddc946",
+    "readerSha256": "4bf67cc028499d86bdb569b714d102bda1e12ea529823699baa0b365a133ed0f",
     "sourcePostId": 10415,
     "sourcePostNumber": 1,
     "blockCount": 19,

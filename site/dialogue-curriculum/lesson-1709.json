@@ -1408,7 +1408,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-7ea24bc8cf4c68bf07b2",
+  "curriculumVersion": "yw-dialogue-efe39040ee28438e1c15",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",
@@ -1486,7 +1486,7 @@
     "lesson": "data/lessons/lesson-1709.json",
     "lessonSha256": "53e86ef4002b819667803883adc634aec24cbcd463e17e586038dd3667f30425",
     "reader": "data/reader-documents/lesson-1709.json",
-    "readerSha256": "69c247d99f16acd9831cb6b81a1b9f73bdfafc25e81e7d9b2220d6713d1a8da7",
+    "readerSha256": "790609892c7d07795cb627e5f8f504d9aa827599494779a97b1aa73e4d0fd571",
     "sourcePostId": 11141,
     "sourcePostNumber": 1,
     "blockCount": 33,

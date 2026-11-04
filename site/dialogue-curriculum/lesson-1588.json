@@ -15,11 +15,11 @@
   "passages": [
     {
       "id": "lesson-1588:p1",
-      "text": "**泻水置平地，各自东西南北流。 **\n\n**人生亦有命，安能行叹复坐愁！ **\n\n**酌酒以自宽，举杯断绝歌《路难》。 **\n\n心非木石岂无感？吞声踯躅不敢言。",
+      "text": "泻水置平地，各自东西南北流。 \n\n人生亦有命，安能行叹复坐愁！ \n\n酌酒以自宽，举杯断绝歌《路难》。 \n\n心非木石岂无感？吞声踯躅不敢言。",
       "block": {
         "runs": [
           {
-            "text": "**泻水置平地，各自东西南北流。 **\n\n**人生亦有命，安能行叹复坐愁！ **\n\n**酌酒以自宽",
+            "text": "泻水置平地，各自东西南北流。 \n\n人生亦有命，安能行叹复坐愁！ \n\n酌酒以自宽",
             "type": "text"
           },
           {
@@ -37,7 +37,7 @@
             "type": "annotation-ref"
           },
           {
-            "text": "。 **\n\n心非木石岂无感",
+            "text": "。 \n\n心非木石岂无感",
             "type": "text"
           },
           {
@@ -1783,9 +1783,9 @@
       "sourceEvidence": {
         "kind": "new-unscored-contextual-analysis",
         "readerPath": "data/reader-documents/lesson-1588.json",
-        "readerSha256": "ad3e77d523f1cf9d9351dd2666c4f1aae5817d07c5edc0c35d4349ab2191ff5e",
+        "readerSha256": "f835a60db9f80a5f3731e6ff1593759d1e71c244a2a026e393ebe1268cecad0a",
         "passageId": "lesson-1588:p1",
-        "passageSha256": "1ac80c185d6b7b8bc21f5d06479000f2e3ed736cbd3902f0bd918a437521ce00",
+        "passageSha256": "4d744888f2051636bc0164537826752ff9be25df163483ad7036627d412cd92b",
         "quotationPolicy": "exact-original-substring",
         "analysisAuthority": "authored-learning-support; not-original-consequential-rubric",
         "supplementVersion": "yw-dialogue-classical-language-20261013-v2"
@@ -1809,7 +1809,7 @@
       "sourcePassages": [
         "lesson-1588:p1"
       ],
-      "version": "yw-language-d86af746634119fca1b3",
+      "version": "yw-language-f7677279dd12a79c724f",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     }
   ],
@@ -1907,7 +1907,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-c23f476ecdb9ca355102",
+  "curriculumVersion": "yw-dialogue-34dbd7e0dacf1102dfce",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",
@@ -1988,7 +1988,7 @@
     "lesson": "data/lessons/lesson-1588.json",
     "lessonSha256": "9d4a612cafabd8be8971123f47ccb65b341f3066a74a708c60e845b77097e1dc",
     "reader": "data/reader-documents/lesson-1588.json",
-    "readerSha256": "ad3e77d523f1cf9d9351dd2666c4f1aae5817d07c5edc0c35d4349ab2191ff5e",
+    "readerSha256": "f835a60db9f80a5f3731e6ff1593759d1e71c244a2a026e393ebe1268cecad0a",
     "sourcePostId": 10589,
     "sourcePostNumber": 1,
     "blockCount": 2,

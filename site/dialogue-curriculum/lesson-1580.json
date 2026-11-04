@@ -15,11 +15,11 @@
   "passages": [
     {
       "id": "lesson-1580:p1",
-      "text": "**郭橐驼，不知始何名。病偻，隆然伏行，有类橐驼者，故乡人号之“驼”。驼闻之曰：“甚善。名我固当。”因舍其名，亦自谓“橐驼”云。",
+      "text": "郭橐驼，不知始何名。病偻，隆然伏行，有类橐驼者，故乡人号之“驼”。驼闻之曰：“甚善。名我固当。”因舍其名，亦自谓“橐驼”云。",
       "block": {
         "runs": [
           {
-            "text": "**郭橐驼，不知始何名。病偻",
+            "text": "郭橐驼，不知始何名。病偻",
             "type": "text"
           },
           {
@@ -526,11 +526,11 @@
     },
     {
       "id": "lesson-1580:p5",
-      "text": "问者曰：“嘻，不亦善夫！吾问养树，得养人术。”传其事以为官戒也。**",
+      "text": "问者曰：“嘻，不亦善夫！吾问养树，得养人术。”传其事以为官戒也。",
       "block": {
         "runs": [
           {
-            "text": "问者曰：“嘻，不亦善夫！吾问养树，得养人术。”传其事以为官戒也。**",
+            "text": "问者曰：“嘻，不亦善夫！吾问养树，得养人术。”传其事以为官戒也。",
             "type": "text"
           }
         ],
@@ -3681,7 +3681,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-6faec7cec021b66f12d1",
+  "curriculumVersion": "yw-dialogue-2f422334d9a15e838263",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",
@@ -4113,7 +4113,7 @@
     "lesson": "data/lessons/lesson-1580.json",
     "lessonSha256": "f3a7b4c05f6b8f75498dd8eb74c4d721da2b6647f4aaf0f6bd64a46e1b42a2e7",
     "reader": "data/reader-documents/lesson-1580.json",
-    "readerSha256": "ee8bb6db62baac6c897a8950c49d9dbffac5817caba402e88084e632600bc931",
+    "readerSha256": "2f1a1c6c8d21431d039a945b7b8e9549ef3b052e3d0aeb2f5b9e02c00d2fc6bd",
     "sourcePostId": 10546,
     "sourcePostNumber": 1,
     "blockCount": 6,

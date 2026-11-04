@@ -1878,7 +1878,7 @@
       "sourceEvidence": {
         "kind": "new-unscored-contextual-analysis",
         "readerPath": "data/reader-documents/lesson-1722-p4.json",
-        "readerSha256": "3c2e8b1e38d12ac34a2575a3cd5f59ff584b5ee8fef29b4d96a4e28bcc844f86",
+        "readerSha256": "794cab70c474923664f3857cc67689d4adc29ba80acf5fc249885c24cdcc50b6",
         "passageId": "lesson-1722-p4:p3",
         "passageSha256": "b0e65c298737bebe34c8165e8e7f2ce1883f2977c19bfe90f0076d8cef24c023",
         "quotationPolicy": "exact-original-substring",
@@ -1902,7 +1902,7 @@
       "sourcePassages": [
         "lesson-1722-p4:p3"
       ],
-      "version": "yw-language-e08b6d13a08c659b5aa0",
+      "version": "yw-language-6a80a685b2e5cd64988a",
       "assessmentStatus": "separate-unscored-mastery-awaiting-calibration"
     }
   ],
@@ -1985,7 +1985,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-cc99db879501606dbac8",
+  "curriculumVersion": "yw-dialogue-7510df0ff1800f3e8f27",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",
@@ -2069,7 +2069,7 @@
     "lesson": "data/lessons/lesson-1722-p4.json",
     "lessonSha256": "0bef4871a45d6b2cdce09324c3de666cac42f5a993d9fd51b3a673e5fd6cffaf",
     "reader": "data/reader-documents/lesson-1722-p4.json",
-    "readerSha256": "3c2e8b1e38d12ac34a2575a3cd5f59ff584b5ee8fef29b4d96a4e28bcc844f86",
+    "readerSha256": "794cab70c474923664f3857cc67689d4adc29ba80acf5fc249885c24cdcc50b6",
     "sourcePostId": "11166-4",
     "sourcePostNumber": 1,
     "blockCount": 5,

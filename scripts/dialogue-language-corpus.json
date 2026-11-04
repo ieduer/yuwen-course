@@ -908,7 +908,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1691.json",
-          "readerSha256": "47dde14d6412244feb2cb25e624bdfb42283c852942d393340b77ff5e1a1a5c0",
+          "readerSha256": "8d031b258a550efb8f11326fc2b69a54baedee447509892307b9e734c3118a6b",
           "passageId": "lesson-1691:p3",
           "passageSha256": "54a603da323d5e012bcd136637d53f8329d4801f42be75cd5e61943783349abc",
           "quotationPolicy": "exact-original-substring",
@@ -971,7 +971,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1701-p1.json",
-          "readerSha256": "9bb8bb6ffd1735f59d30282a0535ccbb4d4ed38cb0f22672547bb398715df6be",
+          "readerSha256": "da925911cc7a83ea9698b245768f32a68f603cb7a785a86a0bfa61f0fe6dde7c",
           "passageId": "lesson-1701-p1:p2",
           "passageSha256": "64a667d018bb4e5c00859e989b4f296066ba8dd36bb8c680a4fc67c3032495f0",
           "quotationPolicy": "exact-original-substring",
@@ -1040,7 +1040,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1701-p2.json",
-          "readerSha256": "8e56b5f6f77589d9c0b771c16b090601c681f819399a61c130a46ca74e7061b8",
+          "readerSha256": "49f03504b33ce9dc0e79f3ff826d0dd1d266247da95792a2fbdbb3bb3826c7d8",
           "passageId": "lesson-1701-p2:p1",
           "passageSha256": "a2cb69d13930118146cf5033eb3501510d3245a7d842e69ee6038a17f7f6a7aa",
           "quotationPolicy": "exact-original-substring",
@@ -1103,7 +1103,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1701-p2.json",
-          "readerSha256": "8e56b5f6f77589d9c0b771c16b090601c681f819399a61c130a46ca74e7061b8",
+          "readerSha256": "49f03504b33ce9dc0e79f3ff826d0dd1d266247da95792a2fbdbb3bb3826c7d8",
           "passageId": "lesson-1701-p2:p1",
           "passageSha256": "a2cb69d13930118146cf5033eb3501510d3245a7d842e69ee6038a17f7f6a7aa",
           "quotationPolicy": "exact-original-substring",
@@ -1120,7 +1120,7 @@
           "authority": "independent-primary-source-context-review",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1701-p2.json",
-            "readerSha256": "8e56b5f6f77589d9c0b771c16b090601c681f819399a61c130a46ca74e7061b8",
+            "readerSha256": "49f03504b33ce9dc0e79f3ff826d0dd1d266247da95792a2fbdbb3bb3826c7d8",
             "passages": [
               {
                 "id": "lesson-1701-p2:p1",
@@ -1194,7 +1194,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1704-p1.json",
-          "readerSha256": "bf9b00e4721b222be051b6d44d263bed62ce0d5d63dbb1657ecead411368bab7",
+          "readerSha256": "74d1997b974c49377e4e3312182d28d79b743989535d33c684fb3563e30edb0f",
           "passageId": "lesson-1704-p1:p1",
           "passageSha256": "b0960bf13540d791c9e087402e553bd491d9ab1960d79091c0aba5084ddadd11",
           "quotationPolicy": "exact-original-substring",
@@ -1257,7 +1257,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1704-p2.json",
-          "readerSha256": "90e6e986ecb883297c7a080f78e51792256363a6f15a4eb852dc2c1b02ed610d",
+          "readerSha256": "48ac53304a922e682b2c0e2e7e6df83e2283970c36baeda5f151b92e56f474c2",
           "passageId": "lesson-1704-p2:p1",
           "passageSha256": "14b1619d96a1f13255ad0808e8c3b4d0c8ea365fc53e0e11b1855d09dcd4bc41",
           "quotationPolicy": "exact-original-substring",
@@ -1318,7 +1318,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1704-p2.json",
-          "readerSha256": "90e6e986ecb883297c7a080f78e51792256363a6f15a4eb852dc2c1b02ed610d",
+          "readerSha256": "48ac53304a922e682b2c0e2e7e6df83e2283970c36baeda5f151b92e56f474c2",
           "passageId": "lesson-1704-p2:p1",
           "passageSha256": "14b1619d96a1f13255ad0808e8c3b4d0c8ea365fc53e0e11b1855d09dcd4bc41",
           "quotationPolicy": "exact-original-substring",
@@ -1335,7 +1335,7 @@
           "authority": "root-accepted-scoped-independent-source-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1704-p2.json",
-            "readerSha256": "90e6e986ecb883297c7a080f78e51792256363a6f15a4eb852dc2c1b02ed610d",
+            "readerSha256": "48ac53304a922e682b2c0e2e7e6df83e2283970c36baeda5f151b92e56f474c2",
             "passages": [
               {
                 "id": "lesson-1704-p2:p1",
@@ -1398,7 +1398,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1705-p1.json",
-          "readerSha256": "e4aaf45a27b18d9c8f0b38f001ee2375f5c78b9884126a4be4b364061eaca636",
+          "readerSha256": "746fb644ed6b8808f84e72fb80ad9c5b1e7989dd5e1b7bb1974280b76f5f5e9d",
           "passageId": "lesson-1705-p1:p1",
           "passageSha256": "82eb2a2fd3709581442c11339351066fa7ceaa5614a6b84cf63a7ff53989e4bd",
           "quotationPolicy": "exact-original-substring",
@@ -1463,7 +1463,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1705-p2.json",
-          "readerSha256": "8896291b730000a39eb082b39135fd1c4f588683e1bda6d58a1bf9833d970db1",
+          "readerSha256": "5fc846e75f5cd0a30e44f9c74e09d532635b8a7138708ade95ca693dc7d6b61a",
           "passageId": "lesson-1705-p2:p1",
           "passageSha256": "7f1a443b677e41591ec05f636cf7890011736aa2ebf284f363e346351ddbcac3",
           "quotationPolicy": "exact-original-substring",
@@ -1528,7 +1528,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1705-p3.json",
-          "readerSha256": "d1264bf2cc1490a62126b2a963556b17fc3538f082e6f91d80c0808a9cfd4fd6",
+          "readerSha256": "daa5a8f23bf6f3785f73f5ab61db791ff0742d10da0df0b097257f78803c6ef8",
           "passageId": "lesson-1705-p3:p1",
           "passageSha256": "f7fae83a7bb0ba73813e7dc2405ddcce7b28f9b8b05133d5689598398d6d3321",
           "quotationPolicy": "exact-original-substring",
@@ -1593,7 +1593,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1705-p3.json",
-          "readerSha256": "d1264bf2cc1490a62126b2a963556b17fc3538f082e6f91d80c0808a9cfd4fd6",
+          "readerSha256": "daa5a8f23bf6f3785f73f5ab61db791ff0742d10da0df0b097257f78803c6ef8",
           "passageId": "lesson-1705-p3:p1",
           "passageSha256": "f7fae83a7bb0ba73813e7dc2405ddcce7b28f9b8b05133d5689598398d6d3321",
           "quotationPolicy": "exact-original-substring",
@@ -1610,7 +1610,7 @@
           "authority": "root-accepted-scoped-independent-source-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1705-p3.json",
-            "readerSha256": "d1264bf2cc1490a62126b2a963556b17fc3538f082e6f91d80c0808a9cfd4fd6",
+            "readerSha256": "daa5a8f23bf6f3785f73f5ab61db791ff0742d10da0df0b097257f78803c6ef8",
             "passages": [
               {
                 "id": "lesson-1705-p3:p1",
@@ -1685,7 +1685,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1706-p1.json",
-          "readerSha256": "6afa47e93c35f8a60f702102a1620e831e7b1ede30b5a68baa918d327bbe85d1",
+          "readerSha256": "21d37636a018a198a9a48e17824bf7bb6ba863e31f5ba6de0466258ffe11ca43",
           "passageId": "lesson-1706-p1:p1",
           "passageSha256": "985f855a15215b63389d24cc1cbbe118e0c5640eab0f2c52327e4edeb68ed77a",
           "quotationPolicy": "exact-original-substring",
@@ -1748,7 +1748,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1706-p2.json",
-          "readerSha256": "f0e58b44889d988d13eeb65c13fdb877899be0660db42d95d4b86c35ccae95ae",
+          "readerSha256": "8de25fc037324040b3d9863336eb129fb002881cf8c5da5a3d7b12a742870d44",
           "passageId": "lesson-1706-p2:p1",
           "passageSha256": "09b505695c7356b2741570e7692a36c40c04210f8dded132d2c66ef3acb97123",
           "quotationPolicy": "exact-original-substring",
@@ -1811,7 +1811,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1706-p3.json",
-          "readerSha256": "00cc37c67a8b933a914c42ac4c434499e1b9defc2f21da202a311411cc9ae304",
+          "readerSha256": "f0d25d3bff925cb06f322e20ca52b08a173146154a430143129bd4212ed403da",
           "passageId": "lesson-1706-p3:p1",
           "passageSha256": "3b0b268f75319bde6943a7263ebf58f434a61513fd5b35d1b00213123bfa7655",
           "quotationPolicy": "exact-original-substring",
@@ -1874,7 +1874,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1711-p2.json",
-          "readerSha256": "dae64b745339db742970183b57c7ff3f721c0efbf4385e9014c783bd5300b3e0",
+          "readerSha256": "75d0247d90f3eec86cbbc89a396115e5ac6fbeb4377f04ba00b76c54e467f9cf",
           "passageId": "lesson-1711-p2:p1",
           "passageSha256": "f30edfc6df10b60df80d5dec64d47c823f8397cf6f76831ce85c41276fa21cca",
           "quotationPolicy": "exact-original-substring",
@@ -1939,7 +1939,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1719-p1.json",
-          "readerSha256": "8ec78850d94a2c8e7129bf95b2583b9d0887e691d3d03b322c7a2a0876e10191",
+          "readerSha256": "86fdd07a7ffe3bdf879196836743c8c986d33e6f3dcd2acbf8e06d99f535e3b7",
           "passageId": "lesson-1719-p1:p2",
           "passageSha256": "20c22ab5ef1f94741849c4e61debaec27e972866ea64ddfdd9cfac54dbe9f726",
           "quotationPolicy": "exact-original-substring",
@@ -2004,7 +2004,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1719-p1.json",
-          "readerSha256": "8ec78850d94a2c8e7129bf95b2583b9d0887e691d3d03b322c7a2a0876e10191",
+          "readerSha256": "86fdd07a7ffe3bdf879196836743c8c986d33e6f3dcd2acbf8e06d99f535e3b7",
           "passageId": "lesson-1719-p1:p3",
           "passageSha256": "f3d26f38c310d40312be6a43762f2f45e19dc29f178dee58856f3790e89c5638",
           "quotationPolicy": "exact-original-substring",
@@ -2021,7 +2021,7 @@
           "authority": "root-accepted-scoped-independent-source-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1719-p1.json",
-            "readerSha256": "8ec78850d94a2c8e7129bf95b2583b9d0887e691d3d03b322c7a2a0876e10191",
+            "readerSha256": "86fdd07a7ffe3bdf879196836743c8c986d33e6f3dcd2acbf8e06d99f535e3b7",
             "passages": [
               {
                 "id": "lesson-1719-p1:p3",
@@ -2092,7 +2092,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1719-p2.json",
-          "readerSha256": "387283e3f3dcab51e8f91e7a7537e7fe0bcd0a3f49625e232d6da02b363f303d",
+          "readerSha256": "1ce885f55273a69f90950a64ce594af2c7f485ca0fc3dbc69c366568c0215fc8",
           "passageId": "lesson-1719-p2:p3",
           "passageSha256": "f10ba065789b6938fbc57aa0d3315f9976d454ad43b333c8523540c01a1cd542",
           "quotationPolicy": "exact-original-substring",
@@ -2157,7 +2157,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1722-p1.json",
-          "readerSha256": "f045f842f71e7c941a7c83ec614531ccd54f1b10dcd0be935fd33754c3d6ad14",
+          "readerSha256": "aa950e4934aa1df930ec84e423c0a189638374005f3d9190097200beba574f62",
           "passageId": "lesson-1722-p1:p3",
           "passageSha256": "378045288d1dd5c900c404f65507f21ea0da0d558e6d75913ceda93190d84c0d",
           "quotationPolicy": "exact-original-substring",
@@ -2224,7 +2224,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1722-p2.json",
-          "readerSha256": "641c66a4ef8395b92eeb0b84926f5fd3e88bc0dfbc0b4bdeed51bf09a068dd47",
+          "readerSha256": "6241a74afebbe72d530e54d6aaf5d7183f701c58c7d2cb9e5daea36d6f221d15",
           "passageId": "lesson-1722-p2:p3",
           "passageSha256": "c168cce1b1220669584a312579a23090124e9543c0955ba4ec749b604ceac89b",
           "quotationPolicy": "exact-original-substring",
@@ -2289,7 +2289,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1722-p3.json",
-          "readerSha256": "89ff78f151e0d456803f105ab8d87d91f000a59bb3b5899272980b6a4cc0de5b",
+          "readerSha256": "1323c38f2f035edac52a4e3c2edbef51ae7b4df397d685f59d9e6e886f6c40a5",
           "passageId": "lesson-1722-p3:p3",
           "passageSha256": "6174eeb31140e8c51bb5cb3ccb329f14f5dc01040f234f87703c7eb22e2a7225",
           "quotationPolicy": "exact-original-substring",
@@ -2350,7 +2350,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1722-p3.json",
-          "readerSha256": "89ff78f151e0d456803f105ab8d87d91f000a59bb3b5899272980b6a4cc0de5b",
+          "readerSha256": "1323c38f2f035edac52a4e3c2edbef51ae7b4df397d685f59d9e6e886f6c40a5",
           "passageId": "lesson-1722-p3:p3",
           "passageSha256": "6174eeb31140e8c51bb5cb3ccb329f14f5dc01040f234f87703c7eb22e2a7225",
           "quotationPolicy": "exact-original-substring",
@@ -2367,7 +2367,7 @@
           "authority": "root-accepted-scoped-independent-source-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1722-p3.json",
-            "readerSha256": "89ff78f151e0d456803f105ab8d87d91f000a59bb3b5899272980b6a4cc0de5b",
+            "readerSha256": "1323c38f2f035edac52a4e3c2edbef51ae7b4df397d685f59d9e6e886f6c40a5",
             "passages": [
               {
                 "id": "lesson-1722-p3:p3",
@@ -2438,7 +2438,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1722-p4.json",
-          "readerSha256": "3c2e8b1e38d12ac34a2575a3cd5f59ff584b5ee8fef29b4d96a4e28bcc844f86",
+          "readerSha256": "794cab70c474923664f3857cc67689d4adc29ba80acf5fc249885c24cdcc50b6",
           "passageId": "lesson-1722-p4:p3",
           "passageSha256": "b0e65c298737bebe34c8165e8e7f2ce1883f2977c19bfe90f0076d8cef24c023",
           "quotationPolicy": "exact-original-substring",
@@ -2501,7 +2501,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1726-p1.json",
-          "readerSha256": "cd8d03cafaae05eb22655fa507a8b50c4fb2d53311f29da6dc29113ad4066c99",
+          "readerSha256": "40fe194698cb2ef5534e493183a783bc83194dd931d94fab54ad1b2547a317c4",
           "passageId": "lesson-1726-p1:p1",
           "passageSha256": "7fe8bbf9e30d5e5cbeb6cf29dbd9adfdbc9150b1f26598d901db2564d7b1f201",
           "quotationPolicy": "exact-original-substring",
@@ -2566,7 +2566,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1726-p2.json",
-          "readerSha256": "a156ec7ffd46ed733fb94a0f4e914cef1fb1c2648d45bbc71e34c22672a8ad45",
+          "readerSha256": "58a997a104efec8c66703f398bb1bdec5d4ea391e90bb32ffb6c1ce2d7fea8f3",
           "passageId": "lesson-1726-p2:p2",
           "passageSha256": "b602450ad7b55b7b56e0d1e743aa13139c5493f65ef0e0e5fdc7ace6932f9cc2",
           "quotationPolicy": "exact-original-substring",
@@ -2631,7 +2631,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1726-p3.json",
-          "readerSha256": "e340c255274f1a29f038c9e820bb90e5c12b076d19b40fa1de174bd32b7229d5",
+          "readerSha256": "ac0f0bda3f53aac210dd26a959a07b81701850db81af759326a626704cc3b4a4",
           "passageId": "lesson-1726-p3:p2",
           "passageSha256": "5d287430fb8b528048c8615cbb6f19ffd2dd92ad42be8b044cecff23d82cf59b",
           "quotationPolicy": "exact-original-substring",
@@ -2694,7 +2694,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1726-p3.json",
-          "readerSha256": "e340c255274f1a29f038c9e820bb90e5c12b076d19b40fa1de174bd32b7229d5",
+          "readerSha256": "ac0f0bda3f53aac210dd26a959a07b81701850db81af759326a626704cc3b4a4",
           "passageId": "lesson-1726-p3:p2",
           "passageSha256": "5d287430fb8b528048c8615cbb6f19ffd2dd92ad42be8b044cecff23d82cf59b",
           "quotationPolicy": "exact-original-substring",
@@ -2711,7 +2711,7 @@
           "authority": "root-accepted-scoped-independent-source-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1726-p3.json",
-            "readerSha256": "e340c255274f1a29f038c9e820bb90e5c12b076d19b40fa1de174bd32b7229d5",
+            "readerSha256": "ac0f0bda3f53aac210dd26a959a07b81701850db81af759326a626704cc3b4a4",
             "passages": [
               {
                 "id": "lesson-1726-p3:p2",
@@ -2796,7 +2796,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1727.json",
-          "readerSha256": "16376b67517d33a6d31c7c1ed2f70d553cab0247a0f31223ed94a3c34c144425",
+          "readerSha256": "d4bc2335e3d9205b11cf2537c553b5c16db162437f165a1ee2725bd67e088aa7",
           "passageId": "lesson-1727:p3",
           "passageSha256": "f4071b1c17c26dbd0b793199d87b93424579b80080ce0624c515dd9681c588d8",
           "quotationPolicy": "exact-original-substring",
@@ -2861,7 +2861,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1728.json",
-          "readerSha256": "0ed5a9f71b92c978ac5ad31d4065a4e0ffb57181c1703ff3f096dcc396f7a64d",
+          "readerSha256": "a269c658464aaa18e8e267355b02be9f517c6f246e0919278ef5fd0bc4fe4a1e",
           "passageId": "lesson-1728:p7",
           "passageSha256": "856a2e0e58d1cd1c076f6b75f385e3eb2204a063b143f1fc768e5c37b1c7ff89",
           "quotationPolicy": "exact-original-substring",
@@ -2924,7 +2924,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1743-p1.json",
-          "readerSha256": "177f264972fd859daa2c2155ed1a15b1e2e6a9572b2bb11b2ef6c4a9143caf25",
+          "readerSha256": "3fdb7b7b206e87f4992d2f7df9f71043941ff44ecf3fe61b0e6d76cc75363e15",
           "passageId": "lesson-1743-p1:p2",
           "passageSha256": "f2c95baaaf0a51c68e72238cb1cbeae0794b1a670454fe9e7db0a59ac6600526",
           "quotationPolicy": "exact-original-substring",
@@ -2989,7 +2989,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1743-p2.json",
-          "readerSha256": "cbe5ffbd00de0d6dc489fbdf0fb75a026c05d8c479f44f6d71fae9fc80b2d4c0",
+          "readerSha256": "d3d480ffcc6d8cf28459adf77fd23d28a6c04bbe9f8e572817b59414024f883a",
           "passageId": "lesson-1743-p2:p3",
           "passageSha256": "1fa5dd355fcd8b8e2c259aebd6d165ecc809ffc9c6365d8c7702a270ccabdb7b",
           "quotationPolicy": "exact-original-substring",
@@ -3058,7 +3058,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1752.json",
-          "readerSha256": "02526d09cd0d61d275ff00feeeec2e41c10ed30b5be1f1f103eb57b23dbbecc8",
+          "readerSha256": "f8f02431959c2d55e78816ae5e547cfe2e81eb0e55f63f394a4a78bf783fd93e",
           "passageId": "lesson-1752:p1",
           "passageSha256": "13314e01a13e61dbdfbb9f72b1cd35a0671e82239c8041d9cf95a3d507bf02ec",
           "quotationPolicy": "exact-original-substring",
@@ -3127,7 +3127,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1753-p1.json",
-          "readerSha256": "1d91883d50a91c7176e38b53365300d3429322907de8c8607a6dbc8a74b46ba9",
+          "readerSha256": "53da20268781e8944e5c856e92d0a543693ba79897233ad7eb5d49dcc3328546",
           "passageId": "lesson-1753-p1:p4",
           "passageSha256": "d58c9b34fbdd75d327e6ccda3d2b6ae4e1ec25a8daa671150eecf9a2acf053d4",
           "quotationPolicy": "exact-original-substring",
@@ -3192,7 +3192,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1753-p2.json",
-          "readerSha256": "ae76c0bbc55e6992dc8eb71a85463c95773ae8afc23eb3eb7536d04573aff154",
+          "readerSha256": "573f5d8f86d043e143d7b56ca0a94a65467724d26d617649e5f762f694337379",
           "passageId": "lesson-1753-p2:p1",
           "passageSha256": "426655d855c7b5cda1f85fa650ee826641ddefb452b7b49643b5f05de1b56b5f",
           "quotationPolicy": "exact-original-substring",
@@ -3255,7 +3255,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1753-p2.json",
-          "readerSha256": "ae76c0bbc55e6992dc8eb71a85463c95773ae8afc23eb3eb7536d04573aff154",
+          "readerSha256": "573f5d8f86d043e143d7b56ca0a94a65467724d26d617649e5f762f694337379",
           "passageId": "lesson-1753-p2:p1",
           "passageSha256": "426655d855c7b5cda1f85fa650ee826641ddefb452b7b49643b5f05de1b56b5f",
           "quotationPolicy": "exact-original-substring",
@@ -3272,7 +3272,7 @@
           "authority": "root-accepted-scoped-independent-source-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1753-p2.json",
-            "readerSha256": "ae76c0bbc55e6992dc8eb71a85463c95773ae8afc23eb3eb7536d04573aff154",
+            "readerSha256": "573f5d8f86d043e143d7b56ca0a94a65467724d26d617649e5f762f694337379",
             "passages": [
               {
                 "id": "lesson-1753-p2:p1",
@@ -3354,7 +3354,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1755-p1.json",
-          "readerSha256": "58e8ff774c80100366c0c78f7d310cb2465979b60d348cd7984434e792a798e9",
+          "readerSha256": "2f8120a4178702dfacb78f4496b5c40a99c985dd1b959d0324e3ea8d79041bf5",
           "passageId": "lesson-1755-p1:p3",
           "passageSha256": "96c0c1961ddf1b3ce17a1f87a9eea73604249315a2791fc479c0585562877ecd",
           "quotationPolicy": "exact-original-substring",
@@ -3415,7 +3415,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1755-p1.json",
-          "readerSha256": "58e8ff774c80100366c0c78f7d310cb2465979b60d348cd7984434e792a798e9",
+          "readerSha256": "2f8120a4178702dfacb78f4496b5c40a99c985dd1b959d0324e3ea8d79041bf5",
           "passageId": "lesson-1755-p1:p3",
           "passageSha256": "96c0c1961ddf1b3ce17a1f87a9eea73604249315a2791fc479c0585562877ecd",
           "quotationPolicy": "exact-original-substring",
@@ -3432,7 +3432,7 @@
           "authority": "root-authorized-revision-and-independent-scoped-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1755-p1.json",
-            "readerSha256": "58e8ff774c80100366c0c78f7d310cb2465979b60d348cd7984434e792a798e9",
+            "readerSha256": "2f8120a4178702dfacb78f4496b5c40a99c985dd1b959d0324e3ea8d79041bf5",
             "passages": [
               {
                 "id": "lesson-1755-p1:p3",
@@ -3496,7 +3496,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1755-p2.json",
-          "readerSha256": "ea4b2c50420bae7a6ba6b55a1785c1b9ba6dfaa7061ead83f5c772a215c3263f",
+          "readerSha256": "238b6f8a1df31aa3f7a6be555328f0e880be4cc130de4878951a816c2369929b",
           "passageId": "lesson-1755-p2:p4",
           "passageSha256": "057b19122e29322c6b4c1bf30ed9ee2af93ca649df2980214b0923bdd2276ef6",
           "quotationPolicy": "exact-original-substring",
@@ -3557,7 +3557,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1755-p2.json",
-          "readerSha256": "ea4b2c50420bae7a6ba6b55a1785c1b9ba6dfaa7061ead83f5c772a215c3263f",
+          "readerSha256": "238b6f8a1df31aa3f7a6be555328f0e880be4cc130de4878951a816c2369929b",
           "passageId": "lesson-1755-p2:p4",
           "passageSha256": "057b19122e29322c6b4c1bf30ed9ee2af93ca649df2980214b0923bdd2276ef6",
           "quotationPolicy": "exact-original-substring",
@@ -3574,7 +3574,7 @@
           "authority": "root-authorized-revision-and-independent-scoped-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1755-p2.json",
-            "readerSha256": "ea4b2c50420bae7a6ba6b55a1785c1b9ba6dfaa7061ead83f5c772a215c3263f",
+            "readerSha256": "238b6f8a1df31aa3f7a6be555328f0e880be4cc130de4878951a816c2369929b",
             "passages": [
               {
                 "id": "lesson-1755-p2:p4",
@@ -3646,7 +3646,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1755-p3.json",
-          "readerSha256": "a0cd9593105161be600eda3cc8ba35e106dd75bf64d863cb0a5efc2b892237bf",
+          "readerSha256": "82043ab0ef68be16e7fd5ff7c3d24ead1bcd09a4a93c3f69e5d49a370078404d",
           "passageId": "lesson-1755-p3:p4",
           "passageSha256": "8180a0b6c55c05c6f47e0ac4b4a9ec82c36dae7143fc87aa9638b98a1f648f35",
           "quotationPolicy": "exact-original-substring",
@@ -3707,7 +3707,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1755-p3.json",
-          "readerSha256": "a0cd9593105161be600eda3cc8ba35e106dd75bf64d863cb0a5efc2b892237bf",
+          "readerSha256": "82043ab0ef68be16e7fd5ff7c3d24ead1bcd09a4a93c3f69e5d49a370078404d",
           "passageId": "lesson-1755-p3:p4",
           "passageSha256": "8180a0b6c55c05c6f47e0ac4b4a9ec82c36dae7143fc87aa9638b98a1f648f35",
           "quotationPolicy": "exact-original-substring",
@@ -3724,7 +3724,7 @@
           "authority": "root-accepted-scoped-independent-source-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1755-p3.json",
-            "readerSha256": "a0cd9593105161be600eda3cc8ba35e106dd75bf64d863cb0a5efc2b892237bf",
+            "readerSha256": "82043ab0ef68be16e7fd5ff7c3d24ead1bcd09a4a93c3f69e5d49a370078404d",
             "passages": [
               {
                 "id": "lesson-1755-p3:p4",
@@ -3803,7 +3803,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1497.json",
-          "readerSha256": "b8c1a11d92c1e12ce92418396d68af130ca9033429b71e64926629edfd0cbb71",
+          "readerSha256": "24f9b6e15350ff790bcdd3a20ff1826108f47aa11704beab74230d0d11e70388",
           "passageId": "lesson-1497:p1",
           "passageSha256": "85f3e0e83cf79260eb87309921a0a5b03804ed28795cdab6957ae88661b881b1",
           "quotationPolicy": "exact-original-substring",
@@ -3866,7 +3866,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1499.json",
-          "readerSha256": "a0159853f4a542abeb31411d778fd503aec8de38b5bff6360faae9fe5caf39fb",
+          "readerSha256": "bbab263ce28839b598bdc94869a3c34539699b3a1a3569cfe008a63f49dee762",
           "passageId": "lesson-1499:p3",
           "passageSha256": "a18ff7b76f9566113398610d7ca9f7cb737f193e656e68221616a138a228f0cb",
           "quotationPolicy": "exact-original-substring",
@@ -3929,7 +3929,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1500.json",
-          "readerSha256": "9536261771f27ff453fb8075e7f50347094cb4c33b1e084fb012fe5861fcabd2",
+          "readerSha256": "89ff5dc21a182a698d340b86e9c5f6320f375191e85a8a0f01c8535afa86aea1",
           "passageId": "lesson-1500:p1",
           "passageSha256": "14d9a486a7161609ef8dc51a7ea1ee70f11048d6a2715f4d4c42cdea74c75d8b",
           "quotationPolicy": "exact-original-substring",
@@ -3994,7 +3994,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1500.json",
-          "readerSha256": "9536261771f27ff453fb8075e7f50347094cb4c33b1e084fb012fe5861fcabd2",
+          "readerSha256": "89ff5dc21a182a698d340b86e9c5f6320f375191e85a8a0f01c8535afa86aea1",
           "passageId": "lesson-1500:p4",
           "passageSha256": "c552e4f1691a3fd93e88817b6c52365156bb51b1025acdf63197e1826015fe3c",
           "quotationPolicy": "exact-original-substring",
@@ -4011,7 +4011,7 @@
           "authority": "independent-primary-source-context-review",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1500.json",
-            "readerSha256": "9536261771f27ff453fb8075e7f50347094cb4c33b1e084fb012fe5861fcabd2",
+            "readerSha256": "89ff5dc21a182a698d340b86e9c5f6320f375191e85a8a0f01c8535afa86aea1",
             "passages": [
               {
                 "id": "lesson-1500:p4",
@@ -4106,7 +4106,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1536.json",
-          "readerSha256": "6692b1fda568e5ab70fefe6cf70bae91a69698d94f245ae2d289ae66daf88f96",
+          "readerSha256": "61b826809bf0a1f5ff75a82015732812bf542b0fe4b1e1849cdb3ce3475c79e2",
           "passageId": "lesson-1536:p3",
           "passageSha256": "ec0e2a2f7c3d20542822a750042531ae962906015415287ff016e309b4cbdad2",
           "quotationPolicy": "exact-original-substring",
@@ -4171,7 +4171,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1537.json",
-          "readerSha256": "8baa959a443c752f5c6ad96bbb23570d130a92ab4c66131d2cc5c0bc311e51cc",
+          "readerSha256": "60dccaf47f20b0e4f61a4d8099edac14ffb64a6d46dd0b71b7c90410dbd1ccf2",
           "passageId": "lesson-1537:p1",
           "passageSha256": "e092516458293c359f8e831e400e1a779ac8e195b8844a69d2de1818e5bf6d48",
           "quotationPolicy": "exact-original-substring",
@@ -4234,7 +4234,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1547.json",
-          "readerSha256": "794e5488296fdb8ee010ae3d4d83bd1b08fc78e801bcdf0d3f3f6ae7d4d28d45",
+          "readerSha256": "a8c985335f61f4ec64ae5073c84f5aa8e3f35a2e7ce24b7b75746e1ffbfdab54",
           "passageId": "lesson-1547:p2",
           "passageSha256": "17836549044204c84fcd2d95ce7c011c54087c7b3efff43162abfab238e95d8e",
           "quotationPolicy": "exact-original-substring",
@@ -4295,7 +4295,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1547.json",
-          "readerSha256": "794e5488296fdb8ee010ae3d4d83bd1b08fc78e801bcdf0d3f3f6ae7d4d28d45",
+          "readerSha256": "a8c985335f61f4ec64ae5073c84f5aa8e3f35a2e7ce24b7b75746e1ffbfdab54",
           "passageId": "lesson-1547:p2",
           "passageSha256": "17836549044204c84fcd2d95ce7c011c54087c7b3efff43162abfab238e95d8e",
           "quotationPolicy": "exact-original-substring",
@@ -4312,7 +4312,7 @@
           "authority": "root-accepted-scoped-independent-source-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1547.json",
-            "readerSha256": "794e5488296fdb8ee010ae3d4d83bd1b08fc78e801bcdf0d3f3f6ae7d4d28d45",
+            "readerSha256": "a8c985335f61f4ec64ae5073c84f5aa8e3f35a2e7ce24b7b75746e1ffbfdab54",
             "passages": [
               {
                 "id": "lesson-1547:p2",
@@ -4383,7 +4383,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1548.json",
-          "readerSha256": "fc3d1e4b639380265598b61cfa5fc31257cb28ff952cb11987ef9fcdcd6a5834",
+          "readerSha256": "c7244b072a621eed099365a9d184c082ed17cc30493c762df821470624e19939",
           "passageId": "lesson-1548:p1",
           "passageSha256": "ed2faa7745b22e60fbde6b366ba6dd8a61199bf6a2e18a8c1b2bcd6ae320960b",
           "quotationPolicy": "exact-original-substring",
@@ -4448,7 +4448,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1548.json",
-          "readerSha256": "fc3d1e4b639380265598b61cfa5fc31257cb28ff952cb11987ef9fcdcd6a5834",
+          "readerSha256": "c7244b072a621eed099365a9d184c082ed17cc30493c762df821470624e19939",
           "passageId": "lesson-1548:p1",
           "passageSha256": "ed2faa7745b22e60fbde6b366ba6dd8a61199bf6a2e18a8c1b2bcd6ae320960b",
           "quotationPolicy": "exact-original-substring",
@@ -4465,7 +4465,7 @@
           "authority": "root-accepted-scoped-independent-source-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1548.json",
-            "readerSha256": "fc3d1e4b639380265598b61cfa5fc31257cb28ff952cb11987ef9fcdcd6a5834",
+            "readerSha256": "c7244b072a621eed099365a9d184c082ed17cc30493c762df821470624e19939",
             "passages": [
               {
                 "id": "lesson-1548:p1",
@@ -4528,7 +4528,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1550.json",
-          "readerSha256": "88fd24d0cb7ce806577317db9abba54c9d8649901fca6cfdef0d476f6243981f",
+          "readerSha256": "462e60d7a5bbb4bedf986e7518d47fc39494c9bffc02506c6b06256d01e4e728",
           "passageId": "lesson-1550:p1",
           "passageSha256": "2e1d7df301213e6f306f993ff557f4d2f8f1d94616a8cf84c2f0a8d244cec9f9",
           "quotationPolicy": "exact-original-substring",
@@ -4589,7 +4589,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1550.json",
-          "readerSha256": "88fd24d0cb7ce806577317db9abba54c9d8649901fca6cfdef0d476f6243981f",
+          "readerSha256": "462e60d7a5bbb4bedf986e7518d47fc39494c9bffc02506c6b06256d01e4e728",
           "passageId": "lesson-1550:p1",
           "passageSha256": "2e1d7df301213e6f306f993ff557f4d2f8f1d94616a8cf84c2f0a8d244cec9f9",
           "quotationPolicy": "exact-original-substring",
@@ -4606,7 +4606,7 @@
           "authority": "root-accepted-scoped-independent-source-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1550.json",
-            "readerSha256": "88fd24d0cb7ce806577317db9abba54c9d8649901fca6cfdef0d476f6243981f",
+            "readerSha256": "462e60d7a5bbb4bedf986e7518d47fc39494c9bffc02506c6b06256d01e4e728",
             "passages": [
               {
                 "id": "lesson-1550:p1",
@@ -4673,7 +4673,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1549.json",
-          "readerSha256": "1bd11ce59af46b995c5b97fb36a2d940f3cd23b06fcbb7de41e0d5c023fad5a5",
+          "readerSha256": "b0ee48dd47607f6718449aa394b1a7f81959dcdc29b2ccd5a304cfc497c3ad4d",
           "passageId": "lesson-1549:p2",
           "passageSha256": "e648b50c60f98933b750026222a11c6a1e330b8252ec52d3d4a73dc92cff4d1c",
           "quotationPolicy": "exact-original-substring",
@@ -4736,7 +4736,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1556.json",
-          "readerSha256": "46842c30ddba1ce44be7aa68edd9a09ac876202c2347aeb16359c982effef43e",
+          "readerSha256": "416b5509f7ee7110d9731e79a94e87d7d0d05b55e05632d54f6380ea310d4db2",
           "passageId": "lesson-1556:p5",
           "passageSha256": "72ea4792957cc72f918708b271bd8e23b57e3b7b3c24e92fdede2dc83ba3e962",
           "quotationPolicy": "exact-original-substring",
@@ -4801,7 +4801,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1557.json",
-          "readerSha256": "dbebf0a7e5aa9a5748c4e702f76ffe929f1c2c3383a0aa4e8cdc5d5d53ddc946",
+          "readerSha256": "4bf67cc028499d86bdb569b714d102bda1e12ea529823699baa0b365a133ed0f",
           "passageId": "lesson-1557:p10",
           "passageSha256": "9596fb6dde2c255a952b8dd0240579ecb0f1ea2acd8ce213cb5d68b604e41b4a",
           "quotationPolicy": "exact-original-substring",
@@ -4866,7 +4866,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1558.json",
-          "readerSha256": "51a15d5fbb7fe473f544412d663729dfc4283342e2d7f283af7cd12f562554a1",
+          "readerSha256": "c2fc3bbb3cbec2f3c998af0a3fa721b149158835d1bebdb53af41c34070a6076",
           "passageId": "lesson-1558:p3",
           "passageSha256": "1ff59a3130c715a9768c28d1c9def222137a3bb7998915b9cfa58991aa321e28",
           "quotationPolicy": "exact-original-substring",
@@ -4929,7 +4929,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1559.json",
-          "readerSha256": "6c5c2bd17b7187a49d4dbee1ec1b2ffcb9734e89d947d8f09600ef85863e35f2",
+          "readerSha256": "3a64afcaa98385c6ab4dcf892aaa9a932b0e460cf33804f234641bc786bcfc12",
           "passageId": "lesson-1559:p2",
           "passageSha256": "5b60413894f8964f047bb73af09549eb9e355818ab15fff2e595ce911d3a37ee",
           "quotationPolicy": "exact-original-substring",
@@ -4996,7 +4996,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1560.json",
-          "readerSha256": "f32151f51b09456e9036eac7624f3b415db695c8a3f369026429aa71da7ebd89",
+          "readerSha256": "03a4704e90d2cdec68c97429d1bd2c691a81e59c4fed53a32138f969c958d82b",
           "passageId": "lesson-1560:p1",
           "passageSha256": "7ddc9c88741d0bfbb1f7020ea7a1bc551fd08ada4948935acba7fca4a3b5a4a0",
           "quotationPolicy": "exact-original-substring",
@@ -5058,7 +5058,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1560.json",
-          "readerSha256": "f32151f51b09456e9036eac7624f3b415db695c8a3f369026429aa71da7ebd89",
+          "readerSha256": "03a4704e90d2cdec68c97429d1bd2c691a81e59c4fed53a32138f969c958d82b",
           "passageId": "lesson-1560:p1",
           "passageSha256": "7ddc9c88741d0bfbb1f7020ea7a1bc551fd08ada4948935acba7fca4a3b5a4a0",
           "quotationPolicy": "exact-original-substring",
@@ -5075,7 +5075,7 @@
           "authority": "independent-primary-source-context-review",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1560.json",
-            "readerSha256": "f32151f51b09456e9036eac7624f3b415db695c8a3f369026429aa71da7ebd89",
+            "readerSha256": "03a4704e90d2cdec68c97429d1bd2c691a81e59c4fed53a32138f969c958d82b",
             "passages": [
               {
                 "id": "lesson-1560:p1",
@@ -5156,7 +5156,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1561.json",
-          "readerSha256": "917a9557ea5307dc047f947375aeb1189eecd445f8bd0aff1a16d128353648e6",
+          "readerSha256": "b894157e4991be4300f3ffdb355ec60d11ed0e1a984eb44c08b1b578d63f1045",
           "passageId": "lesson-1561:p2",
           "passageSha256": "639f8b94c410f26d73e364f73e490847e7a7a1322ba739fc6fca7a29a8030425",
           "quotationPolicy": "exact-original-substring",
@@ -5217,7 +5217,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1561.json",
-          "readerSha256": "917a9557ea5307dc047f947375aeb1189eecd445f8bd0aff1a16d128353648e6",
+          "readerSha256": "b894157e4991be4300f3ffdb355ec60d11ed0e1a984eb44c08b1b578d63f1045",
           "passageId": "lesson-1561:p3",
           "passageSha256": "17b4674096b246f9461383a3316672c4d11a44a42c9ff90e35bc040f3378a937",
           "quotationPolicy": "exact-original-substring",
@@ -5234,7 +5234,7 @@
           "authority": "root-accepted-scoped-independent-source-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1561.json",
-            "readerSha256": "917a9557ea5307dc047f947375aeb1189eecd445f8bd0aff1a16d128353648e6",
+            "readerSha256": "b894157e4991be4300f3ffdb355ec60d11ed0e1a984eb44c08b1b578d63f1045",
             "passages": [
               {
                 "id": "lesson-1561:p3",
@@ -5306,7 +5306,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1562.json",
-          "readerSha256": "4cd91a396bfb0f3658d565f7bc2b439f8f7fda7bc614387f8b01f1a5743c1607",
+          "readerSha256": "46a53b38a61b3843d2276e5799a5aa62f834356c585bbc69d48a1bc2b89266ce",
           "passageId": "lesson-1562:p3",
           "passageSha256": "f95af619b299906ca463751dd77cee50ea9f621197762b02282d28eaee5689ee",
           "quotationPolicy": "exact-original-substring",
@@ -5367,7 +5367,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1562.json",
-          "readerSha256": "4cd91a396bfb0f3658d565f7bc2b439f8f7fda7bc614387f8b01f1a5743c1607",
+          "readerSha256": "46a53b38a61b3843d2276e5799a5aa62f834356c585bbc69d48a1bc2b89266ce",
           "passageId": "lesson-1562:p4",
           "passageSha256": "37200e2e69e9ffd52a6d60d6317dfa26ce475f6e705448823faeb27cde9cfffc",
           "quotationPolicy": "exact-original-substring",
@@ -5384,7 +5384,7 @@
           "authority": "root-accepted-scoped-independent-source-review-01a132c3",
           "evidence": {
             "readerPath": "data/reader-documents/lesson-1562.json",
-            "readerSha256": "4cd91a396bfb0f3658d565f7bc2b439f8f7fda7bc614387f8b01f1a5743c1607",
+            "readerSha256": "46a53b38a61b3843d2276e5799a5aa62f834356c585bbc69d48a1bc2b89266ce",
             "passages": [
               {
                 "id": "lesson-1562:p4",
@@ -5456,7 +5456,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1581.json",
-          "readerSha256": "9616eddd316019b3acf3bec793453b5e7fcb93166613e601d71996bb512a8fe9",
+          "readerSha256": "eb7a00d18379073c7879ebb9e2cbb5e8bd0044d4b0b10b1d42414672322e7e94",
           "passageId": "lesson-1581:p2",
           "passageSha256": "5fa2f4715608150359caf1ec6ece66d9f215a9d157e0629a3e4fb9108bc62a65",
           "quotationPolicy": "exact-original-substring",
@@ -5521,9 +5521,9 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1588.json",
-          "readerSha256": "ad3e77d523f1cf9d9351dd2666c4f1aae5817d07c5edc0c35d4349ab2191ff5e",
+          "readerSha256": "f835a60db9f80a5f3731e6ff1593759d1e71c244a2a026e393ebe1268cecad0a",
           "passageId": "lesson-1588:p1",
-          "passageSha256": "1ac80c185d6b7b8bc21f5d06479000f2e3ed736cbd3902f0bd918a437521ce00",
+          "passageSha256": "4d744888f2051636bc0164537826752ff9be25df163483ad7036627d412cd92b",
           "quotationPolicy": "exact-original-substring",
           "analysisAuthority": "authored-learning-support; not-original-consequential-rubric",
           "supplementVersion": "yw-dialogue-classical-language-20261013-v2"
@@ -5586,7 +5586,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1589.json",
-          "readerSha256": "14f8926fc10b5d5aa44c2076827740766b992e38b7042123feac6f42c9202d06",
+          "readerSha256": "e4bdbbe8fd3e7c1fbdcfdb1bd2c32253dbda9a265b765912d0fa41bf58891f29",
           "passageId": "lesson-1589:p1",
           "passageSha256": "c170fd7bfad939a481efaf73d14bbc381e1b1d09232b33fe9303219608ab8f6c",
           "quotationPolicy": "exact-original-substring",
@@ -5649,7 +5649,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1590.json",
-          "readerSha256": "9415d9ab8aa32c90db710fec9bbf359903a603823b45c162abb46674a2532b89",
+          "readerSha256": "aa19716b788c08b207db1d9af533e385a52b1711ef7cd198f0e5be6446d4de79",
           "passageId": "lesson-1590:p3",
           "passageSha256": "b9d55b7675339ff3d767aa3b49b1ab0191a840e9131a8a390bae9477cfa785a3",
           "quotationPolicy": "exact-original-substring",
@@ -5712,7 +5712,7 @@
         "sourceEvidence": {
           "kind": "new-unscored-contextual-analysis",
           "readerPath": "data/reader-documents/lesson-1591.json",
-          "readerSha256": "f30e770191f026cb5ae9c3fcc54a3438710ce92b982a24f402b2c05294c6da23",
+          "readerSha256": "ca00dc24d9848d1c032e3fe66599d352c973552d4cb8d10498c4ae68200f2cbe",
           "passageId": "lesson-1591:p5",
           "passageSha256": "d406c686d86d35ccc2e286a55495a17a8ded1e49ca2c8cd73caa465c81e1bb50",
           "quotationPolicy": "exact-original-substring",

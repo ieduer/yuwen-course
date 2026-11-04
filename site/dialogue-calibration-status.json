@@ -3,14 +3,14 @@
   "lessons": [
     {
       "lessonId": "lesson-1498",
-      "curriculumVersion": "yw-dialogue-69c4af43735ff9884e79",
-      "sourceDigest": "97b7624a650b9ec6f805c4601e26d62b4562133bf03c34a0c07e308845bb2546",
+      "curriculumVersion": "yw-dialogue-06d29749043ef4e1d501",
+      "sourceDigest": "b87d74fd1f1f94445e9bd8b827cc130450cf1ac342aa0d1f45d6dd64fa125158",
       "inspectionDigest": "c78475c72166d94a7406cea0abf40b3fca3096c7cf7e4cd8fe5de9da4c652f47",
       "items": [
         {
           "objectiveId": "lesson-1498:grammar-moon",
-          "itemVersion": "yw-language-494b4393766eeae528f9",
-          "itemDigest": "439c78287f24a2fd1ecc4c865401bc78a84028848472dd6df2940df514bb4884",
+          "itemVersion": "yw-language-36a1726101c8a817dce2",
+          "itemDigest": "0e04f3b2b66f0cb45b6dc03e4756a74263360d4dc26f1489ff040c643a79fb7b",
           "evidenceDigest": "245e8557fef30d02b818229abe03f3d17d8b4f53f014304273572336b94468f7",
           "cases": [
             {
@@ -71,14 +71,14 @@
     },
     {
       "lessonId": "lesson-1711-p1",
-      "curriculumVersion": "yw-dialogue-0013f01b365782c41837",
-      "sourceDigest": "52c20350bb260eaacceef43da90112c252a21319f5d6b4be6884a4ce078af522",
+      "curriculumVersion": "yw-dialogue-45a65b86d49d295e0830",
+      "sourceDigest": "a500becc9f98cea6e635b6021d219206ad025c970da1d207efe1a869cb75ab04",
       "inspectionDigest": "39ab020a27e9b2cd81270280dc37c3e0918180196d244b1de73d454d28459621",
       "items": [
         {
           "objectiveId": "lesson-1711-p1:grammar-modifier",
-          "itemVersion": "yw-language-001756db9acbca59b674",
-          "itemDigest": "ebdcfba945c2d29db0c45b45ed953e763dd5f821980af27d680b62042b2a8ccb",
+          "itemVersion": "yw-language-a939658de670c4532ef1",
+          "itemDigest": "17f4a6cfc398de1749fcd412fd990432986583e864fbdd4eaf176542c69d90b0",
           "evidenceDigest": "7a4f7da3f073c8f9c45f1738b88b2ebbcc2689bbd8059a0be69587f25449fe39",
           "cases": [
             {
@@ -103,8 +103,8 @@
         },
         {
           "objectiveId": "lesson-1711-p1:grammar-one",
-          "itemVersion": "yw-language-264ecdc8e336d1cd76f2",
-          "itemDigest": "3cb074da48ee267939c14f50c7f1f568181d217c495c25f97600a7ad733cae64",
+          "itemVersion": "yw-language-6017ab1977f118b073e9",
+          "itemDigest": "e8a794a4d65e12f6841754959493ea08355ef83c2d2c11f8d90079dcde6ff1c4",
           "evidenceDigest": "cc040caf2bb1dc27af75a0afd1e5d77223481ea9a784b5cabd2eec4ff28b02ea",
           "cases": [
             {
@@ -123,8 +123,8 @@
         },
         {
           "objectiveId": "lesson-1711-p1:grammar-water",
-          "itemVersion": "yw-language-091667b2a67ffd030406",
-          "itemDigest": "2e76f51814918bb85ba532d736f338581bffd334c9776a753e3b41974787f2d6",
+          "itemVersion": "yw-language-acb5f58bf16241e3b329",
+          "itemDigest": "35c39a8e78afb1736b3b1b3a6bb7961d145b7b904aefde9981330c37a7685714",
           "evidenceDigest": "f7ffb742b9f141d7365c38f80b2358ccf3f5bd9ab8966d26d2fbea52b5048b26",
           "cases": [
             {
@@ -155,8 +155,8 @@
         },
         {
           "objectiveId": "lesson-1711-p1:grammar-wuyi",
-          "itemVersion": "yw-language-84f1a722e9a48f41ba3b",
-          "itemDigest": "cdc3b72fef48e5b9f52f7ab49f23cc13a3248ca97b2b0bdbc2df8809233d0a4a",
+          "itemVersion": "yw-language-edbd8f1dfc84708da501",
+          "itemDigest": "b2da506d5bef22494f402287cf2cdfb98772aa2872ac17735d14566f119bb837",
           "evidenceDigest": "4e62da2b5222a95a36dd52a83b6c1977344504373a1cd48b0b1aeef514a41cf9",
           "cases": [
             {

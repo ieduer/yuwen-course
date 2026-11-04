@@ -116,7 +116,12 @@ function cleanSourceMarkup(value) {
   return String(value || "")
     .replace(/\[color=[^\]]+\]|\[\/color\]/gi, "")
     .replace(/\[(?:right|center|left)\]|\[\/(?:right|center|left)\]/gi, "")
-    .replace(/↩︎/g, "");
+    .replace(/↩︎/g, "")
+    // Forum bold markers that span a line break are never rendered by
+    // Discourse; the literal "**" leaked into eight lessons' reading text
+    // (2026-11-04 audit, owner 「修」). Chinese lesson text never contains a
+    // literal "**", so every occurrence is markup, not content.
+    .replace(/\*\*/g, "");
 }
 
 function parseArgs(argv) {

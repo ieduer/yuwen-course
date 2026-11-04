@@ -5,6 +5,9 @@
 const IMAGE_NOTE = Object.freeze({
  version:'yw-annotation-image-2026-10-15.1',lessonId:'lesson-1462',noteId:'footnote-9899-2',mediaId:'media-4bc0b5d3090892e77319',
  readerSha256:'ce4cde2322ed571dfb1efea9b1f56ac01b8230ed0e9fe9e0388f710546e505e9',
+ // 2026-11-04 r43: the reader was re-projected (media receipt ledger binding only; reader text, note structure and image
+ // receipt unchanged — bank-fix-yw-20261104/yw-release-r43/reader-diff-proof.json). Sessions keep their own reader hash.
+ readerSha256Reprojected:Object.freeze(['2c3c32a017d390382383b2fc321f9718f1ec4ccb07083a5e6dddb7d4c57cb83d']),
  readerHashEncoding:'sha256(JSON.stringify(parsed-reader))',
  sourceUrl:'https://files.rdfzer.com/original/2X/c/c79bd0eab5fad7c41ab0220ed8476eeeb559a54a.png',
  imageSha256:'146a53fecde8bf22aefcbd798a16494049c2fcc4b546b992ec5f8949c9e7f6bc',imageBytes:11049,width:533,height:150,
@@ -16,7 +19,7 @@ const IMAGE_NOTE = Object.freeze({
 });
 function imageNote(curriculum,annotation){
  const n=IMAGE_NOTE,blocks=annotation.blocks;
- if(curriculum.lessonId!==n.lessonId||annotation.noteId!==n.noteId||curriculum.sourceInventory?.readerSha256!==n.readerSha256)return null;
+ if(curriculum.lessonId!==n.lessonId||annotation.noteId!==n.noteId||![n.readerSha256,...n.readerSha256Reprojected].includes(curriculum.sourceInventory?.readerSha256))return null;
  if(!Array.isArray(blocks)||blocks.length!==1||Object.keys(blocks[0]).sort().join(',')!=='alt,mediaId,type'||blocks[0].type!=='image'||blocks[0].mediaId!==n.mediaId||blocks[0].alt!=='')return null;
  const matches=(curriculum.media||[]).filter(m=>m.id===n.mediaId),m=matches[0];
  if(matches.length!==1||m.sha256!==n.imageSha256||m.bytes!==n.imageBytes||m.width!==n.width||m.height!==n.height||m.mediaType!=='image/png'||m.sourceUrl!==n.sourceUrl||m.finalUrl!==n.sourceUrl)return null;
