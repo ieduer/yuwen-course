@@ -1064,6 +1064,9 @@ export async function callDialogueModel(env,prompt,requestId,onReply,budget=dial
  const signal=AbortSignal.timeout(LIMITS.timeoutMs);
  const response=await env.APIS.fetch(new Request('https://apis.internal/api/yw/dialogue-stream',{method:'POST',headers:{'content-type':'application/json',accept:'text/event-stream','x-project-name':'yw.bdfz.net','x-task-type':'chat','x-thinking-level':'low',...(env.APIS_CALLER_TOKEN?{'x-internal-token':env.APIS_CALLER_TOKEN}:{}),'x-request-id':requestId},body:JSON.stringify({stream:true,providerAttemptLimit:budget.providerAttemptLimit||1,model:budget.model,...(budget.primaryModel?{tier:'claude-primary'}:{}),...(()=>{const parts=budget.primaryModel?promptParts(prompt):[prompt];return {contents:[{role:'user',parts:parts.map(text=>({text}))}],...(parts.length===3?{cacheBreakpoints:[0,1]}:{})};})(),taskType:'chat',thinkingLevel:'low',generationConfig:{temperature:0.3,maxOutputTokens:budget.maxOutputTokens??LIMITS.outputTokens,responseMimeType:'application/json',...(responseJsonSchema?{responseJsonSchema}:{})}}),signal}));
  if(!response.ok){
+  // APIS answers 403 STREAM_NOT_ADMITTED when the request exceeds its stream admission
+  // bounds (contents size, output tokens); that is not a credential problem (2026-11-04).
+  if(response.status===403){const refusal=await response.clone().json().catch(()=>null);if(refusal?.error_code==='STREAM_NOT_ADMITTED')throw new Error('gateway_stream_not_admitted');}
   if([401,403,429].includes(response.status))throw new Error(response.status===429?'gateway_rate_limit':'gateway_credential_rejected');
   const error=new Error('gateway_unavailable');
   if(acceptanceContext(env)){

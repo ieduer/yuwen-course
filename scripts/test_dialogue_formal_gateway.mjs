@@ -36,6 +36,14 @@ test('formal credential and rate refusals stop without automatic replay',async()
  }
 });
 
+// 2026-11-04: an APIS stream-admission refusal (contents or output bound) is named as such, not as a credential failure.
+test('an APIS 403 STREAM_NOT_ADMITTED is gateway_stream_not_admitted, sent once, not a credential refusal',async()=>{
+ let calls=0;const env={APIS_CALLER_TOKEN:'synthetic-caller-only',APIS:{fetch:async()=>{calls++;return new Response(JSON.stringify({error_code:'STREAM_NOT_ADMITTED',retryable:false}),{status:403,headers:{'content-type':'application/json'}});}}};
+ await assert.rejects(callDialogueModel(env,'p','id',()=>{},{model}),/gateway_stream_not_admitted/);assert.equal(calls,1);
+ const other={APIS_CALLER_TOKEN:'synthetic-caller-only',APIS:{fetch:async()=>new Response(JSON.stringify({error_code:'CALLER_NOT_ALLOWED'}),{status:403})}};
+ await assert.rejects(callDialogueModel(other,'p','id',()=>{},{model}),/gateway_credential_rejected/);
+});
+
 const failedAccounting={...accounting,attempts:[{ordinal:1,model,outcome:'400',brokerCompleted:true,outputStarted:false,usage:null}]};
 const safeFailure={requestId:'synthetic-request',providerAccounting:failedAccounting,error_code:'CLIENT_REQUEST_INVALID',status_code:400,google_error:{error:{code:400,status:'INVALID_ARGUMENT'}}};
 function failureEnvironment(fetch,isolated){
