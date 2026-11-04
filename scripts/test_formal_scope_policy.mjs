@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
-import {FORMAL_SCOPE_POLICY,ORIGINAL_FORMAL_RELEASE,EXPANSION_FORMAL_RELEASE,FORMAL_REVISION_POLICY,validateFormalScopeExpansion,formalDefinitionForResource,assertNewFormalAnswerTime,withProspectiveFormalScope} from '../site/formal-scope-policy.js';
+import {FORMAL_SCOPE_POLICY,ORIGINAL_FORMAL_RELEASE,EXPANSION_FORMAL_RELEASE,FORMAL_REVISION_POLICY,FORMAL_REVISION_POLICY_V2,FORMAL_PRIOR_RELEASES,REVISION_1_FORMAL_RELEASE,validateFormalScopeExpansion,formalDefinitionForResource,assertNewFormalAnswerTime,withProspectiveFormalScope} from '../site/formal-scope-policy.js';
 import {validateAPlusCompatibilityContract} from '../site/learning-evidence-source.js';
 import {validateFormalDraft} from '../site/dialogue-formal.js';
 const read=path=>JSON.parse(fs.readFileSync(new URL('../'+path,import.meta.url)));
@@ -26,12 +26,21 @@ test('all 764 new compulsory resources stay outside A-plus while 869 old identit
  assert.equal(additions.filter(i=>i.evidenceRole==='formative').length,676);
  assert.equal(additions.filter(i=>i.evidenceRole==='non_scoring').length,88);
  assert(additions.every(i=>i.evidenceRole!=='a_plus_gate'&&i.sourceId!=='lesson-1572'));
- assert(original.every(i=>i.sourceReleaseId===(i.formalRevisionPolicyVersion?manifest.sourceReleaseId:ORIGINAL_FORMAL_RELEASE.sourceReleaseId)));
- assert(additions.every(i=>i.sourceReleaseId===(i.formalRevisionPolicyVersion?manifest.sourceReleaseId:EXPANSION_FORMAL_RELEASE.sourceReleaseId)));
+ // 2026-11-04 revision batches: v1 items keep release 6ceed2f6 (now a prior release); v2 items carry the current release.
+ const revisionRelease=i=>i.formalRevisionPolicyVersion===FORMAL_REVISION_POLICY.policyVersion?REVISION_1_FORMAL_RELEASE.sourceReleaseId:manifest.sourceReleaseId;
+ assert(original.every(i=>i.sourceReleaseId===(i.formalRevisionPolicyVersion?revisionRelease(i):ORIGINAL_FORMAL_RELEASE.sourceReleaseId)));
+ assert(additions.every(i=>i.sourceReleaseId===(i.formalRevisionPolicyVersion?revisionRelease(i):EXPANSION_FORMAL_RELEASE.sourceReleaseId)));
  const revised=manifest.items.filter(i=>i.formalRevisionPolicyVersion);
- assert.equal(revised.length,FORMAL_REVISION_POLICY.revisedItemCount);assert.equal(revised.filter(i=>!i.formalScopePolicyVersion).length,95);
+ const v1=revised.filter(i=>i.formalRevisionPolicyVersion===FORMAL_REVISION_POLICY.policyVersion),v2=revised.filter(i=>i.formalRevisionPolicyVersion===FORMAL_REVISION_POLICY_V2.policyVersion);
+ assert.equal(v1.length,FORMAL_REVISION_POLICY.revisedItemCount);assert.equal(v1.filter(i=>!i.formalScopePolicyVersion).length,95);
+ assert.deepEqual(v2.map(i=>i.questionId),['lesson-1722-p2:v05']);assert.equal(v1.length+v2.length,revised.length);
  assert(revised.every(i=>i.questionKind==='vocabulary'&&i.revisionOf.resourceVersion!==i.resourceVersion));
- assert.deepEqual(manifest.priorReleases,[ORIGINAL_FORMAL_RELEASE,EXPANSION_FORMAL_RELEASE]);
+ assert.deepEqual(manifest.priorReleases,[ORIGINAL_FORMAL_RELEASE,EXPANSION_FORMAL_RELEASE,REVISION_1_FORMAL_RELEASE]);assert.deepEqual(manifest.priorReleases,FORMAL_PRIOR_RELEASES);
+ assert.equal(manifest.formalRevision,undefined);assert.deepEqual(manifest.formalRevisions.map(r=>r.sourceReleaseId),[REVISION_1_FORMAL_RELEASE.sourceReleaseId,manifest.sourceReleaseId]);
+ // A second-level revision or a forged batch release fails closed.
+ const forged=structuredClone(manifest);forged.items.find(i=>i.formalRevisionPolicyVersion===FORMAL_REVISION_POLICY_V2.policyVersion).sourceReleaseId=REVISION_1_FORMAL_RELEASE.sourceReleaseId;
+ assert.throws(()=>validateFormalScopeExpansion(forged),/formal revision inventory invalid/);
+ const stale=structuredClone(manifest);stale.formalRevision=FORMAL_REVISION_POLICY;assert.throws(()=>validateFormalScopeExpansion(stale),/admission policy invalid/);
  validateFormalScopeExpansion(manifest);validateAPlusCompatibilityContract(registry,manifest);
  const compatibility=registry.compatibilityContracts.aPlusGate;
  assert.equal(compatibility.eligibleItemCount,768);assert.equal(compatibility.excludedItemCount,865);
