@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "artifactRoot": ".release/site/",
-  "fileCount": 1493,
-  "totalBytes": 205156537,
-  "aggregateSha256": "bc356ecf1e3448e054d7a6bdc3520fbe2980cf1f94d00d9b3fc815f5b00789bd",
+  "fileCount": 1524,
+  "totalBytes": 209401325,
+  "aggregateSha256": "eeea3cea0f66a928106f756b0727c4c8b7e7eadc7699fa6d93047ff53ee0c10d",
   "files": [
     {
       "path": "_headers",
@@ -382,1398 +382,1553 @@
     },
     {
       "path": ".bdfz-release-artifact.json",
-      "bytes": 44632,
-      "sha256": "c01d3d20d313913c1e599cdd73d1d65f85b5ab7c5f3e3c3f6458d59bf21dfb6e"
+      "bytes": 50003,
+      "sha256": "56e01bd08f03898a2fdfc8f64b53f18e8b4fe38eec94ba45c806b1a47ef10b5b"
     },
     {
       "path": "app-content/latest-stable.json",
-      "bytes": 2120,
-      "sha256": "a5ccd441deb7b0111517c9c1ec597b98e16a6dac789bd32bff3daa96960285a7"
+      "bytes": 2376,
+      "sha256": "6729e48d5fd361f27fceb22dcc7ada6ba1abef9fc661c1d1ff19e7d53d20e91a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/catalog.json",
-      "bytes": 117248,
-      "sha256": "67e74f0fb31db395df941feb3de1211f1717f98c9838124a0dc6db4a19efdd98"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/catalog.json",
+      "bytes": 122812,
+      "sha256": "e7e90e7a43ebf5dee8a213df39a592ca9b6d536cbe3a0ceabddd417e80dc075b"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/core-bundle.json",
-      "bytes": 16517004,
-      "sha256": "6cc5e1205de54012141a779a848939f54bd4be1370f2d81f1c7397ec90cfb823"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/index.json",
+      "bytes": 8832,
+      "sha256": "b5d9c2de3469d01527147a67217e05a6381f5263741ea47a7936cb9be8ee2342"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/interaction-definitions.json",
-      "bytes": 4124,
-      "sha256": "6c89199e2211cda0bf6a8dcaa9bc0154018115e44aeec88eebad3f9a1ad172a5"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1474.json",
+      "bytes": 4011,
+      "sha256": "a353218e941862a43dc64fdae4de62dfb5ba20b8f30a8fb7a80f9f17be13f088"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/learning-manifest.json",
-      "bytes": 311462,
-      "sha256": "e83d7b2c6d77c340a1caa43d49db165096688b10e99a2f41a8a053b31af07ddd"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1476.json",
+      "bytes": 1984,
+      "sha256": "e02001d3655b930464718ff495f5a07c2d3090f365f6a4b14e2ee19ea737fde2"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-11637.json",
-      "bytes": 8666,
-      "sha256": "4bf292e27e4c8b3212650c7de0057a284c4f41f878720bc9a091198d5cf5f6cf"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1477.json",
+      "bytes": 2859,
+      "sha256": "c43c0d9a5a36d8d2c19f7a8b73dd8338e288515f6879e6034d05b7dcd4f0a291"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-11705.json",
-      "bytes": 5368,
-      "sha256": "ae1ddf66328b43fff2cc8fe89eefdd99a80e695f4458e5de258598e79105f3ce"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1483.json",
+      "bytes": 2773,
+      "sha256": "a599dd69323e0d104aa484001b277e9ec597258cfcd5270d8ef283cbf1201480"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1458.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1484.json",
+      "bytes": 2087,
+      "sha256": "16bdcf048d5a158a83e7d539c95c48d05d6f45091fafe3db3787f26299c66910"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1485.json",
+      "bytes": 4599,
+      "sha256": "677807a6544961f05d1d9296acc0a72ad38647610d5bf5322653179c7e126278"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1534.json",
+      "bytes": 10370,
+      "sha256": "556d50caa1c099f1c07acd63e5048bf933118e219df39eb3ba69bddc9a69f6e4"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1535.json",
+      "bytes": 9923,
+      "sha256": "357d703c37b30b28edc6105b8363f8d821a484c4bab8e8ec0bb6bf19e55af6c3"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1536.json",
+      "bytes": 6152,
+      "sha256": "5912924c7dc55700c285261a7cd0c1a9573190911e93d063ae297ad9ab2d7775"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1537.json",
+      "bytes": 2770,
+      "sha256": "74e8386e5a529bc446567ac61ae9532ac569acca6fa94e849155dfa5b53781c2"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1576.json",
+      "bytes": 3955,
+      "sha256": "06fc97827fadbfa26d73073fc1eda042519d21745513daa396885cd5ef4ebb6a"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1577.json",
+      "bytes": 4631,
+      "sha256": "42b1190e5676f8b31227a7deaf535781d35c154e6fa67945fca11302b135a416"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1578.json",
+      "bytes": 3053,
+      "sha256": "6738a21ccac46fd1d56e35189429ba11e1b10b6ea46a24b494095e99eed25dd0"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1579.json",
+      "bytes": 4368,
+      "sha256": "f0acfad5d21ce7095cc8c8da47e64eae39968072b64646966645ab8111e7dc35"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1580.json",
+      "bytes": 4049,
+      "sha256": "1c649bc9b0e6cd30f71d95445f31ccb67c8ee8c99eee8c95e7e93fb270c5afb7"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1581.json",
+      "bytes": 3811,
+      "sha256": "dc64dea46041163710004eec3b2a8cbf7dab7044f5997a36efabb7ccd60e1c19"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1711-p1.json",
+      "bytes": 2536,
+      "sha256": "0e01ec7c0f8f719d68004977a23bfe2fd67154e66c99ce95c85435b76cca6806"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1711-p2.json",
+      "bytes": 3522,
+      "sha256": "50beb4d5a35c30b483b7b2361103b9445e6f892249da5e93a38bc50c9996b48a"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1719-p1.json",
+      "bytes": 4120,
+      "sha256": "9cd8eae160709b3de0e70d16865e1e1a44cb9616a49be2fea1b05594d481d303"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1719-p2.json",
+      "bytes": 3804,
+      "sha256": "df9ab23d1685a6422189e31637519fc0003f0b405d96abd7105d9aad567a5ffd"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1726-p1.json",
+      "bytes": 2712,
+      "sha256": "35afa4cc96a217cebc85aefa94877eeb44d7478129165d69865d6c6a9acfdedb"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1726-p2.json",
+      "bytes": 8684,
+      "sha256": "f96ec0e215457006673e3c93d1647d9e73022ac43f305b183210cc489aa52914"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1726-p3.json",
+      "bytes": 2532,
+      "sha256": "4a2b0c51e784c45c0b8b58333edaf1605172c5947e19f0b7b88750f1cc97bca2"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1727.json",
+      "bytes": 2552,
+      "sha256": "a02b2f98e224605aeb93f82554adc3866d060ff4f72ad09d26b1683346e5ae22"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1728.json",
+      "bytes": 10201,
+      "sha256": "a0ce632082dd376e15a530ecdee369e8d8a42f7b9fea8051c1143bb787fd3c4e"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1743-p1.json",
+      "bytes": 5010,
+      "sha256": "09057f60e70f37cbfb46f2e8746539d6197cff94722238809a34dc53367eadd3"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1743-p2.json",
+      "bytes": 7223,
+      "sha256": "cfca9fbcb40ab425ed24264d102e2bf078fa68cb53a6b60fce812be498b06dd7"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1752.json",
+      "bytes": 3833,
+      "sha256": "3fe64575470c582a80e4c253c4a1e8285cdb3b7f1f3f09a3cf96902ceff749af"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1753-p1.json",
+      "bytes": 4087,
+      "sha256": "f3ed5386bfbde0c1658ef0e4498b18a45ff67b285d609223b6f4f11ab5d61fa9"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/classical-first-read/lesson-1753-p2.json",
+      "bytes": 4047,
+      "sha256": "eafdbaca1082027ee6a41bd54214bb634140ad05c097bc8bf99bf781c7060bfd"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/core-bundle.json",
+      "bytes": 18629507,
+      "sha256": "56390fdd968376cef8e52040bd9b473e2f6db8ac0f55bd679257ea757b3ee7ee"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/interaction-definitions.json",
+      "bytes": 7760,
+      "sha256": "674bdf68c6370b205f29e1f2eabd531263a1b2dc4005feb478610efcf82c52e0"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/learning-manifest.json",
+      "bytes": 1349111,
+      "sha256": "dde77610c5842bb6dbf15ca7f9c81ed2489ae6ce723d48698f0a5574690ee5db"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lesson-competency-manifest.json",
+      "bytes": 781027,
+      "sha256": "59699699d8b6660d694f1d99ef90c3e597fbc57a56cb845ace18f014b0aa3327"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1458.json",
       "bytes": 207313,
-      "sha256": "6152a4a5af4ea4acc86ca0ac73673e886e00b9f65f5d89c2087cc7ca3c931632"
+      "sha256": "cbd96eb4e160a2c8820836fff42525437bfecbc56d1bf221479df5b938c0eccd"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1460.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1460.json",
       "bytes": 26577,
-      "sha256": "e04c5c10d830df0833c5dea77a3632f9696394e0b68afffce495d1b3e1d53650"
+      "sha256": "b9ba314ce3fbcb715c7b733bc7247c02e1b313227c7a54e49dd0ae3bbee6cc3b"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1461.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1461.json",
       "bytes": 152335,
-      "sha256": "689c90f2e974c2bf3a7e4f189adb1a94a1104c57ba44db279d1627c67d639238"
+      "sha256": "998feacf8dfec3f81aad38bb440dee39abae2e42e245b813eda47678bb3b78cd"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1462.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1462.json",
       "bytes": 80014,
-      "sha256": "f953578aa6208488030be9a1f59e61376c726c18b02d4e23f0b9c64a037b1467"
+      "sha256": "b99489998baf808598573dbff62d338aa3fd068d6df056606f84bd0c5c554437"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1466.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1466.json",
       "bytes": 61067,
-      "sha256": "647922605a5281274f032480893c1680e167ced87140acdc88e14cc6228dae53"
+      "sha256": "c6d0425bb4e551f3ec58ea0173c825b02a0294f3fbe68a292f910c0ac1cbc722"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1468.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1468.json",
       "bytes": 203390,
-      "sha256": "aea5b1413cad26a228f5905de8541b3e7883bf0497eeadd72dfd7240bd9a2dbf"
+      "sha256": "61e498987398dce9274fc5788cc01e4ac8b37095069549f823a853c191742647"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1471.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1471.json",
       "bytes": 226522,
-      "sha256": "e4ad0524acbc6fc9e319104470f12106d7de5f7975fc708add1edb8a0bec9d39"
+      "sha256": "f85e0dc51ee0e0e62e289cf7573d3f271ce1d561d9365003ced1c6911aa6224c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1472.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1472.json",
       "bytes": 46032,
-      "sha256": "03ede3a62426d2db62b6de4633825470e803855c894045154503f883f3d4fa7a"
+      "sha256": "d20337102d3bff6153a11a6d43dc67ff70fe22b49d39ae8a7ad8951cb7874fe4"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1473.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1473.json",
       "bytes": 38883,
-      "sha256": "54ba640c5c0b66a23a3cf63b0a04547ad3d25c65ff45d0544005ba382345b969"
+      "sha256": "9c005e11ff973c3e4c2483a3e91761b707cd2b7ed1860a8b7b912aac7c1eed04"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1474.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1474.json",
       "bytes": 122221,
-      "sha256": "4ae21301bda185a3903238833438d7ec3000cb042bf30f396d39bcb1ca5236e5"
+      "sha256": "9359be9f0e3a0bbdb5967829e5529c6bdeb087cd70fdd50543112c4caf8de3c4"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1476.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1476.json",
       "bytes": 79098,
-      "sha256": "2c231503f64fe4c9325f48b5f7937382f48805b7f61a712160146db69ffdfc9a"
+      "sha256": "c9170158a6657ffdf5d411f4861b59f728f63b0826d98c45fdc66672a41b734a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1477.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1477.json",
       "bytes": 87048,
-      "sha256": "3935d3afcd9cc5042e20e9b7c6eab57fc6f5572ea8eb761ae45b2cad05b2988c"
+      "sha256": "446f1cbed97367a41c5f483f1ca1e6a5e15750d7c791725e85ac4138bfb06809"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1483.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1483.json",
       "bytes": 104725,
-      "sha256": "04018b7684c2663ded3c59bcd505b49bc4f72cd2503b15e762141ca2a851e6a3"
+      "sha256": "cf97b01a6dee9eb28facb62baf4b8e918c4861454444056a886105883c7199ed"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1484.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1484.json",
       "bytes": 60986,
-      "sha256": "3c1b7bcac42e1a547a1217797cd91590e9a0b2b7c29d0cc977809bdc0074a0a1"
+      "sha256": "9fa99407d95d7a2de6620692a35e418ef022043bc42d284dff8a75cd29cf3e9e"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1485.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1485.json",
       "bytes": 94674,
-      "sha256": "1fa88b294be69d0b081bdbdfaba66d9ce6d1b312ae2fb4e510f0951c86d5c7f2"
+      "sha256": "88555810b32cfd254fed102fa4d40bd93d77dbf92aa7c8a34f2c75ee4896d61f"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1486.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1486.json",
       "bytes": 45286,
-      "sha256": "7e074294a4a3691a3e050cccb96394bb5d80e742acf42f9a828e9041b862d2fc"
+      "sha256": "605d5de1ff50b0cf2ea66ae482de55580ecb57ff41aa4fbb9626bb8907132f45"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1487.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1487.json",
       "bytes": 150121,
-      "sha256": "98e1d1faa3d433e055147c964c9151d796ee6d79655bc407c412b5024dd00f88"
+      "sha256": "570e3faf06a3c099076dc9f8c2dbc8b160040f74ab6ceb30e6e5c72e9c8bcffa"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1488.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1488.json",
       "bytes": 189809,
-      "sha256": "d7a980dce42a9bcd95b1356af4ee25b0fb6afc5a4367637782b835f7508e87bf"
+      "sha256": "80f882aae46f749e370869a2d5fe8479fe5ed633272f450e5ab5254477405655"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1490.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1490.json",
       "bytes": 148190,
-      "sha256": "fadd8583780c6da76e0d689c9f0c07395314a217392ac1ea4cd4e074b6faf677"
+      "sha256": "0e133286825f974a4345a51db6c8a9a7cc6f9adae08396514977205975f35456"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1493.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1493.json",
       "bytes": 172921,
-      "sha256": "2ad66cc414ee73f054556547b829e7e6dc06fc91d486ee065aede46c2619f3f4"
+      "sha256": "2810e324a8f6c5cfde829f4d0c7f62c787dba12eaa4f786d45fd8ec70d1f50dc"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1494.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1494.json",
       "bytes": 129047,
-      "sha256": "3c14646c13bebbf3e7e82c624a2ef548d91fc31fbf28325a332d3dc47ccf0a39"
+      "sha256": "eed92d4aa9567a9e8979b4b8fd63a817d690b00ff5d454bd24f6bc8432c1e7f4"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1495.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1495.json",
       "bytes": 41396,
-      "sha256": "53dda763930d6e6c275a159b0403ef795d477c0cadb0b16da1567ba4900f7ba0"
+      "sha256": "7cd2129846aee9b9ce7b5d96445e4268c2367410c915eb97fcc96ea816b37b43"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1496.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1496.json",
       "bytes": 133245,
-      "sha256": "9cb7fb9af5c7c4616a234f0d7b804999af939a02867ed9e7096cf351e2aa9284"
+      "sha256": "947862fc380f6caeced7dcffc0ac33e90e1a45469c1d876d76f08f07033c4ad6"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1497.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1497.json",
       "bytes": 33980,
-      "sha256": "60cc6fe8a93f6a890dd88a7f71badee7215beb5e1fdf07b2c49d19ef9a9d219f"
+      "sha256": "89519ae522cbcf9938e74d0013afad7fc81672e47831775022cce5b3b4522b0e"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1498.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1498.json",
       "bytes": 57868,
-      "sha256": "4a079dbce4b0e7215d5ec97752105300031a8c0198887fd62eff58b74b4b1070"
+      "sha256": "28d618f818cae74218a4c679cc5f24143c33c9816d207be16570acccf3e8c4ca"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1499.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1499.json",
       "bytes": 61932,
-      "sha256": "972c8b7676fdf0bd3af71b03435e949d58cae22a89378b629b9689902e4600c4"
+      "sha256": "8a4cc8020858ffc88d330b84c72ddf0b9431db88a7427e47d7b76805c22a314d"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1500.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1500.json",
       "bytes": 49343,
-      "sha256": "5a713e46afedc419ae301e56ec0a23a18b7e3e5a0aafab1d61a2e87431b8c82d"
+      "sha256": "59941215caaa08aba2d36fb8e2beaf84eb7e5bece1b729b6b91928ca3e4ae65c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1501.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1501.json",
       "bytes": 15142,
-      "sha256": "0e120b0eaf7da004e7602989e49ee5dff1f6167a5f08accc27959b248bdda797"
+      "sha256": "9b1f981c1de860ee1cce2d5e238282ad922adaeeb31f59516af94daf9c0fdb0b"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1502.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1502.json",
       "bytes": 26446,
-      "sha256": "3cf84f3b5508c2e7548d63eaa712bb15959d235fc419f50c3f14f282cc6fc7ce"
+      "sha256": "1b14211bde6d7a2bc9be032c2755000421aba19e8fdf141edc9a3e239ccc3a5c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1517.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1517.json",
       "bytes": 108666,
-      "sha256": "a95e8f5398957c848003cdc174ef6078f6283e13002ceb39506603c308caa63e"
+      "sha256": "c268043b3f5212986ec798af056bad8e3462324b46b266993a1c10e82084ec09"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1518.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1518.json",
       "bytes": 83680,
-      "sha256": "591f62c67246678c36a29d7c918b4921fa8ff34d544479fd737362e8e2774678"
+      "sha256": "8c516ee2fdd6b46e438300c06832a5f628f3beb803235f9c53cb2bc640484b4e"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1519.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1519.json",
       "bytes": 40893,
-      "sha256": "d71bc162604f3468d00632f14125aaacd23eb1f6a617b5b0f7549d6bacaa61cb"
+      "sha256": "0114da15044eb762fd92c2557bb8a7e7213350e5b0df2fc006eb108b3a3b57d7"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1520.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1520.json",
       "bytes": 109243,
-      "sha256": "0ced00dba5d69c88052a22f4a9adea9c2032a1ba9eb54959fcefbc95438a7dd7"
+      "sha256": "6e2293481bc2c9f9b110575d09aa150ca27fab1a5e31df6bd8b2c4b119463104"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1521.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1521.json",
       "bytes": 44137,
-      "sha256": "d36f54d5b3b21b52c5d2bc90b475ca2d1a1da0f0b778e254f3034657907ca5d7"
+      "sha256": "9796ad493ee3812abafb63d48055ff88baa2a6a8406e872f4bce7941ce3205b9"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1522.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1522.json",
       "bytes": 86940,
-      "sha256": "89244d1535d1f9c76bdac0a9938ecddb7217ede57152f61fc377e5ff51b5a40e"
+      "sha256": "f5ee086b8136bb3ed07deadca249aa4716173d7f0bbcf1f40aa7f617cb1d3ce9"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1523.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1523.json",
       "bytes": 67441,
-      "sha256": "75c698c559d78c3b07fc4e05f2d88a91e75e96300bdc309dfa070ca03be2ff8c"
+      "sha256": "436ae5bd9f92f0430c3f3c6045d574edab3f46104d3dff438ff5670947bb2e05"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1524.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1524.json",
       "bytes": 44559,
-      "sha256": "aa1b0c1bd970feb56fc1bd46fc0b0491850c73e79a7d875352080be4ca2c0dcf"
+      "sha256": "a8130412472964542df5629414e45ebf05ca5e519ceec366ab3e720fc83f9459"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1525.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1525.json",
       "bytes": 31586,
-      "sha256": "3c53023f67c8b9d5d8e655f023832f23b44c928fa91f0654ae28471186d3e21d"
+      "sha256": "63420ffc49fca49f53de836f00825af4fab0dca707098a2ab8fd26e257e5c457"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1526.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1526.json",
       "bytes": 193740,
-      "sha256": "1bfbf597243df08721a6e080402266b549d29b9fabcca2bff06a160c3ab49f6b"
+      "sha256": "9a61d339b1fffb4f39d4cb5868bc4fcb54f2ba72bca32b168e51c8ada161fc5e"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1527.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1527.json",
       "bytes": 168860,
-      "sha256": "286f0ebd58b0e560c43b9c9b42f0b9cea76250ca5f9c88e5c8571a4b929497de"
+      "sha256": "912e9af683c4615c01e9dc2e984eab3b9770d61f234119fd20035f319a404910"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1528.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1528.json",
       "bytes": 207130,
-      "sha256": "93cc13d6985823aca1a820929ce1fd2be91f15b934fadc523376d87c21d13724"
+      "sha256": "2ee451cb4af156583c614f8cda3fad2c131f79aba55a458260bd4fd504357678"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1529.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1529.json",
       "bytes": 93407,
-      "sha256": "970b29eb9b3d2d75cfaec92571f01729263e4c1e3fe5de1f4b9eccfdbbe86dfd"
+      "sha256": "b755c4ee94dc97ac282072dc60c69ff261998925c0747a8d21809c3753e955fa"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1530.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1530.json",
       "bytes": 78507,
-      "sha256": "421cf4f30f5e19d098cd05aea15f1b5d091557c74bdb477f38ce9bb6a2b149d1"
+      "sha256": "4f4b5d7fedf10a584a95b7e61521f8ed463f0aa295f52e91e492a98dd722c0ce"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1531.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1531.json",
       "bytes": 102603,
-      "sha256": "e0d02b4ab2be6778863db6ffd712bf63be2afc6cd1243e8f3ae04f5043d48044"
+      "sha256": "56533c9f96dac08eaaa2e04b336aff53daa77f38e4a7134fe4d108f737a21f8a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1532.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1532.json",
       "bytes": 35528,
-      "sha256": "329a640a336b79e233e213a3a91b4ab32a5690351cb7fed2d0f326bd5e8b562b"
+      "sha256": "57ee6738b5739cf4f3d2340f2471ff782bdbb0a13c4dcc2b6149b38b23d0c80b"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1533.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1533.json",
       "bytes": 31155,
-      "sha256": "2b746c271724c5aa4e85854ee4deac2611df71ab8fe8a67403ca2c119b32ca37"
+      "sha256": "af3505e5bdd6b35c4baf80958aa7d28041b42087251baf1cb1c3f5bed9862af5"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1534.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1534.json",
       "bytes": 189855,
-      "sha256": "cb9746db2d200fb68902e318a47fc0f92b41beef0e3803cbc099b262322a6142"
+      "sha256": "48122f99da012e4410138435f5228c9d0ce1e1e889985d5aff978ea07b76a48b"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1535.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1535.json",
       "bytes": 288143,
-      "sha256": "66627deada6f9d60a53828b5697b4204872826bffc4247ac1a23932367b9c6af"
+      "sha256": "f62ee7b2b19dcd87ff38a455721568f50adcd75deff93905a6b52dca1a9d9c1c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1536.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1536.json",
       "bytes": 141481,
-      "sha256": "53f21916b01d0fee6c2212af685853e4fac2e6ad895b853eeb26ef33f0699e92"
+      "sha256": "8453a4d3845818723548c903d53ebe21745a8dd26eabde31d58feafbb3ced8e0"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1537.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1537.json",
       "bytes": 76885,
-      "sha256": "48b67b03c6c6074a620124ae944b8cf154081b0e2f41ab1874d30554ba80317f"
+      "sha256": "46e8014e12027b5ecae5a0e934f973f89234a966c6f230e0f1fd109109fb2672"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1538.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1538.json",
       "bytes": 39715,
-      "sha256": "7a530f994087b398ef31bee31310b0f7b4ee2b57d24e2893670938f47c1444a8"
+      "sha256": "156908f7fc6de92143d05429b6977d01aea67314b47ae7de9de0f2126dc81f22"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1539.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1539.json",
       "bytes": 35184,
-      "sha256": "2a305f5f1a41c92808cf2520ad615313671733710c595289609e8341f0742473"
+      "sha256": "55ef4c9b2abd2aedfd61d8a079758e3711e7bc41459da8c3ccb308d4c336a46b"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1540.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1540.json",
       "bytes": 227002,
-      "sha256": "9dfc4401c7210454e7d55ccd6ed44f03ef10e0fac406e510266b46c16df439f5"
+      "sha256": "7848908ed2aedb54df758d132684f9f3c2ea96e87cf4dd3e01e1b10fbab78a4e"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1541.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1541.json",
       "bytes": 48188,
-      "sha256": "a3fe1c0129ca7777231816a21e3c4c5e80b7af4bdfcce4ff12dc517861d28283"
+      "sha256": "4330487262926fdc19c8f90e87ab8f71ed8ece852f08880f5c4187a1fe384acc"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1542.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1542.json",
       "bytes": 49796,
-      "sha256": "1ff8bcc4a212705f0f9c525a46ff43e3aa0a68ad12353a8040b9e9621a363c85"
+      "sha256": "2bd0a45bd7dab1a71572256124d53a3d138ffc80e54a366813d94daaac4c8e08"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1543.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1543.json",
       "bytes": 47914,
-      "sha256": "2bec9ffe35d6a34b67f50dd28144492ef75b0e42b02665b248b81f5512c88e8a"
+      "sha256": "311b3ae22cea47ccbd637f5946ce9513d5a6d37e960f3d3837157924b177eb3c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1544.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1544.json",
       "bytes": 33353,
-      "sha256": "8e81e008ed08471e76608dd01e17f8994d64dc1ade1a99fe7978174498254268"
+      "sha256": "bf68053f87e82235d9d9cab54154404f95f7fc58ab80e788de0dfbe445d7727a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1545.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1545.json",
       "bytes": 84728,
-      "sha256": "61b25e9c5f70b96e49ed8e96cd9045904c57c7a141fac4bfca324a5acf9d8c28"
+      "sha256": "ff482905f314e638bcbb1bf87e96e4c978034cc397f248c015c2b2d8a0206c99"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1546.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1546.json",
       "bytes": 29398,
-      "sha256": "c50936fc2c1b8f6a507dd70725a4f810335cddd9c58821a42217aaa99620b0e5"
+      "sha256": "2f60029975a76aae75ed6075234203405264dc8d22ff65fffac1c8c8d92258a7"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1547.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1547.json",
       "bytes": 76203,
-      "sha256": "78dc6d5f5df38ad7c8119ede95177759ab8b817327a8196aa1f323a38400ae84"
+      "sha256": "2028d297e6ab3f4274e5192ea9c4e1f7dd5418217aa92ca907e4354025385448"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1548.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1548.json",
       "bytes": 55879,
-      "sha256": "0ea35bff77a1905585d42857a121e7d11778a813994b222efa4143aab2281369"
+      "sha256": "b751dc15d18f475fe08624bb15b4bddb35fb2c6d20fb2069f830a47f8d0e4d13"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1549.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1549.json",
       "bytes": 34673,
-      "sha256": "1a2f94092e9220b914a4ade3060880b9f4223947949475acf655e27ba534922e"
+      "sha256": "fac5c79c8d04c9cdc77abf1aa50b5c20082eb5e78f812d6d59b838f3f3da8a63"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1550.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1550.json",
       "bytes": 35162,
-      "sha256": "9adf364758f44781d4a921578891c954cf97070c59bb594ca05b5f5b29b2d3b6"
+      "sha256": "412921e90892fc7083db5150b9906fc710280f6005d8492b858228b302b21fc1"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1551.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1551.json",
       "bytes": 27970,
-      "sha256": "a18d2701a6904f5fe4b7d872998f41317471515da2bc0b4c390108235ae91550"
+      "sha256": "90834650b96ed5bdb12e7a6c02edb46556d9bc022d24ecd44cf5ac55d1e485bf"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1554.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1554.json",
       "bytes": 27120,
-      "sha256": "62e3847a7834c3a83bddbf5218660b49db21153e5eea4f6e5590311914aeb1ab"
+      "sha256": "52b4d88ee5a95a798c5fa33752d847198af8932a5beea0c9f1e86ca4c776ec55"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1556.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1556.json",
       "bytes": 94705,
-      "sha256": "d5afb0b8b1c502d258ebb64f58104a75f603fed26de64cf4ac57e8e4b45201ba"
+      "sha256": "37cb93d2de5aacc7376a23d6dadaae174a2f3db23c46d6c4c89afbdd85053a41"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1557.json",
-      "bytes": 165219,
-      "sha256": "d6ec1d492caeaef5bf9d8235050da66bb7c87bdf3349b07e8bcc4f7ebb498555"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1557.json",
+      "bytes": 165215,
+      "sha256": "da2ca26f07afe5fe895c78b437d5918807df1ec1747fb3d25741b084e3edf1a8"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1558.json",
-      "bytes": 245284,
-      "sha256": "c831458afd8dc7a9ad13131638e90d0d8a954bafdaa0e037a3ddff2f4f906c64"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1558.json",
+      "bytes": 245280,
+      "sha256": "5f6f2841ad29ad26781f9855874e19b2eabc2af1b67dc5a29bee81bcb9e1f3af"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1559.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1559.json",
       "bytes": 94917,
-      "sha256": "6be5da3aeeded4cdffd5c016d95d405efe137c61f495edaed02e4ca910dceca8"
+      "sha256": "1e6fcef61dd457565de4720a5fe359f264dfd61c87b9175fd362a6b270ea3792"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1560.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1560.json",
       "bytes": 54460,
-      "sha256": "c3edea2e9ce4cf7b0f21c5782dee717a5d8e5501d29acb5789f95ff480ef2758"
+      "sha256": "2c3e17cf504dea25774377e5d21393eea4ade0b8deeff32b31a6fd1b47e35154"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1561.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1561.json",
       "bytes": 54628,
-      "sha256": "8e74ebdb79a61ab32138112ecaa67d905ebd2a15fb70b1400e85c17a7440046c"
+      "sha256": "075a26c34d4576e4290d4a6e0a51b16269f6948eba2e5b2044a22fa8152fdabb"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1562.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1562.json",
       "bytes": 54172,
-      "sha256": "e39b066ee5b42f280c9589ee137a27ef62905d5e2117fc12c551c680684d36bc"
+      "sha256": "d93aaa5f6b32e15a51a39d37a8762e21d2d586e5bf1b0e674dcab87ce294fa47"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1563.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1563.json",
       "bytes": 49830,
-      "sha256": "d43b2e6cdf46ee1ab0d61fc3a0aefdc2debe7b28867bff8db285478629f4525c"
+      "sha256": "ad1ac6f188f5aa3220bcc750f235b676831f23c7677b3749efe803fdd09ef4a1"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1564.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1564.json",
       "bytes": 32685,
-      "sha256": "da39395ec37265656715bc8a06df99809420170aaaaaf61b4ed99d8274430b6a"
+      "sha256": "be14a4c1d88906132ad319059d5c08b5c3465193d5df5be60a6aff3c5cae89f8"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1565.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1565.json",
       "bytes": 139236,
-      "sha256": "6f9bd06a196f9d011d316bae976293399fc0205896e6398520f42783f4488f83"
+      "sha256": "9872d4154534b3e3509acd6dadf78f91c4758a7d9fadd9b81515bb1d3f2ab33b"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1566.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1566.json",
       "bytes": 152195,
-      "sha256": "37fb6fb42b7663168e8bcad16b5b9ec4094deb67d759254ba1e0badf60233e52"
+      "sha256": "c4b5b2fe6cf234784218923e228ec2c4de8b9d08b5fda02d1a8bab449586f6da"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1567.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1567.json",
       "bytes": 56478,
-      "sha256": "9e897fec8dbc4bca1b43aa96bc20a1c445fe569930ac8890ec20c6db823d8f4d"
+      "sha256": "fc186c510ba9e8e2dfb0ccc1e6fda0636dea950c0b775e190f8958141c2b56f0"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1568.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1568.json",
       "bytes": 44138,
-      "sha256": "97df735ee96c107218472df0de3c7cf734de8f3fc850f084ac16fe5a4faa5116"
+      "sha256": "1799ff8ce575be5b19ff69a3f546018bf17b6e02f46f973cadfd3aa46982a45e"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1569.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1569.json",
       "bytes": 56151,
-      "sha256": "01e2fbc3317d861d5af6fe655789d7d4e5bf44e198c307880ea9813617d53a50"
+      "sha256": "65078742a97bc10d115b5b44b3de7ed36a4d6e9560bf2d5e49b1a1b5909181ac"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1570.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1570.json",
       "bytes": 69280,
-      "sha256": "6dca08495d7144d79e192c14582c0c80a27670ae4ad3fdeaad1214894b5fbe8f"
+      "sha256": "f1667a185e82b70dbd45b0b347d0e614cd2f8d1151b060a609c8dad28cc67c55"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1571.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1571.json",
       "bytes": 77678,
-      "sha256": "8f05f2ab3688a607b608f8fe8da1dbd2ade8310cadbfecb771d678d71640df0f"
+      "sha256": "9ba5ac22b9ec2e877f306a868fc7751a7f8bc0b6971e73edf4411f2f0e4cb44b"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1572.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1572.json",
       "bytes": 31035,
-      "sha256": "222184ada41d699c43fbe9271221b4b469aa33b404663b87f2aecfdde31c367d"
+      "sha256": "dcb7ed5dd53d36e8b24fcf9654f3586247018361e2bfa06be0f2a9c467d70498"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1573.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1573.json",
       "bytes": 123762,
-      "sha256": "18a5c73d360e8193568b289974e2af0c8fbfd5fd1f83856219a9d24bfa5b64d1"
+      "sha256": "7b39275f4b461261e1c31546efc9230ab82745a1c13da1a5ebd1af3187d7118b"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1574.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1574.json",
       "bytes": 66520,
-      "sha256": "995feea1b6f77e3e3f3acd4fad2ba28faa8055e04341019c31c80936e510202f"
+      "sha256": "e3c793091e85c6c71a3ea4f219144bea26433fc7b971867222bba29cf1076f3f"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1575.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1575.json",
       "bytes": 42466,
-      "sha256": "4fc4d5fab0d6ac38ce19f2a0d802e51487db0111bf3f02e9233a7dcbf6eff416"
+      "sha256": "54f8073f72b4b0bec46cf8439031936ae11196a59bc205ebd56f8a12cb814cdc"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1576.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1576.json",
       "bytes": 134452,
-      "sha256": "6811778a839ffcaf89fab8f9ec369df5045a3e14de038996cfd6fe73607485d1"
+      "sha256": "05df61ecc58ab989e3d888f1ea7f88859796b8ce13762cfb5a111a9b6259c69a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1577.json",
-      "bytes": 137604,
-      "sha256": "fbab8fb35804a00c92e49e43defc1d26ba02c4162ef85cafe4ca029ad00af1bc"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1577.json",
+      "bytes": 137596,
+      "sha256": "a6386475c37336ffe3a1090869cfe13e30c76440e23139b9d41bab4a66c8ddc7"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1578.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1578.json",
       "bytes": 105436,
-      "sha256": "600af324c3f0c4152aabee34d019bc65dfd538bcc08c7f0e2bce059aabae3ddb"
+      "sha256": "32b58cbb5658a75e0754757bbdbeb02d09c655db0fdcbf8bb04826b9a530547a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1579.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1579.json",
       "bytes": 378902,
-      "sha256": "ef1409c9fdb81432a6842d71f1ae2c535c810cf3db9b3c73911afeb8e52fee34"
+      "sha256": "fc9d871c8b7e33bec1dd6e29dfbbfa08e1d0dfedd203fd28d1ce1eeea14bc0e1"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1580.json",
-      "bytes": 104687,
-      "sha256": "7fcad9c9fec67594038ead6de9bb746077667b19fdc080ddc6041bed25d7bd1e"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1580.json",
+      "bytes": 104679,
+      "sha256": "c10c760ec9405f8176ec82d79fda039d623cfed3170f73747dc0a69126f4d238"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1581.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1581.json",
       "bytes": 139242,
-      "sha256": "98469dab162efca094c8b0f766673ec4a79e340f688c0180322978b236198247"
+      "sha256": "e18fc8f740800af1c7ce48bf8cf15e4fb55b493ad41e697cdd8499c088aa8c82"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1582.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1582.json",
       "bytes": 50588,
-      "sha256": "8f39502e92d9d1d2ef78579c27ae24904c1da8d70d5d215fea5e54974d791d4c"
+      "sha256": "8b33cdf072cabc9aaae9cee0d1a3f86a384e29bab00577bc380bb6a01997cbdb"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1583.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1583.json",
       "bytes": 35808,
-      "sha256": "ad89c643c60ea02003d3a2b6b424d958ae49ba0f8de0ee02f9a06258790b259b"
+      "sha256": "3ed67975c09b4cf3908b55b46ff3341ea997d0f45b59145ef8baaf8a5b01e07a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1584.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1584.json",
       "bytes": 92687,
-      "sha256": "d174d99b4f0318d5ad3026f123415f86f66c30edd5bde7b1171931c6b8c06d31"
+      "sha256": "e96eec6d773c3d7a71e14c19aba68ae77a359289f51cf279775bbe6203959e47"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1585.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1585.json",
       "bytes": 93889,
-      "sha256": "ecac1e279e8b2889fe4211c1888b4c44ae1257463f0621fdbbc4f93ed8afff71"
+      "sha256": "45b346c95f350a47f20ff88be254d45e440f3bff284ba735091b1c0fddab8e95"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1586.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1586.json",
       "bytes": 206387,
-      "sha256": "bf2acfbcf8ebe23fd0e769c5c965f4917dd1ae0edf0ec012b26dff406ccdea20"
+      "sha256": "502b3d06dbe43f5d210b62b0a935322f248001f35a2c341394c52b2f84d6e09c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1587.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1587.json",
       "bytes": 49212,
-      "sha256": "ed9a077d58c9a5e5ccc9c6d67b4b89afd027bd6d730383cd20dedc55a386aecd"
+      "sha256": "b32863396533805b30d652f8d36eb705f663d227bee6c0d57cdce770afa81364"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1588.json",
-      "bytes": 54328,
-      "sha256": "19444fa91744048cf89458e5e7d935ba17c3f5699c00267fa7cd32f4d4c02bf9"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1588.json",
+      "bytes": 54304,
+      "sha256": "b7a75a8c01279406e09fe0a66508c32f4de461f7ddc205d9165651975cf30860"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1589.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1589.json",
       "bytes": 52842,
-      "sha256": "a92f572fbe0723429c9fffeb41a350c2a2abbaf6a50fe4ce2ced3487f402720d"
+      "sha256": "f350bbe86be0d60b47f27f1d8d98c2fcb053e38289a35ff8bda57cd8ec5807d2"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1590.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1590.json",
       "bytes": 68369,
-      "sha256": "c6ed35952bc3ca10be229c5f56bb978de52a9b13ff179235069384f13d03ba61"
+      "sha256": "cfc6d03a7c67fa3d046c7e46729bb991ff48001204543e6ca6928be38b2609fd"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1591.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1591.json",
       "bytes": 70065,
-      "sha256": "d7223b0b549e0fb9c51bf0f9b02a735e1612852ac5c9ef11db8bda96b083fef3"
+      "sha256": "5320e9140b7bd84066a32a2136504fd239ae36b42bdf4248b525be47506445ee"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1690.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1690.json",
       "bytes": 19953,
-      "sha256": "ae57ab36fd873741b321563590a7093007907109c768932aa25207903e9264ec"
+      "sha256": "44c9dc4c994a76261ac888871324c7088dd7b480f7a7a6f868df57c31df35790"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1691.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1691.json",
       "bytes": 40098,
-      "sha256": "8360c81367bdedb06156669749e1487160fe81859f05eeeeb571228819854ca6"
+      "sha256": "74a817117c69f4c022f95fcf7173a3926d152cb98490353a5f147f16b2576575"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1692-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1692-p1.json",
       "bytes": 27385,
-      "sha256": "0fd62024e29cbbcf652a20ae13055c114c34f9c973214c456ffde40551aff394"
+      "sha256": "46d05596b847b93510c91d801ae0bc58d74944e811673bac574067251675dc7f"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1692-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1692-p2.json",
       "bytes": 30214,
-      "sha256": "a2f90ff704767f3fe79833fab4d5f9e3bd90581e46dba9e41b8770dfe60b04b0"
+      "sha256": "ae7001c455fe7618796fdfab2aeaf505e8f9f569e2152234e7f77282f6167ef4"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1692-p3.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1692-p3.json",
       "bytes": 28334,
-      "sha256": "cf6f32efbc8aac4dadfbed79c34e8709f579a4c23d49ee5b9c0480f5661da97b"
+      "sha256": "8043d5aea05d52e14aa430bbbccfca7c383dc41877c06a8f7c197c8f04b03af9"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1692-p4.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1692-p4.json",
       "bytes": 39292,
-      "sha256": "d83472b9b4f271e849ce86cc27be7e015c3b8cc95b9682a23227786a2ddb377b"
+      "sha256": "c2a02312ca27b329e0f042b9257297a41dba4cb782bc95059b8ee4db0d3313f5"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1693.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1693.json",
       "bytes": 87592,
-      "sha256": "619c4acbd6f5ef4552565269cf96ccb667ea78a2bf51015ac5c6de26adb0ad27"
+      "sha256": "a54a0ab8daba52e4a360d3a68154974facad9bb1a2e4e10e26b79b55586c6259"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1694.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1694.json",
       "bytes": 114227,
-      "sha256": "698c622d826d4cef7f669ec9e8868b995319dc6073047305f1d2a23bf8f3446d"
+      "sha256": "a37df6f54ac2b102e8cb2601dddbd8de96b822c77dbb247c5eb1cfc7ec4a2f0c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1695.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1695.json",
       "bytes": 36755,
-      "sha256": "e4d9277cfb7fd7771b15348d29e27d8c3f6de8ff81ea80e68bfc6f42463d8ef6"
+      "sha256": "99d8c8fbc6ec90277b897d42d1548959b74635da66a5f817e0a3ec2a965d241a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1696.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1696.json",
       "bytes": 27008,
-      "sha256": "3e5e1e057983bff7123cacbd9201b8ab788711c5ac936b90452380049dc60c4e"
+      "sha256": "7a95cae6aa822daca8a7ba2d5223f1d4f4a2026a804c6202f68d63a80ec60eec"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1697.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1697.json",
       "bytes": 82150,
-      "sha256": "cf3e0ba4c81e4ac1db4a19e70bf2d38bc5a688fe5a4f3d0f52cbe2faf90ed931"
+      "sha256": "32adad4be2a64986209b71e14c6a8e7c66d5f688b4210dcd68df7467e5c89611"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1698.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1698.json",
       "bytes": 61873,
-      "sha256": "19c15ecc8592defe4154f02c294d4bbd2afc7fcb4a009cb9073d6d4eb45364f9"
+      "sha256": "9d2ddc644bf00f6a1f1d7b6e50b594de8772a7dc092cafd3934d58b79cc4de97"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1699.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1699.json",
       "bytes": 85400,
-      "sha256": "af04186a9ed20ea34c3b6ed9a09a00f7c5bc2ba319af056b88da5ba0509c6c9c"
+      "sha256": "d0b0a2e4f64160acf413d561ef2404c1fbba472822e7e45d5cf6ca63afc71b45"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1700.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1700.json",
       "bytes": 37288,
-      "sha256": "2fd1099f54b17dca35d0f1620beba9f730e3cc6ba76fe889e95e56e13dae8645"
+      "sha256": "6122584c31426fc16a82cae5e86b37b6cc3853951156703c1cb638d34e79f1af"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1701-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1701-p1.json",
       "bytes": 31993,
-      "sha256": "7d0a3148b29a0c03b62f1331273790348271f3f01189bca90c7151f50cc74dfe"
+      "sha256": "aae38339ab33f99c267925a4c564361a7726645b6230dd23ec888b4f73fa9fd2"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1701-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1701-p2.json",
       "bytes": 31802,
-      "sha256": "f4da8fab150cfeb1c24a82b47b798d29c77de096cdeb3213b8541a3efc74a969"
+      "sha256": "c9d6b22f98e29949d11974edbe1f832c30cfdc2bf0acf12ad554bc42f942247e"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1702.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1702.json",
       "bytes": 39694,
-      "sha256": "333a04e4ae39241ecdc69c4b0679abc64ebd3ebf48b9f6e7585f144c0e109ba5"
+      "sha256": "64f915283d8ef93201c7174ef885931122849db7dbfdd867f24b4d903f190b97"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1703.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1703.json",
       "bytes": 28352,
-      "sha256": "6adae87dbda1ef37e1bf0f8da63c0bc45f57995d61c6d42b6cd998ef49f0a67d"
+      "sha256": "6c3b97ecfc3adbf2eb68f59d0f9fecede5c9639ffbd0fc6d2d4006b48ce71137"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1704-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1704-p1.json",
       "bytes": 48821,
-      "sha256": "6ed19bb2947265b1ddd239bae249177bb94f1cf5d73fdedc3ce781e66336baf0"
+      "sha256": "5031f9e4a060b9bc14d7307ad8a87501d7d47c1a62b4b117767dfdbee7a1afa1"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1704-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1704-p2.json",
       "bytes": 48189,
-      "sha256": "3161abcb88022d882e9880ce40b605956d790f9bb7d43619d5219509d0290662"
+      "sha256": "fa98306169a57dd281d4711d070871db0f5125a5c5dfe7ea4227b170e2efd15d"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1705-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1705-p1.json",
       "bytes": 110681,
-      "sha256": "53fe93614a0f555af6e88f6343128909dff41e8ee342f0d8da4c435b695ffb75"
+      "sha256": "06a7107a80ca73c972f7a2f1f5782650642ecdb7d1611bbfd366f41132104aa6"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1705-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1705-p2.json",
       "bytes": 99154,
-      "sha256": "cfb6e3f2ef0dd7878500f1b8f5966a63d0a2f3501fb5abdb695403b023d6e581"
+      "sha256": "65b8a5d333de3bd93ce3ee57077ea18c1d5cd5e901023c9612c8ab8c8f0ffa72"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1705-p3.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1705-p3.json",
       "bytes": 126591,
-      "sha256": "f21d7be7c006d2a1e5343421ea4b5ed3dbbb7e964c06261f9e258fb7283340ea"
+      "sha256": "cae7132e84235485d00c2388b406158f47d227d73f7f5b322a54fb44ed553c3c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1706-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1706-p1.json",
       "bytes": 47774,
-      "sha256": "e0f0d85628bc04f186941a156212df4764525620cfee72a1ed0fe43036d04ec2"
+      "sha256": "8d9628bec1b2557b31f0790e0c074b00a292e2b85a3b6e0f7ade41b3bc1ac1d1"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1706-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1706-p2.json",
       "bytes": 49593,
-      "sha256": "c71c99532402754b9b829b8fba4631751e7c28ee108a4889cb54be1c06b23299"
+      "sha256": "7b59cf0e2494d4ac44b6493f81bb972271d7b1c89e424be4babecc7466ecd5e8"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1706-p3.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1706-p3.json",
       "bytes": 47253,
-      "sha256": "09a11e54e31fd9ea54db0ed434ecc8fae085380fdb87fcc1a6a8bf532e128ba6"
+      "sha256": "b83006299bb714ccf15840c45e4ef2601ef2fd51cb9d78479e5473d40da0ab71"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1707.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1707.json",
       "bytes": 35486,
-      "sha256": "a67ee8d090b57b649e6a07fdc4abe06eac9f862b96d41e31f81d3e2e69809447"
+      "sha256": "c0bd8f3e1469d212b1463546703778ff5c85bcad5c9cfc81f2a21ec0cd803259"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1708.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1708.json",
       "bytes": 95649,
-      "sha256": "2c69c8bf3ce62ac50fc91ede38091f92438a816ee7348920ac1bb4215d6d2ded"
+      "sha256": "99ae511830bebc8341c31c3515ab119f21b885d5a158d44bc5ddf03f8a2675fe"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1709.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1709.json",
       "bytes": 55917,
-      "sha256": "38e93374730fc01091da1e7db936d8988c8e188a81ee77129392a9ebb839f80b"
+      "sha256": "ba850c7098a7bf8c6e47c3c2263956137f22750eb270c91a48cc1bce16c63814"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1710.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1710.json",
       "bytes": 26878,
-      "sha256": "c485ff23585039acb4d42538219323d3adcb6263963f6e50d615c0878d250e18"
+      "sha256": "3a5746ade39ad0edbe5d595e118b7269cdf806e416fa30f6110004dd3e3994ad"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1711-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1711-p1.json",
       "bytes": 68460,
-      "sha256": "d9f4ab49d2f6f76f6b7ffb8ff7d03ec1874c826c01a3b50bd791236213b5a115"
+      "sha256": "d08de037053e378be6c7620f341479a921647da7f214ce45e81b2910b9acae6f"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1711-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1711-p2.json",
       "bytes": 79156,
-      "sha256": "ce6374206a374651c838dcaea83e0bf48799a5793cfe6d79101dc406c8d4573f"
+      "sha256": "39693e0b7684b11e0388a54a5efd7c14cf3d277770fe5a58ccc2c9de4f6ccf5c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1712.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1712.json",
       "bytes": 83413,
-      "sha256": "3dadda0b455fc93086aa607554200e9778c80064f9163df18702a993da3fce33"
+      "sha256": "63059a960190faa6b1ed4f323721e5e944e5bbc1dba10140247c57e9a27ed8e7"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1713.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1713.json",
       "bytes": 59538,
-      "sha256": "ffb8afb4f4503e3ffd240da8158e3a0a72346fa4d18d276fa4be9e034431513e"
+      "sha256": "ef3959058b22f2543df8801adfaefbb8dc738243eb323889997d0ece46091d70"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1714.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1714.json",
       "bytes": 71816,
-      "sha256": "c5e49c3c2f958ad381e7a2826f9b9d93750b0172ef77c0a765915f6a657a0e59"
+      "sha256": "24290a18ac6649f299479aa6f249dcc1bdeb7a2d1f60a1384e6a1ad76a6a34ae"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1715.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1715.json",
       "bytes": 37389,
-      "sha256": "f1b9c3851ea6bf1cd5d5ceca2df29be7c73e8f0ae5294d22cd43fabb4961b958"
+      "sha256": "46ccfd0a8d7b1dd36e763d5104cd31f11fab7389cb7c8c764b4470d84b385438"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1716.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1716.json",
       "bytes": 27554,
-      "sha256": "a8dae7e5f2bba5f3bd903ec2491c3875197252d1dc99a048f79608b7c62a8699"
+      "sha256": "7129abafef8ff530297db76dec9aa04a5e16930b2b12780ab3353d9eb2496801"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1717-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1717-p1.json",
       "bytes": 61413,
-      "sha256": "d2600af3f8eff79dd1c0a94433aebdcde21f7da3ee95c7b8b7bbef77b2fead24"
+      "sha256": "b0beabe1914f6193a5d555195da11cb1ea03cd73d5522920efe7897864cbc1f4"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1717-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1717-p2.json",
       "bytes": 59537,
-      "sha256": "bb27e0ea73943f74eb519ced0507f3eda15759516b70fd4dc18a7a1f06b48bfa"
+      "sha256": "746dc34085f00d488421decb1a1ce1b469f3a9d045bf21baab04d15eac155da4"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1718.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1718.json",
       "bytes": 75368,
-      "sha256": "d36e069350f1afed65e67bea8d8559a7106601bd774c0efefa69c56e5ad8a39a"
+      "sha256": "81ab63e6833a7c83d10c9223c22374b38e366b3987c290e330230c80e445b0cb"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1719-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1719-p1.json",
       "bytes": 82374,
-      "sha256": "fc4510428098db8eb52d465165d7931c8d3895b40a286de83b7cf407320c55ae"
+      "sha256": "288cf57a26cbc7223aa40c6d6fec159de03b405800fbd96e83f8ffe1a0e1378a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1719-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1719-p2.json",
       "bytes": 71778,
-      "sha256": "822a6c8ff828f659515e63d70651b28e21961fb6312e883376a8a9e1c225ebc5"
+      "sha256": "5d0720732bf28dd887cb09777d38a59acc1f9918868c3375f8991e19df147bb7"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1720.json",
-      "bytes": 41044,
-      "sha256": "512bf3f87900477302a9473aec137f477c81440662a5554051c7f6280bf18e11"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1720.json",
+      "bytes": 41036,
+      "sha256": "ade36e7eb2996203ebbf4bafc3df52cc0f18769705a7715efbac6b09728f6532"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1721.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1721.json",
       "bytes": 138622,
-      "sha256": "bcad08f86f5373391d424242174639d473899f3c9175470cd60c1b2dd7b0df9a"
+      "sha256": "ac2c740198a0df0c894207310b559f2794289b8045ed4107da8840a9729841f2"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1722-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1722-p1.json",
       "bytes": 30126,
-      "sha256": "ce5201ecc580e0cd2a6a7f597c22bb33dbfc41d54bbc0c3423af695b8d19f738"
+      "sha256": "3cff0c7df7947ad55a45356000566fec5d380887e57ca536203b89372ecd5c01"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1722-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1722-p2.json",
       "bytes": 22571,
-      "sha256": "4f70923b64190a9957792e8ed1acfdbcade5799b748c8b4a28597bd1affdd127"
+      "sha256": "19a5d88045336e21b39bee7b736e535f1290a5f9d05906c339c437215da13dd9"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1722-p3.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1722-p3.json",
       "bytes": 24636,
-      "sha256": "342fee0ac697e79d6e6fa653353dbad876ed6830f4b47ae9cd399f69ea8a8dc5"
+      "sha256": "44f84be3cfedefd2e48de4229ef688c38d41fef52dbd7e67e51a99ce53eb5c9d"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1722-p4.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1722-p4.json",
       "bytes": 26626,
-      "sha256": "5f6cb24495b46300751da7d3d31c8479b30bbdf256c66dd32db0bed6a42a8120"
+      "sha256": "abf8b5e7c9732b66f89915e71ea1fef01c91120acf93845a7f605917cc1f119d"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1723.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1723.json",
       "bytes": 8636,
-      "sha256": "49b76e6a37e68b9d5ff469d8470bdb73e770c37ed53497bc2d77aa3e507f5dde"
+      "sha256": "d60a201a29a16495d467f381d95bd92ef41ad1124605a473987f7df9115c174f"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1725.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1725.json",
       "bytes": 20577,
-      "sha256": "04d09fe2e92834fe6d59a356a80350cf66c72f83835ac024fe7352689cd5705b"
+      "sha256": "108572a0a9ddd893e36e8099f8cc377186068e6933d96a67f5b234a5ba9a6c98"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1726-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1726-p1.json",
       "bytes": 66507,
-      "sha256": "e409bf690e7fd2dc0948547e3b03e248186d8fc0940dc13ffe64698210af59a9"
+      "sha256": "40039c75bb205c76c3c6b407b3839749c494ab61ac46a9b2618871deabfbd284"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1726-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1726-p2.json",
       "bytes": 125655,
-      "sha256": "8158f47acb202c35d223f1e529d14c2c0c25148f9ebb81f50cc6c4abea3759cd"
+      "sha256": "c343081a703e00c870c906a47bcb9a48b17b164afe560dc53ab382da4651a48a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1726-p3.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1726-p3.json",
       "bytes": 59445,
-      "sha256": "ab69fa4d65d2365a2db632e16d99fcac5906795453d2b6361068aa7cb2ccd42d"
+      "sha256": "962c952f98b851262402f5ddb651efa73b3045d8a8ebd7e857c1e52de9e9149d"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1727.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1727.json",
       "bytes": 68649,
-      "sha256": "26ecca323d180d1d44fd2fac57653db53bd5119805d46d4427195836994b6784"
+      "sha256": "70083dc1f6b74d210ed78c2caa04990aec834a0bfbe3458ac45032c62e9e62e1"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1728.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1728.json",
       "bytes": 131856,
-      "sha256": "c289c726178c145eb5ccab9cf2a305b8b9e625d64a8e2617ffcb3faeecb7e025"
+      "sha256": "6051ed4f8085ade7818fdd501ff1ba777228d4b42d0fbde4353c6fadbcba6368"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1729.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1729.json",
       "bytes": 41792,
-      "sha256": "b7427d29cba8e6d20c0a82eb67b943e7181612399580cc317a64e6b6233f0e2d"
+      "sha256": "cbb717fbafc06b149c54c167d3080fd5702d377cfca1e5bdc597f4d132bca1e6"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1730.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1730.json",
       "bytes": 26082,
-      "sha256": "582e86eda2ba5b3b0ec6952bd68382980ccef7cc7976c117437992524baa44f4"
+      "sha256": "30be261108a6dbc08e93c4a4e0bf9b4f732f7cab389eeade14e4047d4d5db348"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1731.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1731.json",
       "bytes": 97187,
-      "sha256": "aad8ae9edf0429dc6141a92b830c2e89fa13a29ea51441bf3e2bcb57d0a8fe98"
+      "sha256": "e3be4c00d3d7d1728881ce91f70f8c64d65a180172e0393edd2d4f4282a33f05"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1732.json",
-      "bytes": 103874,
-      "sha256": "00f672df622c10dfe64673c828e7a91d33a8d56c83da8cd118691b8af92e7919"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1732.json",
+      "bytes": 103866,
+      "sha256": "5954ed71db8306246ed576851c69d2cf61a8216090fb7e1b575c41dd98a977da"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1733.json",
-      "bytes": 73591,
-      "sha256": "85e454d3f0d88a4c87eb7bd6d233b4ce190255f4ff0482737fcf9024e8a3769a"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1733.json",
+      "bytes": 73583,
+      "sha256": "79825ffef449536ad23a8d8dbd4ba7f13d3dc4228cd24d2648c6da9da6c66348"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1734.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1734.json",
       "bytes": 37528,
-      "sha256": "8493200d21bc41113642bfdc7702ef81db0cb17528698343cf18cb0dbdb59ed8"
+      "sha256": "505ceab6824bb75342e441a6b218cc7d9ad0791051f2688d7d7ae6d0fe2b01f4"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1735.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1735.json",
       "bytes": 26721,
-      "sha256": "d94f03785fe945a0a52f7c689d9a726e65ba27568d535d6cbc4333cccbcf551b"
+      "sha256": "4c09856c883aed144136d78f8bf0b04f1e248a41c12b3018bda2fbe4236b4c3f"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1736.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1736.json",
       "bytes": 105045,
-      "sha256": "3015d51899b96add0796d6c472a585f3b13df3d945a49f9a6e023a78e4ca329b"
+      "sha256": "2c6bd9f96301d0e56345e0d3d18ec643ea1f46b70a25e49e28dad1097753830c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1737.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1737.json",
       "bytes": 106348,
-      "sha256": "71ef3796275c3d71523a2266bea1d096649966848a137e9d4f6be5a2c3220002"
+      "sha256": "1b5bda7ebc9587cd68feb504ad896bb71bcb8d84fa10effee913c8da654f25c6"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1738.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1738.json",
       "bytes": 80124,
-      "sha256": "b33e1497538a02258bc59729efa759a6401bc69fd4657374cec726b2bfdcdcbf"
+      "sha256": "99c913962b0acb258034c32fec2d3e7b68a146b6a14cc2bdaf3903a6bdcdacd7"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1739.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1739.json",
       "bytes": 41504,
-      "sha256": "b4e24a65c62947371c2226c304d2f4868229f49a83e752c2b80dcf78714e45e1"
+      "sha256": "388a2e7a16c8aa57542397132e0f3eeec74339ada6f49bd17c64d5a1a4d2c154"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1740.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1740.json",
       "bytes": 124377,
-      "sha256": "cbfe7c0e64df61a6278597e65c0104f6685e0ee71ea8d58fbe2559cf4a81535f"
+      "sha256": "e5d6dc1c8cb755e6298526a95be60f071e7175132f3c6517a70d3ac1e4792a47"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1741.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1741.json",
       "bytes": 26265,
-      "sha256": "f3ee3e8af62a1503dfc8557ca968e295d82490cb6eb051f5627215c5e18526b4"
+      "sha256": "482c2b55ea5a0337f216a294246b3e746a2eaa4f56257671cc9709140b5a14fd"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1742.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1742.json",
       "bytes": 77434,
-      "sha256": "e24b9aa3c03aa88a8e553355b0aaa08bef9e58f5f63ce834c167ee5a47290247"
+      "sha256": "d9a1835d073c06963a7261437c2d858c4cef90b56f69e0ba376924db8714afc2"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1743-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1743-p1.json",
       "bytes": 88689,
-      "sha256": "1c8a4b056edf68971e22f23a48ac03d8addfeb401455b72b58ce30c6819b852c"
+      "sha256": "b2450f15b6085cbcc1689a2e7f701cd88b04bc4cad7e5a055145f4943ee8d1b3"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1743-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1743-p2.json",
       "bytes": 68626,
-      "sha256": "e24d8021746adef52ef641c6995e81f001e8d9700caacbe2494febf537357fce"
+      "sha256": "47fec6e2002dcca12ab835bafee3904d7915080c9f504fce96823f449b646432"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1744.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1744.json",
       "bytes": 39020,
-      "sha256": "8f207c6b3558be79042ebbe8ea6028fbf7bb1c7b544d30113311e318b5168ba6"
+      "sha256": "79cb174be9ffd91440e1d07b860d81d8b316dc208808814044b7e09a5a3db277"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1745.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1745.json",
       "bytes": 26948,
-      "sha256": "eba81c615fa7b9778669b1a1401ff558a9258c32a11f957865d2293722474124"
+      "sha256": "e0f6385ffaeca0d3466d66e4d832fa0086e2607a60999f174396dc66ce131d14"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1746.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1746.json",
       "bytes": 185240,
-      "sha256": "ef9243a1e2181144e0cc57b9314229d42df7d7915bc99064b4dcee937ba5dfe8"
+      "sha256": "caba472ecbd087df2cc8f837c816d25fdc4a57151c0d789256318a9219b7185d"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1747.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1747.json",
       "bytes": 183273,
-      "sha256": "7f6cee3f18c9900017e45ad54066b4f6bb53cdf804cb29c6d81f8ae77f6c0a6e"
+      "sha256": "277183d0a0c55902e105dbac66bc7949cbdb8e190cd81b9fa73aec85ba7d43cb"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1748.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1748.json",
       "bytes": 224143,
-      "sha256": "c5a313f9cb856f101c259c858f3ffe922baec45545c222ff042405ab464220ec"
+      "sha256": "78691f56ebc085acad54abb7ec2ec2c1c39004aacab085435be7106dc3dca5d6"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1749.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1749.json",
       "bytes": 37741,
-      "sha256": "816df007acb95d95e913820309178306c7cbcd53073b9ee94fccb91f02ae7524"
+      "sha256": "1d5c7058f8ee292027ac80072d96269a6fe3ff8aa726927c1b94072d2487c990"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1750.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1750.json",
       "bytes": 70925,
-      "sha256": "d25307326890119df918db8d50fa70b777483de368589d8f6a51bcbfaad50d15"
+      "sha256": "3ff6231bbcde6dd580604a9d087749a87f448b5180b4d6a3eb44e47f24189ca9"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1751.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1751.json",
       "bytes": 26631,
-      "sha256": "93b911e9b573026e761dfb7c3002c1503e586c9f0c1fa397ea157cb5bb915984"
+      "sha256": "42e12ee86d4c8198e561f2f77cb4920f55ee30a5c911d0c2ab0a3b15303100dd"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1752.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1752.json",
       "bytes": 108693,
-      "sha256": "89a86b980d436236ab92643045cc301984391c61179b89b6b867e19ad52cf214"
+      "sha256": "c775901a8f3f45f08e4c8944ef103949f4fdad14dc3d9859b6375345feb9bd21"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1753-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1753-p1.json",
       "bytes": 70657,
-      "sha256": "f8007bee4779684808ab172924334c8799f3cc78e9b9872cf0a06fa365d63314"
+      "sha256": "cab3d2d26cb315cd95812f7928f693ce6cbdb2c038a50c82d864cbf4385c089c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1753-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1753-p2.json",
       "bytes": 55784,
-      "sha256": "95346657888feb4d5e608a58c77b83d041b08537409a39ef17fb5a3f3bcbb14f"
+      "sha256": "f13a7d327c7a8472ce27de74a9e611ba1cb5bdd9a6100e1ac14b0decf3df0bbe"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1754.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1754.json",
       "bytes": 42860,
-      "sha256": "13c8e45dc574a1c37fe81ea8b7e06c3dc73fc2f650c0eed5461e27e2d288064a"
+      "sha256": "a59eac0cd46f12799f5a519871db288ff463fd26301f9ae5dea6ab7f6d319f42"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1755-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1755-p1.json",
       "bytes": 23880,
-      "sha256": "513cc2ae83a75ef915098584b97559620cdb88f27f4cc4bd8751b23ea9a56c09"
+      "sha256": "d357b6eba13523087d02f66ff0d7f492f191afad8890a2fb8196ff4012677ccd"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1755-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1755-p2.json",
       "bytes": 31720,
-      "sha256": "57dd4b24bc1f8d488711607cf11e15e67ee112850560efa86ae85f29602766e3"
+      "sha256": "e5319c98f4a2d4d2de80325fad1dc0f2e8f92f7bbaaa805018f071867ea86c20"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1755-p3.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1755-p3.json",
       "bytes": 31684,
-      "sha256": "6ddad26e9aecdaf3d53f2b8e503c4a0aa413df1b7d682ae245f0f392ab813924"
+      "sha256": "fc9ff3a5cf0b04b75ea60e2421c5b3e9e79e0c1c3f99906f07b1dc809a1bb6aa"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1755-p4.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1755-p4.json",
       "bytes": 25993,
-      "sha256": "1981c46cc2e1bbfccac965be840c0216e784bed1456eb6bf228a59629b3c796d"
+      "sha256": "8a66302d9f5670db643a1c9e7cacbd8cbfa95a0dad02c776d5b9a5758fe42881"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/lessons/lesson-1756.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/lessons/lesson-1756.json",
       "bytes": 11270,
-      "sha256": "ea7af4cc3e2b5fbfac5b72bcbbdd790c42b56c1b423e7cd0587f79477757413f"
+      "sha256": "04d9fde565c1c3a661faab2bd774196b63b9b9d5a1cd1ed5833c6f7e105ccff4"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/manifest.json",
-      "bytes": 110119,
-      "sha256": "a866d2a2b89877a8d511622a3f736481401cb48b0da88fc39c1c50cead7fe1c3"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/manifest.json",
+      "bytes": 124620,
+      "sha256": "a864c2b015b3b35ad60259ec7d6fa1c212f9929c3c5503b459f7bf3a89d055c9"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/media.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/media.json",
       "bytes": 30437,
-      "sha256": "1d801c592f79fdd72c78b8d838b0624fe0a4ee41ec5c2f30606b2a712d1eff2b"
+      "sha256": "e2e45e194b6087cc18acd837dd49c2d8d7f818bb2e201590ddebfb362de1fa5c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/tombstones.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/study-guide-catalog.json",
+      "bytes": 144814,
+      "sha256": "afe126a2ff2cb9fc6f39ee64d53ea4f0676e3bfd1641372a3354fbc76c830784"
+    },
+    {
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/tombstones.json",
       "bytes": 3223,
       "sha256": "72d3203968a06cb4c41bcb6190b32c9b7c6cafe6138c26c39ffd0aa0fb0cfe07"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab-eligibility.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab-eligibility.json",
       "bytes": 493,
       "sha256": "f20979d0939f9ef1b32381c8f3e1f642defc1f57fa39dbca07d95964b04bf6f9"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/index.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/index.json",
       "bytes": 7453,
       "sha256": "a4f301ca989706fc6557ffc0b7c5e3d53ce3653f223e90adac11f25ceea3d07f"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1474.json",
-      "bytes": 12683,
-      "sha256": "88aa4ff3950b2ae1062d296761677eb8aee7c3fe5a0ffebe699692f3ed07de66"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1474.json",
+      "bytes": 12799,
+      "sha256": "ecef96be1c85d684fda64cd763bb1ebd7e67b744756d105c3f291b7c8eaf09a5"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1476.json",
-      "bytes": 10229,
-      "sha256": "221096a3dbab71f6541360ad7122404bfc021c7ee9b978530645b8ec2aa5ec32"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1476.json",
+      "bytes": 10164,
+      "sha256": "868174fef8972d9eac0233a64496035f5fc2d6a8b0739c67113ac9a346b4c256"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1477.json",
-      "bytes": 10241,
-      "sha256": "2f385debb6b70d74437a2477fb83d5351ecc3cde08b4d5e647a2687407d7de88"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1477.json",
+      "bytes": 10349,
+      "sha256": "1062000bb09113b33121e836afc67d55a018321dce7eeec7aa470bacb07b2871"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1483.json",
-      "bytes": 13977,
-      "sha256": "6a592fb15a8b8aab60c6c8d8f7ddb06473608155365302d8a667bd7a792737ac"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1483.json",
+      "bytes": 14295,
+      "sha256": "7a3b37de59ff03600369bb9dcf0d9691cef8e6255b2ab88697bd0704bd3b8c67"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1484.json",
-      "bytes": 10193,
-      "sha256": "65072236089d780f37b7d6e9a10ed3f6cfc60f613f76f9c0f7d37891fc782625"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1484.json",
+      "bytes": 10470,
+      "sha256": "817cdcdfd78754644a1beb0e8483bea4ac4a2e1b2d412beb543c9f20752ac6d4"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1485.json",
-      "bytes": 10729,
-      "sha256": "7311109a4f96d4a2e8a05c5d635709f7f60083586fd70edee16edba63193f417"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1485.json",
+      "bytes": 10965,
+      "sha256": "a736e816ade3ec7cdd120a07b4893a9e031079abdb95a2ebbb9b5bf68af753eb"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1497.json",
-      "bytes": 5388,
-      "sha256": "55be1b924c350ace3f13fada94a3d9fa35a1718d968826a0434c14e46d4e7b91"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1497.json",
+      "bytes": 5530,
+      "sha256": "1c26a5fe65bea4dbe62c426a2c2f889ac6ddd72a0e67a957e43e6f88bbb648df"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1498.json",
-      "bytes": 9035,
-      "sha256": "bd323ac6c3993024647e387c85b4ceb39db6ebd358f9da472af9ea96f509b714"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1498.json",
+      "bytes": 9068,
+      "sha256": "ad36f2e49f65a9c701441deb8aded2be8565b335847942851aa1a3f782cdf9d8"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1499.json",
-      "bytes": 7563,
-      "sha256": "6b543fac8a8d0b4b282cf1e176cf55573460b53da3d6a03c8259635379aece3b"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1499.json",
+      "bytes": 7752,
+      "sha256": "354321c2c35c2fa36fc57f2af34fb1800a17bcc5dc34f7f2e177399eedf88030"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1500.json",
-      "bytes": 5858,
-      "sha256": "7581a4d90523b4391b4d7efb0c2d468eab9532c8ecf183b8b4d0bde0d7821460"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1500.json",
+      "bytes": 5876,
+      "sha256": "6ba610ccdbcb4ed8a3a199c6dff9f2fc812135e7b58235d5fbbadb403e33ab51"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1534.json",
-      "bytes": 34046,
-      "sha256": "de3d27a71f4ebf71a005e1baec23a825769c4b532102a28018cdcbb8951182ca"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1534.json",
+      "bytes": 34049,
+      "sha256": "689a2bdc4872e1bc82d73c783c15f54f047bbbbeb07be57f335adf566ddc4f52"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1535.json",
-      "bytes": 35343,
-      "sha256": "63bb65f3bd4ce2507b77b85bfb537836760dbb0d6cc8c2e73ef9f3fccb764756"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1535.json",
+      "bytes": 35385,
+      "sha256": "bad460d862b425d62c3060add8330b4280908505401cf416bfb831ecdecdc8d0"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1536.json",
-      "bytes": 21375,
-      "sha256": "3dee61f25b63f766d93af79e0bd22bd8dcb6ecff63d77cb7dc1c24aedca08970"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1536.json",
+      "bytes": 21468,
+      "sha256": "188176245c26f402322f2dcc9cb605961d7ba8dd3bd7e3dd01ca3e2b4d43848a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1537.json",
-      "bytes": 13850,
-      "sha256": "a23f6da12e0b2dea99d5b4fa1c1f6fbbe5081432163fe8b1374268abf025d140"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1537.json",
+      "bytes": 13959,
+      "sha256": "c68b761035852ba5d783292c93f7c71469429346e21ab1ff0f5d6aee25ceb045"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1541.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1541.json",
       "bytes": 4045,
-      "sha256": "c192e2cf6a31c7e0d2c13cf356a15726e059da7ee3797570d44f6ca361705a7a"
+      "sha256": "6be89d62ac231134b6fbf3a9587e171ff3ca3368fd0cf5566d5e5c0ea3c9b26c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1542.json",
-      "bytes": 7440,
-      "sha256": "24b84a8163fb4797fe550c7a7ecf92a8acf000e0aa308f1e8fc6f5ea2840274b"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1542.json",
+      "bytes": 7572,
+      "sha256": "da313addb75c9b011addaf42b6fc3b4310aad2e8ad1cec9a23bd6c8f39941f2c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1543.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1543.json",
       "bytes": 5578,
-      "sha256": "4fdb12bc3e05355ab7bbf152667ec3b13891b80b74cbbe1dc783a37dacae3ba3"
+      "sha256": "7916e066137acdc88dba31d5db2614d9d9017ec4b38e3f33268178f7c6dc5d81"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1544.json",
-      "bytes": 6242,
-      "sha256": "c93eb963933f1708bded75a18c68874f1e33f416169c8f525ee24b873efcd026"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1544.json",
+      "bytes": 6316,
+      "sha256": "fb3c2e849b39fcaa2f12580288903575ba8d229f36bdfc17de17b763c64ef942"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1547.json",
-      "bytes": 13498,
-      "sha256": "b3e506b36fa75acd5729632165118a4a4c657286824a79868d906095b7265c42"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1547.json",
+      "bytes": 13504,
+      "sha256": "23b2e22f39f2f1ebf70d67d84ddcb67843055081a7ec5715f05bdcf8884302bd"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1548.json",
-      "bytes": 9533,
-      "sha256": "99486aa2178130e901762c439c78f7fcb7cccc9faae57506d1d97ecc91a163bc"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1548.json",
+      "bytes": 9652,
+      "sha256": "f6399bc6ccff71dafdd8b4860d2bc0f26f77aaa116daa44a050e2818fc356821"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1549.json",
-      "bytes": 8221,
-      "sha256": "3cc9dccc1498d1698d2e33ce9e7d9e36c58766f0fafe2c9e93b39415d151f3f2"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1549.json",
+      "bytes": 8227,
+      "sha256": "d108dd0ad5da52ebbc93b992c00e75b4b54f5add056ac3ba8131e439a76f593a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1550.json",
-      "bytes": 6523,
-      "sha256": "d7a4c973dc3b268038daf5998a41067dfb53bf0aa37e38a337c756bf86188c87"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1550.json",
+      "bytes": 6617,
+      "sha256": "5d698e4171ccbb893d9161d930064df64194aaec28d54b3b28e93af436aac23a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1556.json",
-      "bytes": 17728,
-      "sha256": "23ee5d535b27279044ab483912abae2a5fb25dc296feff5f099c2562d2be90e7"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1556.json",
+      "bytes": 17923,
+      "sha256": "16a55b3479515fee00233b385f128e4fcda4177ed33efd7e0be538fdf8e0ddad"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1557.json",
-      "bytes": 12747,
-      "sha256": "981ed1295e7ceb6f95d1c92b2f1af22580aa7d12b77c898793c60fdc8bd65604"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1557.json",
+      "bytes": 12857,
+      "sha256": "0a0f1ff63d191017749cd37d5cdabacc960b22e0b752858b9fd6dc72cfeee3eb"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1558.json",
-      "bytes": 46862,
-      "sha256": "25e344c9e896cdd21eea96da744cff2d2bfed2d2f469fb74fcc8185af6cda0c7"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1558.json",
+      "bytes": 47043,
+      "sha256": "85c1afcf0a91fab291fe32126329a1cf0e120425cfc640a8ad5bbdfab82edc36"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1559.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1559.json",
       "bytes": 14669,
-      "sha256": "1f9867e1b53e69e547286d3034e369149bbaf8f78a810b72e4607c00f74cdfe5"
+      "sha256": "f1582901c045dfa7b26ff1667fcc56eb0aa4c4bc701ad6d8d4ed4ac36a460ff1"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1560.json",
-      "bytes": 6480,
-      "sha256": "b15860e592fc3cb248021980b70c6ab923ec7f351de2974051d9a1643af0db66"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1560.json",
+      "bytes": 6408,
+      "sha256": "471d64e372f4c06ed60c7a9f57117b3be8682e1e488560ccb5e8692c7526304c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1561.json",
-      "bytes": 6127,
-      "sha256": "ddeb9f775ead96160c2479f7808e3a5a79c39f2b8b7f44adcd1668d33a38c76c"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1561.json",
+      "bytes": 6133,
+      "sha256": "6dc37d2a3e6035a39090284499afc6752b038ad7097da28d4e1d6cb35a743b5c"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1562.json",
-      "bytes": 4392,
-      "sha256": "7eeaaceb2e47135ea84817b91c6e6d09550fa8ddd2b36e726401799b036520cb"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1562.json",
+      "bytes": 4476,
+      "sha256": "519d39746aba8c2ffab46193625e42eb76dc85041d625e476127064c5b6365eb"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1567.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1567.json",
       "bytes": 7531,
       "sha256": "ccfaa0a3400c4c0b3471d128883ed856936833372e92d171752cb20b6d8c5005"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1568.json",
-      "bytes": 4992,
-      "sha256": "5d827e470fc8d45013904730b4e4153a8b59f8137b9dc42562e39d1c6490f424"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1568.json",
+      "bytes": 5049,
+      "sha256": "276147494ab6670b9214ec8f2971088b5eb10bbca9cedcd7aec0b322fa8f0169"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1576.json",
-      "bytes": 27280,
-      "sha256": "8a6ffbadd90f98a3193568ac81dd899a5e0305f1b2706b382e7b0fbb67aba4a9"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1576.json",
+      "bytes": 27471,
+      "sha256": "980153df4424c0a6a837ce98c04d6c40ca7e6385290f41828e79141c9f54d3ed"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1577.json",
-      "bytes": 17717,
-      "sha256": "112c26776f3285c379cca17b4324216d4e561a2b4ada901df24e8cd3812f80bc"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1577.json",
+      "bytes": 17714,
+      "sha256": "4f501f5be50848e3c781762c697836d6d7f0e8e5fb2c1c0741f230f98b9d0ce5"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1578.json",
-      "bytes": 18042,
-      "sha256": "404354342c06df00123e86c7a464e85a47f0eaaa78201054c00f6bef2604d64d"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1578.json",
+      "bytes": 18243,
+      "sha256": "eb6b6650d90e82fda233d8ee9731daac2a0c54e684ba241736cadb71b6bf61cc"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1579.json",
-      "bytes": 29529,
-      "sha256": "240150d9c6d46cfe32f2b61a23e119ef608f4d8d1809e4c7d1b7efe81ced7363"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1579.json",
+      "bytes": 29626,
+      "sha256": "eef7e1359f0a5ab33f24abc08548334475cdb3a818ea2799754c8c3f73239371"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1580.json",
-      "bytes": 21013,
-      "sha256": "8adc2930ed7e6b2b9f6371bd433c3ea2708fd32a5568ad8e0e71339e742d6e9c"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1580.json",
+      "bytes": 21161,
+      "sha256": "6dc271845b63909dc5af7d4d6843664c85818a6974d6ffc525ab7a8a30fd7ce3"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1581.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1581.json",
       "bytes": 16040,
-      "sha256": "c3ed11090bf6603f99504fd7c97868dcbe30365e25aeceda12c61766c537b219"
+      "sha256": "c91c2ac5148edc52cb458ecf370226bc192dff620c6919ce5a4d95c8d6263b84"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1588.json",
-      "bytes": 6618,
-      "sha256": "a853da9ed06f06bb9b5fe049a3a93064cf4f115d7ebe4c205c496b33310529b4"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1588.json",
+      "bytes": 6814,
+      "sha256": "9aefb56173c95f537a3999b6af07dad26d293a121f256a284e34569b0fdb7358"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1589.json",
-      "bytes": 4715,
-      "sha256": "85064734fa954529b0d030614d2f9a7c954884fcf0ad13ac49e60b4ab8b3eef4"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1589.json",
+      "bytes": 4739,
+      "sha256": "872377aefd344b21928a194d5e32af73d2e1d75a0568cd661bdea1577dd778be"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1590.json",
-      "bytes": 5133,
-      "sha256": "bcf211a8b4f29fe62a3f7a67d473ae1fc9162e06a198d3c8db05807849e6653a"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1590.json",
+      "bytes": 5135,
+      "sha256": "70b6853c0bf02b9dbcc886d3f70ec0c688abecf7f6421386b32a2216d0ff7658"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1591.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1591.json",
       "bytes": 5369,
-      "sha256": "33d2eef364f9a12d2b329c483cbff44ccf5e974b5244c3b912a00447df4c5719"
+      "sha256": "16074ab9a0be60d670e6924364fc60e1cf13e01682b7d9f7b562182f81d93270"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1691.json",
-      "bytes": 11051,
-      "sha256": "a9e97b9b2e361640645414cedd4eedb6fdd1980f4b71515582b8ca9c9e0ebe00"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1691.json",
+      "bytes": 11126,
+      "sha256": "cd22ae98e83bc7df839d3ab1957c52a78fa01300b2fd3f502df52784b9fee57d"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1692-p1.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1692-p1.json",
       "bytes": 7894,
       "sha256": "4d0872f15fc67a8ff39a434040b8cc18e24992adab9f0f221a5fab44ef493033"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1692-p2.json",
-      "bytes": 7124,
-      "sha256": "3446e69a5ce96ab9e6c0997b6654c429ac231f7581786b8a71e0fe64e9aa95d4"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1692-p2.json",
+      "bytes": 7244,
+      "sha256": "d74dcc384ee2115e87ca9d7e70b86675dbe92dc3212abc415bdefdcf72526c82"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1692-p3.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1692-p3.json",
       "bytes": 8044,
       "sha256": "15c821f3c1742933adf32656883c7d2d0b3f7dd2ca706acb29f970b5034daa04"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1692-p4.json",
-      "bytes": 8343,
-      "sha256": "a8e938494ab2f5e5267a9342721832413282b830b16a81ef7ccf28874e5c0a6e"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1692-p4.json",
+      "bytes": 8431,
+      "sha256": "9dfd99be7c686a68f0d479135a1087beab35d9af5a0048ef26b9c59b902c170d"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1701-p1.json",
-      "bytes": 6679,
-      "sha256": "9f26776c889df817449ddf9ebc29b72f5706343d9178a2c3eb05cf0a935995cb"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1701-p1.json",
+      "bytes": 6731,
+      "sha256": "4beec8c325c2f58d3b192663cdc451556a087a283b97979a26b296dc2aa9675a"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1701-p2.json",
-      "bytes": 7090,
-      "sha256": "23df7858c8dbb642af3f4eba767bb337f3f66bd36e08ce95a7728633005aa38c"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1701-p2.json",
+      "bytes": 7298,
+      "sha256": "cc81eed22bd31d3d264de63dd55c529402c2f9b62bed0d49c7b83055c690186d"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1704-p1.json",
-      "bytes": 14276,
-      "sha256": "3a0ce5aaa10c22cae5f0cf2d282cf03c3291a9ef28f68220cb2bd1ffc7fb3dd9"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1704-p1.json",
+      "bytes": 14342,
+      "sha256": "f9ba3245fb5640c024c158a6d9dbb9446b5327f3b198cd624774c32e1c262e56"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1704-p2.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1704-p2.json",
       "bytes": 15432,
-      "sha256": "1c167718a1f2b1a49f9685a3ca69a6d07cb033a5a3c952fcaaee6d7977262861"
+      "sha256": "fdf871f4204e51145913b0b94cfde4a0d3a685e17639c3408800687b7ce9f874"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1705-p1.json",
-      "bytes": 39776,
-      "sha256": "f9dfbf9e4fb22fdf75cf2dbc289beee0607b9fe543948521ef1ee047c82550cb"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1705-p1.json",
+      "bytes": 39804,
+      "sha256": "5e3cab07abb37fc6425c883aadbade08d9cad9c957df4eb1855e452784a7ec41"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1705-p2.json",
-      "bytes": 38751,
-      "sha256": "9e860f5bfb422dbd83fc79ea4cfd665ed5993fc393e9fcdb7f17ab1f3c8fd903"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1705-p2.json",
+      "bytes": 38968,
+      "sha256": "3da18b39f568b4e1e30bf7724317e5c022ac055131806da30e046e07c94b4c81"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1705-p3.json",
-      "bytes": 37562,
-      "sha256": "1ac3c32eaa955d7893370828566177660d19411f2ec89e2f9e3ea74b82ec59a1"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1705-p3.json",
+      "bytes": 37752,
+      "sha256": "1446fa64fea6295d53ff5ce18f62968188139087802efeb90e37d79a678b7c30"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1706-p1.json",
-      "bytes": 14688,
-      "sha256": "1d9a329540bf44a275bcba25309e2b417edcaecff10ee7096ee35222ace07562"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1706-p1.json",
+      "bytes": 14769,
+      "sha256": "1df139ba80ef9a92f8e870f637375f1dc0502e96912fdd34bc3b1f73556764b5"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1706-p2.json",
-      "bytes": 14703,
-      "sha256": "fc351f574949f58a3ad71824ad71d4c3efd799b3d22f260dffb376b573d855aa"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1706-p2.json",
+      "bytes": 15023,
+      "sha256": "b97042b9924531e3ca85a13fc8908c7235faf7942797d11cb5828d348c7cc35d"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1706-p3.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1706-p3.json",
       "bytes": 15809,
       "sha256": "b35a17b3019eb05b8ea8d4af0fddc9a314010d83eb8028e40814f435b60f8c3e"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1711-p1.json",
-      "bytes": 18244,
-      "sha256": "0027cc051cc9228829220a257b3f4bae69b81124f954501adbb21902f1af0389"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1711-p1.json",
+      "bytes": 18415,
+      "sha256": "60ac35a1f49fee6d685808d5ee4611192981bf378ce5bda7e11eafc1600976b3"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1711-p2.json",
-      "bytes": 21106,
-      "sha256": "3ef384bc136b3b375e1fa4f6b7abc966edd028b3370c22d007550796f66ac6df"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1711-p2.json",
+      "bytes": 21109,
+      "sha256": "ec3d3012583b5dd9c14f358cdd2036d8b762877583ceee7da1eaee57464a7716"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1719-p1.json",
-      "bytes": 21958,
-      "sha256": "76b2112675ca2ae06f65a32b923873bf9a376eb980b64a8cbcd8909b729cc774"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1719-p1.json",
+      "bytes": 22082,
+      "sha256": "36757ac8fbe64f06d58d7acfbb37608de03e65c26b19827290177f8000a4454e"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1719-p2.json",
-      "bytes": 20049,
-      "sha256": "1b00fec0125d08542b4495cd779329216c7ad8ce1154cfa099b94a3ccd264f29"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1719-p2.json",
+      "bytes": 20058,
+      "sha256": "039386f79ef27b15d445a545faf23be1f0246b13625c0234b8f41b1e68c98042"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1722-p1.json",
-      "bytes": 7827,
-      "sha256": "451e0b90fcf903b5857c524f2fe45b4bf43a4efc6e7580902d88b906b84a5d88"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1722-p1.json",
+      "bytes": 7905,
+      "sha256": "bc65cb27174e3284b75b7a70433123cd2d4fe83891d87f1feeee0d09a0944fa7"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1722-p2.json",
-      "bytes": 5331,
-      "sha256": "91001ca01d2eb1284583e4eede9e752ff6760fae9b2b653c2ade53f0257093c1"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1722-p2.json",
+      "bytes": 5735,
+      "sha256": "4239db39d2a413b5a9be2b4ccc49be030e3a3fd413ca1d9ddfe7df01aac57ea8"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1722-p3.json",
-      "bytes": 6018,
-      "sha256": "828d36b66e8bb9443f9577004ec312e497131e5658e082168bbf7f6cccddf95d"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1722-p3.json",
+      "bytes": 6211,
+      "sha256": "e27ab19f6d8927ffe115019e146f7559949b983efea145e0bce7b500a34c1e81"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1722-p4.json",
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1722-p4.json",
       "bytes": 7032,
-      "sha256": "a31b5b66b809f6e2f0fd8f409f5b7530076bc51310fbccd52d58b983af1048b7"
+      "sha256": "f2a431fc7322a28dcabf42231ec4ed4c4165ab7022470d96b4541a75ec0dcd29"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1726-p1.json",
-      "bytes": 9420,
-      "sha256": "066309fc929e4302ac992be1679a65e9a73d25b6b5f9efe96a42209c52e4a886"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1726-p1.json",
+      "bytes": 9490,
+      "sha256": "1f0e15d7b8bdfb4c8a7ed25a91adf9cfcd0df5460b4b1f0456a7ed7544729f9d"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1726-p2.json",
-      "bytes": 34364,
-      "sha256": "2600c53e1455eb47eab5d0c79c2e6a4e35df9e84f3ec7316408b6c55d67c4361"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1726-p2.json",
+      "bytes": 34931,
+      "sha256": "2b1b4d75cfd17dc6e917e1dfbc18ca732c601c50ebff1685cae6f13be308f1eb"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1726-p3.json",
-      "bytes": 17978,
-      "sha256": "ce3146fa00e2c1f74bccbd22a31d45d86df6d74336e430e1e88e4a5c689a7697"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1726-p3.json",
+      "bytes": 18165,
+      "sha256": "d80f0de08c3bd351b7d3039cd459b9677a38ed4d5d44429aedcc71fd70b9d8b4"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1727.json",
-      "bytes": 18875,
-      "sha256": "ce6174cf5f472a93b999cfb00f2f7c17cd2a250cfb1a9fe9e3af11356258f809"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1727.json",
+      "bytes": 18934,
+      "sha256": "434c915892b78f51bda1cacff19ec3e739b324c16250ab4ded62881bcd2e6374"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1728.json",
-      "bytes": 29693,
-      "sha256": "39834223c01cecaca8f3c4ef36ef2b77906aa5f8acc435ca054e7951d13cee87"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1728.json",
+      "bytes": 29759,
+      "sha256": "4968dfbebebf01f2c0c2dee65aaba3a437cd24762ca90a271f120a9b6bc93ecf"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1743-p1.json",
-      "bytes": 25525,
-      "sha256": "abd42f2a3e5071cab6c956f1bb690926d411452f0ba86355df89c2bef2c19358"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1743-p1.json",
+      "bytes": 25519,
+      "sha256": "d72c95ba6984fd26ed87de5366d80f58244ad6013f76a655f9058a759c743e70"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1743-p2.json",
-      "bytes": 12370,
-      "sha256": "8bd221065803324840ed6f081cf649b7ab64b8911ec409db6af9618e9b94f9f8"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1743-p2.json",
+      "bytes": 12844,
+      "sha256": "27313920ec88b7e54089145aec855478ff5efbb95d4a8fad5026c617177128d8"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1752.json",
-      "bytes": 26175,
-      "sha256": "2a49c9a17f6725c08bf7af8dff709df01ab2d03a7a79961da548b7c9ad10c912"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1752.json",
+      "bytes": 26886,
+      "sha256": "953d4ea118336f34159981c28c1602c9947082fa8057618a590b18d8628fc135"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1753-p1.json",
-      "bytes": 19137,
-      "sha256": "b1d651eca7b058c89750845664e260ae7630f9c04e1d46a8041d1f22763c6aaa"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1753-p1.json",
+      "bytes": 19221,
+      "sha256": "b4a0e5a501239494c4297d470288ce184bf6e032ddb93207ee3f3c3855ba47bb"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1753-p2.json",
-      "bytes": 14956,
-      "sha256": "63311af2f2d4b588b7a4620533fd5d8f08f60e5a3e51c6853a786e4841c596a6"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1753-p2.json",
+      "bytes": 14971,
+      "sha256": "26004eaab5f177d1bbc0cd06177d8f5f30d8911edba343763136d926ec0233a5"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1755-p1.json",
-      "bytes": 5748,
-      "sha256": "f2e5a5684be99f9cdc7034966184b684fcab6e68c94577c3faa2b94ee2736868"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1755-p1.json",
+      "bytes": 5902,
+      "sha256": "862a6f01cce2ef61499ce226324f0055c433c72015e13ef29f9935626c75fbce"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1755-p2.json",
-      "bytes": 7168,
-      "sha256": "e99625935beb294641544c5598015dedc361d57c10a2c07655ea377b9e8c055f"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1755-p2.json",
+      "bytes": 7238,
+      "sha256": "d90249ae846b873187ec2c0a21a8f79c3adc11abe7afcee181fa33915d83dd5d"
     },
     {
-      "path": "app-content/releases/yw-3e77f0f7ffa5d042a6d06763/sha256-ab04efc472f2346bccf4f7e7eb77f35ac75456a7a3af98d426b385a74524bb06/vocab/lesson-1755-p3.json",
-      "bytes": 7833,
-      "sha256": "90a7ff6217302b2ffecedacdeec20e704e97f95f1bdb84f6ce47bcabc2540a0d"
+      "path": "app-content/releases/yw-465046852ef13beebd2e18ae/sha256-7d799da003677a17fd247081855ac3ee1d9b082323713b00b39271a1071fb91c/vocab/lesson-1755-p3.json",
+      "bytes": 7971,
+      "sha256": "640960dbc4bb05f628c828e157b01beb30610c10b5f8082e511c69f0e65b73d3"
     },
     {
       "path": "assets/app.js",
