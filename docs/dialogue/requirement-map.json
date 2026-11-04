@@ -24238,12 +24238,15 @@
         {
           "resourceKey": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v05",
           "canonicalUnitId": "yw:lesson-1722-p2:vocabulary:lesson-1722-p2:v05",
-          "resourceVersion": "sha256:5bec7fe00e423e522baac59578ff182ab42138d191bad99cab1c2a2b708a53a7",
+          "resourceVersion": "sha256:8f560dd7f07d23b87dd2939544c49a34b265cc1d64945dabe1c7b5f1b95a7523",
           "questionKind": "vocabulary",
           "scoringRole": "formative",
-          "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+          "sourceReleaseId": "yw-release-83caa75b6f61afb7",
           "effectiveFrom": "2026-10-13T02:03:44.252Z",
-          "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+          "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+          "priorResourceVersions": [
+            "sha256:5bec7fe00e423e522baac59578ff182ab42138d191bad99cab1c2a2b708a53a7"
+          ]
         },
         {
           "resourceKey": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v06",
@@ -24507,7 +24510,7 @@
         },
         {
           "requirementId": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v05",
-          "sourceVersion": "sha256:5bec7fe00e423e522baac59578ff182ab42138d191bad99cab1c2a2b708a53a7",
+          "sourceVersion": "sha256:8f560dd7f07d23b87dd2939544c49a34b265cc1d64945dabe1c7b5f1b95a7523",
           "source": "formal",
           "dialogueDomain": "vocabulary",
           "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",

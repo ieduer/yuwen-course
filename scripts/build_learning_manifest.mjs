@@ -4,8 +4,12 @@ import { createHash } from "node:crypto";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import {FORMAL_SCOPE_POLICY, ORIGINAL_FORMAL_RELEASE, EXPANSION_FORMAL_RELEASE, FORMAL_REVISION_POLICY} from "../site/formal-scope-policy.js";
-const REVISIONS_PATH = new URL("./formal-revisions/yw-formal-revision-20261104-v1.json", import.meta.url);
+import {FORMAL_SCOPE_POLICY, ORIGINAL_FORMAL_RELEASE, EXPANSION_FORMAL_RELEASE, REVISION_1_FORMAL_RELEASE, FORMAL_REVISION_POLICY, FORMAL_REVISION_POLICY_V2, FORMAL_PRIOR_RELEASES, formalRevisionPolicies} from "../site/formal-scope-policy.js";
+// Revision batches in release order; each names the policy it implements.
+const REVISION_BATCHES = Object.freeze([
+  { policy: FORMAL_REVISION_POLICY, path: new URL("./formal-revisions/yw-formal-revision-20261104-v1.json", import.meta.url) },
+  { policy: FORMAL_REVISION_POLICY_V2, path: new URL("./formal-revisions/yw-formal-revision-20261104-v2.json", import.meta.url) },
+]);
 import {
   hashEligibilitySourceItem,
   isVocabItemEligible,
@@ -256,20 +260,35 @@ export function buildLearningManifest() {
   });
 
   // Owner-authorized item corrections: each revised item pins both its prior and
-  // its new resource version; reconstructing the prior versions must reproduce
-  // both accepted releases exactly, so any other content change still fails.
-  const revisionDoc = JSON.parse(readFileSync(REVISIONS_PATH, "utf8"));
-  if (revisionDoc.policyVersion !== FORMAL_REVISION_POLICY.policyVersion
-    || revisionDoc.revisions.length !== FORMAL_REVISION_POLICY.revisedItemCount) throw Error("formal revision document invalid");
-  const revisionByKey = new Map(revisionDoc.revisions.map(r => [r.resourceKey, r]));
-  if (revisionByKey.size !== revisionDoc.revisions.length) throw Error("duplicate formal revision");
+  // its new resource version. Undoing the batches newest first must reproduce
+  // every accepted release exactly (revision 1, expansion, original elective),
+  // so any other content change still fails. An item is revised at most once.
+  const batches = REVISION_BATCHES.map(({ policy, path }) => {
+    const doc = JSON.parse(readFileSync(path, "utf8"));
+    if (doc.policyVersion !== policy.policyVersion || doc.revisions.length !== policy.revisedItemCount) throw Error(`formal revision document invalid: ${policy.policyVersion}`);
+    const byKey = new Map(doc.revisions.map(r => [r.resourceKey, r]));
+    if (byKey.size !== doc.revisions.length) throw Error("duplicate formal revision");
+    return { policy, byKey };
+  });
+  const revisionByKey = new Map();
+  for (const batch of batches) for (const [key, revision] of batch.byKey) {
+    if (revisionByKey.has(key)) throw Error(`second-level formal revision is not supported: ${key}`);
+    revisionByKey.set(key, { ...revision, policy: batch.policy, batchIndex: batches.indexOf(batch) });
+  }
   for (const [key, revision] of revisionByKey) {
     const item = items.find(entry => entry.resourceKey === key);
     if (!item || item.canonicalUnitId !== revision.canonicalUnitId || item.resourceVersion !== revision.resourceVersion
       || revision.priorResourceVersion === revision.resourceVersion) throw Error(`formal revision drift: ${key}`);
   }
-  const priorItems = items.map(item => revisionByKey.has(item.resourceKey)
-    ? {...item, resourceVersion: revisionByKey.get(item.resourceKey).priorResourceVersion} : item);
+  const undo = (values, batchIndex) => values.map(item => {
+    const revision = revisionByKey.get(item.resourceKey);
+    return revision && revision.batchIndex >= batchIndex ? {...item, resourceVersion: revision.priorResourceVersion} : item;
+  });
+  const revisionReleaseIds = [REVISION_1_FORMAL_RELEASE.sourceReleaseId, sourceReleaseId];
+  if (releaseIdForItems(undo(items, 1)) !== REVISION_1_FORMAL_RELEASE.sourceReleaseId
+    || items.length !== REVISION_1_FORMAL_RELEASE.itemCount
+    || `sha256:${keyHash}` !== REVISION_1_FORMAL_RELEASE.resourceKeyHash) throw Error("revision 1 release inventory changed");
+  const priorItems = undo(items, 0);
   const originalItems = priorItems.filter(item => lessons.some(lesson => lesson.id === item.sourceId && ORIGINAL_BOOK_IDS.includes(lesson.blockId)));
   const originalKeyHash = sha256(originalItems.map(item => item.resourceKey).sort().join("\n"));
   // The accepted elective release is immutable. New task-pool entries cannot
@@ -289,7 +308,7 @@ export function buildLearningManifest() {
       ? {...item, sourceReleaseId: ORIGINAL_FORMAL_RELEASE.sourceReleaseId}
       : {...item, effectiveFrom:FORMAL_SCOPE_POLICY.effectiveFrom, formalScopePolicyVersion:FORMAL_SCOPE_POLICY.policyVersion, sourceReleaseId: EXPANSION_FORMAL_RELEASE.sourceReleaseId};
     return revision
-      ? {...base, sourceReleaseId, formalRevisionPolicyVersion: FORMAL_REVISION_POLICY.policyVersion,
+      ? {...base, sourceReleaseId: revisionReleaseIds[revision.batchIndex], formalRevisionPolicyVersion: revision.policy.policyVersion,
         revisionOf: {sourceReleaseId: revision.priorSourceReleaseId, resourceVersion: revision.priorResourceVersion}}
       : base;
   });
@@ -306,8 +325,8 @@ export function buildLearningManifest() {
     completionKind: "answer_submitted",
     thresholdPercent: 90,
     formalScopeExpansion: FORMAL_SCOPE_POLICY,
-    formalRevision: FORMAL_REVISION_POLICY,
-    priorReleases: [ORIGINAL_FORMAL_RELEASE, EXPANSION_FORMAL_RELEASE],
+    formalRevisions: formalRevisionPolicies(sourceReleaseId),
+    priorReleases: FORMAL_PRIOR_RELEASES,
     lessonCount: lessons.length,
     vocabEligibility: {
       policyVersion: eligibility.policyVersion,

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "yw-formal-revision-20261104-v2",
+  "reviewReport": "_meta/reports/operations/bank-fix-yw-20261104/REPORT.md",
+  "revisedItemCount": 1,
+  "revisions": [
+    {
+      "resourceKey": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v05",
+      "canonicalUnitId": "yw:lesson-1722-p2:vocabulary:lesson-1722-p2:v05",
+      "priorSourceReleaseId": "yw-release-5bcdbb23da04c33d",
+      "priorResourceVersion": "sha256:5bec7fe00e423e522baac59578ff182ab42138d191bad99cab1c2a2b708a53a7",
+      "resourceVersion": "sha256:8f560dd7f07d23b87dd2939544c49a34b265cc1d64945dabe1c7b5f1b95a7523",
+      "answerKeyChanged": false
+    }
+  ]
+}

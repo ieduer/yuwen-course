@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "curriculumVersion": "yw-dialogue-catalog-5d25ecbe5ceaba3977eb",
+  "curriculumVersion": "yw-dialogue-catalog-e69e2f41a8bda2e53d79",
   "lessons": [
     {
       "lessonId": "lesson-1690",
@@ -503,7 +503,7 @@
       "mode": "poetry",
       "blockId": "bixiu-shang",
       "blockTitle": "必修上",
-      "curriculumVersion": "yw-dialogue-c0298a26c9b7bc745eab",
+      "curriculumVersion": "yw-dialogue-b675344934505ee5c1a4",
       "personaKind": "source-guide",
       "status": "source-ready",
       "sourceReviewRequired": false

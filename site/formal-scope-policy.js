@@ -15,7 +15,7 @@ export const EXPANSION_FORMAL_RELEASE = Object.freeze({
 });
 // Owner-authorized content corrections of existing items (suen 2026-11-04,
 // bank-qa-openai-20261104). A corrected item keeps its canonical unit, role and
-// effective date; only its resource version moves to the current release.
+// effective date; only its resource version moves to the release that revised it.
 // Earlier evidence keeps its own release and version; nothing is regraded.
 export const FORMAL_REVISION_POLICY = Object.freeze({
   policyVersion:'yw-formal-revision-20261104-v1',
@@ -26,6 +26,34 @@ export const FORMAL_REVISION_POLICY = Object.freeze({
   creditUnit:'canonicalUnitId',
   priorVersionPolicy:'prior_release_versions_remain_valid_evidence_identities',
 });
+// The first revision release; immutable once a later revision release exists.
+// Its 180 items keep this release as their identity.
+export const REVISION_1_FORMAL_RELEASE = Object.freeze({
+  manifestVersion:'yw-e8a6b72248be1cd8',
+  sourceReleaseId:'yw-release-6ceed2f673344492',
+  resourceKeyHash:'sha256:e8a6b72248be1cd8af86d37ec66bd4381d1546e8306b36023b145decbf044866',
+  itemCount:1633,
+});
+// Second correction batch (suen 2026-11-04 「還沒做的一併做完」): a whole-item
+// redesign of lesson-1722-p2:v05. Each item is revised at most once (one level).
+export const FORMAL_REVISION_POLICY_V2 = Object.freeze({
+  policyVersion:'yw-formal-revision-20261104-v2',
+  authority:'suen-20261104-complete-remaining',
+  authorizedAt:'2026-11-04T00:00:00.000Z',
+  revisedItemCount:1,
+  historicalWork:'preserve_prior_versions_no_regrade',
+  creditUnit:'canonicalUnitId',
+  priorVersionPolicy:'prior_release_versions_remain_valid_evidence_identities',
+});
+// Every revision policy names the release that introduced it. The last one is
+// the current release (the manifest's own sourceReleaseId).
+export function formalRevisionPolicies(currentReleaseId){
+  return [
+    Object.freeze({...FORMAL_REVISION_POLICY,sourceReleaseId:REVISION_1_FORMAL_RELEASE.sourceReleaseId}),
+    Object.freeze({...FORMAL_REVISION_POLICY_V2,sourceReleaseId:currentReleaseId}),
+  ];
+}
+export const FORMAL_PRIOR_RELEASES = Object.freeze([ORIGINAL_FORMAL_RELEASE,EXPANSION_FORMAL_RELEASE,REVISION_1_FORMAL_RELEASE]);
 export const FORMAL_SCOPE_POLICY = Object.freeze({
   policyVersion:'yw-formal-scope-20261013-v2',
   authority:'direct-suen-instruction-01a132c3',
@@ -42,26 +70,29 @@ export const FORMAL_SCOPE_POLICY = Object.freeze({
 export function validateFormalScopeExpansion(manifest){
   const policy=manifest?.formalScopeExpansion;
   if(!policy)return null;
-  const revision=manifest.formalRevision||null;
-  const expectedPrior=revision?[ORIGINAL_FORMAL_RELEASE,EXPANSION_FORMAL_RELEASE]:[ORIGINAL_FORMAL_RELEASE];
+  const revisions=manifest.formalRevisions||null;
+  const expectedPrior=revisions?FORMAL_PRIOR_RELEASES:[ORIGINAL_FORMAL_RELEASE];
   if(JSON.stringify(policy)!==JSON.stringify(FORMAL_SCOPE_POLICY)
-    ||(revision&&JSON.stringify(revision)!==JSON.stringify(FORMAL_REVISION_POLICY))
+    ||manifest.formalRevision!==undefined
+    ||(revisions&&JSON.stringify(revisions)!==JSON.stringify(formalRevisionPolicies(manifest.sourceReleaseId)))
     ||JSON.stringify(manifest.priorReleases)!==JSON.stringify(expectedPrior))throw Error('formal scope admission policy invalid');
+  const revisionFor=item=>(revisions||[]).find(entry=>entry.policyVersion===item.formalRevisionPolicyVersion)||null;
+  const homes=[ORIGINAL_FORMAL_RELEASE.sourceReleaseId,EXPANSION_FORMAL_RELEASE.sourceReleaseId];
   const revised=manifest.items.filter(item=>item.formalRevisionPolicyVersion);
-  if(revised.length!==(revision?revision.revisedItemCount:0)
-    ||revised.some(item=>item.formalRevisionPolicyVersion!==revision.policyVersion||item.sourceReleaseId!==manifest.sourceReleaseId
-      ||!item.revisionOf||!expectedPrior.some(release=>release.sourceReleaseId===item.revisionOf.sourceReleaseId)
-      ||!/^sha256:[a-f0-9]{64}$/.test(String(item.revisionOf.resourceVersion||''))||item.revisionOf.resourceVersion===item.resourceVersion))throw Error('formal revision inventory invalid');
-  const addedRelease=revision?EXPANSION_FORMAL_RELEASE.sourceReleaseId:manifest.sourceReleaseId;
+  if((revisions||[]).some(entry=>revised.filter(item=>item.formalRevisionPolicyVersion===entry.policyVersion).length!==entry.revisedItemCount)
+    ||revised.some(item=>{const entry=revisionFor(item);return !entry||item.sourceReleaseId!==entry.sourceReleaseId
+      ||!item.revisionOf||!homes.includes(item.revisionOf.sourceReleaseId)
+      ||!/^sha256:[a-f0-9]{64}$/.test(String(item.revisionOf.resourceVersion||''))||item.revisionOf.resourceVersion===item.resourceVersion;}))throw Error('formal revision inventory invalid');
+  const addedRelease=revisions?EXPANSION_FORMAL_RELEASE.sourceReleaseId:manifest.sourceReleaseId;
   const prior=manifest.items.filter(item=>!item.formalScopePolicyVersion);
   const added=manifest.items.filter(item=>item.formalScopePolicyVersion);
   if(prior.length!==869||added.length!==764||new Set(added.map(item=>item.sourceId)).size!==88
     ||prior.some(item=>item.effectiveFrom!=='2026-08-12T00:00:00+08:00'
-      ||item.sourceReleaseId!==(item.formalRevisionPolicyVersion?manifest.sourceReleaseId:ORIGINAL_FORMAL_RELEASE.sourceReleaseId)
+      ||item.sourceReleaseId!==(item.formalRevisionPolicyVersion?revisionFor(item).sourceReleaseId:ORIGINAL_FORMAL_RELEASE.sourceReleaseId)
       ||(item.formalRevisionPolicyVersion&&item.revisionOf.sourceReleaseId!==ORIGINAL_FORMAL_RELEASE.sourceReleaseId))
     ||prior.filter(item=>item.evidenceRole==='a_plus_gate').length!==768
     ||added.some(item=>item.evidenceRole!==(item.questionKind==='evaluation'?'non_scoring':'formative')||item.formalScopePolicyVersion!==policy.policyVersion||item.effectiveFrom!==policy.effectiveFrom
-      ||item.sourceReleaseId!==(item.formalRevisionPolicyVersion?manifest.sourceReleaseId:addedRelease)
+      ||item.sourceReleaseId!==(item.formalRevisionPolicyVersion?revisionFor(item).sourceReleaseId:addedRelease)
       ||(item.formalRevisionPolicyVersion&&item.revisionOf.sourceReleaseId!==EXPANSION_FORMAL_RELEASE.sourceReleaseId)))throw Error('formal scope inventory invalid');
   return policy;
 }

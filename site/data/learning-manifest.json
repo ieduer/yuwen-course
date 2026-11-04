@@ -3,7 +3,7 @@
   "siteKey": "yw",
   "title": "語文課 · 必修與選擇性必修見效題目",
   "manifestVersion": "yw-e8a6b72248be1cd8",
-  "sourceReleaseId": "yw-release-6ceed2f673344492",
+  "sourceReleaseId": "yw-release-83caa75b6f61afb7",
   "mappingVersion": "yw-canonical-learning-mapping-v1",
   "lineagePolicy": "append_only_canonical_unit_resource_versions_v1",
   "resourceKeyHash": "sha256:e8a6b72248be1cd8af86d37ec66bd4381d1546e8306b36023b145decbf044866",
@@ -26,15 +26,28 @@
     "annualPolicyVersion": "yw-aplus-2026-2027-v1",
     "requiredDistinctCreditUnits": 692
   },
-  "formalRevision": {
-    "policyVersion": "yw-formal-revision-20261104-v1",
-    "authority": "suen-20261104-bank-qa-full-fix",
-    "authorizedAt": "2026-11-04T00:00:00.000Z",
-    "revisedItemCount": 180,
-    "historicalWork": "preserve_prior_versions_no_regrade",
-    "creditUnit": "canonicalUnitId",
-    "priorVersionPolicy": "prior_release_versions_remain_valid_evidence_identities"
-  },
+  "formalRevisions": [
+    {
+      "policyVersion": "yw-formal-revision-20261104-v1",
+      "authority": "suen-20261104-bank-qa-full-fix",
+      "authorizedAt": "2026-11-04T00:00:00.000Z",
+      "revisedItemCount": 180,
+      "historicalWork": "preserve_prior_versions_no_regrade",
+      "creditUnit": "canonicalUnitId",
+      "priorVersionPolicy": "prior_release_versions_remain_valid_evidence_identities",
+      "sourceReleaseId": "yw-release-6ceed2f673344492"
+    },
+    {
+      "policyVersion": "yw-formal-revision-20261104-v2",
+      "authority": "suen-20261104-complete-remaining",
+      "authorizedAt": "2026-11-04T00:00:00.000Z",
+      "revisedItemCount": 1,
+      "historicalWork": "preserve_prior_versions_no_regrade",
+      "creditUnit": "canonicalUnitId",
+      "priorVersionPolicy": "prior_release_versions_remain_valid_evidence_identities",
+      "sourceReleaseId": "yw-release-83caa75b6f61afb7"
+    }
+  ],
   "priorReleases": [
     {
       "manifestVersion": "yw-e310d45b1d81e9ad",
@@ -45,6 +58,12 @@
     {
       "manifestVersion": "yw-e8a6b72248be1cd8",
       "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+      "resourceKeyHash": "sha256:e8a6b72248be1cd8af86d37ec66bd4381d1546e8306b36023b145decbf044866",
+      "itemCount": 1633
+    },
+    {
+      "manifestVersion": "yw-e8a6b72248be1cd8",
+      "sourceReleaseId": "yw-release-6ceed2f673344492",
       "resourceKeyHash": "sha256:e8a6b72248be1cd8af86d37ec66bd4381d1546e8306b36023b145decbf044866",
       "itemCount": 1633
     }
@@ -9851,7 +9870,7 @@
       "questionType": "usage",
       "questionIndex": 3,
       "canonicalUnitId": "yw:lesson-1722-p2:vocabulary:lesson-1722-p2:v05",
-      "resourceVersion": "sha256:5bec7fe00e423e522baac59578ff182ab42138d191bad99cab1c2a2b708a53a7",
+      "resourceVersion": "sha256:8f560dd7f07d23b87dd2939544c49a34b265cc1d64945dabe1c7b5f1b95a7523",
       "mappingVersion": "yw-canonical-learning-mapping-v1",
       "dimensionKey": "retention",
       "competencyKey": "vocabulary",
@@ -9860,7 +9879,12 @@
       "effectiveFrom": "2026-10-13T02:03:44.252Z",
       "effectiveTo": null,
       "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
-      "sourceReleaseId": "yw-release-5bcdbb23da04c33d"
+      "sourceReleaseId": "yw-release-83caa75b6f61afb7",
+      "formalRevisionPolicyVersion": "yw-formal-revision-20261104-v2",
+      "revisionOf": {
+        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "resourceVersion": "sha256:5bec7fe00e423e522baac59578ff182ab42138d191bad99cab1c2a2b708a53a7"
+      }
     },
     {
       "resourceKey": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v06",

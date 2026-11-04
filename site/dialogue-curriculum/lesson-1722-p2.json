@@ -373,7 +373,7 @@
         "explanation",
         "independent"
       ],
-      "rule": "沿用原題準據：木欣欣以向荣。語境義：连词，表示结果。「忧伤以终老」中「以」表示因果，即因为忧伤而终老。C项「木欣欣以向荣」为修饰语助词。",
+      "rule": "沿用原題準據：连词，表示结果，句意是两地分离，结果只能在忧伤中度过一生。語境義：连词，表示结果。教材注释：「以」，连词，表示结果。上句「同心而离居」写相爱的人分处两地，下句写由此造成的结果：只能在忧伤中度过一生，课文提示也说「只能让忧伤陪伴自己终老」。A、B把「以」当作介词，D把它看成表示目的，都不合语境。",
       "sourcePassages": [
         "lesson-1722-p2:p3"
       ],
@@ -590,12 +590,15 @@
       "legacy": {
         "resourceKey": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v05",
         "canonicalUnitId": "yw:lesson-1722-p2:vocabulary:lesson-1722-p2:v05",
-        "resourceVersion": "sha256:5bec7fe00e423e522baac59578ff182ab42138d191bad99cab1c2a2b708a53a7",
+        "resourceVersion": "sha256:8f560dd7f07d23b87dd2939544c49a34b265cc1d64945dabe1c7b5f1b95a7523",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-83caa75b6f61afb7",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:5bec7fe00e423e522baac59578ff182ab42138d191bad99cab1c2a2b708a53a7"
+        ]
       }
     },
     {
@@ -754,23 +757,25 @@
       "word": "以",
       "sourceSentence": "忧伤以 终老",
       "meaning": "连词，表示结果",
-      "explanation": "「忧伤以终老」中「以」表示因果，即因为忧伤而终老。C项「木欣欣以向荣」为修饰语助词。",
+      "explanation": "教材注释：「以」，连词，表示结果。上句「同心而离居」写相爱的人分处两地，下句写由此造成的结果：只能在忧伤中度过一生，课文提示也说「只能让忧伤陪伴自己终老」。A、B把「以」当作介词，D把它看成表示目的，都不合语境。",
       "type": "usage",
       "difficulty": 3,
-      "question": "下列句中的「以」与「忧伤以终老」用法相同的是",
+      "question": "「同心而离居，忧伤以终老」中「以」的用法，理解正确的一项是",
       "options": [
-        "以其无礼于晋",
-        "不以物喜，不以己悲",
-        "木欣欣以向荣",
-        "余与四人拥火以入"
+        "介词，相当于「因为」，句意是因为忧伤才终老",
+        "介词，相当于「用」，句意是用忧伤来度过一生",
+        "连词，表示结果，句意是两地分离，结果只能在忧伤中度过一生",
+        "连词，表示目的，句意是为了忧伤而终老"
       ],
       "answerIndex": 2,
-      "sourceAnswer": "木欣欣以向荣",
-      "sourceRefs": [],
+      "sourceAnswer": "连词，表示结果，句意是两地分离，结果只能在忧伤中度过一生",
+      "sourceRefs": [
+        "教材注释"
+      ],
       "version": "vocab-set-a1f96426bdfcce7b",
       "dictionaryStatus": "verify-context-against-source-image",
       "variants": [
-        "語境：「忧伤以 终老」\n下列句中的「以」与「忧伤以终老」用法相同的是\nA. 以其无礼于晋\nB. 不以物喜，不以己悲\nC. 木欣欣以向荣\nD. 余与四人拥火以入\n請選出答案，並用自己的話說明判斷依據。",
+        "語境：「忧伤以 终老」\n「同心而离居，忧伤以终老」中「以」的用法，理解正确的一项是\nA. 介词，相当于「因为」，句意是因为忧伤才终老\nB. 介词，相当于「用」，句意是用忧伤来度过一生\nC. 连词，表示结果，句意是两地分离，结果只能在忧伤中度过一生\nD. 连词，表示目的，句意是为了忧伤而终老\n請選出答案，並用自己的話說明判斷依據。",
         "請改寫「忧伤以 终老」的句意，解釋「以」在句中的用法及語境依據；只報詞性名稱不足以說明。"
       ]
     },
@@ -984,12 +989,15 @@
       {
         "resourceKey": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v05",
         "canonicalUnitId": "yw:lesson-1722-p2:vocabulary:lesson-1722-p2:v05",
-        "resourceVersion": "sha256:5bec7fe00e423e522baac59578ff182ab42138d191bad99cab1c2a2b708a53a7",
+        "resourceVersion": "sha256:8f560dd7f07d23b87dd2939544c49a34b265cc1d64945dabe1c7b5f1b95a7523",
         "questionKind": "vocabulary",
         "scoringRole": "formative",
-        "sourceReleaseId": "yw-release-5bcdbb23da04c33d",
+        "sourceReleaseId": "yw-release-83caa75b6f61afb7",
         "effectiveFrom": "2026-10-13T02:03:44.252Z",
-        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2"
+        "formalScopePolicyVersion": "yw-formal-scope-20261013-v2",
+        "priorResourceVersions": [
+          "sha256:5bec7fe00e423e522baac59578ff182ab42138d191bad99cab1c2a2b708a53a7"
+        ]
       },
       {
         "resourceKey": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v06",
@@ -1253,7 +1261,7 @@
       },
       {
         "requirementId": "effect:lesson-1722-p2:vocab:lesson-1722-p2:v05",
-        "sourceVersion": "sha256:5bec7fe00e423e522baac59578ff182ab42138d191bad99cab1c2a2b708a53a7",
+        "sourceVersion": "sha256:8f560dd7f07d23b87dd2939544c49a34b265cc1d64945dabe1c7b5f1b95a7523",
         "source": "formal",
         "dialogueDomain": "vocabulary",
         "conversationEquivalent": "回到原句，自述語境義及依據；每個必考詞分別核對。",
@@ -1694,7 +1702,7 @@
       }
     ]
   },
-  "curriculumVersion": "yw-dialogue-c0298a26c9b7bc745eab",
+  "curriculumVersion": "yw-dialogue-b675344934505ee5c1a4",
   "formalScopeExpansion": {
     "policyVersion": "yw-formal-scope-20261013-v2",
     "authority": "direct-suen-instruction-01a132c3",
