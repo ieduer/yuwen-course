@@ -118,7 +118,7 @@
    "decision": "question",
    "reason": "多义词，此处语境义为借助",
    "contextMeaning": "借助",
-   "sourceSentence": " 舆马 者，非利足 也，而致 千里；",
+   "sourceSentence": "假 舆马 者，非利足 也，而致 千里；",
    "type": "contextual-choice",
    "question": "“假舆马者”中“假”的意思是",
    "options": [
@@ -134,7 +134,7 @@
     "《汉语大词典》"
    ],
    "location": {
-    "charIndex": 192
+    "charIndex": 191
    }
   },
   {
@@ -227,12 +227,12 @@
    "question": "下列各句中“焉”的用法与“风雨兴焉”中的“焉”相同的一项是",
    "options": [
     "复驾言兮焉求",
-    "圣心备焉",
+    "积水成渊，蛟龙生焉",
     "且焉置土石",
     "寒暑易节，始一反焉"
    ],
    "answerIndex": 1,
-   "explanation": "文中的“焉”为兼词，相当于“于此”。B项“圣心备焉”中的“焉”是语气词。",
+   "explanation": "「风雨兴焉」与B项「蛟龙生焉」中的「焉」均为兼词，相当于「于此」。A项「焉」为疑问代词，相当于「何」，意为「什么」；C项「焉」为疑问代词，意为「哪里」；D项「焉」为句末语气词。",
    "difficulty": 3,
    "sourceRefs": [
     "《古汉语常用字字典》"
@@ -300,14 +300,14 @@
    "decision": "question",
    "reason": "重要动词，考查语境义",
    "contextMeaning": "刻",
-   "sourceSentence": " 而舍之，朽木不折；锲而不舍，金石可镂 。",
+   "sourceSentence": "锲 而舍之，朽木不折；锲而不舍，金石可镂 。",
    "type": "contextual-choice",
    "question": "“锲而舍之”中“锲”的意思是",
    "options": [
     "坚持",
     "刻",
     "放弃",
-    "雕琢"
+    "磨砺"
    ],
    "answerIndex": 1,
    "explanation": "“锲”意为刻。",
@@ -316,7 +316,7 @@
     "王力《古汉语常用字字典》"
    ],
    "location": {
-    "charIndex": 331
+    "charIndex": 330
    }
   },
   {

@@ -67,8 +67,8 @@
    "reason": "典型的古今异义词，极易产生误读",
    "contextMeaning": "外交使者",
    "sourceSentence": "若舍郑以为东道主,行李之往来,共其乏困",
-   "type": "gu-jin",
-   "question": "下列句中加点词语与现代汉语意思相同的一项是",
+   "type": "contextual-choice",
+   "question": "下列句中「行李」指外交使者的一项是",
    "options": [
     "行李之往来",
     "收拾好行李准备出发",
@@ -76,7 +76,7 @@
     "你的行李寄存在前台"
    ],
    "answerIndex": 0,
-   "explanation": "古义指外交使者，今义指行李物品。",
+   "explanation": "A项的「行李」指外交使者；B、C、D项的「行李」均指出门所带的包裹、箱子等。因此选A。",
    "difficulty": 1,
    "sourceRefs": [
     "王力《古汉语常用字字典》"

@@ -46,18 +46,18 @@
    "annotated": true,
    "decision": "question",
    "reason": "古今异义，极易误解为现代汉语中“随意”之意。",
-   "contextMeaning": "遍布",
+   "contextMeaning": "满、全",
    "sourceSentence": "漫江碧透",
    "type": "contextual-choice",
    "question": "“漫江碧透”中“漫”的意思是：",
    "options": [
     "随意",
-    "充满",
-    "遍布",
+    "水势浩大",
+    "满、全",
     "漫长"
    ],
    "answerIndex": 2,
-   "explanation": "漫，遍布之意，指湘江满江碧透。",
+   "explanation": "漫，满、全之意；「漫江碧透」指满江碧绿澄澈。",
    "difficulty": 2,
    "sourceRefs": [],
    "location": {
@@ -153,7 +153,7 @@
     "捕鱼"
    ],
    "answerIndex": 1,
-   "explanation": "此处借指游泳，语出《庄子》相关典故。",
+   "explanation": "「击水」在此指游泳。「到中流击水」回忆青年时代到江心游泳的情景。",
    "difficulty": 1,
    "sourceRefs": [],
    "location": {

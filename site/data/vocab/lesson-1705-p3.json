@@ -42,7 +42,7 @@
    "type": "gu-jin",
    "question": "「委身为贾人妇」中「委身」的意思是",
    "options": [
-    "托付身心",
+    "委曲求全",
     "嫁人",
     "舍弃身体",
     "侍奉他人"
@@ -61,18 +61,18 @@
    "annotated": true,
    "decision": "question",
    "reason": "古今义差异大，现代多为形容词，此处为使动用法。",
-   "contextMeaning": "使……畅快",
+   "contextMeaning": "畅快地、尽情地",
    "sourceSentence": "使快 弹数曲",
    "type": "contextual-choice",
    "question": "「使快弹数曲」中「快」的用法是",
    "options": [
     "形容词，形容弹得很快",
     "副词，表示迅速",
-    "使动用法，使……畅快",
+    "形容词作状语，畅快地、尽情地",
     "名词，快乐的事情"
    ],
    "answerIndex": 2,
-   "explanation": "此处意为让弹奏者尽情弹奏，使人畅快。",
+   "explanation": "「使」意为让；「快」意为畅快、尽情，在此为形容词作状语，修饰「弹」。「使快弹数曲」意为让她尽情弹奏几支曲子。",
    "difficulty": 2,
    "sourceRefs": [],
    "location": {
@@ -96,7 +96,7 @@
     "光泽"
    ],
    "answerIndex": 2,
-   "explanation": "古汉语中颜色多指人的面容、脸色。",
+   "explanation": "此处「颜色」指容貌、姿色；「颜色故」意为容颜衰老，写琵琶女年长色衰，故选C。",
    "difficulty": 1,
    "sourceRefs": [],
    "location": {
@@ -163,7 +163,7 @@
    "question": "「沉吟放拨插弦中」中「沉吟」表现了弹者怎样的心理？",
    "options": [
     "急躁不安",
-    "犹豫不决",
+    "羞愤难当",
     "沉思迟疑",
     "欢快兴奋"
    ],

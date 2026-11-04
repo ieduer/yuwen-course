@@ -70,7 +70,7 @@
    "type": "substitution",
    "question": "「会须一饮三百杯」中「会须」可以替换为",
    "options": [
-    "一定需要",
+    "曾经需要",
     "应当",
     "能够",
     "只会"
@@ -125,7 +125,7 @@
     "只需",
     "直接应当",
     "径直需要",
-    "必须"
+    "暂且"
    ],
    "answerIndex": 1,
    "explanation": "径须，表示毫不犹豫地去做，即直须、应当。",
@@ -143,18 +143,18 @@
    "annotated": true,
    "decision": "question",
    "reason": "多义词，在此处作动词性短语，易产生歧义",
-   "contextMeaning": "牵出",
+   "contextMeaning": "拿、取",
    "sourceSentence": "呼儿将出换美酒",
    "type": "contextual-choice",
    "question": "「呼儿将出换美酒」中「将」的用法是",
    "options": [
     "副词，将要",
-    "动词，牵出",
+    "动词，拿、取",
     "介词，把",
-    "动词，拿出"
+    "动词，率领"
    ],
    "answerIndex": 1,
-   "explanation": "此处「将」为动词，指牵出（马）或拿出（裘）。",
+   "explanation": "「将」在此作动词，意为拿、取；「将出」承接前文的「五花马，千金裘」，指牵出马、拿出裘去换美酒。",
    "difficulty": 2,
    "sourceRefs": [
     "课文注解"
@@ -195,7 +195,7 @@
    "annotated": false,
    "decision": "question",
    "reason": "词类活用，形容词作使动用法，是古诗常见考点",
-   "contextMeaning": "使……空",
+   "contextMeaning": "徒然地、白白地",
    "sourceSentence": "莫使金樽空对月",
    "type": "usage",
    "question": "「莫使金樽空对月」中「空」的用法是",
@@ -205,8 +205,8 @@
     "形容词作动词，使……空",
     "副词，徒然地"
    ],
-   "answerIndex": 2,
-   "explanation": "空，此处是形容词作使动，意为使……空着。",
+   "answerIndex": 3,
+   "explanation": "空，副词，意为「徒然地、白白地」，在句中修饰「对月」。全句意为不要让金樽白白地对着月亮，意在劝人尽情饮酒。",
    "difficulty": 3,
    "sourceRefs": [
     "《古汉语常用字字典》"

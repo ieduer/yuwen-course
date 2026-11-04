@@ -21,7 +21,7 @@
     "享用",
     "犒劳",
     "祭祀",
-    "款待"
+    "赏赐钱财"
    ],
    "answerIndex": 1,
    "explanation": "此处指项羽准备用酒食犒劳士兵。",
@@ -72,7 +72,7 @@
    "options": [
     "幸运",
     "宠爱",
-    "临幸",
+    "侥幸",
     "希望"
    ],
    "answerIndex": 1,
@@ -273,18 +273,18 @@
    "annotated": false,
    "decision": "question",
    "reason": "语境义，影响对行军路线和情节发展的理解",
-   "contextMeaning": "秘密地",
+   "contextMeaning": "从小路",
    "sourceSentence": "道芷阳间行。",
    "type": "contextual-choice",
    "question": "「道芷阳间行」中「间」的意思是",
    "options": [
     "间隔",
     "中间",
-    "秘密地",
+    "从小路",
     "参与"
    ],
    "answerIndex": 2,
-   "explanation": "指秘密地、抄小路行走。",
+   "explanation": "间，从小路，名词作状语。「道芷阳间行」意为取道芷阳，从小路走。",
    "difficulty": 2,
    "sourceRefs": [
     "《汉语大词典》"

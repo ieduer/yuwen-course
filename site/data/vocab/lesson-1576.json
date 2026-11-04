@@ -71,12 +71,12 @@
    "question": "「终鲜兄弟」中「鲜」的意思是",
    "options": [
     "新鲜",
-    "少",
+    "众多",
     "没有",
     "鲜明"
    ],
    "answerIndex": 2,
-   "explanation": "此处“鲜”通“少”，但在语境中引申为“没有”。",
+   "explanation": "「鲜」读xiǎn，有「少」的意思；此处依教材注释解作「没有」。「终鲜兄弟」意为又没有兄弟。",
    "difficulty": 2,
    "sourceRefs": [
     "王力《古汉语常用字字典》"
@@ -195,7 +195,7 @@
    "annotated": false,
    "decision": "question",
    "reason": "被动标志词，核心语法点",
-   "contextMeaning": "被",
+   "contextMeaning": "看见",
    "sourceSentence": "非独蜀之人士及二州牧伯所见明知",
    "type": "usage",
    "question": "「所见明知」中「见」的用法是",
@@ -205,8 +205,8 @@
     "见识",
     "拜见"
    ],
-   "answerIndex": 1,
-   "explanation": "此处“见”作被动标志，与“所”构成被动结构。",
+   "answerIndex": 0,
+   "explanation": "此处「见」是实义动词，意为「看见」。「所见明知」指所看见并清楚知道的；「所」与后面的动词性成分构成所字结构，「见」不是被动标志。",
    "difficulty": 2,
    "sourceRefs": [
     "王力《古汉语常用字字典》"
@@ -279,7 +279,7 @@
    "question": "「听臣微志」中「听」的意思是",
    "options": [
     "听见",
-    "听从",
+    "审断",
     "准许",
     "聆听"
    ],

@@ -65,18 +65,18 @@
    "annotated": false,
    "decision": "question",
    "reason": "形容詞性副詞，影響對子路性格的判斷",
-   "contextMeaning": "急切地",
+   "contextMeaning": "輕率急忙的樣子",
    "sourceSentence": "子路率尔 而对曰",
    "type": "contextual-choice",
    "question": "「子路率尔而对曰」中「率尔」的意思是",
    "options": [
     "率直地",
-    "草率地",
-    "急切地",
+    "審慎地",
+    "輕率急忙地",
     "隨意地"
    ],
    "answerIndex": 2,
-   "explanation": "形容子路回答時毫無遲疑、急切的樣子。",
+   "explanation": "「率爾」指輕率急忙的樣子，此處形容子路不假思索、急於作答的情態，故選C。",
    "difficulty": 2,
    "sourceRefs": [
     "王力《古漢語常用字字典》"
@@ -356,7 +356,7 @@
    "type": "contextual-choice",
    "question": "「安见」中「安」的意思是",
    "options": [
-    "哪裡",
+    "於是",
     "怎麼",
     "安穩",
     "安定"

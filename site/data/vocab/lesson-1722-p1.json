@@ -63,16 +63,16 @@
    "reason": "古今异义，极易误解为情感动词",
    "contextMeaning": "隐藏",
    "sourceSentence": "爱而不见",
-   "type": "gu-jin",
-   "question": "下列句中加点词与「爱而不见」中「爱」的用法相同的是",
+   "type": "contextual-choice",
+   "question": "下列对《静女》「爱而不见」中「爱」的解释，正确的是",
    "options": [
-    "爱之深，责之切",
-    "爱惜羽毛",
-    "爱而不露",
-    "博爱众生"
+    "疼爱",
+    "爱惜",
+    "同「薆」，隐藏",
+    "博爱"
    ],
    "answerIndex": 2,
-   "explanation": "古义为隐藏，今义为喜爱。",
+   "explanation": "「爱」同「薆」，意为隐藏。此处属通假用法，不宜简单表述为「爱」的古义是隐藏、今义是喜爱。",
    "difficulty": 2,
    "sourceRefs": [],
    "location": {

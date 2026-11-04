@@ -232,7 +232,7 @@
     "聚集"
    ],
    "answerIndex": 1,
-   "explanation": "族，灭族，使动用法。",
+   "explanation": "族，灭族，名词用作动词，此处指灭亡秦朝。",
    "difficulty": 2,
    "sourceRefs": [
     "《汉语大词典》"
@@ -247,18 +247,18 @@
    "annotated": false,
    "decision": "question",
    "reason": "语境义，指依次传递，体现历史周期律的分析。",
-   "contextMeaning": "依次",
+   "contextMeaning": "依次传递",
    "sourceSentence": "使秦复爱六国之人，则递 三世可至万世而为君，谁得而族灭也",
    "type": "contextual-choice",
    "question": "“则递三世可至万世而为君”中“递”的意思是",
    "options": [
     "递送",
-    "传递",
-    "依次",
+    "交替",
+    "依次传递",
     "推移"
    ],
    "answerIndex": 2,
-   "explanation": "递，依次。",
+   "explanation": "递，依次传递，这里指帝位一代代传下去。",
    "difficulty": 2,
    "sourceRefs": [
     "《汉语大词典》"

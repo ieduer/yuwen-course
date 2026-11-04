@@ -9,14 +9,14 @@
  "inventory": [
   {
    "id": "lesson-1535:v01",
-   "word": "任",
+   "word": "以",
    "annotated": false,
    "decision": "question",
    "reason": "古今异义，影响句意理解",
-   "contextMeaning": "凭藉",
+   "contextMeaning": "凭借",
    "sourceSentence": "少以父任,兄弟并为郎",
    "type": "contextual-choice",
-   "question": "“少以父任”中“任”的意思是",
+   "question": "“少以父任”中“以”的意思是",
    "options": [
     "任用",
     "职位",
@@ -24,7 +24,7 @@
     "担任"
    ],
    "answerIndex": 2,
-   "explanation": "此处指凭借父亲的职位关系。",
+   "explanation": "以，凭借。「少以父任」指年轻时凭借父亲的职位而获任用。",
    "difficulty": 1,
    "sourceRefs": [
     "王力《古汉语常用字字典》"
@@ -96,7 +96,7 @@
    "type": "contextual-choice",
    "question": "“汉使张胜谋杀单于近臣，当死”中“当”的意思是",
    "options": [
-    "应当",
+    "抵挡",
     "判处",
     "抵押",
     "面对"
@@ -151,7 +151,7 @@
     "雨水",
     "下",
     "像雨一样",
-    "降落"
+    "淋湿"
    ],
    "answerIndex": 1,
    "explanation": "此处为名词作动词，下。",

@@ -48,7 +48,7 @@
    "annotated": false,
    "decision": "question",
    "reason": "词义古今差异，且是理解老子哲学观的核心词",
-   "contextMeaning": "明智、智慧",
+   "contextMeaning": "显明",
    "sourceSentence": "自见者不明,自是者不彰",
    "type": "contextual-choice",
    "question": "「自见者不明」中「明」的意思是",
@@ -58,8 +58,8 @@
     "明智、洞察力",
     "公开"
    ],
-   "answerIndex": 2,
-   "explanation": "在老子语境中，指主体具备的智慧和洞察力。",
+   "answerIndex": 1,
+   "explanation": "明，显明。「自见者不明」意为自我显露的反而不能显明，故选B。",
    "difficulty": 2,
    "sourceRefs": [
     "王力《古汉语常用字字典》"
@@ -134,10 +134,10 @@
     "强行者有志（强行：勤勉而行）",
     "众人之所过（过：经过）",
     "其未兆易谋（谋：阴谋）",
-    "民之从事（从事：做官）"
+    "民之从事（从事：做事）"
    ],
-   "answerIndex": 0,
-   "explanation": "A项古今义不同，A项强行指勤勉。",
+   "answerIndex": 3,
+   "explanation": "D项「从事」古今均可指做事。A项「强行」古义为勤勉而行，现代常用义为强制进行；B项「过」此处指过错，不是经过；C项「谋」此处指图谋、谋划，不是阴谋。古今意义相同的是D。",
    "difficulty": 2,
    "sourceRefs": [
     "《汉语大词典》"
@@ -211,7 +211,7 @@
    "options": [
     "多少",
     "接近",
-    "几乎",
+    "屡次",
     "哪里"
    ],
    "answerIndex": 1,
@@ -293,7 +293,7 @@
     "虚假"
    ],
    "answerIndex": 2,
-   "explanation": "假道，即借路。",
+   "explanation": "假道，即借路。（此句出自《韩非子·喻老》，为本课所附阅读材料，并非《老子》原文。）",
    "difficulty": 1,
    "sourceRefs": [
     "王力《古汉语常用字字典》"

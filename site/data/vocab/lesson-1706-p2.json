@@ -32,7 +32,7 @@
    "options": [
     "忧愁的样子",
     "轻率、草率",
-    "匆忙的样子",
+    "疲惫的样子",
     "杂乱的样子"
    ],
    "answerIndex": 1,
@@ -49,18 +49,18 @@
    "annotated": true,
    "decision": "question",
    "reason": "古今词义演变，若按现代汉语理解极易产生误读，影响对词人情感的理解。",
-   "contextMeaning": "败逃中回头北望（指回望被敌占领的故土）",
+   "contextMeaning": "败退时回头向北张望，写北伐失败后的惊慌情状。",
    "sourceSentence": "赢得仓皇北顾",
    "type": "interpretation",
    "question": "「赢得仓皇北顾」中的「北顾」是指",
    "options": [
-    "向北方看去",
+    "向北方进军",
     "北方的顾虑",
     "败逃时向北方回头张望",
     "关照北方的情况"
    ],
    "answerIndex": 2,
-   "explanation": "结合词中「仓皇」二字，可知「北顾」是指战败后狼狈逃窜时回头看北方，含有悔恨与悲凉之意。",
+   "explanation": "此句承接「元嘉草草，封狼居胥」，用宋文帝刘义隆草率北伐、遭北魏反攻的典故。「北顾」指回头向北张望，「仓皇」突出北伐失败后的惊慌狼狈。",
    "difficulty": 2,
    "sourceRefs": [],
    "location": {
@@ -121,18 +121,18 @@
    "annotated": false,
    "decision": "question",
    "reason": "文言虚词/动词用法，直接影响对句式逻辑的理解。",
-   "contextMeaning": "能够，受得住",
+   "contextMeaning": "忍受、承受",
    "sourceSentence": "可堪回首，佛狸祠 下",
    "type": "usage",
    "question": "下列句中加点词的含义与「可堪回首」中的「堪」相同的是",
    "options": [
-    "不可一世",
-    "堪当重任",
     "不堪设想",
+    "堪当重任",
+    "不堪回首",
     "堪称一绝"
    ],
    "answerIndex": 2,
-   "explanation": "「可堪」意为「能够忍受」，与「堪当」中的「堪」同为「能够」义。",
+   "explanation": "「可堪回首」意为「哪堪回首、怎能忍受回顾」，其中「堪」指忍受、承受。C项「不堪回首」的「堪」同样指忍受、承受，故选C。A项「不堪设想」的「堪」意为可、能，B项「堪当重任」的「堪」指能够，D项「堪称一绝」的「堪」指可以，均不同于题句。",
    "difficulty": 2,
    "sourceRefs": [],
    "location": {

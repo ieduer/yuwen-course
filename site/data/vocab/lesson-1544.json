@@ -40,7 +40,7 @@
    "contextMeaning": "极短的时间",
    "sourceSentence": "和我们一样它在等待那瞬息",
    "type": "contextual-choice",
-   "question": "「和我们一样它在等待那瞬息」中的「瞬息」指代的是",
+   "question": "「和我们一样它在等待那瞬息」中「瞬息」一词的意思是",
    "options": [
     "漫长的黑夜",
     "雨停的时刻",
@@ -48,7 +48,7 @@
     "未来的终点"
    ],
    "answerIndex": 2,
-   "explanation": "瞬息指极短的时间，在诗中指代树木等待的那个转折时刻。",
+   "explanation": "「瞬息」意为极短的时间，故选C。原诗中「那瞬息」具体指下句所说的雪花在空中绽开的时刻。",
    "difficulty": 2,
    "sourceRefs": [],
    "location": {
@@ -148,15 +148,15 @@
    "contextMeaning": "内在的含义、韵味",
    "sourceSentence": "短短几行诗,却蕴藏着丰富的意蕴",
    "type": "discrimination",
-   "question": "下列选项中，「意蕴」一词用法与其他三项不同的是",
+   "question": "下列选项中，「意蕴」一词使用不恰当的是",
    "options": [
     "这首诗蕴藏着丰富的意蕴。",
     "他这番话语重心长，意蕴深远。",
     "这幅画的画面简单，但意蕴无穷。",
-    "他在文中详细阐述了诗歌的中心意蕴。"
+    "这首诗共有二十行，因此它的意蕴比十行的诗多一倍。"
    ],
    "answerIndex": 3,
-   "explanation": "选项A、B、C中的「意蕴」均指内在的韵味或深意，D项中「中心意蕴」虽可通，但在语境中更偏向「中心思想」，语义色彩稍有差异。",
+   "explanation": "「意蕴」指内在的含义、韵味。A、B、C均使用恰当；D仅凭诗行数量便断定意蕴多一倍，把意蕴当作可按行数直接计算的量，使用不当，故选D。",
    "difficulty": 3,
    "sourceRefs": [],
    "location": {

@@ -13,7 +13,7 @@
    "annotated": false,
    "decision": "question",
    "reason": "多義詞，且在文中分別作形容詞（堅固）、副詞（堅決地/固然）和名詞（要塞）使用，是理解全文論證結構的關鍵。",
-   "contextMeaning": "形容詞，堅固",
+   "contextMeaning": "險固的地勢（形容詞用作名詞）",
    "sourceSentence": "秦孝公据崤函之固",
    "type": "contextual-choice",
    "question": "「秦孝公据崤函之固」中「固」的解釋正確的是",
@@ -50,7 +50,7 @@
     "控制、制服"
    ],
    "answerIndex": 3,
-   "explanation": "此處指秦國有餘力去控制、制服六國的弱點。",
+   "explanation": "「制」意為控制、制服。全句意為秦國尚有餘力，趁諸侯困敝而制服他們。「弊」指困敝、疲敝。",
    "difficulty": 2,
    "sourceRefs": [
     "《漢語大詞典》"
@@ -203,7 +203,7 @@
     "潔淨",
     "衡量",
     "巨大的",
-    "比較"
+    "捆束"
    ],
    "answerIndex": 1,
    "explanation": "「絜」意為衡量。",

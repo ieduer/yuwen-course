@@ -18,13 +18,13 @@
    "type": "contextual-choice",
    "question": "「对酒当歌」中「当」的意思是",
    "options": [
-    "应当",
+    "担任",
     "对着",
     "阻挡",
     "充当"
    ],
    "answerIndex": 1,
-   "explanation": "此处意为对着酒，引申为饮酒时。",
+   "explanation": "依统编教材《短歌行》的注释，「当」意为「对着」；「对酒当歌」是说一边喝酒，一边唱歌。",
    "difficulty": 1,
    "sourceRefs": [],
    "location": {
@@ -39,8 +39,8 @@
    "reason": "古今异义词，现代汉语多指大方，文中指情绪激昂",
    "contextMeaning": "情绪激昂",
    "sourceSentence": "慨当以慷",
-   "type": "gu-jin",
-   "question": "文中「慨当以慷」的「慷慨」与现代汉语词义不同，其义为",
+   "type": "contextual-choice",
+   "question": "文中「慨当以慷」的「慷慨」，在此处的意思是",
    "options": [
     "大方、不吝啬",
     "充满正义感",
@@ -106,7 +106,7 @@
    "options": [
     "停止",
     "摘取",
-    "获得",
+    "赠送",
     "遇见"
    ],
    "answerIndex": 1,

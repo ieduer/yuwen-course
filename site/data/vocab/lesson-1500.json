@@ -150,7 +150,7 @@
    "type": "contextual-choice",
    "question": "「纵使相逢应不识」中「应」字的意思是",
    "options": [
-    "应当",
+    "回应",
     "答应",
     "大概",
     "反应"
@@ -169,18 +169,18 @@
    "annotated": false,
    "decision": "question",
    "reason": "文言实词，指回头看，是动作描写的核心。",
-   "contextMeaning": "回头看",
+   "contextMeaning": "看、注视",
    "sourceSentence": "相顾无言,惟有泪千行",
    "type": "contextual-choice",
    "question": "「相顾无言，惟有泪千行」中「顾」的意思是",
    "options": [
     "照顾",
-    "回头看",
+    "看、注视",
     "顾虑",
     "拜访"
    ],
    "answerIndex": 1,
-   "explanation": "「相顾」意为互相看着、对视，故选B。",
+   "explanation": "「顾」在此指看；「相顾」即彼此相视，故选B。",
    "difficulty": 1,
    "sourceRefs": [],
    "location": {

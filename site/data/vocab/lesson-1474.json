@@ -169,18 +169,18 @@
    "annotated": false,
    "decision": "question",
    "reason": "儒家核心概念，易被误解为自我克制。",
-   "contextMeaning": "约束自我，使言行归复于先王之礼",
+   "contextMeaning": "约束自己",
    "sourceSentence": "克己复礼为仁。一日克己复礼,天下归仁焉",
    "type": "interpretation",
    "question": "「克己复礼」中的「克己」最准确的含义是",
    "options": [
-    "克制自己的欲望",
-    "约束自我，使言行符合礼",
+    "克制别人的欲望",
+    "约束自己",
     "克服自己的缺点",
     "赢得自己"
    ],
    "answerIndex": 1,
-   "explanation": "克己，即约束自我，使言行归复于先王之礼。",
+   "explanation": "克己，即约束自己；复礼，即使言行回归于礼。「克己复礼」意为约束自己，使言行符合礼。",
    "difficulty": 2,
    "sourceRefs": [
     "《论语注疏》"
@@ -205,8 +205,8 @@
     "敏而好学",
     "反应敏捷"
    ],
-   "answerIndex": 1,
-   "explanation": "A项指勤勉，其他项指聪明、反应快。",
+   "answerIndex": 0,
+   "explanation": "A项的「敏」指勤勉；B、C两项指聪明，D项指灵敏、反应快。后三项均属聪敏、灵敏一类，与A项的勤勉义不同，故选A。",
    "difficulty": 2,
    "sourceRefs": [
     "《汉语大词典》"

@@ -99,7 +99,7 @@
     "给予",
     "写作、抒发",
     "赋税",
-    "铺陈"
+    "征收"
    ],
    "answerIndex": 1,
    "explanation": "「赋」在此处作动词，意为写作或抒发情感。",
@@ -117,18 +117,18 @@
    "annotated": false,
    "decision": "question",
    "reason": "多义词，考察词人情感表达的深层含义",
-   "contextMeaning": "思念、怜惜",
+   "contextMeaning": "想到、想想",
    "sourceSentence": "念桥边红药,年年知为谁生",
    "type": "contextual-choice",
    "question": "「念桥边红药」中「念」的意思是",
    "options": [
     "读诵",
-    "思念、怜惜",
+    "想到、想想",
     "打算",
     "告知"
    ],
    "answerIndex": 1,
-   "explanation": "「念」在此表达对芍药花年年空开的怜惜与感伤。",
+   "explanation": "「念」意为「想到、想想」。词人想到桥边的芍药年年开放，却不知为谁而开，借此表达对扬州昔盛今衰的感伤。",
    "difficulty": 2,
    "sourceRefs": [
     "古汉语常用字字典"
