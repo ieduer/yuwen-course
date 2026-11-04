@@ -71,7 +71,8 @@ test('all formal source identities, roles, grade policy and task content are pre
   assert.equal(mapping.lessons.reduce((n, l) => n + l.formal.length, 0), formal.items.length);
   assert.equal(mapping.lessons.reduce((n, l) => n + l.formative.length, 0), 1697);
   for (const c of curricula) {
-    const originals = formal.items.filter(i => i.sourceId === c.lessonId).map(i => ({resourceKey:i.resourceKey, canonicalUnitId:i.canonicalUnitId, resourceVersion:i.resourceVersion, questionKind:i.questionKind, scoringRole:i.evidenceRole, sourceReleaseId:i.sourceReleaseId, ...(i.effectiveFrom?{effectiveFrom:i.effectiveFrom}:{}), ...(i.formalScopePolicyVersion?{formalScopePolicyVersion:i.formalScopePolicyVersion}:{})}));
+    const originals = formal.items.filter(i => i.sourceId === c.lessonId).map(i => ({resourceKey:i.resourceKey, canonicalUnitId:i.canonicalUnitId, resourceVersion:i.resourceVersion, questionKind:i.questionKind, scoringRole:i.evidenceRole, sourceReleaseId:i.sourceReleaseId, ...(i.effectiveFrom?{effectiveFrom:i.effectiveFrom}:{}), ...(i.formalScopePolicyVersion?{formalScopePolicyVersion:i.formalScopePolicyVersion}:{}), ...(i.revisionOf?{priorResourceVersions:[i.revisionOf.resourceVersion]}:{})}));
+    // 2026-11-04: a revised item also names the exact prior version it revised (same canonical unit).
     assert.deepEqual(c.legacy.formal, originals, c.lessonId);
     assert.deepEqual(c.formalScopeExpansion,formal.formalScopeExpansion);
     for(const item of c.legacy.formal.filter(i=>i.formalScopePolicyVersion))assert.notEqual(item.scoringRole,'a_plus_gate');
