@@ -1000,11 +1000,11 @@ test('a new session admits prior-version evidence of a revised item as verified 
   const o=published.objectives.find(x=>x.id==='legacy:effect:lesson-1499:vocab:lesson-1499:v08');
   const prior=o.legacy.priorResourceVersions[0];
   f.sql.prepare("INSERT INTO learning_interactions(source_event_id,student_id,academic_year,lesson_id,interaction_key,event_type,assessment_kind,scoring_role,resource_key,resource_version,registry_version,client_mutation_id,lesson_phase,occurred_at) VALUES('prior-pass',1,'2026-2027','lesson-1499','vocabAnswer','vocab_answer_submitted','performance','a_plus_gate',?,'yw-e310d45b1d81e9ad','yw-interactions-2026-08-09-v2','prior-pass','','2026-10-20T00:00:00Z')").run(o.legacy.resourceKey);
-  f.sql.prepare("INSERT INTO learning_evaluations(source_event_id,student_id,eligibility_status,correctness) VALUES('prior-pass',1,'eligible','correct')").run();
+  f.sql.prepare("INSERT INTO learning_evaluations(source_event_id,verification_method,eligibility_status,correctness,evaluated_at) VALUES('prior-pass','source_answer_key','eligible','correct','2026-10-20T00:00:01Z')").run();
   f.sql.prepare('INSERT INTO evidence_outbox(source_event_id,envelope_json,delivery_status) VALUES(?,?,?)').run('prior-pass',JSON.stringify({sourceEventId:'prior-pass',resourceKey:o.legacy.resourceKey,sourceVersion:'yw-e310d45b1d81e9ad',sourceSiteKey:'yw',sourceSystem:'yuwen-course',resourceVersion:prior}),'accepted');
-  const preserved=await historicalEvidence(f.db,1,published);
+  const {preserved}=await historicalEvidence(f.db,1,published);
   assert(preserved.some(p=>p.objectiveId===o.id&&p.verified===true),'the exact prior version is the same canonical unit');
-  const without=await historicalEvidence(f.db,1,{...published,objectives:published.objectives.map(x=>x.id===o.id?{...x,legacy:{...x.legacy,priorResourceVersions:[]}}:x)});
+  const {preserved:without}=await historicalEvidence(f.db,1,{...published,objectives:published.objectives.map(x=>x.id===o.id?{...x,legacy:{...x.legacy,priorResourceVersions:[]}}:x)});
   assert(!without.some(p=>p.objectiveId===o.id&&p.verified===true),'without the revision link the old pass would need review');
  }finally{f.close();}
 });
