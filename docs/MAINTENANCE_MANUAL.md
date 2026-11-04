@@ -1,3 +1,26 @@
+## Current 2026-11-04 — r43: leaked forum bold ** removed from the reading text (accepted)
+
+**Accepted:** source `a307f20`, Pages deployment `568999e1`, effective 2026-11-04T06:18:56Z; rollback to r42 `73ebf3f0` (artifact `/private/tmp/cf-task-yw-bankfix-20261104/r42-artifact/site`, digest `590dcab9` = registered). Web-only; the User Center is unchanged.
+
+**What changed.** `build_reader_documents.mjs` `cleanSourceMarkup` strips the literal `**` (Discourse leaves a bold span crossing a line break unrendered). 8 lessons lose the marker (1557 离骚, 1558 孔雀东南飞, 1577, 1580, 1588, 1720, 1732, 1733).
+
+**Cascade (read this before any reader text change).** Each reader document carries `mediaReceiptLedgerSha256`, and the ledger is bound to the reader semantic digest. So any reader text change:
+- moves every reader document's hash;
+- moves every curriculum's `sourceInventory.readerSha256` and `curriculumVersion`;
+- moves the language-corpus pins and calibrated item versions.
+
+Steps:
+1. Stage the media inventory, re-collect receipts, then put the new semantic digest into `reader-documents/index.json` before `build:reader-documents` (the build reads the canonical index).
+2. Re-pin with exact-old-hash proof: one-off scripts in `_meta/reports/operations/bank-fix-yw-20261104/yw-release-r43/` (reader_diff_proof, repin_reader_bold, repin_calibration_status_r43).
+3. Consumed calibration packets stay frozen; their tests read `scripts/fixtures/dialogue-curriculum-calibration-frozen/`.
+4. The 1462 image transcription lists re-projected reader hashes in `readerSha256Reprojected`.
+
+Not affected: formal and formative manifests, the first-read texts, existing sessions (frozen curricula) and saved reading notes. Native receipt re-signed to `95c472be…`.
+
+**Acceptance (553).** 0 `**` in production reader documents, curricula and rendered pages of the 8 lessons. Old sessions and saved notes are shown. lesson-1556 now continues past its third round (APIS cap 96000): 21,881 prompt tokens, 71,619 µ$.
+
+**Known.** `scripts/dialogue_e2e_fixtures.json` pins are stale since r41 and renewed only by `dialogue_e2e_renewal.mjs` before a paid e2e run. App content pointer still 2026-07-30 (signer decision pending).
+
 ## Current 2026-11-04 — r42: lesson-1722-p2:v05 redesign as formal revision batch v2 (accepted)
 
 **Accepted:** source `c3eab77`, Pages deployment `73ebf3f0`, effective 2026-11-04T05:34:55Z; rollback to r41 `972b6381` (artifact `/private/tmp/cf-task-yw-bankfix-20261104/yw-r41/.release/site`, rebuilt from `a2d5179`, digest `a1da6a0e` = registered). The User Center went first (Worker `f6847c65` / deployment `9c33e38b`, source `f729f66`, 05:27:07Z).
